@@ -1,0 +1,45 @@
+{
+ "id": "def-weil-endomorphism-determinant",
+ "kind": "definition",
+ "title": "Determinant of an endomorphism",
+ "statement": "Let $R$ be a commutative ring and $M$ a free $R$-module with a finite basis $(m_1,\\dots,m_n)$. For an $R$-linear endomorphism $f:M\\to M$, write $f(m_j)=\\sum_ia_{ij}m_i$ with $a_{ij}\\in R$; the determinant $\\det(f\\mid M)\\in R$ is the determinant of the matrix $(a_{ij})\\in M_n(R)$. It does not depend on the basis, since the matrices of $f$ in two bases are conjugate. In particular, for a field $K$ and a finite-dimensional $K$-vector space $V$ [def-weil-finite-dimensional-subspace], $\\det(F\\mid V)\\in K$ is defined for every $K$-linear endomorphism $F$ of $V$, and $F$ is invertible if and only if $\\det(F\\mid V)\\neq0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "node def-weil-smooth-proper-cohomological-family, order 2856: '$\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$' and 'leading coefficient $(-1)^{\\dim V_{i,\\ell}}\\det(F_{i,\\ell})$'"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'irreducible_def det\\|theorem det_toMatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/LinearAlgebra/Determinant.lean",
+   "results": "Mathlib/LinearAlgebra/Determinant.lean:179 `protected irreducible_def LinearMap.det : (M →ₗ[A] M) →* A` (the determinant of an endomorphism independent of basis; 1 when M has no finite basis); :212 `LinearMap.det_toMatrix (b : Basis ι A M) (f) : Matrix.det (toMatrix b b f) = LinearMap.det f`; :427 `LinearEquiv.det : (M ≃ₗ[R] M) →* Rˣ`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.det",
+  "file": "Mathlib/LinearAlgebra/Determinant.lean",
+  "how": "exact: `LinearMap.det f` for `f : M →ₗ[R] M` with `M` free of finite rank; basis description is `LinearMap.det_toMatrix`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-smooth-proper-cohomological-family",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-reverse-charpoly-coefficients",
+ "kind": "statement",
+ "title": "Coefficients of the reverse characteristic polynomial",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, $T$ an indeterminate, and $P(T)=\\det(1-TF\\mid V)\\in K[T]$ [def-weil-polynomial-ring] the reverse characteristic polynomial of $F$ [def-weil-reverse-characteristic-polynomial]. Then:\n\n1. the constant coefficient of $P$ is $P(0)=1$;\n\n2. $\\deg P\\leq n$, and the coefficient of $T^n$ in $P$ is $(-1)^n\\det(F\\mid V)$ [def-weil-endomorphism-determinant];\n\n3. consequently, $\\deg P=n$ with leading coefficient $(-1)^n\\det(F\\mid V)$ if $F$ is invertible, and $\\deg P<n$ if $F$ is not invertible.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "node def-weil-smooth-proper-cohomological-family, order 2856, last sentence: 'It has constant coefficient $1$, degree $\\dim_{\\Ql}V_{i,\\ell}$, and leading coefficient $(-1)^{\\dim V_{i,\\ell}}\\det(F_{i,\\ell})$' (the same claim is made in literature/blueprint/master/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'eval_charpolyRev\\|reverse_charpoly\\|det_eq_sign_charpoly_coeff\\|charpoly_natDegree' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/LinearAlgebra/",
+   "results": "constant term: Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:329 `Matrix.eval_charpolyRev : eval 0 M.charpolyRev = 1`. top coefficient: Coeff.lean:294 `Matrix.reverse_charpoly : M.charpoly.reverse = M.charpolyRev`, Coeff.lean:151 `Matrix.det_eq_sign_charpoly_coeff : M.det = (-1) ^ Fintype.card n * M.charpoly.coeff 0`, Mathlib/LinearAlgebra/Charpoly/BaseChange.lean:35 `LinearMap.det_eq_sign_charpoly_coeff : LinearMap.det f = (-1) ^ Module.finrank R M * f.charpoly.coeff 0`, Coeff.lean:116 `Matrix.charpoly_natDegree_eq_dim`, Mathlib/LinearAlgebra/Charpoly/Basic.lean:76 `LinearMap.charpoly_natDegree : natDegree (charpoly f) = finrank R M`",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement; Mathlib has the ingredients for claims 1 and 2"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'coeff_reverse\\|reverse_natDegree\\|coeff_zero_reverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/Algebra/Polynomial/Reverse.lean",
+   "results": "Mathlib/Algebra/Polynomial/Reverse.lean:221 `Polynomial.coeff_reverse : f.reverse.coeff n = f.coeff (revAt f.natDegree n)`, :225 `Polynomial.coeff_zero_reverse : coeff (reverse f) 0 = leadingCoeff f`, :236 `Polynomial.reverse_natDegree_le`, :257 `Polynomial.reverse_natDegree : f.reverse.natDegree = f.natDegree - f.natTrailingDegree`",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement; these transfer degree and coefficients between charpoly and its reverse, which with the charpoly lemmas prove claims 2 and 3 (deg P = n iff charpoly.coeff 0 ≠ 0 iff det F ≠ 0)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-smooth-proper-cohomological-family",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

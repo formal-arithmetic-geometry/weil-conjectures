@@ -1,0 +1,54 @@
+{
+ "id": "def-weil-coefficientwise-extension",
+ "kind": "definition",
+ "title": "Coefficientwise extension of an integral polynomial to $\\Ql$",
+ "statement": "Let $\\ell$ be a prime, write $\\Ql=\\mathbf Q_\\ell$ for the field of\n$\\ell$-adic numbers, and fix an indeterminate $T$. For\n$P(T)=\\sum_{r\\geq0}c_rT^r\\in\\mathbf Z[T]$, the coefficientwise\nextension of $P$ to $\\Ql$ is\n\n$$\nP^{(\\ell)}(T)=\\sum_{r\\geq0}(c_r\\cdot1_{\\Ql})T^r\\in\\Ql[T],\n$$\n\nthe image of $P$ under the ring homomorphism\n$\\mathbf Z[T]\\to\\Ql[T]$ that applies the unique ring homomorphism\n$\\mathbf Z\\to\\Ql$, $c\\mapsto c\\cdot1_{\\Ql}$, to each coefficient and\nfixes $T$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-determinant-constants.md",
+  "place": "node def-weil-determinant-constants, order 2866: the sentence defining $P^{(\\ell)}(T)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$; the same inline definition is in node def-weil-integral-frobenius-factor (sk-def-roots) and in 24 other nodes"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def map' in Mathlib/Algebra/Polynomial/Eval/Defs.lean; 'theorem coeff_map|theorem map_injective' in Mathlib/Algebra/Polynomial/Eval/Coeff.lean",
+   "results": "Polynomial.map (f : R →+* S) : R[X] → S[X] (Defs.lean line 494); Polynomial.coeff_map : coeff (p.map f) n = f (coeff p n) (Coeff.lean line 79); Polynomial.map_injective (hf : Injective f) : Injective (map f) (Coeff.lean line 103)",
+   "date": "2026-10-09",
+   "verdict": "generalization: Polynomial.map f applies any ring homomorphism f coefficientwise; the node is the case f = Int.castRingHom ℚ_[ℓ]"
+  },
+  {
+   "tool": "grep",
+   "query": "'def castRingHom|lemma cast_injective' in Mathlib/Data/Int/Cast/Lemmas.lean; 'def Padic|notation ℚ_[' in Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+   "results": "Int.castRingHom : ℤ →+* α (Cast/Lemmas.lean line 85); Int.cast_injective for a CharZero ring (line 69); Padic p with notation ℚ_[p] (PadicNumbers.lean lines 531, 536)",
+   "date": "2026-10-09",
+   "verdict": "match for the coefficient map $\\mathbf Z\\to\\Ql$ and for $\\Ql$ itself"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.map",
+  "file": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+  "how": "specializes in one line: Polynomial.map (Int.castRingHom ℚ_[ℓ]) P"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-determinant-constants",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-polynomial-ring",
+ "kind": "definition",
+ "title": "Polynomial ring in one indeterminate",
+ "statement": "Let $R$ be a commutative ring and $T$ an indeterminate. The polynomial ring $R[T]$ is the ring of finitely supported sequences $(c_n)_{n\\geq0}$ in $R$, written $P=\\sum_{n\\geq0}c_nT^n$, with coefficientwise addition and the product whose coefficient of $T^n$ is $\\sum_{i=0}^nc_id_{n-i}$. For $P\\neq0$ its degree $\\deg P$ is the largest $n$ with $c_n\\neq0$, its leading coefficient is $c_{\\deg P}$, and its constant coefficient is $c_0=P(0)$; the zero polynomial has degree $-\\infty$ (or $0$ as a natural number) and leading coefficient $0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "node def-weil-smooth-proper-cohomological-family, order 2856: 'Fix an indeterminate $T$' and '$P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$. It has constant coefficient $1$, degree ..., and leading coefficient ...'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Polynomial\\|notation:9000 R \"\\[X\\]\"' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/Algebra/Polynomial/Basic.lean",
+   "results": "Mathlib/Algebra/Polynomial/Basic.lean:74 `structure Polynomial (R : Type*) [Semiring R] where ofFinsupp ::` (finitely supported functions ℕ → R), :78 notation `R[X]`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def degree \\|^def natDegree\\|^def leadingCoeff\\|^def coeff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/Algebra/Polynomial/Degree/Defs.lean, Basic.lean",
+   "results": "Mathlib/Algebra/Polynomial/Degree/Defs.lean:48 `Polynomial.degree : R[X] → WithBot ℕ`, :52 `Polynomial.natDegree`, :56 `Polynomial.leadingCoeff`; Mathlib/Algebra/Polynomial/Basic.lean:564 `Polynomial.coeff`; Mathlib/Algebra/Polynomial/Eval/Coeff.lean:57 `coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0`",
+   "date": "2026-10-09",
+   "verdict": "match: degree, leading coefficient and constant coefficient are Polynomial.degree/natDegree, Polynomial.leadingCoeff and Polynomial.coeff p 0"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial",
+  "file": "Mathlib/Algebra/Polynomial/Basic.lean",
+  "how": "exact: `Polynomial R` (notation `R[X]`); degree, leading coefficient and constant coefficient are `Polynomial.natDegree`/`Polynomial.degree`, `Polynomial.leadingCoeff` (Mathlib/Algebra/Polynomial/Degree/Defs.lean) and `Polynomial.coeff p 0` (Mathlib/Algebra/Polynomial/Basic.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-smooth-proper-cohomological-family",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

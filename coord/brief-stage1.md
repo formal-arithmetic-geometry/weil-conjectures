@@ -47,7 +47,7 @@ A Mathlib leaf (`status` `mathlib`) has a `mathlib_match` and no proof. Any othe
 
 ## 4. The literature
 
-A proof follows a document in `literature/` (`literature/LIST.md` lists what is obtained; the Stacks project is `literature/stacks-project/` with `literature/stacks-tags-cited.tsv` and `stacks-project/tags/tags` mapping a tag to its label; EGA and SGA are PDFs, use `pdftotext` on the pages you need). Cite the document and the place for every step. When the document a step needs is not in `literature/`, do not download anything: write in your report `WANTED: <document>, <place>, for <node id>`; then write the proof yourself from what you know, with `proof_origin.by` = `agent`, so the node is marked as written by an agent.
+A proof follows a document in `literature/` (`literature/LIST.md` lists what is obtained; `pdftotext` is installed; the Stacks project is `literature/stacks-project/` with `literature/stacks-tags-cited.tsv` and `stacks-project/tags/tags` mapping a tag to its label; EGA and SGA are PDFs, use `pdftotext` on the pages you need). Cite the document and the place for every step. When the document a step needs is not in `literature/`, do not download anything: write in your report `WANTED: <document>, <place>, for <node id>`; then write the proof yourself from what you know, with `proof_origin.by` = `agent`, so the node is marked as written by an agent.
 
 ## 5. Mathlib searches
 
@@ -55,7 +55,7 @@ Mathlib is at `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (
 
 ## 6. Delivering
 
-Write your item and your new nodes, then run `python3 tools/check_dag.py` from the project root and fix what it reports about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). Do not run `git`. Do not edit any file other than your item and the new nodes you created, and never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
+Write your new nodes first and your item last, each file in one write, so that an interruption leaves no citation of a node that does not exist; then run `python3 tools/check_dag.py` and `python3 tools/review_split.py <your item>` from the project root and fix what they report about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). These two scripts only read (review_split.py reads the committed version with `git show`); apart from them, do not run `git`. Do not edit any file other than your item and the new nodes you created, and never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
 
 1. files written (item, new nodes with one line each: id, kind, Mathlib verdict);
 2. attachments: `<Lean declaration> belongs to <existing node id>` lines;

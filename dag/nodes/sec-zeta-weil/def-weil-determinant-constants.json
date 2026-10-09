@@ -9,19 +9,52 @@
  },
  "stmt_deps": [
   "def-weil-betti-numbers",
+  "def-weil-coefficientwise-extension",
   "def-weil-finite-field-fiber",
   "def-weil-frobenius-detailed",
   "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
   "def-weil-integral-frobenius-factor",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-polynomial-coefficient",
+  "def-weil-smooth-proper-cohomological-family",
+  "lem-weil-leading-coefficient-nonzero"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def leadingCoeff|def natDegree|theorem coeff_natDegree' in Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+   "results": "Polynomial.leadingCoeff (line 56), Polynomial.natDegree (line 52), Polynomial.coeff_natDegree : coeff p (natDegree p) = leadingCoeff p (line 85)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no notion attached to the Frobenius factors of a variety; the single constant $D_i=(-1)^{\\deg P_i}[T^{\\deg P_i}]P_i$ is one line over Polynomial.leadingCoeff and Polynomial.natDegree, but the node bundles $D_i$, $\\chi$ and $\\Delta$ in the geometric situation and is not one Mathlib declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "'charpolyRev|det_eq_sign_charpoly_coeff|coeff_charpolyRev' in Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean",
+   "results": "Matrix.charpolyRev M = det (1 - X • M.map C) (line 292), Matrix.det_eq_sign_charpoly_coeff (line 151), Matrix.coeff_charpolyRev_eq_neg_trace (line 336)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the reverse characteristic polynomial $\\det(1-TM)$ and the determinant as the signed constant coefficient of the characteristic polynomial, but no statement that $(-1)^{\\dim V}$ times the leading coefficient of $\\det(1-TF)$ is $\\det F$; that is the route for the remark in this node that the image of $D_i$ in $\\Ql$ is $\\det(F_{i,\\ell})$, which is not a dependency of the definition"
+  },
+  {
+   "tool": "grep",
+   "query": "'eulerChar|Euler characteristic' in Mathlib/",
+   "results": "GradedObject.eulerChar, HomologicalComplex.eulerChar, HomologicalComplex.homologyEulerChar in Mathlib/Algebra/Homology/EulerCharacteristic.lean; Mathlib/Algebra/Exact/Sequence.lean",
+   "date": "2026-10-09",
+   "verdict": "no match: those are Euler characteristics of a graded object or complex in a category with a dimension function; here $\\chi=\\sum_i(-1)^ib_i$ is the alternating sum of the given integers $b_i$, a Finset.sum in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "'zpow_ne_zero|def mk0' in Mathlib/Algebra/GroupWithZero/Units/Basic.lean",
+   "results": "zpow_ne_zero : a ≠ 0 → a ^ n ≠ 0 (line 412), Units.mk0 (line 211)",
+   "date": "2026-10-09",
+   "verdict": "no match needed: $\\Delta=\\prod_i D_i^{(-1)^i}$ is a Finset.prod of integer powers in ℚ, and lies in ℚˣ by zpow_ne_zero once $D_i\\neq0$, which is lem-weil-leading-coefficient-nonzero"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -55,5 +88,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-determinant-constants",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-determinant-constants.md); it is verbatim and has no slopmaster2 copy, so it was kept. The definition is built from the global finite-field datum, the geometric hypotheses, the geometric Frobenius on cohomology, ordinary cohomology, the smooth-proper cohomological family, the integral Frobenius factor and the Betti numbers (the seven imported stmt_deps, all confirmed as used), plus three notions the text used without a node: the operator $F$ on $H^i(X,\\Ql)$, which is def-weil-global-geometric-frobenius (added; def-weil-frobenius-detailed only fixes the geometric convention); the coefficient $[T^m]P$ of a polynomial, defined inline, now the Mathlib leaf def-weil-polynomial-coefficient (Polynomial.coeff); and the coefficientwise extension $P^{(\\ell)}$, defined inline here and in 25 other nodes, now the Mathlib leaf def-weil-coefficientwise-extension (Polynomial.map (Int.castRingHom ℚ_[ℓ])). The text asserts $D_i\\in\\mathbf Z\\setminus\\{0\\}$ and $\\Delta\\in\\mathbf Q^\\times$, which the definition of $\\Delta$ needs; that proof is the new leaf lem-weil-leading-coefficient-nonzero (Polynomial.leadingCoeff_ne_zero), added as a statement dependency. The two remaining remarks in the text, that $b_i=\\dim_{\\Ql}V_{i,\\ell}$ (this is prop-weil-betti-comparison) and that the image of $D_i$ in $\\Ql$ is $\\det(F_{i,\\ell}\\mid H^i(X,\\Ql))$ (stated by no node; the imported proofs downstream use $D_i$ through the reciprocal-root factorization instead), are claims, not notions, and were left in the text and reported. Mathlib was searched for the node itself: no match; $D_i$, $\\chi$ and $\\Delta$ are each one line over Mathlib once the inputs are stated."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

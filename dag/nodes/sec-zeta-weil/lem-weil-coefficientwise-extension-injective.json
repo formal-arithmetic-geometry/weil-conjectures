@@ -1,0 +1,53 @@
+{
+ "id": "lem-weil-coefficientwise-extension-injective",
+ "kind": "statement",
+ "title": "Coefficientwise extension along an injective ring homomorphism is an injective ring homomorphism",
+ "statement": "Let $\\varphi:R\\to S$ be a ring homomorphism of commutative rings and $T$ an indeterminate, with polynomial rings $R[T]$ and $S[T]$ [def-weil-polynomial-ring]. The coefficientwise extension along $\\varphi$ is the map\n\n$$\n\\varphi_*:R[T]\\longrightarrow S[T],\\qquad\n\\sum_{r\\geq0}c_rT^r\\longmapsto\\sum_{r\\geq0}\\varphi(c_r)T^r .\n$$\n\nIt is a ring homomorphism: $\\varphi_*(1)=1$, $\\varphi_*(P+Q)=\\varphi_*(P)+\\varphi_*(Q)$, $\\varphi_*(PQ)=\\varphi_*(P)\\varphi_*(Q)$, hence $\\varphi_*\\bigl(\\prod_{j\\in J}P_j\\bigr)=\\prod_{j\\in J}\\varphi_*(P_j)$ for every finite family $(P_j)_{j\\in J}$ in $R[T]$. If $\\varphi$ is injective, then $\\varphi_*$ is injective: two polynomials with the same image have the same coefficients.\n\nIn particular: for a prime $\\ell$, the coefficientwise extension $P\\mapsto P^{(\\ell)}$ from $\\mathbf Z[T]$ to $\\Ql[T]$ [def-weil-coefficientwise-extension] is $\\varphi_*$ for $\\varphi:\\mathbf Z\\to\\Ql$, $c\\mapsto c\\cdot1_{\\Ql}$, so it is a ring homomorphism, injective whenever $\\mathbf Z\\to\\Ql$ is; and for a subfield $K\\subset L$ the inclusion $K[T]\\subset L[T]$ is $\\varphi_*$ for the (injective) inclusion $\\varphi:K\\hookrightarrow L$, hence injective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
+  "place": "node prop-integral-recovery, order 2910, '## Proof': the uniqueness of the $P_i$ and the passage from $A^{(\\ell)}=N_\\ell$, $B^{(\\ell)}=D_\\ell$ to $Z=\\prod P_i^{(-1)^{i+1}}$ use, without saying so, that $\\mathbf Z[T]\\to\\Ql[T]$ is an injective ring homomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem map_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/",
+   "results": "Mathlib/Algebra/Polynomial/Eval/Coeff.lean:103 `Polynomial.map_injective (f : R →+* S) (hf : Function.Injective f) : Function.Injective (map f)` (R, S semirings); :106 `Polynomial.map_injective_iff`",
+   "date": "2026-10-09",
+   "verdict": "match: injectivity of the coefficientwise map for any injective ring homomorphism, the same kind of object"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def mapRingHom\\|theorem map_prod\\|theorem map_multiset_prod' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/",
+   "results": "Mathlib/Algebra/Polynomial/Eval/Defs.lean:534 `Polynomial.mapRingHom (f : R →+* S) : R[X] →+* S[X]` (map as a ring homomorphism: map_add, map_zero, map_mul, map_one); :725 `Polynomial.map_prod (g : ι → R[X]) (s : Finset ι) : (∏ i ∈ s, g i).map f = ∏ i ∈ s, (g i).map f` for commutative semirings; :722 `Polynomial.map_multiset_prod`",
+   "date": "2026-10-09",
+   "verdict": "match: the ring-homomorphism clause and the finite-product clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.map_injective",
+  "file": "Mathlib/Algebra/Polynomial/Eval/Coeff.lean",
+  "how": "exact for the injectivity clause: `Polynomial.map_injective φ hφ`; the ring-homomorphism clause is `Polynomial.mapRingHom φ` (Mathlib/Algebra/Polynomial/Eval/Defs.lean:534) and the finite-product clause is `Polynomial.map_prod` (Eval/Defs.lean:725); the two particular cases are φ = Int.castRingHom ℚ_[ℓ] and φ = algebraMap K L"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-integral-recovery",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

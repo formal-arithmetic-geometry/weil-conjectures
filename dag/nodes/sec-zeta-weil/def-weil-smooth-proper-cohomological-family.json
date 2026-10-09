@@ -8,20 +8,34 @@
   "place": "node def-weil-smooth-proper-cohomological-family, order 2856"
  },
  "stmt_deps": [
-  "def-weil-frobenius-detailed",
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-detailed",
   "def-weil-weil-sheaf-complex",
-  "prop-cohomological-finiteness"
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "prop-cohomological-finiteness",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-endomorphism-determinant",
+  "def-weil-reverse-characteristic-polynomial",
+  "lem-weil-reverse-charpoly-coefficients"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'etale cohomology\\|Weil sheaf\\|proetale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1); sed -n 1,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean (big and small pro-étale site, after Bhatt–Scholze); Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: `AlgebraicGeometry.Scheme.ellAdicSheaf` (the sheaf U ↦ C(U, ℤ_[ℓ]) on the pro-étale site) and `AlgebraicGeometry.Scheme.EllAdicCohomology` (the groups Hⁱ(X, ℤ_[ℓ])). Nothing on Weil sheaves, a Frobenius action, ℚ_ℓ-coefficients, finiteness, or det(1 - T F | Hⁱ)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the integral ℓ-adic cohomology groups of a scheme on the pro-étale site but not the family (V_{i,ℓ}, F_{i,ℓ}, P_{i,ℓ}); only the linear-algebra notions of the statement are leaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -54,5 +68,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-smooth-proper-cohomological-family",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint, order 2856): verbatim, kept; slopmaster2 has no copy of this node. Named every notion the statement is built from. Kept the seven imported statement dependencies, each verified to supply what is used: the datum p,a,q,k_0,k, the geometric fiber X, the prime l and Q_l (def-weil-finite-field-fiber); smooth, proper, geometrically connected, pure dimension d (def-weil-geometric-hypotheses); the geometric-Frobenius convention g_X (def-weil-frobenius-detailed); Weil sheaves and D^b_{c,W}(X,E) with E=Q_l (def-weil-weil-sheaf-complex); RGamma, H^i and the constant coefficient object (Q_l)_X with its canonical Weil structure (def-weil-ordinary-compact-cohomology); F_l on RGamma and its action on H^i, i.e. F_{i,l} (def-weil-global-geometric-frobenius); prop-cohomological-finiteness, which the statement names and which the definition relies on for V_{i,l} to be finite-dimensional (so that det(1 - T F_{i,l} | V_{i,l}) is meaningful) and for F_{i,l} to be invertible (used by the degree claim). Added the linear-algebra notions, as new Mathlib leaves: polynomial ring Q_l[T] (def-weil-polynomial-ring, Polynomial), dimension (def-weil-vector-space-dimension, Module.finrank), determinant of an endomorphism (def-weil-endomorphism-determinant, LinearMap.det), the reverse characteristic polynomial det(1 - T F | V) (def-weil-reverse-characteristic-polynomial, Matrix.charpolyRev), and the existing leaf def-weil-finite-dimensional-subspace (FiniteDimensional). The last sentence of the statement is an assertion, not part of the definition: it is stated as the new node lem-weil-reverse-charpoly-coefficients (unsplit; Mathlib has its ingredients), which, together with prop-cohomological-finiteness for invertibility, is what the sentence rests on. Recorded a Mathlib search for the item itself: Mathlib has H^i(X, Z_l) on the pro-étale site (AlgebraicGeometry/Sites/ElladicCohomology.lean) but no Weil structure, Frobenius or Q_l-coefficients."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

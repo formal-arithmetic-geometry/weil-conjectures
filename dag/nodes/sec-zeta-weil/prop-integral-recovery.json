@@ -7,43 +7,125 @@
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
   "place": "node prop-integral-recovery, order 2910"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-point-counts-zeta",
+  "def-weil-normalized-integral-fraction",
+  "def-weil-parity-products",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-vector-space-dimension"
+ ],
  "proof": [
   {
-   "text": "The terminal realization-independent factor interface\n[thm-weil-realization-independence] supplies, for every $i$, a unique\nintegral polynomial $P_i$ whose scalar extension is $P_{i,\\ell}$ for every\n$\\ell\\neq p$. Its normalization and the parity products are the\nnormalizations in [def-weil-integral-frobenius-factor] and\n[def-weil-parity-products]; the normalized fraction is the one in\n[def-weil-normalized-integral-fraction]. Thus\n[def-weil-point-counts-zeta] gives\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\n$$\n\nafter scalar extension, and uniqueness of the normalized fraction gives\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. The degree of\n$P_{i,\\ell}$ is $\\dim_{\\Ql}H^i(X,\\Ql)$ by\n[def-weil-smooth-proper-cohomological-family]; scalar extension preserves\ndegree, so the displayed degree equality follows. All objects and\nidentifications used here are formed with the finite-field and geometric\nhypotheses in [def-weil-finite-field-fiber],\n[def-weil-geometric-hypotheses], and the ordinary cohomology convention\n[def-weil-ordinary-compact-cohomology].",
+   "text": "*Step 1: existence of the integral factors.* Fix an algebraic closure $\\overline{\\mathbf Q}$ of $\\mathbf Q$. For every prime $\\ell\\neq p$ choose an algebraic closure $\\Qlb$ of $\\Ql$ and, by [lem-weil-realization-exists], an $\\ell$-adic realization $\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim}\\overline{\\mathbf Q}^{(\\ell)}\\subset\\Qlb$ [def-weil-algebraic-closure-q]. With these choices, and with $(A,B)$ as the chosen normalized reduced integral presentation of $Z(X_0,T)$, [thm-weil-realization-independence] provides, for every $0\\leq i\\leq2d$, a polynomial $Q_i\\in\\mathbf Z[T]$ with $Q_i(0)=1$ such that, for every $\\ell\\neq p$,\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T)\\quad\\text{in }\\Qlb[T],\n$$\n\nwhere $Q_i^{(\\ell,\\jmath_\\ell)}$ is the coefficientwise extension of $Q_i$ along $\\jmath_\\ell$ and $P_{i,\\ell}\\in\\Ql[T]$ [def-weil-smooth-proper-cohomological-family] is viewed in $\\Qlb[T]$ through the inclusion $\\Ql\\subset\\Qlb$. Since $\\jmath_\\ell$ fixes every integer [lem-weil-realization-exists], $Q_i^{(\\ell,\\jmath_\\ell)}$ is the image of $Q_i$ under $\\mathbf Z[T]\\to\\Qlb[T]$, $c\\mapsto c\\cdot1_{\\Qlb}$, which is the coefficientwise extension $Q_i\\mapsto Q_i^{(\\ell)}\\in\\Ql[T]$ [def-weil-coefficientwise-extension] followed by the inclusion $\\Ql[T]\\subset\\Qlb[T]$. That inclusion is injective [lem-weil-coefficientwise-extension-injective], so $Q_i^{(\\ell)}=P_{i,\\ell}$ in $\\Ql[T]$. Put $P_i=Q_i$. Then $P_i\\in\\mathbf Z[T]$, $P_i(0)=1$, and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$: $P_i$ is an integral realization-independent factor in degree $i$ [def-weil-integral-frobenius-factor]. This is the existence clause.",
    "uses": [
+    "lem-weil-realization-exists",
+    "def-weil-algebraic-closure-q",
     "thm-weil-realization-independence",
-    "def-weil-integral-frobenius-factor",
-    "def-weil-parity-products",
-    "def-weil-normalized-integral-fraction",
-    "def-weil-point-counts-zeta",
     "def-weil-smooth-proper-cohomological-family",
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-ordinary-compact-cohomology"
+    "def-weil-coefficientwise-extension",
+    "lem-weil-coefficientwise-extension-injective",
+    "def-weil-integral-frobenius-factor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, Théorème (1.6) and 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277 (paper pagination; PDF pp. 4–5): 'La description ci-dessus des racines de $P_i(t)$ est indépendante de $\\ell$; le polynôme $P_i(t)$ lui-même est donc indépendant de $\\ell$'; the derivation of the integral $P_i$ is thm-weil-realization-independence, this step only reads its conclusion. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md, '## Proof', first sentence."
+   }
+  },
+  {
+   "text": "*Step 2: uniqueness.* Let $(P_i')_{0\\leq i\\leq2d}$ be polynomials in $\\mathbf Z[T]$ with $P_i'(0)=1$ and $P_i'^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$. Choose one prime $\\ell\\neq p$ (there are infinitely many primes). Then $P_i^{(\\ell)}=P_{i,\\ell}=P_i'^{(\\ell)}$ in $\\Ql[T]$ by Step 1. The ring homomorphism $\\mathbf Z\\to\\Ql$ is injective because $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], so the coefficientwise extension $\\mathbf Z[T]\\to\\Ql[T]$, $P\\mapsto P^{(\\ell)}$ [def-weil-coefficientwise-extension], is injective [lem-weil-coefficientwise-extension-injective]; hence $P_i'=P_i$. (The normalization $P_i'(0)=1$ is not needed for this.) So the $P_i$ of Step 1 are the unique polynomials in $\\mathbf Z[T]$ with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$; these are the integral Frobenius factors.",
+   "uses": [
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-coefficientwise-extension",
+    "lem-weil-coefficientwise-extension-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "\\begin{proposition}[Integral factor recovery] \\label{prop:integral-recovery}, lines 3154–3181: the uniqueness clause 'If another family $(\\widetilde P_i)$ in $\\mathbf Z[T]$ has constant term one and the same realizations for all primes $\\ell\\neq p$, then $\\widetilde P_i=P_i$'. The master blueprint (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md, '## Proof') asserts uniqueness in its first sentence without argument."
+   }
+  },
+  {
+   "text": "*Step 3: the parity products are the scalar extensions of $A$ and $B$.* The pair $(A,B)$ is, by hypothesis, a normalized reduced integral presentation of $Z(X_0,T)$ [def-weil-normalized-integral-fraction]: $A,B\\in\\mathbf Z[T]$, $A(0)=B(0)=1$, $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ and $Z(X_0,T)=A(T)/B(T)$ as a Taylor series at $T=0$. This is exactly the chosen presentation for which [thm-weil-realization-independence] is stated, and its parity-product clause gives, for every prime $\\ell\\neq p$,\n\n$$\nA^{(\\ell)}=N_\\ell,\\qquad B^{(\\ell)}=D_\\ell\\quad\\text{in }\\Ql[T],\n$$\n\nwith $N_\\ell=\\prod_{i\\text{ odd}}P_{i,\\ell}$ and $D_\\ell=\\prod_{i\\text{ even}}P_{i,\\ell}$ the odd and even parity products [def-weil-parity-products] and $A^{(\\ell)},B^{(\\ell)}$ the coefficientwise extensions [def-weil-coefficientwise-extension]. This is the parity-product clause of the statement.",
+   "uses": [
+    "def-weil-normalized-integral-fraction",
+    "thm-weil-realization-independence",
+    "def-weil-parity-products",
+    "def-weil-coefficientwise-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277 (PDF pp. 4–5): $Z(X_0,t)=P/Q$ with $P,Q\\in\\mathbf Z[t]$ coprime of constant term $1$ (Fatou), the $P_i$ pairwise coprime, hence '$P(t)=\\prod_{i\\text{ impair}}P_i(t)$, $Q(t)=\\prod_{i\\text{ pair}}P_i(t)$'; in the DAG this is the parity-product clause of thm-weil-realization-independence. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md, '## Proof': 'uniqueness of the normalized fraction gives $A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$'."
+   }
+  },
+  {
+   "text": "*Step 4: the integral factorization in $\\mathbf Q(T)$.* Fix a prime $\\ell\\neq p$. The coefficientwise extension $\\mathbf Z[T]\\to\\Ql[T]$ is a ring homomorphism [lem-weil-coefficientwise-extension-injective], so by Step 1, [def-weil-parity-products] and Step 3,\n\n$$\n\\Bigl(\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ odd}}}P_i\\Bigr)^{(\\ell)}\n=\\prod_{i\\text{ odd}}P_i^{(\\ell)}\n=\\prod_{i\\text{ odd}}P_{i,\\ell}=N_\\ell=A^{(\\ell)},\n\\qquad\n\\Bigl(\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ even}}}P_i\\Bigr)^{(\\ell)}\n=\\prod_{i\\text{ even}}P_{i,\\ell}=D_\\ell=B^{(\\ell)}.\n$$\n\nSince $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], the extension $\\mathbf Z[T]\\to\\Ql[T]$ [def-weil-coefficientwise-extension] is injective [lem-weil-coefficientwise-extension-injective], hence\n\n$$\nA=\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ odd}}}P_i,\n\\qquad\nB=\\prod_{\\substack{0\\leq i\\leq2d\\\\ i\\text{ even}}}P_i\n\\qquad\\text{in }\\mathbf Z[T].\n$$\n\nBy [def-weil-normalized-integral-fraction], $Z(X_0,T)=A(T)/B(T)$ as a Taylor series at $T=0$, that is, $Z(X_0,T)$ is the expansion of the rational function $A/B\\in\\mathbf Q(T)$ ($B(0)=1$, so $B$ is invertible in $\\mathbf Q[[T]]$). Substituting the two products and writing the even factors, which are in the denominator, with exponent $-1=(-1)^{i+1}$ and the odd ones with exponent $+1=(-1)^{i+1}$,\n\n$$\nZ(X_0,T)=\\frac{\\prod_{i\\text{ odd}}P_i(T)}{\\prod_{i\\text{ even}}P_i(T)}\n=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\quad\\text{in }\\mathbf Q(T).\n$$\n\nThis is the factorization clause.",
+   "uses": [
+    "lem-weil-coefficientwise-extension-injective",
+    "def-weil-parity-products",
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-coefficientwise-extension",
+    "def-weil-normalized-integral-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Summary 27.14 (b) and (d) with Theorem 27.6 and Proposition 27.11, pp. 156–159 (PDF pp. 162–165, v2.21): $Z(X_0,t)=P_1P_3\\cdots P_{2d-1}/P_0P_2\\cdots P_{2d}$ with the $P_{r}\\in1+t\\mathbf Z[t]$ independent of $\\ell$, numerator and denominator of the reduced form of $Z$ in $\\mathbf Z[t]$. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 277: '$P(t)=\\prod_{i\\text{ impair}}P_i(t)$, $Q(t)=\\prod_{i\\text{ pair}}P_i(t)$'. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md, '## Proof': 'Thus ... $Z(X_0,T)=\\prod P_i(T)^{(-1)^{i+1}}$ after scalar extension', where the descent from $\\Ql[T]$ to $\\mathbf Z[T]$ is left unsaid."
+   }
+  },
+  {
+   "text": "*Step 5: the degrees.* Fix a prime $\\ell\\neq p$. Since $\\mathbf Z\\to\\Ql$ is injective [lem-weil-integers-injective-char-zero], the coefficientwise extension [def-weil-coefficientwise-extension] preserves degrees [lem-weil-coefficientwise-extension-degree]: $\\deg P_i=\\deg P_i^{(\\ell)}=\\deg P_{i,\\ell}$, the last equality by Step 1. Now $P_{i,\\ell}=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$ [def-weil-smooth-proper-cohomological-family] is the reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial] of the endomorphism $F_{i,\\ell}$ of $V_{i,\\ell}=H^i(X,\\Ql)$, the ordinary cohomology group [def-weil-ordinary-compact-cohomology]. By [prop-cohomological-finiteness] (applied with $E=\\Ql$ to the proper $X_0$), $H^i(X,\\Ql)$ is finite-dimensional over $\\Ql$ and the geometric Frobenius $F_{i,\\ell}$ on it is an automorphism, hence invertible; the definition of the family records that these two facts are that proposition. Therefore, by [lem-weil-reverse-charpoly-coefficients] (3), $\\deg P_{i,\\ell}=\\dim_{\\Ql}V_{i,\\ell}$ [def-weil-vector-space-dimension]. Altogether\n\n$$\n\\deg P_i=\\dim_{\\Ql}H^i(X,\\Ql)\\qquad\\text{for every prime }\\ell\\neq p,\n$$\n\nwhich is the degree clause; in particular the right-hand side does not depend on $\\ell$.",
+   "uses": [
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-coefficientwise-extension",
+    "lem-weil-coefficientwise-extension-degree",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-reverse-characteristic-polynomial",
+    "def-weil-ordinary-compact-cohomology",
+    "prop-cohomological-finiteness",
+    "lem-weil-reverse-charpoly-coefficients",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Summary 27.14 (e), p. 159 (PDF p. 165, v2.21): '$\\beta_r=\\deg P_r(t)$', with Theorem 27.6 ($P_r(X,t)=\\det(1-Ft\\mid H^r(X,\\mathbf Q_\\ell))$) and Remark 27.7. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md, '## Proof': 'The degree of $P_{i,\\ell}$ is $\\dim_{\\Ql}H^i(X,\\Ql)$ by [def-weil-smooth-proper-cohomological-family]; scalar extension preserves degree', where the invertibility of $F_{i,\\ell}$ that the degree needs is left unsaid."
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-realization-exists",
+  "def-weil-algebraic-closure-q",
   "thm-weil-realization-independence",
-  "def-weil-integral-frobenius-factor",
-  "def-weil-parity-products",
-  "def-weil-normalized-integral-fraction",
-  "def-weil-point-counts-zeta",
   "def-weil-smooth-proper-cohomological-family",
-  "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-coefficientwise-extension",
+  "lem-weil-coefficientwise-extension-injective",
+  "def-weil-integral-frobenius-factor",
+  "lem-weil-integers-injective-char-zero",
+  "def-weil-normalized-integral-fraction",
+  "def-weil-parity-products",
+  "lem-weil-coefficientwise-extension-degree",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-cohomological-finiteness",
+  "lem-weil-reverse-charpoly-coefficients",
+  "def-weil-vector-space-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
-  "place": "## Proof"
+  "place": "## Proof; the result is Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, Théorème (1.6) with 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277, and Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Summary 27.14 (b), (d), (e), p. 159, which the steps cite; the division of the argument between thm-weil-realization-independence and this node is the blueprint's, so the proof as a whole follows the blueprint's one-paragraph proof, expanded"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -74,5 +156,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-integral-recovery",
+  "worker": "stage1",
+  "summary": "Checked the statement against the blueprint source (identical on master; slopmaster2 has no node file, its TeX proposition prop:integral-recovery states the same four clauses, with the uniqueness clause spelled out) and against Deligne Weil I (1.6)/(1.7 ⇒ 1.6), pp. 276–277, and Milne LEC 27.14 (b),(d),(e); kept the statement. The imported one-paragraph proof was replaced by five steps: existence of the P_i read off from thm-weil-realization-independence (which needs an ℓ-adic realization to exist and the descent of an identity from Qlb[T] to Q_ℓ[T]), uniqueness (injectivity of Z[T]→Q_ℓ[T], asserted by the blueprint without argument), the parity-product clause (the theorem's conclusion for the chosen presentation), the factorization in Q(T) (descent of A^(ℓ)=N_ℓ, B^(ℓ)=D_ℓ to A=∏_odd P_i, B=∏_even P_i in Z[T], left unsaid by the blueprint), and the degree clause (degree preserved under coefficientwise extension; deg P_{i,ℓ}=dim V_{i,ℓ} needs F_{i,ℓ} invertible, which is prop-cohomological-finiteness, and the degree lemma lem-weil-reverse-charpoly-coefficients created by another worker). Moved the nine imported definition citations from the proof to stmt_deps (the statement, not the proof, uses them) and added def-weil-polynomial-ring, def-weil-coefficientwise-extension, def-weil-vector-space-dimension for Z[T], P^(ℓ) and dim; def-weil-finite-field-fiber and def-weil-geometric-hypotheses are statement dependencies only. Created four Mathlib leaves: lem-weil-coefficientwise-extension-injective (Polynomial.map_injective), lem-weil-coefficientwise-extension-degree (Polynomial.natDegree_map_eq_of_injective), lem-weil-integers-injective-char-zero (Int.cast_injective, CharZero ℚ_[p]), lem-weil-realization-exists (IsAlgClosure.equiv with algebraicClosure.isAlgClosure). The pair (A,B) is read as any normalized reduced integral presentation (as in thm-weil-realization-independence); its existence and uniqueness is prop-weil-zeta-normalized-presentation, not needed by the proof."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

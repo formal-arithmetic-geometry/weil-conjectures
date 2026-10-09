@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-perfect-pairing-line-equivariance",
+ "kind": "statement",
+ "title": "Equivariant isomorphism from a perfect pairing against a line",
+ "statement": "Let $L$ be a field, and let $V$, $W$ and $M$ be finite-dimensional $L$-vector spaces with $\\dim_LV=1$ and $\\dim_LM=1$. Let $\\beta:V\\times W\\to M$ be an $L$-bilinear map that is perfect, meaning that the two induced $L$-linear maps $V\\to\\operatorname{Hom}_L(W,M)$, $x\\mapsto\\beta(x,-)$, and $W\\to\\operatorname{Hom}_L(V,M)$, $y\\mapsto\\beta(-,y)$, are bijective. Let $F_V$, $F_W$ and $F_M$ be $L$-linear endomorphisms of $V$, $W$ and $M$ with\n\n$$\n\\beta(F_Vx,F_Wy)=F_M\\,\\beta(x,y)\\qquad(x\\in V,\\ y\\in W),\n$$\n\nand suppose that $F_V=\\mathrm{id}_V$ and that $F_M=c\\cdot\\mathrm{id}_M$ for some $c\\in L$. Then $\\dim_LW=1$; for every nonzero $e\\in V$ the map\n\n$$\n\\beta(e,-):W\\longrightarrow M,\\qquad y\\longmapsto\\beta(e,y),\n$$\n\nis an $L$-linear isomorphism satisfying $\\beta(e,F_Wy)=F_M\\,\\beta(e,y)$ for all $y\\in W$ (it is equivariant for $F_W$ on $W$ and $F_M$ on $M$); and $F_W=c\\cdot\\mathrm{id}_W$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.md",
+  "place": "## Proof, the sentence giving $H^{2d}(X,\\Ql)\\cong\\Ql(-d)$ with Frobenius eigenvalue $q^d$: the linear algebra that sentence leaves implicit (the perfect pairing $\\langle-,-\\rangle_0$ of [prop-poincare-pairing] against the line $H^0$ with its similitude), stated for abstract vector spaces. The same argument is Milne, Lectures on Etale Cohomology (literature/milne-lectures-on-etale-cohomology_LEC.pdf), proof of Theorem 27.12, p. 158, in the form $F_*=q^d/F^*$."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank' Mathlib/LinearAlgebra/PerfectPairing/Basic.lean; grep -rln 'IsPerfPair' Mathlib/LinearAlgebra/",
+   "results": "class LinearMap.IsPerfPair (p : M →ₗ[R] N →ₗ[R] R) with fields bijective_left, bijective_right (PerfectPairing/Basic.lean:40); LinearMap.toPerfPair : M ≃ₗ[R] Dual R N; Module.finrank_of_isPerfPair : finrank R M = finrank R N (line 79); also used in RootSystem/Defs.lean, RootSystem/Basic.lean, PerfectPairing/Restrict.lean",
+   "date": "2026-10-09",
+   "verdict": "generalization of the dimension clause only: after identifying M with L by a basis vector, Module.finrank_of_isPerfPair gives dim W = dim V = 1; the equivariance of beta(e,-) and the conclusion F_W = c·id are not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'equivariant\\|conj\\|compatible' Mathlib/LinearAlgebra/PerfectPairing/*.lean",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank' Mathlib/LinearAlgebra/BilinearForm/Properties.lean",
+   "results": "LinearMap.BilinForm.toDual (B : BilinForm K V) (b : B.Nondegenerate) : V ≃ₗ[K] Module.Dual K V (line 349), for a nondegenerate form on one space V",
+   "date": "2026-10-09",
+   "verdict": "no match: one space only, values in K, no second space W and no equivariance"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank_eq_one' Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean",
+   "results": "exists_smul_eq_of_finrank_eq_one (line 564), finrank_eq_one_iff_of_nonzero (line 598), surjective_of_nonzero_of_finrank_eq_one (line 613)",
+   "date": "2026-10-09",
+   "verdict": "no match; these state that a nonzero vector spans a line and that an endomorphism of a line is a scalar, which proves the clause F_W = c·id once dim W = 1 is known"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-endpoints",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

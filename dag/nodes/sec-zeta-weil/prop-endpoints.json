@@ -9,44 +9,122 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
   "def-weil-frobenius-detailed",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
   "def-weil-integral-frobenius-factor",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-betti-numbers",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists"
  ],
  "proof": [
   {
-   "text": "Apply the perfect pairing in [prop-poincare-pairing] to degree zero and\ntop degree. The geometric-connectedness clause of\n[def-weil-geometric-hypotheses], together with the constant-sheaf\nfiniteness statement [prop-cohomological-finiteness], gives\n$H^0(X,\\Ql)\\cong\\Ql$. The smooth orientation and twist normalization in\n[prop-poincare-pairing], [def-coefficient-twists-detailed] give\n$H^{2d}(X,\\Ql)\\cong\\Ql(-d)$. The Frobenius convention in\n[def-weil-smooth-proper-cohomological-family] gives the eigenvalue $1$\non $H^0$, while the twist action in\n[def-weil-frobenius-coefficient-twists] gives the eigenvalue $q^d$\non $\\Ql(-d)$. The factor and degree identifications in\n[prop-integral-recovery], [def-weil-betti-numbers] give the displayed\nfactors and endpoint Betti numbers.",
+   "text": "Degree zero. $X_0$ is geometrically connected, by the geometric-connectedness clause of [def-weil-geometric-hypotheses], so the connectedness clause of [prop-cohomological-finiteness] (applied with $Y_0=X_0$ and $E=\\Ql$) gives $H^0(X,\\Ql)\\cong\\Ql$ with the geometric Frobenius $F$ acting as the identity on $H^0(X,\\Ql)$; the same proposition gives that the ordinary cohomology groups [def-weil-ordinary-compact-cohomology] $H^0(X,\\Ql)$ and $H^{2d}(X,\\Ql)$ are finite-dimensional $\\Ql$-vector spaces. The coefficient space $\\Ql$ is the Tate twist $\\Ql(0)$ of degree $0$ ([def-coefficient-twists-detailed]: $\\Lambda(0)=\\Lambda_S$), on which geometric Frobenius acts by $q^{-0}=1$ ([def-weil-frobenius-coefficient-twists]); hence every $\\Ql$-linear isomorphism $H^0(X,\\Ql)\\cong\\Ql$ is Frobenius-equivariant, which is the first displayed isomorphism, and $F$ acts by $1$ on $H^0(X,\\Ql)$. In the notation of [def-weil-smooth-proper-cohomological-family], $V_{0,\\ell}=H^0(X,\\Ql)$ is one-dimensional and $F_{0,\\ell}=F|_{V_{0,\\ell}}=\\mathrm{id}$.",
    "uses": [
-    "prop-poincare-pairing",
     "def-weil-geometric-hypotheses",
     "prop-cohomological-finiteness",
+    "def-weil-ordinary-compact-cohomology",
     "def-coefficient-twists-detailed",
-    "def-weil-smooth-proper-cohomological-family",
     "def-weil-frobenius-coefficient-twists",
-    "prop-integral-recovery",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Remark 27.7, p. 156 (\"F acts as 1 on H^0(X,Q_l)\"); the connectedness argument it omits is [prop-cohomological-finiteness]"
+   }
+  },
+  {
+   "text": "The pairing in degree zero. Apply [prop-poincare-pairing] with $i=0$: the trace–cup-product pairing $\\langle-,-\\rangle_0:H^0(X,\\Ql)\\times H^{2d}(X,\\Ql)\\to\\Ql(-d)$ of [def-weil-poincare-trace-cup] is perfect, that is, the induced $\\Ql$-linear maps $H^0(X,\\Ql)\\to\\operatorname{Hom}_{\\Ql}(H^{2d}(X,\\Ql),\\Ql(-d))$, $x\\mapsto\\langle x,-\\rangle_0$, and $H^{2d}(X,\\Ql)\\to\\operatorname{Hom}_{\\Ql}(H^0(X,\\Ql),\\Ql(-d))$, $y\\mapsto\\langle-,y\\rangle_0$, are bijective; and the Frobenius similitude $\\langle Fx,Fy\\rangle_0=q^d\\langle x,y\\rangle_0$ holds for all $x\\in H^0(X,\\Ql)$ and $y\\in H^{2d}(X,\\Ql)$. The value space $\\Ql(-d)$ is the Tate twist of degree $-d$ ([def-coefficient-twists-detailed]), a one-dimensional $\\Ql$-vector space (the twist of degree $1$ is of rank one, and $\\Lambda(-d)=\\operatorname{Hom}(\\Lambda(d),\\Lambda)$), on which geometric Frobenius acts by the scalar $q^d$ by the Frobenius-on-twists normalization [def-weil-frobenius-coefficient-twists] (restated in [prop-poincare-pairing]).",
+   "uses": [
+    "prop-poincare-pairing",
+    "def-weil-poincare-trace-cup",
+    "def-coefficient-twists-detailed",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Theorem 27.12, p. 158 (the pairing H^{2d-r}(X,Q_l) × H^r(X,Q_l(d)) → H^{2d}(X,Q_l) → Q_l and its compatibility with Frobenius); here in the form of [prop-poincare-pairing], whose similitude ⟨Fx,Fy⟩ = q^d⟨x,y⟩ replaces Milne's F_* F^* = q^d (Remark 27.4(a))"
+   }
+  },
+  {
+   "text": "Top degree. Apply [lem-weil-perfect-pairing-line-equivariance] with $L=\\Ql$, $V=H^0(X,\\Ql)$, $W=H^{2d}(X,\\Ql)$, $M=\\Ql(-d)$, $\\beta=\\langle-,-\\rangle_0$, $F_V=F|_{H^0(X,\\Ql)}$, $F_W=F|_{H^{2d}(X,\\Ql)}$, $F_M=F|_{\\Ql(-d)}$ and $c=q^d$. Its hypotheses are supplied by the two preceding steps: $V$, $W$ and $M$ are finite-dimensional with $\\dim V=1$ and $F_V=\\mathrm{id}$ (step 1, from [prop-cohomological-finiteness]); $\\dim M=1$, $F_M=q^d\\cdot\\mathrm{id}$, $\\beta$ is perfect, and $\\beta(F_Vx,F_Wy)=F_M\\beta(x,y)$ is the similitude (step 2, from [prop-poincare-pairing] and [def-weil-frobenius-coefficient-twists]). The lemma gives $\\dim_{\\Ql}H^{2d}(X,\\Ql)=1$; that for a nonzero $e\\in H^0(X,\\Ql)$ the map $y\\mapsto\\langle e,y\\rangle_0$ is a Frobenius-equivariant $\\Ql$-linear isomorphism $H^{2d}(X,\\Ql)\\xrightarrow{\\sim}\\Ql(-d)$, which is the second displayed isomorphism; and that $F$ acts on $H^{2d}(X,\\Ql)$ as multiplication by $q^d$. In the notation of [def-weil-smooth-proper-cohomological-family], $V_{2d,\\ell}=H^{2d}(X,\\Ql)$ is one-dimensional and $F_{2d,\\ell}=F|_{V_{2d,\\ell}}=q^d\\cdot\\mathrm{id}$.",
+   "uses": [
+    "lem-weil-perfect-pairing-line-equivariance",
+    "prop-cohomological-finiteness",
+    "prop-poincare-pairing",
+    "def-weil-frobenius-coefficient-twists",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Remark 27.7, p. 156 (\"F acts as q^d on H^{2d}(X,Q_l)\", asserted) with Remark 27.4(a), p. 155, and the proof of Theorem 27.12, p. 158; the linear algebra that these leave implicit is [lem-weil-perfect-pairing-line-equivariance]"
+   }
+  },
+  {
+   "text": "The $\\ell$-adic endpoint factors. By [def-weil-smooth-proper-cohomological-family], $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$. For an endomorphism of a one-dimensional space acting as the scalar $\\lambda$, $\\det(1-T\\lambda)=1-\\lambda T$, the determinant of a $1\\times1$ matrix being its entry. By steps 1 and 3, $V_{0,\\ell}$ and $V_{2d,\\ell}$ are one-dimensional with $F_{0,\\ell}=1$ and $F_{2d,\\ell}=q^d$, so $P_{0,\\ell}(T)=1-T$ and $P_{2d,\\ell}(T)=1-q^dT$ in $\\Ql[T]$. (When $d=0$ the two identities coincide, since $q^0=1$.)",
+   "uses": [
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Remark 27.7, p. 156, with P_r(X_0,t) = det(1 − Ft | H^r(X,Q_l)) of Theorem 27.6"
+   }
+  },
+  {
+   "text": "Integral factors and Betti numbers. By [def-weil-integral-frobenius-factor], $P_0,P_{2d}\\in\\mathbf Z[T]$ satisfy $P_0^{(\\ell)}=P_{0,\\ell}=1-T$ and $P_{2d}^{(\\ell)}=P_{2d,\\ell}=1-q^dT$ in $\\Ql[T]$. The coefficientwise extension $P\\mapsto P^{(\\ell)}$, $\\mathbf Z[T]\\to\\Ql[T]$, is injective, because $\\mathbf Z\\to\\Ql$, $c\\mapsto c\\cdot1_{\\Ql}$, is injective ($\\Ql$ has characteristic $0$). The polynomials $1-T$ and $1-q^dT$ lie in $\\mathbf Z[T]$ (as $q^d\\in\\mathbf Z$) and are their own coefficient extensions, so $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$. Hence, by [def-weil-betti-numbers], $b_0=\\deg P_0=1$ and $b_{2d}=\\deg P_{2d}=1$, as $q^d\\neq0$.",
+   "uses": [
+    "def-weil-integral-frobenius-factor",
     "def-weil-betti-numbers"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.md",
+    "place": "## Proof, last sentence (the integral factors P_i and the Betti numbers b_i are the blueprint's notions; Milne's Remark 27.7 states the identities for the l-adic factors)"
+   }
   }
  ],
  "proof_deps": [
-  "prop-poincare-pairing",
   "def-weil-geometric-hypotheses",
   "prop-cohomological-finiteness",
+  "def-weil-ordinary-compact-cohomology",
   "def-coefficient-twists-detailed",
-  "def-weil-smooth-proper-cohomological-family",
   "def-weil-frobenius-coefficient-twists",
-  "prop-integral-recovery",
+  "def-weil-smooth-proper-cohomological-family",
+  "prop-poincare-pairing",
+  "def-weil-poincare-trace-cup",
+  "lem-weil-perfect-pairing-line-equivariance",
+  "def-weil-integral-frobenius-factor",
   "def-weil-betti-numbers"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Chapter II, §27, Remark 27.7, p. 156 (P_0 = 1 − t and P_{2d} = 1 − q^d t from the Frobenius actions on H^0 and H^{2d}), with Remark 27.4(a), p. 155, and the proof of Theorem 27.12, p. 158, for the Frobenius action on H^{2d}; the steps Milne omits are written out from the DAG nodes [prop-cohomological-finiteness], [prop-poincare-pairing] and [lem-weil-perfect-pairing-line-equivariance]"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'etale cohomology\\|EtaleCohomology' Mathlib/ (and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean read)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: AlgebraicGeometry.Scheme.ellAdicSheaf (the sheaf U ↦ C(U, ℤ_[ℓ]) on the pro-étale site) and AlgebraicGeometry.Scheme.EllAdicCohomology ℓ n (its sheaf cohomology, a Type (u+1)); no Frobenius action, no ℚ_ℓ coefficients, no finiteness, no trace map, no Poincaré duality; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean mentions the words only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'tate twist' Mathlib/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -86,5 +164,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-endpoints",
+  "worker": "stage1",
+  "summary": "Statement checked against the master blueprint file and the slopmaster2 LaTeX (01_final_weil_conjectures.tex, prop:endpoints): same content, kept. stmt_deps completed with the notions the statement names (geometric hypotheses, global geometric Frobenius, cohomological family, Betti numbers, Tate twist and its Frobenius normalization). The single imported step was replaced by five steps following Milne, Lectures on Etale Cohomology, Remark 27.7 (p. 156), which states P_0 = 1 − t and P_{2d} = 1 − q^d t from F = 1 on H^0 and F = q^d on H^{2d}; Deligne, Weil I, is in literature/ but is a scan without a text layer and could not be read. The H^0 clause is exactly the connectedness clause of [prop-cohomological-finiteness]. The H^{2d} clause, which the blueprint attributed to the twist normalization without arguing that the isomorphism is Frobenius-equivariant, is derived from the degree-zero perfect pairing and its similitude in [prop-poincare-pairing] through the new linear-algebra node [lem-weil-perfect-pairing-line-equivariance] (searched in Mathlib: LinearMap.IsPerfPair and Module.finrank_of_isPerfPair cover the dimension clause only). The ℓ-adic factors and the integral factors are elementary (1×1 determinant; injectivity of ℤ[T] → ℚ_ℓ[T]). Dropped from the proof: [prop-integral-recovery] (the statement takes the integral factors as given objects of [def-weil-integral-frobenius-factor]; existence is not used) and [def-weil-frobenius-detailed] (a statement dependency, not a proof step)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

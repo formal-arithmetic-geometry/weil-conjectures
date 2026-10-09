@@ -1,0 +1,54 @@
+{
+ "id": "def-weil-polynomial-coefficient",
+ "kind": "definition",
+ "title": "Coefficient of $T^m$ in a polynomial",
+ "statement": "Let $R$ be a commutative ring and $T$ an indeterminate. A polynomial\n$P(T)\\in R[T]$ is a finite sum $P(T)=\\sum_{r\\geq0}c_rT^r$ with\ncoefficients $c_r\\in R$ indexed by integers $r\\geq0$, all but finitely\nmany zero. For an integer $m\\geq0$, the coefficient of $T^m$ in $P$ is\n\n$$\n[T^m]P(T)=c_m\\in R.\n$$\n\nFor $P\\neq0$, the degree $\\deg P$ is the largest $m$ with\n$[T^m]P(T)\\neq0$, and the leading coefficient of $P$ is\n$[T^{\\deg P}]P(T)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-determinant-constants.md",
+  "place": "node def-weil-determinant-constants, order 2866: the sentence defining $[T^m]P(T)=c_m$; the degree is used there and in def-weil-betti-numbers without definition"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def coeff' in Mathlib/Algebra/Polynomial/Basic.lean",
+   "results": "Polynomial.coeff : R[X] → ℕ → R (line 564), the coefficient of X^n",
+   "date": "2026-10-09",
+   "verdict": "match: the same notion for the same kind of object (polynomials over a semiring, coefficient at a natural number)"
+  },
+  {
+   "tool": "grep",
+   "query": "'def degree|def natDegree|def leadingCoeff|theorem coeff_natDegree' in Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+   "results": "Polynomial.degree : R[X] → WithBot ℕ (line 48), Polynomial.natDegree : R[X] → ℕ (line 52), Polynomial.leadingCoeff (line 56), Polynomial.coeff_natDegree : coeff p (natDegree p) = leadingCoeff p (line 85)",
+   "date": "2026-10-09",
+   "verdict": "match for the derived notions: the degree is Polynomial.natDegree (Polynomial.degree with the value ⊥ for 0) and the leading coefficient is Polynomial.leadingCoeff = coeff p (natDegree p)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.coeff",
+  "file": "Mathlib/Algebra/Polynomial/Basic.lean",
+  "how": "exact; the degree and the leading coefficient are Polynomial.natDegree and Polynomial.leadingCoeff in Mathlib/Algebra/Polynomial/Degree/Defs.lean"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-determinant-constants",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

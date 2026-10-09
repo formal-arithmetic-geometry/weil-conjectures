@@ -1,0 +1,46 @@
+{
+ "id": "lem-weil-reciprocal-polynomial",
+ "kind": "statement",
+ "title": "Reciprocal polynomial of a polynomial with constant term one",
+ "statement": "Let $R$ be a commutative ring and let $P(T)=\\sum_{k=0}^{r}c_kT^k\\in R[T]$ with $c_0=P(0)=1$ and $c_r\\neq0$, so that $r=\\deg P$. Define the reciprocal polynomial\n\n$$\nP^\\#(U)=U^{r}P(U^{-1}):=\\sum_{k=0}^{r}c_kU^{r-k}\\in R[U].\n$$\n\nThen:\n\n1. $P^\\#$ is monic of degree $r$, and $P^\\#(0)=c_r$.\n2. Let $\\varphi:R\\to K$ be a ring homomorphism into a field $K$ with $\\varphi(c_r)\\neq0$ (for instance any injective $\\varphi$; for $R=\\mathbf Z$, the unique homomorphism into any field $K$ of characteristic $0$), and write $\\varphi(Q)$ for the coefficientwise extension of $Q\\in R[T]$. Then $\\deg\\varphi(P)=r$, $\\varphi(P)(0)=1$, and $\\varphi(P^\\#)=(\\varphi(P))^\\#$.\n3. For $\\varphi$ as in (2) and $x\\in K$: $\\varphi(P^\\#)(x)=0$ if and only if $x\\neq0$ and $\\varphi(P)(x^{-1})=0$. Equivalently, $\\varphi(P^\\#)(x)=x^{r}\\,\\varphi(P)(x^{-1})$ for $x\\neq0$, and $\\varphi(P^\\#)(0)=\\varphi(c_r)\\neq0$. In particular the roots of $\\varphi(P^\\#)$ in $K$ are exactly the inverses of the roots of $\\varphi(P)$ in $K$, and all of them are nonzero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+  "place": "statement, the display $P_i^\\#(U)=U^{r_i}P_i(U^{-1})\\in\\mathbf Z[U]$ 'is monic' and the convention 'a reciprocal root means a root of $P_i^\\#$; its inverse is the corresponding ordinary root'; ## Proof, 'so the reversed polynomial is monic' (asserted without argument); also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/_section.md, ## Proof, first sentence"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -nE '^(theorem|lemma|def) ' Mathlib/Algebra/Polynomial/Reverse.lean; grep -rn 'reverse_map\\|map_reverse\\|reflect_map' Mathlib/",
+   "results": "Polynomial.reverse (reflect at natDegree; coeff_reverse: coefficient n is coeff (revAt natDegree n)), reverse_leadingCoeff : f.reverse.leadingCoeff = f.trailingCoeff, reverse_natDegree : f.reverse.natDegree = f.natDegree - f.natTrailingDegree, coeff_zero_reverse : coeff (reverse f) 0 = leadingCoeff f, eval₂_reverse_mul_pow, eval₂_reverse_eq_zero_iff (i : R →+* S) (x : S) [Invertible x] (f : R[X]) : eval₂ i (⅟x) (reverse f) = 0 ↔ eval₂ i x f = 0, reflect_map (f : R →+* S) (p) (n) : (p.map f).reflect n = (p.reflect n).map f; no reverse_map in Mathlib (the source repository adds one in WeilConjectures/Mathlib/Algebra/Polynomial/Reverse.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match as one declaration; generalization assembled from several: with natTrailingDegree P = 0 (Polynomial.natTrailingDegree_eq_zero_of_constantCoeff_ne_zero, Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean) one has P^# = Polynomial.reverse P; clause (1) is reverse_leadingCoeff + reverse_natDegree + coeff_zero_reverse, clause (2) is reflect_map + natDegree_map_of_leadingCoeff_ne_zero (Mathlib/Algebra/Polynomial/Eval/Degree.lean), clause (3) is eval₂_reverse_eq_zero_iff / eval₂_reverse_mul_pow; more than one line, so the node stays in the queue"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'natTrailingDegree_eq_zero\\|natDegree_map_of_leadingCoeff_ne_zero\\|natDegree_map_eq_of_injective\\|theorem Monic.map' Mathlib/Algebra/Polynomial/",
+   "results": "natTrailingDegree_eq_zero : natTrailingDegree p = 0 ↔ p = 0 ∨ coeff p 0 ≠ 0 and natTrailingDegree_eq_zero_of_constantCoeff_ne_zero (Degree/TrailingDegree.lean:141, 428); natDegree_map_of_leadingCoeff_ne_zero (Eval/Degree.lean:180); natDegree_map_eq_of_injective (Degree/Lemmas.lean:293); Monic.map (Monic.lean:56)",
+   "date": "2026-10-09",
+   "verdict": "no match; supporting lemmas for clauses (1) and (2)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-arithmetic-roots",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

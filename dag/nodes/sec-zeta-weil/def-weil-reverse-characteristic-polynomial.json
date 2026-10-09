@@ -1,0 +1,55 @@
+{
+ "id": "def-weil-reverse-characteristic-polynomial",
+ "kind": "definition",
+ "title": "Reverse characteristic polynomial of an endomorphism",
+ "statement": "Let $K$ be a field, $V$ a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace] of dimension $n=\\dim_KV$ [def-weil-vector-space-dimension], $F:V\\to V$ a $K$-linear endomorphism, and $T$ an indeterminate, with polynomial ring $K[T]$ [def-weil-polynomial-ring]. The reverse characteristic polynomial of $F$ is\n\n$$\n \\det(1-TF\\mid V)\\in K[T],\n$$\n\nthe determinant [def-weil-endomorphism-determinant] of the $K[T]$-linear endomorphism $1-T\\,(F\\otimes1)$ of the free $K[T]$-module $V\\otimes_KK[T]$ of rank $n$. Concretely, if $A\\in M_n(K)$ is the matrix of $F$ in a basis of $V$, it is $\\det(I_n-TA)$, and this does not depend on the basis. It is the reverse $T^n\\chi_F(1/T)$ of the characteristic polynomial $\\chi_F(T)=\\det(T-F\\mid V)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-smooth-proper-cohomological-family.md",
+  "place": "node def-weil-smooth-proper-cohomological-family, order 2856: '$P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$'"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpolyRev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)",
+   "results": "Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:292 `def Matrix.charpolyRev (M : Matrix n n R) : R[X] := det (1 - (X : R[X]) • M.map C)`; :294 `Matrix.reverse_charpoly : M.charpoly.reverse = M.charpolyRev`; :329 `Matrix.eval_charpolyRev : eval 0 M.charpolyRev = 1`; :336 `Matrix.coeff_charpolyRev_eq_neg_trace`; :316 `Matrix.charpoly_inv`. Only the matrix version exists: no `LinearMap.charpolyRev`",
+   "date": "2026-10-09",
+   "verdict": "generalization: Matrix.charpolyRev is exactly det(1 - T A) for the matrix A of F"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def charpoly\\|charpoly_toMatrix\\|charpoly_natDegree' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/LinearAlgebra/Charpoly/Basic.lean, ToMatrix.lean; ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+   "results": "Mathlib/LinearAlgebra/Charpoly/Basic.lean:44 `LinearMap.charpoly f := (toMatrix (chooseBasis R M) (chooseBasis R M) f).charpoly` (basis-free characteristic polynomial of an endomorphism of a finite free module); Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean:43 `LinearMap.charpoly_toMatrix (b : Basis ι R M) : (toMatrix b b f).charpoly = f.charpoly`; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:134 `Matrix.charpoly M := (charmatrix M).det`",
+   "date": "2026-10-09",
+   "verdict": "match for the characteristic polynomial; combined with Matrix.reverse_charpoly it gives the basis-free form `f.charpoly.reverse`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.charpolyRev",
+  "file": "Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean",
+  "how": "specializes in one line: for a basis `b` of `V`, `det(1 - T F | V) = (LinearMap.toMatrix b b F).charpolyRev`; basis-free, it equals `F.charpoly.reverse` by `Matrix.reverse_charpoly` (Coeff.lean:294) and `LinearMap.charpoly_toMatrix` (Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean:43)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-smooth-proper-cohomological-family",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

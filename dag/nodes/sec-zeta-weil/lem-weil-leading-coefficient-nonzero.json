@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-leading-coefficient-nonzero",
+ "kind": "statement",
+ "title": "Nonvanishing of the signed leading coefficient",
+ "statement": "Let $T$ be an indeterminate and let\n$P(T)=\\sum_{r\\geq0}c_rT^r\\in\\mathbf Z[T]$ satisfy $P(0)=1$, that is,\n$[T^0]P(T)=1$. Put $b=\\deg P$. Then\n\n$$\n(-1)^b[T^b]P(T)\\in\\mathbf Z\\setminus\\{0\\}.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-determinant-constants.md",
+  "place": "node def-weil-determinant-constants, order 2866: the assertion $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)\\in\\mathbf Z\\setminus\\{0\\}$, which the definition of $\\Delta\\in\\mathbf Q^\\times$ needs; stated there without proof"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-coefficient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'theorem leadingCoeff_ne_zero|theorem leadingCoeff_eq_zero|theorem coeff_natDegree' in Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+   "results": "Polynomial.leadingCoeff_ne_zero : leadingCoeff p ≠ 0 ↔ p ≠ 0 (line 360); Polynomial.leadingCoeff_eq_zero : leadingCoeff p = 0 ↔ p = 0 (line 354); Polynomial.coeff_natDegree : coeff p (natDegree p) = leadingCoeff p (line 85)",
+   "date": "2026-10-09",
+   "verdict": "generalization: for any nonzero polynomial over a semiring the leading coefficient is nonzero; the node is the case of $P\\in\\mathbf Z[T]$ with $P\\neq0$ because $[T^0]P=1$, with the sign $(-1)^b$ attached"
+  },
+  {
+   "tool": "grep",
+   "query": "'theorem coeff_zero_eq_eval_zero' in Mathlib/Algebra/Polynomial/Eval/Coeff.lean; 'theorem mul_ne_zero' in Mathlib/Algebra/GroupWithZero/Basic.lean",
+   "results": "Polynomial.coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0 (Eval/Coeff.lean line 57); mul_ne_zero : a ≠ 0 → b ≠ 0 → a * b ≠ 0 (GroupWithZero/Basic.lean line 84)",
+   "date": "2026-10-09",
+   "verdict": "match for the two side facts: $P\\neq0$ from $P(0)=1$, and the product with the unit $(-1)^b$ stays nonzero"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.leadingCoeff_ne_zero",
+  "file": "Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+  "how": "specializes in one line: $P\\neq0$ since $P.\\mathrm{coeff}\\ 0=1\\neq0$, so $[T^{\\deg P}]P=\\mathrm{leadingCoeff}\\ P\\neq0$ by leadingCoeff_ne_zero.mpr (via coeff_natDegree), and mul_ne_zero (pow_ne_zero _ (by norm_num)) gives $(-1)^{\\deg P}\\cdot\\mathrm{leadingCoeff}\\ P\\neq0$"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-determinant-constants",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "id": "lem-weil-integers-injective-char-zero",
+ "kind": "statement",
+ "title": "The integers embed in a field of characteristic zero; $\\Ql$ and its extensions have characteristic zero",
+ "statement": "Let $K$ be a field of characteristic zero, that is, $n\\cdot1_K\\neq0$ for every integer $n\\neq0$. Then the unique ring homomorphism $\\mathbf Z\\to K$, $c\\mapsto c\\cdot1_K$, is injective. For every prime $\\ell$, the field $\\Ql=\\mathbf Q_\\ell$ of $\\ell$-adic numbers has characteristic zero, and so has every field $L$ containing $\\Ql$ as a subfield (for instance an algebraic closure $\\Qlb$ of $\\Ql$): $n\\cdot1_L$ is the image of $n\\cdot1_{\\Ql}\\neq0$ under the injective inclusion. Hence $\\mathbf Z\\to\\Ql$ and $\\mathbf Z\\to L$ are injective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
+  "place": "node prop-integral-recovery, order 2910, '## Proof': uniqueness of the $P_i$ ('a unique integral polynomial $P_i$ whose scalar extension is $P_{i,\\ell}$') rests on the injectivity of $\\mathbf Z\\to\\Ql$, used without mention"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma cast_injective\\|theorem cast_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/Int/Cast/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharZero/",
+   "results": "Mathlib/Data/Int/Cast/Lemmas.lean:69 `Int.cast_injective : Function.Injective (Int.cast : ℤ → α)` for `[AddGroupWithOne α] [CharZero α]`; Mathlib/Algebra/CharZero/Defs.lean:63 `Nat.cast_injective`",
+   "date": "2026-10-09",
+   "verdict": "match: injectivity of ℤ → K for a characteristic-zero ring, the same kind of object"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'CharZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNumbers.lean; grep -rn 'theorem charZero_of_injective_ringHom\\|theorem charZero_of_injective_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharP/Algebra.lean",
+   "results": "Mathlib/NumberTheory/Padics/PadicNumbers.lean:563 `instance : CharZero ℚ_[p]`; Mathlib/Algebra/CharP/Algebra.lean:72 `charZero_of_injective_ringHom` (an injective ring homomorphism out of a CharZero ring lands in a CharZero ring), :77 `charZero_of_injective_algebraMap`",
+   "date": "2026-10-09",
+   "verdict": "match: ℚ_[ℓ] has characteristic zero, and so has every field it embeds in"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Int.cast_injective",
+  "file": "Mathlib/Data/Int/Cast/Lemmas.lean",
+  "how": "exact for the injectivity clause, with the instances `CharZero ℚ_[p]` (Mathlib/NumberTheory/Padics/PadicNumbers.lean:563) and `charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] L).injective` (Mathlib/Algebra/CharP/Algebra.lean:77) supplying the characteristic-zero hypothesis for ℚ_[ℓ] and for a field L over it"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-integral-recovery",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

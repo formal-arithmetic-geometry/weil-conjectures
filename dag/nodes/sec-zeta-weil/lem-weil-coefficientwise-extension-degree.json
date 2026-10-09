@@ -1,0 +1,55 @@
+{
+ "id": "lem-weil-coefficientwise-extension-degree",
+ "kind": "statement",
+ "title": "Coefficientwise extension along an injective ring homomorphism preserves degree, leading coefficient and constant coefficient",
+ "statement": "Let $\\varphi:R\\to S$ be an injective ring homomorphism of commutative rings, $T$ an indeterminate, and $\\varphi_*:R[T]\\to S[T]$ the coefficientwise extension [lem-weil-coefficientwise-extension-injective]. For every $P\\in R[T]$, with degree, leading coefficient and coefficients $[T^m]P$ as in [def-weil-polynomial-coefficient] and [def-weil-polynomial-ring]:\n\n$$\n\\deg\\varphi_*(P)=\\deg P,\\qquad\n[T^{\\deg P}]\\varphi_*(P)=\\varphi\\bigl([T^{\\deg P}]P\\bigr),\\qquad\n[T^m]\\varphi_*(P)=\\varphi\\bigl([T^m]P\\bigr)\\ \\text{for every }m\\geq0,\n$$\n\nin particular $\\varphi_*(P)(0)=\\varphi(P(0))$, and $\\varphi_*(P)(0)=1$ if and only if $P(0)=1$.\n\nIn particular, for a prime $\\ell$ such that $\\mathbf Z\\to\\Ql$ is injective, every $P\\in\\mathbf Z[T]$ has $\\deg P^{(\\ell)}=\\deg P$ and $P^{(\\ell)}(0)=P(0)\\cdot1_{\\Ql}$ [def-weil-coefficientwise-extension].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
+  "place": "node prop-integral-recovery, order 2910, '## Proof': 'scalar extension preserves degree, so the displayed degree equality follows', stated without proof"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-coefficientwise-extension",
+  "lem-weil-coefficientwise-extension-injective"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem natDegree_map_eq_of_injective\\|theorem degree_map_eq_of_injective\\|theorem leadingCoeff_map_of_injective\\|theorem natDegree_map_of_leadingCoeff_ne_zero\\|theorem degree_map \\|theorem natDegree_map ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/",
+   "results": "Mathlib/Algebra/Polynomial/Degree/Lemmas.lean:289 `Polynomial.degree_map_eq_of_injective (hf : Function.Injective f) (p) : (p.map f).degree = p.degree`; :293 `Polynomial.natDegree_map_eq_of_injective`; :297 `Polynomial.leadingCoeff_map_of_injective : (p.map f).leadingCoeff = f p.leadingCoeff`; Degree/Lemmas.lean:180 `natDegree_map_of_leadingCoeff_ne_zero`; FieldDivision.lean:277/281/285 `degree_map`, `natDegree_map`, `leadingCoeff_map` (source a division ring)",
+   "date": "2026-10-09",
+   "verdict": "match: degree and leading coefficient under map by an injective ring homomorphism, the same kind of object"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem coeff_map\\|theorem coeff_zero_eq_eval_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Eval/Coeff.lean",
+   "results": "Mathlib/Algebra/Polynomial/Eval/Coeff.lean:79 `Polynomial.coeff_map (n : ℕ) : coeff (p.map f) n = f (coeff p n)`; :57 `Polynomial.coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0`",
+   "date": "2026-10-09",
+   "verdict": "match: the coefficient clause; the constant-coefficient clause is coeff_map at n = 0 with coeff_zero_eq_eval_zero, and the 'if and only if' is injectivity of φ"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.natDegree_map_eq_of_injective",
+  "file": "Mathlib/Algebra/Polynomial/Degree/Lemmas.lean",
+  "how": "exact for the degree clause (`Polynomial.degree_map_eq_of_injective` for the WithBot-valued degree); `Polynomial.leadingCoeff_map_of_injective` (same file, line 297) for the leading coefficient; `Polynomial.coeff_map φ m` (Mathlib/Algebra/Polynomial/Eval/Coeff.lean:79) for every coefficient, and with `coeff_zero_eq_eval_zero` and `hφ.eq_iff` for the constant coefficient"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-integral-recovery",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "id": "prop-weil-functional-equation-parity",
+ "kind": "statement",
+ "title": "Parity of the functional-equation exponent",
+ "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$ and\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$.\nFix an indeterminate $T$. Let $X_0/k_0$ be smooth, proper, and\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, and\nput $X=X_0\\times_{k_0}k$. For every prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, for $P(T)=\\sum_r c_rT^r\\in\\mathbf Z[T]$ write\n$P^{(\\ell)}(T)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$, let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper cohomological family, and let $P_i(T)\\in\\mathbf Z[T]$ be\nthe integral Frobenius factor with $P_i(0)=1$ and\n$P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$. For $0\\leq i\\leq2d$\nlet $b_i=\\deg P_i$ be the Betti number, and let\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i\n$$\n\nbe the Euler characteristic. Then the integer $d\\chi$ is even: there\nis an integer $h$ with $d\\chi=2h$.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+  "place": "Proposition prop:functional-equation-parity (Parity of the functional-equation exponent), lines 3486-3494, whose uses are def:smooth-proper-datum, prop:duality-reciprocity, def:euler-characteristic; the registry comment at line 3521 says it 'supplies integrality of the exponent' of def:functional-equation-sign. On master the claim is the remark 'Assume dχ is even; in geometric applications this follows from the duality relations ...' inside def-weil-functional-equation-sign (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/def-weil-functional-equation-sign.md) and is argued inline, with no node, in step 2 of sk-thm-fe/prop-functional-equation.md and step 2 of sk-thm-weil5/thm-weil-final-functional-equation.md. Human source of the functional equation whose exponent dχ/2 it makes an integer: Milne, Lectures on Étale Cohomology v2.21 (literature/milne-lectures-on-etale-cohomology_LEC.pdf), §27, Theorem 27.12 and Remark 27.13, pp. 158-159, which writes q^{dχ/2} without stating the parity."
+ },
+ "stmt_deps": [
+  "def-weil-betti-numbers",
+  "def-weil-determinant-constants",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-smooth-proper-cohomological-family"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'weil conjecture\\|functional equation' Mathlib/; grep -rl zeta Mathlib/NumberTheory/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "only the functional equations of the Gamma function, of the Riemann and Hurwitz zeta functions and Dirichlet L-series, and of exponential and Schroder power series; nothing about the zeta function of a variety over a finite field or its Betti numbers",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'betti\\|poincar\\|étale cohomology' Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "no file mentions Betti numbers; 'Poincar' only in Geometry/Manifold/PoincareConjecture.lean, Dynamics and MeasureTheory (no Poincaré duality); AlgebraicGeometry/Sites/ElladicCohomology.lean defines AlgebraicGeometry.Scheme.EllAdicCohomology (pro-étale H^i(X, Z_ℓ)) with no Frobenius action, finiteness, duality or characteristic polynomial",
+   "date": "2026-10-09",
+   "verdict": "no match: the hypotheses (Frobenius factors of ℓ-adic cohomology, Poincaré duality) have no Mathlib counterpart"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def IsSquare' Mathlib/Algebra/Group/Even.lean; grep -n 'lemma even_iff' Mathlib/Algebra/Group/Int/Even.lean; grep -rln eulerChar Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Even is the additive form of IsSquare (Algebra/Group/Even.lean:55-57); Int.even_iff (Algebra/Group/Int/Even.lean:34); Algebra/Homology/EulerCharacteristic.lean defines HomologicalComplex.eulerChar for complexes of modules, not the alternating sum of the degrees of the P_i",
+   "date": "2026-10-09",
+   "verdict": "no match; the conclusion is Even (d * χ) in Mathlib's terms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-functional-equation-sign",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

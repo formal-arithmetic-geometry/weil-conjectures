@@ -1,0 +1,53 @@
+{
+ "id": "lem-weil-realization-exists",
+ "kind": "statement",
+ "title": "An $\\ell$-adic realization of algebraic numbers exists and fixes the rationals",
+ "statement": "Fix a prime $p$, $a\\in\\mathbf Z_{\\geq1}$, $q=p^a$, $k_0=\\Fq$, $k=\\Fbar$, and a prime $\\ell\\neq p$; write $\\Ql=\\mathbf Q_\\ell$ and choose an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-finite-field-fiber]. Fix an algebraic closure $\\overline{\\mathbf Q}$ of $\\mathbf Q$ and let\n\n$$\n\\overline{\\mathbf Q}^{(\\ell)}=\\{z\\in\\Qlb:z\\text{ is algebraic over }\\mathbf Q\\}\n$$\n\nbe the algebraic closure of $\\mathbf Q$ inside $\\Qlb$ [def-weil-algebraic-closure-q]. Then $\\overline{\\mathbf Q}^{(\\ell)}$ is an algebraic closure of $\\mathbf Q$: it is an algebraically closed field and every element of it is algebraic over $\\mathbf Q$. Consequently there exists a $\\mathbf Q$-isomorphism\n\n$$\n\\jmath:\\overline{\\mathbf Q}\\xrightarrow{\\ \\sim\\ }\\overline{\\mathbf Q}^{(\\ell)},\n$$\n\nthat is, an $\\ell$-adic realization of algebraic numbers in the sense of [def-weil-algebraic-closure-q] exists. Every such $\\jmath$ is the identity on $\\mathbf Q$, hence sends every integer $c$ to $c\\cdot1_{\\Qlb}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md",
+  "place": "node prop-integral-recovery, order 2910, '## Proof': the identity $P_i^{(\\ell)}=P_{i,\\ell}$ is read off from the identity $Q_i^{(\\ell,\\jmath_\\ell)}=P_{i,\\ell}$ of thm-weil-realization-independence, which is stated for a chosen realization $\\jmath_\\ell$; that one exists is used without mention"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure-q"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def algebraicClosure\\|instance isAlgClosure\\|instance isAlgebraic\\|theorem mem_algebraicClosure_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/AlgebraicClosure.lean",
+   "results": "Mathlib/FieldTheory/AlgebraicClosure.lean:39 `algebraicClosure F E : IntermediateField F E` (the elements of E algebraic over F, Stacks 09GI); :54 `mem_algebraicClosure_iff : x ∈ algebraicClosure F E ↔ IsAlgebraic F x`; :108 `instance isAlgebraic : Algebra.IsAlgebraic F (algebraicClosure F E)`; :183 `instance algebraicClosure.isAlgClosure [IsAlgClosed E] : IsAlgClosure F (algebraicClosure F E)` (algebraically closed and algebraic over F)",
+   "date": "2026-10-09",
+   "verdict": "match: $\\overline{\\mathbf Q}^{(\\ell)}$ = algebraicClosure ℚ Qlb is an algebraic closure of ℚ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsAlgClosure\\|noncomputable def equiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean:264 `class IsAlgClosure R K` (isAlgClosed, isAlgebraic); :405 `IsAlgClosure.equiv (R L M) [IsAlgClosure R L] [IsAlgClosure R M] : L ≃ₐ[R] M` (Stacks 09GV, any two algebraic closures are R-isomorphic); an `AlgEquiv` over ℚ fixes ℚ (`AlgEquiv.commutes`) and hence ℤ (`map_intCast`)",
+   "date": "2026-10-09",
+   "verdict": "match: existence of a ℚ-isomorphism between two algebraic closures of ℚ, the same kind of object"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlgClosure.equiv",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "how": "specializes in one line: `IsAlgClosure.equiv ℚ Qbar (algebraicClosure ℚ Qlb)` with the instances `IsAlgClosure ℚ Qbar` (Qbar an algebraic closure of ℚ) and `algebraicClosure.isAlgClosure` (Mathlib/FieldTheory/AlgebraicClosure.lean:183, from `IsAlgClosed Qlb`); the first clause is that instance, and `AlgEquiv.commutes`/`map_intCast` give that ȷ fixes ℚ and ℤ"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-integral-recovery",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
