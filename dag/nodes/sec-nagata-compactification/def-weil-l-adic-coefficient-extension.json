@@ -1,0 +1,55 @@
+{
+ "id": "def-weil-l-adic-coefficient-extension",
+ "kind": "definition",
+ "title": "Finite extension of $\\mathbf Q_\\ell$: valuation ring, uniformizer and finite quotients",
+ "statement": "Let $\\ell$ be a prime number and let $E/\\mathbf Q_\\ell$ be a *finite extension*: a field $E$ with a fixed field homomorphism $\\mathbf Q_\\ell\\to E$ making $E$ finite-dimensional as a $\\mathbf Q_\\ell$-vector space. The absolute value $|\\cdot|_\\ell$ of $\\mathbf Q_\\ell$ extends uniquely to an absolute value $|\\cdot|_E$ on $E$, namely $|x|_E=|N_{E/\\mathbf Q_\\ell}(x)|_\\ell^{1/[E:\\mathbf Q_\\ell]}$, and $E$ is complete for it. The *valuation ring* (ring of integers) of $E$ is\n\n$$\n\\mathcal O_E=\\{x\\in E:|x|_E\\leq1\\},\n$$\n\nthe integral closure of $\\mathbf Z_\\ell$ in $E$; it is a discrete valuation ring, hence a local ring whose maximal ideal $\\mathfrak m_E=\\{x\\in E:|x|_E<1\\}$ is principal, with finite residue field $\\mathcal O_E/\\mathfrak m_E$. A *uniformizer* of $E$ is an element $\\varpi_E\\in\\mathcal O_E$ generating $\\mathfrak m_E$, equivalently a nonzero element of $\\mathfrak m_E$ of largest absolute value; every $x\\in E^\\times$ is uniquely $u\\,\\varpi_E^{m}$ with $u\\in\\mathcal O_E^\\times$ and $m\\in\\mathbf Z$. For every integer $n\\geq1$ the *finite coefficient ring* is the quotient ring\n\n$$\nA_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E,\n$$\n\na finite local ring, with the surjective transition homomorphisms $A_{E,n+1}\\twoheadrightarrow A_{E,n}$ induced by the identity of $\\mathcal O_E$. The ring $A_{E,n}$ does not depend on the choice of $\\varpi_E$, since any two uniformizers differ by a unit.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$'; on slopmaster2 the same datum with the transition maps is Definition def:weil-finite-coefficient-datum (Auxiliary finite coefficient datum), literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex lines 36-56. No document in literature/ proves the facts the definition rests on (unique extension of the absolute value, $\\mathcal O_E$ a discrete valuation ring with finite residue field): Stacks Tag 0EXQ (More on Algebra, Section 15.111 Extensions of discrete valuation rings) defines extensions of discrete valuation rings but does not treat finite extensions of a complete field; the standard reference is Serre, Local Fields, Ch. II, §2, Proposition 3 and its corollaries (not obtained)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/NumberTheory/LocalField/; grep -n '^class IsNonarchimedeanLocalField\\|^instance' Mathlib/NumberTheory/LocalField/Basic.lean; grep -rn 'instance.*IsNonarchimedeanLocalField' Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "IsNonarchimedeanLocalField K (Basic.lean:45): a topological field with a valuative relation, whose topology is the valuation topology, locally compact and nontrivially valued; for such K the file gives IsDiscreteValuationRing 𝒪[K] (:108), Finite 𝓀[K] (:140), CompleteSpace K (:157), IsAdicComplete 𝓂[K] 𝒪[K] (:176); no instance of the class exists anywhere in Mathlib, in particular none for ℚ_[p] or for a finite extension of ℚ_[p]",
+   "date": "2026-10-09",
+   "verdict": "no match: the class states exactly the properties of O_E used here, but Mathlib does not know that a finite extension of ℚ_ℓ satisfies it"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def spectralNorm\\|theorem spectralNorm_unique\\|def normedField\\|instance (priority := 100) completeSpace' Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean; grep -n 'def integer\\|scoped notation \"𝒪\\[' Mathlib/Topology/Algebra/Valued/ValuedField.lean; grep -n 'def IsUniformizer\\|structure Uniformizer' Mathlib/RingTheory/Valuation/Discrete/Basic.lean; grep -n '^class IsDiscreteValuationRing' Mathlib/RingTheory/DiscreteValuationRing/Basic.lean; grep -n 'instance instHasQuotient' Mathlib/RingTheory/Ideal/Quotient/Defs.lean; grep -n '^abbrev FiniteDimensional' Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "spectralNorm K L (y : L) := spectralValue (minpoly K y) (SpectralNorm.lean:381); spectralNorm_unique [CompleteSpace K] (:699): every power-multiplicative K-algebra norm on L equals the spectral norm; spectralNorm.normedField K L : NormedField L (:854), nontriviallyNormedField (:873), CompleteSpace L for finite-dimensional L (:939); Valued.integer K : Subring K (ValuedField.lean:608) with notation 𝒪[K] (:611); Valuation.IsUniformizer π := v π = generator (Discrete/Basic.lean:200) and the bundled Valuation.Uniformizer (:242); IsDiscreteValuationRing (DiscreteValuationRing/Basic.lean:58); R ⧸ I (Quotient/Defs.lean:43); FiniteDimensional K V (FiniteDimensional/Defs.lean:75)",
+   "date": "2026-10-09",
+   "verdict": "no match as one notion; the pieces exist: E is `[Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]`, |·|_E is `spectralNorm.normedField ℚ_[ℓ] E` (unique by `spectralNorm_unique`), O_E is `Valued.integer E` (`Valuation.integer`) for the valuation of that norm, ϖ_E is a `Valuation.Uniformizer`, and A_{E,n} is `𝒪[E] ⧸ Ideal.span {ϖ_E ^ n}`; that O_E is a discrete valuation ring with finite residue field is not in Mathlib for this E, so the assembly is more than one line and the node stays in the queue"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'finite extension of ℚ_\\[\\|FiniteDimensional ℚ_\\[\\|Module.Finite ℚ_\\[\\|\\[Algebra ℚ_\\[p\\]' Mathlib  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no file about finite extensions of ℚ_[p]"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-field-fiber",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

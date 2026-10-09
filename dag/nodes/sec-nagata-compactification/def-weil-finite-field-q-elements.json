@@ -1,0 +1,56 @@
+{
+ "id": "def-weil-finite-field-q-elements",
+ "kind": "definition",
+ "title": "The finite field with $q$ elements",
+ "statement": "Let $p$ be a prime number, let $a\\in\\mathbf Z_{\\geq1}$, and put $q=p^a$. A *finite field with $q$ elements* is a field $F$ whose underlying set is finite of cardinality $q$. Such a field exists (for instance the splitting field of $X^{q}-X$ over the prime field $\\mathbf F_p=\\mathbf Z/p\\mathbf Z$), it has characteristic $p$, and any two fields with $q$ elements are isomorphic; $\\mathbf F_q$ denotes one fixed such field. Conversely every finite field has $p^f$ elements, where $p$ is its characteristic and $f\\geq1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'fix a prime $p$ and an integer $a\\in\\mathbf Z_{\\geq1}$, and put $q=p^a$. Set $k_0=\\Fq$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09HY (Fields, Section 9.14 Finite fields: a finite field has $q=p^f$ elements)"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^def GaloisField\\|^theorem card\\|^def algEquivOfCardEq\\|^def ringEquivOfCardEq\\|^def algEquivGaloisField\\|^theorem finrank' Mathlib/FieldTheory/Finite/GaloisField.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "GaloisField p n := SplittingField (X ^ p ^ n - X : (ZMod p)[X]) (line 69), deriving Field, CharP _ p and Finite; GaloisField.finrank (h : n ≠ 0) : Module.finrank (ZMod p) (GaloisField p n) = n (:80); GaloisField.card (h : n ≠ 0) : Nat.card (GaloisField p n) = p ^ n (:130); GaloisField.algEquivGaloisField (h : Nat.card K = p ^ n) : K ≃ₐ[ZMod p] GaloisField p n (:208); FiniteField.algEquivOfCardEq (:263) and FiniteField.ringEquivOfCardEq (hKK' : Fintype.card K = Fintype.card K') : K ≃+* K' (:277): two finite fields of the same cardinality are isomorphic",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/FieldTheory/Finite/; grep -n 'card_eq_pow_finrank' Mathlib/FieldTheory/Finite/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Basic.lean, Extension.lean, GaloisField.lean, Polynomial.lean, Trace.lean, Valuation.lean; Basic.lean lines 381 and 389 use Module.card_eq_pow_finrank to write the cardinality of a finite field as p ^ (finrank over ZMod p), i.e. every finite field has p^f elements",
+   "date": "2026-10-09",
+   "verdict": "match (supporting: the cardinality of a finite field is a power of its characteristic)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "GaloisField",
+  "file": "Mathlib/FieldTheory/Finite/GaloisField.lean",
+  "how": "exact: $\\mathbf F_q$ is `GaloisField p a` (line 69), a field with `Nat.card (GaloisField p a) = p ^ a` by `GaloisField.card` (line 130, under `a ≠ 0`); any field with $q$ elements is isomorphic to it by `FiniteField.ringEquivOfCardEq` (line 277) / `GaloisField.algEquivGaloisField` (line 208)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-field-fiber",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

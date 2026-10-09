@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-l-adic-numbers",
+ "kind": "definition",
+ "title": "The field of $\\ell$-adic numbers and its valuation ring",
+ "statement": "Let $\\ell$ be a prime number. The *$\\ell$-adic valuation* $v_\\ell:\\mathbf Q^\\times\\to\\mathbf Z$ sends $x=\\ell^{m}\\,u$, with $u$ a quotient of integers prime to $\\ell$, to $m$, and the *$\\ell$-adic absolute value* is $|x|_\\ell=\\ell^{-v_\\ell(x)}$ for $x\\neq0$, $|0|_\\ell=0$. The field of *$\\ell$-adic numbers* $\\mathbf Q_\\ell$ is the completion of $\\mathbf Q$ with respect to $|\\cdot|_\\ell$; it is a complete nonarchimedean valued field of characteristic $0$, and $v_\\ell$ extends to $v_\\ell:\\mathbf Q_\\ell^\\times\\to\\mathbf Z$ with $|x|_\\ell=\\ell^{-v_\\ell(x)}$. The *valuation ring* of $\\mathbf Q_\\ell$ is\n\n$$\n\\mathbf Z_\\ell=\\{x\\in\\mathbf Q_\\ell:|x|_\\ell\\leq1\\}=\\{0\\}\\cup\\{x\\in\\mathbf Q_\\ell^\\times:v_\\ell(x)\\geq0\\},\n$$\n\nthe ring of *$\\ell$-adic integers*; it is a discrete valuation ring with maximal ideal $\\ell\\mathbf Z_\\ell$ and uniformizer $\\ell$, and $\\mathbf Z_\\ell/\\ell^n\\mathbf Z_\\ell\\cong\\mathbf Z/\\ell^n\\mathbf Z$ for every $n\\geq1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For each prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, ... and write $\\Zl$ for the valuation ring of $\\Ql$. Thus ... $\\Zl$ consists of the elements of nonnegative $\\ell$-adic valuation'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^def Padic\\b\\|notation \"ℚ_\\[\\|^def valuation\\|instance normedField\\|instance : CompleteSpace\\|theorem norm_le_one_iff_val_nonneg\\|^def addValuation' Mathlib/NumberTheory/Padics/PadicNumbers.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Padic p (line 531; the file's header: the p-adic numbers as the Cauchy-sequence completion of ℚ for the p-adic norm) with notation ℚ_[p] (:536); NormedField ℚ_[p] (:800), NontriviallyNormedField (:872), CompleteSpace ℚ_[p] (:1026); Padic.valuation : ℚ_[p] → ℤ (:1040), Padic.addValuation : AddValuation ℚ_[p] (WithTop ℤ) (:1206); Padic.norm_le_one_iff_val_nonneg (x : ℚ_[p]) : ‖x‖ ≤ 1 ↔ 0 ≤ x.valuation (:1234)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def PadicInt\\|notation \"ℤ_\\[\\|^def valuation\\|instance : IsLocalRing\\|instance : IsDiscreteValuationRing\\|theorem maximalIdeal_eq_span_p\\|theorem irreducible_p\\|lemma valuation_coe_nonneg' Mathlib/NumberTheory/Padics/PadicIntegers.lean; sed -n 15,30p Mathlib/NumberTheory/Padics/RingHoms.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "PadicInt p := {x : ℚ_[p] // ‖x‖ ≤ 1} (line 60) with notation ℤ_[p] (:63); PadicInt.valuation (:324) and valuation_coe_nonneg (:315); IsLocalRing ℤ_[p] (:503); PadicInt.maximalIdeal_eq_span_p : maximalIdeal ℤ_[p] = Ideal.span {p} (:510); irreducible_p (:523); IsDiscreteValuationRing ℤ_[p] (:525); RingHoms.lean: PadicInt.toZModPow : ℤ_[p] →+* ZMod (p ^ n) with kernel the ideal (p ^ n) (header lines 25-27)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Padic",
+  "file": "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+  "how": "exact: $\\mathbf Q_\\ell$ is `ℚ_[ℓ]` (`Padic ℓ`, line 531) and $v_\\ell$ is `Padic.valuation` (line 1040); $\\mathbf Z_\\ell$ is `ℤ_[ℓ]` (`PadicInt ℓ` = `{x : ℚ_[ℓ] // ‖x‖ ≤ 1}`, Mathlib/NumberTheory/Padics/PadicIntegers.lean:60), the elements of nonnegative valuation by `Padic.norm_le_one_iff_val_nonneg` (line 1234); `IsDiscreteValuationRing ℤ_[ℓ]` (PadicIntegers.lean:525) with `PadicInt.maximalIdeal_eq_span_p` (line 510) and the quotients `PadicInt.toZModPow` (Mathlib/NumberTheory/Padics/RingHoms.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-field-fiber",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

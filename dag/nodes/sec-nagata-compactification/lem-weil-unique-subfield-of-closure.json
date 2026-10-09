@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-unique-subfield-of-closure",
+ "kind": "statement",
+ "title": "The subfield with $q^n$ elements of an algebraic closure of $\\mathbf F_q$",
+ "statement": "Let $p$ be a prime, let $a\\geq1$, put $q=p^a$, let $k_0=\\mathbf F_q$ be a field with $q$ elements, and let $k$ be an algebraic closure of $k_0$ with structure homomorphism $\\iota:k_0\\to k$. For every integer $n\\geq1$:\n\n1. the set $k^{(n)}=\\{x\\in k:x^{q^n}=x\\}$ of roots of $X^{q^n}-X$ in $k$ is a subfield of $k$ with exactly $q^n$ elements;\n2. $k^{(n)}$ is the only subfield of $k$ with $q^n$ elements;\n3. $k^{(n)}\\supseteq\\iota(k_0)$, and $\\iota(k_0)=k^{(1)}$ is the unique subfield of $k$ with $q$ elements.\n\nConsequently $\\mathbf F_{q^n}:=k^{(n)}$, 'the unique subfield of $k$ with $q^n$ elements', is well defined, and it is a $k_0$-algebra through $\\iota$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every integer $n\\geq1$, let $\\mathbf F_{q^n}\\subset k$ be the unique subfield with $q^n$ elements' (existence and uniqueness asserted without argument; the $k_0$-algebra structure of $\\mathbf F_{q^n}$, needed for $\\operatorname{Hom}_{k_0}(\\operatorname{Spec}\\mathbf F_{q^n},Y_0)$, is not mentioned). No document in literature/ proves it: Stacks Tag 09HY (Fields, Section 9.14) only shows that a finite field has $p^f$ elements and a cyclic unit group; the standard reference is Lang, Algebra, Ch. V, §5, Theorem 5.1 (not obtained)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Subfield\\|IntermediateField\\|fixedField\\|rootSet' Mathlib/FieldTheory/Finite/Basic.lean Mathlib/FieldTheory/Finite/GaloisField.lean Mathlib/FieldTheory/Finite/Extension.lean; sed -n 690,760p Mathlib/FieldTheory/Finite/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "only the prime subfield: Subfield.card_bot : Nat.card (⊥ : Subfield F) = p (Basic.lean:722), Subfield.roots_X_pow_char_sub_X_bot (:734), Subfield.mem_bot_iff_pow_eq_self : x ∈ (⊥ : Subfield F) ↔ x ^ p = x (:748); GaloisField p n is an abstract splitting field with p ^ n elements (GaloisField.lean:69, :130), not a subfield of a given algebraically closed field; FiniteField.Extension k p n (Extension.lean) is a non-canonically chosen extension of degree n of a finite field k",
+   "date": "2026-10-09",
+   "verdict": "no match: clause (3) for a = 1 (the prime subfield is the set of roots of X^p - X and has p elements) is Subfield.mem_bot_iff_pow_eq_self with Subfield.card_bot; nothing states that the roots of X^{q^n} - X in an algebraically closed field of characteristic p form the unique subfield with q^n elements"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_unique.*Subfield\\|∃! .*Subfield\\|Subfield.*Nat.card.*= \\|subfield.*X \\^ q - X\\|Subfield.*frobenius\\|fixedPoints.*frobenius' Mathlib/FieldTheory Mathlib/Algebra; grep -rn 'IsAlgClosed.*Finite\\|AlgebraicClosure (ZMod\\|AlgebraicClosure (GaloisField' Mathlib/FieldTheory/Finite/*.lean Mathlib/FieldTheory/IsAlgClosed/*.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "only Subfield.card_bot (Basic.lean:722); nothing about subfields of an algebraic closure of a finite field",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'splits_X_pow_card_sub_X\\|isSplittingField_of_card_eq\\|roots_X_pow_card_sub_X\\|frobeniusAlgEquiv' Mathlib/FieldTheory/Finite/GaloisField.lean Mathlib/FieldTheory/Finite/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "FiniteField.splits_X_pow_card_sub_X (GaloisField.lean:156), FiniteField.isSplittingField_of_card_eq (:160): a field with p ^ n elements is a splitting field of X ^ p ^ n - X; FiniteField.roots_X_pow_card_sub_X (Basic.lean, used at :739): the roots of X ^ card - X are all the elements; FiniteField.frobeniusAlgEquiv (Basic.lean:349) and frobeniusAlgEquivOfAlgebraic (:363): the Frobenius x ↦ x ^ p as an automorphism",
+   "date": "2026-10-09",
+   "verdict": "no match; supporting lemmas for a later proof of clause (1): every field with q^n elements consists of the roots of X^{q^n} - X, and X^{q^n} - X splits in k with q^n distinct roots"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-field-fiber",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

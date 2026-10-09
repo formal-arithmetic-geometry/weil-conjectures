@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-scheme-over-base",
+ "kind": "definition",
+ "title": "Schemes over a base and morphisms over it",
+ "statement": "Let $S$ be a scheme. A *scheme over $S$* (an *$S$-scheme*) is a scheme $X$ equipped with a morphism of schemes $X\\to S$, called its *structure morphism*. For a commutative ring $R$, a *scheme over $R$* (an $R$-scheme) means a scheme over $\\operatorname{Spec}R$. A *morphism of schemes over $S$* (an *$S$-morphism*) $f:X\\to Y$ between $S$-schemes is a morphism of schemes such that the composite of $f$ with the structure morphism of $Y$ equals the structure morphism of $X$; $\\operatorname{Hom}_S(X,Y)$ (also written $\\operatorname{Mor}_S(X,Y)$) denotes the set of $S$-morphisms from $X$ to $Y$, and $\\operatorname{Hom}_R$ means $\\operatorname{Hom}_{\\operatorname{Spec}R}$. The $S$-schemes and $S$-morphisms form the category $\\mathit{Sch}/S$ of schemes over $S$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For a $k_0$-scheme $Y_0$ whose structure morphism is of finite type', '$a_Y:Y\\longrightarrow\\Spec k$ ... its ... structure morphism', and '$Y_0(\\mathbf F_{q^n})=\\operatorname{Hom}_{k_0}\\bigl(\\operatorname{Spec}\\mathbf F_{q^n},Y_0\\bigr)$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01JX (Schemes, Definition 26.18.1, items (1)-(4))"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'protected abbrev Over\\|abbrev Hom.IsOver\\|abbrev CanonicallyOver\\|abbrev asOver\\|abbrev Hom.asOver\\|lemma Hom.isOver_iff' Mathlib/AlgebraicGeometry/Over.lean; grep -n '^class OverClass\\|^class HomIsOver\\|^class CanonicallyOverClass' Mathlib/CategoryTheory/Comma/Over/OverClass.lean; grep -n '^def Over\\b' Mathlib/CategoryTheory/Comma/Over/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "AlgebraicGeometry.Scheme.Over X S := OverClass X S (Over.lean:36): the data of a structure morphism X ↘ S; Scheme.Hom.IsOver f S := HomIsOver f S (:46), i.e. f ≫ Y ↘ S = X ↘ S (Hom.isOver_iff, :49); Scheme.asOver X S (:55) and Hom.asOver f S (:58) bundle them into CategoryTheory.Over S (Comma/Over/Basic.lean:39), whose morphisms are exactly the S-morphisms; OverClass (OverClass.lean:43), CanonicallyOverClass (:67), HomIsOver (:88)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Over",
+  "file": "Mathlib/AlgebraicGeometry/Over.lean",
+  "how": "exact: an $S$-scheme is `X` with `[X.Over S]` (line 36), its structure morphism is `X ↘ S`; an $S$-morphism is `f : X ⟶ Y` with `[f.IsOver S]` (line 46); $\\operatorname{Hom}_S(X,Y)$ is the hom-set of `CategoryTheory.Over S` (Mathlib/CategoryTheory/Comma/Over/Basic.lean:39) between `X.asOver S` and `Y.asOver S` (line 55); an $R$-scheme is one over `Spec (CommRingCat.of R)`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-field-fiber",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
