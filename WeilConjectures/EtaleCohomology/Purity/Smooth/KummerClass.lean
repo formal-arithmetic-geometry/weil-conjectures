@@ -157,6 +157,8 @@ end Kummer
 
 section Boundary
 
+variable [Finite Λ]
+
 variable {U : Scheme.{u}} (f : Γ(U, ⊤))
 
 /-- The *Kummer boundary* `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` of a global function `f` on `U`. Write
@@ -187,6 +189,8 @@ noncomputable def kummerBoundary :
 end Boundary
 
 section Normalization
+
+variable [Finite Λ]
 
 variable {X Z : Scheme.{u}}
 
@@ -227,6 +231,8 @@ class HasKummerClass.IsNormalized : Prop where
 end Normalization
 
 section BoundaryProduct
+
+variable [Finite Λ]
 
 variable (U : Scheme.{u}) in
 /-- The diagonal `Λ_U ⟶ Λ_U ⊗ Λ_U` along which cohomology classes are multiplied: the inverse of
@@ -298,7 +304,7 @@ end Etale
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
@@ -315,7 +321,7 @@ inversion — assume it; they are false for the two data above. -/
 class HasTateTwist.IsNormalized [inst : HasTateTwist Λ] : Prop where
   /-- The twist datum underlies a normalized rank-one datum. -/
   exists_hasKummerClass :
-    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K
+    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K _
 
 /-- The twist datum underlying a normalized rank-one datum is normalized. -/
 instance HasKummerClass.IsNormalized.hasTateTwistIsNormalized [HasKummerClass Λ]

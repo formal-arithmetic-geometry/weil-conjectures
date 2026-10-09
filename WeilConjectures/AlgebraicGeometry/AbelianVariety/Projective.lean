@@ -93,7 +93,7 @@ pullback `j^* 𝒪(1)` of the twisting sheaf along a closed immersion `j` into a
 it is very ample, and equal to its first tensor power. -/
 theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] :
-    ∃ M : A.left.Modules, M.IsInvertible ∧ IsAmple A.hom M := by
+    ∃ M : A.left.Modules, IsAmple A.hom M := by
   obtain ⟨α, _, j, hj, hjA⟩ := exists_isClosedImmersion_projectiveSpace A
   have hM : IsVeryAmple A.hom (ProjectiveSpace.twistRestrict j 1) :=
     ⟨α, j, inferInstance, hj, hjA, ⟨Iso.refl _⟩⟩
@@ -110,7 +110,7 @@ Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_
 symmetrisation `L ⊗ [-1]^* L` is ample: `[-1]` is an automorphism, so `[-1]^* L` is ample, and a
 tensor product of ample modules is ample (`AlgebraicGeometry.IsAmple.tensorObj`). -/
 theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianVariety A] (L : A.left.Modules) [L.IsInvertible] (hample : IsAmple A.hom L) :
+    [IsAbelianVariety A] (L : A.left.Modules) (hample : IsAmple A.hom L) :
     IsAmple A.hom L.symmetrisation := by
   have : IsClosedImmersion ι[A].left := by
     have : IsIso ι[A].left := (Over.forget _).map_isIso ι[A]

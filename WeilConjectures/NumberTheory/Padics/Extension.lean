@@ -52,6 +52,8 @@ the `ℓ`-adic one, and `E` becomes a nonarchimedean local field.
   `ℚ_ℓ(b)` for some `b` algebraic over `ℚ`, so countably many finite extensions of `ℚ_ℓ` cover
   `ℚ̄_ℓ`.
 - `PadicAlgCl.isClosed_intermediateField` : a finite extension of `ℚ_ℓ` is closed in `ℚ̄_ℓ`.
+- `PadicAlgCl.completeSpace_ofAlgebra` : a finite extension of `ℚ_ℓ` is complete for the
+  restricted norm.
 - `PadicAlgCl.isAdicComplete_integers` and `PadicAlgCl.isAdicComplete_maximalIdealShrink` :
   if `E` is finite over `ℚ_ℓ`, then `𝒪_E` and its copy `Shrink 𝒪_E` are `𝔪_E`-adically
   complete.
@@ -200,6 +202,19 @@ lemma valuationOfAlgebra_algebraMap (x : ℚ_[l]) :
     valuationOfAlgebra l E (algebraMap ℚ_[l] E x) = ‖x‖₊ := by
   rw [valuationOfAlgebra_apply, ← IsScalarTower.algebraMap_apply]
   exact NNReal.eq (PadicAlgCl.norm_extends l x)
+
+/-- A finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` is complete for the norm restricted from
+`ℚ̄_ℓ`, being a finite-dimensional normed space over the complete field `ℚ_ℓ`. -/
+theorem completeSpace_ofAlgebra [FiniteDimensional ℚ_[l] E] :
+    letI := normedFieldOfAlgebra l E
+    CompleteSpace E := by
+  let := normedFieldOfAlgebra l E
+  let : NormedSpace ℚ_[l] E :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E (PadicAlgCl l) (c • x)‖ ≤ ‖c‖ * ‖algebraMap E (PadicAlgCl l) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  exact FiniteDimensional.complete ℚ_[l] E
 
 open ValuativeRel in
 /-- If `E` is a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, then `E`, with the valuative relation

@@ -252,6 +252,20 @@ theorem GlobalSectionsBijective.nonempty [GlobalSectionsBijective k X] : Nonempt
     ((GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)).1
       (Subsingleton.elim _ _))
 
+/-- A `k`-scheme with `H⁰(X, 𝒪_X) = k` is connected: its only idempotent global functions are
+the idempotents `0` and `1` of the field `k`. -/
+theorem GlobalSectionsBijective.connectedSpace [GlobalSectionsBijective k X] :
+    ConnectedSpace X := by
+  have := GlobalSectionsBijective.nonempty (k := k) (X := X)
+  rw [connectedSpace_iff_isIdempotentElem]
+  intro e he
+  have hb := GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)
+  obtain ⟨c, rfl⟩ := hb.2 e
+  have hc : IsIdempotentElem c := hb.1 (by rw [map_mul]; exact he)
+  rcases IsIdempotentElem.iff_eq_zero_or_one.mp hc with rfl | rfl
+  · exact .inl (map_zero _)
+  · exact .inr (map_one _)
+
 /-- **`h⁰(X, 𝒪_X) = 1`** for a `k`-scheme `X` with `H⁰(X, 𝒪_X) = k`, using
 `H⁰(X, 𝒪_X) = Γ(X, 𝒪_X)`. -/
 theorem Modules.finrankH_unit_zero [GlobalSectionsBijective k X] :

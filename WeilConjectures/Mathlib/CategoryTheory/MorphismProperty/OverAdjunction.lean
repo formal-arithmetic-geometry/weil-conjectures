@@ -294,3 +294,64 @@ lemma MorphismProperty.Over.isIso_pullbackMapComparison_of_isPullback
 end PullbackMapComparison
 
 end CategoryTheory
+
+namespace CategoryTheory.MorphismProperty.Over
+
+section Slice
+
+variable {C : Type*} [Category C] {P : MorphismProperty C} [P.IsStableUnderComposition]
+  [P.HasOfPostcompProperty P] {X Y : C} {f : X ⟶ Y} (hPf : P f) (T : P.Over ⊤ X)
+
+/-- Composition with `f` induces a full functor on the slices over each object: a morphism
+over `X` between two objects over `T` which is compatible with the maps to `T ⟶ Y` is a morphism
+over `X`. -/
+instance full_post_map_op : (Under.post (Over.map ⊤ hPf).op (X := Opposite.op T)).Full where
+  map_surjective {A B} ψ := by
+    let m := ψ.right.unop
+    have hA := Over.w A.hom.unop
+    have hB := Over.w B.hom.unop
+    have hψ' : m ≫ (Over.map ⊤ hPf).map A.hom.unop = (Over.map ⊤ hPf).map B.hom.unop :=
+      Quiver.Hom.op_inj (CategoryTheory.Under.w ψ)
+    have hψ : m.left ≫ A.hom.unop.left = B.hom.unop.left := by
+      simpa using congrArg (fun φ ↦ φ.left) hψ'
+    let φ : B.right.unop ⟶ A.right.unop := Over.homMk m.left (by
+      rw [← hA, ← Category.assoc, hψ, hB]) trivial
+    refine ⟨CategoryTheory.Under.homMk φ.op ?_, ?_⟩
+    · apply Quiver.Hom.unop_inj
+      apply Over.Hom.ext
+      simpa [φ] using hψ
+    · ext
+      apply Quiver.Hom.unop_inj
+      apply Over.Hom.ext
+      rfl
+
+/-- Composition with `f` is essentially surjective on the slices over each object `T`: an
+object `s : W ⟶ T` over `T` is an object over `X` through `T`, using that `P` has the
+right-cancellation property. -/
+instance essSurj_post_map_op :
+    (Under.post (Over.map ⊤ hPf).op (X := Opposite.op T)).EssSurj where
+  mem_essImage Z := by
+    let s := Z.hom.unop
+    have hs : P s.left := MorphismProperty.of_postcomp (W := P) (W' := P) s.left (T.hom ≫ f)
+      (P.comp_mem _ _ T.prop hPf) (by
+        have : s.left ≫ T.hom ≫ f = Z.right.unop.hom := Over.w s
+        rw [this]
+        exact Z.right.unop.prop)
+    let W : P.Over ⊤ X := Over.mk ⊤ (s.left ≫ T.hom) (P.comp_mem _ _ hs T.prop)
+    let t : W ⟶ T := Over.homMk s.left rfl trivial
+    refine ⟨CategoryTheory.Under.mk t.op, ⟨CategoryTheory.Under.isoMk
+      (Iso.op (Over.isoMk (Iso.refl _) ?_)) ?_⟩⟩
+    · have : s.left ≫ T.hom ≫ f = Z.right.unop.hom := Over.w s
+      simpa [W] using this
+    · apply Quiver.Hom.unop_inj
+      apply Over.Hom.ext
+      simp [W, t, s]
+      rfl
+
+/-- Composition with `f` induces equivalences on the slices over each object. -/
+instance isEquivalence_post_map_op :
+    (Under.post (Over.map ⊤ hPf).op (X := Opposite.op T)).IsEquivalence where
+
+end Slice
+
+end CategoryTheory.MorphismProperty.Over

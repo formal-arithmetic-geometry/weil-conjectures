@@ -133,6 +133,30 @@ lemma isIso_map_projectionMap_app_app [IsIso adj.unit] [IsIso δ] (K : C) (M : D
   rw [(IsIso.eq_inv_comp _).2 (adj.unit_app_comp_map_projectionMap_app_app G' T T' δ K M)]
   infer_instance
 
+/-- The projection map `F (K ⊗ G' M) ⟶ F K ⊗ M` is an isomorphism if the unit of `F ⊣ G` and
+`δ` are isomorphisms and its target `F K ⊗ M` lies in the essential image of `F`: it is then
+`F` of the isomorphism `Adjunction.projectionMapTranspose` followed by the counit at an object
+of the essential image of the fully faithful `F`. -/
+lemma isIso_projectionMap_app_app_of_iso [IsIso adj.unit] [IsIso δ] (K : C) (M : D) (Z : C)
+    (e : (T'.obj (F.obj K)).obj M ≅ F.obj Z) :
+    IsIso (((adj.projectionMap G' T T' δ).app K).app M) := by
+  have hZ : IsIso (adj.counit.app (F.obj Z)) := by
+    have : IsIso (F.map (adj.unit.app Z) ≫ adj.counit.app (F.obj Z)) := by
+      rw [adj.left_triangle_components Z]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_left (F.map (adj.unit.app Z)) _
+  have hN : IsIso (adj.counit.app ((T'.obj (F.obj K)).obj M)) := by
+    have h := adj.counit.naturality e.hom
+    dsimp at h
+    have : IsIso (adj.counit.app ((T'.obj (F.obj K)).obj M) ≫ e.hom) := by
+      rw [← h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ e.hom
+  rw [projectionMap_app_app, homEquiv_counit]
+  have : IsIso (adj.counit.app
+      ((((((Functor.whiskeringLeft₂ D).obj F).obj (𝟭 D)).obj T').obj K).obj M)) := hN
+  infer_instance
+
 end LeftAdjoint
 
 section RightAdjoint

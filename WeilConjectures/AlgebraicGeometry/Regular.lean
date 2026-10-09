@@ -181,6 +181,15 @@ theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoet
     [ConnectedSpace X] : IrreducibleSpace X :=
   irreducibleSpace_of_isDomain_stalk X fun _ ↦ inferInstance
 
+/-- A nonempty connected locally noetherian regular scheme is integral: it is irreducible
+(`AlgebraicGeometry.IsRegular.irreducibleSpace`), and reduced since its local rings are
+integral domains. -/
+theorem IsRegular.isIntegral (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
+    [ConnectedSpace X] : IsIntegral X :=
+  have := IsRegular.irreducibleSpace X
+  have := isReduced_of_isReduced_stalk X
+  isIntegral_of_irreducibleSpace_of_isReduced X
+
 /-- A smooth morphism with geometrically connected fibres has geometrically irreducible fibres:
 a base change of it to a field is smooth over that field, hence regular and locally noetherian,
 and connected, hence irreducible. -/

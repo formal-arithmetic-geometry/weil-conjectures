@@ -67,6 +67,34 @@ noncomputable example :
       DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) :=
   R+(ν_*(X)[A])
 
+/-- An object of the derived category of pro-étale sheaves is *bounded below of étale origin*
+if it is isomorphic to `D(ν^*) K'` for a bounded below complex `K'` of étale sheaves. This is the
+class of objects on which the exceptional adjunction of blueprint `sk-prop-sf-existence` (c)
+holds. -/
+def DerivedCategory.plusEtaleOrigin :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  DerivedCategory.TStructure.t.plus.map D(ν^*(X)[A])
+
+variable {A X} in
+/-- `D(ν^*) K'` is bounded below of étale origin for a bounded below `K'`. -/
+lemma DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj
+    {K' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK' : DerivedCategory.TStructure.t.plus K') :
+    DerivedCategory.plusEtaleOrigin A X (D(ν^*(X)[A]).obj K') :=
+  ObjectProperty.prop_map_obj _ _ hK'
+
+instance : (DerivedCategory.plusEtaleOrigin A X).IsClosedUnderIsomorphisms :=
+  inferInstanceAs (DerivedCategory.TStructure.t.plus.map _).IsClosedUnderIsomorphisms
+
+variable {A X} in
+/-- An object bounded below of étale origin is bounded below. -/
+lemma DerivedCategory.plusEtaleOrigin.plus
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.plusEtaleOrigin A X K) : DerivedCategory.TStructure.t.plus K := by
+  obtain ⟨K', ⟨n, hn⟩, ⟨e⟩⟩ := hK
+  exact DerivedCategory.TStructure.t.plus.prop_of_iso e
+    ⟨n, (ν^*(X)[A]).isGE_mapDerivedCategory_obj K' n⟩
+
 section Adjunction
 
 /- The closed symmetric preadditive monoidal structure and the functorial flat resolutions on
@@ -80,6 +108,46 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 pro-étale sheaves, induced by the adjunction `ν^* ⊣ ν_*`. -/
 noncomputable def derivedComparisonAdjunctionPlus : D+(ν^*(X)[A]) ⊣ R+(ν_*(X)[A]) :=
   (comparisonAdjunction A X).derivedAdjunctionPlus
+
+/-- The adjunction `D(ν^*) ⊣ Rν_*` between the unbounded derived categories of étale and
+pro-étale sheaves, induced by the adjunction `ν^* ⊣ ν_*`: the derived adjunction
+`Lν^* ⊣ Rν_*`, read through the identification `Lν^* ≅ D(ν^*)` of the left derived functor of
+the exact functor `ν^*`. -/
+noncomputable def derivedComparisonAdjunction : D(ν^*(X)[A]) ⊣ R(ν_*(X)[A]) :=
+  (comparisonAdjunction A X).derivedAdjunction.ofNatIsoLeft
+    (ν^*(X)[A]).leftDerivedFunctorIsoMapDerivedCategory
+
+/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+
+*Full faithfulness on `D⁺`.* For a bounded below complex `M` of étale sheaves, the unit
+`M ⟶ Rν_* ν^* M` of the comparison adjunction is an isomorphism: this is the assertion
+`id ≅ Rν_{T*} ν_T^*` on `D⁺(T_ét)` of the blueprint (Bhatt–Scholze, *The pro-étale topology for
+schemes*, Corollary 5.1.6), which makes `ν^* : D⁺(X_ét) ⥤ D(X_proét)` fully faithful. -/
+theorem isIso_derivedComparisonAdjunction_unit_app
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (hM : DerivedCategory.TStructure.t.plus M) :
+    IsIso ((derivedComparisonAdjunction A X).unit.app M) :=
+  sorry
+
+variable {A X} in
+/-- `D(ν^*)` is fully faithful on bounded below complexes: for `K` and `M` in `D⁺(X_ét)`,
+`D(ν^*)` induces a bijection `Hom(K, M) ≃ Hom(ν^* K, ν^* M)`. It is the composite of the
+bijection `Hom(K, M) ≃ Hom(K, Rν_* ν^* M)` given by the unit, which is invertible at the bounded
+below `M` (`isIso_derivedComparisonAdjunction_unit_app`), and the adjunction
+`D(ν^*) ⊣ Rν_*`. Only `M` needs to be bounded below. -/
+lemma bijective_comparisonUpperStar_mapDerivedCategory_map
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (hM : DerivedCategory.TStructure.t.plus M) :
+    Function.Bijective (fun g : K ⟶ M ↦ D(ν^*(X)[A]).map g) := by
+  have := isIso_derivedComparisonAdjunction_unit_app A X M hM
+  have h : (fun g : K ⟶ M ↦ D(ν^*(X)[A]).map g) = fun g ↦
+      ((derivedComparisonAdjunction A X).homEquiv K _).symm
+        (g ≫ (derivedComparisonAdjunction A X).unit.app M) := by
+    ext g
+    simp [Adjunction.homEquiv_counit]
+  rw [h]
+  exact ((derivedComparisonAdjunction A X).homEquiv K _).symm.bijective.comp
+    ((asIso ((derivedComparisonAdjunction A X).unit.app M)).homToEquiv.bijective)
 
 end Adjunction
 

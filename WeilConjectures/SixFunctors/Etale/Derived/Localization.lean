@@ -72,7 +72,8 @@ an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this sa
 is fully faithful on the exceptional side. It is the derived counterpart of the full
 faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`. -/
 theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
-    [HasCompactification i] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
     IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) :=
   sorry
 
@@ -145,6 +146,7 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 where `ε` is the counit of `Ri_! ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*`. -/
 noncomputable abbrev supportedLocalizationTriangle (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
       ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧) :
@@ -216,7 +218,7 @@ Uniqueness is [BBD, 1.1.9] applied to two such triangles and the identity of `L`
 triangles extending `𝟙 L` (`CategoryTheory.Pretriangulated.exists_triangleHom_of_comp_eq_zero`)
 has components `(𝟙, 𝟙, 𝟙)`, so the two connecting maps agree. -/
 theorem existsUnique_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃! w, supportedLocalizationTriangle A i j L w ∈ distTriang _ := by
@@ -278,7 +280,7 @@ It is *defined* as `Classical.choose` of the existence half of
 the choice canonical. The supported term is
 `Ri_!`, which for a closed immersion is `Ri_*`. -/
 noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧ :=
@@ -287,7 +289,7 @@ noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
 /-- The supported localization triangle with its boundary
 `AlgebraicGeometry.Etale.supportedLocalizationBoundary` is distinguished. -/
 theorem supportedLocalizationTriangle_mem_distTriang (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L) ∈
@@ -315,6 +317,7 @@ The middle component extends to a morphism of triangles
 because `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`). -/
 theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : L ⟶ L')
     {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
@@ -351,6 +354,7 @@ are equal (`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`), be
 `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`) [BBD, 1.1.9]. -/
 theorem triangleHom_supportedLocalization_ext (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶

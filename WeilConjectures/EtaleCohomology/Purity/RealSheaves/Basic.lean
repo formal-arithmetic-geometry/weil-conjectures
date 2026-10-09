@@ -42,8 +42,11 @@ Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a
 ## Implementation notes
 
 The curve itself enters through the instance arguments `[Finite K]` and `[IsCurve p]` of
-`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them;
-smoothness and geometric connectedness are extra hypotheses where they are needed. Only closed
+`AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them.
+Geometric connectedness of `C₀`, a standing hypothesis of `def-wf-weil-group`, is the field
+`AlgebraicGeometry.WeilGroup.geometricallyConnected`, since the presentation through
+`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` requires it; smoothness is an extra hypothesis
+where it is needed. Only closed
 points of `C₀` — those of `AlgebraicGeometry.Scheme.finitePoints` — index a local Frobenius,
 since `AlgebraicGeometry.Scheme.Hom.degreeOver` has the junk value `0` elsewhere.
 
@@ -51,15 +54,18 @@ since `AlgebraicGeometry.Scheme.Hom.degreeOver` has the junk value `0` elsewhere
 rather than defined as the subgroup `weilGroup` of `π₁(C₀, s) × ℤ`, because the topology of the
 Weil group is not the subspace topology: the geometric part `π₁(C)` is open. Some fields are
 consequences of others for the genuine Weil group (for instance `deg_frobenius` follows from
-`isFrobeniusElement_frobenius`), and some are theorems about it that are not proved here: the
-surjectivity of the degree needs `C₀` geometrically connected, and `dense_frobenius` is the
-Chebotarev density theorem. They are recorded as fields since they are true of the genuine Weil
-group of a smooth geometrically connected curve, which is the only object the structure is
-meant to describe; the structure is not constructed in this block.
+`isFrobeniusElement_frobenius`), and some are theorems about it which need hypotheses on `C₀`:
+the surjectivity of the degree needs `C₀` geometrically connected. The structure is constructed
+for a geometrically connected curve in `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
+
+The Chebotarev density theorem, that the local Frobenius elements generate a dense normal
+subgroup, is not a field: it is a consequence of the other fields and of the Euler product of
+`L`-functions, `AlgebraicGeometry.WeilGroup.dense_frobenius`.
 
 The identification of `ker deg` with the étale fundamental group of the *geometric* curve
-`C₀ ×_K K̄`, which the rank-one purity theorems use, is the separate hypothesis
-`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`.
+`C₀ ×_K K̄`, which the rank-one purity theorems use, is the separate predicate
+`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`; every Weil group of a geometrically connected
+curve satisfies it by the homotopy exact sequence (`AlgebraicGeometry.WeilGroup.isEtaleQuotient`).
 
 ## Main definitions
 
@@ -101,8 +107,10 @@ group `π₁(C₀, s)` of `C₀` at a geometric base point `s`:
 * the topology of `W` induces the profinite topology of `π₁(C₀, s)` on `π₁(C)`;
 * `frobenius x` is a Frobenius element at `x` of `π₁(C₀, s)`: it acts on the geometric fibres
   at `s` as the geometric Frobenius of `κ(x)` acts on those at a geometric point over `x`,
-  transported along a path (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`);
-* the local Frobenius elements generate a dense normal subgroup (Chebotarev density). -/
+  transported along a path (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`).
+
+That the local Frobenius elements generate a dense normal subgroup (Chebotarev density) is a
+theorem about these data, `AlgebraicGeometry.WeilGroup.dense_frobenius`. -/
 structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The underlying group `W(C₀)` of the Weil group. -/
   carrier : Type u
@@ -145,6 +153,10 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
     MulAction fundamentalGroup ((Scheme.FiniteEtale.fiber basePoint).obj P)]
   [isFundamentalGroup :
     PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber basePoint) fundamentalGroup]
+  /-- The curve `C₀` is geometrically connected over `𝔽_q`, the standing hypothesis of the Weil
+  group `def-wf-weil-group`: without it the degree map of
+  `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` is not surjective. -/
+  [geometricallyConnected : GeometricallyConnected p]
   /-- The identification of `W(C₀)` with the Weil group of `π₁(C₀, s)`: the pairs `(g, n)` such
   that `g` acts on the geometric fibres of the constant covers as the `n`-th power of the
   geometric Frobenius. -/
@@ -161,9 +173,6 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
     haveI : Finite (C.residueField x.1) := x.2
     Scheme.FiniteEtale.IsFrobeniusElement basePoint fundamentalGroup x.1
       (weilGroupEquiv (frobenius x)).1.1
-  /-- Chebotarev density: the local Frobenius elements generate a dense normal subgroup. -/
-  dense_frobenius :
-    Dense ((Subgroup.normalClosure (Set.range frobenius) : Subgroup carrier) : Set carrier)
 
 attribute [instance] WeilGroup.group WeilGroup.topologicalSpace WeilGroup.isTopologicalGroup
   WeilGroup.compactSpace_ker WeilGroup.totallyDisconnectedSpace_ker
@@ -180,6 +189,7 @@ protected abbrev geometric : Subgroup W.carrier := W.deg.ker
 
 /-- The inclusion `W(C₀) → π₁(C₀, s)` of the Weil group into the étale fundamental group. -/
 noncomputable def toFundamentalGroup : W.carrier →* W.fundamentalGroup :=
+  haveI := W.geometricallyConnected
   (MonoidHom.fst _ _).comp
     ((Scheme.FiniteEtale.weilGroup p W.basePoint W.fundamentalGroup).subtype.comp
       W.weilGroupEquiv.toMonoidHom)

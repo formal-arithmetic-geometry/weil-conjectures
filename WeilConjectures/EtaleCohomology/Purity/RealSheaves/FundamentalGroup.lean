@@ -15,15 +15,15 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 An `AlgebraicGeometry.WeilGroup` is presented through the étale fundamental group
 `π₁(C₀, s)` of the curve `C₀` over `K`, and its geometric part `ker deg` is the kernel of
 `π₁(C₀, s) → Gal(K̄ / K)`. That this kernel is the étale fundamental group of the *geometric*
-curve `C = C₀ ×_K K̄` is the homotopy exact sequence, which is not available. The rank-one
-purity statements of `sk-p-real-rankone` use the geometric curve: they compare Frobenius-fixed
-classes in `H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
+curve `C = C₀ ×_K K̄` is the homotopy exact sequence. The rank-one purity statements of
+`sk-p-real-rankone` use the geometric curve: they compare Frobenius-fixed classes in
+`H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
 
-This file records that identification as a hypothesis,
-`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`:
-the geometric part of `W` is isomorphic, as a topological group, to a fundamental group
-`G = π₁(C, s)` of the geometric curve, compatibly with the Frobenius. The genuine Weil group
-`W(C₀, s)` satisfies it, with the isomorphism of the homotopy exact sequence.
+This file states that identification as `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`: the
+geometric part of `W` is isomorphic, as a topological group, to a fundamental group
+`G = π₁(C, s)` of the geometric curve, compatibly with the Frobenius. Every Weil group of a
+geometrically connected curve satisfies it, by the homotopy exact sequence
+(`AlgebraicGeometry.WeilGroup.isEtaleQuotient`).
 
 From it, the cohomological vanishing `lim_n H¹(C, ℤ / ℓⁿ)^{Φ = 1} = 0`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`) yields the
