@@ -4,7 +4,7 @@
 Usage:
   tools/lean_status.py <branch>=<sorry map> [<branch>=<sorry map> ...]
 
-A sorry map is the output of tools/sorry_map.lean for one branch: every declaration of the project, whether its
+A sorry map is the output of tools/sorry_map.lean for one branch (read plain or gzip-compressed, `.jsonl` or `.jsonl.gz`): every declaration of the project, whether its
 own term contains `sorry`, and the project declarations it uses. Auxiliary declarations are merged into their owner.
 
 The declarations of a node are the names in its `blueprint_lean`, plus the names the detailed LaTeX blueprint
@@ -32,7 +32,10 @@ TEX = ROOT / "literature/blueprint/slopmaster2/src/version"
 def load_map(path):
     own = {}                                   # owner -> record
     deps = collections.defaultdict(set)
-    rows = [json.loads(l) for l in open(path)]
+    import gzip
+    opener = gzip.open if str(path).endswith(".gz") else open
+    with opener(path, "rt") as fh:
+        rows = [json.loads(l) for l in fh]
     owner = {r["n"]: r["o"] for r in rows}
     for r in rows:
         o = r["o"]

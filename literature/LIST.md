@@ -75,3 +75,12 @@ A proof written by a human and checked by readers is worth more than one an agen
 | `ega/EGA-IV-1_PMIHES-20-1964.pdf` | EGA IV, première partie (contains 0_IV), Publ. Math. IHÉS 20 (1964) (32.0 MB) | https://www.numdam.org/item/PMIHES_1964__20__5_0.pdf, 2026-10-08 |
 | `ega/EGA-IV-2_PMIHES-24-1965.pdf` | EGA IV, seconde partie, Publ. Math. IHÉS 24 (1965) (31.8 MB) | https://www.numdam.org/item/PMIHES_1965__24__5_0.pdf, 2026-10-08 |
 | `ega/EGA-IV-3_PMIHES-28-1966.pdf` | EGA IV, troisième partie, Publ. Math. IHÉS 28 (1966) (34.4 MB) | https://www.numdam.org/item/PMIHES_1966__28__5_0.pdf, 2026-10-08 |
+
+## Rebuilding `literature/` on another machine
+
+Only `LIST.md`, `CITATIONS.tsv`, `stacks-tags-cited.tsv`, `README-import.md` and `import-tools/` are in git; the documents are not. `tools/fetch_literature.sh` (run from the project root; `--dry` lists what it would do) fetches every row of the Obtained table by the URL recorded there, and clones the git sources at the recorded commits:
+
+- the Stacks project, `https://github.com/stacks/stacks-project`, commit `a04446e57ec1fbc252a871afcec7752fb2807b14`, into `stacks-project/`;
+- the blueprint copies, branches of `https://github.com/formal-arithmetic-geometry/weil-conjectures` (the same repository that carries this project as branch `sheaf-dag`): `master` at `967897d1c5e775be739997d7e847a9205fae1359` into `blueprint/master/` and `slopmaster2` at `1ad77be92cebdbd62febaca30a77fa594d1a23a5` into `blueprint/slopmaster2/`; the node files are `blueprint/master/blueprint/`, the LaTeX of slopmaster2 is `blueprint/slopmaster2/src/version/`. Both copies here were taken as the whole branch; the commits are also in `blueprint/COMMITS.txt`.
+
+What the script cannot fetch and must be copied by hand: nothing of the Obtained table (every row has a public URL; Numdam, arXiv and the authors' pages served them on 2026-10-08). What may fail: a server that refuses `curl` (the IAS page did, for SGA 4½, which is Wanted, not Obtained); then download the file in a browser to the path the script prints. The Wanted table lists what is not obtained at all. The compiled source checkouts and Mathlib are not literature: see `SETUP.md`, "The machine".

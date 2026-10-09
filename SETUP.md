@@ -16,6 +16,14 @@ Fill in the table before starting the project. Any other requirement for how the
 - The DAG in `dag/nodes/` was not written by splitting from the target: it was imported from the blueprint on 2026-10-08 by `tools/import_blueprint.py`. The blueprint's proofs were written by agents, and every imported node records that.
 - A Lean declaration recorded in a node is one of the source repository (the node says which branch), found by reading the source text; nothing was compiled, and this project has no `lean/` directory.
 
+## The machine (as of 2026-10-09)
+
+- The project directory is this repository, branch `sheaf-dag` of `github.com/formal-arithmetic-geometry/weil-conjectures`; the launcher pushes it from another machine after every few commits. A new session clones it and reads `AGENTS.md`.
+- Nothing is built here: there is no `lean/` and no Lake build. The Lean of the source repository is only read, from two compiled checkouts on the machine: branch `master` at `~/weil-conjectures` and branch `slopmaster2` at `~/weil-conjectures-slopmaster2`; Mathlib for searching is `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (the version the source repository pins, `leanprover/lean4:v4.33.1`). Workers read these paths read-only; on another machine, put the checkouts where you like and give the paths in the brief.
+- The sorry maps (which declarations contain `sorry`, and what they use) are in git, compressed, in `local/`; how to regenerate them from a compiled checkout is in `tools/README.md`.
+- `literature/` is rebuilt by `tools/fetch_literature.sh` (see `literature/LIST.md`). `pdftotext` (poppler-utils) is installed for the PDFs.
+- Agents: this run used Claude Code, with workers as sub-agents (the `Agent` tool, model `opus`, effort `medium`, started with the brief `coord/brief-stage1.md` as their prompt). In another agent system a worker is any separately started agent given that brief and its item as its prompt, with the same read and write permissions; "model" and "effort" are whatever that system calls the choice of model and reasoning budget. Nothing else here depends on the agent system.
+
 ## Requirements of the human (2026-10-09)
 
 - **Sessions.** One session runs the project: it is the maintainer and the only lead, and gives items to at most 10 workers at a time, started as sub-agents with model `fable`.

@@ -27,7 +27,15 @@ An item of this stage is a node that a target reaches and that is not split yet.
 - The **maintainer** keeps the queue: the nodes that are neither Mathlib leaves nor split, nearest to a target first. If `SETUP.md` asks for an early review of the target statements, the nodes needed to state the targets come before all others. It starts with the targets. There is no Lean to build in this stage; in each cycle the maintainer brings the queue up to date, checks the new nodes against §6, and commits.
 - A **lead** claims nodes and gives each to a worker.
 - A **worker** splits its node by one level (§3) and writes the nodes directly into `dag/nodes/`. It changes no node that is not its own; what it finds wrong in another node goes into its report.
-- The lead reviews the node: the proof follows its source, every step names what it uses, every new node was searched in Mathlib, and no new node repeats an existing one.
+- The lead reviews the node: the proof follows its source, every step names what it uses, every new node was searched in Mathlib, and no new node repeats an existing one. A node counts as split only when its `status` is `split` and the lead has written `reviewed` (date, lead, result) on it after that review; `tools/review_split.py` does the mechanical part first. An item that turns out to be in Mathlib gets `status` `mathlib` with its match and `reviewed` as well.
+
+Conventions settled on review (2026-10-09):
+
+- **Mathlib leaf.** A node is a leaf when Mathlib states the same thing for the same kind of object, or a generalization that specializes in one line, including a conjunction of two Mathlib classes (finite type = `LocallyOfFiniteType` and `QuasiCompact`) or a few Mathlib lemmas applied one per clause; not when the agreement with Mathlib's definition is itself a theorem (smooth morphisms: Mathlib's smooth ring maps against the formally-smooth definition, Stacks 02H6, stays a split node with the match recorded). A `mathlib_match` is `{"declaration", "file", "how"}` with the file under `Mathlib/`.
+- **New nodes.** A new node is named `<def|lem|prop>-<prefix of its chapter>-<short name>`, placed in the directory of the item that created it, carries `created` (`by`, `item`, `date`), a complete statement introducing its own objects, a source with the place, at least one recorded Mathlib search with a verdict, and is `unsplit` (it joins the queue) or `mathlib`. A node that nothing cites yet (a claim moved out of a definition) is flagged `unreachable` in `import_flags` until a user cites it; the ledger records it.
+- **Claims inside definitions** become statement nodes; the definition keeps the data and takes its well-definedness from the theorem by name. A definition does not cite a lemma about itself (that is a pointer, kept in `pointers`, since it would close a cycle).
+- **Lean found by a worker.** A sorry-free declaration of slopmaster2 that states a node exactly is attached by the lead at review (`lean_audit`, with the sorry map as the proof that nothing below it has `sorry`); the node is then closed. `tools/lean_status.py` keeps such hand-attached names.
+- **Duplicates.** Two nodes created the same day for one notion: the later one is merged into the earlier (`status` `merged`, `merged_into`) or, if never committed, dropped, and the citers repointed.
 
 ## 3. Splitting
 

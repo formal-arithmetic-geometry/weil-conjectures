@@ -12,7 +12,11 @@ Your first prompt says who you are and which role document is yours.
 | the lead of a group | the launcher | [`roles/lead.md`](roles/lead.md) |
 | a worker on one item | a lead, as a sub-agent | [`roles/worker.md`](roles/worker.md) |
 
+A worker is started by its lead as a separate agent (in Claude Code, a sub-agent of the `Agent` tool) with the lead's brief as its whole prompt; in any other agent system, any separately started agent given that brief and its item is the worker. `SETUP.md` ("The machine") records what this run used and the equivalents.
+
 The launcher is the agent the human talks to. It works outside this directory: it started the project, keeps the sessions running, and brings the questions in `coord/HUMAN.md` to the human.
+
+A session that starts from this file alone reads, in this order: `SETUP.md` (the human's settings, the machine, the decisions of the run and their reasons), `GOAL.md` (the target), `coord/STATE.md` (where the run stands, what is in progress, the numbers), its role document, the open stage documents, `tools/README.md` (the scripts and the regeneration of what git does not hold), and `coord/ledger.md` when it needs the history of a change.
 
 ## 2. The project directory
 
@@ -23,12 +27,14 @@ AGENTS.md  roles/  stages/   the contract: how each role works, and what each st
 tools/                       scripts for the few operations that must be exact (tools/README.md)
 SETUP.md                     the human's settings and requirements; every agent follows them
 GOAL.md                      the goal of every agent: the targets and the completion criterion
-literature/                  the papers and textbooks the proofs follow; LIST.md lists those obtained and those wanted
-dag/nodes/                   the DAG, one JSON file per node
+literature/                  the papers and textbooks the proofs follow; LIST.md lists those obtained and those wanted, and how
+                             to fetch them (only the lists, the citation tables and import-tools/ are in git)
+dag/nodes/                   the DAG, one JSON file per node; dag/units/ and dag/chapters/ the blueprint's units and chapters
+                             as records (stages/1-dag.md §6); dag/notes/ the remarks and section texts of the import
 lean/                        the Lean project; group sandboxes in lean/.sandbox/<group>/
 coord/                       what the agents and the human tell each other: STATE.md, HUMAN.md, ledger.md,
                              targets-review.md, the queue, claims, changes, settings
-local/                       what this machine builds for itself; not committed
+local/                       what this machine builds for itself; not committed, except the compressed sorry maps
 ```
 
 ## 3. One library, many agents
