@@ -1,0 +1,304 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
+public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+
+/-!
+# Kummer torsors
+
+Let `X` be a scheme on which `n` is invertible, `ζ` a global `n`-th root of unity and `f` a
+global unit. The scheme of `n`-th roots of `f`,
+`X ×_{Spec Γ(X)} Spec Γ(X)[T]/(Tⁿ - f)`, with `a ∈ ℤ/n` acting by `T ↦ ζ^a T`, is the *Kummer
+cover* of `f` (`AlgebraicGeometry.Scheme.kummerCover`). When the image of `ζ` at a geometric
+point is a primitive `n`-th root of unity it is a `ℤ/n`-torsor
+(`AlgebraicGeometry.Scheme.EtaleTorsor.kummer`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Polynomial
+
+namespace AlgebraicGeometry.Scheme
+
+variable (Y : Scheme.{u}) (n : ℕ) (f : Γ(Y, ⊤))
+
+/-- The Kummer algebra `Γ(X)[T]/(Tⁿ - f)`. -/
+abbrev KummerAlgebra : Type u := AdjoinRoot (X ^ n - C f : Γ(Y, ⊤)[X])
+
+/-- The scheme `X ×_{Spec Γ(X)} Spec Γ(X)[T]/(Tⁿ - f)` of `n`-th roots of `f`. -/
+noncomputable abbrev kummerCover : Scheme.{u} :=
+  pullback Y.toSpecΓ (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f))))
+
+/-- The projection of the Kummer cover to `X`. -/
+noncomputable abbrev kummerCoverπ : Y.kummerCover n f ⟶ Y :=
+  pullback.fst _ _
+
+variable {Y n f} (ζ : Γ(Y, ⊤)) (hζ : ζ ^ n = 1)
+
+include hζ in
+lemma kummer_eval_eq_zero (m : ℕ) :
+    (X ^ n - C f : Γ(Y, ⊤)[X]).eval₂ (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f))
+      (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f) (ζ ^ m) * AdjoinRoot.root _) = 0 := by
+  have hr := AdjoinRoot.eval₂_root (X ^ n - C f : Γ(Y, ⊤)[X])
+  simp only [eval₂_sub, eval₂_X_pow, eval₂_C] at hr ⊢
+  rw [mul_pow, ← map_pow, ← pow_mul, mul_comm m n, pow_mul, hζ, one_pow, map_one, one_mul]
+  exact hr
+
+/-- The automorphism `T ↦ ζ ^ m T` of the Kummer algebra. -/
+noncomputable def kummerAlgHom (m : ℕ) : KummerAlgebra Y n f →ₐ[Γ(Y, ⊤)] KummerAlgebra Y n f :=
+  AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) _ (kummer_eval_eq_zero ζ hζ m)
+
+lemma kummerAlgHom_root (m : ℕ) :
+    kummerAlgHom ζ hζ m (AdjoinRoot.root _) =
+      algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f) (ζ ^ m) * AdjoinRoot.root _ :=
+  AdjoinRoot.liftAlgHom_root _ _ _ _
+
+lemma kummerAlgHom_zero : kummerAlgHom ζ hζ (f := f) 0 = AlgHom.id _ _ :=
+  AdjoinRoot.algHom_ext (by simp [kummerAlgHom_root])
+
+lemma kummerAlgHom_add (a b : ℕ) :
+    kummerAlgHom ζ hζ (f := f) (a + b) = (kummerAlgHom ζ hζ a).comp (kummerAlgHom ζ hζ b) :=
+  AdjoinRoot.algHom_ext (by
+    simp only [AlgHom.comp_apply, kummerAlgHom_root, map_mul, AlgHom.commutes, pow_add, map_mul]
+    ring)
+
+lemma kummerAlgHom_mod (m : ℕ) : kummerAlgHom ζ hζ (f := f) (m % n) = kummerAlgHom ζ hζ m :=
+  AdjoinRoot.algHom_ext (by
+    simp only [kummerAlgHom_root]
+    conv_rhs => rw [← Nat.mod_add_div m n, pow_add, pow_mul, hζ, one_pow, mul_one])
+
+/-- **Roots of `f` form a `μₙ`-torsor.** Two ring maps `α, β` from the Kummer algebra to a field
+`Ω`, agreeing on `Γ(Y)`, differ by a unique `T ↦ ζ ^ m T`, `m ∈ ℤ / n`, provided `f` is a unit
+and the image of `ζ` in `Ω` is a primitive `n`-th root of unity. -/
+lemma existsUnique_comp_kummerAlgHom [NeZero n] (hf : IsUnit f) {Ω : Type u} [Field Ω]
+    (α β : KummerAlgebra Y n f →+* Ω)
+    (hαβ : α.comp (algebraMap Γ(Y, ⊤) _) = β.comp (algebraMap Γ(Y, ⊤) _))
+    (hζΩ : IsPrimitiveRoot (α (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f) ζ)) n) :
+    ∃! m : ZMod n, α.comp (kummerAlgHom ζ hζ m.val).toRingHom = β := by
+  set σ := α.comp (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f))
+  set w := α (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f) ζ)
+  have hroot (γ : KummerAlgebra Y n f →+* Ω) :
+      γ (AdjoinRoot.root _) ^ n = γ (algebraMap _ _ f) := by
+    have hr := AdjoinRoot.eval₂_root (X ^ n - C f : Γ(Y, ⊤)[X])
+    simp only [eval₂_sub, eval₂_X_pow, eval₂_C, sub_eq_zero] at hr
+    rw [← map_pow, hr]
+    rfl
+  have hfΩ : α (algebraMap _ _ f) ≠ 0 := (hf.map (α.comp (algebraMap _ _))).ne_zero
+  set a := α (AdjoinRoot.root _)
+  set b := β (AdjoinRoot.root _)
+  have hβf : β (algebraMap _ _ f) = α (algebraMap _ _ f) :=
+    (RingHom.congr_fun hαβ f).symm
+  have ha : a ^ n = α (algebraMap _ _ f) := hroot α
+  have hb : b ^ n = α (algebraMap _ _ f) := (hroot β).trans hβf
+  have ha0 : a ≠ 0 := fun h ↦ hfΩ (by rw [← ha, h, zero_pow (NeZero.ne n)])
+  -- `T ↦ ζ ^ m T` followed by `α` is `β` iff `w ^ m * a = b`
+  have hiff (m : ℕ) : α.comp (kummerAlgHom ζ hζ m).toRingHom = β ↔ w ^ m * a = b := by
+    constructor
+    · intro h
+      have := congrArg (fun γ : KummerAlgebra Y n f →+* Ω ↦ γ (AdjoinRoot.root _)) h
+      simp only [RingHom.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
+        kummerAlgHom_root, map_mul, map_pow] at this
+      exact this
+    · intro h
+      refine AdjoinRoot.ringHom_ext (RingHom.ext fun r ↦ ?_) ?_
+      · change α (kummerAlgHom ζ hζ m (algebraMap _ _ r)) = β (algebraMap _ _ r)
+        rw [AlgHom.commutes]
+        exact RingHom.congr_fun hαβ r
+      · change α (kummerAlgHom ζ hζ m (AdjoinRoot.root _)) = β (AdjoinRoot.root _)
+        rw [kummerAlgHom_root, map_mul, map_pow, map_pow]
+        exact h
+  -- `b / a` is an `n`-th root of unity, hence a power of `w`
+  have hu : (b / a) ^ n = 1 := by rw [div_pow, ha, hb, div_self hfΩ]
+  obtain ⟨i, hin, hi⟩ := hζΩ.eq_pow_of_pow_eq_one hu
+  have hwi : w ^ i * a = b := by rw [hi, div_mul_cancel₀ _ ha0]
+  have hmod (k : ℕ) : w ^ (k % n) = w ^ k := by
+    conv_rhs => rw [← Nat.mod_add_div k n, pow_add, pow_mul, hζΩ.pow_eq_one, one_pow, mul_one]
+  refine ⟨(i : ZMod n), ?_, fun m hm ↦ ?_⟩
+  · beta_reduce
+    rw [hiff, ZMod.val_natCast, hmod]
+    exact hwi
+  · beta_reduce at hm
+    rw [hiff] at hm
+    have hpow : w ^ m.val = w ^ i := mul_right_cancel₀ ha0 (hm.trans hwi.symm)
+    rw [← ZMod.natCast_zmod_val m, hζΩ.pow_inj (ZMod.val_lt m) hin hpow]
+
+section Torsor
+
+variable (n f)
+
+/-- The structure morphism of the Kummer algebra. -/
+noncomputable abbrev kummerStructureMap :
+    Γ(Y, ⊤) ⟶ CommRingCat.of (KummerAlgebra Y n f) :=
+  CommRingCat.ofHom (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f))
+
+variable {n f}
+
+/-- The action of `m` on the Kummer cover, `T ↦ ζ ^ m T` on the second factor. -/
+noncomputable def kummerVadd (m : ℕ) : Y.kummerCover n f ⟶ Y.kummerCover n f :=
+  pullback.map _ _ _ _ (𝟙 Y)
+    (Spec.map (CommRingCat.ofHom (kummerAlgHom ζ hζ (f := f) m).toRingHom)) (𝟙 _) (by simp)
+    (by
+      rw [Category.comp_id, ← Spec.map_comp]
+      congr 1
+      ext r
+      exact ((kummerAlgHom ζ hζ m).commutes r).symm)
+
+lemma kummerVadd_comp_π (m : ℕ) : kummerVadd ζ hζ (f := f) m ≫ Y.kummerCoverπ n f =
+    Y.kummerCoverπ n f := by
+  simp [kummerVadd, kummerCoverπ]
+
+lemma kummerVadd_add (a b : ℕ) :
+    kummerVadd ζ hζ (f := f) (a + b) = kummerVadd ζ hζ a ≫ kummerVadd ζ hζ b := by
+  apply pullback.hom_ext
+  · simp [kummerVadd]
+  · simp only [kummerVadd, pullback.lift_snd, Category.assoc, pullback.lift_snd_assoc]
+    rw [← Spec.map_comp, kummerAlgHom_add]
+    rfl
+
+lemma kummerVadd_zero : kummerVadd ζ hζ (f := f) 0 = 𝟙 _ := by
+  apply pullback.hom_ext
+  · simp [kummerVadd]
+  · simp only [kummerVadd, pullback.lift_snd, Category.id_comp, kummerAlgHom_zero]
+    exact (congrArg (pullback.snd _ _ ≫ ·) (Spec.map_id _)).trans (Category.comp_id _)
+
+lemma kummerVadd_mod (m : ℕ) : kummerVadd ζ hζ (f := f) (m % n) = kummerVadd ζ hζ m := by
+  simp only [kummerVadd, kummerAlgHom_mod]
+
+end Torsor
+
+section Torsor
+
+variable {ζ hζ} [NeZero n] (hn : IsUnit (n : Γ(Y, ⊤))) (hf : IsUnit f)
+
+include hn hf in
+lemma etale_kummerStructureMap : Etale (Spec.map (kummerStructureMap (Y := Y) n f)) := by
+  rw [HasRingHomProperty.Spec_iff (P := @Etale)]
+  exact RingHom.etale_algebraMap.mpr (AdjoinRoot.etale_X_pow_sub_C (NeZero.ne n) hn hf)
+
+lemma isFinite_kummerStructureMap : IsFinite (Spec.map (kummerStructureMap (Y := Y) n f)) := by
+  rw [IsFinite.SpecMap_iff]
+  exact RingHom.finite_algebraMap.mpr (monic_X_pow_sub_C f (NeZero.ne n)).finite_adjoinRoot
+
+lemma surjective_kummerStructureMap : Surjective (Spec.map (kummerStructureMap (Y := Y) n f)) := by
+  have hdeg : (X ^ n - C f : Γ(Y, ⊤)[X]).degree ≠ 0 := by
+    nontriviality Γ(Y, ⊤)
+    rw [degree_X_pow_sub_C (Nat.pos_of_ne_zero (NeZero.ne n))]
+    exact_mod_cast NeZero.ne n
+  exact ((flat_and_surjective_SpecMap_iff _).mpr (RingHom.faithfullyFlat_algebraMap_iff.mpr
+    (AdjoinRoot.faithfullyFlat_of_monic (monic_X_pow_sub_C f (NeZero.ne n)) hdeg))).2
+
+include hn hf in
+/-- The Kummer cover as a finite étale `Y`-scheme. -/
+noncomputable def kummerFiniteEtale : Y.FiniteEtale :=
+  have := etale_kummerStructureMap hn hf
+  have := isFinite_kummerStructureMap (Y := Y) (n := n) (f := f)
+  ⟨MorphismProperty.Over.mk ⊤ (Y.kummerCoverπ n f) (by
+      change Etale (pullback.fst _ _); infer_instance),
+    by change IsFinite (pullback.fst _ _); infer_instance⟩
+
+variable (ζ hζ) in
+/-- The action of `m ∈ ℕ` on the Kummer cover, as an endomorphism of finite étale schemes. -/
+noncomputable def kummerVaddHom (m : ℕ) : kummerFiniteEtale hn hf ⟶ kummerFiniteEtale hn hf :=
+  ObjectProperty.homMk (MorphismProperty.Over.homMk (kummerVadd ζ hζ m) (kummerVadd_comp_π ζ hζ m))
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+/-- The ring map `Γ(Y) → Ω` of a geometric point. -/
+noncomputable abbrev pointRingHom : Γ(Y, ⊤) ⟶ CommRingCat.of Ω := Spec.preimage (s ≫ Y.toSpecΓ)
+
+/-- The ring map `Γ(Y)[T]/(Tⁿ - f) → Ω` of a point of the Kummer cover. -/
+noncomputable abbrev kummerPointRingHom (x : (FiniteEtale.fiber s).obj (kummerFiniteEtale hn hf)) :
+    CommRingCat.of (KummerAlgebra Y n f) ⟶ CommRingCat.of Ω :=
+  Spec.preimage (x.left ≫ pullback.snd _ _)
+
+lemma kummerStructureMap_comp_kummerPointRingHom
+    (x : (FiniteEtale.fiber s).obj (kummerFiniteEtale hn hf)) :
+    kummerStructureMap n f ≫ kummerPointRingHom hn hf s x = pointRingHom s := by
+  apply Spec.map_injective
+  rw [Spec.map_comp, Spec.map_preimage, Spec.map_preimage, Category.assoc, ← pullback.condition,
+    ← Category.assoc]
+  congr 1
+  exact FiniteEtale.fiber_left_comp s x
+
+lemma fiber_map_kummerVaddHom_eq_iff (m : ℕ)
+    (x y : (FiniteEtale.fiber s).obj (kummerFiniteEtale hn hf)) :
+    (FiniteEtale.fiber s).map (kummerVaddHom ζ hζ hn hf m) x = y ↔
+      (kummerPointRingHom hn hf s x).hom.comp (kummerAlgHom ζ hζ m).toRingHom =
+        (kummerPointRingHom hn hf s y).hom := by
+  constructor
+  · intro h
+    have h' := congrArg (fun z ↦ z.left ≫ pullback.snd _ _) h
+    simp only [FiniteEtale.fiber_map_left] at h'
+    change (x.left ≫ kummerVadd ζ hζ m) ≫ pullback.snd _ _ = y.left ≫ pullback.snd _ _ at h'
+    rw [Category.assoc, kummerVadd, pullback.lift_snd, ← Category.assoc,
+      ← Spec.map_preimage (x.left ≫ pullback.snd _ _), ← Spec.map_comp,
+      ← Spec.map_preimage (y.left ≫ pullback.snd _ _)] at h'
+    exact congrArg CommRingCat.Hom.hom (Spec.map_injective h')
+  · intro h
+    apply FiniteEtale.fiber_ext s
+    change x.left ≫ kummerVadd ζ hζ m = y.left
+    apply pullback.hom_ext
+    · rw [Category.assoc]
+      change x.left ≫ (kummerVadd ζ hζ m ≫ Y.kummerCoverπ n f) = y.left ≫ Y.kummerCoverπ n f
+      rw [kummerVadd_comp_π]
+      exact (FiniteEtale.fiber_left_comp s x).trans (FiniteEtale.fiber_left_comp s y).symm
+    · rw [Category.assoc, kummerVadd, pullback.lift_snd, ← Category.assoc,
+        ← Spec.map_preimage (x.left ≫ pullback.snd _ _), ← Spec.map_comp,
+        ← Spec.map_preimage (y.left ≫ pullback.snd _ _)]
+      congr 1
+      exact CommRingCat.hom_ext h
+
+variable (ζ hζ) [ConnectedSpace Y]
+
+/-- **The Kummer torsor.** The scheme of `n`-th roots of a unit `f`, with `m ∈ ℤ / n` acting by
+`T ↦ ζ ^ m T`, is a `ℤ / n`-torsor as soon as the image of `ζ` at a geometric point `s` is a
+primitive `n`-th root of unity. -/
+noncomputable def EtaleTorsor.kummer (hζs : IsPrimitiveRoot ((pointRingHom s).hom ζ) n) :
+    EtaleTorsor (ULift.{u + 1} (ZMod n)) Y where
+  P := Y.kummerCover n f
+  π := Y.kummerCoverπ n f
+  isFinite := (kummerFiniteEtale hn hf).property
+  etale := (kummerFiniteEtale hn hf).obj.prop
+  surjective := by
+    have := surjective_kummerStructureMap (Y := Y) (n := n) (f := f)
+    change Surjective (pullback.fst _ _)
+    infer_instance
+  vadd m := kummerVadd ζ hζ m.down.val
+  vadd_π m := kummerVadd_comp_π ζ hζ _
+  zero_vadd := by
+    change kummerVadd ζ hζ (0 : ZMod n).val = _
+    rw [ZMod.val_zero, kummerVadd_zero]
+  add_vadd a b := by
+    change kummerVadd ζ hζ (a.down + b.down).val = _
+    rw [ZMod.val_add, kummerVadd_mod, kummerVadd_add]
+  isIso_sigmaDesc := by
+    refine FiniteEtale.isIso_sigmaDesc_of_existsUnique s (kummerFiniteEtale hn hf)
+      (fun m : ULift.{u + 1} (ZMod n) ↦ kummerVaddHom ζ hζ hn hf m.down.val) fun x y ↦ ?_
+    have hx := kummerStructureMap_comp_kummerPointRingHom hn hf s x
+    have hy := kummerStructureMap_comp_kummerPointRingHom hn hf s y
+    have hαβ : (kummerPointRingHom hn hf s x).hom.comp (algebraMap Γ(Y, ⊤) _) =
+        (kummerPointRingHom hn hf s y).hom.comp (algebraMap Γ(Y, ⊤) _) :=
+      (congrArg CommRingCat.Hom.hom hx).trans (congrArg CommRingCat.Hom.hom hy).symm
+    have hζΩ : IsPrimitiveRoot
+        ((kummerPointRingHom hn hf s x).hom (algebraMap Γ(Y, ⊤) (KummerAlgebra Y n f) ζ)) n := by
+      have := congrArg (fun g : Γ(Y, ⊤) ⟶ CommRingCat.of Ω ↦ g.hom ζ) hx
+      beta_reduce at this
+      rw [← this] at hζs
+      exact hζs
+    obtain ⟨m, hm, huniq⟩ := existsUnique_comp_kummerAlgHom ζ hζ hf _ _ hαβ hζΩ
+    refine ⟨⟨m⟩, (fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).2 hm, fun m' h ↦ ?_⟩
+    exact ULift.ext _ _ (huniq m'.down ((fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).1 h))
+
+end Torsor
+
+end AlgebraicGeometry.Scheme
