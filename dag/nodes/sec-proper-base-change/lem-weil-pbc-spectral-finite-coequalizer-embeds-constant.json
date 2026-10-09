@@ -13,9 +13,119 @@
   "def-weil-pbc-category-colimit",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (reduction to a finite sober space; Tag 0CAK).* The sheaf $\\mathcal F$ on the spectral space $X$, with the data $U_a,V_b,S_a,T_b,\\beta,\\gamma,q$ of the statement, satisfies exactly the hypothesis of [lem-weil-pbc-spectral-finite-coequalizer-from-finite-space]. It gives a finite sober topological space $Y$, a continuous map $f:X\\to Y$ with $f^{-1}(V)$ quasi-compact for every open $V\\subseteq Y$, a sheaf of sets $\\mathcal G$ on $Y$ all of whose stalks $\\mathcal G_y$ are finite, and an isomorphism of sheaves of sets $\\psi:f^{-1}\\mathcal G\\xrightarrow{\\sim}\\mathcal F$, $f^{-1}$ the inverse image of sheaves of sets [def-weil-pbc-topological-inverse-image].",
+   "uses": [
+    "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133), first sentence: 'By Lemma 0CAK we reduce to the case of a finite sober topological space and a sheaf with finite stalks'; Lemma Tag 0CAK (label lemma-constructible-comes-from-finite, line 3061)"
+   }
+  },
+  {
+   "text": "*Step 2 (on $Y$: $\\mathcal G\\subseteq\\prod_yi_{y,*}\\mathcal G_y$).* For $y\\in Y$ let $i_{y,*}\\mathcal G_y$ be the skyscraper sheaf at $y$ with value $\\mathcal G_y$ ($V\\mapsto\\mathcal G_y$ if $y\\in V$, $V\\mapsto\\{*\\}$ if $y\\notin V$, as in [lem-weil-pbc-skyscraper-constant-on-point-closure]). Since $Y$ is finite, $\\mathcal P^0=\\prod_{y\\in Y}i_{y,*}\\mathcal G_y$, computed sectionwise, is a sheaf of sets and a product in the category of sheaves of sets [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. For $V\\subseteq Y$ open define $e^0_V:\\mathcal G(V)\\to\\mathcal P^0(V)$ by $e^0_V(s)=(s_y)_{y\\in Y}$, where the $y$-component is the germ $s_y\\in\\mathcal G_y$ if $y\\in V$ and $*$ if $y\\notin V$. For opens $V'\\subseteq V$ and $y\\in V'$ one has $(s|_{V'})_y=s_y$, so the $e^0_V$ commute with the restriction maps and form a morphism of sheaves $e^0:\\mathcal G\\to\\mathcal P^0$. It is injective on sections over every open $V$: if $e^0_V(s)=e^0_V(t)$ then $s_y=t_y$ for every $y\\in V$, hence $s=t$ by [lem-weil-pbc-sheaf-sections-determined-by-germs].",
+   "uses": [
+    "lem-weil-pbc-skyscraper-constant-on-point-closure",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133): 'In this case F is contained in prod_{x in X} i_{x,*}F_x where i_x : {x} -> X is the embedding'; Sheaves, Lemma Tag 0079 (lemma-sheaf-subset-stalks); skyscraper sheaves Sheaves, Definition Tag 009A"
+   }
+  },
+  {
+   "text": "*Step 3 (the skyscraper sheaves are constant on closures; the first omitted detail of 0CAL).* For $y\\in Y$ put $W_y=\\overline{\\{y\\}}$, a closed subset of $Y$, and $R_y=\\mathcal G_y$, a finite set by Step 1. By [lem-weil-pbc-skyscraper-constant-on-point-closure] (applied to $Y$, $y$ and $A=R_y$) there is an isomorphism of sheaves of sets $\\kappa^y:i_{y,*}R_y\\xrightarrow{\\sim}(i_{W_y})_*\\underline{R_y}_{W_y}$, where $(i_{W_y})_*\\underline{R_y}_{W_y}(V)=\\{$locally constant maps $V\\cap W_y\\to R_y\\}$. Put $\\mathcal A_y=(i_{W_y})_*\\underline{R_y}_{W_y}$ and $\\mathcal P=\\prod_{y\\in Y}\\mathcal A_y$ (sectionwise). The product $\\prod_y\\kappa^y:\\mathcal P^0\\to\\mathcal P$ is bijective on sections over every open, so $e=(\\prod_y\\kappa^y)\\circ e^0:\\mathcal G\\to\\mathcal P$ is a morphism of sheaves of sets on $Y$ injective on sections over every open (explicitly the $y$-component of $e_V(s)$ is the constant map with value $s_y$ on $V\\cap W_y$ if $y\\in V$, and the empty map if $y\\notin V$).",
+   "uses": [
+    "lem-weil-pbc-skyscraper-constant-on-point-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133): 'We omit the proof that i_{x,*}F_x is a constant sheaf on the closure of x'"
+   }
+  },
+  {
+   "text": "*Step 4 ($f^{-1}$ preserves injectivity on sections).* Let $\\varphi:\\mathcal A\\to\\mathcal B$ be a morphism of sheaves of sets on $Y$ injective on sections over every open; we show that $f^{-1}\\varphi$ is injective on sections over every open of $X$. (a) $\\varphi$ is injective on stalks: if $a,a'\\in\\mathcal A(V)$ (two germs at $y$ can be represented on a common open $V\\ni y$) and $\\varphi_y(a_y)=\\varphi_y(a'_y)$, then $\\varphi_V(a)|_O=\\varphi_V(a')|_O$ for some open $y\\in O\\subseteq V$, i.e. $\\varphi_O(a|_O)=\\varphi_O(a'|_O)$, so $a|_O=a'|_O$ and $a_y=a'_y$. (b) Let $x\\in X$, $y=f(x)$, and let $c_{\\mathcal A}:\\mathcal A_y\\to(f^{-1}\\mathcal A)_x$, $c_{\\mathcal B}:\\mathcal B_y\\to(f^{-1}\\mathcal B)_x$ be the bijections of [lem-weil-pbc-sets-inverse-image-stalk], characterized by $c_{\\mathcal A}(a_y)=(\\eta_{\\mathcal A,V}(a))_x$ for $a\\in\\mathcal A(V)$, $V\\ni y$ open, $\\eta$ the unit of $f^{-1}\\dashv f_*$ [def-weil-pbc-topological-inverse-image] (3). The unit is natural: $(f^{-1}\\varphi)_{f^{-1}V}\\circ\\eta_{\\mathcal A,V}=\\eta_{\\mathcal B,V}\\circ\\varphi_V$ (it is $f_*\\theta\\circ i$ with $\\theta$ and $i$ natural, [def-weil-pbc-topological-inverse-image] (2), (3)). Hence $(f^{-1}\\varphi)_x(c_{\\mathcal A}(a_y))=((f^{-1}\\varphi)(\\eta_{\\mathcal A,V}(a)))_x=(\\eta_{\\mathcal B,V}(\\varphi_V(a)))_x=c_{\\mathcal B}(\\varphi_y(a_y))$, so $(f^{-1}\\varphi)_x\\circ c_{\\mathcal A}=c_{\\mathcal B}\\circ\\varphi_y$, and $(f^{-1}\\varphi)_x$ is injective by (a) since $c_{\\mathcal A},c_{\\mathcal B}$ are bijective. (c) If $s,t\\in(f^{-1}\\mathcal A)(U)$ and $(f^{-1}\\varphi)_U(s)=(f^{-1}\\varphi)_U(t)$, then for every $x\\in U$, $(f^{-1}\\varphi)_x(s_x)=(f^{-1}\\varphi)_x(t_x)$, so $s_x=t_x$ by (b), and $s=t$ by [lem-weil-pbc-sheaf-sections-determined-by-germs]. Applied to $\\varphi=e$ of Step 3: $f^{-1}e:f^{-1}\\mathcal G\\to f^{-1}\\mathcal P$ is injective on sections over every open of $X$.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133), the reduction step (pulling the embedding of the finite case back along f); the exactness of f^{-1} is Sheaves, Lemma Tag 008H (lemma-stalk-pullback) with Tag 0079 (lemma-sheaf-subset-stalks). Detail written by the agent."
+   }
+  },
+  {
+   "text": "*Step 5 ($f^{-1}$ commutes with the finite product).* $\\mathcal P=\\prod_{y\\in Y}\\mathcal A_y$ is a product of finitely many sheaves of sets on $Y$ computed sectionwise, with projections $p_y$. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (b) the morphism $\\pi:f^{-1}\\mathcal P\\to\\prod_{y\\in Y}f^{-1}\\mathcal A_y$ with components $f^{-1}p_y$ is an isomorphism of sheaves of sets on $X$ (product computed sectionwise), hence bijective on sections over every open of $X$.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133), the reduction step; Sheaves, Lemma Tag 008K (lemma-f-map) and the exactness of f^{-1}. Detail written by the agent."
+   }
+  },
+  {
+   "text": "*Step 6 (pull-back of the constant sheaves on closed subsets; the reduction of 0CAL).* For $y\\in Y$ let $Z_y=f^{-1}(W_y)$, a closed subset of $X$ since $f$ is continuous and $W_y$ is closed. By [lem-weil-pbc-inverse-image-closed-pushforward-constant] (applied to $f$, the closed subset $W_y\\subseteq Y$ and the set $R_y$) the canonical morphism $\\alpha^{y\\flat}:f^{-1}\\mathcal A_y=f^{-1}((i_{W_y})_*\\underline{R_y}_{W_y})\\to(i_{Z_y})_*\\underline{R_y}_{Z_y}$ is an isomorphism of sheaves of sets on $X$, where $(i_{Z_y})_*\\underline{R_y}_{Z_y}(U)=\\{$locally constant maps $U\\cap Z_y\\to R_y\\}$. Hence $\\prod_y\\alpha^{y\\flat}:\\prod_yf^{-1}\\mathcal A_y\\to\\prod_y(i_{Z_y})_*\\underline{R_y}_{Z_y}$ (sectionwise products) is bijective on sections over every open of $X$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-closed-pushforward-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133), the reduction step 'By Lemma 0CAK we reduce to the case of a finite sober topological space'. Detail written by the agent."
+   }
+  },
+  {
+   "text": "*Step 7 (the $Z_y$ are constructible).* Let $y\\in Y$. The set $Y\\setminus W_y$ is open in $Y$, and quasi-compact because $Y$ is finite. By the property of $f$ in Step 1, $f^{-1}(Y\\setminus W_y)=X\\setminus Z_y$ is a quasi-compact open subset of $X$. The space $X$ is spectral [def-weil-spectral-space], so quasi-compact, and by [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact] the quasi-compact opens $X$ and $X\\setminus Z_y$ are retrocompact in $X$. Thus $Z_y=X\\cap(X\\setminus(X\\setminus Z_y))$ has the form $U\\cap(X\\setminus V)$ with $U,V\\subseteq X$ retrocompact open, so $Z_y$ is constructible [def-weil-constructible-subset]; it is closed by Step 6.",
+   "uses": [
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, statement of Lemma Tag 0CAL ('constructible closed subsets'); the constructibility of the preimages is not written in the proof. Detail written by the agent."
+   }
+  },
+  {
+   "text": "*Step 8 (conclusion).* Enumerate $Y=\\{y_1,\\dots,y_k\\}$ ($k=|Y|\\ge0$) and put $Z_l=Z_{y_l}$, $R_l=R_{y_l}=\\mathcal G_{y_l}$, finite by Step 1; the $Z_l$ are constructible closed subsets of $X$ by Steps 6 and 7. The composite $\\mathcal F\\xrightarrow{\\psi^{-1}}f^{-1}\\mathcal G\\xrightarrow{f^{-1}e}f^{-1}\\mathcal P\\xrightarrow{\\pi}\\prod_{l=1}^kf^{-1}\\mathcal A_{y_l}\\xrightarrow{\\prod\\alpha^{y_l\\flat}}\\prod_{l=1}^k(i_{Z_l})_*\\underline{R_l}_{Z_l}$ is a morphism of sheaves of sets on $X$. Over every open $U\\subseteq X$ each factor is injective on sections: $\\psi^{-1}$ is an isomorphism (Step 1), $f^{-1}e$ by Step 4, $\\pi$ by Step 5, $\\prod\\alpha^{y_l\\flat}$ by Step 6. So the composite is injective on sections over every open of $X$, which is the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, proof of Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-finite-coequalizer-from-finite-space",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-skyscraper-constant-on-point-closure",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133) and its proof (reduction by Lemma Tag 0CAK, line 3061, to a finite sober space, then F inside the product of the skyscrapers i_{x,*}F_x); the steps the proof omits (the pull-back along f in Steps 4-7 and that i_{x,*}F_x is constant on the closure of x, node lem-weil-pbc-skyscraper-constant-on-point-closure) are written by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +170,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-finite-coequalizer-embeds-constant",
+  "worker": "stage1",
+  "summary": "Statement kept: it is Modules Lemma 0CAL (tag and label checked in tags/tags: 0CAL modules-lemma-constructible-in-constant, 0CAK modules-lemma-constructible-comes-from-finite, 0CAJ the equation, 0CAG the section) with the hypothesis of equation 0CAJ written out (U_a, V_b quasi-compact open, S_a, T_b finite) and 'isomorphic to a subsheaf' read as a morphism injective on sections over every open. stmt_deps kept. Proof in 8 steps following the Stacks proof: Step 1 reduces by 0CAK (new unsplit node lem-weil-pbc-spectral-finite-coequalizer-from-finite-space; its own omitted details, that the pulled-back coequalizer is F and that G has finite stalks, are recorded in its source for its split); Steps 2-3 do the finite case (G into the product of skyscrapers by sections-determined-by-germs, and the omitted detail that a skyscraper at y is the direct image of the constant sheaf on the closure of y, new unsplit node lem-weil-pbc-skyscraper-constant-on-point-closure, true on every topological space); Steps 4-7 write out the pull-back that Stacks' 'we reduce to' hides: f^{-1} preserves injectivity on sections (via the stalk lemma 008H and germs 0079, written in the step), commutes with the finite product (existing Mathlib leaf), turns (W->Y)_*R into (f^{-1}W->X)_*R (new unsplit node lem-weil-pbc-inverse-image-closed-pushforward-constant), and f^{-1}W is constructible because Y\\W is quasi-compact and f is spectral (existing leaf on retrocompact = quasi-compact opens). All cited nodes are in unit sk-thm-p1."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Eight steps along Stacks 0CAL: reduction to a finite sober space by the 0CAK node (statement matches modules.tex 3061), embedding of G into the product of skyscrapers (sections determined by germs), skyscraper = pushforward of the constant sheaf on the closure (new node, elementary statement), then the pull-back written out: f^{-1} preserves injectivity on sections (via stalks), commutes with finite products, pulls (W->Y)_* R back to (f^{-1}W->X)_* R (new node), and f^{-1}W is constructible since Y\\W is quasi-compact. Correct. Three new unsplit nodes, no Mathlib match; tags verified."
+ }
 }
