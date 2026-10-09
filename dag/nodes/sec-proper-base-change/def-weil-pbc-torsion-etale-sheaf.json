@@ -2,10 +2,10 @@
  "id": "def-weil-pbc-torsion-etale-sheaf",
  "kind": "definition",
  "title": "Torsion abelian sheaf on the small etale site",
- "statement": "Let $T$ be a scheme and $F$ an abelian sheaf on the small etale site of $T$, i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. For an integer $n\\ge1$ let $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel] be the kernel of multiplication by $n$, the subsheaf of sections killed by $n$. Order the positive integers by divisibility; this poset is directed ($\\operatorname{lcm}(n,m)$ bounds $n$ and $m$), and for $n\\mid m$ one has $F[n]\\subseteq F[m]$, so $n\\mapsto F[n]$ with the inclusions is a filtered diagram in $\\Ab(T_{\\Et})$, and the inclusions $F[n]\\hookrightarrow F$ induce a canonical map\n\n$$\n c_F:\\varinjlim_{n}F[n]\\longrightarrow F\n$$\n\nfrom its colimit [def-weil-pbc-category-colimit] in $\\Ab(T_{\\Et})$. The sheaf $F$ is *torsion* (a *torsion abelian sheaf*) if $c_F$ is an isomorphism.",
+ "statement": "Let $T$ be a scheme and $F$ an abelian sheaf on the small etale site of $T$, i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. For an integer $n\\ge1$ let $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel] be the kernel of multiplication by $n$, the subsheaf of sections killed by $n$. Order the positive integers by divisibility; this poset is directed ($\\operatorname{lcm}(n,m)$ bounds $n$ and $m$), hence a filtered small category, and for $n\\mid m$ one has $F[n]\\subseteq F[m]$ (since $m=(m/n)\\cdot n$ as endomorphisms of $F$, the subobject $\\ker n$ is contained in $\\ker m$; sectionwise, $ns=0$ implies $ms=0$), so $n\\mapsto F[n]$ with the inclusions is a filtered diagram in $\\Ab(T_{\\Et})$; it has a colimit because $\\Ab(T_{\\Et})$ has all small colimits [def-weil-pbc-abelian-etale-sheaves], and the inclusions $F[n]\\hookrightarrow F$, which are compatible with the transition inclusions, induce a canonical map\n\n$$\n c_F:\\varinjlim_{n}F[n]\\longrightarrow F\n$$\n\nfrom its colimit [def-weil-pbc-category-colimit] in $\\Ab(T_{\\Et})$. The sheaf $F$ is *torsion* (a *torsion abelian sheaf*) if $c_F$ is an isomorphism. Equivalent forms of this condition (every local section is locally killed by a positive integer; every stalk at a geometric point is a torsion abelian group), and the fact that it does not make every group $F(U)$ torsion, are stated in [lem-weil-pbc-torsion-sheaf-characterizations]; that lemma is about this definition and is a pointer, not a dependency.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
-  "place": "unit sk-def-pbc, statement ('Here a sheaf of abelian groups F on X_et is torsion if the canonical map colim_n F[n] -> F ... is an isomorphism'); also def-weil-pbc-property.md, detailed form; cf. Stacks Project, Etale cohomology, Section 0DDB (Torsion sheaves), proof of Lemma 'torsion-cohomology': F = union of F[d]"
+  "place": "unit sk-def-pbc, statement ('Here a sheaf of abelian groups F on X_et is torsion if the canonical map colim_n F[n] -> F ... is an isomorphism'); also def-weil-pbc-property.md, detailed form; cf. Stacks Project, Etale cohomology, Section 0DDB (Torsion sheaves), proof of Lemma 'torsion-cohomology': F = union of F[d]; the equivalent forms are Stacks etale-cohomology.tex Section 0DDB (torsion-sheaves; 'F = \\bigcup F[n]', proof of Lemma 0DDC 'lemma-torsion-cohomology') and proof of Lemma 03SA (lemma-torsion-colimit-constructible (2)), stalk criterion via Definition 040R, Lemma 03PT, Theorem 03PU (see lem-weil-pbc-torsion-sheaf-characterizations)"
  },
  "stmt_deps": [
   "def-weil-pbc-abelian-etale-sheaves",
@@ -57,10 +57,38 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match: confirms the earlier verdict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "abelian sheaf is the colimit of its n-torsion subsheaves",
+   "results": "SheafOfModules.Presentation.isColimit (Algebra.Category.ModuleCat.Sheaf.Quasicoherent), Sheaf.createsColimitOfIsSheaf (CategoryTheory.Sites.Limits), SheafOfModules.instHasColimitsOfShape... (ModuleCat.Sheaf.Colimits), AddSubgroup.torsionBy (Algebra.Module.Torsion.Basic, n-torsion of a group), Sheaf.ab5ofSize, Sheaf.hasExactColimitsOfShape (Abelian.GrothendieckAxioms.Sheaf)",
+   "date": "2026-10-09",
+   "verdict": "no match: colimit infrastructure and group-level n-torsion only, no torsion sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsAddTorsion",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Mathlib declaration mentions both sheaves and IsAddTorsion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf of abelian groups whose stalks are all torsion groups",
+   "results": "SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFiniteType, CategoryTheory.Sheaf.H, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsAddTorsion|torsionBy|IsTorsion' Mathlib/CategoryTheory Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves Mathlib/Algebra/Category (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: confirms that Mathlib has no torsion sheaf (in any of the three equivalent forms)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +108,26 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc"
+ "unit": "sk-def-pbc",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-torsion-sheaf-characterizations",
+   "was": [
+    "stmt"
+   ],
+   "reason": "lemma about this definition (equivalent characterizations, Stacks 0DDB/03SA and the stalk criterion 03PU); citing it as a statement dependency would close a cycle, since it has this node in its stmt_deps (stages/1-dag.md par. 2, claims inside definitions)",
+   "date": "2026-10-09"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-torsion-etale-sheaf",
+  "worker": "stage1",
+  "summary": "Checked against the unit sk-def-pbc (statement: torsion iff colim_n F[n] -> F is an isomorphism; equivalently torsion geometric stalks / locally killed local sections; weaker than F(U) torsion) and Stacks etale-cohomology Section 0DDB and Lemma 03SA (2), where torsion sheaves are used as F = union of the F[n] (Stacks gives no formal definition). Every notion is named by a node: Ab(T_et) [def-weil-pbc-abelian-etale-sheaves, Mathlib leaf], F[n] = ker(n) [def-pur-abelian-sheaf-kernel, Mathlib leaf], colimit and canonical map [def-weil-pbc-category-colimit, Mathlib leaf]; integers ordered by divisibility need no node. Claims inside the definition: the divisibility poset is directed (lcm, elementary); F[n] subset F[m] for n | m (m = (m/n) n, elementary, now written out); existence of the colimit is the clause 'it has all small colimits' of def-weil-pbc-abelian-etale-sheaves (Mathlib instance HasColimitsOfSize (Sheaf J D), Mathlib/CategoryTheory/Sites/Limits.lean:228, read), now cited in the text; compatibility of the inclusions with the transition maps (elementary). The equivalent characterizations are in the existing statement node lem-weil-pbc-torsion-sheaf-characterizations (created earlier today by the worker of def-weil-pbc-property), cited by name in the statement and recorded in pointers, not stmt_deps, because it has this node in its stmt_deps. Four more Mathlib searches (leansearch, loogle, leanfinder, grep): no torsion sheaf in Mathlib; the node stays a definition with no Mathlib match. Lean of slopmaster2: AlgebraicGeometry.Scheme.IsTorsionSheaf (WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/TorsionSheaf.lean:83-86) is the geometric-stalk form, for sheaves of Lambda-modules, at points Spec Omega -> X with Omega separably closed; it is equivalent to this node for Lambda = Z only through the characterization lemma, so it is not attached."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
