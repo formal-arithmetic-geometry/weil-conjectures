@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-thickening-integral",
+ "kind": "statement",
+ "title": "Integrality is insensitive to thickenings",
+ "statement": "Let $i_S:S\\to S'$ and $i_X:X\\to X'$ be thickenings of schemes [def-sbc-first-order-thickening] (closed immersions that are surjective on underlying spaces), and let $f':X'\\to S'$ and $f:X\\to S$ be morphisms with $f'\\circ i_X=i_S\\circ f$ (a morphism of thickenings $(X\\subseteq X')\\to(S\\subseteq S')$; no cartesian or finite order hypothesis). Then $f$ is integral if and only if $f'$ is integral [def-weil-finite-integral-morphism]. (Stacks proves it from: $f$ affine iff $f'$ affine (part (1), via the bijection of affine opens of a thickening, More on Morphisms 06AD), $f$ universally closed iff $f'$ universally closed (part (4), since $i_S$, $i_X$ are universal homeomorphisms, Morphisms 054M), and integral = affine + universally closed (Morphisms 01WM).)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), part (5), with parts (1), (4) and the proof"
+ },
+ "stmt_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral morphism of schemes over a nilpotent thickening; f integral iff restriction to closed subscheme with same underlying space integral",
+   "results": "IsIntegralHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion, IsIntegralHom.instMorphismRestrict (Mathlib.AlgebraicGeometry.Morphisms.Integral)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes is integral if its restriction over a closed subscheme defined by a nilpotent ideal (homeomorphic) is integral; affine morphism over thickening",
+   "results": "Scheme.Hom.isIntegral_app, isIntegralHom_iff, IsIntegralHom.integral_app, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion: definitional API only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, IsNilpotent",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'UniversallyClosed|IsAffineHom|IsIntegralHom|LocallyOfFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iE 'nilpot|thicken|ker|square|surjective'; grep -rniE 'thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/UniversallyClosed.lean:79 (UniversallyClosed g from f ≫ g with f surjective: a tool for part (4), not the statement); FormallyUnramified.lean:189 only; no permanence of affineness/integrality over thickenings (IsIntegralHom.iff_universallyClosed_and_isAffineHom, Integral.lean:135, is 01WM, a tool)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-finite-cartesian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is More on Morphisms 09ZV (5) with the route noted; correct; unsplit."
+ }
+}

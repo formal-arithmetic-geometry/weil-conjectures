@@ -5,16 +5,97 @@
  "statement": "Let $S\\subseteq S'$ be a finite order thickening of schemes [def-sbc-first-order-thickening] (a closed subscheme whose quasi-coherent ideal sheaf $\\mathcal I\\subseteq\\mathcal O_{S'}$ satisfies $\\mathcal I^{n+1}=0$ for some $n$), let $f':X'\\to S'$ be a morphism of schemes and let $f:X=S\\times_{S'}X'\\to S$ be its base change [def-pc-base-change]. Then $f$ is finite if and only if $f'$ is finite [def-weil-finite-integral-morphism].",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 09ZW (label lemma-thicken-property-morphisms-cartesian), part (8), with its proof"
+  "place": "More on Morphisms, Lemma 09ZW (label lemma-thicken-property-morphisms-cartesian), part (8), with its proof (first paragraph and 'Proof of (8)')"
  },
  "stmt_deps": [
   "def-sbc-first-order-thickening",
   "def-pc-base-change",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($f'$ finite $\\Rightarrow$ $f$ finite.) $f:X=S\\times_{S'}X'\\to S$ is the base change of $f'$ along $S\\to S'$, and finite morphisms are stable under base change (Morphisms, Lemma 01WL); so $f$ is finite. It remains to show the converse, 'the interesting direction'.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, first paragraph ('The properties listed in the lemma are all stable under base change ... Morphisms, Lemma ... base-change-finite')"
+   }
+  },
+  {
+   "text": "($(X\\subseteq X')\\to(S\\subseteq S')$ is a morphism of thickenings.) A finite order thickening $S\\to S'$ is a surjective closed immersion [def-sbc-first-order-thickening]. The projection $i_X:X=S\\times_{S'}X'\\to X'$ is its base change along $f'$, hence again a surjective closed immersion [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism], i.e. $X\\subseteq X'$ is a thickening; and $f'\\circ i_X=i_S\\circ f$ is the commutativity of the fibre product square. (This is More on Morphisms, Lemma 09ZU, whose proof Stacks omits; the argument given here is that omitted proof.)",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZU (label lemma-base-change-thickening), proof omitted in the source; written out here"
+   }
+  },
+  {
+   "text": "(Assume $f$ finite.) By Morphisms 01WJ (finite = integral + locally of finite type) $f$ is integral and locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, 'Proof of (8)' ('finite equals integral + locally of finite type (Morphisms, Lemma 01WJ)')"
+   }
+  },
+  {
+   "text": "($f'$ is integral.) By step 2, $(f,f')$ is a morphism of thickenings, and $f$ is integral by step 3; hence $f'$ is integral by More on Morphisms 09ZV (5).",
+   "uses": [
+    "lem-weil-pbc-thickening-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, 'Proof of (8)' ('results of Lemma 09ZV'), i.e. Lemma 09ZV part (5)"
+   }
+  },
+  {
+   "text": "($f'$ is locally of finite type.) $S\\subseteq S'$ is a finite order thickening and $X=S\\times_{S'}X'$, and $f$ is locally of finite type by step 3; hence $f'$ is locally of finite type by part (2) of the same lemma 09ZW.",
+   "uses": [
+    "lem-weil-pbc-thickening-lft-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, 'Proof of (8)' ('combining (2) with ...')"
+   }
+  },
+  {
+   "text": "($f'$ is finite.) By steps 4 and 5, $f'$ is integral and locally of finite type, hence finite by Morphisms 01WJ. With step 1 this proves: $f$ finite iff $f'$ finite.",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, 'Proof of (8)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "def-pc-base-change",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "lem-weil-pbc-thickening-integral",
+  "lem-weil-pbc-thickening-lft-cartesian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZW, proof: base change paragraph and 'Proof of (8)'; Lemma 09ZU (proof omitted in the source, written out in step 2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +147,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-thickening-finite-cartesian",
+  "worker": "stage1",
+  "summary": "Split along Stacks 09ZW (8) exactly: the easy direction is base change of finite morphisms (01WL, reviewed Mathlib leaf lem-weil-pbc-finite-morphism-permanence (a)); for the converse, X ⊂ X' is a thickening (09ZU, proof omitted in Stacks, written out from the reviewed closed node lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism), f finite = integral + lft (new Mathlib leaf lem-weil-pbc-finite-iff-integral-lft, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, Finite.lean:100, read), integral lifts along any morphism of thickenings (new unsplit node lem-weil-pbc-thickening-integral, 09ZV (5)), lft lifts along a cartesian finite order thickening (new unsplit node lem-weil-pbc-thickening-lft-cartesian, 09ZW (2), carrying the induction on the order and the Nakayama step), and f' integral + lft is finite. The brief's suggested direct Nakayama-for-finite-modules route is not Stacks' route for (8) and was not used. Statement unchanged; stmt_deps unchanged. Additional searches recorded on the new nodes; no Mathlib or slopmaster2 declaration states the item or the two new unsplit nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Six steps along Stacks 09ZW (8): base change (reviewed permanence leaf), (f, f′) a morphism of thickenings (09ZU written out from the reviewed universal-homeomorphism node), finite = integral + locally of finite type (new Mathlib leaf IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, Finite.lean:100, checked), integral over a thickening (09ZV (5), new unsplit node), locally of finite type over a finite order thickening (09ZW (2), new unsplit node with the Nakayama route recorded). Tags corrected by the worker (the brief guessed 0BPH/0BPG/05YU). Stage-3 merge candidates: pqf-lem-finite-integral-lft, pqf-lem-integral-lft-finite (the two halves of 01WJ)."
+ }
 }
