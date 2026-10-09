@@ -69,8 +69,8 @@ instance [P.IsClosedUnderSubobjects] : P.filtrationClosure.IsClosedUnderSubobjec
       let t := (exact_cokernel i).lift (kernel.ι g ≫ m) (by simp [g])
       have ht : t ≫ i = kernel.ι g ≫ m := (exact_cokernel i).lift_f _ _
       have : Mono t := mono_of_mono_fac ht
-      exact .of_mono (kernel.ι g) (ih t inferInstance) (P.prop_of_iso (Abelian.coimageIsoImage g).symm
-        (P.prop_of_mono (Abelian.image.ι g) hi))
+      exact .of_mono (kernel.ι g) (ih t inferInstance)
+        (P.prop_of_iso (Abelian.coimageIsoImage g).symm (P.prop_of_mono (Abelian.image.ι g) hi))
 
 instance [P.IsClosedUnderQuotients] : P.filtrationClosure.IsClosedUnderQuotients where
   prop_of_epi {X H} p _ hX := by

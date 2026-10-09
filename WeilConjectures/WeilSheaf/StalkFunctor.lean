@@ -133,7 +133,8 @@ theorem frobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
     congr 2
     rw [Functor.comp_map, ← Functor.map_comp_assoc, ih, Functor.map_comp_assoc]
     congr 1
-    simpa using f.hom.hom.h
+    simp only [IsoAlgebra.str_hom]
+    exact f.hom.hom.h
 
 /-- A naturality square for a composite `Γ(c ≫ T(ι ≫ Φ))` of natural isomorphisms `c`, `ι` and
 a family `Φ` commuting with `φ`. Stated for general functors, so that it applies to the stalk
@@ -274,5 +275,67 @@ theorem injective_stalkMap (f : F ⟶ G) [Mono f] :
 theorem surjective_stalkMap (f : F ⟶ G) [Epi f] :
     Function.Surjective ((WeilCoefficients.toModuleCat l).map (stalkMap s f)).hom :=
   (ModuleCat.epi_iff_surjective (stalkMap s f)).1 inferInstance
+
+section StalkAt
+
+variable (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+  (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+
+/-- The map induced by `f : F ⟶ G` on the stalks at `s`, as a linear map between the underlying
+spaces of the Frobenius modules `AlgebraicGeometry.WeilSheaf.stalkAt`. -/
+noncomputable def stalkAtMap (f : F ⟶ G) :
+    (F.stalkAt s m hs).carrier →ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
+  ((WeilCoefficients.toModuleCat l).map (stalkMap s f)).hom
+
+theorem stalkAtMap_apply (f : F ⟶ G) (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs f x = ((WeilCoefficients.toModuleCat l).map (stalkMap s f)).hom x :=
+  rfl
+
+/-- The map induced on the stalks commutes with the Frobenius. -/
+theorem stalkAtMap_frobenius (f : F ⟶ G) (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs f ((F.stalkAt s m hs).frobenius x) =
+      (G.stalkAt s m hs).frobenius (stalkAtMap s m hs f x) :=
+  -- passing through `stalkAtMap_apply` explicitly keeps the kernel check fast
+  (stalkAtMap_apply s m hs f _).trans ((stalkAt_frobenius_map s f m hs x).trans
+    (congrArg (G.stalkAt s m hs).frobenius (stalkAtMap_apply s m hs f x).symm))
+
+theorem injective_stalkAtMap (f : F ⟶ G) [Mono f] : Function.Injective (stalkAtMap s m hs f) :=
+  fun a b h ↦ injective_stalkMap s f
+    ((stalkAtMap_apply s m hs f a).symm.trans (h.trans (stalkAtMap_apply s m hs f b)))
+
+theorem surjective_stalkAtMap (f : F ⟶ G) [Epi f] :
+    Function.Surjective (stalkAtMap s m hs f) := fun y ↦ by
+  obtain ⟨x, hx⟩ := surjective_stalkMap s f y
+  exact ⟨x, (stalkAtMap_apply s m hs f x).trans hx⟩
+
+/-- The stalk of a subobject of `G` at `s` is a Frobenius-stable subspace of the stalk of `G`, so
+it is pure if the stalk of `G` is. -/
+theorem stalkAt_isPureOfWeight_of_mono {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w : ℝ} (f : F ⟶ G)
+    [Mono f] (h : (G.stalkAt s m hs).IsPureOfWeight ι q w) :
+    (F.stalkAt s m hs).IsPureOfWeight ι q w :=
+  FrobeniusModule.IsPureOfWeight.of_injective _ (stalkAtMap_frobenius s m hs f)
+    (injective_stalkAtMap s m hs f) h
+
+/-- The stalk of a quotient of `F` at `s` is a Frobenius-equivariant quotient of the stalk of
+`F`, so it is pure if the stalk of `F` is. -/
+theorem stalkAt_isPureOfWeight_of_epi {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w : ℝ} (f : F ⟶ G)
+    [Epi f] (h : (F.stalkAt s m hs).IsPureOfWeight ι q w) :
+    (G.stalkAt s m hs).IsPureOfWeight ι q w :=
+  FrobeniusModule.IsPureOfWeight.of_surjective _ (stalkAtMap_frobenius s m hs f)
+    (surjective_stalkAtMap s m hs f) h
+
+end StalkAt
+
+/-- A subobject of a punctually `ι`-pure Weil sheaf of weight `w` is punctually `ι`-pure of
+weight `w`: its stalks are Frobenius-stable subspaces. -/
+theorem IsPunctuallyPureOfWeight.of_mono {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Mono f]
+    (h : G.IsPunctuallyPureOfWeight ι w) : F.IsPunctuallyPureOfWeight ι w := fun x ↦
+  stalkAt_isPureOfWeight_of_mono _ _ _ f (h x)
+
+/-- A quotient of a punctually `ι`-pure Weil sheaf of weight `w` is punctually `ι`-pure of
+weight `w`: its stalks are Frobenius-equivariant quotients. -/
+theorem IsPunctuallyPureOfWeight.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
+    (h : F.IsPunctuallyPureOfWeight ι w) : G.IsPunctuallyPureOfWeight ι w := fun x ↦
+  stalkAt_isPureOfWeight_of_epi _ _ _ f (h x)
 
 end AlgebraicGeometry.WeilSheaf
