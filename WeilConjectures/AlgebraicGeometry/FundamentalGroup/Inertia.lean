@@ -59,6 +59,7 @@ instance (T : Finset C) : IsOpenImmersion (toComplOpens j S hS hSU T) := by
     infer_instance
   exact .of_comp _ (complOpens S hS T).ι
 
+omit [IsOpenImmersion j] in
 lemma toComplOpens_comp_homOfLE {T T' : Finset C} (h : T ⊆ T') :
     toComplOpens j S hS hSU T ≫ C.homOfLE (complOpens_mono S hS h) =
       toComplOpens j S hS hSU T' := by

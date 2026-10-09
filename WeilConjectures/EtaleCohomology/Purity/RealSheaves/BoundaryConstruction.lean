@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.Mathlib.Topology.KrullDimension
@@ -18,10 +19,13 @@ field, `U₀` geometrically connected. This file constructs a `AlgebraicGeometry
 `AlgebraicGeometry.WeilGroup.restrictionOfPath`.
 
 The boundary `C₀ \ U₀` is finite and consists of closed points, since `C₀` is irreducible of
-dimension at most one. The genuine inertia groups need the henselization of `C₀` at a boundary
-point, which is not available; the structure only pins them down jointly, through
-`ker_restrict_eq`, and here every inertia group is taken to be the whole kernel of the
-restriction `W(U₀) → W(C₀)`. A residue Frobenius lift at a boundary point `s` is a preimage of
+dimension at most one. The inertia group at a boundary point `z`
+(`AlgebraicGeometry.WeilGroup.weilInertia`) is the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`, i.e. the
+subgroup acting trivially on the finite étale covers of `U₀` which extend over `z`, intersected
+with the geometric part of `W(U₀)`. These generate the kernel of the restriction
+`W(U₀) → W(C₀)` as a closed normal subgroup
+(`AlgebraicGeometry.WeilGroup.ker_restrictionHom_eq`), since a cover of `U₀` extending over each
+`U₀ ∪ {z}` extends over `C₀`. A residue Frobenius lift at a boundary point `s` is a preimage of
 the local Frobenius at `s` under the (surjective) restriction.
 -/
 
@@ -92,34 +96,154 @@ lemma isClosed_ker_restrictionHom :
     (restrictionOfPath j hj τ GU GC).continuous_restrict
   exact (isClosed_singleton (x := (1 : weilGroup p sC GC))).preimage hc
 
-omit [IsCurve p] [GeometricallyConnected p] [Smooth p] [IsCurve pU] [GeometricallyConnected pU]
-  [Nonempty U] in
-lemma restrictionHom_injective_of_isEmpty (h : IsEmpty ↥((Set.range j.base)ᶜ)) :
-    Function.Injective (restrictionHom j hj τ GU GC) := by
-  have : Surjective j := ⟨fun x ↦ by
-    by_contra hx
-    exact h.false ⟨x, hx⟩⟩
-  have : IsIso j := (isIso_iff_isOpenImmersion_and_surjective j).2 ⟨inferInstance, inferInstance⟩
-  have hinj := fundamentalGroupMap_injective (pullbackFiberIso j sU ≪≫ τ) GC GU
-  intro w w' hww'
-  have := congrArg (fun w : weilGroup p sC GC ↦ (w : GC × Multiplicative ℤ)) hww'
-  simp only [restrictionHom_apply, Prod.mk.injEq] at this
-  exact Subtype.ext (Prod.ext (hinj this.1) this.2)
+section Inertia
 
-lemma ker_restrictionHom_eq :
-    (restrictionHom j hj τ GU GC).ker = (Subgroup.normalClosure
-      (⋃ _ : ↥((Set.range j.base)ᶜ),
-        ((restrictionHom j hj τ GU GC).ker : Set _))).topologicalClosure := by
-  have hcl := isClosed_ker_restrictionHom j hj τ GU GC
-  rcases isEmpty_or_nonempty ↥((Set.range j.base)ᶜ) with h | h
-  · rw [Set.iUnion_of_empty, Subgroup.normalClosure_empty,
-      (MonoidHom.ker_eq_bot_iff _).2 (restrictionHom_injective_of_isEmpty j hj τ GU GC h)]
-    have : T2Space GU := (toAutHomeo (fiber sU) GU).isEmbedding.t2Space
-    refine le_antisymm bot_le (Subgroup.topologicalClosure_minimal _ le_rfl ?_)
-    exact isClosed_singleton
-  · rw [Set.iUnion_const, Subgroup.normalClosure_eq_self]
-    exact le_antisymm (Subgroup.le_topologicalClosure _)
-      (Subgroup.topologicalClosure_minimal _ le_rfl hcl)
+omit hj
+
+omit [Finite K] [GeometricallyConnected p] [ConnectedSpace U] [IsCurve pU]
+  [GeometricallyConnected pU] in
+include p in
+/-- The boundary `C₀ \ U₀` as a finite set. -/
+noncomputable def boundaryFinset : Finset C := (finite_boundary (p := p) j).toFinset
+
+omit [Finite K] [GeometricallyConnected p] [ConnectedSpace U] [IsCurve pU]
+  [GeometricallyConnected pU] in
+lemma coe_boundaryFinset : (↑(boundaryFinset (p := p) j) : Set C) = (Set.range j.base)ᶜ :=
+  Set.Finite.coe_toFinset _
+
+omit [Finite K] [GeometricallyConnected p] [ConnectedSpace U] [IsCurve pU]
+  [GeometricallyConnected pU] in
+lemma isClosed_of_mem_boundaryFinset :
+    ∀ z ∈ boundaryFinset (p := p) j, IsClosed ({z} : Set C) := fun z hz ↦ by
+  have := irreducibleSpace_of_smooth (p := p)
+  obtain ⟨u⟩ := (inferInstance : Nonempty U)
+  refine j.isOpenEmbedding.isOpen_range.isClosed_singleton_of_mem_compl
+    (IsCurve.krullDim_le_one (f := p)) ⟨_, u, rfl⟩ ?_
+  have hz' : z ∈ (↑(boundaryFinset (p := p) j) : Set C) := hz
+  rwa [coe_boundaryFinset] at hz'
+
+open scoped Classical in
+/-- The open immersion `U₀ ⟶ U₀ ∪ {z}` for a boundary point `z`. -/
+noncomputable def toBoundaryOpen (z : C) :
+    U ⟶ (complOpens (boundaryFinset (p := p) j) (isClosed_of_mem_boundaryFinset j) {z}).toScheme :=
+  toComplOpens j _ _ (coe_boundaryFinset (p := p) j).symm {z}
+
+variable (sU) in
+/-- The local kernel at a boundary point `z`: the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`, made of the
+elements acting trivially on the finite étale covers of `U₀` which extend over `z`. -/
+noncomputable def localInertia (z : C) : Subgroup GU :=
+  fixingSubgroup sU (toBoundaryOpen (p := p) j z) GU
+
+instance (z : C) : (localInertia (p := p) j sU GU z).Normal :=
+  inferInstanceAs (fixingSubgroup _ _ _).Normal
+
+omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
+open scoped Classical in
+/-- **The kernel of `π₁(U₀) → π₁(C₀)` is generated by the local kernels**: an element of `π₁(U₀)`
+acting trivially on the covers coming from `C₀` lies in the closed subgroup generated by the
+kernels of `π₁(U₀) → π₁(U₀ ∪ {z})` at the boundary points `z`. -/
+theorem fixingSubgroup_le_topologicalClosure_iSup_localInertia :
+    fixingSubgroup sU j GU ≤
+      (⨆ z : ↥((Set.range j.base)ᶜ), localInertia (p := p) j sU GU z.1).topologicalClosure := by
+  let S := boundaryFinset (p := p) j
+  have hS := isClosed_of_mem_boundaryFinset (p := p) j
+  have hSU := (coe_boundaryFinset (p := p) j).symm
+  have := irreducibleSpace_of_smooth (p := p)
+  have hV : ∀ z ∈ S, ConnectedSpace (complOpens S hS {z}).toScheme := fun z hz ↦ by
+    obtain ⟨u⟩ := (inferInstance : Nonempty U)
+    have hne : ((complOpens S hS {z} : C.Opens) : Set C).Nonempty :=
+      ⟨j u, range_le_complOpens j S hS hSU {z} ⟨u, rfl⟩⟩
+    have hirr : IsIrreducible ((complOpens S hS {z} : C.Opens) : Set C) :=
+      ⟨hne, (IrreducibleSpace.isIrreducible_univ C).isPreirreducible.open_subset
+        (complOpens S hS {z}).isOpen (Set.subset_univ _)⟩
+    exact isConnected_iff_connectedSpace.1 hirr.isConnected
+  have hconn : ∀ z ∈ S, ∀ P : (complOpens S hS {z}).toScheme.FiniteEtale, IsConnected P →
+      IsConnected ((Scheme.FiniteEtale.pullback (toComplOpens j S hS hSU {z})).obj P) :=
+      fun z hz P hP ↦ by
+    have := hV z hz
+    have := connectedSpace_of_isConnected P
+    have : Etale P.obj.hom := P.obj.prop
+    let q : P.obj.left ⟶ Spec (.of K) := P.obj.hom ≫ (complOpens S hS {z}).ι ≫ p
+    have : Smooth q := inferInstance
+    have := LocallyOfFiniteType.isLocallyNoetherian q
+    have := IsRegular.of_smooth q
+    have := IsRegular.irreducibleSpace P.obj.left
+    exact isConnected_pullback_of_irreducibleSpace _ P
+  refine (fixingSubgroup_le_topologicalClosure_iSup j S hS hSU sU GU hV hconn).trans
+    (Subgroup.topologicalClosure_mono (iSup_le fun z ↦ ?_))
+  have hz : z.1 ∈ (Set.range j.base)ᶜ := by
+    rw [← coe_boundaryFinset (p := p) j]
+    exact z.2
+  exact le_iSup_of_le (f := fun z : ↥((Set.range j.base)ᶜ) ↦ localInertia (p := p) j sU GU z.1)
+    ⟨z.1, hz⟩ le_rfl
+
+variable (sU) in
+/-- The inertia group at a boundary point `z`: the elements of the geometric part of `W(U₀)`
+lying in the local kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`. -/
+noncomputable def weilInertia (z : C) : Subgroup (weilGroup pU sU GU) :=
+  (localInertia (p := p) j sU GU z).comap
+    ((MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype) ⊓ (weilGroupDeg pU sU GU).ker
+
+instance normal_weilInertia (z : C) : (weilInertia (p := p) (pU := pU) j sU GU z).Normal := by
+  unfold weilInertia
+  infer_instance
+
+end Inertia
+
+omit hj [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
+/-- The local kernel at a boundary point dies in `π₁(C₀)`. -/
+lemma localInertia_le_ker_restrictionMap (z : C) :
+    localInertia (p := p) j sU GU z ≤ (restrictionMap j τ GU GC).ker := by
+  classical
+  rw [ker_fundamentalGroupMap]
+  have := fixingSubgroup_le_comp sU (toBoundaryOpen (p := p) j z) GU
+    (complOpens _ (isClosed_of_mem_boundaryFinset (p := p) j) {z}).ι
+  rwa [toBoundaryOpen, toComplOpens_ι] at this
+
+/-- **The inertia groups generate the kernel of the restriction** `W(U₀) → W(C₀)` as a closed
+normal subgroup. -/
+theorem ker_restrictionHom_eq :
+    (restrictionHom j hj τ GU GC).ker = (Subgroup.normalClosure (⋃ z : ↥((Set.range j.base)ᶜ),
+      SetLike.coe (weilInertia (p := p) (pU := pU) j sU GU z.1))).topologicalClosure := by
+  have : T2Space GU := (toAutHomeo (fiber sU) GU).isEmbedding.t2Space
+  have hcU : ∀ P, ContinuousSMul GU ((fiber sU).obj P) := fun P ↦
+    IsFundamentalGroup.continuous_smul P
+  have hle (z : C) :
+      weilInertia (p := p) (pU := pU) j sU GU z ≤ (restrictionHom j hj τ GU GC).ker :=
+    fun w hw ↦ by
+      rw [MonoidHom.mem_ker]
+      refine Subtype.ext (Prod.ext ?_ hw.2)
+      exact localInertia_le_ker_restrictionMap j τ GU GC z hw.1
+  refine le_antisymm (fun w hw ↦ ?_) (Subgroup.topologicalClosure_minimal _
+    (Subgroup.normalClosure_le_normal (Set.iUnion_subset fun z ↦ hle z.1))
+    (isClosed_ker_restrictionHom j hj τ GU GC))
+  set M := (Subgroup.normalClosure
+    (⋃ z : ↥((Set.range j.base)ᶜ),
+      SetLike.coe (weilInertia (p := p) (pU := pU) j sU GU z.1))).topologicalClosure
+  let φ : weilGroup pU sU GU →* GU := (MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype
+  have hw1 : (w : GU × Multiplicative ℤ).2 = 1 :=
+    congrArg (fun w : weilGroup p sC GC ↦ (w : GC × Multiplicative ℤ).2) hw
+  have hwfix : φ w ∈ fixingSubgroup sU j GU := by
+    rw [← ker_fundamentalGroupMap sU j GU (pullbackFiberIso j sU ≪≫ τ) GC]
+    exact congrArg (fun w : weilGroup p sC GC ↦ (w : GC × Multiplicative ℤ).1) hw
+  -- the image in `π₁(U₀)` of the geometric part of `M` is a closed subgroup
+  let H : Subgroup GU := (M ⊓ (weilGroupDeg pU sU GU).ker).map φ
+  have hHc : IsClosed (H : Set GU) := by
+    rw [Subgroup.coe_map, Subgroup.coe_inf]
+    exact (((isCompact_ker_weilGroupDeg pU sU GU).inter_left
+      (Subgroup.isClosed_topologicalClosure _)).image
+        (continuous_fst.comp continuous_subtype_val)).isClosed
+  have hNH (z : ↥((Set.range j.base)ᶜ)) : localInertia (p := p) j sU GU z.1 ≤ H := fun k hk ↦ by
+    have hkW : (k, (1 : Multiplicative ℤ)) ∈ weilGroup pU sU GU := by
+      rw [mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC,
+        MonoidHom.mem_ker.1 (localInertia_le_ker_restrictionMap j τ GU GC z.1 hk)]
+      exact (weilGroup p sC GC).one_mem
+    exact ⟨⟨_, hkW⟩, ⟨Subgroup.le_topologicalClosure _
+      (Subgroup.subset_normalClosure (Set.mem_iUnion.2 ⟨z, hk, rfl⟩)), rfl⟩, rfl⟩
+  obtain ⟨w', ⟨hw'M, hw'deg⟩, hw'⟩ := Subgroup.topologicalClosure_minimal _ (iSup_le hNH) hHc
+    (fixingSubgroup_le_topologicalClosure_iSup_localInertia (p := p) j GU hwfix)
+  obtain rfl : w' = w := Subtype.ext (Prod.ext hw' (hw'deg.trans hw1.symm))
+  exact hw'M
 
 /-- A residue Frobenius lift at a boundary point: a preimage under the restriction of the local
 Frobenius at that point. -/
@@ -134,18 +258,17 @@ lemma restrictionHom_residueFrobenius (z : ↥((Set.range j.base)ᶜ)) :
   (restrictionHom_surjective j hj τ GU GC _).choose_spec
 
 /-- **A boundary datum for a nonempty open of a smooth curve**: the restriction of Weil groups
-`AlgebraicGeometry.WeilGroup.restrictionOfPath`, with every inertia group the kernel of the
-restriction and residue Frobenius lifts chosen as preimages of the local Frobenius elements.
+`AlgebraicGeometry.WeilGroup.restrictionOfPath`, with the inertia group at `z` the kernel of
+`π₁(U₀) → π₁(U₀ ∪ {z})` and residue Frobenius lifts chosen as preimages of the local Frobenius
+elements.
 (blueprint `sk-d-real-boundary`) -/
 noncomputable def boundaryDatumOfPath :
     BoundaryDatum j (ofFundamentalGroup pU sU GU) (ofFundamentalGroup p sC GC) where
   toRestriction := restrictionOfPath j hj τ GU GC
   finite_boundary := finite_boundary (p := p) j
   boundary_subset_finitePoints := boundary_subset_finitePoints (p := p) j
-  inertia _ := (restrictionHom j hj τ GU GC).ker
-  inertia_le _ w hw := by
-    have h := congrArg (fun w : weilGroup p sC GC ↦ (w : GC × Multiplicative ℤ).2) hw
-    exact h
+  inertia z := weilInertia (p := p) (pU := pU) j sU GU z.1
+  inertia_le _ := inf_le_right
   ker_restrict_eq := ker_restrictionHom_eq j hj τ GU GC
   residueFrobenius := residueFrobenius j hj τ GU GC
   deg_residueFrobenius z :=
@@ -155,7 +278,9 @@ noncomputable def boundaryDatumOfPath :
     change IsConj _ (restrictionHom j hj τ GU GC _)
     rw [restrictionHom_residueFrobenius]
     exact IsConj.refl _
-  normalizes_inertia _ := Subgroup.Normal.map_conj_eq _ _
+  normalizes_inertia z := by
+    have := normal_weilInertia (p := p) (pU := pU) (sU := sU) j GU z.1
+    exact Subgroup.Normal.map_conj_eq _ _
 
 omit hj in
 /-- A nonempty open `j : U₀ ⟶ C₀` of a smooth geometrically connected curve over a finite field,
