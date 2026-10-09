@@ -2,19 +2,95 @@
  "id": "lem-weil-geometrically-connected-algebraic-closure",
  "kind": "statement",
  "title": "Geometric connectedness is tested on one algebraically closed extension",
- "statement": "Let $k$ be a field, let $X$ be a scheme over $k$, and let $\\bar k/k$ be a field extension with $\\bar k$ algebraically closed (every nonconstant polynomial in $\\bar k[T]$ has a root in $\\bar k$). Then $X$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] (that is, $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ [def-pc-base-change] is connected [def-weil-connected-scheme] for every field extension $k'/k$) if and only if the base change $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$ is connected. In particular a geometrically connected scheme over $k$ is nonempty.",
+ "statement": "Let $k$ be a field, let $X$ be a scheme over $k$ [def-weil-scheme-over-base], and let $\\bar k/k$ be a field extension [def-pc-field-extension] with $\\bar k$ algebraically closed [def-weil-algebraic-closure] (every nonconstant polynomial in $\\bar k[T]$ has a root in $\\bar k$). Then $X$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] (that is, $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ [def-pc-base-change] is connected [def-weil-connected-scheme] for every field extension $k'/k$) if and only if the base change $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$ is connected. In particular a geometrically connected scheme over $k$ is nonempty.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Lemma 33.7.7, tag 0387 (lemma-characterize-geometrically-connected), stated for a separable algebraic closure; the algebraically closed case follows from it and Lemma 33.7.3, tag 054N (lemma-geometrically-connected-check-after-extension)"
  },
  "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-weil-algebraic-closure",
   "def-pc-geometrically-irreducible",
   "def-pc-base-change",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\Rightarrow$) If $X$ is geometrically connected over $k$, then by definition $X_{k'}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is connected for every field extension $k'/k$; taking $k'=\\bar k$ gives that $X_{\\bar k}$ is connected.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definition 33.7.1 (definition-geometrically-connected), applied to $k'=\\overline{k}$; the trivial direction of Lemma 33.7.7, tag 0387"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), first: $\\bar k$ is separably closed. A nonconstant separable polynomial in $\\bar k[T]$ is in particular a nonconstant polynomial, so it has a root in $\\bar k$ because $\\bar k$ is algebraically closed.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-separably-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.7.7, tag 0387: the lemma is stated for a separable algebraic closure; an algebraically closed field is in particular separably algebraically closed, which is all its proof uses of $\\overline{k}$"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), second: assume $X_{\\bar k}$ is connected. Regard $X_{\\bar k}$ as a scheme over $\\bar k$ through its projection to $\\operatorname{Spec}\\bar k$. Since $\\bar k$ is separably closed (previous step) and $X_{\\bar k}$ is connected, [lem-weil-separably-closed-geometrically-connected] applied to the field $\\bar k$ and the $\\bar k$-scheme $X_{\\bar k}$ shows that $X_{\\bar k}$ is geometrically connected over $\\bar k$, i.e. $(X_{\\bar k})_{k''}$ is connected for every field extension $k''/\\bar k$.",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "proof of Lemma 33.7.7, tag 0387 ('By Lemma [lemma-separably-closed-field-connected-components] we see that $X_{\\overline{k}'}$ is connected'), using Lemma 33.7.6, tag 0363"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), conclusion: by [lem-weil-geometrically-connected-check-after-extension] applied to the field extension $\\bar k/k$, $X$ is geometrically connected over $k$ if and only if $X_{\\bar k}$ is geometrically connected over $\\bar k$; the latter holds by the previous step, so $X$ is geometrically connected over $k$. (This lemma packages the rest of the proof of tag 0387: for an arbitrary field extension $k'/k$ one takes a common field extension $k'''$ of $k'$ and $\\bar k$; then $X_{k'''}=(X_{\\bar k})_{k'''}$ is connected and surjects onto $X_{k'}$, so $X_{k'}$ is connected.)",
+   "uses": [
+    "lem-weil-geometrically-connected-check-after-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "proof of Lemma 33.7.7, tag 0387, and Lemma 33.7.3, tag 054N (lemma-geometrically-connected-check-after-extension)"
+   }
+  },
+  {
+   "text": "(Nonemptiness.) If $X$ is geometrically connected over $k$, then taking the trivial extension $k'=k$ the base change $X_k=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k$ is connected; it is isomorphic to $X$ through the first projection (the base change along the identity of $\\operatorname{Spec}k$), so $X$ is connected, and a connected space is nonempty by definition. Hence $X\\neq\\emptyset$.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "remark after Definition 33.7.1 ('By convention a connected topological space is nonempty; hence a fortiori geometrically connected schemes are nonempty')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "def-weil-algebraic-closure",
+  "def-pc-separably-closed",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 33.7.7, tag 0387 (lemma-characterize-geometrically-connected), with its common-extension argument as Lemma 33.7.3, tag 054N, and Lemma 33.7.6, tag 0363; the remark after Definition 33.7.1 for nonemptiness"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +133,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-geometrically-connected-algebraic-closure",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0387 (stated there for a separable algebraic closure) and 054N; the statement is correct for any algebraically closed extension and was kept, with the notions it uses (scheme over a base, field extension, algebraically closed) added to stmt_deps and tagged in the text. Wrote the proof in five steps following varieties.tex Section 33.7: the forward direction and nonemptiness are instances of the definition; the converse passes from algebraically closed to separably closed (elementary), then uses tag 0363 (new node lem-weil-separably-closed-geometrically-connected) to get X_kbar geometrically connected over kbar, and tag 054N (new node lem-weil-geometrically-connected-check-after-extension) to descend to k. Mathlib (Geometrically/Connected.lean) has only stability of GeometricallyConnected under base change, i.e. the trivial direction of 054N; neither 0363 nor the converse of 054N nor this lemma is there."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
