@@ -49,13 +49,15 @@ The compatibility of the translation action with the Weil structure of `AS_* ℚ
 general `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`, the
 translations commuting with the geometric Frobenius.
 
-That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`) is
-checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier map is a `k₀`-torsor
+That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`, stated
+with `sorry`) is to be checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier map is a `k₀`-torsor
 (`AlgebraicGeometry.affineLine.isIso_sigmaDesc_lift_geometricTranslation`), so for
 `v : V ⟶ 𝔸¹_{k̄}` the fibre product `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` is a disjoint union of `#k₀` copies
 of `V`. The sections of `ĀS^* ĀS_* ℚ̄_ℓ` over `V` are the locally finite functions on it, and
 there the projector `e_ψ` factors as an averaging map to the sections of `ℚ̄_ℓ` followed by a
-splitting map, a split epi–mono factorisation; hence the image of `e_ψ` becomes `ℚ̄_ℓ`.
+splitting map, a split epi–mono factorisation of sheaves of `WeilCoefficients`-modules. It
+remains to see that the factorisation is `ℚ̄_ℓ,X`-linear, so that the image of `e_ψ` becomes
+`ℚ̄_ℓ` as a sheaf of `ℚ̄_ℓ,X`-modules.
 
 The constructibility statement which makes the tensor product with a lisse sheaf land in Weil
 complexes is reduced by dévissage to the case of a single Weil sheaf, stated with `sorry`.
@@ -644,6 +646,7 @@ noncomputable def artinSchreierTranslationSheafHom (c : k₀) :
       (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
       (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
 
+omit [Fact (ringChar k₀ ≠ l)] in
 lemma artinSchreierTranslationSheafHom_hom (c : k₀) :
     (artinSchreierTranslationSheafHom l c).hom =
       (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].map
@@ -760,7 +763,8 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   simp only [hsum, ModuleCat.hom_sum, ModuleCat.hom_comp,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
   refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
-  rw [LinearMap.sum_apply, hdown, Submodule.coe_sum, ContinuousMap.coe_sum, Finset.sum_apply]
+  rw [LinearMap.sum_apply, hdown, AddSubmonoidClass.coe_finsetSum, ContinuousMap.coe_sum,
+    Finset.sum_apply]
   refine (Finset.sum_congr rfl fun c _ ↦ ?_).trans
     (affineLine.sum_apply_pullbackMap_translation V.unop.hom ψ h z)
   change (ModuleCat.Hom.hom ((artinSchreierTranslationSheafHom l c).hom.hom.app _)
