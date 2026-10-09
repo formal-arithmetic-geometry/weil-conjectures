@@ -553,3 +553,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-etale-stratified-finite returned (93368851d): The branch (head 93368851) has no report file coord/reports/F1/lem-weil-pbc-etale-stratified-finite.md; a delivery needs the report with the group's '## Review 
 - 22:18 UTC (2026-10-09) — Returned F1 etale-stratified-finite (head 93368851; no report file). Launched a worker on fibre-product-point-residue-field (01JT residue sentence).
 - 22:18 UTC (2026-10-09) — Reviewed and committed etale-local-finite-multiple-points-elementary (02LL; 2 new nodes).
+- 22:20 UTC (2026-10-09) — Reviewed and committed etale-neighbourhood-prescribed-residue-field (02LF; 2 new nodes); tag 00UH -> 00UD corrected in standard-etale-monic-derivative.

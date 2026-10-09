@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-spec-map-residue-field-naturality",
+ "kind": "statement",
+ "title": "Spec of a ring map on points and on residue fields",
+ "statement": "Let $\\psi:R\\to R'$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ the induced morphism of schemes [def-weil-affine-spectrum]. Let $\\mathfrak p'\\subset R'$ be a prime ideal and $\\mathfrak p=\\psi^{-1}(\\mathfrak p')$. (1) $\\operatorname{Spec}\\psi$ maps the point $\\mathfrak p'$ to the point $\\mathfrak p$. (2) Let $r:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\kappa_{\\operatorname{Spec}R'}(\\mathfrak p')$ be the homomorphism induced by $\\operatorname{Spec}\\psi$ on residue fields of the schemes [def-weil-residue-field]; let $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, $\\kappa(\\mathfrak p')=R'_{\\mathfrak p'}/\\mathfrak p'R'_{\\mathfrak p'}$ [def-weil-pbc-localization-at-prime] and $\\kappa(\\psi):\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ the homomorphism induced by $\\psi$ ($r/t\\mapsto\\psi(r)/\\psi(t)$); and let $e_R:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\kappa(\\mathfrak p)$, $e_{R'}:\\kappa_{\\operatorname{Spec}R'}(\\mathfrak p')\\to\\kappa(\\mathfrak p')$ be the isomorphisms induced by the identifications of stalks $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\cong R_{\\mathfrak p}$, $\\mathcal O_{\\operatorname{Spec}R',\\mathfrak p'}\\cong R'_{\\mathfrak p'}$ (as in [lem-weil-pbc-spec-residue-field-identification]). Then $e_{R'}\\circ r=\\kappa(\\psi)\\circ e_R$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HY (schemes-lemma-morphism-into-affine-where-point-goes, line 769: the commutative square Gamma(Y) -> O_{Y,f(x)} -> O_{X,x} <- Gamma(X) and f(x) = the inverse image of m_x), with Lemma 01HV(6) (schemes-lemma-spec-sheaves, O_{Spec R,p} = R_p) and Lemma 01I2 (schemes-lemma-category-affine-schemes); the passage to residue fields is not written in Stacks"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field map of Spec.map f at a prime corresponds to the map of residue fields Ideal.ResidueField.map under Spec.residueFieldIso",
+   "results": "Ideal.ResidueField.mapₐ, Ideal.ResidueField.map (Mathlib.RingTheory.LocalRing.ResidueField.Ideal), Scheme.Hom.residueFieldMap, Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField (Mathlib.AlgebraicGeometry.ResidueField), IsLocalRing.ResidueField.map, RingHom.specComap",
+   "date": "2026-10-10",
+   "verdict": "no match: the two sides exist, the compatibility does not"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the isomorphism between the residue field of Spec R at p and the residue field of the prime ideal p with respect to a ring homomorphism R -> S",
+   "results": "Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField (+ _assoc), Scheme.descResidueField_fromSpecResidueField, Scheme.residue_residueFieldMap (+ _assoc), Scheme.residue_descResidueField_assoc (Mathlib.AlgebraicGeometry.ResidueField)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.Scheme.Spec.residueFieldIso",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'residueFieldIso' Mathlib/ ; grep -rn 'localRingHom' Mathlib/AlgebraicGeometry/*.lean ; sed -n 530,540p Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "(1) is Spec.map_apply (AlgebraicGeometry/Scheme.lean:537: Spec.map f x = PrimeSpectrum.comap f.hom x). For (2) only the stalk-level version exists: Scheme.localRingHom_comp_stalkIso (AlgebraicGeometry/AffineScheme.lean:1314: (Spec.stalkIso R (p.comap f)).hom ≫ ofHom (Localization.localRingHom ...) ≫ (Spec.stalkIso S p).inv = (Spec.map f).stalkMap p), AlgebraicGeometry.localRingHom_comp_stalkIso (Spec.lean:227), Scheme.arrowStalkMapSpecIso (AffineScheme.lean:1324); Spec.residueFieldIso (ResidueField.lean:301) is IsLocalRing.ResidueField.mapEquiv of Spec.stalkIso, and Scheme.residue_residueFieldMap (ResidueField.lean:128); residueFieldIso is used elsewhere only in AlgebraicGeometry/Fiber.lean:87-90, with no naturality lemma",
+   "date": "2026-10-10",
+   "verdict": "no exact match: (1) is Spec.map_apply; (2) follows from Scheme.localRingHom_comp_stalkIso by passing to residue fields (IsLocalRing.ResidueField.map functoriality, residue_residueFieldMap, the definition of Spec.residueFieldIso and Ideal.ResidueField.map as ResidueField.map of Localization.localRingHom), a few lines, not one"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

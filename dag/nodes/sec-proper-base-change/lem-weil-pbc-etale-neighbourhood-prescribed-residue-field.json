@@ -14,9 +14,95 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Affine chart. Since $S$ is a scheme [def-pc-scheme], $s$ has an affine open neighbourhood $W\\subseteq S$; put $R=\\mathcal O_S(W)$. By [lem-weil-pbc-affine-open-spec-points] there are an open immersion $\\iota:\\operatorname{Spec}R\\to S$ [def-weil-open-immersion] with image $W$ and a prime $\\mathfrak p\\subset R$ with $\\iota(\\mathfrak p)=s$. By [lem-weil-pbc-residue-field-point-naturality] (its last clause, $\\iota$ an open immersion) the map $\\rho:\\kappa(s)\\to\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ induced by $\\iota$ on residue fields [def-weil-residue-field] is an isomorphism, and by [lem-weil-pbc-spec-residue-field-identification] there is an isomorphism $e_R:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] induced by $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\cong R_{\\mathfrak p}$. Put $\\theta=e_R\\circ\\rho:\\kappa(s)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 02LF (line 10148-10152): 'We may assume S is affine'"
+   }
+  },
+  {
+   "text": "Transport of $k$. Let $j:\\kappa(s)\\to k$ be the structure map of the extension $k/\\kappa(s)$ [def-pc-field-extension]. Let $L$ be the field $k$ regarded as an extension of $\\kappa(\\mathfrak p)$ through $j\\circ\\theta^{-1}:\\kappa(\\mathfrak p)\\to k$. Since $\\theta$ is a field isomorphism, a $\\kappa(s)$-basis of $k$ is a $\\kappa(\\mathfrak p)$-basis of $L$, so $L$ is finite over $\\kappa(\\mathfrak p)$; and $\\theta$ extends coefficientwise to a ring isomorphism $\\kappa(s)[T]\\to\\kappa(\\mathfrak p)[T]$ that preserves monic polynomials, irreducibility, degrees, derivatives and coprimality and is compatible with evaluation at any $\\alpha\\in k$ (via $j$, resp. $j\\circ\\theta^{-1}$), so it maps the minimal polynomial of $\\alpha$ over $\\kappa(s)$ to the minimal polynomial of $\\alpha$ over $\\kappa(\\mathfrak p)$, and the latter is separable because the former is. Hence $L/\\kappa(\\mathfrak p)$ is finite and separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 02LF (line 10148-10152); the transport along kappa(s) = kappa(p) is implicit in 'we may assume S is affine' and written by the agent"
+   }
+  },
+  {
+   "text": "Etale ring map. Apply [lem-weil-pbc-etale-ring-map-prescribed-residue-field] to $R$, $\\mathfrak p$ and the finite separable algebraic extension $L/\\kappa(\\mathfrak p)$ of step 2: there are a ring map $\\psi:R\\to R'$ with $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale [def-weil-etale-morphism], a prime $\\mathfrak p'\\subset R'$ with $\\psi^{-1}(\\mathfrak p')=\\mathfrak p$, and a field isomorphism $\\lambda:\\kappa(\\mathfrak p')\\to L=k$ with $\\lambda\\circ\\kappa(\\psi)=j\\circ\\theta^{-1}$, where $\\kappa(\\psi):\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is induced by $\\psi$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-prescribed-residue-field",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 02LF (line 10150-10151): 'the lemma follows from Algebra, Lemma 00UD'"
+   }
+  },
+  {
+   "text": "The neighbourhood. Put $U=\\operatorname{Spec}R'$, $\\varphi=\\iota\\circ\\operatorname{Spec}\\psi:U\\to S$ and $u=\\mathfrak p'\\in U$. The open immersion $\\iota$ is etale and the composite of the etale morphisms $\\operatorname{Spec}\\psi$ and $\\iota$ is etale, by [lem-weil-pbc-etale-composition-cancellation] (1) and (2); so $\\varphi$ is etale [def-weil-etale-morphism]. By [lem-weil-pbc-spec-map-residue-field-naturality] (1), $\\operatorname{Spec}\\psi(\\mathfrak p')=\\psi^{-1}(\\mathfrak p')=\\mathfrak p$, hence $\\varphi(u)=\\iota(\\mathfrak p)=s$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-spec-map-residue-field-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 02LF (line 10148-10152), the return from the affine case, written by the agent"
+   }
+  },
+  {
+   "text": "The residue field. Let $r_\\varphi:\\kappa(s)\\to\\kappa(u)$, $r_\\psi:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\kappa(u)=\\kappa_{\\operatorname{Spec}R'}(\\mathfrak p')$ be the maps induced on residue fields [def-weil-residue-field] by $\\varphi$ and $\\operatorname{Spec}\\psi$. The local homomorphism of stalks induced by a composite of morphisms of schemes is the composite of the induced local homomorphisms, hence so are the maps on residue fields: $r_\\varphi=r_\\psi\\circ\\rho$. By [lem-weil-pbc-spec-map-residue-field-naturality] (2), $e_{R'}\\circ r_\\psi=\\kappa(\\psi)\\circ e_R$, with $e_{R'}:\\kappa(u)\\xrightarrow{\\sim}\\kappa(\\mathfrak p')$ the isomorphism of [lem-weil-pbc-spec-residue-field-identification] for $R'$. Therefore $e_{R'}\\circ r_\\varphi=\\kappa(\\psi)\\circ e_R\\circ\\rho=\\kappa(\\psi)\\circ\\theta$. Let $\\nu=e_{R'}^{-1}\\circ\\lambda^{-1}:k\\to\\kappa(u)$, a field isomorphism. From $\\lambda\\circ\\kappa(\\psi)=j\\circ\\theta^{-1}$ (step 3) we get $\\lambda^{-1}\\circ j=\\kappa(\\psi)\\circ\\theta$, so $\\nu\\circ j=e_{R'}^{-1}\\circ\\kappa(\\psi)\\circ\\theta=r_\\varphi$: $\\nu$ is an isomorphism $k\\to\\kappa(u)$ of extensions of $\\kappa(s)$ (it is the identity on $\\kappa(s)$, where $\\kappa(s)$ sits in $k$ by $j$ and in $\\kappa(u)$ by $r_\\varphi$). With step 4 this is the assertion.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LF (line 10138-10145), the residue field clause; the bookkeeping is written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-etale-ring-map-prescribed-residue-field",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-spec-map-residue-field-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LF (more-morphisms-lemma-realize-prescribed-residue-field-extension-etale, line 10138), proof lines 10148-10152, which reduces to S affine and Algebra, Lemma 00UD (algebra-lemma-make-etale-map-prescribed-residue-field, algebra.tex line 39810); the reduction to the affine case and the identification of residue fields, which Stacks leaves to the reader, are written by the agent (steps 1, 2, 4, 5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +154,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 02LF (tag verified: 02LF = more-morphisms-lemma-realize-prescribed-residue-field-extension-etale, line 10138): correct, kept; stmt_deps unchanged. Stacks' proof is two sentences ('we may assume S affine; then Algebra 00UD'); written out in five steps: an affine chart iota: Spec R -> S with iota(p) = s and kappa(s) = kappa(p) (affine-open-spec-points, residue-field-point-naturality, spec-residue-field-identification); transport of k to an extension L of kappa(p) (elementary); Algebra 00UD as a new node (tag verified: 00UD = algebra-lemma-make-etale-map-prescribed-residue-field, line 39810; the existing leaf lem-weil-pbc-standard-etale-monic-derivative cites it wrongly as 00UH, which is not its tag); U = Spec R', phi = iota o Spec psi etale by etale-composition-cancellation, phi(p') = s; the residue field isomorphism k = kappa(u) over kappa(s) by functoriality of residue maps and a new node for the compatibility of Spec psi with kappa(p) -> kappa(p') (Schemes 01HY/01HV(6)). New unsplit nodes: lem-weil-pbc-etale-ring-map-prescribed-residue-field (00UD; no Mathlib match: Mathlib's etale-neighbourhood existence results all have bijective residue field map), lem-weil-pbc-spec-map-residue-field-naturality (no exact match; (1) is Spec.map_apply, (2) follows in a few lines from Scheme.localRingHom_comp_stalkIso). The primitive element theorem and the standard etale algebra belong to the proof of 00UD (next level), not to this split."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps (Stacks 02LF says only 'reduce to S affine, then 00UD'): affine chart with the residue-field identifications, transport of k, the new unsplit node for Algebra 00UD (etale ring map with prescribed finite separable residue field extension; its split needs the primitive element theorem and standard etale algebras), the neighbourhood is etale (composition leaf), the residue field compatibility via a new unsplit node on Spec of a ring map and residue fields (01HY/01HV(6)/01I2; Mathlib has Spec.map_apply and the stalk-level localRingHom_comp_stalkIso). Tag correction done by L in lem-weil-pbc-standard-etale-monic-derivative (00UH -> 00UD)."
+ }
 }
