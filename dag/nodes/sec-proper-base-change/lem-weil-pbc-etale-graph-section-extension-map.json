@@ -18,9 +18,154 @@
   "def-weil-pbc-etale-sum-extension",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The objects and the morphism $\\Gamma_\\varphi$.* Since $V\\to X$ is etale and $\\pi:U\\to X$ is etale (it is finite etale [def-weil-pbc-finite-etale-category]), [lem-weil-pbc-etale-base-change-finite-limits] (1) applied to $u=\\pi$ and the object $V\\to X$ of $X_{\\Et}$ shows that $q_V:V_U=V\\times_XU\\to U$ is etale, so $(V_U,q_V)$ is an object of $U_{\\Et}$ [def-weil-pbc-etale-site]; applied to $u=(V\\to X)$ and the object $\\pi$ of $X_{\\Et}$ it shows that $p_V:V_U\\to V$ is etale. The $X$-morphism $\\varphi:V\\to U$ is a morphism between two schemes etale over $X$ commuting with the structure morphisms, hence etale by [lem-weil-pbc-etale-composition-cancellation] (3); so $(V,\\varphi)$ is an object of $U_{\\Et}$. The graph $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi)$ exists by the universal property of $V\\times_XU$ [def-pc-fibre-product], since $(V\\to X)\\circ\\mathrm{id}_V=\\pi\\circ\\varphi$ ($\\varphi$ is an $X$-morphism); it satisfies $p_V\\circ\\Gamma_\\varphi=\\mathrm{id}_V$ and $q_V\\circ\\Gamma_\\varphi=\\varphi$. The second identity says that $\\Gamma_\\varphi$ is a $U$-morphism $(V,\\varphi)\\to(V_U,q_V)$, i.e. a morphism of $U_{\\Et}$ [def-weil-pbc-etale-site]. This is the setting of the proof of Stacks 0F4L ('Evaluating both sides on $V\\to X$ etale ... $\\Gamma_\\varphi=(1,\\varphi):V\\to V\\times_XU$ over $U$').",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546)"
+   }
+  },
+  {
+   "text": "*$\\Gamma_\\varphi$ is an open and closed immersion (clause 1).* The projection $p_V:V_U\\to V$ is etale (step 1) and separated: it is the base change of $\\pi$ along $V\\to X$, and $\\pi$ is finite, so $p_V$ is finite by [lem-weil-pbc-finite-morphism-permanence] (a); a finite morphism is affine by definition [def-weil-finite-integral-morphism], and an affine morphism is separated by [lem-weil-pbc-affine-morphism-permanence] (3). By step 1, $\\Gamma_\\varphi$ is a section of $p_V$: $p_V\\circ\\Gamma_\\varphi=\\mathrm{id}_V$. Hence [lem-weil-pbc-etale-section-clopen-immersion] (for the etale separated $p_V:V_U\\to V$ and its section $\\Gamma_\\varphi$) gives: $\\Gamma_\\varphi$ is an open immersion [def-weil-open-immersion] and a closed immersion [def-weil-closed-immersion], so $O:=\\Gamma_\\varphi(V)$ is open and closed in $V_U$ and $\\Gamma_\\varphi=j_O\\circ\\gamma$ with $j_O:O\\to V_U$ the inclusion of the open subscheme and $\\gamma:V\\to O$ an isomorphism of schemes, whose inverse is $p_V\\circ j_O$ (from $p_V\\circ j_O\\circ\\gamma=\\mathrm{id}_V$). In particular $\\Gamma_\\varphi\\circ p_V\\circ j_O=j_O\\circ\\gamma\\circ\\gamma^{-1}=j_O$. This is Stacks 0F4L ('It is open as it is a morphism between schemes etale over $U$ and it is closed as it is a section of a scheme separated over $V$'), with closedness from Schemes Lemma 01KT (schemes-lemma-section-immersion: a section of a separated morphism is a closed immersion), which is clause (3) of [lem-weil-pbc-etale-section-clopen-immersion]; openness is clause (2) there (the section is etale, flat and a monomorphism), equivalent to Stacks' argument ($\\Gamma_\\varphi$ is a $U$-morphism between etale $U$-schemes, hence etale, hence open).",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546); literature/stacks-project/schemes.tex, Lemma 01KT (lemma-section-immersion, line 4275)"
+   }
+  },
+  {
+   "text": "*Sections over $V_U$ split along $O$ and its complement.* Let $W=V_U\\setminus O$, open (as $O$ is closed), with inclusion $j_W:W\\to V_U$ of the open subscheme; $j_W$ and $\\Gamma_\\varphi$ are open immersions, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $(W,q_V\\circ j_W)$ is an object of $U_{\\Et}$ (composite of etale morphisms, ibid. (2)). As $O\\cup W=V_U$, the family $\\{\\Gamma_\\varphi:(V,\\varphi)\\to(V_U,q_V),\\ j_W:(W,q_Vj_W)\\to(V_U,q_V)\\}$ is a covering of $U_{\\Et}$ [def-weil-pbc-etale-site], whose fibre products are scheme fibre products (ibid.). (i) An empty scheme $\\varnothing$ with its unique morphism to $U$ (an open immersion onto the empty open, hence etale) is an object of $U_{\\Et}$ covered by the empty family; the sheaf condition [def-weil-pbc-abelian-etale-sheaves] for it says $M(\\varnothing)\\to$ (empty product) is injective, so $M(\\varnothing)=0$. (ii) If $T$ is a scheme with $a:T\\to V$, $b:T\\to W$ and $\\Gamma_\\varphi a=j_Wb$, every point of $T$ maps into $O\\cap W=\\varnothing$, so $T$ is empty; hence $V\\times_{V_U}W$ and $W\\times_{V_U}V$ are empty schemes [def-pc-fibre-product] and $M$ of them is $0$ by (i). (iii) $\\Gamma_\\varphi$ and $j_W$ are monomorphisms [lem-weil-pbc-open-immersion-monomorphism], so the two projections $V\\times_{V_U}V\\rightrightarrows V$ are equal (they become equal after composing with $\\Gamma_\\varphi$), and likewise for $W\\times_{V_U}W$. The underlying presheaf of abelian groups of $M$ is an abelian sheaf on $U_{\\Et}$ [def-weil-sheaf-of-modules-category, def-weil-pbc-etale-sheaves], and its sheaf condition for this covering says that $\\rho:M(V_U,q_V)\\to M(V,\\varphi)\\times M(W),\\ t\\mapsto(M(\\Gamma_\\varphi)t,\\,M(j_W)t)$ is injective with image the pairs whose two restrictions to each of the four fibre products agree; by (ii) and (iii) this holds for every pair, so $\\rho$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546) ('Thus for a section $s_\\varphi$ ... there exists a unique section $s'_\\varphi$ ... which pulls back to $s_\\varphi$ by $\\Gamma_\\varphi$ and which restricts to zero on the complement of the image of $\\Gamma_\\varphi$'), written out"
+   }
+  },
+  {
+   "text": "*The $\\Lambda$-module structures.* For an object $T$ of $U_{\\Et}$ let $\\iota_T:\\Lambda\\to\\Lambda_U(T)$ be the ring map sending $\\lambda$ to the image of the constant section $\\lambda$ under the canonical map from the constant presheaf to its sheafification $\\Lambda_U$ [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]; since the constant presheaf has identity restriction maps and the canonical map is a morphism of presheaves, every restriction map of $\\Lambda_U$ sends $\\iota_T(\\lambda)$ to $\\iota_{T'}(\\lambda)$. $M(T)$ is a $\\Lambda$-module through $\\iota_T$, and by the semilinearity of the restriction maps of the $\\Lambda_U$-module $M$ [def-weil-sheaf-of-modules-category], every $M(g)$, $g$ a morphism of $U_{\\Et}$, is $\\Lambda$-linear; every component $\\alpha_T$ of a morphism $\\alpha$ of sheaves of $\\Lambda_U$-modules is $\\Lambda$-linear. These are the $\\Lambda$-module structures on $M(V,\\varphi)$, on $(\\pi_*M)(V)=M(V_U,q_V)$ [def-weil-pbc-direct-image] and, summandwise, on $P_M(V)$ [def-weil-pbc-etale-sum-extension]; the restriction maps of $P_M$ and of $\\pi_*M$ (the maps $M(a_U)$, step 6) are $\\Lambda$-linear, so both are presheaves of $\\Lambda$-modules on $X_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546) ('We prove this in the case of abelian sheaves'); the $\\Lambda$-module case, with the module structures written out"
+   }
+  },
+  {
+   "text": "*Clause 2.* By step 3, $\\rho$ is a bijection, and it is $\\Lambda$-linear because $M(\\Gamma_\\varphi)$ and $M(j_W)$ are (step 4); so $\\rho^{-1}$ is $\\Lambda$-linear. For $s\\in M(V,\\varphi)$ put $e_\\varphi(s)=\\rho^{-1}(s,0)$. The conditions '$M(\\Gamma_\\varphi)(e)=s$ and the restriction $M(j_W)(e)$ of $e$ to the open subscheme $W=V_U\\setminus\\Gamma_\\varphi(V)$ is $0$' say exactly $\\rho(e)=(s,0)$, so $e_\\varphi(s)$ is the unique element satisfying them, and $e_\\varphi=\\rho^{-1}\\circ(s\\mapsto(s,0))$ is $\\Lambda$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546)"
+   }
+  },
+  {
+   "text": "*Graphs and base change along $a$.* Let $a:V'\\to V$ be a morphism of $X_{\\Et}$, $\\varphi:V\\to U$ an $X$-morphism, $\\varphi'=\\varphi a$, and $a_U=a\\times_X\\mathrm{id}_U:V'_U\\to V_U$, the morphism with $p_V a_U=a\\,p_{V'}$ and $q_Va_U=q_{V'}$ [def-pc-fibre-product]; it is a morphism $(V'_U,q_{V'})\\to(V_U,q_V)$ of $U_{\\Et}$, and $(\\pi_*M)(a)=M(a_U)$ [def-weil-pbc-direct-image]. Also $a$ is a morphism $(V',\\varphi')\\to(V,\\varphi)$ of $U_{\\Et}$. (i) $a_U\\circ\\Gamma_{\\varphi'}=\\Gamma_\\varphi\\circ a$: both have $p_V$-component $a$ and $q_V$-component $\\varphi a$, so they agree by the uniqueness in [def-pc-fibre-product]. Hence $\\Gamma_{\\varphi'}(V')\\subseteq a_U^{-1}(O)$. (ii) Conversely let $O'=a_U^{-1}(O)$, open in $V'_U$, with inclusion $\\iota:O'\\to V'_U$. Since $a_U\\iota$ maps into $O$ it factors as $j_O\\circ h$ [lem-weil-pbc-morphism-factors-through-open-subscheme]; by step 2, $a_U\\iota=\\Gamma_\\varphi p_Vj_Oh=\\Gamma_\\varphi p_Va_U\\iota=\\Gamma_\\varphi\\,a\\,p_{V'}\\iota$. Therefore $q_{V'}\\iota=q_Va_U\\iota=q_V\\Gamma_\\varphi a p_{V'}\\iota=\\varphi a\\,p_{V'}\\iota=q_{V'}\\Gamma_{\\varphi'}p_{V'}\\iota$ and $p_{V'}\\iota=p_{V'}\\Gamma_{\\varphi'}p_{V'}\\iota$, so $\\iota=\\Gamma_{\\varphi'}\\circ p_{V'}\\circ\\iota$ [def-pc-fibre-product], and $O'=\\iota(O')\\subseteq\\Gamma_{\\varphi'}(V')$. So $a_U^{-1}(\\Gamma_\\varphi(V))=\\Gamma_{\\varphi a}(V')$, the key point named in the statement; equivalently $a_U$ maps $W'=V'_U\\setminus\\Gamma_{\\varphi'}(V')$ into $W=V_U\\setminus\\Gamma_\\varphi(V)$, and $a_U\\circ j_{W'}=j_W\\circ b$ for a unique $b:W'\\to W$ [lem-weil-pbc-morphism-factors-through-open-subscheme], a $U$-morphism ($q_Vj_Wb=q_Va_Uj_{W'}=q_{V'}j_{W'}$), hence a morphism of $U_{\\Et}$ [def-weil-pbc-etale-site].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546) (compatibility of the canonical map with restriction, left implicit in Stacks; written out by the agent)"
+   }
+  },
+  {
+   "text": "*Extension by zero commutes with restriction.* With the notation of step 6 and $s\\in M(V,\\varphi)$, put $t=M(a_U)(e_\\varphi(s))\\in M(V'_U,q_{V'})$. By step 6 (i), $M(\\Gamma_{\\varphi'})(t)=M(a_U\\Gamma_{\\varphi'})(e_\\varphi s)=M(\\Gamma_\\varphi a)(e_\\varphi s)=M(a)(M(\\Gamma_\\varphi)e_\\varphi s)=M(a)(s)$, and by step 6 (ii), $M(j_{W'})(t)=M(a_Uj_{W'})(e_\\varphi s)=M(b)(M(j_W)e_\\varphi s)=M(b)(0)=0$ ($M$ is a contravariant functor on $U_{\\Et}$). By the uniqueness in clause 2 (step 5) for $(V',\\varphi')$: $M(a_U)(e_\\varphi(s))=e_{\\varphi a}(M(a)(s))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546)"
+   }
+  },
+  {
+   "text": "*Clause 3: $c^p_M$ is a morphism of presheaves of $\\Lambda$-modules.* $c^p_{M,V}((s_\\varphi)_\\varphi)=\\sum_\\varphi e_\\varphi(s_\\varphi)$ is a finite sum (an element of the direct sum has finitely many nonzero components) of $\\Lambda$-linear maps (step 5), hence well defined and $\\Lambda$-linear. For $a:V'\\to V$ in $X_{\\Et}$ the restriction of $P_M$ [def-weil-pbc-etale-sum-extension] sends $(s_\\varphi)_\\varphi$ to the family whose $\\psi$-component is $\\sum_{\\varphi:\\varphi a=\\psi}M(a)(s_\\varphi)$, and $(\\pi_*M)(a)=M(a_U)$ [def-weil-pbc-direct-image]. By step 7, $M(a_U)\\big(\\sum_\\varphi e_\\varphi(s_\\varphi)\\big)=\\sum_\\varphi e_{\\varphi a}(M(a)s_\\varphi)=\\sum_\\psi e_\\psi\\big(\\sum_{\\varphi a=\\psi}M(a)s_\\varphi\\big)$, i.e. $(\\pi_*M)(a)\\circ c^p_{M,V}=c^p_{M,V'}\\circ P_M(a)$. So $c^p_M:P_M\\to\\pi_*M$ is a morphism of presheaves of $\\Lambda$-modules on $X_{\\Et}$. This is the map $j_{p!}\\mathcal F\\to j_*\\mathcal F$ of Stacks 0F4L for $j=\\pi$.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546)"
+   }
+  },
+  {
+   "text": "*Naturality in $M$.* Let $\\alpha:M\\to M'$ be a morphism of sheaves of $\\Lambda_U$-modules and $s\\in M(V,\\varphi)$. The components of $\\alpha$ commute with the maps $M(g)$, $M'(g)$ [def-weil-sheaf-of-modules-category], so $M'(\\Gamma_\\varphi)(\\alpha_{V_U}e_\\varphi s)=\\alpha_{(V,\\varphi)}(M(\\Gamma_\\varphi)e_\\varphi s)=\\alpha_{(V,\\varphi)}(s)$ and $M'(j_W)(\\alpha_{V_U}e_\\varphi s)=\\alpha_W(0)=0$; by the uniqueness in clause 2 for $M'$, $\\alpha_{V_U}(e_\\varphi(s))=e'_\\varphi(\\alpha_{(V,\\varphi)}(s))$. Summing over $\\varphi$, and since $(\\pi_*\\alpha)_V=\\alpha_{V_U}$ [def-weil-pbc-direct-image] and $(P_\\alpha)_V=\\bigoplus_\\varphi\\alpha_{(V,\\varphi)}$: $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546) ('a functorial injective map')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (lines 11522-11546); with literature/stacks-project/schemes.tex Lemma 01KT (line 4275). Steps 3, 4, 6 and 7 write out what Stacks leaves implicit (the sheaf condition for the clopen covering, the module structures, compatibility with restriction)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +187,24 @@
    "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean, functions on index sets); smallEtale appears only in AlgebraicGeometry/Sites/{Etale,AffineEtale,EtalePoint}.lean, which have no extension by zero and no direct image comparison",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf on small etale site, sections over a scheme that is a disjoint union of two open and closed subschemes is the product of sections",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso (Mathlib.AlgebraicGeometry.Limits: structure presheaf of X ⨿ Y), TopCat.Sheaf.isProductOfDisjoint, TopCat.Sheaf.objSupIsoProdEqLocus (sheaves on topological spaces), CategoryTheory.Sheaf.instHasFiniteCoproducts: nothing for sheaves on the small etale site nor for the graph-section map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln PreservesFiniteProducts Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry/Sites",
+   "results": "only CategoryTheory/Sites/Coherent/{ExtensiveSheaves,SheafComparison,ExtensiveColimits,LocallySurjective}.lean and Sites/PreservesLimits.lean (sheaves for extensive/coherent topologies preserve finite products); nothing for smallEtaleTopology",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +224,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-graph-section-extension-map",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0F4L (etale-cohomology.tex line 11517, first paragraph of the proof) and Schemes 01KT (schemes.tex line 4275); tags verified in stacks-project/tags/tags (0F4L = etale-cohomology-lemma-shriek-into-star-separated-etale, 01KT = schemes-lemma-section-immersion). Statement kept; stmt_deps kept. Proof in 9 steps: objects and graph (cancellation, etale base change); clopen immersion via the existing Mathlib leaf lem-weil-pbc-etale-section-clopen-immersion for the projection p_V (etale by base change, separated since finite => affine => separated); sheaf condition for the covering {Gamma_phi, complement} written out inline (M(empty)=0, empty cross fibre products, monomorphisms), as in the sibling lem-weil-pbc-direct-image-split-cover-product; Lambda-module structures; extension e_phi; key point a_U^{-1}(Gamma_phi(V)) = Gamma_{phi a}(V') proved scheme-theoretically; compatibility with restriction; naturality in M. No new nodes. No Lean candidate in slopmaster2 (its lowerShriekToLowerStar is built from compactifications, not from the sum presheaf). Two Mathlib searches added."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Nine steps along the first paragraph of the proof of Stacks 0F4L, no new node: the objects and the graph in U_et, the graph open and closed (section of the etale separated p_V, via finite => affine => separated and the etale-section-clopen leaf, 01KT), the sheaf condition for the clopen covering written out, module structures, e_phi and its uniqueness, compatibility of graphs with base change along a (morphism-factors-through-open-subscheme node), extension by zero commutes with restriction, c^p_M a presheaf map, naturality in M. Stage-3 note: the clopen sheaf-condition argument is written inline here and in direct-image-split-cover-product. Tags verified (0F4L, 01KT)."
+ }
 }
