@@ -360,6 +360,31 @@ lemma app_eq_of_closure (D₁ D₂ : LocalDerivation M U) {W : X.Opens} (hW : W 
   | neg x _ hx => rw [map_neg, map_neg, hx]
   | mul x y _ _ hx hy => rw [D₁.map_mul, D₂.map_mul, hx, hy]
 
+/-- The postcomposition of a local derivation with a morphism of modules. -/
+noncomputable def postcomp (D : LocalDerivation M U) {N : X.Modules} (g : M ⟶ N) :
+    LocalDerivation N U where
+  app W hW := (g.app W).hom.comp (D.app W hW)
+  map_mul W hW a b := by
+    change g.app W (D.app W hW (a * b)) = a • g.app W (D.app W hW b) + b • g.app W (D.app W hW a)
+    rw [D.map_mul, map_add, Hom.app_smul, Hom.app_smul]
+  naturality W W' hW h a := by
+    change g.app W' (D.app W' _ _) = _
+    rw [D.naturality]
+    exact Hom.app_presheaf_map g (homOfLE h) _
+
+@[simp]
+lemma postcomp_app (D : LocalDerivation M U) {N : X.Modules} (g : M ⟶ N) (W : X.Opens)
+    (hW : W ≤ U) (a : Γ(X, W)) : (D.postcomp g).app W hW a = g.app W (D.app W hW a) :=
+  rfl
+
+/-- **Local derivations agreeing on an open cover agree.** -/
+lemma ext_of_cover {ι : Type*} (V : ι → X.Opens) (hV : ⨆ i, V i = ⊤)
+    (D₁ D₂ : LocalDerivation M ⊤)
+    (h : ∀ i (W : X.Opens) (_ : W ≤ V i) (a : Γ(X, W)), D₁.app W le_top a = D₂.app W le_top a)
+    (W : X.Opens) (a : Γ(X, W)) : D₁.app W le_top a = D₂.app W le_top a :=
+  ext_of_basis (fun p : Σ i, {W : X.Opens // W ≤ V i} ↦ p.2.1) (fun _ ↦ le_top)
+    (cover_basis V hV) D₁ D₂ (fun p a ↦ h p.1 p.2.1 p.2.2 a) W le_top a
+
 section Relative
 
 variable {S : Scheme.{u}} (f : X ⟶ S)
@@ -425,6 +450,19 @@ lemma toDerivation'_d (D : LocalDerivation M ⊤)
     (h : ∀ (U : S.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (c : Γ(S, U)),
       D.app V le_top (f.appLE U V e c) = 0) (V : X.Opens) (a : Γ(X, V)) :
     (toDerivation' f D h).d (X := op V) a = D.app V le_top a :=
+  rfl
+
+/-- A relative derivation of `𝒪_X`, as a local derivation over `⊤`. -/
+def ofDerivation' {S' : X.Opensᵒᵖ ⥤ CommRingCat.{u}} {φ : S' ⟶ X.presheaf}
+    (d : M.val.Derivation' φ) : LocalDerivation M ⊤ where
+  app W _ := d.d (X := op W)
+  map_mul _ _ a b := d.d_mul a b
+  naturality _ _ _ h a := d.d_map (homOfLE h).op a
+
+@[simp]
+lemma ofDerivation'_app {S' : X.Opensᵒᵖ ⥤ CommRingCat.{u}} {φ : S' ⟶ X.presheaf}
+    (d : M.val.Derivation' φ) (W : X.Opens) (a : Γ(X, W)) :
+    (ofDerivation' d).app W le_top a = d.d (X := op W) a :=
   rfl
 
 end Relative
