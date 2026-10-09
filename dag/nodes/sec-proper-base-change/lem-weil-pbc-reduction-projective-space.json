@@ -188,5 +188,15 @@
   "item": "lem-weil-pbc-reduction-projective-space",
   "worker": "stage1",
   "summary": "Statement made precise (P^m_S = P({0..m};S) of def-nagata-projective-space-base-change; (P^1_T)^n defined inductively as iterated fibre product with p_n = p_{n-1}∘pr_1; conclusion PBC(p_n) and PBC(q_{n,T}) plus properness, for n≥0); the mechanism ('by repeated base change ... by cancellation along σ_n') moved from the statement into the proof, so σ_n and def-weil-pbc-symmetric-product-morphism left stmt_deps and def-nagata-projective-space-base-change, def-pc-fibre-product entered. Proof rewritten in 6 steps following Stacks 0A4F, last paragraph, with 0A4C/0A4D/0A4E: properness; composition in PBC form (composition-stability is stated with IA hypotheses, so the iff lemma is used to convert, which the old proof omitted); n=0 (not covered by the source nor by σ_n, which needs n≥1; new node lem-weil-pbc-projective-space-zero-isomorphism); induction on n using the pullback lemma and the hypothesis for S=(P^1_T)^{n-1} (no base-change stability of PBC needed; the isomorphism χ is handled by the finite case, new Mathlib leaf lem-weil-pbc-isomorphism-finite); σ_n finite, surjective, over T (the last was used but stated nowhere: new node lem-weil-pbc-symmetric-product-over-base); cancellation. Checked: lemma-weil-pbc-cancellation states exactly X-f->Y-h->Z proper, f surjective, PBC(f), PBC(hf) ⇒ PBC(h); prop-weil-pbc-finite-morphism gives PBC for every finite morphism. Mathlib searched three ways: no proper base change."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise (iterated fibre product, n = 0 covered), composition through IA made explicit; lem-weil-pbc-finite-proper (sk-prop-av-pqf-finite) and lem-weil-pbc-proper-composition (sk-thm-br) accepted as tool uses; 3 new nodes, one closed by Lean"
  }
 }

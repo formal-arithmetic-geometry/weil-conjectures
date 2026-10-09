@@ -1,13 +1,11 @@
 # Work queue
 
-560 items; claim with `tools/claim.py next <group> [--stage N]`.
+563 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (551)
+## Stage 1: nodes to split (553)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `def-weil-pbc-derived-inverse-image` | 1002 | none |
-| `lem-weil-pbc-derived-exchange-triangulated` | 1002 | none |
 | `lem-weil-pbc-reduction-projective-space` | 1002 | none |
 | `lem-weil-pbc-sheaf-flat-separator` | 1002 | sorry_here |
 | `lemma-weil-pbc-cancellation` | 1002 | none |
@@ -16,13 +14,17 @@
 | `prop-weil-pbc-composition-stability` | 1002 | none |
 | `prop-weil-pbc-derived-inverse-image-adjunction` | 1002 | none |
 | `prop-weil-pbc-proper-curve-sepclosed-invariance` | 1002 | rests_on_sorry |
-| `def-weil-pbc-symmetric-product-morphism` | 1003 | none |
+| `lem-weil-pbc-derived-adjunction-commshift` | 1003 | none |
+| `lem-weil-pbc-derived-square-iso-commshift` | 1003 | none |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
 | `lem-weil-pbc-injective-module-abelian-acyclic` | 1003 | none |
+| `lem-weil-pbc-projective-space-zero-isomorphism` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
+| `lem-weil-pbc-symmetric-product-over-base` | 1003 | none |
+| `lem-weil-pbc-symmetric-product-properties` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-surjective` | 1003 | none |
 | `lem-weil-pbc-vanishing-descends-retract` | 1003 | none |
 | `lemma-weil-pbc-curve-constructible-primary-reduction` | 1003 | none |
@@ -36,9 +38,9 @@
 | `prop-weil-pbc-strict-local-exchange` | 1003 | none |
 | `def-weil-pbc-extension-by-zero` | 1004 | none |
 | `def-weil-pbc-finite-open-comparison` | 1004 | none |
+| `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
-| `lem-weil-pbc-symmetric-product-properties` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
 | `lemma-weil-pbc-eight-curve-devissage` | 1004 | none |
@@ -387,18 +389,18 @@
 | `def-sp-injective-resolutions` | 6003 | none |
 | `def-sp-left-exact-additive` | 6003 | none |
 | `lem-sp-grothendieck-enough-injectives` | 6003 | none |
+| `lem-weil-pbc-finite-proper` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
 | `def-sp-composite-acyclicity` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
+| `pqf-lem-finite-integral-lft` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `thm-sp-if-e1` | 6004 | none |
 | `def-sp-double-complex-total` | 6005 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
-| `lem-weil-pbc-finite-proper` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6005 | none |
 | `lem-sp-long-exact-of-triangle` | 6006 | none |
-| `pqf-lem-finite-integral-lft` | 6006 | none |
 | `def-sp-homological-functor` | 6007 | none |
 | `lem-sc-cech-spectral` | 6007 | sorry_here |
 | `lem-sc-divisor-exact-sequence` | 6007 | none |
@@ -558,7 +560,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (9)
+## Stage 2: nodes to state (10)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -566,13 +568,14 @@
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 565 nodes that wait for stage 1, 39 nodes that wait for a statement dependency.
+Not open yet: 568 nodes that wait for stage 1, 41 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
