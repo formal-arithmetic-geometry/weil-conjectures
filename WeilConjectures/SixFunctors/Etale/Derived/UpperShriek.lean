@@ -74,7 +74,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 section TorsionCoefficients
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Blueprint `thm-amb-etale-exceptional-adjoint`: The ordinary ambient exceptional adjoint.
 
@@ -88,7 +88,7 @@ cohomology sheaves commute with filtered colimits, so `Rg_*` preserves coproduct
 unbounded derived category. Brown representability for the derived category of the
 Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) then gives the
 right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
-instance isLeftAdjoint_rightDerivedLowerShriek :
+instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
     (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
   sorry
 

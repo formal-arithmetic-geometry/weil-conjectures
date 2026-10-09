@@ -269,7 +269,8 @@ theorem bijective_derivedTensor_map_comp_twistedEvaluation
     fun g ↦ ⟨MonoidalClosed.curry g, MonoidalClosed.uncurry_curry g⟩⟩
     ((isIso_iff_yoneda_map_bijective _).1 hi _)
 
-omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] in
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] [HasCompactification a]
+  [(R(a)_![A]).IsLeftAdjoint] in
 /-- The adjoint description of the evaluation part of the derived Poincaré pairing: for `K`
 perfect and any `N`, maps `h : N ⟶ Ra_*(K^∨ ⊗ᴸ T)` correspond bijectively to maps
 `K ⊗ᴸ La^* N ⟶ T`, through `K ⊗ᴸ La^* h`, `K ⊗ᴸ` the counit of `La^* ⊣ Ra_*` and the twisted

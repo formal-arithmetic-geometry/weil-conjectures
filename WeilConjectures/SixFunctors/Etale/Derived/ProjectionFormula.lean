@@ -310,7 +310,7 @@ end Coherence
 
 section TorsionCoherence
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}}
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
@@ -319,7 +319,7 @@ torsion coefficients. Comparing the chosen compactification of `f ≫ g` with th
 from compactifications of `f` and `g` uses the independence of the compactification and
 compact-support base change for the open immersion of the compactification of `g` along the
 proper map of that of `f`; both rest on proper base change, which needs torsion coefficients. -/
-theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ Z)
+theorem nonempty_iso_rightDerivedLowerShriek_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
@@ -333,7 +333,7 @@ and `M`. For torsion coefficients the projection formula holds for every morphis
 compactification and all objects (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`).
 This is the objectwise shadow of the blueprint's associativity pentagon; the pentagon itself is
 an identity between canonical transformations and is not stated, see the module docstring. -/
-theorem hasProjectionFormula_comp (f : X ⟶ Y) (g : Y ⟶ Z)
+theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -348,7 +348,8 @@ Independence of the compactification, for torsion coefficients: the formula comp
 arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for
 `AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both hold, for every
 compactification (`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_of_finite`). -/
-theorem hasProjectionFormulaOfCompactification_iff {f : X ⟶ Y} [HasCompactification f]
+theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
+    [HasCompactification f]
     (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

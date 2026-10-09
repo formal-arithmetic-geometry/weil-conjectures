@@ -354,7 +354,7 @@ lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullba
   unfold IsWeilMorphism lowerShriekWeilDatum at *
   rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
 
-omit [HasCompactification a] in
+omit [Finite Λ] [HasCompactification a] in
 /-- `Ra_*` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
 exchange map. -/
 lemma IsWeilMorphism.rightDerivedLowerStar_map (sq : CommSq g a a h) {f : K ⟶ L}

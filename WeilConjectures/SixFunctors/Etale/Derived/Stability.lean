@@ -373,6 +373,7 @@ theorem torAmplitudeIn_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   sorry
 
+omit [Finite Λ] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
