@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-scheme-base-change",
+ "kind": "statement",
+ "title": "Base change of an etale morphism of schemes is etale (Stacks 02GO)",
+ "statement": "Let $f:X\\to S$ be an etale morphism of schemes [def-weil-etale-morphism] and $g:S'\\to S$ any morphism of schemes [def-pc-scheme]. Then the base change $X\\times_SS'\\to S'$ (second projection of the fibre product [def-pc-fibre-product]) is etale. (Stacks Project, Morphisms, Lemma Tag 02GO.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 02GO (lemma-base-change-etale), line 8136"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of an etale morphism of schemes is etale",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme (leansearch index name), RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match (scheme-level instance; name in this Mathlib checked by loogle and grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Etale",
+   "results": "AlgebraicGeometry.Etale.etale_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Etale.etale_isStableUnderBaseChange (project ~/weil-conjectures-slopmaster2)",
+   "results": "instance in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "line 74: instance etale_isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @Etale; lines 82-90: instances Etale (pullback.fst f g) given Etale g and Etale (pullback.snd f g) given Etale f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Etale.etale_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+  "how": "exact: line 74, `instance etale_isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @Etale`, i.e. in every pullback square the base change of an etale morphism is etale; for the chosen fibre product the instance `Etale (pullback.snd f g)` given `[Etale f]` (lines 87-90) is the node's statement; def-weil-etale-morphism is matched to AlgebraicGeometry.Etale. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-separated-stratified-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-etale-separated-stratified-finite",
  "kind": "statement",
  "title": "A separated etale morphism is finite etale on a constructible stratification",
- "statement": "Let $Y$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $f:V\\to Y$ be a separated etale morphism [def-weil-etale-morphism]. Then there exists a finite partition $Y=\\coprod_rY_r$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $V\\times_Y Y_r\\to Y_r$ is finite etale [def-weil-pbc-finite-etale-category].",
+ "statement": "Let $Y$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $f:V\\to Y$ be an etale morphism [def-weil-etale-morphism] which is separated and quasi-compact [def-weil-pbc-scheme-conventions] (since $Y$ is quasi-compact and quasi-separated, $f$ is quasi-compact exactly when $V$ is quasi-compact). Then there exists a finite partition $Y=\\coprod_rY_r$ into pairwise disjoint subsets $Y_r$, each locally closed [def-weil-locally-closed-subset] and constructible [def-weil-constructible-subset] and given the structure of a subscheme (an immersion $Y_r\\to Y$ [def-weil-closed-immersion] with image $Y_r$), such that each base change $V\\times_Y Y_r\\to Y_r$ (fibre product [def-pc-fibre-product]) is finite etale [def-weil-pbc-finite-etale-category].",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "More on Morphisms, Lemma Tag 07RZ (more-morphisms-lemma-stratify-flat-fp-qf), together with Etale Morphisms: etale implies flat, locally of finite presentation and quasi-finite; the finite locally free strata are finite etale after base change"
@@ -10,13 +10,122 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-weil-etale-morphism",
+  "def-weil-locally-closed-subset",
   "def-weil-constructible-subset",
+  "def-weil-closed-immersion",
   "def-weil-pbc-finite-etale-category",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-etale-morphism], $f$ is flat, locally of finite presentation and unramified. An unramified morphism is quasi-finite at every point, i.e. locally quasi-finite [lem-weil-pbc-unramified-quasi-finite-at-points]. Since $f$ is moreover quasi-compact, it is quasi-finite [pqf-lem-qf-locqf-qc]. Together with the hypothesis that $f$ is separated, $f$ is flat, locally of finite presentation, separated and quasi-finite.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemmas Tag 02GR (etale is locally of finite presentation), 02GS (etale is flat), 03WS (etale is locally quasi-finite), 01TJ (quasi-finite = locally quasi-finite + quasi-compact); applied as in Etale Cohomology Lemma 03S9, proof, first sentence"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-fp-qf-stratification] to $f$: there are closed subsets $\\emptyset=Z_{-1}\\subseteq Z_0\\subseteq Z_1\\subseteq\\cdots\\subseteq Y$ such that $Y_r:=Z_r\\setminus Z_{r-1}$ ($r\\ge0$) are pairwise disjoint with union $Y$, for every morphism $g:T\\to Y$ the projection $V\\times_YT\\to T$ is finite locally free of degree $r$ if and only if $g(T)\\subseteq Y_r$, and every inclusion $Y_r\\to Y$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), statement"
+   }
+  },
+  {
+   "text": "Only finitely many $Y_r$ are nonempty. Since $f$ is quasi-compact and $Y$ is quasi-compact, $V$ is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence] (2). As $f$ is locally quasi-finite (step 1), [lem-weil-pbc-lqf-qc-source-bounded-fibres] gives an integer $n$ such that every fibre $V_y=V\\times_Y\\operatorname{Spec}\\kappa(y)$ is a finite $\\kappa(y)$-scheme with $\\dim_{\\kappa(y)}\\Gamma(V_y,\\mathcal O_{V_y})\\le n$. If $y\\in Y_r$, apply the universal property of step 2 to $g:T=\\operatorname{Spec}\\kappa(y)\\to Y$, whose image $\\{y\\}$ lies in $Y_r$: then $V_y\\to\\operatorname{Spec}\\kappa(y)$ is finite locally free of degree $r$, so by [def-pc-finite-locally-free] (fibre over the unique point of $\\operatorname{Spec}\\kappa(y)$, which is $V_y$ itself) $r=\\dim_{\\kappa(y)}\\Gamma(V_y,\\mathcal O_{V_y})\\le n$. Hence $Y_r=\\emptyset$ for $r>n$, $Z_n=Y$, and $Y=Y_0\\sqcup\\cdots\\sqcup Y_n$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "def-pc-finite-locally-free",
+    "def-weil-residue-field",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RZ, proof, first paragraph (fibres universally bounded by Morphisms Lemma 03JA), and the universal property applied to the points Spec kappa(y)"
+   }
+  },
+  {
+   "text": "Each $Y_r$ is locally closed and constructible. Since $Y$ is quasi-compact and $Y_r\\to Y$ is quasi-compact (step 2), $Y_r=Y_r\\cap Y$ is quasi-compact. For $-1\\le r\\le n$ put $U_r:=Y\\setminus Z_r=Y_{r+1}\\cup\\cdots\\cup Y_n$ (so $U_{-1}=Y$, $U_n=\\emptyset$): it is open, as $Z_r$ is closed, and quasi-compact, as a finite union of quasi-compact subsets. The underlying space of the qcqs scheme $Y$ is spectral [lem-weil-pbc-qcqs-scheme-spectral], so every $U_r$ is a retrocompact open subset [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact]. Then $Y_r=U_{r-1}\\cap(Y\\setminus U_r)$ is of the form $U\\cap(Y\\setminus U')$ with $U,U'$ open and retrocompact, hence constructible by [def-weil-constructible-subset]; it is the intersection of the open $U_{r-1}$ with the closed $Z_r$, hence locally closed [def-weil-locally-closed-subset], and closed in $U_{r-1}$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "def-weil-constructible-subset",
+    "def-weil-locally-closed-subset",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RZ, statement (Moreover-part: the inclusions S_r -> S are quasi-compact) and proof, second paragraph ('elementary topology'); constructibility by Topology Lemma Tag 005H's definition of constructible sets"
+   }
+  },
+  {
+   "text": "Give each $Y_r$ a subscheme structure: $Y_r$ is a closed subset of the open subscheme $U_{r-1}\\subseteq Y$ (step 4), so by [lem-weil-pbc-closed-subset-closed-subscheme] there is a closed immersion $Y_r\\to U_{r-1}$ with image $Y_r$ (for instance the reduced induced structure); composed with the open immersion $U_{r-1}\\to Y$ [def-weil-open-immersion] it is an immersion $i_r:Y_r\\to Y$ with image $Y_r$ [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), statement ('partition by constructible locally closed subschemes'); the subscheme structure is the step the source leaves implicit"
+   }
+  },
+  {
+   "text": "For each $r\\le n$ apply the universal property of step 2 to $g=i_r:T=Y_r\\to Y$, whose image is $Y_r$: the projection $V\\times_YY_r\\to Y_r$ is finite locally free of degree $r$, in particular finite [def-pc-finite-locally-free]. It is etale as a base change of the etale morphism $f$ [lem-weil-pbc-etale-scheme-base-change]. Hence it is finite etale [def-weil-pbc-finite-etale-category], and $Y=Y_0\\sqcup\\cdots\\sqcup Y_n$ (step 3) is the required finite partition by constructible locally closed subschemes (steps 4 and 5).",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9, proof, first sentence ('If U -> X is separated, then this is More on Morphisms, Lemma 07RZ'), with Morphisms Lemma Tag 02GO (base change of etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-qf-locqf-qc",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "def-pc-finite-locally-free",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-constructible-subset",
+  "def-weil-locally-closed-subset",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf) with its proof, as used in Etale Cohomology Lemma Tag 03S9 (etale-cohomology.tex, line 12034), proof, first sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +170,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-separated-stratified-finite",
+  "worker": "stage1",
+  "summary": "The statement lacked a quasi-compactness hypothesis: Stacks 07RZ needs f quasi-finite (= locally quasi-finite + quasi-compact), and without it the statement is false (V = infinitely many disjoint copies of Y = Spec k over Y: separated etale, no nonempty stratum over which V is finite). Added 'f quasi-compact' (equivalently V quasi-compact, Y being qcqs), which holds in every application in the citer lem-weil-pbc-etale-stratified-finite (U qcqs over qcqs X, and base changes of quasi-compact morphisms). Also made the subscheme structure explicit (immersion with image Y_r) and added the locally-closed-subset definition to stmt_deps. Proof in six steps: etale => flat, lfp, locally quasi-finite, hence quasi-finite; Stacks 07RZ (new unsplit node); finitely many strata via universally bounded fibres (Stacks 03JA, new unsplit node) and the universal property at points; constructibility and local closedness of the strata from quasi-compactness of the inclusions and the spectral topology of Y; reduced/closed subscheme structure; finite (finite locally free) and etale (base change, new Mathlib leaf 02GO = Etale.etale_isStableUnderBaseChange). Tags verified against tags/tags."
+ },
+ "tool_uses": [
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "lead_note": "Off-route tool use recorded by L (2026-10-10): pqf-lem-qf-locqf-qc (Morphisms 01TJ, quasi-finite iff locally quasi-finite and quasi-compact; unit sk-prop-nagata-sketch-zmt) in step 1, as a black box. The statement delivered by F1 lacked quasi-compactness of f and was false (infinitely many copies of Spec k); the worker added the hypothesis; the citer lem-weil-pbc-etale-stratified-finite applies it only to quasi-compact morphisms.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Six steps: etale gives flat, lfp, unramified hence locally quasi-finite, with quasi-compactness quasi-finite (01TJ tool); 07RZ as a new unsplit node stated faithfully (checked against more-morphisms.tex); finitely many nonempty strata by universally bounded fibres (new unsplit 03JA node) and the universal property at Spec kappa(y); strata constructible via retrocompact opens of the spectral space Y; subscheme structure; finite locally free + etale base change (new leaf etale_isStableUnderBaseChange Etale.lean:74 verified) = finite etale. Statement corrected: f quasi-compact added (the delivered statement was false). Correct."
+ }
 }
