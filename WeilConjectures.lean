@@ -925,6 +925,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
+public import WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE

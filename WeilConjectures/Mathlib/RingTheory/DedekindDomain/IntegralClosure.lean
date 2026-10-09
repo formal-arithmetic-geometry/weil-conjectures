@@ -36,6 +36,8 @@ and integrally closed, the separable case applies.
 - `Algebra.FiniteType.finite_integralClosure`: Noether's finiteness theorem.
 - `Algebra.FiniteType.finite_integralClosure_of_forall_eq_div`: the variant for an algebra map
   `A → L` to a field whose image generates `L` as a field.
+- `isIntegrallyClosed_of_isLocalization_away`: if one denominator `b` clears the integral closure
+  of `A` in its fraction field, then `A[1/b]` is integrally closed.
 -/
 
 @[expose] public section
@@ -368,3 +370,54 @@ theorem Algebra.FiniteType.finite_integralClosure_of_forall_eq_div (k : Type*) {
       map_add' _ _ := rfl
       map_smul' _ _ := rfl }
   exact Module.Finite.of_injective φ fun x y h ↦ Subtype.ext congr($h.1)
+
+open scoped nonZeroDivisors
+
+/-- If the integral closure of a domain `A` in its fraction field `K` is a finite `A`-module, then
+a single nonzero denominator `b` clears all its elements. -/
+theorem exists_isInteger_smul_of_finite_integralClosure {A K : Type*} [CommRing A] [IsDomain A]
+    [Field K] [Algebra A K] [IsFractionRing A K] [Module.Finite A (integralClosure A K)] :
+    ∃ b ∈ A⁰, ∀ x : K, IsIntegral A x → IsLocalization.IsInteger A (b • x) := by
+  classical
+  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := A) (M := integralClosure A K)
+  obtain ⟨⟨b, hb⟩, hbs⟩ := IsLocalization.exist_integer_multiples_of_finset A⁰
+    (s.image fun c : integralClosure A K ↦ (c : K))
+  refine ⟨b, hb, fun x hx ↦ ?_⟩
+  have hmem : (⟨x, hx⟩ : integralClosure A K) ∈ Submodule.span A (s : Set _) := hs ▸ trivial
+  have key : ∀ c ∈ Submodule.span A (s : Set (integralClosure A K)),
+      IsLocalization.IsInteger A (b • (c : K)) := by
+    intro c hc
+    induction hc using Submodule.span_induction with
+    | mem c hc => exact hbs _ (Finset.mem_image_of_mem _ hc)
+    | zero => exact ⟨0, by simp⟩
+    | add c d _ _ hc hd =>
+      obtain ⟨u, hu⟩ := hc; obtain ⟨v, hv⟩ := hd
+      exact ⟨u + v, by simp [hu, hv, smul_add]⟩
+    | smul a c _ hc =>
+      obtain ⟨u, hu⟩ := hc
+      refine ⟨a * u, ?_⟩
+      rw [map_mul, hu, Subalgebra.coe_smul, smul_comm, Algebra.smul_def a]
+  exact key _ hmem
+
+/-- If `b ≠ 0` clears the denominators of all elements of `K = Frac A` integral over `A`, then
+the localization `A[1/b]` is integrally closed. -/
+theorem isIntegrallyClosed_of_isLocalization_away {A K R : Type*} [CommRing A] [IsDomain A]
+    [Field K] [Algebra A K] [IsFractionRing A K] [CommRing R] [Algebra A R] [Algebra R K]
+    [IsScalarTower A R K] [IsFractionRing R K] {b : A} (hb : b ≠ 0) [IsLocalization.Away b R]
+    (h : ∀ x : K, IsIntegral A x → IsLocalization.IsInteger A (b • x)) :
+    IsIntegrallyClosed R := by
+  rw [isIntegrallyClosed_iff K]
+  intro x hx
+  obtain ⟨⟨_, n, rfl⟩, hm⟩ :=
+    IsIntegral.exists_multiple_integral_of_isLocalization (Submonoid.powers b) x hx
+  obtain ⟨a, ha⟩ := h _ hm
+  have hb' : algebraMap A K b ≠ 0 := (map_ne_zero_iff _ (IsFractionRing.injective A K)).mpr hb
+  refine ⟨IsLocalization.mk' R a (⟨b ^ (n + 1), n + 1, rfl⟩ : Submonoid.powers b), ?_⟩
+  have hspec := congr(algebraMap R K $(IsLocalization.mk'_spec R a
+    (⟨b ^ (n + 1), n + 1, rfl⟩ : Submonoid.powers b)))
+  simp only [map_mul, ← IsScalarTower.algebraMap_apply] at hspec
+  rw [ha] at hspec
+  simp only [Submonoid.smul_def, Algebra.smul_def, map_pow] at hspec
+  apply mul_right_cancel₀ (pow_ne_zero (n + 1) hb')
+  rw [hspec]
+  ring
