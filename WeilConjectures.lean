@@ -158,6 +158,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceEqualizer
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRefine
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSection
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
