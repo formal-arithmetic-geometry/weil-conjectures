@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-etale-local-ring-triples",
+ "kind": "statement",
+ "title": "The etale local ring at a geometric point as a colimit over etale algebras with a point",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $\\bar x:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point] lying over $y\\in Y$, and let $\\kappa(\\bar x)\\subset\\Omega$ be the separable algebraic closure [def-weil-pbc-relative-separable-closure] of the residue field $\\kappa(y)$ [def-weil-residue-field] in $\\Omega$ (with $\\kappa(y)\\to\\Omega$ given by $\\bar x$). Let $U=\\operatorname{Spec}A\\subset Y$ be an affine open containing $y$ and $\\mathfrak p\\subset A$ the prime ideal of $y$, so that $\\kappa(\\mathfrak p)=\\kappa(y)$. Let $\\mathcal N$ be the category of affine pointed etale neighbourhoods $(V=\\operatorname{Spec}A_V,\\bar v)$ of $\\bar x$ [def-weil-pbc-pointed-etale-neighbourhoods] (a morphism $(V',\\bar v')\\to(V,\\bar v)$ is a $Y$-morphism $V'\\to V$ carrying $\\bar v'$ to $\\bar v$), and let $\\mathcal T$ be the category of triples $(B,\\mathfrak q,\\phi)$ where $A\\to B$ is a ring map with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism], $\\mathfrak q\\subset B$ is a prime lying over $\\mathfrak p$, and $\\phi:\\kappa(\\mathfrak q)\\to\\kappa(\\bar x)$ is a homomorphism of $\\kappa(\\mathfrak p)$-algebras; a morphism $(B,\\mathfrak q,\\phi)\\to(B',\\mathfrak q',\\phi')$ is an $A$-algebra map $\\beta:B\\to B'$ with $\\beta^{-1}(\\mathfrak q')=\\mathfrak q$ and $\\phi'\\circ\\kappa(\\beta)=\\phi$. Then:\\n\\n1. $\\mathcal N$ is cofiltered: it is nonempty, any two objects receive morphisms from a common object, and any two parallel morphisms $V'\\rightrightarrows V$ are equalized by a morphism $V''\\to V'$.\\n2. The full subcategory $\\mathcal N_U\\subset\\mathcal N$ of those $(V,\\bar v)$ for which $V\\to Y$ factors through $U$ is initial: every object of $\\mathcal N$ receives a morphism from an object of $\\mathcal N_U$. Hence the colimit $\\varinjlim_{(V,\\bar v)\\in\\mathcal N}A_V$ [def-weil-pbc-category-colimit] is canonically the colimit over $\\mathcal N_U$.\\n3. For $(V=\\operatorname{Spec}B,\\bar v)$ in $\\mathcal N_U$ let $v\\in V$ be the image of $\\bar v$, $\\mathfrak q_v\\subset B$ its prime, and $\\phi_v:\\kappa(\\mathfrak q_v)\\to\\Omega$ the field homomorphism corresponding to $\\bar v$ [def-weil-geometric-point]. Then $\\phi_v$ is a $\\kappa(\\mathfrak p)$-algebra map with image in $\\kappa(\\bar x)$, and $(V,\\bar v)\\mapsto(B,\\mathfrak q_v,\\phi_v)$ is an equivalence of $\\mathcal N_U$ with the opposite of $\\mathcal T$. Consequently $\\varinjlim_{\\mathcal N}A_V=\\varinjlim_{(B,\\mathfrak q,\\phi)\\in\\mathcal T}B$ canonically, compatibly with the maps from each $A_V$, $(V,\\bar v)\\in\\mathcal N_U$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03PQ (lemma-cofinal-etale) for (1); Remark Tag 04HT (remark-etale-neighbourhoods: $\\kappa(u)/\\kappa(s)$ is finite separable for an etale neighbourhood) and the proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph (cofinal system of affine neighbourhoods over $\\operatorname{Spec}(A)$ and the translation into triples $(B,\\mathfrak q,\\phi)$), for (2) and (3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-residue-field",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of étale neighborhoods of a point of a scheme is cofiltered, affine étale neighborhoods are cofinal",
+   "results": "CategoryTheory.GrothendieckTopology.Point.isCofiltered (Mathlib.CategoryTheory.Sites.Point.Basic); AlgebraicGeometry.Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); AffineTransitionLimit lemmas; nothing on the structure sheaf stalk or triples",
+   "date": "2026-10-09",
+   "verdict": "no match (part (1) only, as cofilteredness of the elements of a point's fibre functor)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of the structure sheaf at a geometric point in the etale topology, colimit over etale neighbourhoods",
+   "results": "TopCat.Presheaf.stalk, germ, stalkFunctor (Mathlib.Topology.Sheaves.Stalks); LocallyRingedSpace stalks; Zariski stalks only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of pointed étale neighbourhoods of a geometric point of a scheme is cofiltered; affine neighbourhoods are cofinal",
+   "results": "AlgebraicGeometry.exists_map_eq_top, Scheme.exists_isAffine_of_isLimit, exists_isAffineOpen_preimage_eq (Mathlib.AlgebraicGeometry.AffineTransitionLimit); no étale neighbourhood category",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": "pointSmallEtale, pointSmallEtale_fiber, isConservative_pointSmallEtale, pointSmallEtaleFiberObjToPreimage(_surjective) (Mathlib.AlgebraicGeometry.Sites.EtalePoint): the point of the small étale site defined by Spec Ω → S, Ω separably closed; its fibre's category of elements (the pointed étale neighbourhoods) is cofiltered (EtalePoint.lean:56 instance) and initially small through affine étale objects; no description of the stalk of the structure sheaf",
+   "date": "2026-10-09",
+   "verdict": "no match (partial: part (1) for all, not only affine, neighbourhoods)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'etale neighbo|étale neighbo|EtaleNeighbo|stacks 03PQ|stacks 04HX' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "results": "RingTheory/Etale/QuasiFinite.lean:15,602 (etale neighbourhoods splitting fibres of finite algebras, a different statement); EtalePoint.lean as above; no tag 03PQ/04HX",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-henselization-functoriality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

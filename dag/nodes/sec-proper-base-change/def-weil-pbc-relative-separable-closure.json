@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-pbc-relative-separable-closure",
+ "kind": "definition",
+ "title": "Separable algebraic closure of a field inside an extension",
+ "statement": "Let $F\\to E$ be a homomorphism of fields, making $E$ an extension of $F$. The *separable algebraic closure of $F$ in $E$* is the set of elements of $E$ that are separable algebraic over $F$ (roots of a separable polynomial with coefficients in $F$); it is a subfield of $E$ containing the image of $F$, and it is algebraic and separable over $F$. If $E$ is separably closed [def-pc-separably-closed] (for instance algebraically closed), then the separable algebraic closure of $F$ in $E$ is separably closed, hence a separable closure of $F$ (a separably closed field, separable algebraic over $F$).",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Lemma Tag 09HC (lemma-separable-elements: the elements of $E$ separable over $k$ form a subextension) and Lemma Tag 09HB (lemma-separable-permanence: separable algebraic over separable algebraic is separable algebraic, which gives that the subextension is separably closed when $E$ is); used with $E=\\Omega$ algebraically closed in etale-cohomology.tex Lemma Tag 04HX ('the separable algebraic closure of $\\kappa$ in $\\kappa(\\overline{s})$')"
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separable closure of a field inside an algebraically closed extension is separably closed",
+   "results": "separableClosure.isSepClosure, separableClosure (Mathlib.FieldTheory.SeparableClosure); SeparableClosure.isSepClosed, IsSepClosure, IsSepClosed (Mathlib.FieldTheory.IsSepClosed)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative separable closure of F in E is a separable closure when E is separably closed",
+   "results": "separableClosure.isSepClosure, isSepClosure_iff, IsSepClosure.sep_closed, IsSepClosed.separableClosure_eq_bot_iff, SeparableClosure.isSepClosed",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "separableClosure, IsSepClosure",
+   "results": "separableClosure.isSepClosure (Mathlib.FieldTheory.IsSepClosed)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def separableClosure\\|separableClosure.isSepClosure\\|IsSepClosed.of_isAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/SeparableClosure.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "SeparableClosure.lean:83 `def separableClosure : IntermediateField F E` (@[stacks 09HC], carrier {x | IsSeparable F x}); IsSepClosed.lean:341 `instance separableClosure.isSepClosure [IsSepClosed E] : IsSepClosure F (separableClosure F E)`; IsSepClosed.lean:70 `instance IsSepClosed.of_isAlgClosed [IsAlgClosed k] : IsSepClosed k`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "separableClosure",
+  "file": "Mathlib/FieldTheory/SeparableClosure.lean",
+  "how": "exact: `separableClosure F E` (line 83) is the intermediate field of elements of E separable over F (`mem_separableClosure_iff`, line 94); for `[IsSepClosed E]` the instance `separableClosure.isSepClosure` (Mathlib/FieldTheory/IsSepClosed.lean:341) says it is an `IsSepClosure F`, i.e. separably closed and separable algebraic over F (`isSepClosure_iff`); an algebraically closed E is separably closed by `IsSepClosed.of_isAlgClosed` (IsSepClosed.lean:70)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-henselization-functoriality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

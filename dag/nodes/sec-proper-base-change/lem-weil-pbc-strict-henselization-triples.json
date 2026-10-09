@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-triples",
+ "kind": "statement",
+ "title": "The colimit over etale algebras with a point and a residue embedding is strictly henselian",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal with residue field $\\kappa(\\mathfrak p)$, and $K$ a separable closure of $\\kappa(\\mathfrak p)$: a field with a $\\kappa(\\mathfrak p)$-embedding $\\kappa(\\mathfrak p)\\to K$ such that $K$ is separably closed [def-pc-separably-closed] and every element of $K$ is separable algebraic over $\\kappa(\\mathfrak p)$. Let $\\mathcal T$ be the category of triples $(S,\\mathfrak q,\\phi)$ with $R\\to S$ a ring map such that $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism], $\\mathfrak q\\subset S$ a prime lying over $\\mathfrak p$, and $\\phi:\\kappa(\\mathfrak q)\\to K$ a $\\kappa(\\mathfrak p)$-algebra map; a morphism $(S,\\mathfrak q,\\phi)\\to(S',\\mathfrak q',\\phi')$ is an $R$-algebra map $\\beta:S\\to S'$ with $\\beta^{-1}(\\mathfrak q')=\\mathfrak q$ and $\\phi'\\circ\\kappa(\\beta)=\\phi$. Then:\\n\\n1. $\\mathcal T$ is filtered; let $C=\\varinjlim_{(S,\\mathfrak q,\\phi)\\in\\mathcal T}S$ [def-weil-pbc-category-colimit], an $R$-algebra which is a filtered colimit of etale $R$-algebras.\\n2. The maps $S\\to S/\\mathfrak q\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}K$ are compatible and define a surjective ring map $\\psi:C\\to K$; $C$ is a local ring with maximal ideal $\\mathfrak m_C=\\ker\\psi=\\mathfrak pC$, so $\\psi$ induces an isomorphism of $\\kappa(\\mathfrak p)$-algebras $C/\\mathfrak m_C\\cong K$; and the preimage of $\\mathfrak m_C$ in $R$ is $\\mathfrak p$.\\n3. $C$ is strictly henselian [def-weil-pbc-henselian-terminology]: henselian, with separably closed residue field $C/\\mathfrak m_C\\cong K$.\\n\\n($C$ is the strict henselization $(R_{\\mathfrak p})^{sh}$ of $R_{\\mathfrak p}$ with respect to $\\kappa(\\mathfrak p)\\subset K$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GW (lemma-strict-henselization-different) for (1) and the identification with $(R_{\\mathfrak p})^{sh}$; Lemma Tag 04GP (lemma-strict-henselization) items (2)-(5), whose proof is that of Lemma Tag 04GN (lemma-henselization) with triples, for (2) and (3)"
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization of a local ring is strictly henselian with separably closed residue field",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing, HenselianLocalRing.is_henselian, instHenselianRingMaximalIdeal (Mathlib.RingTheory.Henselian); IsSepClosure, IsSepClosed (Mathlib.FieldTheory.IsSepClosed); separableClosure; no (strict) henselization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of étale algebras over a ring with a prime ideal and residue field embedding is a strictly henselian local ring",
+   "results": "Algebra.IsEtaleAt(.comp) (Mathlib.RingTheory.Etale.Locus); CommRingCat.FilteredColimits.colimitCoconeIsColimit; HenselianLocalRing.toIsLocalRing; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (Mathlib.RingTheory.Etale.QuasiFinite); RingHom.Etale",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization of a local ring as a filtered colimit of étale algebras with a prime and an embedding of residue field into a separable closure",
+   "results": "Field.henselian, HenselianLocalRing.TFAE, HenselianLocalRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing (Mathlib.RingTheory.Henselian); Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.instFormallyUnramifiedResidueField",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, IsSepClosed",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"henselian\"",
+   "results": "HenselianLocalRing, Field.henselian, HenselianRing, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing.jac, HenselianLocalRing.is_henselian, HenselianLocalRing.mk, HenselianRing.is_henselian, HenselianRing.mk, HenselianLocalRing.TFAE (all Mathlib.RingTheory.Henselian); no henselization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'strict(ly)?[ _]?hensel|StrictHenselization|henselization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rlE 'HenselianLocalRing|HenselianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none for henselization; HenselianLocalRing/HenselianRing occur only in RingTheory/Henselian.lean",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-henselization-functoriality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
