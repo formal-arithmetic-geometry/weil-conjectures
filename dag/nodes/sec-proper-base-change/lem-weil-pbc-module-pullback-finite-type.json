@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-module-pullback-finite-type",
+ "kind": "statement",
+ "title": "The pullback of a finite type module is of finite type",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal G$ be an $\\mathcal O_Y$-module of finite type [pqf-def-coherent], i.e. every point of $Y$ has an open neighbourhood $V$ with a surjection $\\mathcal O_V^{\\oplus n}\\twoheadrightarrow\\mathcal G|_V$ for some $n\\ge0$. Then the pullback $f^*\\mathcal G$ [def-pc-module-pullback] is an $\\mathcal O_X$-module of finite type: every point of $X$ has an open neighbourhood $U$ with a surjection $\\mathcal O_U^{\\oplus n}\\twoheadrightarrow(f^*\\mathcal G)|_U$ (one may take $U=f^{-1}V$ and the same $n$ as for $\\mathcal G$ on $V$).",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Sheaves of Modules (modules.tex), Lemma 01B6 (lemma-pullback-finite-type), stated there for a morphism of ringed spaces; its proof uses that $f^*$ is right exact and commutes with direct sums (Lemma 01AJ, lemma-exactness-pushforward-pullback), $f^*\\mathcal O_Y=\\mathcal O_X$, and that pullback commutes with restriction to opens (argument of Lemma 01B3, lemma-pullback-locally-generated)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of a sheaf of modules of finite type is of finite type",
+   "results": "SheafOfModules.IsFiniteType.mk (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), SheafOfModules.pullback (…Sheaf.PullbackContinuous), SheafOfModules.pullbackObjFreeIso and its naturality lemmas (…Sheaf.PullbackFree), AlgebraicGeometry.Scheme.Modules.pullback (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no match: the finite-type predicate and the pullback exist, no lemma that pullback preserves IsFiniteType"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image (pullback) of a finite type sheaf of modules along a morphism of ringed spaces is of finite type",
+   "results": "Scheme.Modules.pullback, SheafOfModules.IsFiniteType, SheafOfModules.pullback, Scheme.Modules.pushforward, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (finite presentation implies finite type), finite-limit instances",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "SheafOfModules.IsFiniteType, IsFiniteType.exists_localGeneratorsData, IsFiniteType.mk, instIsFiniteTypeOfIsFinitePresentation (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators / .Quasicoherent): four declarations, none about pullback",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsFiniteType\\|isFiniteType' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (and the source repo WeilConjectures/)",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:95,137,142 (GeneratingSections.IsFiniteType, LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType), :178 instance (G.map F η).IsFiniteType for a colimit-preserving functor F with F(unit) ≅ unit (globally generated case only: GeneratingSections, not LocalGeneratorsData; nothing for SheafOfModules.IsFiniteType under pullback); Quasicoherent.lean:52-60,142-143,244-245,282 (presentations, finite presentation implies finite type); source repo: only Presentation.IsFinite instances, no finite-type pullback",
+   "date": "2026-10-10",
+   "verdict": "no match: the global-generators instance Generators.lean:178 plus SheafOfModules.pullbackObjFreeIso would give the globally generated case; the local case (restriction to an open cover commuting with pullback) is absent"
+  },
+  {
+   "tool": "local_search",
+   "query": "isFiniteType_pullback (project ~/weil-conjectures-slopmaster2)",
+   "results": "none, index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-support-pullback-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
