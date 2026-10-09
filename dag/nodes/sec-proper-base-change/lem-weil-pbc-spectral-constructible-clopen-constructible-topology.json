@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+ "kind": "statement",
+ "title": "Constructible subsets of a spectral space are open and closed in the constructible topology",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space] and let $E\\subseteq X$ be a constructible subset [def-weil-constructible-subset]. Then $E$ is both open and closed in the constructible topology of $X$ [def-weil-pbc-constructible-topology] (the topology on $X$ with subbase the quasi-compact open subsets of $X$ and their complements).",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Paragraph after Definition 08YG (definition-spectral-space), line 4290 ff.: 'since X is spectral an open U is retrocompact iff U is quasi-compact; hence the constructible topology can also be characterized as the coarsest topology such that every constructible subset of X is both open and closed'; with Lemma 005H (lemma-constructible, line 2571: constructible subsets form a Boolean algebra) and Lemma 0069 (lemma-topology-quasi-separated-scheme, line 5470, (2): a quasi-compact open is retrocompact)"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a constructible subset of a spectral space is clopen in the constructible topology",
+   "results": "PrimeSpectrum.isClopen_iff, Topology.IsConstructible, PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible, PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible, PrimeSpectrum.isConstructible_basicOpen",
+   "date": "2026-10-10",
+   "verdict": "no match (clopen in the Zariski topology, or Zariski-open/closed under stability hypotheses)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible set is open and closed in the constructible topology (patch topology)",
+   "results": "PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, Topology.IsConstructible.isLocallyConstructible, PrimeSpectrum.exists_constructibleSetData_iff, IsRetrocompact.isConstructible (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constructibleTopology",
+   "results": "IsCompact.isClopen_constructibleTopology_of_isOpen/_of_isClosed, IsCompact.isClosed_constructibleTopology_of_isOpen/_of_isClosed, constructibleTopology_eq_generateFrom_isConstructible [CompactSpace X] [QuasiSeparatedSpace X] : constructibleTopology X = generateFrom {s | IsConstructible s} (Mathlib.Topology.Spectral.ConstructibleTopology, in the newer Mathlib of the Loogle server)",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib: the Loogle server's newer Mathlib has constructibleTopology_eq_generateFrom_isConstructible, from which the statement follows (constructible sets open; closed as complements of constructible sets), but neither it nor the isClopen/isClosed lemmas exist in the pinned Mathlib (grep below)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isClopen\\|IsClopen\\|isClosed_constructibleTopology\\|generateFrom_isConstructible\\|IsConstructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/ConstructibleTopology.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "ConstructibleTopology.lean: only IsCompact.isOpen_constructibleTopology_of_isOpen (:60) and _of_isClosed (:65), no isClopen/isClosed/IsConstructible lemma; Constructible.lean:178 IsConstructible, :230 IsConstructible.empty_union_induction, :337 QuasiSeparatedSpace.isRetrocompact_iff_isCompact",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib; a short proof: induction IsConstructible.empty_union_induction with isRetrocompact_iff_isCompact and IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

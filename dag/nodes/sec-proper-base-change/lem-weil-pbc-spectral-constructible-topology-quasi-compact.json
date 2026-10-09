@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+ "kind": "statement",
+ "title": "The constructible topology of a spectral space is quasi-compact",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space]. Then $X$ endowed with its constructible topology [def-weil-pbc-constructible-topology] (the topology with subbase the quasi-compact open subsets of $X$ and their complements) is quasi-compact: every covering of $X$ by subsets that are open in the constructible topology has a finite subcovering.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Lemma 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), the quasi-compactness part"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the constructible topology of a spectral space is compact",
+   "results": "SpectralSpace.toCompactSpace, SpectralSpace.mk (Topology.Spectral.Basic), PrimeSpectrum.compactSpace, IsCompact.isConstructible",
+   "date": "2026-10-10",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the constructible topology on a spectral space is quasi-compact",
+   "results": "SpectralSpace.toQuasiSeparatedSpace, SpectralSpace.toPrespectralSpace, PrimeSpectrum.instPrespectralSpace, Topology.IsLocallyConstructible.isConstructible",
+   "date": "2026-10-10",
+   "verdict": "no direct hit (v4.28 snapshot predates the file)"
+  },
+  {
+   "tool": "loogle",
+   "query": "constructibleTopology",
+   "results": "compactSpace_withConstructibleTopology [CompactSpace X] [QuasiSober X] [PrespectralSpace X] [QuasiSeparatedSpace X] : CompactSpace (WithConstructibleTopology X) (Mathlib.Topology.Spectral.ConstructibleTopology)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 0901\\|compactSpace_withConstructibleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+   "results": "line 91 @[stacks 0901 \"quasi-compactness\"], line 92 instance compactSpace_withConstructibleTopology",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "compactSpace_withConstructibleTopology",
+  "file": "Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+  "line": 92,
+  "how": "specializes in one line: for X spectral (SpectralSpace X, Topology/Spectral/Basic.lean:38, the node def-weil-spectral-space) the instances CompactSpace X, QuasiSober X, PrespectralSpace X, QuasiSeparatedSpace X are the parent classes of SpectralSpace, so the instance gives CompactSpace (WithConstructibleTopology X), i.e. X with constructibleTopology X (def-weil-pbc-constructible-topology) is quasi-compact (Mathlib's CompactSpace has no Hausdorff condition). Tagged @[stacks 0901 \"quasi-compactness\"]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

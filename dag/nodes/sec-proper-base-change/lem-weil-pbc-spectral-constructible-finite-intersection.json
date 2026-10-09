@@ -11,9 +11,51 @@
   "def-weil-spectral-space",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T^{c}$ denote the set $T$ with its constructible topology [def-weil-pbc-constructible-topology]. Each $E_a$ is a constructible subset of the spectral space $T$, hence $E_a$ is closed (indeed open and closed) in $T^{c}$ [lem-weil-pbc-spectral-constructible-clopen-constructible-topology]. So $V_a=T\\setminus E_a$ is open in $T^{c}$ for every $a\\in A$.",
+   "uses": [
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-clopen-constructible-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "paragraph after Definition 08YG (definition-spectral-space), line 4290 ff.: every constructible subset is open and closed in the constructible topology"
+   }
+  },
+  {
+   "text": "The space $T^{c}$ is quasi-compact, because $T$ is spectral [lem-weil-pbc-spectral-constructible-topology-quasi-compact].",
+   "uses": [
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Lemma 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), quasi-compactness part"
+   }
+  },
+  {
+   "text": "Since $\\bigcap_{a\\in A}E_a=\\emptyset$, every point of $T$ lies outside some $E_a$, so $T=\\bigcup_{a\\in A}V_a$ is a covering of $T^{c}$ by open subsets (step 1). By quasi-compactness of $T^{c}$ (step 2) there is a finite subset $A_0\\subseteq A$ with $T=\\bigcup_{a\\in A_0}V_a$ (if $T=\\emptyset$, take $A_0=\\emptyset$; then $\\bigcap_{a\\in\\emptyset}E_a=T=\\emptyset$). Taking complements, $\\bigcap_{a\\in A_0}E_a=T\\setminus\\bigcup_{a\\in A_0}V_a=\\emptyset$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Definition 005A (definition-quasi-compact, line 1628): every open covering has a finite subcover; De Morgan"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Lemma 0901 (lemma-constructible-hausdorff-quasi-compact) and the paragraph before it (line 4290 ff.: constructible subsets are open and closed in the constructible topology); the finite-intersection consequence is the standard reformulation of quasi-compactness by closed sets, used in the proof of Etale Cohomology Lemma 095N"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,7 +111,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: finite intersection property of constructible sets in a spectral space (Topology 0901 with the closedness of constructible sets in the constructible topology); self-contained; correct; unsplit (Mathlib has compactSpace_withConstructibleTopology, ConstructibleTopology.lean:92, but not the closedness clause as one lemma)."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Three steps, three new nodes: def-weil-pbc-constructible-topology (Mathlib leaf: constructibleTopology, Spectral/ConstructibleTopology.lean:42, subbasis :36, verified), lem-weil-pbc-spectral-constructible-topology-quasi-compact (0901; compactSpace_withConstructibleTopology :92, verified; one-line specialization from the parent classes of SpectralSpace), lem-weil-pbc-spectral-constructible-clopen-constructible-topology (unsplit; constructible sets are clopen in the constructible topology, Stacks paragraph before 0901; not in the pinned Mathlib). The finite-intersection statement follows by compactness of the covering by the complements, with T empty handled."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Topology 0901 (topology-lemma-constructible-hausdorff-quasi-compact, verified in tags/tags) and the paragraph at line 4290 ff.; statement and stmt_deps kept. Proof in three steps: constructible sets are clopen in the constructible topology (new unsplit node lem-weil-pbc-spectral-constructible-clopen-constructible-topology; the pinned Mathlib lacks it, the Loogle server's newer Mathlib has constructibleTopology_eq_generateFrom_isConstructible), the constructible topology of a spectral space is quasi-compact (new Mathlib leaf lem-weil-pbc-spectral-constructible-topology-quasi-compact = compactSpace_withConstructibleTopology, ConstructibleTopology.lean:92, @[stacks 0901]), and the elementary complement/finite-subcover argument. New definition node def-weil-pbc-constructible-topology, Mathlib leaf constructibleTopology (ConstructibleTopology.lean:42). No Lean candidate in slopmaster2 (no use of constructibleTopology or a finite-intersection lemma for constructible sets)."
  }
 }
