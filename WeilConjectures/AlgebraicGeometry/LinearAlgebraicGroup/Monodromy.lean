@@ -129,7 +129,7 @@ closure `G` of a subgroup is a closed subgroup (`lem-wf-zariski-closure-subgroup
 
 @[expose] public section
 
-open scoped Matrix Pointwise
+open scoped Matrix Pointwise IsMulCommutative
 open Matrix.GeneralLinearGroup AlgebraicGeometry.GeneralLinearGroup
 
 namespace AlgebraicGeometry.Monodromy
@@ -888,20 +888,120 @@ theorem exists_mem_center_mul_mem_geometricMonodromy_eq (hD : D.IsSemisimple) {g
   have := D.isSemisimpleRepresentation_standardRepresentation_identityComponent hD
   sorry
 
+/-- The group theory behind `exists_isPositiveCentralPair`: let `H` be a subgroup of `Γ` containing
+the commutators and `G₀` a subgroup of finite index such that every element of `G₀` is a product
+`c h` with `c ∈ G₀` central in `G₀` and `h ∈ H`. Then for every `F` there are `N > 0` and a central
+`z ∈ Γ` with `z ∈ H Fᴺ`. Pass to the normal core `K` of `G₀`, of index `e`: then `Fᵉ = c h`, and
+`d = cᵉ` lies in the centre of `K`; the product `z` of the conjugates of `d` by representatives of
+`Γ ⧸ K` is central, and it is congruent to `F^(e³)` modulo the commutators and `H`. -/
+private theorem exists_pos_mem_center_mul_inv_mem {Γ : Type*} [Group Γ] (H G₀ : Subgroup Γ)
+    (hH : commutator Γ ≤ H) [G₀.FiniteIndex] (F : Γ)
+    (hfac : ∀ x ∈ G₀, ∃ c ∈ G₀, (∀ y ∈ G₀, c * y = y * c) ∧ ∃ h ∈ H, c * h = x) :
+    ∃ N : ℕ, 0 < N ∧ ∃ z ∈ Subgroup.center Γ, z * (F ^ N)⁻¹ ∈ H := by
+  classical
+  set K := G₀.normalCore
+  have : Finite (Γ ⧸ K) := Subgroup.finite_quotient_of_finiteIndex
+  let : Fintype (Γ ⧸ K) := Fintype.ofFinite _
+  set e := Nat.card (Γ ⧸ K)
+  have he : 0 < e := Nat.card_pos
+  have hpow (x : Γ) : x ^ e ∈ K := by
+    rw [← QuotientGroup.eq_one_iff, QuotientGroup.mk_pow]
+    exact pow_card_eq_one'
+  obtain ⟨c, hcG₀, hc, h, hhH, hch⟩ := hfac _ (G₀.normalCore_le (hpow F))
+  set d := c ^ e
+  have hdK : d ∈ K := hpow c
+  have hd (y : Γ) (hy : y ∈ K) : y * d = d * y :=
+    ((Commute.pow_left (hc y (G₀.normalCore_le hy)) e)).symm
+  let C : Subgroup Γ := Subgroup.centralizer (K : Set Γ) ⊓ K
+  have : IsMulCommutative C := ⟨⟨fun a b ↦ Subtype.ext
+    (Subgroup.mem_centralizer_iff.1 a.2.1 b b.2.2).symm⟩⟩
+  have hconj (g : Γ) {x : Γ} (hx : x ∈ C) : g * x * g⁻¹ ∈ C := by
+    refine ⟨Subgroup.mem_centralizer_iff.2 fun y hy ↦ ?_,
+      Subgroup.Normal.conj_mem inferInstance x hx.2 g⟩
+    have := Subgroup.mem_centralizer_iff.1 hx.1 (g⁻¹ * y * g)
+      (Subgroup.Normal.conj_mem' inferInstance y hy g)
+    calc y * (g * x * g⁻¹) = g * ((g⁻¹ * y * g) * x) * g⁻¹ := by group
+      _ = g * (x * (g⁻¹ * y * g)) * g⁻¹ := by rw [this]
+      _ = g * x * g⁻¹ * y := by group
+  have hdC : d ∈ C := ⟨Subgroup.mem_centralizer_iff.2 fun y hy ↦ hd y hy, hdK⟩
+  let f : Γ ⧸ K → C := fun q ↦ ⟨q.out * d * q.out⁻¹, hconj _ hdC⟩
+  have hf (g : Γ) : (f (QuotientGroup.mk g) : Γ) = g * d * g⁻¹ := by
+    obtain ⟨⟨y, hyK⟩, hy⟩ := QuotientGroup.mk_out_eq_mul K g
+    change (QuotientGroup.mk g : Γ ⧸ K).out * d * (QuotientGroup.mk g : Γ ⧸ K).out⁻¹ = _
+    rw [hy]
+    calc g * y * d * (g * y)⁻¹ = g * (y * d) * y⁻¹ * g⁻¹ := by group
+      _ = g * d * g⁻¹ := by rw [hd y hyK]; group
+  let z : C := ∏ q, f q
+  refine ⟨e * e * e, by positivity, z, Subgroup.mem_center_iff.2 fun g ↦ ?_, ?_⟩
+  · let φ : C →* C := ((MulAut.conj g).toMonoidHom.comp C.subtype).codRestrict C
+      fun x ↦ hconj g x.2
+    have hφ : φ z = z := by
+      rw [map_prod]
+      refine Fintype.prod_equiv (MulAction.toPerm g) _ _ fun q ↦ Subtype.ext ?_
+      induction q using QuotientGroup.induction_on with | H x => ?_
+      change g * (f x : Γ) * g⁻¹ = (f (QuotientGroup.mk (g * x)) : Γ)
+      rw [hf, hf]
+      group
+    have : g * (z : Γ) * g⁻¹ = z := congrArg Subtype.val hφ
+    calc g * (z : Γ) = g * z * g⁻¹ * g := by group
+      _ = z * g := by rw [this]
+  · let ψ : C →* Abelianization Γ := Abelianization.of.comp C.subtype
+    have hψ : Abelianization.of (z : Γ) = Abelianization.of d ^ e := by
+      change ψ z = _
+      rw [map_prod]
+      trans ∏ _q : Γ ⧸ K, Abelianization.of d
+      · refine Finset.prod_congr rfl fun q _ ↦ ?_
+        change Abelianization.of (q.out * d * q.out⁻¹) = _
+        rw [map_mul, map_mul, mul_comm, ← mul_assoc, ← map_mul, inv_mul_cancel, map_one, one_mul]
+      · rw [Finset.prod_const, Finset.card_univ, ← Nat.card_eq_fintype_card]
+    have hmem : z * (F ^ (e * e * e))⁻¹ * h ^ (e * e) ∈ commutator Γ := by
+      rw [← Abelianization.ker_of, MonoidHom.mem_ker, map_mul, map_mul, map_inv, hψ, pow_mul,
+        pow_mul, map_pow, map_pow, map_pow, ← hch, map_mul, mul_pow, map_pow, mul_pow, ← pow_mul,
+        ← pow_mul]
+      rw [mul_inv, mul_inv_cancel_left, inv_mul_cancel]
+    simpa using H.mul_mem (hH hmem) (H.inv_mem (H.pow_mem hhH (e * e)))
+
 /-- Every semisimple represented degree datum admits a positive central pair `(N, z)`.
 
-Proof sketch (not formalised): the component group `G(k) ⧸ G°(k)` is finite
-(`AlgebraicGeometry.GrpObj.finiteIndex_range_identityComponentι`), so some `m > 0` has
-`Fᵐ ∈ G°`; factor `Fᵐ = c h` with `c ∈ Z(G°)°` and `h ∈ H°` by
-`exists_mem_center_mul_mem_geometricMonodromy_eq`, and choose representatives `g₁, …, gᵣ` of the
-cosets of `G°` in `G`. Then `N = m r` and `z = ∏ gᵢ c gᵢ⁻¹` form a positive central pair: the
-factors `gᵢ c gᵢ⁻¹` lie in the abelian group `Z(G°)` and do not depend on the choice of
-representatives, so conjugation by `G`, which permutes the cosets, fixes `z`; and each factor lies
-in the coset `H Fᵐ` of `c` because the commutators of `G` lie in `H`, so `z ∈ H Fᵐʳ`.
+Proof: the component group `G(k) ⧸ G°(k)` is finite
+(`AlgebraicGeometry.GeneralLinearGroup.finiteIndex_subgroupOf_zeroLocus_identityComponent`), every
+element of `G°(k)` is a product `c h` with `c` central in `G°(k)` and `h ∈ H(k)`
+(`exists_mem_center_mul_mem_geometricMonodromy_eq`), and the commutators of `G(k)` lie in `H(k)`.
+The group theory is then `exists_pos_mem_center_mul_inv_mem`: with `K` the normal core of `G°(k)`
+in `G(k)`, of index `e`, factor `Fᵉ = c h`; then `cᵉ` is central in `K`, and the product of its
+conjugates by representatives of `G(k) ⧸ K` is central in `G(k)` and lies in `H Fᴺ` for
+`N = e³`.
 (blueprint: `sk-p-central`) -/
 theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
     ∃ (N : ℕ) (z : GL n k), D.IsPositiveCentralPair N z := by
-  sorry
+  have hG₀ : zeroLocus (identityComponent D.arithmeticMonodromy) k ≤
+      zeroLocus D.arithmeticMonodromy k :=
+    zeroLocus_anti (le_identityComponent _)
+  have hH := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k
+  have := finiteIndex_subgroupOf_zeroLocus_identityComponent D.arithmeticMonodromy
+  obtain ⟨N, hN, z, hz, hzF⟩ := exists_pos_mem_center_mul_inv_mem
+    ((zeroLocus D.geometricMonodromy k).subgroupOf (zeroLocus D.arithmeticMonodromy k))
+    ((zeroLocus (identityComponent D.arithmeticMonodromy) k).subgroupOf
+      (zeroLocus D.arithmeticMonodromy k))
+    (by
+      rw [commutator_def, Subgroup.commutator_le]
+      intro x _ y _
+      rw [Subgroup.mem_subgroupOf]
+      exact D.commutator_zeroLocus_le_zeroLocus_geometricMonodromy k
+        (Subgroup.commutator_mem_commutator x.2 y.2))
+    ⟨D.frobenius, D.rep_mem_zeroLocus_arithmeticMonodromy _⟩
+    (by
+      intro x hx
+      obtain ⟨c, hc, h, hh, hch⟩ := D.exists_mem_center_mul_mem_geometricMonodromy_eq hD hx
+      obtain ⟨hc₀, hcc⟩ := (mem_zeroLocus_center_iff _).1
+        (zeroLocus_anti (le_identityComponent _) hc)
+      refine ⟨⟨c, hG₀ hc₀⟩, hc₀, fun y hy ↦ Subtype.ext (hcc _ hy),
+        ⟨h, hH (zeroLocus_anti (le_identityComponent _) hh)⟩,
+        zeroLocus_anti (le_identityComponent _) hh, Subtype.ext hch⟩)
+  refine ⟨N, z, hN, (mem_centerPoints_iff _).2 ⟨z.2, fun g hg ↦ ?_⟩,
+    Set.mem_mul.2 ⟨_, hzF, _, rfl, ?_⟩⟩
+  · exact congrArg Subtype.val (Subgroup.mem_center_iff.1 hz ⟨g, hg⟩).symm
+  · simp
 
 end IsAlgClosed
 

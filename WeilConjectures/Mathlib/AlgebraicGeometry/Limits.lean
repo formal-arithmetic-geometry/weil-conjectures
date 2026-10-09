@@ -203,4 +203,17 @@ lemma Scheme.isEmpty_of_subsingleton_Γ (h : Subsingleton Γ(X, ⊤)) : IsEmpty 
     rw [map_zero, map_one] at this
     exact zero_ne_one this⟩
 
+open CategoryTheory Limits in
+/-- The ring of global functions on the terminal scheme `Spec ℤ` is a quotient of `ℤ`. -/
+lemma surjective_intCastRingHom_Γ_terminal :
+    Function.Surjective (Int.castRingHom Γ(⊤_ Scheme.{u}, ⊤)) := by
+  let e : Γ(⊤_ Scheme.{u}, ⊤) ≅ CommRingCat.of (ULift.{u} ℤ) :=
+    Scheme.Γ.mapIso (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).op ≪≫
+      Scheme.ΓSpecIso _
+  intro y
+  refine ⟨(e.hom y).down, e.commRingCatIsoToRingEquiv.injective ?_⟩
+  change e.hom _ = e.hom y
+  rw [eq_intCast, map_intCast]
+  rfl
+
 end AlgebraicGeometry
