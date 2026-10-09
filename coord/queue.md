@@ -6,11 +6,11 @@
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-torsion-assembly` | 1 | none |
 | `lem-sp-exact-functor-couple` | 2 | none |
 | `lem-sp-shift-identification` | 2 | none |
 | `lem-sp-truncation-couple-exact` | 2 | none |
 | `lem-weil-pbc-derived-functor-truncation-iso` | 2 | none |
+| `lem-weil-pbc-inverse-image-preserves-colimits` | 2 | none |
 | `lem-weil-pbc-truncation-couple-morphism` | 2 | none |
 | `lem-weil-pbc-truncation-triangle` | 2 | none |
 | `prop-weil-pbc-inverse-image-exact` | 2 | none |
@@ -92,25 +92,22 @@
 | `lem-weil-pbc-normal-constant-generic` | 1009 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-prime-factor-devissage` | 2002 | none |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
 | `lemma-weil-pbc-direct-image-filtered-colimit` | 2002 | none |
-| `lemma-weil-pbc-five-lemma-transfer` | 2002 | none |
-| `lemma-weil-pbc-prime-factor-induction` | 2002 | none |
 | `lemma-weil-pbc-property-iff-acyclicity` | 2002 | sorry_here |
-| `thm-weil-pbc-stein-inputs` | 2002 | none |
-| `def-weil-pbc-henselian-terminology` | 2003 | none |
-| `def-weil-pbc-stein-factorization` | 2003 | none |
+| `lem-weil-pbc-prime-factor-devissage` | 2003 | none |
 | `lem-weil-pbc-proper-immersion-closed` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
+| `lemma-weil-pbc-five-lemma-transfer` | 2003 | none |
 | `lemma-weil-pbc-prime-torsion-devissage` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | none |
-| `lemma-weil-pbc-spectral-restriction` | 2003 | none |
 | `def-weil-pbc-etale-sum-extension` | 2004 | none |
+| `def-weil-pbc-henselian-terminology` | 2004 | none |
 | `def-weil-pbc-strict-henselian-setup` | 2004 | none |
 | `lem-sp-right-adjoint-preserves-injectives` | 2004 | none |
 | `lem-weil-pbc-etale-restriction-injectives` | 2004 | none |
 | `lemma-weil-pbc-etale-degree-zero` | 2004 | none |
+| `lemma-weil-pbc-prime-factor-induction` | 2004 | none |
 | `lemma-weil-pbc-proper-strict-henselian-h0` | 2004 | none |
 | `prop-weil-pbc-cohomology-resolution-independent` | 2004 | none |
 | `thm-sp-grothendieck-base-change` | 2004 | none |
@@ -122,20 +119,21 @@
 | `lemma-weil-pbc-finite-pullback-descent` | 2005 | none |
 | `lemma-weil-pbc-finite-pullback-identity` | 2005 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2005 | none |
+| `lemma-weil-pbc-spectral-restriction` | 2005 | none |
 | `lemma-weil-pbc-stein-connectedness` | 2005 | none |
 | `thm-sc-proper-cohomology` | 2005 | none |
+| `def-weil-pbc-stein-factorization` | 2006 | none |
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
+| `thm-weil-pbc-stein-inputs` | 2006 | none |
 | `lem-sp-grothendieck-edge-maps` | 2008 | none |
 | `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-direct-image` | 3002 | none |
 | `def-weil-pbc-geometric-stalks` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-kinjective-resolutions` | 3002 | none |
-| `lemma-weil-pbc-torsion-filtered-union` | 3002 | none |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 3003 | none |
-| `lem-weil-pbc-etale-finite-data-descent` | 3003 | none |
-| `lem-weil-pbc-etale-section-continuity` | 3003 | none |
 | `lemma-weil-pbc-leray-acyclicity` | 3003 | none |
+| `lemma-weil-pbc-torsion-filtered-union` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3003 | none |
 | `def-weil-pbc-etale-cohomology` | 3004 | none |
@@ -155,6 +153,7 @@
 | `def-weil-pbc-curve-setting` | 3005 | none |
 | `lem-fet-locally-trivial` | 3005 | none |
 | `lem-galois-descent` | 3005 | none |
+| `lem-weil-pbc-etale-section-continuity` | 3005 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3005 | none |
@@ -172,6 +171,7 @@
 | `lem-sc-kummer-les` | 3006 | none |
 | `lem-sc-morphism-from-function` | 3006 | none |
 | `lem-sc-primitive-root` | 3006 | none |
+| `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
 | `thm-av-final` | 3006 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3006 | rests_on_sorry |
 | `def-pc-smooth-projective-curve` | 3007 | none |
@@ -391,6 +391,7 @@
 | `def-sp-truncation-couple` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
+| `pqf-lem-proper-basic` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
 | `def-sp-abelian` | 6003 | none |
 | `def-sp-grothendieck-abelian` | 6003 | none |
@@ -426,7 +427,6 @@
 | `pqf-lem-leray` | 6008 | none |
 | `pqf-lem-leray-lowdegree` | 6008 | none |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
-| `pqf-lem-proper-basic` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
 | `pqf-lem-qf-finitefibres` | 6008 | none |
 | `pqf-lem-serre-criterion` | 6008 | none |
@@ -577,7 +577,7 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 575 nodes that wait for stage 1, 24 nodes that wait for a statement dependency.
+Not open yet: 575 nodes that wait for stage 1, 25 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
