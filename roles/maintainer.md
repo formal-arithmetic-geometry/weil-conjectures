@@ -69,3 +69,16 @@ When a decision needs the human, write it under "Open" in `coord/HUMAN.md`, with
 The three stages are three kinds of work on a node, and they overlap. A node is stated as soon as stage 1 has split it and the nodes its statement needs are stated; a module is proved as soon as the targets are stated, so that `TargetsCheck.lean` exists, and the nodes its proof uses are stated. Which stage a node is in follows from its own state (§1 of each stage document), never from a calendar, and the order of the dependencies is never overridden: stage 1 runs from the targets downward, stage 2 from Mathlib upward, stage 3 from the targets downward. So stage 2 opens with the first node that can be stated and stage 3 with the first module that can be proved, while stage 1 may still be splitting elsewhere. A queue that states nodes from the targets downward, or states a node before stage 1 is finished with it, hands out items that cannot compile and stops every worker.
 
 `coord/STATE.md` lists the stages that have open or waiting items; keep it current. Every stage document ends with "Finished when". In every cycle, check it for each open stage; when it holds, record it in `coord/ledger.md` and remove the stage from `coord/STATE.md`. When stage 3 is finished the project is complete: record it in both files, and stop.
+
+## 7. Deliveries of groups on other machines
+
+A group on another machine (`roles/remote-lead.md`) claims on the server and pushes each item as a branch `refs/heads/deliver/<group>/<item>` of this repository; the server accepts pushes to those branches only (`tools/install_hooks.sh`). Look for them after each of your own reviews and at least every ten minutes (`tools/merge_delivery.py list`); their deliveries do not wait behind your own workers. For each branch, `tools/merge_delivery.py <group> <item>` does, in this order, and stops at the first failure:
+
+1. the base: the branch is based on `sheaf-dag` (its merge base is an ancestor of `sheaf-dag`) and not far behind it;
+2. the files: it changes only the item's node, new node files created by the item, the `realized` fields of the item's unit record, and `coord/reports/<group>/<item>.md`;
+3. the cherry-pick of its commits onto `sheaf-dag` (a conflict goes back to the group: pull, rebase, push again);
+4. the checks on the result: `tools/review_split.py <item>`, `tools/check_dag.py` (with the unit check), and that the report carries the group's own review;
+5. `reviewed` on the item with the group recorded (`{"date", "by": "L", "group": "<group>", "result": "pass"}`), the claim closed (`claim.py done <group> <item>`), the branch deleted, a ledger line, one commit.
+
+Review the mathematics yourself for one or two items of each batch of the group (`--spot`: the tool prints the delivery for reading and does not merge until told), and record the spot check in the ledger. What fails or is rejected is returned with `tools/merge_delivery.py return <group> <item> "<reasons>"`: the reasons go into `coord/returns/<group>.md`, the claim stays with the group, the branch stays until the group pushes again. Stale claims of a group that went silent: a claim not renewed for `SHEAF_CLAIM_TTL` hours (6) expires; `tools/claim.py expire` releases every expired claim and you run it in each cycle (§4), so an item of a silent group returns to the queue after at most 6 hours.
+

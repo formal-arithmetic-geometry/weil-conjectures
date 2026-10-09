@@ -11,6 +11,7 @@ Your first prompt says who you are and which role document is yours.
 | the maintainer | the launcher | [`roles/maintainer.md`](roles/maintainer.md) |
 | the lead of a group | the launcher | [`roles/lead.md`](roles/lead.md) |
 | a worker on one item | a lead, as a sub-agent | [`roles/worker.md`](roles/worker.md) |
+| the lead of a group on another machine | the human, with the group name and the server login | [`roles/remote-lead.md`](roles/remote-lead.md), after `roles/lead.md` |
 
 A worker is started by its lead as a separate agent (in Claude Code, a sub-agent of the `Agent` tool) with the lead's brief as its whole prompt; in any other agent system, any separately started agent given that brief and its item is the worker. `SETUP.md` ("The machine") records what this run used and the equivalents.
 
@@ -33,6 +34,7 @@ dag/nodes/                   the DAG, one JSON file per node; dag/units/ and dag
                              as records (stages/1-dag.md §6); dag/notes/ the remarks and section texts of the import
 lean/                        the Lean project; group sandboxes in lean/.sandbox/<group>/
 coord/                       what the agents and the human tell each other: STATE.md, HUMAN.md, ledger.md,
+                             reports/<group>/ and returns/<group>.md (deliveries of groups on other machines),
                              targets-review.md, the queue, claims, changes, settings
 local/                       what this machine builds for itself; not committed, except the compressed sorry maps
 ```
@@ -68,3 +70,8 @@ So the target statements change only on the human's instruction. A change to a d
 ## 6. When the process fails
 
 The process of this project is what lets many agents work on one library. When you notice something going against it, a rule that does not fit, a tool that misbehaves, an agent working around the contract, handle it at once if it is yours to handle; otherwise report it upward: a worker to the agent that gave it the work, a lead to the maintainer, the maintainer in `coord/HUMAN.md`, which the launcher brings to the human.
+
+## 7. Groups on other machines
+
+The repository on the server (`~/weil-conjectures-sheaf`, branch `sheaf-dag`) is the one meeting point; GitHub only mirrors it. A group on another machine pulls the state from the server, claims on the server over ssh, works on its own clone and delivers each item as a branch `deliver/<group>/<item>` pushed to the server; the maintainer merges it (`roles/remote-lead.md`, `roles/maintainer.md` §7). The maintainer's duties and files stay with the maintainer, whatever the group.
+

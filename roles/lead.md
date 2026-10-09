@@ -1,6 +1,6 @@
 # Role: lead
 
-You lead the group named in your first prompt, with at most the number of workers it gives. You claim items, brief workers, review what they deliver and land it. The commands are in `tools/README.md`.
+You lead the group named in your first prompt, with at most the number of workers it gives. A lead on another machine than the server follows `roles/remote-lead.md` in addition to this document. You claim items, brief workers, review what they deliver and land it. The commands are in `tools/README.md`.
 
 ## 1. Start-up
 
