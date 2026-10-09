@@ -173,6 +173,14 @@ lemma neg_hom {M N : Mod C A} (f : M ⟶ N) : (-f).hom = -f.hom :=
 
 instance : (forget (D := C) A).Additive where
 
+instance {A' : C} [MonObj A'] (f : A' ⟶ A) [IsMonHom f] : (comap (D := C) f).Additive where
+
+open scoped Obj in
+/-- The functor on modules induced by an additive lax monoidal functor is additive. -/
+instance {D : Type*} [Category D] [MonoidalCategory D] [Preadditive D] [MonoidalPreadditive D]
+    (F : C ⥤ D) [F.LaxMonoidal] [F.Additive] : (F.mapMod A).Additive where
+  map_add := Mod.hom_ext _ _ F.map_add
+
 end Preadditive
 
 section Abelian
@@ -194,8 +202,8 @@ instance : PreservesFiniteColimits (forget (D := C) A) where
 instance {M N : Mod C A} (f : M ⟶ N) : IsIso (Abelian.coimageImageComparison f) := by
   have h := Abelian.PreservesCoimage.hom_coimageImageComparison (forget A) f
   have : IsIso ((forget A).map (Abelian.coimageImageComparison f)) := by
-    rw [← Category.comp_id ((forget A).map _), ← (Abelian.PreservesImage.iso (forget A) f).hom_inv_id,
-      ← Category.assoc, ← h]
+    rw [← Category.comp_id ((forget A).map _),
+      ← (Abelian.PreservesImage.iso (forget A) f).hom_inv_id, ← Category.assoc, ← h]
     infer_instance
   exact isIso_of_reflects_iso _ (forget A)
 
@@ -207,11 +215,15 @@ noncomputable instance instAbelian : Abelian (Mod C A) :=
 instance : ReflectsFiniteLimits (forget (D := C) A) where
   reflects _ _ _ := inferInstance
 
+instance : ReflectsFiniteColimits (forget (D := C) A) where
+  reflects _ _ _ := inferInstance
+
 end Abelian
 
 section Grothendieck
 
-variable [Abelian C] [MonoidalPreadditive C] [∀ X : C, PreservesColimitsOfSize.{w, w} (tensorLeft X)]
+variable [Abelian C] [MonoidalPreadditive C]
+  [∀ X : C, PreservesColimitsOfSize.{w, w} (tensorLeft X)]
 
 instance : PreservesFiniteColimits (tensorLeft A) :=
   PreservesColimitsOfSize.preservesFiniteColimits _

@@ -172,6 +172,57 @@ lemma act_mapMod_obj (F : C ⥤ D) [F.LaxMonoidal] {A : C} [MonObj A] (M : Mod C
 
 end Functor
 
+namespace NatTrans
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+open scoped Obj
+
+/-- The components of a monoidal natural transformation at monoid objects are monoid
+morphisms. -/
+instance isMonHom_app {F G : C ⥤ D} [F.LaxMonoidal] [G.LaxMonoidal] (α : F ⟶ G)
+    [NatTrans.IsMonoidal α] (X : C) [MonObj X] : IsMonHom (α.app X) :=
+  (Functor.mapMonNatTrans α |>.app (Mon.mk X)).isMonHom_hom
+
+end NatTrans
+
+namespace Functor
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+open scoped Obj
+
+open _root_.CategoryTheory.Mod
+
+/-- A monoidal natural transformation `α : F ⟶ G` of lax monoidal functors induces, for each
+monoid `A`, a natural transformation of the induced functors on `A`-modules, the `G A`-modules
+being viewed as `F A`-modules along `α_A`. -/
+@[simps]
+def mapModNatTrans {F G : C ⥤ D} [F.LaxMonoidal] [G.LaxMonoidal] (α : F ⟶ G)
+    [NatTrans.IsMonoidal α] (A : C) [MonObj A] :
+    F.mapMod A ⟶ G.mapMod A ⋙ comap (α.app A) where
+  app M := homMk (M := (F.mapMod A).obj M) (N := (comap (α.app A)).obj ((G.mapMod A).obj M))
+    (α.app M.X) (by
+      rw [act_comap_obj, act_mapMod_obj, act_mapMod_obj, Category.assoc, α.naturality,
+        NatTrans.IsMonoidal.tensor_assoc, tensorHom_def', Category.assoc]
+      rfl)
+  naturality _ _ f := Mod.hom_ext _ _ (α.naturality f.hom)
+
+/-- A monoidal natural isomorphism of lax monoidal functors induces an isomorphism of the
+induced functors on modules. -/
+@[simps!]
+def mapModNatIso {F G : C ⥤ D} [F.LaxMonoidal] [G.LaxMonoidal] (α : F ≅ G)
+    [NatTrans.IsMonoidal α.hom] (A : C) [MonObj A] :
+    F.mapMod A ≅ G.mapMod A ⋙ comap (α.hom.app A) :=
+  NatIso.ofComponents (fun M ↦ isoMk (M := (F.mapMod A).obj M)
+      (N := (comap (α.hom.app A)).obj ((G.mapMod A).obj M)) (α.app M.X)
+      (act_hom ((mapModNatTrans α.hom A).app M)))
+    fun f ↦ Mod.hom_ext _ _ (α.hom.naturality f.hom)
+
+end Functor
+
 instance IsMonHom.inv {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {M N : C}
     [MonObj M] [MonObj N] (f : M ⟶ N) [IsIso f] [IsMonHom f] : IsMonHom (inv f) :=
   inferInstanceAs (IsMonHom (asIso f).inv)
@@ -261,5 +312,59 @@ lemma modAdjunction_homEquiv_apply_hom {M : Mod C A} {N : Mod D B}
   simp [modAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
 
 end Adjunction
+
+end CategoryTheory
+
+namespace CategoryTheory
+
+namespace Mod
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+
+/-- Restriction of scalars along a composite is the composite of the restrictions. -/
+@[simps!]
+def comapComp {A B B' : C} [MonObj A] [MonObj B] [MonObj B'] (f : A ⟶ B) (g : B ⟶ B')
+    [IsMonHom f] [IsMonHom g] : comap (D := C) (f ≫ g) ≅ comap g ⋙ comap f :=
+  NatIso.ofComponents (fun M ↦ isoMk (M := (comap (f ≫ g)).obj M)
+      (N := (comap f).obj ((comap g).obj M)) (Iso.refl _) (by
+        simp only [act_comap_obj, Iso.refl_hom, Category.comp_id,
+          MonoidalCategory.whiskerLeft_id, Category.id_comp, comp_whiskerRight,
+          Category.assoc]
+        rfl))
+    fun _ ↦ Mod.hom_ext _ _ (by simp)
+
+/-- Restriction of scalars along the identity is the identity. -/
+@[simps!]
+def comapId (A : C) [MonObj A] : comap (D := C) (𝟙 A) ≅ 𝟭 (Mod C A) :=
+  NatIso.ofComponents (fun M ↦ isoMk (M := (comap (𝟙 A)).obj M) (N := M) (Iso.refl _) (by
+      simp only [act_comap_obj, Iso.refl_hom, Category.comp_id, MonoidalCategory.whiskerLeft_id,
+        Category.id_comp, id_whiskerRight]))
+    fun _ ↦ Mod.hom_ext _ _ (by simp)
+
+/-- Restrictions of scalars along equal morphisms are isomorphic. -/
+def comapCongr {A B : C} [MonObj A] [MonObj B] {f g : A ⟶ B} [IsMonHom f] [IsMonHom g]
+    (h : f = g) : comap (D := C) f ≅ comap g :=
+  NatIso.ofComponents (fun M ↦ isoMk (M := (comap f).obj M) (N := (comap g).obj M) (Iso.refl _)
+      (by subst h; simp))
+    fun _ ↦ Mod.hom_ext _ _ (by simp)
+
+@[simp]
+lemma comapCongr_hom_app_hom {A B : C} [MonObj A] [MonObj B] {f g : A ⟶ B} [IsMonHom f]
+    [IsMonHom g] (h : f = g) (M : Mod C B) :
+    ((comapCongr h).hom.app M).hom = 𝟙 M.X :=
+  rfl
+
+end Mod
+
+namespace Functor
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+open scoped Obj
+
+open _root_.CategoryTheory.Mod
+
+end Functor
 
 end CategoryTheory
