@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-spec-tilde-stalk-localization",
+ "kind": "statement",
+ "title": "Stalks of tilde modules are localizations",
+ "statement": "Let $R$ be a commutative ring, $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], $\\mathfrak p\\subset R$ a prime ideal with point $x\\in X$, and $S=R\\setminus\\mathfrak p$. Let $S\\subseteq R$ be a multiplicative subset of a commutative ring $R$. An $R$-linear map $\\ell:P\\to P'$ of $R$-modules is a *localization of $P$ at $S$* if (a) every $s\\in S$ acts bijectively on $P'$, (b) every element of $P'$ is $s^{-1}\\ell(p)$ for some $p\\in P$, $s\\in S$, and (c) $\\ell(p)=\\ell(q)$ implies $sp=sq$ for some $s\\in S$ (equivalently, (a) holds and $S^{-1}P\\to P'$, $p/s\\mapsto s^{-1}\\ell(p)$, is bijective). Let $\\rho:R=\\Gamma(X,\\mathcal O_X)\\to\\mathcal O_{X,x}$ be the germ map, which is a localization of $R$ at $S$ [lem-weil-pbc-spec-domain-stalks-function-field]. For an $R$-module $M$ let $\\widetilde M$ and $\\tau_X:M\\to\\widetilde M(X)$ be as in [lem-weil-pbc-spec-module-tilde-sections], and regard the stalk $\\widetilde M_x$, an $\\mathcal O_{X,x}$-module [def-weil-pbc-module-stalk], as an $R$-module via $\\rho$. Then the map $\\lambda_M:M\\to\\widetilde M_x$, $m\\mapsto\\tau_X(m)_x$ (the germ at $x$), is $R$-linear and is a localization of $M$ at $S$; so $\\widetilde M_x\\cong M_{\\mathfrak p}$, $\\tau_X(m)_x\\leftrightarrow m/1$, as modules over $\\mathcal O_{X,x}\\cong R_{\\mathfrak p}$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HV (lemma-spec-sheaves), item (7) (with item (6) for the stalk of the structure sheaf)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of the sheaf tilde M on Spec R at a prime p is the localization M_p",
+   "results": "ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk (names of an older Mathlib snapshot, not in the pinned checkout); AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk (ring case)",
+   "date": "2026-10-10",
+   "verdict": "candidate; the pinned-Mathlib form is AlgebraicGeometry.tilde.toStalk (see grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prime p of R and R-module M, the stalk of the associated quasi-coherent sheaf on Spec R at p is a localization of M at the complement of p",
+   "results": "ModuleCat.Tilde.instIsLocalizedModule...toStalk, ModuleCat.Tilde.localizationToStalk, ModuleCat.Tilde.stalkIso (older snapshot names)",
+   "date": "2026-10-10",
+   "verdict": "candidate (same as leansearch)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stalk' Mathlib/AlgebraicGeometry/Modules/Tilde.lean Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "results": "Tilde.lean:184 instance Module R ((tilde M).presheaf.stalk x) (via moduleStructurePresheaf); Tilde.lean:191 tilde.toStalk M x : M -> (tilde M).presheaf.stalk x (StructureSheaf.toStalkₗ'); Tilde.lean:196 instance IsLocalizedModule x.asIdeal.primeCompl (toStalk M x).hom; StructureSheaf.lean:634 toStalk_smul (R-action on the module-presheaf stalk equals the action of the germ of r in the structure-sheaf stalk, for structurePresheafInModuleCat)",
+   "date": "2026-10-10",
+   "verdict": "generalization not exact: Tilde.lean:196 gives the localization property for Mathlib's R-module structure on the stalk of the underlying presheaf; that this R-structure is the restriction along R -> O_{X,x} of the O_{X,x}-module structure of def-weil-pbc-module-stalk (Mathlib/Algebra/Category/ModuleCat/Stalk.lean:167) is not stated for tilde M (StructureSheaf.lean:634 states it for the structure-sheaf presentation, not for the X.Modules object tilde M); recorded as a candidate, node left unsplit"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.tilde.toStalk",
+   "results": "exists in pinned Mathlib (Tilde.lean:191)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-tilde-tensor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

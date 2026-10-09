@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-localization-tensor-product",
+ "kind": "statement",
+ "title": "Localization commutes with tensor products",
+ "statement": "Let $S\\subseteq R$ be a multiplicative subset of a commutative ring $R$. An $R$-linear map $\\ell:P\\to P'$ of $R$-modules is a *localization of $P$ at $S$* if (a) every $s\\in S$ acts bijectively on $P'$, (b) every element of $P'$ is $s^{-1}\\ell(p)$ for some $p\\in P$, $s\\in S$, and (c) $\\ell(p)=\\ell(q)$ implies $sp=sq$ for some $s\\in S$ (equivalently, (a) holds and $S^{-1}P\\to P'$, $p/s\\mapsto s^{-1}\\ell(p)$, is bijective). Let $A$ be an $R$-algebra whose structure map $R\\to A$ is a localization of $R$ at $S$, let $M,N$ be $R$-modules and $M',N'$ $A$-modules (regarded as $R$-modules via $R\\to A$), and let $\\ell_M:M\\to M'$, $\\ell_N:N\\to N'$ be $R$-linear maps that are localizations at $S$. Then the $R$-linear map $\\ell:M\\otimes_RN\\to M'\\otimes_AN'$, $m\\otimes n\\mapsto\\ell_M(m)\\otimes\\ell_N(n)$, is a localization of $M\\otimes_RN$ at $S$. In particular $S^{-1}M\\otimes_{S^{-1}R}S^{-1}N\\cong S^{-1}(M\\otimes_RN)$, $(m/s)\\otimes(n/t)\\mapsto(m\\otimes n)/st$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00DL (lemma-tensor-product-localization)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of tensor product of modules is tensor product of localizations over the localized ring",
+   "results": "IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.moduleTensorEquiv, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.rTensor (Mathlib.RingTheory.Localization.BaseChange)",
+   "date": "2026-10-10",
+   "verdict": "match (two declarations combined in one line)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "S^{-1}M tensor over S^{-1}R S^{-1}N is isomorphic to S^{-1}(M tensor_R N)",
+   "results": "IsLocalization.moduleTensorEquiv, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.rTensor, IsLocalization.algebraTensorEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule _ (TensorProduct.map _ _)",
+   "results": "IsLocalization.instIsLocalizedModuleTensorProductMap (Mathlib.RingTheory.Localization.BaseChange)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsLocalizedModule S (TensorProduct.map\\|moduleTensorEquiv' Mathlib/RingTheory/Localization/BaseChange.lean; grep -n 'class IsLocalizedModule\\|instance IsLocalizedModule.of_linearEquiv' Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+   "results": "BaseChange.lean:119 instance IsLocalizedModule S (TensorProduct.map f g); BaseChange.lean:132 moduleTensorEquiv : M₁ ⊗[A] M₂ ≃ₗ[A] M₁ ⊗[R] M₂ for [IsLocalization S A]; Basic.lean:547 class IsLocalizedModule (map_units, surj, exists_of_eq = conditions (a),(b),(c)); Basic.lean:567 IsLocalizedModule.of_linearEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.moduleTensorEquiv, IsLocalizedModule.of_linearEquiv",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "line": 119,
+  "how": "specializes in one line: the node's 'localization at S' is Mathlib's IsLocalizedModule S (Mathlib/Algebra/Module/LocalizedModule/Basic.lean:547, fields map_units, surj, exists_of_eq = (a),(b),(c)); the instance at BaseChange.lean:119 gives IsLocalizedModule S (TensorProduct.map ℓ_M ℓ_N) : M ⊗[R] N → M' ⊗[R] N', and composing with the R-linear equivalence (IsLocalization.moduleTensorEquiv S A M' N').symm.restrictScalars R : M' ⊗[R] N' ≃ M' ⊗[A] N' (BaseChange.lean:132, for [IsLocalization S A] and IsScalarTower R A M', N'; it is the identity on pure tensors) by IsLocalizedModule.of_linearEquiv (Basic.lean:567) gives that ℓ, m ⊗ n ↦ ℓ_M m ⊗ ℓ_N n, is IsLocalizedModule S"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-tilde-tensor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
