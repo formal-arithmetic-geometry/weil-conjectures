@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-base-change",
+ "kind": "statement",
+ "title": "Base change of a closed immersion is a closed immersion",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion] and $g:X'\\to X$ any morphism of schemes [def-pc-scheme]. Then the projection $Z\\times_XX'\\to X'$ from the fibre product [def-pc-fibre-product] is a closed immersion.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01QR (morphisms-lemma-base-change-closed-immersion), referring to Schemes, Lemma 01JY (schemes-lemma-base-change-immersion)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a closed immersion of schemes is a closed immersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, IsClosedImmersion, IsClosedImmersion.mk, IsClosedImmersion.of_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "match: IsClosedImmersion.isStableUnderBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsStableUnderBaseChange @IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/ClosedImmersion.lean:382 instance IsClosedImmersion.isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "how": "specializes in one line: the instance `MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion` (line 382) applied to the pullback square of $i$ along $g$ (`MorphismProperty.pullback_snd`) gives that `pullback.snd i g : pullback i g ⟶ X'` is a closed immersion"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduction-universal-homeomorphism",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-reduction-universal-homeomorphism; match verified by the lead against the Mathlib source"
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-surjective-base-change",
+ "kind": "statement",
+ "title": "Base change of a surjective morphism is surjective",
+ "statement": "Let $f:Y\\to X$ be a surjective morphism of schemes [def-weil-surjective-morphism] and $g:X'\\to X$ any morphism of schemes [def-pc-scheme]. Then the projection $Y\\times_XX'\\to X'$ from the fibre product [def-pc-fibre-product] is surjective.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01S1 (morphisms-lemma-base-change-surjective)"
+ },
+ "stmt_deps": [
+  "def-weil-surjective-morphism",
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective morphisms of schemes are stable under base change",
+   "results": "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.PullbackCarrier), isSmooth_isStableUnderBaseChange, Surjective.surj, RingHom.surjective_isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "match: Surjective.instIsStableUnderBaseChangeScheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective",
+   "results": "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.PullbackCarrier)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsStableUnderBaseChange @Surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "PullbackCarrier.lean:436 instance : MorphismProperty.IsStableUnderBaseChange @Surjective (namespace AlgebraicGeometry.Surjective)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+  "file": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "how": "specializes in one line: the instance `MorphismProperty.IsStableUnderBaseChange @Surjective` (line 436) applied to the pullback square of $f$ along $g$ (`MorphismProperty.pullback_snd`) gives that `pullback.snd f g` is surjective"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduction-universal-homeomorphism",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-reduction-universal-homeomorphism; match verified by the lead against the Mathlib source"
+ }
+}
