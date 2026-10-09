@@ -2,17 +2,76 @@
  "id": "def-weil-pbc-sets-extension-by-empty",
  "kind": "definition",
  "title": "Extension by the empty set of a sheaf of sets along an open subset",
- "statement": "Let $X$ be a topological space, $U\\subseteq X$ an open subset with inclusion $j_U:U\\to X$, and $\\mathcal G$ a sheaf of sets on $U$. The presheaf of sets $j_{U,p!}\\mathcal G$ on $X$ is defined by $(j_{U,p!}\\mathcal G)(V)=\\mathcal G(V)$ if $V\\subseteq U$ and $(j_{U,p!}\\mathcal G)(V)=\\emptyset$ if $V\\not\\subseteq U$ ($V\\subseteq X$ open); for opens $V'\\subseteq V$ the restriction map is the restriction map of $\\mathcal G$ when $V\\subseteq U$ (then $V'\\subseteq U$), and the empty map when $V\\not\\subseteq U$. The *extension of $\\mathcal G$ by the empty set* is the sheaf of sets $j_{U!}\\mathcal G$ on $X$ given by the sheafification [def-weil-pbc-sheafification] $j_{U,p!}\\mathcal G\\to j_{U!}\\mathcal G$. A morphism $\\alpha:\\mathcal G\\to\\mathcal G'$ of sheaves on $U$ gives $j_{U,p!}\\alpha$ (equal to $\\alpha_V$ on $V\\subseteq U$, empty otherwise) and hence $j_{U!}\\alpha$. For a set $S$ write $\\underline S_U$ for the sheaf of sets on $U$ with $\\underline S_U(V)=\\{$locally constant maps $V\\to S\\}$ ($V\\subseteq U$ open, restriction of maps), and $j_{U!}\\underline S:=j_{U!}(\\underline S_U)$.",
+ "statement": "Let $X$ be a topological space (presheaves and sheaves of sets on $X$ are those on the site of open subsets of $X$ with open coverings [def-weil-pbc-sites-and-cohomology]), $U\\subseteq X$ an open subset with inclusion $j_U:U\\to X$, and $\\mathcal G$ a sheaf of sets on $U$. The presheaf of sets $j_{U,p!}\\mathcal G$ on $X$ is defined by $(j_{U,p!}\\mathcal G)(V)=\\mathcal G(V)$ if $V\\subseteq U$ and $(j_{U,p!}\\mathcal G)(V)=\\emptyset$ if $V\\not\\subseteq U$ ($V\\subseteq X$ open); for opens $V'\\subseteq V$ the restriction map is the restriction map of $\\mathcal G$ when $V\\subseteq U$ (then $V'\\subseteq U$), and the empty map when $V\\not\\subseteq U$. The *extension of $\\mathcal G$ by the empty set* is the sheaf of sets $j_{U!}\\mathcal G$ on $X$ given by the sheafification [def-weil-pbc-sheafification] $j_{U,p!}\\mathcal G\\to j_{U!}\\mathcal G$. A morphism $\\alpha:\\mathcal G\\to\\mathcal G'$ of sheaves on $U$ gives $j_{U,p!}\\alpha$ (equal to $\\alpha_V$ on $V\\subseteq U$, empty otherwise) and hence $j_{U!}\\alpha$. For a set $S$ write $\\underline S_U$ for the sheaf of sets on $U$ with $\\underline S_U(V)=\\{$locally constant maps $V\\to S\\}$ ($V\\subseteq U$ open, restriction of maps), and $j_{U!}\\underline S:=j_{U!}(\\underline S_U)$.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Sheaves, Section 'Open immersions and (pre)sheaves of sets' (Tag 009Z), Definition Tag 00A2 (label definition-j-shriek, line 4525); notation j_{U!} and the constant sheaf as in Modules, Section 'Constructible sheaves of sets' (Tag 0CAG, modules.tex line 2979)"
  },
  "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The presheaf $j_{U,p!}\\mathcal G$.) The rule is well defined: if $V\\subseteq U$ and $V'\\subseteq V$ then $V'\\subseteq U$, so the restriction $\\mathcal G(V)\\to\\mathcal G(V')$ lands in $(j_{U,p!}\\mathcal G)(V')$; if $V\\not\\subseteq U$ the source is $\\emptyset$ and the empty map $\\emptyset\\to(j_{U,p!}\\mathcal G)(V')$ is the only map. Functoriality: the restriction for $V=V'$ is the identity (that of $\\mathcal G$, or $\\mathrm{id}_\\emptyset$); for $V''\\subseteq V'\\subseteq V$ the composite equals the restriction $V\\to V''$: if $V\\subseteq U$ all three are restrictions of $\\mathcal G$, which compose; if $V\\not\\subseteq U$ both sides are maps out of $\\emptyset$, hence equal. So $j_{U,p!}\\mathcal G$ is a presheaf of sets on $X$ (Stacks: 'with obvious restriction mappings'). (Whether $j_{U,p!}\\mathcal G$ is already a sheaf is not needed: Stacks sheafifies in any case, step 2.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 00A2 (definition-j-shriek, line 4525) (1)"
+   }
+  },
+  {
+   "text": "(The sheaf $j_{U!}\\mathcal G$.) The open subsets of $X$ with open coverings form a site [def-weil-pbc-sites-and-cohomology], and every presheaf of sets on it has a sheafification [def-weil-pbc-sheafification]; $j_{U!}\\mathcal G$ is the sheafification of the presheaf of step 1, together with $\\theta_{\\mathcal G}:j_{U,p!}\\mathcal G\\to j_{U!}\\mathcal G$. It is unique up to unique isomorphism compatible with $\\theta$ by its universal property, so the definition does not depend on the choice.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 00A2 (2); sheafification: Section Tag 007X (section-sheafification), Lemma Tag 0080 (lemma-sheafify-universal)"
+   }
+  },
+  {
+   "text": "(Functoriality.) For $\\alpha:\\mathcal G\\to\\mathcal G'$ the family $(j_{U,p!}\\alpha)_V=\\alpha_V$ ($V\\subseteq U$), the empty map $\\emptyset\\to\\emptyset$ ($V\\not\\subseteq U$), is a natural transformation: for $V'\\subseteq V$ with $V\\subseteq U$ this is the naturality of $\\alpha$, and for $V\\not\\subseteq U$ both composites are maps out of $\\emptyset$. Clearly $j_{U,p!}\\mathrm{id}=\\mathrm{id}$ and $j_{U,p!}(\\beta\\alpha)=j_{U,p!}\\beta\\circ j_{U,p!}\\alpha$. By the universal property of sheafification [def-weil-pbc-sheafification] there is exactly one $j_{U!}\\alpha:j_{U!}\\mathcal G\\to j_{U!}\\mathcal G'$ with $j_{U!}\\alpha\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal G'}\\circ j_{U,p!}\\alpha$, and this uniqueness gives $j_{U!}\\mathrm{id}=\\mathrm{id}$ and $j_{U!}(\\beta\\alpha)=j_{U!}\\beta\\circ j_{U!}\\alpha$. So $j_{U,p!}$ and $j_{U!}$ are functors.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 00A2; functoriality of sheafification as in Section Tag 007X (section-sheafification)"
+   }
+  },
+  {
+   "text": "(The sheaf $\\underline S_U$.) For a set $S$ (discrete topology) a map $V\\to S$ is locally constant iff it is continuous, and continuous maps glue: given an open cover $V=\\bigcup V_i$ and locally constant $f_i:V_i\\to S$ agreeing on overlaps there is exactly one $f:V\\to S$ restricting to the $f_i$, and it is locally constant since being locally constant is a local property. Restriction of maps is functorial. So $\\underline S_U$ is a sheaf of sets on $U$ (its value on $\\emptyset$ is the one-point set $\\{\\emptyset\\to S\\}$), and $j_{U!}\\underline S:=j_{U!}(\\underline S_U)$ is defined by step 2. This is the constant sheaf of Stacks 006W on the space $U$, and the notation $j_{U!}\\underline S$ is that of Modules, Section 0CAG.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Example Tag 006V (example-basic-continuous-maps, line 554) and Definition Tag 006W (definition-constant-sheaf, line 588); literature/stacks-project/modules.tex Section Tag 0CAG (section-constructible, line 2979)"
+   }
+  },
+  {
+   "text": "(What the definition does not contain.) The properties Stacks proves right after Definition 00A2, Lemma 00A3: $j_{U,p!}$ and $j_{U!}$ are left adjoint to the restriction to $U$, the stalks of $j_{U!}\\mathcal G$ are $\\emptyset$ off $U$ and $\\mathcal G_x$ on $U$, and $\\mathcal G\\to(j_{U!}\\mathcal G)|_U$ is an isomorphism, are not part of the definition and are not used in steps 1-4; they are the separate statement lem-weil-pbc-sets-extension-by-empty-adjunction (created by this split, unsplit; Stacks Modules 0CAH uses its adjunction and stalk parts, so lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers and the statements built on Tag 0CAH should cite it). It is not listed in uses because it depends on this definition. Stacks' remark after 00A3 that $j_!$ of an abelian sheaf is not abelian (empty stalks) is why the abelian version is extension by zero, here [def-weil-pbc-extension-by-zero] for etale modules (Definition Tag 00A4 in the topological case); that node is not used here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma Tag 00A3 (lemma-j-shriek, line 4549), the paragraph after it and Definition Tag 00A4 (definition-j-shriek-structures)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition Tag 00A2 (definition-j-shriek, line 4525), Example 006V / Definition 006W (constant sheaf); literature/stacks-project/modules.tex Section 0CAG for the notation j_{U!}S"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +93,17 @@
    "results": "no file names extension by the empty set; Topology/Sheaves/Functors.lean has only Topology.IsOpenEmbedding.sheafPullback (restriction j^{-1}, composition with IsOpenMap.functor); CategoryTheory/Sites/Pullback.lean line 55/70 Functor.sheafPullback (left adjoint of sheafPushforwardContinuous for a continuous functor of sites), which applied to IsOpenMap.functor would compute j_! only after a left Kan extension computation that is not in Mathlib",
    "date": "2026-10-10",
    "verdict": "no match (generalization only through an unproved identification of the left Kan extension; not one line)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Topology.IsOpenEmbedding.sheafPullback (project ~/weil-conjectures-slopmaster2); and grep -rn 'functor_isContinuous' Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "results": "Topology.IsOpenEmbedding.sheafPullback, Topology.IsOpenEmbedding.sheafPullbackIso (Mathlib/Topology/Sheaves/Functors.lean:125, :142; restriction only); Topology.IsOpenEmbedding.functor_isContinuous (SheafCondition/Sites.lean:165), which makes CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback (CategoryTheory/Sites/Pullback.lean:70) along IsOpenMap.functor an abstract left adjoint of restriction; its value is a left Kan extension, not the explicit presheaf of the definition",
+   "date": "2026-10-10",
+   "verdict": "no match (re-checked by the splitter): Mathlib has no explicit extension by the empty set; the abstract left adjoint agrees with it only after a Kan-extension computation that is not in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +123,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-sets-extension-by-empty",
+  "worker": "stage1",
+  "summary": "Checked against Stacks sheaves.tex Definition 00A2 (definition-j-shriek), Lemma 00A3 (lemma-j-shriek), Definition 00A4 (definition-j-shriek-structures), Example 006V / Definition 006W (constant sheaf) and modules.tex Section 0CAG (all tags verified in tags/tags; note 00A4 is the definition of extension by zero for abelian/structured sheaves, not a stalk lemma: the stalk description is part (3) of 00A3). The statement is correct against the source (Stacks defines j_{p!} for presheaves; the node restricts to sheaves G, which is all the definition needs). Added def-weil-pbc-sites-and-cohomology to the statement (site of opens of X) and stmt_deps. Wrote four elementary construction steps: j_{U,p!}G is a presheaf (case check of restriction maps), j_{U!}G via sheafification and its independence of choice, functoriality of j_{U,p!} and j_{U!} via the universal property, and that the locally-constant-maps presheaf S_U is a sheaf. The properties after the definition (00A3: presheaf and sheaf adjunction with restriction, stalks, j^{-1}j_! = id) are a new statement node lem-weil-pbc-sets-extension-by-empty-adjunction (unsplit, no Mathlib match: Mathlib has only the abstract left adjoint Functor.sheafPullbackConstruction.sheafPullback along IsOpenMap.functor), recorded in step 5 and not used by the definition (it depends on it). Existing etale node def-weil-pbc-extension-by-zero is the abelian analogue, not a duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Definition node (00A2) split: five elementary steps check that j_{U,p!}G is a presheaf, that j_{U!}G is its sheafification on the site of opens (dependency on def-weil-pbc-sites-and-cohomology added to the statement), functoriality, that the sheaf of locally constant maps is a sheaf, and that the properties of 00A3 are not part of the definition; those are the new unsplit node lem-weil-pbc-sets-extension-by-empty-adjunction (00A3 in full: presheaf and sheaf adjunctions, stalks, G = (j_! G)|_U), which the split of lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers (0CAI via 0CAH) will cite. Correct that 00A4 is the abelian extension by zero, not the stalk formula."
+ }
 }
