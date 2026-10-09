@@ -8,11 +8,68 @@
   "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
  },
  "stmt_deps": [
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent objects and arrows by elements of the two filtered colimits of sets. For any finite collection of representatives, filteredness supplies a common later stage; the equality criterion in the reviewed elementwise filtered-colimit lemma then shows that source, target, identities and composition are independent of representatives. The same criterion proves the category axioms and that each coprojection is a functor, with v_{j'} v_phi = v_j.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "proof of Lemma Tag 09YL (09YL), first paragraph"
+   }
+  },
+  {
+   "text": "Choose representatives for the finitely many objects and arrows and representatives for every listed source, target, composition and identity relation. Filteredness gives one stage dominating all of them; applying the transition functors makes every relation hold at that stage. If two lifts are chosen, apply the same eventual-equality clause to their finite list of objects and arrows and then use filteredness to obtain a common later stage where they agree. A functor from a finite category is exactly such a finite list with these relations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "proof of Lemma Tag 09YL (09YL), first paragraph and its finite-diagram remark"
+   }
+  },
+  {
+   "text": "For fixed X,Y in C_j, a morphism in the colimit is represented by an arrow at some j' reached by phi:j -> j'. The source and target equalities can be made literal at a common later stage by the same filtered-colimit equality criterion. Surjectivity follows from arrow representability; injectivity says that two such arrows have equal images exactly when they become equal after a further arrow out of j'. This is precisely the canonical bijection from the filtered colimit over the filtered slice j/J of the Hom sets.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "filtered-colimit category construction following Lemma Tag 09YL"
+   }
+  },
+  {
+   "text": "An isomorphism at a stage maps to an isomorphism because the coprojection is a functor. Conversely, represent a colimit morphism and an inverse by stage arrows. Their two inverse equations, together with source and target identities, form a finite list of relations; the finite-stage argument above moves this list to one common stage. There the representative has a two-sided inverse, so it is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "filtered-colimit category construction following Lemma Tag 09YL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +135,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-categories",
+  "worker": "stage1",
+  "summary": "The item is kept as one sourced statement. Its four proof clauses directly use the reviewed elementwise filtered-colimit-of-sets lemma and the explicit filteredness assumptions; no auxiliary nodes are introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E; spot-checked by L: L read the four clauses' proofs (representatives at a common stage, eventual equality from lem-weil-pbc-filtered-colimit-sets-elementwise, filteredness): routine and correct as a sketch at the level of Stacks 09YL; the E review lists what each clause invokes; the earlier circular auxiliary nodes are gone; branch squashed by L"
+ }
 }
