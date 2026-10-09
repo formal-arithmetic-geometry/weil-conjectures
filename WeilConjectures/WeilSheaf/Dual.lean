@@ -99,12 +99,18 @@ theorem ProEtale.IsAdicLisseSheaf.ihom {Z : Scheme.{u}}
       (ProEtale.adicUpperStarComp l _ _).app G ≪≫ e₂) ≪≫ Mod.ihomFreeIso n m⟩⟩
 
 /-- The internal hom from a lisse sheaf into a constructible sheaf is constructible: on the
-strata of the second sheaf it is the internal hom of two lisse sheaves. -/
+strata of the second sheaf it is the internal hom of two lisse sheaves
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar_ihom`). -/
 theorem ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf {Z : Scheme.{u}}
     {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
     (hG : IsAdicConstructibleSheaf G) :
-    IsAdicConstructibleSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
-  sorry
+    IsAdicConstructibleSheaf ((ProEtale.AdicSheaf.ihom F).obj G) := by
+  intro x
+  obtain ⟨W, j, hj, hx, ι, hι, S, i, hi, hc, hcover, h⟩ := hG x
+  have : WeaklyEtale j := inferInstance
+  exact ⟨W, j, hj, hx, ι, hι, S, i, hi, hc, hcover, fun k ↦
+    ((hF.upperStar j).upperStar_ihom (i k) (h k)).of_iso
+      ((ProEtale.adicUpperStar l (i k)).mapIso ((ProEtale.adicUpperStarIhomIso l j F).app G).symm)⟩
 
 variable (k₀ l X) in
 /-- The internal hom `𝓗om_{ℚ̄_ℓ,X̄}(A, B)` of two pro-étale Weil sheaves, with the Weil

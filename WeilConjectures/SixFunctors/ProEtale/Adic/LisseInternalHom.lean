@@ -77,4 +77,56 @@ theorem IsAdicLisseSheaf.preservesFiniteColimits_ihom {F : AdicSheaf l X}
   have h := (Functor.preservesFiniteLimits_tfae (AdicSheaf.ihom F)).out 3 0
   exact ⟨(h.1 ‹_› S hS).1, hF.epi_ihom_map S.g⟩
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+/-- **Being lisse is local**: a sheaf whose pullbacks along the members of a pro-étale cover are
+lisse is lisse, trivialised on the composite cover. -/
+theorem IsAdicLisseSheaf.of_cover {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X) {M : AdicSheaf l X}
+    (h : ∀ i, IsAdicLisseSheaf ((g i)^*ᵃ[l].obj M)) : IsAdicLisseSheaf M := by
+  choose R hR hRM using h
+  choose κ V f hf using fun i ↦ (R i).exists_eq_ofArrows
+  refine ⟨_, Precoverage.comp_mem_coverings g hg f (fun i ↦ hf i ▸ hR i), ?_⟩
+  rintro _ _ ⟨⟨i, k⟩⟩
+  obtain ⟨n, ⟨e⟩⟩ := hRM i (f i k) (by rw [hf i]; exact .mk k)
+  exact ⟨n, ⟨(adicUpperStarComp l _ _).app M ≪≫ e⟩⟩
+
+/-- A finite direct sum of copies of a lisse sheaf is lisse. -/
+theorem IsAdicLisseSheaf.biproduct_const {N : AdicSheaf l X} (hN : IsAdicLisseSheaf N) :
+    ∀ n : ℕ, IsAdicLisseSheaf (⨁ fun _ : Fin n ↦ N)
+  | 0 => IsAdicLisseSheaf.of_isZero
+      ⟨fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext' _ _ fun j ↦ Fin.elim0 j⟩⟩,
+        fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩⟩
+  | n + 1 => ((IsAdicLisseSheaf.biproduct_const hN n).biprod
+      (hN.of_iso (biproductUniqueIso (fun _ : Fin 1 ↦ N)).symm)).of_iso
+      (biprodBiproductSumIso (fun _ : Fin n ⊕ Fin 1 ↦ N) ≪≫
+        biproduct.whiskerEquiv (f := fun _ : Fin n ⊕ Fin 1 ↦ N) (g := fun _ : Fin (n + 1) ↦ N)
+          finSumFinEquiv (fun _ ↦ Iso.refl _))
+
+/-- **Pullback of an internal hom out of a lisse sheaf.** For `F` lisse and any morphism
+`i : Y ⟶ X`, if `i^* G` is lisse then so is `i^* 𝓗om(F, G)`: on the base change of a cover
+trivialising `F`, it becomes a finite direct sum of copies of the pullback of `i^* G`. -/
+theorem IsAdicLisseSheaf.upperStar_ihom {Y : Scheme.{u}} (i : Y ⟶ X) {F G : AdicSheaf l X}
+    (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf ((i)^*ᵃ[l].obj G)) :
+    IsAdicLisseSheaf ((i)^*ᵃ[l].obj ((AdicSheaf.ihom F).obj G)) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨κ, V, g, rfl⟩ := R.exists_eq_ofArrows
+  refine IsAdicLisseSheaf.of_cover (fun k ↦ pullback.fst i (g k))
+    (Precoverage.mem_coverings_of_isPullback g hR i _ _
+      fun k ↦ IsPullback.of_hasPullback i (g k)) fun k ↦ ?_
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk k)
+  obtain ⟨n, ⟨e⟩⟩ := hRF (g k) (.mk k)
+  let p := pullback.fst i (g k)
+  let q := pullback.snd i (g k)
+  have hpq : p ≫ i = q ≫ g k := pullback.condition
+  refine (IsAdicLisseSheaf.biproduct_const (hG.upperStar p) n).of_iso
+    ((adicUpperStarComp l p i).symm.app _ ≪≫ (adicUpperStarCongr l hpq).app _ ≪≫
+      (adicUpperStarComp l q (g k)).app _ ≪≫
+      (q)^*ᵃ[l].mapIso ((adicUpperStarIhomIso l (g k) F).app G ≪≫
+        (Mod.ihomMapIso e).symm.app _ ≪≫ Mod.ihomBiproductIso _ _ ≪≫
+        biproduct.mapIso fun _ ↦ Mod.ihomRegularIso.app _) ≪≫
+      (q)^*ᵃ[l].mapBiproduct _ ≪≫
+      biproduct.mapIso fun _ ↦ (adicUpperStarComp l q (g k)).symm.app G ≪≫
+        (adicUpperStarCongr l hpq.symm).app G ≪≫ (adicUpperStarComp l p i).app G).symm
+
 end AlgebraicGeometry.ProEtale
