@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Topology.Instances.ZMod
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
@@ -71,6 +72,10 @@ lemma kummerAlgHom_add (a b : ℕ) :
   AdjoinRoot.algHom_ext (by
     simp only [AlgHom.comp_apply, kummerAlgHom_root, map_mul, AlgHom.commutes, pow_add, map_mul]
     ring)
+
+lemma kummerAlgHom_pow (k m : ℕ) (hζk : (ζ ^ k) ^ n = 1) :
+    kummerAlgHom (ζ ^ k) hζk (f := f) m = kummerAlgHom ζ hζ (k * m) :=
+  AdjoinRoot.algHom_ext (by simp only [kummerAlgHom_root, ← pow_mul])
 
 lemma kummerAlgHom_mod (m : ℕ) : kummerAlgHom ζ hζ (f := f) (m % n) = kummerAlgHom ζ hζ m :=
   AdjoinRoot.algHom_ext (by
@@ -170,6 +175,10 @@ lemma kummerVadd_zero : kummerVadd ζ hζ (f := f) 0 = 𝟙 _ := by
   · simp [kummerVadd]
   · simp only [kummerVadd, pullback.lift_snd, Category.id_comp, kummerAlgHom_zero]
     exact (congrArg (pullback.snd _ _ ≫ ·) (Spec.map_id _)).trans (Category.comp_id _)
+
+lemma kummerVadd_pow (k m : ℕ) (hζk : (ζ ^ k) ^ n = 1) :
+    kummerVadd (ζ ^ k) hζk (f := f) m = kummerVadd ζ hζ (k * m) := by
+  simp only [kummerVadd, kummerAlgHom_pow ζ hζ k m hζk]
 
 lemma kummerVadd_mod (m : ℕ) : kummerVadd ζ hζ (f := f) (m % n) = kummerVadd ζ hζ m := by
   simp only [kummerVadd, kummerAlgHom_mod]
@@ -298,6 +307,53 @@ noncomputable def EtaleTorsor.kummer (hζs : IsPrimitiveRoot ((pointRingHom s).h
     obtain ⟨m, hm, huniq⟩ := existsUnique_comp_kummerAlgHom ζ hζ hf _ _ hαβ hζΩ
     refine ⟨⟨m⟩, (fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).2 hm, fun m' h ↦ ?_⟩
     exact ULift.ext _ _ (huniq m'.down ((fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).1 h))
+
+section Monodromy
+
+open FiniteEtale PreGaloisCategory
+
+variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+
+/-- If an isomorphism of total spaces over `Y` carries the action of `k * m` on `t` to the action
+of `m` on `t'`, then `k • f_{t'} = f_t`. -/
+lemma _root_.AlgebraicGeometry.Scheme.EtaleTorsor.mul_monodromy_of_iso
+    (t t' : EtaleTorsor (ULift.{u + 1} (ZMod n)) Y) (φ : t.P ≅ t'.P) (hφ : φ.hom ≫ t'.π = t.π)
+    (k : ZMod n)
+    (hv : ∀ m : ZMod n, t.vadd ⟨k * m⟩ ≫ φ.hom = φ.hom ≫ t'.vadd ⟨m⟩) (g : G) :
+    k * (t'.monodromy s G g).toAdd.down = (t.monodromy s G g).toAdd.down := by
+  let Φ : t.toFiniteEtale ⟶ t'.toFiniteEtale :=
+    ObjectProperty.homMk (MorphismProperty.Over.homMk φ.hom hφ)
+  have hinj : Function.Injective ((fiber s).map Φ) := fun a b h ↦ FiniteEtale.fiber_ext s (by
+    have := congrArg (fun z ↦ z.left) h
+    change a.left ≫ φ.hom = b.left ≫ φ.hom at this
+    exact (cancel_mono φ.hom).1 this)
+  let x := (t.nonempty_fiber s).some
+  set m' := (t'.monodromy s G g).toAdd.down
+  have key : t.monodromy s G g = Multiplicative.ofAdd (ULift.up (k * m')) := by
+    refine (t.monodromy_eq_iff s G g x _).2 (hinj ?_)
+    rw [IsNaturalSMul.naturality, ← t'.fiber_map_vaddHom_monodromy s G g ((fiber s).map Φ x)]
+    apply FiniteEtale.fiber_ext s
+    change (x.left ≫ t.vadd ⟨k * m'⟩) ≫ φ.hom = (x.left ≫ φ.hom) ≫ t'.vadd ⟨m'⟩
+    rw [Category.assoc, Category.assoc, hv m']
+  rw [key]
+  rfl
+
+/-- Replacing `ζ` by `ζ ^ k` divides the monodromy of the Kummer torsor by `k`:
+`k • f_{ζ ^ k} = f_ζ`. -/
+lemma EtaleTorsor.mul_monodromy_kummer_pow (k : ℕ) (hζk : (ζ ^ k) ^ n = 1)
+    (hζs : IsPrimitiveRoot ((pointRingHom s).hom ζ) n)
+    (hζks : IsPrimitiveRoot ((pointRingHom s).hom (ζ ^ k)) n) (g : G) :
+    (k : ZMod n) * ((EtaleTorsor.kummer (ζ ^ k) hζk hn hf s hζks).monodromy s G g).toAdd.down =
+      ((EtaleTorsor.kummer ζ hζ hn hf s hζs).monodromy s G g).toAdd.down := by
+  refine EtaleTorsor.mul_monodromy_of_iso s G _ _ (Iso.refl (Y.kummerCover n f))
+    (Category.id_comp _) (k : ZMod n) (fun m ↦ ?_) g
+  change kummerVadd ζ hζ ((k : ZMod n) * m).val ≫ 𝟙 _ = 𝟙 _ ≫ kummerVadd (ζ ^ k) hζk m.val
+  rw [Category.comp_id, Category.id_comp, kummerVadd_pow ζ hζ k _ hζk,
+    ← kummerVadd_mod ζ hζ (k * m.val), ZMod.val_mul, ZMod.val_natCast, Nat.mod_mul_mod,
+    kummerVadd_mod]
+
+end Monodromy
 
 end Torsor
 
