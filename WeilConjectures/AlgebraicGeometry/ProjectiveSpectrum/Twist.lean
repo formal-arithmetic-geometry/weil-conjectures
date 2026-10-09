@@ -432,6 +432,13 @@ def twistRestrictIso :
       (twist 𝒜 (m + d)).restrict (Proj.basicOpen 𝒜 f).ι :=
   asIso ((Scheme.Modules.restrictFunctor (Proj.basicOpen 𝒜 f).ι).map (twistMul m hf))
 
+/-- Multiplications by two homogeneous elements of the same degree commute. -/
+lemma twistMul_comp_twistMul {g : A} (hg : g ∈ 𝒜 d) :
+    twistMul m hf ≫ twistMul (m + d) hg = twistMul m hg ≫ twistMul (m + d) hf := by
+  ext U s : 3
+  refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
+  exact mul_right_comm _ _ _
+
 /-- **`𝒪(m)` is trivial on `D₊(f)`** for a homogeneous element `f` of degree `1`: composing
 `twistRestrictIso` `|m|` times gives `𝒪(m)|_{D₊(f)} ≅ 𝒪(0)|_{D₊(f)}`, and `𝒪(0) ≅ 𝒪`. -/
 lemma nonempty_restrict_twist_iso_unit (hf : f ∈ 𝒜 1) :
