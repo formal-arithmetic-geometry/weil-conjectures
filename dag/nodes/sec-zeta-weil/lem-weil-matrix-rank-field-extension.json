@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-matrix-rank-field-extension",
+ "kind": "statement",
+ "title": "The rank of a matrix is unchanged by field extension",
+ "statement": "Let $K$ and $L$ be fields [def-weil-field] with $K$ a subfield of $L$ (more generally, let $\\iota:K\\to L$ be a ring homomorphism of fields, necessarily injective, and view a matrix with entries in $K$ as a matrix with entries in $L$ by applying $\\iota$ to every entry). Let $m,n\\in\\mathbf Z_{\\geq0}$ and let $A=(a_{ij})_{1\\leq i\\leq m,\\ 1\\leq j\\leq n}$ be an $m\\times n$ matrix with entries in $K$. For a field $F$ containing $K$, the rank of $A$ over $F$, written $\\operatorname{rank}_F(A)$, is the dimension [def-weil-vector-space-dimension] of the $F$-linear span in $F^n$ of the $m$ rows of $A$; this span is a finite-dimensional $F$-vector space [def-weil-finite-dimensional-subspace], spanned by at most $m$ vectors, so $\\operatorname{rank}_F(A)\\leq\\min(m,n)$. Then\n\n$$\n\\operatorname{rank}_L(A)=\\operatorname{rank}_K(A).\n$$\n\nEquivalently, a family of rows of $A$ is linearly independent over $L$ if and only if it is linearly independent over $K$.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157 (PDF p. 157, v2.21): 'Obviously, if the condition in (d) is satisfied in K, then it is satisfied in k' (the condition is the vanishing of Hankel determinants, i.e. a rank bound on finite submatrices with entries in k); the same step is Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, 'Preuve de (1.7) ⇒ (1.6)', p. 276 (PDF p. 5): 'Cette nullité est vraie dans Q_ℓ si et seulement si elle l'est dans Q'; and the blueprint, literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof': 'every finite Hankel minor has integral entries, so the same rank bound holds over Q'. None of the three writes the linear algebra out."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rank_map\\\\|rank_mapMatrix\\\\|rank_baseChange\\\\|finrank_baseChange\\\\|rank.*algebraMap\\\\|rank.*RingHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Dimension/Constructions.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/Matrix --include=*.lean",
+   "results": "nothing on `Matrix.rank` of a matrix mapped along a ring homomorphism or an algebraMap; ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Dimension/Constructions.lean:371 `Module.rank_baseChange`, :379 `Module.finrank_baseChange : finrank R (R ⊗[S] M') = finrank S M'` are about modules under base change, not about a matrix and its row span",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'linearIndependent_algebraMap_comp_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean; grep -n '^theorem \\\\|^lemma ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean",
+   "results": "~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean:43 `linearIndependent_algebraMap_comp_iff : LinearIndependent S (fun i ↦ algebraMap R S ∘ v i) ↔ LinearIndependent R v` for `[CommRing R] [CommRing S] [Algebra R S] [FaithfulSMul R S] [IsDomain S]`, `v : ι → ι' → R`, `ι'` finite: a family of vectors of K^n is L-linearly independent iff K-linearly independent (the 'equivalently' clause, for fields K ⊂ L). ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean:134 `Matrix.rank A = finrank R (LinearMap.range A.mulVecLin)`, :569 `Matrix.rank_eq_finrank_span_row : A.rank = finrank R (span R (range A.row))` for a field, :574 `LinearIndependent.rank_matrix : LinearIndependent R M.row → M.rank = card m`, :288 `Matrix.rank_submatrix_le`, :223 `Matrix.rank_of_det_ne_zero`",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement: the rank equality is not in Mathlib; its ingredients are (rank = dimension of the row span, `rank_eq_finrank_span_row`; a maximal linearly independent subfamily of the rows has the same size over K and over L by `linearIndependent_algebraMap_comp_iff`), several lines, not one"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem _root_.RingHom.map_det' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean; grep -rn 'baseChange_span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:318 `RingHom.map_det (f : R →+* S) (M : Matrix n n R) : f M.det = Matrix.det (f.mapMatrix M)` (a minor of A computed in L is the image of the minor computed in K, so it vanishes in L iff in K: the determinant form in which Deligne and Milne use the statement); ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean:864 `Submodule.baseChange_span`",
+   "date": "2026-10-09",
+   "verdict": "no match; `RingHom.map_det` gives the vanishing of one minor over L iff over K, not the rank equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final-rationality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
