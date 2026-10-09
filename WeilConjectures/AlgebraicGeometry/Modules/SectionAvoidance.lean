@@ -211,13 +211,16 @@ lemma generatesAt_iff_mem_compl_support {N : X.Modules} [SheafOfModules.IsInvert
   exact ⟨fun h ↦ h.2, fun h ↦ ⟨hxV, h⟩⟩
 
 /-- **Generating sections include one generating at a given point.** Let `N` be invertible and
-`t i` global sections of `N` which generate `N` on an open `U ∋ x`. Then some `t i` generates
-`N` at `x`. Otherwise all `t i` vanish at `x`, so they come from `J ⊗ N` for the ideal `J` of
-the closure of `x`, and hence the cokernel of `J ⊗ N ⟶ N` would vanish near `x`. -/
+`t i` global sections of `N`, the components of `φ : 𝒪_X^{⊕ I} ⟶ N`, which generate `N` on an
+open `U ∋ x`. Then some `t i` generates `N` at `x`. Otherwise all `t i` vanish at `x`, so they
+come from `J ⊗ N` for the ideal `J` of the closure of `x`, and hence the cokernel of
+`J ⊗ N ⟶ N` would vanish near `x`. -/
 lemma exists_generatesAt_of_epi {N : X.Modules} [SheafOfModules.IsInvertible.{u, u, u} N]
-    {I : Type u} (t : I → (𝟙_ X.Modules ⟶ N)) {U : X.Opens} {x : X} (hx : x ∈ U)
-    (h : Epi ((restrictFunctor U.ι).map (Sigma.desc t))) :
-    ∃ i, GeneratesAt ((t i).app ⊤ (unitSectionsEquiv ⊤ 1)) x := by
+    {I : Type u} (φ : SheafOfModules.free (R := X.ringCatSheaf) I ⟶ N) {U : X.Opens} {x : X}
+    (hx : x ∈ U) (h : Epi ((restrictFunctor U.ι).map φ)) :
+    ∃ i, GeneratesAt
+      (Hom.app (SheafOfModules.ιFree (R := X.ringCatSheaf) i ≫ φ) ⊤ (unitSectionsEquiv ⊤ 1)) x := by
+  set t : I → (𝟙_ X.Modules ⟶ N) := fun i ↦ SheafOfModules.ιFree (R := X.ringCatSheaf) i ≫ φ
   by_contra! hne
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
     inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
@@ -248,13 +251,15 @@ lemma exists_generatesAt_of_epi {N : X.Modules} [SheafOfModules.IsInvertible.{u,
       rw [Hom.ideal_zeroLocus (t i) W (isFreeGenerator_one _) he (he.coeff_smul _).symm]
       exact Ideal.mem_span_singleton_self _
     · rw [presheaf_map_app_unitSectionsEquiv_one, he.coeff_smul]
-  have hzero : Sigma.desc t ≫ q = 0 := Sigma.hom_ext _ _ fun i ↦ by simp [hq i]
+  have hzero : φ ≫ q = 0 := free_hom_ext fun i ↦ by
+    rw [← Category.assoc, comp_zero]
+    exact hq i
   -- hence `N ⧸ J N` vanishes on `U`, which is absurd near `x`
   obtain ⟨W, hxW, hWU, e, he⟩ := exists_isFreeGenerator N hx
   refine not_isZero_restrict_cokernel_whiskerRight_toModulesι J he hxW hxJ
     (isZero_restrict_of_le hWU ?_)
   have h₁ : (restrictFunctor U.ι).map q = 0 := by
-    rw [← cancel_epi ((restrictFunctor U.ι).map (Sigma.desc t)), ← Functor.map_comp, hzero,
+    rw [← cancel_epi ((restrictFunctor U.ι).map φ), ← Functor.map_comp, hzero,
       Functor.map_zero, comp_zero]
   have h₂ : (restrictFunctor U.ι).map (cokernel.π (J.toModulesι ▷ N)) = 0 := by
     have : (restrictFunctor U.ι).map (cokernel.π (J.toModulesι ▷ N)) =
