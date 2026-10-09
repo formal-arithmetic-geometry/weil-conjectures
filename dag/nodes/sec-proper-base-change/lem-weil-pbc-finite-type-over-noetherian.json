@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-finite-type-over-noetherian",
+ "kind": "statement",
+ "title": "A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6)",
+ "statement": "Call a scheme Noetherian if it is locally Noetherian [pqf-def-locnoeth] and quasi-compact (Stacks Properties, Definition 01OV). Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] of finite type [def-weil-finite-type-morphism] with $S$ Noetherian. Then $X$ is Noetherian. In particular $\\operatorname{Spec}\\mathbf Z$ is Noetherian ($\\mathbf Z$ being a Noetherian ring), so every scheme of finite type over $\\operatorname{Spec}\\mathbf Z$ is Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01T6 (lemma-finite-type-noetherian, line 2765), Noetherian case; definition of a Noetherian scheme: Properties, Definition 01OV (definition-noetherian, properties.tex line 421)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a scheme of finite type over a Noetherian scheme is Noetherian",
+   "results": "AlgebraicGeometry.IsNoetherian, Algebra.FiniteType.isNoetherianRing, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsNoetherian.mk, isNoetherian_iff_of_finite_iSup_eq_top (Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "match by one lemma per clause: LocallyOfFiniteType.isLocallyNoetherian plus IsNoetherian.mk"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian",
+   "results": "IsNoetherian, IsNoetherian.toIsLocallyNoetherian, IsNoetherian.toCompactSpace, IsNoetherian.mk, isNoetherian_iff (IsNoetherian X ↔ IsLocallyNoetherian X ∧ CompactSpace X), instIsNoetherianSpecOfIsNoetherianRingCarrier, isNoetherian_Spec (Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "match: Mathlib's IsNoetherian is the node's definition (locally Noetherian and quasi-compact); Spec of a Noetherian ring is Noetherian"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if Y is a Noetherian scheme and f : X ⟶ Y is locally of finite type and quasi-compact then X is Noetherian",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, quasiCompact_of_noetherianSpace_source, isNoetherian_iff, IsNoetherian.toIsLocallyNoetherian (Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "match (same lemmas)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isLocallyNoetherian\\|class IsNoetherian\\|IsNoetherian (Spec' Mathlib/AlgebraicGeometry/Noetherian.lean; grep -n compactSpace_of_compactSpace Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Noetherian.lean:239 theorem LocallyOfFiniteType.isLocallyNoetherian (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X; Noetherian.lean:280 class IsNoetherian (X : Scheme) : Prop extends IsLocallyNoetherian X, CompactSpace X; Noetherian.lean:342 instance {R : CommRingCat} [IsNoetherianRing R] : IsNoetherian (Spec R); QuasiCompact.lean:150 lemma QuasiCompact.compactSpace_of_compactSpace (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X; RingTheory/PrincipalIdealDomain.lean:115 instance PrincipalIdealRing.isNoetherianRing (ℤ via Int.euclideanDomain)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian; AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace; AlgebraicGeometry.IsNoetherian (class); instance IsNoetherian (Spec R) for IsNoetherianRing R",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "line": "Noetherian.lean:239, 280, 342; QuasiCompact.lean:150",
+  "how": "specializes in one line per clause: the class IsNoetherian X extends IsLocallyNoetherian X and CompactSpace X (Noetherian.lean:280), the node's definition; finite type is LocallyOfFiniteType f and QuasiCompact f [def-weil-finite-type-morphism]; LocallyOfFiniteType.isLocallyNoetherian (:239) gives IsLocallyNoetherian X and QuasiCompact.compactSpace_of_compactSpace (QuasiCompact.lean:150) gives CompactSpace X, so IsNoetherian.mk; Spec ℤ is Noetherian by the instance at :342 with ℤ a Noetherian ring (PrincipalIdealRing.isNoetherianRing). Lines read 2026-10-10 with sed -n."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-chow-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

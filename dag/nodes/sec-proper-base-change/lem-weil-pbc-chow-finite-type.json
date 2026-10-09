@@ -15,9 +15,139 @@
   "def-weil-closed-immersion",
   "def-nagata-projective-space-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*A finitely presented envelope.* Since $S$ is quasi-compact and quasi-separated and $f$ is separated and of finite type, Stacks Proposition 01ZJ [prop-nagata-finite-type-closed-in-fp] (applied to the envelope $\\mathsf{Env}_{\\mathrm{fp}}(X/S)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}}_{X/S})$ of [def-nagata-finite-type-closed-in-fp]; Lean: Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation, closed) gives a scheme $Y=X^{\\mathrm{fp}}$, a closed immersion $i:X\\to Y$ and a morphism $g:Y\\to S$ which is separated and of finite presentation, with $g\\circ i=f$.",
+   "uses": [
+    "prop-nagata-finite-type-closed-in-fp",
+    "def-nagata-finite-type-closed-in-fp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, first paragraph, first sentence (Proposition 01ZJ, separated-closed-in-finite-presentation)"
+   }
+  },
+  {
+   "text": "*It suffices to treat $g$.* Suppose $n\\ge0$, a scheme $Y'$, a proper surjective $\\pi_Y:Y'\\to Y$ and an immersion $j_Y:Y'\\to\\mathbf P^n_S$ with $p\\circ j_Y=g\\circ\\pi_Y$ are found. Put $X'=Y'\\times_YX$ (fibre product of $\\pi_Y$ and $i$ [def-pc-fibre-product]) with projections $e:X'\\to Y'$ and $\\pi:X'\\to X$, so $\\pi_Y\\circ e=i\\circ\\pi$. Then $\\pi$ is proper, as a base change of the proper $\\pi_Y$ [lem-weil-pbc-proper-fp-permanence] (b), and surjective, as a base change of the surjective $\\pi_Y$ [lem-weil-pbc-surjective-base-change]. The projection $e$ is a closed immersion, as a base change of the closed immersion $i$ [lem-weil-pbc-closed-immersion-base-change], hence an immersion (a closed immersion followed by the identity, an open immersion [def-weil-closed-immersion, def-weil-open-immersion]); so $j=j_Y\\circ e:X'\\to\\mathbf P^n_S$ is an immersion [lem-weil-pbc-proper-fp-permanence] (e). Finally $p\\circ j=g\\circ\\pi_Y\\circ e=g\\circ i\\circ\\pi=f\\circ\\pi$. So $(n,X',\\pi,j)$ is as claimed for $f$. It remains to prove the lemma for $g:Y\\to S$, separated and of finite presentation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, first paragraph, 'Clearly, if we prove the assertion for $Y$, then the result follows for $X$' (written out by the agent)"
+   }
+  },
+  {
+   "text": "*Noetherian approximation of $S$.* By [prop-nagata-noetherian-inverse-system] (Stacks Proposition 01ZA; Lean closed) $S$ admits a Noetherian approximation [def-nagata-noetherian-inverse-system]: a small cofiltered diagram of schemes of finite type over $\\operatorname{Spec}\\mathbf Z$ with affine transition morphisms and a limit cone with vertex $S$. By [lem-weil-pbc-cofiltered-limit-directed-reindex] it is re-indexed by a nonempty directed set $J$: an inverse system $(S_j)_{j\\in J}$ of schemes of finite type over $\\operatorname{Spec}\\mathbf Z$ with affine transition morphisms $s_{j'j}:S_{j'}\\to S_j$ ($j'\\ge j$) [pqf-def-affine-morphism] and projections $q_j:S\\to S_j$ exhibiting $S=\\varprojlim_jS_j$ [lem-weil-pbc-limit-affine-transition]. Each $S_j$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], hence quasi-compact and, being locally Noetherian, quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "def-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, second paragraph, first sentence (Proposition 01ZA, proposition-approximate)"
+   }
+  },
+  {
+   "text": "*Descending $Y$.* Since $g$ is of finite presentation and the $S_j$ are quasi-compact and quasi-separated with affine transition morphisms, [thm-pd-spreading-out] (1) (Stacks Lemma 01ZM; source repository: AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation, sorry-free) gives $j_0\\in J$, a morphism of finite presentation $g_{j_0}:Y_{j_0}\\to S_{j_0}$ and an isomorphism $Y\\cong Y_{j_0}\\times_{S_{j_0}}S$ over $S$ [def-pc-fibre-product]. As $g_{j_0}$ is quasi-compact and quasi-separated and $S_{j_0}$ is quasi-compact and quasi-separated, $Y_{j_0}$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2). For $j\\ge j_0$ put $Y_j=Y_{j_0}\\times_{S_{j_0}}S_j$ with projection $g_j:Y_j\\to S_j$; $g_j$ is of finite presentation, a base change of $g_{j_0}$ [lem-weil-pbc-qcqs-morphism-permanence] (3), and $Y\\cong Y_j\\times_{S_j}S$ over $S$ (transitivity of fibre products).",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, second paragraph, second sentence (Lemma 01ZM, descend-finite-presentation)"
+   }
+  },
+  {
+   "text": "*Making the model separated.* Apply [lem-weil-pbc-descend-separated] (Stacks Lemma 01ZQ) to the system $(S_j)_{j\\in J}$ with $0=j_0$, $X_0=Y_{j_0}$, $Y_0=S_{j_0}$ and $f_0=g_{j_0}$: $S_{j_0}$ and $Y_{j_0}$ are quasi-compact and quasi-separated (steps 3, 4); for $j\\ge j_0$ the base change of $f_0$ to $S_j$ is $g_j:Y_j\\to S_{j_0}\\times_{S_{j_0}}S_j=S_j$, and its base change to $S$ is $Y_{j_0}\\times_{S_{j_0}}S\\to S$, which is isomorphic over $S$ to the separated $g$ (step 4), hence separated (separatedness is invariant under isomorphism over $S$: the diagonals correspond under the isomorphism [def-weil-proper-morphism]). So there is $j_1\\ge j_0$ with $g_{j_1}:Y_{j_1}\\to S_{j_1}$ separated; it is of finite presentation (step 4), and $Y\\cong Y_{j_1}\\times_{S_{j_1}}S$ over $S$.",
+   "uses": [
+    "lem-weil-pbc-descend-separated",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, second paragraph, third sentence (Lemma 01ZQ, descend-separated-finite-presentation)"
+   }
+  },
+  {
+   "text": "*Chow's lemma over the Noetherian stage.* $S_{j_1}$ is Noetherian (step 3) and $g_{j_1}$ is separated and of finite type (finite presentation implies locally of finite type and quasi-compact [def-weil-pbc-scheme-conventions]). By [lem-weil-pbc-chow-noetherian] (Cohomology of Schemes, Lemma 0200; only its first assertion is used) there are $n\\ge0$, a scheme $Y'_{j_1}$, a proper surjective morphism $\\pi_{j_1}:Y'_{j_1}\\to Y_{j_1}$ and an immersion $\\iota:Y'_{j_1}\\to\\mathbf P^n_{S_{j_1}}=S_{j_1}\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change] with $p_{j_1}\\circ\\iota=g_{j_1}\\circ\\pi_{j_1}$, $p_{j_1}$ the projection to $S_{j_1}$.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "def-weil-pbc-scheme-conventions",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, second paragraph, last two sentences (Cohomology of Schemes, Lemma 0200, coherent-lemma-chow-Noetherian)"
+   }
+  },
+  {
+   "text": "*Base change back to $S$.* Write $T\\mapsto T_S=T\\times_{S_{j_1}}S$ for base change along $q_{j_1}$ [def-pc-fibre-product]. Put $Y'=(Y'_{j_1})_S$. The morphism $(\\pi_{j_1})_S:Y'\\to(Y_{j_1})_S$ is identified, by pasting of fibre squares, with the projection $Y'_{j_1}\\times_{Y_{j_1}}(Y_{j_1})_S\\to(Y_{j_1})_S$, a base change of $\\pi_{j_1}$; so it is proper [lem-weil-pbc-proper-fp-permanence] (b) and surjective [lem-weil-pbc-surjective-base-change]. Composing with the isomorphism $(Y_{j_1})_S\\cong Y$ over $S$ of step 5 (an isomorphism is a closed immersion, hence proper (c), and bijective) gives $\\pi_Y:Y'\\to Y$, proper (a) and surjective. Likewise, since $Y'_{j_1}\\to S_{j_1}$ factors as $p_{j_1}\\circ\\iota$, the morphism $\\iota_S:Y'\\to(\\mathbf P^n_{S_{j_1}})_S$ is identified with the projection $Y'_{j_1}\\times_{\\mathbf P^n_{S_{j_1}}}(\\mathbf P^n_{S_{j_1}})_S\\to(\\mathbf P^n_{S_{j_1}})_S$, a base change of the immersion $\\iota$, hence an immersion [lem-weil-pbc-immersion-base-change-lft] (1). Transitivity of fibre products gives an isomorphism over $S$, $(\\mathbf P^n_{S_{j_1}})_S=(S_{j_1}\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z})\\times_{S_{j_1}}S\\cong S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}=\\mathbf P^n_S$ [def-nagata-projective-space-base-change]; an isomorphism is an immersion (a closed immersion followed by the identity [def-weil-closed-immersion]), so the composite $j_Y:Y'\\to\\mathbf P^n_S$ is an immersion [lem-weil-pbc-proper-fp-permanence] (e). All the identifications are over $S$, and $p_{j_1}\\circ\\iota=g_{j_1}\\circ\\pi_{j_1}$ base changes to the equality of the two structure morphisms $Y'\\to S$; hence $p\\circ j_Y=g\\circ\\pi_Y$. This is the lemma for $g$, and by step 2 for $f$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-nagata-projective-space-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), proof, second paragraph, 'Clearly, if we prove the assertion for $X_i$ over $S_i$, then the assertion holds for $X$' (written out by the agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-finite-type-closed-in-fp",
+  "def-nagata-finite-type-closed-in-fp",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "prop-nagata-noetherian-inverse-system",
+  "def-nagata-noetherian-inverse-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-chow-noetherian",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-immersion-base-change-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071) and its proof; the two 'Clearly' reductions (steps 2 and 7) written out by the agent",
+  "note": "steps 2 and 7 written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +172,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,7 +196,17 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 0202 (Chow′s lemma over a qcqs base); correct; unsplit."
- }
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Seven steps along the proof of 0202 with Stacks' two 'clearly's written out (reduction to the finitely presented envelope Y of 01ZJ, base change back to S), one new Mathlib leaf lem-weil-pbc-finite-type-over-noetherian (01T6 Noetherian case; LocallyOfFiniteType.isLocallyNoetherian Noetherian.lean:239 and QuasiCompact.compactSpace_of_compactSpace QuasiCompact.lean:150, verified). Route: the closed Nagata nodes (01ZJ, 01ZA) as tools, thm-pd-spreading-out (01ZM) recorded as a tool use, lem-weil-pbc-descend-separated (01ZQ) and lem-weil-pbc-chow-noetherian (0200) cited unsplit. Lean candidate recorded: Scheme.exists_isPullback_of_finitePresentation_of_isSeparated (AffineTransitionLimit.lean:3512, @[stacks 01ZQ], sorry-free) covers steps 4-5 together."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-chow-finite-type",
+  "worker": "stage1",
+  "summary": "Tags checked in tags/tags: 0202 limits-lemma-chow-finite-type (limits.tex 3071), 01ZJ limits-proposition-separated-closed-in-finite-presentation (not 'S a limit of Noetherian schemes': that is 01ZA limits-proposition-approximate), 01ZM limits-lemma-descend-finite-presentation, 01ZQ limits-lemma-descend-separated-finite-presentation, 0200 coherent-lemma-chow-Noetherian, 01T6 morphisms-lemma-finite-type-noetherian. Seven steps following Stacks' proof: envelope by 01ZJ (closed node prop-nagata-finite-type-closed-in-fp), reduction from X to the envelope written out, Noetherian approximation 01ZA (closed prop-nagata-noetherian-inverse-system, re-indexed by the leaf lem-weil-pbc-cofiltered-limit-directed-reindex), descent of the envelope by 01ZM (thm-pd-spreading-out, as in lem-weil-pbc-proper-limit-noetherian), separatedness by 01ZQ (lem-weil-pbc-descend-separated), Chow over the Noetherian stage (lem-weil-pbc-chow-noetherian, 0200), base change back to S written out (proper/surjective/immersion stable under base change, P^n_{S_i} x_{S_i} S = P^n_S). One new node: lem-weil-pbc-finite-type-over-noetherian (01T6 Noetherian case, Mathlib leaf), for 'the stages S_j are Noetherian'. Statement and stmt_deps unchanged."
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out"
+ ],
+ "lead_note": "tool_uses: thm-pd-spreading-out (01ZM, descent of finite presentation to a finite stage; unit sk-prop-jacobian-descent) attached by the lead at review, as in four other nodes of this unit."
 }
