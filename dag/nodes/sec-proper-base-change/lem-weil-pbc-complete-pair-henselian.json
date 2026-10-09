@@ -11,9 +11,66 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $A$ is $I$-adically complete, $I$ is contained in the Jacobson radical of $A$.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 05GI, part (4), applied to an I-adically complete ring"
+   }
+  },
+  {
+   "text": "For each $n\\ge1$, apply the locally nilpotent factorization lemma to $A/I^n$ and its locally nilpotent ideal $I/I^n$. Any factorization of a monic polynomial modulo $I$ therefore lifts to a monic factorization modulo $I^n$.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-locally-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ALI, applied to $(A/I^n,I/I^n)$ in the proof of Lemma Tag 0ALJ"
+   }
+  },
+  {
+   "text": "The lifts at successive levels are compatible: uniqueness in the locally nilpotent factorization lemma, after reduction modulo $I^n$, forces level $n+1$ to reduce to level $n$. Thus the coefficients define compatible elements of the inverse system $A/I^n$.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-locally-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ALJ proof, successive lifts and uniqueness from Lemma Tag 0ALI"
+   }
+  },
+  {
+   "text": "By $I$-adic completeness, the compatible coefficient systems give monic polynomials $g,h\\in A[T]$ with $f=gh$ and reductions $g_0,h_0$ modulo $I$. The factorization criterion for henselian pairs now implies that $(A,I)$ is henselian.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0ALJ proof, final sentence, together with Lemma Tag 09XI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ALJ proof; checked against the public Stacks Project text because the local source document is absent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +122,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-complete-pair-henselian",
+  "worker": "stage1",
+  "summary": "Split along Stacks Tag 0ALJ: Jacobson-radical containment, factorization lifting at each quotient A/I^n via Tag 0ALI, compatibility and inverse-limit assembly, then the henselian factorization criterion Tag 09XI. Created unsplit nodes lem-weil-pbc-henselian-factorization-locally-nilpotent and lem-weil-pbc-henselian-factorization-criterion; Mathlib has only root-lifting or nilpotent-kernel idempotent results, not these pair statements."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F; spot-checked by L: L read the four steps against Stacks 0ALJ: I in the Jacobson radical (05GI, existing node), factorizations lift modulo I^n (0ALI on A/I^n, as the new node lem-weil-pbc-henselian-factorization-locally-nilpotent with uniqueness), compatibility by uniqueness, completeness assembles the coefficients, 09XI's factorization criterion (new node). Correct. Note: the report's WANTED claims more-algebra.tex is absent; it is in literature/stacks-project/; F should cite labels from the file."
+ }
 }
