@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+ "kind": "statement",
+ "title": "Surjectivity and exactness in Mod(O_X) of a ringed space are local lifting of sections (Stacks 01AF, 01AG)",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $\\textit{Mod}(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules on (the open sets of) $X$ [def-weil-sheaf-of-modules-category]; it is abelian, and the kernel of $\\varphi:\\mathcal G\\to\\mathcal H$ is the sub-$\\mathcal O_X$-module $W\\mapsto\\ker(\\varphi_W)$. Then: (1) a morphism $\\varphi:\\mathcal G\\to\\mathcal H$ of $\\mathcal O_X$-modules is surjective (an epimorphism of $\\textit{Mod}(\\mathcal O_X)$, equivalently $\\operatorname{Coker}\\varphi=0$) if and only if it is surjective as a map of sheaves: for every open $W\\subseteq X$ and every $h\\in\\mathcal H(W)$ there are an open covering $W=\\bigcup_iW_i$ and sections $g_i\\in\\mathcal G(W_i)$ with $\\varphi_{W_i}(g_i)=h|_{W_i}$; (2) a complex $\\mathcal F\\xrightarrow{\\chi}\\mathcal G\\xrightarrow{\\varphi}\\mathcal H$ of $\\mathcal O_X$-modules ($\\varphi\\circ\\chi=0$) is exact at $\\mathcal G$ (the image of $\\chi$ equals $\\operatorname{Ker}\\varphi$ in $\\textit{Mod}(\\mathcal O_X)$) if and only if for every open $W\\subseteq X$ and every $g\\in\\mathcal G(W)$ with $\\varphi_W(g)=0$ there are an open covering $W=\\bigcup_iW_i$ and sections $f_i\\in\\mathcal F(W_i)$ with $\\chi_{W_i}(f_i)=g|_{W_i}$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 01AF (label section-kernels: kernels sectionwise, cokernel the sheafified sectionwise cokernel with stalks Coker(phi)_x = Coker(phi_x), lines 102-145) and Lemma 01AG (label lemma-abelian, line 149: Mod(O_X) is abelian and a complex is exact at G iff it is exact on all stalks); with Sheaves, Lemma 0H7H / Definition 007U (sheaves.tex, label lemma-characterize-epi-mono, definition-injective-surjective: surjective on all stalks iff locally surjective), as recorded on lem-weil-pbc-locally-surjective-iff-stalks"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sequence of sheaves of modules on a ringed space is exact iff exact on stalks; epimorphism of sheaves of modules iff locally surjective",
+   "results": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono), CategoryTheory.Sheaf.epi_of_isLocallySurjective(') and CategoryTheory.Sheaf.isLocallySurjective_iff_epi (Mathlib.CategoryTheory.Sites.LocallySurjective), PresheafOfModules.IsLocallySurjective (Mathlib.Algebra.Category.ModuleCat.Sheaf), PresheafOfModules.epi_iff_surjective / epi_of_surjective / surjective_of_epi (Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono, presheaves only)",
+   "date": "2026-10-10",
+   "verdict": "no match: epi iff locally surjective is in Mathlib for sheaves valued in a concrete category (Sheaf J A), not for SheafOfModules, and nothing for exactness of a complex of sheaves of modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism of sheaves of modules is locally surjective",
+   "results": "CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', PresheafOfModules.epi_of_surjective, PresheafOfModules.surjective_of_epi, PresheafOfModules.epi_iff_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match (same as leansearch: abelian/concrete-valued sheaves or presheaves of modules only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Epi, CategoryTheory.Presheaf.IsLocallySurjective",
+   "results": "none (further loogle queries 'SheafOfModules, CategoryTheory.ShortComplex.Exact' were refused by the service's rate limit, 3 requests per 30 s)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocallySurjective' Mathlib/Algebra/Category/ModuleCat/; grep -rn 'Exact\\|exact_iff' Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean Mathlib/Topology/Sheaves/*.lean (theorem/lemma lines); ls Mathlib/Algebra/Category/ModuleCat/Sheaf/ and read Abelian.lean",
+   "results": "SheafOfModules.IsLocallySurjective is only an abbrev (ModuleCat/Sheaf.lean:203) used as a hypothesis in ChangeOfRings/Sheafify; Sheaf/Abelian.lean:40 only the instance Abelian (SheafOfModules R); TopCat.Sheaf.exact_iff_stalkFunctor_map_exact (Mathlib/Topology/Sheaves/Abelian.lean:103): a ShortComplex of sheaves on a topological space valued in a concrete abelian category C is exact iff exact on all stalks; TopCat.Sheaf.epi_of_shortExact (Topology/Sheaves/Flasque.lean:113)",
+   "date": "2026-10-10",
+   "verdict": "no match for O_X-modules: exact_iff_stalkFunctor_map_exact is the stalk criterion for abelian sheaves (C = AddCommGrpCat); applying it to O_X-modules needs that the forgetful functor Mod(O_X) -> Ab(X) is exact, and the passage from stalks to local lifting is lem-weil-pbc-locally-surjective-iff-stalks, so this node is not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: epimorphisms and exactness in Mod(O_X) on a ringed space are the local lifting conditions (Modules 01AF/01AG); self-contained; correct; unsplit."
+ }
+}
