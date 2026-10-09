@@ -33,3 +33,7 @@ the '## Review by C' is a mechanical check (statement against the unit, steps na
 ## lem-weil-pbc-proj-standard-open-inclusion (2026-10-09 16:56 UTC, branch head ff126e05)
 
 Branch stacked on deliver/C/lem-weil-pbc-sheaf-of-modules-from-basis (it carries that item's report and nodes); one branch per item on top of sheaf-dag (roles/remote-lead.md). Re-push on the current sheaf-dag after the other delivery is merged or on its own base.
+
+## lem-weil-pbc-zariski-h0-proper-henselian-pair (2026-10-09 17:09 UTC, branch head 9906be5f)
+
+Branch stacked on deliver/C/lem-weil-pbc-proj-standard-open-inclusion (carries that item's report); one branch per item on top of sheaf-dag. Note: lem-weil-pbc-proj-standard-open-inclusion has since been split by L (C released its claim); rebase on the current sheaf-dag and re-push.
