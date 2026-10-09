@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Stalk
 
@@ -55,7 +56,7 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
 
 universe u
 
-open CategoryTheory MonoidalCategory Endofunctor
+open CategoryTheory MonoidalCategory Endofunctor Limits
 
 namespace AlgebraicGeometry
 
@@ -68,8 +69,34 @@ section Monoidal
 sums of copies of `ℚ̄_ℓ,X`, and `𝓗om_{ℚ̄_ℓ,X}(ℚ̄_ℓ,X, ℚ̄_ℓ,X) = ℚ̄_ℓ,X`. -/
 theorem ProEtale.IsAdicLisseSheaf.ihom {Z : Scheme.{u}}
     {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
-    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
-  sorry
+    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ProEtale.AdicSheaf.ihom F).obj G) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨R', hR', hR'G⟩ := hG
+  obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  obtain ⟨ι', V', f', rfl⟩ := R'.exists_eq_ofArrows
+  refine ⟨_, Precoverage.comp_mem_coverings f hR (fun i j ↦ pullback.fst (f i) (f' j))
+    (fun i ↦ Precoverage.mem_coverings_of_isPullback f' hR' (f i) _ _
+      fun j ↦ IsPullback.of_hasPullback (f i) (f' j)), ?_⟩
+  rintro _ _ ⟨⟨i, j⟩⟩
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR' (.mk j)
+  have : WeaklyEtale (pullback.fst (f i) (f' j)) :=
+    MorphismProperty.pullback_fst _ _ ‹WeaklyEtale (f' j)›
+  have : WeaklyEtale (pullback.fst (f i) (f' j) ≫ f i) :=
+    have : MorphismProperty.IsStableUnderComposition
+        (@WeaklyEtale : MorphismProperty Scheme.{u}) :=
+      MorphismProperty.IsMultiplicative.toIsStableUnderComposition
+    MorphismProperty.comp_mem _ _ _ ‹_› ‹_›
+  obtain ⟨n, ⟨e⟩⟩ := hRF (f i) (.mk i)
+  obtain ⟨m, ⟨e'⟩⟩ := hR'G (f' j) (.mk j)
+  obtain ⟨e₁⟩ := ProEtale.nonempty_upperStar_iso_biproduct (pullback.fst (f i) (f' j))
+    ⟨ProEtale.adicUpperStarUnitIso l _⟩ e
+  obtain ⟨e₂⟩ := ProEtale.nonempty_upperStar_iso_biproduct (pullback.snd (f i) (f' j))
+    ⟨ProEtale.adicUpperStarUnitIso l _⟩ e'
+  refine ⟨n * m, ⟨(ProEtale.adicUpperStarIhomIso l (pullback.fst (f i) (f' j) ≫ f i) F).app G ≪≫
+    (Mod.ihomMapIso ((ProEtale.adicUpperStarComp l _ _).app F ≪≫ e₁)).symm.app _ ≪≫
+    (ProEtale.AdicSheaf.ihom _).mapIso ((ProEtale.adicUpperStarCongr l pullback.condition).app G ≪≫
+      (ProEtale.adicUpperStarComp l _ _).app G ≪≫ e₂) ≪≫ Mod.ihomFreeIso n m⟩⟩
 
 /-- The internal hom from a lisse sheaf into a constructible sheaf is constructible: on the
 strata of the second sheaf it is the internal hom of two lisse sheaves. -/

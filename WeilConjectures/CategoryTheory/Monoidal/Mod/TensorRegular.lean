@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Limits.Shapes.SplitCoequalizer
+public import Mathlib.Logic.Equiv.Fin.Basic
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 
 /-!
@@ -219,23 +220,61 @@ noncomputable def ihomMapAddHom (M M' : Mod C A) : (M ⟶ M') →+ (ihom M' ⟶ 
     rwa [add_zero, left_eq_add] at h
   map_add' := ihomMap_add
 
+lemma sum_ihomMap_ι_comp_ihomMap_π {n : ℕ} (M : Fin n → Mod C A) :
+    ∑ i, ihomMap (biproduct.ι M i) ≫ ihomMap (biproduct.π M i) = 𝟙 (ihom (⨁ M)) := by
+  simp_rw [← ihomMap_comp]
+  calc ∑ i, ihomMap (biproduct.π M i ≫ biproduct.ι M i) =
+      ihomMapAddHom (⨁ M) (⨁ M) (∑ i, biproduct.π M i ≫ biproduct.ι M i) := by
+        rw [map_sum]; rfl
+    _ = 𝟙 _ := by rw [biproduct.total]; exact ihomMap_id _
+
 /-- `Hom_A(⨁ᵢ Mᵢ, -)` preserves epimorphisms if each `Hom_A(Mᵢ, -)` does: it is the direct sum
 of the `Hom_A(Mᵢ, -)`, the projections and inclusions being induced by those of `⨁ᵢ Mᵢ`. -/
 lemma epi_ihom_biproduct_map {n : ℕ} (M : Fin n → Mod C A) {N N' : Mod C A} (f : N ⟶ N')
     (h : ∀ i, Epi ((ihom (M i)).map f)) : Epi ((ihom (⨁ M)).map f) := by
   refine Preadditive.epi_of_cancel_zero _ fun {Z} g hg ↦ ?_
-  have htot : ∑ i, ihomMap (biproduct.ι M i) ≫ ihomMap (biproduct.π M i) = 𝟙 (ihom (⨁ M)) := by
-    simp_rw [← ihomMap_comp]
-    calc ∑ i, ihomMap (biproduct.π M i ≫ biproduct.ι M i) =
-        ihomMapAddHom (⨁ M) (⨁ M) (∑ i, biproduct.π M i ≫ biproduct.ι M i) := by
-          rw [map_sum]; rfl
-      _ = 𝟙 _ := by rw [biproduct.total]; exact ihomMap_id _
+  have htot := sum_ihomMap_ι_comp_ihomMap_π M
   have hi (i : Fin n) : (ihomMap (biproduct.π M i)).app N' ≫ g = 0 := by
     have := h i
     rw [← cancel_epi ((ihom (M i)).map f), ← Category.assoc, (ihomMap _).naturality,
       Category.assoc, hg, comp_zero, comp_zero]
   rw [← Category.id_comp g, ← NatTrans.id_app, ← htot, NatTrans.app_sum, Preadditive.sum_comp]
   exact Finset.sum_eq_zero fun i _ ↦ by rw [NatTrans.comp_app, Category.assoc, hi, comp_zero]
+
+/-- The bicone exhibiting `Hom_A(⨁ᵢ Mᵢ, N)` as the direct sum of the `Hom_A(Mᵢ, N)`. -/
+@[simps]
+noncomputable def ihomBiproductBicone {n : ℕ} (M : Fin n → Mod C A) (N : Mod C A) :
+    Bicone fun i ↦ (ihom (M i)).obj N where
+  pt := (ihom (⨁ M)).obj N
+  π i := (ihomMap (biproduct.ι M i)).app N
+  ι i := (ihomMap (biproduct.π M i)).app N
+  ι_π i j := by
+    rw [← NatTrans.comp_app, ← ihomMap_comp]
+    by_cases h : i = j
+    · subst h
+      simp [ihomMap_id]
+    · rw [biproduct.ι_π_ne _ (Ne.symm h), dif_neg h]
+      exact congrArg (NatTrans.app · N) ((ihomMapAddHom _ _).map_zero)
+
+/-- **`Hom_A(-, N)` takes finite direct sums to direct sums.** -/
+noncomputable def ihomBiproductIso {n : ℕ} (M : Fin n → Mod C A) (N : Mod C A) :
+    (ihom (⨁ M)).obj N ≅ ⨁ fun i ↦ (ihom (M i)).obj N :=
+  biproduct.uniqueUpToIso _ (isBilimitOfTotal (ihomBiproductBicone M N) (by
+    simp only [ihomBiproductBicone_π, ihomBiproductBicone_ι]
+    simp_rw [← NatTrans.comp_app]
+    rw [← NatTrans.app_sum, sum_ihomMap_ι_comp_ihomMap_π]
+    rfl))
+
+/-- The internal hom between free modules of finite rank is free:
+`Hom_A(Aⁿ, Aᵐ) ≅ A^{n m}`. -/
+noncomputable def ihomFreeIso (n m : ℕ) :
+    (ihom (⨁ fun _ : Fin n ↦ regular A)).obj (⨁ fun _ : Fin m ↦ regular A) ≅
+      ⨁ fun _ : Fin (n * m) ↦ regular A :=
+  ihomBiproductIso _ _ ≪≫ biproduct.mapIso (fun _ ↦ ihomRegularIso.app _) ≪≫
+    biproductBiproductIso (fun _ : Fin n ↦ Fin m) (fun _ _ ↦ regular A) ≪≫
+    biproduct.whiskerEquiv (f := fun _ : (Σ _ : Fin n, Fin m) ↦ regular A)
+      (g := fun _ : Fin (n * m) ↦ regular A)
+      ((Equiv.sigmaEquivProd _ _).trans finProdFinEquiv) (fun _ ↦ Iso.refl _)
 
 /-- `Hom_A(M, -)` preserves epimorphisms for `M` free of finite rank. -/
 lemma epi_ihom_map_of_iso_biproduct {M : Mod C A} {n : ℕ}
