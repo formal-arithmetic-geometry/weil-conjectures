@@ -15,9 +15,38 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a property of a morphism of schemes saying that for every cartesian base change, the pullback of every injective torsion sheaf has vanishing higher direct images",
+   "results": "AlgebraicGeometry.Scheme.Hom.injective; AlgebraicGeometry.UniversallyInjective; AlgebraicGeometry.Flat.isStableUnderBaseChange; no etale sheaf base-change acyclicity property",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective torsion sheaf is acyclic for a direct image functor after every base change",
+   "results": "CochainComplex.isKInjective_of_injective; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; no scheme etale base-change property",
+   "date": "2026-10-10",
+   "verdict": "no match; generic derived-functor vanishing is not the quantified base-change property"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "results": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ in Mathlib.CategoryTheory.Abelian.RightDerived",
+   "date": "2026-10-10",
+   "verdict": "no match; this is only the generic injective-object vanishing lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'HasInjectiveAcyclicity|injective.*acyclic|rightDerived.*injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158 has Functor.isZero_rightDerived_obj_injective_succ; no HasInjectiveAcyclicity or etale direct-image base-change declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form"
@@ -49,5 +78,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-ia"
+ "unit": "sk-def-ia",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-injective-acyclicity-property",
+  "worker": "stage1",
+  "summary": "Checked the detailed definition against the unit sk-def-ia and the blueprint source. The statement keeps its three existing dependencies: proper scheme-morphism conventions, the chosen cartesian square, and the higher direct image. The definition has no proof steps and no new statement nodes are needed. Mathlib searches found only the generic CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ lemma, not this quantified etale base-change property. The slopmaster2 source contains AlgebraicGeometry.Etale.HasInjectiveAcyclicity, a broader declaration over an arbitrary coefficient ring with an explicit IsTorsionSheaf hypothesis and no properness assumption; this is reported as an attachment for lead review rather than changing the blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed definition split and attached Lean declaration against the blueprint; broader Lean type is explicitly reported, statement unchanged, searches complete."
+ }
 }
