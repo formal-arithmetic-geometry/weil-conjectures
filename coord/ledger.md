@@ -635,3 +635,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:28 L reviewed lem-weil-pbc-coherent-formal-modules-affine (worker, 7 steps along 087W, 2 new unsplit) and lem-weil-pbc-coherent-formal-short-exact-levels (worker, 4 steps, 2 new: explicit kernel in Coh(X,I) unsplit, ses-kernel leaf): pass, committed.
 - 23:29 L reviewed lem-weil-pbc-coherent-sheaf-hom-coherent (worker, 5 steps, 1 new unsplit 01BY): pass, committed.
 - 23:30 L reviewed lem-weil-pbc-colimit-surjective-ring-map (worker, 5 steps, 0 new): pass, committed. Notice to C1: the two re-pushes of z-g-ring do not change the false DVR node; the return stands.
+- 23:31 L reviewed lem-weil-pbc-complete-local-quotient (worker, 4 steps, 0 new): pass, committed.
