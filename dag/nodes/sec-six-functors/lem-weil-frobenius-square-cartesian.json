@@ -1,0 +1,50 @@
+{
+ "id": "lem-weil-frobenius-square-cartesian",
+ "kind": "statement",
+ "title": "The Frobenius square of a k_0-morphism is Cartesian",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$ and put\n$\\gamma=\\operatorname{Frob}_q=\\varphi_q^{-1}\\in\\operatorname{Aut}(k/k_0)$, the\ngeometric Frobenius [def-weil-frobenius-detailed]. Let $f_0:X_0\\to Y_0$ be a\nmorphism of $k_0$-schemes [def-weil-scheme-morphism-properties], put\n$X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$ and $f=f_0\\times\\operatorname{id}_k:X\\to Y$,\nand let\n\n$$\n g_X=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X,\\qquad\n g_Y=\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma):Y\\to Y .\n$$\n\nThen:\n\n1. $g_X$ and $g_Y$ are isomorphisms of schemes, with inverses\n$\\operatorname{id}_{X_0}\\times\\Spec(\\gamma^{-1})$ and\n$\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma^{-1})$;\n\n2. $f\\circ g_X=g_Y\\circ f$;\n\n3. the commutative square\n\n$$\n\\begin{array}{ccc}\n X & \\xrightarrow{\\ g_X\\ } & X\\\\\n f\\downarrow & & \\downarrow f\\\\\n Y & \\xrightarrow{\\ g_Y\\ } & Y\n\\end{array}\n$$\n\nis Cartesian: the morphism $(g_X,f):X\\to X\\times_{f,Y,g_Y}Y$ is an\nisomorphism. This square, with the identification $(g_X,f)$, is the\n*Frobenius square* of $f_0$.\n\nIn particular, for $Y_0=\\Spec k_0$ one has $Y=s=\\Spec k$ (via\n$\\Spec k_0\\times_{k_0}k=\\Spec k$), $g_Y=g_s=\\Spec(\\gamma)$, and for a\n$k_0$-scheme $X_0$ with structure morphism $a_{X_0}$ the base change\n$a_X:X\\to s$ satisfies $a_X\\circ g_X=g_s\\circ a_X$, the square\n$(a_X,g_X,g_s)$ being Cartesian.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, La conjecture de Weil II, (1.1.10)(i) and (1.1.11), pp. 151-152: the action of W(F/F_q) on X = X_0 (x) F through the factor F, id_{X_0} x F being 'l'action du Frobenius geometrique' of (1.1.14), p. 152; the Cartesian property is the one asserted without proof in the slopmaster2 definition def:weil-direct-image-object (literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, lines 2405-2425: 'The Frobenius square for f_0 is Cartesian') and in def-pur-scheme-geometric-frobenius"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'theorem of_horiz_isIso|theorem of_vert_isIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "results": "IsPullback/Basic.lean:78 CategoryTheory.IsPullback.of_horiz_isIso [IsIso fst] [IsIso g] (sq : CommSq fst snd f g) : IsPullback fst snd f g, and :297 of_vert_isIso",
+   "date": "2026-10-09",
+   "verdict": "generalization of part 3 only: IsPullback.of_horiz_isIso with fst = g_X, g = g_Y once parts 1 and 2 are known; parts 1 and 2 are not supplied, so not a one-line specialization; no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'pullback\\.map_isIso|lemma pullback\\.map_comp|lemma pullback\\.map_id' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean ; grep -rln -i frobenius ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "HasPullback.lean:339 instance pullback.map_isIso, :283 pullback.map_comp, :295 pullback.map_id (functoriality of the fibre product, from which parts 1 and 2 follow for g = pullback.map of id and Spec gamma); nothing on Frobenius in AlgebraicGeometry/",
+   "date": "2026-10-09",
+   "verdict": "ingredients only (functoriality of pullback.map); no statement about the base change of a Galois automorphism of k/k_0; no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-cohomology-transport",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
