@@ -34,7 +34,7 @@ the internal hom of `A`-modules.
 
 @[expose] public section
 
-universe v u
+universe v u v' u'
 
 open CategoryTheory MonoidalCategory MonObj Limits
 
@@ -190,6 +190,37 @@ lemma tensorLeftDiagramMap_id (M : Mod C A) : tensorLeftDiagramMap A (𝟙 M) = 
       (tensorRightMap_id _)
   · exact tensorRightMap_id _
 
+lemma tensorLeftMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    tensorLeftMap (f ≫ g) = tensorLeftMap f ≫ tensorLeftMap g := by
+  rw [tensorLeftMap, tensorLeftMap, tensorLeftMap, tensorLeftDiagramMap_comp, Functor.map_comp,
+    Functor.whiskerRight_comp]
+
+lemma tensorLeftMap_id (M : Mod C A) : tensorLeftMap (𝟙 M) = 𝟙 _ := by
+  rw [tensorLeftMap, tensorLeftDiagramMap_id, CategoryTheory.Functor.map_id,
+    Functor.whiskerRight_id']
+  rfl
+
+section Additive
+
+variable [Preadditive C] [MonoidalPreadditive C]
+
+/-- The tensor product `- ⊗_A M` is additive in `M`. -/
+lemma tensorLeftMap_add {M M' : Mod C A} (f g : M ⟶ M') :
+    tensorLeftMap (f + g) = tensorLeftMap f + tensorLeftMap g := by
+  ext P : 2
+  refine colimit.hom_ext fun j ↦ ?_
+  simp only [tensorLeftMap, Functor.whiskerRight_app, colim_map, ι_colimMap, NatTrans.app_add,
+    Preadditive.comp_add]
+  cases j
+  · ext
+    change P.X ◁ A ◁ (f.hom + g.hom) ≫ _ = P.X ◁ A ◁ f.hom ≫ _ + P.X ◁ A ◁ g.hom ≫ _
+    simp [MonoidalPreadditive.whiskerLeft_add]
+  · ext
+    change P.X ◁ (f.hom + g.hom) ≫ _ = P.X ◁ f.hom ≫ _ + P.X ◁ g.hom ≫ _
+    simp [MonoidalPreadditive.whiskerLeft_add]
+
+end Additive
+
 /-- An isomorphism `M ≅ M'` induces `- ⊗_A M ≅ - ⊗_A M'`. -/
 noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') :
     tensorLeft M ≅ tensorLeft M' where
@@ -252,6 +283,18 @@ noncomputable def ihomMapIso {M M' : Mod C A} (e : M ≅ M') : ihom M' ≅ ihom 
 noncomputable def ihomMap {M M' : Mod C A} (f : M ⟶ M') : ihom M' ⟶ ihom M :=
   conjugateEquiv (ihomAdjunction M') (ihomAdjunction M) (tensorLeftMap f)
 
+
+lemma ihomMap_add {M M' : Mod C A} (f g : M ⟶ M') : ihomMap (f + g) = ihomMap f + ihomMap g := by
+  ext N
+  simp [ihomMap, tensorLeftMap_add, Preadditive.add_comp, Preadditive.comp_add]
+
+lemma ihomMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    ihomMap (f ≫ g) = ihomMap g ≫ ihomMap f := by
+  rw [ihomMap, ihomMap, ihomMap, conjugateEquiv_comp, tensorLeftMap_comp]
+
+lemma ihomMap_id (M : Mod C A) : ihomMap (𝟙 M) = 𝟙 _ := by
+  rw [ihomMap, tensorLeftMap_id, conjugateEquiv_id]
+
 end Hom
 
 section Functor
@@ -260,23 +303,24 @@ open Functor.LaxMonoidal
 
 open scoped Obj
 
-variable {G : C ⥤ C} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
-  (ρ : A ⟶ G.obj A) [IsMonHom ρ]
+variable {D : Type u'} [Category.{v'} D] [MonoidalCategory D] {B : D} [MonObj B]
+  {G : C ⥤ D} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
+  (ρ : B ⟶ G.obj A) [IsMonHom ρ]
 
-/-- The functor on modules induced by a lax monoidal endofunctor `G` and a monoid morphism
-`ρ : A ⟶ G A`. -/
-noncomputable abbrev mapModComap : Mod C A ⥤ Mod C A :=
+/-- The functor on modules induced by a lax monoidal functor `G : C ⥤ D` and a monoid morphism
+`ρ : B ⟶ G A`. -/
+noncomputable abbrev mapModComap : Mod C A ⥤ Mod D B :=
   G.mapMod A ⋙ comap ρ
 
 /-- A lax monoidal functor with invertible tensor comparison commutes with `- ⊗ X`. -/
 noncomputable def tensorRightCompMapModComapIso (X : C) :
-    tensorRight A X ⋙ mapModComap ρ ≅ mapModComap ρ ⋙ tensorRight A (G.obj X) :=
+    tensorRight A X ⋙ mapModComap ρ ≅ mapModComap ρ ⋙ tensorRight B (G.obj X) :=
   NatIso.ofComponents (fun P ↦ isoMk (M := (mapModComap ρ).obj ((tensorRight A X).obj P))
-      (N := (tensorRight A (G.obj X)).obj ((mapModComap ρ).obj P))
+      (N := (tensorRight B (G.obj X)).obj ((mapModComap ρ).obj P))
       (asIso (Functor.LaxMonoidal.μ G P.X X)).symm (by
         change (ρ ▷ G.obj (P.X ⊗ X) ≫ Functor.LaxMonoidal.μ G A (P.X ⊗ X) ≫
             G.map ((α_ A P.X X).inv ≫ act P.X ▷ X)) ≫ inv (Functor.LaxMonoidal.μ G P.X X) =
-          A ◁ inv (Functor.LaxMonoidal.μ G P.X X) ≫ (α_ A (G.obj P.X) (G.obj X)).inv ≫
+          B ◁ inv (Functor.LaxMonoidal.μ G P.X X) ≫ (α_ B (G.obj P.X) (G.obj X)).inv ≫
             (ρ ▷ G.obj P.X ≫ Functor.LaxMonoidal.μ G A P.X ≫ G.map (act P.X)) ▷ G.obj X
         rw [← cancel_mono (Functor.LaxMonoidal.μ G P.X X)]
         simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id, comp_whiskerRight,
@@ -290,10 +334,10 @@ noncomputable def tensorRightCompMapModComapIso (X : C) :
         inv (Functor.LaxMonoidal.μ G _ X) ≫ G.map f.hom ▷ G.obj X
       rw [IsIso.comp_inv_eq, Category.assoc, μ_natural_left, IsIso.inv_hom_id_assoc])
 
-variable [BraidedCategory C] [IsCommMonObj A] [IsIso ρ]
+variable [BraidedCategory C] [IsCommMonObj A] [BraidedCategory D] [IsCommMonObj B] [IsIso ρ]
 
-/-- The isomorphism `G (A ⊗ M) ≅ A ⊗ G M`, from the inverses of `μ` and of `ρ`. -/
-noncomputable def mapTensorIso (M : C) : G.obj (A ⊗ M) ≅ A ⊗ G.obj M :=
+/-- The isomorphism `G (A ⊗ M) ≅ B ⊗ G M`, from the inverses of `μ` and of `ρ`. -/
+noncomputable def mapTensorIso (M : C) : G.obj (A ⊗ M) ≅ B ⊗ G.obj M :=
   (asIso (Functor.LaxMonoidal.μ G A M)).symm ≪≫ whiskerRightIso (asIso ρ).symm _
 
 /-- The functor `- ⊗ X` on modules along an isomorphism `X ≅ Y`. -/
@@ -308,13 +352,13 @@ def tensorRightMapIso {X Y : C} (e : X ≅ Y) : tensorRight A X ≅ tensorRight 
     rw [← tensorRightMap_comp, e.inv_hom_id]
     exact NatTrans.ext (funext fun P ↦ Mod.hom_ext _ _ (MonoidalCategory.whiskerLeft_id _ _))
 
-omit [BraidedCategory C] [IsCommMonObj A] in
+omit [BraidedCategory C] [IsCommMonObj A] [BraidedCategory D] [IsCommMonObj B] in
 lemma map_tensorRightMap_act_comp (M P : Mod C A) :
     ((mapModComap ρ).map ((tensorRightMap A (act M.X)).app P) ≫
         ((tensorRightCompMapModComapIso ρ M.X).app P).hom).hom =
       (((tensorRightCompMapModComapIso ρ (A ⊗ M.X)).app P).hom ≫
-        (tensorRightMap A (mapTensorIso ρ M.X).hom).app ((mapModComap ρ).obj P) ≫
-        (tensorRightMap A (act ((mapModComap ρ).obj M).X)).app ((mapModComap ρ).obj P)).hom := by
+        (tensorRightMap B (mapTensorIso ρ M.X).hom).app ((mapModComap ρ).obj P) ≫
+        (tensorRightMap B (act ((mapModComap ρ).obj M).X)).app ((mapModComap ρ).obj P)).hom := by
   change G.map (P.X ◁ act M.X) ≫ inv (Functor.LaxMonoidal.μ G P.X M.X) =
     inv (Functor.LaxMonoidal.μ G P.X (A ⊗ M.X)) ≫ G.obj P.X ◁ (mapTensorIso ρ M.X).hom ≫
       G.obj P.X ◁ (ρ ▷ G.obj M.X ≫ Functor.LaxMonoidal.μ G A M.X ≫ G.map (act M.X))
@@ -330,12 +374,12 @@ lemma map_tensorRightRightAct_comp
     ((mapModComap ρ).map ((tensorRightRightAct A M.X).app P) ≫
         ((tensorRightCompMapModComapIso ρ M.X).app P).hom).hom =
       (((tensorRightCompMapModComapIso ρ (A ⊗ M.X)).app P).hom ≫
-        (tensorRightMap A (mapTensorIso ρ M.X).hom).app ((mapModComap ρ).obj P) ≫
-        (tensorRightRightAct A ((mapModComap ρ).obj M).X).app ((mapModComap ρ).obj P)).hom := by
+        (tensorRightMap B (mapTensorIso ρ M.X).hom).app ((mapModComap ρ).obj P) ≫
+        (tensorRightRightAct B ((mapModComap ρ).obj M).X).app ((mapModComap ρ).obj P)).hom := by
   change G.map ((α_ P.X A M.X).inv ≫ rightAct P ▷ M.X) ≫ inv (Functor.LaxMonoidal.μ G P.X M.X) =
     inv (Functor.LaxMonoidal.μ G P.X (A ⊗ M.X)) ≫ G.obj P.X ◁ (mapTensorIso ρ M.X).hom ≫
-      (α_ (G.obj P.X) A (G.obj M.X)).inv ≫
-        ((β_ (G.obj P.X) A).hom ≫ ρ ▷ G.obj P.X ≫ Functor.LaxMonoidal.μ G A P.X ≫
+      (α_ (G.obj P.X) B (G.obj M.X)).inv ≫
+        ((β_ (G.obj P.X) B).hom ≫ ρ ▷ G.obj P.X ≫ Functor.LaxMonoidal.μ G A P.X ≫
           G.map (act P.X)) ▷ G.obj M.X
   rw [IsIso.comp_inv_eq]
   simp only [mapTensorIso, Iso.trans_hom, Iso.symm_hom, asIso_inv, whiskerRightIso_hom,
@@ -351,13 +395,15 @@ lemma map_tensorRightRightAct_comp
 
 variable [HasColimitsOfShape WalkingParallelPair C]
   [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)]
+  [HasColimitsOfShape WalkingParallelPair D]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft B)]
   (hβ : ∀ X Y : C, Functor.LaxMonoidal.μ G X Y ≫ G.map (β_ X Y).hom =
       (β_ (G.obj X) (G.obj Y)).hom ≫ Functor.LaxMonoidal.μ G Y X)
 
 /-- The parallel pairs defining `P ⊗_A M` are compatible with `G`. -/
 noncomputable def tensorLeftDiagramCompIso (M : Mod C A) :
     (tensorLeftDiagram A M).flip ⋙ (Functor.whiskeringRight _ _ _).obj (mapModComap ρ) ≅
-      mapModComap ρ ⋙ (tensorLeftDiagram A ((mapModComap ρ).obj M)).flip :=
+      mapModComap ρ ⋙ (tensorLeftDiagram B ((mapModComap ρ).obj M)).flip :=
   NatIso.ofComponents (fun P ↦ parallelPair.ext
       ((tensorRightCompMapModComapIso ρ (A ⊗ M.X)).app P ≪≫
         (tensorRightMapIso (mapTensorIso ρ M.X)).app ((mapModComap ρ).obj P))
@@ -368,7 +414,7 @@ noncomputable def tensorLeftDiagramCompIso (M : Mod C A) :
       ext j : 2
       cases j
       · have h₁ := (tensorRightCompMapModComapIso ρ (A ⊗ M.X)).hom.naturality f
-        have h₂ := (tensorRightMapIso (A := A) (mapTensorIso ρ M.X)).hom.naturality
+        have h₂ := (tensorRightMapIso (A := B) (mapTensorIso ρ M.X)).hom.naturality
           ((mapModComap ρ).map f)
         simp only [Functor.comp_map] at h₁
         simp only [Functor.comp_obj, Functor.whiskeringRight_obj_obj, Functor.flip_obj_obj,
@@ -398,8 +444,13 @@ variable [BraidedCategory C] [IsCommMonObj A] [Abelian C] [MonoidalPreadditive C
   [IsGrothendieckAbelian.{v} C]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
-  {G : C ⥤ C} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
-  (ρ : A ⟶ G.obj A) [IsMonHom ρ] [IsIso ρ]
+  {D : Type u'} [Category.{v'} D] [MonoidalCategory D] {B : D} [MonObj B]
+  [BraidedCategory D] [IsCommMonObj B] [Abelian D] [MonoidalPreadditive D]
+  [IsGrothendieckAbelian.{v'} D]
+  [∀ X : D, PreservesColimitsOfSize.{v', v'} (MonoidalCategory.tensorLeft X)]
+  [∀ X : D, PreservesColimitsOfSize.{v', v'} (MonoidalCategory.tensorRight X)]
+  {G : C ⥤ D} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
+  (ρ : B ⟶ G.obj A) [IsMonHom ρ] [IsIso ρ]
   (hβ : ∀ X Y : C, Functor.LaxMonoidal.μ G X Y ≫ G.map (β_ X Y).hom =
       (β_ (G.obj X) (G.obj Y)).hom ≫ Functor.LaxMonoidal.μ G Y X)
   [(mapModComap ρ).IsEquivalence]

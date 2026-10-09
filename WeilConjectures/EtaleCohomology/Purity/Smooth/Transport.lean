@@ -56,6 +56,7 @@ open Scheme
 namespace Etale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+  [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
   [Small.{u + 1} E] {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [IsSeparated f]
   [SmoothOfRelativeDimension d f] [HasCompactification f]
 

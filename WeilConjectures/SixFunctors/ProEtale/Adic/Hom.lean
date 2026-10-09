@@ -81,4 +81,15 @@ noncomputable def adicLowerStarCompIhomIso (g : X ⟶ X) [IsIso g] (M : AdicShea
   Mod.mapModComapCompIhomIso (adicConstantSheafToLowerStar l g)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
 
+variable (l) in
+/-- The pushforward of sheaves of `ℚ̄_ℓ`-modules along an automorphism commutes with the
+tensor product: `g_* (P ⊗ M) ≅ g_* P ⊗ g_* M`. -/
+noncomputable def adicLowerStarTensorLeftIso (g : X ⟶ X) [IsIso g] (M : AdicSheaf l X) :
+    Mod.tensorLeft M ⋙ (g)_*ᵃ[l] ≅ (g)_*ᵃ[l] ⋙ Mod.tensorLeft ((g)_*ᵃ[l].obj M) :=
+  haveI : (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l g)).IsEquivalence :=
+    isEquivalence_adicLowerStar l g
+  Mod.tensorLeftCompMapModComapIso (adicConstantSheafToLowerStar l g)
+    (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
+
 end AlgebraicGeometry.ProEtale

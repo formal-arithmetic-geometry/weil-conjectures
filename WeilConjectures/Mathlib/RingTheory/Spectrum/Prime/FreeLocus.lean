@@ -24,6 +24,8 @@ We record two facts about the rank `Module.rankAtStalk` of a module at a prime.
 - `Module.Finite.exists_free_localizedModule_powers_of_isDomain`: *generic freeness*. A finite
   module `M` over a domain `A` becomes free after inverting a suitable nonzero `r ∈ A`, of rank the
   rank of `M` at the generic point `(0)` of `Spec A`.
+- `Module.exists_free_localizedModule_powers_of_flat`: a finitely presented flat module becomes
+  free of finite rank after inverting a suitable element outside any given prime.
 - `Module.exists_flat_localizedModule_powers`: *generic flatness* (Stacks, Tag 051R). A finite
   module over a finite type algebra over a noetherian domain `R` becomes flat over `R` after
   inverting a suitable nonzero element of `R`.
@@ -565,5 +567,20 @@ theorem exists_flat_localizedModule_powers [IsNoetherianRing R] [IsDomain R] {S 
   exact ⟨a, ha, (flatAway_iff a).mp h⟩
 
 end GenericFlatness
+
+/-- **Finitely presented flat modules are locally free.** If `M` is a finitely presented flat
+`R`-module and `p` is a prime of `R`, then `M_r` is a finite free `R_r`-module for some `r ∉ p`:
+the localization `M_p` is free over the local ring `R_p`, and a basis of `M_p` spreads out to a
+basis of some `M_r`. -/
+theorem exists_free_localizedModule_powers_of_flat {R M : Type*} [CommRing R] [AddCommGroup M]
+    [Module R M] [Module.FinitePresentation R M] [Module.Flat R M] (p : Ideal R) [p.IsPrime] :
+    ∃ r ∉ p, Module.Free (Localization.Away r) (LocalizedModule.Away r M) ∧
+      Module.Finite (Localization.Away r) (LocalizedModule.Away r M) := by
+  have : Module.Free (Localization.AtPrime p) (LocalizedModule p.primeCompl M) :=
+    Module.free_of_flat_of_isLocalRing
+  obtain ⟨r, hr, hfree, -⟩ := Module.FinitePresentation.exists_free_localizedModule_powers
+    p.primeCompl (LocalizedModule.mkLinearMap p.primeCompl M) (Localization.AtPrime p)
+  exact ⟨r, hr, hfree, Module.Finite.of_isLocalizedModule (.powers r)
+    (LocalizedModule.mkLinearMap (.powers r) M)⟩
 
 end Module

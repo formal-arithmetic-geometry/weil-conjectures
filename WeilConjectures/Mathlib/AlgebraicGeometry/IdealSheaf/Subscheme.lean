@@ -81,6 +81,12 @@ complement of the basic open `X_f` when `s = {f}`. The sections of `s` vanish on
 (`AlgebraicGeometry.Scheme.zeroLocusSubschemeι_appTop`), and a quasi-compact morphism on which
 they vanish factors through `V(s)` (`AlgebraicGeometry.Scheme.Hom.liftZeroLocusSubscheme`).
 
+## Morphisms from reduced schemes
+
+A morphism `f : X ⟶ Y` from a reduced scheme kills the nilradical of `Y`
+(`AlgebraicGeometry.Scheme.nilradical_le_ker`), hence factors through the reduced closed
+subscheme `Y.nilradical.subscheme` (`AlgebraicGeometry.Scheme.Hom.liftNilradical`).
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
@@ -93,6 +99,7 @@ they vanish factors through `V(s)` (`AlgebraicGeometry.Scheme.Hom.liftZeroLocusS
 - `AlgebraicGeometry.Scheme.zeroLocusSubschemeι_appTop` and
   `AlgebraicGeometry.Scheme.Hom.liftZeroLocusSubscheme`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.nilradical_le_ker` and `AlgebraicGeometry.Scheme.Hom.liftNilradical`
 - `AlgebraicGeometry.Scheme.Opens.closedComplement` and
   `AlgebraicGeometry.Scheme.Opens.range_closedComplement`, with the specialisations
   `AlgebraicGeometry.Scheme.Hom.closedComplement` and
@@ -390,3 +397,31 @@ lemma range_closedComplement : Set.range j.closedComplement.base = (Set.range j.
   simp
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme
+
+variable {X Y : Scheme.{u}}
+
+/-- A morphism from a reduced scheme kills the nilradical of the target. -/
+lemma nilradical_le_ker [IsReduced X] (f : X ⟶ Y) : Y.nilradical ≤ f.ker := by
+  refine IdealSheafData.le_ofIdeals_iff.mpr fun U a ha ↦ ?_
+  obtain ⟨n, hn⟩ := Ideal.mem_radical_iff.mp ha
+  rw [RingHom.mem_ker]
+  exact IsNilpotent.eq_zero ⟨n, by rw [← map_pow, Ideal.mem_bot.mp hn, map_zero]⟩
+
+/-- The closed subscheme cut out by the nilradical is reduced. -/
+instance isReduced_nilradical_subscheme (X : Scheme.{u}) : IsReduced X.nilradical.subscheme := by
+  rw [← IdealSheafData.vanishingIdeal_top]
+  infer_instance
+
+/-- A morphism from a reduced scheme factors through the reduced closed subscheme of the
+target. -/
+noncomputable def Hom.liftNilradical [IsReduced X] (f : X ⟶ Y) : X ⟶ Y.nilradical.subscheme :=
+  f.toImage ≫ IdealSheafData.inclusion (nilradical_le_ker f)
+
+@[reassoc (attr := simp)]
+lemma Hom.liftNilradical_subschemeι [IsReduced X] (f : X ⟶ Y) :
+    f.liftNilradical ≫ Y.nilradical.subschemeι = f := by
+  simp [Hom.liftNilradical]
+
+end AlgebraicGeometry.Scheme

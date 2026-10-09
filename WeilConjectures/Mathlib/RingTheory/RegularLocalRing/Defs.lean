@@ -41,6 +41,7 @@ they are open and closed, and they are the connected components.
   over a regular ring are regular local rings.
 - `PrimeSpectrum.disjoint_of_mem_irreducibleComponents`: irreducible components of a smooth
   affine variety do not meet.
+- `IsRegularRing.localization`: a localization of a regular ring is regular.
 
 ## Blueprint
 
@@ -379,3 +380,12 @@ theorem IsRegularLocalRing.isDiscreteValuationRing (R : Type*) [CommRing R]
   · rw [← Ideal.span_singleton_generator (IsLocalRing.maximalIdeal R), ht,
       Ideal.span_singleton_eq_bot]
   · exact (Ideal.span_singleton_generator _).symm
+
+/-- A localization of a regular ring is regular: its localizations at primes are localizations of
+the original ring at primes. -/
+instance IsRegularRing.localization {R : Type*} [CommRing R] [IsRegularRing R] (M : Submonoid R) :
+    IsRegularRing (Localization M) := by
+  rw [isRegularRing_iff]
+  intro p _
+  exact IsRegularLocalRing.of_ringEquiv
+    (IsLocalization.localizationLocalizationAtPrimeIsoLocalization M p).toRingEquiv
