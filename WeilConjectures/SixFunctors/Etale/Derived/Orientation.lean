@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 
@@ -148,8 +149,10 @@ theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ
     Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj
-          ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) :=
-  sorry
+          ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) := by
+  obtain ⟨e⟩ := DerivedCategory.nonempty_iso_derivedHom_derivedTensor hK
+    ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)
+  exact ⟨(RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso o.purity.symm ≪≫ e⟩
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.
 
@@ -157,8 +160,13 @@ Under an orientation the Verdier dual of a perfect complex is perfect, so that `
 restricts to a contravariant anti-equivalence of the perfect objects. -/
 theorem Orientation.isDualizable_verdierDual (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
-    IsDualizable ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) :=
-  sorry
+    IsDualizable ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) := by
+  obtain ⟨e⟩ := o.nonempty_iso_verdierDual_coefficientDual hK
+  have hT : IsInvertible (tateObject Λ X d) :=
+    (isInvertible_iff_exists_derivedTensor _).2 (isInvertible_tateObject Λ X d)
+  exact IsDualizable.of_iso e.symm (DerivedCategory.isDualizable_derivedTensor
+    (DerivedCategory.isDualizable_coefficientDual hK)
+    (DerivedCategory.isDualizable_of_isInvertible (DerivedCategory.isInvertible_shift hT _)))
 
 end Etale
 
