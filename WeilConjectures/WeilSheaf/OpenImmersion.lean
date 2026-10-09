@@ -185,6 +185,18 @@ lemma extensionByZeroToDirectImage_app_hom_hom_f (j : U ⟶ X) [IsOpenImmersion 
         (Scheme.Hom.geometricFiberMap j (comp_over j _))).app F.obj.carrier :=
   rfl
 
+-- TODO(unify): sk-prop-sf-open-closed-triangle
+/-- **The comparison `j_! F ⟶ j_* F` of Weil sheaves is a monomorphism**: on underlying
+pro-étale sheaves it is the comparison along the base change `j̄ : Ū ⟶ X̄`, which is a
+monomorphism (`AlgebraicGeometry.ProEtale.mono_adicOpenImmersionLowerShriekToLowerStar_app`). -/
+instance mono_extensionByZeroToDirectImage_app (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l U) : Mono ((extensionByZeroToDirectImage j).app F) := by
+  let Φ := (WeilSheaf.objectProperty k₀ l X).ι ⋙
+    IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+  apply Φ.mono_of_mono_map
+  exact ProEtale.mono_adicOpenImmersionLowerShriekToLowerStar_app _ F.obj.carrier
+
 end WeilSheaf
 
 end AlgebraicGeometry
