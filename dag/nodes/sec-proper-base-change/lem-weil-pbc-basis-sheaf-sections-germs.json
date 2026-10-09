@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-weil-pbc-basis-presheaf-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Injectivity of $\\gamma_W$ for every $W\\in\\mathcal B$.* Let $W\\in\\mathcal B$ and $s,s'\\in F(W)$ with $s_x=s'_x$ in $F_x$ for every $x\\in W$. Fix $x\\in W$. By the description of equality in the directed colimit $F_x=\\operatorname{colim}_{V\\in\\mathcal B_x}F(V)$ [def-weil-pbc-basis-presheaf-stalk] (two elements $\\sigma\\in F(V)$, $\\sigma'\\in F(V')$, $V,V'\\in\\mathcal B_x$, have the same germ at $x$ if and only if there is $V''\\in\\mathcal B_x$ with $V''\\subseteq V\\cap V'$ and $r_{V,V''}\\sigma=r_{V',V''}\\sigma'$), applied with $V=V'=W$, there is $V_x\\in\\mathcal B$ with $x\\in V_x\\subseteq W$ and $s|_{V_x}=s'|_{V_x}$. Choose such a $V_x$ for every $x\\in W$. Then $(V_x)_{x\\in W}$ is a family of members of $\\mathcal B$ with $\\bigcup_{x\\in W}V_x=W$ (each $x\\in W$ lies in $V_x\\subseteq W$; for $W=\\emptyset$ it is the empty family, allowed in the hypothesis). The family $s_x^\\ast=s|_{V_x}\\in F(V_x)$ is compatible: $s|_{V_x}|_{V_x\\cap V_y}=s|_{V_x\\cap V_y}=s|_{V_y}|_{V_x\\cap V_y}$ by $r_{V,W'}r_{U,V}=r_{U,W'}$ (all intersections lie in $\\mathcal B$). Both $s$ and $s'$ restrict to it, since $s'|_{V_x}=s|_{V_x}$. By the uniqueness half of the gluing hypothesis for the $\\mathcal B$-covering $(V_x)_{x\\in W}$ of $W$, $s=s'$. Hence $\\gamma_W$ is injective; for $W=U$ this is the first claim.",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009M (label lemma-condition-star-sections), first sentence: 'injective by the uniqueness in the sheaf condition of Definition 009J'; the equality of germs in the directed colimit F_x after Definition 009I (label definition-presheaf-basis) written out"
+   }
+  },
+  {
+   "text": "*The image satisfies (*).* Let $s\\in F(U)$ and $t=\\gamma_U(s)$, i.e. $t_y=s_y$ for $y\\in U$. For $x\\in U$ take $V=U\\in\\mathcal B$ (so $x\\in V\\subseteq U$) and $\\sigma=s\\in F(V)$; then $t_y=\\sigma_y$ for all $y\\in V$. So $\\gamma_U(F(U))$ is contained in the set of families with (*).",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, Lemma 009M (label lemma-condition-star-sections), the inclusion of the image in the families with (*), not written in Stacks"
+   }
+  },
+  {
+   "text": "*Every family with (*) is in the image.* Let $t=(t_x)_{x\\in U}\\in\\prod_{x\\in U}F_x$ satisfy (*). For each $x\\in U$ choose $V_x\\in\\mathcal B$ with $x\\in V_x\\subseteq U$ and $\\sigma_x\\in F(V_x)$ with $t_y=(\\sigma_x)_y$ for all $y\\in V_x$. Then $(V_x)_{x\\in U}$ is a $\\mathcal B$-covering of $U$ ($x\\in V_x\\subseteq U$; for $U=\\emptyset$ the empty family). Compatibility: let $x,x'\\in U$ and $W=V_x\\cap V_{x'}$, which lies in $\\mathcal B$ by the hypothesis on $\\mathcal B$. For $z\\in W$, by the compatibility of germs with restriction [def-weil-pbc-basis-presheaf-stalk], $(\\sigma_x|_W)_z=(\\sigma_x)_z=t_z=(\\sigma_{x'})_z=(\\sigma_{x'}|_W)_z$. So $\\sigma_x|_W,\\sigma_{x'}|_W\\in F(W)$ have the same germ at every point of $W$, and by step 1 applied to $W\\in\\mathcal B$ (this is where the uniqueness half of the hypothesis enters, for the covering of $V_x\\cap V_{x'}$ found there) $\\sigma_x|_W=\\sigma_{x'}|_W$. By the existence half of the gluing hypothesis for the covering $(V_x)_{x\\in U}$ there is $s\\in F(U)$ with $s|_{V_x}=\\sigma_x$ for every $x\\in U$. For $y\\in U$, $y\\in V_y$ and $s_y=(s|_{V_y})_y=(\\sigma_y)_y=t_y$ [def-weil-pbc-basis-presheaf-stalk]. Hence $\\gamma_U(s)=t$. Together with steps 1 and 2: $\\gamma_U$ is injective with image exactly the families satisfying (*).",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009M (label lemma-condition-star-sections), from 'Let (s_x) be any element on the right hand side which satisfies (*)': the covering by the U_i (here V_x) with sections sigma_i, agreement of sigma_i, sigma_j in the stalks at y in U_i cap U_j giving V_ijy with sigma_i|_{V_ijy} = sigma_j|_{V_ijy}, then (**) of Definition 009J; with the single-overlap gluing hypothesis of this node (the form of Lemma 009L, label lemma-cofinal-systems-coverings-standard-case), the V_ijy are the covering of U_i cap U_j used in step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-basis-presheaf-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009H, Lemma 009M (label lemma-condition-star-sections) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +81,52 @@
    "results": "Stalks.lean:484,491,502 (germs over basis opens for presheaves on X); Sites.lean:126-266 (coverDense_iff_isBasis, restrictHomEquivHom, hom_ext, isIso_iff_isIso_basis); Sheafify.lean:53,60 isGerm/isLocallyGerm (the predicate (*) for a presheaf on X, used for sheafification)",
    "date": "2026-10-10",
    "verdict": "no match for presheaves on a basis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a section of a sheaf is determined by its germs; the map from sections to the product of stalks is injective",
+   "results": "TopCat.Presheaf.section_ext, app_injective_iff_stalkFunctor_map_injective, germ_exist (Mathlib.Topology.Sheaves.Stalks); AlgebraicGeometry.germ_injective_of_isIntegral; TopCat.Presheaf.stalkToFiber_injective (Sheafify)",
+   "date": "2026-10-10",
+   "verdict": "no match: section_ext (Stalks.lean:520) is the injectivity half for F : TopCat.Sheaf C X on all opens, not for a presheaf on a basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition for a presheaf defined only on a basis of open sets closed under intersection: section over basic open is a compatible family of germs",
+   "results": "TopCat.Presheaf.germ_eq_of_isBasis, germ_exist_of_isBasis (v4.28 index name; in this Mathlib exists_mem_germ_eq_of_isBasis), germ_eq, germ_ext, Γgerm_res_apply, germ_res_apply' (Stalks); TopCat.Presheaf.Sheafify.isGerm",
+   "date": "2026-10-10",
+   "verdict": "no match: all for presheaves on all opens of X"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.section_ext",
+   "results": "TopCat.Presheaf.section_ext (Mathlib.Topology.Sheaves.Stalks): (F : TopCat.Sheaf C X) (U : Opens X) (s t) (h : ∀ x (hx : x ∈ U), germ s = germ t) : s = t",
+   "date": "2026-10-10",
+   "verdict": "no match (sheaf on X, not on a basis)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.isSheaf_iff_isSheafUniqueGluing",
+   "results": "unknown identifier; the declaration is TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing (Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean:160; _types version :125)",
+   "date": "2026-10-10",
+   "verdict": "no match: unique-gluing sheaf condition for presheaves on all opens of X"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf on a basis of a topological space; functor on the full subcategory of basic opens satisfying the sheaf condition; sections equal families of compatible germs",
+   "results": "TopCat.Presheaf.IsSheaf, TopCat.Sheaf, TopCat.Sheaf.presheaf, TopCat.Sheaf.forget (Sheaf.lean); germ_eq_of_isBasis (Stalks); TopCat.sheafToTypes; isSheaf_iff_isSheafEqualizerProducts",
+   "date": "2026-10-10",
+   "verdict": "no match: no notion of sheaf on a basis with stalks in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsBasis' Mathlib/Topology/Sheaves (all files); sed -n 478,525p Mathlib/Topology/Sheaves/Stalks.lean; grep -rn 'isSheaf_iff_isSheafUniqueGluing' Mathlib",
+   "results": "IsBasis only in Stalks.lean (exists_mem_germ_eq_of_isBasis :484, germ_eq_of_isBasis :491, stalkFunctor_map_injective_of_isBasis :502, all for F : X.Presheaf C) and SheafCondition/Sites.lean (coverDense_iff_isBasis :127, coverDense_inducedFunctor :135, restrictHomEquivHom :240, hom_ext :252, isIso_iff_isIso_basis :258, for sheaves on X); section_ext Stalks.lean:520; TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing UniqueGluing.lean:160",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no API for presheaves/sheaves on a basis with stalks (confirmed); the statement is not a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +151,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 009M (sections over U ∈ B = germ families with (*)); correct; unsplit; its split must use the uniqueness half of the hypothesis for gluing on refinements of U_i ∩ U_j, as the worker notes."
+  "note": "Three steps along Stacks 009M (lemma-condition-star-sections): injectivity from the colimit description and the uniqueness half; image ⊆ (*) trivially; (*) ⇒ image by gluing the local sections, agreement on V_x ∩ V_{x′} by step 1. Checked; no new nodes; not in Mathlib (basis API absent)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-basis-sheaf-sections-germs",
+  "worker": "stage1",
+  "summary": "Split along Stacks 009M (sheaves.tex, label lemma-condition-star-sections) and its proof, read in full, in three steps: (1) injectivity of gamma_W for every W in B, from the equality of germs in the directed colimit (def-weil-pbc-basis-presheaf-stalk, reviewed leaf) and the uniqueness half of the gluing hypothesis for the covering (V_x) of W (empty U covered by the empty family); (2) the image satisfies (*) with V = U (elementary); (3) a family with (*): choose V_x, sigma_x, show sigma_x and sigma_x' agree on V_x cap V_x' in B by step 1 applied there (Stacks uses (**) with the coverings V_ijy instead; with the single-overlap hypothesis of this node, the 009L form, step 1 is that argument), glue, and compare germs. No new nodes; statement unchanged. Mathlib searched three ways again: no API for sheaves on a basis (section_ext, germ_eq_of_isBasis, exists_mem_germ_eq_of_isBasis are for presheaves on all opens; the unique-gluing equivalence is TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing, not TopCat.Sheaf.). Source repository: no declaration combining IsBasis and germ (the 6 files mentioning both use isBasis_affineOpens inside proofs; no sorry-map name contains basis with germ/sheaf/stalk)."
  }
 }
