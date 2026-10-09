@@ -1,8 +1,8 @@
 # Work queue
 
-571 items; claim with `tools/claim.py next <group> [--stage N]`.
+572 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (554)
+## Stage 1: nodes to split (555)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1005 | none |
 | `lem-weil-pbc-curve-constructible-sub-quotient` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
@@ -48,6 +47,7 @@
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | sorry_here |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
 | `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
+| `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
@@ -487,6 +487,7 @@
 | `lem-sc-artin-schreier-k` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-pic-affine` | - | none |
+| `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
 | `lemma-nagata-proj-chart-ring-cocycle` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
@@ -503,6 +504,7 @@
 | `lem-sc-divisible-quotient-torsion` | - | none |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | none |
+| `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 | `def-nagata-affine-fp-descent` | - | none |
@@ -538,7 +540,6 @@
 | `lem-pc-perfect-locus` | - | rests_on_sorry |
 | `lem-sc-canonical-sheaf` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | none |
-| `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pc-hilb-sheaf` | - | rests_on_sorry |
 | `lem-pc-projective-coherent-finiteness` | - | none |
@@ -583,7 +584,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 569 nodes that wait for stage 1, 125 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 126 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

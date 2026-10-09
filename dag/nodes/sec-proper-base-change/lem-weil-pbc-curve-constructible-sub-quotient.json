@@ -14,9 +14,120 @@
   "def-weil-pbc-curve-setting",
   "def-weil-pbc-constructible-torsion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$C$ is Noetherian and $F$ is killed by one integer $N\\ge1$.* $C$ is of finite type over the field $k$, hence a Noetherian scheme; its underlying space is a Noetherian topological space, and so is every subspace of it (Mathlib: TopologicalSpace.NoetherianSpace.set), which is therefore quasi-compact (TopologicalSpace.NoetherianSpace.isCompact). By [def-weil-pbc-constructible-torsion] there are a finite partition $C=\\coprod_{i=1}^rC_i$ into locally closed constructible subsets and immersions $u_i:Z_i\\to C$ with image $C_i$ such that $G_i=u_i^{-1}F$ [def-weil-pbc-inverse-image] is locally constant with finite stalks: there is a jointly surjective family of etale morphisms $(v_{ij}:U_{ij}\\to Z_i)_{j\\in J_i}$ [def-weil-etale-morphism] such that the restriction of $G_i$ to $(U_{ij})_{\\Et}$ is isomorphic to a constant sheaf $\\underline{A_{ij}}$ [def-constructible-locally-constant], and every geometric stalk of $G_i$ is finite. Discard the empty $U_{ij}$. Etale morphisms are flat and locally of finite presentation, hence open (Mathlib: UniversallyOpen.of_flat, Scheme.Hom.isOpenMap), so the images $v_{ij}(U_{ij})$ form an open cover of the quasi-compact space $|Z_i|\\cong C_i$; choose a finite subfamily $J_i^0\\subseteq J_i$ that is still jointly surjective. (a) *Each $A_{ij}$ ($j\\in J_i^0$) is finite.* Pick a point of $U_{ij}$ and a geometric point $\\bar w$ of $U_{ij}$ over it (Spec of an algebraic closure of its residue field [def-weil-geometric-point]). The stalk of the constant sheaf $\\underline{A_{ij}}$ at $\\bar w$ is $A_{ij}$ [lem-weil-pbc-constant-sheaf-geometric-stalk]. The stalk at $\\bar w$ of the restriction $G_i|_{U_{ij}}$ equals the stalk $(G_i)_{v_{ij}\\circ\\bar w}$ [def-weil-pbc-geometric-stalks]: a pointed etale neighbourhood of $\\bar w$ in $U_{ij}$ is, by composition with $v_{ij}$, a pointed etale neighbourhood of $v_{ij}\\circ\\bar w$ in $Z_i$ with the same sections of $G_i$, and these are cofinal, since for a pointed neighbourhood $(W,\\bar x)$ of $v_{ij}\\circ\\bar w$ the pair $(W\\times_{Z_i}U_{ij},(\\bar x,\\bar w))$ is a pointed neighbourhood of $\\bar w$ mapping to it. So $A_{ij}\\cong(G_i)_{v_{ij}\\circ\\bar w}$ is finite by hypothesis; let $e_{ij}\\ge1$ be its exponent and $N=\\operatorname{lcm}_{i,\\,j\\in J_i^0}e_{ij}$ (a finite lcm; $N=1$ if $C=\\emptyset$). (b) *Every geometric stalk of $G_i$ is killed by $N$.* Let $\\bar z$ be a geometric point of $Z_i$; since $(v_{ij})_{j\\in J_i^0}$ is jointly surjective, $\\bar z=v_{ij}\\circ\\bar w$ for some $j\\in J_i^0$ and a geometric point $\\bar w$ of $U_{ij}$ [lem-weil-pbc-etale-cover-geometric-point-lift], so as in (a) $(G_i)_{\\bar z}\\cong A_{ij}$ is killed by $e_{ij}\\mid N$. (c) *A covering family of geometric points of $C$.* For every point $c\\in C$, with $c\\in C_i$, choose $z\\in Z_i$ over $c$ and a geometric point $\\bar z$ of $Z_i$ at $z$; then $\\bar c=u_i\\circ\\bar z$ is a geometric point of $C$ at $c$, and $F_{\\bar c}\\cong(u_i^{-1}F)_{\\bar z}=(G_i)_{\\bar z}$ [lem-weil-pbc-inverse-image-stalk-germ], killed by $N$ by (b). (d) *$NF=0$.* Let $\\psi=N\\cdot\\mathrm{id}_F$ and $I=\\operatorname{Im}\\psi\\subseteq F$. Stalk functors are exact [prop-weil-pbc-geometric-stalks-exact], so $I_{\\bar c}=N\\cdot F_{\\bar c}=0$ for each $\\bar c$ of the family (c). Hence the morphism $I\\to0$ is injective on the stalks of a family of geometric points whose images cover $C$, so it is a monomorphism [lem-weil-pbc-geometric-stalks-detect-mono]; thus $I=0$ and $\\psi=0$, i.e. $NF=0$. (This is why one integer works for all three sheaves: Stacks' Noetherian setting has finitely many strata, each with finitely many trivializing pieces.)",
+   "uses": [
+    "def-weil-pbc-constructible-torsion",
+    "def-weil-pbc-inverse-image",
+    "def-weil-etale-morphism",
+    "def-constructible-locally-constant",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-geometric-stalks-detect-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 'Constructible sheaves on Noetherian schemes' (section-noetherian-constructible), first paragraph (finite partition on a Noetherian scheme); Definition 03RU (definition-finite-locally-constant). The bound N is not stated in Stacks; written out here (agent)."
+   }
+  },
+  {
+   "text": "*$F_1$ and $F_2$ are killed by $N$, and the sequence is one of sheaves of $\\mathbf Z/N$-modules.* $(N\\cdot\\mathrm{id}_F)\\circ\\alpha=\\alpha\\circ(N\\cdot\\mathrm{id}_{F_1})$ and the left side is $0$ by step 1; $\\alpha$ is a monomorphism, so $N\\cdot\\mathrm{id}_{F_1}=0$. Likewise $\\beta\\circ(N\\cdot\\mathrm{id}_F)=(N\\cdot\\mathrm{id}_{F_2})\\circ\\beta$ with $\\beta$ an epimorphism gives $N\\cdot\\mathrm{id}_{F_2}=0$. An abelian sheaf killed by $N$ is the same as a sheaf of $(\\mathbf Z/N)_C$-modules [def-weil-pbc-etale-sheaves] (the module structure $\\mathbf Z/N\\times F(U)\\to F(U)$ is the unique one induced by $\\mathbf Z$), and every morphism of abelian sheaves between two such is $\\mathbf Z/N$-linear; so $\\operatorname{Mod}(C_{\\Et},\\mathbf Z/N)$ is the full subcategory of $\\Ab(C_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] of sheaves killed by $N$. It is closed under subobjects and quotients in $\\Ab(C_{\\Et})$, so kernels, images and cokernels of its morphisms are the same in both categories, and $0\\to F_1\\to F\\to F_2\\to0$ is a short exact sequence in $\\operatorname{Mod}(C_{\\Et},\\mathbf Z/N)$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem 03SC (theorem-vanishing-affine-curves), second paragraph, where a sheaf killed by an integer is treated as a sheaf of modules over Z/n; written out here (agent)."
+   }
+  },
+  {
+   "text": "*$F$ is a constructible sheaf of $\\mathbf Z/N$-modules.* By steps 1 and 2, $NF=0$ and $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting]; by [lem-weil-pbc-constructible-torsion-modules-agree] with $n=N$, $F$ being constructible in the sense of [def-weil-pbc-constructible-torsion] is constructible as a sheaf of $\\mathbf Z/N$-modules in the sense of [def-weil-pbc-etale-constructible-sheaf] ($\\Lambda=\\mathbf Z/N$, a finite commutative ring). On the Noetherian scheme $C$ every locally closed subset is constructible [def-weil-constructible-subset] (Stacks Topology, Lemma 005L, recorded in that definition), so condition (a) of that definition is automatic on $C$ and the notion agrees with the one without condition (a) (def-constructible-constructible, used by thm-constructible-serre).",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "lem-weil-pbc-constructible-torsion-modules-agree",
+    "def-weil-pbc-constructible-torsion",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 'Constructible sheaves on Noetherian schemes' (section-noetherian-constructible), first paragraph: on a Noetherian scheme the adjective 'constructible' on the strata can be omitted; Lemma 095E (lemma-constructible-quasi-compact-quasi-separated) for the global partition form."
+   }
+  },
+  {
+   "text": "*$F_1$ is a constructible sheaf of $\\mathbf Z/N$-modules (Stacks 09BH (3), submodules).* The monomorphism $\\alpha$ induces an isomorphism of $F_1$ onto the subsheaf $\\alpha(F_1)=\\operatorname{Im}\\alpha\\subseteq F$, a subsheaf of $\\mathbf Z/N$-modules (step 2). $C$ is Noetherian (step 1) and $\\mathbf Z/N$ is a finite commutative ring, so $\\operatorname{Im}\\alpha$ is a constructible sheaf of $\\mathbf Z/N$-modules by [lem-weil-pbc-constructible-subobjects-noetherian] applied to $F$ (step 3). Constructibility in the sense of [def-weil-pbc-etale-constructible-sheaf] is invariant under isomorphism: the same stratification serves, since the inverse image along each stratum immersion carries the isomorphism $F_1\\cong\\operatorname{Im}\\alpha$ to an isomorphism, and composing local trivializations with it shows finite local constancy is transported. So $F_1$ is constructible as a sheaf of $\\mathbf Z/N$-modules.",
+   "uses": [
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 09BH (proposition-constructible-over-noetherian), part (3) and its proof ('Thus it suffices to show the statement on submodules', then Noetherian induction with Lemma 09BG (lemma-irreducible-subsheaf-constant-zero)); part (2) for abelian sheaves 'follows in the usual manner from (3)', which is what steps 2, 3 and 5 do on C."
+   }
+  },
+  {
+   "text": "*$F_2$ is a constructible sheaf of $\\mathbf Z/N$-modules (Stacks 09BH (3), quotients, via the weak Serre property 03RZ).* By exactness in $\\operatorname{Mod}(C_{\\Et},\\mathbf Z/N)$ (step 2), $\\beta$ induces an isomorphism $\\operatorname{Coker}\\alpha\\cong F_2$. $\\alpha:F_1\\to F$ is a morphism between constructible sheaves of $\\mathbf Z/N$-modules (steps 3, 4), so its cokernel is constructible [thm-constructible-serre] (closed under cokernels; on the Noetherian $C$ its notion of constructible agrees with [def-weil-pbc-etale-constructible-sheaf], step 3). By invariance under isomorphism (as in step 4) $F_2$ is a constructible sheaf of $\\mathbf Z/N$-modules.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 09BH (proposition-constructible-over-noetherian) proof of (3): 'we already know that constructible sheaves of modules form a weak Serre subcategory, see Lemma 03RZ (lemma-constructible-abelian). Thus it suffices to show the statement on submodules' (a quotient F -> Q is the cokernel of its kernel, a submodule)."
+   }
+  },
+  {
+   "text": "*Back to the curve notion.* $F_1$ and $F_2$ are torsion abelian sheaves with $NF_1=0=NF_2$ (step 2), so $(C,F_1)$, $(C,F_2)$ are curve coefficient pairs [def-weil-pbc-curve-setting], and by [lem-weil-pbc-constructible-torsion-modules-agree] with $n=N$ and steps 4, 5 they are constructible in the sense of [def-weil-pbc-constructible-torsion].",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "lem-weil-pbc-constructible-torsion-modules-agree",
+    "def-weil-pbc-constructible-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 09BH (proposition-constructible-over-noetherian), part (2), with Definition 03RW (definition-constructible) and Lemma 095E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-etale-morphism",
+  "def-constructible-locally-constant",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-curve-setting",
+  "lem-weil-pbc-constructible-torsion-modules-agree",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proposition 09BH (proposition-constructible-over-noetherian) (2)/(3) and its proof, with Lemma 03RZ (lemma-constructible-abelian), Lemma 095E (lemma-constructible-quasi-compact-quasi-separated) and the first paragraph of Section 'Constructible sheaves on Noetherian schemes'; step 1 (one integer N kills F) and the Z/N-module bridge are written out by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +149,38 @@
    "results": "only constructible sets (Topology/Constructible, RingTheory/Spectrum/Prime/ConstructibleSet.lean, Chevalley.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean); no constructible sheaf anywhere; etale sheaves only in AlgebraicGeometry/Sites/{Etale,AffineEtale,EtalePoint}.lean",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a constructible etale sheaf with finite stalks on a Noetherian scheme is killed by a positive integer",
+   "results": "SheafOfModules.Finite.hasFiniteLimits, Sheaf.IsConstant.mk, SheafOfModules.IsFiniteType.mk, Scheme.Modules.instAbelian, Scheme.etaleTopology, Scheme.Etale: nothing on constructible or torsion etale sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructibleSheaf\"",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient sheaf of a constructible sheaf of modules on the etale site of a Noetherian scheme is constructible",
+   "results": "SheafOfModules.IsFiniteType, LocalGeneratorsData.IsFiniteType, QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation (Mathlib.Algebra.Category.ModuleCat.Sheaf.*): finite type / finite presentation for sheaves of O-modules, not constructibility",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Constructible' and grep -rn 'IsConstructibleSheaf\\|Serre' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only constructible sets (Topology/Constructible.lean, Topology/Spectral/ConstructibleTopology.lean, RingTheory/Spectrum/Prime/{ConstructibleSet,Chevalley,ChevalleyComplexity,Topology}.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean); no constructible sheaf, no Serre subcategory of sheaves; ingredients found for step 1: TopologicalSpace.NoetherianSpace.set / .isCompact (Topology/NoetherianSpace.lean:76, :65), UniversallyOpen.of_flat and Scheme.Hom.isOpenMap (AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147, :48)",
+   "date": "2026-10-09",
+   "verdict": "no match (for the statement; the step-1 topological ingredients are in Mathlib)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +200,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-curve-constructible-sub-quotient",
+  "worker": "stage1",
+  "summary": "Statement kept. Proof in six steps following Stacks 09BH (proof of (3), reduction of quotients to submodules via the weak Serre property 03RZ, and '(2) follows in the usual manner from (3)'): (1) C Noetherian; F killed by one N (finitely many strata, each covered by finitely many trivializing etale opens by quasi-compactness and openness of etale maps; stalk comparisons; image of N.id is zero on a covering family of stalks, hence zero by the Mathlib leaf on detecting monos); (2) F_1, F_2 killed by N, the sequence lives in Mod(C,Z/N) (elementary); (3) F constructible as Z/N-module by the bridge lem-weil-pbc-constructible-torsion-modules-agree, strata automatically constructible on Noetherian C; (4) F_1 = Im(alpha) constructible by the existing lem-weil-pbc-constructible-subobjects-noetherian (Stacks 09BH(3), sk-prop-sf-cbc: used as a generic tool lemma, not duplicated); (5) F_2 = Coker(alpha) constructible by thm-constructible-serre (Lean closed on slopmaster2: IsConstructibleSheaf.cokernel); (6) back by the bridge. No new node: the planned lem-weil-pbc-constructible-noetherian-sub-quotient would repeat lem-weil-pbc-constructible-subobjects-noetherian (sub part) and thm-constructible-serre (cokernel part)."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-subobjects-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "six steps along Stacks 09BH (3) (a single integer N kills F on the Noetherian C, written out; the sequence in Z/N-modules; the bridge to the general constructibility; subsheaves by 09BH (3), quotients by the weak Serre property 03RZ (closed node); back by the bridge); no new nodes; the generic lem-weil-pbc-constructible-subobjects-noetherian (sk-prop-sf-cbc) accepted as a tool use; the new bridge node now reached (flag removed)"
+ }
 }
