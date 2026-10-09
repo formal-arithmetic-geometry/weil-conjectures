@@ -274,6 +274,7 @@ theorem boundedConstructible_tensor (X : Scheme.{u})
     boundedConstructible A X (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
   sorry
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
@@ -283,7 +284,7 @@ theorem torAmplitudeIn_tensor (X : Scheme.{u}) (a b c d : ℤ)
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hKt : torAmplitudeIn A X a b K) (hMt : torAmplitudeIn A X c d M) :
     torAmplitudeIn A X (a + c) (b + d) (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
-  sorry
+  _root_.DerivedCategory.torAmplitudeIn_tensor hKt hMt
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.

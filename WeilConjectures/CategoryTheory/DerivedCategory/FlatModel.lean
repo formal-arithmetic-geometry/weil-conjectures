@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
+public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-!
 
@@ -46,6 +47,8 @@ concentrated in degrees `[a, b]`.
 - `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn` and
   `DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat`: an object has Tor amplitude in
   `[a, b]` exactly when it is represented by a complex of flat objects in degrees `[a, b]`.
+- `DerivedCategory.torAmplitudeIn_tensor`: Tor amplitudes add under the derived tensor
+  product.
 
 -/
 
@@ -281,5 +284,79 @@ lemma torAmplitudeIn_iff_exists_iso_Q_obj_flat (a b : ℤ) (K : DerivedCategory 
   refine ⟨exists_iso_Q_obj_flat_of_torAmplitudeIn, ?_⟩
   rintro ⟨P, _, _, hP, ⟨e⟩⟩
   exact (torAmplitudeIn C a b).prop_of_iso e (torAmplitudeIn_Q_obj_of_flat P a b hP)
+
+/-- For a K-flat complex `P` and any complex `L`, the derived tensor product `P ⊗ᴸ L` is the
+tensor product of complexes `P ⊗ L`. -/
+noncomputable def QObjTensorQObjIsoOfKFlatLeft (P L : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.obj P ⊗ Q.obj L ≅ Q.obj (P ⊗ L) :=
+  have hP' : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2 hP
+  have := isIso_tensorLeftCounit _ hP'
+  tensorIso ((quotientCompQhIso C).symm.app P) ((quotientCompQhIso C).symm.app L) ≪≫
+    (asIso (tensorLeftCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P))).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj L) ≪≫
+    Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient C (.up ℤ)) _ _) ≪≫
+    (quotientCompQhIso C).app _
+
+/-- For any complex `L` and a K-flat complex `P`, the derived tensor product `L ⊗ᴸ P` is the
+tensor product of complexes `L ⊗ P`. -/
+noncomputable def QObjTensorQObjIsoOfKFlatRight (L P : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.obj L ⊗ Q.obj P ≅ Q.obj (L ⊗ P) :=
+  have hP' : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2 hP
+  have := isIso_tensorRightCounit _ hP'
+  tensorIso ((quotientCompQhIso C).symm.app L) ((quotientCompQhIso C).symm.app P) ≪≫
+    (asIso (tensorRightCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P))).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj L) ≪≫
+    Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient C (.up ℤ)) _ _) ≪≫
+    (quotientCompQhIso C).app _
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` has homology concentrated in `[c, d]`, then
+`K ⊗ᴸ N` has homology concentrated in `[a + c, b + d]`: represent `K` by a complex of flat
+objects in degrees `[a, b]` and `N` by a complex in degrees `[c, d]`. -/
+lemma homologyConcentratedIn_tensor_of_torAmplitudeIn_left {a b c d : ℤ}
+    {K N : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (hN : homologyConcentratedIn c d N) :
+    homologyConcentratedIn (a + c) (b + d) (K ⊗ N) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  have : N.IsGE c := hN.1
+  have : N.IsLE d := hN.2
+  obtain ⟨L, _, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE_of_isLE c d
+  have hPk := CochainComplex.kFlat_of_bounded_of_flat P a b hP
+  have := CochainComplex.isStrictlyGE_tensorObj P L a c
+  have := CochainComplex.isStrictlyLE_tensorObj P L b d
+  have e'' : K ⊗ N ≅ Q.obj (P ⊗ L) :=
+    tensorIso e.symm e' ≪≫ QObjTensorQObjIsoOfKFlatLeft P L hPk
+  exact ⟨TStructure.t.isGE_of_iso e''.symm _, TStructure.t.isLE_of_iso e''.symm _⟩
+
+/-- If `N` has homology concentrated in `[c, d]` and `M` has Tor amplitude in `[a, b]`, then
+`N ⊗ᴸ M` has homology concentrated in `[c + a, d + b]`. -/
+lemma homologyConcentratedIn_tensor_of_torAmplitudeIn_right {a b c d : ℤ}
+    {N M : DerivedCategory C} (hN : homologyConcentratedIn c d N)
+    (hM : torAmplitudeIn C a b M) :
+    homologyConcentratedIn (c + a) (d + b) (N ⊗ M) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hM
+  have : N.IsGE c := hN.1
+  have : N.IsLE d := hN.2
+  obtain ⟨L, _, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE_of_isLE c d
+  have hPk := CochainComplex.kFlat_of_bounded_of_flat P a b hP
+  have := CochainComplex.isStrictlyGE_tensorObj L P c a
+  have := CochainComplex.isStrictlyLE_tensorObj L P d b
+  have e'' : N ⊗ M ≅ Q.obj (L ⊗ P) :=
+    tensorIso e' e.symm ≪≫ QObjTensorQObjIsoOfKFlatRight L P hPk
+  exact ⟨TStructure.t.isGE_of_iso e''.symm _, TStructure.t.isLE_of_iso e''.symm _⟩
+
+/-- **Tor amplitudes add under the derived tensor product.** If `K` and `M` have Tor amplitude
+in `[a, b]` and `[c, d]`, then `K ⊗ᴸ M` has Tor amplitude in `[a + c, b + d]`. -/
+lemma torAmplitudeIn_tensor {a b c d : ℤ} {K M : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (hM : torAmplitudeIn C c d M) :
+    torAmplitudeIn C (a + c) (b + d) (K ⊗ M) := fun F ↦ by
+  obtain ⟨h₁, h₂⟩ := homologyConcentratedIn_tensor_of_torAmplitudeIn_left hK (hM F)
+  exact ⟨TStructure.t.isGE_of_iso (α_ K M _).symm _,
+    TStructure.t.isLE_of_iso (α_ K M _).symm _⟩
 
 end DerivedCategory
