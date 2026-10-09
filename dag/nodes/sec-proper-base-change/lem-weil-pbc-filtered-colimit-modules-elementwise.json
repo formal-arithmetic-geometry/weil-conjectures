@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+ "kind": "statement",
+ "title": "Elements, equality and vanishing in a filtered colimit of modules",
+ "statement": "Let $R$ be a ring, $I$ a small filtered category (for instance a directed set) and $i\\mapsto M_i$ a functor from $I$ to the category of $R$-modules, with a colimit $(M,(\\iota_i)_i)$ in that category [def-weil-pbc-category-colimit]. Then: (1) every element of $M$ is $\\iota_i(x)$ for some $i$ and some $x\\in M_i$; (2) for $x\\in M_i$, $y\\in M_j$ one has $\\iota_i(x)=\\iota_j(y)$ if and only if there are an object $k$ and morphisms $f:i\\to k$, $g:j\\to k$ with $M(f)(x)=M(g)(y)$; in particular $\\iota_i(x)=0$ if and only if $M(f)(x)=0$ for some morphism $f:i\\to k$ (for a directed set: $\\mu_{ki}(x)=0$ for some $k\\ge i$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778: the directed colimit of modules as a quotient of the direct sum, every element from a stage) and Lemma Tag 00D7 (lemma-zero-directed-limit, line 811: mu_i(x_i)=0 iff mu_ij(x_i)=0 for some j >= i); a filtered colimit reduces to a directed one by Categories, Lemma Tag 0032"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element of a filtered colimit of modules is zero iff its representative becomes zero at some later stage",
+   "results": "CategoryTheory.Limits.Concrete.colimit_rep_eq_zero (Mathlib.CategoryTheory.Limits.ConcreteCategory.WithAlgebraicStructures, ModuleCat R, filtered J), ModuleCat.FilteredColimits.colimit_zero_eq, Module.DirectLimit.of.zero_exact (Mathlib.Algebra.Colimit.Module, directed preorder), ModuleCat.FilteredColimits.colimit, DirectLimit.exists_eq_zero",
+   "date": "2026-10-10",
+   "verdict": "match (with the concrete-category lemmas below)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Concrete.colimit_rep_eq_zero; ModuleCat.FilteredColimits.forget_preservesFilteredColimits",
+   "results": "Concrete.colimit_rep_eq_zero (R : Type) [Ring R] (F : J ⥤ ModuleCat R) [PreservesColimit F (forget (ModuleCat R))] [IsFiltered J] [HasColimit F] (j) (x) : colimit.ι F j x = 0 → ∃ j' i, F.map i x = 0; ModuleCat.FilteredColimits.forget_preservesFilteredColimits {R} [Ring R] : PreservesFilteredColimits (forget (ModuleCat R)) (Mathlib.Algebra.Category.ModuleCat.FilteredColimits)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isColimit_exists_rep\\|theorem isColimit_rep_eq_iff_exists\\|colimit_rep_eq_zero' -r ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/ConcreteCategory/; grep -n 'forget_preservesFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean",
+   "results": "ConcreteCategory/Basic.lean:130 theorem isColimit_exists_rep {D : Cocone F} (hD : IsColimit D) (x) : ∃ j y, D.ι.app j y = x [PreservesColimit F (forget C)]; Basic.lean:175 theorem isColimit_rep_eq_iff_exists (hD : IsColimit D) x y : D.ι.app i x = D.ι.app j y ↔ ∃ k f g, F.map f x = F.map g y [IsFiltered J]; WithAlgebraicStructures.lean:48 colimit_rep_eq_zero; ModuleCat/FilteredColimits.lean:202 instance forget_preservesFilteredColimits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Concrete.isColimit_exists_rep, CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists, ModuleCat.FilteredColimits.forget_preservesFilteredColimits",
+  "file": "Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+  "how": "one Mathlib lemma per clause, for F : J ⥤ ModuleCat R with [IsFiltered J] and any colimit cocone D (hD : IsColimit D), the hypothesis PreservesColimit F (forget (ModuleCat R)) being the instance ModuleCat.FilteredColimits.forget_preservesFilteredColimits (Algebra/Category/ModuleCat/FilteredColimits.lean:202; J : Type v small, modules in universe max v u): (1) Concrete.isColimit_exists_rep (Basic.lean:130); (2) Concrete.isColimit_rep_eq_iff_exists (Basic.lean:175); the 'in particular' is the case j = i, y = 0 (linear maps send 0 to 0), stated in Mathlib for the chosen colimit as Concrete.colimit_rep_eq_zero (ConcreteCategory/WithAlgebraicStructures.lean:48). Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Concrete.isColimit_exists_rep (ConcreteCategory/Basic.lean:130), isColimit_rep_eq_iff_exists (:175), ModuleCat.FilteredColimits.forget_preservesFilteredColimits (ModuleCat/FilteredColimits.lean:202), colimit_rep_eq_zero (WithAlgebraicStructures.lean:48)."
+ }
+}
