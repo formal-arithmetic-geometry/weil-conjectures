@@ -91,8 +91,10 @@ the intended instantiation is `A = ModuleCat (𝒪_E/ϖⁿ)`.
 
 The fields of the package are the comparison isomorphisms of the six operations restricted to
 `Dᵇctf` on geometric schemes, that is, natural isomorphisms between functors out of the
-categories `Dᵇctf`. This is what makes the package inhabitable by the six operations: for
-`A = 𝒪_E/ϖⁿ` with `ℓ` invertible on the base, every object of `Dᵇctf` is of étale origin, and the
+categories `Dᵇctf`. This is what makes the package inhabitable by the six operations over the
+bases of the blueprint, a field or a regular scheme of dimension at most one (biduality on
+`Dᵇctf`, `isIso_bidualityMap`, fails over more general bases): for `A = 𝒪_E/ϖⁿ` with `ℓ`
+invertible on the base, every object of `Dᵇctf` is of étale origin, and the
 fields are the étale statements of the six functors chapter (finiteness, proper and `!`-base
 change, the projection formula, `Rf_! = Rf_*` for proper `f`, biduality and Künneth-Verdier),
 transported along the comparison `ν^*` (blueprint `sk-prop-sf-comparison`). On the whole
@@ -140,10 +142,10 @@ built from the canonical idempotent `AlgebraicGeometry.ProEtale.clopenIdempotent
 clopen piece, which uses no package data (`GeometricOperations.localTerm`).
 
 The remaining comparison data are still *not* pinned to canonical maps: `properComparison`
-to the natural transformation `Rf_! ⟶ Rf_*`, and `upperStarMonoidal` to the oplax monoidal
-structure of the left adjoint `Lf^*` of the lax monoidal `Rf_*`. This project constructs
-neither at the level of derived categories; they belong to the six operations chapter rather
-than to this block.
+to the natural transformation `Rf_! ⟶ Rf_*`, `projectionFormula` to the inverse of the
+projection map `AlgebraicGeometry.ProEtale.projectionMap`, and `upperStarMonoidal` to the
+tensor comparison `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorIso`. The last two maps
+now exist; pinning these fields to them is left to a follow-up.
 
 The dualizing complex `ω_X = a_X^! A` is carried as a field, tied to its construction by
 `dualizingIso` whenever `a_X` admits a compactification; `dualizingBase` normalises `ω_s` to

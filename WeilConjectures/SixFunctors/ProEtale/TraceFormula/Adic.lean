@@ -183,9 +183,8 @@ noncomputable def levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
     Functor.mapDerivedCategoryNatIso (Sheaf.restrictScalarsCompIso _ _ _ _
       (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm)
 
-/-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` if it comes from a
-compatible system of levels `L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ`, as in blueprint
-`sk-prop-trace-adic`:
+/-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` and levels
+`L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ` if, as in blueprint `sk-prop-trace-adic`:
 - `K_n` is `L_n` with scalars restricted to `R`;
 - for `j ≤ n`, the base change `L_n ⊗ᴸ_{A_n} A_n/I^j A_n` of `L_n` along `A_n → A_j` is
   isomorphic to `L_j` with scalars restricted to `A_n`;
@@ -196,11 +195,11 @@ The base change is taken over `A_n`, not over `R`: for `I = (ϖ)` with `ϖ` a no
 `L_n ⊗ᴸ_R R/Iʲ` has an extra `Tor₁` term, and requiring it to be `L_j` would force the tower
 to vanish. -/
 def IsNormalizedTower
-    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
+    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (L : ∀ n : ℕ,
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))) :
     Prop :=
-  ∃ (L : ∀ n : ℕ,
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))))
-    (eK : ∀ n : ℕ, K.obj (Opposite.op n) ≅ (levelRestrictScalars X I n).obj (L n))
+  ∃ (eK : ∀ n : ℕ, K.obj (Opposite.op n) ≅ (levelRestrictScalars X I n).obj (L n))
     (e : ∀ n j : ℕ, ∀ h : j ≤ n,
       (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X)
           (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).obj (Opposite.op j) ≅
@@ -213,7 +212,9 @@ def IsNormalizedTower
 
 variable [IsAdicComplete I R] [IsDomain R] (hI : I.IsPrincipal)
   {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
-  (hK : IsNormalizedTower I K) (c : Cone K) (hc : IsHomotopyLimit c)
+  {L : ∀ n : ℕ,
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))}
+  (hK : IsNormalizedTower I K L) (c : Cone K) (hc : IsHomotopyLimit c)
 
 include hI hK hc in
 /-- Adic realization, levelwise reduction: the realization `K_{𝒪_E} = R lim_n K_n` of a
@@ -259,7 +260,7 @@ scheme over a field, `RΓ_c(X, R lim_n K_n) ≅ R lim_n RΓ_c(X, K_n)`
 theorem isHomotopyLimit_mapCone_rightDerivedLowerShriek [s.IsSpecOfField] (aX : X ⟶ s)
     [IsGeometric aX] [HasCompactification aX]
     (hctf : ∀ n : ℕ,
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X (K.obj (Opposite.op n))) :
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
     IsHomotopyLimit ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).mapCone c) := by
   -- `Rf_! = Di_! ⋙ Rg_*` for the chosen compactification `aX = i ≫ g`. The right adjoint `Rg_*`
   -- is triangulated and preserves products, so it preserves homotopy limits.
@@ -282,7 +283,7 @@ amplitude on a geometric scheme over a field, `(R lim_n K_n)_x̄ ≅ R lim_n (K_
 theorem isHomotopyLimit_mapCone_leftDerivedUpperStar [s.IsSpecOfField] (aX : X ⟶ s)
     [IsGeometric aX] (x : s ⟶ X) (hx : x ≫ aX = 𝟙 s)
     (hctf : ∀ n : ℕ,
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X (K.obj (Opposite.op n))) :
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
     IsHomotopyLimit (((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).mapCone c) :=
   sorry
 
