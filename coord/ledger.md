@@ -21,3 +21,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-08, tools/dag_queue.py: its `FIELDS` table is unchanged; the nodes use the names it already reads.
 - 2026-10-08, tools: added `import_blueprint.py` and `check_dag.py` (tools/README.md).
 - 2026-10-09, tools: added `export_snapshot.py`, which writes the DAG as the snapshot file of the graph viewer in `site/` (not committed: the viewer is the blueprint site's code).
+- 2026-10-09, lean_audit: every node gets `lean_audit[branch]` from the compiled project (tools/sorry_map.lean, tools/lean_status.py): state none / closed / closed_part (closed, some named declarations absent) / sorry_here / rests_on_sorry, with the open declarations below it. Read from the environment, not from source text; the older `lean` field is unchanged.
