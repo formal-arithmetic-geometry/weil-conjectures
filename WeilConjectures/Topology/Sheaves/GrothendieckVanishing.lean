@@ -641,6 +641,65 @@ lemma subsingleton_H_of_epi_freeYoneda_of_finset (S : Finset (Set X))
       ihS hS' hQ (π ≫ cokernel.π (image.ι g)) i hi
     exact subsingleton_H_X₂ hS₀ i
 
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **Finitely generated sheaves.** If `E` is supported on a finite union of irreducible closed
+sets of dimension at most `n` and is a quotient of a finite direct sum of sheaves `ℤ_U`, then
+`H^i(E) = 0` for `i > n`, by induction on the number of summands. -/
+lemma subsingleton_H_of_epi_biproduct (S : Finset (Set X))
+    (hS : ∀ T ∈ S, IsIrreducible T ∧ IsClosed T ∧ topologicalKrullDim T ≤ n)
+    (ι : Type u) [Fintype ι] :
+    ∀ (U : ι → Opens X) {E : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+      AddCommGrpCat.{u}}, IsSupportedOn E (⋃ T ∈ S, T) →
+      ∀ (p : ⨁ (fun k ↦ freeYoneda.obj (U k)) ⟶ E) [Epi p] (i : ℕ), n < i →
+        Subsingleton (Sheaf.H E i) := by
+  refine Fintype.induction_empty_option (P := fun ι _ ↦ ∀ (U : ι → Opens X)
+      {E : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}},
+      IsSupportedOn E (⋃ T ∈ S, T) → ∀ (p : ⨁ (fun k ↦ freeYoneda.obj (U k)) ⟶ E) [Epi p]
+        (i : ℕ), n < i → Subsingleton (Sheaf.H E i)) ?_ ?_ ?_ ι
+  · intro α β _ e h U E hE p _ i hi
+    have : Fintype α := Fintype.ofEquiv β e.symm
+    let w : ⨁ (fun a ↦ freeYoneda.obj (U (e a))) ≅ ⨁ (fun k ↦ freeYoneda.obj (U k)) :=
+      biproduct.whiskerEquiv (f := fun a ↦ freeYoneda.obj (U (e a)))
+        (g := fun k ↦ freeYoneda.obj (U k)) e fun _ ↦ Iso.refl _
+    exact h (fun a ↦ U (e a)) hE (w.hom ≫ p) i hi
+  · intro U E _ p _ i _
+    have : IsZero (⨁ (fun k : PEmpty ↦ freeYoneda.obj (U k))) :=
+      (IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ fun j ↦ isEmptyElim j)
+    exact subsingleton_H_of_isZero (IsZero.of_epi p this) i
+  · intro α _ h U E hE p _ i hi
+    let incl : ⨁ (fun a : α ↦ freeYoneda.obj (U (some a))) ⟶
+        ⨁ (fun k ↦ freeYoneda.obj (U k)) :=
+      biproduct.desc fun a ↦ biproduct.ι (fun k ↦ freeYoneda.obj (U k)) (some a)
+    let g := incl ≫ p
+    let S₀ := ShortComplex.mk (image.ι g) (cokernel.π (image.ι g)) (cokernel.condition _)
+    have hS₀ : S₀.ShortExact :=
+      ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have : Subsingleton (Sheaf.H S₀.X₁ i) :=
+      h (fun a ↦ U (some a)) (hE.of_mono (image.ι g)) (factorThruImage g) i hi
+    have hg0 : incl ≫ p ≫ cokernel.π (image.ι g) = 0 :=
+      calc incl ≫ p ≫ cokernel.π (image.ι g) =
+          factorThruImage g ≫ image.ι g ≫ cokernel.π (image.ι g) := by
+            rw [image.fac_assoc, Category.assoc]
+        _ = 0 := by rw [cokernel.condition, comp_zero]
+    let φ := biproduct.ι (fun k ↦ freeYoneda.obj (U k)) none ≫ p ≫ cokernel.π (image.ι g)
+    have : Epi φ := by
+      refine Preadditive.epi_of_cancel_zero _ fun {Z} k hk ↦ ?_
+      have h0 : p ≫ cokernel.π (image.ι g) ≫ k = 0 := by
+        refine biproduct.hom_ext' _ _ fun j ↦ ?_
+        rcases j with _ | a
+        · simpa [φ] using hk
+        · have : biproduct.ι (fun k ↦ freeYoneda.obj (U k)) (some a) =
+              biproduct.ι (fun a : α ↦ freeYoneda.obj (U (some a))) a ≫ incl :=
+            (biproduct.ι_desc (fun a ↦ biproduct.ι (fun k ↦ freeYoneda.obj (U k)) (some a))
+              a).symm
+          rw [this, comp_zero]
+          simp only [Category.assoc, reassoc_of% hg0, zero_comp, comp_zero]
+      rw [← Category.assoc] at h0
+      exact zero_of_epi_comp _ h0
+    have : Subsingleton (Sheaf.H S₀.X₃ i) :=
+      subsingleton_H_of_epi_freeYoneda_of_finset ih S hS (hE.of_epi (cokernel.π _)) φ i hi
+    exact subsingleton_H_X₂ hS₀ i
+
 end Reducible
 
 end TopCat.Sheaf
