@@ -71,13 +71,6 @@ zero ideal. -/
 instance IsRegular.spec_field (k : Type u) [Field k] : IsRegular (Spec (.of k)) :=
   ⟨fun z ↦ IsRegularLocalRing.of_ringEquiv (Spec.stalkIso (.of k) z).commRingCatIsoToRingEquiv.symm⟩
 
-/-- A scheme étale over a regular scheme is regular: an étale local homomorphism of local rings
-is flat with regular (indeed trivial) closed fibre, so it preserves regularity. -/
-theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f]
-    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (x : X) :
-    IsRegularLocalRing (X.presheaf.stalk x) :=
-  sorry
-
 /-- The product of two regular schemes locally of finite type over a perfect field `k` is
 regular: over a perfect field such schemes are smooth, and smoothness is stable under base
 change and composition. -/
@@ -100,6 +93,41 @@ theorem IsAffineOpen.isRegularLocalRing_stalk_of_etale {X : Scheme.{u}} {R : Typ
   have := IsRegularLocalRing.localization_of_etale (R := R) (hV.primeIdealOf ⟨x, hx⟩).asIdeal
   exact .of_ringEquiv (IsLocalization.algEquiv (hV.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
     (Localization.AtPrime (hV.primeIdealOf ⟨x, hx⟩).asIdeal) (X.presheaf.stalk x)).toRingEquiv
+
+/-- If the local rings of `X` at the points of an affine open `U` are regular local rings, then
+so are the localizations of `Γ(X, U)` at primes: the localization at `p` is the local ring of `X`
+at the point of `U` corresponding to `p`. -/
+theorem IsAffineOpen.isRegularLocalRing_localization {X : Scheme.{u}} {U : X.Opens}
+    (hU : IsAffineOpen U) (hX : ∀ x ∈ U, IsRegularLocalRing (X.presheaf.stalk x))
+    (p : Ideal Γ(X, U)) [p.IsPrime] : IsRegularLocalRing (Localization.AtPrime p) := by
+  have hy : hU.fromSpec ⟨p, inferInstance⟩ ∈ U := by
+    rw [← SetLike.mem_coe, ← hU.range_fromSpec]
+    exact Set.mem_range_self _
+  let := X.presheaf.algebra_section_stalk ⟨_, hy⟩
+  have := hU.isLocalization_stalk' ⟨p, inferInstance⟩ hy
+  have := hX _ hy
+  exact .of_ringEquiv (IsLocalization.algEquiv p.primeCompl
+    (X.presheaf.stalk (hU.fromSpec ⟨p, inferInstance⟩)) (Localization.AtPrime p)).toRingEquiv
+
+/-- A scheme étale over a regular scheme is regular: an étale local homomorphism of local rings
+is flat with regular (indeed trivial) closed fibre, so it preserves regularity. -/
+theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f]
+    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (x : X) :
+    IsRegularLocalRing (X.presheaf.stalk x) := by
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (show x ∈ f ⁻¹ᵁ U from hxU)
+      (f ⁻¹ᵁ U).isOpen
+  have hφ := HasRingHomProperty.appLE @Etale f ‹_› ⟨U, hU⟩ ⟨V, hV⟩ hVU
+  algebraize [(f.appLE U V hVU).hom]
+  let := X.presheaf.algebra_section_stalk ⟨x, hxV⟩
+  have := hV.isLocalization_stalk ⟨x, hxV⟩
+  set P := (hV.primeIdealOf ⟨x, hxV⟩).asIdeal
+  have := IsRegularLocalRing.localization_of_etale_of_comap (R := Γ(Y, U)) P
+    (hU.isRegularLocalRing_localization (fun y _ ↦ hY y) _)
+  exact .of_ringEquiv
+    (IsLocalization.algEquiv P.primeCompl (Localization.AtPrime P) (X.presheaf.stalk x)).toRingEquiv
 
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
 regular local rings, hence domains (`IsRegularLocalRing.isDomain`). Near any point `X` is étale

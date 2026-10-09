@@ -263,16 +263,21 @@ theorem IsRegularLocalRing.of_flat_of_map_maximalIdeal_eq {R S : Type*} [CommRin
         rw [IsRegularLocalRing.spanFinrank_maximalIdeal, maximalIdeal_height_eq_ringKrullDim]
     _ ≤ _ := by exact_mod_cast le_self_add
 
-/-- Let `A` be an étale algebra over a regular ring `R`. The localization of `A` at a prime `P`
-is a regular local ring: it is flat over the regular local ring `R_p`, `p = P ∩ R`, and
-`p A_P = P A_P` since `A` is unramified at `P`. -/
-theorem IsRegularLocalRing.localization_of_etale {R A : Type*} [CommRing R] [CommRing A]
-    [Algebra R A] [Algebra.Etale R A] [IsRegularRing R] (P : Ideal A) [P.IsPrime] :
+/-- Let `A` be an étale algebra over a ring `R`, and `P` a prime of `A` lying over a prime `p` of
+`R` such that `R_p` is a regular local ring. Then `A_P` is a regular local ring: it is noetherian,
+being essentially of finite type over `R_p`, flat over `R_p`, and `p A_P = P A_P` since `A` is
+unramified at `P`. -/
+theorem IsRegularLocalRing.localization_of_etale_of_comap {R A : Type*} [CommRing R]
+    [CommRing A] [Algebra R A] [Algebra.Etale R A] (P : Ideal A) [P.IsPrime]
+    (hP : IsRegularLocalRing (Localization.AtPrime (P.comap (algebraMap R A)))) :
     IsRegularLocalRing (Localization.AtPrime P) := by
   set p := P.comap (algebraMap R A)
   have : P.LiesOver p := ⟨rfl⟩
   let := Localization.AtPrime.algebraOfLiesOver p P
-  have : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing R A
+  have : Algebra.EssFiniteType (Localization.AtPrime p) (Localization.AtPrime P) :=
+    .of_comp R _ _
+  have : IsNoetherianRing (Localization.AtPrime P) :=
+    Algebra.EssFiniteType.isNoetherianRing (Localization.AtPrime p) _
   have : IsLocalHom (algebraMap (Localization.AtPrime p) (Localization.AtPrime P)) :=
     Localization.isLocalHom_localRingHom _ _ _ _
   have : Module.Flat (Localization.AtPrime p) (Localization.AtPrime P) :=
@@ -281,6 +286,14 @@ theorem IsRegularLocalRing.localization_of_etale {R A : Type*} [CommRing R] [Com
   refine IsRegularLocalRing.of_flat_of_map_maximalIdeal_eq (R := Localization.AtPrime p) ?_
   rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map, ← IsScalarTower.algebraMap_eq]
   exact ((Algebra.isUnramifiedAt_iff_map_eq R p P).mp inferInstance).2
+
+/-- Let `A` be an étale algebra over a regular ring `R`. The localization of `A` at a prime `P`
+is a regular local ring: it is flat over the regular local ring `R_p`, `p = P ∩ R`, and
+`p A_P = P A_P` since `A` is unramified at `P`. -/
+theorem IsRegularLocalRing.localization_of_etale {R A : Type*} [CommRing R] [CommRing A]
+    [Algebra R A] [Algebra.Etale R A] [IsRegularRing R] (P : Ideal A) [P.IsPrime] :
+    IsRegularLocalRing (Localization.AtPrime P) :=
+  localization_of_etale_of_comap (R := R) P inferInstance
 
 namespace PrimeSpectrum
 
