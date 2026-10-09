@@ -14,7 +14,9 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
 
@@ -419,8 +421,16 @@ immersion of pure codimension `c`: a regular sequence stays regular after a flat
 scalars, and it still generates the extended ideal. -/
 theorem IsRegularImmersion.of_isPullback {Z' X' : Scheme.{u}} (c : ℕ) {i : Z ⟶ X}
     {i' : Z' ⟶ X'} {g : Z' ⟶ Z} {e : X' ⟶ X} (h : IsPullback g i' i e) [IsRegularImmersion c i]
-    [Flat e] : IsRegularImmersion c i' :=
-  sorry
+    [Flat e] : IsRegularImmersion c i' := by
+  have : IsClosedImmersion i' := MorphismProperty.of_isPullback h inferInstance
+  refine { exists_isWeaklyRegular_generators := fun x' ↦ ?_ }
+  obtain ⟨U, hxU, r, hr, hreg, hI⟩ := exists_isWeaklyRegular_generators (c := c) (i := i) (e x')
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ := X'.isBasis_affineOpens.exists_subset_of_mem_open
+    (show x' ∈ e ⁻¹ᵁ U.1 from hxU) (e ⁻¹ᵁ U.1).isOpen
+  refine exists_isWeaklyRegular_generators_of_flat ⟨V, hV⟩ hxV (e.appLE U.1 V hVU).hom
+    (HasRingHomProperty.appLE @Flat e ‹_› U ⟨V, hV⟩ hVU) r hr hreg ?_
+  rw [hI, Scheme.Hom.ker_of_isPullback i e h,
+    Scheme.IdealSheafData.ideal_comap_appLE i.ker e U ⟨V, hV⟩ hVU]
 
 /-- **Exterior products.** For regular closed immersions `i₁ : Z₁ ⟶ X₁` and `i₂ : Z₂ ⟶ X₂` of
 pure codimensions `c₁` and `c₂` of schemes over a field `k`, the closed immersion
