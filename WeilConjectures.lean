@@ -94,6 +94,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
