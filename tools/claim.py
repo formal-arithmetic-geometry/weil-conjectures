@@ -17,7 +17,7 @@ A group holds at most SHEAF_CLAIMS_PER_GROUP claims (default 10). A claim not re
 Every `done` and `release` is recorded in coord/deliveries.log.
 """
 from __future__ import annotations
-import fcntl, json, os, pathlib, sys, time
+import fcntl, json, os, pathlib, re, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
@@ -27,6 +27,40 @@ C = WORK / "claims"
 CFG = li.config()
 LIMIT = int(CFG.get("SHEAF_CLAIMS_PER_GROUP", "10"))
 TTL = float(CFG.get("SHEAF_CLAIM_TTL", "6")) * 3600
+
+
+RETURNS = WORK / "returns"
+
+
+def _node_exists(m: str) -> bool:
+    return any((li.ROOT / "dag" / "nodes").glob(f"*/{m}.json"))
+
+
+def open_returns(group: str) -> list[str]:
+    """Headings `## <item> (...)` of coord/returns/<group>.md whose <item> is a DAG node: the open entries
+    (decision of the human, 2026-10-09 evening: returns are repaired before new work is claimed)."""
+    p = RETURNS / f"{group}.md"
+    if not p.exists():
+        return []
+    out = []
+    for line in p.read_text().splitlines():
+        m = re.match(r"## (\S+) \(", line)
+        if m and _node_exists(m.group(1)):
+            out.append(line[3:].rstrip())
+    return out
+
+
+def drop_return_entries(group: str, item: str) -> int:
+    """Delete every entry of coord/returns/<group>.md headed `## <item> (`; returns how many were dropped."""
+    p = RETURNS / f"{group}.md"
+    if not p.exists():
+        return 0
+    parts = re.split(r"(?m)^(?=## )", p.read_text())
+    keep = [x for x in parts if not x.startswith(f"## {item} (")]
+    n = len(parts) - len(keep)
+    if n:
+        p.write_text("".join(keep))
+    return n
 
 
 def lock(m): return C / (m.replace("/", "__") + ".lock")
@@ -118,6 +152,13 @@ def main() -> int:
     cmd = a[0]
     if cmd == "next":
         who = a[1]; n = int(a[a.index("--count") + 1]) if "--count" in a else 1
+        if who != "L":
+            opened = open_returns(who)
+            if opened:
+                print(f"{who} has {len(opened)} open return(s) in coord/returns/{who}.md; repair them (push the repaired delivery) or release the item with the reason before claiming new work:")
+                for e in opened:
+                    print("  " + e)
+                return 1
         stage = a[a.index("--stage") + 1] if "--stage" in a else None
         n = min(n, LIMIT - len(held_by(who)))
         got = 0
@@ -154,6 +195,8 @@ def main() -> int:
             print("done" + (f"; {left} sorry left, so the module returns to the queue" if left else ""))
         else:
             log(f"{who} released {m}: {note}")
+            if drop_return_entries(who, m):
+                log(f"return entries of {who} for {m} dropped (item released)")
             print("released")
     elif cmd == "mine":
         print("\n".join(held_by(a[1])))

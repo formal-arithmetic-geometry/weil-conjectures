@@ -196,6 +196,13 @@ def cmd_merge(group, item, spot_note=None):
                           cwd=ROOT, text=True, capture_output=True)
     ledger(f"delivery of {group}: {item} merged from {br} ({len(commits)} commit(s), {len(new)} new node(s)"
            f"{', spot-checked by L: ' + spot_note if spot_note else ''}); claim {'closed' if 'done' in done.stdout else 'not held by ' + group + ' (' + done.stdout.strip() + ')'}")
+    rp = ROOT / "coord" / "returns" / f"{group}.md"
+    if rp.exists():
+        import re as _re
+        parts = _re.split(r"(?m)^(?=## )", rp.read_text())
+        keep = [x for x in parts if not x.startswith(f"## {item} (")]
+        if len(keep) != len(parts):
+            rp.write_text("".join(keep)); git("add", "--", rp.relative_to(ROOT).as_posix())
     git("add", "--", *kinds.keys(), "coord/ledger.md")
     git("commit", "-q", f"--author={author}", "-m", f"{subject}\n\nDelivered by group {group} ({br}); merged and marked reviewed by L.")
     git("branch", "-D", br)
