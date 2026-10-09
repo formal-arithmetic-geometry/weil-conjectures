@@ -532,6 +532,17 @@ theorem constructibleFiniteTor_rightDerivedUpperShriek {X Y : Scheme.{u}}
   exact (exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor _).1
     ⟨a - c, b + c, hc a b K hab⟩
 
+/-- The dualizing complex `ω_Y = Ra_Y^! Λ_S` lies in `Dctf(Y, Λ)` when the unit `Λ_S` does,
+for `S` of finite type over a field `k` and a finite `Λ` whose exponent is invertible on `S`, by
+the stability of `Dctf` under `Ra_Y^!`. In the blueprint's setting (`S` the spectrum of a
+field) the unit is in `Dctf`. -/
+theorem constructibleFiniteTor_dualizingComplex {Y S : Scheme.{u}} (aS : S ⟶ Spec (.of k))
+    [LocallyOfFiniteType aS] [QuasiCompact aS] [HasInvertibleExponent Λ S] (aY : Y ⟶ S)
+    [HasCompactification aY] [QuasiCompact aY]
+    (hΛ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) S (𝟙_ _)) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ aY) :=
+  constructibleFiniteTor_rightDerivedUpperShriek Λ aS aY hΛ
+
 /-! #### The descended functors -/
 
 section Functors
