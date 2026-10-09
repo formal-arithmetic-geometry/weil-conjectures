@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-etale-shriek-star-finite-modules",
  "kind": "statement",
  "title": "Extension by zero equals direct image for finite etale module sheaves",
- "statement": "Let $\\pi:U\\to X$ be a finite etale morphism [def-weil-pbc-finite-etale-category] of schemes [def-weil-pbc-scheme-conventions], let $\\Lambda$ be a commutative ring, and let $M$ be a sheaf of $\\Lambda_U$-modules on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. The canonical natural transformation $\\pi_!M\\to\\pi_*M$ from etale extension by zero [def-weil-pbc-etale-sum-extension] to direct image [def-weil-pbc-direct-image] is an isomorphism. This is Stacks Project Lemma 59.70.6, Tag 03S7 (lemma-shriek-equals-star-finite-etale), for module sheaves.",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism [def-weil-pbc-finite-etale-category] of schemes [def-weil-pbc-scheme-conventions], let $\\Lambda$ be a commutative ring, and let $M$ be a sheaf of $\\Lambda_U$-modules on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. The canonical map $c_M:\\pi_!M\\to\\pi_*M$ [def-weil-pbc-etale-shriek-to-star-map] from etale extension by zero [def-weil-pbc-etale-sum-extension] to direct image [def-weil-pbc-direct-image], which is natural in $M$, is an isomorphism of sheaves of $\\Lambda_X$-modules. This is Stacks Project Lemma 59.70.6, Tag 03S7 (lemma-shriek-equals-star-finite-etale), for module sheaves.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 03S7 (lemma-shriek-equals-star-finite-etale), line 11571, module-sheaf clause"
@@ -14,11 +14,103 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-shriek-to-star-map"
+ ],
+ "proof": [
+  {
+   "text": "*The map.* Write $V_U=V\\times_XU$ for an object $V$ of $X_{\\Et}$, $p_V:V_U\\to V$, $q_V:V_U\\to U$ the projections, $P_M$ the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$ whose sheafification (as presheaf of $\\Lambda_X$-modules) is $\\pi_!M$, with sheafification map $\\eta_M:P_M\\to\\pi_!M$, and $(\\pi_*M)(V)=M(V_U)$. The canonical map of the statement is $c_M$ of [def-weil-pbc-etale-shriek-to-star-map]: the unique morphism of sheaves of $\\Lambda_X$-modules with $c_M\\circ\\eta_M=c^p_M$, where $c^p_{M,V}((s_\\varphi)_\\varphi)=\\sum_\\varphi e_\\varphi(s_\\varphi)$ and $e_\\varphi(s)\\in M(V_U)$ is the section with $M(\\Gamma_\\varphi)(e_\\varphi(s))=s$ for the graph $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi):V\\to V_U$ that vanishes on $V_U\\setminus\\Gamma_\\varphi(V)$ [lem-weil-pbc-etale-graph-section-extension-map]. It is natural in $M$ by the same definition node. So it remains to show that $c_M(W)$ is bijective for every object $W$ of $X_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-to-star-map",
+    "lem-weil-pbc-etale-graph-section-extension-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), construction of the map; Lemma 03S7 (line 11571) refers to it"
+   }
+  },
+  {
+   "text": "*Injectivity.* By [lem-weil-pbc-etale-shriek-to-star-injective], $c_M(W):(\\pi_!M)(W)\\to(\\pi_*M)(W)$ is injective for every object $W$ of $X_{\\Et}$ (Stacks proves this for every separated etale morphism; $\\pi$ is finite, hence affine, hence separated).",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-to-star-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), second paragraph of the proof"
+   }
+  },
+  {
+   "text": "*Etale locally on $X$, $\\pi$ is a disjoint union of isomorphisms.* Call an object $T$ of $X_{\\Et}$ *split* if there are a finite set $J$ and pairwise disjoint open and closed subschemes $V_j\\subseteq T_U$ ($j\\in J$) covering $T_U$ such that each $p_T|_{V_j}:V_j\\to T$ is an isomorphism. Claim: every object $W$ of $X_{\\Et}$ has a covering $\\{h_x:W_x\\to W\\}$ in $X_{\\Et}$ by split objects. For each $x\\in X$, [lem-weil-pbc-finite-etale-etale-local-split] (Stacks 04HN) applied to the finite etale $\\pi$ and $x$ gives an etale $g_x:X_x\\to X$ with $x\\in g_x(X_x)$, a finite set $J_x$ and a decomposition $U\\times_XX_x=\\coprod_{j\\in J_x}V_{x,j}$ into pairwise disjoint open and closed subschemes such that each $V_{x,j}\\to X_x$ (second projection) is an isomorphism. The family $(g_x)_{x\\in X}$ is etale and jointly surjective, so the projections $h_x:W_x=W\\times_XX_x\\to W$ are etale and jointly surjective [lem-weil-pbc-etale-covering-base-change]; $W_x\\to W\\to X$ is etale [lem-weil-pbc-etale-composition-cancellation(2)], so $W_x$ is an object of $X_{\\Et}$, $h_x$ a morphism of $X_{\\Et}$, and $\\{h_x\\}_x$ a covering of $W$ in $X_{\\Et}$ [def-weil-pbc-etale-site]. Let $r_x:W_x\\to X_x$ be the second projection. The square with sides $U\\times_XX_x\\to U$ and $X_x\\to X$ is cartesian, so pasting it with the square over $r_x$ [lem-weil-pbc-cartesian-square-pasting] identifies $(W_x)_U=W_x\\times_XU$, over $W_x$, with $W_x\\times_{X_x}(U\\times_XX_x)$. Let $V'_j\\subseteq(W_x)_U$ be the preimage of $V_{x,j}$ under the projection to $U\\times_XX_x$: the $V'_j$ are pairwise disjoint, open and closed, and cover $(W_x)_U$ (preimages of such a family); by [lem-weil-pbc-open-fibre-product] $V'_j=W_x\\times_{X_x}V_{x,j}$ as open subscheme, and its projection to $W_x$ is the base change along $r_x$ of the isomorphism $V_{x,j}\\to X_x$, hence an isomorphism [def-pc-fibre-product]. So $W_x$ is split.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571): 'we may assume U -> X is a finite disjoint union of isomorphisms, see Etale Morphisms, Lemma 04HN' (literature/stacks-project/etale.tex, lemma-finite-etale-etale-local, line 1856); the pull-back to an arbitrary W written out by the worker"
+   }
+  },
+  {
+   "text": "*The split case: surjectivity.* Let $T$ be split by $(V_j)_{j\\in J}$ as in step 3, and let $\\sigma_j:T\\to T_U$ be the inverse of $p_T|_{V_j}$ followed by the inclusion, so $p_T\\sigma_j=\\mathrm{id}_T$ and $\\sigma_j(T)=V_j$. Put $\\varphi_j=q_T\\sigma_j:T\\to U$, an $X$-morphism. Then $\\sigma_j=\\Gamma_{\\varphi_j}$, since both have components $\\mathrm{id}_T$ and $\\varphi_j$ [def-pc-fibre-product]; so $\\Gamma_{\\varphi_j}(T)=V_j$. If $T=\\varnothing$ then $T_U=\\varnothing$ and $(\\pi_*M)(T)=M(\\varnothing)=0$, nothing to prove; otherwise the $V_j$ are nonempty and pairwise disjoint, so the $\\sigma_j$, hence the $\\varphi_j$, are pairwise distinct. Let $t\\in(\\pi_*M)(T)=M(T_U)$, put $s_j=M(\\Gamma_{\\varphi_j})(t)\\in M(T,\\varphi_j)$ and $x=(s_j)_{j\\in J}\\in P_M(T)$ (the entry $s_j$ in the summand of $\\varphi_j$). We show $c^p_{M,T}(x)=\\sum_je_{\\varphi_j}(s_j)=t$. Fix $k\\in J$. For $j\\ne k$, $V_k\\subseteq T_U\\setminus V_j=T_U\\setminus\\Gamma_{\\varphi_j}(T)$, so $e_{\\varphi_j}(s_j)$ restricts to $0$ on $V_k$ [lem-weil-pbc-etale-graph-section-extension-map(2)]. For $j=k$: $e_{\\varphi_k}(s_k)$ and $t$ have the same pull-back $s_k$ along $\\Gamma_{\\varphi_k}$, which is an isomorphism $T\\to V_k$ onto the open subscheme $V_k$ [lem-weil-pbc-etale-graph-section-extension-map(1)], so their restrictions to $V_k$ agree. Hence $\\sum_je_{\\varphi_j}(s_j)$ and $t$ have the same restriction to every $V_k$; the inclusions $V_k\\to T_U$ are open immersions, hence etale [lem-weil-pbc-etale-composition-cancellation(1)], jointly surjective, so a covering of $T_U$ in $U_{\\Et}$ [def-weil-pbc-etale-site], and $M$ is separated [def-weil-sheaf-of-modules-category, def-weil-pbc-abelian-etale-sheaves], so $\\sum_je_{\\varphi_j}(s_j)=t$. Therefore $t=c^p_{M,T}(x)=c_M(T)(\\eta_M(T)(x))$ (step 1): $c_M(T)$ is surjective for every split $T$. This is the case Stacks omits ('We omit the proof in this case').",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-shriek-to-star-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571), the split case, whose proof Stacks omits; written out by the worker"
+   }
+  },
+  {
+   "text": "*Surjectivity in general and conclusion.* Let $W$ be an object of $X_{\\Et}$ and $t\\in(\\pi_*M)(W)$. Take a covering $\\{h_a:W_a\\to W\\}$ of $W$ in $X_{\\Et}$ by split objects (step 3). By step 4 there are $g_a\\in(\\pi_!M)(W_a)$ with $c_M(W_a)(g_a)=t|_{W_a}$, the restriction of $t$ along $h_a$ in $\\pi_*M$. For indices $a,b$ let $W_{ab}=W_a\\times_WW_b$, an object of $X_{\\Et}$ and the fibre product there [lem-weil-pbc-etale-base-change-finite-limits(2)]. As $c_M$ commutes with restrictions, $c_M(W_{ab})(g_a|_{W_{ab}})=t|_{W_{ab}}=c_M(W_{ab})(g_b|_{W_{ab}})$, so $g_a|_{W_{ab}}=g_b|_{W_{ab}}$ by step 2. By the sheaf condition for $\\pi_!M$ [def-weil-pbc-abelian-etale-sheaves] there is $g\\in(\\pi_!M)(W)$ with $g|_{W_a}=g_a$ for all $a$; then $c_M(W)(g)$ and $t$ have the same restriction to every $W_a$, so they are equal, $\\pi_*M$ being a sheaf [def-weil-pbc-direct-image]. Thus each $c_M(W)$ is bijective (step 2 and this step) and $\\Lambda$-linear; the inverse maps $c_M(W)^{-1}$ are $\\Lambda$-linear and commute with the restriction maps (because the $c_M(W)$ do), so they form a morphism of sheaves of $\\Lambda_X$-modules inverse to $c_M$ [def-weil-sheaf-of-modules-category]. Hence $c_M:\\pi_!M\\to\\pi_*M$ is an isomorphism for every $M$, and the natural transformation $c:\\pi_!\\to\\pi_*$ is a natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571): 'It suffices to check j_!F -> j_*F is an isomorphism etale locally on X'; the reduction (injective plus locally surjective) written out by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "lem-weil-pbc-etale-graph-section-extension-map",
+  "lem-weil-pbc-etale-shriek-to-star-injective",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-etale-base-change-finite-limits",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571) with the map and its injectivity from Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517) and the local splitting from Etale Morphisms Lemma 04HN (literature/stacks-project/etale.tex line 1856); the split case, omitted in Stacks, and the gluing from local surjectivity written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +155,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "worker": "stage1",
+  "summary": "The canonical map pi_! -> pi_* was defined in no node (def-weil-pbc-etale-sum-extension defines only pi_!; the item's statement pointed at an undefined map), so the split creates def-weil-pbc-etale-shriek-to-star-map (the sheafification of the Stacks 0F4L presheaf map) with its well-definedness in the new statement node lem-weil-pbc-etale-graph-section-extension-map (graphs are open and closed immersions; extension of a section by zero off the graph; presheaf map, natural in M), and the 0F4L injectivity as lem-weil-pbc-etale-shriek-to-star-injective; all three for finite etale pi (Stacks: separated etale). The statement now cites the definition node (added to stmt_deps; nothing removed). The proof follows Stacks 03S7: injectivity (0F4L), splitting covers via the existing split node lem-weil-pbc-finite-etale-etale-local-split (Stacks 04HN; tag verified, the brief's guess 04HN is right, 03PC is not it), surjectivity on split objects written out (Stacks omits it), and gluing of local preimages using injectivity. Tags checked against tags/tags: 03S7, 0F4L, 04HN, 01KT, 03S3, 03S6. Mathlib: three kinds of search for each new node, no match (only generic locally-injective/sheafification tools)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 03S7 with the map taken from 0F4L: the map c_M (new definition node: sheafification of the 0F4L presheaf map, built from the extension by zero of sections over the graph of phi, a new unsplit well-definedness node), injectivity (new unsplit node, 0F4L second paragraph), every object of X_et covered by objects over which pi splits (04HN node pulled back; the etale-covering base-change leaf of sk-thm-reduction used as a tool), surjectivity in the split case (written out: the graphs of the phi_j are the sections), gluing with injectivity. Statement: the canonical map was defined nowhere; the definition node is now cited. Lean candidate reported for def-weil-pbc-etale-sum-extension: AlgebraicGeometry.Etale.etaleLowerShriek (slopmaster2 SixFunctors/Etale/LowerShriek/EtaleMap.lean:55, sorry-free). Stage-3 note: the splitting-covering argument also sits inside the finite-etale-trace nodes (steps 3 and 5). Tags verified by the worker (03S7, 0F4L, 04HN, 03S3, 03S5, 03S6, 01KT)."
+ }
 }

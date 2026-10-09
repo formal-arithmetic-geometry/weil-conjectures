@@ -1,0 +1,76 @@
+{
+ "id": "def-weil-pbc-etale-shriek-to-star-map",
+ "kind": "definition",
+ "title": "The canonical map from extension by zero to direct image for a finite etale morphism",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring and $M$ a sheaf of $\\Lambda_U$-modules on $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. Let $P_M$ be the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$ on $X_{\\Et}$ and $\\pi_!M=P_M^\\#$ its sheafification as a presheaf of $\\Lambda_X$-modules, the extension by zero of [def-weil-pbc-etale-sum-extension], with sheafification map $\\eta_M:P_M\\to\\pi_!M$ [def-weil-presheaf-modules-sheafification]; let $\\pi_*M$ be the direct image, $(\\pi_*M)(V)=M(V\\times_XU)$ [def-weil-pbc-direct-image], a sheaf of $\\Lambda_X$-modules; and let $c^p_M:P_M\\to\\pi_*M$ be the morphism of presheaves of $\\Lambda$-modules of [lem-weil-pbc-etale-graph-section-extension-map] (sending $s\\in M(V,\\varphi)$ to the unique section of $M(V\\times_XU)$ that pulls back to $s$ along the graph $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi)$ and vanishes off $\\Gamma_\\varphi(V)$).\n\nThe *canonical map from extension by zero to direct image* is the unique morphism of sheaves of $\\Lambda_X$-modules\n$$\nc_M:\\pi_!M\\longrightarrow\\pi_*M\\qquad\\text{with}\\qquad c_M\\circ\\eta_M=c^p_M,\n$$\ngiven by the universal property of sheafification. It is natural in $M$: for $\\alpha:M\\to M'$, $\\pi_*\\alpha\\circ c_M=c_{M'}\\circ\\pi_!\\alpha$, since both sides composed with $\\eta_M$ equal $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$ (naturality of $c^p$ and of $\\eta$) and the factorization through $\\eta_M$ is unique. (Stacks constructs the same map for every separated etale $\\pi$; only the finite etale case is used here.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517): 'Sheafification of this map will be the desired map j_!F -> j_*F', on abelian sheaves and sheaves of Lambda-modules; the map of Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-graph-section-extension-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map from extension by zero to direct image for a separated etale morphism of schemes",
+   "results": "Function.ExtendByZero.linearMap (Mathlib.LinearAlgebra.Pi), AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSeparated: no sheaf-level extension by zero on the small etale site",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical morphism from extension by zero j_! F to pushforward j_* F for an etale morphism of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.pushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf): O_X-modules on the Zariski site along open immersions; Scheme.Etale.forget; no extension by zero along etale maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'lowerShriek|extensionByZero|extendByZero|shriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean) and its uses; no j_! on sites",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "lowerShriek (project ~/weil-conjectures-slopmaster2)",
+   "results": "Mathlib has none; the source repository has AlgebraicGeometry.Etale.etaleLowerShriek (WeilConjectures/SixFunctors/Etale/LowerShriek/EtaleMap.lean:55, the functor v_! of def-weil-pbc-etale-sum-extension) and Etale.lowerShriekToLowerStar (LowerShriek/Comparison.lean:196, for open immersions), but no map v_! -> v_* for finite etale v",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

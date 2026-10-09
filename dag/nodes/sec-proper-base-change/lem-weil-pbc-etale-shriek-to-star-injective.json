@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-etale-shriek-to-star-injective",
+ "kind": "statement",
+ "title": "The map from extension by zero to direct image is injective",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring and $M$ a sheaf of $\\Lambda_U$-modules on $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category], and let $c_M:\\pi_!M\\to\\pi_*M$ be the canonical map from extension by zero to direct image [def-weil-pbc-etale-shriek-to-star-map]. Then for every object $W$ of $X_{\\Et}$ the map $c_M(W):(\\pi_!M)(W)\\to(\\pi_*M)(W)$ is injective; in particular $c_M$ is a monomorphism of sheaves of $\\Lambda_X$-modules. Equivalently, the presheaf map $c^p_M:P_M\\to\\pi_*M$ of [lem-weil-pbc-etale-graph-section-extension-map] is locally injective: if $x=\\sum_{i=1}^n s_{\\varphi_i}\\in P_M(V)$ ($\\varphi_1,\\dots,\\varphi_n$ distinct $X$-morphisms $V\\to U$, $s_{\\varphi_i}\\in M(V,\\varphi_i)$) has $c^p_{M,V}(x)=0$, then there is a covering $\\{V_k\\to V\\}$ of $V$ in $X_{\\Et}$ on whose members $x$ restricts to $0$ (in fact one may take $V$ partitioned into finitely many open and closed pieces on each of which every two $\\varphi_i$ either agree or have disjoint graphs).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), second paragraph of the proof (injectivity via pairwise equalizers, which are open and closed, and disjoint supports), there for separated etale j"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "lem-weil-pbc-etale-graph-section-extension-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf morphism locally injective then sheafification injective; sum over graphs of sections injective into sections over fibre product",
+   "results": "CategoryTheory.Presheaf.isLocallyInjective_toSheafify, Presheaf.isLocallyInjective_presheafToSheaf_map_iff, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, Sheaf.mono_of_isLocallyInjective (Mathlib.CategoryTheory.Sites.LocallyInjective / LocallyBijective, Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify): generic tools (locally injective presheaf map gives a mono after sheafification), not the statement about pi_! -> pi_*",
+   "date": "2026-10-10",
+   "verdict": "no match (generic tools only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves from lower shriek to lower star is injective for separated etale morphism",
+   "results": "CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated, CategoryTheory.Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective), TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective: generic, no etale extension by zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'lowerShriek|extensionByZero|shriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rn 'IsLocallyInjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LocallyInjective.lean",
+   "results": "no extension by zero along etale maps; LocallyInjective.lean has only the generic notions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

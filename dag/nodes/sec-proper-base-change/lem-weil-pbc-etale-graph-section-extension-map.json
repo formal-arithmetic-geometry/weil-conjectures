@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-etale-graph-section-extension-map",
+ "kind": "statement",
+ "title": "Sections over graphs extend by zero: the presheaf map from the etale sum presheaf to direct image",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], let $\\Lambda$ be a commutative ring and $M$ a sheaf of $\\Lambda_U$-modules on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. For an object $V$ of $X_{\\Et}$ write $V_U=V\\times_XU$ [def-pc-fibre-product] with projections $p_V:V_U\\to V$ and $q_V:V_U\\to U$; $(V_U,q_V)$ is an object of $U_{\\Et}$ and $(V_U,\\,V_U\\to V\\to X)$ one of $X_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits]. For an $X$-morphism $\\varphi:V\\to U$ write $(V,\\varphi)$ for $V$ regarded as an etale $U$-scheme and $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi):V\\to V_U$ for its graph. Then:\n\n1. $(V,\\varphi)$ is an object of $U_{\\Et}$; $\\Gamma_\\varphi$ is a morphism $(V,\\varphi)\\to(V_U,q_V)$ of $U_{\\Et}$; its image $\\Gamma_\\varphi(V)$ is open and closed in $V_U$, and $\\Gamma_\\varphi$ is an isomorphism of $V$ onto the open subscheme $\\Gamma_\\varphi(V)$.\n2. For every $s\\in M(V,\\varphi)$ there is exactly one $e_\\varphi(s)\\in M(V_U,q_V)$ such that $M(\\Gamma_\\varphi)(e_\\varphi(s))=s$ and the restriction of $e_\\varphi(s)$ to the open subscheme $V_U\\setminus\\Gamma_\\varphi(V)$ is $0$; the map $e_\\varphi:M(V,\\varphi)\\to M(V_U,q_V)$ is $\\Lambda$-linear.\n3. Let $P_M$ be the presheaf of $\\Lambda$-modules on $X_{\\Et}$ of [def-weil-pbc-etale-sum-extension] for $v=\\pi$: $P_M(V)=\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$, the restriction along a morphism $a:V'\\to V$ of $X_{\\Et}$ sending the summand of $\\varphi$ to the summand of $\\varphi a$ by $M(a:(V',\\varphi a)\\to(V,\\varphi))$. Then the maps\n$$\nc^p_{M,V}:P_M(V)\\longrightarrow M(V_U,q_V)=(\\pi_*M)(V),\\qquad (s_\\varphi)_\\varphi\\longmapsto\\sum_\\varphi e_\\varphi(s_\\varphi),\n$$\nwith $\\pi_*$ the direct image [def-weil-pbc-direct-image], form a morphism of presheaves of $\\Lambda$-modules $c^p_M:P_M\\to\\pi_*M$ on $X_{\\Et}$, and $c^p_M$ is natural in $M$: $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$ for every morphism $\\alpha:M\\to M'$ of sheaves of $\\Lambda_U$-modules (with $P_\\alpha=\\bigoplus_\\varphi\\alpha_{(V,\\varphi)}$). The key point for compatibility with restriction is that for $a:V'\\to V$ in $X_{\\Et}$ the preimage of $\\Gamma_\\varphi(V)$ under $a\\times_X\\mathrm{id}_U:V'_U\\to V_U$ is $\\Gamma_{\\varphi a}(V')$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), first paragraph of the proof (construction of the presheaf map j_{p!}F -> j_*F via the open and closed graph immersions Gamma_phi, there for separated etale j), using Schemes Lemma 01KT (schemes-lemma-section-immersion, literature/stacks-project/schemes.tex line 4275); here for finite etale pi and sheaves of Lambda-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section of a separated etale morphism is an open and closed immersion, extend a section on the image of the graph by zero",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp, IsSeparated.isClosedImmersion_diagonal (Mathlib.AlgebraicGeometry.Morphisms.Separated): scheme-level facts only (already the Mathlib leaf lem-weil-pbc-etale-section-clopen-immersion); nothing about sheaves on the small etale site",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf section on disjoint union of open subsets extended by zero from one component",
+   "results": "TopCat.Sheaf.objSupIsoProdEqLocus and TopCat.Sheaf.interUnionPullbackConeLift (Mathlib.Topology.Sheaves...): sheaves on topological spaces only; no presheaf map from a sum over Hom_X(V,U) to sections over V x_X U",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'lowerShriek|extensionByZero|extendByZero|shriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rln smallEtale ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean, functions on index sets); smallEtale appears only in AlgebraicGeometry/Sites/{Etale,AffineEtale,EtalePoint}.lean, which have no extension by zero and no direct image comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
