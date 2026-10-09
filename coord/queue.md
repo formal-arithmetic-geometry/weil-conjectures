@@ -1,6 +1,6 @@
 # Work queue
 
-594 items; claim with `tools/claim.py next <group> [--stage N]`.
+598 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (562)
 
@@ -11,11 +11,10 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-scheme-clopen-idempotent` | 1007 | none |
-| `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1008 | none |
+| `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
@@ -34,7 +33,7 @@
 | `lem-weil-pbc-henselian-pair-approximation` | 1008 | none |
 | `lem-weil-pbc-henselization-colimit` | 1008 | none |
 | `lem-weil-pbc-henselization-pair-g-ring` | 1008 | none |
-| `lem-weil-pbc-idempotents-determined-modulo-radical` | 1008 | none |
+| `lem-weil-pbc-sheaf-on-basis-extends` | 1008 | none |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
 | `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
@@ -61,6 +60,7 @@
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1009 | none |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
+| `lem-weil-pbc-site-ses-cech-h1-surjective` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1010 | none |
@@ -569,7 +569,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (32)
+## Stage 2: nodes to state (36)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -589,14 +589,18 @@
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
+| `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
+| `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
+| `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
