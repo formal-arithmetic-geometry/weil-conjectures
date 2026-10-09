@@ -1,0 +1,53 @@
+{
+ "id": "lem-weil-cohomology-commutes-scalar-extension",
+ "kind": "statement",
+ "title": "Cohomology commutes with extension of scalars along a field extension",
+ "statement": "Let $K\\subset L$ be fields and let $C=(C^r,d^r)$ be a cochain complex of $K$-vector spaces, with cohomology modules $\\mathrm H^i(C)$ [def-weil-derived-category-cohomology-functor]. Let $C\\otimes_KL$ be the complex of $L$-vector spaces with terms $C^r\\otimes_KL$ and differentials $d^r\\otimes_KL$ (extension of scalars termwise [def-weil-vector-space-scalar-extension]). Then for every integer $i$ the $L$-linear map\n\n$$\n\\mathrm H^i(C)\\otimes_KL\\longrightarrow\\mathrm H^i(C\\otimes_KL),\\qquad[x]\\otimes\\lambda\\longmapsto[x\\otimes\\lambda],\n$$\n\nis well defined and an isomorphism of $L$-vector spaces, natural in $C$ (compatible with the maps induced by morphisms of complexes). In particular, $C\\otimes_KL$ has finite-dimensional cohomology over $L$ when $C$ has finite-dimensional cohomology over $K$, and a quasi-isomorphism $C\\to C'$ of complexes of $K$-vector spaces induces a quasi-isomorphism $C\\otimes_KL\\to C'\\otimes_KL$. For a tower $K\\subset L\\subset M$ the isomorphisms are compatible with the canonical isomorphisms $(V\\otimes_KL)\\otimes_LM\\cong V\\otimes_KM$ of [def-weil-vector-space-scalar-extension]: the square formed by $\\mathrm H^i(C)\\otimes_KM$, $(\\mathrm H^i(C)\\otimes_KL)\\otimes_LM$, $\\mathrm H^i(C\\otimes_KL)\\otimes_LM$ and $\\mathrm H^i((C\\otimes_KL)\\otimes_LM)\\cong\\mathrm H^i(C\\otimes_KM)$ commutes.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Section 'Flat modules' (Tag 00H9), Definition 00HB (M flat: −⊗_R M exact) — L is a free K-module (a K-basis exists), hence flat; Homology, Lemma 010N (exact functors between abelian categories) and the definition of H^i of a cochain complex in Section 'Complexes' (Tag 010V): an exact additive functor preserves kernels and images, hence carries Ker(d^i)/Im(d^{i-1}) to Ker(F d^i)/Im(F d^{i-1}). The blueprint uses this without a name in the stagewise definition of $\\mathrm H^i$ on $D^b_{\\mathrm{fd}}(\\Qlb)$"
+ },
+ "stmt_deps": [
+  "def-weil-derived-category-cohomology-functor",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class PreservesHomology\\|def mapHomologyIso' Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; grep -n 'preservesHomology_of' Mathlib/CategoryTheory/Abelian/Exact.lean; grep -n 'lTensor_shortComplex_exact\\|PreservesFiniteLimits' Mathlib/RingTheory/Flat/CategoryTheory.lean; grep -rn 'homologyFunctor\\|QuasiIsoAt' Mathlib/Algebra/Homology/QuasiIso.lean | grep mapHomologicalComplex; grep -rln 'baseChange.*homology\\|homology.*baseChange\\|ker_baseChange' Mathlib/LinearAlgebra/TensorProduct Mathlib/RingTheory/Flat",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:40 `Functor.PreservesHomology` and :455 `ShortComplex.mapHomologyIso : (S.map F).homology ≅ F.obj S.homology` for a functor preserving homology; Mathlib/CategoryTheory/Abelian/Exact.lean:267 `preservesHomology_of_map_exact`, :294 `preservesHomology_of_preservesMonos_and_cokernels`; Mathlib/RingTheory/Flat/CategoryTheory.lean:41 `Module.Flat.lTensor_shortComplex_exact` (tensoring with a flat module carries exact short complexes of modules to exact ones), :79 `PreservesFiniteLimits (tensorLeft M)` for flat M; Mathlib/Algebra/Homology/QuasiIso.lean:257-267 `quasiIsoAt_map_iff_of_preservesHomology`-type lemmas: F.mapHomologicalComplex preserves (and reflects, for faithful exact F) quasi-isomorphisms when F preserves homology. No lemma identifying the homology of a complex of vector spaces tensored with a field extension as the tensor product of its homology (`ker_baseChange`, `range_baseChange` do not exist)",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement: the ingredients are there (the base-change functor `ModuleCat.extendScalars` / `tensorLeft L` preserves finite limits by flatness of L over K, hence homology by `preservesHomology_of_map_exact`, and `ShortComplex.mapHomologyIso` then gives H^i(C ⊗ L) ≅ H^i(C) ⊗ L), but assembling them for cochain complexes of vector spaces with the naturality and the compatibility with towers is not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def homologyFunctorIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:777 `Functor.homologyFunctorIso : F.mapShortComplex ⋙ ShortComplex.homologyFunctor D ≅ ShortComplex.homologyFunctor C ⋙ F` for F preserving homology (natural iso on short complexes); applied to `(K.sc i)` it gives H^i(F(K)) ≅ F(H^i(K)) naturally",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement: the natural iso is `Functor.homologyFunctorIso` at `K.sc i` once `ModuleCat.extendScalars` is shown to preserve homology (flatness + `preservesHomology_of_map_exact`); the compatibility with towers K⊂L⊂M is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-coefficient-cohomology-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

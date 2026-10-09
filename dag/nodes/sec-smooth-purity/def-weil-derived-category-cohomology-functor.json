@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-derived-category-cohomology-functor",
+ "kind": "definition",
+ "title": "Cohomology modules of a complex of modules, as a functor on the derived category",
+ "statement": "Let $R$ be a ring and let $\\operatorname{Mod}_R$ be the abelian category of $R$-modules, with derived category $D(R)=D(\\operatorname{Mod}_R)$ [def-weil-abstract-derived-category]. For a cochain complex $C=(C^r,d^r:C^r\\to C^{r+1})$ of $R$-modules and an integer $i$, the $i$-th cohomology module is the $R$-module\n\n$$\n\\mathrm H^i(C)=\\ker(d^i:C^i\\to C^{i+1})/\\operatorname{im}(d^{i-1}:C^{i-1}\\to C^i),\n$$\n\nand a morphism of complexes $f:C\\to C'$ induces the $R$-linear map $\\mathrm H^i(f):\\mathrm H^i(C)\\to\\mathrm H^i(C')$, $[x]\\mapsto[f^i(x)]$; this is a functor from the category of cochain complexes of $R$-modules to $\\operatorname{Mod}_R$. A quasi-isomorphism is by definition a morphism $f$ for which every $\\mathrm H^i(f)$ is an isomorphism, so by the universal property of the localization the functor $\\mathrm H^i$ factors uniquely through the localization functor $Q$ of complexes to $D(R)$: there is a functor\n\n$$\n\\mathrm H^i:D(R)\\longrightarrow\\operatorname{Mod}_R\n$$\n\nwith $\\mathrm H^i\\circ Q\\cong\\mathrm H^i$ (the cohomology of a representing complex), canonically. Hence for an object $C$ of $D(R)$ the module $\\mathrm H^i(C)$ is well defined up to canonical isomorphism as the cohomology of any complex representing $C$, and a morphism of $D(R)$ induces an $R$-linear map on $\\mathrm H^i$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Project, Homology, Section 'Complexes' (Tag 010V): the definition H^i(A^•)=Ker(d^i)/Im(d^{i-1}) and the functor H^i on cochain complexes, after Lemma 0114; Definition 0115 (quasi-isomorphism); Derived Categories, Section 'Derived categories' (Tag 05RR), Lemma 05RT (H^0 factors through the localization Q) and Definition 05RU (D(A)), with H^i(K)=H^0(K[i]) as set at the start of that section"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def homologyFunctor\\|def homologyFunctorFactors\\|homologyFunctorFactors_hom_naturality' Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; grep -n 'def homology\\b\\|def homologyFunctor' Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; grep -n 'moduleCatHomologyIso\\|moduleCatLeftHomologyData' Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean; grep -n 'instance abelian' Mathlib/Algebra/Category/ModuleCat/Abelian.lean",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:34 `DerivedCategory.homologyFunctor C n : DerivedCategory C ⥤ C` for an abelian category C with `HasDerivedCategory C`; :39 `homologyFunctorFactors C n : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n`, :47 its naturality. Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:90 `HomologicalComplex.homology K i := (K.sc i).homology`, :469 `HomologicalComplex.homologyFunctor`. Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean:105 `ShortComplex.moduleCatLeftHomologyData` (homology of a short complex of modules as ker g modulo the image of f) and :177 `moduleCatHomologyIso`. Mathlib/Algebra/Category/ModuleCat/Abelian.lean:75 `ModuleCat.abelian`. Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 `DerivedCategory C` with `HasDerivedCategory.standard` (:81)",
+   "date": "2026-10-09",
+   "verdict": "match: `DerivedCategory.homologyFunctor (ModuleCat R) i` with `DerivedCategory.homologyFunctorFactors` is the functor H^i : D(R) → Mod_R factoring the cohomology of complexes `HomologicalComplex.homologyFunctor`, whose value is ker d^i / im d^{i-1} by `ShortComplex.moduleCatHomologyIso`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.homologyFunctor",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+  "how": "exact: `DerivedCategory.homologyFunctor (ModuleCat R) i : DerivedCategory (ModuleCat R) ⥤ ModuleCat R` (line 34), with `DerivedCategory.homologyFunctorFactors` (line 39) the canonical isomorphism Q ⋙ H^i ≅ `HomologicalComplex.homologyFunctor` (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:469); the cohomology of a complex of modules is ker/im by `ShortComplex.moduleCatHomologyIso` (Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean:177)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-coefficient-cohomology-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-vector-space-scalar-extension",
+ "kind": "definition",
+ "title": "Extension of scalars of a vector space along a field extension",
+ "statement": "Let $K\\subset L$ be fields ($L$ a field extension of $K$) and $V$ a $K$-vector space. The *extension of scalars* of $V$ to $L$ is the tensor product $V\\otimes_KL$, an $L$-vector space with $\\lambda\\cdot(v\\otimes\\mu)=v\\otimes\\lambda\\mu$. A $K$-linear map $f:V\\to W$ induces the $L$-linear map $f\\otimes_KL:V\\otimes_KL\\to W\\otimes_KL$, $v\\otimes\\mu\\mapsto f(v)\\otimes\\mu$, and $V\\mapsto V\\otimes_KL$ is a functor from $K$-vector spaces to $L$-vector spaces. If $(v_j)_{j\\in J}$ is a $K$-basis of $V$ then $(v_j\\otimes1)_{j\\in J}$ is an $L$-basis of $V\\otimes_KL$; in particular $V\\otimes_KL$ is finite-dimensional [def-weil-finite-dimensional-subspace] over $L$ when $V$ is finite-dimensional over $K$, of the same dimension. For a tower $K\\subset L\\subset M$ of fields there is a canonical $M$-linear isomorphism $(V\\otimes_KL)\\otimes_LM\\cong V\\otimes_KM$, $(v\\otimes\\lambda)\\otimes\\mu\\mapsto v\\otimes\\lambda\\mu$, natural in $V$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Section 'Tensor products' (Tag 00CV) and Lemma 00D0 (associativity, giving (V⊗_K L)⊗_L M ≅ V⊗_K(L⊗_L M) = V⊗_K M); Section 'Base change' (Tag 05G3), Definition 05G4 and Lemma 05G5 (base change of a finite module is finite); the basis statement is elementary (tensor product commutes with direct sums)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def baseChange' Mathlib/LinearAlgebra/TensorProduct/Tower.lean Mathlib/LinearAlgebra/TensorProduct/Basis.lean; grep -n 'def cancelBaseChange' Mathlib/LinearAlgebra/TensorProduct/Tower.lean; grep -n 'instance Module.Finite.base_change' Mathlib/RingTheory/TensorProduct/Finite.lean; grep -n 'def extendScalars' Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "results": "`TensorProduct R M N` (Mathlib/LinearAlgebra/TensorProduct/Basic.lean) with the `Module A (A ⊗[R] M)` structure of Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Tower.lean:661 `LinearMap.baseChange A f : A ⊗[R] M →ₗ[A] A ⊗[R] N`; Basis.lean:64 `Basis.baseChange` (a basis of M gives a basis of S ⊗[R] M); Mathlib/RingTheory/TensorProduct/Finite.lean:81 `Module.Finite.base_change`; Tower.lean:436 `TensorProduct.AlgebraTensorModule.cancelBaseChange : M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N`; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:400 `ModuleCat.extendScalars f : ModuleCat R ⥤ ModuleCat S` (the functor). Mathlib writes the scalar extension as `L ⊗[K] V` rather than `V ⊗_K L`; the two are identified by `TensorProduct.comm`",
+   "date": "2026-10-09",
+   "verdict": "match: `TensorProduct` with the `Algebra`-module structure (`L ⊗[K] V`), functoriality `LinearMap.baseChange` / `ModuleCat.extendScalars`, basis `Basis.baseChange`, finiteness `Module.Finite.base_change`, transitivity `TensorProduct.AlgebraTensorModule.cancelBaseChange`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+  "how": "exact: `L ⊗[K] V` with its `L`-module structure (Mathlib/LinearAlgebra/TensorProduct/Tower.lean), the maps `LinearMap.baseChange L f` (Tower.lean:661), the functor `ModuleCat.extendScalars` (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:400), the basis `Basis.baseChange` (Mathlib/LinearAlgebra/TensorProduct/Basis.lean:64), `Module.Finite.base_change` (Mathlib/RingTheory/TensorProduct/Finite.lean:81), and the tower isomorphism `TensorProduct.AlgebraTensorModule.cancelBaseChange` (Tower.lean:436); the order of the factors differs from the node's by `TensorProduct.comm`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-coefficient-cohomology-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

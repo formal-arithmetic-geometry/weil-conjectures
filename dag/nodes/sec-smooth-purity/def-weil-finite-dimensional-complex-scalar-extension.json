@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-finite-dimensional-complex-scalar-extension",
+ "kind": "definition",
+ "title": "Scalar extension on the bounded derived categories of finite-dimensional vector spaces",
+ "statement": "Fix a prime $\\ell$, $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and let $\\mathcal E_\\ell$ be the directed set of finite extensions $E'/\\Ql$ [def-weil-l-adic-coefficient-extension] contained in $\\Qlb$, as in the finite coefficient categories over a point [def-weil-finite-coefficient-point]; for $E'\\in\\mathcal E_\\ell$ let $D^b_{\\mathrm{fd}}(E')$ be the bounded derived category of finite-dimensional $E'$-vector spaces of that node, a full subcategory of the derived category $D(E')$ of $E'$-vector spaces [def-weil-abstract-derived-category]. For $E'\\subset L$ in $\\mathcal E_\\ell$, the *scalar extension* functor\n\n$$\n-\\otimes_{E'}L:D^b_{\\mathrm{fd}}(E')\\longrightarrow D^b_{\\mathrm{fd}}(L)\n$$\n\nis defined on a complex $C'=(C'^r,d^r)$ of finite-dimensional $E'$-vector spaces termwise, $(C'\\otimes_{E'}L)^r=C'^r\\otimes_{E'}L$ with differentials $d^r\\otimes_{E'}L$, using the extension of scalars of vector spaces [def-weil-vector-space-scalar-extension], and on a morphism of complexes termwise. The termwise functor $V\\mapsto V\\otimes_{E'}L$ is exact (it carries a basis to a basis, so it preserves kernels and images), hence it carries quasi-isomorphisms to quasi-isomorphisms and descends to a functor on the derived categories; it preserves boundedness and finite-dimensionality, so it lands in $D^b_{\\mathrm{fd}}(L)$. For a tower $E'\\subset L\\subset M$ in $\\mathcal E_\\ell$ the canonical isomorphisms $(V\\otimes_{E'}L)\\otimes_LM\\cong V\\otimes_{E'}M$ give a canonical isomorphism of functors $(-\\otimes_{E'}L)\\otimes_LM\\cong-\\otimes_{E'}M$, and $-\\otimes_{E'}E'$ is the identity; these are the transition functors of the directed system $(D^b_{\\mathrm{fd}}(E'))_{E'\\in\\mathcal E_\\ell}$ whose $2$-colimit is the stagewise $D^b_{\\mathrm{fd}}(\\Qlb)$ of [def-weil-finite-coefficient-point]. The same definition applies with $L$ replaced by $\\Qlb$ itself, giving $-\\otimes_{E'}\\Qlb:D^b_{\\mathrm{fd}}(E')\\to D^b_{\\mathrm{fd}}(\\Qlb)_{\\mathrm{naive}}$, the bounded derived category of finite-dimensional $\\Qlb$-vector spaces.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "node def-weil-finite-coefficient-point, order 1509: the 2-colimit $D^b_{\\mathrm{fd}}(\\Qlb)=\\operatorname{2-colim}_{E\\in\\mathcal E_\\ell}D^b_{\\mathrm{fd}}(E)$, whose transition functors the blueprint does not write out; the transition functor $K\\mapsto K\\otimes_EL$ is the one named in def-weil-algebraically-closed-coefficients (order 1462) for $D^b_c(Y,E)$"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-coefficient-point",
+  "def-weil-abstract-derived-category",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapDerivedCategory\\|mapDerivedCategoryFactors\\|IsTriangulated' Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; grep -n 'def extendScalars' Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; grep -n 'PreservesFiniteLimits' Mathlib/RingTheory/Flat/CategoryTheory.lean; grep -n 'Free.of_divisionRing' Mathlib/LinearAlgebra/Basis/VectorSpace.lean; grep -n 'instance of_free' Mathlib/RingTheory/Flat/Basic.lean; ls Mathlib/Algebra/Homology/DerivedCategory/ (bounded derived category)",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36 `CategoryTheory.Functor.mapDerivedCategory F : DerivedCategory C₁ ⥤ DerivedCategory C₂` for an additive F preserving finite limits and colimits, :41 `mapDerivedCategoryFactors` (it is induced by `F.mapHomologicalComplex`, the termwise functor), :104 it is triangulated; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:400 `ModuleCat.extendScalars f` (the termwise functor on modules); Mathlib/RingTheory/Flat/CategoryTheory.lean:79 `PreservesFiniteLimits (tensorLeft M)` for a flat module M, flatness of L over the field E' from `Module.Free.of_divisionRing` (Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156) and `Module.Flat.of_free` (Mathlib/RingTheory/Flat/Basic.lean:231); the colimit side holds since tensoring is a left adjoint. Bounded derived categories: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:207 `DerivedCategory.Bounded C` (the full subcategory of t-bounded objects of `DerivedCategory C` for the canonical t-structure `DerivedCategory.TStructure.t`, :34), with `Plus`/`Minus` (:201-204); no subcategory of complexes with finite-dimensional cohomology, no restriction of `mapDerivedCategory` to `Bounded`, no 2-colimit over finite extensions",
+   "date": "2026-10-09",
+   "verdict": "no match: the derived functor of an exact functor exists (`Functor.mapDerivedCategory` applied to `ModuleCat.extendScalars`, exact by flatness) and the bounded derived category `DerivedCategory.Bounded` exists, but the restriction to the bounded finite-dimensional subcategories D^b_fd(E') → D^b_fd(L), the transition-functor coherence and the system over the finite extensions of ℚ_ℓ are not in Mathlib and are not one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-coefficient-cohomology-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

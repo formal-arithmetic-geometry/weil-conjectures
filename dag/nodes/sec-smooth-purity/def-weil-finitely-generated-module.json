@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-finitely-generated-module",
+ "kind": "definition",
+ "title": "Finitely generated modules and finite modules over a finite ring",
+ "statement": "Let $R$ be a ring and $M$ an $R$-module. $M$ is *finitely generated* (a *finite* $R$-module) if there are finitely many elements $m_1,\\ldots,m_r\\in M$ such that every element of $M$ is an $R$-linear combination $\\sum_j a_jm_j$ with $a_j\\in R$. When $R$ is a finite ring, an $R$-module is finitely generated if and only if its underlying set is finite; so for a finite ring $R$ a *finite $R$-module* means, without ambiguity, a finitely generated $R$-module, equivalently one with finitely many elements. When $R$ is a field, a finitely generated $R$-module is a finite-dimensional $R$-vector space [def-weil-finite-dimensional-subspace].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Section 'Finite modules and finitely presented modules' (Tag 0517), Definition 0518 (finite = finitely generated module); the equivalence over a finite ring is elementary (a finite set generates M; conversely M is a quotient of R^r, a finite set when R is finite)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class Finite' Mathlib/RingTheory/Finiteness/Defs.lean; grep -rn 'finite_of_finite' Mathlib/RingTheory/Finiteness/Cardinality.lean; grep -n 'abbrev FiniteDimensional' Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean",
+   "results": "Mathlib/RingTheory/Finiteness/Defs.lean: `Module.Finite R M` (the class: `(⊤ : Submodule R M).FG`, i.e. M is spanned by a finite set); Mathlib/RingTheory/Finiteness/Cardinality.lean:73 `Module.finite_of_finite [Finite R] [Module.Finite R M] : Finite M` and :80 the equivalence `Module.Finite R M ↔ Finite M` over a finite ring (with `Module.Finite.of_finite`); Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean:75 `FiniteDimensional K V := Module.Finite K V`",
+   "date": "2026-10-09",
+   "verdict": "match: `Module.Finite R M`; over a finite ring the equivalence with finiteness of M is `Module.finite_of_finite` / `Module.Finite.of_finite`; over a field it is `FiniteDimensional K V` by definition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite",
+  "file": "Mathlib/RingTheory/Finiteness/Defs.lean",
+  "how": "exact: `Module.Finite R M`; over a finite ring `Module.finite_of_finite` and `Module.Finite.of_finite` (Mathlib/RingTheory/Finiteness/Cardinality.lean:73-80) give the equivalence with finiteness of the underlying set; over a field `FiniteDimensional K V` is by definition `Module.Finite K V` (Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean:75)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-coefficient-cohomology-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
