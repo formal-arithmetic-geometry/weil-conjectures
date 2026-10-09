@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-localization-of-localization",
+ "kind": "statement",
+ "title": "A localization of a localization is a localization",
+ "statement": "Say that a homomorphism of commutative rings $\\varphi:R\\to S'$ is a *localization of $R$ at* a multiplicative subset $M\\subseteq R$ if (a) $\\varphi(m)$ is a unit for every $m\\in M$, (b) every element of $S'$ is $\\varphi(x)\\varphi(m)^{-1}$ with $x\\in R$, $m\\in M$, (c) $\\varphi(x)=0$ implies $mx=0$ for some $m\\in M$; then $a/m\\mapsto\\varphi(a)\\varphi(m)^{-1}$ is an isomorphism of $R$-algebras $M^{-1}R\\cong S'$. Let $R$ be a commutative ring. (1) Let $\\varphi:R\\to S$ be a localization of $R$ at $M$, $N\\subseteq S$ a multiplicative subset and $\\psi:S\\to T$ a localization of $S$ at $N$. Then $U=\\{x\\in R:\\varphi(x)=n\\varphi(m)\\text{ for some }n\\in N,\\ m\\in M\\}$ is a multiplicative subset of $R$, $\\psi\\circ\\varphi:R\\to T$ is a localization of $R$ at $U$, and so $T\\cong U^{-1}R$ as $R$-algebras. (2) Let $M\\subseteq N$ be multiplicative subsets of $R$, $\\varphi:R\\to S$ a localization at $M$, $\\varphi':R\\to T$ a localization at $N$ and $\\chi:S\\to T$ a ring map with $\\chi\\circ\\varphi=\\varphi'$. Then $\\chi$ is a localization of $S$ at the multiplicative subset $\\varphi(N)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00CM (section-localization, line 1039): Definition Tag 00CO (definition-localization, line 1068) and Proposition Tag 00CP (proposition-universal-property-localization, line 1084); Stacks has no numbered lemma for the transitivity of localization (it is used silently, e.g. in the omitted proof of Lemma 00CR); the statement is that of Mathlib's IsLocalization.localization_localization_isLocalization and IsLocalization.isLocalization_of_submonoid_le"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a localization is a localization of the original ring",
+   "results": "IsLocalization.isLocalization_atPrime_localization_atPrime, IsLocalization.localization_localization_isLocalization, IsLocalization.Away.mul', IsLocalization.localizationLocalizationAtPrimeIsoLocalization, IsLocalization.Away.commutes (RingTheory.Localization.LocalizationLocalization, .Away.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: (1) is IsLocalization.localization_localization_isLocalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing at M then at a submonoid N of the localization equals localizing at the preimage submonoid",
+   "results": "IsLocalization.isLocalization_of_submonoid_le, IsLocalization.localization_localization_isLocalization_of_has_all_units, IsLocalization.map_map, IsLocalization.localization_localization_isLocalization, IsLocalization.mk'_eq_algebraMap_mk'_of_submonoid_le (RingTheory.Localization.LocalizationLocalization)",
+   "date": "2026-10-10",
+   "verdict": "match: (2) is IsLocalization.isLocalization_of_submonoid_le"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 40,60p and 105,115p and 190,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/LocalizationLocalization.lean; sed -n 100,114p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean",
+   "results": "localizationLocalizationSubmodule M N := (N ⊔ M.map (algebraMap R S)).comap (algebraMap R S) (line 47) with mem_localizationLocalizationSubmodule: x ∈ … ↔ ∃ y∈N, z∈M, algebraMap R S x = y * algebraMap R S z (line 53); theorem localization_localization_isLocalization [IsLocalization N T] : IsLocalization (localizationLocalizationSubmodule M N) T (line 110); theorem isLocalization_of_submonoid_le (M N) (h : M ≤ N) [IsLocalization M S] [IsLocalization N T] [Algebra S T] [IsScalarTower R S T] : IsLocalization (N.map (algebraMap R S)) T (line 194); isLocalization_iff (Defs.lean line 110): IsLocalization M S ↔ units, surjectivity, exists_of_eq = conditions (a)-(c); IsLocalization.algEquiv (Localization/Basic.lean line 457) gives Localization M ≃ₐ[R] S",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.localization_localization_isLocalization",
+  "file": "Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+  "how": "specializes in one line per clause: (1) is IsLocalization.localization_localization_isLocalization (line 110) with U = localizationLocalizationSubmodule M N, whose membership is mem_localizationLocalizationSubmodule (line 53); (2) is IsLocalization.isLocalization_of_submonoid_le (line 194) (scalar tower = chi∘phi = phi'); 'localization at M' in the sense (a)-(c) is IsLocalization by isLocalization_iff (Localization/Defs.lean line 110), and the isomorphism with U^{-1}R is IsLocalization.algEquiv (Localization/Basic.lean line 457); Mathlib works over commutative semirings, which specializes",
+  "line": 110
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-essentially-smooth-composition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added (clause (1) at 110, clause (2) at 194), verified with sed."
+}

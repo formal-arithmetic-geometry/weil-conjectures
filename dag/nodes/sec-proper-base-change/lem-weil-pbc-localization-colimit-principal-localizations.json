@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-localization-colimit-principal-localizations",
+ "kind": "statement",
+ "title": "A localization is the filtered colimit of the principal localizations",
+ "statement": "Let $P$ be a commutative ring and $S\\subseteq P$ a multiplicative subset. For $f\\in S$ let $P_f$ be the localization of $P$ at $\\{1,f,f^2,\\dots\\}$ and $S^{-1}P$ the localization at $S$ (fractions $a/s$, $a/s=a'/s'$ iff $u(as'-a's)=0$ for some $u\\in S$). Preorder $S$ by $f\\le g$ iff $g=fh$ for some $h\\in P$. Then: (1) this preorder is directed ($f,f'\\le ff'$), so, regarded as a category, it is filtered; (2) for $f\\le g$, $g=fh$, the map $\\rho_{fg}:P_f\\to P_g$, $a/f^e\\mapsto ah^e/g^e$, is a well defined ring homomorphism, independent of the choice of $h$, with $\\rho_{ff}=\\mathrm{id}$ and $\\rho_{gk}\\circ\\rho_{fg}=\\rho_{fk}$, so $f\\mapsto P_f$ is a functor from $S$ to commutative rings; (3) the ring maps $\\kappa_f:P_f\\to S^{-1}P$, $a/f^e\\mapsto a/f^e$, satisfy $\\kappa_g\\circ\\rho_{fg}=\\kappa_f$ and make $S^{-1}P$ a colimit of this functor in the category of commutative rings [def-weil-pbc-category-colimit]: $S^{-1}P=\\varinjlim_{f\\in S}P_f$. Moreover $\\kappa_f$ composed with $P\\to P_f$ is the localization map $P\\to S^{-1}P$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization at a submonoid is the filtered colimit of localizations away from its elements",
+   "results": "AddLocalization.Away, IsLocalization (RingTheory.Localization.Defs), Localization, Localization.Away, IsLocalization', IsLocalization.of_le: no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization M is a colimit of Localization.Away f over f in M",
+   "results": "Localization.Away, IsLocalizedModule.Away, AddSubmonoid.LocalizationMap.AwayMap, Localization, LocalizedModule.Away: no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a ring at a submonoid is the colimit of the localizations away from elements of the submonoid",
+   "results": "Localization.isLocalization, PrimeSpectrum.toPiLocalization, Algebra.instIsStandardOpenImmersionAway, IsLocalization.Away.instMapRingHomPowersOfCoe, IsLocalization.localization_localization_isLocalization_of_has_all_units: none states a colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, CategoryTheory.Limits.IsColimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'Localization.*(colimit|DirectLimit|isColimit)|(colimit|DirectLimit).*Localization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only AlgebraicGeometry/Sites/SmallAffineZariski.lean:336 PreservesLocalization.colimitDesc_preimage (presheaves on the small affine Zariski site), unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-essentially-smooth-composition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
