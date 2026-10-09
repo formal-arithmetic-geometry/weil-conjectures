@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-proj-basic-open-intersection",
+ "kind": "statement",
+ "title": "D_+(f) meets D_+(g) in the principal open of g^d/f^e",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring, $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj], and $f\\in S_d$, $g\\in S_e$ homogeneous with $d,e>0$. Let $\\iota_f:\\operatorname{Spec}S_{(f)}\\to X$ be the open immersion with image $D_+(f)$ given by the canonical isomorphism $D_+(f)\\cong\\operatorname{Spec}S_{(f)}$ [def-nagata-homogeneous-localization-degree-zero], so that $\\Gamma(D_+(f),\\mathcal O_X)=S_{(f)}$. Then $\\iota_f^{-1}(D_+(g))=D(g^d/f^e)$, the principal open of the element $g^d/f^e\\in S_{(f)}$. Equivalently: $D_+(f)\\cap D_+(g)$ $(=D_+(fg))$ is the set of $x\\in D_+(f)$ at which the germ of the function $g^d/f^e\\in\\Gamma(D_+(f),\\mathcal O_X)$ is a unit of $\\mathcal O_{X,x}$, i.e. the basic open of that function in the scheme $D_+(f)$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(e),(f) and (3); Lemma 01MA (label lemma-standard-open-proj); used in the proof of Lemma 01MV (label lemma-principal-open)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of basic open D_+(g) under Spec (A_f)_0 → Proj A is the basic open of g^deg f / f^deg g",
+   "results": "AlgebraicGeometry.Proj.awayι_preimage_basicOpen (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic), ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen, Proj.fromOfGlobalSections_preimage_basicOpen, ProjIsoSpecTopComponent.ToSpec.preimage_basicOpen, Proj.basicOpen, SpecMap_preimage_basicOpen",
+   "date": "2026-10-09",
+   "verdict": "match: Proj.awayι_preimage_basicOpen"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.awayι_preimage_basicOpen",
+   "results": "AlgebraicGeometry.Proj.awayι_preimage_basicOpen : (Opens.map (Proj.awayι 𝒜 f f_deg hm).base).obj (Proj.basicOpen 𝒜 g) = PrimeSpectrum.basicOpen (HomogeneousLocalization.Away.isLocalizationElem f_deg g_deg) (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen, PrimeSpectrum.basicOpen, AlgebraicGeometry.Spec",
+   "results": "AlgebraicGeometry.basicOpen_eq_of_affine, basicOpen_eq_of_affine', Scheme.toSpecΓ_preimage_basicOpen, IsAffineOpen.fromSpec_image_basicOpen, IsAffineOpen.fromSpec_preimage_basicOpen, ...",
+   "date": "2026-10-09",
+   "verdict": "match for the second form: basicOpen_eq_of_affine"
+  },
+  {
+   "tool": "leansearch",
+   "query": "preimage of basic open under morphism of schemes is basic open of pulled back section; basic open of Spec R equals PrimeSpectrum.basicOpen",
+   "results": "Scheme.basicOpen_appLE, Scheme.Hom.preimage_basicOpen, SpecMap_preimage_basicOpen, PrimeSpectrum.comap_basicOpen, Scheme.preimage_basicOpen_top",
+   "date": "2026-10-09",
+   "verdict": "match: Scheme.Hom.preimage_basicOpen transports basic opens along the isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'awayι_preimage_basicOpen\\|isLocalizationElem\\|basicOpen_mul\\|opensRange_awayι\\|theorem basicOpen_eq_of_affine\\|theorem preimage_basicOpen\\|theorem mem_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "ProjectiveSpectrum/Basic.lean:301 awayι_preimage_basicOpen, :196 opensRange_awayι, :186 awayι := basicOpenIsoSpec.inv ≫ ι, :69 basicOpen_mul; HomogeneousLocalization.lean:881 Away.isLocalizationElem hf hg := Away.mk hf e (g ^ d) (f ∈ 𝒜 d, g ∈ 𝒜 e), i.e. g^d/f^e; Scheme.lean:641 mem_basicOpen, :679 preimage_basicOpen, :837 basicOpen_eq_of_affine",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Proj.awayι_preimage_basicOpen (with Proj.opensRange_awayι, Proj.basicOpen_mul, AlgebraicGeometry.basicOpen_eq_of_affine, Scheme.Hom.preimage_basicOpen, Scheme.mem_basicOpen)",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+  "how": "a few Mathlib lemmas, one per clause: awayι_preimage_basicOpen (ProjectiveSpectrum/Basic.lean:301) states (awayι f)⁻¹ D₊(g) = PrimeSpectrum.basicOpen (Away.isLocalizationElem f_deg g_deg), and isLocalizationElem (RingTheory/GradedAlgebra/HomogeneousLocalization.lean:881) is Away.mk (g^d) over f^e, i.e. g^d/f^e for f ∈ 𝒜 d, g ∈ 𝒜 e; awayι = basicOpenIsoSpec.inv ≫ ι (Basic.lean:186) with opensRange_awayι = D₊(f) (Basic.lean:196), and D₊(fg) = D₊(f) ⊓ D₊(g) is basicOpen_mul (Basic.lean:69). The second form: PrimeSpectrum.basicOpen r is the scheme basic open of r on Spec (basicOpen_eq_of_affine, Scheme.lean:837), an isomorphism carries basic opens to basic opens (Scheme.Hom.preimage_basicOpen, Scheme.lean:679), and Scheme.mem_basicOpen (Scheme.lean:641) says the germ is a unit"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-projective-space-twisting-sheaf-charts; match verified by the lead against the Mathlib source"
+ }
+}

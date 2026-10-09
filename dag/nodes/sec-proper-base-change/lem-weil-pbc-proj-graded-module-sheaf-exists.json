@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+ "kind": "statement",
+ "title": "The sheaf of modules on Proj(S) attached to a graded module exists",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring, $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj] with its standard opens $D_+(f)$ and $\\Gamma(D_+(f),\\mathcal O_X)=S_{(f)}$ for $f$ homogeneous of positive degree [def-nagata-homogeneous-localization-degree-zero], and let $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ be a graded $S$-module. For such $f$ let $M_{(f)}$ be the degree-zero part of $M_f=M\\otimes_SS_f$, i.e. the $S_{(f)}$-module of fractions $x/f^m$ with $m\\ge0$ and $x\\in M_{m\\deg f}$. Then: (a) if $g$ is homogeneous of positive degree with $D_+(g)\\subseteq D_+(f)$, then $g^e=af$ for some $e\\ge1$ and homogeneous $a\\in S$, and $x/f^m\\mapsto a^mx/g^{em}$ is a well-defined $S_{(f)}$-linear map $\\rho_{f,g}:M_{(f)}\\to M_{(g)}$, independent of the choice of $e,a$, with $\\rho_{f,f}=\\mathrm{id}$, $\\rho_{g,h}\\rho_{f,g}=\\rho_{f,h}$, and an isomorphism when $D_+(f)=D_+(g)$; (b) there is a sheaf of $\\mathcal O_X$-modules $\\mathcal F$ with $\\mathcal F(D_+(f))=M_{(f)}$ as $S_{(f)}$-modules for every homogeneous $f$ of positive degree and with restriction maps $\\rho_{f,g}$, and it is unique up to unique isomorphism compatible with these identifications; (c) $\\mathcal F$ is quasi-coherent [pqf-def-coherent], and its stalk at the point $x$ given by the homogeneous prime $\\mathfrak p$ is $M_{(\\mathfrak p)}$ (fractions $y/h$, $h\\notin\\mathfrak p$ homogeneous, $\\deg y=\\deg h$); (d) for every $m\\in M_0$ the elements $m/1\\in M_{(f)}$ are compatible under the $\\rho_{f,g}$ and are the restrictions of a unique global section of $\\mathcal F$; this gives an $S_0$-linear map $M_0\\to\\Gamma(X,\\mathcal F)$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section 01M3 (label section-proj), the text before Definition 01M6 (the presheaf $\\widetilde M$ on the basis of standard opens, its stalks, the sheaf condition on standard coverings via Algebra Lemma cover-module); Lemma 01M4 (label lemma-standard-open), (1)(b),(g),(h); Definition 01M6 (label definition-structure-sheaf) (3); Lemma 01M7 (label lemma-proj-sheaves) (1)-(6); Lemma 01MB (label lemma-proj-scheme) for quasi-coherence"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent sheaf on Proj associated to a graded module, twisting sheaf O(n)",
+   "results": "SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, ModuleCat.tilde (Mathlib.AlgebraicGeometry.Modules.Tilde: over Spec R only), ModuleCat.tildeInModuleCat, ProjectiveSpectrum.Proj.structureSheaf, StructureSheaf.structureSheafInType",
+   "date": "2026-10-09",
+   "verdict": "no match: tilde exists only over Spec of a ring; on Proj only the structure sheaf (M = S)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules on Proj associated to graded module M, sections over D_+(f) equal degree zero localization M_(f)",
+   "results": "Proj.awayToSection, StructureSheaf.structureSheafInType, sectionInBasicOpen, ProjectiveSpectrum.Proj.awayToSection, openToLocalization, Proj.structureSheaf: structure sheaf only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": "none (no declaration mentions both Proj and Scheme.Modules)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'GradedModule|DirectSum.Gmodule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rnE 'twist|Twist' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "no graded module appears in AlgebraicGeometry; ProjectiveSpectrum/{Basic,Functor,Proper,Scheme,StructureSheaf,Topology}.lean (structure sheaf only), Modules/{Presheaf,Sheaf,Tilde}.lean (tilde over Spec only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
