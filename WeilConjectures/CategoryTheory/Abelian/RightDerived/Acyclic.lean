@@ -138,7 +138,54 @@ lemma map_of_rightAcyclic [PreservesFiniteLimits F] (h₁ : F.rightAcyclic S.X�
   exact ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ hf) inferInstance
     inferInstance
 
+/-- `F`-acyclic objects are closed under extensions: if `0 ⟶ A ⟶ B ⟶ C ⟶ 0` is short exact and
+`A` and `C` are `F`-acyclic, then so is `B`. -/
+lemma rightAcyclic_X₂ (h₁ : F.rightAcyclic S.X₁) (h₃ : F.rightAcyclic S.X₃) :
+    F.rightAcyclic S.X₂ := fun q ↦
+  (hS.rightDerived_exact₁ F (q + 1)).isZero_X₂ ((h₁ q).eq_of_src _ _) ((h₃ q).eq_of_tgt _ _)
+
 end ShortComplex.ShortExact
+
+namespace Functor
+
+variable {F : C ⥤ D} [F.Additive]
+
+/-- **A criterion for acyclicity.** Let `P` be a property of objects of `C` which holds for
+injective objects and is closed under cokernels of monomorphisms, and suppose that the left exact
+functor `F` sends every short exact sequence `0 ⟶ A ⟶ B ⟶ C ⟶ 0` with `P A` to a sequence with
+`F B ⟶ F C` epi. Then every object satisfying `P` is `F`-acyclic.
+
+For `P` the flasque sheaves and `F` a pushforward or a functor of sections, this is the
+acyclicity of flasque sheaves. -/
+theorem rightAcyclic_of_epi_map [PreservesFiniteLimits F] (P : ObjectProperty C)
+    (hinj : ∀ (I : C), Injective I → P I)
+    (hP : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₂ → P S.X₃)
+    (hF : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → Epi (F.map S.g))
+    {A : C} (hA : P A) : F.rightAcyclic A := by
+  have := enoughInjectives_of_hasInjectiveResolutions (C := C)
+  intro q
+  induction q generalizing A with
+  | zero =>
+    let S := ShortComplex.mk (Injective.ι A) (cokernel.π (Injective.ι A)) (cokernel.condition _)
+    have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have : Epi ((F.rightDerived 0).map S.g) := by
+      have := hF S hS hA
+      rw [← NatIso.naturality_2 F.rightDerivedZeroIsoSelf S.g]
+      infer_instance
+    have h₀ : hS.rightDerivedδ F 0 = 0 := by
+      rw [← cancel_epi ((F.rightDerived 0).map S.g), hS.rightDerived_map_g_comp_δ, comp_zero]
+    have : Epi (hS.rightDerivedδ F 0) := (hS.rightDerived_exact₃ F 0).epi_f
+      ((Functor.isZero_rightDerived_obj_injective_succ F 0 _).eq_of_tgt _ _)
+    rw [h₀] at this
+    exact IsZero.of_epi_zero ((F.rightDerived 0).obj S.X₃) _
+  | succ q ih =>
+    let S := ShortComplex.mk (Injective.ι A) (cokernel.π (Injective.ι A)) (cokernel.condition _)
+    have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have h₃ : P S.X₃ := hP S hS hA (hinj _ inferInstance)
+    exact (hS.rightDerived_exact₃ F (q + 1)).isZero_X₂ ((ih h₃).eq_of_src _ _)
+      ((Functor.isZero_rightDerived_obj_injective_succ F (q + 1) _).eq_of_tgt _ _)
+
+end Functor
 
 end CategoryTheory
 
