@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-sets-inverse-image-stalk",
+ "kind": "statement",
+ "title": "Stalks of the inverse image of a sheaf of sets along a continuous map, with germs",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and $\\mathcal G$ a sheaf of sets on $Y$. For a presheaf of sets $\\mathcal P$ on a space $T$ and $t\\in T$ let $\\mathcal P_t=\\varinjlim_{W\\ni t}\\mathcal P(W)$ be its stalk, the colimit of sets [def-weil-pbc-category-colimit] over the open neighbourhoods $W$ of $t$ ordered by reverse inclusion, and $s\\mapsto s_t$ the coprojection $\\mathcal P(W)\\to\\mathcal P_t$ (the germ). Let $f_p\\mathcal G(U)=\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$ ($V\\subseteq Y$ open, colimit of sets) be the presheaf inverse image, with coprojections $\\iota^U_V$, and $\\theta:f_p\\mathcal G\\to f^{-1}\\mathcal G$ its sheafification [def-weil-pbc-sheafification], as in [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets; for $V\\subseteq Y$ open and $s\\in\\mathcal G(V)$ put $\\eta_V(s)=\\theta_{f^{-1}V}(\\iota^{f^{-1}V}_V(s))\\in(f^{-1}\\mathcal G)(f^{-1}V)$. Then for every $x\\in X$, with $y=f(x)$, there is exactly one map of sets $c:\\mathcal G_y\\to(f^{-1}\\mathcal G)_x$ with $c(s_y)=(\\eta_V(s))_x$ for every open $V\\ni y$ and every $s\\in\\mathcal G(V)$, and $c$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma (Tag 008H, label lemma-stalk-pullback) with Lemma (Tag 008G, lemma-stalk-pullback-presheaf) and Tag 007Z (lemma-stalk-sheafification: sheafification does not change stalks); used in literature/stacks-project/etale-cohomology.tex, proof of Lemma 59.82.1 (Tag 09ZG, line 15112)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of the pullback of a sheaf of types along a continuous map is isomorphic to the stalk at the image point",
+   "results": "TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.germ_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks), TopCat.Presheaf.pullbackObjObjOfImageOpen (Topology.Sheaves.Presheaf), PresheafedSpace.stalkMap.isIso",
+   "date": "2026-10-10",
+   "verdict": "match: stalkPullbackIso with C = Type u, plus sheafification stalk iso (below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the sheaf pullback of a sheaf of types at x equals the stalk at f x",
+   "results": "TopCat.Presheaf.stalkPullbackHom, stalkPullbackInv, stalkPullbackIso, stalkPushforward, stalkPushforward_germ_apply (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "match (same declarations)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkPullbackIso",
+   "results": "TopCat.Presheaf.stalkPullbackIso (C : Type u) [Category C] [HasColimits C] (f : X ⟶ Y) (F : Presheaf C Y) (x) : F.stalk (f x) ≅ ((Presheaf.pullback C f).obj F).stalk x",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n \"stalkPullback\\|germ_stalkPullbackHom\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; grep -n \"stalkFunctor_map_unit_toSheafify_isIso\\|sheafifyStalkIso\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Sheafify.lean",
+   "results": "Stalks.lean:234 def stalkPullbackHom, :242 lemma germ_stalkPullbackHom, :335 def stalkPullbackIso; Sheafify.lean:137 theorem stalkFunctor_map_unit_toSheafify_isIso (C with colimits and terminal, HasWeakSheafify), :124 sheafifyStalkIso",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "specializes in one line, one lemma per part, with C = Type u: stalkPullbackIso (Stalks.lean:335) is the bijection G_y ≅ (f_p G)_x for the presheaf pullback, its hom stalkPullbackHom (line 234) satisfying germ_stalkPullbackHom (line 242: the germ of s at y goes to the germ at x of the unit of the presheaf adjunction applied to s, i.e. of ι(s)); TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso (Mathlib/Topology/Sheaves/Sheafify.lean:137) says that the map on stalks induced by the sheafification θ = toSheafify is a bijection; composing gives c with c(s_y) = (θ(ι s))_x. Uniqueness: every element of G_y is a germ (stalk of a filtered colimit of sets), TopCat.Presheaf.stalk_hom_ext. Mathlib's TopCat.Sheaf.pullback is identified with sheafification of the presheaf pullback by TopCat.Sheaf.pullbackIso (Mathlib/Topology/Sheaves/Functors.lean:98)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-h0-spectral-closed-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: stalkPullbackIso (Topology/Sheaves/Stalks.lean:335), germ_stalkPullbackHom (:242), stalkFunctor_map_unit_toSheafify_isIso (Sheafify.lean:137) with C = Type; Sheaves 008H for sets."
+ }
+}

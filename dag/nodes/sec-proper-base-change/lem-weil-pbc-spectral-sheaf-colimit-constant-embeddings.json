@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+ "kind": "statement",
+ "title": "On a spectral space every sheaf of sets is a directed colimit of subsheaves of finite products of pushed-forward finite constant sheaves",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space] and $\\mathcal F$ a sheaf of sets on $X$. For a closed subset $W\\subseteq X$ with inclusion $i_W:W\\to X$ and a set $S$ let $\\underline S_W$ be the sheaf of locally constant maps to $S$ on $W$ ($V\\mapsto\\{$locally constant maps $V\\to S\\}$ for $V\\subseteq W$ open, with restriction of maps) and $(i_W)_*\\underline S_W$ its direct image, $V\\mapsto\\{$locally constant maps $V\\cap W\\to S\\}$ for $V\\subseteq X$ open. Then there are a directed set $\\Lambda$ (nonempty, any two elements have a common upper bound), a system of sheaves of sets $(\\mathcal F_\\lambda,\\varphi_{\\mu\\lambda}:\\mathcal F_\\lambda\\to\\mathcal F_\\mu)_{\\lambda\\le\\mu}$ on $X$ over $\\Lambda$ ($\\varphi_{\\lambda\\lambda}=\\mathrm{id}$, $\\varphi_{\\nu\\mu}\\varphi_{\\mu\\lambda}=\\varphi_{\\nu\\lambda}$) and morphisms $c_\\lambda:\\mathcal F_\\lambda\\to\\mathcal F$ with $c_\\mu\\varphi_{\\mu\\lambda}=c_\\lambda$ such that $(\\mathcal F,(c_\\lambda)_\\lambda)$ is a colimit of the system in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit], and such that for every $\\lambda$ there are $n\\ge0$, constructible [def-weil-constructible-subset] closed subsets $Z_1,\\dots,Z_n\\subseteq X$, finite sets $S_1,\\dots,S_n$ and a morphism $\\mathcal F_\\lambda\\to\\prod_{k=1}^n(i_{Z_k})_*\\underline{S_k}_{Z_k}$ (product computed sectionwise) which is injective on sections over every open of $X$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 'Constructible sheaves of sets' (line 2979): Lemma Tag 0CAI (label lemma-filtered-colimit-constructibles, line 3016; the colimit is indexed by finite subsets of the index sets constructed in its proof) and Lemma Tag 0CAL (label lemma-constructible-in-constant, line 3133, via Lemma Tag 0CAK lemma-constructible-comes-from-finite), applied to the basis of quasi-compact opens of the spectral space; as combined in literature/stacks-project/etale-cohomology.tex, proof of Lemma 59.82.1 (Tag 09ZG, lines 15119-15142)"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-category-colimit",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every sheaf of sets on a spectral space is a filtered colimit of subsheaves of finite products of pushforwards of finite constant sheaves on closed subsets",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.hasExactColimitsOfShape (Abelian.GrothendieckAxioms.Sheaf), SheafedSpace colimit instances, CategoryTheory.isSheaf_pointwiseColimit, SheafOfModules.Presentation.isColimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of sets on a spectral space is a filtered colimit of constructible sheaves embedding into products of pushforwards of finite constant sheaves",
+   "results": "topCatToSheafCompHausLike, LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf, Condensed.lanSheafProfinite (condensed mathematics, a different statement)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"LocallyConstant\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean; grep -rln \"constantSheaf\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rn \"IsFiltered\\|filteredColimit\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean",
+   "results": "no LocallyConstant in Topology/Sheaves; constantSheaf only in CategoryTheory/Sites/{ConstantSheaf,GlobalSections,LocalSite,Abelian,SheafCohomology/Basic}.lean (generic sites); no filtered-colimit decomposition of sheaves on spaces",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-h0-spectral-closed-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement combines Etale Cohomology 0CAI and 0CAL (a sheaf of sets on a spectral space is a directed colimit of sheaves embedding into finite products of pushed-forward finite constant sheaves on constructible closed subsets); self-contained; correct; unsplit."
+ }
+}

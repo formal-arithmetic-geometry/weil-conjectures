@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-closed-pushforward-constant-restriction",
+ "kind": "statement",
+ "title": "Restricting a pushed-forward constant sheaf from one closed subset to another",
+ "statement": "Let $X$ be a topological space, $Z,Z'\\subseteq X$ closed subsets with inclusions $i:Z\\to X$, $i':Z'\\to X$, and $S$ a set. Let $\\mathcal G=i'_*\\underline S_{Z'}$ be the sheaf of sets on $X$ with $\\mathcal G(V)=\\{$locally constant maps $V\\cap Z'\\to S\\}$ for $V\\subseteq X$ open (restriction of maps as restriction), so $\\Gamma(X,\\mathcal G)$ is the set $\\mathrm{LC}(Z',S)$ of locally constant maps $Z'\\to S$. Let $\\mathcal G|_Z=i^{-1}\\mathcal G$ be the sheafification [def-weil-pbc-sheafification] $\\theta:i_p\\mathcal G\\to\\mathcal G|_Z$ of $i_p\\mathcal G:U\\mapsto\\varinjlim_{V\\supseteq U}\\mathcal G(V)$ (colimit of sets [def-weil-pbc-category-colimit], coprojections $\\iota^U_V$), as in [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets. Then there is a bijection $\\beta:\\Gamma(Z,\\mathcal G|_Z)\\to\\mathrm{LC}(Z\\cap Z',S)$ such that $\\beta(\\theta_Z(\\iota^Z_X(g)))=g|_{Z\\cap Z'}$ for every $g\\in\\Gamma(X,\\mathcal G)=\\mathrm{LC}(Z',S)$. (For $Z'=X$: $\\Gamma(Z,\\underline S_X|_Z)\\cong\\mathrm{LC}(Z,S)$ compatibly with restriction of locally constant maps.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, proof of Lemma 59.82.1 (Tag 09ZG), the displayed identifications at lines 15145-15151 ('Observe that Γ(X,(Z_i→X)_*S_i)=Γ(Z_i,S_i) and Γ(X,(Z_i→X)_*S_i|_Z)=Γ(Z∩Z_i,S_i)'), stated there without proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward along closed embedding of constant sheaf restricted to another closed subset, global sections are locally constant functions on the intersection",
+   "results": "SheafOfModules.pushforwardSections, StructureSheaf.res_const, CategoryTheory.Sheaf.IsConstant.mk (Sites.ConstantSheaf), CategoryTheory.Sheaf.Γ (Sites.GlobalSections), LocallyRingedSpace.IsOpenImmersion.isoRestrict",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of the restriction to a closed subset of the pushforward of a constant sheaf from another closed subset are locally constant functions on the intersection",
+   "results": "ModuleCat.Tilde.res_const, CompHausLike.LocallyConstant.incl_comap, CompHausLike.LocallyConstant.presheaf_ext, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"LocallyConstant\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean; grep -rn \"stalk\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Functors.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/",
+   "results": "no locally-constant sheaf and no closed base change for pushforwards in Topology/Sheaves (files: Skyscraper, Stalks, Functors, Sheafify, LocalPredicate, ...); only skyscraper sheaves (Skyscraper.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-h0-spectral-closed-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: restriction of the pushforward of a constant sheaf on a closed subset to another closed subset (the display in the proof of 09ZG); self-contained; correct; unsplit."
+ }
+}
