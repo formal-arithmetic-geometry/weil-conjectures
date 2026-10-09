@@ -128,7 +128,8 @@ binary operation `m` on `P`: `s` and `t` are locally images of sections `x` and 
 `liftOp m s t` is glued from the images of `m x y`. -/
 noncomputable def liftOp {X : C} (s t : (sheafify J P).obj (op X)) :
     (sheafify J P).obj (op X) :=
-  (isSheaf_sheafify _ (J.intersection_covering (imageSieve_mem s) (imageSieve_mem t))).amalgamate (liftOpFamily m s t)
+  (isSheaf_sheafify _ (J.intersection_covering (imageSieve_mem s) (imageSieve_mem t))).amalgamate
+    (liftOpFamily m s t)
     (liftOpFamily_compatible m hm s t)
 
 /-- **Characterization of `liftOp`.** If `s` and `t` pull back along `g` to the images of `x`
@@ -216,8 +217,10 @@ attribute [local instance] sheafifyGroup
 back along `g` to the images of `x` and `y`, then `s * t` pulls back to the image of `x * y`. -/
 lemma map_sheafify_mul {X Y : C} (s t : (sheafify J (G ⋙ forget GrpCat)).obj (op X)) (g : Y ⟶ X)
     (x y : G.obj (op Y))
-    (hx : (toSheafify J (G ⋙ forget GrpCat)).app _ x = (sheafify J (G ⋙ forget GrpCat)).map g.op s)
-    (hy : (toSheafify J (G ⋙ forget GrpCat)).app _ y = (sheafify J (G ⋙ forget GrpCat)).map g.op t) :
+    (hx : (toSheafify J (G ⋙ forget GrpCat)).app _ x =
+      (sheafify J (G ⋙ forget GrpCat)).map g.op s)
+    (hy : (toSheafify J (G ⋙ forget GrpCat)).app _ y =
+      (sheafify J (G ⋙ forget GrpCat)).map g.op t) :
     (sheafify J (G ⋙ forget GrpCat)).map g.op (s * t) =
       (toSheafify J (G ⋙ forget GrpCat)).app _ (x * y) :=
   map_liftOp (fun _ x y ↦ x * y) (map_mul_forget G) s t g x y hx hy

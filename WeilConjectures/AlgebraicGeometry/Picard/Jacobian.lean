@@ -407,13 +407,14 @@ theorem exists_commGrpObj_isPicardZeroMul {J : Over (Spec (.of k))}
 omit [SmoothOfRelativeDimension 1 f] [IsProper f] in
 /-- **Rational points as a group.** Let `e` represent `Pic^0_{X/k}` by a group scheme `J`,
 respecting the group laws. If a bijection `Φ` from a group `G` to `Pic^0_{X/k}(T)` sends every
-`g ∈ G` to the image of a class `ρ g ∈ Pic (X_T)` of fibrewise degree zero, for a group
-homomorphism `ρ : G →* Pic (X_T)`, then `G ≅ J(T)` as groups, through `Φ` followed by the
+`g ∈ G` to the image of a class `ρ g ∈ Pic (X_T)` of fibrewise degree zero, for a
+multiplicative map `ρ : G → Pic (X_T)`, then `G ≅ J(T)` as groups, through `Φ` followed by the
 representation. This turns the bijections `Pic^0(X) ≃ Pic^0_{X/k}(k)` below into group
 isomorphisms `Pic^0(X) ≃* J(k)`. -/
 theorem exists_mulEquiv_of_isPicardZeroMul {G : Type*} [Group G] {T : Over (Spec (.of k))}
     {J : Over (Spec (.of k))} [GrpObj J] (e : (picardFunctorDegree f 0).obj.RepresentableBy J)
-    (he : IsPicardZeroMul f e) (ρ : G →* (pullback f T.hom).Pic)
+    (he : IsPicardZeroMul f e) (ρ : G → (pullback f T.hom).Pic)
+    (hρ : ∀ a b, ρ (a * b) = ρ a * ρ b)
     (Φ : G ≃ (picardFunctorDegree f 0).obj.obj (.op T))
     (hΦ : ∀ g, ∃ h, Φ g = (toSheafify (fppfTopology.over (Spec (.of k)))
       (picardSubfunctorDegree f 0).toFunctor).app (.op T) ⟨ρ g, h⟩) :
@@ -422,11 +423,11 @@ theorem exists_mulEquiv_of_isPicardZeroMul {G : Type*} [Group G] {T : Over (Spec
   obtain ⟨ha, hΦa⟩ := hΦ a
   obtain ⟨hb, hΦb⟩ := hΦ b
   obtain ⟨hab, hΦab⟩ := hΦ (a * b)
-  have hab' : ρ a * ρ b ∈ (picardSubfunctorDegree f 0).obj (.op T) := map_mul ρ a b ▸ hab
+  have hab' : ρ a * ρ b ∈ (picardSubfunctorDegree f 0).obj (.op T) := hρ a b ▸ hab
   change e.homEquiv.symm (Φ (a * b)) = e.homEquiv.symm (Φ a) * e.homEquiv.symm (Φ b)
   rw [hΦab, hΦa, hΦb, ← he _ _ ha hb hab']
   congr 3
-  exact Subtype.ext (map_mul ρ a b)
+  exact hρ a b
 
 end GroupLaw
 
@@ -876,12 +877,19 @@ theorem exists_jacobian [IsSepClosed k]
   obtain ⟨h₀⟩ := hPd 0
   obtain ⟨_, he⟩ := exists_commGrpObj_isPicardZeroMul (X ↘ Spec (.of k)) h₀
   obtain ⟨Φ, hΦ⟩ := exists_picardZero_equiv_picardFunctorDegree_zero (k := k) (X := X)
+  have hρ (a b : picardZero k X) :
+      Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) (a * b).1 =
+        Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) a.1 *
+          Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) b.1 :=
+    Pic.map_mul _ a.1 b.1
+  obtain ⟨ψ, -⟩ := exists_mulEquiv_of_isPicardZeroMul (X ↘ Spec (.of k)) h₀ he
+    (T := 𝟙_ (Over (Spec (.of k))))
+    (fun L : picardZero k X ↦
+      Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1)
+    hρ Φ hΦ
   exact ⟨Pd 0, inferInstance, h₀, isProper_of_representableBy_picardFunctorDegree 0 _ h₀,
     smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 _ h₀,
-    geometricallyIntegral_of_representableBy_picardFunctorDegree 0 _ h₀, he,
-    ⟨(exists_mulEquiv_of_isPicardZeroMul _ h₀ he
-      ((Pic.mapHom (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom)).comp
-        (picardZero k X).subtype) Φ hΦ).choose⟩⟩
+    geometricallyIntegral_of_representableBy_picardFunctorDegree 0 _ h₀, he, ⟨ψ⟩⟩
 
 end Jacobian
 
@@ -1198,7 +1206,9 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
   have : IsAlgClosed K := IsAlgClosure.isAlgClosed k₀
   obtain ⟨Φ, hΦ, hΦσ⟩ := exists_picardZero_equiv_picardFunctorDegree C₀ C p hC
   obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul _ r hr
-    ((Pic.mapHom hC.isoPullback.inv).comp (picardZero K C).subtype) Φ hΦ
+    (T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))))
+    (fun L : picardZero K C ↦ Pic.map hC.isoPullback.inv L.1)
+    (fun a b ↦ Pic.map_mul _ a.1 b.1) Φ hΦ
   refine ⟨J₀, inferInstance, r, hP, hS, hG, hr,
     ⟨(r.ofAdjunction (Over.mapPullbackAdj _)).ofIso e⟩, ψ, fun σ ↦ ?_⟩
   obtain ⟨γ, hγp, hγ, act, hact, hΦσ⟩ := hΦσ σ
