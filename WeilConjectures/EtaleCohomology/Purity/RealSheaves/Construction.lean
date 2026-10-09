@@ -107,6 +107,24 @@ end Topology
 
 end Scheme.FiniteEtale
 
+/-- The residue field at a closed point of a scheme locally of finite type over a finite field
+`K` is finite: it is a finite extension of `K` (Nullstellensatz). -/
+lemma Scheme.Hom.finite_residueField_of_isClosed {K : Type u} [Field K] [Finite K]
+    {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) [LocallyOfFiniteType p] {x : C}
+    (hx : IsClosed {x}) : Finite (C.residueField x) := by
+  have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
+  have : IsClosedImmersion (C.fromSpecResidueField x) :=
+    isClosed_singleton_iff_isClosedImmersion.mp hx
+  let f := C.fromSpecResidueField x ≫ p
+  have : IsFinite f := isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.2 inferInstance
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective f
+  have hfin : φ.hom.Finite := by
+    rw [← IsFinite.SpecMap_iff, hφ]
+    infer_instance
+  let := φ.hom.toAlgebra
+  have : Module.Finite K (C.residueField x) := hfin
+  exact Module.finite_of_finite K
+
 /-- A nonempty quasi-compact scheme locally of finite type over a finite field `K` has a point
 with values in the algebraic closure of `K`: the residue field at a closed point is finite over
 `K`. -/
