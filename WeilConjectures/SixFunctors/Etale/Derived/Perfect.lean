@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -111,12 +114,13 @@ noncomputable def coefficientEvaluation
 
 This holds because the derived tensor product of `D(X_ét)` is symmetric monoidal (with the
 Koszul sign rule), and in a braided monoidal category exact pairings can be swapped
-(`CategoryTheory.BraidedCategory.exactPairing_swap`). No braiding on `D(X_ét)` has been
-constructed in this repository yet, which is why this is stated separately. -/
+(`CategoryTheory.BraidedCategory.exactPairing_swap`). The braiding is the one given by
+`DerivedCategory.nonempty_braidedCategory`. -/
 theorem nonempty_exactPairing_swap
     (K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing K K'] :
-    Nonempty (ExactPairing K' K) :=
-  sorry
+    Nonempty (ExactPairing K' K) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  exact ⟨BraidedCategory.exactPairing_swap K K'⟩
 
 /-- If `L` and `K` form an exact pairing in `D(X_ét)`, that is, `L` is a left dual of `K`, then
 `K^∨ ≅ L`. -/
@@ -200,6 +204,40 @@ theorem nonempty_iso_leftDerivedUpperStar_derivedHom [Etale.UpperStarPreservesFl
   exact ⟨L((g)^*[A]).mapIso (MonoidalClosed.ihomObjIsoTensor Mᘁ M N) ≪≫
     (Functor.Monoidal.μIso L((g)^*[A]) Mᘁ N).symm ≪≫
     (MonoidalClosed.ihomObjIsoTensor _ _ _).symm⟩
+
+/-- The derived hom out of a dualizable complex is tensoring with its coefficient dual,
+`RHom(K, M) ≅ K^∨ ⊗ᴸ M`, written with `AlgebraicGeometry.Etale.derivedTensor`
+(`AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`). -/
+theorem nonempty_iso_derivedHom_derivedTensor
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty ((RHom(X)[A].obj (op K)).obj M ≅
+      ((derivedTensor A X).obj ((coefficientDual A X).obj (op K))).obj M) :=
+  (nonempty_iso_coefficientDual_tensor hK M).map Iso.symm
+
+/-- The derived tensor product of two dualizable complexes is dualizable. -/
+theorem isDualizable_derivedTensor
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (hM : IsDualizable M) : IsDualizable (((derivedTensor A X).obj K).obj M) :=
+  hK.tensorObj hM
+
+/-- An invertible complex is dualizable: a one-sided tensor inverse is two-sided, the derived
+tensor product being symmetric (`DerivedCategory.nonempty_braidedCategory`). -/
+theorem isDualizable_of_isInvertible
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) :
+    IsDualizable T := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  obtain ⟨M, ⟨e⟩⟩ := hT
+  exact isDualizable_of_tensorIso e (β_ M T ≪≫ e)
+
+/-- A shift of an invertible complex is invertible: `T⟦n⟧ ⊗ᴸ M⟦-n⟧ ≅ (T ⊗ᴸ M)⟦0⟧ ≅ Λ_X` for a
+tensor inverse `M` of `T`. -/
+theorem isInvertible_shift
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) (n : ℤ) :
+    IsInvertible (T⟦n⟧) := by
+  obtain ⟨M, ⟨e⟩⟩ := hT
+  exact ⟨M⟦-n⟧, ⟨derivedTensorShiftIso A T M n (-n) ≪≫ (shiftFunctor _ (n + -n)).mapIso e ≪≫
+    (shiftFunctorZero' _ (n + -n) (by simp)).app _⟩⟩
 
 end Etale.DerivedCategory
 

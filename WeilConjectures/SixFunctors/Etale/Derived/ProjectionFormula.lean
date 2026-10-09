@@ -257,9 +257,9 @@ ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
 
 `PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)`
 
-of `AlgebraicGeometry.Etale.projectionMapOfCompactification`, for any compactification of `f`,
-is an isomorphism of bifunctors on the whole unbounded derived categories, with no boundedness,
-constructibility or Tor amplitude hypothesis on `K` and `L`.
+of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on the whole
+unbounded derived categories, with no boundedness, constructibility or Tor amplitude hypothesis
+on `K` and `L`.
 
 This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
 kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.
@@ -270,17 +270,9 @@ map `g` one checks on geometric stalks with unbounded proper base change, where 
 `RΓ(X_ȳ, K) ⊗ᴸ M ≅ RΓ(X_ȳ, K ⊗ᴸ M)` for a complex `M` of `Λ`-modules; this holds because
 `RΓ(X_ȳ, -)` has finite cohomological dimension on torsion sheaves, so commutes with the
 colimits reducing `M` to `Λ`. -/
-theorem isIso_projectionMapOfCompactification_of_finite [Finite Λ] {f : X ⟶ Y}
-    (c : Compactification f) :
-    IsIso (projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c) :=
-  sorry
-
-/-- **The projection formula at finite coefficients, unbounded**, for the chosen
-compactification: `AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_of_finite`
-for `HasCompactification.compactification f`. -/
 theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
     IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
-  isIso_projectionMapOfCompactification_of_finite Λ (HasCompactification.compactification f)
+  sorry
 
 /-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
 `Λ`, the projection formula holds for `f` at all `K` and `L`.
@@ -360,19 +352,17 @@ theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
 
 Independence of the compactification, for torsion coefficients: the formula computed with an
 arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for
-`AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both hold, for every
-compactification (`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_of_finite`). -/
+`AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both sides hold: the
+argument for the chosen compactification (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`)
+applies to any compactification. -/
 theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
     [HasCompactification f]
     (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
-      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
-  have := isIso_projectionMapOfCompactification_of_finite Λ c
-  have := isIso_projectionMapOfCompactification_of_finite Λ (HasCompactification.compactification f)
-  exact ⟨fun _ ↦ inferInstanceAs (IsIso (((projectionMapOfCompactification _ _).app K).app L)),
-    fun _ ↦ inferInstanceAs (IsIso (((projectionMapOfCompactification _ c).app K).app L))⟩
+      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  sorry
 
 end TorsionCoherence
 
