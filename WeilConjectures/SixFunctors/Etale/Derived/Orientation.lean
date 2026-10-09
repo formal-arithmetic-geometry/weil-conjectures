@@ -146,8 +146,9 @@ coefficient dual: `𝔻_X K ≅ K^∨(d)[2d]`. -/
 theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) ≅
-      (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K) ⊗
-        (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj
+          ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) :=
   sorry
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.

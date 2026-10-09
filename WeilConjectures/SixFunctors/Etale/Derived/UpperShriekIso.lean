@@ -64,7 +64,8 @@ adjoint, for any coefficient category: `Re_! ≅ Re_* ≅ L(e⁻¹)^*`, and `L(e
 `R(e⁻¹)_*`. -/
 instance isLeftAdjoint_rightDerivedLowerShriek_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
     (R(e.hom)_![A]).IsLeftAdjoint :=
-  (derivedUpperStarLowerStarAdjunction A e.inv).isLeftAdjoint.of_iso
+  have := (derivedUpperStarLowerStarAdjunction A e.inv).isLeftAdjoint
+  Functor.isLeftAdjoint_of_iso
     (rightDerivedLowerShriekIsoRightDerivedLowerStar A e.hom ≪≫
       rightDerivedLowerStarIsoLeftDerivedUpperStarInv A e).symm
 

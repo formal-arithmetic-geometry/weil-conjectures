@@ -78,9 +78,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] (k : Type u) [Field k]
 
-/-- The coefficient category `ModuleCat Λ` of the package. -/
-local notation "𝐀" => ModuleCat.{u + 1} Λ
-
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of k)) [HasCompactification f]
   [QuasiCompact f] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
@@ -114,62 +111,85 @@ Let `k` be a field, `Λ` a finite ring with a Tate twist datum, `Y` separated of
 See the module docstring for the clauses that are deliberately not carried here. -/
 structure SixOperationsPackage : Prop where
   /-- (1) The adjunction `Lf^* ⊣ Rf_*`. -/
-  upperStarLowerStarAdjunction : Nonempty (L((f)^*[𝐀]) ⊣ R((f)_*[𝐀]))
+  upperStarLowerStarAdjunction :
+    Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]) ⊣ R((f)_*[ModuleCat.{u + 1} Λ]))
   /-- (1) The adjunction `Rf_! ⊣ Rf^!`. -/
-  lowerShriekUpperShriekAdjunction : Nonempty (R(f)_![𝐀] ⊣ R(f)^![𝐀])
+  lowerShriekUpperShriekAdjunction :
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⊣ R(f)^![ModuleCat.{u + 1} Λ])
   /-- (2) Base change for `Rf_!`. -/
   baseChangeLowerShriek : ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
     IsPullback g' f' f g → ∀ [HasCompactification f'],
-      Nonempty (R(f)_![𝐀] ⋙ L((g)^*[𝐀]) ≅ L((g')^*[𝐀]) ⋙ R(f')_![𝐀])
+      Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
+        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ])
   /-- (2) Proper base change for `Rf_*`. -/
   baseChangeLowerStarOfProper :
     ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
       IsPullback g' f' f g → IsProper f →
-      Nonempty (R((f)_*[𝐀]) ⋙ L((g)^*[𝐀]) ≅ L((g')^*[𝐀]) ⋙ R((f')_*[𝐀]))
+      Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
+        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
   /-- (2) Smooth base change for `Rf_*`. -/
   baseChangeLowerStarOfSmooth :
     ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
       IsPullback g' f' f g → Smooth g →
-      Nonempty (R((f)_*[𝐀]) ⋙ L((g)^*[𝐀]) ≅ L((g')^*[𝐀]) ⋙ R((f')_*[𝐀]))
+      Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
+        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
   /-- (3) The projection formula. -/
-  projectionFormula : ∀ K L, HasProjectionFormula 𝐀 f K L
+  projectionFormula : ∀ K L, HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L
   /-- (4) `Rf_!` is independent of the chosen compactification. -/
-  lowerShriekCompactificationIndependent :
-    ∀ c c' : Compactification f, Nonempty (Rf_!(c)[𝐀] ≅ Rf_!(c')[𝐀])
+  lowerShriekCompactificationIndependent : ∀ c c' : Compactification f,
+    Nonempty (Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(c')[ModuleCat.{u + 1} Λ])
   /-- (4) The composition law `R(f ≫ h)_! ≅ Rf_! ⋙ Rh_!`. -/
   lowerShriekComp : ∀ {Z : Scheme.{u}} (h : Y ⟶ Z) [HasCompactification h]
-    [HasCompactification (f ≫ h)], Nonempty (R(f ≫ h)_![𝐀] ≅ R(f)_![𝐀] ⋙ R(h)_![𝐀])
+    [HasCompactification (f ≫ h)],
+    Nonempty (R(f ≫ h)_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(h)_![ModuleCat.{u + 1} Λ])
   /-- (4) Proper coincidence `Rf_! ≅ Rf_*`. -/
-  lowerShriekIsoLowerStarOfProper : IsProper f → Nonempty (R(f)_![𝐀] ≅ R((f)_*[𝐀]))
+  lowerShriekIsoLowerStarOfProper :
+    IsProper f → Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ≅ R((f)_*[ModuleCat.{u + 1} Λ]))
   /-- (5) A smooth morphism of pure relative dimension carries an orientation. -/
   orientation : ∀ d : ℕ, SmoothOfRelativeDimension d f → Nonempty (Orientation Λ f d)
   /-- (6) Verdier biduality on `Dctf(X, Λ)`. -/
-  biduality : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 X K →
-    Nonempty (K ≅ (verdierDual 𝐀 (f ≫ aY)).obj (op ((verdierDual 𝐀 (f ≫ aY)).obj (op K))))
+  biduality : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+    Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+      (op ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K))))
   /-- (6) The Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`. -/
-  verdierExchange : ∀ M, Nonempty ((verdierDual 𝐀 aY).obj (op ((R(f)_![𝐀]).obj M)) ≅
-      (R((f)_*[𝐀])).obj ((verdierDual 𝐀 (f ≫ aY)).obj (op M)))
+  verdierExchange : ∀ M,
+    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj
+        (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) ≅
+      (R((f)_*[ModuleCat.{u + 1} Λ])).obj
+        ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op M)))
   /-- (7) The four Künneth comparisons over `k` are isomorphisms. -/
-  kunneth : HasKunnethComparisons 𝐀 (Spec (.of k))
+  kunneth : HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k))
   /-- (8) `Lf^*` carries `Dctf` into `Dctf`. -/
-  ctfLeftDerivedUpperStar : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 Y K →
-    DerivedCategory.constructibleFiniteTor 𝐀 X ((L((f)^*[𝐀])).obj K)
+  ctfLeftDerivedUpperStar : ∀ K,
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)
   /-- (8) `- ⊗ᴸ -` carries `Dctf` into `Dctf`. -/
-  ctfTensor : ∀ K M, DerivedCategory.constructibleFiniteTor 𝐀 X K →
-    DerivedCategory.constructibleFiniteTor 𝐀 X M →
-    DerivedCategory.constructibleFiniteTor 𝐀 X (((-⊗ᴸ-(X)[𝐀]).obj K).obj M)
+  ctfTensor : ∀ K M, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M)
   /-- (8) `Rf_*` carries `Dctf` into `Dctf`. -/
-  ctfRightDerivedLowerStar : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 X K →
-    DerivedCategory.constructibleFiniteTor 𝐀 Y ((R((f)_*[𝐀])).obj K)
+  ctfRightDerivedLowerStar : ∀ K,
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)
   /-- (8) `Rf_!` carries `Dctf` into `Dctf`. -/
-  ctfRightDerivedLowerShriek : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 X K →
-    DerivedCategory.constructibleFiniteTor 𝐀 Y ((R(f)_![𝐀]).obj K)
+  ctfRightDerivedLowerShriek : ∀ K,
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y
+        ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)
   /-- (8) `Rf^!` carries `Dctf` into `Dctf`. -/
-  ctfRightDerivedUpperShriek : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 Y K →
-    DerivedCategory.constructibleFiniteTor 𝐀 X ((R(f)^![𝐀]).obj K)
+  ctfRightDerivedUpperShriek : ∀ K,
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+        ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)
   /-- (8) `𝔻_X` carries `Dctf` into `Dctf`. -/
-  ctfVerdierDual : ∀ K, DerivedCategory.constructibleFiniteTor 𝐀 X K →
-    DerivedCategory.constructibleFiniteTor 𝐀 X ((verdierDual 𝐀 (f ≫ aY)).obj (op K))
+  ctfVerdierDual : ∀ K,
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+        ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K))
 
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 

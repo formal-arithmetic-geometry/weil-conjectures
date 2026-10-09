@@ -120,8 +120,9 @@ theorem nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation [HasTa
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKperf : IsDualizable K) :
     Nonempty (((R((aX)_*[ModuleCat.{u + 1} Λ])).obj
-        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K) ⊗
-          tateObject Λ X d))⟦(2 * d : ℤ)⟧ ≅
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+          ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))).obj
+            (tateObject Λ X d)))⟦(2 * d : ℤ)⟧ ≅
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
         (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))) := by
   obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX K
