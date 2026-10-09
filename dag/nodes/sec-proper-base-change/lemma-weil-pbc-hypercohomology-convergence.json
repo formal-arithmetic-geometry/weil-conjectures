@@ -2,34 +2,152 @@
  "id": "lemma-weil-pbc-hypercohomology-convergence",
  "kind": "statement",
  "title": "Half-plane convergence",
- "statement": "Both spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] lie in $p\\geq0$, $q\\geq\na$. In total degree $n$, only $a\\leq q\\leq n$ occurs. The induced filtrations\nare finite, exhaustive, and separated, so the spectral sequences converge\nwithout a derived inverse-limit condition.",
+ "statement": "Let $\\square$, $K\\in\\Dplus(X_{\\Et})$ with torsion cohomology, the integer $a$ with $\\mathcal H^q(K)=0$ for $q<a$, and the three exact couples (1) $(D,E)$ (truncation couple of $K$ for $f_*$, on $Y$), (2) $(D_A,E_A)$ (the couple of $g^{-1}Rf_*$, on $Y'$) and (3) $(D',E')$ (truncation couple of $g'^{-1}K$ for $f'_*$, on $Y'$) with their spectral sequences $(E_r,d_r)_{r\\geq2}$, $E_2=E$, and the filtrations $F^p$ of their abutments $\\mathcal H^n(Rf_*K)$, $\\mathcal H^n(g^{-1}Rf_*K)$, $\\mathcal H^n(Rf'_*g'^{-1}K)$ be as in [def-weil-pbc-hypercohomology-filtrations]. Then for each of the three couples:\n\n1. **(Quadrant.)** $D^{p,q}=0$ for $q<a$, and $E_2^{p,q}=0$ unless $p\\geq0$ and $q\\geq a$; hence $E_r^{p,q}=0$ for all $r\\geq2$ (and for $r=\\infty$) outside $p\\geq0$, $q\\geq a$.\n2. **(Finitely many terms.)** In total degree $n$ a nonzero $E_r^{p,q}$, $p+q=n$, has $a\\leq q\\leq n$ and $0\\leq p\\leq n-a$; there are at most $n-a+1$ of them, and none if $n<a$.\n3. **(Stabilization.)** The differentials $d_r$ [def-sp-exact-couple] into and out of $E_r^{p,q}$ vanish for $r>\\max(q-a+1,p)$, so $Z_r^{p,q}$, $B_r^{p,q}$ [def-sp-convergence] are constant from $r_0(p,q)=\\max(q-a+2,p+1)$ on, $E_\\infty^{p,q}$ exists and equals $E_{r_0}^{p,q}$; on the line $p+q=n$ every page $r\\geq n-a+2$ is already $E_\\infty$.\n4. **(Finite filtration, convergence.)** The filtration $F^p$ of the abutment $H^n$ in degree $n$ [def-sp-filtration] has $F^pH^n=H^n$ for $p\\leq0$ and $F^pH^n=0$ for $p\\geq n-a+1$; so it is finite, exhaustive and separated, $H^n=\\lim_pH^n/F^pH^n$ trivially, the couple is regular and complete, and $E_\\infty^{p,q}\\cong F^pH^{p+q}/F^{p+1}H^{p+q}$: the spectral sequence converges in the sense of [def-sp-convergence] with no derived inverse-limit condition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.md",
   "place": "node lemma-weil-pbc-hypercohomology-convergence, order 1316"
  },
  "stmt_deps": [
-  "def-weil-pbc-hypercohomology-filtrations"
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration"
  ],
  "proof": [
   {
-   "text": "Right-derived direct image has no negative cohomological degree, giving\n$p\\geq0$, and the lower bound gives $q\\geq a$. On $p+q=n$ these inequalities\ngive the finite interval; the truncation triangles show exhaustivity, and\nfiniteness shows separatedness, so convergence is immediate for the\nfiltrations of [def-weil-pbc-hypercohomology-filtrations].",
+   "text": "**Step 1 (quadrant for the couples (1) and (3)).** Let $(v,L^\\bullet)$ be $(f_*,K^\\bullet)$ for (1) and $(f'_*,g'^{-1}K^\\bullet)$ for (3), where by [def-weil-pbc-hypercohomology-filtrations] $K^\\bullet$ represents $K$ with $K^i=0$ for $i<a$ and $g'^{-1}K^\\bullet$ (terms $g'^{-1}K^i$, zero for $i<a$) represents $g'^{-1}K$; so $L^i=0$ for $i<a$, hence $\\tau_{\\leq q}L^\\bullet=0$ and $\\mathcal H^q(L^\\bullet)=0$ for $q<a$. The couple is the truncation couple [def-sp-truncation-couple] $D^{p,q}=\\mathcal H^{p+q}(Rv\\,\\tau_{\\leq q}L)$, $E^{p,q}=\\mathcal H^{p+q}(Rv(\\mathcal H^q(L)[-q]))$, $v$ left exact additive between the Grothendieck abelian categories of abelian étale sheaves. We use [lem-weil-pbc-derived-functor-negative-vanishing] (Stacks 05TC (1)): if $\\mathcal H^i(M)=0$ for $i<b$ then $\\mathcal H^j(RvM)=0$ for $j<b$. (i) $D^{p,q}=0$ for $q<a$: $\\tau_{\\leq q}L^\\bullet$ is the zero complex, all of whose cohomology vanishes, so the lemma with $b=p+q+1$ gives $\\mathcal H^{p+q}(Rv\\,0)=0$. (ii) $E^{p,q}=0$ for $q<a$: $\\mathcal H^q(L)[-q]=0$, same argument. (iii) $E^{p,q}=0$ for $p<0$: $M=\\mathcal H^q(L)[-q]$ is concentrated in degree $q$, so $\\mathcal H^i(M)=0$ for $i<q$ and the lemma with $b=q$ gives $\\mathcal H^{p+q}(RvM)=0$ for $p+q<q$. (This is the vanishing of $R^pv(\\mathcal H^qL)=E^{p,q}$, [lem-sp-shift-identification], in negative degrees: right-derived direct image has no negative degrees.) Since $E_2=E$, the $E_2$-page lies in $p\\geq0$, $q\\geq a$.",
    "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-sp-truncation-couple",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (1); its use for $R^pF(H^q(K))$ in Lemma 015J (lemma-two-ss-complex-functor, line 7177), which constructs the spectral sequences of Etale Cohomology Lemma 0DDE (etale-cohomology.tex, lemma-proper-base-change, line 18708)"
+   }
+  },
+  {
+   "text": "**Step 2 (quadrant for the couple (2)).** By [def-weil-pbc-hypercohomology-filtrations] (2), $D_A^{p,q}=\\mathcal H^{p+q}(g^{-1}Rf_*\\tau_{\\leq q}K)$ and $E_A^{p,q}=\\mathcal H^{p+q}(g^{-1}Rf_*(\\mathcal H^q(K)[-q]))$, where $g^{-1}$ is exact [prop-weil-pbc-inverse-image-exact] and applied termwise. The natural isomorphisms $\\mathcal H^m(g^{-1}N)\\cong g^{-1}\\mathcal H^m(N)$ [lem-weil-pbc-exact-functor-bounded-below] give $D_A^{p,q}\\cong g^{-1}D^{p,q}$ and $E_A^{p,q}\\cong g^{-1}E^{p,q}$ with $(D,E)$ the couple (1); an additive functor sends a zero object to a zero object, so Step 1 for (1) gives $D_A^{p,q}=0$ for $q<a$ and $E_A^{p,q}=0$ unless $p\\geq0$, $q\\geq a$.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DDE (lemma-proper-base-change, line 18708), proof: the spectral sequence on $Y'$ obtained from that of $Rf_*$ by the exact functor $g^{-1}$ (the 'details omitted' of the proof)"
+   }
+  },
+  {
+   "text": "**Step 3 (all pages; finitely many terms in total degree $n$).** For $r\\geq2$, $E_r^{p,q}=Z_r^{p,q}/B_r^{p,q}$ is a subquotient of $E_2^{p,q}$ [def-sp-convergence], and so is $E_\\infty^{p,q}$ when it exists; so by Steps 1-2 every page vanishes outside $p\\geq0$, $q\\geq a$. If $p+q=n$ and $E_r^{p,q}\\neq0$ then $q\\geq a$ and $p=n-q\\geq0$, i.e. $a\\leq q\\leq n$ and $0\\leq p\\leq n-a$: at most $n-a+1$ bidegrees, none if $n<a$. In the terminology of Stacks 0BDU (3) the spectral sequence is bounded.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 0BDU (definition-bounded-ss, line 6262), item (3); the hypothesis of Lemma 0132 (lemma-first-quadrant-ss, line 6672): finitely many nonzero terms on each line $p+q=n$"
+   }
+  },
+  {
+   "text": "**Step 4 (stabilization at a finite page).** The differential $d_r$ of the spectral sequence of an exact couple has bidegree $(r,1-r)$ [def-sp-exact-couple]. The differential out of $(p,q)$ lands in $E_r^{p+r,q-r+1}$, zero by Step 3 when $q-r+1<a$, i.e. $r>q-a+1$; the differential into $(p,q)$ starts at $E_r^{p-r,q+r-1}$, zero when $p-r<0$, i.e. $r>p$. So for $r\\geq r_0(p,q)=\\max(q-a+2,p+1)$ both vanish, $E_{r+1}^{p,q}=\\ker d_r/\\operatorname{im}d_r=E_r^{p,q}$, i.e. $Z_{r+1}^{p,q}=Z_r^{p,q}$ and $B_{r+1}^{p,q}=B_r^{p,q}$ inside $E_2^{p,q}$ [def-sp-convergence]. Hence $Z_\\infty^{p,q}=\\bigcap_rZ_r^{p,q}=Z_{r_0}^{p,q}$ and $B_\\infty^{p,q}=\\bigcup_rB_r^{p,q}=B_{r_0}^{p,q}$ exist (a decreasing, resp. increasing, chain that is constant from $r_0$ on), and $E_\\infty^{p,q}=E_{r_0}^{p,q}$; both the $Z_r$ and the $B_r$ are eventually constant (regular and coregular, Stacks 0BDV). On the line $p+q=n$ the nonzero entries have $q\\leq n$ and $p\\leq n-a$ (Step 3), so $r_0(p,q)\\leq n-a+2$ for all of them. This is the stabilization bound $r>\\max(q-a+1,p)$ of [thm-sp-half-plane-convergence], whose hypotheses hold by Steps 1-2.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0BDV (lemma-relate-boundedness, line 6292), parts (1)-(5) and the hint of its proof; Lemma 011T (lemma-spectral-sequence-associated-exact-couple, line 5356) for $Z_r$, $B_r$ of an exact couple; Definition 011O (definition-limit-spectral-sequence, line 5219) for $E_\\infty=Z_\\infty/B_\\infty$"
+   }
+  },
+  {
+   "text": "**Step 5 (the filtration of the canonical abutment is finite; convergence).** By Steps 1-2 each of the three couples is an exact couple (as recorded in [def-weil-pbc-hypercohomology-filtrations]) satisfying the hypotheses of [thm-sp-half-plane-convergence]: $D^{p,q}=0$ for $q<a$ and $E_2^{p,q}=0$ unless $p\\geq0$, $q\\geq a$. That theorem gives, for $A^n=D^{0,n}$ and $F^pA^n=\\operatorname{im}(\\alpha^p:D^{p,n-p}\\to A^n)$ ($F^pA^n=A^n$ for $p\\leq0$) [def-sp-filtration], that $F^p$ is finite, exhaustive and separated, that $E_\\infty^{p,q}\\cong F^pA^{p+q}/F^{p+1}A^{p+q}$, and that the couple is regular and complete in the sense of [def-sp-convergence]. Concretely: $F^0A^n=\\operatorname{im}(\\alpha^0)=A^n$, and for $p\\geq n-a+1$ the source $D^{p,n-p}$ has second index $n-p<a$, so it is $0$ and $F^pA^n=0$. A filtration with $F^0=A^n$ and $F^{n-a+1}=0$ is finite (Stacks 0121 (7)); its union is $F^0A^n=A^n$ (exhaustive) and its intersection lies in $F^{n-a+1}A^n=0$ (separated); the inverse system $A^n/F^pA^n$ is constant equal to $A^n$ for $p\\geq n-a+1$, so $A^n=\\lim_pA^n/F^pA^n$ holds with no $\\lim^1$ or derived-limit condition (Stacks 012U (3)); and $\\operatorname{im}(\\alpha^r:D^{p+r,q-r}\\to D^{p,q})=0$ as soon as $q-r<a$ (completeness).",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "def-sp-filtration",
+    "def-sp-convergence",
     "def-weil-pbc-hypercohomology-filtrations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 0121 (definition-filtered, line 4667), items (7), (9); Definition 012U (definition-filtered-complex-ss-converges, line 6317), item (3); Lemma 012W (lemma-biregular-ss-converges, line 6362), parts (2)-(3) and its proof, the filtered-complex form of this argument"
+   }
+  },
+  {
+   "text": "**Step 6 (the canonical abutment is the abutment of [def-weil-pbc-hypercohomology-filtrations]).** For (1) and (3), with $(v,L^\\bullet)$ as in Step 1: the structure map $\\alpha$ of the truncation couple is $\\mathcal H^{*}(Rv)$ of the inclusion $\\tau_{\\leq q-1}L\\to\\tau_{\\leq q}L$ [def-sp-truncation-couple], so $\\alpha^p:D^{p,n-p}\\to D^{0,n}$ is $\\mathcal H^n(Rv)$ of the composite inclusion $\\tau_{\\leq n-p}L\\to\\tau_{\\leq n}L$ ($Rv$ is a functor, [lem-sp-kinjective-computes] (1)). The map $c_n:\\mathcal H^n(Rv\\,\\tau_{\\leq n}L)\\to\\mathcal H^n(RvL)$ induced by $\\tau_{\\leq n}L\\to L$ is an isomorphism [lem-weil-pbc-derived-functor-truncation-iso], and $c_n\\circ\\alpha^p$ is induced by $\\tau_{\\leq n-p}L\\to L$. So $c_n$ carries $F^pA^n$ onto $\\operatorname{im}(\\mathcal H^n(Rv\\,\\tau_{\\leq n-p}L)\\to\\mathcal H^n(RvL))$, which is the filtration $F^p$ of $\\mathcal H^n(Rf_*K)$, resp. $\\mathcal H^n(Rf'_*g'^{-1}K)$ (using $\\tau_{\\leq q}(g'^{-1}K^\\bullet)=g'^{-1}\\tau_{\\leq q}K^\\bullet$), in [def-weil-pbc-hypercohomology-filtrations]. For (2): $\\mathcal H^n(g^{-1}Rf_*\\tau_{\\leq n}K)\\to\\mathcal H^n(g^{-1}Rf_*K)$ is identified by the natural isomorphism of [lem-weil-pbc-exact-functor-bounded-below] with $g^{-1}(c_n)$, an isomorphism, and the same image computation (with $\\mathcal H^n(g^{-1}Rf_*(-))$ in place of $\\mathcal H^n(Rv(-))$) identifies $F^pA^n$ with the image filtration of $\\mathcal H^n(g^{-1}Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(g^{-1}Rf_*K)$ of [def-weil-pbc-hypercohomology-filtrations] (2). Transporting Step 5 along these isomorphisms of filtered objects, the filtrations of the three abutments in degree $n$ have $F^p=H^n$ for $p\\leq0$ and $F^p=0$ for $p\\geq n-a+1$, are finite, exhaustive and separated, and have $E_\\infty$ as associated graded, which with Steps 1-4 is the statement.",
+   "uses": [
+    "def-sp-truncation-couple",
+    "lem-sp-kinjective-computes",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-sp-image-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (2): $H^n(RF(\\tau_{\\leq n}K))\\to H^n(RF(K))$ is an isomorphism; Lemma 015J (lemma-two-ss-complex-functor, line 7177): the spectral sequence converges to $H^*(RF(K^\\bullet))$ with finite induced filtrations"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-hypercohomology-filtrations"
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-sp-truncation-couple",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-sp-shift-identification",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "thm-sp-half-plane-convergence",
+  "def-sp-filtration",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "def-sp-image-filtration"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0DDE (lemma-proper-base-change, line 18708), proof (the spectral sequences $R^pf_*H^q(E)$, $R^pf'_*(g')^{-1}H^q(E)$ converge), with the convergence argument of Derived Categories Lemma 015J (derived.tex, line 7177) and Homology Lemmas 0132, 012W, 0BDV (homology.tex): finitely many nonzero terms on each line $p+q=n$ give bounded spectral sequences and finite filtrations. The spectral sequences are realized, on the blueprint's route, by the truncation exact couples (not Stacks' Cartan-Eilenberg double complex), so the general exact-couple convergence is taken from [thm-sp-half-plane-convergence]."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "ls",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject",
+   "results": "SpectralSequence/{Basic,ComplexShape}.lean; SpectralObject/{Basic,Cycles,Differentials,EpiMono,FirstPage,HasSpectralSequence,Homology,Page,SpectralSequence}.lean (J. Riou): spectral sequences as pages with homology isomorphisms, and the spectral sequence of a spectral object",
+   "date": "2026-10-09",
+   "verdict": "no match (no exact couples, no abutment)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'converge\\|abut\\|infty\\|∞\\|stationary\\|filtration' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/SpectralObject.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean",
+   "results": "only docstrings: HasSpectralSequence.lean 393 and 435 ('to obtain a (convergent) first/third quadrant E₂ spectral sequence', class IsFirstQuadrant / IsThirdQuadrant: vanishing hypotheses on the spectral object) and ComplexShape.lean 24 (spectralSequenceFin for a finite filtration); no E_∞ page, no filtration of an abutment, no convergence statement",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ExactCouple\\|exactCouple\\|exact couple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject/Page.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+   "results": "isZero_E_of_isZero_H, isZero_spectralSequence_page_X_of_isZero_H' and the IsFirstQuadrant examples (pages vanish for p<0 or q<0): the quadrant part (1) for Mathlib's spectral-object spectral sequences with a=0, not for exact couples; TStructure/SpectralObject.lean builds the t-structure spectral object (the Deligne analogue of the truncation couple) without convergence",
+   "date": "2026-10-09",
+   "verdict": "no match (partial analogue of clause 1 only, different construction)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -61,5 +179,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-hypercohomology-convergence",
+  "worker": "stage1",
+  "summary": "Statement made explicit and extended to the three couples (1), (2), (3) now defined in def-weil-pbc-hypercohomology-filtrations (the imported text said 'both'; the target thm-weil-pbc-bounded-below Step 5 uses (2) and (3), (2) being the g^{-1}Rf_* couple): quadrant, the range a<=q<=n, 0<=p<=n-a on the line p+q=n, the explicit stabilization page max(q-a+2,p+1) (uniformly n-a+2 on degree n), and F^0=H^n, F^{n-a+1}=0 for the decreasing filtration F^p = image of H^n of tau_{<=n-p}K, giving finite/exhaustive/separated, trivial lim condition and E_inf = gr. The one-paragraph proof was split into six steps: (1) vanishing of D for q<a and of E for q<a and p<0 for (1),(3) from lem-weil-pbc-derived-functor-negative-vanishing (Stacks 05TC); (2) transfer to (2) by the exact g^{-1}; (3) finitely many terms, elementary; (4) stabilization from the bidegree (r,1-r) of d_r (Stacks 0BDV), agreeing with the bound of thm-sp-half-plane-convergence; (5) the finite filtration and convergence from thm-sp-half-plane-convergence, with the explicit bounds (Stacks 0121, 012U, 012W); (6) identification of the canonical abutment D^{0,n} and its filtration with the abutment and image filtration of the definition via lem-weil-pbc-derived-functor-truncation-iso (Stacks 05TC (2)). Source: Stacks 0DDE and its convergence references 015J/0132/012W, adapted to the blueprint's truncation exact couples. No new nodes; Mathlib has spectral objects and first-quadrant spectral sequences but no exact couples or convergence (searches recorded)."
+ }
 }
