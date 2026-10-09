@@ -2,22 +2,40 @@
  "id": "def-weil-integral-frobenius-factor",
  "kind": "definition",
  "title": "Integral realization of a Frobenius factor",
- "statement": "Fix a prime $p$, $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$,\n$k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nLet $X_0/k_0$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, with\n$X=X_0\\times_{k_0}k$. Fix an indeterminate $T$. For every prime\n$\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, and let\n$P_{i,\\ell}\\in\\Ql[T]$, $0\\leq i\\leq2d$, be the determinant factors in the\nsmooth-proper\ncohomological family.\nFor $P(T)=\\sum_{r\\geq0}a_rT^r\\in\\mathbf Z[T]$, write\n\n$$\nP^{(\\ell)}(T)=\\sum_{r\\geq0}(a_r\\cdot1_{\\Ql})T^r\\in\\Ql[T].\n$$\n\nFor an integer $i$ with $0\\leq i\\leq2d$, an integral\nrealization-independent factor in degree\n$i$ is a polynomial\n$P_i\\in\\mathbf Z[T]$ such that\n\n$$\nP_i^{(\\ell)}=P_{i,\\ell}\n$$\n\nfor every prime $\\ell\\neq p$.",
+ "statement": "Let $\\mathscr X=(X_0,d,X)$ be a smooth-proper datum [def-weil-smooth-proper-datum] over the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], and fix an indeterminate $T$. For every prime $\\ell\\neq p$ write $\\Ql=\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], and let $P_{i,\\ell}(T)\\in\\Ql[T]$, $0\\leq i\\leq2d$, be the determinant factors $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ of the smooth-proper cohomological family of $\\mathscr X$ [def-weil-smooth-proper-cohomological-family]. For $P=\\sum_{r\\geq0}c_rT^r$ in the polynomial ring $\\mathbf Z[T]$ [def-weil-polynomial-ring] write $P^{(\\ell)}=\\sum_{r\\geq0}(c_r\\cdot1_{\\Ql})T^r\\in\\Ql[T]$ for its coefficientwise extension [def-weil-coefficientwise-extension].\n\nFor an integer $i$ with $0\\leq i\\leq2d$ and a polynomial $P\\in\\mathbf Z[T]$, the proposition '$P$ is an integral realization-independent factor of $\\mathscr X$ in degree $i$' is\n\n$$\n\\forall\\,\\ell\\text{ prime},\\ \\ell\\neq p:\\qquad P^{(\\ell)}=P_{i,\\ell}\\quad\\text{in }\\Ql[T].\n$$\n\nThis defines a predicate on $\\mathbf Z[T]$ (depending on $\\mathscr X$ and $i$), and nothing more: the identity is required for every prime $\\ell\\neq p$ simultaneously, not for one fixed $\\ell$, and the definition asserts neither that such a $P$ exists nor that it is unique. Existence (with normalization $P(0)=1$) and uniqueness are the theorem prop-integral-recovery, and the polynomial so obtained is named by def-weil-canonical-integral-factors.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-cohfamily/def-weil-integral-frobenius-factor.md",
   "place": "node def-weil-integral-frobenius-factor, order 2857"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-datum",
+  "def-weil-l-adic-numbers",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'weil\\|zeta' Mathlib/AlgebraicGeometry --include=*.lean; grep -rln -i 'frobenius.*polynomial\\|weilPolynomial\\|zetaFunction' Mathlib --include=*.lean",
+   "results": "no hit in Mathlib/AlgebraicGeometry; the second grep returns RingTheory/MvPolynomial/Expand.lean, RingTheory/WittVector/Frobenius.lean, RingTheory/WittVector/IsPoly.lean, FieldTheory/Finite/Polynomial.lean (Frobenius endomorphism of rings / Witt vectors), none about a characteristic polynomial of Frobenius on cohomology or an integral polynomial realizing ℓ-adic factors",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem map_injective' Mathlib/Algebra/Polynomial/",
+   "results": "Mathlib/Algebra/Polynomial/Eval/Coeff.lean:103 Polynomial.map_injective: the coefficientwise extension along an injective ring map is injective. The predicate itself is one line over Mathlib once the family is given: ∀ ℓ, ℓ.Prime → ℓ ≠ p → Polynomial.map (Int.castRingHom ℚ_[ℓ]) P = P_{i,ℓ}",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the ingredients (Polynomial, Polynomial.map, Padic), not the ℓ-adic factors P_{i,ℓ} the predicate compares with"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +61,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-integral-frobenius-factor",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint, order 2857; slopmaster2 has no copy: its TeX states only the existence theorem, 01_statement_final.tex:134 and 14_integrality_final.tex:237 thm:integral-frobenius-factors). The mathematical content is kept: for each i, a P in Z[T] with P^(l)=P_{i,l} for every prime l != p. The statement was rewritten to (1) introduce its objects through the reviewed smooth-proper datum X=(X_0,d,X), as def-weil-canonical-integral-factors does, (2) name every notion it is built from: the finite-field datum (def-weil-finite-field-fiber, kept), the smooth-proper datum (def-weil-smooth-proper-datum, added; replaces def-weil-geometric-hypotheses, removed, which the datum already carries), Q_l (def-weil-l-adic-numbers, added, Mathlib leaf), the determinant factors P_{i,l} (def-weil-smooth-proper-cohomological-family, kept), Z[T] (def-weil-polynomial-ring, added, Mathlib leaf) and P^(l) (def-weil-coefficientwise-extension, added, Mathlib leaf; previously defined inline), and (3) separate definition from theorem as the reviewers asked: the node now defines a predicate on Z[T] quantified over every prime l != p, and says explicitly that it asserts neither existence nor uniqueness, which are prop-integral-recovery (with P(0)=1), and that the resulting polynomial is def-weil-canonical-integral-factors. prop-integral-recovery is mentioned in the text but not made a statement dependency: the predicate does not need it, and prop-integral-recovery and def-weil-canonical-integral-factors already depend on this node (making it a dependency would create a cycle). No new node was needed: every notion already has a node. Primes l, the quantifier over l != p and the range 0<=i<=2d are judged elementary (Nat.Prime). Mathlib search: no match for the node; it is one line over Mathlib once the family P_{i,l} is given."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
