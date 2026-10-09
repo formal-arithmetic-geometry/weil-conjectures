@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-etale-base-change-finite-limits",
+ "kind": "statement",
+ "title": "The base-change functor between small etale sites commutes with finite limits",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], and let $V_{\\Et}$, $U_{\\Et}$ be the small etale sites [def-weil-pbc-etale-site] (objects: etale morphisms $W\\to V$, resp. $W'\\to U$; morphisms: morphisms over the base). Then:\n\n1. for an object $W\\to V$ of $V_{\\Et}$ the base change $U\\times_VW\\to U$ is etale, and $W\\mapsto U\\times_VW$, $(g:W_1\\to W_2)\\mapsto\\mathrm{id}_U\\times g$, is a functor $b_u:V_{\\Et}\\to U_{\\Et}$;\n2. the categories $V_{\\Et}$ and $U_{\\Et}$ have all finite limits: $\\mathrm{id}_V:V\\to V$ is a final object of $V_{\\Et}$, and for morphisms $W_1\\to W\\leftarrow W_2$ in $V_{\\Et}$ the scheme-theoretic fibre product $W_1\\times_WW_2$, with its map to $V$, is etale over $V$ and is a fibre product in $V_{\\Et}$;\n3. $b_u$ commutes with finite limits: $b_u(V/V)=U\\times_VV\\cong U$ is a final object of $U_{\\Et}$, and the canonical morphism $U\\times_V(W_1\\times_WW_2)\\to(U\\times_VW_1)\\times_{U\\times_VW}(U\\times_VW_2)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma 021D (lemma-fibre-products-etale, line 946): fibre products in $S_\\etale$ are scheme fibre products, $S/S$ is final; Lemma 021I (lemma-morphism-big-small-etale, line 1176), proof: the functor $u(U\\to S)=(U\\times_ST\\to T)$ commutes with fibre products and $u(S/S)=T/T$; morphisms.tex Lemma 02GO (lemma-base-change-etale, line 8136) and Lemma 02GW (lemma-etale-permanence, line 8491); etale-cohomology.tex Section 04I0 (section-functoriality, line 4430), properties (1), (2) of the functor $u$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change functor between categories of étale schemes over X preserves finite limits",
+   "results": "CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits; CategoryTheory.leftExactFunctor; Functor.sheafPullbackConstruction.preservesFiniteLimits (Mathlib.CategoryTheory.Sites.Pullback); none about MorphismProperty.Over.pullback directly",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MorphismProperty.Over.pullback _ _ _)",
+   "results": "CategoryTheory.MorphismProperty.Over.instPreservesFiniteLimitsTopPullback (Mathlib.CategoryTheory.Limits.MorphismProperty): for P with [HasPullbacks T] [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P], PreservesFiniteLimits (MorphismProperty.Over.pullback P ⊤ f)",
+   "date": "2026-10-09",
+   "verdict": "match (clause 3)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change U ×_V W of étale schemes over V gives a functor V.Etale ⥤ U.Etale that is continuous for the small étale topologies",
+   "results": "AlgebraicGeometry.Scheme.instCategoryEtale, Scheme.instHasPullbacksEtale, Scheme.Etale.forget (Mathlib.AlgebraicGeometry.Morphisms.Etale); IsEtale.instIsStableUnderBaseChangeScheme; IsEtale.instHasOfPostcompPropertyScheme (Etale/Etale cancellation)",
+   "date": "2026-10-09",
+   "verdict": "match for clauses 1-2 (the instances of P = @Etale needed by the loogle hit); no continuity statement"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'deriving\\|protected def Etale\\|IsMultiplicative\\|IsStableUnderBaseChange\\|HasOfPostcompProperty' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; sed -n 255,325p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/MorphismProperty.lean",
+   "results": "Morphisms/Etale.lean:157-158 `protected def Etale (X : Scheme.{u}) : Type _ := MorphismProperty.Over @Etale ⊤ X deriving Category, HasPullbacks, HasFiniteLimits`; :63 IsMultiplicative @Etale; :74 etale_isStableUnderBaseChange; :134 HasOfPostcompProperty @Etale @Etale; Limits/MorphismProperty.lean:276 mkIdTerminal (X ⟶ X terminal in P.Over ⊤ X), :303 hasFiniteLimits, :315 `instance PreservesFiniteLimits (pullback P ⊤ f)`",
+   "date": "2026-10-09",
+   "verdict": "match: all three clauses, with P = @Etale; MorphismProperty.Over.pullback (CategoryTheory/MorphismProperty/OverAdjunction.lean:101) is the base change W ↦ W ×_V U"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.Over.instPreservesFiniteLimitsTopPullback",
+  "file": "Mathlib/CategoryTheory/Limits/MorphismProperty.lean",
+  "how": "specializes in one line: with P = @AlgebraicGeometry.Etale (IsMultiplicative, IsStableUnderBaseChange and HasOfPostcompProperty @Etale @Etale in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:63,74,134), b_u = MorphismProperty.Over.pullback @Etale ⊤ u : V.Etale ⥤ U.Etale (Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean:101; clause 1); finite limits of X.Etale by the derived HasFiniteLimits instance (Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:158) and the terminal object MorphismProperty.Over.mkIdTerminal (Mathlib/CategoryTheory/Limits/MorphismProperty.lean:276; clause 2); clause 3 is the instance. The pullback in Mathlib is W ×_V U, i.e. U ×_V W up to the symmetry isomorphism."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-inverse-image-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

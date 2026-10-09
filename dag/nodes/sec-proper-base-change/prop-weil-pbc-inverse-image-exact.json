@@ -2,7 +2,7 @@
  "id": "prop-weil-pbc-inverse-image-exact",
  "kind": "statement",
  "title": "Exactness of inverse image",
- "statement": "For a morphism [def-weil-pbc-scheme-conventions] $u:U\\to V$ of schemes, the\ninverse image [def-weil-pbc-inverse-image]\n\n$$\n u^{-1}:\\Ab(V_{\\Et})\\longrightarrow\\Ab(U_{\\Et})\n$$\n\nof [def-weil-pbc-inverse-image] is an exact functor.",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], and let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image [def-weil-pbc-inverse-image] between the categories of abelian sheaves on the small etale sites [def-weil-pbc-abelian-etale-sheaves]. Then $u^{-1}$ is an exact functor: it commutes with finite limits and with finite colimits (Stacks Project, Categories, Definition 0034); in particular it is additive, preserves kernels and cokernels, and carries short exact sequences $0\\to G'\\to G\\to G''\\to0$ of abelian sheaves on $V_{\\Et}$ to short exact sequences on $U_{\\Et}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-inverse-image-exact.md",
   "place": "node prop-weil-pbc-inverse-image-exact, order 1213",
@@ -18,35 +18,135 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-inverse-image"
+  "def-pc-scheme",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-inverse-image] the functor $u^{-1}$ is the left adjoint of\nthe direct image $u_*$ of [def-weil-pbc-direct-image] and is obtained by\nsheafifying the presheaf inverse image along the functor $U_{\\Et}\\to V_{\\Et}$\nof [def-weil-pbc-etale-site]. The presheaf inverse image is computed\nsectionwise by a filtered colimit of sections of the given presheaf; it has a\nleft adjoint (extension by zero of presheaves) and a right adjoint (presheaf\ndirect image), so it preserves kernels and cokernels and is exact.\nSheafification of presheaves of abelian groups is exact (Stacks Project,\nLemma 7.10.15, Tag [00WJ](https://stacks.math.columbia.edu/tag/00WJ)), and a\ncomposite of exact functors is exact, so $u^{-1}$ is exact. This is the\nexactness of pullback of abelian sheaves on small etale sites (Stacks\nProject, Lemma 59.36.2, Tag\n[03Q1](https://stacks.math.columbia.edu/tag/03Q1)); the source category is\nthe category of sheaves of [def-weil-pbc-etale-sheaves].",
+   "text": "Notation. Let $b=b_u:V_{\\Et}\\to U_{\\Et}$, $W\\mapsto U\\times_VW$, be the base-change functor of [lem-weil-pbc-etale-base-change-finite-limits] (clause 1). For abelian presheaves let $b^p:\\mathrm{PAb}(U_{\\Et})\\to\\mathrm{PAb}(V_{\\Et})$, $\\mathcal F\\mapsto\\mathcal F\\circ b$, and let $b_p:\\mathrm{PAb}(V_{\\Et})\\to\\mathrm{PAb}(U_{\\Et})$ be the presheaf pullback $b_p\\mathcal G(U')=\\varinjlim\\mathcal G(W)$, the colimit over the pairs $(W/V,\\ \\varphi:U'\\to U\\times_VW)$ over $U$, which is left adjoint to $b^p$ by [lem-weil-pbc-presheaf-pullback-left-exact] (clause 1). Let $\\iota_T:\\Ab(T_{\\Et})\\to\\mathrm{PAb}(T_{\\Et})$ be the inclusion and $\\#$ the sheafification, left adjoint to $\\iota_T$ [def-weil-pbc-sheafification]. By [def-weil-pbc-direct-image], $(u_*F)(W)=F(U\\times_VW)$, i.e. $\\iota_Vu_*=b^p\\iota_U$. Hence for $G\\in\\Ab(V_{\\Et})$ and $F\\in\\Ab(U_{\\Et})$, naturally in both,\n\n$$\\operatorname{Hom}_{\\Ab(U_{\\Et})}((b_p\\iota_VG)^\\#,F)=\\operatorname{Hom}_{\\mathrm{PAb}(U_{\\Et})}(b_p\\iota_VG,\\iota_UF)=\\operatorname{Hom}_{\\mathrm{PAb}(V_{\\Et})}(\\iota_VG,b^p\\iota_UF)=\\operatorname{Hom}_{\\Ab(V_{\\Et})}(G,u_*F),$$\n\nthe last because $\\iota_V$ is fully faithful and $b^p\\iota_UF=\\iota_Vu_*F$. So $G\\mapsto(b_p\\iota_VG)^\\#$ is a left adjoint of $u_*$; since $u^{-1}$ is by [def-weil-pbc-inverse-image] the left adjoint of $u_*$, uniqueness of adjoints (Yoneda) gives a natural isomorphism $u^{-1}\\cong\\#\\circ b_p\\circ\\iota_V$. This is the formula (pullback) of the source, the sheaf associated to $U'\\mapsto\\varinjlim_{U'\\to U\\times_VW}G(W)$.",
    "uses": [
-    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-presheaf-pullback-left-exact",
+    "def-weil-pbc-sheafification",
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaves"
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-abelian-etale-sheaves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03PZ (section-inverse-image, line 4580): Definition 03Q0 and the formula (equation-pullback) after it, obtained from Sites Proposition 00X6 and the description $u_s=(u_p\\,)^\\#$; sites.tex Lemma 00WX (lemma-adjoint-sheaves, line 2579), whose proof is the chain of adjunctions written here"
+   }
+  },
+  {
+   "text": "Right exactness. By [lem-weil-pbc-inverse-image-preserves-colimits], $u^{-1}$ preserves all small colimits, in particular finite ones: the initial (zero) object, finite coproducts (= finite direct sums) and cokernels.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0039 (lemma-exact-adjoint, line 3510): a left adjoint is right exact; used in sites.tex Lemma 00X5 (line 2802), first sentence of the proof"
+   }
+  },
+  {
+   "text": "The presheaf pullback is left exact. By [lem-weil-pbc-etale-base-change-finite-limits] (clauses 2, 3) the category $V_{\\Et}$ has finite limits (final object $V/V$, fibre products computed as scheme fibre products) and $b$ commutes with them ($b(V/V)=U/U$ is final, $b$ preserves fibre products). Hence [lem-weil-pbc-presheaf-pullback-left-exact] (clause 2), applied to $b:V_{\\Et}\\to U_{\\Et}$, shows that the index categories of the colimits defining $b_p$ are filtered and that $b_p:\\mathrm{PAb}(V_{\\Et})\\to\\mathrm{PAb}(U_{\\Et})$ commutes with finite limits; in particular, for $\\varphi:\\mathcal G_1\\to\\mathcal G_2$, $b_p(\\ker\\varphi)=\\ker(b_p\\varphi)$, both computed sectionwise. (The small etale sites are taken, as in the source, with set-sized underlying categories: Stacks, Topologies, Definition 021B, inside a chosen big etale site; the lemma needs this smallness.)",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-presheaf-pullback-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma 021I (lemma-morphism-big-small-etale, line 1176), proof: $u$ commutes with fibre products and $u(S/S)=T/T$, so Sites Proposition 00X6 applies; sites.tex Lemma 00X3 (line 452) and the proof of Lemma 00X5 (line 2802): 'Because the categories $\\mathcal I_Y^{opp}$ are filtered we see that $u_p$ commutes with finite limits'; sites.tex Lemma 00YT (line 10393) for abelian presheaves"
+   }
+  },
+  {
+   "text": "Left exactness. By [lem-weil-pbc-sheafification-exact] (clause 1, for the site $V_{\\Et}$) the inclusion $\\iota_V$ commutes with finite limits, and (clause 2, for the site $U_{\\Et}$) the sheafification $\\#:\\mathrm{PAb}(U_{\\Et})\\to\\Ab(U_{\\Et})$ commutes with finite limits. By step 3 so does $b_p$. A composite of functors commuting with finite limits commutes with finite limits, and so does any functor naturally isomorphic to one that does; by step 1, $u^{-1}\\cong\\#\\circ b_p\\circ\\iota_V$ commutes with finite limits. In particular $u^{-1}$ preserves kernels and the final (zero) object.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-presheaf-pullback-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma 00X5 (lemma-directed-morphism, line 2802), proof: 'since sheafification commutes with finite limits as well (Lemma 00WJ) we conclude because $u_s=\\#\\circ u_p$'; Lemma 00WJ (lemma-sheafification-exact, line 2134); sites-modules.tex Lemma 03CO(2) (limits of abelian sheaves are presheaf limits)"
+   }
+  },
+  {
+   "text": "Conclusion. By steps 2 and 4, $u^{-1}$ commutes with finite limits and finite colimits, i.e. it is exact. It preserves finite products, which in the additive categories $\\Ab(V_{\\Et})$, $\\Ab(U_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] are the finite direct sums, so it is additive; preserving kernels and cokernels, it carries a short exact sequence $0\\to G'\\to G\\to G''\\to0$ ($G'\\to G$ a kernel of $G\\to G''$, $G\\to G''$ a cokernel of $G'\\to G$) to a short exact sequence.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q1 (lemma-stalk-pullback, line 4649), part (1) and its proof; categories.tex Definition 0034 (definition-exact)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-presheaf-pullback-left-exact",
+  "def-weil-pbc-sheafification",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-sheafification-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-inverse-image-exact.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03Q1 (lemma-stalk-pullback, line 4649), part (1), and its proof: exactness of $f^{-1}$ from Sites Proposition 00X6 applied to the functor $u$ of Section 04I0 (line 4430), with Sites Lemma 00X5 (line 2802) and Lemma 00WJ (line 2134); written for abelian sheaves via sites.tex Lemma 00YT"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of abelian sheaves on the small étale site along a morphism of schemes is exact",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePullback (Mathlib.AlgebraicGeometry.Modules.Sheaf, Zariski O_X-modules); CategoryTheory.sheafIsAbelian; GrothendieckTopology.overMapPullback (Mathlib.CategoryTheory.Sites.Over, slice sites of one big site); nothing for small etale sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of abelian sheaves along a morphism of schemes on small étale sites is an exact functor",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits, sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, sheafPullbackConstruction.sheafPullback, Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Mathlib.CategoryTheory.Sites.Pullback); SheafOfModules.pullback (PullbackContinuous)",
+   "date": "2026-10-09",
+   "verdict": "generalization only under hypotheses Mathlib does not supply here: sheafPullback G A J K needs G.IsContinuous J K, and finite-limit preservation needs PreservesFiniteLimits G.op.lan (proved in Mathlib only for small categories); for G = MorphismProperty.Over.pullback @Etale ⊤ u neither is in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change U ×_V W of étale schemes over V gives a functor V.Etale ⥤ U.Etale that is continuous for the small étale topologies",
+   "results": "Scheme.Etale.forget, Scheme.instCategoryEtale, Scheme.instHasPullbacksEtale, IsEtale.instIsStableUnderBaseChangeScheme, IsEtale.instHasOfPostcompPropertyScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+   "date": "2026-10-09",
+   "verdict": "no continuity statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous (CategoryTheory.MorphismProperty.Over.pullback _ _ _)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: continuity of the base-change functor of small etale sites is not in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Functor.sheafPullback",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no sheaf pullback between small etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Over.pullback\\|smallEtaleTopology' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'IsContinuous\\|CoverPreserving\\|sheafPullback'; grep -rln smallEtaleTopology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only CategoryTheory/Sites/Over.lean:392,397 (CategoryTheory.Over.pullback f is cover preserving / continuous for J.over Y → J.over X, slices of one big site); smallEtaleTopology occurs only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, none with a pullback functor",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the base-change functor MorphismProperty.Over.pullback @Etale ⊤ u : V.Etale ⥤ U.Etale and its finite-limit preservation (lem-weil-pbc-etale-base-change-finite-limits), but not its continuity for smallEtaleTopology, hence no sheafPullback/inverse image between small etale sites and no exactness statement; moreover V.Etale is not a small category (Category.{u, u+1}), so lan_preservesFiniteLimits_of_preservesFiniteLimits does not apply to it directly"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -77,5 +177,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-pbc-inverse-image-exact",
+  "worker": "stage1",
+  "summary": "Statement kept in substance and made explicit: 'morphism' now cites def-pc-scheme (a Mathlib leaf for schemes and their morphisms) instead of the grab-bag def-weil-pbc-scheme-conventions, the categories cite def-weil-pbc-abelian-etale-sheaves, and 'exact' is spelled out (finite limits and finite colimits, Stacks 0034). The imported one-step proof argued that the presheaf inverse image has a left and a right adjoint, which was not justified (a presheaf pullback u_p has no left adjoint in general, and none was constructed here) and cited 03Q1 as if it were a sheafification lemma; replaced by a five-step proof following Stacks 03Q1(1): u^{-1} = # o b_p o iota (Stacks 03Q0 formula, 00WX), right exactness from the reviewed lem-weil-pbc-inverse-image-preserves-colimits, left exactness from the base-change functor commuting with finite limits (new leaf lem-weil-pbc-etale-base-change-finite-limits, Stacks 021D/021I), the presheaf pullback along such a functor commuting with finite limits (new leaf lem-weil-pbc-presheaf-pullback-left-exact, Stacks 00X3/00X5/00YT) and sheafification being exact with limits of sheaves sectionwise (new leaf lem-weil-pbc-sheafification-exact, Stacks 00WJ/03CO). def-weil-pbc-etale-site and def-weil-pbc-etale-sheaves dropped from proof_deps (replaced by the precise nodes). Not a Mathlib leaf: Mathlib lacks continuity of MorphismProperty.Over.pullback for smallEtaleTopology, and its Lan finite-limit lemma needs small categories."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

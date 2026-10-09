@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-sheafification-exact",
+ "kind": "statement",
+ "title": "Sheafification of abelian presheaves is exact; limits of abelian sheaves are sectionwise",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathrm{PAb}(\\mathcal C)$ the category of presheaves of abelian groups on $\\mathcal C$ and $\\Ab(\\mathcal C)\\subseteq\\mathrm{PAb}(\\mathcal C)$ the full subcategory of sheaves, with inclusion $\\iota$ and sheafification $\\mathcal F\\mapsto\\mathcal F^\\#$, $\\#:\\mathrm{PAb}(\\mathcal C)\\to\\Ab(\\mathcal C)$, left adjoint to $\\iota$ [def-weil-pbc-sheafification]. Then:\n\n1. $\\iota$ commutes with all limits, in particular with finite limits: the limit of a diagram of abelian sheaves is its limit as presheaves, computed sectionwise; e.g. the kernel of a morphism of abelian sheaves is the sectionwise kernel;\n2. $\\#$ commutes with finite limits, and (as a left adjoint) with all colimits; hence $\\#$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma 00WJ (lemma-sheafification-exact, line 2134) and Lemma 00W2 (lemma-limit-sheaf, line 1680); for abelian sheaves sites-modules.tex Lemma 03CO (lemma-limits-colimits-abelian-sheaves) part (2) and Lemma 03CN (lemma-abelian-abelian), proof (sheafification of abelian presheaves is left exact)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification functor preserves finite limits",
+   "results": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf, HasSheafify.isLeftExact (Mathlib.CategoryTheory.Sites.Sheafification); GrothendieckTopology.preservesFiniteLimits_sheafification, preservesFiniteLimits_presheafToSheaf (Mathlib.CategoryTheory.Sites.LeftExact)",
+   "date": "2026-10-09",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.presheafToSheaf _ _)",
+   "results": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf (Mathlib.CategoryTheory.Sites.Sheafification): [HasSheafify J A] → PreservesFiniteLimits (presheafToSheaf J A)",
+   "date": "2026-10-09",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limits of sheaves are computed in presheaves: sheafToPresheaf preserves finite limits",
+   "results": "CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, Sheaf.instHasFiniteLimits, Sheaf.hasLimitsOfSize (Mathlib.CategoryTheory.Sites.Limits); preservesFiniteLimits_presheafToSheaf (Mathlib.CategoryTheory.Sites.LeftExact)",
+   "date": "2026-10-09",
+   "verdict": "match (clause 1)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 40,92p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Sheafification.lean; sed -n 150,175p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean; grep -n 'HasSheafify' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LeftExact.lean",
+   "results": "Sheafification.lean:46 class HasSheafify (sheafification exists and is left exact), :76 `instance [HasSheafify J A] : PreservesFiniteLimits (presheafToSheaf J A)`, :79 sheafificationAdjunction; Limits.lean:164 CreatesLimitsOfSize (sheafToPresheaf J D), :171 PreservesFiniteLimits (sheafToPresheaf J D); LeftExact.lean:308 HasSheafify for small sites and concrete D; AffineEtale.lean:112 `instance : HasSheafify S.smallEtaleTopology A`",
+   "date": "2026-10-09",
+   "verdict": "match: both clauses"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf",
+  "file": "Mathlib/CategoryTheory/Sites/Sheafification.lean",
+  "how": "one Mathlib lemma per clause, with A = AddCommGrpCat: (1) sheafToPresheaf J A creates (hence preserves) limits, Sheaf.createsLimits and the PreservesFiniteLimits instance at Mathlib/CategoryTheory/Sites/Limits.lean:164,171; (2) the instance `PreservesFiniteLimits (presheafToSheaf J A)` given HasSheafify J A (Sheafification.lean:76), with preservation of colimits from sheafificationAdjunction (left adjoint); HasSheafify holds for small sites (Mathlib/CategoryTheory/Sites/LeftExact.lean:308) and for the small etale site S.smallEtaleTopology (Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:112)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-inverse-image-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
