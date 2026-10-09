@@ -1172,8 +1172,143 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
         ∃ act : picardZero K C → picardZero K C,
           (∀ L, (act L).1 = Pic.map γ L.1) ∧
             ∀ L, Φ (act L) =
-              (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.map (specAlgEquivOver σ).op (Φ L) :=
-  sorry
+              (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.map (specAlgEquivOver σ).op
+                (Φ L) := by
+  set f := C₀ ↘ Spec (.of k₀)
+  let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
+  let J := fppfTopology.over (Spec (.of k₀))
+  let S := picardSubfunctorDegree f 0
+  let e := hC.isoPullback
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have he₁ : e.hom ≫ pullback.fst f T.hom = p := hC.isoPullback_hom_fst
+  have he₂ : e.hom ≫ pullback.snd f T.hom = C ↘ Spec (.of K) := hC.isoPullback_hom_snd
+  have hsqE : IsPullback e.hom (C ↘ Spec (.of K)) (pullback.snd f T.hom) (𝟙 _) :=
+    IsPullback.of_horiz_isIso ⟨by rw [he₂, Category.comp_id]⟩
+  have hsqE' : IsPullback e.inv (pullback.snd f T.hom) (C ↘ Spec (.of K)) (𝟙 _) :=
+    IsPullback.of_horiz_isIso ⟨by rw [← he₂, Iso.inv_hom_id_assoc, Category.comp_id]⟩
+  have hker (L : C.Pic) :
+      L ∈ picardZero K C ↔ Modules.degree K ((fromSkeleton C.Modules).obj L.val) = 0 := by
+    rw [MonoidHom.mem_ker, picDegreeHom_apply, Hom.picDegree_eq, ofAdd_eq_one]
+  -- the fibrewise degree of a class transported from `C` is its degree
+  have hdegρ (L : C.Pic) {K' : Type u} [Field K'] [Algebra k₀ K']
+      (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K'))) ⟶ T) :
+      picardFibreDegree f (Pic.map e.inv L) t =
+        Modules.degree K ((fromSkeleton C.Modules).obj L.val) := by
+    let : (pullback f (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K')))).hom).Over
+        (Spec (.of K')) := ⟨pullback.snd _ _⟩
+    change Modules.degree K' ((fromSkeleton _).obj
+      (Pic.map (baseChangeMap f t) (Pic.map e.inv L)).val) = _
+    rw [← Pic.map_comp]
+    have sq := (isPullback_baseChangeMap f t).paste_horiz hsqE'
+    rw [Category.comp_id] at sq
+    exact (Modules.degree_congr K' (fromSkeletonToSkeletonIso _)).trans
+      (Modules.degree_pullback_of_isPullback t.left _ sq ((fromSkeleton C.Modules).obj L.val))
+  have hmem (L : picardZero K C) : Pic.map e.inv L.1 ∈ S.obj (.op T) := fun K' _ _ t ↦ by
+    rw [hdegρ]
+    exact (hker L.1).1 L.2
+  -- the comparison `β : Pic^0_{C₀/k₀} ⟶ Pic_{C₀/k₀}` is injective on sections
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J α (picardFunctor f).property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α _
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have hβ : Function.Injective (β.hom.app (.op T)) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T' : Over (Spec (.of k₀))} (M : S.toFunctor.obj (.op T')) :
+      β.hom.app _ ((toSheafify J S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T')) M
+  have hf := isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral (k := k₀) (X := C₀)
+  have hinv (L : C.Pic) : Pic.map e.hom (Pic.map e.inv L) = L := by
+    rw [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
+  have hinv' (M : (pullback f T.hom).Pic) : Pic.map e.inv (Pic.map e.hom M) = M := by
+    rw [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]
+  let φ (L : picardZero K C) : (picardFunctorDegree f 0).obj.obj (.op T) :=
+    (toSheafify J S.toFunctor).app _ ⟨_, hmem L⟩
+  have hφinj : Function.Injective φ := fun L₁ L₂ h ↦ by
+    have h' := congrArg (β.hom.app _) h
+    simp only [φ, hβS] at h'
+    obtain ⟨N, ⟨i⟩⟩ := exists_iso_tensorObj_of_toPicardFunctor_app_eq f hf _ _ h'
+    obtain ⟨eN⟩ := Modules.IsInvertible.nonempty_iso_unit (X := Spec (.of K)) default
+      ((fromSkeleton _).obj N.val)
+    have hρ : Pic.map e.inv L₁.1 = Pic.map e.inv L₂.1 :=
+      Pic.eq_iff_nonempty_iso.2 ⟨i ≪≫ (Iso.refl _ ⊗ᵢ ((Modules.pullback _).mapIso eN ≪≫
+        Modules.pullbackObjUnitIso _)) ≪≫ ρ_ _⟩
+    exact Subtype.ext (by rw [← hinv L₁.1, hρ, hinv])
+  have hφsurj : Function.Surjective φ := fun s ↦ by
+    -- the degree of the image of `s` in `Pic_{C₀/k₀}(T)` vanishes everywhere
+    have hdeg (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+      obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+        (Presheaf.imageSieve_mem J (toSheafify J S.toFunctor) s) t
+      refine (picardDegree_map f g (β.hom.app _ s) z).symm.trans ?_
+      rw [← NatTrans.naturality_apply β.hom,
+        show (picardFunctorDegree f 0).obj.map g.op s = (toSheafify J S.toFunctor).app _ a from
+          ha.symm, hβS, picardDegree_toPicardFunctor]
+      exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+    -- the image of `s` comes from a class on an fppf covering of `Spec K`, which has a `K`-point
+    obtain ⟨t₀⟩ : Nonempty T.left := inferInstanceAs (Nonempty (Spec (.of K)))
+    obtain ⟨Z, g, ⟨MZ, hMZ⟩, -, hg, z, -⟩ := exists_flat_mem_of_mem_fppfTopology_over
+      (Presheaf.imageSieve_mem J (toPicardFunctor f) (β.hom.app _ s)) t₀
+    have : JacobsonSpace Z.left := LocallyOfFiniteType.jacobsonSpace g.left
+    obtain ⟨x, -, hx⟩ := nonempty_inter_closedPoints (Z := Set.univ) ⟨z, trivial⟩
+      isClosed_univ.isLocallyClosed
+    let τ : T ⟶ Z := Over.homMk (pointOfClosedPoint g.left x hx) (by
+      rw [← Over.w g, pointOfClosedPoint_comp_assoc]
+      rfl)
+    have hτ : τ ≫ g = 𝟙 T := by
+      ext1
+      exact pointOfClosedPoint_comp g.left x hx
+    let M := Pic.map (baseChangeMap f τ) MZ
+    have hM₂ : (toPicardFunctor f).app _ M = β.hom.app _ s := by
+      have h₁ := NatTrans.naturality_apply (toPicardFunctor f) τ.op MZ
+      refine h₁.trans ?_
+      rw [hMZ, ← Functor.map_comp_apply, ← op_comp, hτ, op_id]
+      exact Functor.map_id_apply (picardFunctor f).obj _ _
+    have hMS : M ∈ S.obj (.op T) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun t ↦ by
+      rw [← picardDegree_toPicardFunctor, hM₂]
+      exact hdeg t
+    have hL₀ : Pic.map e.hom M ∈ picardZero K C := by
+      rw [hker, ← hdegρ _ (𝟙 T), hinv']
+      exact hMS K (𝟙 T)
+    refine ⟨⟨_, hL₀⟩, hβ ?_⟩
+    simp only [φ, hβS]
+    rw [hinv' M]
+    exact hM₂
+  refine ⟨Equiv.ofBijective φ ⟨hφinj, hφsurj⟩, fun L ↦ ⟨hmem L, rfl⟩, fun σ ↦ ?_⟩
+  -- the Galois action
+  let ψ := specAlgEquivOver σ
+  let b := baseChangeMap f ψ
+  have hb₁ : b ≫ pullback.fst f T.hom = pullback.fst f T.hom :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  have hb₂ : b ≫ pullback.snd f T.hom =
+      pullback.snd f T.hom ≫ Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) :=
+    pullback.lift_snd _ _ _
+  let γ := e.hom ≫ b ≫ e.inv
+  have hγ : IsPullback γ (C ↘ Spec (.of K)) (C ↘ Spec (.of K))
+      (Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom)) := by
+    have := (hsqE.paste_horiz (isPullback_baseChangeMap f ψ)).paste_horiz hsqE'
+    simp only [Category.id_comp, Category.assoc] at this
+    exact this
+  have hact (L : picardZero K C) : Pic.map γ L.1 ∈ picardZero K C := by
+    rw [hker]
+    exact (Modules.degree_congr K (fromSkeletonToSkeletonIso _)).trans
+      ((Modules.degree_pullback_of_isPullback _ _ hγ
+        ((fromSkeleton C.Modules).obj L.1.val)).trans ((hker L.1).1 L.2))
+  refine ⟨γ, ?_, ?_, fun L ↦ ⟨_, hact L⟩, fun L ↦ rfl, fun L ↦ ?_⟩
+  · rw [← he₁]
+    simp only [γ, Category.assoc, Iso.inv_hom_id_assoc, hb₁]
+  · rw [← he₂]
+    simp only [γ, Category.assoc, Iso.inv_hom_id_assoc, hb₂]
+  · change (toSheafify J S.toFunctor).app _ ⟨_, hmem _⟩ =
+      (picardFunctorDegree f 0).obj.map ψ.op ((toSheafify J S.toFunctor).app _ ⟨_, hmem L⟩)
+    have hnat := NatTrans.naturality_apply (toSheafify J S.toFunctor) ψ.op
+      (⟨_, hmem L⟩ : S.toFunctor.obj (.op T))
+    refine (congrArg _ (Subtype.ext ?_)).trans hnat
+    change Pic.map e.inv (Pic.map γ L.1) = Pic.map b (Pic.map e.inv L.1)
+    rw [← Pic.map_comp, ← Pic.map_comp]
+    simp only [γ, Iso.inv_hom_id_assoc]
+
 
 omit [Field k] in
 lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]

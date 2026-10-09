@@ -156,7 +156,15 @@ relative coordinates `x₁, …, x_d` on `V` in which `s` is `x_i = 0`, and on t
 chart `u_i = x_i / t` the deformation is `𝔸^d × 𝔸¹` over the base, which gives both the
 smoothness of `g̃` and the two cartesian squares.
 
-All of this commutes with base change in `B` and with étale localization. -/
+All of this commutes with base change in `B` and with étale localization.
+
+As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
+module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
+be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
+`d = 1`, and `N` the total space of `L` with its zero section. For a datum `𝒟`, the line bundle
+`s̃^* Ω_{𝒟/𝔸¹_B}` on `𝔸¹_B` restricts to `s^* Ω_{V/B} ≅ 𝒪_B` at `t = 1` and to `L^∨` at `t = 0`,
+contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
+`s`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     (N : NormalConeData d s) :
