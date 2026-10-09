@@ -31,10 +31,11 @@ the derived adjunction `D(r.hom)^* ⊣ R(r.hom)_*`, the inverse of the base chan
 `AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, and no monoidal structure
 on the coefficient category `A` is needed.
 
-When `f` is quasi-compact, passing through the common refinement `Compactification.inf c d`
-gives an isomorphism `Rf_!(c)[A] ≅ Rf_!(d)[A]` for any two compactifications, and in
-particular an isomorphism `Rf_!(c)[A] ≅ R(f)_![A]` with the derived lower shriek defined by
-the chosen compactification.
+For `A = ModuleCat Λ` with `Λ` finite the comparison is an isomorphism (Stacks 0F7H,
+Lemma 63.9.1). When moreover `f` is quasi-compact, passing through the common refinement
+`Compactification.inf c d` gives an isomorphism `Rf_!(c)[Λ] ≅ Rf_!(d)[Λ]` for any two
+compactifications, and in particular an isomorphism `Rf_!(c)[Λ] ≅ R(f)_![Λ]` with the derived
+lower shriek defined by the chosen compactification.
 
 On bounded below objects, whiskering `rightDerivedLowerShriekOfCompactificationIso c d` by
 `DerivedCategory.Plus.ι` should give the isomorphism
@@ -48,14 +49,14 @@ counterparts.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison`: the
   comparison `Rf_!(d)[A] ⟶ Rf_!(c)[A]` along a refinement with cartesian square over `X`;
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso`: the isomorphism
-  `Rf_!(c)[A] ≅ Rf_!(d)[A]`;
+  `Rf_!(c)[Λ] ≅ Rf_!(d)[Λ]` for `Λ` finite;
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`: the isomorphism
-  `Rf_!(c)[A] ≅ R(f)_![A]`.
+  `Rf_!(c)[Λ] ≅ R(f)_![Λ]` for `Λ` finite.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`: the
-  comparison is an isomorphism. Not proved yet, see its docstring for the missing hypotheses.
+  comparison is an isomorphism for `A = ModuleCat Λ` with `Λ` finite. Not proved yet.
 
 -/
 
@@ -113,45 +114,53 @@ noncomputable def rightDerivedLowerShriekOfCompactificationComparison
       (Functor.rightDerivedFunctorCompIso' (r.hom)_*[A] (d.g)_*[A]
         (refinementLowerStarComp A r)).hom
 
-/-- **The comparison of unbounded derived lower shrieks along a refinement is an
-isomorphism**: for a refinement `r : c.Refinement d` whose square over `X` is cartesian, the
-comparison `Rf_!(d)[A] ⟶ Rf_!(c)[A]` is an isomorphism.
+section Finite
 
-Not proved yet, and not expected to hold in this generality. The blueprint (`BA43-RHO`) only
-states the bounded below version, with torsion coefficients: it rests on proper base change
-for `r.hom`, which needs torsion coefficients. Passing from `D⁺` to the unbounded derived
-category moreover needs `R(r.hom)_*` to have finite cohomological dimension, since étale
-topoi are not left-complete in general. The corresponding hypotheses on `A` and on `f` are
-still to be added. -/
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- **The comparison of unbounded derived lower shrieks along a refinement is an
+isomorphism**: for `Λ` finite and a refinement `r : c.Refinement d` whose square over `X` is
+cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism.
+
+This is the independence of `Rf_!` of the compactification on unbounded derived categories
+with torsion coefficients, Stacks 0F7H (Lemma 63.9.1), via the isomorphism
+`j_{2!} ≅ Rq_* j_{1!}` of Stacks 0F6Y (Lemma 63.8.6). It rests on proper base change for
+`r.hom` on unbounded complexes, Stacks 0F0C: `Λ` is killed by some `n` and the proper map
+`r.hom` has fibres of bounded dimension over quasi-compact opens, so `(r.hom)_*` has finite
+cohomological dimension on sheaves of `Λ`-modules. Both ingredients need torsion
+coefficients, hence the restriction to `ModuleCat Λ` with `Λ` finite. Not proved yet. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
-    IsIso (rightDerivedLowerShriekOfCompactificationComparison A r hcart) :=
+    IsIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ) r hcart) :=
   sorry
 
 variable [QuasiCompact f]
 
-/-- **The unbounded derived lower shriek does not depend on the compactification**: for two
-compactifications `c` and `d` of a quasi-compact morphism `f`, the isomorphism
-`Rf_!(c)[A] ≅ Rf_!(d)[A]` obtained by comparing both with the common refinement
+/-- **The unbounded derived lower shriek does not depend on the compactification**: for `Λ`
+finite and two compactifications `c` and `d` of a quasi-compact morphism `f`, the isomorphism
+`Rf_!(c)[Λ] ≅ Rf_!(d)[Λ]` obtained by comparing both with the common refinement
 `Compactification.inf c d`: the comparison along `Compactification.infFst c d` followed by the
 inverse of the comparison along `Compactification.infSnd c d`.
 (blueprint: unbounded analogue of `κ_{C,D}` in `BA43-RHO`) -/
 noncomputable def rightDerivedLowerShriekOfCompactificationIso
-    (c d : Compactification f) : Rf_!(c)[A] ≅ Rf_!(d)[A] :=
-  asIso (rightDerivedLowerShriekOfCompactificationComparison A
+    (c d : Compactification f) :
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(d)[ModuleCat.{u + 1} Λ] :=
+  asIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)
       (Compactification.infFst c d) (Compactification.isPullback_infFst c d)) ≪≫
-    (asIso (rightDerivedLowerShriekOfCompactificationComparison A
+    (asIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)
       (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d))).symm
 
 variable [HasCompactification f]
 
-/-- The unbounded derived lower shriek attached to any compactification `c` of a
-quasi-compact morphism `f` is isomorphic to `R(f)_![A]`, the one attached to the chosen
+/-- For `Λ` finite, the unbounded derived lower shriek attached to any compactification `c` of
+a quasi-compact morphism `f` is isomorphic to `R(f)_![Λ]`, the one attached to the chosen
 compactification `HasCompactification.compactification f`.
 (blueprint: unbounded analogue of `κ_{C,D}` in `BA43-RHO`) -/
 noncomputable def rightDerivedLowerShriekIso (c : Compactification f) :
-    Rf_!(c)[A] ≅ R(f)_![A] :=
-  rightDerivedLowerShriekOfCompactificationIso A c (HasCompactification.compactification f)
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] :=
+  rightDerivedLowerShriekOfCompactificationIso Λ c (HasCompactification.compactification f)
+
+end Finite
 
 end Etale
 

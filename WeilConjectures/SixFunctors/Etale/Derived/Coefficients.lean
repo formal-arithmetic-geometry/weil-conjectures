@@ -26,13 +26,19 @@ These belong to the framework, not to any one chapter: the finiteness statements
 - `AlgebraicGeometry.Etale.DerivedCategoryModule`: the derived category `D(X_ét, Λ)`.
 - `AlgebraicGeometry.Etale.constantComplex`: the constant complex `Λ_X`, the unit of the
   derived tensor product.
-- `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`: Tor amplitude in `[a, b]`.
-  Finite Tor amplitude is `AlgebraicGeometry.Etale.DerivedCategory.finiteTorAmplitude` of
-  `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`, for `A = ModuleCat Λ`.
-- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleFiniteTor`:
-  `D^b_{ctf}(X, Λ)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isInvertible`: ⊗-invertible objects.
 - `AlgebraicGeometry.Etale.reductionModIdeal`: reduction of coefficients `K ↦ K ⊗^L (Λ/J)_X`.
+
+Tor amplitude, finite Tor amplitude and `D^b_{ctf}` are not redefined for `Λ`: they are
+`AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn`, `…finiteTorAmplitude` and
+`…constructibleFiniteTor` of `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude` for
+`A = ModuleCat Λ`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor_constantComplex`
+- `AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor_shift`
+- `AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor_derivedTensor`
 -/
 
 @[expose] public section
@@ -55,31 +61,11 @@ abbrev DerivedCategoryModule : Type (u + 2) :=
 
 The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
 zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`.
-It is the coefficient object every statement of the purity chapter is normalized against. -/
-noncomputable def constantComplex :
+It is the coefficient object every statement of the purity chapter is normalized against; it
+is only a name for the monoidal unit `𝟙_ _` of `D(X_ét, Λ)`. -/
+noncomputable abbrev constantComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   𝟙_ _
-
-/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
-
-An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
-`Λ`-modules on `X_ét` the derived tensor product `K ⊗^L F` has vanishing cohomology outside
-`[a, b]`. -/
-def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < a ∨ b < q →
-    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
-
-/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
-
-The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
-constructible cohomology sheaves and of finite Tor amplitude. -/
-def DerivedCategory.boundedConstructibleFiniteTor :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
-    DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
 
 /-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
 with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of
@@ -100,6 +86,40 @@ noncomputable def reductionModIdeal (J : Ideal Λ) :
     ((_root_.DerivedCategory.singleFunctor _ 0).obj
       ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Λ ⧸ J))))
+
+/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
+
+For a finite coefficient ring the constant complex lies in `D^b_{ctf}`: `Λ_X` is the constant
+sheaf `Λ` in degree zero, which is constructible for the one-stratum stratification (its stalks
+are `Λ`, finite), bounded, and flat, so of Tor amplitude `[0, 0]`. -/
+theorem DerivedCategory.constructibleFiniteTor_constantComplex [Finite Λ] :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (constantComplex Λ X) :=
+  sorry
+
+/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
+
+`D^b_{ctf}(X, Λ)` is stable under shifts: shifting moves the cohomology sheaves and the Tor
+amplitude by the same amount. -/
+theorem DerivedCategory.constructibleFiniteTor_shift
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) (n : ℤ) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (K⟦n⟧) :=
+  sorry
+
+/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
+
+For a finite coefficient ring `D^b_{ctf}(X, Λ)` is stable under the derived tensor product: if
+`K` has Tor amplitude in `[a, b]` and `L` in `[c, e]`, then `K ⊗^L L` has Tor amplitude in
+`[a + c, b + e]`; it is bounded, and its cohomology sheaves are constructible, as one sees on a
+common stratification over which `K` and `L` have bounded flat models with finite locally
+constant terms. -/
+theorem DerivedCategory.constructibleFiniteTor_derivedTensor [Finite Λ]
+    {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) :=
+  sorry
 
 end Etale
 

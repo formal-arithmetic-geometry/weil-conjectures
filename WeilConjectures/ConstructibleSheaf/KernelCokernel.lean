@@ -21,11 +21,11 @@ which is, on a further étale cover, induced by a linear map `f : M ⟶ N`
 cokernel of `φ` restrict to the constant sheaves at `ker f` and `coker f` there. Hence
 kernels and cokernels of morphisms between finite locally constant sheaves are locally
 constant; their stalks are kernels and cokernels of maps between finite modules, hence
-finite (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`,
-`IsFiniteLocallyConstantSheaf.cokernel`). Pulling back to the strata of a common refinement of
-stratifications, kernels, cokernels and direct sums of constructible sheaves of modules are
-constructible (`IsConstructibleSheaf.kernel`, `IsConstructibleSheaf.cokernel`,
-`IsConstructibleSheaf.biprod`).
+finite (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.kernel`,
+`IsLocallyConstantSheaf.cokernel`, `IsFiniteSheaf.kernel`, `IsFiniteSheaf.cokernel`).
+Pulling back to the strata of a common refinement of stratifications, kernels, cokernels and
+direct sums of constructible sheaves of modules are constructible
+(`IsConstructibleSheaf.kernel`, `IsConstructibleSheaf.cokernel`, `IsConstructibleSheaf.biprod`).
 (blueprint: `lemma:constructible-hom-constant-locally`, the kernel and cokernel part of
 `lemma:constructible-flc-serre`)
 
@@ -182,7 +182,7 @@ with finite values, which is étale-locally induced by a linear map `f`, so that
 and cokernel are étale-locally the constant sheaves at `ker f` and `coker f`.
 (blueprint: `lemma:constructible-hom-constant-locally`, `lemma:constructible-flc-serre`) -/
 theorem IsLocallyConstantSheaf.kernel_and_cokernel
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    [IsLocallyConstantSheaf F] [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] [IsLocallyConstantSheaf G] :
     IsLocallyConstantSheaf (kernel φ) ∧ IsLocallyConstantSheaf (cokernel φ) := by
   obtain ⟨𝒰₀, h𝒰₀⟩ := IsLocallyConstantSheaf.exists_cover₂ F G
@@ -304,29 +304,23 @@ theorem IsFiniteSheaf.cokernel
       (fun k ↦ e.inv (cokernel.π ((pointSmallEtale s).sheafFiber.map φ) k))
       (((ModuleCat.epi_iff_surjective e.inv).mp inferInstance).comp hπ)
 
-/-- **The kernel of a morphism between finite locally constant sheaves of modules is finite
-locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
-theorem IsFiniteLocallyConstantSheaf.kernel
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
-    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (kernel φ) where
-  toIsLocallyConstantSheaf := (IsLocallyConstantSheaf.kernel_and_cokernel φ).1
-  toIsFiniteSheaf := IsFiniteSheaf.kernel φ
+/-- **The kernel of a morphism between finite locally constant sheaves of modules is locally
+constant.** Together with `IsFiniteSheaf.kernel`, the kernel is finite locally constant.
+(blueprint: `lemma:constructible-flc-serre`) -/
+theorem IsLocallyConstantSheaf.kernel
+    [IsLocallyConstantSheaf F] [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] [IsLocallyConstantSheaf G] :
+    IsLocallyConstantSheaf (kernel φ) :=
+  (IsLocallyConstantSheaf.kernel_and_cokernel φ).1
 
-/-- **The cokernel of a morphism between finite locally constant sheaves of modules is finite
-locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
-theorem IsFiniteLocallyConstantSheaf.cokernel
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
-    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (cokernel φ) where
-  toIsLocallyConstantSheaf := (IsLocallyConstantSheaf.kernel_and_cokernel φ).2
-  toIsFiniteSheaf := IsFiniteSheaf.cokernel φ
+/-- **The cokernel of a morphism between finite locally constant sheaves of modules is locally
+constant.** Together with `IsFiniteSheaf.cokernel`, the cokernel is finite locally constant.
+(blueprint: `lemma:constructible-flc-serre`) -/
+theorem IsLocallyConstantSheaf.cokernel
+    [IsLocallyConstantSheaf F] [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] [IsLocallyConstantSheaf G] :
+    IsLocallyConstantSheaf (cokernel φ) :=
+  (IsLocallyConstantSheaf.kernel_and_cokernel φ).2
 
 end FiniteStalks
 
@@ -353,13 +347,17 @@ theorem IsConstructibleSheaf.kernel
     (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (F := G)
   refine ⟨S.inter T, fun k ↦ ?_⟩
-  have hF := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
-  have hG := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
-  have := IsFiniteLocallyConstantSheaf.kernel
+  have := (S.inter_refines_left T).isLocallyConstantSheaf_upperStar F (fun k ↦ (hS k).1) k
+  have := (S.inter_refines_left T).isFiniteSheaf_upperStar F (fun k ↦ (hS k).2) k
+  have := (S.inter_refines_right T).isLocallyConstantSheaf_upperStar G (fun k ↦ (hT k).1) k
+  have := (S.inter_refines_right T).isFiniteSheaf_upperStar G (fun k ↦ (hT k).2) k
+  have := IsLocallyConstantSheaf.kernel
     ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).map φ)
-  exact IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+  have := IsFiniteSheaf.kernel
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).map φ)
+  let e :=
     (PreservesKernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
+  exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
 
 /-- **The cokernel of a morphism between constructible sheaves of modules is constructible.**
 (blueprint: `thm:constructible-serre`) -/
@@ -377,13 +375,17 @@ theorem IsConstructibleSheaf.cokernel
     (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (F := G)
   refine ⟨S.inter T, fun k ↦ ?_⟩
-  have hF := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
-  have hG := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
-  have := IsFiniteLocallyConstantSheaf.cokernel
+  have := (S.inter_refines_left T).isLocallyConstantSheaf_upperStar F (fun k ↦ (hS k).1) k
+  have := (S.inter_refines_left T).isFiniteSheaf_upperStar F (fun k ↦ (hS k).2) k
+  have := (S.inter_refines_right T).isLocallyConstantSheaf_upperStar G (fun k ↦ (hT k).1) k
+  have := (S.inter_refines_right T).isFiniteSheaf_upperStar G (fun k ↦ (hT k).2) k
+  have := IsLocallyConstantSheaf.cokernel
     ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).map φ)
-  exact IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+  have := IsFiniteSheaf.cokernel
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).map φ)
+  let e :=
     (PreservesCokernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
+  exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
 
 variable (F G) in
 /-- **The direct sum of two constructible sheaves of modules is constructible**: on the common
@@ -403,16 +405,20 @@ theorem IsConstructibleSheaf.biprod
     (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (F := G)
   refine ⟨S.inter T, fun k ↦ ?_⟩
-  have hF := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
-  have hG := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
-  have := IsFiniteLocallyConstantSheaf.biprod (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+  have := (S.inter_refines_left T).isLocallyConstantSheaf_upperStar F (fun k ↦ (hS k).1) k
+  have := (S.inter_refines_left T).isFiniteSheaf_upperStar F (fun k ↦ (hS k).2) k
+  have := (S.inter_refines_right T).isLocallyConstantSheaf_upperStar G (fun k ↦ (hT k).1) k
+  have := (S.inter_refines_right T).isFiniteSheaf_upperStar G (fun k ↦ (hT k).2) k
+  have := IsLocallyConstantSheaf.biprod
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj F)
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj G)
+  have := IsFiniteSheaf.biprod (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj F)
     ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj G)
-  exact IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+  let e := ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       ((S.inter T).immersion k)).leftAdjointBiprodIso F G).symm
+  exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
 
 end Constructible
 

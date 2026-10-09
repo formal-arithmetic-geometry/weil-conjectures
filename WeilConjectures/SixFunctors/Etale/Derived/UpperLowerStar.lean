@@ -22,6 +22,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDeri
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 
@@ -307,6 +308,12 @@ noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     L((g₁₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
   Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A g₁ g₂ g₁₂ hg₁₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
+
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on étale sheaves: the
+derived functor of `Etale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
 on étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of the

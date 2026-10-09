@@ -23,7 +23,7 @@ Finiteness of the stalks descends along a *surjective closed immersion* `p : W �
 geometric point of `Z` lifts to `W` (`AlgebraicGeometry.Scheme.exists_comp_eq_of_surjective`,
 the residue field maps of a closed immersion being surjective), and the stalk of `p^* G` at a
 lift is the stalk of `G` (`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar`,
-`IsFiniteLocallyConstantSheaf.of_upperStar`). This is the case needed for the independence of
+`isFiniteSheaf_upperStar_iff`). This is the case needed for the independence of
 constructibility from the scheme structures on the strata, see
 `WeilConjectures.ConstructibleSheaf.Refinement`.
 (blueprint: `lemma:constructible-universal-homeomorphism-invariance`)
@@ -189,21 +189,18 @@ theorem IsFiniteSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
       (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A p).obj G)))
       ((CategoryTheory.forget A).mapIso ((Etale.upperStarCompSheafFiberIso A p s').app G)).toEquiv
 
-/-- **Finite local constancy descends along a surjective closed immersion.**
-(blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
-theorem IsFiniteLocallyConstantSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
-    [IsFiniteLocallyConstantSheaf ((Etale.upperStar A p).obj G)] :
-    IsFiniteLocallyConstantSheaf G where
-  toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_upperStar p G
-  toIsFiniteSheaf := IsFiniteSheaf.of_upperStar p G
-
-/-- A sheaf is finite locally constant if and only if its pullback along a surjective closed
+/-- A sheaf is locally constant if and only if its pullback along a surjective closed
 immersion is. -/
-theorem isFiniteLocallyConstantSheaf_upperStar_iff (G : Sheaf Z.smallEtaleTopology A) :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A p).obj G) ↔
-      IsFiniteLocallyConstantSheaf G :=
-  ⟨fun _ ↦ IsFiniteLocallyConstantSheaf.of_upperStar p G,
-    fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar p G⟩
+theorem isLocallyConstantSheaf_upperStar_iff (G : Sheaf Z.smallEtaleTopology A) :
+    IsLocallyConstantSheaf ((Etale.upperStar A p).obj G) ↔ IsLocallyConstantSheaf G :=
+  ⟨fun _ ↦ IsLocallyConstantSheaf.of_upperStar p G,
+    fun _ ↦ IsLocallyConstantSheaf.upperStar p G⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- A sheaf is finite if and only if its pullback along a surjective closed immersion is. -/
+theorem isFiniteSheaf_upperStar_iff (G : Sheaf Z.smallEtaleTopology A) :
+    IsFiniteSheaf ((Etale.upperStar A p).obj G) ↔ IsFiniteSheaf G :=
+  ⟨fun _ ↦ IsFiniteSheaf.of_upperStar p G, fun _ ↦ IsFiniteSheaf.upperStar p G⟩
 
 end Finite
 

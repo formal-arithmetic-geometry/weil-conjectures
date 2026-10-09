@@ -84,12 +84,6 @@ lemma IsFiniteSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : IsZero F)
       Types.isTerminalEquivUnique _ hT
     exact Finite.of_subsingleton
 
-/-- A zero sheaf is finite locally constant. -/
-lemma IsFiniteLocallyConstantSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A}
-    (hF : IsZero F) : IsFiniteLocallyConstantSheaf F where
-  toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_isZero hF
-  toIsFiniteSheaf := IsFiniteSheaf.of_isZero hF
-
 /-- The trivial stratification of `X`, with the single stratum `X`. -/
 @[simps n stratum domain immersion]
 def Stratification.trivial (X : Scheme.{u}) : Stratification X where
@@ -106,7 +100,8 @@ def Stratification.trivial (X : Scheme.{u}) : Stratification X where
 lemma IsConstructibleSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : IsZero F) :
     IsConstructibleSheaf F :=
   ⟨Stratification.trivial X, fun _ ↦
-    IsFiniteLocallyConstantSheaf.of_isZero ((Etale.upperStar A (𝟙 X)).map_isZero hF)⟩
+    ⟨IsLocallyConstantSheaf.of_isZero ((Etale.upperStar A (𝟙 X)).map_isZero hF),
+      IsFiniteSheaf.of_isZero ((Etale.upperStar A (𝟙 X)).map_isZero hF)⟩⟩
 
 end Zero
 
@@ -243,19 +238,22 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
   obtain ⟨SU, hSU⟩ := hU.exists_stratification
   obtain ⟨SZ, hSZ⟩ := hZ.exists_stratification
   refine ⟨Stratification.openClosed j i hij SU SZ, fun k ↦ ?_⟩
-  change IsFiniteLocallyConstantSheaf ((Etale.upperStar A
-    (Sum.rec (motive := fun s ↦ Sum.elim SU.domain SZ.domain s ⟶ X)
-      (fun l ↦ SU.immersion l ≫ j) (fun l ↦ SZ.immersion l ≫ i) (finSumFinEquiv.symm k))).obj F)
+  change IsLocallyConstantSheaf ((Etale.upperStar A
+      (Sum.rec (motive := fun s ↦ Sum.elim SU.domain SZ.domain s ⟶ X)
+        (fun l ↦ SU.immersion l ≫ j) (fun l ↦ SZ.immersion l ≫ i) (finSumFinEquiv.symm k))).obj F) ∧
+    IsFiniteSheaf ((Etale.upperStar A
+      (Sum.rec (motive := fun s ↦ Sum.elim SU.domain SZ.domain s ⟶ X)
+        (fun l ↦ SU.immersion l ≫ j) (fun l ↦ SZ.immersion l ≫ i) (finSumFinEquiv.symm k))).obj F)
   generalize finSumFinEquiv.symm k = s
   rcases s with l | l
-  · have := hSU l
-    exact IsFiniteLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (SU.immersion l)).obj
-      ((Etale.upperStar A j).obj F))
+  · obtain ⟨_, _⟩ := hSU l
+    let e : (Etale.upperStar A (SU.immersion l)).obj ((Etale.upperStar A j).obj F) ≅ _ :=
       ((Etale.upperStarComp A (SU.immersion l) j).app F).symm
-  · have := hSZ l
-    exact IsFiniteLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (SZ.immersion l)).obj
-      ((Etale.upperStar A i).obj F))
+    exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
+  · obtain ⟨_, _⟩ := hSZ l
+    let e : (Etale.upperStar A (SZ.immersion l)).obj ((Etale.upperStar A i).obj F) ≅ _ :=
       ((Etale.upperStarComp A (SZ.immersion l) i).app F).symm
+    exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
 
 variable [PreservesFiniteLimits (CategoryTheory.forget A)]
 

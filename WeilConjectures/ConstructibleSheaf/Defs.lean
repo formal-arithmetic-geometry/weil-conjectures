@@ -31,8 +31,8 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
   (`CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf`).
 - `F` is *finite* (`IsFiniteSheaf`) if the stalk of `F` at every geometric point of `X`
   (`Scheme.pointSmallEtale`) is finite.
-- `F` is *finite locally constant* (`IsFiniteLocallyConstantSheaf`) if it is locally
-  constant and finite.
+- `F` is *finite locally constant* if it is locally constant and finite
+  (`IsLocallyConstantSheaf F ∧ IsFiniteSheaf F`).
 - `F` is *constructible* (`IsConstructibleSheaf`) if there is a stratification of `X`
   (`Scheme.Stratification`: a stratification of the underlying topological space of `X` —
   a finite partition into locally closed subsets, `Topology.Stratification`, following
@@ -183,22 +183,6 @@ class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
 
 end FiniteSheaf
 
-section FiniteLocallyConstant
-
-variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [HasSmallSiteSheafify A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-
-/-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
-*finite locally constant* if it is locally constant and finite. For sheaves of sets,
-equivalently (not proved here), `F` is representable by a scheme finite étale over
-`X`. -/
-class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
-    extends IsLocallyConstantSheaf F, IsFiniteSheaf F
-
-end FiniteLocallyConstant
-
 section Stratification
 
 /-- A *stratification* of a scheme `X`: a stratification of the underlying topological
@@ -237,9 +221,10 @@ condition does not depend on this choice.
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
 provided by the instance
 `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
-`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`. Stating
-`IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
-étale sites of the strata; since the stratification is existentially quantified, this has
+`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`. Stating that the
+pullbacks are finite locally constant (`IsLocallyConstantSheaf` and `IsFiniteSheaf`) needs
+sheafification for the localizations of the small étale sites of the strata; since the
+stratification is existentially quantified, this has
 to be available for all schemes, which is what the hypothesis
 `CategoryTheory.HasSmallSiteSheafify A` provides (see the module implementation notes).
 
@@ -248,7 +233,8 @@ affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied wit
 `A = ModuleCat Λ` for the finite ring `Λ = ℤ/ℓⁿℤ`. -/
 class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   exists_stratification : ∃ S : Stratification X, ∀ i : Fin S.n,
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)
+    IsLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F) ∧
+      IsFiniteSheaf ((Etale.upperStar A (S.immersion i)).obj F)
 
 end Constructible
 

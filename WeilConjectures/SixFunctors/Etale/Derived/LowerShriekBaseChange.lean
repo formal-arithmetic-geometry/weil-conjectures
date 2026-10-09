@@ -9,6 +9,7 @@ public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The compactly supported base change map
@@ -68,9 +69,8 @@ comparison isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for 
   isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` rests on
   `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is
-  not proved and not expected in this generality. The blueprint defines `Ex_!` on bounded below
-  derived categories; a version built from `derivedBaseChangeMapPlus` and
-  `rightDerivedLowerShriekOfCompactificationPlusIso` avoids this.
+  not proved yet. It holds for `ModuleCat Λ` with `Λ` finite (Stacks 0F7H), so
+  `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` is only defined there.
 -/
 
 @[expose] public section
@@ -154,13 +154,16 @@ cartesian square `g' ≫ f = f' ≫ g`: the map
 chosen compactification of `f`, followed by the comparison isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` between the derived lower shriek of `f'`
 computed with its base change and the one computed with the chosen compactification of `f'`.
+It is defined for `Λ` finite only, where that comparison isomorphism is available.
 (blueprint: `sk-def-sf-exchanges`) -/
-noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
-    [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    R(f)_![A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R(f')_![A] :=
-  rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq
+noncomputable def rightDerivedLowerShriekBaseChangeMap (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
+    (sq : IsPullback g' f' f g) :
+    R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶
+      L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] :=
+  rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
       (HasCompactification.compactification f) ≫
-    Functor.whiskerLeft _ (rightDerivedLowerShriekIso A _).hom
+    Functor.whiskerLeft _ (rightDerivedLowerShriekIso Λ _).hom
 
 end Etale
 

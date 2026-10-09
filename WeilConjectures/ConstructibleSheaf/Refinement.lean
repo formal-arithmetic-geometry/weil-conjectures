@@ -10,16 +10,18 @@ public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 /-!
 # Refinement of stratifications
 
-Finite local constancy of the pullback of a sheaf `F` to an immersed subscheme depends only on
-the image of the immersion: for immersions `a : Z ⟶ X` and `b : Z' ⟶ X` with
+Local constancy and finiteness of the pullback of a sheaf `F` to an immersed subscheme depend
+only on the image of the immersion: for immersions `a : Z ⟶ X` and `b : Z' ⟶ X` with
 `range a ⊆ range b`, the projection `Z ×_X Z' ⟶ Z` is a surjective closed immersion, along
-which finite local constancy descends
-(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset`,
-`isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq`).
+which local constancy and finiteness descend
+(`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.upperStar_of_range_subset`,
+`IsFiniteSheaf.upperStar_of_range_subset`, `isLocallyConstantSheaf_upperStar_iff_of_range_eq`,
+`isFiniteSheaf_upperStar_iff_of_range_eq`).
 
 Consequently constructibility passes from a stratification to any refinement
 (`AlgebraicGeometry.Scheme.Stratification.Refines`,
-`Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar`), and two stratifications have
+`Stratification.Refines.isLocallyConstantSheaf_upperStar`,
+`Stratification.Refines.isFiniteSheaf_upperStar`), and two stratifications have
 a common refinement by intersecting the strata (`Stratification.inter`).
 (blueprint: `lemma:constructible-immersion-independence`, `def:constructible-refines`,
 `lemma:constructible-common-refinement`, `lemma:constructible-of-refines`)
@@ -63,39 +65,75 @@ lemma surjective_pullback_fst_of_range_subset (h : Set.range a ⊆ Set.range b) 
 
 variable [IsImmersion b]
 
-/-- **Finite local constancy of a pullback along an immersion depends only on the image**: if
+/-- **Local constancy of a pullback along an immersion depends only on the image**: if
 `b : Z' ⟶ X` is an immersion, `a : Z ⟶ X` is any morphism with `range a ⊆ range b` and
-`b^* F` is finite locally constant, so is `a^* F`. The projection `p : Z ×_X Z' ⟶ Z` is a
-surjective closed immersion, `p^* a^* F ≅ q^* b^* F` is finite locally constant, and finite
-local constancy descends along `p`. (blueprint: `lemma:constructible-immersion-independence`) -/
-theorem IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a ⊆ Set.range b)
+`b^* F` is locally constant, so is `a^* F`. The projection `p : Z ×_X Z' ⟶ Z` is a
+surjective closed immersion, `p^* a^* F ≅ q^* b^* F` is locally constant, and local
+constancy descends along `p`. (blueprint: `lemma:constructible-immersion-independence`) -/
+theorem IsLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a ⊆ Set.range b)
     (F : Sheaf X.smallEtaleTopology A)
-    [IsFiniteLocallyConstantSheaf ((Etale.upperStar A b).obj F)] :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A a).obj F) := by
+    [IsLocallyConstantSheaf ((Etale.upperStar A b).obj F)] :
+    IsLocallyConstantSheaf ((Etale.upperStar A a).obj F) := by
   have := surjective_pullback_fst_of_range_subset a b h
   have := IsClosedImmersion.of_isImmersion_of_surjective (pullback.fst a b)
-  have : IsFiniteLocallyConstantSheaf ((Etale.upperStar A (pullback.snd a b)).obj
+  have : IsLocallyConstantSheaf ((Etale.upperStar A (pullback.snd a b)).obj
       ((Etale.upperStar A b).obj F)) :=
-    IsFiniteLocallyConstantSheaf.upperStar _ _
-  have : IsFiniteLocallyConstantSheaf ((Etale.upperStar A (pullback.fst a b)).obj
+    IsLocallyConstantSheaf.upperStar _ _
+  have : IsLocallyConstantSheaf ((Etale.upperStar A (pullback.fst a b)).obj
       ((Etale.upperStar A a).obj F)) :=
-    IsFiniteLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (pullback.snd a b)).obj
+    IsLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (pullback.snd a b)).obj
       ((Etale.upperStar A b).obj F))
       (((Etale.upperStarComp A (pullback.snd a b) b).app F).symm ≪≫
         eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition.symm) ≪≫
         (Etale.upperStarComp A (pullback.fst a b) a).app F)
-  exact IsFiniteLocallyConstantSheaf.of_upperStar (pullback.fst a b) _
+  exact IsLocallyConstantSheaf.of_upperStar (pullback.fst a b) _
+
+omit [HasSmallSiteSheafify A] in
+/-- **Finiteness of a pullback along an immersion depends only on the image**: if
+`b : Z' ⟶ X` is an immersion, `a : Z ⟶ X` is any morphism with `range a ⊆ range b` and
+`b^* F` is finite, so is `a^* F`; as for `IsLocallyConstantSheaf.upperStar_of_range_subset`,
+finiteness descends along the surjective closed immersion `p : Z ×_X Z' ⟶ Z`.
+(blueprint: `lemma:constructible-immersion-independence`) -/
+theorem IsFiniteSheaf.upperStar_of_range_subset (h : Set.range a ⊆ Set.range b)
+    (F : Sheaf X.smallEtaleTopology A)
+    [IsFiniteSheaf ((Etale.upperStar A b).obj F)] :
+    IsFiniteSheaf ((Etale.upperStar A a).obj F) := by
+  have := surjective_pullback_fst_of_range_subset a b h
+  have := IsClosedImmersion.of_isImmersion_of_surjective (pullback.fst a b)
+  have : IsFiniteSheaf ((Etale.upperStar A (pullback.snd a b)).obj
+      ((Etale.upperStar A b).obj F)) :=
+    IsFiniteSheaf.upperStar _ _
+  have : IsFiniteSheaf ((Etale.upperStar A (pullback.fst a b)).obj
+      ((Etale.upperStar A a).obj F)) :=
+    IsFiniteSheaf.of_iso (F := (Etale.upperStar A (pullback.snd a b)).obj
+      ((Etale.upperStar A b).obj F))
+      (((Etale.upperStarComp A (pullback.snd a b) b).app F).symm ≪≫
+        eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition.symm) ≪≫
+        (Etale.upperStarComp A (pullback.fst a b) a).app F)
+  exact IsFiniteSheaf.of_upperStar (pullback.fst a b) _
 
 /-- **Independence of the scheme structure**: for immersions `a`, `b` with the same image,
-`a^* F` is finite locally constant if and only if `b^* F` is.
+`a^* F` is locally constant if and only if `b^* F` is.
 (blueprint: `lemma:constructible-immersion-independence`) -/
-theorem isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq [IsImmersion a]
+theorem isLocallyConstantSheaf_upperStar_iff_of_range_eq [IsImmersion a]
     (h : Set.range a = Set.range b)
     (F : Sheaf X.smallEtaleTopology A) :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A a).obj F) ↔
-      IsFiniteLocallyConstantSheaf ((Etale.upperStar A b).obj F) :=
-  ⟨fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar_of_range_subset b a h.ge F,
-    fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar_of_range_subset a b h.le F⟩
+    IsLocallyConstantSheaf ((Etale.upperStar A a).obj F) ↔
+      IsLocallyConstantSheaf ((Etale.upperStar A b).obj F) :=
+  ⟨fun _ ↦ IsLocallyConstantSheaf.upperStar_of_range_subset b a h.ge F,
+    fun _ ↦ IsLocallyConstantSheaf.upperStar_of_range_subset a b h.le F⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- **Independence of the scheme structure**: for immersions `a`, `b` with the same image,
+`a^* F` is finite if and only if `b^* F` is.
+(blueprint: `lemma:constructible-immersion-independence`) -/
+theorem isFiniteSheaf_upperStar_iff_of_range_eq [IsImmersion a]
+    (h : Set.range a = Set.range b)
+    (F : Sheaf X.smallEtaleTopology A) :
+    IsFiniteSheaf ((Etale.upperStar A a).obj F) ↔
+      IsFiniteSheaf ((Etale.upperStar A b).obj F) :=
+  ⟨fun _ ↦ IsFiniteSheaf.upperStar_of_range_subset b a h.ge F,
+    fun _ ↦ IsFiniteSheaf.upperStar_of_range_subset a b h.le F⟩
 
 end Independence
 
@@ -111,26 +149,42 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- **Constructibility passes to refinements**: if the pullbacks of `F` to the strata of `S`
-are finite locally constant and `T` refines `S`, the pullbacks of `F` to the strata of `T` are
-finite locally constant. (blueprint: `lemma:constructible-of-refines`) -/
-theorem Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar {T S : Stratification X}
+/-- **Local constancy passes to refinements**: if the pullbacks of `F` to the strata of `S`
+are locally constant and `T` refines `S`, the pullbacks of `F` to the strata of `T` are
+locally constant. (blueprint: `lemma:constructible-of-refines`) -/
+theorem Stratification.Refines.isLocallyConstantSheaf_upperStar {T S : Stratification X}
     (hTS : T.Refines S) (F : Sheaf X.smallEtaleTopology A)
-    (hS : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) (l) :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A (T.immersion l)).obj F) := by
+    (hS : ∀ k, IsLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) (l) :
+    IsLocallyConstantSheaf ((Etale.upperStar A (T.immersion l)).obj F) := by
   obtain ⟨k, hk⟩ := hTS l
   have := hS k
-  refine IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (T.immersion l) (S.immersion k)
+  refine IsLocallyConstantSheaf.upperStar_of_range_subset (T.immersion l) (S.immersion k)
     ?_ F
+  rw [T.range_immersion, S.range_immersion]
+  exact hk
+
+omit [HasSmallSiteSheafify A] in
+/-- **Finiteness passes to refinements**: if the pullbacks of `F` to the strata of `S`
+are finite and `T` refines `S`, the pullbacks of `F` to the strata of `T` are finite.
+(blueprint: `lemma:constructible-of-refines`) -/
+theorem Stratification.Refines.isFiniteSheaf_upperStar {T S : Stratification X}
+    (hTS : T.Refines S) (F : Sheaf X.smallEtaleTopology A)
+    (hS : ∀ k, IsFiniteSheaf ((Etale.upperStar A (S.immersion k)).obj F)) (l) :
+    IsFiniteSheaf ((Etale.upperStar A (T.immersion l)).obj F) := by
+  obtain ⟨k, hk⟩ := hTS l
+  have := hS k
+  refine IsFiniteSheaf.upperStar_of_range_subset (T.immersion l) (S.immersion k) ?_ F
   rw [T.range_immersion, S.range_immersion]
   exact hk
 
 /-- A sheaf is constructible with respect to a refinement of a witnessing stratification. -/
 theorem IsConstructibleSheaf.of_refines {T S : Stratification X} (hTS : T.Refines S)
     (F : Sheaf X.smallEtaleTopology A)
-    (hS : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) :
+    (hS : ∀ k, IsLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F) ∧
+      IsFiniteSheaf ((Etale.upperStar A (S.immersion k)).obj F)) :
     IsConstructibleSheaf F :=
-  ⟨T, hTS.isFiniteLocallyConstantSheaf_upperStar F hS⟩
+  ⟨T, fun l ↦ ⟨hTS.isLocallyConstantSheaf_upperStar F (fun k ↦ (hS k).1) l,
+    hTS.isFiniteSheaf_upperStar F (fun k ↦ (hS k).2) l⟩⟩
 
 end Refines
 

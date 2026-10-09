@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
@@ -55,14 +56,15 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   with components `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso g K M`.
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit`: `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarUnit`: the unit comparison `Lg^* Λ_Y ⟶ Λ_Z`, and
+  `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStarUnit`: it is an isomorphism.
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
 
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
 `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`;
-`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_unit` is stated, not proved.
+`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStarUnit` is stated, not proved.
 
 ## TODO
 
@@ -350,6 +352,10 @@ lemma leftDerivedUpperStarTensorIso_hom
 
 end
 
+section
+
+open DerivedCategory
+
 /-- Tensoring with a complex pulled back along `g : Z ⟶ Y`, as a functor of the complex
 downstairs: `N ↦ (K ↦ K ⊗ᴸ g^* N)`. -/
 noncomputable def derivedTensorRightPullback :
@@ -358,13 +364,44 @@ noncomputable def derivedTensorRightPullback :
         DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
 
-/-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`. This is the existence of the unit
-comparison asked for in the TODO above. -/
-theorem nonempty_iso_leftDerivedUpperStar_unit :
-    Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
-  -- Proof sketch: the unit `Λ_Y` is the constant sheaf placed in degree `0`, which is K-flat,
-  -- and `g^*` sends the constant sheaf of `Y` to that of `Z`.
+instance (X : Scheme.{u}) :
+    IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A))) :=
+  inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal DerivedCategory.Qh
+    (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)))))
+
+/-- The unit `Λ_X = 𝟙_` of the derived tensor product is the unit sheaf placed in degree `0`:
+the canonical isomorphism `𝟙_ ≅ (𝟙_)[0]`, composed of the unit comparison of the localization
+`Qh`, that of the quotient `C(X_ét) ⥤ K(X_ét)`, and `Q = quotient ⋙ Qh`. -/
+noncomputable def unitIsoSingle (X : Scheme.{u}) :
+    𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) ≅
+      (singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj (𝟙_ _) :=
+  asIso (Functor.LaxMonoidal.ε Qh) ≪≫
+    Qh.mapIso (Functor.Monoidal.εIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ))) ≪≫
+    (quotientCompQhIso (Sheaf X.smallEtaleTopology A)).app (𝟙_ (CochainComplex _ ℤ)) ≪≫
+    ((singleFunctorIsoCompQ (Sheaf X.smallEtaleTopology A) 0).app (𝟙_ _)).symm
+
+/-- The unit comparison `Lg^* Λ_Y ⟶ Λ_Z` of the derived pullback: on the unit sheaf in degree
+`0`, the derived functor of the exact functor `g^*` is `g^*` itself
+(`CategoryTheory.Functor.singleFunctorCompLeftDerivedFunctorIso`), followed by the unit
+comparison `η : g^* 𝟙_ ⟶ 𝟙_` of the oplax monoidal functor `g^*`. -/
+noncomputable def leftDerivedUpperStarUnit :
+    L((g)^*[A]).obj (𝟙_ _) ⟶ 𝟙_ (DerivedCategory (Sheaf Z.smallEtaleTopology A)) :=
+  L((g)^*[A]).map (unitIsoSingle A Y).hom ≫
+    ((g)^*[A].singleFunctorCompLeftDerivedFunctorIso).hom.app (𝟙_ _) ≫
+    (singleFunctor _ 0).map (Functor.OplaxMonoidal.η (g)^*[A]) ≫ (unitIsoSingle A Z).inv
+
+/-- The derived pullback preserves the unit: the comparison `Lg^* Λ_Y ⟶ Λ_Z` is an isomorphism,
+because `g^*` is strong monoidal, so its `η` is an isomorphism. -/
+instance isIso_leftDerivedUpperStarUnit : IsIso (leftDerivedUpperStarUnit A g) :=
   sorry
+
+/-- The isomorphism `Lg^* Λ_Y ≅ Λ_Z`, with underlying morphism
+`AlgebraicGeometry.Etale.leftDerivedUpperStarUnit`. -/
+noncomputable def leftDerivedUpperStarUnitIso :
+    L((g)^*[A]).obj (𝟙_ _) ≅ 𝟙_ (DerivedCategory (Sheaf Z.smallEtaleTopology A)) :=
+  asIso (leftDerivedUpperStarUnit A g)
+
+end
 
 end Etale
 

@@ -16,7 +16,8 @@ the trivialising covers of the restrictions to the members of an étale cover co
 trivialising cover), and finiteness of the stalks is Zariski local
 (`IsFiniteSheaf.of_openCover`: a geometric point lifts to a member of an open cover
 containing its image, and the stalk of the restriction at the lift is the stalk), so finite
-local constancy is Zariski local (`IsFiniteLocallyConstantSheaf.of_openCover`).
+local constancy is Zariski local (`IsLocallyConstantSheaf.of_openCover`,
+`IsFiniteSheaf.of_openCover`).
 
 Consequently a constructible sheaf `F` on `X` is finite locally constant on a dense open
 subscheme (`AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open`): the union `U` of
@@ -91,18 +92,16 @@ theorem IsFiniteSheaf.of_openCover (𝒰 : OpenCover.{u} X) (G : Sheaf X.smallEt
       ((CategoryTheory.forget A).mapIso
         ((Etale.upperStarCompSheafFiberIso A (𝒰.f i) s').app G)).toEquiv
 
-/-- **Finite local constancy is Zariski local**: if the pullbacks of `G` to the members of
-an open cover are finite locally constant, so is `G`. -/
-theorem IsFiniteLocallyConstantSheaf.of_openCover (𝒰 : OpenCover.{u} X)
+/-- **Local constancy is Zariski local**: if the pullbacks of `G` to the members of an open
+cover are locally constant, so is `G`. -/
+theorem IsLocallyConstantSheaf.of_openCover (𝒰 : OpenCover.{u} X)
     (G : Sheaf X.smallEtaleTopology A)
-    [∀ i, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (𝒰.f i)).obj G)] :
-    IsFiniteLocallyConstantSheaf G where
-  toIsLocallyConstantSheaf := by
-    let 𝒱 : Cover.{u} etalePrecoverage X := 𝒰.changeProp (Q := @Etale) fun _ ↦ inferInstance
-    have : ∀ i, IsLocallyConstantSheaf ((Etale.upperStar A (𝒱.f i)).obj G) := fun i ↦
-      inferInstanceAs (IsLocallyConstantSheaf ((Etale.upperStar A (𝒰.f i)).obj G))
-    exact IsLocallyConstantSheaf.of_cover 𝒱 G
-  toIsFiniteSheaf := IsFiniteSheaf.of_openCover 𝒰 G
+    [∀ i, IsLocallyConstantSheaf ((Etale.upperStar A (𝒰.f i)).obj G)] :
+    IsLocallyConstantSheaf G := by
+  let 𝒱 : Cover.{u} etalePrecoverage X := 𝒰.changeProp (Q := @Etale) fun _ ↦ inferInstance
+  have : ∀ i, IsLocallyConstantSheaf ((Etale.upperStar A (𝒱.f i)).obj G) := fun i ↦
+    inferInstanceAs (IsLocallyConstantSheaf ((Etale.upperStar A (𝒰.f i)).obj G))
+  exact IsLocallyConstantSheaf.of_cover 𝒱 G
 
 end Finite
 
@@ -144,24 +143,32 @@ subscheme, the union of the interiors of the strata of a witnessing stratificati
 theorem IsConstructibleSheaf.exists_dense_open (F : Sheaf X.smallEtaleTopology A)
     [IsConstructibleSheaf F] :
     ∃ U : X.Opens, Dense (U : Set X) ∧
-      IsFiniteLocallyConstantSheaf ((Etale.upperStar A U.ι).obj F) := by
+      IsLocallyConstantSheaf ((Etale.upperStar A U.ι).obj F) ∧
+        IsFiniteSheaf ((Etale.upperStar A U.ι).obj F) := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)
   refine ⟨S.interiorUnion, S.dense_interiorUnion, ?_⟩
-  have h (i : ULift.{u} (Fin S.n)) : IsFiniteLocallyConstantSheaf
-      ((Etale.upperStar A (S.interiorUnionCover.f i)).obj
+  have h (i : ULift.{u} (Fin S.n)) :
+      IsLocallyConstantSheaf ((Etale.upperStar A (S.interiorUnionCover.f i)).obj
+        ((Etale.upperStar A S.interiorUnion.ι).obj F)) ∧
+      IsFiniteSheaf ((Etale.upperStar A (S.interiorUnionCover.f i)).obj
         ((Etale.upperStar A S.interiorUnion.ι).obj F)) := by
-    have := hS i.down
-    have h' : IsFiniteLocallyConstantSheaf
-        ((Etale.upperStar A (S.interiorOpens i.down).ι).obj F) := by
-      refine IsFiniteLocallyConstantSheaf.upperStar_of_range_subset _ (S.immersion i.down) ?_ F
+    obtain ⟨_, _⟩ := hS i.down
+    have hsub : Set.range (S.interiorOpens i.down).ι ⊆ Set.range (S.immersion i.down) := by
       rw [Scheme.Opens.range_ι, S.range_immersion]
       exact interior_subset
-    refine IsFiniteLocallyConstantSheaf.of_iso
-      (F := (Etale.upperStar A (S.interiorOpens i.down).ι).obj F) ?_
-    exact eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F)
-      (Scheme.homOfLE_ι X (le_iSup S.interiorOpens i.down)).symm) ≪≫
-      (Etale.upperStarComp A (S.interiorUnionCover.f i) S.interiorUnion.ι).app F
-  exact IsFiniteLocallyConstantSheaf.of_openCover S.interiorUnionCover _
+    have := IsLocallyConstantSheaf.upperStar_of_range_subset _ (S.immersion i.down) hsub F
+    have := IsFiniteSheaf.upperStar_of_range_subset _ (S.immersion i.down) hsub F
+    let e : (Etale.upperStar A (S.interiorOpens i.down).ι).obj F ≅
+        (Etale.upperStar A (S.interiorUnionCover.f i)).obj
+          ((Etale.upperStar A S.interiorUnion.ι).obj F) :=
+      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F)
+        (Scheme.homOfLE_ι X (le_iSup S.interiorOpens i.down)).symm) ≪≫
+        (Etale.upperStarComp A (S.interiorUnionCover.f i) S.interiorUnion.ι).app F
+    exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
+  have := fun i ↦ (h i).1
+  have := fun i ↦ (h i).2
+  exact ⟨IsLocallyConstantSheaf.of_openCover S.interiorUnionCover _,
+    IsFiniteSheaf.of_openCover S.interiorUnionCover _⟩
 
 end Generic
 

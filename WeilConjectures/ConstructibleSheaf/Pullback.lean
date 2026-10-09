@@ -16,10 +16,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 For a morphism of schemes `g : Y ⟶ X`, the pullback `g^*` sends locally constant sheaves to
 locally constant sheaves (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.upperStar`), finite
-sheaves to finite sheaves (`IsFiniteSheaf.upperStar`), finite locally constant sheaves to
-finite locally constant sheaves (`IsFiniteLocallyConstantSheaf.upperStar`) and constructible
-sheaves to constructible sheaves (`IsConstructibleSheaf.upperStar`); all four notions are
-invariant under isomorphism of sheaves.
+sheaves to finite sheaves (`IsFiniteSheaf.upperStar`), hence finite locally constant sheaves
+to finite locally constant sheaves, and constructible sheaves to constructible sheaves
+(`IsConstructibleSheaf.upperStar`); all these notions are invariant under isomorphism of
+sheaves.
 
 The restriction `F.over U` of `F` to the small étale site localized at an étale `X`-scheme `U`
 is identified with the pullback `(U.hom)^* F` on the small étale site of `U.left`
@@ -155,20 +155,6 @@ theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
       ((CategoryTheory.forget A).mapIso
         ((Etale.upperStarCompSheafFiberIso A g s).app F)).toEquiv.symm
 
-omit [HasSmallSiteSheafify A] in
-/-- Finite locally constant sheaves are invariant under isomorphism. -/
-lemma IsFiniteLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
-    [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf F' where
-  toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_iso i
-  toIsFiniteSheaf := IsFiniteSheaf.of_iso i
-
-/-- **Pullback of a finite locally constant sheaf is finite locally constant.** -/
-theorem IsFiniteLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
-    [IsFiniteLocallyConstantSheaf F] :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A g).obj F) where
-  toIsLocallyConstantSheaf := IsLocallyConstantSheaf.upperStar g F
-  toIsFiniteSheaf := IsFiniteSheaf.upperStar g F
-
 end Finite
 
 section Stratification
@@ -203,8 +189,10 @@ lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F �
     [IsConstructibleSheaf F] : IsConstructibleSheaf F' := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)
   exact ⟨S, fun j ↦
-    have := hS j
-    IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStar A (S.immersion j)).mapIso i)⟩
+    have := (hS j).1
+    have := (hS j).2
+    ⟨IsLocallyConstantSheaf.of_iso ((Etale.upperStar A (S.immersion j)).mapIso i),
+      IsFiniteSheaf.of_iso ((Etale.upperStar A (S.immersion j)).mapIso i)⟩⟩
 
 /-- **Pullback of a constructible sheaf is constructible**: the stratification pulls back, and
 the pullback of `F` to a pulled-back stratum is the pullback of the pullback of `F` to the
@@ -213,16 +201,19 @@ theorem IsConstructibleSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopo
     [IsConstructibleSheaf F] : IsConstructibleSheaf ((Etale.upperStar A g).obj F) := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)
   refine ⟨S.pullback g, fun j ↦ ?_⟩
-  have := hS j
-  have h : IsFiniteLocallyConstantSheaf ((Etale.upperStar A (pullback.fst (S.immersion j) g)).obj
-      ((Etale.upperStar A (S.immersion j)).obj F)) :=
-    IsFiniteLocallyConstantSheaf.upperStar _ _
-  refine IsFiniteLocallyConstantSheaf.of_iso
-    (F := (Etale.upperStar A (pullback.fst (S.immersion j) g)).obj
-      ((Etale.upperStar A (S.immersion j)).obj F)) ?_
-  exact ((Etale.upperStarComp A (pullback.fst (S.immersion j) g) (S.immersion j)).app F).symm ≪≫
-    eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition) ≪≫
-    (Etale.upperStarComp A (pullback.snd (S.immersion j) g) g).app F
+  have := (hS j).1
+  have := (hS j).2
+  let e : (Etale.upperStar A (pullback.fst (S.immersion j) g)).obj
+      ((Etale.upperStar A (S.immersion j)).obj F) ≅
+      (Etale.upperStar A ((S.pullback g).immersion j)).obj ((Etale.upperStar A g).obj F) :=
+    ((Etale.upperStarComp A (pullback.fst (S.immersion j) g) (S.immersion j)).app F).symm ≪≫
+      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition) ≪≫
+      (Etale.upperStarComp A (pullback.snd (S.immersion j) g) g).app F
+  have := IsLocallyConstantSheaf.upperStar (pullback.fst (S.immersion j) g)
+    ((Etale.upperStar A (S.immersion j)).obj F)
+  have := IsFiniteSheaf.upperStar (pullback.fst (S.immersion j) g)
+    ((Etale.upperStar A (S.immersion j)).obj F)
+  exact ⟨IsLocallyConstantSheaf.of_iso e, IsFiniteSheaf.of_iso e⟩
 
 end Constructible
 

@@ -808,6 +808,17 @@ lemma AffineSpace.oneSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.oneSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
+/-- `𝔾_{m,S}`, as the open subscheme of `𝔸¹_S` on which the coordinate `t` is invertible: the
+open complement of the zero section. -/
+noncomputable abbrev AffineSpace.multiplicativeGroupOpen (S : Scheme.{u}) :
+    (𝔸(ULift.{u} (Fin 1); S)).Opens :=
+  (𝔸(ULift.{u} (Fin 1); S)).basicOpen (AffineSpace.coord S (ULift.up 0))
+
+/-- The projection `𝔾_{m,S} ⟶ S`. -/
+noncomputable abbrev AffineSpace.multiplicativeGroupProj (S : Scheme.{u}) :
+    (AffineSpace.multiplicativeGroupOpen S).toScheme ⟶ S :=
+  (AffineSpace.multiplicativeGroupOpen S).ι ≫ (𝔸(ULift.{u} (Fin 1); S) ↘ S)
+
 /-- The zero section is compatible with base change: it is the base change of the zero
 section of `𝔸(n; T)` along any `f : S ⟶ T`. -/
 lemma AffineSpace.zeroSection_comp_map {n : Type u} {S T : Scheme.{u}} (f : S ⟶ T) :

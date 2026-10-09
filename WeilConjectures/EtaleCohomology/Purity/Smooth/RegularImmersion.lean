@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -29,15 +30,15 @@ is the cup product with supports `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` of the Kum
 to the frame class on every frame. Its adjoint is the morphism
 `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`.
 
-The statements about the fundamental class assume the rank-one datum with its normalisation,
-`[HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]`: without the normalisation the Kummer
-classes, and with them the fundamental class, could be zero.
+The Kummer classes, and with them the frame classes and the fundamental class, are the
+concrete ones built from the Kummer sequence (`AlgebraicGeometry.Etale.kummerClass`); they need
+the exponent of `Λ` to be invertible on `X`.
 
 Classes with supports are morphisms `Λ_X ⟶ Ri_! Ri^! L`, with the supported term `Ri_!` of the
 supported localization triangle; for the closed immersion `i` it is `Ri_*`. The coefficients
 `Λ_X(c)[2c]` are placed inside `Ri^!`: the blueprint's `Ri^! Λ_X(c)[2c]` is
 `Ri^! (Λ_X(c)[2c])`, which is `(Ri^! Λ_X)(c)[2c]` by the co-projection formula
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`).
+(`AlgebraicGeometry.Etale.isIso_coprojectionMap`).
 
 ## Main definitions
 
@@ -48,7 +49,7 @@ supported localization triangle; for the closed immersion `i` it is `Ri_*`. The 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`
+- `AlgebraicGeometry.Etale.coprojectionMap`, `AlgebraicGeometry.Etale.isIso_coprojectionMap`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion`,
   `isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`,
   `exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`:
@@ -75,14 +76,40 @@ open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Z : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z : Scheme.{u}}
+
+/-- Blueprint `sk-lem-coprojection`: Co-projection for a closed immersion
+
+The *co-projection map* of a closed immersion `i : Z ⟶ X`,
+
+`Ri^! K ⊗^L Li^* L ⟶ Ri^!(K ⊗^L L)`,
+
+the transpose under `Ri_! ⊣ Ri^!` of
+
+`Ri_!(Ri^! K ⊗^L Li^* L) ≅ Ri_! Ri^! K ⊗^L L ⟶ K ⊗^L L`,
+
+the inverse of the projection map `PF` at `(Ri^! K, L)`, invertible for a closed immersion
+(`AlgebraicGeometry.Etale.isIso_projectionMap_of_isClosedImmersion`), followed by the counit. -/
+noncomputable def coprojectionMap (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
+    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).obj
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L) ⟶
+      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) :=
+  haveI := isIso_projectionMap_of_isClosedImmersion Λ i
+  ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).homEquiv _ _)
+    (inv (((projectionMap (ModuleCat.{u + 1} Λ) i).app
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).app L) ≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).map
+        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K)).app L)
 
 /-- Blueprint `sk-lem-coprojection`: Co-projection for a closed immersion
 
 For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an object `L` of
-`D^b_{ctf}(X, Λ)` that is *invertible*, the canonical co-projection
+`D^b_{ctf}(X, Λ)` that is *invertible*, the co-projection map
 
-`Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L`
+`Ri^! K ⊗^L Li^* L ⟶ Ri^!(K ⊗^L L)`
 
 is an isomorphism: an invertible tensor factor passes through `i^!` at the cost of restricting
 it. Testing against an arbitrary `A ∈ D^b_{ctf}(Z, Λ)` and using `Ri_! = Ri_*`, the projection
@@ -90,19 +117,14 @@ formula for `Ri_*` and invertibility of `L`, the two Hom-functors agree naturall
 Yoneda gives the isomorphism.
 
 Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
-`Ri^!(K(m)[2m]) ≅ (Ri^! K)(m)[2m]`; taking `L = Lf^* B` for `B` invertible on `Y` and
-`f' = f ∘ i` it reads `Ri^!(K ⊗ Lf^* B) ≅ Ri^! K ⊗ Lf'^* B`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
-    (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
+`(Ri^! K)(m)[2m] ≅ Ri^!(K(m)[2m])`; taking `L = Lf^* B` for `B` invertible on `Y` and
+`f' = f ∘ i` it reads `Ri^! K ⊗ Lf'^* B ≅ Ri^!(K ⊗ Lf^* B)`. -/
+theorem isIso_coprojectionMap (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
-    (hLctf : DerivedCategory.boundedConstructibleFiniteTor Λ X L)
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hLctf : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L)
     (hL : DerivedCategory.isInvertible Λ X L) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
-          ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).obj
-        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
+    IsIso (coprojectionMap Λ i K L) :=
   sorry
 
 end Etale
@@ -159,18 +181,20 @@ variable {c : ℕ} {i : Z ⟶ X}
 the iterated cup product with supports of the Kummer boundaries
 (`AlgebraicGeometry.Etale.kummerBoundaryProduct`), supported on
 `V(f₁) ∩ ⋯ ∩ V(f_c) = Z_U`. -/
-noncomputable def frameClass [HasKummerClass Λ] (F : i.EtaleFrame c) :
+noncomputable def frameClass [HasInvertibleExponent Λ X] (F : i.EtaleFrame c) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
+  haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   kummerBoundaryProduct Λ F.f
 
 /-- The restriction of a class `γ ∈ H^{2c}_Z(X, Λ(c))` to a frame `(e : U ⟶ X, f)`, a class in
 `H^{2c}_{Z_U}(U, Λ(c))`: the restriction of supports along the étale `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`), with `Λ_U ≅ Le^* Λ_X` and
 `Le^* (Λ_X(c)[2c]) ≅ Λ_U(c)[2c]`. -/
-noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i] (F : i.EtaleFrame c)
+noncomputable def frameRestriction [HasInvertibleExponent Λ X] [IsClosedImmersion i]
+    (F : i.EtaleFrame c)
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :
     constantComplex Λ F.U ⟶
@@ -180,7 +204,7 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i] (F : 
   restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
-variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ X]
+variable [HasInvertibleExponent Λ X]
   {k : Type u} [Field k] [PerfectField k] (c) (i) [IsRegularImmersion c i]
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
@@ -333,8 +357,7 @@ The hypotheses on the product are derived: `i₁₂` is a regular immersion of c
 `c₁ + c₂` (`AlgebraicGeometry.IsRegularImmersion.pullback_map`), `Z₁ ×_k Z₂` is regular
 (`AlgebraicGeometry.isRegularLocalRing_stalk_pullback`), `P` is smooth over `k` and the exponent
 of `Λ` is invertible on `P`. -/
-theorem fundamentalClass_eq_cupWithSupportsTateObject [HasKummerClass Λ]
-    [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k] [PerfectField k]
+theorem fundamentalClass_eq_cupWithSupportsTateObject {k : Type u} [Field k] [PerfectField k]
     {X₁ X₂ Z₁ Z₂ : Scheme.{u}} (c₁ c₂ : ℕ)
     (i₁ : Z₁ ⟶ X₁) (i₂ : Z₂ ⟶ X₂) [IsRegularImmersion c₁ i₁] [IsRegularImmersion c₂ i₂]
     (a₁ : X₁ ⟶ Spec (.of k)) (a₂ : X₂ ⟶ Spec (.of k)) [Smooth a₁] [Smooth a₂]
@@ -380,7 +403,7 @@ Smooth purity computes `ω_{a_X}` and `ω_{a_Z}`, and the co-projection formula 
 the former into the latter. The relative dimension of `a_Z` is carried as `m` with
 `hm : m + c = n` rather than as `n - c`: truncated subtraction would silently read `0` when
 `c > n`. -/
-theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [Finite Λ] [HasTateTwist Λ]
+theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [Finite Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
     [IsRegularImmersion c i] [HasCompactification i] (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
     [SmoothOfRelativeDimension n aX] [HasCompactification aX]

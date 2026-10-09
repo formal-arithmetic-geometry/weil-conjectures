@@ -21,8 +21,7 @@ trivialising covers (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.biprod`); 
 functors are left adjoints (to the skyscraper functors) and the forgetful functor of the
 coefficient category preserves finite products, so the stalk of a direct sum is the product of
 the stalks and a direct sum of finite sheaves is finite (`IsFiniteSheaf.biprod`). Together,
-finite direct sums of finite locally constant sheaves are finite locally constant
-(`IsFiniteLocallyConstantSheaf.biprod`).
+finite direct sums of finite locally constant sheaves are finite locally constant.
 (blueprint: `lemma:constructible-flc-biproduct`)
 
 -/
@@ -145,14 +144,6 @@ theorem IsFiniteSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
           biprod.isoProd _ _) ≪≫
         PreservesLimitPair.iso (CategoryTheory.forget A) _ _
     exact Finite.of_equiv _ (e ≪≫ Types.binaryProductIso _ _).toEquiv.symm
-
-/-- **A finite direct sum of finite locally constant sheaves is finite locally constant.**
-(blueprint: `lemma:constructible-flc-biproduct`) -/
-theorem IsFiniteLocallyConstantSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
-    [IsFiniteLocallyConstantSheaf F] [IsFiniteLocallyConstantSheaf G] :
-    IsFiniteLocallyConstantSheaf (F ⊞ G) where
-  toIsLocallyConstantSheaf := IsLocallyConstantSheaf.biprod F G
-  toIsFiniteSheaf := IsFiniteSheaf.biprod F G
 
 end Finite
 
