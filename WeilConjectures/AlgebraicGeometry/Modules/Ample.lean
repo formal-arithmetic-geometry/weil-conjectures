@@ -499,7 +499,7 @@ theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
     (hj : Set.range j.base = (J.support : Set X)ᶜ) :
     IsAffine V := by
   have := hJ.isInvertible_dual_toModules
-  obtain ⟨m, hm, n, i, hn, hi, -, ⟨e⟩⟩ := hample
+  obtain ⟨-, m, hm, n, i, hn, hi, -, ⟨e⟩⟩ := hample
   obtain ⟨s, hs⟩ := hJ.exists_zeroLocus_eq
   let L := ProjectiveSpace.twistRestrict i 1
   have : L.IsInvertible := Scheme.Modules.IsInvertible.of_iso e.symm
