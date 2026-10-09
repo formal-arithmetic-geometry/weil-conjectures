@@ -57,7 +57,8 @@ noncomputable def monObjOfPresheaf : MonObj S :=
 multiplication along the comparison `S ⊗ₚ S ⟶ S ⊗ S`. -/
 lemma μ_comp_map_mul :
     letI := monObjOfPresheaf S
-    Functor.LaxMonoidal.μ (sheafToPresheaf J A) S S ≫ (sheafToPresheaf J A).map μ[S] = μ[S.obj] := by
+    Functor.LaxMonoidal.μ (sheafToPresheaf J A) S S ≫ (sheafToPresheaf J A).map μ[S] =
+      μ[S.obj] := by
   let adj := sheafificationAdjunction J A
   let e : (presheafToSheaf J A).obj S.obj ≅ S := asIso (adj.counit.app S)
   have hμ : Functor.LaxMonoidal.μ (sheafToPresheaf J A) S S = adj.homEquiv _ _
@@ -106,7 +107,8 @@ lemma tensor_hom_ext {S T U : Sheaf J A} {f g : S ⊗ T ⟶ U}
   let φ : (presheafToSheaf J A).obj (S.obj ⊗ T.obj) ⟶ S ⊗ T :=
     δ (presheafToSheaf J A) S.obj T.obj ≫ (adj.counit.app S ⊗ₘ adj.counit.app T)
   have : IsIso φ := by dsimp only [φ]; infer_instance
-  have hμ : Functor.LaxMonoidal.μ (sheafToPresheaf J A) S T = adj.homEquiv (S.obj ⊗ T.obj) (S ⊗ T) φ :=
+  have hμ : Functor.LaxMonoidal.μ (sheafToPresheaf J A) S T =
+      adj.homEquiv (S.obj ⊗ T.obj) (S ⊗ T) φ :=
     rfl
   rw [hμ] at h
   erw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_right] at h
@@ -177,7 +179,10 @@ lemma μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app (S T : Sheaf
     (LaxMonoidal.μ (sheafToPresheaf K A) S T).app (F.op.obj U) := by
   have := congr_app (μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous F J K S T) U
   simp only [NatTrans.comp_app] at this
-  exact this.trans (by simp; exact Category.id_comp _)
+  refine this.trans ?_
+  simp only [ObjectProperty.ι_obj, CategoryTheory.Monoidal.tensorObj_obj, whiskeringLeft_obj_obj,
+    comp_obj, op_obj, Monoidal.whiskeringLeft_μ_app, whiskeringLeft_obj_map, whiskerLeft_app]
+  exact Category.id_comp _
 
 end CategoryTheory.Functor
 

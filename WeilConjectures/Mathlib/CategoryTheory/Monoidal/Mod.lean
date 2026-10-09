@@ -138,7 +138,8 @@ def mapMod : Mod C A ⥤ Mod D (F.obj A) where
     letI := F.modObjObj (A := A) M.X
     letI := F.modObjObj (A := A) N.X
     homMk (F.map f.hom) (by
-      change (LaxMonoidal.μ F A M.X ≫ F.map (act M.X)) ≫ _ = _ ≫ LaxMonoidal.μ F A N.X ≫ F.map (act N.X)
+      change (LaxMonoidal.μ F A M.X ≫ F.map (act M.X)) ≫ _ =
+        _ ≫ LaxMonoidal.μ F A N.X ≫ F.map (act N.X)
       rw [Category.assoc, ← F.map_comp, act_hom, F.map_comp, μ_natural_right_assoc])
 
 end Functor
@@ -250,6 +251,7 @@ noncomputable def modLeft : Mod C A ⥤ Mod D B :=
 noncomputable def modRight (_adj : F ⊣ G) (φ : A ⟶ G.obj B) [IsMonHom φ] : Mod D B ⥤ Mod C A :=
   G.mapMod B ⋙ comap φ
 
+omit [G.LaxMonoidal] [adj.IsMonoidal] [IsMonHom φ] in
 variable {adj φ} in
 /-- A morphism `F M ⟶ N` is `B`-linear iff `F (A ⊗ M) ⟶ F M ⟶ N` agrees with
 `F (A ⊗ M) ⟶ F A ⊗ F M ⟶ B ⊗ N ⟶ N`. -/
@@ -268,6 +270,7 @@ lemma modLeft_linear_iff {M : Mod C A} {N : Mod D B} (f : F.obj M.X ⟶ N.X) :
     simp only [Category.assoc, ← comp_whiskerRight_assoc, IsIso.inv_hom_id, id_whiskerRight,
       Category.id_comp]
 
+omit [IsIso ((adj.homEquiv A B).symm φ)] [IsMonHom ((adj.homEquiv A B).symm φ)] in
 variable {adj φ} in
 /-- A morphism `M ⟶ G N` is `A`-linear iff its adjoint `F M ⟶ N` satisfies the condition of
 `CategoryTheory.Adjunction.modLeft_linear_iff`. -/
@@ -426,7 +429,8 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
 /-- A monoid isomorphism `φ : M ≅ B` identifies `M`, as a `B`-module along `φ⁻¹`, with the
 regular `B`-module. -/
 @[simps!]
-noncomputable def regularIsoOfIsIso {M B : C} [MonObj M] [MonObj B] (φ : M ⟶ B) [IsIso φ] [IsMonHom φ] :
+noncomputable def regularIsoOfIsIso {M B : C} [MonObj M] [MonObj B] (φ : M ⟶ B) [IsIso φ]
+    [IsMonHom φ] :
     (comap (D := C) (inv φ)).obj (regular M) ≅ regular B :=
   letI : IsMonHom (inv φ) := inferInstance
   isoMk (asIso φ) (by

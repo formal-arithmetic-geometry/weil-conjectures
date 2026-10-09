@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 Frobenius
 
 This is the counterpart, for sheaves of modules over the constant `ℓ`-adic sheaves
-(`AlgebraicGeometry.ProEtale.AdicSheaf`), of `WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius`.
+(`AlgebraicGeometry.ProEtale.AdicSheaf`), of
+`WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius`.
 For a morphism `φ : X₀ ⟶ Y₀` of schemes over a finite field `k`, with base change
 `φ̄ : X ⟶ Y` to the geometric fibers, the pushforward and the pullback along `φ̄` commute with
 the Frobenius pullbacks `Fr^* = (Fr⁻¹)_*`.

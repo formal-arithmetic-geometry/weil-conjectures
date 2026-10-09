@@ -99,17 +99,17 @@ def freeForgetAdjunction : free A ⊣ forget A :=
             have hc : A ◁ (λ_ X).inv ≫ A ◁ η ▷ X ≫ (α_ A A X).inv ≫ μ ▷ X = 𝟙 (A ⊗ X) := by
               rw [associator_inv_naturality_middle_assoc, ← comp_whiskerRight, MonObj.mul_one]
               monoidal
-            show (freeDesc A (M := M) ((λ_ X).inv ≫ η ▷ X ≫ f.hom)).hom = f.hom
+            change (freeDesc A (M := M) ((λ_ X).inv ≫ η ▷ X ≫ f.hom)).hom = f.hom
             rw [freeDesc_hom, MonoidalCategory.whiskerLeft_comp_assoc,
               MonoidalCategory.whiskerLeft_comp_assoc, ← hf]
             simp only [← Category.assoc] at hc ⊢
             rw [hc, Category.id_comp])
           right_inv g := unit_freeDesc A g }
       homEquiv_naturality_left_symm {X X' M} f g := Mod.hom_ext _ _ (by
-        show (freeDesc A (M := M) (f ≫ g)).hom = A ◁ f ≫ (freeDesc A (M := M) g).hom
+        change (freeDesc A (M := M) (f ≫ g)).hom = A ◁ f ≫ (freeDesc A (M := M) g).hom
         erw [freeDesc_hom, freeDesc_hom, MonoidalCategory.whiskerLeft_comp_assoc])
       homEquiv_naturality_right {X M M'} f g := by
-        show (λ_ X).inv ≫ η ▷ X ≫ (f ≫ g).hom = ((λ_ X).inv ≫ η ▷ X ≫ f.hom) ≫ g.hom
+        change (λ_ X).inv ≫ η ▷ X ≫ (f ≫ g).hom = ((λ_ X).inv ≫ η ▷ X ≫ f.hom) ≫ g.hom
         simp only [comp_hom', Category.assoc] }
 
 end Free

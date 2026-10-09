@@ -128,6 +128,7 @@ def tensorRightRightAct (X : C) : tensorRight A (A ⊗ X) ⟶ tensorRight A X wh
     rw [associator_inv_naturality_left_assoc, ← comp_whiskerRight, key, comp_whiskerRight,
       Category.assoc])
 
+omit [BraidedCategory C] [IsCommMonObj A] in
 @[reassoc]
 lemma tensorRightMap_comp {X Y Z : C} (g : X ⟶ Y) (h : Y ⟶ Z) :
     tensorRightMap A (g ≫ h) = tensorRightMap A g ≫ tensorRightMap A h := by
@@ -165,9 +166,13 @@ noncomputable def tensorLeftDiagramMap {M M' : Mod C A} (f : M ⟶ M') :
 noncomputable def tensorLeftMap {M M' : Mod C A} (f : M ⟶ M') : tensorLeft M ⟶ tensorLeft M' :=
   Functor.whiskerRight ((flipFunctor _ _ _).map (tensorLeftDiagramMap A f)) colim
 
+omit [BraidedCategory C] [IsCommMonObj A] [HasColimitsOfShape WalkingParallelPair C]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)] in
 lemma tensorRightMap_id (X : C) : tensorRightMap A (𝟙 X) = 𝟙 _ :=
-  NatTrans.ext (funext fun P ↦ Mod.hom_ext _ _ (MonoidalCategory.whiskerLeft_id _ _))
+  NatTrans.ext (funext fun _ ↦ Mod.hom_ext _ _ (MonoidalCategory.whiskerLeft_id _ _))
 
+omit [HasColimitsOfShape WalkingParallelPair C]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)] in
 lemma tensorLeftDiagramMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
     tensorLeftDiagramMap A (f ≫ g) = tensorLeftDiagramMap A f ≫ tensorLeftDiagramMap A g := by
   ext j : 2
@@ -176,6 +181,8 @@ lemma tensorLeftDiagramMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ 
       (tensorRightMap_comp _ _)
   · exact tensorRightMap_comp _ _
 
+omit [HasColimitsOfShape WalkingParallelPair C]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)] in
 lemma tensorLeftDiagramMap_id (M : Mod C A) : tensorLeftDiagramMap A (𝟙 M) = 𝟙 _ := by
   ext j : 2
   cases j
@@ -184,7 +191,8 @@ lemma tensorLeftDiagramMap_id (M : Mod C A) : tensorLeftDiagramMap A (𝟙 M) = 
   · exact tensorRightMap_id _
 
 /-- An isomorphism `M ≅ M'` induces `- ⊗_A M ≅ - ⊗_A M'`. -/
-noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') : tensorLeft M ≅ tensorLeft M' where
+noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') :
+    tensorLeft M ≅ tensorLeft M' where
   hom := tensorLeftMap e.hom
   inv := tensorLeftMap e.inv
   hom_inv_id := by
@@ -203,7 +211,8 @@ end TensorLeft
 section Hom
 
 variable [BraidedCategory C] [IsCommMonObj A] [Abelian C] [MonoidalPreadditive C]
-  [IsGrothendieckAbelian.{v} C] [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
+  [IsGrothendieckAbelian.{v} C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
 
 attribute [local instance] Mod.isGrothendieckAbelian
@@ -299,6 +308,7 @@ def tensorRightMapIso {X Y : C} (e : X ≅ Y) : tensorRight A X ≅ tensorRight 
     rw [← tensorRightMap_comp, e.inv_hom_id]
     exact NatTrans.ext (funext fun P ↦ Mod.hom_ext _ _ (MonoidalCategory.whiskerLeft_id _ _))
 
+omit [BraidedCategory C] [IsCommMonObj A] in
 lemma map_tensorRightMap_act_comp (M P : Mod C A) :
     ((mapModComap ρ).map ((tensorRightMap A (act M.X)).app P) ≫
         ((tensorRightCompMapModComapIso ρ M.X).app P).hom).hom =
@@ -385,7 +395,8 @@ section HomFunctor
 open scoped Obj
 
 variable [BraidedCategory C] [IsCommMonObj A] [Abelian C] [MonoidalPreadditive C]
-  [IsGrothendieckAbelian.{v} C] [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
+  [IsGrothendieckAbelian.{v} C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
   {G : C ⥤ C} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
   (ρ : A ⟶ G.obj A) [IsMonHom ρ] [IsIso ρ]

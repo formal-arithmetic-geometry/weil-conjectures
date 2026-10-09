@@ -279,7 +279,8 @@ noncomputable def adicLowerStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g 
 
 lemma adicLowerStarCongr_hom_app_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
     (M : AdicSheaf l Z) :
-    ((adicLowerStarCongr l h).hom.app M).hom = (lowerStarCongr (WeilCoefficients.{u} l) h).hom.app M.X :=
+    ((adicLowerStarCongr l h).hom.app M).hom =
+      (lowerStarCongr (WeilCoefficients.{u} l) h).hom.app M.X :=
   rfl
 
 lemma adicLowerStarComp_hom_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
