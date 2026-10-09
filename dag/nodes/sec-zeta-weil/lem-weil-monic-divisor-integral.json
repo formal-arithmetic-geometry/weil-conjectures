@@ -1,0 +1,53 @@
+{
+ "id": "lem-weil-monic-divisor-integral",
+ "kind": "statement",
+ "title": "A monic rational divisor of a monic integer polynomial is integral",
+ "statement": "Let $F\\in\\mathbf Z[T]$ be monic and $G\\in\\mathbf Q[T]$ monic [def-weil-polynomial-ring] such that $G$ divides the image of $F$ in $\\mathbf Q[T]$ [def-weil-coefficientwise-ring-hom-map]. Then $G$ has integer coefficients: $G$ is the image of a (monic) polynomial in $\\mathbf Z[T]$. (Gauss's lemma, in the form: $\\mathbf Z$ is integrally closed in $\\mathbf Q$, and the coefficients of a monic factor of a monic integer polynomial are integral over $\\mathbf Z$, being polynomials in its roots.)",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Ch. II §27, proof of 27.14(c), p. 159 (\"the inverse roots of $P_{r,\\ell}(t)$ are algebraic integers, which implies that $P_{r,\\ell}(t)\\in1+t\\mathbf Z[t]$\"); used as Gauss's lemma in the blueprint proof of prop-weil-integral-rational-series, fourth paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/GaussLemma.lean",
+   "results": "IsIntegrallyClosed.eq_map_mul_C_of_dvd (line 80: R integrally closed, K = Frac R, f : R[X] monic, g : K[X], g ∣ f.map (algebraMap R K) → ∃ g' : R[X], g'.map (algebraMap R K) * C g.leadingCoeff = g); Monic.dvd_iff_fraction_map_dvd_fraction_map (207, both monic over R); IsPrimitive.dvd_iff_fraction_map_dvd_fraction_map (309); IsPrimitive.Int.dvd_iff_map_cast_dvd_map_cast (324)",
+   "date": "2026-10-09",
+   "verdict": "match: IsIntegrallyClosed.eq_map_mul_C_of_dvd"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*IsIntegrallyClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/RationalRoot.lean",
+   "results": "UniqueFactorizationMonoid.instIsIntegrallyClosed (line 139): a UFD is integrally closed, so ℤ is",
+   "date": "2026-10-09",
+   "verdict": "instance needed for ℤ"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegrallyClosed.eq_map_mul_C_of_dvd",
+  "file": "Mathlib/RingTheory/Polynomial/GaussLemma.lean",
+  "how": "specializes in one line: R = ℤ, K = ℚ (ℤ integrally closed by UniqueFactorizationMonoid.instIsIntegrallyClosed), and C (leadingCoeff G) = C 1 = 1 since G is monic"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-integral-rational-series",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

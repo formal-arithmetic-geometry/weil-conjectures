@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-cayley-hamilton-free-module",
+ "kind": "statement",
+ "title": "Cayley–Hamilton for a free module of finite rank",
+ "statement": "Let $R$ be a commutative ring, $T$ an indeterminate with polynomial ring $R[T]$ [def-weil-polynomial-ring], $L$ a free $R$-module of finite rank $r$ and $\\varphi:L\\to L$ an $R$-linear endomorphism. Let $M\\in M_r(R)$ be the matrix of $\\varphi$ in a basis of $L$ and $\\chi_\\varphi(T)=\\det(T\\,I_r-M)\\in R[T]$ (independent of the basis). Then $\\chi_\\varphi$ is monic of degree $r$, and writing $\\chi_\\varphi=\\sum_{i=0}^rc_iT^i$ one has $\\sum_{i=0}^rc_i\\varphi^i=0$ as an endomorphism of $L$ (Cayley–Hamilton). For $R=\\mathbf Z$, $\\chi_\\varphi\\in\\mathbf Z[T]$ is a monic polynomial with integer coefficients.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+  "place": "## Proof, third paragraph (integer matrix $M$ of the shift on the lattice); the slopmaster2 Lean uses it in exists_monic_sum_coeff_mul_eq_zero, WeilConjectures/ZetaLinearAlgebra/IntegralRecurrence.lean lines 147-184"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def charpoly\\|charpoly_monic\\|aeval_self_charpoly\\|charpoly_natDegree\\|charpoly_def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+   "results": "LinearMap.charpoly (line 44, for Module.Free and Module.Finite over a comm. ring), charpoly_def (47: charpoly of the matrix in the chosen basis), charpoly_monic (72), charpoly_natDegree (76, = finrank), aeval_self_charpoly (89)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem aeval_self_charpoly\\|theorem charpoly_monic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/*.lean",
+   "results": "Matrix.aeval_self_charpoly (Basic.lean:216), Matrix.charpoly_monic (Coeff.lean:120)",
+   "date": "2026-10-09",
+   "verdict": "match (matrix form)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.aeval_self_charpoly",
+  "file": "Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+  "how": "exact, with LinearMap.charpoly_monic and LinearMap.charpoly_natDegree for monic of degree r = finrank, and LinearMap.charpoly_def for the matrix description"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-integral-rational-series",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

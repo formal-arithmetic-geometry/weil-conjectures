@@ -62,7 +62,7 @@ def tex_names(node_ids):
 
 def hand_names(d):
     """Declarations a worker attached by hand to a node it created (`created` set): the names in its lean_audit decls."""
-    if not d.get("created"):
+    if not d.get("created") and not (d.get("lean") or {}).get("note", "").startswith("attached by the lead"):
         return []
     out = []
     for a in (d.get("lean_audit") or {}).values():

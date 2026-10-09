@@ -1,0 +1,43 @@
+{
+ "id": "lem-weil-subgroup-finite-free-abelian-group-free",
+ "kind": "statement",
+ "title": "Subgroups of a finite free abelian group are finite free",
+ "statement": "Let $J$ be a finite set and $\\mathbf Z^J$ the free abelian group of functions $J\\to\\mathbf Z$. Every subgroup $N\\subseteq\\mathbf Z^J$ is a free abelian group of finite rank $r\\leq|J|$: there are $e_1,\\ldots,e_r\\in N$ such that every element of $N$ is $\\sum_ia_ie_i$ for unique $a_1,\\ldots,a_r\\in\\mathbf Z$. Consequently an abelian group isomorphic to a subgroup of $\\mathbf Z^J$ is free of finite rank.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+  "place": "## Proof, second paragraph (\"A subgroup of $\\mathbf Z^r$ is finite free\", proved there by induction on $r$)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'basisOfPid\\|free_of_finite_type_torsion_free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/PID.lean",
+   "results": "Submodule.basisOfPid (line 300): for a PID R, a basis b : Basis ι R M with ι finite and N : Submodule R M, a basis Basis (Fin n) R N; Module.free_of_finite_type_torsion_free' (line 387); Submodule.basisOfPidOfLE",
+   "date": "2026-10-09",
+   "verdict": "match: Submodule.basisOfPid with R = ℤ, M = J → ℤ, b = Pi.basisFun ℤ J"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.basisOfPid",
+  "file": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "how": "specializes in one line: `Submodule.basisOfPid (Pi.basisFun ℤ J) N : Σ n, Basis (Fin n) ℤ N` (ℤ is a PID); the bound n ≤ |J| is `Submodule.finrank_le` / `finrank_le_finrank_of_le`; transport along an isomorphism by `Basis.map`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-integral-rational-series",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

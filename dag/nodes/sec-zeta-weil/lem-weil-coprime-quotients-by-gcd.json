@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-coprime-quotients-by-gcd",
+ "kind": "statement",
+ "title": "Dividing two polynomials by their gcd leaves coprime quotients",
+ "statement": "Let $K$ be a field [def-weil-field] and $a,b\\in K[T]$ [def-weil-polynomial-ring] with $b\\neq0$. Then there are $g,A_1,B_1\\in K[T]$ with $g\\neq0$, $a=gA_1$, $b=gB_1$, and $A_1,B_1$ coprime [def-weil-coprime-polynomials]; one may take $g=\\gcd(a,b)$, $A_1=a/g$, $B_1=b/g$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+  "place": "## Proof, fourth paragraph (\"the greatest common divisor of $A_0,B_0$ over $\\mathbf Q[T]$ ... the two quotients are coprime\")"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-coprime-polynomials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isCoprime_div_gcd_div_gcd\\|mul_div_cancel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/EuclideanDomain.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/EuclideanDomain/Basic.lean",
+   "results": "isCoprime_div_gcd_div_gcd (RingTheory/EuclideanDomain.lean:50: q ≠ 0 → IsCoprime (p / gcd p q) (q / gcd p q)); EuclideanDomain.mul_div_cancel' (Algebra/EuclideanDomain/Basic.lean:100); gcd_dvd_left/right, gcd_ne_zero_of_right",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isCoprime_div_gcd_div_gcd",
+  "file": "Mathlib/RingTheory/EuclideanDomain.lean",
+  "how": "specializes in one line: K[X] is a Euclidean domain with GCDMonoid; g = gcd a b ≠ 0 by gcd_ne_zero_of_right, and g * (a / g) = a, g * (b / g) = b by EuclideanDomain.mul_div_cancel' with gcd_dvd_left/right"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-integral-rational-series",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
