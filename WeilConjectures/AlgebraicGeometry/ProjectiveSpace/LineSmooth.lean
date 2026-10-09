@@ -103,7 +103,6 @@ namespace AlgebraicGeometry.ProjectiveLine
 
 open ProjectiveSpace
 
-set_option maxHeartbeats 400000 in
 /-- **The `K`-point `[1 : t]` in the chart `D₊(T₀)`.** For a field `K` over `k` and `t ∈ K`, the
 `K`-point `[1 : t]` of `ℙ¹_k` factors through the chart `D₊(T₀) ≅ Spec k[T]` as `Spec` of the
 evaluation `k[T] → K`, `T ↦ t`. -/
@@ -195,7 +194,6 @@ theorem homOfSections_eq_SpecMap_comp {k K : Type u} [Field k] [Field K] (φ : k
     Scheme.Hom.resLE_comp_ι, IsIso.inv_hom_id_assoc]
   rfl
 
-set_option maxHeartbeats 400000 in
 /-- **A transcendental point of `ℙ¹` is not closed.** Let `K` be a field over `k` and `t ∈ K`
 transcendental over `k`. The `K`-point `[1 : t]` of `ℙ¹_k` is not a closed point: in the chart
 `D₊(T₀) = Spec k[T]` it is the prime `ker (T ↦ t) = 0`, which is not maximal. -/
@@ -323,8 +321,8 @@ theorem not_isClosed_homOfSections {k K : Type u} [Field k] [Field K] (φ : k �
       have : a = 1 := by grind
       subst this; rfl⟩
   exact Polynomial.not_isField k
-    ((MvPolynomial.uniqueAlgEquiv (R := k) {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩}).symm.toMulEquiv.isField
-      hc)
+    ((MvPolynomial.uniqueAlgEquiv (R := k)
+      {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩}).symm.toMulEquiv.isField hc)
 
 end AlgebraicGeometry.ProjectiveLine
 
@@ -386,7 +384,8 @@ theorem fieldRange_descResidueField_homOfSections {k K : Type u} [Field k] [Fiel
       (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)) = ⊤) :
     (Scheme.descResidueField (Scheme.stalkClosedPointTo (homOfSections
       (Spec.map (CommRingCat.ofHom φ))
-      (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)) hs))).hom.fieldRange =
+      (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down))
+        hs))).hom.fieldRange =
       Subfield.closure (Set.range φ ∪ {t}) := by
   set j := (standardOpenIso (ULift.{u} (Fin 2)) (Spec (.of k)) ⟨0⟩ ≪≫
     AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩} (.of k)).inv ≫

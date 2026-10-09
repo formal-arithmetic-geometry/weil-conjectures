@@ -216,16 +216,17 @@ noncomputable abbrev functionFieldCoordinates [IsIntegral X] (t : X.functionFiel
     ULift.{u} (Fin 2) → Γ(Spec X.functionField, ⊤) :=
   fun i ↦ (Scheme.ΓSpecIso X.functionField).inv (![1, t] i.down)
 
+set_option linter.unusedSectionVars false in
 /-- **Rational functions define morphisms to `ℙ¹`.** Let `X` be a proper smooth integral curve
 over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over
-`k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`. On
-an affine open `Spec A` of `X` one writes `t = a / b` with `(a, b) = A`, using that the local
-rings at closed points are discrete valuation rings, and maps `x₀ ↦ b`, `x₁ ↦ a`; these glue since
-`ℙ¹_k` is separated.
+`k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`.
+The local rings of `X` are discrete valuation rings or fields (`valuationRing_stalk`), so by the
+valuative criterion for the proper `ℙ¹_k` this point extends over every point of `X`
+(`exists_hom_of_valuationRing_stalk`).
 
 (blueprint: `lem-sc-rational-function-morphism`) -/
 theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functionField)
-    (ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
+    (_ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
       ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
         (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs := by
