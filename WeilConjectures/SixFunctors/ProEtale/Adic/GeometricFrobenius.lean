@@ -66,7 +66,7 @@ lemma adicLowerStarEquivalence_inverse (e : X ≅ Y) :
 adjoint to the pushforward along `e.hom`. -/
 noncomputable def adicUpperStarIsoLowerStarInv (e : X ≅ Y) : (e.hom)^*ᵃ[l] ≅ (e.inv)_*ᵃ[l] :=
   (adicUpperStarLowerStarAdjunction l e.hom).leftAdjointUniq
-    (adicLowerStarEquivalence l e.symm).toAdjunction
+    (adicLowerStarEquivalence l e).symm.toAdjunction
 
 instance isEquivalence_adicLowerStar (g : X ⟶ Y) [IsIso g] : (g)_*ᵃ[l].IsEquivalence :=
   (adicLowerStarEquivalence l (asIso g)).isEquivalence_functor

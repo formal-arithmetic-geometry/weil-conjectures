@@ -8,10 +8,10 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 public import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
 public import Mathlib.CategoryTheory.Adjunction.Triple
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 
 /-!
 # Extension by zero of sheaves of modules over the constant `ℓ`-adic sheaf
@@ -24,9 +24,18 @@ theorem in the Grothendieck abelian category of sheaves of `ℚ̄_ℓ,X`-modules
 is fully faithful (the counit of `j^* ⊣ j_*` is invertible), hence so is `j_!`, and `j_! F`
 vanishes along every morphism missing the range of `j`.
 
+On underlying sheaves, `j_!` is the extension by zero of sheaves
+(`AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekComparison`), hence exact. The point is
+that the underlying sheaf of `j_! M` is an extension by zero, i.e. the counit of `j_! ⊣ j^*` on
+sheaves is invertible there. For a free module `ℚ̄_ℓ,U ⊗ P` the underlying sheaf of `j_!` is
+`ℚ̄_ℓ,X ⊗ j_! P`, the tensor product of a sheaf with a presheaf vanishing away from `U`,
+sheafified; and every module is a cokernel of a morphism of free modules.
+
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriek`: `j_!`, with notation `(j)_!ᵃ[l]`.
+- `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekComparison`: the comparison
+  `j_! M.X ⟶ (j_! M).X`, an isomorphism, giving the exactness of `j_!`.
 - `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekToLowerStar`: the comparison
   `j_! ⟶ j_*`.
 -/
@@ -35,7 +44,7 @@ vanishes along every morphism missing the range of `j`.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -109,32 +118,96 @@ instance : IsIso (adicOpenImmersionLowerShriekAdjunction l j).unit :=
     ⟨adicOpenImmersionLowerShriekAdjunction l j, adicUpperStarLowerStarAdjunction l j⟩).2
     inferInstance
 
-/-- The pullback along an open immersion sends cofree sheaves of `ℚ̄_ℓ,X`-modules `[ℚ̄_ℓ,X, Y]` to
-cofree sheaves of modules, the pullback commuting with internal homs
-(`AlgebraicGeometry.ProEtale.isIso_ihomComparison_upperStar`). -/
-noncomputable def adicUpperStarCofreeIso :
-    Mod.cofree (adicConstantSheaf l X) ⋙ (j)^*ᵃ[l] ≅
-      (j)^*[WeilCoefficients.{u} l] ⋙ Mod.cofree (adicConstantSheaf l U) :=
-  have := isIso_ihomComparison_upperStar (WeilCoefficients.{u} l) j (adicConstantSheaf l X)
-  (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) j).modLeftCofreeIso
-    (adicConstantSheafToLowerStar l j)
+/-- The tensor product of a sheaf with an extension by zero is again an extension by zero: the
+counit of `j_! ⊣ j^*` is invertible at `B ⊗ j_! P`. Before sheafification, `B ⊗ j_! P` is the
+tensor product of `B` with a presheaf vanishing away from `U`. -/
+lemma isIso_openImmersionLowerShriek_counit_app_tensor
+    {G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l) ⥤
+      Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)}
+    (adj : (j)_!open[WeilCoefficients.{u} l] ⊣ G)
+    (B : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))
+    (P : Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)) :
+    IsIso (adj.counit.app (B ⊗ (j)_!open[WeilCoefficients.{u} l].obj P)) := by
+  let L := (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op
+  let T := L.lan.obj P.obj
+  have hR (W) (hW : IsEmpty (CostructuredArrow L W)) : IsZero ((B.obj ⊗ T).obj W) :=
+    isZero_tensorObj_of_isZero_right _ (L.isInitialLanObjObj P.obj hW).isZero
+  have e : B ⊗ (j)_!open[WeilCoefficients.{u} l].obj P ≅
+      (presheafToSheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)).obj (B.obj ⊗ T) :=
+    whiskerRightIso (asIso ((sheafificationAdjunction (Scheme.ProEt.topology X)
+      (WeilCoefficients.{u} l)).counit.app B)).symm _ ≪≫
+      Functor.Monoidal.μIso (presheafToSheaf (Scheme.ProEt.topology X)
+        (WeilCoefficients.{u} l)) B.obj T
+  exact adj.isIso_counit_app_of_iso
+    (e ≪≫ presheafToSheafObjIsoOpenImmersionLowerShriek _ j _ hR)
 
-/-- The underlying sheaf of `j_! F` is the extension by zero of the underlying sheaf of `F`:
-both functors are left adjoint to `Y ↦ j^* [ℚ̄_ℓ,X, Y] ≅ [ℚ̄_ℓ,U, j^* Y]`. -/
-noncomputable def adicOpenImmersionLowerShriekCompForgetIso :
-    (j)_!ᵃ[l] ⋙ AdicSheaf.forget X ≅ AdicSheaf.forget U ⋙ (j)_!open[WeilCoefficients.{u} l] :=
-  (((adicOpenImmersionLowerShriekAdjunction l j).comp
-      (Mod.forgetCofreeAdjunction (adicConstantSheaf l X))).ofNatIsoRight
-    (adicUpperStarCofreeIso j)).leftAdjointUniq
-    ((Mod.forgetCofreeAdjunction (adicConstantSheaf l U)).comp
-      (openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j))
+/-- The counit of `j_! ⊣ j^*` on sheaves is invertible at the underlying sheaf of the extension by
+zero `j_! M` of every sheaf of `ℚ̄_ℓ,U`-modules `M`. This holds for free modules, the extension by
+zero of `ℚ̄_ℓ,U ⊗ P` being `ℚ̄_ℓ,X ⊗ j_! P`, and is inherited by cokernels, every module being a
+cokernel of a morphism of free modules. -/
+lemma isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_forget (M : AdicSheaf l U) :
+    IsIso ((openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j).counit.app
+      ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := by
+  let adj := openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j
+  let S : ObjectProperty (AdicSheaf l U) := fun M ↦
+    IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M)))
+  have hiso {M N : AdicSheaf l U} (e : M ≅ N) (hM : S M) : S N := by
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := hM
+    exact NatTrans.isIso_app_of_iso adj.counit
+      ((AdicSheaf.forget X).mapIso ((j)_!ᵃ[l].mapIso e)).symm
+  have hfree (P : Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)) :
+      S ((Mod.free _).obj P) := by
+    let e := Adjunction.leftAdjointUniq
+      ((Mod.freeForgetAdjunction (adicConstantSheaf l U)).comp
+        (adicOpenImmersionLowerShriekAdjunction l j))
+      (adj.comp (Mod.freeForgetAdjunction (adicConstantSheaf l X)))
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj
+        ((Mod.free (adicConstantSheaf l X)).obj ((j)_!open[WeilCoefficients.{u} l].obj P)))) :=
+      isIso_openImmersionLowerShriek_counit_app_tensor j adj (adicConstantSheaf l X) P
+    exact @NatTrans.isIso_app_of_iso _ _ _ _ _ _ adj.counit _ _
+      ((AdicSheaf.forget X).mapIso (e.app P)) this
+  have hcoker {M N : AdicSheaf l U} (f : M ⟶ N) (hM : S M) (hN : S N) : S (cokernel f) := by
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := hM
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj N))) := hN
+    have : IsIso (adj.counit.app (cokernel (((j)_!ᵃ[l] ⋙ AdicSheaf.forget X).map f))) :=
+      adj.isIso_counit_app_cokernel ((AdicSheaf.forget X).map ((j)_!ᵃ[l].map f))
+    exact NatTrans.isIso_app_of_iso adj.counit
+      (PreservesCokernel.iso ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X) f)
+  -- every module is a cokernel of a morphism of free modules
+  let ε := (Mod.freeForgetAdjunction (adicConstantSheaf l U)).counit
+  have hepi (N : AdicSheaf l U) : Epi (ε.app N) := by
+    have : IsSplitEpi ((Mod.forget _).map (ε.app N)) :=
+      ⟨⟨(λ_ N.X).inv ≫ MonObj.one ▷ N.X, Mod.unit_freeDesc _ (𝟙 N.X)⟩⟩
+    exact (Mod.forget _).epi_of_epi_map inferInstance
+  let p := ε.app M
+  have e : M ≅ cokernel (ε.app (kernel p) ≫ kernel.ι p) :=
+    (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel p)).coconePointUniqueUpToIso
+      (colimit.isColimit _) ≪≫ (cokernelEpiComp _ _).symm
+  exact hiso e.symm (hcoker _ (hfree _) (hfree _))
 
-/-- **Extension by zero is exact**: on underlying sheaves it is the extension by zero of sheaves
-of `ℚ̄_ℓ`-modules (`AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekCompForgetIso`). -/
-instance : PreservesFiniteLimits (j)_!ᵃ[l] :=
+variable (l) in
+/-- The comparison `j_! M.X ⟶ (j_! M).X` of the extension by zero of the underlying sheaf of a
+sheaf of `ℚ̄_ℓ,U`-modules `M` with the underlying sheaf of its extension by zero. -/
+noncomputable def adicOpenImmersionLowerShriekComparison :
+    AdicSheaf.forget U ⋙ (j)_!open[WeilCoefficients.{u} l] ⟶ (j)_!ᵃ[l] ⋙ AdicSheaf.forget X :=
+  Functor.whiskerRight (Functor.whiskerRight (adicOpenImmersionLowerShriekAdjunction l j).unit
+      (AdicSheaf.forget U)) (j)_!open[WeilCoefficients.{u} l] ≫
+    Functor.whiskerLeft ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X)
+      (openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j).counit
+
+instance : IsIso (adicOpenImmersionLowerShriekComparison l j) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  have := isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_forget j M
+  dsimp [adicOpenImmersionLowerShriekComparison]
+  infer_instance
+
+/-- **Extension by zero is exact.** On underlying sheaves it is the extension by zero of
+sheaves, which is exact. -/
+instance : PreservesFiniteLimits (j)_!ᵃ[l] := by
   have : PreservesFiniteLimits ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X) :=
-    preservesFiniteLimits_of_natIso (adicOpenImmersionLowerShriekCompForgetIso j).symm
-  preservesFiniteLimits_of_reflects_of_preserves _ (AdicSheaf.forget X)
+    preservesFiniteLimits_of_natIso (asIso (adicOpenImmersionLowerShriekComparison l j))
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (AdicSheaf.forget X)
 
 /-- The pullback of `j_! F` along a morphism `g` missing the range of `j` vanishes: the
 adjunctions turn `Hom(g^* j_! F, H)` into `Hom(F, j^* g_* H)`, and the underlying sheaf of
@@ -164,31 +237,20 @@ noncomputable def adicOpenImmersionLowerShriekToLowerStar : (j)_!ᵃ[l] ⟶ (j)_
     Functor.whiskerLeft (j)_*ᵃ[l] (adicOpenImmersionLowerShriekAdjunction l j).counit ≫
     (Functor.rightUnitor _).hom
 
-/-- The comparison `j_! ⟶ j_*` is characterised by `η_F ≫ j^* (can_F) = ε_F⁻¹`, `η` the unit
-of `j_! ⊣ j^*` and `ε` the counit of `j^* ⊣ j_*`. -/
-lemma unit_app_comp_adicUpperStar_map_adicOpenImmersionLowerShriekToLowerStar_app
+/-- The comparison `j_! ⟶ j_*` is characterised by its transpose under `j_! ⊣ j^*`: the inverse
+of the counit of `j^* ⊣ j_*`. -/
+lemma adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar
     (F : AdicSheaf l U) :
     (adicOpenImmersionLowerShriekAdjunction l j).unit.app F ≫
         (j)^*ᵃ[l].map ((adicOpenImmersionLowerShriekToLowerStar l j).app F) =
       inv ((adicUpperStarLowerStarAdjunction l j).counit.app F) := by
-  simp only [adicOpenImmersionLowerShriekToLowerStar, NatTrans.comp_app, Functor.map_comp]
-  simp only [Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Functor.associator_hom_app, NatIso.isIso_inv_app]
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    CategoryTheory.Functor.map_id]
-  simp only [Category.id_comp, Category.comp_id]
-  have h1 := (adicOpenImmersionLowerShriekAdjunction l j).unit.naturality
-    (inv ((adicUpperStarLowerStarAdjunction l j).counit.app F))
-  have h2 := (adicOpenImmersionLowerShriekAdjunction l j).right_triangle_components
-    ((j)_*ᵃ[l].obj F)
-  have h1' : (adicOpenImmersionLowerShriekAdjunction l j).unit.app F ≫
-      (j)^*ᵃ[l].map ((j)_!ᵃ[l].map
-        (inv ((adicUpperStarLowerStarAdjunction l j).counit.app F))) =
-      inv ((adicUpperStarLowerStarAdjunction l j).counit.app F) ≫
-        (adicOpenImmersionLowerShriekAdjunction l j).unit.app
-          ((j)^*ᵃ[l].obj ((j)_*ᵃ[l].obj F)) :=
-    h1.symm
-  rw [reassoc_of% h1', h2, Category.comp_id]
+  simp only [adicOpenImmersionLowerShriekToLowerStar, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Functor.rightUnitor_hom_app, Category.id_comp, Functor.map_comp]
+  erw [(adicOpenImmersionLowerShriekAdjunction l j).unit_naturality_assoc,
+    (adicOpenImmersionLowerShriekAdjunction l j).right_triangle_components_assoc ((j)_*ᵃ[l].obj F),
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  exact NatIso.isIso_inv_app _ _
 
 end AlgebraicGeometry.ProEtale
 
@@ -217,89 +279,73 @@ noncomputable def adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso 
     (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] ⋙ (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
       (f.geometricGaloisFrobenius.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] :=
   (conjugateIsoEquiv
-      ((adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction.comp
+      ((adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).toAdjunction.comp
         (adicOpenImmersionLowerShriekAdjunction l _))
       ((adicOpenImmersionLowerShriekAdjunction l _).comp
-        (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction)).symm
+        (adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).toAdjunction)).symm
     (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h).symm
 
 omit [IsOpenImmersion φ] in
 /-- The exchange isomorphism
-`AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso` of the pushforwards
-is conjugate to
-`AlgebraicGeometry.ProEtale.adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso` of the
-pullbacks: each of the five constituents of the latter is conjugate to the identity, to a
-composition isomorphism or to a congruence isomorphism of pushforwards. -/
-lemma conjugateEquiv_adicOpenImmersionUpperStarFrobeniusIso_inv :
-    conjugateEquiv ((adicLowerStarEquivalence l g.geometricGaloisFrobenius).toAdjunction.comp
-        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
+`AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso` for the pushforwards
+is conjugate, under the adjunctions `φ̄^* ⊣ φ̄_*` composed with the Frobenius equivalences, to
+`AlgebraicGeometry.ProEtale.adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso` for the
+pullbacks. Each of its five constituents is conjugate to the identity, to a composition
+isomorphism or to a congruence isomorphism of pushforwards. -/
+lemma conjugateEquiv_adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso_inv :
+    conjugateEquiv
+        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).symm.toAdjunction.comp
+          (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
       ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-        (adicLowerStarEquivalence l f.geometricGaloisFrobenius).toAdjunction)
+        (adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).symm.toAdjunction)
       (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv =
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
+  set j := Scheme.Hom.geometricFiberMap φ h
+  set a := f.geometricGaloisFrobenius
+  set b := g.geometricGaloisFrobenius
+  set adj := adicUpperStarLowerStarAdjunction l j
   have h₁ := conjugateEquiv_whiskerRight
-    (adicLowerStarEquivalence l g.geometricGaloisFrobenius).toAdjunction
-    (adicUpperStarLowerStarAdjunction l (Iso.symm g.geometricGaloisFrobenius).hom)
-    (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.symm).hom
-  have h₃ : conjugateEquiv ((adicUpperStarLowerStarAdjunction l
-      (Iso.symm g.geometricGaloisFrobenius).hom).comp
-        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
-      (adicUpperStarLowerStarAdjunction l
-        (Scheme.Hom.geometricFiberMap φ h ≫ g.geometricGaloisFrobenius.inv))
-      (adicUpperStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        (Iso.symm g.geometricGaloisFrobenius).hom).hom =
-      (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        (Iso.symm g.geometricGaloisFrobenius).hom).hom :=
-    conjugateEquiv_adicUpperStarComp_hom l _ _
-  have h₅ : conjugateEquiv (adicUpperStarLowerStarAdjunction l
-      (f.geometricGaloisFrobenius.inv ≫ Scheme.Hom.geometricFiberMap φ h))
-      ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-        (adicUpperStarLowerStarAdjunction l (Iso.symm f.geometricGaloisFrobenius).hom))
-      (adicUpperStarComp l f.geometricGaloisFrobenius.inv
-        (Scheme.Hom.geometricFiberMap φ h)).inv =
-      (adicLowerStarComp l f.geometricGaloisFrobenius.inv
-        (Scheme.Hom.geometricFiberMap φ h)).inv :=
-    conjugateEquiv_adicUpperStarComp_inv l _ _
-  have h₄ := conjugateEquiv_adicUpperStarCongr_inv l
+    (adicLowerStarEquivalence l b.symm).symm.toAdjunction
+    (adicUpperStarLowerStarAdjunction l (Iso.symm b).hom) adj
+    (adicUpperStarIsoLowerStarInv l b.symm).hom
+  have h₂ : conjugateEquiv ((adicUpperStarLowerStarAdjunction l (Iso.symm b).hom).comp adj)
+      (adicUpperStarLowerStarAdjunction l (j ≫ b.inv))
+      (adicUpperStarComp l j (Iso.symm b).hom).hom = (adicLowerStarComp l j (Iso.symm b).hom).hom :=
+    conjugateEquiv_adicUpperStarComp_hom l j _
+  have h₃ := conjugateEquiv_adicUpperStarCongr_inv l
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h)
-  have h₇ := conjugateEquiv_whiskerLeft
-    (adicUpperStarLowerStarAdjunction l (Iso.symm f.geometricGaloisFrobenius).hom)
-    (adicLowerStarEquivalence l f.geometricGaloisFrobenius).toAdjunction
-    (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.symm).inv
-  have hb : conjugateEquiv (adicLowerStarEquivalence l g.geometricGaloisFrobenius).toAdjunction
-      (adicUpperStarLowerStarAdjunction l (Iso.symm g.geometricGaloisFrobenius).hom)
-      (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.symm).hom = 𝟙 _ :=
+  have h₄ : conjugateEquiv (adicUpperStarLowerStarAdjunction l (a.inv ≫ j))
+      (adj.comp (adicUpperStarLowerStarAdjunction l (Iso.symm a).hom))
+      (adicUpperStarComp l a.inv j).inv = (adicLowerStarComp l a.inv j).inv :=
+    conjugateEquiv_adicUpperStarComp_inv l a.inv j
+  have h₅ := conjugateEquiv_whiskerLeft (adicUpperStarLowerStarAdjunction l (Iso.symm a).hom)
+    (adicLowerStarEquivalence l a.symm).symm.toAdjunction adj
+    (adicUpperStarIsoLowerStarInv l a.symm).inv
+  have hb : conjugateEquiv (adicLowerStarEquivalence l b.symm).symm.toAdjunction
+      (adicUpperStarLowerStarAdjunction l (Iso.symm b).hom)
+      (adicUpperStarIsoLowerStarInv l b.symm).hom = 𝟙 ((Iso.symm b).hom)_*ᵃ[l] :=
     conjugateEquiv_leftAdjointUniq_hom _ _
-  have ha : conjugateEquiv
-      (adicUpperStarLowerStarAdjunction l (Iso.symm f.geometricGaloisFrobenius).hom)
-      (adicLowerStarEquivalence l f.geometricGaloisFrobenius).toAdjunction
-      (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.symm).inv = 𝟙 _ :=
+  have ha : conjugateEquiv (adicUpperStarLowerStarAdjunction l (Iso.symm a).hom)
+      (adicLowerStarEquivalence l a.symm).symm.toAdjunction
+      (adicUpperStarIsoLowerStarInv l a.symm).inv = 𝟙 _ :=
     conjugateEquiv_leftAdjointUniq_inv _ _
   rw [hb] at h₁
-  rw [ha] at h₇
+  rw [ha] at h₅
   simp only [adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso, Iso.trans_inv,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv, Category.assoc]
-  rw [← conjugateEquiv_comp _
-      ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-        (adicUpperStarLowerStarAdjunction l (Iso.symm f.geometricGaloisFrobenius).hom)) _,
-    ← conjugateEquiv_comp _ (adicUpperStarLowerStarAdjunction l
-      (f.geometricGaloisFrobenius.inv ≫ (Scheme.Hom.geometricFiberMap φ h))) _,
-    ← conjugateEquiv_comp _ (adicUpperStarLowerStarAdjunction l
-      ((Scheme.Hom.geometricFiberMap φ h) ≫ g.geometricGaloisFrobenius.inv)) _,
-    ← conjugateEquiv_comp _
-      ((adicUpperStarLowerStarAdjunction l (Iso.symm g.geometricGaloisFrobenius).hom).comp
-        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))) _]
-  rw [h₁, h₃, h₄, h₅, h₇]
-  simp only [Functor.whiskerLeft_id', Functor.whiskerRight_id', Category.comp_id,
-    Category.id_comp, adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.trans_hom,
-    Iso.symm_hom, Category.assoc]
+  rw [← conjugateEquiv_comp _ (adj.comp (adicUpperStarLowerStarAdjunction l (Iso.symm a).hom)) _,
+    ← conjugateEquiv_comp _ (adicUpperStarLowerStarAdjunction l (a.inv ≫ j)) _,
+    ← conjugateEquiv_comp _ (adicUpperStarLowerStarAdjunction l (j ≫ b.inv)) _,
+    ← conjugateEquiv_comp _ ((adicUpperStarLowerStarAdjunction l (Iso.symm b).hom).comp adj) _]
+  rw [h₁, h₂, h₃, h₄, h₅]
+  simp only [Functor.whiskerRight_id', Category.comp_id,
+    adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  -- `simp` does not see through the instance arguments here, and a plain `rfl` times out in the
+  -- kernel.
+  rw [show (j)_*ᵃ[l].whiskerLeft (𝟙 (b.inv)_*ᵃ[l]) = 𝟙 _ from Functor.whiskerLeft_id' _]
+  exact Category.id_comp _
 
-/-- The comparison `φ̄_! ⟶ φ̄_*` commutes with the Frobenius exchange isomorphisms: both
-composites are adjoint, under `φ̄_! ⊣ φ̄^*`, to the inverse of the counit of `φ̄^* ⊣ φ̄_*`
-transported along the Frobenii
-(`CategoryTheory.Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom`). -/
+/-- The comparison `φ̄_! ⟶ φ̄_*` commutes with the Frobenius exchange isomorphisms. -/
 lemma adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso :
     Functor.whiskerRight
         (adicOpenImmersionLowerShriekToLowerStar l (Scheme.Hom.geometricFiberMap φ h))
@@ -311,13 +357,12 @@ lemma adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso 
   have := Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom
     (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap φ h))
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicLowerStarEquivalence l f.geometricGaloisFrobenius)
-    (adicLowerStarEquivalence l g.geometricGaloisFrobenius)
+    (adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).symm
+    (adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).symm
     (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h) _
-    (unit_app_comp_adicUpperStar_map_adicOpenImmersionLowerShriekToLowerStar_app _)
+    (adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar _)
   rw [conjugateIsoEquiv_apply_hom, Iso.symm_hom,
-    conjugateEquiv_adicOpenImmersionUpperStarFrobeniusIso_inv] at this
+    conjugateEquiv_adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso_inv] at this
   exact this
-
 
 end AlgebraicGeometry.ProEtale

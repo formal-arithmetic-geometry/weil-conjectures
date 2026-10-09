@@ -325,7 +325,18 @@ noncomputable def adicUpperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z
   (adicUpperStarComp l a b).symm ≪≫ adicUpperStarCongr l h ≪≫ adicUpperStarComp l c d
 
 variable (l) in
-/-- The inverse composition isomorphism of pullbacks is conjugate to that of pushforwards. -/
+/-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
+lemma conjugateEquiv_adicUpperStarCongr_inv {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :
+    conjugateEquiv (adicUpperStarLowerStarAdjunction l g) (adicUpperStarLowerStarAdjunction l g')
+      (adicUpperStarCongr l h).inv = (adicLowerStarCongr l h).hom := by
+  subst h
+  refine NatTrans.ext (funext fun M ↦ Mod.hom_ext _ _ ?_)
+  simp [adicUpperStarCongr, adicLowerStarCongr_hom_app_hom]
+  rfl
+
+variable (l) in
+/-- The inverse of the composition isomorphism of pullbacks is conjugate to that of
+pushforwards. -/
 lemma conjugateEquiv_adicUpperStarComp_inv {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
     conjugateEquiv (adicUpperStarLowerStarAdjunction l (h₁ ≫ h₂))
       ((adicUpperStarLowerStarAdjunction l h₂).comp (adicUpperStarLowerStarAdjunction l h₁))
@@ -344,17 +355,6 @@ lemma conjugateEquiv_adicUpperStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S)
     (α := (adicUpperStarComp l h₁ h₂).inv) (β := (adicUpperStarComp l h₁ h₂).hom) (by simp)
   rw [conjugateEquiv_adicUpperStarComp_inv] at this
   rw [← cancel_epi (adicLowerStarComp l h₁ h₂).inv, this, Iso.inv_hom_id]
-
-variable (l) in
-/-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
-lemma conjugateEquiv_adicUpperStarCongr_inv {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :
-    conjugateEquiv (adicUpperStarLowerStarAdjunction l g) (adicUpperStarLowerStarAdjunction l g')
-      (adicUpperStarCongr l h).inv = (adicLowerStarCongr l h).hom := by
-  subst h
-  ext M : 2
-  refine Mod.hom_ext _ _ ?_
-  simp [adicUpperStarCongr, adicLowerStarCongr_hom_app_hom, lowerStarCongr]
-  rfl
 
 variable (l) in
 /-- **The pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic sheaf**, as sheaves
@@ -424,33 +424,3 @@ lemma adicLowerStar_map_smul {Z : Scheme.{u}} (g : X ⟶ Z) (c : ULift.{u + 1} (
   Mod.hom_ext _ _ (by ext : 3; rfl)
 
 end AlgebraicGeometry.ProEtale.AdicSheaf
-
-namespace AlgebraicGeometry.ProEtale
-
-variable (l : ℕ) [Fact l.Prime]
-
-/-- **A deck transformation commutes with the exchange isomorphism**, for sheaves of modules over
-the constant `ℓ`-adic sheaves: the version of
-`AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange` for
-`g_* ℚ̄_ℓ,X` as a sheaf of `ℚ̄_ℓ,Y`-modules. -/
-lemma adicLowerStar_map_deckAction_comp_lowerStarExchange {X Y : Scheme.{u}} (g : X ⟶ Y)
-    (a : X ≅ X) (b : Y ≅ Y) (σ : X ≅ X) (hg : g ≫ b.inv = a.inv ≫ g) (hσ : σ.hom ≫ g = g)
-    (hσa : σ.hom ≫ a.hom = a.hom ≫ σ.hom)
-    (str : (b.inv)_*ᵃ[l].obj ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)) ⟶
-      (g)_*ᵃ[l].obj (AdicSheaf.unit l X))
-    (hstr : str = ((adicLowerStarComp l g b.inv ≪≫ adicLowerStarCongr l hg ≪≫
-          (adicLowerStarComp l a.inv g).symm).app (AdicSheaf.unit l X) ≪≫
-        (g)_*ᵃ[l].mapIso (adicLowerStarUnitIso l a.symm)).hom) :
-    (b.inv)_*ᵃ[l].map
-        ((g)_*ᵃ[l].map (adicLowerStarUnitIso l σ).inv ≫
-          (adicLowerStarComp l σ.hom g).hom.app (AdicSheaf.unit l X) ≫
-          (adicLowerStarCongr l hσ).hom.app (AdicSheaf.unit l X)) ≫ str =
-    str ≫
-      ((g)_*ᵃ[l].map (adicLowerStarUnitIso l σ).inv ≫
-          (adicLowerStarComp l σ.hom g).hom.app (AdicSheaf.unit l X) ≫
-          (adicLowerStarCongr l hσ).hom.app (AdicSheaf.unit l X)) := by
-  subst hstr
-  refine Mod.hom_ext _ _ ?_
-  exact lowerStar_map_deckAction_comp_lowerStarExchange l g a b σ hg hσ hσa _ rfl
-
-end AlgebraicGeometry.ProEtale
