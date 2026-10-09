@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-spectral-constructible-finite-intersection",
+ "kind": "statement",
+ "title": "In a spectral space, constructible sets with empty intersection have a finite subfamily with empty intersection",
+ "statement": "Let $T$ be a spectral topological space [def-weil-spectral-space], $A$ a set and $(E_a)_{a\\in A}$ a family of constructible subsets of $T$ [def-weil-constructible-subset] with $\\bigcap_{a\\in A}E_a=\\emptyset$ (the intersection over $A=\\emptyset$ being $T$). Then there is a finite subset $A_0\\subseteq A$ with $\\bigcap_{a\\in A_0}E_a=\\emptyset$. (Equivalently: constructible subsets are closed in the constructible topology of $T$, the topology with subbase the quasi-compact opens of $T$ and their complements, and this topology is quasi-compact.)",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305: the constructible topology of a spectral space is quasi-compact) and the paragraph before it (line 4290 ff.: definition of the constructible topology; a subset is closed in it iff it is an intersection of constructible subsets, so constructible subsets are closed), as used in the proof of Etale Cohomology Lemma 095N"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a spectral space a family of constructible sets with empty intersection has a finite subfamily with empty intersection",
+   "results": "compactSpace_of_finite_subfamily_closed, isCompact_iff_finite_subfamily_closed, IsCompact.elim_finite_subfamily_closed (Topology.Compactness.Compact), Topology.IsConstructible (Topology.Constructible), SpectralSpace.mk (Topology.Spectral.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match (generic compactness criteria)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible subsets are closed in the constructible topology of a spectral space",
+   "results": "PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, PrimeSpectrum.exists_constructibleSetData_iff (RingTheory.Spectrum.Prime.ConstructibleSet), Topology.IsLocallyConstructible.isConstructible, Topology.IsConstructible (Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSpace (WithConstructibleTopology _)",
+   "results": "compactSpace_withConstructibleTopology (Mathlib.Topology.Spectral.ConstructibleTopology)",
+   "date": "2026-10-10",
+   "verdict": "partial: the quasi-compactness half (Stacks 0901), not the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"IsConstructible\\|isClosed_constructibleTopology\\|IsConstructible.isClosed\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/",
+   "results": "Topology/Spectral/ConstructibleTopology.lean:92 compactSpace_withConstructibleTopology [CompactSpace X] [QuasiSober X] [PrespectralSpace X] [QuasiSeparatedSpace X] : CompactSpace (WithConstructibleTopology X) (@[stacks 0901]); :60/:65 IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed; Topology/Constructible.lean:178 Topology.IsConstructible, :230 IsConstructible.empty_union_induction, :336 QuasiSeparatedSpace.isRetrocompact_iff_isCompact; no lemma that a constructible set is closed in constructibleTopology",
+   "date": "2026-10-10",
+   "verdict": "no match: the statement follows in a few lines (induction IsConstructible.empty_union_induction with isRetrocompact_iff_isCompact and IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed shows every constructible set is closed in constructibleTopology; then IsCompact.elim_finite_subfamily_closed for compactSpace_withConstructibleTopology), not one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: finite intersection property of constructible sets in a spectral space (Topology 0901 with the closedness of constructible sets in the constructible topology); self-contained; correct; unsplit (Mathlib has compactSpace_withConstructibleTopology, ConstructibleTopology.lean:92, but not the closedness clause as one lemma)."
+ }
+}
