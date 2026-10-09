@@ -192,3 +192,28 @@ theorem ProEtale.isIso_ihomComparison_upperStar (P : Sheaf (Scheme.ProEt.topolog
 end Closed
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open Scheme ProEtale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A]
+  [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+  {V X : Scheme.{u}} (g : V ⟶ X) [hg : WeaklyEtale g]
+  [((Scheme.ProEt.topology X).W (A := A)).IsMonoidal]
+  [((Scheme.ProEt.topology V).W (A := A)).IsMonoidal]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+
+/-- The pullback along a weakly étale morphism is braided: it is identified, as a monoidal
+functor, with the restriction along the localization functor, which is lax braided. -/
+noncomputable instance ProEtale.laxBraided_upperStar : (g)^*[A].LaxBraided where
+  braided P Q := by
+    let τ := ProEtale.upperStarIsoSheafPushforward A g hg
+    rw [← cancel_mono (τ.hom.app (Q ⊗ P)), Category.assoc, NatTrans.naturality,
+      ← Category.assoc, NatTrans.IsMonoidal.tensor, Category.assoc,
+      Functor.LaxBraided.braided, Category.assoc, NatTrans.IsMonoidal.tensor,
+      ← BraidedCategory.braiding_naturality_assoc]
+
+end AlgebraicGeometry
