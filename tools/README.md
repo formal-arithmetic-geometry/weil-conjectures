@@ -98,6 +98,13 @@ One build:
 
 The first build in a new copy may compile the whole library once.
 
+## Rebuilding what git does not hold
+
+| Tool | What it is for |
+|---|---|
+| `fetch_literature.sh [--dry]` | Fetches every document of the Obtained table of `literature/LIST.md` by its recorded URL and clones the Stacks project and the two blueprint branches at their recorded commits (`literature/LIST.md`, "Rebuilding literature/"). |
+| `sorry_map.lean` | Run inside a compiled checkout of the source repository (`lake env lean`) to produce a sorry map; the maps are committed compressed in `local/` (see `lean_status.py` above). |
+
 ## Importing the blueprint
 
 This project's DAG was not split from the target by hand: `import_blueprint.py` wrote it from the blueprint in `literature/blueprint/master/blueprint/`. It can be run again; it replaces `dag/nodes/` and `dag/notes/` entirely, so it is for the state before stage 1 has changed any node.
