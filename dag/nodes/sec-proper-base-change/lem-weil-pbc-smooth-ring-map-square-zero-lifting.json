@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+ "kind": "statement",
+ "title": "A smooth ring map lifts along square-zero ideals",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings such that $H_1(L_{B/A})=0$ and $\\Omega_{B/A}$ is a projective $B$-module ($H_1(L_{B/A})$ and $\\Omega_{B/A}$ as in [def-weil-pbc-smooth-ring-map] and [def-weil-pbc-kahler-differentials]; this holds in particular when $\\varphi$ is smooth [def-weil-pbc-smooth-ring-map]). Let $D$ be a commutative ring with a ring map $A\\to D$, let $N\\subseteq D$ be an ideal with $N^2=0$, and let $q:D\\to D/N$ be the quotient map. Then for every homomorphism of $A$-algebras $g:B\\to D/N$ there is a homomorphism of $A$-algebras $f:B\\to D$ with $q\\circ f=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 031J (proposition-characterize-formally-smooth, line 37986), (6) implies (1), with Definition Tag 00TI (definition-formally-smooth) of formally smooth; for smooth ring maps also Proposition Tag 00TN (proposition-smooth-formally-smooth, line 38169)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally smooth algebra: algebra homomorphism into quotient by square-zero ideal lifts",
+   "results": "Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.mk_lift, Algebra.FormallySmooth.of_split, Algebra.FormallySmooth.comp_lift (all Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FormallySmooth.exists_lift (nilpotent I) and comp_surjective (I^2 = 0)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, Function.Surjective, Ideal.Quotient.mkₐ",
+   "results": "Algebra.FormallySmooth.comp_surjective, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_comp_surjective (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FormallySmooth.comp_surjective (R A) (I : Ideal B) (hI : I ^ 2 = ⊥) : Function.Surjective (Ideal.Quotient.mkₐ R I).comp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 031J\\|stacks 00TN\\|stacks 00TI' Mathlib; sed -n 60,82p Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "Mathlib/RingTheory/Smooth/Basic.lean:69 @[stacks 00TI \"Also see 031J (6) ...\"] class FormallySmooth with fields projective_kaehlerDifferential : Module.Projective A Ω[A⁄R] and subsingleton_h1Cotangent : Subsingleton (H1Cotangent R A) (lines 70-72); lemma FormallySmooth.comp_surjective at line 80",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.comp_surjective",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 80,
+  "how": "specializes in one line: the two hypotheses H_1(L_{B/A})=0 and Ω_{B/A} projective are exactly the two fields of the class Algebra.FormallySmooth A B (line 70: Module.Projective B Ω[B⁄A], Subsingleton (Algebra.H1Cotangent A B), H1Cotangent being H_1 of the naive cotangent complex of the canonical presentation as in the match of def-weil-pbc-smooth-ring-map); comp_surjective A B (I := N) (hI : N ^ 2 = ⊥) says every A-algebra map B → D ⧸ N is (Ideal.Quotient.mkₐ A N).comp f for some f : B →ₐ[A] D; for smooth φ the instance Algebra.Smooth.formallySmooth (line 541) gives the hypothesis"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-conormal-sequence-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
