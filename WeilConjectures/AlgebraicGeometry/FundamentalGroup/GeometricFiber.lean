@@ -99,58 +99,117 @@ section GeometricFiber
 
 variable {K : Type u} [Field K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K))
 
+/-- The section `C ⟶ (C₀ ×_K Spec A) ×_{C₀} C` of the base change to the geometric fibre
+`C = C₀ ×_K K̄` of a constant cover `C₀ ×_K Spec A`, given by the projection `π` and the morphism
+`C ⟶ Spec K̄ ⟶ Spec A` induced by a `K̄`-point `u : Spec K̄ ⟶ Spec A` of `Spec A` over `K`. -/
+noncomputable def sectionOfPoint (A : FiniteEtaleAlgebra K)
+    (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
+    (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
+    p.geometricFiber ⟶ ((pullback p.geometricFiberProj).obj (constantCover p A)).obj.left :=
+  Limits.pullback.lift (f := (constantCover p A).obj.hom) (g := p.geometricFiberProj)
+    (Limits.pullback.lift p.geometricFiberProj (p.geometricFiberToAlgebraicClosure ≫ u) (by
+      rw [Scheme.Hom.geometricFiber_condition, Category.assoc, hu]))
+    (𝟙 _) (by rw [Category.id_comp]; exact Limits.pullback.lift_fst _ _ _)
+
+@[reassoc (attr := simp)]
+lemma sectionOfPoint_snd (A : FiniteEtaleAlgebra K)
+    (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
+    (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
+    sectionOfPoint p A u hu ≫
+      Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj = 𝟙 _ :=
+  Limits.pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma sectionOfPoint_fst_fst (A : FiniteEtaleAlgebra K)
+    (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
+    (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
+    sectionOfPoint p A u hu ≫
+      Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+        Limits.pullback.fst p A.specHom = p.geometricFiberProj := by
+  simp [sectionOfPoint]
+
+@[reassoc (attr := simp)]
+lemma sectionOfPoint_fst_snd (A : FiniteEtaleAlgebra K)
+    (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
+    (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
+    sectionOfPoint p A u hu ≫
+      Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+        Limits.pullback.snd p A.specHom = p.geometricFiberToAlgebraicClosure ≫ u := by
+  simp [sectionOfPoint]
+
+/-- Two morphisms into `(C₀ ×_K Spec A) ×_{C₀} C` agree if their three components agree. -/
+lemma hom_ext_pullback_constantCover (A : FiniteEtaleAlgebra K) {T : Scheme.{u}}
+    {f g : T ⟶ ((pullback p.geometricFiberProj).obj (constantCover p A)).obj.left}
+    (h₁ : f ≫ Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+        Limits.pullback.snd p A.specHom =
+      g ≫ Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+        Limits.pullback.snd p A.specHom)
+    (h₂ : f ≫ Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj =
+      g ≫ Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj) : f = g := by
+  have hc : Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+      pullback.fst p A.specHom =
+        Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj ≫
+          p.geometricFiberProj :=
+    Limits.pullback.condition
+  refine Limits.pullback.hom_ext ?_ h₂
+  refine Limits.pullback.hom_ext ?_ (by simpa only [Category.assoc] using h₁)
+  rw [Category.assoc, Category.assoc, hc, ← Category.assoc, h₂, Category.assoc]
+
+variable {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber}
+
+/-- The `K̄`-point of `Spec A` underlying a point of the geometric fibre at `t` of the base change
+of a constant cover. -/
+noncomputable abbrev pointOfFiber (A : FiniteEtaleAlgebra K)
+    (y : (fiber t).obj ((pullback p.geometricFiberProj).obj (constantCover p A))) :
+    Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1) :=
+  y.left ≫ Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+    Limits.pullback.snd p A.specHom
+
+lemma pointOfFiber_comp_specHom (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _)
+    (A : FiniteEtaleAlgebra K)
+    (y : (fiber t).obj ((pullback p.geometricFiberProj).obj (constantCover p A))) :
+    pointOfFiber p A y ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom := by
+  have hy : y.left ≫ Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj = t :=
+    fiber_left_comp t y
+  have hc : Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+      pullback.fst p A.specHom =
+        Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj ≫
+          p.geometricFiberProj :=
+    Limits.pullback.condition
+  calc pointOfFiber p A y ≫ A.specHom
+      = y.left ≫ Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+          Limits.pullback.snd p A.specHom ≫ A.specHom := by simp only [Category.assoc]
+    _ = y.left ≫ (Limits.pullback.fst (constantCover p A).obj.hom p.geometricFiberProj ≫
+          pullback.fst p A.specHom) ≫ p := by
+        rw [← Limits.pullback.condition]; simp only [Category.assoc]
+    _ = (y.left ≫ Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj) ≫
+          p.geometricFiberProj ≫ p := by rw [hc]; simp only [Category.assoc]
+    _ = (Scheme.specAlgebraicClosure K).hom := by
+        rw [hy, Scheme.Hom.geometricFiber_condition, ← Category.assoc, ht]
+        exact Category.id_comp _
+
 /-- The base change to the geometric fibre `C = C₀ ×_K K̄` of a constant cover `C₀ ×_K Spec A` is
-totally split: a point of its geometric fibre at a `K̄`-rational point `t` of `C` lies on the
-section `C ⟶ (C₀ ×_K Spec A) ×_{C₀} C` given by the projection `π` and the morphism
-`C ⟶ Spec K̄ ⟶ Spec A` induced by the corresponding `K`-algebra map `A → K̄`. -/
+totally split: a point `y` of its geometric fibre at a `K̄`-rational point `t` of `C` lies on the
+section `AlgebraicGeometry.Scheme.FiniteEtale.sectionOfPoint` of its `K̄`-point of `Spec A`. -/
+lemma left_eq_sectionOfPoint (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _)
+    (A : FiniteEtaleAlgebra K)
+    (y : (fiber t).obj ((pullback p.geometricFiberProj).obj (constantCover p A))) :
+    y.left = t ≫ sectionOfPoint p A (pointOfFiber p A y) (pointOfFiber_comp_specHom p ht A y) := by
+  have hy : y.left ≫ Limits.pullback.snd (constantCover p A).obj.hom p.geometricFiberProj = t :=
+    fiber_left_comp t y
+  apply hom_ext_pullback_constantCover
+  · rw [Category.assoc, sectionOfPoint_fst_snd, ← Category.assoc t, ht, Category.id_comp]
+  · rw [Category.assoc, sectionOfPoint_snd, Category.comp_id, hy]
+
 lemma exists_section_pullback_constantCover (A : FiniteEtaleAlgebra K)
-    {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber}
     (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _)
     (y : (fiber t).obj ((pullback p.geometricFiberProj).obj (constantCover p A))) :
     ∃ σ : p.geometricFiber ⟶ ((pullback p.geometricFiberProj).obj (constantCover p A)).obj.left,
       σ ≫ ((pullback p.geometricFiberProj).obj (constantCover p A)).obj.hom = 𝟙 _ ∧
-        y.left = t ≫ σ := by
-  have hc : Limits.pullback.fst (pullback.fst p A.specHom) p.geometricFiberProj ≫
-      pullback.fst p A.specHom =
-        Limits.pullback.snd (pullback.fst p A.specHom) p.geometricFiberProj ≫
-          p.geometricFiberProj :=
-    Limits.pullback.condition
-  have hy : y.left ≫ Limits.pullback.snd (pullback.fst p A.specHom) p.geometricFiberProj = t :=
-    fiber_left_comp t y
-  have h₁ : y.left ≫ Limits.pullback.fst (pullback.fst p A.specHom) p.geometricFiberProj ≫
-      pullback.fst p A.specHom = t ≫ p.geometricFiberProj := by
-    rw [hc, ← Category.assoc, hy]
-  let u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1) :=
-    y.left ≫ Limits.pullback.fst (pullback.fst p A.specHom) p.geometricFiberProj ≫
-      Limits.pullback.snd p A.specHom
-  have hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom := by
-    simp only [u, Category.assoc, ← Limits.pullback.condition]
-    rw [← Category.assoc (Limits.pullback.fst _ _) (pullback.fst p A.specHom) p,
-      ← Category.assoc y.left, h₁, Category.assoc, Scheme.Hom.geometricFiber_condition,
-      ← Category.assoc, ht]
-    exact Category.id_comp _
-  let σ₀ : p.geometricFiber ⟶ Limits.pullback p A.specHom :=
-    Limits.pullback.lift p.geometricFiberProj (p.geometricFiberToAlgebraicClosure ≫ u) (by
-      rw [Scheme.Hom.geometricFiber_condition, Category.assoc, hu])
-  have hσ₀ : σ₀ ≫ Limits.pullback.fst p A.specHom = 𝟙 _ ≫ p.geometricFiberProj := by
-    simp [σ₀]
-  refine ⟨Limits.pullback.lift σ₀ (𝟙 _) hσ₀, Limits.pullback.lift_snd _ _ _, ?_⟩
-  have key : t ≫ Limits.pullback.lift σ₀ (𝟙 _) hσ₀ = y.left := by
-    apply Limits.pullback.hom_ext
-    · change (t ≫ _) ≫ Limits.pullback.fst (pullback.fst p A.specHom) p.geometricFiberProj =
-        y.left ≫ Limits.pullback.fst (pullback.fst p A.specHom) p.geometricFiberProj
-      rw [Category.assoc, Limits.pullback.lift_fst]
-      apply Limits.pullback.hom_ext
-      · rw [Category.assoc, Category.assoc, h₁, Limits.pullback.lift_fst]
-      · rw [Category.assoc, Category.assoc, Limits.pullback.lift_snd, ← Category.assoc t, ht,
-          Category.id_comp]
-    · change (t ≫ _) ≫ Limits.pullback.snd (pullback.fst p A.specHom) p.geometricFiberProj =
-        y.left ≫ Limits.pullback.snd (pullback.fst p A.specHom) p.geometricFiberProj
-      rw [Category.assoc, Limits.pullback.lift_snd, Category.comp_id, hy]
-  exact key.symm
+        y.left = t ≫ σ :=
+  ⟨_, sectionOfPoint_snd p A _ _, left_eq_sectionOfPoint p ht A y⟩
 
-variable {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber}
-  (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _)
+variable (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _)
   (G' : Type*) [Group G'] [∀ P, MulAction G' ((fiber t).obj P)] [IsNaturalSMul (fiber t) G']
 
 include ht in
