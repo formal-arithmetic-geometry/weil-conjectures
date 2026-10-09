@@ -5,16 +5,66 @@
  "statement": "Let $X$ be a topological space and $\\mathcal O_X$ a sheaf of commutative rings on $X$. An $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Let $\\mathcal G$ be of finite presentation, $I$ a directed set, $(\\mathcal F_i,\\varphi_{i'i})_{i\\le i'}$ a system of $\\mathcal O_X$-modules over $I$ with a colimit $(\\mathcal F,(c_i)_i)$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. Let $\\mathcal H_i=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)$ and $\\mathcal H=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ be the sheaf Homs [def-pur-sheaf-hom] (on the site of open subsets of $X$), with the $\\mathcal O_X$-linear maps $\\mathcal H_i\\to\\mathcal H_{i'}$, $\\psi\\mapsto\\varphi_{i'i}|_U\\circ\\psi$, and $\\gamma_i:\\mathcal H_i\\to\\mathcal H$, $\\psi\\mapsto c_i|_U\\circ\\psi$ (for $\\psi$ a section over an open $U$), Then the system $(\\mathcal H_i)$ has a colimit $(\\mathcal H',(d_i)_i)$ in $\\Mod(\\mathcal O_X)$ (the sheafification of the sectionwise colimit, Modules 01AH (2)), and the unique $\\mathcal O_X$-linear $u:\\mathcal H'\\to\\mathcal H$ with $u\\circ d_i=\\gamma_i$ for all $i$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 0GMV (lemma-hom-finite-presentation-colimit, line 3759) and its proof (colimits commute with restriction to opens, Sheaves Section 009E; local presentation; Hom(O_X, -) = id and Hom commutes with finite direct sums; Lemma 01CO lemma-internal-hom-exact (1); filtered colimits exact, Lemma 01AH (3); existence of the colimit, Lemma 01AH (2)). Stacks states it for filtered colimits; the directed case is used here."
+  "place": "Modules, Lemma 0GMV (lemma-hom-finite-presentation-colimit), line 3759; proof uses Modules 01AH(2),(3), Modules 01CO, and Sheaves Section 009E and Lemma 00WY"
  },
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (localize the finite presentation).* Colimits of sheaves of modules commute with restriction to an open subset by [lem-weil-pbc-ringed-space-colimit-restriction] (Modules 01AH(2),(3)), and the sheaf Hom construction is defined by restriction to the localized ringed space [def-pur-sheaf-hom]. Therefore the assertion can be checked after restricting to an open neighbourhood on which $\\mathcal G$ has a presentation $\\mathcal O_X^{\\oplus m}\\to\\mathcal O_X^{\\oplus n}\\to\\mathcal G\\to0$. Replace $X$ and all modules by these restrictions; the resulting comparison map restricts back to the original map, and isomorphisms of sheaves can be checked locally by [lem-weil-pbc-sheaf-isomorphism-local-open-cover] (Sheaves 00WY).",
+   "uses": [
+    "lem-weil-pbc-ringed-space-colimit-restriction",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0GMV proof, first paragraph: taking colimits commutes with restriction to opens, so a finite-presentation module may be treated on an open where its presentation is global; Sheaves, Section 009E"
+   }
+  },
+  {
+   "text": "*Step 2 (the kernel presentations).* Apply [lem-weil-pbc-sheaf-hom-finite-presentation-kernel] to the chosen presentation and each $\\mathcal F_i$, and also to $\\mathcal F$. This gives exact rows $0\\to\\mathcal H_i\\to\\mathcal F_i^{\\oplus n}\\to\\mathcal F_i^{\\oplus m}$ and $0\\to\\mathcal H\\to\\mathcal F^{\\oplus n}\\to\\mathcal F^{\\oplus m}$. The maps $\\varphi_{i'i}$ and $c_i$ induce a commutative diagram of these rows, whose left vertical maps are the $\\gamma_i$ and whose other vertical maps are the canonical maps on finite direct sums.",
+   "uses": [
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0GMV proof, the global finite presentation and the exact sequence obtained from Lemma 01CO"
+   }
+  },
+  {
+   "text": "*Step 3 (pass to the filtered colimit).* The category of sheaves of $\\mathcal O_X$-modules has the required colimits, and filtered colimits are exact, by the generic sheaf-module result [lem-weil-pbc-module-sheaves-colimits-forgetful] (used here as a tool for the ringed-space site). Finite direct sums are finite colimits, so the colimit of the systems $(\\mathcal F_i^{\\oplus n})$ and $(\\mathcal F_i^{\\oplus m})$ identifies canonically with $\\mathcal F^{\\oplus n}$ and $\\mathcal F^{\\oplus m}$. Applying exactness to the top rows in Step 2 yields an exact sequence $0\\to\\varinjlim_i\\mathcal H_i\\to\\mathcal F^{\\oplus n}\\to\\mathcal F^{\\oplus m}$. The comparison diagram has isomorphisms on the last two vertical arrows, hence its induced map on kernels is an isomorphism; this induced map is the unique $u:\\mathcal H'\\to\\mathcal H$ compatible with the cocones. Thus $u$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0GMV proof, exactness of filtered colimits (Lemma 01AH(3)) and the displayed commutative diagram; finite direct sums and Hom(O_X,-)=id are in the Internal Hom section"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-space-colimit-restriction",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 0GMV (lemma-hom-finite-presentation-colimit), line 3759, with Lemmas 01CO and 01AH and Sheaves Section 009E"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +89,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,10 +110,20 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
+  "worker": "stage1",
+  "summary": "Repaired the two child statements with self-contained TeX notation, explicit sheaf/module/colimit/sheafification dependencies, and exact Stacks tags 01AH(2),(3), 01CO, and 00WY. Split the unrelated open-restriction and local-isomorphism assertions into separate nodes; the parent proof now cites both."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Modules 0GMV for directed systems, with existence of the colimit; self-contained; correct; unsplit."
+  "group": "D1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D1; spot-checked by L: Repaired as asked at 19:18: the new nodes are now TeX statements with node citations and tags (01AH(2),(3) with 009E for restriction of colimits to an open; 01CO(1),(2) for the left exactness of sheaf Hom in the source, with the correct contravariant variance after D1's own review; 00WY for locality of isomorphisms). The three steps follow 0GMV: localize to a presentation, the kernel presentations of the sheaf Homs, exactness of filtered colimits with lem-weil-pbc-module-sheaves-colimits-forgetful as a tool. The review by D1 is a real review (it caught the variance error)."
  }
 }

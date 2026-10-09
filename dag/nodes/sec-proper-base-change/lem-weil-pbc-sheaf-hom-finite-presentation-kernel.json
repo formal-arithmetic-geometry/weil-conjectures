@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+ "kind": "statement",
+ "title": "Sheaf Hom applied to a finite presentation is a kernel of finite sums",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and let $\\mathcal E_2\\xrightarrow{a}\\mathcal E_1\\xrightarrow{b}\\mathcal E\\to0$ be an exact sequence of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For any source module $\\mathcal H\\in\\operatorname{Mod}(\\mathcal O_X)$ and target module $\\mathcal M\\in\\operatorname{Mod}(\\mathcal O_X)$, applying the sheaf Hom [def-pur-sheaf-hom] contravariantly in the source gives an exact sequence\n$$0\\longrightarrow\\mathcal Hom_{\\mathcal O_X}(\\mathcal E,\\mathcal M)\\xrightarrow{b^*}\\mathcal Hom_{\\mathcal O_X}(\\mathcal E_1,\\mathcal M)\\xrightarrow{a^*}\\mathcal Hom_{\\mathcal O_X}(\\mathcal E_2,\\mathcal M).$$\nIn particular, for a finite presentation $\\mathcal O_X^{\\oplus m}\\to\\mathcal O_X^{\\oplus n}\\to\\mathcal H\\to0$, the identifications $\\mathcal Hom_{\\mathcal O_X}(\\mathcal O_X,-)\\cong\\operatorname{id}$ and compatibility with finite direct sums give an exact sequence\n$$0\\longrightarrow\\mathcal Hom_{\\mathcal O_X}(\\mathcal H,\\mathcal M)\\longrightarrow\\mathcal M^{\\oplus n}\\longrightarrow\\mathcal M^{\\oplus m}.$$ \nThis is Modules, Lemma 01CO(1),(2).",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01CO(1),(2) (left exactness of internal Hom), and the Internal Hom discussion immediately preceding it (Hom$(\\mathcal O_X,-)=\\operatorname{id}$ and finite direct sums)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf Hom of modules is left exact in the first variable and commutes with finite direct sums",
+   "results": "SheafOfModules.Hom and AlgebraicGeometry.Scheme.Modules.Hom are only Hom types; CategoryTheory.sheafHom is Type-valued for sheaves in a fixed category. No module-valued sheaf-Hom exactness result.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Hom; CategoryTheory.sheafHom; CategoryTheory.ShortComplex.isIso_of_isIso",
+   "results": "SheafOfModules.Hom is the type of module morphisms, CategoryTheory.sheafHom is Type-valued, and ShortComplex.isIso_of_isIso is unrelated to the module-valued internal Hom statement.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'internalHom|sheafHom|presheafHom|MonoidalClosed|PreservesFiniteLimits' Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/CategoryTheory/Sites/SheafHom.lean",
+   "results": "Mathlib/CategoryTheory/Sites/SheafHom.lean provides only Type-valued sheafHom; Mathlib/Algebra/Category/ModuleCat/Sheaf has no module-valued internal Hom or left-exactness theorem; finite direct-sum Hom for sheaves is absent.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "worker": "stage1",
+  "summary": "Corrected the variance of the internal-Hom kernel statement: for an exact source sequence E₂→E₁→E→0 and target M, Hom(E,M)→Hom(E₁,M)→Hom(E₂,M) is exact; the finite-presentation specialization now uses source H and target M with M^n→M^m."
+ }
+}

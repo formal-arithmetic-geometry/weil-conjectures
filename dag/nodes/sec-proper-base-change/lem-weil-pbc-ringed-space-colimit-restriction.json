@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-ringed-space-colimit-restriction",
+ "kind": "statement",
+ "title": "Restriction of sheaf-module colimits to an open",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O_X$ [def-weil-sheaf-of-modules-category], let $j:U\\hookrightarrow X$ be an open immersion, and write $\\mathcal O_U=j^{-1}\\mathcal O_X$. For a sheaf of $\\mathcal O_X$-modules $\\mathcal M$, let $\\mathcal M|_U=j^{-1}\\mathcal M$ [def-weil-sheaf-of-modules-category]. If $(\\mathcal M_i)_{i\\in I}$ is a small diagram with colimit $(\\mathcal M,(c_i)_i)$ in $\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-pbc-category-colimit], then $(\\mathcal M_i|_U)_{i\\in I}$ has colimit $(\\mathcal M|_U,(c_i|_U)_i)$ in $\\operatorname{Mod}(\\mathcal O_U)$; moreover this colimit is the sheafification [def-weil-pbc-sheafification] of the sectionwise colimit of the restricted presheaves. This is Modules, Lemma 01AH(2),(3) (with open restriction as in Sheaves, Section 009E).",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AH(2),(3) (existence, sectionwise description, and exactness of filtered colimits), together with Sheaves, Section 009E (restriction to an open and sheafification of presheaf colimits)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves of modules to an open subset of a ringed space preserves colimits",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctor and restrictAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf) for open immersions of schemes; PresheafOfModules.hasColimit for presheaves. No generic topological ringed-space restriction theorem.",
+   "date": "2026-10-10",
+   "verdict": "no match: the scheme-specific restriction functor does not state the generic topological ringed-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.toPresheaf_preservesColimitsOfSize; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "PresheafOfModules.toPresheaf_preservesColimitsOfSize and Scheme.Modules.restrictFunctor/restrictAdjunction; no declaration for restriction of arbitrary sheaves of modules on a topological space.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'restrictFunctor|restrictAdjunction|preservesColimits|sheafToPresheaf' Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/AlgebraicGeometry/Modules",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:337-429 has restriction and its adjunction only for scheme open immersions; Mathlib/Algebra/Category/ModuleCat/Sheaf has no generic restriction-preserves-colimits statement.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
