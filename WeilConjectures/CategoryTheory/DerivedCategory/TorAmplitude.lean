@@ -46,7 +46,7 @@ open CategoryTheory Limits MonoidalCategory
 
 namespace DerivedCategory
 
-variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
+variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C]
 

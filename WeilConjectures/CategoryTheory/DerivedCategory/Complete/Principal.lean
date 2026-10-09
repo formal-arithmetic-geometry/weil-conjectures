@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
-public import WeilConjectures.Algebra.Homology.DerivedCategory.Products
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
