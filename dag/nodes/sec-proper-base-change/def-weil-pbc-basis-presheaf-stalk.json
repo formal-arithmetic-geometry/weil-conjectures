@@ -1,0 +1,76 @@
+{
+ "id": "def-weil-pbc-basis-presheaf-stalk",
+ "kind": "definition",
+ "title": "Stalk of a presheaf of abelian groups on a basis",
+ "statement": "Let $X$ be a topological space and $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology and satisfies $U\\cap V\\in\\mathcal B$ for $U,V\\in\\mathcal B$. Let $F$ be a presheaf of abelian groups on $\\mathcal B$: abelian groups $F(U)$ for $U\\in\\mathcal B$ and homomorphisms $r_{U,V}:F(U)\\to F(V)$ for $V\\subseteq U$ in $\\mathcal B$ with $r_{U,U}=\\mathrm{id}$, $r_{V,W}r_{U,V}=r_{U,W}$ (a functor $\\mathcal B^{op}\\to\\mathbf{Ab}$, $\\mathcal B$ ordered by inclusion). For $x\\in X$ let $\\mathcal B_x=\\{U\\in\\mathcal B:x\\in U\\}$, a directed set under reverse inclusion ($U\\cap V\\in\\mathcal B_x$ for $U,V\\in\\mathcal B_x$; nonempty since $\\mathcal B$ is a basis and $x\\in X$ open). The *stalk* of $F$ at $x$ is the colimit $F_x=\\operatorname{colim}_{U\\in\\mathcal B_x}F(U)$ in the category of abelian groups of the restriction of $F$ to $\\mathcal B_x^{op}$, with its colimit maps $\\sigma\\mapsto\\sigma_x=(U,\\sigma)_x:F(U)\\to F_x$ (the *germ* maps), which are homomorphisms with $(r_{U,V}\\sigma)_x=\\sigma_x$ for $x\\in V\\subseteq U$ in $\\mathcal B$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009H (label section-bases), after Definition 009I (label definition-presheaf-basis): F_x = colim_{U in B, x in U} F(U), a directed colimit; and after Definition 009P (label definition-sheaf-structures-basis) for values in an algebraic structure (the underlying set of F_x is the stalk of the underlying presheaf of sets)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of a presheaf defined on a basis of open sets as colimit over basic open neighbourhoods of a point",
+   "results": "TopCat.Presheaf.germ_exist_of_isBasis, TopCat.Presheaf.stalk, stalkFunctor, germ, Γgerm, germ_exist, germ_eq_of_isBasis (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "no dedicated declaration: Mathlib's stalks are for presheaves on all opens of X; the stalk of a presheaf on B is a colimit in AddCommGrpCat (match recorded)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit of a functor on basic open neighbourhoods of a point (filtered) in abelian groups, germ maps",
+   "results": "ModuleCat.Tilde.toOpen_germ_apply, TopCat.Presheaf.Γgerm, TopCat.Presheaf.germ, TopCat.stalkToFiber_germ",
+   "date": "2026-10-10",
+   "verdict": "no dedicated declaration; definition is a Mathlib colimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.Opens.IsBasis, CategoryTheory.Limits.colimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no dedicated declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsBasis.*stalk\\|stalk.*IsBasis\\|basicOpenNhds' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves; grep -n 'hasColimitsOfSize' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Grp/Colimits.lean; grep -n 'forget_preservesFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Grp/FilteredColimits.lean; grep -n 'theorem colimit_eq_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Types/Filtered.lean",
+   "results": "no stalk over a basis in Topology/Sheaves (Stalks.lean:480-505 has exists_mem_germ_eq_of_isBasis, germ_eq_of_isBasis for presheaves on X); AddCommGrpCat.hasColimitsOfSize (Colimits.lean:295), AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits (FilteredColimits.lean:213), Types.FilteredColimit.colimit_eq_iff (Filtered.lean:164)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Limits.colimit in AddCommGrpCat"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.colimit",
+  "file": "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+  "how": "specializes in one line: colimit in AddCommGrpCat (which has all small colimits, AddCommGrpCat.hasColimitsOfSize, Mathlib/Algebra/Category/Grp/Colimits.lean:295) of F restricted to the full subcategory of B_x^op, with colimit.ι as the germ maps; for the description of elements (every element is a germ, two germs agree iff the sections agree on a smaller member of B_x) use AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits (Grp/FilteredColimits.lean:213) with CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff (Limits/Types/Filtered.lean:164), B_x being directed"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-on-basis-extends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition leaf: colimit over B_x in AddCommGrpCat (CategoryTheory.Limits.colimit, AddCommGrpCat.hasColimitsOfSize), elements described by forget_preservesFilteredColimits (Grp/FilteredColimits.lean:150) and Types.FilteredColimit.colimit_eq_iff (Types/Filtered.lean:164); checked."
+ }
+}

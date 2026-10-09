@@ -8,9 +8,65 @@
   "place": "Sheaves on Spaces, Section 009H: Lemma 009M (label lemma-condition-star-sections), Lemma 009N (label lemma-extend-off-basis) with its proof (F^ext(W) = families of germs (s_x) in the stalks F_x = colim_{x in U in B} F(U) satisfying (*); sheaf by the argument of Lemma 007Y, label lemma-sheafification-sheaf), Lemma 009Q (label lemma-extend-off-basis-structures) for the abelian group structure; Definition 009J and Lemma 009L for the form of the sheaf condition when B is closed under intersections"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Stalks and sections over members of $\\mathcal B$.* For $x\\in X$ let $F_x=\\operatorname{colim}_{x\\in U\\in\\mathcal B}F(U)$ be the stalk of $F$ with its germ homomorphisms $\\sigma\\mapsto\\sigma_x$, which satisfy $(r_{U,V}\\sigma)_x=\\sigma_x$ for $x\\in V\\subseteq U$ in $\\mathcal B$ [def-weil-pbc-basis-presheaf-stalk]. For $U\\in\\mathcal B$ let $\\gamma_U:F(U)\\to\\prod_{x\\in U}F_x$, $s\\mapsto(s_x)_{x\\in U}$. Since $F$ satisfies the gluing hypothesis of the statement for all $\\mathcal B$-coverings and $\\mathcal B$ is a basis closed under pairwise intersections, [lem-weil-pbc-basis-sheaf-sections-germs] applies: $\\gamma_U$ is injective and its image is the set of families $(t_x)_{x\\in U}$ satisfying (*): every $x\\in U$ has $V\\in\\mathcal B$ with $x\\in V\\subseteq U$ and $\\sigma\\in F(V)$ with $t_y=\\sigma_y$ for all $y\\in V$.",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk",
+    "lem-weil-pbc-basis-sheaf-sections-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H: the stalk after Definition 009I (label definition-presheaf-basis); Lemma 009M (label lemma-condition-star-sections)"
+   }
+  },
+  {
+   "text": "*The extension as a sheaf of sets.* For an open $W\\subseteq X$ let $F^{ext}(W)\\subseteq\\prod_{x\\in W}F_x$ be the set of families $(t_x)_{x\\in W}$ satisfying (*) relative to $W$: every $x\\in W$ has $V\\in\\mathcal B$ with $x\\in V\\subseteq W$ and $\\sigma\\in F(V)$ with $t_y=\\sigma_y$ for all $y\\in V$; for open $W'\\subseteq W$ the restriction is $(t_x)_{x\\in W}\\mapsto(t_x)_{x\\in W'}$. The two conditions of [lem-weil-pbc-local-predicate-sections-sheaf] hold for $T_x=F_x$ and $P(W)=F^{ext}(W)$. (i) Restriction: let $t\\in F^{ext}(W)$, $W'\\subseteq W$ open and $x\\in W'$; take $V,\\sigma$ for $t$ at $x$; as $\\mathcal B$ is a basis there is $V'\\in\\mathcal B$ with $x\\in V'\\subseteq V\\cap W'$; then $\\sigma'=r_{V,V'}(\\sigma)\\in F(V')$ satisfies $\\sigma'_y=\\sigma_y=t_y$ for $y\\in V'$ [def-weil-pbc-basis-presheaf-stalk], which is (*) for $(t_x)_{x\\in W'}$ at $x$. (ii) Locality: if $t\\in\\prod_{x\\in W}F_x$ and every $x\\in W$ has an open $V_0$ with $x\\in V_0\\subseteq W$ and $(t_y)_{y\\in V_0}\\in F^{ext}(V_0)$, then (*) for $(t_y)_{y\\in V_0}$ at $x$ gives $V\\in\\mathcal B$, $x\\in V\\subseteq V_0\\subseteq W$, and $\\sigma\\in F(V)$ with $t_y=\\sigma_y$ on $V$: this is (*) for $t$ at $x$. Hence by [lem-weil-pbc-local-predicate-sections-sheaf] $F^{ext}$ is a sheaf of sets on $X$: for every open covering $W=\\bigcup_kW_k$ and families $t^k\\in F^{ext}(W_k)$ agreeing on all $W_k\\cap W_l$ there is exactly one $t\\in F^{ext}(W)$ restricting to every $t^k$.",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk",
+    "lem-weil-pbc-local-predicate-sections-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, Lemma 009N (label lemma-extend-off-basis), proof: F^ext(U) = families satisfying (*) of Lemma 009M, a presheaf by restriction of families, a sheaf 'as in the proof of Lemma 007Y' (label lemma-sheafification-sheaf, Section 007X)"
+   }
+  },
+  {
+   "text": "*The group structure.* Each $F^{ext}(W)$ is a subgroup of the abelian group $\\prod_{x\\in W}F_x$ (componentwise operations). Zero: for $x\\in W$ choose $V\\in\\mathcal B$ with $x\\in V\\subseteq W$ ($\\mathcal B$ a basis) and $\\sigma=0\\in F(V)$; $0_y=\\sigma_y$ for $y\\in V$ since germ maps are homomorphisms. Sums and negatives: if $t,t'\\in F^{ext}(W)$ and $x\\in W$, take $V,\\sigma$ for $t$ and $V',\\sigma'$ for $t'$ at $x$; then $V''=V\\cap V'\\in\\mathcal B$, $x\\in V''\\subseteq W$, and $\\sigma''=r_{V,V''}(\\sigma)+r_{V',V''}(\\sigma')$ (resp. $-r_{V,V''}(\\sigma)$) satisfies $\\sigma''_y=\\sigma_y+\\sigma'_y=t_y+t'_y$ (resp. $-t_y$) for $y\\in V''$, because germ maps are homomorphisms compatible with restriction [def-weil-pbc-basis-presheaf-stalk]. The restriction maps of $F^{ext}$ are restrictions of the coordinate projections $\\prod_{x\\in W}F_x\\to\\prod_{x\\in W'}F_x$, hence homomorphisms, and they are compatible with composition. So $F^{ext}$ is a presheaf of abelian groups whose underlying presheaf of sets is the sheaf of step 2; the gluing condition for a presheaf of abelian groups is the same statement about the underlying sets, so $F^{ext}$ is a sheaf of abelian groups on $X$.",
+   "uses": [
+    "def-weil-pbc-basis-presheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, Lemma 009Q (label lemma-extend-off-basis-structures), proof: it suffices to construct F^ext on the level of underlying presheaves of sets and to see that the structure of the stalks makes F^ext(U) an object of the algebraic category; for abelian groups this is the subgroup of the product of stalks written out here (Stacks leaves the details to the reader)"
+   }
+  },
+  {
+   "text": "*The isomorphisms $\\iota_U$.* Let $U\\in\\mathcal B$. For $s\\in F(U)$ the family $\\gamma_U(s)=(s_x)_{x\\in U}$ satisfies (*) relative to $U$ (take $V=U$, $\\sigma=s$), so $\\gamma_U$ is a map $F(U)\\to F^{ext}(U)$; it is a homomorphism since the germ maps are; it is injective and surjective onto $F^{ext}(U)$ by step 1 ([lem-weil-pbc-basis-sheaf-sections-germs]: its image is exactly the set of families satisfying (*), which is $F^{ext}(U)$ by definition). Put $\\iota_U=\\gamma_U^{-1}:F^{ext}(U)\\to F(U)$, a group isomorphism. Compatibility: for $V\\subseteq U$ in $\\mathcal B$ and $s\\in F(U)$, $\\gamma_V(r_{U,V}(s))=((r_{U,V}s)_y)_{y\\in V}=(s_y)_{y\\in V}=\\gamma_U(s)|_V$ [def-weil-pbc-basis-presheaf-stalk]; with $t=\\gamma_U(s)$, i.e. $s=\\iota_U(t)$, this reads $\\iota_V(t|_V)=r_{U,V}(\\iota_U(t))$ for all $t\\in F^{ext}(U)$.",
+   "uses": [
+    "lem-weil-pbc-basis-sheaf-sections-germs",
+    "def-weil-pbc-basis-presheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, Lemma 009N (label lemma-extend-off-basis), proof: 'by Lemma 009M we see that F(U) = F^ext(U) whenever U is an element of the basis B', compatibly with restrictions; Lemma 009Q for the group structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-basis-presheaf-stalk",
+  "lem-weil-pbc-basis-sheaf-sections-germs",
+  "lem-weil-pbc-local-predicate-sections-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H (label section-bases): Lemma 009N (label lemma-extend-off-basis) with Lemma 009M (label lemma-condition-star-sections) and the argument of Lemma 007Y (label lemma-sheafification-sheaf); Lemma 009Q (label lemma-extend-off-basis-structures) for abelian groups, whose details Stacks leaves to the reader and which are written out in step 3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +102,38 @@
    "results": "Stalks.lean:484 exists_mem_germ_eq_of_isBasis, :491 germ_eq_of_isBasis, :502 stalkFunctor_map_injective_of_isBasis; Sites.lean:126 coverDense_iff_isBasis, :135 coverDense_inducedFunctor, :240 restrictHomEquivHom, :246 extend_hom_app, :252 hom_ext, :258 isIso_iff_isIso_basis; InducedTopology.lean:111 mem_restrictedTopology_iff, :138 mem_inducedTopology_iff_of_isCoverDense, :159 sheafInducedTopologyEquivOfIsCoverDense; no TopCat.Sheaf.extend or extension-from-basis declaration",
    "date": "2026-10-10",
    "verdict": "no match as stated; comparison-lemma route recorded above"
+  },
+  {
+   "tool": "leansearch",
+   "query": "presheaf on a basis of opens is a sheaf for the induced topology iff gluing holds for covers of a basic open by basic opens",
+   "results": "TopCat.Presheaf.IsGluing, IsSheaf.isSheafOpensLeCover, isSheaf_iff_isSheafUniqueGluing, isSheaf_iff_isSheafPairwiseIntersections, isSheaf_iff_isSheafPreservesLimitPairwiseIntersections (Topology/Sheaves/SheafCondition), Presheaf.IsSheaf', Presheaf.IsSheaf",
+   "date": "2026-10-10",
+   "verdict": "no match: all for presheaves on all opens of X; no declaration identifying the gluing condition on B with Presheaf.IsSheaf for (inducedFunctor B).inducedTopology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition for the Grothendieck topology generated by a precoverage is the sheaf condition for each covering presieve",
+   "results": "Presieve.isSheaf_coverage (Sites/Coverage.lean:402), IsSheaf.isSheafFor_of_mem_precoverage, isSheaf_pretopology (needs HasPullbacks C), Precoverage.isSheaf_toGrothendieck_iff, IsSheaf.isSheafFor, isSheafFor_iff_generate, isSheaf_iff_isSheaf_of_type, Presheaf.IsSheaf.isSheafFor",
+   "date": "2026-10-10",
+   "verdict": "tools for the identification of the hypothesis with the induced-topology sheaf condition, none of them that identification: the induced topology is not given as generated by a coverage/precoverage on B (Precoverage.toGrothendieck_comap_eq_restrictedTopology, InducedTopology.lean:184, would need Opens.grothendieckTopology as a Precoverage.toGrothendieck with HasIsos, IsStableUnderBaseChange, IsStableUnderComposition, HasPullbacks), and the per-presieve condition needs a translation of compatible families to agreement on U_i ∩ U_j"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.isSheafFor_arrows_iff_pullbacks",
+   "results": "Presieve.isSheafFor_arrows_iff_pullbacks (Mathlib.CategoryTheory.Sites.IsSheafFor): IsSheafFor P (ofArrows X π) ↔ ∀ x, Arrows.PullbackCompatible P π x → ∃! t, ∀ i, P.map (π i).op t = x i, under [(ofArrows X π).HasPairwisePullbacks]",
+   "date": "2026-10-10",
+   "verdict": "tool only: in the category of members of B (InducedCategory/FullSubcategory of Opens X) the pairwise pullbacks are U_i ∩ U_j but no instance provides HasPairwisePullbacks there; the sieve-to-family translation remains"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; sed -n 25,112p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean; sed -n 790,800p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean; sed -n 715,735p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Sheaf.lean; sed -n 225,286p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/LocalPredicate.lean",
+   "results": "sheafInducedTopologyEquivOfIsCoverDense (InducedTopology.lean:159) = IsDenseSubsite.sheafEquiv (Basic.lean:797) = (sheafPushforwardContinuous G A J K).asEquivalence.symm, so its inverse is restriction along G (Y ↦ G.op ⋙ Y.val) and the functor is the right Kan extension (counit isos: SheafEquiv.lean:44,97); mem_inducedTopology_iff_of_isCoverDense (:138); Presheaf.isSheaf_iff_isSheaf_forget (Sheaf.lean:730); TopCat.subpresheafToTypes.isSheaf (LocalPredicate.lean:245); no declaration turning the B-gluing condition into Presheaf.IsSheaf (G.inducedTopology _)",
+   "date": "2026-10-10",
+   "verdict": "generalization candidate, not a leaf (see split_report): the comparison lemma gives F^ext (functor of the equivalence) and the iota_U (components at U of the isomorphism inverse.obj (functor.obj F) ≅ F of the equivalence, whose inverse is restriction along inducedFunctor B; naturality = compatibility), but the hypothesis must first be shown to be the sheaf condition for the induced topology, which is no single Mathlib declaration; the split follows Stacks 009N, whose step 2 is the Mathlib leaf subpresheafToTypes.isSheaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,6 +158,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 009N for abelian groups (sheaf on a basis closed under intersections extends); correct; unsplit; the Mathlib route via sheafInducedTopologyEquivOfIsCoverDense is recorded on the node."
+  "note": "Four steps along Stacks 009N/009M/007Y/009Q: stalks on the basis (new definition leaf def-weil-pbc-basis-presheaf-stalk: colimit in AddCommGrpCat, element description via forget_preservesFilteredColimits and Types.FilteredColimit.colimit_eq_iff, checked), sections = germ families with (*) (009M as the new unsplit node lem-weil-pbc-basis-sheaf-sections-germs), the extension as the sheaf of families satisfying the local predicate (*) (new Mathlib leaf TopCat.subpresheafToTypes.isSheaf, LocalPredicate.lean:245, checked), subgroup structure written out (009Q leaves it to the reader), ι_U from the bijection of 009M. Not a Mathlib leaf: the comparison-lemma route (sheafInducedTopologyEquivOfIsCoverDense) lacks one declaration identifying the gluing hypothesis with the induced-topology sheaf condition; recorded on the node."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-on-basis-extends",
+  "worker": "stage1",
+  "summary": "Decided not a Mathlib leaf. The comparison-lemma route was read in the source: Functor.sheafInducedTopologyEquivOfIsCoverDense (InducedTopology.lean:159) is IsDenseSubsite.sheafEquiv = (sheafPushforwardContinuous ..).asEquivalence.symm (DenseSubsite/Basic.lean:797), so with G = inducedFunctor of B (cover dense by TopCat.Opens.coverDense_inducedFunctor, Sites.lean:135) and A = AddCommGrpCat its functor gives F^ext and the component at U of the isomorphism inverse.obj (functor.obj F) ≅ F (inverse = restriction along G) gives iota_U, naturality giving compatibility: one declaration per clause there. But the hypothesis is not yet Presheaf.IsSheaf (G.inducedTopology _) F: it needs isSheaf_iff_isSheaf_forget (Sheaf.lean:730), isSheaf_iff_isSheaf_of_type, mem_inducedTopology_iff_of_isCoverDense with Opens.mem_grothendieckTopology (a sieve S on U in B covers iff its members cover U), and then an argument that a compatible family for S is a family agreeing on pairwise intersections (V ∩ V' in B and in S) and conversely, for which there is no single declaration (isSheafFor_arrows_iff_pullbacks needs HasPairwisePullbacks in the category of members of B, which no instance gives; Precoverage.toGrothendieck_comap_eq_restrictedTopology needs a precoverage presentation of the topology of X). So, as instructed, the item is split along Stacks 009N/009Q: (1) stalks on B (new def-weil-pbc-basis-presheaf-stalk, Mathlib leaf: a colimit in AddCommGrpCat) and Lemma 009M (new lem-weil-pbc-basis-sheaf-sections-germs, unsplit); (2) F^ext(W) = families of germs satisfying (*), a local predicate, hence a sheaf by Stacks 007Y = TopCat.subpresheafToTypes.isSheaf (new lem-weil-pbc-local-predicate-sections-sheaf, Mathlib leaf); (3) F^ext(W) is a subgroup of the product of stalks (Stacks 009Q, details written out); (4) iota_U = inverse of s ↦ (s_x), bijective by 009M, compatible with restrictions. The comparison-lemma route stays recorded in mathlib_searches as a generalization candidate. Statement unchanged; lean_audit none on both branches; the source repository has no extension-from-basis declaration (inducedTopology occurs only in hasSheafify_inducedTopology_equivSmallModel and the small-model sheafification instances, all sorry-free and unrelated)."
  }
 }

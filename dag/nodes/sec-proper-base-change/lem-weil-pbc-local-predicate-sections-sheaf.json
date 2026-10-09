@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-local-predicate-sections-sheaf",
+ "kind": "statement",
+ "title": "Families satisfying a local condition form a sheaf of sets",
+ "statement": "Let $X$ be a topological space and $(T_x)_{x\\in X}$ a family of sets. Suppose given, for every open $W\\subseteq X$, a subset $P(W)\\subseteq\\prod_{x\\in W}T_x$ such that (i) (restriction) for open $W'\\subseteq W$ and $f\\in P(W)$ the restriction $(f_x)_{x\\in W'}$ lies in $P(W')$, and (ii) (locality) a family $f\\in\\prod_{x\\in W}T_x$ lies in $P(W)$ as soon as every $x\\in W$ has an open neighbourhood $V\\subseteq W$ with $(f_y)_{y\\in V}\\in P(V)$. Then $W\\mapsto P(W)$, with restriction of families as restriction maps, is a sheaf of sets on $X$: for every open covering $W=\\bigcup_kW_k$ and families $f^k\\in P(W_k)$ that agree on every $W_k\\cap W_l$ there is exactly one $f\\in P(W)$ restricting to $f^k$ on every $W_k$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 007X (label section-sheafification), Lemma 007Y (label lemma-sheafification-sheaf) and its proof: the families of germs satisfying the local condition (*) form a sheaf, glued pointwise in the product sheaf and (*) checked at each point; it is used in this form in the proof of Lemma 009N (label lemma-extend-off-basis)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the presheaf of dependent functions satisfying a local predicate is a sheaf",
+   "results": "TopCat.subpresheafToTypes.isSheaf, TopCat.subsheafToTypes (Mathlib.Topology.Sheaves.LocalPredicate), TopCat.Presheaf.sheafify, TopCat.Presheaf.toType_isSheaf",
+   "date": "2026-10-10",
+   "verdict": "match: TopCat.subpresheafToTypes.isSheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dependent functions satisfying a local predicate form a sheaf of types on a topological space",
+   "results": "TopCat.subsheafToTypes, TopCat.subpresheafToTypes.isSheaf (Mathlib.Topology.Sheaves.LocalPredicate), TopCat.Presheaf.toTypes_isSheaf",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.subpresheafToTypes.isSheaf",
+   "results": "TopCat.subpresheafToTypes.isSheaf {X : TopCat} {T : X → Type u_1} (P : TopCat.LocalPredicate T) : (TopCat.subpresheafToTypes P.toPrelocalPredicate).IsSheaf (Mathlib.Topology.Sheaves.LocalPredicate)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 60,105p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/LocalPredicate.lean; sed -n 225,286p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/LocalPredicate.lean",
+   "results": "PrelocalPredicate (pred, res) line 64; LocalPredicate (locality) line 95; subpresheafToTypes line 228 (obj U = {f : (x:U) -> T x // P.pred f}); subpresheafToTypes.isSheaf line 245; subsheafToTypes line 283",
+   "date": "2026-10-10",
+   "verdict": "match: read the source; LocalPredicate's three fields are (i), (ii) of the node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.subpresheafToTypes.isSheaf",
+  "file": "Mathlib/Topology/Sheaves/LocalPredicate.lean",
+  "how": "exact (line 245): for P : TopCat.LocalPredicate T (pred = membership in P(W), res = (i), locality = (ii)), (subpresheafToTypes P.toPrelocalPredicate).IsSheaf; TopCat.subsheafToTypes P (line 283) is the bundled sheaf"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-on-basis-extends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf TopCat.subpresheafToTypes.isSheaf (LocalPredicate.lean:245), Stacks 007Y; checked."
+ }
+}

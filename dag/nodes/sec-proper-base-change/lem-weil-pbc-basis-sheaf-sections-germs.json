@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-basis-sheaf-sections-germs",
+ "kind": "statement",
+ "title": "Sections of a sheaf on a basis are the families of germs satisfying (*)",
+ "statement": "Let $X$ be a topological space and $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology and satisfies $U\\cap V\\in\\mathcal B$ for $U,V\\in\\mathcal B$. Let $F$ be a presheaf of abelian groups on $\\mathcal B$ (groups $F(U)$, $U\\in\\mathcal B$, restriction homomorphisms $r_{U,V}$, $s|_V=r_{U,V}(s)$, with $r_{U,U}=\\mathrm{id}$ and $r_{V,W}r_{U,V}=r_{U,W}$) such that for every $U\\in\\mathcal B$, every family $(U_i)_{i\\in I}$ of members of $\\mathcal B$ with $\\bigcup_iU_i=U$ ($I$ arbitrary, possibly empty) and every family $s_i\\in F(U_i)$ with $s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}$ for all $i,j$ there is exactly one $s\\in F(U)$ with $s|_{U_i}=s_i$ for all $i$. For $x\\in X$ let $F_x$ be the stalk of $F$ at $x$ with germ maps $\\sigma\\mapsto\\sigma_x$ [def-weil-pbc-basis-presheaf-stalk]. Then for every $U\\in\\mathcal B$ the map $\\gamma_U:F(U)\\to\\prod_{x\\in U}F_x$, $s\\mapsto(s_x)_{x\\in U}$, is injective, and its image is the set of families $(t_x)_{x\\in U}$ with property (*): for every $x\\in U$ there are $V\\in\\mathcal B$ with $x\\in V\\subseteq U$ and $\\sigma\\in F(V)$ with $t_y=\\sigma_y$ for all $y\\in V$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009H, Lemma 009M (label lemma-condition-star-sections) and its proof (for a sheaf of sets on B, Definition 009J; by Lemma 009L (label lemma-cofinal-systems-coverings-standard-case) with B closed under intersections the hypothesis here is that sheaf condition); for values in abelian groups, the remark before Lemma 009Q that 009K, 009L, 009M hold without change for the underlying presheaf of sets"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-basis-presheaf-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of a sheaf on a basis over a basic open are identified with families of germs at its points which are locally given by a section",
+   "results": "TopCat.Presheaf.germ_exist_of_isBasis, section_ext, germ_exist, germ_eq_of_isBasis (Mathlib.Topology.Sheaves.Stalks); ModuleCat.Tilde.toOpen_germ_apply; StructureSheaf.germ_toOpen",
+   "date": "2026-10-10",
+   "verdict": "no match: all for presheaves on all opens of X (section_ext is the injectivity for a sheaf on X), nothing for a presheaf on a basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a sheaf on a basis, a section over a basic open is the same as a family of germs at its points which is locally given by sections over basic opens",
+   "results": "TopCat.Presheaf.germ_exist_of_isBasis, germ_eq_of_isBasis (Stalks), RingedSpace.mem_basicOpen(') , Scheme.mem_basicOpen''",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.germ_eq_of_isBasis",
+   "results": "TopCat.Presheaf.germ_eq_of_isBasis (Mathlib.Topology.Sheaves.Stalks): for F : TopCat.Presheaf C X on all opens and B a basis, equal germs agree on some W in B",
+   "date": "2026-10-10",
+   "verdict": "no match: a tool for the proof only when F is already a presheaf on X"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsBasis\\|isBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -n 'isGerm\\|isLocallyGerm' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Sheafify.lean",
+   "results": "Stalks.lean:484,491,502 (germs over basis opens for presheaves on X); Sites.lean:126-266 (coverDense_iff_isBasis, restrictHomEquivHom, hom_ext, isIso_iff_isIso_basis); Sheafify.lean:53,60 isGerm/isLocallyGerm (the predicate (*) for a presheaf on X, used for sheafification)",
+   "date": "2026-10-10",
+   "verdict": "no match for presheaves on a basis"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-on-basis-extends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 009M (sections over U ∈ B = germ families with (*)); correct; unsplit; its split must use the uniqueness half of the hypothesis for gluing on refinements of U_i ∩ U_j, as the worker notes."
+ }
+}
