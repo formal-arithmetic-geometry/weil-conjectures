@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-ring-stalk-sheafification-space",
+ "kind": "statement",
+ "title": "Stalks of the sheafification of a presheaf of commutative rings on a space",
+ "statement": "Let $X$ be a topological space, $x\\in X$, and $\\mathcal P$ a presheaf of commutative rings on $X$, with sheafification $\\theta:\\mathcal P\\to\\mathcal P^\\#$ in sheaves of commutative rings [def-weil-pbc-sheafification]. Stalks are the colimits $\\varinjlim_{U\\ni x}$ over the open neighbourhoods of $x$, taken in commutative rings, with germs $s\\mapsto s_x$ [def-weil-pbc-module-stalk]. Then the ring homomorphism $\\theta_x:\\mathcal P_x\\to\\mathcal P^\\#_x$, $s_x\\mapsto\\theta_U(s)_x$ ($s\\in\\mathcal P(U)$, $x\\in U$), is an isomorphism of rings.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification: $\\mathcal F_x=\\mathcal F^\\#_x$ for presheaves of sets), with Section 0086 (section-sheafification-presheaves-structures: the sheafification of a presheaf of algebraic structures has as underlying sheaf of sets the sheafification of the underlying presheaf of sets) and Section 008P (stalks of sheaves of algebraic structures are computed on underlying sets)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of a presheaf of commutative rings is isomorphic to stalk of its sheafification",
+   "results": "TopCat.Presheaf.sheafifyStalkIso, stalkToFiber, stalkToFiber_surjective, TopCat.Presheaf.sheafify (types only, Mathlib.Topology.Sheaves.Sheafify); AlgebraicGeometry.StructureSheaf.stalkIso, ModuleCat.Tilde.stalkIso (not this)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit for rings; the general-category lemma found by loogle below"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso",
+   "results": "stalkFunctor_map_unit_toSheafify_isIso {X : TopCat} (p₀ : X) (C) [Category C] [HasColimits C] [HasTerminal C] (𝓕 : TopCat.Presheaf C X) [HasWeakSheafify (Opens.grothendieckTopology X) C] : IsIso ((stalkFunctor C p₀).map (toSheafify (Opens.grothendieckTopology X) 𝓕)) (Mathlib.Topology.Sheaves.Sheafify)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization to any C, specializes to C = CommRingCat)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 125,143p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Sheafify.lean; grep -n 'theorem stalkFunctor_map_germ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; sed -n 300,312p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LeftExact.lean",
+   "results": "Sheafify.lean:137 stalkFunctor_map_unit_toSheafify_isIso (variables line 133: HasColimits C, HasTerminal C, HasWeakSheafify); Stalks.lean:147 stalkFunctor_map_germ (germ s ≫ (stalkFunctor C x).map f = f.app U ≫ germ, the formula θ_x(s_x) = θ_U(s)_x); LeftExact.lean:308 instance HasSheafify J D for concrete D with the favourable assumptions (CommRingCat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso",
+  "file": "Mathlib/Topology/Sheaves/Sheafify.lean",
+  "how": "specializes in one line: take C = CommRingCat.{u} for X : TopCat.{u} (HasColimits and HasTerminal hold; HasWeakSheafify (Opens.grothendieckTopology X) CommRingCat from HasSheafify, CategoryTheory/Sites/LeftExact.lean:308, as recorded on lem-weil-pbc-ring-sheafification-space-underlying-abelian); (stalkFunctor CommRingCat x).map (toSheafify J P) is θ_x, sending germ s to germ θ_U(s) (stalkFunctor_map_germ, Topology/Sheaves/Stalks.lean:147), and an isomorphism in CommRingCat is a ring isomorphism. The abelian-group version is lem-weil-pbc-stalk-sheafification-space (same declaration with C = AddCommGrpCat)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-topological-inverse-image-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: stalkFunctor_map_unit_toSheafify_isIso (Topology/Sheaves/Sheafify.lean:137) with C = CommRingCat, stalkFunctor_map_germ (Stalks.lean:147); Stacks 007Z for rings."
+ }
+}

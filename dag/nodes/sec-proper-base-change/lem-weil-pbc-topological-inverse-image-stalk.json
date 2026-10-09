@@ -2,15 +2,104 @@
  "id": "lem-weil-pbc-topological-inverse-image-stalk",
  "kind": "statement",
  "title": "Stalks of the inverse image of a sheaf along a continuous map, with germs",
- "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of abelian groups or the category of commutative rings. For a sheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$ let $f^{-1}\\mathcal G$ be its inverse image, the sheafification of the presheaf $f_p\\mathcal G:U\\mapsto\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, and let $\\eta_{\\mathcal G}:\\mathcal G\\to f_*f^{-1}\\mathcal G$ be the unit of the adjunction $f^{-1}\\dashv f_*$ (so $\\eta_{\\mathcal G,V}:\\mathcal G(V)\\to(f^{-1}\\mathcal G)(f^{-1}V)$ for $V\\subseteq Y$ open). Then for every $x\\in X$, with $y=f(x)$, there is an isomorphism in $\\mathcal C$\n$$c_{\\mathcal G}:\\mathcal G_y\\xrightarrow{\\ \\sim\\ }(f^{-1}\\mathcal G)_x,$$\nnatural in $\\mathcal G$, such that $c_{\\mathcal G}(s_y)=(\\eta_{\\mathcal G,V}(s))_x$ for every open $V\\ni y$ and every $s\\in\\mathcal G(V)$. In particular every element of $(f^{-1}\\mathcal G)_x$ is the germ at $x$ of $\\eta_{\\mathcal G,V}(s)$ for some open $V\\ni y$ and some $s\\in\\mathcal G(V)$.",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of abelian groups or the category of commutative rings. For a sheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$ let $f^{-1}\\mathcal G$ be its inverse image, the sheafification [def-weil-pbc-sheafification] of the presheaf $f_p\\mathcal G:U\\mapsto\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, and let $\\eta_{\\mathcal G}:\\mathcal G\\to f_*f^{-1}\\mathcal G$ be the unit of the adjunction $f^{-1}\\dashv f_*$ (so $\\eta_{\\mathcal G,V}:\\mathcal G(V)\\to(f^{-1}\\mathcal G)(f^{-1}V)$ for $V\\subseteq Y$ open), all as in [def-weil-pbc-topological-inverse-image]. Stalks and germs are those of [def-weil-pbc-module-stalk] (for commutative rings, the colimit over the open neighbourhoods taken in commutative rings). Then for every $x\\in X$, with $y=f(x)$, there is an isomorphism in $\\mathcal C$\n$$c_{\\mathcal G}:\\mathcal G_y\\xrightarrow{\\ \\sim\\ }(f^{-1}\\mathcal G)_x,$$\nnatural in $\\mathcal G$, such that $c_{\\mathcal G}(s_y)=(\\eta_{\\mathcal G,V}(s))_x$ for every open $V\\ni y$ and every $s\\in\\mathcal G(V)$. In particular every element of $(f^{-1}\\mathcal G)_x$ is the germ at $x$ of $\\eta_{\\mathcal G,V}(s)$ for some open $V\\ni y$ and some $s\\in\\mathcal G(V)$.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Sheaves, Lemma Tag 008H (label lemma-stalk-pullback: $(f^{-1}\\mathcal G)_x=\\mathcal G_{f(x)}$), proved from Lemma Tag 008G (lemma-stalk-pullback-presheaf, the colimit computation $(f_p\\mathcal G)_x=\\varinjlim_{x\\in U}\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V)=\\mathcal G_{f(x)}$) and stalks commute with sheafification (lemma-stalk-sheafification); the germ formula is the construction (the map $\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ is the presheaf unit)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "*(0) Set-up.* Write $y=f(x)$. By [def-weil-pbc-topological-inverse-image], $f^{-1}\\mathcal G=(f_p\\mathcal G)^\\#$ with sheafification map $\\theta=\\theta_{\\mathcal G}:f_p\\mathcal G\\to f^{-1}\\mathcal G$ (a morphism of presheaves on $X$ with values in $\\mathcal C$), $i_{\\mathcal G,V}:\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ is the coprojection of index $V$, and the unit is $\\eta_{\\mathcal G,V}=\\theta_{f^{-1}V}\\circ i_{\\mathcal G,V}$ for every open $V\\subseteq Y$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008F (the map $i_{\\mathcal G}$ in its proof) and the definition $f^{-1}\\mathcal G=(f_p\\mathcal G)^\\#$ with the adjunction after Lemma 008G; Sections 008N, 008P"
+   }
+  },
+  {
+   "text": "*(1) Stalks of the presheaf inverse image.* By [lem-weil-pbc-presheaf-inverse-image-stalk] applied to $\\mathcal G$ (a sheaf, in particular a presheaf with values in $\\mathcal C$) there is an isomorphism $c^p:\\mathcal G_y\\to(f_p\\mathcal G)_x$ in $\\mathcal C$ with $c^p(s_y)=(i_{\\mathcal G,V}(s))_x$ for every open $V\\ni y$ and $s\\in\\mathcal G(V)$.",
+   "uses": [
+    "lem-weil-pbc-presheaf-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008G (lemma-stalk-pullback-presheaf) and Lemma 008O (1) (lemma-pullback-abelian-stalk); Section 008P"
+   }
+  },
+  {
+   "text": "*(2) Stalks commute with sheafification.* The stalk map $\\theta_x:(f_p\\mathcal G)_x\\to(f^{-1}\\mathcal G)_x$, $t_x\\mapsto(\\theta_U(t))_x$ for $t\\in f_p\\mathcal G(U)$, $x\\in U$ [def-weil-pbc-module-stalk], is an isomorphism in $\\mathcal C$: for abelian groups by [lem-weil-pbc-stalk-sheafification-space] applied on $X$ to the presheaf $f_p\\mathcal G$; for commutative rings by [lem-weil-pbc-ring-stalk-sheafification-space] applied to the presheaf of commutative rings $f_p\\mathcal G$.",
+   "uses": [
+    "lem-weil-pbc-stalk-sheafification-space",
+    "lem-weil-pbc-ring-stalk-sheafification-space",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification), as used in the proof of Lemma 008H"
+   }
+  },
+  {
+   "text": "*(3) The isomorphism and the germ formula.* Put $c_{\\mathcal G}=\\theta_x\\circ c^p:\\mathcal G_y\\to(f^{-1}\\mathcal G)_x$, an isomorphism in $\\mathcal C$ as a composite of the isomorphisms of steps (1) and (2). For an open $V\\ni y$ and $s\\in\\mathcal G(V)$, steps (1), (2) and (0) give $c_{\\mathcal G}(s_y)=\\theta_x((i_{\\mathcal G,V}(s))_x)=(\\theta_{f^{-1}V}(i_{\\mathcal G,V}(s)))_x=(\\eta_{\\mathcal G,V}(s))_x$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-presheaf-inverse-image-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008H (lemma-stalk-pullback: 'a combination of Lemmas 007Z and 008G'); the germ formula is written out by the worker"
+   }
+  },
+  {
+   "text": "*(4) Every element is such a germ.* Every element of $\\mathcal G_y$ is a germ $s_y$ with $s\\in\\mathcal G(V)$ for some open $V\\ni y$: for abelian groups by [def-weil-pbc-module-stalk]; for commutative rings by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) with $R=\\mathbb Z$ (commutative rings are the commutative $\\mathbb Z$-algebras), the open neighbourhoods of $y$ forming a directed set. Since $c_{\\mathcal G}$ is surjective, every element of $(f^{-1}\\mathcal G)_x$ is $c_{\\mathcal G}(s_y)=(\\eta_{\\mathcal G,V}(s))_x$ by step (3).",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008H; written out by the worker"
+   }
+  },
+  {
+   "text": "*(5) Naturality.* Let $u:\\mathcal G\\to\\mathcal G'$ be a morphism of sheaves on $Y$ with values in $\\mathcal C$. The unit is natural: $(f^{-1}u)_{f^{-1}V}\\circ\\eta_{\\mathcal G,V}=\\eta_{\\mathcal G',V}\\circ u_V$, since by [def-weil-pbc-topological-inverse-image] $(f^{-1}u)\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal G'}\\circ f_pu$ and $(f_pu)_{f^{-1}V}\\circ i_{\\mathcal G,V}=i_{\\mathcal G',V}\\circ u_V$ (the defining property of $f_pu$ on coprojections), and step (0). The stalk maps of [def-weil-pbc-module-stalk] satisfy $u_y(s_y)=(u_V(s))_y$ and $(f^{-1}u)_x(t_x)=((f^{-1}u)_U(t))_x$. Hence for $s\\in\\mathcal G(V)$, $V\\ni y$, by step (3): $c_{\\mathcal G'}(u_y(s_y))=(\\eta_{\\mathcal G',V}(u_V(s)))_x=((f^{-1}u)_{f^{-1}V}(\\eta_{\\mathcal G,V}(s)))_x=(f^{-1}u)_x(c_{\\mathcal G}(s_y))$. The two morphisms $c_{\\mathcal G'}\\circ u_y$ and $(f^{-1}u)_x\\circ c_{\\mathcal G}$ agree on all germs, which exhaust $\\mathcal G_y$ (step (4)), so they are equal: $c$ is natural in $\\mathcal G$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008H ('canonical bijection'; naturality not spelled out in the source); written out by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-presheaf-inverse-image-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-weil-pbc-ring-stalk-sheafification-space",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 008H (lemma-stalk-pullback), proved from Lemma 008G (lemma-stalk-pullback-presheaf) and Lemma 007Z (lemma-stalk-sheafification); Lemma 008O and Section 008P for abelian groups and algebraic structures; the germ formula and naturality (omitted in the source) written out from the construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +142,24 @@
    "results": "Stalks.lean:234 stalkPullbackHom := stalkFunctor.map (presheaf unit) ≫ stalkPushforward; :242 germ_stalkPullbackHom (germ of s at f x ↦ germ of the presheaf unit of s); :313 stalkPullbackInv; :335 stalkPullbackIso. Functors.lean:91 TopCat.Sheaf.pullback, :98 TopCat.Sheaf.pullbackIso : pullback A f ≅ forget ⋙ Presheaf.pullback A f ⋙ presheafToSheaf, :103 pullbackPushforwardAdjunction. Sheafify.lean:137 stalkFunctor_map_unit_toSheafify_isIso. Sites/Pullback.lean:75 sheafPullbackConstruction.sheafAdjunctionContinuous (composite of lanAdjunction and sheafificationAdjunction, so its unit is the presheaf unit followed by toSheafify), :85 sheafPullbackIso via Adjunction.leftAdjointUniq (compatible with units)",
    "date": "2026-10-09",
    "verdict": "match by composition: Mathlib's sheaf inverse image is the sheafification of the presheaf one (same definition as Stacks), its stalk at x is that of the presheaf pullback (stalkFunctor_map_unit_toSheafify_isIso), which is F_{f x} (stalkPullbackIso), with the germ formula from germ_stalkPullbackHom and the description of the unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the pullback presheaf f_p G at x is isomorphic to the stalk of G at f x, sending germ of s to germ of the unit image of s",
+   "results": "TopCat.Presheaf.stalkPullbackIso, germ_stalkPullbackInv, germ_stalkPullbackHom, stalkPullbackInv, germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "presheaf-level match (recorded on lem-weil-pbc-presheaf-inverse-image-stalk); no sheaf-level lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stalkPullback\\|Sheaf.pullback.*stalk\\|stalk.*Sheaf.pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Topology/Sheaves/Stalks.lean (presheaf pullback: stalkPullbackHom :234, germ_stalkPullbackHom :242, stalkPullbackInv :313, stalkPullbackIso :335); nothing for TopCat.Sheaf.pullback or sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-10",
+   "verdict": "no single declaration for the sheaf statement; split into the presheaf leaf, the sheafification leaves and the construction (as the lead's withdrawal of 2026-10-09 says)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +189,17 @@
    "how": "a few Mathlib lemmas, one per clause: the iso is stalkPullbackIso C f F x (line 335, C = Ab or CommRingCat, natural since stalkPullbackHom is stalkFunctor.map of the unit followed by stalkPushforward) composed with the stalk iso of the sheafification map TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso (Topology/Sheaves/Sheafify.lean:137), the sheaf pullback being the sheafified presheaf pullback (TopCat.Sheaf.pullbackIso, Topology/Sheaves/Functors.lean:98); the germ clause is germ_stalkPullbackHom (Stalks.lean:242) together with the unit of the sheaf adjunction being the presheaf unit followed by toSheafify (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory/Sites/Pullback.lean:75, transported by leftAdjointUniq at :85)"
   },
   "reason": "the match composes four declarations (stalkPullbackIso, stalkFunctor_map_unit_toSheafify_isIso, Sheaf.pullbackIso, germ_stalkPullbackHom) and the germ clause needs the identification of the sheaf-adjunction unit with the presheaf unit followed by toSheafify (through leftAdjointUniq): an argument of several steps, not one declaration per clause; kept as the route for the split"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-topological-inverse-image-stalk",
+  "worker": "stage1",
+  "summary": "Split along Stacks 008H = 008G + 007Z (with 008O/008P for abelian groups and commutative rings) in six steps: (0) the construction f^{-1}G = (f_pG)^#, eta = f_*(theta) o i; (1) presheaf stalks (new Mathlib leaf lem-weil-pbc-presheaf-inverse-image-stalk = stalkPullbackIso + germ_stalkPullbackHom); (2) stalks commute with sheafification (existing leaf lem-weil-pbc-stalk-sheafification-space for abelian groups, new leaf lem-weil-pbc-ring-stalk-sheafification-space for commutative rings); (3) c = theta_x o c^p and the germ formula; (4) surjectivity on germs; (5) naturality from naturality of the unit and germs exhausting the stalk. No node defined the topological f_*, f_p, f^{-1} and the unit: new definition node def-weil-pbc-topological-inverse-image (Mathlib leaf: sheafPullbackConstruction.sheafAdjunctionContinuous for Opens.map f, whose unit is the Lan unit followed by f_*(toSheafify)); stmt_deps filled (was empty) with it, def-weil-pbc-module-stalk and def-weil-pbc-sheafification, and the statement now cites them (meaning unchanged). The source tag for stalks-of-sheafification is 007Z (the brief's 007K is a different tag)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 6 steps along Sheaves 008H (presheaf stalk 008G, stalks commute with sheafification 007Z, germ formula, germs exhaust the stalk, naturality). Statement only gained citations of the new definition node and the stalk/sheafification nodes. Correct; three new Mathlib leaves verified."
  }
 }

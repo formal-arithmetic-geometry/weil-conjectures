@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-presheaf-inverse-image-stalk",
+ "kind": "statement",
+ "title": "Stalks of the presheaf inverse image along a continuous map, with germs",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of abelian groups or the category of commutative rings. Let $\\mathcal G$ be a presheaf on $Y$ with values in $\\mathcal C$, let $f_p\\mathcal G$ be its presheaf inverse image, $f_p\\mathcal G(U)=\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, with the morphism $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$, $i_{\\mathcal G,V}:\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ the coprojection of index $V$ [def-weil-pbc-topological-inverse-image], and let stalks and germs be as in [def-weil-pbc-module-stalk] (for commutative rings: the colimit $\\varinjlim_{W\\ni z}\\mathcal P(W)$ in commutative rings). Let $x\\in X$ and $y=f(x)$. Then there is exactly one morphism $c^p_{\\mathcal G}:\\mathcal G_y\\to(f_p\\mathcal G)_x$ in $\\mathcal C$ such that $c^p_{\\mathcal G}(s_y)=(i_{\\mathcal G,V}(s))_x$ for every open $V\\ni y$ and every $s\\in\\mathcal G(V)$ (note $x\\in f^{-1}V$), and $c^p_{\\mathcal G}$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 008G (lemma-stalk-pullback-presheaf: $(f_p\\mathcal G)_x=\\operatorname{colim}_{x\\in U}\\operatorname{colim}_{f(U)\\subset V}\\mathcal G(V)=\\operatorname{colim}_{f(x)\\in V}\\mathcal G(V)=\\mathcal G_{f(x)}$, by cofinality: $U=f^{-1}V$), Lemma 008O (1) (lemma-pullback-abelian-stalk: an isomorphism of abelian groups) and Section 008P (the same formula in a category of algebraic structures); the germ formula is the construction (the composite of the coprojections)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the pullback presheaf f_p G at x is isomorphic to the stalk of G at f x, sending germ of s to germ of the unit image of s",
+   "results": "TopCat.Presheaf.stalkPullbackIso, germ_stalkPullbackInv, germ_stalkPullbackHom, stalkPullbackInv, germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of the inverse image sheaf of a sheaf on a topological space at x is the stalk at f x",
+   "results": "TopCat.Presheaf.stalkPullbackIso, stalkPullbackHom, stalkPullbackInv, germ_stalkPullbackHom, germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks) (query and results of the item's search of 2026-10-09)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkPullbackIso",
+   "results": "TopCat.Presheaf.stalkPullbackIso (C) [HasColimits C] (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x) : F.stalk (f x) ≅ ((TopCat.Presheaf.pullback C f).obj F).stalk x (Mathlib.Topology.Sheaves.Stalks) (the item's search of 2026-10-09)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 225,346p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; grep -n stalk_hom_ext the same file",
+   "results": "Stalks.lean:234 stalkPullbackHom := (stalkFunctor _ (f x)).map ((pullbackPushforwardAdjunction C f).unit.app F) ≫ stalkPushforward; :242 germ_stalkPullbackHom : F.germ U (f x) hU ≫ stalkPullbackHom C f F x = (unit.app F).app (op U) ≫ ((pullback C f).obj F).germ (f^{-1}U) x hU; :313 stalkPullbackInv; :335 stalkPullbackIso (hom = stalkPullbackHom); stalk_hom_ext (maps out of a stalk agreeing on germs are equal)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.stalkPullbackIso",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "specializes in one line, one lemma per clause: for X Y : TopCat.{u}, C = AddCommGrpCat.{u} or CommRingCat.{u} (HasColimits), stalkPullbackIso C f G x : G.stalk (f x) ≅ ((TopCat.Presheaf.pullback C f).obj G).stalk x (line 335) is the isomorphism, with hom = stalkPullbackHom; its germ formula is germ_stalkPullbackHom (line 242), where (pullbackPushforwardAdjunction C f).unit is i_G (def-weil-pbc-topological-inverse-image); uniqueness is TopCat.Presheaf.stalk_hom_ext (two morphisms out of a stalk agreeing after every germ are equal). An isomorphism in AddCommGrpCat / CommRingCat is a group / ring isomorphism."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-topological-inverse-image-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: stalkPullbackIso (Topology/Sheaves/Stalks.lean:335), germ_stalkPullbackHom (:242), stalk_hom_ext; Stacks 008G."
+ }
+}

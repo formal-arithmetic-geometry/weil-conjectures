@@ -1,0 +1,79 @@
+{
+ "id": "def-weil-pbc-topological-inverse-image",
+ "kind": "definition",
+ "title": "Direct image, presheaf inverse image and inverse image along a continuous map, with units",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of abelian groups or the category of commutative rings. (1) For a presheaf $\\mathcal F$ on $X$ with values in $\\mathcal C$, the *direct image* $f_*\\mathcal F$ is the presheaf $V\\mapsto\\mathcal F(f^{-1}V)$ on $Y$, with the restriction maps of $\\mathcal F$; a morphism $\\varphi:\\mathcal F\\to\\mathcal F'$ gives $f_*\\varphi$ with $(f_*\\varphi)_V=\\varphi_{f^{-1}V}$; if $\\mathcal F$ is a sheaf, so is $f_*\\mathcal F$. (2) For a presheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$, the *presheaf inverse image* $f_p\\mathcal G$ is the presheaf on $X$ with $f_p\\mathcal G(U)=\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, the colimit in $\\mathcal C$ [def-weil-pbc-category-colimit] over the open subsets $V\\subseteq Y$ containing $f(U)$ ordered by reverse inclusion (a directed set, closed under finite intersections), with coprojections $\\iota^U_V:\\mathcal G(V)\\to f_p\\mathcal G(U)$; for opens $U'\\subseteq U$ of $X$ the restriction map $f_p\\mathcal G(U)\\to f_p\\mathcal G(U')$ is the unique morphism sending $\\iota^U_V$ to $\\iota^{U'}_V$ (every $V\\supseteq f(U)$ contains $f(U')$); a morphism $u:\\mathcal G\\to\\mathcal G'$ gives $f_pu$ with $(f_pu)_U\\circ\\iota^U_V=\\iota'^U_V\\circ u_V$. Since $f(f^{-1}V)\\subseteq V$, the maps $i_{\\mathcal G,V}=\\iota^{f^{-1}V}_V:\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ form a morphism of presheaves $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$, natural in $\\mathcal G$; it is the unit of an adjunction $f_p\\dashv f_*$ on presheaves with values in $\\mathcal C$. (3) For a sheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$, the *inverse image* is the sheafification $\\theta_{\\mathcal G}:f_p\\mathcal G\\to f^{-1}\\mathcal G:=(f_p\\mathcal G)^\\#$ [def-weil-pbc-sheafification], and for a morphism of sheaves $u:\\mathcal G\\to\\mathcal G'$, $f^{-1}u$ is the unique morphism of sheaves with $f^{-1}u\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal G'}\\circ f_pu$. The functor $f^{-1}$ is left adjoint to $f_*$ on sheaves with values in $\\mathcal C$, by the composite bijection $\\mathrm{Hom}(f^{-1}\\mathcal G,\\mathcal F)=\\mathrm{Hom}(f_p\\mathcal G,\\mathcal F)=\\mathrm{Hom}(\\mathcal G,f_*\\mathcal F)$, and the unit of this adjunction is $\\eta_{\\mathcal G}=f_*(\\theta_{\\mathcal G})\\circ i_{\\mathcal G}:\\mathcal G\\to f_*f^{-1}\\mathcal G$, that is, $\\eta_{\\mathcal G,V}=\\theta_{\\mathcal G,f^{-1}V}\\circ\\iota^{f^{-1}V}_V:\\mathcal G(V)\\to(f^{-1}\\mathcal G)(f^{-1}V)$ for $V\\subseteq Y$ open.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 008C (section-presheaves-functorial): Lemma 008D (lemma-pushforward-sheaf), Lemma 008F (lemma-pullback-presheaves: $f_p\\mathcal G(U)=\\operatorname{colim}_{f(U)\\subset V}\\mathcal G(V)$, the map $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$ in its proof), the definition $f^{-1}\\mathcal G=(f_p\\mathcal G)^\\#$ and the adjunction after Lemma 008G; Section 008N (section-abelian-presheaves-functorial: the same for abelian (pre)sheaves) and Section 008P (section-presheaves-structures-functorial: the same for algebraic structures, e.g. commutative rings)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaf along continuous map as sheafification of left Kan extension presheaf, adjoint to pushforward",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback); TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackPushforwardAdjunction (Mathlib.Topology.Sheaves.Functors); TopCat.Presheaf.pushforwardPullbackAdjunction (Mathlib.Topology.Sheaves.Presheaf)",
+   "date": "2026-10-10",
+   "verdict": "match: sheafPullbackConstruction.sheafPullback with sheafAdjunctionContinuous, for G = Opens.map f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves along continuous map of topological spaces is left adjoint to pushforward, constructed as sheafification of presheaf pullback",
+   "results": "TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.instIsLeftAdjointPullback (Mathlib.Topology.Sheaves.Functors); CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback, 'formed by composing the left Kan extension adjunction with the sheafification adjunction'); SheafOfModules.pullbackPushforwardAdjunction (modules, not this node)",
+   "date": "2026-10-10",
+   "verdict": "match (the construction variant)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "results": "sheafAdjunctionContinuous G A J K [G.IsContinuous J K] [∀ F, G.op.HasLeftKanExtension F] [HasWeakSheafify K A] : sheafPullbackConstruction.sheafPullback G A J K ⊣ G.sheafPushforwardContinuous A J K (Mathlib.CategoryTheory.Sites.Pullback)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 280,330p Topology/Sheaves/Presheaf.lean; sed -n 55,105p Topology/Sheaves/Functors.lean; sed -n 40,90p CategoryTheory/Sites/Pullback.lean; grep -n comp_unit_app CategoryTheory/Adjunction/Basic.lean; sed -n 60,68p CategoryTheory/Adjunction/Restrict.lean; grep -n lanAdjunction_unit CategoryTheory/Functor/KanExtension/Adjunction.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "Presheaf.lean:287 TopCat.Presheaf.pullback C f := (Opens.map f).op.lan, :291 pullbackPushforwardAdjunction := lanAdjunction, :313 pullbackObjObjOfImageOpen (value at U is a colimit through isPointwiseLeftKanExtensionLeftKanExtensionUnit, :326); Functors.lean:62 TopCat.Sheaf.pushforward, :91 TopCat.Sheaf.pullback := (Opens.map f).sheafPullback (the abstract left adjoint), :98 pullbackIso, :103 pullbackPushforwardAdjunction; Sites/Pullback.lean:66 sheafPullbackConstruction.sheafPullback := sheafToPresheaf ⋙ G.op.lan ⋙ presheafToSheaf, :72 sheafAdjunctionContinuous := ((G.op.lanAdjunction A).comp (sheafificationAdjunction K A)).restrictFullyFaithful ..., :85 sheafPullbackIso via Adjunction.leftAdjointUniq; Adjunction/Basic.lean:575 comp_unit_app; Adjunction/Restrict.lean:63 map_restrictFullyFaithful_unit_app; KanExtension/Adjunction.lean:166 lanAdjunction_unit = lanUnit",
+   "date": "2026-10-10",
+   "verdict": "match: every clause is a Mathlib declaration (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+  "file": "Mathlib/CategoryTheory/Sites/Pullback.lean",
+  "how": "specializes in one line, one declaration per clause, for X Y : TopCat.{u} and C = AddCommGrpCat.{u} or CommRingCat.{u}: (1) f_* is TopCat.Presheaf.pushforward C f (Topology/Sheaves/Presheaf.lean) and TopCat.Sheaf.pushforward C f (Topology/Sheaves/Functors.lean:62); (2) f_p is TopCat.Presheaf.pullback C f = (Opens.map f).op.lan (Presheaf.lean:287), a pointwise left Kan extension (Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit, used at Presheaf.lean:326), so its value at U is a colimit over CostructuredArrow (Opens.map f).op (op U), whose objects are the V with U ≤ f^{-1}V, i.e. f(U) ⊆ V, a poset ordered by reverse inclusion: the colimit of the node up to the unique isomorphism compatible with coprojections; i_G is (TopCat.Presheaf.pullbackPushforwardAdjunction C f).unit.app G = lanUnit (lanAdjunction_unit, Functor/KanExtension/Adjunction.lean:166), whose component at V is the coprojection of index (V, id); (3) f^{-1} with its adjunction is sheafPullbackConstruction.sheafPullback (Opens.map f) C (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X) = sheafToPresheaf ⋙ (Opens.map f).op.lan ⋙ presheafToSheaf (Sites/Pullback.lean:66) with sheafAdjunctionContinuous (line 72) = (lanAdjunction.comp sheafificationAdjunction).restrictFullyFaithful, whose unit is i_G followed by f_*(toSheafify) (Adjunction.comp_unit_app, Adjunction/Basic.lean:575, and map_restrictFullyFaithful_unit_app, Adjunction/Restrict.lean:63), i.e. η_G = f_*(θ_G) ∘ i_G. HasWeakSheafify (Opens.grothendieckTopology X) C holds by the instance HasSheafify of Sites/LeftExact.lean:308 (as on def-weil-pbc-sheafification and lem-weil-pbc-ring-sheafification-space-underlying-abelian). Caution for stage 2: TopCat.Sheaf.pullback (Functors.lean:91) is the abstract left adjoint Functor.sheafPullback, isomorphic to this construction only through Adjunction.leftAdjointUniq (sheafPullbackIso, Sites/Pullback.lean:85; the docstring of TopCat.Sheaf.pullbackIso calls it definitionally equal, which it is not as stated); a formalization of this node should use sheafPullbackConstruction, or transport the unit along leftAdjointUniq (Adjunction.unit_leftAdjointUniq_hom_app)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-topological-inverse-image-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition leaf verified: TopCat.Presheaf.pullback/pullbackPushforwardAdjunction (Topology/Sheaves/Presheaf.lean:291), sheafPullbackConstruction.sheafAdjunctionContinuous (Sites/Pullback.lean:59/75), pushforward (Functors.lean). Stage-2 caution on TopCat.Sheaf.pullback recorded by the worker."
+ }
+}
