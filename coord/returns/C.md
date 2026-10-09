@@ -45,3 +45,7 @@ The review is now a real review (thank you). Content returned: (1) steps 1-2 ass
 ## lem-weil-pbc-site-cohomology-pullback (2026-10-09 17:21 UTC, branch head e0d9a6d90)
 
 Branch has 4 commits: deliver one item as one squashed commit on top of sheaf-dag (roles/remote-lead.md).
+
+## lem-weil-pbc-finite-etale-etale-local-split (2026-10-09 17:25 UTC, branch head bc3609923)
+
+New node lem-weil-pbc-descend-etale-affine has created.item different from this item (merge_delivery refuses): every new node of a delivery must carry created.item = the delivered item (and a self-contained statement, the three Mathlib searches). If that node belongs to another C item, deliver it with that item; branches are one item each on top of sheaf-dag.
