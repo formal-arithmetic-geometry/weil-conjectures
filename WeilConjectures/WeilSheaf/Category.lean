@@ -183,13 +183,15 @@ instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderFiniteProducts :=
   inferInstance
 
 /-- The geometric fiber of a `k₀`-scheme locally of finite type is locally Noetherian. -/
-instance isLocallyNoetherian_geometricFiber [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+instance isLocallyNoetherian_geometricFiber
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   have : IsLocallyNoetherian (Scheme.specAlgebraicClosure k₀).left :=
     inferInstanceAs (IsLocallyNoetherian (Spec (CommRingCat.of (AlgebraicClosure k₀))))
   inferInstanceAs (IsLocallyNoetherian (pullback _ _))
 
-noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] : Abelian (WeilSheaf k₀ l X) :=
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Abelian (WeilSheaf k₀ l X) :=
   inferInstanceAs (Abelian (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
 
 noncomputable instance : Preadditive (WeilSheaf k₀ l X) :=
@@ -207,7 +209,8 @@ instance : HasBinaryBiproducts (WeilSheaf k₀ l X) :=
 instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderExtensions :=
   inferInstance
 
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] : (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
   inferInstance
 
 noncomputable instance : Category (WeilComplex k₀ l X) :=
@@ -227,11 +230,13 @@ instance (n : ℤ) : (shiftFunctor (WeilComplex k₀ l X) n).Additive :=
 
 /-- **Weil complexes form a pretriangulated category**, the triangulated structure being that
 of the derived category of pro-étale Weil sheaves. -/
-noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] : Pretriangulated (WeilComplex k₀ l X) :=
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Pretriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (Pretriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
 /-- **Weil complexes form a triangulated category.** -/
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] : IsTriangulated (WeilComplex k₀ l X) :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsTriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (IsTriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
 namespace WeilSheaf

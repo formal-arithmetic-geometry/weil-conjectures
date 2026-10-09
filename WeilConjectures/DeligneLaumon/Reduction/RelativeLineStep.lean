@@ -100,9 +100,11 @@ inductive WeilSheaf.HasRelativeLineStratification :
       (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (hpure : F.IsPunctuallyPureOfWeight ι w) :
       WeilSheaf.HasRelativeLineStratification h F
   /-- Gluing along an open immersion `j` and its closed complement `i`. -/
-  | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType
+  (U ↘ Spec (CommRingCat.of k₀))]
       [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-      [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X)
+      [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+      (j : U ⟶ X)
       [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X)
       [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
       (hij : IsCompl (Set.range j.base) (Set.range i.base)) (h : X ⟶ S)

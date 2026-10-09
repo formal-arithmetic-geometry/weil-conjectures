@@ -156,7 +156,8 @@ lemma IsClosed.isConstructible_of_noetherianSpace [NoetherianSpace X] {s : Set X
 
 /-- The image of a constructible set under an embedding with locally closed range into a
 Noetherian space is constructible. -/
-lemma Topology.IsConstructible.image_of_isEmbedding [NoetherianSpace Y] {f : X → Y} (hf : IsEmbedding f)
+lemma Topology.IsConstructible.image_of_isEmbedding [NoetherianSpace Y] {f : X → Y}
+    (hf : IsEmbedding f)
     (hr : IsLocallyClosed (range f)) {s : Set X} (hs : IsConstructible s) :
     IsConstructible (f '' s) := by
   obtain ⟨U, Z, hU, hZ, hUZ⟩ := hr

@@ -9,43 +9,51 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.Mathlib.Topology.Constructible
+public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Kernels and cokernels of constructible `ℓ`-adic sheaves
 
 A morphism `ψ : ℚ̄_ℓ,Tⁿ ⟶ ℚ̄_ℓ,Tᵐ` of finite free modules is a matrix of locally finite continuous
-functions on `T` (`AlgebraicGeometry.ProEtale.AdicSheaf.unitMatrix`). If its rank at the points
-of `T` is constant, then locally on `T` it is equivalent to `[[1, 0], [0, 0]]`, so its kernel and
-cokernel are lisse (`AlgebraicGeometry.ProEtale.AdicSheaf.isAdicLisseSheaf_kernel_cokernel_of_rank_eq`).
+functions on `T` (`AlgebraicGeometry.ProEtale.AdicSheaf.unitMatrix`), and has a rank at every
+point of `T`. If this rank is constant, then locally on `T` the morphism is equivalent to
+`[[1, 0], [0, 0]]`, so its kernel and cokernel are lisse
+(`AlgebraicGeometry.ProEtale.AdicSheaf.isAdicLisseSheaf_kernel_cokernel_of_rank_eq`).
+
+For a morphism `φ` of lisse sheaves on `Y`, the rank of `φ` at a point does not depend on the
+trivialisation used to compute it
+(`AlgebraicGeometry.ProEtale.AdicSheaf.rank_eq_of_apply_eq`), is lower semicontinuous, and
+descends to `Y` along the pro-étale cover
+(`AlgebraicGeometry.Scheme.isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage`). On the open
+subscheme where it is maximal the kernel and cokernel of `φ` are lisse
+(`AlgebraicGeometry.ProEtale.exists_nonempty_isAdicLisseSheaf_kernel_cokernel`), and Noetherian
+induction gives finite stratifications on which they are lisse
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel`).
+
+Refining stratifications, kernels and cokernels of constructible sheaves on a locally Noetherian
+scheme are constructible (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.kernel_cokernel`).
+The Noetherian hypothesis is necessary: if the underlying space of `X` is a profinite set without
+isolated points, such as `ℤ_ℓ`, multiplication by the continuous function `t ↦ t` on `ℚ̄_ℓ,X` has
+a cokernel supported at a single non-constructible point.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.kernel_cokernel`, and the instances
+  `(adicConstructibleSheaf l X).IsClosedUnderKernels` and
+  `(adicConstructibleSheaf l X).IsClosedUnderCokernels` for `[IsLocallyNoetherian X]`.
 -/
 
 @[expose] public section
 
 open CategoryTheory Limits
 
-lemma CategoryTheory.conj_eq_comp_conj {C D : Type*} [Category C] [Category D]
-    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B A' B' : D}
-    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) (t₂ : F₂.obj X ≅ A') (s₂ : F₂.obj Y ≅ B') :
-    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
-      (t₁.symm ≪≫ c.app X ≪≫ t₂).hom ≫ (t₂.inv ≫ F₂.map φ ≫ s₂.hom) ≫
-        (s₂.symm ≪≫ (c.app Y).symm ≪≫ s₁).hom := by
-  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
-    Iso.hom_inv_id_assoc, NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
-
-lemma CategoryTheory.conj_eq_comp_conj' {C D : Type*} [Category C] [Category D]
-    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B : D}
-    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) :
-    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
-      (t₁.symm ≪≫ c.app X).hom ≫ F₂.map φ ≫ ((c.app Y).symm ≪≫ s₁).hom := by
-  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
-    NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
-
 namespace PadicAlgCl
 
 variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T] {κ ι : Type*} [Fintype κ]
   [Fintype ι]
 
+set_option linter.unusedFintypeInType false in
 /-- The rank of a matrix of locally finite functions is lower semicontinuous. -/
 lemma isOpen_setOf_le_rank (M : Matrix κ ι (locallyFiniteFunctions l T)) (j : ℕ) :
     IsOpen {t | j ≤ (M.map (locallyFiniteFunctionsEval t)).rank} := by
@@ -92,12 +100,13 @@ theorem isAdicLisseSheaf_kernel_cokernel_of_rank_eq
   have hR : Presieve.ofArrows (fun t ↦ (O t).toScheme) (fun t ↦ (O t).ι) ∈
       Scheme.proetalePrecoverage T :=
     Scheme.zariskiPrecoverage_le_proetalePrecoverage _
-      ((Scheme.ofArrows_mem_precoverage_iff (P := @IsOpenImmersion)).2 ⟨fun x ↦ ⟨x, by simpa [O] using ht x⟩,
-        fun _ ↦ inferInstance⟩)
+      ((Scheme.ofArrows_mem_precoverage_iff (P := @IsOpenImmersion)).2
+        ⟨fun x ↦ ⟨x, by simpa [O] using ht x⟩, fun _ ↦ inferInstance⟩)
   have key (t : T) : ∃ (P : Matrix κ κ _) (Q : Matrix ι ι _), IsUnit P.det ∧ IsUnit Q.det ∧
       unitMatrix ((freeUpperStarIso l ι (O t).ι).inv ≫ ((O t).ι)^*ᵃ[l].map ψ ≫
         (freeUpperStarIso l κ (O t).ι).hom) = P * (Matrix.fromBlocks 1 0 0 0 :
-          Matrix (Fin r ⊕ {i // i ∉ Set.range (ρ t)}) (Fin r ⊕ {j // j ∉ Set.range (γ t)}) _).reindex
+          Matrix (Fin r ⊕ {i // i ∉ Set.range (ρ t)})
+            (Fin r ⊕ {j // j ∉ Set.range (γ t)}) _).reindex
             (PadicAlgCl.sumComplEquiv (ρ t) (hρ t)).symm
             (PadicAlgCl.sumComplEquiv (γ t) (hγ t)).symm * Q := by
     obtain ⟨P, Q, hP, hQ, h⟩ := hfac t (O t).ι.base.hom (by simp [O])

@@ -212,7 +212,6 @@ nonzero stalk at some closed point, and its eigenvalues there are eigenvalues of
 (blueprint: `lem-zl-mixed-punctual-cutoff`). -/
 theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
     (h : F.IsMixedOfWeightsAtMost ι u) (hv : F.HasWeightsAtMost ι v) :
     F.IsMixedOfWeightsAtMost ι v :=

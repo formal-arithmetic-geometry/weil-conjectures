@@ -191,7 +191,8 @@ section OpenClosed
 the filtration, a closed point of `W` being a closed point of `X` with the same residue field,
 stalk and local Frobenius (blueprint: `lem-zl-morphism-open-closed-reduction`, restriction). -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
-    [W.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : W ⟶ X)
+    [W.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))] [X.Over
+    (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : W ⟶ X)
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : WeilSheaf k₀ l X}
     (hF : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
@@ -202,7 +203,8 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
 cohomology sheaves, and it preserves mixed upper bounds of sheaves
 (blueprint: `lem-zl-morphism-open-closed-reduction`, restriction). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
-    [W.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : W ⟶ X)
+    [W.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))] [X.Over
+    (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : W ⟶ X)
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l X}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
@@ -213,7 +215,8 @@ weights at most `w` to Weil complexes mixed of weights at most `w`: it has the s
 points of `U` and zero stalks elsewhere, and extends filtrations by zero
 (blueprint: `lem-zl-morphism-open-closed-reduction`, part 2). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
-    {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
+    {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec
+    (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
@@ -227,7 +230,8 @@ weights at most `w` to Weil complexes mixed of weights at most `w`, the case of 
 immersion of the finite pushforward bound (blueprint: `lem-zl-finite-pushforward`, used in
 `lem-zl-morphism-open-closed-reduction`, part 2). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isClosedImmersion
-    {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
+    {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec
+    (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ}
@@ -264,8 +268,10 @@ is mixed of weights at most `w` (blueprint: `lem-zl-morphism-open-closed-reducti
 
 The blueprint argument applies `lem-zl-open-closed-weight` to `G` placed in degree zero. -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
-    [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] {j : U ⟶ X} [IsOpenImmersion j]
+    [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [X.Over
+    (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    {j : U ⟶ X} [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))]
     (hij : IsCompl (Set.range j.base) (Set.range i.base)) {w : ℝ} {G : WeilSheaf k₀ l X}
@@ -543,7 +549,8 @@ The blueprint argument is the hypercohomology spectral sequence
 `E₂^{a,b} = Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`: its `E₂`-terms are mixed of weights at most `w + a + b` by
 the hypothesis, and the abutment is filtered by subquotients of them. -/
 theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
-    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec
+    (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
