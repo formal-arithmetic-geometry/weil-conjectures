@@ -144,10 +144,9 @@ lemma IsIsomorphic.mapIso {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t
 
 /-- Base change along `f : X ⟶ Y` commutes with transport along automorphisms `e_X` of `X` and
 `e_Y` of `Y` compatible with `f`. -/
-lemma isIsomorphic_pullback_mapIso {X : Scheme.{u}} [ConnectedSpace X] {Ω : Type u} [Field Ω]
-    [IsSepClosed Ω] (t : EtaleTorsor M Y) (f : X ⟶ Y) (s : Spec (.of Ω) ⟶ X) (eX : X ≅ X)
-    (eY : Y ≅ Y) (h : f ≫ eY.hom = eX.hom ≫ f) :
-    ((t.mapIso eY).pullback f s).IsIsomorphic ((t.pullback f s).mapIso eX) := by
+lemma isIsomorphic_pullback_mapIso {X : Scheme.{u}} [ConnectedSpace X]
+    (t : EtaleTorsor M Y) (f : X ⟶ Y) (eX : X ≅ X) (eY : Y ≅ Y) (h : f ≫ eY.hom = eX.hom ≫ f) :
+    ((t.mapIso eY).pullback f).IsIsomorphic ((t.pullback f).mapIso eX) := by
   have h' : eX.inv ≫ f = f ≫ eY.inv := by
     rw [Iso.eq_comp_inv, Category.assoc, h, Iso.inv_hom_id_assoc]
   let a : Limits.pullback (t.π ≫ eY.hom) f ⟶ Limits.pullback t.π f :=
@@ -162,7 +161,7 @@ lemma isIsomorphic_pullback_mapIso {X : Scheme.{u}} [ConnectedSpace X] {Ω : Typ
   · apply pullback.hom_ext <;> simp [a, b]
   · change a ≫ pullback.snd _ _ ≫ eX.hom = pullback.snd _ _
     simp [a]
-  · change ((t.mapIso eY).pullback f s).vadd m ≫ a = a ≫ (t.pullback f s).vadd m
+  · change ((t.mapIso eY).pullback f).vadd m ≫ a = a ≫ (t.pullback f).vadd m
     rw [pullback_vadd, pullback_vadd]
     apply pullback.hom_ext <;> simp [a]
 
@@ -487,7 +486,7 @@ theorem exists_extension_of_isIsomorphic_mapIso
       (_ : ∀ P, MulAction G' ((fiber (s ≫ p.geometricFiberMap c.i c.comm.symm)).obj P))
       (_ : IsFundamentalGroup (fiber (s ≫ p.geometricFiberMap c.i c.comm.symm)) G')
       (t' : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) c.g.geometricFiber),
-      (∀ n, ((t' n).pullback (p.geometricFiberMap c.i c.comm.symm) s).IsIsomorphic (t n)) ∧
+      (∀ n, ((t' n).pullback (p.geometricFiberMap c.i c.comm.symm)).IsIsomorphic (t n)) ∧
       (∀ n, ((t' n).mapIso c.g.geometricGaloisFrobenius).IsIsomorphic (t' n)) ∧
       ∀ (n : ℕ) (g : G'), ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
           ((t' (n + 1)).monodromy (s ≫ p.geometricFiberMap c.i c.comm.symm) G' g).toAdd.down =
@@ -577,7 +576,7 @@ theorem exists_extension_of_isIsomorphic_mapIso
   · refine isIsomorphic_of_isIsomorphic_pullback j s hρ ?_
     have hcomm : j ≫ c.g.geometricGaloisFrobenius.hom = p.geometricGaloisFrobenius.hom ≫ j :=
       Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius _ _
-    exact (isIsomorphic_pullback_mapIso (T n) j s _ _ hcomm).trans
+    exact (isIsomorphic_pullback_mapIso (T n) j _ _ hcomm).trans
       (((hT n).mapIso _).trans ((hfix n).trans (hT n).symm))
   · obtain ⟨g, rfl⟩ := hρ g'
     rw [← monodromy_pullback, ← monodromy_pullback, monodromy_eq_of_isIsomorphic s G (hT (n + 1)),
