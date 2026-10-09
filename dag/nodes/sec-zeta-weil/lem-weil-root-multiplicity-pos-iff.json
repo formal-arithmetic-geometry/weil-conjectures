@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-root-multiplicity-pos-iff",
+ "kind": "statement",
+ "title": "A nonzero polynomial has positive root multiplicity at c exactly when it vanishes at c",
+ "statement": "Let $K$ be a field, $T$ an indeterminate, $K[T]$ the polynomial ring [def-weil-polynomial-ring], $c\\in K$, and for $P\\in K[T]$ let $m_c(P)$ be the multiplicity of $c$ as a root of $P$ [def-weil-root-multiplicity] and $P(c)\\in K$ the value of $P$ at $c$ [def-weil-polynomial-root]. For nonzero $P\\in K[T]$: $m_c(P)\\geq1$ if and only if $P(c)=0$; equivalently $m_c(P)=0$ if and only if $P(c)\\neq0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+  "place": "## Proof, third and fourth paragraphs: the factors $P_i$ with $P_i(c)\\neq0$ are treated as contributing nothing to the pole at $T=c$; the equivalence is used without proof (it is also recorded in the statement of def-weil-root-multiplicity, 'by the factor theorem')"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-root-multiplicity",
+  "def-weil-polynomial-root"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem rootMultiplicity_pos\\|theorem rootMultiplicity_eq_zero' Mathlib/Algebra/Polynomial/Div.lean",
+   "results": "rootMultiplicity_eq_zero_iff : rootMultiplicity x p = 0 ↔ (IsRoot p x → p = 0) (line 623); rootMultiplicity_eq_zero (h : ¬IsRoot p x) (line 629); rootMultiplicity_pos' : 0 < rootMultiplicity x p ↔ p ≠ 0 ∧ IsRoot p x (line 633); rootMultiplicity_pos (hp : p ≠ 0) : 0 < rootMultiplicity x p ↔ IsRoot p x (line 637)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.rootMultiplicity_pos",
+  "file": "Mathlib/Algebra/Polynomial/Div.lean",
+  "how": "exact: `rootMultiplicity_pos hP : 0 < rootMultiplicity c P ↔ IsRoot P c` for `P : K[X]`, `hP : P ≠ 0`; the form with `= 0` is `rootMultiplicity_eq_zero_iff` (line 623)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-rational-function-order-product",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

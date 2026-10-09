@@ -8,14 +8,128 @@
   "place": "## Proof, second to fourth paragraphs: 'the order of vanishing of $P_i$ at $T=c^{-1}$ is the number of $r$ with $\\alpha_{i,r}=c$' and 'As $P_0$ occurs with exponent $(-1)^{0+1}=-1$, $Z(X_0,T)$ has a pole of order exactly $1$ at $T=1$' (likewise for $P_{2d}$ and $T=q^{-d}$): the bookkeeping of root multiplicities in the product $\\prod P_i^{(-1)^{i+1}}$ that these sentences take for granted; also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-betti/_section.md, ## Proof: 'to read off the pole orders one must exclude cancellation against $N_\\ell$ and further multiplicity from other factors of $D_\\ell$'"
  },
  "stmt_deps": [
+  "def-weil-field",
   "def-weil-polynomial-ring",
   "def-weil-rational-function-field",
   "def-weil-root-multiplicity",
+  "def-weil-rational-function-pole-order",
+  "def-weil-coprime-polynomials",
+  "def-weil-polynomial-root"
+ ],
+ "proof": [
+  {
+   "text": "Step 1 (clause 1, vanishing and products). Let $P,Q\\in K[T]$ be nonzero. By [lem-weil-root-multiplicity-pos-iff], $m_c(P)\\geq1$ if and only if $P(c)=0$, i.e. $m_c(P)=0$ if and only if $P(c)\\neq0$. By [lem-weil-root-multiplicity-mul], $m_c(PQ)=m_c(P)+m_c(Q)$.",
+   "uses": [
+    "lem-weil-root-multiplicity-pos-iff",
+    "lem-weil-root-multiplicity-mul"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 2 (clause 1, linear factors). Let $u\\in K^\\times$. The constant polynomial $u$ is nonzero and its value at $c$ is $u\\neq0$, so $m_c(u)=0$ by [lem-weil-root-multiplicity-pos-iff]. Next $m_c(T-c)=1$ by the definition [def-weil-root-multiplicity]: $(T-c)^1$ divides $T-c$, and $(T-c)^2$, of degree $2$, does not divide the nonzero polynomial $T-c$ of degree $1$, since a nonzero multiple of a polynomial of degree $2$ over a field has degree at least $2$ [def-weil-polynomial-ring]. Hence by [lem-weil-root-multiplicity-mul] $m_c(u(T-c))=m_c(u)+m_c(T-c)=0+1=1$. When $c\\neq0$, $1-c^{-1}T=(-c^{-1})(T-c)$ with $-c^{-1}\\in K^\\times$, so $m_c(1-c^{-1}T)=1$.",
+   "uses": [
+    "lem-weil-root-multiplicity-pos-iff",
+    "lem-weil-root-multiplicity-mul",
+    "def-weil-root-multiplicity",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 3 (clause 2, a presentation by two polynomials). Let $J_+=\\{j:e_j>0\\}$, $J_-=\\{j:e_j<0\\}$ and put $A=\\prod_{j\\in J_+}P_j^{e_j}$, $B=\\prod_{j\\in J_-}P_j^{-e_j}$ in $K[T]$ (empty products are $1$). Since $K$ is a field, the leading coefficient of a product of nonzero polynomials is the product of their leading coefficients [def-weil-polynomial-ring], hence nonzero; so $A\\neq0$ and $B\\neq0$. In the field $K(T)$ [def-weil-rational-function-field], $P_j^{e_j}=1$ for $e_j=0$, so $R=\\prod_jP_j^{e_j}=A/B$; in particular $R\\neq0$ as a quotient of nonzero elements of a field.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-rational-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 4 (clause 2, multiplicities of $A$ and $B$). Applying Step 1 ($m_c(PQ)=m_c(P)+m_c(Q)$ for nonzero $P,Q$) repeatedly, by induction on the number of factors, gives $m_c(\\prod_iQ_i)=\\sum_im_c(Q_i)$ for finitely many nonzero $Q_i$, and in particular $m_c(Q^e)=e\\,m_c(Q)$ for $e\\geq0$ (with $m_c(1)=0$ from Step 2, $u=1$). Hence $m_c(A)=\\sum_{j\\in J_+}e_jm_c(P_j)$ and $m_c(B)=\\sum_{j\\in J_-}(-e_j)m_c(P_j)$, so $m_c(A)-m_c(B)=\\sum_{j=0}^ne_jm_c(P_j)=\\nu$ (the indices with $e_j=0$ contribute $0$).",
+   "uses": [
+    "lem-weil-root-multiplicity-mul"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 5 (clause 2, $m_c(N)-m_c(D)=\\nu$). Let $R=N/D$ be the reduced presentation [def-weil-rational-function-field]; $N\\neq0$ because $R\\neq0$ (Step 3), and $D\\neq0$ is monic. By Step 3, $N/D=A/B$ in $K(T)$, so by the definition of equality of fractions in [def-weil-rational-function-field], $NB=AD$ in $K[T]$. Both sides are products of nonzero polynomials, so by [lem-weil-root-multiplicity-mul] $m_c(N)+m_c(B)=m_c(A)+m_c(D)$, i.e. $m_c(N)-m_c(D)=m_c(A)-m_c(B)=\\nu$ by Step 4.",
+   "uses": [
+    "def-weil-rational-function-field",
+    "lem-weil-root-multiplicity-mul"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 6 (clause 2, no cancellation). Suppose $m_c(N)\\geq1$ and $m_c(D)\\geq1$. By the definition [def-weil-root-multiplicity], $T-c$ divides both $N$ and $D$. Since $\\gcd(N,D)=1$, there are $U,V\\in K[T]$ with $UN+VD=1$ [def-weil-coprime-polynomials], so $T-c$ divides $1$, i.e. $1=(T-c)W$ for some $W\\in K[T]$; but $W\\neq0$ and $\\deg((T-c)W)=1+\\deg W\\geq1>0=\\deg1$ [def-weil-polynomial-ring], a contradiction. Hence at most one of $m_c(N)$, $m_c(D)$ is nonzero.",
+   "uses": [
+    "def-weil-root-multiplicity",
+    "def-weil-coprime-polynomials",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 7 (clause 2, pole order and regularity). Let $m\\geq1$. By [def-weil-rational-function-pole-order], $R$ has a pole of order exactly $m$ at $T=c$ if and only if $m_c(D)=m$. If $m_c(D)=m\\geq1$, then $m_c(N)=0$ by Step 6, so $\\nu=-m$ by Step 5. Conversely if $\\nu=-m$, then $m_c(D)=m_c(N)+m\\geq1$ by Step 5, so $m_c(N)=0$ by Step 6 and $m_c(D)=m$. For regularity: $R$ is regular at $c$ if and only if $D(c)\\neq0$ [def-weil-rational-function-field], if and only if $m_c(D)=0$ by [lem-weil-root-multiplicity-pos-iff] ($D\\neq0$). If $m_c(D)=0$ then $\\nu=m_c(N)\\geq0$ by Step 5. If $m_c(D)\\geq1$ then $m_c(N)=0$ by Step 6 and $\\nu=-m_c(D)<0$. So $R$ is regular at $c$ if and only if $\\nu\\geq0$.",
+   "uses": [
+    "def-weil-rational-function-pole-order",
+    "def-weil-rational-function-field",
+    "lem-weil-root-multiplicity-pos-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  },
+  {
+   "text": "Step 8 (clause 3). Under the hypotheses of clause 3, $P_j(c)\\neq0$ gives $m_c(P_j)=0$ for $j\\neq j_0$ by Step 1, so $\\nu=e_{j_0}m_c(P_{j_0})=(-1)\\cdot1=-1$. By Step 7 with $m=1$, $R$ has a pole of order exactly $1$ at $T=c$.",
+   "uses": [
+    "lem-weil-root-multiplicity-pos-iff"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+    "place": "## Proof, second to fourth paragraphs (the bookkeeping is taken for granted there; the step is written by an agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-root-multiplicity-pos-iff",
+  "lem-weil-root-multiplicity-mul",
+  "def-weil-root-multiplicity",
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field",
+  "def-weil-coprime-polynomials",
   "def-weil-rational-function-pole-order"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-final-betti.md",
+  "place": "## Proof, second to fourth paragraphs, where the statement is used without proof; the proof is written by an agent, no algebra textbook being in literature/ (wanted: S. Lang, Algebra, rev. 3rd ed., GTM 211, Ch. IV §1 (roots and multiplicities) and Ch. II §5 (principal rings, gcd))"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -37,10 +151,17 @@
    "results": "IsDedekindDomain.HeightOneSpectrum.valuation v : Valuation K ℤᵐ⁰ (line 322), multiplicative by Valuation.map_mul; valuation_of_mk' : v.valuation (mk' r s) = intValuation r / intValuation s (line 334); intValuation_eq_exp_neg_multiplicity (line 187); Polynomial.idealX only for the prime (X) (AsPolynomial.lean 286)",
    "date": "2026-10-09",
    "verdict": "generalization of clause 2 for the (T - c)-adic valuation of the height-one prime (T - c) of K[T], after constructing that prime as idealX does for X and identifying its multiplicity with rootMultiplicity; not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rootMultiplicity' Mathlib --include=*.lean | grep -i 'ratfunc\\|num\\|denom\\|IsFractionRing\\|valuation'; grep -n 'theorem num_mul_eq_mul_denom_iff\\|theorem isCoprime_num_denom\\|theorem num_ne_zero\\|theorem monic_denom' Mathlib/FieldTheory/RatFunc/Basic.lean; grep -n 'theorem IsCoprime.isUnit_of_dvd' Mathlib/RingTheory/Coprime/Basic.lean",
+   "results": "no lemma relating rootMultiplicity to RatFunc.num/denom or to a valuation of RatFunc; RatFunc.num_mul_eq_mul_denom_iff (hq : q ≠ 0) : x.num * q = p * x.denom ↔ x = algebraMap p / algebraMap q (Basic.lean 1019), isCoprime_num_denom (1004), num_ne_zero (1016), monic_denom (958); IsCoprime.isUnit_of_dvd' (h : IsCoprime a b) (ha : x ∣ a) (hb : x ∣ b) : IsUnit x (Coprime/Basic.lean 173), with not_isUnit_X_sub_C (Mathlib/Algebra/Polynomial/AlgebraMap.lean 642)",
+   "date": "2026-10-09",
+   "verdict": "no match for the whole statement; the proof's steps 5 and 6 are num_mul_eq_mul_denom_iff, rootMultiplicity_mul, and IsCoprime.isUnit_of_dvd' with not_isUnit_X_sub_C"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +179,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-rational-function-order-product",
+  "worker": "stage1",
+  "summary": "No Lean exists (none on both branches) and no textbook is in literature/, so the proof is written by an agent (proof_origin by agent; wanted: Lang, Algebra, Ch. IV §1 and Ch. II §5). Mathlib has no statement of clauses 2-3 for RatFunc (searched; recorded). Proof in 8 steps: clause 1 from two new Mathlib leaves (lem-weil-root-multiplicity-mul = Polynomial.rootMultiplicity_mul, lem-weil-root-multiplicity-pos-iff = Polynomial.rootMultiplicity_pos) and the definition of m_c (m_c(T-c)=1 by degree); clause 2 by writing R=A/B with A, B the products of factors with positive and negative exponents, cross-multiplying N B = A D, additivity of m_c, and the coprimality of N and D (a common factor T-c would divide 1); pole order and regularity read off via def-weil-rational-function-pole-order; clause 3 as the case nu=-1. stmt_deps completed with def-weil-field, def-weil-coprime-polynomials (reduced presentation, gcd(N,D)=1) and def-weil-polynomial-root (P(c)). Statement unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
