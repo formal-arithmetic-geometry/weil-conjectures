@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 
 /-!
 
@@ -25,6 +26,9 @@ torsion conditions entering the statement of the proper base change theorem:
   this point. Since the geometric points form a conservative family, this stalkwise
   condition agrees with the classical definition [Stacks 03SA] that `F` is the filtered
   union of its `n`-torsion subsheaves.
+  The bridge `AlgebraicGeometry.Scheme.isTorsionSheaf_iff_isTorsion` identifies it with the
+  local condition `CategoryTheory.Sheaf.IsTorsion` (every section is locally torsion) on the
+  underlying sheaf of abelian groups.
 - `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`: the property of an
   object of the bounded below derived category of étale sheaves of `Λ`-modules that all
   its cohomology sheaves are torsion.
@@ -84,6 +88,34 @@ class Scheme.IsTorsionSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
     IsAddTorsion (↥((pointSmallEtale s).sheafFiber.obj F))
+
+/-- A sheaf of `Λ`-modules on the small étale site is torsion in the stalkwise sense
+`AlgebraicGeometry.Scheme.IsTorsionSheaf` if and only if its underlying sheaf of abelian
+groups is torsion in the local sense `CategoryTheory.Sheaf.IsTorsion`: every section is locally
+torsion. -/
+lemma Scheme.isTorsionSheaf_iff_isTorsion {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsTorsionSheaf F ↔
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion := by
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  rw [isTorsion_iff_isAddTorsion_sheafFiber]
+  refine ⟨fun h Ω _ _ s ↦ ?_, fun h ↦ ⟨fun Ω _ _ s ↦ ?_⟩⟩
+  · let e := ((pointSmallEtale s).sheafFiberCompIso
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app F
+    have : IsAddTorsion ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
+        ((pointSmallEtale s).sheafFiber.obj F)) :=
+      IsTorsionSheaf.isTorsion_sheafFiber (F := F) Ω s
+    exact IsAddTorsion.of_surjective (f := e.inv.hom)
+      (ConcreteCategory.bijective_of_isIso e.inv).2 this
+  · let e := ((pointSmallEtale s).sheafFiberCompIso
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app F
+    have : IsAddTorsion ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
+        ((pointSmallEtale s).sheafFiber.obj F)) :=
+      IsAddTorsion.of_surjective (f := e.hom.hom) (ConcreteCategory.bijective_of_isIso e.hom).2
+        (h Ω s)
+    exact this
 
 /-- If the coefficient ring `Λ` is torsion as an additive group — in particular if `Λ`
 is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then every sheaf of `Λ`-modules on the small étale site is
