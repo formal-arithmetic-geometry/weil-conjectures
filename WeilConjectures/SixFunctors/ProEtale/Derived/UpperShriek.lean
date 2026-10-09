@@ -382,7 +382,7 @@ of objects of `D(Y_proét)` contained in the bounded below objects, such that `R
 `Q` and `Rf^!` sends `Q` to `P`, then the restrictions of `Rf_!` and `Rf^!` to the full
 subcategories of `P` and `Q` are adjoint. This applies to the bounded constructible objects of
 finite Tor amplitude. -/
-noncomputable def rightDerivedUpperShriekAdjunctionOfLE
+noncomputable def rightDerivedUpperShriekAdjunction
     (P : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)))
     (Q : ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)))
     (hP : P ≤ DerivedCategory.plusEtaleOrigin A X) (hQ : Q ≤ DerivedCategory.TStructure.t.plus)

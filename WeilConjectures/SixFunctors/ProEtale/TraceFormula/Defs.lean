@@ -79,7 +79,7 @@ project has:
 
 The pro-étale `Rf_!` is not a left adjoint on the whole derived category (blueprint
 `sk-rem-sf-fullcd-scope`), so the exceptional adjunction is only available on `Dᵇctf`, where it
-is a theorem (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunctionOfLE`): every object
+is a theorem (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`): every object
 of `Dᵇctf` is bounded below of étale origin.
 
 `Dᵇctf(X, A)` is not data: it is the property
@@ -228,7 +228,7 @@ noncomputable abbrev ctfLowerStar (f : X ⟶ Y)
 
 /-- Blueprint `sk-prop-sf-existence` (c): the exceptional adjunction `Rf_! ⊣ Rf^!` between the
 categories `Dᵇctf`, whenever both functors preserve `Dᵇctf`. It is
-`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunctionOfLE`: every object of `Dᵇctf` is
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`: every object of `Dᵇctf` is
 bounded below of étale origin. -/
 noncomputable def ctfExceptionalAdjunction (f : X ⟶ Y) [HasCompactification f]
     (h₁ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
@@ -236,7 +236,7 @@ noncomputable def ctfExceptionalAdjunction (f : X ⟶ Y) [HasCompactification f]
     (h₂ : ∀ L, DerivedCategory.constructibleFiniteTor A Y L →
       DerivedCategory.constructibleFiniteTor A X ((rightDerivedUpperShriek A f).obj L)) :
     ctfLowerShriek f h₁ ⊣ ctfUpperShriek f h₂ :=
-  rightDerivedUpperShriekAdjunctionOfLE f _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
+  rightDerivedUpperShriekAdjunction f _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
     (fun _ hL ↦ hL.plus) h₁ h₂
 
 /-- Transport of the exceptional direct image on `Dᵇctf` along an equality of morphisms. -/
