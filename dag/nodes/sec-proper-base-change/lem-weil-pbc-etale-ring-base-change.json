@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-etale-ring-base-change",
+ "kind": "statement",
+ "title": "Base change of an etale ring map is etale",
+ "statement": "Let $R\\to A$ and $R\\to S$ be homomorphisms of commutative rings such that $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism]. Then $\\operatorname{Spec}(S\\otimes_RA)\\to\\operatorname{Spec}S$, induced by $s\\mapsto s\\otimes1$, is etale.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00U2 (lemma-etale), item (2) (base change of an etale ring map is etale), used in the proof of Lemma Tag 08HQ (lemma-map-into-henselian)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of an etale algebra is etale",
+   "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic); AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale); RingHom.Etale.isStableUnderBaseChange (Mathlib.RingTheory.RingHom.Etale); Algebra.FormallyEtale.instTensorProduct; Algebra.Unramified.baseChange",
+   "date": "2026-10-09",
+   "verdict": "match: Algebra.Etale.baseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.baseChange",
+   "results": "Algebra.Etale.baseChange (R A B) [Algebra.Etale R A] : Algebra.Etale B (TensorProduct R B A) (Mathlib.RingTheory.Etale.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product B ⊗[R] A is étale over B when A is étale over R",
+   "results": "Algebra.Etale.baseChange; Algebra.FormallyEtale.instTensorProduct; RingHom.Etale.isStableUnderBaseChange; Algebra.Etale.comp",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean; grep -n 'HasRingHomProperty @Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -n 'etale_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Etale.lean; grep -n 'theorem Spec_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+   "results": "RingTheory/Etale/Basic.lean:242 `instance baseChange [Etale R A] : Etale B (B ⊗[R] A)`; Morphisms/Etale.lean:56 `instance : HasRingHomProperty @Etale RingHom.Etale`; RingHom/Etale.lean:37 `etale_algebraMap`; RingHomProperties.lean:360 `Spec_iff`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Etale.baseChange",
+  "file": "Mathlib/RingTheory/Etale/Basic.lean",
+  "how": "specializes in one line: `Spec A → Spec R` etale ↔ `(algebraMap R A).Etale` (`HasRingHomProperty.Spec_iff`, AlgebraicGeometry/Morphisms/RingHomProperties.lean:360, with the instance `HasRingHomProperty @Etale RingHom.Etale`, Morphisms/Etale.lean:56) ↔ `Algebra.Etale R A` (`RingHom.etale_algebraMap`, RingTheory/RingHom/Etale.lean:37); then the instance `Algebra.Etale.baseChange` (Etale/Basic.lean:242) gives `Algebra.Etale S (S ⊗[R] A)`, translated back the same way. Source read 2026-10-09."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-map-into-henselian-colimit",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

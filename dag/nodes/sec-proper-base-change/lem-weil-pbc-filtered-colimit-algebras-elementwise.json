@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+ "kind": "statement",
+ "title": "Elements of a filtered colimit of commutative algebras come from a stage",
+ "statement": "Let $R$ be a commutative ring, $I$ a filtered category and $i\\mapsto A_i$ a functor from $I$ to the category of commutative $R$-algebras, with a colimit $A=\\varinjlim_IA_i$ in that category [def-weil-pbc-category-colimit] and coprojections $\\iota_i:A_i\\to A$. Then (1) $A$ with the maps $\\iota_i$ is also a colimit of the underlying diagram of commutative rings; (2) every element of $A$ is of the form $\\iota_i(a)$ for some $i\\in I$ and some $a\\in A_i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00D6 (lemma-directed-colimit: a directed colimit of modules is the disjoint union of the $M_i$ modulo the evident relation, so every element comes from some $M_i$; the same description for rings, the ring operations being defined at a common later index), and Categories Section Tag 04AX (section-directed-colimits) for filtered versus directed index categories; used without mention in the proof of Lemma Tag 08HR (lemma-map-into-henselian-colimitlemma-map-into-henselian-colimit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every element of a filtered colimit of commutative rings is the image of an element of some stage",
+   "results": "CommRingCat.FilteredColimits.R, colimit, colimitCocone, colimitCoconeIsColimit (Mathlib.Algebra.Category.Ring.FilteredColimits); RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the filtered-colimit construction in CommRingCat; elementwise statement is Concrete.isColimit_exists_rep (grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from commutative algebras over R preserves filtered colimits; element of colimit comes from some object of the diagram",
+   "results": "CommRingCat.FilteredColimits.forget_preservesFilteredColimits, forget₂Ring_preservesFilteredColimits, colimitCoconeIsColimit, colimitCommRing (Mathlib.Algebra.Category.Ring.FilteredColimits); RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit",
+   "date": "2026-10-09",
+   "verdict": "generalization: forget CommRingCat preserves filtered colimits"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem colimit_exists_rep\\|isColimit_exists_rep' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean; grep -n 'IsConnected' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions/Over/Connected.lean; grep -n 'IsFiltered.isConnected' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Connected.lean; grep -n 'commAlgCatEquivUnder' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/CommAlgCat/Basic.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/CommAlgCat/",
+   "results": "ConcreteCategory/Basic.lean:129 `Concrete.isColimit_exists_rep` (needs `PreservesColimit F (forget C)`); Constructions/Over/Connected.lean:199,204 `Under.createsColimitsOfShapeForgetOfIsConnected`, `Under.preservesColimitsOfShape_forget_of_isConnected`; Filtered/Connected.lean:34 `IsFiltered.isConnected`; CommAlgCat/Basic.lean:203 `commAlgCatEquivUnder : CommAlgCat R ≌ Under R`; Ring/FilteredColimits.lean:363 `CommRingCat.FilteredColimits.forget_preservesFilteredColimits`; no filtered-colimit file for CommAlgCat itself",
+   "date": "2026-10-09",
+   "verdict": "match: a few Mathlib lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Concrete.isColimit_exists_rep, CategoryTheory.Under.preservesColimitsOfShape_forget_of_isConnected, CommAlgCat.commAlgCatEquivUnder, CommRingCat.FilteredColimits.forget_preservesFilteredColimits",
+  "file": "Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+  "how": "a few Mathlib lemmas, one per clause: (1) commutative R-algebras are `CommAlgCat R ≌ Under R` (`commAlgCatEquivUnder`, Algebra/Category/CommAlgCat/Basic.lean:203), and `Under.forget R : Under R ⥤ CommRingCat` preserves colimits of connected shapes (`Under.preservesColimitsOfShape_forget_of_isConnected`, CategoryTheory/Limits/Constructions/Over/Connected.lean:204), a filtered category being connected (`IsFiltered.isConnected`, CategoryTheory/Filtered/Connected.lean:34); (2) `forget CommRingCat` preserves filtered colimits (`CommRingCat.FilteredColimits.forget_preservesFilteredColimits`, Algebra/Category/Ring/FilteredColimits.lean:363), so `Concrete.isColimit_exists_rep` (CategoryTheory/Limits/ConcreteCategory/Basic.lean:129) applied to the colimit of (1) gives the representative. Sources read 2026-10-09."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-map-into-henselian-colimit",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
