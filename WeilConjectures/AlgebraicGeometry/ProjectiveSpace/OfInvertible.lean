@@ -43,14 +43,6 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-private lemma Scheme.homOfLE_appTop_topIso_inv {X : Scheme.{u}} {U V : X.Opens} (h : U ≤ V)
-    (a : Γ(X, V)) :
-    (X.homOfLE h).appTop (V.topIso.inv a) = U.topIso.inv (X.presheaf.map (homOfLE h).op a) := by
-  simp only [Scheme.homOfLE_appTop, Scheme.Opens.topIso_inv]
-  rw [← CommRingCat.comp_apply, ← Functor.map_comp, ← CommRingCat.comp_apply,
-    ← Functor.map_comp]
-  rfl
-
 namespace ProjectiveSpace
 
 attribute [local instance] MvPolynomial.gradedAlgebra

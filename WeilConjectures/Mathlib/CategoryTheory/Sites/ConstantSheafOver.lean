@@ -228,6 +228,14 @@ instance preservesFiniteLimits_constantSheaf [HasFiniteLimits A] [HasSheafify J 
     PreservesLimitsOfSize.preservesFiniteLimits.{0, 0} _
   comp_preservesFiniteLimits _ _
 
+/-- The constant sheaf functor is right exact, as the composite of the constant presheaf
+functor and sheafification, which is a left adjoint. -/
+instance preservesFiniteColimits_constantSheaf [HasFiniteColimits A] [HasSheafify J A] :
+    PreservesFiniteColimits (constantSheaf J A) :=
+  have : PreservesFiniteColimits (Functor.const Cᵒᵖ : A ⥤ _) :=
+    PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
+  comp_preservesFiniteColimits _ _
+
 /-- The restriction of sheaves to a localized site preserves colimits: it is left adjoint to
 the pushforward along the cocontinuous functor `Over.forget U`. -/
 instance preservesColimits_overPullback (U : C)

@@ -23,6 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
@@ -110,7 +111,7 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
       ((cechComplexFunctor (ProjectiveSpace.standardOpen n (Spec (.of k)))).obj
         (ProjectiveSpace.twist n (Spec (.of k)) m).presheafModuleCat) ≅
       ProjectiveSpace.monomialCechComplex n k m) :=
-  sorry
+  ⟨ProjectiveSpace.cechComplexTwistIso n k m⟩
 
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,

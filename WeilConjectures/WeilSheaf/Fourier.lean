@@ -9,7 +9,10 @@ public import Mathlib.Algebra.Group.AddChar
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
@@ -1185,17 +1188,53 @@ noncomputable def ProEtaleWeilSheaf.ihomFunctor (A : ProEtaleWeilSheaf k₀ l X)
 instance (A : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.ihomFunctor k₀ l X A).Additive :=
   ⟨ObjectProperty.hom_ext _ (Algebra.Hom.ext (ProEtale.AdicSheaf.ihom A.carrier).map_add)⟩
 
+variable (k₀ l X) in
+/-- The internal hom out of a pro-étale Weil sheaf, followed by the forgetful functor, is the
+internal hom of the underlying sheaves. -/
+noncomputable def ProEtaleWeilSheaf.ihomFunctorCompForgetIso (A : ProEtaleWeilSheaf k₀ l X) :
+    ProEtaleWeilSheaf.ihomFunctor k₀ l X A ⋙ IsoAlgebra.forget _ ≅
+      IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.ihom A.carrier :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ by
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
+
+/-- The internal hom out of a pro-étale Weil sheaf is left exact. -/
+instance (A : ProEtaleWeilSheaf k₀ l X) :
+    PreservesFiniteLimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A) := by
+  have := (Mod.ihomAdjunction A.carrier).rightAdjoint_preservesLimits
+  have : PreservesFiniteLimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A ⋙ IsoAlgebra.forget _) :=
+    preservesFiniteLimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The internal hom out of a pro-étale Weil sheaf with lisse underlying sheaf is exact
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.preservesFiniteColimits_ihom`). -/
+theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilSheaf k₀ l X)
+    (hA : ProEtale.IsAdicLisseSheaf A.carrier) :
+    PreservesFiniteColimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A) := by
+  have := hA.preservesFiniteColimits_ihom
+  have : PreservesFiniteColimits (ProEtaleWeilSheaf.ihomFunctor k₀ l X A ⋙ IsoAlgebra.forget _) :=
+    preservesFiniteColimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
+  exact preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
+
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
-`[F, -]` on pro-étale Weil sheaves gives a Weil complex: it is the tensor product `F^∨ ⊗ G`
-placed in degree `0`, the higher `Ext` sheaves out of the locally free `F` vanishing. -/
+`[F, -]` on pro-étale Weil sheaves gives a Weil complex: `[F, -]` is exact
+(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor`), so the derived
+functor is `[F, G]` placed in degree `0`, and `[F, G]` is constructible
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf`). -/
 theorem WeilComplex.objectProperty_rightDerivedFunctor_ihomFunctor_singleFunctor
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (G : ProEtaleWeilSheaf k₀ l X)
     (hG : WeilSheaf.objectProperty k₀ l X G) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).rightDerivedFunctor.obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
-  sorry
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor F.obj hF
+  let G' : WeilSheaf k₀ l X := ⟨(ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).obj G,
+    ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf hF hG⟩
+  exact (WeilComplex.objectProperty k₀ l X).prop_of_iso
+    (((ProEtaleWeilSheaf.ihomFunctor k₀ l X F.obj).singleFunctorCompRightDerivedFunctorIso).app
+      G).symm (WeilSheaf.toComplex.obj G').property
 
 /-- **Finiteness for the tensor product with a lisse Weil sheaf.** For a lisse Weil sheaf `F`,
 the right derived functor of `[F, -]` on pro-étale Weil sheaves carries Weil complexes to Weil
@@ -1224,6 +1263,14 @@ noncomputable def WeilComplex.ihomLisse (F : WeilSheaf k₀ l X) (hF : F.IsLisse
 instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : (WeilComplex.ihomLisse F hF).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
+noncomputable instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
+    (WeilComplex.ihomLisse F hF).CommShift ℤ :=
+  ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The derived internal hom out of a lisse Weil sheaf is a triangulated functor. -/
+instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : (WeilComplex.ihomLisse F hF).IsTriangulated :=
+  ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
+
 /-- The tensor product `G ⊗ -` with a lisse Weil sheaf `G`, on Weil complexes: the derived
 internal hom out of the dual `G^∨`, `G` being locally free of finite rank over `ℚ̄_ℓ,X̄`. -/
 noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
@@ -1233,6 +1280,15 @@ noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLis
 instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) : (WeilComplex.tensorLisse G hG).Additive := by
   unfold WeilComplex.tensorLisse
   infer_instance
+
+noncomputable instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
+    (WeilComplex.tensorLisse G hG).CommShift ℤ :=
+  inferInstanceAs ((WeilComplex.ihomLisse (G.dual hG) hG.dual).CommShift ℤ)
+
+/-- The tensor product with a lisse Weil sheaf is a triangulated functor. -/
+instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
+    (WeilComplex.tensorLisse G hG).IsTriangulated :=
+  inferInstanceAs ((WeilComplex.ihomLisse (G.dual hG) hG.dual).IsTriangulated)
 
 variable (k₀) in
 /-- The affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and the multiplication
@@ -1308,6 +1364,19 @@ noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
 
 -- TODO(unify): sk-def-ft
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive := by
+  unfold fourierTransform
+  infer_instance
+
+-- TODO(unify): sk-def-ft
+noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (fourierTransform (l := l) ψ).CommShift ℤ := by
+  unfold fourierTransform
+  infer_instance
+
+-- TODO(unify): sk-def-ft
+/-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
+functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
+instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated := by
   unfold fourierTransform
   infer_instance
 

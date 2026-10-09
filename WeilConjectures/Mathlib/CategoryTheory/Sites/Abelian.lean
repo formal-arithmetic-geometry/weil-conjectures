@@ -36,4 +36,13 @@ example : (sheafToPresheaf J D).Linear R := inferInstance
 instance presheafToSheaf_linear : (presheafToSheaf J D).Linear R :=
   (sheafificationAdjunction J D).left_adjoint_linear
 
+/-- The constant sheaf functor is `R`-linear, being the composite of the constant presheaf
+functor and of the sheafification functor. -/
+instance constantSheaf_linear : (constantSheaf J D).Linear R where
+  map_smul {X Y} f r := by
+    change (presheafToSheaf J D).map ((Functor.const _).map (r • f)) =
+      r • (presheafToSheaf J D).map ((Functor.const _).map f)
+    rw [← Functor.map_smul]
+    rfl
+
 end CategoryTheory
