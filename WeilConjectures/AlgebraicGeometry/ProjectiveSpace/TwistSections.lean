@@ -7,7 +7,11 @@ module
 
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
@@ -806,4 +810,144 @@ theorem bijective_sum_twistMonomialSection (k : Type u) [CommRing k] {s : Set n}
 
 end Twist
 
-end AlgebraicGeometry.ProjectiveSpace
+section Cech
+
+open Scheme.Modules Opposite
+
+lemma _root_.MvPolynomial.laurentExponents_mono {s t : Set n} (hts : t ⊆ s) (m : ℤ) :
+    laurentExponents t m ⊆ laurentExponents s m :=
+  fun _ he ↦ ⟨he.1, fun i hi ↦ he.2 i fun h ↦ hi (hts h)⟩
+
+/-- The preimage of `D₊(∏_{i ∈ s} Xᵢ)` is contained in the standard open `D₊(xᵢ)`, `i ∈ s`. -/
+lemma preimage_basicOpenInt_le_standardOpen {s : Set n} {i : n} (hi : i ∈ s) :
+    toProjInt n S ⁻¹ᵁ basicOpenInt n s ≤ standardOpen n S i := fun _ hx ↦
+  Proj.mem_basicOpen_monomialToNat_indicator.1 hx i hi
+
+/-- **The intersection `U_σ = D₊(x_{σ 0}) ∩ ⋯ ∩ D₊(x_{σ p})` of standard opens** of `ℙ(n; S)` is
+the preimage of `D₊(∏_{i ∈ σ} Xᵢ)`. -/
+lemma preimage_basicOpenInt_range {p : ℕ} (σ : Fin (p + 1) → n) :
+    toProjInt n S ⁻¹ᵁ basicOpenInt n (Set.range σ) = ⨅ l, standardOpen n S (σ l) := by
+  refine le_antisymm (le_iInf fun l ↦ preimage_basicOpenInt_le_standardOpen S (Set.mem_range_self l))
+    fun x hx ↦ ?_
+  refine Proj.mem_basicOpen_monomialToNat_indicator.2 ?_
+  rintro _ ⟨l, rfl⟩
+  exact (iInf_le (fun l ↦ standardOpen n S (σ l)) l) hx
+
+variable (k : Type u) [Field k] (m : ℤ)
+
+/-- The `k`-linear map sending a finitely supported family of coefficients `(cₑ)` to the section
+`∑ cₑ xᵉ` of `𝒪(m)` over `⋂_{i ∈ s} D₊(xᵢ) ⊆ ℙ(n; Spec k)`. -/
+noncomputable def twistMonomialLinearMap (s : Set n) :
+    (laurentExponents s m →₀ k) →ₗ[k] (ModuleCat.restrictScalars
+      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).obj
+        ((twist n (Spec (.of k)) m).presheafModuleCat.obj
+          (op (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s))) :=
+  Finsupp.linearCombination k fun e ↦ twistMonomialSection (Spec (.of k)) s e
+
+variable {k m}
+
+lemma bijective_twistMonomialLinearMap {s : Set n} (hs : s.Nonempty) :
+    Function.Bijective (twistMonomialLinearMap k m s) :=
+  bijective_sum_twistMonomialSection k hs m
+
+/-- The sections `∑ cₑ xᵉ` are compatible with restriction. -/
+lemma twistMonomialLinearMap_mapDomain {s t : Set n} (hts : t ⊆ s)
+    (c : laurentExponents t m →₀ k) :
+    twistMonomialLinearMap k m s (c.mapDomain (Set.inclusion (laurentExponents_mono hts m))) =
+      (twist n (Spec (.of k)) m).presheafModuleCat.map (homOfLE ((toProjInt n _).preimage_mono
+        (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) hts))).op
+        (twistMonomialLinearMap k m t c) := by
+  rw [twistMonomialLinearMap, twistMonomialLinearMap, Finsupp.linearCombination_mapDomain,
+    Finsupp.linearCombination_apply, Finsupp.linearCombination_apply, map_finsuppSum]
+  refine Finsupp.sum_congr fun e _ ↦ ?_
+  rw [ModuleCat.restrictScalars.smul_def, ModuleCat.restrictScalars.smul_def]
+  erw [(((twist n (Spec (.of k)) m).presheafModuleCat.map _).hom).map_smul]
+  congr 1
+  exact (twist_presheaf_map_twistMonomialSection hts e).symm
+
+variable (k m) in
+/-- The degree-`p` component of the comparison map from the monomial Čech complex to the Čech
+complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)`, as a function: a family of
+finitely supported coefficients `(c_σ)` goes to the family of sections `∑ c_{σ,e} xᵉ` over
+`U_σ`. -/
+noncomputable def monomialCechToCechFun (p : ℕ) (c : ProjectiveSpace.MonomialCechCochain n k m p) :
+    ((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
+      (twist n (Spec (.of k)) m).presheafModuleCat).X p :=
+  (ModuleCat.piIsoPi (fun σ : Fin (p + 1) → n ↦
+      (twist n (Spec (.of k)) m).presheafModuleCat.obj
+        (op (∏ᶜ fun l ↦ standardOpen n (Spec (.of k)) (σ l))))).inv fun σ ↦
+    (twist n (Spec (.of k)) m).presheafModuleCat.map
+      (homOfLE ((TopCat.Presheaf.piObj_le_iInf _ σ).trans
+        (preimage_basicOpenInt_range _ σ).ge)).op
+      (twistMonomialLinearMap k m (Set.range σ) (Finsupp.supportedEquivFinsupp _ (c σ)))
+
+lemma cechComplexFunctorπ_monomialCechToCechFun (p : ℕ)
+    (c : ProjectiveSpace.MonomialCechCochain n k m p) (σ : Fin (p + 1) → n) :
+    TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat p σ (monomialCechToCechFun k m p c) =
+      (twist n (Spec (.of k)) m).presheafModuleCat.map
+        (homOfLE ((TopCat.Presheaf.piObj_le_iInf _ σ).trans
+          (preimage_basicOpenInt_range _ σ).ge)).op
+        (twistMonomialLinearMap k m (Set.range σ) (Finsupp.supportedEquivFinsupp _ (c σ))) :=
+  TopCat.Presheaf.cechComplexFunctorπ_piIsoPi_inv _ _ _ σ
+
+variable (k m) in
+/-- The degree-`p` component of the comparison map from the monomial Čech complex to the Čech
+complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)`, as a `k`-linear map. -/
+noncomputable def monomialCechToCech (p : ℕ) :
+    ProjectiveSpace.MonomialCechCochain n k m p →ₗ[k] (ModuleCat.restrictScalars
+      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).obj
+        (((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
+          (twist n (Spec (.of k)) m).presheafModuleCat).X p) where
+  toFun := monomialCechToCechFun k m p
+  map_add' c c' := by
+    refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat fun σ ↦ ?_
+    change _ = TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat p σ
+      (monomialCechToCechFun k m p c + monomialCechToCechFun k m p c')
+    rw [map_add, cechComplexFunctorπ_monomialCechToCechFun,
+      cechComplexFunctorπ_monomialCechToCechFun, cechComplexFunctorπ_monomialCechToCechFun]
+    simp only [Pi.add_apply, map_add]
+  map_smul' r c := by
+    refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat fun σ ↦ ?_
+    change _ = TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat p σ
+      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))) r •
+        monomialCechToCechFun k m p c)
+    rw [(TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat p σ).hom.map_smul,
+      cechComplexFunctorπ_monomialCechToCechFun, cechComplexFunctorπ_monomialCechToCechFun,
+      Pi.smul_apply, LinearEquiv.map_smul, LinearMap.map_smul,
+      ModuleCat.restrictScalars.smul_def]
+    exact ((twist n (Spec (.of k)) m).presheafModuleCat.map _).hom.map_smul _ _
+
+omit [Fintype n] in
+lemma supportedEquivFinsupp_apply (s : Set (n → ℤ)) (x : Finsupp.supported k k s) (e : s) :
+    Finsupp.supportedEquivFinsupp s x e = (x : (n → ℤ) →₀ k) e := by
+  simp
+
+/-- The differential of the monomial Čech complex, on the coefficients of a component. -/
+lemma supportedEquivFinsupp_monomialCechComplex_d (p : ℕ)
+    (c : ProjectiveSpace.MonomialCechCochain n k m p) (τ : Fin (p + 2) → n) :
+    Finsupp.supportedEquivFinsupp (laurentExponents (Set.range τ) m)
+        (((ProjectiveSpace.monomialCechComplex n k m).d p (p + 1)).hom c τ) =
+      ∑ i : Fin (p + 2), (-1 : ℤ) ^ (i : ℕ) •
+        (Finsupp.supportedEquivFinsupp (laurentExponents (Set.range (τ ∘ i.succAbove)) m)
+          (c (τ ∘ i.succAbove))).mapDomain
+          (Set.inclusion (laurentExponents_mono (Set.range_comp_subset_range _ _) m)) := by
+  ext e
+  rw [supportedEquivFinsupp_apply, Finsupp.finsetSum_apply]
+  have h := ProjectiveSpace.monomialCechComplex_d_apply p c τ e.1
+  refine h.trans (Finset.sum_congr rfl fun i _ ↦ ?_)
+  rw [Finsupp.smul_apply]
+  congr 1
+  by_cases he : e.1 ∈ laurentExponents (Set.range (τ ∘ i.succAbove)) m
+  · rw [show e = Set.inclusion (laurentExponents_mono (Set.range_comp_subset_range _ _) m)
+        ⟨e.1, he⟩ from rfl, Finsupp.mapDomain_apply (Set.inclusion_injective _),
+      supportedEquivFinsupp_apply]
+  · rw [Finsupp.mapDomain_of_notMem_range _ _ fun ⟨e', he'⟩ ↦ he (he' ▸ e'.2)]
+    exact ProjectiveSpace.MonomialCechCochain.coeff_eq_zero_of_notMem c _ he
+
+end Cech
