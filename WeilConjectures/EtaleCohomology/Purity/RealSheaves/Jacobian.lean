@@ -198,7 +198,85 @@ datum: the descended Jacobian `J₀` of `AlgebraicGeometry.exists_jacobian_desce
 Galois-equivariant identification `J₀(K̄) ≅ Pic⁰(C)`, restricted to `lⁿ`-torsion, which lies in
 `Pic⁰(C)`. -/
 theorem nonempty [SmoothOfRelativeDimension 1 p] : Nonempty (JacobianTorsionDatum p l) := by
-  sorry
+  let _ : C.Over (Spec (.of K)) := ⟨p⟩
+  let _ : p.geometricFiber.Over (Spec (.of (AlgebraicClosure K))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  have : SmoothOfRelativeDimension 1 (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd p _))
+  have : IsProper (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (IsProper (pullback.snd p _))
+  have : GeometricallyConnected (C ↘ Spec (.of K)) := .of_geometricallyIrreducible p
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
+  have : IsProper (C ↘ Spec (.of K)) := ‹IsProper p›
+  obtain ⟨J₀, _, r, hP, hS, hG, -, -, e₀, he⟩ := exists_jacobian_descent K (AlgebraicClosure K)
+    (AlgebraicClosure K) C _ rfl p.geometricFiber p.geometricFiberProj
+    (IsPullback.of_hasPullback _ _)
+  have : Smooth J₀.hom := SmoothOfRelativeDimension.smooth (Scheme.arithmeticGenus K C) _
+  have : IrreducibleSpace J₀.left := GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+    (f := J₀.hom)
+  have hJ : IsAbelianVariety J₀ := ⟨⟩
+  let e : picardZero (AlgebraicClosure K) p.geometricFiber ≃*
+      (Scheme.specAlgebraicClosure K ⟶ J₀) := e₀
+  -- the torsion of `Pic(C)` lies in `Pic⁰(C)`
+  have hdeg (n : ℕ) (y : Additive p.geometricFiber.Pic) (hy : ((l : ℤ) ^ n) • y = 0) :
+      y.toMul ∈ picardZero (AlgebraicClosure K) p.geometricFiber := by
+    rw [MonoidHom.mem_ker]
+    have h := congrArg
+      (fun z ↦ (Scheme.picDegreeHom (AlgebraicClosure K) p.geometricFiber z.toMul).toAdd) hy
+    simp only [toMul_zsmul, map_zpow, toAdd_zpow, toMul_zero, map_one, toAdd_one] at h
+    rw [← ofAdd_toAdd (Scheme.picDegreeHom _ _ _), ofAdd_eq_one]
+    exact (mul_eq_zero.1 h).resolve_left
+      (pow_ne_zero n (by exact_mod_cast (Fact.out : l.Prime).ne_zero))
+  -- `e⁻¹ : J₀(K̄) ≃ Pic⁰(C) ⊆ Pic(C)` commutes with integer multiples
+  have hzsmul (x : Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) (k : ℤ) :
+      (k • Additive.ofMul ((e.symm (Additive.toMul x) :
+        picardZero (AlgebraicClosure K) p.geometricFiber) : p.geometricFiber.Pic)) =
+      Additive.ofMul ((e.symm (Additive.toMul (k • x)) :
+        picardZero (AlgebraicClosure K) p.geometricFiber) : p.geometricFiber.Pic) := by
+    simp [toMul_zsmul, map_zpow]
+  let eT (n : ℕ) :
+      AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) ((l : ℤ) ^ n) ≃+
+        AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ n) :=
+    { toFun x := ⟨.ofMul (e.symm x.1.toMul : p.geometricFiber.Pic), by
+        change ((l : ℤ) ^ n) • (Additive.ofMul _ : Additive p.geometricFiber.Pic) = 0
+        rw [hzsmul,
+          show ((l : ℤ) ^ n) • (x : Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) = 0 from x.2]
+        simp⟩
+      invFun y := ⟨.ofMul (e ⟨y.1.toMul, hdeg n y.1 y.2⟩), by
+        change ((l : ℤ) ^ n) •
+          (Additive.ofMul _ : Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) = 0
+        rw [← ofMul_zpow, ← map_zpow]
+        have : (⟨y.1.toMul, hdeg n y.1 y.2⟩ :
+            picardZero (AlgebraicClosure K) p.geometricFiber) ^ ((l : ℤ) ^ n) = 1 :=
+          Subtype.ext (by
+            have h := congrArg Additive.toMul
+              (show ((l : ℤ) ^ n) • (y : Additive p.geometricFiber.Pic) = 0 from y.2)
+            rw [toMul_zsmul, toMul_zero] at h
+            simpa only [SubgroupClass.coe_zpow, OneMemClass.coe_one] using h)
+        rw [this, map_one, ofMul_one]⟩
+      left_inv x := Subtype.ext (by simp)
+      right_inv y := Subtype.ext (by simp)
+      map_add' x y := Subtype.ext (by simp) }
+  refine ⟨@JacobianTorsionDatum.mk _ _ _ _ p _ _ _ _ l _ J₀ _ hJ r eT ?_ ?_⟩
+  · intro n σ x
+    obtain ⟨γ, hγ₁, hγ₂, act, hact₁, hact₂⟩ := he σ
+    have hγ : γ = p.geometricFiberGaloisMap σ.toAlgHom :=
+      Scheme.Hom.geometricFiber_hom_ext p (by simpa using hγ₁) (by
+        rw [Scheme.Hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure]
+        exact hγ₂)
+    have hx : e (act (e.symm x.1.toMul)) = specAlgEquivOver σ ≫ e (e.symm x.1.toMul) :=
+      hact₂ (e.symm x.1.toMul)
+    rw [MulEquiv.apply_symm_apply, ← MulEquiv.eq_symm_apply] at hx
+    change Additive.ofMul (e.symm (Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ x.1.toMul) :
+      p.geometricFiber.Pic) = _
+    rw [show Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ x.1.toMul =
+      specAlgEquivOver σ ≫ x.1.toMul from rfl, ← hx, hact₁, hγ]
+    rfl
+  · intro n x
+    change Additive.ofMul (e.symm (Additive.toMul ((l : ℤ) •
+        (x : Additive (Scheme.specAlgebraicClosure K ⟶ J₀)))) : p.geometricFiber.Pic) =
+      (l : ℤ) • Additive.ofMul (e.symm x.1.toMul : p.geometricFiber.Pic)
+    rw [hzsmul]
 
 end JacobianTorsionDatum
 

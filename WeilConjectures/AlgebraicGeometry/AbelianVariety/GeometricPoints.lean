@@ -38,7 +38,6 @@ section Points
 
 variable {L : Type u} [Field L] (g : Spec (.of L) ⟶ Spec (.of K))
 
-set_option backward.isDefEq.respectTransparency false in
 noncomputable instance : GrpObj ((Over.pullback g).obj A) := Functor.grpObjObj
 
 /-- The section of `Spec L ×_K Spec L ⟶ Spec L` through the diagonal, as an `L`-point of the
@@ -49,7 +48,6 @@ noncomputable def diagonalPoint :
 
 omit [GrpObj A] in
 variable {A g} in
-set_option backward.isDefEq.respectTransparency false in
 lemma diagonalPoint_comp_map_left (a : Over.mk g ⟶ A) :
     (diagonalPoint g ≫ (Over.pullback g).map a).left =
       pullback.lift a.left (𝟙 _) (by simp) := by
@@ -59,7 +57,6 @@ lemma diagonalPoint_comp_map_left (a : Over.mk g ⟶ A) :
     exact Category.id_comp _
   · simp [diagonalPoint, Over.pullback_map_left]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The `L`-valued points of a group scheme `A` over `K`, i.e. the morphisms `Spec L ⟶ A` over
 `K`, are the `L`-points of the base change `A_L`, as groups. -/
 noncomputable def pointsAddEquivPullback :
