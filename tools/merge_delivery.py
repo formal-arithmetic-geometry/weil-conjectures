@@ -215,6 +215,13 @@ def cmd_return(group, item, reasons):
     head = git("rev-parse", "--short", f"refs/heads/{br}") if subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/heads/{br}"], cwd=ROOT, capture_output=True).returncode == 0 else "no branch"
     p = ROOT / "coord" / "returns" / f"{group}.md"
     p.parent.mkdir(exist_ok=True)
+    # keep the returns file exact: one entry per item, the latest
+    if p.exists():
+        import re as _re
+        parts = _re.split(r"(?m)^(?=## )", p.read_text())
+        kept = [x for x in parts if not x.startswith(f"## {item} (")]
+        if len(kept) != len(parts):
+            p.write_text("".join(kept).rstrip("\n") + "\n")
     with open(p, "a") as f:
         f.write(f"\n## {item} ({datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M')} UTC, branch head {head})\n\n{reasons}\n")
     ledger(f"delivery of {group}: {item} returned ({head}): {reasons.splitlines()[0][:160]}")
