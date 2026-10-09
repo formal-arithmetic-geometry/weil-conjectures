@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+ "kind": "statement",
+ "title": "Galois-invariant closed subsets of a Galois base change descend",
+ "statement": "Let $k$ be a field, let $\\bar k/k$ be a field extension [def-pc-field-extension] that is Galois, i.e. separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal (for every $\\alpha\\in\\bar k$ the minimal polynomial of $\\alpha$ over $k$ is a product of polynomials of degree one in $\\bar k[T]$); it may be of infinite degree. Write $\\operatorname{Aut}(\\bar k/k)$ for the group of $k$-algebra automorphisms of $\\bar k$. Let $X$ be a scheme over $k$ [def-weil-scheme-over-base] and $X_{\\bar k}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$ its base change [def-pc-base-change]. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ let $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma):X_{\\bar k}\\to X_{\\bar k}$ be the base change of the $k$-morphism $\\operatorname{Spec}(\\sigma):\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}\\bar k$ [def-weil-affine-spectrum]; it is an automorphism of the scheme $X_{\\bar k}$, and $(\\sigma\\circ\\tau)_X=\\tau_X\\circ\\sigma_X$. Let $p:X_{\\bar k}\\to X$ be the projection. Let $\\bar T\\subseteq X_{\\bar k}$ be a closed subset such that $\\sigma_X(\\bar T)=\\bar T$ for every $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$. Then there is a closed subset $T\\subseteq X$ with $p^{-1}(T)=\\bar T$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 038B (lemma-closed-fixed-by-Galois, lines 898--934), with the action of equation (equation-galois-action-base-change-kbar), lines 850--874"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed subset of base change to separable closure invariant under Galois group is preimage of closed subset",
+   "results": "Algebra.isInvariant_of_isGalois (RingTheory/Invariant/Basic), IsGaloisGroup.of_isFractionRing, separableClosure.comap_eq_of_algHom, universallyClosed_isStableUnderBaseChange, IsClosedImmersion.isStableUnderBaseChange: no descent of invariant closed subsets of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois action on base change of a scheme to separable closure; invariant closed subsets descend",
+   "results": "instTotallySeparatedSpaceAlgEquivOfIsIntegral (KrullTopology), Algebra.isInvariant_of_isGalois, Algebra.isInvariant_of_isGalois', InfiniteGalois.fixingSubgroup_isClosed, IsGaloisGroup.of_isFractionRing: ring-level invariants only (Algebra.IsInvariant is the ring statement A = B^G for integral closures in finite Galois extensions, not for A ⊗_k k̄)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'galois|IsGalois|AlgEquiv|invariant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iv 'galois connection'; grep -rn 'IsInvariant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Invariant",
+   "results": "no scheme-level Galois descent of closed subsets; RingTheory/Invariant concerns invariants of integral extensions with a finite group, not (A ⊗_k k̄)^Gal = A for an infinite Galois k̄/k",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

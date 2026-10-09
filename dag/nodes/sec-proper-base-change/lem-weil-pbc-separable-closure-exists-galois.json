@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-separable-closure-exists-galois",
+ "kind": "statement",
+ "title": "Existence of a separable closure; it is Galois over every intermediate field",
+ "statement": "Let $k$ be a field. (1) There is a field extension $\\bar k/k$ [def-pc-field-extension] such that $\\bar k$ is separably closed [def-pc-separably-closed] and $\\bar k/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension] (a separable algebraic closure of $k$). (2) For any such $\\bar k$ and any subfield $k'$ with $k\\subseteq k'\\subseteq\\bar k$: the extension $\\bar k/k'$ is separable algebraic and normal (for every $\\alpha\\in\\bar k$ the minimal polynomial of $\\alpha$ over $k'$ is a product of polynomials of degree one in $\\bar k[T]$), i.e. $\\bar k/k'$ is Galois; and $k'/k$ is separable algebraic.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Theorem Tag 09GT (theorem-existence-algebraic-closure) and Lemma Tag 09HC (lemma-separable-elements, line 1435: the separable elements of an algebraic closure form a subfield); Definition Tag 030J (definition-separable-algebraic, line 3723, (4)-(5): normal, Galois); Lemma Tag 09I2 (lemma-galois-goes-up) and Lemma Tag 09H2 (lemma-separable-goes-up, line 1187); separable algebraic over a subfield of the bottom: every element of k' is separable over k by definition"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pc-separably-closed",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of separable closure of a field, it is Galois",
+   "results": "IsSepClosure.isGalois (FieldTheory/IsSepClosed), separableClosure.isGalois, SeparableClosure, separableClosure.isSepClosure, separableClosure, IsSepClosure",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure, IsGalois",
+   "results": "IsSepClosure.isGalois (Mathlib.FieldTheory.IsSepClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsSepClosure\\|SeparableClosure.isSepClosed\\|isGalois' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean; grep -n 'tower_top_of_isGalois' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Galois/Basic.lean; grep -n 'isSeparable_tower_bot_of_isSeparable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean",
+   "results": "class IsSepClosure (IsSepClosed.lean:227: sep_closed, separable), instance separableClosure.isSepClosure (:341), abbrev SeparableClosure (:349), instance SeparableClosure.isSepClosed (:351), instance IsSepClosure.isGalois (:267); IsGalois.tower_top_of_isGalois (Galois/Basic.lean:152, @[stacks 09I2]); Algebra.isSeparable_tower_bot_of_isSeparable (Separable.lean:684); class IsGalois = Algebra.IsSeparable + Normal (Galois/Basic.lean:57), class Normal = IsAlgebraic + minpoly splits (Normal/Defs.lean:34)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosure.isGalois",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "line": 267,
+  "how": "one Mathlib lemma per clause: (1) `SeparableClosure k` with the instance `IsSepClosure k (SeparableClosure k)` (separableClosure.isSepClosure, IsSepClosed.lean:341, applied to AlgebraicClosure k; `IsSepClosure` at :227 is IsSepClosed + Algebra.IsSeparable); (2) `IsSepClosure.isGalois` (:267) gives `IsGalois k k̄`, then `IsGalois.tower_top_of_isGalois` (Mathlib/FieldTheory/Galois/Basic.lean:152) gives `IsGalois k' k̄` for an intermediate field k' (instance IsGalois.tower_top_intermediateField, :159), `IsGalois` being `Algebra.IsSeparable` + `Normal` (:57; Normal = algebraic + every minpoly splits, Normal/Defs.lean:34); `Algebra.isSeparable_tower_bot_of_isSeparable` (Mathlib/FieldTheory/Separable.lean:684) gives `Algebra.IsSeparable k k'`. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

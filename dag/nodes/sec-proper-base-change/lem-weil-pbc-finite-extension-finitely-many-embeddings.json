@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+ "kind": "statement",
+ "title": "A finite field extension has finitely many embeddings over the base",
+ "statement": "Let $F$ be a field, let $K/F$ be a field extension [def-pc-field-extension] with $\\dim_FK<\\infty$, and let $L/F$ be any field extension. Then the set of $F$-algebra homomorphisms $K\\to L$ is finite, with at most $\\dim_FK$ elements.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09H8 (lemma-count-embeddings-explicitly, line 1326) for L an algebraic closure, with deg_s(P_i) <= deg(P_i) (remark after Definition Tag 09H5, line 1262); an F-map K -> L lands in the algebraic closure of F in L, which embeds into an algebraic closure (Lemma Tag 09GU)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely many algebra homomorphisms from a finite field extension into a field",
+   "results": "AlgHom.card_le (FieldTheory/Fixed, K->K only), FiniteField.natCard_algHom_of_finrank_dvd, AlgHom.natCard_of_splits (PrimitiveElement), card_algHom_le_finrank (LinearAlgebra/FreeModule/Finite/Matrix)",
+   "date": "2026-10-10",
+   "verdict": "match: card_algHom_le_finrank"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.card (_ →ₐ[_] _) ≤ Module.finrank _ _",
+   "results": "card_algHom_le_finrank (Mathlib.LinearAlgebra.FreeModule.Finite.Matrix)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'card_algHom_le\\|Finite.algHom\\|AlgHom.fintype' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Finite.algHom (LinearAlgebra/FreeModule/Finite/Matrix.lean:79), card_algHom_le_finrank (same file :91, @[stacks 09HS]), AlgHom.fintype (FieldTheory/Minpoly/Field.lean:250)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "card_algHom_le_finrank",
+  "file": "Mathlib/LinearAlgebra/FreeModule/Finite/Matrix.lean",
+  "line": 91,
+  "how": "exact (generalization specializing in one line): for `K M L` with `[CommRing K] [Ring M] [Algebra K M] [Module.Free K M] [Module.Finite K M] [CommRing L] [IsDomain L] [Algebra K L]`, `Nat.card (M →ₐ[K] L) ≤ finrank K M`; take K := F, M := K, L := L (a finite-dimensional vector space over a field is free and finite, a field is a domain); finiteness of the set is the instance `Finite.algHom` (line 79). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

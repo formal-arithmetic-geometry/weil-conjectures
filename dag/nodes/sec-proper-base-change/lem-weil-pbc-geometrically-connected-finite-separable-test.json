@@ -2,21 +2,175 @@
  "id": "lem-weil-pbc-geometrically-connected-finite-separable-test",
  "kind": "statement",
  "title": "Geometric connectedness is tested by finite separable extensions",
- "statement": "Let $k$ be a field and let $Y$ be a scheme over $k$ [def-weil-scheme-over-base]. Then $Y$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] if and only if for every finite separable field extension $k'/k$ [def-pc-field-extension] the base change $Y_{k'}=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ [def-pc-base-change] is connected [def-weil-connected-scheme].",
+ "statement": "Let $k$ be a field and let $Y$ be a scheme over $k$ [def-weil-scheme-over-base]. Then $Y$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] if and only if for every field extension $k'/k$ [def-pc-field-extension] that is finite ($\\dim_kk'<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension] the base change $Y_{k'}=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ [def-pc-base-change] is connected [def-weil-connected-scheme].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma 33.7.8 (Tag 0389, label lemma-characterize-geometrically-disconnected), lines 936--1020"
+  "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), lines 935--1020"
  },
  "stmt_deps": [
   "def-weil-scheme-over-base",
   "def-pc-geometrically-irreducible",
   "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
   "def-pc-base-change",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\Rightarrow$) If $Y$ is geometrically connected over $k$, then by definition $Y_{k'}$ is connected for every field extension $k'/k$, in particular for every finite separable one.",
+   "uses": [
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, first sentence (line 950)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), setup. Assume $Y_{k'}$ is connected for every finite separable $k'/k$ and, for a contradiction, that $Y$ is not geometrically connected. By [lem-weil-pbc-separable-closure-exists-galois](1) choose a separable algebraic closure $\\bar k/k$: $\\bar k$ is separably closed and separable algebraic over $k$; by (2) it is Galois over $k$ and over every intermediate field. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ write $\\sigma_Y=\\mathrm{id}_Y\\times\\operatorname{Spec}(\\sigma)$, the automorphism of $Y_{\\bar k}$ given by base change [def-pc-base-change]; $(\\sigma\\circ\\tau)_Y=\\tau_Y\\circ\\sigma_Y$, $(\\sigma^{-1})_Y=\\sigma_Y^{-1}$, so each $\\sigma_Y$ is a homeomorphism of $Y_{\\bar k}$. Let $p:Y_{\\bar k}\\to Y$ be the projection; since $\\sigma$ is a $k$-algebra map, $p\\circ\\sigma_Y=p$, hence $\\sigma_Y(p^{-1}(S))=p^{-1}(S)$ for every subset $S\\subseteq Y$. The morphism $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ is a map of one-point spaces, hence surjective, so $p$ is surjective [lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "def-pc-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, lines 951--953, and the action (equation-galois-action-base-change-kbar), lines 850--874"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), $Y$ is nonempty. Taking $k'=k$ (finite of degree one, and separable algebraic since each $a\\in k$ has minimal polynomial $T-a$), $Y_k$ is connected, hence nonempty [def-weil-connected-scheme]; the projection $Y_k\\to Y$ is an isomorphism (base change along the identity of $\\operatorname{Spec}k$), so $Y\\neq\\emptyset$, and $Y_{\\bar k}\\ne\\emptyset$ because $p$ is surjective.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-pc-base-change",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020 (the case of empty $Y$, which the source passes over)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), $Y_{\\bar k}$ is disconnected (Stacks Lemma 0387). If $Y_{\\bar k}$ were connected, then, $\\bar k$ being separably closed, [lem-weil-separably-closed-geometrically-connected] applied to the $\\bar k$-scheme $Y_{\\bar k}$ would make $Y_{\\bar k}$ geometrically connected over $\\bar k$, and [lem-weil-geometrically-connected-check-after-extension] applied to $\\bar k/k$ would make $Y$ geometrically connected over $k$, contrary to the assumption. So $Y_{\\bar k}$, which is nonempty by the previous step, is not connected: $Y_{\\bar k}=\\bar U\\amalg\\bar V$ with $\\bar U,\\bar V$ open, closed and nonempty [def-weil-connected-scheme].",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-weil-geometrically-connected-check-after-extension",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, lines 953--958, citing Lemma Tag 0387 (lemma-characterize-geometrically-connected, lines 791--808), whose proof uses Lemma Tag 0363 and Lemma Tag 054N"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), quasi-compact pieces. Let $W\\subseteq Y$ be a quasi-compact open subset and $W_{\\bar k}:=p^{-1}(W)$. Then $W_{\\bar k}$ is open and quasi-compact: $W$ is a finite union of affine opens $W_i$, $p$ is quasi-compact as a base change of the quasi-compact morphism $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ (a morphism of affine schemes) [lem-weil-pbc-qcqs-morphism-permanence](1),(3), so each $p^{-1}(W_i)$ is quasi-compact [def-weil-finite-type-morphism], and a finite union of quasi-compact sets is quasi-compact. By the setup, $\\sigma_Y(W_{\\bar k})=W_{\\bar k}$ for all $\\sigma$. The sets $W_{\\bar k}\\cap\\bar U$ and $W_{\\bar k}\\cap\\bar V$ are open in $Y_{\\bar k}$, complementary in $W_{\\bar k}$, and closed in the quasi-compact space $W_{\\bar k}$, hence quasi-compact [lem-weil-pbc-closed-in-quasi-compact]. By [lem-weil-pbc-galois-base-change-qc-open-descends](2), applied to $V=W_{\\bar k}\\cap\\bar U$, there is a finite subextension $k\\subseteq k_W\\subseteq\\bar k$ with $\\rho_Y(W_{\\bar k}\\cap\\bar U)=W_{\\bar k}\\cap\\bar U$ for all $\\rho\\in\\operatorname{Aut}(\\bar k/k_W)$; then also $\\rho_Y(W_{\\bar k}\\cap\\bar V)=W_{\\bar k}\\cap\\bar V$, the complement in the invariant set $W_{\\bar k}$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-weil-pbc-galois-base-change-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, second paragraph (lines 959--970), using Lemma Tag 04KU"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), choice of $k'$. Pick $u\\in\\bar U$ and an affine open $W_0\\subseteq Y$ containing $p(u)$; it is quasi-compact and $W_{0,\\bar k}\\cap\\bar U\\ni u$ is nonempty. Let $k':=k_{W_0}$ be the finite subextension of the previous step for $W_0$ and $H:=\\operatorname{Aut}(\\bar k/k')$, a subgroup of $\\operatorname{Aut}(\\bar k/k)$; thus $\\sigma_Y(W_{0,\\bar k}\\cap\\bar U)=W_{0,\\bar k}\\cap\\bar U$ for $\\sigma\\in H$. By [lem-weil-pbc-separable-closure-exists-galois](2), $k'/k$ is separable algebraic, and it is finite by construction.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, third paragraph (lines 971--983)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), finiteness of the $H$-translates. Let $W$ be a quasi-compact open of $Y$ and $A:=W_{\\bar k}\\cap\\bar U$, with $k_W$ as above. If $\\sigma,\\tau\\in H$ and $\\sigma^{-1},\\tau^{-1}$ agree on $k_W$, then $\\rho:=\\tau\\circ\\sigma^{-1}$ fixes $k_W$ pointwise (for $x\\in k_W$: $\\rho(x)=\\tau(\\sigma^{-1}(x))=\\tau(\\tau^{-1}(x))=x$), and $\\tau=\\rho\\circ\\sigma$ gives $\\tau_Y(A)=\\sigma_Y(\\rho_Y(A))=\\sigma_Y(A)$. The restrictions $\\sigma^{-1}|_{k_W}$ are $k$-algebra homomorphisms $k_W\\to\\bar k$, of which there are finitely many since $\\dim_kk_W<\\infty$ [lem-weil-pbc-finite-extension-finitely-many-embeddings]. Hence $\\{\\sigma_Y(A):\\sigma\\in H\\}$ and likewise $\\{\\sigma_Y(W_{\\bar k}\\cap\\bar V):\\sigma\\in H\\}$ are finite families. (The source phrases this as invariance under an open subgroup of the profinite Galois group.)",
+   "uses": [
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fourth paragraph (lines 985--996: 'the union and intersection above are finite')"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), the sets $U_W,V_W$. For a quasi-compact open $W\\subseteq Y$ put $U_W:=\\bigcap_{\\sigma\\in H}\\sigma_Y(W_{\\bar k}\\cap\\bar U)$ and $V_W:=\\bigcup_{\\sigma\\in H}\\sigma_Y(W_{\\bar k}\\cap\\bar V)$. Since $\\sigma_Y$ is a homeomorphism fixing $W_{\\bar k}$, $\\sigma_Y(W_{\\bar k}\\cap\\bar U)$ and $\\sigma_Y(W_{\\bar k}\\cap\\bar V)$ are complementary open and closed subsets of $W_{\\bar k}$; by the previous step the intersection and the union are finite, so $U_W$ and $V_W=W_{\\bar k}\\setminus U_W$ are open and closed in $W_{\\bar k}$, hence open in $Y_{\\bar k}$, and $W_{\\bar k}=U_W\\amalg V_W$. For $\\tau\\in H$, $\\tau_Y(U_W)=\\bigcap_\\sigma(\\sigma\\circ\\tau)_Y(W_{\\bar k}\\cap\\bar U)=U_W$ because $\\sigma\\mapsto\\sigma\\circ\\tau$ is a bijection of $H$; likewise $\\tau_Y(V_W)=V_W$. Since $W_{0,\\bar k}\\cap\\bar U$ is $H$-invariant, $U_{W_0}=W_{0,\\bar k}\\cap\\bar U\\neq\\emptyset$; and $V_W\\supseteq W_{\\bar k}\\cap\\bar V$ ($\\sigma=\\mathrm{id}$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fourth paragraph (lines 985--998)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), compatibility (the source's 'verification omitted'). If $W\\subseteq W'$ are quasi-compact opens, then $W_{\\bar k}\\subseteq W'_{\\bar k}$ and, as $\\sigma_Y(W_{\\bar k})=W_{\\bar k}$ and $\\sigma_Y$ is bijective, $W_{\\bar k}\\cap\\sigma_Y(W'_{\\bar k}\\cap\\bar U)=\\sigma_Y(W_{\\bar k}\\cap W'_{\\bar k}\\cap\\bar U)=\\sigma_Y(W_{\\bar k}\\cap\\bar U)$; intersecting over $\\sigma\\in H$ gives $W_{\\bar k}\\cap U_{W'}=U_W$, and the same computation with unions gives $W_{\\bar k}\\cap V_{W'}=V_W$. Consequently, for any two quasi-compact opens $W,W'$ (so $W\\cup W'$ is quasi-compact open), $U_W\\cap W'_{\\bar k}=U_{W\\cup W'}\\cap W_{\\bar k}\\cap W'_{\\bar k}\\subseteq U_{W\\cup W'}\\cap W'_{\\bar k}=U_{W'}$, and similarly for $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fifth paragraph (lines 1000--1004, 'Verification omitted')"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), gluing. Put $U:=\\bigcup_WU_W$ and $V:=\\bigcup_WV_W$ over all quasi-compact opens $W\\subseteq Y$. Both are open in $Y_{\\bar k}$ and $H$-invariant (each $U_W$, $V_W$ is). By the previous step $U\\cap W'_{\\bar k}=U_{W'}$ and $V\\cap W'_{\\bar k}=V_{W'}$ for every quasi-compact open $W'$; since the $W'_{\\bar k}$ for $W'$ affine open cover $Y_{\\bar k}$ (affine opens cover $Y$ and are quasi-compact) and $W'_{\\bar k}=U_{W'}\\amalg V_{W'}$, we get $Y_{\\bar k}=U\\amalg V$ with $U,V$ open, hence also closed. $U\\supseteq U_{W_0}\\neq\\emptyset$, and $V\\neq\\emptyset$: for $v\\in\\bar V$ and an affine open $W\\ni p(v)$, $v\\in W_{\\bar k}\\cap\\bar V\\subseteq V_W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fifth paragraph (lines 1004--1012)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), descent to $k'$ and contradiction. Let $q:Y_{\\bar k}\\to Y_{k'}$ be $\\mathrm{id}_Y\\times\\operatorname{Spec}(k'\\hookrightarrow\\bar k)$. By [lem-weil-pbc-cartesian-square-pasting] (pasting the cartesian squares of $Y_{k'}\\to\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k'$), $(Y_{\\bar k},q,\\mathrm{pr})$ is the base change of the $k'$-scheme $Y_{k'}$ along $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k'$, and for $\\sigma\\in H=\\operatorname{Aut}(\\bar k/k')$ the automorphism $\\mathrm{id}_{Y_{k'}}\\times\\operatorname{Spec}(\\sigma)$ equals $\\sigma_Y$ (both have the same compositions with the two projections, by the universal property of the fibre product [def-pc-fibre-product]). As $\\bar k/k'$ is Galois [lem-weil-pbc-separable-closure-exists-galois](2) and $U,V$ are closed and $H$-invariant, [lem-weil-pbc-galois-invariant-closed-subset-descends] (for the field $k'$, the $k'$-scheme $Y_{k'}$ and $\\bar k/k'$) gives closed $U',V'\\subseteq Y_{k'}$ with $q^{-1}(U')=U$, $q^{-1}(V')=V$. The morphism $q$ is surjective [lem-weil-pbc-surjective-base-change] (base change of the surjection of one-point spaces $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k'$). Hence $U'\\cup V'=Y_{k'}$ (each point has a preimage, lying in $U$ or $V$), $U'\\cap V'=\\emptyset$ (a common point would have a preimage in $U\\cap V$), and $U'=q(U)$, $V'=q(V)$ are nonempty. So $Y_{k'}$ is the disjoint union of two nonempty closed, hence open and closed, subsets and is not connected [def-weil-connected-scheme], although $k'/k$ is finite and separable algebraic (setup of $k'$). This contradiction proves that $Y$ is geometrically connected.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, end of the proof (lines 1012--1019), using Lemma Tag 038B over $k'$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "def-pc-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-galois-base-change-qc-open-descends",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-galois-invariant-closed-subset-descends"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020; the omitted verification and the empty case written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +192,17 @@
    "results": "No finite-separable geometric-connectedness criterion; Geometrically/Connected.lean only has base-change stability and fibre characterizations",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "results": "GeometricallyConnected (l.40), base-change instances, fibre characterization iff_geometricallyConnected_fiber, connectedSpace lemmas, comp; nothing reduces geometric connectedness to finite separable (or separably closed) extensions",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -49,9 +210,34 @@
   "date": "2026-10-10"
  },
  "lean_audit": {
-  "master": {"state": "none", "decls": [], "missing": []},
-  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks Varieties Lemma 0389 (lines 935--1020) in 11 steps. The reduction to the separable closure (Lemma 0387) is carried by the existing nodes lem-weil-separably-closed-geometrically-connected (0363) and lem-weil-geometrically-connected-check-after-extension (054N) of unit sk-prop-nagata-sketch-comp-category, cited as tools. New nodes: 04KU (qc opens of a Galois base change descend to a finite subextension, stated without the Krull topology), 038B (Galois-invariant closed subsets descend), a Mathlib leaf for finiteness of embeddings of a finite extension (card_algHom_le_finrank), and a Mathlib leaf for existence of a separable closure and its Galois property over intermediate fields. The source's 'Verification omitted' compatibility claim, the finiteness of the H-translates (written with embeddings of k_W instead of open subgroups), the gluing, and the empty case are written out. Statement: 'finite separable' made explicit as finite and separable algebraic (stmt_dep def-weil-pbc-separable-algebraic-extension added); source place corrected (the tag is 0389; the lemma number 33.7.8 in the old place was wrong by sequential count: 0387 is 33.7.7, then 0388, 04KU, 038B precede 0389)."
+ },
+ "tool_uses": [
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-geometrically-connected-check-after-extension"
+ ],
+ "lead_note": "Off-route tool uses recorded by L (2026-10-10): lem-weil-separably-closed-geometrically-connected (0363) and lem-weil-geometrically-connected-check-after-extension (054N), unit sk-prop-nagata-sketch-comp-category, in step 4 as black boxes (Stacks 0387).",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Eleven steps along Stacks 0389 with the omitted verification, the empty case and the finiteness of the Galois translates written out (finite subextension k_W instead of an open subgroup; embeddings counted by a new Mathlib leaf card_algHom_le_finrank Matrix.lean:91 verified). Step 4 (0387) uses two generic nodes of another unit, recorded as tool_uses. New nodes: 04KU and 038B unsplit (statements self-contained, with the Galois action defined), separable closure exists and is Galois over intermediate fields as a leaf by one declaration per clause (IsSepClosed.lean:341/267, Galois/Basic.lean:152, Separable.lean:684 verified). Checked steps 7-11; correct."
+ }
 }

@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-galois-base-change-qc-open-descends",
+ "kind": "statement",
+ "title": "Quasi-compact opens of a Galois base change are defined over a finite subextension",
+ "statement": "Let $k$ be a field, let $\\bar k/k$ be a field extension [def-pc-field-extension] that is Galois, i.e. separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal (for every $\\alpha\\in\\bar k$ the minimal polynomial of $\\alpha$ over $k$ is a product of polynomials of degree one in $\\bar k[T]$); it may be of infinite degree. Write $\\operatorname{Aut}(\\bar k/k)$ for the group of $k$-algebra automorphisms of $\\bar k$. Let $X$ be a scheme over $k$ [def-weil-scheme-over-base] and $X_{\\bar k}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$ its base change [def-pc-base-change]. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ let $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma):X_{\\bar k}\\to X_{\\bar k}$ be the base change of the $k$-morphism $\\operatorname{Spec}(\\sigma):\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}\\bar k$ [def-weil-affine-spectrum]; it is an automorphism of the scheme $X_{\\bar k}$, and $(\\sigma\\circ\\tau)_X=\\tau_X\\circ\\sigma_X$. Let $V\\subseteq X_{\\bar k}$ be a quasi-compact open subset. Then: (1) there are a subfield $k'$ with $k\\subseteq k'\\subseteq\\bar k$ and $\\dim_kk'<\\infty$, and a quasi-compact open subset $V'\\subseteq X_{k'}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$, such that $V=p^{-1}(V')$, where $p:X_{\\bar k}\\to X_{k'}$ is the morphism $\\mathrm{id}_X\\times\\operatorname{Spec}(k'\\hookrightarrow\\bar k)$; (2) for this $k'$, $\\sigma_X(V)=V$ for every $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ that fixes $k'$ pointwise. (Stacks states (2) as: $V$ is invariant under an open subgroup of $\\operatorname{Gal}(\\bar k/k)$; the subgroup fixing a finite subextension is such a subgroup.)",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 04KU (lemma-Galois-action-quasi-compact-open, lines 876--897), whose proof uses Lemma Tag 0388 (lemma-descend-open, lines 811--848); the action is equation (equation-galois-action-base-change-kbar), lines 850--874"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact open subset of base change of scheme to Galois extension descends to a finite subextension",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens (Morphisms/QuasiCompact), descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (Morphisms/FlatDescent): none descends an open along a Galois or directed extension of the base field",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact open of X base changed to infinite Galois extension is defined over a finite subextension",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed, fibre compactness instance, quasiCompact_isStableUnderBaseChange, Algebra.QuasiFiniteAt.baseChange, RingHom.QuasiFinite.isStableUnderBaseChange: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'galois|IsGalois|fixingSubgroup|IntermediateField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -nE '^(theorem|lemma)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean | grep -iE 'open|compact'",
+   "results": "no Galois action on base changes in AlgebraicGeometry (hits are Galois connections in IdealSheaf, ProjectiveSpectrum); AffineTransitionLimit.lean has isBasis_preimage_isAffineOpen (l.312), exists_isAffineOpen_preimage_eq (l.1063) for cofiltered limits with affine transition maps, which could serve the proof (Spec of the colimit of finite subextensions) but do not state the lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
