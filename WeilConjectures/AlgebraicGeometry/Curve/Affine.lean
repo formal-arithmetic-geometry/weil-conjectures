@@ -7,14 +7,17 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldFiltration
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -48,7 +51,7 @@ collects the inputs of the computation of the étale cohomology of `C`
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj Opposite
 
 namespace AlgebraicGeometry.IsConnectedCurve
 
@@ -329,6 +332,45 @@ theorem subsingleton_sheafH_two_constantZMod (f : C ⟶ Spec (.of k)) [IsConnect
   have e' := ((Sheaf.functorH _ 2).mapIso
     (C.constantZModIsoRootsOfUnitySheaf ℓ f hζ)).addCommGroupIsoToAddEquiv
   exact (e'.trans e).subsingleton
+
+/-- **Split sheaves on the generic point of an affine curve.** Let `C` be a smooth integral
+affine connected curve over an algebraically closed field `k`, with generic point
+`η : Spec k(C) ⟶ C`, let `N/k(C)` be a finite Galois extension whose Galois group is an
+`ℓ`-group, and let `Y` be an étale sheaf on `Spec k(C)` split by `N` whose sections over `N` form
+a finite group killed by a power of `ℓ`. Then `H²(C, η_* Y) = 0`: `Y` is an iterated extension of
+copies of `ℤ/ℓ` (`AlgebraicGeometry.Scheme.isSplitBy_induction`), the vanishing passes to
+extensions (`AlgebraicGeometry.IsCurve.subsingleton_H_lowerStar_of_shortExact`), and
+`H²(C, η_* ℤ/ℓ) ≅ H²(C, ℤ/ℓ) = 0`. -/
+theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C] (N : Type u) [Field N]
+    [Algebra C.functionField N] [Algebra.Etale C.functionField N] [IsGalois C.functionField N]
+    [FiniteDimensional C.functionField N] {ℓ : ℕ} [Fact ℓ.Prime]
+    (hP : IsPGroup ℓ (N ≃ₐ[C.functionField] N)) (a : ℕ)
+    (Y : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hY : Scheme.IsSplitBy N Y)
+    [Finite (Y.obj.obj (op (Scheme.etaleSpec C.functionField N)))]
+    (ha : ∀ x : Y.obj.obj (op (Scheme.etaleSpec C.functionField N)), ℓ ^ a • x = 0) :
+    Subsingleton (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj Y)
+      2) := by
+  refine Scheme.isSplitBy_induction hP (fun Z ↦ Subsingleton (Sheaf.H
+    ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj Z) 2)) ?_ ?_ ?_ a Y hY
+    ‹_› ha
+  · intro Z hZ
+    exact Sheaf.subsingleton_H_of_isZero (Functor.map_isZero _ hZ) 2
+  · intro S hS h₁ h₃
+    exact IsCurve.subsingleton_H_lowerStar_of_shortExact f hS 0 h₁ h₃
+  · have hb := IsCurve.bijective_H_map_unit_fromSpecFunctionField f (C.constantZMod ℓ) 0
+    have h₀ : Subsingleton (Sheaf.H ((𝟭 _).obj (C.constantZMod ℓ)) (0 + 2)) :=
+      subsingleton_sheafH_two_constantZMod f ℓ
+    let e := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} C.fromSpecFunctionField).app
+      (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))
+    have h₁ : Subsingleton ((Sheaf.functorH _ 2).obj ((Etale.lowerStar AddCommGrpCat.{u + 1}
+        C.fromSpecFunctionField).obj ((Etale.upperStar AddCommGrpCat.{u + 1}
+          C.fromSpecFunctionField).obj (C.constantZMod ℓ)))) :=
+      @Equiv.subsingleton _ _ (Equiv.ofBijective _ hb).symm h₀
+    exact @Equiv.subsingleton _ _ ((Sheaf.functorH _ 2).mapIso ((Etale.lowerStar
+      AddCommGrpCat.{u + 1} C.fromSpecFunctionField).mapIso
+        e)).addCommGroupIsoToAddEquiv.toEquiv.symm h₁
 
 /-- **Second cohomology of a generic extension on an affine curve.** Let `C` be a smooth integral
 affine connected curve over an algebraically closed field `k`, with generic point
