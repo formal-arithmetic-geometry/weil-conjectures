@@ -418,10 +418,12 @@ noncomputable abbrev IsGeometricallySemisimple : Prop :=
 
 /-- A *positive central pair* for the datum is a pair `(N, z)` with `N > 0` and
 `z ∈ Z(G) ∩ H Fᴺ`, where `H Fᴺ` is the right coset `H(k) · Fᴺ`, written as the pointwise product
-of the set `H(k)` with the singleton `{Fᴺ}`.
+of the set `H(k)` with the singleton `{Fᴺ}`. Only `k`-points of `Z(G)` occur, so `Z(G)(k)` is
+written as `centerPoints`, the matrices of `G(k)` commuting with all of `G(k)`; this makes sense
+over any field `k`.
 (blueprint: `sk-d-central`) -/
 def IsPositiveCentralPair (N : ℕ) (z : GL n k) : Prop :=
-  0 < N ∧ z ∈ (zeroLocus (center D.arithmeticMonodromy) k : Set (GL n k)) ∩
+  0 < N ∧ z ∈ (centerPoints D.arithmeticMonodromy : Set (GL n k)) ∩
     (zeroLocus D.geometricMonodromy k * {D.frobenius ^ N})
 
 /-- The ideal of `G` is contained in the ideal of `H`; that is, `H ⊆ G` as closed subschemes of
@@ -511,13 +513,13 @@ variable {D} in
 /-- The central element of a positive central pair lies in the arithmetic monodromy group. -/
 theorem IsPositiveCentralPair.mem_zeroLocus_arithmeticMonodromy {N : ℕ} {z : GL n k}
     (hz : D.IsPositiveCentralPair N z) : z ∈ zeroLocus D.arithmeticMonodromy k :=
-  ((mem_zeroLocus_center_iff _).1 hz.2.1).1
+  ((mem_centerPoints_iff _).1 hz.2.1).1
 
 variable {D} in
 /-- The central element of a positive central pair commutes with the image of `W`. -/
 theorem IsPositiveCentralPair.commute {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
     (w : W) : z * D.rep w = D.rep w * z :=
-  ((mem_zeroLocus_center_iff _).1 hz.2.1).2 _ (D.rep_mem_zeroLocus_arithmeticMonodromy w)
+  ((mem_centerPoints_iff _).1 hz.2.1).2 _ (D.rep_mem_zeroLocus_arithmeticMonodromy w)
 
 /-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of the
 defining representation: invariance under `ρ(W)` passes to its Zariski closure.
@@ -736,7 +738,7 @@ theorem IsPositiveCentralPair.map {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentr
     (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) :
     (D.map r).IsPositiveCentralPair N (r z) := by
   obtain ⟨hN, -, h, hh, _, rfl, hzh⟩ := id hz
-  refine ⟨hN, (mem_zeroLocus_center_iff _).2 ⟨?_, fun g hg ↦ ?_⟩, r h, ?_, _, rfl, ?_⟩
+  refine ⟨hN, (mem_centerPoints_iff _).2 ⟨?_, fun g hg ↦ ?_⟩, r h, ?_, _, rfl, ?_⟩
   · exact map_mem_zeroLocus_vanishingIdeal r φ hφ (Γ := D.rep.range)
       (Γ' := (r.comp D.rep).range) (by rintro _ ⟨w, rfl⟩; exact ⟨w, rfl⟩)
       (hz.mem_zeroLocus_arithmeticMonodromy)

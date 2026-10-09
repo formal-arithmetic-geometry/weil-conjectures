@@ -49,7 +49,9 @@ Finally, the identity component and the centre of `V(I)` are described by Hopf i
 - `Matrix.GeneralLinearGroup.identityComponent`: the ideal of the reduced identity component
   `G°` of `V(I)`.
 - `Matrix.GeneralLinearGroup.IsConnected`: `I` is the ideal of its own reduced identity component.
-- `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)` of `V(I)`.
+- `Matrix.GeneralLinearGroup.centerPoints`: the matrices of `G(k)` commuting with all of `G(k)`.
+- `Matrix.GeneralLinearGroup.center`: the ideal of the reduced centre `Z(G)` of `V(I)`, for `k`
+  algebraically closed.
 - `Matrix.GeneralLinearGroup.translate`, `Matrix.GeneralLinearGroup.translateHomeomorph`: the
   two-sided translation `x ↦ g * x * h` on the coordinate ring of `GL_n` and on its spectrum.
 - `Matrix.GeneralLinearGroup.conjBialgHom`: the bialgebra endomorphism of the coordinate ring
@@ -1010,25 +1012,41 @@ theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (Coordina
     toPrimeSpectrum_mem_zeroLocus_iff.2 (zeroLocus I k).one_mem
   exact (PrimeSpectrum.mem_vanishingIdeal _ _).1 ha _ (mem_connectedComponentIn h1)
 
-/-- The ideal of the reduced centre `Z(G)` of the closed subgroup scheme `G = V(I)` of `GL_n`: the
-Zariski closure of the matrices of `G(k)` commuting with all of `G(k)`.
-(blueprint: `sk-d-geometry`) -/
-noncomputable def center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
-    Ideal (CoordinateRing n k) :=
-  vanishingIdeal ((zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k)) :
-    Subgroup (GL n k)) : Set (GL n k))
+/-- The matrices of `G(k)` commuting with all of `G(k)`, for `G = V(I)`: the `k`-points of the
+centre `Z(G)` when `k` is algebraically closed, and in general the subgroup `Z(G)(k) ⊆ G(k)` of
+`k`-points of the centre that are central in `G(k)`. (blueprint: `sk-d-geometry`) -/
+noncomputable def centerPoints (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
+    Subgroup (GL n k) :=
+  zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k))
 
-instance (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : (center I).IsHopfIdeal k :=
+theorem mem_centerPoints_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] {g : GL n k} :
+    g ∈ centerPoints I ↔ g ∈ zeroLocus I k ∧ ∀ h ∈ zeroLocus I k, g * h = h * g :=
+  ⟨fun ⟨hg, hc⟩ ↦ ⟨hg, fun h hh ↦ (Subgroup.mem_centralizer_iff.1 hc h hh).symm⟩,
+    fun ⟨hg, hc⟩ ↦ ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩⟩
+
+/-- The ideal of the reduced centre `Z(G)` of the closed subgroup scheme `G = V(I)` of `GL_n`, for
+`k` algebraically closed: the Zariski closure of the matrices of `G(k)` commuting with all of
+`G(k)`. Over an algebraically closed field the `k`-points are dense in the reduced centre, so this
+is its ideal; over a general field the closure of `centerPoints I` can be strictly smaller (for
+`k = 𝔽_q` and `G = GL_n` it is finite), which is why `k` is assumed algebraically closed.
+(blueprint: `sk-d-geometry`) -/
+noncomputable def center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
+    Ideal (CoordinateRing n k) :=
+  vanishingIdeal (centerPoints I : Set (GL n k))
+
+instance [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
+    (center I).IsHopfIdeal k :=
   instIsHopfIdealVanishingIdeal _
 
 /-- The ideal of `G` is contained in the ideal of its centre: `Z(G) ⊆ G`. -/
-theorem le_center (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] : I ≤ center I :=
+theorem le_center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
+    I ≤ center I :=
   (le_vanishingIdeal_zeroLocus I).trans (vanishingIdeal_anti fun _ hg ↦ hg.1)
 
 /-- The `k`-points of the centre of `G = V(I)` are the matrices of `G(k)` commuting with all of
 `G(k)`. (blueprint: `sk-d-geometry`) -/
-theorem mem_zeroLocus_center_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
-    {g : GL n k} :
+theorem mem_zeroLocus_center_iff [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
+    [I.IsHopfIdeal k] {g : GL n k} :
     g ∈ zeroLocus (center I) k ↔ g ∈ zeroLocus I k ∧ ∀ h ∈ zeroLocus I k, g * h = h * g := by
   let J : Set (CoordinateRing n k) :=
     I ∪ {c | ∃ h ∈ zeroLocus I k, ∃ i j, c = commutatorEquation h i j}
