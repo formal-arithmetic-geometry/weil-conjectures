@@ -555,3 +555,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:18 UTC (2026-10-09) — Reviewed and committed etale-local-finite-multiple-points-elementary (02LL; 2 new nodes).
 - 22:20 UTC (2026-10-09) — Reviewed and committed etale-neighbourhood-prescribed-residue-field (02LF; 2 new nodes); tag 00UH -> 00UD corrected in standard-etale-monic-derivative.
 - 22:21 UTC (2026-10-09) — Reviewed and committed popescu-resolve-char-p (07FJ; 18 new nodes, 4 Mathlib leaves; Stacks misprints and the too-small n recorded in the review note). Launched a worker on isolated-fibre-point-residue-finite (01TH/01TG).
+- 22:22 UTC (2026-10-09) — Launcher: group D1 stopped (3 merged in four hours, its two claims 3.8 h old). Released its claims lem-weil-pbc-sheaves-directed-colimit-sections and lem-weil-pbc-surjective-universally-closed-affine-target as abandoned, deleted its delivery branches, cleared coord/returns/D1.md; the items return to the queue.
