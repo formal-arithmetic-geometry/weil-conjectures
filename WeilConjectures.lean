@@ -91,6 +91,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.HomotopyExactSequence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.KummerTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
