@@ -5,7 +5,7 @@
  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, and let $\\theta^D_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ be the derived square isomorphism of functors $\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})$ [def-weil-pbc-derived-square-iso]. Give each inverse image $u^{-1}$ on bounded below derived categories [def-weil-pbc-derived-inverse-image] its shift-commutation isomorphism $\\iota^u_M:u^{-1}(M[1])\\xrightarrow{\\sim}(u^{-1}M)[1]$, the identity of the termwise shifted complex $u^{-1}(M^\\bullet[1])=(u^{-1}M^\\bullet)[1]$ on a representing complex ($(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$), and give the composites $f'^{-1}g^{-1}$ and $g'^{-1}f^{-1}$ the composite isomorphisms $\\varphi_M=\\iota^{f'}_{g^{-1}M}\\circ f'^{-1}(\\iota^g_M)$ and $\\psi_M=\\iota^{g'}_{f^{-1}M}\\circ g'^{-1}(\\iota^f_M)$ [lem-weil-pbc-triangulated-functor-composite]. Then for every $M\\in\\Dplus(Y_{\\Et})$\\n$$\\n \\psi_M\\circ\\theta^D_{\\square,M[1]}=\\theta^D_{\\square,M}[1]\\circ\\varphi_M:\\ f'^{-1}g^{-1}(M[1])\\longrightarrow(g'^{-1}f^{-1}M)[1],\\n$$\\nand hence the same holds for the iterated isomorphisms $\\varphi^{(n)},\\psi^{(n)}$ and the shifts $[n]$, $n\\in\\mathbf Z$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
-  "place": "Definition 014V (definition-exact-functor-triangulated-categories, line 191) and Lemma 05SU (lemma-derived-shift, line 4657: compatibility of derived functors with shifts); the inverse images act termwise on complexes and their shift isomorphisms are identities of termwise shifted complexes. The statement is assembled by an agent: Stacks uses the compatibility without stating it."
+  "place": "Definition 014V (definition-exact-functor-triangulated-categories, line 191) and Lemma 05SU (lemma-derived-shift, line 4657: compatibility of derived functors with shifts); the inverse images act termwise on complexes and their shift isomorphisms are identities of termwise shifted complexes. The statement is assembled by an agent: Stacks uses the compatibility without stating it. Proof places: Proposition 05R6 (line 1360) and Definition 05RU (line 3690) of derived.tex for the exact localization Q and the shift on D(A); homology.tex Definition 011G (line 3427) for the shift of complexes; categories.tex Lemma 04VG (line 4406) clause (3) for uniqueness through Q."
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
@@ -14,9 +14,108 @@
   "lem-weil-pbc-triangulated-functor-composite",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (notation; the shift compatibility of the identifications $\\beta$).** Work first on the unbounded derived categories. For $u\\in\\{f,g,f',g'\\}$ let $u^{-1}_D$ be the functor on $D$ induced termwise, $\\beta_u:u^{-1}_D\\circ Q\\xrightarrow{\\sim}Q\\circ u^{-1}$ its identification and $\\iota^u_X:u^{-1}_D(X[1])\\xrightarrow{\\sim}u^{-1}_D(X)[1]$ ($X\\in D$) its shift isomorphism [def-weil-pbc-derived-inverse-image]; let $c_K:Q(K[1])\\xrightarrow{\\sim}(QK)[1]$ be the shift isomorphism of the exact functor $Q$, natural in the complex $K$ [def-weil-abstract-derived-category]. The termwise functor $u^{-1}$ on complexes satisfies $u^{-1}(K[1])=(u^{-1}K)[1]$ literally (degree $r$: $u^{-1}K^{r+1}$; differential $u^{-1}(-d^{r+1})=-u^{-1}d^{r+1}$, $u^{-1}$ being additive), with the identity as shift isomorphism. Clause (2) of [lem-weil-pbc-exact-functor-derived-factorization] for $F=u^{-1}$, $n=1$, $\\tau=\\mathrm{id}$ reads: for every complex $K$\n$$\\beta_{u,K}[1]\\circ\\iota^u_{QK}\\circ u^{-1}_D(c_K)=c_{u^{-1}K}\\circ\\beta_{u,K[1]}:\\ u^{-1}_D(Q(K[1]))\\to(Q(u^{-1}K))[1],\\qquad(\\ast_u)$$\ni.e. $\\beta_u$ is compatible with the shift, $u^{-1}_D\\circ Q$ carrying the composite isomorphism $\\iota^u_Q\\circ u^{-1}_D(c)$ and $Q\\circ u^{-1}$ the composite $c_{u^{-1}}\\circ Q(\\mathrm{id})$ [lem-weil-pbc-triangulated-functor-composite].",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-triangulated-functor-composite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05R6 (proposition-construct-localization, line 1360: the localization Q of a triangulated category is exact, i.e. commutes with the shift) and Definition 05RU (definition-unbounded-derived-category, line 3690); the shift of complexes is literature/stacks-project/homology.tex Definition 011G (definition-shift-cochain, line 3427): A[k]^n=A^{n+k}, d_{A[k]}=(-1)^k d_A, f[k]^n=f^{n+k}. Written out by an agent: Stacks uses the compatibility without stating it."
+   }
+  },
+  {
+   "text": "**Step 2 (the composite identifications $\\beta_1,\\beta_2$ are compatible with the shift).** Let $\\beta_1=\\beta_{f',g^{-1}K}\\circ f'^{-1}_D(\\beta_{g,K})$ and $\\beta_2=\\beta_{g',f^{-1}K}\\circ g'^{-1}_D(\\beta_{f,K})$ be the identifications of [def-weil-pbc-derived-square-iso], and $\\varphi_X=\\iota^{f'}_{g^{-1}_DX}\\circ f'^{-1}_D(\\iota^g_X)$, $\\psi_X=\\iota^{g'}_{f^{-1}_DX}\\circ g'^{-1}_D(\\iota^f_X)$ the composite shift isomorphisms of the statement (on $D$). Claim: $\\beta_{1,K}[1]\\circ\\varphi_{QK}\\circ f'^{-1}_Dg^{-1}_D(c_K)=c_{f'^{-1}g^{-1}K}\\circ\\beta_{1,K[1]}$, and the same with $\\beta_2,\\psi$, $g'^{-1}f^{-1}$. This is [lem-weil-pbc-commshift-nattrans-comp-whisker] (ii) (whisker $\\beta_g$ by $f'^{-1}_D$), (iii) (whisker $\\beta_{f'}$ by the termwise $g^{-1}$, whose shift isomorphism is the identity) and (i) (compose). Written out: $\\beta_{1,K}[1]\\circ\\varphi_{QK}\\circ f'^{-1}_Dg^{-1}_D(c_K)=\\beta_{f',g^{-1}K}[1]\\circ f'^{-1}_D(\\beta_{g,K})[1]\\circ\\iota^{f'}_{g^{-1}_DQK}\\circ f'^{-1}_D(\\iota^g_{QK}\\circ g^{-1}_D(c_K))$; naturality of $\\iota^{f'}$ for the morphism $\\beta_{g,K}$ moves $f'^{-1}_D(\\beta_{g,K})[1]\\circ\\iota^{f'}_{g^{-1}_DQK}$ to $\\iota^{f'}_{Q(g^{-1}K)}\\circ f'^{-1}_D(\\beta_{g,K}[1])$; then $(\\ast_g)$ inside $f'^{-1}_D$ turns $f'^{-1}_D(\\beta_{g,K}[1]\\circ\\iota^g_{QK}\\circ g^{-1}_D(c_K))$ into $f'^{-1}_D(c_{g^{-1}K})\\circ f'^{-1}_D(\\beta_{g,K[1]})$; and $(\\ast_{f'})$ at the complex $g^{-1}K$ turns $\\beta_{f',g^{-1}K}[1]\\circ\\iota^{f'}_{Q(g^{-1}K)}\\circ f'^{-1}_D(c_{g^{-1}K})$ into $c_{f'^{-1}g^{-1}K}\\circ\\beta_{f',g^{-1}(K[1])}$, using $g^{-1}(K[1])=(g^{-1}K)[1]$. The result is $c_{f'^{-1}g^{-1}K}\\circ\\beta_{f',g^{-1}(K[1])}\\circ f'^{-1}_D(\\beta_{g,K[1]})=c_{f'^{-1}g^{-1}K}\\circ\\beta_{1,K[1]}$. Same computation for $\\beta_2$.",
+   "uses": [
+    "def-weil-pbc-derived-square-iso",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05R6 (proposition-construct-localization, line 1360: the localization Q of a triangulated category is exact, i.e. commutes with the shift) and Definition 05RU (definition-unbounded-derived-category, line 3690); the shift of complexes is literature/stacks-project/homology.tex Definition 011G (definition-shift-cochain, line 3427): A[k]^n=A^{n+k}, d_{A[k]}=(-1)^k d_A, f[k]^n=f^{n+k}. Written out by an agent: Stacks uses the compatibility without stating it."
+   }
+  },
+  {
+   "text": "**Step 3 (the termwise $\\theta$ commutes with the shift of complexes).** For a complex $K$ on $Y_{\\Et}$, the termwise isomorphism $\\theta_{\\square,K[1]}:f'^{-1}g^{-1}(K[1])\\to g'^{-1}f^{-1}(K[1])$ and the shifted isomorphism $\\theta_{\\square,K}[1]:(f'^{-1}g^{-1}K)[1]\\to(g'^{-1}f^{-1}K)[1]$ are the same morphism of complexes: source and target agree literally (Step 1), and in degree $r$ both are $\\theta_{\\square,K^{r+1}}$ (homology.tex 011G: $f[1]^r=f^{r+1}$; the sign of the differential plays no role in the components). Hence the shift isomorphisms of the termwise composites (identities) are respected by $\\theta_{\\square,-}$, and by naturality of $c$ for the morphism $\\theta_{\\square,K}$: $c_{g'^{-1}f^{-1}K}\\circ Q(\\theta_{\\square,K[1]})=(Q\\theta_{\\square,K})[1]\\circ c_{f'^{-1}g^{-1}K}$.",
+   "uses": [
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 011G (definition-shift-cochain, line 3427)"
+   }
+  },
+  {
+   "text": "**Step 4 (the square on the image of $Q$).** Let $\\theta^D_{\\mathrm{unb}}:f'^{-1}_Dg^{-1}_D\\to g'^{-1}_Df^{-1}_D$ be the transformation on $D$ of [def-weil-pbc-derived-square-iso], with $\\theta^D_{\\mathrm{unb},QK}=\\beta_{2,K}^{-1}\\circ Q(\\theta_{\\square,K})\\circ\\beta_{1,K}$ for every complex $K$. Claim: $\\psi_{QK}\\circ\\theta^D_{\\mathrm{unb},(QK)[1]}=\\theta^D_{\\mathrm{unb},QK}[1]\\circ\\varphi_{QK}$. Since $h=f'^{-1}_Dg^{-1}_D(c_K):f'^{-1}_Dg^{-1}_D(Q(K[1]))\\to f'^{-1}_Dg^{-1}_D((QK)[1])$ is an isomorphism it suffices to compare both sides after precomposing with $h$. Left: by naturality of $\\theta^D_{\\mathrm{unb}}$ for $c_K$, $\\theta^D_{\\mathrm{unb},(QK)[1]}\\circ h=g'^{-1}_Df^{-1}_D(c_K)\\circ\\theta^D_{\\mathrm{unb},Q(K[1])}$, and by Step 2 for $\\beta_2$, $\\psi_{QK}\\circ g'^{-1}_Df^{-1}_D(c_K)=\\beta_{2,K}[1]^{-1}\\circ c_{g'^{-1}f^{-1}K}\\circ\\beta_{2,K[1]}$; so the left side is $\\beta_{2,K}[1]^{-1}\\circ c_{g'^{-1}f^{-1}K}\\circ\\beta_{2,K[1]}\\circ\\beta_{2,K[1]}^{-1}\\circ Q(\\theta_{\\square,K[1]})\\circ\\beta_{1,K[1]}=\\beta_{2,K}[1]^{-1}\\circ c_{g'^{-1}f^{-1}K}\\circ Q(\\theta_{\\square,K[1]})\\circ\\beta_{1,K[1]}$. By Step 3 this is $\\beta_{2,K}[1]^{-1}\\circ(Q\\theta_{\\square,K})[1]\\circ c_{f'^{-1}g^{-1}K}\\circ\\beta_{1,K[1]}$, and by Step 2 for $\\beta_1$, $c_{f'^{-1}g^{-1}K}\\circ\\beta_{1,K[1]}=\\beta_{1,K}[1]\\circ\\varphi_{QK}\\circ h$. So the left side is $(\\beta_{2,K}^{-1}\\circ Q\\theta_{\\square,K}\\circ\\beta_{1,K})[1]\\circ\\varphi_{QK}\\circ h=\\theta^D_{\\mathrm{unb},QK}[1]\\circ\\varphi_{QK}\\circ h$, the right side precomposed with $h$ ($[1]$ is a functor). Cancel the isomorphism $h$.",
+   "uses": [
+    "def-weil-pbc-derived-square-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05R6 (proposition-construct-localization, line 1360: the localization Q of a triangulated category is exact, i.e. commutes with the shift) and Definition 05RU (definition-unbounded-derived-category, line 3690); the shift of complexes is literature/stacks-project/homology.tex Definition 011G (definition-shift-cochain, line 3427): A[k]^n=A^{n+k}, d_{A[k]}=(-1)^k d_A, f[k]^n=f^{n+k}. Written out by an agent: Stacks uses the compatibility without stating it."
+   }
+  },
+  {
+   "text": "**Step 5 (the square on all of $D$).** The two sides are the components at $X$ of two natural transformations $\\sigma,\\sigma'$ between the functors $G_1=f'^{-1}_D\\circ g^{-1}_D\\circ[1]$ and $G_2=[1]\\circ g'^{-1}_D\\circ f^{-1}_D$ from $D(Y_{\\Et})$ to $D(X'_{\\Et})$: $\\sigma_X=\\psi_X\\circ\\theta^D_{\\mathrm{unb},X[1]}$ and $\\sigma'_X=\\theta^D_{\\mathrm{unb},X}[1]\\circ\\varphi_X$, natural in $X$ as composites of natural transformations ($\\psi,\\varphi$ natural, $\\theta^D_{\\mathrm{unb}}$ natural, whiskered by $[1]$ on either side). By Step 4, $\\sigma_{QK}=\\sigma'_{QK}$ for every complex $K$. $Q$ is a localization at the quasi-isomorphisms [def-weil-abstract-derived-category], so by the uniqueness clause (3) of [lem-weil-pbc-localization-universal-property] (with $L=Q$, $\\mathcal E=D(X'_{\\Et})$), $\\sigma=\\sigma'$: $\\psi_X\\circ\\theta^D_{\\mathrm{unb},X[1]}=\\theta^D_{\\mathrm{unb},X}[1]\\circ\\varphi_X$ for every $X\\in D(Y_{\\Et})$. (Source: categories.tex Lemma 04VG (3): a functor out of $S^{-1}\\mathcal C$ is determined by its composite with $Q$; Mathlib Localization.natTrans_ext.)",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3)"
+   }
+  },
+  {
+   "text": "**Step 6 (restriction to $\\Dplus$).** For $M\\in\\Dplus(Y_{\\Et})$ [def-weil-pbc-derived-categories]: $M[1]\\in\\Dplus(Y_{\\Et})$ and the shift of $\\Dplus$ is that of $D$; $\\theta^D_{\\square,M}=\\theta^D_{\\mathrm{unb},M}$ and $\\theta^D_{\\square,M[1]}=\\theta^D_{\\mathrm{unb},M[1]}$ [def-weil-pbc-derived-square-iso]; the inverse images on $\\Dplus$ and their shift isomorphisms are the restrictions of those on $D$ [def-weil-pbc-derived-inverse-image], [lem-weil-pbc-triangulated-functor-restriction], hence so are the composite isomorphisms $\\varphi_M,\\psi_M$ (Step 2's formulas, read in the full subcategory). So the identity of the statement at $M$ is the identity of Step 5 at $X=M$, read in the full subcategory $\\Dplus(X'_{\\Et})$.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-triangulated-functor-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05R6 (proposition-construct-localization, line 1360: the localization Q of a triangulated category is exact, i.e. commutes with the shift) and Definition 05RU (definition-unbounded-derived-category, line 3690); the shift of complexes is literature/stacks-project/homology.tex Definition 011G (definition-shift-cochain, line 3427): A[k]^n=A^{n+k}, d_{A[k]}=(-1)^k d_A, f[k]^n=f^{n+k}. Written out by an agent: Stacks uses the compatibility without stating it."
+   }
+  },
+  {
+   "text": "**Step 7 (iterates).** Define $\\varphi^{(0)}=\\mathrm{id}$, $\\varphi^{(n+1)}_M=\\varphi^{(n)}_M[1]\\circ\\varphi_{M[n]}$ for $n\\ge0$ and $\\varphi^{(-m)}_M=((\\varphi^{(m)}_{M[-m]})^{-1})[-m]$, likewise $\\psi^{(n)}$. Then $\\psi^{(n)}_M\\circ\\theta^D_{\\square,M[n]}=\\theta^D_{\\square,M}[n]\\circ\\varphi^{(n)}_M$ for all $n\\in\\mathbf Z$: for $n\\ge0$ by induction, $\\psi^{(n+1)}_M\\circ\\theta^D_{M[n+1]}=\\psi^{(n)}_M[1]\\circ\\psi_{M[n]}\\circ\\theta^D_{M[n][1]}=\\psi^{(n)}_M[1]\\circ\\theta^D_{M[n]}[1]\\circ\\varphi_{M[n]}=(\\theta^D_M[n]\\circ\\varphi^{(n)}_M)[1]\\circ\\varphi_{M[n]}=\\theta^D_M[n+1]\\circ\\varphi^{(n+1)}_M$ (Step 6 at $M[n]$, functoriality of $[1]$); for $n=-m<0$ the case $m$ at $M[-m]$, $\\psi^{(m)}_{M[-m]}\\circ\\theta^D_M=\\theta^D_{M[-m]}[m]\\circ\\varphi^{(m)}_{M[-m]}$, rearranges to $(\\psi^{(m)}_{M[-m]})^{-1}\\circ\\theta^D_{M[-m]}[m]=\\theta^D_M\\circ(\\varphi^{(m)}_{M[-m]})^{-1}$, and applying $[-m]$ (with $[m][-m]=\\mathrm{id}$ on complexes) gives the claim. This is the induction written out for the exchange morphism by its user (the derived exchange lemma, Step 5); in Mathlib terms, NatTrans.CommShift for $\\mathbf Z$ is determined by the case $a=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 011G (definition-shift-cochain, line 3427)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "def-weil-pbc-derived-square-iso",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-triangulated-functor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Proposition 05R6 and Definition 05RU (Q exact, shift on D(A)); homology.tex Definition 011G (shift of complexes); categories.tex Lemma 04VG (3) (uniqueness through Q). Stacks uses the compatibility without stating it; the computation is the agent's. The construction of theta^D follows the agent-written source Lean AlgebraicGeometry.Etale.pullbackSquareComparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +144,52 @@
    "results": "no liftNatTrans in Shift/ of the pinned Mathlib; Shift/Localization.lean:241 NatTrans.commShift_iso_hom_of_localization, :306 LocalizerMorphism.natTransCommShift_hom (only the lifting isomorphisms); ExactFunctor.lean:86,94 CommShift of mapDerivedCategoryFactorsh/Factors; HomotopyCategory/Shift.lean:273-283 the shift isomorphism of F.mapHomologicalComplex is the identity termwise",
    "date": "2026-10-09",
    "verdict": "no match in the pinned Mathlib; tools recorded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation between functors on a localized category commutes with shift if it does after composing with the localization functor",
+   "results": "LocalizerMorphism.natTransCommShift_hom, Functor.commShiftOfLocalization(_iso_hom_app), NatTrans.commShift_iso_hom_of_localization, LocalizerMorphism.commShift (Mathlib.CategoryTheory.Shift.Localization); NatTrans.CommShift.shift_comm, NatTrans.shift_app_comm (Shift.CommShift)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the lifting isomorphisms are shown to commute with shifts in the pinned Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "NatTrans.CommShift for the natural transformation induced on derived categories by a natural transformation of exact functors",
+   "results": "NatTrans.CommShift(.mk, .of_core, .shift_comm), NatTrans.CommShiftCore.app_shift/shift_app/shift_app_comm, NatTrans.shift_app_comm (Mathlib.CategoryTheory.Shift.CommShift)",
+   "date": "2026-10-09",
+   "verdict": "no match: the notion only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Localization.liftNatTrans",
+   "results": "CategoryTheory.NatTrans.CommShift.liftNatTrans (module Mathlib.CategoryTheory.Shift.Localization, in Loogle's newer Mathlib): for Lifting isos with NatTrans.CommShift and τ with NatTrans.CommShift, NatTrans.CommShift (liftNatTrans L W F₁ F₂ F₁' F₂' τ) A",
+   "date": "2026-10-09",
+   "verdict": "generalization in a newer Mathlib only (would give Step 5 in one line together with Steps 1-3); absent from the pinned Mathlib, see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two natural transformations of functors out of a localization that agree on objects in the image of the localization functor are equal",
+   "results": "Localization.natTrans_ext (Mathlib.CategoryTheory.Localization.Predicate), Localization.natTrans₂_ext (Localization.Bifunctor), Localization.Construction.uniq, natTrans_hcomp_injective, LeftFraction.Localization.StrictUniversalPropertyFixedTarget.uniq",
+   "date": "2026-10-09",
+   "verdict": "tool for Step 5 (already the leaf lem-weil-pbc-localization-universal-property clause (3)); no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'CommShift.*liftNatTrans\\|liftNatTrans.*CommShift' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'liftNatTrans\\|NatTrans.CommShift' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Localization.lean; grep -rn 'CommShift.*mapHomologicalComplex\\|mapHomologicalComplex.*CommShift' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no file states CommShift of liftNatTrans; Shift/Localization.lean has only NatTrans.commShift_iso_hom_of_localization (:240), LocalizerMorphism.natTransCommShift_hom (:306) and :321; CommShift of F.mapHomologicalComplex (HomotopyCategory/Shift.lean:256) and of mapDerivedCategory (DerivedCategory/ExactFunctor.lean:109), nothing for a transformation between two termwise functors",
+   "date": "2026-10-09",
+   "verdict": "no match in the pinned Mathlib (NatTrans.CommShift.liftNatTrans confirmed absent)"
+  },
+  {
+   "tool": "local_search",
+   "query": "NatTrans.CommShift.liftNatTrans (project ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable",
+   "date": "2026-10-09",
+   "verdict": "inconclusive (no index); the grep above is the evidence of absence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +210,16 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-derived-square-iso-commshift",
+  "worker": "stage1",
+  "summary": "Statement kept (theta^D on D^+ compatible with the composite shift isomorphisms of f'^{-1}g^{-1} and g'^{-1}f^{-1}). Proof written by an agent in seven steps: (1) shift compatibility of each identification beta_u: u^{-1}_D Q = Q u^{-1} (clause (2) of the Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization, the termwise shift iso being the identity); (2) hence of the composites beta_1, beta_2 (leaf lem-weil-pbc-commshift-nattrans-comp-whisker, computation written out); (3) termwise theta_{K[1]} = theta_K[1] with the sign convention of homology.tex 011G; (4) the square at QK, after precomposing with the isomorphism f'^{-1}_D g^{-1}_D(c_K); (5) equality on all of D by the uniqueness clause (3) of lem-weil-pbc-localization-universal-property (categories.tex 04VG, Localization.natTrans_ext); (6) restriction to D^+ (def-weil-pbc-derived-inverse-image, lem-weil-pbc-triangulated-functor-restriction); (7) iterates by induction. No new nodes; every node used is a Mathlib leaf or a reviewed definition. Mathlib: NatTrans.CommShift.liftNatTrans exists only in Loogle's newer Mathlib, confirmed absent from the pinned one by grep. Source Lean: no declaration states this (the source proves NatTrans.CommShift of the whole base change, Etale.commShift_baseChange, by another route through injective resolutions); the termwise analogue is WeilConjectures/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean:38 commShift_mapHomologicalComplexCompIso. The brief's place 'derived.tex 05QY' is Lemma 'exact functor is additive', not the shift on D(A); 05R6/05RU/011G cited instead."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
