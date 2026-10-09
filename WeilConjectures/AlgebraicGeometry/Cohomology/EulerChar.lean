@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Topology.Sheaves.GrothendieckVanishing
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules
@@ -70,7 +71,8 @@ sum, hence makes `χ`, the genus and the degree meaningful, for instance on a cu
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
     (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) :=
-  sorry
+  TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ) hq
 
 section Defs
 
