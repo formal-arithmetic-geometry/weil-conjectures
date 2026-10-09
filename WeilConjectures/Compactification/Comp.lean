@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
@@ -36,6 +37,8 @@ cartesian squares
   `f ≫ g`.
 - `AlgebraicGeometry.Compactification.restrict`: the compactification of `f` with compactifying
   scheme `e.Z ×_W Y`, for `e` a compactification of `f ≫ m` and `m` a monomorphism.
+- `AlgebraicGeometry.Compactification.ofComp`: for quasi-compact `f ≫ g`, a compactification of
+  `f ≫ d.i` built from compactifications of `f ≫ g` and `d` of `g`.
 
 ## Main results
 
@@ -85,6 +88,22 @@ Note that `d` must come first since the type of `e` depends on `d.i`.
 noncomputable def comp (d : Compactification g) (e : Compactification (f ≫ d.i)) :
     Compactification (f ≫ g) :=
   (e.postcomp d.g).copy (by rw [Category.assoc, ← d.comm])
+
+/-- **Compactifying `f ≫ d.i` from a compactification of `f ≫ g`**: if `f ≫ g` is
+quasi-compact, `d` compactifies `g : Y ⟶ S` and `e` compactifies `f ≫ g`, then `f ≫ d.i`
+admits a compactification. The graph `X ⟶ X ×_S d.Z` of `f ≫ d.i` is a closed immersion, `d.Z`
+being separated over `S`, and the base change `e.baseChange d.g` compactifies the projection
+`X ×_S d.Z ⟶ d.Z`; restricting it to the graph (`Compactification.ofIsClosedImmersion`) gives
+the compactification. -/
+noncomputable def ofComp [QuasiCompact (f ≫ g)] (d : Compactification g)
+    (e : Compactification (f ≫ g)) : Compactification (f ≫ d.i) :=
+  let γ : X ⟶ pullback (f ≫ g) d.g :=
+    pullback.lift (𝟙 X) (f ≫ d.i) (by rw [Category.id_comp, Category.assoc, ← d.comm])
+  have : IsClosedImmersion (γ ≫ pullback.fst (f ≫ g) d.g) := by
+    rw [pullback.lift_fst]
+    infer_instance
+  have : IsClosedImmersion γ := .of_comp _ (pullback.fst (f ≫ g) d.g)
+  (ofIsClosedImmersion γ (e.baseChange d.g)).copy (pullback.lift_snd _ _ _).symm
 
 end Comp
 
@@ -150,5 +169,12 @@ info: 'AlgebraicGeometry.Compactification.restrict' depends on axioms: [propext,
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Compactification.restrict
+
+/--
+info: 'AlgebraicGeometry.Compactification.ofComp' depends on axioms: [propext,
+  Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Compactification.ofComp
 
 end AlgebraicGeometry

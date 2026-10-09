@@ -115,13 +115,15 @@ section VerdierExchange
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (f : X ⟶ Y)
   (aY : Y ⟶ S) [HasCompactification f] [HasCompactification aY] [HasCompactification (f ≫ aY)]
+  [QuasiCompact (f ≫ aY)]
 
 /-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
 
 First half. If `f : X ⟶ Y`, the structure morphism `a_Y : Y ⟶ S` and `a_X = f ≫ a_Y` all
 admit a compactification (the last is assumed separately, there being no composition instance
-for `HasCompactification`), then for torsion coefficients the exceptional inverse image along
-`f` of the dualizing complex of `Y` is the dualizing complex of `X`:
+for `HasCompactification`) and `a_X` is quasi-compact, then for torsion coefficients the
+exceptional inverse image along `f` of the dualizing complex of `Y` is the dualizing complex of
+`X`:
 
 `Rf^! ω_Y ≅ ω_X`.
 

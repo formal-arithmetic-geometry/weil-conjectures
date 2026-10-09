@@ -8,7 +8,10 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Compactification.Comp
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -103,6 +106,14 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 
 open Scheme
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file (through
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`). -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
 
 namespace Etale
 
@@ -321,15 +332,33 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}}
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct image, for
-torsion coefficients. Comparing the chosen compactification of `f ≫ g` with the one assembled
-from compactifications of `f` and `g` uses the independence of the compactification and
-compact-support base change for the open immersion of the compactification of `g` along the
-proper map of that of `f`; both rest on proper base change, which needs torsion coefficients. -/
+torsion coefficients. Write `d = (j, q)` for the chosen compactification of `g`. A
+compactification `e` of `f ≫ j` (`Compactification.ofComp`) restricts to a compactification
+`e.restrict` of `f` whose proper map is the base change of `e.g` along `j`
+(`Compactification.isPullback_restrict`), and `(e.i, e.g ≫ q)` compactifies `f ≫ g`. The
+composition law for these compatible compactifications is
+`AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarCompIso`, which rests on proper base
+change, and the independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`) compares them with the chosen ones.
+
+`f ≫ g` is assumed quasi-compact, and then so is `f`: both the construction of
+`Compactification.ofComp` (a scheme-theoretic closure) and the independence of the
+compactification (through the common refinement `Compactification.inf`) need it. -/
 theorem nonempty_iso_rightDerivedLowerShriek_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
+  have : QuasiCompact f := .of_comp f g
+  let d := HasCompactification.compactification g
+  let e := Compactification.ofComp d (HasCompactification.compactification (f ≫ g))
+  -- the domain of `pullback.fst e.g d.i` in `e.isPullback_restrict` is `e.restrict.Z`
+  have : @IsOpenImmersion e.restrict.Z e.Z (pullback.fst e.g d.i) :=
+    inferInstanceAs (IsOpenImmersion (pullback.fst e.g d.i))
+  exact ⟨(rightDerivedLowerShriekIso Λ (d.comp e)).symm ≪≫
+    openImmersionLowerShriekLowerStarCompIso Λ isAddTorsion_of_finite e.restrict.i e.restrict.g
+      (pullback.fst e.g d.i) d.i e.g d.g e.i e.restrict_i_fst e.isPullback_restrict ≪≫
+    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ e.restrict) _⟩
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 

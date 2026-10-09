@@ -143,8 +143,8 @@ structure SixOperationsPackage : Prop where
   /-- (4) `Rf_!` is independent of the chosen compactification. -/
   lowerShriekCompactificationIndependent : ∀ c c' : Compactification f,
     Nonempty (Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(c')[ModuleCat.{u + 1} Λ])
-  /-- (4) The composition law `R(f ≫ h)_! ≅ Rf_! ⋙ Rh_!`. -/
-  lowerShriekComp : ∀ {Z : Scheme.{u}} (h : Y ⟶ Z) [HasCompactification h]
+  /-- (4) The composition law `R(f ≫ h)_! ≅ Rf_! ⋙ Rh_!`, for quasi-compact `h`. -/
+  lowerShriekComp : ∀ {Z : Scheme.{u}} (h : Y ⟶ Z) [HasCompactification h] [QuasiCompact h]
     [HasCompactification (f ≫ h)],
     Nonempty (R(f ≫ h)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(h)_![ModuleCat.{u + 1} Λ])

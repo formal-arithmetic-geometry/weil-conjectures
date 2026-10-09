@@ -20,6 +20,7 @@ is the composite of the extensions by zero, `(j' ≫ j)_! ≅ j'_! ⋙ j_!`. For
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekComp`: `(j' ≫ j)_! ≅ j'_! ⋙ j_!`.
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekIsoOfEq`: `j₁_! ≅ j₂_!` for `j₁ = j₂`.
 - `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionLowerShriekInv`: `e^* ≅ (e⁻¹)_!` for an
   isomorphism `e`.
 
@@ -56,6 +57,13 @@ noncomputable def Etale.openImmersionLowerShriekComp {V U X : Scheme.{u}} (j' : 
     (((Etale.openImmersionLowerShriekUpperStarAdjunction A j').comp
         (Etale.openImmersionLowerShriekUpperStarAdjunction A j)).ofNatIsoRight
       (Etale.upperStarComp A j' j).symm)
+
+/-- The extensions by zero along equal open immersions `j₁ = j₂` are isomorphic. -/
+noncomputable def Etale.openImmersionLowerShriekIsoOfEq {U X : Scheme.{u}} {j₁ j₂ : U ⟶ X}
+    [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ = j₂) :
+    (j₁)_!open[A] ≅ (j₂)_!open[A] := by
+  subst h
+  exact Iso.refl _
 
 /-- The pullback along an isomorphism `e : U ≅ U'` of schemes is the extension by zero along
 its inverse: `e^* ≅ (e⁻¹)_!` as functors `Sh(U') ⥤ Sh(U)`. -/

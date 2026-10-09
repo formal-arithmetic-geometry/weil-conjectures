@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 
 /-!
 # Exchanging an extension by zero with a derived pushforward
@@ -39,6 +41,10 @@ yet proved); this is the key step in the proof of the composition law `R(f ≫ g
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`:
   with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism (not proved
   yet; see its docstring).
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekLowerStarCompIso`: with torsion coefficients,
+  `D(k_!) ⋙ R(r ≫ q)_* ≅ (D(i_!) ⋙ Rp_*) ⋙ (D(j_!) ⋙ Rq_*)` for `k = i ≫ j'` and a cartesian
+  square `p ≫ j = j' ≫ r` with `r` proper; this is the composition law of `Rf_!` for
+  compatible compactifications.
 
 ## TODO
 
@@ -162,6 +168,43 @@ theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
     IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) :=
   sorry
+
+/-- **Composition of compactly supported pushforwards along compatible compactifications.**
+Let `i : X ⟶ P`, `j' : P ⟶ E`, `j : Y ⟶ Q`, `k : X ⟶ E` be open immersions with
+`i ≫ j' = k`, and let `r : E ⟶ Q` be proper, with a cartesian square
+```
+  P --j'--> E
+  |         |
+  p         r
+  ↓         ↓
+  Y --j---> Q --q--> Z
+```
+For torsion coefficients, `D(k_!) ⋙ R(r ≫ q)_* ≅ (D(i_!) ⋙ Rp_*) ⋙ (D(j_!) ⋙ Rq_*)`. It is
+assembled from the composition isomorphisms for `R(-)_*` and for `D(-)_!`, and the inverse of
+the exchange map `Rp_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rr_*`, an isomorphism by
+`isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`. When `(i, p)`, `(j, q)`
+and `(k, r ≫ q)` are compactifications of `f`, `g` and `f ≫ g`, this is the composition law of
+the compactly supported pushforward. -/
+noncomputable def openImmersionLowerShriekLowerStarCompIso (hΛ : IsAddTorsion Λ)
+    {X P Y E Q Z : Scheme.{u}} (i : X ⟶ P) (p : P ⟶ Y) (j' : P ⟶ E) (j : Y ⟶ Q) (r : E ⟶ Q)
+    (q : Q ⟶ Z) (k : X ⟶ E) [IsOpenImmersion i] [IsOpenImmersion j'] [IsOpenImmersion j]
+    [IsOpenImmersion k] [IsProper r] (hk : i ≫ j' = k) (hsq : IsPullback p j' j r) :
+    D((k)_!open[ModuleCat.{u + 1} Λ]) ⋙ R((r ≫ q)_*[ModuleCat.{u + 1} Λ]) ≅
+      (D((i)_!open[ModuleCat.{u + 1} Λ]) ⋙ R((p)_*[ModuleCat.{u + 1} Λ])) ⋙
+        (D((j)_!open[ModuleCat.{u + 1} Λ]) ⋙ R((q)_*[ModuleCat.{u + 1} Λ])) :=
+  have := isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring Λ hΛ hsq
+  Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorCompIso' _ _
+      (Etale.lowerStarComp (ModuleCat.{u + 1} Λ) r q)).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso
+      (openImmersionLowerShriekIsoOfEq (ModuleCat.{u + 1} Λ) hk.symm ≪≫
+        openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) i j') ≪≫
+      Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (asIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq)).symm _ ≪≫
+      Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm
 
 end Etale
 

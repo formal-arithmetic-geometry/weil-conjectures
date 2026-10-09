@@ -96,9 +96,11 @@ This is clause (b) of `sk-lem-sf-mate` in its étale form, for morphisms admitti
 compactification (`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is not
 formalised. The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
 quasi-separated base, by Nagata's theorem; it is kept because no composition instance for
-`HasCompactification` is available in general. -/
+`HasCompactification` is available in general. The composite `f ≫ g` is assumed quasi-compact,
+as in `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
       R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g

@@ -363,9 +363,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
 /-- Composition of kernel transforms, at a general coefficient category `A`, from the inputs of
-the six-functor formalism it uses: the composition law of `Rf_!` (`hcomp`, which holds for
-torsion coefficients, `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`),
-compact-support
+the six-functor formalism it uses: the composition law of `Rf_!` for quasi-compact composites
+(`hcomp`, which holds for torsion coefficients,
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`; `π` and `π'` are assumed
+quasi-compact so that it applies to the composites used below), compact-support
 base change (`hbc`) along the cartesian square
 
 ```
@@ -387,13 +388,13 @@ Base change gives `q₁^* Rp₂,! ≅ Rr₂₃,! r₁₂^*`, the projection form
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`) and the composition law turn the
 kernel transform of `𝒦' ∗ 𝒦` into the same expression.
 (sketch blueprint: `sk-lem-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
-theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
+theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso [QuasiCompact π] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
     [HasCompactification (pullback.tripleProj₁₃ π π' π'' ≫ pullback.snd π π'')]
     (hcomp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
-      [HasCompactification g] [HasCompactification (f ≫ g)],
+      [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)],
       Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]))
     (hbc : Nonempty (R(pullback.snd π π')_![A] ⋙ L((pullback.fst π' π'')^*[A]) ≅
       L((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A]) ⋙
@@ -429,6 +430,9 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
   have : HasCompactification
       (pullback.snd (pullback.snd π π') (pullback.fst π' π'') ≫ pullback.snd π' π'') :=
     .of_eq hc
+  have : QuasiCompact (pullback.tripleProj₁₃ π π' π'' ≫ pullback.snd π π'') := by
+    rw [hc]
+    infer_instance
   -- the inputs from the six-functor formalism
   obtain ⟨β₁₃⟩ := nonempty_iso_derivedTensor_flip A (pullback π π'')
   obtain ⟨βP⟩ := nonempty_iso_derivedTensor_flip A
@@ -568,7 +572,7 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ]
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
     (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π''))
   nonempty_iso_kernelTransform_comp_of_nonempty_iso (ModuleCat.{u + 1} Λ) π π' π''
-    (fun f g _ _ _ ↦ nonempty_iso_rightDerivedLowerShriek_comp Λ f g)
+    (fun f g _ _ _ _ ↦ nonempty_iso_rightDerivedLowerShriek_comp Λ f g)
     ⟨asIso (rightDerivedLowerShriekBaseChangeMap _
       (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π'')))⟩
     (fun L ↦ nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight _ _ L
