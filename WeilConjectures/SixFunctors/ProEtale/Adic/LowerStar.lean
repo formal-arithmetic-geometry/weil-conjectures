@@ -8,10 +8,15 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 
 /-!
@@ -111,5 +116,67 @@ theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOf
         ((DerivedCategory.singleFunctor _ 0).obj F)) :=
   ⟨⟨0, (f)_*ᵃ[l].isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
     exists_isLE_rightDerivedFunctor_lowerStar s f hK hF⟩
+
+section Devissage
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+variable (l) in
+/-- The objects `K` of the derived category of `ℓ`-adic sheaves on `X_proét` whose derived
+pushforward `Rf_* K` is bounded with constructible cohomology sheaves. The finiteness theorem
+asserts that it contains every constructible sheaf placed in degree `0`. -/
+def finiteLowerStar : ObjectProperty (DerivedCategory (AdicSheaf l X)) :=
+  (DerivedCategory.TStructure.t.bounded ⊓
+    _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y)).inverseImage
+      (f)_*ᵃ[l].rightDerivedFunctor
+
+instance : (finiteLowerStar l f).IsClosedUnderIsomorphisms := by
+  dsimp [finiteLowerStar]
+  infer_instance
+
+/-- **Dévissage for the finiteness theorem**: on a locally noetherian target, the objects with
+bounded constructible derived pushforward form a triangulated subcategory, constructible
+sheaves being a Serre subcategory and `Rf_*` a triangulated functor. -/
+instance [IsLocallyNoetherian Y] : (finiteLowerStar l f).IsTriangulated := by
+  have : (DerivedCategory.TStructure.t.bounded ⊓
+      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y)).IsTriangulated :=
+    inferInstance
+  exact inferInstanceAs (ObjectProperty.IsTriangulated (ObjectProperty.inverseImage _
+    (f)_*ᵃ[l].rightDerivedFunctor))
+
+/-- **Two out of three for the finiteness theorem**: in a short exact sequence of `ℓ`-adic
+sheaves on a scheme over a locally noetherian base, if the outer terms have bounded
+constructible derived pushforward then so has the middle one. -/
+lemma finiteLowerStar_X₂_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
+    (hS : S.ShortExact) (h₁ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁))
+    (h₃ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃)) :
+    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂) :=
+  (finiteLowerStar l f).ext_of_isTriangulatedClosed₂ _ hS.singleTriangle_distinguished h₁ h₃
+
+/-- **Two out of three for the finiteness theorem**, kernel form. -/
+lemma finiteLowerStar_X₁_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
+    (hS : S.ShortExact) (h₂ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂))
+    (h₃ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃)) :
+    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁) :=
+  (finiteLowerStar l f).ext_of_isTriangulatedClosed₁ _ hS.singleTriangle_distinguished h₂ h₃
+
+/-- **Two out of three for the finiteness theorem**, cokernel form. -/
+lemma finiteLowerStar_X₃_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
+    (hS : S.ShortExact) (h₁ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁))
+    (h₂ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂)) :
+    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃) :=
+  (finiteLowerStar l f).ext_of_isTriangulatedClosed₃ _ hS.singleTriangle_distinguished h₁ h₂
+
+/-- The finiteness theorem extends from constructible sheaves to bounded complexes with
+constructible cohomology sheaves (dévissage along the truncation triangles). -/
+lemma finiteLowerStar_of_bounded [IsLocallyNoetherian Y]
+    (h : ∀ F : AdicSheaf l X, IsAdicConstructibleSheaf F →
+      finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj F))
+    (K : DerivedCategory (AdicSheaf l X)) (hK : DerivedCategory.TStructure.t.bounded K)
+    (hK' : _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X) K) :
+    finiteLowerStar l f K :=
+  DerivedCategory.prop_of_bounded _ (adicConstructibleSheaf l X) h K hK hK'
+
+end Devissage
 
 end AlgebraicGeometry.ProEtale
