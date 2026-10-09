@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-dvr-completion-regular",
+ "kind": "statement",
+ "title": "Characteristic-zero DVR completion is a regular map",
+ "statement": "Let $(A,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local discrete valuation ring (that is, a Noetherian local domain of Krull dimension one whose maximal ideal is principal, as characterized by [lem-sc-normal-dim1-dvr] and Stacks Tag 00PD), and assume that its fraction field $K=\\operatorname{Frac}(A)$ has characteristic zero. Let $A^\\wedge$ be its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion]. Then the canonical map $A\\to A^\\wedge$ is a regular ring map in the sense of [def-weil-pbc-g-ring]: it is flat by Stacks Tag 00MB, its generic fibre is $A^\\wedge\\otimes_A K=\\operatorname{Frac}(A^\\wedge)$ and is geometrically regular over $K$ because $K$ has characteristic zero, and its closed fibre is $A^\\wedge/\\mathfrak mA^\\wedge\\cong A/\\mathfrak m$, a field. Equivalently, every fibre over a prime $\\mathfrak p\\subset A$ [def-weil-pbc-localization-at-prime] is a Noetherian [def-weil-pbc-noetherian-ring] geometrically regular algebra over the corresponding residue field.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition Tag 07PX (proposition-ubiquity-G-ring), proof of item (3), in the characteristic-zero DVR case: the completion is a DVR by More on Algebra Lemma Tag 0AP1 (lemma-completion-dvr), completion is flat by Algebra Lemma Tag 00MB (lemma-completion-flat), and the generic and closed fibres are geometrically regular; the Noetherian local-domain, dimension-one, principal-maximal-ideal characterization is Algebra Lemma Tag 00PD (lemma-characterize-dvr), and regular ring maps are Definition Tag 07BZ."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the canonical map from a Noetherian discrete valuation ring to its adic completion is a regular ring map with geometrically regular fibres",
+   "results": "No G-ring or regular-ring-map declaration; AdicCompletion.flat_of_isNoetherian supplies only flatness and generic completion APIs",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsRegular A (AdicCompletion (maximalIdeal A) A)",
+   "results": "No matching declaration; no typeclass or predicate for regular ring maps with geometrically regular fibres",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'G-ring|regular ring map|geometrically.?regular|IsRegularRingHom|IsGeometricallyRegular' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No G-ring, regular-ring-map, or geometrically-regular-fibre notion in Mathlib; AdicCompletion files contain flatness and local/completeness results only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-z-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

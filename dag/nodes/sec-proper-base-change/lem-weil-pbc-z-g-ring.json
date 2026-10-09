@@ -10,9 +10,68 @@
  "stmt_deps": [
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ring $\\mathbf Z$ is Noetherian, and its prime localizations are the field $\\mathbf Q$ at $(0)$ and discrete valuation rings at the nonzero primes, by [lem-weil-pbc-z-localizations-dvr]. Thus the definition of a G-ring reduces the claim to checking regularity of the completion map at the field localization and at each DVR localization.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-z-localizations-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), first sentence: fields, Z and characteristic-zero Dedekind domains are handled from the definition; the localization description is the Dedekind criterion in Algebra Lemma 034X (tag 034X)."
+   }
+  },
+  {
+   "text": "At the zero prime, $\\mathbf Z_{(0)}=\\mathbf Q$ is a field, its maximal ideal is zero, and its completion is itself. The identity map of a field is flat and has the field as its only fibre; the fibre is a regular ring by [lem-weil-pbc-field-regular-ring], so the identity map is regular by [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-field-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), the field case in the sentence preceding the itemized conclusion."
+   }
+  },
+  {
+   "text": "For every nonzero prime ideal $(p)$, the localization $\\mathbf Z_{(p)}$ is a Noetherian local discrete valuation ring whose fraction field is $\\mathbf Q$, hence has characteristic zero. Therefore the hypothesis of [lem-weil-pbc-dvr-completion-regular] applies, and its completion map is regular. More explicitly, the completion is a discrete valuation ring by More on Algebra Lemma Tag 0AP1, completion is flat by Algebra Lemma Tag 00MB, its generic fibre $\\operatorname{Frac}(\\mathbf Z_{(p)}^\\wedge)=\\mathbf Q_p$ is geometrically regular over $\\mathbf Q$ by characteristic zero, and its closed fibre is the field $\\mathbf F_p$.",
+   "uses": [
+    "lem-weil-pbc-z-localizations-dvr",
+    "lem-weil-pbc-dvr-completion-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), together with Lemma Tag 0AP1 (completion-dvr), Algebra Lemma Tag 00MB (completion-flat), and Definition Tag 07BZ (regular ring map)."
+   }
+  },
+  {
+   "text": "The zero-prime and nonzero-prime cases cover every prime of $\\mathbf Z$, so all localization-to-completion maps required by [def-weil-pbc-g-ring] are regular. Therefore $\\mathbf Z$ is a G-ring.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-z-localizations-dvr",
+    "lem-weil-pbc-dvr-completion-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-dvr-completion-regular",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-z-localizations-dvr"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition Tag 07PX (proposition-ubiquity-G-ring), item (3) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -30,14 +89,14 @@
   },
   {
    "tool": "grep",
-   "query": "rg -n -i 'G-ring|formal.?fibr|geometrically.?regular|excellent|DedekindDomain.*Int|Int.*Dedekind' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib",
+   "query": "rg -n -i 'G-ring|formal.?fibr|geometrically.?regular|excellent|DedekindDomain.*Int|Int.*Dedekind' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
    "results": "No G-ring, formal-fibre, geometrically-regular, or excellent-ring notion; only generic Dedekind-domain infrastructure and unrelated uses of excellent",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +116,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-z-g-ring",
+  "worker": "stage1",
+  "summary": "Read More on Algebra Proposition 07PX (tag 07PX), item (3), and checked its proof against the definition of a G-ring (tag 07GH/07BZ), the Dedekind localization criterion (tag 034X), the completion-DVR lemma (tag 0AP1), and completion flatness (tag 00MB). The statement is split into the field localization and the nonzero-prime DVR localizations. Added two public unsplit support nodes: lem-weil-pbc-z-localizations-dvr records the arithmetic localization fact, and lem-weil-pbc-dvr-completion-regular records the regularity calculation for a DVR completion. Both support nodes have LeanSearch, Loogle, and source-grep searches and exact Stacks tags."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 7th push, 4th distinct delivery, repairs the return of 23:22: the DVR node now assumes a fraction field of characteristic zero, names the generic fibre Frac(A^) (geometrically regular over K by characteristic zero) and the closed fibre A/m, and step 3 says Q has characteristic zero. Route along 07PX(3) correct; 2 new unsplit nodes (localizations of Z; DVR completion regular in characteristic zero)."
+ }
 }
