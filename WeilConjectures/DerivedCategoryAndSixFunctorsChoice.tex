@@ -8,11 +8,13 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{enumitem}
-\usepackage{url}
+\usepackage{seqsplit}
 \usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 
-% Lean declaration names, typeset in typewriter with line breaks at dots.
-\DeclareUrlCommand\lean{\urlstyle{tt}}
+% Lean declaration names, typeset in typewriter. `\detokenize` makes the macro safe inside
+% arguments of other commands (e.g. tabularx cells), and underscores print literally.
+\newcommand{\lean}[1]{\texttt{\expandafter\seqsplit\expandafter{\detokenize{#1}}}}
+\emergencystretch=3em
 
 \newtheorem{definition}{Definition}[section]
 \newtheorem{proposition}[definition]{Proposition}
@@ -543,12 +545,12 @@ The derived pushforward and pullback on module objects are the \emph{total deriv
 functors of the composites}:
 \begin{align*}
   Rf_* &:= R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr)
-    \colon \D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),
-    &&\text{computed on K-injective resolutions in }\Mod_{\mathcal{A}_X},\\
+    \colon \D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),\\
   Lf^* &:= L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr)
     \colon \D(\Mod_{\mathcal{A}_Y})\to\D(\Mod_{\mathcal{A}_X}),
-    &&\text{computed on K-flat resolutions in }\Mod_{\mathcal{A}_Y}.
 \end{align*}
+the first computed on K-injective resolutions in $\Mod_{\mathcal{A}_X}$, the second on
+K-flat resolutions in $\Mod_{\mathcal{A}_Y}$.
 In Lean they are not separate definitions: they are the generic
 \lean{Functor.rightDerivedFunctor} and \lean{Functor.leftDerivedFunctor} applied to the
 underived module-object functors \lean{ProEtale.ContinuousMapRing.lowerStar} and
