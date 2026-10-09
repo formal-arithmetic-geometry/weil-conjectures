@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # Slicing a flat morphism with geometrically reduced fibres
@@ -28,9 +29,12 @@ fibres (Stacks `057I`), and it contains a point over `x`.
 
 - `AlgebraicGeometry.GeometricallyConnected.of_isPreconnected_preimage_singleton`: a morphism
   with a section and topologically connected fibres has geometrically connected fibres.
-- `AlgebraicGeometry.exists_isCompact_isPreconnected_inter_preimage_singleton`: the relative
+- `AlgebraicGeometry.isOpen_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a flat morphism of finite presentation with geometrically
-  reduced fibres, near one fibre.
+  reduced fibres is open (Stacks `055R`).
+- `AlgebraicGeometry.isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton`:
+  the relative connected component of a section of a morphism of finite presentation is locally
+  constructible (Stacks `055P`).
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the slicing.
 
 ## References
@@ -75,19 +79,25 @@ theorem exists_mem_smoothLocus_of_geometricallyReduced {X S : Scheme.{u}} (f : X
     (hx : x ∈ U) : ∃ x' ∈ U, f x' = f x ∧ x' ∈ f.smoothLocus :=
   sorry
 
-/-- **The relative connected component of a section** (Stacks `057I`, `055W`). Let
-`f : X ⟶ Y` be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a
-section of `f`. Near the fibre over `y`, the points lying in the connected component of `σ` in
-their fibre form a quasi-compact open: there are a quasi-compact open `W` of `X` containing the
-connected component of `σ y` in the fibre over `y` and an open neighbourhood `N` of `y` with
-`σ N ⊆ W`, such that `W` meets every fibre over `N` in a connected set. -/
-@[stacks 057I]
-theorem exists_isCompact_isPreconnected_inter_preimage_singleton {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
-    [GeometricallyReduced f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) (y : Y) :
-    ∃ (W : X.Opens) (N : Y.Opens), y ∈ N ∧ IsCompact (W : Set X) ∧
-      connectedComponentIn (f ⁻¹' {y}) (σ y) ⊆ W ∧ (∀ n ∈ N, σ n ∈ W) ∧
-      ∀ n ∈ N, _root_.IsPreconnected ((W : Set X) ∩ f ⁻¹' {n}) :=
+/-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
+be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a section of
+`f`. The points `x` lying in the connected component of `σ (f x)` in their fibre form an open
+subset of `X`. -/
+@[stacks 055R]
+theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
+    [GeometricallyReduced f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
+    IsOpen {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
+  sorry
+
+/-- **The relative connected component of a section is locally constructible** (Stacks `055P`).
+Let `f : X ⟶ Y` be of finite presentation with a section `σ`. The points `x` lying in the
+connected component of `σ (f x)` in their fibre form a locally constructible subset of `X`. -/
+@[stacks 055P]
+theorem isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f]
+    [QuasiSeparated f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
+    Topology.IsLocallyConstructible {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
   sorry
 
 /-- The slicing of `f` near a point, for `X` and `S` affine; see
@@ -132,51 +142,55 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
     (by rwa [hσx, Scheme.Hom.comp_apply])
   have hp₀z : pullback.snd f (ι ≫ f) p₀ = z :=
     connectedComponentIn_subset (pullback.snd f (ι ≫ f) ⁻¹' {z}) _ hp₀
-  -- the relative connected component of `σ` near the fibre over `z`
+  -- the relative connected component `W` of `σ`, an open with connected fibres over `Z`
   set g := pullback.snd f (ι ≫ f)
-  obtain ⟨W', N₀, hzN₀, hW'c, hW'z, hσW', hW'⟩ :=
-    exists_isCompact_isPreconnected_inter_preimage_singleton g σ hσ z
-  obtain ⟨N, hN, hzN, hNN₀⟩ := exists_isAffineOpen_mem_and_subset (x := z) hzN₀
-  have : IsAffine N := hN
-  set U := W' ⊓ g ⁻¹ᵁ N
-  have hUN : U ≤ g ⁻¹ᵁ N := inf_le_right
-  set q := g.resLE N U hUN
-  have hqι : q ≫ N.ι = U.ι ≫ g := Scheme.Hom.resLE_comp_ι _ _
-  have : CompactSpace U := isCompact_iff_compactSpace.mp
-    (QuasiSeparatedSpace.inter_isCompact _ _ W'.2 hW'c (g ⁻¹ᵁ N).2 (hN.preimage g).isCompact)
+  have : IsAffine Z := hZ
+  let W : (pullback f (ι ≫ f)).Opens :=
+    ⟨{p | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))},
+      isOpen_setOf_mem_connectedComponentIn_preimage_singleton g σ hσ⟩
+  have hgσ (n : Z) : g (σ n) = n := by
+    rw [← Scheme.Hom.comp_apply, hσ]
+    rfl
+  have hW (n : Z) : (W : Set _) ∩ g ⁻¹' {n} = connectedComponentIn (g ⁻¹' {n}) (σ n) := by
+    ext p
+    refine ⟨fun ⟨hp, hpn⟩ ↦ ?_, fun hp ↦ ?_⟩
+    · rw [Set.mem_preimage, Set.mem_singleton_iff] at hpn
+      subst hpn
+      exact hp
+    · have hpn : g p = n := connectedComponentIn_subset (g ⁻¹' {n}) _ hp
+      subst hpn
+      exact ⟨hp, rfl⟩
+  have : CompactSpace W := isCompact_iff_compactSpace.mp
+    (isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton g σ hσ
+      ).isConstructible.isCompact
+  have hσW : Set.range σ ⊆ Set.range W.ι := by
+    rintro _ ⟨n, rfl⟩
+    refine ⟨⟨σ n, ?_⟩, rfl⟩
+    change σ n ∈ connectedComponentIn (g ⁻¹' {g (σ n)}) (σ (g (σ n)))
+    rw [hgσ]
+    exact mem_connectedComponentIn (by simp [hgσ])
+  have hp₀W : p₀ ∈ W := by
+    change p₀ ∈ connectedComponentIn (g ⁻¹' {g p₀}) (σ (g p₀))
+    rwa [hp₀z]
   have : GeometricallyReduced g :=
     MorphismProperty.of_isPullback (P := @GeometricallyReduced) (.of_hasPullback _ _) ‹_›
-  have : GeometricallyReduced (g ∣_ N) := MorphismProperty.of_isPullback
-    (P := @GeometricallyReduced) (isPullback_morphismRestrict g N).flip ‹_›
-  have : GeometricallyReduced q := GeometricallyReduced.comp_of_etale _ _
-  have hσU : N ≤ σ ⁻¹ᵁ U := fun n hn ↦ ⟨hσW' n (hNN₀ hn), by
-    change g (σ n) ∈ N
-    rw [← Scheme.Hom.comp_apply, hσ]
-    exact hn⟩
-  refine ⟨U, U.ι ≫ pullback.fst f (ι ≫ f), N, q, N.ι ≫ ι ≫ f, inferInstance,
-    ⟨⟨p₀, hW'z hp₀, show g p₀ ∈ N from hp₀z ▸ hzN⟩, hp₀x⟩, inferInstance,
-    inferInstance, inferInstance, inferInstance, inferInstance, ?_, ‹_›, ?_⟩
-  · refine GeometricallyConnected.of_isPreconnected_preimage_singleton q (σ.resLE U N hσU) ?_ ?_
-    · rw [← cancel_mono N.ι, Category.assoc, hqι, Scheme.Hom.resLE_comp_ι_assoc, hσ,
-        Category.id_comp, Category.comp_id]
-    · intro n
-      rw [← U.ι.isOpenEmbedding.isInducing.isPreconnected_image]
-      convert hW' (N.ι n) (hNN₀ n.2) using 1
-      ext p
-      constructor
-      · rintro ⟨u, hu, rfl⟩
-        refine ⟨(inf_le_left : U ≤ W') u.2, ?_⟩
-        change (U.ι ≫ g) u = N.ι n
-        rw [← hqι, Scheme.Hom.comp_apply, show q u = n from hu]
-      · rintro ⟨hpW, hpn⟩
-        have hpU : p ∈ U := ⟨hpW, show g p ∈ N by rw [show g p = N.ι n from hpn]; exact n.2⟩
-        refine ⟨⟨p, hpU⟩, N.ι.isOpenEmbedding.injective ?_, rfl⟩
-        change (q ≫ N.ι) ⟨p, hpU⟩ = _
-        rw [hqι]
-        exact hpn
-  · rw [← Category.assoc, hqι]
-    simp only [Category.assoc]
-    exact (U.ι ≫= pullback.condition).symm
+  have : GeometricallyReduced (W.ι ≫ g) := GeometricallyReduced.comp_of_etale _ _
+  refine ⟨W, W.ι ≫ pullback.fst f (ι ≫ f), Z, W.ι ≫ g, ι ≫ f, inferInstance,
+    ⟨⟨p₀, hp₀W⟩, hp₀x⟩, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, ?_, ‹_›, ?_⟩
+  · refine GeometricallyConnected.of_isPreconnected_preimage_singleton _
+      (IsOpenImmersion.lift W.ι σ hσW) (by rw [IsOpenImmersion.lift_fac_assoc, hσ]) fun n ↦ ?_
+    rw [← W.ι.isOpenEmbedding.isInducing.isPreconnected_image]
+    convert (isPreconnected_connectedComponentIn (F := g ⁻¹' {n}) (x := σ n)) using 1
+    rw [← hW]
+    ext p
+    constructor
+    · rintro ⟨w, hw, rfl⟩
+      exact ⟨w.2, hw⟩
+    · rintro ⟨hpW, hpn⟩
+      exact ⟨⟨p, hpW⟩, hpn, rfl⟩
+  · simp only [Category.assoc]
+    exact (W.ι ≫= pullback.condition).symm
 
 /-- **Slicing at a point.** Let `f : X ⟶ S` be flat, locally of finite presentation, with
 geometrically reduced fibres, and let `x : X`. There are an étale `p : U ⟶ X` with `x` in its
