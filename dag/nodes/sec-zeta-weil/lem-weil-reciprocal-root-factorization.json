@@ -12,11 +12,120 @@
   "def-weil-polynomial-ring",
   "def-weil-polynomial-root",
   "def-weil-root-multiplicity",
-  "lem-weil-reciprocal-polynomial"
+  "lem-weil-reciprocal-polynomial",
+  "def-weil-field",
+  "def-weil-polynomial-coefficient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Setup. A ring homomorphism $\\iota:K\\to L$ between fields is injective: if $x\\neq0$ and $\\iota(x)=0$ then $1=\\iota(x x^{-1})=\\iota(x)\\iota(x^{-1})=0$ in $L$, impossible. Hence, by [lem-weil-coefficientwise-extension-degree], $P_L$ has degree $\\deg P_L=\\deg P=r$, its coefficient of $T^m$ is $\\iota([T^m]P)$, and $P_L(0)=\\iota(P(0))=\\iota(1)=1$. In particular $P_L\\neq0$, and for $x\\in L$ the value $P(x)$ of [def-weil-polynomial-root] equals $P_L(x)$.",
+   "uses": [
+    "def-weil-field",
+    "lem-weil-coefficientwise-extension-degree",
+    "def-weil-polynomial-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Clause 1. If $\\beta\\in L$ is a root of $P$, then $\\beta\\neq0$, because $P(0)=P_L(0)=1\\neq0$ (step 1). So $\\beta\\mapsto\\beta^{-1}$ is defined on the roots; it sends a root $\\beta$ to $\\alpha=\\beta^{-1}\\in L^\\times$ with $P(\\alpha^{-1})=P(\\beta)=0$, a reciprocal root, and $\\alpha\\mapsto\\alpha^{-1}$ is its inverse map, since inversion is an involution of $L^\\times$.",
+   "uses": [
+    "def-weil-polynomial-root",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Linear factorization of $P_L$. Since $L$ is algebraically closed and $P_L\\neq0$ (step 1), [lem-weil-alg-closed-linear-factorization] gives $n\\geq0$, $\\beta_1,\\dots,\\beta_n\\in L$ and $c\\in L^\\times$ with $P_L(T)=c\\prod_{i=1}^n(T-\\beta_i)$. Comparing degrees ($\\deg$ of a product of $n$ monic linear factors times a nonzero constant is $n$, as $L$ is a field), $n=\\deg P_L=r$. Each $\\beta_i$ is a root of $P_L$ (the factor $T-\\beta_i$ vanishes at $\\beta_i$ and evaluation at $\\beta_i$ is a ring homomorphism), so $\\beta_i\\neq0$ by step 2.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization",
+    "def-weil-algebraic-closure",
+    "def-weil-polynomial-coefficient",
+    "def-weil-polynomial-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Clause 2. Put $\\alpha_i=\\beta_i^{-1}\\in L^\\times$ ($1\\le i\\le r$). In $L[T]$, $T-\\beta_i=-\\beta_i(1-\\alpha_iT)$, so $P_L(T)=c\\prod_{i=1}^r(-\\beta_i)\\cdot\\prod_{i=1}^r(1-\\alpha_iT)$. Evaluating at $T=0$ (a ring homomorphism $L[T]\\to L$) gives $1=P_L(0)=c\\prod_i(-\\beta_i)\\cdot1$. Hence $P_L(T)=\\prod_{i=1}^r(1-\\alpha_iT)$ with all $\\alpha_i\\in L^\\times$.",
+   "uses": [
+    "def-weil-polynomial-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Multiplicities of the roots of $P_L$. Let $(\\alpha_j)_{1\\le j\\le r}$ be any family in $L^\\times$ with $P_L=\\prod_{j=1}^r(1-\\alpha_jT)$ (for instance the one of step 4). Since $1-\\alpha_jT=-\\alpha_j(T-\\alpha_j^{-1})$, $P_L=u\\prod_{j=1}^r(T-\\alpha_j^{-1})$ with $u=\\prod_j(-\\alpha_j)\\in L^\\times$. Let $\\gamma\\in L$. All factors are nonzero, so by [lem-weil-root-multiplicity-mul] (applied $r$ times) $m_\\gamma(P_L)=m_\\gamma(u)+\\sum_{j=1}^rm_\\gamma(T-\\alpha_j^{-1})$. By [lem-weil-root-multiplicity-pos-iff], $m_\\gamma(u)=0$ (the constant $u\\neq0$ does not vanish at $\\gamma$) and $m_\\gamma(T-\\delta)=0$ for $\\delta\\neq\\gamma$; and $m_\\gamma(T-\\gamma)=1$ by [def-weil-root-multiplicity], since $(T-\\gamma)^1$ divides $T-\\gamma$ while $(T-\\gamma)^2$, of degree $2$, does not divide the nonzero polynomial $T-\\gamma$ of degree $1$. Hence $m_\\gamma(P_L)=\\#\\{j:\\alpha_j^{-1}=\\gamma\\}$, and for $\\alpha\\in L^\\times$, taking $\\gamma=\\alpha^{-1}$: $\\#\\{j:\\alpha_j=\\alpha\\}=m_{\\alpha^{-1}}(P_L)$.",
+   "uses": [
+    "lem-weil-root-multiplicity-mul",
+    "lem-weil-root-multiplicity-pos-iff",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Multiplicities as roots of $P_L^\\#$. By step 1, $P_L\\in L[T]$ has constant coefficient $1$ and degree $r$ (nonzero coefficient of $T^r$), so its reciprocal polynomial $P_L^\\#(U)=\\sum_{k=0}^r[T^k]P_L\\,U^{r-k}$ is defined [lem-weil-reciprocal-polynomial]; in the notation of [lem-weil-polynomial-reflection-multiplicative] it is $\\mathrm{rev}_r(P_L)$. For the family of step 5, each factor $1-\\alpha_jT$ has degree $\\le1$ and $\\mathrm{rev}_1(1-\\alpha_jT)=U-\\alpha_j$ (coefficients $1,-\\alpha_j$ read backwards), so by [lem-weil-polynomial-reflection-multiplicative] $P_L^\\#=\\mathrm{rev}_{1+\\dots+1}\\bigl(\\prod_{j=1}^r(1-\\alpha_jT)\\bigr)=\\prod_{j=1}^r(U-\\alpha_j)$. Applying the computation of step 5 to this product (with $u=1$, [lem-weil-root-multiplicity-mul], [lem-weil-root-multiplicity-pos-iff], [def-weil-root-multiplicity]) gives $m_\\alpha(P_L^\\#)=\\#\\{j:\\alpha_j=\\alpha\\}=m_{\\alpha^{-1}}(P_L)$ for every $\\alpha\\in L^\\times$.",
+   "uses": [
+    "lem-weil-reciprocal-polynomial",
+    "lem-weil-polynomial-reflection-multiplicative",
+    "lem-weil-root-multiplicity-mul",
+    "lem-weil-root-multiplicity-pos-iff",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  },
+  {
+   "text": "Clause 3, uniqueness and the 'in particular'. Two families $(\\alpha_j)$, $(\\alpha'_j)$ in $L^\\times$ satisfying clause 2 have, by step 5, the same number $m_{\\alpha^{-1}}(P_L)$ of indices with value $\\alpha$ for every $\\alpha\\in L^\\times$, so one is a reordering of the other. An element $\\alpha\\in L^\\times$ occurs among the $\\alpha_j$ iff $m_{\\alpha^{-1}}(P_L)\\geq1$, iff $P_L(\\alpha^{-1})=0$ by [lem-weil-root-multiplicity-pos-iff] ($P_L\\neq0$), i.e. iff $\\alpha$ is a reciprocal root of $P$ (step 1: $P(\\alpha^{-1})=P_L(\\alpha^{-1})$); it occurs $m_{\\alpha^{-1}}(P_L)$ times, and summing these counts over the distinct values gives the length $r=\\deg P$ of the family.",
+   "uses": [
+    "lem-weil-root-multiplicity-pos-iff",
+    "def-weil-polynomial-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+    "place": "written by an agent (standard algebra; WANTED: S. Lang, Algebra, Ch. IV §1, roots and their multiplicities, factorization over an algebraically closed field)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "lem-weil-coefficientwise-extension-degree",
+  "def-weil-polynomial-root",
+  "lem-weil-alg-closed-linear-factorization",
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-coefficient",
+  "lem-weil-root-multiplicity-mul",
+  "lem-weil-root-multiplicity-pos-iff",
+  "def-weil-root-multiplicity",
+  "lem-weil-reciprocal-polynomial",
+  "lem-weil-polynomial-reflection-multiplicative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+  "place": "the blueprint states the factorization without proof; proof written by an agent from standard algebra (WANTED: S. Lang, Algebra, 3rd ed., Ch. IV §1, factorization over an algebraically closed field, multiplicities, reciprocal polynomials)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -34,7 +143,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -52,5 +161,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-reciprocal-root-factorization",
+  "worker": "stage1",
+  "summary": "The node had no proof. Wrote a seven-step proof (agent-written; no algebra textbook in literature/, Lang Algebra Ch. IV wanted): injectivity of the field homomorphism and degree/constant term of P_L via lem-weil-coefficientwise-extension-degree; nonvanishing of roots; factorization over the algebraically closed L via a new Mathlib leaf lem-weil-alg-closed-linear-factorization (Splits.eq_prod_roots with IsAlgClosed.splits), normalized by evaluating at 0; multiplicities by lem-weil-root-multiplicity-mul and lem-weil-root-multiplicity-pos-iff (any family, which gives uniqueness); the P^# clause by P_L^# = prod (U - alpha_j), using a new Mathlib leaf lem-weil-polynomial-reflection-multiplicative (Polynomial.reflect_mul). Added def-weil-field and def-weil-polynomial-coefficient to stmt_deps (L^x, degree). Statement unchanged; checked the edge case r = 0 (P = 1, empty product)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

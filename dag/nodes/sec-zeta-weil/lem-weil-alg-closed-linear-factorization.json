@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-alg-closed-linear-factorization",
+ "kind": "statement",
+ "title": "A nonzero polynomial over an algebraically closed field is a nonzero constant times a product of linear factors",
+ "statement": "Let $L$ be an algebraically closed field [def-weil-algebraic-closure], $T$ an indeterminate and $Q\\in L[T]$ [def-weil-polynomial-ring] a nonzero polynomial. Then there exist an integer $n\\geq0$ and elements $\\gamma_1,\\dots,\\gamma_n\\in L$ such that\n\n$$\nQ(T)=c\\prod_{j=1}^{n}(T-\\gamma_j)\\quad\\text{in }L[T],\n$$\n\nwhere $c\\in L^\\times$ is the leading coefficient of $Q$ [def-weil-polynomial-coefficient].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-ordinary-reciprocal-roots.md",
+  "place": "hidden in 'Over an algebraic closure one has $P(T)=\\prod_j(1-\\alpha_jT)$' (no proof given); standard: S. Lang, Algebra, Ch. IV §1 (not in literature/, wanted)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsAlgClosed\\|theorem IsAlgClosed.splits_domain' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean; grep -n 'theorem Splits.eq_prod_roots' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Splits.lean; grep -n 'C_leadingCoeff_mul_prod_multiset_X_sub_C' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Roots.lean",
+   "results": "class IsAlgClosed with field splits : ∀ p : k[X], p.Splits (IsAlgClosed/Basic.lean:62); Polynomial.Splits.eq_prod_roots (hf : Splits f) : f = C f.leadingCoeff * (f.roots.map (X - C ·)).prod (Splits.lean:299, [IsDomain R]); C_leadingCoeff_mul_prod_multiset_X_sub_C (Roots.lean:841)",
+   "date": "2026-10-09",
+   "verdict": "match: Splits.eq_prod_roots (IsAlgClosed.splits Q) is the statement with the γ_j the elements of the multiset Q.roots listed with repetition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.Splits.eq_prod_roots",
+  "file": "Mathlib/Algebra/Polynomial/Splits.lean",
+  "how": "specializes in one line: `(IsAlgClosed.splits Q).eq_prod_roots : Q = C Q.leadingCoeff * (Q.roots.map (X - C ·)).prod`; the γ_j are the elements of the multiset `Q.roots`, and `Q.leadingCoeff ≠ 0` by `leadingCoeff_ne_zero.mpr`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-reciprocal-root-factorization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
