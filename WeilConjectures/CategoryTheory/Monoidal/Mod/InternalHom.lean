@@ -315,6 +315,8 @@ lemma ihomDesc_ihomLift {P M N : Mod C A} (u : (tensorRight A M.X).obj P ⟶ N)
     ihomDesc (ihomLift u hu) = u :=
   Mod.hom_ext _ _ (by rw [ihomDesc_hom, ihomLift_ι, uncurry_curry, Iso.inv_hom_id_assoc])
 
+omit [HasColimitsOfShape WalkingParallelPair C]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)] in
 lemma ihomLift_ihomDesc {P M N : Mod C A} (v : P ⟶ (ihom' A M).obj N) :
     ihomLift (ihomDesc v) (ihomDesc_coequalizes v) = v :=
   equalizer.hom_ext (Mod.hom_ext _ _ (by
