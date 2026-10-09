@@ -2,22 +2,57 @@
  "id": "def-kun-support",
  "kind": "definition",
  "title": "Closed points, transcendence degree, support",
- "statement": "Let $X$ be a scheme of finite type over a field $K$ (the\nscheme conventions of\nthe proper-base-change chapter; in particular $X$ is Noetherian, quasi-compact and\nquasi-separated). A point $x\\in X$ is *closed* if $\\{x\\}$ is\nclosed in $|X|$; write\n\n$$\n\\operatorname{trdeg}_K\\kappa(x)\n$$\n\nfor the transcendence degree of the residue field $\\kappa(x)$ over\n$K$, and for $a\\ge0$ set\n\n$$\nE_a(X)=\\{x\\in X:\\operatorname{trdeg}_K\\kappa(x)\\le a\\}.\n$$\n\nFor an etale sheaf $F\\in\\Ab(X_{\\Et})$, the *support*\n$\\kunsupp F$ is the set of $x\\in X$ such that $F_{\\bar x}\\ne0$\nfor some geometric point\n$\\bar x$ over $x$; that this set does not depend on the choice of\nthe geometric point over $x$ is recorded with the other properties of\nthis notion. For\n$K\\in D(X_{\\Et})$ put\n\n$$\n\\kunsupp K=\\bigcup_q\\kunsupp\\mathcal H^q(K)\n$$\n\nusing the cohomology\nsheaves of $K$.",
+ "statement": "Let $K$ be a field and $X$ a scheme over $K$ [def-weil-scheme-over-base] whose structure morphism is of finite type [def-weil-finite-type-morphism]. A point $x\\in X$ is *closed* if $\\{x\\}$ is closed in the underlying topological space of $X$ [def-weil-closed-points]. The residue field $\\kappa(x)$ [def-weil-residue-field] is a field extension of $K$ through the structure morphism; write\n\n$$\n\\operatorname{trdeg}_K\\kappa(x)\n$$\n\nfor its transcendence degree over $K$ [def-kun-transcendence-degree], and for an integer $a\\ge0$ set\n\n$$\nE_a(X)=\\{x\\in X:\\operatorname{trdeg}_K\\kappa(x)\\le a\\}.\n$$\n\nFor an etale sheaf of abelian groups $F\\in\\Ab(X_{\\Et})$ [def-weil-pbc-etale-sheaves], the *support* $\\kunsupp F$ is the set of $x\\in X$ such that $F_{\\bar x}\\ne0$ [def-weil-pbc-geometric-stalks] for some geometric point $\\bar x$ of $X$ lying over $x$ [def-weil-geometric-point]; that this set does not depend on the choice of the geometric point over $x$ is [lem-kun-support-geometric-point-independent], which the definition does not use. For $K\\in D(X_{\\Et})$ [def-weil-pbc-derived-categories] put\n\n$$\n\\kunsupp K=\\bigcup_{q\\in\\mathbf Z}\\kunsupp\\mathcal H^q(K),\n$$\n\nusing the cohomology sheaves $\\mathcal H^q(K)\\in\\Ab(X_{\\Et})$ of $K$ [def-weil-pbc-derived-categories].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-support.md",
   "place": "node def-kun-support, order 1673"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-derived-categories"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def .*[sS]upport' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry, /Topology/Sheaves, /CategoryTheory/Sites, /RingTheory/Support.lean, /Algebra/Category/ModuleCat/Sheaf",
+   "results": "`Module.support` (RingTheory/Support.lean:49, support of an R-module in Spec R), `Scheme.IdealSheafData.support` (AlgebraicGeometry/IdealSheaf/Basic.lean:328, closed subset cut out by an ideal sheaf); nothing for sheaves on a site or on the etale site; Topology/Sheaves has only skyscraper sheaves 'supported at' a point (Skyscraper.lean), no support of a sheaf",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'support' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules and ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'Function.support' concept, and etale stalks: 'pointSmallEtale\\|presheafFiber' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites and ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point",
+   "results": "`Function.support` is the set where a function to a type with zero is nonzero; it does not apply to a family of stalks of varying type. `Scheme.pointSmallEtale` (AlgebraicGeometry/Sites/EtalePoint.lean:64) makes a morphism `Spec Ω ⟶ S`, `Ω` separably closed, a point of the small etale site, and `Point.presheafFiber`/`sheafFiber` (CategoryTheory/Sites/Point/Basic.lean:96) is the stalk there; no support defined from them",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the stalks at geometric points (used by def-weil-pbc-geometric-stalks) but no support of an etale sheaf or of a complex"
+  },
+  {
+   "tool": "grep",
+   "query": "'trdeg' with 'residueField' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "`Algebra.trdeg` (RingTheory/AlgebraicIndependent/Basic.lean:45) and `Scheme.residueField` exist separately; no set of points of bounded residue transcendence degree",
+   "date": "2026-10-09",
+   "verdict": "no match for E_a(X); built from Algebra.trdeg and Scheme.residueField"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +78,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-kun-support",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint (no slopmaster2 copy, no Lean on either branch). Named the notions it is built from as statement dependencies: scheme over K and finite type (def-weil-scheme-over-base, def-weil-finite-type-morphism, Mathlib leaves), closed points (def-weil-closed-points, leaf), residue field with its K-structure (def-weil-residue-field, leaf), transcendence degree (new leaf def-kun-transcendence-degree, Algebra.trdeg), etale abelian sheaves, geometric points, geometric stalks, derived category and cohomology sheaves (def-weil-pbc-etale-sheaves, def-weil-geometric-point, def-weil-pbc-geometric-stalks, def-weil-pbc-derived-categories). Dropped def-weil-pbc-scheme-conventions: the statement only needs 'finite type over a field', and its parenthetical claim that X is Noetherian, quasi-compact and quasi-separated is a property not used by the definitions, so it was removed from the text. Replaced '{x} closed in |X|' by 'closed in the underlying space' because def-weil-closed-points uses |X| for the set of closed points. The independence of the geometric point is pointed to as lem-kun-support-geometric-point-independent but is not a dependency (the definition uses 'some geometric point', and that lemma depends on this node). Searched Mathlib for a support of sheaves on a site/etale site: none (only Module.support and ideal-sheaf support)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
