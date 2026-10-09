@@ -11,9 +11,93 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1) Construction of the map.* Write $\\eta:\\mathrm{id}\\to f_*f^*$ for the unit of $f^*\\dashv f_*$ [def-pc-module-pullback], so $f^*u=\\eta(u)$ for a section $u$, and put $\\mathcal T=f^*\\mathcal F\\otimes_{\\mathcal O_X}f^*\\mathcal G$ [def-pur-sheaf-tensor-product]. For an open $V\\subseteq Y$ define $\\beta_V:\\mathcal F(V)\\times\\mathcal G(V)\\to(f_*\\mathcal T)(V)=\\mathcal T(f^{-1}V)$ by $\\beta_V(s,t)=f^*s\\otimes f^*t$. It is $\\mathcal O_Y(V)$-bilinear for the $\\mathcal O_Y$-module structure of $f_*\\mathcal T$ (in which $a\\in\\mathcal O_Y(V)$ acts through $f^\\sharp(a)\\in\\mathcal O_X(f^{-1}V)$): $\\eta_{\\mathcal F}$ is $\\mathcal O_Y$-linear, so $f^*(as)=f^\\sharp(a)f^*s$, and $\\otimes$ is $\\mathcal O_X(f^{-1}V)$-bilinear on sections; additivity is the same. It commutes with restriction to $V'\\subseteq V$, since $\\eta$ is a morphism of sheaves and the map $u\\otimes w\\mapsto u\\otimes w$ into $\\mathcal T$ commutes with restrictions. Hence the maps $\\beta_V$ induce $\\mathcal O_Y(V)$-linear maps $\\mathcal F(V)\\otimes_{\\mathcal O_Y(V)}\\mathcal G(V)\\to(f_*\\mathcal T)(V)$ forming a morphism of presheaves of $\\mathcal O_Y$-modules $\\mathcal F\\otimes_{p,\\mathcal O_Y}\\mathcal G\\to f_*\\mathcal T$. The target is a sheaf of $\\mathcal O_Y$-modules (the pushforward of a sheaf of $\\mathcal O_X$-modules, [def-pc-module-pullback]), so by the universal property of sheafification of presheaves of modules [def-weil-presheaf-modules-sheafification] it factors uniquely through $\\mathcal F\\otimes_{p}\\mathcal G\\to\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G$: there is a unique $\\mathcal O_Y$-linear $\\beta:\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G\\to f_*\\mathcal T$ with $\\beta(s\\otimes t)=f^*s\\otimes f^*t$ (this is Stacks' characterization $\\operatorname{Hom}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)=\\operatorname{Bilin}(\\mathcal F\\times\\mathcal G,\\mathcal H)$, Modules Section 17.16). Let $\\alpha=\\alpha_{\\mathcal F,\\mathcal G}:f^*(\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G)\\to\\mathcal T$ be the morphism of $\\mathcal O_X$-modules adjoint to $\\beta$ under $f^*\\dashv f_*$ [def-pc-module-pullback], i.e. the unique one with $f_*(\\alpha)\\circ\\eta_{\\mathcal F\\otimes\\mathcal G}=\\beta$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Section 17.16 (Tag 01CA, label section-tensor-product: $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)=\\operatorname{Bilin}_{\\mathcal O_X}(\\mathcal F\\times\\mathcal G,\\mathcal H)$); compare Modules on Sites, Lemma Tag 03EL (sites-modules lemma-tensor-product-pullback), whose proof goes through the same adjunction and bilinear maps"
+   }
+  },
+  {
+   "text": "*(2) The formula on sections.* For $V\\subseteq Y$ open, $s\\in\\mathcal F(V)$, $t\\in\\mathcal G(V)$: $\\alpha(f^*(s\\otimes t))=\\alpha(\\eta(s\\otimes t))=(f_*(\\alpha)\\circ\\eta)(s\\otimes t)=\\beta(s\\otimes t)=f^*s\\otimes f^*t$, the sections of $f_*$ over $V$ being those over $f^{-1}V$ and $f_*(\\alpha)_V=\\alpha_{f^{-1}V}$. This is the defining identity of $\\alpha$ from step (1) evaluated on a section.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.16.4 (Tag 01CD, label lemma-tensor-product-pullback; proof omitted in the source)"
+   }
+  },
+  {
+   "text": "*(3) Stalks.* Let $x\\in X$, $y=f(x)$, $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, with $f^\\sharp_x:A\\to B$. By [lem-weil-pbc-module-stalk-pullback] and [lem-weil-pbc-module-stalk-tensor] there are isomorphisms of $B$-modules\\n$$\\lambda:(f^*(\\mathcal F\\otimes\\mathcal G))_x\\cong(\\mathcal F\\otimes\\mathcal G)_y\\otimes_AB\\cong(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB,\\qquad (f^*(s\\otimes t))_x\\mapsto(s\\otimes t)_y\\otimes1\\mapsto(s_y\\otimes t_y)\\otimes1,$$\\n$$\\rho:\\mathcal T_x=(f^*\\mathcal F\\otimes f^*\\mathcal G)_x\\cong(f^*\\mathcal F)_x\\otimes_B(f^*\\mathcal G)_x\\cong(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB),\\qquad (f^*s\\otimes f^*t)_x\\mapsto(f^*s)_x\\otimes(f^*t)_x\\mapsto(s_y\\otimes1)\\otimes(t_y\\otimes1),$$\\nfor $V\\ni y$, $s\\in\\mathcal F(V)$, $t\\in\\mathcal G(V)$ (the stalk-of-tensor isomorphism applied on $Y$ to $\\mathcal F,\\mathcal G$ and on $X$ to $f^*\\mathcal F,f^*\\mathcal G$; the stalk-of-pullback isomorphism applied to $\\mathcal F\\otimes\\mathcal G$, $\\mathcal F$ and $\\mathcal G$, with base change of the first isomorphism along $A\\to B$). Since $\\alpha$ is $\\mathcal O_X$-linear, $\\alpha_x$ is $B$-linear, and so is $\\gamma=\\rho\\circ\\alpha_x\\circ\\lambda^{-1}:(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB\\to(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB)$. By step (2), $\\alpha_x((f^*(s\\otimes t))_x)=(f^*s\\otimes f^*t)_x$, hence $\\gamma((s_y\\otimes t_y)\\otimes1)=(s_y\\otimes1)\\otimes(t_y\\otimes1)$. Every pair of germs $\\sigma\\in\\mathcal F_y$, $\\tau\\in\\mathcal G_y$ is of the form $s_y,t_y$ for sections over one open $V\\ni y$ (represent them over $V_1,V_2$ and restrict to $V_1\\cap V_2$), and the elements $(\\sigma\\otimes\\tau)\\otimes1$ generate $(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB$ as a $B$-module. So $\\gamma$ is the unique $B$-linear map with $(\\sigma\\otimes\\tau)\\otimes1\\mapsto(\\sigma\\otimes1)\\otimes(\\tau\\otimes1)$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0098 (label lemma-stalk-pullback-modules) and Modules, Lemma Tag 01CB (label lemma-stalk-tensor-product), as named in the node's source sketch"
+   }
+  },
+  {
+   "text": "*(4) The algebra identity.* By [lem-weil-pbc-base-change-tensor-distrib] applied to $f^\\sharp_x:A\\to B$ and the $A$-modules $M=\\mathcal F_y$, $N=\\mathcal G_y$, the map $\\delta:(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB\\to(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB)$ with $(\\sigma\\otimes\\tau)\\otimes1\\mapsto(\\sigma\\otimes1)\\otimes(\\tau\\otimes1)$ is an isomorphism of $B$-modules. By the uniqueness in step (3), $\\gamma=\\delta$; hence $\\alpha_x=\\rho^{-1}\\circ\\delta\\circ\\lambda$ is bijective, for every $x\\in X$.",
+   "uses": [
+    "lem-weil-pbc-base-change-tensor-distrib"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.16.4 (Tag 01CD, label lemma-tensor-product-pullback; proof omitted in the source)"
+   }
+  },
+  {
+   "text": "*(5) $\\alpha$ is an isomorphism.* $\\alpha$ is a morphism of $\\mathcal O_X$-modules on the scheme $X$ whose stalk maps $\\alpha_x$ are bijective for all $x\\in X$ (step (4)); by [lem-weil-pbc-module-iso-on-stalks] it is an isomorphism of $\\mathcal O_X$-modules $f^*(\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G)\\cong f^*\\mathcal F\\otimes_{\\mathcal O_X}f^*\\mathcal G$, and by step (2) it sends $f^*(s\\otimes t)$ to $f^*s\\otimes f^*t$.",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 01AG (label lemma-abelian) with Sheaves, Lemma Tag 007T (label lemma-points-exactness (3))"
+   }
+  },
+  {
+   "text": "*(6) Naturality.* Let $u:\\mathcal F\\to\\mathcal F'$, $v:\\mathcal G\\to\\mathcal G'$ be $\\mathcal O_Y$-linear, with $u\\otimes v$ the induced map of tensor products [def-pur-sheaf-tensor-product] (sheafification of $s\\otimes t\\mapsto u(s)\\otimes v(t)$, so $(u\\otimes v)(s\\otimes t)=u(s)\\otimes v(t)$ on sections). The two $\\mathcal O_X$-linear maps $\\alpha_{\\mathcal F',\\mathcal G'}\\circ f^*(u\\otimes v)$ and $(f^*u\\otimes f^*v)\\circ\\alpha_{\\mathcal F,\\mathcal G}$ from $f^*(\\mathcal F\\otimes\\mathcal G)$ to $f^*\\mathcal F'\\otimes f^*\\mathcal G'$ are equal: by the adjunction [def-pc-module-pullback] it suffices that their adjoints $\\mathcal F\\otimes\\mathcal G\\to f_*(f^*\\mathcal F'\\otimes f^*\\mathcal G')$ (composition with $\\eta_{\\mathcal F\\otimes\\mathcal G}$, after $f_*$) agree, and by the uniqueness in the universal property of sheafification [def-weil-presheaf-modules-sheafification] it suffices that they agree on the sections $s\\otimes t$, which generate the presheaf tensor product over $\\mathcal O_Y(V)$. Using the naturality of the unit, $f^*(w)(f^*z)=f^*(w(z))$ for a morphism $w$ and a section $z$, and step (2): the first sends $s\\otimes t$ to $\\alpha(f^*(u(s)\\otimes v(t)))=f^*(u(s))\\otimes f^*(v(t))$; the second sends it to $(f^*u\\otimes f^*v)(f^*s\\otimes f^*t)=f^*(u(s))\\otimes f^*(v(t))$. Hence $\\alpha$ is natural in $\\mathcal F$ and $\\mathcal G$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.16.4 (Tag 01CD, label lemma-tensor-product-pullback; proof omitted in the source)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-base-change-tensor-distrib",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 17.16.4 (Tag 01CD), proof omitted in the source; written by an agent along the sketch recorded in the node's source (adjoint of the bilinear map, check on stalks via Tags 0098, 01CB and the algebra identity, isomorphisms detected on stalks Tags 007T/01AG). Stacks gives a different proof for ringed topoi (Modules on Sites, Lemma Tag 03EL, via Hom/Bilin adjunctions)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +126,45 @@
    "results": "no hits (the monoidal structure exists only on presheaves of modules, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback functor of sheaves of modules is monoidal, pullback of tensor product isomorphic to tensor of pullbacks",
+   "results": "SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, Functor.sheafPullbackConstruction.sheafPullback, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullback, Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-09",
+   "verdict": "no match: no monoidal structure on Scheme.Modules / SheafOfModules in this Mathlib, so no statement on the pullback and tensor products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves of modules along a morphism of schemes commutes with tensor product of modules",
+   "results": "Scheme.Modules.pullbackComp, SheafOfModules.pullback_assoc, Scheme.Modules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.MonoidalCategoryStruct.tensorObj",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Functor.Monoidal",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/; grep -rln 'Monoidal' the same two directories; grep -rln 'Monoidal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/",
+   "results": "Sheaf/: Abelian, ChangeOfRings, Colimits, Free, Generators, Limits, Localization, LocallyFree, PullbackContinuous, PullbackFree, PushforwardContinuous, Quasicoherent (no Monoidal.lean); AlgebraicGeometry/Modules/: Presheaf, Sheaf, Tilde; no 'Monoidal' in either. Presheaf/: Monoidal.lean (PresheafOfModules.monoidalCategory, no pullback), PushforwardZeroMonoidal.lean (pushforward₀OfCommRingCat F R is Monoidal: pushforward along a functor without change of rings, on presheaves; not the pullback), ColimitFunctor.lean",
+   "date": "2026-10-09",
+   "verdict": "no match: the monoidal structure on sheaves of modules (SheafOfModules.monoidalCategory) exists only in the source repository, WeilConjectures/Algebra/Category/ModuleCat/Sheaf/Monoidal.lean, not in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +184,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-module-pullback-tensor",
+  "worker": "stage1",
+  "summary": "Statement kept (it agrees with Stacks 01CD and adds the formula on sections, which the parent lem-weil-pbc-invertible-pullback-tensor clause (2) uses). Stacks omits the proof; wrote a proof in six steps along the node's own source sketch (proof_origin agent): (1) the map as adjoint of the bilinear map (s,t) ↦ f^*s ⊗ f^*t, via the universal property of sheafification of presheaves of modules (def-weil-presheaf-modules-sheafification, a Mathlib leaf) and the adjunction in def-pc-module-pullback; (2) the formula on sections (elementary); (3) stalks via the existing nodes lem-weil-pbc-module-stalk-pullback (Tag 0098) and lem-weil-pbc-module-stalk-tensor (Tag 01CB); (4) the algebra identity, new Mathlib leaf lem-weil-pbc-base-change-tensor-distrib (TensorProduct.AlgebraTensorModule.distribBaseChange; naturality from the Monoidal instance on ModuleCat.extendScalars); (5) isomorphisms detected on stalks, new Mathlib leaf lem-weil-pbc-module-iso-on-stalks (Zariski: Scheme.Modules.toPresheaf reflects isos + TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso); (6) naturality via the adjunction and the uniqueness in the sheafification universal property. Leaves: steps (4), (5) rest on the two new Mathlib leaves; def-weil-presheaf-modules-sheafification is already a leaf; the stalk nodes and def-pc-module-pullback, def-pur-sheaf-tensor-product remain unsplit. Mathlib searched three ways for the item: no monoidal structure on SheafOfModules / Scheme.Modules and nothing on the pullback and tensor products in the pinned Mathlib. Source repository: AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorObj_iso (ProjectionFormula.lean 66-68) has its own sorry and states existence only (Nonempty iso), without naturality or the formula on sections."
+ }
 }

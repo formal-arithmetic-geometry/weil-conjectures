@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+ "kind": "statement",
+ "title": "Colimits of presheaves of modules are computed sectionwise",
+ "statement": "Let $\\mathcal C$ be a category, $\\mathcal O$ a presheaf of rings on $\\mathcal C$, $\\mathrm{PMod}(\\mathcal O)$ the category of presheaves of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification] and $\\mathrm{PAb}(\\mathcal C)$ the category of presheaves of abelian groups. Let $\\mathcal I$ be a small category and $i\\mapsto\\mathcal P_i$ a diagram $\\mathcal I\\to\\mathrm{PMod}(\\mathcal O)$. For each object $V$ let $\\mathcal P(V)=\\colim_i\\mathcal P_i(V)$ be the colimit of the $\\mathcal O(V)$-modules $\\mathcal P_i(V)$, whose underlying abelian group is the colimit of the abelian groups $\\mathcal P_i(V)$; for $V'\\to V$ the restriction maps of the $\\mathcal P_i$ induce a map $\\mathcal P(V)\\to\\mathcal P(V')$, semilinear over $\\mathcal O(V)\\to\\mathcal O(V')$. Then $\\mathcal P$ is a presheaf of $\\mathcal O$-modules, and $\\mathcal P$ with the maps $\\mathcal P_i\\to\\mathcal P$ induced by the coprojections is a colimit of the diagram in $\\mathrm{PMod}(\\mathcal O)$; in particular $\\mathrm{PMod}(\\mathcal O)$ has all small colimits and evaluation at each $V$ preserves them. Moreover the functor $\\mathrm{PMod}(\\mathcal O)\\to\\mathrm{PAb}(\\mathcal C)$ forgetting the module structures preserves small colimits: the underlying presheaf of abelian groups of $\\mathcal P$, with the same maps, is the colimit of the underlying presheaves of abelian groups of the $\\mathcal P_i$ in $\\mathrm{PAb}(\\mathcal C)$, which is computed sectionwise.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DB (label lemma-limits-colimits), proof (the multiplication on the presheaf colimit), with Lemma 03CL (label lemma-limits-colimits-abelian-presheaves: limits and colimits of abelian presheaves are computed on sections)"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimits of presheaves of modules are computed objectwise and the forgetful functor to presheaves of abelian groups preserves colimits",
+   "results": "PresheafOfModules.toPresheaf_preservesColimit, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.hasColimit (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits)",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib declaration per clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfSize (PresheafOfModules.toPresheaf _)",
+   "results": "PresheafOfModules.toPresheaf_preservesColimitsOfSize (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the forgetful functor from sheaves of modules to sheaves of abelian groups commutes with colimits; colimit of sheaves of modules is the sheafification of the presheaf colimit",
+   "results": "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat (Sheaf.Colimits), SheafOfModules.isColimitFreeCofan, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.hasColimit (Presheaf.Colimits)",
+   "date": "2026-10-09",
+   "verdict": "presheaf-level match (colimitPresheafOfModules_obj, hasColimit)"
+  },
+  {
+   "tool": "grep",
+   "query": "'colimitPresheafOfModules|isColimitColimitCocone|hasColimitsOfSize|evaluation_preservesColimitsOfSize|toPresheaf_preservesColimitsOfSize' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; 'evaluation_preservesColimits' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "results": "Presheaf/Colimits.lean:72 colimitPresheafOfModules (sectionwise colimit with induced restrictions), :114 isColimitColimitCocone, :168 hasColimitsOfSize, :170 evaluation_preservesColimitsOfSize, :173 toPresheaf_preservesColimitsOfSize; FunctorCategory/Basic.lean:319,437 evaluation_preservesColimitsOfShape / evaluation_preservesColimits (colimits in PAb(C) sectionwise); ModuleCat/Colimits.lean:133 forget₂PreservesColimitsOfSize",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.toPresheaf_preservesColimitsOfSize",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+  "how": "one Mathlib declaration per clause, for `R : Cᵒᵖ ⥤ RingCat` and `F : J ⥤ PresheafOfModules R`: the sectionwise colimit `PresheafOfModules.colimitPresheafOfModules F` (line 72) is a colimit, `isColimitColimitCocone` (line 114); existence `hasColimitsOfSize` (line 168); evaluation preserves it, `evaluation_preservesColimitsOfSize` (line 170); `toPresheaf R` preserves colimits, `toPresheaf_preservesColimitsOfSize` (line 173), colimits in `Cᵒᵖ ⥤ AddCommGrpCat` being sectionwise by `CategoryTheory.Limits.evaluation_preservesColimitsOfShape` (Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:319); underlying group of a colimit of modules by `ModuleCat.forget₂PreservesColimitsOfSize` (Mathlib/Algebra/Category/ModuleCat/Colimits.lean:133)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

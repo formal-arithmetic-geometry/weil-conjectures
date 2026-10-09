@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-module-iso-on-stalks",
+ "kind": "statement",
+ "title": "A morphism of modules on a scheme is an isomorphism iff it is bijective on all stalks",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism of $\\mathcal O_X$-modules (sheaves of $\\mathcal O_X$-modules on the Zariski topology of $X$ [def-weil-sheaf-of-modules-category]). For $x\\in X$ let $\\mathcal F_x=\\varinjlim_{U\\ni x}\\mathcal F(U)$ be the stalk (colimit over the open neighbourhoods of $x$) and $\\varphi_x:\\mathcal F_x\\to\\mathcal G_x$ the induced map. Then $\\varphi$ is an isomorphism of $\\mathcal O_X$-modules if and only if $\\varphi_x$ is bijective for every $x\\in X$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Sheaves, Tag 007T (label lemma-points-exactness, part (3): a map of sheaves of sets is an isomorphism iff it is bijective on all stalks), applied to the underlying sheaves of sets, with Modules, Tag 01AG (label lemma-abelian: Mod(O_X) is abelian, kernels and cokernels computed stalkwise); the inverse of an O_X-linear bijective map of sheaves is O_X-linear"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves is an isomorphism iff all stalk maps are isomorphisms",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, TopCat.Presheaf.mono_of_stalk_mono (Mathlib.Topology.Sheaves.Stalks), AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app (Mathlib.AlgebraicGeometry.Modules.Sheaf), GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso",
+   "date": "2026-10-09",
+   "verdict": "match (combination, see mathlib_match)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of sheaves of modules on a scheme is an isomorphism if it induces isomorphisms on all stalks",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.isIso_iff_stalk_iso (morphisms of schemes, not modules), AlgebraicGeometry.isomorphisms_eq_stalkwise",
+   "date": "2026-10-09",
+   "verdict": "match (combination)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isIso_iff_stalkFunctor_map_iso\\|app_isIso_of_stalkFunctor_map_iso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; grep -n 'ReflectsIsomorphisms\\|isIso_iff_isIso_app\\|stalkFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "results": "Stalks.lean:652 app_isIso_of_stalkFunctor_map_iso, :670 isIso_of_stalkFunctor_map_iso, :686 isIso_iff_stalkFunctor_map_iso {F G : Sheaf C X} (f : F ⟶ G) : IsIso f ↔ ∀ x, IsIso ((stalkFunctor C x).map f.1) (C concrete, forget preserves limits and filtered colimits and reflects isos); Modules/Sheaf.lean:74 toPresheaf : X.Modules ⥤ TopCat.Presheaf Ab X, :79 (toPresheaf X).ReflectsIsomorphisms, :141 isSheaf, :147 Hom.isIso_iff_isIso_app, :511 stalks of modules taken as toPresheaf ⋙ stalkFunctor",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, AlgebraicGeometry.Scheme.Modules.toPresheaf (ReflectsIsomorphisms instance), AlgebraicGeometry.Scheme.Modules.isSheaf",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "a few Mathlib lemmas, one per clause: for φ : M ⟶ N in X.Modules, IsIso φ ↔ IsIso ((Scheme.Modules.toPresheaf X).map φ) (toPresheaf reflects isomorphisms, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:79, and any functor preserves them); the latter is a morphism between the sheaves ⟨M.presheaf, M.isSheaf⟩, ⟨N.presheaf, N.isSheaf⟩ of abelian groups (Sheaf.lean:141), and sheaves → presheaves is fully faithful, so by TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso with C = AddCommGrpCat (Stalks.lean:686) it is an isomorphism iff every stalk map (stalkFunctor Ab x).map is an isomorphism in AddCommGrpCat, i.e. bijective. The stalk of an O_X-module is that of its underlying abelian sheaf (Mathlib's convention, Sheaf.lean:511)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-pullback-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

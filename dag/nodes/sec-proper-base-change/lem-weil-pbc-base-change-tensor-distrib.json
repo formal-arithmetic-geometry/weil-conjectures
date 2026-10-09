@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-base-change-tensor-distrib",
+ "kind": "statement",
+ "title": "Base change distributes over tensor products of modules",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings, and for an $A$-module $P$ write $P\\otimes_AB$ for its base change, a $B$-module. For $A$-modules $M,N$ there is an isomorphism of $B$-modules\n$$\\delta_{M,N}:(M\\otimes_AN)\\otimes_AB\\;\\xrightarrow{\\ \\sim\\ }\\;(M\\otimes_AB)\\otimes_B(N\\otimes_AB),\\qquad (m\\otimes n)\\otimes b\\mapsto(m\\otimes b)\\otimes(n\\otimes1),$$\nin particular $(m\\otimes n)\\otimes1\\mapsto(m\\otimes1)\\otimes(n\\otimes1)$, natural in $M$ and $N$: for $A$-linear $u:M\\to M'$, $v:N\\to N'$ one has $\\delta_{M',N'}\\circ((u\\otimes v)\\otimes\\mathrm{id}_B)=((u\\otimes\\mathrm{id}_B)\\otimes(v\\otimes\\mathrm{id}_B))\\circ\\delta_{M,N}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 10.12 (Tag 00CV, label section-tensor-product): commutativity (Tag 00CY, label lemma-flip-tensor-product) and the bimodule associativity (Tag 00D2, label lemma-tensor-with-bimodule) give $(M\\otimes_AN)\\otimes_AB\\cong M\\otimes_A(N\\otimes_AB)\\cong (M\\otimes_AB)\\otimes_B(N\\otimes_AB)$; the identity is used in Modules, proof of Tag 01CD (lemma-tensor-product-pullback) via stalks"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change distributes over tensor product of modules (M ⊗ N) ⊗ S ≃ (M ⊗ S) ⊗_S (N ⊗ S)",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower), isBaseChange_tensorProduct_map, IsBaseChange.tensorEquiv (Mathlib.RingTheory.IsTensorProduct), TensorProduct.directSumLeft, TensorProduct.finsuppLeft",
+   "date": "2026-10-09",
+   "verdict": "match: distribBaseChange (checked by its source, Tower.lean:441)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "distribBaseChange : A ⊗[R] (N ⊗[R] Q) ≃ₗ[A] (A ⊗[R] N) ⊗[A] (A ⊗[R] Q); distribBaseChange_tmul : a ⊗ₜ (n ⊗ₜ q) ↦ (a ⊗ₜ n) ⊗ₜ (1 ⊗ₜ q); distribBaseChange_symm_tmul; ModuleCat.extendScalars_δ (δ of the monoidal functor extendScalars f is distribBaseChange), ModuleCat.extendScalars_μ (Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars is a monoidal functor: S ⊗_R (M ⊗_R N) ≅ (S ⊗_R M) ⊗_S (S ⊗_R N)",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.map_tmul (ChangeOfRings), ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, ModuleCat.monoidalCategory",
+   "date": "2026-10-09",
+   "verdict": "related (ExtendScalars.map_tmul gives the action of extendScalars on maps)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'distribBaseChange\\|instance : (extendScalars f).Monoidal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "LinearAlgebra/TensorProduct/Tower.lean:441 def distribBaseChange, :462 distribBaseChange_tmul; Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:45 noncomputable instance : (extendScalars f).Monoidal (μIso := (distribBaseChange R S M₁ M₂).symm, naturality fields μIso_inv_natural_left/right), :101 extendScalars_δ, :109 extendScalars_δ_tmul",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.AlgebraTensorModule.distribBaseChange, ModuleCat.extendScalars (Functor.Monoidal instance), ModuleCat.extendScalars_δ_tmul",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+  "how": "specializes in one line: Mathlib writes base change on the left, $B\\otimes_AP$; distribBaseChange A B M N : B ⊗[A] (M ⊗[A] N) ≃ₗ[B] (B ⊗[A] M) ⊗[B] (B ⊗[A] N) (Tower.lean:441) with b ⊗ (m ⊗ n) ↦ (b ⊗ m) ⊗ (1 ⊗ n) (distribBaseChange_tmul, :462); conjugating by the natural isomorphisms TensorProduct.comm A P B : P ⊗[A] B ≃ B ⊗[A] P (B-linear for the right B-structures) gives δ_{M,N} and its formula. Naturality in M and N: δ is the oplax structure map δ of the monoidal functor ModuleCat.extendScalars φ (Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:45, extendScalars_δ :101), natural by Functor.OplaxMonoidal.δ_natural; equivalently both composites agree on the generators (m ⊗ n) ⊗ b."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-pullback-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

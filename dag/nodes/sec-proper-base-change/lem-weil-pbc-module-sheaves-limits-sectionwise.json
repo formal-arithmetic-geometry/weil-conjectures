@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+ "kind": "statement",
+ "title": "Limits of sheaves of modules exist and are computed sectionwise",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of rings on $\\mathcal C$, $\\Mod(\\mathcal O)$ the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], $\\mathcal I$ a small category and $i\\mapsto\\mathcal F_i$ a diagram $\\mathcal I\\to\\Mod(\\mathcal O)$. Let $\\mathcal L$ be the presheaf $V\\mapsto\\lim_i\\mathcal F_i(V)$, the limit of the $\\mathcal O(V)$-modules $\\mathcal F_i(V)$, i.e. the set of families $(x_i)_i\\in\\prod_i\\mathcal F_i(V)$ with $\\mathcal F(a)(x_i)=x_j$ for every arrow $a:i\\to j$, with componentwise addition, $\\mathcal O(V)$-action and restriction maps; its underlying abelian group is the limit of the abelian groups $\\mathcal F_i(V)$. Then $\\mathcal L$ is a sheaf of $\\mathcal O$-modules, and $\\mathcal L$ with the coordinate projections $\\mathcal L\\to\\mathcal F_i$ is a limit of the diagram in $\\Mod(\\mathcal O)$, and also in the category of presheaves of $\\mathcal O$-modules; in particular every small diagram in $\\Mod(\\mathcal O)$ has a limit, and evaluation at each object $V$ carries it to the limit of the $\\mathcal O(V)$-modules $\\mathcal F_i(V)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DB (label lemma-limits-colimits), proof, first paragraph (limits), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) (2)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limits of sheaves of modules exist and are computed sectionwise; forgetful functor from SheafOfModules to PresheafOfModules preserves limits",
+   "results": "SheafOfModules.createsLimit, SheafOfModules.hasLimit, SheafOfModules.forgetPreservesLimitsOfSize, SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.hasLimitsOfSize, SheafOfModules.hasLimitsOfShape, SheafOfModules.Finite.forgetPreservesFiniteLimits (all Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib instance per clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfSize (SheafOfModules.forget _)",
+   "results": "SheafOfModules.forgetPreservesLimitsOfSize (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'hasLimitsOfSize|evaluationPreservesLimitsOfSize|forgetPreservesLimitsOfSize|createsLimit' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; 'forget₂AddCommGroup_preservesLimits' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Limits.lean",
+   "results": "Sheaf/Limits.lean:62 createsLimit F (forget _) (the limit is the limit in PresheafOfModules, whose underlying presheaf is a sheaf by isSheaf_of_isLimit :43), :106 hasLimitsOfSize.{v₂, v}, :108 evaluationPreservesLimitsOfSize, :111 forgetPreservesLimitsOfSize; ModuleCat/Limits.lean:164,169 forget₂AddCommGroup_preservesLimitsOfSize / forget₂AddCommGroup_preservesLimits",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SheafOfModules.hasLimitsOfSize",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+  "how": "one Mathlib instance per clause, for `R : Sheaf J RingCat` and diagrams indexed by categories with objects in the universe v of the modules: existence `SheafOfModules.hasLimitsOfSize` (line 106); limit created by (and computed as) the limit in `PresheafOfModules R.obj`, `SheafOfModules.createsLimit` (line 62) and `SheafOfModules.forgetPreservesLimitsOfSize` (line 111); computed on sections, `SheafOfModules.evaluationPreservesLimitsOfSize` (line 108), with underlying abelian group the limit of abelian groups by `ModuleCat.forget₂AddCommGroup_preservesLimits` (Mathlib/Algebra/Category/ModuleCat/Limits.lean:169)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
