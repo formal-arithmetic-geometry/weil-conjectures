@@ -1,12 +1,11 @@
 # Work queue
 
-559 items; claim with `tools/claim.py next <group> [--stage N]`.
+560 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (544)
+## Stage 1: nodes to split (545)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
 | `lemma-weil-pbc-curve-separably-closed-passage` | 1003 | sorry_here |
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
 | `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
@@ -26,6 +25,8 @@
 | `lem-weil-pbc-invertible-pullback-tensor` | 1004 | none |
 | `lem-weil-pbc-map-into-henselian-colimit` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
+| `lem-weil-pbc-p1-power-affine-charts` | 1004 | none |
+| `lem-weil-pbc-projective-morphism-chart-preimage` | 1004 | none |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1004 | none |
 | `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
@@ -384,12 +385,15 @@
 | `def-sp-composite-acyclicity` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
 | `pqf-lem-finite-integral-lft` | 6004 | none |
+| `pqf-lem-integral-lft-finite` | 6004 | none |
+| `pqf-lem-integral-univclosed` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `thm-sp-if-e1` | 6004 | none |
 | `def-sc-p1-standard` | 6005 | none |
 | `def-sp-double-complex-total` | 6005 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
 | `pqf-def-coherent` | 6005 | none |
+| `pqf-lem-lying-over` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6005 | none |
 | `lem-sp-long-exact-of-triangle` | 6006 | none |
@@ -405,8 +409,6 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6008 | none |
 | `pqf-lem-fff-vanishing` | 6008 | none |
 | `pqf-lem-finite-qf` | 6008 | none |
-| `pqf-lem-integral-lft-finite` | 6008 | none |
-| `pqf-lem-integral-univclosed` | 6008 | none |
 | `pqf-lem-leray` | 6008 | none |
 | `pqf-lem-leray-lowdegree` | 6008 | none |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
@@ -419,7 +421,6 @@
 | `lem-sc-abelian-variety-characterization` | 6009 | none |
 | `pqf-def-cohomology` | 6009 | none |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
-| `pqf-lem-lying-over` | 6009 | none |
 | `cor-pqf-proper-quasifinite-finite` | 6010 | none |
 | `def-pc-zero-scheme` | 6010 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | none |
@@ -445,6 +446,7 @@
 | `def-weil-pbc-eight-curve-assertions` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
 | `lemma-nagata-final-noetherian-base-system` | - | none |
+| `pqf-lem-affine-local-target` | - | none |
 | `def-nagata-affine-proj` | - | none |
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
@@ -496,7 +498,6 @@
 | `lemma-nagata-qc-open-descends` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-def-quasifinite` | - | none |
-| `pqf-lem-affine-local-target` | - | none |
 | `cor-pc-dense-points-curves-sections` | - | none |
 | `def-fin-normalization-extension` | - | none |
 | `def-nagata-basechanged-system` | - | none |
@@ -571,7 +572,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 555 nodes that wait for stage 1, 72 nodes that wait for a statement dependency.
+Not open yet: 560 nodes that wait for stage 1, 73 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

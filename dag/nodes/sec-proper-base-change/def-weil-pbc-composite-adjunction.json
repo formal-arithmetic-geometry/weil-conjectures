@@ -1,0 +1,66 @@
+{
+ "id": "def-weil-pbc-composite-adjunction",
+ "kind": "definition",
+ "title": "Composite of two adjunctions; the identity adjunction",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be categories, $F:\\mathcal A\\to\\mathcal B$ left adjoint to $G:\\mathcal B\\to\\mathcal A$ (unit $\\eta_1:\\mathrm{id}\\to GF$, counit $\\varepsilon_1:FG\\to\\mathrm{id}$) and $H:\\mathcal B\\to\\mathcal C$ left adjoint to $I:\\mathcal C\\to\\mathcal B$ (unit $\\eta_2$, counit $\\varepsilon_2$). The *composite adjunction* is the adjunction $H\\circ F\\dashv G\\circ I$ with unit $\\eta_A=G(\\eta_{2,FA})\\circ\\eta_{1,A}:A\\to GFA\\to GIHFA$ and counit $\\varepsilon_C=\\varepsilon_{2,C}\\circ H(\\varepsilon_{1,IC}):HFGIC\\to HIC\\to C$; its hom bijection $\\operatorname{Hom}(HFA,C)\\cong\\operatorname{Hom}(FA,IC)\\cong\\operatorname{Hom}(A,GIC)$ is the composite of the two hom bijections. The *identity adjunction* on $\\mathcal A$ is $\\mathrm{id}_{\\mathcal A}\\dashv\\mathrm{id}_{\\mathcal A}$ with identity unit and counit.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 0DV0 (lemma-compose-counits, line 3576): the composite $v'\\circ v$ has left adjoint $u\\circ u'$, with counit $\\epsilon^v_X\\circ u(\\epsilon^{v'}_{v(X)})$; Mathlib CategoryTheory.Adjunction.comp (tagged stacks 0DV0) and Adjunction.id"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of adjunctions F ⋙ H ⊣ I ⋙ G with unit and counit",
+   "results": "CategoryTheory.Adjunction.comp, Adjunction.comp_unit, Adjunction.comp_counit, Adjunction.comp_counit_app (Mathlib.CategoryTheory.Adjunction.Basic); Bicategory.Adjunction.comp",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Adjunction.comp"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp (adj₁ : F ⊣ G) (adj₂ : H ⊣ I) : F ⋙ H ⊣ I ⋙ G; comp_unit_app: (adj₁.comp adj₂).unit.app X = adj₁.unit.app X ≫ G.map (adj₂.unit.app (F.obj X)); comp_counit_app: (adj₁.comp adj₂).counit.app X = H.map (adj₁.counit.app (I.obj X)) ≫ adj₂.counit.app X; comp_homEquiv",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the composite of two adjunctions is an adjunction, and the identity functor is left adjoint to itself",
+   "results": "CategoryTheory.Adjunction.id (Mathlib.CategoryTheory.Adjunction.Basic), instInhabitedId; Adjunction.leftAdjointCompIso, leftAdjointIdIso (Mathlib.CategoryTheory.Adjunction.CompositionIso)",
+   "date": "2026-10-09",
+   "verdict": "match for the identity clause: CategoryTheory.Adjunction.id"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def comp\\|^def id\\|comp_unit_app\\|comp_counit_app' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "def id : 𝟭 C ⊣ 𝟭 C (line 475, unit 𝟙, counit 𝟙); def comp : F ⋙ H ⊣ I ⋙ G (line 567, stacks 0DV0); comp_unit_app (line 575), comp_counit_app (line 580); comp_homEquiv",
+   "date": "2026-10-09",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.comp",
+  "file": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "how": "exact: Adjunction.comp adj₁ adj₂ : F ⋙ H ⊣ I ⋙ G (line 567), unit and counit by comp_unit_app / comp_counit_app (lines 575, 580), hom bijection by comp_homEquiv; identity clause CategoryTheory.Adjunction.id : 𝟭 C ⊣ 𝟭 C (line 475)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-direct-image-composition",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
