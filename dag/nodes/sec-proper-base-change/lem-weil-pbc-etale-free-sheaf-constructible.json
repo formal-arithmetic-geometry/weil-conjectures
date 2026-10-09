@@ -16,9 +16,79 @@
   "def-weil-pbc-etale-sum-extension",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By Tag 03S9, choose a finite partition $X=\\coprod_iX_i$ by constructible locally closed subschemes such that $\\pi_i:U_i=U\\times_XX_i\\to X_i$ is finite etale. The fibre product and each inclusion $X_i\\to X$ are as in [def-pc-fibre-product] and [def-weil-constructible-subset].",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S8 proof, line 12199, invoking Lemma 03S9 (Tag 03S9)"
+   }
+  },
+  {
+   "text": "Pull back the module sheaf $j_!\\underline M_U$ along the immersion $i_i:X_i\\to X$. The module-form extension-by-zero base-change node identifies $i_i^{-1}(j_!\\underline M_U)$ with $(\\pi_i)_!\\underline M_{U_i}$; this is Stacks Lemma 03S6 (Tag 03S6) applied to the fibre-product square.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S8 proof, lines 12203-12210, using Lemma 03S6 (Tag 03S6)"
+   }
+  },
+  {
+   "text": "Since $\\pi_i$ is finite etale, its extension by zero agrees with its direct image on module sheaves by the module-form comparison node, which is Stacks Lemma 03S7 (Tag 03S7). Hence $i_i^{-1}(j_!\\underline M_U)\\cong(\\pi_i)_*\\underline M_{U_i}$.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-star-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S8 proof, lines 12205-12210, using Lemma 03S7 (Tag 03S7)"
+   }
+  },
+  {
+   "text": "The finite-etale pushforward lemma gives that $(\\pi_i)_*\\underline M_{U_i}$ is finite locally constant as a sheaf of $\\Lambda_{X_i}$-modules: this is the module clause of Lemma 03RU (Tag 03RU), isolated in [lem-weil-pbc-etale-finite-pushforward-locally-constant].",
+   "uses": [
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S8 proof, lines 12211-12212, invoking Lemma 03RU (Tag 03RU)"
+   }
+  },
+  {
+   "text": "The strata $X_i$ are constructible locally closed and the pullback to each $X_i$ is finite locally constant. By the definition of a constructible sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-constructible-sheaf], $j_!\\underline M_U$ is constructible.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RW and Lemma 03S8 conclusion (Tag 03S8)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S8 (Tag 03S8), part (3), proof at lines 12198-12212"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +140,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-free-sheaf-constructible",
+  "worker": "stage1",
+  "summary": "Repaired the Stacks 03S8 split. The proof now uses self-contained module-form nodes for 03S6 extension-by-zero base change and 03S7 finite-etale extension/direct-image, with no irrelevant h_U set-sheaf detour. The finite locally constant module pushforward clause of 03RU is isolated in a self-contained node to avoid a dependency cycle. The 03S9 stratification node remains self-contained with exact tag and all required searches."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Fourth delivery: step 2 now cites a module-form 03S6 node (shriek base change along an etale map, general M), step 3 a module-form 03S7 node (pi_! = pi_* for finite etale pi), plus the 03S9 stratification and the 03RU module-clause nodes; all four new nodes unsplit with exact tags. Accepted by L."
+ }
 }
