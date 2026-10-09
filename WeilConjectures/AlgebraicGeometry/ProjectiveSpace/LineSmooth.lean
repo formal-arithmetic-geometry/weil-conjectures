@@ -198,6 +198,93 @@ theorem homOfSections_eq_SpecMap_comp {k K : Type u} [Field k] [Field K] (φ : k
     Scheme.Hom.resLE_comp_ι, IsIso.inv_hom_id_assoc]
   rfl
 
+/-- **A `K`-point of `ℙ¹` in a standard chart.** For a field `K` over `k` and homogeneous
+coordinates `v : Fin 2 → K` with `v i ≠ 0`, the `K`-point `[v₀ : v₁]` of `ℙ¹_k` factors through
+the chart `D₊(Tᵢ) ≅ Spec k[T]` as `Spec` of the evaluation `T ↦ v_j / v_i` (`j ≠ i`). -/
+theorem homOfSections_eq_SpecMap_comp_of_ne_zero {k K : Type u} [Field k] [Field K]
+    (φ : k →+* K) (v : ULift.{u} (Fin 2) → K) (i : ULift.{u} (Fin 2)) (hvi : v i ≠ 0)
+    (hs : Ideal.span (Set.range fun j : ULift.{u} (Fin 2) ↦
+      (Scheme.ΓSpecIso (.of K)).inv (v j)) = ⊤) :
+    homOfSections (Spec.map (CommRingCat.ofHom φ))
+      (fun j : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (v j)) hs =
+      Spec.map (CommRingCat.ofHom (MvPolynomial.eval₂Hom φ
+        (fun j : {j : ULift.{u} (Fin 2) // j ≠ i} ↦ v j / v i))) ≫
+        (standardOpenIso (ULift.{u} (Fin 2)) (Spec (.of k)) i ≪≫
+          AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ i} (.of k)).inv ≫
+        (standardOpen (ULift.{u} (Fin 2)) (Spec (.of k)) i).ι := by
+  set s := fun j : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (v j)
+  have hsi : IsUnit (s i) := (Ne.isUnit hvi).map _
+  have hB : (Spec (.of K)).basicOpen (s i) = ⊤ := Scheme.basicOpen_of_isUnit _ hsi
+  have : IsIso ((Spec (.of K)).basicOpen (s i)).ι := Scheme.Opens.isIso_ι_of_eq_top hB
+  let r : Spec (.of K) ⟶ Spec (.of (MvPolynomial {j : ULift.{u} (Fin 2) // j ≠ i} k)) :=
+    inv ((Spec (.of K)).basicOpen (s i)).ι ≫
+      (homOfSections (Spec.map (CommRingCat.ofHom φ)) s hs).resLE
+        (standardOpen (ULift.{u} (Fin 2)) (Spec (.of k)) i) ((Spec (.of K)).basicOpen (s i))
+        (homOfSections_preimage_standardOpen _ s hs i).ge ≫
+      (standardOpenIso (ULift.{u} (Fin 2)) (Spec (.of k)) i).hom ≫
+        (AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ i} (.of k)).hom
+  have hover : r ≫ Spec.map (CommRingCat.ofHom MvPolynomial.C) =
+      Spec.map (CommRingCat.ofHom φ) := by
+    have e : (AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ i} (.of k)).hom ≫
+        Spec.map (CommRingCat.ofHom MvPolynomial.C) =
+        𝔸({j : ULift.{u} (Fin 2) // j ≠ i}; Spec (.of k)) ↘ Spec (.of k) := by
+      rw [← AffineSpace.SpecIso_inv_over, Iso.hom_inv_id_assoc]
+    simp only [r, Category.assoc, e, standardOpenIso_hom_over, homOfSections_resLE_ι_over,
+      IsIso.inv_hom_id_assoc]
+  have hX (j : {j : ULift.{u} (Fin 2) // j ≠ i}) :
+      r.appTop ((Scheme.ΓSpecIso _).inv (MvPolynomial.X j)) =
+        (Scheme.ΓSpecIso _).inv (v j / v i) := by
+    have h₁ : (AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ i} (.of k)).hom.appTop
+        ((Scheme.ΓSpecIso _).inv (MvPolynomial.X j)) = AffineSpace.coord _ j := by
+      rw [← AffineSpace.SpecIso_inv_appTop_coord, ← CommRingCat.comp_apply,
+        ← Scheme.Hom.comp_appTop, Iso.hom_inv_id, Scheme.Hom.id_appTop]
+      rfl
+    have h₂ := homOfSections_resLE_standardOpenIso_hom (Spec.map (CommRingCat.ofHom φ)) s hs i
+    have h₃ : (Spec (.of K)).divBasicOpen (s j.1) (s i) =
+        ((Spec (.of K)).basicOpen (s i)).ι.appTop ((Scheme.ΓSpecIso _).inv (v j / v i)) := by
+      have hu := (Spec (.of K)).isUnit_ι_appTop_basicOpen (s i)
+      have := Scheme.divBasicOpen_mul_self (Spec (.of K)) (s j.1) (s i)
+      refine hu.mul_right_cancel (this.trans ?_)
+      rw [← map_mul, ← map_mul, div_mul_cancel₀ _ hvi]
+    have hr : r = inv ((Spec (.of K)).basicOpen (s i)).ι ≫
+        ((homOfSections (Spec.map (CommRingCat.ofHom φ)) s hs).resLE
+          (standardOpen (ULift.{u} (Fin 2)) (Spec (.of k)) i) ((Spec (.of K)).basicOpen (s i))
+          (homOfSections_preimage_standardOpen _ s hs i).ge ≫
+        (standardOpenIso (ULift.{u} (Fin 2)) (Spec (.of k)) i).hom) ≫
+        (AffineSpace.SpecIso {j : ULift.{u} (Fin 2) // j ≠ i} (.of k)).hom := by
+      simp only [r, Category.assoc]
+    rw [h₂] at hr
+    rw [hr, Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      CommRingCat.comp_apply, h₁, AffineSpace.homOfVector_appTop_coord, h₃,
+      ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, IsIso.inv_hom_id,
+      Scheme.Hom.id_appTop]
+    rfl
+  let ψ := MvPolynomial.eval₂Hom φ (fun j : {j : ULift.{u} (Fin 2) // j ≠ i} ↦ v j / v i)
+  have hψ : r = Spec.map (CommRingCat.ofHom ψ) := by
+    refine ext_of_isAffine ?_
+    rw [← cancel_epi (Scheme.ΓSpecIso _).inv, ← Scheme.ΓSpecIso_inv_naturality]
+    ext1
+    refine MvPolynomial.ringHom_ext (fun c ↦ ?_) (fun j ↦ ?_)
+    · have h := congrArg (fun f ↦ f.appTop ((Scheme.ΓSpecIso (.of k)).inv c)) hover
+      have e₁ : (Spec.map (CommRingCat.ofHom (MvPolynomial.C (σ :=
+          {j : ULift.{u} (Fin 2) // j ≠ i}) (R := k)))).appTop
+          ((Scheme.ΓSpecIso (.of k)).inv c) = (Scheme.ΓSpecIso _).inv (MvPolynomial.C c) := by
+        rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality]
+        rfl
+      have e₂ : (Spec.map (CommRingCat.ofHom φ)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) =
+          (Scheme.ΓSpecIso (.of K)).inv (φ c) := by
+        rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality]
+        rfl
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, e₁, e₂] at h
+      rw [CommRingCat.comp_apply, CommRingCat.comp_apply, h]
+      simp [ψ]
+    · rw [CommRingCat.comp_apply, CommRingCat.comp_apply, hX j]
+      simp [ψ]
+  rw [← hψ]
+  simp only [r, Iso.trans_inv, Category.assoc, Iso.hom_inv_id_assoc,
+    Scheme.Hom.resLE_comp_ι, IsIso.inv_hom_id_assoc]
+  rfl
+
 /-- **A transcendental point of `ℙ¹` is not closed.** Let `K` be a field over `k` and `t ∈ K`
 transcendental over `k`. The `K`-point `[1 : t]` of `ℙ¹_k` is not a closed point: in the chart
 `D₊(T₀) = Spec k[T]` it is the prime `ker (T ↦ t) = 0`, which is not maximal. -/
