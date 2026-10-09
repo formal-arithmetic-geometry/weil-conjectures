@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-endofunctor-fixed-pair-category",
+ "kind": "definition",
+ "title": "Category of objects with an isomorphism from their image under an endofunctor",
+ "statement": "Let $\\mathcal C$ be a category and $T:\\mathcal C\\to\\mathcal C$ a functor. The *category of $T$-fixed pairs* $\\mathcal C^{T}$ has as objects the pairs $(X,\\theta)$ with $X$ an object of $\\mathcal C$ and $\\theta:T(X)\\xrightarrow{\\sim}X$ an isomorphism of $\\mathcal C$. A morphism $(X,\\theta)\\to(X',\\theta')$ is a morphism $u:X\\to X'$ of $\\mathcal C$ such that\n\n$$\n u\\circ\\theta=\\theta'\\circ T(u):T(X)\\longrightarrow X'.\n$$\n\nIdentities and composition are those of $\\mathcal C$ (the composite of two such morphisms satisfies the condition, by functoriality of $T$). The *forgetful functor* $\\operatorname{For}:\\mathcal C^T\\to\\mathcal C$ sends $(X,\\theta)$ to $X$ and $u$ to $u$; it is faithful. Equivalently, $\\mathcal C^T$ is the full subcategory of the category of $T$-algebras (pairs $(X,\\theta)$ with $\\theta:T(X)\\to X$ arbitrary, same morphisms) on the pairs whose structure map $\\theta$ is an isomorphism.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, La conjecture de Weil II, (1.1.14), p. 153 (the category of sheaves $\\mathcal F$ on $X$ with an isomorphism $F^*:F^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, for $T=F^*$); the general construction is category theory"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Algebra\\|str :\\|structure Hom\\|h :\\|def forget\\|forget_faithful' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+   "results": "Algebra.lean:39 `structure Algebra (F : C ⥤ C)` with carrier `a : C` and `str : F.obj a ⟶ a`; :65 `structure Hom` with `f : A₀.1 ⟶ A₁.1` and `h : F.map f ≫ A₁.str = A₀.str ≫ f` (the condition u∘θ = θ'∘T(u)); :131 `Algebra.forget F : Algebra F ⥤ C`; :142 `forget_faithful`",
+   "date": "2026-10-09",
+   "verdict": "generalization: T-algebras with arbitrary structure map; the fixed pairs are the full subcategory where `str` is an isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure FullSubcategory\\|def ι ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean; grep -rln -i 'fixed.\\?point' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory; grep -rn 'IsIso .*\\.str' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "FullSubcategory.lean:39 `ObjectProperty.FullSubcategory`, :59 `ObjectProperty.ι`; no Mathlib category of 'fixed points' of an endofunctor (the fixed-point hits are Galois/Prorepresentability and Limits/Shapes/SingleObj, unrelated); `IsIso A.str` occurs only in Lambek's lemma `Algebra.Initial.str_isIso` (Algebra.lean:225)",
+   "date": "2026-10-09",
+   "verdict": "match by one-line specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Endofunctor.Algebra",
+  "file": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+  "how": "specializes in one line: $\\mathcal C^T$ is `(fun A : Endofunctor.Algebra T => IsIso A.str : ObjectProperty (Endofunctor.Algebra T)).FullSubcategory` (Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean), with $\\theta$ = `A.str`, morphisms `Algebra.Hom` (condition `T.map f ≫ A₁.str = A₀.str ≫ f`), and For = `ObjectProperty.ι _ ⋙ Algebra.forget T`, faithful as a composite of faithful functors (`Algebra.forget_faithful`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-weil-sheaf-complex",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
