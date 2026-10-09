@@ -678,6 +678,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.Enriched.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
@@ -714,6 +715,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
