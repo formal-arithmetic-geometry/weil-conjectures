@@ -1,0 +1,45 @@
+{
+ "id": "lem-weil-finite-field-pow-card",
+ "kind": "statement",
+ "title": "Every element of a field with $Q$ elements is a root of $X^Q-X$",
+ "statement": "Let $F$ be a finite field with $Q$ elements. Then $x^Q=x$ for every $x\\in F$; consequently $x^{Q^m}=x$ for every $x\\in F$ and every integer $m\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Section 9.14 'Finite fields' (Tag 09HY, label section-finite): the unit group $F^*$ of a finite field with $q$ elements is cyclic of order $q-1$; then $x^{q-1}=1$ for $x\\neq0$ by Lagrange's theorem, so $x^q=x$ for all $x$ (this last line is not written in the Stacks text)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem pow_card\\|pow_card_pow\\|pow_card_sub_one_eq_one' Mathlib/FieldTheory/Finite/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "FiniteField.pow_card (Basic.lean:227): a ^ Fintype.card K = a for a : K, K a finite field; FiniteField.pow_card_pow (:232): a ^ (Fintype.card K) ^ n = a; FiniteField.pow_card_sub_one_eq_one (a ≠ 0)",
+   "date": "2026-10-09",
+   "verdict": "match: FiniteField.pow_card and FiniteField.pow_card_pow"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "FiniteField.pow_card",
+  "file": "Mathlib/FieldTheory/Finite/Basic.lean",
+  "how": "exact: `FiniteField.pow_card (a : K) : a ^ Fintype.card K = a` (line 227); the iterate is `FiniteField.pow_card_pow (n : ℕ) (a : K) : a ^ Fintype.card K ^ n = a` (line 232); with `Nat.card` one rewrites by `Nat.card_eq_fintype_card`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-unique-subfield-of-closure",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

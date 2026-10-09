@@ -1,0 +1,45 @@
+{
+ "id": "lem-weil-frobenius-polynomial-simple-roots",
+ "kind": "statement",
+ "title": "The polynomial $X^Q-X$ has only simple roots in characteristic $p$",
+ "statement": "Let $p$ be a prime, let $L$ be a field of characteristic $p$, and let $Q$ be an integer divisible by $p$. Then every root of the polynomial $f=X^Q-X\\in L[X]$ in $L$ [def-weil-polynomial-root] is a simple root: $(X-\\alpha)^2$ does not divide $f$ for any $\\alpha\\in L$; equivalently, in the multiset of roots of $f$ in $L$ no element occurs twice. (Reason: $f$ is separable, since its derivative is $f'=QX^{Q-1}-1=-1$, so $f$ and $f'$ are coprime.)",
+ "source": {
+  "document": "literature/LIST.md",
+  "place": "Lang, Algebra, Ch. V, §5, proof of Theorem 5.1 (the derivative of $X^{q^n}-X$ is $-1$, so the roots are distinct); the document is wanted, not obtained: statement written by an agent"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-root"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'galois_poly_separable' Mathlib/FieldTheory/Finite/GaloisField.lean; grep -n 'theorem nodup_roots\\|count_roots_le_one\\|rootMultiplicity_le_one_of_separable' Mathlib/FieldTheory/Separable.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "galois_poly_separable (GaloisField.lean:57): [CharP K p] (h : p ∣ q) → Separable (X ^ q - X : K[X]); Polynomial.nodup_roots (Separable.lean:289): Separable p → p.roots.Nodup; Polynomial.count_roots_le_one, rootMultiplicity_le_one_of_separable",
+   "date": "2026-10-09",
+   "verdict": "generalization: galois_poly_separable with Polynomial.nodup_roots specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "galois_poly_separable",
+  "file": "Mathlib/FieldTheory/Finite/GaloisField.lean",
+  "how": "specializes in one line: `Polynomial.nodup_roots (galois_poly_separable p Q h) : (X ^ Q - X : L[X]).roots.Nodup` (GaloisField.lean:57, Separable.lean:289); multiplicity at most one is `Polynomial.rootMultiplicity_le_one_of_separable`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-unique-subfield-of-closure",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

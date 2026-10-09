@@ -9,11 +9,97 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-q-elements",
-  "def-weil-algebraic-closure"
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-root",
+  "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Setup. $k_0$ has characteristic $p$ and $q$ elements [def-weil-finite-field-q-elements]; the ring homomorphism $\\iota:k_0\\to k$ is injective since $k_0$ is a field [def-pc-field-extension], and $p\\cdot1_k=\\iota(p\\cdot1_{k_0})=0$, so $k$ has characteristic $p$. Fix $n\\geq1$ and put $Q=q^n=p^{an}$; then $p\\mid Q$ and $Q\\geq2$.",
+   "uses": [
+    "def-weil-finite-field-q-elements",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/LIST.md",
+    "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted, not obtained); proof written by an agent along the lines of that theorem"
+   }
+  },
+  {
+   "text": "Clause 1, subfield. By [def-weil-frobenius-substitution] the map $\\varphi_q:z\\mapsto z^q$ is a field automorphism of $k$ fixing $\\iota(k_0)$ pointwise, hence so is its $n$-th iterate $\\varphi_q^n:z\\mapsto z^{q^n}$. The set $k^{(n)}=\\{x\\in k:\\varphi_q^n(x)=x\\}$ is the fixed set of a field automorphism, hence a subfield of $k$: it contains $0,1$, and if $\\varphi_q^n(x)=x$ and $\\varphi_q^n(y)=y$ then $\\varphi_q^n(x\\pm y)=x\\pm y$, $\\varphi_q^n(xy)=xy$ and, for $x\\neq0$, $\\varphi_q^n(x^{-1})=\\varphi_q^n(x)^{-1}=x^{-1}$. It contains $\\iota(k_0)$ because $\\varphi_q$ fixes $\\iota(k_0)$ pointwise. By definition $k^{(n)}$ is the set of roots in $k$ of $f_n=X^{q^n}-X$ [def-weil-polynomial-root].",
+   "uses": [
+    "def-weil-frobenius-substitution",
+    "def-weil-polynomial-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/LIST.md",
+    "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted, not obtained); proof written by an agent along the lines of that theorem"
+   }
+  },
+  {
+   "text": "Clause 1, cardinality. The polynomial $f_n=X^{Q}-X\\in k[X]$ is monic of degree $Q$ (as $Q\\geq2>1$), and $k$ is algebraically closed [def-weil-algebraic-closure], so by [lem-weil-alg-closed-linear-factorization] $f_n=\\prod_{j=1}^{Q}(X-\\gamma_j)$ with $\\gamma_1,\\dots,\\gamma_Q\\in k$ (the number of factors equals the degree, the leading coefficient is $1$). An element $x\\in k$ is a root of $f_n$ iff $x=\\gamma_j$ for some $j$ ($k$ is a field, so a product vanishes iff a factor does). Since $k$ has characteristic $p$ and $p\\mid Q$, every root of $f_n$ is simple [lem-weil-frobenius-polynomial-simple-roots], so the $\\gamma_j$ are pairwise distinct (if $\\gamma_i=\\gamma_j$ with $i\\neq j$, then $(X-\\gamma_i)^2\\mid f_n$). Hence $k^{(n)}=\\{\\gamma_1,\\dots,\\gamma_Q\\}$ has exactly $Q=q^n$ elements.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-weil-frobenius-polynomial-simple-roots"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/LIST.md",
+    "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted, not obtained); proof written by an agent along the lines of that theorem"
+   }
+  },
+  {
+   "text": "Clause 2, uniqueness. Let $E\\subseteq k$ be a subfield with $q^n$ elements. By [lem-weil-finite-field-pow-card] applied to $E$ (a finite field with $Q=q^n$ elements), $x^{q^n}=x$ for every $x\\in E$, so $E\\subseteq k^{(n)}$. Both are finite sets with $q^n$ elements (step 3), so $E=k^{(n)}$.",
+   "uses": [
+    "lem-weil-finite-field-pow-card"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Section 9.14 'Finite fields' (Tag 09HY) for the unit group of order $q^n-1$ behind [lem-weil-finite-field-pow-card]; the containment-and-counting argument is Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted), written by an agent"
+   }
+  },
+  {
+   "text": "Clause 3. $\\iota(k_0)$ is a subfield of $k$ (the image of a field under a ring homomorphism) with $q$ elements ($\\iota$ is injective, step 1). By step 4 with $n=1$, $\\iota(k_0)=k^{(1)}$, and it is the only subfield of $k$ with $q$ elements. Moreover $k^{(1)}\\subseteq k^{(n)}$: if $x^q=x$ then by induction on $m$, $x^{q^{m}}=(x^{q^{m-1}})^q=x^q=x$; in particular $\\iota(k_0)\\subseteq k^{(n)}$ (as also seen in step 2).",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/LIST.md",
+    "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted, not obtained); proof written by an agent along the lines of that theorem"
+   }
+  },
+  {
+   "text": "Consequence. By clauses 1 and 2, '$\\mathbf F_{q^n}$, the unique subfield of $k$ with $q^n$ elements' names the well-defined subfield $k^{(n)}$. By clause 3, $\\iota$ takes values in $k^{(n)}$, so its corestriction $\\iota_n:k_0\\to k^{(n)}$ is a ring homomorphism and makes $\\mathbf F_{q^n}=k^{(n)}$ a field extension of $k_0$, i.e. a $k_0$-algebra [def-pc-field-extension], with $\\iota$ equal to the composite of $\\iota_n$ and the inclusion $k^{(n)}\\subseteq k$.",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/LIST.md",
+    "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 (wanted, not obtained); proof written by an agent along the lines of that theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-pc-field-extension",
+  "def-weil-frobenius-substitution",
+  "def-weil-polynomial-root",
+  "def-weil-algebraic-closure",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-weil-frobenius-polynomial-simple-roots",
+  "lem-weil-finite-field-pow-card"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Lang, Algebra, Ch. V, §5, Theorem 5.1 is wanted (literature/LIST.md, not obtained); the proof was written by an agent along that theorem. Stacks Section 9.14 'Finite fields' (Tag 09HY) covers only the input that a finite field with $Q$ elements has unit group of order $Q-1$, used through [lem-weil-finite-field-pow-card]"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -35,10 +121,17 @@
    "results": "FiniteField.splits_X_pow_card_sub_X (GaloisField.lean:156), FiniteField.isSplittingField_of_card_eq (:160): a field with p ^ n elements is a splitting field of X ^ p ^ n - X; FiniteField.roots_X_pow_card_sub_X (Basic.lean, used at :739): the roots of X ^ card - X are all the elements; FiniteField.frobeniusAlgEquiv (Basic.lean:349) and frobeniusAlgEquivOfAlgebraic (:363): the Frobenius x ↦ x ^ p as an automorphism",
    "date": "2026-10-09",
    "verdict": "no match; supporting lemmas for a later proof of clause (1): every field with q^n elements consists of the roots of X^{q^n} - X, and X^{q^n} - X splits in k with q^n distinct roots"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Nat.card.*Subfield\\|card (.*: Subfield\\|Subfield.*Nat.card\\|eq_of_le_of_card\\|eq_of_subset_of_card_le' Mathlib (whole tree); grep -n 'theorem\\|instance' Mathlib/FieldTheory/Finite/Extension.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Subfield.card_bot (FieldTheory/Finite/Basic.lean:722) only; set-level counting Set.eq_of_subset_of_card_le (Data/Set/Finite/Basic.lean:809), Finset.eq_of_subset_of_card_le (Data/Finset/Card.lean:282), Set.eq_of_subset_of_ncard_le (Data/Set/Card.lean:861); FiniteField.Extension k p n is an abstract extension with an IsSplittingField instance for X ^ Nat.card k ^ n - X (Extension.lean:85), not a subfield of a given algebraic closure; no lemma on uniqueness of a subfield (or IntermediateField) of given cardinality",
+   "date": "2026-10-09",
+   "verdict": "no match for the whole statement; the proof assembles FiniteField.pow_card (uniqueness), galois_poly_separable + Polynomial.nodup_roots / Polynomial.card_rootSet_eq_natDegree with IsAlgClosed.splits (cardinality q^n), FiniteField.frobeniusAlgEquivOfAlgebraic ^ n and its fixed points (subfield), Set.eq_of_subset_of_card_le (equality)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +149,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-unique-subfield-of-closure",
+  "worker": "stage1",
+  "summary": "Node had no proof. Wrote a six-step agent proof along Lang, Algebra V §5 Thm 5.1 (wanted, already in literature/LIST.md): the roots of X^{q^n}-X are the fixed points of the n-th power of the Frobenius substitution, hence a subfield containing iota(k_0); they number q^n because X^{q^n}-X splits in the algebraically closed k (lem-weil-alg-closed-linear-factorization) with simple roots (new Mathlib leaf lem-weil-frobenius-polynomial-simple-roots); a subfield with q^n elements lies inside by x^{q^n}=x (new Mathlib leaf lem-weil-finite-field-pow-card, whose input is Stacks 09HY) and equals it by counting; clause 3 is the case n=1. Statement kept; stmt_deps gain def-weil-polynomial-root and def-pc-field-extension (roots, k_0-algebra structure). No Mathlib lemma states the whole result; search recorded."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
