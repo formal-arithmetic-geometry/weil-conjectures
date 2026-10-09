@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-alternating-product-reciprocity",
+ "kind": "statement",
+ "title": "Substitution $T\\mapsto c^{-1}T^{-1}$ in an alternating product of polynomials with degreewise reciprocity",
+ "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate, $K[T]$ the polynomial ring [def-weil-polynomial-ring] and $K(T)$ the field of rational functions [def-weil-rational-function-field]; for $R\\in K(T)$ and $u\\in K^\\times$, $R(uT^{-1})$ denotes the substitution of $uT^{-1}$ for $T$, the involutive $K$-algebra automorphism of $K(T)$ of that definition, and for a polynomial $P\\in K[T]$, $P(uT^{-1})$ is its evaluation at $uT^{-1}\\in K(T)$. Negative integer exponents denote multiplicative inverses in $K^\\times$ or in $K(T)^\\times$.\n\nLet $c\\in K^\\times$ and let $d\\in\\mathbf Z_{\\geq0}$. For every integer $i$ with $0\\leq i\\leq2d$ let $P_i\\in K[T]$ with $P_i(0)=1$ (so $P_i\\neq0$), let $b_i\\in\\mathbf Z_{\\geq0}$, and let $D_i\\in K^\\times$. Assume that for every integer $i$ with $0\\leq i\\leq2d$:\n\n1. $b_i=b_{2d-i}$;\n\n2. $D_iD_{2d-i}=c^{b_i}$;\n\n3. $P_{2d-i}(c^{-1}T^{-1})=(-1)^{b_i}\\,T^{-b_i}\\,D_i^{-1}\\,P_i(T)$ in $K(T)$.\n\nPut\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i\\in\\mathbf Z,\\qquad\n\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}\\in K^\\times,\\qquad\nZ(T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in K(T)^\\times.\n$$\n\nThen\n\n$$\n\\text{(a)}\\quad \\Delta^2=c^{\\chi}\\ \\text{ in }K^\\times,\n\\qquad\\qquad\n\\text{(b)}\\quad Z(c^{-1}T^{-1})=(-1)^{\\chi}\\,T^{\\chi}\\,\\Delta\\,Z(T)\\ \\text{ in }K(T).\n$$\n\nAssertion (b) uses only hypotheses 1 and 3; assertion (a) uses only hypotheses 1 and 2.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+  "place": "## Proof, step 2, first display and the display for $\\Delta^2$: the reindexing of the product $\\prod_iP_i(T)^{(-1)^{i+1}}$ under $T\\mapsto q^{-d}T^{-1}$ by $i\\mapsto2d-i$ and the computation $\\Delta^2=\\prod_i(D_iD_{2d-i})^{(-1)^i}=q^{d\\chi}$, here stated as a lemma of pure field algebra with $K=\\mathbf Q$, $c=q^d$ in the application (slopmaster2: proof of prop:functional-equation, literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex lines 3523-3551, which states the proposition without a proof). The human sources leave this computation to the reader: literature/milne-lectures-on-etale-cohomology_LEC.pdf, Theorem 27.12, p. 158 ('This implies the statement', after the eigenvalue reciprocity), and literature/deligne-weil-I_PMIHES-1974-43.pdf, (2.6), p. 281 ('On déduit facilement de (1.5.4) et de (2.3), (2.4) que ...')."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'functional equation\\|reciproc' Mathlib/FieldTheory/RatFunc Mathlib/Algebra/Polynomial/Laurent.lean Mathlib/RingTheory/Polynomial  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem reflect_mul\\|^def reverse\\|^def reflect\\|^theorem eval₂_reflect_mul_pow\\|^theorem eval₂_reverse_mul_pow' Mathlib/Algebra/Polynomial/Reverse.lean; grep -n '^def invert' Mathlib/Algebra/Polynomial/Laurent.lean",
+   "results": "Polynomial.reflect / Polynomial.reverse with reflect_mul (177), eval₂_reflect_mul_pow (191), eval₂_reverse_mul_pow (332): the reciprocal polynomial of one polynomial and its evaluation at an inverse; LaurentPolynomial.invert (579): the algebra automorphism T ↦ T⁻¹ of R[T;T⁻¹]. Nothing about an alternating product ∏ P_i^{(-1)^{i+1}} over a reflected index, nor about the scalar Δ",
+   "date": "2026-10-09",
+   "verdict": "no match; these are the primitives for one polynomial, not the identity for the alternating product"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def liftAlgHom\\|^def eval' Mathlib/FieldTheory/RatFunc/Basic.lean Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; grep -rn 'theorem prod_zpow\\|theorem prod_range_reflect\\|lemma Even.neg_one_zpow\\|lemma zpow_mul\\b' Mathlib/Algebra/",
+   "results": "RatFunc.liftAlgHom (Basic.lean:652) and RatFunc.eval (AsPolynomial.lean:143) give the substitution T ↦ c⁻¹T⁻¹; Finset.prod_zpow (BigOperators/Group/Finset/Defs.lean:683), Finset.prod_range_reflect (BigOperators/Intervals.lean:155), Even.neg_one_zpow (Ring/Parity.lean:411), zpow_mul (Group/Basic.lean:468) are the steps of the proof",
+   "date": "2026-10-09",
+   "verdict": "no match for the lemma; generalizations of its ingredients only (a proof in Mathlib's terms is the reindexing prod_range_reflect applied to the product of the hypothesis 3 identities, with prod_zpow and the parity lemmas)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-functional-equation",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

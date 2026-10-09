@@ -8,60 +8,166 @@
   "place": "node prop-functional-equation, order 2922"
  },
  "stmt_deps": [
-  "def-weil-determinant-constants",
   "def-weil-finite-field-fiber",
-  "def-weil-frobenius-detailed",
   "def-weil-geometric-hypotheses",
-  "def-weil-integral-frobenius-factor",
+  "def-weil-frobenius-detailed",
+  "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-betti-numbers",
+  "def-weil-polynomial-coefficient",
+  "def-weil-determinant-constants",
+  "lem-weil-leading-coefficient-nonzero",
+  "prop-weil-functional-equation-parity",
+  "def-weil-functional-equation-sign",
+  "def-weil-point-counts-zeta",
+  "def-weil-rational-power-series",
+  "def-weil-rational-function-field"
  ],
  "proof": [
   {
-   "text": "1. **1.** The exponential series defining $Z(X_0,T)$ is the\npoint-count zeta series of [def-weil-point-counts-zeta]; the\ntrace-to-determinant calculation in\n[prop-trace-determinant] identifies it with the normalized product\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}.\n$$\nAll subsequent manipulations therefore take place in the Laurent rational\nfunction field $\\mathbf Q(T)$.",
+   "text": "*Step 1: the data and the integral factors.* The finite-field datum $(p,a,q,k_0=\\Fq,k=\\Fbar)$ is that of [def-weil-finite-field-fiber], and the hypotheses on $X_0$ (smooth of pure dimension $d$, proper, geometrically connected, with geometric fiber $X=X_0\\times_{k_0}k$) are those of [def-weil-geometric-hypotheses]. For the fixed prime $\\ell\\neq p$, the spaces $V_{i,\\ell}=H^i(X,\\Ql)$, the operators $F_{i,\\ell}=F\\vert_{V_{i,\\ell}}$ and the polynomials $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$, $0\\leq i\\leq2d$, are the smooth-proper cohomological family of [def-weil-smooth-proper-cohomological-family], and $P_{i,\\ell}$ is the reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial] of $F_{i,\\ell}$. By [prop-integral-recovery] (existence and uniqueness clause, applied to $X_0$) there are unique polynomials $P_i\\in\\mathbf Z[T]$, $0\\leq i\\leq2d$, with $P_i(0)=1$ and $P_i^{(\\ell')}=P_{i,\\ell'}$ for every prime $\\ell'\\neq p$; they are the integral realization-independent factors of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$, and in particular $P_i^{(\\ell)}=P_{i,\\ell}$ for the fixed $\\ell$. Conversely, a polynomial $P\\in\\mathbf Z[T]$ with $P^{(\\ell)}=P_{i,\\ell}$ for the fixed $\\ell$ alone equals $P_i$: $\\mathbf Z\\to\\Ql$ is injective because $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], so the coefficientwise extension $\\mathbf Z[T]\\to\\Ql[T]$ [def-weil-coefficientwise-extension] is injective [lem-weil-coefficientwise-extension-injective], and $P^{(\\ell)}=P_{i,\\ell}=P_i^{(\\ell)}$ gives $P=P_i$. Hence 'the integral Frobenius factor with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$' of the statement is this $P_i$, whether the condition is read for the fixed $\\ell$ or for every $\\ell'\\neq p$, and it is the polynomial that [prop-duality-reciprocity], [prop-weil-functional-equation-parity] and [def-weil-functional-equation-sign], applied below, take as their $P_i$ (each assumes the hypotheses of this statement on $X_0$ and takes $P_i\\in\\mathbf Z[T]$ with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ in the same way). The integers $b_i=\\deg P_i$ are the Betti numbers of [def-weil-betti-numbers], and $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)$, $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ and $\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}$ are the determinant constants, the Euler characteristic and the alternating determinant scalar of [def-weil-determinant-constants], defined there by the same formulas. Since $P_i(0)=1$, [lem-weil-leading-coefficient-nonzero] gives $D_i\\in\\mathbf Z\\setminus\\{0\\}$, so $D_i^{-1}$ and $\\Delta$ are elements of $\\mathbf Q^\\times$; and $P_i\\neq0$.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-reverse-characteristic-polynomial",
+    "prop-integral-recovery",
+    "def-weil-integral-frobenius-factor",
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-coefficientwise-extension",
+    "lem-weil-coefficientwise-extension-injective",
+    "def-weil-betti-numbers",
+    "def-weil-determinant-constants",
+    "lem-weil-leading-coefficient-nonzero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "statement (the hypotheses and the definitions of $P_i$, $b_i$, $D_i$, $\\chi$, $\\Delta$); the identification of the statement's $P_i$ with the unique factors of prop-integral-recovery is left unsaid by the blueprint (slopmaster2 lists prop:integral-recovery among the uses of prop:functional-equation, 01_final_weil_conjectures.tex line 3525, without saying where it is used). Milne LEC, Summary 27.14 (d), p. 159: the $P_r\\in1+t\\mathbf Z[t]$ are independent of $\\ell$."
+   }
+  },
+  {
+   "text": "*Step 2: the zeta series as a rational function.* By [def-weil-point-counts-zeta] with $Y_0=X_0$, $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}\\#X_0(\\mathbf F_{q^n})T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$ is the point-count zeta series of the statement. The factorization clause of [prop-integral-recovery], for the $P_i$ of Step 1, gives\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\quad\\text{in }\\mathbf Q(T):\n$$\n\nthat is, in the sense of [def-weil-rational-power-series], $Z(X_0,T)$ is a rational power series (each $P_i$ has $P_i(0)=1$, so the even-indexed product is a denominator with nonzero constant term) whose rational function $R_Z\\in\\mathbf Q(T)$ is the displayed product; every assertion 'in $\\mathbf Q(T)$' about $Z(X_0,T)$ is the assertion about $R_Z$. The expression $Z(X_0,q^{-d}T^{-1})$ in the statement is the image of $R_Z$ under the substitution of $q^{-d}T^{-1}$ for $T$ [def-weil-rational-function-field] (with $c=q^{-d}\\in\\mathbf Q^\\times$), which is an involutive $\\mathbf Q$-algebra automorphism $\\sigma$ of $\\mathbf Q(T)$; likewise $P(q^{-d}T^{-1})$ for a polynomial $P$ is its evaluation at $q^{-d}T^{-1}$, that is, $\\sigma(P)$. (The imported proof derived the product from [prop-trace-determinant], which gives it only with the $\\ell$-adic factors $P_{i,\\ell}$ after the coefficient extension $\\mathbf Q[[T]]\\to\\Ql[[T]]$; the identity with the integral $P_i$ in $\\mathbf Q(T)$ is the factorization clause of prop-integral-recovery, whose proof uses prop-trace-determinant through thm-weil-realization-independence.)",
    "uses": [
     "def-weil-point-counts-zeta",
-    "prop-trace-determinant"
+    "prop-integral-recovery",
+    "def-weil-rational-power-series",
+    "def-weil-rational-function-field"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 1 ('identifies it with the normalized product $Z(X_0,T)=\\prod_iP_i(T)^{(-1)^{i+1}}$. All subsequent manipulations therefore take place in ... $\\mathbf Q(T)$'); the descent from $\\Ql$ to $\\mathbf Q(T)$ is prop-integral-recovery. Milne LEC, Summary 27.14 (a), (b), (d), p. 159: $Z(X_0,t)\\in\\mathbf Q(t)$, $Z=P_1P_3\\cdots P_{2d-1}/P_0P_2\\cdots P_{2d}$ with $P_r\\in1+t\\mathbf Z[t]$ independent of $\\ell$."
+   }
   },
   {
-   "text": "1. **2.** The reciprocity relations in\n[prop-duality-reciprocity] give\n$$\nb_i=b_{2d-i},\\qquad D_iD_{2d-i}=q^{db_i},\\qquad\nP_i(q^{-d}T^{-1})\n=(-1)^{b_i}T^{-b_i}D_{2d-i}^{-1}P_{2d-i}(T),\n$$\nwhere the last equality is the displayed relation with $i$ replaced by\n$2d-i$. Reindexing the product in Step 1 by $i\\mapsto2d-i$, and using\n$(-1)^{2d-i}=(-1)^i$, gives\n$$\n\\begin{aligned}\nZ(X_0,q^{-d}T^{-1})\n&=\\prod_{i=0}^{2d}\n\\left((-1)^{b_i}T^{-b_i}D_{2d-i}^{-1}P_{2d-i}(T)\\right)^{(-1)^{i+1}}\\\\\n&=(-1)^\\chi T^\\chi\n\\left(\\prod_{i=0}^{2d}D_i^{(-1)^i}\\right)Z(X_0,T).\n\\end{aligned}\n$$\nThese same reciprocity relations show that $d\\chi$ is even. This is\nimmediate if $d$ is even. If $d$ is odd, then\n[prop-duality-reciprocity] gives that $b_d$ is even, while pairing\nthe terms indexed by $i$ and $2d-i$ gives\n$$\n\\chi=\n2\\sum_{0\\leq i<d}(-1)^ib_i+(-1)^db_d,\n$$\nwhich is even. Thus the normalized sign in\n[def-weil-functional-equation-sign] is defined.\nThe determinant-constant definition in\n[def-weil-functional-equation-sign] names the product in parentheses\n$\\Delta$, and the same definition gives\n$$\n\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\Delta.\n$$\nThe determinant relation also implies\n$$\n\\Delta^2\n=\\prod_{i=0}^{2d}(D_iD_{2d-i})^{(-1)^i}\n=\\prod_{i=0}^{2d}q^{db_i(-1)^i}\n=q^{d\\chi}.\n$$",
+   "text": "*Step 3: the degreewise reciprocity, as hypotheses of the algebraic lemma.* [prop-duality-reciprocity], applied to $X_0$, the fixed prime $\\ell$ and the $P_i$ of Step 1, states that for every integer $i$ with $0\\leq i\\leq2d$\n\n$$\nb_i=b_{2d-i},\\qquad D_iD_{2d-i}=q^{db_i},\\qquad\nP_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)\n\\quad\\text{in }\\mathbf Q[T,T^{-1}].\n$$\n\nThe Laurent polynomial ring $\\mathbf Q[T,T^{-1}]$ is the subring of $\\mathbf Q(T)$ generated by $\\mathbf Q[T]$ and $T^{-1}$ (the inverse of $T$ in the field $\\mathbf Q(T)$), and $P_{2d-i}(q^{-d}T^{-1})$ is the evaluation of $P_{2d-i}$ at $q^{-d}T^{-1}\\in\\mathbf Q(T)$, that is, $\\sigma(P_{2d-i})$ for the substitution $\\sigma$ of Step 2 [def-weil-rational-function-field]; so the last identity is an identity in $\\mathbf Q(T)$. Put $K=\\mathbf Q$ and $c=q^d\\in\\mathbf Q^\\times$, so that $c^{-1}T^{-1}=q^{-d}T^{-1}$ and $c^{b_i}=q^{db_i}$. The three displayed relations are then exactly hypotheses 1, 2 and 3 of [lem-weil-alternating-product-reciprocity] for the data $(P_i,b_i,D_i)_{0\\leq i\\leq2d}$ of Step 1, which satisfy $P_i\\in\\mathbf Q[T]$, $P_i(0)=1$, $b_i\\in\\mathbf Z_{\\geq0}$ and $D_i\\in\\mathbf Q^\\times$ (Step 1); and the $\\chi$, $\\Delta$ and $Z(T)=\\prod_iP_i(T)^{(-1)^{i+1}}$ of that lemma are the $\\chi$ and $\\Delta$ of Step 1 and the $R_Z$ of Step 2.",
    "uses": [
     "prop-duality-reciprocity",
-    "def-weil-functional-equation-sign"
+    "def-weil-rational-function-field",
+    "lem-weil-alternating-product-reciprocity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 2, first sentence ('The reciprocity relations in [prop-duality-reciprocity] give $b_i=b_{2d-i}$, $D_iD_{2d-i}=q^{db_i}$, ...'). Milne LEC, proof of Theorem 27.12, p. 158 (if $\\alpha_1,\\ldots,\\alpha_s$ are the eigenvalues of $F$ on $H^r$ then $q^d/\\alpha_1,\\ldots,q^d/\\alpha_s$ are those on $H^{2d-r}$); Deligne Weil I, (2.4), p. 281."
+   }
   },
   {
-   "text": "1. **3.** Squaring the preceding normalization and using\n[def-weil-functional-equation-sign] yields\n$$\n\\varepsilon^2\n=(-1)^{2\\chi}q^{-d\\chi}\\Delta^2=1.\n$$\nSince $\\varepsilon\\in\\mathbf Q^\\times$, it follows that\n$\\varepsilon\\in\\{1,-1\\}$.",
+   "text": "*Step 4: the determinant-constant form, and $\\Delta^2=q^{d\\chi}$.* By Step 3, [lem-weil-alternating-product-reciprocity] applies with $K=\\mathbf Q$ and $c=q^d$. Its assertion (b) reads\n\n$$\nZ(X_0,q^{-d}T^{-1})=\\sigma(R_Z)=(-1)^\\chi\\,T^\\chi\\,\\Delta\\,Z(X_0,T)\n=(-1)^\\chi T^\\chi\\left(\\prod_{i=0}^{2d}D_i^{(-1)^i}\\right)Z(X_0,T)\\quad\\text{in }\\mathbf Q(T),\n$$\n\nwhich is the determinant-constant form of the functional equation asserted in the statement. Its assertion (a) reads $\\Delta^2=c^\\chi=(q^d)^\\chi=q^{d\\chi}$ in $\\mathbf Q^\\times$, the first assertion of the statement.",
+   "uses": [
+    "lem-weil-alternating-product-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 2, first display (the reindexed product giving $Z(X_0,q^{-d}T^{-1})=(-1)^\\chi T^\\chi(\\prod_iD_i^{(-1)^i})Z(X_0,T)$) and last display ($\\Delta^2=\\prod_i(D_iD_{2d-i})^{(-1)^i}=q^{d\\chi}$); the computation itself is the new lemma. Milne LEC, Theorem 27.12, p. 158 ('This implies the statement'); Deligne Weil I, (2.6), p. 281 ('On déduit facilement ...')."
+   }
+  },
+  {
+   "text": "*Step 5: parity of $d\\chi$ and the normalized sign.* [prop-weil-functional-equation-parity], applied to $X_0$ and the $P_i$ of Step 1 (its $b_i$ and $\\chi$ are those of Step 1), states that $d\\chi$ is even: $d\\chi=2h$ for an integer $h$. Hence $q^{-d\\chi/2}=q^{-h}$ and $q^{d\\chi/2}=q^{h}$ are elements of $\\mathbf Q^\\times$, and the data $(q,d,(P_i)_{0\\leq i\\leq2d})$ satisfy the hypotheses of [def-weil-functional-equation-sign] ($P_i\\in\\mathbf Z[T]$, $P_i(0)=1$, $d\\chi$ even). That definition computes $b_i$, $D_i$, $\\chi$ and $\\Delta$ by the formulas of Step 1 and defines\n\n$$\n\\varepsilon=(-1)^\\chi q^{-h}\\Delta=(-1)^\\chi q^{-d\\chi/2}\\Delta\\in\\mathbf Q^\\times,\n$$\n\nwhich is the $\\varepsilon$ of the statement: the normalized functional-equation sign.",
+   "uses": [
+    "prop-weil-functional-equation-parity",
+    "def-weil-functional-equation-sign"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 2, from 'These same reciprocity relations show that $d\\chi$ is even' to '$\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\Delta$'; the inline parity argument is replaced by prop-weil-functional-equation-parity (slopmaster2: prop:functional-equation-parity, 01_final_weil_conjectures.tex lines 3486-3494, listed among the uses of prop:functional-equation at line 3526). Deligne Weil I, (2.6), p. 281: 'l'entier $n\\chi(X)$ est donc toujours pair'."
+   }
+  },
+  {
+   "text": "*Step 6: $\\varepsilon^2=1$ and $\\varepsilon\\in\\{1,-1\\}$.* Squaring the formula of Step 5 in $\\mathbf Q^\\times$ and using $2h=d\\chi$ and Step 4(a),\n\n$$\n\\varepsilon^2=(-1)^{2\\chi}\\,q^{-2h}\\,\\Delta^2=1\\cdot q^{-d\\chi}\\cdot q^{d\\chi}=1 .\n$$\n\nSince $\\mathbf Q$ is a field, $0=\\varepsilon^2-1=(\\varepsilon-1)(\\varepsilon+1)$ forces $\\varepsilon=1$ or $\\varepsilon=-1$; so $\\varepsilon\\in\\{1,-1\\}$.",
    "uses": [
     "def-weil-functional-equation-sign"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 3. Milne LEC, Theorem 27.12, p. 158 (the sign $\\pm$); Deligne Weil I, (2.6), p. 281 ($\\varepsilon=\\pm1$)."
+   }
   },
   {
-   "text": "1. **4.** Substituting\n$(-1)^\\chi\\Delta=\\varepsilon q^{d\\chi/2}$ into the product identity of\nStep 2 gives\n$$\nZ(X_0,q^{-d}T^{-1})\n=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T).\n$$\nReplacing $\\Delta$ by its defining product from\n[def-weil-functional-equation-sign] gives equivalently\n$$\nZ(X_0,q^{-d}T^{-1})\n=(-1)^\\chi T^\\chi\n\\left(\\prod_{i=0}^{2d}D_i^{(-1)^i}\\right)Z(X_0,T),\n$$\nwhich proves both asserted forms.",
+   "text": "*Step 7: the sign form.* Multiplying the formula $\\varepsilon=(-1)^\\chi q^{-h}\\Delta$ of Step 5 by $q^{h}$ gives $(-1)^\\chi\\Delta=\\varepsilon\\,q^{h}=\\varepsilon\\,q^{d\\chi/2}$ in $\\mathbf Q^\\times$. Substituting this into the identity of Step 4,\n\n$$\nZ(X_0,q^{-d}T^{-1})=\\varepsilon\\,q^{d\\chi/2}\\,T^\\chi\\,Z(X_0,T)\\quad\\text{in }\\mathbf Q(T),\n$$\n\nwhich is the functional equation in its sign form. Together with Steps 4 and 6 this proves every assertion of the statement: $\\Delta^2=q^{d\\chi}$, $\\varepsilon^2=1$, $\\varepsilon\\in\\{1,-1\\}$, the sign form, and the equivalent determinant-constant form (the two forms differ by the substitution $(-1)^\\chi\\Delta=\\varepsilon q^{d\\chi/2}$ just made, which is invertible, so each implies the other).",
    "uses": [
     "def-weil-functional-equation-sign"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "## Proof, step 4. Milne LEC, Theorem 27.12, p. 158: $Z(X_0,1/q^dt)=\\pm q^{d\\chi/2}t^\\chi Z(X_0,t)$; Deligne Weil I, (2.6), p. 281, the same identity solved for $Z(X_0,t)$."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "prop-integral-recovery",
+  "def-weil-integral-frobenius-factor",
+  "lem-weil-integers-injective-char-zero",
+  "def-weil-coefficientwise-extension",
+  "lem-weil-coefficientwise-extension-injective",
+  "def-weil-betti-numbers",
+  "def-weil-determinant-constants",
+  "lem-weil-leading-coefficient-nonzero",
   "def-weil-point-counts-zeta",
-  "prop-trace-determinant",
+  "def-weil-rational-power-series",
+  "def-weil-rational-function-field",
   "prop-duality-reciprocity",
+  "lem-weil-alternating-product-reciprocity",
+  "prop-weil-functional-equation-parity",
   "def-weil-functional-equation-sign"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
-  "place": "## Proof"
+  "place": "## Proof (the blueprint's four steps, rewritten in seven: the imported step 1 cited prop-trace-determinant for an identity that only prop-integral-recovery gives; the imported step 2 is now Steps 3-5, with the substitution computation isolated as lem-weil-alternating-product-reciprocity and the inline parity argument replaced by prop-weil-functional-equation-parity; the imported steps 3 and 4 are Steps 6 and 7). The slopmaster2 blueprint states the proposition without a proof (01_final_weil_conjectures.tex lines 3523-3551). Human sources of the result, which state it and leave the substitution computation to the reader: literature/milne-lectures-on-etale-cohomology_LEC.pdf, Theorem 27.12 and Remark 27.13, pp. 158-159; literature/deligne-weil-I_PMIHES-1974-43.pdf, (2.4)-(2.6), p. 281."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'weil conjecture\\|hasse.weil\\|zeta function of a variety\\|zeta.*finite field' Mathlib/; grep -rln 'functional equation\\|reciproc' Mathlib/FieldTheory/RatFunc Mathlib/Algebra/Polynomial/Laurent.lean Mathlib/RingTheory/Polynomial  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no zeta function of a variety over a finite field, no Frobenius factors and no functional equation for them"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma sq_eq_one_iff\\|theorem mul_self_eq_one_iff' Mathlib/Algebra/; grep -rn 'lemma Even.neg_one_zpow\\|lemma Even.neg_one_pow' Mathlib/Algebra/; grep -n '^def invert' Mathlib/Algebra/Polynomial/Laurent.lean; grep -n '^def liftAlgHom\\|^def eval' Mathlib/FieldTheory/RatFunc/Basic.lean Mathlib/FieldTheory/RatFunc/AsPolynomial.lean",
+   "results": "sq_eq_one_iff (Algebra/Ring/Commute.lean:176: a^2 = 1 ↔ a = 1 ∨ a = -1, NoZeroDivisors) and mul_self_eq_one_iff (:195) are Step 6; Even.neg_one_pow (Algebra/Ring/Parity.lean:47) and Even.neg_one_zpow (:411) are (-1)^{2χ} = 1; LaurentPolynomial.invert (Algebra/Polynomial/Laurent.lean:579) is T ↦ T⁻¹ on ℚ[T,T⁻¹]; RatFunc.liftAlgHom (FieldTheory/RatFunc/Basic.lean:652) / RatFunc.eval (AsPolynomial.lean:143) are the substitution T ↦ q^{-d}T^{-1} of Steps 2-4",
+   "date": "2026-10-09",
+   "verdict": "generalization: the primitives of Steps 2-7 ($\\mathbf Q(T)$ and its substitution, $\\mathbf Q[T,T^{-1}]\\subset\\mathbf Q(T)$, $x^2=1\\Rightarrow x=\\pm1$ in a field, $(-1)^{2\\chi}=1$), recorded here rather than as leaf nodes; the geometric content has no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -103,5 +209,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-functional-equation",
+  "worker": "stage1",
+  "summary": "Statement kept verbatim: it is the master text, and the slopmaster2 LaTeX (prop:functional-equation, 01_final_weil_conjectures.tex lines 3523-3551, stated for a smooth-proper datum without a proof) asserts the same three things except that it omits the clause Delta^2 = q^{d chi}, which the master statement has and the proof gives; checked against Milne LEC Theorem 27.12 / Remark 27.13 (pp. 158-159) and Deligne Weil I (2.4)-(2.6) (p. 281), and on X_0 = P^1 (b = (1,0,1), D = (1,1,q), chi = 2, Delta = q, Delta^2 = q^2 = q^{d chi}, epsilon = 1, Z(1/(qT)) = qT^2 Z(T)) and on d = 0 (X_0 a point: P_0 = 1 - T, b_0 = 1, D_0 = 1, chi = 1, Delta = 1, epsilon = -1, Z = 1/(1-T), Z(T^{-1}) = -T Z(T)). No Lean on either branch. Proof rewritten in seven steps. What was wrong in the imported proof: step 1 cited prop-trace-determinant for Z(X_0,T) = prod P_i(T)^{(-1)^{i+1}} in Q(T), but that proposition gives the product only with the ell-adic factors P_{i,ell} after coefficient extension to Q_ell[[T]]; the identity with the integral P_i in Q(T) is the factorization clause of prop-integral-recovery (slopmaster2 lists prop:integral-recovery among the uses), now Step 2, and prop-trace-determinant is dropped from the proof. Step 2 of the import proved the parity of d chi inline; that is now the reviewed node prop-weil-functional-equation-parity (Step 5), as the brief says. The substitution computation (reindex i -> 2d-i under T -> q^{-d}T^{-1}, collect (-1)^chi T^chi Delta, and Delta^2 = prod (D_i D_{2d-i})^{(-1)^i} = q^{d chi}) was sketched in two displays with the sign bookkeeping ((-1)^{b_i (-1)^{i+1}} = (-1)^{b_i}, prod (-1)^{b_i} = (-1)^chi) left unsaid; it is pure field algebra, which both Milne ('This implies the statement') and Deligne ('On déduit facilement') leave to the reader, so it is now the new statement node lem-weil-alternating-product-reciprocity over a field K with c in K^x (Steps 3-4 are its hypotheses and its conclusion). Also made explicit: that the statement's P_i (defined by P_i^{(ell)} = P_{i,ell} for the one fixed ell) is the unique factor of prop-integral-recovery (injectivity of Z[T] -> Q_ell[T]), so that prop-duality-reciprocity, the parity proposition and the sign definition apply to it (Step 1); that Z(X_0,T) is read in Q(T) through def-weil-rational-power-series and Z(X_0,q^{-d}T^{-1}) is the substitution automorphism of def-weil-rational-function-field (Step 2); and that the Laurent identity of prop-duality-reciprocity is read in Q(T) (Step 3). stmt_deps rebuilt from the notions the statement names: kept the seven imported ids and added def-weil-global-geometric-frobenius (F on H^i, as def-weil-determinant-constants does), def-weil-reverse-characteristic-polynomial, def-weil-polynomial-ring, def-weil-coefficientwise-extension, def-weil-betti-numbers, def-weil-polynomial-coefficient, def-weil-determinant-constants, lem-weil-leading-coefficient-nonzero (D_i^{-1} and Delta need D_i != 0), prop-weil-functional-equation-parity (epsilon needs d chi even), def-weil-functional-equation-sign, def-weil-point-counts-zeta, def-weil-rational-power-series and def-weil-rational-function-field (the sense of 'in Q(T)' and of Z(X_0,q^{-d}T^{-1})). Mathlib: no match for the node; the field-algebra primitives of the steps are recorded in mathlib_searches."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
