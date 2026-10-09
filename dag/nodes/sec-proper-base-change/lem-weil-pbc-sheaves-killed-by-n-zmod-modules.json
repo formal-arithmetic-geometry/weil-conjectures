@@ -14,9 +14,121 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation and the action as a morphism of sheaves of sets.* Write $\\mathcal O=(\\mathbf Z/n)_T$, $P$ for the constant presheaf of rings $U\\mapsto\\mathbf Z/n$ (all restriction maps the identity) and $\\eta:P\\to\\mathcal O$ for the canonical map, a morphism of presheaves of rings, $\\mathcal O$ being the sheafification of $P$ in sheaves of rings [def-weil-pbc-constant-sheaf], [def-weil-pbc-sheafification]; $\\iota_U(\\bar a)=\\eta_U(\\bar a)$. For a presheaf $Q$ write $|Q|$ for its underlying presheaf of sets. (a) If $G$ is an abelian sheaf, $|G|$ is a sheaf of sets: the sheaf condition of [def-weil-pbc-abelian-etale-sheaves] says that $G(U)\\to\\prod_iG(U_i)\\rightrightarrows\\prod_{i,j}G(U_i\\times_UU_j)$ is an equalizer of abelian groups, and products and equalizers of abelian groups are the products and equalizers of the underlying sets; likewise $|\\mathcal O|$ is a sheaf of sets. (b) Sectionwise finite products of sheaves of sets, such as $|\\mathcal O|^m\\times|G_1|\\times\\dots\\times|G_k|$, are sheaves of sets: the inclusion of sheaves into presheaves preserves finite limits and finite limits of presheaves are computed objectwise [lem-weil-pbc-presheaf-finite-limits-objectwise] (1), (2). (c) By [def-weil-sheaf-of-modules-category] (with [def-weil-pbc-etale-sheaves]: $\\Mod(T_{\\Et},\\mathbf Z/n)$ is the category of sheaves of $\\mathcal O$-modules), a sheaf of $\\mathcal O$-modules $G$ is an abelian sheaf with $\\mathcal O(U)$-module structures on the $G(U)$ extending the addition and compatible with restriction, $(rx)|_V=r|_Vx|_V$; this compatibility says exactly that the action maps $\\mu_{G,U}:\\mathcal O(U)\\times G(U)\\to G(U)$ form a morphism of presheaves of sets $\\mu_G:|\\mathcal O|\\times|G|\\to|G|$. Conversely an abelian sheaf $F$ together with a morphism of presheaves of sets $\\mu:|\\mathcal O|\\times|F|\\to|F|$ such that each $\\mu_U$ is an $\\mathcal O(U)$-module structure on $F(U)$ extending its addition is a sheaf of $\\mathcal O$-modules; and a morphism of abelian sheaves between two sheaves of $\\mathcal O$-modules is a morphism of sheaves of $\\mathcal O$-modules iff each component is $\\mathcal O(U)$-linear [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*Extension and uniqueness along $\\eta$.* Let $m\\ge0$, $G_1,\\dots,G_k$ sheaves of sets on $T_{\\Et}$, and $\\eta^m\\times\\mathrm{id}:P^m\\times G_1\\times\\dots\\times G_k\\to|\\mathcal O|^m\\times G_1\\times\\dots\\times G_k$ (products sectionwise; here $P$ stands for $|P|$). Claim: this map is a sheafification of the presheaf of sets $P^m\\times\\prod_jG_j$; hence for every sheaf of sets $H$, (a) two morphisms of presheaves $\\alpha,\\beta:|\\mathcal O|^m\\times\\prod_jG_j\\to H$ with $\\alpha\\circ(\\eta^m\\times\\mathrm{id})=\\beta\\circ(\\eta^m\\times\\mathrm{id})$ are equal, and (b) every morphism of presheaves $P^m\\times\\prod_jG_j\\to H$ is $\\alpha\\circ(\\eta^m\\times\\mathrm{id})$ for exactly one $\\alpha$. Proof: $|\\eta|:|P|\\to|\\mathcal O|$ is a sheafification of the presheaf of sets $|P|$ [lem-weil-pbc-ring-sheafification-underlying-sets]; for a sheaf of sets $G$, $\\mathrm{id}_G$ is a sheafification of $G$ (every morphism $G\\to H$ to a sheaf factors uniquely through $\\mathrm{id}_G$, which is the universal property of [def-weil-pbc-sheafification]). Sheafification of presheaves of sets commutes with finite products via the projections [lem-weil-pbc-sheafification-sets-exact]: for presheaves $Q_1,\\dots,Q_r$ with sheafifications $u_i:Q_i\\to Q_i^\\#$, the map $(\\mathrm{pr}_1^\\#,\\dots,\\mathrm{pr}_r^\\#):(\\prod Q_i)^\\#\\to\\prod Q_i^\\#$ is an isomorphism, and composed with the unit $u:\\prod Q_i\\to(\\prod Q_i)^\\#$ it equals $\\prod u_i$, since $\\mathrm{pr}_i^\\#\\circ u=u_i\\circ\\mathrm{pr}_i$ (naturality of the unit). Hence $\\prod u_i:\\prod Q_i\\to\\prod Q_i^\\#$ is itself a sheafification. Apply this to $Q_i=|P|$ ($m$ times) and $Q_i=G_j$; the target is a sheaf by step 1 (b). (a) and (b) are the uniqueness and existence in the universal property [def-weil-pbc-sheafification]. (The small etale site is essentially small and sheafification exists on it, as recorded in the Mathlib matches of the cited nodes.)",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 'Sheaves of algebraic structures' (section-sheaves-algebraic-structures), items (alpha), (gamma), (epsilon), (zeta); Section 'Sheafification', Lemma 00WJ (sites-lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "*Constants act by integers in every module sheaf.* Let $G$ be a sheaf of $\\mathcal O$-modules, $U$ an object, $a\\in\\mathbf Z$ and $s\\in G(U)$. Since $\\eta_U:\\mathbf Z/n\\to\\mathcal O(U)$ is a ring homomorphism, $\\eta_U(\\bar a)=a\\cdot1_{\\mathcal O(U)}$, and in the $\\mathcal O(U)$-module $G(U)$ we have $(a\\cdot1)s=as$ [lem-weil-pbc-zmod-module-structure-killed-by-n] (3). So $\\mu_G\\circ(\\eta\\times\\mathrm{id})=\\mu^0_G$, where $\\mu^0_G:P\\times|G|\\to|G|$, $(\\bar a,s)\\mapsto as$. This proves the last assertion of (2) for any module structure.",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*(1).* Let $G$ be a sheaf of $\\mathcal O$-modules and $s\\in G(U)$. By step 3 with $a=n$: $ns=\\eta_U(\\bar n)s=\\eta_U(0)s=0\\cdot s=0$. So $n\\cdot\\mathrm{id}=0$ on $\\mathrm{forget}(G)$, the endomorphism $n\\cdot\\mathrm{id}$ being sectionwise multiplication by $n$.",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*(2), existence.* Let $F$ be an abelian sheaf with $n\\cdot\\mathrm{id}_F=0$, i.e. $ns=0$ for every section. By [lem-weil-pbc-zmod-module-structure-killed-by-n] (1) each $F(U)$ is a $\\mathbf Z/n$-module by $\\bar a\\cdot s=as$, and restriction maps, being additive, commute with integer multiples; so $\\mu^0:P\\times|F|\\to|F|$, $(\\bar a,s)\\mapsto as$, is a morphism of presheaves of sets. By step 2 (b) ($m=1$, $G_1=H=|F|$) there is a unique morphism $\\mu:|\\mathcal O|\\times|F|\\to|F|$ with $\\mu\\circ(\\eta\\times\\mathrm{id})=\\mu^0$. The module axioms hold, each by step 2 (a), comparing two morphisms of presheaves of sets into the sheaf $|F|$ (all are morphisms since the sectionwise addition of $F$ and the sectionwise ring operations of $\\mathcal O$ commute with restriction) after composition with $\\eta^m\\times\\mathrm{id}$, using that $\\eta_U$ is a ring homomorphism and $\\mu(\\eta_U(\\bar a),x)=ax$ for all $x\\in F(U)$: (i) $1_{\\mathcal O(U)}=\\eta_U(\\bar1)$, so $\\mu(1,s)=1s=s$ directly; (ii) $|\\mathcal O|\\times|F|^2\\to|F|$, $(r,s,t)\\mapsto\\mu(r,s+t)$ and $\\mu(r,s)+\\mu(r,t)$: on $(\\bar a,s,t)$ both give $a(s+t)=as+at$; (iii) $|\\mathcal O|^2\\times|F|\\to|F|$, $(r,r',s)\\mapsto\\mu(r+r',s)$ and $\\mu(r,s)+\\mu(r',s)$: on $(\\bar a,\\bar b,s)$, $\\mu(\\eta(\\bar a+\\bar b),s)=(a+b)s=as+bs$; (iv) $(r,r',s)\\mapsto\\mu(rr',s)$ and $\\mu(r,\\mu(r',s))$: on $(\\bar a,\\bar b,s)$, $\\mu(\\eta(\\bar a\\bar b),s)=(ab)s=a(bs)=\\mu(\\eta(\\bar a),\\mu(\\eta(\\bar b),s))$. Hence each $\\mu_U$ is an $\\mathcal O(U)$-module structure on $F(U)$ extending its addition, compatible with restriction ($\\mu$ is a morphism of presheaves), and by step 1 (c) $F$ with $\\mu$ is a sheaf of $\\mathcal O$-modules $\\tilde F$ with $\\mathrm{forget}(\\tilde F)=F$, in which $\\iota_U(\\bar a)$ acts as $a$ ($\\mu\\circ(\\eta\\times\\mathrm{id})=\\mu^0$).",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*(2), uniqueness.* If $\\mu'$ is the action of any structure of sheaf of $\\mathcal O$-modules on $F$ extending its abelian structure, step 3 gives $\\mu'\\circ(\\eta\\times\\mathrm{id})=\\mu^0=\\mu\\circ(\\eta\\times\\mathrm{id})$, both being morphisms $|\\mathcal O|\\times|F|\\to|F|$ of presheaves of sets (step 1 (c)) into the sheaf $|F|$; by step 2 (a) $\\mu'=\\mu$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*(3).* Let $G,G'$ be sheaves of $\\mathcal O$-modules and $\\varphi:\\mathrm{forget}(G)\\to\\mathrm{forget}(G')$ a morphism of abelian sheaves. The maps $\\alpha(r,s)=\\varphi_U(\\mu_G(r,s))$ and $\\beta(r,s)=\\mu_{G'}(r,\\varphi_U(s))$ are morphisms of presheaves of sets $|\\mathcal O|\\times|G|\\to|G'|$ (naturality of $\\varphi$, $\\mu_G$, $\\mu_{G'}$), and $|G'|$ is a sheaf (step 1 (a)). By step 3, $\\alpha(\\eta_U(\\bar a),s)=\\varphi_U(as)$ and $\\beta(\\eta_U(\\bar a),s)=a\\varphi_U(s)$, which are equal since $\\varphi_U$ is additive (it is $\\mathbf Z/n$-linear for the module structures of step 3 by [lem-weil-pbc-zmod-module-structure-killed-by-n] (4)). By step 2 (a), $\\alpha=\\beta$: every $\\varphi_U$ is $\\mathcal O(U)$-linear, so $\\varphi$ is a morphism of sheaves of $\\mathcal O$-modules (step 1 (c)).",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  },
+  {
+   "text": "*Consequences.* $\\mathrm{forget}$ is faithful: a morphism of sheaves of $\\mathcal O$-modules is a morphism of abelian sheaves with a property [def-weil-sheaf-of-modules-category], and $\\mathrm{forget}$ is the identity on morphisms. It is full by (3). Its image: $\\mathrm{forget}(G)$ is killed by $n$ by (1); conversely an abelian sheaf $F$ killed by $n$ equals $\\mathrm{forget}(\\tilde F)$ by (2); and being killed by $n$ is invariant under isomorphism of abelian sheaves ($\\varphi\\circ n\\,\\mathrm{id}=n\\,\\mathrm{id}\\circ\\varphi$, $\\varphi$ additive), so the essential image is the full subcategory of abelian sheaves killed by $n$. Finally an isomorphism $\\varphi$ of abelian sheaves between $\\mathrm{forget}(G)$ and $\\mathrm{forget}(G')$ and its inverse are both $\\mathcal O$-linear by (3), so $\\varphi$ is an isomorphism of sheaves of $\\mathcal O$-modules.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "agent-written; the fact is used without comment in the proof of Theorem 03SC and in Definition 03RW (2), (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-zmod-module-structure-killed-by-n"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks is silent: the identification is used without comment in Definition 03RW (2), (3) and the proof of Theorem 03SC; the sheaf-theoretic tools follow sites.tex, Section 'Sheaves of algebraic structures' and Lemma 00WJ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +157,17 @@
    "results": "uses only in Mathlib/LinearAlgebra/FreeModule/ModN.lean and Mathlib/Algebra/Module/Torsion/Basic.lean (torsionBy.zmodModule); ZMod in CategoryTheory/Algebra/Category only in Grp/Injective, Grp/Subobject, Grp/Abelian, AlgCat/TensorAlgebra: nothing on sheaves",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules over constant sheaf ZMod n equivalent to sheaves of abelian groups killed by n",
+   "results": "SheafOfModules, SheafOfModules.mk, SheafOfModules.toSheaf, SheafOfModules.toSheaf_obj_val (Mathlib.Algebra.Category.ModuleCat.Sheaf), AddCommGroup.zmodModule, AddCommMonoid.zmodModule (Mathlib.Algebra.Module.ZMod), AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-09",
+   "verdict": "no match for the sheaf statement; group-level ingredients recorded as the leaf lem-weil-pbc-zmod-module-structure-killed-by-n. For stage 2: the existence in (2) is in reach of PresheafOfModules.sheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification) applied to the presheaf of modules F over the constant presheaf of rings, with alpha the unit of sheafification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +188,17 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "worker": "stage1",
+  "summary": "Statement kept. Proof written in 8 steps (agent-written, Stacks silent): the action of a sheaf of (Z/n)_T-modules is a morphism of sheaves of sets O x G -> G; the key tool (step 2) is that eta^m x id : P^m x prod G_j -> O^m x prod G_j is a sheafification of presheaves of sets (ring sheafification computed on underlying sets, new Mathlib leaf lem-weil-pbc-ring-sheafification-underlying-sets, plus lem-weil-pbc-sheafification-sets-exact for finite products), so morphisms into a sheaf of sets out of O^m x prod G_j are determined by, and extend uniquely from, P^m x prod G_j. Existence (2) extends the constant action abar.s = a s and checks the module axioms on constants; uniqueness (2) and linearity (3) compare two maps on constants. This replaces the brief's local-sections argument (local surjectivity plus separation) by the universal property, which needs no description of the sections of (Z/n)_T. Group-level facts are the new Mathlib leaf lem-weil-pbc-zmod-module-structure-killed-by-n (AddCommGroup.zmodModule, ZMod.instSubsingletonModule, Int.cast_smul_eq_zsmul, ZMod.map_smul). Source repository: no declaration compares sheaves of ModuleCat (ULift (ZMod r)) with abelian sheaves killed by r (it uses sheafCompose (forget2 ...) only, e.g. AlgebraicGeometry/Curve/Reductions.lean:154), and it does not use SheafOfModules over a constant sheaf."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Eight steps on the universal property of sheafification with finite products: the action as a morphism of sheaves of sets; eta^m x id is a sheafification (new Mathlib leaf lem-weil-pbc-ring-sheafification-underlying-sets: sheafifyComposeIso PreservesSheafification.lean:233 with the forget instance :305 and constantCommuteCompose ConstantSheaf.lean:184, verified; with lem-weil-pbc-sheafification-sets-exact); constants act by integers (new Mathlib leaf lem-weil-pbc-zmod-module-structure-killed-by-n: AddCommGroup.zmodModule ZMod.lean:44, ZMod.instSubsingletonModule Basic.lean:1308, Int.cast_smul_eq_zsmul NatInt.lean:173, ZMod.map_smul ZMod.lean:63, verified); (1); (2) existence by extension along eta and the axioms checked on constants; uniqueness; (3) linearity; consequences. Route differs from the brief (no node on the sections of (Z/n)_T exists); essential smallness of T_et noted against the set-of-objects hypothesis of the sheafification-sets-exact leaf."
+ }
 }

@@ -1,0 +1,77 @@
+{
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-zmod-module-structure-killed-by-n",
+ "kind": "statement",
+ "title": "An abelian group killed by n is uniquely a Z/n-module; additive maps are Z/n-linear",
+ "statement": "Let $n\\ge1$ be an integer. (1) Every abelian group $A$ with $nx=0$ for all $x\\in A$ carries a structure of $\\mathbf Z/n$-module extending its addition, given by $\\bar a\\cdot x=ax$ for any integer $a$ lifting $\\bar a\\in\\mathbf Z/n$ (well defined since $nA=0$). (2) An abelian group carries at most one $\\mathbf Z/n$-module structure extending its addition. (3) In any module $M$ over any ring $R$, the image $a\\cdot1_R$ of an integer $a$ acts as the integer multiple: $(a\\cdot1_R)x=ax$ for $x\\in M$. (4) Every additive map $f:M\\to M'$ between $\\mathbf Z/n$-modules is $\\mathbf Z/n$-linear: $f(\\bar a x)=\\bar a f(x)$.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "elementary algebra, used without comment in the proof of Theorem 03SC (passing between abelian sheaves killed by n and sheaves of Z/n-modules); not stated in Stacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "abelian group in which n x = 0 for all x has a unique ZMod n module structure",
+   "results": "AddCommGroup.zmodModule, AddCommMonoid.zmodModule, QuotientAddGroup.zmodModule (Mathlib.Algebra.Module.ZMod); ZMod.instSubsingletonModule (Mathlib.Data.ZMod.Basic); AddCommGroup.uniqueIntModule (Mathlib.Algebra.Module.NatInt)",
+   "date": "2026-10-09",
+   "verdict": "match: AddCommGroup.zmodModule for (1), ZMod.instSubsingletonModule for (2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Module (ZMod _) _)",
+   "results": "ZMod.instSubsingletonModule (Mathlib.Data.ZMod.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match for (2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every additive group homomorphism between ZMod n modules is ZMod n linear",
+   "results": "AddMonoidHom.toZModLinearMap, ZMod.map_smul, AddCommGroup.zmodModule (Mathlib.Algebra.Module.ZMod) (query of the creating item, repeated in substance here)",
+   "date": "2026-10-09",
+   "verdict": "match: ZMod.map_smul for (4)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'zmodModule\\|theorem map_smul\\|instSubsingletonModule\\|lemma Int.cast_smul_eq_zsmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/ZMod.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/ZMod/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/NatInt.lean",
+   "results": "AddCommGroup.zmodModule (Algebra/Module/ZMod.lean:44, abbrev, hypothesis ∀ x, n • x = 0, action c • x = c.val • x for n ≠ 0); ZMod.map_smul (Algebra/Module/ZMod.lean:63: f (c • x) = c • f x for f an AddMonoidHomClass); ZMod.instSubsingletonModule (Data/ZMod/Basic.lean:1308); Int.cast_smul_eq_zsmul (Algebra/Module/NatInt.lean:173: ((n : R) • b) = n • b)",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AddCommGroup.zmodModule",
+  "file": "Mathlib/Algebra/Module/ZMod.lean",
+  "how": "a few Mathlib lemmas applied one per clause: (1) AddCommGroup.zmodModule (Algebra/Module/ZMod.lean:44; its action is c • x = c.val • x, and for a lift a of c the equality c • x = a • x follows from (3) with R = ZMod n since c = (a : ZMod n)); (2) ZMod.instSubsingletonModule (Mathlib/Data/ZMod/Basic.lean:1308); (3) Int.cast_smul_eq_zsmul (Mathlib/Algebra/Module/NatInt.lean:173); (4) ZMod.map_smul (Algebra/Module/ZMod.lean:63), or AddMonoidHom.toZModLinearMap"
+ },
+ "status": "mathlib",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified, one declaration per clause (AddCommGroup.zmodModule, ZMod.instSubsingletonModule, Int.cast_smul_eq_zsmul, ZMod.map_smul)."
+ }
+}

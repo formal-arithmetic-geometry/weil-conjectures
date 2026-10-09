@@ -1,0 +1,81 @@
+{
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-ring-sheafification-underlying-sets",
+ "kind": "statement",
+ "title": "Sheafification of a presheaf of rings has as underlying sheaf of sets the sheafification of sets",
+ "statement": "Let $T$ be a scheme, $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $P$ a presheaf of commutative rings (or of rings) on $T_{\\Et}$, and $\\eta:P\\to P^\\#$ its sheafification in sheaves of (commutative) rings [def-weil-pbc-sheafification]. Write $|-|$ for the underlying presheaf of sets. Then $|P^\\#|$ is a sheaf of sets and $|\\eta|:|P|\\to|P^\\#|$ is a sheafification of the presheaf of sets $|P|$: every morphism of presheaves of sets from $|P|$ to a sheaf of sets $H$ factors uniquely through $|\\eta|$. In particular, for a ring $R$, the constant sheaf of rings $\\underline R$ [def-weil-pbc-constant-sheaf] has as underlying sheaf of sets, with the canonical map from the constant presheaf $U\\mapsto R$, the constant sheaf of sets on the underlying set of $R$.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 'Sheaves of algebraic structures' (section-sheaves-algebraic-structures), items (alpha) to (gamma): for a type of algebraic structure (A, s) (rings, with s the underlying set), a presheaf is a sheaf iff its underlying presheaf of sets is, F^# = (F^+)^+ is computed on underlying sets, and sheafification commutes with s (the commutative square (gamma))"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "underlying presheaf of sets of the sheafification of a presheaf of rings is the sheafification of the underlying presheaf of sets",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification), CategoryTheory.toSheafify (Sites.Sheafification), TopCat.Presheaf.sheafify",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (module case only); the general form found by Loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafifyComposeIso",
+   "results": "CategoryTheory.sheafifyComposeIso : sheafify J (P ⋙ F) ≅ sheafify J P ⋙ F under [J.HasSheafCompose F] [J.PreservesSheafification F]; sheafComposeIso_hom_fac : toSheafify J (P ⋙ F) ≫ (sheafifyComposeIso J F P).hom = whiskerRight (toSheafify J P) F; constantCommuteCompose_hom_app_hom (Mathlib.CategoryTheory.Sites.PreservesSheafification, Sites.ConstantSheaf)",
+   "date": "2026-10-09",
+   "verdict": "match (generalization: any F preserving sheafification; F = forget CommRingCat)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from rings to types commutes with sheafification: sheafify (P ⋙ forget) ≅ sheafify P ⋙ forget",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.toPresheaf_map_toSheafify, PresheafOfModules.sheafification",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (module versions)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafifyComposeIso\\|PreservesSheafification J (forget\\|hasSheafCompose_of_preservesLimitsOfSize' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "PreservesSheafification.lean:233 sheafifyComposeIso, :239 sheafComposeIso_hom_fac, :305-312 instance PreservesSheafification J (forget D) for D concrete with forget preserving limits and the colimits over covers and reflecting isomorphisms (CommRingCat, RingCat: Algebra/Category/Ring/Limits.lean, FilteredColimits.lean:309,363); Whiskering.lean:143,161 HasSheafCompose instances; ConstantSheaf.lean:184 constantCommuteCompose",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafifyComposeIso",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "how": "specializes in one line: sheafifyComposeIso J (forget CommRingCat) P (line 233) with sheafComposeIso_hom_fac (line 239) for the compatibility with the units; instances PreservesSheafification J (forget D) (line 305) and HasSheafCompose (Sites/Whiskering.lean:161); for the constant sheaf, constantCommuteCompose J (forget CommRingCat) (Sites/ConstantSheaf.lean:184) with constantCommuteCompose_hom_app_hom. J = T.smallEtaleTopology; that the instances resolve at the universes of the source repository is to be confirmed in stage 2."
+ },
+ "status": "mathlib",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: sheafifyComposeIso with the PreservesSheafification instance for forget, constantCommuteCompose for the constant sheaf."
+ }
+}
