@@ -498,3 +498,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:32 UTC (2026-10-09) — Reviewed and committed descend-closed-immersion (01ZP; 1 new node for 07RH; E1 had released the claim at 21:28 with reason 'no valid split was delivered', L claimed it in queue order). Stage-3 note: the affine reduction (steps 2-5) is duplicated across the descend-* items.
 - 21:35 UTC (2026-10-09) — Reviewed and committed flat-unramified-formally-etale (04FF; 9 new nodes: 4 Mathlib leaves incl. the formally-unramified definition, 5 unsplit on universal first order thickenings and conormal sheaves).
 - 21:35 UTC (2026-10-09) — Reviewed and committed formal-completion-fully-faithful-proper (0883; 3 new unsplit nodes: 01CQ, 0882, 087U). Launched a worker on g-ring-quotient (07PP(3)).
+- 21:36 UTC (2026-10-09) — Reviewed and committed formal-systems-pullback (0887; 1 new unsplit node).
