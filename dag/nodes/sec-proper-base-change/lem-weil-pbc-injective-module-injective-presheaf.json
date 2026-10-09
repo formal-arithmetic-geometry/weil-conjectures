@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-injective-module-injective-presheaf",
+ "kind": "statement",
+ "title": "An injective module sheaf is injective among presheaves of modules",
+ "statement": "Let $X$ be a scheme, $R$ a commutative ring, $R_X$ the constant sheaf of rings on the small etale site $X_{\\Et}$, and $\\Mod(X_{\\Et},R)$ the category of sheaves of $R_X$-modules [def-weil-pbc-etale-sheaves]; let $\\mathrm{PMod}(R_X)$ be the category of presheaves of $R_X$-modules on $X_{\\Et}$ [def-weil-presheaf-modules-sheafification]. If $I$ is an injective object of $\\Mod(X_{\\Et},R)$ [def-sp-injective-resolutions], then $I$, regarded as a presheaf of $R_X$-modules, is an injective object of $\\mathrm{PMod}(R_X)$. (Stacks states this for any ringed site.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FB (lemma-injective-module-injective-presheaf), proof: Homology, Lemma Tag 015Z (homology-lemma-adjoint-preserve-injectives) applied to the inclusion Mod(O) -> PMod(O) and its exact left adjoint, sheafification (Modules on Sites, Section Tag 03CX)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective object in the category of sheaves of modules is injective as presheaf of modules",
+   "results": "Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, SheafOfModules.forget (Algebra.Category.ModuleCat.Sheaf), PresheafOfModules.injective_of_mono, Sheaf.mono_of_injective: no direct statement",
+   "date": "2026-10-09",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification of presheaves of modules preserves monomorphisms, so the inclusion of sheaves of modules preserves injective objects",
+   "results": "PresheafOfModules.sheafification, sheafification_map, sheafify, toSheafify (ModuleCat.Presheaf.Sheafification / Sheafify), Sheaf.Hom.mono_of_presheaf_mono",
+   "date": "2026-10-09",
+   "verdict": "ingredients found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an injective object of sheaves of modules is injective in presheaves of modules since sheafification is exact left adjoint",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.injective_of_mono, mono_of_injective, SheafOfModules.instAbelian",
+   "date": "2026-10-09",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'preservesInjectiveObjects_of_adjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean; sed -n 120,195p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; grep -n 'restrictScalars (𝟙' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; grep -n preservesMonomorphisms_of_preservesLimitsOfShape ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean",
+   "results": "Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Preserves.lean:49); PresheafOfModules.sheafificationAdjunction α : sheafification α ⊣ SheafOfModules.forget R ⋙ restrictScalars α (Sheafification.lean:126); instance PreservesFiniteLimits (sheafification α) (Sheafification.lean:190); restrictScalars (𝟙 R) is 𝟭 by definition (ChangeOfRings.lean:63, inferInstanceAs (𝟭 _)); preservesMonomorphisms_of_preservesLimitsOfShape (EpiMono.lean:40); IsLocallyInjective/IsLocallySurjective of an iso (Sites/LocallyInjective.lean:89, LocallySurjective.lean:338)",
+   "date": "2026-10-09",
+   "verdict": "match (a few Mathlib lemmas applied)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean",
+  "how": "specializes in one line: apply it to adj := PresheafOfModules.sheafificationAdjunction (𝟙 R_X.val) (Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean), whose left adjoint preserves monomorphisms by the instance PreservesFiniteLimits (sheafification α) and preservesMonomorphisms_of_preservesLimitsOfShape, and whose right adjoint SheafOfModules.forget R_X ⋙ restrictScalars (𝟙 _) is SheafOfModules.forget R_X (restrictScalars (𝟙 R) is the identity functor by definition); the instances IsLocallyInjective/IsLocallySurjective for 𝟙 come from the iso instances, and HasSheafify/WEqualsLocallyBijective for AddCommGrpCat on the etale site are the standing instances of the formalized Mod(X_et,R)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-module-abelian-acyclic",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

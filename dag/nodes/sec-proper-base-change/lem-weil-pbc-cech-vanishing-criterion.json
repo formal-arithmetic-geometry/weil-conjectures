@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-cech-vanishing-criterion",
+ "kind": "statement",
+ "title": "Vanishing Cech cohomology on a cofinal system of coverings gives vanishing cohomology",
+ "statement": "Let $X$ be a scheme and $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site]. Let $\\mathcal B\\subset\\Ob(X_{\\Et})$ be a set of objects and $\\mathrm{Cov}$ a set of coverings of $X_{\\Et}$, and let $\\mathcal F\\in\\Ab(X_{\\Et})$ be an abelian sheaf [def-weil-pbc-abelian-etale-sheaves]. For an object $U$ let $H^p(U,-)$ be the $p$-th right derived functor of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive]. Assume: (1) for every $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ in $\\mathrm{Cov}$, the objects $U$, $U_i$ and all $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ lie in $\\mathcal B$; (2) for every $U\\in\\mathcal B$ the coverings of $U$ occurring in $\\mathrm{Cov}$ form a cofinal system of coverings of $U$ (every covering of $U$ in $X_{\\Et}$ is refined by one in $\\mathrm{Cov}$, i.e. each member of the latter factors over $U$ through some member of the former); (3) for every $\\mathcal U\\in\\mathrm{Cov}$ the Cech cohomology [def-weil-pbc-cech-complex] satisfies $\\check H^p(\\mathcal U,\\mathcal F)=0$ for all $p>0$. Then $H^p(U,\\mathcal F)=0$ for all $p>0$ and all $U\\in\\mathcal B$. (Stacks states this for any site; no finiteness of coverings is assumed. With $\\mathcal B=\\Ob(X_{\\Et})$ and $\\mathrm{Cov}$ all coverings, (1) and (2) hold automatically.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection) and its proof (embedding into an injective abelian sheaf, Lemma Tag 03AW (lemma-injective-trivial-cech), Lemma Tag 03F8 (lemma-ses-cech-h1), dimension shifting); variant of Cohomology, Lemma 01EV (cohomology-lemma-cech-vanish)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf with vanishing Cech cohomology for all coverings has vanishing sheaf cohomology",
+   "results": "CategoryTheory.Sheaf.H (Sites.SheafCohomology.Basic), Presheaf.IsSheaf, TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing, Presieve.isSheaf_coverage, SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech criterion: if an abelian sheaf has trivial higher Cech cohomology for every covering then its higher sheaf cohomology vanishes",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, Sheaf.instAddCommGroupH, Sheaf.cohomologyPresheafFunctor, MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, CochainComplex.IsKInjective",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "only the definition itself (Mathlib.CategoryTheory.Sites.SheafCohomology.Cech); no lemma relates it to Sheaf.H or Sheaf.H'",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cechComplexFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n '^theorem\\|^lemma\\|^instance\\|^abbrev\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean",
+   "results": "cechComplexFunctor used in no other file; SheafCohomology/Basic.lean has H, H', cohomologyPresheaf, Subsingleton (H F (n+1)) for injective F (line 97); MayerVietoris.lean has the two-term Mayer-Vietoris sequence; no Cech-to-cohomology comparison. (The source repository has a Cech criterion only for topological spaces, WeilConjectures/Topology/Sheaves/CechCriterion.lean, and a sorry'd Cech-to-derived spectral sequence for sites, WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean:72, neither used here.)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-module-abelian-acyclic",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
