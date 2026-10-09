@@ -116,7 +116,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}}
 
 section FundamentalClass
 
-variable {c : ℕ} {i : Z ⟶ X}
+variable [Finite Λ] {c : ℕ} {i : Z ⟶ X}
 
 /-- The *class of a frame* `(e : U ⟶ X, f₁, …, f_c)` of `Z`:
 
