@@ -16,35 +16,38 @@
   "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-truncation-triangle",
   "def-weil-derived-cohomology-sheaves",
-  "def-sp-exact-couple"
+  "def-sp-exact-couple",
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof": [
   {
-   "text": "**Step 1 (the image triangles are distinguished).** $T_q$ is a distinguished triangle of $D(X_{\\Et})$ with terms in $\\Dplus(X_{\\Et})$ [lem-weil-pbc-truncation-triangle]. The functors $g^{-1}$ and $g'^{-1}$ are triangulated with the identity as shift isomorphism, being induced by the exact sheaf functors applied termwise [def-weil-pbc-derived-inverse-image], [lem-sf-exact-functor-derived-triangulated]; $Rf_*$ and $Rf'_*$ are triangulated with shift isomorphism $\\sigma$ [lem-weil-pbc-derived-direct-image-triangulated]. A composite of triangulated functors, with the composite shift isomorphism, is triangulated (if $GT$ is distinguished with third map $\\sigma^G\\circ G(w)$, then $HGT$ has third map $H(\\sigma^G)$-composed, $\\sigma^H_{G}\\circ H(\\sigma^G)\\circ HG(w)$, which is the composite shift isomorphism applied to $HG(w)$). Hence for $F\\in\\{\\Phi,\\Psi\\}$ the triangle $F(T_q)=(F\\tau_{\\leq q-1}K,F\\tau_{\\leq q}K,F(\\mathcal H^q(K)[-q]),Fi_q,Fj_q,c_{F}\\circ Fk_q)$ is distinguished in $\\Dplus(Y'_{\\Et})$.",
+   "text": "**Step 1 (the image triangles are distinguished).** $T_q$ is a distinguished triangle of $D(X_{\\Et})$ whose three terms lie in $\\Dplus(X_{\\Et})$ [lem-weil-pbc-truncation-triangle] (bounded below because $K$ is), hence a distinguished triangle of the full triangulated subcategory $\\Dplus(X_{\\Et})$. The inverse images $g^{-1}$, $g'^{-1}$ on $\\Dplus$ are the restrictions of the functors induced by the exact sheaf functors $g^{-1}$, $g'^{-1}$ [prop-weil-pbc-inverse-image-exact] applied termwise [def-weil-pbc-derived-inverse-image], which are triangulated with the identity $u^{-1}(M[1])=(u^{-1}M)[1]$ as shift isomorphism [lem-sf-exact-functor-derived-triangulated]; $Rf_*$ and $Rf'_*$ are triangulated with shift isomorphism $\\sigma$ [lem-weil-pbc-derived-direct-image-triangulated]. A composite of triangulated functors, with the composite shift isomorphism $\\psi_{FX}\\circ G(\\varphi_X)$, is triangulated [lem-weil-pbc-triangulated-functor-composite]; for $\\Phi=g^{-1}\\circ Rf_*$ the composite isomorphism is $\\mathrm{id}\\circ g^{-1}(\\sigma_L)=g^{-1}(\\sigma_L)=\\xi_L$, for $\\Psi=Rf'_*\\circ g'^{-1}$ it is $\\sigma_{g'^{-1}L}\\circ Rf'_*(\\mathrm{id})=\\zeta_L$, the isomorphisms of the statement. Hence for $F\\in\\{\\Phi,\\Psi\\}$ the triangle $F(T_q)=(F\\tau_{\\leq q-1}K,F\\tau_{\\leq q}K,F(\\mathcal H^q(K)[-q]),Fi_q,Fj_q,c_{F,\\tau_{\\leq q-1}K}\\circ Fk_q)$ is distinguished in $\\Dplus(Y'_{\\Et})$, so in $D(Y'_{\\Et})$.",
    "uses": [
     "lem-weil-pbc-truncation-triangle",
+    "prop-weil-pbc-inverse-image-exact",
     "def-weil-pbc-derived-inverse-image",
     "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-triangulated-category"
+    "lem-weil-pbc-triangulated-functor-composite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076) and Proposition 05SE (proposition-derived-functor, line 4895)"
+    "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076), Proposition 05SE (proposition-derived-functor, line 4895) and Lemma 014Y (lemma-composition-exact, line 939)"
    }
   },
   {
-   "text": "**Step 2 (claim (1): exact couples).** Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the distinguished triangle $F(T_q)$ of Step 1: with $n=p+q$ it reads\n$$\n \\cdots\\to\\mathcal H^{n}(F\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^n(Fi_q)}\\mathcal H^n(F\\tau_{\\leq q}K)\\xrightarrow{\\mathcal H^n(Fj_q)}\\mathcal H^n(F(\\mathcal H^q(K)[-q]))\\xrightarrow{\\delta^n}\\mathcal H^{n+1}(F\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^{n+1}(Fi_q)}\\cdots,\n$$\nwhere the connecting map $\\delta^n$ is $\\mathcal H^n$ of the third map $c_F\\circ Fk_q$ followed by $\\mathcal H^n(M[1])=\\mathcal H^{n+1}(M)$. In the notation of the statement these maps are $\\alpha_F:D_F^{p+1,q-1}\\to D_F^{p,q}$, $g_F:D_F^{p,q}\\to E_F^{p,q}$, $f_F:E_F^{p,q}\\to D_F^{p+2,q-1}$ and $\\alpha_F:D_F^{p+2,q-1}\\to D_F^{p+1,q}$. Consecutive composites vanish and exactness at the three spots is exactly $\\ker\\alpha=\\operatorname{im}f$, $\\ker f=\\operatorname{im}g$, $\\ker g=\\operatorname{im}\\alpha$ of [def-sp-exact-couple] in bidegree $(p,q)$ (the first one read at $D^{p+2,q-1}$ after renaming). As $p,q$ are arbitrary, both couples are exact couples. (This is the argument of [lem-sp-truncation-couple-exact] with $Rv$ replaced by the triangulated functor $F$.)",
+   "text": "**Step 2 (claim (1): exact couples).** Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the distinguished triangle $F(T_q)$ of Step 1. Its connecting map $\\delta^n$ is $\\mathcal H^n$ of the third map $c_F\\circ Fk_q$ followed by the identification $\\mathcal H^n(M[1])=\\mathcal H^{n+1}(M)$ (same cycles and boundaries; the sign $d_{M[1]}=-d_M$ is irrelevant) [lem-weil-pbc-derived-cohomology-ladder] (Stacks 0148: the map $H^0(Z)\\to H^1(X)$ is $H(h)$, no signs; Mathlib `DerivedCategory.HomologySequence.δ T n₀ n₁ := (homologyFunctor C 0).shiftMap T.mor₃ n₀ n₁`, whose shift identification is the identity on the middle term of the short complex, `CochainComplex.shiftShortComplexFunctor'`). With $n=p+q$ the sequence reads\n$$\n \\cdots\\to\\mathcal H^{n}(F\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^n(Fi_q)}\\mathcal H^n(F\\tau_{\\leq q}K)\\xrightarrow{\\mathcal H^n(Fj_q)}\\mathcal H^n(F(\\mathcal H^q(K)[-q]))\\xrightarrow{\\delta^n}\\mathcal H^{n+1}(F\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^{n+1}(Fi_q)}\\mathcal H^{n+1}(F\\tau_{\\leq q}K)\\to\\cdots\n$$\nIn the notation of the statement its terms are $D_F^{p+1,q-1}$, $D_F^{p,q}$, $E_F^{p,q}$, $D_F^{p+2,q-1}$, $D_F^{p+1,q}$ (since $(p+1)+(q-1)=n$, $(p+2)+(q-1)=n+1$), and its maps are $\\alpha_F=\\mathcal H^{(p+1)+(q-1)}(Fi_{(q-1)+1}):D_F^{p+1,q-1}\\to D_F^{p,q}$, $g_F:D_F^{p,q}\\to E_F^{p,q}$, $f_F=\\delta^n:E_F^{p,q}\\to D_F^{p+2,q-1}$ and $\\alpha_F=\\mathcal H^{(p+2)+(q-1)}(Fi_q):D_F^{p+2,q-1}\\to D_F^{p+1,q}$. Exactness at $D_F^{p,q}$ and at $E_F^{p,q}$ is $\\ker g=\\operatorname{im}\\alpha$ and $\\ker f=\\operatorname{im}g$ of [def-sp-exact-couple] in bidegree $(p,q)$; exactness at $D_F^{p+2,q-1}$ is $\\ker\\alpha=\\operatorname{im}f$ in bidegree $(p+2,q-1)$, so, $(p,q)$ being arbitrary, $\\ker(\\alpha:D^{p,q}\\to D^{p-1,q+1})=\\operatorname{im}(f:E^{p-2,q+1}\\to D^{p,q})$ holds in every bidegree (read from the sequence of $T_{q+1}$ at $n=p+q$). Exactness gives the vanishing of consecutive composites. Hence both couples are exact couples. (The same argument, with $Rv$ in place of $F$, is Step 3-4 of [lem-sp-truncation-couple-exact], split separately.)",
    "uses": [
     "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
     "def-sp-exact-couple",
     "def-weil-derived-cohomology-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 011Q (definition-exact-couple, line 5289) for the exact couple; the long exact sequence of a distinguished triangle under a homological functor: literature/stacks-project/derived.tex, Definition 0147 (definition-homological, line 261) and the paragraph after it (line 277)"
+    "place": "Definition 011Q (definition-exact-couple, line 5289) in Section 12.21 (011P, section-exact-couple, line 5286); the long exact sequence of a distinguished triangle: literature/stacks-project/derived.tex, Definition 0147 (definition-homological, line 261) and equation 0148 (equation-long-exact-cohomology-sequence, line 282)"
    }
   },
   {
@@ -61,23 +64,25 @@
    }
   },
   {
-   "text": "**Step 4 (claim (2): a morphism of exact couples).** Apply $\\mathcal H^{p+q}$ to the three squares of Step 3. The first square for $T_{q+1}$ gives $t_D^{p-1,q+1}\\circ\\alpha_\\Phi=\\alpha_\\Psi\\circ t_D^{p,q}$; the second for $T_q$ gives $t_E^{p,q}\\circ g_\\Phi=g_\\Psi\\circ t_D^{p,q}$; the third, together with the naturality of the identification $\\mathcal H^{n}(M[1])=\\mathcal H^{n+1}(M)$ (which carries $\\mathcal H^n(a[1])$ to $\\mathcal H^{n+1}(a)$), gives $t_D^{p+2,q-1}\\circ f_\\Phi=f_\\Psi\\circ t_E^{p,q}$. These are the three compatibilities of a morphism of exact couples. (Equivalently: the connecting maps of the long exact sequences of Step 2 are natural for morphisms of triangles, Mathlib `Functor.homologySequenceδ_naturality`.)",
+   "text": "**Step 4 (claim (2): a morphism of exact couples).** By Step 1, $\\Phi(T_q)$ and $\\Psi(T_q)$ are distinguished, and by Step 3 the exchange maps form a morphism of triangles between them. By [lem-weil-pbc-derived-cohomology-ladder] its $\\mathcal H^n$ commute with the maps of the two long exact sequences of Step 2, the connecting maps included: in degree $n=p+q$, with the sequence of $T_{q+1}$ for the first identity, $t_D^{p-1,q+1}\\circ\\alpha_\\Phi=\\alpha_\\Psi\\circ t_D^{p,q}$ on $D^{p,q}$ (from $\\Psi i_{q+1}\\circ\\Ex_{\\tau_{\\leq q}K}=\\Ex_{\\tau_{\\leq q+1}K}\\circ\\Phi i_{q+1}$; $t_D^{p-1,q+1}=\\mathcal H^{p+q}(\\Ex_{\\tau_{\\leq q+1}K})$), $t_E^{p,q}\\circ g_\\Phi=g_\\Psi\\circ t_D^{p,q}$, and $\\mathcal H^{n+1}(\\Ex_{\\tau_{\\leq q-1}K})\\circ\\delta^n_\\Phi=\\delta^n_\\Psi\\circ\\mathcal H^n(\\Ex_{\\mathcal H^q(K)[-q]})$, i.e. $t_D^{p+2,q-1}\\circ f_\\Phi=f_\\Psi\\circ t_E^{p,q}$ since $t_D^{p+2,q-1}=\\mathcal H^{p+q+1}(\\Ex_{\\tau_{\\leq q-1}K})$. These are the three conditions of a morphism of exact couples (Stacks 011Q (2), read bidegree by bidegree). (Directly: apply $\\mathcal H^{p+q}$ to the three squares of Step 3 and use $\\mathcal H^n(a[1])=\\mathcal H^{n+1}(a)$ under the identification of Step 2.)",
    "uses": [
+    "lem-weil-pbc-derived-cohomology-ladder",
     "def-sp-exact-couple",
     "def-weil-derived-cohomology-sheaves"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Section 12.21 (exact couples, Definition 011Q); the morphism is that of Lemma 0DDE's spectral sequences, etale-cohomology.tex line 18708"
+    "place": "Definition 011Q (2) (definition-exact-couple, line 5289); the morphism is that of the spectral sequences in the proof of Lemma 0DDE, etale-cohomology.tex line 18708"
    }
   },
   {
-   "text": "**Step 5 (claim (3): the first graded component).** Let $M=\\mathcal H^q(K)$, a sheaf placed in degree $0$. By [lem-weil-pbc-derived-exchange-triangulated] (1) with $n=-q$, $\\zeta^{(-q)}_M\\circ\\Ex_{\\square,M[-q]}=\\Ex_{\\square,M}[-q]\\circ\\xi^{(-q)}_M$. Applying $\\mathcal H^{p+q}$ and the identity $\\mathcal H^{p+q}(L[-q])=\\mathcal H^p(L)$ (natural in $L$), $t_E^{p,q}$ corresponds to $\\mathcal H^p(\\Ex_{\\square,M}):\\mathcal H^p(g^{-1}Rf_*M)\\to\\mathcal H^p(Rf'_*g'^{-1}M)$. Finally $\\mathcal H^p(g^{-1}Rf_*M)=g^{-1}\\mathcal H^p(Rf_*M)=g^{-1}R^pf_*M$, because $g^{-1}$ on $\\Dplus$ is the exact sheaf functor applied termwise [def-weil-pbc-derived-inverse-image], [prop-weil-pbc-inverse-image-exact] and an exact functor commutes with the cohomology of a complex, and $\\mathcal H^p(Rf'_*g'^{-1}M)=R^pf'_*(g'^{-1}M)$ by the definition of $R^pf'_*$ [def-weil-pbc-direct-image]. So $t_E^{p,q}$ is the degree-$p$ exchange map $g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$ of the sheaf $\\mathcal H^q(K)$, the map of Stacks' $E_2$-pages.",
+   "text": "**Step 5 (claim (3): the first graded component).** Let $M=\\mathcal H^q(K)$, a sheaf placed in degree $0$. By [lem-weil-pbc-derived-exchange-triangulated] (1) with $n=-q$ (whose $\\xi^{(n)},\\zeta^{(n)}$ are the iterates used in the statement), $\\zeta^{(-q)}_M\\circ\\Ex_{\\square,M[-q]}=\\Ex_{\\square,M}[-q]\\circ\\xi^{(-q)}_M$. Apply $\\mathcal H^{p+q}$ and the identification $\\mathcal H^{p+q}(L[-q])=\\mathcal H^p(L)$ ($q$-fold iterate of that of Step 2, natural in $L$, so $\\mathcal H^{p+q}(a[-q])=\\mathcal H^p(a)$): under the isomorphisms $E_\\Phi^{p,q}\\cong\\mathcal H^p(\\Phi M)$ and $E_\\Psi^{p,q}\\cong\\mathcal H^p(\\Psi M)$ of the statement, $t_E^{p,q}$ becomes $\\mathcal H^p(\\Ex_{\\square,M}):\\mathcal H^p(g^{-1}Rf_*M)\\to\\mathcal H^p(Rf'_*g'^{-1}M)$. Finally $\\mathcal H^p(g^{-1}Rf_*M)\\cong g^{-1}\\mathcal H^p(Rf_*M)=g^{-1}R^pf_*M$ by the natural isomorphism $H^p(u^{-1}L)\\cong u^{-1}H^p(L)$ for the exact functor $g^{-1}$ [prop-weil-pbc-inverse-image-exact] applied termwise [def-weil-pbc-derived-inverse-image], [lem-weil-pbc-exact-functor-bounded-below], and $\\mathcal H^p(Rf'_*g'^{-1}M)=R^pf'_*(g'^{-1}M)$ by the definition of $R^pf'_*$ [def-weil-pbc-direct-image]. So $t_E^{p,q}$ is the degree-$p$ exchange map $\\mathcal H^p(\\Ex_{\\square,\\mathcal H^q(K)}):g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$, the map of Stacks' $E_2$-pages.",
    "uses": [
     "lem-weil-pbc-derived-exchange-triangulated",
     "def-weil-pbc-derived-inverse-image",
     "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
     "def-weil-pbc-direct-image",
     "def-weil-derived-cohomology-sheaves"
    ],
@@ -90,23 +95,25 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-truncation-triangle",
+  "prop-weil-pbc-inverse-image-exact",
   "def-weil-pbc-derived-inverse-image",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-derived-direct-image-triangulated",
-  "def-weil-triangulated-category",
+  "lem-weil-pbc-triangulated-functor-composite",
   "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
   "def-sp-exact-couple",
   "def-weil-derived-cohomology-sheaves",
   "lem-weil-pbc-derived-exchange-triangulated",
   "def-weil-pbc-derived-exchange",
   "def-weil-pbc-triangles-with-shift",
-  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0DDE (line 18708), proof ('some details omitted'); the steps are written by an agent, following the truncation couple of the spectral-sequence chapter (lem-sp-truncation-couple-exact)"
+  "place": "Lemma 0DDE (line 18708), proof ('Some details omitted'); the steps are written by an agent from the truncation triangle (derived.tex Remark 08J5), the long exact sequence of a triangle (derived.tex 0147/0148) and the exact couples of homology.tex Section 12.21 (011P, Definition 011Q)"
  },
  "mathlib_searches": [
   {
@@ -150,10 +157,38 @@
    "results": "no file mentions exact couples; SpectralObject/{{Basic,Cycles,Differentials,EpiMono,FirstPage,HasSpectralSequence,Homology,Page,SpectralSequence}}, SpectralSequence/{{Basic,ComplexShape}}",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural transformation commuting with shift between triangulated functors induces morphism of homology long exact sequences of image triangles",
+   "results": "Functor.homologySequenceδ_naturality(_assoc) (Mathlib.CategoryTheory.Triangulated.HomologicalFunctor), Triangle.functorHomMk (…Triangulated.Basic), ShortComplex.homologyMap_mapNatTrans, NatTrans.CommShift (…Shift.CommShift)",
+   "date": "2026-10-09",
+   "verdict": "no match for the statement (no exact couples); tools of Steps 2 and 4 only (connecting-map naturality, already the leaf lem-weil-pbc-derived-cohomology-ladder)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.mapTriangle",
+   "results": "Functor.mapTriangleIso and its _hom_app_hom₁/₂/₃, _inv_app_hom₁/₂/₃ (Mathlib.CategoryTheory.Triangulated.Functor): only for a natural isomorphism e with NatTrans.CommShift e.hom",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the morphism of image triangles only for an isomorphism of functors, not for a morphism (Step 3 rests on the DAG node lem-weil-pbc-derived-exchange-triangulated); no exact couples"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of two triangulated functors is a triangulated functor",
+   "results": "Functor.IsTriangulated.instComp, isTriangulated_of_precomp, isTriangulated_iff_comp_right, isTriangulated_of_precomp_iso (Mathlib.CategoryTheory.Triangulated.Functor)",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; match for the new node lem-weil-pbc-triangulated-functor-composite used in Step 1"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def δ\\|shiftMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; grep -n 'negOnePow\\|def shiftShortComplexFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+   "results": "HomologySequence.δ (HomologySequence.lean:152) := (homologyFunctor C 0).shiftMap T.mor₃ n₀ n₁; shiftShortComplexFunctor' (ShiftSequence.lean:44) is the identity on the middle object, signs n.negOnePow only on the outer ones, so H^n(M[1]) ≅ H^{n+1}(M) is the identity on cycles mod boundaries",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; confirms that f_F is Mathlib's connecting map without sign"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -174,5 +209,16 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-truncation-couple-morphism",
+  "worker": "stage1",
+  "summary": "Statement kept (indexing checked against def-sp-exact-couple, def-weil-pbc-truncation-exact-couples, lemma-weil-pbc-exact-couple-abutment and lem-weil-pbc-exact-couple-differential: D^{p,q}=H^{p+q}(F tau_{<=q}K), E^{p,q}=H^{p+q}(F(H^q(K)[-q])), alpha via i_{q+1}, f via c_F o Fk_q of bidegree (+2,-1), t_D, t_E the H^{p+q} of the exchange maps: all agree); lem-weil-pbc-exact-functor-bounded-below added to stmt_deps (it gives the identification H^p o g^{-1} = g^{-1} o H^p named in claim (3)). Proof checked step by step; five steps kept, citations corrected. Step 1: the composite of triangulated functors was argued inline and cited def-weil-triangulated-category; now the new Mathlib leaf lem-weil-pbc-triangulated-functor-composite (Stacks 014Y, Functor.IsTriangulated.instComp), with the check that the composite shift isomorphisms are xi and zeta; the exactness of g^{-1} (prop-weil-pbc-inverse-image-exact, hypothesis of lem-sf-exact-functor-derived-triangulated) added. Step 2: lem-sf-derived-homology-long-exact states only that some connecting maps exist; that they are H^n of the third map followed by H^n(M[1])=H^{n+1}(M), which makes f_F the connecting map, is now cited from lem-weil-pbc-derived-cohomology-ladder (and Stacks 0148, Mathlib HomologySequence.delta, no sign); the bidegree bookkeeping written out. Step 4: was marked elementary with no lemma for the connecting square; now cites lem-weil-pbc-derived-cohomology-ladder (elementary false). Step 5: the inline 'an exact functor commutes with cohomology' replaced by lem-weil-pbc-exact-functor-bounded-below. Comparison: lem-weil-pbc-exact-couple-differential proves claims (1)-(3) in its Steps 1, 2-3 and 5; its Step 1 proves exactness differently (Phi-couple as g^{-1} of the truncation couple of Rf_* via lem-sp-truncation-couple-exact and exactness of g^{-1}; Psi-couple as the truncation couple of g'^{-1}K, using that g'^{-1} commutes with canonical truncation), whereas Step 2 here applies the long exact sequence to the distinguished triangles F(T_q) uniformly; its Steps 2-3 and 5 are the same as Steps 3-4 and 5 here. Not duplicated further; the differential node could cite this lemma for (1) and (3) (left to the lead). Mathlib: no exact couples; three kinds of search recorded (leansearch, loogle, leanfinder, grep). One new node (Mathlib leaf)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

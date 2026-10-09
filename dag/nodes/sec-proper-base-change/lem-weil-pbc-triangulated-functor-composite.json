@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-triangulated-functor-composite",
+ "kind": "statement",
+ "title": "A composite of triangulated functors, with the composite shift isomorphism, is triangulated",
+ "statement": "Let $\\mathcal D,\\mathcal D',\\mathcal D''$ be pre-triangulated categories [def-weil-triangulated-category] with shifts $[1]$, and let $(F,\\varphi):\\mathcal D\\to\\mathcal D'$ and $(G,\\psi):\\mathcal D'\\to\\mathcal D''$ be triangulated (exact) functors, $\\varphi_X:F(X[1])\\xrightarrow{\\sim}F(X)[1]$ and $\\psi_Y:G(Y[1])\\xrightarrow{\\sim}G(Y)[1]$ their natural shift-commutation isomorphisms. Equip $G\\circ F$ with the composite isomorphism\n$$\n \\chi_X=\\psi_{F X}\\circ G(\\varphi_X):\\ GF(X[1])\\xrightarrow{\\sim}GF(X)[1],\n$$\nnatural in $X$. Then $(G\\circ F,\\chi)$ is triangulated: for every distinguished triangle $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1]$ of $\\mathcal D$, the triangle $GFX\\xrightarrow{GFu}GFY\\xrightarrow{GFv}GFZ\\xrightarrow{\\chi_X\\circ GF(w)}GF(X)[1]$ is distinguished in $\\mathcal D''$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 014Y (lemma-composition-exact, line 939), proof 'Omitted'; the composite shift isomorphism is the one implicit in Definition 014V (definition-exact-functor-triangulated-categories)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composite of two triangulated functors is triangulated with composite shift isomorphism",
+   "results": "CategoryTheory.Functor.IsTriangulated.instComp (Mathlib.CategoryTheory.Triangulated.Functor), Functor.IsTriangulated, isTriangulated_of_precomp, isTriangulated_of_iso",
+   "date": "2026-10-09",
+   "verdict": "match: Functor.IsTriangulated.instComp"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of two triangulated functors is a triangulated functor",
+   "results": "CategoryTheory.Functor.IsTriangulated.instComp, Functor.isTriangulated_of_precomp, isTriangulated_iff_comp_right, isTriangulated_of_precomp_iso (Mathlib.CategoryTheory.Triangulated.Functor), Equivalence.IsTriangulated.trans, Adjunction.IsTriangulated.comp (…Triangulated.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "match: Functor.IsTriangulated.instComp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance.*IsTriangulated\\|def mapTriangleCompIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean; sed -n 195,225p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "results": "Functor.lean:244 `instance [F.IsTriangulated] [G.IsTriangulated] : (F ⋙ G).IsTriangulated` (proved via mapTriangleCompIso, line 159, whose components are identities); CommShift.lean:200 `instance comp : (F ⋙ G).CommShift A`, with `commShiftIso_comp_hom_app` (line 222): the composite shift iso at X is `G.map ((F.commShiftIso a).hom.app X) ≫ (G.commShiftIso a).hom.app (F.obj X)`, i.e. $\\psi_{FX}\\circ G(\\varphi_X)$; Functor.mapTriangle (line 42) has third map `F.map T.mor₃ ≫ (F.commShiftIso 1).hom.app T.obj₁`",
+   "date": "2026-10-09",
+   "verdict": "match: exact, with the composite CommShift instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.IsTriangulated.instComp",
+  "file": "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+  "how": "exact: the instance `(F ⋙ G).IsTriangulated` (line 244) for `[F.IsTriangulated] [G.IsTriangulated]`, where `F ⋙ G` carries the composite shift structure `Functor.CommShift.comp` (Mathlib/CategoryTheory/Shift/CommShift.lean:200; `commShiftIso_comp_hom_app` gives $\\chi_X=\\psi_{FX}\\circ G(\\varphi_X)$) and the image triangle is `Functor.mapTriangle` (third map `F.map T.mor₃ ≫ (F.commShiftIso 1).hom.app T.obj₁`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-couple-morphism",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
