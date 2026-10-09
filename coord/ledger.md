@@ -429,3 +429,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:27 UTC (2026-10-09) — Reviewed and committed smooth-section-etale-lift (07M7; 10 steps, 11 new nodes: 4 Mathlib leaves incl. the definition of smooth ring maps, 7 unsplit incl. the identification of smooth ring maps with def-sbc-smooth-morphisms, 01V6/02H6).
 - 20:28 UTC (2026-10-09) — Reviewed and committed affine-tilde-tensor (01I8(1), node created by E1; 7 steps, 2 new nodes; tool use lem-weil-pbc-module-stalk-tensor recorded).
 - 20:29 UTC (2026-10-09) — Reviewed and committed module-support-proper-over-base (0CYS; 5 steps, 3 new unsplit nodes for 056J, 05JU, 01QY).
+- 20:33 UTC (2026-10-09) — Reviewed and committed algebra-directed-colimit-finite-type (05JT, no new nodes), def-weil-pbc-sets-extension-by-empty (definition split; 00A3 node created) and site-filtered-colimit-sections-finite-coverings (0738(4) by a shorter argument through finite limits; 1 Mathlib leaf).
