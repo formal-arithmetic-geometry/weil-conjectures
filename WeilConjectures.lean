@@ -390,6 +390,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
