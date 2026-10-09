@@ -1,14 +1,13 @@
 # Work queue
 
-562 items; claim with `tools/claim.py next <group> [--stage N]`.
+561 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (558)
+## Stage 1: nodes to split (557)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-truncation-triangle` | 2 | none |
 | `prop-weil-pbc-inverse-image-exact` | 2 | none |
-| `thm-sp-truncation-e2` | 2 | none |
 | `lem-sp-derived-couple-exact` | 3 | none |
 | `def-weil-pbc-scheme-conventions` | 1001 | none |
 | `def-weil-pbc-torsion-etale-sheaf` | 1001 | none |
@@ -574,7 +573,7 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 572 nodes that wait for stage 1, 32 nodes that wait for a statement dependency.
+Not open yet: 571 nodes that wait for stage 1, 33 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-complex-ses-triangle",
+ "kind": "statement",
+ "title": "A short exact sequence of complexes gives a distinguished triangle in D(A), functorially",
+ "statement": "Let $\\mathcal A$ be an abelian category with derived category $D(\\mathcal A)$ and localization functor $Q$ from cochain complexes [def-weil-abstract-derived-category], a triangulated category [def-weil-triangulated-category]. For every short exact sequence of cochain complexes $0\\to X_1\\xrightarrow{f}X_2\\xrightarrow{g}X_3\\to0$ (degreewise short exact) there is a morphism $\\delta:X_3\\to X_1[1]$ in $D(\\mathcal A)$ such that $X_1\\xrightarrow{Q(f)}X_2\\xrightarrow{Q(g)}X_3\\xrightarrow{\\delta}X_1[1]$ is a distinguished triangle of $D(\\mathcal A)$; and $\\delta$ is natural: for a morphism $(u_1,u_2,u_3)$ of short exact sequences of complexes, $(Q(u_1),Q(u_2),Q(u_3))$ is a morphism of the corresponding triangles, i.e. $Q(u_1)[1]\\circ\\delta=\\delta'\\circ Q(u_3)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0152 (lemma-derived-canonical-delta-functor): Comp(A) -> D(A) is a delta-functor, with delta = -p o q^{-1}; the triangle of a short exact sequence is distinguished and functorial"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "distinguished triangle truncLE (n-1) K → truncLE n K → single homology n K in degree n in the derived category",
+   "results": "DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSES_distinguished (Algebra.Homology.DerivedCategory.ShortExact); ShortComplex.ShortExact.singleTriangle(_distinguished) (DerivedCategory.SingleTriangle); TStructure.triangleLTGE_distinguished",
+   "date": "2026-10-09",
+   "verdict": "match: DerivedCategory.triangleOfSES_distinguished"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES.map",
+   "results": "DerivedCategory.triangleOfSES.map : triangleOfSES h₁ ⟶ triangleOfSES h₂ for f : S₁ ⟶ S₂, with map_hom₁/₂/₃ = Q.map f.τ₁/τ₂/τ₃ (Algebra.Homology.DerivedCategory.ShortExact)",
+   "date": "2026-10-09",
+   "verdict": "match (naturality clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical truncation τ≤q-1 K → τ≤q K → H^q(K)[-q] distinguished triangle derived category of abelian category",
+   "results": "DerivedCategory.triangleOfSESδ, DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSES_distinguished (DerivedCategory.ShortExact); CochainComplex.shortComplexTruncLE(_shortExact); ShortExact.singleTriangle",
+   "date": "2026-10-09",
+   "verdict": "match: triangleOfSES_distinguished"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 30,125p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+   "results": "triangleOfSESδ (line 38), triangleOfSESδ_naturality (:56), triangleOfSES := Triangle.mk (Q.map S.f) (Q.map S.g) (triangleOfSESδ hS) (:74), triangleOfSES_distinguished (:96), triangleOfSES.map (:109) with hom_i = Q.map f.τ_i",
+   "date": "2026-10-09",
+   "verdict": "match, types read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.triangleOfSES_distinguished",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+  "how": "exact, one lemma per clause: for `S : ShortComplex (CochainComplex C ℤ)` with `hS : S.ShortExact`, `triangleOfSES hS = Triangle.mk (Q.map S.f) (Q.map S.g) (triangleOfSESδ hS)` is distinguished (`triangleOfSES_distinguished`, line 96); naturality is `DerivedCategory.triangleOfSES.map` (line 109, a morphism of triangles with components `Q.map f.τ₁`, `Q.map f.τ₂`, `Q.map f.τ₃`) or `triangleOfSESδ_naturality` (line 56)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-triangle",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

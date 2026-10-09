@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-truncation-descends",
+ "kind": "statement",
+ "title": "Canonical truncations and H^q(-)[-q] descend to functors on D(A), with i_q, j_q natural",
+ "statement": "Let $\\mathcal A$ be an abelian category with derived category $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category], and for $q\\in\\mathbf Z$ let $\\tau_{\\leq q}$ be the canonical truncation of complexes ($(\\tau_{\\leq q}K)^r=K^r$ for $r<q$, $\\Ker d^q_K$ for $r=q$, $0$ for $r>q$), a functor on cochain complexes, $H^q(-)[-q]$ the functor $K\\mapsto$ (the complex with $H^q(K)$ in degree $q$, $0$ elsewhere), $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$ the inclusion and $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ the projection $\\Ker d^q\\to H^q$ in degree $q$, natural transformations of functors on complexes. Then: (a) if $s:K\\to L$ is a quasi-isomorphism, so are $\\tau_{\\leq q}s$ (indeed $H^r(\\tau_{\\leq q}K)=H^r(K)$ for $r\\le q$ and $0$ for $r>q$, naturally) and $H^q(s)[-q]$; (b) hence there are functors $\\tau_{\\leq q},\\ H^q(-)[-q]:D(\\mathcal A)\\to D(\\mathcal A)$, unique up to unique isomorphism, with $\\tau_{\\leq q}\\circ Q=Q\\circ\\tau_{\\leq q}$ and $H^q(-)[-q]\\circ Q=Q\\circ H^q(-)[-q]$, and unique natural transformations $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$, $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ of functors on $D(\\mathcal A)$ whose composites with $Q$ are $Q(i_q)$, $Q(j_q)$. In particular a morphism $f:K\\to L$ of $D(\\mathcal A)$ between complexes $K,L$ gives morphisms $\\tau_{\\leq q}f$, $\\tau_{\\leq q-1}f$, $H^q(f)[-q]$ with $\\tau_{\\leq q}f\\circ i_q=i_q\\circ\\tau_{\\leq q-1}f$ and $H^q(f)[-q]\\circ j_q=j_q\\circ\\tau_{\\leq q}f$, and these are the images under $Q$ of the morphisms of complexes when $f=Q(\\phi)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076, 'canonical truncation functors'); the descent to D(A) by the universal property of the localization, Definition 05RU / Section 05RR; homology.tex Section 0118 (the cohomology of tau_{<=n}, line 3612ff.)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncation truncLE of cochain complexes sends quasi-isomorphisms to quasi-isomorphisms, induced functor on derived category",
+   "results": "CochainComplex.quasiIso_truncLEMap_iff (Embedding.CochainComplex: QuasiIso (truncLEMap φ n) ↔ ∀ i ≤ n, QuasiIsoAt φ i); HomologicalComplex.quasiIso_truncLEMap_iff (Embedding.TruncLEHomology); quasiIso_ιTruncLE_iff; DerivedCategory.instIsIsoMapCochainComplexIntQ; ComplexShape.Embedding.truncLEFunctor",
+   "date": "2026-10-09",
+   "verdict": "clause (a) for tau_{<=q} is CochainComplex.quasiIso_truncLEMap_iff; no descended truncation functor on DerivedCategory compatible with Q"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical truncation functor τ≤n on the derived category induced from truncation of cochain complexes, Q.obj (K.truncLE n) isomorphic to t.truncLE n (Q.obj K)",
+   "results": "ComplexShape.Embedding.truncLEFunctor, truncGEFunctor, truncLE'Functor (+ _obj lemmas) (Algebra.Homology.Embedding.TruncLE/TruncGE)",
+   "date": "2026-10-09",
+   "verdict": "no match (functors on complexes only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'truncLE\\|ιTruncLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; grep -n 'def lift \\|def liftNatTrans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "results": "only TStructure.lean:68,121 (truncLE used to prove the t-structure axioms of DerivedCategory.TStructure.t) and Fractions.lean:78-149 (truncLEMap of a quasi-isomorphism); Localization.lift (Predicate.lean:304), Localization.liftNatTrans (:326)",
+   "date": "2026-10-09",
+   "verdict": "no match as a statement; the ingredients are CochainComplex.quasiIso_truncLEMap_iff and Localization.lift / liftNatTrans (with Lifting instances), which give it in several lines, not one"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-triangle",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-triangle-morphism-extension",
+ "kind": "statement",
+ "title": "Extending a morphism of the middle terms to distinguished triangles; uniqueness when Hom(X[1],Z')=0",
+ "statement": "Let $\\mathcal T$ be a pre-triangulated category [def-weil-triangulated-category] and let $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{d}X[1]$ and $X'\\xrightarrow{u'}Y'\\xrightarrow{v'}Z'\\xrightarrow{d'}X'[1]$ be distinguished triangles, and $g:Y\\to Y'$ a morphism. (1) The following are equivalent: (a) $v'gu=0$; (b) there is $f:X\\to X'$ with $u'f=gu$; (b') there is $h:Z\\to Z'$ with $hv=v'g$; (c) there are $f,h$ such that $(f,g,h)$ is a morphism of triangles. (2) If moreover $\\Hom_{\\mathcal T}(X[1],Z')=0$, then the $f$ of (b) and the $h$ of (b') are unique; consequently, for any $f$ with $u'f=gu$ and any $h$ with $hv=v'g$, $(f,g,h)$ is a morphism of triangles, i.e. also $d'h=f[1]d$. (3) In particular, if $\\Hom_{\\mathcal T}(X[1],Z)=0$, then $d$ is the unique morphism $x:Z\\to X[1]$ such that $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{x}X[1]$ is distinguished.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Beilinson-Bernstein-Deligne, Faisceaux pervers, Proposition 1.1.9 and Corollaire 1.1.10 (ii), p. 23 (pdf page 24); cf. literature/stacks-project/derived.tex Lemma 0149 (lemma-representable-homological, line 386) for the exactness of Hom(W,-) and Hom(-,W) used in the proof"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of third morphism of distinguished triangle when Hom(X[1], Z) = 0 pretriangulated",
+   "results": "Pretriangulated.TriangleMorphism.mk.noConfusion, distinguished_cocone_triangle₂, Triangle.epi₃, distinguished_cocone_triangle, Triangle.mor₁_eq_zero_iff_epi₃, Triangle.mono₁, Triangle.epi₂ (CategoryTheory.Triangulated.Pretriangulated)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two distinguished triangles with the same first two morphisms; if every morphism X[1] → Z is zero then the third morphisms coincide",
+   "results": "Triangulated.TStructure.triangle_map_ext (TStructure.TruncLTGE: two morphisms of distinguished triangles with the same hom₂ are equal when T.obj₁ <= a and T'.obj₃ >= b for a t-structure); Triangle.hom_ext; complete_distinguished_triangle_morphism(₁,₂); TriangleMorphism.ext",
+   "date": "2026-10-09",
+   "verdict": "no match: triangle_map_ext (TruncLTGE.lean:52) and triangle_map_exists (:71) are the t-structure analogues that a morphism of distinguished triangles is determined by hom₂; they do not state that a given h with h v = v' g completes a morphism of triangles, nor the uniqueness of the third arrow d"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mor₃ = \\|hom₃ = \\|exists_unique\\|∃!' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/*.lean; sed -n 45,95p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "results": "Triangle.coyoneda_exact₃ (Pretriangulated.lean:271), coyoneda_exact₂, mor₃_eq_zero_iff_epi₂; TStructure.triangle_map_ext, triangle_map_exists, triangle_iso_exists (TruncLTGE.lean:52-94)",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredients coyoneda_exact₂/₃ and complete_distinguished_triangle_morphism are there; BBD 1.1.9 itself is not)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-triangle",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

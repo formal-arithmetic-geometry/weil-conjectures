@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-truncation-step-ses",
+ "kind": "statement",
+ "title": "The step tau_{<=q-1}K -> tau_{<=q}K of canonical truncations: short exact sequence and quasi-isomorphism of the cokernel to H^q(K)[-q]",
+ "statement": "Let $\\mathcal A$ be an abelian category and $K$ a cochain complex of $\\mathcal A$ with differentials $d^r:K^r\\to K^{r+1}$ and cohomology $H^r(K)=\\Ker d^r/\\Im d^{r-1}$ [def-weil-abstract-derived-category]. For $q\\in\\mathbf Z$ let $\\tau_{\\leq q}K$ be the subcomplex $\\cdots\\to K^{q-2}\\to K^{q-1}\\to\\Ker(d^q)\\to0\\to\\cdots$ of $K$ (so $(\\tau_{\\leq q}K)^r=K^r$ for $r<q$, $=\\Ker d^q$ for $r=q$, $=0$ for $r>q$), and let $H^q(K)[-q]$ be the complex with $H^q(K)$ in degree $q$ and $0$ elsewhere. Then:\n(a) $\\tau_{\\leq q-1}K$ is a subcomplex of $\\tau_{\\leq q}K$; the inclusion $i_q$ is a monomorphism of complexes, and its cokernel $M_q(K)=\\tau_{\\leq q}K/\\tau_{\\leq q-1}K$ (formed degreewise) is the complex with $M_q(K)^{q-1}=K^{q-1}/\\Ker d^{q-1}$, $M_q(K)^q=\\Ker d^q$, differential $M_q(K)^{q-1}\\to M_q(K)^q$ induced by $d^{q-1}$, and $0$ in all other degrees; thus $0\\to\\tau_{\\leq q-1}K\\xrightarrow{i_q}\\tau_{\\leq q}K\\xrightarrow{p_q}M_q(K)\\to0$ is a short exact sequence of complexes ($p_q$ the quotient map).\n(b) The morphism of complexes $j_q:\\tau_{\\leq q}K\\to H^q(K)[-q]$ that is the projection $\\Ker d^q\\to H^q(K)$ in degree $q$ and $0$ elsewhere factors uniquely as $j_q=\\bar j_q\\circ p_q$, and $\\bar j_q:M_q(K)\\to H^q(K)[-q]$ (the projection $\\Ker d^q\\to H^q(K)$ in degree $q$) is a quasi-isomorphism: $H^{q-1}(M_q(K))=0$ because $K^{q-1}/\\Ker d^{q-1}\\to\\Ker d^q$ is a monomorphism, and $H^q(\\bar j_q)$ is the identity of $\\Ker d^q/\\Im d^{q-1}=H^q(K)$.\n(c) Everything is natural in $K$: a morphism of complexes $f:K\\to L$ restricts to morphisms $\\tau_{\\leq q}f$, $\\tau_{\\leq q-1}f$, induces $M_q(f)$, and $(\\tau_{\\leq q-1}f,\\tau_{\\leq q}f,M_q(f))$ is a morphism of short exact sequences with $H^q(f)[-q]\\circ\\bar j_q=\\bar j_q\\circ M_q(f)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076: 'in a similar way' the triangle tau_{<=a}K -> tau_{<=a+1}K -> H^{a+1}(K)[-a-1] from the short exact sequence of truncations and the quasi-isomorphism of the quotient); canonical truncations: literature/stacks-project/homology.tex, Section 0118 (section-truncations, line 3612)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cokernel of inclusion truncLE (n-1) K → truncLE n K is quasi-isomorphic to the homology of K in degree n placed in degree n",
+   "results": "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_ιTruncLE_iff (Algebra.Homology.Embedding.CochainComplex); HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE (Embedding.AreComplementary); HomologicalComplex.quasiIsoAt_ιTruncLE (Embedding.TruncLEHomology); homologyIsCokernel",
+   "date": "2026-10-09",
+   "verdict": "no match: the short exact sequence 0 -> truncLE n K -> K -> X3 -> 0 and the quasi-isomorphism X3 -> truncGE (n+1) K are there for the inclusion into K, not the step tau_{<=q-1} -> tau_{<=q} with cokernel quasi-isomorphic to the single complex H^q(K)[-q]"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of complexes 0 → τ≤(n-1) K → τ≤n K → quotient → 0 with quotient quasi-isomorphic to H^n(K)[-n]",
+   "results": "CochainComplex.shortComplexTruncLE_shortExact (Embedding.CochainComplex); CochainComplex.mappingCone.quasiIso_descShortComplex; DerivedCategory.HomologySequence.exact₁/₂/₃",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredient: shortComplexTruncLE_shortExact applied to tau_{<=q}K with n=q-1 gives a short exact sequence whose first term is truncLE (q-1) (truncLE q K), only isomorphic to tau_{<=q-1}K, and whose third term is not identified with the single complex)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'truncLE.*truncLE\\|natTransTruncLE\\|truncLEMap.*single\\|single.*truncLE\\|exists_iso_single' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/*.lean; grep -n 'shortComplexTruncLE\\|shortComplexTruncLEX₃ToTruncGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/CochainComplex.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+   "results": "CochainComplex.shortComplexTruncLE (CochainComplex.lean:446), shortComplexTruncLE_shortExact (:450), shortComplexTruncLEX₃ToTruncGE (:458, quasi-isomorphism by AreComplementary.lean instance), truncLEMap/truncLEMap_comp (TruncLE.lean:134-143); no comparison truncLE (q-1) K -> truncLE q K, no cokernel identification with a single complex",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-triangle",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
