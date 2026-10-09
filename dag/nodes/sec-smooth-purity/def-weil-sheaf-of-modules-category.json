@@ -1,0 +1,47 @@
+{
+ "id": "def-weil-sheaf-of-modules-category",
+ "kind": "definition",
+ "title": "Category of sheaves of modules over a sheaf of rings",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of rings on $\\mathcal C$. A *sheaf of $\\mathcal O$-modules* is a sheaf of abelian groups $\\mathcal F$ on $\\mathcal C$ together with, for every object $U$, an $\\mathcal O(U)$-module structure on $\\mathcal F(U)$ (extending its abelian group structure) such that every restriction map $\\mathcal F(U)\\to\\mathcal F(V)$ along $V\\to U$ is semilinear over the restriction $\\mathcal O(U)\\to\\mathcal O(V)$: $(a x)|_V=a|_V\\,x|_V$. A morphism of sheaves of $\\mathcal O$-modules $\\mathcal F\\to\\mathcal G$ is a morphism of sheaves of abelian groups whose component at every $U$ is $\\mathcal O(U)$-linear. These form a category $\\Mod(\\mathcal O)$, which is abelian when the site is small relative to the universe of the modules (or essentially so): kernels are computed sectionwise, and cokernels are the sheafifications of the sectionwise cokernels.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Section 'Sheaves of modules' (Tag 03CV), Definition sites-modules-definition-sheaf-modules; Lemma sites-modules-lemma-abelian (Tag 03DA): Mod(O) is abelian and the forgetful functor to abelian sheaves is exact"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+   "results": "`structure SheafOfModules (R : Sheaf J RingCat)` (Sheaf.lean:33: a `PresheafOfModules R.obj` whose underlying presheaf of abelian groups is a sheaf), its category instance (Sheaf.lean, `SheafOfModules.Hom`: morphisms of underlying presheaves of modules), and `instance : Abelian (SheafOfModules.{v} R)` (Sheaf/Abelian.lean:40, under `[HasSheafify J AddCommGrpCat.{v}] [J.WEqualsLocallyBijective AddCommGrpCat.{v}]`)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SheafOfModules",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
+  "how": "exact: `SheafOfModules.{v} R` for `R : Sheaf J RingCat` (line 33) with its category structure; abelian by the instance `SheafOfModules.instAbelian` in Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40, which needs sheafification of abelian-group presheaves (`HasSheafify J AddCommGrpCat.{v}`); for the pro-étale site of `X : Scheme.{u}` take `v = u + 1` as `Scheme.ellAdicSheaf`'s file does with `EssentiallySmall.{u+1} X.ProEt`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-completed-integral-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
