@@ -2,18 +2,83 @@
  "id": "lem-weil-pbc-pushforward-coherent-on-open",
  "kind": "statement",
  "title": "Pushforward from an open of a coherent module with support closed in the ambient scheme is coherent",
- "statement": "Let $X$ be a scheme, $j:U\\to X$ the inclusion of an open subscheme and $T\\subseteq X$ a closed subset with $T\\subseteq U$. If $\\mathcal F$ is a coherent $\\mathcal O_U$-module [pqf-def-coherent] with $\\operatorname{Supp}(\\mathcal F)\\subseteq T$ [def-weil-pbc-closed-subset-proper-over-base], then $j_*\\mathcal F$ is a coherent $\\mathcal O_X$-module; indeed $(j_*\\mathcal F)|_U=\\mathcal F$ and $(j_*\\mathcal F)|_{X\\setminus T}=0$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $j:U\\to X$ the inclusion of an open subscheme and $T\\subseteq X$ a closed subset with $T\\subseteq U$. If $\\mathcal F$ is a coherent $\\mathcal O_U$-module [pqf-def-coherent] with $\\operatorname{Supp}(\\mathcal F)\\subseteq T$ [def-weil-pbc-closed-subset-proper-over-base], then the pushforward $j_*\\mathcal F$ [def-pc-module-pullback] is a coherent $\\mathcal O_X$-module; indeed $(j_*\\mathcal F)|_U=\\mathcal F$ and $(j_*\\mathcal F)|_{X\\setminus T}=0$ (restrictions to open subschemes as in [lem-weil-pbc-module-restriction-open-immersion-colimits]).",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open) and its proof"
  },
  "stmt_deps": [
   "pqf-def-coherent",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($j_*\\mathcal F$ on $U$).* For an open $V\\subseteq U$ we have $j^{-1}(V)=V$, so by the definition of the pushforward of modules [def-pc-module-pullback] $(j_*\\mathcal F)(V)=\\mathcal F(j^{-1}V)=\\mathcal F(V)$, with the restriction maps of $\\mathcal F$ and with $\\mathcal O_X(V)=\\mathcal O_U(V)$ acting as on $\\mathcal F(V)$ ($j^\\sharp_V$ is the identity for the inclusion of an open subscheme). By the definition of the restriction to the open subscheme $U$ [lem-weil-pbc-module-restriction-open-immersion-colimits], $(j_*\\mathcal F)|_U=\\mathcal F$ as $\\mathcal O_U$-modules. (In Mathlib this is AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:416.)",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
+   }
+  },
+  {
+   "text": "*Step 2 ($\\mathcal F$ vanishes on $U\\setminus T$).* $U\\setminus T=U\\cap(X\\setminus T)$ is open in $U$. Let $W\\subseteq U\\setminus T$ be open and $s\\in\\mathcal F(W)$. For every $x\\in W$ we have $x\\notin T\\supseteq\\operatorname{Supp}(\\mathcal F)$, so the stalk $\\mathcal F_x$ [def-weil-pbc-module-stalk] is $0$ by the definition of the support [def-weil-pbc-closed-subset-proper-over-base](2); hence the germs of $s$ and of $0$ at $x$ agree. Since $\\mathcal F$ is a sheaf, a section is determined by its germs [lem-weil-pbc-sheaf-sections-determined-by-germs] (applied to the underlying sheaf of sets of $\\mathcal F$, whose stalks are those of $\\mathcal F$), so $s=0$. Thus $\\mathcal F(W)=0$ for every open $W\\subseteq U\\setminus T$.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
+   }
+  },
+  {
+   "text": "*Step 3 ($j_*\\mathcal F$ on $X\\setminus T$).* $X\\setminus T$ is open since $T$ is closed. For an open $V\\subseteq X\\setminus T$, $(j_*\\mathcal F)(V)=\\mathcal F(V\\cap U)$ [def-pc-module-pullback], and $V\\cap U$ is an open subset of $U\\setminus T$, so $(j_*\\mathcal F)(V)=0$ by Step 2. Hence $(j_*\\mathcal F)|_{X\\setminus T}=0$ [lem-weil-pbc-module-restriction-open-immersion-colimits].",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
+   }
+  },
+  {
+   "text": "*Step 4 (coherence).* Since $T\\subseteq U$, the opens $U$ and $X\\setminus T$ cover $X$. On $U$, $(j_*\\mathcal F)|_U=\\mathcal F$ (Step 1) is coherent by hypothesis. On $X\\setminus T$, $(j_*\\mathcal F)|_{X\\setminus T}=0$ (Step 3), and the zero module $0$ on an open subscheme $W$ is coherent by [pqf-def-coherent]: it is of finite type (the map $\\mathcal O_W^{\\oplus0}=0\\to0$ is surjective), and for every open $W'\\subseteq W$ the kernel of any map $\\mathcal O_{W'}^{\\oplus n}\\to0$ is $\\mathcal O_{W'}^{\\oplus n}$, of finite type via the identity. Since coherence is local on an open covering [lem-weil-pbc-coherent-module-local-on-open-cover](2), $j_*\\mathcal F$ is a coherent $\\mathcal O_X$-module.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "pqf-def-coherent",
+  "lem-weil-pbc-coherent-module-local-on-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +123,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-pushforward-coherent-on-open",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 0CYJ (tag verified: 0CYJ,coherent-lemma-pushforward-coherent-on-open); statement unchanged in content, citations added for j_* (def-pc-module-pullback), the restriction to an open subscheme (lem-weil-pbc-module-restriction-open-immersion-colimits) and def-pc-scheme, which are added to stmt_deps. The three-line Stacks proof is split into four steps: restriction of j_*F to U is F (definitional; Mathlib restrictFunctorAdjCounitIso), F is zero on U\\T because its stalks vanish there and sections are determined by germs (lem-weil-pbc-sheaf-sections-determined-by-germs), hence j_*F is zero on X\\T, and coherence follows because the zero module is coherent and coherence is local on an open covering; the last fact, used by Stacks without statement, is the new node lem-weil-pbc-coherent-module-local-on-open-cover (unsplit; no Mathlib match, Mathlib has no coherent sheaves of modules)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps along Stacks 0CYJ: j_*F restricts to F on U (definitional, elementary), F vanishes on U minus T (stalks and the sections-determined-by-germs leaf), j_*F vanishes on X minus T (elementary), coherence from the open cover {U, X minus T} with the zero module coherent (new unsplit node: coherence restricts to opens and is local on an open cover; agent-formulated, Stacks uses it silently; Mathlib has no coherent sheaves of modules). Statement citations added, content unchanged. Stage-3 note: pqf-def-coherent (sec-abelian-varieties, imported) cites 01DW (cohomology-section-phantom) where 01BV (modules-definition-coherent) is meant."
+ }
 }
