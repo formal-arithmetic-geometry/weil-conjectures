@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+ "kind": "statement",
+ "title": "Gabber's root condition implies lifting of sections of etale algebras",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal such that (a) $I$ is contained in the Jacobson radical of $A$, and (b) every monic polynomial $f(T)=T^n(T-1)+a_nT^n+\\dots+a_1T+a_0\\in A[T]$ with $n\\ge1$ and $a_0,\\dots,a_n\\in I$ has a root $\\alpha\\in1+I$. Then for every ring map $A\\to A'$ such that $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism] and every $A$-algebra map $\\sigma:A'\\to A/I$ there is an $A$-algebra map $\\tau:A'\\to A$ whose composite with the quotient map $A\\to A/I$ is $\\sigma$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), implication (5)$\\Rightarrow$(2) and its proof (paragraphs from 'Assume (5). We will show that (2) holds' to the end of the proof): the section gives $A'/IA'\\cong A/I\\times C$ (Algebra Lemmas 00U7 lemma-map-between-etale and 00U8 lemma-surjective-flat-finitely-presented); integral closure $B'$ of $A$ in $A'$ and Lemma Tag 09XH (lemma-helper-finite-type, line 2502); a finite subalgebra $B''$ and Lemma Tag 0EM0 (lemma-helper-finite, line 2290) give $f$ as in (b) with $f(b)=0$; the root $a\\in1+I$ splits $A[T]/(f)$ and hence $B'$ and $A'$; Lemma Tag 0ELZ (lemma-check-isomorphism-zariski, line 2265) concludes"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if every root of T^n(T-1)+a_n T^n+...+a_0 with a_i in I lifts to 1+I then sections of etale algebras modulo I lift",
+   "results": "Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift (Mathlib.RingTheory.Smooth.Basic; nilpotent ideals only), Algebra.FormallyEtale, RingHom.FormallyEtale, Algebra.mem_etaleLocus_iff, Ideal.ResidueField.liftₐ, Algebra.Etale; nothing for an ideal in the Jacobson radical or Gabber's polynomials",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every etale algebra section modulo an ideal in the Jacobson radical lifts if polynomials x^n(x-1) + I-coefficients have roots in 1+I (Gabber)",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot (square-zero ideals), StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.lift, StandardEtalePresentation.hasMap, StandardEtalePair.instEtaleRing (Mathlib.RingTheory.Etale.StandardEtale); no lifting along a non-nilpotent ideal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "6 declarations, all in Mathlib.RingTheory.Henselian: HenselianRing, HenselianRing.mk, HenselianRing.jac, HenselianRing.is_henselian (simple-root lifting), instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing; no etale-section characterization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean; grep -rnE 'X \\^ [a-z] \\* \\(X - 1\\)|\\(X - 1\\) \\* X \\^' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "only RingTheory/Henselian.lean mentions jacobson (HenselianRing.jac, isLocalHom_of_le_jacobson_bot); no polynomial of the shape T^n(T-1) anywhere in RingTheory",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-factorization-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is 09XI (5) ⇒ (2) (Gabber′s root criterion gives lifting of sections of etale algebras); correct; unsplit."
+ }
+}

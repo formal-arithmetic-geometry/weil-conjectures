@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+ "kind": "statement",
+ "title": "A lifted idempotent of A[T]/(f) lifts the coprime factorization of f",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal contained in the Jacobson radical of $A$, $f\\in A[T]$ monic with image $\\overline f\\in(A/I)[T]$, and $\\overline f=g_0h_0$ with $g_0,h_0\\in(A/I)[T]$ monic and generating the unit ideal of $(A/I)[T]$. Let $B=A[T]/(f)$ and identify $B/IB$ with $(A/I)[T]/(\\overline f)$ (reduction of coefficients). Let $\\bar e\\in B/IB$ be the idempotent with $\\bar e\\equiv1$ modulo $g_0$ and $\\bar e\\equiv0$ modulo $h_0$ (the element $(1,0)$ under the Chinese remainder isomorphism $(A/I)[T]/(\\overline f)\\cong(A/I)[T]/(g_0)\\times(A/I)[T]/(h_0)$). If $e\\in B$ is an idempotent whose image in $B/IB$ is $\\bar e$, then there are monic polynomials $g,h\\in A[T]$ with $f=gh$ whose images in $(A/I)[T]$ are $g_0$ and $h_0$. (In Stacks' proof, $g$ and $h$ are the characteristic polynomials of multiplication by $T$ on the finite locally free $A$-modules $eB$ and $(1-e)B$, which have constant ranks $\\deg g_0$ and $\\deg h_0$.)",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), from 'Set $B=A[T]/(f)$' to 'Details omitted. Thus (3) implies (1)': $B=eB\\times(1-e)B$, $eB$ and $(1-e)B$ finite locally free of constant ranks $\\deg g_0$, $\\deg h_0$ (rank constant along $V(I)$ hence everywhere, as $I$ lies in the Jacobson radical), $f=\\mathrm{CharPol}_A(T|B)=\\mathrm{CharPol}_A(T|eB)\\,\\mathrm{CharPol}_A(T|(1-e)B)$, CharPol of a finite locally free module glued via Algebra Lemma 00EJ (lemma-standard-covering); 'Details omitted'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of multiplication by X on a direct summand of R[X]/(f) gives a factorization of f",
+   "results": "LinearMap.charpoly (Mathlib.LinearAlgebra.Charpoly.Basic; requires Module.Free and Module.Finite), LinearMap.charpoly_prodMap (Mathlib.LinearAlgebra.Charpoly.ToMatrix; free modules), LinearMap.charpoly_monic, LinearMap.minpoly_dvd_charpoly, LinearMap.charpoly_sub_smul, Polynomial.Splits; nothing for locally free summands or idempotents of R[X]/(f)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "idempotent e of A[X]/(f) gives factorization of the monic polynomial f into monic polynomials, characteristic polynomials on eB and (1-e)B",
+   "results": "Polynomial.UniversalFactorizationRing.presentation, .factor₁, .factor₂, .factor₁_mul_factor₂, .homEquiv, Polynomial.UniversalCoprimeFactorizationRing.factor₁_mul_factor₂, .factor₂, Polynomial.instAlgebraUniversalFactorizationRing (Mathlib.RingTheory.Polynomial.UniversalFactorizationRing): the universal (coprime) factorization ring, not a factorization from an idempotent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, Module.Projective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib -l | xargs grep -l 'Projective\\|IsLocallyFree\\|finrank'; sed -n 35,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean; grep -rn 'charpoly_leftMulMatrix\\|charpoly_baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "LinearMap.charpoly is defined only for [Module.Free R M] [Module.Finite R M] (Charpoly/Basic.lean:39-44); LinearMap.charpoly_baseChange (Charpoly/BaseChange.lean:23), Matrix.charpoly_leftMulMatrix (Matrix/Charpoly/Minpoly.lean:75, charpoly of a power basis generator = minpoly) are pieces for free modules; no characteristic polynomial of a finite locally free (projective) module and no factorization statement",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces for the free case: LinearMap.charpoly_prodMap, LinearMap.charpoly_baseChange, Matrix.charpoly_leftMulMatrix)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-factorization-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: a lifted idempotent of A[T]/(f) gives the monic factorization (Stacks′ omitted step of 09XI (3)⇒(1)); well posed; unsplit."
+ }
+}
