@@ -5,8 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
+public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Torsors under a finite constant sheaf are representable
@@ -339,5 +343,138 @@ theorem exists_toSheafTorsor_equiv_of_iso
   refine ⟨ofRepresentable R π e, Setoid.trans ?_ (Sheaf.Torsor.ofIso_symm_ofIso_equiv i P)⟩
   exact (Sheaf.Torsor.ofIso_equiv_ofIso_iff i.symm).2
     (toSheafTorsorContinuousMap_ofRepresentable_equiv R π e)
+
+/-! ### Torsors under a finite constant sheaf are finite locally constant -/
+
+section FiniteLocallyConstant
+
+omit [Finite M] in
+/-- A torsor under the constant sheaf `M` is constant on every étale `Y`-scheme `U` over which it
+has a section `x`: translating `x` identifies it with the constant sheaf `M` there. -/
+theorem isConstant_over_of_section
+    (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M))) (U : Y.Etale) (x : P.sheaf.obj.obj (op U)) :
+    (P.sheaf.over U).IsConstant (Y.smallEtaleTopology.over U) := by
+  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  have : Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    inferInstance
+  let G := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)
+  have : G.IsConstant Y.smallEtaleTopology := Sheaf.isConstant_of_iso _ (Iso.refl _)
+  let G' := (sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G
+  have : G'.IsConstant Y.smallEtaleTopology := inferInstance
+  have hG' := Sheaf.isConstant_over (W := U) G'
+  let e : (G'.over U).obj ≅ (P.sheaf.over U).obj :=
+    NatIso.ofComponents (fun W ↦ Equiv.toIso (Equiv.ofBijective
+      (fun a : G.obj.obj (op W.unop.left) ↦
+        P.vadd (op W.unop.left) a (P.sheaf.obj.map W.unop.hom.op x))
+      (P.bijective_vadd _ _))) (fun {W W'} h ↦ by
+        ext a
+        change P.vadd _ (G.obj.map h.unop.left.op a) (P.sheaf.obj.map W'.unop.hom.op x) =
+          P.sheaf.obj.map h.unop.left.op (P.vadd _ a (P.sheaf.obj.map W.unop.hom.op x))
+        rw [P.map_vadd, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+          Over.w h.unop])
+  exact Sheaf.isConstant_congr _
+    ((fullyFaithfulSheafToPresheaf _ _).preimageIso (X := G'.over U) (Y := P.sheaf.over U) e)
+
+variable [TopologicalSpace M] [DiscreteTopology M]
+
+/-- The stalks of a torsor under the sheaf of locally constant `M`-valued functions are finite,
+for `M` finite: near a geometric point, every section is a translate of a fixed one by a locally
+constant function, hence by a constant. -/
+theorem finite_sheafFiber (R : Sheaf.Torsor (Etale.continuousMapSheaf Y M)) {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+    Finite (ToType ((pointSmallEtale s).sheafFiber.obj R.sheaf)) := by
+  let Φ := pointSmallEtale s
+  have hT : IsTerminal (Etale.mk (𝟙 Y)) :=
+    MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Y
+  let t₀ : Φ.fiber.obj (Etale.mk (𝟙 Y)) := (Φ.uniqueFiberObj _ hT).default
+  obtain ⟨V₀, g₀, ⟨x₀⟩, v₀, -⟩ :=
+    Φ.jointly_surjective _ (R.nonemptySieve_mem (Etale.mk (𝟙 Y))) t₀
+  let φ : M → ToType (Φ.sheafFiber.obj R.sheaf) := fun m ↦
+    Φ.toPresheafFiber V₀ v₀ R.sheaf.obj (R.vadd (op V₀) (ContinuousMap.const _ m) x₀)
+  refine Finite.of_surjective φ fun p ↦ ?_
+  obtain ⟨V, v, z, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := R.sheaf.obj) p
+  let E₁ : Φ.fiber.Elements := ⟨V, v⟩
+  let E₂ : Φ.fiber.Elements := ⟨V₀, v₀⟩
+  let Wel := IsCofiltered.min E₁ E₂
+  let f₁ := IsCofiltered.minToLeft E₁ E₂
+  let f₂ := IsCofiltered.minToRight E₁ E₂
+  let W : Y.Etale := Wel.1
+  let w : Φ.fiber.obj W := Wel.2
+  obtain ⟨a₀, ha⟩ := (R.bijective_vadd (op W) (R.sheaf.obj.map f₂.1.op x₀)).2
+    (R.sheaf.obj.map f₁.1.op z)
+  let a : C(W.left, M) := a₀
+  let m : M := a (w.left (IsLocalRing.closedPoint Ω))
+  let U := W.left.fiberOpens a m
+  have hU : Set.range w.left ⊆ (U : Set W.left) := by
+    rintro _ ⟨ξ, rfl⟩
+    change a (w.left ξ) = m
+    rw [Subsingleton.elim (α := PrimeSpectrum Ω) ξ (IsLocalRing.closedPoint Ω)]
+  obtain ⟨w', hw'⟩ := exists_pointSmallEtale_fiber_ofOpens s w U hU
+  let ιU := Etale.ofOpensι W U
+  have hmap (F : Y.Etaleᵒᵖ ⥤ Type (u + 1)) {A B : Y.Etale} (f : B ⟶ W) (g : W ⟶ A)
+      (y : F.obj (op A)) : F.map (f ≫ g).op y = F.map f.op (F.map g.op y) := by
+    rw [op_comp, F.map_comp]
+    rfl
+  have hz : R.sheaf.obj.map (ιU ≫ f₁.1).op z =
+      R.sheaf.obj.map (ιU ≫ f₂.1).op (R.vadd (op V₀) (ContinuousMap.const _ m) x₀) := by
+    rw [hmap, hmap, ← ha, R.map_vadd, R.map_vadd, R.map_vadd]
+    congr 1
+    exact ContinuousMap.ext fun ξ ↦ ξ.2
+  have h₁ : Φ.fiber.map (ιU ≫ f₁.1) w' = v := by
+    rw [Functor.map_comp_apply, hw']
+    exact f₁.2
+  have h₂ : Φ.fiber.map (ιU ≫ f₂.1) w' = v₀ := by
+    rw [Functor.map_comp_apply, hw']
+    exact f₂.2
+  have e₁ := ConcreteCategory.congr_hom (Φ.toPresheafFiber_w (ιU ≫ f₁.1) w' R.sheaf.obj) z
+  have e₂ := ConcreteCategory.congr_hom (Φ.toPresheafFiber_w (ιU ≫ f₂.1) w' R.sheaf.obj)
+    (R.vadd (op V₀) (ContinuousMap.const _ m) x₀)
+  rw [ConcreteCategory.comp_apply, h₁] at e₁
+  rw [ConcreteCategory.comp_apply, h₂] at e₂
+  refine ⟨m, ?_⟩
+  change Φ.toPresheafFiber V₀ v₀ R.sheaf.obj _ = Φ.toPresheafFiber V v R.sheaf.obj z
+  rw [← e₁, ← e₂, hz]
+
+omit [TopologicalSpace M] [DiscreteTopology M] in
+/-- **Torsors under a finite constant sheaf are finite locally constant sheaves of sets.** -/
+theorem isFiniteLocallyConstantSheafOfTypes_sheaf
+    (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M))) :
+    Scheme.IsFiniteLocallyConstantSheafOfTypes P.sheaf := by
+  refine ⟨?_, ?_⟩
+  · choose V g hg hy using
+      (mem_smallEtaleTopology_iff _).1 (P.nonemptySieve_mem (Etale.mk (𝟙 Y)))
+    let 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage Y :=
+      Scheme.Cover.mkOfCovers Y (fun y ↦ (V y).left) (fun y ↦ (V y).hom) (fun y ↦ by
+        obtain ⟨z, hz⟩ := hy y
+        refine ⟨y, z, ?_⟩
+        have h₂ : (g y).left ≫ 𝟙 Y = (V y).hom := MorphismProperty.Over.w (g y)
+        calc (V y).hom z = ((g y).left ≫ 𝟙 Y) z := by rw [h₂]; rfl
+          _ = (g y).left z := by erw [Category.comp_id]; rfl
+          _ = y := hz) (fun y ↦ (V y).prop)
+    exact ⟨𝒰, fun y ↦ isConstant_over_of_section P (V y) (hg y).some⟩
+  · let _ : TopologicalSpace M := ⊥
+    have : DiscreteTopology M := ⟨rfl⟩
+    refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
+    exact finite_sheafFiber
+      (Sheaf.Torsor.ofIso (Etale.constantSheafIsoContinuousMapSheaf Y M) P) s
+
+end FiniteLocallyConstant
+
+/-- **Torsors under a finite constant sheaf come from étale torsors.** Every torsor `P` under the
+constant sheaf `M` on the small étale site of `Y` is the sheaf torsor of an `M`-torsor: `P` is a
+finite locally constant sheaf of sets, hence represented by a finite étale `Y`-scheme `Q`
+(`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`, blueprint
+`lemma-weil-pbc-finite-locally-constant-etale-equivalence`), on which the action of `M` lifts.
+(blueprint: `thm-galois-lc-etale`, `sbc-prop-torsors-h1`) -/
+theorem exists_toSheafTorsor_equiv
+    (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M))) :
+    ∃ t : EtaleTorsor M Y, t.toSheafTorsor ≈ P := by
+  obtain ⟨Q, π, _, _, ⟨e⟩⟩ := (Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso Y).2 P.sheaf
+    (isFiniteLocallyConstantSheafOfTypes_sheaf P)
+  exact exists_toSheafTorsor_equiv_of_iso P π ((fullyFaithfulSheafToPresheaf _ _).preimageIso e)
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
