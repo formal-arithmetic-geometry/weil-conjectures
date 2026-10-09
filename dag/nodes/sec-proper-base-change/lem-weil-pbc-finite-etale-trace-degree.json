@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-degree",
+ "kind": "statement",
+ "title": "Constant degree of a finite etale cover of a connected scheme, and trace after restriction",
+ "statement": "Let $X$ be a connected scheme [def-weil-connected-scheme] and $f:Y\\to X$ a finite etale morphism [def-weil-pbc-scheme-conventions]. Then there is an integer $d\\ge0$ such that (a) $f$ is finite locally free of degree $d$ [def-pc-finite-locally-free]; (b) for every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point] the geometric fibre $Y\\times_X\\operatorname{Spec}\\Omega$ has exactly $d$ points (it is $\\coprod_{i=1}^d\\operatorname{Spec}\\Omega$); (c) for every abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], with the restriction and trace of [def-weil-pbc-finite-etale-trace],\\n$$F\\xrightarrow{\\operatorname{res}_{f,F}}f_*f^{-1}F\\xrightarrow{\\operatorname{tr}_{f,F}}F$$\\nis multiplication by $d$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Section 03SH (section-trace-method), after Definition 03SE: 'This description shows that if $f$ has constant degree $d$, then the composition $\\mathcal F\\to f_*f^{-1}\\mathcal F\\to\\mathcal F$ is multiplication by $d$'; local splitting: Etale Morphisms Lemma 04HN"
+ },
+ "stmt_deps": [
+  "def-weil-connected-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-finite-locally-free",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-etale-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rank of a finite flat morphism of schemes is locally constant",
+   "results": "Module.isLocallyConstant_rankAtStalk (Mathlib.RingTheory.Spectrum.Prime.FreeLocus), Module.isLocallyConstant_rankAtStalk_freeLocus, instances on finite morphisms",
+   "date": "2026-10-09",
+   "verdict": "partial: local constancy of the rank only (clause (a)), see the grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank",
+   "results": "Scheme.Hom.isLocallyConstant_finrank (f : X ⟶ Y) [Flat f] [IsFinite f] [LocallyOfFinitePresentation f] : IsLocallyConstant (Scheme.Hom.finrank f) (Mathlib.AlgebraicGeometry.Morphisms.FlatRank)",
+   "date": "2026-10-09",
+   "verdict": "partial: gives the locally constant rank (clause (a) on connected X, after relating finrank to def-pc-finite-locally-free), nothing on traces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale morphism of schemes trace map of sheaves f_* f^* F to F",
+   "results": "etale morphism API only; no trace of sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match for (c)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isLocallyConstant_finrank\\|trace' Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; grep -rn 'def .*[Tt]race' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "Scheme.Hom.finrank and Scheme.Hom.isLocallyConstant_finrank (FlatRank.lean line 232; its TODO says the relation to the rank of f_*O_X is not yet there); no trace of sheaves anywhere",
+   "date": "2026-10-09",
+   "verdict": "no match (only clause (a) partially)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-curve-locally-constant-reduction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

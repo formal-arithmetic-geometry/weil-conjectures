@@ -1,12 +1,11 @@
 # Work queue
 
-565 items; claim with `tools/claim.py next <group> [--stage N]`.
+568 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (549)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
 | `lemma-weil-pbc-eight-curve-devissage` | 1004 | none |
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
@@ -23,6 +22,7 @@
 | `lem-sc-c6` | 1005 | none |
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
+| `lem-weil-pbc-cohomology-pullback-degree-zero` | 1005 | none |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1005 | none |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
@@ -31,6 +31,7 @@
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-henselian-local-root-lifting` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
+| `lem-weil-pbc-inverse-image-stalk-germ` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1005 | none |
@@ -45,6 +46,8 @@
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
 | `lem-weil-pbc-zero-dim-integral-point` | 1005 | none |
+| `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
+| `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
@@ -577,7 +580,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 563 nodes that wait for stage 1, 110 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 111 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

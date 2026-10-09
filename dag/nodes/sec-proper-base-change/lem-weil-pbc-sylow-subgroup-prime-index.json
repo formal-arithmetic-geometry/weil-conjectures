@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-sylow-subgroup-prime-index",
+ "kind": "statement",
+ "title": "Sylow subgroups exist and have index prime to the prime",
+ "statement": "Let $Q$ be a finite group and $r$ a prime number. Then $Q$ has a subgroup $P$ which is an $r$-group (every element of $P$ has order a power of $r$; equivalently, $P$ being finite, $\\#P$ is a power of $r$) and whose index $[Q:P]$ is not divisible by $r$ (an $r$-Sylow subgroup).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Lemma 0A3R (lemma-pullback-filtered), proof: 'Let $H\\subset G$ be an $\\ell$-Sylow subgroup' (Sylow's theorem, used without reference)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sylow p-subgroup of a finite group has index not divisible by p",
+   "results": "Sylow.not_dvd_index' (Mathlib.GroupTheory.Sylow), Sylow.not_dvd_index (Mathlib.GroupTheory.Sylow), IsPGroup.toSylow, Sylow",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow.not_dvd_index",
+   "results": "Sylow.not_dvd_index {p} {G} [Group G] [Fact (Nat.Prime p)] (P : Sylow p G) [(↑P).FiniteIndex] : ¬p ∣ (↑P).index (Mathlib.GroupTheory.Sylow)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sylow subgroup of finite group, index coprime to p",
+   "results": "Sylow.card_coprime_index, IsPGroup.toSylow, Sylow.not_dvd_index, not_dvd_card_sylow (Mathlib.GroupTheory.Sylow)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'instance nonempty : Nonempty (Sylow p G)' and 'theorem not_dvd_index' in Mathlib/GroupTheory/Sylow.lean",
+   "results": "Sylow.nonempty (line 213), Sylow.not_dvd_index (line 489), structure Sylow with field isPGroup' (line 52)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Sylow.not_dvd_index",
+  "file": "Mathlib/GroupTheory/Sylow.lean",
+  "how": "one Mathlib lemma per clause: Sylow.nonempty gives P : Sylow r Q, P.isPGroup' says P is an r-group, Sylow.not_dvd_index (finite index since Q is finite) says r does not divide [Q:P]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-curve-locally-constant-reduction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
