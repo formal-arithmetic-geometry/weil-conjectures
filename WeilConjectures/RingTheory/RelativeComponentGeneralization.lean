@@ -9,6 +9,7 @@ public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.Mathlib.Topology.Connected.Basic
 
 /-!
 # The relative connected component of a section is stable under generalization
@@ -58,6 +59,52 @@ theorem Module.Flat.localization_of_isPushout {R R' S S' : Type*} [CommRing R] [
     Module.Flat R' (Localization.AtPrime Q) := by
   exact Module.Flat.localization_of_isPushout_aux Q h
 
+/-- Let `Z` be a closed subset of `Spec C` such that `C` is flat over `R` at every point of `Z`, and
+`T` a submonoid of `C` containing every element lying in no prime of `Z`. Then the localization
+`C_T` is flat over `R`. -/
+theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing R] [CommRing C]
+    [Algebra R C] {Z : Set (PrimeSpectrum C)} (hZ : IsClosed Z)
+    (hflat : ∀ q ∈ Z, Module.Flat R (Localization.AtPrime q.asIdeal)) (T : Submonoid C)
+    (hT : ∀ c : C, (∀ q ∈ Z, c ∉ q.asIdeal) → c ∈ T) :
+    Module.Flat R (Localization T) := by
+  refine Module.Flat.iff_lTensor_injective'.2 fun J ↦ ?_
+  rw [Module.lTensor_injective_iff_of_isLocalizedModule T (Algebra.linearMap C (Localization T))]
+  intro y hy
+  have hI : LinearMap.ker (LinearMap.toSpanSingleton C _ y) ⊔
+      PrimeSpectrum.vanishingIdeal Z = ⊤ := by
+    by_contra h
+    obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ h
+    have hmZ : (⟨m, hm.isPrime⟩ : PrimeSpectrum C) ∈ Z := by
+      rw [← hZ.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+      exact le_sup_right.trans hle
+    have := hflat _ hmZ
+    obtain ⟨t, ht, hty⟩ := (Module.lTensor_injective_iff_of_isLocalizedModule m.primeCompl
+      (Algebra.linearMap C (Localization.AtPrime m)) J.subtype).1
+      (Module.Flat.iff_lTensor_injective'.1 this J) y hy
+    exact ht (le_sup_left.trans hle (LinearMap.mem_ker.2 hty))
+  obtain ⟨t, ht, j, hj, htj⟩ := Submodule.mem_sup.1 (hI ▸ Submodule.mem_top (x := (1 : C)))
+  refine ⟨t, hT t fun q hq htq ↦ q.isPrime.ne_top ((Ideal.eq_top_iff_one _).2 ?_), ht⟩
+  rw [← htj]
+  exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)
+
+/-- Let `F` be a noetherian subspace of `X` and `f : Y → X` a continuous map landing in `F`. Then
+the preimage under `f` of a connected component of `F` is open and closed. -/
+theorem isClopen_preimage_connectedComponentIn {X Y : Type*} [TopologicalSpace X]
+    [TopologicalSpace Y] {F : Set X} [TopologicalSpace.NoetherianSpace F] {f : Y → X}
+    (hf : Continuous f) (hfF : ∀ y, f y ∈ F) (x : X) :
+    IsClopen (f ⁻¹' connectedComponentIn F x) := by
+  by_cases hx : x ∈ F
+  · have : f ⁻¹' connectedComponentIn F x =
+        (fun y ↦ (⟨f y, hfF y⟩ : F)) ⁻¹' connectedComponent ⟨x, hx⟩ := by
+      ext y
+      simp [connectedComponentIn_eq_image hx, hfF]
+    rw [this]
+    exact ⟨isClosed_connectedComponent.preimage (hf.subtype_mk hfF),
+      (TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _).preimage
+        (hf.subtype_mk hfF)⟩
+  · rw [connectedComponentIn_eq_empty hx, Set.preimage_empty]
+    exact isClopen_empty
+
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
 namespace PrimeSpectrum
@@ -79,7 +126,136 @@ theorem mem_relativeComponent_of_isDiscreteValuationRing {R C : Type u} [CommRin
       Module.Flat R (Localization.AtPrime q.asIdeal))
     (hτ : comap (τ : C →+* R) (closedPoint R) ∈ relativeComponent σ) :
     comap (τ : C →+* R) ⟨⊥, Ideal.isPrime_bot⟩ ∈ relativeComponent σ := by
-  sorry
+  classical
+  have : IsNoetherianRing C := Algebra.FiniteType.isNoetherianRing R C
+  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible R
+  have hsec (φ : C →ₐ[R] R) (p : PrimeSpectrum R) :
+      comap (algebraMap R C) (comap (φ : C →+* R) p) = p := by
+    rw [← comap_comp_apply, φ.comp_algebraMap]
+    simp
+  simp only [relativeComponent, Set.mem_ofPred_eq, hsec] at hτ ⊢
+  set F := comap (algebraMap R C) ⁻¹' {closedPoint R}
+  set Z := connectedComponentIn F (comap (σ : C →+* R) (closedPoint R))
+  have hZF : Z ⊆ F := connectedComponentIn_subset _ _
+  have hZ : IsClosed Z := ((isClosed_singleton_iff_isMaximal _).2
+    (inferInstanceAs (maximalIdeal R).IsMaximal)).preimage (continuous_comap _)
+    |>.isClosed_connectedComponentIn _
+  have hσZ : comap (σ : C →+* R) (closedPoint R) ∈ Z := mem_connectedComponentIn (hsec σ _)
+  -- the localization `D` of `C` at the elements avoiding `Z`
+  let T : Submonoid C := ⨅ q ∈ Z, q.asIdeal.primeCompl
+  have hT (c : C) : c ∈ T ↔ ∀ q ∈ Z, c ∉ q.asIdeal := by
+    simp [T, Submonoid.mem_iInf, Ideal.primeCompl]
+  let D := Localization T
+  have hDflat : Module.Flat R D := by
+    refine Module.Flat.localization_of_forall_mem_isClosed hZ (fun q hq ↦ hflat q ?_ (hZF hq)) T
+      fun c hc ↦ (hT c).2 hc
+    have hq' : comap (algebraMap R C) q = closedPoint R := hZF hq
+    rw [relativeComponent, Set.mem_ofPred_eq, hq']
+    exact hq
+  have hDred : IsReduced (D ⧸ Ideal.span {algebraMap R D ϖ}) := by
+    let eSp : ResidueField R ⊗[R] C ≃ₐ[R] C ⧸ (maximalIdeal R).map (algebraMap R C) :=
+      (Algebra.TensorProduct.comm _ _ _).trans
+        ((Algebra.TensorProduct.quotIdealMapEquivTensorQuot C (maximalIdeal R)).symm.restrictScalars
+          _)
+    have : IsReduced (C ⧸ (maximalIdeal R).map (algebraMap R C)) :=
+      isReduced_of_injective eSp.symm.toRingHom eSp.symm.injective
+    have := isReduced_localizationPreserves
+      (Algebra.algebraMapSubmonoid (C ⧸ (maximalIdeal R).map (algebraMap R C)) T)
+      (D ⧸ ((maximalIdeal R).map (algebraMap R C)).map (algebraMap C D)) this
+    rwa [Ideal.map_map, ← IsScalarTower.algebraMap_eq,
+      (IsDiscreteValuationRing.irreducible_iff_uniformizer ϖ).1 hϖ,
+      Ideal.map_span, Set.image_singleton] at this
+  -- the extensions of the sections to `D` and to `D[1/ϖ]`
+  let E := Localization.Away (algebraMap R D ϖ)
+  let K := FractionRing R
+  have hext (φ : C →ₐ[R] R) (hφ : comap (φ : C →+* R) (closedPoint R) ∈ Z) :
+      ∃ (φD : D →+* R) (φE : E →+* K), φD.comp (algebraMap C D) = φ ∧
+        φE.comp (algebraMap D E) = (algebraMap R K).comp φD := by
+    have hu (y : T) : IsUnit (φ y) := notMem_maximalIdeal.1 ((hT _).1 y.2 _ hφ)
+    let φD : D →+* R := IsLocalization.lift hu
+    have hφD : φD.comp (algebraMap C D) = φ := IsLocalization.lift_comp hu
+    have hϖ' : IsUnit (((algebraMap R K).comp φD) (algebraMap R D ϖ)) := by
+      rw [IsScalarTower.algebraMap_apply R C D, RingHom.comp_apply, ← RingHom.comp_apply φD,
+        hφD, AlgHom.coe_toRingHom, AlgHom.commutes, Algebra.algebraMap_self, RingHom.id_apply]
+      exact isUnit_iff_ne_zero.2 ((map_ne_zero_iff _ (IsFractionRing.injective R K)).2 hϖ.ne_zero)
+    exact ⟨φD, IsLocalization.Away.lift _ hϖ', hφD, IsLocalization.Away.lift_comp _ hϖ'⟩
+  obtain ⟨σD, σE, hσD, hσE⟩ := hext σ hσZ
+  obtain ⟨τD, τE, hτD, hτE⟩ := hext τ hτ
+  -- `D` embeds in `D[1/ϖ]`, since `ϖ` is regular on the flat `R`-module `D`
+  have hinj : Function.Injective (algebraMap D E) := by
+    refine IsLocalization.injective E (M := Submonoid.powers (algebraMap R D ϖ))
+      (Submonoid.powers_le.2 (mem_nonZeroDivisors_iff_right.2 fun z hz ↦ ?_))
+    refine (isSMulRegular_algebraMap_iff D).2 (Module.Flat.isSMulRegular_of_nonZeroDivisors
+      (mem_nonZeroDivisors_of_ne_zero hϖ.ne_zero)) ?_
+    simpa [smul_eq_mul, mul_comm] using hz
+  -- `Spec D[1/ϖ]` maps to the generic fibre
+  set ηR : PrimeSpectrum R := ⟨⊥, Ideal.isPrime_bot⟩
+  set Fη := comap (algebraMap R C) ⁻¹' {ηR}
+  let ι : C →+* E := (algebraMap D E).comp (algebraMap C D)
+  have hι : ι.comp (algebraMap R C) = algebraMap R E := by
+    rw [RingHom.comp_assoc, ← IsScalarTower.algebraMap_eq, ← IsScalarTower.algebraMap_eq]
+  have hιF (P : PrimeSpectrum E) : comap ι P ∈ Fη := by
+    rw [Set.mem_preimage, Set.mem_singleton_iff, ← comap_comp_apply, hι]
+    ext1
+    by_contra hne
+    have hϖm : ϖ ∈ (comap (algebraMap R E) P).asIdeal := by
+      rw [IsLocalRing.eq_maximalIdeal ((comap (algebraMap R E) P).isPrime.isMaximal hne)]
+      exact hϖ.not_isUnit
+    refine P.isPrime.ne_top (Ideal.eq_top_of_isUnit_mem _ hϖm ?_)
+    rw [IsScalarTower.algebraMap_apply R D E]
+    exact IsLocalization.Away.algebraMap_isUnit _
+  by_contra hW
+  obtain ⟨e, he, hUe⟩ := isClopen_iff.1 (isClopen_preimage_connectedComponentIn
+    (continuous_comap ι) hιF (comap (σ : C →+* R) ηR))
+  obtain ⟨b, rfl⟩ :=
+    IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem hϖ hDred he
+  have hb : IsIdempotentElem b := hinj ((map_mul _ b b).trans he)
+  -- the generic points of the sections, seen in `Spec D[1/ϖ]`
+  let ηK : PrimeSpectrum K := ⟨⊥, Ideal.isPrime_bot⟩
+  have hpt (φ : C →ₐ[R] R) (φD : D →+* R) (φE : E →+* K)
+      (hφD : φD.comp (algebraMap C D) = φ)
+      (hφE : φE.comp (algebraMap D E) = (algebraMap R K).comp φD) :
+      comap ι (comap φE ηK) = comap (φ : C →+* R) ηR := by
+    have : φE.comp ι = (algebraMap R K).comp φ := by
+      rw [← hφD, ← RingHom.comp_assoc, hφE, RingHom.comp_assoc]
+    rw [← comap_comp_apply, this, comap_comp_apply]
+    congr 1
+    ext1
+    exact Ideal.comap_bot_of_injective _ (IsFractionRing.injective R K)
+  have hσb : σD b = 1 := by
+    have hmem : comap σE ηK ∈ (basicOpen (algebraMap D E b) : Set (PrimeSpectrum E)) := by
+      rw [← hUe, Set.mem_preimage, hpt σ σD σE hσD hσE]
+      exact mem_connectedComponentIn (hsec σ ηR)
+    rw [SetLike.mem_coe, mem_basicOpen, comap_asIdeal, Ideal.mem_comap, ← RingHom.comp_apply,
+      hσE] at hmem
+    refine (IsIdempotentElem.iff_eq_zero_or_one.1 (hb.map σD)).resolve_left fun h ↦ hmem ?_
+    rw [RingHom.comp_apply, h, map_zero]
+    exact zero_mem _
+  have hτb : τD b = 0 := by
+    have hmem : comap τE ηK ∉ (basicOpen (algebraMap D E b) : Set (PrimeSpectrum E)) := by
+      rw [← hUe, Set.mem_preimage, hpt τ τD τE hτD hτE]
+      exact hW
+    rw [SetLike.mem_coe, mem_basicOpen, not_not, comap_asIdeal, Ideal.mem_comap,
+      ← RingHom.comp_apply, hτE] at hmem
+    exact (map_eq_zero_iff _ (IsFractionRing.injective R K)).1 hmem
+  -- the clopen subset `D(b)` of `Spec D` separates the special points of `σ` and `τ` in `Z`
+  have hY : IsPreconnected (comap (algebraMap C D) ⁻¹' Z) := by
+    rw [← (localization_comap_isInducing D T).isPreconnected_image,
+      Set.image_preimage_eq_of_subset]
+    · exact isPreconnected_connectedComponentIn
+    · rw [localization_comap_range D T]
+      exact fun q hq ↦ Set.disjoint_left.2 fun c hc hcq ↦ (hT c).1 hc q hq hcq
+  have hY' (φ : C →ₐ[R] R) (φD : D →+* R) (hφD : φD.comp (algebraMap C D) = φ)
+      (hφ : comap (φ : C →+* R) (closedPoint R) ∈ Z) :
+      comap φD (closedPoint R) ∈ comap (algebraMap C D) ⁻¹' Z := by
+    rw [Set.mem_preimage, ← comap_comp_apply, hφD]
+    exact hφ
+  have hsub := hY.subset_isClopen (isClopen_iff.2 ⟨b, hb, rfl⟩)
+    ⟨_, hY' σ σD hσD hσZ, ?_⟩ (hY' τ τD hτD hτ)
+  · rw [SetLike.mem_coe, mem_basicOpen, comap_asIdeal, Ideal.mem_comap, hτb] at hsub
+    exact hsub (zero_mem _)
+  · rw [SetLike.mem_coe, mem_basicOpen, comap_asIdeal, Ideal.mem_comap, hσb]
+    exact fun h ↦ (closedPoint R).isPrime.ne_top ((Ideal.eq_top_iff_one _).2 h)
 
 /-- **The relative component is stable under generalization over a noetherian base.** Let `A` be
 noetherian, `B` a finite type `A`-algebra with a section `s`, and `x' ≤ x` primes of `B` with `x`
