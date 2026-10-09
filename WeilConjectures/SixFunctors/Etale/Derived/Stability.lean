@@ -17,7 +17,11 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 
 /-!
@@ -163,36 +167,20 @@ namespace Etale
 
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
-/-! ### Extension by zero -/
+omit [HasSmallSiteSheafify A] in
+/-- Membership in `D_c^[a, b]` with Tor amplitude in `[a, b]` is invariant under
+isomorphism. -/
+lemma constructibleTorAmplitudeIn_of_iso {X : Scheme.{u}} {a b : ℤ}
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (e : K ≅ K')
+    (hK : constructibleTorAmplitudeIn A X a b K) : constructibleTorAmplitudeIn A X a b K' := by
+  obtain ⟨⟨hbc, h₁, h₂⟩, hta⟩ := hK
+  exact ⟨⟨(boundedConstructible A X).prop_of_iso e hbc,
+    _root_.DerivedCategory.TStructure.t.isGE_of_iso e a,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e b⟩,
+    (torAmplitudeIn A X a b).prop_of_iso e hta⟩
 
-/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
-category.
-
-For an open immersion `j : U ⟶ Y` admitting a compactification, extension by zero sends
-`Dctf(U, A)` into `Dctf(Y, A)` *without moving the interval*: if `K` is bounded constructible
-with homology concentrated in `[a, b]` and Tor amplitude in `[a, b]`, then so is `Rj_! K`. -/
-theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek {U Y : Scheme.{u}} (j : U ⟶ Y)
-    [IsOpenImmersion j] [HasCompactification j] (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A U a b K) :
-    constructibleTorAmplitudeIn A Y a b ((R(j)_![A]).obj K) :=
-  sorry
 
 /-! ### The exceptional inverse image -/
-
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
-image.
-
-Clause (i), open-immersion case: for an open immersion `f`, `Rf^!` preserves the constructible
-interval and the Tor amplitude *unchanged*, the ambient right adjoint being the exact functor
-`Lf^*`. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] [HasCompactification f]
-    [(R(f)_![A]).IsLeftAdjoint] (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hK : constructibleTorAmplitudeIn A Y a b K) :
-    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) :=
-  sorry
 
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
@@ -403,6 +391,95 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X
     (hK : constructibleFiniteTor A X K) :
     constructibleFiniteTor A Y ((R(f)_![A]).obj K) :=
   sorry
+
+/-! ### Open immersions -/
+
+section OpenImmersion
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U Y : Scheme.{u}} (j : U ⟶ Y)
+  [IsOpenImmersion j] [HasCompactification j] [QuasiCompact j]
+
+/-- The derived lower shriek along a quasi-compact open immersion `j` is extension by zero,
+`Rj_! ≅ D(j_!)`: it is computed by the compactification `U ⟶[j] Y ⟶[𝟙] Y`, and `Rj_!` does not
+depend on the compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`). -/
+noncomputable def rightDerivedLowerShriekIsoOfIsOpenImmersion :
+    R(j)_![ModuleCat.{u + 1} Λ] ≅ D((j)_!open[ModuleCat.{u + 1} Λ]) :=
+  (rightDerivedLowerShriekIso Λ (Compactification.ofIsOpenImmersion j)).symm ≪≫
+    Functor.isoWhiskerLeft D((j)_!open[ModuleCat.{u + 1} Λ])
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (𝟙 Y)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
+        Functor.mapDerivedCategoryNatIso (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Y) ≪≫
+        Functor.mapDerivedCategoryIdIso _) ≪≫
+    Functor.rightUnitor _
+
+/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
+category.
+
+For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
+`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
+`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
+`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
+constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
+formula. -/
+theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
+  let F := (j)_!open[ModuleCat.{u + 1} Λ]
+  refine constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm ⟨⟨⟨?_, fun n ↦ ?_⟩,
+      F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩, fun G ↦ ?_⟩
+  · exact F.bounded_mapDerivedCategory_obj hbc.1
+  · have := hbc.2 n
+    have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙ F).obj K) :=
+      IsConstructibleSheaf.openImmersionLowerShriek j j.closedComplement
+        j.range_closedComplement ((_root_.DerivedCategory.homologyFunctor _ n).obj K)
+    exact IsConstructibleSheaf.of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).app K)
+  · -- `j_!K ⊗ᴸ G ≅ j_!(K ⊗ᴸ j^*G)`
+    have e := (((derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} Λ) j).app
+      K).app ((_root_.DerivedCategory.singleFunctor _ 0).obj G)).symm ≪≫
+      F.mapDerivedCategory.mapIso (((-⊗ᴸ-(U)[ModuleCat.{u + 1} Λ]).obj K).mapIso
+        ((singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} Λ) j).app G))
+    obtain ⟨h₁, h₂⟩ := F.homologyConcentratedIn_mapDerivedCategory_obj (hta ((j)^*[_].obj G))
+    have : _root_.DerivedCategory.TStructure.t.IsGE (F.mapDerivedCategory.obj
+        (((-⊗ᴸ-(U)[ModuleCat.{u + 1} Λ]).obj K).obj (((j)^*[ModuleCat.{u + 1} Λ] ⋙
+          _root_.DerivedCategory.singleFunctor _ 0).obj G))) a := h₁
+    have : _root_.DerivedCategory.TStructure.t.IsLE (F.mapDerivedCategory.obj
+        (((-⊗ᴸ-(U)[ModuleCat.{u + 1} Λ]).obj K).obj (((j)^*[ModuleCat.{u + 1} Λ] ⋙
+          _root_.DerivedCategory.singleFunctor _ 0).obj G))) b := h₂
+    exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
+      _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
+
+/-- For a quasi-compact open immersion `j`, the exceptional inverse image is the restriction,
+`Rj^! ≅ D(j^*)`: both are right adjoint to `Rj_! ≅ D(j_!)`. -/
+noncomputable def rightDerivedUpperShriekIsoOfIsOpenImmersion :
+    R(j)^![ModuleCat.{u + 1} Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]) :=
+  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) j).rightAdjointUniq
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).ofNatIsoLeft
+      (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm)
+
+/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+image.
+
+Clause (i), open-immersion case: for a quasi-compact open immersion `f` and a finite ring `Λ`,
+`Rf^!` preserves the constructible interval and the Tor amplitude *unchanged*, the right adjoint
+of `Rf_! ≅ f_!` being the exact functor `f^*`. -/
+theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b
+      ((R(j)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
+  refine constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm ⟨⟨?_,
+      ((j)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
+  · exact hbc.mapDerivedCategory_upperStar j
+  · exact (torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ j a b hta)
+
+end OpenImmersion
 
 /-! ### The descended functors -/
 

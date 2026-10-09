@@ -95,6 +95,15 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
+/-- An open immersion is compactified by the identity of its target. -/
+def ofIsOpenImmersion (f : X ⟶ Y) [IsOpenImmersion f] : Compactification f where
+  Z := Y
+  g := 𝟙 Y
+  i := f
+  comm := (Category.comp_id f).symm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
 variable {f : X ⟶ Y}
 
 /-- Transport a compactification along an equality of morphisms: if `f' = f`, then a
