@@ -713,4 +713,97 @@ theorem bijective_sum_awayMonomial (k : Type u) [CommRing k] {s : Set n} (hs : s
       Scheme.Opens.ι_appTop, Scheme.Opens.topIso_hom, ← Functor.map_comp]
     rfl
 
+section Twist
+
+open Scheme.Modules
+
+variable {m : ℤ}
+
+/-- **The Laurent monomial `xᵉ` as a section of `𝒪(m)`** over `⋂_{i ∈ s} D₊(xᵢ) ⊆ ℙ(n; S)`, for
+an exponent vector `e` with `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`: the pullback of the section
+`xᵉ` of `𝒪(m)` on the integral model. -/
+noncomputable def twistMonomialSection (s : Set n) (e : laurentExponents s m) :
+    Γ(twist n S m, toProjInt n S ⁻¹ᵁ basicOpenInt n s) :=
+  pullbackSection (toProjInt n S) (Proj.twistMonomial (ULift.{u} ℤ) s e)
+
+variable {S}
+
+lemma twist_presheaf_map_twistMonomialSection {s t : Set n} (hts : t ⊆ s)
+    (e : laurentExponents t m) :
+    (twist n S m).presheaf.map (homOfLE ((toProjInt n S).preimage_mono
+        (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) hts))).op
+        (twistMonomialSection S t e) =
+      twistMonomialSection S s ⟨e.1, e.2.1, fun i hi ↦ e.2.2 i fun h ↦ hi (hts h)⟩ := by
+  have h := pullbackSection_map (toProjInt n S)
+    (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) hts)
+    (Proj.twistMonomial (ULift.{u} ℤ) t e)
+  rw [Proj.twist_presheaf_map_twistMonomial hts] at h
+  exact h.symm
+
+lemma twistMonomialSection_eq_smul {s : Set n} {i : n} (hi : i ∈ s) (e : laurentExponents s m) :
+    twistMonomialSection S s e =
+      (Proj.awayToSection _ _ ≫ (toProjInt n S).appLE (basicOpenInt n s)
+        (toProjInt n S ⁻¹ᵁ basicOpenInt n s) le_rfl)
+        (awayMonomial (ULift.{u} ℤ) s (Proj.shiftExponent m hi e)) •
+        twistMonomialSection S s (Proj.singleExponent (s := s) (m := m) hi) := by
+  rw [twistMonomialSection, Proj.twistMonomial_eq_smul hi e, pullbackSection_smul,
+    Scheme.Hom.appLE_eq_app]
+  rfl
+
+lemma isFreeGenerator_twistMonomialSection_singleExponent {s : Set n} {i : n} (hi : i ∈ s) :
+    IsFreeGenerator (twistMonomialSection S s (Proj.singleExponent (s := s) (m := m) hi)) :=
+  (Proj.isFreeGenerator_twistMonomial_singleExponent hi).pullback_unit_app (toProjInt n S)
+
+open Classical in
+variable (m) in
+/-- Shifting exponent vectors by `m eᵢ`, for `i ∈ s`, identifies the Laurent monomials of
+degree `m` regular on `⋂_{j ∈ s} D₊(xⱼ)` with those of degree `0`. -/
+noncomputable def shiftExponentEquiv {s : Set n} {i : n} (hi : i ∈ s) :
+    laurentExponents s m ≃ laurentExponents s 0 where
+  toFun := Proj.shiftExponent m hi
+  invFun e := ⟨e.1 + Pi.single i m, by simp [Finset.sum_add_distrib, e.2.1], fun j hj ↦ by
+    rw [Pi.add_apply, Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi), add_zero]
+    exact e.2.2 j hj⟩
+  left_inv e := Subtype.ext (by simp [Proj.shiftExponent])
+  right_inv e := Subtype.ext (by simp [Proj.shiftExponent])
+
+/-- **The sections of `𝒪(m)` over `⋂_{i ∈ s} D₊(xᵢ) ⊆ ℙ(n; Spec k)`** for nonempty `s`: every
+section is uniquely a finite `k`-linear combination of the Laurent monomials `xᵉ` with
+`∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`. -/
+theorem bijective_sum_twistMonomialSection (k : Type u) [CommRing k] {s : Set n}
+    (hs : s.Nonempty) (m : ℤ) :
+    Function.Bijective fun c : laurentExponents s m →₀ k ↦ c.sum fun e r ↦
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop ≫
+        ℙ(n; Spec (.of k)).presheaf.map
+          (homOfLE (le_top : toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s ≤ ⊤)).op) r •
+        twistMonomialSection (Spec (.of k)) s e := by
+  obtain ⟨i, hi⟩ := hs
+  have hfun : (fun c : laurentExponents s m →₀ k ↦ c.sum fun e r ↦
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop ≫
+        ℙ(n; Spec (.of k)).presheaf.map
+          (homOfLE (le_top : toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s ≤ ⊤)).op) r •
+        twistMonomialSection (Spec (.of k)) s e) =
+      (fun r ↦ r • twistMonomialSection (Spec (.of k)) s
+        (Proj.singleExponent (s := s) (m := m) hi)) ∘
+      (fun c : laurentExponents s 0 →₀ k ↦ c.sum fun e r ↦
+        ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop ≫
+          ℙ(n; Spec (.of k)).presheaf.map
+          (homOfLE (le_top : toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s ≤ ⊤)).op) r *
+        (Proj.awayToSection _ _ ≫ (toProjInt n (Spec (.of k))).appLE (basicOpenInt n s)
+          (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s) le_rfl)
+          (awayMonomial (ULift.{u} ℤ) s e)) ∘
+      Finsupp.equivMapDomain (shiftExponentEquiv m hi) := by
+    funext c
+    simp only [Function.comp_apply, Finsupp.sum_equivMapDomain]
+    rw [Finsupp.sum, Finsupp.sum, Finset.sum_smul]
+    refine Finset.sum_congr rfl fun e _ ↦ ?_
+    rw [twistMonomialSection_eq_smul hi e, mul_smul]
+    rfl
+  rw [hfun]
+  exact (isFreeGenerator_twistMonomialSection_singleExponent hi).bijective.comp
+    ((bijective_sum_awayMonomial k ⟨i, hi⟩).comp
+      (Finsupp.domCongr (M := k) (shiftExponentEquiv m hi)).bijective)
+
+end Twist
+
 end AlgebraicGeometry.ProjectiveSpace
