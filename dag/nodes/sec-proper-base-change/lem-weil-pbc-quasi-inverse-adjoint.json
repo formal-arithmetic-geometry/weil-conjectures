@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-quasi-inverse-adjoint",
+ "kind": "statement",
+ "title": "A quasi-inverse of an equivalence of categories is both a left and a right adjoint of it",
+ "statement": "Let $\\mathcal X,\\mathcal Y$ be categories and $F:\\mathcal X\\to\\mathcal Y$, $G:\\mathcal Y\\to\\mathcal X$ functors with natural isomorphisms $\\alpha:\\mathrm{id}_{\\mathcal X}\\xrightarrow{\\sim}G\\circ F$ and $\\beta:F\\circ G\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal Y}$ (so $F$ is an equivalence of categories and $G$ a quasi-inverse, Stacks Categories, Definition 001J). Then $G$ is a right adjoint of $F$ and $G$ is a left adjoint of $F$ (Categories, Definition 0037): there are bijections $\\operatorname{Mor}_{\\mathcal Y}(F(X),Y)\\cong\\operatorname{Mor}_{\\mathcal X}(X,G(Y))$ and $\\operatorname{Mor}_{\\mathcal X}(G(Y),X)\\cong\\operatorname{Mor}_{\\mathcal Y}(Y,F(X))$, each natural in $X\\in\\operatorname{Ob}(\\mathcal X)$ and $Y\\in\\operatorname{Ob}(\\mathcal Y)$. More precisely, there is a natural isomorphism $\\alpha':\\mathrm{id}_{\\mathcal X}\\xrightarrow{\\sim}G\\circ F$ such that $\\alpha'$ and $\\beta$ are the unit and counit of an adjunction $F\\dashv G$, and $\\beta^{-1}$ and $\\alpha'^{-1}$ are the unit and counit of an adjunction $G\\dashv F$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Definition Tag 001J (definition-equivalence-categories, line 351) and Definition Tag 0037 (definition-adjoint, line 3344); Stacks has no lemma stating that a quasi-inverse is an adjoint (it is used tacitly, e.g. in the proof of Sites, Lemma 03A0); statement written by an agent for lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functors F G with natural isomorphisms id ≅ F ⋙ G and G ⋙ F ≅ id form an adjoint equivalence; G is left and right adjoint of F",
+   "results": "Functor.isLeftAdjoint_of_isEquivalence (Adjunction.Basic), Functor.isEquivalence_of_isRightAdjoint (Adjunction.Basic), Equivalence.mk (Mathlib.CategoryTheory.Equivalence), Functor.isEquivalence_of_iso, Functor.IsEquivalence.mk', Adjunction.leftAdjointIdIso, Adjunction.toEquivalence_functor",
+   "date": "2026-10-10",
+   "verdict": "match: Equivalence.mk F G η ε (Equivalence.lean:353) followed by Equivalence.toAdjunction (Adjunction/Basic.lean:719) and its symm"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.toAdjunction",
+   "results": "Equivalence.toAdjunction : e.functor ⊣ e.inverse, Equivalence.toAdjunction_unit (= e.unit), Equivalence.toAdjunction_counit (= e.counit), Equivalence.refl_toAdjunction, Equivalence.trans_toAdjunction (all Mathlib.CategoryTheory.Adjunction.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def toAdjunction\\|def adjointifyη\\|protected def mk\\|def symm\\|isLeftAdjoint_of_isEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/{Equivalence.lean,Adjunction/Basic.lean}",
+   "results": "Equivalence.lean:327 adjointifyη η ε : 𝟭 C ≅ F ⋙ G, :353 protected def Equivalence.mk (F G η ε) : C ≌ D := ⟨F, G, adjointifyη η ε, ε, adjointify_η_ε η ε⟩, :366 Equivalence.symm; Adjunction/Basic.lean:719 Equivalence.toAdjunction (unit e.unit, counit e.counit), :772 Functor.isLeftAdjoint_of_isEquivalence (and its dual isRightAdjoint)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "import_flags": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Equivalence.toAdjunction",
+  "file": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "how": "a few Mathlib lemmas, one per clause: e := CategoryTheory.Equivalence.mk F G α β (Mathlib/CategoryTheory/Equivalence.lean:353) is an equivalence with e.functor = F, e.inverse = G, unit e.unitIso = adjointifyη α β (=: α', line 327) and counit e.counitIso = β; e.toAdjunction : F ⊣ G (Adjunction/Basic.lean:719) has unit α' and counit β (toAdjunction_unit, toAdjunction_counit); e.symm.toAdjunction : G ⊣ F (Equivalence.symm, Equivalence.lean:366) has unit β⁻¹ and counit α'⁻¹. Mathlib's adjunction F ⊣ G is equivalent to Stacks' natural hom bijection by Adjunction.homEquiv."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Equivalence.toAdjunction (Adjunction/Basic.lean:719) on Equivalence.mk F G α β (Equivalence.lean:353) and its symm."
+ }
+}

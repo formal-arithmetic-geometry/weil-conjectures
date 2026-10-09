@@ -41,11 +41,105 @@
   }
  ],
  "import_flags": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (clause (1); symmetry of the hypotheses).* Let $\\{g_a:Y_a\\to Y\\}_{a\\in I}$ be a family of morphisms of $\\mathcal C$ with common target. By the hypothesis on $p$, applied to the family $\\{p'(g_a):p'(Y_a)\\to p'(Y)\\}_{a\\in I}$ of $\\mathcal A$, this family is a covering of $\\mathcal A$ if and only if $\\{pp'(g_a):pp'(Y_a)\\to pp'(Y)\\}_{a\\in I}$ is a covering of $\\mathcal C$. By naturality of $\\varepsilon$, $g_a\\circ\\varepsilon_{Y_a}=\\varepsilon_Y\\circ pp'(g_a)$ for every $a$, with $\\varepsilon_{Y_a},\\varepsilon_Y$ isomorphisms. If $\\{g_a\\}$ is a covering, [lem-weil-pbc-site-covering-isomorphic-family] with $U_a=Y_a$, $U=Y$, $f_a=pp'(g_a)$, $\\sigma_a=\\varepsilon_{Y_a}$, $\\varphi=\\varepsilon_Y$ shows that $\\{pp'(g_a)\\}$ is a covering. Conversely, if $\\{pp'(g_a)\\}$ is a covering, the same lemma with the roles exchanged ($U_a=pp'(Y_a)$, $U=pp'(Y)$, $f_a=g_a$, $\\sigma_a=\\varepsilon_{Y_a}^{-1}$, $\\varphi=\\varepsilon_Y^{-1}$; indeed $pp'(g_a)\\circ\\varepsilon_{Y_a}^{-1}=\\varepsilon_Y^{-1}\\circ g_a$) shows that $\\{g_a\\}$ is a covering. This proves (1). Consequently the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$, with $\\mathcal A$ and $\\mathcal C$ exchanged, satisfy all hypotheses of the lemma: $p'$ is an equivalence preserving and reflecting coverings, with quasi-inverse $p$ and natural isomorphisms $\\varepsilon^{-1}:\\mathrm{id}_{\\mathcal C}\\cong p\\circ p'$, $\\eta^{-1}:p'\\circ p\\cong\\mathrm{id}_{\\mathcal A}$.",
+   "uses": [
+    "lem-weil-pbc-site-covering-isomorphic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00VH (definition-site, line 679); written by an agent"
+   }
+  },
+  {
+   "text": "*Step 2 ($p$ preserves fibre products).* By [lem-weil-pbc-quasi-inverse-adjoint] (with $F=p'$, $G=p$, $\\alpha=\\varepsilon^{-1}$, $\\beta=\\eta^{-1}$), $p$ is a right adjoint of $p'$. Let $T\\to V\\leftarrow V_a$ be morphisms of $\\mathcal A$ whose fibre product $P=T\\times_VV_a$ (with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$) exists; it is the limit of the diagram $T\\to V\\leftarrow V_a$ indexed by the category $\\{1\\to0\\leftarrow2\\}$. By [lem-weil-pbc-right-adjoint-preserves-limits], $(p(P),p(\\mathrm{pr}_1),p(\\mathrm{pr}_2))$ is a limit of $p(T)\\to p(V)\\leftarrow p(V_a)$, i.e. a fibre product $p(T)\\times_{p(V)}p(V_a)$ in $\\mathcal C$. Hence this fibre product exists, and the canonical morphism $p(T\\times_VV_a)\\to p(T)\\times_{p(V)}p(V_a)$ (to any chosen fibre product, the morphism with components $p(\\mathrm{pr}_1),p(\\mathrm{pr}_2)$) is the comparison between two limits of the same diagram compatible with the projections, hence an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition Tag 001J (line 351), Definition Tag 0037 (line 3344), Lemma Tag 0038 (lemma-adjoint-exact, line 3472) (2); written by an agent"
+   }
+  },
+  {
+   "text": "*Step 3 ($p$ is continuous).* Let $\\{V_a\\to V\\}_{a\\in I}$ be a covering of $\\mathcal A$. (a) $\\{p(V_a)\\to p(V)\\}_{a\\in I}$ is a covering of $\\mathcal C$ by the hypothesis on $p$. (b) For a morphism $T\\to V$ of $\\mathcal A$ the fibre products $T\\times_VV_a$ exist (axiom (iii) of 00VH) and the canonical morphisms $p(T\\times_VV_a)\\to p(T)\\times_{p(V)}p(V_a)$ are isomorphisms by Step 2. So $p$ is continuous (Sites, Definition 00WV, [def-weil-pbc-sites-and-cohomology](3)).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00WV (definition-continuous, line 2524)"
+   }
+  },
+  {
+   "text": "*Step 4 ($p^s$ and $p'^s$ are quasi-inverse equivalences).* By Step 3, and by Step 3 applied to the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$ of Step 1, $p$ and $p'$ are continuous; by [lem-weil-pbc-site-continuous-pushforward-sheaf] (Sites, Lemma 00WW), $p^s\\mathcal G=\\mathcal G\\circ p$ is a sheaf of sets (resp. abelian sheaf) on $\\mathcal A$ for every sheaf of sets (resp. abelian sheaf) $\\mathcal G$ on $\\mathcal C$, and $p'^s\\mathcal F=\\mathcal F\\circ p'$ is one on $\\mathcal C$ for every $\\mathcal F$ on $\\mathcal A$; on morphisms $p^s\\psi=(\\psi_{p(X)})_X$, $p'^s\\phi=(\\phi_{p'(Y)})_Y$, so both are functors. For a sheaf $\\mathcal G$ on $\\mathcal C$ we have $p'^sp^s\\mathcal G=\\mathcal G\\circ p\\circ p'$, and the maps $\\mathcal G(\\varepsilon_Y):\\mathcal G(Y)\\to\\mathcal G(pp'(Y))$ are bijections (group isomorphisms), with inverses $\\mathcal G(\\varepsilon_Y^{-1})$; they are natural in $Y$ by naturality of $\\varepsilon$ and functoriality of $\\mathcal G$, and natural in $\\mathcal G$ because morphisms of sheaves are natural transformations. So they form a natural isomorphism $\\mathrm{id}\\cong p'^s\\circ p^s$ of functors on sheaves on $\\mathcal C$. Likewise the maps $\\mathcal F(\\eta_X):\\mathcal F(p'p(X))\\to\\mathcal F(X)$ form a natural isomorphism $p^s\\circ p'^s\\cong\\mathrm{id}$ on sheaves on $\\mathcal A$. Hence $p^s$ and $p'^s$ are quasi-inverse equivalences of categories (Categories, Definition 001J), on sheaves of sets and on abelian sheaves. This proves (2) (with Step 3) and (3).",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf, line 2548); categories.tex Definition Tag 001J; written by an agent"
+   }
+  },
+  {
+   "text": "*Step 5 ($p_s$ is a quasi-inverse of $p^s$).* By Step 4 the hypothesis of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (Sites, Lemma 00WX) holds for $u=p$, so $p_s$ is a left adjoint of $p^s$ on sheaves of sets, resp. on abelian sheaves. By [lem-weil-pbc-quasi-inverse-adjoint] applied to the quasi-inverse pair $(p^s,p'^s)$ of Step 4, $p'^s$ is both a left adjoint and a right adjoint of $p^s$. By [lem-weil-pbc-conjugate-iso-unit-equation] with $R_1=R_2=p^s$, $\\delta=\\mathrm{id}$, $L_1=p_s$, $L_2=p'^s$ (uniqueness of left adjoints) there is a natural isomorphism $c:p_s\\xrightarrow{\\sim}p'^s$. Then $p^s\\circ p_s\\cong p^s\\circ p'^s\\cong\\mathrm{id}$ and $p_s\\circ p^s\\cong p'^s\\circ p^s\\cong\\mathrm{id}$ (whiskering $c$ and composing with the isomorphisms of Step 4), so $p_s$ is a quasi-inverse of $p^s$, on sheaves of sets and on abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WX (lemma-adjoint-sheaves, line 2579); written by an agent"
+   }
+  },
+  {
+   "text": "*Step 6 ($p_s$ is exact; $p$ defines a morphism of sites $\\mathcal C\\to\\mathcal A$).* On sheaves of sets, $p_s$ is a left adjoint of $p^s$ (Step 5), so by [lem-weil-pbc-left-adjoint-preserves-colimits] it commutes with all colimits that exist, in particular finite ones. $p'^s$ is a right adjoint of $p^s$ (Step 5), so by [lem-weil-pbc-right-adjoint-preserves-limits] it commutes with all limits that exist. For a finite diagram in $\\Sh(\\mathcal A)$ with limit cone $\\lambda$, the cone $p_s(\\lambda)$ is isomorphic through the components of $c:p_s\\cong p'^s$ (Step 5) to the limit cone $p'^s(\\lambda)$, and a cone isomorphic to a limit cone is a limit cone; so $p_s$ commutes with finite limits. Hence $p_s$ is exact (Categories, Definition 0034), and the continuous functor $p$ (Step 3) defines a morphism of sites $\\mathcal C\\to\\mathcal A$ (Sites, Definition 00X1, [def-weil-pbc-sites-and-cohomology](3)).",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00X1 (definition-morphism-sites, line 2687); categories.tex Lemma Tag 0038 (lemma-adjoint-exact, line 3472), Definition Tag 0034; written by an agent"
+   }
+  },
+  {
+   "text": "*Step 7 (the same for $p'$).* By Step 1 the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$ satisfy the hypotheses of the lemma with $\\mathcal A$ and $\\mathcal C$ exchanged. Steps 2, 3, 5 and 6 applied to them give: $p'$ is continuous, $p'_s$ is a quasi-inverse of $p'^s$ (on sheaves of sets and on abelian sheaves), $p'_s$ on sheaves of sets is exact, and $p'$ defines a morphism of sites $\\mathcal A\\to\\mathcal C$. Together with Steps 1-6 this proves (1)-(4).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-covering-isomorphic-family",
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; Definitions Tag 00VH, 00WV, 00X1 and Lemmas Tag 00WW, 00WX of sites.tex, with Categories Definitions 001J, 0037 and Lemma 0038; Lemma 03A0 (lemma-equivalence) is the topos-level analogue for cocontinuous functors and is not used"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,6 +164,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: an equivalence preserving and reflecting coverings, with a quasi-inverse, gives continuous functors and morphisms of sites in both directions, with p^s, p′^s quasi-inverse; well posed; unsplit."
+  "note": "Split reviewed: 7 steps (clause (1) via the isomorphic-family node, valid under the reindexing convention now in def-weil-pbc-sites-and-cohomology (1); fibre products preserved since p is a right adjoint; continuity; p^s, p'^s quasi-inverse; p_s iso to p'^s by uniqueness of left adjoints; exactness; symmetry). Correct. New Mathlib leaf verified."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "worker": "stage1",
+  "summary": "Checked the statement against sites.tex Definitions 00VH, 00WV, 00X1 and Lemmas 00WW, 00WX: correct as written (clause (4) asks exactness on sheaves of sets, as 00X1 does; the quasi-inverse claims hold on sets and abelian sheaves). Proof in 7 steps: (1) via the isomorphic-family lemma and naturality of epsilon, which also makes the hypotheses symmetric in (p,p'); fibre products preserved since p is a right adjoint of p' (new Mathlib leaf lem-weil-pbc-quasi-inverse-adjoint, Equivalence.mk + toAdjunction) and right adjoints preserve limits; continuity; p^s, p'^s quasi-inverse via 00WW node and epsilon, eta; p_s iso to p'^s by uniqueness of left adjoints (conjugate-iso node), hence quasi-inverse; exactness: left adjoint gives colimits, the iso with the right adjoint p'^s gives limits; p' by symmetry. Lemma 03A0 is not needed. Mathlib: no statement for Stacks family-sites (searches of the creator, all three kinds, still valid); Equivalence.sheafCongr covers only clause (3) for Grothendieck topologies."
  }
 }
