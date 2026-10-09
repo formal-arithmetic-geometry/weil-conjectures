@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
@@ -44,6 +45,8 @@ the members of an étale cover are not open subschemes of the source.
   morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
+- `AlgebraicGeometry.isReduced_pullback_of_perfectField`: over a perfect field, the fibre
+  product of two reduced schemes is reduced.
 
 The smooth case, in which the schemes can moreover be taken affine and the first leg admits a
 section (Stacks `0EY4`), is
@@ -60,7 +63,7 @@ section (Stacks `0EY4`), is
 
 universe u
 
-open CategoryTheory
+open CategoryTheory TensorProduct
 
 namespace AlgebraicGeometry
 
@@ -135,5 +138,31 @@ theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f
       (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, GeometricallyReduced (q i)) ∧
       (∀ i, q i ≫ r i = p i ≫ f) :=
   sorry
+
+/-- Over a perfect field `k`, the fibre product of the spectra of two reduced `k`-algebras is
+reduced: it is the spectrum of their tensor product. -/
+theorem isReduced_pullback_specMap_of_perfectField {k : Type u} [Field k] [PerfectField k]
+    {A B : CommRingCat.{u}} (φ : CommRingCat.of k ⟶ A) (ψ : CommRingCat.of k ⟶ B)
+    [_root_.IsReduced A] [_root_.IsReduced B] :
+    IsReduced (Limits.pullback (Spec.map φ) (Spec.map ψ)) := by
+  algebraize [φ.hom, ψ.hom]
+  have : _root_.IsReduced (A ⊗[k] B) := isReduced_tensorProduct_of_perfectField k A B
+  exact isReduced_of_isOpenImmersion (pullbackSpecIso k A B).hom
+
+/-- Over a perfect field `k`, the fibre product of two reduced `k`-schemes is reduced: it is
+covered by the spectra of tensor products `A ⊗[k] B` of reduced `k`-algebras. -/
+theorem isReduced_pullback_of_perfectField {k : Type u} [Field k] [PerfectField k]
+    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [IsReduced X]
+    [IsReduced Y] : IsReduced (Limits.pullback f g) := by
+  refine @IsReduced.of_openCover _
+    (Scheme.Pullback.openCoverOfLeftRight X.affineCover Y.affineCover f g) fun ij ↦ ?_
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective (X.affineCover.f ij.1 ≫ f)
+  obtain ⟨ψ, hψ⟩ := Spec.map_surjective (Y.affineCover.f ij.2 ≫ g)
+  have : IsReduced (X.affineCover.X ij.1) := isReduced_of_isOpenImmersion (X.affineCover.f _)
+  have : IsReduced (Y.affineCover.X ij.2) := isReduced_of_isOpenImmersion (Y.affineCover.f _)
+  have := (affine_isReduced_iff _).mp ‹IsReduced (X.affineCover.X ij.1)›
+  have := (affine_isReduced_iff _).mp ‹IsReduced (Y.affineCover.X ij.2)›
+  have := isReduced_pullback_specMap_of_perfectField φ ψ
+  rwa [hφ, hψ] at this
 
 end AlgebraicGeometry
