@@ -1,0 +1,51 @@
+{
+ "id": "def-weil-closed-points",
+ "kind": "definition",
+ "title": "Closed points of a scheme",
+ "statement": "Let $X$ be a scheme. A point $x\\in X$ is *closed* if the one-point set $\\{x\\}$ is closed in the underlying topological space of $X$. Write $|X|$ for the set of closed points of $X$.",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "§1, (1.1), p. 273: \"$|X|$ l'ensemble des points fermés de $X$\" (the notation; a closed point is one whose singleton is closed)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def closedPoints\\|abbrev closedPoints' Mathlib/",
+   "results": "Mathlib/Topology/JacobsonSpace.lean:38 `def closedPoints : Set X := Set.ofPred (IsClosed {·})`, with `mem_closedPoints_iff : x ∈ closedPoints X ↔ IsClosed {x}` (line 42)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'closedPoint\\|IsClosed {x}' Mathlib/AlgebraicGeometry/",
+   "results": "only `IsLocalRing.closedPoint` (the closed point of the spectrum of a local ring) and uses of `IsClosed {x}` for points of schemes (AffineScheme.lean:807–810, through `PrimeSpectrum.isClosed_singleton_iff_isMaximal`); no scheme-specific definition, the topological one applies to the underlying space",
+   "date": "2026-10-09",
+   "verdict": "no scheme-specific declaration; the topological `closedPoints` is the match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "closedPoints",
+  "file": "Mathlib/Topology/JacobsonSpace.lean",
+  "how": "exact: `closedPoints X` for the underlying topological space of the scheme `X`; `x ∈ closedPoints X ↔ IsClosed {x}`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean_notes": "The source repository works with `AlgebraicGeometry.Scheme.finitePoints` (WeilConjectures/ZetaFunction.lean:66, the points with finite residue field) in place of closed points; `AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints` (WeilConjectures/ClosedPoints.lean:150, sorry-free) identifies the two for a scheme locally of finite type over ℤ, hence for every finite-type scheme over a finite field."
+}

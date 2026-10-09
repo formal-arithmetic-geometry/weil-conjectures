@@ -1,0 +1,56 @@
+{
+ "id": "def-weil-closed-point-degree",
+ "kind": "definition",
+ "title": "Degree of a closed point of a scheme over a field",
+ "statement": "Let $k_0$ be a field and $Y_0$ a scheme over $k_0$, with structure morphism $f:Y_0\\to\\operatorname{Spec}k_0$, and let $x\\in|Y_0|$ be a closed point [def-weil-closed-points]. Its residue field $\\kappa(x)$ [def-weil-residue-field] is a field extension of $k_0=\\kappa(f(x))$ through the homomorphism induced by $f$. The *degree* of $x$ is\n\n$$\n \\deg(x)=[\\kappa(x):k_0],\n$$\n\nthe dimension of $\\kappa(x)$ as a $k_0$-vector space [def-weil-vector-space-dimension], with the convention $\\deg(x)=0$ when this dimension is infinite. When $Y_0$ is of finite type over $k_0$, the residue field of every closed point is a finite extension of $k_0$ [lem-kun-closed-point-field], so $\\deg(x)\\in\\mathbf Z_{\\geq1}$ for every $x\\in|Y_0|$.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "§27 (Integrality), p. 157: \"Let $x$ be a closed point of $X_0$. The residue field $\\kappa(x)$ is a finite extension of $\\mathbf F_q$; we set $\\deg x=[\\kappa(x):\\mathbf F_q]$\"; also Deligne, Weil I, (1.1), p. 274 (\"Posant $\\deg(x)=[k(x):\\mathbf F_q]$\")"
+ },
+ "stmt_deps": [
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension",
+  "lem-kun-closed-point-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finrank.*residueField\\|residueDegree' Mathlib/AlgebraicGeometry/",
+   "results": "Mathlib/AlgebraicGeometry/ResidueField.lean:147 `def Hom.residueDegree (f : X ⟶ Y) (x : X) : ℕ := letI := (f.residueFieldMap x).hom.toAlgebra; Module.finrank (Y.residueField (f x)) (X.residueField x)` (docstring: degree of the field extension κ(f x) → κ(x), default 0 when infinite); `residueDegree_id` (line 152); used in AlgebraicCycle/Basic.lean:56",
+   "date": "2026-10-09",
+   "verdict": "generalization: the degree of the residue-field extension along any morphism at any point; specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'degreeOver\\|degree of a closed point' Mathlib/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no declaration under the project's name"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.residueDegree",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "specializes in one line: `deg(x) = f.residueDegree x` for the structure morphism `f : Y₀ ⟶ Spec (.of k₀)`, since `(Spec (.of k₀)).residueField (f x) ≅ k₀` by `AlgebraicGeometry.Spec.residueFieldIso` (same file, line 301: the residue field of the field `k₀` at its only prime, the zero ideal, is `k₀`), and `Module.finrank` is invariant under this isomorphism; the convention 0 for an infinite extension is Mathlib's"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean_notes": "The source repository's `AlgebraicGeometry.Scheme.Hom.degreeOver` (WeilConjectures/ZetaSeries.lean:228, closed) is this definition with the identification κ(f x) = k₀ made explicit through `Hom.residueFieldAlgebraMap` (line 221): `Module.finrank k (X.residueField x)` for the algebra structure `k →+* X.residueField x` induced by `f`."
+}

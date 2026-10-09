@@ -1,0 +1,43 @@
+{
+ "id": "def-weil-residue-field",
+ "kind": "definition",
+ "title": "Residue field of a point of a scheme",
+ "statement": "Let $X$ be a scheme and $x\\in X$ a point, with local ring $\\mathcal O_{X,x}$ (the stalk of the structure sheaf at $x$) and maximal ideal $\\mathfrak m_x$. The *residue field* of $X$ at $x$ is the field\n\n$$\n \\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x .\n$$\n\nA morphism of schemes $f:X\\to Y$ induces, for every $x\\in X$, a homomorphism of fields $\\kappa(f(x))\\to\\kappa(x)$, the map induced on residue fields by the local homomorphism $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$. For $Y=\\operatorname{Spec}K$ with $K$ a field, $\\kappa(f(x))=K$, so $\\kappa(x)$ is a field extension of $K$ through $f$.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "§27 (Integrality), p. 157: \"The residue field $\\kappa(x)=\\mathcal O_{X_0,x}/\\mathfrak m_x$\"; also Deligne, Weil I, (1.1), p. 273 (\"le corps résiduel $k(x)$ de $X$ en $x$\")"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def residueField\\|def Hom.residueFieldMap\\|def Spec.residueFieldIso\\|def fromSpecResidueField' Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "line 45 `def residueField (x : X) : CommRingCat` (the residue field of the stalk, a field); line 123 `def Hom.residueFieldMap (f : X ⟶ Y) (x : X) : Y.residueField (f x) ⟶ X.residueField x`; line 237 `fromSpecResidueField`; line 301 `Spec.residueFieldIso : (Spec R).residueField x ≅ .of x.asIdeal.ResidueField`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.residueField",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "exact: `X.residueField x`; the induced map of residue fields is `AlgebraicGeometry.Scheme.Hom.residueFieldMap f x` (same file, line 123), and for `Y = Spec K` the identification `κ(f x) ≅ K` is `AlgebraicGeometry.Spec.residueFieldIso` (line 301), the residue field of a field at its zero ideal being the field itself"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

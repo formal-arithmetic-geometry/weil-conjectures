@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-point-counts-finite",
+ "kind": "statement",
+ "title": "Finiteness of point counts and of closed points of bounded degree",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ with $k_0=\\Fq$ [def-weil-finite-field-fiber], and let $Y_0$ be a $k_0$-scheme of finite type [def-weil-finite-type-morphism].\n\n1. For every finite field extension $K$ of $k_0$, the set $Y_0(K)=\\operatorname{Hom}_{k_0}(\\operatorname{Spec}K,Y_0)$ of $K$-valued points of $Y_0$ [def-weil-field-valued-points] is finite. In particular $\\#Y_0(\\mathbf F_{q^n})$ is a nonnegative integer for every $n\\geq1$.\n2. For every integer $m\\geq0$, the set of closed points $x\\in|Y_0|$ [def-weil-closed-points] with $\\deg(x)\\leq m$ [def-weil-closed-point-degree] is finite. In particular, for every $r\\geq1$, the set of closed points of degree $r$ is finite.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/49_zeta_linear_algebra.tex",
+  "place": "Theorem (Closed-point--orbit dictionary), lines 358–372: \"Consequently, only finitely many closed points have degree at most a fixed integer\", with \\deps naming \"finiteness of rational points on a finite-type scheme over a finite field\"; Lean: WeilConjectures/PointCount.lean, `AlgebraicGeometry.Scheme.Hom.finite_fieldPoints` (slopmaster2 lines 185–189) and `AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le` (lines 364–380)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-field-valued-points",
+  "def-weil-closed-points",
+  "def-weil-closed-point-degree"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Finite (Spec\\|finite_hom\\|Finite.*⟶ X)' Mathlib/AlgebraicGeometry/",
+   "results": "only `IsFinite (Spec.map f) ↔ f.hom.Finite` (Morphisms/Finite.lean:74) and quasi-finiteness of morphisms (Morphisms/QuasiFinite.lean:247); nothing on finiteness of the set of morphisms from the spectrum of a finite field",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finitely many closed points\\|Finite.*closedPoints' Mathlib/AlgebraicGeometry/ Mathlib/RingTheory/Jacobson/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean": {
+  "module": "WeilConjectures.PointCount",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finite_fieldPoints",
+  "branch": "slopmaster2",
+  "line": 185,
+  "sorry_free": true,
+  "others": [
+   {
+    "module": "WeilConjectures.PointCount",
+    "declaration": "AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le",
+    "branch": "slopmaster2",
+    "line": 364,
+    "sorry_free": true
+   }
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.finite_fieldPoints",
+     "module": "WeilConjectures.PointCount",
+     "lines": [
+      144,
+      148
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le",
+     "module": "WeilConjectures.PointCount",
+     "lines": [
+      261,
+      277
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.finite_fieldPoints",
+     "module": "WeilConjectures.PointCount",
+     "lines": [
+      185,
+      189
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le",
+     "module": "WeilConjectures.PointCount",
+     "lines": [
+      364,
+      380
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean_notes": "Hand-written audit (tools/lean_status.py reads only `blueprint_lean`, which a new node has none of): both declarations exist on both branches, WeilConjectures/PointCount.lean contains no `sorry`, and `Hom.zetaSeries_eq_tprod` (WeilConjectures/EulerProduct.lean), which uses `finite_setOf_degreeOver_le`, is audited `closed` on both branches in prop-euler-product. The Lean states clause 2 for `X.finitePoints` (points with finite residue field) with `Hom.degreeOver`, which are the closed points and their degrees for a finite-type scheme over a finite field (`finitePoints_eq_closedPoints`, WeilConjectures/ClosedPoints.lean:150), and clause 1 for any finite field extension `K` of `k` (`[Finite K]`), the hypotheses `[QuasiCompact f] [LocallyOfFiniteType f]` being finite type."
+}

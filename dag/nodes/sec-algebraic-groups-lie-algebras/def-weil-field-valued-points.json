@@ -1,0 +1,57 @@
+{
+ "id": "def-weil-field-valued-points",
+ "kind": "definition",
+ "title": "Points of a scheme over a field with values in a field extension, and their number",
+ "statement": "Let $k_0$ be a field, $Y_0$ a scheme over $k_0$ with structure morphism $f:Y_0\\to\\operatorname{Spec}k_0$, and $K$ a field extension of $k_0$; write $\\operatorname{Spec}K\\to\\operatorname{Spec}k_0$ for the morphism induced by the inclusion $k_0\\to K$. The set of *$K$-valued points* of $Y_0$ over $k_0$ is\n\n$$\n Y_0(K)=\\operatorname{Hom}_{k_0}(\\operatorname{Spec}K,Y_0)\n =\\{\\,g:\\operatorname{Spec}K\\to Y_0\\ :\\ f\\circ g=(\\operatorname{Spec}K\\to\\operatorname{Spec}k_0)\\,\\},\n$$\n\nthe set of morphisms of schemes over $\\operatorname{Spec}k_0$ from $\\operatorname{Spec}K$ to $Y_0$. When $Y_0(K)$ is a finite set, $\\#Y_0(K)\\in\\mathbf Z_{\\geq0}$ denotes its number of elements.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "§27 (Integrality), p. 157: \"A point of $X_0$ with coordinates in $\\mathbf F_{q^m}$ is a map $\\operatorname{Spec}\\mathbf F_{q^m}\\to X_0$\"; §26, p. 151: \"$N_m$ the number of points on $X_0$ with coordinates in $\\mathbf F_{q^m}$\"",
+  "external": [
+   {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/49_zeta_linear_algebra.tex",
+    "place": "Definition (Point counts), line 340"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Nat.card\\|rationalPoint\\|fieldPoints\\|rational points' Mathlib/AlgebraicGeometry/",
+   "results": "only Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean and EllipticCurve/Affine/Point.lean (affine points of a Weierstrass curve), not the scheme-theoretic notion",
+   "date": "2026-10-09",
+   "verdict": "no scheme-specific declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Over\\|protected def Over.Hom' Mathlib/CategoryTheory/Comma/Over/Basic.lean; grep -n 'IsOver\\|CanonicallyOver\\|asOver' Mathlib/AlgebraicGeometry/Over.lean",
+   "results": "Over/Basic.lean:39 `def Over (X : T) := CostructuredArrow (𝟭 T) X`, line 43 `Over.Hom f g := CommaMorphism f g` (a morphism `g.left ⟶ f.left` with the commutation `w`); AlgebraicGeometry/Over.lean:46 `Hom.IsOver f S` with `isOver_iff : f.IsOver S ↔ f ≫ Y ↘ S = X ↘ S` (line 49), `asOver` (55), `Hom.asOver` (58)",
+   "date": "2026-10-09",
+   "verdict": "generalization: hom types of the over category; specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Over",
+  "file": "Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+  "how": "specializes in one line: `Y₀(K)` is the hom type `Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) ⟶ Over.mk f` in `Over (Spec (CommRingCat.of k₀))`, whose elements are morphisms `g : Spec (.of K) ⟶ Y₀` with `g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k₀ K))`; its number of elements is `Nat.card` of that type (Mathlib/SetTheory/Cardinal/Finite.lean:41, value 0 when infinite); the scheme-level packaging is `AlgebraicGeometry.Scheme.Hom.IsOver` (Mathlib/AlgebraicGeometry/Over.lean:46)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean_notes": "The source repository defines exactly this subtype as `AlgebraicGeometry.Scheme.Hom.fieldPoints f K := {g : Spec (.of K) ⟶ X // g ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k K))}` (Comparator/Weil/Definitions.lean:85, module `Weil.Definitions`, both branches, sorry-free) and the count as `Hom.pointCount f n := Nat.card (f.fieldPoints (FiniteField.galoisExtension k n))` (line 91), with `FiniteField.galoisExtension k n` (line 67) a model of the degree-n extension; `Hom.nat_card_fieldPoints_congr` (WeilConjectures/ZetaSeries.lean:172) shows the count does not depend on the model."
+}

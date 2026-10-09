@@ -1,0 +1,66 @@
+{
+ "id": "def-weil-power-series-exponential",
+ "kind": "definition",
+ "title": "Formal exponential of a power series without constant term",
+ "statement": "Let $R$ be a commutative $\\mathbf Q$-algebra and $T$ an indeterminate, with the ring $R[[T]]$ of formal power series [def-weil-formal-power-series]. For $U\\in TR[[T]]$, a power series with constant coefficient $0$, the *formal exponential* of $U$ is\n\n$$\n \\exp(U)=\\sum_{r\\geq0}\\frac{U^r}{r!}\\in1+TR[[T]].\n$$\n\nThe sum is coefficientwise finite: $U^r$ is divisible by $T^r$, so the coefficient of $T^N$ in $\\exp(U)$ is $\\sum_{r=0}^{N}\\frac1{r!}[T^N]U^r$; explicitly, for $U=\\sum_{n\\geq1}u_nT^n$ and $N\\geq1$,\n\n$$\n [T^N]\\exp(U)=\\sum_{r=1}^{N}\\frac1{r!}\\sum_{\\substack{n_1+\\cdots+n_r=N\\\\ n_j\\geq1}}u_{n_1}\\cdots u_{n_r},\n$$\n\nand the constant coefficient of $\\exp(U)$ is $1$.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/49_zeta_linear_algebra.tex",
+  "place": "Definition (Formal exponential and logarithm), lines 98–112, and Lemma (Finite coefficient formulas), lines 114–131",
+  "external": [
+   {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "§26, p. 151: $Z(X_0,t)=\\exp(\\sum N_m t^m/m)=1+\\sum N_m t^m/m+(\\sum N_m t^m/m)^2/2!+\\cdots$, a formal power series with coefficients in $\\mathbf Q$"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-formal-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def exp\\|constantCoeff_exp\\|coeff_exp' Mathlib/RingTheory/PowerSeries/Exp.lean",
+   "results": "line 49 `def exp : PowerSeries A := mk fun n => algebraMap ℚ A (1 / n !)` for `[Ring A] [Algebra ℚ A]`; line 55 `coeff_exp`; line 59 `constantCoeff_exp : constantCoeff (exp A) = 1`",
+   "date": "2026-10-09",
+   "verdict": "match for the exponential series itself"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def subst\\|HasSubst.of_constantCoeff_zero' Mathlib/RingTheory/PowerSeries/Substitution.lean; grep -n 'constantCoeff_subst' Mathlib/RingTheory/MvPowerSeries/Substitution.lean",
+   "results": "PowerSeries/Substitution.lean:158 `def subst (a : MvPowerSeries τ S) (f : PowerSeries R)` (substitution of `a` for the variable of `f`), line 67 `HasSubst.of_constantCoeff_zero'` (a series with zero constant coefficient may be substituted), line 171 `substAlgHom`; MvPowerSeries/Substitution.lean:319 `constantCoeff_subst`, 324 `constantCoeff_subst_eq_zero`",
+   "date": "2026-10-09",
+   "verdict": "match for substituting U into the exponential series"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '(exp .*).subst\\|exp_subst\\|subst_exp\\|def expOf' Mathlib/RingTheory/",
+   "results": "none: no named declaration for the composite exp ∘ U",
+   "date": "2026-10-09",
+   "verdict": "no named composite; the composite is one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PowerSeries.exp",
+  "file": "Mathlib/RingTheory/PowerSeries/Exp.lean",
+  "how": "specializes in one line: `exp(U) = (PowerSeries.exp R).subst U` with `PowerSeries.subst` (Mathlib/RingTheory/PowerSeries/Substitution.lean:158), legitimate by `PowerSeries.HasSubst.of_constantCoeff_zero'` (line 67) since `constantCoeff U = 0`; the coefficient formula is `PowerSeries.coeff_subst` with `PowerSeries.coeff_exp`, and the constant coefficient 1 is `PowerSeries.constantCoeff_exp` (Exp.lean:59) with `MvPowerSeries.constantCoeff_subst` (MvPowerSeries/Substitution.lean:319)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-point-counts-zeta",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean_notes": "This is how the source repository writes the zeta series: `Hom.zetaSeries f := (PowerSeries.exp ℚ).subst (PowerSeries.mk fun n ↦ if n = 0 then 0 else (f.pointCount n : ℚ) / n)` (Comparator/Weil/Definitions.lean:100), and `Hom.constantCoeff_zetaSeries` (WeilConjectures/ZetaSeries.lean:185, closed) is the constant-coefficient clause for it."
+}
