@@ -129,3 +129,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-09, delivery of C: lem-sc-c3 merged from deliver/C/lem-sc-c3 (1 commit(s), 0 new node(s)); claim closed
 - 2026-10-09, delivery of C: lem-sc-c4 merged from deliver/C/lem-sc-c4 (1 commit(s), 0 new node(s)); claim closed
 - 2026-10-09, delivery of C: lem-sc-c5 merged from deliver/C/lem-sc-c5 (1 commit(s), 0 new node(s)); claim closed
+- 2026-10-09, delivery of C: lem-sc-c7 merged from deliver/C/lem-sc-c7 (1 commit(s), 0 new node(s)); claim closed
