@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-algebra-tensor-map-ring-hom",
+ "kind": "statement",
+ "title": "Tensoring an algebra homomorphism with the identity gives an algebra homomorphism",
+ "statement": "Let $R$ be a commutative ring, $A$, $C$, $N$ commutative $R$-algebras and $f:A\\to C$ a homomorphism of $R$-algebras. Give $A\\otimes_RN$ and $C\\otimes_RN$ their $R$-algebra structures, with multiplication $(a\\otimes n)(a'\\otimes n')=aa'\\otimes nn'$ and unit $1\\otimes1$. Then the $R$-linear map $f\\otimes\\mathrm{id}_N:A\\otimes_RN\\to C\\otimes_RN$, $a\\otimes n\\mapsto f(a)\\otimes n$, is a homomorphism of $R$-algebras, in particular a ring homomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00CV (section-tensor-product, line 1702) for the tensor product of modules, and Section Tag 05G3 (section-base-change, line 2404), where $S\\otimes_RR'$ is used as a ring; the ring structure on a tensor product of algebras and the functoriality $f\\otimes\\mathrm{id}$ are not stated in Stacks"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of two algebra homomorphisms is an algebra homomorphism Algebra.TensorProduct.map",
+   "results": "Algebra.TensorProduct.map, Algebra.TensorProduct.map_tmul, Algebra.TensorProduct.productMap, Algebra.TensorProduct.rTensor (Mathlib.RingTheory.TensorProduct.Maps); AlgCat.hom_tensorHom; CommAlgCat.tensorHom_hom",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.TensorProduct.rTensor"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.rTensor",
+   "results": "Algebra.TensorProduct.rTensor (B) (f : A →ₐ[S] C) : A ⊗[R] B →ₐ[S] C ⊗[R] B (Mathlib.RingTheory.TensorProduct.Maps); uses in Algebra.tensorQuotientTensorEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev rTensor\\|def map \\|theorem map_tmul' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/Maps.lean; sed -n 536,550p and 610,616p",
+   "results": "Maps.lean:540 def map (f : A →ₐ[S] C) (g : B →ₐ[R] D) : A ⊗[R] B →ₐ[S] C ⊗[R] D; :548 map_tmul : map f g (a ⊗ₜ b) = f a ⊗ₜ g b; :614 abbrev rTensor (f : A →ₐ[S] C) : A ⊗[R] B →ₐ[S] C ⊗[R] B := map f (.id R B)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.TensorProduct.rTensor",
+  "file": "Mathlib/RingTheory/TensorProduct/Maps.lean",
+  "line": 614,
+  "how": "exact, with S = R: Algebra.TensorProduct.rTensor N f : A ⊗[R] N →ₐ[R] C ⊗[R] N is map f (AlgHom.id R N) (line 614), an R-algebra homomorphism, whose value on a ⊗ₜ n is f a ⊗ₜ n by Algebra.TensorProduct.map_tmul (line 548); its underlying linear map is TensorProduct.AlgebraTensorModule.map f.toLinearMap LinearMap.id (toLinearMap_map, line 544), i.e. f ⊗ id_N. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

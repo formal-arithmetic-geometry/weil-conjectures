@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+ "kind": "statement",
+ "title": "A filtered colimit of algebras is the colimit of the underlying modules",
+ "statement": "Let $R$ be a commutative ring, $I$ a small filtered category and $i\\mapsto A_i$ a functor from $I$ to the category of commutative $R$-algebras, with transition maps $A(u):A_i\\to A_j$ for $u:i\\to j$, colimit $A=\\varinjlim_IA_i$ in that category [def-weil-pbc-category-colimit] and coprojections $\\iota_i:A_i\\to A$. Regard every $A_i$ and $A$ as $R$-modules and the $R$-algebra homomorphisms $A(u)$, $\\iota_i$ as $R$-linear maps. Then $(A,(\\iota_i)_{i\\in I})$ is a colimit of the diagram $i\\mapsto A_i$ in the category of $R$-modules [def-weil-pbc-category-colimit]: for every $R$-module $P$ and $R$-linear maps $f_i:A_i\\to P$ with $f_j\\circ A(u)=f_i$ for all $u:i\\to j$ there is exactly one $R$-linear map $f:A\\to P$ with $f\\circ\\iota_i=f_i$ for all $i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "not stated in Stacks for algebras; the module side is Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778: elements of the colimit are classes of elements of the stages, sums and scalar multiples computed at a common later index), and the passage from the colimit of rings to the colimit of modules is used implicitly in Algebra, proof of Lemma Tag 07RI (lemma-colimit-etale, line 47654) and More on Algebra, proof of Lemma Tag 0AH1 (more-algebra-lemma-filtered-colimit-etale-noetherian-fibres); the directed-set case with base A_0 is written out in step 2 of lem-weil-pbc-directed-colimit-base-change-elementwise"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forgetful functor from commutative algebras to modules preserves filtered colimits",
+   "results": "ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk (Mathlib.Algebra.Category.ModuleCat.FilteredColimits); CommGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommMonCat.FilteredColimits.forget₂AddMonPreservesFilteredColimits; AlgCat.forget₂Module_preservesLimitsOfSize (Mathlib.Algebra.Category.AlgCat.Limits, limits, not colimits); AddCommGrpCat/AddGrpCat.FilteredColimits.forget_preservesFilteredColimits; CommRingCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients only (filtered colimits of modules and of rings are computed on underlying sets); nothing for forget₂ (CommAlgCat R) (ModuleCat R) or forget₂ (AlgCat R) (ModuleCat R) and filtered colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the underlying R-module of a filtered colimit of commutative R-algebras is the colimit of the underlying modules",
+   "results": "ModuleCat.FilteredColimits.colimitModule, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.colimitCocone (Mathlib.Algebra.Category.ModuleCat.FilteredColimits)",
+   "date": "2026-10-10",
+   "verdict": "no match: construction of filtered colimits in ModuleCat R only, no comparison with algebras"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.forget₂ _ (ModuleCat _))",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFilteredColimits\\|PreservesColimitsOfShape' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ | grep -i 'module\\|alg'; grep -rn 'Preserves.*forget₂.*ModuleCat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgCat/FilteredColimits.lean:92 forget₂ (AlgCat R) RingCat and :95 forget (AlgCat R) preserve filtered colimits; Ring/FilteredColimits.lean:301 forget₂ RingCat AddCommGrpCat; no instance for forget₂ (AlgCat R) (ModuleCat R) or forget₂ (CommAlgCat R) (ModuleCat R) with colimits (only Limits: AlgCat/Limits.lean:168-176); CommAlgCat/ has Basic, FiniteType, Monoidal only",
+   "date": "2026-10-10",
+   "verdict": "no match: obtainable in Lean in a few lines (forget (ModuleCat R) reflects isomorphisms and preserves filtered colimits, so it reflects them; compose with the AlgCat and CommAlgCat ≌ Under R facts), but not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

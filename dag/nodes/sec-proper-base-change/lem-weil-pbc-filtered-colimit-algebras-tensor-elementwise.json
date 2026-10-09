@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($A$ is the colimit of the $A_i$ as $R$-modules).* By [lem-weil-pbc-filtered-colimit-algebras-underlying-module], applied to $R$, the small filtered category $I$ and the diagram $i\\mapsto A_i$ of commutative $R$-algebras with its colimit $(A,(\\iota_i))$, the $R$-module $A$ with the $R$-linear maps $\\iota_i$ is a colimit [def-weil-pbc-category-colimit] of the diagram of $R$-modules $i\\mapsto A_i$ with transition maps $A(u)$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778), via the node cited; the passage from algebras to modules is implicit in More on Algebra, proof of Lemma Tag 0AH1"
+   }
+  },
+  {
+   "text": "*Step 2 (tensoring with $N$; the 'equivalently' form).* Apply [lem-weil-pbc-tensor-commutes-with-colimits] to the ring $R$, the small category $I$, the diagram of $R$-modules $i\\mapsto A_i$ (transition maps $A(u)$) with the colimit $(A,(\\iota_i))$ of step 1, and the $R$-module $N$. It says that $A\\otimes_RN$ with the maps $\\iota_i\\otimes1=\\gamma_i$ is a colimit, in the category of $R$-modules, of the diagram $i\\mapsto A_i\\otimes_RN$ with transition maps $A(u)\\otimes1=\\gamma_u$. In particular $\\gamma_j\\circ\\gamma_u=\\gamma_i$ for $u:i\\to j$. This is the parenthetical 'equivalently' clause of the statement.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934)"
+   }
+  },
+  {
+   "text": "*Step 3 (elements and zero elements come from a stage: (1) and (2)).* Apply [lem-weil-pbc-filtered-colimit-modules-elementwise] to the ring $R$, the small filtered category $I$ and the diagram $i\\mapsto A_i\\otimes_RN$ of $R$-modules with its colimit $(A\\otimes_RN,(\\gamma_i))$ from step 2. Its part (1) says that every element of $A\\otimes_RN$ is $\\gamma_i(t)$ for some $i\\in I$ and $t\\in A_i\\otimes_RN$: this is (1). Its 'in particular' says that for $t\\in A_i\\otimes_RN$ with $\\gamma_i(t)=0$ there is a morphism $u:i\\to j$ of $I$ with $\\gamma_u(t)=0$ (the transition map along $u$ being $\\gamma_u$): this is (2).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778) and Lemma Tag 00D7 (lemma-zero-directed-limit, line 811), in the filtered form of the node cited (filtered to directed: Categories, Lemma Tag 0032, lemma-directed-category-system)"
+   }
+  },
+  {
+   "text": "*Step 4 (the ring structure when $N$ is an algebra).* Let $N$ be a commutative $R$-algebra. Each $\\iota_i:A_i\\to A$ and each $A(u):A_i\\to A_j$ is a homomorphism of commutative $R$-algebras (they are morphisms of the category of commutative $R$-algebras). By [lem-weil-pbc-algebra-tensor-map-ring-hom] applied to $f=\\iota_i$, resp. $f=A(u)$, the maps $\\gamma_i=\\iota_i\\otimes\\mathrm{id}_N$ and $\\gamma_u=A(u)\\otimes\\mathrm{id}_N$ are homomorphisms of $R$-algebras, in particular ring homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00CV (section-tensor-product, line 1702) for the tensor product of modules, and Section Tag 05G3 (section-base-change, line 2404), where $S\\otimes_RR'$ is used as a ring; the ring structure on a tensor product of algebras and the functoriality $f\\otimes\\mathrm{id}$ are not stated in Stacks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "combination of Algebra, Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934) and Lemma Tag 00D6 (lemma-directed-colimit, line 778) / Tag 00D7 (line 811), as used without mention in More on Algebra, proof of Lemma Tag 0AH1 ('B (x)_A kappa(p) = colim B_i (x)_A kappa(p)'); the passage from the colimit of algebras to the colimit of modules (step 1) is a node of its own"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +90,17 @@
    "results": "AlgCat/FilteredColimits.lean:92 forget₂ (AlgCat R) RingCat preserves filtered colimits, :95 forget (AlgCat R); Ring/FilteredColimits.lean:363 forget CommRingCat; ModuleCat/FilteredColimits.lean:202 forget (ModuleCat R); CommAlgCat/Monoidal.lean only binaryCofanIsColimit (tensor product is the coproduct); nothing on base change of filtered colimits",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem exists_of\\|theorem of.zero_exact' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Colimit/Module.lean; sed -n 76,95p /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean",
+   "results": "Module.DirectLimit.exists_of (Algebra/Colimit/Module.lean:100), Module.DirectLimit.of.zero_exact (:272, :324), TensorProduct.directLimitLeft (LinearAlgebra/TensorProduct/DirectLimit.lean:78) with directLimitLeft_tmul_of (:82), directLimitLeft_rTensor_of (:90): the directed-preorder (Module.DirectLimit) form of steps 2-3, for a chosen direct limit over a preorder",
+   "date": "2026-10-10",
+   "verdict": "no match for the node (filtered category, colimit of commutative algebras); the cited sub-nodes carry the categorical Mathlib forms"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +120,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "worker": "stage1",
+  "summary": "Split into four steps: (1) the colimit A of the algebras is also the colimit of the underlying R-modules (new node lem-weil-pbc-filtered-colimit-algebras-underlying-module, unsplit; no Mathlib instance for forget₂ (CommAlgCat R) (ModuleCat R) preserving filtered colimits); (2) tensor products commute with colimits (existing Mathlib leaf lem-weil-pbc-tensor-commutes-with-colimits, Stacks 00DD), giving the 'equivalently' colimit form; (3) the elementwise description of a filtered colimit of modules (existing Mathlib leaf lem-weil-pbc-filtered-colimit-modules-elementwise, Stacks 00D6/00D7) gives (1) and (2); (4) the ring-homomorphism clause from the new Mathlib leaf lem-weil-pbc-algebra-tensor-map-ring-hom (Algebra.TensorProduct.rTensor). Statement kept. Tags checked against tags/tags: 00DD = algebra-lemma-tensor-products-commute-with-limits (line 1934), 00D6 = algebra-lemma-directed-colimit (line 778), 00D7 = algebra-lemma-zero-directed-limit, 0032 = categories-lemma-directed-category-system, 0AH1 = more-algebra-lemma-filtered-colimit-etale-noetherian-fibres. Stacks 00DD and 00D6 are stated over preordered/directed sets; the cited nodes are already stated for small (filtered) categories, so no reindexing by 0032 is needed. lem-weil-pbc-directed-colimit-base-change-elementwise is the analogous statement for a directed set of rings with base A_0 and is not the same statement (different base ring, directed set), so it is not cited; its step 2 is the directed-set analogue of the new node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps: a filtered colimit of commutative R-algebras is the colimit of the underlying R-modules (new unsplit node; no tag of its own; its proof is step 2 of lem-weil-pbc-directed-colimit-base-change-elementwise made filtered), tensoring with N by the 00DD leaf (the 'equivalently' clause), the elementwise description by the filtered-colimit-modules-elementwise node (clauses (1) and (2)), f (x) id a ring map (new Mathlib leaf Algebra.TensorProduct.rTensor, TensorProduct/Maps.lean:614 with map_tmul line 548; lines verified). Categories 0032 not needed. Tags verified by the worker (00DD, 00D6, 00D7, 0AH1)."
+ }
 }
