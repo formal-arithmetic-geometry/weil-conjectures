@@ -2,37 +2,179 @@
  "id": "lem-weil-pbc-symmetric-product-surjective",
  "kind": "statement",
  "title": "Surjectivity of the symmetric-product morphism",
- "statement": "Let $\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ be the symmetric-product\nmorphism [def-weil-pbc-symmetric-product-morphism]. It is finite and\nsurjective. Equivalently, over every algebraically closed geometric point of\n$S$, every binary form of degree $n$ factors as a product of $n$ linear forms,\nincluding factors at infinity.",
+ "statement": "Let $S$ be a scheme and $n\\ge1$. Write $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ and $\\mathbf P^n_S=\\mathbf P(\\{0,\\dots,n\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change], with structure morphism $q_n=\\mathrm{pr}_1:\\mathbf P^n_S\\to S$, and let $(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ be the $n$-fold fibre product over $S$ [def-pc-fibre-product] with projections $\\mathrm{pr}_i:(\\mathbf P^1_S)^n\\to\\mathbf P^1_S$ and $p_n:(\\mathbf P^1_S)^n\\to S$. Let $\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ be the symmetric-product morphism $((x_1:y_1),\\dots,(x_n:y_n))\\mapsto[F_0:\\cdots:F_n]$, $\\prod_{i=1}^n(x_it+y_i)=\\sum_{j=0}^nF_jt^j$ [def-weil-pbc-symmetric-product-morphism], constructed in [lem-weil-pbc-symmetric-product-properties] as the morphism $\\varphi_{p_n,(\\mathcal L_n,(F_0,\\dots,F_n))}$ [def-weil-pbc-morphism-to-projective-space-by-sections] of the invertible module $\\mathcal L_n=\\mathrm{pr}_1^*\\mathcal O(1)\\otimes\\cdots\\otimes\\mathrm{pr}_n^*\\mathcal O(1)$ and its generating sections $F_j$ (here $x_i,y_i$ are the pullbacks along $\\mathrm{pr}_i$ of the coordinate sections $T_0,T_1$ of $\\mathcal O(1)$ on $\\mathbf P^1_S$). Then $\\sigma_n$ is surjective [def-weil-surjective-morphism]: every point of $\\mathbf P^n_S$ is the image of a point of $(\\mathbf P^1_S)^n$. (The source also said 'finite'; finiteness is the separate node [lem-weil-pbc-symmetric-product-finite] and is not a claim of this node. The source's 'equivalently, over every algebraically closed geometric point every binary form of degree $n$ factors into $n$ linear forms, including factors at infinity' is not claimed as an equivalence: the factorization is proved in step 3 and is what the proof uses.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
   "place": "node lem-weil-pbc-symmetric-product-surjective, order 1202"
  },
  "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
   "def-weil-pbc-symmetric-product-morphism",
-  "def-weil-pbc-scheme-conventions"
+  "lem-weil-pbc-symmetric-product-properties",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-surjective-morphism"
  ],
  "proof": [
   {
-   "text": "Over an algebraically closed geometric point, every binary form of degree $n$\nfactors as a product of $n$ linear forms, so every geometric fibre of the\nmorphism constructed in [lem-weil-pbc-symmetric-product-finite] is nonempty; a\nfinite-type morphism with nonempty geometric fibres is surjective\n([lem-weil-pbc-surjective-nonempty-fibres]).",
+   "text": "*A geometric point over $p$.* Let $p\\in\\mathbf P^n_S$, let $\\kappa(p)$ be its residue field [def-weil-residue-field] and $K$ an algebraic closure of $\\kappa(p)$ [def-weil-algebraic-closure]. The point $p$ together with the inclusion $\\kappa(p)\\to K$ is a geometric point $\\xi:\\operatorname{Spec}K\\to\\mathbf P^n_S$ lying over $p$ [def-weil-geometric-point]: the image of the unique point of $\\operatorname{Spec}K$ is $p$ ($\\xi$ is $\\operatorname{Spec}(\\kappa(p)\\to K)$ followed by the canonical morphism $\\operatorname{Spec}\\kappa(p)\\to\\mathbf P^n_S$, whose image is $\\{p\\}$; in Mathlib `Scheme.fromSpecResidueField` and `range_fromSpecResidueField`, Mathlib/AlgebraicGeometry/ResidueField.lean:237,276). Since $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ with $q_n=\\mathrm{pr}_1$ [def-nagata-projective-space-base-change], put $g=q_n\\circ\\xi:\\operatorname{Spec}K\\to S$ and $\\psi=\\mathrm{pr}_2\\circ\\xi:\\operatorname{Spec}K\\to\\mathbf P^n_{\\mathbf Z}$; by the universal property of the fibre product [def-pc-fibre-product], $\\xi$ is the unique morphism with these two components.",
    "uses": [
-    "lem-weil-pbc-symmetric-product-finite",
-    "lem-weil-pbc-surjective-nonempty-fibres"
+    "def-weil-residue-field",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "def-nagata-projective-space-base-change",
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "*Homogeneous coordinates of $\\psi$.* By [lem-weil-pbc-projective-space-functor-of-points] (Stacks 01NE), $\\psi=\\psi_{(\\mathcal N,(u_0,\\dots,u_n))}$ for an invertible $\\mathcal O_{\\operatorname{Spec}K}$-module $\\mathcal N$ [def-sc-invertible-module] and global sections $u_j$ generating it. $\\operatorname{Spec}K$ has one point and $\\Gamma(\\operatorname{Spec}K,\\mathcal O)=K$; an invertible module is locally free of rank one, so on the one-point space $\\operatorname{Spec}K$ it is free of rank one: choosing a generator gives an isomorphism $\\beta:\\mathcal N\\to\\mathcal O_{\\operatorname{Spec}K}$, and $\\beta(u_j)=a_j\\in K$. That the $u_j$ generate $\\mathcal N$ at the unique point means that some $a_j\\ne0$. Hence $(\\mathcal N,(u_j))\\sim(\\mathcal O,(a_0,\\dots,a_n))$ and $\\psi=\\psi_{(\\mathcal O,(a_0,\\dots,a_n))}$ with $(a_0,\\dots,a_n)\\in K^{n+1}\\setminus\\{0\\}$ (equivalent pairs give the same morphism).",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 27.13.1 (Tag 01NE, label lemma-projective-space), applied to Y = Spec K"
+   }
+  },
+  {
+   "text": "*Factorization of the binary form (the content of the geometric fibre).* Claim: there are $(x_i,y_i)\\in K^2\\setminus\\{(0,0)\\}$, $i=1,\\dots,n$, with $\\prod_{i=1}^n(x_it+y_i)=\\sum_{j=0}^na_jt^j$ in $K[t]$. Indeed $P(t)=\\sum_ja_jt^j$ is nonzero (step 2); let $d\\le n$ be its degree and $c=a_d\\ne0$ its leading coefficient. As $K$ is algebraically closed, [lem-weil-alg-closed-linear-factorization] gives $\\gamma_1,\\dots,\\gamma_m\\in K$ with $P=c\\prod_{k=1}^m(t-\\gamma_k)$; comparing degrees ($c\\ne0$ and the product of $m$ monic linear factors has degree $m$), $m=d$. If $d\\ge1$ put $(x_1,y_1)=(c,-c\\gamma_1)$, $(x_k,y_k)=(1,-\\gamma_k)$ for $2\\le k\\le d$; if $d=0$ put $(x_1,y_1)=(0,c)$. In both cases put $(x_i,y_i)=(0,1)$ for the remaining $i\\le n$ (the $n-d$ factors at infinity: the binary form $\\sum_ja_jt^ju^{n-j}$ is divisible by $u^{n-d}$). Every pair is nonzero ($c\\ne0$), and $\\prod_i(x_it+y_i)=c\\prod_{k=1}^d(t-\\gamma_k)\\cdot1=P$.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "*The lift $\\eta$.* For each $i$ the sections $x_i,y_i$ of $\\mathcal O_{\\operatorname{Spec}K}$ generate it (step 3: not both zero, $K$ a field). Let $\\eta_i=\\varphi_{g,(\\mathcal O,(x_i,y_i))}:\\operatorname{Spec}K\\to\\mathbf P^1_S$ [def-weil-pbc-morphism-to-projective-space-by-sections] (with index set $\\{0,1\\}$): so $q_1\\circ\\eta_i=g$ and $\\mathrm{pr}_2\\circ\\eta_i=\\psi_{(\\mathcal O,(x_i,y_i))}$. Since all $\\eta_i$ lie over the same $g$, the universal property of the iterated fibre product $(\\mathbf P^1_S)^m=(\\mathbf P^1_S)^{m-1}\\times_S\\mathbf P^1_S$ [def-pc-fibre-product], applied for $m=1,\\dots,n$, gives a morphism $\\eta:\\operatorname{Spec}K\\to(\\mathbf P^1_S)^n$ with $\\mathrm{pr}_i\\circ\\eta=\\eta_i$ for all $i$ and $p_n\\circ\\eta=g$.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "*$\\sigma_n\\circ\\eta=\\xi$.* First components: $q_n\\circ\\sigma_n=p_n$ [lem-weil-pbc-symmetric-product-over-base], so $\\mathrm{pr}_1\\circ\\sigma_n\\circ\\eta=p_n\\circ\\eta=g=\\mathrm{pr}_1\\circ\\xi$. Second components: by the construction of $\\sigma_n$ [lem-weil-pbc-symmetric-product-properties], $\\mathrm{pr}_2\\circ\\sigma_n=\\psi_{(\\mathcal L_n,(F_j))}$, and by the compatibility of $\\psi$ with pullback [lem-weil-pbc-projective-space-functor-of-points], $\\mathrm{pr}_2\\circ\\sigma_n\\circ\\eta=\\psi_{(\\eta^*\\mathcal L_n,(\\eta^*F_j))}$. By [lem-weil-pbc-invertible-pullback-tensor] (2), $\\eta^*\\mathcal L_n\\cong\\bigotimes_i\\eta^*\\mathrm{pr}_i^*\\mathcal O(1)\\cong\\bigotimes_i(\\mathrm{pr}_2\\circ\\eta_i)^*\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$, compatibly with pullback of tensor products of sections, where $\\mathcal O(1)$ on $\\mathbf P^1_S$ is the pullback of $\\mathcal O_{\\mathbf P^1_{\\mathbf Z}}(1)$ along $\\mathrm{pr}_2$ with sections $T_0,T_1$; and by [lem-weil-pbc-projective-space-functor-of-points] for $\\mathrm{pr}_2\\circ\\eta_i=\\psi_{(\\mathcal O,(x_i,y_i))}$ there is an isomorphism $(\\mathrm{pr}_2\\circ\\eta_i)^*\\mathcal O(1)\\cong\\mathcal O_{\\operatorname{Spec}K}$ carrying $T_0,T_1$ to $x_i,y_i$. Tensoring, $\\eta^*\\mathcal L_n\\cong\\mathcal O_{\\operatorname{Spec}K}^{\\otimes n}=\\mathcal O_{\\operatorname{Spec}K}$, and since $F_j=\\sum_{|J|=j}\\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i$ (each monomial a tensor product of one of $x_i,y_i$ from each factor) [lem-weil-pbc-product-linear-forms-coefficients], $\\eta^*F_j$ goes to $\\sum_{|J|=j}\\prod_{i\\in J}x_i\\prod_{i\\notin J}y_i\\in K$, which by the same node (with $R=K$) is the coefficient of $t^j$ in $\\prod_i(x_it+y_i)$, i.e. $a_j$ by step 3. Hence $(\\eta^*\\mathcal L_n,(\\eta^*F_j))\\sim(\\mathcal O,(a_j))$, so $\\mathrm{pr}_2\\circ\\sigma_n\\circ\\eta=\\psi_{(\\mathcal O,(a_j))}=\\psi=\\mathrm{pr}_2\\circ\\xi$ (step 2). By the uniqueness in the universal property of $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-pc-fibre-product], $\\sigma_n\\circ\\eta=\\xi$.",
+   "uses": [
+    "lem-weil-pbc-symmetric-product-over-base",
+    "lem-weil-pbc-symmetric-product-properties",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-product-linear-forms-coefficients",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 0A4F (lemma-reduce-to-P1), 'For every n >= 1 there is a finite surjective morphism' (surjectivity asserted without proof)"
+   }
+  },
+  {
+   "text": "*Surjectivity.* Let $z\\in(\\mathbf P^1_S)^n$ be the image under $\\eta$ of the unique point of $\\operatorname{Spec}K$. By step 5 and step 1, $\\sigma_n(z)=\\xi(\\mathrm{pt})=p$. As $p$ was arbitrary, the underlying map of $\\sigma_n$ is surjective, i.e. $\\sigma_n$ is surjective [def-weil-surjective-morphism]. (No finiteness or finite-type hypothesis is used, and no fibre-wise criterion such as [lem-weil-pbc-surjective-nonempty-fibres] is needed: the lift is built directly over each point.)",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-symmetric-product-finite",
-  "lem-weil-pbc-surjective-nonempty-fibres"
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-sc-invertible-module",
+  "lem-weil-alg-closed-linear-factorization",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-symmetric-product-over-base",
+  "lem-weil-pbc-symmetric-product-properties",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-product-linear-forms-coefficients",
+  "def-weil-surjective-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-surjective.md",
-  "place": "## Proof"
+  "place": "## Proof (one sentence: geometric fibres nonempty by factorization of binary forms); written out by an agent. The statement is used in Stacks, Etale Cohomology, proof of Lemma 0A4F (lemma-reduce-to-P1), literature/stacks-project/etale-cohomology.tex lines 18587-18606, without proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from product of projective lines to projective space given by symmetric functions is surjective",
+   "results": "MvPolynomial.esymmAlgHom_surjective, MvPolynomial.esymmAlgHom_fin_surjective (RingTheory.MvPolynomial.Symmetric.FundamentalTheorem), SymAlg.sym_surjective, Sym2.mk_surjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine, SymmetricAlgebra.algHom_surjective, MvPolynomial.map_surjective_iff: none about schemes P^1 or P^n",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is surjective if every point valued in an algebraically closed field lifts",
+   "results": "AlgebraicGeometry.Surjective, surjective_iff, Scheme.Hom.surjective, Surjective.surj, surjective_eq_topologically, Surjective.of_universallyClosed_of_isDominant, range_eq_univ (Morphisms.UnderlyingMap / UniversallyClosed), SurjectiveOnStalks: the definition only, no lifting criterion, no projective space",
+   "date": "2026-10-09",
+   "verdict": "no match (AlgebraicGeometry.Surjective is the definition, already the leaf def-weil-surjective-morphism)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-points of projective space over a field are nonzero vectors up to scalars; morphism Spec K to Proj of polynomial ring",
+   "results": "AlgebraicGeometry.Proj.toSpecZero, ProjectiveSpectrum.Proj.toSpec_base_apply_eq, projIsoSpec, Proj.isIso_toSpec, Proj.toSpec_base_apply_eq_comap, Proj.toSpec: Proj charts only, no functor of points of P^n",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, IsAlgClosed",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|projectiveSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'symmetricProduct\\|SymmetricProduct\\|symmetric product' and grep -rn 'esymm\\|IsAlgClosed' in .../Mathlib/AlgebraicGeometry/",
+   "results": "no ProjectiveSpace anywhere in Mathlib; no symmetric product of schemes; IsAlgClosed in AlgebraicGeometry only in AlgClosed/Basic.lean, Group/Abelian.lean, Group/Smooth.lean (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'fromSpecResidueField\\|range_fromSpecResidueField' Mathlib/AlgebraicGeometry/ResidueField.lean; grep -n 'Splits.eq_prod_roots' Mathlib/Algebra/Polynomial/Splits.lean",
+   "results": "Scheme.fromSpecResidueField (ResidueField.lean:237), range_fromSpecResidueField : Set.range (X.fromSpecResidueField x) = {x} (:276); Polynomial.Splits.eq_prod_roots (Splits.lean:299)",
+   "date": "2026-10-09",
+   "verdict": "ingredients for steps 1 and 3 (step 3 through the existing leaf lem-weil-alg-closed-linear-factorization), not the statement"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.ProjectiveSpace (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.ProjectiveSpace in WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean (source repository, not Mathlib) and lemmas on its cohomology; index: unavailable",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +202,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-symmetric-product-surjective",
+  "worker": "stage1",
+  "summary": "Statement made precise (S, n>=1, sigma_n as phi_{p_n,(L_n,(F_j))} as fixed by the reviewed lem-weil-pbc-symmetric-product-over-base) and restricted to surjectivity: 'finite' dropped (it is lem-weil-pbc-symmetric-product-finite, used separately by lem-weil-pbc-reduction-projective-space step 5), and the 'equivalently ...' clause is not claimed as an equivalence; the factorization of binary forms over an algebraically closed field (with factors at infinity) is step 3. The one-sentence blueprint proof (nonempty geometric fibres + lem-weil-pbc-surjective-nonempty-fibres) is replaced by a direct pointwise lift: for p in P^n_S, the geometric point Spec K -> P^n_S over p (K = algebraic closure of kappa(p)) has coordinates (a_j) != 0 by the functor of points (Stacks 01NE); the polynomial sum a_j t^j factors over K by the Mathlib leaf lem-weil-alg-closed-linear-factorization, padded with factors (0,1) at infinity; the pairs (x_i,y_i) give a K-point eta of (P^1_S)^n, and sigma_n o eta = xi is checked on both components of S x P^n_Z by the pullback compatibility of the functor of points, lem-weil-pbc-invertible-pullback-tensor and lem-weil-pbc-product-linear-forms-coefficients. lem-weil-pbc-surjective-nonempty-fibres (unit sk-thm-br, off this unit's route) and lem-weil-pbc-symmetric-product-finite are no longer used; def-weil-pbc-scheme-conventions repointed to def-weil-surjective-morphism. No new node: every step ends in existing nodes. Searched three ways; no Mathlib match (Mathlib has no projective space scheme)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

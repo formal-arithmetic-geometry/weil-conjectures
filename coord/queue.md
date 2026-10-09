@@ -1,12 +1,11 @@
 # Work queue
 
-562 items; claim with `tools/claim.py next <group> [--stage N]`.
+561 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (547)
+## Stage 1: nodes to split (546)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-surjective` | 1003 | none |
 | `lem-weil-pbc-vanishing-descends-retract` | 1003 | none |
@@ -252,7 +251,6 @@
 | `lem-weil-pbc-proper-to-separated` | 4003 | none |
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
 | `lem-weil-pbc-proper-closed-image` | 4004 | none |
-| `lem-weil-pbc-surjective-nonempty-fibres` | 4004 | none |
 | `lem-sc-affine-open-proper` | 4006 | none |
 | `lem-sc-brauer-zero` | 4006 | none |
 | `lem-sc-compactification` | 4006 | none |
@@ -293,6 +291,7 @@
 | `lem-sc-normalization-exists` | 4008 | none |
 | `lem-sc-normalization-over-normal-locus` | 4008 | none |
 | `lem-sc-normalized-curve-smooth` | 4008 | none |
+| `lem-weil-pbc-surjective-nonempty-fibres` | 4008 | none |
 | `pqf-lem-proper-closed-map` | 4008 | none |
 | `prop-pc-xk-integral` | 4008 | none |
 | `thm-pc-f-representable` | 4008 | rests_on_sorry |
@@ -574,7 +573,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 558 nodes that wait for stage 1, 69 nodes that wait for a statement dependency.
+Not open yet: 557 nodes that wait for stage 1, 70 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
