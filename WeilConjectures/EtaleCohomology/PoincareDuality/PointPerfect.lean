@@ -334,9 +334,10 @@ extension `E/ℚ_ℓ`, and the statement follows from the integral stage
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral` by flat
 extension of scalars `𝒪_E → E → ℚ̄_ℓ`. -/
 theorem isPerfect_compactlySupportedGlobalSections_adic
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
-    ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj K).IsPerfect :=
+    ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect :=
   sorry
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
@@ -346,18 +347,20 @@ For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
 perfect complex of `ℚ̄_ℓ`-vector spaces, by flat extension of scalars from
 `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral`. -/
 theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
-    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj K).IsPerfect :=
+    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect :=
   sorry
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
 **The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
-    ((ihom ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj K)).obj
+    ((ihom ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K))).obj
       (𝟙_ _)).IsPerfect :=
   (isPerfect_compactlySupportedGlobalSections_adic l aX K hK).ihom_unit
 
@@ -365,9 +368,10 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
 
 **The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)))
+    (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
-    ((ihom ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj K)).obj
+    ((ihom ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K))).obj
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections_adic l aX K hK).ihom_unit
 
