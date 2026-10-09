@@ -23,7 +23,9 @@ irreducible components are pairwise disjoint, they are the connected components
 (`TopologicalSpace.NoetherianSpace.connectedComponent_eq_irreducibleComponent`).
 
 The same argument applied to the open subspaces shows that a noetherian space is locally
-connected (`TopologicalSpace.NoetherianSpace.locallyConnectedSpace`).
+connected (`TopologicalSpace.NoetherianSpace.locallyConnectedSpace`). Consequently, the preimage
+of a connected component of a noetherian subspace under a continuous map landing in it is open and
+closed (`TopologicalSpace.NoetherianSpace.isClopen_preimage_connectedComponentIn`).
 -/
 
 @[expose] public section
@@ -174,5 +176,22 @@ theorem exists_isOpen_inter_eq_singleton [QuasiSober α] {Z : Set α} (hZ : IsCl
   have : t = {g} := by rw [← hg.def, hyc.closure_eq]
   rw [this] at hzt
   exact hzt
+
+/-- Let `F` be a noetherian subspace of `X` and `f : Y → X` a continuous map landing in `F`. Then
+the preimage under `f` of a connected component of `F` is open and closed. -/
+theorem isClopen_preimage_connectedComponentIn {X Y : Type*} [TopologicalSpace X]
+    [TopologicalSpace Y] {F : Set X} [TopologicalSpace.NoetherianSpace F] {f : Y → X}
+    (hf : Continuous f) (hfF : ∀ y, f y ∈ F) (x : X) :
+    IsClopen (f ⁻¹' connectedComponentIn F x) := by
+  by_cases hx : x ∈ F
+  · have : f ⁻¹' connectedComponentIn F x =
+        (fun y ↦ (⟨f y, hfF y⟩ : F)) ⁻¹' connectedComponent ⟨x, hx⟩ := by
+      ext y
+      simp [connectedComponentIn_eq_image hx, hfF]
+    rw [this]
+    exact ⟨isClosed_connectedComponent.preimage (hf.subtype_mk hfF),
+      (isOpen_connectedComponent _).preimage (hf.subtype_mk hfF)⟩
+  · rw [connectedComponentIn_eq_empty hx, Set.preimage_empty]
+    exact isClopen_empty
 
 end TopologicalSpace.NoetherianSpace
