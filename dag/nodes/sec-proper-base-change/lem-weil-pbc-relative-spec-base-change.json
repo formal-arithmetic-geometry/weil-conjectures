@@ -2,20 +2,90 @@
  "id": "lem-weil-pbc-relative-spec-base-change",
  "kind": "statement",
  "title": "Relative Spec commutes with base change",
- "statement": "Let $S'\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal A$ be a quasi-coherent $\\mathcal O_S$-algebra. The pullback of the relative spectrum $\\underline{\\operatorname{Spec}}_S(\\mathcal A)$ [lem-weil-pbc-affine-morphism-relative-spec] to $S'$ is canonically isomorphic over $S'$ to $\\underline{\\operatorname{Spec}}_{S'}(\\mathcal A|_{S'})$.",
+ "statement": "Let $g:S'\\to S$ be a morphism of schemes [def-pc-scheme] and $\\mathcal A$ a quasi-coherent $\\mathcal O_S$-algebra (a sheaf of commutative $\\mathcal O_S$-algebras whose underlying $\\mathcal O_S$-module is quasi-coherent [pqf-def-coherent], [def-weil-sheaf-of-modules-category]), with multiplication $\\mu:\\mathcal A\\otimes_{\\mathcal O_S}\\mathcal A\\to\\mathcal A$ (tensor product of modules [def-pur-sheaf-tensor-product]) and unit $e:\\mathcal O_S\\to\\mathcal A$. Let $g^*\\mathcal A$ be the pullback module [def-pc-module-pullback] with the multiplication $g^*(\\mu)\\circ t^{-1}:g^*\\mathcal A\\otimes g^*\\mathcal A\\to g^*\\mathcal A$, $t:g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$ the isomorphism of [lem-weil-pbc-module-pullback-tensor], and the unit $g^*(e)\\circ\\epsilon_g^{-1}:\\mathcal O_{S'}\\to g^*\\mathcal A$, $\\epsilon_g:g^*\\mathcal O_S\\cong\\mathcal O_{S'}$ the isomorphism of [lem-weil-pbc-module-pullback-structure-sheaf]. Let $\\pi:X=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$ with $\\alpha:\\mathcal A\\cong\\pi_*\\mathcal O_X$ be the relative spectrum [lem-weil-pbc-affine-morphism-relative-spec](2), and $X'=X\\times_SS'$ [def-pc-fibre-product] with projections $\\pi':X'\\to S'$, $g':X'\\to X$. Then: (1) $g^*\\mathcal A$ is a quasi-coherent $\\mathcal O_{S'}$-algebra, $\\pi'$ is affine [pqf-def-affine-morphism], and there is an isomorphism of $\\mathcal O_{S'}$-algebras $\\gamma:g^*\\mathcal A\\to\\pi'_*\\mathcal O_{X'}$, namely the morphism corresponding under $g^*\\dashv g_*$ to $\\pi_*(g'^\\sharp)\\circ\\alpha:\\mathcal A\\to\\pi_*\\mathcal O_X\\to\\pi_*g'_*\\mathcal O_{X'}=g_*\\pi'_*\\mathcal O_{X'}$. (2) Let $\\rho:Y=\\underline{\\operatorname{Spec}}_{S'}(g^*\\mathcal A)\\to S'$ with $\\alpha':g^*\\mathcal A\\cong\\rho_*\\mathcal O_Y$ be the relative spectrum of $g^*\\mathcal A$ over $S'$. The canonical $S'$-morphism $\\Phi:\\underline{\\operatorname{Spec}}_{S'}(g^*\\mathcal A)\\to\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\times_SS'$, i.e. the unique $S'$-morphism $Y\\to X'$ with $\\pi'_*(\\Phi^\\sharp)=\\alpha'\\circ\\gamma^{-1}:\\pi'_*\\mathcal O_{X'}\\to\\rho_*\\mathcal O_Y$ (the anti-equivalence of [lem-weil-pbc-affine-morphism-relative-spec](3) over $S'$), is an isomorphism of schemes over $S'$.",
  "source": {
   "document": "literature/stacks-project/constructions.tex",
   "place": "Constructions, Lemma 01LX (spec-properties), base-change clause"
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "lem-weil-pbc-affine-morphism-relative-spec",
   "pqf-def-coherent",
-  "lem-weil-pbc-affine-morphism-relative-spec"
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-pc-fibre-product",
+  "pqf-def-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($\\pi'$ is affine).* By [lem-weil-pbc-affine-morphism-relative-spec](2) $\\pi$ is affine, so its base change $\\pi':X\\times_SS'\\to S'$ is affine by [lem-weil-pbc-affine-morphism-permanence](1). Hence $\\pi'_*\\mathcal O_{X'}$ is a quasi-coherent $\\mathcal O_{S'}$-algebra [lem-weil-pbc-affine-morphism-relative-spec](1).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SA ('compatible with arbitrary base change') with Lemma 01S8; base change of affine morphisms, Morphisms Lemma 01S5"
+   }
+  },
+  {
+   "text": "*Step 2 (the isomorphism of algebras $g^*\\pi_*\\mathcal O_X\\cong\\pi'_*\\mathcal O_{X'}$).* Apply [lem-weil-pbc-affine-pushforward-base-change] to the affine morphism $\\pi$, the morphism $g$ and $\\mathcal F=\\mathcal O_X$: by its part (1) the base change map $\\beta:g^*\\pi_*\\mathcal O_X\\to\\pi'_*g'^*\\mathcal O_X$ is an isomorphism, and by its part (2) $\\gamma_0=\\pi'_*(\\epsilon_{g'})\\circ\\beta:g^*\\pi_*\\mathcal O_X\\to\\pi'_*\\mathcal O_{X'}$ is an isomorphism of $\\mathcal O_{S'}$-algebras, $g^*\\pi_*\\mathcal O_X$ carrying the multiplication and unit induced through $t$ and $\\epsilon_g$ as in the statement. By [lem-weil-pbc-module-base-change-map-algebra](i) $\\gamma_0$ is the morphism adjoint to $\\pi_*(g'^\\sharp):\\pi_*\\mathcal O_X\\to g_*\\pi'_*\\mathcal O_{X'}$.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), applied to F = O_X"
+   }
+  },
+  {
+   "text": "*Step 3 (transport along $\\alpha$; part (1)).* $\\alpha:\\mathcal A\\to\\pi_*\\mathcal O_X$ is an isomorphism of $\\mathcal O_S$-algebras [lem-weil-pbc-affine-morphism-relative-spec](2): $\\alpha\\circ\\mu=\\mu_X\\circ(\\alpha\\otimes\\alpha)$ and $\\alpha\\circ e=\\pi^\\sharp$, with $\\mu_X$ the multiplication of $\\pi_*\\mathcal O_X$. Applying the functor $g^*$ [def-pc-module-pullback], $g^*(\\alpha)$ is an isomorphism of $\\mathcal O_{S'}$-modules, and by naturality of $t$ in both arguments [lem-weil-pbc-module-pullback-tensor], $t\\circ g^*(\\alpha\\otimes\\alpha)=(g^*\\alpha\\otimes g^*\\alpha)\\circ t$; hence $g^*(\\alpha)\\circ g^*(\\mu)\\circ t^{-1}=g^*(\\mu_X)\\circ t^{-1}\\circ(g^*\\alpha\\otimes g^*\\alpha)$ and $g^*(\\alpha)\\circ g^*(e)\\circ\\epsilon_g^{-1}=g^*(\\pi^\\sharp)\\circ\\epsilon_g^{-1}$, i.e. $g^*(\\alpha)$ respects the induced multiplications and units. So $\\gamma:=\\gamma_0\\circ g^*(\\alpha):g^*\\mathcal A\\to\\pi'_*\\mathcal O_{X'}$ is an isomorphism of $\\mathcal O_{S'}$-modules which carries the multiplication and unit of $g^*\\mathcal A$ to those of the sheaf of commutative $\\mathcal O_{S'}$-algebras $\\pi'_*\\mathcal O_{X'}$ (Step 2). Consequently the section-wise multiplications of $g^*\\mathcal A$ (the composites $g^*\\mathcal A(W)\\times g^*\\mathcal A(W)\\to(g^*\\mathcal A\\otimes g^*\\mathcal A)(W)\\to g^*\\mathcal A(W)$ through the sheafification map of [def-pur-sheaf-tensor-product]) are the transports by the bijections $\\gamma_W$ of those of $\\pi'_*\\mathcal O_{X'}$, so they are associative, commutative, unital, bilinear and compatible with restriction: $g^*\\mathcal A$ is a sheaf of commutative $\\mathcal O_{S'}$-algebras and $\\gamma$ an isomorphism of $\\mathcal O_{S'}$-algebras. Its underlying module is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Finally $\\gamma$ is adjoint to $\\pi_*(g'^\\sharp)\\circ\\alpha$: the adjoint of $\\gamma_0\\circ g^*(\\alpha)$ is (adjoint of $\\gamma_0$)$\\circ\\alpha=\\pi_*(g'^\\sharp)\\circ\\alpha$ by naturality of the adjunction $g^*\\dashv g_*$ and Step 2. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Section 01LQ (section-spec, first paragraph: 'f^*A is a quasi-coherent sheaf of O_T-algebras'), written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (part (2): the canonical morphism is an isomorphism).* By (1) $g^*\\mathcal A$ is a quasi-coherent $\\mathcal O_{S'}$-algebra, so $\\rho:Y=\\underline{\\operatorname{Spec}}_{S'}(g^*\\mathcal A)\\to S'$ and $\\alpha'$ exist and $\\rho$ is affine [lem-weil-pbc-affine-morphism-relative-spec](2) (over $S'$); $\\pi':X'\\to S'$ is affine by Step 1. $\\psi=\\alpha'\\circ\\gamma^{-1}:\\pi'_*\\mathcal O_{X'}\\to\\rho_*\\mathcal O_Y$ is an isomorphism of $\\mathcal O_{S'}$-algebras. By [lem-weil-pbc-affine-morphism-relative-spec](3) over $S'$ the functor $h\\mapsto\\pi'_*h^\\sharp$ from schemes affine over $S'$ to quasi-coherent $\\mathcal O_{S'}$-algebras is fully faithful (contravariant), so there is exactly one $S'$-morphism $\\Phi:Y\\to X'$ with $\\pi'_*(\\Phi^\\sharp)=\\psi$, and exactly one $S'$-morphism $\\Psi:X'\\to Y$ with $\\rho_*(\\Psi^\\sharp)=\\psi^{-1}$. Then $\\Phi\\circ\\Psi:X'\\to X'$ and $\\Psi\\circ\\Phi:Y\\to Y$ are $S'$-morphisms sent by the functor to $\\psi^{-1}\\circ\\psi=\\mathrm{id}$ and $\\psi\\circ\\psi^{-1}=\\mathrm{id}$ (functoriality), as are the identities; by faithfulness $\\Phi\\circ\\Psi=\\mathrm{id}_{X'}$ and $\\Psi\\circ\\Phi=\\mathrm{id}_Y$. So $\\Phi$ is an isomorphism of schemes over $S'$, which is (2).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SA (anti-equivalence; base-change clause) and Lemma 01S8 ('Moreover, in this case X = Spec_S(f_*O_X)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01LX (2); Stacks proves it via the functor of points (Lemma 01LS, lemma-spec-base-change), which the DAG's construction of the relative spectrum (lem-weil-pbc-affine-morphism-relative-spec, by glueing and the anti-equivalence of Morphisms 01SA) does not provide; the proof here is written by the agent from Morphisms 01SA/01S8 (anti-equivalence) and Cohomology of Schemes 02KG (affine base change, coherent.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +107,38 @@
    "results": "Mathlib has no relative Spec construction for quasi-coherent algebras or its base-change theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative spectrum of a quasi-coherent sheaf of algebras commutes with base change: Spec_S(A) ×_S S' ≅ Spec_{S'}(g^* A)",
+   "results": "AlgebraicGeometry.pullbackSpecIso and its _hom_fst/_hom_snd/_hom_base lemmas (Mathlib.AlgebraicGeometry.Pullbacks): absolute affine case only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of an affine morphism along a base change, pushforward of structure sheaf base change isomorphism",
+   "results": "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, instIsAffinePullbackSchemeOfIsAffineHom_1 (Morphisms/Affine), Scheme.Modules.pullbackPushforwardAdjunction (Modules/Sheaf), SheafOfModules.pullback; no relative Spec",
+   "date": "2026-10-10",
+   "verdict": "no match (base change of affine morphisms only, the Mathlib leaf behind lem-weil-pbc-affine-morphism-permanence(1))"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeSpec\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'relativeSpec|RelativeSpec|underline.?Spec|01LX|01LS|01SA' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-stein-universally-closed-factor",
@@ -60,5 +158,20 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L (2026-10-10): citation of the relative-Spec node added to the statement."
+ "lead_note": "L (2026-10-10): citation of the relative-Spec node added to the statement. Off-route tool use recorded by L (2026-10-10): lem-weil-pbc-module-pullback-tensor (pullback commutes with tensor products, unit sk-thm-reduction), used for the algebra structure of g^*A and its naturality in step 3, as a black box.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-spec-base-change",
+  "worker": "stage1",
+  "summary": "Statement made precise: 'A|_{S'}' replaced by the pullback g^*A [def-pc-module-pullback] with its algebra structure (multiplication through g^*(A⊗A)≅g^*A⊗g^*A [lem-weil-pbc-module-pullback-tensor], unit through g^*O_S≅O_{S'} [lem-weil-pbc-module-pullback-structure-sheaf], as in lem-weil-pbc-affine-pushforward-base-change(2)); part (1) states g^*A is a quasi-coherent O_{S'}-algebra and gives the algebra isomorphism γ:g^*A≅π'_*O_{X'}; part (2) defines the canonical S'-morphism Spec_{S'}(g^*A)→Spec_S(A)×_SS' through the anti-equivalence of the relative-spec node (3) (that node has no functor-of-points universal property) and states it is an isomorphism. stmt_deps deduplicated (the relative-spec node was listed twice) and completed. Proof (agent-written: Stacks 01LX(2) goes through the functor of points 01LS, absent from the DAG's construction): π' affine (affine-morphism-permanence(1)); affine base change 02KG (lem-weil-pbc-affine-pushforward-base-change (1),(2), reviewed) gives g^*π_*O_X≅π'_*O_{X'} as algebras; transport along α gives γ and the algebra axioms of g^*A; full faithfulness of the anti-equivalence over S' gives the isomorphism. No new nodes. Mathlib re-searched (leanfinder, leansearch, loogle, grep): no relative Spec in Mathlib."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Statement made precise by the worker (E1 delivered A|_{S'} for the pullback algebra g^*A; now the algebra structure via the pullback-tensor isomorphism and the canonical morphism via the anti-equivalence of the relative-Spec node). Four steps: pi' affine, g^* pi_* O_X = pi'_* O_{X'} as algebras from the reviewed 02KG node, transport along alpha, full faithfulness of the anti-equivalence over S'. Correct; 0 new nodes."
+ }
 }
