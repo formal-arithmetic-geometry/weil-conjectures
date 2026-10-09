@@ -10,9 +10,58 @@
  "stmt_deps": [
   "lem-weil-pbc-sheaf-algebraic-structures-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a covering family $\\{V_i\\to V\\}_{i\\in I}$ in $\\mathcal C$. By continuity condition (a), its image $\\{u(V_i)\\to u(V)\\}_{i\\in I}$ is a covering family in $\\mathcal D$. For every pair $i,j$, condition (b), applied to $T=V_j\\to V$, gives an isomorphism $u(V_j\\times_VV_i)\\cong u(V_j)\\times_{u(V)}u(V_i)$; these identifications are compatible with the projection maps because they are the canonical pullback maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00WV (definition-continuous), line 2524"
+   }
+  },
+  {
+   "text": "Since $\\mathcal G$ is a sheaf on $\\mathcal D$, its value on the image covering is the equalizer of $\\mathcal G(u(V))\\to\\prod_i\\mathcal G(u(V_i))$ and the two restriction maps to $\\prod_{i,j}\\mathcal G(u(V_i)\\times_{u(V)}u(V_j))$. This is exactly the sheaf equalizer condition from the definition of a sheaf of sets.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf), proof at line 2548"
+   }
+  },
+  {
+   "text": "Replace each term $\\mathcal G(u(V_j)\\times_{u(V)}u(V_i))$ in that equalizer by $\\mathcal G(u(V_j\\times_VV_i))$ using the isomorphisms from the first step. The resulting equalizer is $\\mathcal G(u(V))\\to\\prod_i\\mathcal G(u(V_i))\\rightrightarrows\\prod_{i,j}\\mathcal G(u(V_i\\times_VV_j))$, which is the sheaf condition for the presheaf $u^p\\mathcal G=\\mathcal G\\circ u$ on the arbitrary covering $\\{V_i\\to V\\}$. Thus $u^p\\mathcal G$ is a sheaf of sets on $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf), proof at line 2548"
+   }
+  },
+  {
+   "text": "For a sheaf of abelian groups $\\mathcal G$, the same argument applies to the underlying sheaf of sets. The restriction maps and the canonical identifications preserve the sectionwise group operations, so the equalizer is an equalizer in abelian groups and $u^p\\mathcal G$ is a sheaf of abelian groups. The identification of abelian sheaves with abelian group objects in sheaves of sets is the cited algebraic-structures result.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf), final sentence and proof at line 2548"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 00WW (lemma-pushforward-sheaf), line 2548"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +113,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 00WW into explicit steps: continuity sends a covering to a covering and identifies pairwise fibre products, the sheaf equalizer on the image covering is transported along those identifications, and the same argument gives abelian sheaves via the existing algebraic-structures node. Mathlib searches found the Grothendieck-topology analogue but no exact precoverage statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Sites 00WW: the equalizer for the image covering is transported along the isomorphisms u(V_i x_V V_j) = u(V_i) x u(V_j) of 00WV(b); correct; the C review checks each step"
+ }
 }
