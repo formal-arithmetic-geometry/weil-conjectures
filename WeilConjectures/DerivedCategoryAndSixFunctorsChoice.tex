@@ -529,27 +529,149 @@ $\Res_{\alpha_j}\dashv\Coext_{\alpha_j}\cong\Ext_{\alpha_j}$). $f_!$ is left exa
 projection-formula route is the template intended for $f^!$ as well:
 $f_!=P_B\circ\Res_{\alpha_f}$, $f^!=\Coext_{\alpha_f}\circ G_B$.
 
-\subsection{Derived functors}
+\subsection{Derived functors: derive the composite, do not compose derived functors}
+\label{sec:sixB-derived}
+
+Each underived functor on module objects is a \emph{composite} of a transport
+$\mathrm{mapMod}(-)$ of an $\Ab$-valued functor and a change of scalars. There are two
+a priori different ways to derive such a composite $G\circ F$: take the total derived
+functor of the composite, $R(G\circ F)$ or $L(G\circ F)$, or compose the derived functors
+of the factors, $RG\circ RF$ or $LG\circ LF$. The development makes the following choice.
+
+\begin{choice}[Derived pullback and pushforward]
+The derived pushforward and pullback on module objects are the \emph{total derived
+functors of the composites}:
+\begin{align*}
+  Rf_* &:= R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr)
+    \colon \D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),
+    &&\text{computed on K-injective resolutions in }\Mod_{\mathcal{A}_X},\\
+  Lf^* &:= L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr)
+    \colon \D(\Mod_{\mathcal{A}_Y})\to\D(\Mod_{\mathcal{A}_X}),
+    &&\text{computed on K-flat resolutions in }\Mod_{\mathcal{A}_Y}.
+\end{align*}
+In Lean they are not separate definitions: they are the generic
+\lean{Functor.rightDerivedFunctor} and \lean{Functor.leftDerivedFunctor} applied to the
+underived module-object functors \lean{ProEtale.ContinuousMapRing.lowerStar} and
+\lean{ProEtale.ContinuousMapRing.upperStar}. They are \emph{not} defined as
+$\D(\Res_{\eta_f})\circ R\,\mathrm{mapMod}(f_*)$ or as
+$L(\Ext_{\alpha_f})\circ L\,\mathrm{mapMod}(f^*)$, and they are \emph{not} defined from the
+$\Ab$-valued $Rf_*$, $Lf^*$ of layer (A).
+\end{choice}
+
+\paragraph{Why.}
 \begin{itemize}
-\item $Rf_* := R(f_*)$ (K-injective in $\Mod_{\mathcal{A}_X}$), also on $\D^+$. Since
-  $\Res_{\eta_f}$ is exact,
-  $Rf_*\cong\D(\Res_{\eta_f})\circ R(\mathrm{mapMod}(f_*))$.
-\item $Lf^* := L(f^*)$ (K-flat in $\Mod_{\mathcal{A}_Y}$). Since $\mathrm{mapMod}(f^*)$ is
-  exact and preserves K-flat complexes,
+\item The derived adjunction comes for free and is canonical. The underived adjunction
+  $f^*\dashv f_*$ on module objects is directly derived by the general theorem
+  (\lean{Adjunction.derivedAdjunction}, the left adjoint derived by the K-flat structure,
+  the right adjoint by the K-injective one), giving
   \[
-    Lf^*M \;\cong\; \mathcal{A}_X\lotimes_{f^*\mathcal{A}_Y} f^*M,
-    \qquad Lf^*\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}(f^*)),
+    Lf^*\dashv Rf_*\quad\text{on }\D(\Mod_{\mathcal{A}_Y})\rightleftarrows\D(\Mod_{\mathcal{A}_X})
   \]
-  the pullback of Bhatt--Scholze, Remark 6.8.15. Unlike layer (A), $Lf^*$ is not the
-  levelwise functor. $Lf^*\dashv Rf_*$ on $\D$; there is no general $\D^+$ adjunction.
-\item For an open immersion, $Lj^*\cong\D(j^*)$ and $\D(j_!)\dashv\D(j^*)$, also on
-  $\D^+$.
-\item $Rf_! := R(g_*)\circ\D(i_!)$ for the chosen compactification, and on $\D^+$, as in
-  layer (A).
-\item $\lotimes_{\mathcal{A}_X}$ and $\RHom_{\mathcal{A}_X}$ on $\D(\Mod_{\mathcal{A}_X})$
-  as in \S\ref{sec:derived}.
-\item $Rf^!$ on module objects is \emph{not yet constructed}.
+  (\lean{ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunction}). With a
+  composite of derived functors one would instead have to compose two derived adjunctions
+  through the intermediate category $\D(\Mod_{f^*\mathcal{A}_Y})$ resp.\
+  $\D(\Mod_{f_*\mathcal{A}_X})$, and check that the pieces match.
+\item The universal property (a derived functor is characterized by its counit/unit on
+  resolutions) applies to the functor one actually cares about, which is the pullback and
+  pushforward of $\mathcal{A}$-modules, not to its factors.
+\item The factorizations through the change of scalars are kept as \emph{theorems}, and
+  they hold exactly under the expected exactness conditions (see below). This makes it
+  visible where the non-exactness of $f^*$ on module objects enters.
 \end{itemize}
+
+\paragraph{Comparison with the composite of derived functors.}
+\begin{proposition}[Pushforward]
+Since $\Res_{\eta_f}$ is exact, right deriving the composite amounts to right deriving
+$\mathrm{mapMod}(f_*)$ and restricting scalars levelwise:
+\[
+  R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr)
+  \;\cong\; \D(\Res_{\eta_f})\circ R\bigl(\mathrm{mapMod}(f_*)\bigr)
+\]
+(\lean{ProEtale.ContinuousMapRing.rightDerivedLowerStarIso}, an instance of the general
+$R(G\circ F)\cong\D(G)\circ RF$ for $G$ exact,
+\lean{Functor.rightDerivedFunctorCompMapDerivedCategoryIso}). No hypothesis on $F$ is
+needed.
+\end{proposition}
+
+\begin{proposition}[Pullback]
+Since $\mathrm{mapMod}(f^*)$ is exact and sends K-flat complexes of
+$\mathcal{A}_Y$-modules to K-flat complexes of $f^*\mathcal{A}_Y$-modules ($f^*$ being
+strong monoidal, exact and cocontinuous), left deriving the composite amounts to applying
+$\mathrm{mapMod}(f^*)$ levelwise and left deriving the extension of scalars:
+\[
+  L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr)
+  \;\cong\; L(\Ext_{\alpha_f})\circ\D\bigl(\mathrm{mapMod}(f^*)\bigr),
+  \qquad\text{i.e.}\qquad
+  Lf^*M \;\cong\; \mathcal{A}_X\lotimes_{f^*\mathcal{A}_Y} f^*M
+\]
+(\lean{ProEtale.ContinuousMapRing.leftDerivedUpperStarIso}, an instance of the general
+$L(G\circ F)\cong LG\circ\D(F)$ for $F$ exact preserving K-flat complexes,
+\lean{Functor.leftDerivedFunctorCompMapDerivedCategoryIso}). Both sides are computed on the
+same K-flat resolution in $\Mod_{\mathcal{A}_Y}$. This is the pullback of Bhatt--Scholze,
+Remark 6.8.15.
+\end{proposition}
+
+The functor-specific input making $Lf^*$ meaningful is that the composite preserves
+quasi-isomorphisms between K-flat complexes, which follows from the two factors:
+$\mathrm{mapMod}(f^*)$ (exact and preserving K-flatness) and $\Ext_{\alpha_f}$ (which
+preserves quasi-isomorphisms between K-flat complexes).
+
+\begin{remark}[Contrast with layer (A)]
+In layer (A), $g^*$ is exact, so $Lg^*\cong\D(g^*)$ is levelwise, and the choice of
+derived-of-composite versus composite-of-derived is invisible. On module objects
+$f^*=\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)$ is only right exact, because extension of
+scalars along the non-invertible $\alpha_f$ is not exact, so $Lf^*$ is genuinely not
+levelwise; this is exactly the case the K-flat left derivability structure is designed
+for. For the same reason there is no bounded-below derived adjunction $Lf^*\dashv R^+f_*$
+in general, while $R^+f_* := R^+(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*))$ exists.
+\end{remark}
+
+\begin{remark}[Open immersions]
+For an open immersion $j$, $\alpha_j$ is an isomorphism, so $\Ext_{\alpha_j}\cong
+\Res_{\alpha_j^{-1}}$ and $j^*$ is exact on module objects. Then the total derived functor
+is levelwise, $L(j^*)\cong\D(j^*)$
+(\lean{ProEtale.ContinuousMapRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion}).
+Likewise $j_!=(\text{linear }j_!)\circ\Res_{\alpha_j}$ is exact, so it is derived
+levelwise, $\D(j_!)$, as the derived functor of the composite. The derived adjunction
+\[
+  \D(j_!)\dashv\D(j^*)\quad\text{(also on }\D^+\text{)}
+\]
+(\lean{ProEtale.ContinuousMapRing.derivedOpenImmersionLowerShriekUpperStarAdjunction}) is
+again obtained by deriving the underived adjunction $j_!\dashv j^*$ on module objects
+between total derived functors, and then identifying them with the levelwise functors.
+\end{remark}
+
+\begin{choice}[Derived lower shriek: composite of derived functors]
+For $f$ with chosen compactification $X\xrightarrow{i}\bar X\xrightarrow{g}Y$,
+\[
+  Rf_! := R(g_*)\circ\D(i_!)\colon\D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),
+  \qquad
+  R^+f_! := R^+(g_*)\circ\D^+(i_!),
+\]
+where $g_*$ and $i_!$ are the module-object functors (each itself derived as a composite
+with change of scalars, as above)
+(\lean{ProEtale.ContinuousMapRing.rightDerivedLowerShriek}). Here, and only here, the
+choice is the \emph{opposite} one: $Rf_!$ is the composite of the derived functors of the
+two halves, \emph{not} the total derived functor $R(g_*\circ i_!)=R(f_!)$ of the underived
+lower shriek. The reason is mathematical: $i_!$ does not send injectives to
+$g_*$-acyclic objects, and $R(f_!)$ is the wrong functor (although
+$H^0(Rf_!)=f_!$). The bounded-below version is the restriction of the unbounded one.
+\end{choice}
+
+\begin{choice}[Tensor product and internal hom]
+$\lotimes_{\mathcal{A}_X}$ is the two-variable total left derived functor of the
+\emph{relative} tensor product $\otimes_{\mathcal{A}_X}$ on complexes of module objects
+(K-flat resolutions in $\Mod_{\mathcal{A}_X}$), not a derived tensor over $\mathbb{Z}$
+followed by a quotient; $\RHom_{\mathcal{A}_X}$ is its right adjoint
+(\lean{ProEtale.ContinuousMapRing.derivedTensor},
+\lean{ProEtale.ContinuousMapRing.derivedHom}).
+\end{choice}
+
+\paragraph{Exceptional pullback.} $Rf^!$ on module objects is \emph{not yet constructed}.
+The intended route mirrors $f_!$: the projection formula linearizes the $\Ab$-valued right
+adjoint, and $f^!$ is obtained by coextension of scalars along $\alpha_f$,
+$f^!=\Coext_{\alpha_f}\circ G_B$, then $Rf^!$ is assembled as in layer (A) from a right
+adjoint of $Rg_*$ for the proper part and $\D(i^*)$ for the open part.
 
 %======================================================================
 \section{Summary}
@@ -568,9 +690,16 @@ $f^*$ & $\mathrm{sheafify}\circ\operatorname{Lan}$, exact, monoidal &
 $j_!$ ($j$ open) & $\mathrm{sheafify}\circ\operatorname{Lan}$ along localization &
   $(\text{linear }j_!)\circ\Res_{\alpha_j}$ via projection formula\\
 $f_!$ & $g_*\circ i_!$ (chosen compactification) & $g_*\circ i_!$\\
-$Rf_*$ & $R(f_*)$ & $R(f_*)\cong\D(\Res_{\eta_f})\circ R(\mathrm{mapMod}f_*)$\\
-$Lf^*$ & $L(f^*)\cong\D(f^*)$ & $L(f^*)\cong\mathcal{A}_X\lotimes_{f^*\mathcal{A}_Y}f^*$\\
-$Rf_!$ & $R(g_*)\circ\D(i_!)$ & $R(g_*)\circ\D(i_!)$\\
+$Rf_*$ & $R(f_*)$ &
+  $R(\Res_{\eta_f}\circ\mathrm{mapMod}f_*)$ (derived of composite);
+  $\cong\D(\Res_{\eta_f})\circ R(\mathrm{mapMod}f_*)$ (theorem)\\
+$Lf^*$ & $L(f^*)\cong\D(f^*)$ &
+  $L(\Ext_{\alpha_f}\circ\mathrm{mapMod}f^*)$ (derived of composite);
+  $\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}f^*)$ (theorem)\\
+$Lf^*\dashv Rf_*$ & derived from $f^*\dashv f_*$ & derived from $f^*\dashv f_*$ on module
+  objects\\
+$Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) &
+  $R(g_*)\circ\D(i_!)$ (composite of derived)\\
 $Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & not yet\\
 $\lotimes$ & K-flat derived $\otimes$ & K-flat derived $\otimes_{\mathcal{A}_X}$\\
 $\RHom$ & right adjoint of $\lotimes$ & right adjoint of $\lotimes_{\mathcal{A}_X}$\\
