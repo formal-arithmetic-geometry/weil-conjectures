@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
@@ -14,7 +15,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison
 
 /-!
 
@@ -33,6 +34,15 @@ they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
 - `AlgebraicGeometry.ProEtale.derivedComparisonAdjunctionPlus`: the adjunction
   `D+(ν^*(X)[A]) ⊣ R+(ν_*(X)[A])` between the bounded below derived categories of étale and
   pro-étale sheaves.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_unit_app`: the unit
+  `M ⟶ Rν_* ν^* M` is an isomorphism for bounded below `M`. On a bounded below complex `I` of
+  injectives it is the unit of `ν^* ⊣ ν_*` on `I`, which is invertible, followed by the unit
+  `ν_* ν^* I ⟶ R⁺ν_* ν^* I`, which is invertible because `ν^*` sends injectives to
+  `ν_*`-acyclic objects
+  (`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`).
 
 -/
 
@@ -95,6 +105,19 @@ lemma DerivedCategory.plusEtaleOrigin.plus
   exact DerivedCategory.TStructure.t.plus.prop_of_iso e
     ⟨n, (ν^*(X)[A]).isGE_mapDerivedCategory_obj K' n⟩
 
+/-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
+finite level
+
+*Acyclicity.* For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for
+`ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The other two clauses of the node, exactness of `ν^*`
+and invertibility of the unit `F ⟶ ν_* ν^* F`, are
+`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`,
+`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` and
+`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
+theorem rightAcyclic_comparisonUpperStar_obj_of_injective (I : Sheaf X.smallEtaleTopology A)
+    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
+  sorry
+
 section Adjunction
 
 /- The closed symmetric preadditive monoidal structure and the functorial flat resolutions on
@@ -126,8 +149,25 @@ schemes*, Corollary 5.1.6), which makes `ν^* : D⁺(X_ét) ⥤ D(X_proét)` ful
 theorem isIso_derivedComparisonAdjunction_unit_app
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (hM : DerivedCategory.TStructure.t.plus M) :
-    IsIso ((derivedComparisonAdjunction A X).unit.app M) :=
-  sorry
+    IsIso ((derivedComparisonAdjunction A X).unit.app M) := by
+  -- the unit of the bounded below adjunction is invertible: `ν^*` is exact, the unit of
+  -- `ν^* ⊣ ν_*` is invertible and `ν^*` sends injectives to `ν_*`-acyclic objects
+  have := isIso_comparisonAdjunction_unit A X
+  have hplus := (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
+    (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I)
+    ⟨M, hM⟩
+  rw [← (comparisonAdjunction A X).derivedAdjunctionPlus_eq_derivedPlus] at hplus
+  -- it is the restriction of the unbounded unit along the inclusion of `D⁺`
+  have h := (derivedComparisonAdjunction A X).map_restrictFullyFaithful_unit_app
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (ν^*(X)[A]).mapDerivedCategoryPlusCompatibility.symm
+    (ν_*(X)[A]).rightDerivedFunctorPlusCompatibility.symm ⟨M, hM⟩
+  change DerivedCategory.Plus.ι.map
+    ((comparisonAdjunction A X).derivedAdjunctionPlus.unit.app ⟨M, hM⟩) = _ at h
+  have : IsIso (DerivedCategory.Plus.ι.map
+      ((comparisonAdjunction A X).derivedAdjunctionPlus.unit.app ⟨M, hM⟩)) := inferInstance
+  rw [h] at this
+  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ this
 
 variable {A X} in
 /-- `D(ν^*)` is fully faithful on bounded below complexes: for `K` and `M` in `D⁺(X_ét)`,

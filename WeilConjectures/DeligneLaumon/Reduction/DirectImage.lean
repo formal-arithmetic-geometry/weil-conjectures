@@ -323,7 +323,8 @@ theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ)
 /-- If `K` is a bounded constructible Weil complex on `X` mixed of weights at most `w`, then
 `Rf₀!K` is mixed of weights at most `w` (blueprint: `sk-cor-dl-general-complex`,
 `thm-zl-wme-deligne-estimate`). -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
+theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]

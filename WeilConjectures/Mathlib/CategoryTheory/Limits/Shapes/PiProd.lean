@@ -106,7 +106,12 @@ noncomputable def binaryCofanOptionSigma :
 variable [HasBinaryCoproduct (F none) (∐ fun i ↦ F (some i))]
 
 /-- A coproduct indexed by `Option ι` is the binary coproduct of the `none` summand with the
-coproduct over `ι` of the remaining summands. -/
+coproduct over `ι` of the remaining summands:
+```
+∐ F ≅ F none ⨿ ∐ (F ∘ some)
+```
+Under this isomorphism `Sigma.ι F none` corresponds to `coprod.inl`, and `Sigma.ι F (some i)` to
+`Sigma.ι (F ∘ some) i ≫ coprod.inr`. -/
 noncomputable def sigmaOptionIso : (∐ F) ≅ F none ⨿ (∐ fun i ↦ F (some i)) :=
   (binaryCofanOptionSigma F).coconePointUniqueUpToIso
     (colimit.isColimit (pair (F none) (∐ fun i ↦ F (some i))))

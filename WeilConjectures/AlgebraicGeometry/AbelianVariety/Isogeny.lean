@@ -274,6 +274,7 @@ theorem IsIsogeny.fiberDegree_eq (f : A ⟶ B) [IsIsogeny f] [IsAffineHom f.left
 
 variable [IsAbelianVariety A] [IsAbelianVariety B]
 
+omit [IsAbelianVariety B] in
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
 An isogeny of abelian varieties is a finite morphism: it is proper, `A` being proper, and has

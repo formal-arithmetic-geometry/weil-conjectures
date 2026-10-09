@@ -14,7 +14,10 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 
 /-!
@@ -180,13 +183,35 @@ noncomputable instance : Category (WeilSheaf k₀ l X) :=
 instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderFiniteProducts :=
   inferInstance
 
-noncomputable instance : Abelian (WeilSheaf k₀ l X) :=
+/-- The geometric fiber of a `k₀`-scheme locally of finite type is locally Noetherian. -/
+instance isLocallyNoetherian_geometricFiber
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  have : IsLocallyNoetherian (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (IsLocallyNoetherian (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  inferInstanceAs (IsLocallyNoetherian (pullback _ _))
+
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Abelian (WeilSheaf k₀ l X) :=
   inferInstanceAs (Abelian (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
 
 noncomputable instance : Preadditive (WeilSheaf k₀ l X) :=
+  inferInstanceAs (Preadditive (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+
+instance : HasFiniteProducts (WeilSheaf k₀ l X) :=
+  inferInstanceAs (HasFiniteProducts (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+
+instance : HasFiniteBiproducts (WeilSheaf k₀ l X) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
+instance : HasBinaryBiproducts (WeilSheaf k₀ l X) :=
+  hasBinaryBiproducts_of_finite_biproducts _
+
+instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderExtensions :=
   inferInstance
 
-instance : (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
   inferInstance
 
 noncomputable instance : Category (WeilComplex k₀ l X) :=
@@ -206,11 +231,13 @@ instance (n : ℤ) : (shiftFunctor (WeilComplex k₀ l X) n).Additive :=
 
 /-- **Weil complexes form a pretriangulated category**, the triangulated structure being that
 of the derived category of pro-étale Weil sheaves. -/
-noncomputable instance : Pretriangulated (WeilComplex k₀ l X) :=
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Pretriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (Pretriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
 /-- **Weil complexes form a triangulated category.** -/
-instance : IsTriangulated (WeilComplex k₀ l X) :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsTriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (IsTriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
 namespace WeilSheaf
@@ -278,11 +305,14 @@ finite direct sum of copies of `ℚ̄_ℓ`. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   IsAdicLisseSheaf F.obj.carrier
 
+attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- A direct sum of lisse Weil sheaves is lisse: the underlying sheaf of `F ⊞ G` is the direct
 sum of those of `F` and `G`. -/
 theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
     (F ⊞ G).IsLisse := by
   let Φ := ObjectProperty.ι (objectProperty k₀ l X) ⋙ IsoAlgebra.forget (frobeniusPullback k₀ l X)
+  have : HasBinaryBiproducts (objectProperty k₀ l X).FullSubcategory :=
+    inferInstanceAs (HasBinaryBiproducts (WeilSheaf k₀ l X))
   have : PreservesBinaryBiproducts Φ := preservesBinaryBiproducts_of_preservesBiproducts _
   exact IsAdicLisseSheaf.of_iso (Φ.mapBiprod F G).symm
     (IsAdicLisseSheaf.biprod (F := Φ.obj F) (G := Φ.obj G) hF hG)
@@ -405,6 +435,18 @@ noncomputable def WeilComplex.upperStar : WeilComplex k₀ l Y ⥤ WeilComplex k
 
 instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+noncomputable instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).CommShift ℤ := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.CommShift ℤ := inferInstance
+  have : (WeilComplex.objectProperty k₀ l X).IsStableUnderShift ℤ := inferInstance
+  exact ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The pullback of Weil complexes is a triangulated functor. -/
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).IsTriangulated := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.IsTriangulated := inferInstance
+  exact ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 
 end UpperStar
 

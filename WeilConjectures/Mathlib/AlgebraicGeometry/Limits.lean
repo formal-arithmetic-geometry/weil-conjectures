@@ -217,4 +217,17 @@ lemma exists_comp_sigmaι_eq_of_subsingleton {σ : Type*} [Small.{u} σ] {g : σ
   rintro _ ⟨w, rfl⟩
   exact ⟨y, by rw [hy', Subsingleton.elim w z]⟩
 
+open CategoryTheory Limits in
+/-- The ring of global functions on the terminal scheme `Spec ℤ` is a quotient of `ℤ`. -/
+lemma surjective_intCastRingHom_Γ_terminal :
+    Function.Surjective (Int.castRingHom Γ(⊤_ Scheme.{u}, ⊤)) := by
+  let e : Γ(⊤_ Scheme.{u}, ⊤) ≅ CommRingCat.of (ULift.{u} ℤ) :=
+    Scheme.Γ.mapIso (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).op ≪≫
+      Scheme.ΓSpecIso _
+  intro y
+  refine ⟨(e.hom y).down, e.commRingCatIsoToRingEquiv.injective ?_⟩
+  change e.hom _ = e.hom y
+  rw [eq_intCast, map_intCast]
+  rfl
+
 end AlgebraicGeometry
