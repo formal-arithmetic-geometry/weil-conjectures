@@ -101,7 +101,15 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
     rw [hr, hφ₀]
 
 variable {M} in
-/-- `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is natural in `M`. -/
+/-- `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is natural in `M`: for `f : M ⟶ M'` the square
+```
+  Hom(M', R) ⊗ P ---> Hom(M', P)
+        |                  |
+  f^* ⊗ P                 f^*
+        v                  v
+  Hom(M, R) ⊗ P  ---> Hom(M, P)
+```
+commutes. -/
 lemma dualTensorHom_naturality {M' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} (f : M ⟶ M') :
     homObjMap f (𝟙 (unit _)) ▷ P ≫ dualTensorHom M P =
       dualTensorHom M' P ≫ homObjMap f (𝟙 P) := by
@@ -120,7 +128,15 @@ variable {X : Scheme.{u}}
 set_option maxHeartbeats 1000000 in
 -- The rewrites through the localized monoidal structure on sheaves of modules are slow.
 /-- The identification `M ⊗ P ≅ a(M ⊗ P)` of the tensor product of sheaves of modules with the
-sheafification of the tensor product of presheaves is natural in `M`. -/
+sheafification of the tensor product of presheaves is natural in `M`: for `f : M ⟶ M'` the square
+```
+  M ⊗ P  ---------> a(M ⊗ P)
+    |                  |
+  f ⊗ P             a(f ⊗ P)
+    v                  v
+  M' ⊗ P ---------> a(M' ⊗ P)
+```
+commutes. -/
 lemma whiskerRight_tensorObjIsoSheafification_hom {M M' : X.Modules} (f : M ⟶ M')
     (P : X.Modules) :
     f ▷ P ≫ (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M' P).hom =
@@ -203,7 +219,15 @@ instance isIso_dualTensorHom (M N : X.Modules) [N.IsInvertible] : IsIso (dualTen
     (homObj M N)) := inferInstance
   exact IsIso.comp_isIso' (Iso.isIso_hom _) (IsIso.comp_isIso' this hc)
 
-/-- `Mᵛ ⊗ N ⟶ Hom(M, N)` is natural in `M`. -/
+/-- `Mᵛ ⊗ N ⟶ Hom(M, N)` is natural in `M`: for `f : M ⟶ M'` the square
+```
+  M'ᵛ ⊗ N ---> Hom(M', N)
+     |              |
+  fᵛ ⊗ N           f^*
+     v              v
+  Mᵛ ⊗ N  ---> Hom(M, N)
+```
+commutes. -/
 lemma dualTensorHom_naturality {M M' : X.Modules} (f : M ⟶ M') (N : X.Modules) :
     dualMap f ▷ N ≫ dualTensorHom M N =
       dualTensorHom M' N ≫ SheafOfModules.homObjMap (R := X.sheaf) f (𝟙 N) := by

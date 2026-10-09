@@ -27,18 +27,20 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.Scheme.Modules
+namespace AlgebraicGeometry.Scheme
 
 variable (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))]
   [Y.Over (Spec (.of k))]
 
 /-- The structure maps `k →+* Γ(Y, ⊤)` and `k →+* Γ(X, ⊤)` of `k`-schemes are compatible with a
 morphism `g : X ⟶ Y` of `k`-schemes. -/
-lemma globalSectionsRingHom_comp_appTop (g : X ⟶ Y) [g.IsOver (Spec (.of k))] (c : k) :
+lemma Hom.appTop_globalSectionsRingHom (g : X ⟶ Y) [g.IsOver (Spec (.of k))] (c : k) :
     g.appTop (globalSectionsRingHom k (X := Y) c) = globalSectionsRingHom k (X := X) c := by
   rw [globalSectionsRingHom, globalSectionsRingHom,
     ← (Hom.isOver_iff (Spec (.of k))).mp ‹g.IsOver _›, Scheme.Hom.comp_appTop]
   rfl
+
+namespace Modules
 
 /-- `H⁰(Y, g_* M) ≅ H⁰(X, M)`, both being global sections of `M`. -/
 noncomputable def H.zeroPushforwardLinearEquiv (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
@@ -53,7 +55,7 @@ noncomputable def H.zeroPushforwardLinearEquiv (g : X ⟶ Y) [g.IsOver (Spec (.o
         c • (H.zeroLinearEquiv M).symm s :=
       (H.zeroLinearEquiv M).symm.map_smul _ _
     refine (congrArg (H.zeroLinearEquiv M).symm h₁).trans ?_
-    rw [globalSectionsRingHom_comp_appTop]
+    rw [Hom.appTop_globalSectionsRingHom]
     exact h₂
 
 omit [X.Over (Spec (.of k))] in
@@ -78,4 +80,6 @@ noncomputable def pushforwardCompCohomologyFunctorZeroIso (g : X ⟶ Y) [g.IsOve
       LinearEquiv.apply_symm_apply]
     rfl
 
-end AlgebraicGeometry.Scheme.Modules
+end Modules
+
+end AlgebraicGeometry.Scheme
