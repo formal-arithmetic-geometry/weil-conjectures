@@ -2,7 +2,7 @@
  "id": "lem-sp-finite-filtration-induction",
  "kind": "statement",
  "title": "Finite filtration induction",
- "statement": "Let $(A,F)$ and $(A',F')$ be filtered objects [def-sp-filtration] with finite\nfiltrations, and let $\\varphi:A\\to A'$ be a morphism of filtered objects. If\n$\\operatorname{gr}^p\\varphi$ is an isomorphism for all $p$, then $\\varphi$ is\nan isomorphism.",
+ "statement": "Let $\\mathcal A$ be an abelian category and let $(A,F)$, $(A',F')$ be filtered objects of $\\mathcal A$ [def-sp-filtration]: decreasing families of subobjects $F^pA\\subseteq A$, $F'^pA'\\subseteq A'$ ($p\\in\\mathbf Z$), with graded pieces $\\operatorname{gr}^pA=F^pA/F^{p+1}A$ and $\\operatorname{gr}^pA'=F'^pA'/F'^{p+1}A'$. Assume both filtrations are *finite*: there are integers $n\\le m$ with $F^nA=A$, $F'^nA'=A'$ and $F^mA=0$, $F'^mA'=0$ (Stacks 0121 (7); such a filtration is automatically exhaustive and separated; the finite filtrations of [def-sp-filtration], with $F^0A=A$ and $F^NA=0$, are the case $n=0$). Let $\\varphi:A\\to A'$ be a morphism of $\\mathcal A$ with $\\varphi(F^pA)\\subseteq F'^pA'$ for all $p$ (a morphism of filtered objects, Stacks 0121 (3); it is *not* assumed strict), so that $\\varphi$ restricts to $F^p\\varphi:F^pA\\to F'^pA'$ and induces $\\operatorname{gr}^p\\varphi:\\operatorname{gr}^pA\\to\\operatorname{gr}^pA'$. If $\\operatorname{gr}^p\\varphi$ is an isomorphism for every $p$, then $\\varphi$ is an isomorphism (and so is every $F^p\\varphi$, i.e. $\\varphi(F^pA)=F'^pA'$ for all $p$; in particular $\\varphi$ is strict).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-finite-filtration-induction.md",
   "place": "node lem-sp-finite-filtration-induction, order 1209"
@@ -12,24 +12,86 @@
  ],
  "proof": [
   {
-   "text": "Apply the five lemma to the commutative diagram of short exact sequences\n\n$$\n\\begin{array}{ccccccccc}\n0&\\to& F^{p+1}A&\\to& F^{p}A&\\to& \\operatorname{gr}^p A&\\to&0\\\\\n&&\\downarrow&&\\downarrow&&\\downarrow&&\\\\\n0&\\to& F^{p+1}A'&\\to& F^{p}A'&\\to& \\operatorname{gr}^p A'&\\to&0\n\\end{array}\n$$\n\nin which the third vertical arrow is an isomorphism by hypothesis: descending\ninduction on $p$, starting where both filtrations vanish (using the *graded\npieces* of [def-sp-filtration]) shows $F^{p}A\\to F^{p}A'$ is an isomorphism\nfor all $p$, and $p=0$ gives the claim.",
+   "text": "**Step 1 (common bounds and the diagrams).** Since the filtrations are decreasing, if $F^{n_1}A=A$, $F^{m_1}A=0$ and $F'^{n_2}A'=A'$, $F'^{m_2}A'=0$, then $n=\\min(n_1,n_2)$ and $m=\\max(m_1,m_2)$ satisfy $F^nA=A$, $F'^nA'=A'$, $F^mA=F'^mA'=0$, and the same then holds for every $p\\le n$, resp. every $p\\ge m$. For each $p$ the hypothesis $\\varphi(F^pA)\\subseteq F'^pA'$ says that $\\varphi\\circ\\iota_p:F^pA\\to A'$ factors (uniquely, $\\iota'_p$ being a monomorphism) through the inclusion $\\iota'_p:F'^pA'\\to A'$; call the factorization $F^p\\varphi$. By uniqueness, $F^p\\varphi$ restricted to $F^{p+1}A$ is $F^{p+1}\\varphi$ followed by $F'^{p+1}A'\\subseteq F'^pA'$, so $F^p\\varphi$ passes to the quotients, giving $\\operatorname{gr}^p\\varphi$ (the functor $\\operatorname{gr}^p$ on filtered objects). Hence for each $p$ the diagram with exact rows\n\n$$\n\\begin{array}{ccccccccc}\n0&\\to& F^{p+1}A&\\to& F^{p}A&\\to& \\operatorname{gr}^p A&\\to&0\\\\\n&&\\downarrow{\\scriptstyle F^{p+1}\\varphi}&&\\downarrow{\\scriptstyle F^p\\varphi}&&\\downarrow{\\scriptstyle \\operatorname{gr}^p\\varphi}&&\\\\\n0&\\to& F'^{p+1}A'&\\to& F'^{p}A'&\\to& \\operatorname{gr}^p A'&\\to&0\n\\end{array}\n$$\n\ncommutes; its rows are short exact because $\\operatorname{gr}^p$ is by definition the cokernel of the monomorphism $F^{p+1}A\\to F^pA$ [def-sp-filtration].",
    "uses": [
     "def-sp-filtration"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 0121 (definition-filtered, line 4667), items (1), (3), (7); the paragraph defining $\\operatorname{gr}^p$ before Lemma 05SP (line 4948); the diagram in the proof of Lemma 0127 (lemma-characterize-strict, line 5018)"
+   }
+  },
+  {
+   "text": "**Step 2 (descending induction on $p$).** Claim: $F^p\\varphi$ is an isomorphism for every $p$. For $p\\ge m$ both $F^pA$ and $F'^pA'$ are $0$ (Step 1), so $F^p\\varphi$ is the isomorphism $0\\to0$. Let $p<m$ and assume $F^{p+1}\\varphi$ is an isomorphism. In the diagram of Step 1 for this $p$, the left vertical arrow $F^{p+1}\\varphi$ is an isomorphism by the induction hypothesis and the right vertical arrow $\\operatorname{gr}^p\\varphi$ is an isomorphism by hypothesis; the rows are short exact, so the short five lemma [lem-weil-pbc-short-five-lemma] gives that the middle arrow $F^p\\varphi$ is an isomorphism. Since only the finitely many $p$ with $n\\le p<m$ need an induction step, this descending induction reaches every $p\\ge n$, and for $p<n$ the map $F^p\\varphi=F^n\\varphi$ (as $F^pA=F^nA$, $F'^pA'=F'^nA'$). No strictness of $\\varphi$ is used: the five lemma needs only the commutative diagram.",
+   "uses": [
+    "lem-weil-pbc-short-five-lemma",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0127 (lemma-characterize-strict, line 5018), proof of (3) implies (2): 'As the filtrations are finite we may prove this by descending induction on $p$ ... the five lemma imply that $f(F^pA)=F^pB$'; the five lemma is Lemma 05QB (lemma-five-lemma, line 1227)"
+   }
+  },
+  {
+   "text": "**Step 3 (conclusion).** For $p=n$ the inclusions $F^nA\\to A$ and $F'^nA'\\to A'$ are isomorphisms (equalities of subobjects, Step 1) and $\\varphi\\circ\\iota_n=\\iota'_n\\circ F^n\\varphi$; hence $\\varphi=\\iota'_n\\circ F^n\\varphi\\circ\\iota_n^{-1}$ is a composite of isomorphisms, so an isomorphism. Moreover each $F^p\\varphi$ being an isomorphism means $\\varphi(F^pA)=F'^pA'$, so $\\varphi$ is an isomorphism of filtered objects and in particular strict.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 0127 (lemma-characterize-strict, line 5018), proof: the conclusion $f(F^pA)=F^pB$ for all $p$"
+   }
   }
  ],
  "proof_deps": [
-  "def-sp-filtration"
+  "def-sp-filtration",
+  "lem-weil-pbc-short-five-lemma"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-finite-filtration-induction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 0127 (lemma-characterize-strict, line 5018), proof of (3) implies (2) (descending induction with the five lemma); the same statement also follows from Lemma 05QH (lemma-filtered-acyclic, line 5095) applied to the complexes $0\\to A\\to A'$ and $A\\to A'\\to0$"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Filtration\\|filtration' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order",
+   "results": "only Algebra/Homology/SpectralSequence/ComplexShape.lean (a docstring remark that `spectralSequenceFin` could serve for spectral sequences of a finite filtration); no filtered objects of an abelian category",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^theorem\\|^lemma\\|^class\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FilteredAlgebra/Basic.lean",
+   "results": "`IsFiltration`, `IsRingFiltration`, `IsModuleFiltration` (increasing filtrations by SetLike subobjects of rings/modules), only basic lemmas; no associated graded morphism, no 'iso on gr implies iso'",
+   "date": "2026-10-09",
+   "verdict": "no match (different setting: SetLike filtrations of rings and modules, no graded-piece criterion)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'GradedPiece\\|gradedPiece\\|of_gr\\|grIso\\|gr_bijective\\|gr_injective\\|gr_surjective\\|associatedGraded' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no relevant hit (only unrelated names such as `smooth_of_grpObj`, `tmul_of_gradedMul_of_tmul`)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ntitone\\|filtration\\|abutment' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject/*.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence/",
+   "results": "SpectralObject/HasSpectralSequence.lean: only `antitone_i₀` (index data of pages); SpectralSequence/ has Basic.lean and ComplexShape.lean; no filtration of an abutment and no convergence statement",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean; grep -rn 'isIso₂_of_shortExact_of_isIso₁₃' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "five lemma `CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono` (Four.lean:141) and the short five lemma `CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃` (ShortComplex/ShortExact.lean:146)",
+   "date": "2026-10-09",
+   "verdict": "the step tool, not the statement: recorded as the Mathlib leaf lem-weil-pbc-short-five-lemma"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -51,5 +113,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sp-finite-filtration-induction",
+  "worker": "stage1",
+  "summary": "Rewrote the proof from Stacks Lemma 0127 (homology.tex, lemma-characterize-strict), proof of (3)=>(2), which is exactly the descending induction with the five lemma on 0 -> F^{p+1} -> F^p -> gr^p -> 0; the imported one-paragraph proof is split into three steps (common bounds and the commutative diagrams, elementary; descending induction using the new Mathlib leaf lem-weil-pbc-short-five-lemma = CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃; conclusion at p = n, elementary). The statement was made explicit (not changed in substance): 'finite' is Stacks 0121(7) (F^n = whole, F^m = 0 for some n <= m), which implies exhaustive and separated and contains def-sp-filtration's finite filtrations (F^0 = A, F^N = 0) as the case n = 0; the imported proof's 'p = 0 gives the claim' only works for that case and now reads p = n. The morphism is only required to respect the filtrations (not strict); strictness is a consequence. Checked against Step 6 of thm-weil-pbc-bounded-below: the abutment filtrations there are indexed by p with E_2 in p >= 0, q >= a, so F^0 H^n = H^n and F^{n-a+1} H^n = 0, a finite filtration in this sense, and the map is a morphism of filtered objects; nothing more is needed. Mathlib has no filtered objects of an abelian category and no graded-piece criterion (searches recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

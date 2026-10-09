@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-pbc-short-five-lemma",
+ "kind": "statement",
+ "title": "Short five lemma in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category and consider a commutative diagram in $\\mathcal A$\n\n$$\n\\begin{array}{ccccccccc}\n0&\\to& X_1&\\xrightarrow{i}& X_2&\\xrightarrow{\\pi}& X_3&\\to&0\\\\\n&&\\downarrow{\\scriptstyle\\alpha}&&\\downarrow{\\scriptstyle\\beta}&&\\downarrow{\\scriptstyle\\gamma}&&\\\\\n0&\\to& Y_1&\\xrightarrow{i'}& Y_2&\\xrightarrow{\\pi'}& Y_3&\\to&0\n\\end{array}\n$$\n\nwhose rows are short exact sequences ($i$, $i'$ monomorphisms, $\\pi$, $\\pi'$ epimorphisms, exact in the middle). If $\\alpha$ and $\\gamma$ are isomorphisms, then $\\beta$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 05QB (lemma-five-lemma, line 1227), applied to the rows padded with zeros: $0\\to X_1\\to X_2\\to X_3\\to 0$ over $0\\to Y_1\\to Y_2\\to Y_3\\to0$ with $\\alpha,\\gamma$ isomorphisms and the zero maps $0\\to0$ as outer arrows; this is the form used in the proof of Lemma 0127 (lemma-characterize-strict, line 5018)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isIso₂_of_shortExact_of_isIso₁₃\\|isIso_of_shortExact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "Algebra/Homology/ShortComplex/ShortExact.lean:146 `CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃ [Balanced C] (φ : S₁ ⟶ S₂) (h₁ : S₁.ShortExact) (h₂ : S₂.ShortExact) [IsIso φ.τ₁] [IsIso φ.τ₃] : IsIso φ.τ₂`, and the primed variant at line 156 taking the two IsIso as explicit arguments",
+   "date": "2026-10-09",
+   "verdict": "match: a morphism of short complexes is exactly a commutative diagram of the statement, `ShortExact` is exactness of a row with mono on the left and epi on the right, and an abelian category is balanced (instance `CategoryTheory.Abelian` → `Balanced`)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean",
+   "results": "`CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono` (line 141, the five-term five lemma on `ComposableArrows C 4`), the four lemmas `mono_of_epi_of_mono_of_mono`, `epi_of_epi_of_epi_of_mono`, the three-term variants `Abelian.isIso_of_epi_of_isIso`, `Abelian.isIso_of_isIso_of_mono`, and `ShortComplex.mono_of_mono_of_mono_of_mono`, `ShortComplex.epi_of_epi_of_epi_of_epi` (line 359, 364), which together also give the statement",
+   "date": "2026-10-09",
+   "verdict": "generalization: the five-term five lemma (Stacks 05QB) specializes to the statement by padding the rows with zero objects; the ShortExact.lean lemma above states it directly"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "how": "exact: the two rows are short complexes `S₁`, `S₂` with `S₁.ShortExact`, `S₂.ShortExact`, the diagram is a morphism `φ : S₁ ⟶ S₂` with `φ.τ₁ = α`, `φ.τ₂ = β`, `φ.τ₃ = γ`, and an abelian category is `Balanced`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-filtration-induction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
