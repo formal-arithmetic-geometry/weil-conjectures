@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-stalk-germs-on-basis",
+ "kind": "statement",
+ "title": "Germs in a stalk are represented and compared on members of a basis",
+ "statement": "Let $X$ be a topological space, $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology, $\\mathcal P$ a presheaf of abelian groups (or of sets, rings, modules) on $X$ and $x\\in X$, with stalk $\\mathcal P_x$ and germs $s\\mapsto s_x$ [def-weil-pbc-module-stalk]. Then (i) every element of $\\mathcal P_x$ is the germ $s_x$ of some $s\\in\\mathcal P(U)$ with $U\\in\\mathcal B$, $x\\in U$; (ii) for open $U,V\\ni x$, $s\\in\\mathcal P(U)$, $t\\in\\mathcal P(V)$ with $s_x=t_x$ there is $W\\in\\mathcal B$ with $x\\in W\\subseteq U\\cap V$ and $s|_W=t|_W$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H, remark after Definition 009I (the stalk may be computed over the members of B containing x, since they form a fundamental system of neighbourhoods of x) and the remark after Lemma 009N (F_x = F^ext_x)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every germ in the stalk is represented by a section over a basic open set of a basis",
+   "results": "TopCat.Presheaf.germ_exist_of_isBasis (older name in the leansearch index), TopCat.Presheaf.germ_exist (Topology/Sheaves/Stalks), Scheme.basicOpen, StructureSheaf.germ_toOpen",
+   "date": "2026-10-10",
+   "verdict": "match: the basis version of germ_exist, called exists_mem_germ_eq_of_isBasis in this Mathlib (see loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.germ, TopologicalSpace.Opens.IsBasis",
+   "results": "TopCat.Presheaf.exists_mem_germ_eq_of_isBasis, TopCat.Presheaf.germ_eq_of_isBasis (Mathlib.Topology.Sheaves.Stalks), for C concrete with HasColimits and PreservesFilteredColimits (forget C)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "TopCat.Presheaf.exists_mem_germ_eq_of_isBasis",
+   "results": "TopCat.Presheaf.exists_mem_germ_eq_of_isBasis in .lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean (index: unavailable; existence confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 425,513p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean",
+   "results": "section IsBasis (variable {B : Set (Opens X)} (hB : Opens.IsBasis B)): :484 exists_mem_germ_eq_of_isBasis (F : X.Presheaf C) (x) (t : F.stalk x) : exists U, x in U, U in B, s, F.germ U x m s = t; :491 germ_eq_of_isBasis (h : F.germ U x mU s = F.germ V x mV t) : exists W, x in W, W in B, W <= U, W <= V, F.map (homOfLE hWU).op s = F.map (homOfLE hWV).op t; ambient [PreservesFilteredColimits (forget C)] at :427",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.exists_mem_germ_eq_of_isBasis, TopCat.Presheaf.germ_eq_of_isBasis",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "one lemma per clause: (i) exists_mem_germ_eq_of_isBasis (Stalks.lean:484), (ii) germ_eq_of_isBasis (Stalks.lean:491), for B : Set (Opens X) with hB : Opens.IsBasis B and F : X.Presheaf C, C a concrete category with colimits whose forgetful functor preserves filtered colimits (AddCommGrpCat, RingCat, ModuleCat R, Type); for a presheaf of modules apply them to its underlying presheaf of abelian groups M.presheaf, whose stalk is the module stalk of def-weil-pbc-module-stalk"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-of-modules-from-basis",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf TopCat.Presheaf.exists_mem_germ_eq_of_isBasis (Stalks.lean:484) and germ_eq_of_isBasis (:491); checked."
+ }
+}

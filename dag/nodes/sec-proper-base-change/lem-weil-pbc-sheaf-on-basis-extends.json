@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-sheaf-on-basis-extends",
+ "kind": "statement",
+ "title": "A sheaf of abelian groups on a basis extends to a sheaf on the space",
+ "statement": "Let $X$ be a topological space and $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology and satisfies $U\\cap V\\in\\mathcal B$ for all $U,V\\in\\mathcal B$. Let $F$ be a presheaf of abelian groups on $\\mathcal B$: abelian groups $F(U)$ for $U\\in\\mathcal B$ and group homomorphisms $r_{U,V}:F(U)\\to F(V)$ for $V\\subseteq U$ in $\\mathcal B$ with $r_{U,U}=\\mathrm{id}$ and $r_{V,W}r_{U,V}=r_{U,W}$. Suppose that for every $U\\in\\mathcal B$ and every family $(U_i)_{i\\in I}$ of members of $\\mathcal B$ with $\\bigcup_iU_i=U$ ($I$ arbitrary, possibly empty) and every family $s_i\\in F(U_i)$ with $r_{U_i,U_i\\cap U_j}(s_i)=r_{U_j,U_i\\cap U_j}(s_j)$ for all $i,j$, there is exactly one $s\\in F(U)$ with $r_{U,U_i}(s)=s_i$ for all $i$. Then there is a sheaf of abelian groups $F^{ext}$ on $X$ together with group isomorphisms $\\iota_U:F^{ext}(U)\\to F(U)$ for $U\\in\\mathcal B$ such that $\\iota_V(t|_V)=r_{U,V}(\\iota_U(t))$ for $V\\subseteq U$ in $\\mathcal B$ and $t\\in F^{ext}(U)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H: Lemma 009M (label lemma-condition-star-sections), Lemma 009N (label lemma-extend-off-basis) with its proof (F^ext(W) = families of germs (s_x) in the stalks F_x = colim_{x in U in B} F(U) satisfying (*); sheaf by the argument of Lemma 007Y, label lemma-sheafification-sheaf), Lemma 009Q (label lemma-extend-off-basis-structures) for the abelian group structure; Definition 009J and Lemma 009L for the form of the sheaf condition when B is closed under intersections"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a sheaf on a basis of the topology extends to a sheaf on the space, comparison lemma for a basis of opens",
+   "results": "TopCat.Presheaf.germ_eq_of_isBasis, exists_mem_germ_eq_of_isBasis (Topology/Sheaves/Stalks), TopCat.Sheaf.hom_ext, extend_hom_app, restrictHomEquivHom (Topology/Sheaves/SheafCondition/Sites), isSheaf_iff_isSheafPairwiseIntersections",
+   "date": "2026-10-10",
+   "verdict": "no match: morphisms and germs relative to a basis, no extension of a sheaf given only on the basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison lemma: sheaves on a cover-dense full subcategory with induced topology are equivalent to sheaves on the site",
+   "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense (Sites/DenseSubsite/InducedTopology), Functor.IsDenseSubsite.sheafEquiv, sheafEquiv_functor, sheafEquiv_inverse (Sites/DenseSubsite/SheafEquiv), Functor.IsCoverDense.sheafIso, IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line: for G = inducedFunctor of the subtype B (cover dense by TopCat.Opens.coverDense_inducedFunctor, Sites.lean:135) the comparison lemma Sheaf (G.inducedTopology K) A ≌ Sheaf K A with A = AddCommGrpCat (complete) gives F^ext and the isomorphisms iota (counit of the equivalence, whose inverse is restriction along G), but only for F a sheaf for the induced Grothendieck topology on B; that the gluing condition of this node implies that sheaf condition (a sieve S on U in B covers iff its members cover U, mem_inducedTopology_iff_of_isCoverDense InducedTopology.lean:138; then the gluing condition for the family of members of S, with pairwise intersections in B) is a further argument, recorded here for the splitter"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf on a basis is a sheaf for the induced topology iff it satisfies gluing for covers of a basic open by basic opens",
+   "results": "TopCat.Presheaf.isSheaf_iff_isSheafOpensLeCover, isSheafOpensLeCover_iff_isSheafPairwiseIntersections, IsSheafUniqueGluing, generateEquivalenceOpensLe, isSheaf_of_isSheafUniqueGluing_types, isSheaf_iff_isSheafUniqueGluing_types (Topology/Sheaves/SheafCondition)",
+   "date": "2026-10-10",
+   "verdict": "no match: all for presheaves on all opens of X"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense (Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology): Sheaf (G.inducedTopology K) A ≌ Sheaf K A",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line (as for leanfinder)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsBasis\\|isBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; sed -n 105,172p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; grep -rn 'def extend' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "Stalks.lean:484 exists_mem_germ_eq_of_isBasis, :491 germ_eq_of_isBasis, :502 stalkFunctor_map_injective_of_isBasis; Sites.lean:126 coverDense_iff_isBasis, :135 coverDense_inducedFunctor, :240 restrictHomEquivHom, :246 extend_hom_app, :252 hom_ext, :258 isIso_iff_isIso_basis; InducedTopology.lean:111 mem_restrictedTopology_iff, :138 mem_inducedTopology_iff_of_isCoverDense, :159 sheafInducedTopologyEquivOfIsCoverDense; no TopCat.Sheaf.extend or extension-from-basis declaration",
+   "date": "2026-10-10",
+   "verdict": "no match as stated; comparison-lemma route recorded above"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-of-modules-from-basis",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 009N for abelian groups (sheaf on a basis closed under intersections extends); correct; unsplit; the Mathlib route via sheafInducedTopologyEquivOfIsCoverDense is recorded on the node."
+ }
+}
