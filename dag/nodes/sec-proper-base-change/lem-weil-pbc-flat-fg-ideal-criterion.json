@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-flat-fg-ideal-criterion",
+ "kind": "statement",
+ "title": "Flatness is tested on finitely generated ideals",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. Then $M$ is flat [def-weil-pbc-flat-ring-map] if and only if for every finitely generated ideal $\\mathfrak a\\subset R$ the $R$-linear map $\\mathfrak a\\otimes_RM\\to M$, $x\\otimes m\\mapsto xm$, is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HD (lemma-flat), equivalence of (1) and (4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a module is flat iff for every finitely generated ideal I the map I ⊗ M → M is injective",
+   "results": "Module.Flat.iff_lTensor_injective, Module.Flat.iff_rTensor_injective, Module.Flat.iff_rTensor_injective', Module.Flat.iff_lTensor_injective', Module.Flat.iff_lift_lsmul_comp_subtype_injective (all Mathlib.RingTheory.Flat.Tensor), Module.flat_iff (Mathlib.RingTheory.Flat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.iff_lift_lsmul_comp_subtype_injective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Ideal.FG, Function.Injective",
+   "results": "Module.Flat.iff_lTensor_injective, Module.Flat.iff_rTensor_injective, Module.Flat.iff_lift_lsmul_comp_subtype_injective (Mathlib.RingTheory.Flat.Tensor)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.iff_lift_lsmul_comp_subtype_injective"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem iff_rTensor_injective\\|lemma iff_rTensor_injective\\|iff_lift_lsmul_comp_subtype_injective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/",
+   "results": "RingTheory/Flat/Tensor.lean:67 iff_rTensor_injective' (all ideals), :80 iff_rTensor_injective (fg ideals, rTensor of the inclusion), :95 iff_lift_lsmul_comp_subtype_injective (fg ideals, the multiplication map I ⊗ M → M); file docstring cites Stacks 00HD",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.iff_lift_lsmul_comp_subtype_injective (Tensor.lean:95), read with sed -n 93,97p"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.iff_lift_lsmul_comp_subtype_injective",
+  "file": "Mathlib/RingTheory/Flat/Tensor.lean",
+  "line": 95,
+  "how": "exact: for R : Type u a commutative ring and M : Type v an R-module, Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective (TensorProduct.lift ((lsmul R M).comp I.subtype)), the map x ⊗ m ↦ x • m; Module.Flat is the node's flatness by the match of def-weil-pbc-flat-ring-map. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-rings-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
