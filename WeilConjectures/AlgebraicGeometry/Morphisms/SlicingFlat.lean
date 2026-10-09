@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
+public import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Slicing a flat morphism with geometrically reduced fibres
@@ -29,6 +34,11 @@ fibres (Stacks `057I`), and it contains a point over `x`.
 
 - `AlgebraicGeometry.GeometricallyConnected.of_isPreconnected_preimage_singleton`: a morphism
   with a section and topologically connected fibres has geometrically connected fibres.
+- `AlgebraicGeometry.GeometricallyReduced.dense_smoothLocus`: over a field, the smooth locus of
+  a scheme locally of finite presentation and geometrically reduced is dense.
+- `AlgebraicGeometry.exists_mem_smoothLocus_of_geometricallyReduced`: smooth points are dense in
+  the fibres of a flat morphism, locally of finite presentation, with geometrically reduced
+  fibres.
 - `AlgebraicGeometry.isOpen_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a flat morphism of finite presentation with geometrically
   reduced fibres is open (Stacks `055R`).
@@ -71,13 +81,62 @@ theorem GeometricallyConnected.of_isPreconnected_preimage_singleton {U V : Schem
   exact (GeometricallyConnected.of_connectedSpace_of_section (q.fiberToSpecResidueField v) s'
     (pullback.lift_snd _ _ _)).geometrically_connectedSpace
 
+/-- Over a field `K`, the smooth locus of a morphism `f : X ⟶ Spec K`, locally of finite
+presentation, with geometrically reduced fibres is dense, given a perfect purely inseparable
+extension `L / K`. The base change `X_L` is reduced, so its smooth locus over the perfect field
+`L` is dense (`AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField`). As `X_L ⟶ X`
+is a homeomorphism, the image of this smooth locus is a dense open of `X` whose base change to
+`L` is smooth, hence it is smooth over `K` by flat descent. -/
+theorem GeometricallyReduced.dense_smoothLocus_of_isPurelyInseparable {K : Type u} [Field K]
+    (L : Type u) [Field L] [Algebra K L] [PerfectField L] [IsPurelyInseparable K L]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f]
+    [GeometricallyReduced f] : Dense (f.smoothLocus : Set X) := by
+  let g : Spec (.of L) ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  have : IsReduced (pullback f g) :=
+    pullback_of_geometrically GeometricallyReduced.geometrically_isReduced L g
+  have hW := (pullback.snd f g).dense_smoothLocus_of_perfectField
+  have hh : IsHomeomorph (pullback.fst f g) := (pullback.fst f g).isHomeomorph
+  let O : X.Opens := ⟨pullback.fst f g '' (pullback.snd f g).smoothLocus,
+    hh.isOpenMap _ (pullback.snd f g).smoothLocus.2⟩
+  have hO : Smooth (O.ι ≫ f) := by
+    refine MorphismProperty.of_pullback_snd_of_descendsAlong
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) (g := g)
+      ⟨⟨?_, inferInstance⟩, inferInstance⟩ ?_
+    · exact ⟨fun _ ↦ ⟨IsLocalRing.closedPoint L, Subsingleton.elim _ _⟩⟩
+    · rw [← pullbackRightPullbackFstIso_inv_snd_snd]
+      suffices Smooth (pullback.snd O.ι (pullback.fst f g) ≫ pullback.snd f g) from inferInstance
+      rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← Scheme.Hom.preimage_smoothLocus_eq, eq_top_iff]
+      rintro z -
+      obtain ⟨w, hw, hwz⟩ := (pullback.fst O.ι (pullback.fst f g) z).2
+      have hzw : pullback.fst f g (pullback.snd O.ι (pullback.fst f g) z) =
+          pullback.fst f g w := by
+        rw [hwz, ← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
+        rfl
+      rwa [Scheme.Hom.mem_preimage, hh.injective hzw]
+  refine (hh.surjective.denseRange.dense_image hh.continuous hW).mono fun x hx ↦ ?_
+  have := (Scheme.Hom.smoothLocus_eq_top_iff.mpr hO).ge (Set.mem_univ ⟨x, hx⟩)
+  rwa [← Scheme.Hom.preimage_smoothLocus_eq] at this
+
+/-- **Smooth points are dense over a field**: the smooth locus of a morphism `X ⟶ Spec K`,
+locally of finite presentation, with geometrically reduced fibres is dense. We apply
+`AlgebraicGeometry.GeometricallyReduced.dense_smoothLocus_of_isPurelyInseparable` to the perfect
+closure of `K` in an algebraic closure. -/
+theorem GeometricallyReduced.dense_smoothLocus {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] [GeometricallyReduced f] :
+    Dense (f.smoothLocus : Set X) :=
+  dense_smoothLocus_of_isPurelyInseparable (perfectClosure K (AlgebraicClosure K)) f
+
 /-- **Smooth points are dense in the fibres** of a flat morphism, locally of finite
 presentation, with geometrically reduced fibres: every open `U` of `X` meeting the fibre
 through `x` contains a point of that fibre at which `f` is smooth. -/
 theorem exists_mem_smoothLocus_of_geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyReduced f] (U : X.Opens) {x : X}
-    (hx : x ∈ U) : ∃ x' ∈ U, f x' = f x ∧ x' ∈ f.smoothLocus :=
-  sorry
+    (hx : x ∈ U) : ∃ x' ∈ U, f x' = f x ∧ x' ∈ f.smoothLocus := by
+  obtain ⟨w, hwU, hw⟩ := (GeometricallyReduced.dense_smoothLocus (K := S.residueField (f x))
+    (f.fiberToSpecResidueField (f x))).inter_open_nonempty (f.fiberι (f x) ⁻¹ᵁ U)
+    (f.fiberι (f x) ⁻¹ᵁ U).2 ⟨f.asFiber x, by simpa using hx⟩
+  exact ⟨f.fiberι _ w, hwU, (f.range_fiberι _).subset ⟨w, rfl⟩,
+    f.fiberι_mem_smoothLocus hw⟩
 
 /-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
 be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a section of
