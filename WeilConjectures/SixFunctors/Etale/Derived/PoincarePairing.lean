@@ -403,7 +403,7 @@ end ModuleCat
 
 section Point
 
-variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ]
+variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [HasCompactification a] {d : ℕ}
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
