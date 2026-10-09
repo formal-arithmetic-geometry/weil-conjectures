@@ -257,6 +257,34 @@ lemma exists_section_of_invariant (P : Torsor G) (F : Sheaf J (Type w)) {T : C}
   rw [hF.valid_glue hx _ ⟨y⟩]
   exact hg' _ _ _
 
+/-- A section-wise map `g` out of the sections of two `G`-torsors `P` and `P'` to a sheaf of sets
+`F`, natural and invariant under the action of `G` on each argument, is the restriction of a
+global section of `F`: the values glue over the objects where both torsors have sections. -/
+lemma exists_section_of_invariant₂ (P P' : Torsor G) (F : Sheaf J (Type w)) {T : C}
+    (hT : IsTerminal T) (g : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U → F.obj.obj U)
+    (hg : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U) (x' : P'.sheaf.obj.obj U),
+      F.obj.map f (g U x x') = g V (P.sheaf.obj.map f x) (P'.sheaf.obj.map f x'))
+    (hinv₁ : ∀ U (a : G.obj.obj U) x x', g U (P.vadd U a x) x' = g U x x')
+    (hinv₂ : ∀ U (a : G.obj.obj U) x x', g U x (P'.vadd U a x') = g U x x') :
+    ∃ σ : F.obj.obj (op T), ∀ U x x', g U x x' = F.obj.map (hT.from U.unop).op σ := by
+  have hg' : ∀ U x x' y y', g U x x' = g U y y' := fun U x x' y y' ↦ by
+    obtain ⟨a, rfl⟩ := (P.bijective_vadd U x).2 y
+    obtain ⟨a', rfl⟩ := (P'.bijective_vadd U x').2 y'
+    rw [hinv₁, hinv₂]
+  let S := nonemptySieve P.sheaf.obj T ⊓ nonemptySieve P'.sheaf.obj T
+  have hS : S ∈ J T := J.intersection_covering (P.nonemptySieve_mem T) (P'.nonemptySieve_mem T)
+  have hF := (isSheaf_iff_isSheaf_of_type J F.obj).1 F.property _ hS
+  let x : Presieve.FamilyOfElements F.obj S.arrows :=
+    fun V _ hf ↦ g (op V) hf.1.some hf.2.some
+  have hx : x.Compatible := by
+    intro W₁ W₂ V f₁ f₂ g₁ g₂ h₁ h₂ _
+    simp only [x]
+    rw [hg, hg]
+    exact hg' _ _ _ _ _
+  refine ⟨hF.amalgamate x hx, fun U y y' ↦ ?_⟩
+  rw [hF.valid_glue hx _ ⟨⟨y⟩, ⟨y'⟩⟩]
+  exact hg' _ _ _ _ _
+
 /-- A morphism of the underlying sheaves of two `G`-torsors which commutes with the action of
 `G` is an isomorphism of torsors. -/
 noncomputable def Iso.ofHom {P P' : Torsor G} (f : P.sheaf ⟶ P'.sheaf)
@@ -783,6 +811,102 @@ theorem exists_quotientEquiv_H_one :
     ∃ c : _root_.Quotient (Torsor.setoid (G := G)) ≃ H G 1,
       ∀ P : Torsor G, c ⟦P⟧ = 0 ↔ Nonempty (P.sheaf.obj.obj (op T)) :=
   ⟨classH1 G hT, classH1_eq_zero_iff hT⟩
+
+/-- **`classH1` is additive.** Let `μ : P × P' → P''` be a natural map from the sections of two
+`G`-torsors to those of a third, which is equivariant in each argument:
+`μ(a • x, x') = a • μ(x, x') = μ(x, a • x')`. Then `[P''] = [P] + [P']` in `H¹(G)`. This is the
+case of the contracted product `P'' = P ∧ P'`, whose class is the sum of the classes.
+
+Writing `P ≅ P_s`, `P' ≅ P_{s'}` and `P'' ≅ P_{s''}` as lifting torsors for an injective
+resolution `0 → G → I → Q → 0`, the differences `b''(μ(x, x')) - b(x) - b'(x')` of the lifts are
+invariant, hence glue to a global section `c` of `I` with `d c = s'' - s - s'`.
+(blueprint: `thm-sc-hilbert-90`, the group structure on torsors) -/
+theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
+    (μ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U → P''.sheaf.obj.obj U)
+    (hμ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U) (x' : P'.sheaf.obj.obj U),
+      P''.sheaf.obj.map f (μ U x x') = μ V (P.sheaf.obj.map f x) (P'.sheaf.obj.map f x'))
+    (hμ₁ : ∀ U (a : G.obj.obj U) x x', μ U (P.vadd U a x) x' = P''.vadd U a (μ U x x'))
+    (hμ₂ : ∀ U (a : G.obj.obj U) x x', μ U x (P'.vadd U a x') = P''.vadd U a (μ U x x')) :
+    classH1 G hT ⟦P''⟧ = classH1 G hT ⟦P⟧ + classH1 G hT ⟦P'⟧ := by
+  have hS := injectiveSequence_shortExact G
+  obtain ⟨s, hs⟩ := exists_equiv_lifts hT hS P
+  obtain ⟨s', hs'⟩ := exists_equiv_lifts hT hS P'
+  obtain ⟨s'', hs''⟩ := exists_equiv_lifts hT hS P''
+  rw [_root_.Quotient.sound hs, _root_.Quotient.sound hs', _root_.Quotient.sound hs'',
+    classH1_lifts, classH1_lifts, classH1_lifts, ← map_add, ← sub_eq_zero, ← map_sub,
+    ← AddMonoidHom.mem_ker, H.ker_δ]
+  obtain ⟨e⟩ := hs
+  obtain ⟨e'⟩ := hs'
+  obtain ⟨e''⟩ := hs''
+  let I := (injectiveSequence G).X₂
+  let d := (injectiveSequence G).g
+  let b (U : Cᵒᵖ) (x : P.sheaf.obj.obj U) : I.obj.obj U := (e.iso.hom.hom.app U x).1
+  let b' (U : Cᵒᵖ) (x : P'.sheaf.obj.obj U) : I.obj.obj U := (e'.iso.hom.hom.app U x).1
+  let b'' (U : Cᵒᵖ) (x : P''.sheaf.obj.obj U) : I.obj.obj U := (e''.iso.hom.hom.app U x).1
+  have hb_nat {U V : Cᵒᵖ} (f : U ⟶ V) (x) : I.obj.map f (b U x) = b V (P.sheaf.obj.map f x) :=
+    by
+    have h := ConcreteCategory.congr_hom (e.iso.hom.hom.naturality f) x
+    rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+    exact (congr_arg Subtype.val h).symm
+  have hb'_nat {U V : Cᵒᵖ} (f : U ⟶ V) (x) :
+      I.obj.map f (b' U x) = b' V (P'.sheaf.obj.map f x) :=
+    by
+    have h := ConcreteCategory.congr_hom (e'.iso.hom.hom.naturality f) x
+    rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+    exact (congr_arg Subtype.val h).symm
+  have hb''_nat {U V : Cᵒᵖ} (f : U ⟶ V) (x) :
+      I.obj.map f (b'' U x) = b'' V (P''.sheaf.obj.map f x) :=
+    by
+    have h := ConcreteCategory.congr_hom (e''.iso.hom.hom.naturality f) x
+    rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+    exact (congr_arg Subtype.val h).symm
+  have hb_vadd (U a x) : b U (P.vadd U a x) = b U x + (injectiveSequence G).f.hom.app U a :=
+    congr_arg Subtype.val (e.map_vadd U a x)
+  have hb'_vadd (U a x) : b' U (P'.vadd U a x) = b' U x + (injectiveSequence G).f.hom.app U a :=
+    congr_arg Subtype.val (e'.map_vadd U a x)
+  have hb''_vadd (U a x) :
+      b'' U (P''.vadd U a x) = b'' U x + (injectiveSequence G).f.hom.app U a :=
+    congr_arg Subtype.val (e''.map_vadd U a x)
+  obtain ⟨c, hc⟩ := exists_section_of_invariant₂ P P' ((sheafCompose J (forget _)).obj I) hT
+    (fun U x x' ↦ b'' U (μ U x x') - b U x - b' U x')
+    (fun U V f x x' ↦ by
+      change I.obj.map f (_ - _ - _) = _
+      rw [map_sub, map_sub, hb''_nat, hμ, hb_nat, hb'_nat])
+    (fun U a x x' ↦ by
+      change b'' U (μ U (P.vadd U a x) x') - b U (P.vadd U a x) - b' U x' = _
+      rw [hμ₁, hb''_vadd, hb_vadd]
+      abel)
+    (fun U a x x' ↦ by
+      change b'' U (μ U x (P'.vadd U a x')) - b U x - b' U (P'.vadd U a x') = _
+      rw [hμ₂, hb''_vadd, hb'_vadd]
+      abel)
+  refine ⟨c, ext_of_nonempty P ((sheafCompose J (forget _)).obj (injectiveSequence G).X₃)
+    fun V f ⟨y⟩ ↦ ext_of_nonempty P' ((sheafCompose J (forget _)).obj (injectiveSequence G).X₃)
+      (U := V) fun W f' ⟨y'⟩ ↦ ?_⟩
+  have hf : f' ≫ f = hT.from W := hT.hom_ext _ _
+  have hmap (z : ((injectiveSequence G).X₃.obj.obj (op T))) :
+      (injectiveSequence G).X₃.obj.map f'.op ((injectiveSequence G).X₃.obj.map f.op z) =
+        (injectiveSequence G).X₃.obj.map (hT.from W).op z := by
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hf]
+  change (injectiveSequence G).X₃.obj.map f'.op ((injectiveSequence G).X₃.obj.map f.op
+      (d.hom.app (op T) c)) = (injectiveSequence G).X₃.obj.map f'.op
+      ((injectiveSequence G).X₃.obj.map f.op (s'' - (s + s')))
+  rw [hmap, hmap]
+  have hd := ConcreteCategory.congr_hom (d.hom.naturality (hT.from W).op) c
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hd
+  rw [← hd]
+  have hcW := hc (op W) (P.sheaf.obj.map f'.op y) y'
+  change _ = I.obj.map (hT.from W).op c at hcW
+  rw [← hcW, map_sub, map_sub, map_sub, map_add]
+  have h₁ := lifts_val hT hS
+    (e''.iso.hom.hom.app (op W) (μ (op W) (P.sheaf.obj.map f'.op y) y'))
+  have h₂ := lifts_val hT hS (e.iso.hom.hom.app (op W) (P.sheaf.obj.map f'.op y))
+  have h₃ := lifts_val hT hS (e'.iso.hom.hom.app (op W) y')
+  change d.hom.app (op W) (b'' _ _) = _ at h₁
+  change d.hom.app (op W) (b _ _) = _ at h₂
+  change d.hom.app (op W) (b' _ _) = _ at h₃
+  rw [h₁, h₂, h₃]
+  abel
 
 end Main
 

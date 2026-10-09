@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
@@ -24,8 +26,9 @@ All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor 
   The Zariski part is `AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf`;
   the proof of the étale part,
   `AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf`, is `sorry`.
-- `AlgebraicGeometry.Scheme.Pic.toH1Units`: the canonical bijection
-  `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ)`, `L ↦ [Isom(𝒪_X, L)]`.
+- `AlgebraicGeometry.Scheme.Pic.toH1Units` and `AlgebraicGeometry.Scheme.Pic.toH1UnitsAddEquiv`:
+  the canonical isomorphism of groups `Pic(X) ≃+ H¹(X_Zar, 𝒪_Xˣ)`, `L ↦ [Isom(𝒪_X, L)]`
+  (additivity: `AlgebraicGeometry.Scheme.Pic.toH1Units_mul`).
 - `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`: Hilbert 90,
   `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`: there is a bijection
@@ -35,10 +38,9 @@ All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor 
 
 ## TODO
 
-The Zariski comparison `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ)` is the canonical map
-`AlgebraicGeometry.Scheme.Pic.toH1Units`; it remains to show that it is additive, which needs
-that the class map `CategoryTheory.Sheaf.Torsor.classH1` carries contracted products of torsors
-to sums. The étale side is only recorded through the existence of bijections: the canonical map
+The Zariski comparison `Pic(X) ≃+ H¹(X_Zar, 𝒪_Xˣ)` is the canonical additive map
+`AlgebraicGeometry.Scheme.Pic.toH1UnitsAddEquiv`. The étale side is only recorded through the
+existence of bijections: the canonical map
 `L ↦ [Isom(𝒪_{X_ét}, L_ét)]`, equivalently the comparison map along the morphism of sites
 `X_ét → X_Zar`, needs either the étale sheaf `L_ét` of an `𝒪_X`-module or the exact pullback
 functor from Zariski to étale sheaves, and neither is available yet.
@@ -102,6 +104,59 @@ lemma Pic.toH1Units_mk (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M]
         ⟦M.generatorsTorsor⟧ := by
   rw [Pic.toH1Units, Equiv.trans_apply, picEquivQuotientTorsorUnitsSheaf_apply,
     Pic.torsorClass_mk]
+
+open MonoidalCategory in
+/-- A tensor product of invertible modules is invertible, in the sense of
+`SheafOfModules.IsInvertible`. -/
+instance _root_.SheafOfModules.IsInvertible.tensorObj_scheme (M N : X.Modules)
+    [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N] :
+    SheafOfModules.IsInvertible.{u, u, u} (M ⊗ N : X.Modules) :=
+  have := Modules.IsInvertible.of_sheafOfModules M
+  have := Modules.IsInvertible.of_sheafOfModules N
+  Modules.IsInvertible.sheafOfModules_isInvertible (M ⊗ N : X.Modules)
+
+open Modules MonoidalCategory in
+/-- The torsor of local generators of `M ⊗ N` has the class of the sum of the classes of the
+torsors of generators of `M` and `N`: `(e, f) ↦ e ⊗ f` maps pairs of local generators to local
+generators, equivariantly in each argument. -/
+lemma classH1_generatorsTorsor_tensorObj (M N : X.Modules)
+    [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N] :
+    Sheaf.Torsor.classH1 X.unitsSheaf (Limits.isTerminalTop (α := X.Opens))
+        ⟦(M ⊗ N).generatorsTorsor⟧ =
+      Sheaf.Torsor.classH1 X.unitsSheaf (Limits.isTerminalTop (α := X.Opens))
+          ⟦M.generatorsTorsor⟧ +
+        Sheaf.Torsor.classH1 X.unitsSheaf (Limits.isTerminalTop (α := X.Opens))
+          ⟦N.generatorsTorsor⟧ := by
+  refine Sheaf.Torsor.classH1_eq_add_of_equivariant _ _ _ _
+    (fun U x x' ↦ ⟨tmulSection (show Γ(M, U.unop) from x.1) (show Γ(N, U.unop) from x'.1),
+      IsFreeGenerator.tmulSection x.2 x'.2⟩) (fun U V f x x' ↦ Subtype.ext ?_)
+    (fun U a x x' ↦ Subtype.ext (smul_tmulSection _ _ _))
+    (fun U a x x' ↦ Subtype.ext (tmulSection_smul _ _ _))
+  obtain ⟨⟨h⟩⟩ := f.unop
+  exact tmulSection_map h _ _
+
+/-- **`Pic(X) → H¹(X_Zar, 𝒪_Xˣ)` is additive**: the class of `L ⊗ L'` is the sum of the
+classes, by `AlgebraicGeometry.Scheme.classH1_generatorsTorsor_tensorObj`.
+(blueprint: `thm-sc-hilbert-90`, the first map is a group isomorphism) -/
+lemma Pic.toH1Units_mul (L L' : X.Pic) :
+    Pic.toH1Units X (L * L') = Pic.toH1Units X L + Pic.toH1Units X L' := by
+  have h (L : X.Pic) : haveI := Pic.isInvertible L
+      Pic.toH1Units X L =
+        Sheaf.Torsor.classH1 X.unitsSheaf (Limits.isTerminalTop (α := X.Opens))
+          ⟦((fromSkeleton X.Modules).obj L.val).generatorsTorsor⟧ := rfl
+  have := Pic.isInvertible L
+  have := Pic.isInvertible L'
+  have := Pic.isInvertible (L * L')
+  rw [h, h, h, _root_.Quotient.sound (Modules.generatorsTorsor_equiv_of_iso (Pic.mulIso L L')),
+    classH1_generatorsTorsor_tensorObj]
+
+/-- **The Picard group is the Zariski cohomology of units, as a group.** The canonical bijection
+`AlgebraicGeometry.Scheme.Pic.toH1Units`, `L ↦ [Isom(𝒪_X, L)]`, as an isomorphism of groups
+`Pic(X) ≃+ H¹(X_Zar, 𝒪_Xˣ)`.
+(blueprint: `thm-sc-hilbert-90`, the first map; `lem-sc-h1-gm-pic`) -/
+noncomputable def Pic.toH1UnitsAddEquiv : Additive X.Pic ≃+ Sheaf.H X.unitsSheaf 1 where
+  toEquiv := Additive.toMul.trans (Pic.toH1Units X)
+  map_add' L L' := Pic.toH1Units_mul X L.toMul L'.toMul
 
 /-- **Hilbert 90 for a scheme.** For a scheme `X` there are bijections
 
