@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-domain",
+ "kind": "statement",
+ "title": "A polynomial ring in any set of variables over an integral domain is an integral domain",
+ "statement": "Let $D$ be an integral domain and $I$ any set. Then the polynomial ring $D[x_i]_{i\\in I}$ in the variables $x_i$, $i\\in I$ (finite $D$-linear combinations of monomials in finitely many of the $x_i$), is an integral domain. In particular $\\mathbf Z[x_i]_{i\\in I}$ is an integral domain and has a field of fractions.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph ('the fraction field of Z[x_i]': used without statement)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring in arbitrarily many variables over an integral domain is an integral domain",
+   "results": "MvPolynomial.instIsDomainOfIsCancelAdd (Mathlib.Algebra.MvPolynomial.Basic), Polynomial.isDomain_iff, Polynomial.instIsDomainOfIsCancelAdd, MvPolynomial.noZeroDivisors_fin",
+   "verdict": "match: MvPolynomial.instIsDomainOfIsCancelAdd",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multivariate polynomial ring over an integral domain in any set of variables is an integral domain",
+   "results": "MvPolynomial.instIsDomainOfIsCancelAdd, MvPolynomial.instNoZeroDivisors (Algebra.MvPolynomial.Basic), MvPolynomial.noZeroDivisors_of_finite, MvPolynomial.noZeroDivisors_fin (RingTheory.Polynomial.Basic)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsDomain (MvPolynomial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 200,210p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/MvPolynomial/Basic.lean",
+   "results": "Algebra/MvPolynomial/Basic.lean:204 instance [IsCancelAdd R] [IsDomain R] : IsDomain (MvPolynomial σ R) (σ any type)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial.instIsDomainOfIsCancelAdd",
+  "file": "Mathlib/Algebra/MvPolynomial/Basic.lean",
+  "how": "exact (instance, line 204, read 2026-10-10): IsDomain (MvPolynomial σ R) for a domain R and any type σ; the fraction field is FractionRing (MvPolynomial σ ℤ)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-cover-trivial-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf MvPolynomial.instIsDomainOfIsCancelAdd (MvPolynomial/Basic.lean:204); checked."
+ }
+}

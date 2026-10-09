@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+ "kind": "statement",
+ "title": "The integral closure of a domain in an algebraic extension of its fraction field is a normal domain with that field as fraction field",
+ "statement": "Let $P$ be an integral domain with field of fractions $K$, let $L$ be a field extension of $K$ which is algebraic (every element of $L$ is a root of a nonzero polynomial in $K[T]$), and let $R=\\{\\alpha\\in L:\\alpha$ is a root of a monic polynomial with coefficients in $P\\}$ be the integral closure of $P$ in $L$. Then $R$ is a subring of $L$ containing $P$ (so $R$ is an integral domain and $R$ is integral over $P$), $L$ is a field of fractions of $R$ (the inclusion $R\\subseteq L$ extends to an isomorphism $\\operatorname{Frac}(R)\\xrightarrow{\\sim}L$), and $R$ is integrally closed in $L$; hence $R$ is a normal domain [def-weil-pbc-normal-ring].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00GO (label lemma-integral-closure-is-ring, line 7542: the integral closure is a subring); Lemma 0308 (lemma-integral-closure-transitive, line 7723: R is integrally closed in L); Lemma 034L (lemma-integral-closure-in-normal, line 7985); the fraction field statement is the clearing of denominators of an algebraic element (for alpha in L with a_n alpha^n + ... + a_0 = 0, a_i in P, a_n != 0, the element a_n alpha is integral over P)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a domain in an algebraic extension field is integrally closed with that field as fraction field",
+   "results": "IsIntegralClosure.isFractionRing_of_algebraic, integralClosure.isFractionRing_of_algebraic (Mathlib.RingTheory.Localization.Integral), instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed), integralClosure.isIntegrallyClosedOfFiniteExtension (finite case only), Ring.instIsIntegrallyClosedNormalClosure",
+   "verdict": "match: one lemma per clause (see mathlib_match)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of an integral domain in an algebraic closure of its fraction field is integrally closed and has the algebraic closure as fraction field",
+   "results": "integralClosure.isFractionRing_of_algebraic, IsIntegralClosure.isFractionRing_of_algebraic (Localization/Integral), algebraicClosure.isIntegralClosure, Ring.NormalClosure instances",
+   "verdict": "match for the fraction field clause",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isFractionRing_of_algebraic|instance : IsIntegrallyClosedIn (integralClosure|isIntegrallyClosed_iff_isIntegrallyClosedIn|comap_isAlgebraic_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Localization/Integral.lean:420 integralClosure.isFractionRing_of_algebraic [Algebra.IsAlgebraic A L] (inj) : IsFractionRing (integralClosure A L) L; Localization/Integral.lean:152 IsFractionRing.comap_isAlgebraic_iff (algebraic over A iff over K); IntegralClosure/IntegrallyClosed.lean:130 instance IsIntegrallyClosedIn (integralClosure R A) A; IntegrallyClosed.lean:102 isIntegrallyClosed_iff_isIntegrallyClosedIn K : IsIntegrallyClosed R <-> IsIntegrallyClosedIn R K for a fraction field K; IntegralClosure/Algebra/Basic.lean:216 def integralClosure : Subalgebra R A; Algebra/Algebra/Subalgebra/Basic.lean:467 instance Subalgebra.isDomain",
+   "verdict": "match: one lemma per clause",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "integralClosure, integralClosure.isFractionRing_of_algebraic, IsFractionRing.comap_isAlgebraic_iff, isIntegrallyClosed_iff_isIntegrallyClosedIn, instance IsIntegrallyClosedIn (integralClosure R A) A, Subalgebra.isDomain",
+  "file": "Mathlib/RingTheory/Localization/Integral.lean",
+  "how": "one lemma per clause, read 2026-10-10: R = integralClosure P L (Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean:216, a Subalgebra, so a subring containing P), a domain by Subalgebra.isDomain (Mathlib/Algebra/Algebra/Subalgebra/Basic.lean:467); Algebra.IsAlgebraic P L from Algebra.IsAlgebraic K L by IsFractionRing.comap_isAlgebraic_iff (Localization/Integral.lean:152); IsFractionRing R L by integralClosure.isFractionRing_of_algebraic (Localization/Integral.lean:420, injectivity of P -> L from P -> K -> L); IsIntegrallyClosed R from the instance IsIntegrallyClosedIn (integralClosure P L) L (Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:130) and isIntegrallyClosed_iff_isIntegrallyClosedIn L (IntegrallyClosed.lean:102)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-cover-trivial-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: integralClosure, Subalgebra.isDomain, integralClosure.isFractionRing_of_algebraic (:420) with IsFractionRing.comap_isAlgebraic_iff, the IsIntegrallyClosedIn instance (IntegrallyClosed.lean:130); checked."
+ }
+}
