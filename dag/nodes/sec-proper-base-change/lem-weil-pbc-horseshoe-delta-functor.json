@@ -18,9 +18,106 @@
   "lem-weil-pbc-derived-functor-long-exact",
   "lem-weil-pbc-right-derived-universal-delta-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the $R^nv$ are additive functors).** By [lem-weil-pbc-derived-functor-map-via-lift] each $R^nv$ is a functor $\\mathcal A\\to\\mathcal B$, with the isomorphisms $\\iota^n_P$ and the rule $R^nv(h)=(\\iota^n_Q)^{-1}H^n(v(\\varphi))\\iota^n_P$ for every morphism $h:X\\to Y$, injective resolutions $s_X:X\\to P^\\bullet$, $s_Y:Y\\to Q^\\bullet$ zero in negative degrees and morphism of complexes $\\varphi:P^\\bullet\\to Q^\\bullet$ with $\\varphi^0s_X=s_Yh$. Additivity: let $h_1,h_2:X\\to Y$. Choose resolutions $P^\\bullet$, $Q^\\bullet$ of $X$, $Y$ zero in negative degrees [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1) and lifts $\\varphi_1,\\varphi_2:P^\\bullet\\to Q^\\bullet$ of $h_1,h_2$ [lem-weil-pbc-injective-resolution-lift-exists]. Then $\\varphi_1+\\varphi_2$ is a morphism of complexes with $(\\varphi_1+\\varphi_2)^0s_X=s_Y(h_1+h_2)$, so it lifts $h_1+h_2$; as $v$ is additive [def-sp-left-exact-additive], $v(\\varphi_1+\\varphi_2)=v(\\varphi_1)+v(\\varphi_2)$ termwise, and $H^n$ is additive on morphisms of complexes (it is induced on subquotients), so $R^nv(h_1+h_2)=(\\iota^n_Q)^{-1}(H^n(v\\varphi_1)+H^n(v\\varphi_2))\\iota^n_P=R^nv(h_1)+R^nv(h_2)$. So each $R^nv$ is additive [def-weil-pbc-additive-functor].",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section Tag 013G (section-injective-resolutions), Lemma Tag 013P (lemma-morphisms-lift) for the lifts; Lemma Tag 05TD (lemma-left-exact-higher-derived) for R^n v computed by injective resolutions"
+   }
+  },
+  {
+   "text": "**Step 2 (for a horseshoe resolution $H$, $v(H)$ is short exact in each degree, so $\\partial_H$ and $\\delta_H$ are defined).** Let $H=(s_A,s_B,s_C,\\alpha,\\beta)$ be a horseshoe resolution of $S$ and fix $n\\ge0$. Since $\\alpha^n$ is a monomorphism and $I_A^n$ is injective [def-sp-injective-resolutions], the identity of $I_A^n$ extends along $\\alpha^n$: there is $r:I_B^n\\to I_A^n$ with $r\\alpha^n=\\mathrm{id}$. The endomorphism $e=\\mathrm{id}-\\alpha^nr$ of $I_B^n$ satisfies $e\\alpha^n=0$; since $\\beta^n$ is a cokernel of $\\alpha^n$ (exactness of the row), $e=\\sigma\\beta^n$ for a unique $\\sigma:I_C^n\\to I_B^n$, and $\\beta^n\\sigma\\beta^n=\\beta^ne=\\beta^n$ with $\\beta^n$ epi gives $\\beta^n\\sigma=\\mathrm{id}$. So $r\\alpha^n=\\mathrm{id}$, $\\beta^n\\sigma=\\mathrm{id}$, $\\beta^n\\alpha^n=0$, $\\alpha^nr+\\sigma\\beta^n=\\mathrm{id}$. The functor $v$ is additive [def-sp-left-exact-additive], so these four identities hold for $v(\\alpha^n),v(\\beta^n),v(r),v(\\sigma)$, and they make $0\\to v(I_A^n)\\to v(I_B^n)\\to v(I_C^n)\\to0$ short exact in the abelian category $\\mathcal B$ [def-sp-abelian]: $v(\\alpha^n)$ is a split mono, $v(\\beta^n)$ a split epi, and $\\mathrm{id}-v(\\alpha^n)v(r)=v(\\sigma)v(\\beta^n)$ vanishes on $\\ker v(\\beta^n)$, so $\\ker v(\\beta^n)=\\operatorname{im}v(\\alpha^n)$. The termwise images $v(\\alpha),v(\\beta)$ are morphisms of complexes since $v$ preserves composition. Hence $0\\to v(I_A^\\bullet)\\to v(I_B^\\bullet)\\to v(I_C^\\bullet)\\to0$ is a degreewise short exact sequence of $\\mathbf N$-indexed cochain complexes of $\\mathcal B$, its connecting morphisms $\\partial^n_H$ are defined [lem-weil-pbc-complex-ses-homology-long-exact], and so is $\\delta^n_H=(\\iota^{n+1}_{I_A})^{-1}\\partial^n_H\\iota^n_{I_C}$. (Only additivity of $v$ is used.)",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
+    "def-sp-abelian",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 0136 (lemma-characterize-injectives), (1) => (3): a short exact sequence 0 -> I -> A -> B -> 0 with I injective splits; as used in derived.tex Lemma Tag 013T, proof Step 1 ('the lower short exact sequence is termwise split'); Lemma Tag 0117 (lemma-long-exact-sequence-cochain) for the connecting maps"
+   }
+  },
+  {
+   "text": "**Step 3 (clause (1): naturality for any two horseshoe resolutions).** Let $(a,b,c):S\\to S'$, $H=(s_A,s_B,s_C,\\alpha,\\beta)$ a horseshoe resolution of $S$ and $H'=(s'_{A'},s'_{B'},s'_{C'},\\alpha',\\beta')$ one of $S'$, with complexes $I_X^\\bullet$ and $I'^\\bullet_{X'}$. Choose morphisms of complexes $\\varphi_A:I_A^\\bullet\\to I'^\\bullet_{A'}$, $\\varphi_C:I_C^\\bullet\\to I'^\\bullet_{C'}$ with $\\varphi_A^0s_A=s'_{A'}a$, $\\varphi_C^0s_C=s'_{C'}c$ [lem-weil-pbc-injective-resolution-lift-exists]; by [lem-weil-pbc-horseshoe-morphism-lift] there is a morphism of complexes $\\varphi_B:I_B^\\bullet\\to I'^\\bullet_{B'}$ with $\\varphi_B\\alpha=\\alpha'\\varphi_A$ and $\\beta'\\varphi_B=\\varphi_C\\beta$. Applying the additive functor $v$ termwise [def-sp-left-exact-additive] gives morphisms of complexes $u_X=v(\\varphi_X)$ with $v(\\alpha')u_A=u_Bv(\\alpha)$ and $v(\\beta')u_B=u_Cv(\\beta)$, i.e. a morphism between the degreewise short exact sequences of Step 2 for $H$ and for $H'$. By [lem-weil-pbc-complex-ses-long-exact-naturality], $H^{n+1}(u_A)\\circ\\partial^n_H=\\partial^n_{H'}\\circ H^n(u_C)$. Since $\\varphi_A$ lifts $a$ and $\\varphi_C$ lifts $c$, [lem-weil-pbc-derived-functor-map-via-lift] gives $R^{n+1}v(a)=(\\iota^{n+1}_{I'_{A'}})^{-1}H^{n+1}(u_A)\\iota^{n+1}_{I_A}$ and $R^nv(c)=(\\iota^n_{I'_{C'}})^{-1}H^n(u_C)\\iota^n_{I_C}$. Hence $R^{n+1}v(a)\\circ\\delta^n_H=(\\iota^{n+1}_{I'_{A'}})^{-1}H^{n+1}(u_A)\\partial^n_H\\iota^n_{I_C}=(\\iota^{n+1}_{I'_{A'}})^{-1}\\partial^n_{H'}H^n(u_C)\\iota^n_{I_C}=(\\iota^{n+1}_{I'_{A'}})^{-1}\\partial^n_{H'}\\iota^n_{I'_{C'}}R^nv(c)=\\delta^n_{H'}\\circ R^nv(c)$ for all $n\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-horseshoe-morphism-lift",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 0117 (lemma-long-exact-sequence-cochain): 'The construction produces long exact cohomology sequences which are functorial in the short exact sequence'; with derived.tex Lemma Tag 013P (lemma-morphisms-lift). Classically Weibel, Theorem 2.4.6, proof of naturality (not in literature/, WANTED)"
+   }
+  },
+  {
+   "text": "**Step 4 (independence of the horseshoe).** Take $S'=S$ and $(a,b,c)=(\\mathrm{id}_A,\\mathrm{id}_B,\\mathrm{id}_C)$ in Step 3. As $R^nv$ and $R^{n+1}v$ are functors [lem-weil-pbc-derived-functor-map-via-lift], $R^{n+1}v(\\mathrm{id}_A)$ and $R^nv(\\mathrm{id}_C)$ are identities, so $\\delta^n_H=\\delta^n_{H'}$ for any two horseshoe resolutions $H,H'$ of $S$; this common value is $\\delta^n_S$, and Step 3 reads $R^{n+1}v(a)\\circ\\delta^n_S=\\delta^n_{S'}\\circ R^nv(c)$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 0117 (lemma-long-exact-sequence-cochain), functoriality applied to the identity of the short exact sequence"
+   }
+  },
+  {
+   "text": "**Step 5 (the long exact sequence).** Let $S:0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be short exact. A horseshoe resolution $H=(s_A,s_B,s_C,\\alpha,\\beta)$ of $S$ exists [lem-weil-pbc-injective-resolution-ses]. Put $K_1=v(I_A^\\bullet)$, $K_2=v(I_B^\\bullet)$, $K_3=v(I_C^\\bullet)$; by Step 2 and [lem-weil-pbc-complex-ses-homology-long-exact] the sequence $H^0(K_1)\\to H^0(K_2)\\to H^0(K_3)\\xrightarrow{\\partial^0_H}H^1(K_1)\\to\\cdots\\to H^n(K_2)\\xrightarrow{H^n(v\\beta)}H^n(K_3)\\xrightarrow{\\partial^n_H}H^{n+1}(K_1)\\xrightarrow{H^{n+1}(v\\alpha)}\\cdots$ is exact at every term after the first. At the start: since $K_i^{-1}=0$, $H^0(K_i)=\\ker(K_i^0\\to K_i^1)$ and $H^0(v\\alpha)$ followed by the inclusion $H^0(K_2)\\hookrightarrow K_2^0$ equals the inclusion $H^0(K_1)\\hookrightarrow K_1^0$ followed by $v(\\alpha^0)$, a monomorphism ($v(\\alpha^0)$ is split mono by Step 2); so $H^0(v\\alpha)$ is a monomorphism and the sequence preceded by $0$ is exact. Since $\\alpha$ lifts $f$ ($\\alpha^0s_A=s_Bf$) and $\\beta$ lifts $g$ ($\\beta^0s_B=s_Cg$), [lem-weil-pbc-derived-functor-map-via-lift] gives $R^nv(f)=(\\iota^n_{I_B})^{-1}H^n(v\\alpha)\\iota^n_{I_A}$ and $R^nv(g)=(\\iota^n_{I_C})^{-1}H^n(v\\beta)\\iota^n_{I_B}$, and $\\delta^n_S=\\delta^n_H=(\\iota^{n+1}_{I_A})^{-1}\\partial^n_H\\iota^n_{I_C}$ by Step 4. So the isomorphisms $\\iota^n_{I_A},\\iota^n_{I_B},\\iota^n_{I_C}$ form an isomorphism from the sequence $0\\to R^0v(A)\\to R^0v(B)\\to R^0v(C)\\xrightarrow{\\delta^0_S}R^1v(A)\\to\\cdots$ of the statement to the exact sequence above (every square commutes by these three identities), and exactness at each term is preserved under an isomorphism of sequences (kernels and images correspond). Hence the sequence of (2) is exact.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-ses",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 0117 (lemma-long-exact-sequence-cochain), for complexes vanishing in negative degrees; derived.tex Lemma Tag 013T (lemma-injective-resolution-ses), parts (2)-(3), for the existence of the horseshoe; derived.tex Lemma Tag 015B (lemma-higher-derived-functors) part (1) is the statement Stacks proves by triangles instead"
+   }
+  },
+  {
+   "text": "**Step 6 ($\\delta$-functor).** By Step 1 the $R^nv$ are additive functors, by Step 5 the sequence of axiom (1) is exact for every short exact sequence, and by Steps 3-4 the $\\delta_S$ satisfy axiom (2); so $(R^nv,\\delta_S)_{n\\ge0}$ is a $\\delta$-functor from $\\mathcal A$ to $\\mathcal B$ [def-weil-pbc-delta-functor].",
+   "uses": [
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition Tag 010Q (definition-cohomological-delta-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-additive-functor",
+  "def-sp-injective-resolutions",
+  "def-sp-abelian",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-horseshoe-morphism-lift",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-injective-resolution-ses",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; literature/stacks-project/derived.tex",
+  "place": "Assembled from homology.tex Lemma Tags 0117 (long exact sequence, functorial in the short exact sequence) and 0136 (sequences starting with an injective split) and derived.tex Lemma Tags 013P, 013T (horseshoe); Stacks itself builds the delta-functor R^*F from triangles (Lemma Tag 05TE, Lemma Tag 015B), not by this route. The classical source of this route, Weibel, An Introduction to Homological Algebra, Theorem 2.4.6 with Lemma 2.2.8, is not in literature/ (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +149,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,7 +173,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: the horseshoe connecting maps of right derived functors are independent of the horseshoe resolution and natural, making (R^n v, delta) a delta-functor (Weibel 2.4.6 / 2.2.8; Stacks 013T + 0117 ingredients); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps, one new unsplit node lem-weil-pbc-horseshoe-morphism-lift (no Stacks statement; Weibel Thm 2.4.6 / Lemma 2.2.8 WANTED, added to literature/LIST.md; a proof route from 0136 and 013R is recorded in the node's source). Steps: additivity of R^n v from lifts; v(H) degreewise split exact (0136 argument written out); naturality via the horseshoe lift and the Mathlib leaf lem-weil-pbc-complex-ses-long-exact-naturality; independence of the horseshoe by identities; the long exact sequence from lem-weil-pbc-complex-ses-homology-long-exact with the monomorphism at the start written out; delta-functor axioms. The old 'accepted' review field from the node's creation is replaced by this one. The pointer-only citations in stmt_deps (derived-functor-long-exact, right-derived-universal-delta-functor) are left as they are."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-horseshoe-delta-functor",
+  "worker": "stage1",
+  "summary": "Statement kept (checked: correct; the stmt_deps lem-weil-pbc-derived-functor-long-exact and lem-weil-pbc-right-derived-universal-delta-functor are only cited in the closing parenthetical remark and are pointers rather than dependencies; kept on the lead's instruction). Proof written in six steps: (1) R^n v additive via lifts (map-via-lift, lift-exists); (2) v(H) degreewise split short exact (0136 argument written out), defining partial_H and delta_H; (3) naturality for arbitrary horseshoes H of S and H' of S' via a morphism of horseshoe resolutions lifting (a,b,c) (new node lem-weil-pbc-horseshoe-morphism-lift, unsplit, absent from Mathlib after LeanSearch/LeanFinder/Loogle/grep) and naturality of the connecting maps (Mathlib leaf lem-weil-pbc-complex-ses-long-exact-naturality); (4) independence by taking identities; (5) exactness by transporting the long exact sequence of v(H) along iota; (6) the delta-functor axioms. Tags checked against tags/tags: 013T derived-lemma-injective-resolution-ses, 0117 homology-lemma-long-exact-sequence-cochain (0111 is the chain version, 0112 is about homotopies), 0136, 013P, 013R, 05TE, 015B, 010Q. Item Lean state none; the source repository's exists_rightDerived_δ_exact (LongExactSequence.lean:58, sorry-free) is triangle-based, existential, and not this statement."
  }
 }
