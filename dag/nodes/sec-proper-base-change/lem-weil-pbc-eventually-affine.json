@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-eventually-affine",
+ "kind": "statement",
+ "title": "A limit that is affine over the base is affine over the base at a finite stage",
+ "statement": "Let $T$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions]. Let $I$ be a nonempty directed set and $(Z_i)_{i\\in I}$ an inverse system of schemes over $T$, with structure morphisms $h_i:Z_i\\to T$ (so $h_i\\circ f_{i'i}=h_{i'}$ for the transition morphisms $f_{i'i}:Z_{i'}\\to Z_i$, $i'\\ge i$), whose transition morphisms are affine [pqf-def-affine-morphism]; let $Z=\\varprojlim_iZ_i$ be its limit in the category of schemes [lem-weil-pbc-limit-affine-transition], with projections $p_i:Z\\to Z_i$ and $h=h_i\\circ p_i:Z\\to T$ the induced morphism. Assume every $Z_i$ is quasi-compact and quasi-separated and $h$ is affine. Then there is $i_0\\in I$ such that $h_i:Z_i\\to T$ is affine for every $i\\ge i_0$ (Stacks Limits, Lemma 09ZM).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 09ZM (lemma-eventually-affine, line 891) and its proof (lines 902-911: a finite affine open covering $T=\\bigcup V_j$, $h^{-1}(V_j)=\\lim_ih_i^{-1}(V_j)$ affine, Lemma Tag 01Z6 lemma-limit-affine, Morphisms Lemma Tag 01S8 lemma-characterize-affine); tags checked in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse system of qcqs schemes with affine transition maps over a qcqs base S, limit affine over S, then some stage is affine over S",
+   "results": "AlgebraicGeometry.Scheme.isAffine_of_isLimit (Mathlib.AlgebraicGeometry.Limits), Scheme.exists_isAffine_of_isLimit, isAffineHom_π_app, exists_appTop_π_eq_of_isAffine_of_isLimit, exists_appTop_π_eq_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), AffineScheme.createsLimitsForgetToScheme, AffineScheme.hasLimits, HasAffineProperty.mk",
+   "date": "2026-10-10",
+   "verdict": "no match (Scheme.exists_isAffine_of_isLimit is Tag 01Z6, the absolute case; nothing for a morphism to a base)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the limit of a cofiltered system of quasi-compact quasi-separated schemes with affine transition morphisms is affine over S then some X_i is affine over S (IsAffineHom)",
+   "results": "Scheme.exists_isAffine_of_isLimit, Scheme.exists_isQuasiAffine_of_isLimit, exists_isAffineOpen_preimage_eq, Scheme.exists_isOpenCover_and_isAffine, isAffineHom_π_app, Scheme.compactSpace_of_isLimit, Scheme.nonempty_of_isLimit (AffineTransitionLimit), Scheme.isAffine_of_isLimit (Limits)",
+   "date": "2026-10-10",
+   "verdict": "no match (only the absolute 01Z6 and its relatives)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, CategoryTheory.Limits.IsLimit, CategoryTheory.IsCofiltered",
+   "results": "Scheme.compactSpace_of_isLimit, isAffineHom_π_app, Scheme.exists_isAffine_of_isLimit, Scheme.exists_isQuasiAffine_of_isLimit, nonempty_isColimit_Γ_mapCocone, isBasis_preimage_isAffineOpen, Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation, Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, exists_isAffineOpen_preimage_eq, Scheme.OpenCover.exists_of_isCofiltered_of_finite (all Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "no match (no conclusion of the form ∃ i, IsAffineHom (t.app i))"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i exists; grep -rn '09ZM' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only exists_appTop_map_eq_zero_of_isLimit, exists_app_map_eq_zero_of_isLimit, exists_app_map_eq_map_of_isLimit, exists_appTop_π_eq_of_isLimit (AffineTransitionLimit.lean:744-842; IsAffineHom is a hypothesis there); no 09ZM tag in Mathlib or the source repository",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-eventually-closed-immersion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

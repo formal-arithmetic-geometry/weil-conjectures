@@ -14,9 +14,100 @@
   "lem-weil-pbc-limit-affine-transition",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation; reduction to $h_i$ affine.* Write $f_{i'i}:Z_{i'}\\to Z_i$ ($i'\\ge i$) for the transition morphisms, so $h_i\\circ f_{i'i}=h_{i'}$, and $p_i:Z\\to Z_i$ for the projections of the limit, so $h=h_i\\circ p_i$ and $f_{i'i}\\circ p_{i'}=p_i$. A closed immersion is affine [lem-weil-pbc-closed-immersion-integral-separated-uc](b); hence the transition morphisms $f_{i'i}$ and the morphism $h$ are affine. $T$ is quasi-compact and quasi-separated and every $Z_i$ is quasi-compact and quasi-separated by hypothesis, so [lem-weil-pbc-eventually-affine] (Stacks 09ZM) gives $i_0\\in I$ such that $h_i:Z_i\\to T$ is affine for every $i\\ge i_0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-eventually-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, line 970: 'By Lemma 09ZM we may assume $X_i\\to S$ is affine for all $i$'"
+   }
+  },
+  {
+   "text": "*A finite affine covering and the rings.* $T$ is a scheme, so covered by affine opens [def-pc-scheme], and quasi-compact [def-weil-pbc-scheme-conventions]; choose affine opens $V_1,\\dots,V_n$ with $T=V_1\\cup\\dots\\cup V_n$ ($n=0$ if $T=\\emptyset$), and put $R_j=\\mathcal O_T(V_j)$. Fix $j$. For $i\\ge i_0$ put $W_{j,i}=h_i^{-1}(V_j)\\subseteq Z_i$, an affine open because $h_i$ is affine (step 1, [pqf-def-affine-morphism]), $A_{j,i}=\\mathcal O_{Z_i}(W_{j,i})$ and $\\varphi_{j,i}:R_j\\to A_{j,i}$ the ring map induced by $h_i$; put $W_j=h^{-1}(V_j)\\subseteq Z$, an affine open because $h$ is affine, $A_j=\\mathcal O_Z(W_j)$ and $\\varphi_j:R_j\\to A_j$ the ring map induced by $h$. From $h_i\\circ f_{i'i}=h_{i'}$ and $h_i\\circ p_i=h$ we get $f_{i'i}^{-1}(W_{j,i})=W_{j,i'}$ and $p_i^{-1}(W_{j,i})=W_j$; let $\\alpha_{i'i}:A_{j,i}\\to A_{j,i'}$ ($i'\\ge i\\ge i_0$) and $\\alpha_i:A_{j,i}\\to A_j$ be the ring maps induced by $f_{i'i}$ and $p_i$. By functoriality of the maps on sections, $\\alpha_{i''i'}\\circ\\alpha_{i'i}=\\alpha_{i''i}$, $\\alpha_{i'}\\circ\\alpha_{i'i}=\\alpha_i$, $\\alpha_{i'i}\\circ\\varphi_{j,i}=\\varphi_{j,i'}$ and $\\alpha_i\\circ\\varphi_{j,i}=\\varphi_j$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, lines 971-973: 'Choose a finite affine open covering $S=\\bigcup V_j$'"
+   }
+  },
+  {
+   "text": "*The three hypotheses of the affine case.* Fix $j$ and $i'\\ge i\\ge i_0$. (a) $\\alpha_{i'i}$ is surjective: $f_{i'i}$ is a closed immersion, $W_{j,i}$ is an affine open of $Z_i$ and $f_{i'i}^{-1}(W_{j,i})=W_{j,i'}$, so [lem-weil-pbc-closed-immersion-affine-cover-criterion](1) applies. (b) $\\varphi_j:R_j\\to A_j$ is surjective: $h$ is a closed immersion and $V_j$ is an affine open of $T$, so [lem-weil-pbc-closed-immersion-affine-cover-criterion](1) applies. (c) $\\varphi_{j,i}:R_j\\to A_{j,i}$ is of finite type: $h_i$ is locally of finite type, $W_{j,i}$ and $V_j$ are affine opens and $h_i(W_{j,i})\\subseteq V_j$, so [lem-weil-pbc-lft-affine-pairs] (Stacks 01T2) applies.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, lines 977-980: 'This reduces us to the affine case: $A=\\colim A_i$ with $R\\to A$ surjective and $A_i\\to A_{i'}$ surjective for all $i\\le i'$. Moreover $R\\to A_i$ is of finite type'"
+   }
+  },
+  {
+   "text": "*$A_j$ is the colimit of the $A_{j,i}$.* Fix $j$. Apply [lem-weil-pbc-limit-cone-affine-projections-opens](2) to the inverse system $(Z_i)$ (affine transition morphisms, step 1), its limit $Z$, the index $i_0$ and the open $W_{j,i_0}\\subseteq Z_{i_0}$: the opens $f_{ii_0}^{-1}(W_{j,i_0})=W_{j,i}$ ($i\\ge i_0$, step 2) with the restricted transition morphisms form an inverse system over the nonempty directed set $I_{\\ge i_0}$, and $p_{i_0}^{-1}(W_{j,i_0})=W_j$ with the restricted projections is its limit in the category of schemes. All $W_{j,i}$ are affine, $W_{j,i}\\cong\\operatorname{Spec}A_{j,i}$ [def-weil-affine-spectrum], so by [lem-weil-pbc-limit-affine-transition] (the clause from Stacks 01YW) this limit is also $\\operatorname{Spec}(\\varinjlim_{i\\ge i_0}A_{j,i})$ (the colimit in commutative rings [def-weil-pbc-category-colimit]) with the projections induced by the coprojections. Two limits of one diagram are isomorphic by a unique isomorphism compatible with the projections; taking global sections ($\\Gamma(\\operatorname{Spec}B)=B$), $A_j=\\mathcal O_Z(W_j)$ with the maps $\\alpha_i$ is a colimit of the directed system $(A_{j,i},\\alpha_{i'i})_{i'\\ge i\\ge i_0}$ of commutative rings. For every $i\\ge i_0$ the subset $I_{\\ge i}$ is cofinal in $I_{\\ge i_0}$, so $A_j$ with the $\\alpha_{i'}$ ($i'\\ge i$) is also a colimit of the restricted system over $I_{\\ge i}$.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, line 977: '$A=\\colim A_i$' (the limit of the affine schemes $f_i^{-1}(V_j)$ is the spectrum of the colimit of their rings)"
+   }
+  },
+  {
+   "text": "*The affine case: $\\varphi_{j,i}$ is surjective for large $i$.* Fix $j$. By step 3(c) choose $x_1,\\dots,x_m\\in A_{j,i_0}$ generating $A_{j,i_0}$ as an $R_j$-algebra via $\\varphi_{j,i_0}$. By step 3(b) choose $r_k\\in R_j$ with $\\varphi_j(r_k)=\\alpha_{i_0}(x_k)$ ($k=1,\\dots,m$). Then $a_k=x_k-\\varphi_{j,i_0}(r_k)\\in A_{j,i_0}$ satisfies $\\alpha_{i_0}(a_k)=\\alpha_{i_0}(x_k)-\\varphi_j(r_k)=0$ (step 2). Apply [lem-weil-pbc-directed-colimit-base-change-elementwise](2) to the directed system $(A_{j,i})_{i\\ge i_0}$ with colimit $A_j$ (step 4), its index $i_0$ and the $A_{j,i_0}$-module $M_0=A_{j,i_0}$: here $M_i=A_{j,i}\\otimes_{A_{j,i_0}}A_{j,i_0}\\cong A_{j,i}$ by $a\\otimes b\\mapsto a\\,\\alpha_{ii_0}(b)$, under which $\\mu_{ii_0}=\\alpha_{ii_0}$ and $\\mu_{i_0}=\\alpha_{i_0}$; so there is $i'_k\\ge i_0$ with $\\alpha_{i'_ki_0}(a_k)=0$. As $I$ is directed choose $i_j\\ge i'_1,\\dots,i'_m$ (and $i_j\\ge i_0$); then $\\alpha_{i_ji_0}(a_k)=0$, i.e. $\\alpha_{i_ji_0}(x_k)=\\alpha_{i_ji_0}\\varphi_{j,i_0}(r_k)=\\varphi_{j,i_j}(r_k)$ for all $k$. The subring $\\varphi_{j,i_j}(R_j)\\subseteq A_{j,i_j}$ thus contains $\\alpha_{i_ji_0}(\\varphi_{j,i_0}(R_j))=\\varphi_{j,i_j}(R_j)$ and the $\\alpha_{i_ji_0}(x_k)$, which generate the subring $\\alpha_{i_ji_0}(A_{j,i_0})$; so $\\alpha_{i_ji_0}(A_{j,i_0})\\subseteq\\varphi_{j,i_j}(R_j)$. Since $\\alpha_{i_ji_0}$ is surjective (step 3(a)), $\\varphi_{j,i_j}$ is surjective. For $i\\ge i_j$, $\\varphi_{j,i}=\\alpha_{ii_j}\\circ\\varphi_{j,i_j}$ is a composite of surjections (step 3(a)), hence surjective.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, lines 980-988: generators $x_1,\\dots,x_m$ of $A_i$ over $R$, $r_j\\mapsto x_j$ in $A$, an $i'\\ge i$ where $r_j$ maps to the image of $x_j$, surjectivity of $A_i\\to A_{i'}$"
+   }
+  },
+  {
+   "text": "*Conclusion.* As $I$ is directed and $n$ is finite, choose $i^*\\in I$ with $i^*\\ge i_0$ and $i^*\\ge i_j$ for $j=1,\\dots,n$ (any $i^*\\ge i_0$ if $n=0$). Let $i\\ge i^*$. For every $j$ the open $h_i^{-1}(V_j)=W_{j,i}$ is affine (step 2) and the induced ring map $\\varphi_{j,i}:\\mathcal O_T(V_j)\\to\\mathcal O_{Z_i}(h_i^{-1}(V_j))$ is surjective (step 5, as $i\\ge i_j$). The $V_j$ are affine opens covering $T$, so $h_i$ is a closed immersion by [lem-weil-pbc-closed-immersion-affine-cover-criterion](2). Hence $h_i$ is a closed immersion for every $i\\ge i^*$, which is the assertion together with its parenthetical (equivalently, $h_{i'}=h_{i^*}\\circ f_{i'i^*}$ is a composite of closed immersions).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof, lines 973-976: 'It suffices to show that there exists an $i$ such that $f_i^{-1}(V_j)$ is a closed subscheme of $V_j$ (Morphisms, Lemma 01QO)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-eventually-affine",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956), proof lines 969-988"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,7 +163,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 0A0N; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along the proof of 0A0N (limits.tex 969-988) with the two unjustified claims of Stacks written out (R -> A_i of finite type via lem-weil-pbc-lft-affine-pairs; A = colim A_i via lem-weil-pbc-limit-cone-affine-projections-opens (2) and the affine limit); two new nodes: lem-weil-pbc-eventually-affine (09ZM, unsplit; note for its split: Stacks' 'finite morphism is affine by definition' there is a slip, f^{-1}(V_j) is affine because f is affine) and the Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion (01QO (1)=>(2),(3)=>(1): Scheme.Hom.app_surjective ClosedImmersion.lean:376, IsAffineOpen.preimage, HasAffineProperty.iff_of_iSup_eq_top Basic.lean:558 with IsClosedImmersion.hasAffineProperty; lines verified). The ring argument (generators, lifts, elementwise colimit) uses lem-weil-pbc-directed-colimit-base-change-elementwise (2) with M_0 = A_{j,i_0}. Lean candidates recorded (081B-type statements, not this one)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-eventually-closed-immersion",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 0A0N (limits.tex line 956) and kept: it is 0A0N with $S=T$ and the limit taken in schemes; stmt_deps kept. Proof written from the Stacks proof in six steps: reduction to affine $h_i$ by 09ZM (new node lem-weil-pbc-eventually-affine, unsplit), a finite affine covering of $T$ and the rings $A_{j,i}=\\mathcal O(h_i^{-1}V_j)$, the three hypotheses of the affine case (surjective transitions and surjective $R_j\\to A_j$ from the new Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion = Morphisms 01QO; finite type from 01T2), the identification $A_j=\\varinjlim A_{j,i}$ (01YX(2) and 01YW, written out because the Stacks proof only writes '$A=\\colim A_i$'), the ring argument with the elementwise colimit description, and the conclusion by 01QO (3)$\\Rightarrow$(1). Tags 0A0N, 09ZM, 01Z6, 01QO, 01S8, 01T2, 01IG, 01IH, 01IN checked in tags/tags. Mathlib searches of the item kept (no match); no Mathlib or slopmaster2 declaration states 0A0N (the slopmaster2 Scheme.exists_isClosedImmersion_comp_π is Tag 081B(1), a different statement)."
  }
 }

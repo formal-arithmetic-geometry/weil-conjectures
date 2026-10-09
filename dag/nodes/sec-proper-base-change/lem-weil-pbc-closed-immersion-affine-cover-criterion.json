@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+ "kind": "statement",
+ "title": "Closed immersions on affine opens: surjective ring maps, and the criterion by an affine open covering of the target",
+ "statement": "Let $h:X\\to S$ be a morphism of schemes [def-pc-scheme]; for an open $V\\subseteq S$ write $h^\\sharp_V:\\mathcal O_S(V)\\to\\mathcal O_X(h^{-1}(V))$ for the ring map induced by $h$. (1) If $h$ is a closed immersion [def-weil-closed-immersion], then for every affine open $V\\subseteq S$ [def-weil-affine-spectrum] the open subscheme $h^{-1}(V)\\subseteq X$ is affine and $h^\\sharp_V$ is surjective. (2) Conversely, if $S=\\bigcup_{j\\in J}V_j$ is a covering by affine opens such that for every $j$ the open subscheme $h^{-1}(V_j)$ is affine and $h^\\sharp_{V_j}$ is surjective, then $h$ is a closed immersion. (Stacks Morphisms, Lemma 01QO, (1)$\\Rightarrow$(2) and (3)$\\Rightarrow$(1): for affine $V=\\operatorname{Spec}R$ and affine $h^{-1}(V)$, '$h^{-1}(V)\\cong\\operatorname{Spec}(R/I)$ over $V$ for an ideal $I$' is the same as '$h^\\sharp_V$ surjective', with $I=\\ker h^\\sharp_V$.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 01QO (lemma-closed-immersion, line 58), equivalence of (1), (2), (3), and its proof (Schemes Lemma Tag 01IN lemma-closed-subspace-scheme, Schemes Example Tag 01IG example-closed-immersion-affines, Schemes Lemma Tag 01IH lemma-closed-immersion-affine-case); tags checked in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of schemes is a closed immersion iff there is an affine open cover of the target with affine preimages and surjective ring maps on sections",
+   "results": "isClosedImmersion_iff_isAffineHom, IsClosedImmersion, IsClosedImmersion.mk, IsClosedImmersion.of_surjective_of_isAffine, IsClosedImmersion.instIsAffineHom, IsClosedImmersion.hasAffineProperty, IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.iff_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match: hasAffineProperty with the generic HasAffineProperty API; isClosedImmersion_iff_isAffineHom for clause (1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion is local on the target: affine open cover V_j of Y such that f^{-1}(V_j) affine and Γ(V_j) → Γ(f^{-1}V_j) surjective implies f closed immersion",
+   "results": "IsClosedImmersion.isZariskiLocalAtTarget, IsClosedImmersion.hasAffineProperty, isClosedImmersion_iff_isAffineHom, IsClosedImmersion.isAffine_surjective_of_isAffine, IsClosedImmersion.instIsAffineHom, IsClosedImmersion.of_surjective_of_isAffine, Scheme.Hom.app_surjective (Morphisms/ClosedImmersion), isClosedEmbedding_isZariskiLocalAtTarget (Morphisms/UnderlyingMap)",
+   "date": "2026-10-10",
+   "verdict": "match (same declarations)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; sed -n 550,562p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; sed -n 45,56p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; sed -n 664,670p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Restrict.lean",
+   "results": "ClosedImmersion.lean:151 instance IsClosedImmersion f -> IsAffineHom f; :364 instance IsClosedImmersion.hasAffineProperty : HasAffineProperty @IsClosedImmersion (fun X _ f _ => IsAffine X ∧ Function.Surjective f.appTop); :370 isClosedImmersion_iff_isAffineHom; :376 Scheme.Hom.app_surjective (f) (U) (hU : IsAffineOpen U) [IsClosedImmersion f] : Surjective (f.app U); Basic.lean:558 HasAffineProperty.iff_of_iSup_eq_top (U : ι → Y.affineOpens) (hU : ⨆ i, U i = ⊤) : P f ↔ ∀ i, Q (f ∣_ U i); Affine.lean:50 IsAffineOpen.preimage; Restrict.lean:666 morphismRestrict_appTop",
+   "date": "2026-10-10",
+   "verdict": "match (one Mathlib lemma per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.IsAffineOpen.preimage, AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "line": "ClosedImmersion.lean:376 (app_surjective), :364 (hasAffineProperty), :151 (IsAffineHom instance); Affine.lean:50 (IsAffineOpen.preimage); Basic.lean:558 (HasAffineProperty.iff_of_iSup_eq_top)",
+  "how": "specializes in one line per clause: (1) h^{-1}(V) affine is IsAffineOpen.preimage with the instance IsClosedImmersion -> IsAffineHom, and h^sharp_V surjective is Scheme.Hom.app_surjective h V hV; (2) HasAffineProperty.iff_of_iSup_eq_top for P = IsClosedImmersion with the affine property Q of IsClosedImmersion.hasAffineProperty (source affine and appTop surjective), applied to h ∣_ V_j, whose source is h^{-1}(V_j) and whose appTop is h.app V_j followed by an isomorphism (morphismRestrict_appTop, Restrict.lean:666)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-eventually-closed-immersion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
