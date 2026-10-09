@@ -13,9 +13,56 @@
   "def-pc-module-pullback",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)$ and $S=\\Gamma(\\operatorname{Spec}S,\\mathcal O)$, with the homomorphism on sections induced by $\\psi$ equal to $\\varphi$ [def-weil-affine-spectrum]. By [lem-weil-pbc-affine-tilde-gamma-adjunction](1) (Schemes 01I7), the $R$-module $M$ determines the associated module sheaf $\\mathcal F_M$, canonically and naturally isomorphic to $\\widetilde M$; this isomorphism carries the canonical section of $m$ to $\\tau(m)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I7 (lemma-compare-constructions), statement and proof; Lemma 01I9 (lemma-widetilde-pullback), first sentence of proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-associated-module-pullback] (Modules 01BJ) to the ringed-space morphism $\\psi$, the $R$-module $M$, and the isomorphism of Step 1. It gives a canonical isomorphism $\\psi^*\\widetilde M\\cong\\mathcal F_{S\\otimes_R M}$, functorial in $M$. Applying [lem-weil-pbc-affine-tilde-gamma-adjunction](1) over $S$ identifies $\\mathcal F_{S\\otimes_R M}$ with $\\widetilde{S\\otimes_R M}$; compose these two isomorphisms to define $\\theta_M$. Both component isomorphisms are natural, so $\\theta_M$ is natural.",
+   "uses": [
+    "lem-weil-pbc-associated-module-pullback",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), proof of (1), citing Schemes 01I7 and Modules 01BJ"
+   }
+  },
+  {
+   "text": "The isomorphism from Modules 01BJ is the canonical pullback comparison: its construction presents the associated sheaf $\\mathcal F_M$ as the pullback of $M$ from the one-point ringed space $(\\{*\\},R)$, and uses the composition isomorphism of pullbacks. Hence the image of the pullback-unit section $\\eta_{\\widetilde M}(\\tau(m))$ in the associated sheaf for $S\\otimes_R M$ is the canonical section belonging to $1\\otimes m$: the ring map $R\\to S$ sends the scalar $1$ to $1$ and extension of scalars sends $m$ to $1\\otimes m$. Under the comparison of Step 2 with $\\widetilde{S\\otimes_R M}$, this canonical section is $\\tau(1\\otimes m)$, establishing the required equality. This is the unit compatibility implicit in the canonical construction of Modules 01BJ; it is stated here because the cited Stacks proof only states the isomorphism.",
+   "uses": [
+    "lem-weil-pbc-associated-module-pullback",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof using the first construction as a pullback from a one-point ringed space and the pullback-composition isomorphism; Schemes Lemma 01I7 identifies canonical sections with the tilde sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-associated-module-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), proof of (1), via Lemma 01I7 and Modules, Lemma 01BJ (literature/stacks-project/modules.tex); the canonical-section unit calculation is made explicit from the construction in 01BJ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -75,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -99,7 +146,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks Schemes 01I9(1) with the unit compatibility made explicit; self-contained; correct; unsplit. Searches record only part (2) (pushforward) in Mathlib."
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed three proof steps and associated-module pullback node against Modules 01BJ; reusable node, searches, and proof dependency union are complete."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-tilde-pullback-base-change",
+  "worker": "stage1",
+  "summary": "Split Schemes 01I9(1) along its cited route: Schemes 01I7 identifies tilde with the associated sheaf, the newly recorded reusable Modules 01BJ node supplies pullback of that sheaf after scalar extension, and the canonical-section calculation traces the pullback unit to 1 tensor m. The existing Mathlib search already rules out a direct Mathlib leaf."
  }
 }
