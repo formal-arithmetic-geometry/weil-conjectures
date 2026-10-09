@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+ "kind": "statement",
+ "title": "The twisting sheaf O(1) on P^n_Z on the standard charts",
+ "statement": "Let $n\\ge0$, $S=\\mathbf Z[T_0,\\dots,T_n]$ graded by total degree, $\\mathbf P^n_{\\mathbf Z}=\\operatorname{Proj}(S)$ [def-nagata-affine-proj], and $\\mathcal O(1)=\\widetilde{S(1)}$ the quasi-coherent $\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}$-module attached to the shifted graded module $S(1)$ (so $\\mathcal O(1)(D_+(f))=S(1)_{(f)}=(S_f)_1$ for homogeneous $f$ of positive degree), with the global sections $T_0,\\dots,T_n\\in\\Gamma(\\mathbf P^n_{\\mathbf Z},\\mathcal O(1))$ given by $T_l\\mapsto T_l/1\\in(S_f)_1$ on every $D_+(f)$. Then: (i) $\\mathcal O(1)$ is an invertible $\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}$-module [def-sc-invertible-module]; (ii) for every $j$, $D_+(T_j)\\cong\\operatorname{Spec}S_{(T_j)}$ and $S_{(T_j)}=\\mathbf Z[T_0/T_j,\\dots,T_n/T_j]$ is the polynomial ring over $\\mathbf Z$ in the $n$ elements $T_l/T_j$, $l\\neq j$; (iii) $D_+(T_j)$ is the non-vanishing locus $(\\mathbf P^n_{\\mathbf Z})_{T_j}=\\{x: T_{j,x}\\notin\\mathfrak m_x\\mathcal O(1)_x\\}$ of the section $T_j$; (iv) for all $j,l$, $T_l|_{D_+(T_j)}=(T_l/T_j)\\cdot T_j|_{D_+(T_j)}$ in $\\mathcal O(1)(D_+(T_j))$, where $T_l/T_j\\in S_{(T_j)}=\\Gamma(D_+(T_j),\\mathcal O)$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Definition (Tag 01MN, label definition-twist) for O(1); Lemma (Tag 01MS, label lemma-when-invertible) for (i) on each $D_+(T_j)$ (which cover, Tag 01M4/01MA); Lemma (Tag 01MA, label lemma-standard-open-proj) for $D_+(f)\\cong\\operatorname{Spec}S_{(f)}$; Lemma (Tag 01MV, label lemma-principal-open, with $d=1$, $W_1=\\mathbf P^n_{\\mathbf Z}$ by Tag 01MU) for (iii); (iv) is the identity $T_l/1=(T_l/T_j)(T_j/1)$ in $(S_{T_j})_1$; Section (Tag 01ND, label section-projective-space) for $\\mathbf P^n_{\\mathbf Z}$"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-sc-invertible-module"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "twisting sheaf O(1) on Proj of a graded ring, invertible, standard open D_+(f) nonvanishing locus",
+   "results": "ProjectiveSpectrum.StructureSheaf.structureSheafInType, Proj.basicOpen, ProjectiveSpectrum.basicOpen, Proj.structureSheaf, StructureSheaf.basicOpenIso, Proj.basicOpen_eq_iSup_proj, Proj.basicOpen_pow: the structure sheaf of Proj and its basic opens only",
+   "date": "2026-10-09",
+   "verdict": "no match: (ii)'s first half is Proj.basicOpenIsoSpec, but there is no twisting sheaf O(n) of Proj in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre twisting sheaf O(1) on Proj S, sheaf associated to the shifted graded module S(1), is invertible on D_+(f) for f of degree 1",
+   "results": "ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem', sectionInBasicOpen, Proj.awayToSection, structureSheafInType, isLocallyFraction (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf/Basic): structure sheaf only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'twist|Serre twist|O\\(1\\)|tildeShift|ofShift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules; grep -rnE 'HomogeneousLocalization.*MvPolynomial|MvPolynomial.*HomogeneousLocalization|dehomogeni' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no file mentions twists of Proj; ProjectiveSpectrum/{Basic,Functor,Proper,Scheme,StructureSheaf,Topology}.lean and Modules/{Presheaf,Sheaf,Tilde}.lean (tilde only over Spec); no identification of the degree-zero localization of MvPolynomial at X_j with a polynomial ring",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-morphism-chart-preimage",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

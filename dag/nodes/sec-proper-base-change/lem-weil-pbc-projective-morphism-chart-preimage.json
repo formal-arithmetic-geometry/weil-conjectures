@@ -10,11 +10,77 @@
  "stmt_deps": [
   "def-nagata-projective-space-base-change",
   "def-sc-invertible-module",
+  "def-weil-residue-field",
   "def-weil-pbc-morphism-to-projective-space-by-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to $\\psi$.* Write $\\psi=\\psi_{(\\mathcal L,(s_i))}:Y\\to\\mathbf P^n_{\\mathbf Z}$. By [def-weil-pbc-morphism-to-projective-space-by-sections], $\\mathrm{pr}_2\\circ\\varphi=\\psi$. Hence $\\varphi^{-1}(D_+(T_j)_S)=\\varphi^{-1}(\\mathrm{pr}_2^{-1}(D_+(T_j)))=(\\mathrm{pr}_2\\circ\\varphi)^{-1}(D_+(T_j))=\\psi^{-1}(D_+(T_j))$, and, since the maps on sections of a composite of morphisms of schemes compose, $\\varphi^*(u_{l/j})=\\varphi^\\sharp(\\mathrm{pr}_2^\\sharp(T_l/T_j))=(\\mathrm{pr}_2\\circ\\varphi)^\\sharp(T_l/T_j)=\\psi^\\sharp(T_l/T_j)$ in $\\Gamma(\\psi^{-1}(D_+(T_j)),\\mathcal O_Y)$, where $u_{l/j}=\\mathrm{pr}_2^\\sharp(T_l/T_j)$ by definition [def-nagata-projective-space-base-change]. So (i) and (ii) are the statements $\\psi^{-1}(D_+(T_j))=Y_{s_j}$ and $\\psi^\\sharp(T_l/T_j)=s_l/s_j$ about $\\psi$.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, paragraph after Definition 01NF (the morphism to $\\mathbf P^n_S$ is the pair of the structure morphism and the morphism to $\\mathbf P^n_{\\mathbf Z}$)"
+   }
+  },
+  {
+   "text": "*The datum of $\\psi$ and the charts of $\\mathbf P^n_{\\mathbf Z}$.* By [lem-weil-pbc-projective-space-functor-of-points] there is an isomorphism of $\\mathcal O_Y$-modules $\\alpha:\\psi^*\\mathcal O(1)\\to\\mathcal L$ with $\\alpha(\\psi^*T_i)=s_i$ for all $i$, where $\\mathcal O(1)$ is the twisting sheaf of $\\mathbf P^n_{\\mathbf Z}$ with its global sections $T_0,\\dots,T_n$, and $\\psi^*T_i\\in\\Gamma(Y,\\psi^*\\mathcal O(1))$ is the image of $T_i$ under the unit $\\mathcal O(1)\\to\\psi_*\\psi^*\\mathcal O(1)$ [def-pc-module-pullback]. By [lem-weil-pbc-projective-space-twisting-sheaf-charts], $\\mathcal O(1)$ is invertible, $D_+(T_j)=\\operatorname{Spec}\\mathbf Z[T_0/T_j,\\dots,T_n/T_j]$, $D_+(T_j)$ is the non-vanishing locus $(\\mathbf P^n_{\\mathbf Z})_{T_j}$ of the section $T_j$, and $T_l|_{D_+(T_j)}=(T_l/T_j)\\cdot T_j|_{D_+(T_j)}$ in $\\mathcal O(1)(D_+(T_j))$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NE and its proof (special case of Lemma 01NA: $\\psi(T_i)=s_i$, $d=1$), Lemma 01N8 (label lemma-converse-construction: the pair $(\\varphi,\\alpha)$ with $\\alpha:\\varphi^*\\mathcal O(d)\\cong\\mathcal L$ compatible with $\\psi$); Lemmas 01MV, 01MA for the charts"
+   }
+  },
+  {
+   "text": "*(i): $\\psi^{-1}(D_+(T_j))=Y_{s_j}$.* Let $y\\in Y$, $x=\\psi(y)$. By [lem-weil-pbc-invertible-pullback-tensor] (3), the fibre of $\\psi^*\\mathcal O(1)$ at $y$ is $\\mathcal O(1)(x)\\otimes_{\\kappa(x)}\\kappa(y)$ and $(\\psi^*T_j)(y)=T_j(x)\\otimes1$. Since $\\kappa(x)\\to\\kappa(y)$ is a field extension, $\\kappa(y)$ is a free $\\kappa(x)$-module and $v\\otimes1\\ne0$ for every nonzero $v\\in\\mathcal O(1)(x)$; so $(\\psi^*T_j)(y)\\ne0$ iff $T_j(x)\\ne0$, i.e. $Y_{\\psi^*T_j}=\\psi^{-1}((\\mathbf P^n_{\\mathbf Z})_{T_j})$ (this is Stacks Modules, Remark 0H78). The isomorphism $\\alpha$ induces, for each $y$, an isomorphism of stalks $(\\psi^*\\mathcal O(1))_y\\to\\mathcal L_y$ of $\\mathcal O_{Y,y}$-modules, which maps $\\mathfrak m_y(\\psi^*\\mathcal O(1))_y$ onto $\\mathfrak m_y\\mathcal L_y$ and $(\\psi^*T_j)_y$ to $s_{j,y}$; hence $Y_{\\psi^*T_j}=Y_{\\alpha(\\psi^*T_j)}=Y_{s_j}$. With step 2, $\\psi^{-1}(D_+(T_j))=\\psi^{-1}((\\mathbf P^n_{\\mathbf Z})_{T_j})=Y_{\\psi^*T_j}=Y_{s_j}$. With step 1 this is (i).",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01N8, uniqueness part: 'By the commutativity of the diagrams in the lemma we have that the inverse images of $D_+(f)$ under both $\\varphi$ and $\\varphi'$ are equal to $Y_{\\psi(f)}$' (here $f=T_j$, $\\psi(f)=s_j$); Modules, Remark 0H78 (label remark-pullback-s-open); Lemma 01MV for $D_+(f)$ as a non-vanishing locus"
+   }
+  },
+  {
+   "text": "*(ii): $\\psi^\\sharp(T_l/T_j)=s_l/s_j$.* Put $V=Y_{s_j}=\\psi^{-1}(D_+(T_j))$ (step 3) and $a=\\psi^\\sharp(T_l/T_j)\\in\\mathcal O_Y(V)$. The unit $\\eta:\\mathcal O(1)\\to\\psi_*\\psi^*\\mathcal O(1)$ [def-pc-module-pullback] is a map of $\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}$-modules, where $(\\psi_*\\psi^*\\mathcal O(1))(D_+(T_j))=(\\psi^*\\mathcal O(1))(V)$ is an $\\mathcal O(D_+(T_j))$-module through $\\psi^\\sharp$, and it commutes with restriction to opens. Applying it over $D_+(T_j)$ to the identity $T_l|_{D_+(T_j)}=(T_l/T_j)\\cdot T_j|_{D_+(T_j)}$ of step 2 gives $(\\psi^*T_l)|_V=a\\cdot(\\psi^*T_j)|_V$ in $(\\psi^*\\mathcal O(1))(V)$. Applying the $\\mathcal O_Y$-linear $\\alpha$ gives $s_l|_V=a\\cdot s_j|_V$ in $\\mathcal L(V)$. By [lem-weil-pbc-nonvanishing-section-trivializes] (with $s=s_j$, the open $V=Y_{s_j}$ and $t=s_l|_V$) there is exactly one $a'\\in\\mathcal O_Y(V)$ with $s_l|_V=a'\\,s_j|_V$, namely $s_l/s_j$; hence $a=s_l/s_j$, and this unique function exists. With step 1, $\\varphi^*(u_{l/j})=\\psi^\\sharp(T_l/T_j)=s_l/s_j$, which is (ii). (In the source's terms: since $D_+(T_j)=\\operatorname{Spec}\\mathbf Z[T_l/T_j]$ is affine, $\\psi|_{Y_{s_j}}:Y_{s_j}\\to D_+(T_j)$ corresponds to the ring map $T_l/T_j\\mapsto s_l/s_j$, Schemes Lemma 01I1; not needed for the statement.)",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01N8: construction ('a ring map $\\psi_{(f)}:S_{(f)}\\to\\Gamma(Y_s,\\mathcal O_Y)$ by mapping the fraction $a/f^n$ to $\\psi(a)/s^n$', with $x\\mapsto x/s$ the inverse of multiplication by $s$, Modules Lemma 01CY) and uniqueness part ('$\\psi^d_\\varphi(x)=\\varphi^\\sharp(x/f^n)\\psi^d_\\varphi(f^n)$ over $Y_{\\psi(f)}$ ... we deduce that $\\varphi^\\sharp(x/f^n)=(\\varphi')^\\sharp(x/f^n)$'), with $d=n=1$, $f=T_j$, $x=T_l$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01N8 (label lemma-converse-construction) and its proof, specialized by Lemmas 01NA and 01NE (label lemma-projective-space) to $S=\\mathbf Z[T_0,\\dots,T_n]$, $d=1$, $\\psi(T_i)=s_i$; Modules, Lemma 01CY and Remark 0H78"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +102,31 @@
    "results": "ProjectiveSpectrum/Basic.lean:301 awayι_preimage_basicOpen, :459 fromOfGlobalSections_preimage_basicOpen, Functor.lean:160 map_preimage_basicOpen, Scheme.lean:211 preimage_basicOpen; no projective space over a scheme, no invertible modules",
    "verdict": "no match",
    "date": "2026-10-09"
+  },
+  {
+   "tool": "leansearch",
+   "query": "preimage of basic open D_+(T_j) under morphism to projective space given by sections is the basic open of s_j",
+   "results": "ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen, LocallyRingedSpace.preimage_basicOpen, Scheme.basicOpen_appLE, Scheme.Hom.preimage_basicOpen, Proj.fromOfGlobalSections_preimage_basicOpen, Proj.awayι_preimage_basicOpen, SpecMap_preimage_basicOpen, Scheme.preimage_basicOpen_top",
+   "date": "2026-10-09",
+   "verdict": "no match: Proj.fromOfGlobalSections_preimage_basicOpen (ProjectiveSpectrum/Basic.lean:459, read: for f : A →+* Γ(X, ⊤) with the irrelevant ideal mapping to ⊤ and r ∈ 𝒜 n, n>0, fromOfGlobalSections ⁻¹ᵁ basicOpen r = X.basicOpen (f r)) is (i) for L = O_Y only; with fromOfGlobalSections_resLE (:505) = toBasicOpenOfGlobalSections (:369, the Spec of the localization map a/t^k ↦ f(a)/f(t)^k) it is also (ii) for L = O_Y. No step of the proof is a leaf: for general invertible L the statement needs O(1) and invertible modules, absent from Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism to projective space from line bundle with generating sections: pullback of standard open D_+(T_j) equals nonvanishing locus of s_j and T_l/T_j pulls back to s_l/s_j",
+   "results": "Proj.fromOfGlobalSections, Proj.fromOfGlobalSections_resLE, Proj.toBasicOpenOfGlobalSections, Proj.fromOfGlobalSections_morphismRestrict, Proj.awayMap_awayToSection, Proj.basicOpenToSpec_SpecMap_awayMap",
+   "date": "2026-10-09",
+   "verdict": "no match (trivial bundle only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.basicOpen",
+   "results": "Proj.fromOfGlobalSections_preimage_basicOpen, Proj.fromOfGlobalSections_resLE, Proj.fromOfGlobalSections_morphismRestrict (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match (trivial bundle only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +146,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-projective-morphism-chart-preimage",
+  "worker": "stage1",
+  "summary": "Split by one level following Stacks Constructions Lemma 01N8 (uniqueness part and construction of $\\varphi_f$), specialized by 01NA/01NE to $\\mathbf Z[T_0,\\dots,T_n]$, $d=1$. Step 1 reduces to $\\psi=\\mathrm{pr}_2\\circ\\varphi$ (elementary). Step 2 collects the datum $\\alpha:\\psi^*\\mathcal O(1)\\cong\\mathcal L$, $\\psi^*T_i\\mapsto s_i$ from lem-weil-pbc-projective-space-functor-of-points (whose statement gives exactly this; it does not describe $\\psi$ on charts, so the chart description is derived here from that defining property, as 01N8's uniqueness proof does) and the chart facts of $\\mathcal O(1)$ (new node lem-weil-pbc-projective-space-twisting-sheaf-charts). Step 3 proves (i) by pulling back the non-vanishing locus (fibre formula (3) of the reviewed lem-weil-pbc-invertible-pullback-tensor; Stacks Remark 0H78) and transporting along $\\alpha$. Step 4 proves (ii) by pulling back $T_l=(T_l/T_j)T_j$ and the uniqueness of $s_l/s_j$ (new node lem-weil-pbc-nonvanishing-section-trivializes, Modules 01CY). Statement kept; def-weil-residue-field added to stmt_deps ($\\kappa(y)$ in the definition of $Y_s$). Mathlib: Proj.fromOfGlobalSections_preimage_basicOpen / fromOfGlobalSections_resLE are the case $\\mathcal L=\\mathcal O_Y$ only; source repository ProjectiveSpace/OfSections.lean (homOfSections, homOfSections_preimage_standardOpen, homOfSections_resLE_comp_toProjInt_resLE, sorry-free) likewise covers only $\\mathcal L=\\mathcal O_Y$ and does not state this node."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "four steps along the uniqueness part of Stacks 01N8 (reduction to ψ, the datum α, the preimage of the non-vanishing locus via the value formula, the quotient via the unit of the pullback and Modules 01CY); 2 new nodes; the source repository covers only L = O_Y (OfSections.lean), no attachment; the brief had wrong tags 01N9/01NB for the standard opens (01M4/01MA/01MV)"
+ }
 }

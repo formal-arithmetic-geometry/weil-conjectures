@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-nonvanishing-section-trivializes",
+ "kind": "statement",
+ "title": "A section of an invertible module trivializes it where it does not vanish",
+ "statement": "Let $Y$ be a scheme, $\\mathcal L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module] and $s\\in\\Gamma(Y,\\mathcal L)$. Put $Y_s=\\{y\\in Y:\\ s_y\\notin\\mathfrak m_y\\mathcal L_y\\}$ (equivalently, the set of $y$ where the value $s(y)$ of $s$ in $\\mathcal L_y\\otimes_{\\mathcal O_{Y,y}}\\kappa(y)$ is nonzero; $\\kappa(y)$ the residue field [def-weil-residue-field]). Then $Y_s$ is open in $Y$, and the map $\\mathcal O_{Y_s}\\to\\mathcal L|_{Y_s}$, $a\\mapsto a\\,s|$, is an isomorphism of $\\mathcal O_{Y_s}$-modules. Consequently, for every open $V\\subseteq Y_s$ and every $t\\in\\mathcal L(V)$ there is a unique $a\\in\\mathcal O_Y(V)$ with $t=a\\cdot s|_V$; it is written $t/s$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma (Tag 01CY, label lemma-s-open) and its proof (for $y\\in Y_s$, $s_y$ is a basis of the free rank-one module $\\mathcal L_y$ by Nakayama; the inverse section $s'$ of $\\mathcal L^{\\otimes-1}$ over $Y_s$ with $s'(s|_{Y_s})=1$)"
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "def-weil-residue-field"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a nonvanishing section of an invertible sheaf trivializes it on the open set where it does not vanish",
+   "results": "RingedSpace.isUnit_res_basicOpen (Mathlib.Geometry.RingedSpace.Basic), LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen, RingedSpace.zeroLocus_singleton, ModuleCat.Tilde.const, StructureSheaf.exists_const: all for sections of O_X (the case L = O_Y), none for an invertible module",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible sheaf L on a scheme and a section s; on the locus where s does not vanish, multiplication by s is an isomorphism O_X -> L",
+   "results": "RingedSpace.isUnit_res_basicOpen, ModuleCat.Tilde.isUnit_toStalk, LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen, StructureSheaf.isIso_toBasicOpen, exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-09",
+   "verdict": "no match (structure sheaf only: X.basicOpen f, where f|_{D(f)} is a unit, is the case L = O_Y)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.basicOpen",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'IsInvertible|invertible.*module|LineBundle|isLocallyFree|IsLocallyTrivial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; grep -rnE 'basicOpen.*(smul|Module)|Module.*basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean (locally free sheaves of modules on a site, no section-wise non-vanishing locus); AlgebraicGeometry/Modules/Tilde.lean (localization of tilde modules at basic opens of Spec); no invertible O_X-modules on schemes and no non-vanishing locus of a module section",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-morphism-chart-preimage",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
