@@ -8,9 +8,40 @@
   "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), implication (3)$\\Rightarrow$(7) (direct summand of a finite free module $\\Rightarrow$ finite locally free), with Definition Tag 00NV of finite locally free"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "View the assumed direct summand of a finite free module as a finite projective module. For every prime $\\mathfrak p\\subset A$, apply [lem-weil-pbc-finite-projective-prime-local-free] to obtain an element $f_{\\mathfrak p}\\notin\\mathfrak p$ for which $M_{f_{\\mathfrak p}}$ is finite free over $A_{f_{\\mathfrak p}}$.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00NX (lemma-finite-projective), implication (3)\\Rightarrow(7), the local finite-free neighbourhood construction"
+   }
+  },
+  {
+   "text": "The principal opens $D(f_{\\mathfrak p})$ cover $\\operatorname{Spec}(A)$ because $f_{\\mathfrak p}\\notin\\mathfrak p$. By quasi-compactness of the prime spectrum, choose finitely many of them, say $D(f_1),\\ldots,D(f_r)$, still covering. The principal-open/unit-ideal criterion gives that $f_1,\\ldots,f_r$ generate the unit ideal, and each corresponding localization $M_{f_i}$ is finite free by the first step.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00NX (lemma-finite-projective), implication (3)\\Rightarrow(7), with Lemmas Tags 00E0 and 00E8 for principal opens and quasi-compactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX (3)\\Rightarrow(7), standard localization-and-quasi-compactness argument reconstructed because the source file is unavailable in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +73,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,7 +97,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: Algebra 00NX (3)⇒(7); well posed; unsplit."
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read both steps against Algebra 00NX (3)=>(7): local freeness at each prime delegated to the new node, then quasi-compactness and the unit-ideal criterion from the reviewed leaf lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact; correct; the G1 review checks the route and the new node's form"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-projective-standard-free-cover",
+  "worker": "stage1",
+  "summary": "Split Tag 00NX (3)⇒(7) into the local principal-open step, recorded as new unsplit node lem-weil-pbc-finite-projective-prime-local-free, and the finite principal-open cover step using the existing Mathlib leaf lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact. The source algebra.tex is absent in this checkout, so the proof is marked agent-written and reported as wanted."
  }
 }
