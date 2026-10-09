@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
@@ -15,52 +14,46 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 The exceptional inverse image `Rf^!` along a morphism `f : X ⟶ Y` admitting a compactification
 is *defined* here as a chosen right adjoint of the derived lower shriek `Rf_!` on the
-unbounded derived categories of étale sheaves. On the bounded below derived categories,
-`Rf^!` is *not* defined by another adjoint-functor argument: it is the restriction of the
-unbounded `Rf^!` along the inclusion `DerivedCategory.Plus.ι`, which makes sense because
-`Rf^!` preserves bounded below objects. That the restriction is again a right adjoint, now
-of the bounded below `Rf_!`, is then a theorem.
+unbounded derived categories of étale sheaves. It is defined whenever `Rf_!` is a left adjoint,
+which is taken as an instance argument.
 
 # Main Results
 
-- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` : `Rf_!` is a left adjoint
-  on `D(X_ét)`.
+- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` : for torsion coefficients,
+  `A = ModuleCat Λ` with `Λ` finite, `Rf_!` is a left adjoint on `D(X_ét)`.
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriek` : `Rf^! : D(Y_ét) ⥤ D(X_ét)`, with scoped
-  notation `R(f)^![A]`.
+  notation `R(f)^![A]`, for `Rf_!` a left adjoint.
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` : the adjunction `Rf_! ⊣ Rf^!`
   on the unbounded derived categories.
 
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekPlus` : `Rf^! : D⁺(Y_ét) ⥤ D⁺(X_ét)`, the
-  restriction of `R(f)^![A]` to the bounded below derived categories, with scoped notation
-  `R(f)^![A]+`.
-
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekPlusAdjunction` : the adjunction
-  `Rf_! ⊣ Rf^!` on the bounded below derived categories.
-
-- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriekPlus` : `Rf_!` is a left
-  adjoint on `D⁺(X_ét)`, a consequence of the previous item.
+- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
+  below objects, an instance for torsion coefficients; and
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerShriek` is `sorry` by design: this file only *states* that
-  `Rf_!` has a right adjoint and packages that right adjoint, the proof is left to a later
-  file. The adjoint exists by Brown representability, `Rf_!` being a colimit preserving
-  functor between compactly generated triangulated categories.
-* `plus_rightDerivedUpperShriek_obj`, that `Rf^!` preserves bounded below objects, is also
-  `sorry` for now.
+* That `Rf_!` is a left adjoint is *not* true for an arbitrary coefficient category: it rests
+  on `Rg_*` preserving coproducts for the proper part `g` of the compactification, which needs
+  `Rg_*` to have finite cohomological dimension, i.e. torsion coefficients. For general `A` the
+  existence of the right adjoint is therefore an instance argument
+  `[(R(f)_![A]).IsLeftAdjoint]` of `rightDerivedUpperShriek`, and it is supplied as an instance
+  only at the torsion coefficients `ModuleCat Λ`, `[Finite Λ]`
+  (`isLeftAdjoint_rightDerivedLowerShriek`). That instance is the blueprint theorem
+  `thm-amb-etale-exceptional-adjoint` of the smooth-purity chapter (Brown representability,
+  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), and is not proved here.
 * `Rf^!` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint extracted from
-  the instance, not a construction. Only the adjunctions `rightDerivedUpperShriekAdjunction`
-  and `rightDerivedUpperShriekPlusAdjunction` should be used about it; it has no definitional
-  content.
-* By contrast, the bounded below `R(f)^![A]+` *is* a construction out of `R(f)^![A]`: by
-  `rightDerivedUpperShriekPlusCompatibility` (which is `Iso.refl`) it is compatible with the
-  inclusions of the bounded below derived categories by definition. In particular there is no
-  ambiguity between "the right adjoint of `Rf_!` on `D⁺`" and "the restriction to `D⁺` of the
-  right adjoint of `Rf_!` on `D`".
+  the instance, not a construction. Only the adjunction `rightDerivedUpperShriekAdjunction`
+  should be used about it; it has no definitional content.
 * There is no underived `f^!`, but the notation still carries the `R` of `R(f)_![A]` and
   `R((g)_*[A])`, to mark that it lives on derived categories rather than on sheaves.
+* No bounded below variant of `Rf^!` is defined here. The ambient `Rf^!` preserves `D⁺` only
+  through the finite cohomological amplitude of `Rf_!`, and the bounded below exceptional
+  functor of the blueprint is the constructible one of `sk-prop-sf-existence` (c). That `Rf^!`
+  preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
+  is an instance for torsion coefficients (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
 
 ## TODO
 
@@ -86,15 +79,37 @@ namespace Etale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
+section TorsionCoefficients
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- Blueprint `thm-amb-etale-exceptional-adjoint`: The ordinary ambient exceptional adjoint.
+
+For torsion coefficients `Λ`, the derived lower shriek `Rf_! : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` is a
+left adjoint; its right adjoint is the exceptional inverse image `Rf^!`.
+
+`Rf_! = D(i_!) ⋙ Rg_*` for the chosen compactification `(i, g)` of `f`. The extension by zero
+is exact and commutes with coproducts. For torsion coefficients the proper `Rg_*` has finite
+cohomological dimension, locally on `Y` bounded by twice the fibre dimension of `g`, and its
+cohomology sheaves commute with filtered colimits, so `Rg_*` preserves coproducts on the
+unbounded derived category. Brown representability for the derived category of the
+Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) then gives the
+right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
+instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
+    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
+  sorry
+
+end TorsionCoefficients
+
 section Unbounded
 
-/-- The derived lower shriek `Rf_! : D(X_ét) ⥤ D(Y_ét)` is a left adjoint; its right adjoint
-is the exceptional inverse image `Rf^!`. -/
-instance isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint := sorry
+variable [(R(f)_![A]).IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : D(Y_ét) ⥤ D(X_ét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, on the unbounded derived categories of étale sheaves: *by
-definition* a chosen right adjoint of the derived lower shriek `R(f)_![A]`. -/
+definition* a chosen right adjoint of the derived lower shriek `R(f)_![A]`, which is assumed
+to be a left adjoint (this holds for torsion coefficients,
+`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`). -/
 noncomputable def rightDerivedUpperShriek :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) :=
@@ -121,55 +136,52 @@ end Unbounded
 
 section BoundedBelow
 
-/-- The exceptional inverse image `Rf^!` preserves bounded below objects: if `K ∈ D(Y_ét)`
-is bounded below, then so is `Rf^! K ∈ D(X_ét)`.
+/-- `Rf_!` is a left adjoint whose right adjoint `Rf^!` preserves bounded below objects: if
+`K ∈ D(Y_ét)` is bounded below, then so is `Rf^! K ∈ D(X_ét)`.
 
-This is what makes the bounded below `Rf^!` the restriction of the unbounded one. Note that
-`Rf^!` is not left t-exact: the bound it produces is shifted by the cohomological amplitude
-of `Rf_!`, which is why the statement is about `t.plus` rather than about `IsGE n` for a
-fixed `n`. -/
-lemma plus_rightDerivedUpperShriek_obj
+This is what the constructible pro-étale `Rf^!`
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) needs of the étale one. Neither half
+holds for an arbitrary coefficient category: both rest on the finite cohomological amplitude of
+the proper direct image, that is, on torsion coefficients, where the class is the instance
+`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`. Note that `Rf^!` is not left t-exact:
+the bound it produces is shifted by the cohomological amplitude of `Rf_!`, which is why the
+condition is about `t.plus` rather than about `IsGE n` for a fixed `n`. -/
+class HasBoundedBelowUpperShriek : Prop extends (R(f)_![A]).IsLeftAdjoint where
+  plus_rightDerivedUpperShriek_obj (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    DerivedCategory.TStructure.t.plus K →
+      DerivedCategory.TStructure.t.plus
+        ((@Functor.rightAdjoint _ _ _ _ (R(f)_![A]) ⟨exists_rightAdjoint⟩).obj K)
+
+/-- The exceptional inverse image `Rf^!` preserves bounded below objects. -/
+lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A))
     (hK : DerivedCategory.TStructure.t.plus K) :
-    DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) := sorry
+    DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
+  HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- The exceptional inverse image `Rf^! : D⁺(Y_ét) ⥤ D⁺(X_ét)` on the *bounded below* derived
-categories of étale sheaves: the restriction of the unbounded `R(f)^![A]` along the inclusions
-of the bounded below derived categories, which is well defined by
-`plus_rightDerivedUpperShriek_obj`. -/
-noncomputable def rightDerivedUpperShriekPlus :
-    DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) ⥤
-      DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) :=
-  DerivedCategory.TStructure.t.plus.lift (DerivedCategory.Plus.ι ⋙ R(f)^![A])
-    (fun K ↦ plus_rightDerivedUpperShriek_obj A f K.obj K.property)
+/-- For torsion coefficients, `Rf_!` is a left adjoint
+(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
+below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
+by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
+then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. -/
+instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
+  plus_rightDerivedUpperShriek_obj := sorry
 
-@[inherit_doc rightDerivedUpperShriekPlus]
-scoped notation "R(" f ")^![" A "]+" =>
-  rightDerivedUpperShriekPlus A f
+/-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
+compactification: the coefficients have exceptional inverse images preserving bounded below
+objects. This holds for torsion coefficients
+(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks`). -/
+class HasBoundedBelowUpperShrieks : Prop where
+  hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    HasBoundedBelowUpperShriek A f
 
-/-- The bounded below `R(f)^![A]+` is compatible with the inclusions of the bounded below
-derived categories, by construction. -/
-noncomputable def rightDerivedUpperShriekPlusCompatibility :
-    R(f)^![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![A] :=
-  ObjectProperty.liftCompιIso _ _ _
+attribute [instance] HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
 
-/-- The adjunction `Rf_! ⊣ Rf^!` on the bounded below derived categories of étale sheaves:
-the unbounded adjunction `rightDerivedUpperShriekAdjunction` restricted along the fully
-faithful inclusions `DerivedCategory.Plus.ι`, which is legitimate since both `Rf_!` and
-`Rf^!` preserve bounded below objects. -/
-noncomputable def rightDerivedUpperShriekPlusAdjunction : R(f)_![A]+ ⊣ R(f)^![A]+ :=
-  Adjunction.restrictFullyFaithful (rightDerivedUpperShriekAdjunction A f)
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (rightDerivedLowerShriekPlusCompatibility A f).symm
-    (rightDerivedUpperShriekPlusCompatibility A f).symm
-
-/-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` on the bounded below derived
-categories is a left adjoint, its right adjoint being `R(f)^![A]+`. -/
-instance isLeftAdjoint_rightDerivedLowerShriekPlus : (R(f)_![A]+).IsLeftAdjoint :=
-  (rightDerivedUpperShriekPlusAdjunction A f).isLeftAdjoint
-
-instance : (R(f)^![A]+).IsRightAdjoint :=
-  (rightDerivedUpperShriekPlusAdjunction A f).isRightAdjoint
+/-- Torsion coefficients have exceptional inverse images preserving bounded below objects. -/
+instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
+  hasBoundedBelowUpperShriek _ _ := inferInstance
 
 end BoundedBelow
 

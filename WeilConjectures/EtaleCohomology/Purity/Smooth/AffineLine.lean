@@ -143,7 +143,6 @@ theorem isZero_homology_multiplicativeGroup [HasTateTwist.IsNormalized Λ]
         ((tateTwist Λ G 1).obj (constantComplex Λ G)))) :=
   sorry
 
-omit [Finite Λ] in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 For the zero section `s : Y ↪ 𝔸¹_Y` the complex `Rs^! Λ(1)[2]` is concentrated in degree zero
@@ -177,7 +176,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
   -- the normalisation: the Kummer boundary of `t` is a fundamental class `Λ_{V(t)} ≅ Rι^! Λ(1)[2]`
   have hφ := hN.isIso_supportedClassMap_kummerBoundary_coord Y
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) he.symm
-  obtain ⟨comp⟩ := nonempty_iso_rightDerivedUpperShriek_comp (ModuleCat.{u + 1} Λ) e.hom ι
+  obtain ⟨comp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ e.hom ι
   exact ⟨heq.app _ ≪≫ comp.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ e).app _ ≪≫
     (L((e.hom)^*[ModuleCat.{u + 1} Λ])).mapIso ((R(ι)^![ModuleCat.{u + 1} Λ]).mapIso
       ((shiftFunctor _ (2 * 1 : ℤ)).mapIso (derivedTensorLeftUnitor _ _ _) ≪≫

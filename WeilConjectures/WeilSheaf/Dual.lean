@@ -5,11 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Stalk
 
@@ -68,58 +64,37 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 section Monoidal
 
-variable (k₀ l X) in
-/-- The comparison `Fr^* F ⊗ Fr^* G ⟶ Fr^* (F ⊗ G)` of the Frobenius pullback is an isomorphism:
-the pushforward along the automorphism `Fr⁻¹` is the right adjoint in a monoidal adjoint
-equivalence whose left adjoint, the pullback along `Fr⁻¹`, is strong monoidal
-(`AlgebraicGeometry.ProEtale.isIso_lowerStar_μ`). -/
-instance WeilSheaf.isIso_μ_frobeniusPullback
-    (F G : Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l)) :
-    IsIso (Functor.LaxMonoidal.μ (WeilSheaf.frobeniusPullback k₀ l X) F G) :=
-  ProEtale.isIso_lowerStar_μ _ _ F G
-
-variable (k₀ l X) in
-/-- The comparison `𝟙 ⟶ Fr^* 𝟙` of the Frobenius pullback is an isomorphism, as for
-`AlgebraicGeometry.WeilSheaf.isIso_μ_frobeniusPullback`
-(`AlgebraicGeometry.ProEtale.isIso_lowerStar_ε`). -/
-instance WeilSheaf.isIso_ε_frobeniusPullback :
-    IsIso (Functor.LaxMonoidal.ε (WeilSheaf.frobeniusPullback k₀ l X)) :=
-  ProEtale.isIso_lowerStar_ε _ _
-
-/-- The Frobenius pullback `Fr^* = (Fr⁻¹)_*` is a monoidal functor. -/
-noncomputable instance : (WeilSheaf.frobeniusPullback k₀ l X).Monoidal :=
-  Functor.Monoidal.ofLaxMonoidal _
-
 /-- The internal hom of two lisse sheaves is lisse: locally it is the internal hom of finite
-sums of copies of `ℚ̄_ℓ`, and `[ℚ̄_ℓ, ℚ̄_ℓ] = ℚ̄_ℓ`, a `ℚ̄_ℓ`-linear endomorphism of `ℚ̄_ℓ,X̄`
-being multiplication by a section. -/
+sums of copies of `ℚ̄_ℓ,X`, and `𝓗om_{ℚ̄_ℓ,X}(ℚ̄_ℓ,X, ℚ̄_ℓ,X) = ℚ̄_ℓ,X`. -/
 theorem ProEtale.IsAdicLisseSheaf.ihom {Z : Scheme.{u}}
-    {F G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F)
-    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ihom F).obj G) :=
+    {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
+    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
   sorry
 
 /-- The internal hom from a lisse sheaf into a constructible sheaf is constructible: on the
 strata of the second sheaf it is the internal hom of two lisse sheaves. -/
 theorem ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf {Z : Scheme.{u}}
-    {F G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)} (hF : IsAdicLisseSheaf F)
-    (hG : IsAdicConstructibleSheaf G) : IsAdicConstructibleSheaf ((ihom F).obj G) :=
+    {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
+    (hG : IsAdicConstructibleSheaf G) :
+    IsAdicConstructibleSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
   sorry
 
 variable (k₀ l X) in
-/-- The internal hom `[A, B]` of two pro-étale Weil sheaves, with the Weil structure
+/-- The internal hom `𝓗om_{ℚ̄_ℓ,X̄}(A, B)` of two pro-étale Weil sheaves, with the Weil
+structure
 ```
-  Fr^* [A, B] ≅ [Fr^* A, Fr^* B] ≅ [A, Fr^* B] ≅ [A, B]
+  Fr^* 𝓗om(A, B) ≅ 𝓗om(Fr^* A, Fr^* B) ≅ 𝓗om(A, Fr^* B) ≅ 𝓗om(A, B)
 ```
-given by the comparison `CategoryTheory.Functor.Monoidal.ihomObjIso` for the monoidal
-equivalence `Fr^*`, the inverse of the Weil structure of `A` in the first variable and the Weil
-structure of `B` in the second. -/
+given by the compatibility of the pushforward along the automorphism `Fr⁻¹` with internal homs
+(`AlgebraicGeometry.ProEtale.adicLowerStarCompIhomIso`), the inverse of the Weil structure of
+`A` in the first variable and the Weil structure of `B` in the second. -/
 noncomputable def ProEtaleWeilSheaf.ihom (A B : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf k₀ l X :=
-  IsoAlgebra.mk ((CategoryTheory.ihom A.carrier).obj B.carrier)
-    (Functor.Monoidal.ihomObjIso (WeilSheaf.frobeniusPullback k₀ l X) _ _ ≪≫
-      ((MonoidalClosed.internalHom.mapIso A.str.op).app _).symm ≪≫
-      (CategoryTheory.ihom A.carrier).mapIso B.str)
+  IsoAlgebra.mk ((ProEtale.AdicSheaf.ihom A.carrier).obj B.carrier)
+    ((ProEtale.adicLowerStarCompIhomIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).symm.app
+        B.carrier ≪≫
+      (Mod.ihomMapIso A.str.symm).app _ ≪≫ (ProEtale.AdicSheaf.ihom A.carrier).mapIso B.str)
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The Weil structure of the internal hom `[A, B]` is natural in `B`: a morphism `f : B ⟶ B'` of
@@ -127,21 +102,21 @@ pro-étale Weil sheaves induces a morphism `[A, B] ⟶ [A, B']` of pro-étale We
 three constituents of the Weil structure are natural in the second variable. -/
 lemma ProEtaleWeilSheaf.ihom_map_comm (A : ProEtaleWeilSheaf k₀ l X)
     {B B' : ProEtaleWeilSheaf k₀ l X} (f : B ⟶ B') :
-    (WeilSheaf.frobeniusPullback k₀ l X).map ((CategoryTheory.ihom A.carrier).map f.hom.f) ≫
+    (WeilSheaf.frobeniusPullback k₀ l X).map
+        ((ProEtale.AdicSheaf.ihom A.carrier).map f.hom.f) ≫
         (ProEtaleWeilSheaf.ihom k₀ l X A B').obj.str =
       (ProEtaleWeilSheaf.ihom k₀ l X A B).obj.str ≫
-        (CategoryTheory.ihom A.carrier).map f.hom.f := by
-  simp only [ProEtaleWeilSheaf.ihom, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.symm_hom,
-    Functor.mapIso_hom, Category.assoc, Functor.Monoidal.ihomObjIso, Iso.app_hom, Iso.app_inv,
-    IsoAlgebra.str_hom]
-  have h₁ := (Functor.Monoidal.commIhom (WeilSheaf.frobeniusPullback k₀ l X)
-    A.carrier).hom.naturality f.hom.f
-  have h₂ := ((MonoidalClosed.internalHom.mapIso A.str.op).inv).naturality
+        (ProEtale.AdicSheaf.ihom A.carrier).map f.hom.f := by
+  simp only [ProEtaleWeilSheaf.ihom, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.app_hom,
+    Iso.symm_hom, Functor.mapIso_hom, IsoAlgebra.str_hom, Category.assoc]
+  have h₁ := (ProEtale.adicLowerStarCompIhomIso l
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.naturality f.hom.f
+  have h₂ := (Mod.ihomMapIso A.str.symm).hom.naturality
     ((WeilSheaf.frobeniusPullback k₀ l X).map f.hom.f)
   simp only [Functor.comp_map] at h₁ h₂
-  rw [reassoc_of% h₁]
-  erw [reassoc_of% h₂, ← Functor.map_comp, f.hom.h, Functor.map_comp]
-  rfl
+  rw [reassoc_of% h₁, reassoc_of% h₂, ← Functor.map_comp, ← Functor.map_comp]
+  congr 3
+  exact f.hom.h
 
 end Monoidal
 
@@ -156,8 +131,10 @@ of the comparison `CategoryTheory.Functor.Monoidal.ihomObjIso` for the monoidal 
 structure of the constant Weil sheaf `ℚ̄_ℓ` in the second. -/
 noncomputable def dualStr (F : WeilSheaf k₀ l X) :
     (frobeniusPullback k₀ l X).obj
-        ((ihom F.obj.carrier).obj (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier) ≅
-      (ihom F.obj.carrier).obj (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier :=
+        ((ProEtale.AdicSheaf.ihom F.obj.carrier).obj
+          (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier) ≅
+      (ProEtale.AdicSheaf.ihom F.obj.carrier).obj
+        (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier :=
   (ProEtaleWeilSheaf.ihom k₀ l X F.obj (ProEtaleWeilSheaf.adicConstant k₀ l X)).str
 
 -- TODO(unify): sk-d-real-operations
@@ -171,30 +148,6 @@ noncomputable def dual (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSheaf k�
 /-- The dual of a lisse Weil sheaf is lisse. -/
 theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : (F.dual hF).IsLisse :=
   ProEtale.IsAdicLisseSheaf.ihom hF (ProEtale.isAdicLisseSheaf_adicConstantSheaf _)
-
-/-- The evaluation `F ⊗ F^∨ ⟶ ℚ̄_ℓ` is compatible with the Weil structures:
-```
-  Fr^* F ⊗ Fr^* [F, ℚ̄_ℓ] ──μ──▶ Fr^* (F ⊗ [F, ℚ̄_ℓ]) ──Fr^* ev──▶ Fr^* ℚ̄_ℓ
-          │                                                         │
-     φ ⊗ φ^∨│                                                         │φ_ℚ̄_ℓ
-          ▼                                                         ▼
-     F ⊗ [F, ℚ̄_ℓ] ──────────────────────ev──────────────────────▶   ℚ̄_ℓ
-```
--/
-lemma dualStr_ev (F : WeilSheaf k₀ l X) :
-    (F.obj.str.hom ⊗ₘ F.dualStr.hom) ≫
-        (ihom.ev F.obj.carrier).app (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
-      Functor.LaxMonoidal.μ (frobeniusPullback k₀ l X) _ _ ≫
-        (frobeniusPullback k₀ l X).map
-          ((ihom.ev F.obj.carrier).app (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier) ≫
-          (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom := by
-  simp only [dualStr, ProEtaleWeilSheaf.ihom, IsoAlgebra.mk_str, Iso.trans_hom, Iso.symm_hom,
-    Functor.Monoidal.ihomObjIso_hom, Functor.Monoidal.commIhom, asIso_hom, Functor.mapIso_hom,
-    Iso.app_inv, Functor.mapIso_inv, Iso.op_inv, MonoidalClosed.internalHom_map,
-    Quiver.Hom.unop_op, tensorHom_def', MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  rw [whisker_exchange_assoc, ihom.ev_naturality, whisker_exchange_assoc,
-    MonoidalClosed.id_tensor_pre_app_comp_ev_assoc, ← comp_whiskerRight_assoc, Iso.hom_inv_id,
-    id_whiskerRight, Category.id_comp, Functor.LaxMonoidal.ihomComparison_ev_assoc]
 
 -- TODO(unify): sk-d-real-operations
 /-- The geometric coinvariants of a lisse Weil sheaf `F`: the dual `Γ(X̄, F^∨)^∨` of the global

@@ -73,7 +73,7 @@ composition isomorphism of the functors induced on derived categories by the exa
 noncomputable def upperStarCompForgetIso :
     upperStar (k₀ := k₀) (l := l) φ ⋙ forget ≅
       forget ⋙
-        D((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]) :=
+        D((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]) :=
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
     ((Functor.mapDerivedCategoryCompIso (ProEtaleWeilSheaf.upperStar k₀ l φ)
         (IsoAlgebra.forget _)).symm ≪≫
@@ -81,9 +81,9 @@ noncomputable def upperStarCompForgetIso :
         (Iso.refl (ProEtaleWeilSheaf.upperStar k₀ l φ ⋙ IsoAlgebra.forget _) :
           ProEtaleWeilSheaf.upperStar k₀ l φ ⋙ IsoAlgebra.forget _ ≅
             IsoAlgebra.forget _ ⋙
-              (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]) ≪≫
+              (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]) ≪≫
       Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]))
+        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]))
 
 /-- Blueprint `prop-weil-operations`: Six operations on Weil complexes.
 
@@ -97,7 +97,7 @@ theorem nonempty_derivedLowerStar_comp_forget_iso [QuasiCompact φ] [QuasiSepara
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (derivedLowerStar (k₀ := k₀) (l := l) φ ⋙ forget ≅
       forget ⋙
-        R(((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l]))) :=
+        R(((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l]))) :=
   sorry
 
 end WeilComplex

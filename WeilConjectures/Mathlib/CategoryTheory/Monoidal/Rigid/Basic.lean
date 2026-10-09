@@ -68,6 +68,11 @@ theorem IsDualizable.tensorObj {X Y : C} (hX : IsDualizable X) (hY : IsDualizabl
   obtain ⟨_⟩ := hY
   exact ⟨hasRightDualTensor⟩
 
+/-- Dualizability is invariant under isomorphism. -/
+theorem IsDualizable.of_iso {X Y : C} (e : X ≅ Y) (hX : IsDualizable X) : IsDualizable Y := by
+  obtain ⟨_⟩ := hX
+  exact ⟨{ rightDual := Xᘁ, exact := exactPairingCongrLeft e.symm }⟩
+
 /-- An object `X` of a monoidal category is *invertible* if it admits a two-sided tensor
 inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. The Tate twists of the
 `ℓ`-adic formalism are the motivating example.

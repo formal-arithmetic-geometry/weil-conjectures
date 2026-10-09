@@ -103,4 +103,33 @@ theorem exists_isFundamentalGroup [EssentiallySmall.{w} C] :
         have := IsFundamentalGroup.non_trivial (F := F) (e g) fun X x ↦ hg X x
         exact e.injective (this.trans (map_one e).symm) }
 
+/-- A continuous homomorphism `ρ : H →* G` from a compact group to a fundamental group `G` of a
+fibre functor `F` is surjective as soon as `H` acts, through `ρ`, transitively on the fibres of
+the Galois objects: `H` acting through `ρ` is then naturally and continuously on the fibres, so
+`H ⟶ Aut F` is surjective, and it factors through `G ≃ Aut F`. -/
+theorem surjective_of_forall_exists_smul_eq (G : Type*) [Group G] [∀ X, MulAction G (F.obj X)]
+    [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [IsFundamentalGroup F G]
+    {H : Type*} [Group H] [TopologicalSpace H] [IsTopologicalGroup H] [CompactSpace H]
+    (ρ : H →* G) (hρ : Continuous ρ)
+    (h : ∀ (X : C) [IsGalois X] (x y : F.obj X), ∃ g : H, ρ g • x = y) :
+    Function.Surjective ρ := by
+  let (X : C) : MulAction H (F.obj X) := MulAction.compHom _ ρ
+  have hsmul (g : H) (X : C) (x : F.obj X) : g • x = ρ g • x := rfl
+  have : IsNaturalSMul F H := ⟨fun g X Y f x ↦ by
+    simp only [hsmul]
+    exact IsNaturalSMul.naturality (ρ g) f x⟩
+  have hc (X : C) : ContinuousSMul H (F.obj X) := by
+    have : ContinuousSMul G (F.obj X) := IsFundamentalGroup.continuous_smul X
+    refine ⟨?_⟩
+    change Continuous fun p : H × F.obj X ↦ ρ p.1 • p.2
+    exact (hρ.comp continuous_fst).smul continuous_snd
+  have hs := toAut_surjective_of_isPretransitive F H fun X _ ↦ ⟨fun x y ↦ h X x y⟩
+  intro g
+  obtain ⟨g', hg'⟩ := hs (toAut F G g)
+  refine ⟨g', (toAut_bijective F G).1 ?_⟩
+  rw [← hg']
+  ext X x
+  rw [toAut_hom_app_apply, toAut_hom_app_apply]
+  rfl
+
 end CategoryTheory.PreGaloisCategory

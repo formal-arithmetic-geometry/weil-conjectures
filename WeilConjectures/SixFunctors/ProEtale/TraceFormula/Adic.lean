@@ -117,14 +117,15 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
   {B : Type u''} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
   [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
   [Abelian.HasFunctorialFlatResolution B] {s X : Scheme.{u}}
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [MonoidalCategory B] [MonoidalPreadditive B]
-  [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B] in
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
+  [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+  [Abelian.HasFunctorialFlatResolution B] in
 /-- Finite-level coefficient change for compactly supported cohomology: derived scalar
 extension `- ⊗ᴸ_A B` commutes with `Ra_{X!}`, that is, `(Ra_{X!} K) ⊗ᴸ B ≅ Ra_{X!}(K ⊗ᴸ B)`
 (blueprint: `sk-p-trace-coeff`).
