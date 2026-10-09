@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-stalk-change-of-rings-tensor",
+ "kind": "statement",
+ "title": "Stalks of a change of rings of a sheaf of modules",
+ "statement": "Let $X$ be a topological space, $\\varphi:\\mathcal O\\to\\mathcal O'$ a morphism of sheaves of commutative rings on $X$, and $\\mathcal F$ a sheaf of $\\mathcal O$-modules, with change of rings $\\mathcal F\\otimes_{\\mathcal O}\\mathcal O'$ [def-pur-sheaf-tensor-product] (the sheafification of $U\\mapsto\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal O'(U)$, a sheaf of $\\mathcal O'$-modules); for an open $U$, $s\\in\\mathcal F(U)$ and $a\\in\\mathcal O'(U)$ write $s\\otimes a\\in(\\mathcal F\\otimes_{\\mathcal O}\\mathcal O')(U)$ for the image of $s\\otimes a$ under the sheafification map. Let $x\\in X$; the stalk $\\mathcal F_x$ is an $\\mathcal O_x$-module and $\\mathcal O'_x$ an $\\mathcal O_x$-algebra via $\\varphi_x$. Then there is an isomorphism of $\\mathcal O'_x$-modules\n$$\\mathcal F_x\\otimes_{\\mathcal O_x}\\mathcal O'_x\\;\\xrightarrow{\\ \\sim\\ }\\;(\\mathcal F\\otimes_{\\mathcal O}\\mathcal O')_x,$$\nnatural in $\\mathcal F$, sending $s_x\\otimes a_x$ to $(s\\otimes a)_x$ for every open $U\\ni x$, $s\\in\\mathcal F(U)$, $a\\in\\mathcal O'(U)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 008B (label lemma-stalk-tensor-sheaf-modules), proved from Lemma Tag 007K (lemma-stalk-tensor-presheaf-modules, the presheaf version, proof omitted: stalks are filtered colimits and tensor products commute with filtered colimits) and the fact that stalks commute with sheafification (lemma-stalk-sheafification)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of tensor product of sheaf of modules with change of rings is tensor product of stalks",
+   "results": "Module.rankAtStalk_baseChange (RingTheory.Spectrum.Prime.FreeLocus), ModuleCat.Tilde.toOpen_germ_apply, stalkToFiberLinearMap_toStalk, stalkIso (AlgebraicGeometry.Modules.Tilde), Scheme.Modules.restrictStalkNatIso, localRingHom_comp_stalkIso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the base change F ⊗_O O' of a sheaf of O-modules along a morphism of sheaves of rings O → O' equals F_x ⊗_{O_x} O'_x",
+   "results": "ModuleCat.Tilde.stalkToFiberLinearMap, stalkIso_hom, toStalk_comp_stalkToFiberLinearMap, toStalk (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules, TopCat.Presheaf.stalk",
+   "results": "PresheafOfModules.instModuleCarrierStalk… (RingCat and CommRingCat versions), PresheafOfModules.germ_ringCat_smul, PresheafOfModules.germ_smul (Mathlib.Algebra.Category.ModuleCat.Stalk)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the O_x-module structure on stalks of a presheaf of modules, nothing on tensor products or change of rings"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln stalk ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/; grep -rn 'TensorProduct\\|⊗' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; grep -rln extendScalars ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "only Algebra/Category/ModuleCat/Stalk.lean (module structure on stalks, germ_smul line 205); no tensor product in the ChangeOfRings files (they are restriction of scalars), no extendScalars for presheaves or sheaves of modules; CategoryTheory/Sites/Point/Monoidal.lean makes fibre functors monoidal for sheaves valued in a monoidal category A (tensor over a fixed A, not over a sheaf of rings)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no change of rings (extension of scalars) for sheaves of modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-pullback",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

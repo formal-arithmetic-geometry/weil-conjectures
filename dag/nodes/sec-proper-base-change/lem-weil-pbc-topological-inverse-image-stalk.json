@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-topological-inverse-image-stalk",
+ "kind": "statement",
+ "title": "Stalks of the inverse image of a sheaf along a continuous map, with germs",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of abelian groups or the category of commutative rings. For a sheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$ let $f^{-1}\\mathcal G$ be its inverse image, the sheafification of the presheaf $f_p\\mathcal G:U\\mapsto\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, and let $\\eta_{\\mathcal G}:\\mathcal G\\to f_*f^{-1}\\mathcal G$ be the unit of the adjunction $f^{-1}\\dashv f_*$ (so $\\eta_{\\mathcal G,V}:\\mathcal G(V)\\to(f^{-1}\\mathcal G)(f^{-1}V)$ for $V\\subseteq Y$ open). Then for every $x\\in X$, with $y=f(x)$, there is an isomorphism in $\\mathcal C$\n$$c_{\\mathcal G}:\\mathcal G_y\\xrightarrow{\\ \\sim\\ }(f^{-1}\\mathcal G)_x,$$\nnatural in $\\mathcal G$, such that $c_{\\mathcal G}(s_y)=(\\eta_{\\mathcal G,V}(s))_x$ for every open $V\\ni y$ and every $s\\in\\mathcal G(V)$. In particular every element of $(f^{-1}\\mathcal G)_x$ is the germ at $x$ of $\\eta_{\\mathcal G,V}(s)$ for some open $V\\ni y$ and some $s\\in\\mathcal G(V)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 008H (label lemma-stalk-pullback: $(f^{-1}\\mathcal G)_x=\\mathcal G_{f(x)}$), proved from Lemma Tag 008G (lemma-stalk-pullback-presheaf, the colimit computation $(f_p\\mathcal G)_x=\\varinjlim_{x\\in U}\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V)=\\mathcal G_{f(x)}$) and stalks commute with sheafification (lemma-stalk-sheafification); the germ formula is the construction (the map $\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ is the presheaf unit)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of the inverse image sheaf of a sheaf on a topological space at x is the stalk at f x",
+   "results": "TopCat.Presheaf.stalkPullbackIso, stalkPullbackHom, stalkPullbackInv, germ_stalkPullbackHom, germToPullbackStalk_stalkPullbackHom, stalkPushforward_germ_apply (Mathlib.Topology.Sheaves.Stalks); AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso (open immersions only)",
+   "date": "2026-10-09",
+   "verdict": "match (presheaf level): stalkPullbackIso with germ_stalkPullbackHom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the sheaf pullback f⁻¹F at x is isomorphic to the stalk of F at f x, for sheaves on topological spaces",
+   "results": "TopCat.Presheaf.stalkPullbackIso, stalkPullbackHom, stalkPullbackInv, stalkPushforward, germ_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-09",
+   "verdict": "match (presheaf level)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkPullbackIso",
+   "results": "TopCat.Presheaf.stalkPullbackIso (C) [HasColimits C] (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x) : F.stalk (f x) ≅ ((TopCat.Presheaf.pullback C f).obj F).stalk x (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor, CategoryTheory.toSheafify",
+   "results": "TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso (Mathlib.Topology.Sheaves.Sheafify): the stalk map of toSheafify is an isomorphism, for any C with colimits and a terminal object and HasWeakSheafify",
+   "date": "2026-10-09",
+   "verdict": "match (stalks commute with sheafification)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback, TopCat.Presheaf.stalk",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no sheaf-level stalk lemma; the sheaf version is the composite below"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stalkPullback\\|germ_stalkPullbackHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; sed -n 80,105p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Functors.lean; sed -n 125,145p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Sheafify.lean; sed -n 55,90p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "results": "Stalks.lean:234 stalkPullbackHom := stalkFunctor.map (presheaf unit) ≫ stalkPushforward; :242 germ_stalkPullbackHom (germ of s at f x ↦ germ of the presheaf unit of s); :313 stalkPullbackInv; :335 stalkPullbackIso. Functors.lean:91 TopCat.Sheaf.pullback, :98 TopCat.Sheaf.pullbackIso : pullback A f ≅ forget ⋙ Presheaf.pullback A f ⋙ presheafToSheaf, :103 pullbackPushforwardAdjunction. Sheafify.lean:137 stalkFunctor_map_unit_toSheafify_isIso. Sites/Pullback.lean:75 sheafPullbackConstruction.sheafAdjunctionContinuous (composite of lanAdjunction and sheafificationAdjunction, so its unit is the presheaf unit followed by toSheafify), :85 sheafPullbackIso via Adjunction.leftAdjointUniq (compatible with units)",
+   "date": "2026-10-09",
+   "verdict": "match by composition: Mathlib's sheaf inverse image is the sheafification of the presheaf one (same definition as Stacks), its stalk at x is that of the presheaf pullback (stalkFunctor_map_unit_toSheafify_isIso), which is F_{f x} (stalkPullbackIso), with the germ formula from germ_stalkPullbackHom and the description of the unit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-pullback",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "mathlib_match_withdrawn": {
+  "date": "2026-10-09",
+  "by": "L",
+  "was": {
+   "declaration": "TopCat.Presheaf.stalkPullbackIso",
+   "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+   "how": "a few Mathlib lemmas, one per clause: the iso is stalkPullbackIso C f F x (line 335, C = Ab or CommRingCat, natural since stalkPullbackHom is stalkFunctor.map of the unit followed by stalkPushforward) composed with the stalk iso of the sheafification map TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso (Topology/Sheaves/Sheafify.lean:137), the sheaf pullback being the sheafified presheaf pullback (TopCat.Sheaf.pullbackIso, Topology/Sheaves/Functors.lean:98); the germ clause is germ_stalkPullbackHom (Stalks.lean:242) together with the unit of the sheaf adjunction being the presheaf unit followed by toSheafify (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory/Sites/Pullback.lean:75, transported by leftAdjointUniq at :85)"
+  },
+  "reason": "the match composes four declarations (stalkPullbackIso, stalkFunctor_map_unit_toSheafify_isIso, Sheaf.pullbackIso, germ_stalkPullbackHom) and the germ clause needs the identification of the sheaf-adjunction unit with the presheaf unit followed by toSheafify (through leftAdjointUniq): an argument of several steps, not one declaration per clause; kept as the route for the split"
+ }
+}
