@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
@@ -95,9 +96,11 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.HomotopyExactSequence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.KummerTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
@@ -579,6 +582,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.GroupTheory.TateModule
+public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom

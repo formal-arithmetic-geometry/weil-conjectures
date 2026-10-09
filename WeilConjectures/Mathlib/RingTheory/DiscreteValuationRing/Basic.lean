@@ -71,4 +71,29 @@ lemma isFractionRing_tensorProduct
     rw [map_pow]
     exact ⟨↑u⁻¹, by rw [mul_comm (u : O), mul_assoc, Units.mul_inv, mul_one]⟩
 
+section Roots
+
+variable {S : Type*} [CommRing S] [IsDomain S] [IsDiscreteValuationRing S]
+
+/-- In a discrete valuation ring `S` with uniformiser `ϖ`, if `ϖ ^ a` is an `N`-th power in
+`S[1/ϖ]`, then `N ∣ a`: the valuation of an `N`-th power is divisible by `N`. -/
+theorem dvd_of_pow_eq_pow_away {ϖ : S} (hϖ : Irreducible ϖ) {N a : ℕ} (hN : N ≠ 0)
+    {t : Localization.Away ϖ} (ht : t ^ N = algebraMap S _ ϖ ^ a) : N ∣ a := by
+  obtain ⟨k, x, hx⟩ := IsLocalization.Away.surj ϖ t
+  have hinj : Function.Injective (algebraMap S (Localization.Away ϖ)) :=
+    IsLocalization.injective _ (powers_le_nonZeroDivisors_of_noZeroDivisors hϖ.ne_zero)
+  have hxN : x ^ N = ϖ ^ (a + k * N) := hinj (by
+    rw [map_pow, ← hx, mul_pow, ht, map_pow, pow_add, ← pow_mul, mul_comm k N, pow_mul])
+  have hx0 : x ≠ 0 := by
+    rintro rfl
+    rw [zero_pow hN] at hxN
+    exact pow_ne_zero _ hϖ.ne_zero hxN.symm
+  obtain ⟨j, u, rfl⟩ := eq_unit_mul_pow_irreducible hx0 hϖ
+  have h : ((u ^ N : Sˣ) : S) * ϖ ^ (j * N) = ((1 : Sˣ) : S) * ϖ ^ (a + k * N) := by
+    rw [Units.val_pow_eq_pow_val, pow_mul, ← mul_pow, hxN, Units.val_one, one_mul]
+  have hjk := unit_mul_pow_congr_pow hϖ hϖ _ _ _ _ h
+  exact (Nat.dvd_add_left (dvd_mul_left N k)).1 (hjk ▸ dvd_mul_left N j)
+
+end Roots
+
 end IsDiscreteValuationRing
