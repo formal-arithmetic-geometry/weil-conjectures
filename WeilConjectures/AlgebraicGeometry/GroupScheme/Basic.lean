@@ -204,12 +204,14 @@ theorem GrpObj.isClosedImmersion_translate {Z : Over (Spec (.of k))} (j : Z ⟶ 
   rw [GrpObj.translate, Over.comp_left]
   infer_instance
 
-lemma GrpObj.comp_mulLeft {X : Over (Spec (.of k))} (x : X ⟶ G)
+/-- Left translation of a generalized point `x` by `g` is `g * x`. -/
+lemma GrpObj.comp_mulLeft_eq_mul {X : Over (Spec (.of k))} (x : X ⟶ G)
     (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : x ≫ GrpObj.mulLeft G g = (toUnit X ≫ g) * x := by
   rw [mulLeft_eq_mul, MonObj.comp_mul, ← Category.assoc, toUnit_unique (x ≫ toUnit G),
     Category.comp_id]
 
-lemma GrpObj.comp_mulRight {X : Over (Spec (.of k))} (x : X ⟶ G)
+/-- Right translation of a generalized point `x` by `g` is `x * g`. -/
+lemma GrpObj.comp_mulRight_eq_mul {X : Over (Spec (.of k))} (x : X ⟶ G)
     (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : x ≫ GrpObj.mulRight G g = x * (toUnit X ≫ g) := by
   rw [mulRight_eq_mul, MonObj.comp_mul, ← Category.assoc, toUnit_unique (x ≫ toUnit G),
     Category.comp_id]
@@ -218,13 +220,13 @@ lemma GrpObj.comp_mulRight {X : Over (Spec (.of k))} (x : X ⟶ G)
 lemma GrpObj.mulLeft_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f : G ⟶ H)
     [IsMonHom f] (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
     GrpObj.mulLeft G g ≫ f = f ≫ GrpObj.mulLeft H (g ≫ f) := by
-  rw [comp_mulLeft, mulLeft_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
+  rw [comp_mulLeft_eq_mul, mulLeft_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
 
 /-- A homomorphism of group schemes intertwines the right translations by `g` and by its image. -/
 lemma GrpObj.mulRight_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f : G ⟶ H)
     [IsMonHom f] (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
     GrpObj.mulRight G g ≫ f = f ≫ GrpObj.mulRight H (g ≫ f) := by
-  rw [comp_mulRight, mulRight_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
+  rw [comp_mulRight_eq_mul, mulRight_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
 
 end Translation
 
@@ -783,8 +785,8 @@ theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgC
     have hy := hSpt y hyS hycl
     have e : a * GrpObj.sectionOfIsClosed H y hycl =
         a ≫ GrpObj.mulRight H (GrpObj.sectionOfIsClosed H y hycl) := by
-      rw [GrpObj.comp_mulRight, toUnit_unit, Category.id_comp]
-    rw [← hsec y hycl, ← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp, e, happ]
+      rw [GrpObj.comp_mulRight_eq_mul, toUnit_unit, Category.id_comp]
+    rw [← hsec y hycl, ← happ, GrpObj.comp_mulLeft_eq_mul, toUnit_unit, Category.id_comp, e, happ]
     exact hclosure (hRS hy) ⟨_, ha, rfl⟩
   have hιZ : ι[H].left '' Z ⊆ Z := hclosure hιS
   have hLiso (s : 𝟙_ (Over (Spec (.of K))) ⟶ H) : IsIso (GrpObj.mulLeft H s).left :=
@@ -815,7 +817,7 @@ theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgC
     exact hLS hs ⟨v, huS ⟨hv, hvZ⟩, rfl⟩
   have hu'P (s) (hs : s ∈ P) : s.left pt ∈ u' := by
     refine Set.mem_iUnion₂.mpr ⟨s * s₀⁻¹, mul_mem hs (inv_mem hx₀P), x₀, hx₀.1, ?_⟩
-    rw [← hsec x₀ hx₀cl, ← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp,
+    rw [← hsec x₀ hx₀cl, ← happ, GrpObj.comp_mulLeft_eq_mul, toUnit_unit, Category.id_comp,
       inv_mul_cancel_right]
   have hu'dense : Z ⊆ closure (u' ∩ Z) := by
     refine closure_minimal (hdense.trans (closure_mono ?_)) isClosed_closure
@@ -839,7 +841,7 @@ theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgC
       have h1 : (1 : 𝟙_ (Over (Spec (.of K))) ⟶ H).left pt ∈ u' := hu'P 1 (one_mem P)
       have hyO : y ∈ O ∩ closure (u' ∩ Z) := by
         refine ⟨⟨_, h1, ?_⟩, hu'dense hyZ⟩
-        rw [← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp, mul_one, hsec]
+        rw [← happ, GrpObj.comp_mulLeft_eq_mul, toUnit_unit, Category.id_comp, mul_one, hsec]
       obtain ⟨w, hw⟩ := closure_nonempty_iff.mp ⟨y, hOopen.inter_closure hyO⟩
       exact ⟨w, hw⟩
     rw [← Set.inter_assoc] at hO
@@ -859,7 +861,7 @@ theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgC
       refine hext ?_
       rw [hsec, show t * GrpObj.sectionOfIsClosed H x hxcl =
           GrpObj.sectionOfIsClosed H x hxcl ≫ GrpObj.mulLeft H t by
-        rw [GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp], happ, hsec]
+        rw [GrpObj.comp_mulLeft_eq_mul, toUnit_unit, Category.id_comp], happ, hsec]
     change t ∈ P
     rw [← mul_inv_cancel_right t (GrpObj.sectionOfIsClosed H x hxcl), htx]
     exact mul_mem hwP (inv_mem hxP)
