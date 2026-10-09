@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory
 /-!
 # The étale fundamental group of a connected scheme
 
@@ -78,8 +78,9 @@ variable (Y) in
 The finite étale `Y`-schemes form a pre-Galois category: they have a terminal object,
 fibre products, finite coproducts and quotients by finite groups, and a monomorphism is the
 inclusion of a direct summand. -/
-theorem preGaloisCategory : PreGaloisCategory Y.FiniteEtale := by
-  sorry
+theorem preGaloisCategory : PreGaloisCategory Y.FiniteEtale where
+  hasQuotientsByFiniteGroups G _ _ := hasColimitsOfShape_singleObj Y G
+  monoInducesIsoOnDirectSummand i _ := monoInducesIsoOnDirectSummand i
 
 attribute [instance] preGaloisCategory
 
