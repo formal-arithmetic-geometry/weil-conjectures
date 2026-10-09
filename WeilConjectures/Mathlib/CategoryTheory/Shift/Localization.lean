@@ -288,7 +288,8 @@ lemma comm_aux_obj (Y₁ : C₁) (Y₂ : C₂) (m n : M) :
   simp only [reassoc_of% hG, Iso.inv_hom_id_app_app_assoc, Functor.map_comp]
   congr 1
   rw [F.commShift₂_comm_assoc h Y₁ Y₂ m n]
-  have h₁ := (shiftFunctorComm E m n).inv.naturality (((Lifting₂.iso L₁ L₂ W₁ W₂ F G).inv.app Y₁).app Y₂)
+  have h₁ := (shiftFunctorComm E m n).inv.naturality
+    (((Lifting₂.iso L₁ L₂ W₁ W₂ F G).inv.app Y₁).app Y₂)
   have h₂ := (h.ε m n).val.naturality
     ((((Lifting₂.iso L₁ L₂ W₁ W₂ F G).inv.app Y₁).app Y₂)⟦m⟧'⟦n⟧')
   dsimp at h₁ h₂
