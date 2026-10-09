@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-lft-formally-unramified-unramified",
+ "kind": "statement",
+ "title": "A formally unramified morphism locally of finite type is unramified",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism] and formally unramified [def-weil-pbc-formally-unramified-morphism]. Then the diagonal $\\Delta_f:X\\to X\\times_SX$ into the fibre product [def-pc-fibre-product] is an open immersion [def-weil-open-immersion]; that is, $f$ is unramified [def-weil-unramified-morphism]. (Stacks Project, More on Morphisms, Lemma 02HE, (2) implies (1), with Morphisms, Lemma 02GE (1).)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HE (lemma-unramified-formally-unramified), (2) implies (1), line 975; combined with Morphisms, Lemma 02GE (lemma-diagonal-unramified-morphism) (1), morphisms.tex line 7853, which turns Stacks' unramified into the open-immersion diagonal of [def-weil-unramified-morphism]"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "diagonal of a formally unramified morphism of schemes locally of finite type is an open immersion",
+   "results": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified), FormallyUnramified.instOfIsOpenImmersionDiagonalScheme (converse), IsSeparated.diagonal_isClosedImmersion, IsImmersion.instDiagonalScheme",
+   "date": "2026-10-10",
+   "verdict": "match: isOpenImmersion_diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally unramified and locally of finite type morphism of schemes implies unramified (open immersion diagonal)",
+   "results": "AlgebraicGeometry.formallyUnramified_iff, IsEtale.instFormallyUnramified, FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme (all Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified / Etale)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the converse instance (:79) came up; the match is from leansearch"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal (project ~/weil-conjectures-slopmaster2)",
+   "results": "instance in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean (index: unavailable, existence confirmed by the hit)",
+   "date": "2026-10-10",
+   "verdict": "match exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance\\|^theorem\\|^lemma' Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; grep -rn 'class.*Unramified' Mathlib/AlgebraicGeometry Mathlib/RingTheory",
+   "results": "FormallyUnramified.lean:79 instance [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f; :120 IsStableUnderBaseChange; :126 instance isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f); no scheme-level class Unramified (only Algebra.Unramified in RingTheory/Unramified/Basic.lean:358)",
+   "date": "2026-10-10",
+   "verdict": "match: FormallyUnramified.lean:126"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "line": 126,
+  "how": "exact: instance isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f); with def-weil-pbc-formally-unramified-morphism = Mathlib's FormallyUnramified (match recorded on that leaf) and def-weil-unramified-morphism = LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f), the conclusion is ⟨‹LocallyOfFiniteType f›, isOpenImmersion_diagonal f⟩"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-base-change-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

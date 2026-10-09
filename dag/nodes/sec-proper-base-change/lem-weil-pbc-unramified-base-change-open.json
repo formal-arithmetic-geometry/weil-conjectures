@@ -5,7 +5,7 @@
  "statement": "Let $f:X\\to S$ be an unramified morphism of schemes [def-pc-scheme] [def-weil-unramified-morphism]. (1) For every morphism $g:S'\\to S$ of schemes, the base change $f':X\\times_S S'\\to S'$ [def-pc-fibre-product] is unramified. (2) If $U\\subseteq X$ and $V\\subseteq S$ are open subschemes [def-weil-open-immersion] with $f(U)\\subseteq V$, then the restriction $f|_U:U\\to V$ is unramified. (Stacks Project, Tags [02GA] and [02G6].)",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 02GA (lemma-base-change-unramified) and Lemma 02G6 (lemma-unramified-characterize), including the final restriction-to-opens clause; source lines 7697-7724"
+  "place": "Morphisms, Lemma 02GA (lemma-base-change-unramified, morphisms.tex lines 7717-7730) for (1) and the final 'Moreover' clause of Lemma 02G6 (lemma-unramified-characterize, lines 7668-7697) for (2)"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -13,9 +13,102 @@
   "def-weil-unramified-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1), finite type.* Let $f:X\\to S$ be unramified and $g:S'\\to S$ a morphism; write $X'=X\\times_SS'$ and $f':X'\\to S'$ for the second projection [def-pc-fibre-product]. By [def-weil-unramified-morphism], $f$ is locally of finite type, so $f'$ is locally of finite type by [lem-weil-pbc-lft-base-change].",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "*(1), formally unramified.* Since $f$ is unramified it is formally unramified by [lem-weil-pbc-unramified-formally-unramified] [def-weil-pbc-formally-unramified-morphism], and hence its base change $f':X'\\to S'$ is formally unramified by [lem-weil-pbc-formally-unramified-base-change].",
+   "uses": [
+    "lem-weil-pbc-unramified-formally-unramified",
+    "def-weil-pbc-formally-unramified-morphism",
+    "lem-weil-pbc-formally-unramified-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HE (lemma-unramified-formally-unramified), (1) implies (2), and Lemma 02HB (lemma-base-change-formally-unramified)"
+   }
+  },
+  {
+   "text": "*(1), conclusion.* By steps 1 and 2, $f'$ is locally of finite type and formally unramified, so it is unramified by [lem-weil-pbc-lft-formally-unramified-unramified]. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HE, (2) implies (1)"
+   }
+  },
+  {
+   "text": "*(2), finite type.* Let $U\\subseteq X$, $V\\subseteq S$ be open subschemes with $f(U)\\subseteq V$, with inclusions $j:U\\to X$, $k:V\\to S$ (open immersions [def-weil-open-immersion]), and let $f|_U:U\\to V$ be the restriction, the unique morphism with $k\\circ f|_U=f\\circ j$. Let $V'\\subseteq V$ and $U'\\subseteq U$ be affine opens with $f|_U(U')\\subseteq V'$. Then $V'$ and $U'$ are affine opens of $S$ and $X$ with $f(U')\\subseteq V'$, and $\\mathcal O_V(V')=\\mathcal O_S(V')$, $\\mathcal O_U(U')=\\mathcal O_X(U')$ with the same ring map $\\mathcal O_S(V')\\to\\mathcal O_X(U')$ induced by $f$ and by $f|_U$. Since $f$ is locally of finite type [def-weil-unramified-morphism], this ring map is of finite type by [lem-weil-pbc-lft-affine-pairs] (only if); as $U'$, $V'$ were arbitrary, $f|_U$ is locally of finite type by [lem-weil-pbc-lft-affine-pairs] (if).",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01T2 (lemma-locally-finite-type-characterize), final 'Moreover' clause (lines 2690-2692), proved via (1)<=>(2)"
+   }
+  },
+  {
+   "text": "*(2), formally unramified.* $f$ is formally unramified by [lem-weil-pbc-unramified-formally-unramified]. Let $T\\subset T'$ be a first order thickening of affine schemes over $V$ [def-sbc-first-order-thickening], with closed immersion $i:T\\to T'$ and structure morphism $b:T'\\to V$, let $a:T\\to U$ with $f|_U\\circ a=b\\circ i$, and let $a'_1,a'_2:T'\\to U$ with $f|_U\\circ a'_\\nu=b$ and $a'_\\nu\\circ i=a$ ($\\nu=1,2$). Via $k\\circ b:T'\\to S$ the same $T\\subset T'$ is a first order thickening of affine schemes over $S$; the morphism $j\\circ a:T\\to X$ is over $S$ ($f\\circ j\\circ a=k\\circ f|_U\\circ a=k\\circ b\\circ i$), and $j\\circ a'_1$, $j\\circ a'_2$ are morphisms $T'\\to X$ over $S$ ($f\\circ j\\circ a'_\\nu=k\\circ f|_U\\circ a'_\\nu=k\\circ b$) with $(j\\circ a'_\\nu)\\circ i=j\\circ a$. By the definition of formally unramified [def-weil-pbc-formally-unramified-morphism] applied to $f$, $j\\circ a'_1=j\\circ a'_2$, and since the open immersion $j$ is a monomorphism [lem-weil-pbc-open-immersion-monomorphism], $a'_1=a'_2$. So $f|_U:U\\to V$ is formally unramified [def-weil-pbc-formally-unramified-morphism].",
+   "uses": [
+    "lem-weil-pbc-unramified-formally-unramified",
+    "def-sbc-first-order-thickening",
+    "def-weil-pbc-formally-unramified-morphism",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Definition 02H8 (definition-formally-unramified, line 798); argument written by the agent (Stacks proves the restriction clause of 02G6 through the locality of unramified ring maps instead)"
+   }
+  },
+  {
+   "text": "*(2), conclusion.* By steps 4 and 5, $f|_U:U\\to V$ is locally of finite type and formally unramified, hence unramified by [lem-weil-pbc-lft-formally-unramified-unramified]. This proves (2).",
+   "uses": [
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HE, (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-unramified-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-unramified-formally-unramified",
+  "def-weil-pbc-formally-unramified-morphism",
+  "lem-weil-pbc-formally-unramified-base-change",
+  "lem-weil-pbc-lft-formally-unramified-unramified",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Written by the agent along More on Morphisms, Lemma 02HE (unramified = locally of finite type + formally unramified), Lemma 02HB and Definition 02H8, because the DAG defines unramified by the open-immersion diagonal (Morphisms 02GE); Stacks' own proofs of Morphisms 02GA and 02G6 (morphisms.tex lines 7691-7697, 7724-7730) go through the locality and base change of unramified ring maps (morphisms.tex lemma-locally-P, lemma-base-change-type-P and Algebra, lemma-unramified), which the DAG does not carry"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +130,17 @@
    "results": "No direct scheme-level theorem combining base-change and open-restriction stability.",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class.*Unramified' Mathlib/AlgebraicGeometry Mathlib/RingTheory; grep -rn 'IsStableUnderBaseChange.*diagonal' Mathlib/CategoryTheory/MorphismProperty/Limits.lean; FormallyUnramified.lean instances",
+   "results": "no scheme-level Unramified class (only Algebra.Unramified, RingTheory/Unramified/Basic.lean:358); the item is a combination: LocallyOfFiniteType base change (FiniteType.lean:80), FormallyUnramified base change (FormallyUnramified.lean:120) and isOpenImmersion_diagonal (:126); alternatively MorphismProperty.IsStableUnderBaseChange.diagonal (CategoryTheory/MorphismProperty/Limits.lean:840) for the diagonal; for (2) the IsZariskiLocalAtSource/Target instances of HasRingHomProperty",
+   "date": "2026-10-10",
+   "verdict": "no single declaration per clause; split into existing leaves and one new leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +160,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-base-change-open",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Morphisms 02GA (morphisms.tex 7717-7730) and the final clause of 02G6 (7668-7697): correct, unchanged; the source place's line numbers corrected. Proof in six steps through the formally-unramified characterization (More on Morphisms 02HE), matching the DAG definition of unramified (lft + open-immersion diagonal, Morphisms 02GE): (1) lft and formal unramifiedness pass to base changes (existing leaves lem-weil-pbc-lft-base-change, lem-weil-pbc-unramified-formally-unramified, lem-weil-pbc-formally-unramified-base-change); (2) lft of the restriction from lem-weil-pbc-lft-affine-pairs (01T2), formal unramifiedness of the restriction directly from Definition 02H8 and the monomorphism property of open immersions. One new Mathlib leaf lem-weil-pbc-lft-formally-unramified-unramified (02HE (2)=>(1); FormallyUnramified.isOpenImmersion_diagonal, FormallyUnramified.lean:126). No Lean in the source repository; no candidates."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps via the 02HE route (lft + formally unramified => unramified; new Mathlib leaf FormallyUnramified.isOpenImmersion_diagonal, FormallyUnramified.lean:126, verified) instead of Stacks' ring-map locality: lft base change (existing leaf), formally unramified by 02HE and its base change (02HB leaf), conclusion; lft of the restriction by the affine-pairs leaf, formally unramified of the restriction directly from the definition with open immersions monomorphisms, conclusion. Statement unchanged (source lines corrected). Mathlib has no scheme-level unramified class, so the item is not a leaf."
+ }
 }

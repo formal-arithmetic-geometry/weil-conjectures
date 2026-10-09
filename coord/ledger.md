@@ -542,3 +542,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:10 UTC (2026-10-09) — Reviewed and committed popescu-reduce-to-field (07F5; 7 new unsplit nodes).
 - 2026-10-10, delivery of F1: lem-weil-pbc-jacobi-zariski-quotient-smooth returned (c9e81f2fe): Not acceptable as delivered. (a) Four of the five new nodes have status unsplit but carry proof steps ('step 1 ...' in jacobi-zariski-differential-maps, -homolo
 - 22:11 UTC (2026-10-09) — Returned F1 jacobi-zariski-quotient-smooth (head c9e81f2f; unsplit nodes with proof steps, plain-prose statements, missing line). Deleted the stale re-pushed branch deliver/E1/lem-weil-pbc-dimension-at-point-open-subspace (008d27bf; the item was merged at 22:09, the branch was behind sheaf-dag). Launched a worker on unramified-fibre-point-isolated (02GF/02G8).
+- 22:12 UTC (2026-10-09) — Reviewed and committed unramified-base-change-open (02GA/02G6; 1 new Mathlib leaf).
