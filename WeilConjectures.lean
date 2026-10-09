@@ -1122,6 +1122,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
