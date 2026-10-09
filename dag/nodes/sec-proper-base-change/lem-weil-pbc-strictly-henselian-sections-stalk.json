@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-strictly-henselian-sections-stalk",
+ "kind": "statement",
+ "title": "Global sections over a strictly henselian local scheme are the stalk at the closed point",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a strictly henselian local ring [def-weil-pbc-henselian-terminology], $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum] with closed point $s$, and let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point lying over $s$ [def-weil-geometric-point] ($\\Omega$ any algebraically closed field with a map $\\kappa\\to\\Omega$). For every abelian sheaf $F$ on $S_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] the germ map $F(S)\\to F_{\\bar s}$, $a\\mapsto a_{\\bar s}$, sending a global section to its class at the pointed etale neighbourhood $(S,\\bar s)$ in the stalk of [def-weil-pbc-geometric-stalks], is an isomorphism of abelian groups, natural in $F$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), the statement Gamma(S,F) = F_sbar and its proof: for a pointed etale neighbourhood (U,ubar) of sbar and an affine open Spec A of U containing the image u of ubar, R -> A is etale and kappa(u) = kappa(s) (kappa(u) is finite separable over the separably closed kappa(s)); by Theorem Tag 04GG (theorem-henselian in etale-cohomology.tex, condition (8)/(10)) A = R x A' compatibly with the maps to the residue field, giving a section S -> U through ubar; hence (S,sbar) is cofinal (initial among neighbourhoods, as an index of the colimit) and the germ map is bijective. The proof works verbatim for any algebraically closed Omega over kappa, since the section sends sbar to ubar (both lie over u and induce the same map kappa(u)=kappa(s) -> Omega). DAG nodes for the section: lem-weil-pbc-henselian-local-root-lifting (i)=>(ii) and lem-weil-pbc-root-lifting-etale-retraction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of a sheaf on the small etale site of Spec of a strictly henselian local ring equal the stalk at the closed geometric point",
+   "results": "AlgebraicGeometry.germ_stalkClosedPointIso_hom, Scheme.germ_stalkClosedPointTo_Spec, StructureSheaf.germ_toOpen, ModuleCat.Tilde.toOpen_germ_apply, stalkClosedPointIso, ΓSpecIso_hom_stalkClosedPointIso_inv (Mathlib.AlgebraicGeometry.Stalk / StructureSheaf / Modules.Tilde)",
+   "date": "2026-10-09",
+   "verdict": "no match: Zariski structure sheaf / quasi-coherent modules only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every etale morphism to the spectrum of a strictly henselian local ring with a point over the closed point has a section",
+   "results": "StandardEtalePair.instFormallyEtaleRing, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.IsEtaleAt, Algebra.Etale.formallyEtale, Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.toAlgebra, Algebra.instEtaleOfIsStandardEtale (Mathlib.RingTheory.Etale.*)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Henselian\\|henselian' Mathlib/AlgebraicGeometry/Sites/ Mathlib/CategoryTheory/Sites/Point/; grep -rln -i 'strictly henselian\\|StrictlyHenselian' Mathlib/ (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none; the etale site files (Sites/Etale.lean, Sites/EtalePoint.lean: pointSmallEtale, isConservativeFamilyOfPoints_pointSmallEtale') never mention henselian rings",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-sections-stalks",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

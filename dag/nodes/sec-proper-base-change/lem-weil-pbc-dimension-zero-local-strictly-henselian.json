@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-dimension-zero-local-strictly-henselian",
+ "kind": "statement",
+ "title": "A local ring with a single prime ideal and separably closed residue field is strictly henselian",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring whose only prime ideal is $\\mathfrak m$ (a local ring of Krull dimension $0$, e.g. an Artinian local ring), and suppose that the residue field $\\kappa=R/\\mathfrak m$ is separably closed [def-pc-separably-closed]. Then $R$ is strictly henselian in the sense of [def-weil-pbc-henselian-terminology]: for every finite $R$-algebra $B$ every idempotent of $B/\\mathfrak mB$ lifts uniquely to an idempotent of $B$, and $\\kappa$ is separably closed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 06RS (lemma-local-dimension-zero-henselian: local rings of dimension zero are henselian) and its proof: for R -> S finite, S has finitely many primes, all over m (Lemma Tag 05DR, lemma-finite-finite-fibres), no inclusions among them (Lemma Tag 00GT, lemma-integral-no-inclusion), so all maximal; their intersection is the nilradical (lemma-Zariski-topology), so S is the product of its localizations (Lemma Tag 00JA, lemma-product-local); a product of local rings lifts idempotents (Lemma Tag 04GG (10)=>(1), done in lem-weil-pbc-henselian-local-root-lifting step 5). The strict part is the hypothesis on kappa (Definition Tag 04GF)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-separably-closed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a local ring of Krull dimension zero (Artinian local ring) is a henselian local ring",
+   "results": "HenselianLocalRing, HenselianLocalRing.TFAE, instHenselianRingMaximalIdeal, HenselianLocalRing.toIsLocalRing, HenselianRing, HenselianLocalRing.mk, HenselianRing.mk (Mathlib.RingTheory.Henselian), isArtinianRing_iff_krullDimLE_zero (Mathlib.RingTheory.HopkinsLevitzki)",
+   "date": "2026-10-09",
+   "verdict": "no match: the notion exists (root-lifting form), no instance for dimension zero / Artinian"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artinian local ring is henselian; local ring of dimension zero is henselian",
+   "results": "HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, isArtinianRing_iff_isNilpotent_maximalIdeal (HopkinsLevitzki), IsArtinianRing.isField_of_isReduced_of_isLocalRing, Field.henselian, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient",
+   "date": "2026-10-09",
+   "verdict": "no match (only fields are henselian by instance; Field.henselian is the reduced case)"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing",
+   "results": "HenselianLocalRing, Field.henselian, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing.is_henselian, HenselianLocalRing.mk, HenselianLocalRing.TFAE (Mathlib.RingTheory.Henselian): 7 declarations in all",
+   "date": "2026-10-09",
+   "verdict": "no match: no producer of HenselianLocalRing for dimension zero"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|theorem' Mathlib/RingTheory/Henselian.lean; grep -rln Henselian Mathlib | xargs grep -ln 'KrullDimLE\\|IsArtinianRing\\|IsNilpotent (maximalIdeal'; grep -rn 'instance.*IsAdicComplete\\|IsAdicComplete.*Nilpotent' Mathlib",
+   "results": "Henselian.lean: Field.henselian, HenselianLocalRing.TFAE, IsAdicComplete.henselianRing (line 170: I-adically complete => henselian at I); no file combines Henselian with KrullDimLE/IsArtinianRing; IsAdicComplete instances only for bot, subsingleton, PowerSeries, Witt vectors, Z_p, completions of Noetherian local rings (AdicCompletion/LocalRing.lean:127) -- none for a nilpotent maximal ideal",
+   "date": "2026-10-09",
+   "verdict": "no match; route via IsAdicComplete.henselianRing would need 'nilpotent ideal => IsAdicComplete', also absent, and gives the root-lifting form, not the idempotent definition of def-weil-pbc-henselian-terminology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-sections-stalks",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
