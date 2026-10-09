@@ -211,7 +211,8 @@ instance (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     (WeilComplex.derivedLowerShriek k₀ l f).IsTriangulated :=
   ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 

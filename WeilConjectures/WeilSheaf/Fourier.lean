@@ -1171,6 +1171,7 @@ end Constituent
 section Fourier
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (k₀ l X) in
 /-- The internal hom `B ↦ [A, B]` out of a fixed pro-étale Weil sheaf, as a functor. -/
@@ -1205,7 +1206,7 @@ instance (A : ProEtaleWeilSheaf k₀ l X) :
     preservesFiniteLimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
   exact preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
 
-omit [Fact (ringChar k₀ ≠ l)] in
+omit [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The internal hom out of a pro-étale Weil sheaf with lisse underlying sheaf is exact
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.preservesFiniteColimits_ihom`). -/
 theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilSheaf k₀ l X)
@@ -1216,6 +1217,7 @@ theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilS
     preservesFiniteColimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
   exact preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
 `[F, -]` on pro-étale Weil sheaves gives a Weil complex: `[F, -]` is exact
@@ -1297,6 +1299,12 @@ noncomputable def affinePlane : Scheme.{u} :=
 
 noncomputable instance : (affinePlane k₀).Over (Spec (CommRingCat.of k₀)) :=
   ⟨pullback.fst _ _ ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀)⟩
+
+instance : LocallyOfFiniteType (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) := by
+  have : LocallyOfFiniteType (pullback.fst (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀))) :=
+    MorphismProperty.pullback_fst _ _ inferInstance
+  exact inferInstanceAs (LocallyOfFiniteType (pullback.fst _ _ ≫ _))
 
 variable (k₀) in
 /-- The first projection `pr₁ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. -/

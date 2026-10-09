@@ -170,6 +170,18 @@ noncomputable def boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carri
     (s : ↥((Set.range j.base)ᶜ)) : Module.End (PadicAlgCl l) (D.boundaryStalk l ρ s) :=
   (ρ (D.residueFrobenius s)).restrict fun _ ↦ D.residueFrobenius_mem_boundaryStalk l ρ s
 
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- **The residue Frobenius is independent of the lift.** Any element of `F_s I_s` acts on the
+boundary stalk `V ^ (I_s)` as the residue Frobenius lift `F_s` does. -/
+theorem apply_eq_boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    (s : ↥((Set.range j.base)ᶜ)) {g : WU.carrier} (hg : (D.residueFrobenius s)⁻¹ * g ∈ D.inertia s)
+    (v : D.boundaryStalk l ρ s) : ρ g v = D.boundaryFrobenius l ρ s v := by
+  have hv : ρ ((D.residueFrobenius s)⁻¹ * g) v = v :=
+    (Representation.mem_invariants _ _).1 v.2 ⟨_, hg⟩
+  calc ρ g v = ρ (D.residueFrobenius s) (ρ ((D.residueFrobenius s)⁻¹ * g) v) := by
+        rw [← Module.End.mul_apply, ← map_mul, mul_inv_cancel_left]
+    _ = D.boundaryFrobenius l ρ s v := by rw [hv]; rfl
+
 /-- A lisse Weil sheaf on `C₀` restricts to a lisse Weil sheaf on `U₀`: the geometric part of
 `W(U₀)` maps continuously into that of `W(C₀)`. -/
 theorem isLisse_comp_restrict {ρ : Representation (PadicAlgCl l) WC.carrier V}

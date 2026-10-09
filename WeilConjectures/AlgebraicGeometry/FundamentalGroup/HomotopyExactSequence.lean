@@ -531,21 +531,13 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} (p : C ⟶ Spec (.of
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- **Exactness in the middle of the homotopy exact sequence**: an element of `π₁(C₀, s)` acting
-trivially on the geometric fibres of the constant covers lies in the image of
-`π₁(C₀ ×_K K̄, t)`. A point `u` of the geometric fibre of a finite étale `C₀`-scheme `U` which is
-fixed by this image corresponds to a section over `C₀ ×_K K̄` of the base change of `U`; it descends
-to a morphism `C₀ ×_K Spec L ⟶ U` from a constant cover, through which `u` comes from a point of
-the geometric fibre of the constant cover, fixed by `g`. -/
-theorem mem_range_fundamentalGroupMap_of_mem_weilGroup [GeometricallyConnected p] (g : G)
-    (hg : (g, (1 : Multiplicative ℤ)) ∈ weilGroup p s G) :
-    g ∈ (fundamentalGroupMap τ G' G).range := by
-  have : T2Space G := (toAutHomeo (fiber s) G).isEmbedding.t2Space
-  have : ∀ P, ContinuousSMul G' ((fiber t).obj P) := fun P ↦ IsFundamentalGroup.continuous_smul P
-  have hcl : IsClosed ((fundamentalGroupMap τ G' G).range : Set G) := by
-    rw [MonoidHom.coe_range]
-    exact (isCompact_range (continuous_fundamentalGroupMap τ G' G)).isClosed
-  refine mem_of_forall_smul_eq_self s G _ hcl g fun U u hu ↦ ?_
+/-- A point `u` of a geometric fibre fixed by the image of the geometric fundamental group comes
+from a point of the geometric fibre of a constant cover: the corresponding point over the geometric
+fibre is fixed by `π₁`, hence lies on a section, which descends to a constant cover. -/
+theorem exists_constantCover_fiber_map_eq (U : C.FiniteEtale) (u : (fiber s).obj U)
+    (hu : ∀ k ∈ (fundamentalGroupMap τ G' G).range, k • u = u) :
+    ∃ (L : FiniteSubfield K) (ψ : constantCover p L.toFiniteEtaleAlgebra ⟶ U)
+      (v : (fiber s).obj (constantCover p L.toFiniteEtaleAlgebra)), (fiber s).map ψ v = u := by
   -- the point of the fibre over the geometric fibre corresponding to `u` is fixed by `π₁`
   let z : (fiber t).obj ((pullback p.geometricFiberProj).obj U) := τ.inv.app U u
   have hτz : τ.hom.app U z = u := ConcreteCategory.congr_hom (τ.inv_hom_id_app U) u
@@ -592,10 +584,28 @@ theorem mem_range_fundamentalGroupMap_of_mem_weilGroup [GeometricallyConnected p
   have hu' : u = (fiber s).map ψ (τ.hom.app _ zV) := by
     rw [← hτz, ← hzV]
     exact (ConcreteCategory.congr_hom (τ.hom.naturality ψ) zV)
-  have hfix : g • τ.hom.app _ zV = τ.hom.app _ zV := by
-    rw [(mem_weilGroup_iff p s G).1 hg A]
+  exact ⟨L, ψ, _, hu'.symm⟩
+
+/-- **Exactness in the middle of the homotopy exact sequence**: an element of `π₁(C₀, s)` acting
+trivially on the geometric fibres of the constant covers lies in the image of
+`π₁(C₀ ×_K K̄, t)`. A point `u` of the geometric fibre of a finite étale `C₀`-scheme `U` which is
+fixed by this image corresponds to a section over `C₀ ×_K K̄` of the base change of `U`; it descends
+to a morphism `C₀ ×_K Spec L ⟶ U` from a constant cover, through which `u` comes from a point of
+the geometric fibre of the constant cover, fixed by `g`. -/
+theorem mem_range_fundamentalGroupMap_of_mem_weilGroup [GeometricallyConnected p] (g : G)
+    (hg : (g, (1 : Multiplicative ℤ)) ∈ weilGroup p s G) :
+    g ∈ (fundamentalGroupMap τ G' G).range := by
+  have : T2Space G := (toAutHomeo (fiber s) G).isEmbedding.t2Space
+  have : ∀ P, ContinuousSMul G' ((fiber t).obj P) := fun P ↦ IsFundamentalGroup.continuous_smul P
+  have hcl : IsClosed ((fundamentalGroupMap τ G' G).range : Set G) := by
+    rw [MonoidHom.coe_range]
+    exact (isCompact_range (continuous_fundamentalGroupMap τ G' G)).isClosed
+  refine mem_of_forall_smul_eq_self s G _ hcl g fun U u hu ↦ ?_
+  obtain ⟨L, ψ, v, rfl⟩ := exists_constantCover_fiber_map_eq p τ G' G U u hu
+  have hfix : g • v = v := by
+    rw [(mem_weilGroup_iff p s G).1 hg L.toFiniteEtaleAlgebra]
     rfl
-  rw [hu', ← IsNaturalSMul.naturality, hfix]
+  rw [← IsNaturalSMul.naturality, hfix]
 
 end Exact
 
