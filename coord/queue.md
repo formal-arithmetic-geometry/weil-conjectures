@@ -1,8 +1,8 @@
 # Work queue
 
-589 items; claim with `tools/claim.py next <group> [--stage N]`.
+591 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (548)
+## Stage 1: nodes to split (546)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,17 +30,11 @@
 | `lem-weil-pbc-henselian-pair-approximation` | 1008 | none |
 | `lem-weil-pbc-henselization-colimit` | 1008 | none |
 | `lem-weil-pbc-henselization-pair-g-ring` | 1008 | none |
-| `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1008 | none |
 | `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
-| `lem-weil-pbc-effaceable-delta-functor-universal` | 1009 | none |
-| `lem-weil-pbc-etale-colimit-normal-local-domain` | 1009 | none |
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1009 | none |
-| `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1009 | none |
-| `lem-weil-pbc-lift-coprime-factorization-etale` | 1009 | none |
-| `lem-weil-pbc-power-series-onto-completion` | 1009 | none |
 | `lem-weil-pbc-proper-closed-in-proper-fp` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1009 | none |
@@ -50,6 +44,10 @@
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lem-weil-pbc-thickening-integral` | 1009 | none |
 | `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
+| `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
+| `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
+| `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1010 | none |
+| `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -555,7 +553,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (41)
+## Stage 2: nodes to state (45)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -574,17 +572,21 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
+| `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-geometric-point-lift` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
+| `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
+| `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
+| `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
@@ -601,7 +603,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 559 nodes that wait for stage 1, 225 nodes that wait for a statement dependency.
+Not open yet: 557 nodes that wait for stage 1, 228 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
