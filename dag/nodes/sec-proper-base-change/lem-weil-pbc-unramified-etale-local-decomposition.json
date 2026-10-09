@@ -2,10 +2,10 @@
  "id": "lem-weil-pbc-unramified-etale-local-decomposition",
  "kind": "statement",
  "title": "A separated morphism unramified at the points of a fibre is etale locally a closed-immersion decomposition near them",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is separated [def-weil-proper-morphism], let $s\\in S$, and let $x_1,\\ldots,x_n\\in X$ ($n\\ge0$) be points with $f(x_i)=s$ such that $f$ is unramified at each $x_i$: every $x_i$ has an open neighbourhood $X_i\\subseteq X$ such that $f|_{X_i}:X_i\\to S$ is unramified [def-weil-unramified-morphism]. Then there are an etale morphism $g:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $g(u)=s$, and a decomposition of the fibre product $X_U=X\\times_SU$ [def-pc-fibre-product] into pairwise disjoint open and closed subschemes $X_U=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$ (integers $m_i\\ge0$; $W$ and the $V_{i,j}$ open subschemes of $X_U$, pairwise disjoint, covering $X_U$), such that (1) for all $i,j$ the composite $V_{i,j}\\hookrightarrow X_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion [def-weil-closed-immersion] whose image contains $u$; (2) no point of $W$ lying over $u\\in U$ maps under $\\mathrm{pr}_1:X_U\\to X$ to any of $x_1,\\ldots,x_n$. In particular, if $f^{-1}(\\{s\\})=\\{x_1,\\ldots,x_n\\}$, then no point of $W$ lies over $u$.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is separated [def-weil-proper-morphism], let $s\\in S$, and let $x_1,\\ldots,x_n\\in X$ ($n\\ge0$) be points with $f(x_i)=s$ such that $f$ is unramified at each $x_i$: every $x_i$ has an open neighbourhood $X_i\\subseteq X$ such that $f|_{X_i}:X_i\\to S$ is unramified [def-weil-unramified-morphism]. Then there are an etale morphism $g:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $g(u)=s$, and a decomposition of the fibre product $X_U=X\\times_SU$ [def-pc-fibre-product] into pairwise disjoint open and closed subschemes $X_U=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$ (integers $m_i\\ge0$; $W$ and the $V_{i,j}$ open subschemes of $X_U$, pairwise disjoint, covering $X_U$), such that (1) for all $i,j$ the composite $V_{i,j}\\hookrightarrow X_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion [def-weil-closed-immersion] whose image contains $u$; (2) no point of $W$ lying over $u\\in U$ maps under $\\mathrm{pr}_1:X_U\\to X$ to any of $x_1,\\ldots,x_n$. In particular, if $f^{-1}(\\{s\\})=\\{x_1,\\ldots,x_n\\}$, then no point of $W$ lies over $u$. (Stacks Project, Tag [04HI].)",
  "source": {
   "document": "literature/stacks-project/etale.tex",
-  "place": "Stacks Etale Morphisms, Lemma 04HI (lemma-unramified-etale-local-technical, line 1722); proof from Lemma 04HH (lemma-unramified-etale-local, line 1693), Morphisms Lemma 01W6 (lemma-image-proper-scheme-closed); 04HH itself from More on Morphisms Lemma 02LM (lemma-etale-makes-quasi-finite-finite-multiple-points-var) and Lemma 04DG (lemma-finite-unramified-one-point)"
+  "place": "Stacks Etale Morphisms, Lemma 04HI (lemma-unramified-etale-local-technical, proof at lines 1722-1749), using 02LM and 04DG"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -15,48 +15,117 @@
   "def-pc-fibre-product",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose unramified open neighbourhoods $X_i$ of the listed points and replace them by their finite union $X^\\circ=\\bigcup_iX_i$; the restriction $X^\\circ\\to S$ is locally of finite type and unramified at every $x_i$. Apply [lem-weil-pbc-unramified-fibre-point-isolated] and then [lem-weil-pbc-etale-local-finite-multiple-points] to $X^\\circ\\to S$. This gives an etale neighbourhood and finitely many open pieces $V_{i,j}\\subseteq X^\\circ\\times_SU$, finite over the neighbourhood, with the required points and exclusions; their inclusions into $X\\times_SU$ are open. The fact that the restriction remains unramified and that the base-changed morphism is unramified is exactly [lem-weil-pbc-unramified-base-change-open] (Stacks Tags 02G6 and 02GA), applied to the defining unramified neighbourhoods and to $X^\\circ\\to S$.",
+   "uses": [
+    "lem-weil-pbc-unramified-fibre-point-isolated",
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-base-change-open",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1702-1714, using More on Morphisms Lemma 02LM"
+   }
+  },
+  {
+   "text": "Shrink the etale neighbourhood to an affine open and use [lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-unramified-base-change-open], each $V_{i,j}\\to U$ is still unramified after the base changes and open restrictions. Apply [lem-weil-pbc-finite-unramified-one-point-closed] to each finite unramified piece and intersect the finitely many resulting neighbourhoods. Whenever the base is shrunk from $U$ to an open $U'$, replace every piece by the actual base change $V'_{i,j}:=V_{i,j}\\times_UU'$; [lem-weil-pbc-open-fibre-product] identifies $V'_{i,j}$ with the corresponding inverse-image open in $X\\times_SU'$. The resulting pieces are closed immersions through the chosen point.",
+   "uses": [
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1711-1714, and Schemes Lemma 01JR"
+   }
+  },
+  {
+   "text": "The base change of X to U is separated. Each closed immersion piece into U is proper, so [lem-weil-pbc-proper-over-separated] makes its map to the base-changed X proper and therefore closed. Pairwise intersections are closed and have closed images in U; the exclusion clause from [lem-weil-pbc-etale-local-finite-multiple-points] says those images avoid the chosen point.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1737-1745; Morphisms Lemma 01W6"
+   }
+  },
+  {
+   "text": "Delete the finite union of those closed images from U and again replace every V by its base change along this open, using [lem-weil-pbc-open-fibre-product]. The pieces are now pairwise disjoint. Their finite union is open and closed, so its open-and-closed complement W gives the asserted decomposition and the exclusion over the chosen point.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1743-1749"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-fibre-point-isolated",
+  "lem-weil-pbc-etale-local-finite-multiple-points",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-base-change-open",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, Lemma 04HI, proof at lines 1737-1749"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "unramified separated morphism of schemes etale locally near a point decomposes as disjoint union of closed immersions and a remainder",
-   "results": "FormallyUnramified.recOn/casesOn (Morphisms.FormallyUnramified), IsSeparated, isSeparated_iff, IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, Scheme.isSeparated_iff_isClosedImmersion_prod_lift (Morphisms.Separated), IsEtale (Morphisms.Etale)",
+   "results": "No scheme-level decomposition theorem found; only generic IsEtale, FormallyUnramified, and IsSeparated APIs.",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "unramified morphism étale locally on the base is a disjoint union of closed immersions near the points of a fibre",
-   "results": "IsEtale.instFormallyUnramified, IsEtale.of_comp, IsEtale.instHasOfPostcompProperty..., IsEtale, Scheme.Etale (Morphisms.Etale), Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus (RingTheory.Etale.Locus), FormallyUnramified, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "query": "unramified morphism etale locally on the base is a disjoint union of closed immersions near the points of a fibre",
+   "results": "No matching scheme-level theorem.",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsClosedImmersion",
-   "results": "AlgebraicGeometry.FormallyUnramified.hom_ext (Morphisms.FormallyUnramified) only",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Etale",
-   "results": "none",
+   "results": "Only generic FormallyUnramified hom_ext result.",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn '04HI\\|04HH\\|04HJ\\|04DG\\|02LM' over ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln FormallyUnramified Mathlib/AlgebraicGeometry",
-   "results": "no tag hit; FormallyUnramified occurs only in Morphisms/FormallyUnramified.lean, Etale.lean, LocalFlatDescent.lean (definition, diagonal criterion, etale => formally unramified); algebra-level ingredients only: Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (@[stacks 00UL], RingTheory/Etale/QuasiFinite.lean:613), RingTheory/Unramified/LocalStructure.lean",
+   "query": "FormallyUnramified IsClosedImmersion fibre",
+   "results": "No direct theorem in mathlib.",
    "date": "2026-10-10",
-   "verdict": "no match (no scheme-level statement)"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,10 +146,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-etale-local-decomposition",
+  "worker": "stage1",
+  "summary": "Repaired the 04HI split with self-contained TeX child statements citing all scheme, fibre, finite type, etale, finite, unramified, closed-immersion, residue-field, and purely-inseparable notions. The child sources and exact Stacks tags are 02LM, 04DG, and 02G8/02GF (with 02V5 for quasi-finiteness). The parent names the defining-node stability argument and explicitly replaces each V by its base change after shrinking U, using 01JR."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Etale Morphisms 04HI (etale.tex:1718); self-contained; correct; unsplit."
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Second delivery: four steps along the proof of Stacks 04HI with four new unsplit nodes carrying exact tags (02LM multiple-points version, verified distinct from the finite-unramified node lem-weil-pbc-finite-unramified-etale-local; 04DG; 02GA+02G6; 02GF/02G8/02V5), all tags checked by L in tags/tags. Accepted by L."
  }
 }
