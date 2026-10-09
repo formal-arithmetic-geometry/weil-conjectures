@@ -2,15 +2,65 @@
  "id": "def-weil-pbc-strictly-standard-element",
  "kind": "definition",
  "title": "Elementary standard and strictly standard elements",
- "statement": "Let $R\\to A$ be a ring map of finite presentation and $a\\in A$. For a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ (an isomorphism of $R$-algebras, $f_j\\in R[x_1,\\dots,x_n]$), write $\\partial f_j/\\partial x_i$ for the formal partial derivatives and also for their images in $A$. (1) $a$ is *elementary standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and an integer $0\\le c\\le\\min(n,m)$ such that $a=a'\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ in $A$ for some $a'\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$ (here $a$ stands for any lift of $a$ to $R[x_1,\\dots,x_n]$; the condition does not depend on the lift since $(f_1,\\dots,f_m)\\cdot f_{c+j}\\subset(f_1,\\dots,f_m)^2$). (2) $a$ is *strictly standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and $0\\le c\\le\\min(n,m)$ such that $a=\\sum_{I\\subset\\{1,\\dots,n\\},\\,|I|=c}a_I\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}$ in $A$ for some $a_I\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$.",
+ "statement": "Let $R\\to A$ be a ring map of finite presentation [def-weil-pbc-finitely-presented-algebra] and $a\\in A$. For a presentation [def-weil-pbc-finitely-presented-algebra] $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ (an isomorphism of $R$-algebras, $f_j\\in R[x_1,\\dots,x_n]$), write $\\partial f_j/\\partial x_i$ for the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative] and also for their images in $A$. (1) $a$ is *elementary standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and an integer $0\\le c\\le\\min(n,m)$ such that $a=a'\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ in $A$ for some $a'\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$ (here $a$ stands for any lift of $a$ to $R[x_1,\\dots,x_n]$; the condition does not depend on the lift since $(f_1,\\dots,f_m)\\cdot f_{c+j}\\subset(f_1,\\dots,f_m)^2$). (2) $a$ is *strictly standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and $0\\le c\\le\\min(n,m)$ such that $a=\\sum_{I\\subset\\{1,\\dots,n\\},\\,|I|=c}a_I\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}$ in $A$ for some $a_I\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$.",
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Smoothing Ring Maps, Definition Tag 07C7 (definition-strictly-standard, line 192), equations (equation-elementary-standard-one/two) and (equation-strictly-standard-one/two); comparison of the notions in Lemma Tag 07EZ (lemma-compare-standard)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "(The ingredients are defined in $A$.) Since $R\\to A$ is of finite presentation, presentations $\\pi:R[x_1,\\dots,x_n]\\to R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)\\cong A$ exist [def-weil-pbc-finitely-presented-algebra], so the existential conditions range over a nonempty set of data. Fix one, with $P=R[x_1,\\dots,x_n]$ and $\\pi:P\\to A$ the surjective $R$-algebra map with kernel $I=(f_1,\\dots,f_m)$. Each $\\partial f_j/\\partial x_i\\in P$ is defined [def-weil-pbc-polynomial-partial-derivative], so its image $\\pi(\\partial f_j/\\partial x_i)\\in A$ is defined. As $0\\le c\\le\\min(n,m)$, the indices $j\\le c$ are among $1,\\dots,m$ and $i\\le c$ among $1,\\dots,n$, so the $c\\times c$ matrix $(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ is defined, and for every subset $I\\subset\\{1,\\dots,n\\}$ with $|I|=c$ (there are $\\binom nc\\ge1$ of them) the $c\\times c$ matrix with rows $j=1,\\dots,c$ and columns $i\\in I$ (in increasing order) is defined. The determinant is a polynomial with integer coefficients in the entries and $\\pi$ is a ring homomorphism, so the determinant of the matrix of images in $A$ equals $\\pi$ of the determinant computed in $P$: it does not matter whether the determinants in (07C7 (1)) and (07C7 (2)) are formed in $P$ and then mapped to $A$, or formed from the images. Hence $a=a'\\det(\\dots)$ and $a=\\sum_I a_I\\det(\\dots)$ are equations between elements of $A$, with $a',a_I\\in A$. For $c=0$ the empty determinant is $1$, the only $I$ is $\\emptyset$, and the first conditions hold with $a'=a$, resp. $a_\\emptyset=a$; for $c=m$ the second conditions are empty.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Definition Tag 07C7 (definition-strictly-standard), line 192, equations (equation-elementary-standard-one/two), (equation-strictly-standard-one/two)"
+   }
+  },
+  {
+   "text": "(The second condition does not depend on the lift of $a$.) With $P$, $\\pi$, $I=(f_1,\\dots,f_m)$ as in step 1 and $J=(f_1,\\dots,f_c)\\subset P$, the condition $a f_{c+j}\\in J+I^2$ means $h f_{c+j}\\in J+I^2$ for a lift $h\\in P$ of $a$ ($\\pi(h)=a$; one exists since $\\pi$ is surjective). If $h'$ is another lift, then $h-h'\\in\\ker\\pi=I$ and $f_{c+j}\\in I$, so $(h-h')f_{c+j}\\in I^2\\subset J+I^2$; hence $h f_{c+j}\\in J+I^2$ iff $h' f_{c+j}\\in J+I^2$. So the condition is a property of $a\\in A$ and the presentation, as the statement says. Equivalently, it says that $a$ times the class of $f_{c+j}$ in the $A$-module $I/I^2$ lies in the submodule generated by the classes of $f_1,\\dots,f_c$ ($I/I^2$ is an $A=P/I$-module since $I\\cdot I\\subset I^2$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Definition Tag 07C7 (definition-strictly-standard), line 192, equations (equation-elementary-standard-one/two), (equation-strictly-standard-one/two)"
+   }
+  },
+  {
+   "text": "(The notions are properties of $a$ in the $R$-algebra $A$.) Both definitions are existential: over the data $(n,m,f_1,\\dots,f_m,\\text{an }R\\text{-algebra isomorphism }P/(f_1,\\dots,f_m)\\cong A)$, the integer $c$ and the elements $a'$, resp. $a_I$; no choice is made, and by steps 1 and 2 the conditions are well defined once these data are given. The conditions for a fixed presentation are not claimed to be independent of the presentation; the definition asks for one presentation (the ordering of the $f_j$ and $x_i$ is part of it). If $\\phi:A\\to A'$ is an isomorphism of $R$-algebras, composing a presentation of $A$ with $\\phi$ gives a presentation of $A'$ with the same $f_j$, and $\\phi$ carries the images of $\\partial f_j/\\partial x_i$, $a'$, $a_I$ to those for $A'$; hence $a$ is elementary (resp. strictly) standard in $A$ over $R$ iff $\\phi(a)$ is in $A'$ over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Definition Tag 07C7 (definition-strictly-standard), line 192, equations (equation-elementary-standard-one/two), (equation-strictly-standard-one/two)"
+   }
+  },
+  {
+   "text": "(Elementary standard implies strictly standard; Lemma Tag 07EZ (b), 'clear from Definition 07C7'.) If $a$ is elementary standard, with presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$, integer $c$ and $a'$ with $a=a'\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$, take the same presentation and $c$, $a_{\\{1,\\dots,c\\}}=a'$ and $a_I=0$ for the other $I$: the matrix for $I=\\{1,\\dots,c\\}$ in (2) is the matrix of (1), so the sum in (2) equals $a'\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}=a$; the second condition of (2) is literally the second condition of (1). So $a$ is strictly standard in $A$ over $R$. (Stacks records this as Lemma 07EZ (b) together with the comparison of the notions with smoothness of $A_a$; the other parts of 07EZ are statements about the definition, used by the nodes that need them.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma Tag 07EZ (lemma-compare-standard), part (b) and its proof, line 719"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Definition Tag 07C7 (definition-strictly-standard), line 192; Lemma Tag 07EZ (lemma-compare-standard) (b), line 719; the well-formedness steps 1-3 are written out by the worker from the definition"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -32,10 +82,17 @@
    "results": "only CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean (Gabriel-Popescu embedding, unrelated) and RingTheory/Localization/FractionRing.lean:54 (definition of IsFractionRing); no strictly/elementary standard elements, no statement about filtered colimits of smooth algebras; RingTheory/Smooth/ (Basic, Locus, Pi, NoetherianDescent, StandardSmooth*) read by file list",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 60-140 Mathlib/RingTheory/Extension/Presentation/Submersive.lean (PreSubmersivePresentation, jacobian, jacobiMatrix, jacobiMatrix_apply)",
+   "results": "PreSubmersivePresentation (line 67: a Presentation with an injective map relations -> vars), jacobian (line 118: image in S of det of the differential), jacobiMatrix_apply (pderiv (P.map i) (P.relation j)): the Jacobian determinant of ALL relations w.r.t. the chosen variables; no c x c minor of the first c of m relations, no condition a f_{c+j} in (f_1..f_c)+I^2, no strictly/elementary standard element",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate for the determinant only: the minor for I is PreSubmersivePresentation.jacobian of the presentation with relations f_1..f_c and map j -> i_j, or Matrix.det of a submatrix of MvPolynomial.pderiv entries)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +112,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-strictly-standard-element",
+  "worker": "stage1",
+  "summary": "Checked against Stacks smoothing.tex Definition 07C7 (line 192, equations elementary-standard-one/two, strictly-standard-one/two), the text before it (07C6) and Lemma 07EZ (lemma-compare-standard; tags verified in tags/tags). The statement agrees with the source; only citations were added (statement text changed by the brackets): the ring-level notion of finite presentation and of a presentation (new Mathlib leaf def-weil-pbc-finitely-presented-algebra, Stacks 00F3 (2), Algebra.FinitePresentation) and formal partial derivatives (new Mathlib leaf def-weil-pbc-polynomial-partial-derivative, MvPolynomial.pderiv); the DAG had no ring-level finite-presentation node (def-sbc-locally-finite-presentation is for schemes; def-weil-pbc-smooth-ring-map only contains the clause) and no partial-derivative definition (lem-weil-pbc-polynomial-ring-kahler-basis is a lemma about it). Determinants are elementary. Four elementary well-formedness steps: the conditions are equations in A (determinant of images = image of determinant; edge cases c=0, c=m); the condition a f_{c+j} in (f_1..f_c)+I^2 does not depend on the lift; the notions are existential over presentations and invariant under R-algebra isomorphism (presentation independence is not claimed); elementary standard implies strictly standard (07EZ (b)). Citers checked: popescu-delocalize-base (elementary standard), popescu-desingularize-strictly-standard, popescu-lift-solution, smooth-free-differentials-strictly-standard-power, strictly-standard-base-change, popescu-reduce-to-field step 7 (elementary => strictly, the same argument as step 4): every clause they use is in the statement. Mathlib: no standard elements; PreSubmersivePresentation.jacobian is the Jacobian of all relations, a candidate for the minors only. No Lean in slopmaster2."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition node (Stacks 07C7), four elementary steps: ingredients defined in A, independence of the lift of a, existential over presentations and invariant under isomorphism, elementary standard implies strictly standard (07EZ (b)). Statement: citations for finite presentation and formal partial derivatives added via two new definition leaves (Algebra.FinitePresentation FinitePresentation.lean:44 with .iff :128; MvPolynomial.pderiv PDeriv.lean:61; lines verified); content unchanged. Correct."
+ }
 }

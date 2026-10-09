@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-polynomial-partial-derivative",
+ "kind": "definition",
+ "title": "Formal partial derivatives of polynomials",
+ "statement": "Let $R$ be a commutative ring and $P=R[x_1,\\dots,x_n]$. For $i=1,\\dots,n$ the *formal partial derivative* $\\partial/\\partial x_i:P\\to P$ is the unique $R$-linear map with $\\partial/\\partial x_i(fg)=f\\,\\partial g/\\partial x_i+g\\,\\partial f/\\partial x_i$ (an $R$-derivation of $P$ into $P$) and $\\partial x_j/\\partial x_i=\\delta_{ij}$; explicitly, $\\partial/\\partial x_i(r\\,x_1^{e_1}\\cdots x_n^{e_n})=e_i\\,r\\,x_1^{e_1}\\cdots x_i^{e_i-1}\\cdots x_n^{e_n}$ (zero if $e_i=0$), extended additively.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00RX (lemma-differentials-polynomial-ring), line ~34330: the R-derivation d/dx_i with d/dx_i(x_j)=delta_ij"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "partial derivative of a multivariate polynomial with respect to a variable",
+   "results": "MvPolynomial.pderiv, pderiv_def, pderiv_X, pderiv_X_self, pderiv_monomial, pderiv_X_of_ne (Mathlib.Algebra.MvPolynomial.PDeriv)",
+   "date": "2026-10-10",
+   "verdict": "match: MvPolynomial.pderiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal partial derivative d/dx_i of a polynomial in several variables",
+   "results": "MvPolynomial.pderiv, pderiv_def, pderiv_X, pderiv_X_self (Mathlib.Algebra.MvPolynomial.PDeriv)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv",
+   "results": "MvPolynomial.pderiv, pderiv_X_self, pderiv_X_of_ne, pderiv_def, pderiv_eq_zero_of_notMem_vars (Mathlib.Algebra.MvPolynomial.PDeriv)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def pderiv' Mathlib/",
+   "results": "Mathlib/Algebra/MvPolynomial/PDeriv.lean:61 def pderiv (i : σ) : Derivation R (MvPolynomial σ R) (MvPolynomial σ R) := mkDerivation R (Pi.single i 1); line 69 pderiv_monomial; line 92 pderiv_X (Kronecker delta); Mathlib/RingTheory/MvPowerSeries/Derivative.lean:150 (power series, not used)",
+   "date": "2026-10-10",
+   "verdict": "match (read lines 50-100)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial.pderiv",
+  "file": "Mathlib/Algebra/MvPolynomial/PDeriv.lean",
+  "line": 61,
+  "how": "exact with σ = Fin n: pderiv i is an R-derivation of MvPolynomial σ R with pderiv i (X j) = δ_ij (pderiv_X, line 92) and the monomial formula pderiv_monomial (line 69)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-strictly-standard-element",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
