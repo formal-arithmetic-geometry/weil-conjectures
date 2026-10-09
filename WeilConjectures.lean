@@ -1034,6 +1034,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
+public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
