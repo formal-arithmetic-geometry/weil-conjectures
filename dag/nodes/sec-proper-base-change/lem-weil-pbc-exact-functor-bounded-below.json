@@ -29,6 +29,41 @@
    "results": "only mapHomologicalComplexCompIso (HomotopyCategory.lean:294) and the uses in Abelian/LeftDerived, RightDerived; no isomorphism H^r(F K) = F(H^r K) for exact F on the derived category",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor commutes with homology of complexes: homology of F applied to a complex is F of homology",
+   "results": "Functor.preservesHomology_of_map_exact (CategoryTheory.Abelian.Exact); Functor.PreservesHomology; HomologicalComplex.homologyFunctor; ShortComplex.mapHomologyIso'",
+   "date": "2026-10-09",
+   "verdict": "ingredient only (complex level)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor preserves bounded below derived category, IsGE of mapDerivedCategory",
+   "results": "CategoryTheory.exactFunctor; Functor.mapDerivedCategory; ExactFunctor.of; Abelian.Ext.mapExactFunctor_hom; ShortComplex.Exact.map_of_preservesLeftHomologyOf",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor F between abelian categories, H^n(F K) ≅ F(H^n K) for K in the derived category",
+   "results": "Abelian.Ext.mapExactFunctor_hom; Abelian.Ext.mapExactFunctor; Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; Functor.mapDerivedCategory; mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.homologyFunctor",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def .*homologyFunctorIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology; rg -ln 'IsGE.*mapDerived|mapDerived.*IsGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ShortComplex/PreservesHomology.lean:777 Functor.homologyFunctorIso (F.mapShortComplex ⋙ homologyFunctor ≅ homologyFunctor ⋙ F, short complexes); ShortComplex/HomologicalComplex.lean:511 HomologicalComplex.homologyFunctorIso (homology of a complex via its short complex); nothing for mapDerivedCategory and IsGE",
+   "date": "2026-10-09",
+   "verdict": "no match: the iso H^r(FK) ≅ F(H^r K) on D needs these two plus descent through DerivedCategory.homologyFunctorFactors; stays unsplit"
   }
  ],
  "mathlib_match": null,

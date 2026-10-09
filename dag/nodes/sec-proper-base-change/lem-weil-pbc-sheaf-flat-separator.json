@@ -22,6 +22,34 @@
    "results": "none: Mathlib has no flat objects of a monoidal abelian category and no extension by zero j_{U!} for sheaves on a site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves with values in a Grothendieck abelian category has a separator",
+   "results": "CategoryTheory.Sheaf.hasSeparator, Sheaf.isSeparator, Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); IsGrothendieckAbelian.hasSeparator; Sheaf.isGrothendieckAbelian_of_essentiallySmall; Presheaf.hasSeparator",
+   "date": "2026-10-09",
+   "verdict": "separator half only: Sheaf.hasSeparator gives a separator of Sheaf J A (the coproduct of the Sheaf.freeYoneda J X (S)) from one of A; no flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "object both flat and separator in category of sheaves of modules",
+   "results": "Sheaf.hasSeparator; SheafOfModules.instAbelian; SheafOfModules.hom_ext; SheafOfModules.instCategory; Scheme.Modules",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasSeparator (CategoryTheory.Sheaf _ _)",
+   "results": "CategoryTheory.Sheaf.hasSeparator only",
+   "date": "2026-10-09",
+   "verdict": "no match for the flat-and-separator statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance hasSeparator|def freeYoneda' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator/Sheaf.lean; rg -ln 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal; rg -n 'class .*Flat|def .*Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
+   "results": "Generator/Sheaf.lean:36 freeYoneda, :63 hasSeparator; no notion of a flat object of a monoidal abelian category in Mathlib",
+   "date": "2026-10-09",
+   "verdict": "no match; stays unsplit (Sheaf.hasSeparator is a candidate for the separator half when it is split)"
   }
  ],
  "mathlib_match": null,

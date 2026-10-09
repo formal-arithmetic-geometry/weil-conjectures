@@ -32,6 +32,27 @@
    "results": "lines 36, 45: the bounded below right derived functor and its unit exist; no adjunction with mapDerivedCategory",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image functor on derived categories of sheaves is left adjoint to derived direct image",
+   "results": "TopCat.Sheaf.instIsLeftAdjointPullback; TopCat.Presheaf.pushforwardPullbackAdjunction; Functor.sheafPullback; Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback (all sheaf level, none derived)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction: left derived functor is left adjoint to right derived functor of an adjunction",
+   "results": "CategoryTheory.Adjunction.derived, derived', derivedη, derived_unit, derived_counit (Mathlib.CategoryTheory.Functor.Derived.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "tool, not a match: Adjunction.derived needs G' a left derived and F' a right derived functor that are absolute (instances on G' ⋙ F' and F' ⋙ G'), and Ru_* here is defined by K-injective resolutions, not as Mathlib's rightDerivedFunctorPlus; the node's (1),(2) are its derivedη/derivedε_fac_app only after that identification"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^(noncomputable )?def|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "results": "Adjunction.derived' (:52), derivedη (:96), derivedε (:118), derived (:144); Functor.rightDerivedFunctorPlus (:36), rightDerivedFunctorPlusUnit (:45)",
+   "date": "2026-10-09",
+   "verdict": "no match; stays unsplit"
   }
  ],
  "mathlib_match": null,

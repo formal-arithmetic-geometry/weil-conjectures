@@ -31,12 +31,33 @@
    "results": "Stacks 0145 = derived-definition-triangulated-category, 05QK = derived-section-triangulated-definitions; DAG: def-sp-homological-functor (homological functors of triangulated categories) presupposes the notion; thm-weil-pbc-verdier-axioms lists the four axioms for $\\mathcal P_T$ but does not define the notion; lem-*-triangulated nodes are statements. No definition node of the notion 'triangulated category' exists",
    "date": "2026-10-09",
    "verdict": "no existing node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "triangulated category octahedral axiom class",
+   "results": "IsTriangulated.octahedron_axiom, IsTriangulated.mk', Triangulated.someOctahedron, Triangulated.Octahedron (Mathlib.CategoryTheory.Triangulated.Triangulated)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pretriangulated category: shift functor and distinguished triangles axioms TR1 TR2 TR3",
+   "results": "CategoryTheory.IsTriangulated, IsTriangulated.mk' (…Triangulated.Triangulated); CategoryTheory.Pretriangulated, Pretriangulated.distinguishedTriangles (…Triangulated.Pretriangulated)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 43,90p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; rg -n 'class IsTriangulated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Triangulated.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean; sed -n 560,563p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; sed -n 237,238p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean",
+   "results": "Pretriangulated.lean:43 variables [HasZeroObject C] [HasShift C ℤ] [Preadditive C], :65 `class Pretriangulated` (isomorphic_distinguished, contractible_distinguished, distinguished_cocone_triangle, rotate_distinguished_triangle (iff), complete_distinguished_triangle_morphism), :562 HasBinaryBiproducts instance; Triangulated.lean:305 class IsTriangulated (octahedron); Functor.lean:186 class Functor.IsTriangulated, :237 IsTriangulated → Additive",
+   "date": "2026-10-09",
+   "verdict": "confirmed; how amended to name [HasZeroObject C] (it was missing) and that additivity (binary biproducts) is an instance"
   }
  ],
  "mathlib_match": {
   "declaration": "CategoryTheory.Pretriangulated",
   "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
-  "how": "exact: a pre-triangulated category is `[Preadditive C] [HasShift C ℤ] [∀ n, (shiftFunctor C n).Additive] [Pretriangulated C]` (line 65, TR1-TR3), a triangulated category adds `[IsTriangulated C]` (Mathlib/CategoryTheory/Triangulated/Triangulated.lean:305, TR4); an exact functor is `[F.CommShift ℤ] [F.IsTriangulated]` (Mathlib/CategoryTheory/Triangulated/Functor.lean:186)"
+  "how": "exact: a pre-triangulated category is `[Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n, (shiftFunctor C n).Additive] [Pretriangulated C]` (Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:43 and :65; TR1 = isomorphic_distinguished, contractible_distinguished, distinguished_cocone_triangle; TR2 = rotate_distinguished_triangle, an iff; TR3 = complete_distinguished_triangle_morphism; binary biproducts, hence additivity, are an instance at :562); a triangulated category adds `[IsTriangulated C]` (Mathlib/CategoryTheory/Triangulated/Triangulated.lean:305, TR4); an exact functor is `[F.CommShift ℤ] [F.IsTriangulated]` (Mathlib/CategoryTheory/Triangulated/Functor.lean:186; additive by the instance at :237). The shift [1] is an autoequivalence (HasShift by ℤ) rather than a strict automorphism, the usual reading. [HasZeroObject C] added to this 'how' at the re-check of 2026-10-09"
  },
  "status": "mathlib",
  "merged_into": null,

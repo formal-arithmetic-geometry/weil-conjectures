@@ -18,6 +18,27 @@
    "results": "Topology/Defs/Induced.lean:76 `instance instTopologicalSpaceSubtype {p : X → Prop} [t : TopologicalSpace X] : TopologicalSpace (Subtype p) := induced (↑) t`; a set or an `OpenNhdsOf x` coerced to a type is a subtype and carries this topology",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "subspace topology on a subtype induced by inclusion",
+   "results": "instTopologicalSpaceSubtype (Mathlib.Topology.Defs.Induced); Topology.IsInducing.subtypeVal; Topology.IsEmbedding.subtypeVal; continuous_subtype_val",
+   "date": "2026-10-09",
+   "verdict": "match: instTopologicalSpaceSubtype"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "subspace topology: the induced topology on a subset, open sets are intersections with open sets",
+   "results": "Topology.IsInducing.subtypeVal; instTopologicalSpaceSubtype; IsOpen.preimage_val; IsOpen.isOpenEmbedding_subtypeVal",
+   "date": "2026-10-09",
+   "verdict": "match: instTopologicalSpaceSubtype"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 76,78p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Defs/Induced.lean",
+   "results": "line 76 `instance _root_.instTopologicalSpaceSubtype {p : X → Prop} [t : TopologicalSpace X] : TopologicalSpace (Subtype p) := induced (↑) t`",
+   "date": "2026-10-09",
+   "verdict": "confirmed: the topology induced by Subtype.val, i.e. open sets V ∩ Y with V open (coarsest topology making the inclusion continuous)"
   }
  ],
  "mathlib_match": {

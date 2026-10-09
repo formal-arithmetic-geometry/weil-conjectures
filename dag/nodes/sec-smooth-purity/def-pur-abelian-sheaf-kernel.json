@@ -18,6 +18,27 @@
    "results": "`sheafIsAbelian : Abelian (Sheaf J D)` (Sites/Abelian.lean:40), `createsLimitsOfShape : CreatesLimitsOfShape K (sheafToPresheaf J D)` (Sites/Limits.lean:151), `HasLimitsOfShape K (Sheaf J D)` (line 153), `PreservesFiniteLimits (sheafToPresheaf J D)` (line 176)",
    "date": "2026-10-09",
    "verdict": "match: `CategoryTheory.Limits.kernel φ` for `φ` in `Sheaf J AddCommGrpCat`; sheafToPresheaf creates limits, and limits of presheaves (functor categories) are computed objectwise"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of a morphism of sheaves of abelian groups computed sectionwise, sheafToPresheaf preserves limits",
+   "results": "Sheaf.createsLimitsOfShape, instCreatesLimitFunctorOppositeSheafToPresheaf, instPreservesFiniteLimits…SheafToPresheaf (Mathlib.CategoryTheory.Sites.Limits); preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-09",
+   "verdict": "match (one lemma per clause)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, CategoryTheory.Sheaf",
+   "results": "only SheafOfModules.Presentation.* (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent), which use kernel in SheafOfModules",
+   "date": "2026-10-09",
+   "verdict": "no dedicated lemma; kernel φ in Sheaf J AddCommGrpCat is the general Limits.kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 37,42p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Abelian.lean; sed -n 145,156p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean",
+   "results": "Abelian.lean:40 `instance sheafIsAbelian [HasSheafify J D] : Abelian (Sheaf J D)`; Limits.lean:151 `instance createsLimitsOfShape : CreatesLimitsOfShape K (sheafToPresheaf J D)`",
+   "date": "2026-10-09",
+   "verdict": "confirmed: kernel exists in the abelian category Sheaf J AddCommGrpCat and is created by sheafToPresheaf, so its sections are the sectionwise kernels (evaluation preserves limits of presheaves)"
   }
  ],
  "mathlib_match": {

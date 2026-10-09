@@ -18,6 +18,27 @@
    "results": "Order/ConditionallyCompleteLattice/Basic.lean:458 `csInf_mem (hs : s.Nonempty) : sInf s ∈ s` under `[ConditionallyCompleteLinearOrder α] [WellFoundedLT α]`; Indexed.lean:503 `ciInf_mem [Nonempty ι] (f : ι → α) : iInf f ∈ range f`; Data/ENat/Basic.lean:47 ℕ∞ derives WellFoundedLT; Order/WithBot.lean:745 `instance instWellFoundedLT [LT α] [WellFoundedLT α] : WellFoundedLT (WithBot α)`; Data/ENat/Lattice.lean:32 `CompleteLinearOrder (WithBot ENat)`",
    "date": "2026-10-09",
    "verdict": "generalization: csInf_mem / ciInf_mem for any well-founded conditionally complete linear order, specialized to WithBot ℕ∞"
+  },
+  {
+   "tool": "leansearch",
+   "query": "infimum of a nonempty family in a well-founded conditionally complete linear order is attained",
+   "results": "isLeast_csInf; ciInf_mem (Mathlib.Order.ConditionallyCompleteLattice.Indexed); sInf_eq_argmin_on; csInf_mem (…Basic); Finset.exists_mem_eq_inf",
+   "date": "2026-10-09",
+   "verdict": "match: ciInf_mem / csInf_mem"
+  },
+  {
+   "tool": "loogle",
+   "query": "iInf ?f ∈ Set.range ?f",
+   "results": "ciInf_mem : [ConditionallyCompleteLinearOrder α] [WellFoundedLT α] [Nonempty ι] (f : ι → α) : iInf f ∈ Set.range f; Finite.ciInf_mem; iUnion_Ici_eq_Ici_iInf; iUnion_Ici_eq_Ioi_iInf",
+   "date": "2026-10-09",
+   "verdict": "match: ciInf_mem"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 501,504p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/ConditionallyCompleteLattice/Indexed.lean; sed -n 458,459p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; rg -n 'instWellFoundedLT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/WithBot.lean; rg -n 'WellFoundedLT|CompleteLinearOrder \\(WithBot ENat\\)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/ENat/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/ENat/Lattice.lean",
+   "results": "Indexed.lean:503 ciInf_mem; Basic.lean:458 csInf_mem; WithBot.lean:745 `instance instWellFoundedLT [LT α] [WellFoundedLT α] : WellFoundedLT (WithBot α)`; ENat/Basic.lean:47 ℕ∞ derives WellFoundedLT; ENat/Lattice.lean:32 `CompleteLinearOrder (WithBot ENat)`",
+   "date": "2026-10-09",
+   "verdict": "confirmed: the hypotheses of ciInf_mem (conditionally complete linear order, WellFoundedLT, nonempty index) all hold for WithBot ℕ∞ by these instances"
   }
  ],
  "mathlib_match": {

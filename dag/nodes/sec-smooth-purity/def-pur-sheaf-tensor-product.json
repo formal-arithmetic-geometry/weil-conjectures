@@ -25,14 +25,38 @@
    "results": "none: no monoidal structure is declared on `SheafOfModules R`",
    "date": "2026-10-09",
    "verdict": "no direct declaration; see the composite below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product of sheaves of modules over a sheaf of commutative rings",
+   "results": "PresheafOfModules.Monoidal.tensorObj, tensorObj_obj, tensorObj_map_tmul (Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal, for R : Cᵒᵖ ⥤ CommRingCat.{u}, modules in universe u); Sheaf.tensorProd_isSheaf (cartesian only); Scheme.Modules",
+   "date": "2026-10-09",
+   "verdict": "presheaf tensor product only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monoidal category structure on sheaves of modules, tensor product sheafified",
+   "results": "Sheaf.monoidalCategory (Sites/Monoidal: Sheaf J A for a monoidal A, constant coefficients); LightCondensed monoidal instances; presheafToSheaf monoidal; PresheafOfModules.monoidalCategory",
+   "date": "2026-10-09",
+   "verdict": "no monoidal structure on SheafOfModules R"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars for presheaves of modules along a morphism of presheaves of rings",
+   "results": "ModuleCat.extendScalars (single modules); PresheafOfModules.pullback (Presheaf/Pullback.lean:44, defined as the left adjoint of pushforward); PresheafOfModules.pushforward₀_obj; PresheafOfModules.free",
+   "date": "2026-10-09",
+   "verdict": "no sectionwise change of rings F ⊗_{O1} O2 for (pre)sheaves of modules"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; sed -n 25,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; rg -n '^noncomputable def pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "ChangeOfRings (presheaf and sheaf): only restrictScalars (and restrictHomEquivOfIsLocallySurjective); PresheafOfModules.pullback := (pushforward φ).leftAdjoint; SheafOfModules.pullback (PullbackContinuous.lean:53) likewise a left adjoint",
+   "date": "2026-10-09",
+   "verdict": "no match for the change-of-rings clause: Mathlib's extension of scalars of sheaves of modules is a left adjoint, and its agreement with the sheafified sectionwise F ⊗_{O1} O2 of the node is a theorem"
   }
  ],
- "mathlib_match": {
-  "declaration": "PresheafOfModules.sheafification",
-  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
-  "how": "specializes in one line: `F ⊗_O G := (PresheafOfModules.sheafification (𝟙 O.val)).obj (F.val ⊗ G.val)`, the sheafification (line 54, with `α` the identity of the sheaf of rings `O` regarded as a presheaf) of the sectionwise tensor product of `PresheafOfModules.Monoidal.monoidalCategory` (Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:125); change of rings is the same with `O₁ → O₂`, and the tensor power is the iterate"
- },
- "status": "mathlib",
+ "mathlib_match": null,
+ "status": "unsplit",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -52,5 +76,11 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "mathlib_match_withdrawn": {
+  "declaration": "PresheafOfModules.sheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "how": "specializes in one line: `F ⊗_O G := (PresheafOfModules.sheafification (𝟙 O.val)).obj (F.val ⊗ G.val)`, the sheafification (line 54, with `α` the identity of the sheaf of rings `O` regarded as a presheaf) of the sectionwise tensor product of `PresheafOfModules.Monoidal.monoidalCategory` (Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:125); change of rings is the same with `O₁ → O₂`, and the tensor power is the iterate",
+  "reason": "re-check 2026-10-09 (group L, list D): the tensor-product clause is one line (PresheafOfModules.sheafification (𝟙 _) applied to the sectionwise PresheafOfModules.Monoidal.tensorObj, which needs a presheaf of commutative rings and modules in the rings' universe), but the change-of-rings clause F ⊗_{O1} O2 has no Mathlib definition of that form: Mathlib's extension of scalars of (pre)sheaves of modules (PresheafOfModules.pullback, SheafOfModules.pullback) is defined as the left adjoint of the pushforward/restriction, and its agreement with the sheafified sectionwise tensor product is a theorem; the old 'how' ('change of rings is the same with O1 → O2') does not give an O2-module structure"
+ }
 }

@@ -18,12 +18,33 @@
    "results": "`structure SheafOfModules (R : Sheaf J RingCat)` (Sheaf.lean:33: a `PresheafOfModules R.obj` whose underlying presheaf of abelian groups is a sheaf), its category instance (Sheaf.lean, `SheafOfModules.Hom`: morphisms of underlying presheaves of modules), and `instance : Abelian (SheafOfModules.{v} R)` (Sheaf/Abelian.lean:40, under `[HasSheafify J AddCommGrpCat.{v}] [J.WEqualsLocallyBijective AddCommGrpCat.{v}]`)",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves of modules over a sheaf of rings is abelian",
+   "results": "SheafOfModules.instAbelian : [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] → Abelian (SheafOfModules R) (Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian); Scheme.Modules.instAbelian; SheafOfModules; SheafOfModules.hom_ext",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of modules over a sheaf of rings on a site",
+   "results": "SheafOfModules.instCategory, SheafOfModules, SheafOfModules.isSheaf (Mathlib.Algebra.Category.ModuleCat.Sheaf); Scheme.Modules.instCategory",
+   "date": "2026-10-09",
+   "verdict": "match: SheafOfModules"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 29,37p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; sed -n 15,45p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+   "results": "Sheaf.lean:33 `structure SheafOfModules` (val : PresheafOfModules.{v} R.obj, isSheaf : Presheaf.IsSheaf J val.presheaf); Abelian.lean:37-40 `variable (R : Sheaf J RingCat.{u}) [HasSheafify J AddCommGrpCat.{v}] [J.WEqualsLocallyBijective AddCommGrpCat.{v}]` then `instance : Abelian (SheafOfModules.{v} R)`",
+   "date": "2026-10-09",
+   "verdict": "confirmed, with the second hypothesis J.WEqualsLocallyBijective AddCommGrpCat added to the how (it was missing); both hold for a small site and v = u, and for the small étale site by AlgebraicGeometry/Sites/AffineEtale.lean:124"
   }
  ],
  "mathlib_match": {
   "declaration": "SheafOfModules",
   "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
-  "how": "exact: `SheafOfModules.{v} R` for `R : Sheaf J RingCat` (line 33) with its category structure; abelian by the instance `SheafOfModules.instAbelian` in Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40, which needs sheafification of abelian-group presheaves (`HasSheafify J AddCommGrpCat.{v}`); for the pro-étale site of `X : Scheme.{u}` take `v = u + 1` as `Scheme.ellAdicSheaf`'s file does with `EssentiallySmall.{u+1} X.ProEt`"
+  "how": "exact: `SheafOfModules.{v} R` for `R : Sheaf J RingCat` (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:33: a presheaf of modules over R.obj whose underlying presheaf of abelian groups is a sheaf) with its category structure; abelian by the instance `SheafOfModules.instAbelian` (Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40), which needs both `HasSheafify J AddCommGrpCat.{v}` and `J.WEqualsLocallyBijective AddCommGrpCat.{v}` (the second hypothesis added at the re-check of 2026-10-09; both hold for a small site with v = u, and for the small étale site by Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:124); for the pro-étale site of `X : Scheme.{u}` take `v = u + 1` as `Scheme.ellAdicSheaf`'s file does with `EssentiallySmall.{u+1} X.ProEt`"
  },
  "status": "mathlib",
  "merged_into": null,

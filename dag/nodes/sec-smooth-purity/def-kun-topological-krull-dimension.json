@@ -27,6 +27,27 @@
    "results": "Topology/Sets/Closeds.lean:393 `structure IrreducibleCloseds` (carrier, IsIrreducible, IsClosed) with PartialOrder by inclusion (line 405); Topology/Irreducible.lean:52 `IsIrreducible s := s.Nonempty ∧ IsPreirreducible s`, so the closed irreducible subsets are nonempty as in Stacks 004V",
    "date": "2026-10-09",
    "verdict": "match: the chains of the definition are the strict chains `LTSeries (IrreducibleCloseds X)`"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a topological space defined via chains of irreducible closed sets",
+   "results": "topologicalKrullDim (Mathlib.Topology.KrullDimension); IsHomeomorph.topologicalKrullDim_eq; topologicalKrullDim_zero_of_discreteTopology; topologicalKrullDim_subspace_le; Order.krullDim_eq_iSup_length; Order.krullDim_lt_coe_iff",
+   "date": "2026-10-09",
+   "verdict": "match: topologicalKrullDim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a topological space as krullDim of irreducible closed subsets",
+   "results": "topologicalKrullDim; topologicalKrullDim_subspace_le; PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; IsClosedEmbedding.topologicalKrullDim_le",
+   "date": "2026-10-09",
+   "verdict": "match: topologicalKrullDim"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 36,41p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean; sed -n 393,398p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sets/Closeds.lean",
+   "results": "KrullDimension.lean:39 `noncomputable def topologicalKrullDim (T : Type*) [TopologicalSpace T] : WithBot ℕ∞ := krullDim (IrreducibleCloseds T)`; Closeds.lean:393 `structure IrreducibleCloseds` (carrier, IsIrreducible (so nonempty), IsClosed)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: exists and says what the node says (sup of lengths of strict chains of irreducible closed subsets in WithBot ℕ∞, ⊥ for the empty space; for Y ⊆ X the subtype with the subspace topology)"
   }
  ],
  "mathlib_match": {

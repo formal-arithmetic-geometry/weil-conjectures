@@ -18,6 +18,27 @@
    "results": "Mathlib/RingTheory/AlgebraicIndependent/Basic.lean:45 `@[stacks 030G] def Algebra.trdeg : Cardinal` (sup of cardinalities of algebraically independent sets); TranscendenceBasis.lean:423 `IsTranscendenceBasis.cardinalMk_eq_trdeg`; FieldTheory/FinTrdeg.lean `FinTrdeg`",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transcendence degree of a field extension",
+   "results": "Algebra.trdeg (Mathlib.RingTheory.AlgebraicIndependent.Basic); trdeg_ne_zero_iff; IsTranscendenceBasis.cardinalMk_eq_trdeg; trdeg_add_le; trdeg_add_eq; trdeg_eq_iSup_cardinalMk_isTranscendenceBasis",
+   "date": "2026-10-09",
+   "verdict": "match: Algebra.trdeg"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transcendence degree: supremum of cardinalities of algebraically independent subsets",
+   "results": "Algebra.trdeg (Mathlib.RingTheory.AlgebraicIndependent.Basic); trdeg_eq_iSup_cardinalMk_isTranscendenceBasis; AlgebraicIndependent.cardinalMk_le_trdeg",
+   "date": "2026-10-09",
+   "verdict": "match: Algebra.trdeg"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 40,46p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AlgebraicIndependent/Basic.lean; rg -n 'cardinalMk_eq_trdeg' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean",
+   "results": "Basic.lean:45 `@[stacks 030G] def Algebra.trdeg : Cardinal.{v} := ⨆ ι : {{ s : Set A // AlgebraicIndepOn R id s }}, Cardinal.mk ι.1` for [CommRing R] [CommRing A] [Algebra R A]; TranscendenceBasis.lean:423 IsTranscendenceBasis.cardinalMk_eq_trdeg (needs Nontrivial R, NoZeroDivisors A: holds for fields)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: exists and says what the node says"
   }
  ],
  "mathlib_match": {
