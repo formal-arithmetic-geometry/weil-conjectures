@@ -2,21 +2,45 @@
  "id": "def-weil-geometric-hypotheses",
  "kind": "definition",
  "title": "Geometric hypotheses",
- "statement": "For the global finite-field datum [def-weil-finite-field-fiber]\n$(p,a,q,k_0,k)$, let $Y_0$ be a finite-type\n[def-weil-scheme-morphism-properties] $k_0$-scheme. It is *smooth of pure\ndimension $d$* if $d\\in\\mathbf Z_{\\geq0}$, the structure morphism $Y_0\\to\\Spec\nk_0$ is a smooth morphism, and every irreducible component of\n$Y_0\\times_{k_0}k$ has Krull dimension $d$. It is *proper* if its structure\nmorphism is separated, of finite type, and universally closed, i.e. it is a\nproper morphism. It is *geometrically connected* if it is nonempty and\n$Y_0\\times_{k_0}k'$ is connected for every field extension $k'/k_0$,\nequivalently if its geometric fiber $Y_0\\times_{k_0}k$ is nonempty and\nconnected.",
+ "statement": "For the global finite-field datum [def-weil-finite-field-fiber]\n$(p,a,q,k_0,k)$, let $Y_0$ be a finite-type\n[def-weil-finite-type-morphism] $k_0$-scheme. It is *smooth of pure\ndimension $d$* if $d\\in\\mathbf Z_{\\geq0}$, the structure morphism $Y_0\\to\\Spec\nk_0$ is a smooth morphism [def-sbc-smooth-morphisms], and $Y_0\\times_{k_0}k$ has pure dimension $d$\n[def-weil-pure-dimension]: every irreducible component [def-weil-irreducible-components] of\n$Y_0\\times_{k_0}k$ has Krull dimension [def-kun-dimension] $d$. It is *proper* if its structure\nmorphism is separated, of finite type, and universally closed, i.e. it is a\nproper morphism [def-weil-proper-morphism]. It is *geometrically connected*\n[def-pc-geometrically-irreducible] if it is nonempty and\n$Y_0\\times_{k_0}k'$ [def-pc-base-change] is connected [def-weil-connected-scheme] for every field extension $k'/k_0$,\nequivalently [lem-weil-geometrically-connected-algebraic-closure] if its geometric fiber $Y_0\\times_{k_0}k$ is nonempty and\nconnected.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-geometric-hypotheses.md",
   "place": "node def-weil-geometric-hypotheses, order 412"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension",
+  "def-weil-irreducible-components",
+  "def-kun-dimension",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "lem-weil-geometrically-connected-algebraic-closure"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "results": "Smooth (Smooth.lean:62), SmoothOfRelativeDimension n (Smooth.lean:135), IsProper (Proper.lean:42), GeometricallyConnected (Connected.lean:40, geometrically (ConnectedSpace ·), nonempty included via ConnectedSpace)",
+   "date": "2026-10-09",
+   "verdict": "no match for the composite definition; each of its three notions has a Mathlib declaration recorded on its own node (smooth: AlgebraicGeometry.Smooth, to be recorded on def-sbc-smooth-morphisms; proper: IsProper; geometrically connected: GeometricallyConnected)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'equidimensional\\|pure dimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -n 'SmoothOfRelativeDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "results": "no notion of pure dimension; SmoothOfRelativeDimension d is local standard smoothness of relative dimension d, whose equivalence with 'smooth and the geometric fibre has pure dimension d' is a theorem (Stacks 29.34), not a one-line specialization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -36,5 +60,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-geometric-hypotheses",
+  "worker": "stage1",
+  "summary": "Checked the statement against its only source, the master blueprint node (order 412; no slopmaster2 copy exists), and kept its wording, changing only the bracket pointers: finite type now points at def-weil-finite-type-morphism directly instead of the grab-bag def-weil-scheme-morphism-properties, which is removed from stmt_deps, and every other notion the definition is built from is named: smooth morphism (existing def-sbc-smooth-morphisms, Mathlib Smooth), pure dimension (new def-weil-pure-dimension, no Mathlib match, built on new leaf def-weil-irreducible-components = irreducibleComponents and existing def-kun-dimension), proper morphism (new leaf def-weil-proper-morphism = IsProper), geometric connectedness over a field (existing def-pc-geometrically-irreducible, Mathlib GeometricallyConnected), base change (existing def-pc-base-change), connectedness (new leaf def-weil-connected-scheme = ConnectedSpace), and the 'equivalently' clause, which is a claim and not a definition, now points at the new statement node lem-weil-geometrically-connected-algebraic-closure (Stacks 0387 + 054N, no Mathlib match). The geometric fiber Y_0 x_{k_0} k itself is introduced by def-weil-finite-field-fiber, kept as a dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

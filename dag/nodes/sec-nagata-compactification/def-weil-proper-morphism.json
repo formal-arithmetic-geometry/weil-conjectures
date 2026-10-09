@@ -1,0 +1,60 @@
+{
+ "id": "def-weil-proper-morphism",
+ "kind": "definition",
+ "title": "Separated, universally closed and proper morphisms",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes. $f$ is *separated* if its diagonal $\\Delta_f:X\\to X\\times_SX$ (the morphism to the fibre product [def-pc-base-change] with both components the identity) is a closed immersion, i.e. identifies $X$ with a closed subscheme of $X\\times_SX$. $f$ is *universally closed* if for every morphism $S'\\to S$ the base change $X\\times_SS'\\to S'$ is a closed map of the underlying topological spaces. $f$ is *proper* if it is separated, of finite type [def-weil-finite-type-morphism], and universally closed. A scheme over a field $K$ is *proper over $K$* if its structure morphism to $\\operatorname{Spec}K$ is proper.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Definition 29.41.1, tag 01W1 (definition-proper); separated: schemes.tex Definition 26.21.3, tag 01KK; universally closed: morphisms.tex definition-universally-closed, Section 29.41"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "line 42: class IsProper : Prop extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f (docstring: 'proper if it is separated, universally closed and locally of finite type'; quasi-compactness is implied by universally closed)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^class' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "results": "IsSeparated (Separated.lean:44: diagonal is a closed immersion), UniversallyClosed (UniversallyClosed.lean:43: universally (topologically IsClosedMap)), LocallyOfFiniteType (FiniteType.lean:43)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'QuasiCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+   "results": "line 167: instance [UniversallyClosed f] : QuasiCompact f, so IsProper f gives finite type (locally of finite type and quasi-compact)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "specializes in one line: IsProper asks LocallyOfFiniteType in place of finite type; the instance UniversallyClosed → QuasiCompact (UniversallyClosed.lean:167) makes the two definitions agree"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-geometric-hypotheses",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
