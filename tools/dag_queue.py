@@ -3,16 +3,22 @@
 
 Usage:
   tools/dag_queue.py summary      how many nodes each stage has open, and why the others are not open
-  tools/dag_queue.py items        the open items, one per line: stage, item, distance (to a target in stage 1, to Mathlib in stage 2), kind
+  tools/dag_queue.py items        the open items, one per line: stage, item, distance (to a target in stage 1, to Mathlib in stage 2),
+                                  kind (in stage 1 the node's lean_audit state on the done branch)
   tools/dag_queue.py waiting      modules whose proof uses a node that has no Lean declaration yet, one per line
 
 `queue.py write` calls this and puts the items into coord/queue.tsv; run this by hand only to look.
 
 What is open follows the stage documents. A node that no target reaches is not open for any stage. A node is open for
 
-  stage 1  when it is a statement that is not a Mathlib leaf and has no proof in steps yet, or a definition
-           that neither names the notions it is built from nor has its Lean written (it is still to be split);
-           nearest to a target first;
+  stage 1  (SETUP.md, requirements of 2026-10-09) when a target reaches it without passing through a finished
+           node, and it is neither finished, nor a Mathlib leaf, nor split. A node is finished when its
+           `lean_audit` state on the branch SHEAF_DONE_BRANCH (default slopmaster2) is `closed`: its Lean exists
+           and no `sorry` is reachable from it, and nothing below it is an item. A node is split only when a
+           worker has checked it against stages/1-dag.md (`status` is `split`) and the lead has reviewed that
+           (`reviewed` is set); the `imported` status of the blueprint import does not count. Every other
+           reached node (states none, sorry_here, rests_on_sorry, closed_part) is an item, nearest to a
+           target first, the distance counted through unfinished nodes only;
   stage 2  when stage 1 has split it (a definition naming the notions it is built from, or a statement with its proof in steps),
            it has no Lean declaration yet, and every node its statement needs has one or is a Mathlib leaf;
            nearest to Mathlib first (the fewest dependency steps down to a Mathlib leaf), so that the
@@ -47,7 +53,10 @@ FIELDS = {
     "proof": ("proof", "steps"),                    # the proof in steps; each step may list what it uses
     "module": ("module", "lean_module"),            # set when the node has a Lean declaration
     "lean": ("lean",),                              # or a record {module, declaration, ...}
+    "audit": ("lean_audit",),                       # {branch: {state: none|closed|closed_part|sorry_here|rests_on_sorry, ...}}
+    "reviewed": ("reviewed",),                      # set by the lead when the review of a split passed
 }
+DONE_STATES = {"closed"}                            # audit states on SHEAF_DONE_BRANCH that finish a node for stage 1
 DEF_KINDS = {"def", "definition", "stmt", "notion", "structure"}
 LEAF_STATUS = {"mathlib", "exact", "adapt"}
 
@@ -81,6 +90,24 @@ def is_leaf(d) -> bool:
     return str(st).lower() in LEAF_STATUS if st else bool(field(d, "mathlib"))
 
 
+def done_branch() -> str:
+    return li.config().get("SHEAF_DONE_BRANCH", "slopmaster2")
+
+
+def audit_state(d) -> str:
+    a = field(d, "audit")
+    if isinstance(a, dict):
+        b = a.get(done_branch())
+        if isinstance(b, dict) and b.get("state"):
+            return str(b["state"])
+    return "none"
+
+
+def finished(d) -> bool:
+    """Stage 1 is finished with the node: its Lean on the done branch is closed (SETUP.md). Nothing below it is an item."""
+    return audit_state(d) in DONE_STATES
+
+
 def is_def(d) -> bool:
     return str(field(d, "kind") or "").lower() in DEF_KINDS
 
@@ -101,13 +128,11 @@ def module_of(d):
 
 
 def unfolded(d) -> bool:
-    """Stage 1 has split the node: a leaf, a definition that names the notions it is built from or has its Lean written, or a statement whose proof is written in steps."""
-    if is_leaf(d):
+    """Stage 1 is done with the node: a Mathlib leaf, a finished node (its Lean closed), or a node a worker has
+    split (`status` split) and the lead has reviewed (`reviewed` set). An imported, unchecked node is not split."""
+    if is_leaf(d) or finished(d):
         return True
-    if is_def(d):
-        return has_decl(d) or bool(deps_of(d, "stmt"))
-    pf = field(d, "proof")
-    return bool(pf) and (not isinstance(pf, list) or len(pf) > 0)
+    return str(field(d, "status") or "").lower() == "split" and bool(field(d, "reviewed"))
 
 
 def deps_of(d, which: str) -> list[str]:
@@ -131,18 +156,25 @@ class Dag:
                        if field(d, "merged") or str(field(d, "status") or "").lower() == "merged"}
         self.live = {i: d for i, d in nodes.items() if i not in self.merged}
         self.targets = [i for i, d in self.live.items() if field(d, "target") or str(field(d, "kind") or "").lower() == "target"]
-        self.dist = {}
+        self.dist = self.distances(cut=False)    # every node a target reaches: the DAG check and stages 2 and 3
+        self.dist1 = self.distances(cut=True)    # reached without passing through a finished node: stage 1
         self.height = {}   # fewest dependency steps down to a Mathlib leaf
+
+    def distances(self, cut: bool) -> dict[str, int]:
+        dist = {}
         dq = collections.deque((t, 0) for t in self.targets)
         while dq:
             i, k = dq.popleft()
-            if i in self.dist:
+            if i in dist:
                 continue
-            self.dist[i] = k
+            dist[i] = k
+            if cut and finished(self.live[i]):
+                continue
             for c in deps_of(self.live[i], "all"):
                 c = self.resolve(c)
-                if c in self.live and c not in self.dist:
+                if c in self.live and c not in dist:
                     dq.append((c, k + 1))
+        return dist
 
     def h(self, i: str, stack=()) -> int:
         if i in self.height:
@@ -170,7 +202,10 @@ class Dag:
         return d is None or is_leaf(d) or has_decl(d)   # a dependency on a missing node is reported by the DAG check, not here
 
     def stage1(self) -> list[tuple[int, str]]:
-        return sorted((self.dist[i], i) for i, d in self.live.items() if i in self.dist and not unfolded(d))
+        return sorted((self.dist1[i], i) for i, d in self.live.items() if i in self.dist1 and not unfolded(d))
+
+    def stage1_states(self) -> collections.Counter:
+        return collections.Counter(audit_state(self.live[i]) for _, i in self.stage1())
 
     def target_statement_closure(self) -> set[str]:
         out, st = set(), list(self.targets)
@@ -216,12 +251,14 @@ def main() -> int:
     if cmd == "summary":
         print(f"nodes: {len(g.n)} ({len(g.merged)} merged, {sum(1 for d in g.live.values() if is_leaf(d))} Mathlib leaves, "
               f"{len(g.targets)} targets, {sum(1 for i in g.live if i not in g.dist)} not reached from a target)")
-        print(f"stage 1 open: {len(s1)} nodes to split")
+        print(f"stage 1 open: {len(s1)} nodes to split (" + ", ".join(f"{v} {k}" for k, v in sorted(g.stage1_states().items()))
+              + f"); finished: {sum(1 for d in g.live.values() if finished(d))} closed on {done_branch()}, "
+              f"{sum(1 for i, d in g.live.items() if i in g.dist1 and unfolded(d) and not finished(d) and not is_leaf(d))} split and reviewed")
         print(f"stage 2 open: {len(s2)} nodes to state; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else f"stage 2 open: {len(s2)} nodes to state")
         print(f"stage 3 waiting: {len(w)} stated modules whose proof uses a node without a declaration")
     elif cmd == "items":
         for dist, i in s1:
-            print(f"1\t{i}\t{dist}\tsplit")
+            print(f"1\t{i}\t{dist}\t{audit_state(g.live[i])}")
         for pri, hgt, i in s2:
             print(f"2\t{i}\t{hgt}\t{'target-statement' if pri == 0 else 'state'}")
     elif cmd == "waiting":

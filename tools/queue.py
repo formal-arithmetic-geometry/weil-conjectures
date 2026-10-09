@@ -93,7 +93,7 @@ def main() -> int:
     if cmd != "write":
         print(__doc__); return 2
     WORK.mkdir(exist_ok=True)
-    rows = [(i, 1, d if d < 10**6 else "-", "", "split") for d, i in s1]
+    rows = [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i])) for d, i in s1]
     rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state") for pri, h, i in s2]
     rows += [(m, 3, d, n, k) for _, d, m, n, k in items3]
     with open(WORK / "queue.tsv", "w") as f:
@@ -104,9 +104,9 @@ def main() -> int:
         f.write(f"# Work queue\n\n{len(rows)} items; claim with `tools/claim.py next <group> [--stage N]`.\n\n")
         f.write(f"## Stage 1: nodes to split ({len(s1)})\n\n")
         if s1:
-            f.write("| node | distance to a target |\n|---|---|\n")
+            f.write("| node | distance to a target | Lean state on the done branch |\n|---|---|---|\n")
             for d, i in s1:
-                f.write(f"| `{i}` | {d if d < 10**6 else '-'} |\n")
+                f.write(f"| `{i}` | {d if d < 10**6 else '-'} | {dag_queue.audit_state(g.live[i])} |\n")
         f.write(f"\n## Stage 2: nodes to state ({len(s2)})\n\n")
         if s2:
             f.write("| node | distance to Mathlib | kind |\n|---|---|---|\n")
