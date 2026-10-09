@@ -46,7 +46,7 @@ section Galois
 variable (R K Ω : Type*) [CommRing R] [Field K] [Field Ω] [Algebra R K] [Algebra K Ω]
   [Algebra R Ω] [IsScalarTower R K Ω]
 
-instance AlgEquiv.smulCommClass_of_isScalarTower : SMulCommClass Gal(Ω/K) R Ω where
+instance (priority := low) AlgEquiv.smulCommClass_of_isScalarTower : SMulCommClass Gal(Ω/K) R Ω where
   smul_comm σ r x := by
     rw [algebra_compatible_smul K r, algebra_compatible_smul K r]
     exact smul_comm σ (algebraMap R K r) x
