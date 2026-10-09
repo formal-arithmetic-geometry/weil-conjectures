@@ -2,19 +2,61 @@
  "id": "def-weil-pbc-proj-twisting-sheaf",
  "kind": "definition",
  "title": "The sheaf of a graded module on Proj and the twisting sheaves O(d)",
- "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. (1) For a graded $S$-module $M$, the sheaf of $\\mathcal O_X$-modules associated to $M$, written $\\widetilde M$, is the sheaf $\\mathcal F$ of [lem-weil-pbc-proj-graded-module-sheaf-exists] (b): $\\Gamma(D_+(f),\\widetilde M)=M_{(f)}$ as a module over $S_{(f)}=\\Gamma(D_+(f),\\mathcal O_X)$ [def-nagata-homogeneous-localization-degree-zero] for every homogeneous $f$ of positive degree, with the canonical restriction maps $M_{(f)}\\to M_{(g)}$ for $D_+(g)\\subseteq D_+(f)$. (2) For $d\\in\\mathbf Z$ the shifted graded module $M(d)$ has $M(d)_n=M_{d+n}$. The $d$-th twist of the structure sheaf is $\\mathcal O_X(d)=\\widetilde{S(d)}$; thus $\\Gamma(D_+(f),\\mathcal O_X(d))=S(d)_{(f)}=(S_f)_d$, the fractions $a/f^m$ with $a\\in S_{m\\deg f+d}$, an $S_{(f)}$-module by multiplication in $S_f$. (3) For $d\\ge0$ and $s\\in S_d$, the global section $s\\in\\Gamma(X,\\mathcal O_X(d))$ is the image of $s\\in S(d)_0=S_d$ under the map of [lem-weil-pbc-proj-graded-module-sheaf-exists] (d): the unique global section whose restriction to every $D_+(f)$ is $s/1\\in(S_f)_d$.",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]; for $f\\in S$ homogeneous of positive degree, $D_+(f)\\subseteq X$ is its standard open and $\\Gamma(D_+(f),\\mathcal O_X)=S_{(f)}$ [def-nagata-homogeneous-localization-degree-zero]. (1) For a graded $S$-module $M=\\bigoplus_{n\\in\\mathbf Z}M_n$, the sheaf of $\\mathcal O_X$-modules associated to $M$, written $\\widetilde M$, is the sheaf $\\mathcal F$ of [lem-weil-pbc-proj-graded-module-sheaf-exists] (b): $\\Gamma(D_+(f),\\widetilde M)=M_{(f)}=\\{x/f^m: m\\ge0,\\ x\\in M_{m\\deg f}\\}\\subseteq M_f$ as a module over $S_{(f)}$ for every homogeneous $f$ of positive degree, with the restriction maps $\\rho_{f,g}:M_{(f)}\\to M_{(g)}$ of (a) of that lemma for $D_+(g)\\subseteq D_+(f)$ (determined up to unique isomorphism compatible with these identifications). (2) For $d\\in\\mathbf Z$ the shifted graded module $M(d)$ is the $S$-module $M$ with the grading $M(d)_n=M_{d+n}$. The $d$-th twist of the structure sheaf is $\\mathcal O_X(d)=\\widetilde{S(d)}$ ($S$ graded as an $S$-module with $S_n=0$ for $n<0$). Thus $\\Gamma(D_+(f),\\mathcal O_X(d))=S(d)_{(f)}=(S_f)_d$, where $(S_f)_d=\\{a/f^m\\in S_f: m\\ge0,\\ a\\in S_{m\\deg f+d}\\}$ (the fractions of degree $d$), an $S_{(f)}$-module by multiplication in $S_f$; and for $D_+(g)\\subseteq D_+(f)$ the restriction $(S_f)_d\\to(S_g)_d$ is the restriction of the canonical localization homomorphism $S_f\\to S_g$ (which exists because $f$ is invertible in $S_g$). (3) For $d\\ge0$ and $s\\in S_d$, the global section $s\\in\\Gamma(X,\\mathcal O_X(d))$ is the image of $s\\in S(d)_0=S_d$ under the map $M_0\\to\\Gamma(X,\\mathcal F)$ of [lem-weil-pbc-proj-graded-module-sheaf-exists] (d) for $M=S(d)$: the unique global section whose restriction to every $D_+(f)$ is $s/1\\in(S_f)_d$. (Summed over $d\\ge0$ these give the map $S\\to\\bigoplus_{d\\ge0}\\Gamma(X,\\mathcal O_X(d))$ of Stacks 01MM.)",
  "source": {
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Definition 01M6 (label definition-structure-sheaf) (3) for $\\widetilde M$; Definition 01MN (label definition-twist) (1) for $\\mathcal O_X(n)=\\widetilde{S(n)}$; Lemma 01M7 (label lemma-proj-sheaves) (2),(3),(6) and the map (equation-global-sections) $S\\to\\bigoplus_n\\Gamma(X,\\mathcal O_X(n))$ of Section 01MM for the sections $s$"
+  "place": "Constructions, Definition 01M6 (label definition-structure-sheaf) (3) for $\\widetilde M$; Definition 01MN (label definition-twist) (1) for $\\mathcal O_X(n)=\\widetilde{S(n)}$; Lemma 01M7 (label lemma-proj-sheaves) (2),(3),(6), the maps (equation-map-global-sections-degree-n) of Section 01MJ and (equation-global-sections) $S\\to\\bigoplus_n\\Gamma(X,\\mathcal O_X(n))$ of Section 01MM for the sections $s$; Algebra, Sections 00JL (twist $M(n)$) and 00JM ($M_{(f)}$)"
  },
  "stmt_deps": [
   "def-nagata-affine-proj",
   "def-nagata-homogeneous-localization-degree-zero",
   "lem-weil-pbc-proj-graded-module-sheaf-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$\\widetilde M$ is well defined.* For a graded $S$-module $M$, [lem-weil-pbc-proj-graded-module-sheaf-exists] (a) gives the $S_{(f)}$-linear restriction maps $\\rho_{f,g}:M_{(f)}\\to M_{(g)}$ for $D_+(g)\\subseteq D_+(f)$, $x/f^m\\mapsto b^mx/g^{em}$ where $g^e=bf$, independent of the choices and transitive; its clause (b) gives a sheaf of $\\mathcal O_X$-modules $\\mathcal F$ with $\\mathcal F(D_+(f))=M_{(f)}$ as $S_{(f)}$-modules and restriction maps $\\rho_{f,g}$, unique up to unique isomorphism compatible with these identifications. So clause (1) names a sheaf, determined up to unique isomorphism, as in Stacks Definition 01M6 (3) and Lemma 01M7 (2),(3).",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01M3, the paragraph before Definition 01M6 (Sheaves, Lemma extend-off-basis-module); Definition 01M6 (3); Lemma 01M7 (2),(3)"
+   }
+  },
+  {
+   "text": "*$M(d)$ is a graded $S$-module, and $S(d)_{(f)}=(S_f)_d$.* $M(d)$ has the same underlying $S$-module as $M$ and $M(d)=\\bigoplus_nM(d)_n$ with $M(d)_n=M_{d+n}$ (a reindexing of the decomposition of $M$); and $S_e\\cdot M(d)_n=S_e M_{d+n}\\subseteq M_{d+n+e}=M(d)_{n+e}$. So $M(d)$ is a graded $S$-module (Stacks 00JL). Take $M=S$ (with $S_n=0$ for $n<0$) and $f\\in S_k$, $k\\ge1$. As $S$-modules $S(d)=S$, so $S(d)_f=S_f$ with its $S_f$-module structure given by multiplication. By the definition of $M_{(f)}$ in [lem-weil-pbc-proj-graded-module-sheaf-exists] (Stacks 00JM), $S(d)_{(f)}$ is the set of $x/f^m\\in S(d)_f=S_f$ with $m\\ge0$ and $x\\in S(d)_{mk}=S_{mk+d}$: this is exactly $(S_f)_d$ as defined in (2) (empty of nonzero elements for $mk+d<0$, since $S_n=0$ for $n<0$). The $S_{(f)}$-module structure of $M_{(f)}$ is the restriction of the $S_f$-module structure of $M_f$ to the subring $S_{(f)}\\subseteq S_f$ [def-nagata-homogeneous-localization-degree-zero], i.e. here multiplication in $S_f$: $(r/f^n)(a/f^m)=ra/f^{n+m}$ with $ra\\in S_{(n+m)k+d}$, which lies in $(S_f)_d$ again. Restrictions: for $D_+(g)\\subseteq D_+(f)$ with $g^e=bf$, $b$ homogeneous, $f\\cdot(b/g^e)=1$ in $S_g$, so $f$ is a unit of $S_g$ and the canonical homomorphism $\\lambda:S_f\\to S_g$ exists, with $\\lambda(a/f^m)=a\\,(b/g^e)^m=ab^m/g^{em}$; this is the formula of $\\rho_{f,g}$ in [lem-weil-pbc-proj-graded-module-sheaf-exists] (a) for $M=S(d)$. So the restriction $(S_f)_d\\to(S_g)_d$ of $\\mathcal O_X(d)$ is $\\lambda$ restricted to $(S_f)_d$. This is clause (2), Stacks Definition 01MN (1) with Lemma 01M7 (2),(3).",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00JL (twist $M(n)_d=M_{n+d}$), Section 00JM (definition of $S_{(f)}$, $M_{(f)}$); constructions.tex Definition 01MN (1), Lemma 01M7 (2),(3)"
+   }
+  },
+  {
+   "text": "*The global section $s$ of (3) exists and is unique.* Apply [lem-weil-pbc-proj-graded-module-sheaf-exists] (d) to the graded module $M=S(d)$, $d\\ge0$: $M_0=S(d)_0=S_d$, and for $s\\in S_d$ the element $s/1\\in M_{(f)}$ is, under step 2, $s/f^0\\in(S_f)_d$. Clause (d) says these elements are compatible under the $\\rho_{f,g}$ and are the restrictions of a unique global section of $\\mathcal O_X(d)$; this global section is the $s$ of (3), and $s\\mapsto s$ is the $S_0$-linear map $S_d\\to\\Gamma(X,\\mathcal O_X(d))$ of Stacks Lemma 01M7 (6) (equation (01MJ) map-global-sections-degree-n), summed over $d$ the map (equation-global-sections) of Section 01MM. (Compatibility is visible directly: with $m=0$, $\\rho_{f,g}(s/1)=b^0s/g^0=s/1$; uniqueness and existence then also follow from the sheaf property of $\\mathcal O_X(d)$ on the cover of $X$ by the $D_+(f)$, which is how Stacks argues in the proof of 01M7 (6); here the clause (d) of the existence lemma is cited.)",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01M7 (6) and its proof; Section 01MJ, equations map-global-sections and map-global-sections-degree-n; Section 01MM, equation global-sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section 01M3 before Definition 01M6, Definition 01M6 (3), Lemma 01M7 (2),(3),(6); Section 01MJ (equations map-global-sections, map-global-sections-degree-n); Definition 01MN (1) and equation global-sections of Section 01MM; algebra.tex Sections 00JL, 00JM"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +85,45 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match (the source repository has its own AlgebraicGeometry.Proj.twist in WeilConjectures/AlgebraicGeometry/ProjectiveSpectrum/Twist.lean:378, Hartshorne-style, M = S(m) only; not Mathlib)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "twisting sheaf O(n) on Proj of a graded ring, sheaf of modules associated to shifted graded module S(n)",
+   "results": "ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, ProjectiveSpectrum.Proj.structureSheaf, Proj.pow_apply, Proj.mul_apply, Scheme.Modules, ModuleCat.tilde (Spec only), StructureSheaf.SectionSubring.add_mem' (all Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf / Modules)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the structure sheaf of Proj; tilde only over Spec"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules on the projective spectrum Proj whose sections on the basic open D+(f) are the degree d part of the localization S_f",
+   "results": "StructureSheaf.structureSheafInType, Proj.structureSheaf, structurePresheafInCommRing, sectionInBasicOpen, Proj.awayToSection (Basic.lean), isLocallyFraction, commRingStructureSheafInTypeObj",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules; HomogeneousLocalization.Away, AlgebraicGeometry.Scheme.Modules",
+   "results": "none; none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/AlgebraicGeometry/ProjectiveSpectrum Mathlib/AlgebraicGeometry/Modules; grep -rniE 'twist|tildeM|ofGradedModule|sheafOfModules|GradedModule|Gmodule' Mathlib/AlgebraicGeometry/ProjectiveSpectrum; grep -rnE 'twist|Twist' Mathlib/AlgebraicGeometry; grep -rn 'Proj.*Modules' Mathlib/AlgebraicGeometry",
+   "results": "directory: Basic, Functor, Proper, Scheme, StructureSheaf, Topology; Modules: Presheaf, Sheaf, Tilde; no hits for any pattern",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Proj.twist (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Proj.twist, Proj.twistMul, Proj.twistRestrictIso, all in WeilConjectures/AlgebraicGeometry/ProjectiveSpectrum/Twist.lean (source repository, not Mathlib); index: unavailable",
+   "date": "2026-10-09",
+   "verdict": "not Mathlib; source-repository candidate for O(d) only (Hartshorne-style locally-fraction sheaf; agreement with clause (2) is a theorem not in the source)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +143,24 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-proj-twisting-sheaf",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 01M3/01M6(3)/01M7(2),(3),(6), 01MJ, 01MN(1), 01MM and Algebra 00JL/00JM: the definition agrees with the source. Statement made self-contained: M_(f) and (S_f)_d written out, M(d) defined as the same S-module regraded, restriction maps of O(d) made explicit as the localization S_f -> S_g (used by the charts node, step 2), and the global section s tied to clause (d) of the existence lemma for M = S(d). Three proof steps record well-definedness: (1) existence/uniqueness of M~ by lem-weil-pbc-proj-graded-module-sheaf-exists (a),(b) (that node is unsplit, not reviewed); (2) the elementary identification S(d)_(f) = (S_f)_d as S_(f)-modules with restrictions; (3) the section s by clause (d) (sheaf-property argument noted). Functoriality of M -> M~ omitted: the only user (lem-weil-pbc-projective-space-twisting-sheaf-charts) uses only (a),(b),(d) and the sections T_l. Mathlib re-searched three ways: no sheaf of modules on Proj in Mathlib. Source repository candidate AlgebraicGeometry.Proj.twist (sorry-free reach) defines O(m) as locally-fraction sections, not as S(m)~ with sections (S_f)_m; not an exact match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition checked against Stacks 01M6 (3), 01MN (1), 01M7 (2),(3),(6) and 01MM; three well-definedness steps resting on lem-weil-pbc-proj-graded-module-sheaf-exists (a),(b),(d) (unsplit, in the queue) and the elementary identification S(d)_(f) = (S_f)_d with restriction the localization map. No Mathlib match (no sheaf of modules on Proj in the pinned Mathlib). Lean candidate Proj.twist (source repository, Hartshorne-style) recorded, not attached."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Proj.twist",
+   "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist",
+   "note": "Twist.lean:378: O(m) built Hartshorne-style from locally-fraction sections of degree m; not defined as S(m)~ and the identification Gamma(D_+(f), twist m) = (S_f)_m is not proved there (its TODO lists it); no sorry reached; docstring names no node. Proj.unitToTwist / val_unitToTwist_app_top are the analogue of clause (3)."
+  }
+ ]
 }
