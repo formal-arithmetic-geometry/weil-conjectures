@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+ "kind": "statement",
+ "title": "Primes and residue fields of the fibre ring",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings, $\\mathfrak p\\subset A$ a prime ideal with residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $C=B\\otimes_A\\kappa(\\mathfrak p)$ the fibre ring and $j:B\\to C$, $b\\mapsto b\\otimes1$. For a prime $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ let $\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$ and let $\\psi_{\\mathfrak q}:C\\to\\kappa(\\mathfrak q)$ be the ring map $b\\otimes\\lambda\\mapsto\\bar b\\,\\bar\\lambda$, where $\\bar b$ is the image of $b$ and $\\bar\\lambda$ the image of $\\lambda$ under the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ induced by $\\varphi$. Then (1) the map $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the set of prime ideals of $C$ onto the set of prime ideals $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, with inverse $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$, and it preserves and reflects inclusions; (2) for each such $\\mathfrak q$, with $\\mathfrak Q=\\ker\\psi_{\\mathfrak q}$, the map $\\psi_{\\mathfrak q}$ induces an isomorphism of fields $\\kappa(\\mathfrak Q)=C_{\\mathfrak Q}/\\mathfrak QC_{\\mathfrak Q}\\xrightarrow{\\sim}\\kappa(\\mathfrak q)$; in other words $\\psi_{\\mathfrak q}$ is the composite of $C\\to\\kappa(\\mathfrak Q)$ with this isomorphism. (Residue fields as in [def-weil-residue-field] at the points of $\\operatorname{Spec}$ [def-weil-affine-spectrum].)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422: kappa(p) (x)_R S = S_p/pS_p, homeomorphism of Spec of the fibre ring onto the fibre) and Remark Tag 0H9M (remark-local-ring-fibre, line 3520: F_qbar = S_q/pS_q, hence kappa(qbar) = kappa(q))"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field of fiber ring at prime is isomorphic to residue field of the prime lying over",
+   "results": "PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, PrimeSpectrum.primesOverOrderIsoFiber, Ideal.Fiber (Mathlib.RingTheory.LocalRing.ResidueField.Fiber); Ideal.ResidueField.map; Algebra.QuasiFinite.instFiniteResidueField",
+   "verdict": "part (1) only: primesOverOrderIsoFiber",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field of the fiber ring kappa(p) (x) S at a prime is isomorphic to the residue field of S at the corresponding prime",
+   "results": "PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal, PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal (Fiber.lean); Ideal.fiberIsoOfBijectiveResidueField (Mathlib.RingTheory.Etale.QuasiFinite)",
+   "verdict": "part (1) only; no residue-field isomorphism for the fibre",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def \\|lemma \\|theorem ' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+   "results": "Ideal.Fiber (:66, = p.ResidueField ⊗[R] S); Fiber.algEquivQuotient (:85, Fiber ≃ S_p/pS_p); Fiber.localizationAlgEquivQuotient (:137, (Fiber)_Q ≃ S_r/pS_r, r = Q.comap includeRight); PrimeSpectrum.preimageEquivFiber (:155, Q = ker of κ(p)⊗S → κ(q)), preimageOrderIsoFiber, primesOverOrderIsoFiber (:202), preimageHomeomorphFiber",
+   "verdict": "generalization in pieces: (1) is PrimeSpectrum.primesOverOrderIsoFiber / preimageEquivFiber (inverse = kernel of the map to κ(q), as here); (2) follows from Fiber.localizationAlgEquivQuotient by passing to residue fields, not stated in Mathlib; no single-declaration match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-finite-separable-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

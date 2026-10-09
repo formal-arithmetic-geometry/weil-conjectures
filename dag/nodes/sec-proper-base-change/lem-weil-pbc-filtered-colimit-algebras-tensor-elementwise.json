@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+ "kind": "statement",
+ "title": "Base change of a filtered colimit of algebras, elementwise",
+ "statement": "Let $R$ be a commutative ring, $I$ a small filtered category and $i\\mapsto A_i$ a functor from $I$ to the category of commutative $R$-algebras, with transition maps $A(u):A_i\\to A_j$ for $u:i\\to j$, colimit $A=\\varinjlim_IA_i$ in that category [def-weil-pbc-category-colimit] and coprojections $\\iota_i:A_i\\to A$. Let $N$ be an $R$-module, and put $\\gamma_i=\\iota_i\\otimes\\mathrm{id}_N:A_i\\otimes_RN\\to A\\otimes_RN$ and $\\gamma_u=A(u)\\otimes\\mathrm{id}_N:A_i\\otimes_RN\\to A_j\\otimes_RN$. Then (1) every element of $A\\otimes_RN$ is $\\gamma_i(t)$ for some $i\\in I$ and some $t\\in A_i\\otimes_RN$; (2) if $t\\in A_i\\otimes_RN$ satisfies $\\gamma_i(t)=0$, then $\\gamma_u(t)=0$ for some morphism $u:i\\to j$ of $I$. (Equivalently, $A\\otimes_RN$ with the maps $\\gamma_i$ is a colimit of the diagram $i\\mapsto A_i\\otimes_RN$ of $R$-modules.) When $N$ is a commutative $R$-algebra, the $\\gamma_i$ and $\\gamma_u$ are ring homomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934) with the elementwise description of filtered colimits, Lemma Tag 00D6 (lemma-directed-colimit, line 778); used without mention in more-algebra.tex, proof of Lemma Tag 0AH1 ('B (x)_A kappa(p) = colim B_i (x)_A kappa(p)')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product commutes with filtered colimit of algebras, base change of colimit",
+   "results": "Algebra.TensorProduct.cancelBaseChange (Mathlib.RingTheory.TensorProduct.Maps); TensorProduct.toDirectLimit, TensorProduct.directLimitLeft (Mathlib.LinearAlgebra.TensorProduct.DirectLimit, directed systems of modules over a preorder); Submodule.FG.rTensor.directLimit; IsLocalization.algebraTensorEquiv",
+   "verdict": "no match: directLimitLeft is for Module.DirectLimit of modules over a preorder, not for a filtered colimit of commutative algebras in a category",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of commutative algebras: forgetful functor to modules preserves filtered colimits, tensor product of filtered colimit of algebras with a module",
+   "results": "ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.forget_preservesFilteredColimits (Mathlib.Algebra.Category.ModuleCat.FilteredColimits)",
+   "verdict": "no match: ingredients only (filtered colimits of modules); no statement that the underlying module of a filtered colimit of commutative algebras is the module colimit, nor of its base change",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFilteredColimits' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category; grep -rln 'IsColimit' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/CommAlgCat /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct",
+   "results": "AlgCat/FilteredColimits.lean:92 forget₂ (AlgCat R) RingCat preserves filtered colimits, :95 forget (AlgCat R); Ring/FilteredColimits.lean:363 forget CommRingCat; ModuleCat/FilteredColimits.lean:202 forget (ModuleCat R); CommAlgCat/Monoidal.lean only binaryCofanIsColimit (tensor product is the coproduct); nothing on base change of filtered colimits",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-finite-separable-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

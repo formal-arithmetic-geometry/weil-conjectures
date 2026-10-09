@@ -1,7 +1,207 @@
 {
- "id":"lem-weil-pbc-henselization-finite-separable-fibres","kind":"statement","title":"A Noetherian filtered colimit of etale algebras has finite separable fibres",
- "statement":"Let $A$ be a commutative ring and let $B=\\varinjlim_{i\\in J}B_i$ [def-weil-pbc-category-colimit] be a filtered colimit of etale $A$-algebras [def-weil-etale-morphism]. Assume $B$ is Noetherian [def-weil-pbc-noetherian-ring]. For every prime $\\mathfrak p\\subset A$, there are finitely many primes $\\mathfrak q_1,\\ldots,\\mathfrak q_r\\subset B$ over $\\mathfrak p$ and a canonical product decomposition $B\\otimes_A\\kappa(\\mathfrak p)=\\prod_{j=1}^r\\kappa(\\mathfrak q_j)$, where $\\kappa(\\mathfrak p)$ and $\\kappa(\\mathfrak q_j)$ are residue fields [def-weil-residue-field], and each extension $\\kappa(\\mathfrak p)\\subset\\kappa(\\mathfrak q_j)$ is separable algebraic.",
- "source":{"document":"literature/stacks-project/more-algebra.tex","place":"Lemma Tag 0AH1 (more-algebra-lemma-filtered-colimit-etale-noetherian-fibres), used in Lemma Tag 0AH3"},"stmt_deps":["def-weil-pbc-category-colimit","def-weil-etale-morphism","def-weil-pbc-noetherian-ring","def-weil-residue-field"],
- "mathlib_searches":[{"tool":"leansearch","query":"henselization fibre over a prime is a finite product of separable residue fields","results":"Finite etale algebra decompositions exist, but no henselization theorem","date":"2026-10-10","verdict":"no match"},{"tool":"loogle","query":"TensorProduct over residue field product residue fields separable","results":"No matching henselization result","date":"2026-10-10","verdict":"no match"},{"tool":"grep","query":"rg -n -i 'henselization.*residue|finite product.*residue field|separable.*henselization' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/","results":"no matching theorem","date":"2026-10-10","verdict":"no match"}],
- "status":"unsplit","merged_into":null,"proof":[],"proof_deps":[],"proof_origin":null,"created":{"by":"worker","item":"lem-weil-pbc-henselization-pair-g-ring","date":"2026-10-10"},"lean_audit":{"master":{"state":"none","decls":[],"missing":[]},"slopmaster2":{"state":"none","decls":[],"missing":[]}},"chapter":"sec-proper-base-change","unit":"sk-thm-p1"
+ "id": "lem-weil-pbc-henselization-finite-separable-fibres",
+ "kind": "statement",
+ "title": "A Noetherian filtered colimit of etale algebras has finite separable fibres",
+ "statement": "Let $A$ be a commutative ring and let $B=\\varinjlim_{i\\in J}B_i$ be a filtered colimit, in the category of commutative $A$-algebras [def-weil-pbc-category-colimit], of etale $A$-algebras $B_i$, i.e. of $A$-algebras such that $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], [def-weil-affine-spectrum] (equivalently, by [lem-weil-pbc-etale-ring-map-iff-etale-affine], $A\\to B_i$ is an etale ring map in the sense of Stacks, Algebra, Definition 00U1). Assume $B$ is Noetherian [def-weil-pbc-noetherian-ring]. Let $\\mathfrak p\\subset A$ be a prime with residue field $\\kappa(\\mathfrak p)$ [def-weil-residue-field]. Then there are only finitely many primes $\\mathfrak q_1,\\ldots,\\mathfrak q_r\\subset B$ ($r\\ge0$) lying over $\\mathfrak p$; the canonical ring map $B\\otimes_A\\kappa(\\mathfrak p)\\to\\prod_{j=1}^r\\kappa(\\mathfrak q_j)$, $b\\otimes\\lambda\\mapsto(\\bar b\\,\\bar\\lambda)_j$ ($\\bar b$ the image of $b$ in $\\kappa(\\mathfrak q_j)$, $\\bar\\lambda$ the image of $\\lambda$ under the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q_j)$ induced by $A\\to B$), is an isomorphism; and each field extension $\\kappa(\\mathfrak p)\\subset\\kappa(\\mathfrak q_j)$ is separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1 (more-algebra-lemma-filtered-colimit-etale-noetherian-fibres, line 11236), used in Lemma Tag 0AH3 and Lemma Tag 07QQ (lemma-fibres-henselization, line 11270)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselization fibre over a prime is a finite product of separable residue fields",
+   "results": "Finite etale algebra decompositions exist, but no henselization theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct over residue field product residue fields separable",
+   "results": "No matching henselization result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'henselization.*residue|finite product.*residue field|separable.*henselization' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/",
+   "results": "no matching theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of étale algebras Noetherian, fiber over prime is product of residue fields separable algebraic",
+   "results": "Algebra.Etale.exists_subalgebra_fg (Mathlib.RingTheory.Smooth.NoetherianDescent); Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field); Algebra.IsEtaleAt.comp; Algebra.Etale.finitePresentation",
+   "date": "2026-10-10",
+   "verdict": "no match: only the etale-over-a-field ingredient (used in lem-weil-pbc-etale-algebra-over-field-product)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IndEtale\\|indEtale\\|Ind.*Etale' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rn 'Fiber' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+   "results": "no ind-etale algebras in Mathlib; Fiber.lean has the prime correspondence (primesOverOrderIsoFiber) but nothing on fibres of colimits of etale algebras (the earlier C1 grep record names a path of another machine, /home/ubuntu/SHEAF/...; repeated here on this machine's Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "proof": [
+  {
+   "text": "Notation. Put $\\kappa=\\kappa(\\mathfrak p)$, $C=B\\otimes_A\\kappa$, $C_i=B_i\\otimes_A\\kappa$, and for $i\\in J$ and $u:i\\to i'$ let $\\gamma_i=\\iota_i\\otimes\\mathrm{id}:C_i\\to C$ and $\\gamma_u=B(u)\\otimes\\mathrm{id}:C_i\\to C_{i'}$, where $\\iota_i:B_i\\to B$ are the coprojections; these are homomorphisms of $\\kappa$-algebras. By [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] (with $R=A$, $N=\\kappa$): (a) every element of $C$ is $\\gamma_i(y)$ for some $i$ and $y\\in C_i$; (b) if $y\\in C_i$ and $\\gamma_i(y)=0$, then $\\gamma_u(y)=0$ for some $u:i\\to i'$. So $C$ is the filtered colimit of the $C_i$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, first sentence: 'B (x)_A kappa(p) = colim B_i (x)_A kappa(p) is a filtered colimit'"
+   }
+  },
+  {
+   "text": "Each $C_i$ is a finite product of finite separable extensions of $\\kappa$. Indeed, $\\operatorname{Spec}(\\kappa\\otimes_AB_i)\\to\\operatorname{Spec}\\kappa$ is etale by [lem-weil-pbc-etale-ring-base-change] (base change of $A\\to B_i$ along $A\\to\\kappa$), and $\\kappa\\otimes_AB_i\\cong B_i\\otimes_A\\kappa=C_i$ as $\\kappa$-algebras by the symmetry of the tensor product. By [lem-weil-pbc-etale-algebra-over-field-product] there is a $\\kappa$-algebra isomorphism $C_i\\cong L_{i,1}\\times\\cdots\\times L_{i,n_i}$ with each $L_{i,k}$ a finite separable algebraic field extension of $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'is a filtered colimit of etale kappa(p)-algebras ... An etale kappa(p)-algebra is a finite product of finite separable field extensions (Algebra, Lemma 00U3)'"
+   }
+  },
+  {
+   "text": "Facts on a finite product $P=L_1\\times\\cdots\\times L_n$ of fields, with idempotents $e_k$ (1 in the $k$-th factor, 0 elsewhere): (a) $P$ is reduced (a nilpotent element has nilpotent, hence zero, components); (b) every prime ideal $\\mathfrak P$ of $P$ is the kernel of a projection $\\mathrm{pr}_k:P\\to L_k$, hence is maximal and $P/\\mathfrak P\\cong L_k$. For (b): $e_ke_l=0\\in\\mathfrak P$ for $k\\ne l$ and $\\sum_ke_k=1\\notin\\mathfrak P$, so exactly one $e_k$ lies outside $\\mathfrak P$; then $1-e_k=\\sum_{l\\ne k}e_l\\in\\mathfrak P$, so $\\ker\\mathrm{pr}_k=(1-e_k)P\\subseteq\\mathfrak P$; as $P/\\ker\\mathrm{pr}_k\\cong L_k$ is a field, $\\ker\\mathrm{pr}_k$ is maximal, so $\\mathfrak P=\\ker\\mathrm{pr}_k$. By Step 2 this applies to every $C_i$: $C_i$ is reduced, all its primes are maximal (so there are no strict inclusions between them), and $C_i/\\mathfrak P$ is one of the $L_{i,k}$ for every prime $\\mathfrak P$ of $C_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Hence there are no nontrivial specializations between the primes (which are all maximal and minimal primes) of the algebras B_i (x)_A kappa(p)'"
+   }
+  },
+  {
+   "text": "$C$ is reduced. Let $x\\in C$ with $x^n=0$. By Step 1(a), $x=\\gamma_i(y)$ with $y\\in C_i$; then $\\gamma_i(y^n)=x^n=0$, so by Step 1(b) $\\gamma_u(y)^n=\\gamma_u(y^n)=0$ for some $u:i\\to i'$. As $C_{i'}$ is reduced (Step 3), $\\gamma_u(y)=0$, and $x=\\gamma_{i'}(\\gamma_u(y))=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Thus B (x)_A kappa(p) is reduced'"
+   }
+  },
+  {
+   "text": "There are no strict inclusions between the primes of $C$; hence every prime of $C$ is both minimal and maximal. Let $\\mathfrak Q\\subseteq\\mathfrak Q'$ be primes of $C$. For each $i$, $\\gamma_i^{-1}(\\mathfrak Q)\\subseteq\\gamma_i^{-1}(\\mathfrak Q')$ are primes of $C_i$, so they are equal by Step 3. If $x\\in\\mathfrak Q'$, write $x=\\gamma_i(y)$ (Step 1(a)); then $y\\in\\gamma_i^{-1}(\\mathfrak Q')=\\gamma_i^{-1}(\\mathfrak Q)$, so $x\\in\\mathfrak Q$. Thus $\\mathfrak Q=\\mathfrak Q'$. Every prime is therefore minimal, and it is maximal, since it is contained in some maximal ideal, which is prime.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'hence there are no nontrivial specializations between the primes of B (x)_A kappa(p) ... has finitely many primes which all minimal'"
+   }
+  },
+  {
+   "text": "$C$ has only finitely many primes $\\mathfrak Q_1,\\ldots,\\mathfrak Q_r$ ($r\\ge0$), all maximal. Indeed $C$ is Noetherian by [lem-weil-pbc-fibre-ring-noetherian], since $B$ is; so $C$ has finitely many minimal primes by [lem-weil-pbc-noetherian-finitely-many-minimal-primes], and by Step 5 every prime of $C$ is minimal and maximal.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'and on the other hand it is Noetherian ... has finitely many primes which all minimal'"
+   }
+  },
+  {
+   "text": "$C\\cong\\prod_{j=1}^rC_{\\mathfrak Q_j}$ and each $C_{\\mathfrak Q_j}$ is a field, equal to the residue field $\\kappa(\\mathfrak Q_j)$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=0$) the nilradical of $C$ is the intersection of all primes, i.e. $\\mathfrak Q_1\\cap\\cdots\\cap\\mathfrak Q_r$ (Step 6), and it is $0$ by Step 4. So the maximal ideals $\\mathfrak Q_1,\\dots,\\mathfrak Q_r$ of $C$ satisfy the hypothesis of [lem-weil-pbc-product-of-localizations-at-maximal], and the canonical map $C\\to\\prod_jC_{\\mathfrak Q_j}$, $c\\mapsto(c/1)_j$, into the localizations [def-weil-pbc-localization-at-prime] is an isomorphism of $\\kappa$-algebras, each $C_{\\mathfrak Q_j}$ a local ring. Each projection $\\pi_j:C\\to C_{\\mathfrak Q_j}$ is surjective; $C_{\\mathfrak Q_j}$ is reduced, being a factor of the reduced ring $C$; and every prime $\\mathfrak P$ of $C_{\\mathfrak Q_j}$ is maximal, because $C_{\\mathfrak Q_j}/\\mathfrak P\\cong C/\\pi_j^{-1}(\\mathfrak P)$ is a field ($\\pi_j^{-1}(\\mathfrak P)$ is a prime, hence maximal, ideal of $C$). So the only prime of the local ring $C_{\\mathfrak Q_j}$ is its maximal ideal $\\mathfrak Q_jC_{\\mathfrak Q_j}$, which by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] is its nilradical, i.e. $0$. Hence $C_{\\mathfrak Q_j}=C_{\\mathfrak Q_j}/\\mathfrak Q_jC_{\\mathfrak Q_j}=\\kappa(\\mathfrak Q_j)$ [def-weil-residue-field] is a field.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Thus it is a finite product of fields (use Algebra, Lemma 02LX or Algebra, Proposition 00KJ)'; the product decomposition is Algebra, Lemma 00JA (lemma-product-local), used in the proof of 00KJ"
+   }
+  },
+  {
+   "text": "Primes of $B$ over $\\mathfrak p$ and the canonical isomorphism. Let $j_B:B\\to C$, $b\\mapsto b\\otimes1$, and $\\mathfrak q_j=j_B^{-1}(\\mathfrak Q_j)$. By [lem-weil-pbc-fibre-ring-primes-residue-fields](1), $\\mathfrak q_1,\\dots,\\mathfrak q_r$ are pairwise distinct and are all the primes of $B$ lying over $\\mathfrak p$ (so there are finitely many), and $\\mathfrak Q_j=\\ker\\psi_{\\mathfrak q_j}$ with $\\psi_{\\mathfrak q_j}:C\\to\\kappa(\\mathfrak q_j)$, $b\\otimes\\lambda\\mapsto\\bar b\\,\\bar\\lambda$. By part (2) of that node, $\\psi_{\\mathfrak q_j}$ is the composite of $C\\to\\kappa(\\mathfrak Q_j)$ with an isomorphism $\\kappa(\\mathfrak Q_j)\\cong\\kappa(\\mathfrak q_j)$. Composing the isomorphism $C\\cong\\prod_j\\kappa(\\mathfrak Q_j)$ of Step 7 (whose $j$-th component is $C\\to C_{\\mathfrak Q_j}=\\kappa(\\mathfrak Q_j)$) with these isomorphisms shows that the canonical map $C\\to\\prod_j\\kappa(\\mathfrak q_j)$, $b\\otimes\\lambda\\mapsto(\\psi_{\\mathfrak q_j}(b\\otimes\\lambda))_j=(\\bar b\\,\\bar\\lambda)_j$, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, statement 'there are finitely many primes q_1,...,q_r lying over p, we have B (x)_A kappa(p) = prod kappa(q_i)'; the identification of the primes and residue fields of the fibre ring with those of B over p is Algebra, Remarks 00E6 and 0H9M"
+   }
+  },
+  {
+   "text": "Each $\\kappa(\\mathfrak q_j)/\\kappa$ is separable algebraic. By Step 8, $\\psi_j=\\psi_{\\mathfrak q_j}:C\\to\\kappa(\\mathfrak q_j)$ is surjective and $\\kappa$-linear for the $\\kappa$-structure on $\\kappa(\\mathfrak q_j)$ given by $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q_j)$. Let $\\alpha\\in\\kappa(\\mathfrak q_j)$; write $\\alpha=\\psi_j(x)$ and $x=\\gamma_i(y)$ with $y\\in C_i$ (Step 1(a)). The $\\kappa$-algebra map $\\psi_j\\circ\\gamma_i:C_i\\to\\kappa(\\mathfrak q_j)$ has prime kernel $\\mathfrak P$ (its target is a field), and by Step 3 $C_i/\\mathfrak P\\cong L_{i,k}$ for some $k$; so $\\psi_j\\circ\\gamma_i$ induces a $\\kappa$-embedding of fields $L_{i,k}\\hookrightarrow\\kappa(\\mathfrak q_j)$ whose image contains $\\alpha$. The preimage $\\beta\\in L_{i,k}$ of $\\alpha$ is algebraic and separable over $\\kappa$ (Step 2), and since a $\\kappa$-embedding preserves polynomial relations, $\\alpha$ has the same minimal polynomial over $\\kappa$ as $\\beta$, which is separable. Hence every element of $\\kappa(\\mathfrak q_j)$ is algebraic and separable over $\\kappa$, i.e. $\\kappa(\\mathfrak q_j)/\\kappa(\\mathfrak p)$ is separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, last sentence: 'Each of these fields is a colimit of finite separable extensions and hence the final statement of the lemma follows'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-pair-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselization-finite-separable-fibres",
+  "worker": "stage1",
+  "summary": "Read Stacks More on Algebra Lemma 0AH1 (more-algebra.tex line 11236) and its proof, and the cited Algebra 00U3, 02LX/00KJ (through 00JA), 00E6, 0H9M, 00FN, 00FR, 00DD, 00D6, all checked in tags/tags. The statement agreed with Stacks (hypothesis: B Noetherian; conclusion: separable algebraic, not finite, residue extensions) and was only made precise: colimit taken in commutative A-algebras, 'etale A-algebra' spelled out as Spec B_i -> Spec A etale with the 00U1 equivalence cited, the 'canonical decomposition' written as the explicit map b(x)lambda -> (bbar lambdabar)_j, r >= 0 allowed, and the separable-algebraic definition cited. Proof written in nine steps following the Stacks proof: fibre as filtered colimit, fibres of the B_i finite products of finite separable extensions, facts on finite products of fields, reducedness, no specializations, Noetherian hence finitely many primes, product of fields via 00JA and the nilradical, identification with residue fields of the primes of B over p, separability. Five new nodes: 00U3 (Mathlib leaf Algebra.Etale.iff_exists_algEquiv_prod), 00FR (Mathlib leaf minimalPrimes.finite_of_isNoetherianRing), and unsplit nodes for the base change of a filtered colimit of algebras (00DD/00D6), the primes and residue fields of the fibre ring (00E6/0H9M; Mathlib has the prime part only) and Noetherianity of the fibre ring (00E6/00FN)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; statement made precise by the worker (colimit in A-algebras, 'etale A-algebra' via lem-weil-pbc-etale-ring-map-iff-etale-affine, the canonical map written out, r = 0 allowed, separable algebraic cited; the residue extensions are separable algebraic, not necessarily finite, as in Stacks). Nine steps along the proof of 0AH1, five new nodes: two Mathlib leaves verified by line (00U3: Algebra.Etale.iff_exists_algEquiv_prod Etale/Field.lean:271; 00FR: minimalPrimes.finite_of_isNoetherianRing MinimalPrime/Noetherian.lean:43) and three unsplit (the elementwise description of a tensored filtered colimit of algebras, 00DD+00D6; primes of the fibre ring and their residue fields, 00E6/0H9M; the fibre ring of a Noetherian algebra is Noetherian). The fibre is a filtered colimit of finite products of finite separable extensions, hence reduced with incomparable primes, Noetherian with finitely many primes, so a product of its residue fields (00JA node), identified with the residue fields of the primes of B over p; separability passes to the colimit."
+ }
 }

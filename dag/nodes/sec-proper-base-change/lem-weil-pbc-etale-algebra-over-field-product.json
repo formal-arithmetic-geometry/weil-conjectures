@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-over-field-product",
+ "kind": "statement",
+ "title": "An etale algebra over a field is a finite product of finite separable extensions",
+ "statement": "Let $k$ be a field and $C$ a commutative $k$-algebra such that $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ is etale [def-weil-etale-morphism], [def-weil-affine-spectrum] (equivalently, by [lem-weil-pbc-etale-ring-map-iff-etale-affine], $k\\to C$ is an etale ring map in the sense of Stacks, Algebra, Definition 00U1). Then there are an integer $n\\ge0$, fields $L_1,\\dots,L_n$, each a field extension of $k$ [def-pc-field-extension] which is finite ($\\dim_kL_j<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension], and an isomorphism of $k$-algebras $C\\cong L_1\\times\\cdots\\times L_n$ (for $n=0$ the zero ring).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00U3 (algebra-lemma-etale-over-field, line 39394), direction 'etale implies finite product of finite separable extensions'"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra over a field is a finite product of finite separable field extensions",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field); Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.iff_isSeparable; Algebra.FormallyEtale.of_isSeparable",
+   "verdict": "match: Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of etale algebra along A -> kappa(p) gives etale algebra over residue field, a finite product of finite separable extensions",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field); RingHom.etale_algebraMap (Mathlib.RingTheory.RingHom.Etale); Algebra.IsEtaleAt.comp",
+   "verdict": "match: Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'iff_exists_algEquiv_prod' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/",
+   "results": "Mathlib/RingTheory/Etale/Field.lean:194 Algebra.FormallyEtale.iff_exists_algEquiv_prod (needs EssFiniteType), :271 Algebra.Etale.iff_exists_algEquiv_prod (read with sed -n 260,290p)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Etale.iff_exists_algEquiv_prod",
+  "file": "Mathlib/RingTheory/Etale/Field.lean",
+  "line": 271,
+  "how": "exact (direction mp): for a field K and a commutative K-algebra A, `Algebra.Etale K A ↔ ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ : A ≃ₐ[K] Π i, Ai i), ∀ i, Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)`; the hypothesis `Algebra.Etale k C` is the node's hypothesis by the match of lem-weil-pbc-etale-ring-map-iff-etale-affine (HasRingHomProperty.Spec_iff with RingHom.etale_algebraMap). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-finite-separable-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
