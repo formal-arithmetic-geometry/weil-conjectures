@@ -690,6 +690,7 @@ theorem _root_.MvPolynomial.isMaximal_span_X_of_unique {K : Type*} [Field K] {σ
   rw [h]
   infer_instance
 
+set_option linter.unusedSectionVars false in
 /-- **Degree of pullbacks of divisors.** Let `π : X ⟶ Y` be a finite flat morphism of proper
 smooth integral curves over an algebraically closed field `k`, of degree `d`, so that `π_* 𝒪_X`
 is locally free of rank `d`. Let `y` be a closed point of `Y` with uniformizer `t`, a section on
@@ -717,7 +718,7 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
   have := hW.isOpenImmersion_fromSpec
   have := hU.isOpenImmersion_fromSpec
   let φ : Γ(Y, W) ⟶ Γ(X, π ⁻¹ᵁ W) := π.appLE W (π ⁻¹ᵁ W) le_rfl
-  letI : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := φ.hom.toAlgebra
+  let : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := φ.hom.toAlgebra
   have : Module.Finite Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := by
     have := π.finite_app W hW
     rwa [← Scheme.Hom.appLE_eq_app] at this
@@ -831,8 +832,8 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
   -- the inertia degree is `1`
   let κA : k →+* Γ(Y, W) :=
     ((Scheme.ΓSpecIso (.of k)).inv ≫ (Y ↘ Spec (.of k)).appLE ⊤ W le_top).hom
-  letI : Algebra k Γ(Y, W) := κA.toAlgebra
-  letI : Algebra k Γ(X, π ⁻¹ᵁ W) := (φ.hom.comp κA).toAlgebra
+  let : Algebra k Γ(Y, W) := κA.toAlgebra
+  let : Algebra k Γ(X, π ⁻¹ᵁ W) := (φ.hom.comp κA).toAlgebra
   have : IsScalarTower k Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : Algebra.FiniteType k Γ(Y, W) := by
     have h := HasRingHomProperty.appLE @LocallyOfFiniteType (Y ↘ Spec (.of k)) inferInstance
@@ -847,14 +848,14 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
     ((Ideal.LiesOver.over (P := q.1) (p := p)) ▸ hpmax)
   rw [Ideal.inertiaDeg_eq_one_of_isAlgClosed (k := k) p q.1, Nat.cast_one, mul_one]
   -- the ramification index is the order of vanishing
-  letI := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨e q, hxU⟩
+  let := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨e q, hxU⟩
   have hloc := hU.isLocalization_stalk ⟨e q, hxU⟩
   rw [hpq] at hloc
-  letI : Algebra Γ(Y, W) (X.presheaf.stalk (e q)) :=
+  let : Algebra Γ(Y, W) (X.presheaf.stalk (e q)) :=
     ((algebraMap Γ(X, π ⁻¹ᵁ W) (X.presheaf.stalk (e q))).comp φ.hom).toAlgebra
   have : IsScalarTower Γ(Y, W) Γ(X, π ⁻¹ᵁ W) (X.presheaf.stalk (e q)) :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  letI := TopCat.Presheaf.algebra_section_stalk Y.presheaf ⟨π (e q), show π (e q) ∈ W from hxU⟩
+  let := TopCat.Presheaf.algebra_section_stalk Y.presheaf ⟨π (e q), show π (e q) ∈ W from hxU⟩
   have hlocY := hW.isLocalization_stalk ⟨π (e q), show π (e q) ∈ W from hxU⟩
   have hpy : hW.primeIdealOf ⟨π (e q), show π (e q) ∈ W from hxU⟩ =
       hW.primeIdealOf ⟨y, hyW⟩ := congrArg _ (Subtype.ext hxy)
@@ -1043,7 +1044,7 @@ flat morphism `π_f : X ⟶ ℙ¹_k` of degree `d`, whose degree is `d - d = 0`.
 theorem finsum_ord_eq_zero [IsIntegral X] [IsLocallyNoetherian X] {f : X.functionField}
     (hf : f ≠ 0) : ∑ᶠ x : X, X.ord f x = 0 := by
   classical
-  letI := (functionFieldRingHom k X).toAlgebra
+  let := (functionFieldRingHom k X).toAlgebra
   by_cases ht : Transcendental k f
   swap
   · -- `f` is algebraic over the algebraically closed `k`, so it is a nonzero constant
