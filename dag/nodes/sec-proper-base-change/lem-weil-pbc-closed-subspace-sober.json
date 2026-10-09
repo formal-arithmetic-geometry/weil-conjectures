@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-closed-subspace-sober",
+ "kind": "statement",
+ "title": "A closed subspace of a sober space is sober",
+ "statement": "Let $X$ be a topological space which is sober: every irreducible closed subset of $X$ [def-weil-irreducible-components] has a unique generic point. Let $E\\subseteq X$ be a closed subset. Then $E$ with the induced topology is sober: every irreducible closed subset $Z\\subseteq E$ has a unique point $\\eta\\in Z$ whose closure in $E$ is $Z$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma (Tag 0B31, label lemma-sober-subspace, line 996), parts (1) Kolmogorov, (2) and (3) in the case $Y$ closed"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed subspace of a quasi-sober space is quasi-sober",
+   "results": "Topology.IsClosedEmbedding.quasiSober (Mathlib.Topology.Sober), Topology.IsOpenEmbedding.quasiSober, QuasiSober, quasiSober_iff, SpectralSpace.toQuasiSober",
+   "date": "2026-10-10",
+   "verdict": "match (existence of generic points)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a closed subspace of a sober (quasi-sober and T0) topological space is sober",
+   "results": "Topology.IsClosedEmbedding.quasiSober (Mathlib.Topology.Sober), isClosed_irreducibleComponent, TopologicalSpace.IrreducibleCloseds.isClosed",
+   "date": "2026-10-10",
+   "verdict": "match (existence of generic points)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsClosedEmbedding.quasiSober\\|protected theorem eq' Mathlib/Topology/Sober.lean; grep -n 'Subtype.t0Space' Mathlib/Topology/Separation/Basic.lean; grep -rn 'IsClosed.isClosedEmbedding_subtypeVal' Mathlib/Topology (mathlib of ~/weil-conjectures-slopmaster2)",
+   "results": "Sober.lean:182 Topology.IsClosedEmbedding.quasiSober; Sober.lean:79 IsGenericPoint.eq [T0Space]; Separation/Basic.lean:231 instance Subtype.t0Space; Constructions.lean:403 IsClosed.isClosedEmbedding_subtypeVal",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsClosedEmbedding _ → QuasiSober _",
+   "results": "not answered (rate limit exceeded, shared limit of 3 per 30 s)",
+   "date": "2026-10-10",
+   "verdict": "no result"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsClosedEmbedding.quasiSober, Subtype.t0Space, IsGenericPoint.eq",
+  "file": "Mathlib/Topology/Sober.lean",
+  "line": 182,
+  "how": "specializes in one line: sober in the node's sense is QuasiSober (existence) plus T0Space (uniqueness, IsGenericPoint.eq, Sober.lean:79); existence for E is `Topology.IsClosedEmbedding.quasiSober (hE.isClosedEmbedding_subtypeVal)` (Sober.lean:182; IsClosed.isClosedEmbedding_subtypeVal, Mathlib/Topology/Constructions.lean:403), T0 for E is the instance `Subtype.t0Space` (Mathlib/Topology/Separation/Basic.lean:231); T0 of X follows from the node's hypothesis since closures of points are irreducible closed with the point as generic point"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-closed-subspace",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

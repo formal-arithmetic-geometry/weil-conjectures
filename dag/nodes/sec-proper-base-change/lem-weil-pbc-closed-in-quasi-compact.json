@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-closed-in-quasi-compact",
+ "kind": "statement",
+ "title": "A closed subset of a quasi-compact space is quasi-compact",
+ "statement": "Let $X$ be a quasi-compact topological space (every open covering of $X$ has a finite subcovering) and $E\\subseteq X$ a closed subset. Then $E$ is quasi-compact in the induced topology: every covering of $E$ by subsets open in $E$ has a finite subcovering.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma (Tag 005C, label lemma-closed-in-quasi-compact, line 1662)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a closed subset of a compact space is compact",
+   "results": "IsClosed.isCompact, IsCompact.of_isClosed_subset (Mathlib.Topology.Compactness.Compact), TopologicalSpace.Closeds.instCompactSpace, IsCompact.closure",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed subset of a quasi-compact topological space is quasi-compact",
+   "results": "AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.quasiCompact_of_compactSpace, quasiSeparatedSpace_iff_affine (all scheme-level, not the topological lemma)",
+   "date": "2026-10-10",
+   "verdict": "no match (the topological lemma is found by the other searches)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem IsClosed.isCompact\\|theorem isCompact_iff_compactSpace\\|IsClosedEmbedding.compactSpace\\|theorem IsCompact.inter_right' Mathlib/Topology/Compactness/Compact.lean (mathlib of ~/weil-conjectures-slopmaster2)",
+   "results": "Compact.lean:865 IsClosed.isCompact [CompactSpace X] (h : IsClosed s) : IsCompact s; :1057 isCompact_iff_compactSpace; :1072 Topology.IsClosedEmbedding.compactSpace; :87 IsCompact.inter_right",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosed ?s → IsCompact ?s",
+   "results": "not answered (rate limit exceeded, shared limit of 3 per 30 s)",
+   "date": "2026-10-10",
+   "verdict": "no result"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsClosed.isCompact",
+  "file": "Mathlib/Topology/Compactness/Compact.lean",
+  "line": 865,
+  "how": "exact: `IsClosed.isCompact [CompactSpace X] (h : IsClosed s) : IsCompact s`; quasi-compactness of $E$ in the induced topology is `IsCompact E`, equivalently `CompactSpace E` by `isCompact_iff_compactSpace` (line 1057)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-closed-subspace",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
