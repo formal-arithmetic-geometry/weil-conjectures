@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
 # Base change of binary coproducts of schemes
@@ -87,15 +88,6 @@ namespace AlgebraicGeometry
 section
 
 variable {X Y : Scheme.{u}}
-
-/-- A property local at the source holds for `coprod.desc f g` if it holds for `f` and `g`. -/
-lemma IsZariskiLocalAtSource.coprodDesc (P : MorphismProperty Scheme.{u})
-    [IsZariskiLocalAtSource P] {Z : Scheme.{u}} {f : X ⟶ Z} {g : Y ⟶ Z} (hf : P f) (hg : P g) :
-    P (coprod.desc f g) := by
-  rw [IsZariskiLocalAtSource.iff_of_openCover (P := P) (coprodOpenCover.{_, 0} X Y)]
-  rintro (⟨⟨⟩⟩ | ⟨⟨⟩⟩)
-  · simpa [coprodOpenCover] using hf
-  · simpa [coprodOpenCover] using hg
 
 instance [CompactSpace X] [CompactSpace Y] : CompactSpace (X ⨿ Y : Scheme.{u}) :=
   (coprodMk X Y).compactSpace

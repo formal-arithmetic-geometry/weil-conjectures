@@ -14,8 +14,8 @@ public import Mathlib.CategoryTheory.Galois.Equivalence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
-
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory
+
 /-!
 # The étale fundamental group of a connected scheme
 

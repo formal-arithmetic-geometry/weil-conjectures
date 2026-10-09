@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
 # The Galois category axioms for finite étale schemes
@@ -73,68 +74,7 @@ noncomputable def toAffineOverFullyFaithful : (toAffineOver Y).FullyFaithful whe
 instance : (toAffineOver Y).Full := toAffineOverFullyFaithful.full
 instance : (toAffineOver Y).Faithful := toAffineOverFullyFaithful.faithful
 
-/-- Two open immersions with disjoint images covering the target exhibit it as a coproduct. -/
-lemma _root_.AlgebraicGeometry.isIso_coprodDesc_of_isOpenImmersion {X X' Z : Scheme.{u}}
-    (a : X ⟶ Z) (b : X' ⟶ Z) [IsOpenImmersion a] [IsOpenImmersion b]
-    (hdisj : ∀ x x', a x ≠ b x') (hcov : ∀ z, z ∈ Set.range a ∨ z ∈ Set.range b) :
-    IsIso (coprod.desc a b) := by
-  have hinl (x : X) : coprod.desc a b ((coprod.inl : X ⟶ X ⨿ X') x) = a x := by
-    rw [← Scheme.Hom.comp_apply, coprod.inl_desc]
-  have hinr (x : X') : coprod.desc a b ((coprod.inr : X' ⟶ X ⨿ X') x) = b x := by
-    rw [← Scheme.Hom.comp_apply, coprod.inr_desc]
-  have hpt (p : (X ⨿ X' : Scheme.{u})) :
-      (∃ x, p = (coprod.inl : X ⟶ X ⨿ X') x) ∨ ∃ x', p = (coprod.inr : X' ⟶ X ⨿ X') x' := by
-    obtain ⟨(x | x), rfl⟩ := (coprodMk X X').surjective p
-    · exact .inl ⟨x, coprodMk_inl X X' x⟩
-    · exact .inr ⟨x, coprodMk_inr X X' x⟩
-  rw [isIso_iff_isOpenImmersion_and_surjective]
-  refine ⟨IsOpenImmersion.iff_isIso_stalkMap.mpr ⟨?_, fun p ↦ ?_⟩, ⟨fun z ↦ ?_⟩⟩
-  · refine .of_continuous_injective_isOpenMap (coprod.desc a b).continuous ?_ ?_
-    · intro p q hpq
-      rcases hpt p with ⟨x, rfl⟩ | ⟨x, rfl⟩ <;> rcases hpt q with ⟨y, rfl⟩ | ⟨y, rfl⟩
-      · rw [hinl, hinl] at hpq; rw [a.isOpenEmbedding.injective hpq]
-      · rw [hinl, hinr] at hpq; exact (hdisj _ _ hpq).elim
-      · rw [hinr, hinl] at hpq; exact (hdisj _ _ hpq.symm).elim
-      · rw [hinr, hinr] at hpq; rw [b.isOpenEmbedding.injective hpq]
-    · intro U hU
-      have : (coprod.desc a b) '' U =
-          a '' ((coprod.inl : X ⟶ X ⨿ X') ⁻¹' U) ∪ b '' ((coprod.inr : X' ⟶ X ⨿ X') ⁻¹' U) := by
-        ext z
-        constructor
-        · rintro ⟨p, hp, rfl⟩
-          rcases hpt p with ⟨x, rfl⟩ | ⟨x, rfl⟩
-          · exact .inl ⟨x, hp, (hinl x).symm⟩
-          · exact .inr ⟨x, hp, (hinr x).symm⟩
-        · rintro (⟨x, hx, rfl⟩ | ⟨x, hx, rfl⟩)
-          · exact ⟨_, hx, hinl x⟩
-          · exact ⟨_, hx, hinr x⟩
-      rw [this]
-      exact (a.isOpenEmbedding.isOpenMap _ (hU.preimage (coprod.inl : X ⟶ X ⨿ X').continuous)).union
-        (b.isOpenEmbedding.isOpenMap _ (hU.preimage (coprod.inr : X' ⟶ X ⨿ X').continuous))
-  · rcases hpt p with ⟨x, rfl⟩ | ⟨x, rfl⟩
-    · have h := Scheme.Hom.stalkMap_comp (coprod.inl : X ⟶ X ⨿ X') (coprod.desc a b) x
-      rw [Scheme.Hom.stalkMap_congr_hom _ _ (coprod.inl_desc a b) x] at h
-      have : IsIso ((coprod.desc a b).stalkMap ((coprod.inl : X ⟶ X ⨿ X') x) ≫
-          (coprod.inl : X ⟶ X ⨿ X').stalkMap x) := by rw [← h]; infer_instance
-      exact IsIso.of_isIso_comp_right _ ((coprod.inl : X ⟶ X ⨿ X').stalkMap x)
-    · have h := Scheme.Hom.stalkMap_comp (coprod.inr : X' ⟶ X ⨿ X') (coprod.desc a b) x
-      rw [Scheme.Hom.stalkMap_congr_hom _ _ (coprod.inr_desc a b) x] at h
-      have : IsIso ((coprod.desc a b).stalkMap ((coprod.inr : X' ⟶ X ⨿ X') x) ≫
-          (coprod.inr : X' ⟶ X ⨿ X').stalkMap x) := by rw [← h]; infer_instance
-      exact IsIso.of_isIso_comp_right _ ((coprod.inr : X' ⟶ X ⨿ X').stalkMap x)
-  · rcases hcov z with ⟨x, rfl⟩ | ⟨x, rfl⟩
-    · exact ⟨_, hinl x⟩
-    · exact ⟨_, hinr x⟩
-
 section Limits
-
-/-- A coproduct of two étale morphisms is étale. -/
-lemma _root_.AlgebraicGeometry.Etale.coprodDesc {X X' Z : Scheme.{u}} (f : X ⟶ Z) (g : X' ⟶ Z)
-    [Etale f] [Etale g] : Etale (coprod.desc f g) := by
-  rw [IsZariskiLocalAtSource.iff_of_openCover (P := @Etale) (coprodOpenCover.{_, 0} X X')]
-  rintro (⟨⟩ | ⟨⟩)
-  · simpa [coprodOpenCover] using ‹Etale f›
-  · simpa [coprodOpenCover] using ‹Etale g›
 
 variable (Y) in
 /-- `FÉt(Y)` as the category of `Y`-schemes with finite étale structure morphism. -/
@@ -186,7 +126,7 @@ noncomputable def isInitialEmpty : IsInitial (empty (Y := Y)) :=
 /-- The disjoint union of two finite étale `Y`-schemes. -/
 noncomputable def coprod (P Q : Y.FiniteEtale) : Y.FiniteEtale :=
   ⟨MorphismProperty.Over.mk ⊤ (Limits.coprod.desc P.obj.hom Q.obj.hom)
-    (by have := P.obj.prop; have := Q.obj.prop; exact Etale.coprodDesc _ _),
+    (IsZariskiLocalAtSource.coprodDesc @Etale P.obj.prop Q.obj.prop),
     by
       have : IsFinite P.obj.hom := P.property
       have : IsFinite Q.obj.hom := Q.property
@@ -236,7 +176,22 @@ noncomputable def isColimitOfIsOpenImmersion {X X' Z : Y.FiniteEtale} (i : X ⟶
   have : IsIso ((forgetScheme Y).map
       ((isColimitCoprodCofan X X').desc (BinaryCofan.mk i j))) := by
     change IsIso (coprod.desc i.hom.left j.hom.left)
-    exact isIso_coprodDesc_of_isOpenImmersion _ _ hdisj hcov
+    have hc : IsCompl i.hom.left.opensRange j.hom.left.opensRange := by
+      rw [isCompl_iff, disjoint_iff, codisjoint_iff]
+      refine ⟨TopologicalSpace.Opens.ext (Set.eq_empty_iff_forall_notMem.mpr ?_),
+        TopologicalSpace.Opens.ext (Set.eq_univ_iff_forall.mpr hcov)⟩
+      rintro _ ⟨⟨x, rfl⟩, ⟨x', hx'⟩⟩
+      exact hdisj x x' hx'.symm
+    obtain ⟨h⟩ := nonempty_isColimit_binaryCofanMk_of_isCompl _ _ hc
+    have : coprod.desc i.hom.left j.hom.left =
+        ((coprodIsCoprod _ _).coconePointUniqueUpToIso h).hom := by
+      ext
+      · rw [coprod.inl_desc]
+        exact ((coprodIsCoprod _ _).comp_coconePointUniqueUpToIso_hom h ⟨.left⟩).symm
+      · rw [coprod.inr_desc]
+        exact ((coprodIsCoprod _ _).comp_coconePointUniqueUpToIso_hom h ⟨.right⟩).symm
+    rw [this]
+    infer_instance
   have : IsIso ((isColimitCoprodCofan X X').desc (BinaryCofan.mk i j)) :=
     isIso_of_reflects_iso _ (forgetScheme Y)
   IsColimit.ofPointIso (isColimitCoprodCofan X X')
@@ -500,6 +455,21 @@ end Connected
 
 end FiberLimits
 
+/-- The leg of a cocone over a monoid action on a type identifies the points related by the
+equivalence relation generated by the action. -/
+lemma _root_.CategoryTheory.Limits.Types.cocone_ι_app_eq_of_eqvGen {M : Type*} [Monoid M]
+    {J : SingleObj M ⥤ Type*} (t : Cocone J) {x y : J.obj (SingleObj.star M)}
+    (h : Relation.EqvGen (fun x y ↦ ∃ m : M, J.map m x = y) x y) :
+    t.ι.app (SingleObj.star M) x = t.ι.app (SingleObj.star M) y := by
+  induction h with
+  | rel x y hxy =>
+    obtain ⟨m, rfl⟩ := hxy
+    exact (ConcreteCategory.congr_hom
+      (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
+  | refl => rfl
+  | symm _ _ _ ih => exact ih.symm
+  | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
+
 /-- A cocone over a monoid action on a type is a colimit if its leg is surjective and identifies
 exactly the points related by the equivalence relation generated by the action. -/
 noncomputable def _root_.CategoryTheory.Limits.Types.isColimitOfSurjectiveOfEqvGen
@@ -511,35 +481,13 @@ noncomputable def _root_.CategoryTheory.Limits.Types.isColimitOfSurjectiveOfEqvG
   fac t j := by
     obtain rfl : j = SingleObj.star M := rfl
     ext x
-    have key : ∀ x y, Relation.EqvGen (fun x y ↦ ∃ m : M, J.map m x = y) x y →
-        t.ι.app (SingleObj.star M) x = t.ι.app (SingleObj.star M) y := by
-      intro x y h
-      induction h with
-      | rel x y hxy =>
-        obtain ⟨m, rfl⟩ := hxy
-        exact (ConcreteCategory.congr_hom
-          (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
-      | refl => rfl
-      | symm _ _ _ ih => exact ih.symm
-      | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
-    exact key _ _ (hf _ _ (Function.surjInv_eq hs _))
+    exact Types.cocone_ι_app_eq_of_eqvGen t (hf _ _ (Function.surjInv_eq hs _))
   uniq t m hm := by
     ext z
     obtain ⟨x, rfl⟩ := hs z
     have := ConcreteCategory.congr_hom (hm (SingleObj.star M)) x
     rw [ConcreteCategory.comp_apply] at this
-    have key : ∀ x y, Relation.EqvGen (fun x y ↦ ∃ m : M, J.map m x = y) x y →
-        t.ι.app (SingleObj.star M) x = t.ι.app (SingleObj.star M) y := by
-      intro x y h
-      induction h with
-      | rel x y hxy =>
-        obtain ⟨m, rfl⟩ := hxy
-        exact (ConcreteCategory.congr_hom
-          (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
-      | refl => rfl
-      | symm _ _ _ ih => exact ih.symm
-      | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
-    exact this.trans (key _ _ (hf _ _ (Function.surjInv_eq hs _).symm))
+    exact this.trans (Types.cocone_ι_app_eq_of_eqvGen t (hf _ _ (Function.surjInv_eq hs _).symm))
 
 section AffinePoints
 
@@ -686,24 +634,16 @@ section Quotient
 
 variable {G : Type u} [Monoid G] [Finite G] (D : SingleObj G ⥤ Y.FiniteEtale)
 
-lemma isAffineHom_of_isAffineHom {X Z : Scheme.{u}} (f : X ⟶ Z) (hf : IsAffineHom f) :
-    IsAffineHom f :=
-  hf
-
-lemma isAffineHom_of_isAffine {X Z : Scheme.{u}} (f : X ⟶ Z) (_ : IsAffine X) (_ : IsAffine Z) :
-    IsAffineHom f :=
-  inferInstance
-
 /-- The gluing data for the quotient of a finite étale `Y`-scheme by a finite monoid action. -/
 noncomputable abbrev quotientGluingData :
     Y.directedAffineCover.ColimitGluingData (D ⋙ toAffineOver Y) :=
-  Scheme.quotientGluingData isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  Scheme.quotientGluingData (fun _ h ↦ h) (fun _ _ _ ↦ inferInstance) _
 
 instance preservesColimitsOfShape_pullback_trans {U V : Y.directedAffineCover.I₀} (hUV : U ⟶ V) :
     PreservesColimitsOfShape (SingleObj G)
       (MorphismProperty.Over.pullback (@IsAffineHom : MorphismProperty Scheme.{u}) ⊤
         (Y.directedAffineCover.trans hUV)) :=
-  preservesColimitsOfShape_pullback isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  preservesColimitsOfShape_pullback (fun _ h ↦ h) (fun _ _ _ ↦ inferInstance) _
 
 /-- The quotient cocone in affine `Y`-schemes is a colimit. -/
 noncomputable def isColimitGluedCocone : IsColimit (quotientGluingData D).gluedCocone :=
@@ -716,7 +656,7 @@ lemma isFinite_and_etale_gluedCocone :
     (D.obj (SingleObj.star G)).property
   have : Etale ((D ⋙ toAffineOver Y).obj (SingleObj.star G)).hom :=
     (D.obj (SingleObj.star G)).obj.prop
-  exact isFinite_and_etale_of_isColimit isAffineHom_of_isAffineHom isAffineHom_of_isAffine _
+  exact isFinite_and_etale_of_isColimit (fun _ h ↦ h) (fun _ _ _ ↦ inferInstance) _
     (isColimitGluedCocone D)
 
 /-- The quotient of a finite étale `Y`-scheme by a finite monoid action, as a cocone in
@@ -784,8 +724,8 @@ theorem fiber_quotientCocone :
     exact ⟨⟨_, hsU⟩, rfl⟩
   let s' := IsOpenImmersion.lift f s hrange
   have hs' : s' ≫ f = s := IsOpenImmersion.lift_fac _ _ _
-  have := preservesColimit_pullback_directedAffineCover isAffineHom_of_isAffineHom
-    isAffineHom_of_isAffine (D ⋙ toAffineOver Y) i
+  have := preservesColimit_pullback_directedAffineCover (fun _ h ↦ h)
+    (fun _ _ _ ↦ inferInstance) (D ⋙ toAffineOver Y) i
   let F := MorphismProperty.Over.pullback (@IsAffineHom : MorphismProperty Scheme.{u}) ⊤ f
   let K' := (D ⋙ toAffineOver Y) ⋙ F
   let hc' := isColimitOfPreserves F (isColimitGluedCocone D)
@@ -797,8 +737,8 @@ theorem fiber_quotientCocone :
     have : Etale ((D ⋙ toAffineOver Y).obj (SingleObj.star G)).hom :=
       (D.obj (SingleObj.star G)).obj.prop
     inferInstanceAs (Etale (pullback.snd _ _))
-  obtain ⟨H₁, H₂⟩ := geometricFiber_quotient_of_isAffine isAffineHom_of_isAffineHom
-    isAffineHom_of_isAffine K' hc' s'
+  obtain ⟨H₁, H₂⟩ := geometricFiber_quotient_of_isAffine (fun _ h ↦ h)
+    (fun _ _ _ ↦ inferInstance) K' hc' s'
   let EW : (K'.obj (SingleObj.star G)).hom.GeometricFiber s' ≃
       (fiber s).obj (D.obj (SingleObj.star G)) :=
     fiberEquivOfOpen s f s' hs' (D.obj (SingleObj.star G))

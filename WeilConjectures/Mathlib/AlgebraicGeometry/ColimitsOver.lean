@@ -22,16 +22,18 @@ Let `X` be a scheme and `P` a property of affine morphisms. A diagram
 `X`-scheme `W` with an action of the monoid `G` by `X`-endomorphisms. If `X` is affine, its
 colimit is `Spec` of the invariants of `Γ(W)`, and a cocone is a colimit iff its leg is injective
 on global sections with image the invariants
-(`AlgebraicGeometry.Scheme.isColimit_iff_injective_appTop`). If `G` is finite, the formation of
+(`AlgebraicGeometry.Scheme.isColimitOfInjectiveAppTop`,
+`AlgebraicGeometry.Scheme.injective_appTop_of_isColimit`). If `G` is finite, the formation of
 the quotient commutes with flat base change, so the quotients over the affine opens of an
 arbitrary `X` glue (`AlgebraicGeometry.Scheme.Cover.hasColimit_of_locallyDirected`).
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.isColimit_iff_injective_appTop`: the characterisation of colimits
+- `AlgebraicGeometry.Scheme.isColimitOfInjectiveAppTop`,
+  `AlgebraicGeometry.Scheme.injective_appTop_of_isColimit`: the characterisation of colimits
   over an affine base.
-- `AlgebraicGeometry.Scheme.hasColimitsOfShape_singleObj_isAffineHom_over`: affine `X`-schemes
-  have quotients by finite groups.
+- `AlgebraicGeometry.Scheme.hasColimitsOfShape_singleObj`: affine `X`-schemes have quotients by
+  finite groups.
 
 -/
 
