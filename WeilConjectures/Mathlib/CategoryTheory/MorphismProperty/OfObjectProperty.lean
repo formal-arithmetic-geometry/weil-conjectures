@@ -10,7 +10,8 @@ public import Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty
 /-!
 # OfObjectProperty
 
-Ported from the `proetale` package (`Proetale.Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty`).
+Ported from the `proetale` package
+(`Proetale.Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty`).
 -/
 
 @[expose] public section

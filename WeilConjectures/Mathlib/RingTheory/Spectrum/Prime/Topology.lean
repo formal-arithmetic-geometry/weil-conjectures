@@ -95,7 +95,8 @@ theorem mem_of_isOpen_of_asIdeal_eq_bot {R : Type*} [CommRing R]
 
 end PrimeSpectrum
 
-/-! ### Ported from the `proetale` package (`Proetale.Mathlib.RingTheory.Spectrum.Prime.Topology`) -/
+/-! ### Ported from the `proetale` package
+(`Proetale.Mathlib.RingTheory.Spectrum.Prime.Topology`) -/
 
 -- end of file
 theorem PrimeSpectrum.continuous_sigmaToPi {ι : Type*} (R : ι → Type*)

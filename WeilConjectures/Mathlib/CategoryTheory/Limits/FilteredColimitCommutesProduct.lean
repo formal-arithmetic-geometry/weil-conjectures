@@ -12,7 +12,8 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # FilteredColimitCommutesProduct
 
-Ported from the `proetale` package (`Proetale.Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct`).
+Ported from the `proetale` package
+(`Proetale.Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct`).
 -/
 
 @[expose] public section

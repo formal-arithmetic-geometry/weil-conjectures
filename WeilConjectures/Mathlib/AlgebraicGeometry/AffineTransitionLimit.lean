@@ -5084,7 +5084,8 @@ end ClosedImmersionDescent
 
 end AlgebraicGeometry
 
-/-! ### Ported from the `proetale` package (`Proetale.Mathlib.AlgebraicGeometry.AffineTransitionLimit`) -/
+/-! ### Ported from the `proetale` package
+(`Proetale.Mathlib.AlgebraicGeometry.AffineTransitionLimit`) -/
 
 universe t
 universe v₁ v₂ v₃ u₁ u₂ u₃

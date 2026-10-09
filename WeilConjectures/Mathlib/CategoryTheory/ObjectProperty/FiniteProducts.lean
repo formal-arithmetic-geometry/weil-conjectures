@@ -29,7 +29,8 @@ instance IsClosedUnderFiniteProducts.inverseImage [P.IsClosedUnderFiniteProducts
 
 end CategoryTheory.ObjectProperty
 
-/-! ### Ported from the `proetale` package (`Proetale.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts`) -/
+/-! ### Ported from the `proetale` package
+(`Proetale.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts`) -/
 
 universe w
 

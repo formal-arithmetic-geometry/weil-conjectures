@@ -81,7 +81,8 @@ theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
 
 end Module.Flat
 
-/-! ### Ported from the `proetale` package (`Proetale.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic`) -/
+/-! ### Ported from the `proetale` package
+(`Proetale.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic`) -/
 
 open TensorProduct
 
