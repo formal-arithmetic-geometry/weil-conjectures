@@ -7,7 +7,6 @@
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
-| `lem-weil-pbc-free-cech-complex-exact` | 1004 | none |
 | `lem-weil-pbc-inverse-image-composition` | 1004 | none |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1004 | none |
 | `lem-weil-pbc-map-into-henselian-colimit` | 1004 | none |
@@ -43,6 +42,7 @@
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
+| `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
@@ -572,7 +572,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 560 nodes that wait for stage 1, 94 nodes that wait for a statement dependency.
+Not open yet: 560 nodes that wait for stage 1, 95 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

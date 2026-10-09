@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-conjugate-iso-unit-equation",
+ "kind": "statement",
+ "title": "An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories, $L_1\\dashv R_1$ and $L_2\\dashv R_2$ two adjunctions with $L_i:\\mathcal C\\to\\mathcal D$, $R_i:\\mathcal D\\to\\mathcal C$ and units $\\eta_1:\\mathrm{id}\\to R_1L_1$, $\\eta_2:\\mathrm{id}\\to R_2L_2$, and let $\\delta:R_2\\xrightarrow{\\sim}R_1$ be a natural isomorphism. Then there is a unique natural transformation $c:L_1\\to L_2$ such that $R_1(c_X)\\circ\\eta_{1,X}=\\delta_{L_2X}\\circ\\eta_{2,X}:X\\to R_1L_2X$ for every object $X$ of $\\mathcal C$, and $c$ is a natural isomorphism. (In particular, for $R_1=R_2$ and $\\delta=\\mathrm{id}$: two left adjoints of one functor are isomorphic by a unique isomorphism carrying the one unit to the other.)",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof: a transformation between left adjoints corresponds bijectively to the transformation between right adjoints inducing the same maps on Hom sets"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two adjunctions and an isomorphism of right adjoints give a unique isomorphism of left adjoints compatible with the units",
+   "results": "Adjunction.leftAdjointUniq_trans_app_assoc, Adjunction.unit_leftAdjointUniq_hom_app, Adjunction.unit_leftAdjointUniq_hom, Adjunction.leftAdjointUniq_inv_app, Adjunction.leftAdjointUniq_hom_app_counit_assoc (Mathlib.CategoryTheory.Adjunction.Unique), Adjunction.CommShift.compatibilityUnit_unique_left (Shift.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "generalization: leftAdjointUniq is the case delta = id; the general case is conjugateIsoEquiv (see loogle, grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism between left adjoints corresponds to isomorphism between right adjoints, unit compatibility",
+   "results": "Adjunction.natIsoOfLeftAdjointNatIso (Adjunction.Opposites), Adjunction.leftAdjointUniq, leftAdjointUniq_inv_app, unit_leftAdjointUniq_hom_app_assoc, rightAdjointUniq (Adjunction.Unique), Adjunction.ofNatIsoLeft, Adjunction.ofNatIsoRight (Adjunction.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match in part (the delta = id case); the general case via conjugateIsoEquiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv",
+   "results": "CategoryTheory.unit_conjugateEquiv (Mathlib.CategoryTheory.Adjunction.Mates): adj₁.unit.app c ≫ (conjugateEquiv adj₁ adj₂ α).app (L₁.obj c) = adj₂.unit.app c ≫ R₂.map (α.app c) for α : L₂ ⟶ L₁",
+   "date": "2026-10-09",
+   "verdict": "match (the unit equation)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def conjugateEquiv\\|theorem unit_conjugateEquiv\\|def conjugateIsoEquiv' Mathlib/CategoryTheory/Adjunction/Mates.lean; grep -n 'homEquiv_unit' Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "conjugateEquiv (Mates.lean:275, (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)), unit_conjugateEquiv (:300), unit_conjugateEquiv_symm (:311), conjugateIsoEquiv (:425, (L₂ ≅ L₁) ≃ (R₁ ≅ R₂)); Adjunction.homEquiv_unit (Basic.lean:181, homEquiv a = η ≫ G.map a)",
+   "date": "2026-10-09",
+   "verdict": "match: a few Mathlib lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.unit_conjugateEquiv_symm",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "a few Mathlib lemmas, one per clause: with Mathlib's adj₁ := (L₂ ⊣ R₂), adj₂ := (L₁ ⊣ R₁) and α := δ : R₂ ⟶ R₁, put c := (conjugateEquiv adj₁ adj₂).symm δ : L₁ ⟶ L₂ (conjugateEquiv, Mates.lean:275); unit_conjugateEquiv_symm (Mates.lean:311) reads η₂ ≫ δ_{L₂X} = η₁ ≫ R₁(c_X), the unit equation (existence); c is an isomorphism since δ is: c = ((conjugateIsoEquiv adj₁ adj₂).symm (asIso δ)).hom (conjugateIsoEquiv, Mates.lean:425); uniqueness: R₁(c'_X) ∘ η₁_X = (L₁ ⊣ R₁).homEquiv _ _ c'_X (Adjunction.homEquiv_unit, Adjunction/Basic.lean:181) and homEquiv is a bijection, so c'_X = c_X for any c' satisfying the equation. The case R₁ = R₂, δ = id is Adjunction.leftAdjointUniq with unit_leftAdjointUniq_hom_app (Adjunction/Unique.lean:36, :53)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-inverse-image-composition",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
