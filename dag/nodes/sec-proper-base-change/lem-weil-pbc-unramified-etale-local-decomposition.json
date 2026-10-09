@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-unramified-etale-local-decomposition",
+ "kind": "statement",
+ "title": "A separated morphism unramified at the points of a fibre is etale locally a closed-immersion decomposition near them",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is separated [def-weil-proper-morphism], let $s\\in S$, and let $x_1,\\ldots,x_n\\in X$ ($n\\ge0$) be points with $f(x_i)=s$ such that $f$ is unramified at each $x_i$: every $x_i$ has an open neighbourhood $X_i\\subseteq X$ such that $f|_{X_i}:X_i\\to S$ is unramified [def-weil-unramified-morphism]. Then there are an etale morphism $g:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $g(u)=s$, and a decomposition of the fibre product $X_U=X\\times_SU$ [def-pc-fibre-product] into pairwise disjoint open and closed subschemes $X_U=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$ (integers $m_i\\ge0$; $W$ and the $V_{i,j}$ open subschemes of $X_U$, pairwise disjoint, covering $X_U$), such that (1) for all $i,j$ the composite $V_{i,j}\\hookrightarrow X_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion [def-weil-closed-immersion] whose image contains $u$; (2) no point of $W$ lying over $u\\in U$ maps under $\\mathrm{pr}_1:X_U\\to X$ to any of $x_1,\\ldots,x_n$. In particular, if $f^{-1}(\\{s\\})=\\{x_1,\\ldots,x_n\\}$, then no point of $W$ lies over $u$.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, Lemma 04HI (lemma-unramified-etale-local-technical, line 1722); proof from Lemma 04HH (lemma-unramified-etale-local, line 1693), Morphisms Lemma 01W6 (lemma-image-proper-scheme-closed); 04HH itself from More on Morphisms Lemma 02LM (lemma-etale-makes-quasi-finite-finite-multiple-points-var) and Lemma 04DG (lemma-finite-unramified-one-point)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unramified separated morphism of schemes etale locally near a point decomposes as disjoint union of closed immersions and a remainder",
+   "results": "FormallyUnramified.recOn/casesOn (Morphisms.FormallyUnramified), IsSeparated, isSeparated_iff, IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, Scheme.isSeparated_iff_isClosedImmersion_prod_lift (Morphisms.Separated), IsEtale (Morphisms.Etale)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unramified morphism étale locally on the base is a disjoint union of closed immersions near the points of a fibre",
+   "results": "IsEtale.instFormallyUnramified, IsEtale.of_comp, IsEtale.instHasOfPostcompProperty..., IsEtale, Scheme.Etale (Morphisms.Etale), Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus (RingTheory.Etale.Locus), FormallyUnramified, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsClosedImmersion",
+   "results": "AlgebraicGeometry.FormallyUnramified.hom_ext (Morphisms.FormallyUnramified) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Etale",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '04HI\\|04HH\\|04HJ\\|04DG\\|02LM' over ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln FormallyUnramified Mathlib/AlgebraicGeometry",
+   "results": "no tag hit; FormallyUnramified occurs only in Morphisms/FormallyUnramified.lean, Etale.lean, LocalFlatDescent.lean (definition, diagonal criterion, etale => formally unramified); algebra-level ingredients only: Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (@[stacks 00UL], RingTheory/Etale/QuasiFinite.lean:613), RingTheory/Unramified/LocalStructure.lean",
+   "date": "2026-10-10",
+   "verdict": "no match (no scheme-level statement)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-unramified-etale-local",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Etale Morphisms 04HI (etale.tex:1718); self-contained; correct; unsplit."
+ }
+}

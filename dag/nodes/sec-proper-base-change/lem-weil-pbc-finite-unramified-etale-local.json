@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-finite-unramified-etale-local",
  "kind": "statement",
  "title": "A finite unramified morphism is etale locally on the base a finite disjoint union of closed immersions",
- "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme] which is finite [def-weil-finite-integral-morphism] and unramified [def-weil-unramified-morphism], and let $x\\in X$. Then there are an etale morphism $g:U\\to X$ [def-weil-etale-morphism], a point $u\\in U$ with $g(u)=x$ such that the induced map of residue fields $\\kappa(x)\\to\\kappa(u)$ [def-weil-residue-field] is an isomorphism, a finite set $J$ and pairwise disjoint open and closed subschemes $V_j\\subseteq Y\\times_XU$ ($j\\in J$) of the fibre product [def-pc-fibre-product] whose union is $Y\\times_XU$, such that for every $j\\in J$ the composite $V_j\\hookrightarrow Y\\times_XU\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion [def-weil-closed-immersion].",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme] which is finite [def-weil-finite-integral-morphism] and unramified [def-weil-unramified-morphism], and let $x\\in X$. Then there are an etale morphism $g:U\\to X$ [def-weil-etale-morphism], a point $u\\in U$ with $g(u)=x$, a finite set $J$ and pairwise disjoint open and closed subschemes $V_j\\subseteq Y\\times_XU$ ($j\\in J$) of the fibre product [def-pc-fibre-product] whose union is $Y\\times_XU$, such that for every $j\\in J$ the composite $V_j\\hookrightarrow Y\\times_XU\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion [def-weil-closed-immersion]. (In general $\\kappa(u)\\ne\\kappa(x)$: $(U,u)$ is an etale neighbourhood, not an elementary one.)",
  "source": {
   "document": "literature/stacks-project/etale.tex",
   "place": "Stacks Etale Morphisms, Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758); its proof uses Lemma 04HI (lemma-unramified-etale-local-technical), Lemma 04HH (lemma-unramified-etale-local), More on Morphisms Lemma 02LM, Lemma 04DG (lemma-finite-unramified-one-point) and Morphisms Lemma 01W6"
@@ -12,13 +12,87 @@
   "def-weil-finite-integral-morphism",
   "def-weil-unramified-morphism",
   "def-weil-etale-morphism",
-  "def-weil-residue-field",
   "def-pc-fibre-product",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The fibre and separatedness.* By [lem-weil-pbc-finite-closed-map-finite-fibres] (2) the fibre $f^{-1}(\\{x\\})$ is a finite set; write $f^{-1}(\\{x\\})=\\{y_1,\\ldots,y_n\\}$ with $n\\ge0$ and the $y_i$ distinct. By [lem-weil-pbc-finite-closed-map-finite-fibres] (1) $f$ is separated. Since $f$ is unramified, it is unramified at every $y_i$ in the sense of [lem-weil-pbc-unramified-etale-local-decomposition] (take the open neighbourhood $Y$ itself).",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-unramified-etale-local-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758)"
+   }
+  },
+  {
+   "text": "*Etale localization.* Apply [lem-weil-pbc-unramified-etale-local-decomposition] to $f:Y\\to X$, $s:=x$ and the points $y_1,\\ldots,y_n$ (step 1): there are an etale $g:U\\to X$, a point $u\\in U$ with $g(u)=x$, and a decomposition $Y_U:=Y\\times_XU=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$ into pairwise disjoint open and closed subschemes covering $Y_U$, such that each $V_{i,j}\\hookrightarrow Y_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion. Since $f^{-1}(\\{x\\})=\\{y_1,\\ldots,y_n\\}$, the final clause of that lemma says that no point of $W$ lies over $u$: $u\\notin\\mathrm{pr}_2(W)$.",
+   "uses": [
+    "lem-weil-pbc-unramified-etale-local-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758)"
+   }
+  },
+  {
+   "text": "*The image of $W$ is closed.* The projection $\\mathrm{pr}_2:Y_U\\to U$ is the base change of the finite morphism $f$ along $g$, hence finite ([lem-weil-pbc-finite-morphism-permanence] (a)), hence a closed map ([lem-weil-pbc-finite-closed-map-finite-fibres] (1)). $W$ is closed in $Y_U$ (its complement $\\bigcup_{i,j}V_{i,j}$ is open), so $Z:=\\mathrm{pr}_2(W)$ is a closed subset of $U$, and $u\\notin Z$ by step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758)"
+   }
+  },
+  {
+   "text": "*Shrinking $U$.* Let $U'=U\\setminus Z$, an open subset containing $u$ (step 3), with its open subscheme structure and inclusion $\\iota:U'\\to U$, an open immersion [def-weil-open-immersion]. Then $\\iota$ is etale and $g'=g\\circ\\iota:U'\\to X$ is etale ([lem-weil-pbc-etale-composition-cancellation] (1), (2)), with $g'(u)=x$. Put $Y'=\\mathrm{pr}_2^{-1}(U')\\subseteq Y_U$, an open subscheme. By [lem-weil-pbc-open-fibre-product] (for $\\mathrm{pr}_2:Y_U\\to U$ and $\\iota$ over $U$, with the opens $Y_U$, $U'$, $U$) the fibre product $Y_U\\times_UU'$ is identified with $Y'$, the second projection being $\\mathrm{pr}_2|_{Y'}:Y'\\to U'$; by the universal property of fibre products [def-pc-fibre-product] (pasting: a pair $a:T\\to Y$, $b:T\\to U'$ with $f\\circ a=g'\\circ b$ is the same as a morphism $(a,\\iota\\circ b):T\\to Y_U$ together with $b$, compatible over $U$), $Y_U\\times_UU'=Y\\times_XU'$. Hence $Y\\times_XU'=Y'$ with second projection $\\mathrm{pr}_2|_{Y'}$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758)"
+   }
+  },
+  {
+   "text": "*The decomposition over $U'$.* Since $\\mathrm{pr}_2(W)=Z$ is disjoint from $U'$, $W\\cap Y'=\\emptyset$. Let $J=\\{(i,j):1\\le i\\le n,1\\le j\\le m_i\\}$, a finite set, and for $(i,j)\\in J$ put $V'_{i,j}=V_{i,j}\\cap Y'$, an open and closed subscheme of $Y'$; the $V'_{i,j}$ are pairwise disjoint and cover $Y'=Y\\times_XU'$, because $W,V_{i,j}$ do so in $Y_U$ and $W\\cap Y'=\\emptyset$. Writing $p_{i,j}:V_{i,j}\\to U$ for the closed immersion of step 2, $V'_{i,j}=p_{i,j}^{-1}(U')$ and, by [lem-weil-pbc-open-fibre-product] (for $p_{i,j}$ and $\\iota$ over $U$), $V'_{i,j}$ with $p_{i,j}|_{V'_{i,j}}:V'_{i,j}\\to U'$ is the fibre product $V_{i,j}\\times_UU'$ with its second projection. By [lem-weil-pbc-closed-immersion-base-change] this projection is a closed immersion, and it is the composite $V'_{i,j}\\hookrightarrow Y\\times_XU'\\xrightarrow{\\mathrm{pr}_2}U'$. So $(g',u,J,(V'_{i,j})_{(i,j)\\in J})$ is as claimed. (If $n=0$ then $J=\\emptyset$ and $Y\\times_XU'=\\emptyset$, which is allowed.)",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-unramified-etale-local-decomposition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, Lemma 04HJ (lemma-finite-unramified-etale-local, line 1758), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,10 +121,24 @@
    "results": "no scheme-level statement. Algebra-level ingredients: Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (@[stacks 00UL], RingTheory/Etale/QuasiFinite.lean:613; finite S over R: an etale R' with P over p, kappa(P)=kappa(p), R' (x)_R S = R_1 x ... x R_n x A, each R_i with a unique prime over P, none in A) and Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (@[stacks 00UJ], :379); RingTheory/Unramified/LocalStructure.lean (unramified algebras locally quotients of standard etale ones). These give the etale-localization step (02LM, affine form) but not the closed-immersion conclusion (04DG)",
    "date": "2026-10-10",
    "verdict": "no match (ingredient 00UL in Mathlib)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unramified separated morphism of schemes etale locally near a point decomposes as disjoint union of closed immersions and a remainder",
+   "results": "FormallyUnramified.recOn/casesOn, IsSeparated, isSeparated_iff, Scheme.isSeparated_iff_isClosedImmersion_prod_lift, IsEtale",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsClosedImmersion",
+   "results": "AlgebraicGeometry.FormallyUnramified.hom_ext (Morphisms.FormallyUnramified) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,6 +163,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Etale Morphisms 04HJ; self-contained; correct; unsplit."
+  "note": "Split reviewed: 5 steps along Etale Morphisms 04HJ (finite fibre and separatedness; 04HI decomposition; image of W closed since finite morphisms are closed maps; shrink U; base change of the closed immersions). Statement corrected: the clause kappa(x) = kappa(u) was false (Spec C -> Spec R; 04HJ gives an etale neighbourhood, not an elementary one); the only citing node does not use it. Correct."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-unramified-etale-local",
+  "worker": "stage1",
+  "summary": "Statement corrected: the clause kappa(x) = kappa(u) is not in Stacks 04HJ (which gives only an etale neighbourhood; its proof goes through 04HI/04HH/02LM, and 02LM uses a Galois extension of kappa(s)) and is false: for Y = Spec C -> X = Spec R (finite etale) any etale (U,u) with kappa(u) = R has the point of Y_U over u with residue field C, so the piece through it cannot be a closed immersion into U; dropped it with def-weil-residue-field from stmt_deps (the only citer, lem-weil-pbc-finite-etale-etale-local-split, states it does not use that clause). Proof in five steps following 04HJ: finite fibre and separatedness (new Mathlib leaf lem-weil-pbc-finite-closed-map-finite-fibres), 04HI (new unsplit node lem-weil-pbc-unramified-etale-local-decomposition) giving Y_U = W + coprod V_ij with no point of W over u, closedness of pr_2(W) (finite base change, existing leaf; finite => closed map), shrinking U to U minus pr_2(W) with the open fibre product identification written out, and the closed immersions over U' by base change. Mathlib re-searched with the three kinds (no scheme-level statement)."
  }
 }

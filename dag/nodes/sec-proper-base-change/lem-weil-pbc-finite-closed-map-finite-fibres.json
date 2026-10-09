@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-finite-closed-map-finite-fibres",
+ "kind": "statement",
+ "title": "A finite morphism is separated, universally closed and has finite fibres",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism]. Then (1) $f$ is separated and universally closed [def-weil-proper-morphism] (indeed proper); in particular $f$ is a closed map: $f(Z)$ is closed in $Y$ for every closed subset $Z\\subseteq X$; (2) for every $y\\in Y$ the fibre $f^{-1}(\\{y\\})\\subseteq X$ is a finite set.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Morphisms, Lemma 01WN (lemma-finite-proper, line 11162: finite iff affine and proper; hence separated and universally closed), Lemma 02NU (lemma-finite-quasi-finite, line 11147: finite => quasi-finite) and Lemma 02NH (lemma-quasi-finite, line 3809: quasi-finite => finite fibres), as used in the proof of Etale Morphisms Lemma 04HJ (etale.tex line 1758: 'the fibre over s is a finite set', 'a finite morphism is separated', 'finite, hence proper')"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes has finite fibers",
+   "results": "IsFinite.finite_preimage_singleton, instance Finite (f.fiber y) for IsFinite f, instLocallyQuasiFiniteOfIsFinite, IsFinite, isFinite_iff",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite morphism of schemes is universally closed, in particular a closed map",
+   "results": "Scheme.Hom.isClosedMap, UniversallyClosed.universally_isClosedMap, universallyClosed_iff (Morphisms.UniversallyClosed), IsFinite.instOfIsClosedImmersion, Scheme.Hom.isProperMap",
+   "date": "2026-10-10",
+   "verdict": "match (clause 1 with the IsProper instance)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton",
+   "results": "Scheme.Hom.finite_preimage_singleton {X Y} (f) [LocallyQuasiFinite f] [QuasiCompact f] (y) : (f ⁻¹' {y}).Finite (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsFinite' Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, QuasiFinite.lean, Affine.lean; grep -n isClosedMap Morphisms/UniversallyClosed.lean",
+   "results": "Proper.lean:69 instance (priority := 900) [IsFinite f] : IsProper f; Proper.lean:42 class IsProper extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f; UniversallyClosed.lean:49 Scheme.Hom.isClosedMap [UniversallyClosed f]; QuasiFinite.lean:90 instance [IsFinite f] : LocallyQuasiFinite f; Affine.lean:58 instance [IsAffineHom f] : QuasiCompact f; QuasiFinite.lean:174 Scheme.Hom.finite_preimage_singleton",
+   "date": "2026-10-10",
+   "verdict": "match, one lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper (instance [IsFinite f] : IsProper f), AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+  "line": 69,
+  "how": "specializes in one line per clause: (1) the instance IsProper f for IsFinite f (Proper.lean:69), whose parents IsSeparated f and UniversallyClosed f (class IsProper, Proper.lean:42) give separated and universally closed, and Scheme.Hom.isClosedMap (UniversallyClosed.lean:49) gives the closed map; (2) Scheme.Hom.finite_preimage_singleton f y (QuasiFinite.lean:174), with LocallyQuasiFinite f from the instance for IsFinite f (QuasiFinite.lean:90) and QuasiCompact f from IsAffineHom f (Affine.lean:58); IsFinite.finite_preimage_singleton is a deprecated alias (QuasiFinite.lean:179)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-unramified-etale-local",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: instance IsProper of IsFinite (Morphisms/Proper.lean:69), Scheme.Hom.isClosedMap (UniversallyClosed.lean:49), finite_preimage_singleton (QuasiFinite.lean:174). Overlaps the imported lem-weil-pbc-finite-proper (unit sk-prop-av-pqf-finite): stage-3 merge candidate."
+ }
+}
