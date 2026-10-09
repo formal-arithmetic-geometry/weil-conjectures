@@ -35,12 +35,33 @@
    "results": "`DerivedCategory.isGE_iff` (line 90), `isLE_iff` (line 107): X.IsGE n iff homology vanishes in degrees < n, X.IsLE n iff it vanishes in degrees > n, giving the cohomological description",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived category of an abelian category",
+   "results": "HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HasDerivedCategory.standard, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, right_fac_of_isStrictlyLE",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed through DerivedCategory.Plus)"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Plus",
+   "results": "DerivedCategory.Plus (Mathlib.Algebra.Homology.DerivedCategory.TStructure), Plus.ι, Plus.IsGE, Plus.IsLE, Plus.homologyFunctor (the last three in Mathlib.Algebra.Homology.DerivedCategory.Plus of the Loogle index, a newer Mathlib than the pinned one)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 198,220p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; sed -n 255,266p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean; rg -n 'IsTriangulated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "results": "abbrev Minus/Plus/Bounded C := t.minus/plus/bounded.FullSubcategory (201-207); minus X := ∃ n, t.IsLE X n, plus X := ∃ n, t.IsGE X n, bounded := plus ⊓ minus (Basic.lean:259-266); instances t.minus/plus/bounded.IsTriangulated (TruncLTGE.lean:638-652)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "DerivedCategory.Plus",
   "file": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
-  "how": "exact: `DerivedCategory.Plus C` (line 204), `DerivedCategory.Minus C` (line 201), `DerivedCategory.Bounded C` (line 207) are the full subcategories `TStructure.t.plus/minus/bounded` of `DerivedCategory C` (CategoryTheory/Triangulated/TStructure/Basic.lean:260-266, `plus X := ∃ n, t.IsGE X n`, `bounded := plus ⊓ minus`), triangulated by the instances `t.plus.IsTriangulated` etc. (TStructure/TruncLTGE.lean:637-655); membership is described by cohomology through `DerivedCategory.isGE_iff`/`isLE_iff` (DerivedCategory/TStructure.lean:90,107)"
+  "how": "exact: `DerivedCategory.Plus C` (line 204), `DerivedCategory.Minus C` (line 201), `DerivedCategory.Bounded C` (line 207) are the full subcategories `TStructure.t.plus/minus/bounded` of `DerivedCategory C` (CategoryTheory/Triangulated/TStructure/Basic.lean:260-266, `plus X := ∃ n, t.IsGE X n`, `bounded := plus ⊓ minus`), triangulated by the instances `t.plus.IsTriangulated` etc. (TStructure/TruncLTGE.lean:637-655); membership is described by cohomology through `DerivedCategory.isGE_iff`/`isLE_iff` (DerivedCategory/TStructure.lean:90,107) Re-check 2026-10-09: types read; Mathlib's `plus` is ∃ n, X ∈ D^{≥n} and `bounded` = plus ⊓ minus, the node's 'equivalently' clauses verbatim; the H^n descriptions follow by `isGE_iff`/`isLE_iff`; full triangulated by the IsTriangulated instances (TruncLTGE.lean:638-652)."
  },
  "status": "mathlib",
  "merged_into": null,

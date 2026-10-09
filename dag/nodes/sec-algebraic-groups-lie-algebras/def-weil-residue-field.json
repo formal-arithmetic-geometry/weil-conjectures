@@ -18,12 +18,33 @@
    "results": "line 45 `def residueField (x : X) : CommRingCat` (the residue field of the stalk, a field); line 123 `def Hom.residueFieldMap (f : X ⟶ Y) (x : X) : Y.residueField (f x) ⟶ X.residueField x`; line 237 `fromSpecResidueField`; line 301 `Spec.residueFieldIso : (Spec R).residueField x ≅ .of x.asIdeal.ResidueField`",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "residue field of a scheme at a point",
+   "results": "AlgebraicGeometry.Scheme.residueField, LocallyRingedSpace.residueField, Scheme.instFieldCarrierResidueField (AlgebraicGeometry.ResidueField)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field of a scheme at a point, map of residue fields induced by morphism",
+   "results": "Scheme.Hom.residueFieldMap, Scheme.residue_residueFieldMap, LocallyRingedSpace.residueFieldMap, Scheme.descResidueField",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 43,47p;121,124p;299,302p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "residueField x := CommRingCat.of (IsLocalRing.ResidueField (X.presheaf.stalk x)) (45); Hom.residueFieldMap f x : Y.residueField (f x) ⟶ X.residueField x (123); Spec.residueFieldIso (301)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "AlgebraicGeometry.Scheme.residueField",
   "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
-  "how": "exact: `X.residueField x`; the induced map of residue fields is `AlgebraicGeometry.Scheme.Hom.residueFieldMap f x` (same file, line 123), and for `Y = Spec K` the identification `κ(f x) ≅ K` is `AlgebraicGeometry.Spec.residueFieldIso` (line 301), the residue field of a field at its zero ideal being the field itself"
+  "how": "exact: `X.residueField x`; the induced map of residue fields is `AlgebraicGeometry.Scheme.Hom.residueFieldMap f x` (same file, line 123), and for `Y = Spec K` the identification `κ(f x) ≅ K` is `AlgebraicGeometry.Spec.residueFieldIso` (line 301), the residue field of a field at its zero ideal being the field itself Re-check 2026-10-09: types read; `X.residueField x` is literally O_{X,x}/m_x (`IsLocalRing.ResidueField` of the stalk), a field by `Scheme.instFieldCarrierResidueField`; `residueFieldMap` is induced by the stalk map (`residue_residueFieldMap`)."
  },
  "status": "mathlib",
  "merged_into": null,

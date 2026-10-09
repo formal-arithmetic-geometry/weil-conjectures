@@ -25,12 +25,33 @@
    "results": "Mathlib/Algebra/Polynomial/Degree/Defs.lean:48 `Polynomial.degree : R[X] → WithBot ℕ`, :52 `Polynomial.natDegree`, :56 `Polynomial.leadingCoeff`; Mathlib/Algebra/Polynomial/Basic.lean:564 `Polynomial.coeff`; Mathlib/Algebra/Polynomial/Eval/Coeff.lean:57 `coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0`",
    "date": "2026-10-09",
    "verdict": "match: degree, leading coefficient and constant coefficient are Polynomial.degree/natDegree, Polynomial.leadingCoeff and Polynomial.coeff p 0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring in one variable, degree and leading coefficient",
+   "results": "Polynomial.leadingCoeff, coeff_natDegree, isMonicOfDegree_X, Polynomial.X, leadingCoeff_X",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "polynomial ring R[X] as finitely supported functions from natural numbers, degree and leading coefficient",
+   "results": "Polynomial, Polynomial.repr, Polynomial.toFinsupp, Polynomial.ofFinsupp (Algebra.Polynomial.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^structure Polynomial|notation:9000' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Basic.lean; rg -n '^def degree|^def natDegree|^def leadingCoeff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Degree/Defs.lean; rg -n '^def coeff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Basic.lean",
+   "results": "structure Polynomial ... ofFinsupp :: (Basic.lean:74), notation R[X] (78); degree : WithBot ℕ (Defs.lean:48), natDegree (52), leadingCoeff (56); coeff (Basic.lean:564)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "Polynomial",
   "file": "Mathlib/Algebra/Polynomial/Basic.lean",
-  "how": "exact: `Polynomial R` (notation `R[X]`); degree, leading coefficient and constant coefficient are `Polynomial.natDegree`/`Polynomial.degree`, `Polynomial.leadingCoeff` (Mathlib/Algebra/Polynomial/Degree/Defs.lean) and `Polynomial.coeff p 0` (Mathlib/Algebra/Polynomial/Basic.lean)"
+  "how": "exact: `Polynomial R` (notation `R[X]`); degree, leading coefficient and constant coefficient are `Polynomial.natDegree`/`Polynomial.degree`, `Polynomial.leadingCoeff` (Mathlib/Algebra/Polynomial/Degree/Defs.lean) and `Polynomial.coeff p 0` (Mathlib/Algebra/Polynomial/Basic.lean) Re-check 2026-10-09: `Polynomial R` wraps `AddMonoidAlgebra R ℕ` (finitely supported ℕ → R with convolution product), as the node; deg 0 = ⊥ in `degree : WithBot ℕ` (the node's −∞) and 0 for `natDegree`; `leadingCoeff 0 = 0`."
  },
  "status": "mathlib",
  "merged_into": null,

@@ -32,12 +32,33 @@
    "results": "none: Mathlib has no named derived category or cohomology sheaf functor specific to sheaves of modules; the general `DerivedCategory`/`homologyFunctor` apply to the abelian category `SheafOfModules R`",
    "date": "2026-10-09",
    "verdict": "no separate declaration; the general one specializes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology functor from derived category to abelian category in degree n",
+   "results": "DerivedCategory.homologyFunctor, DerivedCategory.instIsHomologicalHomologyFunctor (DerivedCategory.HomologySequence), Functor.rightDerived, ...",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology functor H^n on the derived category factors homology of a representing complex",
+   "results": "DerivedCategory.homologyFunctorFactors (DerivedCategory.HomologySequence) and HomComplex cohomology lemmas",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 30,42p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; rg -n 'abbrev topology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "results": "homologyFunctor (n : ℤ) : DerivedCategory C ⥤ C (34); homologyFunctorFactors : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n (39); Scheme.ProEt.topology (Proetale.lean:156)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "DerivedCategory.homologyFunctor",
   "file": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
-  "how": "specializes in one line: `(DerivedCategory.homologyFunctor (SheafOfModules.{v} R) r).obj K` for `R : Sheaf J RingCat` (abelian by `SheafOfModules` instance in Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40, with `HasDerivedCategory.standard`), equal to the homology of a representing complex by `DerivedCategory.homologyFunctorFactors`; the t-structure statement is `DerivedCategory.isLE_iff` / `isGE_iff` for `DerivedCategory.TStructure.t`; for A_Y take `J = Scheme.ProEt.topology Y`, `R = (constantSheaf J RingCat).obj (RingCat.of A)` (universe-lifted as in def-weil-pbc-constant-sheaf)"
+  "how": "specializes in one line: `(DerivedCategory.homologyFunctor (SheafOfModules.{v} R) r).obj K` for `R : Sheaf J RingCat` (abelian by `SheafOfModules` instance in Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40, with `HasDerivedCategory.standard`), equal to the homology of a representing complex by `DerivedCategory.homologyFunctorFactors`; the t-structure statement is `DerivedCategory.isLE_iff` / `isGE_iff` for `DerivedCategory.TStructure.t`; for A_Y take `J = Scheme.ProEt.topology Y`, `R = (constantSheaf J RingCat).obj (RingCat.of A)` (universe-lifted as in def-weil-pbc-constant-sheaf) Re-check 2026-10-09: types read; `homologyFunctor C r` applies to any abelian C with `HasDerivedCategory C`, here C = `SheafOfModules R` (abelian by `SheafOfModules.instAbelian` under HasSheafify J AddCommGrpCat and J.WEqualsLocallyBijective AddCommGrpCat); for the pro-etale site J = `Scheme.ProEt.topology Y` (Mathlib/AlgebraicGeometry/Sites/Proetale.lean:156), whose objects live one universe up, so the modules are taken universe-lifted as the node says."
  },
  "status": "mathlib",
  "merged_into": null,

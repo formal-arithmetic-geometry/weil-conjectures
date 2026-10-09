@@ -48,6 +48,27 @@
    "results": "none: Mathlib has no notion of torsion sheaf",
    "date": "2026-10-09",
    "verdict": "no match (torsion cohomology rests on def-weil-pbc-etale-sheaves)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of sheaves of modules on the étale site",
+   "results": "SheafOfModules, HasDerivedCategory, Sheaf.isGrothendieckAbelian_of_essentiallySmall, HasDerivedCategory.standard: generic pieces only",
+   "date": "2026-10-09",
+   "verdict": "generalization (pieces only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian category of sheaves of modules over a sheaf of rings on a site",
+   "results": "SheafOfModules.instAbelian (Algebra.Category.ModuleCat.Sheaf.Abelian), Scheme.Modules.instAbelian, SheafOfModules.instPreadditive, PresheafOfModules.instAbelian",
+   "date": "2026-10-09",
+   "verdict": "generalization: Mod(R_T) = SheafOfModules over the constant sheaf; D, D^+, D^b, H^i specialize from DerivedCategory/Plus/Bounded/homologyFunctor"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsTorsion|Torsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves; rg -n 'WEqualsLocallyBijective|HasSheafify S.smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "results": "no torsion sheaf in Mathlib; AffineEtale.lean:112 HasSheafify S.smallEtaleTopology A and :121 S.smallEtaleTopology.WEqualsLocallyBijective A (the hypotheses of SheafOfModules.instAbelian)",
+   "date": "2026-10-09",
+   "verdict": "not a leaf as a whole: 'torsion cohomology' rests on def-weil-pbc-etale-sheaves (Mathlib has no torsion sheaf); the split is unchanged"
   }
  ],
  "mathlib_match": null,

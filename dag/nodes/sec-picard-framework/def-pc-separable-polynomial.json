@@ -29,12 +29,33 @@
    "results": "Polynomial.derivative : R[X] →ₗ[R] R[X] (Derivative.lean:46), the formal derivative Σ n c_n T^(n-1)",
    "date": "2026-10-09",
    "verdict": "match (the derivative used in the statement)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separable polynomial coprime with its derivative",
+   "results": "Polynomial.Separable, Polynomial.separable_def, separable_def', Separable.squarefree, separable_X_sub_C (FieldTheory.Separable)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a polynomial is separable iff it is coprime to its formal derivative",
+   "results": "Polynomial.separable_def, Polynomial.Separable, separable_def', separable_iff_derivative_ne_zero (FieldTheory.Separable)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 40,52p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean",
+   "results": "def Separable (f : R[X]) : Prop := IsCoprime f (derivative f) (line 44, @[stacks 09H1]); separable_def' : f.Separable ↔ ∃ a b, a * f + b * derivative f = 1 (line 50)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "Polynomial.Separable",
   "file": "Mathlib/FieldTheory/Separable.lean",
-  "how": "exact: `Polynomial.Separable f := IsCoprime f (derivative f)` for `f : K[X]` (line 44), with `Polynomial.derivative` (Mathlib/Algebra/Polynomial/Derivative.lean:46) and `IsCoprime` as in def-weil-coprime-polynomials"
+  "how": "exact: `Polynomial.Separable f := IsCoprime f (derivative f)` for `f : K[X]` (line 44), with `Polynomial.derivative` (Mathlib/Algebra/Polynomial/Derivative.lean:46) and `IsCoprime` as in def-weil-coprime-polynomials Re-check 2026-10-09: read at Separable.lean:44; for `f : K[X]` over the field K (CommSemiring suffices) the definition is literally the node's: ∃ U V, U f + V f' = 1 (`separable_def'`), with the same formal derivative."
  },
  "status": "mathlib",
  "merged_into": null,

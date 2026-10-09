@@ -25,12 +25,33 @@
    "results": "only `IsLocalRing.closedPoint` (the closed point of the spectrum of a local ring) and uses of `IsClosed {x}` for points of schemes (AffineScheme.lean:807–810, through `PrimeSpectrum.isClosed_singleton_iff_isMaximal`); no scheme-specific definition, the topological one applies to the underlying space",
    "date": "2026-10-09",
    "verdict": "no scheme-specific declaration; the topological `closedPoints` is the match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "set of closed points of a topological space",
+   "results": "closedPoints, mem_closedPoints_iff, closedPoints_eq_univ, closure_closedPoints (Topology.JacobsonSpace)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "set of closed points of a topological space, x closed iff singleton closed",
+   "results": "mem_closedPoints_iff, closedPoints (Topology.JacobsonSpace), IsGenericPoint.isClosed",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 36,44p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/JacobsonSpace.lean",
+   "results": "def closedPoints : Set X := Set.ofPred (IsClosed {·}) (38); mem_closedPoints_iff (42)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "closedPoints",
   "file": "Mathlib/Topology/JacobsonSpace.lean",
-  "how": "exact: `closedPoints X` for the underlying topological space of the scheme `X`; `x ∈ closedPoints X ↔ IsClosed {x}`"
+  "how": "exact: `closedPoints X` for the underlying topological space of the scheme `X`; `x ∈ closedPoints X ↔ IsClosed {x}` Re-check 2026-10-09: type `(X : Type*) → [TopologicalSpace X] → Set X`, read at JacobsonSpace.lean:38; applied to the underlying space of the scheme it is exactly |X|."
  },
  "status": "mathlib",
  "merged_into": null,

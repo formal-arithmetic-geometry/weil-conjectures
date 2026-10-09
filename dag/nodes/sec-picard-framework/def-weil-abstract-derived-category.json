@@ -46,12 +46,33 @@
    "results": "Shift.lean:144 `shiftFunctor_obj_d'`: the differential of K⟦n⟧ is `n.negOnePow • K.d` (for n = 1: -d, as Stacks); Pretriangulated.lean:54 `mappingCone.triangle φ := Triangle.mk φ (inr φ) (-fst φ shifted)`, i.e. the third map is minus the projection, as Stacks' (K, L, C(f), f, i, -p); MappingCone.lean:275/288 `d_fst_v` (-fst ≫ d_K) and `d_snd_v` (fst ≫ φ + snd ≫ d_L), the cone differential of Stacks Definition 'cone'",
    "date": "2026-10-09",
    "verdict": "match: shift, cone and the sign of the third map agree with Stacks Section 13.9-13.11"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category localization of cochain complexes at quasi-isomorphisms",
+   "results": "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory, DerivedCategory.instIsIsoMapCochainComplexIntQ, isIso_Q_map_iff_quasiIso, DerivedCategory.Q (Algebra.Homology.DerivedCategory.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category of an abelian category as localization of cochain complexes at quasi-isomorphisms, triangulated",
+   "results": "HasDerivedCategory, DerivedCategory, HasDerivedCategory.standard, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 70,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; rg -n 'mem_distTriang_iff|IsTriangulated \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "results": "HasDerivedCategory (74), HasDerivedCategory.standard (81), DerivedCategory C (87), Q (95), Q.IsLocalization (98), IsTriangulated (177), mem_distTriang_iff (198)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "DerivedCategory",
   "file": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
-  "how": "specializes in one line: for `[Abelian C]` and `[HasDerivedCategory.{w} C]` (universe of morphisms w; `HasDerivedCategory.standard` gives w = max u v), `DerivedCategory C` (line 87) with the localization functor `DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C` and `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))` (line 98); cohomology functors `DerivedCategory.homologyFunctor C n` with `homologyFunctorFactors` (HomologySequence.lean:34, :39); shift and triangles by the instances `HasShift (DerivedCategory C) ℤ`, `Q.CommShift ℤ`, `Pretriangulated`, `IsTriangulated` (Basic.lean:152-177), distinguished triangles characterized by `DerivedCategory.mem_distTriang_iff` (Basic.lean:198)"
+  "how": "specializes in one line: for `[Abelian C]` and `[HasDerivedCategory.{w} C]` (universe of morphisms w; `HasDerivedCategory.standard` gives w = max u v), `DerivedCategory C` (line 87) with the localization functor `DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C` and `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))` (line 98); cohomology functors `DerivedCategory.homologyFunctor C n` with `homologyFunctorFactors` (HomologySequence.lean:34, :39); shift and triangles by the instances `HasShift (DerivedCategory C) ℤ`, `Q.CommShift ℤ`, `Pretriangulated`, `IsTriangulated` (Basic.lean:152-177), distinguished triangles characterized by `DerivedCategory.mem_distTriang_iff` (Basic.lean:198) Re-check 2026-10-09: types read; `DerivedCategory C : Type (max u v)` for `[Abelian C] [HasDerivedCategory.{w} C]`, with `Q` a localization at `HomologicalComplex.quasiIso C (ComplexShape.up ℤ)` (the node's quasi-isomorphisms of ℤ-indexed cochain complexes); the chosen universe w is the node's size convention."
  },
  "status": "mathlib",
  "merged_into": null,

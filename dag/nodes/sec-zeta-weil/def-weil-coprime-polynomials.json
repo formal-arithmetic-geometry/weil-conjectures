@@ -28,12 +28,33 @@
    "results": "gcd_isUnit_iff : IsUnit (gcd x y) ↔ IsCoprime x y (RingTheory/EuclideanDomain.lean:90, RingTheory/PrincipalIdealDomain.lean:479); gcd_isUnit_iff_isRelPrime (Algebra/GCDMonoid/Basic.lean:375)",
    "date": "2026-10-09",
    "verdict": "match: the gcd formulation is equivalent to IsCoprime in K[X]"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coprime elements a x + b y = 1",
+   "results": "IsCoprime (RingTheory.Coprime.Basic), EuclideanDomain.isCoprime_of_dvd, IsRelPrime.isCoprime, isRelPrime_iff_isCoprime (RingTheory.PrincipalIdealDomain), IsCoprime.isRelPrime",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two polynomials are coprime: exist u v with u p + v q = 1; gcd is a unit",
+   "results": "Polynomial.separable_def', UniversalCoprimeFactorizationRing.isCoprime_factor₁_factor₂, IsCoprime (RingTheory.Coprime.Basic), Polynomial.separable_gcd_right",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^def IsCoprime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Coprime/Basic.lean; rg -n 'theorem gcd_isUnit_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; rg -n 'def IsRelPrime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Divisibility/Units.lean",
+   "results": "IsCoprime (Basic.lean:45: ∃ a b, a * x + b * y = 1); gcd_isUnit_iff (PrincipalIdealDomain.lean:479, EuclideanDomain.lean:90); IsRelPrime (Units.lean:150: every common divisor is a unit)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "IsCoprime",
   "file": "Mathlib/RingTheory/Coprime/Basic.lean",
-  "how": "exact: `IsCoprime P Q` for `P Q : K[X]`; the gcd formulation is `gcd_isUnit_iff` (Mathlib/RingTheory/PrincipalIdealDomain.lean:479, Mathlib/RingTheory/EuclideanDomain.lean:90)"
+  "how": "exact: `IsCoprime P Q` for `P Q : K[X]`; the gcd formulation is `gcd_isUnit_iff` (Mathlib/RingTheory/PrincipalIdealDomain.lean:479, Mathlib/RingTheory/EuclideanDomain.lean:90) Re-check 2026-10-09: `IsCoprime P Q` for `P Q : K[X]` is exactly ∃ U V, U P + V Q = 1; the 'every common divisor is a unit' clause is `IsRelPrime` with `isRelPrime_iff_isCoprime` (Mathlib/RingTheory/PrincipalIdealDomain.lean), the gcd clause `gcd_isUnit_iff`."
  },
  "status": "mathlib",
  "merged_into": null,

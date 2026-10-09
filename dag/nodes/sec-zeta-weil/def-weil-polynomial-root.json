@@ -27,12 +27,33 @@
    "results": "Polynomial.eval₂_eq_eval_map : p.eval₂ f x = (p.map f).eval x (Eval/Defs.lean:565); Polynomial.eval_map (x : S) : (p.map f).eval x = p.eval₂ f x (Eval/Defs.lean:577); Polynomial.isRoot_map_iff (Eval/Coeff.lean:225, for injective f and x in the source ring); Polynomial.coeff_zero_eq_eval_zero : coeff p 0 = p.eval 0 (Eval/Coeff.lean:57)",
    "date": "2026-10-09",
    "verdict": "match: the two descriptions of P(x) (eval₂ along ι, or eval of the coefficientwise extension P.map ι) agree by eval₂_eq_eval_map, and P(0) is the constant coefficient by coeff_zero_eq_eval_zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluate polynomial at element along ring homomorphism, root of polynomial",
+   "results": "IsAdjoinRoot.liftHom_map, IsAdjoinRoot.lift_map (eval₂), Polynomial.isRoot_of_eval₂_map_eq_zero, AdjoinRoot.aeval_eq_of_algebra, Polynomial.IsRoot.map",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed: Polynomial.eval₂ / IsRoot)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of a polynomial at an element via a ring homomorphism, sum of f(c_n) x^n",
+   "results": "Polynomial.eval₂_def, eval₂_eq_sum, eval₂_eq_sum_range, Polynomial.eval₂ (Algebra.Polynomial.Eval.Defs)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 55,60p;353,356p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Eval/Defs.lean; rg -n 'theorem eval₂_eq_eval_map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+   "results": "eval₂ (f : R →+* S) (x : S) (p : R[X]) := p.sum fun e a => f a * x ^ e (57); IsRoot p a := p.eval a = 0 (355); eval₂_eq_eval_map (565)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "Polynomial.eval₂",
   "file": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
-  "how": "exact: `Polynomial.eval₂ ι x P` is $P(x)$ for `P : K[X]`, `ι : K →+* L`, `x : L` (equivalently `(P.map ι).eval x` by `Polynomial.eval₂_eq_eval_map`, or `Polynomial.aeval x P` when `L` is a `K`-algebra); a root of $P$ in $L$ is `Polynomial.IsRoot (P.map ι) x` (Mathlib/Algebra/Polynomial/Eval/Defs.lean:355)"
+  "how": "exact: `Polynomial.eval₂ ι x P` is $P(x)$ for `P : K[X]`, `ι : K →+* L`, `x : L` (equivalently `(P.map ι).eval x` by `Polynomial.eval₂_eq_eval_map`, or `Polynomial.aeval x P` when `L` is a `K`-algebra); a root of $P$ in $L$ is `Polynomial.IsRoot (P.map ι) x` (Mathlib/Algebra/Polynomial/Eval/Defs.lean:355) Re-check 2026-10-09: types read; `eval₂ ι x P` is by definition Σ ι(c_n) x^n, the node's P(x) for ι : K →+* L; root = `(P.map ι).IsRoot x` ↔ `eval₂ ι x P = 0` by `eval₂_eq_eval_map`."
  },
  "status": "mathlib",
  "merged_into": null,

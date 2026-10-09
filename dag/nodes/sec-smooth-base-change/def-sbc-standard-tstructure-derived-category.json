@@ -28,12 +28,33 @@
    "results": "`CategoryTheory.Triangulated.TStructure` (the t-structure axioms) in TStructure/Basic.lean; `TStructure.heart` (Heart.lean:45); no t-cohomology functor of a general t-structure is defined",
    "date": "2026-10-09",
    "verdict": "supports the match (the abstract notion is def-weil-t-structure)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical t-structure on the derived category of an abelian category",
+   "results": "DerivedCategory.TStructure.t, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instIsTriangulated, Triangulated.TStructure.mk",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "t-structure on derived category: X is ≥ n iff homology vanishes in degrees below n",
+   "results": "DerivedCategory.isGE_iff, isLE_iff, isZero_of_isGE, isZero_of_isLE, DerivedCategory.IsGE (Algebra.Homology.DerivedCategory.TStructure)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 30,40p;88,110p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; rg -n 'le_shift|ge_shift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean",
+   "results": "TStructure.t (line 34): le n X := ∃ K, X ≅ Q.obj K ∧ K.IsStrictlyLE n, ge likewise; isGE_iff (90), isLE_iff (107) by homologyFunctor; TStructure fields le_shift/ge_shift (Basic.lean:62-63)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "DerivedCategory.TStructure.t",
   "file": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
-  "how": "exact: `DerivedCategory.TStructure.t` (line 34) is the standard t-structure on `DerivedCategory C`; its parts are described by cohomology through `DerivedCategory.isLE_iff` / `isGE_iff` (lines 107, 90) and by strictly bounded representing complexes by definition"
+  "how": "exact: `DerivedCategory.TStructure.t` (line 34) is the standard t-structure on `DerivedCategory C`; its parts are described by cohomology through `DerivedCategory.isLE_iff` / `isGE_iff` (lines 107, 90) and by strictly bounded representing complexes by definition Re-check 2026-10-09: types read. Mathlib's `t` defines D^{≤n}/D^{≥n} by strictly bounded representing complexes (the node's 'equivalently' clause); the node's primary description by H^i is `isLE_iff`/`isGE_iff`; D^{≤n}=D^{≤0}[-n] is the shift compatibility of `TStructure` (le_shift/ge_shift, CategoryTheory/Triangulated/TStructure/Basic.lean:62-63)."
  },
  "status": "mathlib",
  "merged_into": null,
