@@ -2,10 +2,10 @@
  "id": "lem-weil-pbc-site-covering-isomorphic-family",
  "kind": "statement",
  "title": "A family isomorphic to a covering is a covering",
- "statement": "Let $\\mathcal C$ be a site in the sense of Stacks Sites, Definition 00VH [def-weil-pbc-sites-and-cohomology](1): a category with a set $\\operatorname{Cov}(\\mathcal C)$ of families of morphisms with fixed target such that (i) $\\{V\\to U\\}$ is a covering for every isomorphism $V\\to U$, (ii) if $\\{U_i\\to U\\}_{i\\in I}$ is a covering and $\\{V_{ij}\\to U_i\\}_{j\\in J_i}$ is a covering for every $i$ then $\\{V_{ij}\\to U\\}_{i,j}$ is a covering, (iii) for a covering $\\{U_i\\to U\\}_{i\\in I}$ and a morphism $V\\to U$ the fibre products $U_i\\times_UV$ exist and, for some choice of them, $\\{U_i\\times_UV\\to V\\}_{i\\in I}$ is a covering. Let $\\{g_a:U_a\\to U\\}_{a\\in A}$ be a covering of $\\mathcal C$, and let $\\{f_a:V_a\\to V\\}_{a\\in A}$ be a family of morphisms of $\\mathcal C$ with common target, indexed by the same set $A$, together with an isomorphism $\\varphi:V\\to U$ and isomorphisms $\\sigma_a:V_a\\to U_a$ such that $g_a\\circ\\sigma_a=\\varphi\\circ f_a$ for every $a\\in A$. Then $\\{f_a:V_a\\to V\\}_{a\\in A}$ is a covering of $\\mathcal C$. (In particular, for $\\varphi=\\mathrm{id}$: replacing the sources of a covering by isomorphic objects over the target gives a covering.)",
+ "statement": "Let $\\mathcal C$ be a site in the sense of Stacks Sites, Definition 00VH [def-weil-pbc-sites-and-cohomology](1): a category with a set $\\operatorname{Cov}(\\mathcal C)$ of families of morphisms with fixed target such that (i) for every isomorphism $V\\to U$ some family $\\{V\\to U\\}$ indexed by a singleton set is a covering, (ii) if $\\{U_i\\to U\\}_{i\\in I}$ is a covering and $\\{V_{ij}\\to U_i\\}_{j\\in J_i}$ is a covering for every $i$ then $\\{V_{ij}\\to U\\}_{(i,j)}$, indexed by the set of pairs $(i,j)$ with $i\\in I$, $j\\in J_i$, is a covering, (iii) for a covering $\\{U_i\\to U\\}_{i\\in I}$ and a morphism $V\\to U$ the fibre products $U_i\\times_UV$ exist and, for some choice of them, $\\{U_i\\times_UV\\to V\\}_{i\\in I}$ is a covering. Let $\\{g_a:U_a\\to U\\}_{a\\in A}$ be a covering of $\\mathcal C$, and let $\\{f_a:V_a\\to V\\}_{a\\in A}$ be a family of morphisms of $\\mathcal C$ with common target, indexed by the same set $A$, together with an isomorphism $\\varphi:V\\to U$ and isomorphisms $\\sigma_a:V_a\\to U_a$ such that $g_a\\circ\\sigma_a=\\varphi\\circ f_a$ for every $a\\in A$. Then there are a set $A'$ and a bijection $\\beta:A'\\to A$ such that $\\{f_{\\beta(a')}:V_{\\beta(a')}\\to V\\}_{a'\\in A'}$ is a covering of $\\mathcal C$. In particular, if $\\operatorname{Cov}(\\mathcal C)$ is closed under reindexing along bijections of index sets (a family $\\{W_j\\to W\\}_{j\\in J}$ is a covering whenever $\\{W_{\\gamma(k)}\\to W\\}_{k\\in K}$ is one for a bijection $\\gamma:K\\to J$), then $\\{f_a:V_a\\to V\\}_{a\\in A}$ itself is a covering. STATEMENT-DISPUTED (2026-10-10, worker of this item): the earlier conclusion \"$\\{f_a\\}_{a\\in A}$ is a covering\" without the reindexing does not follow from axioms (i)-(iii) of 00VH, which see the index sets. Counterexample: let $\\mathcal C$ have objects $X,Y,U$ and, besides identities, exactly the morphisms $s:X\\to Y$, $s^{-1}:Y\\to X$, $x:X\\to U$, $y:Y\\to U$ with $y s=x$ (so $x,y$ are monomorphisms and all fibre products exist). Let $S$ be the smallest set of sets containing $\\{\\emptyset\\}$ and containing $\\{(i,j)\\}$ (Kuratowski pair) whenever $\\{i\\},\\{j\\}\\in S$; it is a countable set of singletons. Let $\\operatorname{Cov}(\\mathcal C)$ be all families $\\{h\\}_{I}$ of one morphism $h$ indexed by some $I\\in S$, except $\\{y:Y\\to U\\}_{\\{\\emptyset\\}}$. (i) holds with index $\\{\\emptyset\\}$ since $y$ is not an isomorphism; (ii) holds since a composite family is indexed by $\\{(i,j)\\}\\neq\\{\\emptyset\\}$; (iii) holds since the only base change that could produce $y$ with index $\\{\\emptyset\\}$ is along $\\mathrm{id}_U$, where the fibre product can be chosen as $(X,x)$ or $(U,\\mathrm{id}_U)$. Then $\\{x\\}_{\\{\\emptyset\\}}$ is a covering, $\\varphi=\\mathrm{id}_U$, $\\sigma=s^{-1}$ satisfy $x s^{-1}=y$, but $\\{y\\}_{\\{\\emptyset\\}}$ is not a covering. Mathlib's presieve-based sites (and Stacks' tautological equivalence, Sites 00VU, 00VV, 00VW: tautologically equivalent families have the same sheaf condition) do not see this distinction.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
-  "place": "no Stacks lemma states it; Definition Tag 00VH (definition-site, line 679), axioms (1)-(3) and the \"Clarifications\" paragraph after it (axiom (3) holds for some choice of the fibre products); statement written by an agent for lem-weil-pbc-site-equivalence-morphism-transport"
+  "place": "no Stacks lemma states it; Definition Tag 00VH (definition-site, line 679), axioms (1)-(3) and the \"Clarifications\" paragraph after it (line 697: axiom (1) asks for some singleton-indexed covering; line 705: axiom (3) holds for some choice of the fibre products); Definition 00VU (combinatorially/tautologically equivalent families, line 1116); statement written by an agent for lem-weil-pbc-site-equivalence-morphism-transport, corrected (reindexing) by the worker of this item"
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
@@ -38,14 +38,98 @@
    "results": "Precoverage.lean:87 HasIsos, :95 IsStableUnderBaseChange (any IsPullback), :132 mem_coverings_of_isPullback; Hypercover/Zero.lean:631 class Precoverage.RespectsIso (iso E ≅ F of PreZeroHypercovers of one S), :680 presieve₀_mem_of_iso, :957 instance RespectsIso from IsStableUnderBaseChange (proof: base change along 𝟙 S with isomorphic pullback squares)",
    "date": "2026-10-10",
    "verdict": "no match (same argument as the Mathlib instance, for Mathlib precoverages with the stronger base-change axiom; no theorem for Stacks sites, and no change of target)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pretopology covering family composed with isomorphisms of sources is a covering",
+   "results": "Precoverage.HasIsos.mk, Precoverage.HasIsos, Precoverage.RespectsIso.of_iso, Precoverage.RespectsIso.mk (Sites.Hypercover.Zero), Precoverage.comp_mem_coverings (Sites.Precoverage), Pretopology.has_isos, Scheme.coverOfIsIso",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib coverings are presieves (sets of arrows, no index set), so the reindexing issue of this node does not arise there and no declaration is about Stacks families indexed by sets"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.ofArrows, CategoryTheory.Iso",
+   "results": "Presieve.isSheafFor_ofArrows_comp_iff (Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck): sheaf condition for ofArrows (e i).hom ≫ g i iff for ofArrows g",
+   "date": "2026-10-10",
+   "verdict": "no match (sheaf condition, the analogue of Stacks 00VW, not membership of a covering)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a presieve given by arrows is in a pretopology and each source is replaced by an isomorphic object over the base, the new presieve is in the pretopology",
+   "results": "Pretopology.has_isos, Scheme.mem_pretopology_iff, MorphismProperty.pretopology_toPrecoverage, MorphismProperty.coverage_eq_toCoverage_pretopology, Pretopology.trivial, Precoverage.toPretopology, Scheme.exists_cover_of_mem_pretopology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class RespectsIso\\|instance.*RespectsIso\\|presieve₀_mem_of_iso\\|class IsStableUnderBaseChange' Mathlib/CategoryTheory/Sites/; grep -n ofArrows Mathlib/CategoryTheory/Sites/Pretopology.lean",
+   "results": "Sites/MorphismProperty.lean:54 instance HasIsos; Precoverage.lean:95 IsStableUnderBaseChange; Hypercover/Zero.lean:849 presieve₀_mem_of_iso, :957 instance RespectsIso from IsStableUnderBaseChange; Pretopology.lean:292-295 bind of ofArrows indexed by a sigma type",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib analogue for presieve precoverages with base change along every pullback; not a statement about Stacks sites with indexed families)"
   }
  ],
  "import_flags": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (base change along $\\varphi$).* Apply axiom (iii) of 00VH [def-weil-pbc-sites-and-cohomology](1) to the covering $\\{g_a:U_a\\to U\\}_{a\\in A}$ and the morphism $\\varphi:V\\to U$: the fibre products exist and there is a choice of them, objects $P_a$ with projections $p_a:P_a\\to V$, $q_a:P_a\\to U_a$, $g_a q_a=\\varphi p_a$, each $(P_a,q_a,p_a)$ a fibre product of $g_a$ and $\\varphi$, such that $\\{p_a:P_a\\to V\\}_{a\\in A}$ is a covering. (This is an instance of the axiom; no claim is made about other choices of fibre products.)",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00VH (definition-site, line 679), axioms (1)-(3) and the Clarifications paragraph (lines 697-705)"
+   }
+  },
+  {
+   "text": "*Step 2 ($(V_a,\\sigma_a,f_a)$ is a fibre product of $g_a$ and $\\varphi$).* We have $g_a\\sigma_a=\\varphi f_a$. Let $T$ be an object with $u:T\\to U_a$, $v:T\\to V$, $g_a u=\\varphi v$. A morphism $t:T\\to V_a$ with $\\sigma_a t=u$ must be $t=\\sigma_a^{-1}u$, so there is at most one $t$ with $\\sigma_a t=u$, $f_a t=v$. For $t=\\sigma_a^{-1}u$: $\\sigma_a t=u$, and $\\varphi f_a t=g_a\\sigma_a t=g_a u=\\varphi v$, hence $f_a t=v$ since $\\varphi$ is an isomorphism (compose with $\\varphi^{-1}$). So $t$ exists and is unique: $(V_a,\\sigma_a,f_a)$ is a fibre product $U_a\\times_UV$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "definition of fibre product (Categories, Section 001U, Definition 001V); argument written out by the worker"
+   }
+  },
+  {
+   "text": "*Step 3 (comparison isomorphisms).* By Steps 1 and 2, $(P_a,q_a,p_a)$ and $(V_a,\\sigma_a,f_a)$ are both fibre products of $g_a$ and $\\varphi$. By the universal property of $P_a$ there is a unique $\\tau_a:V_a\\to P_a$ with $q_a\\tau_a=\\sigma_a$ and $p_a\\tau_a=f_a$, and by that of $V_a$ a unique $\\rho_a:P_a\\to V_a$ with $\\sigma_a\\rho_a=q_a$, $f_a\\rho_a=p_a$; then $\\rho_a\\tau_a$ and $\\mathrm{id}_{V_a}$ both satisfy the conditions defining the factorization of $(\\sigma_a,f_a)$ through $V_a$, so $\\rho_a\\tau_a=\\mathrm{id}$, and likewise $\\tau_a\\rho_a=\\mathrm{id}$. So $\\tau_a$ is an isomorphism with $p_a\\tau_a=f_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "uniqueness of fibre products up to unique isomorphism (Categories, Section 001U, Definition 001V); argument written out by the worker"
+   }
+  },
+  {
+   "text": "*Step 4 (composition).* By axiom (i) [def-weil-pbc-sites-and-cohomology](1), for each $a\\in A$ there is a singleton set $J_a=\\{j_a\\}$ such that $\\{\\tau_a:V_a\\to P_a\\}_{j\\in J_a}$ is a covering (Step 3: $\\tau_a$ is an isomorphism). By axiom (ii) applied to the covering $\\{p_a\\}_{a\\in A}$ of Step 1 and these coverings, the family $\\{p_a\\tau_a:V_a\\to V\\}_{(a,j)\\in A'}$, $A'=\\{(a,j_a):a\\in A\\}$, is a covering. By Step 3, $p_a\\tau_a=f_a$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00VH (definition-site, line 679), axioms (1)-(3) and the Clarifications paragraph (lines 697-705)"
+   }
+  },
+  {
+   "text": "*Step 5 (conclusion).* The map $\\beta:A'\\to A$, $(a,j_a)\\mapsto a$, is a bijection (inverse $a\\mapsto(a,j_a)$), and by Step 4 $\\{f_{\\beta(a')}:V_{\\beta(a')}\\to V\\}_{a'\\in A'}$ is a covering. If $\\operatorname{Cov}(\\mathcal C)$ is closed under reindexing along bijections, applying this with $\\gamma=\\beta$ shows that $\\{f_a\\}_{a\\in A}$ is a covering. (Without that hypothesis the conclusion with index set $A$ can fail; see the counterexample in the statement.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00VU (definition-combinatorial-tautological, line 1116): the reindexed family is combinatorially equivalent to $\\{f_a\\}_{a\\in A}$; argument written out by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; proof from the axioms of Definition 00VH (line 679) and its Clarifications (lines 697-705), written by the worker of this item"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,6 +154,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: a family isomorphic to a covering (sources and target) is a covering; well posed; unsplit (proof from axioms (i)-(iii))."
+  "note": "Split reviewed: 5 elementary steps (base change along phi, V_a is a fibre product, comparison isomorphisms, axioms (i)+(ii), reindexing). The worker is right that 00VH sees index sets; the lead added to def-weil-pbc-sites-and-cohomology (1) the convention that coverings are closed under bijective reindexing (true for every site of this document, Sites 00VU/00VX for the general case), under which the \"in particular\" clause gives the family indexed by A itself, as used by lem-weil-pbc-site-equivalence-morphism-transport Step 4(a). Statement correction accepted."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-covering-isomorphic-family",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Sites 00VH and its Clarifications. The statement as written was false: the axioms see index sets (axiom (1) gives a covering indexed by some singleton, axiom (2) gives a family indexed by pairs), and a site can contain a covering {x}_{\\{0\\}} while the isomorphic family {y}_{\\{0\\}} is not a covering (counterexample now in the statement, marked STATEMENT-DISPUTED). Corrected the conclusion to: a reindexing of {f_a} along a bijection A'->A is a covering, and {f_a}_{a in A} itself is one if Cov is closed under bijective reindexing. Proof in 5 steps from axioms (iii), (i), (ii) and the universal property of fibre products (all elementary or instances of the axioms of the definition node). The Clarifications paragraph does not say that (iii) holds for every choice of fibre products; that is avoided here by comparing the chosen fibre product with V_a directly. No new nodes. Mathlib re-searched with three kinds: no match (Mathlib's presieve-based precoverages have no index sets)."
  }
 }
