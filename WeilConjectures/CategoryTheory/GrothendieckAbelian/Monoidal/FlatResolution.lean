@@ -186,7 +186,7 @@ noncomputable def freePresheafDesc {U : C} {G : A} {F : Cᵒᵖ ⥤ A} (h : G �
   app V := Sigma.desc fun φ ↦ h ≫ F.map φ.down.op
   naturality V W ψ := Sigma.hom_ext _ _ fun φ ↦ by
     simp [sigmaConst, ← Functor.map_comp]
-    rfl
+    try rfl
 
 omit [EssentiallySmall.{u + 1} C] [MonoidalCategory A] [MonoidalPreadditive A]
   [SymmetricCategory A] [MonoidalClosed A] in
