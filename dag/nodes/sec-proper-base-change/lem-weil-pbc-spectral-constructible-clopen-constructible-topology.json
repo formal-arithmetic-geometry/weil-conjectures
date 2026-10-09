@@ -12,9 +12,50 @@
   "def-weil-constructible-subset",
   "def-weil-pbc-constructible-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U\\subseteq X$ be open. Then $U$ is retrocompact in $X$ if and only if $U$ is quasi-compact, because $X$ is spectral [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact]. Hence, by Definition 005G as recorded in [def-weil-constructible-subset], $E=\\bigcup_{i=1}^{n}(U_i\\cap(X\\setminus V_i))$ for some $n\\ge 0$ and quasi-compact open subsets $U_i,V_i\\subseteq X$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "paragraph after Definition 08YG, line 4290 ff. ('since X is spectral an open U is retrocompact if and only if U is quasi-compact'); Definition 005G, line 2554"
+   }
+  },
+  {
+   "text": "Let $X^c$ be the set $X$ with its constructible topology [def-weil-pbc-constructible-topology]. For a quasi-compact open $W\\subseteq X$ both $W$ and $X\\setminus W$ belong to the subbase of $X^c$, so both are open in $X^c$; as they are complements of each other, both are also closed in $X^c$. So $W$ and $X\\setminus W$ are open and closed in $X^c$.",
+   "uses": [
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "paragraph after Definition 08YG (definition-spectral-space), line 4290 ff.; Definition 005G (definition-constructible, line 2554)"
+   }
+  },
+  {
+   "text": "In any topological space finite intersections and finite unions of open and closed subsets are open and closed (finite intersections and finite unions of open sets are open, of closed sets are closed). By step 2 each $U_i\\cap(X\\setminus V_i)$ is open and closed in $X^c$, and so is the finite union $E=\\bigcup_{i=1}^n(U_i\\cap(X\\setminus V_i))$ of step 1 (for $n=0$, $E=\\emptyset$ is open and closed). This proves the claim; it is the statement of Stacks that the constructible topology is the coarsest topology in which every constructible subset is open and closed, in its 'every constructible subset is open and closed' half.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "paragraph after Definition 08YG (definition-spectral-space), line 4290 ff.; Definition 005G (definition-constructible, line 2554)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "paragraph after Definition 08YG (definition-spectral-space), line 4290 ff., with Definition 005G and Lemma 0069 (2); Stacks states the result without proof, the steps were written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +84,17 @@
    "results": "ConstructibleTopology.lean: only IsCompact.isOpen_constructibleTopology_of_isOpen (:60) and _of_isClosed (:65), no isClopen/isClosed/IsConstructible lemma; Constructible.lean:178 IsConstructible, :230 IsConstructible.empty_union_induction, :337 QuasiSeparatedSpace.isRetrocompact_iff_isCompact",
    "date": "2026-10-10",
    "verdict": "no match in the pinned Mathlib; a short proof: induction IsConstructible.empty_union_induction with isRetrocompact_iff_isCompact and IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constructibleTopology\\|WithConstructibleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (whole tree)",
+   "results": "only Topology/Spectral/ConstructibleTopology.lean: constructibleTopology (:42), IsCompact.isOpen_constructibleTopology_of_isOpen (:60), _of_isClosed (:65), compactSpace_withConstructibleTopology; nothing about IsConstructible or IsClopen in this topology",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib; the Lean proof is a few lines from IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed, IsConstructible.empty_union_induction and QuasiSeparatedSpace.isRetrocompact_iff_isCompact"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +114,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks topology.tex line 4290 ff. and def-weil-constructible-subset, def-weil-pbc-constructible-topology). Proof written in three steps: (1) in a spectral space open retrocompact = quasi-compact open (new Mathlib leaf lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact = QuasiSeparatedSpace.isRetrocompact_iff_isCompact, Stacks 0069 (2) and the remark after 08YG), so E is a finite union of U ∩ (X \\ V) with U, V quasi-compact open (Definition 005G); (2) subbase elements W, X \\ W are clopen in the constructible topology; (3) finite unions/intersections of clopens are clopen. Lemma 005H (Boolean algebra) is not needed since the finite-union form of 005G is used directly. Tags checked in tags/tags: 005G definition-constructible, 005H lemma-constructible, 0069 lemma-topology-quasi-separated-scheme, 08YG definition-spectral-space (08YF is the section). No Lean in the source repository; the pinned Mathlib lacks the statement itself (a newer Mathlib has constructibleTopology_eq_generateFrom_isConstructible)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Three steps (Stacks gives the fact after 08YG without proof): retrocompact iff quasi-compact for opens of a spectral space (new Mathlib leaf QuasiSeparatedSpace.isRetrocompact_iff_isCompact, Topology/Constructible.lean:336 @[stacks 0069], verified) so constructible sets are finite unions of U cap (X minus V) with U, V quasi-compact open; subbase elements and their complements are clopen; finite unions and intersections. Tags verified by the worker (005G, 005H, 0069, 08YG)."
+ }
 }

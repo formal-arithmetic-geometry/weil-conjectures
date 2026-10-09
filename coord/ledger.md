@@ -583,3 +583,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-etale-stratified-finite returned (0b603c363): Third push (head 0b603c36): the report is now present and the route along 03S9 (separated case via 07RZ, charts and overlaps over an affine base, separatedness 
 - 22:44 UTC (2026-10-09) — Returned F1 etale-stratified-finite a third time (head 0b603c36; a new node stated as a property schema, not a statement).
 - 22:46 UTC (2026-10-09) — Reviewed and committed smooth-ring-map-iff-smooth-affine (02H6 affine case; 2 new nodes). Stage-3 note: def-sbc-smooth-morphisms vs Mathlib's affine-local Smooth: lem-weil-pbc-smooth-restrict-open-subschemes identifies them in one line, this item does not; reconcile.
+- 22:47 UTC (2026-10-09) — Reviewed and committed spectral-constructible-clopen-constructible-topology (1 new Mathlib leaf). Launched a worker on spectral-finite-coequalizer-embeds-constant (0CAL).

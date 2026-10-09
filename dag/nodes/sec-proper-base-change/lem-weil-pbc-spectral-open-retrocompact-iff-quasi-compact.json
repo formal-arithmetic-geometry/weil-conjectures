@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+ "kind": "statement",
+ "title": "In a spectral space an open subset is retrocompact iff it is quasi-compact",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space] (more generally, a quasi-compact topological space in which the intersection of two quasi-compact open subsets is quasi-compact) and let $U\\subseteq X$ be an open subset. Then $U$ is retrocompact in $X$ [def-weil-constructible-subset] (that is, $U\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$) if and only if $U$ is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Lemma 0069 (lemma-topology-quasi-separated-scheme, line 5470), part (2): a quasi-compact open is retrocompact; the converse and the iff are stated in the paragraph after Definition 08YG (definition-spectral-space, line 4290): 'since X is spectral an open U is retrocompact if and only if U is quasi-compact'"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a quasi-compact quasi-separated space an open set is retrocompact iff it is compact",
+   "results": "QuasiSeparatedSpace.isRetrocompact_iff_isCompact, IsRetrocompact.isCompact, IsCompact.isRetrocompact, IsRetrocompact, IsQuasiSeparated, IsRetrocompact.isConstructible (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "match: QuasiSeparatedSpace.isRetrocompact_iff_isCompact"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRetrocompact ?U ↔ IsCompact ?U",
+   "results": "QuasiSeparatedSpace.isRetrocompact_iff_isCompact [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsOpen U) : IsRetrocompact U ↔ IsCompact U (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "QuasiSeparatedSpace.isRetrocompact_iff_isCompact (project ~/weil-conjectures-slopmaster2)",
+   "results": "_root_.QuasiSeparatedSpace.isRetrocompact_iff_isCompact in .lake/packages/mathlib/Mathlib/Topology/Constructible.lean (index: unavailable, existence confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "match exists in the pinned Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isRetrocompact_iff_isCompact\\|class QuasiSeparatedSpace\\|class SpectralSpace' in Mathlib/Topology/Constructible.lean, Topology/QuasiSeparated.lean, Topology/Spectral/Basic.lean",
+   "results": "Constructible.lean:336 QuasiSeparatedSpace.isRetrocompact_iff_isCompact (@[stacks 0069 \"Iff form of (2)\"]); QuasiSeparated.lean:47 class QuasiSeparatedSpace (intersection of two compact opens is compact); Spectral/Basic.lean:38 SpectralSpace extends CompactSpace, QuasiSeparatedSpace",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "QuasiSeparatedSpace.isRetrocompact_iff_isCompact",
+  "file": "Mathlib/Topology/Constructible.lean",
+  "line": 336,
+  "how": "exact: for X with [CompactSpace X] [QuasiSeparatedSpace X] and IsOpen U, IsRetrocompact U ↔ IsCompact U; IsRetrocompact (line 52) is the node's retrocompact (s ∩ W compact for every compact open W), QuasiSeparatedSpace (QuasiSeparated.lean:47) is 'intersection of two compact opens is compact', and SpectralSpace X (Spectral/Basic.lean:38) extends CompactSpace X and QuasiSeparatedSpace X, so the instances are available for a spectral space. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
