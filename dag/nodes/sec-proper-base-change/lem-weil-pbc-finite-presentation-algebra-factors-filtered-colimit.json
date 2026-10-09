@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+ "kind": "statement",
+ "title": "Maps from a finitely presented algebra into a filtered colimit factor through a stage",
+ "statement": "Let $R$ be a commutative ring, $J$ a small filtered category, $j\\mapsto B_j$ a functor from $J$ to commutative $R$-algebras ($R$-algebra transition maps), and $(\\Lambda,(\\iota_j)_j)$ a colimit of this diagram in the category of commutative rings [def-weil-pbc-category-colimit] such that $\\Lambda$ is an $R$-algebra and every $\\iota_j:B_j\\to\\Lambda$ is a homomorphism of $R$-algebras. Let $C=R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ with $f_1,\\ldots,f_m\\in R[x_1,\\ldots,x_n]$ (a finitely presented $R$-algebra), and let $g:C\\to\\Lambda$ be a homomorphism of $R$-algebras. Then there are $j\\in J$ and a homomorphism of $R$-algebras $g':C\\to B_j$ with $\\iota_j\\circ g'=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886), (1) implies (3) (stated there for directed systems); in this filtered form Algebra, Lemma Tag 07C3 (lemma-when-colimit), (1) implies (2), whose proof applies 00QO; used in smoothing.tex, proof of Lemma Tag 0AH5 ('By Theorem 07GC we can find a factorization A -> B -> A^')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra map into filtered colimit factors through some stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation), CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, Algebra.FinitePresentation.out",
+   "date": "2026-10-10",
+   "verdict": "match: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+   "results": "one result, Mathlib.Algebra.Category.Ring.FinitePresentation: for J filtered, F : J ⥤ CommRingCat, α : const R ⟶ F, f : R ⟶ S with f.hom.FinitePresentation, c a colimit cocone with PreservesColimit F (forget CommRingCat), g : S ⟶ c.pt with f ≫ g = α.app i ≫ c.ι.app i for all i: ∃ i g', f ≫ g' = α.app i ∧ g = g' ≫ c.ι.app i",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|theorem\\|instance forget_preservesFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FinitePresentation.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FilteredColimits.lean; grep -n 'protected theorem quotient\\|protected instance mvPolynomial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean",
+   "results": "FinitePresentation.lean:81 RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (source read: hypothesis hf : f.hom.FinitePresentation); FilteredColimits.lean:363 instance CommRingCat.FilteredColimits.forget_preservesFilteredColimits; RingTheory/FinitePresentation.lean:111 Algebra.FinitePresentation.quotient (fg ideal), :190 instance Algebra.FinitePresentation.mvPolynomial",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+  "file": "Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+  "how": "a few Mathlib lemmas: line 81, with R as CommRingCat, F the diagram j ↦ B_j in CommRingCat, α the structure maps R → B_j, S = C, f the structure map R → C, c the colimit cocone (Λ, ι_j); the instance PreservesColimit F (forget CommRingCat) is CommRingCat.FilteredColimits.forget_preservesFilteredColimits (Algebra/Category/Ring/FilteredColimits.lean:363); f.hom.FinitePresentation from Algebra.FinitePresentation.quotient (RingTheory/FinitePresentation.lean:111, the ideal (f_1,...,f_m) is finitely generated) applied to the instance Algebra.FinitePresentation.mvPolynomial (:190); the hypothesis hg holds since g and the ι_j are R-algebra maps, and the conclusion f ≫ g' = α.app j says g' is an R-algebra map. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-pair-approximation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Algebra/Category/Ring/FinitePresentation.lean:81) with CommRingCat.FilteredColimits.forget_preservesFilteredColimits (FilteredColimits.lean:363); Algebra 00QO/07C3."
+ }
+}

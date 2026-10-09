@@ -12,9 +12,97 @@
   "def-weil-pbc-g-ring",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to a regular completion map.* Fix $(A,I)$, $f_1,\\ldots,f_m$, $\\hat a_1,\\ldots,\\hat a_n$ and $N\\ge1$ as in the statement. Since $A$ is a G-ring it is Noetherian [def-weil-pbc-g-ring], so $I$ is finitely generated [def-weil-pbc-noetherian-ring] and $A^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian]. By [lem-weil-pbc-g-ring-completion-regular] the canonical map $\\iota:A\\to A^\\wedge$ is regular. (Stacks: '(2) implies (1)', so it suffices to treat the case $A\\to A^\\wedge$ regular.)",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-g-ring-completion-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), first paragraph: 'By More on Algebra, Lemma 0AH2 we see that (2) implies (1)'"
+   }
+  },
+  {
+   "text": "*Factorization through a smooth $A$-algebra (Popescu).* Let $C=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ and let $\\varphi:C\\to A^\\wedge$ be the $A$-algebra map $x_k\\mapsto\\hat a_k$; it is well defined because $f_j^\\iota(\\hat a_1,\\ldots,\\hat a_n)=0$ for all $j$. By step 1, $\\iota$ is a regular map of Noetherian rings, so by [lem-weil-pbc-popescu-smoothing] $A^\\wedge$ is the colimit in commutative rings of a filtered diagram $j\\mapsto B_j$ of $A$-algebras with $\\operatorname{Spec}B_j\\to\\operatorname{Spec}A$ smooth, with $A$-algebra coprojections $\\iota_j:B_j\\to A^\\wedge$. By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (with $R=A$, $\\Lambda=A^\\wedge$, $g=\\varphi$) there are $j$ and an $A$-algebra map $g':C\\to B_j$ with $\\iota_j\\circ g'=\\varphi$. Put $B=B_j$, $\\psi=\\iota_j:B\\to A^\\wedge$ and $b_k=g'(x_k)\\in B$. Then $f_j(b_1,\\ldots,b_n)=g'(f_j(x_1,\\ldots,x_n))=0$ in $B$ for all $j$ ($g'$ is an $A$-algebra map, so it commutes with evaluating polynomials with coefficients in $A$), and $\\psi(b_k)=\\varphi(x_k)=\\hat a_k$.",
+   "uses": [
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), second paragraph: 'By Theorem 07GC we can find a factorization A -> B -> A^ with A -> B smooth and b_1,...,b_n in B with f_j(b_1,...,b_n)=0 in B' (the source writes 'A -> P smooth', a misprint for A -> B); the factorization of the finitely presented C through a stage is Algebra 07C3 (1)=>(2) / 00QO"
+   }
+  },
+  {
+   "text": "*Lifting the section modulo $I^N$ to an etale $A$-algebra.* Let $\\pi_N:A\\to A/I^N$ be the quotient map and $\\pi^\\wedge_N:A^\\wedge\\to A/I^N$, $(x_n)_n\\mapsto x_N$, the $A$-algebra map of [lem-weil-pbc-adic-completion-mod-power]. Then $\\sigma=\\pi^\\wedge_N\\circ\\psi:B\\to A/I^N$ is a homomorphism of $A$-algebras. By [lem-weil-pbc-smooth-section-etale-lift] applied to the ideal $J=I^N$ there are a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale such that $\\alpha:A/I^N\\to A'/I^NA'$ is an isomorphism, and an $A$-algebra map $\\tilde\\sigma:B\\to A'$ with $q\\circ\\tilde\\sigma=\\alpha\\circ\\sigma$, where $q:A'\\to A'/I^NA'$ is the quotient map.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-smooth-section-etale-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), third paragraph: 'Denote sigma: B -> A^ -> A/I^N the composition. By More on Algebra, Lemma 07M7 we can find an etale ring map A -> A' which induces an isomorphism A/I^N -> A'/I^NA' and an A-algebra map tilde sigma: B -> A' lifting sigma'"
+   }
+  },
+  {
+   "text": "*A retraction $\\chi:A'\\to A$ (henselian pair).* Since $(A,I)$ is henselian [def-weil-pbc-henselian-terminology], by [lem-weil-pbc-henselian-factorization-criterion] (i) $I$ lies in the Jacobson radical of $A$ and (ii) factorizations into coprime monic factors modulo $I$ of monic polynomials over $A$ lift to factorizations into monic factors. Gabber's root condition follows: let $h(T)=T^r(T-1)+c_rT^r+\\cdots+c_1T+c_0$ with $r\\ge1$ and $c_0,\\ldots,c_r\\in I$; it is monic with $\\bar h=T^r\\cdot(T-1)$ in $(A/I)[T]$, and $T^r$, $T-1$ are monic and generate the unit ideal of $(A/I)[T]$ ($1=T^r-(T-1)(T^{r-1}+\\cdots+T+1)$). By (ii) $h=gu$ with $g,u\\in A[T]$ monic, $\\bar g=T^r$, $\\bar u=T-1$; as $u$ is monic of degree $1$, $u=T-\\beta$ with $\\beta\\equiv1$ modulo $I$, and $h(\\beta)=g(\\beta)u(\\beta)=0$: $h$ has a root $\\beta\\in1+I$. By (i), this root condition and [lem-weil-pbc-gabber-root-criterion-etale-section-lifting], applied to the etale $A\\to A'$ of step 3 and the $A$-algebra map $\\sigma_1=\\rho\\circ\\alpha^{-1}\\circ q:A'\\to A/I$ (with $\\rho:A/I^N\\to A/I$ the reduction), there is an $A$-algebra map $\\chi:A'\\to A$ with $\\pi_1\\circ\\chi=\\sigma_1$ ($\\pi_1:A\\to A/I$ the quotient map).",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Smoothing Lemma Tag 0AH5, 'Since (A, I) is henselian, there is an A-algebra map chi: A' -> A, see More on Algebra, Lemma 09XI'; here 09XI (1)=>(2) along the proof of More on Algebra Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553): (3)=>(1) [the DAG's definition is (3)], (1)=>(5) (the root argument written out here), (5)=>(2)"
+   }
+  },
+  {
+   "text": "*$\\chi$ agrees with the section modulo $I^N$.* Claim: $\\pi_N\\circ\\chi=\\alpha^{-1}\\circ q$ as maps $A'\\to A/I^N$. Every $A$-algebra map $h:A'\\to A/I^N$ kills $I^NA'$ (it sends $I^N$ to $0$), so $h=\\bar h\\circ q$ for an $A$-algebra map $\\bar h:A'/I^NA'\\to A/I^N$; then $\\bar h\\circ\\alpha:A/I^N\\to A/I^N$ is an $A$-algebra map, hence the identity ($A\\to A/I^N$ is surjective), so $\\bar h=\\alpha^{-1}$ and $h=\\alpha^{-1}\\circ q$. Apply this to $h=\\pi_N\\circ\\chi$ (an $A$-algebra map since $\\chi$ is). Hence $\\pi_N\\circ\\chi\\circ\\tilde\\sigma=\\alpha^{-1}\\circ q\\circ\\tilde\\sigma=\\sigma$ (step 3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), last sentence ('Then setting a_i = chi(tilde sigma(b_i)) gives a solution'), the congruence left implicit there, written out"
+   }
+  },
+  {
+   "text": "*The solution.* Put $a_k=\\chi(\\tilde\\sigma(b_k))\\in A$. Since $\\chi\\circ\\tilde\\sigma:B\\to A$ is an $A$-algebra map, $f_j(a_1,\\ldots,a_n)=\\chi\\tilde\\sigma(f_j(b_1,\\ldots,b_n))=0$ by step 2. By step 5 and step 2, $\\pi_N(a_k)=\\sigma(b_k)=\\pi^\\wedge_N(\\psi(b_k))=\\pi^\\wedge_N(\\hat a_k)$, and $\\pi^\\wedge_N\\circ\\iota=\\pi_N$ [lem-weil-pbc-adic-completion-mod-power], so $\\pi^\\wedge_N(\\hat a_k-\\iota(a_k))=0$. Since $I$ is finitely generated (step 1), the kernel of $\\pi^\\wedge_N$ is $I^NA^\\wedge$ [lem-weil-pbc-adic-completion-mod-power], i.e. $\\hat a_k-\\iota(a_k)\\in I^NA^\\wedge$ for $k=1,\\ldots,n$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), last sentence: 'Then setting a_i = chi(tilde sigma(b_i)) gives a solution'; the congruence 'hat a_i - a_i in I^N' of the statement means I^N A^ (Algebra Lemma 05GG)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-smooth-section-etale-lift",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), case (2), and its proof (lines 3415-3437)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +147,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselian-pair-approximation",
+  "worker": "stage1",
+  "summary": "Read Stacks Smoothing 0AH5 and its proof, More on Algebra 0AH2, 07M7, 09XI, Smoothing 07GC, Algebra 00QO, 07C3 and 05GG; all tags checked in tags/tags. Statement kept (it is case (2) of 0AH5; 'hat a_i - a_i in I^N' made precise as I^N A^). Proof in 6 steps following the source: (1) A Noetherian, A^ Noetherian, A -> A^ regular (new unsplit lem-weil-pbc-g-ring-completion-regular, 0AH2); (2) the solution as an A-algebra map from C = A[x]/(f) to A^, factored through a smooth A-algebra B by Popescu (new unsplit lem-weil-pbc-popescu-smoothing, 07GC) and the factorization of finitely presented algebras through a stage of a filtered colimit (new Mathlib leaf lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit, 00QO/07C3, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit); (3) the section B -> A/I^N lifted to an etale A' with A/I^N = A'/I^NA' (new unsplit lem-weil-pbc-smooth-section-etale-lift, 07M7); (4) a retraction A' -> A from the henselian property, via the existing reviewed nodes lem-weil-pbc-henselian-factorization-criterion and lem-weil-pbc-gabber-root-criterion-etale-section-lifting (09XI (3)=>(1)=>(5)=>(2), the root step written out), since no node states 09XI (1)=>(2) directly; (5) the retraction agrees with the section mod I^N (uniqueness of A-algebra maps A' -> A/I^N, written out; the source leaves it implicit); (6) the solution and the congruence via the new Mathlib leaf lem-weil-pbc-adic-completion-mod-power (05GG (2), AdicCompletion.pow_smul_top_eq_ker_eval). Source misprint noted: 'A -> P smooth' for A -> B."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 6 steps along Smoothing 0AH5 (2) (A -> A^ regular by 0AH2; Popescu factors the solution through a smooth A-algebra B via the finitely-presented-factors leaf; the section mod I^N lifts to an etale A-algebra by 07M7; a retraction by the henselian property through the reviewed factorization and Gabber-root nodes; agreement mod I^N by uniqueness of A-algebra maps to A/I^N; kernel of A^ -> A/I^N is I^N A^). Correct. New: 0AH2, 07GC (Popescu), 07M7 unsplit; two Mathlib leaves verified."
+ }
 }
