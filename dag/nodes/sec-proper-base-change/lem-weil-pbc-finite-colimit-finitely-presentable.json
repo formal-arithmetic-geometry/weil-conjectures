@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-finite-colimit-finitely-presentable",
+ "kind": "statement",
+ "title": "A finite colimit of finitely presentable objects is finitely presentable",
+ "statement": "Let $\\mathcal C$ be a category whose Hom-sets are small. Call an object $P$ of $\\mathcal C$ *finitely presentable* if for every small filtered category $\\mathcal I$, every diagram $D:\\mathcal I\\to\\mathcal C$ and every colimit cocone $(L,(c_i)_i)$ of $D$ [def-weil-pbc-category-colimit], the canonical map $\\theta_P:\\varinjlim_i\\mathrm{Hom}_{\\mathcal C}(P,D(i))\\to\\mathrm{Hom}_{\\mathcal C}(P,L)$ (colimit of sets; $\\theta_P$ restricted to the $i$-th term is $g\\mapsto c_i\\circ g$) is bijective, i.e. $\\mathrm{Hom}_{\\mathcal C}(P,-)$ preserves filtered colimits. Let $\\mathcal K$ be a finite category (finitely many objects and morphisms), $Y:\\mathcal K\\to\\mathcal C$ a diagram with $Y(k)$ finitely presentable for every object $k$, and $(Q,(q_k)_k)$ a colimit cocone of $Y$. Then $Q$ is finitely presentable. In particular: an object isomorphic to a finitely presentable object, a finite coproduct (in an additive category, a finite direct sum) of finitely presentable objects, and, in a preadditive category, a cokernel of a morphism $f:P_1\\to P_0$ between finitely presentable objects (a colimit of the diagram $P_1\\rightrightarrows P_0$ formed by $f$ and $0$) are finitely presentable.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "used without statement in the proof of Etale Cohomology, Lemma 59.73.8 (Tag 09Z4), modules case ('the result follows in the same way'); the general fact is Adamek-Rosicky, Locally presentable and accessible categories, Prop. 1.16 (not in literature/); Mathlib states it."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cokernel of a morphism between finitely presentable objects is finitely presentable",
+   "results": "CategoryTheory.Limits.cokernel, ModuleCat.cokernelIsColimit, Module.Presentation.cokernel (Algebra.Module.Presentation.Cokernel): module presentations, not the categorical notion",
+   "date": "2026-10-10",
+   "verdict": "no match for the query as phrased; see leanfinder"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite colimit of finitely presentable objects is finitely presentable",
+   "results": "CategoryTheory.isCardinalPresentable_of_isColimit, CategoryTheory.isCardinalPresentable_of_isColimit' (Mathlib.CategoryTheory.Presentable.Limits), CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits (Presentable.Finite), ColimitPresentation total instance",
+   "date": "2026-10-10",
+   "verdict": "match: isCardinalPresentable_of_isColimit with kappa = aleph_0"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isCardinalPresentable_of_isColimit",
+   "results": "CategoryTheory.isCardinalPresentable_of_isColimit {C} [LocallySmall.{w} C] {K} [HasLimitsOfShape K^op (Type w)] {Y : K ⥤ C} (c : Cocone Y) (hc : IsColimit c) (κ) [Fact κ.IsRegular] (hK : HasCardinalLT (Arrow K) κ) [∀ k, IsCardinalPresentable (Y.obj k) κ] : IsCardinalPresentable c.pt κ (Mathlib.CategoryTheory.Presentable.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsFinitelyPresentable\\|lemma isCardinalPresentable_of_isColimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Presentable/{Finite,Limits}.lean; grep -n hasCardinalLT_aleph0_iff ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/SetTheory/Cardinal/HasCardinalLT.lean",
+   "results": "Presentable/Finite.lean:51 abbrev IsFinitelyPresentable X := IsCardinalPresentable X aleph0 ('Hom(X,-) preserves all filtered colimits'); :71 isFinitelyPresentable_iff_preservesFilteredColimits; Presentable/Limits.lean:185 isCardinalPresentable_of_isColimit; HasCardinalLT.lean:78 hasCardinalLT_aleph0_iff : HasCardinalLT X aleph0 ↔ Finite X",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.isCardinalPresentable_of_isColimit",
+  "file": "Mathlib/CategoryTheory/Presentable/Limits.lean",
+  "how": "specializes in one line: take κ = ℵ₀ (regular), so IsCardinalPresentable · ℵ₀ is IsFinitelyPresentable (abbrev, Presentable/Finite.lean:51), equivalent to Hom(P,-) preserving filtered colimits (isFinitelyPresentable_iff_preservesFilteredColimits, line 71), i.e. θ_P bijective; for a finite category K, Arrow K is finite, so HasCardinalLT (Arrow K) ℵ₀ by hasCardinalLT_aleph0_iff (SetTheory/Cardinal/HasCardinalLT.lean:78), and Type w has the finite limits of shape K^op; the lemma applies to any colimit cocone c, which covers objects isomorphic to the colimit; coproducts and cokernels are colimits of the finite discrete category and of the walking parallel pair"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-finitely-presented",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: isCardinalPresentable_of_isColimit (Presentable/Limits.lean:185) with kappa = aleph_0 and hasCardinalLT_aleph0_iff for a finite category."
+ }
+}

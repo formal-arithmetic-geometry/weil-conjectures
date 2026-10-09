@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+ "kind": "statement",
+ "title": "Sections over a quasi-compact quasi-separated etale object commute with filtered colimits of sheaves of modules",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring and $\\Mod(X_{\\Et},\\Lambda)$ the category of sheaves of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Let $U\\to X$ be an object of $X_{\\Et}$ such that the scheme $U$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\mathcal I$ be a small filtered category, $i\\mapsto\\mathcal G_i$ a diagram $\\mathcal I\\to\\Mod(X_{\\Et},\\Lambda)$, and $(\\mathcal G,(c_i)_{i})$ a colimit of it in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit]. Then the canonical map\n$$\n\\Psi:\\varinjlim_i\\mathcal G_i(U)\\longrightarrow\\mathcal G(U),\n$$\nthe unique map (colimit of the sets, equivalently of the $\\Lambda$-modules, $\\mathcal G_i(U)$) whose composite with the coprojection of $\\mathcal G_i(U)$ is $(c_i)_U$, is bijective.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 7.17.7 (Tag 0738, label lemma-directed-colimits-sections), part (4), applied to the etale site as in Etale Cohomology, Section 59.51 'Colimits' (Tag 03Q4, label section-colimit, first paragraph): a quasi-compact quasi-separated object has the cofinal system of finite coverings by affine objects, whose pairwise fibre products are quasi-compact."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of a sheaf over a quasi-compact object commute with filtered colimits of sheaves",
+   "results": "CategoryTheory.Limits.colimitLimitIso (Limits.FilteredColimitCommutesFiniteLimit), CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize (Abelian.GrothendieckAxioms.Sheaf), CategoryTheory.Sheaf.createsColimitOfIsSheaf (Sites.Limits), CategoryTheory.isSheaf_pointwiseColimit (Sites.Coherent.ExtensiveColimits: extensive topology only)",
+   "date": "2026-10-10",
+   "verdict": "no match (existence/exactness of colimits of sheaves; pointwise colimits only for the extensive topology)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluating sheaves at a quasi-compact object of a site preserves filtered colimits",
+   "results": "Condensed colimit instances (Condensed.Limits, Condensed.AB), CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, sheafToPresheaf preserves colimits for extensiveTopology (Sites.Coherent.ExtensiveColimits), GrothendieckTopology.Point sheafFiber preserves colimits (Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFilteredColimitsOfSize, CategoryTheory.sheafToPresheaf",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsQuasiCompact\\|quasiCompact\\|QuasiCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; grep -rln colimit ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "no notion of quasi-compact object of a site in CategoryTheory/Sites; colimit only in AlgebraicGeometry/Sites/BigZariski.lean and SmallAffineZariski.lean (not about sections of colimit sheaves); AlgebraicGeometry/Sites/SheafQuasiCompact.lean is about the qc topology's sheaf condition",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-finitely-presented",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

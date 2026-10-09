@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-constructible-module-finite-presentation",
+ "kind": "statement",
+ "title": "A constructible sheaf of modules on a qcqs scheme is a cokernel of a map between finite sums of extensions by zero of Lambda from affine etale objects",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a finite commutative ring, $\\Lambda_X$ the constant sheaf of rings with value $\\Lambda$ on $X_{\\Et}$ [def-weil-pbc-constant-sheaf] and $\\Mod(X_{\\Et},\\Lambda)$ the abelian category of sheaves of $\\Lambda_X$-modules [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. For an object $W$ of $X_{\\Et}$ let $j_{W!}\\Lambda_W\\in\\Mod(X_{\\Et},\\Lambda)$ be the sheafification [def-weil-presheaf-modules-sheafification] of the presheaf of $\\Lambda_X$-modules $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{X_{\\Et}}(V,W)}\\Lambda_X(V)$ (restriction along $\\psi:V'\\to V$ sending the summand of $\\varphi$ to that of $\\varphi\\psi$ by the restriction of $\\Lambda_X$; this is the presheaf $\\mathcal O[h_W]$ of [lem-weil-pbc-free-yoneda-presheaf-module] for $\\mathcal O=\\Lambda_X$, and its sheafification is the extension by zero $j_{W!}\\Lambda_W$ of Stacks, Modules on Sites, 03DI). Let $\\mathcal F$ be a constructible sheaf of $\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf]. Then there are integers $n,m\\ge0$, objects $U_1,\\dots,U_n$ and $V_1,\\dots,V_m$ of $X_{\\Et}$ whose underlying schemes are affine, and morphisms $f:\\bigoplus_{j=1}^mj_{V_j!}\\Lambda_{V_j}\\to\\bigoplus_{i=1}^nj_{U_i!}\\Lambda_{U_i}$ and $g:\\bigoplus_{i=1}^nj_{U_i!}\\Lambda_{U_i}\\to\\mathcal F$ in $\\Mod(X_{\\Et},\\Lambda)$ such that the sequence\n$$\n\\bigoplus_{j=1}^mj_{V_j!}\\Lambda_{V_j}\\xrightarrow{f}\\bigoplus_{i=1}^nj_{U_i!}\\Lambda_{U_i}\\xrightarrow{g}\\mathcal F\\to0\n$$\nis exact, i.e. $g$ is a cokernel of $f$. (Stacks states, for any Noetherian ring $\\Lambda$, that the constructible sheaves of $\\Lambda$-modules are exactly the cokernels of this form with $U_i$, $V_j$ quasi-compact and quasi-separated, and that one can take them affine; only the direction 'constructible implies a cokernel of this form, with affine objects' is stated here, for finite $\\Lambda$, the generality of [def-weil-pbc-etale-constructible-sheaf].)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.73.6 (Tag 095N, label lemma-category-constructible-modules), the direction 'constructible implies cokernel'; its proof uses Modules on Sites, Lemma 093C (sites-modules-lemma-module-filtered-colimit-constructibles), Lemma 03RZ (lemma-constructible-abelian: constructible modules form an abelian subcategory) and the quasi-compactness of the constructible topology of the spectral space X (Properties, Lemma 094L and Topology, Lemma 0901)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf of modules is cokernel of map between finite direct sums of extensions by zero j_! of constant sheaves",
+   "results": "SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_π/_s, SheafOfModules.isFinitePresentation (Algebra.Category.ModuleCat.Sheaf.Quasicoherent), CategoryTheory.constantSheaf (Sites.ConstantSheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match (presentations by free sheaves of modules sum of copies of the unit, local finite presentation of quasicoherent sheaves; no constructible sheaves, no j_! of representables)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible étale sheaf of modules on a quasi-compact quasi-separated scheme is quotient of finite direct sum of extensions by zero of constant sheaf Λ on affine étale schemes",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation(.exists_quasicoherentData) (ModuleCat.Sheaf.Quasicoherent), SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType (ModuleCat.Sheaf.Generators)",
+   "date": "2026-10-10",
+   "verdict": "no match (local finite presentation by finite free modules, a different notion)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli constructible ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (excluding constructible sets of topology)",
+   "results": "only RingTheory/Spectrum/Prime/{Topology,Chevalley,ConstructibleSet,ChevalleyComplexity}.lean and AlgebraicGeometry/Morphisms/FinitePresentation.lean: constructible subsets (Chevalley); no constructible sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-finitely-presented",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,56 +2,52 @@
 
 564 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (542)
+## Stage 1: nodes to split (538)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `def-weil-pbc-generating-sections` | 1005 | none |
-| `lem-sc-c1` | 1005 | none |
-| `lem-sc-c2` | 1005 | none |
-| `lem-sc-c3` | 1005 | none |
-| `lem-sc-c4` | 1005 | none |
-| `lem-sc-c5` | 1005 | none |
-| `lem-sc-c6` | 1005 | none |
-| `lem-sc-c7` | 1005 | none |
-| `lem-sc-c8` | 1005 | none |
-| `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
-| `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
-| `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
-| `lemma-weil-pbc-h1-constructible-representation` | 1005 | sorry_here |
-| `lemma-weil-pbc-h1-torsor-comparison` | 1005 | sorry_here |
-| `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
-| `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
-| `def-weil-pbc-proj-twisting-sheaf` | 1006 | none |
-| `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1006 | none |
-| `lem-weil-pbc-constructible-torsion-modules-agree` | 1006 | none |
-| `lem-weil-pbc-etale-base-change-continuous` | 1006 | none |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1006 | none |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1006 | none |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
-| `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1006 | none |
-| `lem-weil-pbc-injective-resolution-ses` | 1006 | none |
-| `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1006 | none |
-| `lem-weil-pbc-projective-space-twist-glued-identification` | 1006 | none |
-| `lem-weil-pbc-root-lifting-etale-retraction` | 1006 | none |
-| `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1006 | none |
-| `lem-weil-pbc-stalk-change-of-rings-tensor` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lemma-weil-pbc-constructible-approximation` | 1006 | none |
-| `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
-| `lemma-weil-pbc-finite-etale-henselian-lifting` | 1006 | none |
-| `lemma-weil-pbc-finite-locally-constant-etale-equivalence` | 1006 | none |
-| `prop-weil-pbc-gabber-affine-comparison` | 1006 | none |
-| `thm-weil-pbc-henselian-idempotent-lifting` | 1006 | none |
-| `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1007 | none |
-| `lemma-weil-pbc-finite-stage-killing` | 1007 | none |
-| `lemma-weil-pbc-gabber-effacement` | 1007 | none |
-| `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1008 | none |
-| `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
-| `lemma-weil-pbc-pushout-monicity` | 1008 | none |
-| `lem-weil-pbc-constructible-finitely-presented` | 1009 | none |
-| `lem-weil-pbc-normal-constant-generic` | 1009 | none |
+| `prop-weil-pbc-gabber-pair-comparison` | 1006 | none |
+| `lem-weil-pbc-constructible-finitely-presented` | 1007 | none |
+| `lem-weil-pbc-constructible-generation` | 1007 | none |
+| `lem-weil-pbc-constructible-module-finite-pushforward-noetherian` | 1007 | sorry_here |
+| `lem-weil-pbc-constructible-module-noetherian-descent` | 1007 | none |
+| `lem-weil-pbc-cover-module-exact` | 1007 | none |
+| `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1007 | none |
+| `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1007 | none |
+| `lem-weil-pbc-etale-section-idempotent-splitting` | 1007 | none |
+| `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1007 | none |
+| `lem-weil-pbc-finite-etale-lifting-approximation` | 1007 | none |
+| `lem-weil-pbc-finite-etale-lifting-complete` | 1007 | none |
+| `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1007 | none |
+| `lem-weil-pbc-finite-pushforward-embedding-pullback` | 1007 | none |
+| `lem-weil-pbc-graded-module-away-restriction` | 1007 | none |
+| `lem-weil-pbc-limit-affine-transition` | 1007 | none |
+| `lem-weil-pbc-proj-standard-open-inclusion` | 1007 | none |
+| `lem-weil-pbc-scheme-clopen-idempotent` | 1007 | none |
+| `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
+| `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
+| `def-weil-pbc-site-cech-complex` | 1008 | none |
+| `def-weil-pbc-special-cocontinuous-functor` | 1008 | none |
+| `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
+| `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
+| `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
+| `lem-weil-pbc-descend-etale` | 1008 | none |
+| `lem-weil-pbc-descend-surjective` | 1008 | none |
+| `lem-weil-pbc-filtered-colimit-categories` | 1008 | none |
+| `lem-weil-pbc-right-derived-universal-delta-functor` | 1008 | none |
+| `lem-weil-pbc-scheme-over-limit` | 1008 | none |
+| `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
+| `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
+| `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
+| `lem-weil-pbc-site-injective-cech-acyclic` | 1008 | none |
+| `lem-weil-pbc-site-morphism-composition` | 1008 | none |
+| `lem-weil-pbc-site-sheaves-enough-injectives` | 1008 | none |
+| `lem-weil-pbc-site-system-strictification` | 1008 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -475,23 +471,25 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-pic-affine` | - | none |
 | `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
+| `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lemma-nagata-proj-chart-ring-cocycle` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
 | `pqf-lem-limit-immersion-descends` | - | none |
 | `pqf-lem-limit-qc-open-descends` | - | none |
 | `pqf-lem-qs-intersection-qc` | - | none |
+| `thm-galois-torsor-h1` | - | none |
 | `thm-sc-affine-cohomology` | - | none |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-directed-finite-upper-bound` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
+| `lem-galois-flasque` | - | none |
 | `lem-sc-affine-generic-second` | - | none |
 | `lem-sc-divisible-quotient-torsion` | - | none |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | none |
-| `lem-weil-pbc-flat-lfp-open` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 | `def-nagata-affine-fp-descent` | - | none |
@@ -506,19 +504,17 @@
 | `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
+| `thm-pd-spreading-out` | - | none |
 | `def-nagata-basechanged-system` | - | none |
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
 | `lem-pc-k-sheaf` | - | rests_on_sorry |
-| `lem-weil-pbc-constructible-noetherian-finite-selection` | - | none |
 | `cor-pc-dense-points-curves-sections` | - | none |
 | `def-pc-derived-category` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-hilb-functor` | - | rests_on_sorry |
 | `lem-pc-finite-support-hi` | - | none |
 | `lem-pc-flat-rf-open` | - | none |
-| `lem-weil-pbc-irreducible-lisse-strata` | - | none |
-| `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `def-pc-invertible-in-degree-zero` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-pc-coherent-hi` | - | rests_on_sorry |
@@ -549,16 +545,18 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (22)
+## Stage 2: nodes to state (26)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
+| `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
+| `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
@@ -567,6 +565,8 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
+| `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
+| `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -576,7 +576,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 557 nodes that wait for stage 1, 152 nodes that wait for a statement dependency.
+Not open yet: 551 nodes that wait for stage 1, 190 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
