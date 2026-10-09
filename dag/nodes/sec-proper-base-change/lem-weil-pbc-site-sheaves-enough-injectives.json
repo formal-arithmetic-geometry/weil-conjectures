@@ -5,11 +5,9 @@
  "statement": "Let $\\mathcal C$ be a site in the sense of Stacks Sites, Definition 00VH (a category whose objects form a set, with a set $\\operatorname{Cov}(\\mathcal C)$ of families $\\{U_t\\to U\\}_{t\\in T}$ such that isomorphisms are coverings, coverings of the members of a covering compose to a covering, and for a covering $\\{U_t\\to U\\}$ and a morphism $V\\to U$ the fibre products $U_t\\times_UV$ exist and $\\{U_t\\times_UV\\to V\\}$ is a covering), and let $\\textit{Ab}(\\mathcal C)$ be the category of abelian sheaves on $\\mathcal C$ (presheaves of abelian groups $\\mathcal F$ such that $\\mathcal F(U)\\to\\prod_t\\mathcal F(U_t)\\rightrightarrows\\prod_{t,t'}\\mathcal F(U_t\\times_UU_{t'})$ is an equalizer for every covering). Then $\\textit{Ab}(\\mathcal C)$ is an abelian category with enough injectives: every abelian sheaf is a subobject of an injective object of $\\textit{Ab}(\\mathcal C)$.",
  "source": {
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Theorem Tag 01DP (theorem-sheaves-injectives); Sites Definition Tag 00VH (sites.tex, definition-site); used in Cohomology on Sites, Section Tag 01FT (sites-cohomology.tex, section-cohomology-sheaves)"
+  "place": "Injectives, Theorem Tag 01DP (theorem-sheaves-injectives, Section 01DL); the route Mathlib takes is Injectives, Theorem Tag 079H (theorem-injective-embedding-grothendieck: a Grothendieck abelian category has functorial injective embeddings); abelian: Modules on Sites, Lemma Tag 03CN (sites-modules.tex, lemma-abelian-abelian (1)); sheaves on the site = sheaves for the associated topology: Sites, Lemma Tag 00ZC (sites.tex, lemma-site-gives-topology); Sites Definition Tag 00VH (definition-site); used in Cohomology on Sites, Section Tag 01FT"
  },
- "stmt_deps": [
-  "def-weil-pbc-sheafification"
- ],
+ "stmt_deps": [],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -34,10 +32,56 @@
    "results": "GrothendieckAxioms/Sheaf.lean:77 lemma isGrothendieckAbelian_of_essentiallySmall; GrothendieckCategory/EnoughInjectives.lean:380 instance enoughInjectives",
    "date": "2026-10-09",
    "verdict": "candidate (two Mathlib facts, one per clause) once Stacks' coverings are translated into a Grothendieck topology; left unsplit for the lead to decide whether the translation counts as one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaves of abelian groups on a small site form a Grothendieck abelian category",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf; {C : Type v} [SmallCategory C] (J) (A) [Abelian A] [IsGrothendieckAbelian.{v} A] [HasSheafify J A] : IsGrothendieckAbelian.{v} (Sheaf J A)), CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.sheafIsAbelian (Mathlib.CategoryTheory.Sites.Abelian), CategoryTheory.IsGrothendieckAbelian.mk",
+   "date": "2026-10-10",
+   "verdict": "match for the Grothendieck-topology form: instIsGrothendieckAbelian (small C) gives Grothendieck abelian, sheafIsAbelian gives abelian"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian (CategoryTheory.Sheaf _ _)",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall (both Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology, ...smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.AffineEtale), ...ProEtTopologyAb",
+   "date": "2026-10-10",
+   "verdict": "match (instIsGrothendieckAbelian, read at GrothendieckAxioms/Sheaf.lean:71-74)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of abelian groups on a site has enough injectives",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, SheafOfModules.instAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.H",
+   "date": "2026-10-10",
+   "verdict": "match, combined with IsGrothendieckAbelian.enoughInjectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheaf (CategoryTheory.Coverage.toGrothendieck _) _",
+   "results": "CategoryTheory.Presieve.isSheaf_coverage (Mathlib.CategoryTheory.Sites.Coverage: IsSheaf K.toGrothendieck P <-> forall X, forall R in K X, IsSheafFor P R), CategoryTheory.Presieve.isSheaf_sup",
+   "date": "2026-10-10",
+   "verdict": "match for the identification of sheaves on the site (coverings) with sheaves for the generated Grothendieck topology (Stacks 00ZC(2)), for a general site without all fibre products"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isSheaf_coverage\\|theorem sheaf_condition\\|isSheaf_iff_isSheaf_forget\\|instance sheafIsAbelian\\|IsGrothendieckAbelian.{u} AddCommGrpCat\\|instance enoughInjectives\\|HasSheafify J D :=' in Mathlib/CategoryTheory/Sites/, Mathlib/CategoryTheory/Abelian/, Mathlib/Algebra/Category/Grp/",
+   "results": "Sites/Coverage.lean:402 Presieve.isSheaf_coverage; Sites/EqualizerSheafCondition.lean:361 Equalizer.Presieve.Arrows.sheaf_condition (indexed family with pairwise pullbacks, duplicates allowed; @[stacks 00VM]); Sites/Sheaf.lean:730 Presheaf.isSheaf_iff_isSheaf_forget; Sites/Abelian.lean:40 sheafIsAbelian; Sites/LeftExact.lean:308 instance HasSheafify J D; Abelian/GrothendieckAxioms/Sheaf.lean:71 instance (Sheaf.instIsGrothendieckAbelian), :77 isGrothendieckAbelian_of_essentiallySmall; Algebra/Category/Grp/AB.lean:109 instance IsGrothendieckAbelian.{u} AddCommGrpCat.{u}; Abelian/GrothendieckCategory/EnoughInjectives.lean:380 IsGrothendieckAbelian.enoughInjectives (@[stacks 079H])",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause, sources read"
+  },
+  {
+   "tool": "local_search",
+   "query": "Sheaf.instIsGrothendieckAbelian / IsGrothendieckAbelian.enoughInjectives / sheafIsAbelian",
+   "results": "all three present in the pinned Mathlib (checked by reading the files above)",
+   "date": "2026-10-10",
+   "verdict": "exist"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.enoughInjectives",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+  "how": "a few Mathlib declarations, one per clause. Setting: a site C (objects and morphisms sets) is a `SmallCategory C` (C : Type v). (0) Topology and sheaves: the coverings form a `Coverage C` K (K X = the presieves `Presieve.ofArrows` of the families {U_t -> U} in Cov; the axiom `Coverage.pullback` holds by site axiom (iii): for V -> U the covering {U_t x_U V -> V} factors through {U_t -> U} along V -> U); J = K.toGrothendieck (Stacks 00ZC(1)). A presheaf of abelian groups F is a sheaf in Stacks' sense iff F is in `Sheaf J AddCommGrpCat.{v}`: `Presheaf.isSheaf_iff_isSheaf_forget` (Sites/Sheaf.lean:730) reduces to the underlying presheaf of sets, `Presieve.isSheaf_coverage` (Sites/Coverage.lean:402) reduces sheaf-for-J to `IsSheafFor` each covering presieve, and `Equalizer.Presieve.Arrows.sheaf_condition` (Sites/EqualizerSheafCondition.lean:361, family indexed with duplicates allowed, pairwise fibre products existing by axiom (iii)) identifies `IsSheafFor (ofArrows U f)` with Stacks' equalizer F(U) -> prod F(U_t) => prod F(U_t x_U U_t') (the equalizer in Ab is the one in sets); so Ab(C) and `Sheaf J AddCommGrpCat` are the same full subcategory of the presheaf category (Stacks 00ZC(2)). (1) Abelian: `CategoryTheory.sheafIsAbelian` (Sites/Abelian.lean:40), with `HasSheafify J AddCommGrpCat.{v}` from the instance at Sites/LeftExact.lean:308 (C small). (2) Enough injectives: `CategoryTheory.Sheaf.instIsGrothendieckAbelian` (Abelian/GrothendieckAxioms/Sheaf.lean:71, C small, A = AddCommGrpCat.{v}, which is `IsGrothendieckAbelian.{v}` by the instance at Algebra/Category/Grp/AB.lean:109) gives `IsGrothendieckAbelian.{v} (Sheaf J AddCommGrpCat)`, and `IsGrothendieckAbelian.enoughInjectives` (EnoughInjectives.lean:380, @[stacks 079H]) gives `EnoughInjectives`. For an essentially small (not small) C, `Sheaf.isGrothendieckAbelian_of_essentiallySmall` (GrothendieckAxioms/Sheaf.lean:77) replaces (2). Mathlib proves enough injectives by Stacks 079H (Grothendieck category), not by the transfinite construction of 01DP; same statement."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +101,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-sheaves-enough-injectives",
+  "worker": "stage1",
+  "summary": "Decided as a Mathlib leaf. A Stacks site (00VH, objects a set) is a SmallCategory whose coverings form a Mathlib Coverage (site axiom (iii) gives Coverage.pullback); Stacks' abelian sheaves (equalizer condition per covering family, as in def-weil-pbc-sites-and-cohomology (1)) are exactly Sheaf K.toGrothendieck AddCommGrpCat by Presheaf.isSheaf_iff_isSheaf_forget + Presieve.isSheaf_coverage + Equalizer.Presieve.Arrows.sheaf_condition (Stacks 00ZC). The existing leaf lem-weil-pbc-pretopology-sheaf-condition assumes C has all fibre products (Mathlib Pretopology needs HasPullbacks), which a general site lacks, so the Coverage version is used in `how` instead. Abelian: sheafIsAbelian; enough injectives: Sheaf.instIsGrothendieckAbelian (small C; isGrothendieckAbelian_of_essentiallySmall for essentially small) + IsGrothendieckAbelian.enoughInjectives (Stacks 079H). All declarations read in the pinned Mathlib; three kinds of search recorded. stmt_deps: def-weil-pbc-sheafification removed (the statement does not use sheafification; def-weil-pbc-sites-and-cohomology cannot be a dependency since it cites this node, and the statement introduces the site and its sheaves itself). Source repository: no declaration states this for Stacks-style sites; Mathlib-level helpers there (GrothendieckTopology.isGrothendieckAbelian_sheaf_of_essentiallySmall, Sheaf.isGrothendieckAbelian_of_essentiallySmall') are closed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, decided by the worker (its session died before the report; the node is complete): a Stacks site is a SmallCategory with a Coverage; sheaves in Stacks sense = Sheaf K.toGrothendieck AddCommGrpCat via Presheaf.isSheaf_iff_isSheaf_forget (Sites/Sheaf.lean:730), Presieve.isSheaf_coverage (Coverage.lean:402), Equalizer.Presieve.Arrows.sheaf_condition (EqualizerSheafCondition.lean:361); abelian: sheafIsAbelian (Sites/Abelian.lean:40); enough injectives: Sheaf.instIsGrothendieckAbelian (GrothendieckAxioms/Sheaf.lean:71) with AddCommGrpCat Grothendieck abelian (Grp/AB.lean:109) and IsGrothendieckAbelian.enoughInjectives (EnoughInjectives.lean:380, @[stacks 079H]). All checked in the pinned Mathlib."
+ }
 }
