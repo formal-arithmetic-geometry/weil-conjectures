@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+ "kind": "statement",
+ "title": "Formal fibres of a polynomial ring over a complete local ring at a maximal ideal over the closed point",
+ "statement": "Let $(S,\\mathfrak n)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring which is $\\mathfrak n$-adically complete [def-weil-pbc-adic-completion], let $S[x]$ be the polynomial ring in one variable over $S$ [def-weil-polynomial-ring], and let $\\mathfrak Q\\subset S[x]$ be a maximal ideal with $\\mathfrak Q\\cap S=\\mathfrak n$. Let $S[x]_{\\mathfrak Q}$ be the localization of $S[x]$ at $\\mathfrak Q$ [def-weil-pbc-localization-at-prime] and $(S[x]_{\\mathfrak Q})^\\wedge=\\varprojlim_nS[x]_{\\mathfrak Q}/\\mathfrak Q^nS[x]_{\\mathfrak Q}$ its completion at its maximal ideal [def-weil-pbc-adic-completion]. Then the canonical map $S[x]_{\\mathfrak Q}\\to(S[x]_{\\mathfrak Q})^\\wedge$ is a regular ring map [def-weil-pbc-g-ring]; equivalently (it is flat with Noetherian fibre rings, the source being Noetherian), for every prime $\\mathfrak r\\subseteq\\mathfrak Q$ of $S[x]$ the formal fibre $(S[x]_{\\mathfrak Q})^\\wedge\\otimes_{S[x]}\\kappa(\\mathfrak r)$ is geometrically regular over $\\kappa(\\mathfrak r)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring), paragraphs 2-5 (lines 12596-12637): 'Let R be a Noetherian complete local ring and let q in R[x] be a maximal ideal lying over the maximal ideal of R ...'; that argument uses Lemma 07PN (lemma-check-G-ring-easy), Lemma 07PP (lemma-G-ring-goes-up-quasi-finite), Algebra Lemma 032D (lemma-complete-local-Noetherian-domain-finite-over-regular), Algebra Lemma 07NF (lemma-regular-goes-up), Lemma 07NY (lemma-completion-regular), Lemma 07PR (lemma-helper-G-ring) and Lemma 07PU (lemma-another-helper-G-ring). No tag of its own: it is the 'right vertical arrow' step of 07PV, stated here as a node."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring over a complete Noetherian local ring, localization at a maximal ideal, completion map has geometrically regular formal fibres",
+   "results": "Algebra.FormallyUnramified.of_isLocalization, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.polynomial (Mathlib.RingTheory.Smooth.Basic), Algebra.IsSmoothAt: no formal fibres",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal fibres of localization of polynomial ring over complete local ring are geometrically regular",
+   "results": "standard-smooth localization lemmas (Mathlib.RingTheory.RingHom.StandardSmooth, Mathlib.RingTheory.Smooth.Locus): no formal fibres",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, TensorProduct / IsRegularRing, HasQuotient.Quotient / IsRegularRing, AdicCompletion",
+   "results": "no results for any of the three patterns (the Loogle server's Mathlib apparently predates IsRegularRing; lean_local_search confirms IsRegularRing exists locally in Mathlib/RingTheory/RegularLocalRing/Defs.lean, with no lemma on tensor products, quotients or completions)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'formal.?fib|geometrically.?regular|G-ring|excellent' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing",
+   "results": "no G-ring, formal fibre, geometrically regular algebra or regular ring map (flat with geometrically regular fibres) in Mathlib; only IsRegularLocalRing / IsRegularRing (Mathlib/RingTheory/RegularLocalRing/Defs.lean) and Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal (RegularLocalRing/Polynomial.lean), which are about regular rings, not regular ring maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 30,40p /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing/Polynomial.lean",
+   "results": "Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal: R[X] localized at a prime over the maximal ideal of a regular local ring is regular local; a tool for the regular case of this node's proof (Algebra 07NF), not the node",
+   "date": "2026-10-10",
+   "verdict": "no match (partial tool for a later split)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-over-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-regular-base-change",
+ "kind": "statement",
+ "title": "Regular ring maps are stable under finite type base change",
+ "statement": "Let $\\varphi:R\\to\\Lambda$ be a regular ring map [def-weil-pbc-g-ring] of commutative rings (flat, with every fibre ring $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$ Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$), and let $R\\to R'$ be a ring map of finite type, i.e. $R'$ is a finitely generated $R$-algebra. Then the base change $R'\\to\\Lambda\\otimes_RR'$, $r'\\mapsto1\\otimes r'$, is a regular ring map. (Stacks Project, More on Algebra, Lemma Tag 07C1.)",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07C1 (lemma-regular-base-change, 'Regular maps and base change'), https://stacks.math.columbia.edu/tag/07C1; its proof uses Algebra lemma-flat-base-change, lemma-Noetherian-field-extension and lemma-geometrically-regular. Used in the proof of Proposition 07PV ('as a localization of a base change of the regular ring map R -> R^')."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a regular ring map (flat with geometrically regular fibres) along a finite type ring map is regular",
+   "results": "IsSMulRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange (Mathlib.RingTheory.Regular.Flat), RingHom.IsStableUnderBaseChange (Mathlib.RingTheory.RingHomProperties): regular elements / sequences, not regular ring maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular ring homomorphism: flat with geometrically regular fibres, stable under base change",
+   "results": "RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat: smooth maps and regular sequences only",
+   "date": "2026-10-10",
+   "verdict": "no match (smooth base change is a different notion)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, TensorProduct / IsRegularRing, HasQuotient.Quotient / IsRegularRing, AdicCompletion",
+   "results": "no results for any of the three patterns (the Loogle server's Mathlib apparently predates IsRegularRing; lean_local_search confirms IsRegularRing exists locally in Mathlib/RingTheory/RegularLocalRing/Defs.lean, with no lemma on tensor products, quotients or completions)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'formal.?fib|geometrically.?regular|G-ring|excellent|regular ring map|IsRegular.*RingHom' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing",
+   "results": "no G-ring, formal fibre, geometrically regular algebra or regular ring map (flat with geometrically regular fibres) in Mathlib; only IsRegularLocalRing / IsRegularRing (Mathlib/RingTheory/RegularLocalRing/Defs.lean) and Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal (RegularLocalRing/Polynomial.lean), which are about regular rings, not regular ring maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-over-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
