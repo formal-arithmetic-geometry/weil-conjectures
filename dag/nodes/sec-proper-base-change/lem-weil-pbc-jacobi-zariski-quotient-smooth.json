@@ -11,9 +11,69 @@
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to the composable maps $A\\to B\\to C$. It gives the exact sequence of $C$-modules from that node, including the left base-change term and the right relative-differentials term.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35446"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-jacobi-zariski-surjection-h1] and [lem-weil-pbc-jacobi-zariski-surjection-differentials] for the surjection $B\\twoheadrightarrow C=B/\\mathfrak a$. They identify the relative degree-one homology with $\\mathfrak a/\\mathfrak a^2$ and make the final relative differential module zero.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-surjection-h1",
+    "lem-weil-pbc-jacobi-zariski-surjection-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07BP (lemma-NL-surjection), lines 35505--35515"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-jacobi-zariski-left-term-vanishing], projectivity of $\\Omega_{B/A}$ gives the Tor vanishings required for base change, and the hypothesis $H_1(L_{B/A})=0$ kills the left term in the sequence of [lem-weil-pbc-jacobi-zariski-homology-sequence].",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2, final assertion and proof, lines 35444--35446 and 35467--35485; More on Algebra, Lemma Tag 07M7"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-pbc-jacobi-zariski-differential-maps] gives the conormal and base-change differential maps, with $a\\bmod\\mathfrak a^2\\mapsto1\\otimes\\mathrm da$ and $c\\otimes\\mathrm db\\mapsto c\\,\\mathrm d\\bar b$. Truncating the exact sequence using the two vanishing endpoints yields the asserted short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00RU (lemma-differential-seq), lines 34103--34118 and proof through line 34154"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-jacobi-zariski-surjection-differentials",
+  "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tags 00S2, 07BP and 00RU, with the Tor specialization used in More on Algebra, Lemma Tag 07M7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +118,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-jacobi-zariski-quotient-smooth",
+  "worker": "stage1",
+  "summary": "Statement retained. The four proof steps cite the public homology-sequence, quotient H1/differential, Tor-left-term, and explicit differential-map nodes. The support nodes are statement-only; the quotient differential node is a Mathlib leaf. No Lean was written or compiled."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 3rd delivery repairs the return: 5 statement-only nodes (00S2 sequence with the Tor_1=Tor_2=0 base-change clause as in Stacks, 07BP H_1 = I/I^2 and Omega = 0 leaf, 00RU maps), steps cite nodes only; route correct. Defect fixed by L after merge: the leaf's Mathlib line is 247, not 277 (KaehlerDifferential.subsingleton_of_surjective)."
+ }
 }
