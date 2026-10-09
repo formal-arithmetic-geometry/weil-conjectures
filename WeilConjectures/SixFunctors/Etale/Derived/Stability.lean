@@ -20,6 +20,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.GenericConstancy
+public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
+public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
@@ -876,6 +882,103 @@ end FlatSheaf
 
 /-! ### Generation of `Dctf` -/
 
+section Generation
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- The derived direct image along an identity is the identity. -/
+noncomputable def rightDerivedLowerStarIdIso (Y : Scheme.{u}) :
+    R((𝟙 Y)_*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
+  (Etale.lowerStar (ModuleCat.{u + 1} Λ) (𝟙 Y)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
+    Functor.mapDerivedCategoryNatIso (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Y) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+
+omit [Finite Λ] in
+variable {Λ} in
+/-- Tor amplitude through the canonical t-structure gives Tor amplitude tested on one homology
+sheaf at a time. -/
+lemma hasTorAmplitudeIn_of_torAmplitudeIn {X : Scheme.{u}} {a b : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (h : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
+    DerivedCategory.hasTorAmplitudeIn Λ X a b K := fun F q hq ↦ by
+  obtain ⟨h₁, h₂⟩ := h F
+  rcases hq with hq | hq
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 h₁ q hq
+  · exact (_root_.DerivedCategory.isLE_iff _ b).1 h₂ q hq
+
+/-- The dévissage step of `sk-lem-sf-ctf-generation`: a thick subcategory containing the
+generators `Rg_* Rj_! L` contains `Rι_* F` for every flat constructible sheaf `F` on a closed
+subscheme `ι : Z ⟶ X`. By Noetherian induction on the support `T = ι(Z)`: `F` is lisse on a dense
+open `V ⊆ Z`, and the open–closed triangle `j_! j^* F ⟶ F ⟶ i_* i^* F` for `V` and its closed
+complement exhibits `Rι_* F` as an extension of a generator and of the direct image of the flat
+constructible sheaf `i^* F` from a closed subscheme with smaller support. -/
+theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
+    (P : ObjectProperty
+      (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
+    [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+    (hP : ∀ (str : Scheme.Stratification X) (i : Fin str.n) (Ubar : Scheme.{u})
+      (j : str.domain i ⟶ Ubar) [IsOpenImmersion j] [HasCompactification j]
+      (g : Ubar ⟶ X) [IsClosedImmersion g], Set.range (j ≫ g) = str.stratum i →
+      Set.range g = _root_.closure (str.stratum i) →
+      ∀ (L : Sheaf (str.domain i).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        [IsFiniteLocallyConstantSheaf L], ObjectProperty.flat L →
+        P ((R((g)_*[ModuleCat.{u + 1} Λ])).obj ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj L)))) :
+    ∀ (T : TopologicalSpace.Closeds X) {Z : Scheme.{u}} (ι : Z ⟶ X) [IsClosedImmersion ι],
+      Set.range ι.base = T → ∀ (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        [IsConstructibleSheaf F], ObjectProperty.flat F →
+        P ((R((ι)_*[ModuleCat.{u + 1} Λ])).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
+  intro T
+  induction T using WellFoundedLT.induction with
+  | ind T ih =>
+  intro Z ι _ hT F _ hF
+  by_cases hZ : IsEmpty Z
+  · exact P.prop_of_isZero (Functor.map_isZero _ (isZero_derivedCategory_of_isEmpty _ Z _))
+  rw [not_isEmpty_iff] at hZ
+  obtain ⟨V, hVd, hV⟩ := IsConstructibleSheaf.exists_dense_open F
+  have : TopologicalSpace.NoetherianSpace Z := ι.isClosedEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : HasCompactification V.ι := (Compactification.ofIsOpenImmersion V.ι).hasCompactification
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) V.ι V.closedComplement
+    (by simp) ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
+  refine P.ext_of_isTriangulatedClosed₂ _ ((R((ι)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hw)
+    ?_ ?_
+  · -- the open part is a generator
+    let str := Scheme.Stratification.ofClosedImmersionOpens ι V
+    have := hP str (show Fin str.n from (1 : Fin 3)) Z
+      (V.ι : str.domain (show Fin str.n from (1 : Fin 3)) ⟶ Z) ι (by simp [str,
+      Scheme.Stratification.ofClosedImmersionOpens, Set.range_comp]) (by
+        change Set.range ι.base = closure (ι.base '' V)
+        rw [ι.isClosedEmbedding.closure_image_eq, hVd.closure_eq, Set.image_univ])
+      ((V.ι)^*[_].obj F) (Functor.PreservesFlat.flat_obj (F := (V.ι)^*[_]) hF)
+    exact P.prop_of_iso ((R((ι)_*[ModuleCat.{u + 1} Λ])).mapIso
+      ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ V.ι).app _ ≪≫
+        D((V.ι)_!open[ModuleCat.{u + 1} Λ]).mapIso
+          ((((V.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app F).symm)) this
+  · -- the closed part is handled by induction
+    have hlt : (⟨Set.range (V.closedComplement ≫ ι).base,
+        (V.closedComplement ≫ ι).isClosedEmbedding.isClosed_range⟩ :
+          TopologicalSpace.Closeds X) < T := by
+      rw [← SetLike.coe_ssubset_coe, TopologicalSpace.Closeds.coe_mk, ← hT, Scheme.Hom.comp_base,
+        TopCat.coe_comp, Set.range_comp]
+      refine (Set.image_subset_range _ _).ssubset_of_ne fun h ↦ ?_
+      obtain ⟨z, hz⟩ := hVd.nonempty
+      obtain ⟨y, hy, hyz⟩ : ι.base z ∈ ι.base '' Set.range V.closedComplement.base :=
+        h ▸ ⟨z, rfl⟩
+      rw [ι.isClosedEmbedding.injective hyz, V.range_closedComplement] at hy
+      exact hy hz
+    have : IsConstructibleSheaf ((V.closedComplement)^*[ModuleCat.{u + 1} Λ].obj F) :=
+      IsConstructibleSheaf.upperStar _ _
+    exact P.prop_of_iso (((rightDerivedLowerStarComp _ V.closedComplement ι).app _).symm ≪≫
+      (R((ι)_*[ModuleCat.{u + 1} Λ])).mapIso
+        ((R((V.closedComplement)_*[ModuleCat.{u + 1} Λ])).mapIso
+        ((((V.closedComplement)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app
+          F).symm))
+      (ih _ hlt (V.closedComplement ≫ ι) rfl _
+        (Functor.PreservesFlat.flat_obj (F := (V.closedComplement)^*[_]) hF))
+
 /-- Blueprint `sk-lem-sf-ctf-generation`: Finite/open generation of `Dctf`.
 
 Let `X` be a Noetherian scheme and `Λ` a finite ring. Then `Dctf(X, Λ)` is generated as a
@@ -913,7 +1016,32 @@ theorem ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek (Λ : Typ
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     P K :=
-  sorry
+  by
+  obtain ⟨a, b, ⟨⟨hbc, hab⟩, hta⟩⟩ :=
+    (exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor K).2 hK
+  by_cases hab' : a ≤ b
+  swap
+  · have : K.IsGE a := hab.1
+    have : K.IsLE b := hab.2
+    exact P.prop_of_isZero (_root_.DerivedCategory.TStructure.t.isZero K b a (by omega))
+  -- a bounded model by flat constructible sheaves, reduced to its terms by dévissage
+  obtain ⟨Pc, ⟨hPz, hPflat⟩, hPc, ⟨e⟩⟩ := (hasTorAmplitudeIn_iff_exists_flatConstructibleModel
+    Λ a b hab' K hbc).1 (hasTorAmplitudeIn_of_torAmplitudeIn hta)
+  have : Pc.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun i hi ↦ hPz i (.inl hi)
+  have : Pc.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun i hi ↦ hPz i (.inr hi)
+  have hS := HomotopyCategory.mem_subcategory_of_strictly_bounded
+    (P.inverseImage _root_.DerivedCategory.Qh) Pc a b (fun n _ _ ↦ ?_)
+  · exact P.prop_of_iso e.symm (P.prop_of_iso
+      ((_root_.DerivedCategory.quotientCompQhIso _).app Pc) hS)
+  have := hPc n
+  exact P.prop_of_iso ((rightDerivedLowerStarIdIso Λ X).app _)
+    (prop_rightDerivedLowerStar_of_flat Λ X P hP ⊤ (𝟙 X) (by simp) (Pc.X n) (hPflat n))
+
+end Generation
 
 end Etale
 
