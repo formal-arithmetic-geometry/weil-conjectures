@@ -12,9 +12,54 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Flatness of a ring map is equivalent to flatness of all induced maps on localizations at primes of the target, by [lem-weil-pbc-flat-map-local-criterion]. In the forward direction these local maps are the maps $R_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}$ of the statement; in the reverse direction the local criterion reconstructs flatness of $\\varphi$ from the assumed regular local maps.",
+   "uses": [
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00HT (lemma-flat-localization), the local flatness criterion used in More on Algebra, Lemma Tag 07C0"
+   }
+  },
+  {
+   "text": "Assume $\\varphi$ is flat. For a prime $\\mathfrak q\\subset\\Lambda$ over $\\mathfrak p\\subset R$, localization identifies the fibre of $\\varphi_{\\mathfrak q}$ over $\\mathfrak pR_{\\mathfrak p}$ with the localization at $\\mathfrak q$ of the fibre $\\Lambda\\otimes_R\\kappa(\\mathfrak p)$; the same holds after any finite purely inseparable extension of $\\kappa(\\mathfrak p)$. Thus the fibre of $\\varphi$ is geometrically regular exactly when all corresponding local fibres are regular local. The equivalence between a Noetherian ring being regular and all its localizations at primes being regular local is [lem-weil-pbc-regular-ring-local-criterion]. Therefore $\\varphi$ is regular exactly when every $\\varphi_{\\mathfrak q}$ is regular.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-regular-ring-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07C0 (lemma-regular-local), proof: regularity of a Noetherian ring is checked on all local rings, together with the localization description of fibres from Definition Tag 07BZ"
+   }
+  },
+  {
+   "text": "The prime-local condition implies the maximal-local condition by localizing once more from a prime of $\\Lambda$ to a maximal ideal containing it. Conversely, every prime $\\mathfrak q$ of the Noetherian ring $\\Lambda$ is contained in a maximal ideal $\\mathfrak m'$, and regularity is local on the target by [lem-weil-pbc-regular-ring-local-criterion]. Hence (1), (2), and (3) are equivalent.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07C0 (lemma-regular-local), final sentence of the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-map-local-criterion",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-regular-ring-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07C0 (lemma-regular-local)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +104,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-local-maximal",
+  "worker": "stage1",
+  "summary": "Split Stacks More on Algebra Lemma 07C0 into flatness locality, the regular-Noetherian local criterion, and passage between prime and maximal target localizations. Proof checked against the live Stacks 07C0 page, whose proof cites Algebra 00OD and 00HT."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 3 steps at the level of the Stacks 07C0 proof (flatness local on the target via a new Mathlib leaf; regularity of the Noetherian fibre rings and their purely inseparable extensions local by a new unsplit node 'Noetherian A regular iff all A_q regular local'); correct. Defect fixed by L after merge: the leaf's line 108 points at RingHom.Flat.localRingHom; propertyIsLocal is at line 85, ofLocalizationPrime at 95."
+ }
 }
