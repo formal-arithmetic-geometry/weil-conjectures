@@ -48,7 +48,8 @@ section Galois
 variable (R K Ω : Type*) [CommRing R] [Field K] [Field Ω] [Algebra R K] [Algebra K Ω]
   [Algebra R Ω] [IsScalarTower R K Ω]
 
-instance (priority := low) AlgEquiv.smulCommClass_of_isScalarTower : SMulCommClass Gal(Ω/K) R Ω where
+instance (priority := low) AlgEquiv.smulCommClass_of_isScalarTower :
+    SMulCommClass Gal(Ω/K) R Ω where
   smul_comm σ r x := by
     rw [algebra_compatible_smul K r, algebra_compatible_smul K r]
     exact smul_comm σ (algebraMap R K r) x
@@ -146,7 +147,8 @@ theorem exists_mem_inertia_eqOn (M : IntermediateField K Ω) [Normal K M]
   let _ : TopologicalSpace B := ⊥
   have : DiscreteTopology B := ⟨rfl⟩
   have hcs := Algebra.continuousSMul_integralClosure R K Ω
-  have : CompactSpace N := isCompact_iff_compactSpace.1 (InfiniteGalois.fixingSubgroup_isClosed M).isCompact
+  have : CompactSpace N :=
+    isCompact_iff_compactSpace.1 (InfiniteGalois.fixingSubgroup_isClosed M).isCompact
   have : ContinuousSMul N B := ⟨(hcs.continuous_smul).comp
     ((continuous_subtype_val.comp continuous_fst).prodMk continuous_snd)⟩
   let A := FixedPoints.subalgebra R B N

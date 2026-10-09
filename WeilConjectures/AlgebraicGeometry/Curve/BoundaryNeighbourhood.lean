@@ -39,7 +39,8 @@ lemma isDedekindDomain_of_isAffineOpen {U : C.Opens} (hU : IsAffineOpen U) [None
   have : IsNoetherianRing Γ(C, U) := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
   have hdimC := IsCurve.krullDim_le_one (f := f)
   have : IsIntegrallyClosed Γ(C, U) :=
-    Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk (isIntegrallyClosed_stalk_of_smooth f hdimC) U
+    Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk
+      (isIntegrallyClosed_stalk_of_smooth f hdimC) U
   have hdim : ringKrullDim Γ(C, U) ≤ 1 := by
     rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
     exact (IsHomeomorph.topologicalKrullDim_eq _
@@ -104,7 +105,8 @@ lemma exists_isAffineOpen_basicOpen_eq [SmoothOfRelativeDimension 1 f] {z : C}
       have hle : (hU₀.primeIdealOf z₀).asIdeal ≤ (hU₀.primeIdealOf x).asIdeal := by
         rw [hs, Ideal.span_le]
         simpa using hsx
-      have hsp : hU₀.primeIdealOf z₀ ⤳ hU₀.primeIdealOf x := (PrimeSpectrum.le_iff_specializes _ _).1 hle
+      have hsp : hU₀.primeIdealOf z₀ ⤳ hU₀.primeIdealOf x :=
+        (PrimeSpectrum.le_iff_specializes _ _).1 hle
       have := hsp.map hU₀.fromSpec.continuous
       rw [hU₀.fromSpec_primeIdealOf, hU₀.fromSpec_primeIdealOf] at this
       exact (this.mem_closed hz rfl : (x : C) ∈ ({z} : Set C))

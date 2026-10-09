@@ -87,7 +87,8 @@ theorem galoisToAut_hom_app_eq_of_mem_inertia [ConnectedSpace Y]
     rw [h]
     exact specMapIso_hom_comp_pointOfAlgebra _ σ
   have heκ : (specMapIso (RingEquiv.refl (integralClosure R Ω ⧸ Q))).hom ≫
-      pointOfAlgebra (integralClosure R Ω ⧸ Q) ap = pointOfAlgebra (integralClosure R Ω ⧸ Q) ap := by
+      pointOfAlgebra (integralClosure R Ω ⧸ Q) ap =
+        pointOfAlgebra (integralClosure R Ω ⧸ Q) ap := by
     change Spec.map (𝟙 _) ≫ _ = _
     rw [Spec.map_id, Category.id_comp]
   have key := specialization_app_fiberPrecompIso ap (galoisIntegralClosure σ) σ.toRingEquiv
@@ -96,7 +97,8 @@ theorem galoisToAut_hom_app_eq_of_mem_inertia [ConnectedSpace Y]
       change Ideal.Quotient.mk Q (σ • b) = Ideal.Quotient.mk Q b
       rw [Ideal.Quotient.eq]
       exact hσ b) heΩ heκ P t'
-  have hrefl : (fiberPrecompIso _ (specMapIso (RingEquiv.refl (integralClosure R Ω ⧸ Q))) heκ).hom.app
+  have hrefl :
+      (fiberPrecompIso _ (specMapIso (RingEquiv.refl (integralClosure R Ω ⧸ Q))) heκ).hom.app
       P ((specialization Ω (integralClosure R Ω ⧸ Q) ap).app P t') =
       (specialization Ω (integralClosure R Ω ⧸ Q) ap).app P t' := by
     apply fiber_ext

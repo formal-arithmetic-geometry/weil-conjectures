@@ -105,12 +105,14 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   rwa [hker, Ideal.mem_bot] at this
 
 set_option maxHeartbeats 1000000 in
+-- the instance search through integral closures and quotients is slow
 set_option synthInstance.maxHeartbeats 400000 in
+-- the instance search through integral closures and quotients is slow
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
 `R` in `Ω` over a maximal ideal `m` of `R` with finite residue field. If the inertia group of `Q`
 in `Gal(Ω / K)` fixes `ψ(T)` pointwise, then the prime `ψ⁻¹ Q` of `T` is unramified over `R`. -/
-theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T] [IsDomain T]
+theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
     [IsDedekindDomain T] [Algebra R T] [Module.Finite R T] [Module.IsTorsionFree R T]
     (ψ : T →ₐ[R] Ω) (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] (m : Ideal R)
     [m.IsMaximal] [Q.LiesOver m] [Finite (R ⧸ m)]
@@ -260,7 +262,7 @@ over `R` with an `R`-algebra map to `Ω`, and `Q` a maximal ideal of the integra
 in `Ω` over a maximal ideal `m` of `R` with finite residue field. If the inertia group of `Q` in
 `Gal(Ω / K)` fixes the image of every `R`-algebra map `T → Ω`, then every prime of `T` over `m` is
 unramified over `R`. -/
-theorem ramificationIdx_eq_one_of_forall_inertia {T : Type*} [CommRing T] [IsDomain T]
+theorem ramificationIdx_eq_one_of_forall_inertia {T : Type*} [CommRing T]
     [IsDedekindDomain T] [Algebra R T] [Module.Finite R T] [Module.IsTorsionFree R T]
     (ψ₀ : T →ₐ[R] Ω) (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] (m : Ideal R)
     [m.IsMaximal] [Q.LiesOver m] [Finite (R ⧸ m)]
@@ -357,8 +359,9 @@ lemma isLocalization_away_integralClosure :
     change a * algebraMap _ A (algebraMap R _ π ^ n) = (π ^ n) • a
     rw [map_pow, ← IsScalarTower.algebraMap_apply, Algebra.smul_def, map_pow, mul_comm]
 
-include R' in
 set_option maxHeartbeats 1000000 in
+-- the elaboration of the localisation and integral closure instances is slow
+include R' in
 /-- **Covers on which inertia acts trivially extend.** Let `π ∈ R` vanish exactly at the maximal
 ideal `m`, and `A` a finite étale `R[1/π]`-domain with an `R`-algebra map to `Ω`. If the inertia
 group of `Q` fixes the images of all `R`-algebra maps `A → Ω`, then the integral closure of `R` in

@@ -39,7 +39,8 @@ The image of `I_z` in `π₁(U₀)` (`AlgebraicGeometry.WeilGroup.inertiaGroup`)
   which `I_z` acts trivially extends over `z`.
 
 A lift in `D_z` of the inverse arithmetic Frobenius of `κ(z)` restricts to a Frobenius element at
-`z` in `π₁(C₀)` (`AlgebraicGeometry.WeilGroup.exists_mem_stabilizer_isFrobeniusElement_restrictionMap`).
+`z` in `π₁(C₀)`
+(`BoundaryChart.exists_mem_stabilizer_isFrobeniusElement_restrictionMap`).
 Together with the density of the Weil group in `π₁(U₀)`, this builds the boundary datum of
 `sk-d-real-boundary` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
 -/
@@ -219,9 +220,6 @@ variable [IsIntegral C]
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
--- instance search through `SeparableClosure` and integral closures is slow
-set_option synthInstance.maxHeartbeats 200000
-
 namespace BoundaryChart
 
 variable {j} {z : C} (c : BoundaryChart p j z)
@@ -271,6 +269,8 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
 /-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
 the stabiliser of `Q`. -/
 noncomputable def decompositionGroup (Q : Ideal (integralClosure Γ(C, c.W) Ω)) : Subgroup GU :=
@@ -294,7 +294,8 @@ theorem inertiaGroup_le_localKernel (Q : Ideal (integralClosure Γ(C, c.W) Ω)) 
   have := connectedSpace_boundaryOpen (p := p) j z
   rintro _ ⟨σ, hσ, rfl⟩ P x
   obtain ⟨t, rfl⟩ : ∃ t, (genericPath j sU).hom.app _ t = x :=
-    ⟨(genericPath j sU).inv.app _ x, ConcreteCategory.congr_hom ((genericPath j sU).inv_hom_id_app _) x⟩
+    ⟨(genericPath j sU).inv.app _ x,
+      ConcreteCategory.congr_hom ((genericPath j sU).inv_hom_id_app _) x⟩
   rw [genericGaloisMap, galoisToFundamentalGroup_smul]
   congr 1
   exact galoisToAut_hom_app_pullback_eq_of_mem_inertia j c.isAffineOpen Q
@@ -415,11 +416,12 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
       ((congrArg (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ·) h2).trans ?_)
     simp only [BoundaryChart.genericFiberIso, fiberIsoOfIso_hom_app_left, Iso.refl_hom,
       Category.id_comp]
-    rfl
   rw [← mul_inv_eq_one]
   refine IsFundamentalGroup.non_trivial (F := fiber sC) _ fun P y ↦ ?_
   rw [mul_smul, key, smul_inv_smul]
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
 restricts to a Frobenius element at `z` in `π₁(C₀)`: one inducing the inverse of the arithmetic
@@ -456,6 +458,8 @@ noncomputable def boundaryInertia (z : ↥((Set.range j.base)ᶜ)) :
   (inertiaGroup sU GU (boundaryChart (p := p) j z) (boundaryChart (p := p) j z).point).comap
     ((MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype) ⊓ (weilGroupDeg pU sU GU).ker
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma exists_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
     have : Finite (C.residueField z.1) := boundary_subset_finitePoints (p := p) j z.2
@@ -470,15 +474,20 @@ its residue field. -/
 noncomputable def boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) : Gal(Ω/C.functionField) :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+omit [GeometricallyConnected p] in
 lemma boundaryFrobeniusLift_mem_stabilizer (z : ↥((Set.range j.base)ᶜ)) :
     boundaryFrobeniusLift (p := p) j sU GU τ GC z ∈
       MulAction.stabilizer Gal(Ω/C.functionField) (boundaryChart (p := p) j z).point :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose_spec.1
 
+omit [GeometricallyConnected p] in
 lemma isFrobeniusElement_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
     have : Finite (C.residueField z.1) := boundary_subset_finitePoints (p := p) j z.2
     IsFrobeniusElement sC GC z.1
-      (restrictionMap j τ GU GC (genericGaloisMap j sU GU (boundaryFrobeniusLift (p := p) j sU GU τ GC z))) :=
+      (restrictionMap j τ GU GC
+        (genericGaloisMap j sU GU (boundaryFrobeniusLift (p := p) j sU GU τ GC z))) :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose_spec.2
 
 include hj in
@@ -509,6 +518,8 @@ lemma isConj_restrictionHom_boundaryResidueFrobenius (z : ↥((Set.range j.base)
     Multiplicative.ofAdd (p.degreeOver z.1 : ℤ)
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] [IsCurve pU] in
 /-- An element of `W(U₀)` mapping into the decomposition group conjugates the inertia group at `z`
 into itself. -/
@@ -516,7 +527,8 @@ lemma conj_mem_boundaryInertia (z : ↥((Set.range j.base)ᶜ)) (r : weilGroup p
     {σ : Gal(Ω/C.functionField)}
     (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) (boundaryChart (p := p) j z).point)
     (hr : (r : GU × Multiplicative ℤ).1 = genericGaloisMap j sU GU σ) {x : weilGroup pU sU GU}
-    (hx : x ∈ boundaryInertia (p := p) (pU := pU) j sU GU z) : r * x * r⁻¹ ∈ boundaryInertia (p := p) (pU := pU) j sU GU z := by
+    (hx : x ∈ boundaryInertia (p := p) (pU := pU) j sU GU z) :
+    r * x * r⁻¹ ∈ boundaryInertia (p := p) (pU := pU) j sU GU z := by
   obtain ⟨⟨ι, hι, hιx⟩, hx2⟩ := hx
   refine ⟨⟨σ * ι * σ⁻¹, Ideal.conj_mem_inertia hσ hι, ?_⟩,
     Subgroup.Normal.conj_mem inferInstance x hx2 r⟩
@@ -554,7 +566,8 @@ theorem ker_restrictionHom_eq_boundaryInertia :
   have : QuasiSeparatedSpace U := quasiSeparatedSpace_of_quasiSeparated pU
   let φ : weilGroup pU sU GU →* GU := (MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype
   have hI (z : ↥((Set.range j.base)ᶜ)) :
-      boundaryInertia (p := p) (pU := pU) j sU GU z ≤ weilLocalKernel (p := p) (pU := pU) j sU GU z.1 := fun w hw ↦
+      boundaryInertia (p := p) (pU := pU) j sU GU z ≤
+        weilLocalKernel (p := p) (pU := pU) j sU GU z.1 := fun w hw ↦
     ⟨inertiaGroup_le_localKernel (p := p) sU GU _ _ hw.1, hw.2⟩
   set M := (Subgroup.normalClosure (⋃ z : ↥((Set.range j.base)ᶜ),
       SetLike.coe (boundaryInertia (p := p) (pU := pU) j sU GU z))).topologicalClosure
@@ -604,7 +617,8 @@ theorem ker_restrictionHom_eq_boundaryInertia :
     exact ⟨fun h hh g ↦ ((hS ▸ Subgroup.mem_top g : g ∈ S) h hh).1⟩
   -- the local kernel at `z` lies in `H`
   have : Finite (C.residueField z.1) := boundary_subset_finitePoints (p := p) j z.2
-  have hIH : (inertiaGroup sU GU (boundaryChart (p := p) j z) (boundaryChart (p := p) j z).point : Set GU) ⊆ H := by
+  have hIH : (inertiaGroup sU GU (boundaryChart (p := p) j z)
+      (boundaryChart (p := p) j z).point : Set GU) ⊆ H := by
     intro k hk
     have hkL := inertiaGroup_le_localKernel (p := p) sU GU _ _ hk
     have hkW : (k, (1 : Multiplicative ℤ)) ∈ weilGroup pU sU GU := by
@@ -614,7 +628,8 @@ theorem ker_restrictionHom_eq_boundaryInertia :
     exact ⟨⟨_, hkW⟩, ⟨Subgroup.le_topologicalClosure _ (Subgroup.subset_normalClosure
       (Set.mem_iUnion.2 ⟨z, hk, rfl⟩)), rfl⟩, rfl⟩
   have hle : localKernel (p := p) j sU GU z.1 ≤ H :=
-    (localKernel_le_topologicalClosure_normalClosure (p := p) sU GU (boundaryChart (p := p) j z) z.2 _).trans
+    (localKernel_le_topologicalClosure_normalClosure (p := p) sU GU
+      (boundaryChart (p := p) j z) z.2 _).trans
       (Subgroup.topologicalClosure_minimal _ (Subgroup.normalClosure_le_normal hIH) hHc)
   rintro w ⟨hg, hdeg⟩
   obtain ⟨w', ⟨hw'M, hw'deg⟩, hw'⟩ := hle hg

@@ -174,7 +174,8 @@ theorem exists_pullback_iso_of_fromNormalization (Z : U.FiniteEtale)
       cases i
       · exact (MorphismProperty.arrow_mk_iso_iff _ (hres W hWV)).2
           (by first | exact hW.1 | exact hW.2)
-      · exact (MorphismProperty.arrow_mk_iso_iff _ (hres _ hjV)).2 (by first | exact hU.1 | exact hU.2)
+      · exact (MorphismProperty.arrow_mk_iso_iff _ (hres _ hjV)).2
+          (by first | exact hU.1 | exact hU.2)
   -- the extension
   have earrV : Arrow.mk (pN ∣_ V) ≅ Arrow.mk (pullback.snd pN V.ι) :=
     morphismRestrictEq pN (Scheme.Opens.opensRange_ι V).symm ≪≫ morphismRestrictOpensRange pN V.ι
@@ -247,7 +248,8 @@ theorem isFinite_and_etale_restrict_of_forall_inertia (Z : U.FiniteEtale)
   let f := Z.obj.hom ≫ j
   let A := Γ(Z.obj.left, f ⁻¹ᵁ W)
   let _ : Algebra Γ(C, W) A := (f.app W).hom.toAlgebra
-  have : IsFractionRing Γ(C, W) C.functionField := functionField_isFractionRing_of_isAffineOpen C W hW
+  have : IsFractionRing Γ(C, W) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C W hW
   -- the open `f⁻¹ W = f⁻¹ D(ϖ)` is affine
   have hDϖ : C.basicOpen ϖ ≤ j.opensRange := by
     rw [← hWU]
@@ -385,7 +387,8 @@ lemma galoisToAut_hom_app_pullback_eq_of_mem_inertia [ConnectedSpace V]
     (P : V.toScheme.FiniteEtale)
     (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj ((pullback (toOpen j V hjV)).obj P)) :
     (galoisToAut (genericPointLift j) σ).hom.app _ t = t := by
-  have : IsFractionRing Γ(C, W) C.functionField := functionField_isFractionRing_of_isAffineOpen C W hW
+  have : IsFractionRing Γ(C, W) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C W hW
   have h := pointOfAlgebra_genericPointLift_comp_toOpen j hW V hjV hWV (Ω := Ω)
   let e := pullbackFiberIso (toOpen j V hjV) (pointOfAlgebra Ω (genericPointLift j)) ≪≫
     fiberIsoOfIso (Iso.refl _) (by rw [Iso.refl_hom, Category.id_comp, h])

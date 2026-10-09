@@ -434,6 +434,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
@@ -918,6 +919,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Pointwise
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
