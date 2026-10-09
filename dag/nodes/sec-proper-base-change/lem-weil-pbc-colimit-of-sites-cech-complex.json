@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-colimit-of-sites-cech-complex",
+ "kind": "statement",
+ "title": "The Cech complex of the colimit sheaf on a colimit of sites is the colimit of the Cech complexes",
+ "statement": "In the situation of [lem-weil-pbc-colimit-of-sites] (a cofiltered category $\\mathcal I$, sites $\\mathcal C_i$ whose coverings have finite index sets, morphisms of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$ for $a:j\\to i$ given by continuous functors $u_a:\\mathcal C_i\\to\\mathcal C_j$ with $u_b\\circ u_a=u_{a\\circ b}$, the colimit site $\\mathcal C=\\varinjlim\\mathcal C_i$ with the canonical functors $u_i:\\mathcal C_i\\to\\mathcal C$, $u_j\\circ u_a=u_i$, and the morphisms of sites $f_i:\\mathcal C\\to\\mathcal C_i$ they define [def-weil-pbc-sites-and-cohomology]), let $\\mathcal F_i$ be abelian sheaves on $\\mathcal C_i$ and $\\varphi_a:f_a^{-1}\\mathcal F_i\\to\\mathcal F_j$ ($a:j\\to i$) maps of abelian sheaves with $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$, and $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i$ in $\\textit{Ab}(\\mathcal C)$. Let $\\mathcal U_i=\\{U_i^t\\to U_i\\}_{t\\in T}$ be a covering of $\\mathcal C_i$ ($T$ finite). Then: (1) for $a:j\\to i$, $u_a(\\mathcal U_i)=\\{u_a(U_i^t)\\to u_a(U_i)\\}$ is a covering of $\\mathcal C_j$ and $u_a(U_i^{t_0}\\times_{U_i}\\cdots\\times_{U_i}U_i^{t_p})=u_a(U_i^{t_0})\\times_{u_a(U_i)}\\cdots\\times_{u_a(U_i)}u_a(U_i^{t_p})$, and likewise for $u_i$ and the covering $u_i(\\mathcal U_i)$ of $\\mathcal C$; (2) the Cech complexes $\\check{\\mathcal C}^\\bullet(u_a(\\mathcal U_i),\\mathcal F_j)$ [def-weil-pbc-site-cech-complex], with the transition maps for $b:k\\to j$ given termwise by the maps of [lem-weil-pbc-colimit-of-sites-sections] (unit of $f_b^{-1}\\dashv f_{b*}$ followed by $\\varphi_b$) on the objects $u_a(U_i^{t_0}\\times_{U_i}\\cdots\\times_{U_i}U_i^{t_p})$, form a filtered system of complexes indexed by the arrows $a:j\\to i$, and the termwise maps (unit of $f_j^{-1}\\dashv f_{j*}$ followed by the coprojection $f_j^{-1}\\mathcal F_j\\to\\mathcal F$) induce an isomorphism of complexes $\\varinjlim_{a:j\\to i}\\check{\\mathcal C}^\\bullet(u_a(\\mathcal U_i),\\mathcal F_j)\\xrightarrow{\\sim}\\check{\\mathcal C}^\\bullet(u_i(\\mathcal U_i),\\mathcal F)$. (Termwise this is [lem-weil-pbc-colimit-of-sites-sections] for the objects $X_i=U_i^{t_0}\\times_{U_i}\\cdots\\times_{U_i}U_i^{t_p}$, together with the commutation of filtered colimits of abelian groups with the finite products over $T^{p+1}$; the maps commute with the Cech differentials because they are natural with respect to the restriction maps.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Lemma Tag 09YP (lemma-colimit), display 'by the case p = 0'; continuity of u_a and the fibre products: sites.tex proof of Lemma Tag 09YL (lemma-colimit-sites); the same identification in the proof of Lemma Tag 0739 (lemma-colim-works-over-collection)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-colimit-of-sites-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex of a filtered colimit of sheaves is the colimit of the Cech complexes for a finite covering",
+   "results": "isSheaf_pointwiseColimit (Sites.Coherent.ExtensiveColimits), LightCondensed.isColimitLocallyConstantPresheaf(Diagram) (Condensed.Discrete.Colimit), GrothendieckTopology.plusObj (Sites.Plus)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of a covering on a site with values in abelian groups",
+   "results": "Sheaf.H, Sheaf.cohomologyPresheaf, MayerVietorisSquare.shortComplex, instPreadditiveSheaf, Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cechComplex\\|Cech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ; grep -rln 'IsCofiltered\\|cofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "SheafCohomology/Cech.lean (no colimit statement); Point/* only for cofiltered",
+   "date": "2026-10-10",
+   "verdict": "no match: no colimit of sites in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

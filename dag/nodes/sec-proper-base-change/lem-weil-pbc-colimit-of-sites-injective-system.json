@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-colimit-of-sites-injective-system",
+ "kind": "statement",
+ "title": "Embedding a system of abelian sheaves on an inverse system of sites into a system of injectives",
+ "statement": "In the situation of [lem-weil-pbc-colimit-of-sites] (a cofiltered category $\\mathcal I$, sites $\\mathcal C_i$ whose coverings have finite index sets, morphisms of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$ for $a:j\\to i$ given by continuous functors $u_a:\\mathcal C_i\\to\\mathcal C_j$ with $u_b\\circ u_a=u_{a\\circ b}$, the colimit site $\\mathcal C=\\varinjlim\\mathcal C_i$ with the canonical functors $u_i:\\mathcal C_i\\to\\mathcal C$, $u_j\\circ u_a=u_i$, and the morphisms of sites $f_i:\\mathcal C\\to\\mathcal C_i$ they define [def-weil-pbc-sites-and-cohomology]), let $\\mathcal F_i$ be an abelian sheaf on $\\mathcal C_i$ for every $i$ and $\\varphi_a:f_a^{-1}\\mathcal F_i\\to\\mathcal F_j$ ($a:j\\to i$) maps of abelian sheaves with $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$. Then there are abelian sheaves $\\mathcal G_i$ on $\\mathcal C_i$, maps $\\psi_a:f_a^{-1}\\mathcal G_i\\to\\mathcal G_j$ with $\\psi_{a\\circ b}=\\psi_b\\circ f_b^{-1}\\psi_a$, and injective maps of abelian sheaves $\\gamma_i:\\mathcal F_i\\to\\mathcal G_i$ forming a map of systems ($\\psi_a\\circ f_a^{-1}\\gamma_i=\\gamma_j\\circ\\varphi_a$ for all $a:j\\to i$), such that every $\\mathcal G_i$ is an injective object of $\\textit{Ab}(\\mathcal C_i)$. (Stacks' construction: $\\mathcal G_i=\\prod_{b:k\\to i}f_{b*}\\mathcal A_k$ for chosen injective embeddings $\\mathcal F_k\\to\\mathcal A_k$; $f_{b*}$ preserves injectives because $f_b^{-1}$ is exact, and products of injectives are injective.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0EXZ (lemma-colim-sites-injective) and its proof (Lemma Tag 0730 lemma-pushforward-injective-flat, Homology Lemma Tag 0137 lemma-product-injectives, Homology Lemma Tag 015Z lemma-adjoint-preserve-injectives)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct image of an injective sheaf is injective when inverse image is exact; product of injective objects is injective",
+   "results": "Injective.instProd, Injective.instPiObj, Injective.instBiprod (Mathlib.CategoryTheory.Preadditive.Injective.Basic), Module.Injective.pi, Functor.PreservesInjectiveObjects (Preadditive.Injective.Preserves)",
+   "date": "2026-10-10",
+   "verdict": "no match for the statement: only the ingredients (products of injectives, Adjunction.map_injective) exist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "embed a compatible system of sheaves on an inverse system of sites into a system of injective sheaves",
+   "results": "Presheaf.isLocallyInjective_of_injective, Sheaf.isLocallyInjective_iff_injective (Sites.LocallyInjective), Functor.eval_section_injective_of_eventually_injective (CofilteredSystem)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCofiltered\\|cofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ ; grep -rn 'Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "Point/* files only; SheafCohomology/Basic.lean:97 Subsingleton (H F (n+1)) for injective F",
+   "date": "2026-10-10",
+   "verdict": "no match: no systems of sites in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

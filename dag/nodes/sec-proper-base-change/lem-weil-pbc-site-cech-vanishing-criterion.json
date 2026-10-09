@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-site-cech-vanishing-criterion",
+ "kind": "statement",
+ "title": "Vanishing of Cech cohomology on a cofinal system of coverings implies vanishing of cohomology (any site)",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal B\\subset\\operatorname{Ob}(\\mathcal C)$ a set of objects, $\\mathrm{Cov}$ a set of coverings of $\\mathcal C$, and $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$; $H^p(U,-)$ is cohomology over an object [def-weil-pbc-sites-and-cohomology] and $\\check H^p$ Cech cohomology [def-weil-pbc-site-cech-complex]. Assume: (1) for every $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ in $\\mathrm{Cov}$ the objects $U$, $U_t$ and all $U_{t_0}\\times_U\\cdots\\times_UU_{t_p}$ lie in $\\mathcal B$; (2) for every $U\\in\\mathcal B$ the coverings of $U$ occurring in $\\mathrm{Cov}$ are cofinal among all coverings of $U$ (every covering of $U$ is refined by one in $\\mathrm{Cov}$); (3) $\\check H^p(\\mathcal U,\\mathcal F)=0$ for all $\\mathcal U\\in\\mathrm{Cov}$ and $p>0$. Then $H^p(U,\\mathcal F)=0$ for all $p>0$ and all $U\\in\\mathcal B$. (General-site version of [lem-weil-pbc-cech-vanishing-criterion], which is stated for the small etale site; same proof: embed $\\mathcal F$ into an injective, Lemma 03AW, Lemma 03F8, dimension shifting.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection) and its proof (Lemma Tag 03AW lemma-injective-trivial-cech, Lemma Tag 03F8 lemma-ses-cech-h1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing of Cech cohomology for all coverings implies vanishing of sheaf cohomology",
+   "results": "Presheaf.IsSheaf, Sheaf.cond (Sites.Sheaf), Presheaf.isSheaf_iff_isLimit_coverage (Sites.Coverage), OneHypercoverFamily.isSheaf_iff (Sites.Hypercover.IsSheaf), TopCat.Sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if Cech cohomology of a sheaf vanishes for a cofinal family of coverings then its sheaf cohomology vanishes",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, Sheaf.instAddCommGroupH (Sites.SheafCohomology.Basic), CochainComplex.isZero_of_isGE/isLE",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib defines H but has no Cech criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean",
+   "results": "Basic.lean (cohomologyPresheafFunctor, H.equiv₀, H.map, functorH), Cech.lean (cosimplicialObjectFunctor, cochainComplexFunctor, cechComplexFunctor), MayerVietoris.lean (toBiprod, fromBiprod, δ, sequence_exact)",
+   "date": "2026-10-10",
+   "verdict": "no match. (The source repository has only the topological-space version, WeilConjectures/Topology/Sheaves/CechCriterion.lean TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex, Stacks 01EV; not a site statement)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

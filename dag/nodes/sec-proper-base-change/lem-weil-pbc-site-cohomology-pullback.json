@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-site-cohomology-pullback",
+ "kind": "statement",
+ "title": "Pullback on cohomology over objects along a morphism of sites",
+ "statement": "Let $f:\\mathcal D\\to\\mathcal C$ be a morphism of sites given by the continuous functor $u:\\mathcal C\\to\\mathcal D$ [def-weil-pbc-sites-and-cohomology], with $f_*=u^s$, $f^{-1}$ its exact left adjoint on abelian sheaves and unit $\\eta:\\mathrm{id}\\to f_*f^{-1}$. For $V\\in\\operatorname{Ob}(\\mathcal C)$ and $\\mathcal A\\in\\textit{Ab}(\\mathcal C)$ choose an injective resolution $\\mathcal A\\to\\mathcal I^\\bullet$ and an injective resolution $f^{-1}\\mathcal A\\to\\mathcal J^\\bullet$; as $f^{-1}$ is exact, $f^{-1}\\mathcal A\\to f^{-1}\\mathcal I^\\bullet$ is a resolution, so there is a map of complexes $\\beta:f^{-1}\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ under $f^{-1}\\mathcal A$, unique up to homotopy. Define $f^*:H^p(V,\\mathcal A)\\to H^p(u(V),f^{-1}\\mathcal A)$ as $H^p$ of $\\Gamma(V,\\mathcal I^\\bullet)\\xrightarrow{\\eta}\\Gamma(V,f_*f^{-1}\\mathcal I^\\bullet)=\\Gamma(u(V),f^{-1}\\mathcal I^\\bullet)\\xrightarrow{\\beta}\\Gamma(u(V),\\mathcal J^\\bullet)$. Then: (1) $f^*$ does not depend on the choices, and in degree $0$ it is $\\eta_{\\mathcal A}(V):\\mathcal A(V)\\to(f^{-1}\\mathcal A)(u(V))$; (2) $f^*$ is natural in $\\mathcal A$: $H^p(f^{-1}\\varphi)\\circ f^*=f^*\\circ H^p(\\varphi)$ for $\\varphi:\\mathcal A\\to\\mathcal A'$; (3) for a short exact sequence $0\\to\\mathcal A\\to\\mathcal A'\\to\\mathcal A''\\to0$ in $\\textit{Ab}(\\mathcal C)$ the maps $f^*$ commute with the connecting maps of the long exact sequences of $H^\\bullet(V,-)$ and of $H^\\bullet(u(V),-)$ applied to the exact sequence $0\\to f^{-1}\\mathcal A\\to f^{-1}\\mathcal A'\\to f^{-1}\\mathcal A''\\to0$; equivalently, $(f^*)_p$ is the unique morphism of $\\delta$-functors $H^\\bullet(V,-)\\to H^\\bullet(u(V),f^{-1}(-))$ extending $\\eta(V)$ in degree $0$ ($H^\\bullet(V,-)$ being universal); (4) for a second morphism of sites $g:\\mathcal E\\to\\mathcal D$ given by $v:\\mathcal D\\to\\mathcal E$, so that $f\\circ g$ is given by $v\\circ u$, one has $(f\\circ g)^*=H^p(c)\\circ g^*\\circ f^*$ on $H^p(V,\\mathcal A)$, where $c:g^{-1}f^{-1}\\mathcal A\\xrightarrow{\\sim}(f\\circ g)^{-1}\\mathcal A$ is the canonical isomorphism of left adjoints of $(f\\circ g)_*=f_*g_*$ (compatible with the units).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8 (lemma-functoriality) and Remark Tag 01FB, written for ringed spaces; for sites the same construction with f_* = u^s (sites-cohomology.tex Remark Tag 08J6 remark-before-Leray); universality of the delta-functor H^*(V,-): derived.tex Lemma Tag 015B (lemma-higher-derived-functors) (4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaf cohomology along a morphism of sites, compatible with connecting homomorphism",
+   "results": "Functor.sheafPullbackConstruction.sheafPullback, Functor.sheafPullback (Sites.Pullback), TopCat.Presheaf.pullback, SheafOfModules.pullback, TopCat.Sheaf.pullback, GrothendieckTopology.overMapPullback",
+   "date": "2026-10-10",
+   "verdict": "no match: pullback functors on sheaves only, no map on cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback map on sheaf cohomology Ext groups along a continuous functor between sites, morphism of delta functors",
+   "results": "Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullback, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso",
+   "date": "2026-10-10",
+   "verdict": "no match: functors and their composition isomorphisms only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Functor.sheafPullback",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pullback.*H \\|H.pullback\\|H.map.*pullback\\|cohomologyPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "none (Mathlib's Sheaf.H is global cohomology Ext(Z, F), with H.map only for maps of sheaves on one site)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

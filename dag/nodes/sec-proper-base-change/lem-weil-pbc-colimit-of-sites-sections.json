@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-colimit-of-sites-sections",
+ "kind": "statement",
+ "title": "Sections of the colimit sheaf on a colimit of sites (degree 0)",
+ "statement": "In the situation of [lem-weil-pbc-colimit-of-sites] (a cofiltered category $\\mathcal I$, sites $\\mathcal C_i$ whose coverings have finite index sets, morphisms of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$ for $a:j\\to i$ given by continuous functors $u_a:\\mathcal C_i\\to\\mathcal C_j$ with $u_b\\circ u_a=u_{a\\circ b}$, the colimit site $\\mathcal C=\\varinjlim\\mathcal C_i$ with the canonical functors $u_i:\\mathcal C_i\\to\\mathcal C$, $u_j\\circ u_a=u_i$, and the morphisms of sites $f_i:\\mathcal C\\to\\mathcal C_i$ they define [def-weil-pbc-sites-and-cohomology]), let $\\mathcal F_i$ be a sheaf on $\\mathcal C_i$ for every $i$ and, for $a:j\\to i$, $\\varphi_a:f_a^{-1}\\mathcal F_i\\to\\mathcal F_j$ a map of sheaves on $\\mathcal C_j$ with $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$ (where $f_{a\\circ b}^{-1}=f_b^{-1}f_a^{-1}$ via the canonical isomorphism of left adjoints); the maps $f_j^{-1}\\varphi_a$ make $(f_i^{-1}\\mathcal F_i)$ a system over $\\mathcal I^{\\mathrm{op}}$ (filtered), and $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i$ [def-weil-pbc-category-colimit]. For $i\\in\\operatorname{Ob}(\\mathcal I)$ and $X_i\\in\\operatorname{Ob}(\\mathcal C_i)$ consider the system $(\\mathcal F_j(u_a(X_i)))_{a:j\\to i}$ indexed by the category of arrows $a:j\\to i$ (a cofiltered category, so the colimit is filtered), with transition map for $b:k\\to j$ the composite $\\mathcal F_j(u_a(X_i))\\to(f_b^{-1}\\mathcal F_j)(u_b(u_a(X_i)))\\xrightarrow{\\varphi_b}\\mathcal F_k(u_{a\\circ b}(X_i))$, the first arrow the unit of $f_b^{-1}\\dashv f_{b*}$ at $u_a(X_i)$ ($f_{b*}=u_b^s$). Then the maps $\\mathcal F_j(u_a(X_i))\\to(f_j^{-1}\\mathcal F_j)(u_j(u_a(X_i)))=(f_j^{-1}\\mathcal F_j)(u_i(X_i))\\to\\mathcal F(u_i(X_i))$ (unit of $f_j^{-1}\\dashv f_{j*}$, then the coprojection) induce a bijection $\\varinjlim_{a:j\\to i}\\mathcal F_j(u_a(X_i))\\to\\mathcal F(u_i(X_i))$. The same holds for abelian sheaves $\\mathcal F_i$ and maps $\\varphi_a$ of abelian sheaves, the colimit $\\mathcal F$ taken in $\\textit{Ab}(\\mathcal C)$, and the bijection is then an isomorphism of abelian groups (a filtered colimit of abelian sheaves has as underlying sheaf of sets the colimit of the underlying sheaves of sets, and $f^{-1}$ on abelian sheaves is $f^{-1}$ on the underlying sheaves of sets).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 09YN (lemma-colimit) and its proof (equation-compute-pullback-to-limit of Lemma Tag 0A35, Lemma Tag 0738 lemma-directed-colimits-sections); abelian version: sites-modules.tex Lemma Tag 03CO (lemma-limits-colimits-abelian-sheaves); used for p = 0 in sites-cohomology.tex Lemma Tag 09YP"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of a filtered colimit of sheaves over a quasi-compact object are the colimit of sections",
+   "results": "Sheaf.hasFilteredColimitsOfSize, Sheaf.hasExactColimitsOfShape (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), GrothendieckTopology.Point.instPreservesColimitsOfSize... (Sites.Point.Basic), Sheaf.createsColimitOfIsSheaf (Sites.Limits)",
+   "date": "2026-10-10",
+   "verdict": "no match: colimits of sheaves on one site, no colimit of sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of the colimit of pulled-back sheaves on a colimit of sites over an object coming from a finite stage",
+   "results": "isSheaf_pointwiseColimit (Sites.Coherent.ExtensiveColimits), LightCondensed/Condensed.isColimitLocallyConstantPresheaf (Condensed.Discrete.Colimit), PresheafedSpace.componentwiseDiagram_obj",
+   "date": "2026-10-10",
+   "verdict": "no match: degree-0 statements for condensed sets and extensive topologies only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCofiltered\\|cofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "CoverPreserving.lean, Hypercover/Homotopy.lean, Point/{Skyscraper,OfIsCofiltered,Map,Basic}.lean: points of sites; none constructs a colimit of sites",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no limits/colimits of sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
