@@ -1,0 +1,72 @@
+{
+ "id": "def-weil-pbc-separable-algebraic-extension",
+ "kind": "definition",
+ "title": "Separable elements and separable algebraic field extensions",
+ "statement": "Let $K/F$ be a field extension [def-pc-field-extension] and $F[T]$ the polynomial ring [def-weil-polynomial-ring]. For $\\alpha\\in K$ algebraic over $F$ [def-weil-algebraic-element], the *minimal polynomial* $P_\\alpha\\in F[T]$ of $\\alpha$ over $F$ is the monic polynomial of least degree with $P_\\alpha(\\alpha)=0$; it is the monic generator of the (nonzero) kernel of $F[T]\\to K$, $T\\mapsto\\alpha$, and is irreducible. The element $\\alpha$ is *separable over $F$* if $P_\\alpha$ is separable [def-pc-separable-polynomial] (coprime to its derivative). The extension $K/F$ is *separable algebraic* (an algebraic extension that is separable) if every element of $K$ is algebraic over $F$ and separable over $F$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Definition Tag 09H1 (definition-separable, line 1165), parts (1)-(3); restated in Definition Tag 030J (definition-separable-algebraic, line 3723), parts (1)-(2)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-algebraic-element",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separable algebraic field extension: minimal polynomial of every element is separable",
+   "results": "Algebra.isSeparable_def, Algebra.IsSeparable.isSeparable', IsSeparable (Mathlib.FieldTheory.Separable), Field.isSeparable_algebraMap (Mathlib.FieldTheory.SeparableDegree), isPurelyInseparable_iff_natSepDegree_eq_one, IsPurelyInseparable",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.IsSeparable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separable algebraic extension of fields: every element separable over the base field",
+   "results": "Algebra.IsSeparable.isAlgebraic (Mathlib.FieldTheory.Separable), IntermediateField.isSeparable_of_mem_isSeparable, separableClosure.isSeparable, IsSepClosure.separable, mem_separableClosure_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.IsSeparable, which implies algebraic"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, minpoly",
+   "results": "AlgHom.card_of_splits, Field.primitive_element_iff_algHom_eq_of_eval (Mathlib.FieldTheory.PrimitiveElement), sum_smul_minpolyDiv_eq_X_pow, Algebra.discr_powerBasis_eq_norm, ... (uses of the class)",
+   "date": "2026-10-10",
+   "verdict": "no new declaration; the class itself is in Mathlib.FieldTheory.Separable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 09H1\\|def IsSeparable\\|class Algebra.IsSeparable\\|IsSeparable.isIntegral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean; grep -n 'noncomputable def minpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Minpoly/Basic.lean",
+   "results": "Separable.lean:43 Polynomial.Separable (stacks 09H1 first part), :539 IsSeparable F x := (minpoly F x).Separable (09H1 second part), :549 Algebra.IsSeparable (09H1 third part), :560 IsSeparable.isIntegral, :570 Algebra.IsSeparable.isAlgebraic; Minpoly/Basic.lean:41 minpoly (monic of least degree, :54 monic, :269 irreducible)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsSeparable",
+  "file": "Mathlib/FieldTheory/Separable.lean",
+  "line": 549,
+  "how": "exact: `Algebra.IsSeparable F K` (line 549, tagged Stacks 09H1 third part) says every `x : K` satisfies `IsSeparable F x := Polynomial.Separable (minpoly F x)` (line 539), with `minpoly` (Mathlib/FieldTheory/Minpoly/Basic.lean:41) the minimal polynomial and `Polynomial.Separable` (line 44, def-pc-separable-polynomial) coprimality with the derivative; the algebraicity is built in, since the minpoly of a non-integral element is 0 and not separable (`IsSeparable.isIntegral`, line 560; `Algebra.IsSeparable.isAlgebraic`, line 570); an element is separable over F iff `IsSeparable F α`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-separable-field-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
