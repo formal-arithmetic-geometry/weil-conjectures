@@ -61,7 +61,8 @@ noncomputable def freeYonedaPresheafHom (U : C) (F : Cᵒᵖ ⥤ AddCommGrpCat.{
     rfl
 
 /-- The generator of the free abelian presheaf on `U` over `U`: the identity of `U`. -/
-noncomputable def freeYonedaGen (U : C) : ((uliftYoneda.{w}.obj U ⋙ AddCommGrpCat.free)).obj (op U) :=
+noncomputable def freeYonedaGen (U : C) :
+    (uliftYoneda.{w}.obj U ⋙ AddCommGrpCat.free).obj (op U) :=
   FreeAbelianGroup.of (ULift.up (𝟙 U))
 
 lemma freeYonedaPresheafHom_gen (U : C) (F : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
