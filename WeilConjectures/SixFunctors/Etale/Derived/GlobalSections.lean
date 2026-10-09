@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
@@ -20,6 +21,9 @@ isomorphism `e : X ≅ Y`, this gives the invariance `RΓ(X, e^* K) ≅ RΓ(Y, K
 sections under pullback.
 
 ## Main definitions
+
+- `AlgebraicGeometry.Etale.commShiftRightDerivedGlobalSections`: `RΓ(X, -)` commutes with
+  shifts.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`: the Leray
   isomorphism `R(f_*) ⋙ RΓ_Y ≅ RΓ_X`.
@@ -43,6 +47,12 @@ namespace AlgebraicGeometry.Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
+
+/-- The derived global sections `RΓ(X, -)` commute with shifts, as every right derived
+functor does. -/
+noncomputable instance commShiftRightDerivedGlobalSections (X : Scheme.{u}) :
+    (rightDerivedGlobalSections A X).CommShift ℤ :=
+  inferInstanceAs ((Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor.CommShift ℤ)
 
 /-- The Leray isomorphism `RΓ(Y, Rf_* K) ≅ RΓ(X, K)` for a morphism `f : X ⟶ Y`: the
 composition of right derived functors applied to `f_* ⋙ Γ_Y ≅ Γ_X`, which is valid since `f_*`

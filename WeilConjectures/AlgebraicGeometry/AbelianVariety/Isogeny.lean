@@ -75,7 +75,8 @@ theorem locallyQuasiFinite_npow_id_of_isAlgClosed [IsAlgClosed K] (A : Over (Spe
     LocallyQuasiFinite (𝟙 A ^ n).left := by
   set f := (𝟙 A ^ n).left
   -- A symmetric ample module `N` with `[n]^* N ≅ N^{⊗ n²}`.
-  obtain ⟨L, hLinv, hL⟩ := IsAbelianVariety.exists_isAmple A
+  obtain ⟨L, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have hLinv := hL.isInvertible
   have : L.symmetrisation.IsInvertible :=
     inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
   have hN := IsAbelianVariety.isAmple_symmetrisation A L hL
@@ -273,6 +274,7 @@ theorem IsIsogeny.fiberDegree_eq (f : A ⟶ B) [IsIsogeny f] [IsAffineHom f.left
 
 variable [IsAbelianVariety A] [IsAbelianVariety B]
 
+omit [IsAbelianVariety B] in
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
 An isogeny of abelian varieties is a finite morphism: it is proper, `A` being proper, and has
@@ -334,7 +336,8 @@ Let `N = L ⊗ [-1]^* L` for an ample invertible `L`; it is ample and symmetric,
 -/
 theorem isogenyDegree_npow_id (n : ℕ) (hn : 0 < n) :
     isogenyDegree (𝟙 A ^ n) = n ^ (2 * IsAbelianVariety.dim A) := by
-  obtain ⟨L, hLinv, hL⟩ := IsAbelianVariety.exists_isAmple A
+  obtain ⟨L, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have hLinv := hL.isInvertible
   have : L.symmetrisation.IsInvertible :=
     inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
   have hN := IsAbelianVariety.isAmple_symmetrisation A L hL

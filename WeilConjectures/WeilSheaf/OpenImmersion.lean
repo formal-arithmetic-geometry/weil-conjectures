@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
@@ -50,7 +51,7 @@ noncomputable def ProEtaleWeilSheaf.extensionByZero (j : U ⟶ X) [IsOpenImmersi
     [j.IsOver (Spec (CommRingCat.of k₀))] :
     ProEtaleWeilSheaf k₀ l U ⥤ ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mapOfNatIso
-    (ProEtale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso _ j (comp_over j _))
+    (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l j (comp_over j _))
 
 variable (k₀ l) in
 /-- The comparison `j_! ⟶ j_*` of pro-étale Weil sheaves along an open immersion `j`: the
@@ -60,9 +61,9 @@ noncomputable def ProEtaleWeilSheaf.extensionByZeroToLowerStar (j : U ⟶ X) [Is
     [j.IsOver (Spec (CommRingCat.of k₀))] :
     ProEtaleWeilSheaf.extensionByZero k₀ l j ⟶ ProEtaleWeilSheaf.lowerStar k₀ l j :=
   IsoAlgebra.mapOfNatIsoHom
-    (ProEtale.openImmersionLowerShriekToLowerStar _
+    (ProEtale.adicOpenImmersionLowerShriekToLowerStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j _)))
-    (ProEtale.openImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso _ j
+    (ProEtale.adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso l j
       (comp_over j _))
 
 namespace WeilSheaf
@@ -88,19 +89,24 @@ noncomputable abbrev higherDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiC
     WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   higherLowerStar j i
 
-/-- The extension by zero of a constructible sheaf along an open immersion is constructible:
-the strata of `Ū`, together with the closed complement of `Ū`, on which `j̄_! F` vanishes,
-stratify `X̄`. -/
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The extension by zero of a constructible sheaf along a quasi-compact open immersion is
+constructible: locally on `X̄`, the strata of `Ū`, together with the closed complement of `Ū`,
+on which `j̄_! F` vanishes, stratify `X̄`
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.openImmersionLowerShriek`). Without
+quasi-compactness of `j` this fails: near a boundary point `Ū` may need infinitely many
+strata. -/
 theorem isAdicConstructibleSheaf_extensionByZero (j : U ⟶ X) [IsOpenImmersion j]
-    [j.IsOver (Spec (CommRingCat.of k₀))] (F : ProEtaleWeilSheaf k₀ l U)
+    [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (F : ProEtaleWeilSheaf k₀ l U)
     (hF : WeilSheaf.objectProperty k₀ l U F) :
     WeilSheaf.objectProperty k₀ l X ((ProEtaleWeilSheaf.extensionByZero k₀ l j).obj F) :=
-  sorry
+  ProEtale.IsAdicConstructibleSheaf.openImmersionLowerShriek
+    (Scheme.Hom.geometricFiberMap j (comp_over j _)) hF
 
 -- TODO(unify): sk-prop-sf-open-closed-triangle
-/-- Extension by zero `j_!` of Weil sheaves along an open immersion `j`: the extension by zero
-along the base change `j̄ : Ū ⟶ X̄`, with the transported Weil structure. -/
-noncomputable def extensionByZero (j : U ⟶ X) [IsOpenImmersion j]
+/-- Extension by zero `j_!` of Weil sheaves along a quasi-compact open immersion `j`: the
+extension by zero along the base change `j̄ : Ū ⟶ X̄`, with the transported Weil structure. -/
+noncomputable def extensionByZero (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] :
     WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   (WeilSheaf.objectProperty k₀ l U).liftFullSubcategory (WeilSheaf.objectProperty k₀ l X)
@@ -108,35 +114,38 @@ noncomputable def extensionByZero (j : U ⟶ X) [IsOpenImmersion j]
 
 section ExtensionByZero
 
-variable (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))]
+variable (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
 
 @[simp]
 lemma extensionByZero_obj_obj_carrier (F : WeilSheaf k₀ l U) :
     ((extensionByZero j).obj F).obj.carrier =
-      (Scheme.Hom.geometricFiberMap j (comp_over j _))_!open[_].obj F.obj.carrier :=
+      (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].obj F.obj.carrier :=
   rfl
 
 @[simp]
 lemma extensionByZero_obj_obj_str (F : WeilSheaf k₀ l U) :
     ((extensionByZero j).obj F).obj.str =
-      (ProEtale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso _ j
+      (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l j
           (comp_over j _)).app F.obj.carrier ≪≫
-        (Scheme.Hom.geometricFiberMap j (comp_over j _))_!open[_].mapIso F.obj.str :=
+        (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].mapIso F.obj.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ F.obj
 
 @[simp]
 lemma extensionByZero_map_hom_hom_f {F G : WeilSheaf k₀ l U} (α : F ⟶ G) :
     ((extensionByZero j).map α).hom.hom.f =
-      (Scheme.Hom.geometricFiberMap j (comp_over j _))_!open[_].map α.hom.hom.f :=
+      (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].map α.hom.hom.f :=
   rfl
 
 -- TODO(unify): sk-prop-sf-open-closed-triangle
+omit [QuasiCompact j] in
 instance : (ProEtaleWeilSheaf.extensionByZero k₀ l j).Additive :=
   IsoAlgebra.additive_mapOfNatIso _
 
+omit [QuasiCompact j] in
 instance : PreservesFiniteLimits (ProEtaleWeilSheaf.extensionByZero k₀ l j) :=
   IsoAlgebra.preservesFiniteLimits_mapOfNatIso _
 
+omit [QuasiCompact j] in
 instance : PreservesFiniteColimits (ProEtaleWeilSheaf.extensionByZero k₀ l j) :=
   IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
 
@@ -172,9 +181,21 @@ lemma extensionByZeroToDirectImage_app_hom_hom_f (j : U ⟶ X) [IsOpenImmersion 
     [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U) :
     ((extensionByZeroToDirectImage j).app F).hom.hom.f =
-      (ProEtale.openImmersionLowerShriekToLowerStar _
+      (ProEtale.adicOpenImmersionLowerShriekToLowerStar l
         (Scheme.Hom.geometricFiberMap j (comp_over j _))).app F.obj.carrier :=
   rfl
+
+-- TODO(unify): sk-prop-sf-open-closed-triangle
+/-- **The comparison `j_! F ⟶ j_* F` of Weil sheaves is a monomorphism**: on underlying
+pro-étale sheaves it is the comparison along the base change `j̄ : Ū ⟶ X̄`, which is a
+monomorphism (`AlgebraicGeometry.ProEtale.mono_adicOpenImmersionLowerShriekToLowerStar_app`). -/
+instance mono_extensionByZeroToDirectImage_app (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l U) : Mono ((extensionByZeroToDirectImage j).app F) := by
+  let Φ := (WeilSheaf.objectProperty k₀ l X).ι ⋙
+    IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+  apply Φ.mono_of_mono_map
+  exact ProEtale.mono_adicOpenImmersionLowerShriekToLowerStar_app _ F.obj.carrier
 
 end WeilSheaf
 

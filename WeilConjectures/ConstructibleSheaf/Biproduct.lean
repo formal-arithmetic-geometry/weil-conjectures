@@ -18,9 +18,11 @@ A finite direct sum of constant sheaves is constant, the constant sheaf functor 
 adjoint (`CategoryTheory.Sheaf.IsConstant.biprod`). The pullbacks `g^*` are left adjoints as
 well, so the direct sum of two locally constant sheaves is trivialised by the fibre product of
 trivialising covers (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.biprod`); the stalk
-functors are left adjoints (to the skyscraper functors) and the forgetful functor of the
-coefficient category preserves finite products, so the stalk of a direct sum is the product of
-the stalks and a direct sum of finite sheaves is finite (`IsFiniteSheaf.biprod`). Together,
+functors are left adjoints (to the skyscraper functors), so the stalk of a direct sum is the
+direct sum of the stalks, and a direct sum of finitely generated objects is finitely generated
+when the forgetful functor of the coefficient category preserves finite limits
+(`CategoryTheory.ConcreteCategory.IsFinitelyGenerated.biprod`); hence a direct sum of finite
+sheaves is finite (`IsFiniteSheaf.biprod`). Together,
 finite direct sums of finite locally constant sheaves are finite locally constant
 (`IsFiniteLocallyConstantSheaf.biprod`).
 (blueprint: `lemma:constructible-flc-biproduct`)
@@ -130,21 +132,14 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
 omit [HasSmallSiteSheafify A] in
-/-- The direct sum of two finite sheaves is finite: the stalk of `F ⊞ G` is the product of the
-stalks. (blueprint: `lemma:constructible-flc-biproduct`) -/
+/-- The direct sum of two finite sheaves is finite: the stalk of `F ⊞ G` is the direct sum of the
+stalks, which is finitely generated. (blueprint: `lemma:constructible-flc-biproduct`) -/
 theorem IsFiniteSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
     [IsFiniteSheaf F] [IsFiniteSheaf G] : IsFiniteSheaf (F ⊞ G) where
-  finite_sheafFiber Ω _ _ s := by
-    have hF := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA) (F := F) Ω s
-    have hG := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA) (F := G) Ω s
-    let e : (CategoryTheory.forget A).obj ((pointSmallEtale s).sheafFiber.obj (F ⊞ G)) ≅
-        (CategoryTheory.forget A).obj ((pointSmallEtale s).sheafFiber.obj F) ⨯
-          (CategoryTheory.forget A).obj ((pointSmallEtale s).sheafFiber.obj G) :=
-      (CategoryTheory.forget A).mapIso
-        (((pointSmallEtale s).skyscraperSheafAdjunction (A := A)).leftAdjointBiprodIso F G ≪≫
-          biprod.isoProd _ _) ≪≫
-        PreservesLimitPair.iso (CategoryTheory.forget A) _ _
-    exact Finite.of_equiv _ (e ≪≫ Types.binaryProductIso _ _).toEquiv.symm
+  isFinitelyGenerated_sheafFiber Ω _ _ s :=
+    ((IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA) (F := F) Ω s).biprod
+      (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA) (F := G) Ω s)).of_iso
+      (((pointSmallEtale s).skyscraperSheafAdjunction (A := A)).leftAdjointBiprodIso F G).symm
 
 /-- **A finite direct sum of finite locally constant sheaves is finite locally constant.**
 (blueprint: `lemma:constructible-flc-biproduct`) -/

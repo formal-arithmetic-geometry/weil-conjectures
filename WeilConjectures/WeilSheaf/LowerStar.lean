@@ -76,7 +76,7 @@ noncomputable def ProEtaleWeilSheaf.lowerStar (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] :
     ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l Y :=
   IsoAlgebra.mapOfNatIso
-    (ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _))
+    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _))
 
 instance (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
     (ProEtaleWeilSheaf.lowerStar k₀ l φ).Additive :=
@@ -198,21 +198,23 @@ namespace WeilSheaf
 @[simp]
 lemma lowerStar_obj_obj_carrier (F : WeilSheaf k₀ l X) :
     ((lowerStar φ).obj F).obj.carrier =
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj F.obj.carrier :=
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l].obj F.obj.carrier :=
   rfl
 
+set_option maxHeartbeats 1600000 in
+-- The Weil structure of the pushforward unfolds through several module-object isomorphisms.
 @[simp]
 lemma lowerStar_obj_obj_str (F : WeilSheaf k₀ l X) :
     ((lowerStar φ).obj F).obj.str =
-      (ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _)).app
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _)).app
           F.obj.carrier ≪≫
-        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].mapIso F.obj.str :=
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l].mapIso F.obj.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ F.obj
 
 @[simp]
 lemma lowerStar_map_hom_hom_f {F G : WeilSheaf k₀ l X} (α : F ⟶ G) :
     ((lowerStar φ).map α).hom.hom.f =
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map α.hom.hom.f :=
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l].map α.hom.hom.f :=
   rfl
 
 instance : (lowerStar (k₀ := k₀) (l := l) φ).Additive :=

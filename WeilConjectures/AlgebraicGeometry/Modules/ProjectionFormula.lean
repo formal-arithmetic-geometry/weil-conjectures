@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
@@ -65,7 +66,7 @@ sheafification of the presheaf pullback, which is a base change of modules and s
 tensor products. -/
 theorem nonempty_pullback_tensorObj_iso (g : X ⟶ Y) (M N : Y.Modules) :
     Nonempty ((pullback g).obj (M ⊗ N) ≅ (pullback g).obj M ⊗ (pullback g).obj N) :=
-  sorry
+  ⟨(Functor.Monoidal.μIso (pullback g) M N).symm⟩
 
 /-- **The pullback of a tensor power is the tensor power of the pullback.**
 `g^* (M^{⊗ m}) ≅ (g^* M)^{⊗ m}`. -/

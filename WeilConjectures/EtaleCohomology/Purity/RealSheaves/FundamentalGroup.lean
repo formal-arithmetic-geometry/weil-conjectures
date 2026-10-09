@@ -10,18 +10,20 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 
 /-!
-# The Weil group as a quotient of the étale fundamental group
+# The geometric part of a Weil group and the étale fundamental group of the geometric curve
 
-An `AlgebraicGeometry.WeilGroup` is recorded as abstract data: nothing in it says that its
-geometric part `ker deg` is the étale fundamental group of the geometric curve. Without that
-link the purity statements of `sk-p-real-rankone` are false — the group `ℤ_ℓ × ℤ` with the
-character `(a, n) ↦ (1 + ℓ) ^ a` is a counterexample to the finiteness of the geometric image.
+An `AlgebraicGeometry.WeilGroup` is presented through the étale fundamental group
+`π₁(C₀, s)` of the curve `C₀` over `K`, and its geometric part `ker deg` is the kernel of
+`π₁(C₀, s) → Gal(K̄ / K)`. That this kernel is the étale fundamental group of the *geometric*
+curve `C = C₀ ×_K K̄` is the homotopy exact sequence. The rank-one purity statements of
+`sk-p-real-rankone` use the geometric curve: they compare Frobenius-fixed classes in
+`H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
 
-This file records the link as a hypothesis, `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`:
-the geometric part of `W` is a quotient of a fundamental group `G = π₁(C, s)` of the geometric
-curve `C = C₀ ×_K K̄`, compatibly with the Frobenius. The genuine Weil group `W(C₀, s)`
-satisfies it with `G = W.geometric`, and so does the Weil group of `C₀` viewed as a quotient of
-the Weil group of a dense open `U₀ ⊆ C₀`, since `π₁(U) → π₁(C)` is onto.
+This file states that identification as `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`: the
+geometric part of `W` is isomorphic, as a topological group, to a fundamental group
+`G = π₁(C, s)` of the geometric curve, compatibly with the Frobenius. Every Weil group of a
+geometrically connected curve satisfies it, by the homotopy exact sequence
+(`AlgebraicGeometry.WeilGroup.isEtaleQuotient`).
 
 From it, the cohomological vanishing `lim_n H¹(C, ℤ / ℓⁿ)^{Φ = 1} = 0`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`) yields the
@@ -31,8 +33,9 @@ group-theoretic statement used for rank-one sheaves: a continuous homomorphism
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilGroup.EtaleQuotientData`: a presentation of the geometric part of a
-  Weil group as a Frobenius-equivariant quotient of the étale fundamental group.
+- `AlgebraicGeometry.WeilGroup.EtaleQuotientData`: an identification of the geometric part of a
+  Weil group with the étale fundamental group of the geometric curve, compatible with the
+  Frobenius.
 - `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`: such a presentation exists.
 
 ## Main statements
@@ -56,13 +59,13 @@ open Scheme.FiniteEtale in
 /-- Blueprint `def-wf-weil-group`: the Weil group of a curve, its link with the étale
 fundamental group.
 
-A presentation of the geometric part `W.geometric = ker deg` of a Weil group as a quotient of
-the étale fundamental group of the geometric curve `C = C₀ ×_K K̄`, compatible with the
-Frobenius. It consists of
+An identification of the geometric part `W.geometric = ker deg` of a Weil group with the étale
+fundamental group of the geometric curve `C = C₀ ×_K K̄`, compatible with the Frobenius. It
+consists of
 
 * a geometric point `s` of `C` and a fundamental group `G = π₁(C, s)` of the fibre functor
   `F_s` on finite étale `C`-schemes;
-* a continuous surjection `π : G → W.geometric`;
+* an isomorphism of topological groups `π : G ≃ W.geometric`;
 * a transport `τ : F_s ∘ g_* ≅ F_s` of the fibre functor along the geometric Galois Frobenius
   `g` of `C`, with the induced map `σ : G → G`, `τ (h • x) = σ h • τ x`;
 * an element `w` of degree `± 1` of `W` with `π (σ h) = w π(h) w⁻¹`.
@@ -83,9 +86,8 @@ structure EtaleQuotientData (W : WeilGroup p) where
   [compactSpace : CompactSpace G]
   [mulAction (P : p.geometricFiber.FiniteEtale) : MulAction G ((fiber point).obj P)]
   [isFundamentalGroup : IsFundamentalGroup (fiber point) G]
-  /-- The quotient map `π₁(C, s) → W.geometric`. -/
-  toGeometric : G →ₜ* W.geometric
-  surjective_toGeometric : Function.Surjective toGeometric
+  /-- The identification `π₁(C, s) ≃ W.geometric`. -/
+  toGeometric : G ≃ₜ* W.geometric
   /-- The transport of the fibre functor along the geometric Galois Frobenius of `C`. -/
   frobeniusTransport : mapIso p.geometricGaloisFrobenius ⋙ fiber point ≅ fiber point
   /-- The action of the Frobenius on `π₁(C, s)` induced by the transport. -/
@@ -106,8 +108,8 @@ attribute [instance] EtaleQuotientData.group
 /-- Blueprint `def-wf-weil-group`: the Weil group of a curve, its link with the étale
 fundamental group.
 
-The geometric part of the Weil group `W` is a Frobenius-equivariant quotient of the étale
-fundamental group of the geometric curve (`AlgebraicGeometry.WeilGroup.EtaleQuotientData`). -/
+The geometric part of the Weil group `W` is, Frobenius-equivariantly, the étale fundamental
+group of the geometric curve (`AlgebraicGeometry.WeilGroup.EtaleQuotientData`). -/
 class IsEtaleQuotient (W : WeilGroup p) : Prop where
   nonempty_etaleQuotientData : Nonempty W.EtaleQuotientData
 
@@ -172,7 +174,8 @@ theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyC
     b = 1 := by
   obtain ⟨D⟩ := ‹W.IsEtaleQuotient›.nonempty_etaleQuotientData
   have := D.connectedSpace
-  let b' : D.G →ₜ* Multiplicative ℤ_[l] := b.comp D.toGeometric
+  let b' : D.G →ₜ* Multiplicative ℤ_[l] :=
+    b.comp (ContinuousMonoidHom.toContinuousMonoidHom D.toGeometric)
   have hb' (g : D.G) : b' (D.frobeniusConj g) = b' g := by
     obtain ⟨w, -, hw⟩ := D.exists_conj
     exact conj_invariant_of_conj_invariant_frobeniusLift W b.toMonoidHom hb w _ _ (hw g)
@@ -212,8 +215,8 @@ theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyC
     rw [PadicInt.continuousMonoidHomEquiv_apply_coe] at h
     simpa using h
   ext g
-  obtain ⟨g', rfl⟩ := D.surjective_toGeometric g
-  exact congrArg (fun φ ↦ φ g') hb'1
+  obtain ⟨g', rfl⟩ := D.toGeometric.surjective g
+  exact congrArg (fun φ ↦ (φ g').toAdd) hb'1
 
 end WeilGroup
 

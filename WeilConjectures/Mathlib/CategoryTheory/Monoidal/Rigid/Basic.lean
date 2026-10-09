@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 
@@ -15,12 +17,14 @@ public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 `CategoryTheory.HasRightDual` is a class carrying a right dual as *data*. This file records
 the corresponding *property*, `CategoryTheory.IsDualizable X`, that some right dual exists,
 together with the stronger property `CategoryTheory.IsInvertible X` that `X` admits a
-tensor inverse.
+two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
 
 ## Main definitions
 
 - `CategoryTheory.IsDualizable`: `X` admits a right dual.
-- `CategoryTheory.IsInvertible`: `X` admits a tensor inverse.
+- `CategoryTheory.IsInvertible`: `X` admits a two-sided tensor inverse.
+- `CategoryTheory.exactPairingOfTensorIso`: the exact pairing of an object with a two-sided
+  tensor inverse.
 - `CategoryTheory.MonoidalClosed.ihomIsoTensorLeft`: for an exact pairing of `Y` and `X`, the
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
@@ -28,6 +32,8 @@ tensor inverse.
 
 ## Main statements
 
+- `CategoryTheory.isDualizable_of_tensorIso`, `CategoryTheory.IsInvertible.isDualizable`: an
+  object with a two-sided tensor inverse is dualizable.
 - `CategoryTheory.MonoidalClosed.curry_evaluation`: the transpose `Y ⟶ (ihom X).obj (𝟙_ C)` of
   the evaluation of an exact pairing of `Y` and `X` is an isomorphism.
 - `CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom`: the comparison map is an
@@ -62,14 +68,73 @@ theorem IsDualizable.tensorObj {X Y : C} (hX : IsDualizable X) (hY : IsDualizabl
   obtain ⟨_⟩ := hY
   exact ⟨hasRightDualTensor⟩
 
-/-- An object `X` of a monoidal category is *invertible* if it admits a tensor inverse, that
-is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C`. The Tate twists of the `ℓ`-adic formalism are the
-motivating example. -/
+/-- Dualizability is invariant under isomorphism. -/
+theorem IsDualizable.of_iso {X Y : C} (e : X ≅ Y) (hX : IsDualizable X) : IsDualizable Y := by
+  obtain ⟨_⟩ := hX
+  exact ⟨{ rightDual := Xᘁ, exact := exactPairingCongrLeft e.symm }⟩
+
+/-- An object `X` of a monoidal category is *invertible* if it admits a two-sided tensor
+inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. The Tate twists of the
+`ℓ`-adic formalism are the motivating example.
+
+Both isomorphisms are required: without a braiding, `X ⊗ Y ≅ 𝟙_ C` alone does not make `X`
+invertible (for endofunctors under composition it only says that `X` has a section). -/
 def IsInvertible (X : C) : Prop :=
-  ∃ Y, Nonempty (X ⊗ Y ≅ 𝟙_ C)
+  ∃ Y, Nonempty (X ⊗ Y ≅ 𝟙_ C) ∧ Nonempty (Y ⊗ X ≅ 𝟙_ C)
 
 theorem isInvertible_unit : IsInvertible (𝟙_ C) :=
-  ⟨𝟙_ C, ⟨λ_ _⟩⟩
+  ⟨𝟙_ C, ⟨λ_ _⟩, ⟨λ_ _⟩⟩
+
+/-- In a braided monoidal category a one-sided tensor inverse is two-sided. -/
+theorem isInvertible_iff_of_braided [BraidedCategory C] (X : C) :
+    IsInvertible X ↔ ∃ Y, Nonempty (X ⊗ Y ≅ 𝟙_ C) :=
+  ⟨fun ⟨Y, e, _⟩ ↦ ⟨Y, e⟩, fun ⟨Y, ⟨e⟩⟩ ↦ ⟨Y, ⟨e⟩, ⟨β_ Y X ≪≫ e⟩⟩⟩
+
+/-- An object `X` with a two-sided tensor inverse `Y`, `X ⊗ Y ≅ 𝟙_ C ≅ Y ⊗ X`, forms an exact
+pairing with `Y`. The coevaluation is the inverse of `X ⊗ Y ≅ 𝟙_ C`; the evaluation is
+`Y ⊗ X ≅ 𝟙_ C` corrected by an automorphism of `X` so that the first zigzag identity holds,
+and the second zigzag identity then follows, since `- ▷ X` is injective. -/
+@[instance_reducible]
+noncomputable def exactPairingOfTensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    ExactPairing X Y :=
+  let φ : X ⟶ X := (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ e'.hom ≫ (ρ_ X).hom
+  let ε : Y ⊗ X ⟶ 𝟙_ C := Y ◁ inv φ ≫ e'.hom
+  have zig : (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom = 𝟙 X := by
+    have : (λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom = inv φ ≫ φ := by
+      simp only [ε, φ, MonoidalCategory.whiskerLeft_comp, Category.assoc]
+      rw [← associator_naturality_right_assoc, ← whisker_exchange_assoc,
+        leftUnitor_inv_naturality_assoc]
+    rw [this, IsIso.inv_hom_id]
+  have zag : (ρ_ Y).inv ≫ Y ◁ e.inv ≫ (α_ Y X Y).inv ≫ ε ▷ Y ≫ (λ_ Y).hom = 𝟙 Y := by
+    apply whiskerRight_injective_of_tensorIso e
+    rw [id_whiskerRight, ← cancel_mono ε, Category.id_comp]
+    calc _ = (ρ_ Y).inv ▷ X ≫ (Y ◁ e.inv) ▷ X ≫ (α_ Y X Y).inv ▷ X ≫ (α_ (Y ⊗ X) Y X).hom ≫
+          ε ▷ (Y ⊗ X) ≫ (λ_ (Y ⊗ X)).hom ≫ ε := by monoidal
+      _ = (ρ_ Y).inv ▷ X ≫ (Y ◁ e.inv) ▷ X ≫ (α_ Y X Y).inv ▷ X ≫ (α_ (Y ⊗ X) Y X).hom ≫
+          (Y ⊗ X) ◁ ε ≫ (ρ_ (Y ⊗ X)).hom ≫ ε := by
+        rw [whiskerRight_comp_leftUnitor_hom_comp]
+      _ = Y ◁ ((λ_ X).inv ≫ e.inv ▷ X ≫ (α_ X Y X).hom ≫ X ◁ ε ≫ (ρ_ X).hom) ≫ ε := by
+        monoidal
+      _ = ε := by rw [zig, whiskerLeft_id, Category.id_comp]
+  { coevaluation' := e.inv
+    evaluation' := ε
+    coevaluation_evaluation' := by
+      rw [← cancel_epi (ρ_ Y).inv, ← cancel_mono (λ_ Y).hom]
+      simpa using zag
+    evaluation_coevaluation' := by
+      rw [← cancel_epi (λ_ X).inv, ← cancel_mono (ρ_ X).hom]
+      simpa using zig }
+
+/-- An object with a two-sided tensor inverse is dualizable. -/
+theorem isDualizable_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y ⊗ X ≅ 𝟙_ C) :
+    IsDualizable X :=
+  letI := exactPairingOfTensorIso e e'
+  ⟨⟨Y⟩⟩
+
+/-- An invertible object is dualizable. -/
+theorem IsInvertible.isDualizable {X : C} (hX : IsInvertible X) : IsDualizable X := by
+  obtain ⟨Y, ⟨e⟩, ⟨e'⟩⟩ := hX
+  exact isDualizable_of_tensorIso e e'
 
 /-- The counit of `tensorLeftAdjunction Y X : tensorLeft X ⊣ tensorLeft Y` at `Z` is the composite
 ```

@@ -12,6 +12,8 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The Lie algebra of a group scheme
@@ -96,9 +98,11 @@ algebras of the closed subgroup schemes of `GL_n`.
 
 ## Implementation notes
 
-All constructions are genuine definitions; the proofs that are still missing (the sheaf and local
-conditions of the thickening, the bijectivity of the bridge and of the mixed-term map, the Lie
-algebra axioms, and the functoriality of the bracket) are recorded as `sorry`. The base ring of a
+All constructions are genuine definitions. The bridge `toLie` is a bijection: its inverse sends a
+derivation `d : 𝒪_G → e_*𝒪_S` to the point `GrpObj.pointOfDerivation`, `a ↦ e^♯(a) + ε d(a)`.
+The proofs that are still missing (the sheaf and local conditions of the thickening, the
+bijectivity of the mixed-term map, the Lie algebra axioms, and the functoriality of the bracket)
+are recorded as `sorry`. The base ring of a
 group scheme over an affine base is written `R`; `k` is reserved for a field.
 
 ## Blueprint
@@ -213,7 +217,11 @@ theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
 
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by
-  sorry
+  rw [Hom.one_def, Over.comp_left, unitSection]
+  have : (SemiCartesianMonoidalCategory.toUnit (Over.mk (𝟙 S))).left = 𝟙 S :=
+    (Category.comp_id _).symm.trans (Over.w _)
+  rw [this]
+  exact Category.id_comp _
 
 theorem ι_comp_left_eq {v : Scheme.dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
     S.dualNumbersι ≫ v.left = unitSection G := by
@@ -231,11 +239,34 @@ noncomputable def infDerivation (v : Scheme.dualNumbersOver S ⟶ G) :
       (Scheme.Modules.unitModule S)).val.Derivation' G.hom.pullbackPresheafHom where
   d {V} :=
     { toFun := fun a ↦ (v.left.app V.unop a).snd
-      map_zero' := by sorry
-      map_add' := by sorry }
-  d_mul := by sorry
-  d_map := by sorry
-  d_app := by sorry
+      map_zero' := by rw [map_zero]; rfl
+      map_add' x y := by rw [map_add]; rfl }
+  d_mul {V} a b := by
+    change (v.left.app V.unop (a * b)).snd =
+      (v.left.app V.unop a).fst * (v.left.app V.unop b).snd +
+        (v.left.app V.unop b).fst * (v.left.app V.unop a).snd
+    rw [map_mul, snd_mul, smul_eq_mul, op_smul_eq_mul, mul_comm (v.left.app V.unop a).snd]
+  d_map {X Y} f x := by
+    have h := ConcreteCategory.congr_hom (v.left.c.naturality f) x
+    exact (congr_arg snd h).trans (DualNumber.snd_mapRingHom _ _)
+  d_app {X} a := by
+    let ε₀ : (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+        (Scheme.dualNumbersOver S).left.presheaf ⟶
+        (TopCat.Presheaf.pushforward CommRingCat v.left.base).obj
+          (Scheme.dualNumbersOver S).left.presheaf :=
+      Functor.whiskerLeft ((TopologicalSpace.Opens.map v.left.base).op ⋙ S.presheaf)
+        (CommRingCat.dualNumberFst ≫ CommRingCat.dualNumberInl)
+    have key : (G.hom.pullbackPresheafHom ≫ v.left.c) ≫ ε₀ =
+        G.hom.pullbackPresheafHom ≫ v.left.c := by
+      simp only [Scheme.Hom.pullbackPresheafHom, ← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      ext U b
+      have hb : ((v.left ≫ G.hom).app U b).snd = 0 := by
+        rw [Scheme.Hom.congr_app (Over.w v) U]
+        exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+      exact TrivSqZeroExt.ext rfl hb.symm
+    have h := ConcreteCategory.congr_hom (congr_app key X) a
+    exact (congr_arg snd h).symm.trans rfl
 
 /-- The morphism `(i ≫ v)^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a point `v : S[ε] ⟶ G`: the derivation
 `d_v` through the universal property of `Ω¹_{G/S}` and the adjunction `(i ≫ v)^* ⊣ (i ≫ v)_*`. -/
@@ -253,11 +284,270 @@ noncomputable def toLie (v : infPoints G) : Lie G :=
   (Scheme.Modules.pullbackCongr (ι_comp_left_eq G v.2)).inv.app G.hom.cotangentSheaf ≫
     omegaHom G v.1
 
+/-! ### Points attached to derivations -/
+
+omit [GrpObj G] in
+/-- The morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S` attached to a derivation `d : 𝒪_G → g_*𝒪_S` over `f⁻¹𝒪_S`,
+for a morphism `g : S ⟶ G`: the universal property of `Ω¹_{G/S}` and the adjunction
+`g^* ⊣ g_*`. -/
+noncomputable def homOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S :=
+  ((Scheme.Modules.pullbackPushforwardAdjunction _).homEquiv _ _).symm
+    ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)).symm
+      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D))
+
+omit [GrpObj G] in
+theorem omegaHom_eq_homOfDerivation (v : Scheme.dualNumbersOver S ⟶ G) :
+    omegaHom G v = homOfDerivation G _ (infDerivation G v) :=
+  rfl
+
+/-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
+if the derivations do. -/
+theorem pullbackCongr_inv_comp_homOfDerivation {g₁ g₂ : S ⟶ G.left} (h₁ : g₁ = unitSection G)
+    (h₂ : g₂ = unitSection G)
+    (D₁ : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (D₂ : ((Scheme.Modules.pushforward g₂).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (hD : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)), D₁.d a ≍ D₂.d a) :
+    (Scheme.Modules.pullbackCongr h₁).inv.app G.hom.cotangentSheaf ≫ homOfDerivation G g₁ D₁ =
+      (Scheme.Modules.pullbackCongr h₂).inv.app G.hom.cotangentSheaf ≫
+        homOfDerivation G g₂ D₂ := by
+  subst h₁ h₂
+  obtain rfl : D₁ = D₂ := by
+    ext V a
+    exact eq_of_heq (hD a)
+  rfl
+
+omit [GrpObj G] in
+/-- The components `Γ(G, U) → Γ(S, g⁻¹U)` of a derivation `d : 𝒪_G → g_*𝒪_S`. -/
+def derivationApp (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (U : G.left.Opens) : Γ(G.left, U) →+ Γ(S, g ⁻¹ᵁ U) :=
+  D.d (X := Opposite.op U)
+
+omit [GrpObj G] in
+theorem derivationApp_mul (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (U : G.left.Opens) (a b : Γ(G.left, U)) :
+    derivationApp G g D U (a * b) =
+      g.app U a * derivationApp G g D U b + g.app U b * derivationApp G g D U a :=
+  D.d_mul a b
+
+omit [GrpObj G] in
+@[simp]
+theorem derivationApp_one (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (U : G.left.Opens) :
+    derivationApp G g D U 1 = 0 :=
+  D.d_one _
+
+omit [GrpObj G] in
+theorem derivationApp_map (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) {U V : G.left.Opens} (i : V ⟶ U) (a : Γ(G.left, U)) :
+    derivationApp G g D V (G.left.presheaf.map i.op a) =
+      S.presheaf.map (homOfLE (g.preimage_mono i.le)).op (derivationApp G g D U a) :=
+  D.d_map i.op a
+
+omit [GrpObj G] in
+/-- The ring homomorphism `Γ(G, U) → Γ(S, g⁻¹U)[ε]`, `a ↦ g^♯(a) + ε d(a)`, attached to a
+derivation `d : 𝒪_G → g_*𝒪_S`. -/
+noncomputable def pointOfDerivationRingHom (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (U : G.left.Opens) :
+    Γ(G.left, U) →+* DualNumber Γ(S, g ⁻¹ᵁ U) where
+  toFun a := inl (g.app U a) + inr (derivationApp G g D U a)
+  map_one' := by
+    ext <;> simp
+  map_mul' a b := by
+    ext
+    · simp
+    · simp only [snd_mul, fst_add, fst_inl, fst_inr, add_zero, snd_add, snd_inl, snd_inr,
+        zero_add, smul_eq_mul, op_smul_eq_mul, map_mul]
+      rw [derivationApp_mul]
+      ring
+  map_zero' := by ext <;> simp
+  map_add' a b := by ext <;> simp
+
+omit [GrpObj G] in
+/-- The morphism of presheafed spaces `S[ε] ⟶ G`, `a ↦ g^♯(a) + ε d(a)`, attached to a derivation
+`d : 𝒪_G → g_*𝒪_S`. -/
+noncomputable def pointOfDerivationHom (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    S.dualNumbers.toPresheafedSpace ⟶ G.left.toPresheafedSpace where
+  base := g.base
+  c :=
+    { app U := CommRingCat.ofHom (pointOfDerivationRingHom G g D U.unop)
+      naturality U V i := by
+        ext a
+        change pointOfDerivationRingHom G g D V.unop (G.left.presheaf.map i a) =
+          DualNumber.mapRingHom (S.presheaf.map _).hom (pointOfDerivationRingHom G g D U.unop a)
+        ext
+        · simp only [pointOfDerivationRingHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,
+            fst_add, fst_inl, fst_inr, add_zero, DualNumber.fst_mapRingHom]
+          exact ConcreteCategory.congr_hom (g.c.naturality i) a
+        · simp only [pointOfDerivationRingHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,
+            snd_add, snd_inl, snd_inr, zero_add, DualNumber.snd_mapRingHom]
+          exact derivationApp_map G g D i.unop a }
+
+omit [GrpObj G] in
+theorem ι_comp_pointOfDerivationHom (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    S.dualNumbersι.toPshHom ≫ pointOfDerivationHom G g D = g.toPshHom := by
+  refine PresheafedSpace.ext _ _ rfl ?_
+  ext U a
+  simp only [Functor.comp_obj, Functor.op_obj, PresheafedSpace.comp_base, eqToHom_refl,
+    Functor.whiskerRight_id', TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj,
+    TopologicalSpace.Opens.map_comp_obj, PresheafedSpace.comp_c_app, NatTrans.id_app,
+    Category.comp_id, CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply]
+  change (pointOfDerivationRingHom G g D U a).fst = g.app U a
+  simp [pointOfDerivationRingHom]
+
+omit [GrpObj G] in
+/-- The morphism of schemes `S[ε] ⟶ G`, `a ↦ g^♯(a) + ε d(a)`, attached to a derivation
+`d : 𝒪_G → g_*𝒪_S`: its stalk maps are local since their reductions modulo `ε` are those of `g`. -/
+noncomputable def pointOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) : S.dualNumbers ⟶ G.left where
+  toHom := pointOfDerivationHom G g D
+  prop y := by
+    have h := PresheafedSpace.stalkMap.comp S.dualNumbersι.toPshHom (pointOfDerivationHom G g D) y
+    rw [PresheafedSpace.stalkMap.congr_hom _ _ (ι_comp_pointOfDerivationHom G g D),
+      eqToHom_refl, Category.id_comp] at h
+    have := g.prop y
+    rw [h, CommRingCat.hom_comp] at this
+    exact @isLocalHom_of_comp _ _ _ _ _ _ _ _ this
+
+omit [GrpObj G] in
+@[reassoc (attr := simp)]
+theorem ι_comp_pointOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    S.dualNumbersι ≫ pointOfDerivation G g D = g :=
+  Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (ι_comp_pointOfDerivationHom G g D))
+
+omit [GrpObj G] in
+/-- A derivation over `f⁻¹𝒪_S` kills the functions pulled back from `S`. -/
+theorem derivationApp_app (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (U : S.Opens) (b : Γ(S, U)) :
+    derivationApp G g D (G.hom ⁻¹ᵁ U) (G.hom.app U b) = 0 := by
+  have h : G.hom.c = (TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u}
+      G.hom.base).unit.app S.presheaf ≫
+        (TopCat.Presheaf.pushforward CommRingCat.{u} G.hom.base).map G.hom.pullbackPresheafHom := by
+    rw [Scheme.Hom.pullbackPresheafHom]
+    exact (((TopCat.Presheaf.pullbackPushforwardAdjunction _ _).homEquiv_unit _ _ _).symm.trans
+      (Equiv.apply_symm_apply _ _)).symm
+  have h2 := ConcreteCategory.congr_hom (congr_app h (Opposite.op U)) b
+  change D.d (G.hom.c.app (Opposite.op U) b) = 0
+  rw [h2]
+  exact D.d_app _
+
+omit [GrpObj G] in
+/-- The point attached to a derivation along a section `g` of `G ⟶ S` is a point over `S`. -/
+theorem pointOfDerivation_comp_hom (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (hg : g ≫ G.hom = 𝟙 S) :
+    pointOfDerivation G g D ≫ G.hom = S.dualNumbersProj := by
+  rw [Scheme.eq_dualNumbersProj_comp_of_snd_eq_zero (pointOfDerivation G g D ≫ G.hom),
+    ι_comp_pointOfDerivation_assoc, hg, Category.comp_id]
+  intro U b
+  change (pointOfDerivationRingHom G g D _ (G.hom.app U b)).snd = 0
+  simp only [pointOfDerivationRingHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,
+    snd_add, snd_inl, snd_inr, zero_add]
+  exact derivationApp_app G g D U b
+
+omit [GrpObj G] in
+/-- A point `v : S[ε] ⟶ G` is the point attached to its derivation `d_v` along `i ≫ v`. -/
+theorem pointOfDerivation_infDerivation (v : Scheme.dualNumbersOver S ⟶ G) :
+    pointOfDerivation G (S.dualNumbersι ≫ v.left) (infDerivation G v) = v.left := by
+  refine Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (PresheafedSpace.ext _ _ rfl ?_))
+  ext U a
+  simp only [Functor.comp_obj, Functor.op_obj, eqToHom_refl, Functor.whiskerRight_id',
+    TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj, NatTrans.id_app,
+    Category.comp_id]
+  change pointOfDerivationRingHom G (S.dualNumbersι ≫ v.left) (infDerivation G v) U a =
+    v.left.app U a
+  ext
+  · simp only [pointOfDerivationRingHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,
+      fst_add, fst_inl, fst_inr, add_zero]
+    rfl
+  · simp only [pointOfDerivationRingHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,
+      snd_add, snd_inl, snd_inr, zero_add]
+    rfl
+
+omit [GrpObj G] in
+theorem pointOfDerivation_congr {g₁ g₂ : S ⟶ G.left} (h : g₁ = g₂)
+    {D₁ : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom}
+    {D₂ : ((Scheme.Modules.pushforward g₂).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom}
+    (hD : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)), D₁.d a ≍ D₂.d a) :
+    pointOfDerivation G g₁ D₁ = pointOfDerivation G g₂ D₂ := by
+  subst h
+  obtain rfl : D₁ = D₂ := by
+    ext V a
+    exact eq_of_heq (hD a)
+  rfl
+
+omit [GrpObj G] in
+/-- A derivation `𝒪_G → g_*𝒪_S` is a morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S`. -/
+theorem homOfDerivation_bijective (g : S ⟶ G.left) :
+    Function.Bijective (homOfDerivation G g) := by
+  refine (Equiv.bijective _).comp ((Equiv.bijective _).comp ⟨fun D₁ D₂ h ↦ ?_, fun φ ↦ ?_⟩)
+  · rw [← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₁,
+      ← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₂]
+    exact congrArg _ h
+  · refine ⟨(PresheafOfModules.DifferentialsConstruction.derivation' _).postcomp φ, ?_⟩
+    apply (PresheafOfModules.DifferentialsConstruction.isUniversal' _).postcomp_injective
+    rw [PresheafOfModules.Derivation.Universal.fac]
+
+/-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
+only if the derivations do. -/
+theorem heq_of_pullbackCongr_inv_comp_homOfDerivation_eq {g₁ g₂ : S ⟶ G.left}
+    (h₁ : g₁ = unitSection G) (h₂ : g₂ = unitSection G)
+    (D₁ : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (D₂ : ((Scheme.Modules.pushforward g₂).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (h : (Scheme.Modules.pullbackCongr h₁).inv.app G.hom.cotangentSheaf ≫
+        homOfDerivation G g₁ D₁ =
+      (Scheme.Modules.pullbackCongr h₂).inv.app G.hom.cotangentSheaf ≫
+        homOfDerivation G g₂ D₂) {V : (TopologicalSpace.Opens G.left)ᵒᵖ}
+    (a : Γ(G.left, V.unop)) : D₁.d a ≍ D₂.d a := by
+  subst h₁ h₂
+  obtain rfl := (homOfDerivation_bijective G _).1 ((cancel_epi _).1 h)
+  rfl
+
 /-- The bridge is a bijection: a morphism `ω_{G/S} ⟶ 𝒪_S` is a derivation `d : 𝒪_G → e_*𝒪_S`, and
 `a ↦ e^♯(a) + ε d(a)` is a morphism of schemes `S[ε] ⟶ G` over `S` reducing to the identity, since
 its stalk maps are local, their reductions modulo `ε` being the local maps `e^♯`. -/
 theorem toLie_bijective : Function.Bijective (toLie G) := by
-  sorry
+  refine ⟨fun v w h ↦ ?_, fun φ ↦ ?_⟩
+  · apply Subtype.ext
+    apply Over.OverMorphism.ext
+    rw [← pointOfDerivation_infDerivation G v.1, ← pointOfDerivation_infDerivation G w.1]
+    exact pointOfDerivation_congr G
+      ((ι_comp_left_eq G v.2).trans (ι_comp_left_eq G w.2).symm)
+      (heq_of_pullbackCongr_inv_comp_homOfDerivation_eq G _ _ _ _ h)
+  · obtain ⟨D, hD⟩ := (homOfDerivation_bijective G (unitSection G)).2
+      ((Scheme.Modules.pullbackCongr (rfl : unitSection G = unitSection G)).hom.app
+        G.hom.cotangentSheaf ≫ φ)
+    let v : Scheme.dualNumbersOver S ⟶ G := Over.homMk (pointOfDerivation G (unitSection G) D)
+      (pointOfDerivation_comp_hom G _ D (unitSection_comp_hom G))
+    have hv : v ∈ infPoints G := by
+      rw [mem_infPoints]
+      apply Over.OverMorphism.ext
+      exact (ι_comp_pointOfDerivation G _ D).trans (one_left G).symm
+    refine ⟨⟨v, hv⟩, ?_⟩
+    rw [toLie, omegaHom_eq_homOfDerivation, pullbackCongr_inv_comp_homOfDerivation G
+      (ι_comp_left_eq G hv) rfl _ D (fun a ↦ heq_of_eq (zero_add _)), hD,
+      Iso.inv_hom_id_app_assoc]
 
 /-- The infinitesimal points of `G` are its Lie algebra. (blueprint: `sk-d-tangent`) -/
 noncomputable def lieEquiv : infPoints G ≃ Lie G :=
@@ -269,6 +559,10 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   sorry
+
+theorem lieEquiv_symm_add (x y : Lie G) :
+    (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
+  (lieEquiv G).injective (by simp [lieEquiv_mul])
 
 /-! ### The bracket as the mixed term of the commutator -/
 
@@ -283,7 +577,16 @@ theorem mem_mixedPoints {z : Scheme.dualNumbers₂Over S ⟶ G} :
 
 /-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
 noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
-  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by sorry⟩
+  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by
+    have hv := (mem_infPoints G).1 v.2
+    rw [mem_mixedPoints, Scheme.dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
+      Scheme.dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
+    exact ⟨rfl, rfl⟩⟩
+
+@[simp]
+theorem coe_toMixed (v : infPoints G) :
+    (toMixed G v : Scheme.dualNumbers₂Over S ⟶ G) = Scheme.dualNumbersMulOver S ≫ v.1 :=
+  rfl
 
 /-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
 `ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
@@ -335,6 +638,49 @@ noncomputable instance : LieRing (Lie G) where
 /-- `Lie(G)` is a Lie algebra over `Γ(S, 𝒪_S)`. (blueprint: `sk-d-tangent`) -/
 noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
   lie_smul := by sorry
+
+/-! ### Rescaling infinitesimal points -/
+
+omit [GrpObj G] in
+/-- Multiplying the morphism attached to a derivation by a global function `r` multiplies the
+derivation by `r`. -/
+theorem homOfDerivation_comp_unitSmul (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (r : Γ(S, ⊤)) :
+    homOfDerivation G g D ≫ Scheme.Modules.unitSmul r = homOfDerivation G g
+      (D.postcomp ((Scheme.Modules.pushforward g).map (Scheme.Modules.unitSmul r)).val) := by
+  rw [homOfDerivation, homOfDerivation, ← Adjunction.homEquiv_naturality_right_symm,
+    ← PresheafOfModules.Derivation.Universal.desc_comp]
+  exact congrArg _ (PresheafOfModules.sheafificationHomEquiv_symm_comp _ _ _).symm
+
+theorem dualNumbersScaleOver_comp_mem_infPoints (r : Γ(S, ⊤))
+    {v : Scheme.dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
+    Scheme.dualNumbersScaleOver S r ≫ v ∈ infPoints G := by
+  rw [mem_infPoints] at hv ⊢
+  rw [Scheme.dualNumbersιOver_comp_scaleOver_assoc, hv]
+
+/-- The rescaling `v ↦ v(rε)` of an infinitesimal point by a global function `r`. It is the
+multiplication by `r` on the Lie algebra (`toLie_infPointsScale`). -/
+noncomputable def infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) : infPoints G :=
+  ⟨Scheme.dualNumbersScaleOver S r ≫ v.1, dualNumbersScaleOver_comp_mem_infPoints G r v.2⟩
+
+theorem toLie_infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) :
+    toLie G (infPointsScale G r v) = r • toLie G v := by
+  rw [Scheme.Modules.homUnit_smul_def, toLie, toLie, Category.assoc, omegaHom_eq_homOfDerivation,
+    omegaHom_eq_homOfDerivation, homOfDerivation_comp_unitSmul]
+  refine pullbackCongr_inv_comp_homOfDerivation G _ _ _ _ fun {V} a ↦ heq_of_eq ?_
+  rw [PresheafOfModules.Derivation.postcomp_d_apply]
+  change (DualNumber.scale _ (v.1.left.app V.unop a)).snd =
+    (v.1.left.app V.unop a).snd * S.presheaf.map (homOfLE le_top).op r
+  rw [DualNumber.snd_scale, mul_comm]
+  rfl
+
+theorem lieEquiv_symm_smul (r : Γ(S, ⊤)) (x : Lie G) :
+    (lieEquiv G).symm (r • x) = infPointsScale G r ((lieEquiv G).symm x) := by
+  rw [Equiv.symm_apply_eq]
+  change _ = toLie G _
+  rw [toLie_infPointsScale]
+  exact congrArg (r • ·) ((lieEquiv G).apply_symm_apply x).symm
 
 /-! ### Functoriality -/
 
@@ -403,9 +749,17 @@ variable {G} {H : Over (Spec (.of R))} [GrpObj H]
 (blueprint: `sk-d-tangent`) -/
 noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅R⁆ Lie H where
   toFun x := lieEquiv H (infPointsMap f ((lieEquiv G).symm x))
-  map_add' := by sorry
-  map_smul' := by sorry
-  map_lie' := by sorry
+  map_add' x y := by
+    simp only [lieEquiv_symm_add, map_mul, lieEquiv_mul]
+  map_smul' c x := by
+    change _ = c • lieEquiv H _
+    rw [show c • x = (Scheme.ΓSpecIso (.of R)).inv.hom c • x from rfl, lieEquiv_symm_smul,
+      show infPointsMap f (infPointsScale G _ ((lieEquiv G).symm x)) =
+        infPointsScale H _ (infPointsMap f ((lieEquiv G).symm x)) from
+          Subtype.ext ((coe_infPointsMap_apply _ _).trans (Category.assoc _ _ _))]
+    exact toLie_infPointsScale H _ _
+  map_lie' {x y} := by
+    simp only [lie_def, Equiv.symm_apply_apply, infPointsMap_infBracket]
 
 theorem differential_apply (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
     differential f x = lieEquiv H (infPointsMap f ((lieEquiv G).symm x)) :=
@@ -499,19 +853,56 @@ theorem mem_tangentGroup {x : points G (DualNumber R)} :
 /-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` as a morphism over `Spec R`. -/
 noncomputable def dualNumbersToSpecOver :
     Scheme.dualNumbersOver (Spec (.of R)) ⟶ (Spec (.of (DualNumber R))).asOver (Spec (.of R)) :=
-  Over.homMk (Scheme.dualNumbersToSpec (.of R)) (by sorry)
+  Over.homMk (Scheme.dualNumbersToSpec (.of R)) (Scheme.dualNumbersToSpec_comp_specMap (.of R))
 
 instance : IsIso (dualNumbersToSpecOver (R := R)) := by
-  sorry
+  have : IsIso ((Over.forget _).map (dualNumbersToSpecOver (R := R))) :=
+    Scheme.isIso_dualNumbersToSpec (.of R)
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+/-- The point `ε ↦ 0` of `Spec R[ε]` is the closed immersion `i : S ⟶ S[ε]` through
+`(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem specMap_fstHom_asOver_eq :
+    (Spec.map (CommRingCat.ofHom (fstHom R R R).toRingHom)).asOver (Spec (.of R)) =
+      CartesianMonoidalCategory.toUnit _ ≫ Scheme.dualNumbersιOver (Spec (.of R)) ≫
+        dualNumbersToSpecOver := by
+  ext1
+  simp [dualNumbersToSpecOver, Scheme.ι_comp_dualNumbersToSpec, Over.toUnit_left,
+    specOverSpec_over]
+  rfl
+
+/-- An infinitesimal point gives a point of the tangent group through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup
+    {v : Scheme.dualNumbersOver (Spec (.of R)) ⟶ G} (hv : v ∈ GrpObj.infPoints G) :
+    inv dualNumbersToSpecOver ≫ v ∈ tangentGroup G := by
+  rw [mem_tangentGroup, points.map, specMap_fstHom_asOver_eq]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [(GrpObj.mem_infPoints G).1 hv, MonObj.comp_one]
+
+/-- A point of the tangent group gives an infinitesimal point through `(Spec R)[ε] ≅ Spec R[ε]`. -/
+theorem GrpObj.dualNumbersToSpecOver_comp_mem_infPoints {x : points G (DualNumber R)}
+    (hx : x ∈ tangentGroup G) :
+    dualNumbersToSpecOver ≫ x ∈ GrpObj.infPoints G := by
+  rw [mem_tangentGroup, points.map, specMap_fstHom_asOver_eq] at hx
+  let s : Over.mk (𝟙 (Spec (.of R))) ⟶ (Spec (.of R)).asOver (Spec (.of R)) :=
+    Over.homMk (𝟙 _) (by simp [specOverSpec_over])
+  have e : s ≫ CartesianMonoidalCategory.toUnit _ = 𝟙 _ :=
+    CartesianMonoidalCategory.toUnit_unique _ _
+  simp only [Category.assoc] at hx
+  have h := congrArg (s ≫ ·) hx
+  simp only [MonObj.comp_one] at h
+  rw [← Category.assoc s, e, Category.id_comp] at h
+  exact (GrpObj.mem_infPoints G).2 h
 
 /-- The infinitesimal points of `G` are the points with values in the ring of dual numbers reducing
 to the identity, through `(Spec R)[ε] ≅ Spec R[ε]`. -/
 noncomputable def GrpObj.infPointsEquivTangentGroup : GrpObj.infPoints G ≃* tangentGroup G where
-  toFun v := ⟨inv dualNumbersToSpecOver ≫ v.1, by sorry⟩
-  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, by sorry⟩
-  left_inv _ := by sorry
-  right_inv _ := by sorry
-  map_mul' _ _ := by sorry
+  toFun v :=
+    ⟨inv dualNumbersToSpecOver ≫ v.1, GrpObj.inv_dualNumbersToSpecOver_comp_mem_tangentGroup G v.2⟩
+  invFun x := ⟨dualNumbersToSpecOver ≫ x.1, GrpObj.dualNumbersToSpecOver_comp_mem_infPoints G x.2⟩
+  left_inv v := Subtype.ext (IsIso.hom_inv_id_assoc dualNumbersToSpecOver v.1)
+  right_inv x := Subtype.ext (IsIso.inv_hom_id_assoc dualNumbersToSpecOver x.1)
+  map_mul' _ _ := Subtype.ext (MonObj.comp_mul _ _ _)
 
 @[simp]
 theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :

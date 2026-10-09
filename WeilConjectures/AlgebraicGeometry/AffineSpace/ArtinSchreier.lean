@@ -31,6 +31,8 @@ Over a scheme `S` receiving a ring map from a finite field `k` with `q` elements
 
 - `AlgebraicGeometry.AffineSpace.isFinite_artinSchreierMap`: `AS_q` is finite for `q ≠ 1`.
 - `AlgebraicGeometry.AffineSpace.etale_artinSchreierMap`: `AS_q` is étale when `q = 0` on `S`.
+- `AlgebraicGeometry.AffineSpace.surjective_artinSchreierMap`: `AS_q` is surjective on the affine
+  line over a finite field with `q` elements.
 - `AlgebraicGeometry.AffineSpace.translation_comp_artinSchreierMap_of_finiteField`: `AS_q` is
   invariant under translation by the elements of a finite field with `q` elements.
 - `AlgebraicGeometry.AffineSpace.isIso_artinSchreierTorsorMap`: `AS_q` is a torsor under them.
@@ -312,6 +314,50 @@ lemma isIso_artinSchreierTorsorMap [Finite n] (k : Type u) [Field k] [Fintype k]
     simp only [Function.onFun, hR]
     rw [disjoint_iff, ← Scheme.basicOpen_mul, FiniteField.lagrangeIdem_mul_lagrangeIdem ψ hd hab,
       Scheme.basicOpen_zero]
+
+/-- Over a finite field `k` with `q` elements, every geometric point of `𝔸¹_k` lifts along the
+Artin–Schreier map `AS_q`: the equation `T ^ q - T = c` has a root in an algebraically closed
+field. -/
+lemma exists_comp_artinSchreierMap_eq (k : Type u) [Field k] [Fintype k] {Ω : Type u} [Field Ω]
+    [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ 𝔸(PUnit; Spec (.of k))) :
+    ∃ t : Spec (.of Ω) ⟶ 𝔸(PUnit; Spec (.of k)),
+      t ≫ artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k) = y := by
+  set c := (Scheme.ΓSpecIso (.of Ω)).hom.hom (y.appTop (coord (Spec (.of k)) PUnit.unit))
+  have hlt : (Polynomial.X : Polynomial Ω).degree <
+      ((Polynomial.X : Polynomial Ω) ^ Fintype.card k).degree := by
+    rw [Polynomial.degree_X, Polynomial.degree_X_pow]
+    exact_mod_cast Fintype.one_lt_card
+  obtain ⟨d, hd⟩ := IsAlgClosed.exists_root (Polynomial.X ^ Fintype.card k - Polynomial.X -
+    Polynomial.C c) (by
+      rw [Polynomial.degree_sub_C (by
+        rw [Polynomial.degree_sub_eq_left_of_degree_lt hlt, Polynomial.degree_X_pow]
+        exact_mod_cast Fintype.card_pos)]
+      rw [Polynomial.degree_sub_eq_left_of_degree_lt hlt, Polynomial.degree_X_pow]
+      exact_mod_cast Fintype.card_ne_zero)
+  simp only [Polynomial.IsRoot, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
+    Polynomial.eval_C] at hd
+  refine ⟨homOfVector (y ≫ 𝔸(PUnit; Spec (.of k)) ↘ Spec (.of k))
+    fun _ ↦ (Scheme.ΓSpecIso (.of Ω)).inv.hom d, hom_ext ?_ fun _ ↦ ?_⟩
+  · rw [Category.assoc, artinSchreierMap_over, homOfVector_over]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord, map_sub,
+      map_pow, homOfVector_appTop_coord, ← map_pow, ← map_sub, sub_eq_zero.mp hd]
+    exact (Scheme.ΓSpecIso (.of Ω)).hom_inv_id_apply _
+
+/-- Over a finite field `k` with `q` elements, the Artin–Schreier map `AS_q` of `𝔸¹_k` is
+surjective: every point has a geometric point over it, which lifts along `AS_q`
+(`AlgebraicGeometry.AffineSpace.exists_comp_artinSchreierMap_eq`). -/
+lemma surjective_artinSchreierMap (k : Type u) [Field k] [Fintype k] :
+    Function.Surjective (artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k)).base := by
+  intro x
+  obtain ⟨t, ht⟩ := exists_comp_artinSchreierMap_eq k
+    (Spec.map (CommRingCat.ofHom (algebraMap (𝔸(PUnit; Spec (.of k)).residueField x)
+      (AlgebraicClosure (𝔸(PUnit; Spec (.of k)).residueField x)))) ≫
+      𝔸(PUnit; Spec (.of k)).fromSpecResidueField x)
+  obtain ⟨p⟩ : Nonempty (Spec (.of (AlgebraicClosure (𝔸(PUnit; Spec (.of k)).residueField x)))) :=
+    inferInstance
+  refine ⟨t.base p, ?_⟩
+  rw [← Scheme.Hom.comp_apply, ht, Scheme.Hom.comp_apply]
+  exact Scheme.fromSpecResidueField_apply _ _
 
 end AlgebraicGeometry.AffineSpace
 

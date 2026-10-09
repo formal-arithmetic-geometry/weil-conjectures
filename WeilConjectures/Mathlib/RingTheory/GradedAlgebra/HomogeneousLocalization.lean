@@ -96,6 +96,10 @@ lemma val_algebraMap (r : R) :
     (algebraMap R (HomogeneousLocalization 𝒜 x) r).val = Localization.mk (algebraMap R A r) 1 :=
   rfl
 
+lemma val_sum {α : Type*} (t : Finset α) (f : α → HomogeneousLocalization 𝒜 x) :
+    (∑ i ∈ t, f i).val = ∑ i ∈ t, (f i).val :=
+  map_sum (algebraMap (HomogeneousLocalization 𝒜 x) (Localization x)) f t
+
 end HomogeneousLocalization
 
 namespace HomogeneousLocalization.Away

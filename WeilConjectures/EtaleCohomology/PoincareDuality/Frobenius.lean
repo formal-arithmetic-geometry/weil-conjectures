@@ -91,29 +91,29 @@ namespace Etale
 
 section Generic
 
-variable {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
-**The derived Poincaré pairing of an orientation is a morphism of Weil objects**: the form of
-`AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing` for an orientation `o`
-with twist `T`, a Weil datum `τ` on `T`, and the pairing
+**The derived Poincaré pairing of a purity isomorphism is a morphism of Weil objects**: the
+form of `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing` for a purity
+isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `τ` on `T`, and the pairing
 `AlgebraicGeometry.Etale.poincarePairing`. -/
 theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h)
-    (o : Orientation (ModuleCat.{u + 1} Λ) a d)
-    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
+    {T : DerivedCategoryModule Λ X}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
-    (τ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj o.twist ⟶ o.twist)
+    (τ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj T ⟶ T)
     (ψ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor _ X).obj
-        ((DerivedCategory.coefficientDual _ X).obj (op K))).obj o.twist) ⟶
-      ((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj o.twist)
-    (hψ : IsWeilPairing g φ ψ τ (twistedEvaluation o.twist K))
+        ((DerivedCategory.coefficientDual _ X).obj (op K))).obj T) ⟶
+      ((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj T)
+    (hψ : IsWeilPairing g φ ψ τ (twistedEvaluation T K))
     (hTr : IsWeilMorphism h (lowerShriekWeilDatum sq (shiftWeilDatum g τ (2 * d)))
-      (leftDerivedUpperStarUnitIso _ h).hom (smoothTrace o e)) :
+      (leftDerivedUpperStarUnitIso _ h).hom (smoothTrace γ)) :
     IsWeilPairing h (lowerShriekWeilDatum sq φ)
       (shiftWeilDatum h (lowerStarWeilDatum sq.toCommSq ψ) (2 * d))
-      (leftDerivedUpperStarUnitIso _ h).hom (poincarePairing a o e K) := by
+      (leftDerivedUpperStarUnitIso _ h).hom (poincarePairing a γ K) := by
   have h1 := ((isWeilPairing_mixedSupportCupProduct sq φ ψ).comp
     (hψ.rightDerivedLowerShriek_map sq)).shift_right (2 * d)
   refine ((h1.comp (isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv sq τ
@@ -148,7 +148,8 @@ namespace TateOrientation
 
 section Pairings
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+  {a : X ⟶ Y}
   [HasCompactification a] {d : ℕ}
 
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
@@ -244,7 +245,8 @@ end Pairings
 
 section Equivariance
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+  {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
@@ -269,7 +271,7 @@ theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h) (γ : TateOrient
     IsWeilPairing h (lowerShriekWeilDatum sq φ)
       (shiftWeilDatum h (lowerStarWeilDatum sq.toCommSq ψ) (2 * d))
       (leftDerivedUpperStarUnitIso _ h).hom (γ.poincarePairing K) :=
-  Etale.isWeilPairing_poincarePairing sq γ.toOrientation _ φ τ ψ hψ hTr
+  Etale.isWeilPairing_poincarePairing sq γ.dualizingComplexIso φ τ ψ hψ hTr
 
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
@@ -431,7 +433,8 @@ end Equivariance
 
 section Reciprocity
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+  {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- Blueprint `cor-pod-reciprocal-eigenvalues`: Reciprocal eigenvalues.

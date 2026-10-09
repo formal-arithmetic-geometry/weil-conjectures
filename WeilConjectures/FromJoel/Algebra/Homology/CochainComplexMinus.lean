@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+public import Mathlib.CategoryTheory.ObjectProperty.Shift
 
 /-!
 # C^-
@@ -33,6 +34,12 @@ instance [HasZeroMorphisms C] : (CochainComplex.minus C).IsClosedUnderIsomorphis
     rintro _ _ e ⟨n, _⟩
     exact ⟨n, isStrictlyLE_of_iso e n⟩
 
+/-- Bounded above complexes are stable under the shift. Through Mathlib's
+`ObjectProperty.hasShift` and `ObjectProperty.commShiftι`, this equips `C^-` with a shift and
+the inclusion `C^- ⥤ C(C)` with a commutation with shifts. -/
+instance [Preadditive C] : (CochainComplex.minus C).IsStableUnderShift ℤ where
+  isStableUnderShiftBy n := ⟨fun K ⟨k, _⟩ ↦ ⟨k - n, K.isStrictlyLE_shift k n _ (by omega)⟩⟩
+
 abbrev Minus [HasZeroMorphisms C] :=
   (CochainComplex.minus C).FullSubcategory
 
@@ -57,19 +64,6 @@ instance [CategoryWithHomology C] : (quasiIso C).RespectsIso := by
   dsimp [quasiIso]; infer_instance
 
 end
-
-variable [Preadditive C]
-
-noncomputable instance : HasShift (Minus C) ℤ :=
-  (fullyFaithfulι C).hasShift
-    (fun (n : ℤ) => ObjectProperty.lift _
-    (Minus.ι C ⋙ CategoryTheory.shiftFunctor (CochainComplex C ℤ) n) (by
-      rintro ⟨K, k, hk⟩
-      exact ⟨k - n, K.isStrictlyLE_shift k n _ (by omega)⟩))
-    (fun n => ObjectProperty.liftCompιIso _ _ _)
-
-instance : (ι C).CommShift ℤ :=
-  Functor.CommShift.ofHasShiftOfFullyFaithful _ _ _
 
 end Minus
 
