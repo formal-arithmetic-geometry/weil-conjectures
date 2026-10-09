@@ -1,0 +1,53 @@
+{
+ "id": "def-pc-acyclic-complex-modules",
+ "kind": "definition",
+ "title": "Cohomology sheaves and acyclic complexes of modules on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and $\\mathcal F^\\bullet$ a cochain complex of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules]. For $i\\in\\mathbf Z$ the $i$-th *cohomology sheaf* of $\\mathcal F^\\bullet$ is the $\\mathcal O$-module $H^i(\\mathcal F^\\bullet)=\\Ker(d^i)/\\Im(d^{i-1})$, the quotient taken in the abelian category of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]; a morphism of complexes $f$ induces morphisms $H^i(f)$, functorially. The complex $\\mathcal F^\\bullet$ is *acyclic* if $H^i(\\mathcal F^\\bullet)=0$ for all $i\\in\\mathbf Z$, equivalently if the sequence $\\mathcal F^{i-1}\\to\\mathcal F^i\\to\\mathcal F^{i+1}$ is exact in $\\Mod(\\mathcal O)$ for every $i$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 010V (homology-section-complexes), definition of H^i(A^\\bullet) before Definition 0115, and Definition 0115 (homology-definition-quasi-isomorphism-cochain) (2): acyclic; applied to A = Mod(O) as in literature/stacks-project/sites-cohomology.tex Definition 06YN"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Acyclic\\|def ExactAt\\|lemma exactAt_iff_isZero_homology\\|noncomputable def homology ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+   "results": "`HomologicalComplex.homology K i` (line 90), `HomologicalComplex.ExactAt K i := (K.sc i).Exact` (line 651), `exactAt_iff_isZero_homology` (line 670: `K.ExactAt i ↔ IsZero (K.homology i)`), `HomologicalComplex.Acyclic K := ∀ i, K.ExactAt i` (line 681)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'categoryWithHomology_of_abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+   "results": "`categoryWithHomology_of_abelian` (Abelian.lean:193): every short complex in an abelian category has homology, so `K.homology i` is defined for complexes of `SheafOfModules R`",
+   "date": "2026-10-09",
+   "verdict": "supports the specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.Acyclic",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+  "how": "specializes in one line: for `K : CochainComplex (SheafOfModules R) ℤ`, `K.homology i` is H^i and `K.Acyclic` is acyclicity (`∀ i, K.ExactAt i`, equivalent to `∀ i, IsZero (K.homology i)` by `exactAt_iff_isZero_homology`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-kflat-complex",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
