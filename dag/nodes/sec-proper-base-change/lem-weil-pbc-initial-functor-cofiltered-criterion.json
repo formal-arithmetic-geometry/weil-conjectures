@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-initial-functor-cofiltered-criterion",
+ "kind": "statement",
+ "title": "A functor out of a cofiltered category satisfying the two lifting conditions is initial; colimits over the opposite categories agree",
+ "statement": "(0) Let $\\mathcal I$ be a cofiltered category and $i\\in\\operatorname{Ob}(\\mathcal I)$; then the category $\\mathcal I/i$ whose objects are the morphisms $a:j\\to i$ and whose morphisms $a'\\to a$ ($a':j'\\to i$) are the $b:j'\\to j$ with $a\\circ b=a'$ is cofiltered. (1) Let $\\mathcal A$ be a cofiltered category, $\\mathcal B$ a category and $H:\\mathcal A\\to\\mathcal B$ a functor such that (i) for every object $y$ of $\\mathcal B$ there are an object $x$ of $\\mathcal A$ and a morphism $H(x)\\to y$, and (ii) for every object $y$ of $\\mathcal B$, every object $x$ of $\\mathcal A$ and every two morphisms $s,s':H(x)\\to y$ there is a morphism $t:x'\\to x$ in $\\mathcal A$ with $s\\circ H(t)=s'\\circ H(t)$. Then $H$ is initial (Stacks Categories, Definition of an initial functor, the dual of Definition 04E6), $\\mathcal B$ is cofiltered, and for every functor $M:\\mathcal B^{\\mathrm{op}}\\to\\mathcal C$ into any category [def-weil-pbc-category-colimit] the colimit of $M$ exists if and only if the colimit of $M\\circ H^{\\mathrm{op}}:\\mathcal A^{\\mathrm{op}}\\to\\mathcal C$ exists, and then the canonical map $\\varinjlim_{\\mathcal A^{\\mathrm{op}}}M\\circ H^{\\mathrm{op}}\\to\\varinjlim_{\\mathcal B^{\\mathrm{op}}}M$ (induced by the coprojections $\\iota_{H(x)}$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Definition Tag 04E6 (definition-cofinal) and Lemma Tag 04E7 (lemma-cofinal), applied to $H^{\\mathrm{op}}:\\mathcal A^{\\mathrm{op}}\\to\\mathcal B^{\\mathrm{op}}$; Definition (definition-initial) and Lemma Tag 002R (lemma-initial) are the dual statements"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor from a cofiltered category is initial if every object receives a map and parallel maps are equalized",
+   "results": "CategoryTheory.Functor.initial_of_exists_of_isCofiltered, Functor.initial_iff_of_isCofiltered, initial_iff_isCofiltered_costructuredArrow, initial_eval (Mathlib.CategoryTheory.Filtered.Final)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial, CategoryTheory.IsCofiltered",
+   "results": "IsCofiltered.of_initial (Mathlib.CategoryTheory.Limits.Final), Functor.initial_of_isCofiltered_costructuredArrow, initial_iff_isCofiltered_costructuredArrow, IsFiltered.initial_fst/snd, initial_eval (Mathlib.CategoryTheory.Filtered.Final), IsCofiltered.sequentialFunctor_initial",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'initial_of_exists_of_isCofiltered\\|IsCofiltered.over' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Final.lean; grep -n 'final_op_of_initial\\|def colimitIso\\|hasColimit_of_comp\\|IsCofiltered.of_initial' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Final.lean",
+   "results": "Filtered/Final.lean:124 Functor.initial_of_exists_of_isCofiltered ([IsCofilteredOrEmpty C], h₁ : ∀ d, ∃ c, Nonempty (F.obj c ⟶ d), h₂ : ∀ s s' : F.obj c ⟶ d, ∃ c' (t : c' ⟶ c), F.map t ≫ s = F.map t ≫ s'), :211 instance IsCofiltered.over; Limits/Final.lean:109 final_op_of_initial, :350 Final.colimitIso (stacks 04E7), :388 Final.hasColimit_of_comp, :1046 IsCofiltered.of_initial",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.initial_of_exists_of_isCofiltered, CategoryTheory.IsCofiltered.over, CategoryTheory.IsCofiltered.of_initial, CategoryTheory.Functor.final_op_of_initial, CategoryTheory.Functor.Final.colimitIso",
+  "file": "Mathlib/CategoryTheory/Filtered/Final.lean",
+  "how": "a few Mathlib lemmas, one per clause: (0) instance IsCofiltered.over (Filtered/Final.lean:211; Over i is the node's I/i); (1) Functor.initial_of_exists_of_isCofiltered (Filtered/Final.lean:124, hypotheses exactly (i), (ii)), IsCofiltered.of_initial (Mathlib/CategoryTheory/Limits/Final.lean:1046), final_op_of_initial (Limits/Final.lean:109) and Functor.Final.colimitIso (Limits/Final.lean:350, asIso (colimit.pre M H.op)) with Functor.Final.hasColimit_of_comp (line 388) and the instance Final.comp_hasColimit for existence"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Functor.initial_of_exists_of_isCofiltered (Filtered/Final.lean:124), IsCofiltered.over, IsCofiltered.of_initial, final_op_of_initial, Final.colimitIso."
+ }
+}

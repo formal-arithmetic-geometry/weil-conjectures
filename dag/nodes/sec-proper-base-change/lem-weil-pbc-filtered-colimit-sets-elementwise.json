@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+ "kind": "statement",
+ "title": "Elements of a filtered colimit of sets",
+ "statement": "Let $\\mathcal J$ be a small filtered category [def-weil-pbc-category-colimit] and $M:\\mathcal J\\to\\textit{Sets}$ a functor with colimit $(L,(\\iota_j)_j)$. Then: (1) every element of $L$ is $\\iota_j(x)$ for some $j\\in\\operatorname{Ob}(\\mathcal J)$ and $x\\in M(j)$; (2) for $x\\in M(j)$, $x'\\in M(j')$ one has $\\iota_j(x)=\\iota_{j'}(x')$ if and only if there are $k$ and morphisms $\\phi:j\\to k$, $\\phi':j'\\to k$ with $M(\\phi)(x)=M(\\phi')(x')$; (3) for $x,y\\in M(j)$ one has $\\iota_j(x)=\\iota_j(y)$ if and only if there is a morphism $\\phi:j\\to k$ with $M(\\phi)(x)=M(\\phi)(y)$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Section Tag 04AX (section-directed-colimits), the description of a filtered colimit of sets after Definition Tag 002V ('two elements are equal in the colimit if and only if they eventually become equal')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two elements of a filtered colimit of types are equal iff they become equal at some stage",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff, isColimit_eq_iff, isColimit_eq_iff' (Mathlib.CategoryTheory.Limits.Types.Filtered); Functor.ιColimitType_eq_iff_of_isFiltered (Limits.Types.ColimitTypeFiltered); Concrete.colimit_rep_eq_iff_exists",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "elements of a filtered colimit of sets are represented at some stage and two representatives are equal iff they become equal at a later stage",
+   "results": "Types.FilteredColimit.colimit_eq_iff, colimit_eq_iff_aux, isColimit_eq_iff, isColimit_eq_iff' (Mathlib.CategoryTheory.Limits.Types.Filtered), Concrete.colimit_rep_eq_iff_exists",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem colimit_eq_iff\\|theorem jointly_surjective\\|isColimit_eq_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Types/Filtered.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Types/Colimits.lean",
+   "results": "Types/Colimits.lean:224 jointly_surjective_of_isColimit, :241 jointly_surjective, :246 jointly_surjective'; Types/Filtered.lean:141 isColimit_eq_iff, :153 isColimit_eq_iff', :164 colimit_eq_iff (read: hypotheses [IsFilteredOrEmpty J], statements as in (1)-(3))",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Types.jointly_surjective, CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff, CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff'",
+  "file": "Mathlib/CategoryTheory/Limits/Types/Filtered.lean",
+  "how": "one Mathlib lemma per clause, for any colimit cocone t (ht : IsColimit t) of F : J ⥤ Type u: (1) Types.jointly_surjective (Mathlib/CategoryTheory/Limits/Types/Colimits.lean:241, no filteredness needed); (2) FilteredColimit.isColimit_eq_iff (Types/Filtered.lean:141, [IsFilteredOrEmpty J]); (3) FilteredColimit.isColimit_eq_iff' (Types/Filtered.lean:153)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Types.jointly_surjective, FilteredColimit.isColimit_eq_iff (Types/Filtered.lean:141), isColimit_eq_iff' (:153)."
+ }
+}

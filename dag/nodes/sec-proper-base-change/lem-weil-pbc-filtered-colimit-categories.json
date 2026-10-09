@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-categories",
+ "kind": "statement",
+ "title": "The filtered colimit of a system of categories; finite diagrams and morphisms come from a stage",
+ "statement": "Let $\\mathcal J$ be a small filtered category, for $j\\in\\operatorname{Ob}(\\mathcal J)$ let $\\mathcal C_j$ be a category whose objects and morphisms form sets, and for $\\phi:j\\to j'$ let $v_\\phi:\\mathcal C_j\\to\\mathcal C_{j'}$ be a functor, with $v_{\\mathrm{id}_j}=\\mathrm{id}$ and $v_{\\psi\\circ\\phi}=v_\\psi\\circ v_\\phi$ (equality of functors). Let $\\operatorname{Ob}(\\mathcal C)=\\varinjlim_{\\mathcal J}\\operatorname{Ob}(\\mathcal C_j)$ and $\\operatorname{Arrows}(\\mathcal C)=\\varinjlim_{\\mathcal J}\\operatorname{Arrows}(\\mathcal C_j)$ (filtered colimits of sets along the maps induced by the $v_\\phi$ [def-weil-pbc-category-colimit]), with coprojections written $v_j$, and let source, target, identities and composition of $\\mathcal C$ be induced by those of the $\\mathcal C_j$: $v_j(\\beta)\\circ v_j(\\alpha)=v_j(\\beta\\circ\\alpha)$ for composable $\\alpha,\\beta$ in $\\mathcal C_j$. Then: (1) these operations are well defined and make $\\mathcal C$ a category whose objects and morphisms form sets, and $v_j:\\mathcal C_j\\to\\mathcal C$ is a functor with $v_{j'}\\circ v_\\phi=v_j$ for $\\phi:j\\to j'$. (2) Every finite diagram of $\\mathcal C$ comes from a stage: given finitely many objects $X_1,\\dots,X_n$ and morphisms $\\alpha_1,\\dots,\\alpha_m$ of $\\mathcal C$ together with finitely many relations among them, each of the form $\\mathrm{source}(\\alpha_p)=X_q$, $\\mathrm{target}(\\alpha_p)=X_q$, $\\alpha_p\\circ\\alpha_q=\\alpha_r$ or $\\alpha_p=\\mathrm{id}_{X_q}$, there are $j$, objects $X_{q,j}$ and morphisms $\\alpha_{p,j}$ of $\\mathcal C_j$ with $v_j(X_{q,j})=X_q$, $v_j(\\alpha_{p,j})=\\alpha_p$ satisfying the same relations in $\\mathcal C_j$; moreover, two such lifts at stages $j$, $j'$ become equal at some stage $k$ after applying $v_\\phi$, $v_{\\phi'}$ for suitable $\\phi:j\\to k$, $\\phi':j'\\to k$. In particular every functor $D:\\mathcal D\\to\\mathcal C$ from a finite category is $v_j\\circ D_j$ for some $j$ and some functor $D_j:\\mathcal D\\to\\mathcal C_j$. (3) For $j\\in\\operatorname{Ob}(\\mathcal J)$ and $X,Y\\in\\operatorname{Ob}(\\mathcal C_j)$, the maps $\\operatorname{Mor}_{\\mathcal C_{j'}}(v_\\phi X,v_\\phi Y)\\to\\operatorname{Mor}_{\\mathcal C}(v_jX,v_jY)$, $\\beta\\mapsto v_{j'}(\\beta)$, for $\\phi:j\\to j'$ in the (filtered) category $j/\\mathcal J$ of morphisms out of $j$, induce a bijection $\\varinjlim_{\\phi:j\\to j'}\\operatorname{Mor}_{\\mathcal C_{j'}}(v_\\phi X,v_\\phi Y)\\xrightarrow{\\sim}\\operatorname{Mor}_{\\mathcal C}(v_jX,v_jY)$. (4) A morphism of $\\mathcal C$ is an isomorphism if and only if it is $v_j(\\gamma)$ for some $j$ and some isomorphism $\\gamma$ of $\\mathcal C_j$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories, Cat has colimits",
+   "results": "HasCardinalFilteredColimits.mk, Types.FilteredColimit.isColimitOf, hasFilteredColimitsOfSize_of_hasColimitsOfSize, HasFilteredColimits, hasColimitsOfShape_of_has_filtered_colimits: nothing describing a colimit of categories",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every finite diagram in a filtered colimit of categories lifts to some stage; hom set of colimit category is colimit of hom sets",
+   "results": "IsFiltered.of_hasFiniteColimits, filtered_colim_preservesFiniteLimits, HasFilteredColimitsOfSize.HasColimitsOfShape, IsFiltered.isSifted, Types.FilteredColimit.isColimitOf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of categories: objects and morphisms are filtered colimits of the objects and morphisms; hom sets of the colimit category are colimits of hom sets",
+   "results": "ColimitPresentation.instNonemptyTotalOfIsFiltered, instHasFilteredColimitsOfSizeFunctor, instHasFilteredColimitsInd, IndObjectPresentation.instIsFilteredI",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasColimits CategoryTheory.Cat",
+   "results": "CategoryTheory.Cat.instHasColimits (Mathlib.CategoryTheory.Category.Cat.Colimit)",
+   "date": "2026-10-10",
+   "verdict": "no match: existence of colimits in Cat only, constructed via nerves and the homotopy category (no description of objects/morphisms of a filtered colimit)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat, CategoryTheory.IsFiltered",
+   "results": "CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat (Mathlib.CategoryTheory.Filtered.Grothendieck) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Category/Cat/; sed -n 1,40p .../Cat/Colimit.lean; grep -rln IsFiltered ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Category/",
+   "results": "Cat/{Adjunction,AsSmall,CartesianClosed,Colimit,Limit,Op,Terminal}.lean; Colimit.lean: only 'instance : HasColimits Cat.{v, v} := hasColimits_of_reflective nerveFunctor'; no file of CategoryTheory/Category mentions IsFiltered",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

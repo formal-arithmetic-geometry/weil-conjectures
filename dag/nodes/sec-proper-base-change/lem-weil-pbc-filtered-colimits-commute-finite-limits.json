@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+ "kind": "statement",
+ "title": "Filtered colimits of sets and of abelian groups commute with finite limits",
+ "statement": "Let $\\mathcal I$ be a small filtered category [def-weil-pbc-category-colimit], $\\mathcal J$ a finite category (finitely many objects and morphisms) and $M:\\mathcal I\\times\\mathcal J\\to\\textit{Sets}$, $(i,j)\\mapsto M_{i,j}$, a functor. Then the canonical map $\\varinjlim_i\\varprojlim_jM_{i,j}\\to\\varprojlim_j\\varinjlim_iM_{i,j}$ (induced by the projections and coprojections) is a bijection. In particular filtered colimits of sets commute with finite products, fibre products and equalizers. The same holds for $M$ with values in abelian groups (and the map is then an isomorphism of abelian groups).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 002W (lemma-directed-commutes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimits commute with finite limits in the category of types",
+   "results": "CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types, colimitLimitIso, instPreservesFiniteLimitsFunctorColimOf... (Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit over filtered category commutes with finite limits of sets (Stacks 002W)",
+   "results": "isFiltered_of_nonempty_limit_colimit_to_colimit_limit (Filtered.OfColimitCommutesFiniteLimit), filtered_colim_preservesFiniteLimits_of_types, filtered_colim_preservesFiniteLimits (Limits.FilteredColimitCommutesFiniteLimit)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitLimitToLimitColimit",
+   "results": "colimitLimitToLimitColimit (Mathlib.CategoryTheory.Limits.ColimitLimit), ι_colimitLimitToLimitColimit_π and variants",
+   "date": "2026-10-10",
+   "verdict": "match (the canonical map; its bijectivity is colimitLimitToLimitColimit_isIso)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'colimitLimitToLimitColimit_isIso\\|filtered_colim_preservesFiniteLimits\\|variable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean; grep -n forget_preservesFilteredColimits ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Grp/FilteredColimits.lean; grep -n forget_preservesLimits ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Grp/Limits.lean",
+   "results": "FilteredColimitCommutesFiniteLimit.lean (docstring cites Stacks 002W): :324 instance colimitLimitToLimitColimit_isIso (variables :151-159: [SmallCategory J] [FinCategory J] [Small K] [IsFiltered K], F : J × K ⥤ Type v), :338 filtered_colim_preservesFiniteLimits_of_types, general concrete version filtered_colim_preservesFiniteLimits (:348ff); Grp/FilteredColimits.lean:213 forget_preservesFilteredColimits (to_additive: AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits); Grp/Limits.lean:409 AddCommGrpCat.forget_preservesLimits",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.colimitLimitToLimitColimit_isIso, CategoryTheory.Limits.filtered_colim_preservesFiniteLimits",
+  "file": "Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean",
+  "how": "exact for sets: colimitLimitToLimitColimit_isIso (line 324) for F : J × K ⥤ Type v with J finite and K small filtered (the roles of the two factors as in the node: Mathlib's K is the node's filtered I, Mathlib's J the node's finite J); for abelian groups, filtered_colim_preservesFiniteLimits (the concrete-category instance in the same file) with C = AddCommGrpCat, whose forgetful functor preserves filtered colimits (AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits, Mathlib/Algebra/Category/Grp/FilteredColimits.lean) and limits and reflects isomorphisms (AddCommGrpCat.forget_preservesLimits, Mathlib/Algebra/Category/Grp/Limits.lean:409); a few Mathlib lemmas, one per clause"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-of-sites",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: colimitLimitToLimitColimit_isIso (FilteredColimitCommutesFiniteLimit.lean:324) and filtered_colim_preservesFiniteLimits (:357)."
+ }
+}
