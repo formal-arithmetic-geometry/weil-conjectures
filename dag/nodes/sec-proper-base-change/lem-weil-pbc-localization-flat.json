@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-localization-flat",
+ "kind": "statement",
+ "title": "A localization is a flat algebra",
+ "statement": "Let $R$ be a commutative ring and $T\\subseteq R$ a multiplicative subset ($1\\in T$, $st\\in T$ for $s,t\\in T$). Let $\\lambda:R\\to R'$ be a homomorphism of commutative rings which is a localization of $R$ at $T$: (a) $\\lambda(t)$ is a unit for every $t\\in T$; (b) every element of $R'$ is $\\lambda(r)\\lambda(t)^{-1}$ with $r\\in R$, $t\\in T$; (c) $\\lambda(r)=0$ implies $tr=0$ for some $t\\in T$ (for instance $R'=T^{-1}R$, the ring of fractions $r/t$, with $\\lambda(r)=r/1$). Then $\\lambda$ is a flat ring map [def-weil-pbc-flat-ring-map]: $R'$ is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HT (1) (algebra-lemma-flat-localization, line 9196): the localization S^{-1}R is a flat R-algebra"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a commutative ring at a multiplicative subset is a flat algebra",
+   "results": "IsLocalization.flat (Mathlib.RingTheory.Flat.Localization), Localization.flat (instance, same module), Module.flat_iff_of_isLocalization, RingHom.Flat.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.flat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the localization map R → S⁻¹R makes S⁻¹R a flat R-module",
+   "results": "IsLocalization.flat, Localization.flat (Mathlib.RingTheory.Flat.Localization), Module.Flat.of_isLocalizedModule, Module.flat_iff_of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.flat"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem IsLocalization.flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Localization.lean",
+   "results": "line 37: theorem IsLocalization.flat : Module.Flat R S, for [IsLocalization p S] (variables lines 30-31)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.flat",
+  "file": "Mathlib/RingTheory/Flat/Localization.lean",
+  "line": 37,
+  "how": "exact: for [CommSemiring R] [CommSemiring S] [Algebra R S] (p : Submonoid R) [IsLocalization p S], `IsLocalization.flat S p : Module.Flat R S`; Mathlib's IsLocalization p S has the fields map_units, surj, exists_of_eq, which are (a), (b), (c) of the node, and a flat ring map in the sense of [def-weil-pbc-flat-ring-map] is Module.Flat R R' for the algebra structure given by λ. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-localization-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-localization-units-or-zero",
+ "kind": "statement",
+ "title": "Localization at units, or at a set containing 0",
+ "statement": "Let $R$ be a commutative ring and $T\\subseteq R$ a multiplicative subset ($1\\in T$, $st\\in T$ for $s,t\\in T$). Let $\\lambda:R\\to R'$ be a homomorphism of commutative rings which is a localization of $R$ at $T$: (a) $\\lambda(t)$ is a unit for every $t\\in T$; (b) every element of $R'$ is $\\lambda(r)\\lambda(t)^{-1}$ with $r\\in R$, $t\\in T$; (c) $\\lambda(r)=0$ implies $tr=0$ for some $t\\in T$ (for instance $R'=T^{-1}R$, the ring of fractions $r/t$, with $\\lambda(r)=r/1$). Then (1) $R'$ is the zero ring if and only if $0\\in T$; (2) if every element of $T$ is a unit of $R$, then $\\lambda$ is an isomorphism of rings (so $R'\\cong R$ as $R$-algebras).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "(1) Lemma Tag 00CQ (algebra-lemma-localization-zero, line 1111); (2) from the universal property, Proposition Tag 00CP (algebra-proposition-universal-property-localization, line 1083): the identity of R inverts T, giving g with g(λ(r))=r, and λ(g(r/t))=λ(r t^{-1})=r/t"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization at a submonoid containing zero is the zero ring (subsingleton)",
+   "results": "IsLocalization.subsingleton, IsLocalization.subsingleton_iff (Mathlib.RingTheory.Localization.Defs), Submonoid.LocalizationMap.subsingleton_iff, OreLocalization.subsingleton_iff, LocalizedModule.subsingleton",
+   "date": "2026-10-10",
+   "verdict": "match for (1): IsLocalization.subsingleton_iff"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization at a submonoid consisting of units is an isomorphism R ≃ S",
+   "results": "IsLocalization.atUnits (Mathlib.RingTheory.Localization.Basic), IsLocalization.at_units, IsLocalization.atUnit, IsLocalization.self, IsLocalization.atOne",
+   "date": "2026-10-10",
+   "verdict": "match for (2): IsLocalization.atUnits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a ring at a submonoid of units is isomorphic to the ring itself",
+   "results": "IsLocalization.atUnit, IsLocalization.atUnits (Mathlib.RingTheory.Localization.Basic), IsLocalization.atOne, localization_unit_isIso",
+   "date": "2026-10-10",
+   "verdict": "match for (2): IsLocalization.atUnits"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem subsingleton\\b\\|subsingleton_iff\\|def atUnits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Basic.lean",
+   "results": "Defs.lean:220 theorem subsingleton (h : 0 ∈ M) : Subsingleton S; Defs.lean:222 protected theorem subsingleton_iff : Subsingleton S ↔ 0 ∈ M; Basic.lean:309 noncomputable def atUnits (H : M ≤ IsUnit.submonoid R) : R ≃ₐ[R] S (built as AlgEquiv.ofBijective (Algebra.ofId R S))",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.subsingleton_iff, IsLocalization.atUnits",
+  "file": "Mathlib/RingTheory/Localization/Defs.lean",
+  "line": 222,
+  "how": "one Mathlib declaration per clause, for [IsLocalization M S] (fields map_units, surj, exists_of_eq = (a), (b), (c)): (1) `IsLocalization.subsingleton_iff : Subsingleton S ↔ 0 ∈ M` (Defs.lean:222; a commutative ring is the zero ring iff it is a subsingleton); (2) `IsLocalization.atUnits R M (H : M ≤ IsUnit.submonoid R) : R ≃ₐ[R] S` (Mathlib/RingTheory/Localization/Basic.lean:309), whose underlying map is `Algebra.ofId R S`, i.e. λ. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-localization-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

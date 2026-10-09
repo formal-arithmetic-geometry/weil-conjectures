@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-localization-regular",
  "kind": "statement",
  "title": "A localization map is regular",
- "statement": "Let $S$ be a commutative ring and $W\\subset S$ a multiplicative subset, with localization map $S\\to W^{-1}S$, $s\\mapsto s/1$ [def-weil-pbc-localization-at-prime]. Then $S\\to W^{-1}S$ is a regular ring map [def-weil-pbc-g-ring]. (Its fibre ring over a prime $\\mathfrak p\\subset S$ is $\\kappa(\\mathfrak p)$ if $\\mathfrak p\\cap W=\\emptyset$ and $0$ otherwise.)",
+ "statement": "Let $S$ be a commutative ring and $W\\subseteq S$ a multiplicative subset, and let $\\lambda:S\\to S'$ be a localization of $S$ at $W$: (a) $\\lambda(w)$ is a unit for every $w\\in W$; (b) every element of $S'$ is $\\lambda(s)\\lambda(w)^{-1}$ with $s\\in S$, $w\\in W$; (c) $\\lambda(s)=0$ implies $ws=0$ for some $w\\in W$ (for instance $S'=W^{-1}S$ with $s\\mapsto s/1$). Then $\\lambda$ is a regular ring map [def-weil-pbc-g-ring]. More precisely, for a prime $\\mathfrak p\\subset S$ with residue field $\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime], the fibre ring $S'\\otimes_S\\kappa(\\mathfrak p)$ is isomorphic as a $\\kappa(\\mathfrak p)$-algebra to $\\kappa(\\mathfrak p)$ if $\\mathfrak p\\cap W=\\emptyset$ and is the zero ring otherwise.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "proof of Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), sentence 'The localization R_m^ -> (R_m^)_{p'} is regular', stated without proof; flatness: algebra.tex Lemma Tag 00HT (1) (lemma-flat-localization)"
@@ -11,9 +11,97 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$\\lambda$ is flat [def-weil-pbc-flat-ring-map] by [lem-weil-pbc-localization-flat] applied to $R=S$, $T=W$, $R'=S'$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00HT (1) (lemma-flat-localization, line 9196)"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset S$ and let $\\psi:S\\to\\kappa(\\mathfrak p)=S_{\\mathfrak p}/\\mathfrak pS_{\\mathfrak p}$ be the canonical map [def-weil-pbc-localization-at-prime]. By [lem-weil-pbc-localization-base-change] (with $R=S$, $M=W$, $R'=S'$, $D=\\kappa(\\mathfrak p)$ via $\\psi$), the ring map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p)\\otimes_SS'$, $x\\mapsto x\\otimes1$, is a localization of $\\kappa(\\mathfrak p)$ at the multiplicative subset $\\psi(W)$. Composing with the swap isomorphism $\\kappa(\\mathfrak p)\\otimes_SS'\\cong S'\\otimes_S\\kappa(\\mathfrak p)$, $x\\otimes s'\\mapsto s'\\otimes x$, the structure map $\\kappa(\\mathfrak p)\\to F:=S'\\otimes_S\\kappa(\\mathfrak p)$, $x\\mapsto1\\otimes x$, of the fibre ring as a $\\kappa(\\mathfrak p)$-algebra is a localization of $\\kappa(\\mathfrak p)$ at $\\psi(W)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00DK (lemma-tensor-localization); the fibre ring as in More on Algebra Definition Tag 07BZ"
+   }
+  },
+  {
+   "text": "For $s\\in S$: $\\psi(s)=0$ iff $s\\in\\mathfrak p$. If $s\\in\\mathfrak p$ then $s/1\\in\\mathfrak pS_{\\mathfrak p}$. Conversely if $s/1=a/t$ in $S_{\\mathfrak p}$ with $a\\in\\mathfrak p$, $t\\notin\\mathfrak p$, then $u(st-a)=0$ for some $u\\notin\\mathfrak p$, so $ust=ua\\in\\mathfrak p$ and, $\\mathfrak p$ being prime with $u,t\\notin\\mathfrak p$, $s\\in\\mathfrak p$ [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section on localization (definition-localization, line 1069); written out by the agent"
+   }
+  },
+  {
+   "text": "If $\\mathfrak p\\cap W=\\emptyset$, then by Step 3 every $\\psi(w)$, $w\\in W$, is a nonzero element of the field $\\kappa(\\mathfrak p)$, hence a unit, so by [lem-weil-pbc-localization-units-or-zero] (2) and Step 2 the structure map $\\kappa(\\mathfrak p)\\to F$ is an isomorphism of $\\kappa(\\mathfrak p)$-algebras. If some $w\\in\\mathfrak p\\cap W$ exists, then $0=\\psi(w)\\in\\psi(W)$ by Step 3, so $F$ is the zero ring by [lem-weil-pbc-localization-units-or-zero] (1) and Step 2. This proves the last assertion of the statement.",
+   "uses": [
+    "lem-weil-pbc-localization-units-or-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00CQ (lemma-localization-zero) and Proposition Tag 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "$F$ is Noetherian [def-weil-pbc-noetherian-ring] and geometrically regular over $k=\\kappa(\\mathfrak p)$ [def-weil-pbc-g-ring]. Noetherian: by Step 4 $F$ is a field (ideals $0$ and $F$) or the zero ring (one ideal). Let $k'/k$ be a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension]. If $F\\cong k$ as $k$-algebras, then $k'\\otimes_kF\\cong k'\\otimes_kk\\cong k'$ ($a\\otimes b\\mapsto ab$), a field, hence a regular ring by [lem-weil-pbc-field-regular-ring] (regularity in the sense of [def-weil-regular-scheme] is invariant under ring isomorphisms). If $F=0$, then $k'\\otimes_kF=0$, which is Noetherian and has no prime ideal (its only ideal is the whole ring), so the condition that every localization at a prime is a regular local ring holds vacuously and $0$ is a regular ring [def-weil-regular-scheme].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 0382 (definition-geometrically-regular) with Lemma Tag 0381 (2); Proposition Tag 00OQ for n = 0 (a field is a regular ring)"
+   }
+  },
+  {
+   "text": "By Step 1 $\\lambda$ is flat, and by Step 5 every fibre ring $S'\\otimes_S\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$; so $\\lambda$ is a regular ring map by definition [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 07BZ (definition-regular)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-flat",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-units-or-zero",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 07PT (lemma-check-G-ring-maximal-ideals, line 12392): 'The localization R_m^ -> (R_m^)_{p'} is regular', stated without proof; steps written by the agent from Algebra 00HT (1), 00DK, 00CQ, 00CP, 0382, 00OQ and More on Algebra 07BZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +146,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-localization-regular",
+  "worker": "stage1",
+  "summary": "Stacks asserts the regularity of a localization without proof (07PT); proof written in 6 steps: flatness (00HT(1), new Mathlib leaf lem-weil-pbc-localization-flat = IsLocalization.flat); the fibre ring S'⊗κ(p) is a localization of κ(p) at ψ(W) (existing leaf lem-weil-pbc-localization-base-change, 00DK, plus the swap of factors); ker(S→κ(p)) = p (elementary); hence the fibre is κ(p) or 0 (new leaf lem-weil-pbc-localization-units-or-zero = IsLocalization.subsingleton_iff + IsLocalization.atUnits, 00CQ/00CP); geometric regularity: k'⊗_k k ≅ k' is a field, regular by the new leaf lem-weil-pbc-field-regular-ring (IsRegularRing via the Dedekind-domain instance; 00OQ with n=0), and k'⊗0 = 0 is regular vacuously (Noetherian, no primes); conclusion by 07BZ. Statement: the localization is now given by its three conditions (a)-(c) like the neighbouring nodes (def-weil-pbc-localization-at-prime defines only localization at a prime, not at an arbitrary W) and the fibre description is stated precisely as κ(p)-algebras; content unchanged. Mathlib searches of the item kept (no regular ring maps in Mathlib); source repository has no IsRegularRing/G-ring declarations."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps (Stacks 07PT asserts the fact without proof): flat (new Mathlib leaf IsLocalization.flat, Flat/Localization.lean:37, verified), fibre ring a localization of kappa(p) at the image of W (00DK leaf), kernel of S -> kappa(p) is p (elementary), fibre = kappa(p) or 0 (new leaf of two declarations: IsLocalization.subsingleton_iff Localization/Defs.lean:222 and IsLocalization.atUnits Basic.lean:309, verified), geometric regularity of a field and of the zero ring (new leaf by an instance chain: IsDedekindDomain gives IsRegularRing RegularLocalRing/Defs.lean:120, a field is a PID hence Dedekind DedekindDomain/Basic.lean:171; accepted as a few declarations), conclusion. Statement rewritten to define the localization by its conditions (a)-(c) instead of citing the localization-at-a-prime node; content unchanged; the citer's use (A^ -> (A^)_{p'}) still fits."
+ }
 }
