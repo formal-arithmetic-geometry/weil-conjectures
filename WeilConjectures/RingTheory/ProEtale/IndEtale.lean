@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.Etale.Finite
 public import WeilConjectures.RingTheory.ProEtale.IndZariski
 public import WeilConjectures.RingTheory.ProEtale.Etale
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
+public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 
 /-!
 # Ind-étale algebras
@@ -520,9 +521,6 @@ section FGColimitPresentation
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 
 namespace Subalgebra
-
-instance : Nonempty {A : Subalgebra R S // A.FG} :=
-  ⟨⊥, Subalgebra.fg_bot⟩
 
 instance : IsDirected {A : Subalgebra R S // A.FG} (· ≤ ·) :=
   ⟨fun A B ↦ ⟨⟨A.1 ⊔ B.1, A.2.sup B.2⟩,

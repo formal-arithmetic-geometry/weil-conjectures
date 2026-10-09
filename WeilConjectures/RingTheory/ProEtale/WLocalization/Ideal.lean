@@ -117,14 +117,14 @@ protected def Ideal.WLocalization : Type u :=
 
 namespace Ideal.WLocalization
 
-noncomputable instance commRing : CommRing I.WLocalization := fast_instance%
+noncomputable instance commRing : CommRing I.WLocalization :=
   inferInstanceAs <| CommRing <| Generalization 1 (I.map (algebraMap A (WLocalization A)))
 
 instance isWLocalRing : IsWLocalRing I.WLocalization :=
   inferInstanceAs <| IsWLocalRing <| Generalization 1 (I.map (algebraMap A (WLocalization A)))
 
 noncomputable instance algebraWLocalization : Algebra (WLocalization A) I.WLocalization :=
-  fast_instance% inferInstanceAs <| Algebra (WLocalization A) <|
+  inferInstanceAs <| Algebra (WLocalization A) <|
     Generalization 1 (I.map (algebraMap A (WLocalization A)))
 
 instance isLocalization :

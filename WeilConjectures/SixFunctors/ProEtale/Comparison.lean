@@ -25,7 +25,7 @@ are exactly those in the essential image of `ν^*`.
 
 ## Implementation notes
 
-The inclusion `AlgebraicGeometry.Scheme.toProEt` of small sites, the functors `ν^*` and `ν_*`,
+The inclusion `AlgebraicGeometry.toProEt` of small sites, the functors `ν^*` and `ν_*`,
 the adjunction `ν^* ⊣ ν_*` and the exactness of `ν^*` are
 `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`, sorry-free; this file states the
 remaining clauses of `sk-prop-sf-comparison` on top of them.

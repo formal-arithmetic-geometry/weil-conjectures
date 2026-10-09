@@ -55,7 +55,7 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 - `AlgebraicGeometry.Scheme.ProEt.mem_topology_of_openImmersion`: a sieve on `U : X.ProEt`
   containing a jointly surjective family of open immersions `Y i ⟶ U`
   (`AlgebraicGeometry.Scheme.ProEt.ofOpenImmersionHom`) is covering.
-- `AlgebraicGeometry.Scheme.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
+- `AlgebraicGeometry.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
   étale site into the small pro-étale site, which is fully faithful, representably flat and
   continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
 

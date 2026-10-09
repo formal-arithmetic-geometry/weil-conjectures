@@ -29,12 +29,32 @@ variable {P : Type u} [TopologicalSpace P] {f' : C(P, Y)} {g' : C(P, X)}
 
 section pullback
 
+instance T0Space.pullback [T0Space X] [T0Space Y] (f : C(X, S)) (g : C(Y, S)) :
+    T0Space (pullback (ofHom f) (ofHom g) : TopCat) :=
+  (homeoOfIso (pullbackIsoProdSubtype (ofHom f) (ofHom g))).symm.t0Space
 
 variable [T2Space S]
 
+instance QuasiSober.pullback [QuasiSober X] [QuasiSober Y] (f : C(X, S)) (g : C(Y, S)) :
+    QuasiSober (pullback (ofHom f) (ofHom g) : TopCat) :=
+  let _ := (homeoOfIso (prodIsoProd (of X) (of Y))).symm.quasiSober
+  (isClosedEmbedding_pullback_to_prod (ofHom f) (ofHom g)).quasiSober
 
+instance CompactSpace.pullback [CompactSpace X] [CompactSpace Y] (f : C(X, S)) (g : C(Y, S)) :
+    CompactSpace (pullback (ofHom f) (ofHom g) : TopCat) :=
+  let _ := (homeoOfIso (prodIsoProd (of X) (of Y))).symm.compactSpace
+  (isClosedEmbedding_pullback_to_prod (ofHom f) (ofHom g)).compactSpace
 
+instance PrespectralSpace.pullback [PrespectralSpace X] [PrespectralSpace Y]
+    (f : C(X, S)) (g : C(Y, S)) :
+    PrespectralSpace (pullback (ofHom f) (ofHom g) : TopCat) :=
+  let _ := (homeoOfIso (prodIsoProd (of X) (of Y))).symm.prespectralSpace
+  PrespectralSpace.of_isClosedEmbedding _ (isClosedEmbedding_pullback_to_prod (ofHom f) (ofHom g))
 
+instance SpectralSpace.pullback [SpectralSpace X] [SpectralSpace Y] (f : C(X, S)) (g : C(Y, S)) :
+    SpectralSpace (pullback (ofHom f) (ofHom g) : TopCat) :=
+  let _ := (homeoOfIso (prodIsoProd (of X) (of Y))).symm.spectralSpace
+  (isClosedEmbedding_pullback_to_prod (ofHom f) (ofHom g)).spectralSpace
 
 end pullback
 

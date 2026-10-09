@@ -62,10 +62,10 @@ namespace RestrictClopen
 
 variable {W W₁ W₂ : Clopens (PrimeSpectrum A)}
 
-instance commRing : CommRing (RestrictClopen W) := fast_instance%
+instance commRing : CommRing (RestrictClopen W) :=
   inferInstanceAs <| CommRing <| Localization.Away _
 
-instance algebra : Algebra A (RestrictClopen W) := fast_instance%
+instance algebra : Algebra A (RestrictClopen W) :=
   inferInstanceAs <| Algebra A <| Localization.Away _
 
 instance away : IsLocalization.Away (isIdempotentElemEquivClopens.symm W).val
@@ -257,33 +257,18 @@ variable {T : Type*} [TopologicalSpace T] [CompactSpace T] (S : DiscreteQuotient
   (f : C(T, ConnectedComponents (PrimeSpectrum A)))
 
 
-def Pullback := Restriction (Z S f)
 
 namespace Pullback
 
-instance commRing : CommRing (Pullback S f) :=
-  inferInstanceAs <| CommRing <| Restriction (Z S f)
 
-instance algebra' : Algebra (S → A) (Pullback S f) :=
-  inferInstanceAs <| Algebra (S → A) <| Restriction (Z S f)
 
-instance algebra : Algebra A (Pullback S f) :=
-  Algebra.compHom _ (RingHom.pi fun _ : S ↦ RingHom.id A)
 
-instance isScalarTower : IsScalarTower A (S → A) (Pullback S f) :=
-  .of_algebraMap_eq' rfl
 
 variable {T : Type u} [TopologicalSpace T] [CompactSpace T] (S : DiscreteQuotient T)
   (f : C(T, ConnectedComponents (PrimeSpectrum A)))
 
-instance indZariski' : Algebra.IndZariski (S → A) (Pullback S f) :=
-  inferInstanceAs <| Algebra.IndZariski (S → A) <| Restriction (Z S f)
 
-instance indZariski : Algebra.IndZariski A (Pullback S f) :=
-  .trans A (S → A) (Pullback S f)
 
-theorem bijectiveOnStalks_algebraMap : (algebraMap A (Pullback S f)).BijectiveOnStalks :=
-  Algebra.IndZariski.bijectiveOnStalks_algebraMap _ _
 
 -- Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting for 1.123
 

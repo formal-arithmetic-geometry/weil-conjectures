@@ -73,6 +73,17 @@ theorem Algebra.WeaklyEtale.isSeparable_residueField [Algebra.WeaklyEtale A B]
     (mem_separableClosure_iff.mpr (key s))
 
 
+/-- A weakly étale ring map induces algebraic residue field extensions. This is the shape
+of hypothesis required by the w-localization lemmas (Stacks 097A). -/
+theorem Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver [Algebra.WeaklyEtale A B]
+    (m : Ideal A) (q : Ideal B) [m.IsPrime] [q.IsPrime] [q.LiesOver m]
+    [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
+    [Localization.AtPrime.IsLiesOverAlgebra m q] :
+    Algebra.IsAlgebraic m.ResidueField q.ResidueField :=
+  have : Algebra.IsSeparable m.ResidueField q.ResidueField :=
+    Algebra.WeaklyEtale.isSeparable_residueField m q
+  inferInstance
+
 end ResidueField
 
 section BaseChangeSurjective
@@ -205,7 +216,7 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
       Algebra.IsAlgebraic m.ResidueField q'.ResidueField := by
     intro m q' _ hm _ _ _
     have : m.IsPrime := hm.isPrime
-    exact Algebra.WeaklyEtale.isAlgebraic_residueField m q'
+    exact Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver m q'
   -- Stacks 097A: closed points of `Spec D` are the preimage of those of `Spec C`.
   have hDclosed : zeroLocus ((J.map (algebraMap C D) : Ideal D) : Set D) =
       closedPoints (PrimeSpectrum D) :=

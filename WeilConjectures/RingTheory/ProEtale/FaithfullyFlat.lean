@@ -66,7 +66,10 @@ lemma flat_of_colimitPresentation {M : ModuleCat.{u} R}
       X₃ := pres.diag ⋙ tensorRight C.X₃
       f := pres.diag.whiskerLeft <| (curriedTensor (ModuleCat.{u} R)).flip.map C.f
       g := pres.diag.whiskerLeft <| (curriedTensor (ModuleCat.{u} R)).flip.map C.g
-      zero := by simp [← CategoryTheory.Functor.whiskerLeft_comp, ← Functor.map_comp, C.zero] }
+      zero := by
+        rw [← CategoryTheory.Functor.whiskerLeft_comp, ← Functor.map_comp, C.zero]
+        ext j : 2
+        simp }
   apply colim.exact_mapShortComplex (S := S)
       (hc₁ := isColimitOfPreserves _ pres.isColimit)
       (hc₂ := isColimitOfPreserves _ pres.isColimit)

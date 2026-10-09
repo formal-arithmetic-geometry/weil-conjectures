@@ -66,7 +66,44 @@ instance {C D E : Type*} [Category C] [Category D] [Category E] (F : C ⥤ D) (G
     (F ⋙ G).ReflectsEffectiveEpis where
   reflects _ hf := F.effectiveEpi_of_map _ (G.effectiveEpi_of_map _ hf)
 
+instance Functor.ReflectsEffectiveEpis.of_preservesLimitsOfShape {C D : Type*} [Category C]
+    [Category D] (F : C ⥤ D) [HasPullbacks C] [HasPullbacks D]
+    [PreservesLimitsOfShape WalkingCospan F] [ReflectsColimitsOfShape WalkingParallelPair F] :
+    F.ReflectsEffectiveEpis where
+  reflects {X Y} f hf := by
+    apply effectiveEpi_of_kernelPair
+    apply isColimitOfReflects F
+    let n : parallelPair (pullback.fst f f) (pullback.snd f f) ⋙ F ≅
+        parallelPair ((pullback.fst (F.map f) (F.map f))) (pullback.snd (F.map f) (F.map f)) := by
+      refine diagramIsoParallelPair _ ≪≫ NatIso.ofComponents (fun i ↦ ?_) fun f ↦ ?_
+      · match i with
+        | .one => exact Iso.refl (F.obj X)
+        | .zero => exact PreservesPullback.iso _ _ _
+      · rcases f
+        · simp only [comp_map, parallelPair_obj_zero, parallelPair_obj_one, parallelPair_map_left,
+            parallelPair_map_right, Iso.refl_hom, PreservesPullback.iso_hom,
+            pullbackComparison_comp_fst]
+          exact Category.comp_id _
+        · simp only [comp_map, parallelPair_obj_zero, parallelPair_obj_one, parallelPair_map_left,
+            parallelPair_map_right, Iso.refl_hom, PreservesPullback.iso_hom,
+            pullbackComparison_comp_snd]
+          exact Category.comp_id _
+        · simp only [comp_map, parallelPair_obj_zero, parallelPair_obj_one, parallelPair_map_left,
+            parallelPair_map_right, walkingParallelPairHom_id, map_id, Category.id_comp,
+            Category.comp_id]
+    refine IsColimit.precomposeInvEquiv n (F.mapCocone (Cofork.ofπ f pullback.condition)) ?_
+    let e : (Cocone.precompose n.inv).obj (F.mapCocone (Cofork.ofπ f pullback.condition)) ≅
+        Cofork.ofπ (F.map f) pullback.condition := by
+      refine Cocone.ext (Iso.refl _) fun j ↦ ?_
+      cases j <;> simp [n]
+    refine .ofIsoColimit ?_ e.symm
+    exact (regularEpiOfEffectiveEpi (F.map f)).isColimit
 
+lemma Preregular.of_hasPullbacks_of_effectiveEpi_fst {C : Type*} [Category C] [HasPullbacks C]
+    (h : ∀ {X Y S : C} (f : X ⟶ S) (g : Y ⟶ S), EffectiveEpi g → EffectiveEpi (pullback.fst f g)) :
+    Preregular C where
+  exists_fac f g :=
+    ⟨pullback f g, pullback.fst _ _, h _ _ ‹_›, pullback.snd _ _, pullback.condition.symm⟩
 
 end CategoryTheory
 
@@ -137,6 +174,16 @@ lemma Scheme.Hom.apply_fiberι {X Y : Scheme} (f : X ⟶ Y) (y : Y) (x : f.fiber
   rw [← Set.mem_singleton_iff, ← Set.mem_preimage, ← Scheme.Hom.range_fiberι]
   use x
 
+/-- Universal epimorphisms in the category of schemes are surjective. -/
+instance {X Y : Scheme} (f : X ⟶ Y) [Epi f]
+    [∀ {Z} (g : Z ⟶ Y), Epi (pullback.snd f g)] : Surjective f := by
+  constructor
+  intro y
+  let g := Y.fromSpecResidueField y
+  have h : Surjective (pullback.snd f g) := inferInstance
+  obtain ⟨x, hx⟩ := h.1 default
+  use (f.fiberι y).base x
+  simp
 
 lemma isIso_pushoutDesc_iff_epi {C : Type*} [Category C] {X Y : C} (f : X ⟶ Y) [HasPushout f f] :
     IsIso (pushout.desc (f := f) (g := f) (𝟙 _) (𝟙 _)) ↔ Epi f := by
@@ -294,6 +341,19 @@ lemma Scheme.Etale.epi_iff_surjective {S : Scheme} {X Y : S.Etale} (f : X ⟶ Y)
     Epi f ↔ Surjective f.left :=
   ⟨fun _ ↦ Over.surjective_of_epi_of_isOpenMap f.left.isOpenMap, fun _ ↦ inferInstance⟩
 
+/-- The small étale site of a scheme is preregular. -/
+instance Scheme.Etale.preregular (S : Scheme.{u}) : Preregular S.Etale := by
+  apply Preregular.of_hasPullbacks_of_effectiveEpi_fst
+  intro X Y Z f g hg
+  have : Surjective (pullback.fst f g).left := by
+    rw [← MorphismProperty.Over.forget_comp_forget_map, ← pullbackComparison_comp_fst]
+    rw [MorphismProperty.cancel_left_of_respectsIso (P := @Surjective)]
+    simp only [MorphismProperty.Over.forget_comp_forget_map]
+    infer_instance
+  infer_instance
 
+/-- The small étale site of a scheme is precoherent. -/
+lemma Scheme.Etale.precoherent (S : Scheme.{u}) : Precoherent S.Etale :=
+  inferInstance
 
 end AlgebraicGeometry

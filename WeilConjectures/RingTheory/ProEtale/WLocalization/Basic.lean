@@ -42,10 +42,10 @@ namespace Generalization
 
 variable (f : A) (I : Ideal A)
 
-instance : CommRing (Generalization f I) := fast_instance%
+instance : CommRing (Generalization f I) :=
   inferInstanceAs <| CommRing <| Localization (Generalization.submonoid f I)
 
-instance : Algebra A (Generalization f I) := fast_instance%
+instance : Algebra A (Generalization f I) :=
   inferInstanceAs <| Algebra A <| Localization (Generalization.submonoid f I)
 
 instance : IsLocalization (Generalization.submonoid f I) (Generalization f I) :=
@@ -435,11 +435,11 @@ lemma ProdStrata.ext {E : Finset A} (x y : ProdStrata E) (h : ∀ i, x i = y i) 
   ext i
   exact h i
 
-instance (E : Finset A) : CommRing (ProdStrata E) := fast_instance%
+instance (E : Finset A) : CommRing (ProdStrata E) :=
   inferInstanceAs <| CommRing <|
     ∀ (i : Stratification.Index E), Generalization i.function i.ideal
 
-instance (E : Finset A) : Algebra A (ProdStrata E) := fast_instance%
+instance (E : Finset A) : Algebra A (ProdStrata E) :=
   inferInstanceAs <| Algebra A <|
     ∀ (i : Stratification.Index E), Generalization i.function i.ideal
 
