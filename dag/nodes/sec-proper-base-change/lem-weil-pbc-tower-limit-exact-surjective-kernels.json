@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+ "kind": "statement",
+ "title": "Inverse limits of a tower of short exact sequences whose kernels have surjective transition maps",
+ "statement": "Let $R$ be a commutative ring. For an inverse system $(P_n)_{n\\ge1}$ of $R$-modules ($R$-linear transition maps $P_{n+1}\\to P_n$, hence composites $P_m\\to P_n$ for $m\\ge n$) let $\\varprojlim_nP_n\\subseteq\\prod_nP_n$ be the $R$-module of compatible sequences, with the coordinate projections $\\varprojlim_nP_n\\to P_m$. (a) If all transition maps $K_{n+1}\\to K_n$ of an inverse system $(K_n)_{n\\ge1}$ of $R$-modules are surjective, then every projection $\\varprojlim_nK_n\\to K_m$ ($m\\ge1$) is surjective. (b) Let $0\\to K_n\\xrightarrow{u_n}B_n\\xrightarrow{v_n}C_n\\to0$, $n\\ge1$, be short exact sequences of $R$-modules such that $(u_n)$ and $(v_n)$ are morphisms of inverse systems $(K_n)\\to(B_n)\\to(C_n)$ (they commute with the transition maps). Then $0\\to\\varprojlim_nK_n\\xrightarrow{\\varprojlim u_n}\\varprojlim_nB_n\\xrightarrow{\\varprojlim v_n}\\varprojlim_nC_n$ is exact, and if moreover all transition maps $K_{n+1}\\to K_n$ are surjective, then $\\varprojlim v_n$ is surjective, so that $0\\to\\varprojlim K_n\\to\\varprojlim B_n\\to\\varprojlim C_n\\to0$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 03CA (lemma-Mittag-Leffler) for (b), the system (K_n) with surjective transition maps satisfying its hypothesis with c(i) = i; Homology, Lemma 02N1 (homology-lemma-Mittag-Leffler, homology.tex) (1) and (3) with Definition 02N0 (homology-definition-Mittag-Leffler); (a) is used without proof in Cohomology of Schemes, proof of Lemma 087W (coherent.tex line 6290: 'As the transition maps are surjective, we see that M -> M_1 is surjective')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of short exact sequence of inverse systems of modules is exact when the kernel system has surjective transition maps (Mittag-Leffler)",
+   "results": "CategoryTheory.ShortComplex.exact_of_f_is_kernel, CategoryTheory.ShortComplex.moduleCat_exact_iff_ker_sub_range (Mathlib.Algebra.Homology.ShortComplex.*), Module.DirectLimit.of.zero_exact, InverseSystem.isNatEquiv_piEquivLim (Mathlib.Order.DirectedInverseSystem), CategoryTheory.Functor.IsMittagLeffler.toPreimages (Mathlib.CategoryTheory.CofilteredSystem): none about limits of short exact sequences",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mittag-Leffler: if 0 -> A_n -> B_n -> C_n -> 0 are exact and A_{n+1} -> A_n surjective then lim B_n -> lim C_n is surjective",
+   "results": "five lemmas (Mathlib.Algebra.FiveLemma), ShortComplex.ShortExact.surjective_g; CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (Mathlib.CategoryTheory.Limits.Types.Images:111: for F : ℕᵒᵖ ⥤ Type with surjective maps F(n+1) -> F(n), the projection of a limit cone to F(0) is surjective; the concrete-category version CategoryTheory.Limits.surjective_π_app_zero_of_surjective_map, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean:99)",
+   "date": "2026-10-10",
+   "verdict": "partial: (a) for the index 0 only (any m by reindexing the tower, not one line); (b) not found"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map",
+   "results": "that declaration only (Mathlib.CategoryTheory.Limits.Types.Images), type read: surjectivity of c.π.app (op 0) for a limit cone over ℕᵒᵖ with surjective successor maps",
+   "date": "2026-10-10",
+   "verdict": "partial for (a), no match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Mittag\\|mittag' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'IsMittagLeffler' (theorem|lemma|def) Mathlib; grep -rn 'surjective_π_app\\|limit.*exact' Mathlib/CategoryTheory/Limits Mathlib/Algebra/Category/ModuleCat Mathlib/Algebra/Homology",
+   "results": "CategoryTheory/CofilteredSystem.lean (IsMittagLeffler for functors to Type, isMittagLeffler_of_surjective line 160, nonempty sections; no exactness of limits of modules); RingTheory/AdicCompletion/Exactness.lean ('proven directly without using Mittag-Leffler systems', only for AdicCompletion.map); Limits/Types/Images.lean and Limits/ConcreteCategory/Basic.lean: surjective_π_app_zero_of_surjective_map",
+   "date": "2026-10-10",
+   "verdict": "no match for (b); partial for (a)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-modules-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

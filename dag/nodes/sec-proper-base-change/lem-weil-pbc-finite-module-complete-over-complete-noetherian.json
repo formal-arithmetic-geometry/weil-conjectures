@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+ "kind": "statement",
+ "title": "A finite module over a Noetherian ring complete along an ideal is complete",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $J\\subseteq R$ an ideal such that $R$ is $J$-adically complete [def-weil-pbc-adically-complete-ring]. Let $N$ be a finitely generated $R$-module [def-weil-finitely-generated-module]. Then $N$ is $J$-adically complete: the canonical $R$-linear map $N\\to\\varprojlim_nN/J^nN$, $x\\mapsto(x\\bmod J^nN)_n$, into the module of compatible sequences is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00MA (lemma-completion-tensor) (3): N^ = N (x)_R R^, applied with R -> R^ bijective; equivalently Lemma 031B (lemma-when-finite-module-complete-over-complete-ring) with the Krull intersection theorem (Lemma 00IP, lemma-intersect-powers-ideal-module-zero) for J in the Jacobson radical (Lemma 05GI)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module over Noetherian ring that is I-adically complete is I-adically complete",
+   "results": "IsAdicComplete, IsAdicComplete.mk, AdicCompletion, IsPrecomplete (Mathlib.RingTheory.AdicCompletion.Basic), isNoetherian_of_isNoetherianRing_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian (Mathlib.RingTheory.AdicCompletion.AsTensorProduct:320: for Noetherian R and finite M, AdicCompletion I R ⊗ M -> AdicCompletion I M bijective, Stacks 00MA (3))",
+   "date": "2026-10-10",
+   "verdict": "no match (00MA (3) is there; the complete case needs composing it with the bijection R -> AdicCompletion I R and of_bijective_iff, several lines)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite module over a Noetherian ring which is complete with respect to an ideal I is itself I-adically complete (IsAdicComplete I M)",
+   "results": "IsAdicComplete.toIsPrecomplete, IsAdicComplete, isAdicComplete_iff, IsAdicComplete.toIsHausdorff, IsAdic.isPrecomplete_iff, AdicCompletion.instIsHausdorff (Mathlib.RingTheory.AdicCompletion.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete _ _, Module.Finite _ _ ; and IsAdicComplete _ _, Module.Finite _ _, IsNoetherianRing _",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAdicComplete' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep 'theorem\\|lemma\\|instance'; grep -rn 'IsPrecomplete' (theorem|lemma|instance); read RingTheory/AdicCompletion/Noetherian.lean and AsTensorProduct.lean",
+   "results": "IsHausdorff.of_le_jacobson (Noetherian.lean:23: Noetherian R, finite M, I <= jacobson ⊥ gives IsHausdorff I M, i.e. the Hausdorff half), IsAdicComplete.le_jacobson_bot (Basic.lean:870), ofTensorProduct_bijective_of_finite_of_isNoetherian (AsTensorProduct.lean:320), of_bijective_iff (Basic.lean:647); no instance or theorem giving IsAdicComplete I M or IsPrecomplete I M for finite M over complete Noetherian R",
+   "date": "2026-10-10",
+   "verdict": "no match; Lean candidates: IsHausdorff.of_le_jacobson + IsAdicComplete.le_jacobson_bot for injectivity, ofTensorProduct_surjective_of_finite / ofTensorProduct_bijective_of_finite_of_isNoetherian for surjectivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-modules-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
