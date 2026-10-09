@@ -11,8 +11,51 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Use the plus-construction realization of sheafification from [lem-weil-pbc-sheafification-plus-theorem], which identifies the universal-property sheafification $\\mathcal F^\\#$ with $\\mathcal F^{++}$. For $s\\in\\mathcal F^\\#(U)$, the definition of the second plus construction gives a covering of $U$ on which $s$ is represented by sections of $\\mathcal F^+$; refine each of those covering families by the first plus construction, so that on a covering $\\{U_i\\to U\\}$ the restriction of $s$ is represented by an actual section $s_i\\in\\mathcal F(U_i)$. On $U_i\\times_UU_j$, equality of the two representatives in $\\mathcal F^+$ means, by the common-refinement relation in the plus construction, that a further covering has equal pullbacks of $s_i$ and $s_j$. This is exactly the local representation and overlap condition of the statement; it is the construction in Sites, Lemma Tag 00WK.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-plus-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 00WK (lemma-sections-sheafification), first paragraph, using the plus construction of Section 7.10"
+   }
+  },
+  {
+   "text": "Conversely, suppose that $\\{U_i\\to U\\}$ and $s_i\\in\\mathcal F(U_i)$ satisfy the stated overlap condition. Their images $\\theta^2(s_i)\\in\\mathcal F^\\#(U_i)$ agree after pulling back to a covering of every $U_i\\times_UU_j$: the further-cover equality of the $s_i$ is preserved by the sheafification map. Thus the family $(\\theta^2(s_i))_i$ is descent data for the sheaf $\\mathcal F^\\#$, whose sheaf property and identification with $\\mathcal F^{++}$ are supplied by [lem-weil-pbc-sheafification-plus-theorem]; the equalizer sheaf condition gives a unique $s\\in\\mathcal F^\\#(U)$ restricting to it. The same uniqueness also shows that the section is independent of all refinements used to witness the overlap condition. This is the converse in Lemma Tag 00WK.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-plus-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem Tag 00WB, part (4), and Lemma Tag 00WK (lemma-sections-sheafification), converse"
+   }
+  },
+  {
+   "text": "For the final clause, let $p,q\\in\\mathcal F(U)$ and assume $\\theta^2(p)=\\theta^2(q)$. Regard $p$ and $q$ first as the canonical sections of $\\mathcal F^+(U)$. The separatedness assertion and injectivity of $\\mathcal F^+\\to\\mathcal F^{++}$ in Theorem Tag 00WB(1)--(2), recorded as [lem-weil-pbc-sheafification-plus-separated], imply that the two $\\mathcal F^+$-representatives are equal. By the definition of equality in $\\mathcal F^+$, each such equality has a covering refinement on which the restrictions of $p$ and $q$ agree in $\\mathcal F$. Composing the refinements is a covering by the site axioms [def-weil-pbc-sites-and-cohomology], and on it $p|_{U_i}=q|_{U_i}$, as required.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-separated",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem Tag 00WB, part (1), and Lemma Tag 00WK; the refinement argument is the common-refinement paragraph in the proof of 00WB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-plus-separated",
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
@@ -49,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +112,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-sheafification-sections-local",
+  "worker": "stage1",
+  "summary": "Split the sheafification-sections statement into the plus-construction representation and overlap argument from Sites 00WK, the converse descent argument using the public 00WB theorem-plus node, and the local-equality corollary using first-plus separatedness together with injectivity into double plus. Added the public unsplit reusable node lem-weil-pbc-sheafification-plus-theorem, citing the existing plus-separated node and recording four Mathlib searches; no Lean was written or compiled."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 2nd delivery repairs the return: new unsplit node for Sites 00WB (theorem-plus: F^+ separated, F^++ a sheaf, F -> F^++ the universal sheafification); steps 1-2 cite it, step 3 the separatedness node; 00WK argument correct."
+ }
 }
