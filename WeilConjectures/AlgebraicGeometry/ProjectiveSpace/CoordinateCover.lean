@@ -356,4 +356,100 @@ end Extension
 
 end Scheme.CoordinateCover
 
+namespace Proj
+
+open HomogeneousLocalization
+
+variable {σ' : Type u} {A : Type u} [CommRing A] [SetLike σ' A] [AddSubgroupClass σ' A]
+  (𝒜 : ℕ → σ') [GradedRing 𝒜] {d : ℕ} {f g h : A}
+
+/-- The ratio `g / f` of two homogeneous elements of the same degree, a function on the basic
+open `D₊(f)` of `Proj 𝒜`. -/
+def ratio (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 d) : Γ(Proj 𝒜, basicOpen 𝒜 f) :=
+  awayToSection 𝒜 f (Away.mk 𝒜 hf 1 g (by simpa using hg))
+
+@[simp]
+lemma ratio_self (hf : f ∈ 𝒜 d) : ratio 𝒜 hf hf = 1 := by
+  simp [ratio, Away.mk_self]
+
+lemma basicOpen_ratio (hd : 0 < d) (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 d) :
+    (Proj 𝒜).basicOpen (ratio 𝒜 hf hg) = basicOpen 𝒜 f ⊓ basicOpen 𝒜 g := by
+  have e : (⊤ : (Spec (.of (Away 𝒜 f))).Opens) ≤ awayι 𝒜 f hf hd ⁻¹ᵁ basicOpen 𝒜 f := by
+    rw [← opensRange_awayι 𝒜 f hf hd]; exact (Scheme.Hom.preimage_opensRange _).ge
+  have h₁ : awayι 𝒜 f hf hd ⁻¹ᵁ (Proj 𝒜).basicOpen (ratio 𝒜 hf hg) =
+      awayι 𝒜 f hf hd ⁻¹ᵁ basicOpen 𝒜 g := by
+    have := Scheme.basicOpen_appLE (awayι 𝒜 f hf hd) ⊤ (basicOpen 𝒜 f) e (ratio 𝒜 hf hg)
+    rw [top_inf_eq] at this
+    rw [← this, awayι_preimage_basicOpen 𝒜 hf hd hg hd]
+    have h2 := ConcreteCategory.congr_hom (awayToSection_awayι_appLE 𝒜 hf hd)
+      (Away.mk 𝒜 hf 1 g (by simpa using hg))
+    rw [CommRingCat.comp_apply] at h2
+    rw [ratio, h2, basicOpen_eq_of_affine]
+    have hpow : (Away.mk 𝒜 hf 1 g (by simpa using hg)) ^ d =
+        Away.isLocalizationElem hf hg := by
+      rw [Away.mk_pow]
+      simp only [mul_one]
+    rw [← hpow, PrimeSpectrum.basicOpen_pow _ _ hd]
+  calc (Proj 𝒜).basicOpen (ratio 𝒜 hf hg)
+      = (awayι 𝒜 f hf hd).opensRange ⊓ (Proj 𝒜).basicOpen (ratio 𝒜 hf hg) := by
+        rw [opensRange_awayι, inf_eq_right.mpr ((Proj 𝒜).basicOpen_le _)]
+    _ = (awayι 𝒜 f hf hd).opensRange ⊓ basicOpen 𝒜 g := by
+        rw [← Scheme.Hom.image_preimage_eq_opensRange_inf, h₁,
+          Scheme.Hom.image_preimage_eq_opensRange_inf]
+    _ = basicOpen 𝒜 f ⊓ basicOpen 𝒜 g := by rw [opensRange_awayι]
+
+lemma ratio_mul (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 d) (hh : h ∈ 𝒜 d) :
+    (Proj 𝒜).presheaf.map (homOfLE (inf_le_left :
+        basicOpen 𝒜 f ⊓ basicOpen 𝒜 g ≤ basicOpen 𝒜 f)).op (ratio 𝒜 hf hh) =
+      (Proj 𝒜).presheaf.map (homOfLE (inf_le_left :
+        basicOpen 𝒜 f ⊓ basicOpen 𝒜 g ≤ basicOpen 𝒜 f)).op (ratio 𝒜 hf hg) *
+      (Proj 𝒜).presheaf.map (homOfLE (inf_le_right :
+        basicOpen 𝒜 f ⊓ basicOpen 𝒜 g ≤ basicOpen 𝒜 g)).op (ratio 𝒜 hg hh) := by
+  have e : basicOpen 𝒜 (g * f) = basicOpen 𝒜 f ⊓ basicOpen 𝒜 g := by
+    rw [basicOpen_mul, inf_comm]
+  refine Scheme.eq_of_map_eq_of_eq e ?_
+  rw [map_mul]
+  simp only [Scheme.presheaf_map_map, ratio]
+  have hF := ConcreteCategory.congr_hom
+    (awayMap_awayToSection 𝒜 hg (mul_comm g f)) (Away.mk 𝒜 hf 1 h (by simpa using hh))
+  have hF' := ConcreteCategory.congr_hom
+    (awayMap_awayToSection 𝒜 hg (mul_comm g f)) (Away.mk 𝒜 hf 1 g (by simpa using hg))
+  have hG := ConcreteCategory.congr_hom
+    (awayMap_awayToSection 𝒜 hf (rfl : g * f = g * f)) (Away.mk 𝒜 hg 1 h (by simpa using hh))
+  simp only [ConcreteCategory.comp_apply] at hF hF' hG
+  rw [← hF, ← hF', ← hG, ← map_mul]
+  congr 1
+  exact (awayMap_mk_one_eq_mul 𝒜 hg hf _).trans (mul_comm _ _)
+
+end Proj
+
+namespace Scheme.CoordinateCover
+
+/-- The coordinate cover attached to a morphism `ρ : X ⟶ Proj 𝒜` and a family of homogeneous
+elements `fᵢ` of the same positive degree whose basic opens cover the image of `ρ`: the charts are
+the preimages of the `D₊(fᵢ)` and the ratios are the pullbacks of the functions `fⱼ / fᵢ`. -/
+def ofProj {X : Scheme.{u}} {ι : Type u} {σ' A : Type u} [CommRing A] [SetLike σ' A]
+    [AddSubgroupClass σ' A] (𝒜 : ℕ → σ') [GradedRing 𝒜] (ρ : X ⟶ Proj 𝒜) {d : ℕ} (hd : 0 < d)
+    (f : ι → A) (hf : ∀ i, f i ∈ 𝒜 d) (hcov : ⨆ i, ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i) = ⊤) :
+    X.CoordinateCover ι where
+  U i := ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i)
+  ratio i j := ρ.app _ (Proj.ratio 𝒜 (hf i) (hf j))
+  ratio_self i := by simp
+  basicOpen_ratio i j := by
+    rw [← Scheme.preimage_basicOpen, Proj.basicOpen_ratio 𝒜 hd]
+    rfl
+  ratio_mul i j l := by
+    have := congrArg (ρ.app _) (Proj.ratio_mul 𝒜 (hf i) (hf j) (hf l))
+    rw [map_mul] at this
+    simp only [← CommRingCat.comp_apply, ρ.naturality] at this
+    exact this
+  iSup_U := hcov
+
+lemma ofProj_U {X : Scheme.{u}} {ι : Type u} {σ' A : Type u} [CommRing A] [SetLike σ' A]
+    [AddSubgroupClass σ' A] (𝒜 : ℕ → σ') [GradedRing 𝒜] (ρ : X ⟶ Proj 𝒜) {d : ℕ} (hd : 0 < d)
+    (f : ι → A) (hf : ∀ i, f i ∈ 𝒜 d) (hcov : ⨆ i, ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i) = ⊤) (i : ι) :
+    (ofProj 𝒜 ρ hd f hf hcov).U i = ρ ⁻¹ᵁ Proj.basicOpen 𝒜 (f i) := rfl
+
+end Scheme.CoordinateCover
+
 end AlgebraicGeometry
