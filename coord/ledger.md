@@ -545,3 +545,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:12 UTC (2026-10-09) — Reviewed and committed unramified-base-change-open (02GA/02G6; 1 new Mathlib leaf).
 - 2026-10-10, delivery of C1: lem-weil-pbc-z-g-ring returned (c66e6f9ec): Second delivery (head c66e6f9e): route fine (07PX(3): localizations of Z, completion of a DVR regular), but the two new statement nodes cite no nodes for their 
 - 22:13 UTC (2026-10-09) — Returned C1 z-g-ring a second time (head c66e6f9e; new nodes without citations for DVR/Dedekind, step 2 should cite the field-regular leaf). Launched a worker on popescu-resolve-separable (07FE).
+- 22:13 UTC (2026-10-09) — Reviewed and committed finite-unramified-one-point-closed (04DG; 1 new node; tool uses nakayama-local-generators and fibre-product-affine-spectra recorded).

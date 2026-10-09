@@ -16,9 +16,128 @@
   "def-weil-residue-field",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduction to an affine base. Choose an affine open $V\\subseteq S$ containing $s$ and write $V=\\operatorname{Spec}A$ [def-weil-affine-spectrum], with $s$ the prime $\\mathfrak p\\subset A$. Since $\\pi$ is finite [def-weil-finite-integral-morphism], $\\pi^{-1}(V)$ is affine, $\\pi^{-1}(V)=\\operatorname{Spec}B$, and the ring map $\\varphi:A\\to B$ inducing $\\pi|_{\\pi^{-1}(V)}$ makes $B$ a finitely generated $A$-module. The points of $\\pi^{-1}(s)\\subseteq\\pi^{-1}(V)$ are the primes $\\mathfrak q'\\subset B$ with $\\varphi^{-1}(\\mathfrak q')=\\mathfrak p$; by hypothesis there is exactly one, $\\mathfrak q$, corresponding to $x$. By [lem-weil-pbc-spec-residue-field-identification] (applied to $A$ and to $B$, compatibly with $\\varphi$) the residue fields of the schemes are $\\kappa(s)\\cong\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ and $\\kappa(x)\\cong\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$, and the map $\\kappa(s)\\to\\kappa(x)$ of [def-weil-residue-field] becomes the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ induced by $\\varphi$; so $\\kappa(\\mathfrak q)/\\kappa(\\mathfrak p)$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. It suffices to find $f\\in A\\setminus\\mathfrak p$ such that $\\pi^{-1}(D(f))\\to D(f)$ is a closed immersion, $D(f)\\subseteq V$ being an open neighbourhood of $s$ in $S$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-weil-residue-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, proof, lines 727-733 ('The question is local on S. Hence we may assume that S = Spec(A). By definition of a finite morphism this implies X = Spec(B) ... Let q be the prime corresponding to x')"
+   }
+  },
+  {
+   "text": "The fibre ring is a finite product of finite separable extensions. Let $F=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to F$, $b\\mapsto b\\otimes1$. The restriction $\\operatorname{Spec}B=\\pi^{-1}(V)\\to V=\\operatorname{Spec}A$ is unramified by [lem-weil-pbc-unramified-base-change-open](2), hence so is its base change along $\\operatorname{Spec}\\kappa(\\mathfrak p)\\to\\operatorname{Spec}A$ by [lem-weil-pbc-unramified-base-change-open](1); by [lem-weil-pbc-fibre-product-affine-spectra] this base change is $\\operatorname{Spec}F\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$, induced by the structure map. By [lem-weil-pbc-unramified-algebra-over-field-product] there are $n\\ge0$ and finite separable algebraic field extensions $L_1,\\dots,L_n$ of $\\kappa(\\mathfrak p)$ with $F\\cong L_1\\times\\cdots\\times L_n$ as $\\kappa(\\mathfrak p)$-algebras.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-unramified-algebra-over-field-product",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00UW (algebra-lemma-unramified-at-prime), proof, algebra.tex lines 41584-41591; Morphisms, Lemma 02G7 (morphisms-lemma-unramified-over-field) part (2), morphisms.tex lines 7797-7805"
+   }
+  },
+  {
+   "text": "The fibre ring is a single field, isomorphic to $\\kappa(\\mathfrak q)$. By [lem-weil-pbc-fibre-ring-localization-quotient], $F\\cong B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ as $B$-algebras, $B_{\\mathfrak p}$ the localization of $B$ at $\\varphi(A\\setminus\\mathfrak p)$. (a) $n\\ge1$: the map $B\\to\\kappa(\\mathfrak q)$ kills $\\varphi(\\mathfrak p)\\subseteq\\mathfrak q$ and sends $\\varphi(A\\setminus\\mathfrak p)\\subseteq B\\setminus\\mathfrak q$ to units, so it factors through $B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$, which is therefore nonzero. (b) $n\\le1$: for each $i$ let $Q_i=\\ker(F\\to L_i)$, a prime (maximal) ideal of $F$, the $Q_i$ pairwise distinct. The composite $A\\to B\\xrightarrow{j}F\\to L_i$ equals $A\\to\\kappa(\\mathfrak p)\\to F\\to L_i$, and $\\kappa(\\mathfrak p)\\to L_i$ is injective (a ring map out of a field to a nonzero ring), so its kernel is $\\ker(A\\to\\kappa(\\mathfrak p))=\\mathfrak p$ [lem-weil-pbc-prime-residue-field-algebra](a); hence the prime $j^{-1}(Q_i)$ of $B$ lies over $\\mathfrak p$, so $j^{-1}(Q_i)=\\mathfrak q$ for every $i$ (step 1). Primes of $B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ correspond injectively to primes of $B_{\\mathfrak p}$, and these injectively to their contractions in $B$ [def-weil-pbc-localization-at-prime]; so $Q_i=Q_k$ for all $i,k$, i.e. $n=1$. Thus $F=L_1=:L$ is a field, finite separable algebraic over $\\kappa(\\mathfrak p)$, with unique prime $(0)$ and $j^{-1}(0)=\\mathfrak q$. By [lem-weil-pbc-fibre-ring-residue-field-iso] applied to $\\mathfrak Q=(0)$ the induced map $\\kappa(\\mathfrak q)\\to\\kappa((0))=F$ is an isomorphism; it is a map of $B$-algebras, hence of $\\kappa(\\mathfrak p)$-algebras by [lem-weil-pbc-prime-residue-field-algebra](c). So $\\kappa(\\mathfrak q)\\cong L$ over $\\kappa(\\mathfrak p)$, and $\\kappa(\\mathfrak q)/\\kappa(\\mathfrak p)$ is both purely inseparable and separable algebraic.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, proof, lines 734-737 ('Conditions (2), (3) and (4) imply that B_q/pB_q = kappa(p) ... Hence we see that B_p/pB_p = kappa(p)'); the passage through B_q and Algebra Lemma 00EA (lemma-unique-prime-over-localize-below, B_q = B_p) is replaced here by the direct count of the factors of the fibre ring F = B_p/pB_p, as in the proof of Algebra Lemma 00UW (algebra.tex lines 41590-41595)"
+   }
+  },
+  {
+   "text": "Separable and purely inseparable forces equality: $\\kappa(\\mathfrak p)\\to F$ is an isomorphism. Let $\\alpha\\in L=F$. In characteristic $0$, purely inseparable means $L=\\kappa(\\mathfrak p)$ [def-weil-pbc-finite-purely-inseparable-extension]. In characteristic $p>0$, $c=\\alpha^{p^m}\\in\\kappa(\\mathfrak p)$ for some $m$, so the minimal polynomial $P_\\alpha$ of $\\alpha$ divides $T^{p^m}-c=(T-\\alpha)^{p^m}$ in $L[T]$, hence $P_\\alpha=(T-\\alpha)^e$ for some $e\\ge1$; as $P_\\alpha$ is separable [def-weil-pbc-separable-algebraic-extension] it has no repeated root, so $e=1$ and $\\alpha\\in\\kappa(\\mathfrak p)$. Hence the structure map $\\kappa(\\mathfrak p)\\to F\\cong B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$ is surjective. (This is the footnote of 04DG: under (2), condition (4) is equivalent to $\\kappa(s)=\\kappa(x)$.)",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, statement, footnote to condition (4), lines 715-717"
+   }
+  },
+  {
+   "text": "Nakayama: $A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is surjective. $A_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak pA_{\\mathfrak p}$ and residue field $\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime]. $M=B_{\\mathfrak p}$ is a finitely generated $A_{\\mathfrak p}$-module (the images $b_i/1$ of $A$-module generators $b_i$ of $B$ generate it), and $(\\mathfrak pA_{\\mathfrak p})M=\\mathfrak pB_{\\mathfrak p}$. By step 4 the submodule $N=\\varphi_{\\mathfrak p}(A_{\\mathfrak p})=A_{\\mathfrak p}\\cdot1$ maps onto $M/\\mathfrak pA_{\\mathfrak p}M=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$. By [lem-weil-pbc-nakayama-local-generators], $N=M$: the ring map $\\varphi_{\\mathfrak p}:A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is surjective.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, proof, lines 738-740 ('As B is a finite A-module we see from Nakayama's lemma (see Algebra, Lemma 00DV) that B_p = phi(A_p)')"
+   }
+  },
+  {
+   "text": "Spreading out: $A_f\\to B_f$ is surjective for some $f\\in A\\setminus\\mathfrak p$. Let $Q=B/\\varphi(A)$, a finitely generated $A$-module [def-weil-finitely-generated-module]. By step 5, for each $b\\in B$ we have $b/1=\\varphi(a)/\\varphi(t)$ in $B_{\\mathfrak p}$ with $a\\in A$, $t\\in A\\setminus\\mathfrak p$, so $\\varphi(u)(\\varphi(t)b-\\varphi(a))=0$ for some $u\\in A\\setminus\\mathfrak p$, i.e. $ut\\notin\\mathfrak p$ kills the class of $b$ in $Q$; hence $Q_{\\mathfrak p}=0$. By [lem-weil-pbc-finite-module-support-annihilator], $\\operatorname{Ann}_A(Q)\\not\\subseteq\\mathfrak p$; choose $f\\in\\operatorname{Ann}_A(Q)\\setminus\\mathfrak p$. Then $\\varphi(f)B\\subseteq\\varphi(A)$, and every element $b/\\varphi(f)^m$ of $B_f$ equals $\\varphi(f)b/\\varphi(f)^{m+1}=\\varphi(a)/\\varphi(f)^{m+1}$ for some $a\\in A$, so $\\varphi_f:A_f\\to B_f$ is surjective.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, proof, lines 740-742 ('Hence (using the finiteness of B as an A-module again) there exists a f in A, f not in p such that B_f = phi(A_f)')"
+   }
+  },
+  {
+   "text": "Conclusion. $U=D(f)\\subseteq V$ is an open neighbourhood of $s$ in $S$, and $\\pi^{-1}(U)=\\{\\mathfrak q'\\subset B:\\varphi(f)\\notin\\mathfrak q'\\}=D(\\varphi(f))\\subseteq\\operatorname{Spec}B$. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}A_f\\to\\operatorname{Spec}A$ and $\\operatorname{Spec}B_f\\to\\operatorname{Spec}B$ are open immersions onto $U$ and $\\pi^{-1}(U)$; by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] they identify $\\pi^{-1}(U)\\to U$ with $\\operatorname{Spec}(\\varphi_f):\\operatorname{Spec}B_f\\to\\operatorname{Spec}A_f$. So $U$ and $\\pi^{-1}(U)$ are affine with rings $A_f$ and $B_f$, and the ring map $\\mathcal O_U(U)\\to\\mathcal O(\\pi^{-1}(U))$ is $\\varphi_f$, surjective by step 6. By [lem-weil-pbc-closed-immersion-affine-cover-criterion](2), applied to $\\pi|_{\\pi^{-1}(U)}:\\pi^{-1}(U)\\to U$ with the one-member affine cover $\\{U\\}$, this morphism is a closed immersion [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, Lemma 04DG, proof, line 742 ('such that B_f = phi(A_f) as desired'), with Morphisms, Lemma 01QO for the closed-immersion criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-residue-field-iso",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, Lemma 04DG (lemma-finite-unramified-one-point), proof, lines 722-743; the computation of the fibre ring (steps 2-4) follows the proof of Algebra Lemma 00UW (algebra.tex lines 41584-41595) and Morphisms Lemma 02G7 instead of passing through B_q and Algebra Lemma 00EA"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +189,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-unramified-one-point-closed",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 04DG (etale.tex 706-721): it is correct (the G1 statement adds only the equivalent scheme-theoretic description of the fibre point); stmt_deps kept. Wrote the 04DG proof in seven steps: affine reduction via the definition of a finite morphism and the Spec residue-field identification; the fibre ring F = B (x)_A kappa(p) is unramified over kappa(p) (base change, 02GA/02G6 node) hence a finite product of finite separable extensions (new node lem-weil-pbc-unramified-algebra-over-field-product, 02G7(1)/00UW proof); the unique point over s forces one factor, which is kappa(q) by the fibre-ring residue-field node; separable plus purely inseparable gives kappa(p) = F (elementary, the 04DG footnote); Nakayama over A_p (00DV node) gives A_p -> B_p surjective; the support/annihilator node gives f not in p with A_f -> B_f surjective; the 01QO criterion node gives the closed immersion over D(f). Departure inside the node level: Stacks passes through B_q/pB_q = kappa(p) and Algebra 00EA (B_q = B_p); here F = B_p/pB_p is computed directly, which avoids a node for 00EA. One new node (unsplit, no exact Mathlib match: the unramified product decomposition is a composite of Algebra.FormallyEtale.iff_formallyUnramified_of_field and Algebra.FormallyEtale.iff_exists_algEquiv_prod). Mathlib note for the item: Algebra.FormallyUnramified.range_eq_top_of_isPurelyInseparable (RingTheory/Unramified/Field.lean:161) is step 4 for fields."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "lead_note": "Off-route tool uses recorded by L: lem-weil-pbc-nakayama-local-generators (00DV) and lem-weil-pbc-fibre-product-affine-spectra, both Mathlib leaves of unit sk-thm-reduction, used as black boxes in steps 5 and 2.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 04DG (etale.tex 722-743): reduction to the affine case, the fibre ring unramified over kappa(p) hence a finite product of finite separable extensions (new unsplit node for Morphisms 02G7(1) affine case / Algebra 00UW proof; Mathlib has a composite route via FormallyEtale.iff_formallyUnramified_of_field Etale/Field.lean:185 and iff_exists_algEquiv_prod :194, left unsplit), one factor equal to kappa(q) (fibre-ring nodes), separable and purely inseparable forces equality (elementary; Mathlib FormallyUnramified.range_eq_top_of_isPurelyInseparable noted), Nakayama over A_p, spreading out through the annihilator of B/phi(A) (00L2 leaf) instead of Stacks' 00EA, the closed-immersion criterion 01QO over D(f). Two tool uses recorded. Brief errors: 00UW is unramified-at-prime; the over-a-field lemma is 02G7."
+ }
 }
