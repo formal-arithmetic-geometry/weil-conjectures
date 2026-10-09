@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+ "kind": "statement",
+ "title": "Coherent modules on a scheme: kernels, cokernels, extensions and finite direct sums are coherent",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] (more generally any ringed space) and let $\\mathit{Mod}(\\mathcal O_X)$ be the category of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with its kernels (sectionwise) and cokernels (sheafified sectionwise quotients). No Noetherian hypothesis is made. (1) If $\\varphi:\\mathcal F\\to\\mathcal G$ is an $\\mathcal O_X$-linear map of coherent $\\mathcal O_X$-modules [pqf-def-coherent], then $\\operatorname{Ker}\\varphi$ and $\\operatorname{Coker}\\varphi$ are coherent. (2) If $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ is a short exact sequence of $\\mathcal O_X$-modules and two of $\\mathcal F_1,\\mathcal F_2,\\mathcal F_3$ are coherent, so is the third. (3) In particular, for coherent $\\mathcal O_X$-modules $\\mathcal F_1,\\dots,\\mathcal F_r$ ($r\\ge0$) the direct sum $\\mathcal F_1\\oplus\\dots\\oplus\\mathcal F_r$ is coherent (for $r=0$ the zero module), and so is every $\\mathcal O_X$-module isomorphic to a coherent one.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), parts (2), (3), (4) with proof (snake lemma arguments); part (3) of this node: 0 -> F_1 -> F_1 (+) F_2 -> F_2 -> 0 and part (4) of 01BY, induction on r; the general-ringed-space version of Cohomology of Schemes, Lemma 01Y0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel and cokernel of a morphism of coherent sheaves of modules on a ringed space are coherent; finite direct sum of coherent modules is coherent",
+   "results": "Module.Presentation.nonempty_cokernelData (Mathlib.Algebra.Module.Presentation.Cokernel), ModuleCat.cokernelCocone/cokernelIsColimit (Mathlib.Algebra.Category.ModuleCat.Kernels), SheafOfModules.IsQuasicoherent.mk, Module.Finite.instDirectSum, FGModuleCat.instAbelian (Noetherian ring): modules over a ring only, no coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaves of modules form an abelian (weak Serre) subcategory of all O_X-modules: kernel, cokernel, two out of three in short exact sequences",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAbelian (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.instAbelian, PresheafOfModules.instAbelian, CategoryTheory.sheafIsAbelian, condensed modules: abelian categories of all modules, no coherent subcategory",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "SheafOfModules.IsFiniteType, IsFiniteType.exists_localGeneratorsData, IsFiniteType.mk (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), instIsFiniteTypeOfIsFinitePresentation (…Sheaf.Quasicoherent): the notion of finite type only, no lemma on kernels, cokernels or sums, no coherent notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsCoherent\\b\\|isCoherent\\b' AlgebraicGeometry Algebra/Category CategoryTheory/Sites; grep -rn 'IsFiniteType' Algebra/Category/ModuleCat/Sheaf/*.lean | grep -i 'kernel\\|biprod\\|prod\\|sum\\|ker'; ls Algebra/Category/ModuleCat/Sheaf (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "no hits; Sheaf/ has Abelian, ChangeOfRings, Colimits, Free, Generators, Limits, Localization, LocallyFree, PullbackContinuous, PullbackFree, PushforwardContinuous, Quasicoherent: no coherent modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

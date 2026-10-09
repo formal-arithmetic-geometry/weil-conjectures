@@ -11,9 +11,80 @@
   "pqf-def-coherent",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\mathcal G$ is locally finitely presented.) Let $x\\in X$. Since $\\mathcal G$ is of finite type [pqf-def-coherent] there are an open $U\\ni x$ and a surjection $\\psi:\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$. By the second condition of coherence [pqf-def-coherent] the kernel $\\mathcal K=\\operatorname{Ker}\\psi$ (sectionwise [def-weil-sheaf-of-modules-category]) is of finite type, so there are an open $V$ with $x\\in V\\subseteq U$ and a surjection $\\mathcal O_V^{\\oplus m}\\to\\mathcal K|_V$. Since kernels are computed sectionwise, $\\mathcal K|_V=\\operatorname{Ker}(\\psi|_V)$, and the composite $\\mathcal O_V^{\\oplus m}\\to\\mathcal K|_V\\subseteq\\mathcal O_V^{\\oplus n}$ gives an exact sequence $\\mathcal O_V^{\\oplus m}\\xrightarrow{a}\\mathcal O_V^{\\oplus n}\\xrightarrow{\\psi|_V}\\mathcal G|_V\\to0$ of $\\mathcal O_V$-modules. Thus $X$ is covered by opens $V$ each carrying such a presentation of $\\mathcal G|_V$.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BW (lemma-coherent-finite-presentation, line 1596) and its proof, cited as 'finitely presented' in Lemma 01CQ"
+   }
+  },
+  {
+   "text": "(Restriction to $V$.) For an open $V\\subseteq X$ the restriction $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)|_V$ equals $\\mathcal Hom_{\\mathcal O_V}(\\mathcal G|_V,\\mathcal F|_V)$ as $\\mathcal O_V$-modules: by the definition of the sheaf Hom [def-pur-sheaf-hom] both have as sections over an open $W\\subseteq V$ the $\\mathcal O_W$-module $\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal G|_W,\\mathcal F|_W)$, with the same restriction maps and the same module structure.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT (sites-modules-section-internal-hom), definition of the internal Hom and its restriction to a localized site (Lemma 0E8H, lemma-internal-hom-restriction, line 3775)"
+   }
+  },
+  {
+   "text": "(Locally a kernel.) Let $V$ be as in step 1, with the presentation $\\mathcal O_V^{\\oplus m}\\xrightarrow{a}\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V\\to0$. Applying [lem-weil-pbc-sheaf-hom-finite-presentation-kernel] on the ringed space $(V,\\mathcal O_V)$ with $\\mathcal H=\\mathcal G|_V$ and $\\mathcal M=\\mathcal F|_V$ gives an exact sequence $0\\to\\mathcal Hom_{\\mathcal O_V}(\\mathcal G|_V,\\mathcal F|_V)\\to(\\mathcal F|_V)^{\\oplus n}\\xrightarrow{\\alpha}(\\mathcal F|_V)^{\\oplus m}$ of $\\mathcal O_V$-modules [def-weil-sheaf-of-modules-category]. Hence, by step 2, $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)|_V\\cong\\operatorname{Ker}(\\alpha)$, a kernel of a map between finite direct sums of copies of $\\mathcal F|_V$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CQ (lemma-internal-hom-locally-kernel-direct-sum, line 3739), first assertion, proved in the proof of Lemma 01CP (lemma-stalk-internal-hom, line 3619) via Lemma 01CO (lemma-internal-hom-exact)"
+   }
+  },
+  {
+   "text": "(Coherence on $V$.) $\\mathcal F|_V$ is a coherent $\\mathcal O_V$-module by [lem-weil-pbc-coherent-module-local-on-open-cover](1). Hence $(\\mathcal F|_V)^{\\oplus n}$ and $(\\mathcal F|_V)^{\\oplus m}$ are coherent and so is $\\operatorname{Ker}(\\alpha)$, by parts (3) and (1) of [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] applied on the open subscheme $V$; by part (3) of the same node the isomorphic module $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)|_V$ is coherent.",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CQ, 'in particular' clause, whose proof cites Lemma 01BY (lemma-coherent-abelian, line 1641)"
+   }
+  },
+  {
+   "text": "(Gluing.) The opens $V$ of step 1 cover $X$ and $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)|_V$ is coherent for each of them (step 4), so $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ is a coherent $\\mathcal O_X$-module by [lem-weil-pbc-coherent-module-local-on-open-cover](2).",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CQ ('locally'); locality of coherence, Definition 01BV (definition-coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01CQ (lemma-internal-hom-locally-kernel-direct-sum, line 3739) with its proof, the proof of Lemma 01CP (line 3619), Lemma 01BW (line 1596) and Lemma 01BY (line 1641)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +129,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 01CQ: Stacks states it for any ringed space with F finitely presented; here G coherent, F coherent on a scheme, the 'in particular' clause). stmt_deps kept. Proof written in 5 steps from Stacks 01CQ: coherent G is locally finitely presented (01BW, unfolded from pqf-def-coherent); restriction of sheaf Hom to an open is the sheaf Hom of the restrictions (definition); on each such open V, left exactness of sheaf Hom with Hom(O,-)=id gives Hom(G,F)|_V = Ker((F|_V)^n -> (F|_V)^m) (existing lem-weil-pbc-sheaf-hom-finite-presentation-kernel, Stacks 01CO); this is coherent by restriction of coherence to opens and the new node lem-weil-pbc-coherent-modules-kernel-cokernel-sum (Stacks 01BY for an arbitrary scheme: kernels, cokernels, 2-out-of-3, finite direct sums); coherence glues over the cover (lem-weil-pbc-coherent-module-local-on-open-cover). The existing lem-weil-pbc-coherent-kernel-cokernel-locnoeth (Stacks 01Y0) was not used: it assumes X locally Noetherian, which the item does not."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps along Stacks 01CQ: coherent is locally finitely presented (unfolded from the definition), restriction of sheaf Hom, locally a kernel of F^n -> F^m by the existing 01CO node, coherence of kernels and finite sums (new unsplit 01BY node, no Noetherian hypothesis), gluing by the committed locality node. Correct. Stage-3 note (worker): lem-weil-pbc-coherent-kernel-cokernel-locnoeth (01Y0, claimed by G1) overlaps the new 01BY node."
+ }
 }
