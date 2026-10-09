@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-constructible-change-of-ring",
+ "kind": "statement",
+ "title": "Constructibility is unchanged under restriction of scalars along a surjection of finite rings",
+ "statement": "Let $T$ be a scheme, $\\varphi:\\Lambda\\to\\Lambda'$ a surjective homomorphism of finite commutative rings (for instance $\\mathbf Z/n\\to\\mathbf Z/m$ for $m\\mid n$), and $\\mathcal G$ a sheaf of $\\Lambda'_T$-modules on $T_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves]; write $\\varphi^*\\mathcal G$ for $\\mathcal G$ regarded as a sheaf of $\\Lambda_T$-modules via $\\varphi$. Then $\\mathcal G$ is a constructible sheaf of $\\Lambda'$-modules if and only if $\\varphi^*\\mathcal G$ is a constructible sheaf of $\\Lambda$-modules [def-weil-pbc-etale-constructible-sheaf], with the same stratifications serving for both. In particular a sheaf of $\\mathbf Z/n$-modules killed by a divisor $m$ of $n$ is constructible as a sheaf of $\\mathbf Z/n$-modules iff it is as a sheaf of $\\mathbf Z/m$-modules. (Ingredients: inverse image along an immersion commutes with restriction of scalars; the constant sheaf of $\\Lambda$-modules on $\\varphi^*M'$ is $\\varphi^*$ of the constant sheaf of $\\Lambda'$-modules on $M'$, both being the sheafification of the same presheaf of abelian groups; a $\\Lambda_U$-module isomorphism between sheaves on which $\\Lambda$ acts through $\\Lambda'$ is $\\Lambda'_U$-linear, $\\varphi$ being surjective; a finite $\\Lambda$-module killed by $\\ker\\varphi$ is a finite $\\Lambda'$-module.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Not stated in Stacks; used implicitly in the proof of Theorem 03SC (theorem-vanishing-affine-curves), second paragraph ('we may assume that l^n kills F' ... 'it suffices to assume that F is l-torsion'), where a sheaf killed by l is treated as a sheaf of F_l-modules. Agent-formulated; written out in step 6 of lem-weil-pbc-curve-constructible-reduction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf of modules restriction of scalars along ring homomorphism commutes with sheafification",
+   "results": "PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictScalars.obj', PresheafOfModules.toSheafify, SheafOfModules.restrictScalars (Algebra.Category.ModuleCat.Sheaf.ChangeOfRings), PresheafOfModules.restrictScalars_obj: the restriction-of-scalars functor exists; nothing on constant or constructible sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match (SheafOfModules.restrictScalars is the operation phi^*, a tool)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf of modules under restriction of scalars along a ring surjection is the constant sheaf of the restricted module",
+   "results": "SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars (ChangeOfRings), CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.*: no compatibility with constant sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat; grep -rn 'restrictScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "none; none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-etale-constructible-sheaf",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

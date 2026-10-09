@@ -2,10 +2,10 @@
  "id": "def-weil-pbc-etale-constructible-sheaf",
  "kind": "definition",
  "title": "Constructible sheaf of modules on the small etale site",
- "statement": "Let $T$ be a scheme and $\\Lambda$ a finite commutative ring, let $T_{\\Et}$ be the small etale site of $T$ [def-weil-pbc-etale-site] and $\\Lambda_T$ its constant sheaf of rings, and let $\\mathcal F$ be a sheaf of $\\Lambda_T$-modules on $T_{\\Et}$ [def-weil-pbc-etale-sheaves]. The sheaf $\\mathcal F$ is *constructible* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<n}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<n}T_k$ of the underlying space into pairwise disjoint locally closed subsets, with immersions $\\iota_k$ of schemes $Z_k$ having set-theoretic image $T_k$) such that every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and for every $k$ the inverse image $\\iota_k^{-1}\\mathcal F$ [def-weil-pbc-inverse-image], a sheaf of $\\Lambda_{Z_k}$-modules on $(Z_k)_{\\Et}$, is finite locally constant as a sheaf of $\\Lambda$-modules [def-constructible-finite-locally-constant]: there is an etale covering $\\{U_i\\to Z_k\\}$ such that each restriction to $U_i$ is isomorphic, as a sheaf of $\\Lambda$-modules, to a constant sheaf $\\underline{M_i}$ of a $\\Lambda$-module $M_i$, and its stalk at every geometric point of $Z_k$ is a finite set.",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite commutative ring, let $T_{\\Et}$ be the small etale site of $T$ [def-weil-pbc-etale-site] and $\\Lambda_T$ its constant sheaf of rings, and let $\\mathcal F$ be a sheaf of $\\Lambda_T$-modules on $T_{\\Et}$ [def-weil-pbc-etale-sheaves]. The sheaf $\\mathcal F$ is *constructible* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<n}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<n}T_k$ of the underlying space into pairwise disjoint locally closed subsets, a partition in the sense of Stacks 09XZ with no condition on closures of strata, together with immersions $\\iota_k$ of schemes $Z_k$ with set-theoretic image $T_k$) such that\n(a) every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and\n(b) for every $k$ the inverse image $\\iota_k^{-1}\\mathcal F$ [def-weil-pbc-inverse-image], a sheaf of $\\Lambda_{Z_k}$-modules on $(Z_k)_{\\Et}$, is *finite locally constant as a sheaf of $\\Lambda$-modules* (Stacks 03RU): it is locally constant as a sheaf of $\\Lambda$-modules [def-constructible-locally-constant] with finite values, i.e. there are an etale covering $\\{U_i\\to Z_k\\}_{i\\in I}$ and finite $\\Lambda$-modules $M_i$ (finite as sets; $\\Lambda$ being finite, equivalently finitely generated) such that $(\\iota_k^{-1}\\mathcal F)|_{U_i}\\cong\\underline{M_i}$, the constant sheaf of $\\Lambda_{U_i}$-modules with value $M_i$, for every $i$.\nThe schemes $Z_k$ are part of the data; one may take $Z_k=T_k$ with its reduced induced structure (Stacks, paragraph before 03RW).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Project, Lemma Tag 095E, condition (3) (label lemma-constructible-quasi-compact-quasi-separated), the form for sheaves of Lambda-modules over a Noetherian ring Lambda, here Lambda finite; equivalent for quasi-compact quasi-separated T to Definition Tag 03RW (label definition-constructible), which asks for such a partition on every affine open; finite locally constant as in Definition Tag 03RU. The global form is the constructibility clause of literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md"
+  "place": "Stacks Project, Lemma Tag 095E, condition (3) (label lemma-constructible-quasi-compact-quasi-separated), the form for sheaves of Lambda-modules over a Noetherian ring Lambda, here Lambda finite; the partition is Topology Definition 09XZ (topology-definition-paritition); finite locally constant as in Definition Tag 03RU (definition-finite-locally-constant), with finite values; for quasi-compact quasi-separated T equivalent to Definition Tag 03RW(3) (label definition-constructible), see the pointer lem-weil-pbc-constructible-qcqs-affine-local. The global form is the constructibility clause of literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-site",
@@ -13,11 +13,59 @@
   "def-constructible-stratification",
   "def-weil-constructible-subset",
   "def-weil-pbc-inverse-image",
-  "def-constructible-finite-locally-constant"
+  "def-constructible-locally-constant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Data: the strata.) A stratification $(\\iota_k:Z_k\\to T)_{k<n}$ of the scheme $T$ in the sense of [def-constructible-stratification]: a finite family of pairwise disjoint locally closed subsets $T_k$ covering $T$ and immersions $\\iota_k$ with image $T_k$. Condition (a) asks each $T_k$ to be a constructible subset of $|T|$ [def-weil-constructible-subset] (Mathlib's Topology.IsConstructible); this is what distinguishes the notion from [def-constructible-constructible], whose strata are only locally closed.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095E, condition (3); the paragraph before Definition 03RW ('constructible locally closed subscheme')"
+   }
+  },
+  {
+   "text": "(The restriction to a stratum.) For each $k$ the inverse image functor along $\\iota_k$ [def-weil-pbc-inverse-image] sends the sheaf of $\\Lambda_T$-modules $\\mathcal F$ [def-weil-pbc-etale-sheaves] to a sheaf of $\\Lambda_{Z_k}$-modules on $(Z_k)_{\\Et}$ [def-weil-pbc-etale-site] (the coefficient ring pulls back to itself, as recorded in [def-weil-pbc-inverse-image]); this is the '$\\mathcal F|_{X_i}$' of Stacks.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095E, condition (3); Definition 03RW"
+   }
+  },
+  {
+   "text": "(The condition on a stratum.) Condition (b) is local constancy as a sheaf of $\\Lambda$-modules [def-constructible-locally-constant] (coefficient category the $\\Lambda$-modules), with all constant values $M_i$ finite $\\Lambda$-modules: Stacks 03RU's 'finite locally constant' (finite values). That this is the same as [def-constructible-finite-locally-constant] for $\\Lambda$-modules (locally constant with finite geometric stalks, the Lean IsFiniteLocallyConstantSheaf) and as Stacks 03RW(3)'s 'of finite type and locally constant' is the pointer lem-weil-pbc-finite-locally-constant-module-values, not part of the definition.",
+   "uses": [
+    "def-constructible-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RU (definition-finite-locally-constant)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 095E condition (3); Definitions 03RU, 03RW"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +108,45 @@
    "results": "none; AlgebraicGeometry/Sites has AffineEtale, Etale, EtalePoint, ConstantSheaf, Proetale, ElladicCohomology, none with locally constant or constructible sheaves",
    "date": "2026-10-09",
    "verdict": "no match: confirms the earlier verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible, Topology.IsLocallyConstructible and their lemmas (.univ, .empty, .compl, .inter, .iUnion, IsRetrocompact.isConstructible, IsCompact.isConstructible) in Mathlib.Topology.Constructible: subsets only",
+   "date": "2026-10-09",
+   "verdict": "no match (Topology.IsConstructible is the leaf def-weil-constructible-subset used in (a))"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib says nothing about constant (let alone locally constant) sheaves on the small etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally constant sheaf of modules on a site: there is a covering on which the sheaf is isomorphic to a constant sheaf",
+   "results": "CompHausLike.LocallyConstantModule.functor, .functorToPresheaves_obj_obj_carrier, .functor_obj_val (Condensed.Discrete.Module), CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.Sheaf.IsConstant (Sites.ConstantSheaf): constant sheaves and condensed locally constant functions; no locally constant sheaf on a site",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsConstructibleSheaf (project ~/weil-conjectures-slopmaster2) / grep -n 'class IsConstructibleSheaf' ~/weil-conjectures-slopmaster2/WeilConjectures/ConstructibleSheaf/Defs.lean",
+   "results": "AlgebraicGeometry.Scheme.IsConstructibleSheaf (WeilConjectures.ConstructibleSheaf.Defs:249, source repository, not Mathlib): strata only locally closed, not constructible",
+   "date": "2026-10-09",
+   "verdict": "not Mathlib; not an exact Lean match (see split_report)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +166,49 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-constructible-qcqs-affine-local",
+   "was": [],
+   "reason": "lemma about this definition: for T quasi-compact quasi-separated it is equivalent to Stacks Definition 03RW(3) (partition on every affine open), Stacks Lemma 095E",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lemma-constructible-immersion-independence",
+   "was": [],
+   "reason": "lemma about this definition: condition (b) does not depend on the choice of the schemes Z_k with given image T_k (immersions with the same image; Lean isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq, closed, for any coefficient category A, in particular Lambda-modules); Stacks uses the reduced induced structure and topological invariance 03SI",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lem-weil-pbc-finite-locally-constant-module-values",
+   "was": [],
+   "reason": "lemma about this definition: condition (b) (finite values) is equivalent to def-constructible-finite-locally-constant (finite stalks) and to Stacks 03RW(3) 'finite type and locally constant'",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lem-weil-pbc-constructible-change-of-ring",
+   "was": [],
+   "reason": "lemma about this definition: invariance under restriction of scalars along a surjection Lambda -> Lambda' (used in steps 6-7 of lem-weil-pbc-curve-constructible-reduction)",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lem-weil-pbc-constructible-torsion-modules-agree",
+   "was": [],
+   "reason": "lemma about this definition: on curves it agrees, for sheaves killed by n and Lambda = Z/n, with def-weil-pbc-constructible-torsion (needed where prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 into lem-weil-pbc-curve-constructible-reduction)",
+   "date": "2026-10-09"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-etale-constructible-sheaf",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 095E(3), 03RW(3), 03RU and Topology 09XZ. Made the data precise: a 'stratification' here is a 09XZ partition (finite, locally closed, disjoint; no closure condition), strata constructible, inverse image a Lambda_{Z_k}-module sheaf; finite locally constant is now said once, in Stacks 03RU form: etale-locally isomorphic to constant sheaves of finite Lambda-modules M_i (the old text said 'a Lambda-module M_i' and separately 'stalks finite'). Statement dependency def-constructible-finite-locally-constant (finite-stalk form) replaced by def-constructible-locally-constant (the condition is local constancy with finite values); the agreement of the two forms, and with 03RW(3)'s 'finite type and locally constant', is moved to the new statement node lem-weil-pbc-finite-locally-constant-module-values. Claims moved out into statement nodes kept in pointers (not stmt_deps): lem-weil-pbc-constructible-qcqs-affine-local (Stacks 095E: equivalence with the affine-local 03RW for qcqs T; no 095E node existed), lem-weil-pbc-constructible-change-of-ring (restriction of scalars along Lambda->Lambda' surjective; used inline by steps 6-7 of lem-weil-pbc-curve-constructible-reduction), lem-weil-pbc-constructible-torsion-modules-agree (bridge to def-weil-pbc-constructible-torsion on curves, needed by prop-weil-pbc-algebraically-closed-extension step 10); independence of the choice of Z_k is the existing closed node lemma-constructible-immersion-independence (pointer). Construction written as three elementary steps naming the notions. Lean: slopmaster2 AlgebraicGeometry.Scheme.IsConstructibleSheaf (ConstructibleSheaf/Defs.lean 249-251, sorry-free, reaches no sorry) with A = ModuleCat Lambda is NOT the same: its Scheme.Stratification (Defs.lean 204-216, over Topology.Stratification) does not require the strata to be constructible, and its finiteness is finite stalks (IsFiniteLocallyConstantSheaf, Defs.lean 193-198) rather than finite values; so the node is not closed by it. Mathlib: three kinds of search (grep, leansearch, loogle, leanfinder): only constructible subsets (Topology.IsConstructible), constant sheaves (Sheaf.IsConstant), SheafOfModules.IsFiniteType and restrictScalars; no locally constant or constructible sheaves. Verdict: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "definition made precise (Stacks 09XZ partition, constructible strata, finite locally constant in the 03RU form with finite values, Z_k part of the data); three construction steps; four lemmas about it moved to pointers (095E affine-local equivalence, finite-values/finite-stalks/finite-type equivalence, change of ring, agreement with def-weil-pbc-constructible-torsion on curves) and the closed immersion-independence lemma; the source repository IsConstructibleSheaf has only locally closed strata (it states def-constructible-constructible), no attachment"
+ }
 }
