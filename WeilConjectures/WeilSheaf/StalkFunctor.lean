@@ -51,11 +51,11 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 section Functor
 
 variable (k₀ l X) in
-/-- The underlying pro-étale sheaf on `X̄` of a Weil sheaf, as a functor. -/
+/-- The underlying pro-étale sheaf of `ℚ̄_ℓ`-modules on `X̄` of a Weil sheaf, as a functor. -/
 noncomputable abbrev sheafFunctor : WeilSheaf k₀ l X ⥤
     Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
       (WeilCoefficients.{u} l) :=
-  ObjectProperty.ι _ ⋙ IsoAlgebra.forget _
+  ObjectProperty.ι _ ⋙ IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _
 
 instance preservesMonomorphisms_ι_objectProperty :
     (WeilSheaf.objectProperty k₀ l X).ι.PreservesMonomorphisms :=
@@ -73,13 +73,25 @@ instance preservesEpimorphisms_forget_frobeniusPullback :
     (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).PreservesEpimorphisms :=
   inferInstance
 
+instance preservesMonomorphisms_adicSheafForget :
+    (ProEtale.AdicSheaf.forget (l := l)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).PreservesMonomorphisms :=
+  inferInstance
+
+instance preservesEpimorphisms_adicSheafForget :
+    (ProEtale.AdicSheaf.forget (l := l)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).PreservesEpimorphisms :=
+  inferInstance
+
 instance preservesMonomorphisms_sheafFunctor : (sheafFunctor k₀ l X).PreservesMonomorphisms :=
-  @Functor.preservesMonomorphisms_comp _ _ _ _ _ _ _ _
-    preservesMonomorphisms_ι_objectProperty preservesMonomorphisms_forget_frobeniusPullback
+  @Functor.preservesMonomorphisms_comp _ _ _ _ _ _ _ _ preservesMonomorphisms_ι_objectProperty
+    (@Functor.preservesMonomorphisms_comp _ _ _ _ _ _ _ _
+      preservesMonomorphisms_forget_frobeniusPullback preservesMonomorphisms_adicSheafForget)
 
 instance preservesEpimorphisms_sheafFunctor : (sheafFunctor k₀ l X).PreservesEpimorphisms :=
-  @Functor.preservesEpimorphisms_comp _ _ _ _ _ _ _ _
-    preservesEpimorphisms_ι_objectProperty preservesEpimorphisms_forget_frobeniusPullback
+  @Functor.preservesEpimorphisms_comp _ _ _ _ _ _ _ _ preservesEpimorphisms_ι_objectProperty
+    (@Functor.preservesEpimorphisms_comp _ _ _ _ _ _ _ _
+      preservesEpimorphisms_forget_frobeniusPullback preservesEpimorphisms_adicSheafForget)
 
 variable (k₀ l) in
 /-- The stalk functor `F ↦ F_s = Γ(Spec k̄, s^* F)` at a geometric point `s` of `X̄`. -/
@@ -118,15 +130,14 @@ instance epi_stalkMap (f : F ⟶ G) [Epi f] : Epi (stalkMap s f) :=
 
 /-- The iterated Weil structure `φ_m : (Frᵐ)^* F ≅ F` is natural in `F`. -/
 theorem frobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[
-        WeilCoefficients.{u} l].map f.hom.hom.f ≫ (G.frobeniusPowIso m).hom =
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].map f.hom.hom.f ≫
+      (G.frobeniusPowIso m).hom =
       (F.frobeniusPowIso m).hom ≫ f.hom.hom.f := by
   induction m with
   | zero =>
-    simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom]
-    erw [(ProEtale.lowerStarCongr _ _).hom.naturality_assoc,
-      (ProEtale.lowerStarId _ _).hom.naturality]
-    rfl
+    simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, NatTrans.naturality_assoc,
+      NatTrans.naturality, Functor.id_map]
+    exact (Category.assoc _ _ _).symm
   | succ m ih =>
     simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Category.assoc, Iso.symm_hom,
       Functor.mapIso_hom, NatTrans.naturality_assoc]
@@ -169,10 +180,11 @@ private lemma globalSections_upperStar_naturality {R : CommRingCat.{u}} {Z : Sch
 private theorem stalkObjFrobeniusPowIso_hom_eq (m : ℕ) :
     (F.stalkObjFrobeniusPowIso m s).hom =
       (Sheaf.Γ _ _).map ((ProEtale.upperStarComp _ s
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom).hom.app F.obj.carrier ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom).hom.app
+          F.obj.carrier.X ≫
         (s)^*[_].map ((ProEtale.upperStarIsoLowerStarInv _
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)).hom.app F.obj.carrier ≫
-            (F.frobeniusPowIso m).hom)) :=
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)).hom.app F.obj.carrier.X ≫
+            (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)) :=
   rfl
 
 /-- The isomorphism `F_{s ≫ Frᵐ} ≅ F_s` is natural in `F`. -/
@@ -189,15 +201,21 @@ theorem stalkObjFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
     (ProEtale.upperStarComp _ s ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
     (ProEtale.upperStarIsoLowerStarInv _
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m))
-    (A := F.obj.carrier) (B := G.obj.carrier) f.hom.hom.f (F.frobeniusPowIso m).hom
-    (G.frobeniusPowIso m).hom (frobeniusPowIso_hom_naturality f m)
+    (A := F.obj.carrier.X) (B := G.obj.carrier.X) f.hom.hom.f.hom
+    ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)
+    ((ProEtale.AdicSheaf.forget _).map (G.frobeniusPowIso m).hom)
+    (by
+      have h := congrArg (ProEtale.AdicSheaf.forget _).map (frobeniusPowIso_hom_naturality f m)
+      simp only [Functor.map_comp] at h
+      exact h)
 
 /-- The isomorphism `F_{σᵐ ≫ s} ≅ F_s` is natural in `F`. -/
 theorem stalkObjSpecFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
     stalkMap ((specGeometricFrobenius k₀ ^ m).hom ≫ s) f ≫
       (G.stalkObjSpecFrobeniusPowIso m s).hom =
       (F.stalkObjSpecFrobeniusPowIso m s).hom ≫ stalkMap s f :=
-  globalSections_upperStar_naturality (φ := f.hom.hom.f) (t := s) (specGeometricFrobenius k₀ ^ m)
+  globalSections_upperStar_naturality (φ := f.hom.hom.f.hom) (t := s)
+    (specGeometricFrobenius k₀ ^ m)
 
 /-- The identification of the stalks at equal geometric points is natural. -/
 theorem eqToHom_comp_stalkMap {t t' : Spec (.of (AlgebraicClosure k₀)) ⟶
