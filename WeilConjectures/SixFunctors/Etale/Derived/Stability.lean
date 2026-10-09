@@ -260,20 +260,6 @@ theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {
   exact ⟨boundedConstructible_leftDerivedUpperStar A f hbc,
     a, b, torAmplitudeIn_leftDerivedUpperStar A f a b hta⟩
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
-subcategories.
-
-Clause (ii), constructibility: the derived tensor product of two bounded constructible
-complexes, one of them of finite Tor amplitude, is bounded constructible. Finite Tor amplitude
-of one factor is needed for boundedness: over `ℤ/ℓ²` on a point, `ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero
-`Tor_i` for every `i ≥ 0`. -/
-theorem boundedConstructible_tensor (X : Scheme.{u})
-    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : boundedConstructible A X K) (hM : boundedConstructible A X M)
-    (hMt : finiteTorAmplitude A X M) :
-    boundedConstructible A X (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
-  sorry
-
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
@@ -286,19 +272,122 @@ theorem torAmplitudeIn_tensor (X : Scheme.{u}) (a b c d : ℤ)
     torAmplitudeIn A X (a + c) (b + d) (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
   _root_.DerivedCategory.torAmplitudeIn_tensor hKt hMt
 
+omit [HasSmallSiteSheafify A] in
+/-- The derived tensor product of a bounded complex with a complex of finite Tor amplitude is
+bounded. -/
+theorem bounded_derivedTensor_of_finiteTorAmplitude (X : Scheme.{u})
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : _root_.DerivedCategory.TStructure.t.bounded K) (hMt : finiteTorAmplitude A X M) :
+    _root_.DerivedCategory.TStructure.t.bounded (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
+  obtain ⟨a, b, hab⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).2 hK
+  obtain ⟨c, d, hcd⟩ := hMt
+  exact (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
+    ⟨_, _, _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_right hab hcd⟩
+
+/-- **Dévissage for the derived tensor product.** Suppose that constructible sheaves are closed
+under kernels, cokernels and extensions, and that the homology sheaves of `F[0] ⊗ᴸ G[0]` are
+constructible for constructible sheaves `F` and `G`. Then the derived tensor product of two
+bounded complexes with constructible homology has constructible homology. -/
+theorem constructibleHomology_derivedTensor [PreservesFiniteLimits (CategoryTheory.forget A)]
+    {X : Scheme.{u}} [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
+    [(Etale.constructibleSheaf A X).IsClosedUnderCokernels]
+    [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
+    (hTor : ∀ F G : Sheaf X.smallEtaleTopology A, Etale.constructibleSheaf A X F →
+      Etale.constructibleSheaf A X G → ∀ n : ℤ, Etale.constructibleSheaf A X
+        ((_root_.DerivedCategory.homologyFunctor _ n).obj
+          (((-⊗ᴸ-(X)[A]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))))
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : boundedConstructible A X K) (hM : boundedConstructible A X M) :
+    constructibleHomology A X (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
+  rw [constructibleHomology_eq]
+  have : (_root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X)).IsTriangulated :=
+    inferInstance
+  -- first for `K` a constructible sheaf in degree `0`
+  have h₀ (F : Sheaf X.smallEtaleTopology A) (hF : Etale.constructibleSheaf A X F) :
+      _root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X)
+        (((-⊗ᴸ-(X)[A]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj M) :=
+    letI := _root_.DerivedCategory.commShiftTensorLeft
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    have : ((-⊗ᴸ-(X)[A]).obj ((_root_.DerivedCategory.singleFunctor
+        (Sheaf X.smallEtaleTopology A) 0).obj F)).IsTriangulated :=
+      _root_.DerivedCategory.isTriangulated_tensorLeft
+        (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    _root_.DerivedCategory.prop_of_bounded
+      ((_root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X)).inverseImage
+        ((-⊗ᴸ-(X)[A]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
+      (Etale.constructibleSheaf A X) (fun G hG n ↦ hTor F G hF hG n) M hM.1 hM.2
+  let := _root_.DerivedCategory.commShiftTensorRight (K := M)
+  have : ((-⊗ᴸ-(X)[A]).flip.obj M).IsTriangulated :=
+    _root_.DerivedCategory.isTriangulated_tensorRight (K := M)
+  exact _root_.DerivedCategory.prop_of_bounded
+    ((_root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X)).inverseImage
+      ((-⊗ᴸ-(X)[A]).flip.obj M))
+    (Etale.constructibleSheaf A X) h₀ K hK.1 hK.2
+
+/-! ### The derived tensor product at a finite coefficient ring -/
+
+section Tensor
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- Blueprint `lem-sf-tor-sheaf-constructible`: Tor sheaves of constructible sheaves.
+
+For a finite ring `Λ` and constructible sheaves `F` and `G` of `Λ`-modules on `X_ét`, every
+homology sheaf of `F ⊗ᴸ G` is constructible: on a common stratification both are locally
+constant, and on a cover where both are constant `Hʳ(F ⊗ᴸ G)` is the constant sheaf
+`Tor_{-r}(M, N)` of finite modules. -/
+theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
+    (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf F] [IsConstructibleSheaf G] (r : ℤ) :
+    IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ r).obj
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
+  sorry
+
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
-Clause (ii): `- ⊗ᴸ - : Dctf(X, A) × Dctf(X, A) ⥤ Dctf(X, A)` is defined. The internal-Hom
-half of the clause is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom` above. -/
+Clause (ii), constructibility: for a finite ring `Λ`, the derived tensor product of two
+bounded constructible complexes, one of them of finite Tor amplitude, is bounded constructible.
+Finite Tor amplitude of one factor is needed for boundedness: over `ℤ/ℓ²` on a point,
+`ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero `Tor_i` for every `i ≥ 0`. The coefficients cannot be an arbitrary
+coefficient category: over `R = k[x, y₁, y₂, …]` on a point, `R/(x yᵢ)ᵢ ⊗ᴸ R/(x)` has the
+non-finitely generated `Tor₁ = (yᵢ)ᵢ/(x yᵢ)ᵢ` in degree `-1`, although `R/(x)` has Tor
+amplitude in `[-1, 0]`. -/
+theorem boundedConstructible_tensor (X : Scheme.{u})
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
+    (hMt : finiteTorAmplitude (ModuleCat.{u + 1} Λ) X M) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M) :=
+  have : IsNoetherianRing Λ := inferInstance
+  ⟨bounded_derivedTensor_of_finiteTorAmplitude _ X hK.1 hMt,
+    constructibleHomology_derivedTensor _ (fun F G hF hG n ↦ by
+      have := (Etale.constructibleSheaf_iff _ _ _).mp hF
+      have := (Etale.constructibleSheaf_iff _ _ _).mp hG
+      exact (Etale.constructibleSheaf_iff _ _ _).mpr
+        (isConstructibleSheaf_homology_tensor_singleFunctor Λ F G n)) hK hM⟩
+
+/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+subcategories.
+
+Clause (ii): `- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` is defined, for a finite ring
+`Λ`. The internal-Hom half of the clause is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`
+below. -/
 theorem constructibleFiniteTor_tensor (X : Scheme.{u})
-    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : constructibleFiniteTor A X K) (hM : constructibleFiniteTor A X M) :
-    constructibleFiniteTor A X (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M) := by
   obtain ⟨hKbc, a, b, hKt⟩ := hK
   obtain ⟨hMbc, c, d, hMt⟩ := hM
-  exact ⟨boundedConstructible_tensor A X hKbc hMbc ⟨c, d, hMt⟩,
-    a + c, b + d, torAmplitudeIn_tensor A X a b c d hKt hMt⟩
+  exact ⟨boundedConstructible_tensor Λ X hKbc hMbc ⟨c, d, hMt⟩,
+    a + c, b + d, torAmplitudeIn_tensor _ X a b c d hKt hMt⟩
+
+end Tensor
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.

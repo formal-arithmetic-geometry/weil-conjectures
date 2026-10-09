@@ -340,6 +340,15 @@ and are closed under binary products. -/
 instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderFiniteProducts :=
   .mk'
 
+/-- Constructible sheaves of modules over a finite ring are closed under extensions
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact`). -/
+instance [Finite Λ] :
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions where
+  prop_X₂_of_shortExact {S} hS h₁ h₃ := by
+    have := (Etale.constructibleSheaf_iff _ _ _).mp h₁
+    have := (Etale.constructibleSheaf_iff _ _ _).mp h₃
+    exact (Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.of_shortExact hS)
+
 end ModuleCat
 
 end AlgebraicGeometry
