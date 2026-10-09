@@ -236,6 +236,10 @@ theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
     [Scheme.IsFiniteLocallyConstantSheaf F] :
     Scheme.IsConstructibleSheaf ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F) := by
   have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
+  have : IsNoetherian C := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
   have hcl : ∀ x ∈ (Set.range j.base)ᶜ, IsClosed {x} := fun x hx ↦
     _root_.isClosed_singleton_of_mem_of_finite j.isOpenEmbedding.isOpen_range.isClosed_compl hfin hx
   refine ⟨Stratification.ofOpenImmersion j hfin hcl, fun i ↦ ?_⟩

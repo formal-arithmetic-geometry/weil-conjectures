@@ -111,6 +111,16 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   the Artin–Schreier cohomology makes `Ri^!Λ` at the origin non-constructible. There is not
   yet a way to say "the characteristic of `A` is invertible on `X`" for a general coefficient
   category `A`, so this hypothesis is missing from every statement here carrying a `2d` bound.
+* Constructible sheaves have finitely generated stalks (`AlgebraicGeometry.Scheme.IsFiniteSheaf`).
+  The statements about direct images, internal homs, exceptional inverse images and the Verdier
+  dual hold for torsion coefficients only, and assume that finitely generated objects of `A` are
+  finite (`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`, which holds for
+  `ModuleCat Λ` with `Λ` finite); the direct image statements, used at the integral stage on the
+  torsion reductions, assume instead that `K` is killed by a nonzero integer and that `A` is
+  noetherian (`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`). With coefficients `ℤ`,
+  `H³(ℙ¹, ℤ) ≅ H²(ℙ¹, ℚ/ℤ)` contains `ℚ_ℓ/ℤ_ℓ`, so `Rf_*ℤ` is not constructible for
+  `f : ℙ¹ ⟶ Spec k`. The `ℓ`-adic coefficient stages are reached through the pro-étale formalism
+  instead.
 * The clause (iv) statements of `sk-prop-sf-rf-shriek-preservation` and clause (v) of
   `sk-thm-sf-ctf-stability` assume `Y` Noetherian (`[IsNoetherian Y]`). Quasi-compactness of
   `Y` is needed for a uniform shift, since `f` must be covered by finitely many affine charts:
@@ -164,11 +174,21 @@ theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek {U Y : Scheme.{u}} (
 
 Let `f : X ⟶ Y` be separated of finite type with `dim X ≤ d`, and let `K` be a bounded
 constructible complex on `X_ét` of Tor amplitude in `[a, b]`. Then `Rf_* K` is bounded
-constructible on `Y_ét`. -/
+constructible on `Y_ét`.
+
+The coefficients are torsion and noetherian: `K` is killed by a nonzero integer `N`, and
+subobjects of finitely generated objects of `A` are finitely generated
+(`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`, which holds for `ModuleCat Λ` with
+`Λ` noetherian). Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing `ℚ_ℓ/ℤ_ℓ`; without
+the noetherian hypothesis it fails for a rank-one local system on `𝔾_m` with stalk
+`𝔽_ℓ[x, y₁, y₂, …]/(xˡ, x yᵢ)` and monodromy `1 + x`, whose `H⁰` is the non-finitely generated
+annihilator of `x`. -/
 theorem boundedConstructible_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [ConcreteCategory.FinitelyGeneratedOfMono A]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 K = 0)
     (hbc : boundedConstructible A X K) (hta : torAmplitudeIn A X a b K) :
     boundedConstructible A Y ((R((f)_*[A])).obj K) :=
   sorry
@@ -177,11 +197,14 @@ theorem boundedConstructible_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶
 
 In the situation of `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`, the
 direct image has Tor amplitude in `[a, b + 2d]`. The shift `2d` is the uniform vanishing of
-`Rᵖf_*` above twice the dimension of the source. -/
+`Rᵖf_*` above twice the dimension of the source. The coefficients are torsion and noetherian,
+as in `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f]
+    [ConcreteCategory.FinitelyGeneratedOfMono A]
     [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 K = 0)
     (hbc : boundedConstructible A X K) (hta : torAmplitudeIn A X a b K) :
     torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
@@ -198,6 +221,7 @@ variable (X : Scheme.{u}) (m : ℕ) (hm : topologicalKrullDim X ≤ (m : WithBot
 For bounded constructible `K` and `M` on `X_ét`, the internal hom `RHom(K, M)` is bounded
 constructible. -/
 theorem boundedConstructible_derivedHom (hK : boundedConstructible A X K)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     (hKt : torAmplitudeIn A X a b K) (hM : boundedConstructible A X M)
     (hMt : torAmplitudeIn A X c d M) :
     boundedConstructible A X (((RHom(X)[A]).obj (op K)).obj M) :=
@@ -209,6 +233,7 @@ If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, th
 has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
 `RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. -/
 theorem torAmplitudeIn_derivedHom (hK : boundedConstructible A X K)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     (hKt : torAmplitudeIn A X a b K) (hM : boundedConstructible A X M)
     (hMt : torAmplitudeIn A X c d M) :
     torAmplitudeIn A X (c - b - 2 * (m : ℤ)) (d - a + 2 * (m : ℤ))
@@ -270,6 +295,7 @@ the origin, coming from the punctured `y`-axis, although `Z` has codimension `0`
 regular of pure codimension `c` in a regular `T`, the sharp `Ri^!Λ_T ≅ Λ_Z(-c)[-2c]` is
 `sk-thm-regular`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i] (d : ℕ)
     (hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
@@ -284,6 +310,7 @@ Clause (iii): for `f` smooth of pure relative dimension `d`, the exceptional inv
 shifts both intervals by `-2d`, `D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity
 `Rf^! ≅ Lf^*(-)(d)[2d]`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
@@ -309,6 +336,7 @@ The proof has three steps.
 3. Count dimensions: `dim 𝔸^n_V = dim V + n ≤ d + n`, using that `V` is Noetherian, so the upper
    end is `b + 2d + 1`. -/
 theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
     ∃ D : ℕ, ∀ (d : ℕ), topologicalKrullDim Y ≤ (d : WithBot ℕ∞) →
       ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
@@ -330,6 +358,7 @@ hypothesis is imposed here: clause (v) of `sk-thm-sf-ctf-stability`
 -- TODO: once finite-type schemes over a field are known to be finite-dimensional, state this
 -- under that hypothesis and prove it from the constant-bearing form above.
 theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek {X Y : Scheme.{u}}
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
     ∃ c : ℤ, ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
       constructibleTorAmplitudeIn A Y a b K →
@@ -419,6 +448,7 @@ This is `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar` with the 
 forgotten; the missing input that would turn it into a proof is that a finite-type scheme has
 finite topological Krull dimension, which this repository does not yet have. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A X K) :
@@ -433,6 +463,7 @@ admitting a compactification. One assembles the open-immersion case
 (`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`) with the proper
 case, where `Rf_! = Rf_*`, along a compactification of `f`. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A X K) :
@@ -447,6 +478,7 @@ admitting a compactification, over a Noetherian `Y`. This is
 `AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek`
 with the shift forgotten. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f] [IsNoetherian Y]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hK : constructibleFiniteTor A Y K) :
@@ -473,6 +505,7 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar (f : X ⟶ Y) :
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (iii): the restriction
 `Rf_* : Dctf(X, A) ⥤ Dctf(Y, A)` of the derived direct image to the small categories. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (f : X ⟶ Y) [IsSeparated f]
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [LocallyOfFiniteType f] [QuasiCompact f] :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryFiniteTor A Y :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A X ⋙ R((f)_*[A]))
@@ -482,6 +515,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (f : X ⟶ Y) [
 `Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` of the compactly supported direct image to the small
 categories. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f] :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryFiniteTor A Y :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A X ⋙ R(f)_![A])
@@ -490,6 +524,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
 `Rf^! : Dctf(Y, A) ⥤ Dctf(X, A)` of the exceptional inverse image to the small categories. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriek (f : X ⟶ Y)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [QuasiCompact f] [IsNoetherian Y] :
     DerivedCategoryFiniteTor A Y ⥤ DerivedCategoryFiniteTor A X :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ R(f)^![A])
@@ -499,6 +534,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriek (f : X ⟶ Y)
 `𝔻_X : Dctf(X, A)ᵒᵖ ⥤ Dctf(X, A)` of the Verdier dual to the small categories. That it is an
 anti-equivalence is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`. -/
 noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X ⟶ S)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification a] :
     (DerivedCategoryFiniteTor A X)ᵒᵖ ⥤ DerivedCategoryFiniteTor A X :=
   ObjectProperty.lift _ ((DerivedCategoryFiniteTor.ι A X).op ⋙ Etale.verdierDual A a)

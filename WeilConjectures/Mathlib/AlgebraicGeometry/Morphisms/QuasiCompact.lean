@@ -7,10 +7,16 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.Topology.Constructible
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
-# Points in the closure of the range of a quasi-compact morphism
+# Ranges of quasi-compact morphisms
+
+The range of a quasi-compact morphism is retrocompact
+(`AlgebraicGeometry.Scheme.Hom.isRetrocompact_range`), so the range of a quasi-compact open
+immersion is a constructible subset (`AlgebraicGeometry.Scheme.Hom.isConstructible_range`).
 
 A point in the closure of the range of a quasi-compact morphism is a specialization of a
 point of the range (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`). This is
@@ -74,5 +80,17 @@ theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
   obtain ⟨t, ht⟩ := exists_specializes_of_mem_closure_range_of_isAffine (h ∣_ V) hzV'
   refine ⟨(h ⁻¹ᵁ V).ι t, ?_⟩
   simpa [Scheme.Opens.ι_apply, morphismRestrict_base_coe] using ht.map V.ι.continuous
+
+/-- **The range of a quasi-compact morphism is retrocompact**: its intersection with a
+quasi-compact open `V` is the image of the quasi-compact preimage of `V`. -/
+theorem Scheme.Hom.isRetrocompact_range {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] :
+    IsRetrocompact (Set.range f.base) := fun V hV hVo ↦ by
+  rw [Set.inter_comm, ← Set.image_preimage_eq_inter_range]
+  exact (QuasiCompact.isCompact_preimage V hVo hV).image f.continuous
+
+/-- The range of a quasi-compact open immersion is a constructible subset. -/
+theorem Scheme.Hom.isConstructible_range {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
+    [QuasiCompact f] : Topology.IsConstructible (Set.range f.base) :=
+  f.isRetrocompact_range.isConstructible f.isOpenEmbedding.isOpen_range
 
 end AlgebraicGeometry

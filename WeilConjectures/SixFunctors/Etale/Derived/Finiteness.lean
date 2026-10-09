@@ -231,8 +231,8 @@ applied to the constructible cohomology sheaves of `K` and to the constructible 
 cokernels that arise (`Scheme.IsConstructibleSheaf.kernel`,
 `Scheme.IsConstructibleSheaf.cokernel`); its truncation in degree `a` is then a cokernel of a
 map of constructible sheaves, hence flat and constructible. The converse is the corresponding
-direction of `hasTorAmplitudeIn_iff_exists_flatModel`. Finiteness of `Λ` is needed: for
-`Λ = ℤ` a flat constructible sheaf has finite flat stalks, hence is zero. -/
+direction of `hasTorAmplitudeIn_iff_exists_flatModel`. The statement is made for a finite ring
+`Λ`, as in the blueprint. -/
 theorem hasTorAmplitudeIn_iff_exists_flatConstructibleModel [Finite Λ] [IsNoetherian X]
     (a b : ℤ) (hab : a ≤ b)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

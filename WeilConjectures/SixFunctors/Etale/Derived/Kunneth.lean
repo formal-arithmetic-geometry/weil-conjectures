@@ -179,8 +179,12 @@ external product over `B` and `f ×_B g : X ×_B Y ⟶ B` for the structure morp
 
 `R(f ×_B g)_! (K ⊠ M) ⟶ Rf_! K ⊗ᴸ Rg_! M`
 
-in `D(B_ét)` is an isomorphism. -/
+in `D(B_ét)` is an isomorphism. The coefficients are torsion, finitely generated objects of `A`
+being finite (`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`): with coefficients
+`ℤ` the statement fails, proper base change failing for a regular proper curve over a strictly
+henselian discrete valuation ring with nodal special fibre. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : Y ⟶ B)
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
     [HasCompactification (pullback.toBase f g)]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -239,6 +243,7 @@ complexes `i_* i^* K` and `j_* j^* L`, rewritten with
 `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
 is the Künneth formula for the compactly supported cohomology of `Z ×_k W`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -277,6 +282,7 @@ It is the relative product theorem
 over `B = Spec k` would also need `R(i ≫ f)_! ≅ Rf_! Ri_*`, the composition of compactly
 supported direct images. -/
 theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
     [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -373,12 +379,12 @@ theorem nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
   exact ⟨leftDerivedUpperStarTensorIso A e.inv _ _ ≪≫ (pb₁ ⊗ᵢ pb₂)⟩
 
 /-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
-general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
+torsion coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
 `Y₁ ×_S Y₂ ⟶ Yᵢ`. It is the relative product theorem
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
 `B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
-    [UpperStarPreservesFlat A]
+    [UpperStarPreservesFlat A] [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
     {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A)}
@@ -540,8 +546,11 @@ and `N` in `Dctf(Y, A)`,
 
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
 
-on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
-theorem hasKunnethComparisons (S : Scheme.{u}) : HasKunnethComparisons A S :=
+on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. As
+for `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`, the
+coefficients are torsion. -/
+theorem hasKunnethComparisons (S : Scheme.{u}) [ConcreteCategory.FiniteOfIsFinitelyGenerated A] :
+    HasKunnethComparisons A S :=
   sorry
 
 end Etale
