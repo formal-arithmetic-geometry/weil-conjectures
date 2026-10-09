@@ -28,6 +28,8 @@ upperStarIsoLocalizationRestriction_inv_app_comp_adicUpperStarUnitIso`).
 
 @[expose] public section
 
+universe w
+
 namespace PadicAlgCl
 
 variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T]
@@ -73,8 +75,7 @@ lemma isUnit_of_forall_ne_zero (f : locallyFiniteFunctions l T) (hf : ∀ t, f.1
 
 section ConstantRank
 
-variable {T' : Type*} [TopologicalSpace T'] {κ ι : Type*} [Fintype κ] [Fintype ι]
-  [DecidableEq κ] [DecidableEq ι]
+variable {κ ι : Type*} [Fintype κ] [Fintype ι] [DecidableEq κ] [DecidableEq ι]
 
 /-- The splitting `κ ≃ Fin r ⊕ (κ ∖ range ρ)` along an injection `ρ : Fin r → κ`. -/
 noncomputable def sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) :
@@ -95,7 +96,8 @@ lemma exists_isOpen_eq_mul (M : Matrix κ ι (locallyFiniteFunctions l T)) (r : 
     (hr : ∀ t, (M.map (locallyFiniteFunctionsEval t)).rank = r) (t₀ : T) :
     ∃ (U : Set T) (ρ : Fin r → κ) (γ : Fin r → ι) (hρ : Function.Injective ρ)
       (hγ : Function.Injective γ), IsOpen U ∧ t₀ ∈ U ∧
-      ∀ (g : C(T', T)), Set.range g ⊆ U → ∃ (P : Matrix κ κ (locallyFiniteFunctions l T'))
+      ∀ {T' : Type w} [TopologicalSpace T'] (g : C(T', T)), Set.range g ⊆ U →
+        ∃ (P : Matrix κ κ (locallyFiniteFunctions l T'))
         (Q : Matrix ι ι (locallyFiniteFunctions l T')), IsUnit P.det ∧ IsUnit Q.det ∧
         M.map (locallyFiniteFunctionsCompAlgHom l g) = P * ((Matrix.fromBlocks 1 0 0 0 :
           Matrix (Fin r ⊕ {i // i ∉ Set.range ρ}) (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex
@@ -109,7 +111,7 @@ lemma exists_isOpen_eq_mul (M : Matrix κ ι (locallyFiniteFunctions l T)) (r : 
     exact h (by rw [Matrix.det_zero_of_column_eq hne (by intro; simp [hab]), map_zero])
   let δ := (M.submatrix ρ γ).det
   refine ⟨{t | δ.1 t ≠ 0}, ρ, γ, hρ, hγ, isOpen_compl_singleton.preimage δ.1.continuous, h,
-    fun g hg ↦ ?_⟩
+    fun {T'} _ g hg ↦ ?_⟩
   let M' := M.map (locallyFiniteFunctionsCompAlgHom l g)
   let N := M'.reindex (sumComplEquiv ρ hρ) (sumComplEquiv γ hγ)
   have hN : N = Matrix.fromBlocks N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁ N.toBlocks₂₂ :=
@@ -557,6 +559,38 @@ noncomputable def cokernelBlockMapIso :
     cokernelBiproductFromSubtypeIso _ _
 
 end Block
+
+end AdicSheaf
+
+namespace AdicSheaf
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+variable {ι κ : Type} [Fintype ι] [Fintype κ] {W : Scheme.{u}}
+
+variable (l ι) in
+/-- The pullback of a finite free module is finite free. -/
+noncomputable def freeUpperStarIso (g : W ⟶ V) :
+    (g)^*ᵃ[l].obj (⨁ fun _ : ι ↦ unit l V) ≅ ⨁ fun _ : ι ↦ unit l W :=
+  (g)^*ᵃ[l].mapBiproduct _ ≪≫ biproduct.mapIso fun _ ↦ adicUpperStarUnitIso l g
+
+lemma unitMatrix_adicUpperStar (g : W ⟶ V) [hg : WeaklyEtale g]
+    (ψ : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ ↦ unit l V) :
+    unitMatrix ((freeUpperStarIso l ι g).inv ≫ (g)^*ᵃ[l].map ψ ≫ (freeUpperStarIso l κ g).hom) =
+      (unitMatrix ψ).map (PadicAlgCl.locallyFiniteFunctionsComp l g.base.hom) := by
+  refine Matrix.ext fun i j ↦ ?_
+  have h1 : biproduct.ι (fun _ : ι ↦ unit l W) j ≫ (freeUpperStarIso l ι g).inv =
+      (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : ι ↦ unit l V) j) := by
+    simp [freeUpperStarIso]
+  have h2 : (freeUpperStarIso l κ g).hom ≫ biproduct.π (fun _ : κ ↦ unit l W) i =
+      (g)^*ᵃ[l].map (biproduct.π (fun _ : κ ↦ unit l V) i) ≫ (adicUpperStarUnitIso l g).hom := by
+    simp [freeUpperStarIso]
+  simp only [unitMatrix, Matrix.map_apply, Category.assoc, h2]
+  rw [reassoc_of% h1]
+  have := adicConstantSheafEndFun_adicUpperStar g hg
+    (biproduct.ι (fun _ : ι ↦ unit l V) j ≫ ψ ≫ biproduct.π (fun _ : κ ↦ unit l V) i)
+  simp only [Functor.map_comp, Category.assoc] at this
+  exact this
 
 end AdicSheaf
 
