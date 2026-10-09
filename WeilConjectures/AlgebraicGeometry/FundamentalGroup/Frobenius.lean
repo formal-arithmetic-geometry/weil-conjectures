@@ -396,7 +396,8 @@ their monodromy characters kill the kernels of `π₁(U) → π₁(U ∪ {z})`, 
 of the surjection `π₁(U) → π₁(C)` as a closed subgroup
 (`AlgebraicGeometry.Scheme.FiniteEtale.fixingSubgroup_le_topologicalClosure_iSup`). Hence they
 are base changes of torsors on `C`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isIsomorphic_pullback`), which are compatible and Frobenius-fixed because torsors on `C` are determined by their
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isIsomorphic_pullback`), which are compatible and
+Frobenius-fixed because torsors on `C` are determined by their
 restrictions to `U`. -/
 theorem exists_extension_of_isIsomorphic_mapIso
     {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
