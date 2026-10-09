@@ -180,4 +180,135 @@ instance : PreservesFiniteColimits (g)^*ᵃ[l] :=
 
 end Functors
 
+section Compat
+
+variable (l)
+
+/-- Pulling back functions along a composite is the composite of the pullbacks, up to the
+composition isomorphism of pushforwards. -/
+lemma adicConstantSheafToLowerStar_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    adicConstantSheafToLowerStar l h₂ ≫
+        (h₂)_*[WeilCoefficients.{u} l].map (adicConstantSheafToLowerStar l h₁) ≫
+          (lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).hom.app (adicConstantSheaf l T) =
+      adicConstantSheafToLowerStar l (h₁ ≫ h₂) := by
+  ext V : 3
+  ext x
+  refine adicConstantSheaf_ext (l := l) fun y ↦ ?_
+  have key : ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) h₁ h₂).hom.app
+      V.unop).left ≫ pullback.fst _ h₁ ≫ pullback.fst V.unop.hom h₂ =
+        pullback.fst V.unop.hom (h₁ ≫ h₂) := by
+    simp only [MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullback,
+      MorphismProperty.Over.mk, NatIso.ofComponents_hom_app, MorphismProperty.Over.isoMk_hom_left]
+    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, pullback.congrHom_hom]
+    erw [pullback.map_id, Category.id_comp]
+    exact pullbackLeftPullbackSndIso_inv_fst _ _ _
+  exact congrArg (fun φ ↦ x.down.1 (φ.base y)) key
+
+/-- Pulling back functions along the identity is the identity, up to the identification
+`(𝟙 X)_* ≅ 𝟭`. -/
+lemma adicConstantSheafToLowerStar_id (X : Scheme.{u}) :
+    adicConstantSheafToLowerStar l (𝟙 X) ≫
+        (lowerStarId (WeilCoefficients.{u} l) X).hom.app (adicConstantSheaf l X) = 𝟙 _ := by
+  ext V : 3
+  ext x
+  refine adicConstantSheaf_ext (l := l) fun y ↦ ?_
+  have key : ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).left ≫
+      pullback.fst V.unop.hom (𝟙 X) = 𝟙 _ := by
+    simp [MorphismProperty.Over.pullbackId]
+  exact congrArg (fun φ ↦ x.down.1 (φ.base y)) key
+
+end Compat
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+open scoped Obj
+
+variable {l : ℕ} [Fact l.Prime]
+
+section Isos
+
+instance {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    NatTrans.IsMonoidal (lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).hom :=
+  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) h₁ h₂).symm)
+    (WeilCoefficients.{u} l) (Scheme.ProEt.topology R) (Scheme.ProEt.topology S)
+    (Scheme.ProEt.topology T)).hom)
+
+instance (X : Scheme.{u}) : NatTrans.IsMonoidal (lowerStarId (WeilCoefficients.{u} l) X).hom :=
+  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousId'
+    (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) (WeilCoefficients.{u} l)
+    (Scheme.ProEt.topology X)).hom)
+
+variable (l) in
+/-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of sheaves of modules over the
+constant `ℓ`-adic sheaves: that of the underlying sheaves, which is linear. -/
+noncomputable def adicLowerStarComp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    (h₁)_*ᵃ[l] ⋙ (h₂)_*ᵃ[l] ≅ (h₁ ≫ h₂)_*ᵃ[l] :=
+  NatIso.ofComponents
+    (fun M ↦ Mod.isoMk ((lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).app M.X)
+      (Functor.act_comp_app_of_isMonoidal (lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).hom
+        (adicConstantSheafToLowerStar l h₁) (adicConstantSheafToLowerStar l h₂)
+        (adicConstantSheafToLowerStar l (h₁ ≫ h₂)) (adicConstantSheafToLowerStar_comp l h₁ h₂) M))
+    fun f ↦ Mod.hom_ext _ _ ((lowerStarComp (WeilCoefficients.{u} l) h₁ h₂).hom.naturality f.hom)
+
+variable (l) in
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of sheaves of modules over the constant `ℓ`-adic
+sheaf. -/
+noncomputable def adicLowerStarId (X : Scheme.{u}) : (𝟙 X)_*ᵃ[l] ≅ 𝟭 (AdicSheaf l X) :=
+  NatIso.ofComponents
+    (fun M ↦ Mod.isoMk (M := (𝟙 X)_*ᵃ[l].obj M) (N := (Mod.comap (D := Sheaf _ _)
+        (𝟙 (adicConstantSheaf l X))).obj M) ((lowerStarId (WeilCoefficients.{u} l) X).app M.X)
+      (Functor.act_comp_app_of_isMonoidal_id (lowerStarId (WeilCoefficients.{u} l) X).hom
+        (adicConstantSheafToLowerStar l (𝟙 X)) (𝟙 _)
+        (adicConstantSheafToLowerStar_id l X) M))
+    (fun f ↦ Mod.hom_ext _ _ ((lowerStarId (WeilCoefficients.{u} l) X).hom.naturality f.hom)) ≪≫
+  Mod.comapId _
+
+variable (l) in
+/-- The pushforwards of sheaves of modules along equal morphisms are isomorphic. -/
+noncomputable def adicLowerStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g') :
+    (g)_*ᵃ[l] ≅ (g')_*ᵃ[l] :=
+  eqToIso (by rw [h])
+
+variable (l) in
+/-- The pullbacks of sheaves of modules along equal morphisms are isomorphic. -/
+noncomputable def adicUpperStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g') :
+    (g)^*ᵃ[l] ≅ (g')^*ᵃ[l] :=
+  eqToIso (by rw [h])
+
+variable (l) in
+/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of sheaves of modules over the constant `ℓ`-adic
+sheaf, by uniqueness of left adjoints. -/
+noncomputable def adicUpperStarId (X : Scheme.{u}) : (𝟙 X)^*ᵃ[l] ≅ 𝟭 (AdicSheaf l X) :=
+  (conjugateIsoEquiv Adjunction.id (adicUpperStarLowerStarAdjunction l (𝟙 X))).symm
+    (adicLowerStarId l X).symm
+
+variable (l) in
+/-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of sheaves of modules over the
+constant `ℓ`-adic sheaves, by uniqueness of left adjoints. -/
+noncomputable def adicUpperStarComp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    (h₁ ≫ h₂)^*ᵃ[l] ≅ (h₂)^*ᵃ[l] ⋙ (h₁)^*ᵃ[l] :=
+  ((conjugateIsoEquiv (adicUpperStarLowerStarAdjunction l (h₁ ≫ h₂))
+      ((adicUpperStarLowerStarAdjunction l h₂).comp (adicUpperStarLowerStarAdjunction l h₁))).symm
+    (adicLowerStarComp l h₁ h₂).symm).symm
+
+variable (l) in
+/-- The pullbacks along the two sides of a commutative square agree. -/
+noncomputable def adicUpperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
+    {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d) :
+    (b)^*ᵃ[l] ⋙ (a)^*ᵃ[l] ≅ (d)^*ᵃ[l] ⋙ (c)^*ᵃ[l] :=
+  (adicUpperStarComp l a b).symm ≪≫ adicUpperStarCongr l h ≪≫ adicUpperStarComp l c d
+
+variable (l) in
+/-- **The pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic sheaf**, as sheaves
+of modules over the constant `ℓ`-adic sheaf: `g^* ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,Z`
+(`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`, a ring isomorphism). -/
+noncomputable def adicUpperStarUnitIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (g)^*ᵃ[l].obj (AdicSheaf.unit l Y) ≅ AdicSheaf.unit l Z :=
+  Mod.regularIsoOfIsIso _
+
+end Isos
+
 end AlgebraicGeometry.ProEtale

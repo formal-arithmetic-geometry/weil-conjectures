@@ -368,3 +368,70 @@ open _root_.CategoryTheory.Mod
 end Functor
 
 end CategoryTheory
+
+namespace CategoryTheory.Functor
+
+open _root_.CategoryTheory.Mod
+
+open scoped Obj
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+/-- Linearity of the components of a monoidal natural transformation `F ⋙ G ⟶ H` between the
+modules obtained by restricting scalars along monoid morphisms `ψ' ≫ G ψ` and `φ` compatible with
+it. -/
+lemma act_comp_app_of_isMonoidal {E : Type*} [Category E] [MonoidalCategory E]
+    {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E} [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+    (e : F ⋙ G ⟶ H) [NatTrans.IsMonoidal e] {A : C} {B : D} {B' : E} [MonObj A] [MonObj B]
+    [MonObj B'] (ψ : B ⟶ F.obj A) (ψ' : B' ⟶ G.obj B) (φ : B' ⟶ H.obj A) [IsMonHom ψ]
+    [IsMonHom ψ'] [IsMonHom φ] (h : ψ' ≫ G.map ψ ≫ e.app A = φ) (M : Mod C A) :
+    act ((comap ψ').obj ((G.mapMod B).obj ((comap ψ).obj ((F.mapMod A).obj M)))).X ≫ e.app M.X =
+      B' ◁ e.app M.X ≫ act ((comap φ).obj ((H.mapMod A).obj M)).X := by
+  subst h
+  have hm := NatTrans.IsMonoidal.tensor (τ := e) A M.X
+  rw [LaxMonoidal.comp_μ] at hm
+  simp only [act_comap_obj, act_mapMod_obj, Functor.map_comp, Category.assoc]
+  rw [← Functor.comp_map, e.naturality]
+  simp only [comp_whiskerRight, Category.assoc]
+  erw [← LaxMonoidal.μ_natural_left_assoc, reassoc_of% hm]
+  rw [tensorHom_def']
+  simp only [Category.assoc, ← whisker_exchange_assoc]
+  rfl
+
+/-- Linearity of the components of a monoidal natural transformation `F ⟶ 𝟭` between the modules
+obtained by restricting scalars along monoid morphisms `ψ` and `φ` compatible with it. -/
+lemma act_comp_app_of_isMonoidal_id {F : C ⥤ C} [F.LaxMonoidal] (e : F ⟶ 𝟭 C)
+    [NatTrans.IsMonoidal e] {A B : C} [MonObj A] [MonObj B] (ψ : B ⟶ F.obj A) (φ : B ⟶ A)
+    [IsMonHom ψ] [IsMonHom φ] (h : ψ ≫ e.app A = φ) (M : Mod C A) :
+    act ((comap ψ).obj ((F.mapMod A).obj M)).X ≫ e.app M.X =
+      B ◁ e.app M.X ≫ act ((comap φ).obj M).X := by
+  subst h
+  have hm := NatTrans.IsMonoidal.tensor (τ := e) A M.X
+  rw [LaxMonoidal.id_μ, Category.comp_id] at hm
+  simp only [act_comap_obj, act_mapMod_obj, Category.assoc]
+  erw [e.naturality]
+  rw [reassoc_of% hm, comp_whiskerRight, Category.assoc, tensorHom_def']
+  erw [Category.assoc, ← whisker_exchange_assoc]
+  rfl
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Mod
+
+open scoped Obj
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+
+/-- A monoid isomorphism `φ : M ≅ B` identifies `M`, as a `B`-module along `φ⁻¹`, with the
+regular `B`-module. -/
+@[simps!]
+noncomputable def regularIsoOfIsIso {M B : C} [MonObj M] [MonObj B] (φ : M ⟶ B) [IsIso φ] [IsMonHom φ] :
+    (comap (D := C) (inv φ)).obj (regular M) ≅ regular B :=
+  letI : IsMonHom (inv φ) := inferInstance
+  isoMk (asIso φ) (by
+    change (inv φ ▷ M ≫ μ[M]) ≫ φ = B ◁ φ ≫ μ[B]
+    rw [Category.assoc, IsMonHom.mul_hom, tensorHom_def, Category.assoc,
+      ← comp_whiskerRight_assoc, IsIso.inv_hom_id, id_whiskerRight, Category.id_comp])
+
+end CategoryTheory.Mod
