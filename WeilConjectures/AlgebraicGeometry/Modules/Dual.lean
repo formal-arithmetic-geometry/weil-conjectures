@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -185,8 +186,31 @@ theorem IsFiniteLocallyFree.dual (M : X.Modules) [M.IsFiniteLocallyFree] :
 /-- The tensor product of two finite locally free `𝒪_X`-modules is finite locally free: on an
 open where `M ≅ 𝒪^r` and `N ≅ 𝒪^s`, it is `𝒪^{rs}`. -/
 theorem IsFiniteLocallyFree.tensorObj (M N : X.Modules) [M.IsFiniteLocallyFree]
-    [N.IsFiniteLocallyFree] : (M ⊗ N).IsFiniteLocallyFree :=
-  sorry
+    [N.IsFiniteLocallyFree] : (M ⊗ N).IsFiniteLocallyFree := by
+  obtain ⟨q, hq, hf⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := M)
+  obtain ⟨q', hq', hf'⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := N)
+  have (i : q.I) : Finite (q.generators i).I := (hf.isFiniteType i).finite
+  have (j : q'.I) : Finite (q'.generators j).I := (hf'.isFiniteType j).finite
+  -- A module which is free on `U` is free on every open `W ≤ U`.
+  have hres {P : X.Modules} {U W : X.Opens} (h : W ≤ U) {I : Type u}
+      (e : P.over U ≅ SheafOfModules.free I) : P.restrict W.ι ≅ SheafOfModules.free I :=
+    restrictCompIso P U.ι (X.homOfLE h) W.ι (X.homOfLE_ι h) ≪≫
+      (restrictFunctor (X.homOfLE h)).mapIso (overIsoFreeEquiv P U I e) ≪≫ restrictFreeIso _ _
+  refine isFiniteLocallyFree_of_restrict_iso_free (M ⊗ N) (ι := q.I × q'.I)
+    (fun p ↦ Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)) ?_
+    (fun p ↦ Σ _ : (q.generators p.1).I, (q'.generators p.2).I) fun p ↦ ⟨?_⟩
+  · simp only [Scheme.Opens.opensRange_ι]
+    rw [← iSup_inf_iSup, (Opens.coversTop_iff _ _).1 q.coversTop,
+      (Opens.coversTop_iff _ _).1 q'.coversTop, inf_top_eq]
+  · have := hq.isIso p.1
+    have := hq'.isIso p.2
+    exact (restrictFunctorIsoPullback _).app _ ≪≫
+      (Functor.Monoidal.μIso (pullback (Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2))) M N).symm ≪≫
+      ((((restrictFunctorIsoPullback _).app M).symm ≪≫ hres inf_le_left
+          (asIso (q.generators p.1).π).symm) ⊗ᵢ
+        (((restrictFunctorIsoPullback _).app N).symm ≪≫ hres inf_le_right
+          (asIso (q'.generators p.2).π).symm)) ≪≫
+      SheafOfModules.freeTensorFreeIso.{u} _ _
 
 /-- The contravariant functor `ℱ ↦ ℱᵛ ⊗ ω` on finite locally free modules, for an invertible
 `ω`, with values in finite locally free modules. -/

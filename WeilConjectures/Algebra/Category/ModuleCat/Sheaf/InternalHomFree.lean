@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 
@@ -57,9 +58,6 @@ instance : ((homFunctor R).flip.obj N).Additive where
     exact homObjMap_add_left _ _ _
 
 variable [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-
-instance : HasFiniteBiproducts (SheafOfModules.{u} 𝓡) :=
-  HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- **The internal hom out of a finite free module.** For a finite type `I`,
 `homObj (free I) N ≅ ⨁_I N`. -/
