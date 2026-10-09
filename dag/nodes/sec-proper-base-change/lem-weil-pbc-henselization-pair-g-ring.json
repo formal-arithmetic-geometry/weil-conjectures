@@ -5,15 +5,90 @@
  "statement": "Let $A$ be a G-ring [def-weil-pbc-g-ring] (in particular Noetherian) and $I\\subseteq A$ an ideal, and let $(A^h,I^h)$, $I^h=IA^h$, be the henselization of the pair $(A,I)$ [lem-weil-pbc-pair-henselization]. Then $A^h$ is a G-ring (in particular Noetherian).",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0AH3 (lemma-henselization-pair-G-ring, line 12742; reference Greco, Theorem 5.3 i)) and its proof (Lemma 0AGV henselization-Noetherian-pair: $A^h$ Noetherian with the same $I$-adic completion; Lemmas check-G-ring-maximal-ideals, flat-unramified, filtered-colimit-etale-noetherian-fibres)"
+  "place": "Lemma Tag 0AH3 (more-algebra-lemma-henselization-pair-G-ring, line 12742; reference Greco, Theorem 5.3 i)) and its proof, invoking Tags 0AGV (henselization-Noetherian-pair), 0AGX (flat-unramified), 0AH1 (filtered-colimit-etale-noetherian-fibres), 07PT (check-G-ring-maximal-ideals), and Algebra Tag 07QH (geometrically-regular-over-separable-algebraic)"
  },
  "stmt_deps": [
   "def-weil-pbc-g-ring",
   "lem-weil-pbc-pair-henselization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $A$ is a G-ring, it is Noetherian. Applying Tag 0AGV to the Noetherian pair $(A,I)$ and its henselization $(A^h,I^h)$ gives that $A^h$ is Noetherian, $I^h=IA^h$, and the canonical map of adic completions $A^\\wedge\\xrightarrow{\\sim}(A^h)^\\wedge$ is an isomorphism; it also gives flatness of $A\\to A^h$.",
+   "uses": [
+    "lem-weil-pbc-henselization-noetherian-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH3 proof, first paragraph, invoking Tag 0AGV"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m^h\\subset A^h$ and put $\\mathfrak m=(A\\to A^h)^{-1}(\\mathfrak m^h)$. Because $I^h\\subset\\mathfrak m^h$ and $A/I\\xrightarrow{\\sim}A^h/I^h$ by the henselization pair theorem, $I\\subset\\mathfrak m$, $\\mathfrak mA^h_{\\mathfrak m^h}=\\mathfrak m^hA^h_{\\mathfrak m^h}$, and the residue-field map $\\kappa(\\mathfrak m)\\to\\kappa(\\mathfrak m^h)$ is an isomorphism. Localizing the flat map from Step 1 therefore gives a flat local map of Noetherian local rings $A_{\\mathfrak m}\\to A^h_{\\mathfrak m^h}$ satisfying the hypotheses of Tag 0AGX, so $(A_{\\mathfrak m})^\\wedge\\xrightarrow{\\sim}(A^h_{\\mathfrak m^h})^\\wedge$.",
+   "uses": [
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-flat-local-completion-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH3 proof, first paragraph, invoking Tag 0AGX and the quotient property of Tag 0A02"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset A_{\\mathfrak m}$ be a prime and let $\\mathfrak q^h\\subset A^h_{\\mathfrak m^h}$ lie over it. The pair henselization is a filtered colimit of etale $A$-algebras, and Step 1 says it is Noetherian. Applying Tag 0AH1 to this colimit gives finitely many primes $\\mathfrak q_i^h$ of $A^h$ over $\\mathfrak q$ and $A^h\\otimes_A\\kappa(\\mathfrak q)=\\prod_i\\kappa(\\mathfrak q_i^h)$, with every extension $\\kappa(\\mathfrak q)\\subset\\kappa(\\mathfrak q_i^h)$ separable algebraic; localization at $\\mathfrak m^h$ selects the displayed factor containing $\\mathfrak q^h$.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-finite-separable-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH3 proof, middle paragraph, invoking Tag 0AH1"
+   }
+  },
+  {
+   "text": "Write $C=(A_{\\mathfrak m})^\\wedge\\otimes_{A_{\\mathfrak m}}\\kappa(\\mathfrak q)$ and $C_h=(A^h_{\\mathfrak m^h})^\\wedge\\otimes_{A^h_{\\mathfrak m^h}}\\kappa(\\mathfrak q^h)$. The completion isomorphism of Step 2 and the product decomposition of Step 3 identify $C$ with the finite product of the factors $(A^h_{\\mathfrak m^h})^\\wedge\\otimes_{A^h_{\\mathfrak m^h}}\\kappa(\\mathfrak q_i^h)$; hence $C_h$ is a direct factor of $C$. Since $A$ is a G-ring, its defining regularity at $\\mathfrak m$ says that $C$ is geometrically regular over $\\kappa(\\mathfrak q)$, and a direct factor is geometrically regular over that field. The chosen residue extension $\\kappa(\\mathfrak q)\\subset\\kappa(\\mathfrak q^h)$ is separable algebraic by Step 3, so Tag 07QH transfers geometric regularity of $C_h$ from $\\kappa(\\mathfrak q)$ to $\\kappa(\\mathfrak q^h)$.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-henselization-finite-separable-fibres",
+    "lem-weil-pbc-geometric-regularity-separable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH3 proof, final paragraphs, invoking Algebra Tag 07QH"
+   }
+  },
+  {
+   "text": "Steps 2--4 prove geometrically regular formal fibres for every maximal ideal $\\mathfrak m^h$ of $A^h$ and every prime of $A^h_{\\mathfrak m^h}$. Since $A^h$ is Noetherian by Step 1, Tag 07PT, the maximal-ideal criterion for G-rings, implies that $A^h$ is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AH3 proof, invoking Tag 07PT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-geometric-regularity-separable-extension",
+  "lem-weil-pbc-g-ring-maximal-ideal-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH3 (lemma-henselization-pair-G-ring) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +154,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselization-pair-g-ring",
+  "worker": "C1",
+  "summary": "Audited Stacks Lemma 0AH3 with exact Tags 0AGV, 0AGX, 0AH1, 07PT, and Algebra 07QH. Five expanded steps track a maximal ideal, a prime and its completed fibre, the finite separable fibre decomposition, the completion-factor argument, and the maximal-ideal criterion. Four reusable non-Mathlib facts are explicit public helper nodes; the generic 0AGX completion lemma is reused from sheaf-dag."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 19:41 and 20:00: the four new nodes are TeX statements with node citations and exact tags (0AGV, 0AH1, 07QH, 07PT, tags verified), the existing lem-weil-pbc-flat-local-completion-iso (0AGX) is cited instead of a duplicate, and the five steps now carry the argument: Noetherianity and the unchanged completion (0AGV); for a maximal m^h, m A^h_{m^h} is the maximal ideal with equal residue fields (A/I = A^h/I^h), so 0AGX gives the completion isomorphism; 0AH1 on the filtered colimit of etale algebras gives the finite product of separable residue extensions over q; the completed fibre of A^h at q^h is a direct factor of the geometrically regular completed fibre of A at q, and 07QH transfers geometric regularity along the separable extension; 07PT concludes. The review by C1 is a real review."
+ }
 }
