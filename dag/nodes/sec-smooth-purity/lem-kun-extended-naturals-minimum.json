@@ -1,0 +1,43 @@
+{
+ "id": "lem-kun-extended-naturals-minimum",
+ "kind": "statement",
+ "title": "Every nonempty family in {-∞,0,1,...,∞} has a minimum",
+ "statement": "Every nonempty subset $S$ of the totally ordered set $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$ has a least element; equivalently, for every nonempty index set $I$ and every map $f:I\\to\\{-\\infty,0,1,\\ldots,\\infty\\}$, the infimum $\\inf_{i\\in I}f(i)$ equals $f(i_0)$ for some $i_0\\in I$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Definition 5.10.1, tag 0055 (definition-Krull), item (4): the formula $\\dim_x(X)=\\min\\{\\dim(U)\\}$ takes a minimum, which exists by this statement"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem csInf_mem\\|theorem ciInf_mem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/ConditionallyCompleteLattice/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/ConditionallyCompleteLattice/Indexed.lean; grep -n 'WellFoundedLT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/ENat/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/WithBot.lean; grep -n 'CompleteLinearOrder (WithBot ENat)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/ENat/Lattice.lean",
+   "results": "Order/ConditionallyCompleteLattice/Basic.lean:458 `csInf_mem (hs : s.Nonempty) : sInf s ∈ s` under `[ConditionallyCompleteLinearOrder α] [WellFoundedLT α]`; Indexed.lean:503 `ciInf_mem [Nonempty ι] (f : ι → α) : iInf f ∈ range f`; Data/ENat/Basic.lean:47 ℕ∞ derives WellFoundedLT; Order/WithBot.lean:745 `instance instWellFoundedLT [LT α] [WellFoundedLT α] : WellFoundedLT (WithBot α)`; Data/ENat/Lattice.lean:32 `CompleteLinearOrder (WithBot ENat)`",
+   "date": "2026-10-09",
+   "verdict": "generalization: csInf_mem / ciInf_mem for any well-founded conditionally complete linear order, specialized to WithBot ℕ∞"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ciInf_mem",
+  "file": "Mathlib/Order/ConditionallyCompleteLattice/Indexed.lean",
+  "how": "specializes in one line: `ciInf_mem (α := WithBot ℕ∞) f` (instances WithBot.instWellFoundedLT over ℕ∞'s WellFoundedLT and CompleteLinearOrder (WithBot ENat)); the set form is `csInf_mem` in Order/ConditionallyCompleteLattice/Basic.lean:458"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-kun-topological-dimension-at-point",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
