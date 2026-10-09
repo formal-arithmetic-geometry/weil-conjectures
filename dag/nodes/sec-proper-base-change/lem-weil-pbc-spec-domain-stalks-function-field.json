@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-spec-domain-stalks-function-field",
+ "kind": "statement",
+ "title": "Stalks and function field of the spectrum of a domain",
+ "statement": "Let $R$ be a commutative ring and $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. (1) For every prime $\\mathfrak p\\subset R$ the stalk $\\mathcal O_{X,\\mathfrak p}$, with the map $R=\\Gamma(X,\\mathcal O_X)\\to\\mathcal O_{X,\\mathfrak p}$, is a localization of $R$ at $\\mathfrak p$; so $\\mathcal O_{X,\\mathfrak p}\\cong R_{\\mathfrak p}$ as $R$-algebras. (2) If $R$ is an integral domain with field of fractions $K$, then $X$ is an integral scheme [def-pc-integral-scheme], its generic point is the prime $(0)$, and its function field $\\mathcal O_{X,(0)}$ is a field of fractions of $R$, i.e. $\\mathcal O_{X,(0)}\\cong K$ as $R$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01HV (label lemma-spec-sheaves, line 692): the stalk of the structure sheaf of Spec R at p is R_p (also schemes.tex line 1588, Example 01IG); properties.tex Lemma 01ON (label lemma-characterize-integral, line 260: integral = reduced and irreducible; Spec of a domain is reduced and irreducible with generic point (0)); morphisms.tex Definition 01RW (label definition-function-field, line 12742: the function field of an integral scheme is the stalk at its generic point); used in etale-cohomology.tex Lemma 09ZC proof (line 14445) to apply Lemma 09Z9 to X = Spec R"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of the structure sheaf of Spec R at a prime p is the localization R_p",
+   "results": "AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, StructureSheaf.stalkIso, stalkIso_hom, instIsIsoCommRingCatStalkToFiberRingHom (Mathlib.AlgebraicGeometry.StructureSheaf)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.to_stalk"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "function field of the spectrum of an integral domain is its field of fractions",
+   "results": "AlgebraicGeometry.functionField_isFractionRing_of_affine, instAlgebraCarrierFunctionFieldSpec, functionField_isFractionRing_of_isAffineOpen, instFieldCarrierFunctionField (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "match: functionField_isFractionRing_of_affine"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance IsLocalization.to_stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/StructureSheaf.lean; grep -n 'IsIntegral (Spec' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean; grep -n 'functionField_isFractionRing_of_affine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "results": "StructureSheaf.lean:940 instance IsLocalization.to_stalk (p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal; Properties.lean:331 instance {R : CommRingCat} [IsDomain R] : IsIntegral (Spec R) (and :335 affine_isIntegral_iff); FunctionField.lean:116 instance functionField_isFractionRing_of_affine (R) [IsDomain R] : IsFractionRing R (Spec R).functionField",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.functionField_isFractionRing_of_affine",
+  "file": "Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+  "how": "one declaration per clause: (1) instance StructureSheaf.IsLocalization.to_stalk (StructureSheaf.lean:940; the stalk of Spec R is the stalk of its structure sheaf); (2) the instance IsIntegral (Spec R) for a domain R (Mathlib/AlgebraicGeometry/Properties.lean:331) and functionField_isFractionRing_of_affine (Mathlib/AlgebraicGeometry/FunctionField.lean:116; Scheme.functionField is the stalk at the generic point)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf (StructureSheaf.IsLocalization.to_stalk :940, IsIntegral (Spec R) instance, functionField_isFractionRing_of_affine FunctionField.lean:116); accepted on the worker′s source check."
+ }
+}

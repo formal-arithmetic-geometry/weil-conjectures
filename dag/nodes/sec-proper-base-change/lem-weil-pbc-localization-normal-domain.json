@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-localization-normal-domain",
+ "kind": "statement",
+ "title": "A localization of a normal domain is a normal domain with the same fraction field (Stacks 00GY)",
+ "statement": "Let $R$ be a normal domain [def-weil-pbc-normal-ring] with field of fractions $K$, and let $S\\subseteq R$ be a multiplicative subset with $0\\notin S$. Then $S^{-1}R$ is a normal domain, and the map $S^{-1}R\\to K$, $r/s\\mapsto r/s$, is injective and identifies $K$ with the field of fractions of $S^{-1}R$. (In particular, for $f\\in R$, $f\\neq0$, $R_f$ is a normal domain with fraction field $K$, and for a prime $\\mathfrak p$, $R_{\\mathfrak p}$ is a normal domain with fraction field $K$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00GY (label lemma-localize-normal-domain), line 8048, and its proof; the fraction field statement is the identification $S^{-1}R\\subseteq K$ used in that proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of an integrally closed domain is integrally closed",
+   "results": "isIntegrallyClosed_of_isLocalization (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed), IsIntegrallyClosed.of_localization, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization_submonoid (LocalProperties.IntegrallyClosed), IsIntegralClosure.isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match: isIntegrallyClosed_of_isLocalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsFractionRing, nonZeroDivisors, |- IsFractionRing _ _",
+   "results": "IsFractionRing.isFractionRing_of_isLocalization (Mathlib.RingTheory.Localization.LocalizationLocalization), Localization.isFractionRing_range_mapToFractionRing (Localization.AsSubring)",
+   "date": "2026-10-10",
+   "verdict": "match: IsFractionRing.isFractionRing_of_isLocalization for the fraction field clause"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isIntegrallyClosed_of_isLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; grep -n 'isFractionRing_of_isLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/LocalizationLocalization.lean; grep -rn 'theorem isDomain_of_le_nonZeroDivisors\\|theorem isDomain_localization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/",
+   "results": "IntegrallyClosed.lean:379 lemma isIntegrallyClosed_of_isLocalization [IsIntegrallyClosed R] [IsDomain R] (M : Submonoid R) (hM : M ≤ R⁰) [IsLocalization M S] : IsIntegrallyClosed S; LocalizationLocalization.lean:260 theorem IsFractionRing.isFractionRing_of_isLocalization (M) (S T) [IsScalarTower R S T] [IsLocalization M S] [IsFractionRing R T] (hM : M ≤ nonZeroDivisors R) : IsFractionRing S T; Localization/Defs.lean:891 IsLocalization.isDomain_of_le_nonZeroDivisors (hM : M ≤ nonZeroDivisors R) : IsDomain S",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isIntegrallyClosed_of_isLocalization, IsFractionRing.isFractionRing_of_isLocalization, IsLocalization.isDomain_of_le_nonZeroDivisors",
+  "file": "Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+  "how": "one lemma per clause: $0\\notin S$ in a domain means $S\\le R^0$ (nonZeroDivisors); IsLocalization.isDomain_of_le_nonZeroDivisors (Mathlib/RingTheory/Localization/Defs.lean:891) gives that $S^{-1}R$ is a domain; isIntegrallyClosed_of_isLocalization (IntegrallyClosed.lean:379) that it is integrally closed in its fraction field; IsFractionRing.isFractionRing_of_isLocalization (Mathlib/RingTheory/Localization/LocalizationLocalization.lean:260, with T = K = FractionRing R) that $K$ is a fraction field of $S^{-1}R$ via the induced map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf (isIntegrallyClosed_of_isLocalization IntegrallyClosed.lean:379, IsFractionRing.isFractionRing_of_isLocalization, isDomain_of_le_nonZeroDivisors); accepted on the worker′s source check."
+ }
+}
