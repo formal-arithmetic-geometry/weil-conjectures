@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-open-immersion-monomorphism",
+ "kind": "statement",
+ "title": "An open immersion of schemes is a monomorphism",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-pc-scheme], [def-weil-open-immersion]. Then $j$ is a monomorphism in the category of schemes: for any scheme $T$ and morphisms $a,b:T\\to U$ with $j\\circ a=j\\circ b$ one has $a=b$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma Tag 01L7 (lemma-immersions-monomorphisms): an immersion of schemes is a monomorphism"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open immersion of schemes is a monomorphism",
+   "results": "AlgebraicGeometry.IsOpenImmersion.mono (Mathlib.AlgebraicGeometry.OpenImmersion), IsOpenImmersion.le_monomorphisms (same module), IsOpenImmersion.of_flat_of_mono (Mathlib.AlgebraicGeometry.Morphisms.FlatMono), LocallyRingedSpace.IsOpenImmersion.mono (Mathlib.Geometry.RingedSpace.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsOpenImmersion.mono"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Mono",
+   "results": "AlgebraicGeometry.IsOpenImmersion.mono : {X Z : Scheme} (f : X ⟶ Z) [IsOpenImmersion f] : Mono f (Mathlib.AlgebraicGeometry.OpenImmersion); Scheme.pullback_map_isOpenImmersion (Mathlib.AlgebraicGeometry.Pullbacks); instMono...OfIsOpenImmersion (AlgebraicGeometry.Limits, LimitsOver); IsOpenImmersion.of_flat_of_mono",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsOpenImmersion.mono"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance mono' Mathlib/AlgebraicGeometry/OpenImmersion.lean Mathlib/Geometry/RingedSpace/OpenImmersion.lean",
+   "results": "AlgebraicGeometry/OpenImmersion.lean:546 `instance mono : Mono f := (forget).mono_of_mono_map (inferInstanceAs (Mono f.toLRSHom))` in namespace AlgebraicGeometry.IsOpenImmersion with variable `[H : IsOpenImmersion f]`, f : X ⟶ Z of schemes; Geometry/RingedSpace/OpenImmersion.lean:153, :1004 (PresheafedSpace, LocallyRingedSpace versions)",
+   "date": "2026-10-10",
+   "verdict": "match: read at the source, exactly the node's statement"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsOpenImmersion.mono",
+  "file": "Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "how": "exact: `instance mono : Mono f` (OpenImmersion.lean:546) for f : X ⟶ Z a morphism of schemes with [IsOpenImmersion f]; Mono f is the cancellation property of the statement"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-open-restriction-pullback-unit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf AlgebraicGeometry.IsOpenImmersion.mono (OpenImmersion.lean:546); checked."
+ }
+}
