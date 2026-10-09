@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+public import WeilConjectures.WeilSheaf.Triangle
 
 /-!
 # Comparing the transform of the zero extension with the transform of the middle extension
@@ -31,6 +32,11 @@ The datum of that sequence together with the two comparison isomorphisms is bund
 
 ## Main declarations
 
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.shortExact_boundaryShortComplex` and
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.boundaryTriangle_distinguished`: the sequence
+  `0 → j_!M → j_*M → B → 0` is short exact, and its rotated triangle
+  `B → j_!M[1] → j_*M[1] → B[1]` is distinguished, as is its Fourier transform
+  (`…LisseOnDenseOpen.fourierTransform_mapTriangle_boundaryTriangle_distinguished`).
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`: the exact sequence, the
   comparison isomorphisms with the transforms, and the square identifying its epimorphism with
   the transform of `j_!M[1] → j_*M[1]`.
@@ -43,7 +49,7 @@ The datum of that sequence together with the two comparison isomorphisms is bund
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits Pretriangulated
 
 namespace AlgebraicGeometry
 
@@ -51,6 +57,47 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+section Boundary
+
+variable (D : LisseOnDenseOpen k₀ l)
+
+/-- The sequence `0 → j_!M → j_*M → B → 0` of Weil sheaves on the affine line, `B` being the
+boundary sheaf. -/
+noncomputable def boundaryShortComplex : ShortComplex (WeilSheaf k₀ l (affineLine k₀)) :=
+  ShortComplex.mk ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf) (cokernel.π _)
+    (cokernel.condition _)
+
+/-- The sequence `0 → j_!M → j_*M → B → 0` is short exact: `j_!M → j_*M` is a monomorphism
+(`AlgebraicGeometry.WeilSheaf.mono_extensionByZeroToDirectImage_app`) and `B` is its cokernel.
+(blueprint: `sk-p-dl-a1-correction`) -/
+lemma shortExact_boundaryShortComplex : D.boundaryShortComplex.ShortExact :=
+  ShortComplex.ShortExact.mk' (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel _))
+    (WeilSheaf.mono_extensionByZeroToDirectImage_app D.j D.sheaf)
+    (inferInstanceAs (Epi (cokernel.π _)))
+
+/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` of the sequence
+`0 → j_!M → j_*M → B → 0`, whose middle arrow is `-(j_!M[1] → j_*M[1])`. -/
+noncomputable def boundaryTriangle : Triangle (WeilComplex k₀ l (affineLine k₀)) :=
+  (WeilSheaf.singleTriangle D.shortExact_boundaryShortComplex).rotate.rotate
+
+lemma boundaryTriangle_mor₂ :
+    D.boundaryTriangle.mor₂ = -D.shiftedExtensionByZeroToMiddleExtension :=
+  rfl
+
+/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is distinguished.
+(blueprint: `sk-p-dl-a1-correction`) -/
+lemma boundaryTriangle_distinguished : D.boundaryTriangle ∈ distTriang _ :=
+  rot_of_distTriang _ (rot_of_distTriang _
+    (WeilSheaf.singleTriangle_distinguished D.shortExact_boundaryShortComplex))
+
+/-- The Fourier transform of the rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is
+distinguished, the transform being a triangulated functor. (blueprint: `sk-p-dl-a1-correction`) -/
+lemma fourierTransform_mapTriangle_boundaryTriangle_distinguished :
+    (fourierTransform ψ).mapTriangle.obj D.boundaryTriangle ∈ distTriang _ :=
+  (fourierTransform ψ).map_distinguished _ D.boundaryTriangle_distinguished
+
+end Boundary
 
 /--
 The zero-extension comparison datum for `D` and a Fourier partner `D'`: a short exact sequence

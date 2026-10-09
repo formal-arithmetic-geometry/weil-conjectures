@@ -187,7 +187,8 @@ instance (f : X ⟶ Y)
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
 noncomputable instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-    (c : Compactification f) : (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).CommShift ℤ := by
+    (c : Compactification f) :
+    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).CommShift ℤ := by
   unfold ProEtaleWeilSheaf.rightDerivedLowerShriek
   infer_instance
 

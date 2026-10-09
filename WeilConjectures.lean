@@ -1148,6 +1148,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Com
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
