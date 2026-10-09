@@ -14,9 +14,53 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T_E=\\coprod_{e\\in E}T$ be the constant group scheme over $T$ (Groupoids, Example 39.5.6, Tag 03YW). By [lem-weil-pbc-constant-group-scheme-morphism-clopen], for every etale $T$-scheme $U$ the representable presheaf $h_{T_E}(U)=\\operatorname{Mor}_T(U,T_E)$ is the set of clopen decompositions $U=\\coprod_{e\\in E}U_e$, equivalently maps $|U|\\to E$ with open fibres. Under this identification the canonical map $E\\to h_{T_E}(U)$ sends $e$ to the morphism whose $e$-piece is all of $U$ and whose other pieces are empty, exactly the constant map with value $e$; the group law is pointwise addition.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-constant-group-scheme-morphism-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 59.23.2 (Tag 03P5), using Groupoids, Example 39.5.6 (Tag 03YW)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-small-etale-representable-presheaf-sheaf], $h_{T_E}$ is a sheaf on the small etale site (Stacks Lemma 59.15.8, Tag 03O3). Let $P_E$ be the constant presheaf $U\\mapsto E$, let $\\eta:P_E\\to P_E^\\#=\\underline E$ be its sheafification map, and let $\\alpha:P_E\\to h_{T_E}$ be the map of Step 1. Since $h_{T_E}$ is a sheaf, $\\alpha$ factors uniquely as $P_E\\xrightarrow{\\eta}\\underline E\\xrightarrow{\\varphi}h_{T_E}$. Conversely, every section of $h_{T_E}(U)$ has the clopen decomposition of Step 1, so the family of its nonempty pieces is an etale covering of $U$ on each member of which it is $\\alpha(e)$, a constant section. Thus $h_{T_E}$ is the sheaf associated to $P_E$ and the sheafification comparison $\\varphi:\\underline E\\xrightarrow{\\sim}h_{T_E}$ is an isomorphism by the sheafification universal property (equivalently, local representatives give surjectivity and the sheaf uniqueness condition gives injectivity). Taking $U=T$ identifies $\\underline E(T)$ with the group of Zariski-locally-constant maps $|T|\\to E$, and the factorization carries $\\iota_T(e)$ to the constant map with value $e$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-weil-pbc-constant-group-scheme-morphism-clopen",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Remark 59.23.2 (Tag 03P5), using Lemma 59.15.8 (Tag 03O3) and the sheafification universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-constant-group-scheme-morphism-clopen",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark 59.23.2 (Tag 03P5), with Groupoids Example 39.5.6 (Tag 03YW), Etale Cohomology Lemma 59.15.8 (Tag 03O3), and the sheafification universal property"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +112,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "worker": "stage1",
+  "summary": "Repair split: added public unsplit nodes lem-weil-pbc-constant-group-scheme-morphism-clopen and lem-weil-pbc-small-etale-representable-presheaf-sheaf, both created.item equal to this item and sourced at Stacks Tags 03YW and 03O3. The proof now explicitly identifies E -> h_{T_E}(U) with constant maps, and constructs the sheafification comparison underline E -> h_{T_E} and proves it is an isomorphism from the clopen local representatives and sheafification uniqueness. Existing Stacks 03P5 and generic site-sheafification node are cited."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Second delivery: the clopen-decomposition fact (03YW) and the representable-presheaf-is-a-sheaf fact (03O3) are now cited unsplit nodes with citations; the comparison underline{E} -> h_{T_E} is shown to be an isomorphism. Accepted by L."
+ }
 }
