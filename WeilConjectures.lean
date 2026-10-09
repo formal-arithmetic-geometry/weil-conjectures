@@ -172,11 +172,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceEqualizer
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRefine
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSection
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
@@ -946,6 +948,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
