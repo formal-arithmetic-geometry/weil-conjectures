@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-image-universally-closed",
+ "kind": "statement",
+ "title": "The image of a universally closed scheme under a surjection is universally closed",
+ "statement": "Let $S$ be a scheme, $p:X\\to S$ and $q:Y\\to S$ morphisms of schemes [def-pc-scheme], and $f:X\\to Y$ a morphism with $q\\circ f=p$. If $p$ is universally closed [def-weil-proper-morphism] and $f$ is surjective [def-weil-surjective-morphism], then $q$ is universally closed. In particular, if moreover $q$ is separated and locally of finite type [def-weil-finite-type-morphism], then $q$ is proper.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 03GN (lemma-image-proper-is-proper, line 10054) and its proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if X → Y surjective and X → S universally closed then Y → S universally closed",
+   "results": "Surjective.of_universallyClosed_of_isDominant, UniversallyClosed, universallyClosed_isStableUnderBaseChange, IsClosedMap.of_comp_surjective, UniversallyClosed.of_comp_surjective (Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed), UniversallyClosed.mk",
+   "date": "2026-10-10",
+   "verdict": "match: UniversallyClosed.of_comp_surjective"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective, |- AlgebraicGeometry.UniversallyClosed _",
+   "results": "AlgebraicGeometry.UniversallyClosed.of_comp_surjective (Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_comp_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/UniversallyClosed.lean:78 lemma UniversallyClosed.of_comp_surjective (f : X ⟶ Y) (g : Y ⟶ Z) [UniversallyClosed (f ≫ g)] [Surjective f] : UniversallyClosed g; used in Morphisms/Proper.lean:146 and ZariskisMainTheorem.lean:434",
+   "date": "2026-10-10",
+   "verdict": "match (read: Morphisms/UniversallyClosed.lean:77-84)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.UniversallyClosed.of_comp_surjective",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+  "how": "exact for the first assertion with f, g := q (Mathlib composes left to right: f ≫ q = p); the 'in particular' is isProper_iff (Mathlib/AlgebraicGeometry/Morphisms/Proper.lean: IsProper ↔ IsSeparated ∧ UniversallyClosed ∧ LocallyOfFiniteType)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-closed-in-proper-fp",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf UniversallyClosed.of_comp_surjective (Morphisms/UniversallyClosed.lean:78) with isProper_iff; checked."
+ }
+}

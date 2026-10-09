@@ -13,9 +13,139 @@
   "def-weil-closed-immersion",
   "lem-weil-pbc-limit-affine-transition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The finitely presented envelope.* Since $f$ is proper it is separated, quasi-compact, quasi-separated and of finite type [def-weil-proper-morphism]; as $S$ is quasi-compact and quasi-separated, so is $X$ [lem-weil-pbc-qcqs-morphism-permanence] (2). By Stacks Proposition 01ZJ [prop-nagata-finite-type-closed-in-fp] (the envelope of [def-nagata-finite-type-closed-in-fp]; Lean: Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation, closed) there are a scheme $Y$, a closed immersion $i:X\\to Y$ and a morphism $g:Y\\to S$ that is separated and of finite presentation with $g\\circ i=f$. Since $g$ is quasi-compact and quasi-separated and $S$ is quasi-compact and quasi-separated, $Y$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2).",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "prop-nagata-finite-type-closed-in-fp",
+    "def-nagata-finite-type-closed-in-fp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, first sentence (Proposition 01ZJ)"
+   }
+  },
+  {
+   "text": "*Chow's lemma for the envelope.* $g$ is separated and of finite type (finite presentation implies locally of finite type and quasi-compact [def-weil-pbc-scheme-conventions]) over the quasi-compact quasi-separated $S$. By Chow's lemma [lem-weil-pbc-chow-finite-type] (Stacks 0202) there are $n\\ge0$, a scheme $Y'$, a proper surjective morphism $\\pi:Y'\\to Y$ and an immersion $j:Y'\\to\\mathbf P^n_S$ [def-nagata-projective-space-base-change] with $p\\circ j=g\\circ\\pi$, $p:\\mathbf P^n_S\\to S$ the projection. The projection $p$ is proper [lemma-nagata-projective-space-base-change-proper] (Lean closed), in particular separated.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-chow-finite-type",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, second sentence (Lemma 0202)"
+   }
+  },
+  {
+   "text": "*$X$ as a limit of finitely presented closed subschemes of $Y$.* Since $Y$ is quasi-compact and quasi-separated and $i$ is a closed immersion, Stacks Lemma 09ZP [lemma-nagata-closed-subscheme-fp-system] (with the system of [def-nagata-closed-subscheme-fp-system]; Lean: Scheme.IdealSheafData.isLimitFgSubCone, closed) gives: let $\\mathcal I\\subseteq\\mathcal O_Y$ be the quasi-coherent ideal of $X$, $I$ the set of quasi-coherent subideals $\\mathcal I_\\alpha\\subseteq\\mathcal I$ of finite type ordered by inclusion (nonempty: it contains $0$; directed: $\\mathcal I_\\alpha+\\mathcal I_\\beta$ is of finite type), $X_\\alpha=V(\\mathcal I_\\alpha)\\subseteq Y$; then every $i_\\alpha:X_\\alpha\\to Y$ is a closed immersion of finite presentation, the transition morphisms $X_\\beta\\to X_\\alpha$ ($\\alpha\\le\\beta$, from $\\mathcal I_\\alpha\\subseteq\\mathcal I_\\beta$) and the morphisms $X\\to X_\\alpha$ (from $\\mathcal I_\\alpha\\subseteq\\mathcal I$) are closed immersions, and $X=\\varprojlim_\\alpha X_\\alpha$ in the category of schemes. Put $g_\\alpha=g\\circ i_\\alpha:X_\\alpha\\to S$. Then $g_\\alpha$ is of finite presentation [lem-weil-pbc-proper-fp-permanence] (d), separated and locally of finite type (closed immersions are proper (c), hence separated and of finite type, and (e)). Closed immersions are finite, hence affine [lem-weil-pbc-closed-immersion-finite], so the system has affine transition morphisms [lem-weil-pbc-limit-affine-transition].",
+   "uses": [
+    "lemma-nagata-closed-subscheme-fp-system",
+    "def-nagata-closed-subscheme-fp-system",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, third sentence (Lemma 09ZP; finite presentation of X_i over S via Morphisms Lemma 01TR)"
+   }
+  },
+  {
+   "text": "*Inverse images in $Y'$.* Put $X'_\\alpha=Y'\\times_YX_\\alpha$ and $X'=Y'\\times_YX$ [def-pc-fibre-product] (the scheme-theoretic inverse images of $X_\\alpha$, $X$ in $Y'$), with projections $\\pi_\\alpha:X'_\\alpha\\to X_\\alpha$, $\\pi_X:X'\\to X$ and $e_\\alpha:X'_\\alpha\\to Y'$, $e:X'\\to Y'$. The morphisms $e_\\alpha$, $e$ are closed immersions (base changes of $i_\\alpha$, $i$) [lem-weil-pbc-proper-fp-permanence] (b). The transition morphisms $X'_\\beta\\to X'_\\alpha$ and the morphisms $X'\\to X'_\\alpha$ induced by $X_\\beta\\to X_\\alpha$, $X\\to X_\\alpha$ are closed immersions: $X'_\\beta=X'_\\alpha\\times_{X_\\alpha}X_\\beta$ and $X'=X'_\\alpha\\times_{X_\\alpha}X$ (pasting of fibre squares), so they are base changes of closed immersions (b). And $X'=\\varprojlim_\\alpha X'_\\alpha$: for every scheme $T$, $\\operatorname{Hom}(T,X')=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X)=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\varprojlim_\\alpha\\operatorname{Hom}(T,X_\\alpha)=\\varprojlim_\\alpha\\bigl(\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X_\\alpha)\\bigr)=\\varprojlim_\\alpha\\operatorname{Hom}(T,X'_\\alpha)$, naturally in $T$, where the third equality holds because limits of sets commute with limits and the index set $I$ is nonempty and directed, hence connected, so the constant factors $\\operatorname{Hom}(T,Y')$ and $\\operatorname{Hom}(T,Y)$ pass through $\\varprojlim_\\alpha$. By Yoneda $X'$ with the morphisms $X'\\to X'_\\alpha$ is the limit.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, fourth and fifth sentences ('Denote X'_i ⊂ Y' ... Then lim X'_i = X'.')"
+   }
+  },
+  {
+   "text": "*$X'$ is closed in $\\mathbf P^n_S$.* $\\pi_X$ is a base change of the proper $\\pi$, hence proper, and $f$ is proper, so $f\\circ\\pi_X:X'\\to S$ is proper [lem-weil-pbc-proper-fp-permanence] (a), (b). Put $h=j\\circ e:X'\\to\\mathbf P^n_S$; it is an immersion (composite of a closed immersion and an immersion, (e)), and $p\\circ h=p\\circ j\\circ e=g\\circ\\pi\\circ e=g\\circ i\\circ\\pi_X=f\\circ\\pi_X$. As $p$ is separated (step 2) and $p\\circ h$ is proper, $h$ is proper [lem-weil-pbc-proper-over-separated] (Stacks 01W6), and a proper immersion is a closed immersion [lem-weil-pbc-proper-immersion-closed].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, sixth sentence (Morphisms Lemmas 01W3, 01W6)"
+   }
+  },
+  {
+   "text": "*Eventually $X'_\\alpha$ is closed in $\\mathbf P^n_S$.* Put $h_\\alpha=j\\circ e_\\alpha:X'_\\alpha\\to\\mathbf P^n_S$; these are compatible with the transition morphisms and with $h$. Apply [lem-weil-pbc-eventually-closed-immersion] (Stacks 0A0N) with $T=\\mathbf P^n_S$, the system $(X'_\\alpha)_{\\alpha\\in I}$ and $Z=X'$. Its hypotheses: $\\mathbf P^n_S$ is quasi-compact and quasi-separated since $p$ is proper (quasi-compact and separated, hence quasi-separated) and $S$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2); the transition morphisms are closed immersions and $X'=\\varprojlim X'_\\alpha$ (step 4); $X'_\\alpha\\to S$ equals $g_\\alpha\\circ\\pi_\\alpha$ with $\\pi_\\alpha$ proper (base change of $\\pi$) and $g_\\alpha$ of finite presentation (step 3), so it is quasi-compact, quasi-separated and locally of finite type [lem-weil-pbc-proper-fp-permanence] (b), (d), (e), whence $X'_\\alpha$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2), and since $p\\circ h_\\alpha=g_\\alpha\\circ\\pi_\\alpha$ is locally of finite type so is $h_\\alpha$ (f); finally $h$ is a closed immersion (step 5). Hence there is $\\alpha_0\\in I$ such that $h_{\\alpha_0}$ is a closed immersion, and then for every $\\beta\\ge\\alpha_0$ the morphism $h_\\beta=h_{\\alpha_0}\\circ(X'_\\beta\\to X'_{\\alpha_0})$ is a composite of closed immersions, hence a closed immersion [lem-weil-pbc-closed-immersion-comp].",
+   "uses": [
+    "lem-weil-pbc-eventually-closed-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, seventh sentence (Lemma 0A0N)"
+   }
+  },
+  {
+   "text": "*$X_\\beta$ is proper over $S$ for $\\beta\\ge\\alpha_0$.* For $\\beta\\ge\\alpha_0$, $h_\\beta$ is a closed immersion, hence proper [lem-weil-pbc-proper-fp-permanence] (c), and $p$ is proper, so $p\\circ h_\\beta=g_\\beta\\circ\\pi_\\beta:X'_\\beta\\to S$ is proper (a), in particular universally closed. The morphism $\\pi_\\beta$ is surjective, as the base change of the surjective $\\pi$ along $i_\\beta$ [lem-weil-pbc-surjective-base-change]. By [lem-weil-pbc-image-universally-closed] (Stacks 03GN, applied to $\\pi_\\beta$ over $S$) $g_\\beta$ is universally closed, and being separated and locally of finite type (step 3) it is proper.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, last two sentences (Morphisms Lemma 03GN image-proper-is-proper)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $I_0=\\{\\beta\\in I:\\beta\\ge\\alpha_0\\}$ is a nonempty directed set, cofinal in $I$, so $X=\\varprojlim_{\\beta\\in I_0}X_\\beta$ (a cone over the restricted system extends uniquely to the whole system, since every $\\alpha\\in I$ has some $\\beta\\in I_0$ with $\\beta\\ge\\alpha$ and the extension is independent of the choice by directedness). For $\\beta\\in I_0$, $X_\\beta\\to S$ is proper (step 7) and of finite presentation (step 3), and the transition morphisms and $X\\to X_\\beta$ are closed immersions over $S$ (step 3). This is the assertion; the 'in particular' is the case $Y=X_{\\alpha_0}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309), proof, last sentence ('for i large enough'); the restriction to a cofinal subsystem is implicit in Stacks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "prop-nagata-finite-type-closed-in-fp",
+  "def-nagata-finite-type-closed-in-fp",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-chow-finite-type",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-closed-subscheme-fp-system",
+  "def-nagata-closed-subscheme-fp-system",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-eventually-closed-immersion",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-image-universally-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 09ZR (lemma-proper-limit-of-proper-finite-presentation, line 3309) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +174,24 @@
    "results": "none: no Mathlib file mentions IsProper together with limits; AffineTransitionLimit.lean has no IsProper",
    "date": "2026-10-10",
    "verdict": "no match (source repository slopmaster2 has the ingredients 01ZJ Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation and 081B(1) Scheme.exists_isClosedImmersion_comp_π, both sorry-free, but no Chow lemma and no statement with IsProper)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme over quasi-compact quasi-separated base is a limit of proper schemes of finite presentation with closed immersion transition maps",
+   "results": "isProper_eq, Scheme.exists_isQuasiAffine_of_isLimit, Scheme.exists_isAffine_of_isLimit, Scheme.compactSpace_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), isProper_iff, IsProper.instOfIsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib's AffineTransitionLimit.lean has no IsProper, no closed-immersion approximation; confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 09ZR\\|stacks 09ZP\\|stacks 09ZQ\\|stacks 01ZJ\\|stacks 0A0N\\|stacks 0202' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'Chow' .../Mathlib/AlgebraicGeometry",
+   "results": "none in Mathlib (the tags 09ZP, 09ZQ, 01ZJ, 0202 (Noetherian), 081B(1) are in the source repository's WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean and WeilConjectures/AlgebraicGeometry/ChowLemma.lean, all sorry-free; 09ZR and 0A0N nowhere)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,6 +216,15 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 09ZR (proper X over qcqs S is a limit of proper finitely presented S-schemes with closed-immersion transitions); correct; unsplit."
- }
+  "note": "Eight steps along Stacks 09ZR (limits.tex; tags corrected by the worker: 01ZJ, 0202, 09ZP, 0A0N): finitely presented envelope (closed Nagata node), Chow′s lemma 0202 as the new unsplit node lem-weil-pbc-chow-finite-type, X as a limit of finitely presented closed subschemes (closed Nagata node 09ZP), inverse images in Y′ with lim X′_α = X′ written out (limits commute with limits), X′ closed in P^n_S (proper over separated; tool use lem-weil-pbc-proper-immersion-closed, imported in unit sk-thm-chow; the worker notes IsClosedImmersion.of_isPreimmersion makes it a one-line Mathlib leaf), 0A0N as the new unsplit node lem-weil-pbc-eventually-closed-immersion, properness of X_β from the surjective proper π_β (new leaf lem-weil-pbc-image-universally-closed: UniversallyClosed.of_comp_surjective :78, checked) and the permanence leaf lem-weil-pbc-proper-fp-permanence (one declaration per clause, names checked by the worker), cofinal subsystem. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proper-closed-in-proper-fp",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 09ZR (limits.tex line 3309), read in full with the lemmas it cites (01ZJ, 0202, 09ZP, 0A0N; Morphisms 01W3, 01W4, 01W6, 03GN). Steps: envelope Y (01ZJ, existing closed node prop-nagata-finite-type-closed-in-fp); Chow 0202 on Y (new unsplit node lem-weil-pbc-chow-finite-type: Mathlib and the source repository only have the Noetherian case); X = lim X_alpha by 09ZP (existing closed node lemma-nagata-closed-subscheme-fp-system); inverse images X'_alpha in Y' and lim X'_alpha = X' (written out: limits commute with limits over a connected index); X' closed in P^n_S (01W6 Mathlib leaf + existing lem-weil-pbc-proper-immersion-closed); eventually X'_alpha closed in P^n_S (new unsplit node lem-weil-pbc-eventually-closed-immersion, Stacks 0A0N, hypotheses checked); X_beta proper by 03GN (new Mathlib leaf lem-weil-pbc-image-universally-closed, UniversallyClosed.of_comp_surjective); conclusion on the cofinal subsystem (elementary). Permanence facts collected in a new Mathlib leaf lem-weil-pbc-proper-fp-permanence. lem-weil-pbc-eventually-proper (081F) is not used: Stacks' proof of 09ZR does not cite it. Statement unchanged."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-immersion-closed"
+ ]
 }

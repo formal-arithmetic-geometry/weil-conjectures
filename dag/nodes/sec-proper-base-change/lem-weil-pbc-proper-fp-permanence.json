@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-proper-fp-permanence",
+ "kind": "statement",
+ "title": "Permanence of proper, separated, finite type, finitely presented morphisms and of immersions",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. (a) If $f$ and $g$ are proper [def-weil-proper-morphism], so is $g\\circ f$. (b) If $f$ is proper, then for every morphism $Y'\\to Y$ the base change $X\\times_YY'\\to Y'$ [def-pc-fibre-product] is proper; likewise if $f$ is a closed immersion [def-weil-closed-immersion], so is its base change. (c) A closed immersion is proper. (d) If $f$ and $g$ are of finite presentation (locally of finite presentation, quasi-compact and quasi-separated) [def-weil-pbc-scheme-conventions], so is $g\\circ f$. (e) If $f$ and $g$ are separated (resp. locally of finite type [def-weil-finite-type-morphism], resp. immersions [def-weil-closed-immersion]), so is $g\\circ f$. (f) If $g\\circ f$ is locally of finite type, so is $f$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas Tag 01W3 (composition-proper), 01W4 (base-change-proper), 01W5 (closed-immersion-proper), 01QR (base-change-closed-immersion), 01TR (composition-finite-presentation), 01T3 (composition-finite-type), 01T8 (permanence-finite-type); Schemes, Lemma 01KU (separated-permanence, part on compositions) and 02V0 (composition-immersion)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper morphisms of schemes are stable under composition and base change",
+   "results": "IsProper.isStableUnderBaseChange, IsProper, IsProper.instCompScheme, instHasOfPostcompPropertySchemeIsProperIsSeparated, IsProper.instIsMultiplicativeScheme, IsProper.comp_iff (Mathlib.AlgebraicGeometry.Morphisms.Proper)",
+   "date": "2026-10-10",
+   "verdict": "match: (a), (b)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of morphisms locally of finite presentation is locally of finite presentation (schemes)",
+   "results": "locallyOfFinitePresentation_comp, instIsStableUnderCompositionSchemeLocallyOfFinitePresentation (Morphisms.FinitePresentation), instIsStableUnderCompositionSchemeLocallyOfFiniteType, locallyOfFiniteType_comp, locallyOfFiniteType_of_comp (Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match: (d), (e) for finite type, (f)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|theorem' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Proper,Finite,FinitePresentation,QuasiCompact,QuasiSeparated,Separated,FiniteType,Immersion,ClosedImmersion}.lean",
+   "results": "Proper.lean:67 IsProper (f ≫ g), :69 IsFinite f → IsProper f, :72 isStableUnderBaseChange; Finite.lean:144 IsClosedImmersion f → IsFinite f; FinitePresentation.lean:80 locallyOfFinitePresentation_comp; QuasiCompact.lean:69 quasiCompact_comp; QuasiSeparated.lean:128 quasiSeparated_comp; Separated.lean:75 IsSeparated (f ≫ g); FiniteType.lean:68 locallyOfFiniteType_comp, :72 locallyOfFiniteType_of_comp; Immersion.lean:138 IsMultiplicative @IsImmersion; ClosedImmersion.lean:86 IsClosedImmersion.comp, :393/398 pullback.fst/snd of a closed immersion",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper (instances), AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.IsImmersion (IsMultiplicative), AlgebraicGeometry.IsClosedImmersion (pullback instances)",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "how": "specializes in one line per clause: (a) instance IsProper (f ≫ g) (Proper.lean:67); (b) IsProper.isStableUnderBaseChange (Proper.lean:72) and the instances IsClosedImmersion (pullback.fst f g), (pullback.snd f g) (ClosedImmersion.lean:393, 398); (c) instances IsClosedImmersion f → IsFinite f (Finite.lean:144) and IsFinite f → IsProper f (Proper.lean:69); (d) locallyOfFinitePresentation_comp (FinitePresentation.lean:80), quasiCompact_comp (QuasiCompact.lean:69), quasiSeparated_comp (QuasiSeparated.lean:128); (e) instance IsSeparated (f ≫ g) (Separated.lean:75), locallyOfFiniteType_comp (FiniteType.lean:68), IsMultiplicative @IsImmersion (Immersion.lean:138); (f) locallyOfFiniteType_of_comp (FiniteType.lean:72). Mathlib composes left to right (f ≫ g = g ∘ f)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-closed-in-proper-fp",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause (IsProper instances, locallyOfFinitePresentation_comp, quasiCompact_comp, quasiSeparated_comp, locallyOfFiniteType_comp/of_comp, IsImmersion multiplicative, IsClosedImmersion pullback instances); accepted on the worker′s line-by-line check."
+ }
+}

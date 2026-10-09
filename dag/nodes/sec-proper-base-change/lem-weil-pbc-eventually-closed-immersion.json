@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-eventually-closed-immersion",
+ "kind": "statement",
+ "title": "A limit that is a closed immersion is a closed immersion at a finite stage (closed-immersion transitions)",
+ "statement": "Let $T$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions]. Let $I$ be a nonempty directed set and $(Z_i)_{i\\in I}$ an inverse system of schemes over $T$, with structure morphisms $h_i:Z_i\\to T$, whose transition morphisms $Z_{i'}\\to Z_i$ ($i'\\ge i$) are closed immersions [def-weil-closed-immersion] (in particular affine [pqf-def-affine-morphism]), and let $Z=\\varprojlim_iZ_i$ be its limit [lem-weil-pbc-limit-affine-transition], with $h:Z\\to T$ the induced morphism. Assume every $Z_i$ is quasi-compact and quasi-separated, every $h_i$ is locally of finite type [def-weil-finite-type-morphism], and $h$ is a closed immersion. Then $h_i$ is a closed immersion for some $i\\in I$ (and hence, composing with the closed immersions $Z_{i'}\\to Z_i$, for all $i'\\ge i$).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 0A0N (lemma-eventually-closed-immersion, line 956) and its proof (Lemma 09ZM eventually-affine, Morphisms Lemma 01QO closed-immersion)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed limit of schemes with closed immersion transition maps whose limit is a closed immersion into S, then eventually a closed immersion",
+   "results": "IsClosedImmersion, IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.mk, exists_mem_of_isClosed_of_nonempty' (Mathlib.AlgebraicGeometry.AffineTransitionLimit), IsClosedImmersion.iff_isFinite_and_mono, instHasColimitOverScheme",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system of schemes with closed immersion transitions over S whose limit maps to S by a closed immersion: some stage maps to S by a closed immersion",
+   "results": "exists_mem_of_isClosed_of_nonempty, exists_mem_of_isClosed_of_nonempty' (AffineTransitionLimit), instIsClosedImmersionFstScheme, instIsClosedImmersionSndScheme, isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, IsClosedImmersion.Spec_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Limits.IsLimit, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; grep -rn 'IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -i 'limit\\|cofiltered'",
+   "results": "only AffineTransitionLimit.lean:137 (IsClosedImmersion.lift inside the construction of a limit of closed subschemes) and the pullback instances ClosedImmersion.lean:393/398; no eventual closed-immersion statement",
+   "date": "2026-10-10",
+   "verdict": "no match (the source repository slopmaster2 has the related Tag 081B(1) as AlgebraicGeometry.Scheme.exists_isClosedImmersion_comp_π, sorry-free, which concerns Y -> lim X_i -> X_i, not X_i -> S)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-closed-in-proper-fp",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 0A0N; correct; unsplit."
+ }
+}
