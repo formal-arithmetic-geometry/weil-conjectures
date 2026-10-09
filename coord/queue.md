@@ -1,8 +1,8 @@
 # Work queue
 
-580 items; claim with `tools/claim.py next <group> [--stage N]`.
+582 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (552)
+## Stage 1: nodes to split (553)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,8 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1007 | none |
-| `lem-weil-pbc-etale-section-idempotent-splitting` | 1007 | none |
 | `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-approximation` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-complete` | 1007 | none |
@@ -38,9 +36,12 @@
 | `lem-weil-pbc-etale-free-sheaf-constructible` | 1008 | none |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1008 | none |
 | `lem-weil-pbc-filtered-colimit-categories` | 1008 | none |
+| `lem-weil-pbc-idempotents-determined-modulo-radical` | 1008 | none |
 | `lem-weil-pbc-integral-morphism-limit-of-finite` | 1008 | none |
+| `lem-weil-pbc-lift-idempotent-upstairs` | 1008 | none |
 | `lem-weil-pbc-normal-constant-generic` | 1008 | none |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1008 | none |
+| `lem-weil-pbc-open-restriction-pullback-unit` | 1008 | none |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1008 | none |
 | `lem-weil-pbc-scheme-over-limit` | 1008 | none |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
@@ -559,7 +560,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (29)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -574,6 +575,7 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
+| `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
@@ -592,7 +594,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 566 nodes that wait for stage 1, 194 nodes that wait for a statement dependency.
+Not open yet: 567 nodes that wait for stage 1, 195 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
