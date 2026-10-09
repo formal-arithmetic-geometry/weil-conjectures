@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-product-of-localizations-at-maximal",
+ "kind": "statement",
+ "title": "A ring with finitely many maximal ideals and nil Jacobson radical is the product of its localizations",
+ "statement": "Let $B$ be a commutative ring with finitely many maximal ideals $\\mathfrak n_1,\\dots,\\mathfrak n_r$ such that every element of the Jacobson radical $\\mathfrak n_1\\cap\\dots\\cap\\mathfrak n_r$ is nilpotent. Then every prime ideal of $B$ is maximal, and the canonical ring map $B\\to\\prod_{i=1}^rB_{\\mathfrak n_i}$, $b\\mapsto(b/1)_i$, into the product of the localizations at the maximal ideals is an isomorphism (of $B$-algebras, hence of $A$-algebras for every ring map $A\\to B$); each $B_{\\mathfrak n_i}$ is a local ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00JA (lemma-product-local) and its proof"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a ring with finitely many maximal ideals and nilpotent Jacobson radical is isomorphic to the product of its localizations at maximal ideals",
+   "results": "MaximalSpectrum.toPiLocalizationEquiv (Mathlib.RingTheory.Spectrum.Prime.Topology), MaximalSpectrum.PiLocalization, MaximalSpectrum.toPiLocalization (Mathlib.RingTheory.Spectrum.Maximal.Localization), IsArtinianRing.quotNilradicalEquivPi (Mathlib.RingTheory.Artinian.Module)",
+   "date": "2026-10-09",
+   "verdict": "match: MaximalSpectrum.toPiLocalizationEquiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "MaximalSpectrum.toPiLocalizationEquiv",
+   "results": "MaximalSpectrum.toPiLocalizationEquiv (R) [CommSemiring R] [DiscreteTopology (PrimeSpectrum R)] : R ≃ₐ[R] MaximalSpectrum.PiLocalization R; ..._apply, ..._apply_apply (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring with finitely many prime ideals all maximal is isomorphic to the product of its localizations at maximal ideals (Stacks 00JA)",
+   "results": "PrimeSpectrum.piLocalizationToMaximalEquiv, PrimeSpectrum.piLocalizationToMaximal_bijective (Mathlib.RingTheory.Spectrum.Maximal.Localization), MaximalSpectrum.toPiLocalizationEquiv, PrimeSpectrum.toPiLocalization_bijective (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00JA\\|toPiLocalizationEquiv\\|discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "RingTheory/Spectrum/Prime/Topology.lean:309 PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical; :770-772 @[stacks 00JA] def MaximalSpectrum.toPiLocalizationEquiv : R ≃ₐ[R] MaximalSpectrum.PiLocalization R (bijective: toPiLocalization_injective, maximalSpectrumToPiLocalization_surjective_of_discreteTopology)",
+   "date": "2026-10-09",
+   "verdict": "match (source read; carries the Stacks tag 00JA)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MaximalSpectrum.toPiLocalizationEquiv",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "how": "two Mathlib lemmas: the hypotheses (finitely many maximal ideals, their infimum <= nilradical) are exactly the right side of PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical (Topology.lean:309), giving DiscreteTopology (PrimeSpectrum B), whence all primes maximal (discreteTopology_iff_finite_and_krullDimLE_zero, :301); MaximalSpectrum.toPiLocalizationEquiv B : B ≃ₐ[B] MaximalSpectrum.PiLocalization B (= Π I : MaximalSpectrum B, Localization.AtPrime I.asIdeal; tagged @[stacks 00JA]) is the canonical map (toPiLocalizationEquiv_apply_apply); an A-algebra structure is respected since the map is a ring map commuting with algebraMap; the factors are local (Localization.AtPrime.isLocalRing). Source read 2026-10-09"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-zero-local-strictly-henselian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: MaximalSpectrum.toPiLocalizationEquiv (Spectrum/Prime/Topology.lean:772, @[stacks 00JA]) with discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical (:309)."
+ }
+}

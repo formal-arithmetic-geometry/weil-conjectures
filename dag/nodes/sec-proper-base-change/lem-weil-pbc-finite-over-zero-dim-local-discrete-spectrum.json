@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+ "kind": "statement",
+ "title": "A finite algebra over a local ring with a single prime has finitely many primes, all maximal and over the maximal ideal",
+ "statement": "Let $(R,\\mathfrak m)$ be a local ring whose only prime ideal is $\\mathfrak m$, and let $B$ be a finite $R$-algebra (a ring map $R\\to B$ making $B$ a finitely generated $R$-module). Then $B$ has only finitely many prime ideals $\\mathfrak q_1,\\dots,\\mathfrak q_r$ ($r\\ge0$); each of them is a maximal ideal of $B$ and lies over $\\mathfrak m$ (its preimage in $R$ is $\\mathfrak m$); and their intersection $\\mathfrak q_1\\cap\\dots\\cap\\mathfrak q_r$ is the nilradical of $B$ (every element of it is nilpotent). Equivalently, $\\operatorname{Spec}B$ is a finite discrete space.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "proof of Lemma Tag 06RS (lemma-local-dimension-zero-henselian), first three sentences: finitely many primes over m by Lemma Tag 05DR (lemma-finite-finite-fibres), no inclusions among them by Lemma Tag 00GT (lemma-integral-no-inclusion), hence all maximal; intersection nilpotent by Lemma Tag 00E0 (lemma-Zariski-topology)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebra over a ring with discrete spectrum has discrete prime spectrum",
+   "results": "Algebra.QuasiFinite.discreteTopology_primeSpectrum, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.QuasiFinite.finite_comap_preimage (Mathlib.RingTheory.QuasiFinite.Basic); PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-09",
+   "verdict": "match: Algebra.QuasiFinite.discreteTopology_primeSpectrum with the clause lemmas below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite algebra has finitely many prime ideals lying over a given prime",
+   "results": "Algebra.QuasiFinite.finite_primesOver, Algebra.QuasiFinite.iff_finite_primesOver (Mathlib.RingTheory.QuasiFinite.Basic); primesOver_finite (Dedekind only)",
+   "date": "2026-10-09",
+   "verdict": "match for the finiteness clause (Stacks 05DR in the quasi-finite generality)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite algebra over a ring of Krull dimension zero has Krull dimension zero (integral extension)",
+   "results": "Module.finite_iff_krullDimLE_zero (Jacobson.Artinian, needs R Artinian), Ideal.isMaximal_of_isPrime / instIsMaximalOfIsPrimeOfKrullDimLEOfNatNat (KrullDimension.Basic), Ring.KrullDimLE.minimalPrimes_eq_setOf_isMaximal, isArtinianRing_iff_isNoetherianRing_krullDimLE_zero",
+   "date": "2026-10-09",
+   "verdict": "partial: the dimension clause comes from the discrete-spectrum route instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteTopology (PrimeSpectrum _), Algebra.QuasiFinite",
+   "results": "Algebra.QuasiFinite.discreteTopology_primeSpectrum (R S) [DiscreteTopology (PrimeSpectrum R)] [Algebra.QuasiFinite R S] : DiscreteTopology (PrimeSpectrum S) (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra over a ring with finite discrete prime spectrum has finite discrete prime spectrum; finitely many primes all maximal",
+   "results": "Algebra.QuasiFinite.finite_primeSpectrum, Algebra.QuasiFinite.discreteTopology_primeSpectrum, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton, Algebra.QuasiFinite.finite_primesOver (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DiscreteTopology (PrimeSpectrum\\|Unique (PrimeSpectrum\\|instance (priority := low) \\[Module.Finite R S\\] : QuasiFinite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/QuasiFinite/Basic.lean:107 instance (priority := low) [Module.Finite R S] : QuasiFinite R S; :247 Algebra.QuasiFinite.discreteTopology_primeSpectrum; RingTheory/Spectrum/Prime/Topology.lean:301 PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, :309 discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical; RingTheory/KrullDimension/Zero.lean:178 instance PrimeSpectrum.unique_of_ringKrullDimLE_zero [IsLocalRing R] : Unique (PrimeSpectrum R); RingTheory/Nilpotent/Lemmas.lean:54 nilradical_eq_sInf",
+   "date": "2026-10-09",
+   "verdict": "match (sources read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.QuasiFinite.discreteTopology_primeSpectrum",
+  "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+  "how": "a few Mathlib lemmas, one per clause: 'only prime is m' is [IsLocalRing R] [Ring.KrullDimLE 0 R]; then Unique (PrimeSpectrum R) (instance PrimeSpectrum.unique_of_ringKrullDimLE_zero, RingTheory/KrullDimension/Zero.lean:178) and PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero (RingTheory/Spectrum/Prime/Topology.lean:301, .mpr) give DiscreteTopology (PrimeSpectrum R); Module.Finite R B gives Algebra.QuasiFinite R B (low-priority instance, QuasiFinite/Basic.lean:107); Algebra.QuasiFinite.discreteTopology_primeSpectrum (QuasiFinite/Basic.lean:247) gives DiscreteTopology (PrimeSpectrum B); discreteTopology_iff_finite_and_krullDimLE_zero (.mp) gives Finite (PrimeSpectrum B) and Ring.KrullDimLE 0 B (every prime maximal, Ideal.isMaximal_of_isPrime); lying over m: the comap of a prime is prime (Ideal.IsPrime.comap) hence equals maximalIdeal R (Ring.KrullDimLE.eq_maximalIdeal_of_isPrime); intersection of all primes = nilradical: nilradical_eq_sInf (RingTheory/Nilpotent/Lemmas.lean:54). Sources read 2026-10-09"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-zero-local-strictly-henselian",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: one lemma per clause (finiteness and maximality from Algebra.QuasiFinite.discreteTopology_primeSpectrum with discreteTopology_iff_finite_and_krullDimLE_zero; lying over m from Ring.KrullDimLE.eq_maximalIdeal_of_isPrime; intersection = nilradical from nilradical_eq_sInf)."
+ }
+}
