@@ -49,16 +49,18 @@ The compatibility of the translation action with the Weil structure of `AS_* ℚ
 general `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`, the
 translations commuting with the geometric Frobenius.
 
-That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`, stated
-with `sorry`) is to be checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier
-map is a `k₀`-torsor
+That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`) is
+checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier map is a `k₀`-torsor
 (`AlgebraicGeometry.affineLine.isIso_sigmaDesc_lift_geometricTranslation`), so for
 `v : V ⟶ 𝔸¹_{k̄}` the fibre product `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` is a disjoint union of `#k₀` copies
 of `V`. The sections of `ĀS^* ĀS_* ℚ̄_ℓ` over `V` are the locally finite functions on it, and
 there the projector `e_ψ` factors as an averaging map to the sections of `ℚ̄_ℓ` followed by a
-splitting map, a split epi–mono factorisation of sheaves of `WeilCoefficients`-modules. It
-remains to see that the factorisation is `ℚ̄_ℓ,X`-linear, so that the image of `e_ψ` becomes
-`ℚ̄_ℓ` as a sheaf of `ℚ̄_ℓ,X`-modules.
+splitting map. Both are `ℚ̄_ℓ,X`-linear: the evaluations along the sections of the torsor are
+morphisms of sheaves of modules (`AlgebraicGeometry.affineLine.artinSchreierEvalHom`, the
+pullback of a translation followed by the counit of `ĀS^* ⊣ ĀS_*`), averaging is a linear
+combination of them, and they are jointly injective, while splitting followed by each of them is
+a scalar. This split epi–mono factorisation identifies the image of `e_ψ` with `ℚ̄_ℓ` as a sheaf
+of `ℚ̄_ℓ,X`-modules.
 
 The constructibility statement which makes the tensor product with a lisse sheaf land in Weil
 complexes is reduced by dévissage to the case of a single Weil sheaf, stated with `sorry`.
