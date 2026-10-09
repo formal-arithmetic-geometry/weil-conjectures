@@ -2,43 +2,156 @@
  "id": "lem-weil-pbc-reduction-projective-space",
  "kind": "statement",
  "title": "Reduction of projective space to products of lines",
- "statement": "Assume that for every scheme $S$ the projection $\\mathbf P^1_S\\to S$ satisfies\n$\\mathrm{PBC}$ in the sense of [def-weil-pbc-property]. Then, for every scheme\n$T$ and every $n\\geq0$, the product projection $(\\mathbf P^1_T)^n\\to T$\nsatisfies $\\mathrm{PBC}$ by repeated base change and composition (over the\nsuccessive bases $T,\\mathbf P^1_T,\\dots$), and $\\mathbf P^n_T\\to T$ satisfies\n$\\mathrm{PBC}$ by cancellation along $\\sigma_n$.",
+ "statement": "Write, for a scheme $S$ and $m\\ge0$, $\\mathbf P^m_S=\\mathbf P(\\{0,\\dots,m\\};S)$ for the projective space of [def-nagata-projective-space-base-change] and $q_{m,S}:\\mathbf P^m_S\\to S$ for its structure morphism; so $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$. For a scheme $T$ define $(\\mathbf P^1_T)^n$ with its projection $p_n:(\\mathbf P^1_T)^n\\to T$ inductively by $(\\mathbf P^1_T)^0=T$, $p_0=\\mathrm{id}_T$, and $(\\mathbf P^1_T)^n=(\\mathbf P^1_T)^{n-1}\\times_T\\mathbf P^1_T$ (fibre product [def-pc-fibre-product] of $p_{n-1}$ and $q_{1,T}$), $p_n=p_{n-1}\\circ\\mathrm{pr}_1$; this is the $n$-fold fibre product $\\mathbf P^1_T\\times_T\\cdots\\times_T\\mathbf P^1_T$. Assume that for every scheme $S$ the projection $q_{1,S}:\\mathbf P^1_S\\to S$ satisfies $\\mathrm{PBC}$ in the sense of [def-weil-pbc-property]. Then for every scheme $T$ and every $n\\geq0$ the morphisms $p_n:(\\mathbf P^1_T)^n\\to T$ and $q_{n,T}:\\mathbf P^n_T\\to T$ are proper and satisfy $\\mathrm{PBC}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-reduction-projective-space.md",
   "place": "node lem-weil-pbc-reduction-projective-space, order 1203"
  },
  "stmt_deps": [
   "def-weil-pbc-property",
-  "def-weil-pbc-symmetric-product-morphism"
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "The product projection $(\\mathbf P^1_T)^n\\to T$ is a composite of $n$\nprojective-line projections over successive bases, so it has $\\mathrm{PBC}$ by\n[prop-weil-pbc-composition-stability] applied stepwise. The morphism\n$\\sigma_n$ is finite by [lem-weil-pbc-symmetric-product-finite], hence has\n$\\mathrm{PBC}$ by [prop-weil-pbc-finite-morphism], and is surjective by\n[lem-weil-pbc-symmetric-product-surjective]. Since $(\\mathbf\nP^1_T)^n\\to\\mathbf P^n_T\\to T$ composes to the product projection,\n[lemma-weil-pbc-cancellation] gives $\\mathrm{PBC}$ for $\\mathbf P^n_T\\to T$.",
+   "text": "*Properness.* $\\mathrm{PBC}$ is defined for proper morphisms [def-weil-pbc-property], so we record that every morphism below is proper. $q_{m,S}$ is proper for every $m$ and $S$ [lemma-nagata-projective-space-base-change-proper]. Isomorphisms are finite [lem-weil-pbc-isomorphism-finite] and finite morphisms are proper [lem-weil-pbc-finite-proper]. For $p_n$ we argue by induction on $n$: $p_0=\\mathrm{id}_T$ is an isomorphism, hence proper; for $n\\ge1$, step 4 writes $\\mathrm{pr}_1=q_{1,X}\\circ\\chi$ with $X=(\\mathbf P^1_T)^{n-1}$ and $\\chi$ an isomorphism, so $\\mathrm{pr}_1$ and then $p_n=p_{n-1}\\circ\\mathrm{pr}_1$ are proper as composites of proper morphisms [lem-weil-pbc-proper-composition].",
    "uses": [
-    "prop-weil-pbc-composition-stability",
+    "def-weil-pbc-property",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-isomorphism-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4E (label lemma-finite), proof: a finite morphism is proper (Morphisms, Lemma 01WN); Lemma 0A4F, proof"
+   }
+  },
+  {
+   "text": "*Composition in terms of $\\mathrm{PBC}$.* Let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be proper with $\\mathrm{PBC}(u)$ and $\\mathrm{PBC}(v)$. By [lemma-weil-pbc-property-iff-acyclicity], $\\mathrm{IA}_r(u)$ and $\\mathrm{IA}_r(v)$ hold for every prime $r$, i.e. $\\mathrm{IA}(u)$ and $\\mathrm{IA}(v)$ [def-weil-pbc-injective-acyclicity-property]; by [prop-weil-pbc-composition-stability], $\\mathrm{PBC}(v\\circ u)$ holds. This is Stacks Lemma 0A4D, used below repeatedly.",
+   "uses": [
+    "lemma-weil-pbc-property-iff-acyclicity",
+    "def-weil-pbc-injective-acyclicity-property",
+    "prop-weil-pbc-composition-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4D (label lemma-composition), with the equivalence of Lemma 0A4B used \"without further mention\""
+   }
+  },
+  {
+   "text": "*The case $n=0$.* $p_0=\\mathrm{id}_T$ is an isomorphism, and $q_{0,T}:\\mathbf P(\\{0\\};T)\\to T$ is an isomorphism [lem-weil-pbc-projective-space-zero-isomorphism]. Both are finite [lem-weil-pbc-isomorphism-finite], hence satisfy $\\mathrm{PBC}$ [prop-weil-pbc-finite-morphism].",
+   "uses": [
+    "lem-weil-pbc-projective-space-zero-isomorphism",
+    "lem-weil-pbc-isomorphism-finite",
+    "prop-weil-pbc-finite-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4E (label lemma-finite); the source states the symmetric-product argument for $n\\ge1$ only, the case $n=0$ is written out here"
+   }
+  },
+  {
+   "text": "*$\\mathrm{PBC}(p_n)$ by induction on $n$.* Let $n\\ge1$, assume $\\mathrm{PBC}(p_{n-1})$, and put $X=(\\mathbf P^1_T)^{n-1}$. By [lemma-nagata-projective-space-base-change-pullback], applied to the index set $\\{0,1\\}$ and $g=p_{n-1}:X\\to T$, the square formed by $q_{1,X}:\\mathbf P^1_X\\to X$, $q_{1,T}$, $p_{n-1}$ and the induced map $\\mathbf P^1_X\\to\\mathbf P^1_T$ is cartesian; so there is an isomorphism $\\chi:X\\times_T\\mathbf P^1_T\\to\\mathbf P^1_X$ over $X$, i.e. $q_{1,X}\\circ\\chi=\\mathrm{pr}_1$ (the universal property of the fibre product [def-pc-fibre-product]). Now $\\chi$ is finite [lem-weil-pbc-isomorphism-finite], hence $\\mathrm{PBC}(\\chi)$ [prop-weil-pbc-finite-morphism]; $\\mathrm{PBC}(q_{1,X})$ is the hypothesis applied to $S=X$. Step 2 gives $\\mathrm{PBC}(\\mathrm{pr}_1)$, and step 2 again, with $\\mathrm{PBC}(p_{n-1})$, gives $\\mathrm{PBC}(p_{n-1}\\circ\\mathrm{pr}_1)=\\mathrm{PBC}(p_n)$. With step 3 this proves $\\mathrm{PBC}(p_n)$ for all $n\\ge0$. (No separate stability of $\\mathrm{PBC}$ under base change is needed: the hypothesis is for every base $S$, and is applied to $S=X$; the transport along the isomorphism $\\chi$ is the finite case plus composition.)",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-isomorphism-finite",
+    "prop-weil-pbc-finite-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4F, proof, last paragraph (\"Applying Lemmas ... and 0A4D one more time\"); the source does not spell out the induction, written out here"
+   }
+  },
+  {
+   "text": "*The symmetric-product morphism.* Let $n\\ge1$. The morphism $\\sigma_n:(\\mathbf P^1_T)^n\\to\\mathbf P^n_T$ of [lem-weil-pbc-symmetric-product-properties] is finite [lem-weil-pbc-symmetric-product-finite], hence proper [lem-weil-pbc-finite-proper] and $\\mathrm{PBC}(\\sigma_n)$ holds [prop-weil-pbc-finite-morphism]; it is surjective [lem-weil-pbc-symmetric-product-surjective]; and it is a morphism over $T$, $q_{n,T}\\circ\\sigma_n=p_n$ [lem-weil-pbc-symmetric-product-over-base].",
+   "uses": [
+    "lem-weil-pbc-symmetric-product-properties",
     "lem-weil-pbc-symmetric-product-finite",
+    "lem-weil-pbc-finite-proper",
     "prop-weil-pbc-finite-morphism",
     "lem-weil-pbc-symmetric-product-surjective",
+    "lem-weil-pbc-symmetric-product-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4F (label lemma-reduce-to-P1), proof, last paragraph (\"For every $n \\geq 1$ there is a finite surjective morphism ... Applying Lemmas 0A4C, 0A4E, 0A4D one more time\")"
+   }
+  },
+  {
+   "text": "*Cancellation.* For $n\\ge1$ apply [lemma-weil-pbc-cancellation] to $(\\mathbf P^1_T)^n\\xrightarrow{\\sigma_n}\\mathbf P^n_T\\xrightarrow{q_{n,T}}T$: both are proper (steps 1 and 5), $\\sigma_n$ is surjective, $\\mathrm{PBC}(\\sigma_n)$ holds by step 5, and $\\mathrm{PBC}(q_{n,T}\\circ\\sigma_n)=\\mathrm{PBC}(p_n)$ by steps 4 and 5. Hence $\\mathrm{PBC}(q_{n,T})$. With step 3 for $n=0$, $\\mathrm{PBC}(q_{n,T})$ holds for every $n\\ge0$.",
+   "uses": [
     "lemma-weil-pbc-cancellation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4C (label lemma-sandwich) as applied in Lemma 0A4F, proof, last paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-property",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-isomorphism-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "def-weil-pbc-injective-acyclicity-property",
   "prop-weil-pbc-composition-stability",
-  "lem-weil-pbc-symmetric-product-finite",
+  "lem-weil-pbc-projective-space-zero-isomorphism",
   "prop-weil-pbc-finite-morphism",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-symmetric-product-properties",
+  "lem-weil-pbc-symmetric-product-finite",
   "lem-weil-pbc-symmetric-product-surjective",
+  "lem-weil-pbc-symmetric-product-over-base",
   "lemma-weil-pbc-cancellation"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-reduction-projective-space.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A4F (tag 0A4F, label lemma-reduce-to-P1), proof, last paragraph; with Lemmas 0A4C, 0A4D, 0A4E"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change theorem etale cohomology projective space reduction to projective line",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange, IsEtale.instIsStableUnderBaseChangeScheme, HasAffineProperty.isStableUnderBaseChange, WeierstrassCurve.Projective.baseChange_* (stability of morphism properties only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change for etale cohomology: base change map g^{-1} Rf_* F -> Rf'_* g'^{-1} F is an isomorphism for proper f and torsion sheaf F",
+   "results": "IsEtale/IsLocalIso/IsProper isStableUnderBaseChange, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsProper",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn on ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ -i 'proper.?base.?change|properBaseChange'; and for 'smallEtale' (files Sites/Etale.lean, Sites/AffineEtale.lean, Sites/EtalePoint.lean); 'ProjectiveSpace|symmetricProduct' in AlgebraicGeometry",
+   "results": "none for proper base change; the étale site exists but no derived direct image or base change map for it; no projective space over a scheme",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no proper base change"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +182,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-reduction-projective-space",
+  "worker": "stage1",
+  "summary": "Statement made precise (P^m_S = P({0..m};S) of def-nagata-projective-space-base-change; (P^1_T)^n defined inductively as iterated fibre product with p_n = p_{n-1}∘pr_1; conclusion PBC(p_n) and PBC(q_{n,T}) plus properness, for n≥0); the mechanism ('by repeated base change ... by cancellation along σ_n') moved from the statement into the proof, so σ_n and def-weil-pbc-symmetric-product-morphism left stmt_deps and def-nagata-projective-space-base-change, def-pc-fibre-product entered. Proof rewritten in 6 steps following Stacks 0A4F, last paragraph, with 0A4C/0A4D/0A4E: properness; composition in PBC form (composition-stability is stated with IA hypotheses, so the iff lemma is used to convert, which the old proof omitted); n=0 (not covered by the source nor by σ_n, which needs n≥1; new node lem-weil-pbc-projective-space-zero-isomorphism); induction on n using the pullback lemma and the hypothesis for S=(P^1_T)^{n-1} (no base-change stability of PBC needed; the isomorphism χ is handled by the finite case, new Mathlib leaf lem-weil-pbc-isomorphism-finite); σ_n finite, surjective, over T (the last was used but stated nowhere: new node lem-weil-pbc-symmetric-product-over-base); cancellation. Checked: lemma-weil-pbc-cancellation states exactly X-f->Y-h->Z proper, f surjective, PBC(f), PBC(hf) ⇒ PBC(h); prop-weil-pbc-finite-morphism gives PBC for every finite morphism. Mathlib searched three ways: no proper base change."
+ }
 }

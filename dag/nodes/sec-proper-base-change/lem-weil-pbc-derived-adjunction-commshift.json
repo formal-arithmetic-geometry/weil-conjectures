@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-derived-adjunction-commshift",
+ "kind": "statement",
+ "title": "The unit and counit of the derived adjunction u^{-1} -| Ru_* commute with the shift isomorphisms",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and let $u^{-1}\\dashv Ru_*$ be the adjunction between $u^{-1}:\\Dplus(V_{\\Et})\\to\\Dplus(U_{\\Et})$ [def-weil-pbc-derived-inverse-image] and $Ru_*:\\Dplus(U_{\\Et})\\to\\Dplus(V_{\\Et})$ [def-weil-pbc-direct-image] on the bounded below derived categories [def-weil-pbc-derived-categories], with unit $\\eta^D_u:\\mathrm{id}\\to Ru_*u^{-1}$ and counit $\\varepsilon^D_u:u^{-1}Ru_*\\to\\mathrm{id}$ [prop-weil-pbc-derived-inverse-image-adjunction]. Write $[1]$ for the shift, $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$. Give $u^{-1}$ the shift-commutation isomorphism $\\iota_M:u^{-1}(M[1])\\xrightarrow{\\sim}(u^{-1}M)[1]$ which on a representing complex is the identity of the termwise shifted complex $u^{-1}(M^\\bullet[1])=(u^{-1}M^\\bullet)[1]$ [def-weil-pbc-derived-inverse-image], and give $Ru_*$ the shift-commutation isomorphism $\\sigma_K:Ru_*(K[1])\\xrightarrow{\\sim}(Ru_*K)[1]$ obtained by comparing the K-injective resolutions $K[1]\\to I(K[1])$ and $K[1]\\to I(K)[1]$ [lem-weil-pbc-derived-direct-image-triangulated], [def-weil-pbc-kinjective-resolutions]. Then for every $K\\in\\Dplus(U_{\\Et})$ and every $M\\in\\Dplus(V_{\\Et})$:\\n\\n(a) (counit) $\\varepsilon^D_{u,K[1]}=\\varepsilon^D_{u,K}[1]\\circ\\iota_{Ru_*K}\\circ u^{-1}(\\sigma_K)$ as morphisms $u^{-1}Ru_*(K[1])\\to K[1]$;\\n\\n(b) (unit) $\\sigma_{u^{-1}M}\\circ Ru_*(\\iota_M)\\circ\\eta^D_{u,M[1]}=\\eta^D_{u,M}[1]$ as morphisms $M[1]\\to(Ru_*u^{-1}M)[1]$.\\n\\nThat is, $\\eta^D_u$ and $\\varepsilon^D_u$ commute with the shift-commutation isomorphisms of the composite functors $Ru_*u^{-1}$ and $u^{-1}Ru_*$ (composites as in [lem-weil-pbc-triangulated-functor-composite]) and with the identity of $\\mathrm{id}$, so that $u^{-1}\\dashv Ru_*$ is an adjunction of triangulated functors; by iteration the same holds for the iterated isomorphisms $\\iota^{(n)},\\sigma^{(n)}$, $n\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290): for an exact functor F with right adjoint G the shift isomorphism G(A)[1] -> G(A[1]) is the one adjoint to eps_A[1] o xi_{G(A)}, i.e. the one compatible with the counit; Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570) and Lemma 05SU (lemma-derived-shift, line 4657) for the derived adjunction and the shift of a derived functor. Stacks does not state that the resolution-comparison isomorphism sigma is the one of Lemma 0A8D; the statement is assembled by an agent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-triangulated-functor-composite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit and counit of an adjunction between triangulated categories commute with the shift functors",
+   "results": "Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, Adjunction.CommShift.commShift_counit, Adjunction.commShiftIso_hom_app_counit_app_shift, Adjunction.IsTriangulated.commShift, Adjunction.unit_app_commShiftIso_hom_app, Adjunction.shift_counit_app (Mathlib.CategoryTheory.Shift.Adjunction, Mathlib.CategoryTheory.Triangulated.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "generalization of the notion only: Adjunction.CommShift is the property stated, for abstract adjunctions; nothing about etale sheaves or about the resolution-comparison isomorphism sigma of Ru_*"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction between derived categories of sheaves (inverse image left adjoint to derived direct image) compatible with shift: unit and counit commute with shift isomorphisms",
+   "results": "sheafComposeNatIso, SheafOfModules.pushforwardPushforwardAdj (+ unit/counit lemmas), Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val: all underived sheaf adjunctions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift, CategoryTheory.mateEquiv",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class CommShift\\|lemma mk\\x27\\|rightAdjointCommShift\\|commShift_of_leftAdjoint\\|compatibilityCounit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Adjunction.lean; grep -rln 'Adjunction.CommShift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Shift/Adjunction.lean: Adjunction.CommShift (line 208: unit and counit are NatTrans.CommShift), CommShift.mk' (line 243: unit compatibility suffices), compatibilityCounit_of_compatibilityUnit (line 91), compatibilityUnit_unique_right (line 143), rightAdjointCommShift (line 388) and commShift_of_leftAdjoint (line 403: the right adjoint of a CommShift functor gets a unique compatible CommShift structure); also Triangulated/Adjunction.lean (Adjunction.IsTriangulated), Shift/Opposite.lean. No derived inverse/direct image of sheaves on a site with Adjunction.CommShift (Mathlib has no derived u^{-1} -| Ru_*); grep -rn 'Adjunction.CommShift' ~/weil-conjectures-slopmaster2/WeilConjectures: none",
+   "date": "2026-10-09",
+   "verdict": "tools, no match: commShift_of_leftAdjoint gives a compatible structure on Ru_*, but that it is the resolution-comparison sigma of the node is the content of the statement (by compatibilityUnit_unique_right it suffices to check (a) or (b))"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-exchange-triangulated",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

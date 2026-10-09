@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-derived-square-iso-commshift",
+ "kind": "statement",
+ "title": "The derived square isomorphism commutes with the shift isomorphisms of the inverse images",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, and let $\\theta^D_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ be the derived square isomorphism of functors $\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})$ [def-weil-pbc-derived-square-iso]. Give each inverse image $u^{-1}$ on bounded below derived categories [def-weil-pbc-derived-inverse-image] its shift-commutation isomorphism $\\iota^u_M:u^{-1}(M[1])\\xrightarrow{\\sim}(u^{-1}M)[1]$, the identity of the termwise shifted complex $u^{-1}(M^\\bullet[1])=(u^{-1}M^\\bullet)[1]$ on a representing complex ($(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$), and give the composites $f'^{-1}g^{-1}$ and $g'^{-1}f^{-1}$ the composite isomorphisms $\\varphi_M=\\iota^{f'}_{g^{-1}M}\\circ f'^{-1}(\\iota^g_M)$ and $\\psi_M=\\iota^{g'}_{f^{-1}M}\\circ g'^{-1}(\\iota^f_M)$ [lem-weil-pbc-triangulated-functor-composite]. Then for every $M\\in\\Dplus(Y_{\\Et})$\\n$$\\n \\psi_M\\circ\\theta^D_{\\square,M[1]}=\\theta^D_{\\square,M}[1]\\circ\\varphi_M:\\ f'^{-1}g^{-1}(M[1])\\longrightarrow(g'^{-1}f^{-1}M)[1],\\n$$\\nand hence the same holds for the iterated isomorphisms $\\varphi^{(n)},\\psi^{(n)}$ and the shifts $[n]$, $n\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 014V (definition-exact-functor-triangulated-categories, line 191) and Lemma 05SU (lemma-derived-shift, line 4657: compatibility of derived functors with shifts); the inverse images act termwise on complexes and their shift isomorphisms are identities of termwise shifted complexes. The statement is assembled by an agent: Stacks uses the compatibility without stating it."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-square-iso",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural transformation induced on derived categories by a natural transformation of exact functors commutes with shift",
+   "results": "NatTrans.CommShiftCore.shift_comm, NatTrans.CommShift.of_core, NatTrans.shift_app_comm, NatTrans.CommShift.shift_comm, NatTrans.shift_comm, NatTrans.shift_app (Mathlib.CategoryTheory.Shift.CommShift)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the notion NatTrans.CommShift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between composites of derived pullback functors induced termwise commutes with shift, NatTrans.CommShift for a natural transformation lifted to the localization",
+   "results": "Functor.instCommShift...mapDerivedCategoryFactors, ...mapDerivedCategoryFactorsh (Algebra.Homology.DerivedCategory.ExactFunctor: the factorisation iso of F.mapDerivedCategory through Q commutes with shifts), DerivedCategory.instCommShift...quotientCompQhIso, NatTrans.instCommShiftPullbackShift..., Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "date": "2026-10-09",
+   "verdict": "tools only: the identifications u^{-1}Q = Q u^{-1} commute with shifts (NatTrans.CommShift F.mapDerivedCategoryFactors.hom); no statement for a natural transformation between two termwise functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Localization.liftNatTrans",
+   "results": "CategoryTheory.NatTrans.CommShift.liftNatTrans (Mathlib.CategoryTheory.Shift.Localization, in the Mathlib indexed by loogle): the descent of a shift-compatible transformation along a localization is shift-compatible",
+   "date": "2026-10-09",
+   "verdict": "generalization that would give the statement in a few lines (termwise theta commutes with shifts, then liftNatTrans), but the declaration is absent from the pinned Mathlib: see the grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'liftNatTrans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/; grep -rn 'NatTrans.CommShift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Localization.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; grep -n 'mapHomologicalComplex_commShiftIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "results": "no liftNatTrans in Shift/ of the pinned Mathlib; Shift/Localization.lean:241 NatTrans.commShift_iso_hom_of_localization, :306 LocalizerMorphism.natTransCommShift_hom (only the lifting isomorphisms); ExactFunctor.lean:86,94 CommShift of mapDerivedCategoryFactorsh/Factors; HomotopyCategory/Shift.lean:273-283 the shift isomorphism of F.mapHomologicalComplex is the identity termwise",
+   "date": "2026-10-09",
+   "verdict": "no match in the pinned Mathlib; tools recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-exchange-triangulated",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

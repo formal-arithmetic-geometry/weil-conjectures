@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-exact-functor-derived-factorization",
+ "kind": "statement",
+ "title": "The functor induced on derived categories by an exact functor, with its factorization through the localization functors",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an exact functor (additive, preserving finite limits and finite colimits) between abelian categories, and let $Q_{\\mathcal A}:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$, $Q_{\\mathcal B}:\\mathrm{CoCh}(\\mathcal B)\\to D(\\mathcal B)$ be the localization functors of the cochain complexes at the quasi-isomorphisms, with their shift isomorphisms $Q(K[n])\\cong(QK)[n]$ [def-weil-abstract-derived-category]. Let $C(F):\\mathrm{CoCh}(\\mathcal A)\\to\\mathrm{CoCh}(\\mathcal B)$, $K\\mapsto(F(K^r),F(d^r))_r$, be the functor applying $F$ termwise, and for $n\\in\\mathbf Z$ let $\\tau_{K,n}:C(F)(K[n])\\to C(F)(K)[n]$ be the identity in each degree (both complexes have $F(K^{r+n})$ in degree $r$ and differential $(-1)^nF(d^{r+n})$, $F$ being additive); $\\tau_{K,n}$ is an isomorphism of complexes, natural in $K$. Then $C(F)$ carries quasi-isomorphisms to quasi-isomorphisms, and there are a functor $F_D:D(\\mathcal A)\\to D(\\mathcal B)$, natural isomorphisms $\\sigma_{X,n}:F_D(X[n])\\xrightarrow{\\sim}F_D(X)[n]$ ($X\\in D(\\mathcal A)$, $n\\in\\mathbf Z$) and a natural isomorphism\\n\\n$$\\n \\varphi_K:F_D(Q_{\\mathcal A}K)\\xrightarrow{\\ \\sim\\ }Q_{\\mathcal B}(C(F)K)\\qquad(K\\in\\mathrm{CoCh}(\\mathcal A))\\n$$\\n\\nsuch that: (1) $(F_D,\\sigma)$ is a triangulated functor [def-weil-triangulated-category]; (2) $\\varphi$ is compatible with the shifts: for every complex $K$ and $n\\in\\mathbf Z$, the composite $F_D(Q_{\\mathcal A}(K[n]))\\cong F_D((Q_{\\mathcal A}K)[n])\\xrightarrow{\\sigma}F_D(Q_{\\mathcal A}K)[n]\\xrightarrow{\\varphi_K[n]}Q_{\\mathcal B}(C(F)K)[n]$ equals $F_D(Q_{\\mathcal A}(K[n]))\\xrightarrow{\\varphi_{K[n]}}Q_{\\mathcal B}(C(F)(K[n]))\\xrightarrow{Q_{\\mathcal B}(\\tau_{K,n})}Q_{\\mathcal B}(C(F)(K)[n])\\cong Q_{\\mathcal B}(C(F)K)[n]$, the unnamed isomorphisms being the shift isomorphisms of $Q_{\\mathcal A}$, $Q_{\\mathcal B}$. In particular, for every complex $K$ the complex $C(F)K$ obtained termwise represents $F_D(Q_{\\mathcal A}K)$, no resolution being needed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015F (lemma-right-derived-exact-functor): an exact functor carries quasi-isomorphisms to quasi-isomorphisms and every complex computes RF; the shift and triangle compatibility is that of the termwise functor on K(A) (derived.tex, Lemma 014X (lemma-additive-exact-homotopy-category) on the homotopy category, and Definition 014V of exact functors), passed to the localizations; Mathlib states all clauses (see mathlib_match)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor on derived category induced by exact functor between abelian categories",
+   "results": "CategoryTheory.Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Functor.mapHomologicalComplexUpToQuasiIso (Mathlib.Algebra.Homology.Localization); Abelian.Ext.mapExactFunctor; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory",
+   "date": "2026-10-09",
+   "verdict": "match: Functor.mapDerivedCategory with its factorization (checked by reading ExactFunctor.lean)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor F between abelian categories restricts to a functor between bounded below derived categories D^+",
+   "results": "Functor.mapDerivedCategory; Functor.mapDerivedCategoryFactors (natural iso Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex ⋙ Q); mapDerivedCategoryFactorsh; Localization.Lifting instance; instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-09",
+   "verdict": "match on D (the factorization mapDerivedCategoryFactors); nothing on D^+"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; sed -n 240,290p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; rg -n 'quasiIso_map_of_preservesHomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/QuasiIso.lean",
+   "results": "ExactFunctor.lean: mapDerivedCategory (:36), mapDerivedCategoryFactors (:41), CommShift instance (:80), NatTrans.CommShift F.mapDerivedCategoryFactors.hom ℤ (:94), IsTriangulated (:104); Shift.lean: mapCochainComplexShiftIso (:247, Iso.refl components), commShiftMapCochainComplex (:255), mapHomologicalComplex_commShiftIso_hom_app_f (:278, = 𝟙); QuasiIso.lean:280 quasiIso_map_of_preservesHomology",
+   "date": "2026-10-09",
+   "verdict": "match: one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+  "how": "specializes in one line per clause, for F with [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]: F_D = F.mapDerivedCategory (line 36); φ = F.mapDerivedCategoryFactors : DerivedCategory.Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q (line 41); σ = the instance F.mapDerivedCategory.CommShift ℤ (line 80) and (1) = instance F.mapDerivedCategory.IsTriangulated (line 104); (2) = instance NatTrans.CommShift F.mapDerivedCategoryFactors.hom ℤ (line 94), where the shift structure of F.mapHomologicalComplex is commShiftMapCochainComplex with commShiftIso = mapCochainComplexShiftIso, the identity in each degree (Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean:247-282, mapHomologicalComplex_commShiftIso_hom_app_f); preservation of quasi-isomorphisms = HomologicalComplex.quasiIso_map_of_preservesHomology (Mathlib/Algebra/Homology/QuasiIso.lean:280) with Functor.preservesHomologyOfExact"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-inverse-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

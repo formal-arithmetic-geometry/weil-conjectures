@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-triangulated-functor-restriction",
+ "kind": "statement",
+ "title": "Restriction of a triangulated functor to full triangulated subcategories",
+ "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories and $(F,\\sigma):\\mathcal T\\to\\mathcal T'$ a triangulated functor, $\\sigma_X:F(X[1])\\xrightarrow{\\sim}F(X)[1]$ its shift isomorphism [def-weil-triangulated-category]. Let $\\mathcal S\\subset\\mathcal T$ and $\\mathcal S'\\subset\\mathcal T'$ be full triangulated subcategories (strictly full, containing $0$, stable under $[1]$ and $[-1]$, and containing the third vertex of every distinguished triangle whose two other vertices they contain), each with the triangulated structure in which a triangle is distinguished iff it is distinguished in the ambient category, so that the inclusions $\\iota:\\mathcal S\\to\\mathcal T$, $\\iota':\\mathcal S'\\to\\mathcal T'$ are triangulated functors with identity shift isomorphisms. Suppose $F(X)\\in\\mathcal S'$ for every $X\\in\\mathcal S$. Then the restriction $F|:\\mathcal S\\to\\mathcal S'$, $X\\mapsto F(X)$, $f\\mapsto F(f)$, with the shift isomorphisms $\\sigma_X$ ($X\\in\\mathcal S$), is a triangulated functor, and $\\iota'\\circ F|=F\\circ\\iota$ as functors with shift isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 05QM (definition-triangulated-subcategory) and Lemma 05QX (lemma-triangulated-subcategory: a full triangulated subcategory is triangulated with the distinguished triangles of the ambient category), Definition 014V (exact functor of triangulated categories); the restriction statement itself is Mathlib's (see mathlib_match)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift of a triangulated functor through a triangulated full subcategory is triangulated",
+   "results": "Functor.IsTriangulated.map_distinguished; ObjectProperty.lift (Mathlib.CategoryTheory.ObjectProperty.FullSubcategory); Functor.IsTriangulated.mk; Functor.map_distinguished_iff",
+   "date": "2026-10-09",
+   "verdict": "generalization: ObjectProperty.lift (checked with the grep below)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.lift, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.ObjectProperty.isTriangulated_lift (Mathlib.CategoryTheory.Triangulated.Subcategory): for P.IsTriangulated, F triangulated with ∀ X, P (F.obj X), (P.lift F hF).IsTriangulated",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a triangulated functor whose image lies in a triangulated full subcategory factors through it as a triangulated functor",
+   "results": "Functor.complete_distinguished_essImageDistTriang_morphism; essImageDistTriang; IsTriangulated.of_fully_faithful_triangulated_functor; Localization.isTriangulated_functor",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (the loogle hit isTriangulated_lift is the match)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'lift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ObjectProperty/Shift.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "results": "FullSubcategory.lean:159 ObjectProperty.lift, :165 liftCompιIso := Iso.refl; Shift.lean:209 (P.lift F hF).CommShift A := CommShift.ofComp (liftCompιIso), :213 NatTrans.CommShift (P.liftCompιIso F hF).hom; Subcategory.lean:719 P.ι.IsTriangulated, :742 isTriangulated_lift",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ObjectProperty.isTriangulated_lift",
+  "file": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+  "how": "specializes in one line per clause: with P = S' (an ObjectProperty with [P.IsTriangulated]) and the functor ι ⋙ F (ι = S.ι, triangulated by the instance at Subcategory.lean:719; composite triangulated by the instance (F ⋙ G).IsTriangulated, Mathlib/CategoryTheory/Triangulated/Functor.lean:244), F| = P.lift (ι ⋙ F) hF (Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159), its shift structure the instance at Mathlib/CategoryTheory/ObjectProperty/Shift.lean:209, triangulated by isTriangulated_lift (Subcategory.lean:742); ι' ∘ F| = F ∘ ι is liftCompιIso = Iso.refl (FullSubcategory.lean:165), compatible with the shifts by the instance NatTrans.CommShift (P.liftCompιIso F hF).hom (Shift.lean:213)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-inverse-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

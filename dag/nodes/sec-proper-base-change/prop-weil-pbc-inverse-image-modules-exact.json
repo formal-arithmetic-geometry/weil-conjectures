@@ -1,0 +1,66 @@
+{
+ "id": "prop-weil-pbc-inverse-image-modules-exact",
+ "kind": "statement",
+ "title": "Inverse image of etale sheaves of modules over a constant ring is exact",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $R$ a commutative ring, $R_U$ and $R_V$ the constant sheaves of rings with value $R$ on the small etale sites $U_{\\Et}$, $V_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category]. Let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image of abelian sheaves [def-weil-pbc-inverse-image], [def-weil-pbc-abelian-etale-sheaves]. Then: (1) the inverse image of the sheaf of rings $R_V$ is canonically isomorphic to $R_U$; (2) for a sheaf $G$ of $R_V$-modules, $u^{-1}G$ carries a unique structure of sheaf of $u^{-1}R_V$-modules, hence of $R_U$-modules through (1), such that $u^{-1}$ of the action map is the action map; this defines a functor $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ compatible with $u^{-1}$ on abelian sheaves under the forgetful functors, equal to the module pullback $u^*G=u^{-1}G\\otimes_{u^{-1}R_V}R_U$; (3) this functor is additive and exact (it preserves finite limits and finite colimits), and it is left adjoint to the direct image $u_*$ on sheaves of modules.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 04JC (lemma-flat-pullback-exact): f^{-1} is exact on abelian sheaves and f^* is exact for a flat morphism of ringed topoi; here u is flat as a morphism of ringed sites because u^{-1}R_V -> R_U is an isomorphism (constant sheaves: sites.tex Example 0H7J, Mor(E, F) = Map(E, Gamma(F))); used in sites-cohomology.tex Section 0735 (section-base-change-map) for flat pullback on D^+"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves of modules along a continuous functor of sites preserves finite limits",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits, instPreservesFiniteLimitsSheafSheafPullback, sheafPullback (Mathlib.CategoryTheory.Sites.Pullback); SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); TopCat.Sheaf.pullback",
+   "date": "2026-10-09",
+   "verdict": "no match: generic sheaf pullback with coefficient category A, exact under a hypothesis on G.op.lan or RepresentablyFlat G; nothing for etale sites and constant rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves of modules along a morphism of sites is exact, preserves finite limits",
+   "results": "sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; sheafPullbackConstruction.preservesFiniteLimits; PresheafOfModules sheafification preserves finite limits; SheafOfModules.toSheaf ⋙ sheafToPresheaf preserves finite limits",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'PreservesFiniteLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Pullback*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean; rg -ln 'constantSheaf.*pullback|pullback.*constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "Sites/Pullback.lean:93,98 (sheafPullback preserves finite limits given PreservesFiniteLimits G.op.lan), :120 (for RepresentablyFlat G); no exactness for SheafOfModules.pullback; Sites/ConstantSheaf.lean only, no pullback-of-constant-sheaf statement",
+   "date": "2026-10-09",
+   "verdict": "no match (the identification of Sheaf J (ModuleCat R) with R_T-modules, the flatness of the etale base-change functor and the constant-ring isomorphism are theorems)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-inverse-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

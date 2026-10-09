@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-exact-functor-derived-functor",
+ "kind": "statement",
+ "title": "The functor induced by an exact functor is its own right and left derived functor",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an exact functor between abelian categories, $Q_{\\mathcal A},Q_{\\mathcal B}$ the localization functors of cochain complexes at the quasi-isomorphisms [def-weil-abstract-derived-category], $C(F)$ the termwise functor on cochain complexes, and let $F_D:D(\\mathcal A)\\to D(\\mathcal B)$ be a functor with a natural isomorphism $\\varphi:F_D\\circ Q_{\\mathcal A}\\xrightarrow{\\sim}Q_{\\mathcal B}\\circ C(F)$ (such a pair exists by [lem-weil-pbc-exact-functor-derived-factorization]). Then (1) $(F_D,\\varphi^{-1})$ is a right derived functor of $Q_{\\mathcal B}\\circ C(F)$ with respect to the quasi-isomorphisms, i.e. a left Kan extension of $Q_{\\mathcal B}\\circ C(F)$ along $Q_{\\mathcal A}$, and $(F_D,\\varphi)$ is a left derived functor (a right Kan extension along $Q_{\\mathcal A}$); (2) the same holds for the restriction $F^+:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ of $F_D$ [def-weil-pbc-bounded-derived-subcategories], [lem-weil-pbc-exact-functor-bounded-below] with respect to the localization of the bounded below complexes at the quasi-isomorphisms. In particular every complex computes $RF$ and $LF$: the canonical map $Q_{\\mathcal B}(C(F)K)\\to RF(Q_{\\mathcal A}K)$ is an isomorphism for every complex $K$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015F (lemma-right-derived-exact-functor), parts (2)-(4); sites-cohomology.tex Section 0735 (section-base-change-map), paragraph before Lemma 0736: hence the exact pullback is written g^* rather than Lg^*"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact functor induced functor on derived category is the right derived functor, isRightDerivedFunctor_of_inverts",
+   "results": "Functor.isRightDerivedFunctor_of_inverts, isRightDerivedFunctor_iff_of_inverts, isIso_of_isRightDerivedFunctor_of_inverts, instIsRightDerivedFunctorLiftInvFac (Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived); IsRightDerivedFunctor (…RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "generalization for clause (1): isRightDerivedFunctor_of_inverts / isLeftDerivedFunctor_of_inverts with L = DerivedCategory.Q and e = mapDerivedCategoryFactors; nothing for D^+"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a functor out of a localization that is isomorphic to the lift is its own right derived functor (left Kan extension along the localization)",
+   "results": "instIsRightDerivedFunctorLiftInvFac; isRightDerivedFunctor_of_inverts; IsRightDerivedFunctor; HasRightDerivedFunctor.mk'; instIsRightDerivedFunctorTotalRightDerived…",
+   "date": "2026-10-09",
+   "verdict": "generalization for clause (1) only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsRightDerivedFunctor|IsLeftDerivedFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; rg -n 'IsLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; sed -n 166,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "results": "DerivedCategory/: only rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:52) and DerivabilityStructureInjectives.lean:376, nothing for mapDerivedCategory; Plus.lean:119,124 Plus.Qh is a localization of HomotopyCategory.Plus at quasi-isomorphisms; PointwiseRightDerived.lean:174 isRightDerivedFunctor_of_inverts, PointwiseLeftDerived.lean:174 isLeftDerivedFunctor_of_inverts",
+   "date": "2026-10-09",
+   "verdict": "no match: clause (1) specializes from isRightDerivedFunctor_of_inverts/isLeftDerivedFunctor_of_inverts, clause (2) needs the D^+ functor, absent from Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-inverse-image",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

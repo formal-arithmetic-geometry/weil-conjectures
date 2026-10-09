@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+ "kind": "statement",
+ "title": "Composites and whiskerings of shift-compatible natural transformations are shift-compatible",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be categories with shift functors $[1]$ (automorphisms or auto-equivalences, as for triangles [def-weil-pbc-triangles-with-shift]). A *functor commuting with the shift* is a pair $(F,\\varphi)$ of a functor $F:\\mathcal C\\to\\mathcal D$ and a natural isomorphism $\\varphi_X:F(X[1])\\xrightarrow{\\sim}F(X)[1]$; the composite of $(F,\\varphi)$ and $(G,\\gamma):\\mathcal D\\to\\mathcal E$ is $(GF,\\chi)$ with $\\chi_X=\\gamma_{FX}\\circ G(\\varphi_X)$, and the identity functor carries the identity isomorphism. A natural transformation $\\tau:F_1\\to F_2$ between functors $(F_1,\\varphi_1),(F_2,\\varphi_2)$ commuting with the shift is *compatible with the shift* if $\\varphi_{2,X}\\circ\\tau_{X[1]}=\\tau_X[1]\\circ\\varphi_{1,X}$ for all $X$. Then: (i) the identity transformation is compatible with the shift, and if $\\tau:F_1\\to F_2$ and $\\tau':F_2\\to F_3$ are, so is $\\tau'\\circ\\tau$; (ii) if $\\tau:F_1\\to F_2$ ($\\mathcal C\\to\\mathcal D$) is compatible with the shift and $(G,\\gamma):\\mathcal D\\to\\mathcal E$ commutes with the shift, then $G\\tau:GF_1\\to GF_2$, $(G\\tau)_X=G(\\tau_X)$, is compatible with the shift for the composite isomorphisms; (iii) if $\\tau:G_1\\to G_2$ ($\\mathcal D\\to\\mathcal E$) is compatible with the shift and $(F,\\varphi):\\mathcal C\\to\\mathcal D$ commutes with the shift, then $\\tau F:G_1F\\to G_2F$, $(\\tau F)_X=\\tau_{FX}$, is compatible with the shift for the composite isomorphisms; (iv) the composite isomorphisms of $H\\circ(G\\circ F)$ and $(H\\circ G)\\circ F$ agree.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 014V (definition-exact-functor-triangulated-categories, line 191: functors of triangulated categories with xi_X: F(X[1]) -> F(X)[1]) and Lemma 014Y (lemma-composition-exact, line 939: composite of exact functors, with the composite isomorphism); the compatibility of natural transformations with xi is not stated in Stacks"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sed -n 196,225p and 340,430p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "results": "Functor.CommShift.comp (line 200, composite structure; commShiftIso_comp_hom_app line 221: chi_X = G.map(phi_X) >> gamma_{FX}); class NatTrans.CommShift (line 346); instances NatTrans.CommShift.id (406), comp (411), whiskerRight (414: whiskerRight tau G : F1 >> G -> F2 >> G, i.e. G tau), whiskerLeft (422: whiskerLeft F tau : F >> G1 -> F >> G2, i.e. tau F), associator (425)",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib instance per clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate of a natural transformation compatible with shifts is compatible with shifts (base change exchange morphism commutes with shift)",
+   "results": "NatTrans.CommShiftCore.shift_comm, NatTrans.shift_comm, NatTrans.CommShiftCore.shift_app_comm, NatTrans.CommShift.of_core, LocalizerMorphism.natTransCommShift_hom, NatTrans.CommShift.shift_comm (Mathlib.CategoryTheory.Shift.CommShift)",
+   "date": "2026-10-09",
+   "verdict": "the notion NatTrans.CommShift; its stability instances are found by the grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate of a natural transformation commuting with shifts commutes with shifts, adjunction compatible with shift (recorded by the previous worker on the item, same session)",
+   "results": "Adjunction.CommShift, Adjunction.CommShift.mk', unit_app_commShiftIso_hom_app_assoc, CommShift.commShift_counit (Mathlib.CategoryTheory.Shift.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "tools; the composite/whisker instances are in Shift/CommShift.lean (grep)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.NatTrans.CommShift.comp",
+  "file": "Mathlib/CategoryTheory/Shift/CommShift.lean",
+  "how": "a few Mathlib lemmas, one per clause: (i) NatTrans.CommShift.id (line 406) and NatTrans.CommShift.comp (line 411); (ii) NatTrans.CommShift.whiskerRight (line 414) for Functor.whiskerRight tau G : F1 ⋙ G ⟶ F2 ⋙ G; (iii) NatTrans.CommShift.whiskerLeft (line 422) for Functor.whiskerLeft F tau : F ⋙ G1 ⟶ F ⋙ G2; (iv) NatTrans.CommShift.associator (line 425); the composite structure is Functor.CommShift.comp (line 200) with commShiftIso_comp_hom_app (line 221) giving chi_X = gamma_{FX} o G(phi_X); Mathlib states CommShift for all a in ℤ, which for ℤ is determined by the case a = 1"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-exchange-triangulated",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
