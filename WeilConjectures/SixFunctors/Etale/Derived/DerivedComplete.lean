@@ -117,11 +117,11 @@ theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
   -- `derivedComplete_rightDerivedLowerStar`. It remains to see that `j_! K` is derived
   -- complete. This is the non-formal step and it is open here: `j_!` is a left adjoint, so it
   -- commutes with `– ⊗ᴸ Λ/Iⁿ` (projection formula for `j`) but need not preserve the
-  -- products in the Milnor triangle of `K`. A possible route is the triangle `j_! K → Rj_* K → i_* i^* Rj_* K` for the
-  -- closed complement `i`: `Rj_* K` and `i_*` of a complete object are complete by the
-  -- argument for `Rf_*`, so it suffices that `i^*` preserves completeness of `Rj_* K`. Should
-  -- that fail, `Rf_!` on the adic category has to be defined as the derived completion of
-  -- `Rg_* j_!`.
+  -- products in the Milnor triangle of `K`. A possible route is the triangle
+  -- `j_! K → Rj_* K → i_* i^* Rj_* K` for the closed complement `i`: `Rj_* K` and `i_*` of a
+  -- complete object are complete by the argument for `Rf_*`, so it suffices that `i^*`
+  -- preserves completeness of `Rj_* K`. Should that fail, `Rf_!` on the adic category has to
+  -- be defined as the derived completion of `Rg_* j_!`.
   sorry
 
 /-- **The coefficient dual preserves derived completeness.** For a principal ideal `I` of a
@@ -144,8 +144,8 @@ theorem derivedComplete_coefficientDual {X : Scheme.{u}}
   -- homotopy limit (`IsHomotopyLimit.map`). Since `Iⁿ = (πⁿ)` and `Λ/Iⁿ` is the
   -- cone of `πⁿ : Λ → Λ`, the triangulated `Λ`-linear functor `RHom(K, –)` satisfies
   -- `RHom(K, Λ_X ⊗ᴸ Λ/Iⁿ) ≅ RHom(K, Λ_X) ⊗ᴸ Λ/Iⁿ`, naturally in `n`; transporting the
-  -- homotopy limit along these isomorphisms shows that `K^∨` is derived complete. The hypothesis `hK`
-  -- is not needed by this argument.
+  -- homotopy limit along these isomorphisms shows that `K^∨` is derived complete. The
+  -- hypothesis `hK` is not needed by this argument.
   sorry
 
 end General

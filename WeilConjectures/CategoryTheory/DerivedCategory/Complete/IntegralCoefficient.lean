@@ -162,10 +162,10 @@ instance : IsTriangulated (DerivedCategoryDerivedCompleteIntegral J l E) :=
 
 variable {J l E}
 
+omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] in
 /-- Given a homotopy limit `c` of the tower of reductions `K ⊗ᴸ 𝒪_E/𝔪_Eⁿ`, the object `K`
 lies in `D_comp(J, 𝒪_E)` precisely when it is isomorphic to `c.pt = R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`
 compatibly with the reduction maps. -/
-omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] in
 lemma DerivedCategory.derivedCompleteIntegral_iff_exists_iso
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     {c : Cone (derivedCompletionDiagram J (PadicAlgCl.maximalIdealShrink l E) K)}
