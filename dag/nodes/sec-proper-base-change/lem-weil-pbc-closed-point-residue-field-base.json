@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-closed-point-residue-field-base",
+ "kind": "statement",
+ "title": "Residue fields of closed points over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $X$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism], with structure morphism $f:X\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum]. For every closed point $x\\in X$ [def-weil-closed-points] the homomorphism $k\\to\\kappa(x)$ induced by $f$ on residue fields [def-weil-residue-field] is an isomorphism; equivalently, the composite $\\operatorname{Spec}\\kappa(x)\\to X\\xrightarrow{f}\\operatorname{Spec}k$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Theorem Tag 00FV (theorem-nullstellensatz: the residue field of a maximal ideal of a finite type $k$-algebra is finite over $k$), with $k$ algebraically closed; for schemes literature/stacks-project/morphisms.tex Lemma Tag 01TB (lemma-jacobson-finite-type-points)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field of a closed point of a scheme locally of finite type over an algebraically closed field is the base field",
+   "results": "LocallyRingedSpace.residueField, IsLocalRing.ResidueField, Scheme.residueField, LocallyRingedSpace.Γevaluation, Scheme.residue",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (definitions only); found by the other searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.residueFieldIsoBase",
+   "results": "AlgebraicGeometry.residueFieldIsoBase {X} {K} [Field K] [IsAlgClosed K] (f : X ⟶ Spec K) [LocallyOfFiniteType f] (x : X) (hx : IsClosed {x}) : X.residueField x ≅ K; SpecMap_residueFieldIsoBase_inv : Spec.map (residueFieldIsoBase f x hx).inv = X.fromSpecResidueField x ≫ f (Mathlib.AlgebraicGeometry.AlgClosed.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,90p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; grep -n 'isClosed_singleton_iff_locallyOfFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "AlgClosed/Basic.lean:33 residueFieldIsoBase, :46 SpecMap_residueFieldIsoBase_inv, :52 pointOfClosedPoint, :68 pointEquivClosedPoint; Morphisms/Finite.lean:221 isClosed_singleton_iff_locallyOfFiniteType (Stacks 01TB)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.residueFieldIsoBase, AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv",
+  "file": "Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean",
+  "how": "exact: residueFieldIsoBase f x hx : X.residueField x ≅ .of K for closed x (line 33), and SpecMap_residueFieldIsoBase_inv (line 46) says Spec of its inverse is X.fromSpecResidueField x ≫ f, i.e. the inverse is the map K → κ(x) induced by f"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-base-change-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dimensional-base-change-points; match verified by the lead against the Mathlib source"
+ }
+}

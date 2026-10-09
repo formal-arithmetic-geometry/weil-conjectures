@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-fibre-product-points",
+ "kind": "statement",
+ "title": "Points of a fibre product of schemes",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme] with fibre product $X\\times_SY$ and projections $p,q$ [def-pc-fibre-product]. Points $z$ of $X\\times_SY$ are in bijective correspondence with quadruples $(x,y,s,\\mathfrak p)$ where $x\\in X$, $y\\in Y$, $s\\in S$ with $f(x)=s=g(y)$ and $\\mathfrak p$ is a prime ideal of $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y)$ (residue fields [def-weil-residue-field], with the maps $\\kappa(s)\\to\\kappa(x)$, $\\kappa(s)\\to\\kappa(y)$ induced by $f$ and $g$); under this correspondence $p(z)=x$ and $q(z)=y$. In particular, for fixed $x,y$ with $f(x)=g(y)=s$, the set $p^{-1}(x)\\cap q^{-1}(y)$ is in bijection with $\\operatorname{Spec}(\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y))$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma Tag 01JT (lemma-points-fibre-product)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "points of a fibre product of schemes correspond to triples x y and a prime of the tensor product of residue fields",
+   "results": "pullbackSpecIso_inv_fst'_assoc, pullbackSpecIso_hom_fst_assoc (Pullbacks), AlgebraicGeometry.Scheme.Pullback.carrierEquiv, Scheme.Pullback.SpecOfPoint (Mathlib.AlgebraicGeometry.PullbackCarrier), pullbackSpecIso",
+   "date": "2026-10-09",
+   "verdict": "match: carrierEquiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "underlying points of the pullback X ×_S Y are in bijection with points x, y over the same s together with a prime ideal of κ(x) ⊗_{κ(s)} κ(y)",
+   "results": "Scheme.Pullback.carrierEquiv : ↥(pullback f g) ≃ Σ T : Triplet f g, Spec T.tensor; SpecOfPoint; SpecTensorTo_SpecOfPoint; Triplet.ofPoint_SpecTensorTo; Triplet.isPullback_SpecMap_tensor (Mathlib.AlgebraicGeometry.PullbackCarrier)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|^def\\|stacks' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean; sed -n 240,295p of the same file",
+   "results": "Triplet (x, y with f x = g y), Triplet.tensor (pushout of κ(x) ← κ(s) → κ(y) in CommRingCat, i.e. κ(x) ⊗_{κ(s)} κ(y)), :265 carrierEquiv, :282 carrierEquiv_symm_fst, :288 carrierEquiv_symm_snd",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_fst, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_snd",
+  "file": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "how": "exact: carrierEquiv : ↑(pullback f g) ≃ Σ T : Triplet f g, Spec T.tensor (line 265), a Triplet being x, y with f x = g y and T.tensor the pushout κ(x) ⊔_{κ(s)} κ(y) = κ(x) ⊗_{κ(s)} κ(y) in CommRingCat; carrierEquiv_symm_fst/snd (lines 282, 288) give p(z) = x, q(z) = y"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-base-change-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dimensional-base-change-points; match verified by the lead against the Mathlib source"
+ }
+}

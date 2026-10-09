@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-finite-type-dim-zero-artinian",
+ "kind": "statement",
+ "title": "A zero-dimensional scheme of finite type over a field is finite and discrete",
+ "statement": "Let $k$ be a field and let $X$ be a scheme of finite type over $k$ [def-weil-finite-type-morphism] with $\\dim X\\le0$ [def-kun-topological-krull-dimension]. Then $X$ is locally Noetherian and locally Artinian (for every affine open $U\\subseteq X$ the ring $\\Gamma(U,\\mathcal O_X)$ is an Artinian ring), the underlying topological space $|X|$ is discrete, and $|X|$ is a finite set. In particular every point of $X$ is closed (and open) [def-weil-closed-points].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00KH (lemma-Noetherian-dimension-0: a Noetherian ring of dimension 0 is Artinian, its spectrum is a finite discrete space); finite type over a field gives Noetherian affine pieces (Hilbert basis theorem) and quasi-compactness"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-points"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme of finite type over a field with Krull dimension zero is finite and discrete",
+   "results": "PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.IsArtinianScheme.finite (Mathlib.AlgebraicGeometry.Artinian), AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopology... (Limits)",
+   "date": "2026-10-09",
+   "verdict": "match (assembled): of_topologicalKrullDim_le_zero, discreteTopology, IsArtinianScheme.finite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme of dimension zero is Artinian: finite discrete underlying space",
+   "results": "IsArtinianScheme.iff_isNoetherian_and_discreteTopology, IsArtinianScheme.isNoetherianScheme, IsLocallyArtinian.of_topologicalKrullDim_le_zero, IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology, IsArtinianScheme.finite (Mathlib.AlgebraicGeometry.Artinian)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyArtinian, topologicalKrullDim",
+   "results": "AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero {X} [IsLocallyNoetherian X] (h : topologicalKrullDim X ≤ 0) : IsLocallyArtinian X",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Artinian.lean; grep -rn 'LocallyOfFiniteType.isLocallyNoetherian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Noetherian.lean; grep -n 'compactSpace_of_compactSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "Artinian.lean:66 IsLocallyArtinian.of_topologicalKrullDim_le_zero, :95 IsLocallyArtinian.discreteTopology (instance), :165 class IsArtinianScheme (locally Artinian + CompactSpace), :168 IsArtinianScheme.finite; Noetherian.lean:239 LocallyOfFiniteType.isLocallyNoetherian; QuasiCompact.lean:150 QuasiCompact.compactSpace_of_compactSpace",
+   "date": "2026-10-09",
+   "verdict": "match (read: types as stated)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.IsLocallyArtinian.discreteTopology, AlgebraicGeometry.IsArtinianScheme.finite, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+  "file": "Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "how": "specializes one lemma per clause: for f : X ⟶ Spec k with LocallyOfFiniteType f and QuasiCompact f, IsLocallyNoetherian X by LocallyOfFiniteType.isLocallyNoetherian f (Noetherian.lean:239; Spec k is Noetherian); IsLocallyArtinian X by IsLocallyArtinian.of_topologicalKrullDim_le_zero h (Artinian.lean:66), whose field isArtinianRing_presheaf_obj is the Artinian clause; DiscreteTopology X by the instance IsLocallyArtinian.discreteTopology (Artinian.lean:95); CompactSpace X by QuasiCompact.compactSpace_of_compactSpace f (QuasiCompact.lean:150), so IsArtinianScheme X and Finite X by IsArtinianScheme.finite (Artinian.lean:168); closed points: isClosed_discrete {x}"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-base-change-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dimensional-base-change-points; match verified by the lead against the Mathlib source"
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-discrete-field-base-change-artinian",
+ "kind": "statement",
+ "title": "Base change of a discrete finite type scheme to a field extension",
+ "statement": "Let $k\\subseteq K$ be a field extension, and let $X$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism] whose underlying topological space is discrete. Let $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ be the base change [def-pc-base-change]. Then $X_K$ is locally Artinian (for every affine open $U\\subseteq X_K$ the ring $\\Gamma(U,\\mathcal O_{X_K})$ is Artinian); in particular the underlying space of $X_K$ is discrete and $\\dim X_K\\le0$ [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension: $\\dim_xX=\\dim_{x_K}X_K$ for a finite type $k$-algebra), case of dimension $0$ at every point; quasi-finiteness: literature/stacks-project/morphisms.tex Lemma Tag 02NH (lemma-quasi-finite)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a locally quasi-finite morphism to a locally Artinian scheme is locally Artinian",
+   "results": "Algebra.QuasiFinite.baseChange, Algebra.QuasiFiniteAt.baseChange, RingHom.QuasiFinite.isStableUnderBaseChange (RingTheory.QuasiFinite), IsArtinianScheme.toIsLocallyArtinian, IsLocallyArtinian.of_isImmersion (Mathlib.AlgebraicGeometry.Artinian)",
+   "date": "2026-10-09",
+   "verdict": "ingredients: base change of quasi-finite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme locally of finite type over a field with discrete underlying space, its base change to a field extension has discrete underlying space",
+   "results": "Scheme.Hom.discrete_fiber, instFiniteCarrierCarrierCommRingCatFiberOfIsFinite (Fiber), Algebra.QuasiFinite.isDiscrete_comap_preimage, IsFinite.instIsStableUnderBaseChangeScheme, finite_appTop_of_universallyClosed",
+   "date": "2026-10-09",
+   "verdict": "no single lemma; ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f : X → Y is locally quasi-finite and Y is locally Artinian then X is locally Artinian",
+   "results": "IsLocallyArtinian.of_isImmersion, IsArtinianScheme.toIsLocallyArtinian, instLocallyQuasiFiniteOfIsFinite, LocallyQuasiFinite, IsLocallyArtinian.isLocallyNoetherian",
+   "date": "2026-10-09",
+   "verdict": "the lemma itself not returned; found by grep below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally of finite type morphism is locally quasi-finite iff every fibre is discrete",
+   "results": "instLocallyQuasiFiniteOfIsFinite, Scheme.Hom.discrete_fiber, LocallyQuasiFinite, instFiniteCarrier...FiberOfIsFinite, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-09",
+   "verdict": "the iff not returned; found by grep below"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; grep -n 'topologicalKrullDim_zero_of_discreteTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean",
+   "results": "QuasiFinite.lean:115 IsStableUnderBaseChange @LocallyQuasiFinite and :124 instance LocallyQuasiFinite (pullback.snd f g), :142 IsLocallyArtinian.of_locallyQuasiFinite [LocallyQuasiFinite f] [IsLocallyArtinian Y] : IsLocallyArtinian X, :276 locallyQuasiFinite_iff_isDiscrete_preimage_singleton [LocallyOfFiniteType f] : LocallyQuasiFinite f ↔ ∀ x, IsDiscrete (f ⁻¹' {x}); KrullDimension.lean:67 topologicalKrullDim_zero_of_discreteTopology : topologicalKrullDim X ≤ 0",
+   "date": "2026-10-09",
+   "verdict": "match (assembled, read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton, AlgebraicGeometry.IsLocallyArtinian.of_locallyQuasiFinite, AlgebraicGeometry.IsLocallyArtinian.discreteTopology, topologicalKrullDim_zero_of_discreteTopology",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/Topology/KrullDimension.lean",
+  "how": "specializes in two lines: f : X ⟶ Spec k is LocallyQuasiFinite by locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr (every subset of the discrete X is discrete) (QuasiFinite.lean:276); then IsLocallyArtinian X_K by IsLocallyArtinian.of_locallyQuasiFinite (pullback.snd f g) (QuasiFinite.lean:142), using the base-change instance (QuasiFinite.lean:124) and IsLocallyArtinian (Spec K) (K Artinian; Artinian.lean:180 instance); discreteness by IsLocallyArtinian.discreteTopology (Artinian.lean:95) and dim ≤ 0 by topologicalKrullDim_zero_of_discreteTopology (KrullDimension.lean:67)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-base-change-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-zero-dimensional-base-change-points; match verified by the lead against the Mathlib source"
+ }
+}
