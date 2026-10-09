@@ -46,6 +46,21 @@ boundedness below holds for any sheaf. The constructibility of the higher direct
 the upper bound are stated here with `sorry`. Their proof
 (blueprint `sk-prop-sf-finiteness`) proceeds by generic constructibility for open immersions
 (Deligne's dévissage), the proper case, and a Čech argument for a finite affine cover of `X`.
+
+The objects with bounded constructible derived pushforward form a triangulated subcategory
+(`AlgebraicGeometry.ProEtale.finiteLowerStar`), so the finiteness theorem is stable under
+extensions, kernels and cokernels of short exact sequences and extends to bounded complexes
+with constructible cohomology (`AlgebraicGeometry.ProEtale.finiteLowerStar_of_bounded`).
+
+## Missing infrastructure
+
+The two statements left with `sorry` need, beyond this dévissage: the recollement for closed
+immersions on the pro-étale site (exactness of `i_*`, which rests on lifting weakly étale maps
+along henselian pairs), so as to reduce a constructible sheaf to lisse sheaves on strata; and,
+for the lisse case, a comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers of torsion étale
+sheaves (lattices, `Rf_*` commuting with `R lim` and with `⊗ ℚ`) together with the finiteness
+theorem for torsion étale coefficients
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`).
 -/
 
 @[expose] public section
