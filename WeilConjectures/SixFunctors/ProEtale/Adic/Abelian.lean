@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
+public import WeilConjectures.Mathlib.Topology.Constructible
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Kernels and cokernels of constructible `ℓ`-adic sheaves
@@ -315,5 +317,115 @@ theorem exists_nonempty_isAdicLisseSheaf_kernel_cokernel {Y : Scheme.{u}} [Compa
       (hmem k).2.of_iso (PreservesCokernel.iso _ _).symm⟩
 
 end Generic
+
+section Stratification
+
+open TopologicalSpace Topology
+
+/-- **Stratified lisseness of kernels and cokernels.** A morphism of lisse sheaves on a scheme
+whose underlying space is Noetherian has stratified lisse kernel and cokernel, by Noetherian
+induction from the generic lisseness. -/
+theorem IsAdicLisseSheaf.exists_stratification_kernel_cokernel {Y : Scheme.{u}}
+    [NoetherianSpace Y] {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf G)
+    (φ : F ⟶ G) (Z : Closeds Y) :
+    ∃ (ι : Type) (_ : Finite ι) (S : ι → Scheme.{u}) (i : (k : ι) → S k ⟶ Y),
+      (∀ k, IsImmersion (i k)) ∧ (∀ k, IsConstructible (Set.range (i k).base)) ∧
+      (∀ k, Set.range (i k).base ⊆ Z) ∧ (∀ y ∈ Z, ∃! k, y ∈ Set.range (i k).base) ∧
+      ∀ k, IsAdicLisseSheaf ((i k)^*ᵃ[l].obj (kernel φ)) ∧
+        IsAdicLisseSheaf ((i k)^*ᵃ[l].obj (cokernel φ)) := by
+  induction Z using WellFoundedLT.induction with
+  | ind Z IH =>
+  by_cases hZ : (Z : Set Y) = ∅
+  · refine ⟨Empty, inferInstance, Empty.elim, fun k ↦ k.elim, fun k ↦ k.elim, fun k ↦ k.elim,
+      fun k ↦ k.elim, fun y hy ↦ absurd (hZ ▸ hy : y ∈ (∅ : Set Y)) id, fun k ↦ k.elim⟩
+  let I := Scheme.IdealSheafData.vanishingIdeal Z
+  let iZ := I.subschemeι
+  have hrange : Set.range iZ.base = Z := by
+    rw [Scheme.IdealSheafData.range_subschemeι]
+    simp [I]
+  have : CompactSpace I.subscheme := iZ.isClosedEmbedding.compactSpace
+  obtain ⟨y₀, hy₀⟩ := Set.nonempty_iff_ne_empty.2 hZ
+  have : Nonempty I.subscheme := by
+    obtain ⟨z, -⟩ := hrange.symm ▸ hy₀
+    exact ⟨z⟩
+  obtain ⟨U, hUne, hker, hcok⟩ := exists_nonempty_isAdicLisseSheaf_kernel_cokernel
+    (hF.upperStar iZ) (hG.upperStar iZ) ((iZ)^*ᵃ[l].map φ)
+  let Z' : Closeds Y := ⟨iZ.base '' (U : Set I.subscheme)ᶜ,
+    iZ.isClosedEmbedding.isClosedMap _ U.isOpen.isClosed_compl⟩
+  have hZ' : (Z' : Set Y) = (Z : Set Y) \ iZ.base '' U := by
+    rw [← hrange, ← Set.image_univ, ← Set.image_sdiff iZ.isClosedEmbedding.injective,
+      ← Set.compl_eq_univ_sdiff]
+    rfl
+  have hZ'Z : Z' < Z := by
+    refine lt_of_le_of_ne (fun y hy ↦ ?_) fun h ↦ ?_
+    · have hy' : y ∈ (Z' : Set Y) := hy
+      rw [hZ'] at hy'
+      exact hy'.1
+    · obtain ⟨u, hu⟩ := hUne
+      have : iZ.base u ∈ (Z' : Set Y) := by rw [h, ← hrange]; exact Set.mem_range_self u
+      rw [hZ'] at this
+      exact this.2 ⟨u, hu, rfl⟩
+  obtain ⟨ι', _, S', i', himm, hc, hsub, huniq, hlisse⟩ := IH Z' hZ'Z
+  have hrU : Set.range (U.ι ≫ iZ).base = iZ.base '' U := by
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Scheme.Opens.range_ι]
+  refine ⟨Option ι', inferInstance, fun k ↦ k.elim U.toScheme S',
+    fun k ↦ match k with | none => U.ι ≫ iZ | some k => i' k, ?_, ?_, ?_, ?_, ?_⟩
+  · rintro (_ | k)
+    · exact inferInstanceAs (IsImmersion (U.ι ≫ iZ))
+    · exact himm k
+  · rintro (_ | k)
+    · change IsConstructible (Set.range (U.ι ≫ iZ).base)
+      have hsd : iZ.base '' U = (Z : Set Y) \ Z' := by
+        rw [hZ', Set.sdiff_sdiff_cancel_left]
+        exact hrange ▸ Set.image_subset_range _ _
+      rw [hrU, hsd]
+      exact Z.isClosed.isConstructible_of_noetherianSpace.sdiff
+        Z'.isClosed.isConstructible_of_noetherianSpace
+    · exact hc k
+  · rintro (_ | k)
+    · change Set.range (U.ι ≫ iZ).base ⊆ Z
+      rw [hrU, ← hrange]
+      exact Set.image_subset_range _ _
+    · exact (hsub k).trans hZ'Z.le
+  · intro y hy
+    by_cases hy' : y ∈ Z'
+    · obtain ⟨k, hk, hk'⟩ := huniq y hy'
+      refine ⟨some k, hk, ?_⟩
+      rintro (_ | k') hk''
+      · change y ∈ Set.range (U.ι ≫ iZ).base at hk''
+        rw [hrU] at hk''
+        have : y ∈ (Z' : Set Y) := hy'
+        rw [hZ'] at this
+        exact absurd hk'' this.2
+      · exact congrArg some (hk' k' hk'')
+    · refine ⟨none, ?_, ?_⟩
+      · change y ∈ Set.range (U.ι ≫ iZ).base
+        rw [hrU]
+        by_contra h
+        exact hy' (show y ∈ (Z' : Set Y) by rw [hZ']; exact ⟨hy, h⟩)
+      · rintro (_ | k') hk''
+        · rfl
+        · exact absurd (hsub k' hk'') hy'
+  · rintro (_ | k)
+    · exact ⟨hker.of_iso ((adicUpperStarComp l U.ι iZ).app (kernel φ) ≪≫
+          (U.ι)^*ᵃ[l].mapIso (PreservesKernel.iso (iZ)^*ᵃ[l] φ) ≪≫
+          PreservesKernel.iso (U.ι)^*ᵃ[l] _).symm,
+        hcok.of_iso ((adicUpperStarComp l U.ι iZ).app (cokernel φ) ≪≫
+          (U.ι)^*ᵃ[l].mapIso (PreservesCokernel.iso (iZ)^*ᵃ[l] φ) ≪≫
+          PreservesCokernel.iso (U.ι)^*ᵃ[l] _).symm⟩
+    · exact hlisse k
+
+/-- A morphism of lisse sheaves on a scheme with Noetherian underlying space has stratified lisse
+kernel and cokernel. -/
+theorem IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel {Y : Scheme.{u}}
+    [NoetherianSpace Y] {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf G)
+    (φ : F ⟶ G) :
+    IsAdicStratifiedLisseSheaf (kernel φ) ∧ IsAdicStratifiedLisseSheaf (cokernel φ) := by
+  obtain ⟨ι, hι, S, i, himm, hc, -, huniq, hlisse⟩ :=
+    exists_stratification_kernel_cokernel hF hG φ ⊤
+  exact ⟨⟨ι, hι, S, i, himm, hc, fun y ↦ huniq y trivial, fun k ↦ (hlisse k).1⟩,
+    ⟨ι, hι, S, i, himm, hc, fun y ↦ huniq y trivial, fun k ↦ (hlisse k).2⟩⟩
+
+end Stratification
 
 end AlgebraicGeometry.ProEtale
