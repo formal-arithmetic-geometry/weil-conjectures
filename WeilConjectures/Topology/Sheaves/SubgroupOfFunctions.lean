@@ -25,13 +25,13 @@ Then `U ↦ P U` is a sheaf of abelian groups on `X`.
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory TopologicalSpace Opposite
 
 namespace TopCat
 
-variable {X : TopCat.{u}} (A : X → Type u) [∀ x, AddCommGroup (A x)]
+variable {X : TopCat.{u}} (A : X → Type v) [∀ x, AddCommGroup (A x)]
 
 /-- A family of subgroups of the groups of dependent functions `(x : U) → A x` on the opens
 `U` of `X`, stable under restriction and satisfying the gluing condition. -/
@@ -60,7 +60,7 @@ lemma restrict_apply {U V : Opens X} (h : V ≤ U) (f : P.subgroup U) (x : V) :
   rfl
 
 /-- The presheaf of abelian groups `U ↦ P U`. -/
-def presheaf : Presheaf AddCommGrpCat.{u} X where
+def presheaf : Presheaf AddCommGrpCat.{max u v} X where
   obj U := AddCommGrpCat.of (P.subgroup U.unop)
   map h := AddCommGrpCat.ofHom (P.restrict h.unop.le)
   map_id _ := rfl
@@ -95,7 +95,7 @@ lemma isSheaf : P.presheaf.IsSheaf := by
   refine h1.trans (hf i x hi).symm
 
 /-- The sheaf of abelian groups `U ↦ P U`. -/
-def sheaf : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+def sheaf : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{max u v} :=
   ⟨P.presheaf, P.isSheaf⟩
 
 @[simp]
