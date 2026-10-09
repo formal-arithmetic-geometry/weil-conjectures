@@ -358,6 +358,10 @@ variable (V : C.Opens) (hjV : j.opensRange ≤ V) (hWV : W ≤ V)
 noncomputable abbrev toOpen : U ⟶ V.toScheme :=
   IsOpenImmersion.lift V.ι j (by rw [Scheme.Opens.range_ι]; exact hjV)
 
+/-- The open immersion `Spec Γ(C, W) ⟶ V` of an affine open contained in `V`. -/
+noncomputable abbrev affineToOpen : Spec Γ(C, W) ⟶ V.toScheme :=
+  IsOpenImmersion.lift V.ι hW.fromSpec (by rw [Scheme.Opens.range_ι, hW.range_fromSpec]; exact hWV)
+
 include hW hjV hWV in
 omit [QuasiCompact j] [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] [IsSepClosed Ω]
   [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω] in
@@ -366,12 +370,11 @@ omit [QuasiCompact j] [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionFi
 lemma pointOfAlgebra_genericPointLift_comp_toOpen :
     pointOfAlgebra Ω (genericPointLift j) ≫ toOpen j V hjV =
       pointOfAlgebra Ω (Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) C.functionField)) ≫
-        IsOpenImmersion.lift V.ι hW.fromSpec (by
-          rw [Scheme.Opens.range_ι, hW.range_fromSpec]; exact hWV)) := by
+        affineToOpen hW V hWV) := by
   rw [← cancel_mono V.ι]
   simp only [Category.assoc, IsOpenImmersion.lift_fac]
-  rw [genericPointLift_comp, hW.fromSpecFunctionField_eq, ← Category.assoc, ← Category.assoc, ← Spec.map_comp,
-    ← Spec.map_comp]
+  rw [genericPointLift_comp, hW.fromSpecFunctionField_eq, ← Category.assoc, ← Category.assoc,
+    ← Spec.map_comp, ← Spec.map_comp]
   rfl
 
 include hW hjV hWV in
@@ -388,8 +391,7 @@ lemma galoisToAut_hom_app_pullback_eq_of_mem_inertia [ConnectedSpace V]
     fiberIsoOfIso (Iso.refl _) (by rw [Iso.refl_hom, Category.id_comp, h])
   apply ((ConcreteCategory.isIso_iff_bijective (e.hom.app P)).1 inferInstance).1
   have key := galoisToAut_hom_app_eq_of_mem_inertia (K := C.functionField) (Ω := Ω)
-    (IsOpenImmersion.lift V.ι hW.fromSpec (by
-      rw [Scheme.Opens.range_ι, hW.range_fromSpec]; exact hWV)) Q hσ P (e.hom.app P t)
+    (affineToOpen hW V hWV) Q hσ P (e.hom.app P t)
   rw [← key]
   apply fiber_ext
   simp only [e, Iso.trans_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
