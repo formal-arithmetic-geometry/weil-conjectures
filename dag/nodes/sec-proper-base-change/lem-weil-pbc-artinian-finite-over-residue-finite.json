@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-artinian-finite-over-residue-finite",
+ "kind": "statement",
+ "title": "An Artinian ring whose residue ring is finite over a subring is finite over it",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings with $B$ Artinian (every descending chain of ideals stabilizes), and let $J(B)$ be the Jacobson radical of $B$. If $B/J(B)$ is a finitely generated $A$-module, then $B$ is a finitely generated $A$-module. More generally, any Artinian (or Noetherian) $B$-module $M$ is finitely generated as an $A$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Used in the proof of Algebra, Lemma Tag 032D ('$R/I_0R\\cong R/IR$ is finite over $k=R_0/I_0$ (because $\\dim(R/I)=0$, see Section 00KD)'); finite length of Artinian local rings: Algebra, Lemma Tag 00JB (lemma-artinian-finite-length, line 12787) and Section 00J4 (artinian rings)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artinian module over local ring finitely generated over subring with same residue field; length of quotient R/I finite implies finite over coefficient field",
+   "results": "IsSemiprimaryRing.finite_of_isArtinian (Mathlib.RingTheory.HopkinsLevitzki), Module.finite_of_isArtinianRing (Mathlib.RingTheory.Jacobson.Artinian), IsArtinianRing.tfae, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+   "date": "2026-10-10",
+   "verdict": "match: IsSemiprimaryRing.finite_of_isArtinian"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a module of finite length over a local ring R is finitely generated over a subring R0 when R0 to R is local and induces an isomorphism of residue fields",
+   "results": "IsLocalRing.ResidueField.finite_of_module_finite, IsLocalRing.instFiniteResidueField, IsLocalRing.finite_quotient_iff (Mathlib.RingTheory.LocalRing.Quotient)",
+   "date": "2026-10-10",
+   "verdict": "no match by this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemiprimaryRing.finite_of_isArtinian",
+   "results": "IsSemiprimaryRing.finite_of_isArtinian (R₀ R M) [Ring R₀] [Ring R] [Module R₀ R] [AddCommGroup M] [Module R₀ M] [Module R M] [IsScalarTower R₀ R M] [IsSemiprimaryRing R] [IsScalarTower R₀ R R] [Module.Finite R₀ (R ⧸ Ring.jacobson R)] [IsArtinian R M] : Module.Finite R₀ M (Mathlib.RingTheory.HopkinsLevitzki)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 39,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/HopkinsLevitzki.lean; sed -n 640,656p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Artinian/Module.lean",
+   "results": "HopkinsLevitzki.lean:94 finite_of_isNoetherian, :97 finite_of_isArtinian in namespace IsSemiprimaryRing (line 42) with section variables [IsScalarTower R₀ R R] [Module.Finite R₀ (R ⧸ Ring.jacobson R)] (line 78); Artinian/Module.lean:653 instance : IsSemiprimaryRing R for an Artinian ring R",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSemiprimaryRing.finite_of_isArtinian",
+  "file": "Mathlib/RingTheory/HopkinsLevitzki.lean",
+  "how": "specializes in one line: an Artinian ring is semiprimary (instance, Mathlib/RingTheory/Artinian/Module.lean:653), so IsSemiprimaryRing.finite_of_isArtinian A B M (line 97) gives Module.Finite A M for an Artinian B-module M when Module.Finite A (B ⧸ Ring.jacobson B); for M = B, IsArtinian B B is IsArtinianRing B (the Noetherian variant is finite_of_isNoetherian, line 94)",
+  "line": 97
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added (first declaration named), verified with sed."
+}
