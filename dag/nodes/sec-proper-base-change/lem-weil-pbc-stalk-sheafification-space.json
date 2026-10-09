@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-stalk-sheafification-space",
+ "kind": "statement",
+ "title": "Sheafification does not change stalks (presheaves of abelian groups on a topological space)",
+ "statement": "Let $X$ be a topological space, $x\\in X$, and $\\mathcal P$ a presheaf of abelian groups on $X$ (on the site of open subsets of $X$), with sheafification $\\theta:\\mathcal P\\to\\mathcal P^\\#$ [def-weil-pbc-sheafification]. Stalks are the colimits over the open neighbourhoods of $x$ [def-weil-pbc-module-stalk]. Then the homomorphism $\\theta_x:\\mathcal P_x\\to\\mathcal P^\\#_x$, $s_x\\mapsto\\theta_U(s)_x$ ($s\\in\\mathcal P(U)$, $x\\in U$), is an isomorphism of abelian groups.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification: F_x = F^#_x for presheaves of sets, with proof) and Lemma 0085 (lemma-sheafify-abelian-presheaf: the sheafification of an abelian presheaf is the sheaf of sets F^# with its unique abelian structure making F -> F^# additive), Section 6.18 (Tag 0083)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of sheafification is isomorphic to stalk of presheaf on topological space",
+   "results": "TopCat.Presheaf.sheafifyStalkIso, TopCat.Presheaf.stalkToFiber_injective, stalkToFiber_surjective (Mathlib.Topology.Sheaves.Sheafify; Type-valued, for the explicit étalé sheafification), CategoryTheory.isoSheafify",
+   "date": "2026-10-09",
+   "verdict": "generalization for Type-valued presheaves and the explicit sheafify; see loogle for the general toSheafify"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor, CategoryTheory.toSheafify",
+   "results": "TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso (Mathlib.Topology.Sheaves.Sheafify): IsIso ((stalkFunctor C p₀).map (toSheafify (Opens.grothendieckTopology X) 𝓕)) for C with HasColimits, HasTerminal, HasWeakSheafify",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the sheafification of a presheaf on a topological space is isomorphic to the stalk of the presheaf (map induced by toSheafify is iso)",
+   "results": "TopCat.Presheaf.sheafifyStalkIso, TopCat.Presheaf.stalkToFiber, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso",
+   "date": "2026-10-09",
+   "verdict": "partial (Type-valued version)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'toSheafify\\|sheafify' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean | grep -i stalk",
+   "results": "Topology/Sheaves/Sheafify.lean:87 stalkToFiber, :124 sheafifyStalkIso, :137 stalkFunctor_map_unit_toSheafify_isIso (source read: proof by Adjunction.isIso_map_unit_of_isLeftAdjoint_comp with the skyscraper adjunction)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso",
+  "file": "Mathlib/Topology/Sheaves/Sheafify.lean",
+  "how": "specializes in one line: take C = AddCommGrpCat.{u} for X : TopCat.{u} (HasColimits and HasTerminal hold; HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat holds, as used by Scheme.Modules sheafification, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:70); the map (stalkFunctor C x).map (toSheafify J 𝓕) is θ_x, sending germ s to germ θ_U(s) (stalkFunctor_map_germ), and an isomorphism in AddCommGrpCat is a group isomorphism."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-module-stalk-tensor; match verified by the lead against the Mathlib source"
+ }
+}

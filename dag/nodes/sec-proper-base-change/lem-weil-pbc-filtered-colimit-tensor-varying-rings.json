@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+ "kind": "statement",
+ "title": "Tensor products commute with filtered colimits of (ring, module, module) systems",
+ "statement": "Let $I$ be a directed set, $(A_i,\\alpha_{ij})_{i\\in I}$ a directed system of commutative rings, and $(M_i,\\mu_{ij})$, $(N_i,\\nu_{ij})$ directed systems of abelian groups over $I$ such that each $M_i$, $N_i$ is an $A_i$-module and the transition maps are semilinear: $\\mu_{ij}(am)=\\alpha_{ij}(a)\\mu_{ij}(m)$, $\\nu_{ij}(an)=\\alpha_{ij}(a)\\nu_{ij}(n)$ for $i\\le j$. Let $A=\\varinjlim A_i$, $M=\\varinjlim M_i$, $N=\\varinjlim N_i$ [def-weil-pbc-category-colimit] with coprojections $\\alpha_i,\\mu_i,\\nu_i$, and make $M,N$ into $A$-modules by $\\alpha_i(a)\\mu_i(m)=\\mu_i(am)$, $\\alpha_i(a)\\nu_i(n)=\\nu_i(an)$ (well defined since $I$ is directed). The groups $T_i=M_i\\otimes_{A_i}N_i$ form a directed system with transition maps $m\\otimes n\\mapsto\\mu_{ij}(m)\\otimes\\nu_{ij}(n)$ (each $T_j$ regarded as an $A_i$-module via $\\alpha_{ij}$), and $T=\\varinjlim T_i$ with coprojections $\\lambda_i$ is an $A$-module by $\\alpha_i(a)\\lambda_i(t)=\\lambda_i(at)$. Then there is a unique homomorphism $\\psi:T\\to M\\otimes_AN$ with $\\psi(\\lambda_i(m\\otimes n))=\\mu_i(m)\\otimes\\nu_i(n)$ for all $i$, $m\\in M_i$, $n\\in N_i$, and $\\psi$ is an isomorphism of $A$-modules. Moreover $\\psi$ is natural: for morphisms of such systems $(f_i:M_i\\to M'_i)$, $(g_i:N_i\\to N'_i)$ ($A_i$-linear, compatible with the transition maps) one has $\\psi'\\circ\\varinjlim(f_i\\otimes g_i)=(\\varinjlim f_i\\otimes\\varinjlim g_i)\\circ\\psi$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 007K (lemma-stalk-tensor-presheaf-modules, Section 6.15, proof omitted: this lemma is its algebraic content for the directed set of neighbourhoods); the fixed-ring case is Algebra, Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, literature/stacks-project/algebra.tex line 1932, whose second direct proof is the model for the varying-ring case)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product commutes with filtered colimit of rings and modules, colimit of M_i ⊗_{A_i} N_i",
+   "results": "TensorProduct.toDirectLimit, TensorProduct.directLimitLeft, directLimitRight, directLimitLeft_tmul_of (Mathlib.LinearAlgebra.TensorProduct.DirectLimit; all over one fixed commutative semiring R and one fixed module M), Submodule.FG.lTensor.directLimit_apply, ModuleCat.FilteredColimits.colimitModule (fixed ring)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the fixed-ring case with one factor varying"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of tensor products M_i ⊗_{A_i} N_i over a directed system of rings A_i is the tensor product of the colimits over the colimit ring",
+   "results": "TensorProduct.directLimitRight, toDirectLimit, fromDirectLimit, directLimitLeft_tmul_of (fixed ring R), Submodule.FG.rTensor.directLimit_apply",
+   "date": "2026-10-09",
+   "verdict": "no match (fixed ring only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Ring.DirectLimit",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'directLimitLeft\\|DirectLimit.*tensor\\|tensor.*DirectLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rln 'TensorProduct\\|⊗ₜ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Colimit/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/",
+   "results": "LinearAlgebra/TensorProduct/DirectLimit.lean (directLimitLeft/Right over a fixed R), RingTheory/TensorProduct/DirectLimitFG.lean, Algebra/Colimit/TensorProduct.lean (Submodule.FG.exists_rTensor_fg_inclusion_eq); nothing with varying rings, nothing in ModuleCat/Stalk.lean or Topology/Sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

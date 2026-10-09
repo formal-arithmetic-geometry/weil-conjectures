@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-module-stalk",
+ "kind": "definition",
+ "title": "Stalk of a presheaf of modules on a topological space, as a module over the stalk of the rings",
+ "statement": "Let $X$ be a topological space, $x\\in X$, $\\mathcal O$ a presheaf of rings on $X$ and $\\mathcal P$ a presheaf of $\\mathcal O$-modules (a presheaf of abelian groups with an $\\mathcal O(U)$-module structure on each $\\mathcal P(U)$, the restriction maps being semilinear over those of $\\mathcal O$). The open neighbourhoods of $x$, ordered by reverse inclusion, form a directed set ($U\\cap V$ lies below $U$ and $V$). The *stalk* $\\mathcal P_x=\\varinjlim_{U\\ni x}\\mathcal P(U)$ is the colimit of the abelian groups $\\mathcal P(U)$ over this directed set [def-weil-pbc-category-colimit], with coprojections $s\\mapsto s_x$ (the *germ* of $s\\in\\mathcal P(U)$); likewise $\\mathcal O_x=\\varinjlim_{U\\ni x}\\mathcal O(U)$ is a ring with germs $r\\mapsto r_x$. Every element of $\\mathcal P_x$ is a germ $s_x$, and $s_x=s'_x$ for $s\\in\\mathcal P(U)$, $s'\\in\\mathcal P(U')$ iff $s|_W=s'|_W$ for some open $x\\in W\\subseteq U\\cap U'$. $\\mathcal P_x$ is an $\\mathcal O_x$-module by $r_x\\cdot s_x=(r|_W\\,s|_W)_x$ for $r\\in\\mathcal O(U)$, $s\\in\\mathcal P(U')$, $x\\in W\\subseteq U\\cap U'$ (independent of the choices); in particular $(rs)_x=r_x\\,s_x$ for $r\\in\\mathcal O(U)$, $s\\in\\mathcal P(U)$. For a scheme $X$ and an $\\mathcal O_X$-module $\\mathcal F$ this makes $\\mathcal F_x$ an $\\mathcal O_{X,x}$-module. A morphism of presheaves of $\\mathcal O$-modules $\\varphi:\\mathcal P\\to\\mathcal Q$ induces the $\\mathcal O_x$-linear map $\\varphi_x:\\mathcal P_x\\to\\mathcal Q_x$, $s_x\\mapsto\\varphi(s)_x$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 6.11 (Stalks, Tag 0078: definition and description of elements by germs), Section 6.12 (Tag 007E, stalks of abelian presheaves) and Lemma 6.15.1 (Tag 007J, lemma-stalk-module: F_x is an O_x-module via the multiplication map), Section 6.15 (Tag 007I)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "PresheafOfModules stalk module over stalk of ring germ_smul",
+   "results": "TopCat.Presheaf.stalk (Mathlib.Topology.Sheaves.Stalks), PresheafOfModules.Sheafify.SMulCandidate.h, Filter.Germ.instModule (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "partial: stalk of a presheaf; the module structure found by grep and local_search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module structure on the stalk of a presheaf of modules over the stalk of the ring presheaf, germ of r • m equals germ r • germ m",
+   "results": "ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.toStalk (Mathlib.AlgebraicGeometry.Modules.Tilde; only for tilde sheaves; the snapshot v4.28.0 predates Stalk.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match in the snapshot"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln stalk ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat; grep -n 'instance\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Stalk.lean:167 `instance : Module (R.stalk x) ↑(TopCat.Presheaf.stalk M.presheaf x)` for M : PresheafOfModules R, R : X.Presheaf RingCat; :176 `PresheafOfModules.germ_ringCat_smul`; :194/:205 the CommRingCat versions and `PresheafOfModules.germ_smul`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PresheafOfModules.germ_smul (project ~/weil-conjectures-slopmaster2)",
+   "results": "PresheafOfModules.germ_smul in .lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean (index unavailable, name found)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.stalk, PresheafOfModules.germ_ringCat_smul (instance Module (R.stalk x) (TopCat.Presheaf.stalk M.presheaf x))",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+  "how": "exact: for X : TopCat, R : X.Presheaf RingCat and M : PresheafOfModules R, Mathlib's stalk is TopCat.Presheaf.stalk M.presheaf x (colimit over (OpenNhds x)ᵒᵖ, Topology/Sheaves/Stalks.lean) with the R.stalk x-module structure of the instance at Stalk.lean:167, characterized by germ_ringCat_smul (Stalk.lean:176: germ (r • m) = germ r • germ m). For a scheme, X.Modules has M.val : PresheafOfModules X.ringCatSheaf.obj, so this is the O_{X,x}-module F_x. Germs representing every element: TopCat.Presheaf.germ_exist; equality of germs: TopCat.Presheaf.germ_eq (Stalks.lean, for concrete categories preserving filtered colimits)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-module-stalk-tensor; match verified by the lead against the Mathlib source"
+ }
+}
