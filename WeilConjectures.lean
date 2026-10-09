@@ -1067,6 +1067,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
