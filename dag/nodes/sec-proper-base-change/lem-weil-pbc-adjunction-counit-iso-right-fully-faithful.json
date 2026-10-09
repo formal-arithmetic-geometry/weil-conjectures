@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+ "kind": "statement",
+ "title": "A right adjoint whose counit is an isomorphism is fully faithful",
+ "statement": "Let $L:\\mathcal C\\to\\mathcal D$ be a functor left adjoint to $R:\\mathcal D\\to\\mathcal C$, with counit $\\varepsilon:L\\circ R\\to\\mathrm{id}_{\\mathcal D}$. Assume that $\\varepsilon_Y:LRY\\to Y$ is an isomorphism for every object $Y$ of $\\mathcal D$. Then $R$ is fully faithful: for all objects $Y,Y'$ of $\\mathcal D$ the map $\\operatorname{Hom}_{\\mathcal D}(Y,Y')\\to\\operatorname{Hom}_{\\mathcal C}(RY,RY')$, $\\psi\\mapsto R\\psi$, is bijective.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma 07RB (lemma-adjoint-fully-faithful), part (2), direction 'epsilon is an isomorphism => v is fully faithful'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if the counit of an adjunction is an isomorphism then the right adjoint is fully faithful",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, Adjunction.counit_isIso_of_R_fully_faithful, faithful_R_of_epi_counit_app, isIso_counit_app_of_iso (Mathlib.CategoryTheory.Adjunction.FullyFaithful); Functor.fullyFaithfulOfReflective (Adjunction.Reflective); Adjunction.fullyFaithfulROfCompIsoId (Monad.Adjunction)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit {L : C ⥤ D} {R : D ⥤ C} (h : L ⊣ R) [IsIso h.counit] : R.FullyFaithful (Mathlib.CategoryTheory.Adjunction.FullyFaithful)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'fullyFaithfulROfIsIsoCounit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/; grep -n 'lemma map_bijective' Mathlib/CategoryTheory/Functor/FullyFaithful.lean; grep -n 'theorem isIso_of_isIso_app' Mathlib/CategoryTheory/NatIso.lean",
+   "results": "Adjunction/FullyFaithful.lean:164 `noncomputable def fullyFaithfulROfIsIsoCounit [IsIso h.counit] : R.FullyFaithful` (also used in Reflective.lean:58, Triple.lean:87); Functor/FullyFaithful.lean:173 `FullyFaithful.map_bijective`; NatIso.lean:204 `NatIso.isIso_of_isIso_app`",
+   "date": "2026-10-10",
+   "verdict": "match (read at the lines)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit",
+  "file": "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+  "line": 164,
+  "how": "specializes in one line: for h : L ⊣ R, `h.fullyFaithfulROfIsIsoCounit : R.FullyFaithful` under `[IsIso h.counit]`; the node's componentwise hypothesis gives `IsIso h.counit` by `NatIso.isIso_of_isIso_app` (NatIso.lean:204), and the bijectivity of ψ ↦ Rψ is `Functor.FullyFaithful.map_bijective` (Functor/FullyFaithful.lean:173)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
