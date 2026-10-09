@@ -69,7 +69,8 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 
 universe u
 
-open CategoryTheory Limits PresheafOfModules PresheafOfModules.DifferentialsConstruction
+open CategoryTheory Limits Opposite TopologicalSpace PresheafOfModules
+  PresheafOfModules.DifferentialsConstruction
 
 namespace AlgebraicGeometry.Scheme.Hom
 
@@ -137,6 +138,247 @@ variable (X) in
 /-- The sheaf of relative differentials of the identity morphism vanishes: `Ω¹_{X/X} = 0`. -/
 lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
   isZero_relativeDifferentials _
+
+lemma exists_appLE_eq_pullbackPresheafToPresheaf_app (W : X.Opens)
+    (x : f.pullbackPresheaf.obj (op W)) :
+    ∃ (V : S.Opens) (e : W ≤ f ⁻¹ᵁ V) (a : Γ(S, V)),
+      f.pullbackPresheafToPresheaf.app (op W) x = f.appLE V W e a := by
+  have : IsFiltered (CostructuredArrow (Opens.map f.base).op (op W)) :=
+    IsFiltered.of_equivalence (structuredArrowOpEquivalence _ _)
+  obtain ⟨g, a, rfl⟩ := Concrete.isColimit_exists_rep _
+    ((Opens.map f.base).op.isPointwiseLeftKanExtensionLeftKanExtensionUnit S.presheaf (op W)) x
+  refine ⟨g.left.unop, leOfHom g.hom.unop, a, ?_⟩
+  rw [appLE_eq_pullbackPresheafToPresheaf_app]
+  have : ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat f.base).unit.app
+      S.presheaf).app g.left ≫ f.pullbackPresheaf.map (homOfLE (leOfHom g.hom.unop)).op =
+      ((Functor.LeftExtension.mk _ ((Opens.map f.base).op.leftKanExtensionUnit
+        S.presheaf)).coconeAt (op W)).ι.app g := by
+    rw [TopCat.Presheaf.pullbackPushforwardAdjunction, Functor.lanAdjunction_unit]
+    rfl
+  rw [← Category.assoc, this]
+  rfl
+
+lemma app_eq_pullbackPresheafToPresheaf_app (V : S.Opens) (a : Γ(S, V)) :
+    ∃ x, f.pullbackPresheafToPresheaf.app (op (f ⁻¹ᵁ V)) x = f.app V a := by
+  rw [app_eq_appLE, appLE_eq_pullbackPresheafToPresheaf_app]
+  exact ⟨_, rfl⟩
+
+variable {f} in
+lemma _root_.PresheafOfModules.Derivation'.d_app_scheme
+    {M : _root_.PresheafOfModules.{u} (X.presheaf ⋙ forget₂ _ _)}
+    (D : M.Derivation' f.pullbackPresheafToPresheaf) (V : S.Opens) (a : Γ(S, V)) :
+    D.d (X := op (f ⁻¹ᵁ V)) (f.app V a) = 0 := by
+  obtain ⟨x, hx⟩ := f.app_eq_pullbackPresheafToPresheaf_app V a
+  rw [← hx]
+  exact D.d_app x
+
+/-- Constructor for derivations relative to `f⁻¹𝒪_S ⟶ 𝒪_X`: a family of derivations compatible
+with restrictions is relative to `f⁻¹𝒪_S` as soon as it vanishes on the image of `f.app`. -/
+noncomputable def derivationMk {M : _root_.PresheafOfModules.{u} (X.presheaf ⋙ forget₂ _ _)}
+    (d : ∀ {U : X.Opensᵒᵖ}, X.presheaf.obj U →+ M.obj U)
+    (d_mul : ∀ {U : X.Opensᵒᵖ} (a b : X.presheaf.obj U), d (a * b) = a • d b + b • d a)
+    (d_map : ∀ {U V : X.Opensᵒᵖ} (i : U ⟶ V) (x : X.presheaf.obj U),
+      d (X.presheaf.map i x) = M.map i (d x))
+    (d_app : ∀ (V : S.Opens) (a : Γ(S, V)), d (U := op (f ⁻¹ᵁ V)) (f.app V a) = 0) :
+    M.Derivation' f.pullbackPresheafToPresheaf where
+  d := d
+  d_mul := d_mul
+  d_map := d_map
+  d_app {W} x := by
+    obtain ⟨V, e, a, hx⟩ := f.exists_appLE_eq_pullbackPresheafToPresheaf_app W.unop x
+    change d (f.pullbackPresheafToPresheaf.app (op W.unop) x) = 0
+    rw [hx]
+    change d (X.presheaf.map (homOfLE e).op (f.app V a)) = 0
+    rw [d_map, d_app]
+    exact map_zero _
+
+
+/-- On sections, `(relativeDifferentialsHomEquiv M).symm D` sends `d x` to `D x`. -/
+lemma relativeDifferentialsHomEquiv_symm_app_d {M : X.Modules}
+    (D : M.val.Derivation' f.pullbackPresheafToPresheaf) {U : X.Opensᵒᵖ} (x : X.presheaf.obj U) :
+    ((f.relativeDifferentialsHomEquiv M).symm D).val.app U
+      (f.relativeDifferentialsDerivation.d x) = D.d x :=
+  congr($((f.relativeDifferentialsHomEquiv M).apply_symm_apply D).d x)
+
+/-- Two morphisms `f₁ : X ⟶ S₁` and `f₂ : X ⟶ S₂` with the same derivations have isomorphic
+sheaves of relative differentials. -/
+noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} (f₁ : X ⟶ S₁)
+    (f₂ : X ⟶ S₂)
+    (h₁ : ∀ (M : X.Modules) (D : M.val.Derivation' f₁.pullbackPresheafToPresheaf) (V : S₂.Opens)
+      (a : Γ(S₂, V)), D.d (X := op (f₂ ⁻¹ᵁ V)) (f₂.app V a) = 0)
+    (h₂ : ∀ (M : X.Modules) (D : M.val.Derivation' f₂.pullbackPresheafToPresheaf) (V : S₁.Opens)
+      (a : Γ(S₁, V)), D.d (X := op (f₁ ⁻¹ᵁ V)) (f₁.app V a) = 0) :
+    f₁.relativeDifferentials ≅ f₂.relativeDifferentials where
+  hom := (f₁.relativeDifferentialsHomEquiv _).symm
+    (f₁.derivationMk f₂.relativeDifferentialsDerivation.d
+      f₂.relativeDifferentialsDerivation.d_mul f₂.relativeDifferentialsDerivation.d_map
+      (h₂ _ f₂.relativeDifferentialsDerivation))
+  inv := (f₂.relativeDifferentialsHomEquiv _).symm
+    (f₂.derivationMk f₁.relativeDifferentialsDerivation.d
+      f₁.relativeDifferentialsDerivation.d_mul f₁.relativeDifferentialsDerivation.d_map
+      (h₁ _ f₁.relativeDifferentialsDerivation))
+  hom_inv_id := by
+    apply (f₁.relativeDifferentialsHomEquiv _).injective
+    ext U x
+    simp only [relativeDifferentialsHomEquiv_apply]
+    erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
+      relativeDifferentialsHomEquiv_symm_app_d]
+    exact (f₂.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
+  inv_hom_id := by
+    apply (f₂.relativeDifferentialsHomEquiv _).injective
+    ext U x
+    simp only [relativeDifferentialsHomEquiv_apply]
+    erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
+      relativeDifferentialsHomEquiv_symm_app_d]
+    exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
+
+
+/-- For an open immersion `i : V ⟶ S` and `g : X ⟶ V`, the sheaves of relative differentials
+`Ω¹_{X/S}` (for `g ≫ i`) and `Ω¹_{X/V}` (for `g`) are isomorphic. -/
+noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i : V ⟶ S)
+    [IsOpenImmersion i] : (g ≫ i).relativeDifferentials ≅ g.relativeDifferentials :=
+  relativeDifferentialsIsoOfDerivation _ _
+    (fun M D W b ↦ by
+      obtain ⟨b, rfl⟩ := (ConcreteCategory.bijective_of_isIso (i.appIso W).hom).2 b
+      have h : (i.appIso W).hom ≫ g.app W = (g ≫ i).app (i ''ᵁ W) ≫
+          X.presheaf.map (homOfLE (show g ⁻¹ᵁ W ≤ g ⁻¹ᵁ (i ⁻¹ᵁ (i ''ᵁ W)) by
+            rw [i.preimage_image_eq])).op := by
+        rw [appIso_hom, Category.assoc, g.naturality, ← Category.assoc, ← comp_app]
+        rfl
+      rw [← ConcreteCategory.comp_apply, h, ConcreteCategory.comp_apply]
+      erw [D.d_map, D.d_app_scheme]
+      exact map_zero _)
+    (fun M D W a ↦ by
+      change D.d (g.app _ (i.app W a)) = 0
+      exact D.d_app_scheme _ _)
+
+
+section Restrict
+
+variable {U : Scheme.{u}} (j : U ⟶ X)
+
+/-- The derivation `𝒪_X → j_* Ω¹_{U/S}`, `s ↦ d (j^♯ s)`. -/
+noncomputable def pushforwardDerivation :
+    ((Modules.pushforward j).obj (j ≫ f).relativeDifferentials).val.Derivation'
+      f.pullbackPresheafToPresheaf :=
+  f.derivationMk
+    (fun {W} ↦ ((j ≫ f).relativeDifferentialsDerivation.d (X := op (j ⁻¹ᵁ W.unop))).comp
+      (j.app W.unop).hom.toAddMonoidHom)
+    (fun {W} a b ↦
+      (congrArg (j ≫ f).relativeDifferentialsDerivation.d (map_mul (j.app W.unop).hom a b)).trans
+        ((j ≫ f).relativeDifferentialsDerivation.d_mul _ _))
+    (fun {W₁ W₂} i x ↦ by
+      change (j ≫ f).relativeDifferentialsDerivation.d (j.app W₂.unop (X.presheaf.map i x)) =
+        (j ≫ f).relativeDifferentials.val.map ((Opens.map j.base).map i.unop).op
+          ((j ≫ f).relativeDifferentialsDerivation.d (j.app W₁.unop x))
+      rw [← ConcreteCategory.comp_apply, j.naturality, ConcreteCategory.comp_apply]
+      exact (j ≫ f).relativeDifferentialsDerivation.d_map _ _)
+    (fun V a ↦ (j ≫ f).relativeDifferentialsDerivation.d_app_scheme V a)
+
+lemma pushforwardDerivation_desc_app_d (W : X.Opens) (s : Γ(X, W)) :
+    ((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).val.app (op W)
+      (f.relativeDifferentialsDerivation.d s) =
+      (j ≫ f).relativeDifferentialsDerivation.d (X := op (j ⁻¹ᵁ W)) (j.app W s) :=
+  (relativeDifferentialsHomEquiv_symm_app_d _ _ _).trans rfl
+
+variable [IsOpenImmersion j]
+
+/-- The derivation `𝒪_U → Ω¹_{X/S}|_U`, `t ↦ d (t)` viewed as a section over `j(W)`. -/
+noncomputable def restrictDerivation :
+    (f.relativeDifferentials.restrict j).val.Derivation' (j ≫ f).pullbackPresheafToPresheaf :=
+  (j ≫ f).derivationMk
+    (fun {W} ↦ (f.relativeDifferentialsDerivation.d (X := op (j ''ᵁ W.unop))).comp
+      (j.appIso W.unop).inv.hom.toAddMonoidHom)
+    (fun {W} a b ↦ by
+      exact (congrArg f.relativeDifferentialsDerivation.d
+        (map_mul (j.appIso W.unop).inv.hom a b)).trans
+          (f.relativeDifferentialsDerivation.d_mul _ _))
+    (fun {W₁ W₂} i x ↦ by
+      change f.relativeDifferentialsDerivation.d ((j.appIso W₂.unop).inv (U.presheaf.map i x)) =
+        f.relativeDifferentials.val.map (j.opensFunctor.op.map i)
+          (f.relativeDifferentialsDerivation.d ((j.appIso W₁.unop).inv x))
+      rw [← ConcreteCategory.comp_apply, appIso_inv_naturality, ConcreteCategory.comp_apply]
+      exact f.relativeDifferentialsDerivation.d_map _ _)
+    (fun V a ↦ by
+      change f.relativeDifferentialsDerivation.d
+        ((j.appIso (j ⁻¹ᵁ (f ⁻¹ᵁ V))).inv (j.app (f ⁻¹ᵁ V) (f.app V a))) = 0
+      rw [← ConcreteCategory.comp_apply (j.app _), app_appIso_inv]
+      erw [f.relativeDifferentialsDerivation.d_map, f.relativeDifferentialsDerivation.d_app_scheme]
+      exact map_zero _)
+
+/-- The morphism `Ω¹_{X/S}|_U ⟶ Ω¹_{U/S}`. -/
+noncomputable def restrictToRelativeDifferentials :
+    f.relativeDifferentials.restrict j ⟶ (j ≫ f).relativeDifferentials :=
+  ((Modules.restrictAdjunction j).homEquiv _ _).symm
+    ((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j))
+
+/-- The morphism `Ω¹_{U/S} ⟶ Ω¹_{X/S}|_U`. -/
+noncomputable def relativeDifferentialsToRestrict :
+    (j ≫ f).relativeDifferentials ⟶ f.relativeDifferentials.restrict j :=
+  ((j ≫ f).relativeDifferentialsHomEquiv _).symm (f.restrictDerivation j)
+
+lemma relativeDifferentialsToRestrict_app_d {W : U.Opensᵒᵖ} (t : U.presheaf.obj W) :
+    (f.relativeDifferentialsToRestrict j).val.app W ((j ≫ f).relativeDifferentialsDerivation.d t) =
+      f.relativeDifferentialsDerivation.d ((j.appIso W.unop).inv t) :=
+  relativeDifferentialsHomEquiv_symm_app_d _ _ _
+
+lemma restrictToRelativeDifferentials_app (W : U.Opens) (m : Γ(f.relativeDifferentials, j ''ᵁ W)) :
+    (f.restrictToRelativeDifferentials j).app W m =
+      (j ≫ f).relativeDifferentials.presheaf.map (eqToHom (j.preimage_image_eq W).symm).op
+      (((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).app (j ''ᵁ W) m) := by
+  rw [restrictToRelativeDifferentials, Adjunction.homEquiv_counit]
+  rfl
+
+lemma restrictToRelativeDifferentials_app_d (W : U.Opens) (s : Γ(X, j ''ᵁ W)) :
+    (f.restrictToRelativeDifferentials j).val.app (op W) (f.relativeDifferentialsDerivation.d s) =
+      (j ≫ f).relativeDifferentials.val.map (eqToHom (j.preimage_image_eq W).symm).op
+        ((j ≫ f).relativeDifferentialsDerivation.d (X := op (j ⁻¹ᵁ (j ''ᵁ W)))
+          (j.app (j ''ᵁ W) s)) := by
+  refine (f.restrictToRelativeDifferentials_app j W _).trans ?_
+  exact congrArg _ (f.pushforwardDerivation_desc_app_d j _ s)
+
+lemma relativeDifferentialsToRestrict_restrictToRelativeDifferentials :
+    f.relativeDifferentialsToRestrict j ≫ f.restrictToRelativeDifferentials j = 𝟙 _ := by
+  apply ((j ≫ f).relativeDifferentialsHomEquiv _).injective
+  ext W t
+  change (f.restrictToRelativeDifferentials j).val.app W
+    ((f.relativeDifferentialsToRestrict j).val.app W
+      ((j ≫ f).relativeDifferentialsDerivation.d t)) = (j ≫ f).relativeDifferentialsDerivation.d t
+  refine (congrArg (fun m ↦ (f.restrictToRelativeDifferentials j).val.app W m)
+    (f.relativeDifferentialsToRestrict_app_d j t)).trans ?_
+  refine (f.restrictToRelativeDifferentials_app_d j W.unop _).trans ?_
+  refine ((j ≫ f).relativeDifferentialsDerivation.d_map _ _).symm.trans ?_
+  refine congrArg _ ?_
+  exact ConcreteCategory.congr_hom (j.appIso_inv_app_presheafMap W.unop) t
+
+lemma restrictToRelativeDifferentials_relativeDifferentialsToRestrict :
+    f.restrictToRelativeDifferentials j ≫ f.relativeDifferentialsToRestrict j = 𝟙 _ := by
+  apply ((Modules.restrictAdjunction j).homEquiv _ _).injective
+  apply (f.relativeDifferentialsHomEquiv _).injective
+  rw [Adjunction.homEquiv_naturality_right, restrictToRelativeDifferentials,
+    Equiv.apply_symm_apply, Adjunction.homEquiv_id]
+  ext W s
+  change (f.relativeDifferentialsToRestrict j).val.app (op (j ⁻¹ᵁ W.unop))
+    (((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).val.app W
+      (f.relativeDifferentialsDerivation.d s)) =
+    ((Modules.restrictAdjunction j).unit.app f.relativeDifferentials).val.app W
+      (f.relativeDifferentialsDerivation.d s)
+  refine (congrArg _ (f.pushforwardDerivation_desc_app_d j W.unop s)).trans ?_
+  refine (f.relativeDifferentialsToRestrict_app_d j _).trans ?_
+  refine (congrArg _ (ConcreteCategory.congr_hom (j.app_appIso_inv W.unop) s)).trans ?_
+  exact f.relativeDifferentialsDerivation.d_map _ _
+
+/-- For an open immersion `j : U ⟶ X`, the restriction of `Ω¹_{X/S}` to `U` is `Ω¹_{U/S}`. -/
+noncomputable def relativeDifferentialsRestrictIso :
+    f.relativeDifferentials.restrict j ≅ (j ≫ f).relativeDifferentials where
+  hom := f.restrictToRelativeDifferentials j
+  inv := f.relativeDifferentialsToRestrict j
+  hom_inv_id := f.restrictToRelativeDifferentials_relativeDifferentialsToRestrict j
+  inv_hom_id := f.relativeDifferentialsToRestrict_restrictToRelativeDifferentials j
+
+end Restrict
 
 /-- **The canonical sheaf of a smooth curve.** For `f : X ⟶ S` smooth of relative dimension one,
 the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X = Spec B` with
