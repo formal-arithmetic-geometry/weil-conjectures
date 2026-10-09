@@ -16,9 +16,109 @@
   "def-weil-surjective-morphism",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the image $E$ of $f_0$ is constructible).* Since $X_0$ is quasi-compact and $Y_0$ is quasi-separated, $f_0$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] (1); it is locally of finite presentation by hypothesis, and $Y_0$ is quasi-compact and quasi-separated. Hence by [lem-weil-pbc-chevalley-constructible-image] (clause $C=X_0$) the set $E=f_0(X_0)$ is a constructible subset of $Y_0$ [def-weil-constructible-subset]. (Stacks says '$f_0$ is of finite presentation'; only quasi-compactness of $f_0$ and the hypotheses on $Y_0$ enter Chevalley's theorem.)",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'The morphism $f_0$ is of finite presentation. Hence $E=f_0(X_0)$ is a constructible subset of $Y_0$, see Morphisms, Lemma 054J'"
+   }
+  },
+  {
+   "text": "*Step 2 ($f_T$ is the base change of $f_0$ along $Y_T\\to Y_0$).* Let $u:T\\to S_0$ be one of the morphisms $f_{i0}:S_i\\to S_0$ ($i\\ge0$) or the projection $S\\to S_0$, and write $g_0:Y_0\\to S_0$ for the structure morphism of $Y_0$, so that $g_0\\circ f_0$ is that of $X_0$. Put $Y_T=Y_0\\times_{S_0}T$ with projections $q_T:Y_T\\to Y_0$, $g_T:Y_T\\to T$, and $X_T=X_0\\times_{S_0}T$ with projections $p_T:X_T\\to X_0$, $h_T:X_T\\to T$ [def-pc-fibre-product]; the base change $f_T=f_0\\times\\mathrm{id}_T:X_T\\to Y_T$ is the morphism with $q_T\\circ f_T=f_0\\circ p_T$ and $g_T\\circ f_T=h_T$ (so $f_T=f_i$ for $T=S_i$ and $f_T=f$ for $T=S$). In the diagram with upper square $(X_T\\xrightarrow{p_T}X_0,\\ f_T,\\ f_0,\\ Y_T\\xrightarrow{q_T}Y_0)$ and lower square $(Y_T\\xrightarrow{q_T}Y_0,\\ g_T,\\ g_0,\\ T\\xrightarrow{u}S_0)$ both squares commute, the lower square is cartesian by definition of $Y_T$, and the outer rectangle $(X_T\\xrightarrow{p_T}X_0,\\ g_T\\circ f_T=h_T,\\ g_0\\circ f_0,\\ u)$ is cartesian by definition of $X_T$. By [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(X_T,p_T,f_T)$ is a fibre product of $f_0$ and $q_T$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'Since $f_i$ is the base change of $f_0$ by $Y_i\\to Y_0$' (the pasting of fibre products, which the source leaves implicit, written out)"
+   }
+  },
+  {
+   "text": "*Step 3 (the image of $f_T$ is $q_T^{-1}(E)$).* Apply [lem-weil-pbc-base-change-image] to the fibre product $(X_T,p_T,f_T)$ of $f_0:X_0\\to Y_0$ and $q_T:Y_T\\to Y_0$ from Step 2, with $C=X_0$: $f_T(X_T)=f_T(p_T^{-1}(X_0))=q_T^{-1}(f_0(X_0))=q_T^{-1}(E)$. In particular $f_i(X_i)=q_{S_i}^{-1}(E)$ for every $i\\ge0$ and $f(X)=q_S^{-1}(E)$.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'we see that the image of $f_i$ is the inverse image of $E$ in $Y_i$' (Morphisms, proof of Lemma Tag 01S1, line 1489: $q^{-1}(f(Z))=f_{S'}(p^{-1}(Z))$)"
+   }
+  },
+  {
+   "text": "*Step 4 ($Y\\to Y_0$ maps into $E$).* Since $f$ is surjective [def-weil-surjective-morphism], Step 3 for $T=S$ gives $Y=f(X)=q_S^{-1}(E)$, i.e. $q_S(Y)\\subseteq E$ for the projection $q_S:Y=Y_0\\times_{S_0}S\\to Y_0$.",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'Moreover, we know that $Y\\to Y_0$ maps into $E$'"
+   }
+  },
+  {
+   "text": "*Step 5 ($Y$ is the limit of the system $(Y_i)_{i\\ge0}$ of quasi-compact, quasi-separated schemes with affine transition morphisms).* Write $Y_i=Y_{S_i}=Y_0\\times_{S_0}S_i$ for $i\\ge0$, with transition morphisms $y_{ii'}=\\mathrm{id}_{Y_0}\\times f_{ii'}:Y_i\\to Y_{i'}$ ($i\\ge i'\\ge0$). By [lem-weil-pbc-scheme-over-limit] (with $T=Y_0$ and the structure morphism $g_0$) this is an inverse system over the directed set $I_{\\ge0}=\\{i\\in I: i\\ge0\\}$ with affine transition morphisms, and $Y=Y_0\\times_{S_0}S$ with the morphisms $\\mathrm{id}_{Y_0}\\times f_i:Y\\to Y_i$ is its limit in the category of schemes [def-weil-pbc-category-colimit]. Under the canonical identification $Y_{S_0}=Y_0\\times_{S_0}S_0=Y_0$ (via $q_{S_0}$, an isomorphism since $\\mathrm{id}_{S_0}$ is), the transition morphism $y_{i0}$ is $q_{S_i}$ and the limit projection $Y\\to Y_0$ is $q_S$. Each $q_{S_i}:Y_i\\to Y_0$ is the base change of the affine morphism $f_{i0}$, hence affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence] (1), (3); since $Y_0$ is quasi-compact and quasi-separated, so is $Y_i$ by [lem-weil-pbc-qcqs-morphism-permanence] (2).",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Situation Tag 081D (situation-descent-property, line 1739) and Lemma Tag 01YZ (lemma-scheme-over-limit); the source applies Lemma Tag 05F4, stated in Situation Tag 086P (situation-descent, line 388: qcqs schemes, affine transition morphisms), to the system $(Y_i)$ without comment"
+   }
+  },
+  {
+   "text": "*Step 6 (a stage mapping into $E$).* By Step 5 the system $(Y_i,y_{ii'})_{i\\ge0}$ over $I_{\\ge0}$ with limit $(Y,(\\mathrm{id}_{Y_0}\\times f_i)_i)$ satisfies the hypotheses of [lem-weil-pbc-limit-contained-in-constructible]; take its index $0$, the constructible subset $E\\subseteq Y_0$ of Step 1, and the inclusion $q_S(Y)\\subseteq E$ of Step 4. It gives $i_1\\ge0$ with $q_{S_i}(Y_i)=y_{i0}(Y_i)\\subseteq E$ for every $i\\ge i_1$.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'Hence we win by Lemma 05F4 (lemma-limit-contained-in-constructible, line 530)'"
+   }
+  },
+  {
+   "text": "*Step 7 (conclusion).* Let $i=i_1$. By Step 3 and Step 6, $f_i(X_i)=q_{S_i}^{-1}(E)=Y_i$, so $f_i$ is surjective [def-weil-surjective-morphism] (and so is $f_{i'}$ for every $i'\\ge i_1$).",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069), last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "def-weil-constructible-subset",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-base-change-image",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069), with Morphisms Lemma Tag 054J (Chevalley), the identity $q^{-1}(f(Z))=f_{S'}(p^{-1}(Z))$ from the proof of Morphisms Lemma Tag 01S1, Limits Lemma Tag 01YZ and Lemma Tag 05F4; the pasting of fibre products and the qcqs/affine hypotheses of 05F4 for the system $(Y_i)$, which the source leaves implicit, are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,10 +140,17 @@
    "results": "no 07RR attribute; AffineTransitionLimit.lean never mentions Surjective; the ingredients exist: Scheme.Hom.isConstructible_image (054J, Chevalley) and Scheme.nonempty_of_isLimit / exists_mem_of_isClosed_of_nonempty (01Z2, 01Z3), not the lemma itself",
    "date": "2026-10-10",
    "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, AlgebraicGeometry.IsAffineHom, CategoryTheory.Limits.IsLimit",
+   "results": "none of the hits concludes Surjective of a stage from Surjective of the limit morphism; the AffineTransitionLimit.lean results concern sections, opens, affineness (exists_map_eq_top, Scheme.exists_isAffine_of_isLimit, ...)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +170,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-descend-surjective",
+  "worker": "stage1",
+  "summary": "Split in seven steps along Stacks' proof of Limits 07RR, checked against limits.tex line 2069 and the cited lemmas. Step 1: f_0 quasi-compact (qcqs-morphism-permanence (1)), so E = f_0(X_0) is constructible by Chevalley (new Mathlib leaf lem-weil-pbc-chevalley-constructible-image = Scheme.Hom.isConstructible_image, FinitePresentation.lean:165, @[stacks 054J], with IsConstructible.univ). Step 2: X_T -> Y_T is a fibre product of f_0 and Y_T -> Y_0 by pasting (reviewed leaf lem-weil-pbc-cartesian-square-pasting), for T = S_i or S. Step 3: image of f_T = inverse image of E (new Mathlib leaf lem-weil-pbc-base-change-image = Scheme.image_preimage_eq_of_isPullback, PullbackCarrier.lean:420; the identity in the proof of Morphisms 01S1). Step 4: surjectivity of f gives Y -> Y_0 into E. Step 5: Y = lim Y_i with affine transitions (lem-weil-pbc-scheme-over-limit, 01YZ) and Y_i qcqs (affine-morphism-permanence, qcqs-morphism-permanence (2)), the hypotheses of 05F4. Step 6: 05F4 (new unsplit node lem-weil-pbc-limit-contained-in-constructible, stated for constructible E in Situation 086P; not in Mathlib, only the open case exists_map_eq_top). Step 7: conclusion. Statement kept; 05F3 not created (only cited in the source place of the 05F4 node, as part of Stacks' proof)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 7 steps along Limits 07RR (Chevalley for the quasi-compact lfp f_0; f_T is the base change of f_0 along Y_T -> Y_0 by pasting; image of a base change is the inverse image of the image, a Mathlib leaf; Y = lim Y_i with affine transitions and qcqs stages by lem-weil-pbc-scheme-over-limit; 05F4 as a new unsplit node). Correct; the gaps of the two rejected remote attempts are closed. Three new nodes (two Mathlib leaves verified)."
+ }
 }

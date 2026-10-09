@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-limit-contained-in-constructible",
+ "kind": "statement",
+ "title": "A constructible set containing the image of a limit contains the image of a stage",
+ "statement": "Let $I$ be a directed set and $(T_i,t_{ii'})$ ($i\\ge i'$) an inverse system of schemes [def-pc-scheme] over $I$ such that every $T_i$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions] and every transition morphism $t_{ii'}:T_i\\to T_{i'}$ is affine [pqf-def-affine-morphism]. Let $(T,(t_i)_{i\\in I})$, $t_i:T\\to T_i$, be a limit of this system in the category of schemes [def-weil-pbc-category-colimit]. Let $i\\in I$ and let $E\\subseteq T_i$ be a constructible subset [def-weil-constructible-subset] with $t_i(T)\\subseteq E$. Then there is $i_1\\ge i$ such that $t_{i'i}(T_{i'})\\subseteq E$ for every $i'\\ge i_1$ (Stacks Limits, Lemma 05F4, for $E$ constructible).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 05F4 (lemma-limit-contained-in-constructible, line 530), in Situation Tag 086P (situation-descent, line 388: $S=\\lim S_i$ with affine transition morphisms, all $S_i$ quasi-compact and quasi-separated): 'Suppose we are given an $i$ and a locally constructible subset $E\\subset S_i$ such that $f_i(S)\\subset E$. Then $f_{i'i}(S_{i'})\\subset E$ for all sufficiently large $i'$.' Stated here for a constructible $E$, which is locally constructible (take the covering of $T_i$ by itself, Properties Lemma Tag 054C); Stacks' proof uses Limits Lemma Tag 01YX, Properties Lemma Tag 054C, Algebra Lemma Tag 00F8 (lemma-constructible-is-image), Limits Lemmas Tag 05F3 (lemma-limit-fibre-product-empty) and Tag 01Z2 (lemma-limit-nonempty)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limit of schemes with affine transition maps, if the image of the limit lies in a constructible subset then some stage maps into it",
+   "results": "Scheme.isAffine_of_isLimit (Mathlib.AlgebraicGeometry.Limits), Scheme.Hom.isConstructible_image, AffineScheme.hasLimits, exists_mem_of_isClosed_of_nonempty', exists_app_map_eq_zero_of_isLimit, Scheme.compactSpace_of_isLimit, Scheme.exists_isAffine_of_isLimit, exists_appTop_π_eq_of_isAffine_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofiltered limit of qcqs schemes with affine transition maps; a constructible subset containing the image of the limit contains the image of some stage",
+   "results": "exists_map_eq_top (an open U with c.π i ⁻¹ U = ⊤ has D.map f ⁻¹ U = ⊤ at some stage: the case E open), exists_map_preimage_le_map_preimage, exists_mem_of_isClosed_of_nonempty(') (Stacks 01Z2/01Z3), exists_preimage_eq, exists_isAffineOpen_preimage_eq, Scheme.exists_isQuasiAffine_of_isLimit, Scheme.exists_isAffine_of_isLimit (all Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "no match (exists_map_eq_top is the special case of an open E only; ingredients 01Z2/01Z3 exist)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 05F4\\|stacks 01Z4\\|stacks 01Z2\\|stacks 01Z3' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'Constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Limits.lean",
+   "results": "no @[stacks 05F4]; AffineTransitionLimit.lean:46 @[stacks 01Z2], :157 @[stacks 01Z3], :293/:340 @[stacks 01Z4]; AffineTransitionLimit.lean and Limits.lean never mention Constructible",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-surjective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Limits 05F4 in Situation 086P for a constructible E; self-contained; correct; unsplit."
+ }
+}

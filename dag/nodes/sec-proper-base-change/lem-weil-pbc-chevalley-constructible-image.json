@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-chevalley-constructible-image",
+ "kind": "statement",
+ "title": "Chevalley's theorem: images of constructible sets",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-pbc-scheme-conventions] and locally of finite presentation [def-sbc-locally-finite-presentation], and assume that $Y$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Then for every constructible subset $C\\subseteq X$ [def-weil-constructible-subset] the image $f(C)$ is a constructible subset of $Y$. In particular ($C=X$, which is constructible) the image $f(X)$ is constructible in $Y$ (Stacks Morphisms, Lemma 054J).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 054J (lemma-chevalley, line 4369): 'Let $f:X\\to Y$ be a morphism of schemes. Assume (1) $f$ is quasi-compact and locally of finite presentation, and (2) $Y$ is quasi-compact and quasi-separated. Then the image of every constructible subset of $X$ is constructible in $Y$.'; the clause $C=X$: $X$ is constructible, being open and retrocompact in itself"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of a constructible set under a quasi-compact morphism locally of finite presentation into a qcqs scheme is constructible (Chevalley)",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, Scheme.Hom.isLocallyConstructible_image, Scheme.Hom.isConstructible_preimage (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation); PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap (Mathlib.RingTheory.Spectrum.Prime.Chevalley); Topology.IsConstructible.preimage_of_isOpenEmbedding",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.Hom.isConstructible_image"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible (_ '' _)",
+   "results": "Topology.IsConstructible.image_of_isOpenEmbedding, .image_of_isClosedEmbedding (Mathlib.Topology.Constructible); PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_comap_C (Mathlib.RingTheory.Spectrum.Prime.Chevalley); AlgebraicGeometry.Scheme.Hom.isConstructible_image (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.Hom.isConstructible_image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley's theorem: image of a scheme morphism of finite presentation into a quasi-compact quasi-separated scheme is constructible",
+   "results": "Scheme.Hom.isConstructible_image, Scheme.Hom.isLocallyConstructible_image, Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.Hom.isConstructible_image"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 054J\\|lemma Scheme.Hom.isConstructible_image' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; grep -n 'IsConstructible.univ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "FinitePresentation.lean:164 @[stacks 054J], :165 lemma Scheme.Hom.isConstructible_image (f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y] {s : Set X} (hs : IsConstructible s) : IsConstructible (f '' s); Constructible.lean:185 protected lemma IsConstructible.univ",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.univ",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+  "how": "exact: Scheme.Hom.isConstructible_image (FinitePresentation.lean:165, tagged @[stacks 054J]) has the hypotheses LocallyOfFinitePresentation f, QuasiCompact f, CompactSpace Y, QuasiSeparatedSpace Y (a scheme is quasi-compact resp. quasi-separated as a scheme iff its underlying space is CompactSpace resp. QuasiSeparatedSpace) and concludes IsConstructible (f '' s) for IsConstructible s, Topology.IsConstructible being the node's constructible subsets [def-weil-constructible-subset]; the clause C = X is the instance s = univ with Topology.IsConstructible.univ (Mathlib/Topology/Constructible.lean:185) and f '' univ = range f. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-surjective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Scheme.Hom.isConstructible_image (Morphisms/FinitePresentation.lean:165, @[stacks 054J]) with IsConstructible.univ (Topology/Constructible.lean:185)."
+ }
+}

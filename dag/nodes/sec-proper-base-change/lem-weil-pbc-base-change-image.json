@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-base-change-image",
+ "kind": "statement",
+ "title": "The image of a base change is the inverse image of the image",
+ "statement": "Let $f:X\\to Z$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme], and let $P$ with morphisms $p:P\\to X$, $q:P\\to Y$ be a fibre product of $f$ and $g$ [def-pc-fibre-product] (so $f\\circ p=g\\circ q$). Then for every subset $C$ of the underlying set of $X$ one has $q(p^{-1}(C))=g^{-1}(f(C))$ as subsets of $Y$. In particular ($C=X$) the image of the base change $q:P\\to Y$ of $f$ along $g$ is $q(P)=g^{-1}(f(X))$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "proof of Lemma Tag 01S1 (lemma-base-change-surjective, line 1489): for a fibre product square with $p:X_{S'}\\to X$, $q:Y_{S'}\\to Y$ and base change $f_{S'}$, 'Let $Z$ be a subset of the underlying topological space of $X$. Then $q^{-1}(f(Z))=f_{S'}(p^{-1}(Z))$', by Lemma Tag 0495 (lemma-when-point-maps-to-pair: points $x$, $y$ over the same point come from a point of the fibre product); taking $Z=X$ gives the image clause"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "range of the first projection of a pullback of schemes equals the preimage of the range of the other morphism",
+   "results": "AlgebraicGeometry.Scheme.Pullback.range_fst (Mathlib.AlgebraicGeometry.PullbackCarrier), CategoryTheory.Limits.Types.range_fst_of_isPullback, Types.range_pullbackFst, Function.Pullback.fst, IsOpenImmersion.opensRange_pullback_fst_of_right",
+   "date": "2026-10-10",
+   "verdict": "match for the clause C = X (range_fst, range_snd)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of the base change of a morphism of schemes is the preimage of the image of the morphism",
+   "results": "AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback, Scheme.Pullback.range_fst, Scheme.Pullback.range_snd (Mathlib.AlgebraicGeometry.PullbackCarrier); IsOpenImmersion.range_pullback_to_base_of_right, IsOpenImmersion.range_pullbackFst",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.image_preimage_eq_of_isPullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.range (CategoryTheory.Limits.pullback.fst _ _) = _",
+   "results": "only generic Set lemmas (Set.Subtype.range_coind, Prod.range_fst, Set.range_id, ...): the pattern did not unify through the scheme coercion",
+   "date": "2026-10-10",
+   "verdict": "no match (pattern search inconclusive; the leansearch/leanfinder hits were read in the source)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'range_fst\\|range_snd\\|image_preimage\\|exists_preimage_pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "results": "PullbackCarrier.lean:306 exists_preimage_pullback, :328 range_fst : Set.range (pullback.fst f g) = f ⁻¹' Set.range g, :337 range_snd, :420 lemma image_preimage_eq_of_isPullback {P X Y Z} {fst : P ⟶ X} {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) (s : Set X) : snd.base '' fst.base ⁻¹' s = g.base ⁻¹' f.base '' s",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback",
+  "file": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "how": "exact: image_preimage_eq_of_isPullback (PullbackCarrier.lean:420), for any pullback square h : IsPullback fst snd f g of schemes (fst = p, snd = q) and s : Set X, gives snd '' (fst ⁻¹' s) = g ⁻¹' (f '' s), the node's identity for an arbitrary fibre product P; the clause C = X is s = univ (preimage of univ is univ, image of univ is the range); for the chosen pullback the clause is also Scheme.Pullback.range_snd (line 337). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-surjective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Scheme.image_preimage_eq_of_isPullback (AlgebraicGeometry/PullbackCarrier.lean:420); the identity inside the proof of Morphisms 01S1."
+ }
+}
