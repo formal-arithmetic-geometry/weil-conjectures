@@ -1,8 +1,8 @@
 # Work queue
 
-602 items; claim with `tools/claim.py next <group> [--stage N]`.
+605 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (552)
+## Stage 1: nodes to split (555)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,7 +38,6 @@
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
 | `lem-weil-pbc-eventually-closed-immersion` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
-| `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1010 | none |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1010 | none |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1010 | none |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1010 | none |
@@ -53,7 +52,11 @@
 | `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
 | `lem-weil-pbc-thickening-affine-scheme` | 1010 | none |
+| `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1011 | none |
 | `lem-weil-pbc-nakayama-nilpotent` | 1011 | none |
+| `lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings` | 1011 | none |
+| `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1011 | none |
+| `lem-weil-pbc-sheaves-directed-colimit-sections` | 1011 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -614,7 +617,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 563 nodes that wait for stage 1, 237 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 239 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
