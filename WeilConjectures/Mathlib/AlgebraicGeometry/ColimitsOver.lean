@@ -59,7 +59,8 @@ lemma homOfAppTop_appTop {T T' : Scheme.{u}} [IsAffine T] [IsAffine T']
   rw [← cancel_epi T.isoSpec.hom, isoSpec_hom_naturality, homOfAppTop]
   simp
 
-variable {P : MorphismProperty Scheme.{u}} (hP : ∀ {Y Z : Scheme.{u}} (f : Y ⟶ Z), P f → IsAffineHom f)
+variable {P : MorphismProperty Scheme.{u}}
+  (hP : ∀ {Y Z : Scheme.{u}} (f : Y ⟶ Z), P f → IsAffineHom f)
   {X : Scheme.{u}} {G : Type*} [Monoid G] (K : SingleObj G ⥤ P.Over ⊤ X)
 
 include hP in
@@ -119,7 +120,8 @@ noncomputable def isColimitOfInjectiveAppTop (c : Cocone K)
     ext1
     apply ext_of_isAffine
     ext z
-    simp only [Over.homMk_hom, MorphismProperty.Comma.comp_left, Hom.comp_appTop, CommRingCat.hom_comp,
+    simp only [Over.homMk_hom, MorphismProperty.Comma.comp_left, Hom.comp_appTop,
+      CommRingCat.hom_comp,
       RingHom.coe_comp, Function.comp_apply]
     exact (congr_arg α (by simp)).trans (hβ s z)
   · ext1
@@ -128,7 +130,8 @@ noncomputable def isColimitOfInjectiveAppTop (c : Cocone K)
     apply hinj
     have := congr_arg (fun f : K.obj (SingleObj.star G) ⟶ s.pt ↦ f.left.appTop.hom z)
       (hm (SingleObj.star G))
-    simp only [MorphismProperty.Comma.comp_left, Hom.comp_appTop, CommRingCat.hom_comp, RingHom.coe_comp,
+    simp only [MorphismProperty.Comma.comp_left, Hom.comp_appTop, CommRingCat.hom_comp,
+      RingHom.coe_comp,
       Function.comp_apply] at this
     refine this.trans ((hβ s z).symm.trans ?_)
     congr 1

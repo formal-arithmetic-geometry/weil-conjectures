@@ -171,12 +171,14 @@ end Algebra
 
 namespace Pi
 
-variable {S X : Type*} [CommRing S] [Fintype X] [DecidableEq X]
+variable {S X : Type*} [CommRing S] [Finite X] [DecidableEq X]
 
 /-- A ring map out of `X → S` sending the idempotent `δ_{x₀}` to `1` only depends on the value
 at `x₀`. -/
 lemma ringHom_apply_eq_of_apply_single {B : Type*} [CommRing B] (ψ : (X → S) →+* B) (x₀ : X)
     (h : ψ (Pi.single x₀ 1) = 1) (f : X → S) : ψ f = ψ (fun _ ↦ f x₀) := by
+  classical
+  have := Fintype.ofFinite X
   have hsingle (x : X) : Pi.single x (f x) = (fun _ ↦ f x) * Pi.single x 1 := by
     ext y
     by_cases hy : y = x
@@ -199,13 +201,13 @@ end Pi
 
 namespace AlgHom
 
-variable {S X : Type*} [CommRing S] [Fintype X] [DecidableEq X] {ι : Type*}
+variable {S X : Type*} [CommRing S] [_root_.Finite X] [DecidableEq X] {ι : Type*}
 
 /-- The family of coordinate endomorphisms `f ↦ f ∘ πᵢ` of `X → S`. -/
 def coordFamily (π : ι → X → X) : ι → (X → S) →ₐ[S] (X → S) :=
   fun i ↦ AlgHom.pi fun x ↦ Pi.evalAlgHom S (fun _ ↦ S) (π i x)
 
-omit [Fintype X] [DecidableEq X] in
+omit [_root_.Finite X] [DecidableEq X] in
 @[simp]
 lemma coordFamily_apply (π : ι → X → X) (i : ι) (f : X → S) :
     coordFamily (S := S) π i f = f ∘ π i :=
@@ -235,6 +237,7 @@ lemma exists_localizationAway_coordinate [_root_.Finite ι] (σ : ι → (X → 
     ∃ h ∉ q, ∃ π : ι → X → X, ∀ i x,
       algebraMap S (Localization.Away h) (σ i (Pi.single (π i x) 1) x) = 1 := by
   classical
+  have := Fintype.ofFinite X
   cases nonempty_fintype ι
   have hex (i : ι) (x : X) : ∃ y, σ i (Pi.single y 1) x ∉ q := by
     by_contra! H
@@ -352,14 +355,17 @@ theorem finite_and_etale_fixedPoints {R A : Type u} [CommRing R] [CommRing A] [A
   obtain ⟨T, _, _, _, _, _, hT⟩ := Algebra.IsFiniteSplit.exists_tensorProduct_of_etale hrank
   obtain ⟨m, ⟨e⟩⟩ := hT.nonempty_algEquiv_fun
   obtain ⟨h₁, h₂⟩ :=
-    finite_and_etale_fixedPoints_fun (conjFamily e (baseChangeFamily T (baseChangeFamily (Localization.Away f) σ)))
+    finite_and_etale_fixedPoints_fun
+      (conjFamily e (baseChangeFamily T (baseChangeFamily (Localization.Away f) σ)))
   let E : T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ) ≃ₐ[T]
       fixedPoints (conjFamily e (baseChangeFamily T (baseChangeFamily (Localization.Away f) σ))) :=
-    (Algebra.TensorProduct.congr AlgEquiv.refl (tensorFixedPointsEquiv (Localization.Away f) σ)).trans <|
+    (Algebra.TensorProduct.congr AlgEquiv.refl
+      (tensorFixedPointsEquiv (Localization.Away f) σ)).trans <|
       (tensorFixedPointsEquiv T _).trans (fixedPointsCongr e _)
   have : Module.Finite T (T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ)) :=
     Module.Finite.equiv E.symm.toLinearEquiv
-  have : Algebra.Etale T (T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ)) := Algebra.Etale.of_equiv E.symm
+  have : Algebra.Etale T (T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ)) :=
+    Algebra.Etale.of_equiv E.symm
   exact ⟨.of_finite_tensorProduct_of_faithfullyFlat T,
     Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat T⟩
 
@@ -390,7 +396,8 @@ lemma eqvGen_equiv_iff {α β : Type*} (e : α ≃ β) {r : α → α → Prop} 
 
 /-- Transport of a surjection whose fibres are the classes of an equivalence closure along
 bijections compatible with the maps and the relations. -/
-lemma surjective_and_iff_eqvGen_of_equiv {P P' Q Q' : Type*} (E : P' ≃ P) (EF : Q' ≃ Q) (res' : P' → Q')
+lemma surjective_and_iff_eqvGen_of_equiv {P P' Q Q' : Type*} (E : P' ≃ P) (EF : Q' ≃ Q)
+    (res' : P' → Q')
     (res : P → Q) (h : ∀ s, EF (res' s) = res (E s)) {r' : P' → P' → Prop} {r : P → P → Prop}
     (hr : ∀ s s', r' s s' ↔ r (E s) (E s'))
     (H : Function.Surjective res' ∧ ∀ s s', res' s = res' s' ↔ Relation.EqvGen r' s s') :
@@ -484,7 +491,8 @@ private def PointsGood {R A : Type*} [CommRing R] [CommRing A] [Algebra R A] (φ
 private lemma pointsGood_of_conj {R A A' : Type*} [CommRing R] [CommRing A] [CommRing A']
     [Algebra R A] [Algebra R A'] {φ : R →+* Ω} {ι : Type*} (e : A ≃ₐ[R] A')
     (σ : ι → A →ₐ[R] A) (H : PointsGood φ (conjFamily e σ)) : PointsGood φ σ := by
-  refine Relation.surjective_and_iff_eqvGen_of_equiv (PointsOver.comapEquiv e) (PointsOver.comapEquiv (fixedPointsCongr e σ))
+  refine Relation.surjective_and_iff_eqvGen_of_equiv (PointsOver.comapEquiv e)
+    (PointsOver.comapEquiv (fixedPointsCongr e σ))
     _ _ (fun s ↦ PointsOver.ext fun x ↦ rfl) (fun s s' ↦ exists_congr fun i ↦ ?_) H
   rw [← (PointsOver.comapEquiv e).injective.eq_iff]
   constructor <;> intro h <;> rw [h] <;> ext a <;> simp

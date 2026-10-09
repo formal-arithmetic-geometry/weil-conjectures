@@ -517,7 +517,8 @@ noncomputable def _root_.CategoryTheory.Limits.Types.isColimitOfSurjectiveOfEqvG
       induction h with
       | rel x y hxy =>
         obtain ⟨m, rfl⟩ := hxy
-        exact (ConcreteCategory.congr_hom (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
+        exact (ConcreteCategory.congr_hom
+          (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
       | refl => rfl
       | symm _ _ _ ih => exact ih.symm
       | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
@@ -533,7 +534,8 @@ noncomputable def _root_.CategoryTheory.Limits.Types.isColimitOfSurjectiveOfEqvG
       induction h with
       | rel x y hxy =>
         obtain ⟨m, rfl⟩ := hxy
-        exact (ConcreteCategory.congr_hom (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
+        exact (ConcreteCategory.congr_hom
+          (t.w (j := SingleObj.star M) (j' := SingleObj.star M) m) x).symm
       | refl => rfl
       | symm _ _ _ ih => exact ih.symm
       | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂

@@ -31,8 +31,6 @@ finite sets with a continuous `π₁(Y, s)`-action.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.FiniteEtale`: the category of finite étale `Y`-schemes.
-- `AlgebraicGeometry.Scheme.FiniteEtale.fiber`: the fibre functor at a geometric point.
 - `AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction`: for any fundamental group `G`
   of the fibre functor, the equivalence between finite étale `Y`-schemes and finite discrete
   `G`-sets.
@@ -57,7 +55,9 @@ isomorphism compatible with the actions
 (`CategoryTheory.PreGaloisCategory.toAutContinuousMulEquiv`).
 
 The Galois category axioms for finite étale schemes (blueprint `lem-fet-galois-category`) are
-recorded without proof here.
+verified in `WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory`; the category
+`FÉt(Y)` and the fibre functor are defined in
+`WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale`.
 -/
 
 @[expose] public section
