@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleStructureSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
@@ -31,7 +32,7 @@ the composite
 
 of the structure presheaf with the functor of units, written additively and lifted a universe.
 The functor of units preserves limits, so it suffices that `U ↦ Γ(U, 𝒪_U)` is an étale sheaf
-(`AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`, whose proof is `sorry`). That
+(`AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`, from fpqc descent of modules). That
 reusable form is what `𝔾ₐ`, `μₙ` and sheaves of `𝒪`-modules need too.
 
 For a morphism `g : X ⟶ Y` there is a comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ`. It is an isomorphism when
@@ -52,7 +53,7 @@ Pullback maps on the cohomology of `𝔾ₘ` along an arbitrary `g` go through t
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`: the structure presheaf is a sheaf
-  for the small étale topology. Its proof, étale descent, is `sorry`.
+  for the small étale topology, by fpqc descent for quasi-coherent modules.
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf`: the comparison map
   `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism for étale `g`. The proof is `sorry`.
 
@@ -85,12 +86,12 @@ noncomputable def etaleStructurePresheaf : X.Etaleᵒᵖ ⥤ CommRingCat.{u} :=
   (Scheme.Etale.forget X ⋙ Over.forget X).op ⋙ Scheme.Γ
 
 /-- **Étale descent for the structure sheaf**: the presheaf `U ↦ Γ(U, 𝒪_U)` is a sheaf for the
-small étale topology. The proof is `sorry`; it is the special case for `𝒪` itself of fppf
-descent for quasi-coherent modules, the small étale topology being coarser than the fppf
-topology. -/
+small étale topology. It is identified with the étale sheaf `U ↦ End(U^* 𝒪_X)` by `a ↦ a ·`
+(`AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf_aux`), which is a sheaf by fpqc
+descent for quasi-coherent modules. -/
 theorem isSheaf_etaleStructurePresheaf :
     Presheaf.IsSheaf X.smallEtaleTopology X.etaleStructurePresheaf :=
-  sorry
+  isSheaf_etaleStructurePresheaf_aux X
 
 /-- The presheaf `𝔾ₘ` on the small étale site of `X`: an étale `X`-scheme `U` is sent to the
 group of units of `Γ(U, 𝒪_U)`, written additively and lifted to the next universe,
