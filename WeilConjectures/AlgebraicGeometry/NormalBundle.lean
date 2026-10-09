@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.RelativeGluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
@@ -27,7 +30,7 @@ For a closed immersion `i : Z ⟶ X` with ideal `I`, the *normal bundle* is
 
 since `Sym_{𝒪_X}(I) ⊗_{𝒪_X} 𝒪_Z = Sym_{𝒪_Z}(I ⊗ 𝒪_Z)` and `I ⊗_{𝒪_X} 𝒪_X/I = I/I²`. It is
 determined by `i`: over an affine open `U ⊆ X` it is `Spec (Sym_{Γ(U)} I(U)) ×_U i⁻¹U`
-(`AlgebraicGeometry.Scheme.Hom.isPullback_normalBundle`). For a regular immersion of pure
+(`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_symSpecι`). For a regular immersion of pure
 codimension `c` the conormal sheaf `I/I²` is locally free of rank `c` and `N_{Z/X}` is a vector
 bundle of rank `c` (blueprint `def-pur-normal-bundle`).
 
@@ -42,6 +45,7 @@ bundle of rank `c` (blueprint `def-pur-normal-bundle`).
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_symSpecι`: over an affine open `U`, `V(I)`
   is `Spec (Sym_{Γ(U)} I(U))`.
+- `AlgebraicGeometry.Scheme.Hom.isPullback_normalBundle`: `N_{Z/X} = V(I) ×_X Z`.
 -/
 
 @[expose] public section
@@ -318,6 +322,81 @@ lemma symSpecZeroSection_symSpecMap : I.symSpecZeroSection ≫ I.symSpecMap = �
     toSymAlgebra_symAlgebraAugmentation, Spec.map_id, Category.id_comp, Iso.hom_inv_id_assoc,
     Category.comp_id]
 
+/-- The arrow `Spec (Sym_{Γ(U)} I(U)) ⟶ U` is the restriction of `V(I) ⟶ X` over `U`. -/
+lemma arrow_iso_symSpecMap_pullbackHom (U : X.affineOpens) :
+    Nonempty (Arrow.mk (X.directedAffineCover.pullbackHom I.symSpecMap U) ≅
+      Arrow.mk (Spec.map (I.toSymAlgebra U) ≫ U.2.isoSpec.inv)) :=
+  ⟨Arrow.isoMk (I.isPullback_symSpecι U).flip.isoPullback.symm (Iso.refl _) (by
+    simp only [Cover.pullbackHom, Arrow.mk_hom, Iso.refl_hom, Category.comp_id]
+    exact (I.isPullback_symSpecι U).flip.isoPullback_inv_snd)⟩
+
+/-- `V(I) ⟶ X` is affine: over an affine open `U` it is `Spec (Sym_{Γ(U)} I(U)) ⟶ U`. -/
+instance isAffineHom_symSpecMap : IsAffineHom I.symSpecMap := by
+  refine IsZariskiLocalAtTarget.of_openCover X.directedAffineCover fun U ↦ ?_
+  obtain ⟨e⟩ := I.arrow_iso_symSpecMap_pullbackHom U
+  rw [MorphismProperty.arrow_mk_iso_iff (P := @IsAffineHom) e]
+  infer_instance
+
+/-- Over a locally noetherian scheme, `V(I) ⟶ X` is locally of finite type: the ideals `I(U)`
+are finitely generated, hence so are the algebras `Sym_{Γ(U)} I(U)`. -/
+instance locallyOfFiniteType_symSpecMap [IsLocallyNoetherian X] :
+    LocallyOfFiniteType I.symSpecMap := by
+  refine IsZariskiLocalAtTarget.of_openCover X.directedAffineCover fun (U : X.affineOpens) ↦ ?_
+  obtain ⟨e⟩ := I.arrow_iso_symSpecMap_pullbackHom U
+  rw [MorphismProperty.arrow_mk_iso_iff (P := @LocallyOfFiniteType) e]
+  have : LocallyOfFiniteType (Spec.map (I.toSymAlgebra U)) := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
+    have : IsNoetherianRing Γ(X, U) := IsLocallyNoetherian.component_noetherian U
+    have : Module.Finite Γ(X, U) (I.ideal U) :=
+      Module.Finite.iff_fg.mpr (IsNoetherian.noetherian _)
+    change (algebraMap Γ(X, U) (SymmetricAlgebra Γ(X, U) (I.ideal U))).FiniteType
+    exact RingHom.finiteType_algebraMap.mpr inferInstance
+  infer_instance
+
 end IdealSheafData
+
+namespace Hom
+
+variable {Z X : Scheme.{u}} (i : Z ⟶ X)
+
+/-- Blueprint `def-pur-normal-bundle`: Normal bundle and zero section
+
+The *normal bundle* `N_{Z/X} = Spec_Z (Sym_{𝒪_Z} (I/I²))` of a closed immersion `i : Z ⟶ X`
+with ideal `I`, constructed as the base change `V(I) ×_X Z` of
+`V(I) = Spec_X (Sym_{𝒪_X} I)` (`AlgebraicGeometry.Scheme.IdealSheafData.symSpec`) along `i`:
+`Sym_{𝒪_X}(I) ⊗_{𝒪_X} 𝒪_Z = Sym_{𝒪_Z}(I/I²)`. Over an affine open `U ⊆ X` it is
+`Spec (Sym_{Γ(U)} I(U)) ×_U i⁻¹U = Spec (Sym_{Γ(Z, i⁻¹U)} (I(U)/I(U)²))`
+(`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_symSpecι`). For a regular immersion of
+pure codimension `c` it is a vector bundle of rank `c`. -/
+noncomputable def normalBundle : Scheme.{u} :=
+  pullback i.ker.symSpecMap i
+
+/-- The projection `π : N_{Z/X} ⟶ Z` of the normal bundle. -/
+noncomputable def normalBundleProj : i.normalBundle ⟶ Z :=
+  pullback.snd _ _
+
+/-- The zero section `0 : Z ⟶ N_{Z/X}` of the normal bundle, induced by the zero section of
+`V(I)`. -/
+noncomputable def normalBundleZeroSection : Z ⟶ i.normalBundle :=
+  pullback.lift (i ≫ i.ker.symSpecZeroSection) (𝟙 Z) (by simp)
+
+@[reassoc (attr := simp)]
+lemma normalBundleZeroSection_normalBundleProj :
+    i.normalBundleZeroSection ≫ i.normalBundleProj = 𝟙 Z :=
+  pullback.lift_snd _ _ _
+
+/-- The normal bundle is the base change of `V(I) ⟶ X` along `i`. -/
+lemma isPullback_normalBundle :
+    IsPullback (pullback.fst _ _ : i.normalBundle ⟶ i.ker.symSpec) i.normalBundleProj
+      i.ker.symSpecMap i :=
+  IsPullback.of_hasPullback _ _
+
+instance : IsAffineHom i.normalBundleProj :=
+  MorphismProperty.pullback_snd (P := @IsAffineHom) _ _ inferInstance
+
+instance [IsLocallyNoetherian X] : LocallyOfFiniteType i.normalBundleProj :=
+  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
+
+end Hom
 
 end AlgebraicGeometry.Scheme
