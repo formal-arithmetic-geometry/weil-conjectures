@@ -1,0 +1,53 @@
+{
+ "id": "def-pod-lisse-l-adic-sheaves",
+ "kind": "definition",
+ "title": "Lisse O_E-, E- and Qlbar-sheaves and their fibres (Weil II (1.1.1))",
+ "statement": "Let $Y$ be a scheme with a geometric point $\\bar y$, $\\ell$ a prime, $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], and for $E$ in the directed set $\\mathcal E_\\ell$ of finite extensions of $\\mathbf Q_\\ell$ in $\\Qlb$ [def-weil-finite-subextension-directed-set] let $\\mathcal O_E,\\varpi_E,A_{E,n}=\\mathcal O_E/\\varpi_E^n$ be as in [def-weil-l-adic-coefficient-extension]. A *lisse sheaf of $A$-modules* ($A$ a finite ring) is a sheaf of $A$-modules on $Y_{\\Et}$ [def-weil-pbc-etale-site] etale locally isomorphic to the constant sheaf of a finite $A$-module [def-weil-pbc-etale-sheaves]; stalks are those of [def-weil-pbc-geometric-stalks].\n\n1. *Lisse $\\mathcal O_E$-sheaves.* A lisse $\\mathcal O_E$-sheaf is an inverse system $\\mathcal F=(\\mathcal F_n,t_n)_{n\\geq1}$ with $\\mathcal F_n$ a lisse sheaf of $A_{E,n}$-modules and $t_n:\\mathcal F_{n+1}\\to\\mathcal F_n$ a map of sheaves of $A_{E,n+1}$-modules inducing an isomorphism $\\mathcal F_{n+1}\\otimes_{A_{E,n+1}}A_{E,n}\\xrightarrow{\\sim}\\mathcal F_n$. A morphism $u:\\mathcal F\\to\\mathcal G$ is a family of $A_{E,n}$-linear maps $u_n:\\mathcal F_n\\to\\mathcal G_n$ with $t_n\\circ u_{n+1}=u_n\\circ t_n$. (This is the full subcategory of lisse objects of Weil II (1.1.1) b): for such systems the pro-object morphisms reduce to compatible families.) Its *fibre* at $\\bar y$ is the $\\mathcal O_E$-module $\\mathcal F_{\\bar y}=\\varprojlim_n(\\mathcal F_n)_{\\bar y}$.\n2. *Lisse $E$-sheaves.* The category of lisse $E$-sheaves has the lisse $\\mathcal O_E$-sheaves as objects, written $\\mathcal F\\otimes E$, and $\\operatorname{Hom}(\\mathcal F\\otimes E,\\mathcal G\\otimes E)=\\operatorname{Hom}(\\mathcal F,\\mathcal G)\\otimes_{\\mathcal O_E}E$, with the induced composition. The fibre is $(\\mathcal F\\otimes E)_{\\bar y}=\\mathcal F_{\\bar y}\\otimes_{\\mathcal O_E}E$.\n3. *Scalar extension.* For $E\\subset L$ in $\\mathcal E_\\ell$ with ramification index $e$, and a lisse $\\mathcal O_E$-sheaf $\\mathcal F$, put $(\\mathcal F\\otimes_{\\mathcal O_E}\\mathcal O_L)_m=\\mathcal F_n\\otimes_{A_{E,n}}A_{L,m}$ with $n=\\lceil m/e\\rceil$ (so that $\\varpi_E^n\\in\\varpi_L^m\\mathcal O_L$), with the induced transition maps; this is a lisse $\\mathcal O_L$-sheaf, functorial in $\\mathcal F$, and induces $\\mathcal F\\otimes E\\mapsto(\\mathcal F\\otimes E)\\otimes_EL:=(\\mathcal F\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes L$ on lisse $E$-sheaves.\n4. *Lisse $\\Qlb$-sheaves.* A lisse $\\Qlb$-sheaf is a pair $(E,\\mathcal F)$ with $E\\in\\mathcal E_\\ell$ and $\\mathcal F$ a lisse $E$-sheaf, with $\\operatorname{Hom}((E,\\mathcal F),(E',\\mathcal F'))=\\varinjlim_{L\\supset E,E'}\\operatorname{Hom}(\\mathcal F\\otimes_EL,\\mathcal F'\\otimes_{E'}L)$ over $L\\in\\mathcal E_\\ell$ (the 2-colimit of Weil II (1.1.1) d)). Its fibre is $\\mathcal F_{\\bar y}\\otimes_E\\Qlb$.\n5. *Tensor products.* For lisse $\\mathcal O_E$-sheaves, $\\mathcal F\\otimes\\mathcal G=(\\mathcal F_n\\otimes_{A_{E,n}}\\mathcal G_n)_n$ with the tensor products of the transition maps; this induces tensor products of lisse $E$- and $\\Qlb$-sheaves (at $\\Qlb$ formed over a common $L$). The unit is the constant system $(\\underline{A_{E,n}})_n$.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II, (1.1.1) b), c), d), pp. 146-147 (PMIHES 52): R-sheaves as projective systems with F_J tensor R/I = F_I, lisse when every F tensor R/I is locally constant; E-sheaves as the quotient by torsion with Hom tensor E; Qlbar-sheaves as the 2-colimit over finite E; restricted here to lisse objects and to the cofinal sequence of ideals m^n, as (1.1.1) b) permits"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ellAdicSheaf\\|EllAdicCohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean | head -5",
+   "results": "AlgebraicGeometry.Scheme.ellAdicSheaf (ElladicCohomology.lean:63) and EllAdicCohomology: the constant l-adic sheaf on the pro-etale/fpqc site for defining cohomology groups; no lisse adic systems, no E- or Qlbar-sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'lisse\\|Lisse\\|LocallyConstantSheaf\\|IsLocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "cor-galois-lisse-representations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

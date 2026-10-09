@@ -1,0 +1,48 @@
+{
+ "id": "lem-pod-adic-limit-finite-modules",
+ "kind": "statement",
+ "title": "Adic systems of finite modules over a complete discrete valuation ring",
+ "statement": "Let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$, maximal ideal $\\mathfrak m_E$ and uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension].\n\n1. Let $(M_n)_{n\\geq1}$ be an inverse system in which $M_n$ is a finite $A_{E,n}$-module and the transition map $M_{n+1}\\to M_n$ induces an isomorphism $M_{n+1}\\otimes_{A_{E,n+1}}A_{E,n}=M_{n+1}/\\varpi_E^nM_{n+1}\\xrightarrow{\\sim}M_n$. Then $M=\\varprojlim_nM_n$ is a finitely generated $\\mathcal O_E$-module, the projections induce isomorphisms $M/\\varpi_E^nM\\xrightarrow{\\sim}M_n$, and the inverse-limit topology on $M$ (each $M_n$ discrete) is the $\\mathfrak m_E$-adic topology.\n2. Conversely every finitely generated $\\mathcal O_E$-module $M$ is $\\mathfrak m_E$-adically complete and separated, $M\\to\\varprojlim_nM/\\varpi_E^nM$ is an isomorphism, and $(M/\\varpi_E^nM)_n$ is a system as in (1). Every $\\mathcal O_E$-linear map between finitely generated $\\mathcal O_E$-modules is continuous for the $\\mathfrak m_E$-adic topologies, and for finitely generated $M,N$ the reductions give a bijection $\\operatorname{Hom}_{\\mathcal O_E}(M,N)\\to\\varprojlim_n\\operatorname{Hom}_{A_{E,n}}(M/\\varpi_E^nM,N/\\varpi_E^nN)$.\n3. For finitely generated $M,N$ and a finite extension $L/E$, $(M\\otimes_{\\mathcal O_E}N)/\\varpi_E^n\\cong M/\\varpi_E^nM\\otimes_{A_{E,n}}N/\\varpi_E^nN$ and $(M\\otimes_{\\mathcal O_E}\\mathcal O_L)/\\varpi_E^n\\cong M/\\varpi_E^nM\\otimes_{A_{E,n}}\\mathcal O_L/\\varpi_E^n\\mathcal O_L$, compatibly with $n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 09B8 (algebra, lemma-limit-complete: M = lim M_n with M_n = M_{n+1}/I^n M_{n+1} has M/I^nM = M_n and is I-adically complete); Lemma 031D (algebra, lemma-finite-over-complete-ring: finiteness from M/IM finite over a complete ring); Lemma 00MA (algebra, lemma-completion-tensor: finite modules over a Noetherian ring, M^ = M tensor R^, so finite modules over a complete Noetherian ring are complete); part (3) is right exactness of the tensor product"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/*.lean | grep -i 'finite\\|fg\\|noether'; grep -rln 'IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Module.Finite'",
+   "results": "AdicCompletion.isAdicComplete (Completeness.lean:185), IsAdicComplete instance for Noetherian local rings (LocalRing.lean:127), AdicCompletion.ofTensorProduct_surjective_of_finite (AsTensorProduct.lean:201), IsHausdorff.of_isLocalRing (Noetherian.lean:26); no lemma that the limit of an adic inverse system of finite modules is finitely generated with the given reductions",
+   "date": "2026-10-09",
+   "verdict": "no match (pieces: Hausdorffness and completion of finite modules)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'AdicCauchySequence\\|lim.*Quotient.*pow\\|mkQ.*pow' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Basic.lean | head",
+   "results": "AdicCompletion is defined as the submodule of compatible sequences in prod M/I^nM; no statement for an abstract adic system (M_n)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "cor-galois-lisse-representations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

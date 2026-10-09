@@ -1,0 +1,50 @@
+{
+ "id": "def-pod-l-adic-representations",
+ "kind": "definition",
+ "title": "l-adic representations of a profinite group (Weil II (1.1.6))",
+ "statement": "Let $\\pi$ be a profinite group, $\\ell$ a prime, $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], and for $E$ in the directed set $\\mathcal E_\\ell$ of finite extensions of $\\mathbf Q_\\ell$ in $\\Qlb$ [def-weil-finite-subextension-directed-set] let $\\mathcal O_E$, $\\mathfrak m_E$ be as in [def-weil-l-adic-coefficient-extension], $E$ with its $\\ell$-adic topology.\n\n1. A *continuous $\\mathcal O_E$-representation* of $\\pi$ is a finitely generated $\\mathcal O_E$-module $M$ with an action of $\\pi$ by $\\mathcal O_E$-linear automorphisms such that $\\pi\\times M\\to M$ is continuous for the $\\mathfrak m_E$-adic topology of $M$; morphisms are $\\pi$-equivariant $\\mathcal O_E$-linear maps.\n2. A *continuous $E$-representation* of $\\pi$ is a finite-dimensional $E$-vector space $V$ with an action of $\\pi$ by $E$-linear automorphisms such that $\\pi\\times V\\to V$ is continuous for the $\\ell$-adic topology of $V$; morphisms are equivariant $E$-linear maps. Tensor products carry the diagonal action; the unit is $E$ with trivial action. For $E\\subset L$, $V\\mapsto V\\otimes_EL$ with action $\\sigma\\otimes1$.\n3. An *$\\ell$-adic representation* of $\\pi$ on a finite-dimensional $\\Qlb$-vector space $V$ is a homomorphism $\\sigma:\\pi\\to\\operatorname{GL}(V)$ for which there are $E\\in\\mathcal E_\\ell$ and an $E$-structure $V_E\\subset V$ (an $E$-subspace with $V_E\\otimes_E\\Qlb\\xrightarrow{\\sim}V$) stable under $\\sigma(\\pi)$ such that $\\pi\\to\\operatorname{GL}(V_E)$ is a continuous $E$-representation. Morphisms are $\\pi$-equivariant $\\Qlb$-linear maps; tensor products carry the diagonal action.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II, (1.1.6), p. 148 (PMIHES 52): 'Une representation l-adique d'un groupe profini pi sur un Qlbar-espace vectoriel V est un homomorphisme sigma: pi -> GL(V) tel qu'il existe une extension finie E de Ql dans Qlbar, et une E-structure V_E sur V, telles que sigma se factorise par un homomorphisme continu de pi dans GL(V_E)'"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^structure\\|^def\\|^abbrev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RepresentationTheory/Continuous/TopRep.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RepresentationTheory/Continuous/Basic.lean",
+   "results": "TopRep k G (TopRep.lean:30): a topological k-module with a representation whose action is continuous; ContRepresentation in Continuous/Basic.lean",
+   "date": "2026-10-09",
+   "verdict": "no match: TopRep/ContRepresentation cover parts (1)-(2) for a fixed topological coefficient ring (generalization of the continuity condition), but not the finite-generation/finite-dimension conditions nor the Weil II notion (3) of a Qlbar-representation defined over some finite E"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^abbrev PadicAlgCl\\|PadicAlgCl' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Padics/Complex.lean",
+   "results": "PadicAlgCl p := AlgebraicClosure Q_[p] (NumberTheory/Padics/Complex.lean:54), with its normed-field structure; no l-adic representations defined over finite subextensions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "cor-galois-lisse-representations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

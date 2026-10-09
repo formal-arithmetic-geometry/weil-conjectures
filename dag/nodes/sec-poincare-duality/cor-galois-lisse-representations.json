@@ -2,62 +2,189 @@
  "id": "cor-galois-lisse-representations",
  "kind": "statement",
  "title": "Lisse sheaves and continuous representations",
- "statement": "Let $Y$ be connected with geometric point $\\bar y$, and let $\\Lambda$ be\na finite ring. Then evaluation at $\\bar y$ is an exact equivalence between\nlocally constant sheaves of finite $\\Lambda$-modules on $Y_{\\Et}$ and\ncontinuous $\\Lambda$-linear representations of $\\pi_1(Y,\\bar y)$ on\nfinite $\\Lambda$-modules. It is a tensor equivalence: for commutative\n$\\Lambda$ it carries $\\mathcal F\\otimes_\\Lambda\\mathcal G$ to\n$\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}$ with the diagonal\naction and the constant sheaf $\\Lambda$ to the trivial representation\n$\\Lambda$. It is compatible with base change along a map\n$\\Lambda\\to\\Lambda'$ of finite rings: it carries\n$\\Lambda'\\otimes_\\Lambda\\mathcal F$ to\n$\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}$ with the induced action. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$ the\nsame holds for lisse $\\overline{\\mathbf Q}_\\ell$-sheaves with finite\nstalks, by the coefficient conventions of\n[def-weil-pbc-constructible-complexes].",
+ "statement": "Let $Y$ be a connected scheme with a geometric point $\\bar y$, and let $\\pi_1=\\pi_1(Y,\\bar y)$ be the profinite group of [def-galois-fibre-functor]; stalks at $\\bar y$ are those of [def-weil-pbc-geometric-stalks].\n\n1. *(Finite coefficients.)* Let $\\Lambda$ be a finite ring. Evaluation at $\\bar y$, $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$, with $\\sigma\\in\\pi_1$ acting on $\\mathcal F_{\\bar y}$ as the natural automorphism $\\sigma$ of the fibre functor on the underlying finite locally constant sheaf of sets [def-weil-pbc-etale-sheaves], is an exact equivalence between the category of locally constant sheaves of finite left $\\Lambda$-modules on $Y_{\\Et}$ [def-weil-pbc-etale-site] (sheaves of $\\Lambda$-modules etale locally isomorphic to the constant sheaf of a finite $\\Lambda$-module), with $\\Lambda$-linear maps, and the category of finite left $\\Lambda$-modules with a continuous $\\Lambda$-linear action of $\\pi_1$ (discrete topology), with equivariant $\\Lambda$-linear maps. These sheaves form a full abelian subcategory of all sheaves of $\\Lambda$-modules, closed under kernels and cokernels. It is a tensor equivalence: for commutative $\\Lambda$ it carries $\\mathcal F\\otimes_\\Lambda\\mathcal G$ to $\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}$ with the diagonal action, compatibly with the associativity, commutativity and unit constraints, and the constant sheaf $\\underline\\Lambda$ to the trivial representation $\\Lambda$. It is compatible with base change along a homomorphism $\\Lambda\\to\\Lambda'$ of finite rings: it carries $\\Lambda'\\otimes_\\Lambda\\mathcal F$ to $\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}$ with the action $1\\otimes\\sigma$, naturally in $\\mathcal F$ and compatibly with composites $\\Lambda\\to\\Lambda'\\to\\Lambda''$.\n2. *($\\ell$-adic coefficients.)* Let $\\ell$ be a prime, $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$ and $E\\subset\\Qlb$ a finite extension of $\\mathbf Q_\\ell$. With the lisse $\\mathcal O_E$-, $E$- and $\\Qlb$-sheaves on $Y$ and their fibres at $\\bar y$ of [def-pod-lisse-l-adic-sheaves], and the representations of [def-pod-l-adic-representations], the fibre at $\\bar y$ with $\\pi_1$ acting through (1) at every finite level is an equivalence from lisse $\\mathcal O_E$-sheaves to continuous $\\mathcal O_E$-representations of $\\pi_1$, from lisse $E$-sheaves to continuous $E$-representations of $\\pi_1$, and from lisse $\\Qlb$-sheaves to $\\ell$-adic representations of $\\pi_1$ on finite-dimensional $\\Qlb$-vector spaces. At the levels $E$ and $\\Qlb$ both categories are abelian and the equivalence is exact. At every level it carries tensor products to tensor products with the diagonal action and the unit sheaf to the trivial representation, and it commutes with scalar extension along $E\\subset L$ in $\\Qlb$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
   "place": "node cor-galois-lisse-representations, order 2427"
  },
  "stmt_deps": [
-  "def-weil-pbc-constructible-complexes"
+  "def-galois-fibre-functor",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations"
  ],
  "proof": [
   {
-   "text": "Here $\\pi_1=\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ is the group\nof [def-galois-fibre-functor]. A locally constant sheaf of finite\n$\\Lambda$-modules is, by\n[thm-galois-lc-etale] applied to the underlying sheaf of sets together\nwith the module structure, a finite etale cover with a $\\Lambda$-linear\naction of its automorphism group; by [thm-galois-fundamental] such\nobjects correspond to finite continuous $\\pi_1$-sets with $\\Lambda$-linear\naction, i.e. to continuous representations on finite $\\Lambda$-modules.\nThe $\\overline{\\mathbf Q}_\\ell$-statement follows by writing a lisse sheaf\nwith finite stalks as a filtered colimit of finite-level ones over the\ncoefficient stages of [def-weil-pbc-constructible-complexes].",
+   "text": "*(1): the equivalence.* Write $\\mathrm{FLC}(Y)$ for the finite locally constant sheaves of sets on $Y_{\\Et}$ and $\\pi_1\\text{-}\\mathbf{Set}$ for finite sets with a continuous $\\pi_1$-action. By [thm-galois-lc-etale] (finite locally constant sheaves are the sheaves represented by finite etale $Y$-schemes, compatibly with the fibre functors) and [thm-galois-fundamental] ($Y$ connected), the fibre functor $F_{\\bar y}:\\mathcal A\\mapsto\\mathcal A_{\\bar y}$, with $\\pi_1=\\operatorname{Aut}(F_{\\bar y})$ acting by evaluation [def-galois-fibre-functor], is an equivalence $\\mathrm{FLC}(Y)\\to\\pi_1\\text{-}\\mathbf{Set}$ compatible with finite limits, in particular with finite products and the final object. By [lem-pod-lisse-module-sheaves-as-module-objects], a locally constant sheaf of finite left $\\Lambda$-modules is the same as a $\\Lambda$-module object of $\\mathrm{FLC}(Y)$ (its underlying sheaf of sets with the maps $+$, $0$, $-$, $\\lambda\\cdot$), and $\\Lambda$-linear maps are the maps of $\\mathrm{FLC}(Y)$ commuting with these. By [lem-pod-equivalence-induces-module-objects] (1), $F_{\\bar y}$ induces an equivalence of $\\Lambda$-module objects, and by (2) of that lemma the $\\Lambda$-module objects of $\\pi_1\\text{-}\\mathbf{Set}$ are the finite left $\\Lambda$-modules with a continuous $\\Lambda$-linear $\\pi_1$-action. The composite sends $\\mathcal F$ to the finite set $\\mathcal F_{\\bar y}$ with the operations $(+)_{\\bar y},(\\lambda\\cdot)_{\\bar y}$, which are the module operations of the stalk of $\\mathcal F$ as a sheaf of modules (the stalk is a filtered colimit of sections and filtered colimits of sets commute with finite products), with $\\sigma$ acting as in the statement. This is the asserted equivalence; it is additive, because the addition on $\\operatorname{Hom}$ is computed by $+$ on both sides.",
    "uses": [
-    "def-galois-fibre-functor",
     "thm-galois-lc-etale",
     "thm-galois-fundamental",
-    "def-weil-pbc-constructible-complexes"
+    "def-galois-fibre-functor",
+    "lem-pod-lisse-module-sheaves-as-module-objects",
+    "lem-pod-equivalence-induces-module-objects",
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group', lemma-locally-constant-on-connected), part (3) and its proof; also Milne LEC, Proposition 6.16, p. 49"
+   }
   },
   {
-   "text": "*Exactness.* Let $u:\\mathcal F\\to\\mathcal G$ be a map of locally\nconstant sheaves of finite $\\Lambda$-modules. Choose an etale covering\n$\\{U_i\\to Y\\}$ on which both are constant, $\\mathcal F|_{U_i}\\cong\n\\underline M_i$ and $\\mathcal G|_{U_i}\\cong\\underline N_i$. A map\n$\\underline M_i\\to\\underline N_i$ on $U_i$ is a locally constant function\n$U_i\\to\\operatorname{Hom}_\\Lambda(M_i,N_i)$, a finite set, so $U_i$ is a\nfinite disjoint union of open and closed pieces on each of which $u$ is\na constant map $M_i\\to N_i$. Refining the covering by these pieces, the\nkernel and cokernel of $u$ (taken in all sheaves of $\\Lambda$-modules)\nare constant on each piece with finite values, hence locally constant of\nfinite $\\Lambda$-modules. So the locally constant sheaves form a full\nabelian subcategory closed under kernels and cokernels, and the stalk\nfunctor, being exact on all sheaves, is exact on it. On the\nrepresentation side kernels and cokernels are computed on the underlying\nmodules with the induced action, so evaluation at $\\bar y$ is an exact\nequivalence of abelian categories.",
-   "uses": [],
-   "elementary": null
+   "text": "*(1): exactness.* By [lemma-constructible-flc-serre] the kernel and the cokernel, taken in all sheaves of $\\Lambda$-modules, of a map between locally constant sheaves of finite $\\Lambda$-modules are again locally constant of finite $\\Lambda$-modules; a finite direct sum is too (on a common trivializing covering, $\\underline M\\oplus\\underline N=\\underline{M\\oplus N}$). So these sheaves form a full additive subcategory closed under kernels and cokernels, hence an abelian category whose kernels and cokernels are those of sheaves of $\\Lambda$-modules. The stalk functor at $\\bar y$ is exact on sheaves of abelian groups [prop-weil-pbc-geometric-stalks-exact], hence on sheaves of $\\Lambda$-modules (the stalk of a sheaf of $\\Lambda$-modules has the stalk of the underlying abelian sheaf as underlying group), so $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ carries kernels and cokernels to kernels and cokernels of the underlying modules. On the representation side kernels and cokernels are the kernels and cokernels of the underlying finite modules with the induced action, which is continuous since every action of $\\pi_1$ on a finite discrete set factoring through a continuous one is. Hence the equivalence of step 1 is an exact equivalence of abelian categories.",
+   "uses": [
+    "lemma-constructible-flc-serre",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RX (lemma-kernel-finite-locally-constant: finite type locally constant sheaves of modules over a Noetherian ring form a weak Serre subcategory); blueprint, ## Proof, paragraph 'Exactness'"
+   }
   },
   {
-   "text": "*Naturality of the action.* By [def-galois-fibre-functor] an element\n$\\sigma\\in\\pi_1$ is a natural automorphism of $F_{\\bar y}$ on finite\nlocally constant sheaves of sets, so for every map\n$\\phi:\\mathcal A\\to\\mathcal B$ of such sheaves\n$\\phi_{\\bar y}\\circ\\sigma=\\sigma\\circ\\phi_{\\bar y}$; applied to the\ntwo projections of $\\mathcal A\\times\\mathcal B$ this shows that $\\sigma$\nacts diagonally on $(\\mathcal A\\times\\mathcal B)_{\\bar y}\n=\\mathcal A_{\\bar y}\\times\\mathcal B_{\\bar y}$.",
+   "text": "*(1): naturality of the action.* By [def-galois-fibre-functor] an element $\\sigma\\in\\pi_1$ is a natural automorphism of $F_{\\bar y}$ on $\\mathrm{FLC}(Y)$, so for every map $\\phi:\\mathcal A\\to\\mathcal B$ of finite locally constant sheaves of sets, $\\phi_{\\bar y}\\circ\\sigma_{\\mathcal A}=\\sigma_{\\mathcal B}\\circ\\phi_{\\bar y}$. The product $\\mathcal A\\times\\mathcal B$ lies in $\\mathrm{FLC}(Y)$ (on a common trivializing covering $\\underline S\\times\\underline T=\\underline{S\\times T}$) and $(\\mathcal A\\times\\mathcal B)_{\\bar y}=\\mathcal A_{\\bar y}\\times\\mathcal B_{\\bar y}$ through the two projections; applying naturality to the two projections shows that $\\sigma$ acts on $(\\mathcal A\\times\\mathcal B)_{\\bar y}$ diagonally.",
    "uses": [
     "def-galois-fibre-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+    "place": "## Proof, paragraph 'Naturality of the action'"
+   }
   },
   {
-   "text": "*Tensor products.* Let $\\Lambda$ be commutative. The sheaf\n$\\mathcal F\\otimes_\\Lambda\\mathcal G$ (sheafified presheaf tensor product)\nhas stalk $\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}$, and on a\ncommon trivializing covering it is constant with finite value\n$M_i\\otimes_\\Lambda N_i$, so it is locally constant of finite\n$\\Lambda$-modules. The canonical bilinear map\n$\\mathcal F\\times\\mathcal G\\to\\mathcal F\\otimes_\\Lambda\\mathcal G$ is a\nmap of finite locally constant sheaves of sets, so by the previous\nparagraph its stalk $\\mathcal F_{\\bar y}\\times\\mathcal G_{\\bar y}\\to\n(\\mathcal F\\otimes_\\Lambda\\mathcal G)_{\\bar y}$ is equivariant for the\ndiagonal action; hence the stalk isomorphism\n$\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}\\cong\n(\\mathcal F\\otimes_\\Lambda\\mathcal G)_{\\bar y}$ is $\\pi_1$-equivariant\nfor the diagonal action on the source. These isomorphisms are natural and\ncompatible with the associativity, commutativity and unit constraints,\nsince they are so on stalks. The constant sheaf $\\underline\\Lambda$ has a\nsection over $Y$ through every point of its stalk, and $\\sigma$ fixes the\nstalk of a global section (naturality applied to the map\n$\\underline{\\{*\\}}\\to\\underline\\Lambda$), so it goes to the trivial\nrepresentation $\\Lambda$.",
-   "uses": [],
-   "elementary": null
+   "text": "*(1): tensor products and the unit.* Let $\\Lambda$ be commutative and $\\mathcal F,\\mathcal G$ locally constant of finite $\\Lambda$-modules. By [lem-pod-lisse-tensor-and-scalar-extension] (2), $\\mathcal F\\otimes_\\Lambda\\mathcal G$ is locally constant of finite $\\Lambda$-modules and $c:\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}\\to(\\mathcal F\\otimes_\\Lambda\\mathcal G)_{\\bar y}$, $s_{\\bar y}\\otimes t_{\\bar y}\\mapsto(s\\otimes t)_{\\bar y}$, is an isomorphism, natural and compatible with the associativity, commutativity and unit constraints. The canonical bilinear map $\\beta:\\mathcal F\\times\\mathcal G\\to\\mathcal F\\otimes_\\Lambda\\mathcal G$ is a map of finite locally constant sheaves of sets, and its stalk is $(a,b)\\mapsto c(a\\otimes b)$; by step 3, $\\beta_{\\bar y}\\circ(\\sigma\\times\\sigma)=\\sigma\\circ\\beta_{\\bar y}$, i.e. $\\sigma(c(a\\otimes b))=c(\\sigma a\\otimes\\sigma b)$. Since the $a\\otimes b$ generate $\\mathcal F_{\\bar y}\\otimes_\\Lambda\\mathcal G_{\\bar y}$ additively and $\\sigma$ is additive, $c$ is $\\pi_1$-equivariant for the diagonal action on the source. For the unit: by [lem-pod-lisse-tensor-and-scalar-extension] (1) every element of $(\\underline\\Lambda)_{\\bar y}=\\Lambda$ is the germ of a global constant section $x$, i.e. the image of the point under the stalk of the map $x:\\underline{\\{*\\}}\\to\\underline\\Lambda$; naturality (step 3) for this map, with $\\sigma$ the identity on the one-point stalk, gives $\\sigma(x_{\\bar y})=x_{\\bar y}$, so $\\underline\\Lambda$ goes to the trivial representation $\\Lambda$.",
+   "uses": [
+    "lem-pod-lisse-tensor-and-scalar-extension",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+    "place": "## Proof, paragraph 'Tensor products'"
+   }
   },
   {
-   "text": "*Base change of coefficients.* For $\\Lambda\\to\\Lambda'$ a map of finite\nrings, $\\Lambda'\\otimes_\\Lambda\\mathcal F$ has stalk\n$\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}$, which is finite, and is\nconstant with value $\\Lambda'\\otimes_\\Lambda M_i$ on each $U_i$, hence\nlocally constant of finite $\\Lambda'$-modules. For each $\\lambda'\\in\\Lambda'$\nthe map $\\mathcal F\\to\\Lambda'\\otimes_\\Lambda\\mathcal F$,\n$s\\mapsto\\lambda'\\otimes s$, is a map of finite locally constant sheaves of\nsets, so its stalk commutes with every $\\sigma$; since the elements\n$\\lambda'\\otimes m$ generate $\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}$\nadditively, $\\sigma$ acts on this stalk by $\\lambda'\\otimes m\\mapsto\n\\lambda'\\otimes\\sigma m$, the induced action. The isomorphism is natural\nin $\\mathcal F$ and, for $\\Lambda\\to\\Lambda'\\to\\Lambda''$, compatible with\ncomposition, so evaluation at $\\bar y$ commutes with base change of\ncoefficients (and, trivially, with restriction of scalars along\n$\\Lambda\\to\\Lambda'$).",
-   "uses": [],
-   "elementary": null
+   "text": "*(1): base change of coefficients.* Let $\\Lambda\\to\\Lambda'$ be a homomorphism of finite rings. By [lem-pod-lisse-tensor-and-scalar-extension] (3), $\\Lambda'\\otimes_\\Lambda\\mathcal F$ is locally constant of finite $\\Lambda'$-modules and $\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}\\to(\\Lambda'\\otimes_\\Lambda\\mathcal F)_{\\bar y}$, $\\lambda'\\otimes s_{\\bar y}\\mapsto(\\lambda'\\otimes s)_{\\bar y}$, is an isomorphism, natural in $\\mathcal F$ and compatible with composites. For each $\\lambda'\\in\\Lambda'$, the map $\\mathcal F\\to\\Lambda'\\otimes_\\Lambda\\mathcal F$, $s\\mapsto\\lambda'\\otimes s$, is a map of finite locally constant sheaves of sets, so by step 3 its stalk commutes with every $\\sigma$: $\\sigma(\\lambda'\\otimes m)=\\lambda'\\otimes\\sigma m$ for $m\\in\\mathcal F_{\\bar y}$. These elements generate $\\Lambda'\\otimes_\\Lambda\\mathcal F_{\\bar y}$ additively, so the isomorphism is $\\pi_1$-equivariant for the action $1\\otimes\\sigma$, which proves the compatibility with base change.",
+   "uses": [
+    "lem-pod-lisse-tensor-and-scalar-extension",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+    "place": "## Proof, paragraph 'Base change of coefficients'"
+   }
+  },
+  {
+   "text": "*(2): the $\\mathcal O_E$-level functor.* Let $\\mathcal F=(\\mathcal F_n,t_n)$ be a lisse $\\mathcal O_E$-sheaf [def-pod-lisse-l-adic-sheaves] and $M_n=(\\mathcal F_n)_{\\bar y}$, a finite $A_{E,n}$-module with continuous $\\pi_1$-action by (1) for the finite ring $A_{E,n}$. The maps $(t_n)_{\\bar y}:M_{n+1}\\to M_n$ are equivariant (step 1: they are stalks of maps of sheaves), and by step 5 applied to $A_{E,n+1}\\to A_{E,n}$ they induce equivariant isomorphisms $M_{n+1}\\otimes_{A_{E,n+1}}A_{E,n}\\cong(\\mathcal F_{n+1}\\otimes A_{E,n})_{\\bar y}\\cong M_n$. By [lem-pod-adic-limit-finite-modules] (1), $M=\\mathcal F_{\\bar y}=\\varprojlim M_n$ is a finitely generated $\\mathcal O_E$-module with $M/\\varpi_E^nM=M_n$, whose $\\mathfrak m_E$-adic topology is the limit topology. $\\pi_1$ acts on $M$ by the limit of the actions, $\\mathcal O_E$-linearly; the action map $\\pi_1\\times M\\to M$ is continuous because its composites with the projections $M\\to M_n$ factor as $\\pi_1\\times M\\to\\pi_1\\times M_n\\to M_n$, both continuous. So $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ is a functor to continuous $\\mathcal O_E$-representations [def-pod-l-adic-representations] (a morphism $(u_n)$ goes to $\\varprojlim(u_n)_{\\bar y}$, equivariant by step 1).",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, third bullet, p. 3 (the lcc sheaves F_m correspond to the finite pi_1-modules Lambda/m^m Lambda); Milne LEC, Section 19, p. 125 ('to give a locally constant sheaf M on a connected variety X is to give a finitely generated Z_l-module M together with a continuous action of pi_1(X, x)'); Weil II (1.1.1) b), p. 146"
+   }
+  },
+  {
+   "text": "*(2): the $\\mathcal O_E$-level equivalence.* Full faithfulness: by definition $\\operatorname{Hom}(\\mathcal F,\\mathcal G)=\\varprojlim_n\\operatorname{Hom}(\\mathcal F_n,\\mathcal G_n)$ (compatible families), by (1) at each level this is $\\varprojlim_n\\operatorname{Hom}_{\\pi_1}(M_n,N_n)$ (the identification is natural, so it respects the transition maps), and by [lem-pod-adic-limit-finite-modules] (2) a compatible family of equivariant maps $M_n\\to N_n$ is the same as an $\\mathcal O_E$-linear map $M\\to N$ (automatically continuous) whose reductions are equivariant, i.e. an equivariant map, since $N=\\varprojlim N_n$. Essential surjectivity: let $M$ be a continuous $\\mathcal O_E$-representation. By [lem-pod-adic-limit-finite-modules] (2), $M=\\varprojlim M_n$ with $M_n=M/\\varpi_E^nM$; $\\varpi_E^nM$ is an open $\\pi_1$-stable submodule, so $\\pi_1$ acts continuously on the finite discrete $M_n$. By (1) there are lisse sheaves $\\mathcal F_n$ of $A_{E,n}$-modules with $(\\mathcal F_n)_{\\bar y}\\cong M_n$ equivariantly, and by full faithfulness in (1) the projections $M_{n+1}\\to M_n$ come from maps $t_n:\\mathcal F_{n+1}\\to\\mathcal F_n$; the induced map $\\mathcal F_{n+1}\\otimes A_{E,n}\\to\\mathcal F_n$ is a map of lisse $A_{E,n}$-sheaves whose fibre, by step 5, is the isomorphism $M_{n+1}\\otimes A_{E,n}\\to M_n$, hence it is an isomorphism (an equivalence reflects isomorphisms). So $(\\mathcal F_n,t_n)$ is a lisse $\\mathcal O_E$-sheaf with fibre $\\varprojlim M_n=M$.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, pp. 2-3; Weil II (1.1.1) b), p. 146"
+   }
+  },
+  {
+   "text": "*(2): the $E$-level equivalence.* For lisse $\\mathcal O_E$-sheaves with fibres $M,N$, $\\operatorname{Hom}(\\mathcal F\\otimes E,\\mathcal G\\otimes E)=\\operatorname{Hom}(\\mathcal F,\\mathcal G)\\otimes_{\\mathcal O_E}E=\\operatorname{Hom}_{\\pi_1}(M,N)\\otimes_{\\mathcal O_E}E$ by step 7 and [def-pod-lisse-l-adic-sheaves] (2). This equals $\\operatorname{Hom}_{\\pi_1}(M\\otimes E,N\\otimes E)$: since $M$ is finitely presented, $H=\\operatorname{Hom}_{\\mathcal O_E}(M,N)$ is finitely generated and $H\\otimes_{\\mathcal O_E}E=\\operatorname{Hom}_E(M\\otimes E,N\\otimes E)$ equivariantly; $H^{\\pi_1}\\otimes E\\to(H\\otimes E)^{\\pi_1}$ is injective ($\\otimes E$ is exact), and surjective because if $h\\otimes\\varpi_E^{-k}$ is invariant then every $gh-h$ lies in the torsion of $H$, which is killed by a fixed power $\\varpi_E^t$, so $\\varpi_E^th\\in H^{\\pi_1}$. The $E$-space $M\\otimes E$ with its action is a continuous $E$-representation: the image $M'$ of $M$ is an open lattice (a quotient of $M$ by its torsion, free and spanning), the action on it is continuous, and $\\pi_1\\times M\\otimes E\\to M\\otimes E$ is continuous at $(g,\\varpi_E^{-k}m)$ by scaling. Essential surjectivity: a continuous $E$-representation $V$ has a $\\pi_1$-stable lattice $\\Lambda$ with continuous action by [lem-pod-profinite-stable-lattice] ($\\pi_1$ is profinite, hence compact); $\\Lambda$ is a continuous $\\mathcal O_E$-representation, which comes from a lisse $\\mathcal O_E$-sheaf $\\mathcal F$ by step 7, and $\\mathcal F\\otimes E\\mapsto\\Lambda\\otimes E=V$.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first and second bullets, p. 2 (lisse E-sheaves correspond to representations defined over E; any lisse E-sheaf comes from a lisse O_E-sheaf, corresponding to a stable lattice); Weil II (1.1.1) c), p. 147"
+   }
+  },
+  {
+   "text": "*(2): scalar extension and the $\\Qlb$-level equivalence.* Let $E\\subset L$ in $\\Qlb$, $e$ the ramification index. For a lisse $\\mathcal O_E$-sheaf $\\mathcal F$ with fibre $M$, the levels of $\\mathcal F\\otimes_{\\mathcal O_E}\\mathcal O_L$ are $\\mathcal F_n\\otimes_{A_{E,n}}A_{L,m}$ [def-pod-lisse-l-adic-sheaves] (3), whose fibres are $M_n\\otimes_{A_{E,n}}A_{L,m}$ with action $1\\otimes\\sigma$ by step 5; by [lem-pod-adic-limit-finite-modules] (3) (for $m=en$, $A_{L,en}=\\mathcal O_L/\\varpi_E^n\\mathcal O_L$) and (1) the limit is $M\\otimes_{\\mathcal O_E}\\mathcal O_L$, so the fibre functor commutes with scalar extension, naturally and compatibly with $E\\subset L\\subset L'$. Then for lisse $\\Qlb$-sheaves $(E,\\mathcal F),(E',\\mathcal F')$ with fibres $V_E,V'_{E'}$, steps 8 and this compatibility give $\\operatorname{Hom}((E,\\mathcal F),(E',\\mathcal F'))=\\varinjlim_L\\operatorname{Hom}_{\\pi_1}(V_E\\otimes_EL,V'_{E'}\\otimes_{E'}L)$. The right side is $\\operatorname{Hom}_{\\pi_1}(V_E\\otimes_E\\Qlb,V'_{E'}\\otimes_{E'}\\Qlb)$: for a fixed $L$ the space $H_L=\\operatorname{Hom}_L(V_E\\otimes L,V'_{E'}\\otimes L)$ is finite-dimensional, its $\\pi_1$-invariants are the kernel of the linear map $H_L\\to\\prod_{g\\in S}H_L$, $h\\mapsto(gh-h)_g$, for a finite set $S\\subset\\pi_1$ (finite dimension), and kernels of linear maps commute with the field extension $\\otimes_L\\Qlb$; hence $\\operatorname{Hom}_{\\pi_1}(V\\otimes\\Qlb,V'\\otimes\\Qlb)=\\operatorname{Hom}_{\\pi_1}(V\\otimes L,V'\\otimes L)\\otimes_L\\Qlb=\\varinjlim_{L'}\\operatorname{Hom}_{\\pi_1}(V\\otimes L',V'\\otimes L')$. So the functor $(E,\\mathcal F)\\mapsto\\mathcal F_{\\bar y}\\otimes_E\\Qlb$ is fully faithful; its values are $\\ell$-adic representations in the sense of [def-pod-l-adic-representations] (3) with $E$-structure $V_E$, and every $\\ell$-adic representation has by definition an $E$-structure $V_E$ which is a continuous $E$-representation, hence by step 8 the fibre of some lisse $E$-sheaf, so the functor is essentially surjective.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) d), p. 147 (Qlbar-sheaves as the 2-colimit over finite E, Hom tensor Qlbar) and (1.1.6), p. 148 ('la relation habituelle entre faisceaux lisses et representations continues du groupe fondamental (une equivalence de categories)'); L19, Proposition 1.1.9, first bullet, p. 2"
+   }
+  },
+  {
+   "text": "*(2): exactness, tensor products and the unit.* Continuous $E$-representations form an abelian category: the kernel and image of an equivariant linear map are stable subspaces with continuous (restricted) action, and the cokernel $V/W$ has continuous action because $\\pi_1\\times V\\to\\pi_1\\times V/W$ is an open surjection (a projection of a product times the open linear surjection $V\\to V/W$) through which the continuous map $\\pi_1\\times V\\to V/W$ factors; likewise $\\ell$-adic representations (a map between representations defined over $E$ and $E'$ is defined over some $L\\supset E,E'$ by step 9, and kernel and cokernel are then defined over $L$). An additive category equivalent to an abelian category is abelian, and an equivalence of abelian categories preserves kernels and cokernels, so the equivalences at the levels $E$ and $\\Qlb$ (additive by steps 8 and 9) are exact. Tensor products: the fibres of $\\mathcal F\\otimes\\mathcal G=(\\mathcal F_n\\otimes\\mathcal G_n)_n$ are $M_n\\otimes_{A_{E,n}}N_n$ with the diagonal action by step 4, so by [lem-pod-adic-limit-finite-modules] (1) and (3) its fibre is $\\varprojlim_n(M\\otimes N)/\\varpi_E^n=M\\otimes_{\\mathcal O_E}N$ with the diagonal action; the unit $(\\underline{A_{E,n}})_n$ has fibre $\\varprojlim A_{E,n}=\\mathcal O_E$ with trivial action by step 4. Tensoring with $E$ and passing to the colimit over $L$ (formed with the scalar extension of step 9) gives the same at the levels $E$ and $\\Qlb$, where the diagonal action on $V\\otimes W$ is continuous because it is so on $M\\otimes N$, an open lattice.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.4), p. 148 (the formalism for Zl-, Ql-, Qlbar-sheaves is taken over from the finite levels) and (1.1.6), p. 148; blueprint, ## Proof, first paragraph (the Qlbar-statement from the finite levels)"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-fibre-functor",
   "thm-galois-lc-etale",
   "thm-galois-fundamental",
-  "def-weil-pbc-constructible-complexes"
+  "def-galois-fibre-functor",
+  "lem-pod-lisse-module-sheaves-as-module-objects",
+  "lem-pod-equivalence-induces-module-objects",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-constructible-flc-serre",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pod-profinite-stable-lattice",
+  "def-weil-finite-subextension-directed-set"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Part (1): Stacks Lemma 0DV5 (etale-cohomology, Section 59.65) with its proof, and Milne LEC Proposition 6.16, p. 49; the tensor and base-change steps follow the blueprint's proof, which is agent-written. Part (2): literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, pp. 2-3, with the definitions of Weil II (1.1.1) and (1.1.6), pp. 146-148; L19 only sketches the argument, and the details of steps 6-10 (limits, Hom groups, invariants under field extension, abelianness) were written by the agent."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'fundamentalGroup\\|FundamentalGroup\\|etaleFundamental' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'def functorToContAction\\|IsEquivalence' Mathlib/CategoryTheory/Galois/Equivalence.lean",
+   "results": "no etale fundamental group of a scheme in Mathlib/AlgebraicGeometry; CategoryTheory.PreGaloisCategory.functorToContAction (Galois/Equivalence.lean:40) is an equivalence C ≌ ContAction FintypeCat (Aut F) for an abstract Galois category with fibre functor (line 90); no locally constant etale sheaves, no instance of the Galois-category axioms for finite etale covers of a scheme",
+   "date": "2026-10-09",
+   "verdict": "no match (the abstract Galois-category equivalence is a generalization of the sets-level input of step 1 only, after the Galois-category structure on FEt(Y) is supplied)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'lisse\\|Lisse\\|LocallyConstant.*Sheaf\\|IsLocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -83,5 +210,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "cor-galois-lisse-representations",
+  "worker": "stage1",
+  "summary": "The finite-coefficient part now follows Stacks Lemma 0DV5 (and Milne LEC Prop. 6.16, p. 49): the blueprint's first step ('thm-galois-lc-etale applied to the underlying sheaf of sets together with the module structure') hid two arguments, now nodes: lisse Lambda-module sheaves are Lambda-module objects in FLC(Y) (lem-pod-lisse-module-sheaves-as-module-objects) and a finite-product-preserving equivalence induces an equivalence of module objects, module objects in finite pi_1-sets being finite Lambda[pi_1]-modules (lem-pod-equivalence-induces-module-objects). Exactness now uses the existing closed node lemma-constructible-flc-serre and prop-weil-pbc-geometric-stalks-exact instead of re-deriving it; the tensor and base-change steps (elementary: null before) now use the new lem-pod-lisse-tensor-and-scalar-extension (Stacks 093V/095D, 03EL) for local constancy and the stalk formulas. The Qlbar clause was not provable as stated: it cited 'the coefficient conventions of def-weil-pbc-constructible-complexes', which defines lisse sheaves only for finite commutative rings and has no Qlbar conventions, spoke of 'finite stalks' for Qlbar-sheaves, and its proof ('filtered colimit of finite-level ones') does not match how l-adic sheaves are built (limits over levels, then isogeny, then colimit over E). The statement is rewritten into part (2) with explicit categories: new definitions def-pod-lisse-l-adic-sheaves (Weil II (1.1.1) b-d restricted to lisse objects) and def-pod-l-adic-representations (Weil II (1.1.6)); the proof goes O_E -> E -> Qlbar following the sketch of Stanford Weil II seminar L19 Prop. 1.1.9, with new nodes lem-pod-adic-limit-finite-modules (Stacks 09B8, 031D, 00MA) and lem-pod-profinite-stable-lattice (L19, pp. 2-3). def-weil-pbc-constructible-complexes dropped from stmt_deps and proof (not used); stmt_deps now name the fundamental group, stalks, locally constant sheaves, the etale site and the two new definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

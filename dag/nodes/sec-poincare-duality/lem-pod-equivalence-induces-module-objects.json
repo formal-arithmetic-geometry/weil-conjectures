@@ -1,0 +1,46 @@
+{
+ "id": "lem-pod-equivalence-induces-module-objects",
+ "kind": "statement",
+ "title": "Equivalences induce equivalences of module objects; module objects in finite G-sets",
+ "statement": "Let $\\Lambda$ be a ring. For a category $\\mathcal C$ with finite products and a final object, a *$\\Lambda$-module object* of $\\mathcal C$ is an object $A$ with morphisms $+:A\\times A\\to A$, $0:*\\to A$, $-:A\\to A$ and $\\lambda\\cdot:A\\to A$ ($\\lambda\\in\\Lambda$) satisfying the axioms of a left $\\Lambda$-module written as commutative diagrams; morphisms are the morphisms of $\\mathcal C$ commuting with these maps. Write $\\mathrm{Mod}_\\Lambda(\\mathcal C)$ for this category.\n\n1. Let $\\Phi:\\mathcal C\\to\\mathcal D$ be an equivalence of categories, both with finite products and final objects. Then $\\Phi$ preserves finite products and the final object, and $A\\mapsto\\Phi(A)$, with the structure maps $\\Phi(+)$, $\\Phi(0)$, $\\Phi(-)$, $\\Phi(\\lambda\\cdot)$ transported along the canonical isomorphisms $\\Phi(A\\times A)\\cong\\Phi(A)\\times\\Phi(A)$ and $\\Phi(*)\\cong *$, is an equivalence $\\mathrm{Mod}_\\Lambda(\\mathcal C)\\to\\mathrm{Mod}_\\Lambda(\\mathcal D)$ whose underlying functor is $\\Phi$ on objects and morphisms.\n2. Let $G$ be a topological group and $G\\text{-}\\mathbf{Set}$ the category of finite sets with a continuous action of $G$ (finite sets discrete) and equivariant maps. Then $\\mathrm{Mod}_\\Lambda(G\\text{-}\\mathbf{Set})$ is isomorphic to the category of finite left $\\Lambda$-modules $M$ with an action of $G$ by $\\Lambda$-linear automorphisms for which $G\\times M\\to M$ is continuous ($M$ discrete), with $G$-equivariant $\\Lambda$-linear maps: a module object is the finite $G$-set with its structure maps as module operations, which are $G$-equivariant exactly when $G$ acts $\\Lambda$-linearly.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0DV5 (etale-cohomology, Section 59.65), proof of parts (2)-(3): 'The equivalence in (1) sends products to products and hence sends + to an addition on the corresponding finite pi_1-set. Since pi_1-modules are the same thing as pi_1-sets with a compatible abelian group structure we obtain (2). Part (3) is proved in exactly the same way.'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapCommGrp\\|Equivalence.mapCommGrp\\|def mapGrp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/CommGrp_.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Grp.lean",
+   "results": "CategoryTheory.Equivalence.mapCommGrp (CommGrp_.lean:297): an equivalence with braided (e.g. product-preserving cartesian) functor and inverse lifts to an equivalence of commutative group objects; Functor.mapGrp (Grp.lean:612)",
+   "date": "2026-10-09",
+   "verdict": "no match: generalization only for commutative group objects (the Z-module case); the Lambda-action by endomorphisms is not covered, and Mathlib has no internal Lambda-module object over a ring"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ContAction\\|Action (FintypeCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Equivalence.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Action/ | head; grep -rln 'CommGrp.*Action\\|Action.*Module' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RepresentationTheory",
+   "results": "ContAction FintypeCat (Aut F) (Galois/Equivalence.lean:40) is the category of finite continuous G-sets; RepresentationTheory/Rep has Rep k G = Action (ModuleCat k) G; nothing identifying CommGrp/module objects in ContAction FintypeCat G with finite Lambda[G]-modules",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "cor-galois-lisse-representations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
