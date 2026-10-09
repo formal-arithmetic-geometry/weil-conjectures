@@ -75,7 +75,7 @@ noncomputable instance commShiftRightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
 
 /-- The exceptional inverse image `Rf^!` commutes with shifts, being right adjoint to `Rf_!`. -/
 noncomputable instance commShiftRightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] : (R(f)^![A]).CommShift ℤ :=
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] : (R(f)^![A]).CommShift ℤ :=
   (rightDerivedUpperShriekAdjunction A f).rightAdjointCommShift ℤ
 
 section Monoidal

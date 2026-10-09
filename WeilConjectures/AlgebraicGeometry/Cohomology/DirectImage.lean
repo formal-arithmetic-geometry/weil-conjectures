@@ -169,18 +169,6 @@ noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Mod
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q
 
-/-- The pushforward of multiplication by `f^♯ a` is multiplication by `a`. -/
-lemma pushforward_map_smulHom (f : X ⟶ T) (M : X.Modules) (a : Γ(T, ⊤)) :
-    (pushforward f).map (M.smulHom (f.appTop a)) = ((pushforward f).obj M).smulHom a := by
-  ext U x
-  simp only [pushforward_map_app, smulHom_app_apply]
-  erw [smulHom_app_apply]
-  change _ = f.app U (T.presheaf.map (homOfLE le_top).op a) • (show Γ(M, f ⁻¹ᵁ U) from x)
-  congr 1
-  rw [Scheme.Hom.appTop, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
-    Scheme.Hom.naturality]
-  rfl
-
 /-- **The higher direct images are linear over the base.** Applying `R^q f_*` to multiplication
 by `f^♯ a` on `M` gives multiplication by `a` on `R^q f_* M`. -/
 lemma higherDirectImage_map_smulHom (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ)

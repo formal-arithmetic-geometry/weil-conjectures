@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.ClosedPoints
@@ -66,6 +67,19 @@ theorem Hom.specMap_residueFieldAlgebraMap (f : X.Hom (Spec (.of k))) (x : X) :
     Spec.map_inj]
   ext a
   rfl
+
+/-- The residue field of a closed point of a scheme locally of finite type over a field `k` is
+finite over `k` (Nullstellensatz). -/
+theorem Hom.finite_residueField_of_isClosed (f : X.Hom (Spec (.of k))) [LocallyOfFiniteType f]
+    (x : X) (hx : IsClosed {x}) :
+    letI := (f.residueFieldAlgebraMap x).toAlgebra
+    Module.Finite k (X.residueField x) := by
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have := isClosed_singleton_iff_isClosedImmersion.mp hx
+  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
+    (f := X.fromSpecResidueField x ≫ f)).mpr inferInstance
+  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
+  exact this
 
 /-- The embedding of the base field into the residue field of a point of `X` over `k`,
 for `X` mapping to a `k`-scheme `Y`, is the embedding into the residue field of the image

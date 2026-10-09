@@ -111,18 +111,6 @@ private lemma isClosed_singleton_of_isSeparableAt {Y : Scheme.{u}} (g : Y.Hom (S
   rw [← Y.range_fromSpecResidueField]
   exact (Y.fromSpecResidueField y).isClosedMap.isClosed_range
 
-/-- The residue field of a closed point of a scheme locally of finite type over a field `k` is
-finite over `k`. -/
-private lemma finite_residueField_of_isClosed (f : X.Hom (Spec (.of k))) [LocallyOfFiniteType f]
-    (x : X) (hx : IsClosed {x}) :
-    letI := (f.residueFieldAlgebraMap x).toAlgebra
-    Module.Finite k (X.residueField x) := by
-  have := isClosed_singleton_iff_isClosedImmersion.mp hx
-  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
-    (f := X.fromSpecResidueField x ≫ f)).mpr inferInstance
-  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
-  exact this
-
 /-- The `k`-points of `𝔸ⁿ_k` with coordinates in a separable closure of `k` are dense: every
 nonempty open of `Spec k[X₁, …, Xₙ]` contains a point with residue field separable over `k`. -/
 private lemma exists_isSeparableAt_mvPolynomial (n : ℕ)
@@ -203,7 +191,7 @@ theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [
   have hxc : IsClosed {V.ι.base y} := by
     have := V.ι.isOpenEmbedding.preimage_closedPoints
     exact (this.symm ▸ hyc : y ∈ V.ι.base ⁻¹' closedPoints X)
-  exact ⟨V.ι.base y, hyW, hxc, finite_residueField_of_isClosed f _ hxc,
+  exact ⟨V.ι.base y, hyW, hxc, f.finite_residueField_of_isClosed _ hxc,
     isSeparableAt_of_comp V.ι f y hy⟩
 
 /-- **Zariski density of rational points.** Let `X` be a smooth scheme over a separably closed
