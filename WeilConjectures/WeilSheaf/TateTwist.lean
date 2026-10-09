@@ -171,6 +171,15 @@ instance (m : ℤ) : (tateTwist k₀ l X m).Additive := by
   unfold tateTwist
   infer_instance
 
+noncomputable instance (m : ℤ) : (tateTwist k₀ l X m).CommShift ℤ := by
+  unfold tateTwist
+  infer_instance
+
+/-- The Tate twist of Weil complexes is a triangulated functor. -/
+instance (m : ℤ) : (tateTwist k₀ l X m).IsTriangulated := by
+  unfold tateTwist
+  infer_instance
+
 end WeilComplex
 
 section Fourier

@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 
@@ -405,6 +406,16 @@ noncomputable def WeilComplex.upperStar : WeilComplex k₀ l Y ⥤ WeilComplex k
 
 instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+noncomputable instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).CommShift ℤ := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.CommShift ℤ := inferInstance
+  have : (WeilComplex.objectProperty k₀ l X).IsStableUnderShift ℤ := inferInstance
+  exact ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The pullback of Weil complexes is a triangulated functor. -/
+instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).IsTriangulated := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.IsTriangulated := inferInstance
+  exact ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 
 end UpperStar
 

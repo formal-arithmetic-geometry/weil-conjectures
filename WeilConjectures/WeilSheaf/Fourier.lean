@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
@@ -1223,6 +1224,14 @@ noncomputable def WeilComplex.ihomLisse (F : WeilSheaf k₀ l X) (hF : F.IsLisse
 instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : (WeilComplex.ihomLisse F hF).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
+noncomputable instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
+    (WeilComplex.ihomLisse F hF).CommShift ℤ :=
+  ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The derived internal hom out of a lisse Weil sheaf is a triangulated functor. -/
+instance (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : (WeilComplex.ihomLisse F hF).IsTriangulated :=
+  ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
+
 /-- The tensor product `G ⊗ -` with a lisse Weil sheaf `G`, on Weil complexes: the derived
 internal hom out of the dual `G^∨`, `G` being locally free of finite rank over `ℚ̄_ℓ,X̄`. -/
 noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
@@ -1232,6 +1241,15 @@ noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLis
 instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) : (WeilComplex.tensorLisse G hG).Additive := by
   unfold WeilComplex.tensorLisse
   infer_instance
+
+noncomputable instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
+    (WeilComplex.tensorLisse G hG).CommShift ℤ :=
+  inferInstanceAs ((WeilComplex.ihomLisse (G.dual hG) hG.dual).CommShift ℤ)
+
+/-- The tensor product with a lisse Weil sheaf is a triangulated functor. -/
+instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
+    (WeilComplex.tensorLisse G hG).IsTriangulated :=
+  inferInstanceAs ((WeilComplex.ihomLisse (G.dual hG) hG.dual).IsTriangulated)
 
 variable (k₀) in
 /-- The affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and the multiplication
@@ -1301,6 +1319,19 @@ noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
 
 -- TODO(unify): sk-def-ft
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive := by
+  unfold fourierTransform
+  infer_instance
+
+-- TODO(unify): sk-def-ft
+noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (fourierTransform (l := l) ψ).CommShift ℤ := by
+  unfold fourierTransform
+  infer_instance
+
+-- TODO(unify): sk-def-ft
+/-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
+functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
+instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated := by
   unfold fourierTransform
   infer_instance
 
