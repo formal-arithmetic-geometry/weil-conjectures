@@ -63,7 +63,7 @@ contains a point over `x`.
 
 universe u
 
-open CategoryTheory Limits Topology
+open CategoryTheory Limits Topology TensorProduct
 
 namespace AlgebraicGeometry
 
@@ -301,7 +301,8 @@ theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_single
   refine (PrimeSpectrum.stableUnderGeneralization_relativeComponent (fun L _ _ ↦ ?_)
     s).preimage X.isoSpec.hom.homeomorph.continuous
   -- the fibre `Spec (L ⊗ Γ(X, ⊤))` of `f` over `Spec L ⟶ Y` is reduced
-  have hpb := (CommRingCat.isPushout_tensorProduct Γ(Y, ⊤) L Γ(X, ⊤)).op.flip.map Scheme.Spec
+  have hpb := isPullback_SpecMap_of_isPushout _ _ _ _
+    (CommRingCat.isPushout_tensorProduct Γ(Y, ⊤) L Γ(X, ⊤))
   have hpb' : IsPullback (Spec.map (CommRingCat.ofHom (S := L ⊗[Γ(Y, ⊤)] Γ(X, ⊤))
         Algebra.TensorProduct.includeRight.toRingHom) ≫ X.isoSpec.inv)
       (Spec.map (CommRingCat.ofHom (S := L ⊗[Γ(Y, ⊤)] Γ(X, ⊤))
@@ -310,8 +311,9 @@ theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_single
     refine IsPullback.of_iso hpb.flip (Iso.refl _) X.isoSpec.symm (Iso.refl _) Y.isoSpec.symm
       (by simp) (by simp) ?_ (by simp)
     simp only [Iso.symm_hom]
+    change Spec.map f.appTop ≫ Y.isoSpec.inv = _
     rw [← cancel_epi X.isoSpec.hom, Scheme.isoSpec_hom_naturality_assoc]
-    simp [Scheme.isoSpec_hom_naturality]
+    simp
   exact (affine_isReduced_iff _).mp
     (GeometricallyReduced.geometrically_isReduced (f := f) _ _ _ hpb')
 
