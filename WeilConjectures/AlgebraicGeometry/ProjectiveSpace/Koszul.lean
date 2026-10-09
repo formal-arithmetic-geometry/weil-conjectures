@@ -11,10 +11,23 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
-# Multiplication by the homogeneous coordinates on the twisting sheaves
+# The Koszul sequence of the homogeneous coordinates
 
 Multiplication by the homogeneous coordinate `Tᵢ` is a morphism `𝒪(m) ⟶ 𝒪(m + 1)` on
-`ℙ(n; S)`, an isomorphism over the standard open `D₊(Tᵢ)`.
+`ℙ(n; S)`, an isomorphism over the standard open `D₊(Tᵢ)`. On the projective line `ℙ¹_S` the
+Koszul complex of the two coordinates `x₀, x₁` is a short exact sequence
+`0 → 𝒪(m) → 𝒪(m + 1)² → 𝒪(m + 2) → 0`.
+
+## Main definitions and results
+
+- `AlgebraicGeometry.ProjectiveSpace.twistMulX`: multiplication by `Tᵢ`.
+- `AlgebraicGeometry.ProjectiveLine.koszul`: the Koszul complex `𝒪(m) → 𝒪(m + 1)² → 𝒪(m + 2)`.
+- `AlgebraicGeometry.ProjectiveLine.koszul_shortExact`: it is short exact.
+
+Exactness is checked on the two standard opens, where it is split by
+`AlgebraicGeometry.isIso_of_koszul`, using the local criteria
+`AlgebraicGeometry.Scheme.Modules.mono_of_restrict` and
+`AlgebraicGeometry.Scheme.Modules.epi_of_surjective_stalk`.
 -/
 
 @[expose] public section
@@ -26,64 +39,6 @@ open CategoryTheory Limits
 noncomputable section
 
 namespace AlgebraicGeometry
-
-namespace Proj
-
-variable {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
-  {𝒜 : ℕ → σ} [GradedRing 𝒜]
-
-/-- Multiplications by two homogeneous elements of the same degree commute. -/
-lemma twistMul_comp_twistMul (m : ℤ) {d : ℕ} {f g : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 d) :
-    twistMul m hf ≫ twistMul (m + d) hg = twistMul m hg ≫ twistMul (m + d) hf := by
-  ext U s : 3
-  refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
-  exact mul_right_comm _ _ _
-
-end Proj
-
-namespace Scheme.Modules
-
-variable {X : Scheme.{u}}
-
-instance {Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : (restrictFunctor f).Additive where
-  map_add := rfl
-
-/-- A morphism of `𝒪_X`-modules vanishing over every member of an open cover vanishes. -/
-lemma hom_eq_zero_of_restrict {M N : X.Modules} (φ : M ⟶ N) {ι : Type*} (U : ι → X.Opens)
-    (hU : ⨆ i, U i = ⊤) (h : ∀ i, (restrictFunctor (U i).ι).map φ = 0) : φ = 0 := by
-  have h' (i : ι) (W : X.Opens) (hW : W ≤ U i) : φ.app W = 0 := by
-    have key : ∀ W' : X.Opens, W' = W → φ.app W' = 0 → φ.app W = 0 := by
-      rintro _ rfl h
-      exact h
-    refine key _ ?_ (by
-      have := congrArg (fun ψ ↦ Hom.app ψ ((U i).ι ⁻¹ᵁ W)) (h i)
-      exact this)
-    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
-    exact inf_eq_right.2 hW
-  ext V s
-  change φ.app V s = 0
-  refine TopCat.Sheaf.eq_of_locally_eq' ⟨N.presheaf, N.isSheaf⟩ (fun i ↦ V ⊓ U i) V
-    (fun _ ↦ homOfLE inf_le_left) (fun x hx ↦ ?_) _ 0 fun i ↦ ?_
-  · obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hU.ge (Set.mem_univ x))
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hx, hi⟩
-  · rw [map_zero]
-    have := ConcreteCategory.congr_hom
-      (φ.mapPresheaf.naturality (homOfLE (inf_le_left : V ⊓ U i ≤ V)).op) s
-    refine (this.symm.trans ?_)
-    change φ.app (V ⊓ U i) _ = 0
-    rw [h' i _ inf_le_right]
-    rfl
-
-/-- A morphism of `𝒪_X`-modules which is a monomorphism over every member of an open cover is a
-monomorphism. -/
-lemma mono_of_restrict {M N : X.Modules} (φ : M ⟶ N) {ι : Type*} (U : ι → X.Opens)
-    (hU : ⨆ i, U i = ⊤) (h : ∀ i, Mono ((restrictFunctor (U i).ι).map φ)) : Mono φ := by
-  refine Preadditive.mono_of_cancel_zero _ fun {Z} g hg ↦ ?_
-  refine hom_eq_zero_of_restrict g U hU fun i ↦ ?_
-  rw [← cancel_mono ((restrictFunctor (U i).ι).map φ), ← Functor.map_comp, hg,
-    Functor.map_zero, zero_comp]
-
-end Scheme.Modules
 
 section Koszul
 

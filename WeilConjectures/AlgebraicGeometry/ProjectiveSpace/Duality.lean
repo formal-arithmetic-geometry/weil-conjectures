@@ -27,6 +27,10 @@ Let `k` be a field, `ℙ¹_k = ProjectiveLine (Spec k)` and `ω = Ω¹_{ℙ¹_k/
 ## Main statements
 
 - `AlgebraicGeometry.ProjectiveLine.exists_exact_sigma_twist`: resolutions by twists.
+- `AlgebraicGeometry.ProjectiveLine.bijective_dualPairing_twist`: the duality pairing
+  `Hom(𝒪(a), ω) → H¹(ℙ¹, 𝒪(a))^∨` is bijective.
+- `AlgebraicGeometry.ProjectiveLine.bijective_dualPairing_of_isCoherent`: the duality pairing
+  `Hom(𝒢, ω) → H¹(ℙ¹, 𝒢)^∨` is bijective for coherent `𝒢`.
 - `AlgebraicGeometry.ProjectiveLine.nonempty_dual_H_one_iso`: `H¹(ℙ¹, 𝒢)^∨ ≅ Hom(𝒢, ω)`,
   naturally in coherent `𝒢`.
 - `AlgebraicGeometry.ProjectiveLine.nonempty_dual_H_zero_addEquiv_ext`:
@@ -278,10 +282,13 @@ theorem bijective_dualPairing_of_isCoherent (t : Module.Dual k ((ω).H 1)) (ht :
     (H.surjective_map_g (S := ShortComplex.mk (kernel.ι φ₀) φ₀ (kernel.condition φ₀)) hS 1)
 
 /-- **Duality on the projective line, `H¹`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
-isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. For `𝒢 = 𝒪(d)` both sides
-are computed by the Čech complex, `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` and the monomial pairing is perfect; for
-general `𝒢` one uses a resolution by twists (`exists_exact_sigma_twist`), the vanishing of
-`H²` and of `Ext²` on `ℙ¹_k`, and the four lemma `AddMonoidHom.bijective_of_exact_hexagon`.
+isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`.
+
+The isomorphism is the inverse of the duality pairing `φ ↦ t ∘ H¹(φ)` for a nonzero linear form
+`t` on `H¹(ℙ¹_k, Ω¹) ≅ k` (`Scheme.Modules.dualPairingH`). It is bijective on the twists
+(`bijective_dualPairing_twist`, by descending induction along the Koszul sequences and a
+dimension count), hence on finite sums of twists, hence on every coherent `𝒢` by left exactness
+of both sides and a presentation by sums of twists (`bijective_dualPairing_of_isCoherent`).
 
 (blueprint: `thm-sc-p1-duality`, first isomorphism) -/
 theorem nonempty_dual_H_one_iso :
