@@ -1066,6 +1066,7 @@ public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
+public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
