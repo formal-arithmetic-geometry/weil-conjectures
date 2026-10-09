@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
+public import WeilConjectures.AlgebraicGeometry.Seesaw
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
 # The theorem of the cube
@@ -51,6 +53,28 @@ variable {K : Type u} [Field K]
 noncomputable abbrev preimageSnd (X Y Z : Over (Spec (.of K))) (U : Z.left.Opens) :
     ((X ⊗ Y) ⊗ Z).left.Opens :=
   (snd (X ⊗ Y) Z).left ⁻¹ᵁ U
+
+instance (X Y : Over (Spec (.of K))) [IsProper X.hom] [IsProper Y.hom] :
+    IsProper (X ⊗ Y).hom :=
+  inferInstanceAs (IsProper (Limits.pullback.fst X.hom Y.hom ≫ X.hom))
+
+instance (X Y : Over (Spec (.of K))) [IsProper X.hom] [GeometricallyIntegral X.hom]
+    [IsProper Y.hom] [GeometricallyIntegral Y.hom] : GeometricallyIntegral (X ⊗ Y).hom :=
+  GeometricallyIntegral.comp_of_flat (Limits.pullback.fst X.hom Y.hom) X.hom
+
+instance (W Z : Over (Spec (.of K))) [IsProper W.hom] : IsProper (snd W Z).left :=
+  inferInstanceAs (IsProper (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) : Flat (snd W Z).left :=
+  inferInstanceAs (Flat (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) [IsProper W.hom] :
+    LocallyOfFinitePresentation (snd W Z).left :=
+  inferInstanceAs (LocallyOfFinitePresentation (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) [GeometricallyIntegral W.hom] :
+    GeometricallyIntegral (snd W Z).left :=
+  inferInstanceAs (GeometricallyIntegral (Limits.pullback.snd W.hom Z.hom))
 
 /-- Isomorphic modules stay isomorphic after pulling back along a further morphism. -/
 lemma nonempty_iso_pullback_comp {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) {M N : C.Modules}
@@ -96,12 +120,9 @@ Let `X`, `Y` be proper and geometrically integral over a field `K`, and let `M`,
 invertible modules on `X ×_K Y ×_K Z`. The set of points `t ∈ Z` such that `M` and `N` become
 isomorphic on the fibre `X ×_K Y ×_K Spec κ(t)` is closed.
 
-By Tag 0BDP, applied to `X ×_K Y ×_K Z → Z` (flat, proper, of finite presentation, with
-`𝒪_T ≅ p_* 𝒪` universally since `X ×_K Y` is proper and geometrically integral) and the
-invertible module `M ⊗ N⁻¹`, there is a locally closed subscheme `Z' ⊆ Z` through which a
-morphism `T ⟶ Z` factors if and only if `M ⊗ N⁻¹` becomes a pullback from `T`. For `T` the
-spectrum of a field this means that `M ≅ N` on the fibre, so the set is the underlying set of
-`Z'`, which is closed by Tag 0BF0 since the geometric fibres are integral. -/
+The projection `X ×_K Y ×_K Z ⟶ Z` is proper, flat, of finite presentation and has
+geometrically integral fibres, so this is the seesaw principle
+`AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber`. -/
 theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible]
@@ -111,7 +132,7 @@ theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
           (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj M ≅
         (Scheme.Modules.pullback
           (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj N)} :=
-  sorry
+  Scheme.Modules.isClosed_setOf_nonempty_iso_fiber (snd (X ⊗ Y) Z).left M N
 
 /-- If `M ≅ N` over an open `U ⊆ Z`, then `M ≅ N` on the fibre over every field-valued point
 of `U`. -/
