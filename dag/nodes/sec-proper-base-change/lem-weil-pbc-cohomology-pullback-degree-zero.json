@@ -18,9 +18,99 @@
   "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$\\epsilon$ is well defined for every K-injective resolution.* View $G$ as the complex $G[0]$ concentrated in degree $0$; a K-injective resolution $s:G\\to I^\\bullet$ [def-weil-pbc-kinjective-resolutions] is a morphism of complexes $G[0]\\to I^\\bullet$, so $d^0_I\\circ s^0=s^1\\circ d^0_{G[0]}=0$ since $G[0]^1=0$. Evaluating at the final object $T$: for $g\\in G(T)$, $s^0_T(g)\\in I^0(T)=\\Gamma(T,I^0)$ satisfies $d^0(s^0_T(g))=0$, i.e. lies in the degree-$0$ cycles of $\\Gamma(T,I^\\bullet)$, and $\\epsilon_{T,G}=\\epsilon_s$ is the composite of the homomorphism $s^0_T:G(T)\\to Z^0(\\Gamma(T,I^\\bullet))$ with the projection to $\\mathcal H^0(\\Gamma(T,I^\\bullet))=H^0(T_{\\Et},G)$ [def-weil-pbc-etale-cohomology]; it is a homomorphism of abelian groups. (No hypothesis $I^q=0$ for $q<0$ is used; we write $\\epsilon_s$ when the resolution matters.)",
+   "uses": [
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TD, proof of (3) (the map $F(A)\\to H^0(F(K^\\bullet))$ for a quasi-isomorphism $A[0]\\to K^\\bullet$); written out by the agent for K-injective resolutions"
+   }
+  },
+  {
+   "text": "*Naturality, and compatibility with the identifications (any K-injective resolutions).* Let $\\varphi:G\\to G'$ be a morphism of abelian sheaves on $T_{\\Et}$, $s:G\\to I^\\bullet$, $s':G'\\to I'^\\bullet$ K-injective resolutions, and $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ a morphism of complexes with $\\tilde\\varphi\\circ s\\simeq s'\\circ\\varphi$ as morphisms $G[0]\\to I'^\\bullet$; such lifts exist, and $H^q(\\varphi)=\\mathcal H^q(\\Gamma(T,\\tilde\\varphi))$ does not depend on the lift [lem-weil-pbc-cohomology-pullback-functorial] (statement and step 1(a),(b)). A homotopy between two morphisms $G[0]\\to I'^\\bullet$ consists of $h^n:G[0]^n\\to I'^{n-1}$; only $h^0:G\\to I'^{-1}$ can be nonzero, and the homotopy identity in degree $0$ reads $\\tilde\\varphi^0s^0-s'^0\\varphi=d^{-1}_{I'}h^0+h^1d^0_{G[0]}=d^{-1}_{I'}h^0$. Evaluating at $T$, for $g\\in G(T)$: $\\tilde\\varphi^0_T(s^0_T(g))-s'^0_T(\\varphi_T(g))=d^{-1}(h^0_T(g))$ is a coboundary of $\\Gamma(T,I'^\\bullet)$ (note: $I'^{-1}$ may be nonzero; this is the only place negative terms occur, and they only contribute coboundaries). Hence in $\\mathcal H^0(\\Gamma(T,I'^\\bullet))$: $\\mathcal H^0(\\Gamma(T,\\tilde\\varphi))(\\epsilon_s(g))=\\epsilon_{s'}(\\varphi_T(g))$, i.e. $H^0(\\varphi)\\circ\\epsilon_{T,G}=\\epsilon_{T,G'}\\circ\\varphi(T)$, the naturality of clause (1). For $G'=G$, $\\varphi=\\mathrm{id}_G$ and two K-injective resolutions $s,s'$ of $G$ this gives $\\epsilon_{s'}=H^0(\\mathrm{id}_G)\\circ\\epsilon_s$, where $H^0(\\mathrm{id}_G):\\mathcal H^0(\\Gamma(T,I^\\bullet))\\to\\mathcal H^0(\\Gamma(T,I'^\\bullet))$ is the identification of [prop-weil-pbc-cohomology-resolution-independent] ([lem-weil-pbc-cohomology-pullback-functorial], step 1(b)): $\\epsilon$ is compatible with the identifications between resolutions.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TD, proof of (3) (independence of the quasi-isomorphism $A[0]\\to K^\\bullet$); the homotopy computation is the agent's"
+   }
+  },
+  {
+   "text": "*A bounded below injective resolution, for which $\\epsilon$ is bijective.* The category $\\Ab(T_{\\Et})$ is abelian [def-weil-pbc-abelian-etale-sheaves] with enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. The functor $\\Gamma(T,-):\\Ab(T_{\\Et})\\to\\Ab$, $F\\mapsto F(T)$, is additive (the group structure of $\\Hom$ of sheaves is sectionwise) and preserves kernels, because the kernel of a morphism of abelian sheaves is computed sectionwise, $(\\ker\\psi)(T)=\\ker(\\psi_T)$ [def-pur-abelian-sheaf-kernel]; so it is left exact additive [def-sp-left-exact-additive]. By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1), $G$ has an injective resolution $s_0:G\\to I_0^\\bullet$ with $I_0^q=0$ for $q<0$ [def-sp-injective-resolutions]; it is a quasi-isomorphism $G[0]\\to I_0^\\bullet$ to a bounded below complex of injective objects, which is K-injective [lem-weil-pbc-dplus-injective-representative] (2), so $s_0$ is a K-injective resolution [def-weil-pbc-kinjective-resolutions] and computes $H^0(T_{\\Et},G)=\\mathcal H^0(\\Gamma(T,I_0^\\bullet))$. By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) for $v=\\Gamma(T,-)$, the morphism $G(T)\\to Z^0(\\Gamma(T,I_0^\\bullet))=\\mathcal H^0(\\Gamma(T,I_0^\\bullet))$ induced by $s^0_{0,T}$ (the equality because $\\Gamma(T,I_0^{-1})=0$) is an isomorphism; this morphism is $\\epsilon_{s_0}$ of step 1. (Concretely: $s_0$ identifies $G$ with the subsheaf $\\ker(d^0:I_0^0\\to I_0^1)$, and taking sections over $T$, $G(T)\\cong\\{a\\in I_0^0(T):d^0a=0\\}$, which is $\\mathcal H^0$ because there are no degree-$0$ coboundaries.)",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-pur-abelian-sheaf-kernel",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-kinjective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013K (1) (existence of injective resolutions) and Lemma Tag 05TD (3) ($F\\to R^0F$ is an isomorphism for left exact $F$)"
+   }
+  },
+  {
+   "text": "*$\\epsilon$ is bijective for every K-injective resolution.* Let $s:G\\to I^\\bullet$ be any K-injective resolution, possibly unbounded with $I^q\\neq0$ for some $q<0$ (for such a complex $\\mathcal H^0(\\Gamma(T,I^\\bullet))$ is not visibly $\\Gamma(T,\\ker d^0)$, since degree-$0$ coboundaries from $\\Gamma(T,I^{-1})$ may occur; this is why we transport). By step 2 with $\\varphi=\\mathrm{id}_G$ and the resolutions $s_0$ (step 3) and $s$: $\\epsilon_s=H^0(\\mathrm{id}_G)\\circ\\epsilon_{s_0}$. The identification $H^0(\\mathrm{id}_G)$ is bijective: if $\\tilde\\iota:I_0^\\bullet\\to I^\\bullet$ and $\\tilde\\iota':I^\\bullet\\to I_0^\\bullet$ are lifts of $\\mathrm{id}_G$ in the two directions, $\\tilde\\iota'\\tilde\\iota$ and $\\tilde\\iota\\tilde\\iota'$ are lifts of $\\mathrm{id}_G$, as are the identities, so $H^0(\\mathrm{id})\\circ H^0(\\mathrm{id})=H^0(\\mathrm{id})=\\mathrm{id}$ in both orders ([lem-weil-pbc-cohomology-pullback-functorial] step 1(b); these are the mutually inverse isomorphisms of [prop-weil-pbc-cohomology-resolution-independent]). Since $\\epsilon_{s_0}$ is bijective (step 3), so is $\\epsilon_s$. With steps 1 and 2 this proves clause (1).",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "prop-weil-pbc-cohomology-resolution-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TD, proof of (3) (the value of $R^0F$ does not depend on the quasi-isomorphism $A[0]\\to K^\\bullet$); the transport along the comparison of K-injective resolutions is the agent's"
+   }
+  },
+  {
+   "text": "*Clause (2): the degree-zero pullback map.* Let $s:G\\to I^\\bullet$ and $r:u^{-1}I^\\bullet\\to J^\\bullet$ be the K-injective resolutions defining $u^*$ [def-weil-pbc-cohomology-pullback], so that $H^0(X_{\\Et},G)$ is computed from $s$ and $H^0(Y_{\\Et},u^{-1}G)$ from the K-injective resolution $t=r\\circ u^{-1}(s):u^{-1}G\\to J^\\bullet$ (as that definition says), and in degree $0$, $u^*$ sends the class of a cycle $a\\in I^0(X)$ to the class of $r^0_Y(\\eta_{u,I^0}(X)(a))\\in J^0(Y)$, with $\\eta_{u,I^0}(X)(a)\\in(u_*u^{-1}I^0)(X)=(u^{-1}I^0)(Y)$. Take $\\epsilon_{X,G}=\\epsilon_s$ and $\\epsilon_{Y,u^{-1}G}=\\epsilon_t$ (for other choices both sides change by the identifications, by step 2 and clause 1 of [lem-weil-pbc-cohomology-pullback-functorial]). The unit $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ is a natural transformation [def-weil-pbc-inverse-image]; for the morphism $s^0:G\\to I^0$ this says $\\eta_{u,I^0}\\circ s^0=u_*u^{-1}(s^0)\\circ\\eta_{u,G}$. Evaluate at the object $X$ of $X_{\\Et}$: since $(u_*\\alpha)_X=\\alpha_{X\\times_XY}=\\alpha_Y$ for a morphism $\\alpha$ of sheaves on $Y_{\\Et}$ [def-weil-pbc-direct-image], for $g\\in G(X)$ we get $\\eta_{u,I^0}(X)(s^0_X(g))=(u^{-1}s^0)_Y(\\eta_{u,G}(X)(g))$. Applying $r^0_Y$: $u^*(\\epsilon_{X,G}(g))$ is the class of $r^0_Y(\\eta_{u,I^0}(X)(s^0_X(g)))=(r^0\\circ u^{-1}(s^0))_Y(\\eta_{u,G}(X)(g))=t^0_Y(\\eta_{u,G}(X)(g))$, which is $\\epsilon_t(\\eta_{u,G}(X)(g))$ (step 1). Hence $u^*\\circ\\epsilon_{X,G}=\\epsilon_{Y,u^{-1}G}\\circ\\eta_{u,G}(X)$.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section Tag 01F7, equation Tag 01FA (the map $H^p(X,\\mathcal F)\\to H^p(Y,f^{-1}\\mathcal F)$ from the unit $\\mathcal F\\to f_*f^{-1}\\mathcal F$); the degree-0 computation is the agent's"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-pur-abelian-sheaf-kernel",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemmas Tag 05TD (3) and Tag 013K (1) for the bounded below injective case; literature/stacks-project/cohomology.tex Tag 01FA for clause 2; the transport to arbitrary K-injective resolutions (step 2, step 4) is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +139,31 @@
    "results": "Basic.lean: H, H.equiv₀, H.map, functorH, subsingleton_H_of_isZero; Cech.lean; MayerVietoris.lean; no map of cohomology along a continuous functor / morphism of sites",
    "date": "2026-10-09",
    "verdict": "no match (pullback map of cohomology absent from Mathlib)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H^0 of a left exact functor applied to a K-injective resolution of an object is the functor applied to the object",
+   "results": "Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, rightDerivedZeroIsoSelf (Mathlib.CategoryTheory.Abelian.RightDerived), ProjectiveResolution.fromLeftDerivedZero_eq, Functor.leftDerivedZeroIsoSelf, CategoryTheory.injectiveResolutions",
+   "date": "2026-10-09",
+   "verdict": "partial: R^0F = F via ℕ-indexed injective resolutions only (used through the new leaf lem-weil-pbc-left-exact-injective-resolution-degree-zero in step 3); nothing for unbounded K-injective resolutions or for the pullback map; not a leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth cohomology of global sections of an injective resolution of a sheaf is isomorphic to the global sections of the sheaf",
+   "results": "CategoryTheory.instIsIsoToRightDerivedZero', InjectiveResolution.instIsIsoToRightDerivedZero'Self (Mathlib.CategoryTheory.Abelian.RightDerived), InjectiveResolution.self_cocomplex, InjectiveResolution.ι'_f_zero, InjectiveResolution.quasiIso",
+   "date": "2026-10-09",
+   "verdict": "partial (the bounded below case, step 3); the item is not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsKInjective' Mathlib/; grep -n 'lemma\\|def' Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; grep -n 'toRightDerivedZero\\|rightDerivedZeroIsoSelf' Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "results": "KInjective.lean (DerivedCategory): Qh_map_bijective, quasiIso_iff, bijective_toSmallShiftedHom_of_isKInjective, equivOfIsKInjective; RightDerived.lean:263 toRightDerivedZero', :357 IsIso instance, :376 rightDerivedZeroIsoSelf; no statement on H^0 of F applied to a K-injective complex, no cohomology pullback along a morphism of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match for the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "created": {
@@ -73,5 +184,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "worker": "stage1",
+  "summary": "Option (a) of the brief: clause 1 is proved for one bounded below injective resolution and transported to every K-injective resolution. Step 1: s(g) is a degree-0 cycle for any K-injective s (elementary). Step 2: for a lift phi~ of phi with phi~ s homotopic to s' phi, the homotopy G[0] -> I'^{-1} makes the difference a coboundary, giving naturality and compatibility with the identifications for arbitrary (unbounded) K-injective resolutions. Step 3: Gamma(T,-) is left exact (kernels sectionwise, def-pur-abelian-sheaf-kernel), Ab(T_et) has enough injectives; the new Mathlib leaf lem-weil-pbc-left-exact-injective-resolution-degree-zero (InjectiveResolution.of, instIsIsoToRightDerivedZero') gives an injective resolution with I^q=0 for q<0, K-injective by lem-weil-pbc-dplus-injective-representative (2), for which epsilon is bijective. Step 4: epsilon_s = H^0(id) o epsilon_{s0} with H^0(id) bijective (lem-weil-pbc-cohomology-pullback-functorial step 1(b), prop-weil-pbc-cohomology-resolution-independent). Step 5: clause 2 from the naturality of the unit at s^0 evaluated at X and u_*alpha(X)=alpha(Y), with epsilon_Y taken for r o u^{-1}s as def-weil-pbc-cohomology-pullback prescribes. Statement and stmt_deps unchanged. Mathlib searches added (three kinds): only the bounded below degree-zero fact is in Mathlib. Leaves: step 1 elementary; step 3 rests on a new Mathlib leaf; no unsplit node created. slopmaster2 has no declaration identifying Etale.cohomologyMap in degree 0 with globalSectionsUpperStarMap through Sheaf.H.equiv0."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "five steps (ε well defined for any K-injective resolution; naturality and compatibility with the identifications, negative terms contributing only coboundaries; a bounded below injective resolution with ε bijective by the new leaf (Stacks 013K/05TD); transport to any K-injective resolution; the degree-0 pullback from the naturality of the unit at s^0); 1 new Mathlib leaf verified by the lead (Injective/Resolution.lean:330, RightDerived.lean:263/357, LeftExact.lean:117, HomologicalComplex.lean:748); the generic lem-weil-pbc-module-sheaves-enough-injectives accepted as a tool use"
+ }
 }

@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+ "kind": "statement",
+ "title": "Injective resolutions exist, and a left exact functor is recovered in degree zero",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives and $\\mathcal B$ an abelian category [def-sp-abelian]. (1) Every object $X$ of $\\mathcal A$ has an injective resolution [def-sp-injective-resolutions] $s:X\\to I^\\bullet$ with $I^q=0$ for $q<0$: a complex $I^0\\xrightarrow{d^0}I^1\\xrightarrow{d^1}\\cdots$ of injective objects and a morphism $s:X\\to I^0$ with $d^0s=0$ such that $0\\to X\\xrightarrow{s}I^0\\xrightarrow{d^0}I^1\\to\\cdots$ is exact (equivalently, $s$ is a quasi-isomorphism from the complex $X[0]$ concentrated in degree $0$ to $I^\\bullet$). (2) Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive] and $s:X\\to I^\\bullet$ any injective resolution with $I^q=0$ for $q<0$. Then $v(d^0)\\circ v(s)=0$, so $v(s)$ factors through the degree-$0$ cycles $Z^0(v(I^\\bullet))=\\ker v(d^0)$, which equal $\\mathcal H^0(v(I^\\bullet))$ because $v(I^{-1})=0$; and the induced morphism $v(X)\\to\\mathcal H^0(v(I^\\bullet))$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013K (lemma-injective-resolutions-exist) part (1), for (1); Lemma Tag 05TD (lemma-left-exact-higher-derived) part (3) and its proof, for (2)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every object of an abelian category with enough injectives has an injective resolution",
+   "results": "CategoryTheory.InjectiveResolution.of, InjectiveResolution.of_def, InjectiveResolution.instHasInjectiveResolution, InjectiveResolution.instHasInjectiveResolutions (Mathlib.CategoryTheory.Abelian.Injective.Resolution), CategoryTheory.injectiveResolution",
+   "date": "2026-10-09",
+   "verdict": "match for (1): InjectiveResolution.of Z for [Abelian C] [EnoughInjectives C]"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H^0 of a left exact functor applied to a K-injective resolution of an object is the functor applied to the object",
+   "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf (Mathlib.CategoryTheory.Abelian.RightDerived), ProjectiveResolution.fromLeftDerivedZero_eq, Functor.leftDerivedZeroIsoSelf, CategoryTheory.injectiveResolutions",
+   "date": "2026-10-09",
+   "verdict": "match for (2) through the resolution-level map (see loogle); nothing for K-injective (unbounded) resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+   "results": "InjectiveResolution.toRightDerivedZero' : F.obj X ⟶ ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj P.cocomplex).cycles 0; CategoryTheory.instIsIsoToRightDerivedZero' : [F.Additive] [PreservesFiniteLimits F] (P : InjectiveResolution X) → IsIso (P.toRightDerivedZero' F); toRightDerivedZero'_comp_iCycles (… ≫ iCycles = F.map (P.ι.f 0)); toRightDerivedZero_eq (Mathlib.CategoryTheory.Abelian.RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "match for (2): the lift of F(ι^0) to the 0-cycles is an isomorphism for every injective resolution P and every additive finite-limit-preserving F"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "results": "Functor.rightDerivedZeroIsoSelf : F.rightDerived 0 ≅ F (inverse = toRightDerivedZero), with simp lemmas (Mathlib.CategoryTheory.Abelian.RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "the same fact at the level of derived functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth cohomology of global sections of an injective resolution of a sheaf is isomorphic to the global sections of the sheaf",
+   "results": "CategoryTheory.instIsIsoToRightDerivedZero', InjectiveResolution.instIsIsoToRightDerivedZero'Self (Mathlib.CategoryTheory.Abelian.RightDerived), InjectiveResolution.self_cocomplex, InjectiveResolution.quasiIso",
+   "date": "2026-10-09",
+   "verdict": "match for (2) (instIsIsoToRightDerivedZero')"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'toRightDerivedZero\\|rightDerivedZeroIsoSelf' Mathlib/CategoryTheory/Abelian/RightDerived.lean; grep -n 'irreducible_def of\\|HasInjectiveResolutions' Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; grep -rn 'abbrev isoHomologyπ₀' Mathlib/Algebra/Homology; grep -n 'preservesFiniteLimits_of_preservesKernels' Mathlib/CategoryTheory/Preadditive/LeftExact.lean",
+   "results": "RightDerived.lean:263 def InjectiveResolution.toRightDerivedZero', :357 instance IsIso (P.toRightDerivedZero' F) [PreservesFiniteLimits F], :376 rightDerivedZeroIsoSelf; Injective/Resolution.lean:330 InjectiveResolution.of, :348 instance HasInjectiveResolutions; ShortComplex/HomologicalComplex.lean:748 CochainComplex.isoHomologyπ₀ : K.cycles 0 ≅ K.homology 0; Preadditive/LeftExact.lean:117 preservesFiniteLimits_of_preservesKernels",
+   "date": "2026-10-09",
+   "verdict": "match (read at the lines given)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.instIsIsoToRightDerivedZero'",
+  "file": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "how": "one Mathlib declaration per clause: (1) CategoryTheory.InjectiveResolution.of (Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:330; InjectiveResolution Z is an ℕ-indexed cochain complex of injectives with a quasi-isomorphism ι from (single₀ C).obj Z, i.e. I^q=0 for q<0 in the ℤ-indexed picture); (2) the instance CategoryTheory.instIsIsoToRightDerivedZero' (RightDerived.lean:357) says IsIso (P.toRightDerivedZero' F), where toRightDerivedZero' (line 263) is the lift of F.map (P.ι.f 0) to the degree-0 cycles (toRightDerivedZero'_comp_iCycles), for every injective resolution P and F additive preserving finite limits; a left exact additive functor in the sense of def-sp-left-exact-additive (additive, preserves kernels) preserves finite limits by Functor.preservesFiniteLimits_of_preservesKernels (Mathlib/CategoryTheory/Preadditive/LeftExact.lean:117); cycles 0 = homology 0 for an ℕ-indexed cochain complex is CochainComplex.isoHomologyπ₀ (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:748)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
