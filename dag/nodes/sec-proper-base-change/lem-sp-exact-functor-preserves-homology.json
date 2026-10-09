@@ -1,0 +1,103 @@
+{
+ "id": "lem-sp-exact-functor-preserves-homology",
+ "kind": "statement",
+ "title": "Exact functors preserve kernels, cokernels, images, inverse images and homology",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and $\\Phi:\\mathcal A\\to\\mathcal B$ an exact functor, i.e. an additive functor carrying short exact sequences to short exact sequences, equivalently one commuting with finite limits and finite colimits (Stacks Project, Lemma 12.7.2, Tag 010N). Then:\n\n(a) $\\Phi$ carries monomorphisms to monomorphisms and epimorphisms to epimorphisms, and for $u:X\\to Y$ the map $\\Phi(\\ker u)\\to\\Phi X$ is a kernel of $\\Phi u$ and $\\Phi Y\\to\\Phi(\\operatorname{coker}u)$ is a cokernel of $\\Phi u$; in particular for a subobject $S\\subseteq X$ one has $\\Phi(X/S)\\cong\\Phi X/\\Phi S$ compatibly with the projections, and if $S\\subseteq T\\subseteq X$ then $\\Phi S\\subseteq\\Phi T$ as subobjects of $\\Phi X$ and $\\Phi(T/S)\\cong\\Phi T/\\Phi S$.\n\n(b) For $u:X\\to Y$ with image factorization $X\\twoheadrightarrow\\operatorname{im}u\\hookrightarrow Y$, the factorization $\\Phi X\\twoheadrightarrow\\Phi(\\operatorname{im}u)\\hookrightarrow\\Phi Y$ is an image factorization of $\\Phi u$: there is a unique isomorphism $\\operatorname{im}(\\Phi u)\\cong\\Phi(\\operatorname{im}u)$ compatible with the maps from $\\Phi X$ and to $\\Phi Y$, so $\\operatorname{im}(\\Phi u)=\\Phi(\\operatorname{im}u)$ as subobjects of $\\Phi Y$.\n\n(c) For a complex $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ ($vu=0$) with homology $H=\\ker v/\\operatorname{im}u$, the complex $\\Phi X\\xrightarrow{\\Phi u}\\Phi Y\\xrightarrow{\\Phi v}\\Phi Z$ has homology $\\ker\\Phi v/\\operatorname{im}\\Phi u\\cong\\Phi H$, the isomorphism being induced by $\\ker\\Phi v=\\Phi(\\ker v)$ and $\\operatorname{im}\\Phi u=\\Phi(\\operatorname{im}u)$ of (a), (b) (so compatible with the inclusion of cycles and the projection to homology) and natural in morphisms of such complexes. In particular $\\Phi$ carries exact sequences $X\\to Y\\to Z$ to exact sequences.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.7 (Additive functors), Lemma 12.7.2 (Tag 010N), whose proof shows that an exact functor commutes with kernels and, dually, cokernels; images and homology are kernels and cokernels of these. Mathlib: Algebra/Homology/ShortComplex/PreservesHomology.lean, Algebra/Homology/ShortComplex/ExactFunctor.lean, CategoryTheory/Limits/Preserves/Shapes/Images.lean."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*PreservesHomology\\|preservesHomologyOfExact\\|PreservesHomology.preservesKernel\\|PreservesHomology.preservesCokernel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Functor.preservesHomologyOfExact (line 60: [PreservesFiniteLimits F] [PreservesFiniteColimits F] gives F.PreservesHomology); PreservesHomology.preservesKernel (51), PreservesHomology.preservesCokernel (56)",
+   "date": "2026-10-09",
+   "verdict": "match for (a) and the homology of (c)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapHomologyIso\\|homologyMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; grep -n 'lemma Exact.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "results": "ShortComplex.mapHomologyIso (455: (S.map F).homology ≅ F.obj S.homology) with naturality in homologyMap (620); ShortComplex.Exact.map (Exact.lean:227)",
+   "date": "2026-10-09",
+   "verdict": "match for (c)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'PreservesImage\\|preservesImage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "CategoryTheory/Limits/Preserves/Shapes/Images.lean: PreservesImage.iso (42) image (L.map f) ≅ L.obj (image f) for a functor preserving pullbacks (cospans) and pushouts (spans), with factorThruImage_comp_hom and hom_comp_map_image_ι",
+   "date": "2026-10-09",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'preservesMonomorphisms_of_map_exact\\|preservesEpimorphisms_of_map_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Exact.lean; pullbacks: PreservesFiniteLimits gives PreservesLimit (cospan f g) (CategoryTheory/Limits/Preserves/Finite.lean)",
+   "results": "Functor.preservesMonomorphisms_of_map_exact (251), preservesEpimorphisms_of_map_exact (259); finite limits include pullbacks",
+   "date": "2026-10-09",
+   "verdict": "match for (a) monos/epis and pullbacks (not used)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor preserves homology of short complex",
+   "results": "Functor.preservesHomology_of_map_exact (CategoryTheory.Abelian.Exact), ShortComplex.Exact.map (Algebra.Homology.ShortComplex.Exact), Functor.preservesHomologyOfExact (Algebra.Homology.ShortComplex.PreservesHomology), ShortComplex.ShortExact.map",
+   "date": "2026-10-09",
+   "verdict": "match (read at PreservesHomology.lean:40-61)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreservesImage.iso",
+   "results": "PreservesImage.iso : image (L.map f) ≅ L.obj (image f), with factorThruImage_comp_hom, hom_comp_map_image_ι, inv_comp_image_ι_map (Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images), for L preserving pullbacks and pushouts",
+   "date": "2026-10-09",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "ShortComplex.mapHomologyIso : (S.map F).homology ≅ F.obj S.homology; LeftHomologyData.mapHomologyIso_eq (via the left homology data, i.e. cycles and projection); mapHomologyIso_hom_naturality (Mathlib.Algebra.Homology.ShortComplex.PreservesHomology)",
+   "date": "2026-10-09",
+   "verdict": "match for (c)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an exact functor between abelian categories transports a spectral sequence (pages and differentials) to a spectral sequence",
+   "results": "ShortComplex.ShortExact.map_of_exact, ShortComplex.Exact.map, Functor.preservesHomology_of_map_exact, Functor.exact_tfae (Algebra.Homology.ShortComplex.ExactFunctor:220: short exact preserved <-> exact preserved <-> PreservesHomology <-> finite limits and colimits)",
+   "date": "2026-10-09",
+   "verdict": "match for the hypotheses and (c)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma exact_tfae' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+   "results": "Functor.exact_tfae (220)",
+   "date": "2026-10-09",
+   "verdict": "match: the definitions of exactness agree"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.preservesHomologyOfExact",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+  "how": "specializes in one line per clause, for Φ with PreservesFiniteLimits and PreservesFiniteColimits (equivalent to preserving short exact sequences by Functor.exact_tfae, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean): (a) PreservesHomology.preservesKernel / preservesCokernel and Functor.preservesMonomorphisms_of_map_exact / preservesEpimorphisms_of_map_exact (Mathlib/CategoryTheory/Abelian/Exact.lean); (b) CategoryTheory.PreservesImage.iso with factorThruImage_comp_hom and hom_comp_map_image_ι (Mathlib/CategoryTheory/Limits/Preserves/Shapes/Images.lean); (c) ShortComplex.mapHomologyIso with LeftHomologyData.mapHomologyIso_eq and mapHomologyIso_hom_naturality, and ShortComplex.Exact.map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-exact-functor-couple",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

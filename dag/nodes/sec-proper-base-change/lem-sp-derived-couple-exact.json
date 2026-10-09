@@ -1,0 +1,71 @@
+{
+ "id": "lem-sp-derived-couple-exact",
+ "kind": "statement",
+ "title": "The derived couple of an exact couple is exact",
+ "statement": "Let $(D,E,\\alpha,f,g)$ be an exact couple in an abelian category [def-sp-exact-couple], with $d=g\\circ f:E^{p,q}\\to E^{p+2,q-1}$. Then $\\ker(d)=f^{-1}(\\ker g)=f^{-1}(\\operatorname{im}\\alpha)$ and $\\operatorname{im}(d)=g(\\operatorname{im}f)=g(\\ker\\alpha)$ (as subobjects of $E^{p,q}$); the maps $\\alpha',f',g'$ of the derived couple $(D',E',\\alpha',f',g')$ of [def-sp-exact-couple] ($D'^{p,q}=\\operatorname{im}(\\alpha:D^{p+1,q-1}\\to D^{p,q})$, $E'^{p,q}=\\ker d/\\operatorname{im}d$) are well defined, $g'$ being the unique map with $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ for the epimorphism $\\bar\\alpha:D^{p+1,q-1}\\twoheadrightarrow D'^{p,q}$, the factorization $\\hat g:D^{p+1,q-1}\\to\\ker d\\subseteq E^{p+1,q-1}$ of $g$ and the projection $\\pi:\\ker d\\to E'^{p+1,q-1}$; and the derived couple is again an exact couple, with $\\alpha'$ of bidegree $(-1,+1)$, $f'$ of bidegree $(+2,-1)$, $g'$ of bidegree $(+1,-1)$, and at every bidegree the kernel of each of its arrows equal to the image of its predecessor. Consequently the iterated couples $C_2=(D,E,\\alpha,f,g)$, $C_{r+1}=C_r'$ are exact couples for all $r\\geq2$; $C_r=(D_r,E_r,\\alpha_r,f_r,g_r)$ has $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r-2,q-r+2}\\to D^{p,q})$, $\\alpha_r$ the restriction of $\\alpha$, $f_r$ of bidegree $(+2,-1)$, $g_r$ of bidegree $(r-2,2-r)$, and $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$ with $d_r=g_r\\circ f_r$ of bidegree $(r,1-r)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.21, Lemma 12.21.2 (Tag 011R), proof omitted there; Definition 12.21.3 (Tag 011S) for the iteration; the bigraded (shift-functor) form is Remark 12.21.5 (Tag 0AMJ)."
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ExactCouple\\|exactCouple\\|exact couple\\|derivedCouple\\|DerivedCouple\\|derived couple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject; grep -rn '^structure\\|^class\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "results": "SpectralSequence (pages, differentials, iso to homology) and Abelian.SpectralObject (Cycles, Page, EpiMono, SpectralSequence.lean: the spectral sequence of a spectral object); no exact couples and no derived couple",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple in an abelian category and its derived couple spectral sequence",
+   "results": "HasDerivedCategory, IsPushout.exact_shortComplex, kernelCokernelCompSequence.snakeInput, ShortComplex.SnakeInput.L₁'_exact / L₂'_exact: nothing on exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactCouple\"",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived couple of an exact couple is again an exact couple",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₂_exact / composableArrows₅_exact (long exact homology sequence), ShortComplex.SnakeInput.L₂'_exact, exact_C₂_up/down, L₂_exact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-exact-functor-couple",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

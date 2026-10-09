@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-left-adjoint-preserves-colimits",
+ "kind": "statement",
+ "title": "Left adjoints preserve colimits",
+ "statement": "Let $L:\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal C$ be functors with an adjunction $L\\dashv R$, i.e. bijections $\\operatorname{Hom}_{\\mathcal D}(LX,Y)\\cong\\operatorname{Hom}_{\\mathcal C}(X,RY)$ natural in $X\\in\\mathcal C$ and $Y\\in\\mathcal D$. Let $I$ be a small category and $M:I\\to\\mathcal C$ a diagram having a colimit $(\\varinjlim_IM,(\\iota_i)_i)$ in $\\mathcal C$ [def-weil-pbc-category-colimit]. Then $(L(\\varinjlim_IM),(L\\iota_i)_i)$ is a colimit of $L\\circ M$ in $\\mathcal D$. In particular, when $L\\circ M$ has a chosen colimit, the canonical morphism $\\varinjlim_I(L\\circ M)\\to L(\\varinjlim_IM)$ induced by the $L\\iota_i$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 0038 (lemma-adjoint-exact, line 3472), part (1), and its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a left adjoint functor preserves all colimits",
+   "results": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits (Mathlib.CategoryTheory.Adjunction.Limits); CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint (same module); CategoryTheory.Limits.IsColimit.ofLeftAdjoint",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Adjunction.leftAdjoint_preservesColimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint functor commutes with colimits",
+   "results": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits; CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint; CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint (Mathlib.CategoryTheory.Adjunction.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n -B3 'lemma leftAdjoint_preservesColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean",
+   "results": "line 92: `include adj in /-- A left adjoint preserves colimits. -/ @[stacks 0038] lemma leftAdjoint_preservesColimits : PreservesColimitsOfSize.{v, u} F` for `adj : F ⊣ G`; the Mathlib lemma carries the Stacks tag 0038 of the source",
+   "date": "2026-10-09",
+   "verdict": "match (exact, tagged 0038)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits",
+  "file": "Mathlib/CategoryTheory/Adjunction/Limits.lean",
+  "how": "exact: for `adj : L ⊣ R`, `PreservesColimitsOfSize.{v, u} L` for every universe pair, so `isColimitOfPreserves L hc` makes the image of a colimit cocone a colimit, and `preservesColimitIso L M : L.obj (colimit M) ≅ colimit (M ⋙ L)` is the inverse of the canonical map; the lemma is tagged @[stacks 0038]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-inverse-image-preserves-colimits",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

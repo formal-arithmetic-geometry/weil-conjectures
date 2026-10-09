@@ -12,9 +12,46 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-inverse-image] the inverse image $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ is the left adjoint of the direct image $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ of [def-weil-pbc-direct-image]: there are bijections $\\operatorname{Hom}_{\\Ab(U_{\\Et})}(u^{-1}G,F)\\cong\\operatorname{Hom}_{\\Ab(V_{\\Et})}(G,u_*F)$ natural in $G\\in\\Ab(V_{\\Et})$ and $F\\in\\Ab(U_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], with unit $\\eta_u$ and counit $\\varepsilon_u$. This is an instance of the definition.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03Q0 (definition-inverse-image, line 4588): $f^{-1}:\\textit{Ab}(Y_\\etale)\\to\\textit{Ab}(X_\\etale)$ is left adjoint to $f_*$, with the bijection $\\Hom(f^{-1}\\mathcal G,\\mathcal F)=\\Hom(\\mathcal G,f_*\\mathcal F)$ functorial in both variables"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] with $\\mathcal C=\\Ab(V_{\\Et})$, $\\mathcal D=\\Ab(U_{\\Et})$, $L=u^{-1}$, $R=u_*$ (step 1) and the diagram $M=F:I\\to\\Ab(V_{\\Et})$ with its colimit $(\\varinjlim_iF_i,(\\iota_i)_i)$: the cocone $(u^{-1}(\\varinjlim_iF_i),(u^{-1}\\iota_i)_i)$ is a colimit of $i\\mapsto u^{-1}F_i$. The canonical morphism $c:\\varinjlim_iu^{-1}F_i\\to u^{-1}(\\varinjlim_iF_i)$ is by definition [def-weil-pbc-category-colimit] the unique morphism with $c\\circ\\iota'_i=u^{-1}\\iota_i$ for all $i$, $\\iota'_i$ the coprojections of the chosen colimit of $u^{-1}\\circ F$. Since the target cocone is also a colimit, its universal property gives a unique $d$ with $d\\circ u^{-1}\\iota_i=\\iota'_i$; then $d\\circ c$ and $c\\circ d$ are compatible with the coprojections, hence equal to the identities by the uniqueness clauses of the two colimits. So $c$ is an isomorphism, for every small $I$ and every $F$: $u^{-1}$ preserves all small colimits.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0038 (lemma-adjoint-exact, line 3472), part (1); applied in this form in etale-cohomology.tex, proof of Lemma 0A4B (line 18389) and proof at line 12297"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03Q0 (the adjunction $f^{-1}\\dashv f_*$ on abelian etale sheaves) with categories.tex Lemma 0038(1); the conclusion is stated in etale-cohomology.tex, proof of Lemma 0A4B, line 18389 ('The functors $g^{-1}$ and $(g')^{-1}$ commute with arbitrary colimits (as left adjoints)')"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -29,10 +66,38 @@
    "results": "`CategoryTheory.Functor.sheafPullback G A J K` (Sites/Pullback.lean:55) with the adjunction `sheafAdjunctionContinuous : G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K` (line 60) for a continuous functor of sites; `AlgebraicGeometry.Scheme.smallEtaleTopology` (Sites/Etale.lean:51); no inverse image functor between small etale sites of two schemes",
    "date": "2026-10-09",
    "verdict": "no match for the small etale sites; the general sheafPullback adjunction applies once the base-change functor $V_{\\Et}\\to U_{\\Et}$ is shown continuous, which Mathlib does not state"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of etale sheaves along a morphism of schemes preserves colimits",
+   "results": "GrothendieckTopology.Point fiber functor preserves colimits (Mathlib.CategoryTheory.Sites.Point.Basic); Functor.sheafPullbackConstruction.preservesFiniteLimits (Mathlib.CategoryTheory.Sites.Pullback); SheafedSpace colimit instances; Sheaf.createsColimitOfIsSheaf; none about an inverse image between small etale sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves on the small étale site along a morphism of schemes is left adjoint to pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction and instIsLeftAdjointPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf: O_X-modules on the Zariski site, not etale sheaves); SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous, general continuous functor of sites)",
+   "date": "2026-10-09",
+   "verdict": "no match for small etale sites; only the general continuous-functor adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change functor between small étale sites of schemes is continuous; inverse image of étale sheaves",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, smallEtalePretopology (Sites/Etale.lean); Scheme.Etale.forget; Hom.opensFunctor IsContinuous (OpenImmersion.lean); GrothendieckTopology.instIsContinuousOverMapOver (Sites/Over.lean); no continuity of a base-change functor $V.\\mathrm{Etale}\\to U.\\mathrm{Etale}$",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Etale.*IsContinuous\\|IsContinuous.*smallEtale\\|Over.pullback.*IsContinuous\\|sheafPullback.*Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only CategoryTheory/Sites/Over.lean:397 `(Over.pullback f).IsContinuous (J.over Y) (J.over X)` for the slice topologies of a big site; nothing for `MorphismProperty.Over.pullback` (CategoryTheory/MorphismProperty/OverAdjunction.lean) on `X.Etale` with `smallEtaleTopology`",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the functor `MorphismProperty.Over.pullback @Etale ⊤ u : V.Etale ⥤ U.Etale` but not its continuity for the small etale topologies, hence no `sheafPullback`/`sheafAdjunctionContinuous` instance for it; the statement is not a Mathlib leaf, it follows in two steps from the adjunction of def-weil-pbc-inverse-image and the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -48,5 +113,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-inverse-image-preserves-colimits",
+  "worker": "stage1",
+  "summary": "Statement kept. Proof in two steps following Stacks: the adjunction u^{-1} -| u_* on abelian etale sheaves is part of def-weil-pbc-inverse-image (u^{-1} is defined there as the left adjoint of u_*; Stacks etale-cohomology Definition 03Q0), and left adjoints preserve colimits (Stacks 0038(1)), a new Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits matching CategoryTheory.Adjunction.leftAdjoint_preservesColimits (tagged @[stacks 0038]); the identification of the canonical map with an isomorphism is written out. Not a Mathlib leaf itself: Mathlib has the base-change functor MorphismProperty.Over.pullback on X.Etale but not its continuity for smallEtaleTopology, so no sheaf pullback/adjunction between small etale sites. Three kinds of search recorded (LeanSearch, LeanFinder, grep; Loogle was rate-limited throughout). Source field kept; step 1 cites Definition 03Q0 for the adjunction, and the 0A4B citation (line 18389) was verified."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
