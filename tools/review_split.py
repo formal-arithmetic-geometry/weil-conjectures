@@ -91,7 +91,8 @@ def main() -> int:
             for k in ("kind", "statement", "source", "title"):
                 if not n.get(k):
                     errs.append(f"new node {i}: no {k}")
-            if head_version(files[i]) is not None:
+            hv_new = head_version(files[i])
+            if hv_new is not None and (hv_new.get("created") or {}).get("item") != item:
                 errs.append(f"new node {i}: a committed node already had this id")
             ms = n.get("mathlib_searches") or []
             if not ms or not all(isinstance(m, dict) and m.get("query") and m.get("verdict") for m in ms):
