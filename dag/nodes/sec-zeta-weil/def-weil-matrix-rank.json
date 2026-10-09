@@ -1,0 +1,47 @@
+{
+ "id": "def-weil-matrix-rank",
+ "kind": "definition",
+ "title": "Rank of a finite matrix over a field",
+ "statement": "Let $K$ be a field [def-weil-field], $m,n\\in\\mathbf Z_{\\geq0}$, and $A=(a_{ij})$ an $m\\times n$ matrix with entries in $K$ [def-weil-matrix]. The rank of $A$ is the dimension [def-weil-vector-space-dimension] of the $K$-linear span in $K^n$ of its $m$ rows. It equals the dimension of the span in $K^m$ of its $n$ columns, and it is the largest $k$ such that some $k\\times k$ square submatrix of $A$ has nonzero determinant.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-hankel-matrix.md",
+  "place": "node def-weil-hankel-matrix, order 2863 (notion used in the statement)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def rank\\|rank_eq_finrank_span_row\\|rank_eq_finrank_span_cols' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360)/LinearAlgebra/Matrix/Rank.lean",
+   "results": "Mathlib/LinearAlgebra/Matrix/Rank.lean:134 `noncomputable def Matrix.rank [CommSemiring R] (A : Matrix m n R) : ℕ := finrank R (LinearMap.range A.mulVecLin)` (with `[Fintype n]`); :398 `Matrix.rank_eq_finrank_span_cols`; :569 `Matrix.rank_eq_finrank_span_row [Field R] [Finite m] : A.rank = finrank R (span R (range A.row))`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.rank",
+  "file": "Mathlib/LinearAlgebra/Matrix/Rank.lean",
+  "how": "specializes in one line: for `A : Matrix (Fin m) (Fin n) K`, `A.rank = finrank K (span K (range A.row))` is `Matrix.rank_eq_finrank_span_row`, which is the row-span definition of this node"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-hankel-matrix",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
