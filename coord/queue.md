@@ -1,33 +1,23 @@
 # Work queue
 
-805 items; claim with `tools/claim.py next <group> [--stage N]`.
+808 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (665)
+## Stage 1: nodes to split (661)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1009 | none |
-| `lem-weil-pbc-z-g-ring` | 1009 | none |
+| `lem-weil-pbc-dvr-completion-regular` | 1010 | none |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
 | `lem-weil-pbc-regular-composition` | 1010 | none |
+| `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
-| `lem-weil-pbc-closed-immersion-unit-quotient` | 1011 | none |
-| `lem-weil-pbc-closed-pushforward-stalks` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
-| `lem-weil-pbc-coherent-twist-global-generation` | 1011 | none |
-| `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-filtered-colimit-flat-modules` | 1011 | none |
-| `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1011 | none |
-| `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1011 | none |
-| `lem-weil-pbc-finite-over-complete-ring` | 1011 | none |
-| `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1011 | none |
-| `lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated` | 1011 | none |
 | `lem-weil-pbc-flat-fp-qf-stratification` | 1011 | none |
 | `lem-weil-pbc-flat-module-powers` | 1011 | none |
 | `lem-weil-pbc-flat-over-regular` | 1011 | none |
-| `lem-weil-pbc-flat-permanence` | 1011 | none |
 | `lem-weil-pbc-flat-surjective-spectrum-faithfully-flat` | 1011 | none |
 | `lem-weil-pbc-formal-completion-exact` | 1011 | none |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1011 | none |
@@ -129,16 +119,22 @@
 | `lem-weil-pbc-unramified-quasi-finite-at-points` | 1011 | none |
 | `lem-weil-pbc-vanishing-projective` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
+| `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
+| `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
+| `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
+| `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
+| `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
+| `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
@@ -672,7 +668,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (140)
+## Stage 2: nodes to state (147)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -714,6 +710,7 @@
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
+| `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-multiple-points` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-multiple-points-elementary` | 1 | state |
 | `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
@@ -733,11 +730,16 @@
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
+| `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
+| `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
+| `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-geometric-point-lift` | 1 | state |
+| `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
+| `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
@@ -746,6 +748,7 @@
 | `lem-weil-pbc-flat-iso-mod-ideal-powers` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
+| `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
@@ -817,7 +820,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 677 nodes that wait for stage 1, 425 nodes that wait for a statement dependency.
+Not open yet: 673 nodes that wait for stage 1, 430 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
