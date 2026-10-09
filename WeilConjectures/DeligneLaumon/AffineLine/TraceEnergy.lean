@@ -17,6 +17,7 @@ public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
