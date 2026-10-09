@@ -348,4 +348,111 @@ theorem exists_forall_mem_compl_support_zeroLocus [IsLocallyNoetherian X] (S : F
 
 end Ample
 
+section Polynomial
+
+variable (K : Type u) [Field K] [X.Over (Spec (.of K))] [IsProper (X ↘ Spec (.of K))]
+  {ℒ : X.Modules}
+
+/-- **The Hilbert polynomial of a coherent module.** Let `X` be proper over a field `K`, `ℒ` an
+ample invertible module and `ℱ` a coherent module vanishing on an open `U` whose complement `Z` has
+dimension `< d`. Then `n ↦ χ(X, ℱ ⊗ ℒ^{⊗ n})` is given by a polynomial of degree `< d`.
+
+By induction on `d`. If `d = 0` then `Z` is empty, so `ℱ = 0`. Otherwise, prime avoidance
+(`AlgebraicGeometry.Scheme.Modules.exists_forall_mem_compl_support_zeroLocus`) gives sections `s`
+of `ℒ^{⊗ a}` and of `ℒ^{⊗ (a + 1)}` not vanishing at the generic points of the irreducible
+components of `Z`. The kernel and cokernel of `ℱ ⟶ ℱ ⊗ ℒ^{⊗ b}` given by `s` vanish outside
+`Z ∩ V(s)`, which has dimension `< d - 1`, so by induction and
+`AlgebraicGeometry.Scheme.Modules.eulerChar_tensorObj_sub_eulerChar_tensorObj_eq` the differences
+`χ(ℱ ⊗ ℒ^{⊗ (n + b)}) - χ(ℱ ⊗ ℒ^{⊗ n})` are polynomials of degree `< d - 1` for `b = a, a + 1`;
+hence so is `χ(ℱ ⊗ ℒ^{⊗ (n + 1)}) - χ(ℱ ⊗ ℒ^{⊗ n})`. -/
+theorem exists_polynomial_eulerChar_tensorObj_tensorPow (hℒ : IsAmple (X ↘ Spec (.of K)) ℒ)
+    (d : ℕ) (U : X.Opens) (hU : topologicalKrullDim ((U : Set X)ᶜ : Set X) < d)
+    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ]
+    (hℱ : IsZero (ℱ.restrict U.ι)) :
+    ∃ P : Polynomial ℚ, P.degree < d ∧
+      ∀ n : ℕ, P.eval (n : ℚ) = (ℱ ⊗ ℒ.tensorPow n).eulerChar K := by
+  have := hℒ.isInvertible
+  have := isNoetherian_of_isProper K (X := X)
+  induction d generalizing U ℱ with
+  | zero =>
+    have hUe : ((U : Set X)ᶜ : Set X) = ∅ := by
+      by_contra h
+      obtain ⟨z, hz⟩ := Set.nonempty_iff_ne_empty.mpr h
+      have : Nonempty (IrreducibleCloseds ((U : Set X)ᶜ : Set X)) :=
+        ⟨⟨closure {⟨z, hz⟩}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+      exact (not_lt.mpr (Order.krullDim_nonneg (α := IrreducibleCloseds ((U : Set X)ᶜ : Set X))))
+        (by exact_mod_cast hU)
+    have hUt : U = ⊤ := by
+      ext x
+      simpa using fun h ↦ (Set.eq_empty_iff_forall_notMem.mp hUe x h)
+    subst hUt
+    have hℱ' : IsZero ℱ := isZero_of_isZero_restrict_top hℱ
+    refine ⟨0, by simp, fun n ↦ ?_⟩
+    have := isEquivalence_tensorRight (ℒ.tensorPow n)
+    have h₀ : IsZero (ℱ ⊗ ℒ.tensorPow n) := (tensorRight (ℒ.tensorPow n)).map_isZero hℱ'
+    rw [eulerChar_eq_zero_of_isZero K h₀]
+    simp
+  | succ d ih =>
+    have hUd : topologicalKrullDim ((U : Set X)ᶜ : Set X) < d + 1 := by exact_mod_cast hU
+    have hZ : IsClosed ((U : Set X)ᶜ) := U.isOpen.isClosed_compl
+    let S := hZ.finite_setOf_maximal_specializes.toFinset
+    have hS : ∀ x ∈ S, ∀ y ∈ S, x ⤳ y → x = y := fun x hx y hy hxy ↦ by
+      simp only [S, Set.Finite.mem_toFinset] at hx hy
+      exact hy.2 x hx.1 hxy
+    obtain ⟨n₀, hn₀⟩ := exists_forall_mem_compl_support_zeroLocus (X ↘ Spec (.of K)) hℒ S hS
+    have step (b : ℕ) (hb : n₀ ≤ b) : ∃ Q : Polynomial ℚ, Q.degree < d ∧ ∀ n : ℕ,
+        ((ℱ ⊗ ℒ.tensorPow (n + b)).eulerChar K : ℚ) - (ℱ ⊗ ℒ.tensorPow n).eulerChar K =
+          Q.eval (n : ℚ) := by
+      obtain ⟨s, hs⟩ := hn₀ b hb
+      have : SheafOfModules.IsInvertible.{u, u, u} (ℒ.tensorPow b) :=
+        IsInvertible.sheafOfModules_isInvertible _
+      let φ : ℱ ⟶ ℱ ⊗ ℒ.tensorPow b := (ρ_ ℱ).inv ≫ ℱ ◁ s
+      let V : X.Opens := (Hom.zeroLocus s).support.compl
+      have hU' : topologicalKrullDim (((U ⊔ V : X.Opens) : Set X)ᶜ : Set X) < d := by
+        refine topologicalKrullDim_lt_of_forall_exists_specializes hZ
+          (U ⊔ V).isOpen.isClosed_compl
+          (Set.compl_subset_compl.mpr (le_sup_left : U ≤ U ⊔ V)) (fun w hw ↦ ?_) hUd
+        have hwU : w ∈ ((U : Set X)ᶜ : Set X) := fun h ↦ hw (Or.inl h)
+        obtain ⟨η, hηZ, hη, hηw⟩ := hZ.exists_maximal_specializes hwU
+        have hηS : η ∈ S := by
+          simp only [S, Set.Finite.mem_toFinset]
+          exact ⟨hηZ, hη⟩
+        exact ⟨η, hηZ, hηw, fun h ↦ h (Or.inr (hs η hηS))⟩
+      have hiso : IsIso ((restrictFunctor V.ι).map φ) := by
+        have := isIso_restrictFunctor_map_of_le s (U := V) le_rfl
+        have := isIso_restrictFunctor_map_whiskerLeft s ℱ (U := V)
+        rw [Functor.map_comp]
+        infer_instance
+      have hK : IsZero ((kernel φ).restrict (U ⊔ V).ι) :=
+        isZero_restrict_sup (isZero_restrict_kernel_of_isZero φ _ hℱ)
+          (isZero_restrict_kernel_of_isIso φ _)
+      have hC : IsZero ((cokernel φ).restrict (U ⊔ V).ι) :=
+        isZero_restrict_sup (isZero_restrict_cokernel_of_isZero φ _
+          (isZero_restrict_tensorObj _ hℱ)) (isZero_restrict_cokernel_of_isIso φ _)
+      have := isQuasicoherent_tensorObj ℱ (ℒ.tensorPow b)
+      have := isFinitePresentation_tensorObj ℱ (ℒ.tensorPow b)
+      have := isQuasicoherent_kernel φ
+      have := isFinitePresentation_kernel φ
+      have := isQuasicoherent_cokernel φ
+      have := isFinitePresentation_cokernel φ
+      obtain ⟨PK, hPK, hPK'⟩ := ih (U ⊔ V) hU' (kernel φ) hK
+      obtain ⟨PC, hPC, hPC'⟩ := ih (U ⊔ V) hU' (cokernel φ) hC
+      refine ⟨PC - PK, (Polynomial.degree_sub_le _ _).trans_lt (max_lt hPC hPK), fun n ↦ ?_⟩
+      have h := eulerChar_tensorObj_sub_eulerChar_tensorObj_eq K φ (ℒ.tensorPow n)
+      have e : (ℱ ⊗ ℒ.tensorPow b) ⊗ ℒ.tensorPow n ≅ ℱ ⊗ ℒ.tensorPow (n + b) :=
+        α_ _ _ _ ≪≫ (Iso.refl ℱ ⊗ᵢ ((ℒ.tensorPowAddIso b n).symm ≪≫
+          eqToIso (congrArg ℒ.tensorPow (Nat.add_comm b n))))
+      rw [eulerChar_congr K e] at h
+      rw [Polynomial.eval_sub, hPK', hPC']
+      exact_mod_cast h
+    obtain ⟨A, hA, hA'⟩ := step n₀ le_rfl
+    obtain ⟨B, hB, hB'⟩ := step (n₀ + 1) (Nat.le_succ _)
+    obtain ⟨P, hP, hP'⟩ := Polynomial.exists_degree_lt_eval_eq_of_sub_of_sub
+      (f := fun n ↦ ((ℱ ⊗ ℒ.tensorPow n).eulerChar K : ℚ)) hA hB
+      (fun n ↦ (hA' n).trans rfl) (fun n ↦ (hB' n).trans rfl)
+    exact ⟨P, by exact_mod_cast hP, fun n ↦ hP' n⟩
+
+end Polynomial
+
 end AlgebraicGeometry.Scheme.Modules
