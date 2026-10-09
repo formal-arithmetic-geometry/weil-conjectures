@@ -2,7 +2,7 @@
 
 600 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (554)
+## Stage 1: nodes to split (553)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
-| `lem-weil-pbc-complete-pair-henselian` | 1008 | none |
 | `lem-weil-pbc-constructible-field-finite-separable-constant` | 1008 | none |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1008 | none |
 | `lem-weil-pbc-constructible-module-limit-descent` | 1008 | none |
@@ -34,9 +33,9 @@
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
+| `lem-weil-pbc-henselian-factorization-criterion` | 1009 | none |
+| `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
-| `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
-| `lem-weil-pbc-site-ses-cech-h1-surjective` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lem-weil-pbc-thickening-integral` | 1009 | none |
 | `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
@@ -561,7 +560,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (46)
+## Stage 2: nodes to state (47)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -601,6 +600,7 @@
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
+| `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
@@ -612,7 +612,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 565 nodes that wait for stage 1, 231 nodes that wait for a statement dependency.
+Not open yet: 564 nodes that wait for stage 1, 233 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
