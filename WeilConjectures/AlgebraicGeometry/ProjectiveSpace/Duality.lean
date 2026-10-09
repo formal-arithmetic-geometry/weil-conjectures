@@ -6,7 +6,11 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.ExactSequence
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
@@ -39,11 +43,28 @@ internal hom, so that it is a functor to `k`-vector spaces.
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite MonoidalCategory
 
 open scoped AlgebraicGeometry.ProjectiveSpace
 
 namespace AlgebraicGeometry
+
+open Scheme.Modules
+
+namespace ProjectiveSpace
+
+variable (n : Type u) (S : Scheme.{u})
+
+/-- **The dual of a twist.** `𝒪(a)ᵛ ≅ 𝒪(-a)` on `ℙ(n; S)`: both are tensor inverses of the
+invertible module `𝒪(a)`. -/
+theorem nonempty_dual_twist_iso (a : ℤ) : Nonempty ((twist n S a)ᵛ ≅ twist n S (-a)) := by
+  obtain ⟨e⟩ := nonempty_tensorObj_twist_iso n S (-a) a
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit (twist n S a)
+  let e' : twist n S (-a) ⊗ twist n S a ≅ 𝟙_ _ :=
+    e ≪≫ eqToIso (by rw [neg_add_cancel]) ≪≫ (unitIsoTwistZero n S).symm
+  exact ⟨(λ_ _).symm ≪≫ whiskerRightIso e'.symm _ ≪≫ α_ _ _ _ ≪≫ whiskerLeftIso _ d ≪≫ ρ_ _⟩
+
+end ProjectiveSpace
 
 namespace ProjectiveLine
 
@@ -67,6 +88,77 @@ theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules
       (f₀ : ∐ (fun j ↦ 𝒪 (d₀ j)) ⟶ 𝒢),
       Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact :=
   sorry
+
+/-- `Hom(𝒪(a), Ω¹_{ℙ¹_k/k}) ≅ 𝒪(-a - 2)`, since `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` is invertible and
+`𝒪(a)ᵛ ≅ 𝒪(-a)`. -/
+theorem nonempty_homObj_twist_iso (a : ℤ) :
+    Nonempty (homObj (ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) a)
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
+      ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-a + -2)) := by
+  obtain ⟨eω⟩ := nonempty_relativeDifferentials_iso_twist k
+  have : (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials.IsInvertible :=
+    IsInvertible.of_iso eω.symm
+  obtain ⟨ed⟩ := ProjectiveSpace.nonempty_dual_twist_iso (ULift.{u} (Fin 2)) (Spec (.of k)) a
+  obtain ⟨et⟩ := ProjectiveSpace.nonempty_tensorObj_twist_iso (ULift.{u} (Fin 2)) (Spec (.of k))
+    (-a) (-2)
+  exact ⟨(asIso (dualTensorHom _ _)).symm ≪≫ (ed ⊗ᵢ eω) ≪≫ et⟩
+
+local notation3 "𝒪(" a ")" => ProjectiveSpace.twist (ULift (Fin 2)) (Spec (CommRingCat.of k)) a
+
+local notation3 "ω" =>
+  Scheme.Hom.relativeDifferentials (ProjectiveLine (Spec (CommRingCat.of k)) ↘
+    Spec (CommRingCat.of k))
+
+lemma finiteDimensional_homogeneousSubmodule (d : ℕ) :
+    FiniteDimensional k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k d) :=
+  Module.Finite.iff_fg.2 (MvPolynomial.homogeneousSubmodule_fg _ _ d)
+
+lemma finrank_homogeneousSubmodule_zero :
+    Module.finrank k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k 0) = 1 := by
+  rw [Module.finrank_eq_nat_card_basis (ProjectiveSpace.homogeneousSubmoduleBasis _ k 0)]
+  have : Unique {s : ULift.{u} (Fin 2) →₀ ℕ | s.degree = 0} :=
+    ⟨⟨⟨0, by simp⟩⟩, fun s ↦ Subtype.ext ((Finsupp.degree_eq_zero_iff _).1 s.2)⟩
+  exact Nat.card_unique
+
+lemma finiteDimensional_H_zero_twist (b : ℤ) : FiniteDimensional k ((𝒪(b)).H 0) := by
+  rcases lt_or_ge b 0 with hb | hb
+  · have := subsingleton_H_zero_twist_of_neg k b hb
+    infer_instance
+  · rw [← Int.toNat_of_nonneg hb]
+    obtain ⟨e⟩ := nonempty_H_zero_twist_equiv k b.toNat
+    have := finiteDimensional_homogeneousSubmodule k b.toNat
+    exact e.symm.finiteDimensional
+
+lemma finiteDimensional_H_one_twist (a : ℤ) : FiniteDimensional k ((𝒪(a)).H 1) := by
+  rcases lt_or_ge a (-1) with ha | ha
+  · obtain ⟨e⟩ := nonempty_H_one_twist_equiv_dual k a (by omega)
+    have := finiteDimensional_homogeneousSubmodule k (-a - 2).toNat
+    exact e.symm.finiteDimensional
+  · have := subsingleton_H_one_twist k a ha
+    infer_instance
+
+/-- `H⁰(ℙ¹_k, Hom(𝒪(a), Ω¹)) ≅ H⁰(ℙ¹_k, 𝒪(-a - 2))`. -/
+noncomputable def homObjTwistHZeroLinearEquiv (a : ℤ) :
+    H (homObj (𝒪(a)) ω) 0 ≃ₗ[k] (𝒪(-a + -2)).H 0 :=
+  ((cohomologyFunctor k 0).mapIso (nonempty_homObj_twist_iso k a).some).toLinearEquiv
+
+/-- **The dimension count for the twists.** `H⁰(ℙ¹_k, Hom(𝒪(a), Ω¹))` and `H¹(ℙ¹_k, 𝒪(a))^∨`
+have the same dimension, `max(0, -a - 1)`. -/
+lemma finrank_H_zero_homObj_twist (a : ℤ) :
+    Module.finrank k (H (homObj (𝒪(a)) ω) 0) = Module.finrank k (Module.Dual k ((𝒪(a)).H 1)) := by
+  have := finiteDimensional_H_one_twist k a
+  rw [(homObjTwistHZeroLinearEquiv k a).finrank_eq, Subspace.dual_finrank_eq]
+  rcases lt_or_ge a (-1) with ha | ha
+  · obtain ⟨e⟩ := nonempty_H_one_twist_equiv_dual k a (by omega)
+    have := finiteDimensional_homogeneousSubmodule k (-a - 2).toNat
+    rw [e.finrank_eq, Subspace.dual_finrank_eq]
+    have hb : -a + -2 = (((-a - 2).toNat : ℕ) : ℤ) := by omega
+    rw [hb]
+    obtain ⟨e'⟩ := nonempty_H_zero_twist_equiv k (-a - 2).toNat
+    exact e'.finrank_eq
+  · have := subsingleton_H_one_twist k a ha
+    have := subsingleton_H_zero_twist_of_neg k (-a + -2) (by omega)
+    rw [Module.finrank_zero_of_subsingleton, Module.finrank_zero_of_subsingleton]
 
 /-- **Duality on the projective line, `H¹`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
 isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. For `𝒢 = 𝒪(d)` both sides
