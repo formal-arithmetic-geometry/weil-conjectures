@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-quasi-coherent-finite-type-affine",
  "kind": "statement",
  "title": "Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC)",
- "statement": "Let $X$ be a scheme [def-pc-scheme]. (0) Every $\\mathcal O_X$-module of finite presentation (defined below) is quasi-coherent. Now let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Let $U\\subseteq X$ be an affine open and $R=\\mathcal O_X(U)$. Then (a) $\\mathcal F|_U$ is of finite type [pqf-def-coherent] if and only if $\\mathcal F(U)$ is a finitely generated $R$-module; (b) $\\mathcal F|_U$ is of finite presentation if and only if $\\mathcal F(U)$ is a finitely presented $R$-module. Consequently (c) if $X=\\bigcup_jU_j$ is an affine open covering with $\\mathcal F(U_j)$ finitely generated over $\\mathcal O_X(U_j)$ for all $j$, then $\\mathcal F$ is of finite type and $\\mathcal F(U)$ is a finitely generated $\\mathcal O_X(U)$-module for every affine open $U\\subseteq X$; and if $\\mathcal F$ is of finite presentation then $\\mathcal F(U)$ is a finitely presented $\\mathcal O_X(U)$-module for every affine open $U$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. (0) Every $\\mathcal O_X$-module of finite presentation (defined below) is quasi-coherent. Now let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Let $U\\subseteq X$ be an affine open and $R=\\mathcal O_X(U)$. Then (a) $\\mathcal F|_U$ is of finite type [pqf-def-coherent] if and only if $\\mathcal F(U)$ is a finitely generated $R$-module; (b) $\\mathcal F|_U$ is of finite presentation if and only if $\\mathcal F(U)$ is a finitely presented $R$-module (one isomorphic to $R^{n}/K$ for some $n\\ge0$ and some finitely generated submodule $K\\subseteq R^n$, equivalently the cokernel of an $R$-linear map $R^m\\to R^n$). Consequently (c) if $X=\\bigcup_jU_j$ is an affine open covering with $\\mathcal F(U_j)$ finitely generated over $\\mathcal O_X(U_j)$ for all $j$, then $\\mathcal F$ is of finite type and $\\mathcal F(U)$ is a finitely generated $\\mathcal O_X(U)$-module for every affine open $U\\subseteq X$; and if $\\mathcal F$ is of finite presentation then $\\mathcal F(U)$ is a finitely presented $\\mathcal O_X(U)$-module for every affine open $U$.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Modules, Lemma 01BO (lemma-finite-presentation-quasi-coherent, modules.tex line 1421) for (0); Properties, Lemma 01PB (lemma-finite-type-module, line 2093) and Lemma 01PC (lemma-finite-presentation-module, line 2113); (c) because finite type and finite presentation are local properties (Modules, Definitions 01B5 and 01BN)"
@@ -10,11 +10,155 @@
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (setup on an affine open; maps out of free modules).* Let $U\\subseteq X$ be an affine open and $R=\\mathcal O_X(U)$. Since $U$ is an affine scheme [def-pc-scheme] and $\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$ [def-weil-affine-spectrum], there is an isomorphism $\\operatorname{Spec}R\\cong U$ inducing the identity on global sections, and composing with the inclusion an open immersion $g:X_U:=\\operatorname{Spec}R\\to X$ with image $U$. For an $\\mathcal O_X$-module $\\mathcal G$, the restriction $\\mathcal G|_{X_U}$ along $g$ is $\\mathcal G|_U$ transported along $X_U\\cong U$, with $\\Gamma(X_U,\\mathcal G|_{X_U})=\\mathcal G(U)$ as $R$-modules, and it is quasi-coherent if $\\mathcal G$ is [lem-weil-pbc-module-restriction-open-immersion-colimits](2); being of finite type or of finite presentation is invariant under isomorphisms of ringed spaces and of modules, so these properties of $\\mathcal G|_U$ and of $\\mathcal G|_{X_U}$ agree. By [lem-weil-pbc-spec-tilde-free-module], transported along $g$, $\\mathcal O_U^{\\oplus n}$ is quasi-coherent with $\\Gamma(U,\\mathcal O_U^{\\oplus n})=R^n$, the basis sections $e_i$ being the standard basis. For any open $W$ and any $\\mathcal O_W$-module $\\mathcal G$, an $\\mathcal O_W$-linear $\\varphi:\\mathcal O_W^{\\oplus n}\\to\\mathcal G$ is determined by the sections $s_i=\\varphi_W(e_i)\\in\\mathcal G(W)$, since on $V\\subseteq W$ every section of $\\mathcal O_W^{\\oplus n}$ is $\\sum_if_ie_i|_V$ and $\\varphi_V(\\sum f_ie_i|_V)=\\sum_if_is_i|_V$ by linearity and compatibility with restriction; conversely every $(s_1,\\dots,s_n)$ defines such a $\\varphi_s$ by this formula [def-weil-sheaf-of-modules-category]. On $W$-sections $\\varphi_{s,W}$ is the map $\\mathcal O(W)^n\\to\\mathcal G(W)$, $e_i\\mapsto s_i$, and $\\varphi_s$ is surjective as a map of sheaves exactly when $s_1,\\dots,s_n$ generate $\\mathcal G$ [def-weil-pbc-generating-sections]. So $\\mathcal G$ is of finite type [pqf-def-coherent] iff every point has an open neighbourhood $W$ such that $\\mathcal G|_W$ is generated by finitely many sections over $W$ (this is how Stacks reads Definition 01B5).",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-generating-sections",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Definition 01B5 and the paragraph after it; Properties, Section 'Characterizing modules of finite type and finite presentation' (the identification of an affine open with Spec of its sections)"
+   }
+  },
+  {
+   "text": "*Step 2 (two facts on an affine open).* Let $U$, $R$, $g$ be as in Step 1. (i) A morphism $\\alpha:\\mathcal G\\to\\mathcal G'$ of quasi-coherent $\\mathcal O_U$-modules such that $\\alpha_U:\\mathcal G(U)\\to\\mathcal G'(U)$ is bijective is an isomorphism. Indeed, transported to $X_U=\\operatorname{Spec}R$, the counits $\\varepsilon_{\\mathcal G}:\\widetilde{\\mathcal G(U)}\\to\\mathcal G$ and $\\varepsilon_{\\mathcal G'}$ are isomorphisms [lem-weil-pbc-affine-tilde-gamma-adjunction](3) and natural, $\\alpha\\circ\\varepsilon_{\\mathcal G}=\\varepsilon_{\\mathcal G'}\\circ\\widetilde{\\alpha_U}$ (naturality of the adjunction (1)); $\\widetilde{\\alpha_U}$ is an isomorphism since $\\alpha_U$ is and $M\\mapsto\\widetilde M$ is a functor; hence $\\alpha=\\varepsilon_{\\mathcal G'}\\widetilde{\\alpha_U}\\varepsilon_{\\mathcal G}^{-1}$ is an isomorphism. (ii) In particular (take $\\mathcal G'=0$) a quasi-coherent $\\mathcal O_U$-module with $\\mathcal G(U)=0$ is zero. (Stacks: Schemes 01IB, quasi-coherent modules on $\\operatorname{Spec}R$ are equivalent to $R$-modules via $\\Gamma$.)",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IB (lemma-equivalence-quasi-coherent) and Lemma 01IA (lemma-quasi-coherent-affine)"
+   }
+  },
+  {
+   "text": "*Step 3 (generation by sections over an affine open).* Let $\\mathcal G$ be a quasi-coherent $\\mathcal O_X$-module, $U\\subseteq X$ an affine open, $R=\\mathcal O_X(U)$ and $s_1,\\dots,s_n\\in\\mathcal G(U)$. Then $s_1,\\dots,s_n$ generate $\\mathcal G|_U$ [def-weil-pbc-generating-sections] if and only if $\\mathcal G(U)=\\sum_iRs_i$. Proof: let $\\varphi=\\varphi_s:\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ (Step 1), a morphism of quasi-coherent $\\mathcal O_U$-modules (Step 1 for both), with $\\varphi_U(R^n)=\\sum_iRs_i$. Apply [lem-weil-pbc-quasi-coherent-module-cokernel-image] to the scheme $U$ and $\\varphi$: with $q:\\mathcal G|_U\\to\\operatorname{Coker}\\varphi$, (1) $\\operatorname{Im}\\varphi=\\ker q$, (2) $\\operatorname{Coker}\\varphi$ is quasi-coherent, (3) for the affine open $U$: $(\\operatorname{Im}\\varphi)(U)=\\varphi_U(R^n)$ and $(\\operatorname{Coker}\\varphi)(U)=\\mathcal G(U)/\\varphi_U(R^n)$. If the $s_i$ generate, $\\varphi$ is surjective, i.e. $\\operatorname{Im}\\varphi=\\mathcal G|_U$, so $\\mathcal G(U)=(\\operatorname{Im}\\varphi)(U)=\\sum_iRs_i$ by (3). Conversely if $\\mathcal G(U)=\\sum_iRs_i$ then $(\\operatorname{Coker}\\varphi)(U)=0$, so $\\operatorname{Coker}\\varphi=0$ by Step 2(ii) and (2); then $q=0$, $\\operatorname{Im}\\varphi=\\ker q=\\mathcal G|_U$ by (1), i.e. $\\varphi$ is surjective and the $s_i$ generate. (This is the step 'Thus $M_{f_i}$ is finitely generated' of Stacks 01PB and the converse that Stacks leaves implicit; the finiteness half is the sorry-free slopmaster2 declaration AlgebraicGeometry.Scheme.Modules.finite_sections_top_of_isIso_fromTildeΓ.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 01PB (lemma-finite-type-module), sentence 'Thus M_{f_i} is finitely generated for each i'; Schemes, Lemma 01IC (lemma-kernel-cokernel-quasi-coherent)"
+   }
+  },
+  {
+   "text": "*Step 4 (part (0): finite presentation implies quasi-coherent).* Let $\\mathcal G$ be an $\\mathcal O_X$-module of finite presentation and $x\\in X$. Choose an open $W\\ni x$ and an exact sequence $\\mathcal O_W^{\\oplus m}\\xrightarrow{\\chi}\\mathcal O_W^{\\oplus n}\\xrightarrow{\\pi}\\mathcal G|_W\\to0$, and an affine open $V$ with $x\\in V\\subseteq W$ (the open subscheme $W$ is a scheme, so $x$ has an affine open neighbourhood in it [def-pc-scheme]). Restriction to the open $V$ preserves colimits, in particular cokernels [lem-weil-pbc-module-restriction-open-immersion-colimits](1) (a cokernel is a colimit [def-weil-pbc-category-colimit]), so $\\mathcal G|_V\\cong\\operatorname{Coker}(\\chi|_V)$, where $\\chi|_V:\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}$ is a morphism of quasi-coherent $\\mathcal O_V$-modules (Step 1 applied to the scheme $V$, affine open of itself). By [lem-weil-pbc-quasi-coherent-module-cokernel-image](2) (on the scheme $V$) $\\operatorname{Coker}(\\chi|_V)$, hence $\\mathcal G|_V$, is quasi-coherent. So by the definition [pqf-def-coherent] applied to $\\mathcal G|_V$ at $x$ there is an affine neighbourhood $V'\\subseteq V$ of $x$ with $\\mathcal G|_{V'}\\cong\\widetilde M$; as $x$ was arbitrary, $\\mathcal G$ is quasi-coherent. (Stacks proves 01BO 'immediately from the definitions' because Stacks defines quasi-coherence (Modules 01BD) by local presentations $\\bigoplus_J\\mathcal O\\to\\bigoplus_I\\mathcal O\\to\\mathcal F\\to0$; with the definition of [pqf-def-coherent] ($\\mathcal F|_U\\cong\\widetilde M$) the step through the cokernel lemma is needed.)",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BO (lemma-finite-presentation-quasi-coherent), line 1421, and Definition 01BD (quasi-coherent); Schemes, Lemma 01IC"
+   }
+  },
+  {
+   "text": "*Step 5 (part (a), 'if').* Let $\\mathcal F$ be quasi-coherent, $U$ affine, $R=\\mathcal O_X(U)$, and suppose $\\mathcal F(U)$ is generated over $R$ by $m_1,\\dots,m_n$ [def-weil-finitely-generated-module]. By Step 3 the sections $m_1,\\dots,m_n$ generate $\\mathcal F|_U$, i.e. $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $e_i\\mapsto m_i$, is surjective; so $\\mathcal F|_U$ is of finite type [pqf-def-coherent] (the neighbourhood $U$ serves for every point). (Stacks 01PB states only the converse in its proof; this direction is the exactness of $\\widetilde{\\ }$ applied to $R^n\\twoheadrightarrow M$.)",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PB (lemma-finite-type-module), line 2093, direction 'M finite implies finite type'"
+   }
+  },
+  {
+   "text": "*Step 6 (part (a), 'only if').* Suppose $\\mathcal F|_U$ is of finite type; put $M=\\mathcal F(U)$. Work on $X_U=\\operatorname{Spec}R$ via $g$ (Step 1), where $\\mathcal F|_{X_U}$ is quasi-coherent with global sections $M$ and the counit $\\widetilde M\\to\\mathcal F|_{X_U}$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction](3). Let $x\\in\\operatorname{Spec}R$. By Step 1 there are an open $W\\ni x$ and sections $s_1,\\dots,s_n\\in\\mathcal F(W)$ generating $\\mathcal F|_W$. The principal opens $D(r)$ form a basis of the Zariski topology (the complement of $V(I)$ is $\\bigcup_{r\\in I}D(r)$), so $x\\in D(r)\\subseteq W$ for some $r\\in R$, and the restrictions $s_i|_{D(r)}$ generate $\\mathcal F|_{D(r)}$ (restrict the local expressions $t|_{W_k}=\\sum f_is_i|_{W_k}$ to $W_k\\cap D(r)$). $D(r)$ is an affine open of $\\operatorname{Spec}R$, the image of the open immersion $\\operatorname{Spec}R_r\\to\\operatorname{Spec}R$ [lem-weil-pbc-principal-localization-open-immersion], with $\\mathcal O(D(r))=R_r$ and $\\mathcal F(D(r))\\cong\\widetilde M(D(r))=M_r$ as $R_r$-modules [lem-weil-pbc-spec-module-tilde-sections] (the case $N=R$ for the structure sheaf, $N=M$ for $\\widetilde M$) [def-weil-pbc-module-localization-away]. By Step 3 (for the scheme $\\operatorname{Spec}R$, the quasi-coherent module $\\mathcal F|_{X_U}$ and the affine open $D(r)$) $M_r=\\sum_iR_r\\,s_i|_{D(r)}$ is a finitely generated $R_r$-module. The opens $D(r)$ obtained in this way for all $x$ cover $\\operatorname{Spec}R$, which is quasi-compact, so finitely many $D(r_1),\\dots,D(r_k)$ cover it and then $(r_1,\\dots,r_k)=R$ [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i),(iii). Since every $M_{r_j}$ is finitely generated over $R_{r_j}$, $M$ is a finitely generated $R$-module [lem-weil-pbc-module-finite-of-localization-span] (Algebra 00EO(2)).",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-module-finite-of-localization-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 01PB (lemma-finite-type-module): 'there also exists a standard open covering X = ⋃ D(f_i) such that M~|_{D(f_i)} is generated by finitely many sections. Thus M_{f_i} is finitely generated for each i. Hence we conclude by Algebra, Lemma 00EO'"
+   }
+  },
+  {
+   "text": "*Step 7 (part (b), 'if').* Suppose $M=\\mathcal F(U)$ is finitely presented: there is an exact sequence $R^m\\xrightarrow{v}R^n\\xrightarrow{u}M\\to0$ (take generators $m_i=u(e_i)$ and let $v$ send the basis of $R^m$ to generators of the finitely generated kernel). Let $\\varphi_u:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ be given by the sections $u(e_i)\\in M$ and $\\varphi_v:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ by the sections $v(e_j)\\in R^n=\\Gamma(U,\\mathcal O_U^{\\oplus n})$ (Step 1). The composite $\\varphi_u\\varphi_v$ is given by the sections $u(v(e_j))=0$, so it is $0$ (Step 1, uniqueness). Let $q:\\mathcal O_U^{\\oplus n}\\to C=\\operatorname{Coker}\\varphi_v$; by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (on the scheme $U$) $C$ is quasi-coherent, $\\operatorname{Im}\\varphi_v=\\ker q$, and $q_U$ is the quotient map $R^n\\to R^n/v(R^m)=C(U)$. By the universal property of the cokernel there is a unique $\\beta:C\\to\\mathcal F|_U$ with $\\beta q=\\varphi_u$; on $U$-sections $\\beta_U:R^n/v(R^m)\\to M$ is the map induced by $u$, bijective by exactness. By Step 2(i) $\\beta$ is an isomorphism. Hence $\\mathcal O_U^{\\oplus m}\\xrightarrow{\\varphi_v}\\mathcal O_U^{\\oplus n}\\xrightarrow{\\varphi_u}\\mathcal F|_U\\to0$ is isomorphic to the cokernel sequence of $\\varphi_v$ and is exact, so $\\mathcal F|_U$ is of finite presentation (the neighbourhood $U$ serves for every point). (Stacks 01PC states only the converse in its proof; this direction is the right exactness of $\\widetilde{\\ }$.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PC (lemma-finite-presentation-module), line 2113, direction 'M finitely presented implies finite presentation'"
+   }
+  },
+  {
+   "text": "*Step 8 (part (b), 'only if').* Suppose $\\mathcal F|_U$ is of finite presentation. Then it is of finite type (a presentation contains a surjection $\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$), so $M=\\mathcal F(U)$ is finitely generated by Step 6; choose $u:R^n\\to M$ surjective. By Step 3 the sections $u(e_i)$ generate $\\mathcal F|_U$, i.e. $\\varphi_u:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ is surjective. Let $\\mathcal K=\\operatorname{Ker}\\varphi_u$ ($V\\mapsto\\ker\\varphi_{u,V}$): it is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel] (on the scheme $U$; $\\varphi_u$ is a map between quasi-coherent modules by Step 1), and $\\mathcal K(U)=\\ker(\\varphi_{u,U})=\\ker u$ since $\\varphi_{u,U}=u$ (Step 1). By [lem-weil-pbc-finite-presentation-kernel-surjection-finite-type] (Modules 01BP(1), on the ringed space $U$) $\\mathcal K$ is of finite type. By Step 6 applied to the quasi-coherent $\\mathcal K$ on the scheme $U$ and its affine open $U$, $\\ker u=\\mathcal K(U)$ is a finitely generated $R$-module. So $M\\cong R^n/\\ker u$ with $\\ker u$ finitely generated: $M$ is finitely presented.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 01PC (lemma-finite-presentation-module): 'By Lemma 01PB M is a finite R-module. Choose a surjection R^n → M with kernel K ... By Modules, Lemma 01BP we see that K~ is a finite type O_X-module. Hence by Lemma 01PB again K is a finite R-module.' (Stacks' 0 → K~ → O^n → M~ → 0 by the exactness of tilde, Schemes 01HV, is replaced by the kernel lemma)"
+   }
+  },
+  {
+   "text": "*Step 9 (part (c)).* Let $X=\\bigcup_jU_j$ be an affine open covering with each $\\mathcal F(U_j)$ finitely generated over $\\mathcal O_X(U_j)$. By (a) (Step 5) each $\\mathcal F|_{U_j}$ is of finite type: every point $x\\in U_j$ has an open neighbourhood $W\\subseteq U_j$ with a surjection $\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$, which is the condition of [pqf-def-coherent] for $\\mathcal F$ at $x$; so $\\mathcal F$ is of finite type. If $\\mathcal F$ is of finite type and $U$ is any affine open, then $\\mathcal F|_U$ is of finite type: for $x\\in U$ with a surjection $\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$, its restriction to $W\\cap U$ is still a surjection of sheaves (surjectivity is a local condition on sections over smaller opens); so $\\mathcal F(U)$ is finitely generated by (a) (Step 6). Likewise if $\\mathcal F$ is of finite presentation, restricting a presentation $\\mathcal O_W^{\\oplus m}\\to\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W\\to0$ to $W\\cap U$ gives a presentation (restriction to an open preserves cokernels [lem-weil-pbc-module-restriction-open-immersion-colimits](1)), so $\\mathcal F|_U$ is of finite presentation and $\\mathcal F(U)$ is finitely presented by (b) (Step 8). (Stacks: finite type and finite presentation are local properties by their Definitions 01B5, 01BN; the remark before 01PB.)",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, the paragraph opening Section 'Characterizing modules of finite type and finite presentation' (before Lemma 01PB, line 2075); Modules, Definitions 01B5 and 01BN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-generating-sections",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-module-finite-of-localization-span",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemmas 01PB and 01PC (lines 2093, 2113) with the paragraph before them; Modules, Lemma 01BO (modules.tex line 1421); the steps Stacks omits (the converse directions, Step 3's 'Thus', the reconciliation of Stacks' definition of quasi-coherence with pqf-def-coherent in Step 4, and Step 9) written by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +180,38 @@
    "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules tilde M is of finite type iff M is a finitely generated module",
+   "results": "SheafOfModules.IsFiniteType(.mk), ModuleCat.tildeInModuleCat, SheafOfModules.LocalGeneratorsData.IsFiniteType(.mk), ModuleCat.isFG, ModuleCat.tilde: definitions only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent module on affine scheme generated by finitely many global sections implies global sections generated by them",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType(.isFiniteType), SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^def\\|^instance\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; sed -n 270,290p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "results": "Tilde.lean: tilde, toOpen, isoTop, fromTildeΓ, tilde.adjunction, tildeSelf (:421), tildeFinsupp (:428), presentationTilde (:444), isIso_fromTildeΓ_of_isQuasicoherent (:850), isQuasicoherent_iff_isIso_fromTildeΓ (:876): nothing on finite type or finite presentation of tilde M. Quasicoherent.lean:275 instance [M.IsFinitePresentation] : M.IsQuasicoherent (and :281 IsFiniteType) for sheaves of modules on a site, with Mathlib's quasi-coherence (local presentations, Stacks Modules 01BD)",
+   "date": "2026-10-10",
+   "verdict": "partial: part (0) is the instance Quasicoherent.lean:275 for Mathlib's definitions (agreement of Mathlib's quasi-coherence with pqf-def-coherent is a theorem, so recorded, not used as a leaf); (a), (b), (c) absent"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isFiniteType.*tilde\\|IsFiniteType.*affine\\|finite_of_isQuasicoherent\\|finite_sections' ~/weil-conjectures-slopmaster2/WeilConjectures/ (source repository, not Mathlib)",
+   "results": "AlgebraicGeometry.Scheme.Modules.finite_sections_top_of_isIso_fromTildeΓ (WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:165; on Spec R, M with fromTildeΓ iso and finitely many generating global sections ⇒ Module.Finite R Γ(M,⊤); sorry map: reaches no sorry) and Scheme.Modules.finite_sections_of_isFinitePresentation (:231; F of finite presentation, U affine ⇒ Γ(F,U) finite over Γ(X,U); reaches no sorry); no Lean of the iff statements",
+   "date": "2026-10-10",
+   "verdict": "source repository: closed Lean for the finiteness half of Step 3 and for 'finite presentation ⇒ F(U) finitely generated'; no Lean for the node as stated"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,6 +236,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks Modules 01BO, Properties 01PB/01PC; self-contained; correct; unsplit."
+  "note": "Split reviewed: 9 steps (01PB, 01PC, 01BO and Modules 01BP, both directions written out; generation on an affine open via the cokernel/image node, Step 3; kernel node for the only-if of (b)). Statement: only a parenthetical definition of finitely presented module added. Three new nodes: two Mathlib leaves verified, one unsplit (01BP(1))."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "worker": "stage1",
+  "summary": "Split along Stacks Properties 01PB/01PC and Modules 01BO into nine steps: setup on an affine open (Spec R ≅ U, maps out of O^n = n-tuples of sections), two consequences of the tilde-Gamma counit (Schemes 01IB), generation by sections over an affine open via the (unsplit, same-day) cokernel/image node, (0) via the cokernel node (needed because pqf-def-coherent defines quasi-coherence as locally M~, not by local presentations as Stacks 01BD does), (a) both directions (the 'only if' along Stacks with standard opens D(r), quasi-compactness and Algebra 00EO(2), new Mathlib leaf), (b) both directions (Stacks' use of the exactness of tilde replaced by the kernel node; Modules 01BP(1) as a new unsplit node), (c) by locality of the definitions. New nodes: lem-weil-pbc-module-finite-of-localization-span (leaf Module.Finite.of_localizationSpan_finite), lem-weil-pbc-spec-tilde-free-module (leaf tildeFinsupp/tildeSelf), lem-weil-pbc-finite-presentation-kernel-surjection-finite-type (unsplit). Statement unchanged except a parenthetical definition of 'finitely presented R-module' and def-weil-finitely-generated-module added to stmt_deps."
  }
 }

@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-module-finite-of-localization-span",
+ "kind": "statement",
+ "title": "A module is finitely generated if its localizations at a family generating the unit ideal are (Stacks 00EO(2))",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module, and $f_1,\\dots,f_k\\in R$ elements generating the unit ideal ($(f_1,\\dots,f_k)=R$). For each $i$ let $M_{f_i}$ be the localization of $M$ at $f_i$, an $R_{f_i}$-module [def-weil-pbc-module-localization-away]. If every $M_{f_i}$ is a finitely generated $R_{f_i}$-module [def-weil-finitely-generated-module], then $M$ is a finitely generated $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00EO (label lemma-cover), part (2), line 4134"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if M_f is finitely generated over R_f for a family f generating the unit ideal then M is finitely generated",
+   "results": "Module.Finite.of_localizationSpan_finite', Module.Finite.of_localizationSpan', Module.Finite.of_localizationSpan, Module.Finite.of_localizationSpan_finite (Mathlib.RingTheory.Localization.Finiteness), ModuleCat.isFG, Module.Finite.of_isLocalized_maximal",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M_f is a finitely generated R_f-module for each f in a finite set generating the unit ideal, then M is a finitely generated R-module",
+   "results": "Module.Finite.of_localizationSpan_finite, Module.Finite.of_localizationSpan, Module.Finite.of_localizationSpan_finite', Module.Finite.of_localizationSpan' (Mathlib.RingTheory.Localization.Finiteness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.of_localizationSpan",
+   "results": "Module.Finite.of_localizationSpan (t : Set R) (ht : Ideal.span t = ⊤) (H : ∀ g : t, Module.Finite (Localization.Away ↑g) (LocalizedModule.Away ↑g M)) : Module.Finite R M (Mathlib.RingTheory.Localization.Finiteness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_localizationSpan' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Finiteness.lean; sed -n 180,270p of that file",
+   "results": "of_localizationSpan_finite' (:193), of_localizationSpan' (:229), of_localizationSpan_finite (:251: (t : Finset R) (ht : Ideal.span (t : Set R) = ⊤) (H : ∀ g : t, Module.Finite (Localization.Away g.val) (LocalizedModule.Away g.val M)) : Module.Finite R M), of_localizationSpan (:262, any set t); source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.of_localizationSpan_finite",
+  "file": "Mathlib/RingTheory/Localization/Finiteness.lean",
+  "how": "exact: line 252, with t = {f_1,...,f_k} as a Finset, Localization.Away g = R_g and LocalizedModule.Away g M = M_g; Module.Finite is def-weil-finitely-generated-module. Module.Finite.of_localizationSpan (:262) is the version for an arbitrary spanning set; Module.Finite.of_localizationSpan' (:229) for any IsLocalizedModule.Away models of M_g"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Module.Finite.of_localizationSpan_finite (RingTheory/Localization/Finiteness.lean:252; the worker wrote 251, corrected)."
+ }
+}

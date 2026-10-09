@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-spec-tilde-free-module",
+ "kind": "statement",
+ "title": "On Spec R the free module of rank n is the sheaf associated to R^n (Stacks 01HV(1)-(2), 01I7)",
+ "statement": "Let $R$ be a commutative ring, $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], $n\\ge0$, and let $\\mathcal O_X^{\\oplus n}$ be the free $\\mathcal O_X$-module of rank $n$ [def-weil-sheaf-of-modules-category] with basis sections $e_1,\\dots,e_n\\in\\Gamma(X,\\mathcal O_X^{\\oplus n})$. For an $R$-module $N$ let $\\widetilde N$ with $\\tau_X:N\\to\\Gamma(X,\\widetilde N)$ be as in [lem-weil-pbc-spec-module-tilde-sections]. Then there is an isomorphism of $\\mathcal O_X$-modules $\\widetilde{R^{n}}\\xrightarrow{\\sim}\\mathcal O_X^{\\oplus n}$ sending $\\tau_X(e_i)$ to $e_i$ ($e_i$ the standard basis of $R^n$). In particular $\\mathcal O_X^{\\oplus n}$ is quasi-coherent [pqf-def-coherent] and $\\Gamma(X,\\mathcal O_X^{\\oplus n})=R^n$, with $e_i$ the standard basis.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HV (label lemma-spec-sheaves) (1)-(2) (the structure sheaf is $\\widetilde R$ by Definition 01HR) and Lemma 01I7 (lemma-compare-constructions: $\\widetilde M$ quasi-coherent; $\\widetilde{\\ }$ is a left adjoint so commutes with finite direct sums)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tilde of finsupp module is isomorphic to the free sheaf of modules on Spec R",
+   "results": "ModuleCat.tilde, SheafOfModules.ιFree, ModuleCat.tildeInModuleCat, SheafOfModules.free, AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+   "date": "2026-10-10",
+   "verdict": "partial: the objects; the comparison found by loogle/grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tilde of the free module R^n on Spec R is isomorphic to the free sheaf of modules O^n",
+   "results": "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.ιFree, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv (Mathlib.Algebra.Category.ModuleCat.Sheaf.Free)",
+   "date": "2026-10-10",
+   "verdict": "partial: free sheaves and Hom(free I, M) = I-tuples of sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tildeFinsupp",
+   "results": "AlgebraicGeometry.tildeFinsupp {R : CommRingCat} (ι : Type u) : tilde ↧(ι →₀ ↑R) ≅ SheafOfModules.free ι (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'tildeSelf\\|tildeFinsupp\\|isoTop\\|IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; sed -n 415,445p",
+   "results": "tildeSelf : tilde (ModuleCat.of R R) ≅ SheafOfModules.unit _ := .refl _ (:421); tildeFinsupp ι (:428), built as the unique iso of colimit cocones (tilde preserves the coproduct cocone ModuleCat.finsuppCocone, composed with tildeSelf on each summand), hence compatible with the coprojections; instance IsIso fromTildeΓ (free ι) (:437); instance (tilde M).IsQuasicoherent (:465); isoTop M : M ≅ Γ(tilde M, ⊤) (:247); source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.tildeFinsupp, AlgebraicGeometry.tildeSelf, AlgebraicGeometry.isoTop",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "how": "specializes in one line: tildeFinsupp (Fin n) : tilde (Fin n →₀ R) ≅ SheafOfModules.free (Fin n) (:428) is the comparison of two coproduct cocones built from tildeSelf (:421, the identity), so it carries the i-th coprojection of tilde to ιFree i, i.e. τ_X(e_i) (= toOpen of Finsupp.single i 1) to the basis section e_i; quasi-coherence is the instance (tilde M).IsQuasicoherent (:465, Mathlib's quasi-coherence, agreeing with pqf-def-coherent on schemes as recorded on lem-weil-pbc-spec-module-tilde-sections) and Γ(X, tilde R^n) = R^n is isoTop (:247)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: tildeFinsupp (Modules/Tilde.lean:428), tildeSelf (:421), isoTop (:247), IsQuasicoherent instance (:465)."
+ }
+}
