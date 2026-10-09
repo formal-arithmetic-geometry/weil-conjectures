@@ -20,9 +20,139 @@
   "def-weil-integral-rational-qbar-compact-support",
   "def-weil-finite-coefficient-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the morphism $a_Y$).* By [def-weil-finite-field-fiber] $k$ is an algebraic closure of $\\mathbf F_q$, of characteristic $p\\neq\\ell$, so $\\ell$ is invertible in $k$, and every $A_{E,n}$ is a finite ring annihilated by $\\ell^{n}$ (as $\\varpi_E^{e}\\mathcal O_E=\\ell\\mathcal O_E$ for the ramification index $e$, $\\ell^n\\in\\varpi_E^n\\mathcal O_E$). The point $s=\\operatorname{Spec}k$ is a finite-type $k$-scheme, and $a_Y:Y\\to s$ is the structure morphism of the separated finite-type $k$-scheme $Y$, hence a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. These are the hypotheses of every finiteness result used below, with base field $K_0=k$, source $Y$ and target $s$.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-scheme-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.7, p. 55: $(R,\\mathfrak m)$ complete noetherian local with finite residue field of characteristic $\\ell$, schemes $\\ell$-coprime"
+   }
+  },
+  {
+   "text": "*Step 2 ($\\Lambda=A_{E,n}$, ordinary direct image).* Put $A=A_{E,n}$ and let $K\\in D^b_c(Y,A)$. By [lem-sf-proetale-constructible-origin] (ii) there are a bounded complex $K'$ on $Y_{\\mathrm{et}}$ with constructible cohomology sheaves, i.e. $K'\\in D^b_c(Y_{\\mathrm{et}},A)$ in the sense of [def-weil-pbc-constructible-complexes], and an isomorphism $K\\cong\\nu_Y^*K'$. By Step 1 and [thm-dg-finite-type-constructibility] (applied to $a_Y$ and the finite ring $A$), $Ra_{Y,\\mathrm{et}*}K'\\in D^b_c(s_{\\mathrm{et}},A)$. The morphism $a_Y$ is of finite type, hence quasi-compact and quasi-separated, and $K'$ is bounded below, so [prop-weil-pbc-comparison-direct-image] gives $\\nu_s^*Ra_{Y,\\mathrm{et}*}K'\\cong Ra_{Y,\\mathrm{proet}*}\\nu_Y^*K'$; the right side is $Ra_{Y*,n}K$ of [def-weil-derived-direct-image] (the total right-derived functor of the pro-etale direct image, both built on [def-weil-pbc-proetale-operations]). Finally $\\nu_s^*$ carries $D^b_c(s_{\\mathrm{et}},A)$ into $D^b_c(s,A)$ of [def-weil-finite-torsion-constructibility], again by [lem-sf-proetale-constructible-origin] (ii). Hence $Ra_{Y*}K\\in D^b_c(s,A)$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-weil-pbc-constructible-complexes",
+    "thm-dg-finite-type-constructibility",
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-derived-direct-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.3, p. 39 ($\\nu_X^*f_{\\mathrm{et}*}F\\simeq f_{\\mathrm{proet}*}\\nu_Y^*F$ for qcqs $f$ and $F\\in D^+(Y_{\\mathrm{et}})$); Definition 6.5.1 and the remark after it, p. 49 ($D_{cons}(X_{\\mathrm{proet}},R/\\mathfrak m^n)\\simeq D_{cons}(X_{\\mathrm{et}},R/\\mathfrak m^n)$ via $\\nu$); Theorem 6.7.1, p. 55, and the proof of Lemma 6.7.2, p. 55 ('constructibility follows from Lemma 5.4.3 and Theorem 6.7.1')"
+   }
+  },
+  {
+   "text": "*Step 3 ($\\Lambda=A_{E,n}$, compact support).* Let $K\\in D^b_c(Y,A_{E,n})$. By [lem-sf-proetale-constructible-origin] (ii) $K$ is of etale origin, so $K$ lies in the domain on which the compactification-independent functor $Ra_{Y!,n}$ of [def-compact-support-direct-image-detailed] is defined. By Step 1, [prop-finite-compact-support-constructibility] applies with $K_0=k$, $f=a_Y:Y\\to s$ and $A=A_{E,n}$: the functor $Ra_{Y!,n}$ restricts to $D^b_c(Y,A_{E,n})\\to D^b_c(s,A_{E,n})$. Hence $Ra_{Y!}K\\in D^b_c(s,A_{E,n})$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-compact-support-direct-image-detailed",
+    "prop-finite-compact-support-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7, p. 56 ($f_!=\\bar f_*j_!$ preserves constructibility), at the finite level $R=A_{E,n}$; finite-level theorem: Stacks Project Theorem 63.14.5, Tag 0GL0 (literature/stacks-project/more-etale.tex), through prop-finite-compact-support-constructibility"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\Lambda=\\mathcal O_E$, ordinary direct image).* Let $K\\in D^b_c(Y,\\mathcal O_E)$. By [def-weil-derived-direct-image], $Ra_{Y*}K=R\\varprojlim_n\\operatorname{Res}_nRa_{Y*,n}(K\\otimes^L_{\\mathcal O_E}A_{E,n})$, the derived limit of the system with the transition maps specified there. By Step 1, [lem-sf-integral-direct-image-constructible] applies with $K_0=k$, $f=a_Y:Y\\to s$: this derived limit is derived complete, its reductions are $Ra_{Y*,n}K_n\\in D^b_c(s,A_{E,n})$ (Step 2), and their cohomological supports lie in one interval independent of $n$ (with $N=2\\dim Y$, $k$ being algebraically closed). That is the definition [def-weil-derived-complete-integral-detailed] of $Ra_{Y*}K\\in D^b_c(s,\\mathcal O_E)$.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2 (Pushforward), p. 55, with Lemma 6.5.9 (2), p. 50, and Lemma 6.5.11 (3), p. 51"
+   }
+  },
+  {
+   "text": "*Step 5 ($\\Lambda=\\mathcal O_E$, compact support).* Let $K\\in D^b_c(Y,\\mathcal O_E)$ and let $c=(j,\\bar a)$ be the compactification of $a_Y$ chosen in [def-weil-integral-rational-qbar-compact-support]. There $Ra_{Y!}K=R\\varprojlim_n\\operatorname{Res}_nRa_{Y!,n}K_n$ is defined as a derived limit of the inverse system $\\operatorname{Res}_nRa_{Y!,n}K_n$ with the transition maps built from [lem-sf-compact-support-restriction-of-scalars]. By Step 1, [lem-sf-integral-compact-support-constructible] applies with $K_0=k$, $f=a_Y:Y\\to s$ and this $c$: every derived limit of this system lies in $D^b_c(s,\\mathcal O_E)$. Hence $Ra_{Y!}K\\in D^b_c(s,\\mathcal O_E)$.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7, p. 56"
+   }
+  },
+  {
+   "text": "*Step 6 ($\\Lambda=E$).* By [def-weil-rationalization-karoubi], $D^b_c(-,E)=D^b_c(-,\\mathcal O_E)[1/\\varpi_E]$ has the same objects as $D^b_c(-,\\mathcal O_E)$, on $Y$ and on $s$. Let $K_E\\in D^b_c(Y,E)$, represented by $K\\in D^b_c(Y,\\mathcal O_E)$. On objects the rational direct image of [def-weil-derived-direct-image] is the integral one, $Ra_{Y*}K_E=Ra_{Y*}K$ regarded in $D^b_c(s,E)$, and by [def-weil-integral-rational-qbar-compact-support] $Ra_{Y!}K_E=(Ra_{Y!}K)\\otimes^L_{\\mathcal O_E}E$ is the object $Ra_{Y!}K$ regarded in $D^b_c(s,E)$. By Steps 4 and 5 these are objects of $D^b_c(s,\\mathcal O_E)$, hence of $D^b_c(s,E)$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-direct-image",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 (2), p. 61 ($D_{cons}(X_{\\mathrm{proet}},\\mathcal O_E)[\\ell^{-1}]\\simeq D_{cons}(X_{\\mathrm{proet}},E)$) and Remark 6.8.15, p. 62 (the six functors on $D_{cons}(X_{\\mathrm{proet}},\\Lambda)$, $\\Lambda\\in\\{\\mathcal O_E,E\\}$)"
+   }
+  },
+  {
+   "text": "*Step 7 ($\\Lambda=\\Qlb$).* By [def-weil-algebraically-closed-coefficients] an object of $D^b_c(Y,\\Qlb)$ is a pair $(E,K_E)$ with $E\\subset\\Qlb$ a finite extension of $\\Ql$ and $K_E\\in D^b_c(Y,E)$, and the objects of $D^b_c(s,\\Qlb)$ are the pairs $(E,M)$ with $M\\in D^b_c(s,E)$. The direct images are formed at the stage of the representative: $Ra_{Y*}(E,K_E)=(E,Ra_{Y*}K_E)$ by [def-weil-derived-direct-image] (the common-stage category is used for $\\Lambda=\\Qlb$), and $Ra_{Y!}(E,K_E)=(E,Ra_{Y!}K_E)$ by [def-weil-integral-rational-qbar-compact-support]. By Step 6 (for this $E$) both second entries lie in $D^b_c(s,E)$, so both pairs are objects of $D^b_c(s,\\Qlb)$. This holds for every representative, so no independence of the stage is needed.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-direct-image",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.8, Proposition 6.8.14 (1), pp. 61-62 (colimit over finite subextensions); the common-stage construction is that of def-weil-algebraically-closed-coefficients"
+   }
+  },
+  {
+   "text": "*Step 8 (the fibre functor).* By Steps 2 to 7, for each $\\Lambda$ the objects $Ra_{Y*}K$ and $Ra_{Y!}K$ lie in $D^b_c(s,\\Lambda)$, which is the domain of $\\operatorname{Fib}_s$ in [def-weil-finite-coefficient-point]; so $\\operatorname{Fib}_s(Ra_{Y*}K)$ and $\\operatorname{Fib}_s(Ra_{Y!}K)$ are defined, with values in $D^b_{\\mathrm{fin}}(A_{E,n})$, $D^b_{\\mathrm{fg}}(\\mathcal O_E)$, $D^b_{\\mathrm{fd}}(E)$, $D^b_{\\mathrm{fd}}(\\Qlb)$ respectively.",
+   "uses": [
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "node def-weil-ordinary-compact-cohomology, order 1510: $\\RGamma(Y,K)=\\operatorname{Fib}_s(Ra_{Y*}K)$, $\\RGammac(Y,K)=\\operatorname{Fib}_s(Ra_{Y!}K)$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-pbc-constructible-complexes",
+  "thm-dg-finite-type-constructibility",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-finite-torsion-constructibility",
+  "def-compact-support-direct-image-detailed",
+  "prop-finite-compact-support-constructibility",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.7 (Theorem 6.7.1, Lemma 6.7.2, p. 55; Definition 6.7.6, Lemma 6.7.7, p. 56), with Lemma 5.4.3 (p. 39), Lemma 6.5.9 (p. 50), Lemma 6.5.11 (p. 51) and §6.8 (Proposition 6.8.14, Remark 6.8.15, pp. 61-62); finite level through the DAG nodes thm-dg-finite-type-constructibility and prop-finite-compact-support-constructibility (Stacks Project Tag 0GL0)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -33,7 +163,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -51,5 +181,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-structure-direct-images-constructible",
+  "worker": "stage1",
+  "summary": "The node had no proof. Wrote an 8-step proof following Bhatt-Scholze §6.7-6.8: finite level Ra_{Y*} by etale origin (lem-sf-proetale-constructible-origin), the etale finiteness theorem thm-dg-finite-type-constructibility and the comparison prop-weil-pbc-comparison-direct-image (BS Lemma 5.4.3); finite level Ra_{Y!} by prop-finite-compact-support-constructibility; O_E-level Ra_{Y!} by the existing lem-sf-integral-compact-support-constructible; O_E-level Ra_{Y*} by a new node lem-sf-integral-direct-image-constructible (BS Lemma 6.7.2 with 6.5.9, 6.5.11), the direct-image analogue of the compact-support one, which the DAG lacked; E and Qlbar levels are elementary from the definitions (same objects, stagewise operations). sbc-thm-finiteness-finite-type, named in the source field, is not used: thm-dg-finite-type-constructibility and prop-finite-compact-support-constructibility cover its two clauses. Statement and stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
