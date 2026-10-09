@@ -36,6 +36,10 @@ the derived functor of `lim` applied to the tower.
   invariant under isomorphisms of towers and of cone points.
 - `CategoryTheory.Pretriangulated.IsHomotopyLimit.map`: a triangulated functor preserving the
   product `∏ₙ Fₙ` sends homotopy limit cones to homotopy limit cones.
+- `CategoryTheory.Pretriangulated.IsHomotopyLimit.exists_iso`: homotopy limits are unique up to
+  isomorphism compatible with the legs.
+- `CategoryTheory.Pretriangulated.IsHomotopyLimit.of_isIso_π`: a cone whose legs are all
+  isomorphisms is a homotopy limit cone.
 -/
 
 @[expose] public section
@@ -96,6 +100,86 @@ lemma of_iso {F G : ℕᵒᵖ ⥤ C} (e : F ≅ G) {c : Cone F} (hc : IsHomotopy
   · simp only [Triangle.mk_mor₂, Iso.refl_hom, Category.comp_id, Category.id_comp, ht]
     rfl
   · simp [← Functor.map_comp]
+
+/-- Homotopy limits are unique up to (non-unique) isomorphism: if `c` and `c'` are homotopy
+limit cones over the same tower, there is an isomorphism `c.pt ≅ c'.pt` compatible with the
+legs. It is obtained by completing the identity of `∏ₙ Fₙ` to a morphism of Milnor triangles. -/
+lemma exists_iso {F : ℕᵒᵖ ⥤ C} {c c' : Cone F} (hc : IsHomotopyLimit c)
+    (hc' : IsHomotopyLimit c') :
+    ∃ e : c.pt ≅ c'.pt, ∀ n : ℕ, e.hom ≫ c'.π.app (op n) = c.π.app (op n) := by
+  obtain ⟨P, hP, δ, hT⟩ := hc
+  obtain ⟨P', hP', δ', hT'⟩ := hc'
+  let eP : P.pt ≅ P'.pt := hP.conePointUniqueUpToIso hP'
+  have heP (n : ℕ) : eP.hom ≫ P'.proj n = P.proj n :=
+    hP.conePointUniqueUpToIso_hom_comp hP' ⟨n⟩
+  have ht : towerShift hP ≫ eP.hom = eP.hom ≫ towerShift hP' :=
+    Fan.IsLimit.hom_ext hP' _ _ fun n ↦ by
+      simp only [Category.assoc, heP, towerShift, Fan.IsLimit.fac]
+      rw [← Category.assoc, heP]
+  have hcomm : (𝟙 P.pt - towerShift hP) ≫ eP.hom = eP.hom ≫ (𝟙 P'.pt - towerShift hP') := by
+    rw [Preadditive.sub_comp, Preadditive.comp_sub, ht, Category.id_comp, Category.comp_id]
+  obtain ⟨a, ha₁, ha₃⟩ :=
+    complete_distinguished_triangle_morphism₁ _ _ hT hT' eP.hom eP.hom hcomm
+  have : IsIso a := isIso₁_of_isIso₂₃ (Triangle.homMk _ _ a eP.hom eP.hom ha₁ hcomm ha₃) hT hT'
+    eP.isIso_hom eP.isIso_hom
+  refine ⟨asIso a, fun n ↦ ?_⟩
+  have := ha₁ =≫ P'.proj n
+  simp only [Triangle.mk_mor₁, Category.assoc, heP, Fan.IsLimit.fac] at this
+  simpa using this.symm
+
+set_option backward.defeqAttrib.useBackward true in
+/-- A cone over a tower whose legs are all isomorphisms (so that the tower is constant up to
+isomorphism) is a homotopy limit cone: its Milnor triangle is split, `1 - t` having the section
+`y ↦ (-∑_{k < n} y_k)_n` (transported along the transition isomorphisms). -/
+lemma of_isIso_π {F : ℕᵒᵖ ⥤ C} (c : Cone F) [∀ n, IsIso (c.π.app n)]
+    [HasProduct fun n : ℕ ↦ F.obj (op n)] : IsHomotopyLimit c := by
+  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
+  let hP : IsLimit P := productIsProduct _
+  let ρ (n : ℕ) : F.obj (op n) ⟶ c.pt := inv (c.π.app (op n))
+  let g (n : ℕ) : P.pt ⟶ c.pt := P.proj n ≫ ρ n
+  have hτ (k : ℕ) : F.map (homOfLE k.le_succ).op ≫ ρ k = ρ (k + 1) := by
+    refine IsIso.eq_inv_of_hom_inv_id ?_
+    rw [← Category.assoc, c.w, IsIso.hom_inv_id]
+  have hg (k : ℕ) : (𝟙 P.pt - towerShift hP) ≫ g k = g k - g (k + 1) := by
+    simp only [g, Preadditive.sub_comp, Category.id_comp, towerShift, Fan.IsLimit.fac_assoc,
+      Category.assoc, hτ]
+  have hgπ (n : ℕ) : g n ≫ c.π.app (op n) = P.proj n := by simp [g, ρ]
+  let ℓ : c.pt ⟶ P.pt := Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)
+  let σ : P.pt ⟶ P.pt :=
+    Fan.IsLimit.lift hP fun n ↦ -(∑ k ∈ Finset.range n, g k) ≫ c.π.app (op n)
+  have hℓg : ℓ ≫ g 0 = 𝟙 _ := by simp [ℓ, g, ρ]
+  have hℓt : ℓ ≫ (𝟙 P.pt - towerShift hP) = 0 := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    simp [ℓ, Preadditive.sub_comp, towerShift, c.w]
+  have hσg : σ ≫ g 0 = 0 := by simp [σ, g]
+  have hσt : σ ≫ (𝟙 P.pt - towerShift hP) = 𝟙 _ := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    simp only [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Category.assoc,
+      towerShift, Fan.IsLimit.fac, Category.id_comp, σ, Fan.IsLimit.fac_assoc, c.w,
+      Finset.sum_range_succ, Preadditive.neg_comp, Preadditive.add_comp, hgπ, neg_add_rev]
+    abel
+  have hsplit : g 0 ≫ ℓ + (𝟙 P.pt - towerShift hP) ≫ σ = 𝟙 _ :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      have h₁ : (g 0 ≫ ℓ) ≫ P.proj n = g 0 ≫ c.π.app (op n) := by
+        simp [ℓ]
+      have h₂ : ((𝟙 P.pt - towerShift hP) ≫ σ) ≫ P.proj n =
+          -(g 0 - g n) ≫ c.π.app (op n) := by
+        rw [Category.assoc, Fan.IsLimit.fac, Preadditive.comp_neg, ← Category.assoc,
+          Preadditive.comp_sum]
+        simp only [hg, Finset.sum_range_sub']
+      rw [Preadditive.add_comp, h₁, h₂, Preadditive.sub_comp, hgπ,
+        Category.id_comp]
+      abel
+  let e : P.pt ≅ c.pt ⊞ P.pt :=
+    { hom := biprod.lift (g 0) (𝟙 P.pt - towerShift hP)
+      inv := biprod.desc ℓ σ
+      hom_inv_id := by rw [biprod.lift_desc, hsplit]
+      inv_hom_id := by
+        apply biprod.hom_ext' <;> apply biprod.hom_ext <;>
+          simp [hℓg, hℓt, hσg, hσt] }
+  refine ⟨P, hP, 0, isomorphic_distinguished _ (binaryBiproductTriangle_distinguished c.pt P.pt)
+    _ (Triangle.isoMk _ _ (Iso.refl _) e (Iso.refl _) ?_ ?_ ?_)⟩
+  · apply biprod.hom_ext <;> simp [e, hℓg, hℓt, ℓ]
+  · simp [e]
+  · simp
 
 variable {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
