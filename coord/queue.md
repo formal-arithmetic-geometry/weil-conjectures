@@ -1,8 +1,8 @@
 # Work queue
 
-591 items; claim with `tools/claim.py next <group> [--stage N]`.
+598 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (546)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -34,20 +34,26 @@
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
-| `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1009 | none |
 | `lem-weil-pbc-proper-closed-in-proper-fp` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
-| `lem-weil-pbc-separate-image-closed-from-closed` | 1009 | none |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
 | `lem-weil-pbc-site-equivalence-morphism-transport` | 1009 | none |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lem-weil-pbc-thickening-integral` | 1009 | none |
 | `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
+| `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1010 | none |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
+| `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1010 | none |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1010 | none |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1010 | none |
+| `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1010 | none |
+| `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1010 | none |
+| `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1010 | none |
+| `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1010 | none |
+| `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1010 | none |
+| `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -553,7 +559,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (45)
+## Stage 2: nodes to state (46)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -591,6 +597,7 @@
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
+| `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
@@ -603,7 +610,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 557 nodes that wait for stage 1, 228 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 229 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
