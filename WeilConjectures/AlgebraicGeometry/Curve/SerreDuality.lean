@@ -19,6 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
@@ -122,6 +123,34 @@ theorem isInvertible_vanishingIdeal_and_isDiscreteValuationRing {x : X} (hx : Is
       ∃ _ : IsDomain (X.presheaf.stalk x), IsDiscreteValuationRing (X.presheaf.stalk x) :=
   ⟨isInvertible_vanishingIdeal_of_isClosed f hx, isDiscreteValuationRing_stalk_of_isClosed f hx⟩
 
+/-- The local rings of a smooth curve over a field are valuation rings: discrete valuation rings
+at closed points and fields at generic points. -/
+theorem valuationRing_stalk [IsIntegral X] (x : X) : ValuationRing (X.presheaf.stalk x) := by
+  have := SmoothOfRelativeDimension.smooth 1 f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have := IsRegular.of_smooth f
+  have hle : ringKrullDim (X.presheaf.stalk x) ≤ 1 :=
+    (ringKrullDim_stalk_le_topologicalKrullDim x).trans
+      (by exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension f 1)
+  by_cases h1 : ringKrullDim (X.presheaf.stalk x) = 1
+  · have := IsRegularLocalRing.isDiscreteValuationRing _ h1
+    infer_instance
+  · have h0 : ringKrullDim (X.presheaf.stalk x) ≤ 0 := by
+      generalize ringKrullDim (X.presheaf.stalk x) = d at *
+      induction d using WithBot.recBotCoe with
+      | bot => exact bot_le
+      | coe n =>
+        induction n using ENat.recTopCoe with
+        | top => exact absurd hle (by decide)
+        | coe m =>
+          have : m ≤ 1 := by exact_mod_cast hle
+          have : m ≠ 1 := fun h ↦ h1 (by rw [h]; rfl)
+          have : m = 0 := by omega
+          subst this; rfl
+    have : Ring.KrullDimLE 0 (X.presheaf.stalk x) := ⟨by exact_mod_cast h0⟩
+    let := (Ring.KrullDimLE.isField_of_isDomain (R := X.presheaf.stalk x)).toField
+    infer_instance
+
 end Local
 
 /-- The ring map `k →+* k(X)` of an integral `k`-scheme `X`. -/
@@ -148,7 +177,8 @@ theorem exists_transcendental_functionField [X.Over (Spec (.of k))] [IsIntegral 
         ext a
         simp only [RingHom.algebraMap_toAlgebra, functionFieldRingHom, RingHom.coe_comp,
           RingHom.coe_coe, RingHom.coe_id, Function.comp_apply, id_eq]
-        rw [← CommRingCat.comp_apply, TopCat.Presheaf.germ_stalkSpecializes])
+        rw [← CommRingCat.comp_apply]
+        erw [TopCat.Presheaf.germ_stalkSpecializes])
   have hfield : IsField (X.presheaf.stalk x) :=
     (Algebra.IsIntegral.isField_iff_isField (algebraMap k _).injective).mp (Field.toIsField k)
   exact hx (ringKrullDim_eq_zero_of_isField hfield)
@@ -176,8 +206,17 @@ theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functio
     (ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
       ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
-        (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs :=
-  sorry
+        (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs := by
+  have hs : Ideal.span (Set.range (functionFieldCoordinates (X := X) t)) = ⊤ :=
+    Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨⟨0⟩, rfl⟩) (by simp)
+  have : (ProjectiveLine (Spec (.of k))).IsSeparated :=
+    ⟨by rw [← terminal.comp_from (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))]
+        infer_instance⟩
+  obtain ⟨π, hπ, h⟩ := exists_hom_of_valuationRing_stalk (S := Spec (.of k))
+    (valuationRing_stalk (X ↘ Spec (.of k)))
+    (ProjectiveSpace.homOfSections (X.fromSpecFunctionField ≫ X ↘ Spec (.of k))
+      (functionFieldCoordinates t) hs) (ProjectiveSpace.homOfSections_over _ _ _)
+  exact ⟨π, hπ, fun _ ↦ h⟩
 
 /-- **Rational functions define finite morphisms to `ℙ¹`.** Let `X` be a proper smooth integral
 curve over `k`, `t ∈ k(X)` transcendental over `k`, and `π_t : X ⟶ ℙ¹_k` the morphism of

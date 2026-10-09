@@ -678,6 +678,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
