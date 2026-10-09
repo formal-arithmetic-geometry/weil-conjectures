@@ -44,17 +44,20 @@ namespace TopCat.Sheaf
 variable {X : TopCat.{u}}
 
 /-- The sheafified free abelian sheaf `ℤ_W` on the representable presheaf of an open `W`. -/
-noncomputable abbrev freeYoneda : Opens X ⥤ Sheaf AddCommGrpCat.{u} X :=
+noncomputable abbrev freeYoneda :
+    Opens X ⥤ CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
   yoneda ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
     presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}
 
 /-- Morphisms `ℤ_W ⟶ F` are the sections of `F` over `W`. -/
-noncomputable def freeYonedaHomEquiv (F : Sheaf AddCommGrpCat.{u} X) (W : Opens X) :
+noncomputable def freeYonedaHomEquiv
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (W : Opens X) :
     (freeYoneda.obj W ⟶ F) ≃ F.obj.obj (op W) :=
   ((sheafificationAdjunction (Opens.grothendieckTopology X) AddCommGrpCat.{u}).homEquiv _ _).trans
     (((AddCommGrpCat.adj.whiskerRight (Opens X)ᵒᵖ).homEquiv _ _).trans yonedaEquiv)
 
-lemma freeYonedaHomEquiv_naturality (F : Sheaf AddCommGrpCat.{u} X) {V W : Opens X}
+lemma freeYonedaHomEquiv_naturality
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) {V W : Opens X}
     (i : V ⟶ W) (b : freeYoneda.obj W ⟶ F) :
     freeYonedaHomEquiv F V (freeYoneda.map i ≫ b) = F.obj.map i.op (freeYonedaHomEquiv F W b) := by
   have h₁ : (sheafificationAdjunction (Opens.grothendieckTopology X) AddCommGrpCat.{u}).homEquiv _ _
@@ -93,7 +96,9 @@ instance (V W : Opens X) (i : V ⟶ W) : Mono (freeYoneda.map i) := by
   exact (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).map_mono _
 
 /-- **Injective abelian sheaves are flasque.** -/
-theorem isFlasque_of_injective (F : Sheaf AddCommGrpCat.{u} X) [Injective F] : F.IsFlasque where
+theorem isFlasque_of_injective
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) [Injective F] :
+    Presheaf.IsFlasque F.obj where
   epi {U V} i := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro x
@@ -103,18 +108,20 @@ theorem isFlasque_of_injective (F : Sheaf AddCommGrpCat.{u} X) [Injective F] : F
     rw [← freeYonedaHomEquiv_naturality, Injective.comp_factorThru, Equiv.apply_symm_apply]
 
 /-- **Flasque abelian sheaves have vanishing higher cohomology.** -/
-theorem IsFlasque.subsingleton_H (F : Sheaf AddCommGrpCat.{u} X) [F.IsFlasque] (n : ℕ) :
+theorem IsFlasque.subsingleton_H
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    [Presheaf.IsFlasque F.obj] (n : ℕ) :
     Subsingleton (Sheaf.H F (n + 1)) := by
   induction n generalizing F with
   | zero =>
     refine Sheaf.subsingleton_H_one_of_surjective F isTerminalTop fun E Q ι π w hS ↦ ?_
-    have : IsFlasque (ShortComplex.mk ι π w).X₁ := ‹F.IsFlasque›
+    have : IsFlasque (ShortComplex.mk ι π w).X₁ := ‹Presheaf.IsFlasque F.obj›
     exact (AddCommGrpCat.epi_iff_surjective _).1 (IsFlasque.epi_of_shortExact hS)
   | succ n ih =>
     let S := ObjectProperty.injectiveShortComplex F
     have hS : S.ShortExact := ObjectProperty.shortExact_injectiveShortComplex F
     have hI : Injective S.X₂ := Injective.injective_under F
-    have : IsFlasque S.X₁ := ‹F.IsFlasque›
+    have : IsFlasque S.X₁ := ‹Presheaf.IsFlasque F.obj›
     have : IsFlasque S.X₂ := isFlasque_of_injective _
     have : IsFlasque S.X₃ := IsFlasque.of_shortExact_of_isFlasque₁₂ hS
     have := ih S.X₃
