@@ -27,8 +27,8 @@ Let `x : X` lie over `s : S`. The smooth locus of `f` is dense in the fibre over
 connected component of `x` in that fibre contains a point `x'` at which `f` is smooth and whose
 residue field is finite separable over `κ(s)`. Through `x'` passes an étale slice `ι : Z ⟶ X`,
 and the base change `X ×_S Z ⟶ Z` acquires the section `(ι, 𝟙)`. The relative connected
-component of this section is, near the fibre through `x'`, a quasi-compact open with connected
-fibres (Stacks `057I`), and it contains a point over `x`.
+component of this section is open (Stacks `055R`) and quasi-compact, with connected fibres, and it
+contains a point over `x`.
 
 ## Main statements
 
@@ -42,9 +42,9 @@ fibres (Stacks `057I`), and it contains a point over `x`.
 - `AlgebraicGeometry.isOpen_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a flat morphism of finite presentation with geometrically
   reduced fibres is open (Stacks `055R`).
-- `AlgebraicGeometry.isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton`:
-  the relative connected component of a section of a morphism of finite presentation is locally
-  constructible (Stacks `055P`).
+- `AlgebraicGeometry.isCompact_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
+  connected component of a section of a quasi-compact morphism of finite presentation between
+  quasi-compact, quasi-separated schemes is quasi-compact.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the slicing.
 
 ## References
@@ -57,7 +57,7 @@ fibres (Stacks `057I`), and it contains a point over `x`.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
@@ -149,15 +149,111 @@ theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{
     IsOpen {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
   sorry
 
-/-- **The relative connected component of a section is locally constructible** (Stacks `055P`).
-Let `f : X ⟶ Y` be of finite presentation with a section `σ`. The points `x` lying in the
-connected component of `σ (f x)` in their fibre form a locally constructible subset of `X`. -/
-@[stacks 055P]
-theorem isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f]
-    [QuasiSeparated f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
-    Topology.IsLocallyConstructible {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
-  sorry
+/-- **The relative connected component of a section is quasi-compact.** Let `f : X ⟶ Y` be
+locally of finite presentation and quasi-compact between quasi-compact, quasi-separated schemes,
+and let `σ` be a section of `f`. The points `x` lying in the connected component of `σ (f x)` in
+their fibre form a quasi-compact subset of `X`.
+
+It is the intersection of the constructible sets `(f ⁻¹' (G ∩ σ ⁻¹' U₁) ∩ U₁ᶜ)ᶜ`, for `U₁, U₂`
+quasi-compact opens of `X` and `G` the set of `y` over which `U₁` and `U₂` split the fibre into
+two disjoint pieces, which is constructible by Chevalley's theorem. Indeed the connected
+components of the fibres are open in the fibres, and so are cut out by such pairs. -/
+theorem isCompact_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace X]
+    [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (σ : Y ⟶ X)
+    (hσ : σ ≫ f = 𝟙 Y) :
+    IsCompact {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} := by
+  classical
+  have hfσ (y : Y) : f (σ y) = y := by
+    rw [← Scheme.Hom.comp_apply, hσ]
+    rfl
+  -- the pairs `U₁, U₂` and the constructible sets they define
+  let ι := {p : Set X × Set X // IsOpen p.1 ∧ IsCompact p.1 ∧ IsOpen p.2 ∧ IsCompact p.2}
+  let G (p : ι) : Set Y := (f '' (p.1.1 ∩ p.1.2) ∪ f '' (p.1.1 ∪ p.1.2)ᶜ)ᶜ
+  let E (p : ι) : Set X := f ⁻¹' (G p ∩ σ ⁻¹' p.1.1) ∩ p.1.1ᶜ
+  have hE (p : ι) : IsConstructible (E p)ᶜ := by
+    obtain ⟨⟨U₁, U₂⟩, hU₁, hU₁', hU₂, hU₂'⟩ := p
+    have h₁ : IsConstructible U₁ := hU₁'.isConstructible hU₁
+    have h₂ : IsConstructible U₂ := hU₂'.isConstructible hU₂
+    refine IsConstructible.compl (IsConstructible.inter (f.isConstructible_preimage
+      (IsConstructible.inter (IsConstructible.compl (IsConstructible.union ?_ ?_))
+        (σ.isConstructible_preimage h₁))) h₁.compl)
+    · exact f.isConstructible_image (h₁.inter h₂)
+    · exact f.isConstructible_image (h₁.union h₂).compl
+  convert isCompact_iInter_of_isConstructible hE using 1
+  ext x
+  rw [Set.mem_iInter]
+  change x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x)) ↔ ∀ p, x ∉ E p
+  set y := f x
+  set F := f ⁻¹' {y}
+  have hσF : σ y ∈ F := hfσ y
+  constructor
+  · -- a pair splitting the fibre of `x` puts the whole connected component of `σ y` on one side
+    intro hx p hp
+    obtain ⟨⟨U₁, U₂⟩, hU₁, _, hU₂, _⟩ := p
+    obtain ⟨⟨hG, hσU⟩, hxU⟩ :
+        (y ∈ (f '' (U₁ ∩ U₂) ∪ f '' (U₁ ∪ U₂)ᶜ)ᶜ ∧ σ y ∈ U₁) ∧ x ∉ U₁ := hp
+    simp only [Set.mem_compl_iff, Set.mem_union, Set.mem_image, not_or, not_exists,
+      not_and] at hG
+    have hcover : connectedComponentIn F (σ y) ⊆ U₁ ∪ U₂ := fun z hz ↦ by
+      by_contra h
+      exact hG.2 z (by simpa using h) (connectedComponentIn_subset F _ hz)
+    have hdisj : connectedComponentIn F (σ y) ∩ (U₁ ∩ U₂) = ∅ := by
+      ext z
+      simp only [Set.mem_inter_iff, Set.mem_empty_iff_false, iff_false, not_and]
+      exact fun hz h₁ h₂ ↦ hG.1 z ⟨h₁, h₂⟩ (connectedComponentIn_subset F _ hz)
+    obtain h | h := isPreconnected_iff_subset_of_disjoint.mp isPreconnected_connectedComponentIn
+      U₁ U₂ hU₁ hU₂ hcover hdisj
+    · exact hxU (h hx)
+    · exact hG.1 (σ y) ⟨hσU, h (mem_connectedComponentIn hσF)⟩ (hfσ y)
+  · -- the connected components of the fibre are open in the fibre, and cover it finitely
+    intro H
+    by_contra hx
+    have key (z : X) : ∃ V : Set X, IsOpen V ∧ IsCompact V ∧ z ∈ V ∧
+        V ∩ f ⁻¹' {f z} ⊆ connectedComponentIn (f ⁻¹' {f z}) z := by
+      obtain ⟨U, hzU, hU⟩ := f.exists_opens_inter_preimage_subset_connectedComponentIn z
+      obtain ⟨V, hV, hzV, hVU⟩ := exists_isAffineOpen_mem_and_subset hzU
+      exact ⟨(V : Set X), V.2, hV.isCompact, hzV, Set.inter_subset_inter_left _ hVU |>.trans hU⟩
+    choose V hV hVc hVC hVC' using key
+    obtain ⟨t, htF, hFt⟩ := (f.isCompact_preimage_singleton y).elim_nhds_subcover V
+      fun z _ ↦ (hV z).mem_nhds (hVC z)
+    set C := connectedComponentIn F (σ y) with hC
+    have hVF (z : X) (hz : z ∈ F) : (V z : Set X) ∩ F ⊆ connectedComponentIn F z := by
+      have : f z = y := hz
+      simpa [this] using hVC' z
+    let U₁ := ⋃ z ∈ t.filter (· ∈ C), V z
+    let U₂ := ⋃ z ∈ t.filter (· ∉ C), V z
+    have hU₁ : U₁ ∩ F ⊆ C := by
+      rintro w ⟨hw, hwF⟩
+      simp only [U₁, Set.mem_iUnion, Finset.mem_filter, exists_prop] at hw
+      obtain ⟨z, ⟨hzt, hzC⟩, hwz⟩ := hw
+      rw [hC, connectedComponentIn_eq hzC]
+      exact hVF z (htF z hzt) ⟨hwz, hwF⟩
+    have hU₂ : U₂ ∩ F ⊆ Cᶜ := by
+      rintro w ⟨hw, hwF⟩ hwC
+      simp only [U₂, Set.mem_iUnion, Finset.mem_filter, exists_prop] at hw
+      obtain ⟨z, ⟨hzt, hzC⟩, hwz⟩ := hw
+      refine hzC ?_
+      have := hVF z (htF z hzt) ⟨hwz, hwF⟩
+      rw [hC, connectedComponentIn_eq hwC, ← connectedComponentIn_eq this]
+      exact mem_connectedComponentIn (htF z hzt)
+    have hFU : F ⊆ U₁ ∪ U₂ := fun w hw ↦ by
+      obtain ⟨z, hzt, hwz⟩ := Set.mem_iUnion₂.mp (hFt hw)
+      by_cases hzC : z ∈ C
+      · exact Or.inl (Set.mem_biUnion (Finset.mem_filter.mpr ⟨hzt, hzC⟩) hwz)
+      · exact Or.inr (Set.mem_biUnion (Finset.mem_filter.mpr ⟨hzt, hzC⟩) hwz)
+    let p : ι := ⟨⟨U₁, U₂⟩, isOpen_biUnion fun z _ ↦ hV z,
+      (t.filter _).isCompact_biUnion fun z _ ↦ hVc z, isOpen_biUnion fun z _ ↦ hV z,
+      (t.filter _).isCompact_biUnion fun z _ ↦ hVc z⟩
+    refine H p ?_
+    change (y ∈ G p ∧ σ y ∈ U₁) ∧ x ∉ U₁
+    refine ⟨⟨?_, ?_⟩, ?_⟩
+    · simp only [G, Set.mem_compl_iff, Set.mem_union, Set.mem_image, not_or, not_exists,
+        not_and]
+      exact ⟨fun w hw hwy ↦ hU₂ ⟨hw.2, hwy⟩ (hU₁ ⟨hw.1, hwy⟩),
+        fun w hw hwy ↦ (hFU hwy).elim hw.1 hw.2⟩
+    · exact (hFU hσF).resolve_right fun h ↦ hU₂ ⟨h, hσF⟩ (mem_connectedComponentIn hσF)
+    · exact fun hxU ↦ hx (hU₁ ⟨hxU, rfl⟩)
 
 /-- The slicing of `f` near a point, for `X` and `S` affine; see
 `AlgebraicGeometry.exists_etaleCover_factorization`. -/
@@ -220,8 +316,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
       subst hpn
       exact ⟨hp, rfl⟩
   have : CompactSpace W := isCompact_iff_compactSpace.mp
-    (isLocallyConstructible_setOf_mem_connectedComponentIn_preimage_singleton g σ hσ
-      ).isConstructible.isCompact
+    (isCompact_setOf_mem_connectedComponentIn_preimage_singleton g σ hσ)
   have hσW : Set.range σ ⊆ Set.range W.ι := by
     rintro _ ⟨n, rfl⟩
     refine ⟨⟨σ n, ?_⟩, rfl⟩
