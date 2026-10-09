@@ -919,6 +919,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
