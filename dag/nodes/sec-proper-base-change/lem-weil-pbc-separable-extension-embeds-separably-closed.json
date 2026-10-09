@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-separable-extension-embeds-separably-closed",
+ "kind": "statement",
+ "title": "A separable algebraic extension embeds into a separably closed extension",
+ "statement": "Let $k$ be a field, let $M/k$ be a field extension [def-pc-field-extension] which is separable algebraic [def-weil-pbc-separable-algebraic-extension], and let $\\Omega/k$ be a field extension such that $\\Omega$ is separably closed [def-pc-separably-closed]. Then there is a homomorphism of $k$-algebras $\\sigma:M\\to\\Omega$ (necessarily injective, $M$ being a field).",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 09GU (fields-lemma-map-into-algebraic-closure, line 1023), whose Zorn argument applies verbatim with 'separable algebraic' and 'separably closed' in place of 'algebraic' and 'algebraically closed' (the minimal polynomial of alpha over a subextension E divides its separable minimal polynomial over k, hence is separable, so its image has a root in Omega); Stacks states only the algebraically closed case. Mathlib: IsSepClosed.lift"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separably-closed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a separable algebraic extension L of K admits a K-algebra homomorphism into any separably closed field M containing K",
+   "results": "IsSepClosed.lift, IsSepClosed.lift_def (Mathlib.FieldTheory.IsSepClosed); separableClosure.isSeparable, separableClosure.isAlgebraic (Mathlib.FieldTheory.SeparableClosure); IsAlgClosed.lift (Mathlib.FieldTheory.IsAlgClosed.Basic); IsSepClosed.algebraMap_surjective",
+   "date": "2026-10-10",
+   "verdict": "match: IsSepClosed.lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "embedding of a separable extension into a separably closed field over the base field",
+   "results": "IsSepClosed.lift, IsSepClosed.lift_def (Mathlib.FieldTheory.IsSepClosed); map_mem_separableClosure_iff, separableClosure.map_le_of_algHom, separableClosure.comap_eq_of_algHom (Mathlib.FieldTheory.SeparableClosure)",
+   "date": "2026-10-10",
+   "verdict": "match: IsSepClosed.lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, AlgHom",
+   "results": "IsSepClosed.lift : {K L M} [Field K] [Field L] [Algebra K L] [Field M] [Algebra K M] [IsSepClosed M] [Algebra.IsSeparable K L] : L →ₐ[K] M; IsSepClosed.lift_def; IsSepClosed.surjective_domRestrict_of_isSeparable; IsSepClosed.exists_aeval_eq_zero (Mathlib.FieldTheory.IsSepClosed)",
+   "date": "2026-10-10",
+   "verdict": "match: IsSepClosed.lift"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'variable\\|irreducible_def lift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean (lines 275-300)",
+   "results": "line 277 variable {K} (L) {M} [Field K] [Field L] [Algebra K L] [Field M] (with [Algebra K M] [IsSepClosed M] in the section); line 290 variable [Algebra.IsSeparable K L]; line 294 noncomputable irreducible_def lift : L →ₐ[K] M",
+   "date": "2026-10-10",
+   "verdict": "match: IsSepClosed.lift (line 294), source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosed.lift",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "line": 294,
+  "how": "exact: for fields K := k, L := M, M := Omega with [Algebra k M] [Algebra k Omega] [IsSepClosed Omega] [Algebra.IsSeparable k M], `IsSepClosed.lift : M →ₐ[k] Omega` (line 294); `Algebra.IsSeparable` is def-weil-pbc-separable-algebraic-extension (includes algebraicity), `IsSepClosed` is def-pc-separably-closed. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
