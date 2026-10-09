@@ -347,6 +347,7 @@ the former into the latter. The relative dimension of `a_Z` is carried as `m` wi
 `hm : m + c = n` rather than as `n - c`: truncated subtraction would silently read `0` when
 `c > n`. -/
 theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [Finite Λ] [HasTateTwist Λ]
+    [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
     [IsRegularImmersion c i] [HasCompactification i] (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
     [SmoothOfRelativeDimension n aX] [HasCompactification aX]

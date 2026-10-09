@@ -31,8 +31,9 @@ The datum of that sequence together with the two comparison isomorphisms is bund
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`: the exact sequence and the
-  two comparison isomorphisms.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection`: the exact sequence, the
+  comparison isomorphisms with the transforms, and the square identifying its epimorphism with
+  the transform of `j_!M[1] → j_*M[1]`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection`: it exists.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse` and
   `…FourierCorrection.hasWeightsAtMost`: the correction sheaf is lisse of weights at most `w`.
@@ -53,16 +54,29 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 
 /--
 The zero-extension comparison datum for `D` and a Fourier partner `D'`: a short exact sequence
-`0 → B' → G → j'_*M' → 0` of Weil sheaves on the dual line together with the two isomorphisms
-that identify `G[1]` with `FT_ψ(j_!M[1])` and `B'[1]` with `FT_ψ(B)`, where `B = j_*M / j_!M`
-is the boundary sheaf of `D`.
+`0 → B' → G → j'_*M' → 0` of Weil sheaves on the dual line together with the isomorphisms
+that identify `G[1]` with `FT_ψ(j_!M[1])`, `B'[1]` with `FT_ψ(B)` and `(j'_*M')[1]` with
+`FT_ψ(j_*M[1])`, where `B = j_*M / j_!M` is the boundary sheaf of `D`, such that the epimorphism
+`G → j'_*M'` is the transform of `j_!M[1] → j_*M[1]`:
 
 ```
-  FT_ψ(B) ≃ B'[1]        FT_ψ(j_!M[1]) ≃ G[1]
+  FT_ψ(B) ≃ B'[1]
 
-  0 ──▶ B' ──▶ G ──▶ j'_*M' ──▶ 0
+  FT_ψ(j_!M[1]) ──FT_ψ(can[1])──▶ FT_ψ(j_*M[1])
+        │ ≃                             │ ≃
+        ▼                               ▼
+      G[1] ────────────g[1]──────────▶ X₃[1]
+
+  0 ──▶ B' ──▶ G ──g──▶ X₃ ≃ j'_*M' ──▶ 0
 ```
-(blueprint: `sk-p-dl-a1-correction`)
+
+The square pins the sequence down: a short exact sequence is determined up to isomorphism by its
+epimorphism, `B'` being its kernel, so the sequence is the one obtained from the transform of the
+rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` and not, say, a split one. The square is stated
+for the middle arrow of the rotated triangle only: the first arrow `B → j_!M[1]` is the connecting
+morphism of `0 → j_!M → j_*M → B → 0`, whose formation needs `j_!M → j_*M` to be a
+monomorphism, and comparing whole triangles needs a shift-compatibility of the transform; the
+square already determines the sequence. (blueprint: `sk-p-dl-a1-correction`)
 -/
 structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
   /-- The short exact sequence `0 → B' → G → j'_*M' → 0` on the dual line. -/
@@ -77,16 +91,25 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
   /-- The transform of the boundary sheaf is the shifted first term. -/
   isoBoundary : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
     (WeilSheaf.toComplex.obj seq.X₁)⟦(1 : ℤ)⟧
+  /-- The transform of the middle extension is the shifted third term. -/
+  isoMiddleExtension : (fourierTransform ψ).obj D.middleExtension ≅
+    (WeilSheaf.toComplex.obj seq.X₃)⟦(1 : ℤ)⟧
+  /-- The epimorphism `G → j'_*M'` of the sequence is the transform of `j_!M[1] → j_*M[1]`. -/
+  fourierTransform_map_comp_isoMiddleExtension_hom :
+    (fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension ≫
+        isoMiddleExtension.hom =
+      isoExtensionByZero.hom ≫ (WeilSheaf.toComplex.map seq.g)⟦(1 : ℤ)⟧'
 
 /-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
 comparison datum exists. (blueprint: `sk-p-dl-a1-correction`) -/
-theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
     Nonempty (FourierCorrection ψ D D') := by
   -- TODO: Step 5 of `sk-p-dl-a1-correction`: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and
-  -- `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the sequence come from the rotated triangle
-  -- `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`, which cannot be formed since `WeilComplex` is not
-  -- triangulated.
+  -- `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the sequence come from the transform of the rotated
+  -- triangle `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`; it needs the transforms of the boundary
+  -- skyscrapers (Step 2, `lem-fd-first-formula`), which are not available for Weil complexes.
   sorry
 
 /-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of Artin–Schreier

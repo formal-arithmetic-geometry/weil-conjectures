@@ -12,13 +12,16 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # The étale cohomological dimension of a curve
 
 The étale cohomological dimension of a curve over an algebraically closed field is at most two,
 and at most one if the curve is affine: `H^q(C_ét, F) = 0` for every torsion abelian sheaf `F`
-(`CategoryTheory.Sheaf.IsTorsion`) and `q ≥ 3`, resp. `q ≥ 2`.
+(`CategoryTheory.Sheaf.IsTorsion`: every section is locally torsion, equivalently every
+geometric stalk is a torsion group) and `q ≥ 3`, resp. `q ≥ 2`.
 
 Neither statement needs smoothness, connectedness, or `char k` to be prime to the torsion of
 `F`. The affine bound is first proved for smooth connected curves
@@ -45,14 +48,19 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The pullback `g^* F` of a torsion étale sheaf `F` along a morphism of schemes `g` is torsion.
-Since sections over infinite disjoint unions are products, a torsion sheaf in the sense of
-`CategoryTheory.Sheaf.IsTorsion` is killed by a single integer `N ≠ 0`; then so is `g^* F`, as
-`g^*` is additive. -/
+/-- The pullback `g^* F` of a torsion étale sheaf `F` along a morphism of schemes `g` is torsion:
+torsion is checked on geometric stalks
+(`AlgebraicGeometry.Scheme.isTorsion_iff_isAddTorsion_sheafFiber`), and the stalk of `g^* F` at
+a geometric point `s` is the stalk of `F` at `s ≫ g`
+(`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`). -/
 theorem Etale.isTorsion_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y)
     {F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (hF : F.IsTorsion) :
-    ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F).IsTorsion :=
-  sorry
+    ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F).IsTorsion := by
+  rw [Scheme.isTorsion_iff_isAddTorsion_sheafFiber] at hF ⊢
+  intro Ω _ _ s
+  let e := (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} g s).app F
+  exact IsAddTorsion.of_surjective (f := e.inv.hom) (ConcreteCategory.bijective_of_isIso e.inv).2
+    (hF Ω (s ≫ g))
 
 end AlgebraicGeometry
 
@@ -178,7 +186,7 @@ end IsCurve
 `d`. -/
 lemma Scheme.isTorsion_constantZMod (X : Scheme.{u}) {d : ℕ} (hd : d ≠ 0) :
     (X.constantZMod d).IsTorsion := by
-  intro U s
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U s ↦ ?_
   refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨d, Nat.pos_of_ne_zero hd, ?_⟩
   have h₀ : d • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} (ZMod d))) = 0 := by
     ext x

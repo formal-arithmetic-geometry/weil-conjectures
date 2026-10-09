@@ -44,17 +44,21 @@ theorem DerivedCategory.isInvertible.of_iso
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (e : L ≅ L') (hL : DerivedCategory.isInvertible Λ X L) :
     DerivedCategory.isInvertible Λ X L' := by
-  obtain ⟨M, ⟨h⟩⟩ := hL
-  exact ⟨M, ⟨((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e.symm).app M ≪≫ h⟩⟩
+  obtain ⟨M, ⟨h⟩, ⟨h'⟩⟩ := hL
+  exact ⟨M, ⟨((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e.symm).app M ≪≫ h⟩,
+    ⟨((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).mapIso e.symm ≪≫ h'⟩⟩
 
-/-- A shift of an invertible object is invertible: `L⟦n⟧ ⊗ᴸ M⟦-n⟧ ≅ (L ⊗ᴸ M)⟦0⟧`. -/
+/-- A shift of an invertible object is invertible: `L⟦n⟧ ⊗ᴸ M⟦-n⟧ ≅ (L ⊗ᴸ M)⟦0⟧`, and
+symmetrically. -/
 theorem DerivedCategory.isInvertible.shift
     {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.isInvertible Λ X L) (n : ℤ) :
     DerivedCategory.isInvertible Λ X (L⟦n⟧) := by
-  obtain ⟨M, ⟨h⟩⟩ := hL
+  obtain ⟨M, ⟨h⟩, ⟨h'⟩⟩ := hL
   exact ⟨M⟦-n⟧, ⟨derivedTensorShiftIso _ L M n (-n) ≪≫ (shiftFunctor _ _).mapIso h ≪≫
-    (shiftFunctorZero' _ (n + -n) (by lia)).app _⟩⟩
+    (shiftFunctorZero' _ (n + -n) (by lia)).app _⟩,
+    ⟨derivedTensorShiftIso _ M L (-n) n ≪≫ (shiftFunctor _ _).mapIso h' ≪≫
+    (shiftFunctorZero' _ (-n + n) (by lia)).app _⟩⟩
 
 /-- Shifting moves the Tor amplitude: if `K` has Tor amplitude in `[a, b]`, then `K⟦n⟧` has
 Tor amplitude in `[a - n, b - n]`. -/
