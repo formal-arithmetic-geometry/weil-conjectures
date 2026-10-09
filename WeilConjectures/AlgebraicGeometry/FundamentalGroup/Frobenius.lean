@@ -8,9 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.Instances.ZMod
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
+public import WeilConjectures.GroupTheory.TorsionCharacter
 
 /-!
 # Transport of torsors along automorphisms and the Frobenius action on `H¹`
@@ -176,8 +181,164 @@ end Monodromy
 
 section Curve
 
-open FiniteEtale
+open FiniteEtale MonoidalCategory CartesianMonoidalCategory MonObj
 
+variable {K : Type u} [Field K] [Finite K]
+
+/-- The geometric Galois Frobenius of the geometric fibre `C = C₀ ×_K K̄` is the action
+`𝟙 × Spec σ` of the geometric Frobenius `σ ∈ Gal(K̄ / K)`. -/
+lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius_hom_eq_geometricFiberGaloisMap
+    [Fintype K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) :
+    p.geometricGaloisFrobenius.hom = p.geometricFiberGaloisMap
+      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)).toAlgHom := by
+  rw [Scheme.Hom.geometricGaloisFrobenius, asIso_hom, Scheme.Hom.geometricFiberGaloisMap]
+  congr 1
+  rw [Scheme.specAlgebraicClosureMap_left, specGeometricFrobenius_hom]
+  rfl
+
+/-- Blueprint `lem-wf-curve-h1-dual-tate-module`: Untwisted integral classes form the dual Tate
+module, at finite level (the isomorphisms (4.3) with `J[ℓⁿ](K̄) = Pic(C)[ℓⁿ]`).
+
+Let `C₀` be a proper smooth geometrically connected curve over a finite field `K`, `C` its
+geometric fibre and `ℓ ≠ char K`. The cup product followed by the trace
+`H¹(C, ℤ / ℓⁿ) × H¹(C, μ_{ℓⁿ}) ⟶ H²(C, μ_{ℓⁿ}) = ℤ / ℓⁿ` is perfect (blueprint
+`lem-wf-curve-finite-level-pd`), and Kummer theory identifies `H¹(C, μ_{ℓⁿ})` with the
+`ℓⁿ`-torsion of `Pic(C)` (blueprint `lem-wf-curve-kummer-jacobian-tate-module`). In the torsor
+model of `H¹(C, ℤ / ℓⁿ)` this gives maps `Ψ n` from `ℤ / ℓⁿ`-torsors to characters of
+`Pic(C)[ℓⁿ]` such that
+
+* a torsor with zero character has a section (nondegeneracy);
+* isomorphic torsors have the same character;
+* the transport along the geometric Galois Frobenius `g` corresponds to pulling back line
+  bundles along `g` (invariance of cup product and trace under the automorphism `g` of `C`);
+* the reduction `ℤ / ℓⁿ⁺¹ → ℤ / ℓⁿ` of torsors corresponds to the `ℓ`-th power map
+  `Pic(C)[ℓⁿ⁺¹] → Pic(C)[ℓⁿ]` (the compatibility of the Kummer sequences and traces). -/
+theorem _root_.AlgebraicGeometry.Scheme.EtaleTorsor.exists_picTorsionPairing {C : Scheme.{u}}
+    (p : C ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p] [IsProper p]
+    [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]
+    [ConnectedSpace p.geometricFiber] (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] :
+    ∃ Ψ : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber →
+        (AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ n) →+ ZMod (l ^ n)),
+      (∀ n t, Ψ n t = 0 → ∃ σ : p.geometricFiber ⟶ t.P, σ ≫ t.π = 𝟙 _) ∧
+      (∀ n t₁ t₂, t₁.IsIsomorphic t₂ → Ψ n t₁ = Ψ n t₂) ∧
+      (∀ n t y, Ψ n (t.mapIso p.geometricGaloisFrobenius) y =
+        Ψ n t ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.hom).toAdditive y,
+          AddSubgroup.apply_mem_torsionBy _ y.2⟩) ∧
+      ∀ n (t : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
+        (t' : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ (n + 1)))) p.geometricFiber),
+        (∀ g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
+          (t'.monodromy s G g).toAdd.down = (t.monodromy s G g).toAdd.down) →
+        ∀ y : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ (n + 1)),
+          Ψ n t ⟨(l : ℤ) • (y : Additive p.geometricFiber.Pic),
+            AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
+          ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n)) (Ψ (n + 1) t' y) := by
+  sorry
+
+/-- Blueprint `lem-wf-proper-curve-compatible-h1-no-fixed`: No fixed compatible `H¹`-system on a
+proper curve.
+
+The proper case of
+`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`: on the geometric
+fibre `C` of a proper smooth geometrically connected curve over `𝔽_q`, a compatible system of
+`ℤ / ℓⁿ`-torsors all fixed by the Frobenius is trivial.
+
+Through the pairings `AlgebraicGeometry.Scheme.EtaleTorsor.exists_picTorsionPairing` and the
+Jacobian `J₀` (`AlgebraicGeometry.JacobianTorsionDatum.nonempty`), such a system is a compatible
+system of Frobenius-invariant characters of `J₀(K̄)[ℓⁿ]`. Since the Frobenius has only finitely
+many fixed points on `J₀(K̄)`, namely `J₀(𝔽_q)`, such a system vanishes
+(`AddSubgroup.eq_zero_of_forall_map_eq_of_finite_fixedPoints`). -/
+theorem exists_section_of_isIsomorphic_mapIso_of_isProper
+    {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
+    [IsProper p] [GeometricallyConnected p] (l : ℕ) [Fact l.Prime] [Fact (ringChar K ≠ l)]
+    [ConnectedSpace p.geometricFiber] (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+    (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
+    (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
+      ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ) :
+    ∃ σ : p.geometricFiber ⟶ (t n).P, σ ≫ (t n).π = 𝟙 _ := by
+  have hl : l.Prime := Fact.out
+  let _ : Fintype K := Fintype.ofFinite K
+  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected p
+  have : GeometricallyIntegral p := .of_geometricallyReduced_of_geometricallyIrreducible _
+  obtain ⟨d⟩ := JacobianTorsionDatum.nonempty p l
+  obtain ⟨Ψ, h0, hiso, hfrob, hcompat⟩ := exists_picTorsionPairing p l s G
+  set σ₀ := FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)
+  let A := Additive (Scheme.specAlgebraicClosure K ⟶ d.J)
+  let e := IsAbelianVariety.geometricPointsAddEquiv (A := d.J) σ₀
+  let ψ (m : ℕ) : AddSubgroup.torsionBy A ((l : ℤ) ^ m) →+ ZMod (l ^ m) :=
+    (Ψ m (t m)).comp (d.equivTorsion m).toAddMonoidHom
+  have hfixfin : {a | e.toAddMonoidHom a = a}.Finite := by
+    refine (IsAbelianVariety.finite_setOf_frobenius_fixed d.J).subset fun a (ha : e a = a) ↦ ?_
+    change IsAbelianVariety.geometricPointsAddEquiv _ a = a
+    rw [← inv_inv (FiniteField.frobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)),
+      IsAbelianVariety.geometricPointsAddEquiv_inv,
+      ← FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
+    exact (AddEquiv.symm_apply_eq _).2 ha.symm
+  have hσ (m : ℕ) (y : AddSubgroup.torsionBy A ((l : ℤ) ^ m)) :
+      ψ m ⟨e.toAddMonoidHom y, AddSubgroup.apply_mem_torsionBy _ y.2⟩ = ψ m y := by
+    have hg := d.equivTorsion_galois m σ₀ y
+    rw [← Scheme.Hom.geometricGaloisFrobenius_hom_eq_geometricFiberGaloisMap] at hg
+    change Ψ m (t m) (d.equivTorsion m ⟨e y, _⟩) = Ψ m (t m) (d.equivTorsion m y)
+    rw [show d.equivTorsion m ⟨e y, _⟩ =
+        ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.hom).toAdditive (d.equivTorsion m y),
+          AddSubgroup.apply_mem_torsionBy _ (d.equivTorsion m y).2⟩ from
+      Subtype.ext hg, ← hfrob, hiso m _ _ (hfix m)]
+  have hψ (m : ℕ) (y : AddSubgroup.torsionBy A ((l : ℤ) ^ (m + 1))) :
+      ψ m ⟨(l : ℤ) • (y : A), AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
+        ZMod.castHom (pow_dvd_pow l (Nat.le_succ m)) _ (ψ (m + 1) y) := by
+    change Ψ m (t m) (d.equivTorsion m ⟨_, _⟩) = ZMod.castHom (pow_dvd_pow l (Nat.le_succ m)) _
+      (Ψ (m + 1) (t (m + 1)) (d.equivTorsion (m + 1) y))
+    rw [show d.equivTorsion m ⟨(l : ℤ) • (y : A), AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
+        ⟨(l : ℤ) • (d.equivTorsion (m + 1) y : Additive p.geometricFiber.Pic),
+          AddSubgroup.zsmul_mem_torsionBy_pow (d.equivTorsion (m + 1) y).2⟩ from
+      Subtype.ext (d.equivTorsion_zsmul m y)]
+    exact hcompat m (t m) (t (m + 1)) (ht m) _
+  have hψ0 := AddSubgroup.eq_zero_of_forall_map_eq_of_finite_fixedPoints hl e.toAddMonoidHom
+    hfixfin (IsAbelianVariety.finite_torsionBy_geometricPoints d.J l)
+    (IsAbelianVariety.exists_zsmul_eq_geometricPoints d.J l hl.pos) ψ hσ hψ n
+  refine h0 n (t n) (AddMonoidHom.ext fun y ↦ ?_)
+  obtain ⟨x, rfl⟩ := (d.equivTorsion n).surjective y
+  exact DFunLike.congr_fun hψ0 x
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
+curve, the consequence used for compatible Frobenius-fixed systems.
+
+Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
+compactification `c`, with geometric fibres `U ⊆ C` and `j : U ⟶ C`. A compatible system of
+`ℤ / ℓⁿ`-torsors on `U` all fixed by the Frobenius extends to a compatible system of
+Frobenius-fixed torsors on `C`. Indeed, by purity the residues of the system at the finitely many
+boundary points form a compatible system in `lim_n H⁰(D, ℤ / ℓⁿ(-1))`, fixed by a power
+`Φ_Q`, `Q = q ^ m`, of the Frobenius which fixes every boundary point and acts there as
+multiplication by `Q`; so the residues vanish, and the exact sequence
+`0 → H¹(C) → H¹(U) → H⁰(D, ℤ / ℓⁿ(-1))` gives the unique extensions, which are compatible and
+Frobenius-fixed by uniqueness. -/
+theorem exists_extension_of_isIsomorphic_mapIso
+    {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] (c : Compactification p) [IsCurve c.g]
+    [SmoothOfRelativeDimension 1 c.g] [GeometricallyConnected c.g] (l : ℕ) [Fact l.Prime]
+    [Fact (ringChar K ≠ l)] [ConnectedSpace p.geometricFiber]
+    [ConnectedSpace c.g.geometricFiber] (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+    (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
+    (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
+      ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) :
+    ∃ t' : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) c.g.geometricFiber,
+      (∀ n, Nonempty ((FiniteEtale.pullback (p.geometricFiberMap c.i c.comm.symm)).obj
+        (t' n).toFiniteEtale ≅ (t n).toFiniteEtale)) ∧
+      (∀ n, ((t' n).mapIso c.g.geometricGaloisFrobenius).IsIsomorphic (t' n)) ∧
+      ∀ (s' : Spec (.of (AlgebraicClosure K)) ⟶ c.g.geometricFiber) (G' : Type u) [Group G']
+        [TopologicalSpace G'] [IsTopologicalGroup G'] [CompactSpace G']
+        [∀ P, MulAction G' ((fiber s').obj P)] [IsFundamentalGroup (fiber s') G'] (n : ℕ) (g : G'),
+        ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
+          ((t' (n + 1)).monodromy s' G' g).toAdd.down = ((t' n).monodromy s' G' g).toAdd.down := by
+  sorry
 /-- Blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`: No Frobenius-fixed compatible class
 on an open normal curve.
 
@@ -209,7 +370,26 @@ theorem exists_section_of_isIsomorphic_mapIso {K : Type u} [Field K] [Finite K]
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
     (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ) :
     ∃ σ : p.geometricFiber ⟶ (t n).P, σ ≫ (t n).π = 𝟙 _ := by
-  sorry
+  -- Reduce to the smooth proper compactification `C₀` of `U₀`.
+  obtain ⟨c, hcurve, hsm, hconn, -, -⟩ := exists_smooth_properCompactification p
+  have := c.isProper
+  have : ConnectedSpace c.g.geometricFiber :=
+    pullback_of_geometrically (GeometricallyConnected.geometrically_connectedSpace (f := c.g)) _ _
+  obtain ⟨t', ht'U, ht'fix, ht'compat⟩ :=
+    exists_extension_of_isIsomorphic_mapIso p c l s G t ht hfix
+  let j := p.geometricFiberMap c.i c.comm.symm
+  obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
+  obtain ⟨σ', hσ'⟩ := exists_section_of_isIsomorphic_mapIso_of_isProper c.g l (s ≫ j) G' t'
+    (ht'compat (s ≫ j) G') ht'fix n
+  -- The section of the extended torsor restricts to a section over `U`.
+  obtain ⟨e⟩ := ht'U n
+  refine ⟨pullback.lift (j ≫ σ') (𝟙 _)
+    (by change j ≫ σ' ≫ (t' n).π = 𝟙 _ ≫ j; rw [hσ', Category.comp_id, Category.id_comp]) ≫
+      e.hom.hom.left, ?_⟩
+  have he : e.hom.hom.left ≫ (t n).π = pullback.snd (t' n).π j :=
+    MorphismProperty.Over.w e.hom.hom
+  rw [Category.assoc, he]
+  exact pullback.lift_snd _ _ _
 
 end Curve
 

@@ -189,6 +189,17 @@ theorem nonempty_tateModuleEquiv (d : JacobianTorsionDatum p l) :
     congr 2
     exact Subtype.ext (AddCommGroup.tateModule.zsmul_coe_succ t n)
 
+variable (p l) in
+/-- Blueprint `sk-prop-jacobian-descent`: The Jacobian over a general base field, by Galois
+descent.
+
+Every proper smooth geometrically connected curve over a finite field admits a Jacobian torsion
+datum: the descended Jacobian `J₀` of `AlgebraicGeometry.exists_jacobian_descent` with its
+Galois-equivariant identification `J₀(K̄) ≅ Pic⁰(C)`, restricted to `lⁿ`-torsion, which lies in
+`Pic⁰(C)`. -/
+theorem nonempty [SmoothOfRelativeDimension 1 p] : Nonempty (JacobianTorsionDatum p l) := by
+  sorry
+
 end JacobianTorsionDatum
 
 end AlgebraicGeometry
