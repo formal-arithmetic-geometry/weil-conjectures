@@ -185,14 +185,6 @@ lemma smulMor_mul {Y : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op Y))) (
     smulMor A (a * b) = smulMor A b ≫ smulMor A a :=
   Scheme.Modules.smulHom_mul (A : Y.Modules) a b
 
-lemma pullHom_smulMor {Y Y' Z : Scheme.{u}} (M : modulesPseudofunctor.obj (.mk (op Z)))
-    (f₁ : Y ⟶ Z) (b : Y' ⟶ Y) (bf : Y' ⟶ Z) (h : b ≫ f₁ = bf) (u : Γ(Y, ⊤)) :
-    pullHom (F := modulesPseudofunctor)
-      (smulMor ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj M) u) b bf bf h h =
-      smulMor ((modulesPseudofunctor.map bf.op.toLoc).toFunctor.obj M) (b.appTop u) :=
-  pullHom_smulHom M f₁ b bf h u
-
-
 lemma presheafHom_map_smulMor_comp {X : Scheme.{u}} (O L : modulesPseudofunctor.obj (.mk (op X)))
     {T T' : Over X} (g : T' ⟶ T) (a : Γ(T.left, ⊤))
     (t : (modulesPseudofunctor.presheafHom O L).obj (op T)) :
@@ -202,8 +194,9 @@ lemma presheafHom_map_smulMor_comp {X : Scheme.{u}} (O L : modulesPseudofunctor.
           (g.left.appTop a) ≫
         (modulesPseudofunctor.presheafHom O L).map g.op t := by
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
-  rw [pullHom_comp (smulMor _ a) t g.left T'.hom T'.hom T'.hom (Over.w g) (Over.w g) (Over.w g),
-    pullHom_smulMor]
+  rw [pullHom_comp (smulMor _ a) t g.left T'.hom T'.hom T'.hom (Over.w g) (Over.w g) (Over.w g)]
+  unfold smulMor
+  rw [pullHom_smulHom]
 
 namespace Scheme
 
@@ -246,56 +239,14 @@ lemma isSheaf_etaleIso (M N : modulesPseudofunctor.obj (.mk (op X)))
   exact Pseudofunctor.isIso_of_isIso_presheafHom_map _ φ (h N M _ hφ) (h M M _ hφ)
     (h N N _ hφ) fun W g hg ↦ hg
 
-lemma exists_eq_smulHom_unit (f : Modules.unit X ⟶ Modules.unit X) :
-    ∃ a : Γ(X, ⊤), f = (Modules.unit X).smulHom a := by
-  let a : Γ(X, ⊤) := f.app ⊤ (show Γ(Modules.unit X, ⊤) from (1 : Γ(X, ⊤)))
-  refine ⟨a, ?_⟩
-  ext U x
-  let x' : Γ(X, U) := x
-  have h₁ : f.app U x = x' • f.app U (show Γ(Modules.unit X, U) from (1 : Γ(X, U))) := by
-    rw [← Hom.app_smul]
-    congr 1
-    exact (mul_one x').symm
-  have h₂ : f.app U (show Γ(Modules.unit X, U) from (1 : Γ(X, U))) =
-      (Modules.unit X).presheaf.map (homOfLE (le_top (a := U))).op
-        (show Γ(Modules.unit X, ⊤) from a) := by
-    rw [← Hom.app_presheaf_map]
-    congr 1
-    exact (map_one (X.presheaf.map (homOfLE (le_top (a := U))).op).hom).symm
-  erw [smulHom_app_apply, h₁, h₂]
-  exact mul_comm x' _
-
-lemma exists_eq_smulHom_of_iso {Y : Scheme.{u}} {M : Y.Modules} (e : M ≅ Modules.unit Y)
-    (f : M ⟶ M) : ∃ a : Γ(Y, ⊤), f = M.smulHom a := by
-  obtain ⟨a, h⟩ := exists_eq_smulHom_unit (e.inv ≫ f ≫ e.hom)
-  refine ⟨a, ?_⟩
-  calc f = e.hom ≫ (e.inv ≫ f ≫ e.hom) ≫ e.inv := by simp
-    _ = _ := by rw [h, ← smulHom_naturality_assoc, Iso.hom_inv_id, Category.comp_id]
-
-lemma smulHom_unit_injective : Function.Injective (Modules.unit X).smulHom := by
-  intro a b h
-  have key (c : Γ(X, ⊤)) : ((Modules.unit X).smulHom c).app ⊤
-      (show Γ(Modules.unit X, ⊤) from (1 : Γ(X, ⊤))) = (show Γ(Modules.unit X, ⊤) from c) := by
-    erw [smulHom_app_apply]
-    change X.presheaf.map (homOfLE (le_top (a := (⊤ : X.Opens)))).op c * 1 = c
-    rw [mul_one]
-    exact congrArg (fun φ : Γ(X, ⊤) ⟶ Γ(X, ⊤) ↦ φ c) (X.presheaf.map_id _)
-  have := key a
-  rw [h, key b] at this
-  exact this.symm
-
-lemma smulHom_injective_of_iso {Y : Scheme.{u}} {M : Y.Modules} (e : M ≅ Modules.unit Y) :
-    Function.Injective M.smulHom := by
-  intro a b h
-  have key (c : Γ(Y, ⊤)) : (e.inv ≫ M.smulHom c ≫ e.hom) = (Modules.unit Y).smulHom c := by
-    rw [smulHom_naturality, Iso.inv_hom_id_assoc]
-  apply smulHom_unit_injective
-  rw [← key, ← key, h]
-
 instance isIso_smulHom_units {Y : Scheme.{u}} (M : Y.Modules) (a : Γ(Y, ⊤)ˣ) :
     IsIso (M.smulHom (a : Γ(Y, ⊤))) :=
   ⟨M.smulHom (a⁻¹ : Γ(Y, ⊤)ˣ), by rw [← smulHom_mul, Units.inv_mul, smulHom_one], by
     rw [← smulHom_mul, Units.mul_inv, smulHom_one]⟩
+
+instance isIso_smulMor_units {Y : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op Y)))
+    (a : Γ(Y, ⊤)ˣ) : IsIso (smulMor A a) :=
+  isIso_smulHom_units (A : Y.Modules) a
 
 /-- The structure sheaf, as an object of `modulesPseudofunctor`. -/
 noncomputable abbrev unitObj (X : Scheme.{u}) : modulesPseudofunctor.obj (.mk (op X)) :=
@@ -304,29 +255,29 @@ noncomputable abbrev unitObj (X : Scheme.{u}) : modulesPseudofunctor.obj (.mk (o
 instance : ((unitObj X : modulesPseudofunctor.obj (.mk (op X))) : X.Modules).IsQuasicoherent :=
   SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
 
-lemma exists_smulHom_comp_eq {Y : Scheme.{u}} {A B : Y.Modules} (e : A ≅ Modules.unit Y)
+lemma exists_smulHom_comp_eq {Y : Scheme.{u}} {A B : Y.Modules} [A.IsInvertible]
     (t s : A ⟶ B) [IsIso t] [IsIso s] : ∃ a : Γ(Y, ⊤)ˣ, A.smulHom a ≫ t = s := by
-  obtain ⟨c, hc⟩ := exists_eq_smulHom_of_iso e (s ≫ inv t)
-  obtain ⟨d, hd⟩ := exists_eq_smulHom_of_iso e (t ≫ inv s)
+  obtain ⟨c, hc⟩ := exists_eq_smulHom A (s ≫ inv t)
+  obtain ⟨d, hd⟩ := exists_eq_smulHom A (t ≫ inv s)
   have h₁ : A.smulHom (c * d) = A.smulHom 1 := by
     rw [smulHom_mul, ← hc, ← hd, smulHom_one]
     simp
-  have h₂ : c * d = 1 := smulHom_injective_of_iso e h₁
+  have h₂ : c * d = 1 := eq_of_smulHom_eq A h₁
   refine ⟨⟨c, d, h₂, by rw [mul_comm, h₂]⟩, ?_⟩
   change A.smulHom c ≫ t = s
   rw [← hc]
   simp
 
 lemma smulMor_comp_injective {Y : Scheme.{u}} {A B : modulesPseudofunctor.obj (.mk (op Y))}
-    (e : (A : Y.Modules) ≅ Modules.unit Y) (t : A ⟶ B) (ht : IsIso t) :
+    [(A : Y.Modules).IsInvertible] (t : A ⟶ B) (ht : IsIso t) :
     Function.Injective (fun a : Γ(Y, ⊤) ↦ smulMor A a ≫ t) := by
   intro a b h
-  exact smulHom_injective_of_iso e ((cancel_mono t).1 h)
+  exact eq_of_smulHom_eq (A : Y.Modules) ((cancel_mono t).1 h)
 
 lemma exists_smulMor_comp_eq {Y : Scheme.{u}} {A B : modulesPseudofunctor.obj (.mk (op Y))}
-    (e : (A : Y.Modules) ≅ Modules.unit Y) (t s : A ⟶ B) (ht : IsIso t) (hs : IsIso s) :
+    [(A : Y.Modules).IsInvertible] (t s : A ⟶ B) (ht : IsIso t) (hs : IsIso s) :
     ∃ a : Γ(Y, ⊤)ˣ, smulMor A a ≫ t = s :=
-  @exists_smulHom_comp_eq Y A B e t s ht hs
+  @exists_smulHom_comp_eq Y A B _ t s ht hs
 
 end Modules
 

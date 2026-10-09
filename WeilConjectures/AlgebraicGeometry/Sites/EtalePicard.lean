@@ -42,11 +42,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-instance isIso_smulMor_units {Y : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op Y)))
-    (a : Γ(Y, ⊤)ˣ) : IsIso (smulMor A a) :=
-  ⟨smulMor A (a⁻¹ : Γ(Y, ⊤)ˣ), by rw [← smulMor_mul, Units.inv_mul, smulMor_one], by
-    rw [← smulMor_mul, Units.mul_inv, smulMor_one]⟩
-
 variable (L L' : modulesPseudofunctor.obj (.mk (op X)))
   [SheafOfModules.IsInvertible.{u, u, u} (L : X.Modules)]
   [SheafOfModules.IsInvertible.{u, u, u} (L' : X.Modules)]

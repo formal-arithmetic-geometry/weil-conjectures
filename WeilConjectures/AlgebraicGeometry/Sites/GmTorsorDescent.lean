@@ -219,8 +219,9 @@ noncomputable def descentData :
       (unitDescentData V).hom q f₁ f₂ hf₁ hf₂
   pullHom_hom Y' Y g q q' hq i₁ i₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ := by
     subst hgf₁ hgf₂
-    rw [pullHom_comp _ _ g (g ≫ f₁) (g ≫ f₁) (g ≫ f₂) rfl rfl rfl, pullHom_smulMor,
-      transitionAt_comp]
+    rw [pullHom_comp _ _ g (g ≫ f₁) (g ≫ f₁) (g ≫ f₂) rfl rfl rfl]
+    unfold smulMor
+    rw [pullHom_smulHom, transitionAt_comp]
     · congr 1
       exact (unitDescentData V).pullHom_hom g q q' hq f₁ f₂ hf₁
         hf₂ (g ≫ f₁) (g ≫ f₂) rfl rfl
@@ -267,7 +268,9 @@ end AlgebraicGeometry.Scheme.Torsor
 
 namespace AlgebraicGeometry.Scheme.Torsor
 
-lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M₁ M₂ : 𝒞} (α : Oq ≅ O₁)
+/-- Transport of a commutative square along isomorphisms: if `x₁ ≫ β⁻¹ ≫ δ = (s ≫ α⁻¹ ≫ γ) ≫ x₂`
+and `α ≫ s = s' ≫ α`, then `α ≫ x₁ ≫ β⁻¹ = s' ≫ γ ≫ x₂ ≫ δ⁻¹`. -/
+private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M₁ M₂ : 𝒞} (α : Oq ≅ O₁)
     (β : Mq ≅ M₁) (γ : Oq ≅ O₂) (δ : Mq ≅ M₂) (x₁ : O₁ ⟶ M₁) (x₂ : O₂ ⟶ M₂) (s : O₁ ⟶ O₁)
     (s' : Oq ⟶ Oq) (hs : α.hom ≫ s = s' ≫ α.hom)
     (comm : x₁ ≫ β.inv ≫ δ.hom = (s ≫ α.inv ≫ γ.hom) ≫ x₂) :

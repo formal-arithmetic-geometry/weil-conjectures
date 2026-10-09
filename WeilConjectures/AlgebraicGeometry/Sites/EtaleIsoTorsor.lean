@@ -79,12 +79,14 @@ noncomputable def etaleIsoTorsor [SheafOfModules.IsInvertible.{u, u, u} (L : X.M
     exact presheafHom_map_smulMor_comp (unitObj X) L ((toProEt X ⋙ ProEt.forget X).map f.unop) _
       t.down.1
   bijective_vadd V t := by
-    have e := pullbackObjUnitIso ((toProEt X ⋙ ProEt.forget X).obj V.unop).hom
+    have : (Modules.unit X).IsInvertible := isInvertible_tensorUnit
+    have hA : ((pullback ((toProEt X ⋙ ProEt.forget X).obj V.unop).hom).obj
+        (Modules.unit X)).IsInvertible := inferInstance
     refine ⟨fun a b h ↦ ?_, fun s ↦ ?_⟩
     · have h' := congrArg (fun x ↦ x.down.1) h
-      have := smulMor_comp_injective e t.down.1 t.down.2 h'
+      have := @smulMor_comp_injective _ _ _ hA t.down.1 t.down.2 _ _ h'
       exact ULift.ext _ _ (Additive.toMul.injective (Units.ext this))
-    · obtain ⟨a, ha⟩ := exists_smulMor_comp_eq e t.down.1 s.down.1 t.down.2 s.down.2
+    · obtain ⟨a, ha⟩ := @exists_smulMor_comp_eq _ _ _ hA t.down.1 s.down.1 t.down.2 s.down.2
       exact ⟨ULift.up (Additive.ofMul a), ULift.ext _ _ (Subtype.ext ha)⟩
   nonemptySieve_mem V := by
     have (w : V.left) := exists_isFreeGenerator (L : X.Modules) (W := ⊤) (x := V.hom w) trivial
