@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.RingTheory.Etale.Descent
 public import Mathlib.RingTheory.Finiteness.Descent
 public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
 
 /-!
 # Fixed points of finite étale algebras
@@ -261,6 +262,39 @@ end AlgHom
 
 namespace AlgHom
 
+/-- After inverting `h`, a family of endomorphisms of `Fin n → S` satisfying the conclusion of
+`AlgHom.exists_localizationAway_coordinate` becomes the coordinate family of `π`. -/
+lemma conjFamily_piScalarRight_eq_coordFamily {S : Type*} [CommRing S] {n : ℕ} {ι : Type*}
+    (σ : ι → (Fin n → S) →ₐ[S] (Fin n → S)) (h : S) (π : ι → Fin n → Fin n)
+    (hπ : ∀ i x, algebraMap S (Localization.Away h) (σ i (Pi.single (π i x) 1) x) = 1) :
+    conjFamily (Algebra.TensorProduct.piScalarRight S (Localization.Away h)
+      (Localization.Away h) (Fin n)) (baseChangeFamily (Localization.Away h) σ) =
+      coordFamily π := by
+  let Sh := Localization.Away h
+  let e := Algebra.TensorProduct.piScalarRight S Sh Sh (Fin n)
+  funext i
+  ext f x
+  let ψ : (Fin n → Sh) →+* Sh :=
+    (Pi.evalRingHom _ x).comp (conjFamily e (baseChangeFamily Sh σ) i).toRingHom
+  have hsymm (y : Fin n) : e.symm (Pi.single y 1) = 1 ⊗ₜ Pi.single y 1 := by
+    rw [AlgEquiv.symm_apply_eq]
+    ext z
+    by_cases hz : z = y
+    · subst hz; simp [e]
+    · simp [e, hz]
+  have h1 : ψ (Pi.single (π i x) 1) = 1 := by
+    simp only [ψ, RingHom.comp_apply, Pi.evalRingHom_apply, AlgHom.toRingHom_eq_coe,
+      RingHom.coe_coe, conjFamily_apply, hsymm, Algebra.TensorProduct.map_tmul,
+      AlgHom.id_apply]
+    simp only [e, Algebra.TensorProduct.piScalarRight_tmul, Algebra.smul_def, mul_one]
+    exact hπ i x
+  have := Pi.ringHom_apply_eq_of_apply_single ψ (π i x) h1 f
+  simp only [ψ, RingHom.comp_apply, Pi.evalRingHom_apply, AlgHom.toRingHom_eq_coe,
+    RingHom.coe_coe] at this
+  rw [this, show (fun _ ↦ f (π i x)) = algebraMap Sh (Fin n → Sh) (f (π i x)) from rfl,
+    AlgHom.commutes]
+  rfl
+
 /-- The fixed points of a finite family of algebra endomorphisms of `Fin n → S` form a finite
 étale `S`-algebra: locally on `Spec S` the family consists of coordinate endomorphisms, whose
 fixed points are the functions on a quotient of `Fin n`. -/
@@ -272,33 +306,34 @@ theorem finite_and_etale_fixedPoints_fun {S : Type u} [CommRing S] {n : ℕ} {ι
   refine ⟨h, hq, ?_⟩
   let Sh := Localization.Away h
   let e := Algebra.TensorProduct.piScalarRight S Sh Sh (Fin n)
-  have hconj : conjFamily e (baseChangeFamily Sh σ) = coordFamily π := by
-    funext i
-    ext f x
-    let ψ : (Fin n → Sh) →+* Sh :=
-      (Pi.evalRingHom _ x).comp (conjFamily e (baseChangeFamily Sh σ) i).toRingHom
-    have hsymm (y : Fin n) : e.symm (Pi.single y 1) = 1 ⊗ₜ Pi.single y 1 := by
-      rw [AlgEquiv.symm_apply_eq]
-      ext z
-      by_cases hz : z = y
-      · subst hz; simp [e]
-      · simp [e, hz]
-    have h1 : ψ (Pi.single (π i x) 1) = 1 := by
-      simp only [ψ, RingHom.comp_apply, Pi.evalRingHom_apply, AlgHom.toRingHom_eq_coe,
-        RingHom.coe_coe, conjFamily_apply, hsymm, Algebra.TensorProduct.map_tmul,
-        AlgHom.id_apply]
-      simp only [e, Algebra.TensorProduct.piScalarRight_tmul, Algebra.smul_def, mul_one]
-      exact hπ i x
-    have := Pi.ringHom_apply_eq_of_apply_single ψ (π i x) h1 f
-    simp only [ψ, RingHom.comp_apply, Pi.evalRingHom_apply, AlgHom.toRingHom_eq_coe,
-      RingHom.coe_coe] at this
-    rw [this, show (fun _ ↦ f (π i x)) = algebraMap Sh (Fin n → Sh) (f (π i x)) from rfl,
-      AlgHom.commutes]
-    rfl
   let E : Sh ⊗[S] fixedPoints σ ≃ₐ[Sh] (Quot (fun x y : Fin n ↦ ∃ i, π i x = y) → Sh) :=
     (tensorFixedPointsEquiv Sh σ).trans <| (fixedPointsCongr e _).trans <|
-      (Subalgebra.equivOfEq _ _ (by rw [hconj])).trans (fixedPointsCoordFamilyEquiv π)
+      (Subalgebra.equivOfEq _ _ (by rw [conjFamily_piScalarRight_eq_coordFamily σ h π hπ])).trans
+        (fixedPointsCoordFamilyEquiv π)
   exact ⟨Module.Finite.equiv E.symm.toLinearEquiv, Algebra.Etale.of_equiv E.symm⟩
+
+/-- The rank of a finite étale algebra is locally constant: every prime `p` of `R` has a basic
+open neighbourhood `D(f)` over which `A` has constant rank. -/
+lemma _root_.Algebra.exists_rankAtStalk_localizationAway_eq {R A : Type u} [CommRing R]
+    [CommRing A] [Algebra R A] [Module.Finite R A] [Algebra.Etale R A] (p : Ideal R)
+    [hp : p.IsPrime] :
+    ∃ f ∉ p, ∃ n : ℕ,
+      Module.rankAtStalk (R := Localization.Away f) (Localization.Away f ⊗[R] A) = n := by
+  have : Module.FinitePresentation R A := .of_finite_of_finitePresentation R A
+  have hopen := (Module.isLocallyConstant_rankAtStalk (R := R) (M := A)).isOpen_fiber
+    (Module.rankAtStalk A ⟨p, hp⟩)
+  obtain ⟨_, ⟨f, rfl⟩, hpf, hf⟩ :=
+    PrimeSpectrum.isTopologicalBasis_basic_opens.exists_subset_of_mem_open
+      (a := ⟨p, hp⟩) (show (⟨p, hp⟩ : PrimeSpectrum R) ∈
+        {x | Module.rankAtStalk A x = Module.rankAtStalk A ⟨p, hp⟩} from rfl) hopen
+  refine ⟨f, hpf, Module.rankAtStalk A ⟨p, hp⟩, ?_⟩
+  ext q
+  rw [Module.rankAtStalk_baseChange, Pi.natCast_apply, Nat.cast_id]
+  refine hf ?_
+  change f ∉ (q.comap (algebraMap R (Localization.Away f))).asIdeal
+  rw [PrimeSpectrum.comap_asIdeal, Ideal.mem_comap]
+  exact fun h ↦ q.2.ne_top (Ideal.eq_top_of_isUnit_mem _ h
+    (IsLocalization.Away.algebraMap_isUnit f))
 
 /-- **Fixed points of a finite étale algebra.** The common fixed points of a finite family of
 endomorphisms of a finite étale `R`-algebra form a finite étale `R`-algebra.
@@ -311,37 +346,105 @@ flat base change, and the fixed points of a family of endomorphisms of `Fin n �
 theorem finite_and_etale_fixedPoints {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
     [Module.Finite R A] [Algebra.Etale R A] {ι : Type*} [_root_.Finite ι] (σ : ι → A →ₐ[R] A) :
     Module.Finite R (fixedPoints σ) ∧ Algebra.Etale R (fixedPoints σ) := by
-  have : Module.FinitePresentation R A := .of_finite_of_finitePresentation R A
   refine Algebra.finite_and_etale_of_forall_exists_localizationAway fun p hp ↦ ?_
-  -- the rank of `A` is constant on a basic open neighbourhood `D(f)` of `p`
-  have hopen := (Module.isLocallyConstant_rankAtStalk (R := R) (M := A)).isOpen_fiber
-    (Module.rankAtStalk A ⟨p, hp⟩)
-  obtain ⟨_, ⟨f, rfl⟩, hpf, hf⟩ :=
-    PrimeSpectrum.isTopologicalBasis_basic_opens.exists_subset_of_mem_open
-      (a := ⟨p, hp⟩) (show (⟨p, hp⟩ : PrimeSpectrum R) ∈
-        {x | Module.rankAtStalk A x = Module.rankAtStalk A ⟨p, hp⟩} from rfl) hopen
+  obtain ⟨f, hpf, n, hrank⟩ := Algebra.exists_rankAtStalk_localizationAway_eq (A := A) p
   refine ⟨f, hpf, ?_⟩
-  let Rf := Localization.Away f
-  have hrank : Module.rankAtStalk (R := Rf) (Rf ⊗[R] A) = Module.rankAtStalk A ⟨p, hp⟩ := by
-    ext q
-    rw [Module.rankAtStalk_baseChange, Pi.natCast_apply, Nat.cast_id]
-    refine hf ?_
-    change f ∉ (q.comap (algebraMap R Rf)).asIdeal
-    rw [PrimeSpectrum.comap_asIdeal, Ideal.mem_comap]
-    exact fun h ↦ q.2.ne_top (Ideal.eq_top_of_isUnit_mem _ h
-      (IsLocalization.Away.algebraMap_isUnit f))
   obtain ⟨T, _, _, _, _, _, hT⟩ := Algebra.IsFiniteSplit.exists_tensorProduct_of_etale hrank
   obtain ⟨m, ⟨e⟩⟩ := hT.nonempty_algEquiv_fun
   obtain ⟨h₁, h₂⟩ :=
-    finite_and_etale_fixedPoints_fun (conjFamily e (baseChangeFamily T (baseChangeFamily Rf σ)))
-  let E : T ⊗[Rf] (Rf ⊗[R] fixedPoints σ) ≃ₐ[T]
-      fixedPoints (conjFamily e (baseChangeFamily T (baseChangeFamily Rf σ))) :=
-    (Algebra.TensorProduct.congr AlgEquiv.refl (tensorFixedPointsEquiv Rf σ)).trans <|
+    finite_and_etale_fixedPoints_fun (conjFamily e (baseChangeFamily T (baseChangeFamily (Localization.Away f) σ)))
+  let E : T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ) ≃ₐ[T]
+      fixedPoints (conjFamily e (baseChangeFamily T (baseChangeFamily (Localization.Away f) σ))) :=
+    (Algebra.TensorProduct.congr AlgEquiv.refl (tensorFixedPointsEquiv (Localization.Away f) σ)).trans <|
       (tensorFixedPointsEquiv T _).trans (fixedPointsCongr e _)
-  have : Module.Finite T (T ⊗[Rf] (Rf ⊗[R] fixedPoints σ)) :=
+  have : Module.Finite T (T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ)) :=
     Module.Finite.equiv E.symm.toLinearEquiv
-  have : Algebra.Etale T (T ⊗[Rf] (Rf ⊗[R] fixedPoints σ)) := Algebra.Etale.of_equiv E.symm
+  have : Algebra.Etale T (T ⊗[(Localization.Away f)] ((Localization.Away f) ⊗[R] fixedPoints σ)) := Algebra.Etale.of_equiv E.symm
   exact ⟨.of_finite_tensorProduct_of_faithfullyFlat T,
     Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat T⟩
 
 end AlgHom
+
+namespace Relation
+
+/-- Transport of the equivalence closure along a bijection. -/
+lemma eqvGen_equiv_iff {α β : Type*} (e : α ≃ β) {r : α → α → Prop} {s : β → β → Prop}
+    (h : ∀ a a', r a a' ↔ s (e a) (e a')) (a a' : α) :
+    EqvGen r a a' ↔ EqvGen s (e a) (e a') := by
+  constructor
+  · intro H
+    induction H with
+    | rel x y hxy => exact .rel _ _ ((h x y).mp hxy)
+    | refl x => exact .refl _
+    | symm x y _ ih => exact .symm _ _ ih
+    | trans x y z _ _ ih₁ ih₂ => exact .trans _ _ _ ih₁ ih₂
+  · intro H
+    have key : ∀ b b', EqvGen s b b' → EqvGen r (e.symm b) (e.symm b') := by
+      intro b b' H
+      induction H with
+      | rel x y hxy => exact .rel _ _ ((h _ _).mpr (by simpa using hxy))
+      | refl x => exact .refl _
+      | symm x y _ ih => exact .symm _ _ ih
+      | trans x y z _ _ ih₁ ih₂ => exact .trans _ _ _ ih₁ ih₂
+    simpa using key _ _ H
+
+end Relation
+
+namespace RingHom.PointsOver
+
+variable {R : Type*} [CommRing R] {Ω : Type*} [Field Ω] {φ : R →+* Ω}
+  {B C : Type*} [CommRing B] [CommRing C] [Algebra R B] [Algebra R C]
+
+/-- The restriction of points along an algebra map. -/
+def comap (g : B →ₐ[R] C) (t : PointsOver φ C) : PointsOver φ B :=
+  ⟨t.1.comp g.toRingHom, by ext r; simp [t.apply_algebraMap]⟩
+
+@[simp]
+lemma comap_apply (g : B →ₐ[R] C) (t : PointsOver φ C) (b : B) : comap g t b = t (g b) :=
+  rfl
+
+/-- The restriction of points along an algebra isomorphism, as an equivalence. -/
+def comapEquiv (e : B ≃ₐ[R] C) : PointsOver φ C ≃ PointsOver φ B where
+  toFun := comap (e : B →ₐ[R] C)
+  invFun := comap (e.symm : C →ₐ[R] B)
+  left_inv t := by ext; simp
+  right_inv t := by ext; simp
+
+@[simp]
+lemma comapEquiv_apply (e : B ≃ₐ[R] C) (t : PointsOver φ C) (b : B) :
+    comapEquiv e t b = t (e b) :=
+  rfl
+
+/-- The points of `X → R` over `φ` are the evaluations at the elements of `X`. -/
+noncomputable def evalEquiv (X : Type*) [Fintype X] [DecidableEq X] :
+    X ≃ PointsOver φ (X → R) :=
+  Equiv.ofBijective (fun x ↦ ⟨φ.comp (Pi.evalRingHom _ x), by ext; simp⟩) <| by
+    constructor
+    · intro x y hxy
+      by_contra hne
+      have := congr_arg (fun t : PointsOver φ (X → R) ↦ t (Pi.single x 1)) hxy
+      simp [Ne.symm hne] at this
+    · intro t
+      have hidem (x : X) : IsIdempotentElem (t (Pi.single x 1)) := by
+        rw [IsIdempotentElem, ← map_mul, ← Pi.single_mul, mul_one]
+      have hsum : ∑ x, t (Pi.single x 1) = 1 := by
+        rw [← map_sum, Finset.univ_sum_single (fun _ ↦ (1 : R)),
+          show (fun _ ↦ (1 : R)) = (1 : X → R) from rfl, map_one]
+      obtain ⟨x, -, hx⟩ : ∃ x ∈ Finset.univ, t (Pi.single x 1) ≠ 0 := by
+        by_contra! H
+        rw [Finset.sum_eq_zero H] at hsum
+        exact zero_ne_one hsum
+      have hx1 : t (Pi.single x 1) = 1 :=
+        (IsIdempotentElem.iff_eq_zero_or_one.mp (hidem x)).resolve_left hx
+      refine ⟨x, ?_⟩
+      ext f
+      have := Pi.ringHom_apply_eq_of_apply_single t.1 x hx1 f
+      change φ (f x) = t f
+      rw [this, show (fun _ ↦ f x) = algebraMap R (X → R) (f x) from rfl, t.apply_algebraMap]
+
+@[simp]
+lemma evalEquiv_apply (X : Type*) [Fintype X] [DecidableEq X] (x : X) (f : X → R) :
+    evalEquiv (φ := φ) X x f = φ (f x) :=
+  rfl
+
+end RingHom.PointsOver
