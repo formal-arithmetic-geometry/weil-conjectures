@@ -88,35 +88,14 @@ theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k
     IsRegularLocalRing ((pullback f g).presheaf.stalk z) :=
   sorry
 
-/-- Let `V` be an affine open of a scheme `X` and `R → Γ(X, V)` an étale ring map from a regular
-ring `R`. Then the local rings of `X` at the points of `V` are regular: they are localizations of
-`Γ(X, V)` at primes (`IsRegularLocalRing.localization_of_etale`). -/
-theorem IsAffineOpen.isRegularLocalRing_stalk_of_etale {X : Scheme.{u}} {R : Type u}
-    [CommRing R] [IsRegularRing R] {V : X.Opens} (hV : IsAffineOpen V) (φ : R →+* Γ(X, V))
-    (hφ : φ.Etale) (x : X) (hx : x ∈ V) : IsRegularLocalRing (X.presheaf.stalk x) := by
-  algebraize [φ]
-  let := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hx⟩
-  have := hV.isLocalization_stalk ⟨x, hx⟩
-  have := IsRegularLocalRing.localization_of_etale (R := R) (hV.primeIdealOf ⟨x, hx⟩).asIdeal
-  exact .of_ringEquiv (IsLocalization.algEquiv (hV.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
-    (Localization.AtPrime (hV.primeIdealOf ⟨x, hx⟩).asIdeal) (X.presheaf.stalk x)).toRingEquiv
-
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
 regular local rings, hence domains (`IsRegularLocalRing.isDomain`). Near any point `X` is étale
 over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps preserve regularity.
 
 (blueprint: `lem-sc-smooth-regular`) -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
-    [Smooth f] : IsRegular X := by
-  refine ⟨fun x ↦ ?_⟩
-  obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
-  have : SmoothOfRelativeDimension d (V.ι ≫ f) := by
-    rw [← Scheme.Hom.resLE_comp_ι f e]
-    exact smoothOfRelativeDimension_comp (n := d) (m := 0) _ _
-  obtain ⟨W, hW, hxW, φ, hφ⟩ :=
-    SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field (V.ι ≫ f) d ⟨x, hx⟩
-  have := hW.isRegularLocalRing_stalk_of_etale φ hφ _ hxW
-  exact .of_ringEquiv (V.stalkIso ⟨x, hx⟩).commRingCatIsoToRingEquiv
+    [Smooth f] : IsRegular X :=
+  ⟨Smooth.isRegularLocalRing_stalk f⟩
 
 /-- A regular scheme locally of finite type over a perfect field `k` is smooth over `k`: at a
 point `x` the residue field is finitely generated over the perfect field `k`, hence separably

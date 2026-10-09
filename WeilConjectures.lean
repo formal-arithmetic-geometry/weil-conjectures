@@ -1032,6 +1032,7 @@ public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
