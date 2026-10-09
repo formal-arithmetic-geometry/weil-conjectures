@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 
 /-!
@@ -29,6 +30,33 @@ lemma CategoryTheory.conj_eq_comp_conj {C D : Type*} [Category C] [Category D]
         (s₂.symm ≪≫ (c.app Y).symm ≪≫ s₁).hom := by
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
     Iso.hom_inv_id_assoc, NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
+
+lemma CategoryTheory.conj_eq_comp_conj' {C D : Type*} [Category C] [Category D]
+    {F₁ F₂ : C ⥤ D} (c : F₁ ≅ F₂) {X Y : C} (φ : X ⟶ Y) {A B : D}
+    (t₁ : F₁.obj X ≅ A) (s₁ : F₁.obj Y ≅ B) :
+    t₁.inv ≫ F₁.map φ ≫ s₁.hom =
+      (t₁.symm ≪≫ c.app X).hom ≫ F₂.map φ ≫ ((c.app Y).symm ≪≫ s₁).hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
+    NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
+
+namespace PadicAlgCl
+
+variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T] {κ ι : Type*} [Fintype κ]
+  [Fintype ι]
+
+/-- The rank of a matrix of locally finite functions is lower semicontinuous. -/
+lemma isOpen_setOf_le_rank (M : Matrix κ ι (locallyFiniteFunctions l T)) (j : ℕ) :
+    IsOpen {t | j ≤ (M.map (locallyFiniteFunctionsEval t)).rank} := by
+  have : {t | j ≤ (M.map (locallyFiniteFunctionsEval t)).rank} =
+      ⋃ (e₁ : Fin j → κ) (e₂ : Fin j → ι), {t | (M.submatrix e₁ e₂).det.1 t ≠ 0} := by
+    ext t
+    simp only [Set.mem_ofPred_eq, Set.mem_iUnion]
+    exact M.le_rank_map_iff _ j
+  rw [this]
+  exact isOpen_iUnion fun e₁ ↦ isOpen_iUnion fun e₂ ↦
+    isOpen_compl_singleton.preimage (M.submatrix e₁ e₂).det.1.continuous
+
+end PadicAlgCl
 
 universe u
 
@@ -174,5 +202,118 @@ end Descent
 end Rank
 
 end AdicSheaf
+
+section Generic
+
+lemma isAdicLisseSheaf_kernel_of_eq_comp {Y : Scheme.{u}} {A B A' B' : AdicSheaf l Y}
+    (ψ : A ⟶ B) (X : A' ⟶ B') (α : A' ≅ A) (β : B ≅ B') (h : X = α.hom ≫ ψ ≫ β.hom)
+    (hX : IsAdicLisseSheaf (kernel X) ∧ IsAdicLisseSheaf (cokernel X)) :
+    IsAdicLisseSheaf (kernel ψ) ∧ IsAdicLisseSheaf (cokernel ψ) :=
+  ⟨hX.1.of_iso (kernelIsoOfEq h ≪≫ kernelIsIsoComp _ _ ≪≫ kernelCompMono _ _),
+    hX.2.of_iso (cokernelIsoOfEq h ≪≫ cokernelEpiComp _ _ ≪≫ cokernelCompIsIso _ _)⟩
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+open AdicSheaf in
+/-- **Generic lisseness of kernels and cokernels.** A morphism of lisse sheaves on a nonempty
+quasi-compact scheme has lisse kernel and cokernel over a nonempty open subscheme: the open
+subscheme where the pointwise rank is maximal. -/
+theorem exists_nonempty_isAdicLisseSheaf_kernel_cokernel {Y : Scheme.{u}} [CompactSpace Y]
+    [Nonempty Y] {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf G)
+    (φ : F ⟶ G) : ∃ U : Y.Opens, (U : Set Y).Nonempty ∧
+      IsAdicLisseSheaf (kernel ((U.ι)^*ᵃ[l].map φ)) ∧
+        IsAdicLisseSheaf (cokernel ((U.ι)^*ᵃ[l].map φ)) := by
+  classical
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨R', hR', hR'G⟩ := hG
+  obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  obtain ⟨ι', V', f', rfl⟩ := R'.exists_eq_ofArrows
+  have hW := Precoverage.comp_mem_coverings f hR (fun i j ↦ pullback.fst (f i) (f' j))
+    (fun i ↦ Precoverage.mem_coverings_of_isPullback f' hR' (f i) _ _
+      fun j ↦ IsPullback.of_hasPullback (f i) (f' j))
+  let W (k : Σ _ : ι, ι') : Scheme.{u} := pullback (f k.1) (f' k.2)
+  let g (k : Σ _ : ι, ι') : W k ⟶ Y := pullback.fst (f k.1) (f' k.2) ≫ f k.1
+  change Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage Y at hW
+  have hgw (k) : WeaklyEtale (g k) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hW (.mk k)
+  choose n e using fun i ↦ hRF (f i) (.mk i)
+  choose m e' using fun j ↦ hR'G (f' j) (.mk j)
+  let eF (k : Σ _ : ι, ι') : (g k)^*ᵃ[l].obj F ≅ ⨁ fun _ : Fin (n k.1) ↦ unit l (W k) :=
+    trivPull (f k.1) (e k.1).some (pullback.fst (f k.1) (f' k.2))
+  let eG (k : Σ _ : ι, ι') : (g k)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin (m k.2) ↦ unit l (W k) :=
+    (adicUpperStarCongr l pullback.condition).app G ≪≫
+      trivPull (f' k.2) (e' k.2).some (pullback.snd (f k.1) (f' k.2))
+  let rk (k : Σ _ : ι, ι') (v : W k) : ℕ :=
+    ((unitMatrix ((eF k).inv ≫ (g k)^*ᵃ[l].map φ ≫ (eG k).hom)).map
+      (PadicAlgCl.locallyFiniteFunctionsEval v)).rank
+  have hfc (k k' : Σ _ : ι, ι') (v : W k) (v' : W k') (h : g k v = g k' v') :
+      rk k v = rk k' v' :=
+    rank_eq_of_apply_eq φ (g k) (g k') (eF k) (eG k) (eF k') (eG k') v v' h
+  have hsurj : ∀ y, ∃ k, y ∈ Set.range (g k) :=
+    ((Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).1
+      (Scheme.propQCPrecoverage_le_precoverage _ hW)).1
+  choose kk vv hvv using hsurj
+  let Rk (y : Y) : ℕ := rk (kk y) (vv y)
+  have hRk (k : Σ _ : ι, ι') (v : W k) : Rk (g k v) = rk k v :=
+    hfc _ _ _ _ (hvv _)
+  have hopen (j : ℕ) : IsOpen {y | j ≤ Rk y} := by
+    refine Scheme.isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage g hW _ fun k ↦ ?_
+    have : (g k).base ⁻¹' {y | j ≤ Rk y} = {v | j ≤ rk k v} := by
+      ext v
+      simp only [Set.mem_preimage, Set.mem_ofPred_eq]
+      erw [hRk]
+    rw [this]
+    exact PadicAlgCl.isOpen_setOf_le_rank _ j
+  -- a bound for the rank, from a finite subcover
+  let E : PreZeroHypercover Y := ⟨_, W, g⟩
+  have : QuasiCompactCover E := by
+    have := hW.1
+    rwa [show Presieve.ofArrows W g = E.presieve₀ from rfl,
+      Scheme.presieve₀_mem_qcPrecoverage_iff] at this
+  obtain ⟨N, a, Vs, -, hcov⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact E
+    (U := ⊤) isCompact_univ
+  let B := Finset.univ.sup fun i : Fin N ↦ n (a i).1
+  have hB (y : Y) : Rk y ≤ B := by
+    have : y ∈ ⋃ i, E.f (a i) '' (Vs i : Set _) := by rw [hcov]; trivial
+    obtain ⟨i, v, -, rfl⟩ := by simpa only [Set.mem_iUnion, Set.mem_image] using this
+    change Rk (g (a i) v) ≤ B
+    rw [hRk]
+    refine (Matrix.rank_le_width _).trans ?_
+    exact Finset.le_sup (f := fun i : Fin N ↦ n (a i).1) (Finset.mem_univ i)
+  obtain ⟨y₀⟩ := ‹Nonempty Y›
+  let jmax := Nat.findGreatest (fun j ↦ ∃ y, Rk y = j) B
+  have hmax (y : Y) : Rk y ≤ jmax := Nat.le_findGreatest (hB y) ⟨y, rfl⟩
+  obtain ⟨y₁, hy₁⟩ : ∃ y, Rk y = jmax :=
+    Nat.findGreatest_spec (P := fun j ↦ ∃ y, Rk y = j) (hB y₀) ⟨y₀, rfl⟩
+  let U : Y.Opens := ⟨{y | jmax ≤ Rk y}, hopen jmax⟩
+  refine ⟨U, ⟨y₁, hy₁.ge⟩, ?_⟩
+  -- the base change of the cover to `U`
+  have hP := Precoverage.mem_coverings_of_isPullback g hW U.ι _ _
+    fun k ↦ IsPullback.of_hasPullback U.ι (g k)
+  have e1 {Z P' : Scheme.{u}} {a b : ℕ} (M : Matrix (Fin a) (Fin b) _) (q : P' ⟶ Z) (w : P') :
+      (M.map (PadicAlgCl.locallyFiniteFunctionsComp l q.base.hom)).map
+        (PadicAlgCl.locallyFiniteFunctionsEval w) =
+        M.map (PadicAlgCl.locallyFiniteFunctionsEval (q w)) := by
+    ext; rfl
+  have hmem (k : Σ _ : ι, ι') :
+      IsAdicLisseSheaf (kernel ((pullback.fst U.ι (g k))^*ᵃ[l].map ((U.ι)^*ᵃ[l].map φ))) ∧
+      IsAdicLisseSheaf (cokernel ((pullback.fst U.ι (g k))^*ᵃ[l].map ((U.ι)^*ᵃ[l].map φ))) := by
+    have key := conj_eq_comp_conj' ((adicUpperStarCongr l
+      (pullback.condition (f := U.ι) (g := g k)).symm) ≪≫ adicUpperStarComp l _ _) φ
+      (trivPull (g k) (eF k) (pullback.snd U.ι (g k)))
+      (trivPull (g k) (eG k) (pullback.snd U.ι (g k)))
+    rw [trivPull_conj] at key
+    refine isAdicLisseSheaf_kernel_of_eq_comp _ _ _ _ key
+      (isAdicLisseSheaf_kernel_cokernel_of_rank_eq _ jmax fun w ↦ ?_)
+    rw [unitMatrix_adicUpperStar, e1]
+    change rk k _ = jmax
+    rw [← hRk, ← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply]
+    exact le_antisymm (hmax _) (pullback.fst U.ι (g k) w).2
+  exact ⟨IsAdicLisseSheaf.of_cover _ hP fun _ _ ⟨k⟩ ↦
+      (hmem k).1.of_iso (PreservesKernel.iso _ _).symm,
+    IsAdicLisseSheaf.of_cover _ hP fun _ _ ⟨k⟩ ↦
+      (hmem k).2.of_iso (PreservesCokernel.iso _ _).symm⟩
+
+end Generic
 
 end AlgebraicGeometry.ProEtale
