@@ -11,9 +11,27 @@
   "def-weil-proper-morphism",
   "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the general flat-base-change theorem [lem-pc-flat-base-change-cohom] to the cartesian square obtained from f:X -> Spec R and Spec R' -> Spec R, with the quasi-coherent sheaf F = O_X and i=0. Proper morphisms are quasi-compact and quasi-separated, so its hypotheses hold; the pullback of O_X is O_{X_U}. The theorem identifies the canonical map H^0(X,O_X) tensor_R R' -> H^0(X_U,O_{X_U}) with an isomorphism. If H^0(X,O_X)=R, then R tensor_R R' is canonically R', giving the final assertion.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), statement and proof, especially the affine formula and the hypotheses at lines 23--54 of the online source; specialize i=0 and F=O_X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 30.5.2 (Tag 02KH), specialized to a proper morphism, the structure sheaf, and degree 0"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +56,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +76,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stein-flat-base-change-global-sections",
+  "worker": "stage1",
+  "summary": "Split as the degree-zero structure-sheaf specialization of the existing generic flat-base-change node lem-pc-flat-base-change-cohom, following Stacks Cohomology Lemma 30.5.2 (Tag 02KH). No private proof lemma was introduced: the reusable theorem is already an imported DAG node. The proper hypotheses imply quasi-compact and quasi-separated, the pullback of O_X is O_{X_U}, and the tensor identity specializes to R' when H^0(X,O_X)=R. Mathlib has no proper etale-cohomology flat-base-change declaration; the three searches already recorded on the item found only Scheme.Hom.appTop and unrelated constructions."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: one step applying the generic 02KH node (lem-pc-flat-base-change-cohom, imported, unit sk-thm-picard-semicon) with F=O_X, i=0, affine formula H^0(X,O_X) tensor_R R' = H^0(X_U,O_{X_U}); proper gives qcqs; correct. Off-route generic tool: L records tool_uses in a follow-up commit."
+ }
 }
