@@ -2,7 +2,7 @@
 
 580 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1007 | none |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1007 | none |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1007 | none |
 | `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1007 | none |
@@ -560,7 +559,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (27)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -574,6 +573,7 @@
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
+| `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
@@ -592,7 +592,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 567 nodes that wait for stage 1, 194 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 194 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
