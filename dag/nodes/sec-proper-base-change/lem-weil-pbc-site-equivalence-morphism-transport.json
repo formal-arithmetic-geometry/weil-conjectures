@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-site-equivalence-morphism-transport",
+ "kind": "statement",
+ "title": "A functor isomorphic, through covering-compatible equivalences, to a morphism of sites is one",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology] (Stacks sites: categories with sets of covering families). Let $p:\\mathcal A\\to\\mathcal C$ and $q:\\mathcal B\\to\\mathcal D$ be equivalences of categories such that a family $\\{X_a\\to X\\}_{a\\in A}$ of morphisms of $\\mathcal A$ with common target is a covering of $\\mathcal A$ if and only if $\\{p(X_a)\\to p(X)\\}_{a\\in A}$ is a covering of $\\mathcal C$, and likewise for $q$ (a family of $\\mathcal B$ is a covering iff its image under $q$ is a covering of $\\mathcal D$). Let $u:\\mathcal C\\to\\mathcal D$ be a continuous functor which defines a morphism of sites $\\mathcal D\\to\\mathcal C$ (i.e. $u_s$ on sheaves of sets is exact) [def-weil-pbc-sites-and-cohomology](3), and let $u':\\mathcal A\\to\\mathcal B$ be a functor together with a natural isomorphism $q\\circ u'\\cong u\\circ p$. Then $u'$ is continuous (Sites, Definition 00WV: it maps coverings to coverings, and for a covering $\\{X_a\\to X\\}$ and a morphism $T\\to X$ of $\\mathcal A$ the canonical morphisms $u'(T\\times_XX_a)\\to u'(T)\\times_{u'(X)}u'(X_a)$ are isomorphisms) and defines a morphism of sites $\\mathcal B\\to\\mathcal A$ ($u'_s$ on sheaves of sets is exact). (Sketch, for the queue: an equivalence preserves and reflects fibre products and isomorphisms, and a covering family stays one after composing with isomorphisms (axioms (i), (ii) of 00VH), which gives continuity; $p$ and a quasi-inverse are continuous, so $\\mathcal G\\mapsto\\mathcal G\\circ p$ is an equivalence $\\Sh(\\mathcal C)\\to\\Sh(\\mathcal A)$, likewise for $q$; then $u'^s\\circ q^s\\cong p^s\\circ u^s$, so by uniqueness of left adjoints $u'_s$ is isomorphic to the composite of $u_s$ with equivalences, hence exact.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; the notions are Sites, Definitions 00VH (line 679), 00WV (definition-continuous, line 2524), 00X1 (definition-morphism-sites, line 2687) and Lemma 00WX; the sheaf-level part is the special case of Lemma 03A0 (lemma-equivalence) for an equivalence of categories, as in [lem-weil-pbc-site-equivalence-sheaf-transport]; statement written by an agent for lem-weil-pbc-site-system-strictification"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence of categories transports a Grothendieck topology and a continuous functor between sites, morphism of sites induced by isomorphic functor",
+   "results": "Functor.isContinuous_of_iso (Mathlib.CategoryTheory.Sites.Continuous), Functor.inducedTopology (Sites.DenseSubsite.InducedTopology), IsDenseSubsite.sheafEquiv (Sites.DenseSubsite.SheafEquiv), Equivalence.sheafCongr.functor_obj_val_map (Sites.Equivalence), Functor.IsContinuous(.mk), inducedTopology_isCocontinuous",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's sites are Grothendieck topologies (sieves), its IsContinuous means 'preserves sheaves'; nothing for Stacks family-sites with continuity 00WV and morphisms of sites 00X1; isContinuous_of_iso and sheafCongr are the sieve-level analogues of two ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an equivalence of categories which preserves and reflects coverings induces a continuous functor and a morphism of sites; functor isomorphic to a continuous functor is continuous",
+   "results": "Functor.isContinuous_of_iso (Sites/Continuous.lean:280), isContinuous_of_coverPreserving (Sites/CoverPreserving), IsCoverDense.isContinuous, inducedTopology_isCocontinuous, IsDenseSubsite.instIsContinuous, inducedTopology_coverPreserving",
+   "date": "2026-10-10",
+   "verdict": "no match (same kind of object missing: family-sites and exactness of u_s)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.IsEquivalence",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isContinuous_of_iso\\|isContinuous_comp\\|sheafCongr' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/{Continuous,Equivalence}.lean",
+   "results": "Continuous.lean:280 isContinuous_of_iso, :290 isContinuous_comp, :298 isContinuous_comp'; Equivalence.lean:109-141 sheafCongr (equivalence of sheaf categories along an equivalence with induced topology); no statement about Stacks morphisms of sites",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-system-strictification",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: continuity and the morphism-of-sites property transported along equivalences preserving and reflecting coverings; correct; unsplit."
+ }
+}
