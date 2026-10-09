@@ -12,9 +12,73 @@
   "def-weil-residue-field",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Part (1). This is [lem-weil-pbc-fibre-ring-primes-bijection] for $\\varphi$, $\\mathfrak p$, $C$, $j$ and the maps $\\psi_{\\mathfrak q}$ defined as in the statement: $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the primes of $C$ onto the primes $\\mathfrak q$ of $B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, with inverse $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$, and $\\mathfrak Q\\subseteq\\mathfrak Q'$ iff $j^{-1}(\\mathfrak Q)\\subseteq j^{-1}(\\mathfrak Q')$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422), with Lemmas Tag 00E3 (lemma-spec-localization, line 3163) and Tag 00E5 (lemma-spec-closed, line 3227)"
+   }
+  },
+  {
+   "text": "Part (2), the isomorphism. Fix a prime $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ and put $\\mathfrak Q=\\ker\\psi_{\\mathfrak q}$, a prime of $C$ with $j^{-1}(\\mathfrak Q)=\\mathfrak q$ by Step 1 (the two maps of (1) are inverse to each other). By [lem-weil-pbc-fibre-ring-residue-field-iso] applied to $\\mathfrak Q$, the field homomorphism $\\iota:\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak Q)$ induced by the local homomorphism $B_{\\mathfrak q}\\to C_{\\mathfrak Q}$, $b/s\\mapsto j(b)/j(s)$, is an isomorphism; let $\\theta=\\iota^{-1}:\\kappa(\\mathfrak Q)\\to\\kappa(\\mathfrak q)$. Write $\\pi_{\\mathfrak Q}:C\\to C_{\\mathfrak Q}\\to\\kappa(\\mathfrak Q)$ and $\\pi_{\\mathfrak q}:B\\to B_{\\mathfrak q}\\to\\kappa(\\mathfrak q)$, $b\\mapsto\\bar b$, for the canonical maps [def-weil-pbc-localization-at-prime]. Since the local homomorphism sends $b/1$ to $j(b)/1$, $\\pi_{\\mathfrak Q}\\circ j=\\iota\\circ\\pi_{\\mathfrak q}$. It remains to show $\\theta\\circ\\pi_{\\mathfrak Q}=\\psi_{\\mathfrak q}$ (Steps 3-5); then $\\psi_{\\mathfrak q}$ is the composite of $C\\to\\kappa(\\mathfrak Q)$ with the isomorphism $\\theta$, which is (2).",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-fibre-ring-residue-field-iso",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 0H9M (remark-local-ring-fibre, line 3520): $F_{\\overline{\\mathfrak q}}\\cong S_{\\mathfrak q}/\\mathfrak pS_{\\mathfrak q}$, so the residue field at $\\overline{\\mathfrak q}$ is $\\kappa(\\mathfrak q)$"
+   }
+  },
+  {
+   "text": "Agreement on $j(B)$. For $b\\in B$, $\\theta(\\pi_{\\mathfrak Q}(b\\otimes1))=\\theta(\\iota(\\bar b))=\\bar b=\\psi_{\\mathfrak q}(b\\otimes1)$, by $\\pi_{\\mathfrak Q}\\circ j=\\iota\\circ\\pi_{\\mathfrak q}$ (Step 2) and the definition of $\\psi_{\\mathfrak q}$ with $\\lambda=1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 0H9M (remark-local-ring-fibre, line 3520), the 'obvious ring map' written out"
+   }
+  },
+  {
+   "text": "Agreement on $1\\otimes\\kappa(\\mathfrak p)$. Let $\\alpha,\\beta:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ be the ring homomorphisms $\\alpha(\\lambda)=\\theta\\pi_{\\mathfrak Q}(1\\otimes\\lambda)$ and $\\beta(\\lambda)=\\bar\\lambda$. For $a\\in A$ with image $\\bar a\\in\\kappa(\\mathfrak p)$, $1\\otimes\\bar a=\\varphi(a)\\otimes1$ in $C$ (the tensor product is over $A$), so $\\alpha(\\bar a)=\\overline{\\varphi(a)}$ by Step 3, and $\\beta(\\bar a)=\\overline{\\varphi(a)}$ because the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ is induced by $a/s\\mapsto\\varphi(a)/\\varphi(s)$. Every element of $\\kappa(\\mathfrak p)$ is $\\bar a\\,\\bar s^{-1}$ with $a\\in A$, $s\\in A\\setminus\\mathfrak p$ [def-weil-pbc-localization-at-prime], and ring homomorphisms between fields preserve inverses, so $\\alpha=\\beta$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422): commutativity of the extended diagram, written out"
+   }
+  },
+  {
+   "text": "Conclusion. Both $\\theta\\circ\\pi_{\\mathfrak Q}$ and $\\psi_{\\mathfrak q}$ are ring homomorphisms $C\\to\\kappa(\\mathfrak q)$, and $b\\otimes\\lambda=(b\\otimes1)(1\\otimes\\lambda)$; by Steps 3 and 4 they agree on every pure tensor, and pure tensors generate $C$ additively, so $\\theta\\circ\\pi_{\\mathfrak Q}=\\psi_{\\mathfrak q}$. This proves (2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Remark Tag 0H9M (remark-local-ring-fibre, line 3520)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-fibre-ring-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422) for (1) and Remark Tag 0H9M (remark-local-ring-fibre, line 3520) for (2); the compatibility of $\\psi_{\\mathfrak q}$ with the isomorphism (Steps 3-5), which the remarks leave implicit, is written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +123,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "worker": "stage1",
+  "summary": "Statement, stmt_deps and source kept (the source tags 00E6 = algebra-remark-fundamental-diagram and 0H9M = algebra-remark-local-ring-fibre checked against stacks-project/tags/tags; the lemmas the remark relies on are 00E3 = lemma-spec-localization and 00E5 = lemma-spec-closed; 00E4 is lemma-standard-open and not used). Split into two Mathlib leaves and three elementary compatibility steps: (1) is the new leaf lem-weil-pbc-fibre-ring-primes-bijection (PrimeSpectrum.preimageOrderIsoFiber with preimageEquivFiber_apply_asIdeal / _symm_apply_coe, transported along Algebra.TensorProduct.comm; the inverse is the kernel of exactly the map psi_q); the residue-field isomorphism kappa(q) -> kappa(Q) is the new leaf lem-weil-pbc-fibre-ring-residue-field-iso (RingHom.SurjectiveOnStalks.residueFieldMap_bijective applied to (Ideal.surjectiveOnStalks_residueField p).baseChange); Steps 3-5 check that psi_q is the composite of C -> kappa(Q) with the inverse isomorphism. The identification C = B_p/pB_p is not part of this statement and is not used (it is lem-weil-pbc-fibre-ring-localization-quotient, created by the fibre-ring-noetherian item). lean_audit none; no Lean candidate found in the source repository."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Two new Mathlib leaves and three elementary steps: part (1) is PrimeSpectrum.preimageOrderIsoFiber (ResidueField/Fiber.lean:182, with preimageEquivFiber line 155 and its simps lemmas; line verified); part (2) from RingHom.SurjectiveOnStalks.residueFieldMap_bijective (ResidueField/Ideal.lean:50) applied to the base change of Ideal.surjectiveOnStalks_residueField (Ideal.lean:161, SurjectiveOnStalks.lean:169; lines verified), the identification of psi_q with the composite C -> kappa(Q) -> kappa(q) checked on b (x) 1, on 1 (x) kappa(p) (ring maps out of kappa(p) are determined on A) and on pure tensors. Brief error noted: the identification C = S^{-1}B/pS^{-1}B is not a clause of this node (it is lem-weil-pbc-fibre-ring-localization-quotient). Tags: 00E6 remark-fundamental-diagram, 0H9M remark-local-ring-fibre."
+ }
 }

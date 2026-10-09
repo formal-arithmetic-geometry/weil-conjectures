@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-fibre-ring-residue-field-iso",
+ "kind": "statement",
+ "title": "Residue fields of the fibre ring",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings, $\\mathfrak p\\subset A$ a prime ideal with residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $C=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to C$, $b\\mapsto b\\otimes1$. Let $\\mathfrak Q\\subset C$ be a prime ideal and $\\mathfrak q=j^{-1}(\\mathfrak Q)$. Then the local homomorphism $B_{\\mathfrak q}\\to C_{\\mathfrak Q}$, $b/s\\mapsto j(b)/j(s)$, is surjective, and the field homomorphism it induces on residue fields, $\\iota:\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}\\to\\kappa(\\mathfrak Q)=C_{\\mathfrak Q}/\\mathfrak QC_{\\mathfrak Q}$, is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark Tag 0H9M (remark-local-ring-fibre, line 3520): $F_{\\overline{\\mathfrak q}}\\cong S_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}\\kappa(\\mathfrak p)\\cong S_{\\mathfrak q}/\\mathfrak pS_{\\mathfrak q}$, a quotient of $S_{\\mathfrak q}$, whose residue field is therefore $\\kappa(\\mathfrak q)$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraMap S (S ⊗[R] T) is surjective on stalks if algebraMap R T is; residue field map bijective",
+   "results": "RingHom.SurjectiveOnStalks.baseChange, RingHom.SurjectiveOnStalks.baseChange', RingHom.SurjectiveOnStalks.tensorProductMap (Mathlib.RingTheory.SurjectiveOnStalks); RingHom.SurjectiveOnStalks.residueFieldMap_bijective (Mathlib.RingTheory.LocalRing.ResidueField.Ideal); AlgebraicGeometry.Scheme.Hom.residueFieldMap",
+   "date": "2026-10-10",
+   "verdict": "match in two lemmas: baseChange + residueFieldMap_bijective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the map S -> S ⊗_R κ(p) induces an isomorphism of residue fields at a prime Q of the fibre and its contraction",
+   "results": "Ideal.fiberIsoOfBijectiveResidueField, Ideal.comap_fiberIsoOfBijectiveResidueField_apply/_symm (Mathlib.RingTheory.Etale.QuasiFinite); PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, PrimeSpectrum.preimageOrderIsoFiber (Fiber.lean)",
+   "date": "2026-10-10",
+   "verdict": "no direct match (prime correspondences only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.SurjectiveOnStalks, Function.Bijective, Ideal.ResidueField.map",
+   "results": "RingHom.SurjectiveOnStalks.residueFieldMap_bijective : f.SurjectiveOnStalks → ∀ I J (hf : I = comap f J), Function.Bijective (Ideal.ResidueField.map I J f hf)",
+   "date": "2026-10-10",
+   "verdict": "match (the bijectivity clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Fiber' Mathlib --include=*.lean | grep -i residue; grep -rn 'residueField' Mathlib | grep -i 'bijective\\|surjective'; sed -n 25,60p,155,165p Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean; sed -n 160,195p Mathlib/RingTheory/SurjectiveOnStalks.lean",
+   "results": "Ideal.lean:38 Ideal.ResidueField.map I J f hf := IsLocalRing.ResidueField.map (Localization.localRingHom I J f hf); :50 RingHom.SurjectiveOnStalks.residueFieldMap_bijective; :161 Ideal.surjectiveOnStalks_residueField (algebraMap R κ(I) surjective on stalks); SurjectiveOnStalks.lean:35 def SurjectiveOnStalks f := ∀ P prime, Surjective (Localization.localRingHom _ P f rfl); :169 SurjectiveOnStalks.baseChange ((algebraMap R T).SurjectiveOnStalks → (algebraMap S (S ⊗[R] T)).SurjectiveOnStalks); :189 baseChange' (includeRight); the same composite is used in Mathlib/RingTheory/QuasiFinite/Basic.lean:563 (`p.surjectiveOnStalks_residueField.baseChange'.residueFieldMap_bijective q q' hq'`)",
+   "date": "2026-10-10",
+   "verdict": "match: one-line composite"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.SurjectiveOnStalks.residueFieldMap_bijective, RingHom.SurjectiveOnStalks.baseChange, Ideal.surjectiveOnStalks_residueField",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+  "line": 50,
+  "how": "specializes in one line: `H := (Ideal.surjectiveOnStalks_residueField p).baseChange (S := B)` (Ideal.lean:161 and Mathlib/RingTheory/SurjectiveOnStalks.lean:169) says `(algebraMap B (B ⊗[A] p.ResidueField)).SurjectiveOnStalks`, i.e. (definition, SurjectiveOnStalks.lean:35) `Localization.localRingHom q Q j _ : B_q → C_Q` is surjective for every prime Q with q = j⁻¹(Q), j = algebraMap = b ↦ b ⊗ 1 in Mathlib's factor order B ⊗[A] κ(p) (the node's order); then `H.residueFieldMap_bijective q Q rfl` (Ideal.lean:50) says `Ideal.ResidueField.map q Q j rfl = IsLocalRing.ResidueField.map (localRingHom ...)` (Ideal.lean:38), which is ι, is bijective, hence a field isomorphism. Mathlib uses the same composite at Mathlib/RingTheory/QuasiFinite/Basic.lean:563 in the other factor order. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

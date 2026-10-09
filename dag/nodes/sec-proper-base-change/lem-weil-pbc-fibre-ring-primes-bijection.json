@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-fibre-ring-primes-bijection",
+ "kind": "statement",
+ "title": "Primes of the fibre ring are the primes over p",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings, $\\mathfrak p\\subset A$ a prime ideal with residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $C=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to C$, $b\\mapsto b\\otimes1$. For a prime ideal $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ let $\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$, let $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$, $\\lambda\\mapsto\\bar\\lambda$, be the field homomorphism induced by $\\varphi$ (the map on residue fields of the local homomorphism $A_{\\mathfrak p}\\to B_{\\mathfrak q}$, $a/s\\mapsto\\varphi(a)/\\varphi(s)$), and let $\\psi_{\\mathfrak q}:C\\to\\kappa(\\mathfrak q)$ be the ring homomorphism with $\\psi_{\\mathfrak q}(b\\otimes\\lambda)=\\bar b\\,\\bar\\lambda$, $\\bar b$ the image of $b$ in $\\kappa(\\mathfrak q)$. Then $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the set of prime ideals of $C$ onto the set of prime ideals $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$; its inverse is $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$; and for primes $\\mathfrak Q,\\mathfrak Q'$ of $C$ one has $\\mathfrak Q\\subseteq\\mathfrak Q'$ if and only if $j^{-1}(\\mathfrak Q)\\subseteq j^{-1}(\\mathfrak Q')$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422): Spec of $\\kappa(\\mathfrak p)\\otimes_RS=S_{\\mathfrak p}/\\mathfrak pS_{\\mathfrak p}$ maps homeomorphically onto the fibre over $\\mathfrak p$, by Lemma Tag 00E3 (lemma-spec-localization, line 3163) and Lemma Tag 00E5 (lemma-spec-closed, line 3227); the description of the inverse by $\\ker\\psi_{\\mathfrak q}$ is the Mathlib form (PrimeSpectrum.preimageEquivFiber)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to S and a prime p of R, the prime ideals of S lying over p are in order-preserving bijection with the prime ideals of the fiber ring kappa(p) tensor_R S",
+   "results": "PrimeSpectrum.primesOverOrderIsoFiber, PrimeSpectrum.preimageEquivFiber, PrimeSpectrum.coe_primesOverOrderIsoFiber_symm_apply_coe, PrimeSpectrum.preimageOrderIsoFiber, PrimeSpectrum.preimageOrderIsoTensorResidueField (deprecated alias, not in the grep of this Mathlib) (Mathlib.RingTheory.LocalRing.ResidueField.Fiber)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.preimageOrderIsoFiber"
+  },
+  {
+   "tool": "leansearch",
+   "query": "residue field of fiber ring at prime is isomorphic to residue field of the prime lying over (and: prime ideals of kappa(p) tensor S correspond to primes over p)",
+   "results": "PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, PrimeSpectrum.preimageEquivFiber, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, Ideal.Fiber (Mathlib.RingTheory.LocalRing.ResidueField.Fiber); Ideal.comap_fiberIsoOfBijectiveResidueField_apply (Mathlib.RingTheory.Etale.QuasiFinite)",
+   "date": "2026-10-10",
+   "verdict": "match: preimageEquivFiber with preimageEquivFiber_apply_asIdeal (kernel form of the inverse)"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.preimageEquivFiber",
+   "results": "PrimeSpectrum.preimageEquivFiber : comap (algebraMap R S) ⁻¹' {p} ≃ PrimeSpectrum (p.asIdeal.Fiber S); preimageEquivFiber_symm_apply_coe (= comap includeRight); preimageEquivFiber_apply_asIdeal (= RingHom.ker (Algebra.TensorProduct.lift (Ideal.ResidueField.mapₐ p q (Algebra.ofId R S) _) (IsScalarTower.toAlgHom R S q.ResidueField) _))",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def \\|lemma \\|theorem ' Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean; sed -n 150,236p of the same file",
+   "results": "Fiber.lean:66 abbrev Ideal.Fiber p S := p.ResidueField ⊗[R] S; :155 PrimeSpectrum.preimageEquivFiber (toFun q = ker of TensorProduct.lift (ResidueField.mapₐ ...) (IsScalarTower.toAlgHom ...), invFun Q = Q.comap includeRight); :182 preimageOrderIsoFiber (OrderIso, toEquiv = preimageEquivFiber); :202 primesOverOrderIsoFiber; :212 preimageHomeomorphFiber; :234 coe_primesOverOrderIsoFiber_symm_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.preimageOrderIsoFiber, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, PrimeSpectrum.preimageEquivFiber_symm_apply_coe, Algebra.TensorProduct.comm",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+  "line": 182,
+  "how": "specializes in one line: `PrimeSpectrum.preimageOrderIsoFiber A B ⟨p, _⟩ : comap (algebraMap A B) ⁻¹' {p} ≃o PrimeSpectrum (p.Fiber B)` (line 182, `p.Fiber B = κ(p) ⊗[A] B`, line 66) is an order isomorphism (so it preserves and reflects inclusions) whose toEquiv is `preimageEquivFiber` (line 155): the inverse sends Q to Q.comap includeRight (`preimageEquivFiber_symm_apply_coe`, the simps lemma of line 154), and the forward map sends q to the kernel of `Algebra.TensorProduct.lift (Ideal.ResidueField.mapₐ p q (Algebra.ofId A B) _) (IsScalarTower.toAlgHom A B κ(q)) _`, λ ⊗ b ↦ λ̄ b̄ (`preimageEquivFiber_apply_asIdeal`). Transport along the ring isomorphism `Algebra.TensorProduct.comm A B κ(p) : B ⊗[A] κ(p) ≃ κ(p) ⊗[A] B` (b ⊗ λ ↦ λ ⊗ b): it carries j to includeRight and ψ_q to that lift, so prime ideals, kernels and inclusions correspond. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
