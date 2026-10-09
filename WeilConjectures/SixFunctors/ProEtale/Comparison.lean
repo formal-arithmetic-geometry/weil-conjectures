@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
@@ -68,31 +69,6 @@ of `ν^*`, which is what lets it be applied degreewise to complexes. -/
 instance preservesFiniteColimits_comparisonUpperStar (X : Scheme.{u}) :
     PreservesFiniteColimits (comparisonUpperStar A X) :=
   inferInstance
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
-*Fullness.* The comparison pullback is full. -/
-instance full_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Full :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
-*Faithfulness.* The comparison pullback is faithful. -/
-instance faithful_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Faithful :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
-*Full faithfulness, in the form the chapter uses.* The unit `id ⟶ ν_* ν^*` of the comparison
-adjunction is an isomorphism; this is the assertion `id ≅ Rν_{T*} ν_T^*` of the blueprint, and
-it is strictly stronger than the existence of some isomorphism between the two functors.
-
-Detection of isomorphisms is by covering families and on the affine ind-étale basis, not by
-geometric points: geometric-point stalks are *not* conservative on all pro-étale sheaves, and
-no argument of the purity chapter uses them off the étale-origin objects. -/
-theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
-    IsIso (comparisonAdjunction A X).unit :=
-  sorry
 
 /-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
 

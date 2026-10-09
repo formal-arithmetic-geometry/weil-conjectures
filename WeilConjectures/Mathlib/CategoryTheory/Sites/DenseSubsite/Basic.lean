@@ -73,6 +73,16 @@ lemma toSheafify_sheafEquivSheafificationCompatibility_hom_app_hom (F : Dᵒᵖ 
   erw [Adjunction.unit_leftAdjointUniq_hom_app (sheafifyAdjunctionOfIsEquivalence J K G A)
     (sheafificationAdjunction K A) F]
 
+/-- If the restriction `G.op ⋙ P` of a presheaf `P` to a dense subsite is already a sheaf, then
+sheafification does not change the sections of `P` over the objects of the subsite. -/
+lemma isIso_whiskerLeft_toSheafify (P : Dᵒᵖ ⥤ A) (hP : Presheaf.IsSheaf J (G.op ⋙ P)) :
+    IsIso (G.op.whiskerLeft (toSheafify K P)) := by
+  rw [← toSheafify_sheafEquivSheafificationCompatibility_hom_app_hom J K G A P]
+  have : IsIso (toSheafify J (G.op ⋙ P)) := isIso_toSheafify J hP
+  have : IsIso ((sheafEquivSheafificationCompatibility J K G A).hom.app P).hom :=
+    (sheafToPresheaf J A).map_isIso ((sheafEquivSheafificationCompatibility J K G A).hom.app P)
+  exact IsIso.comp_isIso (f := toSheafify J (G.op ⋙ P))
+
 end Functor.IsDenseSubsite
 
 end CategoryTheory
