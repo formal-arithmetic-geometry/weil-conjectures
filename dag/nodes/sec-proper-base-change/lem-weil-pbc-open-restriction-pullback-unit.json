@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-open-restriction-pullback-unit",
+ "kind": "statement",
+ "title": "Restriction to an open and pullback: compatibility of the adjunction units",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $W\\subseteq X$ an open subscheme and $W'=g^{-1}(W)\\subseteq Y$; let $j_W:W\\to X$, $j_{W'}:W'\\to Y$ be the open immersions (etale [def-weil-etale-morphism]) and $g_W:W'\\to W$ the restriction of $g$, so that $g\\circ j_{W'}=j_W\\circ g_W=:h$. Let inverse images, direct images and units of the small etale sites be as in [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] ($\\eta_u:\\mathrm{id}\\to u_*u^{-1}$), where $W\\times_XY$ is identified with the open subscheme $W'$ of $Y$ (and $W\\times_WW'$ with $W'$) by [lem-weil-pbc-open-fibre-product], so that $(g_*H)(W)=H(W')$ for an abelian sheaf $H$ on $Y_{\\Et}$ and $\\Gamma(W,g_{W*}H')=\\Gamma(W',H')$ for one on $W'_{\\Et}$. For an abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let $\\kappa_F=c_{g,j_{W'},F}^{-1}\\circ c_{j_W,g_W,F}:g_W^{-1}j_W^{-1}F\\xrightarrow{\\sim}h^{-1}F\\xrightarrow{\\sim}j_{W'}^{-1}g^{-1}F$, with $c$ the isomorphisms of [lem-weil-pbc-inverse-image-composition] (so $\\kappa$ is natural in $F$), and let $\\rho_F:j_W^{-1}F\\xrightarrow{\\sim}F|_W$ and $\\rho_{g^{-1}F}:j_{W'}^{-1}g^{-1}F\\xrightarrow{\\sim}(g^{-1}F)|_{W'}$ be the isomorphisms of [lem-weil-pbc-etale-inverse-image-restriction] (1), so $\\rho_F(W):\\Gamma(W,j_W^{-1}F)\\xrightarrow{\\sim}F(W)$ and $\\rho_{g^{-1}F}(W'):\\Gamma(W',j_{W'}^{-1}g^{-1}F)\\xrightarrow{\\sim}(g^{-1}F)(W')$. Then for every $a\\in\\Gamma(W,j_W^{-1}F)$,\n$$\n\\rho_{g^{-1}F}(W')\\bigl(\\kappa_F(W')\\bigl(\\eta_{g_W,j_W^{-1}F}(W)(a)\\bigr)\\bigr)=\\eta_{g,F}(W)\\bigl(\\rho_F(W)(a)\\bigr)\\quad\\text{in }(g^{-1}F)(W'),\n$$\ni.e. the composite $\\Gamma(W,j_W^{-1}F)\\xrightarrow{\\eta_{g_W}}\\Gamma(W',g_W^{-1}j_W^{-1}F)\\xrightarrow{\\kappa_F}\\Gamma(W',j_{W'}^{-1}g^{-1}F)\\xrightarrow{\\rho}(g^{-1}F)(W')$ equals $\\Gamma(W,j_W^{-1}F)\\xrightarrow{\\rho_F(W)}F(W)\\xrightarrow{\\eta_{g,F}(W)}(g^{-1}F)(W')$: under the identifications of the inverse image along an open immersion with the restriction, pulling back sections along $g_W$ is pulling back sections along $g$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "not stated in the source (agent-identified gap, needed by lem-weil-pbc-etale-mayer-vietoris-pullback step 4); the setting is that of Cohomology on Sites, Lemma 03F3 (localization and restriction of sheaves). Intended proof (agent): both sides are the $W$-sections of morphisms of sheaves $j_W^{-1}F\\to g_{W*}(j_{W'}^{-1}g^{-1}F)$ on $W_{\\Et}$ (via $\\rho$); by the adjunction $j_W^{-1}\\dashv j_{W*}$ they agree once their composites with $\\eta_{j_W,F}$ agree, and these are computed on each object $T$ of $X_{\\Et}$ with the unit compatibility of $c$ ([lem-weil-pbc-inverse-image-composition] (2), for both factorizations of $h$), [lem-weil-pbc-etale-inverse-image-restriction] (2) (unit = restriction, for $j_W$ and $j_{W'}$) and the naturality of $\\eta_g$ along $T\\times_XW\\to T$: both become $F(T)\\to F(T\\times_XW)\\to(g^{-1}F)(T\\times_XW')$."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit of inverse image direct image adjunction compatible with restriction to an open subset",
+   "results": "Scheme.Hom.app_appIso_inv (Mathlib.AlgebraicGeometry.OpenImmersion), pullbackRestrictIsoRestrict, morphismRestrict (Mathlib.AlgebraicGeometry.Restrict), IsOpenMap.adjunction (Mathlib.Topology.Category.TopCat.Opens), Scheme.Modules.restrictAdjunction, restrictAdjunction_unit_app_app (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match: Zariski topology / O_X-modules on one scheme (restriction adjunction of an open immersion); nothing on small etale sites or on the base change of units along g"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves along a morphism of sites commutes with restriction to an open, compatibility of the adjunction units with the isomorphism of composite inverse images",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), TopCat.Sheaf.pullbackIso (Mathlib.Topology.Sheaves.Functors), Functor.sheafPullbackConstruction.sheafPullbackIso (Mathlib.CategoryTheory.Sites.Pullback), Scheme.Modules.restrictFunctorIsoPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match: the composition isomorphism of pullbacks of sheaves of modules along continuous functors exists (as a conjugate of the pushforward composition), but no inverse image functor of the small etale site along a morphism of schemes, no identification with restriction for an open immersion, hence not this compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Over\\|pullback\\|restrict\\|unit' Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -rn 'def sheafPullbackComp\\|sheafAdjunctionContinuous\\|def sheafPushforwardContinuousComp' Mathlib/CategoryTheory/Sites",
+   "results": "AlgebraicGeometry/Sites/Etale.lean: only the topology and covers (Cover.Over), no functoriality of the small etale site in the scheme; CategoryTheory/Sites/Pullback.lean: sheafAdjunctionContinuous (pullback -| pushforward for one continuous functor); Continuous.lean: sheafPushforwardContinuousComp (pushforward of a composite)",
+   "date": "2026-10-10",
+   "verdict": "no match: the ingredients for sites exist generically, the statement for small etale sites of schemes does not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

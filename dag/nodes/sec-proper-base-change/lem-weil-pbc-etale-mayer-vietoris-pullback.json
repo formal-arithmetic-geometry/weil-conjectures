@@ -14,9 +14,105 @@
   "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-etale-mayer-vietoris"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Resolutions, and $g^*$ on the chain level.* Choose an injective resolution $s:\\mathcal G\\to I^\\bullet$ on $X_{\\Et}$ and an injective resolution $s':g^{-1}\\mathcal G\\to J^\\bullet$ on $Y_{\\Et}$, with $I^n=J^n=0$ for $n<0$ ($\\Ab(X_{\\Et})$, $\\Ab(Y_{\\Et})$ have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]; [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1)); both are K-injective resolutions [lem-weil-pbc-dplus-injective-representative] (2). By the independence of the resolution in [lem-weil-pbc-etale-mayer-vietoris] (step 7 of its proof), the Mayer-Vietoris sequence of $(X,U,V,\\mathcal G)$ may be computed from $I^\\bullet$ and that of $(Y,U',V',g^{-1}\\mathcal G)$ from $J^\\bullet$, as in steps 4-6 of its proof; we use these. Since $g^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], $g^{-1}(s):g^{-1}\\mathcal G[0]\\to g^{-1}I^\\bullet$ is a quasi-isomorphism, so $Q(g^{-1}(s))$ is invertible in the derived category and, $J^\\bullet$ being K-injective, $-\\circ g^{-1}(s):\\operatorname{Hom}_{K}(g^{-1}I^\\bullet,J^\\bullet)\\to\\operatorname{Hom}_K(g^{-1}\\mathcal G[0],J^\\bullet)$ is bijective [lem-weil-pbc-kinjective-hom-derived] (both Hom sets identified with Hom sets of $D$ by $Q$). Hence there is a morphism of complexes $\\beta:g^{-1}I^\\bullet\\to J^\\bullet$ with $\\beta\\circ g^{-1}(s)$ homotopic to $s'$. A homotopy between two morphisms $g^{-1}\\mathcal G[0]\\to J^\\bullet$ consists of $h^0:g^{-1}\\mathcal G\\to J^{-1}=0$ and $h^n=0$ for $n\\ne0$ (the source vanishes in degree $\\ne0$), so it is zero: $\\beta\\circ g^{-1}(s)=s'$ exactly. Now apply clause 2 of [lem-weil-pbc-cohomology-pullback-functorial] to $u=g$, $G=\\mathcal G$ with $s$, $M^\\bullet=J^\\bullet$, $t=s'$ and this $\\beta$ ($M^\\bullet$ K-injective): $g^*=\\mathcal H^q(\\Gamma(Y,\\gamma))\\circ\\mathcal H^q(a\\mapsto\\beta(\\eta_g(a)))$, where $\\gamma$ is a lift of $\\mathrm{id}_{g^{-1}\\mathcal G}$ from $(J^\\bullet,s')$ to the resolution used in [def-weil-pbc-cohomology-pullback], i.e. $\\mathcal H^q(\\Gamma(Y,\\gamma))$ is the identification $H^q(\\mathrm{id})$ of [prop-weil-pbc-cohomology-resolution-independent]. So, with $H^q(Y_{\\Et},g^{-1}\\mathcal G)$ computed from $s'$ (as in the Mayer-Vietoris sequence of $Y$), $g^*=\\mathcal H^q(\\varphi_X)$ with $\\varphi_X:I^\\bullet(X)\\to J^\\bullet(Y)$, $\\varphi_X(a)=\\beta(Y)(\\eta_{g,I^\\bullet}(X)(a))$, where $\\eta_g$ is the unit of $g^{-1}\\dashv g_*$ [def-weil-pbc-inverse-image] and $(g_*g^{-1}I)(X)=(g^{-1}I)(Y)$ [def-weil-pbc-direct-image].",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-cohomology-pullback",
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof (lines 7194-7230): the construction of the sequence from an injective resolution, used here for both sequences; the compatibility with pullback itself is not in the source (agent-written)"
+   }
+  },
+  {
+   "text": "*The maps on sections over the opens, and the morphism of short exact sequences of complexes.* For an open $W\\subseteq X$ put $W'=g^{-1}(W)$; by [lem-weil-pbc-open-fibre-product] (with $S=X$, $V=W$, the whole of $Y$) $W\\times_XY$ is the open subscheme $W'$ of $Y$, and for opens $W_1\\subseteq W_2$ the base change of the inclusion is the inclusion $W_1'\\subseteq W_2'$; so $(g_*H)(W)=H(W')$ for an abelian sheaf $H$ on $Y_{\\Et}$, with restriction maps those of $H$ along $W_1'\\subseteq W_2'$ [def-weil-pbc-direct-image]. Define $\\varphi_W:I^\\bullet(W)\\to J^\\bullet(W')$, $\\varphi_W(a)=\\beta(W')(\\eta_{g,I^\\bullet}(W)(a))$, for $W\\in\\{X,U,V,U\\cap V\\}$ (for $W=X$ this is the $\\varphi_X$ of step 1; $X'=Y$, and $U'\\cap V'=(U\\cap V)'$). Each $\\varphi_W$ is a morphism of complexes, since $\\eta_{g,I^n}$ is natural in the sheaf [def-weil-pbc-inverse-image] and $\\beta$ is a morphism of complexes of sheaves. For $W_1\\subseteq W_2$ and $a\\in I^n(W_2)$, $\\varphi_{W_1}(a|_{W_1})=\\varphi_{W_2}(a)|_{W_1'}$, because $\\eta_{g,I^n}:I^n\\to g_*g^{-1}I^n$ and $\\beta^n:g^{-1}I^n\\to J^n$ are morphisms of sheaves, hence commute with the restriction maps (those of $g_*g^{-1}I^n$ being those of $g^{-1}I^n$ along $W_1'\\subseteq W_2'$). Since $Y=U'\\cup V'$, [lem-weil-pbc-etale-mayer-vietoris] (steps 2-4 of its proof, for $(Y,U',V')$ and the injective resolution $J^\\bullet$) gives the short exact sequence of complexes $0\\to J^\\bullet(Y)\\xrightarrow{a'}J^\\bullet(U')\\oplus J^\\bullet(V')\\xrightarrow{b'}J^\\bullet(U'\\cap V')\\to0$, $a'(x)=(x|_{U'},x|_{V'})$, $b'(y,z)=y|_{U'\\cap V'}-z|_{U'\\cap V'}$, with the same sign convention as $0\\to I^\\bullet(X)\\xrightarrow{a}I^\\bullet(U)\\oplus I^\\bullet(V)\\xrightarrow{b}I^\\bullet(U\\cap V)\\to0$ on $X$. By the compatibility with restriction and additivity of $\\varphi$: $a'\\circ\\varphi_X=(\\varphi_U\\oplus\\varphi_V)\\circ a$ and $b'\\circ(\\varphi_U\\oplus\\varphi_V)=\\varphi_{U\\cap V}\\circ b$, i.e. $(\\varphi_X,\\varphi_U\\oplus\\varphi_V,\\varphi_{U\\cap V})$ is a morphism of short exact sequences of complexes.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof (lines 7194-7230): the construction of the sequence from an injective resolution, used here for both sequences; the compatibility with pullback itself is not in the source (agent-written)"
+   }
+  },
+  {
+   "text": "*Morphism of long exact sequences on the chain level.* By [lem-weil-pbc-complex-ses-long-exact-naturality] applied to the morphism of step 2, the maps $\\mathcal H^q(\\varphi_X)$, $\\mathcal H^q(\\varphi_U)\\oplus\\mathcal H^q(\\varphi_V)$, $\\mathcal H^q(\\varphi_{U\\cap V})$ form a morphism from the long exact cohomology sequence of $0\\to I^\\bullet(X)\\to I^\\bullet(U)\\oplus I^\\bullet(V)\\to I^\\bullet(U\\cap V)\\to0$ to that of $0\\to J^\\bullet(Y)\\to J^\\bullet(U')\\oplus J^\\bullet(V')\\to J^\\bullet(U'\\cap V')\\to0$: $\\mathcal H^q(a')\\mathcal H^q(\\varphi_X)=(\\mathcal H^q(\\varphi_U)\\oplus\\mathcal H^q(\\varphi_V))\\mathcal H^q(a)$, $\\mathcal H^q(b')(\\mathcal H^q(\\varphi_U)\\oplus\\mathcal H^q(\\varphi_V))=\\mathcal H^q(\\varphi_{U\\cap V})\\mathcal H^q(b)$ and $\\mathcal H^{q+1}(\\varphi_X)\\circ\\delta^q=\\delta'^q\\circ\\mathcal H^q(\\varphi_{U\\cap V})$ for all $q\\ge0$ (using $\\mathcal H^q$ of a direct sum of complexes is the direct sum).",
+   "uses": [
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof (lines 7194-7230): the construction of the sequence from an injective resolution, used here for both sequences; the compatibility with pullback itself is not in the source (agent-written)"
+   }
+  },
+  {
+   "text": "*Identification of $\\mathcal H^q(\\varphi_W)$ with $g_W^*$ for $W\\in\\{U,V,U\\cap V\\}$.* Let $j_W$, $j_{W'}$ be the open immersions, $g_W:W'\\to W$ the restriction of $g$, $h=g\\circ j_{W'}=j_W\\circ g_W$, and $\\kappa=c_{g,j_{W'}}^{-1}\\circ c_{j_W,g_W}:g_W^{-1}j_W^{-1}\\xrightarrow{\\sim}j_{W'}^{-1}g^{-1}$, natural in the sheaf [lem-weil-pbc-inverse-image-composition]; $\\kappa_{\\mathcal G}$ is the isomorphism of the statement. Recall the identifications of [lem-weil-pbc-etale-mayer-vietoris] (step 6 of its proof): by clause 5 of [lem-weil-pbc-cohomology-pullback-functorial], $j_W^{-1}(s):j_W^{-1}\\mathcal G\\to j_W^{-1}I^\\bullet$ and $j_{W'}^{-1}(s'):j_{W'}^{-1}g^{-1}\\mathcal G\\to j_{W'}^{-1}J^\\bullet$ are resolutions by bounded below complexes of injectives (K-injective), and $H^q(W_{\\Et},\\mathcal G|_W)=\\mathcal H^q(\\Gamma(W,j_W^{-1}I^\\bullet))\\cong\\mathcal H^q(I^\\bullet(W))$, $H^q(W'_{\\Et},(g^{-1}\\mathcal G)|_{W'})=\\mathcal H^q(\\Gamma(W',j_{W'}^{-1}J^\\bullet))\\cong\\mathcal H^q(J^\\bullet(W'))$ through the isomorphisms of complexes $\\rho_{I^\\bullet}(W)$, $\\rho_{J^\\bullet}(W')$ of [lem-weil-pbc-etale-inverse-image-restriction] (1). (a) *$g_W^*$ on the chain level.* Put $M^\\bullet=j_{W'}^{-1}J^\\bullet$ and $\\beta_W=j_{W'}^{-1}(\\beta)\\circ\\kappa_{I^\\bullet}:g_W^{-1}j_W^{-1}I^\\bullet\\to j_{W'}^{-1}g^{-1}I^\\bullet\\to M^\\bullet$. By naturality of $\\kappa$ and step 1, $\\beta_W\\circ g_W^{-1}(j_W^{-1}(s))=j_{W'}^{-1}(\\beta)\\circ j_{W'}^{-1}g^{-1}(s)\\circ\\kappa_{\\mathcal G}=j_{W'}^{-1}(s')\\circ\\kappa_{\\mathcal G}=:t$, a quasi-isomorphism ($j_{W'}^{-1}(s')$ is one, $\\kappa_{\\mathcal G}$ an isomorphism). Clause 2 of [lem-weil-pbc-cohomology-pullback-functorial] (for $u=g_W$, the sheaf $j_W^{-1}\\mathcal G$ with resolution $j_W^{-1}(s)$, and $M^\\bullet$, $t$, $\\beta_W$; $M^\\bullet$ K-injective) shows that, with $H^q(W'_{\\Et},g_W^{-1}j_W^{-1}\\mathcal G)$ computed from $t$, $g_W^*=\\mathcal H^q$ of $\\psi_W:\\Gamma(W,j_W^{-1}I^\\bullet)\\to\\Gamma(W',M^\\bullet)$, $\\psi_W(x)=\\beta_W(\\eta_{g_W,j_W^{-1}I^\\bullet}(W)(x))$ (the factor $\\mathcal H^q(\\Gamma(\\gamma))$ being the identification $H^q(\\mathrm{id})$ [prop-weil-pbc-cohomology-resolution-independent], as in step 1). (b) *The identification $H^q(\\kappa_{\\mathcal G})$.* From $(M^\\bullet,t)$ to $(M^\\bullet,j_{W'}^{-1}(s'))$, $\\mathrm{id}_{M^\\bullet}$ is a lift of $\\kappa_{\\mathcal G}$ ($\\mathrm{id}\\circ t=j_{W'}^{-1}(s')\\circ\\kappa_{\\mathcal G}$), so $H^q(\\kappa_{\\mathcal G})$ is the identity of $\\mathcal H^q(\\Gamma(W',M^\\bullet))$ (definition of $H^q(\\varphi)$ in [lem-weil-pbc-cohomology-pullback-functorial]). Hence $H^q(\\kappa_{\\mathcal G})\\circ g_W^*=\\mathcal H^q(\\psi_W)$ as a map $\\mathcal H^q(\\Gamma(W,j_W^{-1}I^\\bullet))\\to\\mathcal H^q(\\Gamma(W',j_{W'}^{-1}J^\\bullet))$. (c) *Comparison with $\\varphi_W$.* For $x\\in\\Gamma(W,j_W^{-1}I^n)$: $\\rho_{J}(W')(\\psi_W(x))=\\rho_J(W')\\bigl(j_{W'}^{-1}(\\beta)(\\kappa_I(\\eta_{g_W}(x)))\\bigr)=\\beta(W')\\bigl(\\rho_{g^{-1}I}(W')(\\kappa_I(\\eta_{g_W}(x)))\\bigr)$ by naturality of $\\rho$ in the sheaf ([lem-weil-pbc-etale-inverse-image-restriction] (1), for $j_{W'}$ and $\\beta^n:g^{-1}I^n\\to J^n$, with $(g^{-1}I)|_{W'}(W')=(g^{-1}I)(W')$), and $\\rho_{g^{-1}I}(W')(\\kappa_I(\\eta_{g_W}(x)))=\\eta_{g,I}(W)(\\rho_I(W)(x))$ by [lem-weil-pbc-open-restriction-pullback-unit] (for $F=I^n$). So $\\rho_{J^\\bullet}(W')\\circ\\psi_W=\\varphi_W\\circ\\rho_{I^\\bullet}(W)$, and under the identifications of [lem-weil-pbc-etale-mayer-vietoris], $H^q(\\kappa_{\\mathcal G})\\circ g_W^*=\\mathcal H^q(\\varphi_W)$, for every $q\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "lem-weil-pbc-open-restriction-pullback-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof (lines 7194-7230): the construction of the sequence from an injective resolution, used here for both sequences; the compatibility with pullback itself is not in the source (agent-written)"
+   }
+  },
+  {
+   "text": "*Conclusion.* Under the identifications of [lem-weil-pbc-etale-mayer-vietoris] (step 6 of its proof), the maps of its sequence for $(X,U,V,\\mathcal G)$ are $(\\rho_U,\\rho_V)=\\mathcal H^q(a)$, $\\rho-\\rho=\\mathcal H^q(b)$ and $\\delta=\\delta^q$, and those for $(Y,U',V',g^{-1}\\mathcal G)$ are $\\mathcal H^q(a')$, $\\mathcal H^q(b')$, $\\delta'^q$; by steps 1 and 4 the vertical maps $g^*$, $(H^q(\\kappa_{\\mathcal G})g_U^*)\\oplus(H^q(\\kappa_{\\mathcal G})g_V^*)$, $H^q(\\kappa_{\\mathcal G})g_{U\\cap V}^*$ are $\\mathcal H^q(\\varphi_X)$, $\\mathcal H^q(\\varphi_U)\\oplus\\mathcal H^q(\\varphi_V)$, $\\mathcal H^q(\\varphi_{U\\cap V})$. Step 3 says exactly that all squares commute, including $g^*\\circ\\delta=\\delta'\\circ H^q(\\kappa_{\\mathcal G})g_{U\\cap V}^*$ (from degree $q$ on $U\\cap V$ to degree $q+1$ on $Y$). The result is independent of the choices of $I^\\bullet$, $J^\\bullet$, $\\beta$, since the maps $g^*$, $g_W^*$ [lem-weil-pbc-cohomology-pullback-functorial] (1) and the two sequences (step 1) are.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof (lines 7194-7230): the construction of the sequence from an injective resolution, used here for both sequences; the compatibility with pullback itself is not in the source (agent-written)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-pbc-cohomology-pullback",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-restriction-pullback-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A50 and its proof (construction of the Mayer-Vietoris sequence from an injective resolution); the compatibility with pullback is not in the source and was written by the agent along the construction of lem-weil-pbc-etale-mayer-vietoris and the definition def-weil-pbc-cohomology-pullback"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +134,38 @@
    "results": "toBiprod, fromBiprod, δ, sequenceIso, sequence_exact for one Mayer-Vietoris square of one site; no statement about functoriality in the site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer-Vietoris sequence of sheaf cohomology is natural with respect to a morphism of sites or continuous functor",
+   "results": "Sheaf.ΓHomEquiv_naturality_left, Sheaf.ΓObjEquivSections_naturality (Mathlib.CategoryTheory.Sites.GlobalSections), Functor.sheafPushforwardContinuous, sheafPushforwardContinuousNatTrans_app_val (Mathlib.CategoryTheory.Sites.Continuous), MayerVietorisSquare.shortComplex(_f, _shortExact) (Mathlib.CategoryTheory.Sites.MayerVietorisSquare)",
+   "date": "2026-10-10",
+   "verdict": "no match: the Mayer-Vietoris sequence exists for one site; nothing relates it for two sites along a functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ",
+   "results": "MayerVietorisSquare.δ, fromBiprod_δ, δ_toBiprod (+ _assoc) (Mathlib.CategoryTheory.Sites.SheafCohomology.MayerVietoris); all for one square S and one sheaf F",
+   "date": "2026-10-10",
+   "verdict": "no match: no lemma about δ and a morphism of sites (or even a morphism of sheaves)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of Mayer-Vietoris long exact sequences induced by pullback of sheaf cohomology along a morphism of schemes, compatible with connecting homomorphism",
+   "results": "MayerVietorisSquare.toPullbackObj, shortComplex, shortComplex_f, shortComplex_g, SheafCondition.map_f₂₄_op_glue, map_f₃₄_op_glue (Mathlib.CategoryTheory.Sites.MayerVietorisSquare)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln MayerVietoris Mathlib/; grep -n 'pullback\\|Functor.map\\|naturality' Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "results": "files Topology/Sheaves/MayerVietoris.lean, CategoryTheory/Sites/MayerVietorisSquare.lean, CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; the only hits are internal (Functor.map_comp in toBiprod_fromBiprod, line 75; pullback squares of the square itself, yonedaEquiv_naturality); SheafCohomology/MayerVietoris.lean (toBiprod, fromBiprod, δ, sequenceIso, sequence_exact, δ_toBiprod, fromBiprod_δ) has no variable for a second site, no continuous functor and no naturality lemma of any kind",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's Mayer-Vietoris sequence of sheaf cohomology has no naturality in a morphism of sites (nor in the sheaf)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +185,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "worker": "stage1",
+  "summary": "Statement kept. Proof written by the agent (Stacks states neither this compatibility nor anything close; Tag 0A50's construction is used) in five steps along the brief's plan: (1) injective resolutions I on X and J on Y with augmentation s', and beta: g^{-1}I -> J with beta g^{-1}(s) = s' exactly (lift via lem-weil-pbc-kinjective-hom-derived; a homotopy out of a complex concentrated in degree 0 into one vanishing in degree -1 is zero), so that by clause 2 of lem-weil-pbc-cohomology-pullback-functorial g^* = H^q(a |-> beta(eta_g(a))) on I(X) -> J(Y), the definition def-weil-pbc-cohomology-pullback being 'unit, then the comparison map to the resolution'; (2) the maps phi_W = beta(W') o eta_g(W): I(W) -> J(W') form a morphism of the short exact sequences of sections (same sign convention), by naturality of the unit and beta; (3) lem-weil-pbc-complex-ses-long-exact-naturality; (4) H^q(phi_W) = H^q(kappa_G) o g_W^* under the identifications rho of the Mayer-Vietoris node: clause 2 again for g_W with M = j_{W'}^{-1}J and beta_W = j_{W'}^{-1}(beta) o kappa_I, H^q(kappa_G) lifted by the identity, and the compatibility of the units with the restriction isomorphisms, which is a new agent-identified node lem-weil-pbc-open-restriction-pullback-unit (unsplit); (5) assembly. The construction of the Mayer-Vietoris sequence (short exact sequence of sections of an injective resolution, rho-identifications, independence of the resolution) is only in the proof of lem-weil-pbc-etale-mayer-vietoris, not in its statement; the steps cite it with the proof steps named. Mathlib searched three ways: no naturality of MayerVietorisSquare's sequence in anything. Source repository: no Lean (MayerVietoris: 0 hits in WeilConjectures; 'Mayer–Vietoris' only in 3 docstrings/comments)."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five agent-written steps (Stacks does not state the compatibility): g^* on the chain level through beta: g^{-1}I -> J over g^{-1}G (K-injectivity, lem-weil-pbc-kinjective-hom-derived; the homotopy out of a complex in degree 0 vanishes); the maps phi_W = beta(W') o eta(W) form a morphism of the two short exact sequences of sections (lem-weil-pbc-open-fibre-product); naturality of delta (lem-weil-pbc-complex-ses-long-exact-naturality); identification of H^q(phi_W) with H^q(kappa_G) o g_W^* via clause 5 of lem-weil-pbc-cohomology-pullback-functorial and the new node lem-weil-pbc-open-restriction-pullback-unit (pullback of sections along g_W is pullback along g under the restriction identifications; agent-identified); assembly. Tool uses: lem-weil-pbc-module-sheaves-enough-injectives, prop-weil-pbc-inverse-image-exact (generic, as on the Mayer-Vietoris and pullback-functorial nodes). Note for a revisit: the steps cite the construction inside the proof of lem-weil-pbc-etale-mayer-vietoris (its steps 2-7); that node's statement should name the construction (sections of an injective resolution, the rho identifications, delta the connecting map, independence of the resolution)."
+ }
 }
