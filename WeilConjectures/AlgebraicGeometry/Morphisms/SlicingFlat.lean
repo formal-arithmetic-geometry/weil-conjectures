@@ -247,7 +247,19 @@ theorem preimage_setOf_mem_connectedComponentIn_preimage_singleton {X Y Y' : Sch
 /-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
 be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a section of
 `f`. The points `x` lying in the connected component of `σ (f x)` in their fibre form an open
-subset of `X`. -/
+subset of `X`.
+
+The proof is still missing. Quasi-compactness of this set is
+`isCompact_setOf_mem_connectedComponentIn_preimage_singleton`, and it commutes with base change
+(`preimage_setOf_mem_connectedComponentIn_preimage_singleton`, Stacks `055M`). What remains is:
+- local constructibility (Stacks `055P`), via the Noetherian case `055N`, which needs geometric
+  connectedness to spread out from the generic fibre (`055G`, from `0559`, whose ring-theoretic
+  form is `exists_ne_zero_forall_isIrreducible_fiber`);
+- stability under generalisation over a Noetherian base (Stacks `055Q`), via DVRs dominating
+  specialisations (Krull–Akizuki) and
+  `IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`;
+- descent of flatness and of geometric reducedness of fibres along Noetherian approximation
+  (`Algebra.FinitePresentation.exists_fg_subalgebra_with_section`, Stacks `04AI`). -/
 @[stacks 055R]
 theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
