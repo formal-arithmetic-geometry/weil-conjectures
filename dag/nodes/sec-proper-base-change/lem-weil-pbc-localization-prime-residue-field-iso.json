@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-localization-prime-residue-field-iso",
+ "kind": "statement",
+ "title": "Residue fields of a localization agree with those of the base",
+ "statement": "Let $A$ be a commutative ring, $W\\subseteq A$ a multiplicative subset and $\\lambda:A\\to A'$ a homomorphism of commutative rings which is a localization of $A$ at $W$: (a) $\\lambda(w)$ is a unit for every $w\\in W$; (b) every element of $A'$ is $\\lambda(a)\\lambda(w)^{-1}$ with $a\\in A$, $w\\in W$; (c) $\\lambda(a)=0$ implies $wa=0$ for some $w\\in W$ (for instance $A'=W^{-1}A$ with $a\\mapsto a/1$). Let $\\mathfrak q'\\subset A'$ be a prime ideal and $\\mathfrak q=\\lambda^{-1}(\\mathfrak q')$. Then: (1) $\\mathfrak q$ is a prime ideal of $A$ with $\\mathfrak q\\cap W=\\emptyset$; (2) the composite $A\\xrightarrow{\\lambda}A'\\to A'_{\\mathfrak q'}$ is a localization of $A$ at $A\\setminus\\mathfrak q$ (in the sense of (a)-(c) with $W$ replaced by $A\\setminus\\mathfrak q$), so the ring map $A_{\\mathfrak q}\\to A'_{\\mathfrak q'}$, $a/s\\mapsto\\lambda(a)/\\lambda(s)$, is an isomorphism of $A$-algebras [def-weil-pbc-localization-at-prime]; (3) this isomorphism carries $\\mathfrak qA_{\\mathfrak q}$ onto $\\mathfrak q'A'_{\\mathfrak q'}$ and induces an isomorphism of fields and of $A$-algebras $\\sigma:\\kappa(\\mathfrak q)=A_{\\mathfrak q}/\\mathfrak qA_{\\mathfrak q}\\xrightarrow{\\sim}\\kappa(\\mathfrak q')=A'_{\\mathfrak q'}/\\mathfrak q'A'_{\\mathfrak q'}$, where $\\kappa(\\mathfrak q')$ is an $A$-algebra via $A\\to A'\\to\\kappa(\\mathfrak q')$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00E3 (algebra-lemma-spec-localization, line 3163) for (1) (the primes of S^{-1}R are the primes of R disjoint from S); basic notion Tag 00C9 (algebra-item-localization-localization, line 223: (SS')^{-1}R = S-bar^{-1}((S')^{-1}R)) for (2), with S = A \\ q, S' = W, SS' = A \\ q; (3) is (2) on maximal ideals of the local rings"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of M⁻¹R at a prime p is the localization of R at the preimage of p; residue fields isomorphic",
+   "results": "IsLocalization.localizationLocalizationAtPrimeIsoLocalization (Localization.AtPrime (comap p) ≃ₐ[R] Localization.AtPrime p, for R → Localization M only), IsLocalization.isLocalization_atPrime_localization_atPrime, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization (Mathlib.RingTheory.Localization.LocalizationLocalization), quotMapEquivQuotMapMaximalIdealOfIsLocalization",
+   "date": "2026-10-10",
+   "verdict": "partial: (2) is IsLocalization.isLocalization_isLocalization_atPrime_isLocalization (LocalizationLocalization.lean:136); no residue field statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a prime q of the localization W⁻¹A with preimage p in A, the residue field of p is isomorphic to the residue field of q",
+   "results": "Ideal.ResidueField.mapₐ_apply, Ideal.ResidueField.map_algebraMap, Polynomial.residueFieldMapCAlgEquiv, Ideal.ResidueField.map, IsLocalRing.PrimeSpectrum.comap_residue, IsLocalRing.ResidueField.mapEquiv_apply",
+   "date": "2026-10-10",
+   "verdict": "no match (only the induced map Ideal.ResidueField.map, not its bijectivity for localizations)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ResidueField' Mathlib --include=*.lean | grep -i locali | grep -i 'bijective|equiv|iso'; grep -rn 'isLocalization_isLocalization_atPrime' Mathlib; sed -n 160,192p Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+   "results": "no residue-field statement for localizations; IsLocalization.isLocalization_isLocalization_atPrime_isLocalization (LocalizationLocalization.lean:136), IsLocalization.localizationLocalizationAtPrimeIsoLocalization (:157), Ideal.residueFieldAlgEquiv (ResidueField/Ideal.lean:184: an R-algebra isomorphism f : A ≃ₐ[R] B with J = K.comap f induces J.ResidueField ≃ₐ[R] K.ResidueField), localRingEquiv (Localization/AtPrime/Basic.lean:292), IsLocalRing.ResidueField.mapEquiv",
+   "date": "2026-10-10",
+   "verdict": "no single match; candidates for a later proof: (1) IsLocalization.isPrime_iff_isPrime_disjoint (Localization/Ideal.lean:181); (2) isLocalization_isLocalization_atPrime_isLocalization + IsLocalization.algEquiv; (3) Ideal.ResidueField.map bijective via Ideal.residueFieldAlgEquiv applied to the algEquiv of (2)"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalization.localizationLocalizationAtPrimeIsoLocalization (project ~/weil-conjectures-slopmaster2)",
+   "results": "def in .lake/packages/mathlib/Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+   "date": "2026-10-10",
+   "verdict": "exists (covers (2) only, for Localization M)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'flat_iff_of_isLocalization\\|isLocalization_isLocalization_atPrime\\|localizationLocalizationAtPrimeIsoLocalization' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no Lean of the source repository"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-through-localization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

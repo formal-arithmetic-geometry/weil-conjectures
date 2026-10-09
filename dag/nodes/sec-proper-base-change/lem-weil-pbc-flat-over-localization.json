@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-flat-over-localization",
+ "kind": "statement",
+ "title": "Flatness of a module over a localization agrees over the base",
+ "statement": "Let $A$ be a commutative ring, $W\\subseteq A$ a multiplicative subset ($1\\in W$, $vw\\in W$ for $v,w\\in W$) and $\\lambda:A\\to A'$ a homomorphism of commutative rings which is a localization of $A$ at $W$: (a) $\\lambda(w)$ is a unit for every $w\\in W$; (b) every element of $A'$ is $\\lambda(a)\\lambda(w)^{-1}$ with $a\\in A$, $w\\in W$; (c) $\\lambda(a)=0$ implies $wa=0$ for some $w\\in W$ (for instance $A'=W^{-1}A$ with $a\\mapsto a/1$). Let $M$ be an $A'$-module, regarded as an $A$-module via $\\lambda$. Then $M$ is a flat $A'$-module if and only if $M$ is a flat $A$-module [def-weil-pbc-flat-ring-map]. In particular, if $\\psi:A'\\to C$ is a ring map such that $\\psi\\circ\\lambda:A\\to C$ is flat, then $\\psi$ is flat.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HT (2) (algebra-lemma-flat-localization, line 9196): if M is an S^{-1}R-module, then M is a flat R-module iff M is a flat S^{-1}R-module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a module over the localization S⁻¹R is flat over S⁻¹R iff it is flat over R",
+   "results": "Module.flat_iff_of_isLocalization (Mathlib.RingTheory.Flat.Localization), Module.Flat.localizedModule, IsLocalization.flat, Module.Flat.of_isLocalizedModule, Module.flat_of_isLocalized_span, RingHom.Flat.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "match: Module.flat_iff_of_isLocalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat ?S ?M ↔ Module.Flat ?R ?M",
+   "results": "Module.Flat.ulift_left_iff, Module.flat_iff_of_isLocalization (Mathlib.RingTheory.Flat.Localization)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.flat_iff_of_isLocalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flatness over a localization S⁻¹R of a S⁻¹R-module is equivalent to flatness over R",
+   "results": "Module.flat_iff_of_isLocalization, Module.Flat.of_isLocalizedModule, IsLocalization.flat, RingHom.Flat.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "match: Module.flat_iff_of_isLocalization"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem' Mathlib/RingTheory/Flat/Localization.lean; sed -n 30,57p of that file",
+   "results": "IsLocalization.flat (line 37), Module.flat_iff_of_isLocalization (line 52, variables at lines 31-33: (S) [Algebra R S] (p : Submonoid R) [IsLocalization p S] (M) [Module R M] [Module S M] [IsScalarTower R S M])",
+   "date": "2026-10-10",
+   "verdict": "match: Module.flat_iff_of_isLocalization, line 52"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.flat_iff_of_isLocalization (project ~/weil-conjectures-slopmaster2)",
+   "results": "Module.flat_iff_of_isLocalization, theorem, .lake/packages/mathlib/Mathlib/RingTheory/Flat/Localization.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'flat_iff_of_isLocalization\\|isLocalization_isLocalization_atPrime\\|localizationLocalizationAtPrimeIsoLocalization' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "none (no use in the source repository)",
+   "date": "2026-10-10",
+   "verdict": "no Lean of the source repository"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.flat_iff_of_isLocalization",
+  "file": "Mathlib/RingTheory/Flat/Localization.lean",
+  "line": 52,
+  "how": "exact: for [CommSemiring R] [CommSemiring S] [Algebra R S] (p : Submonoid R) [IsLocalization p S] and an S-module M with [Module R M] [IsScalarTower R S M] (the A-module structure restricted along λ), `Module.flat_iff_of_isLocalization S p M : Module.Flat S M ↔ Module.Flat R M`; IsLocalization's fields map_units, surj, exists_of_eq are (a), (b), (c). The 'in particular' clause is the direction ← with M = C (RingHom.Flat ψ is Module.Flat A' C). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-through-localization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
