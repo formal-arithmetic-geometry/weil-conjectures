@@ -950,4 +950,82 @@ lemma supportedEquivFinsupp_monomialCechComplex_d (p : ℕ)
   · rw [Finsupp.mapDomain_of_notMem_range _ _ fun ⟨e', he'⟩ ↦ he (he' ▸ e'.2)]
     exact ProjectiveSpace.MonomialCechCochain.coeff_eq_zero_of_notMem c _ he
 
+/-- The comparison maps commute with the differentials. -/
+lemma monomialCechToCechFun_d (p : ℕ) (c : ProjectiveSpace.MonomialCechCochain n k m p) :
+    ((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
+      (twist n (Spec (.of k)) m).presheafModuleCat).d p (p + 1)
+        (monomialCechToCechFun k m p c) =
+      monomialCechToCechFun k m (p + 1)
+        (((ProjectiveSpace.monomialCechComplex n k m).d p (p + 1)).hom c) := by
+  refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of k)))
+    (twist n (Spec (.of k)) m).presheafModuleCat fun τ ↦ ?_
+  rw [TopCat.Presheaf.cechComplexFunctorπ_d_apply, cechComplexFunctorπ_monomialCechToCechFun,
+    supportedEquivFinsupp_monomialCechComplex_d, map_sum, map_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  have h : (∏ᶜ fun l ↦ standardOpen n (Spec (.of k)) (τ l)) ≤
+      toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n (Set.range (τ ∘ i.succAbove)) :=
+    (TopCat.Presheaf.piObj_le_iInf _ τ).trans ((preimage_basicOpenInt_range _ τ).ge.trans
+      ((toProjInt n _).preimage_mono (Proj.basicOpen_monomialToNat_indicator_mono
+        (Set.range_comp_subset_range _ _))))
+  rw [cechComplexFunctorπ_monomialCechToCechFun, map_zsmul, map_zsmul]
+  congr 1
+  rw [twistMonomialLinearMap_mapDomain, TopCat.Presheaf.map_map_apply _ _ _ (homOfLE h).op]
+  · exact TopCat.Presheaf.map_map_apply _ _ _ (homOfLE h).op _
+  · exact Set.range_comp_subset_range _ _
+
+/-- The comparison maps are bijective. -/
+lemma bijective_monomialCechToCech (p : ℕ) :
+    Function.Bijective (monomialCechToCech k m (n := n) p) := by
+  have hle (σ : Fin (p + 1) → n) : toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n (Set.range σ) ≤
+      ∏ᶜ fun l ↦ standardOpen n (Spec (.of k)) (σ l) :=
+    (preimage_basicOpenInt_range _ σ).le.trans (TopCat.Presheaf.iInf_le_piObj _ σ)
+  have hne (σ : Fin (p + 1) → n) : (Set.range σ).Nonempty := Set.range_nonempty σ
+  constructor
+  · intro c c' hcc
+    change monomialCechToCechFun k m p c = monomialCechToCechFun k m p c' at hcc
+    funext σ
+    have hπ := congrArg (fun x ↦ (twist n (Spec (.of k)) m).presheafModuleCat.map
+      (homOfLE (hle σ)).op (TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+        (twist n (Spec (.of k)) m).presheafModuleCat p σ x)) hcc
+    simp only [cechComplexFunctorπ_monomialCechToCechFun] at hπ
+    rw [TopCat.Presheaf.map_map_apply _ _ _ (𝟙 _), TopCat.Presheaf.map_map_apply _ _ _ (𝟙 _),
+      TopCat.Presheaf.map_apply_self, TopCat.Presheaf.map_apply_self] at hπ
+    exact (Finsupp.supportedEquivFinsupp _).injective
+      ((bijective_twistMonomialLinearMap (hne σ)).1 hπ)
+  · intro x
+    choose y hy using fun σ : Fin (p + 1) → n ↦
+      (bijective_twistMonomialLinearMap (k := k) (m := m) (hne σ)).2
+        ((twist n (Spec (.of k)) m).presheafModuleCat.map (homOfLE (hle σ)).op
+          (TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+            (twist n (Spec (.of k)) m).presheafModuleCat p σ x))
+    refine ⟨fun σ ↦ (Finsupp.supportedEquivFinsupp (M := k) (R := k)
+      (laurentExponents (Set.range σ) m)).symm (y σ), ?_⟩
+    refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat fun σ ↦ ?_
+    change TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
+      (twist n (Spec (.of k)) m).presheafModuleCat p σ (monomialCechToCechFun k m p _) = _
+    rw [cechComplexFunctorπ_monomialCechToCechFun, LinearEquiv.apply_symm_apply, hy,
+      TopCat.Presheaf.map_map_apply _ _ _ (𝟙 _), TopCat.Presheaf.map_apply_self]
+
+variable (n k m) in
+/-- **The Čech complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)` is the monomial Čech
+complex**, as complexes of `k`-vector spaces: the section `∑ cₑ xᵉ` over `U_σ` corresponds to the
+family of coefficients `(cₑ)`.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+noncomputable def cechComplexTwistIso :
+    ((ModuleCat.restrictScalars
+        (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).mapHomologicalComplex _).obj
+      ((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
+        (twist n (Spec (.of k)) m).presheafModuleCat) ≅
+      ProjectiveSpace.monomialCechComplex n k m :=
+  (HomologicalComplex.Hom.isoOfComponents (fun p ↦
+    (LinearEquiv.ofBijective (monomialCechToCech k m p)
+      (bijective_monomialCechToCech p)).toModuleIso) (by
+    rintro p _ rfl
+    ext c
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply, Functor.mapHomologicalComplex_obj_d,
+      LinearEquiv.toModuleIso_hom, ModuleCat.hom_ofHom]
+    exact monomialCechToCechFun_d p c)).symm
+
 end Cech
