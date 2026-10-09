@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+ "kind": "statement",
+ "title": "A bijection Hom(A,-) -> Hom(B,-) natural in the target is precomposition with a unique isomorphism B -> A (co-Yoneda)",
+ "statement": "Let $\\mathcal C$ be a category and $A,B$ objects of $\\mathcal C$. Suppose given, for every object $X$ of $\\mathcal C$, a bijection $\\Phi_X:\\mathrm{Hom}_{\\mathcal C}(A,X)\\to\\mathrm{Hom}_{\\mathcal C}(B,X)$, natural in $X$: $\\Phi_{X'}(g\\circ f)=g\\circ\\Phi_X(f)$ for all $f:A\\to X$ and $g:X\\to X'$. Then $\\theta=\\Phi_A(\\mathrm{id}_A):B\\to A$ is an isomorphism, $\\Phi_X(f)=f\\circ\\theta$ for every $X$ and every $f:A\\to X$, and $\\theta$ is the only morphism $B\\to A$ with this property. (Stacks, Categories, Lemma 001P (categories-lemma-yoneda), applied to the opposite category $\\mathcal C^{\\mathrm{opp}}$: the functor $U\\mapsto\\mathrm{Hom}(U,-)$ is fully faithful.)",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 001P (categories-lemma-yoneda), lines 540-566, applied to the opposite category"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a natural isomorphism between corepresentable functors Hom(X,-) ≅ Hom(Y,-) comes from an isomorphism Y ≅ X (co-Yoneda)",
+   "results": "Functor.representableByEquiv, CorepresentableBy.ofIso, CorepresentableBy.ofIsoObj, IsCorepresentable.mk', CorepresentableBy.toIso, CorepresentableBy.isoCoreprX (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "related (corepresentability API in Yoneda.lean); match found via Coyoneda.fullyFaithful below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijections Hom(A, X) → Hom(B, X) natural in X are given by precomposition with a unique isomorphism B ≅ A",
+   "results": "CategoryTheory.Yoneda.ext, CategoryTheory.Coyoneda.ext (iso X ≅ Y from inverse natural maps Hom(X,-) <-> Hom(Y,-), built as Coyoneda.fullyFaithful.preimageIso), isIso_iff_coyoneda_map_bijective, CorepresentableBy/RepresentableBy.uniqueUpToIso (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match: Coyoneda.ext / Coyoneda.fullyFaithful"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Coyoneda.fullyFaithful",
+   "results": "Coyoneda.fullyFaithful : coyoneda.FullyFaithful; Coyoneda.fullyFaithful_preimage (preimage f = (f.app X.unop (𝟙 _)).op); CorepresentableBy.uniqueUpToIso_hom/inv (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def ext\\|fullyFaithful\\|preimageIso' Mathlib/CategoryTheory/Yoneda.lean; sed -n 195,240p Mathlib/CategoryTheory/Yoneda.lean; sed -n 200,212p Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "results": "Coyoneda.fullyFaithful (Yoneda.lean:199), Coyoneda.fullyFaithful_preimage (:207), Coyoneda.ext (:229); Functor.FullyFaithful.preimageIso (FullyFaithful.lean:205, the unique iso inducing a given iso), Faithful.map_injective (FullyFaithful.lean:54)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Coyoneda.fullyFaithful",
+  "file": "Mathlib/CategoryTheory/Yoneda.lean",
+  "line": 199,
+  "how": "a few Mathlib lemmas, one per clause: the natural bijections Φ are an isomorphism e : coyoneda.obj (op A) ≅ coyoneda.obj (op B) (NatIso.ofComponents); Coyoneda.fullyFaithful.preimageIso e : op A ≅ op B (FullyFaithful.preimageIso, Functor/FullyFaithful.lean:205) unop'd is the isomorphism B ≅ A, whose hom is (e.hom.app A (𝟙 A)) = Φ_A(id_A) by Coyoneda.fullyFaithful_preimage (Yoneda.lean:207); Φ_X(f) = θ ≫ f is coyoneda.map θ = e.hom (map_preimage); uniqueness is Faithful.map_injective (FullyFaithful.lean:54) of coyoneda. Coyoneda.ext (Yoneda.lean:229) packages the iso."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-inverse-image-free-etale-module",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

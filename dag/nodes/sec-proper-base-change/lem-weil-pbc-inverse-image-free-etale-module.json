@@ -20,9 +20,96 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Naturality of $\\epsilon$. For a scheme $S$, an object $W$ of $S_{\\Et}$ and $\\mathcal H\\in\\Mod(S_{\\Et},\\Lambda)$, $\\epsilon_{\\mathcal H}$ is the composite of $\\mathrm{Hom}(j_{W!}\\Lambda_W,\\mathcal H)\\to\\mathrm{Hom}_{\\mathrm{PMod}(\\Lambda_S)}(\\Lambda_S[h_W],\\mathcal H)$, $\\varphi\\mapsto\\varphi\\circ\\sigma$ with $\\sigma:\\Lambda_S[h_W]\\to j_{W!}\\Lambda_W$ the sheafification map (bijective by the universal property of [def-weil-presheaf-modules-sheafification]), and $\\beta\\mapsto\\beta_W(e_{\\mathrm{id}_W})$ (bijective by [lem-weil-pbc-free-yoneda-presheaf-module]). Both are compatible with postcomposition by a morphism $\\gamma:\\mathcal H\\to\\mathcal H'$ (the first since $(\\gamma\\circ\\varphi)\\circ\\sigma=\\gamma\\circ(\\varphi\\circ\\sigma)$, the second by the naturality clause of [lem-weil-pbc-free-yoneda-presheaf-module]). Hence $\\epsilon$ is a bijection natural in $\\mathcal H$: $\\epsilon_{\\mathcal H'}(\\gamma\\circ\\varphi)=\\gamma_W(\\epsilon_{\\mathcal H}(\\varphi))$. The same holds on $Y_{\\Et}$ for $W'$; write $\\epsilon'_{\\mathcal G}:\\mathrm{Hom}(j_{W'!}\\Lambda_{W'},\\mathcal G)\\xrightarrow{\\sim}\\mathcal G(W')$ for $\\mathcal G\\in\\Mod(Y_{\\Et},\\Lambda)$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "equation after Lemma 03DI (equation-map-lower-shriek-OU-into-module): Hom_O(j_{U!}O_U, F) = F(U)"
+   }
+  },
+  {
+   "text": "The right adjoint evaluated at $W$. The base-change functor $b:T_{\\Et}\\to Y_{\\Et}$, $W\\mapsto W\\times_TY$, of [lem-weil-pbc-etale-base-change-continuous] sends $W$ to the object $W'$ of $Y_{\\Et}$, and the direct image of sheaves of modules is $h_*\\mathcal G=\\mathcal G\\circ b$ [def-weil-pbc-direct-image], [prop-weil-pbc-inverse-image-modules-exact](3): $(h_*\\mathcal G)(W)=\\mathcal G(W')$, and for a morphism $\\chi:\\mathcal G\\to\\mathcal G'$ of $\\Mod(Y_{\\Et},\\Lambda)$, $(h_*\\chi)_W=\\chi_{W'}$. So $\\mathcal G\\mapsto(h_*\\mathcal G)(W)=\\mathcal G(W')$ is one functor $\\Mod(Y_{\\Et},\\Lambda)\\to\\mathrm{Sets}$, in both descriptions (this is Stacks' identity $f'_*(j')^{-1}=j^{-1}f_*$ on the generating sections).",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), lines 11492-11514, proof: compare the right adjoints f'_*(j')^{-1} = j^{-1}f_*"
+   }
+  },
+  {
+   "text": "A natural bijection of Hom functors. By [prop-weil-pbc-inverse-image-modules-exact](3), $h^{-1}\\dashv h_*$ on sheaves of modules with unit $\\eta$; its hom bijection is $\\alpha_{\\mathcal G}:\\mathrm{Hom}(h^{-1}\\mathcal A,\\mathcal G)\\xrightarrow{\\sim}\\mathrm{Hom}(\\mathcal A,h_*\\mathcal G)$, $\\chi\\mapsto h_*(\\chi)\\circ\\eta_{\\mathcal A}$ [lem-weil-pbc-adjunction-of-natural-bijection], natural in $\\mathcal G$. With $\\mathcal A=j_{W!}\\Lambda_W$ and $\\mathcal G\\in\\Mod(Y_{\\Et},\\Lambda)$ define $\\Phi_{\\mathcal G}=\\alpha_{\\mathcal G}^{-1}\\circ\\epsilon_{h_*\\mathcal G}^{-1}\\circ\\epsilon'_{\\mathcal G}:\\mathrm{Hom}(j_{W'!}\\Lambda_{W'},\\mathcal G)\\to\\mathcal G(W')=(h_*\\mathcal G)(W)\\to\\mathrm{Hom}(j_{W!}\\Lambda_W,h_*\\mathcal G)\\to\\mathrm{Hom}(h^{-1}j_{W!}\\Lambda_W,\\mathcal G)$. Each factor is a bijection natural in $\\mathcal G$: $\\epsilon'$ by step 1; $\\epsilon_{h_*\\mathcal G}$ by step 1 applied to $h_*\\chi$ together with $(h_*\\chi)_W=\\chi_{W'}$ (step 2); $\\alpha$ by the adjunction. So $\\Phi$ is a bijection natural in $\\mathcal G$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), lines 11492-11514, proof: compare the right adjoints f'_*(j')^{-1} = j^{-1}f_*"
+   }
+  },
+  {
+   "text": "Existence of $\\theta$. By [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] applied in $\\Mod(Y_{\\Et},\\Lambda)$ with $A=j_{W'!}\\Lambda_{W'}$, $B=h^{-1}(j_{W!}\\Lambda_W)$ and $\\Phi$ of step 3, $\\theta=\\Phi_A(\\mathrm{id}_A):h^{-1}(j_{W!}\\Lambda_W)\\to j_{W'!}\\Lambda_{W'}$ is an isomorphism with $\\Phi_{\\mathcal G}(\\psi)=\\psi\\circ\\theta$ for all $\\mathcal G$ and $\\psi$. Unwinding $\\Phi$: for every $\\mathcal G$ and every $\\psi:j_{W'!}\\Lambda_{W'}\\to\\mathcal G$,\n$$(*)\\qquad\\epsilon'_{\\mathcal G}(\\psi)=\\epsilon_{h_*\\mathcal G}\\bigl(h_*(\\psi\\circ\\theta)\\circ\\eta_{j_{W!}\\Lambda_W}\\bigr)\\in(h_*\\mathcal G)(W)=\\mathcal G(W').$$",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 001P (categories-lemma-yoneda), dual form"
+   }
+  },
+  {
+   "text": "The compatibility clause. Let $\\mathcal H\\in\\Mod(T_{\\Et},\\Lambda)$, $s\\in\\mathcal H(W)$ and $\\varphi_s$ with $\\epsilon_{\\mathcal H}(\\varphi_s)=s$. Apply $(*)$ to $\\mathcal G=h^{-1}\\mathcal H$ and $\\psi=h^{-1}(\\varphi_s)\\circ\\theta^{-1}$, so $\\psi\\circ\\theta=h^{-1}(\\varphi_s)$. Naturality of the unit $\\eta$ of $h^{-1}\\dashv h_*$ [prop-weil-pbc-inverse-image-modules-exact] gives $h_*h^{-1}(\\varphi_s)\\circ\\eta_{j_{W!}\\Lambda_W}=\\eta_{\\mathcal H}\\circ\\varphi_s$, and naturality of $\\epsilon$ (step 1) gives $\\epsilon_{h_*h^{-1}\\mathcal H}(\\eta_{\\mathcal H}\\circ\\varphi_s)=\\eta_{\\mathcal H,W}(\\epsilon_{\\mathcal H}(\\varphi_s))=\\eta_{\\mathcal H,W}(s)$. Hence $\\epsilon_{h^{-1}\\mathcal H}(h^{-1}(\\varphi_s)\\circ\\theta^{-1})=\\eta_{\\mathcal H,W}(s)$ (here $\\epsilon_{h^{-1}\\mathcal H}$ of the statement is $\\epsilon'_{h^{-1}\\mathcal H}$, for the object $W'$ of $Y_{\\Et}$).",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), lines 11492-11514, proof: compare the right adjoints f'_*(j')^{-1} = j^{-1}f_*"
+   }
+  },
+  {
+   "text": "Uniqueness. Let $\\theta_1,\\theta_2$ both satisfy the clause. Take $\\mathcal H=j_{W!}\\Lambda_W$ and $s=\\epsilon_{\\mathcal H}(\\mathrm{id})$, so $\\varphi_s=\\mathrm{id}$ and $h^{-1}(\\varphi_s)=\\mathrm{id}$. The clause gives $\\epsilon'_{h^{-1}\\mathcal H}(\\theta_1^{-1})=\\eta_{\\mathcal H,W}(s)=\\epsilon'_{h^{-1}\\mathcal H}(\\theta_2^{-1})$; since $\\epsilon'_{h^{-1}\\mathcal H}$ is injective (step 1), $\\theta_1^{-1}=\\theta_2^{-1}$, so $\\theta_1=\\theta_2$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), lines 11492-11514, proof: compare the right adjoints f'_*(j')^{-1} = j^{-1}f_*"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S6 (lemma-shriek-base-change), proof (comparison of the right adjoints f'_*(j')^{-1}=j^{-1}f_*), for the sheaf of modules Lambda_W; the Yoneda bookkeeping (steps 4-6) via Categories Lemma 001P and Modules on Sites, equation after Lemma 03DI"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,7 +165,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Etale Cohomology 03S6 for the free module j_{W!}Lambda_W with the compatibility on generating sections; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps, one new Mathlib leaf (lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection: Coyoneda.fullyFaithful, Yoneda.lean:199, fullyFaithful_preimage :207, lines verified; 001P in the opposite category). Follows the proof of 03S6 as a comparison of right adjoints on the free module: epsilon natural in H (sheafification universal property and lem-weil-pbc-free-yoneda-presheaf-module); (h_*G)(W) = G(W') via the base-change functor of lem-weil-pbc-etale-base-change-continuous; the composite natural bijection Hom(j_{W'!}Lambda, G) = G(W') = Hom(j_{W!}Lambda, h_*G) = Hom(h^{-1}j_{W!}Lambda, G) with the hom bijection chi -> h_* chi . eta; co-Yoneda gives theta; the compatibility clause from naturality of eta and epsilon; uniqueness by injectivity of epsilon'. The nodes of unit sk-def-exchange used are on the route (review_split raised no route line). Noted for stage 3: sbc-prop-extension-by-zero-and-arbitrary-base-change states 03S6 only for open immersions and abelian sheaves; no node states that the base change of an etale morphism is etale (taken as given by the base-change functor node)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-inverse-image-free-etale-module",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 03S6 (etale-cohomology.tex 11492-11514) and kept. Proof written in six steps following Stacks' right-adjoint comparison, specialised to the free module: (1) epsilon is a natural bijection (sheafification universal property + free Yoneda presheaf module); (2) (h_*G)(W)=G(W'), (h_*chi)_W=chi_{W'} via the base-change functor of the etale sites; (3) the composite Hom(j_{W'!},G) = G(W') = Hom(j_{W!},h_*G) = Hom(h^{-1}j_{W!},G) is a bijection natural in G; (4) co-Yoneda gives theta; (5) the compatibility clause from naturality of the unit and of epsilon; (6) uniqueness by taking s the generator. One new Mathlib leaf: lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection (Coyoneda.fullyFaithful). Not cited: sbc-prop-extension-by-zero-and-arbitrary-base-change (open immersions and abelian sheaves only), lem-weil-pbc-etale-inverse-image-restriction and lem-weil-pbc-module-sheaves-grothendieck-abelian (not needed)."
  }
 }
