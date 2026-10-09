@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-localization-noetherian",
+ "kind": "statement",
+ "title": "Localizations of Noetherian rings are Noetherian",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $S\\subseteq R$ a multiplicative subset ($1\\in S$, $st\\in S$ for $s,t\\in S$). Let $\\varphi:R\\to R'$ be a homomorphism of commutative rings that is a localization of $R$ at $S$: (a) $\\varphi(s)$ is a unit of $R'$ for every $s\\in S$; (b) every element of $R'$ is $\\varphi(r)\\varphi(s)^{-1}$ for some $r\\in R$, $s\\in S$; (c) $\\varphi(r)=0$ implies $sr=0$ for some $s\\in S$ (for instance $R'=S^{-1}R$, the ring of fractions $r/s$, with $r\\mapsto r/1$). Then $R'$ is a Noetherian ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), second sentence 'Any localization of a Noetherian ring is Noetherian', with its proof ('any ideal $J\\subset S^{-1}R$ is of the form $I\\cdot S^{-1}R$')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a Noetherian ring at a submonoid is Noetherian",
+   "results": "IsLocalization.isNoetherianRing, IsLocalization.instIsNoetherianRingLocalization (Mathlib.RingTheory.Localization.Submodule); IsArtinianRing.localization_artinian; AlgebraicGeometry.isNoetherianRing_of_away",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.isNoetherianRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R is Noetherian and S is a localization of R at a multiplicative set M then S is Noetherian",
+   "results": "IsLocalization.isNoetherianRing, IsLocalization.instIsNoetherianRingLocalization (Mathlib.RingTheory.Localization.Submodule); AlgebraicGeometry.isNoetherianRing_of_away; IsNoetherianRing.of_isLocalization_maximal; Algebra.EssFiniteType.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isNoetherianRing\\|IsNoetherianRing (Localization' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Submodule.lean; sed -n 80,88p of the same file",
+   "results": "Localization/Submodule.lean:82 theorem IsLocalization.isNoetherianRing (M : Submonoid R) (S) [IsLocalization M S] (h : IsNoetherianRing R) : IsNoetherianRing S (in `variable [IsLocalization M S]`, `include M`); line 86 instance IsNoetherianRing (Localization S)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.isNoetherianRing",
+  "file": "Mathlib/RingTheory/Localization/Submodule.lean",
+  "line": 82,
+  "how": "exact: `theorem IsLocalization.isNoetherianRing (M : Submonoid R) (S : Type*) [CommSemiring S] [Algebra R S] [IsLocalization M S] (h : IsNoetherianRing R) : IsNoetherianRing S`; Mathlib's `IsLocalization M S` (Mathlib/RingTheory/Localization/Defs.lean) has the fields map_units, surj, exists_of_eq, which are (a), (b), (c) of the node (a multiplicative subset is a Submonoid R); for S^{-1}R itself the instance `IsNoetherianRing (Localization S)` (line 86). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-ring-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
