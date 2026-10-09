@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-scheme-theoretic-union",
+ "kind": "statement",
+ "title": "Scheme-theoretic union of two closed subschemes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $i':Z'\\to X$, $i'':Z''\\to X$ be closed immersions [def-weil-closed-immersion] with ideal sheaves $\\mathcal I'=\\ker(\\mathcal O_X\\to i'_*\\mathcal O_{Z'})$ and $\\mathcal I''=\\ker(\\mathcal O_X\\to i''_*\\mathcal O_{Z''})$ [def-sbc-closed-immersion-ideal-sheaf]. Then $\\mathcal I'\\cap\\mathcal I''$ is a quasi-coherent sheaf of ideals of $\\mathcal O_X$; let $i''':Z'''\\to X$ be the closed immersion it defines (the *scheme-theoretic union* $Z'\\cup Z''$; on an affine open $U=\\operatorname{Spec}A$ of $X$ [def-weil-affine-spectrum] where $Z'\\cap U$, $Z''\\cap U$ are cut out by ideals $I,J\\subseteq A$ it is $\\operatorname{Spec}(A/(I\\cap J))\\to\\operatorname{Spec}A$). Then: (a) the underlying set $i'''(Z''')$ equals $i'(Z')\\cup i''(Z'')$; (b) there are closed immersions $a':Z'\\to Z'''$ and $a'':Z''\\to Z'''$ with $i'''\\circ a'=i'$ and $i'''\\circ a''=i''$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Definition 0C4H (definition-scheme-theoretic-intersection-union) and Lemma 0C4J (lemma-scheme-theoretic-union), first sentence and the affine-local description in its proof ($(X\\cup Y)\\cap U$ corresponds to $I\\cap J$); closed immersions via Lemma 01QP (lemma-closed-immersion-ideals, cited in the proof of 0C4J); (a) from $V(I\\cap J)=V(I)\\cup V(J)$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "support of intersection of ideal sheaves is union of supports, scheme theoretic union of closed subschemes",
+   "results": "AlgebraicGeometry.Scheme.zeroLocus_inf (Mathlib.AlgebraicGeometry.AffineScheme; ideals of one ring of sections), PrimeSpectrum.zeroLocus_inf, Scheme.zeroLocus_iInf_of_nonempty, Scheme.IdealSheafData.support, Scheme.IdealSheafData.vanishingIdeal_sup (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: pieces only (affine V(I∩J)=V(I)∪V(J); vanishing ideal of a union of closed sets), no statement for the closed subscheme cut out by I'⊓I''"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed subscheme cut out by the intersection of two ideal sheaves contains both closed subschemes and has underlying set their union",
+   "results": "Scheme.zeroLocus_inf, IdealSheafData.vanishingIdeal_sup, vanishingIdeal_iSup, vanishingIdeal_sSup, IdealSheafData.support_sup (support (I ⊔ J) = support I ⊓ support J; the dual statement, intersection of closed subschemes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.support (_ ⊓ _)  (HTTP endpoint loogle.lean-lang.org/json)",
+   "results": "0 declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.inclusion",
+   "results": "11 declarations: IdealSheafData.inclusion, inclusion_subschemeι, inclusion_comp, inclusion_id, subSchemeCover_map_inclusion, subschemeFunctor_map (IdealSheaf/Subscheme.lean), AlgebraicGeometry.instIsClosedImmersionInclusion (Morphisms/Separated.lean:250)",
+   "date": "2026-10-10",
+   "verdict": "partial: clause (b) is IdealSheafData.inclusion (inf_le_left / inf_le_right) with inclusion_subschemeι and instIsClosedImmersionInclusion, once the closed immersions i', i'' are identified with (ker i').subschemeι (IsClosedImmersion: isIso of toImage, Morphisms/ClosedImmersion.lean:156)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'support_inf\\|support_sup\\|support_mul\\|radical_inf\\|support_radical\\|def inclusion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "results": "IdealSheafData has a lattice (inf: ideal := I.ideal ⊓ J.ideal, Basic.lean:148; ideal_inf :192); support_sup :658, support_mul (I * J).support = I.support ⊔ J.support :423, support_radical :526, radical_inf :549, radical_mul :556, support_antitone :384; range_subschemeι (Subscheme.lean:493); inclusion (Subscheme.lean:611); no support_inf",
+   "date": "2026-10-10",
+   "verdict": "no match: (a) for ⊓ follows in a few lines (support_radical, radical_inf, radical_mul, support_mul) but is not stated; (b) as above. Not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Morphisms 0C4H/0C4J (scheme-theoretic union, underlying set, the two closed immersions); self-contained; correct; unsplit."
+ }
+}

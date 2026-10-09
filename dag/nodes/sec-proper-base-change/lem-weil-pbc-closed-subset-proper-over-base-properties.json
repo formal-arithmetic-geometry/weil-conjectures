@@ -13,9 +13,105 @@
   "def-weil-closed-immersion",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(1), the easy implications. Let $Z\\subseteq X$ be closed and let $i_Z:Z_{\\mathrm{red}}\\to X$ be its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]; it is a closed immersion with $i_Z(Z_{\\mathrm{red}})=Z$, i.e. one closed subscheme structure on $Z$. By [def-weil-pbc-closed-subset-proper-over-base](1), '$Z$ is proper over $S$' means that $f\\circ i_Z:Z_{\\mathrm{red}}\\to S$ is proper. Hence: if $Z'\\to S$ is proper for every closed subscheme structure $Z'$ on $Z$, it is so for $Z_{\\mathrm{red}}$, i.e. $Z$ is proper over $S$; and if $Z$ is proper over $S$, then some closed subscheme structure (namely $Z_{\\mathrm{red}}$) is proper over $S$. It remains to show: if $Z'\\to S$ is proper for one closed subscheme structure $i':Z'\\to X$ on $Z$, then $Z''\\to S$ is proper for every other one $i'':Z''\\to X$ (Steps 2-4).",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYL (lemma-closed-proper-over-base), proof, first sentence ('(3) => (1) and (1) => (2) are immediate'); the reduced induced structure is Schemes, Definition 01J4"
+   }
+  },
+  {
+   "text": "(1), the scheme-theoretic union. Let $i':Z'\\to X$ and $i'':Z''\\to X$ be closed immersions with $i'(Z')=i''(Z'')=Z$ and $f\\circ i'$ proper. Let $i''':Z'''\\to X$ be their scheme-theoretic union [lem-weil-pbc-scheme-theoretic-union], the closed subscheme cut out by the intersection of the two ideal sheaves. By that lemma $i'''(Z''')=Z\\cup Z=Z$, so $Z'''$ is another closed subscheme structure on $Z$, and there are closed immersions $a':Z'\\to Z'''$, $a'':Z''\\to Z'''$ with $i'''a'=i'$, $i'''a''=i''$. Since $i'$, $i''$, $i'''$ are injective with the same image $Z$, the maps $a'$ and $a''$ are bijective; in particular $a'$ is surjective [def-weil-surjective-morphism].",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-union",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYL (lemma-closed-proper-over-base), proof, sentences 4-6 (scheme theoretic union, Morphisms Definition 0C4H and Lemma 0C4J)"
+   }
+  },
+  {
+   "text": "(1), $Z'''\\to S$ is separated and locally of finite type. The closed immersion $i'''$ is proper [lem-weil-pbc-proper-fp-permanence](c), hence locally of finite type [def-weil-proper-morphism], and $f$ is locally of finite type, so $f\\circ i''':Z'''\\to S$ is locally of finite type [lem-weil-pbc-proper-fp-permanence](e). The closed immersion $a'$ is universally closed [lem-weil-pbc-closed-immersion-integral-separated-uc](d) and surjective (Step 2), and $(f\\circ i''')\\circ a'=f\\circ i'$ is proper, in particular separated [def-weil-proper-morphism]; hence $f\\circ i'''$ is separated [lem-weil-pbc-surjective-universally-closed-separated].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-surjective-universally-closed-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYL (lemma-closed-proper-over-base), proof, sentences 8-9 (Morphisms Lemmas 09MQ, 01T5, 01T3)"
+   }
+  },
+  {
+   "text": "(1), conclusion. $f\\circ i'$ is proper, hence universally closed [def-weil-proper-morphism], $a':Z'\\to Z'''$ is surjective with $(f\\circ i''')\\circ a'=f\\circ i'$, and $f\\circ i'''$ is separated and locally of finite type (Step 3); so $f\\circ i''':Z'''\\to S$ is proper [lem-weil-pbc-image-universally-closed] (quasi-compactness is part of that lemma). The closed immersion $a''$ is proper [lem-weil-pbc-proper-fp-permanence](c), so $f\\circ i''=(f\\circ i''')\\circ a''$ is proper [lem-weil-pbc-proper-fp-permanence](a). This proves that properness of one closed subscheme structure on $Z$ over $S$ implies it for every one, and with Step 1 the equivalence of the three conditions in (1).",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-image-universally-closed",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYL (lemma-closed-proper-over-base), proof, sentences 6-7 and 10-11 (Morphisms Lemmas 01W5, 01W3, 03GN; Stacks deduces quasi-compactness separately from the homeomorphism $Z'\\to Z'''$, here it is contained in 03GN)"
+   }
+  },
+  {
+   "text": "(2). Let $Y\\subseteq Z\\subseteq X$ be closed and $Z$ proper over $S$, so $f\\circ i_Z:Z_{\\mathrm{red}}\\to S$ is proper (Step 1). As $i_Z$ is a homeomorphism onto the closed set $Z\\supseteq Y$ [def-weil-closed-immersion], $T=i_Z^{-1}(Y)$ is a closed subset of $Z_{\\mathrm{red}}$ with $i_Z(T)=Y$. By [lem-weil-pbc-closed-subset-closed-subscheme] there is a closed immersion $j:Y'\\to Z_{\\mathrm{red}}$ with $j(Y')=T$. Then $i_Z\\circ j:Y'\\to X$ is a closed immersion [lem-weil-pbc-closed-immersion-comp] with image $Y$, i.e. a closed subscheme structure on $Y$, and $f\\circ i_Z\\circ j$ is proper, $j$ being proper [lem-weil-pbc-proper-fp-permanence](c) and properness being stable under composition [lem-weil-pbc-proper-fp-permanence](a). By (1) (some closed subscheme structure proper implies proper over $S$, Steps 1-4), $Y$ is proper over $S$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYN (lemma-closed-closed-proper-over-base); Stacks omits the proof, this step is written out by the agent from Lemma 0CYL and Morphisms Lemmas 01QS, 01W5, 01W3"
+   }
+  },
+  {
+   "text": "(3). Let $g:X\\to X'$ be an $S$-morphism, $f':X'\\to S$ locally of finite type and separated, $Z\\subseteq X$ closed and proper over $S$. Then $f\\circ i_Z=f'\\circ(g\\circ i_Z):Z_{\\mathrm{red}}\\to S$ is proper (Step 1). Apply [lem-weil-pbc-scheme-theoretic-image-proper] to $h=g\\circ i_Z:Z_{\\mathrm{red}}\\to X'$ over $S$: the scheme-theoretic image $i_W:W\\to X'$ of $h$ has $f'\\circ i_W$ proper, and $i_W(W)=h(Z_{\\mathrm{red}})=g(i_Z(Z_{\\mathrm{red}}))=g(Z)$ is closed in $X'$. So $g(Z)$ is a closed subset of $X'$ and $W$ is a closed subscheme structure on it with $W\\to S$ proper; since $f'$ is locally of finite type, (1) applies to $f'$ and shows that $g(Z)$ is proper over $S$ [def-weil-pbc-closed-subset-proper-over-base].",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of (1) (reduced induced structure on $Z$, Morphisms Lemma 0AH6 applied to $Z\\to Y$ over $S$)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-scheme-theoretic-union",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-image-universally-closed",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-scheme-theoretic-image-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Section 'Being proper over a base': proofs of Lemma 0CYL and Lemma 0CYQ (1); Lemma 0CYN has 'Proof omitted' in Stacks, its step (Step 5) is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +133,24 @@
    "results": "only the module docstring of AlgebraicGeometry/ProjectiveSpectrum/Proper.lean ('Proj A is proper over Spec A_0'); no notion of a closed subset or a support proper over a base",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Surjective (HTTP endpoint loogle.lean-lang.org/json)",
+   "results": "0 declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '0CYL\\|0CYN\\|0CYQ\\|09MQ\\|0AH6\\|03GN' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'of_comp_surjective\\|toImage' Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "no Stacks tag of the section; UniversallyClosed.of_comp_surjective (UniversallyClosed.lean:78, = 03GN first part), instance UniversallyClosed f.toImage (Proper.lean:119); no notion of a closed subset proper over a base and no reduced induced closed subscheme of a closed subset (IdealSheafData.vanishingIdeal exists but no statement on closed subsets proper over S)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,6 +175,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is 0CYL, 0CYN, 0CYQ(1); self-contained; correct; unsplit."
+  "note": "Split reviewed: 6 steps along 0CYL (via the scheme-theoretic union, 09MQ (4) and 03GN), 0CYN (written out) and 0CYQ (1) (via 0AH6). Correct; three new unsplit nodes, one closed by the lead with sorry-free Lean. Stage-3 note: pqf-lem-image-proper (unit sk-thm-br, finite type hypothesis) is the same 0AH6 statement as the new lem-weil-pbc-scheme-theoretic-image-proper (locally finite type); merge candidates."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks coherent.tex 0CYL, 0CYN, 0CYQ(1) (tags verified in tags/tags): correct, kept. Proof in six steps following Stacks: (1) via the scheme-theoretic union Z'''=Z' cup Z'' (Morphisms 0C4H/0C4J, new node lem-weil-pbc-scheme-theoretic-union), separatedness of Z'''->S by Morphisms 09MQ(4) (new node lem-weil-pbc-surjective-universally-closed-separated), properness by 03GN (existing leaf lem-weil-pbc-image-universally-closed), closed immersions and compositions by the leaves lem-weil-pbc-proper-fp-permanence and lem-weil-pbc-closed-immersion-integral-separated-uc; (2) (Stacks: proof omitted) written out: closed subscheme structure on Y inside Z_red (leaves lem-weil-pbc-closed-subset-closed-subscheme, lem-weil-pbc-closed-immersion-comp) and (1); (3) by Morphisms 0AH6 for the reduced Z (new node lem-weil-pbc-scheme-theoretic-image-proper, stated for X->S proper and Y->S separated, locally of finite type). The brief's alternative route (Z_red -> Z_1 and Schemes 0356 factorization) is not needed. Mathlib searched with LeanSearch, LeanFinder, Loogle (HTTP) and grep: no notion of closed subsets proper over a base."
  }
 }
