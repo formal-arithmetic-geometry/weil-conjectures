@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-descend-closed-immersion",
+ "kind": "statement",
+ "title": "Closed immersions descend to a finite stage of a limit",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ with affine transition morphisms [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Let $0\\in I$ and let $f_0:X_0\\to Y_0$ be a morphism of schemes over $S_0$, where $S_0$, $X_0$, $Y_0$ are quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. For $i\\ge0$ let $f_i:X_i\\to Y_i$ be the base change of $f_0$ to $S_i$ ($X_i=X_0\\times_{S_0}S_i$, $Y_i=Y_0\\times_{S_0}S_i$, fibre products [def-pc-fibre-product]) and $f:X\\to Y$ its base change to $S$. If $f$ is a closed immersion [def-weil-closed-immersion] and $f_0$ is locally of finite type [def-weil-finite-type-morphism], then there is $i\\ge0$ such that $f_i$ is a closed immersion (Stacks Limits, Lemma 01ZP).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828) in Situation Tag 081D (situation-descent-property, line 1739); its proof: closed immersions are affine (Morphisms Lemma 01SE, lemma-closed-immersion-affine), Lemma 01ZN (descend-affine-finite-presentation) makes $f_0$ affine after increasing $0$, reduction to $X_0,Y_0$ affine over an affine $W\\subseteq S_0$, and Algebra Lemma 07RH (lemma-colimit-surjective)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion descends to a finite stage of a cofiltered limit of schemes with affine transition maps",
+   "results": "IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.mk, IsFinite.instOfIsClosedImmersion, IsClosedImmersion.instIsAffineHom, exists_mem_of_isClosed_of_nonempty' (AffineTransitionLimit), IsImmersion.instOfIsClosedImmersion, isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism locally of finite type whose base change to the limit of schemes is a closed immersion is a closed immersion at some finite stage (Stacks 01ZP)",
+   "results": "instLocallyOfFiniteTypeOfIsClosedImmersion, IsFinite.instOfIsClosedImmersion, instUniversallyClosedOfIsClosedImmersion, IsClosedImmersion.isStableUnderBaseChange, IsClosedImmersion.of_comp_isClosedImmersion, UniversallyClosed.universally_isClosedMap",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/SpreadingOut.lean; grep -rn 'stacks 01ZP' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AffineTransitionLimit.lean:137 only (closed-immersion lift into a limit, unrelated); no @[stacks 01ZP]",
+   "date": "2026-10-10",
+   "verdict": "no match. The source repository slopmaster2 has AlgebraicGeometry.Scheme.exists_isClosedImmersion_pullback_snd and exists_isClosedImmersion_overPullbackMap (AffineTransitionLimit.lean lines 3191, 3353; sorry-free), which require the morphism at the stage to be of finite presentation, not only locally of finite type; they state a special case, not this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-eventually-proper",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Limits 01ZP in Situation 081D with f_0 locally of finite type; self-contained; correct; unsplit."
+ }
+}

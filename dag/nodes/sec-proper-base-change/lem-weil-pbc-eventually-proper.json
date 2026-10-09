@@ -5,7 +5,7 @@
  "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes over $I$ with affine transition morphisms [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Let $0\\in I$ and let $f_0:X_0\\to Y_0$ be a morphism of schemes over $S_0$ with $S_0$, $X_0$, $Y_0$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. For $i\\ge0$ let $f_i:X_i\\to Y_i$ be the base change of $f_0$ along $S_i\\to S_0$ and $f:X\\to Y$ its base change along $S\\to S_0$ [def-pc-fibre-product]. If $f$ is proper [def-weil-proper-morphism] and $f_0$ is locally of finite type [def-weil-finite-type-morphism], then there is $i\\ge0$ such that $f_i$ is proper.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 081F (lemma-eventually-proper, line 3265) in Situation Tag 081D (situation-descent-property, line 1739), and its proof (Lemma 01ZQ descend-separated-finite-presentation, Lemma 0202 chow-finite-type, Lemma 01ZP descend-closed-immersion-finite-presentation, Morphisms lemmas on proper morphisms)"
+  "place": "Lemma Tag 081F (lemma-eventually-proper, line 3265) in Situation Tag 081D (situation-descent-property, line 1739), and its proof (Limits Lemmas 01ZQ descend-separated-finite-presentation, 0202 chow-finite-type, 01ZP descend-closed-immersion-finite-presentation; Schemes Lemma 03GI quasi-compact-permanence; Morphisms Lemmas 01W3 composition-proper, 01W4 base-change-proper, 01W6 image-proper-scheme-closed, 03GN image-proper-is-proper; tags checked in literature/stacks-project/tags/tags)"
  },
  "stmt_deps": [
   "pqf-def-affine-morphism",
@@ -15,9 +15,127 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (separated at a finite stage; re-basing).* By [lem-weil-pbc-descend-separated] (Stacks 01ZQ), applicable since $f$ is proper, hence separated [def-weil-proper-morphism], there is $i_1\\ge0$ with $f_{i_1}$ separated. The situation at $i_1$ is again one of the kind of the statement: the transition morphism $S_{i_1}\\to S_0$ is affine, hence quasi-compact and separated [lem-weil-pbc-affine-morphism-permanence] (3), and so are its base changes $X_{i_1}\\to X_0$, $Y_{i_1}\\to Y_0$ (ibid. (1)); as $S_0,X_0,Y_0$ are quasi-compact and quasi-separated, so are $S_{i_1},X_{i_1},Y_{i_1}$ [lem-weil-pbc-qcqs-morphism-permanence] (2). For $i\\ge i_1$ the transition $S_i\\to S_0$ is the composite $S_i\\to S_{i_1}\\to S_0$, so by the transitivity of fibre products [def-pc-fibre-product] ($X_0\\times_{S_0}S_i\\cong(X_0\\times_{S_0}S_{i_1})\\times_{S_{i_1}}S_i$, likewise for $Y$ and for $S$ in place of $S_i$) $f_i$ and $f$ are the base changes of $f_{i_1}$ to $S_i$ and to $S$; $f_{i_1}$ is locally of finite type, as a base change of $f_0$ [lem-weil-pbc-lft-base-change]. An index $i\\ge i_1$ is an index $i\\ge0$. Replacing $0$ by $i_1$ we may and do assume that $f_0$ is separated (and keep: $S_0,X_0,Y_0$ quasi-compact and quasi-separated, $f_0$ locally of finite type, $f$ proper).",
+   "uses": [
+    "lem-weil-pbc-descend-separated",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'By Lemma 01ZQ we see that $f_i$ is separated for some $i\\ge0$. Replacing $0$ by $i$ we may assume that $f_0$ is separated.' (the re-basing, which the source leaves implicit, written out)"
+   }
+  },
+  {
+   "text": "*Step 2 (Chow's lemma at the stage $0$).* $f_0$ is quasi-compact, since $X_0$ is quasi-compact and $Y_0$ quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (1) (Stacks 03GI); so $f_0$ is separated and of finite type (locally of finite type and quasi-compact [def-weil-finite-type-morphism]) over the quasi-compact quasi-separated $Y_0$. By Chow's lemma [lem-weil-pbc-chow-finite-type] (Stacks 0202, applied over the base $Y_0$) there are $n\\ge0$, a scheme $X'_0$, a proper surjective morphism $\\pi_0:X'_0\\to X_0$ [def-weil-surjective-morphism] and an immersion $j_0:X'_0\\to P_0:=\\mathbf P^n_{Y_0}$ [def-weil-closed-immersion], [def-nagata-projective-space-base-change] with $p_0\\circ j_0=f_0\\circ\\pi_0$, where $p_0:P_0\\to Y_0$ is the projection; $p_0$ is proper [lemma-nagata-projective-space-base-change-proper].",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-chow-finite-type",
+    "def-weil-surjective-morphism",
+    "def-weil-closed-immersion",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'Observe that $f_0$ is quasi-compact, see Schemes, Lemma 03GI. By Lemma 0202 we can choose a diagram ... where $X_0'\\to\\mathbf P^n_{Y_0}$ is an immersion, and $\\pi:X_0'\\to X_0$ is proper and surjective.'"
+   }
+  },
+  {
+   "text": "*Step 3 (the base changed diagram).* For $T=S_i$ ($i\\ge0$) or $T=S$, with $Y_T=Y_0\\times_{S_0}T$ ($=Y_i$ resp. $Y$) and $X_T=X_0\\times_{S_0}T$, put $X'_T=X'_0\\times_{Y_0}Y_T$ and $P_T=P_0\\times_{Y_0}Y_T$ [def-pc-fibre-product]. By the definition $\\mathbf P^n_{Y_0}=Y_0\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change] and the transitivity of fibre products, $P_T\\cong\\mathbf P^n_{Y_T}$ over $Y_T$, with projection $p_T$ the base change of $p_0$; and $X'_T\\cong X'_0\\times_{S_0}T$, $P_T\\cong P_0\\times_{S_0}T$, $X'_T\\cong X'_0\\times_{P_0}P_T$, $X'_T\\cong X'_0\\times_{X_0}X_T$ (each by pasting of cartesian squares, using $Y_T=Y_0\\times_{S_0}T$ and $X_T=X_0\\times_{Y_0}Y_T$). Let $j_T:X'_T\\to P_T$ and $\\pi_T:X'_T\\to X_T$ be the base changes of $j_0$ and $\\pi_0$; then $p_T\\circ j_T=f_T\\circ\\pi_T$ ($f_T=f_i$ resp. $f$), being the base change of $p_0\\circ j_0=f_0\\circ\\pi_0$ along $Y_T\\to Y_0$. Thus $j_T$ is the base change of the morphism $j_0$ of $S_0$-schemes to $T$, so the pair $(X'_0\\to P_0,\\ S_0)$ with the system $(S_i)$ is again in the situation of the statement, with $j_i$, $j:=j_S$ as the base changes. Moreover: $j_T$ is an immersion [lem-weil-pbc-immersion-base-change-lft] (1); $\\pi_T$ is proper [lem-weil-pbc-proper-fp-permanence] (b) and surjective [lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'Introduce $X'=X_0'\\times_{Y_0}Y$ and $X_i'=X_0'\\times_{Y_0}Y_i$.' (the identifications of the base changes, left implicit in the source, written out)"
+   }
+  },
+  {
+   "text": "*Step 4 ($X'\\to\\mathbf P^n_Y$ is a closed immersion).* Write $X'=X'_S$, $P=P_S=\\mathbf P^n_Y$, $p=p_S$, $\\pi=\\pi_S$. The composite $f\\circ\\pi:X'\\to Y$ is proper, as $\\pi$ (step 3) and $f$ are proper [lem-weil-pbc-proper-fp-permanence] (a) (Stacks 01W3, 01W4). The projection $p:P\\to Y$ is proper [lemma-nagata-projective-space-base-change-proper], in particular separated [def-weil-proper-morphism], and $p\\circ j=f\\circ\\pi$ (step 3), so $j$ is proper [lem-weil-pbc-proper-over-separated] (Stacks 01W6). As $j$ is moreover an immersion (step 3), it is a closed immersion [lem-weil-pbc-proper-immersion-closed].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'By Morphisms, Lemmas 01W3 and 01W4 we see that $X'\\to Y$ is proper. Hence $X'\\to\\mathbf P^n_Y$ is a closed immersion (Morphisms, Lemma 01W6).'"
+   }
+  },
+  {
+   "text": "*Step 5 (the immersion is closed at a finite stage).* Apply [lem-weil-pbc-descend-closed-immersion] (Stacks 01ZP) to the morphism $j_0:X'_0\\to P_0$ of $S_0$-schemes and the system $(S_i)$ (step 3). Its hypotheses: $S_0$ is quasi-compact and quasi-separated; $X'_0$ is, since $\\pi_0$ is proper, hence quasi-compact and separated (so quasi-separated) [def-weil-proper-morphism], over the quasi-compact quasi-separated $X_0$ [lem-weil-pbc-qcqs-morphism-permanence] (2); $P_0$ is, since $p_0$ is proper over the quasi-compact quasi-separated $Y_0$ (same reasons); $j_0$ is locally of finite type, being an immersion [lem-weil-pbc-immersion-base-change-lft] (2); and its base change $j$ to $S$ is a closed immersion (step 4). Hence there is $i\\ge0$ such that $j_i:X'_i\\to\\mathbf P^n_{Y_i}$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-descend-closed-immersion",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'By Lemma 01ZP we find that $X'_i\\to\\mathbf P^n_{Y_i}$ is a closed immersion for $i$ large enough.' (the check of the hypotheses of 01ZP, left implicit, written out)"
+   }
+  },
+  {
+   "text": "*Step 6 ($f_i$ is proper).* For this $i$: $j_i$ is a closed immersion, hence proper, and $p_i:\\mathbf P^n_{Y_i}\\to Y_i$ is proper [lemma-nagata-projective-space-base-change-proper], so $p_i\\circ j_i=f_i\\circ\\pi_i:X'_i\\to Y_i$ is proper [lem-weil-pbc-proper-fp-permanence] (c), (a), in particular universally closed [def-weil-proper-morphism]. The morphism $\\pi_i:X'_i\\to X_i$ is surjective (step 3). The morphism $f_i$ is separated and of finite type, as the base change of the separated morphism of finite type $f_0$ (step 2) along $Y_i\\to Y_0$ [lem-pod-separated-finite-type-base-change]. By [lem-weil-pbc-image-universally-closed] (Stacks 03GN), applied over the base $Y_i$ to $\\pi_i$ with $p=f_i\\circ\\pi_i$ and $q=f_i$, the morphism $f_i$ is universally closed, and being separated and locally of finite type it is proper.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265): 'By Morphisms, Lemma 03GN it suffices to prove that $X'_i\\to Y_i$ is proper for some $i$. ... Then $X'_i\\to Y_i$ is proper and we win.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-descend-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-chow-finite-type",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-image-universally-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "proof of Lemma Tag 081F (lemma-eventually-proper, line 3265); the re-basing at the separated stage, the identification of the base changed diagram and the check of the hypotheses of 01ZP, implicit in the source, written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,6 +192,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 081F; correct; unsplit."
+  "note": "Split reviewed: 6 steps along Limits 081F (separated at a stage by 01ZQ and re-basing; Chow 0202 at stage 0 via the existing node; the base-changed diagram; the immersion is closed over S by properness over a separated base and the proper-immersion node; 01ZP gives a closed immersion at a stage; 03GN gives properness of f_i). Correct; three new nodes (01ZQ, 01ZP unsplit; immersion base change / lft Mathlib leaf verified)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-eventually-proper",
+  "worker": "stage1",
+  "summary": "Split in six steps along the proof of Stacks Limits 081F: (1) 01ZQ gives a separated stage, re-based (new unsplit node lem-weil-pbc-descend-separated, Situation 081D form of 01ZQ); (2) f_0 quasi-compact (03GI) hence separated of finite type, Chow's lemma 0202 over Y_0 via the existing lem-weil-pbc-chow-finite-type (no new Chow node); (3) the base changed diagram X'_T, P^n_{Y_T}, j_T, pi_T with the fibre-product identifications written out, immersions stable under base change (new Mathlib leaf lem-weil-pbc-immersion-base-change-lft: IsImmersion.isStableUnderBaseChange and the instance IsImmersion -> LocallyOfFiniteType); (4) X' -> P^n_Y proper over a separated base (01W6, lem-weil-pbc-proper-over-separated) and a proper immersion is closed (lem-weil-pbc-proper-immersion-closed); (5) 01ZP applied to j_0 (new unsplit node lem-weil-pbc-descend-closed-immersion, Situation 081D form of 01ZP, with the qcqs and lft hypotheses checked); (6) 03GN (lem-weil-pbc-image-universally-closed) makes f_i proper. Statement kept (it is 081F exactly); source place given with every cited tag checked in tags/tags. Not used: lem-weil-pbc-eventually-closed-immersion (0A0N, fixed target, a different statement), lemma-nagata-closed-immersion-stage-exists and the source repository's exists_isClosedImmersion_pullback_snd (need finite presentation; the Chow immersion X'_0 -> P^n_{Y_0} is only of finite type)."
  }
 }

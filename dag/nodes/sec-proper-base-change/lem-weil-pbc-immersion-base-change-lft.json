@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-immersion-base-change-lft",
+ "kind": "statement",
+ "title": "Immersions: base change and finite type",
+ "statement": "Let $j:Z\\to X$ be an immersion of schemes [def-weil-closed-immersion] (a closed immersion $Z\\to U$ followed by an open immersion $U\\to X$ [def-weil-open-immersion]). (1) For every morphism of schemes $g:X'\\to X$ [def-pc-scheme] the projection $Z\\times_XX'\\to X'$ from the fibre product [def-pc-fibre-product] is an immersion (Stacks Schemes, Lemma 01JY). (2) $j$ is locally of finite type [def-weil-finite-type-morphism] (Stacks Morphisms, Lemma 01T5).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01JY (lemma-base-change-immersion, schemes.tex); Morphisms, Lemma Tag 01T5 (lemma-immersion-locally-finite-type, morphisms.tex)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of an immersion of schemes is an immersion",
+   "results": "IsImmersion.isStableUnderBaseChange, isOpenImmersion_stableUnderBaseChange, IsPreimmersion.instIsStableUnderBaseChangeScheme, IsImmersion.instOfIsClosedImmersion, IsImmersion.instOfIsOpenImmersion, IsImmersion (Mathlib.AlgebraicGeometry.Morphisms.Immersion)",
+   "date": "2026-10-10",
+   "verdict": "match (1): IsImmersion.isStableUnderBaseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an immersion of schemes is locally of finite type",
+   "results": "IsImmersion.instLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.Immersion), instLocallyQuasiFiniteOfIsImmersion, locallyOfFiniteType_of_isOpenImmersion, instLocallyOfFiniteTypeOfIsClosedImmersion, IsFinite.instOfIsClosedImmersion",
+   "date": "2026-10-10",
+   "verdict": "match (2): the instance at Immersion.lean line 190"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "results": "line 155 isImmersion_iff_exists (IsImmersion f iff f = closed immersion followed by open immersion), line 161 instance isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @IsImmersion, lines 176/180 pullback.fst/pullback.snd instances, line 190 instance (priority := 900) [IsImmersion f] : LocallyOfFiniteType f",
+   "date": "2026-10-10",
+   "verdict": "match: (1) and (2), with isImmersion_iff_exists identifying Mathlib's IsImmersion with the definition in def-weil-closed-immersion"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType (instance at line 190); AlgebraicGeometry.isImmersion_iff_exists",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+  "line": "161; 190; 155",
+  "how": "exact, one Mathlib declaration per clause: (1) IsStableUnderBaseChange of IsImmersion (pullback.fst/pullback.snd instances, lines 176, 180), (2) the instance IsImmersion f -> LocallyOfFiniteType f; isImmersion_iff_exists says Mathlib's IsImmersion is 'closed immersion followed by open immersion', the definition of the node"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-eventually-proper",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsImmersion.isStableUnderBaseChange (Morphisms/Immersion.lean:161), the LocallyOfFiniteType instance for immersions (:190), isImmersion_iff_exists (:155); Schemes 01JY, Morphisms 01T5."
+ }
+}
