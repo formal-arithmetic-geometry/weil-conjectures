@@ -32,6 +32,8 @@ and noetherian, there are only finitely many such points.
 - `IsOpen.finite_compl_of_topologicalKrullDim_le_one`: the complement of a nonempty open subset
   is finite.
 - `IsOpen.isClosed_singleton_of_mem_compl`: each point of that complement is closed.
+- `topologicalKrullDim_lt_of_ssubset`: a proper closed subset of an irreducible set of dimension
+  at most `n` has dimension less than `n`.
 - `IsOpen.topologicalKrullDimAt_eq`: the local dimension at a point of an open subset agrees
   with the local dimension in the ambient space.
 - `topologicalKrullDim_le_of_specializingMap`, `topologicalKrullDim_le_of_continuous`: comparison
@@ -362,3 +364,36 @@ theorem IsOpen.topologicalKrullDimAt_eq {W : Set X} (hW : IsOpen W) {x : X} (hx 
     · exact IsInducing.subtypeVal
 
 end LocalDimension
+
+/-- A proper closed subset `Y` of an irreducible set `T` of dimension at most `n` has dimension
+less than `n`: a chain of irreducible closed subsets of `Y` extends by `T`. -/
+theorem topologicalKrullDim_lt_of_ssubset {X : Type*} [TopologicalSpace X] {T Y : Set X}
+    (hT : IsIrreducible T) (hYc : IsClosed Y) (hYT : Y ⊆ T) (hne : Y ≠ T) {n : ℕ}
+    (h : topologicalKrullDim T ≤ n) : topologicalKrullDim Y < n := by
+  rw [topologicalKrullDim, krullDim_lt_coe_iff]
+  intro l
+  have hf : IsInducing (Set.inclusion hYT) :=
+    IsInducing.of_comp (continuous_inclusion hYT) continuous_subtype_val IsInducing.subtypeVal
+  let g := IrreducibleCloseds.map _ hf.continuous
+  have : IrreducibleSpace T := by
+    rw [irreducibleSpace_def]
+    exact ⟨⟨⟨_, hT.1.some_mem⟩, trivial⟩,
+      (Subtype.preirreducibleSpace hT.2).isPreirreducible_univ⟩
+  let top : IrreducibleCloseds T :=
+    ⟨Set.univ, IrreducibleSpace.isIrreducible_univ _, isClosed_univ⟩
+  have hsub (c : IrreducibleCloseds Y) : (g c : Set T) ⊆ {t : T | t.1 ∈ Y} := by
+    refine closure_minimal ?_ (hYc.preimage continuous_subtype_val)
+    rintro _ ⟨y, -, rfl⟩
+    exact y.2
+  obtain ⟨t, htT, htY⟩ : ∃ t ∈ T, t ∉ Y := by
+    by_contra! h'
+    exact hne (subset_antisymm hYT h')
+  have hlt : g l.last < top := by
+    refine lt_of_le_of_ne (fun x _ ↦ trivial) fun he ↦ htY ?_
+    have : (⟨t, htT⟩ : T) ∈ (g l.last : Set T) := by rw [he]; trivial
+    exact hsub _ this
+  have hl := LTSeries.length_le_krullDim ((l.map g
+    (IrreducibleCloseds.map_strictMono_of_isInducing hf)).snoc top hlt)
+  have h' := hl.trans h
+  change ((l.length + 1 : ℕ) : WithBot ℕ∞) ≤ n at h'
+  exact_mod_cast (Nat.lt_of_succ_le (by exact_mod_cast h'))

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Data.Int.GCD
-public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Topology.Sheaves.CohomologyColimit
 public import WeilConjectures.Topology.Sheaves.Support
 public import WeilConjectures.Topology.Sheaves.SubgroupOfFunctions
@@ -323,6 +323,200 @@ instance isFlasque_constOn (d : ℤ) : Presheaf.IsFlasque (constOn hT ⊤ d).obj
       refine constOn.ext fun y ↦ ?_
       rw [constOn.toFun_zero, constOn.toFun_eq_zero s y fun hy ↦ h ⟨y, hy⟩]
 
+/-- The morphism `ℤ_W ⟶ constOn T W d` given by the generator `TopCat.Sheaf.constOnGen`. -/
+noncomputable def constOnπ (h : IsIrreducible T) (W : Opens X) (d : ℤ) :
+    freeYoneda.obj W ⟶ constOn h W d :=
+  (freeYonedaHomEquiv _ W).symm (constOnGen h W d)
+
+lemma constOnπ_freeYonedaGen (W : Opens X) (d : ℤ) :
+    (constOnπ hT W d).hom.app (op W) (freeYonedaGen W) = constOnGen hT W d := by
+  rw [← freeYonedaHomEquiv_apply, constOnπ, Equiv.apply_symm_apply]
+
+lemma constOnπ_map_freeYonedaGen {W V : Opens X} (h : V ≤ W) (d : ℤ) :
+    (constOnπ hT W d).hom.app (op V) ((freeYoneda.obj W).obj.map (homOfLE h).op
+      (freeYonedaGen W)) = (constOn hT W d).obj.map (homOfLE h).op (constOnGen hT W d) := by
+  rw [NatTrans.naturality_apply, constOnπ_freeYonedaGen]
+
+/-- `ℤ_W ⟶ constOn T W d` is an epimorphism when `T` is closed. -/
+lemma epi_constOnπ (hTc : IsClosed T) (W : Opens X) (d : ℤ) : Epi (constOnπ hT W d) := by
+  classical
+  refine epi_of_locally _ fun V t x hx ↦ ?_
+  by_cases hxT : x ∈ T
+  · by_cases hc : constOn.toFun t ⟨x, hx⟩ = 0
+    · refine ⟨V, le_rfl, hx, 0, ?_⟩
+      rw [map_zero, constOn.eq_zero_of_toFun_eq_zero t ⟨x, hx⟩ hxT hc, map_zero]
+    · have hxW : x ∈ W := constOn.mem_of_toFun_ne_zero t ⟨x, hx⟩ hxT hc
+      obtain ⟨m, hm⟩ := constOn.dvd_toFun t ⟨x, hx⟩
+      refine ⟨V ⊓ W, inf_le_left, ⟨hx, hxW⟩, m • (freeYoneda.obj W).obj.map
+        (homOfLE inf_le_right).op (freeYonedaGen W), ?_⟩
+      rw [map_zsmul, constOnπ_map_freeYonedaGen]
+      refine constOn.ext fun y ↦ ?_
+      rw [constOn.toFun_zsmul, constOn.toFun_map, constOn.toFun_map]
+      by_cases hyT : y.1 ∈ T
+      · rw [constOnGen_toFun W d ⟨y.1, y.2.2⟩ hyT, constOn.toFun_eq t ⟨y.1, y.2.1⟩ ⟨x, hx⟩ hyT hxT,
+          hm, mul_comm]
+      · rw [constOn.toFun_eq_zero _ ⟨y.1, y.2.2⟩ hyT, constOn.toFun_eq_zero _ ⟨y.1, y.2.1⟩ hyT,
+          mul_zero]
+  · refine ⟨V ⊓ ⟨Tᶜ, hTc.isOpen_compl⟩, inf_le_left, ⟨hx, hxT⟩, 0, ?_⟩
+    rw [map_zero]
+    refine constOn.ext fun y ↦ ?_
+    rw [constOn.toFun_zero, constOn.toFun_map, constOn.toFun_eq_zero _ ⟨y.1, y.2.1⟩ y.2.2]
+
 end ConstOn
+
+variable (X) in
+/-- The statement of Grothendieck vanishing in dimension `n`: every abelian sheaf supported on a
+closed subset of dimension less than `n` has vanishing cohomology in degrees at least `n`. -/
+def VanishingBelow (n : ℕ) : Prop :=
+  ∀ (Z : Set X), IsClosed Z → topologicalKrullDim Z < n →
+    ∀ (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}),
+      IsSupportedOn F Z → ∀ i : ℕ, n ≤ i → Subsingleton (Sheaf.H F i)
+
+section Irreducible
+
+variable {n : ℕ} (ih : VanishingBelow X n) {T : Set X} (hT : IsIrreducible T)
+  (hTc : IsClosed T) (hdim : topologicalKrullDim T ≤ n)
+
+include ih hT hTc hdim
+
+omit ih in
+/-- Removing an open meeting the irreducible closed set `T` from `T` lowers the dimension. -/
+lemma topologicalKrullDim_inter_compl_lt {W : Opens X} (hW : ((W : Set X) ∩ T).Nonempty) :
+    topologicalKrullDim (T ∩ (W : Set X)ᶜ : Set X) < n := by
+  refine topologicalKrullDim_lt_of_ssubset hT (hTc.inter W.isOpen.isClosed_compl)
+    Set.inter_subset_left (fun he ↦ ?_) hdim
+  obtain ⟨x, hxW, hxT⟩ := hW
+  have : x ∈ T ∩ (W : Set X)ᶜ := by rw [he]; exact hxT
+  exact this.2 hxW
+
+/-- `H^i(constOn T W d) = 0` for `i > n` when `W` meets `T`: `constOn T W d` is the kernel of the
+flasque sheaf `constOn T ⊤ d` onto a sheaf supported on `T ∖ W`. -/
+lemma subsingleton_H_constOn {W : Opens X} (hW : ((W : Set X) ∩ T).Nonempty) (d : ℤ) (i : ℕ)
+    (hi : n < i) : Subsingleton (Sheaf.H (constOn hT W d) i) := by
+  obtain ⟨j, rfl⟩ : ∃ j, i = j + 1 := ⟨i - 1, by omega⟩
+  let f := constOnIncl (hT := hT) (le_top : W ≤ ⊤) (dvd_refl d)
+  let S := ShortComplex.mk f (cokernel.π f) (cokernel.condition f)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have hsupp : IsSupportedOn S.X₃ (T ∩ (W : Set X)ᶜ) := by
+    refine isSupportedOn_cokernel f fun V hV t ↦ ⟨constOn.mk (constOn.toFun t)
+      ⟨(constOn.mem t).1, (constOn.mem t).2.1, fun x hx h ↦ ?_, (constOn.mem t).2.2.2⟩, rfl⟩
+    by_contra hxW
+    exact Set.disjoint_left.1 hV x.2 ⟨hx, hxW⟩
+  have : Subsingleton (Sheaf.H S.X₃ j) :=
+    ih _ (hTc.inter W.isOpen.isClosed_compl)
+      (topologicalKrullDim_inter_compl_lt hT hTc hdim hW) _ hsupp j (by omega)
+  have : Subsingleton (Sheaf.H S.X₂ (j + 1)) :=
+    IsFlasque.subsingleton_H (X := X) (constOn hT ⊤ d) j
+  exact subsingleton_H_X₁ hS j
+
+omit ih hTc hdim in
+/-- The value at a point of `T` of the image of a combination of restricted sections. -/
+lemma toFun_app_map_add {K : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} {W' : Opens X} {d' : ℤ} (m : K ⟶ constOn hT W' d') {V₁ V₂ V : Opens X}
+    (h₁ : V ≤ V₁) (h₂ : V ≤ V₂) (k₁ : K.obj.obj (op V₁)) (k₂ : K.obj.obj (op V₂)) (a b : ℤ)
+    (x : V) :
+    constOn.toFun (m.hom.app (op V) (a • K.obj.map (homOfLE h₁).op k₁ +
+      b • K.obj.map (homOfLE h₂).op k₂)) x =
+      a * constOn.toFun (m.hom.app (op V₁) k₁) ⟨x.1, h₁ x.2⟩ +
+        b * constOn.toFun (m.hom.app (op V₂) k₂) ⟨x.1, h₂ x.2⟩ := by
+  rw [map_add, map_zsmul, map_zsmul, NatTrans.naturality_apply, NatTrans.naturality_apply]
+  rfl
+
+/-- **Subsheaves of the constant sheaf on `T`** (Hartshorne's minimal-generator argument). Every
+subsheaf `K` of `constOn T ⊤ 1` has `H^i(K) = 0` for `i > n`: if `d` is the least positive value
+of a section of `K` and `W₀` an open where it is attained, then `K` contains `constOn T W₀ d`,
+and the quotient is supported on `T ∖ W₀`. -/
+lemma subsingleton_H_of_mono {K : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} (m : K ⟶ constOn hT ⊤ 1) [Mono m] (i : ℕ) (hi : n < i) :
+    Subsingleton (Sheaf.H K i) := by
+  classical
+  by_cases hK : ∀ (V : Opens X) (k : K.obj.obj (op V)), k = 0
+  · exact subsingleton_H_of_isZero (isZero_of_forall_eq_zero K hK) i
+  simp only [not_forall] at hK
+  obtain ⟨V, k, hk⟩ := hK
+  have hmk : m.hom.app (op V) k ≠ 0 := fun h ↦
+    hk (injective_app_of_mono m (op V) (h.trans (map_zero _).symm))
+  obtain ⟨x, hx⟩ : ∃ x, constOn.toFun (m.hom.app (op V) k) x ≠ 0 := by
+    by_contra! h
+    exact hmk (constOn.ext fun x ↦ h x)
+  have hxT : x.1 ∈ T := by
+    by_contra h
+    exact hx (constOn.toFun_eq_zero _ x h)
+  -- the least positive value `d` of a section of `K`
+  let P : ℕ → Prop := fun d ↦ 0 < d ∧ ∃ (V : Opens X) (k : K.obj.obj (op V)) (x : V),
+    x.1 ∈ T ∧ constOn.toFun (m.hom.app (op V) k) x = d
+  have hP : ∃ d, P d := by
+    rcases Int.natAbs_eq (constOn.toFun (m.hom.app (op V) k) x) with h | h
+    · exact ⟨_, Int.natAbs_pos.2 hx, V, k, x, hxT, h⟩
+    · refine ⟨_, Int.natAbs_pos.2 hx, V, -k, x, hxT, ?_⟩
+      rw [map_neg]
+      change -constOn.toFun (m.hom.app (op V) k) x = _
+      omega
+  obtain ⟨hd, W₀, k₀, x₀, hx₀T, hk₀⟩ := Nat.find_spec hP
+  set d := Nat.find hP with hd_def
+  -- every value of a section of `K` is divisible by `d`
+  have hdvd (V : Opens X) (k : K.obj.obj (op V)) (y : V) (hy : y.1 ∈ T) :
+      (d : ℤ) ∣ constOn.toFun (m.hom.app (op V) k) y := by
+    obtain ⟨z, hzT, hzV, hzW⟩ := hT.2 _ _ V.isOpen W₀.isOpen ⟨y.1, hy, y.2⟩ ⟨x₀.1, hx₀T, x₀.2⟩
+    set c := constOn.toFun (m.hom.app (op V) k) y
+    let e := Int.gcdA c d • K.obj.map (homOfLE (inf_le_left : V ⊓ W₀ ≤ V)).op k +
+      Int.gcdB c d • K.obj.map (homOfLE (inf_le_right : V ⊓ W₀ ≤ W₀)).op k₀
+    have he : constOn.toFun (m.hom.app (op (V ⊓ W₀)) e) ⟨z, hzV, hzW⟩ = Int.gcd c d := by
+      rw [toFun_app_map_add, Int.gcd_eq_gcd_ab, constOn.toFun_eq _ _ y hzT hy,
+        constOn.toFun_eq _ _ x₀ hzT hx₀T, hk₀]
+      ring
+    have hgpos : 0 < Int.gcd c d := Int.gcd_pos_of_ne_zero_right _ (by exact_mod_cast hd.ne')
+    have hle : d ≤ Int.gcd c d := Nat.find_min' hP ⟨hgpos, _, e, ⟨z, hzV, hzW⟩, hzT, he⟩
+    have hge : Int.gcd c d ≤ d :=
+      Nat.le_of_dvd hd (Int.natCast_dvd_natCast.1 (Int.gcd_dvd_right c d))
+    have h := Int.gcd_dvd_left c (d : ℤ)
+    rwa [le_antisymm hge hle] at h
+  -- the subsheaf `constOn T W₀ d` of `K`, generated by `k₀`
+  have hW₀ : ((W₀ : Set X) ∩ T).Nonempty := ⟨x₀.1, x₀.2, hx₀T⟩
+  let e₀ := constOnπ hT W₀ (d : ℤ)
+  have : Epi e₀ := epi_constOnπ hTc W₀ d
+  let f₀ : freeYoneda.obj W₀ ⟶ K := (freeYonedaHomEquiv K W₀).symm k₀
+  let ι₀ := constOnIncl (hT := hT) (le_top : W₀ ≤ ⊤) (one_dvd (d : ℤ))
+  have hf₀ : f₀ ≫ m = e₀ ≫ ι₀ := by
+    apply (freeYonedaHomEquiv _ W₀).injective
+    rw [freeYonedaHomEquiv_comp, freeYonedaHomEquiv_comp, Equiv.apply_symm_apply]
+    change _ = ι₀.hom.app (op W₀) ((freeYonedaHomEquiv _ W₀)
+      ((freeYonedaHomEquiv _ W₀).symm (constOnGen hT W₀ d)))
+    rw [Equiv.apply_symm_apply]
+    refine constOn.ext fun y ↦ ?_
+    rw [constOnIncl_toFun]
+    by_cases hy : y.1 ∈ T
+    · rw [constOnGen_toFun _ _ _ hy, constOn.toFun_eq _ y x₀ hy hx₀T, hk₀]
+    · rw [constOn.toFun_eq_zero _ y hy, constOn.toFun_eq_zero _ y hy]
+  have hker : kernel.ι e₀ ≫ f₀ = 0 := by
+    rw [← cancel_mono m, Category.assoc, hf₀, kernel.condition_assoc, zero_comp, zero_comp]
+  let j := Abelian.epiDesc e₀ f₀ hker
+  have hj : j ≫ m = ι₀ := by
+    rw [← cancel_epi e₀, ← Category.assoc, Abelian.comp_epiDesc, hf₀]
+  have : Mono j := mono_of_mono_fac hj
+  let S := ShortComplex.mk j (cokernel.π j) (cokernel.condition j)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have hsupp : IsSupportedOn S.X₃ (T ∩ (W₀ : Set X)ᶜ) := by
+    refine isSupportedOn_cokernel j fun V hV κ ↦ ?_
+    let s : (constOn hT W₀ d).obj.obj (op V) := constOn.mk
+      (constOn.toFun (m.hom.app (op V) κ)) ⟨(constOn.mem _).1, fun y ↦ by
+        by_cases hy : y.1 ∈ T
+        · exact hdvd V κ y hy
+        · rw [constOn.toFun_eq_zero _ y hy]
+          exact dvd_zero _, fun y hy _ ↦ by
+        by_contra hyW
+        exact Set.disjoint_left.1 hV y.2 ⟨hy, hyW⟩, (constOn.mem _).2.2.2⟩
+    refine ⟨s, injective_app_of_mono m (op V) ?_⟩
+    exact (congrArg (fun φ : (constOn hT W₀ d ⟶ constOn hT ⊤ 1) ↦ φ.hom.app (op V) s)
+      hj).trans (constOn.ext fun y ↦ rfl)
+  have : Subsingleton (Sheaf.H S.X₁ i) := subsingleton_H_constOn ih hT hTc hdim hW₀ d i hi
+  have : Subsingleton (Sheaf.H S.X₃ i) :=
+    ih _ (hTc.inter W₀.isOpen.isClosed_compl)
+      (topologicalKrullDim_inter_compl_lt hT hTc hdim hW₀) _ hsupp i hi.le
+  exact subsingleton_H_X₂ hS i
+
+end Irreducible
 
 end TopCat.Sheaf
