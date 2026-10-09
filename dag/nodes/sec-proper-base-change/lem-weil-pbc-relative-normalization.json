@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-relative-normalization",
+ "kind": "statement",
+ "title": "The normalization of a scheme in a quasi-compact quasi-separated scheme over it",
+ "statement": "Let $f:T\\to X$ be a quasi-compact and quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions]. Then there are a scheme $X'$ and morphisms $\\nu:X'\\to X$, $f':T\\to X'$ with $f=\\nu\\circ f'$ (the normalization of $X$ in $T$, $X'=\\underline{\\operatorname{Spec}}_X(\\mathcal O')$ with $\\mathcal O'$ the integral closure of $\\mathcal O_X$ in $f_*\\mathcal O_T$) such that: (i) $\\nu$ is integral [def-weil-finite-integral-morphism]; (ii) $f'$ is dominant ($f'(T)$ is dense in $X'$); (iii) for every affine open $U\\subseteq X$ [def-weil-affine-spectrum], with $A=\\mathcal O_X(U)$, $B=\\Gamma(f^{-1}(U),\\mathcal O_T)$ made an $A$-algebra by $f^\\sharp$ and $A'\\subseteq B$ the integral closure of $A$ in $B$, the open $\\nu^{-1}(U)$ is affine and there is a ring isomorphism $\\theta_U:\\Gamma(\\nu^{-1}(U),\\mathcal O_{X'})\\xrightarrow{\\sim}A'$ under which $\\nu^\\sharp:A\\to\\Gamma(\\nu^{-1}(U),\\mathcal O_{X'})$ becomes the structure map $A\\to A'$ and $f'^\\sharp:\\Gamma(\\nu^{-1}(U),\\mathcal O_{X'})\\to\\Gamma(f^{-1}(U),\\mathcal O_T)=B$ becomes the inclusion $A'\\subseteq B$; (iv) if $T$ is an integral scheme [def-pc-integral-scheme], so is $X'$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 035F (lemma-integral-closure, line 13845: A'(U) is the integral closure of O_X(U) in A(U) for U affine), Definition 035H (definition-normalization-X-in-Y, line 13910, with the factorization described after it), Lemma 035I (lemma-characterize-normalization, line 13936: nu integral, f' dominant); (iv): Lemma 0AXN (lemma-normalization-in-reduced, line 14067: T reduced implies X' reduced) and the dominance of 035I (the closure of the irreducible f'(T) is irreducible)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization of a scheme in a finite extension of its function field is a normal integral scheme with integral morphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalization, instIsIntegralHomFromNormalization, instIsIntegralNormalization, normalizationDesc (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-10",
+   "verdict": "match (clause by clause, see mathlib_match)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationObjIso",
+   "results": "normalizationObjIso, normalizationObjIso_hom_val, fromNormalization_app, fromNormalization_app_assoc, toNormalization_app_preimage (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-10",
+   "verdict": "match for (iii)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization of a scheme in Spec of a finite extension of a residue field is a normal integral scheme with function field K",
+   "results": "Scheme.Hom.instIsIntegralNormalization, instIsIntegralHomFromNormalization, instIsIntegralHomNormalizationDesc, instIsIsoToNormalizationOfIsIntegralHom, instIsReducedNormalization (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-10",
+   "verdict": "match for (i), (iv)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Normalization.lean; grep -n isAffine_preimage ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "results": "normalization (:127, @[stacks 035H]), toNormalization (:137), fromNormalization (:174), toNormalization_fromNormalization (:190), instance IsIntegralHom f.fromNormalization (:200), normalizationObjIso (:220), fromNormalization_app (:259), normalizationObjIso_hom_val (:276), instance IsDominant f.toNormalization (:341), instance [IsIntegral X] IsIntegral f.normalization (:358); IsIntegralHom extends IsAffineHom (Morphisms/Integral.lean:35), IsAffineHom.isAffine_preimage (Morphisms/Affine.lean:48)",
+   "date": "2026-10-10",
+   "verdict": "match; source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.normalization, Scheme.Hom.toNormalization, Scheme.Hom.fromNormalization, Scheme.Hom.toNormalization_fromNormalization, Scheme.Hom.instIsIntegralHomFromNormalization, the instance IsDominant f.toNormalization (Normalization.lean:341), Scheme.Hom.normalizationObjIso, Scheme.Hom.fromNormalization_app, Scheme.Hom.normalizationObjIso_hom_val, Scheme.Hom.instIsIntegralNormalization, IsAffineHom.isAffine_preimage",
+  "file": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "how": "one Mathlib lemma per clause, for f with [QuasiCompact f] [QuasiSeparated f]: X' = f.normalization, nu = f.fromNormalization, f' = f.toNormalization, f = f'≫nu is toNormalization_fromNormalization (:190); (i) the instance IsIntegralHom f.fromNormalization (:200); (ii) the instance IsDominant f.toNormalization (:341); (iii) nu^{-1}(U) affine by IsAffineHom.isAffine_preimage (IsIntegralHom extends IsAffineHom), theta_U = normalizationObjIso hU (:220, Γ(normalization, nu⁻¹ U) ≅ integralClosure Γ(X,U) Γ(T, f⁻¹ U)), nu^sharp = algebraMap ≫ theta⁻¹ by fromNormalization_app (:259), f'^sharp (appLE) = theta ≫ val by normalizationObjIso_hom_val (:276); (iv) the instance [IsIntegral T] : IsIntegral f.normalization (:358). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normalization-in-residue-field-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in AlgebraicGeometry/Normalization.lean (normalization :127, toNormalization_fromNormalization :190, IsIntegralHom :200, normalizationObjIso :220, IsDominant :341, IsIntegral normalization for integral T) plus IsAffineHom.isAffine_preimage; checked."
+ }
+}

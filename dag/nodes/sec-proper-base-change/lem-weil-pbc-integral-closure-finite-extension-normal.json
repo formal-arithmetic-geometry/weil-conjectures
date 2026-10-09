@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-integral-closure-finite-extension-normal",
+ "kind": "statement",
+ "title": "The integral closure of a domain in a finite extension of its fraction field is a normal domain with that fraction field",
+ "statement": "Let $A$ be an integral domain with fraction field $F$, let $L/F$ be a finite field extension, and let $A'\\subseteq L$ be the integral closure of $A$ in $L$ (the elements of $L$ satisfying a monic polynomial with coefficients in $A$). Then $A'$ is an integral domain, $L$ is a fraction field of $A'$ (the inclusion $A'\\subseteq L$ extends to an isomorphism $\\operatorname{Frac}(A')\\xrightarrow{\\sim}L$), and $A'$ is integrally closed in $L$, i.e. $A'$ is a normal domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 034L (lemma-integral-closure-in-normal, line 7985: the integral closure of R in a normal domain S, here S = L a field, is a normal domain; proof omitted there) and Lemma 0308 (lemma-integral-closure-transitive, line 7723); the fraction-field clause is the step called clear in literature/stacks-project/etale-cohomology.tex, proof of Lemma 09Z6, line 12976 ('As K/kappa(x) is a finite extension, it is clear that K is the function field of Y')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a domain in a finite extension of its fraction field has that extension as fraction field",
+   "results": "IsIntegralClosure.isFractionRing_of_finite_extension, integralClosure.isFractionRing_of_finite_extension, IsIntegralClosure.isFractionRing_of_algebraic, integralClosure.isFractionRing_of_algebraic (Mathlib.RingTheory.Localization.Integral), integralClosure.isIntegrallyClosedOfFiniteExtension (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a ring in a field is integrally closed",
+   "results": "instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegrallyClosedIn.of_isIntegralClosure",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of a domain in a finite extension of its fraction field is integrally closed with that field as fraction field",
+   "results": "integralClosure.isIntegrallyClosedOfFiniteExtension, integralClosure.isFractionRing_of_finite_extension, IsIntegrallyClosed.instIsIntegralClosure",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isFractionRing_of_finite_extension\\|theorem isIntegrallyClosedOfFiniteExtension' -r ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/",
+   "results": "RingTheory/Localization/Integral.lean:428 integralClosure.isFractionRing_of_finite_extension [IsDomain A] [Algebra A L] [Algebra K L] [IsScalarTower A K L] [FiniteDimensional K L] : IsFractionRing (integralClosure A L) L; RingTheory/IntegralClosure/IntegrallyClosed.lean:367 integralClosure.isIntegrallyClosedOfFiniteExtension [IsDomain R] [FiniteDimensional K L] : IsIntegrallyClosed (integralClosure R L)",
+   "date": "2026-10-10",
+   "verdict": "match; source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "integralClosure.isFractionRing_of_finite_extension, integralClosure.isIntegrallyClosedOfFiniteExtension",
+  "file": "Mathlib/RingTheory/Localization/Integral.lean",
+  "how": "one lemma per clause, with K = F ([IsFractionRing A F]) and [FiniteDimensional F L]: IsFractionRing (integralClosure A L) L (Localization/Integral.lean:428); IsIntegrallyClosed (integralClosure A L) (Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:367); A' is a domain as a subring of the field L (Subalgebra of a domain: instance SubringClass.isDomain). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normalization-in-residue-field-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: integralClosure.isFractionRing_of_finite_extension (Localization/Integral.lean:401) and isIntegrallyClosedOfFiniteExtension (IntegrallyClosed.lean:367); checked."
+ }
+}

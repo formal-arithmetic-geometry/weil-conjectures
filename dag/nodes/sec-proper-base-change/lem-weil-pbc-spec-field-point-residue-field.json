@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-spec-field-point-residue-field",
+ "kind": "statement",
+ "title": "Morphisms from the spectrum of a field to an affine scheme: the image point and the residue field map",
+ "statement": "Let $R$ be a ring and $\\operatorname{Spec}R$ its spectrum [def-weil-affine-spectrum]. (1) For a prime $\\mathfrak p\\subset R$ the residue field $\\kappa(\\mathfrak p)$ of $\\operatorname{Spec}R$ at $\\mathfrak p$ [def-weil-residue-field] is the residue field of $R_{\\mathfrak p}$, and the composite $R\\to R_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$ has kernel $\\mathfrak p$ and makes $\\kappa(\\mathfrak p)$ a fraction field of the domain $R/\\mathfrak p$. (2) For a scheme $X$ and an affine open $U\\subseteq X$ with $\\mathcal O_X(U)=R$ (so $U\\cong\\operatorname{Spec}R$) and a point $x\\in U$ corresponding to $\\mathfrak p$, the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$ factors through $U$ and corresponds (on $U\\cong\\operatorname{Spec}R$) to the ring map $R\\to\\kappa(\\mathfrak p)=\\kappa(x)$ of (1). (3) Let $K$ be a field, $\\psi:R\\to K$ a ring map, and $s:\\operatorname{Spec}K\\to\\operatorname{Spec}R$ the induced morphism. Then $s$ maps the unique point of $\\operatorname{Spec}K$ to $\\mathfrak q=\\ker\\psi$, and the field map $\\kappa(\\mathfrak q)\\to K$ induced by $s$ on residue fields is the unique ring map $\\operatorname{Frac}(R/\\mathfrak q)=\\kappa(\\mathfrak q)\\to K$ extending the injection $R/\\mathfrak q\\to K$ induced by $\\psi$. In particular, if $R$ is a domain, $\\psi$ is injective and $K$ is a fraction field of $R$ via $\\psi$, then $s$ maps the point to the generic point $(0)$ of $\\operatorname{Spec}R$ and $\\kappa((0))\\to K$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, discussion before Lemma 01J9 (lemma-characterize-points, lines 2400-2475: morphisms Spec(K) -> X correspond to pairs (x, kappa(x) -> K)); Algebra, section Local rings (literature/stacks-project/algebra.tex lines 3337-3358: kappa(p) is the residue field of R_p, identified with the fraction field of R/p by Proposition 00CT (proposition-localize-quotient); Spec(kappa(p)) -> Spec(R_p) -> Spec(R) maps the point to p; the induced maps of residue fields)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from Spec of a field K to a scheme X correspond to points x with field map residue field to K",
+   "results": "AlgebraicGeometry.Scheme.SpecToEquivOfField, SpecToEquivOfLocalRing, SpecToEquivOfLocalRing_apply_fst, Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, SpecToEquivOfField_eq_iff (Mathlib.AlgebraicGeometry.ResidueField, .Stalk)",
+   "date": "2026-10-10",
+   "verdict": "partial: the bijection Mor(Spec K, X) = {(x, kappa(x) -> K)} is SpecToEquivOfField; the computation for Spec R (point = ker psi, residue map = extension of R/ker psi -> K) is not stated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "residue field of Spec R at a prime p is isomorphic to the residue field of the localization, fraction field of R/p",
+   "results": "IsLocalRing.ResidueField, Ideal.ResidueField, IsLocalization.AtPrime.equivQuotMaximalIdeal, Scheme.residueField",
+   "date": "2026-10-10",
+   "verdict": "partial (1): Spec.residueFieldIso and the instance IsFractionRing (R ⧸ I) I.ResidueField (found by grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism Spec K to Spec R given by a ring homomorphism R → K sends the point to the kernel prime and induces the residue field map",
+   "results": "Scheme.SpecMap_residue_apply, Scheme.Spec_map_residue_apply, Scheme.SpecToEquivOfField, Scheme.fromSpecResidueField_apply, IsLocalRing.PrimeSpectrum.comap_residue, Scheme.over_def",
+   "date": "2026-10-10",
+   "verdict": "no match for (3)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'residueFieldIso\\|SpecToEquivOfField\\|fromSpecResidueField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean; grep -rn 'IsFractionRing (R ⧸' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+   "results": "Spec.residueFieldIso (ResidueField.lean:301, (Spec R).residueField x ≅ x.asIdeal.ResidueField), Spec.algebraMap_residueFieldIso_inv (:308), Spec.map_residueFieldIso_inv_eq_fromSpecResidueField (:320), SpecToEquivOfField (:346); instance IsFractionRing (R ⧸ I) I.ResidueField (Ideal.lean:108)",
+   "date": "2026-10-10",
+   "verdict": "partial: (1) and (2) are Mathlib (residueFieldIso, the IsFractionRing instance, map_residueFieldIso_inv_eq_fromSpecResidueField with IsAffineOpen.fromSpec); (3) is not stated: no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normalization-in-residue-field-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: residue fields of Spec R, the canonical Spec κ(x) → X on an affine open, and the point/residue map of Spec K → Spec R for ψ: R → K; correct elementary facts (00CT, 01J9); unsplit."
+ }
+}
