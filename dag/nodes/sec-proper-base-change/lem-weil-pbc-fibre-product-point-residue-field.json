@@ -13,9 +13,98 @@
   "def-weil-residue-field",
   "lem-weil-pbc-fibre-product-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation: $R=\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y)$ with $\\iota_x:\\kappa(x)\\to R$, $a\\mapsto a\\otimes1$, and $\\iota_y:\\kappa(y)\\to R$, $b\\mapsto1\\otimes b$; $f^\\sharp:\\kappa(s)\\to\\kappa(x)$, $g^\\sharp:\\kappa(s)\\to\\kappa(y)$, $p^\\sharp:\\kappa(x)\\to\\kappa(z)$, $q^\\sharp:\\kappa(y)\\to\\kappa(z)$ the maps induced on residue fields [def-weil-residue-field]; for a point $w$ of a scheme $W$, $j_w:\\operatorname{Spec}\\kappa(w)\\to W$ is the canonical morphism and $\\xi$ denotes the unique point of the spectrum of a field [def-weil-affine-spectrum]. *Step 1: the map $\\psi$ and the prime $\\mathfrak p$.* By [lem-weil-pbc-residue-field-point-naturality] applied to $f$ at $x$ and to $p$ at $z$ (note $p(z)=x$): $f\\circ j_x=j_s\\circ\\operatorname{Spec}(f^\\sharp)$ and $p\\circ j_z=j_x\\circ\\operatorname{Spec}(p^\\sharp)$, so $f\\circ p\\circ j_z=j_s\\circ\\operatorname{Spec}(f^\\sharp)\\circ\\operatorname{Spec}(p^\\sharp)=j_s\\circ\\operatorname{Spec}(p^\\sharp\\circ f^\\sharp)$ (contravariant functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum]); likewise $g\\circ q\\circ j_z=j_s\\circ\\operatorname{Spec}(q^\\sharp\\circ g^\\sharp)$. Since $f\\circ p=g\\circ q$ [def-pc-fibre-product], the morphisms $j_s\\circ\\operatorname{Spec}(p^\\sharp\\circ f^\\sharp)$ and $j_s\\circ\\operatorname{Spec}(q^\\sharp\\circ g^\\sharp)$ from $\\operatorname{Spec}\\kappa(z)$ to $S$ are equal, and by the injectivity of $(s,\\varphi)\\mapsto j_s\\circ\\operatorname{Spec}(\\varphi)$ in [lem-weil-pbc-morphism-from-spec-field] $p^\\sharp\\circ f^\\sharp=q^\\sharp\\circ g^\\sharp$. Hence $p^\\sharp$ and $q^\\sharp$ are $\\kappa(s)$-algebra maps for the same $\\kappa(s)$-algebra structure on $\\kappa(z)$, and the universal property of the tensor product of $\\kappa(s)$-algebras gives the ring map $\\psi:R\\to\\kappa(z)$, $a\\otimes b\\mapsto p^\\sharp(a)q^\\sharp(b)$, with $\\psi\\circ\\iota_x=p^\\sharp$, $\\psi\\circ\\iota_y=q^\\sharp$. Its kernel $\\mathfrak p$ is prime, since $R/\\mathfrak p$ embeds in the field $\\kappa(z)$. (This is the construction of the Stacks proof: $z$ as a morphism $\\operatorname{Spec}\\kappa(z)\\to X\\times_SY$, Lemma 01J9.)",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product, line 3265), proof, first paragraph (lines 3282-3298), using Lemma 01J9 (schemes-lemma-characterize-points)"
+   }
+  },
+  {
+   "text": "*Step 2: the morphism $T:\\operatorname{Spec}R\\to X\\times_SY$.* In $R$ one has $\\iota_x\\circ f^\\sharp=\\iota_y\\circ g^\\sharp$ ($c\\otimes1=1\\otimes c$ for $c\\in\\kappa(s)$). With step 1's identities $f\\circ j_x=j_s\\circ\\operatorname{Spec}(f^\\sharp)$ and $g\\circ j_y=j_s\\circ\\operatorname{Spec}(g^\\sharp)$ [lem-weil-pbc-residue-field-point-naturality] this gives $f\\circ j_x\\circ\\operatorname{Spec}(\\iota_x)=j_s\\circ\\operatorname{Spec}(\\iota_x\\circ f^\\sharp)=j_s\\circ\\operatorname{Spec}(\\iota_y\\circ g^\\sharp)=g\\circ j_y\\circ\\operatorname{Spec}(\\iota_y)$ [def-weil-affine-spectrum]. By the universal property of the fibre product [def-pc-fibre-product] there is a unique morphism $T:\\operatorname{Spec}R\\to X\\times_SY$ with $p\\circ T=j_x\\circ\\operatorname{Spec}(\\iota_x)$ and $q\\circ T=j_y\\circ\\operatorname{Spec}(\\iota_y)$. (This is the dotted arrow of the Stacks proof, before passing to $R/\\mathfrak p$.)",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof, second paragraph (the diagram with the dotted arrow, lines 3300-3326, Section 01J5 schemes-section-points); the residue-field verification is omitted there and written out here"
+   }
+  },
+  {
+   "text": "*Step 3: $T\\circ\\operatorname{Spec}(\\psi)=j_z$.* Both are morphisms $\\operatorname{Spec}\\kappa(z)\\to X\\times_SY$. By step 2 and step 1, $p\\circ T\\circ\\operatorname{Spec}(\\psi)=j_x\\circ\\operatorname{Spec}(\\iota_x)\\circ\\operatorname{Spec}(\\psi)=j_x\\circ\\operatorname{Spec}(\\psi\\circ\\iota_x)=j_x\\circ\\operatorname{Spec}(p^\\sharp)=p\\circ j_z$ [def-weil-affine-spectrum], [lem-weil-pbc-residue-field-point-naturality]; in the same way $q\\circ T\\circ\\operatorname{Spec}(\\psi)=j_y\\circ\\operatorname{Spec}(q^\\sharp)=q\\circ j_z$. By the uniqueness in the universal property of the fibre product [def-pc-fibre-product], $T\\circ\\operatorname{Spec}(\\psi)=j_z$.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof, second paragraph (the diagram with the dotted arrow, lines 3300-3326, Section 01J5 schemes-section-points); the residue-field verification is omitted there and written out here"
+   }
+  },
+  {
+   "text": "*Step 4: the map $\\lambda:\\kappa(\\mathfrak p)\\to\\kappa(z)$ and $T(\\mathfrak p)=z$.* Apply [lem-weil-pbc-spec-field-point-residue-field] (3) to $\\psi:R\\to K=\\kappa(z)$: $\\operatorname{Spec}(\\psi)$ maps $\\xi$ to $\\ker\\psi=\\mathfrak p$, and the field map $\\lambda:\\kappa(\\mathfrak p)\\to\\kappa(z)$ induced by $\\operatorname{Spec}(\\psi)$ on residue fields is the unique ring map from $\\kappa(\\mathfrak p)=\\operatorname{Frac}(R/\\mathfrak p)$ (clause (1) of the same node) extending the injection $R/\\mathfrak p\\to\\kappa(z)$ induced by $\\psi$; so $\\lambda$ is the induced field homomorphism of the statement, and $\\lambda\\circ\\pi=\\psi$ for $\\pi:R\\to\\kappa(\\mathfrak p)$. By [lem-weil-pbc-morphism-from-spec-field] applied to $\\operatorname{Spec}(\\psi):\\operatorname{Spec}\\kappa(z)\\to\\operatorname{Spec}R$, $\\operatorname{Spec}(\\psi)=j_{\\mathfrak p}\\circ\\operatorname{Spec}(\\lambda)$. By the same node $j_z(\\xi)=z$, so by step 3 $T(\\mathfrak p)=T(\\operatorname{Spec}(\\psi)(\\xi))=j_z(\\xi)=z$.",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof, second paragraph (the diagram with the dotted arrow, lines 3300-3326, Section 01J5 schemes-section-points); the residue-field verification is omitted there and written out here"
+   }
+  },
+  {
+   "text": "*Step 5: $\\lambda\\circ T^\\sharp=\\mathrm{id}_{\\kappa(z)}$.* Let $T^\\sharp:\\kappa(z)=\\kappa(T(\\mathfrak p))\\to\\kappa(\\mathfrak p)$ be the map induced by $T$ on residue fields at $\\mathfrak p$ (step 4) [def-weil-residue-field]. By [lem-weil-pbc-residue-field-point-naturality] applied to $T$ at $\\mathfrak p$, $T\\circ j_{\\mathfrak p}=j_z\\circ\\operatorname{Spec}(T^\\sharp)$. With steps 3 and 4: $j_z=T\\circ\\operatorname{Spec}(\\psi)=T\\circ j_{\\mathfrak p}\\circ\\operatorname{Spec}(\\lambda)=j_z\\circ\\operatorname{Spec}(T^\\sharp)\\circ\\operatorname{Spec}(\\lambda)=j_z\\circ\\operatorname{Spec}(\\lambda\\circ T^\\sharp)$ [def-weil-affine-spectrum]. Also $j_z=j_z\\circ\\operatorname{Spec}(\\mathrm{id}_{\\kappa(z)})$. By the injectivity of $(z,\\varphi)\\mapsto j_z\\circ\\operatorname{Spec}(\\varphi)$ in [lem-weil-pbc-morphism-from-spec-field], $\\lambda\\circ T^\\sharp=\\mathrm{id}_{\\kappa(z)}$.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof, second paragraph (the diagram with the dotted arrow, lines 3300-3326, Section 01J5 schemes-section-points); the residue-field verification is omitted there and written out here"
+   }
+  },
+  {
+   "text": "*Step 6: conclusion.* $\\lambda$ is a ring map between fields, hence injective (its kernel is a proper ideal of the field $\\kappa(\\mathfrak p)$), and it is surjective by step 5; so $\\lambda$ is an isomorphism, with inverse $T^\\sharp$. The maps from $\\kappa(x)$ and $\\kappa(y)$ to $\\kappa(\\mathfrak p)$ are $\\pi\\circ\\iota_x$ and $\\pi\\circ\\iota_y$, and $\\lambda\\circ\\pi\\circ\\iota_x=\\psi\\circ\\iota_x=p^\\sharp$, $\\lambda\\circ\\pi\\circ\\iota_y=q^\\sharp$ (steps 1 and 4): $\\lambda$ is compatible with the maps from $\\kappa(x)$ and $\\kappa(y)$. If $R/\\mathfrak p$ is a field, the inclusion $R/\\mathfrak p\\to\\operatorname{Frac}(R/\\mathfrak p)=\\kappa(\\mathfrak p)$ is an isomorphism, and $R/\\mathfrak p\\to\\kappa(z)$, the composite of it with $\\lambda$, is an isomorphism of extensions of $\\kappa(x)$ and of $\\kappa(y)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof, second paragraph (the diagram with the dotted arrow, lines 3300-3326, Section 01J5 schemes-section-points); the residue-field verification is omitted there and written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product), proof: the constructions (z as a morphism Spec kappa(z) -> X x_S Y via Lemma 01J9; the dotted arrow Spec(kappa(x) (x) kappa(y)/p) -> X x_S Y via Section 01J5) follow Stacks; Stacks omits the verification, and the argument for the residue-field sentence (steps 3-6) is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +133,38 @@
    "results": "residueFieldCongr / residueFieldMap uses at lines 70-136 inside the construction; no IsIso / iso statement for the residue field of a pullback point; no @[stacks 01JT]",
    "date": "2026-10-10",
    "verdict": "no match: candidate glue carrierEquiv + Spec_ofPointTensor_SpecTensorTo"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsIso residueFieldMap of SpecTensorTo at a point of Spec of tensor product of residue fields",
+   "results": "PrimeSpectrum.preimageOrderIsoTensorResidueField (RingTheory.LocalRing.ResidueField.Fiber), Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion, Scheme.SpecToEquivOfField_eq_iff (ResidueField), Ideal.comap_fiberIsoOfBijectiveResidueField_apply (RingTheory.Etale.QuasiFinite), Scheme.Pullback.ofPointTensor_SpecTensorTo (PullbackCarrier), pullbackSpecIso_inv_fst'",
+   "date": "2026-10-10",
+   "verdict": "no match: no IsIso statement for residueFieldMap of SpecTensorTo or for ofPointTensor modulo its kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Hom.residueFieldMap",
+   "results": "only Triplet.Spec_ofPointTensor_SpecTensorTo (PullbackCarrier line 235)",
+   "date": "2026-10-10",
+   "verdict": "no match: that lemma says Spec(residueFieldMap SpecTensorTo p) then Spec(ofPointTensor) is the canonical Spec kappa(p) -> Spec T.tensor; it is one half of the argument (the other composite), not the isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the map from the residue field of the kernel prime of kappa(x) tensor kappa(y) to the residue field of a point of the fibre product X x_S Y is an isomorphism",
+   "results": "Ideal.fiberIsoOfBijectiveResidueField, Ideal.comap_fiberIsoOfBijectiveResidueField_apply/_symm (RingTheory.Etale.QuasiFinite), Scheme.Pullback.ofPointTensor, Triplet.tensor, tensorInl, tensorInr (PullbackCarrier), PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'ofPointTensor|SpecOfPoint|carrierEquiv|IsIso.*residueFieldMap.*pullback|residueFieldMap.*SpecTensorTo|01JT' over Mathlib/ (outside PullbackCarrier.lean) and over ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "no hits outside Mathlib/AlgebraicGeometry/PullbackCarrier.lean; WeilConjectures/Mathlib/AlgebraicGeometry/PullbackCarrier.lean (source repo) has no residue-field lemma",
+   "date": "2026-10-10",
+   "verdict": "no match; no Lean candidate in the source repository"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +184,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fibre-product-point-residue-field",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Schemes 01JT (tag verified: 01JT,schemes-lemma-points-fibre-product; 01J9 characterize-points; 01J5 section-points). Stacks only sketches the bijection and omits the verification; the residue-field sentence is not argued there, so the proof is marked agent-written, following the Stacks constructions. Statement kept (the prime is the kernel of psi, which matches Mathlib's SpecOfPoint = Spec.map(ofPointTensor t)(bot)). Split in six steps using only existing nodes, no new node: well-definedness of psi (naturality of j and the injectivity in morphism-from-spec-field), the morphism T: Spec R -> X x_S Y (universal property), T o Spec(psi) = j_z, the identification of lambda with the residue-field map of Spec(psi) and Spec(psi) = j_p o Spec(lambda) (spec-field-point-residue-field (3), morphism-from-spec-field), lambda o T^# = id (naturality at p plus injectivity), and the elementary conclusion (field maps are injective). The map T is Mathlib's Triplet.SpecTensorTo and step 3 is Mathlib's ofPointTensor_SpecTensorTo; no Mathlib declaration states the isomorphism, so not a leaf. All cited nodes are in unit sk-thm-p1 or are definitions/Mathlib leaves. stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Agent-written proof of the residue-field sentence of Stacks 01JT (Stacks omits it), six steps and no new node: psi well defined, the morphism T: Spec R -> X x_S Y, T o Spec psi = j_z, the residue map lambda of Spec psi via the spec-field-point node, lambda o T^sharp = id by naturality, conclusion. Mathlib has the morphisms (PullbackCarrier.lean: Triplet.SpecTensorTo :141, ofPointTensor_SpecTensorTo :205) but not the residue-field isomorphism."
+ }
 }
