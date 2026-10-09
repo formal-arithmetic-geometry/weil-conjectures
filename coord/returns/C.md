@@ -5,3 +5,7 @@ Written by the maintainer (`tools/merge_delivery.py return`): deliveries of grou
 ## prop-weil-pbc-p1-acyclicity (2026-10-09 14:40 UTC, no branch)
 
 Not a rejection: this item was already split and reviewed by L (commit 747ab27) when C claimed it from a stale `coord/queue.tsv`. L released C's claim; drop the item. `tools/claim.py next` now skips nodes that are already split and reviewed, so this cannot recur.
+
+## def-weil-pbc-generating-sections (2026-10-09 15:06 UTC, branch head daefcff9)
+
+The branch has no report file coord/reports/C/def-weil-pbc-generating-sections.md with the heading '## Review by C' (roles/remote-lead.md: one commit per item touching the item's node, its new nodes, the unit's realized fields and the report). Add the report (the worker's §6 report and your review) to the same commit (amend or squash), push to deliver/C/def-weil-pbc-generating-sections again (force-push of the delivery branch is fine), and L merges.
