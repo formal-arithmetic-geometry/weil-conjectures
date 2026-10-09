@@ -1,12 +1,11 @@
 # Work queue
 
-562 items; claim with `tools/claim.py next <group> [--stage N]`.
+565 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (546)
+## Stage 1: nodes to split (549)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-projective-space-functor-of-points` | 1004 | none |
 | `lem-weil-pbc-reduced-curve-normalization` | 1004 | none |
 | `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-torsion-sheaf-characterizations` | 1004 | none |
@@ -34,8 +33,6 @@
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
-| `lem-weil-pbc-invertible-nonvanishing-trivialization` | 1005 | none |
-| `lem-weil-pbc-module-morphism-gluing` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1005 | none |
 | `lem-weil-pbc-module-stalk-pullback` | 1005 | none |
@@ -43,12 +40,12 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
-| `lem-weil-pbc-projective-space-chart-coordinates` | 1005 | none |
 | `lem-weil-pbc-projective-space-standard-charts` | 1005 | none |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
+| `lem-weil-pbc-zero-dim-integral-point` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
@@ -250,9 +247,13 @@
 | `lem-weil-pbc-proper-closed-image` | 4004 | none |
 | `def-sc-normalization` | 4005 | none |
 | `lem-pc-tensor-dual-invertible` | 4005 | none |
+| `lem-sc-normalization-properties` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | none |
 | `lem-sc-brauer-zero` | 4006 | none |
 | `lem-sc-compactification` | 4006 | none |
+| `lem-sc-normalization-exists` | 4006 | none |
+| `lem-sc-normalization-over-normal-locus` | 4006 | none |
+| `lem-sc-normalized-curve-smooth` | 4006 | none |
 | `lem-sc-proper-affine-finite` | 4006 | none |
 | `def-pc-genus` | 4007 | none |
 | `def-sc-abelian-variety` | 4007 | none |
@@ -266,7 +267,7 @@
 | `lem-sc-isogeny-surjective` | 4007 | rests_on_sorry |
 | `lem-sc-kummer-exact` | 4007 | rests_on_sorry |
 | `lem-sc-mult-n-finite-flat` | 4007 | none |
-| `lem-sc-normalization-properties` | 4007 | none |
+| `lem-sc-normal-dim1-dvr` | 4007 | none |
 | `lem-sc-ntorsion-etale` | 4007 | rests_on_sorry |
 | `lem-sc-pic-tangent-space` | 4007 | none |
 | `lem-sc-smooth-normal` | 4007 | none |
@@ -286,9 +287,6 @@
 | `lem-sc-c1-brauer-trivial` | 4008 | none |
 | `lem-sc-c1-finite-extension` | 4008 | none |
 | `lem-sc-mult-n-etale-kernel` | 4008 | none |
-| `lem-sc-normalization-exists` | 4008 | none |
-| `lem-sc-normalization-over-normal-locus` | 4008 | none |
-| `lem-sc-normalized-curve-smooth` | 4008 | none |
 | `lem-weil-pbc-surjective-nonempty-fibres` | 4008 | none |
 | `pqf-lem-proper-closed-map` | 4008 | none |
 | `prop-pc-xk-integral` | 4008 | none |
@@ -308,7 +306,6 @@
 | `lem-pc-universal-adjoint-section` | 4009 | none |
 | `lem-pc-universal-divisor` | 4009 | none |
 | `lem-pc-zero-scheme-recd` | 4009 | none |
-| `lem-sc-normal-dim1-dvr` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `def-pc-relative-effective-cartier` | 4010 | none |
 | `lem-pc-degree-zero-properties` | 4010 | none |
@@ -464,16 +461,23 @@
 | `def-weil-pbc-C5` | - | none |
 | `def-weil-pbc-C6` | - | none |
 | `def-weil-pbc-C8` | - | none |
+| `lem-fin-dense-normal-open` | - | none |
 | `lem-kun-03sa` | - | none |
 | `lem-pc-sepclosed-finite-sep-trivial` | - | none |
+| `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `lem-weil-pbc-noetherian-finite-components` | - | none |
 | `pqf-def-quasifinite` | - | none |
+| `prop-nagata-proj-standard-open` | - | none |
 | `thm-pqf-immersion-descent` | - | none |
 | `thm-sc-affine-cohomology` | - | none |
 | `thm-sc-constant-invariance` | - | none |
+| `def-fin-normalization-extension` | - | none |
 | `def-nagata-homogeneous-localization-degree-zero` | - | none |
 | `def-nagata-relative-gluing-valid-stage` | - | none |
+| `def-pur-sheaf-modules-hom-module` | - | none |
+| `def-sbc-normal-dominant-galois` | - | none |
+| `lem-fin-normalization-extension-finite` | - | none |
 | `lem-pc-representable-unique` | - | none |
 | `lem-sc-affine-cohomological-dimension` | - | none |
 | `lem-sc-affine-unit-quotient` | - | none |
@@ -481,6 +485,7 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-pic-affine` | - | none |
+| `lemma-nagata-proj-chart-ring-cocycle` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
 | `pqf-lem-limit-immersion-descends` | - | none |
@@ -509,12 +514,10 @@
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
 | `cor-pc-dense-points-curves-sections` | - | none |
-| `def-fin-normalization-extension` | - | none |
 | `def-nagata-basechanged-system` | - | none |
 | `def-pc-derived-category` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-hilb-functor` | - | rests_on_sorry |
-| `lem-fin-normalization-extension-finite` | - | none |
 | `lem-pc-finite-support-hi` | - | none |
 | `lem-pc-flat-rf-open` | - | none |
 | `lem-pc-fpqc-descent` | - | sorry_here |
@@ -574,7 +577,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 562 nodes that wait for stage 1, 106 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 107 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
