@@ -341,6 +341,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
