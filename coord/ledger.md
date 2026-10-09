@@ -577,3 +577,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:35 UTC (2026-10-09) — Reviewed and committed regular-through-localization (2 new nodes, one a Mathlib leaf).
 - 22:36 UTC (2026-10-09) — Reviewed and committed reduced-induced-closed-subscheme (01J3; 3 new Mathlib leaves). Launched a worker on smooth-at-prime-artinian-lifting (02HT).
 - 2026-10-10, delivery of C1: lem-weil-pbc-grothendieck-existence-projective returned (dc4b530e3): Second delivery (head dc4b530e): the report and the item's steps are in order (route along 0885 with 0883, 0884/087Z/0897, 01Q3, 087Y, 087X, 0881), but all seve
+- 22:37 UTC (2026-10-09) — Returned C1 grothendieck-existence-projective a second time (head dc4b530e; seven new nodes without any node citation).
