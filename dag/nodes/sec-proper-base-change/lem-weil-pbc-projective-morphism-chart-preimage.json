@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-projective-morphism-chart-preimage",
+ "kind": "statement",
+ "title": "Preimage of a standard chart under a morphism to projective space given by sections",
+ "statement": "Let $S$ be a scheme, $n\\ge0$, and $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ with $\\mathbf P^n_{\\mathbf Z}=\\operatorname{Proj}(\\mathbf Z[T_0,\\dots,T_n])$ [def-nagata-projective-space-base-change], projections $q_n=\\mathrm{pr}_1$ and $\\mathrm{pr}_2:\\mathbf P^n_S\\to\\mathbf P^n_{\\mathbf Z}$. For $j\\in\\{0,\\dots,n\\}$ let $D_+(T_j)_S=\\mathrm{pr}_2^{-1}(D_+(T_j))$, and for $l\\in\\{0,\\dots,n\\}$ let $u_{l/j}\\in\\Gamma(D_+(T_j)_S,\\mathcal O)$ be the pullback by $\\mathrm{pr}_2$ of the function $T_l/T_j\\in\\Gamma(D_+(T_j),\\mathcal O)=\\mathbf Z[T_0/T_j,\\dots,T_n/T_j]$. Let $g:Y\\to S$ be a morphism of schemes, $\\mathcal L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], $s_0,\\dots,s_n\\in\\Gamma(Y,\\mathcal L)$ global sections generating $\\mathcal L$, and $\\varphi=\\varphi_{g,(\\mathcal L,(s_i))}:Y\\to\\mathbf P^n_S$ the morphism of [def-weil-pbc-morphism-to-projective-space-by-sections]. For a global section $s$ of $\\mathcal L$ write $Y_s=\\{y\\in Y: s(y)\\neq0 \\text{ in } \\mathcal L_y\\otimes\\kappa(y)\\}$ (an open set on which $s$ trivializes $\\mathcal L$). Then for every $j$: (i) $\\varphi^{-1}(D_+(T_j)_S)=Y_{s_j}$; (ii) for every $l$, $\\varphi^*(u_{l/j})\\in\\Gamma(Y_{s_j},\\mathcal O)$ is the unique function $a$ with $s_l|_{Y_{s_j}}=a\\,s_j|_{Y_{s_j}}$ (written $s_l/s_j$).",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma (Tag 01NE, label lemma-projective-space) and its proof via Lemma 01NA (label lemma-apply): the morphism attached to (L, psi) maps Y_{psi(f)} to D_+(f) by the ring map on degree-zero parts; Section (Tag 01MM, label section-invertible-on-proj) for the construction"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-sc-invertible-module",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism to projective space given by invertible sheaf and generating global sections, preimage of standard open",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, Proj.fromOfGlobalSections_morphismRestrict, Proj.toBasicOpenOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic), LocallyRingedSpace.preimage_basicOpen, Scheme.preimage_basicOpen_top",
+   "verdict": "no match: fromOfGlobalSections_preimage_basicOpen (ProjectiveSpectrum/Basic.lean:459) is the statement for a ring map A -> Γ(X, ⊤), i.e. the trivial line bundle; there is no morphism attached to an invertible module in Mathlib",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "preimage of the standard open D_+(T_j) under the morphism to projective space defined by generating sections of a line bundle is the nonvanishing locus of s_j",
+   "results": "Proj.fromOfGlobalSections_preimage_basicOpen, Proj.awayι_preimage_basicOpen, ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen, ProjIsoSpecTopComponent.ToSpec.preimage_basicOpen",
+   "verdict": "no match (trivial bundle only)",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'preimage.*basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/; grep -rln 'ProjectiveSpace\\|LineBundle\\|IsInvertible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "ProjectiveSpectrum/Basic.lean:301 awayι_preimage_basicOpen, :459 fromOfGlobalSections_preimage_basicOpen, Functor.lean:160 map_preimage_basicOpen, Scheme.lean:211 preimage_basicOpen; no projective space over a scheme, no invertible modules",
+   "verdict": "no match",
+   "date": "2026-10-09"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-finite",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

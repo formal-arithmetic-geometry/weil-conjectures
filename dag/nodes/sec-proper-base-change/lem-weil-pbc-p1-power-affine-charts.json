@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-p1-power-affine-charts",
+ "kind": "statement",
+ "title": "The standard affine charts of a power of the projective line",
+ "statement": "Let $S$ be a scheme, $n\\ge1$, $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change] with structure morphism $q_1$, $X=(\\mathbf P^1_S)^n=\\mathbf P^1_S\\times_S\\cdots\\times_S\\mathbf P^1_S$ the $n$-fold fibre product [def-pc-fibre-product] with projections $\\mathrm{pr}_i:X\\to\\mathbf P^1_S$ and $p_n:X\\to S$. Put $\\mathcal L_i=\\mathrm{pr}_i^*\\mathcal O(1)$ (an invertible module [def-sc-invertible-module]) and $x_i=\\mathrm{pr}_i^*T_0$, $y_i=\\mathrm{pr}_i^*T_1\\in\\Gamma(X,\\mathcal L_i)$. For $A\\subseteq\\{1,\\dots,n\\}$ let $U_A=\\bigcap_{i\\in A}X_{y_i}\\cap\\bigcap_{i\\notin A}X_{x_i}$, where $X_s$ is the open set where the section $s$ does not vanish. Then: (i) the $2^n$ opens $U_A$ cover $X$; (ii) for every affine open $S'=\\operatorname{Spec}R\\subseteq S$ [def-weil-affine-spectrum] and every $A$, the open $U_A\\cap p_n^{-1}(S')$ is affine, and the $R$-algebra map $R[Z_i\\,(i\\in A),W_i\\,(i\\notin A)]\\to\\Gamma(U_A\\cap p_n^{-1}(S'),\\mathcal O)$ from the polynomial ring in $n$ variables, $Z_i\\mapsto z_i=x_i/y_i$, $W_i\\mapsto w_i=y_i/x_i$ (the unique functions with $x_i=z_iy_i$ on $X_{y_i}$, $y_i=w_ix_i$ on $X_{x_i}$), is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section (Tag 01ND, label section-projective-space): P^1_Z = D_+(T_0) ∪ D_+(T_1) with D_+(T_k) = Spec Z[T_{1-k}/T_k]; with Schemes, Lemma (Tag 01JR, open subschemes of a fibre product) and (Tag 01JQ, fibre product of affines is Spec of the tensor product), literature/stacks-project/schemes.tex"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre product of affine opens of projective line over affine base is affine, spectrum of polynomial ring",
+   "results": "AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom (Morphisms.Affine), instIsAffineFiberOfIsAffineHom (Fiber), Proj.pullbackAwayιIso and its simp lemmas (ProjectiveSpectrum.Basic)",
+   "verdict": "no match: generic pieces only (pullback of affine is affine, D_+(f)∩D_+(g)); no projective line over a scheme and no charts of its powers",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product of projective lines over a ring covered by affine opens which are spectra of polynomial rings",
+   "results": "AlgebraicGeometry.Proj.affineOpenCover, Proj.openCoverOfMapIrrelevantEqTop, Proj.affineOpenCoverOfIrrelevantLESpan (ProjectiveSpectrum.Basic), AlgebraicGeometry.Proj",
+   "verdict": "no match: the affine cover of a single Proj, no fibre powers",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|ProjectiveLine\\|ℙ(' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none; Mathlib has AffineSpace.lean and ProjectiveSpectrum/ but no projective space over a scheme",
+   "verdict": "no match",
+   "date": "2026-10-09"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-finite",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

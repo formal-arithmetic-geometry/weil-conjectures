@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-proper-over-separated",
+ "kind": "statement",
+ "title": "A morphism from a proper scheme to a separated scheme over the same base is proper",
+ "statement": "Let $S$ be a scheme, $h:X\\to S$ a proper morphism, $q:Y\\to S$ a separated morphism [def-weil-proper-morphism], and $f:X\\to Y$ a morphism with $q\\circ f=h$. Then $f$ is proper; in particular it is universally closed and of finite type.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma (Tag 01W6, label lemma-image-proper-scheme-closed), part (2)"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if g ∘ f is proper and g is separated then f is proper",
+   "results": "AlgebraicGeometry.IsProper.of_comp, IsProper.of_comp_of_isSeparated, instHasOfPostcompPropertySchemeIsProperIsSeparated (Mathlib.AlgebraicGeometry.Morphisms.Proper), IsFinite.of_comp",
+   "verdict": "match: IsProper.of_comp",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsSeparated, CategoryTheory.CategoryStruct.comp",
+   "results": "AlgebraicGeometry.IsProper.of_comp (Morphisms.Proper), exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage (ZariskisMainTheorem)",
+   "verdict": "match: IsProper.of_comp",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsProper.of_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "Proper.lean:124 lemma IsProper.of_comp [IsProper (f ≫ g)] [IsSeparated g] : IsProper f",
+   "verdict": "match",
+   "date": "2026-10-09"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "exact: with g = q, f ≫ g = h (Mathlib composes left to right); the 'in particular' is the definition of IsProper (IsSeparated, UniversallyClosed, LocallyOfFiniteType, QuasiCompact)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-product-finite",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
