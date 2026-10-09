@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-constant-module-sheaf-underlying",
+ "kind": "statement",
+ "title": "The underlying abelian sheaf of a constant sheaf of modules",
+ "statement": "Let $T$ be a scheme, $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $R$ a commutative ring and $M$ an $R$-module. Let $\\underline M^{R}$ be the constant sheaf of $R$-modules with value $M$ on $T_{\\Et}$, i.e. the sheafification in sheaves of $R$-modules [def-weil-presheaf-modules-sheafification] of the constant presheaf $U\\mapsto M$ (an object of the category of sheaves of $\\underline R$-modules [def-weil-sheaf-of-modules-category], [def-weil-pbc-etale-sheaves]), and let $\\underline M$ be the constant abelian sheaf [def-weil-pbc-constant-sheaf] on $T_{\\Et}$ with value the underlying abelian group of $M$. Then the underlying abelian sheaf of $\\underline M^{R}$ is canonically isomorphic to $\\underline M$, the isomorphism being compatible with the canonical maps from the constant presheaf $U\\mapsto M$; the isomorphism is natural in $M$. (Equivalently: the forgetful functor from sheaves of $R$-modules to abelian sheaves commutes with the constant-sheaf functors.)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks, Modules on Sites, Lemma 03CY (lemma-sheafification-presheaf-modules: the sheafification of a presheaf of modules is the sheafification of the underlying presheaf of abelian groups, with its unique module structure), applied to the constant presheaf $U\\mapsto M$ over the constant presheaf of rings $U\\mapsto R$; needed for prop-weil-pbc-p1-acyclicity, where the constant sheaves $\\underline{M_i}$ of finite $\\mathbf F_r$-modules of the Lean statement AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine (sheaves of ModuleCat (ZMod r)) meet the H^1-comparison for constant abelian sheaves (AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing, sheaves of AddCommGrpCat)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of a presheaf of modules has underlying sheaf of abelian groups the sheafification of the underlying presheaf",
+   "results": "PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafificationCompToSheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification), SheafOfModules.toSheaf",
+   "date": "2026-10-09",
+   "verdict": "related (SheafOfModules over a sheaf of rings): sheafificationCompToSheaf says the same for the SheafOfModules formalism; the source repository uses Sheaf J (ModuleCat R) instead, for which the match is the one below"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "PresheafOfModules.sheafification, sheafificationAdjunction, sheafificationCompToSheaf : sheafification α ⋙ SheafOfModules.toSheaf R ≅ toPresheaf R₀ ⋙ presheafToSheaf J AddCommGrpCat, sheafificationCompForgetCompToPresheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-09",
+   "verdict": "related, as above"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf commutes with the forgetful functor from modules to abelian groups",
+   "results": "SheafOfModules.forgetToSheafModuleCat, SheafOfModules.toSheafCompSheafToPresheafIso, CategoryTheory.Sheaf.isConstant_of_forget (Mathlib.CategoryTheory.Sites.ConstantSheaf)",
+   "date": "2026-10-09",
+   "verdict": "led to CategoryTheory.constantCommuteCompose in the same file"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def constantCommuteCompose\\|instance.*PreservesSheafification' Mathlib/CategoryTheory/Sites/; grep -rn 'PreservesFilteredColimits\\|ReflectsIsomorphisms\\|forget₂_reflectsLimits' Mathlib/Algebra/Category/ModuleCat/",
+   "results": "CategoryTheory.constantCommuteCompose : constantSheaf J D ⋙ sheafCompose J U ≅ U ⋙ constantSheaf J B, for U preserving sheafification (Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:184); instance PreservesSheafification J F for F preserving the multicospan limits and the colimits of shape (J.Cover X)ᵒᵖ between concrete categories whose forgetful functors preserve limits and these colimits and reflect isomorphisms (Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:254-298); forget₂ (ModuleCat R) AddCommGrpCat preserves limits and filtered colimits and reflects isomorphisms (ModuleCat/Abelian.lean:99, FilteredColimits.lean:195, Basic.lean:622)",
+   "date": "2026-10-09",
+   "verdict": "match (generalization): constantCommuteCompose with U = forget₂ (ModuleCat R) AddCommGrpCat"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.constantCommuteCompose",
+  "file": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+  "how": "specializes in one line: constantCommuteCompose J (forget₂ (ModuleCat R) AddCommGrpCat), with J the small etale topology and the instance J.PreservesSheafification (forget₂ …) of Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:298 (forget₂ preserves limits and filtered colimits, ModuleCat/Abelian.lean:99, ModuleCat/FilteredColimits.lean:195); the app at M is the isomorphism of the statement. Not compiled: that the instances resolve at the universes of the source repository (ModuleCat.{u+1} over Scheme.{u}) is to be confirmed in stage 2."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-p1-acyclicity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

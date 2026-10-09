@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+ "kind": "statement",
+ "title": "Inverse image of etale sheaves of sets, abelian groups and rings",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $U_{\\Et}$, $V_{\\Et}$ the small etale sites [def-weil-pbc-etale-site] and $b:V_{\\Et}\\to U_{\\Et}$, $W\\mapsto U\\times_VW$, the base-change functor. For a sheaf of sets $\\mathcal F$ on $U_{\\Et}$ put $(u_*\\mathcal F)(W)=\\mathcal F(U\\times_VW)$, and for a sheaf of sets $\\mathcal G$ on $V_{\\Et}$ let $u^{-1}\\mathcal G$ be the sheafification [def-weil-pbc-sheafification] of the presheaf $U'\\mapsto\\varinjlim\\mathcal G(W)$, the colimit over the pairs $(W/V,\\ U'\\to U\\times_VW$ over $U)$. Then: (1) $u^{-1}$ is a functor from sheaves of sets on $V_{\\Et}$ to sheaves of sets on $U_{\\Et}$, left adjoint to $u_*$, and it commutes with finite limits; in particular $u^{-1}(*)=*$ for the final (singleton) sheaf and $u^{-1}(\\mathcal G_1\\times\\mathcal G_2)=u^{-1}\\mathcal G_1\\times u^{-1}\\mathcal G_2$ via the projections. (2) If $\\mathcal G$ is a sheaf of abelian groups (resp. of commutative rings) on $V_{\\Et}$, then $u^{-1}\\mathcal G$ with the images under $u^{-1}$ of the structure maps ($+$, $0$, $-$; resp. also $\\cdot$ and $1$), via (1), is a sheaf of abelian groups (resp. commutative rings) on $U_{\\Et}$; this gives functors $u^{-1}$ on sheaves of abelian groups and of commutative rings, compatible with the forgetful functors to sheaves of sets, left adjoint to $u_*$ on sheaves of abelian groups (resp. rings), whose adjunction bijections and units $\\mathcal G\\to u_*u^{-1}\\mathcal G$ are those of (1) on underlying sheaves of sets. (3) On abelian sheaves the functor of (2) is canonically isomorphic, compatibly with the adjunctions, to the inverse image $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ of [def-weil-pbc-inverse-image] [def-weil-pbc-abelian-etale-sheaves], which is left adjoint to the direct image $u_*$ of [def-weil-pbc-direct-image]; in particular the underlying sheaf of sets of the abelian inverse image $u^{-1}\\mathcal G$ is the set-theoretic inverse image of the underlying sheaf of sets of $\\mathcal G$, and the unit $\\eta_u$ of the abelian adjunction is, on underlying sheaves of sets, the unit of (1).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00X6 (proposition-get-morphism: u_s exact for a continuous functor commuting with the final object and fibre products, applied to b, which does by the etale-site base change), Definition 00X1 (definition-morphism-sites: f^{-1}=u_s left adjoint to f_*=u^s) and Proposition 00YV (proposition-functoriality-algebraic-structures-topoi: the adjoint pair (f^{-1}, f_*) on sheaves of abelian groups and rings, compatible with underlying sheaves of sets); for (3), uniqueness of left adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves along morphism of sites commutes with forgetful functor to sheaves of sets",
+   "results": "Functor.sheafPullbackConstruction.sheafPullback, Functor.sheafPullback (Mathlib.CategoryTheory.Sites.Pullback); TopCat.Sheaf.pullback, TopCat.Sheaf.pushforward_forget (Mathlib.Topology.Sheaves.Functors); sheafForget (Sites.Adjunction)",
+   "date": "2026-10-09",
+   "verdict": "no match: sheafPullback is built for one fixed coefficient category A; nothing identifies the A-valued pullback with the set-valued one after forgetting (only the pushforward compatibility on topological spaces)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves of rings along morphism of sites, sheaves of modules pullback structure, compatible with underlying sheaves of sets",
+   "results": "SheafOfModules.pullback, SheafOfModules.pullbackIso, SheafOfModules.pullback_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'sheafPullback.*forget|forget.*sheafPullback|sheafCompose.*sheafPullback|PreservesSheafification.*Pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; rg -ln sheafPullback ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no hits for the first pattern; sheafPullback occurs in Topology/Sheaves/Functors.lean, Sites/Point/Comap.lean, Sites/CoverLifting.lean, Sites/Pullback.lean only (Sites/Pullback.lean:93,98,120: sheafPullback preserves finite limits under PreservesFiniteLimits G.op.lan / RepresentablyFlat G, for fixed A)",
+   "date": "2026-10-09",
+   "verdict": "no match (the exactness for sets is a generalization of sheafPullbackConstruction.preservesFiniteLimits only after the RepresentablyFlat property of the etale base change is proved, and the compatibility with forgetful functors is absent)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-inverse-image-modules-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

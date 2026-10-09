@@ -1,18 +1,17 @@
 # Work queue
 
-568 items; claim with `tools/claim.py next <group> [--stage N]`.
+578 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (552)
+## Stage 1: nodes to split (561)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
-| `lemma-weil-pbc-eight-curve-devissage` | 1004 | none |
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
 | `prop-weil-pbc-p1-acyclicity` | 1004 | sorry_here |
 | `thm-sc-main` | 1004 | none |
 | `def-weil-pbc-etale-constructible-sheaf` | 1005 | none |
+| `def-weil-pbc-finite-etale-trace` | 1005 | none |
 | `def-weil-pbc-generating-sections` | 1005 | none |
 | `lem-sc-c1` | 1005 | none |
 | `lem-sc-c2` | 1005 | none |
@@ -25,8 +24,10 @@
 | `lem-weil-pbc-cohomology-pullback-degree-zero` | 1005 | none |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1005 | none |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1005 | none |
+| `lem-weil-pbc-curve-constructible-sub-quotient` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
+| `lem-weil-pbc-finite-etale-trace-degree` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-henselian-local-root-lifting` | 1005 | none |
@@ -49,11 +50,11 @@
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
 | `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
-| `lemma-weil-pbc-finite-l-group-filtration` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
 | `lemma-weil-pbc-h1-constructible-representation` | 1005 | sorry_here |
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
+| `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
 | `lemma-weil-pbc-finite-etale-henselian-lifting` | 1006 | none |
@@ -128,19 +129,24 @@
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `thm-weil-pbc-hypercover-cohomology` | 3004 | none |
+| `def-galois-fibre-functor` | 3005 | none |
 | `lem-weil-pbc-etale-section-continuity` | 3005 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
+| `thm-galois-fundamental` | 3005 | none |
 | `thm-galois-lc-etale` | 3005 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3005 | none |
 | `def-pc-morphism-conventions` | 3006 | none |
 | `def-sc-function-field` | 3006 | none |
 | `def-sc-kummer-sequence` | 3006 | rests_on_sorry |
 | `def-sc-mu-trivialization` | 3006 | none |
+| `lem-fet-galois-category` | 3006 | none |
 | `lem-fet-locally-trivial` | 3006 | none |
+| `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-descent` | 3006 | none |
+| `lem-galois-transitive` | 3006 | none |
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
 | `lem-sc-as-sequence` | 3006 | none |
 | `lem-sc-cohomological-dimension` | 3006 | none |
@@ -151,14 +157,20 @@
 | `lem-sc-primitive-root` | 3006 | none |
 | `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
 | `thm-av-final` | 3006 | rests_on_sorry |
+| `thm-galois-abstract-equivalence` | 3006 | none |
 | `thm-sc-jacobian-representability` | 3006 | rests_on_sorry |
+| `def-galois-category` | 3007 | none |
 | `def-pc-projective-morphism` | 3007 | none |
 | `def-pc-smooth-projective-curve` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-sc-effective-cartier-divisor` | 3007 | none |
 | `def-sc-gm-torsor` | 3007 | none |
 | `def-sc-picard-functor` | 3007 | none |
+| `lem-fet-finite-limits` | 3007 | none |
+| `lem-galois-action-continuous` | 3007 | none |
+| `lem-galois-axioms` | 3007 | none |
 | `lem-galois-glue` | 3007 | none |
+| `lem-galois-object-exists` | 3007 | none |
 | `lem-pc-curves-are-sc` | 3007 | none |
 | `lem-sc-ample-complement-affine` | 3007 | none |
 | `lem-sc-deg-principal-zero` | 3007 | none |
@@ -213,11 +225,6 @@
 | `lem-sc-invertible-dual` | 3009 | none |
 | `lem-sc-riemann-roch-large-degree` | 3009 | none |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
-| `thm-galois-fundamental` | 3009 | none |
-| `def-galois-fibre-functor` | 3010 | none |
-| `lem-fet-galois-category` | 3010 | none |
-| `lem-galois-aut-profinite` | 3010 | none |
-| `lem-galois-transitive` | 3010 | none |
 | `lem-pc-finite-extension-alg-closed` | 3010 | none |
 | `lem-pc-genus-base-change` | 3010 | none |
 | `lem-pc-genus-well-defined` | 3010 | none |
@@ -227,14 +234,8 @@
 | `lem-sc-cartier-divisor-points` | 3010 | none |
 | `lem-sc-generic-kummer-residues` | 3010 | none |
 | `lem-sc-negative-degree-no-sections` | 3010 | none |
-| `thm-galois-abstract-equivalence` | 3010 | none |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `cor-sc-hilbert-90-field` | 3011 | rests_on_sorry |
-| `def-galois-category` | 3011 | none |
-| `lem-fet-finite-limits` | 3011 | none |
-| `lem-galois-action-continuous` | 3011 | none |
-| `lem-galois-axioms` | 3011 | none |
-| `lem-galois-object-exists` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | none |
 | `def-sc-ext-sheaf` | 3012 | none |
@@ -321,8 +322,9 @@
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `def-weil-pbc-etale-site` | 5002 | none |
 | `def-weil-size-convention` | 5003 | none |
-| `def-galois-categories` | 5006 | none |
+| `def-galois-categories` | 5005 | none |
 | `def-weil-pbc-finite-torsors` | 5006 | none |
+| `lem-galois-geometric-fibre` | 5007 | none |
 | `lem-pc-picard-functor-agrees-sc` | 5007 | none |
 | `lem-sc-abelian-variety-projective` | 5007 | none |
 | `lem-sc-ample-tensor` | 5007 | none |
@@ -356,7 +358,6 @@
 | `def-pc-derived-pullback` | 5010 | none |
 | `lem-pc-cech-resolution` | 5010 | none |
 | `lem-pc-projective-noetherian-rf-perfect` | 5010 | none |
-| `lem-galois-geometric-fibre` | 5011 | none |
 | `lem-pc-kflat-resolution` | 5011 | none |
 | `lem-pc-noetherian-flat-complex-perfect` | 5011 | none |
 | `lem-sp-page-induction` | 6001 | none |
@@ -453,6 +454,7 @@
 | `def-nagata-affine-proj` | - | none |
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
+| `def-pc-finite-locally-free` | - | none |
 | `def-pc-representable-functor` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
 | `def-sc-field-extension` | - | none |
@@ -478,10 +480,17 @@
 | `def-fin-normalization-extension` | - | none |
 | `def-nagata-homogeneous-localization-degree-zero` | - | none |
 | `def-nagata-relative-gluing-valid-stage` | - | none |
+| `def-pod-l-adic-representations` | - | none |
+| `def-pod-lisse-l-adic-sheaves` | - | none |
 | `def-pur-sheaf-modules-hom-module` | - | none |
 | `def-sbc-normal-dominant-galois` | - | none |
 | `lem-fin-normalization-extension-finite` | - | none |
 | `lem-pc-representable-unique` | - | none |
+| `lem-pod-adic-limit-finite-modules` | - | none |
+| `lem-pod-equivalence-induces-module-objects` | - | none |
+| `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
+| `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
+| `lem-pod-profinite-stable-lattice` | - | none |
 | `lem-sc-affine-cohomological-dimension` | - | none |
 | `lem-sc-affine-unit-quotient` | - | none |
 | `lem-sc-artin-schreier-k` | - | none |
@@ -512,6 +521,7 @@
 | `lem-pc-k-sheaf` | - | rests_on_sorry |
 | `lem-sc-affine-constant-second` | - | none |
 | `lem-sc-finite-extension-affine-model` | - | none |
+| `lem-weil-l-adic-extension-integers-dvr` | - | none |
 | `lemma-nagata-affine-fp-descends` | - | none |
 | `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
@@ -525,7 +535,6 @@
 | `lem-pc-flat-rf-open` | - | none |
 | `lem-pc-fpqc-descent` | - | sorry_here |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | - | none |
-| `def-pc-finite-locally-free` | - | none |
 | `def-pc-invertible-in-degree-zero` | - | none |
 | `lem-pc-coherent-hi` | - | rests_on_sorry |
 | `lem-pc-curve-coherent-finiteness` | - | none |
@@ -559,7 +568,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `lem-sc-p1-twist-sections` | - | none |
 
-## Stage 2: nodes to state (16)
+## Stage 2: nodes to state (17)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -577,10 +586,11 @@
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
+| `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 566 nodes that wait for stage 1, 111 nodes that wait for a statement dependency.
+Not open yet: 575 nodes that wait for stage 1, 115 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

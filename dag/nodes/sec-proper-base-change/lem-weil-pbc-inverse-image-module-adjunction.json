@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-inverse-image-module-adjunction",
+ "kind": "statement",
+ "title": "Inverse image of modules is left adjoint to direct image (etale sites)",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $\\mathcal O$ a sheaf of commutative rings on $V_{\\Et}$ [def-weil-pbc-etale-site], and $u^{-1}$, $u_*$ the inverse and direct images on sheaves of sets, abelian groups and rings, with unit $\\eta:\\mathrm{id}\\to u_*u^{-1}$, of [lem-weil-pbc-etale-inverse-image-algebraic-structures]. For a sheaf of $\\mathcal O$-modules $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $u^{-1}\\mathcal G$ be the sheaf of $u^{-1}\\mathcal O$-modules with action $u^{-1}(\\mu_{\\mathcal G}):u^{-1}\\mathcal O\\times u^{-1}\\mathcal G=u^{-1}(\\mathcal O\\times\\mathcal G)\\to u^{-1}\\mathcal G$; for a sheaf of $u^{-1}\\mathcal O$-modules $\\mathcal F$ on $U_{\\Et}$ let $u_*\\mathcal F$ be the sheaf of $\\mathcal O$-modules with action $\\mathcal O\\times u_*\\mathcal F\\xrightarrow{\\eta\\times\\mathrm{id}}u_*u^{-1}\\mathcal O\\times u_*\\mathcal F=u_*(u^{-1}\\mathcal O\\times\\mathcal F)\\xrightarrow{u_*\\mu_{\\mathcal F}}u_*\\mathcal F$. Then a morphism of abelian sheaves $\\alpha:u^{-1}\\mathcal G\\to\\mathcal F$ is $u^{-1}\\mathcal O$-linear if and only if its adjoint $\\beta:\\mathcal G\\to u_*\\mathcal F$ under the adjunction $u^{-1}\\dashv u_*$ on abelian sheaves is $\\mathcal O$-linear; hence the adjunction bijection restricts to a bijection $\\operatorname{Hom}_{u^{-1}\\mathcal O}(u^{-1}\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathcal O}(\\mathcal G,u_*\\mathcal F)$, natural in $\\mathcal G$ and $\\mathcal F$, and the unit $\\mathcal G\\to u_*u^{-1}\\mathcal G$ and counit $u^{-1}u_*\\mathcal F\\to\\mathcal F$ of the abelian adjunction are linear.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03D3 (lemma-adjoint-push-pull-modules), with Lemmas 03D1, 03D2 (lemma-pushforward-module, lemma-pullback-module) for the module structures; the implication 'beta linear => alpha linear' is omitted in the source"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction between pullback and pushforward of sheaves of modules along a morphism of ringed sites",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-09",
+   "verdict": "no match: SheafOfModules.pullback is defined as an abstract left adjoint of pushforward φ (PullbackContinuous.lean:53,60); the statement that the inverse image u^{-1}G of the underlying sheaf with its u^{-1}O-module structure is that left adjoint, i.e. that linearity is preserved by the abelian adjunction bijection, is not there"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of abelian sheaves is linear for pulled back ring iff adjoint morphism is linear, pullback pushforward adjunction modules",
+   "results": "PresheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback); SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-09",
+   "verdict": "no match (same reason)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def pullbackPushforwardAdjunction|def pullback ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "PullbackContinuous.lean:53 noncomputable def pullback : SheafOfModules S ⥤ SheafOfModules R (left adjoint of pushforward φ), :60 pullbackPushforwardAdjunction",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-inverse-image-modules-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

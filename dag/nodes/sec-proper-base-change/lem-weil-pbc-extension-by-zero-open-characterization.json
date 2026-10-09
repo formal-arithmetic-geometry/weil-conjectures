@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-extension-by-zero-open-characterization",
+ "kind": "statement",
+ "title": "Characterization of extension by zero along an open immersion",
+ "statement": "Let $j:V\\hookrightarrow Y$ be an open immersion of schemes [def-weil-open-immersion], with extension by zero $j_!:\\Ab(V_{\\Et})\\to\\Ab(Y_{\\Et})$ [def-weil-pbc-extension-by-zero] on abelian sheaves of the small etale sites [def-weil-pbc-abelian-etale-sheaves], inverse image $j^{-1}$ [def-weil-pbc-inverse-image], and counit $\\varepsilon^!_j:j_!j^{-1}\\to\\mathrm{id}$ of the adjunction $j_!\\dashv j^{-1}$ [lem-weil-pbc-extension-by-zero-adjunction]. Let $F\\in\\Ab(V_{\\Et})$, $H\\in\\Ab(Y_{\\Et})$, and let $a:F\\to j^{-1}H$ be an isomorphism. Assume that $H_{\\bar y}=0$ for every geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point] whose image point does not lie in $j(V)$ (stalks as in [def-weil-pbc-geometric-stalks]). Then the morphism adjoint to $a$,\n$$\n a^\\sharp:=\\varepsilon^!_{j,H}\\circ j_!(a):\\;j_!F\\xrightarrow{j_!a}j_!j^{-1}H\\xrightarrow{\\varepsilon^!_{j,H}}H,\n$$\nis an isomorphism. (In words: $j_!F$ is the unique abelian sheaf on $Y_{\\Et}$ whose restriction to $V$ is $F$ and whose geometric stalks off $V$ vanish, the identification being the adjoint map.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F70 (etale-cohomology-lemma-jshriek-open, line 11468), second statement ('j_!F is the unique abelian sheaf on X_etale whose restriction to U is F and whose stalks at geometric points of X \\ U are zero') and its proof (the adjoint map is an isomorphism at stalks of geometric points of U by Proposition 03S5, zero off U, then Theorem 03PU, exactness via stalks)"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf with restriction to open isomorphic to F and zero stalks outside the open is the extension by zero of F",
+   "results": "Finsupp.restrictSupportEquiv_symm_apply_coe (Mathlib.Data.Finsupp.Basic), LocallyRingedSpace.ofRestrict_stalkMap_isIso, PresheafedSpace.restrictStalkIso, SheafedSpace.restrictTopIso (Mathlib.Geometry.RingedSpace.*), Sheaf.ΓRes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves is isomorphism if restriction to open is isomorphism and stalks outside open vanish; characterization of extension by zero",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, isIso_iff_stalkFunctor_map_iso, app_isIso_of_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks), Scheme.Modules.Hom.isIso_iff_isIso_app, Scheme.Modules.restrictStalkNatIso (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-09",
+   "verdict": "no match: stalkwise criteria on topological spaces and O-modules, no extension by zero on the etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendByZero\"",
+   "results": "Function.ExtendByZero.hom, Function.ExtendByZero.linearMap (Mathlib.Algebra.Group.Pi.Lemmas, Mathlib.LinearAlgebra.Pi), LinearIsometry.piLpExtendByZero (Mathlib.Analysis.Normed.Lp.PiLp): extension by zero of functions on index sets",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'extension by zero|extendByZero|lowerShriek|lower_shriek|j_!' and grep -rnE 'def (sheafAdjunctionCocontinuous|sheafPullback|sheafAdjunctionContinuous)' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (CategoryTheory/Sites, AlgebraicGeometry/Sites)",
+   "results": "only Function.ExtendByZero (functions on index sets) and a comment in NumberTheory/MulChar/Basic.lean; CategoryTheory.Functor.sheafPullback / sheafAdjunctionContinuous (Mathlib/CategoryTheory/Sites/Pullback.lean, generic left adjoint of a continuous-functor pushforward), sheafAdjunctionCocontinuous (Sites/CoverLifting.lean); AlgebraicGeometry/Sites has Etale.lean, EtalePoint.lean, no extension by zero and nothing on open immersions of small etale sites",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the generic left adjoint G.sheafPullback of a sheaf pushforward but no extension by zero on the small etale site and no statement about its unit or its stalks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

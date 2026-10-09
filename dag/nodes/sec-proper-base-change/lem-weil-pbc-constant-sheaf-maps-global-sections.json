@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-constant-sheaf-maps-global-sections",
+ "kind": "statement",
+ "title": "Morphisms out of a constant sheaf are maps into global sections",
+ "statement": "Let $\\mathcal C$ be a site with a final object $X$, and let $\\mathcal A$ be the category of sets or of commutative rings (a category of values in which sheafification [def-weil-pbc-sheafification] exists). For an object $E$ of $\\mathcal A$ let $\\underline E$ be the constant sheaf [def-weil-pbc-constant-sheaf], with $c_E:E\\to\\underline E(X)$ the map sending $e$ to the image of the constant section $e$ of the constant presheaf. Then for every sheaf $\\mathcal F$ on $\\mathcal C$ with values in $\\mathcal A$ the map $\\operatorname{Hom}(\\underline E,\\mathcal F)\\to\\operatorname{Hom}_{\\mathcal A}(E,\\mathcal F(X))$, $\\varphi\\mapsto\\varphi_X\\circ c_E$, is a bijection, natural in $\\mathcal F$ (and in $E$); that is, $E\\mapsto\\underline E$ is left adjoint to $\\mathcal F\\mapsto\\mathcal F(X)=\\Gamma(\\mathcal C,\\mathcal F)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Example 0H7J (example-constant-sheaf): Mor(E_underline, F) = Mor_Sets(E, Gamma(C, F)); with Gamma(C,F)=F(X) for a final object X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf is left adjoint to sections at terminal object",
+   "results": "CategoryTheory.constantSheafAdj, constantPresheafAdj, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf); constantSheafΓAdj, hasGlobalSectionsFunctor_of_hasTerminal (Mathlib.CategoryTheory.Sites.GlobalSections)",
+   "date": "2026-10-09",
+   "verdict": "match: constantSheafAdj"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from constant sheaf with value E to F equals maps from E to global sections of F",
+   "results": "Sheaf.ΓObjEquivHom, Sheaf.ΓHomEquiv, Sheaf.ΓObjEquivSections (Mathlib.CategoryTheory.Sites.GlobalSections); SheafOfModules.unitHomEquiv",
+   "date": "2026-10-09",
+   "verdict": "match (constantSheafΓAdj / ΓHomEquiv are the same adjunction through the global sections functor)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def constantSheafAdj\\|def constantSheaf\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "ConstantSheaf.lean:66 constantSheaf J D := Functor.const Cᵒᵖ ⋙ presheafToSheaf J D; :70 constantSheafAdj (hT : IsTerminal T) : constantSheaf J D ⊣ (sheafSections J D).obj (op T) := (constantPresheafAdj D hT).comp (sheafificationAdjunction J D)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.constantSheafAdj",
+  "file": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+  "how": "specializes in one line: D = Type (sets) or CommRingCat (commutative rings), T = the final object X; constantSheaf J D is the sheafification of the constant presheaf, as in [def-weil-pbc-constant-sheaf], and the hom equivalence of the adjunction is the stated natural bijection"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-inverse-image-modules-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
