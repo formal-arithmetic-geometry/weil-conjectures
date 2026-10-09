@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-finite-separable-multiplication-etale",
+ "kind": "statement",
+ "title": "Multiplication of a finite separable extension is etale",
+ "statement": "Let $k'/k$ be a field extension [def-pc-field-extension] which is finite ($\\dim_kk'<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Let $\\mu:k'\\otimes_kk'\\to k'$, $a\\otimes b\\mapsto ab$, be the multiplication map. Then $\\operatorname{Spec}\\mu:\\operatorname{Spec}k'\\to\\operatorname{Spec}(k'\\otimes_kk')$ is etale [def-weil-etale-morphism]; in particular $\\mu$ is a smooth ring map [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07QH (lemma-geometrically-regular-over-separable-algebraic, line 47219), proof, second paragraph: 'Since $k'/k$ is an etale extension of rings, we see that $k'\\otimes_kk'\\to k'$ is etale (Lemma 00U2)'. A route in Stacks: Lemma 0C2X (lemma-separable-algebraic-diagonal, line 10221) identifies $\\mu$ with a localization $k'\\otimes_kk'\\to(k'\\otimes_kk')_Q$ at one element ($k'=k(\\alpha)$, $Q$ the cofactor of $x-\\alpha$ in the minimal polynomial), etale by Lemma 00U2 (1) (lemma-etale, line 39290); etale implies smooth by definition of an etale ring map (Stacks 00U1)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "multiplication map K ⊗[k] K → K is étale for finite separable field extension",
+   "results": "Algebra.FormallyEtale.of_isSeparable (RingTheory/Etale/Field.lean:98), Algebra.Etale.baseChange (Etale/Basic.lean:242), Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyUnramified.iff_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match for the multiplication map itself; candidate composite: Algebra.Etale k k' (FormallyEtale.of_isSeparable plus finite presentation of a finite algebra over a field), Algebra.Etale k (k'⊗k') by Etale.baseChange, then Algebra.Etale.of_restrictScalars (Etale/Basic.lean:244: [Etale R A] [Etale R B] -> Etale A B) with A = k'⊗_k k' acting on k' via lmul'; and instance [Etale R A] : Smooth R A (Etale/Basic.lean:223). A short argument, not one statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multiplication map from tensor product L ⊗_K L to L is étale when L/K finite separable",
+   "results": "Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable, Algebra.Etale.baseChange, Algebra.FormallyEtale.iff_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match (same ingredients)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"lmul'.*Etale|Etale.*lmul'|FormallyEtale.*lmul'|IsLocalization.*lmul'\" /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'of_restrictScalars' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean",
+   "results": "only WeaklyEtale.flat_lmul' uses (RingTheory/Etale/Weakly.lean:75,94, flatness of lmul' for weakly etale algebras); Algebra.FormallyEtale.of_restrictScalars (Etale/Basic.lean:119) and Algebra.Etale.of_restrictScalars (Etale/Basic.lean:244)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidates as above"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometric-regularity-separable-extension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

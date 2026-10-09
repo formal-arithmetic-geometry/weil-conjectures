@@ -1,7 +1,183 @@
 {
- "id":"lem-weil-pbc-geometric-regularity-separable-extension","kind":"statement","title":"Geometric regularity over a separable algebraic extension",
- "statement":"Let $k\\subseteq k'$ be a separable algebraic field extension and let $R$ be a $k'$-algebra. Then $R$ is geometrically regular over $k$ if and only if it is geometrically regular over $k'$; geometric regularity is the notion in [def-weil-pbc-g-ring].",
- "source":{"document":"literature/stacks-project/algebra.tex","place":"Lemma Tag 07QH (algebra-lemma-geometrically-regular-over-separable-algebraic), used in More on Algebra Lemma Tag 0AH3"},"stmt_deps":["def-weil-pbc-g-ring"],
- "mathlib_searches":[{"tool":"leansearch","query":"geometrically regular algebra remains geometrically regular after separable algebraic field extension","results":"Only Algebra.IsGeometricallyReduced; no geometrically regular predicate","date":"2026-10-10","verdict":"no match"},{"tool":"loogle","query":"GeometricallyRegular separable field extension","results":"no result","date":"2026-10-10","verdict":"no match"},{"tool":"grep","query":"rg -n -i 'geometrically.?regular|separable.*geometrically' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/","results":"no geometrically regular theorem; only geometrically reduced APIs","date":"2026-10-10","verdict":"no match"}],
- "status":"unsplit","merged_into":null,"proof":[],"proof_deps":[],"proof_origin":null,"created":{"by":"worker","item":"lem-weil-pbc-henselization-pair-g-ring","date":"2026-10-10"},"lean_audit":{"master":{"state":"none","decls":[],"missing":[]},"slopmaster2":{"state":"none","decls":[],"missing":[]}},"chapter":"sec-proper-base-change","unit":"sk-thm-p1"
+ "id": "lem-weil-pbc-geometric-regularity-separable-extension",
+ "kind": "statement",
+ "title": "Geometric regularity over a separable algebraic extension",
+ "statement": "Let $k\\subseteq k'$ be a separable algebraic field extension [def-weil-pbc-separable-algebraic-extension] and let $R$ be a $k'$-algebra which is a Noetherian ring [def-weil-pbc-noetherian-ring], regarded also as a $k$-algebra by restriction along $k\\subseteq k'$. Then $R$ is geometrically regular over $k$ if and only if it is geometrically regular over $k'$; geometric regularity is the notion in [def-weil-pbc-g-ring].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07QH (lemma-geometrically-regular-over-separable-algebraic, line 47219) and its proof; geometric regularity is Definition Tag 0382 (line 47151, for Noetherian algebras); used in More on Algebra Lemma Tag 0AH3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-pc-field-extension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometrically regular algebra remains geometrically regular after separable algebraic field extension",
+   "results": "Only Algebra.IsGeometricallyReduced; no geometrically regular predicate",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricallyRegular separable field extension",
+   "results": "no result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'geometrically.?regular|separable.*geometrically' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/",
+   "results": "no geometrically regular theorem; only geometrically reduced APIs",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular ring geometrically regular algebra over a field tensor finitely generated field extension regular",
+   "results": "only Algebra.IsGeometricallyReduced API (RingTheory/Nilpotent/GeometricallyReduced.lean); no geometric regularity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian algebra A over field k, tensor product K ⊗_k A is a regular ring for every finitely generated field extension K",
+   "results": "geometrically reduced lemmas, Algebra.TensorProduct.isField_of_isAlgebraic; no regularity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'geometrically.?regular' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; rg -l 'IsRegularRing' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no geometric regularity; IsRegularRing only in RingTheory/RegularLocalRing/Defs.lean (line 92) and RegularLocalRing/Polynomial.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'geometricallyregular|IsRegularRing' /home/ubuntu/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "no declaration on geometric regularity in the source repository (only a copied Mathlib file RegularLocalRing/Defs.lean)",
+   "date": "2026-10-10",
+   "verdict": "no Lean candidate"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "proof": [
+  {
+   "text": "($\\Leftarrow$) Assume $R$ is geometrically regular over $k'$. $R$ is Noetherian by hypothesis, so by the definition [def-weil-pbc-g-ring] it suffices to show that $L\\otimes_kR$ is regular for every finite purely inseparable field extension $L/k$. For such $L$, the ring $L'=k'\\otimes_kL$ is a field and a finite purely inseparable extension of $k'$ via $c\\mapsto c\\otimes1$ [lem-weil-pbc-separable-tensor-purely-inseparable-field]. The isomorphism $R\\otimes_{k'}(k'\\otimes_kL)\\xrightarrow{\\sim}R\\otimes_kL$, $r\\otimes(c\\otimes x)\\mapsto cr\\otimes x$ [lem-weil-pbc-tensor-cancel-base-change], together with the symmetry of the tensor product, identifies $L\\otimes_kR$ with $L'\\otimes_{k'}R$, which is regular because $R$ is geometrically regular over $k'$ and $L'/k'$ is finite purely inseparable. Hence $R$ is geometrically regular over $k$.",
+   "uses": [
+    "lem-weil-pbc-separable-tensor-purely-inseparable-field",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH proof, first paragraph"
+   }
+  },
+  {
+   "text": "($\\Rightarrow$, reduction to finite extensions) Assume $R$ is geometrically regular over $k$. Let $(k_i)_{i\\in I}$ be the family of subfields $k\\subseteq k_i\\subseteq k'$ with $\\dim_kk_i<\\infty$. It is directed (the subfield generated by $k_i\\cup k_j$ is generated over $k$ by a $k$-basis of $k_j$, each element algebraic over $k_i$, so it is finite over $k_i$, hence over $k$) and its union is $k'$ (every $\\alpha\\in k'$ is algebraic over $k$, so $\\alpha\\in k(\\alpha)$, which is finite over $k$). Each $k_i/k$ is finite and separable algebraic, since every element of $k_i\\subseteq k'$ has a separable minimal polynomial over $k$ [def-weil-pbc-separable-algebraic-extension]. $R$ is a $k_i$-algebra through $k_i\\subseteq k'$, and its $k$-algebra structure is the restriction of this one. If the finite separable case below (Steps 3 to 5, applied to $k\\subseteq k_i$) shows that $R$ is geometrically regular over each $k_i$, then $R$ is geometrically regular over $k'=\\bigcup_ik_i$ [lem-weil-pbc-geometrically-regular-over-subfields]. So we may assume $k'/k$ finite separable.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-geometrically-regular-over-subfields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH proof, second paragraph, first sentence (Lemma 07QG)"
+   }
+  },
+  {
+   "text": "(Finite separable case: the base change $R\\otimes_kk'$) Let $k'/k$ be finite separable, and put $B=R\\otimes_kk'$, a $k'$-algebra through the second factor. As an $R$-module $B$ is free of rank $\\dim_kk'<\\infty$, so $B$ is a Noetherian ring [lem-weil-pbc-finite-algebra-noetherian]. $B$ is geometrically regular over $k'$: for a finite purely inseparable extension $L'/k'$, the isomorphism of [lem-weil-pbc-tensor-cancel-base-change] gives $L'\\otimes_{k'}B=L'\\otimes_{k'}(k'\\otimes_kR)\\cong L'\\otimes_kR$; the extension $L'/k$ is finite (as $L'/k'$ and $k'/k$ are), hence finitely generated, so $L'\\otimes_kR$ is regular because $R$ is Noetherian and geometrically regular over $k$ [lem-weil-pbc-geometrically-regular-finitely-generated-extensions]. By the definition [def-weil-pbc-g-ring], $B$ is geometrically regular over $k'$ ('a base change of $R$ to $k'$').",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH proof, second paragraph ('Note that $A\\otimes_kk'$ is geometrically regular over $k'$ as a base change of $A$ to $k'$'; uses Lemma 0381 for the finite extension $L'/k$)"
+   }
+  },
+  {
+   "text": "(The map $B\\to R$ is smooth) Let $\\iota:k'\\to R$ be the structure map and $\\pi:B=R\\otimes_kk'\\to R$, $r\\otimes c\\mapsto\\iota(c)r$, a homomorphism of $k'$-algebras ($k'$ acting on $B$ through the second factor). Let $\\mu:k'\\otimes_kk'\\to k'$ be the multiplication and $f:k'\\otimes_kk'\\to B$, $x\\otimes y\\mapsto\\iota(x)\\otimes y$. Then $\\pi$ is the base change of $\\mu$ along $f$: by [lem-weil-pbc-tensor-cancel-base-change], $B\\cong R\\otimes_{k'}(k'\\otimes_kk')$ ($k'$ acting on the first factor of $k'\\otimes_kk'$) compatibly with $f$, hence $B\\otimes_{k'\\otimes_kk'}k'\\cong R\\otimes_{k'}\\bigl((k'\\otimes_kk')\\otimes_{k'\\otimes_kk'}k'\\bigr)\\cong R\\otimes_{k'}k'\\cong R$, and on $r\\otimes c\\otimes1$ this composite is $\\iota(c)r=\\pi(r\\otimes c)$. Since $k'/k$ is finite separable, $\\mu$ is etale, in particular smooth [lem-weil-pbc-finite-separable-multiplication-etale]; a base change of a smooth ring map is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition, clause (1)]. Hence $\\pi:B\\to R$ is a smooth ring map.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-finite-separable-multiplication-etale",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH proof, second paragraph ('$A\\otimes_kk'\\to A$ is the base change of $k'\\otimes_kk'\\to k'$ by the map $k'\\to A$ ... etale (Lemma 00U2)')"
+   }
+  },
+  {
+   "text": "(Conclusion) $\\pi:B\\to R$ is a smooth homomorphism of $k'$-algebras, $B$ is Noetherian and geometrically regular over $k'$ (Step 3). By ascent of geometric regularity along smooth ring maps over the field $k'$ [lem-weil-pbc-geometrically-regular-smooth-ascent], $R$ is geometrically regular over $k'$. With Step 2 this proves ($\\Rightarrow$) for every separable algebraic $k'/k$, and with Step 1 the lemma.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-smooth-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH proof, second paragraph, last sentence (Lemma 07QF)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-tensor-purely-inseparable-field",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-geometrically-regular-over-subfields",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-finite-separable-multiplication-etale",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-geometrically-regular-smooth-ascent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07QH (lemma-geometrically-regular-over-separable-algebraic, line 47219) and its proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-pair-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometric-regularity-separable-extension",
+  "worker": "stage1",
+  "summary": "Checked against Stacks algebra.tex Lemma 07QH (line 47219), Definition 0382 / Lemma 0381 and Lemmas 07QF, 07QG; tags verified in tags/tags (0381, 0382, 07QF, 07QG, 07QH, 045I, 00U2, 00T4, 0C2X, 07NF, 07NG, 030R, 037X). Statement corrected: R is now assumed Noetherian, since geometric regularity (Definition 0382, def-weil-pbc-g-ring) is defined only for Noetherian algebras. Proof written in five steps following 07QH: the (<=) direction via k'(x)_k L being a field finite purely inseparable over k'; the (=>) direction reduced to finite separable k'/k by 07QG, then base change R(x)_k k' (geometrically regular over k' by 0381), the map R(x)_k k' -> R as base change of the etale multiplication of k', and ascent 07QF. Existing nodes cited: def-weil-pbc-g-ring, def-weil-pbc-separable-algebraic-extension, lem-weil-pbc-tensor-cancel-base-change, lem-weil-pbc-finite-algebra-noetherian, lem-weil-pbc-smooth-ring-map-base-change-composition. Five new unsplit nodes: lem-weil-pbc-separable-tensor-purely-inseparable-field, lem-weil-pbc-geometrically-regular-finitely-generated-extensions, lem-weil-pbc-geometrically-regular-over-subfields, lem-weil-pbc-geometrically-regular-smooth-ascent, lem-weil-pbc-finite-separable-multiplication-etale. Mathlib has no geometric regularity (IsRegularRing exists); no Lean candidates in slopmaster2."
+ },
+ "lead_note": "Statement corrected by the worker (2026-10-10): added the hypothesis that R is a Noetherian ring. Stacks 07QH says only 'an algebra over k''; but geometric regularity (Stacks Definition 0382, and def-weil-pbc-g-ring) is defined only for Noetherian k-algebras, so 07QH implicitly assumes R Noetherian (Noetherianity does not depend on k or k'). The only user, lem-weil-pbc-henselization-pair-g-ring, applies it to a fibre ring of a completion of a Noetherian local ring at a prime, which is Noetherian.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; the worker added the hypothesis R Noetherian (geometric regularity, 0382 and def-weil-pbc-g-ring, is defined for Noetherian algebras; the only citer applies it to a Noetherian fibre ring). Five steps along the proof of 07QH, five new unsplit nodes with statements checked: k' (x)_k L is a field, finite purely inseparable over k' (Stacks cites only 037H; the claim is isolated as a node), 0381 (2)=>(1), 07QG, 07QF, and the multiplication map k' (x)_k k' -> k' is etale for k'/k finite separable (0C2X with 00U2(1); the Mathlib composite of_isSeparable/baseChange/of_restrictScalars recorded, not a one-line match). Direction (<=) via the field L' and the cancellation isomorphism; (=>) reduced to finite k'/k by 07QG, then B = R (x)_k k' is Noetherian and geometrically regular over k' (0381), B -> R is the base change of the etale multiplication map, hence smooth, and 07QF ascends. Stacks misprint in 07QG noted."
+ }
 }
