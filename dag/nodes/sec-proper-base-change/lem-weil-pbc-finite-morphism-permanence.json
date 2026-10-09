@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-finite-morphism-permanence",
+ "kind": "statement",
+ "title": "Base change, affineness and properness for finite morphisms",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism]. (a) For every morphism $g:Y'\\to Y$, the projection $f':X\\times_YY'\\to Y'$ from the fibre product [def-pc-base-change] is finite. (b) If $Y$ is affine [def-pc-scheme], then $X$ is affine. (c) If $h:Y\\to S$ is proper [def-weil-proper-morphism], then $h\\circ f:X\\to S$ is proper; in particular, if $Y$ is proper over a field $k$, so is $X$ (with structure morphism $h\\circ f$).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks, Morphisms, Lemma 01WL (finite morphisms are stable under base change), Lemma 01WM/01S8 (finite morphisms are affine; an affine morphism to an affine scheme has affine source), Lemma 01WN (finite morphisms are proper) and Lemma 01W0 (composition of proper morphisms); used in the proof of Etale Cohomology Lemma 0A5D for the assertions (2), (5), (6)-(8)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-base-change",
+  "def-pc-scheme",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a finite morphism of schemes is finite",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Finite), IsIntegralHom.instIsStableUnderBaseChangeScheme, RingHom.finite_isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "match for (a)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme finite over an affine scheme is affine",
+   "results": "IsFinite HasAffineProperty instance (source affine and global-section map finite), AlgebraicGeometry.IsFinite.toIsAffineHom, isFinite_iff, Scheme.Hom.finite_app (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match for (b) with isAffine_of_isAffineHom"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsAffineHom",
+   "results": "AlgebraicGeometry.isAffine_of_isAffineHom {X Y} (f) [IsAffineHom f] [IsAffine Y] : IsAffine X (Mathlib.AlgebraicGeometry.Morphisms.Affine), isAffineHom_of_isAffine, IsAffine.of_isPullback",
+   "date": "2026-10-09",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance.*IsProper\\|IsStableUnderBaseChange\\|isAffine_of_isAffineHom' Mathlib/AlgebraicGeometry/Morphisms/{Proper,Finite,Affine}.lean",
+   "results": "Proper.lean:67 instance [IsProper f] [IsProper g] : IsProper (f ≫ g); Proper.lean:69 instance [IsFinite f] : IsProper f; Finite.lean:60 instance IsStableUnderBaseChange @IsFinite; Affine.lean:185 isAffine_of_isAffineHom",
+   "date": "2026-10-09",
+   "verdict": "match for (a), (b), (c)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite (instance IsStableUnderBaseChange @IsFinite), AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.IsProper (instances for IsFinite f and f ≫ g)",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "how": "specializes in one line per clause: (a) the instance IsStableUnderBaseChange @IsFinite (Finite.lean:60); (b) isAffine_of_isAffineHom (Affine.lean:185) with IsFinite.toIsAffineHom; (c) the instances IsProper of IsFinite (Proper.lean:69) and IsProper (f ≫ g) (Proper.lean:67)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-curve-assertions-finite-pushforward",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
