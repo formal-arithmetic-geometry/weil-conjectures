@@ -1,0 +1,45 @@
+{
+ "id": "lem-pod-separated-finite-type-base-change",
+ "kind": "statement",
+ "title": "Separated finite-type morphisms are stable under base change",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes that is separated and of finite type (locally of finite type and quasi-compact) [def-weil-scheme-morphism-properties], and let $g:S'\\to S$ be any morphism of schemes. Then the base change $f':X\\times_SS'\\to S'$ is separated and of finite type. In particular, for a field extension $k/k_0$ and a separated finite-type $k_0$-scheme $Y_0$, the scheme $Y_0\\times_{k_0}k$ is a separated finite-type $k$-scheme.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma schemes-lemma-separated-permanence (Tag 01KU), item 'the base change of a separated morphism is separated'; literature/stacks-project/morphisms.tex, Lemma morphisms-lemma-base-change-finite-type (Tag 01T4, a base change of a morphism of finite type is of finite type); used without proof in the blueprint step 1 of prop-cohomological-finiteness ('Y=Y_0 x_{k_0} k ... a separated morphism of finite type over the field k')"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "Separated.lean:82 instance AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; FiniteType.lean:79 instance AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; QuasiCompact.lean:165 instance AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "how": "specializes in one line: apply the three IsStableUnderBaseChange instances (MorphismProperty.of_isPullback) to the pullback square of f along g"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-cohomological-finiteness",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "id": "lem-pod-connected-constant-h0",
+ "kind": "statement",
+ "title": "Degree-zero cohomology of the constant coefficients on a connected scheme",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $Y$ be a nonempty connected [def-weil-connected-scheme] separated finite-type [def-weil-scheme-morphism-properties] $k$-scheme, and use the cohomology groups $H^0(Y,\\Lambda)=H^0(Y,\\Lambda_Y)$ of [def-weil-ordinary-compact-cohomology] for $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E\\}$, with $(A_{E,n})_Y$ the constant sheaf on $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] and $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ [def-weil-completed-integral-coefficients].\n\n1. For every $n\\geq1$, $H^0(Y,A_{E,n})=\\Gamma(Y_{\\mathrm{proet}},(A_{E,n})_Y)$ (the derived direct image [def-weil-derived-direct-image] of a sheaf placed in degree $0$ has the direct image as $\\mathcal H^0$), and the map $A_{E,n}\\to H^0(Y,A_{E,n})$, $a\\mapsto a\\cdot1$, where $1$ is the unit section of the sheaf of rings $(A_{E,n})_Y$, is an isomorphism.\n\n2. The maps $H^0(Y,\\mathcal O_E)\\to H^0(Y,A_{E,n})$ induced by the projections of the derived limit defining $Ra_{Y*}\\widehat{\\mathcal O}_{E,Y}$ [def-weil-derived-direct-image] (with $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ [lem-weil-constant-coefficient-objects-constructible]) induce an isomorphism $H^0(Y,\\mathcal O_E)\\xrightarrow{\\sim}\\varprojlim_nH^0(Y,A_{E,n})\\cong\\varprojlim_nA_{E,n}=\\mathcal O_E$; let $1_{\\mathcal O_E}\\in H^0(Y,\\mathcal O_E)$ be the element corresponding to $1$.\n\n3. $H^0(Y,E)=H^0(Y,\\mathcal O_E)\\otimes_{\\mathcal O_E}E$ (by the definition of $\\operatorname{Fib}_s$ at $E$ [def-weil-finite-coefficient-point] and flatness of $E$ over $\\mathcal O_E$), and the map $E\\to H^0(Y,E)$, $\\lambda\\mapsto\\lambda\\cdot1_E$ with $1_E=1_{\\mathcal O_E}\\otimes1$, is an isomorphism of $E$-vector spaces.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, p. 30 (for T discrete and U qcqs, F_T(U)=Map_cont(pi_0(U),T): sections of a constant sheaf on a connected qcqs scheme are constant); literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n), H^r(X,Q_l)=H^r(X,Z_l) (x) Q_l); blueprint prop-cohomological-finiteness, ## Proof, Step 7 ('its space of invariants is all of E, so H^0(Y,E)=E')"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-connected-scheme",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-direct-image",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli -E 'etale cohomology|étale cohomology|proetale|ProEt|compactly supported|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology and the site S.ProEt, no sheaf cohomology computations) and AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.ellAdicSheaf, Scheme.EllAdicCohomology: H^i(X_proet, Z_l) as a bare definition, no direct images, no compact supports, no Frobenius, no computation of H^0)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i -E 'constantSheaf|isConnected|PreconnectedSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/GlobalSections.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "CategoryTheory/Sites/ConstantSheaf.lean (constantSheaf functor and its adjunction with global sections for a site); Topology/Sheaves/* (locally constant sheaves on topological spaces); no computation of global sections of a constant sheaf on the pro-etale site of a connected scheme, no derived limit over the coefficients",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-cohomological-finiteness",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
