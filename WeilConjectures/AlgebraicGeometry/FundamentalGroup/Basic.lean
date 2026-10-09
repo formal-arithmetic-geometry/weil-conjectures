@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Galois.Equivalence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
@@ -232,7 +234,60 @@ lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
     (hv : ∀ x y : (fiber s).obj P, ∃! m, (fiber s).map (v m) x = y) :
     IsIso (Sigma.desc fun m : M ↦ pullback.lift (f := P.obj.hom) (g := P.obj.hom)
       (v m).hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp (v m))) := by
-  sorry
+  have : IsFinite P.obj.hom := P.property
+  set φ := Sigma.desc fun m : M ↦ pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+    (v m).hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp (v m)) with hφ
+  -- `∐_{m ∈ M} P` and `P ×_Y P` as finite étale `Y`-schemes, and `φ` as a morphism between them
+  let a : ∐ (fun _ : M ↦ P.obj.left) ⟶ Y := Sigma.desc fun _ ↦ P.obj.hom
+  let b : pullback P.obj.hom P.obj.hom ⟶ Y := pullback.fst _ _ ≫ P.obj.hom
+  have : Etale a := IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
+  let A : Y.FiniteEtale := ⟨Etale.mk a, inferInstanceAs (IsFinite a)⟩
+  let B : Y.FiniteEtale := ⟨Etale.mk b, inferInstanceAs (IsFinite b)⟩
+  have hw : φ ≫ b = a := Sigma.hom_ext _ _ fun m ↦ by simp [φ, a, b]
+  let Φ : A ⟶ B := ObjectProperty.homMk (MorphismProperty.Over.homMk φ hw)
+  -- a geometric point of `P` gives an element of its geometric fibre
+  let pt (x : Spec (.of Ω) ⟶ P.obj.left) (hx : x ≫ P.obj.hom = s) : (fiber s).obj P :=
+    Over.homMk (V := (Etale.forget Y).obj P.obj) x hx
+  have hΦ : IsIso ((fiber s).map Φ) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+    · have hxy' : x.left ≫ φ = y.left ≫ φ := congrArg (fun u ↦ u.left) hxy
+      have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+      have : Nonempty (Spec (.of Ω)) := inferInstanceAs (Nonempty (PrimeSpectrum Ω))
+      obtain ⟨m, x', hx'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) x.left
+      obtain ⟨n, y', hy'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) y.left
+      rw [← hx', ← hy', Category.assoc, Category.assoc, hφ, Sigma.ι_desc, Sigma.ι_desc] at hxy'
+      have h₁ := congrArg (· ≫ pullback.fst _ _) hxy'
+      have h₂ := congrArg (· ≫ pullback.snd _ _) hxy'
+      simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd, Category.comp_id] at h₁ h₂
+      subst h₂
+      have hxs : x' ≫ P.obj.hom = s := by
+        rw [← fiber_left_comp s x, ← hx', Category.assoc]
+        exact congrArg (x' ≫ ·) (Sigma.ι_desc (fun _ : M ↦ P.obj.hom) m).symm
+      have hmn : m = n := by
+        obtain ⟨k, -, hk⟩ := hv (pt x' hxs) ((fiber s).map (v m) (pt x' hxs))
+        rw [hk m rfl, hk n (fiber_ext s h₁.symm)]
+      subst hmn
+      exact fiber_ext s (hx'.symm.trans hy')
+    · have h₁ : (z.left ≫ pullback.fst _ _) ≫ P.obj.hom = s := by
+        rw [Category.assoc]
+        exact fiber_left_comp s z
+      have h₂ : (z.left ≫ pullback.snd _ _) ≫ P.obj.hom = s := by
+        rw [Category.assoc, ← pullback.condition, ← Category.assoc]
+        exact h₁
+      obtain ⟨m, hm, -⟩ := hv (pt _ h₂) (pt _ h₁)
+      have hm' : (z.left ≫ pullback.snd _ _) ≫ (v m).hom.left = z.left ≫ pullback.fst _ _ :=
+        congrArg (fun u ↦ u.left) hm
+      have hA : ((z.left ≫ pullback.snd _ _) ≫ Sigma.ι (fun _ : M ↦ P.obj.left) m) ≫ a = s := by
+        rw [Category.assoc]
+        exact (congrArg _ (Sigma.ι_desc _ _)).trans h₂
+      refine ⟨Over.homMk (V := (Etale.forget Y).obj A.obj) _ hA, fiber_ext s ?_⟩
+      change ((z.left ≫ pullback.snd _ _) ≫ Sigma.ι (fun _ : M ↦ P.obj.left) m) ≫ φ = z.left
+      refine pullback.hom_ext ?_ ?_
+      · simpa [φ] using hm'
+      · simp [φ]
+  have : IsIso Φ := isIso_of_reflects_iso Φ (fiber s)
+  exact inferInstanceAs (IsIso ((ObjectProperty.ι _ ⋙ Etale.forget Y ⋙ Over.forget Y).map Φ))
 
 /-- Blueprint `rem-ptr-galois-object-2`: Pointer to the properties of [def-galois-object].
 
