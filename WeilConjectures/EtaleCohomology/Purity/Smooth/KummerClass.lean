@@ -318,13 +318,13 @@ admit the untwisted datum `Λ_B(m) = Λ_B` and the shifted datum `Λ_B(m) = Λ_B
 The statements that compare the twist with geometry — `Rs^! Λ(1)[2] ≅ Λ` for the zero section of
 the affine line, affine-space and smooth purity, purity for regular immersions, Fourier
 inversion — assume it; they are false for the two data above. -/
-class HasTateTwist.IsNormalized [inst : HasTateTwist Λ] : Prop where
+class HasTateTwist.IsNormalized [Finite Λ] [inst : HasTateTwist Λ] : Prop where
   /-- The twist datum underlies a normalized rank-one datum. -/
   exists_hasKummerClass :
-    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K
+    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K _
 
 /-- The twist datum underlying a normalized rank-one datum is normalized. -/
-instance HasKummerClass.IsNormalized.hasTateTwistIsNormalized [HasKummerClass Λ]
+instance HasKummerClass.IsNormalized.hasTateTwistIsNormalized [Finite Λ] [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] : HasTateTwist.IsNormalized Λ :=
   ⟨⟨‹_›, rfl, ‹_›⟩⟩
 
