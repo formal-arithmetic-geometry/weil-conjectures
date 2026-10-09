@@ -1,0 +1,46 @@
+{
+ "id": "def-pur-sheaf-hom",
+ "kind": "definition",
+ "title": "Sheaf Hom of sheaves of modules on a site",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of rings on $\\mathcal C$, and\n$\\mathcal F,\\mathcal G$ sheaves of $\\mathcal O$-modules. For an object $U$ of\n$\\mathcal C$ write $\\mathcal F|_U$ for the restriction of $\\mathcal F$ to the\nlocalized site $\\mathcal C/U$. The *sheaf Hom*\n$\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal G)$ is the presheaf\n\n$$\n U\\longmapsto\\operatorname{Hom}_{\\mathcal O|_U}\n (\\mathcal F|_U,\\mathcal G|_U),\n$$\n\nthe set of $\\mathcal O|_U$-linear maps of sheaves on $\\mathcal C/U$, with the\nrestriction map along $V\\to U$ given by restricting a map on $\\mathcal C/U$ to\n$\\mathcal C/V$, and with $f\\in\\mathcal O(U)$ acting on $\\varphi$ by composing\n$\\varphi$ with multiplication by $f$. This presheaf is a sheaf of\n$\\mathcal O$-modules, and its global sections are\n$\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal G)$. In the twist\nnotation of the blueprint, $\\operatorname{Hom}_{\\Lambda_S}(\\Lambda(-m),\\Lambda_S)$\nfor a sheaf $\\Lambda(-m)$ of $\\Lambda_S$-modules on a site denotes this sheaf\nHom.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 04TT (sites-modules-section-internal-hom), the displayed rule U ↦ Hom_{O_U}(F|_U, G|_U) with its restriction maps and O-module structure, and Lemma 03EM (sites-modules-lemma-internal-hom: it is a sheaf of O-modules when F and G are sheaves)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'ihom|sheafHom|internalHom|MonoidalClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/*.lean",
+   "results": "`CategoryTheory.presheafHom` (CategoryTheory/Sites/SheafHom.lean:48) and `sheafHom'` (line 226): the Type-valued presheaf U ↦ (F|_U ⟶ G|_U) of morphisms of sheaves with values in a category A, with no module structure; `MonoidalClosed (Sheaf J A)` (CategoryTheory/Sites/CartesianClosed.lean:28, Sites/Monoidal.lean) for sheaves with values in a monoidal closed category A, which does not cover modules over a sheaf of rings; nothing in Algebra/Category/ModuleCat/Sheaf/ or /Presheaf/",
+   "date": "2026-10-09",
+   "verdict": "no match: the Hom presheaf exists for sheaves in a fixed category, but not as a sheaf of O-modules for sheaves of modules over a sheaf of rings"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ihom\\|MonoidalClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean | head",
+   "results": "the internal Hom of modules over one ring (`ModuleCat.monoidalClosed`), not of sheaves of modules",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-coefficient-twists-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

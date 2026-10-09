@@ -1,0 +1,50 @@
+{
+ "id": "def-pur-sheaf-inverse-limit",
+ "kind": "definition",
+ "title": "Inverse limit of a sequence of sheaves of modules on a site",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of rings on $\\mathcal C$, and\n$(\\mathcal F_r,t_r)_{r\\geq1}$ an inverse system of sheaves of $\\mathcal O$-modules,\nwith transition maps $t_r:\\mathcal F_{r+1}\\to\\mathcal F_r$. Its *inverse limit*\n$\\varprojlim_r\\mathcal F_r$ is the limit of this diagram in the category of\nsheaves of $\\mathcal O$-modules. It exists, and it is computed sectionwise: for\nevery object $U$ of $\\mathcal C$,\n\n$$\n \\Bigl(\\varprojlim_r\\mathcal F_r\\Bigr)(U)\n =\\varprojlim_r\\mathcal F_r(U)\n =\\Bigl\\{(x_r)_{r\\geq1}\\in\\prod_{r\\geq1}\\mathcal F_r(U):\n   t_r(x_{r+1})=x_r\\text{ for all }r\\Bigr\\},\n$$\n\nwith the restriction maps and the $\\mathcal O(U)$-module structure taken\ncomponentwise; the presheaf so defined is a sheaf, and the projections\n$\\varprojlim_r\\mathcal F_r\\to\\mathcal F_r$ are the coordinate maps. The same\napplies to sheaves of abelian groups ($\\mathcal O=\\mathbf Z$) and of rings.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03DB (sites-modules-lemma-limits-colimits: all limits exist in Mod(O) and the forgetful functor to Ab(C) commutes with them) and Lemma 03CO (2) (sites-modules-lemma-limits-colimits-abelian-sheaves: limits of abelian sheaves are the limits of the underlying presheaves, i.e. are computed on sections)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; grep -n 'HasLimitsOfShape\\|HasLimitsOfSize' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean",
+   "results": "`SheafOfModules.hasLimit` (line 68, created by the forgetful functor), `SheafOfModules.hasLimitsOfShape : HasLimitsOfShape D (SheafOfModules.{v} R)` (line 83), `evaluationPreservesLimitsOfShape` (line 85: limits are computed sectionwise) and `forgetPreservesLimitsOfShape` (line 88); for sheaves with values in a category D, `Sheaf J D` has `HasLimitsOfShape K` (CategoryTheory/Sites/Limits.lean:153) and `HasLimitsOfSize` (line 168)",
+   "date": "2026-10-09",
+   "verdict": "match: the limit of a `ℕᵒᵖ`-shaped diagram in `SheafOfModules R`"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ℕᵒᵖ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/*.lean",
+   "results": "`CategoryTheory.Limits.sequentialFunctor : ℕᵒᵖ ⥤ J` (Shapes/Countable.lean:204); the shape `ℕᵒᵖ` of a sequential inverse system is a small category, so `limit` applies",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SheafOfModules.hasLimitsOfShape",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+  "how": "specializes in one line: `CategoryTheory.Limits.limit F` for `F : ℕᵒᵖ ⥤ SheafOfModules R`, which exists by `SheafOfModules.hasLimitsOfShape` (line 83) and is computed on sections by `SheafOfModules.evaluationPreservesLimitsOfShape` (line 85)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-coefficient-twists-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

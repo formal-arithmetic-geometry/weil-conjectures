@@ -1,0 +1,50 @@
+{
+ "id": "def-pur-sheaf-tensor-product",
+ "kind": "definition",
+ "title": "Tensor product of sheaves of modules on a site",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on\n$\\mathcal C$, and $\\mathcal F,\\mathcal G$ sheaves of $\\mathcal O$-modules. The\n*presheaf tensor product* is\n\n$$\n (\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)(U)\n =\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal G(U)\n \\qquad(U\\in\\mathcal C),\n$$\n\nwith the restriction maps induced by those of $\\mathcal F$, $\\mathcal G$ and\n$\\mathcal O$, and the *tensor product* $\\mathcal F\\otimes_{\\mathcal O}\\mathcal G$\nis the sheaf of $\\mathcal O$-modules associated to it (its sheafification).\nFor a morphism of sheaves of rings $\\mathcal O_1\\to\\mathcal O_2$ and a sheaf of\n$\\mathcal O_1$-modules $\\mathcal F$, the sheaf of $\\mathcal O_2$-modules\n$\\mathcal F\\otimes_{\\mathcal O_1}\\mathcal O_2$ is the *change of rings* of\n$\\mathcal F$. For $m\\in\\mathbf Z_{\\geq1}$ the $m$-fold *tensor power* is\n$\\mathcal F^{\\otimes_{\\mathcal O}1}=\\mathcal F$ and\n$\\mathcal F^{\\otimes_{\\mathcal O}(m+1)}\n=\\mathcal F^{\\otimes_{\\mathcal O}m}\\otimes_{\\mathcal O}\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (sites-modules-section-tensor-product), the displayed definitions of F ⊗_{p,O} G and F ⊗_O G = (F ⊗_{p,O} G)^#, and the associativity formula stated there"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; grep -n '^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "results": "`PresheafOfModules.Monoidal.monoidalCategory` (Presheaf/Monoidal.lean:125) and `symmetricCategory` (line 144): the monoidal structure on `PresheafOfModules (R ⋙ forget₂ _ _)` for `R : Cᵒᵖ ⥤ CommRingCat`, with `M₁ ⊗ M₂` the sectionwise tensor product `M₁.obj X ⊗ M₂.obj X`; `PresheafOfModules.sheafification : PresheafOfModules R₀ ⥤ SheafOfModules R` (Presheaf/Sheafification.lean:54) for `α : R₀ ⟶ R.val` exhibiting `R` as the sheafification of `R₀`, left adjoint to the forgetful functor (`sheafificationAdjunction`, line 125)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the sheaf tensor product is the sheafification of the presheaf tensor product"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -l -iE 'MonoidalCategory|tensorObj'",
+   "results": "none: no monoidal structure is declared on `SheafOfModules R`",
+   "date": "2026-10-09",
+   "verdict": "no direct declaration; see the composite below"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.sheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "how": "specializes in one line: `F ⊗_O G := (PresheafOfModules.sheafification (𝟙 O.val)).obj (F.val ⊗ G.val)`, the sheafification (line 54, with `α` the identity of the sheaf of rings `O` regarded as a presheaf) of the sectionwise tensor product of `PresheafOfModules.Monoidal.monoidalCategory` (Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:125); change of rings is the same with `O₁ → O₂`, and the tensor power is the iterate"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-coefficient-twists-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
