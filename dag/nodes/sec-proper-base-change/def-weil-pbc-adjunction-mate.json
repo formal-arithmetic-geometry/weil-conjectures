@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-pbc-adjunction-mate",
+ "kind": "definition",
+ "title": "Mate of a transformation under two adjunctions",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E,\\mathcal F$ be categories, let $L_1:\\mathcal C\\to\\mathcal D$ be left adjoint to $R_1:\\mathcal D\\to\\mathcal C$ (unit $\\eta_1:\\mathrm{id}\\to R_1L_1$, counit $\\varepsilon_1:L_1R_1\\to\\mathrm{id}$), let $L_2:\\mathcal E\\to\\mathcal F$ be left adjoint to $R_2:\\mathcal F\\to\\mathcal E$ (unit $\\eta_2$, counit $\\varepsilon_2$), and let $G:\\mathcal C\\to\\mathcal E$ and $H:\\mathcal D\\to\\mathcal F$ be functors. For a natural transformation $\\alpha:L_2G\\to HL_1$ its *mate* is the natural transformation $\\alpha^\\flat:GR_1\\to R_2H$ with components\n\n$$\n GR_1d\\xrightarrow{\\eta_{2,GR_1d}}R_2L_2GR_1d\\xrightarrow{R_2\\alpha_{R_1d}}R_2HL_1R_1d\\xrightarrow{R_2H\\varepsilon_{1,d}}R_2Hd ,\n$$\n\nequivalently the transformation whose transpose under $L_2\\dashv R_2$ is $L_2GR_1\\xrightarrow{\\alpha R_1}HL_1R_1\\xrightarrow{H\\varepsilon_1}H$. The assignment $\\alpha\\mapsto\\alpha^\\flat$ is a bijection between natural transformations $L_2G\\to HL_1$ and natural transformations $GR_1\\to R_2H$, with inverse $\\beta\\mapsto (L_2G\\xrightarrow{L_2G\\eta_1}L_2GR_1L_1\\xrightarrow{L_2\\beta L_1}L_2R_2HL_1\\xrightarrow{\\varepsilon_2HL_1}HL_1)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remark 07A7 (remark-base-change), where the base change map is defined as the adjoint of L(g')^* of the counit; the general notion is Kelly-Street, Review of the elements of 2-categories, LNM 420, Section 2.2 (listed as wanted in literature/LIST.md)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mateEquiv\\|def TwoSquare' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/TwoSquare.lean",
+   "results": "Mates.lean:84 `def mateEquiv : TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂` for adj₁ : L₁ ⊣ R₁, adj₂ : L₂ ⊣ R₂, G : C ⥤ E, H : D ⥤ F; toFun is unit of adj₂, then R₂(α R₁), then counit of adj₁ whiskered by H ⋙ R₂, exactly the composite above; TwoSquare.lean:50 `def TwoSquare := T ⋙ R ⟶ L ⋙ B`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "CategoryTheory/Adjunction/Mates.lean, CategoryTheory/Bicategory/Adjunction/Mate.lean, CategoryTheory/Bicategory/Adjunction/Cat.lean, CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-09",
+   "verdict": "match (Mates.lean)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.mateEquiv",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "exact: with C, D, E, F, adj₁ : L₁ ⊣ R₁, adj₂ : L₂ ⊣ R₂, G, H as above, a TwoSquare G L₁ L₂ H is a transformation G ⋙ L₂ ⟶ L₁ ⋙ H (i.e. L₂G → HL₁) and `mateEquiv adj₁ adj₂ α : TwoSquare R₁ H G R₂` is R₁ ⋙ G ⟶ H ⋙ R₂ (i.e. GR₁ → R₂H), with the components of the statement (mateEquiv_apply / unit_mateEquiv, mateEquiv_counit); adjunctions, units and counits are CategoryTheory.Adjunction, .unit, .counit"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-ambient-ringed-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

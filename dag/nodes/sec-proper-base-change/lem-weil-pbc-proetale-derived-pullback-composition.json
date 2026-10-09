@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-pbc-proetale-derived-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of derived pro-etale module pullbacks",
+ "statement": "Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes, with small pro-etale sites [def-weil-pbc-proetale-site] and inverse images $h^{-1},k^{-1},(kh)^{-1}$ [def-weil-proetale-inverse-image]. Let $R_V,R_W,R_Z$ be sheaves of rings on $V_{\\mathrm{proet}},W_{\\mathrm{proet}},Z_{\\mathrm{proet}}$ with identifications $k^{-1}R_V\\cong R_W$ and $h^{-1}R_W\\cong R_Z$, and give $(kh)^{-1}R_V$ the identification with $R_Z$ obtained through the canonical isomorphism $(kh)^{-1}\\cong h^{-1}k^{-1}$. With the derived module pullbacks $Lh^*,Lk^*,L(kh)^*$ of [def-weil-pbc-proetale-operations] there is a canonical isomorphism of functors\n\n$$\n c_{h,k}:L(k\\circ h)^*\\xrightarrow{\\ \\sim\\ }Lh^*\\circ Lk^*:\\ D(V_{\\mathrm{proet}},R_V)\\longrightarrow D(Z_{\\mathrm{proet}},R_Z),\n$$\n\nwhich on a K-flat complex $\\mathcal K^\\bullet$ of $R_V$-modules with flat terms is the class of the termwise canonical isomorphism of module pullbacks $(kh)^*\\mathcal K^\\bullet\\cong h^*k^*\\mathcal K^\\bullet$ (here $k^*\\mathcal K^\\bullet$ is again K-flat with flat terms, so it computes $Lk^*$ and $h^*k^*\\mathcal K^\\bullet$ computes $Lh^*Lk^*$).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0D6D (lemma-derived-pullback-composition), for morphisms of ringed topoi; specialized to the ringed pro-etale topoi of schemes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'pullbackComp\\|pullbackPushforwardAdjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "SheafOfModules.pullbackComp (line 167): pullback φ ⋙ pullback ψ ≅ pullback (φ ≫ ...) for underived pullback of sheaves of modules along continuous functors; no derived version",
+   "date": "2026-10-09",
+   "verdict": "no match (underived only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/; grep -rn 'totalLeftDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/",
+   "results": "no derived category of sheaves of modules functoriality in ModuleCat/Sheaf; Functor.totalLeftDerived (LeftDerived.lean:193) is the abstract left derived functor, with no composition isomorphism for derived pullbacks of ringed sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'proetale\\|Proetale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology), ElladicCohomology.lean; no derived module pullbacks",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-ambient-ringed-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

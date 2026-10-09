@@ -2,21 +2,40 @@
  "id": "def-weil-pbc-ambient-ringed-exchange",
  "kind": "definition",
  "title": "Ambient ringed exchange",
- "statement": "For a cartesian square [def-weil-pbc-cartesian-square] with its chosen\nidentification, and a coefficient sheaf $R$, define the ambient pro-etale\nexchange transformation\n\n$$\n \\Ex^R_{\\square}:Lg^*Rf_*\\longrightarrow Rf'_*Lg'^*\n$$\n\nto be the mate, under $Lf'^*\\dashv Rf'_*$, of\n\n$$\n Lf'^*Lg^*Rf_*\\xrightarrow{\\sim}\n Lg'^*Lf^*Rf_*\\xrightarrow{Lg'^*\\varepsilon_f}Lg'^*,\n$$\n\nusing the derived operations on ringed pro-etale topoi. It is defined before\nany completeness or constructibility condition.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nwith its chosen identification; of it only the equality $f\\circ g'=g\\circ f'$ is used. Let a coefficient sheaf be given on each corner: a sheaf of rings $R_T$ on the small pro-etale site $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] for $T\\in\\{X,Y,X',Y'\\}$, with identifications $f^{-1}R_Y\\cong R_X$, $g^{-1}R_Y\\cong R_{Y'}$, $g'^{-1}R_X\\cong R_{X'}$, $f'^{-1}R_{Y'}\\cong R_{X'}$ of pro-etale inverse images [def-weil-proetale-inverse-image] such that the two resulting identifications $(fg')^{-1}R_Y\\cong R_{X'}$ and $(gf')^{-1}R_Y\\cong R_{X'}$ agree (a commutative square of ringed pro-etale topoi). For each edge $u$ use the derived module pullback and derived direct image with their adjunction $Lu^*\\dashv Ru_*$ [def-weil-pbc-proetale-operations]; let $\\varepsilon_f:Lf^*Rf_*\\to\\mathrm{id}$ be the counit of $Lf^*\\dashv Rf_*$. Let\n\n$$\n \\theta_\\square:Lf'^*Lg^*\\xrightarrow{c_{f',g}^{-1}}L(g\\circ f')^*=L(f\\circ g')^*\\xrightarrow{c_{g',f}}Lg'^*Lf^*\n$$\n\nbe the isomorphism of functors $D(Y_{\\mathrm{proet}},R_Y)\\to D(X'_{\\mathrm{proet}},R_{X'})$ built from the composition isomorphisms of derived pullbacks [lem-weil-pbc-proetale-derived-pullback-composition]. The *ambient pro-etale exchange transformation*\n\n$$\n \\Ex^R_{\\square}:Lg^*Rf_*\\longrightarrow Rf'_*Lg'^*\n$$\n\nof functors $D(X_{\\mathrm{proet}},R_X)\\to D(Y'_{\\mathrm{proet}},R_{Y'})$ is the mate [def-weil-pbc-adjunction-mate] of $\\theta_\\square$ with respect to the adjunctions $Lf^*\\dashv Rf_*$ and $Lf'^*\\dashv Rf'_*$ and the functors $G=Lg^*$, $H=Lg'^*$; that is, the transformation whose transpose under $Lf'^*\\dashv Rf'_*$ is\n\n$$\n Lf'^*Lg^*Rf_*\\xrightarrow{\\theta_\\square Rf_*}\n Lg'^*Lf^*Rf_*\\xrightarrow{Lg'^*\\varepsilon_f}Lg'^*,\n$$\n\nexplicitly $Lg^*Rf_*K\\xrightarrow{\\eta_{f'}}Rf'_*Lf'^*Lg^*Rf_*K\\xrightarrow{Rf'_*\\theta_\\square}Rf'_*Lg'^*Lf^*Rf_*K\\xrightarrow{Rf'_*Lg'^*\\varepsilon_{f,K}}Rf'_*Lg'^*K$ with $\\eta_{f'}$ the unit of $Lf'^*\\dashv Rf'_*$. It is defined before any completeness or constructibility condition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-ambient-ringed-exchange.md",
   "place": "node def-weil-pbc-ambient-ringed-exchange, order 1323"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'base change map\\|baseChangeMap\\|BaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "only BaseChange of coverings/precoverages (Sites/Precoverage.lean, Sites/MorphismProperty.lean, ...); no cohomological base change map of ringed sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'proetale\\|Proetale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'def derived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (topology only); Adjunction.derived gives G' ⊣ F' for absolute derived functors, but no derived pullback/pushforward of pro-etale modules and no exchange map",
+   "date": "2026-10-09",
+   "verdict": "no match; the mate itself is CategoryTheory.mateEquiv (node def-weil-pbc-adjunction-mate)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -39,5 +58,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-ambient-ringed-exchange",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Remark 07A7 (sites-cohomology.tex, remark-base-change), which defines the base change map Lg^*Rf_*K -> Rf'_*Lg'^*K of a commutative square of ringed topoi exactly as the blueprint does: adjoint to L(g')^* of the counit after L(f')^*Lg^* = L(g')^*Lf^*. Made the statement explicit: the coefficient sheaves on the four corners with compatible identifications (the blueprint's 'a coefficient sheaf R'), the isomorphism theta built from the composition isomorphisms of derived pullbacks (Stacks 0D6D; the blueprint's unlabelled '~'), and the mate in the sense of CategoryTheory.mateEquiv with G = Lg^*, H = Lg'^*. Only commutativity fg' = gf' of the cartesian square is used. Statement dependencies: the cartesian square, the pro-etale site and inverse image (for the coefficient identifications), the derived operations with the adjunction Lu^* -| Ru_* (def-weil-pbc-proetale-operations, which carries units and counits), and two new nodes: lem-weil-pbc-proetale-derived-pullback-composition (unsplit, Stacks 0D6D; Mathlib has only the underived SheafOfModules.pullbackComp) and def-weil-pbc-adjunction-mate (Mathlib leaf, CategoryTheory.mateEquiv). The Mathlib notion of adjunction with unit and counit is recorded in the mate node's match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
