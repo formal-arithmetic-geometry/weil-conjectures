@@ -5,7 +5,7 @@
  "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. A *quasi-coherent $\\mathcal O_X$-algebra* is a sheaf of commutative $\\mathcal O_X$-algebras whose underlying $\\mathcal O_X$-module is quasi-coherent [pqf-def-coherent]; it is *finite* (resp. *integral*, resp. *of finite presentation*) if for every affine open $U=\\operatorname{Spec}R\\subseteq X$ the $R$-algebra $\\mathcal A(U)$ is finite, i.e. finitely generated as an $R$-module (resp. integral, i.e. every element is a root of a monic polynomial over $R$; resp. of finite presentation, i.e. isomorphic to $R[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$). Let $\\mathcal A$ be an integral quasi-coherent $\\mathcal O_X$-algebra. Then (1) $\\mathcal A$ is the directed colimit of its finite quasi-coherent $\\mathcal O_X$-subalgebras (these form a directed set under inclusion, and the inclusions induce an isomorphism from their colimit to $\\mathcal A$); and (2) there exist a directed set $I$, a system $(\\mathcal A_i,\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'})_{i\\le i'}$ over $I$ of quasi-coherent $\\mathcal O_X$-algebras each of which is finite and of finite presentation, and $\\mathcal O_X$-algebra maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$ with $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$, which induce an isomorphism $\\varinjlim_i\\mathcal A_i\\xrightarrow{\\sim}\\mathcal A$ [def-weil-pbc-category-colimit] (colimit in the category of sheaves of $\\mathcal O_X$-algebras, equivalently of quasi-coherent $\\mathcal O_X$-algebras). The maps $\\varphi_i$ need not be injective.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 0817 (lemma-integral-algebra-directed-colimit-finite, line 3424; proof lines 3436-3496, via Lemmas lemma-algebra-directed-colimit-finite-type (line 3349), lemma-finite-algebra-directed-colimit-finite-finitely-presented (line 3378), lemma-directed-colimit-finite-presentation, lemma-quasi-coherent-colimit-finite-type and Algebra, lemma-characterize-finite-in-terms-of-integral); the definitions of finite/integral/finitely presented quasi-coherent algebras at lines 3289-3293 and 3369-3374"
+  "place": "Properties, Lemma 0817 (lemma-integral-algebra-directed-colimit-finite, line 3424; proof lines 3436-3496, via Lemma 05JT lemma-algebra-directed-colimit-finite-type (line 3349), Lemma 01PK lemma-directed-colimit-finite-presentation (line 3193), Modules Lemma 01BS lemma-finite-presentation-quasi-compact-colimit, Algebra Lemma 02JJ lemma-characterize-finite-in-terms-of-integral, and the proofs of Lemmas 05JS (line 3297) and 086N lemma-finite-algebra-directed-colimit-finite-finitely-presented (line 3378)); the definitions of finite/integral/finitely presented quasi-coherent algebras at lines 3289-3293 and 3369-3374"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -13,9 +13,154 @@
   "pqf-def-coherent",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (for subalgebras of $\\mathcal A$, finite = of finite type).* Let $\\mathcal B\\subseteq\\mathcal A$ be a quasi-coherent $\\mathcal O_X$-subalgebra (a subsheaf of $\\mathcal O_X$-subalgebras, quasi-coherent as a module; the notion of [lem-weil-pbc-algebra-directed-colimit-finite-type]). If $\\mathcal B$ is finite, then for every affine open $U$ a finite set of $\\mathcal O_X(U)$-module generators of $\\mathcal B(U)$ also generates it as an $\\mathcal O_X(U)$-algebra, so $\\mathcal B$ is of finite type. Conversely let $\\mathcal B$ be of finite type and $U\\subseteq X$ affine open, $R=\\mathcal O_X(U)$; let $b_1,\\dots,b_m$ generate $\\mathcal B(U)$ as an $R$-algebra. Since $\\mathcal B(U)\\subseteq\\mathcal A(U)$ is an $R$-subalgebra and $\\mathcal A(U)$ is integral over $R$ ($\\mathcal A$ is integral), each $b_l$ is a root of a monic polynomial over $R$, and this equation holds in $\\mathcal B(U)$. By [lem-weil-pbc-finite-of-integral-generators] (Algebra 02JJ, (3)$\\Rightarrow$(1)) $\\mathcal B(U)$ is a finitely generated $R$-module. So $\\mathcal B$ is finite. Hence the finite quasi-coherent subalgebras of $\\mathcal A$ are exactly its quasi-coherent subalgebras of finite type.",
+   "uses": [
+    "lem-weil-pbc-algebra-directed-colimit-finite-type",
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, first paragraph (lines 3437-3442: 'Any finite type quasi-coherent O_X-subalgebra of A is finite (apply Algebra, Lemma 02JJ to A_i(U) in A(U) for affine opens U)')"
+   }
+  },
+  {
+   "text": "*Step 2 (proof of (1)).* By [lem-weil-pbc-algebra-directed-colimit-finite-type] (Properties 05JT; $X$ is qcqs and $\\mathcal A$ quasi-coherent) the set $\\Sigma$ of quasi-coherent $\\mathcal O_X$-subalgebras of finite type of $\\mathcal A$, ordered by inclusion, is directed, and the inclusions induce an isomorphism $\\varinjlim_{\\mathcal B\\in\\Sigma}\\mathcal B\\xrightarrow{\\sim}\\mathcal A$ in sheaves of $\\mathcal O_X$-algebras (equivalently in quasi-coherent $\\mathcal O_X$-algebras, a full subcategory containing all terms). By Step 1, $\\Sigma$ is exactly the set of finite quasi-coherent $\\mathcal O_X$-subalgebras of $\\mathcal A$. This is (1).",
+   "uses": [
+    "lem-weil-pbc-algebra-directed-colimit-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, first paragraph (lines 3436-3442)"
+   }
+  },
+  {
+   "text": "*Step 3 (setup for (2): $\\mathcal A$ as a colimit of finitely presented modules, symmetric algebras, kernels).* By [lem-weil-pbc-module-directed-colimit-finite-presentation] (Properties 01PK) applied to the underlying quasi-coherent module of $\\mathcal A$ there are a directed set $I$, a system $(\\mathcal F_i,\\varphi_{i'i})$ of $\\mathcal O_X$-modules of finite presentation and $\\mathcal O_X$-linear $\\varphi_i:\\mathcal F_i\\to\\mathcal A$, $\\varphi_{i'}\\varphi_{i'i}=\\varphi_i$, with $(\\mathcal A,(\\varphi_i))=\\varinjlim_i\\mathcal F_i$ in $\\mathcal O_X$-modules. Modules of finite presentation are quasi-coherent [lem-weil-pbc-quasi-coherent-finite-type-affine](0), so [lem-weil-pbc-quasi-coherent-symmetric-algebra] gives quasi-coherent $\\mathcal O_X$-algebras $\\mathcal S_i:=\\operatorname{Sym}(\\mathcal F_i)$ with $j_i:\\mathcal F_i\\to\\mathcal S_i$; by its part (a) let $\\psi_i:\\mathcal S_i\\to\\mathcal A$ be the algebra map with $\\psi_i j_i=\\varphi_i$ and, for $i\\le i'$, $\\sigma_{i'i}=\\operatorname{Sym}(\\varphi_{i'i}):\\mathcal S_i\\to\\mathcal S_{i'}$ the algebra map with $\\sigma_{i'i}j_i=j_{i'}\\varphi_{i'i}$. By the uniqueness in (a): $\\sigma_{ii}=\\mathrm{id}$, $\\sigma_{i''i'}\\sigma_{i'i}=\\sigma_{i''i}$, and $\\psi_{i'}\\sigma_{i'i}=\\psi_i$ (both restrict to $\\varphi_{i'}\\varphi_{i'i}=\\varphi_i$ along $j_i$). Let $\\mathcal J_i=\\ker\\psi_i$, a quasi-coherent sheaf of ideals of $\\mathcal S_i$ with $\\mathcal J_i(U)=\\ker\\psi_{i,U}$ on affine opens [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](a). From $\\psi_{i'}\\sigma_{i'i}=\\psi_i$, $\\sigma_{i'i}(\\mathcal J_i)\\subseteq\\mathcal J_{i'}$.",
+   "uses": [
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, second paragraph (lines 3446-3457: 'write A = colim F_i ... using Lemma 01PK. For each i let J_i be the kernel of Sym*(F_i) -> A. For i' >= i there is an induced map J_i -> J_i''), with the symmetric algebra and the kernel as in the proof of Lemma 05JS (lines 3320-3326)"
+   }
+  },
+  {
+   "text": "*Step 4 (the image $\\mathcal A'_i=\\operatorname{Im}\\psi_i\\cong\\mathcal S_i/\\mathcal J_i$ is finite).* By [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](a) $\\mathcal A'_i:=\\operatorname{Im}\\psi_i$ is a quasi-coherent $\\mathcal O_X$-subalgebra of $\\mathcal A$ with $\\mathcal A'_i(U)=\\psi_{i,U}(\\mathcal S_i(U))$ for affine $U$, $R=\\mathcal O_X(U)$. By [lem-weil-pbc-quasi-coherent-symmetric-algebra](b) $\\mathcal S_i(U)=\\operatorname{Sym}_R(\\mathcal F_i(U))$, and $\\mathcal F_i(U)$ is a finitely presented, in particular finitely generated, $R$-module by [lem-weil-pbc-quasi-coherent-finite-type-affine](b); by [lem-weil-pbc-symmetric-algebra-finite-presentation](a) $\\mathcal S_i(U)$, hence its image $\\mathcal A'_i(U)$, is a finitely generated $R$-algebra. So $\\mathcal A'_i$ is of finite type, hence finite by Step 1. (Stacks: 'the quasi-coherent O_X-algebras Sym*(F_i)/J_i are finite (see above)'.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, second paragraph (lines 3458-3460), with the proof of Lemma 05JT (lines 3367-3369: the images are quasi-coherent subalgebras of finite type)"
+   }
+  },
+  {
+   "text": "*Step 5 (the finitely presented algebras $\\mathcal A_{ik}$).* Fix $i$. $\\mathcal J_i$ is quasi-coherent, so by [lem-weil-pbc-module-directed-colimit-finite-presentation] there are a directed set $K_i$, a system $(\\mathcal E_{ik})_{k\\in K_i}$ of $\\mathcal O_X$-modules of finite presentation with transition maps $\\eta_{k'k}$, and $\\varepsilon_{ik}:\\mathcal E_{ik}\\to\\mathcal J_i$ with $\\varepsilon_{ik'}\\eta_{k'k}=\\varepsilon_{ik}$ and $(\\mathcal J_i,(\\varepsilon_{ik}))=\\varinjlim_k\\mathcal E_{ik}$. Let $e_{ik}:\\mathcal E_{ik}\\to\\mathcal S_i$ be $\\varepsilon_{ik}$ followed by $\\mathcal J_i\\subseteq\\mathcal S_i$, $\\mathcal I_{ik}:=(e_{ik}(\\mathcal E_{ik}))\\subseteq\\mathcal S_i$ the sheaf of ideals it generates and $q_{ik}:\\mathcal S_i\\to\\mathcal A_{ik}:=\\mathcal S_i/\\mathcal I_{ik}$ the quotient, both quasi-coherent with $\\mathcal I_{ik}(U)=$ the ideal generated by $e_{ik,U}(\\mathcal E_{ik}(U))$ and $\\mathcal A_{ik}(U)=\\mathcal S_i(U)/\\mathcal I_{ik}(U)$ for affine $U$ [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b). Since $\\mathcal J_i$ is a sheaf of ideals containing $e_{ik}(\\mathcal E_{ik})$, $\\mathcal I_{ik}\\subseteq\\mathcal J_i$; so $\\psi_i$ kills $e_{ik}$ and factors uniquely as $\\pi_{ik}q_{ik}$ with $\\pi_{ik}:\\mathcal A_{ik}\\to\\mathcal A$ (universal property in (b)). For $k\\le k'$, $e_{ik}=e_{ik'}\\eta_{k'k}$ gives $\\mathcal I_{ik}\\subseteq\\mathcal I_{ik'}$. Each $\\mathcal A_{ik}$ is of finite presentation: for affine $U$, $R=\\mathcal O_X(U)$, $\\mathcal S_i(U)=\\operatorname{Sym}_R(\\mathcal F_i(U))$ [lem-weil-pbc-quasi-coherent-symmetric-algebra](b) with $\\mathcal F_i(U)$ finitely presented and $\\mathcal E_{ik}(U)$ finitely generated over $R$ [lem-weil-pbc-quasi-coherent-finite-type-affine](b), so $\\mathcal I_{ik}(U)$ is generated by the images of finitely many generators of $\\mathcal E_{ik}(U)$, and $\\mathcal A_{ik}(U)=\\operatorname{Sym}_R(\\mathcal F_i(U))/\\mathcal I_{ik}(U)$ is a finitely presented $R$-algebra by [lem-weil-pbc-symmetric-algebra-finite-presentation](b).",
+   "uses": [
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, second paragraph (lines 3460-3462 'Write J_i = colim E_ik as a colimit of finitely presented O_X-modules', and lines 3474-3484: A_ik = Sym*(F_i)/(E_ik), 'of finite presentation'), with the proof of Lemma 05JS (lines 3326-3333)"
+   }
+  },
+  {
+   "text": "*Step 6 (the directed index set $P$ and the system).* Let $P=\\{(i,k):i\\in I,k\\in K_i\\}$ with $(i,k)\\le(i',k')$ iff $i\\le i'$ and $\\sigma_{i'i}(\\mathcal I_{ik})\\subseteq\\mathcal I_{i'k'}$ (the order of Stacks 05JS, which the proof of 0817 leaves implicit). It is reflexive and transitive since $\\sigma_{ii}=\\mathrm{id}$ and $\\sigma_{i''i'}\\sigma_{i'i}=\\sigma_{i''i}$. Note $\\sigma_{i'i}(\\mathcal I_{ik})\\subseteq\\mathcal I_{i'k'}$ as soon as $\\sigma_{i'i}e_{ik}$ factors through $\\mathcal I_{i'k'}$ (the preimage $\\sigma_{i'i}^{-1}(\\mathcal I_{i'k'})$ is a sheaf of ideals containing $e_{ik}(\\mathcal E_{ik})$). For $(i,k)\\le(i',k')$, $q_{i'k'}\\sigma_{i'i}$ kills $e_{ik}$, so it factors uniquely as $\\alpha_{(i'k'),(ik)}q_{ik}$ [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b); by uniqueness these transition maps compose and $\\pi_{i'k'}\\alpha=\\pi_{ik}$ (from $\\psi_{i'}\\sigma_{i'i}=\\psi_i$). Directedness (Stacks: 'Given i' >= i and k there exists a k' ... This follows from Modules, Lemma 01BS'): $P\\neq\\emptyset$ as $I$ and the $K_i$ are nonempty. Given $(i_1,k_1),(i_2,k_2)$ choose $i'\\ge i_1,i_2$. For $a=1,2$ the map $\\sigma_{i'i_a}\\varepsilon_{i_ak_a}:\\mathcal E_{i_ak_a}\\to\\mathcal J_{i'}$ (it lands in $\\mathcal J_{i'}$ by Step 3) goes from a module of finite presentation into $\\varinjlim_k\\mathcal E_{i'k}$, so by [lem-weil-pbc-finite-presentation-hom-directed-colimit] (Modules 01BS; $X$ qcqs) it equals $\\varepsilon_{i'k_a'}g_a$ for some $k_a'\\in K_{i'}$ and $g_a$. Take $k'\\ge k_1',k_2'$ in $K_{i'}$; then $\\sigma_{i'i_a}e_{i_ak_a}=e_{i'k'}\\eta_{k'k_a'}g_a$ factors through $\\mathcal I_{i'k'}$, so $(i_a,k_a)\\le(i',k')$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-finite-presentation-hom-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, second paragraph (lines 3463-3484: the commutative square E_ik -> E_i'k' over J_i -> J_i', Modules Lemma 01BS, and the induced map A_ik -> A_i'k'); the order on pairs from the proof of Lemma 05JS (lines 3334-3336)"
+   }
+  },
+  {
+   "text": "*Step 7 ($\\varinjlim_{P}\\mathcal A_{ik}=\\mathcal A$).* By [lem-weil-pbc-quasi-coherent-algebra-colimit] the colimit $(\\mathcal L,(\\lambda_{ik}))$ of the system $(\\mathcal A_{ik})_P$ exists in quasi-coherent (equivalently, all sheaves of) $\\mathcal O_X$-algebras, with $\\mathcal L(U)=\\varinjlim_P\\mathcal A_{ik}(U)$ for affine $U$; let $\\pi:\\mathcal L\\to\\mathcal A$ be induced by the $\\pi_{ik}$. Fix an affine open $U$. Surjectivity of $\\pi_U$: by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] for $\\mathcal A=\\varinjlim\\mathcal F_i$, every $a\\in\\mathcal A(U)$ is $\\varphi_{i,U}(x)$ with $x\\in\\mathcal F_i(U)$; then $a=\\psi_{i,U}(j_{i,U}(x))=\\pi_{ik,U}(q_{ik,U}(j_{i,U}(x)))$ for any $k\\in K_i$. Injectivity: by [lem-weil-pbc-filtered-colimit-algebras-elementwise](2) an element of $\\mathcal L(U)$ is $\\lambda_{ik,U}(y)$ with $y\\in\\mathcal A_{ik}(U)$; suppose $\\pi_{ik,U}(y)=0$. Write $y=q_{ik,U}(z)$, $z\\in\\mathcal S_i(U)$ ($q_{ik,U}$ is surjective on affines, [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b)). Then $\\psi_{i,U}(z)=0$, so $z\\in\\mathcal J_i(U)$ (part (a)), and by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] for $\\mathcal J_i=\\varinjlim_k\\mathcal E_{ik}$, $z=\\varepsilon_{ik',U}(w)$ for some $k'$ and $w\\in\\mathcal E_{ik'}(U)$, so $z\\in\\mathcal I_{ik'}(U)$. Choose $k''\\ge k,k'$ in $K_i$: $(i,k)\\le(i,k'')$ (as $\\mathcal I_{ik}\\subseteq\\mathcal I_{ik''}$) and $z\\in\\mathcal I_{ik''}(U)$, so $\\alpha_{(ik''),(ik)}(y)=q_{ik'',U}(z)=0$ and $\\lambda_{ik,U}(y)=0$ [lem-weil-pbc-filtered-colimit-rings-zero]. So $\\pi_U$ is bijective for every affine $U$; the affine opens form a basis, so $\\pi$ is an isomorphism of sheaves by [lem-weil-pbc-sheaf-morphism-on-basis](b), and its inverse is an algebra map. (Stacks: 'colim A_ik = colim A_i = A ... the first equality was shown in the proof of Lemma 086N and the second because A is the colimit of the modules F_i'.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, last sentences (lines 3488-3495), referring to the proof of Lemma 086N (lines 3400-3407: A = colim Sym*(F)/(E_i) since J = colim E_i)"
+   }
+  },
+  {
+   "text": "*Step 8 (finiteness for $k$ large: the cofinal subset $P_{\\rm fin}$).* Fix $i$. As $X$ is quasi-compact choose an affine open covering $X=U_1\\cup\\dots\\cup U_m$, $R_j=\\mathcal O_X(U_j)$, and generators $f_{j,1},\\dots,f_{j,N_j}$ of the finitely generated $R_j$-module $\\mathcal F_i(U_j)$ [lem-weil-pbc-quasi-coherent-finite-type-affine]. By Step 4, $\\mathcal A'_i(U_j)$ is a finite $R_j$-algebra, hence integral [lem-weil-pbc-finite-algebra-is-integral]: there are monic $P_{j,l}\\in R_j[T]$ with $P_{j,l}(\\psi_{i,U_j}(j_i(f_{j,l})))=0$, i.e. $z_{j,l}:=P_{j,l}(j_i(f_{j,l}))\\in\\ker\\psi_{i,U_j}=\\mathcal J_i(U_j)$. By [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] each $z_{j,l}$ lies in $e_{ik}(\\mathcal E_{ik}(U_j))$ for some $k$, and since $K_i$ is directed and the $\\mathcal I_{ik}$ increase with $k$ there is $k_0(i)\\in K_i$ with all (finitely many) $z_{j,l}\\in\\mathcal I_{ik_0(i)}(U_j)$. For $k\\ge k_0(i)$ in $K_i$: in $\\mathcal A_{ik}(U_j)=\\mathcal S_i(U_j)/\\mathcal I_{ik}(U_j)$ the images of the $f_{j,l}$ satisfy the monic $P_{j,l}$, and they generate it as an $R_j$-algebra ([lem-weil-pbc-quasi-coherent-symmetric-algebra](b) and [lem-weil-pbc-symmetric-algebra-finite-presentation](a)); so $\\mathcal A_{ik}(U_j)$ is a finite $R_j$-module [lem-weil-pbc-finite-of-integral-generators] for every $j$, hence by [lem-weil-pbc-quasi-coherent-finite-type-affine](c) $\\mathcal A_{ik}(U)$ is finitely generated over $\\mathcal O_X(U)$ for every affine open $U$: $\\mathcal A_{ik}$ is finite. Let $P_{\\rm fin}=\\{(i,k)\\in P:k\\ge k_0(i)\\text{ in }K_i\\}$. It is cofinal in $P$: for $(i,k)\\in P$ take $k''\\ge k,k_0(i)$; then $(i,k)\\le(i,k'')\\in P_{\\rm fin}$. It is directed: two elements have an upper bound $(i',k')$ in $P$ (Step 6), and $(i',k')\\le(i',k'')\\in P_{\\rm fin}$ for $k''\\ge k',k_0(i')$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation",
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817 ('The quasi-coherent O_X-algebras A_ik are of finite presentation and finite for k large enough (see proof of Lemma 086N)', lines 3484-3487), with the proof of Lemma 086N (lines 3407-3420: finite affine covering, generators f_jk, monic P_jk, P_jk(f_jk) = 0 in A_i(U_j) for i large)"
+   }
+  },
+  {
+   "text": "*Step 9 (conclusion of (2)).* View the directed preordered sets $P\\supseteq P_{\\rm fin}$ as filtered categories; $P^{\\rm op}$ is cofiltered, $P_{\\rm fin}^{\\rm op}$ is a full subcategory, and by Step 8 every object of $P$ maps to an object of $P_{\\rm fin}$. By [lem-weil-pbc-colimit-initial-full-subcategory](1) (applied to $\\mathcal I=P^{\\rm op}$, $\\mathcal J=P_{\\rm fin}^{\\rm op}$ and the diagram $(\\mathcal A_{ik})$ in sheaves of $\\mathcal O_X$-algebras) the canonical map $\\varinjlim_{P_{\\rm fin}}\\mathcal A_{ik}\\to\\varinjlim_P\\mathcal A_{ik}$ is an isomorphism, and by Step 7 the latter is $\\mathcal A$ via the $\\pi_{ik}$. So the directed set $P_{\\rm fin}$, the system $(\\mathcal A_{ik},\\alpha)$ of quasi-coherent $\\mathcal O_X$-algebras, each finite (Step 8) and of finite presentation (Step 5), and the maps $\\pi_{ik}$ satisfy (2) [def-weil-pbc-category-colimit]; the colimit is the same in quasi-coherent $\\mathcal O_X$-algebras [lem-weil-pbc-quasi-coherent-algebra-colimit]. The $\\pi_{ik}$ need not be injective (a finitely presented $\\mathcal A_{ik}$ can have a nonzero kernel to $\\mathcal A$).",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, proof of Lemma 0817, last paragraph (lines 3484-3495)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-directed-colimit-finite-type",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-module-directed-colimit-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 0817 (lemma-integral-algebra-directed-colimit-finite, line 3424; proof lines 3436-3496), with the proofs of Lemmas 05JS (line 3297), 05JT (line 3349) and 086N (line 3378) to which it refers"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +199,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,6 +224,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 0817 (1)(2) with the definitions inline; correct; unsplit."
+  "note": "Nine steps along Stacks Properties 0817 with the proofs of 05JS/05JT/086N (tags all verified by the worker): finite = finite type for subalgebras of an integral algebra (02JJ via the reviewed leaf), (1) by 05JT (new node), the construction of (2) with symmetric algebras of finitely presented modules (01PK, 01CF-01CL, 01IC/01LA, 01BO/01PB/01PC, 00DO/00R2 as new statement nodes with exact tags), the order on the pairs (i,k) and its directedness via 01BS (new node) written out (left implicit by Stacks), the colimit identification on affine sections (reviewed colimit nodes), finiteness for k large and the cofinal subset P_fin written out (left implicit by Stacks). Read in full; the arguments are those of Stacks with the gaps filled. Eight new unsplit nodes, all self-contained with tags; none in Mathlib (no quasi-coherent algebras/symmetric algebras of sheaves)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "worker": "stage1",
+  "summary": "Split along Stacks Properties 0817 (tags verified in literature/stacks-project/tags/tags: 0817, 05JT, 05JS, 086N, 01PK, 01BS, 02JJ, 01PC, 01PB, 01CG, 01CL, 01IC, 01ID, 00DO). (1): Step 1 (finite = finite type for quasi-coherent subalgebras of an integral algebra, by 02JJ = lem-weil-pbc-finite-of-integral-generators) and Step 2 (05JT, new node). (2): Stacks' proof written out in Steps 3-9: F_i from 01PK (new node), Sym(F_i) (new node), kernels J_i and images (new node), E_ik from 01PK again, the ideals (E_ik) and quotients A_ik (finitely presented by a new ring-level node on Sym of a finitely presented module), the order on pairs (i,k) which Stacks leaves implicit (taken from 05JS) and its directedness by 01BS (new node), the colimit computed on affine sections (new node for colimits of quasi-coherent modules; existing nodes for algebra colimits, elementwise colimits, basis isomorphisms), finiteness for k >= k_0(i) by the argument of the proof of 086N, and the passage to the cofinal subset P_fin of finite stages (existing lem-weil-pbc-colimit-initial-full-subcategory). Stacks writes A_ki/'direct colimit' and 'Write J_i = colim E_ik as a colimit of finitely presented modules' while also using the generated ideals: the steps use the maps E_ik -> J_i (not submodules) as Stacks does. Statement kept. Mathlib (searched before, 5 queries) has nothing on quasi-coherent algebras; Algebra.finite_adjoin_of_finite_of_isIntegral and Algebra.FinitePresentation.quotient are the ring-level ingredients only."
  }
 }

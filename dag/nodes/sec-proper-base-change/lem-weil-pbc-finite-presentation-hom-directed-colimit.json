@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+ "kind": "statement",
+ "title": "Maps from a module of finite presentation into a directed colimit factor through a stage, on a qcqs scheme (Stacks 01BS)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Let $I$ be a directed set, $(\\mathcal F_i,\\varphi_{i'i})_{i\\le i'}$ a system of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] over $I$ with a colimit $(\\mathcal F,(c_i:\\mathcal F_i\\to\\mathcal F)_i)$ in the category of $\\mathcal O_X$-modules [def-weil-pbc-category-colimit], and $\\mathcal G$ an $\\mathcal O_X$-module of finite presentation. Then the canonical map $\\varinjlim_i\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F_i)\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$, $g\\mapsto c_i\\circ g$ on the $i$-th term, is bijective: every $\\mathcal O_X$-linear $h:\\mathcal G\\to\\mathcal F$ is $c_i\\circ g$ for some $i\\in I$ and some $\\mathcal O_X$-linear $g:\\mathcal G\\to\\mathcal F_i$, and if $c_i\\circ g=c_{i'}\\circ g'$ then $\\varphi_{i''i}\\circ g=\\varphi_{i''i'}\\circ g'$ for some $i''\\ge i,i'$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BS (lemma-finite-presentation-quasi-compact-colimit, line 3818; proof via Lemma lemma-hom-finite-presentation-colimit, line 3759, and Sheaves, Lemma 009F); its hypothesis (3) (a cofinal system of finite open coverings with quasi-compact pairwise intersections) holds on a qcqs scheme by finite affine open coverings and Schemes, Lemma 01KO (lemma-characterize-quasi-separated, schemes.tex line 4125)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom from a finitely presented sheaf of modules commutes with filtered colimits on a quasi-compact space",
+   "results": "CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits (CategoryTheory.Presentable.Finite), CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, CommRingCat.preservesFilteredColimits_coyoneda (Algebra.Category.Ring.FinitePresentation; rings, not sheaves), AlgebraicGeometry.Scheme.Modules.Hom: no statement that a finitely presented sheaf of modules is finitely presentable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented sheaf of modules: Hom out of it commutes with filtered colimits when the space is quasi-compact",
+   "results": "SheafOfModules.Presentation.map, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation: definitions only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'kernel.*IsQuasicoherent|image.*IsQuasicoherent|IsFinitePresentation.*colimit|coyoneda.*IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks Modules 01BS on a qcqs scheme; self-contained; correct; unsplit."
+ }
+}

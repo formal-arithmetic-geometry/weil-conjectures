@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+ "kind": "statement",
+ "title": "Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. (0) Every $\\mathcal O_X$-module of finite presentation (defined below) is quasi-coherent. Now let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal G$ is *of finite presentation* if every point of $X$ has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01BN). Let $U\\subseteq X$ be an affine open and $R=\\mathcal O_X(U)$. Then (a) $\\mathcal F|_U$ is of finite type [pqf-def-coherent] if and only if $\\mathcal F(U)$ is a finitely generated $R$-module; (b) $\\mathcal F|_U$ is of finite presentation if and only if $\\mathcal F(U)$ is a finitely presented $R$-module. Consequently (c) if $X=\\bigcup_jU_j$ is an affine open covering with $\\mathcal F(U_j)$ finitely generated over $\\mathcal O_X(U_j)$ for all $j$, then $\\mathcal F$ is of finite type and $\\mathcal F(U)$ is a finitely generated $\\mathcal O_X(U)$-module for every affine open $U\\subseteq X$; and if $\\mathcal F$ is of finite presentation then $\\mathcal F(U)$ is a finitely presented $\\mathcal O_X(U)$-module for every affine open $U$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Modules, Lemma 01BO (lemma-finite-presentation-quasi-coherent, modules.tex line 1421) for (0); Properties, Lemma 01PB (lemma-finite-type-module, line 2093) and Lemma 01PC (lemma-finite-presentation-module, line 2113); (c) because finite type and finite presentation are local properties (Modules, Definitions 01B5 and 01BN)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent module of finite type on an affine scheme has finitely generated global sections",
+   "results": "SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation (Algebra.Category.ModuleCat.Sheaf.*): definitions only, no comparison with sections over Spec R",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent sheaf of finite type on Spec R corresponds to a finitely generated R-module",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType(.isFiniteType), SheafOfModules.instIsFiniteTypeOfIsFinitePresentation: definitions and fp => finite type only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'kernel.*IsQuasicoherent|image.*IsQuasicoherent|IsFinitePresentation.*colimit|coyoneda.*IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks Modules 01BO, Properties 01PB/01PC; self-contained; correct; unsplit."
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+ "kind": "statement",
+ "title": "The symmetric algebra of a quasi-coherent module: universal property and sections over affine opens",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. For a commutative ring $R$ and an $R$-module $M$ let $\\operatorname{Sym}_R(M)=\\bigoplus_{n\\ge0}\\operatorname{Sym}^n_R(M)$ be the symmetric algebra, with $M=\\operatorname{Sym}^1_R(M)\\to\\operatorname{Sym}_R(M)$. Then there are a sheaf of commutative $\\mathcal O_X$-algebras $\\operatorname{Sym}(\\mathcal F)$, whose underlying $\\mathcal O_X$-module is quasi-coherent, and an $\\mathcal O_X$-linear map $j_{\\mathcal F}:\\mathcal F\\to\\operatorname{Sym}(\\mathcal F)$ such that: (a) for every sheaf of commutative $\\mathcal O_X$-algebras $\\mathcal B$ and every $\\mathcal O_X$-linear map $u:\\mathcal F\\to\\mathcal B$ there is exactly one morphism of sheaves of $\\mathcal O_X$-algebras $\\tilde u:\\operatorname{Sym}(\\mathcal F)\\to\\mathcal B$ with $\\tilde u\\circ j_{\\mathcal F}=u$; (b) for every affine open $U\\subseteq X$, with $R=\\mathcal O_X(U)$, the $R$-algebra map $\\operatorname{Sym}_R(\\mathcal F(U))\\to\\operatorname{Sym}(\\mathcal F)(U)$ extending $j_{\\mathcal F,U}$ is an isomorphism. (Consequently, by (a), an $\\mathcal O_X$-linear $v:\\mathcal F\\to\\mathcal F'$ between quasi-coherent modules induces a unique algebra map $\\operatorname{Sym}(v)$ with $\\operatorname{Sym}(v)\\circ j_{\\mathcal F}=j_{\\mathcal F'}\\circ v$, functorially.)",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 01CF (section-symmetric-exterior, line 3262: definition of Sym(F) as a quotient of the tensor algebra), Lemma 01CG (lemma-local-tensor-algebra, line 3303: Sym^n F is the sheafification of U -> Sym^n_{O(U)}(F(U))), Lemma 01CL (lemma-whole-tensor-algebra-permanence, line 3461: Sym of a quasi-coherent module is quasi-coherent); Schemes, Section 01LA item (9) (schemes.tex line 4717); used as Sym^*_{O_X} in Properties, Lemmas 05JS, 086N, 0817"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric algebra of a sheaf of modules over a ringed space",
+   "results": "SymmetricAlgebra, IsSymmetricAlgebra.of_equiv, SymmetricAlgebra.isSymmetricAlgebra_ι, SymmetricAlgebra.lift (LinearAlgebra.SymmetricAlgebra.Basic), SymmetricPower, SymAlg: module level only",
+   "date": "2026-10-10",
+   "verdict": "no match (ring/module level only: SymmetricAlgebra.lift is the universal property for modules)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric algebra sheaf of a quasi-coherent sheaf of modules on a scheme, sections over affine open are the symmetric algebra of the module of sections",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInType, ModuleCat.tildeInModuleCat (AlgebraicGeometry.Modules.Tilde), Scheme.Modules section module instance: no symmetric algebra of a sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'kernel.*IsQuasicoherent|image.*IsQuasicoherent|IsFinitePresentation.*colimit|coyoneda.*IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks Modules 01CF/01CG/01CL; self-contained; correct; unsplit."
+ }
+}

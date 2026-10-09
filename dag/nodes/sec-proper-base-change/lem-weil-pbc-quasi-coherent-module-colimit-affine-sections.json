@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+ "kind": "statement",
+ "title": "A directed colimit of quasi-coherent modules is quasi-coherent, with sections over an affine open the colimit of the sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a directed set, $(\\mathcal F_i,\\varphi_{i'i})_{i\\le i'}$ a system over $I$ of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category], and $(\\mathcal F,(c_i)_i)$ a colimit [def-weil-pbc-category-colimit] of it in the category of $\\mathcal O_X$-modules. Then $\\mathcal F$ is quasi-coherent, and for every affine open $U\\subseteq X$ the canonical map $\\varinjlim_i\\mathcal F_i(U)\\to\\mathcal F(U)$ (directed colimit of $\\mathcal O_X(U)$-modules, induced by the $c_{i,U}$) is bijective. Equivalently: every element of $\\mathcal F(U)$ is $c_{i,U}(x)$ for some $i\\in I$ and $x\\in\\mathcal F_i(U)$; and $c_{i,U}(x)=0$ if and only if $\\varphi_{i'i,U}(x)=0$ for some $i'\\ge i$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent, line 1435: colimits of quasi-coherent sheaves on Spec R are M~ with M the colimit of the modules) and Section 01LA (section-quasi-coherent, line 4717, item (4)); the same argument as Steps 2-4 of lem-weil-pbc-quasi-coherent-algebra-colimit, for modules"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections over an affine open of a filtered colimit of quasi-coherent sheaves of modules",
+   "results": "CategoryTheory.Sheaf.ΓRes, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat (Algebra.Category.ModuleCat.Sheaf.Colimits), AlgebraicGeometry.preservesColimit_Γ (schemes, not modules), SheafOfModules.sections: no sections-of-colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections over an affine open of a filtered colimit of quasi-coherent sheaves are the colimit of the sections",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone (AffineTransitionLimit: rings of a limit of schemes), AlgebraicGeometry.Scheme.Modules.instHasColimits, preservesColimit_Γ: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'kernel.*IsQuasicoherent|image.*IsQuasicoherent|IsFinitePresentation.*colimit|coyoneda.*IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks Schemes 01ID / 01LA (4), module version; self-contained; correct; unsplit."
+ }
+}
