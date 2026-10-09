@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Comparison
 
 /-!
 # The extension by zero and the pushforward vanish off an open immersion
@@ -21,8 +21,8 @@ that both `k^* j_! F` and `k^* j_* F` are initial as sheaves on the small pro-é
 `W`, and deduces that `k^*` of the comparison `j_! ⟶ j_*` is an isomorphism.
 
 Together with the `j^*` half (`j_!` fully faithful for an open immersion, proved in
-`WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful`), this is the
-sheaf-theoretic input to the comparison `j_! ⟶ j_*` being an isomorphism for an open
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.FullyFaithful`),
+this is the sheaf-theoretic input to the comparison `j_! ⟶ j_*` being an isomorphism for an open
 immersion with closed range. It is the one place where the zero object of the abelian `A`
 is consumed, and genuinely so: for `A = Type` and `k` with nonempty source, `k^* j_* F` has
 singleton sections `F(∅)` while `k^* j_! F` is empty, so the comparison is not an
