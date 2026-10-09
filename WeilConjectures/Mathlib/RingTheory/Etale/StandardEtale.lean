@@ -25,6 +25,8 @@ along closed immersions.
 - `StandardEtalePair.exists_algEquiv_quotient_tensor_ring`: for every
   `P : StandardEtalePair (R ⧸ I)` there is a `Q : StandardEtalePair R` together with an
   `R ⧸ I`-algebra isomorphism `(R ⧸ I) ⊗[R] Q.Ring ≃ₐ[R ⧸ I] P.Ring`.
+- `StandardEtalePair.exists_algEquiv_tensor_ring_of_coeffs_subset`: a standard etale pair over
+  `S` whose coefficients come from `R` is the base change of a standard etale pair over `R`.
 - `Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`: if `S` is a standard etale
   `R ⧸ I`-algebra, then there is a standard etale `R`-algebra `T` together with an
   `R ⧸ I`-algebra isomorphism `(R ⧸ I) ⊗[R] T ≃ₐ[R ⧸ I] S`.
@@ -135,6 +137,24 @@ theorem exists_algEquiv_quotient_tensor_ring (I : Ideal R) (P : StandardEtalePai
     refine StandardEtalePair.ext ?_ ?_
     · simpa [Ideal.Quotient.algebraMap_eq] using hF
     · simp [Ideal.Quotient.algebraMap_eq, hF, hG]
+  rw [h]
+  exact P.mulDerivativeRingEquiv
+
+/-- Every standard etale pair over `S` whose polynomials have coefficients in the image of an
+`R`-algebra `S` is, after passing to the associated standard etale algebras, the base change of
+a standard etale pair over `R`. -/
+theorem exists_algEquiv_tensor_ring_of_coeffs_subset [Algebra R S] (P : StandardEtalePair S)
+    (hf : ↑P.f.coeffs ⊆ Set.range (algebraMap R S))
+    (hg : ↑P.g.coeffs ⊆ Set.range (algebraMap R S)) :
+    ∃ Q : StandardEtalePair R, Nonempty (S ⊗[R] Q.Ring ≃ₐ[S] P.Ring) := by
+  obtain ⟨F, hF, -, hFm⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
+    ((Polynomial.lifts_iff_coeffs_subset_range _).mpr hf) P.monic_f
+  obtain ⟨G, hG⟩ := (Polynomial.lifts_iff_coeffs_subset_range _).mpr hg
+  rw [Polynomial.coe_mapRingHom] at hG
+  refine ⟨ofMonic hFm G, ⟨((ofMonic hFm G).baseChangeEquiv S).trans ?_⟩⟩
+  have h : (ofMonic hFm G).map (algebraMap R S) = P.mulDerivative := by
+    rw [map_ofMonic]
+    exact StandardEtalePair.ext hF (by simp [hF, hG])
   rw [h]
   exact P.mulDerivativeRingEquiv
 
