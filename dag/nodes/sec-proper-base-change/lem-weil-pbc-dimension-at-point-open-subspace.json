@@ -11,9 +11,31 @@
   "def-kun-subspace-topology",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let A be the set of open neighborhoods of y in Y and B the set of open neighborhoods of y in O, with O given the subspace topology. Since O is open in Y, every V in B is also open in Y and is an element of A. Conversely, for W in A, the intersection W \\cap O is in B; applying [lem-weil-pbc-open-subspace-dimension-monotone] to the open subsets W \\cap O \\subseteq W gives dim(W \\cap O) \\leq dim(W). Thus the minimum defining dim_y(O) is at most the minimum defining dim_y(Y), while the inclusion B \\subseteq A gives the reverse inequality. The two minima are therefore equal.",
+   "uses": [
+    "def-kun-subspace-topology",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Section 'Krull dimension', Definition 0055 (label definition-Krull), item (4), and the remark immediately following it (the dimension of an open subspace is at most that of the ambient space and open neighborhoods form a fundamental system attaining dim_y(Y))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-open-subspace-dimension-monotone"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Section 'Krull dimension', Definition 0055 and the remark immediately following it"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +60,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +80,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dimension-at-point-open-subspace",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks topology.tex Definition 0055 (tag 0055), item (4), and the following remark. Added the reusable unsplit node lem-weil-pbc-open-subspace-dimension-monotone for the cited inequality dim(U') <= dim(U), with the exact Stacks source and three Mathlib searches. The proof now identifies neighborhoods in an open subspace with ambient neighborhoods intersected with the open subset, invokes the new monotonicity node, and compares the two minima defining the local dimensions."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: Second delivery: the monotonicity of the Krull dimension under passage to an open subspace is now a cited unsplit node (Stacks remark after Definition 0055, topology.tex lines 1421-1425) and the step uses the min-over-neighbourhoods definition explicitly. Two commits on the branch accepted this time; one squashed commit next time. Accepted by L."
+ }
 }
