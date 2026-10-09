@@ -12,9 +12,65 @@
   "def-pc-base-change",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($f'$ locally of finite type $\\Rightarrow$ $f$ locally of finite type.) $f:X=S\\times_{S'}X'\\to S$ is the base change of $f'$ along $i_S:S\\to S'$ [def-pc-base-change], and the base change of a morphism locally of finite type is locally of finite type (Morphisms, Lemma 01T4) [lem-weil-pbc-lft-base-change]. It remains to prove the converse.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, first paragraph ('The properties ... are all stable under base change ... Morphisms, Lemma base-change-finite-type') and second paragraph ('The interesting direction ...')"
+   }
+  },
+  {
+   "text": "(Reduction to affines.) Let $p:X\\to X'$ and $q:X\\to S$ be the projections, so $f=q$ and $f'\\circ p=i_S\\circ f$. Let $U'=\\operatorname{Spec}A'\\subseteq S'$ be an affine open and $V'=\\operatorname{Spec}B'\\subseteq X'$ an affine open with $f'(V')\\subseteq U'$. Put $I=\\mathcal I(U')\\subseteq A'$, where $\\mathcal I$ is the ideal sheaf of $S\\subseteq S'$; then $U:=i_S^{-1}(U')$ is an open subscheme of $S$ and $U\\to U'$ is identified with $\\operatorname{Spec}(A'/I)\\to\\operatorname{Spec}A'$ [def-sbc-closed-immersion-ideal-sheaf], and $I^{n+1}=\\mathcal I^{n+1}(U')=0$ since $\\mathcal I^{n+1}=0$ [def-sbc-first-order-thickening, def-sbc-ideal-sheaf-powers]. Put $W:=p^{-1}(V')\\subseteq X$, an open subscheme. Since $i_S(f(W))=f'(p(W))\\subseteq U'$, we have $f(W)\\subseteq U$, i.e. $W\\subseteq q^{-1}(U)$, so $W=q^{-1}(U)\\cap p^{-1}(V')$; by the open-subscheme property of fibre products (Schemes, Lemma 01JR) [lem-weil-pbc-open-fibre-product] applied to the opens $U\\subseteq S$, $V'\\subseteq X'$, $U'\\subseteq S'$, the canonical morphism $U\\times_{U'}V'\\to X$ is an open immersion with image $W$, compatibly with the projections. By [lem-weil-pbc-fibre-product-affine-spectra] (Schemes, Lemma 01I4/01JQ) $U\\times_{U'}V'\\cong\\operatorname{Spec}(A'/I\\otimes_{A'}B')$, with the projection to $U$ being $\\operatorname{Spec}$ of $A'/I\\to A'/I\\otimes_{A'}B'$; and $A'/I\\otimes_{A'}B'\\cong B'/IB'$ via $\\bar a\\otimes b\\mapsto \\overline{ab}$ (right exactness of $-\\otimes_{A'}B'$ applied to $I\\to A'\\to A'/I\\to0$; elementary). Hence $W$ is an affine open of $X$, $W\\cong\\operatorname{Spec}(B'/IB')$, $f(W)\\subseteq U$, and the ring map $\\mathcal O_S(U)\\to\\mathcal O_X(W)$ induced by $f$ is the map $A/I\\to B'/IB'$ induced by $A'\\to B'$ (with $A/I$ meaning $A'/I$). This is the diagram of the source with exact rows $0\\to IB'\\to B'\\to B'/IB'\\to0$, $0\\to I\\to A'\\to A'/I\\to0$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-first-order-thickening",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, fourth paragraph ('Most of the proofs will use a reduction to the affine case. Let U' ⊂ S' be an affine open ... Then V' ∩ X = Spec(B'/IB') ...')"
+   }
+  },
+  {
+   "text": "($f$ locally of finite type $\\Rightarrow$ $f'$ locally of finite type.) Assume $f$ is locally of finite type, and let $U'=\\operatorname{Spec}A'$, $V'=\\operatorname{Spec}B'$ be any affine opens of $S'$, $X'$ with $f'(V')\\subseteq U'$. With the notation of step 2, $U\\subseteq S$ and $W\\subseteq X$ are affine opens with $f(W)\\subseteq U$, so by Morphisms 01T2 ((1)$\\Rightarrow$(2)) [lem-weil-pbc-lft-affine-pairs] the ring map $A'/I\\to B'/IB'$ is of finite type. As $I^{n+1}=0$, the ring lemma [lem-weil-pbc-finite-type-lift-nilpotent] (Nakayama's lemma, Algebra 00DV, applied to $A'[x_1,\\dots,x_m]\\to B'$ lifting generators of $B'/IB'$) gives that $A'\\to B'=\\mathcal O_{S'}(U')\\to\\mathcal O_{X'}(V')$ is of finite type. Since $U'$, $V'$ were arbitrary, $f'$ is locally of finite type by 01T2 ((2)$\\Rightarrow$(1)) [lem-weil-pbc-lft-affine-pairs]. (The source first reduces, by induction on the order of the thickening along the filtration $S=S_1\\subseteq\\dots\\subseteq S_{n+1}=S'$, to $I^2=0$; this is not needed here, since the ring lemma, like Nakayama's lemma 00DV (11) on which it rests, holds for any nilpotent $I$.) With step 1: $f$ is locally of finite type iff $f'$ is.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-lift-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZW, proof, third paragraph (induction on the order; bypassed, see the step) and 'The translation of (2) into algebra'; Morphisms, Lemma 01T2 (literature/stacks-project/morphisms.tex, label lemma-locally-finite-type-characterize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-type-lift-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZW (label lemma-thicken-property-morphisms-cartesian), proof: base change paragraph, reduction to affines, 'The translation of (2) into algebra'; the induction on the order is replaced by the nilpotent form of the ring lemma (Algebra 00DV (11))"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,6 +127,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is More on Morphisms 09ZW (2) with the Nakayama route noted; correct; unsplit."
+  "note": "Three steps along Stacks 09ZW (2): base change (new leaf locallyOfFiniteType_isStableUnderBaseChange FiniteType.lean:80, checked), reduction to affine pairs written out with the reviewed fibre-product leaves (the affine open W = U ×_{U′} V′ = Spec(B′/IB′)), and the ring lemma for nilpotent I (new unsplit node lem-weil-pbc-finite-type-lift-nilpotent, Nakayama 00DV (11)) with 01T2 as the new leaf locallyOfFiniteType_iff (checked). The induction on the order is bypassed since the ring lemma holds for any nilpotent ideal (noted). Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-thickening-lft-cartesian",
+  "worker": "stage1",
+  "summary": "Read Stacks 09ZW (more-morphisms.tex:334ff) part (2) and its proof, Morphisms 01T2/01T4 and Algebra 00DV. Statement kept. Proof in three steps: (1) easy direction by base change (new Mathlib leaf lem-weil-pbc-lft-base-change = locallyOfFiniteType_isStableUnderBaseChange); (2) affine reduction: for affine U'=Spec A' ⊆ S', V'=Spec B' ⊆ X' over it, p^{-1}(V') = U ×_{U'} V' = Spec(B'/IB') over U = Spec(A'/I) (existing leaves lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra; ideal-sheaf definitions); (3) converse by 01T2 (new Mathlib leaf lem-weil-pbc-lft-affine-pairs = locallyOfFiniteType_iff, Mathlib's definition) and the new unsplit ring lemma lem-weil-pbc-finite-type-lift-nilpotent (A'/I → B'/IB' finite type, I nilpotent ⇒ A' → B' finite type; Nakayama 00DV (11), absent from Mathlib). The source's induction on the order of the thickening is bypassed since 00DV (11) and hence the ring lemma hold for any nilpotent ideal; the affine-open correspondence 06AD and the thickening X ⊆ X' are not needed (the affine open W is a fibre product of affines). Mathlib: only the base change direction is there."
  }
 }

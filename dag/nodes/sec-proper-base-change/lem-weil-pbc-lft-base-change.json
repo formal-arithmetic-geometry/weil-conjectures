@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-lft-base-change",
+ "kind": "statement",
+ "title": "Locally of finite type is stable under base change",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes that is locally of finite type [def-weil-finite-type-morphism] and let $g:S'\\to S$ be any morphism of schemes. Then the base change $f':X\\times_SS'\\to S'$ (the second projection of the fibre product) [def-pc-fibre-product] is locally of finite type.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01T4 (label lemma-base-change-finite-type), first statement"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally of finite type is stable under base change",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme (Mathlib.AlgebraicGeometry.Morphisms.FiniteType), RingHom.finiteType_isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a morphism of schemes locally of finite type is locally of finite type",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, CategoryTheory.MorphismProperty.IsStableUnderBaseChange",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'locallyOfFiniteType_isStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "results": "FiniteType.lean:80 instance locallyOfFiniteType_isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+  "how": "specializes in one line: the instance (line 80) says LocallyOfFiniteType is IsStableUnderBaseChange; apply MorphismProperty.of_isPullback to the pullback square, or use the instance LocallyOfFiniteType (pullback.snd f g) / (pullback.fst f g) given LocallyOfFiniteType f (resp. g)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-lft-cartesian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf locallyOfFiniteType_isStableUnderBaseChange (Morphisms/FiniteType.lean:80); checked."
+ }
+}

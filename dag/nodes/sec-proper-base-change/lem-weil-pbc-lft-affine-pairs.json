@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-lft-affine-pairs",
+ "kind": "statement",
+ "title": "Locally of finite type is checked on all pairs of affine opens",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes. Then $f$ is locally of finite type [def-weil-finite-type-morphism] if and only if for every affine open $V\\subseteq S$ and every affine open $U\\subseteq X$ with $f(U)\\subseteq V$ [def-weil-affine-spectrum] the ring map $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ induced by $f$ is of finite type, i.e. $\\mathcal O_X(U)$ is a finitely generated $\\mathcal O_S(V)$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01T2 (label lemma-locally-finite-type-characterize), equivalence (1)<=>(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism locally of finite type iff ring map on every pair of affine opens is of finite type",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, instHasRingHomPropertyLocallyOfFiniteTypeFiniteType (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes is locally of finite type iff for all affine opens U of Y and V of X with V ⊆ f⁻¹U the ring map Γ(Y,U) → Γ(X,V) is of finite type",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.Scheme.Hom.finiteType_appLE (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.appLE",
+   "results": "LocallyOfFiniteType.finiteType_appLE, LocallyOfFiniteType.mk, Scheme.Hom.finiteType_appLE, locallyOfFiniteType_iff (Mathlib.AlgebraicGeometry.Morphisms.FiniteType)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 38,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; grep -n 'lemma iff_appLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+   "results": "FiniteType.lean:42-47 '@[mk_iff] class LocallyOfFiniteType (f) : Prop where finiteType_appLE : ∀ {U} (_ : IsAffineOpen U) {V} (_ : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U), (f.appLE U V e).hom.FiniteType'; RingHomProperties.lean:317 HasRingHomProperty.iff_appLE",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+  "how": "exact: Mathlib's definition of LocallyOfFiniteType (FiniteType.lean:42, @[mk_iff]) is condition (2) of 01T2, with f.appLE U V e : Γ(S,V) → Γ(X,U) the induced ring map; locallyOfFiniteType_iff states the equivalence and LocallyOfFiniteType.mk / Scheme.Hom.finiteType_appLE are the two directions; the agreement of this with the cover form of [def-weil-finite-type-morphism] is the one recorded on that leaf (HasRingHomProperty, RingHomProperties.lean:317 iff_appLE)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-lft-cartesian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf locallyOfFiniteType_iff (the definition LocallyOfFiniteType, FiniteType.lean:43); checked."
+ }
+}

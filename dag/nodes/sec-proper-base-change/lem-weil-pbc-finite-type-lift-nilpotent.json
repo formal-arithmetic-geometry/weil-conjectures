@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-finite-type-lift-nilpotent",
+ "kind": "statement",
+ "title": "Finite type lifts along a nilpotent ideal (ring version)",
+ "statement": "Let $A'\\to B'$ be a ring map of commutative rings and $I\\subseteq A'$ a nilpotent ideal ($I^{n+1}=0$ for some $n\\ge0$). If the induced ring map $A'/I\\to B'/IB'$ is of finite type (i.e. $B'/IB'$ is a finitely generated $A'/I$-algebra), then $A'\\to B'$ is of finite type. (Proof: choose $b_1,\\dots,b_m\\in B'$ whose images generate $B'/IB'$ over $A'/I$, let $R=A'[x_1,\\dots,x_m]\\to B'$, $x_j\\mapsto b_j$; then $R/IR=(A'/I)[x_1,\\dots,x_m]\\to B'/IB'$ is surjective, i.e. $B'=N+IB'$ for the image $N$ of $R$, viewed as $R$-modules with $IR$ nilpotent; by Nakayama's lemma for a nilpotent ideal (Algebra 00DV (11): $M=IM$ with $I$ nilpotent implies $M=0$, applied to $M=B'/N$) $R\\to B'$ is surjective.)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZW (label lemma-thicken-property-morphisms-cartesian), proof, 'The translation of (2) into algebra' (stated there with I^2=0; the argument uses only Algebra, Lemma 00DV (label lemma-NAK) part (11), which holds for any nilpotent I)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if I is a nilpotent ideal of A and A/I → B/IB is of finite type then A → B is of finite type",
+   "results": "RingHom.FiniteType, AlgHom.FiniteType, AlgHom.Finite.finiteType, Algebra.FiniteType.quotient, algebra_finiteType_of_liesOver (only the converse: quotients of finite type algebras)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebra B over A is finitely generated if B modulo a nilpotent ideal I B is finitely generated over A/I",
+   "results": "Algebra.instEssFiniteTypeQuotientIdeal, Algebra.FiniteType.quotient, algebra_finiteType_of_liesOver, Algebra.FinitePresentation.quotient (all the converse direction)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsNilpotent",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FiniteType, Ideal.Quotient.mk, IsNilpotent",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nakayama nilpotent ideal: if N ⊔ I • M = ⊤ and I is nilpotent then N = ⊤",
+   "results": "only Jacobson/FG versions: Submodule.le_of_le_smul_of_le_jacobson_bot, Submodule.smul_le_of_le_smul_of_le_jacobson_bot (Mathlib.RingTheory.Nakayama, need N' finitely generated), Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul; surjective_of_mkQ_comp_surjective (Mathlib.RingTheory.AdicCompletion.Functoriality:437, needs IsPrecomplete/IsHausdorff instances, none provided for nilpotent ideals)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'Algebra.FiniteType|RingHom.FiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | xargs grep -lE 'IsNilpotent|nilpotent'; grep -rnE 'IsNilpotent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Nakayama.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Nakayama.lean; grep -rnE 'IsHausdorff|IsPrecomplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i nilpot",
+   "results": "RingTheory/QuasiFinite/Basic.lean, RingTheory/Unramified/Field.lean (unrelated uses); RingTheory/Finiteness/NilpotentKer.lean:22 Module.finite_of_surjective_of_ker_le_nilradical (module-finiteness of S over R when S/I is R-finite, I FG nilpotent: a different statement, the ideal is in the target and the conclusion is Module.Finite); no nilpotent Nakayama, no finite-type lifting",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-lft-cartesian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: finite type lifts along a nilpotent ideal (Nakayama 00DV (11)); correct; unsplit."
+ }
+}
