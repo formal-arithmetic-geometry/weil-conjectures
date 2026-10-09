@@ -16,7 +16,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 # The Weil group of a curve over a finite field
 
 Let `p : C₀ ⟶ Spec 𝔽_q` be a curve which is geometrically connected. This file constructs a
-`AlgebraicGeometry.WeilGroup` of `C₀` (`AlgebraicGeometry.WeilGroup.ofCurve`): the Weil group
+`AlgebraicGeometry.WeilGroup` of `C₀` (`AlgebraicGeometry.WeilGroup.ofFundamentalGroup`): the Weil group
 `W(C₀, s) ⊆ π₁(C₀, s) × ℤ` of a fundamental group `π₁(C₀, s)` at a geometric point `s` with values
 in `𝔽̄_q`, with the topology induced from `π₁(C₀, s) × ℤ`, `ℤ` being discrete. In this topology
 the geometric part `ker deg` is open and is the subspace `ker (π₁(C₀, s) → Gal(𝔽̄_q / 𝔽_q))` of the
@@ -29,8 +29,8 @@ Frobenius at a closed point `x` is a Frobenius element at `x`, of degree `e_x`
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilGroup.ofCurve`: the Weil group of a geometrically connected curve over a
-  finite field.
+- `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`: the Weil group of a geometrically connected
+  curve over a finite field.
 -/
 
 @[expose] public section
@@ -183,13 +183,6 @@ noncomputable def weilFrobenius (x : C.finitePoints) : weilGroup p s G :=
   ⟨(frobeniusElement s G x, Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)),
     (isFrobeniusElement_frobeniusElement s G x).mem_weilGroup p⟩
 
-/-- **Chebotarev density** for the Weil group of a curve over a finite field: the local
-Frobenius elements generate a dense normal subgroup. -/
-theorem dense_normalClosure_range_weilFrobenius :
-    Dense ((Subgroup.normalClosure (Set.range (weilFrobenius p s G)) :
-      Subgroup (weilGroup p s G)) : Set (weilGroup p s G)) := by
-  sorry
-
 /-- **The Weil group of a geometrically connected curve over a finite field**, built from a
 fundamental group `G = π₁(C₀, s)` at a geometric point `s` with values in `𝔽̄_q`: the subgroup
 `W(C₀, s) ⊆ π₁(C₀, s) × ℤ` with the induced topology, the local Frobenius at a closed point
@@ -219,8 +212,7 @@ noncomputable def ofFundamentalGroup : WeilGroup p :=
     weilGroupEquiv := MulEquiv.refl _
     deg_eq _ := rfl
     isEmbedding_ker := isEmbedding_ker_weilGroupDeg p s G
-    isFrobeniusElement_frobenius := isFrobeniusElement_frobeniusElement s G
-    dense_frobenius := dense_normalClosure_range_weilFrobenius p s G }
+    isFrobeniusElement_frobenius := isFrobeniusElement_frobeniusElement s G }
 
 omit [ConnectedSpace C] [IsFundamentalGroup (fiber s) G] in
 /-- A geometrically connected curve over a finite field has a Weil group. -/
