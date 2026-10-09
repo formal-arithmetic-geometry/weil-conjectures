@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-geometric-stalks-detect-mono",
+ "kind": "statement",
+ "title": "Monomorphisms of etale sheaves are detected on a covering family of geometric stalks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $(\\bar s_i:\\operatorname{Spec}\\Omega_i\\to S)_{i\\in I}$ be a family of geometric points of $S$ [def-weil-geometric-point] whose images cover $S$ (every point of $S$ is the image of the point of some $\\operatorname{Spec}\\Omega_i$), and let $\\varphi:F\\to G$ be a morphism in the category $\\Ab(S_{\\Et})$ of abelian sheaves on the small etale site [def-weil-pbc-abelian-etale-sheaves]. Then $\\varphi$ is a monomorphism if and only if for every $i\\in I$ the induced map of stalks [def-weil-pbc-geometric-stalks] $\\varphi_{\\bar s_i}:F_{\\bar s_i}\\to G_{\\bar s_i}$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Theorem 03PU (label theorem-exactness-stalks): a map of sheaves on $S_{\\acute etale}$ is injective iff it is injective on the stalks at all geometric points; its proof (the surjectivity case written out, the injectivity case 'omitted') only uses, for every $u\\in U$, some geometric point lying over $u$, so a family of geometric points covering $S$ suffices"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of étale sheaves is a monomorphism if its stalks at a jointly surjective family of geometric points are injective",
+   "results": "TopCat.Presheaf.mono_iff_stalk_mono, TopCat.Presheaf.mono_of_stalk_mono (Mathlib.Topology.Sheaves.Stalks, topological spaces only); CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono (Mathlib.CategoryTheory.Sites.Sheaf); PresheafOfModules.mono_iff_surjective (sic, injective sectionwise); CategoryTheory.Sheaf.mono_of_isLocallyInjective (Mathlib.CategoryTheory.Sites.LocallyInjective)",
+   "date": "2026-10-09",
+   "verdict": "no direct match (topological-space version only); the etale version found by the other searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conservative family of points of a site jointly reflects monomorphisms of sheaves; geometric points of small étale site are conservative",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); TopCat.Presheaf.stalkFunctor_preserves_mono (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-09",
+   "verdict": "no match by itself (the Lean Finder index v4.28.0 is older than the pinned Mathlib)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectMonomorphisms",
+   "results": "CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectMonomorphisms (Mathlib.CategoryTheory.Sites.Point.Conservative): for a conservative family of points P and A concrete over Type w with filtered-colimit-preserving forget, AB5OfSize.{w,w}, HasFiniteLimits: JointlyReflectMonomorphisms (fun Φ => Φ.obj.sheafFiber)",
+   "date": "2026-10-09",
+   "verdict": "match (the 'if' direction, given conservativity)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isConservative_pointSmallEtale",
+   "results": "AlgebraicGeometry.Scheme.isConservative_pointSmallEtale (Mathlib.AlgebraicGeometry.Sites.EtalePoint): {ι} {S} {Ω : ι → Type u} [Field (Ω i)] [IsSepClosed (Ω i)] (s : (i : ι) → Spec (Ω i) ⟶ S) (hs : ⋃ i, Set.range (s i) = Set.univ) : (ObjectProperty.ofObj fun i => pointSmallEtale (s i)).IsConservativeFamilyOfPoints",
+   "date": "2026-10-09",
+   "verdict": "match (a covering family of geometric points is conservative)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Mono\\|Epi' Mathlib/CategoryTheory/Sites/Point/*.lean; grep -rn 'PreservesFiniteLimits' Mathlib/CategoryTheory/Sites/Point/Basic.lean; grep -n 'mono_iff_injective' Mathlib/Algebra/Category/Grp/EpiMono.lean; grep -n AB5 Mathlib/Algebra/Category/Grp/AB.lean",
+   "results": "Sites/Point/Conservative.lean:87 jointlyReflectMonomorphisms (stacks 00YL (1)); Sites/Point/Basic.lean:289-291 instance PreservesFiniteLimits (Φ.sheafFiber) under [LocallySmall.{w} C] [HasFiniteLimits A] [AB5OfSize.{w,w} A]; Functor/ReflectsIso/Jointly.lean:111 JointlyReflectMonomorphisms.mono_iff; Algebra/Category/Grp/EpiMono.lean:357 AddCommGrpCat.mono_iff_injective; Algebra/Category/Grp/AB.lean:61 instance AB5 AddCommGrpCat.{u}; AlgebraicGeometry/Sites/EtalePoint.lean:64 pointSmallEtale (fibre functor U ↦ lifts Spec Ω → U over S, i.e. the stalk colimit over pointed etale neighbourhoods)",
+   "date": "2026-10-09",
+   "verdict": "match: the conjunction below"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isConservative_pointSmallEtale, CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectMonomorphisms, CategoryTheory.JointlyReflectMonomorphisms.mono_iff, AddCommGrpCat.mono_iff_injective",
+  "file": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+  "how": "specializes in one line: for S : Scheme.{u} and Ω i : Type u algebraically (hence separably) closed, isConservative_pointSmallEtale s hs (EtalePoint.lean:126) makes the points pointSmallEtale (s i) a conservative family; its jointlyReflectMonomorphisms AddCommGrpCat.{u} (Mathlib/CategoryTheory/Sites/Point/Conservative.lean:87; AB5 AddCommGrpCat at Algebra/Category/Grp/AB.lean:61) with JointlyReflectMonomorphisms.mono_iff (Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean:111; each sheafFiber preserves finite limits, Sites/Point/Basic.lean:290, hence monomorphisms) gives Mono φ ↔ ∀ i, Mono ((pointSmallEtale (s i)).sheafFiber.map φ), and AddCommGrpCat.mono_iff_injective (Algebra/Category/Grp/EpiMono.lean:357) turns each clause into injectivity. The fibre functor of pointSmallEtale s sends U to the set of lifts of s to U, so sheafFiber is the colimit over pointed etale neighbourhoods of [def-weil-pbc-geometric-stalks]. The same holds for A = ModuleCat.{u} Λ (AB5 at Algebra/Category/ModuleCat/AB.lean:29)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-retract-supplied",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

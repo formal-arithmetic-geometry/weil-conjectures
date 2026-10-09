@@ -1,13 +1,12 @@
 # Work queue
 
-559 items; claim with `tools/claim.py next <group> [--stage N]`.
+558 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (545)
+## Stage 1: nodes to split (543)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
-| `lem-weil-pbc-exchange-identity-pasting` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
@@ -29,7 +28,6 @@
 | `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-free-cech-complex-exact` | 1004 | none |
 | `lem-weil-pbc-inverse-image-composition` | 1004 | none |
-| `lem-weil-pbc-mate-whisker` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
@@ -552,7 +550,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (14)
+## Stage 2: nodes to state (15)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -563,6 +561,7 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -571,7 +570,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 558 nodes that wait for stage 1, 64 nodes that wait for a statement dependency.
+Not open yet: 556 nodes that wait for stage 1, 65 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

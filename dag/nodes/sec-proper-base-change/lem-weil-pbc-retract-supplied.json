@@ -2,34 +2,164 @@
  "id": "lem-weil-pbc-retract-supplied",
  "kind": "statement",
  "title": "Retract supplied by a proper surjection",
- "statement": "Let $f:X\\to Y$ be proper and surjective, let $I$ be injective on $Y_{\\Et}$,\nand choose a monomorphism $f^{-1}I\\hookrightarrow J$ with $J$ injective on\n$X_{\\Et}$. The adjoint map\n\n$$\n I\\longrightarrow f_*J\n$$\n\nof the direct image adjunction is a monomorphism. Injectivity of $I$ supplies\na retraction $f_*J\\to I$, so $I$ is a direct summand of $f_*J$.",
+ "statement": "Let $f:X\\to Y$ be a surjective morphism of schemes [def-weil-surjective-morphism] (no properness is needed), let $\\Lambda$ be a commutative ring (in the application $\\Lambda=\\mathbf F_r$; $\\Lambda=\\mathbf Z$ gives abelian sheaves), and for a scheme $T$ let $\\Mod(T_{\\Et},\\Lambda)$ be the abelian category of sheaves of modules [def-weil-sheaf-of-modules-category] over the constant sheaf of rings $\\underline\\Lambda$ [def-weil-pbc-constant-sheaf] on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. Let $f^{-1}:\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ be the inverse image [def-weil-pbc-inverse-image] and $f_*:\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Y_{\\Et},\\Lambda)$ the direct image [def-weil-pbc-direct-image], with the adjunction $f^{-1}\\dashv f_*$ of [prop-weil-pbc-inverse-image-modules-exact]. Let $I$ be an injective object [def-sp-injective-resolutions] of $\\Mod(Y_{\\Et},\\Lambda)$, $J$ an object of $\\Mod(X_{\\Et},\\Lambda)$ and $j:f^{-1}I\\to J$ a monomorphism of $\\Mod(X_{\\Et},\\Lambda)$ (in the application $J$ is injective; that is not used here). Then the adjoint map $\\iota=f_*(j)\\circ\\eta_I:I\\to f_*J$ of $j$ ($\\eta$ the unit of the adjunction) is a monomorphism, and there is a morphism $\\rho:f_*J\\to I$ with $\\rho\\circ\\iota=\\mathrm{id}_I$; hence $I$ is a direct summand of $f_*J$: $(\\rho,\\ \\pi):f_*J\\xrightarrow{\\sim}I\\oplus\\ker\\rho$, where $\\pi$ is the map to $\\ker\\rho$ induced by $\\mathrm{id}-\\iota\\rho$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-retract-supplied.md",
   "place": "node lem-weil-pbc-retract-supplied, order 1187"
  },
  "stmt_deps": [
+  "def-weil-surjective-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-sp-injective-resolutions"
  ],
  "proof": [
   {
-   "text": "At a geometric point $\\bar y\\to Y$, choose a geometric point $\\bar x\\to X$\nabove it, possible by surjectivity on geometric points. Composing the stalk\nmap $I_{\\bar y}\\to(f_*J)_{\\bar y}$ with restriction to $J_{\\bar x}$ gives the\ninclusion $I_{\\bar y}=(f^{-1}I)_{\\bar x}\\hookrightarrow J_{\\bar x}$, so the\nstalk map is a monomorphism; by conservativity of geometric stalks, the map\nitself is a monomorphism. Since $I$ is injective, the monomorphism splits,\nwhich is the assertion.",
-   "uses": [],
-   "elementary": null
+   "text": "*The adjoint map and the triangle identity.* By [prop-weil-pbc-inverse-image-modules-exact] (3), $f^{-1}:\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ is left adjoint to $f_*$ [def-weil-pbc-direct-image], [def-weil-pbc-inverse-image]; let $\\eta:\\mathrm{id}\\to f_*f^{-1}$ and $\\varepsilon:f^{-1}f_*\\to\\mathrm{id}$ be unit and counit. The adjoint of $j$ is $\\iota=f_*(j)\\circ\\eta_I$, and the adjunction bijection being inverse to $\\psi\\mapsto\\varepsilon_J\\circ f^{-1}(\\psi)$, we have the triangle identity $j=\\varepsilon_J\\circ f^{-1}(\\iota)$ in $\\Mod(X_{\\Et},\\Lambda)$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\") ('the map $\\mathcal I\\to f_*\\mathcal J$' is the adjoint of $f^{-1}\\mathcal I\\to\\mathcal J$)"
+   }
+  },
+  {
+   "text": "*Passing to abelian sheaves.* In $\\Mod(T_{\\Et},\\Lambda)$ kernels are computed sectionwise [def-weil-sheaf-of-modules-category], as they are in $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]; since a morphism of an abelian category is a monomorphism iff its kernel is zero, a morphism of $\\Mod(T_{\\Et},\\Lambda)$ is a monomorphism iff its underlying morphism of abelian sheaves is one. The underlying abelian sheaf of $f^{-1}G$ is the abelian inverse image of that of $G$ ([prop-weil-pbc-inverse-image-modules-exact] (2)), and that of $f_*F$ is the abelian direct image $W\\mapsto F(W\\times_YX)$ [def-weil-pbc-direct-image]. So, writing the same letters for underlying abelian sheaves and maps, $j:f^{-1}I\\to J$ is a monomorphism of $\\Ab(X_{\\Et})$, the identity $j=\\varepsilon_J\\circ f^{-1}(\\iota)$ of step 1 holds in $\\Ab(X_{\\Et})$ (with $\\varepsilon_J$ now just some morphism $f^{-1}f_*J\\to J$ of abelian sheaves), and it suffices to show that $\\iota:I\\to f_*J$ is a monomorphism of $\\Ab(Y_{\\Et})$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\"); the reduction of injectivity of a map of module sheaves to the underlying abelian sheaves is written out here"
+   }
+  },
+  {
+   "text": "*Geometric points above the points of $Y$.* For every point $x\\in X$ choose an algebraic closure $\\Omega_x$ of the residue field $\\kappa(x)$; the point $x$ with $\\kappa(x)\\to\\Omega_x$ is a geometric point $\\bar x_x:\\operatorname{Spec}\\Omega_x\\to X$ lying over $x$ [def-weil-geometric-point], and $\\bar y_x=f\\circ\\bar x_x$ is a geometric point of $Y$ lying over $f(x)$. The images of the $\\bar x_x$ ($x\\in X$) cover $X$, and since $f$ is surjective [def-weil-surjective-morphism] the images $f(x)$ of the $\\bar y_x$ cover $Y$.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\") ('Since $f$ is surjective ... look at stalks in geometric points'); this is where surjectivity is used, and only surjectivity"
+   }
+  },
+  {
+   "text": "*The stalk computation.* Fix $x\\in X$ and write $\\bar x=\\bar x_x$, $\\bar y=\\bar y_x=f\\circ\\bar x$. By [lemma-openclosed-stalk-upperstar] there are isomorphisms $\\theta_G:(f^{-1}G)_{\\bar x}\\xrightarrow{\\sim}G_{\\bar y}$ of stalks [def-weil-pbc-geometric-stalks], natural in the abelian sheaf $G$ on $Y_{\\Et}$; naturality at $\\iota:I\\to f_*J$ gives $(f^{-1}\\iota)_{\\bar x}=\\theta_{f_*J}^{-1}\\circ\\iota_{\\bar y}\\circ\\theta_I$. Taking stalks at $\\bar x$ (a functor) in the identity $j=\\varepsilon_J\\circ f^{-1}(\\iota)$ of step 2 gives\n$$j_{\\bar x}\\circ\\theta_I^{-1}=\\bigl((\\varepsilon_J)_{\\bar x}\\circ\\theta_{f_*J}^{-1}\\bigr)\\circ\\iota_{\\bar y}:\\ I_{\\bar y}\\to J_{\\bar x}.$$\nThat is: the stalk map $I_{\\bar y}\\to(f_*J)_{\\bar y}$ followed by the map $(f_*J)_{\\bar y}\\to J_{\\bar x}$ is the stalk at $\\bar x$ of the inclusion $f^{-1}I\\to J$, read through $I_{\\bar y}=(f^{-1}I)_{\\bar x}$.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\") ('look at stalks in geometric points', written out); the stalk of an inverse image is the closed node lemma-openclosed-stalk-upperstar"
+   }
+  },
+  {
+   "text": "*Injectivity on stalks, hence $\\iota$ monic.* Since $j$ is a monomorphism of $\\Ab(X_{\\Et})$ and the $\\bar x_x$ cover $X$ (step 3), [lem-weil-pbc-geometric-stalks-detect-mono] (the 'only if' direction) shows that every $j_{\\bar x_x}$ is injective; so the left side of the identity of step 4 is injective, hence so is $\\iota_{\\bar y_x}$ (if $g\\circ h$ is injective, $h$ is injective). Thus $\\iota$ is injective on the stalks at the family $(\\bar y_x)_{x\\in X}$, whose images cover $Y$ (step 3), and [lem-weil-pbc-geometric-stalks-detect-mono] (the 'if' direction) shows that $\\iota$ is a monomorphism of $\\Ab(Y_{\\Et})$, hence of $\\Mod(Y_{\\Et},\\Lambda)$ by step 2.",
+   "uses": [
+    "lem-weil-pbc-geometric-stalks-detect-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Theorem 03PU (label theorem-exactness-stalks: a map of sheaves is injective iff injective on all geometric stalks), used as in Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\")"
+   }
+  },
+  {
+   "text": "*The retraction.* $I$ is injective in $\\Mod(Y_{\\Et},\\Lambda)$ [def-sp-injective-resolutions] and $\\iota:I\\to f_*J$ is a monomorphism (step 5), so $\\mathrm{Hom}(f_*J,I)\\to\\mathrm{Hom}(I,I)$, $\\rho\\mapsto\\rho\\circ\\iota$, is surjective; a preimage $\\rho$ of $\\mathrm{id}_I$ satisfies $\\rho\\circ\\iota=\\mathrm{id}_I$. (In Mathlib: CategoryTheory.Injective.factorThru (𝟙 I) ι with Injective.comp_factorThru.)",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\") ('Since $\\mathcal I$ is injective')"
+   }
+  },
+  {
+   "text": "*Direct summand.* In the abelian category $\\Mod(Y_{\\Et},\\Lambda)$ [def-weil-sheaf-of-modules-category], $e=\\mathrm{id}-\\iota\\rho$ is an endomorphism of $f_*J$ with $\\rho e=\\rho-\\rho\\iota\\rho=0$, so $e$ factors as $f_*J\\xrightarrow{\\pi}\\ker\\rho\\hookrightarrow f_*J$; the maps $(\\rho,\\pi):f_*J\\to I\\oplus\\ker\\rho$ and $(\\iota,\\ \\mathrm{incl}):I\\oplus\\ker\\rho\\to f_*J$ are mutually inverse (using $\\rho\\iota=\\mathrm{id}$, $\\pi\\iota=0$ since $e\\iota=\\iota-\\iota=0$, $\\rho|_{\\ker\\rho}=0$, $\\pi|_{\\ker\\rho}=\\mathrm{id}$ and $\\iota\\rho+e=\\mathrm{id}$). So $I$ is a direct summand of $f_*J$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ ... Since $f$ is surjective the map $\\mathcal I\\to f_*\\mathcal J$ is injective (look at stalks in geometric points). Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$.\") ('we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$')"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-surjective-morphism",
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-retract-supplied.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A4C (label lemma-sandwich), proof, first paragraph; Theorem 03PU (label theorem-exactness-stalks) for step 5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for a surjective morphism of schemes f and an injective sheaf I, the unit map I → f_* f^{-1} I composed into f_* J is a monomorphism; I is a direct summand of f_* J",
+   "results": "CategoryTheory.Sheaf.instMono...LocallySurjectiveInjectiveFactorization (Mathlib.CategoryTheory.Sites.EpiMono); AlgebraicGeometry.IsPreimmersion.instMonoScheme; AlgebraicGeometry.SurjectiveOnStalks.mono_of_injective; CategoryTheory.Sheaf.mono_of_injective, CategoryTheory.Sheaf.mono_of_isLocallyInjective (Mathlib.CategoryTheory.Sites.LocallyInjective); AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomorphism into an injective object splits: injective object is a retract of any object it embeds into",
+   "results": "CategoryTheory.Injective.factors, CategoryTheory.Injective.factorThru, CategoryTheory.InjectivePresentation.mono, CategoryTheory.Injective.ι_mono, CategoryTheory.Injective.instHasLiftingPropertyOfMono (Mathlib.CategoryTheory.Preadditive.Injective.*)",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; Injective.factorThru gives step 6 only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Mono, CategoryTheory.IsSplitMono",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Retract",
+   "results": "CategoryTheory.Retract.injective (Mathlib.CategoryTheory.Preadditive.Injective.Basic): a retract of an injective object is injective",
+   "date": "2026-10-09",
+   "verdict": "no match (converse direction)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Surjective' Mathlib/AlgebraicGeometry/Sites/*.lean; grep -rln 'sheafFiber\\|pointSmallEtale' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -n 'split\\|retract' Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+   "results": "Surjective only in the quasi-compact/fpqc precoverage files (Sites/QuasiCompact.lean, SheafQuasiCompact.lean); geometric points only in AlgebraicGeometry/Sites/EtalePoint.lean (pointSmallEtale, isConservative_pointSmallEtale), no direct image of etale sheaves along a scheme morphism; Injective/Basic.lean:366 Retract.injective",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no inverse/direct image adjunction for etale sheaves along a morphism of schemes stated with this conclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +190,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-retract-supplied",
+  "worker": "stage1",
+  "summary": "Statement fixed: the coefficient category named as in lemma-weil-pbc-prime-proper-base-change (sheaves of modules over the constant sheaf of a commutative ring Λ on the small etale site; Λ=F_r in the application, Λ=Z abelian sheaves); 'proper' dropped (Stacks 0A4C uses only that f is surjective, and the proof uses no more); 'surjective' repointed from def-weil-pbc-scheme-conventions to def-weil-surjective-morphism; the adjoint map named (f_*(j)∘η_I) and the retraction ρ with ρι=id stated, which is what lemma-weil-pbc-cancellation step 2 uses; injectivity of J dropped as unused (any monomorphism f^{-1}I→J). stmt_deps: removed def-weil-pbc-scheme-conventions and def-weil-pbc-geometric-stalks (stalks are not in the statement); added the module category, the adjunction and def-sp-injective-resolutions. Proof written out from Stacks 0A4C, first paragraph ('look at stalks in geometric points') in seven steps: triangle identity of the adjunction (prop-weil-pbc-inverse-image-modules-exact); reduction to underlying abelian sheaves; a covering family of geometric points x̄_x (algebraic closures of residue fields) whose images f∘x̄_x cover Y by surjectivity (no separate 'surjective on geometric points' lemma or 04FN needed); stalk computation by the closed lemma-openclosed-stalk-upperstar; the monomorphism criterion on a covering family of geometric stalks (new Mathlib leaf lem-weil-pbc-geometric-stalks-detect-mono, Stacks 03PU; the closed lemma-weil-pbc-geometric-stalk-conservative covers isomorphisms only and is no longer used); retraction from injectivity of I; direct summand. The existence of an injective J (lem-weil-pbc-module-sheaves-enough-injectives) is used by the citer lemma-weil-pbc-cancellation, not here."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
