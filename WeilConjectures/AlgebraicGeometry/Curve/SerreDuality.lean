@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -296,12 +297,28 @@ section FiniteDuality
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
 
 /-- **Trace identification along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
+`τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Hom(ℳ, Ω¹_{X/k}) ⟶ Hom(f_* ℳ, Ω¹_{ℙ¹_k/k})`,
+`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`. This is the combination of
+the adjunction `Hom(f_* ℳ, 𝒢) ≅ f_* Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f` with
+the trace identification `Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat
+extension of discrete valuation rings), i.e. Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for
+`f`.
+
+(blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
+theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+      ∀ ℳ : X.Modules, ℳ.IsFiniteLocallyFree →
+        IsIso (Modules.pushforwardHomObjComparison f τ ℳ) :=
+  sorry
+
+/-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ f_* Hom_{𝒪_X}(ℳ, Ω¹_{X/k})` as sheaves of modules on `ℙ¹_k`,
-naturally in finite locally free `ℳ`. This is the combination of the adjunction
-`Hom(f_* ℳ, 𝒢) ≅ f_* Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f` with the trace
-identification `Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat extension
-of discrete valuation rings), i.e. Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`.
+naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` of
+`exists_isIso_pushforwardHomObjComparison`.
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
@@ -312,8 +329,17 @@ theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ Projective
           (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials ⋙
-          Modules.pushforward f) :=
-  sorry
+          Modules.pushforward f) := by
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f
+  have (ℳ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ) :
+      IsIso ((Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+        (Modules.pushforwardHomObjComparisonNatTrans f τ)).app ℳ) :=
+    hτ ℳ.unop.obj ℳ.unop.property
+  have := NatIso.isIso_of_isIso_app (Functor.whiskerLeft
+    (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+    (Modules.pushforwardHomObjComparisonNatTrans f τ))
+  exact ⟨(asIso (Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+    (Modules.pushforwardHomObjComparisonNatTrans f τ))).symm⟩
 
 /-- **Duality along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve over `k` and
 `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
