@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-abelian-of-coimage-image-iso",
+ "kind": "statement",
+ "title": "A preadditive category with finite products, kernels and cokernels in which coimage equals image is abelian",
+ "statement": "Let $\\mathcal C$ be a preadditive category (hom-sets abelian groups, composition bilinear) which has finite products, kernels and cokernels. For a morphism $f:A\\to B$ let $\\operatorname{Coim}f=\\operatorname{Coker}(\\operatorname{Ker}f\\to A)$ and $\\operatorname{Im}f=\\operatorname{Ker}(B\\to\\operatorname{Coker}f)$, and let $\\theta_f:\\operatorname{Coim}f\\to\\operatorname{Im}f$ be the canonical morphism (the unique one whose composite with $A\\to\\operatorname{Coim}f$ and $\\operatorname{Im}f\\to B$ is $f$). If $\\theta_f$ is an isomorphism for every morphism $f$ of $\\mathcal C$, then $\\mathcal C$ is an abelian category [def-sp-abelian]: it has a zero object and finite biproducts, and every monomorphism is a kernel and every epimorphism is a cokernel.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 0109 (definition-abelian-category, line 608): Stacks defines an abelian category as an additive category with kernels and cokernels in which Coim -> Im is an isomorphism; this node is the passage from that definition to the definition of def-sp-abelian, as used at the end of the proof of Cohomology of Schemes, Lemma 087X"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preadditive category with kernels cokernels finite products where coimage image comparison is iso is abelian",
+   "results": "Abelian.instIsIsoCoimageImageComparison, Abelian.coimage_image_factorisation, Abelian.coimageIsoImage', Abelian.coimageImageComparison (Mathlib.CategoryTheory.Abelian.Basic/Images)",
+   "date": "2026-10-10",
+   "verdict": "related; the converse construction found by the next search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian category from preadditive category with kernels, cokernels, finite products and coimage-image comparison isomorphism",
+   "results": "CategoryTheory.Abelian.ofCoimageImageComparisonIsIso (Mathlib.CategoryTheory.Abelian.Basic), NonPreadditiveAbelian.abelian, Abelian",
+   "date": "2026-10-10",
+   "verdict": "match: Abelian.ofCoimageImageComparisonIsIso"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.ofCoimageImageComparisonIsIso",
+   "results": "[Preadditive C] [HasKernels C] [HasCokernels C] [∀ {X Y : C} (f : X ⟶ Y), IsIso (Abelian.coimageImageComparison f)] [HasFiniteProducts C] : Abelian C (Mathlib.CategoryTheory.Abelian.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ofCoimageImageComparisonIsIso' Mathlib; sed -n 40,106p Mathlib/CategoryTheory/Abelian/Images.lean",
+   "results": "def at Mathlib/CategoryTheory/Abelian/Basic.lean:260 (tagged @[stacks 0109]); coimage = cokernel (kernel.ι f), image = kernel (cokernel.π f), coimageImageComparison (Images.lean:102, tagged stacks 0107); used in Abelian/FunctorCategory.lean:99, Indization.lean:42, Transfer.lean:105",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.ofCoimageImageComparisonIsIso",
+  "file": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+  "line": 260,
+  "how": "exact: from Preadditive C, HasKernels, HasCokernels, HasFiniteProducts and IsIso (Abelian.coimageImageComparison f) for all f it builds Abelian C; Mathlib's Abelian (Preadditive, HasFiniteProducts, HasKernels, HasCokernels, NormalMonoCategory, NormalEpiCategory) is def-sp-abelian (finite products in a preadditive category are biproducts, the empty one a zero object). Abelian.coimage f = cokernel (kernel.ι f), Abelian.image f = kernel (cokernel.π f) (Mathlib/CategoryTheory/Abelian/Images.lean:47,72). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-modules-abelian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

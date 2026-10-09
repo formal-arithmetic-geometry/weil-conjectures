@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-artin-rees",
+ "kind": "statement",
+ "title": "Artin-Rees lemma",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq R$ an ideal, $M$ a finitely generated $R$-module and $N\\subseteq M$ a submodule. Then there is an integer $c\\ge0$ such that $I^nM\\cap N=I^{n-c}(I^cM\\cap N)$ for all $n\\ge c$; in particular $I^nM\\cap N\\subseteq I^{n-c}N$ for all $n\\ge c$, and the same holds for every $c'\\ge c$ in place of $c$ (since $I^{n-c}N\\subseteq I^{n-c'}N$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00IN (lemma-Artin-Rees, line 12187); Stacks states c > 0, Mathlib gives c >= 0, and c may always be enlarged in the 'in particular' form used by Cohomology of Schemes, proof of Lemma 087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin-Rees lemma: I^n M ∩ N = I^(n-k) (I^k M ∩ N) for finite module over Noetherian ring",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul (Mathlib.RingTheory.Filtration), Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.mem_iInf_smul_pow_eq_bot_iff, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_pow_inf_eq_pow_smul"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin-Rees lemma for Noetherian ring and finitely generated module",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul (Mathlib.RingTheory.Filtration), IsSemiprimaryRing.finite_of_isNoetherian, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.exists_pow_inf_eq_pow_smul"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_inf_eq_pow_smul",
+   "results": "{R M} [CommRing R] [AddCommGroup M] [Module R M] (I : Ideal R) [IsNoetherianRing R] [Module.Finite R M] (N : Submodule R M) : ∃ k, ∀ n ≥ k, I ^ n • ⊤ ⊓ N = I ^ (n - k) • (I ^ k • ⊤ ⊓ N) (Mathlib.RingTheory.Filtration)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Artin-Rees\\|exists_pow_inf_eq_pow_smul' Mathlib",
+   "results": "Mathlib/RingTheory/Filtration.lean:388-391 (docstring **Artin-Rees lemma**, theorem Ideal.exists_pow_inf_eq_pow_smul), used in RingTheory/AdicCompletion/Exactness.lean:94,189; ReesAlgebra.lean:16 comment",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.exists_pow_inf_eq_pow_smul",
+  "file": "Mathlib/RingTheory/Filtration.lean",
+  "line": 389,
+  "how": "exact: for [IsNoetherianRing R] [Module.Finite R M] (N : Submodule R M), ∃ k, ∀ n ≥ k, I ^ n • ⊤ ⊓ N = I ^ (n - k) • (I ^ k • ⊤ ⊓ N); I ^ n • ⊤ is I^nM. The 'in particular' clause is one line: I^(n-k) • (I^k • ⊤ ⊓ N) ≤ I^(n-k) • N by Submodule.smul_mono_right and inf_le_right, and I^(n-c) • N ≤ I^(n-c') • N for c' ≥ c by Ideal.pow_le_pow_right and Submodule.smul_mono_left. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-modules-abelian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
