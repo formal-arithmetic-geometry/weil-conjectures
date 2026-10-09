@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-presheaf-finite-limits-objectwise",
+ "kind": "statement",
+ "title": "Finite limits of A-valued presheaves are objectwise; the inclusion of sheaves preserves them; the sheafification counit is an isomorphism",
+ "statement": "Let $\\mathcal C$ be a category with a Grothendieck topology $J$, let $\\mathcal A$ be a category with finite limits, let $\\mathrm{PSh}(\\mathcal C;\\mathcal A)$ be the category of functors $\\mathcal C^{op}\\to\\mathcal A$ and $\\iota:\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)\\to\\mathrm{PSh}(\\mathcal C;\\mathcal A)$ the inclusion of the full subcategory of sheaves. Then: (1) for every object $V$ of $\\mathcal C$ the evaluation $\\mathrm{ev}_V:G\\mapsto G(V)$ preserves finite limits, and a functor $\\Phi:\\mathcal D\\to\\mathrm{PSh}(\\mathcal C;\\mathcal A)$ from any category $\\mathcal D$ preserves finite limits as soon as $\\mathrm{ev}_V\\circ\\Phi$ does for every object $V$ (finite limits of presheaves are computed objectwise); (2) $\\iota$ preserves finite limits; (3) if a left adjoint $a$ of $\\iota$ (sheafification) exists, then the counit $a\\iota F\\to F$ is an isomorphism for every sheaf $F$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "for abelian sheaves Lemma 03CO (lemma-limits-colimits-abelian-sheaves) and sites.tex Lemma 00W2 (lemma-limit-sheaf: limits of sheaves are computed as presheaves, sectionwise); here for an arbitrary coefficient category A, as needed by [lem-weil-pbc-free-sheaf-flat]"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a functor into a functor category preserves finite limits if each evaluation does; the inclusion of sheaves into presheaves preserves finite limits",
+   "results": "Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits (Mathlib.CategoryTheory.Sites.Limits); Limits.instPreservesFiniteLimitsFunctorObjEvaluationOfHasFiniteLimits (Mathlib.CategoryTheory.Limits.FunctorCategory.Finite); PreservesLimits.preservesFiniteLimits; preservesFiniteLimits_of_createsFiniteLimits_and_hasFiniteLimits",
+   "date": "2026-10-09",
+   "verdict": "match for clauses (1, evaluation preserves) and (2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limits in a functor category are computed pointwise: a functor into C ⥤ D preserves finite limits if each evaluation preserves finite limits",
+   "results": "CategoryTheory.preservesFiniteLimits_of_evaluation (Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory); Limits.instPreservesFiniteLimitsFunctorObjEvaluationOfHasFiniteLimits; Limits.preservesLimits_of_evaluation; Limits.preservesLimitsOfShape_of_evaluation (Mathlib.CategoryTheory.Limits.FunctorCategory.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match for clause (1)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.sheafToPresheaf _ _)",
+   "results": "CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits (Mathlib.CategoryTheory.Sites.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match for clause (2)"
+  },
+  {
+   "tool": "local_search",
+   "query": "preservesFiniteLimits_of_evaluation (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.preservesFiniteLimits_of_evaluation, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean",
+   "date": "2026-10-09",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'preservesFiniteLimits_of_evaluation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory; grep -n 'PreservesFiniteLimits\\|createsLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean; grep -n 'isIso_sheafificationAdjunction_counit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Sheafification.lean; grep -n 'PreservesFiniteLimits ((evaluation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FunctorCategory/Finite.lean",
+   "results": "Limits/Preserves/FunctorCategory.lean:232 preservesFiniteLimits_of_evaluation (F : C ⥤ D ⥤ E) (h : ∀ d, PreservesFiniteLimits (F ⋙ (evaluation D E).obj d)) : PreservesFiniteLimits F; Limits/FunctorCategory/Finite.lean:34 instance [HasFiniteLimits C] (k : K) : PreservesFiniteLimits ((evaluation K C).obj k); Sites/Limits.lean:171 instance [HasFiniteLimits D] : PreservesFiniteLimits (sheafToPresheaf J D); Sites/Sheafification.lean:241 instance isIso_sheafificationAdjunction_counit (P : Sheaf J D) : IsIso ((sheafificationAdjunction J D).counit.app P)",
+   "date": "2026-10-09",
+   "verdict": "match: one Mathlib declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.preservesFiniteLimits_of_evaluation",
+  "file": "Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean",
+  "how": "one Mathlib lemma per clause, with D = Cᵒᵖ, E = A: (1) preservesFiniteLimits_of_evaluation (Limits/Preserves/FunctorCategory.lean:232) and the instance PreservesFiniteLimits ((evaluation K C).obj k) given HasFiniteLimits (Mathlib/CategoryTheory/Limits/FunctorCategory/Finite.lean:34); (2) the instance PreservesFiniteLimits (sheafToPresheaf J D) given HasFiniteLimits D (Mathlib/CategoryTheory/Sites/Limits.lean:171); (3) isIso_sheafificationAdjunction_counit (Mathlib/CategoryTheory/Sites/Sheafification.lean:241), for a left adjoint given by HasSheafify, any other left adjoint being isomorphic to it"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-free-sheaf-flat",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

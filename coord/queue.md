@@ -1,15 +1,14 @@
 # Work queue
 
-560 items; claim with `tools/claim.py next <group> [--stage N]`.
+559 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (546)
+## Stage 1: nodes to split (545)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
 | `lem-weil-pbc-etale-localization-exchange` | 1003 | none |
 | `lem-weil-pbc-exchange-identity-pasting` | 1003 | none |
-| `lem-weil-pbc-first-quadrant-row-collapse` | 1003 | none |
 | `lem-weil-pbc-free-sheaf-flat` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
@@ -572,7 +571,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 559 nodes that wait for stage 1, 56 nodes that wait for a statement dependency.
+Not open yet: 558 nodes that wait for stage 1, 57 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

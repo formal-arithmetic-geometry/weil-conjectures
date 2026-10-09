@@ -10,9 +10,65 @@
  "stmt_deps": [
   "lem-weil-pbc-sheaf-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Step 1 (the functor to be studied). Let $Q$ be the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}P$ of the statement, so $P_X^\\#=aQ$, and let $\\iota$, $a$, $\\otimes_p$ be as in [lem-weil-pbc-sheaf-tensor-closed]. By the definition of the sheaf tensor product in [lem-weil-pbc-sheaf-tensor-closed] (2), $P_X^\\#\\otimes F=a(\\iota aQ\\otimes_p\\iota F)$, and by the strong monoidality of $a$ in the same clause, $a(Q\\otimes_p\\iota F)\\cong aQ\\otimes a(\\iota F)$ naturally in the sheaf $F$. The counit $a\\iota F\\to F$ is an isomorphism, naturally in $F$ ([lem-weil-pbc-presheaf-finite-limits-objectwise] (3)), and $aQ\\otimes-$ is a functor, so $P_X^\\#\\otimes F\\cong a(Q\\otimes_p\\iota F)$ naturally in $F$. Hence $P_X^\\#\\otimes-\\cong a\\circ(Q\\otimes_p-)\\circ\\iota$ as functors $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)\\to\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$, and since a functor naturally isomorphic to one preserving finite limits preserves them, it suffices to show that $a\\circ(Q\\otimes_p-)\\circ\\iota$ preserves finite limits. (In Stacks this is the identification $j_{U!}\\mathcal O_U=(j_{U!}\\mathcal O_U)^\\#$ together with Lemma 0GMW, $\\mathcal F^\\#\\otimes\\mathcal G^\\#=(\\mathcal F\\otimes_p\\mathcal G)^\\#$; for $\\mathcal A$-valued sheaves the strong monoidality of $a$ is the clause of [lem-weil-pbc-sheaf-tensor-closed] that replaces 0GMW.)",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EV (lemma-j-shriek-flat), proof of (2), and Lemma 0GMW (lemma-sheafification-tensor); generalization to A-valued sheaves by the agent"
+   }
+  },
+  {
+   "text": "Step 2 (the values of $Q$ are flat in $\\mathcal A$). Fix an object $V$ of $\\mathcal C$. $\\mathrm{Mor}_{\\mathcal C}(V,X)$ is a set ($\\mathcal C$ is essentially small, in particular locally small), and $\\mathcal A$, being Grothendieck abelian, has coproducts indexed by sets, so $Q(V)=\\coprod_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}P$ exists. $\\mathcal A$ is Grothendieck abelian with a symmetric, hence braided, monoidal closed structure, and each summand $P$ is flat ($P\\otimes-$ preserves finite limits, by hypothesis). By [lem-weil-pbc-flat-coproduct] applied to $\\mathcal B=\\mathcal A$ and the constant family $P$ indexed by $\\mathrm{Mor}_{\\mathcal C}(V,X)$, $Q(V)$ is flat: $Q(V)\\otimes-:\\mathcal A\\to\\mathcal A$ preserves finite limits. (If $\\mathrm{Mor}(V,X)=\\emptyset$ then $Q(V)=0$ and $0\\otimes-\\cong0$, which preserves finite limits; this is the empty case of the same lemma.) Concretely, the argument of that lemma is the one asked for here: since $\\otimes$ is closed, $-\\otimes G$ is a left adjoint and $Q(V)\\otimes G\\cong\\bigoplus_{\\varphi}P\\otimes G$ naturally in $G$; $P\\otimes-$ preserves finite limits; and coproducts in $\\mathcal A$ are exact (AB4, implied by AB5), so a coproduct of left exact functors is left exact. This replaces Stacks' remark that $\\bigoplus_\\varphi\\mathcal O(V)$ is a flat $\\mathcal O(V)$-module (a direct sum of flat modules is flat): in a general $\\mathcal A$ it needs the closed structure and AB4, not only the definition of flatness.",
+   "uses": [
+    "lem-weil-pbc-flat-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EV (lemma-j-shriek-flat), proof of (1): j_{U!}O_U(V) is the direct sum over Mor(V,U) of O(V), a flat O(V)-module (formula from Remark remark-localize-presheaves, line 2288); generalization to A by the agent"
+   }
+  },
+  {
+   "text": "Step 3 (the presheaf tensor product with $Q$ is left exact). Consider $Q\\otimes_p-:\\mathrm{PSh}(\\mathcal C;\\mathcal A)\\to\\mathrm{PSh}(\\mathcal C;\\mathcal A)$, $G\\mapsto Q\\otimes_pG$, with $(Q\\otimes_pG)(V)=Q(V)\\otimes G(V)$ and $(Q\\otimes_pg)_V=Q(V)\\otimes g_V$ for a morphism $g$ of presheaves. For every object $V$, $\\mathrm{ev}_V\\circ(Q\\otimes_p-)=(Q(V)\\otimes-)\\circ\\mathrm{ev}_V$ (by the definition of $\\otimes_p$). $\\mathcal A$ is abelian, so it has finite limits, and $\\mathrm{ev}_V$ preserves finite limits ([lem-weil-pbc-presheaf-finite-limits-objectwise] (1)); $Q(V)\\otimes-$ preserves finite limits (Step 2); so their composite does. By [lem-weil-pbc-presheaf-finite-limits-objectwise] (1) (finite limits of presheaves are objectwise), $Q\\otimes_p-$ preserves finite limits. (This is Stacks 03ES, 'immediate from the definitions', for $\\mathcal A$-valued presheaves.)",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03ES (lemma-flatness-presheaves): a presheaf with flat values is flat, proof 'immediate from the definitions', written out for A-valued presheaves by the agent"
+   }
+  },
+  {
+   "text": "Step 4 (conclusion). $\\iota$ preserves finite limits ([lem-weil-pbc-presheaf-finite-limits-objectwise] (2)); $Q\\otimes_p-$ preserves finite limits (Step 3); $a$ is exact, in particular preserves finite limits ([lem-weil-pbc-sheaf-tensor-closed] (1), which is stated for $\\mathcal A$-valued sheaves on an essentially small site, so the abelian-group node lem-weil-pbc-sheafification-exact is not needed). A composite of functors preserving finite limits preserves finite limits, so $a\\circ(Q\\otimes_p-)\\circ\\iota$ does, and by Step 1 so does $P_X^\\#\\otimes-$. (This is the hint of Stacks 03ET, 'sheafification is exact', for the sheafification of the flat presheaf of Step 3.)",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03ET (lemma-flatness-sheafification), hint 'sheafification is exact', and Lemma 03EV (lemma-j-shriek-flat) proof of (2); generalization to A-valued sheaves by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-coproduct",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EV (lemma-j-shriek-flat) with Lemmas 03ES, 03ET, 0GMW and 03DI, generalized by the agent from O-modules to sheaves with values in a Grothendieck abelian symmetric monoidal closed category"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +97,38 @@
    "results": "freeYoneda only in Generator/Presheaf.lean, Generator/Sheaf.lean, ModuleCat/Presheaf/Generator.lean, ModuleCat/Presheaf/Pullback.lean, Presentable/Presheaf.lean (separating/presentability statements); no flatness statement in those directories; no extension by zero",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensoring with sheafification of a presheaf of flat objects preserves finite limits in the category of sheaves",
+   "results": "Module.Flat.iff_preservesFiniteLimits_tensorLeft; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; preservesLimitsOfShape_presheafToSheaf; HasSheafify.isLeftExact; preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-09",
+   "verdict": "no match (module flatness and exactness of sheafification only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of sheaves with the sheafified free sheaf j_! on a representable object is left exact (flat)",
+   "results": "Module.Flat.iff_preservesFiniteLimits_tensorLeft; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Module.Flat.iff_lTensor_preserves_shortComplex_exact; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeYoneda\"",
+   "results": "PresheafOfModules.freeYoneda, .isSeparating, .isDetecting, .instSmall, freeYonedaCoproduct, fromFreeYonedaCoproduct (Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator): generators only, no flatness",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFiniteLimits (tensorLeft\\|PreservesFiniteLimits (MonoidalCategory.tensorLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n tensorLeft ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/*.lean; source repository: grep -rn 'freeYoneda\\|flat' ~/weil-conjectures-slopmaster2/WeilConjectures/CategoryTheory/GrothendieckAbelian/Monoidal/ and grep -rln freeYoneda ~/weil-conjectures{,-slopmaster2}/WeilConjectures",
+   "results": "Mathlib: only RingTheory/Flat/CategoryTheory.lean:74 (modules); Sites/Point files only filtered-colimit hypotheses on tensorLeft. Source repository: no declaration named freeYoneda in either branch, no flat_freeYoneda; the only related Lean is the sorry theorem GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall (Monoidal/FlatResolution.lean:167-170) and its module docstring (lines 63-71), plus ObjectProperty.flat_iff_preservesFiniteLimits / flat_coproduct (CategoryTheory/Abelian/Flat/Basic.lean:52, 67)",
+   "date": "2026-10-09",
+   "verdict": "no match; no Lean for this node"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +148,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-free-sheaf-flat",
+  "worker": "stage1",
+  "summary": "Proof written in four steps following Stacks 03EV (with 03ES, 03ET, 0GMW), generalized by the agent from O-modules to A-valued sheaves: (1) P_X^# (x) - is a(Q (x)_p iota -) by the strong monoidality of a ([lem-weil-pbc-sheaf-tensor-closed] (2)) and the counit iso; (2) each Q(V) = coproduct over Mor(V,X) of P is flat in A by the closed [lem-weil-pbc-flat-coproduct] (this is where AB4 and closedness enter, the part of the generalization that needs its own argument); (3) Q (x)_p - is left exact on presheaves because finite limits are objectwise; (4) iota left exact, a exact ([lem-weil-pbc-sheaf-tensor-closed] (1), which covers A-valued sheaves, so lem-weil-pbc-sheafification-exact, abelian groups only, is not used). One new Mathlib leaf: lem-weil-pbc-presheaf-finite-limits-objectwise (preservesFiniteLimits_of_evaluation, sheafToPresheaf preserves finite limits, counit iso). No Lean for the node in the source repository (no freeYoneda declaration). Statement kept; its parenthetical identification with j_{X!} (Stacks 03DI) is descriptive and not used by the proof."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
