@@ -172,6 +172,16 @@ structure IsModelFrobenius {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
   /-- `Φ₁` is the base change of the `q`-power Frobenius of `X₀`. -/
   exists_isFrobenius : ∃ F₀ : X₀ ⟶ X₀, F₀.IsFrobenius (Nat.card k) ∧ W.frobenius ≫ p = p ≫ F₀
 
+/-- The geometric base change `X = X₀ ×_{Spec k} s` of a separated scheme of finite type `X₀`
+over `k` is geometric over `s`. -/
+lemma IsModelFrobenius.isGeometric {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)} {p : X ⟶ X₀}
+    (hΦ : W.IsModelFrobenius f₀ σ p) [IsSeparated f₀] [LocallyOfFiniteType f₀]
+    [QuasiCompact f₀] : IsGeometric aX where
+  isSeparated := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+  locallyOfFiniteType := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+  quasiCompact := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
 composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
 `φ_0` is the identification `L(𝟙 X)^* K ≃ K` and `φ_{m+1}` is the composite
