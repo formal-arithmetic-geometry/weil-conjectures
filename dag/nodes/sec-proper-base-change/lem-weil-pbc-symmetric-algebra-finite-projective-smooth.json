@@ -11,9 +11,85 @@
   "lem-weil-pbc-symmetric-algebra-universal-property",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=\\operatorname{Sym}_A(M)$, an $A$-algebra via the structure map $\\alpha:A\\to C$. By [lem-weil-pbc-finite-projective-standard-free-cover] there are $f_1,\\dots,f_r\\in A$ generating the unit ideal such that for every $i$ the localization $M_{f_i}$ is a finite free $A_{f_i}$-module, say $M_{f_i}\\cong A_{f_i}^{\\oplus n_i}$ with $n_i\\ge0$. Write $1=\\sum_i a_if_i$ with $a_i\\in A$ and put $g_i=\\alpha(f_i)\\in C$; applying the ring homomorphism $\\alpha$ gives $1=\\sum_i\\alpha(a_i)g_i$, so $g_1,\\dots,g_r$ generate the unit ideal of $C$.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), (3)$\\Rightarrow$(7) (finite projective $\\Rightarrow$ finite locally free, Definition Tag 00NV)"
+   }
+  },
+  {
+   "text": "Fix $i$ and write $f=f_i$, $g=g_i$, $n=n_i$. The localization $C_g$ of $C$ at the powers of $g=\\alpha(f)$ is, as an $A_f$-algebra, $A_f\\otimes_AC$ [lem-weil-pbc-localization-tensor] (first assertion, with $R=A$ and the $A$-algebra $C$), and by [lem-weil-pbc-symmetric-algebra-base-change] (with $R\\to S$ the map $A\\to A_f$) the $A_f$-algebra $A_f\\otimes_AC$ is isomorphic to $\\operatorname{Sym}_{A_f}(A_f\\otimes_AM)$; finally $A_f\\otimes_AM\\cong M_f$ as $A_f$-modules [lem-weil-pbc-localization-tensor] (second assertion). So $C_g\\cong\\operatorname{Sym}_{A_f}(M_f)$ as $A_f$-algebras, the $A$-algebra structure of $C_g$ being $A\\to C\\to C_g$, which is also $A\\to A_f\\to C_g$ since all the isomorphisms are $A_f$-linear and send $1$ to $1$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-symmetric-algebra-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0C6F (lemma-tensor-algebra-localization: $\\operatorname{Sym}_A(M)_f=\\operatorname{Sym}_{A_f}(M_f)$) and Lemma Tag 00DK (lemma-tensor-localization)"
+   }
+  },
+  {
+   "text": "An $A_f$-linear isomorphism $u:M_f\\to A_f^{\\oplus n}$ induces an isomorphism of $A_f$-algebras $\\operatorname{Sym}_{A_f}(M_f)\\cong\\operatorname{Sym}_{A_f}(A_f^{\\oplus n})$: by the universal property [lem-weil-pbc-symmetric-algebra-universal-property] $\\iota\\circ u$ and $\\iota\\circ u^{-1}$ extend to $A_f$-algebra maps $U$, $U'$ in the two directions, and $U'\\circ U$ and $U\\circ U'$ agree with the identity on the image of $\\iota$, hence are the identity by the uniqueness clause. By [lem-weil-pbc-symmetric-algebra-free-module-polynomial] $\\operatorname{Sym}_{A_f}(A_f^{\\oplus n})\\cong A_f[x_1,\\dots,x_n]$ as $A_f$-algebras. With the previous step, $C_g\\cong A_f[x_1,\\dots,x_n]$ as $A_f$-algebras, hence as $A$-algebras (both via $A\\to A_f$).",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00DM (section-tensor-algebra): $\\operatorname{Sym}$ of a finite free module is a polynomial algebra"
+   }
+  },
+  {
+   "text": "$A\\to C_g$ is smooth. The map $A\\to A$ (the identity) is smooth, being the polynomial ring in $0$ variables [lem-weil-pbc-polynomial-ring-smooth]; hence $A\\to A_f$ is smooth [lem-weil-pbc-smooth-ring-map-principal-localization] (with $R=S=A$ and $g=f$). The map $A_f\\to A_f[x_1,\\dots,x_n]$ is smooth [lem-weil-pbc-polynomial-ring-smooth], so the composite $A\\to A_f\\to A_f[x_1,\\dots,x_n]$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] (2). By the previous step $C_g$ is isomorphic to this $A$-algebra, and smoothness [def-weil-pbc-smooth-ring-map] is invariant under isomorphisms of $A$-algebras (finite presentation, $H_1(L_{-/A})$ and $\\Omega_{-/A}$ are carried along by an isomorphism of $A$-algebras), so $A\\to C_g$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00T6 and Lemma Tag 00T7 (polynomial algebras are standard smooth, hence smooth), Lemma Tag 00T3 (lemma-localize-smooth), Lemma Tag 00TD (lemma-compose-smooth)"
+   }
+  },
+  {
+   "text": "So $A\\to C_{g_i}$ is smooth for every $i$, and $g_1,\\dots,g_r$ generate the unit ideal of $C$ (first step). By [lem-weil-pbc-smooth-ring-map-local-on-cover] (with $R=A$, $S=C$), $A\\to C=\\operatorname{Sym}_A(M)$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Route chosen by the worker instead of the recorded source (More on Algebra, Lemma Tag 07M6, whose proof computes NL_{C/A} via Lemma Tag 07EV): smoothness is local on a standard cover of Spec(Sym_A(M)) (Algebra, Lemma Tag 00TC); a finite projective module is free on a standard cover of Spec(A) (Algebra, Lemma Tag 00NX); Sym commutes with localization (Algebra, Lemma Tag 0C6F); Sym of a finite free module is a polynomial algebra (Algebra, Section Tag 00DM), which is smooth (Algebra, Lemma Tag 00T7). Assembled by the agent; each step cites its Stacks place."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +111,17 @@
    "results": "only RingTheory/Bialgebra/SymmetricAlgebra.lean; no smoothness statement for SymmetricAlgebra (MvPolynomial is formally smooth: instFormallySmoothMvPolynomial, Smooth/Basic.lean line 112, the free case only)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, Algebra.FormallySmooth",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+  "worker": "stage1",
+  "summary": "Statement and stmt_deps checked against Stacks 07M6 (the implication finite projective => smooth) and kept. The recorded source proves it through the naive cotangent complex computation 07EV, which the DAG lacks; the proof was instead written by the local route, entirely from existing nodes of unit sk-thm-p1: free on a standard cover of Spec A (finite-projective-standard-free-cover, 00NX), the images of the f_i generate the unit ideal of Sym, Sym_A(M)_f = Sym_{A_f}(M_f) (localization-tensor, symmetric-algebra-base-change, 0C6F), Sym of a free module = polynomial ring (symmetric-algebra-free-module-polynomial, universal property for transport along M_f = A_f^n), polynomial rings and principal localizations smooth and composites smooth (polynomial-ring-smooth, smooth-ring-map-principal-localization, base-change-composition), and smoothness local on a standard cover of the target (smooth-ring-map-local-on-cover, 00TC). No new nodes. Item Mathlib search completed with a Loogle query (no SymmetricAlgebra smoothness in Mathlib)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps, agent route replacing the cotangent-complex proof of 07M6: standard free cover of a finite projective module (00NX node), Sym commutes with localization/base change, Sym of a free module is a polynomial ring, polynomial rings are smooth and smoothness is stable under principal localization and composition, smooth is local on a standard cover (00TC node). All cited nodes exist with the stated content; 0 new nodes. Correct."
+ }
 }
