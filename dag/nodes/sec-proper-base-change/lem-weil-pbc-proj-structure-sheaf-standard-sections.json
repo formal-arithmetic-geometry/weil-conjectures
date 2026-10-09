@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+ "kind": "statement",
+ "title": "Sections and stalks of the structure sheaf of Proj on standard opens",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. For a point $x\\in X$ with homogeneous prime $\\mathfrak p$ let $S_{(\\mathfrak p)}$ be the ring of fractions $y/h$ with $y,h\\in S$ homogeneous, $\\deg y=\\deg h$, $h\\notin\\mathfrak p$ (a subring of the localization of $S$ at the homogeneous elements outside $\\mathfrak p$). Then: (i) there is a ring isomorphism $\\varphi_x:\\mathcal O_{X,x}\\to S_{(\\mathfrak p)}$; (ii) for $f\\in S$ homogeneous of positive degree there is a ring isomorphism $\\theta_f:S_{(f)}\\to\\Gamma(D_+(f),\\mathcal O_X)$ [def-nagata-homogeneous-localization-degree-zero] such that for every $x\\in D_+(f)$ with prime $\\mathfrak p$ and every $y/f^m\\in S_{(f)}$, $\\varphi_x$ maps the germ of $\\theta_f(y/f^m)$ at $x$ to the fraction $y/f^m\\in S_{(\\mathfrak p)}$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M7 (label lemma-proj-sheaves) (1), (4) for $M=S$, with the stalk computation in the text before Definition 01M6"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of the structure sheaf of Proj over the basic open D_+(f) are isomorphic to the degree zero homogeneous localization at f",
+   "results": "AlgebraicGeometry.Proj.basicOpenIsoAway, Proj.basicOpenIsoAway_hom (= Proj.awayToSection), StructureSheaf.basicOpenIso (Spec), ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, StructureSheaf.structureSheafInType, sectionInBasicOpen",
+   "date": "2026-10-09",
+   "verdict": "match: Proj.basicOpenIsoAway"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.stalkIso",
+   "results": "AlgebraicGeometry.Proj.stalkIso (ProjectiveSpectrum/Basic.lean:355), Proj.localRingHom_comp_stalkIso(_apply) (Functor.lean)",
+   "date": "2026-10-09",
+   "verdict": "match for (i)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'awayToSection\\|basicOpenIsoAway\\|stalkIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/{Basic,Scheme,StructureSheaf}.lean",
+   "results": "Proj.awayToSection (Basic.lean:134), Proj.basicOpenIsoAway (Basic.lean:176, asIso of awayToSection for f ∈ 𝒜 m, 0 < m), ProjectiveSpectrum.Proj.awayToSection_germ (Scheme.lean:611: awayToSection f ≫ germ x = mapId (A_(f) → A_(x)) ≫ (stalkIso' x).inv), Proj.stalkIso' (StructureSheaf.lean:351, stalk ≃+* AtPrime 𝒜 x), Proj.stalkIso (Basic.lean:355), awayMap_awayToSection (Basic.lean:222)",
+   "date": "2026-10-09",
+   "verdict": "match: a few Mathlib declarations, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_germ, AlgebraicGeometry.Proj.stalkIso'",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+  "how": "a few Mathlib declarations, one per clause: (i) Proj.stalkIso' 𝒜 x : stalk ≃+* HomogeneousLocalization.AtPrime 𝒜 x (ProjectiveSpectrum/StructureSheaf.lean:351; scheme form Proj.stalkIso, Basic.lean:355), AtPrime being the degree-zero fractions with denominators outside the prime; (ii) Proj.basicOpenIsoAway 𝒜 f f_deg hm : Away 𝒜 f ≅ Γ(Proj 𝒜, basicOpen 𝒜 f) for f ∈ 𝒜 m, 0 < m (Basic.lean:176), with hom = Proj.awayToSection (basicOpenIsoAway_hom), and ProjectiveSpectrum.Proj.awayToSection_germ (ProjectiveSpectrum/Scheme.lean:611): awayToSection f ≫ germ x = mapId (the map A_(f) → A_(x), y/f^m ↦ y/f^m) ≫ (stalkIso' x).inv. Mathlib's Proj is the scheme of def-nagata-affine-proj."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Proj.stalkIso' (StructureSheaf.lean:354), Proj.basicOpenIsoAway (Basic.lean:176) with ProjectiveSpectrum.Proj.awayToSection_germ (Scheme.lean:611)."
+ }
+}

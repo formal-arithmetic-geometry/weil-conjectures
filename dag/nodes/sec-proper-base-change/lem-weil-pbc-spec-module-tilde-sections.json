@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-spec-module-tilde-sections",
+ "kind": "statement",
+ "title": "The quasi-coherent sheaf of a module on Spec and its sections over principal opens",
+ "statement": "Let $R$ be a commutative ring and $N$ an $R$-module. There is a sheaf of $\\mathcal O_{\\operatorname{Spec}R}$-modules $\\widetilde N$ on $\\operatorname{Spec}R$ [def-weil-sheaf-of-modules-category] with $R$-linear maps $\\tau_U:N\\to\\widetilde N(U)$ for all opens $U$, compatible with restriction ($\\tau_U(n)|_V=\\tau_V(n)$), such that for every $r\\in R$ the map $\\tau_{D(r)}:N\\to\\widetilde N(D(r))$ is a localization of $N$ at the powers of $r$, i.e. induces an isomorphism $N_r\\cong\\widetilde N(D(r))$, $n/r^k\\mapsto r^{-k}\\tau_{D(r)}(n)$; under these isomorphisms the restriction $\\widetilde N(D(r))\\to\\widetilde N(D(rr'))$ is the canonical map $N_r\\to N_{rr'}$ and the $\\mathcal O(D(r))=R_r$-module structure is the natural one. Moreover $\\widetilde N$ is quasi-coherent [pqf-def-coherent].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HV (label lemma-spec-sheaves) (4),(5) and Section 01I6 (label section-quasi-coherent-affine, the paragraph stating that the sheaves $\\widetilde M$ are quasi-coherent)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules tilde M on Spec R, sections over basic open D(f) is the localization M_f",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat, ModuleCat.Tilde.exists_const, Γ_restrict_isLocalization, StructureSheaf.basicOpenIso, ModuleCat.Tilde.localizationToStalk_mk (index of an older Mathlib; in the pinned Mathlib the sheaf is AlgebraicGeometry.tilde)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the quasi-coherent sheaf of modules M tilde on Spec R associated to an R-module M; the map M to sections over D(f) is a localization at f",
+   "results": "ModuleCat.tildeInType, ModuleCat.tilde, ModuleCat.tildeInModuleCat and module-structure instances (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def\\|^theorem\\|^instance\\|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; sed -n 145,182p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "AlgebraicGeometry.tilde (Tilde.lean:150, (Spec R).Modules), tilde.toOpen (:170), tilde.toOpen_res (:175), instance IsLocalizedModule.Away f (toOpen M (basicOpen f)).hom (:179), instance (tilde M).IsQuasicoherent (:465), tilde.functor and tildeEquiv",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.tilde, AlgebraicGeometry.tilde.toOpen, AlgebraicGeometry.tilde.toOpen_res",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "how": "a few Mathlib declarations, one per clause: tilde M : (Spec R).Modules (Tilde.lean:150); tilde.toOpen M U : M ⟶ Γ(tilde M, U) (:170), compatible with restriction (toOpen_res, :175); the instance IsLocalizedModule.Away f (toOpen M (basicOpen f)).hom (:179) says Γ(D(f)) is the localization M_f (so the restriction D(f) → D(ff') is the canonical map M_f → M_{ff'} by uniqueness of maps out of a localization, and the R_f-module structure is the natural one, Scheme.Modules.smul_Spec_def :98); quasi-coherence is the instance (tilde M).IsQuasicoherent (:465), Mathlib's quasi-coherence being local presentations, which agrees with pqf-def-coherent on schemes."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: tilde, tilde.toOpen, toOpen_res, the IsLocalizedModule.Away instance (Modules/Tilde.lean:150-179) and the IsQuasicoherent instance (:465)."
+ }
+}

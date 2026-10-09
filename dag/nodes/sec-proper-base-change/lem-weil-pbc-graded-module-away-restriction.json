@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-graded-module-away-restriction",
+ "kind": "statement",
+ "title": "Restriction maps between degree-zero localizations of a graded module",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ a graded $S$-module ($S_kM_n\\subseteq M_{k+n}$). For $f\\in S$ homogeneous of positive degree let $M_f=M\\otimes_SS_f$ and $M_{(f)}=\\{x/f^m: m\\ge0,\\ x\\in M_{m\\deg f}\\}\\subseteq M_f$, a module over the ring $S_{(f)}$ (the case $M=S$) [def-nagata-homogeneous-localization-degree-zero]. Let $f,g\\in S$ be homogeneous of positive degree with $g^e=af$ for some $e\\ge1$ and some homogeneous $a\\in S$. Then: (i) $f/1$ acts invertibly on $M_g$ (inverse $a/g^e$), so there is a unique $S$-linear map $\\lambda_{f,g}:M_f\\to M_g$ with $\\lambda_{f,g}(x/1)=x/1$ for $x\\in M$; it is given by $x/f^m\\mapsto a^mx/g^{em}$ (hence independent of the choice of $e,a$), it is semilinear over the ring homomorphism $\\lambda^S_{f,g}:S_f\\to S_g$ (the case $M=S$), and it maps $M_{(f)}$ into $M_{(g)}$; write $\\rho_{f,g}:M_{(f)}\\to M_{(g)}$ for the restriction, which is semilinear over the ring homomorphism $\\rho^S_{f,g}:S_{(f)}\\to S_{(g)}$. (ii) $\\rho_{f,f}=\\mathrm{id}$, and if $h\\in S$ is homogeneous of positive degree with $h^{e'}=a'g$ ($e'\\ge1$, $a'$ homogeneous), then $h^{ee'}=(a'^ea)f$ and $\\rho_{g,h}\\circ\\rho_{f,g}=\\rho_{f,h}$. (iii) Put $u=g^{\\deg f}/f^{\\deg g}\\in S_{(f)}$. Then $\\rho^S_{f,g}(u)$ is a unit of $S_{(g)}$, and $\\rho_{f,g}$ induces an isomorphism of modules $\\theta_{f,g}:(M_{(f)})_u\\to M_{(g)}$, $(x/f^m)/u^k\\mapsto\\rho_{f,g}(x/f^m)\\,\\rho^S_{f,g}(u)^{-k}$, semilinear over the ring isomorphism $\\theta^S_{f,g}:(S_{(f)})_u\\to S_{(g)}$ (the case $M=S$). (iv) In the situation of (ii), with $u'=h^{\\deg f}/f^{\\deg h}$, the element $u$ is invertible in $(S_{(f)})_{u'}$ and $\\rho_{g,h}\\circ\\theta_{f,g}=\\theta_{f,h}\\circ\\kappa$, where $\\kappa:(M_{(f)})_u\\to(M_{(f)})_{u'}$ is the canonical localization map.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+ },
+ "stmt_deps": [
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero part of the localization of a graded module at a homogeneous element",
+   "results": "HomogeneousLocalization.fromZeroRingHom, HomogeneousLocalization.awayMap_fromZeroRingHom, HomogeneousLocalization.algebraMap_eq, HomogeneousLocalization.Away, HomogeneousLocalization (all for the ring 𝒜 only)",
+   "date": "2026-10-09",
+   "verdict": "no match: homogeneous localization exists only for graded rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous localization of a graded module, degree zero elements m/f^n with m of degree n deg f",
+   "results": "HomogeneousLocalization.Away.mk, Away.isLocalizationElem, HomogeneousLocalization.mk, NumDenSameDeg, Away.mk_surjective, HomogeneousLocalization.deg (ring only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization, Module",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no declaration involves both HomogeneousLocalization and Module"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'GradedModule|Gmodule|GradedSMul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln LocalizedModule ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/GradedModule.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/GradedMulAction.lean; grep -n 'awayMap\\|Away.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+   "results": "no graded-module localization anywhere; for the ring: HomogeneousLocalization.awayMap (HomogeneousLocalization.lean:825, A_(f) → A_(x) for x = f*g, a/f^i ↦ a g^i/(fg)^i), awayMapₐ (:859), Away.map (:727, functoriality in the graded ring, not a restriction)",
+   "date": "2026-10-09",
+   "verdict": "no match; for M = S and g = f*g' the map ρ is HomogeneousLocalization.awayMap (recorded for stage 2), the general module case and (iii),(iv) are absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

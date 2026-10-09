@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-sheaf-of-modules-from-basis",
+ "kind": "statement",
+ "title": "A sheaf of modules on a basis extends uniquely to a sheaf of modules",
+ "statement": "Let $X$ be a topological space and $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology, such that $U\\cap V\\in\\mathcal B$ for $U,V\\in\\mathcal B$, and such that for every $U\\in\\mathcal B$ every covering of $U$ by members of $\\mathcal B$ can be refined to a finite covering of $U$ by members of $\\mathcal B$. Let $\\mathcal O$ be a sheaf of rings on $X$. Suppose given, for every $U\\in\\mathcal B$, an $\\mathcal O(U)$-module $F(U)$, and for $V\\subseteq U$ in $\\mathcal B$ an additive map $r_{U,V}:F(U)\\to F(V)$ with $r_{U,U}=\\mathrm{id}$, $r_{V,W}r_{U,V}=r_{U,W}$ and $r_{U,V}(as)=a|_V\\,r_{U,V}(s)$ for $a\\in\\mathcal O(U)$, such that for every $U\\in\\mathcal B$ and every finite covering $U=U_1\\cup\\dots\\cup U_n$ with $U_i\\in\\mathcal B$ the sequence $0\\to F(U)\\to\\prod_iF(U_i)\\rightrightarrows\\prod_{i,j}F(U_i\\cap U_j)$ is exact (an element is determined by its restrictions, and a family agreeing on the $U_i\\cap U_j$ comes from an element). Then: (a) there is a sheaf of $\\mathcal O$-modules $F^{ext}$ on $X$ [def-weil-sheaf-of-modules-category] together with $\\mathcal O(U)$-linear isomorphisms $\\iota_U:F^{ext}(U)\\to F(U)$ for $U\\in\\mathcal B$ with $\\iota_V(t|_V)=r_{U,V}(\\iota_U(t))$; (b) for every sheaf of $\\mathcal O$-modules $\\mathcal G$ on $X$ and every family of $\\mathcal O(U)$-linear maps $\\psi_U:F(U)\\to\\mathcal G(U)$, $U\\in\\mathcal B$, compatible with the restrictions, there is a unique morphism of $\\mathcal O$-modules $\\Psi:F^{ext}\\to\\mathcal G$ with $\\Psi_U=\\psi_U\\circ\\iota_U$ for all $U\\in\\mathcal B$, and $\\Psi$ is an isomorphism if all $\\psi_U$ are bijective; in particular $(F^{ext},\\iota)$ is unique up to unique isomorphism; (c) for $x\\in X$ the stalk $F^{ext}_x$ [def-weil-pbc-module-stalk] is the colimit of the $F(U)$ over the members $U\\in\\mathcal B$ containing $x$ (directed by reverse inclusion), via the maps $F(U)\\xrightarrow{\\iota_U^{-1}}F^{ext}(U)\\to F^{ext}_x$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H (label section-bases): Definition 009J (sheaf on a basis), Lemma 009L (label lemma-cofinal-systems-coverings-standard-case: the sheaf condition on a cofinal system of coverings, here the finite ones), Lemma 009M (label lemma-condition-star-sections) and Lemma 009N (label lemma-extend-off-basis) with its proof (sections of the extension are compatible families of germs in the colimit stalks), Definition 009S, Lemma 009T (label lemma-extend-off-basis-module), Lemma 009U (label lemma-restrict-basis-equivalence-modules)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf on a basis of the topology extends uniquely to a sheaf on the whole space",
+   "results": "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing(_types), isSheaf_iff_isSheafUniqueGluing(_types), TopCat.Sheaf.existsUnique_gluing('), isSheaf_of_isSheafUniqueGluing_types (Topology/Sheaves/SheafCondition/UniqueGluing.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the sheaf condition on the whole space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf on a basis of open sets extends to a sheaf on the topological space; comparison lemma for a cover dense subsite",
+   "results": "TopCat.Sheaf.restrictHomEquivHom, TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.hom_ext, TopCat.Opens.coverDense_inducedFunctor (Topology/Sheaves/SheafCondition/Sites.lean), Functor.IsCoverDense.ext, TopCat.Presheaf.generateEquivalenceOpensLe",
+   "date": "2026-10-09",
+   "verdict": "partial: morphisms into a sheaf are determined by and extend from a basis (clause (b) for sheaves valued in one category C); no existence of an extension for sheaves of modules over a sheaf of rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.Opens.IsBasis, TopCat.Sheaf",
+   "results": "TopCat.Sheaf.restrictHomEquivHom, TopCat.Sheaf.isIso_iff_isIso_basis, TopCat.Sheaf.hom_ext, TopCat.Sheaf.extend_hom_app (Sites.lean:240-266)",
+   "date": "2026-10-09",
+   "verdict": "partial, as for leanfinder"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -n 'sheafInducedTopologyEquivOfIsCoverDense\\|IsDenseSubsite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; grep -rn 'IsDenseSubsite\\|IsCoverDense' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat; sed -n 475,513p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean",
+   "results": "Functor.sheafInducedTopologyEquivOfIsCoverDense (InducedTopology.lean:159: Sheaf (G.inducedTopology K) A ≌ Sheaf K A for a cover-dense G, A with limits: the comparison lemma, for sheaves valued in a fixed category A, with the sheaf condition on the basis expressed for the induced Grothendieck topology); TopCat.Opens.coverDense_inducedFunctor (Sites.lean:135); restrictHomEquivHom/isIso_iff_isIso_basis (Sites.lean:240,258); TopCat.Presheaf.exists_mem_germ_eq_of_isBasis, germ_eq_of_isBasis (Stalks.lean:484,492: germs can be taken on basis opens); nothing for SheafOfModules over a dense subsite (no IsDenseSubsite/IsCoverDense in Algebra/Category/ModuleCat)",
+   "date": "2026-10-09",
+   "verdict": "no match as stated: for sheaves of abelian groups (a) is the comparison lemma once the finite-cover sheaf condition is shown to be the induced-topology sheaf condition, (b) is restrictHomEquivHom; the module structure over a sheaf of rings, the finite-cover reduction (009L) and (c) are not in Mathlib in this form"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

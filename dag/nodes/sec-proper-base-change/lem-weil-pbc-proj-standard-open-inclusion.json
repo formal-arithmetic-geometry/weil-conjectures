@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-proj-standard-open-inclusion",
+ "kind": "statement",
+ "title": "Standard opens of Proj: basis, intersections, inclusions and coverings",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj], the set of homogeneous primes $\\mathfrak p\\subseteq S$ with $S_+\\not\\subseteq\\mathfrak p$; for $f\\in S$ homogeneous of positive degree let $D_+(f)=\\{\\mathfrak p\\in X: f\\notin\\mathfrak p\\}$ (a *standard open*), and $S_{(f)}$ the degree-zero part of $S_f$ [def-nagata-homogeneous-localization-degree-zero], with the canonical homeomorphism $D_+(f)\\cong\\operatorname{Spec}S_{(f)}$. Then: (0) the standard opens form a basis of the topology of $X$, and $D_+(f)\\cap D_+(g)=D_+(fg)$ for $f,g$ homogeneous of positive degree; (1) for $f,g$ homogeneous of positive degree, $D_+(g)\\subseteq D_+(f)$ if and only if $g^e=af$ for some $e\\ge1$ and some homogeneous $a\\in S$ (necessarily of degree $e\\deg g-\\deg f$ when $af\\neq0$); in this case $f$ is a unit of $S_g$ and $f^{\\deg g}/g^{\\deg f}$ is a unit of $S_{(g)}$; (2) every open covering of a standard open $D_+(f)$ can be refined to a finite covering $D_+(f)=\\bigcup_{i=1}^nD_+(g_i)$ by standard opens; (3) for $g_1,\\dots,g_n\\in S$ homogeneous of positive degree, $D_+(f)\\subseteq\\bigcup_iD_+(g_i)$ if and only if the elements $g_i^{\\deg f}/f^{\\deg g_i}\\in S_{(f)}$ generate the unit ideal of $S_{(f)}$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section 01M3 (label section-proj), the paragraph before Lemma 01M4 (basis, $D_+(f)\\cap D_+(g)=D_+(fg)$); Lemma 01M4 (label lemma-standard-open) (1)(a),(b), (2), (3) and its proof; Algebra Lemma 00JP (label lemma-topology-proj) for $D_+(f)\\cong\\operatorname{Spec}S_{(f)}$"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if D_+(g) is contained in D_+(f) in projective spectrum then f is invertible in the localization at g",
+   "results": "Proj.basicOpenToSpec, PrimeSpectrum.basicOpen_le_basicOpen_iff_algebraMap_isUnit (Spec only), projIsoSpec, Proj.basicOpenIsoSpec, Proj.awayι_preimage_basicOpen (ProjectiveSpectrum/Basic.lean), Proj.isIso_toSpec",
+   "date": "2026-10-09",
+   "verdict": "no match for (1),(3): only the Spec analogue and the preimage formula (which is lem-weil-pbc-proj-basic-open-intersection); (0) is in Mathlib in pieces (see grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum.basicOpen _ _ ≤ ProjectiveSpectrum.basicOpen _ _",
+   "results": "ProjectiveSpectrum.basicOpen_mul_le_left, basicOpen_mul_le_right (Topology.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match: no criterion for D_+(g) ⊆ D_+(f)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proj of graded ring: D_+(f) contained in union of D_+(g_i) iff g_i^{deg f}/f^{deg g_i} generate the unit ideal of the degree zero localization A_(f)",
+   "results": "Proj.iSup_basicOpen_eq_top, Proj.iSup_basicOpen_eq_top', Proj.openCoverOfISupEqTop, ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff(_of_mem_mul,')",
+   "date": "2026-10-09",
+   "verdict": "no match for (3): only covers of all of Proj by an ideal containing S_+"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -nE 'basicOpen_(mul|pow|mono|le|eq)|isTopologicalBasis|isBasis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/{Topology,Basic}.lean; grep -rn 'basicOpen_le_basicOpen_iff\\|le_basicOpen_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra",
+   "results": "ProjectiveSpectrum.isTopologicalBasis_basic_opens (Topology.lean:391, basis indexed by ALL r : A, not only homogeneous of positive degree), basicOpen_eq_union_of_projection (:376), basicOpen_mul (:361), basicOpen_pow (:373), Proj.isBasis_basicOpen (Basic.lean:79), Proj.basicOpen_mono (Basic.lean:72, f ∣ g → D(g) ≤ D(f): the converse direction of (1) with e = 1); no D_+(g) ≤ D_+(f) criterion, no unit-ideal criterion",
+   "date": "2026-10-09",
+   "verdict": "no match as stated: (0) follows from isTopologicalBasis_basic_opens + basicOpen_eq_union_of_projection + basicOpen_mul after a short argument (a degree-0 or inhomogeneous basic open is a union of positive-degree ones), (1) forward direction and (3) are absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

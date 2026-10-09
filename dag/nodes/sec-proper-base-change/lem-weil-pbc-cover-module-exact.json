@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-cover-module-exact",
+ "kind": "statement",
+ "title": "Exactness of the Cech sequence of a module for a principal open covering",
+ "statement": "Let $R$ be a commutative ring, $f_1,\\dots,f_n\\in R$ elements generating the unit ideal, and $M$ an $R$-module. Then the sequence $0\\to M\\xrightarrow{\\alpha}\\bigoplus_{i=1}^nM_{f_i}\\xrightarrow{\\beta}\\bigoplus_{i,j=1}^nM_{f_if_j}$ is exact, where $\\alpha(m)=(m/1,\\dots,m/1)$ and $\\beta((m_i/f_i^{e_i})_i)=(m_i/f_i^{e_i}-m_j/f_j^{e_j})_{(i,j)}$ (the differences taken in $M_{f_if_j}$ via the canonical maps $M_{f_i}\\to M_{f_if_j}$, $M_{f_j}\\to M_{f_if_j}$). That is: $m\\in M$ with $m/1=0$ in every $M_{f_i}$ is $0$, and every family $(s_i)\\in\\prod_iM_{f_i}$ whose images in $M_{f_if_j}$ agree for all $i,j$ is $(m/1)_i$ for a (unique) $m\\in M$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00EK (label lemma-cover-module) and its proof"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "elements generating the unit ideal, module M injects into product of localizations M_{f_i} and the equalizer sequence is exact",
+   "results": "IsLocalizedModule.map_exact, localizedModuleIsLocalizedModule, injective_of_isLocalization_of_span_eq_top, exact_of_isLocalized_maximal, exact_of_isLocalized_span (RingTheory/LocalProperties/Exactness.lean), isLocalizedModule_iff, span_eq_top_of_isLocalizedModule, IsLocalizedModule.exists_of_eq",
+   "date": "2026-10-09",
+   "verdict": "partial: exactness of a given sequence can be checked after localizing at a spanning set, but the Cech sequence itself is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let f_1,...,f_n generate the unit ideal of R and M an R-module. Compatible elements m_i in M_{f_i} (equal in M_{f_i f_j}) glue to a unique m in M.",
+   "results": "Module.Finite.exists_smul_of_comp_eq_of_isLocalizedModule, Module.FinitePresentation.exists_lift_of_isLocalizedModule, IsLocalizedModule.is_universal, IsLocalizedModule.exists_of_eq, isLocalizedModule_iff, LocalizedModule.lift_unique, ModuleCat.Tilde.isFraction",
+   "date": "2026-10-09",
+   "verdict": "no match for the gluing clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.Away, Ideal.span",
+   "results": "Module.eq_zero_of_isLocalized_span, Module.eq_of_isLocalized_span, Submodule.{eq_bot,eq_top,eq,le,mem}_of_isLocalized{₀,'}_span (RingTheory/LocalProperties/Submodule.lean)",
+   "date": "2026-10-09",
+   "verdict": "partial match: Module.eq_zero_of_isLocalized_span (Submodule.lean:161) is the injectivity of α (exactness at M); no gluing (exactness at the middle term)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Exactness.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Submodule.lean; sed -n 145,182p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "Module.eq_zero_of_isLocalized_span (Submodule.lean:161); AlgebraicGeometry.tilde M (Tilde.lean:150, a sheaf of modules on Spec R), tilde.toOpen (:170) with instance IsLocalizedModule.Away f (toOpen M (basicOpen f)).hom (:179), toOpen_res (:175); PrimeSpectrum.iSup_basicOpen_eq_top_iff (RingTheory/Spectrum/Prime/Topology.lean:620)",
+   "date": "2026-10-09",
+   "verdict": "no match as stated: the gluing clause follows from the sheaf condition of tilde M on the cover Spec R = ⋃ D(f_i) (iSup_basicOpen_eq_top_iff, D(f_i) ⊓ D(f_j) = D(f_i f_j)) transported along the localization identifications of toOpen; that is several steps, not one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
