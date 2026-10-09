@@ -9,18 +9,18 @@ public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
-# Constructible sets of spectral spaces are quasi-compact
+# Intersections of constructible sets of spectral spaces are quasi-compact
 
 In a quasi-compact, quasi-separated, quasi-sober prespectral space `X` (for instance a spectral
-space), every constructible set is quasi-compact. Indeed, constructible sets are closed in the
-constructible topology, which is quasi-compact (`compactSpace_withConstructibleTopology`) and
-finer than the topology of `X`.
+space), every intersection of constructible sets is quasi-compact.
+Indeed, constructible sets are closed in the constructible topology, which is
+quasi-compact (`compactSpace_withConstructibleTopology`) and finer than the topology of `X`.
 
 ## Main statements
 
 - `constructibleTopology_le`: the constructible topology of a prespectral space is finer than
   its topology.
-- `Topology.IsConstructible.isCompact`: constructible sets are quasi-compact.
+- `isCompact_iInter_of_isConstructible`: intersections of constructible sets are quasi-compact.
 -/
 
 @[expose] public section
@@ -50,18 +50,21 @@ lemma Topology.IsConstructible.isClopen_constructibleTopology [CompactSpace X] {
   | union s _ t _ hs ht => exact @IsClopen.union X (constructibleTopology X) _ _ hs ht
   | compl s _ hs => exact @IsClopen.compl X (constructibleTopology X) _ hs
 
-/-- **Constructible sets are quasi-compact** in a quasi-compact, quasi-separated, quasi-sober
-prespectral space: they are closed in the constructible topology, which is quasi-compact and
-finer than the topology of `X`. -/
-lemma Topology.IsConstructible.isCompact [CompactSpace X] [QuasiSober X] [PrespectralSpace X]
-    [QuasiSeparatedSpace X] {s : Set X} (hs : IsConstructible s) : IsCompact s := by
+/-- **Intersections of constructible sets are quasi-compact** in a quasi-compact,
+quasi-separated, quasi-sober prespectral space: they are closed in the constructible topology,
+which is quasi-compact and finer than the topology of `X`. -/
+lemma isCompact_iInter_of_isConstructible [CompactSpace X] [QuasiSober X] [PrespectralSpace X]
+    [QuasiSeparatedSpace X] {ι : Sort*} {s : ι → Set X} (hs : ∀ i, IsConstructible (s i)) :
+    IsCompact (⋂ i, s i) := by
   let φ : WithConstructibleTopology X → X := WithTopology.ofTopology
   have hφ : Continuous φ := by
     refine continuous_def.mpr fun U hU ↦ ?_
     rw [WithConstructibleTopology.isOpen_iff]
     exact constructibleTopology_le U hU
-  have hK : IsClosed (φ ⁻¹' s) := by
+  have hK : IsClosed (φ ⁻¹' ⋂ i, s i) := by
+    rw [Set.preimage_iInter]
+    refine isClosed_iInter fun i ↦ ?_
     rw [WithConstructibleTopology.isClosed_iff]
-    exact hs.isClopen_constructibleTopology.1
+    exact (hs i).isClopen_constructibleTopology.1
   have := hK.isCompact.image hφ
   rwa [Set.image_preimage_eq _ fun x ↦ ⟨WithTopology.toTopology _ x, rfl⟩] at this
