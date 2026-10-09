@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-pushout-cokernel-iso",
+ "kind": "statement",
+ "title": "In a pushout square the cokernels of two parallel sides are isomorphic",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $f:w\\to y$, $g:w\\to x$, $h:y\\to z$, $k:x\\to z$ be morphisms of $\\mathcal A$ with $h\\circ f=k\\circ g$ such that the square is cocartesian, i.e. $(z,h,k)$ is a pushout of $f$ and $g$ [def-weil-pbc-category-colimit]. Let $\\pi_f:y\\to\\operatorname{Coker}(f)$ and $\\pi_k:z\\to\\operatorname{Coker}(k)$ be cokernels. Then the unique morphism $\\theta:\\operatorname{Coker}(f)\\to\\operatorname{Coker}(k)$ with $\\theta\\circ\\pi_f=\\pi_k\\circ h$ (it exists since $\\pi_k\\circ h\\circ f=\\pi_k\\circ k\\circ g=0$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 08N3 (label lemma-cartesian-kernel, line 852), part (2); proof: part (1) written out, (2) 'follows by duality'"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a pushout square the induced map between cokernels of the horizontal maps is an isomorphism",
+   "results": "CategoryTheory.Limits.cokernel.map (Mathlib.CategoryTheory.Limits.Shapes.Kernels), SemiNormedGrp.explicitCokernel.map, Square.IsPushout.isColimitCokernelCofork (Mathlib.Algebra.Homology.Square), IsPushout.exact_shortComplex (Mathlib.CategoryTheory.Abelian.CommSq), IsPushout.isColimitCokernelCofork (Mathlib.Algebra.Homology.CommSq), IsPushout.mk",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; cokernel.map is the induced map whose invertibility is the statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout, CategoryTheory.Limits.cokernel.map",
+   "results": "CategoryTheory.Limits.isIso_cokernel_map_of_isPushout (Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Kernels): [HasZeroMorphisms C] [HasCokernel t] [HasCokernel b] (sq : IsPushout t l r b) : IsIso (cokernel.map t b l r sq.w)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isIso_cokernel_map_of_isPushout\\|cokernel.map.*IsPushout\\|IsPushout.*cokernel' --include=*.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Limits/Shapes/Pullback/IsPullback/Kernels.lean:48 lemma isIso_cokernel_map_of_isPushout; used in Abelian/SerreClass/MorphismProperty.lean:213 (on sq.flip); Algebra/Homology/Square.lean:38 (IsPushout iff cokernel cofork colimit)",
+   "date": "2026-10-10",
+   "verdict": "match: Kernels.lean:48, source read (sed -n 1,52p): the square t:X1->X2, l:X1->X3, r:X2->X4, b:X3->X4 with t>>r = l>>b; cokernel.map t b l r : cokernel t -> cokernel b is the map induced by r"
+  },
+  {
+   "tool": "local_search",
+   "query": "isIso_cokernel_map_of_isPushout (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.Limits.isIso_cokernel_map_of_isPushout in .lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Kernels.lean (index unavailable; name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.isIso_cokernel_map_of_isPushout",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Kernels.lean",
+  "line": 48,
+  "how": "specializes in one line: Mathlib states it for any category with zero morphisms in which the two cokernels exist (an abelian category has zero morphisms and all cokernels); take t=f, l=g, r=h, b=k, sq the pushout square (IsPushout f g h k); then cokernel.map f k g h sq.w : cokernel f -> cokernel k is the morphism theta (cokernel.π f >> theta = h >> cokernel.π k) and is an isomorphism; any other choice of cokernels differs by unique isomorphisms"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-pushout-short-exact-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

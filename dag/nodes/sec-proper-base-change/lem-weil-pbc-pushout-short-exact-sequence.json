@@ -8,11 +8,92 @@
   "place": "Section Tag 010I (section-extensions, line 1260), item (2) after the definition of Ext (line 1349: the pushout E' = A' amalg_A E of an extension via A -> A', a commutative diagram of short exact sequences, 'by Lemma lemma-cartesian-cocartesian'); Lemma Tag 08N4 (lemma-cartesian-cocartesian) part (2) for the monomorphism, Lemma Tag 08N3 (lemma-cartesian-kernel) part (2) for the cokernel, Example Tag 05PJ (example-fibre-product-pushouts) for the pushout; used in derived.tex Lemma Tag 013T, proof Step 1"
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the pushout exists).** By [lem-weil-pbc-abelian-exact-epi-cokernel](d) the abelian category $\\mathcal A$ has pushouts: there are an object $E$ and morphisms $\\iota:I\\to E$, $v:B\\to E$ with $\\iota\\circ u=v\\circ f$ such that any $j':I\\to W$, $k':B\\to W$ with $j'\\circ u=k'\\circ f$ factor as $j'=\\varphi\\circ\\iota$, $k'=\\varphi\\circ v$ for a unique $\\varphi:E\\to W$ (the pushout in the sense of [def-weil-pbc-category-colimit]).",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 010D (lemma-colimit-abelian-category: finite colimits exist) and Section Tag 010I (section-extensions), item (2) after the definition of Ext: E' = A' amalg_A E"
+   }
+  },
+  {
+   "text": "**Step 2 (the pushout as a cokernel).** Let $\\pi:I\\oplus B\\to Q$ be a cokernel of $(u,-f):A\\to I\\oplus B$ (biproducts and cokernels exist in $\\mathcal A$ [def-sp-abelian]), and let $\\iota_Q=\\pi\\circ\\mathrm{in}_I$, $v_Q=\\pi\\circ\\mathrm{in}_B$. Morphisms $\\psi:I\\oplus B\\to W$ correspond bijectively to pairs $(j',k')=(\\psi\\,\\mathrm{in}_I,\\psi\\,\\mathrm{in}_B)$, and $\\psi\\circ(u,-f)=j'u-k'f$; so pairs with $j'u=k'f$ are exactly the $\\psi$ killing $(u,-f)$, and these factor uniquely through $\\pi$. Hence $(Q,\\iota_Q,v_Q)$ is a pushout of $u$ and $f$, and $E\\cong\\operatorname{Coker}((u,-f))$ compatibly with $\\iota$, $v$ (uniqueness of colimits up to unique isomorphism [def-weil-pbc-category-colimit]). This identification is the parenthetical claim of the statement and is not used below.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Example Tag 05PJ (example-fibre-product-pushouts, line 700), part (2)"
+   }
+  },
+  {
+   "text": "**Step 3 (the morphism $p$).** Since the first sequence is a complex, $g\\circ f=0=0\\circ u$; so the pair $j'=0:I\\to C$, $k'=g:B\\to C$ satisfies $j'u=k'f$, and by the universal property of Step 1 there is a unique $p:E\\to C$ with $p\\circ\\iota=0$ and $p\\circ v=g$. This is the existence and uniqueness of $p$ claimed.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section Tag 010I (section-extensions), item (2): the commutative diagram of short exact sequences with right vertical map id_B"
+   }
+  },
+  {
+   "text": "**Step 4 ($\\iota$ is a monomorphism).** $f:A\\to B$ is a monomorphism (the sequence $0\\to A\\to B\\to C\\to0$ is short exact) and $(E,\\iota,v)$ is the pushout of $f$ and $u$; by [lem-weil-pbc-abelian-pushout-mono] applied with $a=f:G=A\\to G'=B$, $b=u:A\\to F=I$, the canonical map $a'=\\iota:I\\to E$ is a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-abelian-pushout-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 08N4 (lemma-cartesian-cocartesian, line 887), part (2), with g := f monic and h := iota; also Lemma Tag 05PK (lemma-epimorphism-universal-abelian-category), part (2)"
+   }
+  },
+  {
+   "text": "**Step 5 ($p$ is a cokernel of $\\iota$).** The square with $w=A$, $y=B$, $x=I$, $z=E$, top $f:A\\to B$, left $u:A\\to I$, right $v:B\\to E$, bottom $\\iota:I\\to E$ commutes ($v f=\\iota u$) and is cocartesian (Step 1). Since $0\\to A\\xrightarrow fB\\xrightarrow gC\\to0$ is short exact, $g$ is a cokernel of $f$ [lem-weil-pbc-abelian-exact-epi-cokernel](a) ($g$ is an epimorphism and the sequence is exact at $B$). Let $c:E\\to K$ be a cokernel of $\\iota$. By [lem-weil-pbc-pushout-cokernel-iso] (with $\\pi_f=g$, $\\pi_k=c$, $h=v$, $k=\\iota$) the morphism $\\theta:C\\to K$ with $\\theta\\circ g=c\\circ v$ is an isomorphism. Put $p'=\\theta^{-1}\\circ c:E\\to C$. Then $p'\\circ\\iota=0$ and $p'\\circ v=\\theta^{-1}\\theta g=g$, so $p'=p$ by the uniqueness in Step 3. Thus $p$ is the composite of the cokernel $c$ of $\\iota$ with an isomorphism, hence itself a cokernel of $\\iota$.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-pushout-cokernel-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 08N3 (lemma-cartesian-kernel, line 852), part (2): Coker(f) -> Coker(k) induced by h is an isomorphism for a cocartesian square"
+   }
+  },
+  {
+   "text": "**Step 6 (conclusion).** $\\iota$ is a monomorphism (Step 4) and $p$ is a cokernel of $\\iota$ (Step 5), so $0\\to I\\xrightarrow{\\iota}E\\xrightarrow{p}C\\to0$ is a short exact sequence by [lem-weil-pbc-abelian-exact-epi-cokernel](c). The squares $\\iota\\circ u=v\\circ f$ (Step 1) and $p\\circ v=g=\\mathrm{id}_C\\circ g$ (Step 3) commute, so $(u,v,\\mathrm{id}_C)$ is a morphism of short exact sequences.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section Tag 010I (section-extensions), item (2) after the definition of Ext ('By Lemma lemma-cartesian-cocartesian we have the following commutative diagram of short exact sequences')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian",
+  "lem-weil-pbc-abelian-pushout-mono",
+  "lem-weil-pbc-pushout-cokernel-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Tag 010I (section-extensions), item (2) after the definition of Ext; Lemmas Tag 08N4 (lemma-cartesian-cocartesian) (2) and Tag 08N3 (lemma-cartesian-kernel) (2); Example Tag 05PJ (example-fibre-product-pushouts) (2). Stacks gives only 'By Lemma lemma-cartesian-cocartesian'; the identification of the cokernel (08N3) and the construction of p are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +125,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +145,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-pushout-short-exact-sequence",
+  "worker": "stage1",
+  "summary": "Checked the Stacks places: 010I = section-extensions (item (2) after the definition of Ext, which cites only Lemma 08N4 lemma-cartesian-cocartesian), 08N4 = lemma-cartesian-cocartesian (part (2): cocartesian + monic vertical side gives monic opposite side), 08N3 = lemma-cartesian-kernel (part (2): cocartesian square gives Coker(f) = Coker(k) via h), 05PJ = example-fibre-product-pushouts (part (2): pushout as Coker((a,-b))), all verified in tags/tags. Proof in six steps: pushout exists (Mathlib leaf lem-weil-pbc-abelian-exact-epi-cokernel (d)); its description as Coker((u,-f)) (elementary, not used later); p from the universal property (elementary); iota monic (Mathlib leaf lem-weil-pbc-abelian-pushout-mono); p is a cokernel of iota via the new Mathlib leaf lem-weil-pbc-pushout-cokernel-iso (08N3 (2), Mathlib CategoryTheory.Limits.isIso_cokernel_map_of_isPushout) and uniqueness of p; short exactness by lem-weil-pbc-abelian-exact-epi-cokernel (c). Added def-weil-pbc-category-colimit to stmt_deps (the statement uses the pushout). Every branch now ends in Mathlib leaves (or def-sp-abelian)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along Homology 010I(2)/08N4/08N3/05PJ: pushouts exist (abelian leaf), E = Coker((u,-f)) (elementary), p from the universal property, iota mono (pushout-mono leaf, 08N4(2)), p a cokernel of iota via the new Mathlib leaf for 08N3(2) (isIso_cokernel_map_of_isPushout, IsPullback/Kernels.lean:48, verified), short exactness. Stage-3 note confirmed by the worker: lem-weil-pbc-injective-resolution-ses step 1 justifies 'monic' wrongly and asserts a non-canonical direct sum; this item covers only its first claim."
+ }
 }
