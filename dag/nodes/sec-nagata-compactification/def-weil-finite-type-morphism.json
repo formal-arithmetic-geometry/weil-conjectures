@@ -13,13 +13,50 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "results": "FiniteType.lean:43 class LocallyOfFiniteType (f : X ⟶ Y): for all affine opens U ⊆ Y, V ⊆ X with V ≤ f⁻¹ᵁ U, f.appLE U V e is RingHom.FiniteType; module docstring (lines 18-21): 'A morphism of schemes is of finite type if it is both locally of finite type and quasi-compact'. QuasiCompact.lean:43 class QuasiCompact (f : X ⟶ Y): preimage of every compact open is compact; quasiCompact_iff_forall_isAffineOpen (line 97): equivalently the preimage of every affine open is compact",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class FiniteType\\|def FiniteType\\|LocallyOfFiniteType ⊓' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no bundled scheme-level FiniteType class or MorphismProperty; Mathlib writes finite type as the pair of instances [LocallyOfFiniteType f] [QuasiCompact f] (e.g. ZariskisMainTheorem.lean:120, 207, 324)",
+   "date": "2026-10-09",
+   "verdict": "match: finite type is the conjunction LocallyOfFiniteType f ∧ QuasiCompact f, one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iff_of_source_openCover\\|iff_appLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'finiteType_isLocal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/FiniteType.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "results": "HasRingHomProperty.iff_of_source_openCover (RingHomProperties.lean:350): for Y affine and an affine open cover 𝒰 of X, P f ↔ every Γ(Y) → Γ(𝒰.X i) has Q; iff_appLE (:317); RingHom.finiteType_isLocal (RingHom/FiniteType.lean:88), used for the HasRingHomProperty @LocallyOfFiniteType RingHom.FiniteType instance (FiniteType.lean:55). This is Stacks 01T2 and identifies the node's cover formulation with Mathlib's all-affine-pairs formulation",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^class Algebra.FiniteType\\|^def FiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FiniteType.lean; grep -n '^def IsCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Defs/Filter.lean",
+   "results": "Algebra.FiniteType (RingTheory/FiniteType.lean:39), RingHom.FiniteType (:217); IsCompact (Topology/Defs/Filter.lean:276): the two auxiliary notions (finitely generated algebra, quasi-compact set) used in the statement",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.QuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "how": "specializes in one line: locally of finite type is `LocallyOfFiniteType f` (FiniteType.lean:43; Mathlib's all-affine-pairs condition is equivalent to the node's cover condition by HasRingHomProperty.iff_of_source_openCover, RingHomProperties.lean:350, = Stacks 01T2), quasi-compact is `QuasiCompact f` (QuasiCompact.lean:43, affine form quasiCompact_iff_forall_isAffineOpen :97), of finite type is `LocallyOfFiniteType f ∧ QuasiCompact f` (Mathlib has no bundled name; FiniteType.lean module docstring defines it so); for a $K$-scheme $X$ (`[X.Over (Spec K)]`), finite type is that of `X ↘ Spec K`. The 'equivalently, finite cover' clause: a quasi-compact $f^{-1}(V)$ admits a finite subcover, and a finite union of affines is quasi-compact"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -36,5 +73,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-finite-type-morphism",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks morphisms.tex Definition 29.15.1 (tag 01T1) and Lemma 29.15.2 (tag 01T2) and schemes.tex definition-quasi-compact (tag 01K3) and lemma-quasi-compact-affine (tag 01K4) (quasi-compact, affine form): it is correct (the cover formulation of 'locally of finite type' is 01T2 (4)⇔(1), taking the cover of Y by all affine opens); statement kept unchanged. Named the notions it is built from as statement dependencies: schemes and morphisms (def-pc-scheme), affine opens Spec A (def-weil-affine-spectrum), structure morphism of a scheme over a field (def-weil-scheme-over-base); 'finitely generated algebra' and 'quasi-compact' are the Mathlib notions Algebra.FiniteType and IsCompact and get no node of their own (as in def-sbc-locally-finite-presentation). The node is a Mathlib leaf: LocallyOfFiniteType and QuasiCompact exist; Mathlib has no bundled finite-type class, finite type is their conjunction (one line). No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; Mathlib leaf (LocallyOfFiniteType + QuasiCompact; the cover form of the node agrees with Mathlib by Stacks 01T2)"
  }
 }
