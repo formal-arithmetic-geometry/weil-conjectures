@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-right-derived-universal-delta-functor",
+ "kind": "statement",
+ "title": "Right derived functors form a universal delta-functor",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, $\\mathcal B$ an abelian category [def-sp-abelian], $v:\\mathcal A\\to\\mathcal B$ a left exact additive functor and $R^nv$ ($n\\ge0$) its right derived functors computed by injective resolutions [def-sp-left-exact-additive], [def-sp-injective-resolutions]. A *$\\delta$-functor* from $\\mathcal A$ to $\\mathcal B$ (Stacks Homology, Definition 010Q) is a family $(G^n)_{n\\ge0}$ of additive functors $\\mathcal A\\to\\mathcal B$ together with, for every short exact sequence $0\\to A\\to B\\to C\\to0$ of $\\mathcal A$, morphisms $\\delta^n_G:G^n(C)\\to G^{n+1}(A)$ such that $0\\to G^0(A)\\to G^0(B)\\to G^0(C)\\xrightarrow{\\delta^0_G}G^1(A)\\to\\cdots$ is exact and such that for every morphism of short exact sequences $(a,b,c)$ from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$ one has $G^{n+1}(a)\\circ\\delta^n_G=\\delta'^n_G\\circ G^n(c)$; a morphism of $\\delta$-functors is a family of natural transformations $t^n:G^n\\to H^n$ with $t^{n+1}\\circ\\delta_G=\\delta_H\\circ t^n$; a $\\delta$-functor $G$ is *universal* (Homology, Definition 010S) if for every $\\delta$-functor $H$ and every natural transformation $t:G^0\\to H^0$ there is a unique morphism of $\\delta$-functors $(t^n)$ with $t^0=t$. Then there are morphisms $\\delta^n:R^nv(C)\\to R^{n+1}v(A)$, one for each short exact sequence, making $(R^nv,\\delta)$ a $\\delta$-functor, and this $\\delta$-functor is universal; moreover $R^0v\\cong v$ naturally (Stacks Derived Categories, Lemma 015B (2), (4), and Lemma 05TE; Homology, Lemma 010T: a $\\delta$-functor $G$ such that for every $n>0$ and every object $A$ there is a monomorphism $A\\to B$ with $G^n(A)\\to G^n(B)$ zero is universal).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015B (lemma-higher-derived-functors, line 7048) items (2) and (4), whose proof of (4) cites Lemma Tag 05TE (lemma-right-derived-delta-functor); homology.tex Definitions 010Q, 010S and Lemma Tag 010T (lemma-efface-implies-universal)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functors form a universal delta functor",
+   "results": "Functor.IsRightDerivedFunctor, Functor.totalRightDerived (Mathlib.CategoryTheory.Functor.Derived.RightDerived), Functor.rightDerived, Functor.rightDerivedToHomotopyCategory (Mathlib.CategoryTheory.Abelian.RightDerived), Functor.totalLeftDerived",
+   "date": "2026-10-10",
+   "verdict": "no match: universality of derived functors in the Kan-extension sense (IsRightDerivedFunctor) is a different statement; no delta-functor notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "delta functor universal: right derived functors are universal cohomological delta functor, effaceable",
+   "results": "Functor.mapDerivedCategoryFactors, Functor.rightDerived, Functor.isZero_rightDerived_obj_injective_succ (Mathlib.CategoryTheory.Abelian.RightDerived), instLiftingCochainComplex... (DerivedCategory.ExactFunctor)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DeltaFunctor\\|δ-functor\\|delta functor\\|ffaceable' Mathlib; grep -rn 'rightDerived.*δ\\|δ.*rightDerived' Mathlib",
+   "results": "only the comment Mathlib/CategoryTheory/Monoidal/Tor.lean:22 ('Possibly it's best to axiomatize delta functors'); no connecting morphism for Functor.rightDerived",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no delta-functors; unsplit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-sites-and-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

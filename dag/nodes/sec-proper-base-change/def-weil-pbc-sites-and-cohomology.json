@@ -2,18 +2,155 @@
  "id": "def-weil-pbc-sites-and-cohomology",
  "kind": "definition",
  "title": "Sites, morphisms of sites and cohomology on an object of a site",
- "statement": "(1) A *site* $\\mathcal C$ and its category $\\textit{Ab}(\\mathcal C)$ of abelian sheaves are as in [lem-weil-pbc-site-sheaves-enough-injectives] (Stacks Sites, Definition 00VH). (2) *Cohomology over an object.* For $U\\in\\operatorname{Ob}(\\mathcal C)$ and $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$ choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ in $\\textit{Ab}(\\mathcal C)$ (one exists by [lem-weil-pbc-site-sheaves-enough-injectives]) and put $H^p(U,\\mathcal F)=H^p(\\Gamma(U,\\mathcal I^\\bullet))$, $\\Gamma(U,\\mathcal G)=\\mathcal G(U)$; these are the right derived functors of the left exact functor $\\mathcal F\\mapsto\\mathcal F(U)$, independent of the resolution up to canonical isomorphism, and form a universal $\\delta$-functor (Stacks Cohomology on Sites, Section 01FT). (3) *Continuous functors and morphisms of sites.* A functor $u:\\mathcal C\\to\\mathcal D$ between sites is *continuous* if for every covering $\\{V_t\\to V\\}$ of $\\mathcal C$ the family $\\{u(V_t)\\to u(V)\\}$ is a covering of $\\mathcal D$ and for every morphism $T\\to V$ the morphisms $u(V_t\\times_VT)\\to u(V_t)\\times_{u(V)}u(T)$ are isomorphisms (Sites, Definition 00WV). Then $u^s\\mathcal G=\\mathcal G\\circ u$ sends sheaves on $\\mathcal D$ to sheaves on $\\mathcal C$, and it has a left adjoint $u_s$, the sheafification [def-weil-pbc-sheafification] of the presheaf $u_p\\mathcal F(W)=\\varinjlim_{(V,\\,W\\to u(V))}\\mathcal F(V)$. A *morphism of sites* $f:\\mathcal D\\to\\mathcal C$ is given by a continuous functor $u:\\mathcal C\\to\\mathcal D$ such that $u_s$ is exact; then $f_*=u^s$ and $f^{-1}=u_s$ (left adjoint of $f_*$), on sheaves of sets and on abelian sheaves (Sites, Definition 00X1). The composite of the morphisms of sites given by $u:\\mathcal C\\to\\mathcal D$ and $v:\\mathcal D\\to\\mathcal E$ is the morphism given by $v\\circ u$ (Sites, Lemma 03CB).",
+ "statement": "(1) *Sites and abelian sheaves.* A *site* $\\mathcal C$ is a category whose objects and morphisms form sets, together with a set $\\operatorname{Cov}(\\mathcal C)$ of families of morphisms with fixed target $\\{U_i\\to U\\}_{i\\in I}$, the *coverings*, such that (i) if $V\\to U$ is an isomorphism then $\\{V\\to U\\}$ is a covering; (ii) if $\\{U_i\\to U\\}_{i\\in I}$ is a covering and $\\{V_{ij}\\to U_i\\}_{j\\in J_i}$ is a covering for every $i$, then $\\{V_{ij}\\to U\\}_{i\\in I,j\\in J_i}$ is a covering; (iii) if $\\{U_i\\to U\\}_{i\\in I}$ is a covering and $V\\to U$ is a morphism, then the fibre products $U_i\\times_UV$ exist and $\\{U_i\\times_UV\\to V\\}_{i\\in I}$ is a covering (Stacks Sites, Definition 00VH; the same notion as in [lem-weil-pbc-site-sheaves-enough-injectives]). A *sheaf of sets* (resp. *abelian sheaf*) on $\\mathcal C$ is a functor $\\mathcal F:\\mathcal C^{op}\\to$ sets (resp. abelian groups) such that for every covering $\\{U_i\\to U\\}_{i\\in I}$ the diagram $\\mathcal F(U)\\to\\prod_i\\mathcal F(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(U_i\\times_UU_j)$ is an equalizer (Sites, Definitions 00VM, 00VR; as in [lem-weil-pbc-sheaf-algebraic-structures-objects]); equivalently, for abelian sheaves, a presheaf of abelian groups whose underlying presheaf of sets is a sheaf [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets]. $\\Sh(\\mathcal C)$ and $\\textit{Ab}(\\mathcal C)$ are the full subcategories of the presheaf categories (morphisms the natural transformations); $\\textit{Ab}(\\mathcal C)$ is an abelian category with enough injectives [lem-weil-pbc-site-sheaves-enough-injectives]. (2) *Cohomology over an object* (Stacks Cohomology on Sites, Section 01FT). For $U\\in\\operatorname{Ob}(\\mathcal C)$ let $\\Gamma(U,-):\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}$, $\\mathcal F\\mapsto\\mathcal F(U)$, $\\varphi\\mapsto\\varphi_U$; it is additive and left exact [def-sp-left-exact-additive]. The $p$-th cohomology group of $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$ over $U$ is $H^p(U,\\mathcal F)=R^p\\Gamma(U,-)(\\mathcal F)$ ($p\\ge0$), the right derived functors of $\\Gamma(U,-)$ [def-sp-left-exact-additive]: for an injective resolution [def-sp-injective-resolutions] $\\mathcal F\\to\\mathcal I^\\bullet$ in $\\textit{Ab}(\\mathcal C)$ with $\\mathcal I^q=0$ for $q<0$, $H^p(U,\\mathcal F)=H^p(\\Gamma(U,\\mathcal I^\\bullet))$. These groups are independent of the resolution up to canonical isomorphism (for two resolutions the canonical isomorphism is $H^p(\\Gamma(U,\\varphi))$ for any morphism of complexes $\\varphi$ over $\\mathrm{id}_{\\mathcal F}$), functorial in $\\mathcal F$, with $H^0(U,\\mathcal F)=\\mathcal F(U)$ canonically and $H^p(U,\\mathcal I)=0$ for $\\mathcal I$ injective and $p>0$; with the connecting morphisms of short exact sequences they form a universal $\\delta$-functor $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}$ [lem-weil-pbc-right-derived-universal-delta-functor]. (3) *Continuous functors and morphisms of sites.* A functor $u:\\mathcal C\\to\\mathcal D$ between sites is *continuous* if for every covering $\\{V_i\\to V\\}_{i\\in I}$ of $\\mathcal C$ (a) $\\{u(V_i)\\to u(V)\\}_{i\\in I}$ is a covering of $\\mathcal D$ and (b) for every morphism $T\\to V$ of $\\mathcal C$ the canonical morphism $u(T\\times_VV_i)\\to u(T)\\times_{u(V)}u(V_i)$ is an isomorphism (Sites, Definition 00WV). Then $u^s\\mathcal G=\\mathcal G\\circ u$ ($V\\mapsto\\mathcal G(u(V))$) is a functor from sheaves of sets (resp. abelian sheaves) on $\\mathcal D$ to those on $\\mathcal C$ [lem-weil-pbc-site-continuous-pushforward-sheaf], and $u_s\\mathcal F=(u_p\\mathcal F)^\\#$, the sheafification [def-weil-pbc-sheafification] of the presheaf $u_p\\mathcal F(W)=\\varinjlim_{(V,\\,\\phi:W\\to u(V))}\\mathcal F(V)$ (colimit over the opposite of the category of pairs $(V,\\phi)$, taken in sets, resp. in abelian groups), is a left adjoint of $u^s$ on sheaves of sets, resp. on abelian sheaves [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (Sites, Lemmas 00WW, 00WX). A *morphism of sites* $f:\\mathcal D\\to\\mathcal C$ is given by a continuous functor $u:\\mathcal C\\to\\mathcal D$ such that $u_s:\\Sh(\\mathcal C)\\to\\Sh(\\mathcal D)$ is exact, i.e. commutes with finite limits and finite colimits (Sites, Definition 00X1; Categories, Definition 0034); one writes $f_*=u^s$ and $f^{-1}=u_s$, on sheaves of sets and on abelian sheaves, with $f^{-1}\\dashv f_*$. For a morphism of sites the abelian $f^{-1}\\mathcal G$ has as underlying sheaf of sets the $f^{-1}$ of the underlying sheaf of sets of $\\mathcal G$, with the group law $f^{-1}(+)$, and the abelian unit $\\mathcal G\\to f_*f^{-1}\\mathcal G$ is the unit on underlying sheaves of sets (Sites, Section 00YR, Proposition 00YV(2)). (4) *Composition.* If $f:\\mathcal C_1\\to\\mathcal C_2$ and $g:\\mathcal C_2\\to\\mathcal C_3$ are morphisms of sites given by $u:\\mathcal C_2\\to\\mathcal C_1$ and $v:\\mathcal C_3\\to\\mathcal C_2$, the composite $g\\circ f:\\mathcal C_1\\to\\mathcal C_3$ is the morphism of sites given by $u\\circ v$ (Sites, Definition 03CC; that $u\\circ v$ defines a morphism of sites, with $(g\\circ f)_*=g_*f_*$ and $(g\\circ f)^{-1}\\cong f^{-1}g^{-1}$, is Lemma 03CB, [lem-weil-pbc-site-morphism-composition]).",
  "source": {
   "document": "literature/stacks-project/sites.tex",
-  "place": "Definitions Tag 00VH (definition-site), Tag 00WV (definition-continuous), Tag 00X1 (definition-morphism-sites), Lemma Tag 03CB (lemma-composition-morphisms-sites); sites-cohomology.tex Section Tag 01FT (section-cohomology-sheaves, equation cohomology-object-site)"
+  "place": "Definitions Tag 00VH (definition-site, line 679), 00VM/00VR (sheaves), 00WV (definition-continuous, line 2524), Lemmas 00WW (line 2548) and 00WX (line 2579), Definition 00X1 (definition-morphism-sites, line 2687), Lemma 03CB and Definition 03CC (line 2764 ff.), Section 00YR with Proposition 00YV (line 10473); sites-cohomology.tex Section Tag 01FT (section-cohomology-sheaves, equation cohomology-object-site)"
  },
  "stmt_deps": [
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-site-morphism-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Abelian sheaves.* A sheaf of abelian groups on $\\mathcal C$ is a functor $\\mathcal C^{op}\\to\\textit{Ab}$ satisfying the equalizer condition for every covering, morphisms the natural transformations [lem-weil-pbc-sheaf-algebraic-structures-objects]; the equalizer condition in abelian groups holds if and only if it holds for the underlying sets [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets], which gives the 'equivalently' of (1). The category $\\textit{Ab}(\\mathcal C)$ is abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives] (Stacks Injectives, Theorem 01DP), whose site and sheaves are those of (1).",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT, first sentences ('We know that the category of abelian sheaves on C has enough injectives, see Injectives, Theorem 01DP')"
+   }
+  },
+  {
+   "text": "*$\\Gamma(U,-)$ is additive and left exact.* The group structure on $\\operatorname{Hom}_{\\textit{Ab}(\\mathcal C)}(\\mathcal F,\\mathcal G)$ is the sectionwise addition of natural transformations, so $\\varphi\\mapsto\\varphi_U$ is a group homomorphism and $\\Gamma(U,-)$ is additive, hence preserves finite biproducts. The kernel of a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ in $\\textit{Ab}(\\mathcal C)$ is the sectionwise kernel, since the inclusion of abelian sheaves into abelian presheaves commutes with limits and limits of presheaves are computed sectionwise [lem-weil-pbc-sheafification-exact] (clause 1); hence $\\Gamma(U,\\ker\\varphi)=\\ker(\\varphi_U)$, i.e. $\\Gamma(U,-)$ preserves kernels, and it is left exact additive in the sense of [def-sp-left-exact-additive], so its right derived functors $R^p\\Gamma(U,-)$ are defined.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT ('these are the right derived functors of the functor F -> F(U)'), the left exactness written out"
+   }
+  },
+  {
+   "text": "*Resolutions and degree zero.* By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1), applied to the abelian category $\\textit{Ab}(\\mathcal C)$ with enough injectives (step 1), every $\\mathcal F$ has an injective resolution $s:\\mathcal F\\to\\mathcal I^\\bullet$ with $\\mathcal I^q=0$ for $q<0$; by (2) of the same node, applied to the left exact additive $\\Gamma(U,-)$ (step 2), $\\Gamma(U,s)$ induces an isomorphism $\\mathcal F(U)\\to H^0(\\Gamma(U,\\mathcal I^\\bullet))$, which is the identification $H^0(U,\\mathcal F)=\\mathcal F(U)$.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT, equation (cohomology-object-site)"
+   }
+  },
+  {
+   "text": "*Independence of the resolution, functoriality, injectives.* By [lem-weil-pbc-derived-functor-map-via-lift], $R^p\\Gamma(U,-)$ is a functor $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}$ and for every injective resolution $\\mathcal F\\to P^\\bullet$ with $P^q=0$ for $q<0$ there is an isomorphism $\\iota^p_P:R^p\\Gamma(U,-)(\\mathcal F)\\to H^p(\\Gamma(U,P^\\bullet))$; for two resolutions $P^\\bullet,Q^\\bullet$ of $\\mathcal F$, $\\iota^p_Q\\circ(\\iota^p_P)^{-1}$ is an isomorphism, and applying the same node with $h=\\mathrm{id}_{\\mathcal F}$ shows that it equals $H^p(\\Gamma(U,\\varphi))$ for every morphism of complexes $\\varphi:P^\\bullet\\to Q^\\bullet$ with $\\varphi^0s_P=s_Q$; so the groups $H^p(\\Gamma(U,\\mathcal I^\\bullet))$ for different resolutions are identified by canonical isomorphisms, compatibly with the maps induced by morphisms of sheaves. For $\\mathcal I$ injective and $p>0$, $H^p(U,\\mathcal I)=R^p\\Gamma(U,-)(\\mathcal I)=0$ by [lem-weil-pbc-derived-functor-injective-vanishing]. (The imported node lem-sp-derived-well-defined is not used: it is stated for Grothendieck abelian categories.)",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015B (lemma-higher-derived-functors) items (2) and (3); sites-cohomology.tex Section 01FT"
+   }
+  },
+  {
+   "text": "*Universal $\\delta$-functor.* For a short exact sequence $0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to0$ in $\\textit{Ab}(\\mathcal C)$ the long exact sequence $0\\to H^0(U,\\mathcal F')\\to H^0(U,\\mathcal F)\\to H^0(U,\\mathcal F'')\\xrightarrow{\\delta}H^1(U,\\mathcal F')\\to\\cdots$ exists by [lem-weil-pbc-derived-functor-long-exact], applied to $v=\\Gamma(U,-)$; by [lem-weil-pbc-right-derived-universal-delta-functor], applied to the same $v$, the connecting morphisms can be taken natural in the short exact sequence and $(H^p(U,-),\\delta)_{p\\ge0}$ is a universal $\\delta$-functor $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}$, as Section 01FT states.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT: 'The family of functors H^i(U,-) forms a universal delta-functor Ab(C) -> Ab'"
+   }
+  },
+  {
+   "text": "*$u^s$ and $u_s$.* For a continuous $u:\\mathcal C\\to\\mathcal D$, $\\mathcal G\\circ u$ is a sheaf of sets (resp. abelian sheaf) on $\\mathcal C$ for every sheaf of sets (resp. abelian sheaf) $\\mathcal G$ on $\\mathcal D$ by [lem-weil-pbc-site-continuous-pushforward-sheaf] (Sites 00WW); so $u$ satisfies the hypothesis of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], which gives the functor $u^s$ and its left adjoint $u_s=(u_p-)^\\#$, built from the sheafification [def-weil-pbc-sheafification], on sheaves of sets and on abelian sheaves (Sites 00WX, whose proof is the composite of $u_p\\dashv u^p$, Sites 00VE, with $\\#\\dashv$ inclusion, Sites 00WH).",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma 00WW (line 2548) and Lemma 00WX (line 2579) with their proofs"
+   }
+  },
+  {
+   "text": "*Morphisms of sites; exactness.* By Definition 00X1 a morphism of sites is a continuous $u$ with $u_s$ exact on sheaves of sets, i.e. (Categories, Definition 0034) commuting with finite limits and finite colimits; since $u_s$ is a left adjoint (previous step) it commutes with all colimits that exist, so exactness amounts to commuting with finite limits. The notation $f_*=u^s$, $f^{-1}=u_s$ and the adjunction $\\operatorname{Mor}(f^{-1}\\mathcal G,\\mathcal F)=\\operatorname{Mor}(\\mathcal G,f_*\\mathcal F)$ are those of the paragraph after Definition 00X1. That left adjoints preserve colimits is the one-line argument $\\operatorname{Mor}(u_s\\varinjlim\\mathcal F_k,\\mathcal G)=\\operatorname{Mor}(\\varinjlim\\mathcal F_k,u^s\\mathcal G)=\\varprojlim\\operatorname{Mor}(\\mathcal F_k,u^s\\mathcal G)=\\varprojlim\\operatorname{Mor}(u_s\\mathcal F_k,\\mathcal G)$.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00X1 (line 2687) and the paragraph after it; categories.tex Definition 0034 (line 3279)"
+   }
+  },
+  {
+   "text": "*The abelian $f^{-1}$ on underlying sets* (Sites, Section 00YR and Proposition 00YV(2)). Let $f$ be a morphism of sites given by $u$. By [lem-weil-pbc-sheaf-algebraic-structures-objects], abelian sheaves on $\\mathcal C$ (resp. $\\mathcal D$) are, compatibly with the forgetful functors, the abelian group objects $(\\mathcal G,+,0,i)$ of $\\Sh(\\mathcal C)$ (resp. $\\Sh(\\mathcal D)$), with the sectionwise structure maps. The set-valued $u_s$ commutes with finite products (it is exact) and $u^s$ commutes with finite products (they are computed sectionwise and $u^s$ is precomposition); so [lem-weil-pbc-adjunction-lifts-abelian-group-objects], applied to $L=u_s\\dashv R=u^s$ on sheaves of sets, gives an adjunction $L^{\\mathrm{gr}}\\dashv R^{\\mathrm{gr}}$ on abelian group objects whose unit has the set-theoretic unit as underlying morphism, with $L^{\\mathrm{gr}}(\\mathcal G,+,0,i)=(u_s\\mathcal G,u_s(+)\\circ\\lambda^{-1},\\dots)$. Under the identification above, $R^{\\mathrm{gr}}$ is the abelian $u^s$ (the structure maps of $\\mathcal G\\circ u$ are those of $\\mathcal G$ at the objects $u(V)$). Hence $L^{\\mathrm{gr}}$ and the abelian $u_s$ of the previous steps are both left adjoints of the abelian $u^s$, and they are isomorphic by the unique isomorphism compatible with the units (uniqueness of adjoints: the isomorphism is determined by the bijections $\\operatorname{Mor}(L^{\\mathrm{gr}}\\mathcal G,-)\\cong\\operatorname{Mor}(\\mathcal G,u^s-)\\cong\\operatorname{Mor}(u_s\\mathcal G,-)$ and Yoneda). This gives the last sentence of (3).",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00YR, the discussion before Proposition 00YV and its proof of (2) (line 10420 ff.)"
+   }
+  },
+  {
+   "text": "*Composition.* For morphisms of sites $f$, $g$ given by $u:\\mathcal C_2\\to\\mathcal C_1$, $v:\\mathcal C_3\\to\\mathcal C_2$, the functor $u\\circ v$ is continuous and defines a morphism of sites, with $(u\\circ v)^s=v^su^s$ and $(u\\circ v)_s\\cong u_sv_s$, by [lem-weil-pbc-site-morphism-composition] (Sites, Lemma 03CB); so Definition 03CC of $g\\circ f$ is meaningful, and the composite is strictly associative on the level of functors, $(u\\circ v)\\circ w=u\\circ(v\\circ w)$.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma 03CB (line 2764), Definition 03CC and the sentence after it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Definitions 00VH, 00WV, 00X1, 03CC, Lemmas 00WW, 00WX, 03CB, Section 00YR (Proposition 00YV); sites-cohomology.tex Section 01FT; derived.tex Lemma 015B"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +172,38 @@
    "results": "Basic.lean:59 abbrev H (Ext from constant sheaf ULift Z), :87 abbrev H' (Ext from free sheaf on yoneda X); TODO lines 30-34: isomorphism with Sheaf.H (F.over U) not yet defined",
    "date": "2026-10-09",
    "verdict": "no exact match: definition node with Mathlib candidates recorded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of an abelian sheaf on a site over an object as right derived functor of sections functor",
+   "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheafFunctor, Sheaf.cohomologyPresheaf (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), Functor.rightDerived (Mathlib.CategoryTheory.Abelian.RightDerived), Sheaf.Γ (Sites.GlobalSections), SheafOfModules.sectionsFunctor",
+   "date": "2026-10-10",
+   "verdict": "no exact match for (2): Mathlib's Sheaf.H' F n X (SheafCohomology/Basic.lean:87) is Ext^n(free abelian sheaf on yoneda X, F) and Sheaf.H F n (:59) is Ext^n(constant sheaf ULift Z, F); their agreement with R^n Gamma(U,-) is not in this Mathlib: the file's TODO (lines 30-34) asks for H'(F,n,U) ≃ H(F.over U, n) and, for terminal U, H'(F,n,U) ≃ H(F,n); only degree 0 is there (H.equiv₀, :105, for a terminal object); grep finds no comparison of Ext with Functor.rightDerived. R^n Gamma(U,-) itself is expressible as (evaluation at op U of sheafToPresheaf).rightDerived n (RightDerived.lean)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.sheafPullback",
+   "results": "Functor.sheafPullback, Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.preservesFiniteLimits, sheafPullbackConstruction.sheafPullbackIso, SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Mathlib.CategoryTheory.Sites.Pullback), GrothendieckTopology.Point.sheafFiberComapIso (Sites.Point.Comap)",
+   "date": "2026-10-10",
+   "verdict": "(3) partly: Mathlib's continuity (Functor.IsContinuous, Continuous.lean:197) is defined as Stacks' conclusion 00WW, not Stacks' conditions; u^s = sheafPushforwardContinuous (:362); u_s = sheafPullback / sheafPullbackConstruction.sheafPullback (Pullback.lean:55, :70); no structure 'morphism of sites' (exactness of the pullback is an instance under RepresentablyFlat, Pullback.lean:93 ff.)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves along a morphism of sites preserves finite limits, composition of pullbacks isomorphic to pullback along composite",
+   "results": "sheafPullbackConstruction.preservesFiniteLimits, instPreservesFiniteLimitsSheafSheafPullback, SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Sites.Pullback), GrothendieckTopology.overMapPullbackComp (Sites.Over), SheafOfModules.pullbackComp",
+   "date": "2026-10-10",
+   "verdict": "(4): continuity of a composite is Functor.isContinuous_comp (Continuous.lean:290) and (u∘v)^s = v^s∘u^s is sheafPushforwardContinuousComp (:383, Iso.refl); no composite of sheafPullback for general sites"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Pretopology\\|stacks 00VH' Mathlib/CategoryTheory/Sites/Pretopology.lean; grep -n 'def toGrothendieck\\|theorem isSheaf_toGrothendieck_iff\\|class HasIsos\\|class IsStableUnderBaseChange\\|class IsStableUnderComposition\\|class HasPullbacks' Mathlib/CategoryTheory/Sites/{Precoverage,PrecoverageToGrothendieck}.lean; grep -n 'instance sheafIsAbelian' Mathlib/CategoryTheory/Sites/Abelian.lean",
+   "results": "Pretopology.lean:62-64 @[stacks 00VH 'Stacks calls a category together with a pretopology a site'] structure Pretopology (requires HasPullbacks C globally); Precoverage.lean:46 Precoverage, :87 HasIsos, :95 IsStableUnderBaseChange, :107 IsStableUnderComposition, :122 HasPullbacks; PrecoverageToGrothendieck.lean:61 Precoverage.toGrothendieck, :98 isSheaf_toGrothendieck_iff; Abelian.lean:40 sheafIsAbelian",
+   "date": "2026-10-10",
+   "verdict": "correspondence for (1), not a leaf: a Stacks site (C, Cov) is a Precoverage (each covering family {U_i -> U} giving Presieve.ofArrows; index multiplicities forgotten, which does not change the sheaf condition) with HasIsos (axiom i), IsStableUnderComposition (ii), HasPullbacks and, after closing Cov under isomorphic families (Stacks' tautological equivalence, no change of sheaves), IsStableUnderBaseChange (iii); it is not a Mathlib Pretopology in general since C need not have all pullbacks. Its sheaves are the sheaves for the Grothendieck topology toGrothendieck (Stacks Sites Lemma 00ZC; isSheaf_toGrothendieck_iff with Presieve.isSheafFor_arrows_iff_pullbacks, IsSheafFor.lean:968); Ab(C) = Sheaf J AddCommGrpCat, abelian by sheafIsAbelian."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +223,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-sites-and-cohomology",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Sites 00VH, 00VM/00VR, 00WV, 00WW, 00WX (with 00VE, 00WH), 00X1, 03CB/03CC, Section 00YR/Proposition 00YV, Categories 0034, Cohomology on Sites Section 01FT, Derived 015B/05TE and Homology 010Q/010S/010T. Made the definition self-contained: the site axioms and the sheaf condition are restated (consistent with lem-weil-pbc-site-sheaves-enough-injectives and lem-weil-pbc-sheaf-algebraic-structures-objects), H^p(U,-) is R^p Gamma(U,-) with the clauses (resolution exists, independence via derived-functor-map-via-lift with h = id, H^0 = F(U), vanishing on injectives, long exact sequence, universal delta-functor), 'exact' is Categories 0034, and the abelian f^{-1} is said to be the set-theoretic one on underlying sheaves (00YV(2)), which the users (cohomology-colimit-of-sites, the 09YQ proof) rely on. Nine steps record well-definedness, each citing nodes: 01DP node, Gamma(U,-) left exact (kernels sectionwise, lem-weil-pbc-sheafification-exact), the reviewed derived-functor leaves and lem-weil-pbc-derived-functor-long-exact, and four new nodes: lem-weil-pbc-site-continuous-pushforward-sheaf (Sites 00WW, general site, unsplit; Mathlib's Functor.IsContinuous is defined as its conclusion and isContinuous_of_coverPreserving carries @[stacks 00WW 'basically'], but Stacks' conditions do not give CompatiblePreserving in one line), lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (Sites 00WX, Mathlib leaf: sheafPullbackConstruction.sheafAdjunctionContinuous, Pullback.lean:75, for sets and abelian groups), lem-weil-pbc-site-morphism-composition (Sites 03CB, unsplit) and lem-weil-pbc-right-derived-universal-delta-functor (Derived 015B(4)/05TE with Homology 010T, unsplit; Mathlib has no delta-functors). The 00YV(2) compatibility is a step through the reviewed lem-weil-pbc-sheaf-algebraic-structures-objects and the leaf lem-weil-pbc-adjunction-lifts-abelian-group-objects (as in lem-weil-pbc-etale-inverse-image-algebraic-structures). Not a Mathlib leaf: Stacks' sites are Precoverages (not Pretopologies) whose sheaves agree with those of Precoverage.toGrothendieck by Stacks 00ZC, Mathlib's IsContinuous is Stacks' 00WW conclusion, there is no 'morphism of sites' structure, and Sheaf.H/Sheaf.H' are Ext groups whose comparison with R^p Gamma(U,-) is a TODO of SheafCohomology/Basic.lean (lines 30-34). Global sections Gamma(C,-) for a site without final object (also in 01FT) are not included: none of the four users needs them. The imported lem-sp-derived-well-defined is not used (stated for Grothendieck abelian categories)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition made self-contained in four parts (sites and sheaves; cohomology over an object as right derived functors with the universal delta-functor; continuous functors, u^s, u_s and morphisms of sites with exactness defined; composition; plus the clause that the abelian f^{-1} is the set-level f^{-1} on underlying sheaves, which the users rely on). Nine well-definedness steps on the reviewed derived-functor leaves and the new nodes lem-weil-pbc-site-continuous-pushforward-sheaf (00WW), lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (00WX; Mathlib leaf sheafPullbackConstruction.sheafAdjunctionContinuous, Sites/Pullback.lean:75, verified), lem-weil-pbc-site-morphism-composition (03CB/03CC), lem-weil-pbc-right-derived-universal-delta-functor (015B/05TE). The Stacks site / Grothendieck topology correspondence (00ZC) is recorded in the searches; a node for it is wanted at stage 2 (worker's note)."
+ }
 }

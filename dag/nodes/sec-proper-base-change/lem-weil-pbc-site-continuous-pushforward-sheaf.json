@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+ "kind": "statement",
+ "title": "A continuous functor of sites pulls sheaves back to sheaves by precomposition (Stacks 00WW)",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be sites, each a site in the sense of Stacks Sites, Definition 00VH: a category whose objects and morphisms form sets, with a set $\\operatorname{Cov}$ of families $\\{U_i\\to U\\}_{i\\in I}$ (coverings) such that every isomorphism $\\{V\\to U\\}$ is a covering, if $\\{U_i\\to U\\}_{i}$ and $\\{V_{ij}\\to U_i\\}_{j}$ for every $i$ are coverings then $\\{V_{ij}\\to U\\}_{i,j}$ is a covering, and for a covering $\\{U_i\\to U\\}$ and a morphism $V\\to U$ the fibre products $U_i\\times_UV$ exist and $\\{U_i\\times_UV\\to V\\}$ is a covering. A sheaf of sets (resp. of abelian groups) on a site is a presheaf $\\mathcal F$ of sets (resp. abelian groups) such that for every covering $\\{U_i\\to U\\}_{i\\in I}$ the diagram $\\mathcal F(U)\\to\\prod_i\\mathcal F(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(U_i\\times_UU_j)$ is an equalizer (Sites, Definitions 00VM and 00VR; [lem-weil-pbc-sheaf-algebraic-structures-objects]); morphisms are natural transformations. Let $u:\\mathcal C\\to\\mathcal D$ be a continuous functor (Sites, Definition 00WV): for every covering $\\{V_i\\to V\\}_{i\\in I}$ of $\\mathcal C$, (a) $\\{u(V_i)\\to u(V)\\}_{i\\in I}$ is a covering of $\\mathcal D$, and (b) for every morphism $T\\to V$ of $\\mathcal C$ the canonical morphism $u(T\\times_VV_i)\\to u(T)\\times_{u(V)}u(V_i)$ is an isomorphism (in particular the target fibre product exists). Then for every sheaf of sets $\\mathcal G$ on $\\mathcal D$ the presheaf $u^p\\mathcal G=\\mathcal G\\circ u$, $V\\mapsto\\mathcal G(u(V))$ (restriction maps $\\mathcal G(u(g))$), is a sheaf of sets on $\\mathcal C$; more precisely, for every covering $\\{V_i\\to V\\}$ of $\\mathcal C$, the sheaf condition of $u^p\\mathcal G$ for $\\{V_i\\to V\\}$ is equivalent to the sheaf condition of $\\mathcal G$ for the covering $\\{u(V_i)\\to u(V)\\}$ of $\\mathcal D$, via the isomorphisms $u(V_i\\times_VV_j)\\cong u(V_i)\\times_{u(V)}u(V_j)$ of (b). The same holds for sheaves of abelian groups: $\\mathcal G\\circ u$ is then a sheaf of abelian groups on $\\mathcal C$. (Stacks Sites, Lemma 00WW.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 00WW (lemma-pushforward-sheaf, line 2548) and its proof; Definition 00WV (definition-continuous, line 2524)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stacks continuous functor: sends covering families to covering families and commutes with fibre products of coverings, then pullback of sheaf is sheaf",
+   "results": "CategoryTheory.Functor.isContinuous_of_coverPreserving (Mathlib.CategoryTheory.Sites.CoverPreserving), CategoryTheory.Functor.IsContinuous (Mathlib.CategoryTheory.Sites.Continuous), Functor.IsCocontinuous, instIsContinuousOverMapOver, inducedTopology_isCocontinuous",
+   "date": "2026-10-10",
+   "verdict": "generalization in another presentation, not one line: isContinuous_of_coverPreserving needs CompatiblePreserving (a condition on all compatible families and commuting squares, not implied in one line by (b), which concerns covering families only) and CoverPreserving for Grothendieck topologies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition for composition with functor on a presieve equals sheaf condition on image presieve when functor preserves pairwise pullbacks",
+   "results": "Presheaf.isSheaf_comp_of_isSheaf, GrothendieckTopology.HasSheafCompose.isSheaf, Presheaf.isSheaf_iff_isSheaf_comp, Presieve.isSheafFor_over_map_op_comp_iff (none of them the per-covering equivalence)",
+   "date": "2026-10-10",
+   "verdict": "no match by this tool; the grep below found the per-covering statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous functor between sites, precomposition sends sheaves to sheaves, left adjoint sheafification of left Kan extension",
+   "results": "Functor.IsContinuous.mk, Functor.op_comp_isSheaf, Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), presheafToSheaf, sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback)",
+   "date": "2026-10-10",
+   "verdict": "Mathlib's Functor.IsContinuous (Continuous.lean:197) is *defined* as the conclusion of this node (precomposition preserves type-valued sheaves); the node is the passage from Stacks' conditions (a), (b) to it"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00WW\\|comp_iff_of_preservesPairwisePullbacks\\|isContinuous_of_coverPreserving' Mathlib/CategoryTheory/Sites",
+   "results": "CoverPreserving.lean:159 @[stacks 00WW \"This is basically this Stacks entry.\"] on Functor.isContinuous_of_coverPreserving (:160); PrecoverageToGrothendieck.lean:244 Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks (F : C ⥤ D) (P) (R) [R.HasPairwisePullbacks] [F.PreservesPairwisePullbacks R] : IsSheafFor (F.op ⋙ P) R ↔ IsSheafFor P (R.map F), which is Stacks' proof for one covering",
+   "date": "2026-10-10",
+   "verdict": "no exact match: the per-covering equivalence is comp_iff_of_preservesPairwisePullbacks (whose hypothesis F.PreservesPairwisePullbacks R is (b) for T = V_j), but turning it into Functor.IsContinuous for the topologies generated by the coverings needs the site-to-topology comparison Stacks 00ZC (Precoverage.toGrothendieck, isSheaf_toGrothendieck_iff, PrecoverageToGrothendieck.lean:61, :98); unsplit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-sites-and-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

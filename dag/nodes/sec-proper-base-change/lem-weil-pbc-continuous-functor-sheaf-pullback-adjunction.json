@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+ "kind": "statement",
+ "title": "For a functor of sites preserving sheaves, u_s = (u_p -)^# is left adjoint to u^s (Stacks 00WX)",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be sites, each a site in the sense of Stacks Sites, Definition 00VH: a category whose objects and morphisms form sets, with a set $\\operatorname{Cov}$ of families $\\{U_i\\to U\\}_{i\\in I}$ (coverings) such that every isomorphism $\\{V\\to U\\}$ is a covering, if $\\{U_i\\to U\\}_{i}$ and $\\{V_{ij}\\to U_i\\}_{j}$ for every $i$ are coverings then $\\{V_{ij}\\to U\\}_{i,j}$ is a covering, and for a covering $\\{U_i\\to U\\}$ and a morphism $V\\to U$ the fibre products $U_i\\times_UV$ exist and $\\{U_i\\times_UV\\to V\\}$ is a covering. A sheaf of sets (resp. of abelian groups) on a site is a presheaf $\\mathcal F$ of sets (resp. abelian groups) such that for every covering $\\{U_i\\to U\\}_{i\\in I}$ the diagram $\\mathcal F(U)\\to\\prod_i\\mathcal F(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(U_i\\times_UU_j)$ is an equalizer (Sites, Definitions 00VM and 00VR; [lem-weil-pbc-sheaf-algebraic-structures-objects]); morphisms are natural transformations. Let $u:\\mathcal C\\to\\mathcal D$ be a functor such that $\\mathcal G\\circ u$ is a sheaf of sets on $\\mathcal C$ for every sheaf of sets $\\mathcal G$ on $\\mathcal D$. Let $\\mathcal A$ be the category of sets or the category of abelian groups, and $\\mathrm{PSh}(-,\\mathcal A)\\supseteq\\Sh(-,\\mathcal A)$ the categories of presheaves and of sheaves with values in $\\mathcal A$. Then: (1) for every sheaf $\\mathcal G$ on $\\mathcal D$ with values in $\\mathcal A$, $\\mathcal G\\circ u$ is a sheaf on $\\mathcal C$ with values in $\\mathcal A$, so that $u^s:\\Sh(\\mathcal D,\\mathcal A)\\to\\Sh(\\mathcal C,\\mathcal A)$, $\\mathcal G\\mapsto\\mathcal G\\circ u$, $\\psi\\mapsto(\\psi_{u(V)})_V$, is a functor; (2) for $\\mathcal F\\in\\mathrm{PSh}(\\mathcal C,\\mathcal A)$ and $W\\in\\operatorname{Ob}(\\mathcal D)$ let $\\mathcal I_W$ be the category of pairs $(V,\\phi)$ with $V\\in\\operatorname{Ob}(\\mathcal C)$, $\\phi:W\\to u(V)$ (morphisms $f:V\\to V'$ with $u(f)\\circ\\phi=\\phi'$) and $u_p\\mathcal F(W)=\\varinjlim_{(V,\\phi)\\in\\mathcal I_W^{op}}\\mathcal F(V)$ (colimit in $\\mathcal A$), a presheaf on $\\mathcal D$ functorial in $\\mathcal F$; let $u_s\\mathcal F=(u_p\\mathcal F)^\\#$ be its sheafification [def-weil-pbc-sheafification] for $\\mathcal F\\in\\Sh(\\mathcal C,\\mathcal A)$. Then $u_s:\\Sh(\\mathcal C,\\mathcal A)\\to\\Sh(\\mathcal D,\\mathcal A)$ is a left adjoint of $u^s$: $\\operatorname{Mor}_{\\Sh(\\mathcal D,\\mathcal A)}(u_s\\mathcal F,\\mathcal G)=\\operatorname{Mor}_{\\Sh(\\mathcal C,\\mathcal A)}(\\mathcal F,u^s\\mathcal G)$ bifunctorially, the bijection being the composite of the adjunctions $u_p\\dashv u^p$ (Sites, Lemma 00VE) and $\\#\\dashv$ inclusion. (Stacks Sites, Lemma 00WX, for sheaves of sets; for abelian groups the same proof with the colimits taken in abelian groups.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 00WX (lemma-adjoint-sheaves, line 2579) with Lemma 00VE (lemma-adjoints-u, line 567) and Proposition 00WH (proposition-sheafification-adjoint, line 2053); abelian case: Section 00YR (sheaves of algebraic structures, item (epsilon))"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous functor between sites, precomposition sends sheaves to sheaves, left adjoint sheafification of left Kan extension",
+   "results": "Functor.IsContinuous.mk, Functor.op_comp_isSheaf, Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), presheafToSheaf, sheafification, plusPlusAdjunction (Mathlib.CategoryTheory.Sites.Sheafification/ConcreteSheafification), Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback)",
+   "date": "2026-10-10",
+   "verdict": "match: sheafPullbackConstruction.sheafAdjunctionContinuous"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.sheafPullback",
+   "results": "Functor.sheafPullback, Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.preservesFiniteLimits, sheafPullbackConstruction.sheafPullbackIso, SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Mathlib.CategoryTheory.Sites.Pullback), GrothendieckTopology.Point.sheafFiberComapIso (Sites.Point.Comap)",
+   "date": "2026-10-10",
+   "verdict": "match (same declarations)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def sheafPullback\\|def sheafAdjunctionContinuous\\|lemma op_comp_isSheaf\\|class IsContinuous' Mathlib/CategoryTheory/Sites/{Pullback,Continuous}.lean; grep -n 'lanAdjunction\\|lanEvaluationIsoColim' Mathlib/CategoryTheory/Functor/{KanExtension/Adjunction,Flat}.lean",
+   "results": "Continuous.lean:197 class IsContinuous (op_comp_isSheaf_of_types: precomposition with F.op sends sheaves of types to sheaves), :256 op_comp_isSheaf (any value category A), :362 sheafPushforwardContinuous; Pullback.lean:70 sheafPullbackConstruction.sheafPullback := sheafToPresheaf J A ⋙ G.op.lan ⋙ presheafToSheaf K A, :75 sheafPullbackConstruction.sheafAdjunctionContinuous [HasWeakSheafify K A] : sheafPullback G A J K ⊣ G.sheafPushforwardContinuous A J K, built from (G.op.lanAdjunction A).comp (sheafificationAdjunction K A); KanExtension/Adjunction.lean:148 lanAdjunction; Flat.lean:302 lanEvaluationIsoColim",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+  "file": "Mathlib/CategoryTheory/Sites/Pullback.lean",
+  "how": "one Mathlib declaration per clause, for the Grothendieck topologies J, K generated by the coverings (Stacks 00ZC; Precoverage.toGrothendieck, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean:61, whose sheaves are the sheaves of the node by isSheaf_toGrothendieck_iff :98 and Presieve.isSheafFor_arrows_iff_pullbacks, IsSheafFor.lean:968, as recorded for the other site leaves) and A = Type v or AddCommGrpCat.{v} for small C, D : Type v: the hypothesis on u is exactly [u.IsContinuous J K] (class IsContinuous, Sites/Continuous.lean:197); (1) is Functor.op_comp_isSheaf (Continuous.lean:256, any A) and u^s is u.sheafPushforwardContinuous A J K (Continuous.lean:362); (2) u_s is sheafPullbackConstruction.sheafPullback u A J K (Pullback.lean:70) = sheafToPresheaf ⋙ u.op.lan ⋙ presheafToSheaf, where u.op.lan is u_p (its value at W is the colimit over CostructuredArrow u.op (op W) ≃ I_W^op, lanEvaluationIsoColim, Mathlib/CategoryTheory/Functor/Flat.lean:302) and presheafToSheaf is sheafification; the adjunction is sheafPullbackConstruction.sheafAdjunctionContinuous (Pullback.lean:75), defined as the composite of lanAdjunction (KanExtension/Adjunction.lean:148) and sheafificationAdjunction (Sheafification.lean:80) restricted to sheaves, as in Stacks' proof. Instances: HasWeakSheafify from HasSheafify J (Type (max u v)) (Sites/LeftExact.lean:313) and the concrete-category instance HasSheafify J D (LeftExact.lean:308) for AddCommGrpCat; left Kan extensions exist since A is cocomplete and C small."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-sites-and-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Sites/Pullback.lean:75) with sheafPushforwardContinuous and sheafPullback (:70)."
+ }
+}
