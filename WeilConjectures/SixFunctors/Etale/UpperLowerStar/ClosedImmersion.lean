@@ -24,7 +24,10 @@ Let `i : Z ⟶ X` be a closed immersion. The base change functor `i.Etale : X.Et
   `U ×_X Z`, the base change of a morphism of étale `X`-schemes. Its graph is a section of the
   étale projection `(U ×_X V) ×_X Z ⟶ U ×_X Z`, hence an open immersion; its image is the trace
   of an open `W` of `U ×_X V`, and the second projection `W ⟶ V` lifts `f` on `W ×_X Z`, which
-  maps isomorphically onto `U ×_X Z`.
+  maps isomorphically onto `U ×_X Z`;
+- *locally faithful*: two morphisms of étale `X`-schemes which agree after base change to `Z`
+  agree on an open containing the preimage of `Z`, the locus where two morphisms to an
+  unramified `X`-scheme agree being open.
 
 By `CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous` and
 `CategoryTheory.Functor.IsCoverDense.faithful_sheafPushforwardContinuous` the pushforward `i_*`
@@ -36,6 +39,7 @@ points and needs `A` to be concrete.
 
 - `AlgebraicGeometry.Scheme.Hom.isCoverDense_etale_of_isClosedImmersion`
 - `AlgebraicGeometry.Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion`
+- `AlgebraicGeometry.Scheme.Hom.isLocallyFaithful_etale_of_isClosedImmersion`
 - `AlgebraicGeometry.Etale.full_lowerStar_of_isClosedImmersion`,
   `AlgebraicGeometry.Etale.faithful_lowerStar_of_isClosedImmersion`: `i_*` is fully faithful.
 -/
@@ -155,6 +159,49 @@ instance Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion :
       change (σ ≫ (i.Etale.map ι).left ≫ (i.Etale.map p).left) x = x
       rw [reassoc_of% hσ, hΓp]
       rfl
+
+/-- Base change along a closed immersion `i : Z ⟶ X` is locally faithful for the small étale
+topology of `Z`. If `f₁ f₂ : W ⟶ W'` agree after base change to `Z`, they agree on the open
+`E` of `W` where they coincide (`AlgebraicGeometry.FormallyUnramified.eqLocus`, open as `W'`
+is unramified over `X`). The projection `W ×_X Z ⟶ W` factors through `E`, so the base change
+of `E ⟶ W`, which lies in the equalizer sieve, has a section, and the image of the equalizer
+sieve contains the identity of `W ×_X Z`. -/
+instance Scheme.Hom.isLocallyFaithful_etale_of_isClosedImmersion :
+    i.Etale.IsLocallyFaithful Z.smallEtaleTopology where
+  functorPushforward_equalizer_mem {W W'} f₁ f₂ hf := by
+    have hc : f₁.left ≫ W'.hom = f₂.left ≫ W'.hom := by simp
+    -- the open `E` of `W` on which `f₁` and `f₂` agree
+    let E := FormallyUnramified.eqLocus W'.hom f₁.left f₂.left hc
+    let e : Scheme.Etale.mk (E.ι ≫ W.hom) ⟶ W := MorphismProperty.Over.homMk E.ι rfl
+    have he : Sieve.equalizer f₁ f₂ e :=
+      MorphismProperty.Over.Hom.ext (FormallyUnramified.eqLocus_ι_comp_eq W'.hom f₁.left f₂.left hc)
+    -- the projection `W ×_X Z ⟶ W` lands in `E`
+    have hfst : pullback.fst W.hom i ≫ f₁.left = pullback.fst W.hom i ≫ f₂.left := by
+      rw [← Scheme.Hom.etale_map_left_comp_fst, ← Scheme.Hom.etale_map_left_comp_fst]
+      change (i.Etale.map f₁).left ≫ _ = (i.Etale.map f₂).left ≫ _
+      rw [hf]
+    have hr := FormallyUnramified.range_subset_eqLocus W'.hom f₁.left f₂.left hc _ hfst
+    rw [← E.range_ι] at hr
+    let l := IsOpenImmersion.lift E.ι (pullback.fst W.hom i) hr
+    -- hence the base change of `e` has a section `s`
+    let s : i.Etale.obj W ⟶ i.Etale.obj (Scheme.Etale.mk (E.ι ≫ W.hom)) :=
+      MorphismProperty.Over.homMk (pullback.lift l (pullback.snd W.hom i) (by
+        change l ≫ E.ι ≫ W.hom = _
+        rw [← Category.assoc, IsOpenImmersion.lift_fac, pullback.condition]))
+        (pullback.lift_snd _ _ _)
+    have hs : s ≫ i.Etale.map e = 𝟙 _ := by
+      refine MorphismProperty.Over.Hom.ext (pullback.hom_ext ?_ ?_)
+      · change (s.left ≫ (i.Etale.map e).left) ≫ _ = _
+        rw [Category.assoc, Scheme.Hom.etale_map_left_comp_fst]
+        change pullback.lift l _ _ ≫ pullback.fst _ i ≫ E.ι = 𝟙 _ ≫ _
+        rw [pullback.lift_fst_assoc, IsOpenImmersion.lift_fac, Category.id_comp]
+      · change (s.left ≫ (i.Etale.map e).left) ≫ _ = _
+        rw [Category.assoc, Scheme.Hom.etale_map_left_comp_snd]
+        change pullback.lift l _ _ ≫ pullback.snd _ i = 𝟙 _ ≫ _
+        rw [pullback.lift_snd, Category.id_comp]
+    convert (Z.smallEtaleTopology).top_mem (i.Etale.obj W)
+    rw [Sieve.id_mem_iff_eq_top.symm]
+    exact ⟨_, e, s, he, hs.symm⟩
 
 namespace Etale
 
