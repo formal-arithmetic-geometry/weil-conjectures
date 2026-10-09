@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
@@ -58,7 +59,7 @@ Pullback maps on the cohomology of `𝔾ₘ` along an arbitrary `g` go through t
 - `AlgebraicGeometry.Scheme.isSheaf_etaleStructurePresheaf`: the structure presheaf is a sheaf
   for the small étale topology.
 - `AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf`: the comparison map
-  `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism for étale `g`. The proof is `sorry`.
+  `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism for étale `g`.
 
 ## Blueprint references
 
@@ -192,12 +193,43 @@ noncomputable def upperStarGmSheafToGmSheaf (g : X ⟶ Y) :
   ((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g)
 
 /-- For an étale morphism `g`, the comparison map `g^* 𝔾ₘ ⟶ 𝔾ₘ` is an isomorphism: then `g^*`
-is restriction along the functor `X.Etale ⥤ Y.Etale` composing with `g`, and an étale
-`X`-scheme `U` has the same units `Γ(U, 𝒪_U)ˣ` as an `X`-scheme and as a `Y`-scheme. For a
-general `g` the map is not an isomorphism, see the module docstring. The proof is `sorry`. -/
-theorem isIso_upperStarGmSheafToGmSheaf (g : X ⟶ Y) [Etale g] :
-    IsIso (upperStarGmSheafToGmSheaf g) :=
-  sorry
+is restriction along the functor `X.Etale ⥤ Y.Etale` composing with `g`
+(`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), and an étale `X`-scheme `U`
+has the same units `Γ(U, 𝒪_U)ˣ` as an `X`-scheme and as a `Y`-scheme. On `U` the comparison
+map is pullback of units along `U ⟶ U ×_Y X ⟶ U`, which is the identity. For a general `g`
+the map is not an isomorphism, see the module docstring. -/
+theorem isIso_upperStarGmSheafToGmSheaf (g : X ⟶ Y) [hg : Etale g] :
+    IsIso (upperStarGmSheafToGmSheaf g) := by
+  let adj := Etale.localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g hg
+  have h : upperStarGmSheafToGmSheaf g =
+      (Etale.upperStarIsoLocalizationRestriction _ g hg).hom.app Y.gmSheaf ≫
+        (adj.homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g) := by
+    rw [upperStarGmSheafToGmSheaf, Adjunction.homEquiv_counit, Adjunction.homEquiv_counit,
+      Etale.upperStarIsoLocalizationRestriction, ← Adjunction.leftAdjointUniq_hom_app_counit _ adj,
+      NatTrans.naturality_assoc]
+  rw [h]
+  suffices IsIso ((adj.homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g)) from inferInstance
+  suffices IsIso ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      ((adj.homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g))) from
+    isIso_of_reflects_iso _ (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+  suffices ∀ U, IsIso (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      ((adj.homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g))).app U) from
+    NatIso.isIso_of_isIso_app _
+  intro U
+  have : ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      ((adj.homEquiv _ _).symm (gmSheafToLowerStarGmSheaf g))).app U =
+      CommRingCat.unitsAddCommGrpULift.{u + 1, u}.map (𝟙 _) := by
+    change CommRingCat.unitsAddCommGrpULift.{u + 1, u}.map _ ≫
+      CommRingCat.unitsAddCommGrpULift.{u + 1, u}.map _ ≫ 𝟙 _ = _
+    rw [Category.comp_id, ← Functor.map_comp]
+    congr 1
+    change Scheme.Γ.map _ ≫ Scheme.Γ.map _ = _
+    rw [← Functor.map_comp]
+    refine (congrArg Scheme.Γ.map ?_).trans (Scheme.Γ.map_id _)
+    apply Quiver.Hom.unop_inj
+    exact Limits.pullback.lift_fst _ _ _
+  rw [this]
+  infer_instance
 
 /-- The pullback of `𝔾ₘ` along an étale morphism of schemes is `𝔾ₘ`, via the comparison map
 `AlgebraicGeometry.Scheme.upperStarGmSheafToGmSheaf`. This is the analogue for `𝔾ₘ` of
