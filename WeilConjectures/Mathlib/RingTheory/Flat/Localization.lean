@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.Flat.Equalizer
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.Localization.BaseChange
@@ -560,5 +561,106 @@ theorem _root_.Algebra.exists_notMem_flat_localizedModule_quotient [IsNoetherian
     intro J y hy
     obtain ⟨n, hn⟩ := hC J y hy
     exact ⟨(g₁ * g₂) ^ n, ⟨n, rfl⟩, by rw [mul_pow, mul_comm, mul_smul, hn, smul_zero]⟩
+
+omit [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] in
+/-- **Regular elements of the fibre, noetherian case, all base changes.** Let `R` be noetherian,
+`S` a finite type `R`-algebra, `q` a prime of `S` with `S_q` flat over `R`, and `f ∈ S` a
+nonzerodivisor of the fibre `S_q ⧸ p S_q`. Then there is `g ∉ q` such that for every `R`-module
+`N`, every element of `S ⊗ N` killed by `f` is killed by a power of `g`. -/
+theorem _root_.Algebra.exists_notMem_forall_pow_smul_eq_zero [IsNoetherianRing R]
+    [Algebra.FiniteType R S] (q : Ideal S) [q.IsPrime] [Flat R (Localization.AtPrime q)] (f : S)
+    (hfib : ∀ m : Localization.AtPrime q,
+      algebraMap S _ f * m ∈ (q.comap (algebraMap R S)).map (algebraMap R _) →
+        m ∈ (q.comap (algebraMap R S)).map (algebraMap R (Localization.AtPrime q))) :
+    ∃ g ∉ q, ∀ (N : Type*) [AddCommGroup N] [Module R N] (y : S ⊗[R] N), f • y = 0 →
+      ∃ n : ℕ, g ^ n • y = 0 := by
+  classical
+  obtain ⟨g₁, hg₁, hreg, hC⟩ := Algebra.exists_notMem_flat_localizedModule_quotient q f hfib
+  have hP : Flat R (LocalizedModule q.primeCompl S) := Flat.of_linearEquiv
+    ((IsLocalizedModule.iso q.primeCompl (Algebra.linearMap S (Localization.AtPrime q))).restrictScalars R)
+  obtain ⟨g₂, hg₂, hopen⟩ := Flat.exists_notMem_forall_flat_localizedModule (M := S) q hP
+  have hS : ∀ (J : Ideal R) (y : S ⊗[R] J), J.subtype.lTensor S y = 0 →
+      ∃ n : ℕ, g₂ ^ n • y = 0 := by
+    intro J y hy
+    have : g₂ ∈ (Submodule.span S {y}).annihilator.radical := by
+      rw [Ideal.radical_eq_sInf, Submodule.mem_sInf]
+      rintro Q ⟨haQ, hQ⟩
+      by_contra hg
+      obtain ⟨t, ht, hty⟩ := (flat_localizedModule_iff _).mp (hopen Q hg) J y hy
+      exact ht (haQ ((Submodule.mem_annihilator_span_singleton _ _).mpr hty))
+    obtain ⟨n, hn⟩ := this
+    exact ⟨n, (Submodule.mem_annihilator_span_singleton _ _).mp hn⟩
+  set g := g₁ * g₂
+  refine ⟨g, fun h ↦ (Ideal.IsPrime.mul_mem_iff_mem_or_mem ‹_›).mp h |>.elim hg₁ hg₂, ?_⟩
+  set X := Localization.Away g
+  have hX : Flat R X := by
+    have : Flat R (LocalizedModule (Submonoid.powers g) S) := by
+      rw [flat_localizedModule_iff]
+      intro J y hy
+      obtain ⟨n, hn⟩ := hS J y hy
+      exact ⟨g ^ n, ⟨n, rfl⟩, by rw [mul_pow, mul_smul, hn, smul_zero]⟩
+    exact Flat.of_linearEquiv ((IsLocalizedModule.iso (Submonoid.powers g)
+      (Algebra.linearMap S X)).restrictScalars R).symm
+  set s := algebraMap S X f
+  let φ : X →ₗ[R] X := (LinearMap.mulLeft S s).restrictScalars R
+  -- `s` is a nonzerodivisor of `X`.
+  have hφ : Function.Injective φ := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    obtain ⟨a, b, rfl⟩ := IsLocalization.exists_mk'_eq (Submonoid.powers g) x
+    change s * IsLocalization.mk' X a b = 0 at hx
+    rw [show s = IsLocalization.mk' X f (1 : Submonoid.powers g) from
+      (IsLocalization.mk'_one X f).symm, ← IsLocalization.mk'_mul, one_mul,
+      IsLocalization.mk'_eq_zero_iff] at hx
+    obtain ⟨⟨_, m, rfl⟩, hm⟩ := hx
+    rw [IsLocalization.mk'_eq_zero_iff]
+    refine ⟨⟨g ^ (m + 1), m + 1, rfl⟩, ?_⟩
+    have := hreg (g ^ m * a) (by rw [← hm]; ring)
+    change g ^ (m + 1) * a = 0
+    rw [pow_succ, show g ^ m * g * a = g₂ * (g₁ * (g ^ m * a)) by ring, this, mul_zero]
+  -- `X ⧸ s` is flat.
+  have hflat : Flat R (X ⧸ LinearMap.range φ) := by
+    have : Flat R (LocalizedModule (Submonoid.powers g) (S ⧸ Ideal.span {f})) := by
+      rw [flat_localizedModule_iff] at hC ⊢
+      intro J y hy
+      obtain ⟨_, ⟨n, rfl⟩, hn⟩ := hC J y hy
+      simp only at hn
+      exact ⟨g ^ n, ⟨n, rfl⟩, by rw [mul_pow, mul_comm (g₁ ^ n), mul_smul, hn, smul_zero]⟩
+    let ψ := (Ideal.span {f} : Submodule S S).toLocalizedQuotient' X (Submonoid.powers g)
+      (Algebra.linearMap S X)
+    let e₁ : LocalizedModule (Submonoid.powers g) (S ⧸ Ideal.span {f}) ≃ₗ[S]
+        X ⧸ (Ideal.span {f} : Submodule S S).localized' X (Submonoid.powers g)
+          (Algebra.linearMap S X) := IsLocalizedModule.iso (Submonoid.powers g) ψ
+    have hloc : (Ideal.span {f} : Submodule S S).localized' X (Submonoid.powers g)
+        (Algebra.linearMap S X) = Submodule.span X {s} := by
+      rw [Submodule.localized'_span, Set.image_singleton]
+      rfl
+    have hrange : (Submodule.span X {s}).restrictScalars R = LinearMap.range φ := by
+      ext x
+      rw [Submodule.restrictScalars_mem, ← Ideal.span, Ideal.mem_span_singleton',
+        LinearMap.mem_range]
+      exact ⟨fun ⟨a, ha⟩ ↦ ⟨a, by rw [← ha, mul_comm]; rfl⟩,
+        fun ⟨a, ha⟩ ↦ ⟨a, by rw [← ha, mul_comm]; rfl⟩⟩
+    let e₂ : (X ⧸ Submodule.span X {s}) ≃ₗ[R] X ⧸ LinearMap.range φ :=
+      (Submodule.Quotient.restrictScalarsEquiv _ _).symm.trans
+        (Submodule.quotEquivOfEq _ _ hrange)
+    exact Flat.of_linearEquiv (((e₁.restrictScalars R).trans
+      ((Submodule.quotEquivOfEq _ _ hloc).restrictScalars R)).trans e₂).symm
+  intro N _ _ y hy
+  have hinj : Function.Injective (φ.rTensor N) := by
+    rw [← LinearMap.lTensor_inj_iff_rTensor_inj]
+    exact LinearMap.lTensor_injective_of_exact_of_flat _ (Submodule.mkQ_surjective _) φ hφ
+      (LinearMap.exact_map_mkQ_range φ) N
+  let ℓ := AlgebraTensorModule.rTensor R N (Algebra.linearMap S X)
+  have : IsLocalizedModule (Submonoid.powers g) ℓ :=
+    IsLocalizedModule.rTensor (A := S) _ (Algebra.linearMap S X)
+  have hnat (z : S ⊗[R] N) : φ.rTensor N (ℓ z) = ℓ (f • z) := by
+    induction z with
+    | zero => simp
+    | add z w hz hw => rw [map_add, map_add, hz, hw, smul_add, map_add]
+    | tmul a n => simp [φ, ℓ, s, smul_tmul']
+  have h0 : ℓ y = 0 := hinj (by rw [hnat, hy, map_zero, map_zero])
+  obtain ⟨⟨_, n, rfl⟩, hn⟩ := (IsLocalizedModule.eq_zero_iff (Submonoid.powers g) (f := ℓ)).mp h0
+  exact ⟨n, hn⟩
 
 end Module
