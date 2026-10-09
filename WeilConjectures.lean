@@ -4,6 +4,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import WeilConjectures.Algebra.Central.ReducedNorm
+public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
@@ -189,6 +190,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
@@ -306,6 +308,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
+public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
@@ -675,6 +678,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.Enriched.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
@@ -708,10 +712,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
@@ -1117,6 +1123,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
