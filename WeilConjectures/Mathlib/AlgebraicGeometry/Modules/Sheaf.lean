@@ -550,6 +550,20 @@ theorem isFiniteLocallyFreeOfRank_of_restrict_iso_free (M : X.Modules) {r : ℕ}
       (f i).isoOpensRange_inv_comp ≪≫
     (restrictFunctor _).mapIso (h i).some ≪≫ restrictFreeIso _ _
 
+/-- An `𝒪_X`-module whose restrictions along a family of open immersions covering `X` are free
+of finite rank is finite locally free. -/
+theorem isFiniteLocallyFree_of_restrict_iso_free (M : X.Modules) {ι : Type u}
+    {Y : ι → Scheme.{u}} (f : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (f i)]
+    (hf : ⨆ i, (f i).opensRange = ⊤) (κ : ι → Type u) [∀ i, Finite (κ i)]
+    (h : ∀ i, Nonempty (M.restrict (f i) ≅ SheafOfModules.free (κ i))) :
+    M.IsFiniteLocallyFree := by
+  refine SheafOfModules.isFiniteLocallyFree_of_exists_over_iso_free.{u, u, u}
+    (fun i ↦ (f i).opensRange) ((Opens.coversTop_iff _ _).2 hf) κ fun i ↦ ⟨?_⟩
+  refine (overIsoFreeEquiv M _ _).symm ?_
+  exact restrictCompIso M (f i) (f i).isoOpensRange.inv (f i).opensRange.ι
+      (f i).isoOpensRange_inv_comp ≪≫
+    (restrictFunctor _).mapIso (h i).some ≪≫ restrictFreeIso _ _
+
 /-- A finite locally free `𝒪_X`-module of rank `r` is free of rank `r` on the members of an open
 cover of `X`. -/
 theorem IsFiniteLocallyFreeOfRank.exists_restrict_iso_free (M : X.Modules) {r : ℕ}
