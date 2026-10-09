@@ -1,8 +1,8 @@
 # Work queue
 
-614 items; claim with `tools/claim.py next <group> [--stage N]`.
+613 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (561)
+## Stage 1: nodes to split (559)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,11 +38,6 @@
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
 | `lem-weil-pbc-eventually-closed-immersion` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
-| `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1010 | none |
-| `lem-weil-pbc-site-covering-isomorphic-family` | 1010 | none |
-| `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
-| `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
-| `lem-weil-pbc-thickening-affine-scheme` | 1010 | none |
 | `def-weil-pbc-charpoly-locally-free` | 1011 | none |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1011 | none |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1011 | none |
@@ -60,6 +55,9 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1011 | none |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1011 | none |
 | `lem-weil-pbc-strictly-henselian-quotient` | 1011 | none |
+| `lem-weil-pbc-surjective-universally-closed-affine-target` | 1011 | none |
+| `lem-weil-pbc-symmetric-algebra-base-change` | 1011 | none |
+| `lem-weil-pbc-symmetric-algebra-quotient-module` | 1011 | none |
 | `lem-weil-pbc-tilde-pullback-base-change` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1011 | none |
@@ -568,7 +566,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (54)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -617,6 +615,7 @@
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
+| `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
@@ -626,7 +625,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 572 nodes that wait for stage 1, 247 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 251 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

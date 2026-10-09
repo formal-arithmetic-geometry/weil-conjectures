@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+ "kind": "statement",
+ "title": "The symmetric algebra of a finite free module is a polynomial ring",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, and $F=R^{\\oplus n}$ with standard basis $e_1,\\dots,e_n$; let $\\operatorname{Sym}_R(F)$ and $\\iota_F:F\\to\\operatorname{Sym}_R(F)$ be the symmetric algebra of $F$ and its canonical $R$-linear map [lem-weil-pbc-symmetric-algebra-universal-property]. Then the $R$-algebra homomorphism $\\varphi:\\operatorname{Sym}_R(F)\\to R[x_1,\\dots,x_n]$ to the polynomial ring in $n$ variables with $\\varphi(\\iota_F(e_i))=x_i$ for $i=1,\\dots,n$ (it exists and is unique by the universal property, applied to the $R$-linear map $F\\to R[x_1,\\dots,x_n]$, $e_i\\mapsto x_i$) is an isomorphism of $R$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00DM (section-tensor-algebra), paragraph after the definition of Sym(M), line 2226: 'when M = Rx_1 + ... + Rx_n is a finite free module ... Sym(M) = R[x_1, ..., x_n] is a polynomial algebra' (stated without proof); Lemma 00DN (lemma-free-tensor-algebra, line 2231) for the freeness of the symmetric powers"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric algebra of a free module is isomorphic to multivariate polynomial ring",
+   "results": "SymmetricAlgebra.IsSymmetricAlgebra.mvPolynomial, Module.Basis.symmetricAlgebra (Mathlib.LinearAlgebra.SymmetricAlgebra.Basis), SymmetricAlgebra, MvPolynomial.esymmAlgEquiv, freeCommRingEquivMvPolynomialInt",
+   "date": "2026-10-10",
+   "verdict": "match: SymmetricAlgebra.equivMvPolynomial / IsSymmetricAlgebra.mvPolynomial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric algebra of a finite free module is isomorphic to a polynomial ring in finitely many variables",
+   "results": "SymmetricAlgebra.IsSymmetricAlgebra.mvPolynomial, Module.Basis.symmetricAlgebra_repr_apply (uses SymmetricAlgebra.equivMvPolynomial), IsSymmetricAlgebra.of_equiv, Module.Basis.symmetricAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def\\|lemma\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean; lean_local_search SymmetricAlgebra.equivMvPolynomial",
+   "results": "SymmetricAlgebra.equivMvPolynomial (Basis.lean:49, b : Basis κ R M → SymmetricAlgebra R M ≃ₐ[R] MvPolynomial κ R, built as lift (b.constr R X) with inverse aeval (ι ∘ b)), equivMvPolynomial_ι_apply (:58, ι (b i) ↦ X i), equivMvPolynomial_symm_X (:63), IsSymmetricAlgebra.mvPolynomial (:68)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SymmetricAlgebra.equivMvPolynomial, SymmetricAlgebra.equivMvPolynomial_ι_apply",
+  "file": "Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean",
+  "line": 49,
+  "how": "specializes in one line: for any basis b : Basis κ R M, equivMvPolynomial b : SymmetricAlgebra R M ≃ₐ[R] MvPolynomial κ R with equivMvPolynomial_ι_apply (line 58): ι R M (b i) ↦ X i; take M = Fin n → R, b = Pi.basisFun R (Fin n), κ = Fin n. The R-algebra map is the node's φ (both are R-algebra maps sending ι(e_i) to x_i, hence equal by SymmetricAlgebra.algHom_ext)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: SymmetricAlgebra.equivMvPolynomial (LinearAlgebra/SymmetricAlgebra/Basis.lean:49), equivMvPolynomial_ι_apply (:58)."
+ }
+}
