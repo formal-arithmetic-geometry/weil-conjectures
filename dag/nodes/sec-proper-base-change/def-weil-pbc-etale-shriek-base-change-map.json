@@ -24,9 +24,106 @@
   "lem-weil-pbc-underived-exchange-module-linear",
   "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The square and the etaleness of $j'$.* Write the fibre product $V'=Y\\times_XV$ [def-pc-fibre-product] with its projections $j':V'\\to Y$, $f':V'\\to V$; then $f\\circ j'=j\\circ f'$. In the notation $(f,f',g,g',\\alpha)$ of [def-weil-pbc-cartesian-square] (top $X'\\xrightarrow{g'}X$, bottom $Y'\\xrightarrow{g}Y$, $f:X\\to Y$, $f':X'\\to Y'$) take $X'=V'$, $X=Y$, $Y=X$, $Y'=V$, $g=j$, $g'=j'$, and the identification $\\alpha=\\mathrm{id}:V'\\to Y\\times_XV$; so $\\square=(f,f',j,j',\\mathrm{id})$ is a cartesian square, with $\\theta_\\square:f'^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}f^{-1}$. Since $j:V\\to X$ is etale [def-weil-etale-morphism], $(V,j)$ is an object of $X_{\\Et}$, and clause 1 of [lem-weil-pbc-etale-base-change-finite-limits] for $u=f$, $W=V$ says that the base change $Y\\times_XV\\to Y$, i.e. $j'$, is etale.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493: the fibre-product square V' = Y x_X V, j', f'"
+   }
+  },
+  {
+   "text": "*The four adjunctions on sheaves of $\\Lambda$-modules.* (a) $j$ and $j'$ are etale (step 1), so the extensions by zero $j_!:\\Mod(V_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ and $j'_!:\\Mod(V'_{\\Et},\\Lambda)\\to\\Mod(Y_{\\Et},\\Lambda)$ are defined [def-weil-pbc-etale-sum-extension], and by [lem-weil-pbc-etale-restriction-injectives] they are left adjoint to the inverse images $j^{-1}$, $j'^{-1}$ on sheaves of modules over the constant ring $\\Lambda$; write $\\eta_j,\\varepsilon_j$ and $\\eta_{j'},\\varepsilon_{j'}$ for units and counits (this is Stacks 03S3(3)). (b) By [prop-weil-pbc-inverse-image-modules-exact](3), for $u\\in\\{f,f'\\}$ the module inverse image $u^{-1}$ is left adjoint to the module direct image $u_*$, with unit $\\eta_u$ and counit $\\varepsilon_u$ those of the adjunction of abelian sheaves [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. (c) The functor $j^{-1}$ in (a) is the inverse image of [def-weil-pbc-inverse-image] acting on module sheaves: the abelian inverse image of the underlying sheaf, with a $\\Lambda_V$-module structure for which $j^{-1}$ of the action map is the action map. By the uniqueness in [prop-weil-pbc-inverse-image-modules-exact](2) this is the module inverse image functor of that proposition, so the right adjoints in (a) and (b), and hence $R_1=j^{-1}f_*$ and $R_2=f'_*j'^{-1}$, are the functors on which [lem-weil-pbc-underived-exchange-module-linear] is stated; the same holds for $j'$.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03S3 (definition-extension-zero), line 11361, clause (3): j^{-1} on Mod(X_et, Lambda) has the left adjoint j_!; proof of Lemma 03S6, lines 11506-11508"
+   }
+  },
+  {
+   "text": "*The composite adjunctions.* Apply [def-weil-pbc-composite-adjunction] with $\\mathcal A=\\Mod(V_{\\Et},\\Lambda)$, $\\mathcal B=\\Mod(X_{\\Et},\\Lambda)$, $\\mathcal C=\\Mod(Y_{\\Et},\\Lambda)$, $F=j_!\\dashv G=j^{-1}$ and $H=f^{-1}\\dashv I=f_*$ (step 2): $L_1=f^{-1}\\circ j_!\\dashv R_1=j^{-1}\\circ f_*$, with unit $\\eta_{1,M}=j^{-1}(\\eta_{f,j_!M})\\circ\\eta_{j,M}$ and counit $\\varepsilon_{1,N}=\\varepsilon_{f,N}\\circ f^{-1}(\\varepsilon_{j,f_*N})$. Apply it again with $\\mathcal B=\\Mod(V'_{\\Et},\\Lambda)$, $F=f'^{-1}\\dashv G=f'_*$ and $H=j'_!\\dashv I=j'^{-1}$: $L_2=j'_!\\circ f'^{-1}\\dashv R_2=f'_*\\circ j'^{-1}$, with unit $\\eta_{2,M}=f'_*(\\eta_{j',f'^{-1}M})\\circ\\eta_{f',M}$ and counit $\\varepsilon_{2,N}=\\varepsilon_{j',N}\\circ j'_!(\\varepsilon_{f',j'^{-1}N})$. Both are adjunctions between $\\Mod(V_{\\Et},\\Lambda)$ (source of $L_i$) and $\\Mod(Y_{\\Et},\\Lambda)$ (source of $R_i$), as the statement requires; the formula for $\\eta_{1,M}$ in the statement is the one just written.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 03S6 (lemma-shriek-base-change), lines 11506-11508: j'_! f'^{-1} is left adjoint to f'_*(j')^{-1} and f^{-1} j_! is left adjoint to j^{-1} f_*"
+   }
+  },
+  {
+   "text": "*$\\Ex^0_\\square$ is a natural transformation $R_1\\to R_2$ of functors on sheaves of modules.* [def-weil-pbc-underived-exchange] defines $\\Ex^0_{\\square,F}:g^{-1}f_*F\\to f'_*g'^{-1}F$ only for an abelian sheaf $F$ on the top-right scheme of the square (here $Y$), as a morphism of abelian sheaves; with the dictionary of step 1 this is $\\Ex^0_{\\square,F}:j^{-1}f_*F\\to f'_*j'^{-1}F$ on $V_{\\Et}$. It does not by itself give a morphism of sheaves of $\\Lambda_V$-modules, nor naturality. [lem-weil-pbc-underived-exchange-module-linear], applied to the cartesian square $\\square$ of step 1 (its $X,Y,Y',X',g,g'$ are our $Y,X,V,V',j,j'$), says that for $G\\in\\Mod(Y_{\\Et},\\Lambda)$ the morphism $\\Ex^0_{\\square,G}$ formed on the underlying abelian sheaf is $\\Lambda_V$-linear, $R_1G\\to R_2G$, and that these morphisms form a natural transformation $\\Ex^0_\\square:j^{-1}\\circ f_*=R_1\\to R_2=f'_*\\circ j'^{-1}$ of functors $\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(V_{\\Et},\\Lambda)$; its functors are those of step 2(c), so $\\Ex^0_\\square$ is a morphism between the right adjoints of step 3.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 03S6 (lemma-shriek-base-change), lines 11508-11509: f'_*(j')^{-1} = j^{-1} f_* (the comparison map of the right adjoints, on sheaves of modules)"
+   }
+  },
+  {
+   "text": "*$\\beta$ exists, is unique and natural.* By [def-weil-pbc-adjunction-conjugate], for the two adjunctions $L_1\\dashv R_1$, $L_2\\dashv R_2$ of step 3, with $\\mathcal C=\\Mod(V_{\\Et},\\Lambda)$ and $\\mathcal D=\\Mod(Y_{\\Et},\\Lambda)$, the assignment $\\tau\\mapsto\\tau^c$ is a bijection from natural transformations $L_2\\to L_1$ to natural transformations $R_1\\to R_2$. $\\Ex^0_\\square$ is one of the latter (step 4), so there is exactly one natural transformation $\\beta:L_2=j'_!f'^{-1}\\to L_1=f^{-1}j_!$ with $\\beta^c=\\Ex^0_\\square$; being a natural transformation, its components $\\beta_M$ are morphisms of $\\Mod(Y_{\\Et},\\Lambda)$ natural in $M$.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 03S6 (lemma-shriek-base-change), lines 11506-11509: the comparison of left adjoints obtained from the comparison of right adjoints"
+   }
+  },
+  {
+   "text": "*The explicit formula.* By [def-weil-pbc-adjunction-conjugate] the conjugate is the mate [def-weil-pbc-adjunction-mate] for $G=\\mathrm{id}_{\\mathcal C}$, $H=\\mathrm{id}_{\\mathcal D}$, and [def-weil-pbc-adjunction-mate] gives the inverse of the mate bijection: $\\sigma\\mapsto(\\varepsilon_2HL_1)\\circ(L_2\\sigma L_1)\\circ(L_2G\\eta_1)$. With $G,H$ identities and $\\sigma=\\Ex^0_\\square$ this is $\\beta_M=\\varepsilon_{2,L_1M}\\circ L_2(\\Ex^0_{\\square,L_1M})\\circ L_2(\\eta_{1,M})$, the composite displayed in the statement, with $\\eta_{1,M}=j^{-1}(\\eta_{f,j_!M})\\circ\\eta_{j,M}$ by step 3. The hom bijection of the adjunction $L_2\\dashv R_2$ sends $h:M\\to R_2N$ to $\\varepsilon_{2,N}\\circ L_2(h)$ (the counit description of the hom bijection, part of the composite adjunction [def-weil-pbc-composite-adjunction], whose hom bijection is the composite of those of $j'_!\\dashv j'^{-1}$ and $f'^{-1}\\dashv f'_*$); for $h=\\Ex^0_{\\square,L_1M}\\circ\\eta_{1,M}$ and $N=L_1M$, functoriality of $L_2$ gives $\\varepsilon_{2,L_1M}\\circ L_2(\\Ex^0_{\\square,L_1M})\\circ L_2(\\eta_{1,M})=\\beta_M$, which is the second description in the statement.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Section 0036 (section-adjoint, line 3341), Definition 0037 (definition-adjoint, line 3344): adjoint functors via the hom bijection and its unit/counit description; the formula is Mathlib's conjugateEquiv_symm_apply_app (simps of conjugateEquiv, Mathlib/CategoryTheory/Adjunction/Mates.lean:275, inverse of mateEquiv line 84)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S6 (lemma-shriek-base-change), proof lines 11506-11514 (the comparison of left adjoints from the comparison f'_*(j')^{-1} = j^{-1}f_* of right adjoints); Definition 03S3(3) (definition-extension-zero, line 11361); the conjugate/mate calculus as in Mathlib Mates.lean"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +152,17 @@
    "results": "only LinearAlgebra/Pi.lean, LinearAlgebra/InvariantBasisNumber.lean, LinearAlgebra/Dimension/StrongRankCondition.lean, Algebra/Group/Pi/Lemmas.lean (Function.extendByZero on functions); nothing in CategoryTheory/Sites",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def conjugateEquiv\\|def mateEquiv\\|unit_conjugateEquiv_symm' Mathlib/CategoryTheory/Adjunction/Mates.lean; grep -n 'def comp ' Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "conjugateEquiv (Mates.lean:275, @[simps!], so conjugateEquiv_symm_apply_app exists), mateEquiv (Mates.lean:84, invFun = the formula of step 6), unit_conjugateEquiv_symm (Mates.lean:311), Adjunction.comp (Basic.lean:567): the generic construction; no etale extension by zero or etale direct image of modules in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match (the construction pattern is Mathlib's; the objects are not)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +182,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-etale-shriek-base-change-map",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks 03S6 (proof lines 11506-11514) and 03S3(3) (both tags verified in tags/tags) and against the cited leaves. Six well-formedness steps: (1) the square (f,f',j,j',id) is a cartesian square in the convention of def-weil-pbc-cartesian-square (X'=V', X=Y, Y=X, Y'=V, g=j, g'=j') and j' is etale by clause 1 of lem-weil-pbc-etale-base-change-finite-limits; (2) the four module adjunctions (j_! -| j^{-1}, j'_! -| j'^{-1} by lem-weil-pbc-etale-restriction-injectives; f^{-1} -| f_*, f'^{-1} -| f'_* by prop-weil-pbc-inverse-image-modules-exact(3)), with the right adjoints identified with the module functors of prop-...(2) by its uniqueness clause; (3) the composite adjunctions with their units and counits (composite-adjunction leaf); the eta_1 formula of the statement checked; (4) def-weil-pbc-underived-exchange defines Ex^0 only on abelian sheaves and without naturality; lem-weil-pbc-underived-exchange-module-linear makes it a natural transformation R_1 -> R_2 on Mod(-,Lambda); (5) existence, uniqueness, naturality of beta from the conjugate bijection (Mathlib leaf conjugateEquiv); (6) the explicit formula is the inverse of the mate bijection as stated in def-weil-pbc-adjunction-mate with G=H=id, and the hom-bijection description follows from the counit description. No new node was needed. Statement and stmt_deps kept. lem-weil-pbc-etale-shriek-base-change-modules is not cited (it cites this node; citing it would close a cycle). Lean candidate (not attached): slopmaster2 Etale.openImmersionLowerShriekBaseChangeMap (BaseChangeSquare.lean:107, sorry-free) is the same construction for open immersions; the etale version would use Etale.etaleLowerShriekUpperStarAdjunction (EtaleMap.lean:63, sorry-free) and Etale.baseChangeMap (BaseChange/Square.lean:85, sorry-free)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Definition node split by six well-formedness steps, no new node: the cartesian square and j' etale, the four module adjunctions (restriction-injectives for j_! -| j^{-1}; prop-weil-pbc-inverse-image-modules-exact (3) for f^{-1} -| f_*, cited as a definition-level input from sk-def-exchange, identified with the restriction lemma's functor by the prop's uniqueness clause), the composites with explicit units and counits, Ex^0 on modules via the linearity node (def-weil-pbc-underived-exchange defines Ex^0 for abelian sheaves only), beta by the conjugate bijection, the explicit formula from the mate leaf (Mathlib conjugateEquiv_symm_apply_app, Mates.lean:275). Lean candidate pattern reported: Etale.openImmersionLowerShriekBaseChangeMap (BaseChangeSquare.lean:107). Tags verified (03S6, 03S3, 0036, 0037)."
+ }
 }
