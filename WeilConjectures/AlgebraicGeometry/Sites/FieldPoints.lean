@@ -34,6 +34,24 @@ universe u
 
 open CategoryTheory Limits Opposite
 
+namespace CategoryTheory.Sheaf
+
+variable {C : Type*} [Category C] {J : GrothendieckTopology C}
+
+lemma nsmul_hom_app_apply {F G : Sheaf J AddCommGrpCat.{u}} (f : F ⟶ G) (m : ℕ) (U : Cᵒᵖ)
+    (x : F.obj.obj U) : (m • f).hom.app U x = m • f.hom.app U x := by
+  have e : (m • f).hom = m • f.hom := (sheafToPresheaf _ _).map_nsmul (f := f) (n := m)
+  rw [e, NatTrans.app_nsmul]
+  rfl
+
+lemma zsmul_hom_app_apply {F G : Sheaf J AddCommGrpCat.{u}} (f : F ⟶ G) (m : ℤ) (U : Cᵒᵖ)
+    (x : F.obj.obj U) : (m • f).hom.app U x = m • f.hom.app U x := by
+  have e : (m • f).hom = m • f.hom := (sheafToPresheaf _ _).map_zsmul (f := f) (r := m)
+  rw [e, NatTrans.app_zsmul]
+  rfl
+
+end CategoryTheory.Sheaf
+
 namespace AlgebraicGeometry.Scheme
 
 variable {K : Type u} [Field K]
@@ -221,6 +239,40 @@ lemma etaleBaseChangeMap_snd (φ : A →ₐ[K] B) (V : (Spec (.of K)).Etale) :
       etaleBaseChangeSnd B V ≫ etaleSpecMap φ := by
   apply MorphismProperty.Over.Hom.ext
   exact pullback.lift_snd _ _ _
+
+
+variable (A) in
+/-- The morphism `V₁ ×_K A ⟶ V₂ ×_K A` induced by a morphism `V₁ ⟶ V₂`. These are the
+restriction maps of the pushforward along `Spec A ⟶ Spec K`. -/
+noncomputable abbrev etaleBaseChangeHom {V₁ V₂ : (Spec (.of K)).Etale} (f : V₁ ⟶ V₂) :
+    etaleBaseChange A V₁ ⟶ etaleBaseChange A V₂ :=
+  (MorphismProperty.Over.map ⊤ (etaleSpec K A).prop).map
+    ((MorphismProperty.Over.pullback @Etale ⊤ (etaleSpec K A).hom).map f)
+
+@[reassoc (attr := simp)]
+lemma etaleBaseChangeHom_fst {V₁ V₂ : (Spec (.of K)).Etale} (f : V₁ ⟶ V₂) :
+    etaleBaseChangeHom A f ≫ etaleBaseChangeFst A V₂ = etaleBaseChangeFst A V₁ ≫ f := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma etaleBaseChangeHom_snd {V₁ V₂ : (Spec (.of K)).Etale} (f : V₁ ⟶ V₂) :
+    etaleBaseChangeHom A f ≫ etaleBaseChangeSnd A V₂ = etaleBaseChangeSnd A V₁ := by
+  apply MorphismProperty.Over.Hom.ext
+  exact pullback.lift_snd _ _ _
+
+lemma etaleBaseChangeMap_comp {C : Type u} [CommRing C] [Algebra K C] [Algebra.Etale K C]
+    (φ : A →ₐ[K] B) (ψ : B →ₐ[K] C) (V : (Spec (.of K)).Etale) :
+    etaleBaseChangeMap ψ V ≫ etaleBaseChangeMap φ V = etaleBaseChangeMap (ψ.comp φ) V := by
+  refine etaleBaseChange_hom_ext ?_ ?_
+  · simp
+  · simp [etaleSpecMap_comp]
+
+@[reassoc]
+lemma etaleBaseChangeMap_hom (φ : A →ₐ[K] B) {V₁ V₂ : (Spec (.of K)).Etale} (f : V₁ ⟶ V₂) :
+    etaleBaseChangeMap φ V₁ ≫ etaleBaseChangeHom A f =
+      etaleBaseChangeHom B f ≫ etaleBaseChangeMap φ V₂ := by
+  refine etaleBaseChange_hom_ext ?_ ?_ <;> simp
 
 /-- For a nonempty `A`, the projection `V ×_K A ⟶ V` is surjective. -/
 lemma surjective_etaleBaseChangeFst [Nontrivial A] (V : (Spec (.of K)).Etale) :
