@@ -42,7 +42,7 @@ they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
   injectives it is the unit of `ν^* ⊣ ν_*` on `I`, which is invertible, followed by the unit
   `ν_* ν^* I ⟶ R⁺ν_* ν^* I`, which is invertible because `ν^*` sends injectives to
   `ν_*`-acyclic objects
-  (`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`).
+  (`AlgebraicGeometry.ProEtale.exact_isIso_unit_rightAcyclic_comparisonUpperStar`).
 
 -/
 
@@ -108,15 +108,18 @@ lemma DerivedCategory.plusEtaleOrigin.plus
 /-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
 finite level
 
-*Acyclicity.* For an injective étale sheaf `I`, the pro-étale sheaf `ν^* I` is acyclic for the
-restriction `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The other two clauses of the proposition
-are the exactness of `ν^*` (`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`
-and `AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar`) and the
-invertibility of the unit `F ⟶ ν_* ν^* F`
-(`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`). -/
-theorem rightAcyclic_comparisonUpperStar_obj_of_injective (I : Sheaf X.smallEtaleTopology A)
-    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
-  sorry
+The comparison functor `ν^*` is exact, the unit `F ⟶ ν_* ν^* F` of `ν^* ⊣ ν_*` is an isomorphism
+for every étale sheaf `F`, and for every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is
+acyclic for `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The first two clauses are
+`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`,
+`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` and
+`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
+theorem exact_isIso_unit_rightAcyclic_comparisonUpperStar :
+    (Limits.PreservesFiniteLimits ν^*(X)[A] ∧ Limits.PreservesFiniteColimits ν^*(X)[A]) ∧
+      IsIso (comparisonAdjunction A X).unit ∧
+      ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
+        ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
+  ⟨⟨inferInstance, inferInstance⟩, isIso_comparisonAdjunction_unit A X, sorry⟩
 
 section Adjunction
 
@@ -152,10 +155,9 @@ theorem isIso_derivedComparisonAdjunction_unit_app
     IsIso ((derivedComparisonAdjunction A X).unit.app M) := by
   -- the unit of the bounded below adjunction is invertible: `ν^*` is exact, the unit of
   -- `ν^* ⊣ ν_*` is invertible and `ν^*` sends injectives to `ν_*`-acyclic objects
-  have := isIso_comparisonAdjunction_unit A X
+  obtain ⟨-, _, hI⟩ := exact_isIso_unit_rightAcyclic_comparisonUpperStar A X
   have hplus := (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
-    (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I)
-    ⟨M, hM⟩
+    (fun _ _ ↦ inferInstance) (fun I _ ↦ hI I) ⟨M, hM⟩
   rw [← (comparisonAdjunction A X).derivedAdjunctionPlus_eq_derivedPlus] at hplus
   -- it is the restriction of the unbounded unit along the inclusion of `D⁺`
   have h := (derivedComparisonAdjunction A X).map_restrictFullyFaithful_unit_app
