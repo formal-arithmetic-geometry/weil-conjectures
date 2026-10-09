@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-normalization-in-residue-field-extension",
+ "kind": "statement",
+ "title": "The normalization of a scheme in a finite extension of a residue field is a normal integral scheme, integral over the base, with the extension as generic point",
+ "statement": "Let $X$ be a quasi-separated scheme [def-weil-pbc-scheme-conventions], $x\\in X$ a point with residue field $\\kappa(x)$ [def-weil-residue-field], $K/\\kappa(x)$ a finite field extension, and $h:\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(x)\\to X$ the composite of the induced morphism with the canonical morphism [def-weil-affine-spectrum]. Then $h$ is quasi-compact and quasi-separated, and there are a scheme $Y$, an integral morphism $\\nu:Y\\to X$ [def-weil-finite-integral-morphism] and a morphism $g:\\operatorname{Spec}K\\to Y$ with $h=\\nu\\circ g$ such that: (a) $Y$ is an integral scheme [def-pc-integral-scheme] all of whose local rings $\\mathcal O_{Y,y}$ are integrally closed domains (Y is normal); (b) $g$ maps the point of $\\operatorname{Spec}K$ to the generic point $\\eta_Y$ of $Y$ and induces an isomorphism $\\kappa(\\eta_Y)\\xrightarrow{\\sim}K$ of fields, i.e. $g$ is the inclusion of the generic point of $Y$ with $K$ as function field. (One may take for $\\nu$ the normalization of $X$ in $\\operatorname{Spec}K$, Stacks 035H: $Y=\\underline{\\operatorname{Spec}}_X(\\mathcal O')$ with $\\mathcal O'$ the integral closure of $\\mathcal O_X$ in $h_*\\mathcal O_{\\operatorname{Spec}K}$; if $Z\\subseteq X$ is the reduced closed subscheme on $\\overline{\\{x\\}}$, it is also the normalization of $Z$ in $\\operatorname{Spec}K$, by the last clause of Stacks 035I, which is the scheme used in the proof of Stacks 09Z6.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Definition 035H (definition-normalization-X-in-Y, line 13910), Lemma 035I (lemma-characterize-normalization: nu integral, f' dominant), Lemma 035L (lemma-normal-normalization, line 14170: Y normal, Y -> X' dominant and bijective on irreducible components, so X' is normal integral when Y = Spec K); as used in literature/stacks-project/etale-cohomology.tex, proof of Lemma 09Z6, line 12972-12978 ('Let Y -> Z be the normalization of Z in Spec(K) ... Y is a normal integral scheme ... it is clear that K is the function field of Y'; the function-field identification is called clear there)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization of a scheme in a finite extension of its function field is a normal integral scheme with integral morphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalization, instIsIntegralHomFromNormalization (fromNormalization integral), instIsIntegralNormalization (normalization of f integral when the source X is integral), normalizationDesc, instIsIsoToNormalizationOfIsIntegralHom (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-10",
+   "verdict": "partial: Mathlib has the relative normalization f.normalization of a qcqs f with f.fromNormalization integral, f.toNormalization dominant (instIsDominant, Normalization.lean:341) and f.normalization integral for integral source (:358); no normality of f.normalization and no identification of the function field: no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative normalization of a scheme in a normal scheme is normal",
+   "results": "instIsIntegralNormalization, instIsIntegralHomNormalizationDesc, instIsIntegralHomFromNormalization, instIsAffineHomToNormalization, instIsIsoToNormalizationOfIsIntegralHom, Scheme.Hom.normalization (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-10",
+   "verdict": "no match (normality not stated)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegral",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization only; the query 'AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsNormal' fails: unknown identifier AlgebraicGeometry.IsNormal",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no normal-scheme class"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNormal|isNormal|IsIntegrallyClosed|functionField' Mathlib/AlgebraicGeometry/Normalization.lean; grep -rn 'class IsNormal|IsNormalScheme|NormalScheme' Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match; integrality, dominance of Spec K -> Y and integrality of Y are in Mathlib (Normalization.lean:200, :341, :358), normality and the function field are not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

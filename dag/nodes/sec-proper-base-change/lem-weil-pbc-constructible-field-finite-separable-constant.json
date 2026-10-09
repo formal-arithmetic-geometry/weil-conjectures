@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-constructible-field-finite-separable-constant",
+ "kind": "statement",
+ "title": "A constructible sheaf of modules on the spectrum of a field becomes constant over a finite separable extension",
+ "statement": "Let $k$ be a field, $\\Lambda$ a finite commutative ring and $G$ a constructible sheaf of $\\Lambda$-modules on $(\\operatorname{Spec}k)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], an object of $\\Mod((\\operatorname{Spec}k)_{\\Et},\\Lambda)$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Then there are a finite separable field extension $K/k$, a finite $\\Lambda$-module $M$ (finite as a set) and an isomorphism of sheaves of $\\Lambda$-modules $\\pi^{-1}G\\cong\\underline M$ on $(\\operatorname{Spec}K)_{\\Et}$, where $\\pi:\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is the induced morphism [def-weil-affine-spectrum], $\\pi^{-1}$ the inverse image [def-weil-pbc-inverse-image] and $\\underline M$ the constant sheaf of $\\Lambda$-modules with value $M$ [def-weil-pbc-constant-sheaf]. (Expected proof, for the split: a stratification of the one-point space $\\operatorname{Spec}k$ has exactly one nonempty stratum, whose immersion is an isomorphism onto $\\operatorname{Spec}k$, so $G$ is finite locally constant: there are an etale covering $\\{U_i\\to\\operatorname{Spec}k\\}$ and finite $\\Lambda$-modules $M_i$ with $G|_{U_i}\\cong\\underline{M_i}$; some $U_i$ is nonempty; an etale $k$-scheme is a disjoint union of spectra of finite separable extensions of $k$ (Stacks 02GL), so some $\\operatorname{Spec}K\\to U_i$ is an open and closed immersion with $K/k$ finite separable; the inverse image of a constant sheaf is constant.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 09Z6 (lemma-constructible-maps-into-constant), line 12969-12971: 'Since F is constructible, there is a finite separable extension K/kappa(x) such that F|_Spec(K) is the constant sheaf with value E for some finite set E' (stated without proof; the module form is that of part (3)); Definition 03RU (definition-finite-locally-constant); literature/stacks-project/morphisms.tex Lemma 02GL (lemma-etale-over-field)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally constant etale sheaf on spectrum of a field becomes constant after a finite separable extension",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso, Sheaf.IsConstant (Mathlib.CategoryTheory.Sites.ConstantSheaf), Algebra.FormallyEtale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field), StructureSheaf.exists_const: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale sheaf on Spec of a field locally constant trivialized by finite separable field extension",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod (etale algebras over a field are finite products of finite separable extensions, Mathlib.RingTheory.Etale.Field), Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt: ingredients only",
+   "date": "2026-10-10",
+   "verdict": "no match (the ring-theoretic ingredient 02GL is Algebra.Etale.iff_exists_algEquiv_prod)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Algebra.IsSeparable",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field)",
+   "date": "2026-10-10",
+   "verdict": "no match for the sheaf statement; ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' Mathlib; grep -rn 'constant' Mathlib/AlgebraicGeometry/Sites/*.lean",
+   "results": "smallEtaleTopology in Sites/Etale.lean, EtalePoint.lean, AffineEtale.lean only; Sites/ConstantSheaf.lean is the Zariski sheaf of continuous maps (constant sheaf TODO); no locally constant or constructible etale sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

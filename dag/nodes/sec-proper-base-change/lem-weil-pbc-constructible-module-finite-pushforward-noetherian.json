@@ -18,9 +18,150 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setup at a point; the generic trivialization.* Fix a point $x\\in X$ and let $\\varepsilon_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical morphism. The inverse image $\\varepsilon_x^{-1}F$ is a constructible sheaf of $\\Lambda$-modules on $\\operatorname{Spec}\\kappa(x)$ by [prop-constructible-pullback] (on the one-point space $\\operatorname{Spec}\\kappa(x)$ every stratum is trivially a constructible subset, so condition (a) of [def-weil-pbc-etale-constructible-sheaf] holds). By [lem-weil-pbc-constructible-field-finite-separable-constant] there are a finite separable extension $K/\\kappa(x)$, a finite $\\Lambda$-module $M$ and an isomorphism $\\pi^{-1}\\varepsilon_x^{-1}F\\cong\\underline M_{\\operatorname{Spec}K}$, $\\pi:\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(x)$. Put $h=\\varepsilon_x\\circ\\pi:\\operatorname{Spec}K\\to X$; composing with the canonical isomorphism $h^{-1}\\cong\\pi^{-1}\\varepsilon_x^{-1}$ of [lem-weil-pbc-inverse-image-composition] gives an isomorphism of sheaves of $\\Lambda$-modules $\\alpha:h^{-1}F\\xrightarrow{\\sim}\\underline M_{\\operatorname{Spec}K}$. (Stacks: 'Since $\\mathcal F$ is constructible, there is a finite separable extension $K/\\kappa(x)$ such that $\\mathcal F|_{\\Spec(K)}$ is the constant sheaf with value $E$'.)",
+   "uses": [
+    "prop-constructible-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-field-finite-separable-constant",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12959-12971"
+   }
+  },
+  {
+   "text": "*The normal model.* $X$ is Noetherian, hence quasi-separated. By [lem-weil-pbc-normalization-in-residue-field-extension] applied to $x$ and $K/\\kappa(x)$ there are a normal integral scheme $Y$, an integral morphism $\\nu:Y\\to X$ and the inclusion $g:\\operatorname{Spec}K\\to Y$ of the generic point of $Y$ (with $K$ as function field) such that $h=\\nu\\circ g$. (Stacks takes the normalization of the reduced closure $Z=\\overline{\\{x\\}}$ in $\\operatorname{Spec}K$ and composes with $Z\\to X$; that is the same $X$-scheme, by the last clause of Stacks 035I, recorded in the new node; working over $X$ directly removes the closed immersion from the argument.)",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12967-12978"
+   }
+  },
+  {
+   "text": "*The map $\\varphi:F\\to\\nu_*\\underline M$.* By [lem-weil-pbc-normal-constant-generic] applied to the normal integral $Y$ and $g$, the unit $u:\\underline M_Y\\to g_*g^{-1}\\underline M_Y$ is an isomorphism; the node is stated for a finite abelian group $E$, and $M$ is one; $u$ is the unit of the adjunction $g^{-1}\\dashv g_*$, which is $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction], so $u$ is an isomorphism of sheaves of $\\Lambda$-modules (the constant sheaf of $\\Lambda$-modules has the constant abelian sheaf as underlying sheaf, both being sheafifications of the same presheaf, [def-weil-pbc-constant-sheaf]); and $g^{-1}\\underline M_Y\\cong\\underline M_{\\operatorname{Spec}K}$ by [lemma-constructible-pullback-constant]. Let $\\alpha':g^{-1}\\nu^{-1}F\\cong h^{-1}F\\xrightarrow{\\alpha}\\underline M_{\\operatorname{Spec}K}=g^{-1}\\underline M_Y$ (the first isomorphism from [lem-weil-pbc-inverse-image-composition]). Define $\\psi=u^{-1}\\circ g_*(\\alpha')\\circ\\eta_g:\\nu^{-1}F\\to g_*g^{-1}\\nu^{-1}F\\to g_*g^{-1}\\underline M_Y\\to\\underline M_Y$, the map adjoint to $\\alpha'$ followed by $u^{-1}$, and let $\\varphi:F\\to\\nu_*\\underline M_Y$ be the map adjoint to $\\psi$ under $\\nu^{-1}\\dashv\\nu_*$, i.e. $\\varphi=\\nu_*(\\psi)\\circ\\eta_\\nu$ and $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$. All maps are $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction]. (Stacks: 'The map $\\mathcal F|_{\\Spec(K)}\\to\\underline E$ is adjoint to a map $\\mathcal F|_Y\\to g_*\\underline E=\\underline E$ ... This in turn is adjoint to a map $\\varphi:\\mathcal F\\to f_*\\underline E$'.)",
+   "uses": [
+    "lem-weil-pbc-normal-constant-generic",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "def-weil-pbc-constant-sheaf",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12979-12984, using Lemma 09Z5 (lemma-push-constant-sheaf-from-open) (1)"
+   }
+  },
+  {
+   "text": "*$\\varphi$ is injective at every geometric point over $x$.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point lying over $x$ [def-weil-geometric-point], i.e. a field map $\\kappa(x)\\to\\Omega$ with $\\Omega$ algebraically closed. As $K/\\kappa(x)$ is algebraic it extends to $K\\to\\Omega$, giving a geometric point $\\bar\\omega$ of $\\operatorname{Spec}K$ with $h\\circ\\bar\\omega=\\bar x$; put $\\bar y=g\\circ\\bar\\omega$, so $\\nu\\circ\\bar y=\\bar x$. (i) $g^{-1}(\\psi)$ equals $\\alpha'$ up to the identification $g^{-1}\\underline M_Y=\\underline M_{\\operatorname{Spec}K}$: indeed $\\varepsilon_g\\circ g^{-1}(u)=\\mathrm{id}$ (triangle identity, $u$ being the unit at $\\underline M_Y$) and $g^{-1}(u)$ is an isomorphism, so $g^{-1}(u)^{-1}=\\varepsilon_g$, whence $g^{-1}\\psi=\\varepsilon_g\\circ g^{-1}g_*(\\alpha')\\circ g^{-1}(\\eta_g)=\\alpha'\\circ\\varepsilon_g\\circ g^{-1}(\\eta_g)=\\alpha'$ by naturality of $\\varepsilon_g$ and the other triangle identity. By the natural isomorphism $c_{g,\\bar\\omega}:(g^{-1}H)_{\\bar\\omega}\\cong H_{\\bar y}$ of [lem-weil-pbc-inverse-image-stalk-germ] (natural in $H$), $\\psi_{\\bar y}$ corresponds to $(g^{-1}\\psi)_{\\bar\\omega}=\\alpha'_{\\bar\\omega}$, an isomorphism. (ii) Let $r:(\\nu_*\\underline M_Y)_{\\bar x}\\to(\\underline M_Y)_{\\bar y}$ be the restriction map of [lem-weil-pbc-counit-stalk-germ-restriction] and $c=c_{\\nu,\\bar y,F}:(\\nu^{-1}F)_{\\bar y}\\cong F_{\\bar x}$. Since $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$, $(\\varepsilon_\\nu)_{\\bar y}=r\\circ c$ ([lem-weil-pbc-counit-stalk-germ-restriction]) and $c\\circ(\\nu^{-1}\\varphi)_{\\bar y}=\\varphi_{\\bar x}\\circ c$ (naturality of $c$), we get $\\psi_{\\bar y}=r\\circ\\varphi_{\\bar x}\\circ c$. By (i) the left side is bijective, so $\\varphi_{\\bar x}$ is injective. This is Stacks' commutative square $\\mathcal F_{\\bar x}=(\\mathcal F|_Y)_{\\bar y}\\to\\underline E_{\\bar y}$ through $(f_*\\underline E)_{\\bar x}$, written out.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-counit-stalk-germ-restriction",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12984-12994 (the commutative diagram)"
+   }
+  },
+  {
+   "text": "*Finite approximation of $\\nu$.* $X$ is Noetherian, hence quasi-compact and quasi-separated, and $\\nu$ is integral, so by [lem-weil-pbc-integral-morphism-limit-of-finite] $Y=\\lim_{i\\in I}Y_i$ for a directed inverse system of finite (and finitely presented) $X$-schemes $\\nu_i:Y_i\\to X$ with affine transition morphisms $t_{i'i}$ and projections $p_i:Y\\to Y_i$. The morphisms $\\nu_i$ (finite) and $\\nu$ (integral) are affine, hence quasi-compact and quasi-separated [def-weil-finite-integral-morphism]. (Stacks: 'we write $Y=\\lim Y_i$ with $Y_i$ ... finite over $Z$'; the $Y_i$ there are finite over $Z$, here finite over $X$, which is what the node needs; Stacks' extra 'irreducible, integral' is used only for the 'Moreover' clause, not part of this node.)",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12999-13006, using Properties Lemma 0817 / Limits Lemma 09YZ"
+   }
+  },
+  {
+   "text": "*$\\nu_*\\underline M$ is the colimit of the finite pushforwards.* On $Y_i$ take the constant sheaves $\\underline M_{Y_i}$, with the transition maps $t_{i'i}^{-1}\\underline M_{Y_i}\\xrightarrow{\\sim}\\underline M_{Y_{i'}}$ the canonical isomorphisms of [lemma-constructible-pullback-constant]; then $p_i^{-1}\\underline M_{Y_i}\\cong\\underline M_Y$ compatibly, so $\\operatorname{colim}_ip_i^{-1}\\underline M_{Y_i}$ is the colimit of a diagram of isomorphisms onto $\\underline M_Y$ over the directed (nonempty, connected) set $I$, i.e. $\\underline M_Y$. By [sbc-lem-higher-direct-image-limit] in degree $p=0$ (with $S=X$, $g_i=\\nu_i$, $g=\\nu$; hypotheses checked in the previous step) the canonical map $\\operatorname{colim}_i\\nu_{i,*}\\underline M_{Y_i}\\to\\nu_*\\underline M_Y$ is an isomorphism of abelian sheaves; its components are the $\\Lambda$-linear maps $\\nu_{i,*}$(unit$)$ composed with the identifications above, and filtered colimits in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit] are computed on underlying abelian sheaves (both are sheafifications of the sectionwise colimit, and a filtered colimit of $\\Lambda$-modules is computed on the underlying groups), so $\\nu_*\\underline M_Y=\\operatorname{colim}_i\\nu_{i,*}\\underline M_{Y_i}$ in $\\Mod(X_{\\Et},\\Lambda)$. (Stacks: 'Then $f_*\\underline E=\\colim f_{i,*}\\underline E$ by Lemma 09Z1'.)",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "sbc-lem-higher-direct-image-limit",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 13006-13007, Lemma 09Z1 (lemma-relative-colimit, line 7535) in degree 0"
+   }
+  },
+  {
+   "text": "*Factorization through a finite stage.* $\\Lambda$ is finite, hence Noetherian (a finite ring is a Noetherian module over itself; Mathlib `isNoetherian_of_finite`, Mathlib/RingTheory/Noetherian/Basic.lean:123), and this is the only place where the hypothesis 'Noetherian $\\Lambda$' of Stacks enters the proof. $X$ is quasi-compact and quasi-separated and $F$ is constructible, so by [lem-weil-pbc-constructible-finitely-presented] the map $\\varphi:F\\to\\nu_*\\underline M_Y=\\operatorname{colim}_i\\nu_{i,*}\\underline M_{Y_i}$ factors as $F\\xrightarrow{\\varphi_i}\\nu_{i,*}\\underline M_{Y_i}\\xrightarrow{\\kappa_i}\\nu_*\\underline M_Y$ for some $i$, with $\\kappa_i$ the colimit injection. For every geometric point $\\bar x$ over $x$, $(\\kappa_i)_{\\bar x}\\circ(\\varphi_i)_{\\bar x}=\\varphi_{\\bar x}$ is injective (previous steps), so $(\\varphi_i)_{\\bar x}$ is injective. Set $f_x=\\nu_i:Y_x=Y_i\\to X$, finite, $M_x=M$, a finite $\\Lambda$-module, and $\\varphi_x=\\varphi_i:F\\to f_{x,*}\\underline{M_x}$. (Stacks: 'By Lemma 09Z4 the map $\\mathcal F\\to f_*\\underline E$ factors through $f_{i,*}\\underline E$ for some $i$'. Stacks' further remark that $Y_i\\to Z$ is finite etale over a nonempty open of $Z$ belongs to the 'Moreover' clause, which this node does not state.)",
+   "uses": [
+    "lem-weil-pbc-constructible-finitely-presented",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 13007-13009, Lemma 09Z4 (lemma-constructible-is-compact, line 12497)"
+   }
+  },
+  {
+   "text": "*Finitely many points suffice.* Choose for every $x\\in X$ data $(f_x,M_x,\\varphi_x)$ as in the previous steps. Every geometric point of $X$ lies over some $x$, and there $\\varphi_x$ is injective on stalks. The underlying abelian sheaf of $F$ is a constructible abelian sheaf (the same stratification serves: a constant sheaf of $\\Lambda$-modules with finite value is, as an abelian sheaf, constant with finite value; [def-weil-pbc-etale-constructible-sheaf], [def-weil-pbc-constructible-torsion]). By [lem-weil-pbc-constructible-noetherian-finite-selection], applied on the Noetherian scheme $X$ to the family $(\\varphi_x)_{x\\in X}$ of maps of abelian sheaves, there is a finite set $\\{x_1,\\dots,x_n\\}\\subseteq X$ such that $(\\varphi_{x_k})_k:F\\to\\bigoplus_{k=1}^nf_{x_k,*}\\underline{M_{x_k}}$ is a monomorphism of abelian sheaves. The finite direct sum in $\\Mod(X_{\\Et},\\Lambda)$ is the biproduct [def-weil-additive-category] whose underlying abelian sheaf is the abelian direct sum (sectionwise product with componentwise $\\Lambda$-action), and the map is $\\Lambda$-linear, each component being so; the forgetful functor $\\Mod(X_{\\Et},\\Lambda)\\to\\Ab(X_{\\Et})$ is faithful, hence reflects monomorphisms, so the map is a monomorphism in $\\Mod(X_{\\Et},\\Lambda)$. With $f_k=f_{x_k}$, $Y_k=Y_{x_k}$, $M_k=M_{x_k}$ this is the assertion (for $X=\\emptyset$, $n=0$). REMARK on the source: Stacks deduces this step from the ascending chain condition of Lemma 09YV ('Because we have the ascending chain condition for subsheaves of $\\mathcal F$ ... it suffices to show that for every point $x$ ...'). As written that inference does not go through: the kernels $\\ker(F\\to\\bigoplus_{x\\in S}f_{x,*}\\underline{M_x})$ for growing finite $S$ form a descending family, and constructible sheaves do not satisfy the descending chain condition (on $X=\\operatorname{Spec}\\mathbf Z$ with $\\Lambda=\\mathbf Z/2$, the subsheaves $j_{n!}\\underline{\\Lambda}\\subset\\underline\\Lambda$, $j_n$ the inclusion of the complement of the first $n$ primes, descend strictly). The step therefore follows the alternative that Stacks gives in the same sentence ('This argument can be avoided by picking a partition of $X$ as in Lemma 095E and constructing a $Y_i\\to X$ for each irreducible component of each part'), which is the proof of [lem-weil-pbc-constructible-noetherian-finite-selection]; this is below the unit level and keeps the unit's route.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-constructible-torsion",
+    "lem-weil-pbc-constructible-noetherian-finite-selection",
+    "def-weil-additive-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12952-12962 (reduction to points and the parenthetical alternative via Lemma 095E), and 'The proofs of (2) and (3) are identical to the proof of (1)', line 13018"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-pullback",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-direct-image",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-counit-stalk-germ-restriction",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "def-weil-finite-integral-morphism",
+  "sbc-lem-higher-direct-image-limit",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-constructible-finitely-presented",
+  "def-weil-pbc-constructible-torsion",
+  "lem-weil-pbc-constructible-noetherian-finite-selection",
+  "def-weil-additive-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof of (1), lines 12950-13016, transferred to (3) ('identical'); the final finite-selection step follows Stacks' own parenthetical alternative (partition, Lemma 095E) instead of the ACC sentence (Lemma 09YV), see the remark in the last step"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -97,5 +238,21 @@
   "declarations": [
    "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
   ]
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 09Z6 (1), transferred to the module form (3): for each point x, generic trivialization of F over a finite separable K/kappa(x) (new node lem-weil-pbc-constructible-field-finite-separable-constant, with prop-constructible-pullback), normal model Y -> X of Spec K (new node lem-weil-pbc-normalization-in-residue-field-extension; taken over X instead of over the closure Z, the same scheme by Stacks 035I), the map F -> nu_* M via 09Z5 (lem-weil-pbc-normal-constant-generic) and the module adjunction, stalk injectivity over x written out with the stalk/counit nodes, Y = lim Y_i finite (new node lem-weil-pbc-integral-morphism-limit-of-finite, Stacks 09YZ/0817), nu_* M = colim nu_{i,*} M (09Z1, sbc-lem-higher-direct-image-limit, degree 0), factorization through a finite stage (09Z4, lem-weil-pbc-constructible-finitely-presented; finite Lambda is Noetherian, the only use of that hypothesis), and finite selection over the Noetherian X (lem-weil-pbc-constructible-noetherian-finite-selection, Stacks' parenthetical alternative); Stacks' ACC sentence (09YV) does not give the reduction as written (descending kernels; DCC fails), recorded in the last step. Statement unchanged; stmt_deps unchanged. Three new nodes, all searched three ways (no Mathlib match; Mathlib has the relative normalization Scheme.Hom.normalization but not its normality). No Lean helper lemmas for the steps exist in the source repository beyond the 09Z5 and 09Z4 declarations (both sorry)."
+ },
+ "tool_uses": [
+  "sbc-lem-higher-direct-image-limit",
+  "lem-weil-pbc-constructible-noetherian-finite-selection"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Eight steps along Stacks 09Z6 (1), carried to the module form (3): the generic trivialization at a point (new node lem-weil-pbc-constructible-field-finite-separable-constant), the normal model (new node lem-weil-pbc-normalization-in-residue-field-extension, 035I), the map F -> nu_* M via lem-weil-pbc-normal-constant-generic (09Z5) and the module adjunction, injectivity at geometric points over x (triangle identities, stalk-germ leaves), Y as a limit of finite X-schemes (new node lem-weil-pbc-integral-morphism-limit-of-finite, 09YZ/0817), nu_* M as the colimit of finite pushforwards (tool use sbc-lem-higher-direct-image-limit, 09Z1 in degree 0), factorization through a finite stage by lem-weil-pbc-constructible-finitely-presented (09Z4; the only place where Lambda Noetherian enters), finitely many points (tool use lem-weil-pbc-constructible-noetherian-finite-selection; see the literature note). LITERATURE NOTE (worker, recorded in STATE): Stacks 09Z6 justifies 'finitely many points suffice' by the ACC 09YV, which does not apply to the shrinking kernels (no DCC: on Spec Z with Lambda = Z/2 the extensions by zero from complements of more and more primes form a strictly descending chain); the step uses the partition alternative Stacks mentions in the same sentence. The attached Lean takes any CommRing Lambda (no finiteness), stronger than the node; the IsConstructibleSheaf defect is harmless on a Noetherian scheme. Stage-3 merge candidate: lem-weil-pbc-constructible-finite-pushforward-noetherian (the abelian form 09Z6 (2))."
  }
 }
