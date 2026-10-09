@@ -2,7 +2,7 @@
  "id": "def-weil-derived-complete-integral-detailed",
  "kind": "definition",
  "title": "Bounded constructible derived-complete integral coefficients",
- "statement": "Let $D^b_c(Y,\\mathcal O_E)$ be the full triangulated subcategory of\n$D(Y_{\\mathrm{proet}},\\mathcal O_E)$, the derived category of the completed\nintegral coefficient sheaf [def-weil-completed-integral-coefficients], whose\nobjects $K$ are derived complete [def-weil-derived-complete] and satisfy\n\n$$\n K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D^b_c(Y,A_{E,n})\n$$\n\nfor every $n\\geq1$, where $D^b_c(Y,A_{E,n})$ is the category of bounded\ncomplexes satisfying the finite-torsion constructibility condition\n[def-weil-finite-torsion-constructibility], the derived tensor product\n[def-weil-derived-tensor] being that of the derived tensor notation. In\naddition we require that the cohomological supports\n[def-weil-cohomological-support]\n\n$$\n \\operatorname{Supp}_{\\mathrm{coh}}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr)\n$$\n\nare contained in a single interval $[r,s]$ of $\\mathbf Z$ with $r\\leq s$\nindependent of $n$. This uniform amplitude of the reductions is part of the\ndefinition of $D^b_c(Y,\\mathcal O_E)$, and it is the only boundedness\ncondition imposed on them.",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $Y$; put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$.\nLet $D^b_c(Y,\\mathcal O_E)$ be the full subcategory of\n$D(Y_{\\mathrm{proet}},\\mathcal O_E)$, the derived category of the completed\nintegral coefficient sheaf [def-weil-completed-integral-coefficients], whose\nobjects $K$ are derived complete [def-weil-derived-complete] and satisfy\n\n$$\n K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D^b_c(Y,A_{E,n})\n$$\n\nfor every $n\\geq1$, where $K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D(Y_{\\mathrm{proet}},A_{E,n})$ is the derived reduction modulo $\\varpi_E^n$ [def-weil-integral-derived-reduction] (the derived tensor product over $\\widehat{\\mathcal O}_{E,Y}$ with $(A_{E,n})_Y$), and $D^b_c(Y,A_{E,n})\\subset D(Y_{\\mathrm{proet}},A_{E,n})$ is the category of bounded\ncomplexes satisfying the finite-torsion constructibility condition\n[def-weil-finite-torsion-constructibility]. In\naddition we require that the cohomological supports\n[def-weil-cohomological-support]\n\n$$\n \\operatorname{Supp}_{\\mathrm{coh}}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr)\n$$\n\nare contained in a single interval $[r,s]$ of $\\mathbf Z$ with $r\\leq s$\nindependent of $n$. This uniform amplitude of the reductions is part of the\ndefinition of $D^b_c(Y,\\mathcal O_E)$, and it is the only boundedness\ncondition imposed on them. That this full subcategory is a triangulated subcategory (contains $0$, closed under isomorphisms, shifts and extensions in distinguished triangles) is a separate statement, not part of this definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-complete-integral-detailed.md",
   "place": "node def-weil-derived-complete-integral-detailed, order 1459"
@@ -10,16 +10,45 @@
  "stmt_deps": [
   "def-weil-completed-integral-coefficients",
   "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-tensor",
   "def-weil-cohomological-support"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'structure FullSubcategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ObjectProperty/",
+   "results": "CategoryTheory.ObjectProperty.FullSubcategory (CategoryTheory/ObjectProperty/FullSubcategory.lean:39): the full subcategory on the objects satisfying an ObjectProperty",
+   "date": "2026-10-09",
+   "verdict": "match for the notion 'full subcategory on a property of objects': D^b_c(Y,O_E) is `ObjectProperty.FullSubcategory P` for the property P defined here; P itself is not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "results": "DerivedCategory C for an abelian C with HasDerivedCategory (Basic.lean:74), Pretriangulated and IsTriangulated instances (Basic.lean:169-177), t-structure and IsLE/IsGE (TStructure.lean:84), homologyFunctor; K-injective, K-projective; no derived tensor product, no derived limit, no derived completeness",
+   "date": "2026-10-09",
+   "verdict": "generalization for the ambient category only: D(Y_proet,O_E) = DerivedCategory (SheafOfModules Ô_{E,Y}), SheafOfModules being abelian (Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40); recorded in def-weil-completed-integral-coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsDerivedComplete\\|derivedComplete\\|DerivedComplete\\|KFlat\\|Constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none (IsConstructible exists only for subsets of topological spaces / schemes)",
+   "date": "2026-10-09",
+   "verdict": "no match for the defining property: derived completeness, derived reduction, constructible complexes are not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsTriangulated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "results": "ObjectProperty.IsTriangulated (line 182): ContainsZero, IsStableUnderShift ℤ, IsTriangulatedClosed₂",
+   "date": "2026-10-09",
+   "verdict": "the notion of triangulated subcategory exists; the claim that this subcategory is one is the new node lem-weil-integral-constructible-triangulated"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -42,5 +71,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-derived-complete-integral-detailed",
+  "worker": "stage1",
+  "summary": "Checked the statement against the blueprint (master; no slopmaster2 copy of this node) and Bhatt-Scholze Def. 6.5.1 / Stacks Tag 09C2-type definitions. Two changes. (1) The definition asserted 'full triangulated subcategory', which is a claim, not a definition: it now defines the full subcategory, and the claim is the new statement node lem-weil-integral-constructible-triangulated (source Bhatt-Scholze §6.5 after Def. 6.5.1, Stacks Tag 0999), which depends on this node; users needing the triangulated structure must cite it. (2) The reduction K⊗^L_{O_E}A_{E,n} was attributed to def-weil-derived-tensor, which only defines the derived tensor over a constant ring sheaf A_Y; here the ring sheaf Ô_{E,Y} is not constant and the result must land in D(Y_proet,A_{E,n}). It now points to the new definition node def-weil-integral-derived-reduction (K-flat resolution over Ô_{E,Y}, then change of rings to (A_{E,n})_Y via def-pur-sheaf-tensor-product), and def-weil-derived-tensor was removed from stmt_deps. The fixed data (ℓ, E, ϖ_E, Y, A_{E,n}) are now introduced in the statement. Mathlib: FullSubcategory, DerivedCategory, SheafOfModules and ObjectProperty.IsTriangulated exist; derived reduction, derived completeness and constructibility do not."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

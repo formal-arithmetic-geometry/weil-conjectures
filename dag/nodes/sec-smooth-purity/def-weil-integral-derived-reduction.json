@@ -1,0 +1,64 @@
+{
+ "id": "def-weil-integral-derived-reduction",
+ "kind": "definition",
+ "title": "Derived reduction of integral complexes modulo powers of the uniformizer",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$ and an integer $n\\in\\mathbf Z_{\\geq1}$; put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed coefficient sheaf of rings on the small pro-etale site $Y_{\\mathrm{proet}}$, with its surjection $\\widehat{\\mathcal O}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ and derived category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ of $\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-completed-integral-coefficients]. A complex $P$ of $\\widehat{\\mathcal O}_{E,Y}$-modules is *K-flat* if $P\\otimes_{\\widehat{\\mathcal O}_{E,Y}}M$ (the totalized termwise tensor product of sheaves of modules [def-pur-sheaf-tensor-product]) is acyclic for every acyclic complex $M$ of $\\widehat{\\mathcal O}_{E,Y}$-modules. For $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ choose a quasi-isomorphism $P\\to K$ with $P$ K-flat (one exists: Stacks Project, Tag 06YS, for any ringed site) and define the *derived reduction modulo $\\varpi_E^n$*\n\n$$\n K\\otimes^L_{\\mathcal O_E}A_{E,n}:=P\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{E,n})_Y\\in D(Y_{\\mathrm{proet}},A_{E,n}),\n$$\n\nthe termwise change of rings along $\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,n})_Y$ [def-pur-sheaf-tensor-product], a complex of $(A_{E,n})_Y$-modules, regarded in the derived category $D(Y_{\\mathrm{proet}},A_{E,n})$ of sheaves of $(A_{E,n})_Y$-modules [def-weil-pbc-proetale-site]. Its independence of the choice of $P$ up to unique isomorphism, and the functor $D(Y_{\\mathrm{proet}},\\mathcal O_E)\\to D(Y_{\\mathrm{proet}},A_{E,n})$ it defines, are part of this construction (Stacks Project, Section 'Flat resolutions', Tag 06YL, and Section 'Derived pullback', Tag 06YV, for the derived pullback along the morphism of ringed sites $(Y_{\\mathrm{proet}},(A_{E,n})_Y)\\to(Y_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,Y})$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-complete-integral-detailed.md",
+  "place": "the object $K\\otimes^L_{\\mathcal O_E}A_{E,n}$ of node def-weil-derived-complete-integral-detailed (order 1459); same construction as Bhatt-Scholze, The pro-etale topology for schemes (literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf), Section 6.5 before Definition 6.5.1 ($K\\otimes^L_{\\widehat R}R/\\mathfrak m^n$), and Stacks Project, Tag 06YS"
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'KFlat\\|IsKFlat\\|K-flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no K-flat complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'derivedTensor\\|DerivedTensor\\|tensorLeftDerived\\|Tor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal",
+   "results": "only Mathlib/CategoryTheory/Monoidal/Tor.lean: `Tor C n`, left-derived functor of the tensor product in a monoidal abelian category with enough projectives (HasProjectiveResolutions), objectwise in degrees n, not a functor on derived categories",
+   "date": "2026-10-09",
+   "verdict": "no match: sheaves of modules on the pro-etale site do not have enough projectives, and Tor is not a derived-category functor"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/; grep -rn 'extendScalars\\|tensorObj\\|pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf",
+   "results": "SheafOfModules (Sheaf.lean:33), abelian (Sheaf/Abelian.lean:40), restrictScalars (Sheaf/ChangeOfRings.lean:36), pullback along a continuous functor (Sheaf/PullbackContinuous.lean), sectionwise tensor of presheaves of modules (Presheaf/Monoidal.lean:63); no derived functor of any of these",
+   "date": "2026-10-09",
+   "verdict": "no match: underived change of rings only (see def-pur-sheaf-tensor-product); no derived version"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "Basic, DerivabilityStructureInjectives, ExactFunctor, Ext, Fractions, FullyFaithful, HomologySequence, KInjective, KProjective, Linear, Plus, RightDerivedFunctorPlus, ShortExact, SingleTriangle, SmallShiftedHom, TStructure: DerivedCategory C of an abelian category (with HasDerivedCategory), triangulated (Basic.lean:169-177), K-injective/K-projective, right derived functors on D^+; no left derived functor on unbounded D via K-flat objects",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-complete-integral-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
