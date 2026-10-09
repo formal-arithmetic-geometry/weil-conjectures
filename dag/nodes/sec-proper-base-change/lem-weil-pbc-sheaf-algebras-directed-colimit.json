@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-sheaf-algebras-directed-colimit",
+ "kind": "statement",
+ "title": "Directed colimits of sheaves of commutative algebras on a ringed space",
+ "statement": "Let $X$ be a topological space and $\\mathcal O_X$ a sheaf of commutative rings on $X$. A *sheaf of commutative $\\mathcal O_X$-algebras* is a sheaf of commutative rings $\\mathcal A$ on $X$ together with a morphism of sheaves of rings $\\sigma:\\mathcal O_X\\to\\mathcal A$; it is an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] by $r\\cdot a=\\sigma(r)a$, and a morphism $\\mathcal A\\to\\mathcal B$ of sheaves of commutative $\\mathcal O_X$-algebras is a morphism of sheaves of rings commuting with the structure maps. Let $I$ be a directed set and $(\\mathcal A_i,\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'})_{i\\le i'}$ a system of sheaves of commutative $\\mathcal O_X$-algebras ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\varphi_{i'i}=\\varphi_{i''i}$). Let $\\mathcal P$ be the presheaf $U\\mapsto\\varinjlim_i\\mathcal A_i(U)$ (directed colimit of commutative rings, with the restriction maps induced by those of the $\\mathcal A_i$ and with the coprojections $c_{i,U}:\\mathcal A_i(U)\\to\\mathcal P(U)$), a presheaf of commutative rings with the map $\\mathcal O_X\\to\\mathcal P$, $r\\mapsto c_{i,U}(\\sigma_i(r))$ (independent of $i$). Let $\\theta:\\mathcal P\\to\\mathcal A:=\\mathcal P^\\#$ be its sheafification as a presheaf of commutative rings [def-weil-pbc-sheafification], and $\\iota_i=\\theta\\circ c_i:\\mathcal A_i\\to\\mathcal A$. Then: (1) $\\mathcal A$ with $\\sigma=\\theta\\circ(\\mathcal O_X\\to\\mathcal P)$ is a sheaf of commutative $\\mathcal O_X$-algebras, the $\\iota_i$ are morphisms of such with $\\iota_{i'}\\varphi_{i'i}=\\iota_i$, and $(\\mathcal A,(\\iota_i))$ is a colimit [def-weil-pbc-category-colimit] of the system in the category of sheaves of commutative $\\mathcal O_X$-algebras; (2) the underlying $\\mathcal O_X$-module of $\\mathcal A$, with the $\\iota_i$, is a colimit of the underlying $\\mathcal O_X$-modules of the $\\mathcal A_i$ in the category of sheaves of $\\mathcal O_X$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 009D (section-limits-presheaves: colimits of presheaves are sectionwise), Section 009E (section-limits-sheaves, item (3): the colimit of sheaves is the sheafification of the presheaf colimit), Lemma 0087 (lemma-sheafify-presheaf-structures: sheafification of a presheaf of algebraic structures, (1) underlying sheaf of sets, (2) universal property), Lemma 0089 (lemma-sheafification-presheaf-modules); Modules, Lemma 01AH (modules.tex, lemma-limits-colimits, (2): colimits in Mod(O_X) are the sheafification of the presheaf colimit). The assembly for algebras over O_X is not stated in Stacks as one lemma (it is used in Schemes, Section 26.24, and Limits 01YX)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of sheaves of commutative algebras over a sheaf of rings is sheafification of the presheaf colimit",
+   "results": "CategoryTheory.Sheaf.isColimitSheafifyCocone, Sheaf.sheafifyCocone, Sheaf.createsColimitOfIsSheaf (Mathlib.CategoryTheory.Sites.Limits), SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat (Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits), PresheafOfModules.sheafify, PresheafOfModules.colimitPresheafOfModules",
+   "date": "2026-10-10",
+   "verdict": "no match (colimits of sheaves with values in a fixed category D, e.g. CommRingCat, and colimits of sheaves of modules; no category of sheaves of algebras over a sheaf of rings, and no comparison of the underlying module of an algebra colimit with the module colimit)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit in the category of sheaves of commutative algebras over a sheaf of commutative rings, computed by sheafifying the sectionwise colimit",
+   "results": "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, SheafOfModules.Presentation.isColimit, Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.instHasColimitsOfShape",
+   "date": "2026-10-10",
+   "verdict": "no match (modules and D-valued sheaves only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of a presheaf of commutative rings: underlying sheaf of sets is sheafification of underlying presheaf of sets",
+   "results": "PresheafOfModules.sheafification, PresheafOfModules.sheafify, PresheafOfModules.Sheafify.module, PresheafOfModules.toPresheaf_map_toSheafify, PresheafOfModules.toSheafify (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify)",
+   "date": "2026-10-10",
+   "verdict": "no match for the algebra statement (the module-level sheafification is usable in the split)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SheafOfAlgebras\\|sheaf of algebras\\|PresheafOfAlgebras' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'PreservesFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/AlgCat/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+   "results": "no sheaf-of-algebras notion in Mathlib; filtered colimits: CommRingCat.FilteredColimits.forget_preservesFilteredColimits (Ring/FilteredColimits.lean:363), AlgCat forget₂ to RingCat preserves filtered colimits (AlgCat/FilteredColimits.lean:92); Sheaf.instHasColimitsOfShape (Sites/Limits.lean) for CommRingCat-valued sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only: CommRingCat-valued sheaf colimits by sheafification, filtered colimits of rings computed on sets)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: directed colimits of sheaves of commutative O_X-algebras on a ringed space exist as the sheafification of the presheaf colimit, with the module colimit underlying (Sheaves 009E/0087/0089, Modules 01AH); correct; unsplit."
+ }
+}

@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+ "kind": "statement",
+ "title": "On Spec R, M ↦ M~ is left adjoint to global sections, fully faithful, and an equivalence onto quasi-coherent modules; it preserves colimits",
+ "statement": "Let $R$ be a commutative ring, $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and for an $R$-module $M$ let $\\widetilde M$ be the $\\mathcal O_X$-module of [lem-weil-pbc-spec-module-tilde-sections], with $\\tau_X:M\\to\\Gamma(X,\\widetilde M)$. Then: (1) $M\\mapsto\\widetilde M$ is a functor $\\mathrm{Mod}_R\\to\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] (an $R$-linear $u:M\\to N$ goes to the unique $\\widetilde u$ with $\\widetilde u_X\\circ\\tau_X=\\tau_X\\circ u$), left adjoint to $\\Gamma(X,-):\\Mod(\\mathcal O_X)\\to\\mathrm{Mod}_R$: for every $\\mathcal O_X$-module $\\mathcal F$, $\\alpha\\mapsto\\alpha_X\\circ\\tau_X$ is a bijection $\\operatorname{Hom}_{\\mathcal O_X}(\\widetilde M,\\mathcal F)\\cong\\operatorname{Hom}_R(M,\\Gamma(X,\\mathcal F))$, natural in $M$ and $\\mathcal F$; (2) the unit $\\tau_X:M\\to\\Gamma(X,\\widetilde M)$ is an isomorphism; (3) for every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent] the counit $\\varepsilon_{\\mathcal F}:\\widetilde{\\Gamma(X,\\mathcal F)}\\to\\mathcal F$ (the map corresponding to $\\mathrm{id}_{\\Gamma(X,\\mathcal F)}$) is an isomorphism; (4) consequently $M\\mapsto\\widetilde M$ preserves all small colimits: if $(M,(c_i))$ is a colimit of a diagram $(M_i)$ of $R$-modules, then $(\\widetilde M,(\\widetilde{c_i}))$ is a colimit of $(\\widetilde{M_i})$ in $\\Mod(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I7 (lemma-compare-constructions: the mapping property Hom(M~,F)=Hom_R(M,Γ(X,F))), Lemma 01HV (lemma-spec-sheaves (2): Γ(Spec R, M~)=M), Lemma 01IA (lemma-quasi-coherent-affine) and Lemma 01IB (lemma-equivalence-quasi-coherent); (4) is the content of Lemma 01ID (lemma-colimit-quasi-coherent) via Categories, a left adjoint commutes with colimits"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tilde functor from modules to quasi-coherent sheaves on Spec R preserves colimits, left adjoint to global sections",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat (Mathlib.AlgebraicGeometry.Modules.Tilde), PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, AlgebraicGeometry.preservesColimit_Γ, SheafOfModules.instHasColimitsOfSize...",
+   "date": "2026-10-10",
+   "verdict": "partial (the functor); the adjunction found by loogle and grep below"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "AlgebraicGeometry.tilde.adjunction {R : CommRingCat} : tilde.functor R ⊣ moduleSpecΓFunctor; AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction : IsIso tilde.adjunction.unit (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-10",
+   "verdict": "match for (1),(2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint, CategoryTheory.Limits.PreservesColimitsOfSize",
+   "results": "CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint (Mathlib.CategoryTheory.Adjunction.Limits): F.IsLeftAdjoint → PreservesColimitsOfSize F",
+   "date": "2026-10-10",
+   "verdict": "match for (4) with the instance (tilde.functor R).IsLeftAdjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'adjunction\\|IsLeftAdjoint\\|isIso_fromTildeΓ_of_isQuasicoherent\\|essImage_tilde\\|tildeEquiv\\|isoTop' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "tilde.functor (Tilde.lean:236), isoTop (:247), tilde.toTildeΓNatIso (:338), tilde.adjunction (:345), instance IsIso (tilde.adjunction).unit (:374), instance (tilde.functor R).IsLeftAdjoint (:384), Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (:850, the counit fromTildeΓ is an iso for quasi-coherent M), isQuasicoherent_iff_isIso_fromTildeΓ (:876), essImage_tilde (:884), tildeEquiv (:898)",
+   "date": "2026-10-10",
+   "verdict": "match (one declaration per clause, read in the source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.tilde.adjunction, AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction, AlgebraicGeometry.Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "how": "a few Mathlib declarations, one per clause, for R : CommRingCat: (1) tilde.adjunction : tilde.functor R ⊣ moduleSpecΓFunctor (Tilde.lean:345; moduleSpecΓFunctor is Γ(X,-) as an R-module, :50; the unit is tilde.toTildeΓNatIso built from toOpen M ⊤ = τ_X, :338, so the bijection is α ↦ α_X∘τ_X); (2) instance IsIso tilde.adjunction.unit (:374), equivalently isoTop (:247); (3) the counit is Scheme.Modules.fromTildeΓ (:259, fromTildeΓNatTrans :313) and Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (:850) for [M.IsQuasicoherent] (Mathlib's quasi-coherence, which agrees with pqf-def-coherent on schemes as recorded on lem-weil-pbc-spec-module-tilde-sections); (4) instance (tilde.functor R).IsLeftAdjoint (:384) with Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint (Mathlib/CategoryTheory/Adjunction/Limits.lean). Mathlib's tilde is on Spec (CommRingCat.of R) = def-weil-affine-spectrum."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in AlgebraicGeometry/Modules/Tilde.lean: tilde.adjunction :345, IsIso unit :374, Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent :850, Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint; checked."
+ }
+}

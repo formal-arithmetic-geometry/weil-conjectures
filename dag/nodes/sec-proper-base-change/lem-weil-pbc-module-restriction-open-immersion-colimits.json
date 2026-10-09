@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-module-restriction-open-immersion-colimits",
+ "kind": "statement",
+ "title": "Restriction of O-modules along an open immersion preserves colimits and quasi-coherence",
+ "statement": "Let $f:X\\to Y$ be an open immersion of schemes [def-pc-scheme] (for instance the inclusion of an open subscheme $V\\subseteq Y$, or an isomorphism). For an $\\mathcal O_Y$-module $\\mathcal M$ [def-weil-sheaf-of-modules-category] let $\\mathcal M|_X$ be the $\\mathcal O_X$-module with $(\\mathcal M|_X)(U)=\\mathcal M(f(U))$ for $U\\subseteq X$ open, restriction maps those of $\\mathcal M$, and $\\mathcal O_X(U)$ acting through the isomorphism $f^\\sharp:\\mathcal O_Y(f(U))\\cong\\mathcal O_X(U)$; a morphism $\\alpha$ of $\\mathcal O_Y$-modules goes to $\\alpha|_X$ with $(\\alpha|_X)_U=\\alpha_{f(U)}$. Then: (1) $\\mathcal M\\mapsto\\mathcal M|_X$ is a functor $\\Mod(\\mathcal O_Y)\\to\\Mod(\\mathcal O_X)$ which is left adjoint to the direct image $f_*$, hence preserves all small colimits: if $(\\mathcal M,(c_i))$ is a colimit of a diagram $(\\mathcal M_i)$ of $\\mathcal O_Y$-modules then $(\\mathcal M|_X,(c_i|_X))$ is a colimit of $(\\mathcal M_i|_X)$ [def-weil-pbc-category-colimit]; (2) if $\\mathcal M$ is quasi-coherent [pqf-def-coherent], so is $\\mathcal M|_X$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Sheaves, Lemma 00A0 (sheaves.tex, lemma-j-pullback: the restriction to an open is V ↦ G(V)) and Definition 00A1; Modules, Lemma 01AJ (lemma-exactness-pushforward-pullback (2): f^* commutes with all colimits, f^* ⊣ f_*, Sheaves Lemma 0096) and Lemma 01BG (lemma-pullback-quasi-coherent); for an open immersion j, j^* = j^{-1} = restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves of modules on a scheme along an open immersion preserves colimits",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict, restrict_obj, restrict_map, restrictFunctor, instIsLeftAdjointRestrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint, CategoryTheory.Limits.PreservesColimitsOfSize",
+   "results": "CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint (Mathlib.CategoryTheory.Adjunction.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match for the colimit clause with instIsLeftAdjointRestrictFunctor"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'restrictFunctor\\|restrictAdjunction\\|restrictAppIso\\|IsLeftAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; grep -n 'isQuasicoherent_restrictFunctor\\|PreservesColimitsOfSize.{u, u} (Scheme.Modules.restrictFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "restrictFunctor (Sheaf.lean:348), restrict_obj (sections Γ(M|_X,U)=Γ(M,f''U), rfl), restrictAppIso, restrictAdjunction : restrictFunctor f ⊣ pushforward f (:425), instance (restrictFunctor f).IsLeftAdjoint (:437); Scheme.Modules.isQuasicoherent_restrictFunctor (Tilde.lean:576); Tilde.lean:596 uses PreservesColimitsOfSize.{u,u} (restrictFunctor f) by inferInstance",
+   "date": "2026-10-10",
+   "verdict": "match (one declaration per clause, read in the source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.isQuasicoherent_restrictFunctor",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "how": "a few Mathlib declarations, one per clause, for f : X ⟶ Y with [IsOpenImmersion f]: the functor restrictFunctor f : Y.Modules ⥤ X.Modules (Sheaf.lean:348) with sections Γ(M.restrict f, U) = Γ(M, f ''ᵁ U) (restrict_obj, restrictAppIso, rfl) and restriction maps those of M (restrict_map); (1) restrictAdjunction f : restrictFunctor f ⊣ pushforward f (:425), instance IsLeftAdjoint (:437), and Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint (Mathlib/CategoryTheory/Adjunction/Limits.lean); (2) Scheme.Modules.isQuasicoherent_restrictFunctor (Mathlib/AlgebraicGeometry/Modules/Tilde.lean:576)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in AlgebraicGeometry/Modules/Sheaf.lean: restrictFunctor :348, restrictAdjunction :425, IsLeftAdjoint :437, isQuasicoherent_restrictFunctor; checked."
+ }
+}
