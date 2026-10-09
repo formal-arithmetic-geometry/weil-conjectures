@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-inverse-image-composition-module-linear",
+ "kind": "statement",
+ "title": "The composition isomorphisms of inverse and direct images are linear on sheaves of modules",
+ "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], $\\Lambda$ a commutative ring and, for a scheme $T$, $\\Mod(T_{\\Et},\\Lambda)$ the category of sheaves of $\\Lambda_T$-modules on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category]. For $w\\in\\{u,v,u\\circ v\\}$ let $w^{-1}$ and $w_*$ be the inverse and direct images of sheaves of $\\Lambda$-modules of [prop-weil-pbc-inverse-image-modules-exact] (on underlying abelian sheaves the inverse image [def-weil-pbc-inverse-image] and the direct image [def-weil-pbc-direct-image] of abelian sheaves). Let $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$ and $c_{u,v}:v^{-1}\\circ u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the isomorphisms of functors on abelian sheaves of [lem-weil-pbc-inverse-image-composition] (1), (2). Then: (1) for every $F\\in\\Mod(Z_{\\Et},\\Lambda)$ the morphism $d_{u,v,F}:(u\\circ v)_*F\\to u_*v_*F$ is $\\Lambda_X$-linear for the module structures of [prop-weil-pbc-inverse-image-modules-exact]; (2) for every $G\\in\\Mod(X_{\\Et},\\Lambda)$ the morphism $c_{u,v,G}:v^{-1}u^{-1}G\\to(u\\circ v)^{-1}G$ is $\\Lambda_Z$-linear for the module structures of [prop-weil-pbc-inverse-image-modules-exact] (that of $v^{-1}u^{-1}G$ obtained by applying the module inverse image twice). Hence $d_{u,v}$ and $c_{u,v}$ are isomorphisms of functors $\\Mod(Z_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Z_{\\Et},\\Lambda)$ whose underlying morphisms of abelian sheaves are those of [lem-weil-pbc-inverse-image-composition], and $c_{u,v}$ is the unique isomorphism of functors on modules carrying the unit $u_*\\eta_vu^{-1}\\circ\\eta_u$ of the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ to the unit $\\eta_{u\\circ v}$ transported along $d_{u,v}$ (the module form of Stacks Project, Modules on Sites, Lemma 03D8 (lemma-push-pull-composition-modules), for the morphisms of ringed sites $(w,\\,w^{-1}\\Lambda\\cong\\Lambda)$).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions', with Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197; the isomorphism (g o f)^* = f^* g^* is the one conjugate to (g o f)_* = g_* f_*"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of pullbacks of sheaves of modules is isomorphic to pullback along composite, compatible with forgetful functor",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity (Mathlib.AlgebraicGeometry.Modules.Sheaf), PresheafOfModules.pullback_comp_id: composition isomorphisms of module pullbacks defined directly in module categories (by conjugation of pushforwardComp); nothing relating them to the composition isomorphism of the underlying sheaves of abelian groups",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism pullback (g ∘ f) ≅ pullback f ∘ pullback g for sheaves of modules, linear, uniqueness of left adjoints",
+   "results": "SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous / PullbackFree): module-level pullbackComp only; no statement that the abelian composition isomorphism is linear, and no small etale site",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous): no lemma involving SheafOfModules.toSheaf or forget",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def pullbackComp|conjugateEquiv_pullbackComp_inv' Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; grep -rn 'pullbackComp.*forget|forget.*pullbackComp|toSheaf.*pullback|pullback.*toSheaf' Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "PullbackContinuous.lean:167 def pullbackComp, :177 conjugateEquiv_pullbackComp_inv; no compatibility of module pullback (or its composition isomorphism) with the forgetful functor to abelian sheaves",
+   "date": "2026-10-10",
+   "verdict": "generalization only in a different form: SheafOfModules.pullbackComp is the composition isomorphism built in the module categories; the content of this node (it agrees with the abelian one) is absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-underived-exchange-module-linear",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

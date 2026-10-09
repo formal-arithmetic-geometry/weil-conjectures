@@ -593,3 +593,6 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:55 L reviewed lem-weil-pbc-smooth-at-prime-artinian-lifting (worker, 12 steps, 5 new: 02HP leaf, Noetherian-local quotient Artinian leaf (one declaration per clause), 02HQ/02HO/length-one filtration unsplit): pass, committed. Stage-3 note: Mathlib split_injective_iff_lTensor_residueField_injective would shortcut 02HO + Artin-Rees.
 - 22:55 L reviewed lem-weil-pbc-symmetric-algebra-finite-projective-smooth (worker, 0 new, agent local route replacing 07M6/07EV): pass, committed.
 - 22:56 L reviewed lem-weil-pbc-spectral-finite-coequalizer-embeds-constant (worker, 8 steps, 3 new unsplit: 0CAK, skyscraper on closure, pull-back of constant sheaf on a closed set): pass, committed.
+- 22:58 L reviewed lem-weil-pbc-support-pullback-finite-type (worker, 8 steps, 1 new unsplit 01B6; tool_uses lem-weil-pbc-module-stalk-pullback recorded): pass, committed.
+- 22:58 L reviewed lem-weil-pbc-surjective-universally-closed-separated (worker, 5 steps, 1 new Mathlib leaf pullbackMap for f x_S f universally closed): pass, committed.
+- 22:58 L reviewed lem-weil-pbc-underived-exchange-module-linear (worker, 4 steps, agent proof, 1 new unsplit: composition isomorphisms linear on modules): pass, committed.

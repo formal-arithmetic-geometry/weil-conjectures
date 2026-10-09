@@ -17,9 +17,74 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-underived-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The square isomorphism is linear.* By [def-weil-pbc-cartesian-square] the specified isomorphism of the square is $\\theta_\\square=c_{f,g'}^{-1}\\circ c_{g,f'}:f'^{-1}g^{-1}\\xrightarrow{\\sim}(g\\circ f')^{-1}=(f\\circ g')^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$, with the composition isomorphisms $c$ of [lem-weil-pbc-inverse-image-composition] (2) (this is the definition of the source Lean `AlgebraicGeometry.Etale.squareUpperStarIso`: both composites are identified with the inverse image along the one morphism $g\\circ f'=f\\circ g':X'\\to Y$). Let $M\\in\\Mod(Y_{\\Et},\\Lambda)$. Since $g\\circ f'=f\\circ g'$ is one morphism, $(g\\circ f')^{-1}M=(f\\circ g')^{-1}M$ as sheaves of $\\Lambda_{X'}$-modules [prop-weil-pbc-inverse-image-modules-exact] (2). By [lem-weil-pbc-inverse-image-composition-module-linear] (2), $c_{g,f',M}:f'^{-1}g^{-1}M\\to(g f')^{-1}M$ and $c_{f,g',M}:g'^{-1}f^{-1}M\\to(f g')^{-1}M$ are $\\Lambda_{X'}$-linear isomorphisms. The inverse of a linear isomorphism of sheaves of modules is linear (its components are inverses of bijective $\\Lambda_{X'}(W)$-linear maps, and they commute with restrictions because the original components do) [def-weil-sheaf-of-modules-category]. Hence $\\theta_{\\square,M}$ is $\\Lambda_{X'}$-linear for every $M\\in\\Mod(Y_{\\Et},\\Lambda)$.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236: (g o f)^* = f^* g^* canonically on modules; the formula for theta is that of the source Lean AlgebraicGeometry.Etale.squareUpperStarIso (WeilConjectures/SixFunctors/BaseChange/Square.lean, lines 70-76)"
+   }
+  },
+  {
+   "text": "*The adjoint of $\\Ex^0$ is linear.* Let $G\\in\\Mod(X_{\\Et},\\Lambda)$. By [prop-weil-pbc-inverse-image-modules-exact] (2), (3), $f_*G\\in\\Mod(Y_{\\Et},\\Lambda)$, $g^{-1}f_*G$ and $f'^{-1}g^{-1}f_*G$, $f^{-1}f_*G$, $g'^{-1}f^{-1}f_*G$ and $g'^{-1}G$ are sheaves of modules whose underlying abelian sheaves are the abelian images, and the module functors $u^{-1}$, $u_*$ act on morphisms as the abelian ones. By (3) of that proposition the counit $\\varepsilon_{f,G}:f^{-1}f_*G\\to G$ of the abelian adjunction is the counit of the module adjunction, hence $\\Lambda_X$-linear; by (2), $g'^{-1}\\varepsilon_{f,G}$ is the module inverse image of a linear morphism, hence $\\Lambda_{X'}$-linear. By step 1 with $M=f_*G$, $\\theta_{\\square,f_*G}$ is $\\Lambda_{X'}$-linear. So the composite $\\varphi_G=g'^{-1}\\varepsilon_{f,G}\\circ\\theta_{\\square,f_*G}:f'^{-1}(g^{-1}f_*G)\\to g'^{-1}G$ of [def-weil-pbc-underived-exchange] is a morphism of $\\Mod(X'_{\\Et},\\Lambda)$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197, and Lemma 03D3 (lemma-adjoint-push-pull-modules), line 1044: the module adjunction and its counit"
+   }
+  },
+  {
+   "text": "*$\\Ex^0_{\\square,G}$ is linear.* By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square,G}:g^{-1}f_*G\\to f'_*g'^{-1}G$ is the adjoint of $\\varphi_G$ under the abelian adjunction $f'^{-1}\\dashv f'_*$, i.e. $\\Ex^0_{\\square,G}=f'_*(\\varphi_G)\\circ\\eta_{f',g^{-1}f_*G}$. By [prop-weil-pbc-inverse-image-modules-exact] (3) (with $u=f'$, the sheaf of modules $g^{-1}f_*G$ on $Y'_{\\Et}$ and the sheaf of modules $g'^{-1}G$ on $X'_{\\Et}$), the abelian adjunction bijection $\\operatorname{Hom}_{\\Ab}(f'^{-1}g^{-1}f_*G,g'^{-1}G)\\cong\\operatorname{Hom}_{\\Ab}(g^{-1}f_*G,f'_*g'^{-1}G)$ restricts to the bijection between $\\Lambda_{X'}$-linear and $\\Lambda_{Y'}$-linear morphisms (the unit $\\eta_{f'}$ is linear and $f'_*$ of a linear morphism is linear). Since $\\varphi_G$ is $\\Lambda_{X'}$-linear (step 2), $\\Ex^0_{\\square,G}$ is $\\Lambda_{Y'}$-linear for the module structures of $g^{-1}f_*G$ and $f'_*g'^{-1}G$ given by [prop-weil-pbc-inverse-image-modules-exact], i.e. a morphism of $\\Mod(Y'_{\\Et},\\Lambda)$.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197, and Lemma 03D3 (lemma-adjoint-push-pull-modules), line 1044: a morphism f^{-1}G -> F is linear iff its adjoint G -> f_*F is"
+   }
+  },
+  {
+   "text": "*Naturality.* Let $a:G\\to G'$ be a morphism of $\\Mod(X_{\\Et},\\Lambda)$. The module functors $g^{-1}\\circ f_*$ and $f'_*\\circ g'^{-1}$ send $a$ to the abelian morphisms $g^{-1}f_*a$ and $f'_*g'^{-1}a$ [prop-weil-pbc-inverse-image-modules-exact] (2), (3), and by [lemma-weil-pbc-underived-exchange-naturality] $f'_*g'^{-1}a\\circ\\Ex^0_{\\square,G}=\\Ex^0_{\\square,G'}\\circ g^{-1}f_*a$ as morphisms of abelian sheaves. Composition in $\\Mod(Y'_{\\Et},\\Lambda)$ is composition of the underlying morphisms of abelian sheaves [def-weil-sheaf-of-modules-category], so the same equality holds in $\\Mod(Y'_{\\Et},\\Lambda)$, all four morphisms being linear (step 3). Hence the $\\Ex^0_{\\square,G}$ form a natural transformation $\\Ex^0_\\square:g^{-1}\\circ f_*\\to f'_*\\circ g'^{-1}$ of functors $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Y'_{\\Et},\\Lambda)$ whose underlying morphisms are the abelian underived exchange morphisms.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), proof (lines 11506-11514): the exchange f'_*(j')^{-1} = j^{-1}f_* used as a transformation of functors on sheaves of modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-underived-exchange-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03D3, 03D7, 03D8 (module adjunction and composition of module pullbacks), applied to the exchange morphism of def-weil-pbc-underived-exchange; Stacks uses the module form of the exchange in Etale Cohomology, Lemma 03S6 (lemma-shriek-base-change), proof, without writing the check"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +136,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-underived-exchange-module-linear",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against def-weil-pbc-underived-exchange, prop-weil-pbc-inverse-image-modules-exact and the two citers lem-weil-pbc-etale-shriek-base-change-modules and def-weil-pbc-etale-shriek-base-change-map, which use exactly linearity plus naturality on module categories). Proof in four steps written by an agent from Stacks sites-modules 03D3/03D7/03D8: (1) theta_square = c_{f,g'}^{-1} c_{g,f'} (formula of the source Lean squareUpperStarIso) is linear because the composition isomorphisms c of lem-weil-pbc-inverse-image-composition are linear on modules (new node lem-weil-pbc-inverse-image-composition-module-linear, unsplit); (2) g'^{-1}epsilon_f is linear since the module counit is the abelian counit and the module g'^{-1} acts on morphisms as the abelian one (prop-weil-pbc-inverse-image-modules-exact (2),(3)); (3) the adjoint of a linear map under f'^{-1} -| f'_* is linear (same prop (3)); (4) naturality is read off on underlying abelian sheaves from lemma-weil-pbc-underived-exchange-naturality. Tags verified in stacks-project/tags/tags: 03D2, 03D3, 03D7, 03D8 (sites-modules), 03S6. stmt_deps unchanged. Lean candidate (not attached): AlgebraicGeometry.Etale.baseChangeMap with A = ModuleCat Lambda (slopmaster2, closed), where module sheaves are Sheaf (ModuleCat Lambda) and linearity is automatic."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps, agent proof from Stacks sites-modules 03D3/03D7/03D8: the square isomorphism theta is linear (new unsplit node: the composition isomorphisms c, d are linear on modules), the counit and the inverse image of a linear map are linear, the adjunction bijection restricts to linear maps (prop-weil-pbc-inverse-image-modules-exact (3)), naturality read off on abelian sheaves. Correct. Worker notes def-weil-pbc-cartesian-square does not say what theta is; taken from square-iso-pasting and the Lean squareUpperStarIso. Lean candidates (not attached): AlgebraicGeometry.Etale.baseChangeMap, squareUpperStarIso in slopmaster2 SixFunctors/BaseChange/Square.lean, no sorry below."
+ }
 }
