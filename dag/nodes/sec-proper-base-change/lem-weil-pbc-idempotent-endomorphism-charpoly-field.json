@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-idempotent-endomorphism-charpoly-field",
+ "kind": "statement",
+ "title": "Characteristic polynomial of an idempotent endomorphism over a field",
+ "statement": "Let $k$ be a field, $n\\ge0$, $V=k^{\\oplus n}$ and $p:V\\to V$ a $k$-linear map with $p\\circ p=p$. Let $r=\\dim_k\\operatorname{Im}(p)$. Then the characteristic polynomial of $p$ [def-weil-pbc-charpoly-free-module] (computed in any basis [lem-weil-pbc-charpoly-free-module-properties]) is $\\det(T-p)=(T-1)^rT^{n-r}\\in k[T]$. In particular it divides $T^n(T-1)^n$ in $k[T]$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020): 'For every prime p containing I the image of f in kappa(p) is (x-1)^r x^{n-r} where r is the dimension of P-bar (x) kappa(p)' (stated without proof)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-charpoly-free-module",
+  "lem-weil-pbc-charpoly-free-module-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of an idempotent linear map over a field is (X-1)^r X^(n-r)",
+   "results": "LinearMap.polyCharpoly, LinearMap.charpoly, IsNilpotent.charpoly_eq_X_pow_finrank (Mathlib.LinearAlgebra.Eigenspace.Zero), Matrix.charpoly, LinearMap.charpoly_def, LinearMap.charpoly_one (Mathlib.LinearAlgebra.Charpoly.Basic), Matrix.charpoly_toLin, LinearMap.charpoly_monic",
+   "date": "2026-10-10",
+   "verdict": "no match (charpoly_one and IsNilpotent.charpoly_eq_X_pow_finrank are the two pieces after splitting V = Im p (+) ker p, with LinearMap.charpoly_prodMap)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a projection (idempotent matrix) over a field equals (X - 1)^rank * X^(n - rank)",
+   "results": "LinearMap.finrank_maxGenEigenspace, LinearMap.finrank_maxGenEigenspace_zero_eq (Mathlib.LinearAlgebra.Eigenspace.Zero), LinearMap.charpoly_one, Matrix.charmatrix_apply_natDegree_le, Matrix.charmatrix_apply_natDegree",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, LinearMap.charpoly",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIdempotentElem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'charpoly\\|minpoly\\|eigen'; grep -rn 'charpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'idempot\\|proj'",
+   "results": "no hits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-projective-module-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

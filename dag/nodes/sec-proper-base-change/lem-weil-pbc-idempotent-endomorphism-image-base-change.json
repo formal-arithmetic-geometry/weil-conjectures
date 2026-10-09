@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+ "kind": "statement",
+ "title": "The image of an idempotent endomorphism of a finite free module is finite projective and commutes with base change",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$ and $p:R^{\\oplus n}\\to R^{\\oplus n}$ an $R$-linear map with $p\\circ p=p$, with matrix $X\\in M_n(R)$ in the standard basis. (i) $R^{\\oplus n}=\\operatorname{Im}(p)\\oplus\\operatorname{Im}(1-p)$ (internal direct sum, with $\\operatorname{Im}(1-p)=\\ker p$), so $\\operatorname{Im}(p)$ is a finite projective $R$-module (a direct summand of a finite free module). (ii) Let $\\rho:R\\to S$ be a ring map and $p_S:S^{\\oplus n}\\to S^{\\oplus n}$ the $S$-linear map with matrix $\\rho(X)$ (entrywise); then $p_S\\circ p_S=p_S$, and the $S$-linear map $\\operatorname{Im}(p)\\otimes_RS\\to S^{\\oplus n}$, $v\\otimes s\\mapsto s\\cdot\\rho(v)$ ($\\rho$ applied to coordinates), is injective with image $\\operatorname{Im}(p_S)$; hence $\\operatorname{Im}(p)\\otimes_RS\\cong\\operatorname{Im}(p_S)$ as $S$-modules.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), last sentences: 'is an idempotent element p which lifts p-bar. Setting P = Im(p) we win.' (that Im(p) is finite projective and that it lifts P-bar, i.e. that the image of an idempotent commutes with base change, is left to the reader there)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "range of an idempotent endomorphism of a finite free module is finite projective",
+   "results": "LinearMap.IsIdempotentElem.range_mem_invtSubmodule, LinearMap.IsIdempotentElem.isProj_range, LinearMap.isProj_range_iff_isIdempotentElem, LinearMap.IsIdempotentElem.isCompl (Mathlib.LinearAlgebra.Projection), ContinuousLinearMap.IsIdempotentElem.ker_eq_range, Module.Projective.iff_split' (Mathlib.Algebra.Module.Projective)",
+   "date": "2026-10-10",
+   "verdict": "no match as one statement; clause (i) is LinearMap.IsIdempotentElem.isCompl (range and kernel complementary) with Module.Projective.of_split (Mathlib/Algebra/Module/Projective.lean:165); clause (ii) not found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of an idempotent linear map commutes with base change: range (p.baseChange S) ≃ S ⊗ range p",
+   "results": "LinearMap.range_liftBaseChange (Mathlib.RingTheory.TensorProduct.Basic), Subbimodule.coe_baseChange, Submodule.baseChange_eq_span, Ideal.map_includeRight_eq, Ideal.map_includeLeft_eq",
+   "date": "2026-10-10",
+   "verdict": "no match (range_liftBaseChange gives the image as a span, not the injectivity of Im(p) (x) S -> S^n)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, Module.Projective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'range_baseChange\\|baseChange_range\\|lTensor_range\\|IsCompl.*baseChange\\|Projective.of_split' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "LinearMap.lTensor_range (Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean:130, range of lTensor of a surjection's composite), Module.Projective.of_split (Mathlib/Algebra/Module/Projective.lean:165); no base-change statement for the range of an idempotent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-projective-module-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
