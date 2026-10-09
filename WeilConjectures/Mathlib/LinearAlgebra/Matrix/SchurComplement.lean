@@ -29,7 +29,7 @@ variable {R : Type*} [CommRing R] {r κ' ι' : Type*} [Fintype r] [DecidableEq r
 /-- A block matrix whose upper left block is invertible and whose Schur complement vanishes is
 equivalent to the block matrix `[[1, 0], [0, 0]]`. -/
 lemma exists_eq_mul_fromBlocks_one_zero (B : Matrix r r R) (C : Matrix r ι' R) (D : Matrix κ' r R)
-    (E : Matrix κ' ι' R) (hB : IsUnit B.det) (hS : ∀ [Invertible B], E - D * ⅟B * C = 0) :
+    (E : Matrix κ' ι' R) (hB : IsUnit B.det) (hS : E - D * B⁻¹ * C = 0) :
     ∃ (P : Matrix (r ⊕ κ') (r ⊕ κ') R) (Q : Matrix (r ⊕ ι') (r ⊕ ι') R),
       IsUnit P.det ∧ IsUnit Q.det ∧
         fromBlocks B C D E = P * (fromBlocks 1 0 0 0 : Matrix (r ⊕ κ') (r ⊕ ι') R) * Q := by
@@ -39,7 +39,8 @@ lemma exists_eq_mul_fromBlocks_one_zero (B : Matrix r r R) (C : Matrix r ι' R) 
     simpa using hB
   · rw [det_fromBlocks_zero₂₁, det_one, det_one, mul_one]
     exact isUnit_one
-  · rw [fromBlocks_eq_of_invertible₁₁ B C D E, hS, Matrix.mul_assoc _ (fromBlocks B 0 0 1),
+  · rw [fromBlocks_eq_of_invertible₁₁ B C D E, invOf_eq_nonsing_inv, hS,
+      Matrix.mul_assoc _ (fromBlocks B 0 0 1),
       fromBlocks_multiply]
     simp only [fromBlocks_multiply]
     simp [Matrix.mul_assoc]

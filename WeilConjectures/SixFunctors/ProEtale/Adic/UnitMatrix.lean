@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 
 /-!
@@ -68,6 +70,80 @@ lemma isUnit_of_forall_ne_zero (f : locallyFiniteFunctions l T) (hf : ∀ t, f.1
     exact E.inv_mem (hfE y hy)
   have h1 : f * ⟨g, hg⟩ = 1 := Subtype.ext (ContinuousMap.ext fun t ↦ mul_inv_cancel₀ (hf t))
   exact ⟨⟨f, ⟨g, hg⟩, h1, by rw [mul_comm]; exact h1⟩, rfl⟩
+
+section ConstantRank
+
+variable {T' : Type*} [TopologicalSpace T'] {κ ι : Type*} [Fintype κ] [Fintype ι]
+  [DecidableEq κ] [DecidableEq ι]
+
+/-- The splitting `κ ≃ Fin r ⊕ (κ ∖ range ρ)` along an injection `ρ : Fin r → κ`. -/
+noncomputable def sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) :
+    κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} :=
+  (Equiv.sumCompl (· ∈ Set.range ρ)).symm.trans
+    (Equiv.sumCongr (Equiv.ofInjective ρ hρ).symm (Equiv.refl _))
+
+omit [Fintype κ] in
+@[simp]
+lemma sumComplEquiv_symm_inl {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) (a : Fin r) :
+    (sumComplEquiv ρ hρ).symm (Sum.inl a) = ρ a := by
+  simp [sumComplEquiv]
+
+/-- Pulled back along maps into a neighbourhood of a point, a matrix of locally finite functions
+of constant rank `r` is equivalent to the matrix `[[1, 0], [0, 0]]` with an `r × r` identity
+block. -/
+lemma exists_isOpen_eq_mul (M : Matrix κ ι (locallyFiniteFunctions l T)) (r : ℕ)
+    (hr : ∀ t, (M.map (locallyFiniteFunctionsEval t)).rank = r) (t₀ : T) :
+    ∃ (U : Set T) (ρ : Fin r → κ) (γ : Fin r → ι) (hρ : Function.Injective ρ)
+      (hγ : Function.Injective γ), IsOpen U ∧ t₀ ∈ U ∧
+      ∀ (g : C(T', T)), Set.range g ⊆ U → ∃ (P : Matrix κ κ (locallyFiniteFunctions l T'))
+        (Q : Matrix ι ι (locallyFiniteFunctions l T')), IsUnit P.det ∧ IsUnit Q.det ∧
+        M.map (locallyFiniteFunctionsCompAlgHom l g) = P * ((Matrix.fromBlocks 1 0 0 0 :
+          Matrix (Fin r ⊕ {i // i ∉ Set.range ρ}) (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex
+            (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q := by
+  obtain ⟨ρ, γ, h⟩ := (M.le_rank_map_iff (locallyFiniteFunctionsEval t₀) r).1 (hr t₀).ge
+  have hρ : Function.Injective ρ := fun a b hab ↦ by
+    by_contra hne
+    exact h (by rw [Matrix.det_zero_of_row_eq hne (by ext; simp [hab]), map_zero])
+  have hγ : Function.Injective γ := fun a b hab ↦ by
+    by_contra hne
+    exact h (by rw [Matrix.det_zero_of_column_eq hne (by intro; simp [hab]), map_zero])
+  let δ := (M.submatrix ρ γ).det
+  refine ⟨{t | δ.1 t ≠ 0}, ρ, γ, hρ, hγ, isOpen_compl_singleton.preimage δ.1.continuous, h,
+    fun g hg ↦ ?_⟩
+  let M' := M.map (locallyFiniteFunctionsCompAlgHom l g)
+  let N := M'.reindex (sumComplEquiv ρ hρ) (sumComplEquiv γ hγ)
+  have hN : N = Matrix.fromBlocks N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁ N.toBlocks₂₂ :=
+    (Matrix.fromBlocks_toBlocks N).symm
+  have hB : N.toBlocks₁₁ = (M.submatrix ρ γ).map (locallyFiniteFunctionsCompAlgHom l g) := by
+    ext a b
+    simp [N, M', Matrix.toBlocks₁₁]
+  have hBu : IsUnit N.toBlocks₁₁.det := by
+    rw [hB]
+    erw [← RingHom.map_det (locallyFiniteFunctionsCompAlgHom l g).toRingHom]
+    refine isUnit_of_forall_ne_zero _ fun t' ↦ ?_
+    exact hg ⟨t', rfl⟩
+  let := N.toBlocks₁₁.invertibleOfIsUnitDet hBu
+  have hS := Matrix.schur_eq_zero_of_rank_le (fun t' : T' ↦ locallyFiniteFunctionsEval t')
+    (fun x hx ↦ Subtype.ext (ContinuousMap.ext hx)) N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁
+    N.toBlocks₂₂ (fun t' ↦ ?_)
+  · rw [Matrix.invOf_eq_nonsing_inv] at hS
+    obtain ⟨P, Q, hP, hQ, hPQ⟩ := Matrix.exists_eq_mul_fromBlocks_one_zero _ _ _ _ hBu hS
+    refine ⟨P.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv ρ hρ).symm,
+      Q.reindex (sumComplEquiv γ hγ).symm (sumComplEquiv γ hγ).symm, by simpa using hP,
+      by simpa using hQ, ?_⟩
+    have hM' : M' = N.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm := by simp [N]
+    change M' = _
+    rw [hM', hN, hPQ]
+    simp only [Matrix.reindex_apply, Matrix.submatrix_mul_equiv]
+  · rw [← hN]
+    have : N.map (locallyFiniteFunctionsEval t') =
+        (M.map (locallyFiniteFunctionsEval (g t'))).reindex (sumComplEquiv ρ hρ)
+          (sumComplEquiv γ hγ) := by
+      ext a b
+      rfl
+    rw [this, Matrix.rank_reindex, hr, Fintype.card_fin]
+
+end ConstantRank
 
 end PadicAlgCl
 
@@ -364,6 +440,123 @@ lemma unitMatrix_ofUnitMatrix (N : Matrix κ ι (PadicAlgCl.locallyFiniteFunctio
   refine Matrix.ext fun i j ↦ ?_
   simp only [unitMatrix, ofUnitMatrix, biproduct.matrix_π, biproduct.ι_desc]
   exact unitEndFun_unitMul _
+
+end AdicSheaf
+
+namespace AdicSheaf
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+variable {ι κ ν : Type} [Fintype ι] [Fintype κ] [Fintype ν]
+
+lemma ofUnitMatrix_unitMatrix (ψ : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ ↦ unit l V) :
+    ofUnitMatrix (unitMatrix ψ) = ψ :=
+  unitMatrix_injective (unitMatrix_ofUnitMatrix _)
+
+lemma ofUnitMatrix_mul (N₁ : Matrix ν κ (PadicAlgCl.locallyFiniteFunctions l V))
+    (N₂ : Matrix κ ι (PadicAlgCl.locallyFiniteFunctions l V)) :
+    ofUnitMatrix (N₁ * N₂) = ofUnitMatrix N₂ ≫ ofUnitMatrix N₁ :=
+  unitMatrix_injective (by rw [unitMatrix_comp, unitMatrix_ofUnitMatrix, unitMatrix_ofUnitMatrix,
+    unitMatrix_ofUnitMatrix])
+
+lemma ofUnitMatrix_one [DecidableEq ι] :
+    ofUnitMatrix (1 : Matrix ι ι (PadicAlgCl.locallyFiniteFunctions l V)) = 𝟙 _ :=
+  unitMatrix_injective (by rw [unitMatrix_ofUnitMatrix, unitMatrix_id])
+
+lemma isIso_ofUnitMatrix [DecidableEq ι] (P : Matrix ι ι (PadicAlgCl.locallyFiniteFunctions l V))
+    (hP : IsUnit P.det) : IsIso (ofUnitMatrix P) :=
+  ⟨ofUnitMatrix P⁻¹, by rw [← ofUnitMatrix_mul, Matrix.nonsing_inv_mul _ hP, ofUnitMatrix_one],
+    by rw [← ofUnitMatrix_mul, Matrix.mul_nonsing_inv _ hP, ofUnitMatrix_one]⟩
+
+section Block
+
+variable [DecidableEq ι] [DecidableEq κ] {r : ℕ} (ρ : Fin r → κ) (γ : Fin r → ι)
+  (hρ : Function.Injective ρ) (hγ : Function.Injective γ)
+
+/-- The morphism `ℚ̄_ℓ^ι ⟶ ℚ̄_ℓ^κ` projecting onto the coordinates in the range of `γ` and
+including them as the coordinates in the range of `ρ`. -/
+noncomputable def blockMap : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ ↦ unit l V :=
+  biproduct.toSubtype _ (· ∈ Set.range γ) ≫
+    (biproduct.whiskerEquiv ((Equiv.ofInjective γ hγ).symm.trans (Equiv.ofInjective ρ hρ))
+      (fun _ ↦ Iso.refl (unit l V))).hom ≫ biproduct.fromSubtype _ (· ∈ Set.range ρ)
+
+lemma unitMatrix_blockMap :
+    unitMatrix (blockMap (l := l) (V := V) ρ γ hρ hγ) =
+      (Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
+        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm
+          (PadicAlgCl.sumComplEquiv γ hγ).symm := by
+  refine Matrix.ext fun i j ↦ ?_
+  obtain ⟨x, rfl⟩ := (PadicAlgCl.sumComplEquiv ρ hρ).symm.surjective i
+  obtain ⟨y, rfl⟩ := (PadicAlgCl.sumComplEquiv γ hγ).symm.surjective j
+  simp only [Matrix.reindex_apply, Matrix.submatrix_apply, Equiv.symm_symm, Equiv.apply_symm_apply]
+  rcases y with b | ⟨j, hj⟩
+  · have h1 : biproduct.ι (fun _ : ι ↦ unit l V) ((PadicAlgCl.sumComplEquiv γ hγ).symm
+        (Sum.inl b)) ≫ blockMap (l := l) (V := V) ρ γ hρ hγ =
+        biproduct.ι (fun _ : κ ↦ unit l V) (ρ b) := by
+      rw [PadicAlgCl.sumComplEquiv_symm_inl, blockMap,
+        biproduct.ι_toSubtype_subtype_assoc (fun _ : ι ↦ unit l V) (· ∈ Set.range γ) ⟨γ b, b, rfl⟩]
+      simp only [biproduct.whiskerEquiv_hom, Equiv.trans_apply, Iso.refl_inv,
+        biproduct.ι_desc_assoc, Category.assoc, biproduct.ι_fromSubtype,
+        Equiv.ofInjective_symm_apply, Equiv.ofInjective_apply]
+      exact Category.id_comp _
+    rw [unitMatrix, ← Category.assoc, h1]
+    rcases x with a | ⟨i, hi⟩
+    · rw [PadicAlgCl.sumComplEquiv_symm_inl]
+      by_cases hab : b = a
+      · subst hab
+        rw [biproduct.ι_π_self]
+        simp
+        rfl
+      · rw [biproduct.ι_π_ne _ (hρ.ne hab)]
+        simp only [Matrix.fromBlocks_apply₁₁]
+        rw [Matrix.one_apply_ne (Ne.symm hab)]
+        rfl
+    · have : (PadicAlgCl.sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
+        simp [PadicAlgCl.sumComplEquiv]
+      rw [this, biproduct.ι_π_ne _ (fun h ↦ hi ⟨b, h⟩)]
+      rfl
+  · have : (PadicAlgCl.sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
+      simp [PadicAlgCl.sumComplEquiv]
+    rw [unitMatrix, this, blockMap]
+    simp only [Category.assoc]
+    erw [biproduct.ι_toSubtype_assoc, dif_neg hj]
+    simp only [Limits.zero_comp]
+    rcases x with a | ⟨i, hi⟩ <;> rfl
+
+set_option linter.unusedFintypeInType false in
+instance : Mono (biproduct.fromSubtype (fun _ : κ ↦ unit l V) (· ∈ Set.range ρ)) :=
+  mono_of_mono_fac (biproduct.fromSubtype_toSubtype _ _)
+
+set_option linter.unusedFintypeInType false in
+instance : Epi (biproduct.toSubtype (fun _ : ι ↦ unit l V) (· ∈ Set.range γ)) :=
+  epi_of_epi_fac (biproduct.fromSubtype_toSubtype _ _)
+
+variable {ρ γ hρ hγ} in
+lemma eq_blockMap_of_unitMatrix_eq
+    (ψ : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ ↦ unit l V)
+    (P : Matrix κ κ (PadicAlgCl.locallyFiniteFunctions l V))
+    (Q : Matrix ι ι (PadicAlgCl.locallyFiniteFunctions l V))
+    (h : unitMatrix ψ = P * (Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
+        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm
+          (PadicAlgCl.sumComplEquiv γ hγ).symm * Q) :
+    ψ = ofUnitMatrix Q ≫ blockMap ρ γ hρ hγ ≫ ofUnitMatrix P := by
+  rw [← ofUnitMatrix_unitMatrix ψ, h, ofUnitMatrix_mul, ofUnitMatrix_mul,
+    ← unitMatrix_blockMap (l := l) (V := V) ρ γ hρ hγ, ofUnitMatrix_unitMatrix]
+
+/-- The kernel of the block map is free on the coordinates outside the range of `γ`. -/
+noncomputable def kernelBlockMapIso :
+    kernel (blockMap (l := l) (V := V) ρ γ hρ hγ) ≅
+      ⨁ Subtype.restrict (· ∈ Set.range γ)ᶜ (fun _ : ι ↦ unit l V) :=
+  kernelCompMono _ _ ≪≫ kernelBiproductToSubtypeIso _ _
+
+/-- The cokernel of the block map is free on the coordinates outside the range of `ρ`. -/
+noncomputable def cokernelBlockMapIso :
+    cokernel (blockMap (l := l) (V := V) ρ γ hρ hγ) ≅
+      ⨁ Subtype.restrict (· ∈ Set.range ρ)ᶜ (fun _ : κ ↦ unit l V) :=
+  (cokernelIsoOfEq (Category.assoc _ _ _).symm) ≪≫ cokernelEpiComp _ _ ≪≫
+    cokernelBiproductFromSubtypeIso _ _
+
+end Block
 
 end AdicSheaf
 
