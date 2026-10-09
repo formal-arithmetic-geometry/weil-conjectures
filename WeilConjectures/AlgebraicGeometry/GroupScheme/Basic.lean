@@ -10,13 +10,16 @@ public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Normal
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.Mathlib.Topology.Constructible
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
@@ -200,6 +203,28 @@ theorem GrpObj.isClosedImmersion_translate {Z : Over (Spec (.of k))} (j : Z ⟶ 
   have := GrpObj.isIso_mulLeft_left G g
   rw [GrpObj.translate, Over.comp_left]
   infer_instance
+
+lemma GrpObj.comp_mulLeft {X : Over (Spec (.of k))} (x : X ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : x ≫ GrpObj.mulLeft G g = (toUnit X ≫ g) * x := by
+  rw [mulLeft_eq_mul, MonObj.comp_mul, ← Category.assoc, toUnit_unique (x ≫ toUnit G),
+    Category.comp_id]
+
+lemma GrpObj.comp_mulRight {X : Over (Spec (.of k))} (x : X ⟶ G)
+    (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : x ≫ GrpObj.mulRight G g = x * (toUnit X ≫ g) := by
+  rw [mulRight_eq_mul, MonObj.comp_mul, ← Category.assoc, toUnit_unique (x ≫ toUnit G),
+    Category.comp_id]
+
+/-- A homomorphism of group schemes intertwines the left translations by `g` and by its image. -/
+lemma GrpObj.mulLeft_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f : G ⟶ H)
+    [IsMonHom f] (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulLeft G g ≫ f = f ≫ GrpObj.mulLeft H (g ≫ f) := by
+  rw [comp_mulLeft, mulLeft_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
+
+/-- A homomorphism of group schemes intertwines the right translations by `g` and by its image. -/
+lemma GrpObj.mulRight_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f : G ⟶ H)
+    [IsMonHom f] (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
+    GrpObj.mulRight G g ≫ f = f ≫ GrpObj.mulRight H (g ≫ f) := by
+  rw [comp_mulRight, mulRight_eq_mul, MonObj.mul_comp, Category.id_comp, Category.assoc]
 
 end Translation
 
@@ -617,8 +642,228 @@ end IdentityComponent
 /-- Cartier's theorem: a group scheme locally of finite type over a field of characteristic zero
 is reduced (indeed smooth). (blueprint: `sk-i-cartier`) -/
 theorem GrpObj.isReduced_of_charZero [CharZero k] (G : Over (Spec (.of k))) [GrpObj G]
-    [LocallyOfFiniteType G.hom] : IsReduced G.left := by
-  sorry
+    [LocallyOfFiniteType G.hom] : IsReduced G.left :=
+  let : GrpObj (Over.mk G.hom) := ‹GrpObj G›
+  isReduced_of_grpObj G.hom
+
+/-- Let `V` be an open subset of a space `X` and `s ⊆ X`. If some open subset of `V` meets the
+closure of `s ∩ V` in `V` inside `s`, then some open subset of `X` meets the closure of `s` in a
+nonempty subset of `s`. -/
+theorem exists_isOpen_inter_closure_subset_of_subtype {X : Type*} [TopologicalSpace X]
+    {V s : Set X} (hV : IsOpen V) {u : Set V} (hu : IsOpen u)
+    (hne : (u ∩ closure (Subtype.val ⁻¹' s)).Nonempty)
+    (hsub : u ∩ closure (Subtype.val ⁻¹' s) ⊆ Subtype.val ⁻¹' s) :
+    ∃ u : Set X, IsOpen u ∧ (u ∩ closure s).Nonempty ∧ u ∩ closure s ⊆ s := by
+  refine ⟨Subtype.val '' u, hV.isOpenMap_subtype_val u hu, ?_, ?_⟩
+  · obtain ⟨p, hpu, hp⟩ := hne
+    exact ⟨p, ⟨p, hpu, rfl⟩, continuous_subtype_val.closure_preimage_subset s hp⟩
+  · rintro _ ⟨⟨p, hpu, rfl⟩, hp⟩
+    refine hsub ⟨hpu, closure_subtype.mpr ?_⟩
+    rw [Subtype.image_preimage_coe]
+    exact hV.inter_closure ⟨p.2, hp⟩
+
+/-- A consequence of **Chevalley's theorem**: the image of a quasi-compact morphism locally of
+finite type from a nonempty scheme to a locally noetherian scheme contains a nonempty open subset
+of its closure. -/
+theorem Scheme.Hom.exists_isOpen_inter_closure_range_subset {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [LocallyOfFiniteType f] [QuasiCompact f] [IsLocallyNoetherian Y] [Nonempty X] :
+    ∃ u : Set Y, IsOpen u ∧ (u ∩ closure (Set.range f)).Nonempty ∧
+      u ∩ closure (Set.range f) ⊆ Set.range f := by
+  obtain ⟨x⟩ := ‹Nonempty X›
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+  have : IsAffine V := hV
+  have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+  have : TopologicalSpace.NoetherianSpace V := noetherianSpace_of_isAffineOpen V hV
+  have hr : Set.range (f ∣_ V) = Subtype.val ⁻¹' Set.range f := by
+    ext y
+    refine ⟨?_, ?_⟩
+    · rintro ⟨z, rfl⟩
+      exact ⟨z.1, (morphismRestrict_base_coe f V z).symm⟩
+    · rintro ⟨z, hz⟩
+      refine ⟨⟨z, show f z ∈ V from hz ▸ y.2⟩, Subtype.ext ?_⟩
+      rw [morphismRestrict_base_coe, hz]
+  have hc : Topology.IsConstructible (Set.range (f ∣_ V)) := by
+    rw [← Set.image_univ]
+    exact (f ∣_ V).isConstructible_image .univ
+  obtain ⟨u, hu, hne, hsub⟩ := exists_isOpen_inter_closure_subset_of_isConstructible hc
+    (Set.range_nonempty_iff_nonempty.mpr ⟨⟨x, hxV⟩⟩)
+  rw [hr] at hne hsub
+  exact exists_isOpen_inter_closure_subset_of_subtype V.2 hu hne hsub
+
+/-- The image of a homomorphism from a group scheme of finite type to a group scheme locally of
+finite type over an algebraically closed field `K` is closed.
+
+Let `S` be the image and `Z` its closure. By Chevalley's theorem `S` contains a nonempty open
+subset `U` of `Z`; the translates of `U` by the rational points of `S` cover the closed points of
+`S`, so their union `U'` is a dense open subset of `Z` contained in `S`. If `Z ⊄ U'`, pick a closed
+point `y ∈ Z \ U'`. Then `y U'` and `U'` are open in `Z` and meet in a closed point `w = y x`,
+with `x, w` rational points of `S`, so `y = w x⁻¹ ∈ S ⊆ U'`, a contradiction. -/
+theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgClosed K]
+    {G H : Over (Spec (.of K))} [GrpObj G] [GrpObj H] [LocallyOfFiniteType G.hom]
+    [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] (f : G ⟶ H) [IsMonHom f] :
+    IsClosed (Set.range f.left) := by
+  classical
+  have := isNoetherian_left G
+  have := LocallyOfFiniteType.isLocallyNoetherian H.hom
+  have : JacobsonSpace G.left := LocallyOfFiniteType.jacobsonSpace G.hom
+  have : JacobsonSpace H.left := LocallyOfFiniteType.jacobsonSpace H.hom
+  have : LocallyOfFiniteType f.left := by
+    have : LocallyOfFiniteType (f.left ≫ H.hom) := by rw [Over.w f]; infer_instance
+    exact locallyOfFiniteType_of_comp f.left H.hom
+  set S := Set.range f.left with hS
+  set Z := closure S with hZ
+  let pt : Spec (.of K) := IsLocalRing.closedPoint K
+  -- rational points of `H` are its closed points
+  have hcl (s : 𝟙_ (Over (Spec (.of K))) ⟶ H) : IsClosed {s.left pt} :=
+    (pointEquivClosedPoint H.hom ⟨s.left, Over.w s⟩).2
+  have hext {s t : 𝟙_ (Over (Spec (.of K))) ⟶ H} (h : s.left pt = t.left pt) : s = t :=
+    Over.OverMorphism.ext (ext_of_apply_closedPoint_eq H.hom (Over.w s) (Over.w t) h)
+  have hsec (y : H.left) (hy : IsClosed {y}) : (GrpObj.sectionOfIsClosed H y hy).left pt = y :=
+    GrpObj.sectionOfIsClosed_left_apply H y hy pt
+  have happ {X Y : Over (Spec (.of K))} (a : 𝟙_ (Over (Spec (.of K))) ⟶ X) (b : X ⟶ Y) :
+      (a ≫ b).left pt = b.left (a.left pt) := by
+    rw [Over.comp_left, Scheme.Hom.comp_apply]
+  -- the rational points of `S` form the subgroup `P`, the image of `G(K)`
+  set P := (IsMonHom.monoidHom f (𝟙_ (Over (Spec (.of K))))).range with hP
+  have hmemP (s : 𝟙_ (Over (Spec (.of K))) ⟶ H) : s ∈ P ↔ s.left pt ∈ S := by
+    refine ⟨?_, fun hs ↦ ?_⟩
+    · rintro ⟨g, rfl⟩
+      exact ⟨g.left pt, (happ g f).symm⟩
+    obtain ⟨x, hx, hxcl⟩ := nonempty_inter_closedPoints (Z := f.left ⁻¹' {s.left pt})
+      (by obtain ⟨x, hx⟩ := hs; exact ⟨x, hx⟩) ((hcl s).preimage f.left.continuous).isLocallyClosed
+    refine ⟨GrpObj.sectionOfIsClosed G x hxcl, hext ?_⟩
+    rw [IsMonHom.monoidHom_apply, happ, GrpObj.sectionOfIsClosed_left_apply]
+    exact hx
+  have hSpt (y : H.left) (hyS : y ∈ S) (hy : IsClosed {y}) :
+      GrpObj.sectionOfIsClosed H y hy ∈ P := by
+    rw [hmemP, hsec]
+    exact hyS
+  -- the closed points of `S` are dense in `S`
+  have hdense : S ⊆ closure (S ∩ closedPoints H.left) := by
+    rintro _ ⟨x, rfl⟩
+    have hx : x ∈ closure (closedPoints G.left) := by rw [closure_closedPoints]; trivial
+    refine (image_closure_subset_closure_image f.left.continuous) ⟨x, hx, rfl⟩ |> closure_mono ?_
+    rintro _ ⟨x, hx, rfl⟩
+    refine ⟨⟨x, rfl⟩, ?_⟩
+    rw [← GrpObj.sectionOfIsClosed_left_apply G x hx pt, ← happ]
+    exact hcl _
+  -- translations by rational points of `S` and the inversion preserve `S` and `Z`
+  have hclosure {φ : H.left ⟶ H.left} (h : φ '' S ⊆ S) : φ '' Z ⊆ Z :=
+    (image_closure_subset_closure_image φ.continuous).trans (closure_mono h)
+  have hLS {s} (hs : s ∈ P) : (GrpObj.mulLeft H s).left '' S ⊆ S := by
+    obtain ⟨g, rfl⟩ := hs
+    rintro _ ⟨_, ⟨x, rfl⟩, rfl⟩
+    refine ⟨(GrpObj.mulLeft G g).left x, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, GrpObj.mulLeft_comp_of_isMonHom,
+      Over.comp_left, Scheme.Hom.comp_apply, IsMonHom.monoidHom_apply]
+  have hRS {s} (hs : s ∈ P) : (GrpObj.mulRight H s).left '' S ⊆ S := by
+    obtain ⟨g, rfl⟩ := hs
+    rintro _ ⟨_, ⟨x, rfl⟩, rfl⟩
+    refine ⟨(GrpObj.mulRight G g).left x, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, GrpObj.mulRight_comp_of_isMonHom,
+      Over.comp_left, Scheme.Hom.comp_apply, IsMonHom.monoidHom_apply]
+  have hιS : ι[H].left '' S ⊆ S := by
+    have : ι[G] ≫ f = f ≫ ι[H] := by
+      calc ι[G] ≫ f = (𝟙 G)⁻¹ ≫ f := by rw [Hom.inv_def, Category.id_comp]
+        _ = (𝟙 G ≫ f)⁻¹ := GrpObj.inv_comp _ _
+        _ = f ≫ ι[H] := by rw [Category.id_comp, Hom.inv_def]
+    rintro _ ⟨_, ⟨x, rfl⟩, rfl⟩
+    exact ⟨ι[G].left x, by rw [← Scheme.Hom.comp_apply, ← Over.comp_left, this, Over.comp_left,
+      Scheme.Hom.comp_apply]⟩
+  -- left translation by a rational point of `Z` preserves `Z`
+  have hLZ (a : 𝟙_ (Over (Spec (.of K))) ⟶ H) (ha : a.left pt ∈ Z) :
+      (GrpObj.mulLeft H a).left '' Z ⊆ Z := by
+    refine (image_closure_subset_closure_image (GrpObj.mulLeft H a).left.continuous).trans
+      (closure_minimal ?_ isClosed_closure)
+    refine (Set.image_mono hdense).trans
+      ((image_closure_subset_closure_image (GrpObj.mulLeft H a).left.continuous).trans
+      (closure_minimal ?_ isClosed_closure))
+    rintro _ ⟨y, ⟨hyS, hycl⟩, rfl⟩
+    have hy := hSpt y hyS hycl
+    have e : a * GrpObj.sectionOfIsClosed H y hycl =
+        a ≫ GrpObj.mulRight H (GrpObj.sectionOfIsClosed H y hycl) := by
+      rw [GrpObj.comp_mulRight, toUnit_unit, Category.id_comp]
+    rw [← hsec y hycl, ← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp, e, happ]
+    exact hclosure (hRS hy) ⟨_, ha, rfl⟩
+  have hιZ : ι[H].left '' Z ⊆ Z := hclosure hιS
+  have hLiso (s : 𝟙_ (Over (Spec (.of K))) ⟶ H) : IsIso (GrpObj.mulLeft H s).left :=
+    GrpObj.isIso_mulLeft_left H s
+  have hLinv (s : 𝟙_ (Over (Spec (.of K))) ⟶ H) (x : H.left) :
+      (GrpObj.mulLeft H s⁻¹).left ((GrpObj.mulLeft H s).left x) = x := by
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, GrpObj.mulLeft_comp_mulLeft, inv_mul_cancel,
+      GrpObj.mulLeft_one]
+    rfl
+  -- Chevalley: `S` contains a nonempty open subset `u ∩ Z` of `Z`
+  have : Nonempty G.left := ⟨η[G].left pt⟩
+  obtain ⟨u, hu, hune, huS⟩ := f.left.exists_isOpen_inter_closure_range_subset
+  obtain ⟨x₀, hx₀, hx₀cl⟩ := nonempty_inter_closedPoints hune
+    (hu.isLocallyClosed.inter isClosed_closure.isLocallyClosed)
+  have hx₀P := hSpt x₀ (huS hx₀) hx₀cl
+  set s₀ := GrpObj.sectionOfIsClosed H x₀ hx₀cl
+  -- the union `U'` of the translates of `u` by `P`
+  set u' := ⋃ s ∈ P, (GrpObj.mulLeft H s).left '' u with hu'
+  have hu'open : IsOpen u' :=
+    isOpen_biUnion fun s _ ↦ (GrpObj.mulLeft H s).left.isOpenEmbedding.isOpenMap _ hu
+  have hu'S : u' ∩ Z ⊆ S := by
+    rintro _ ⟨hy, hyZ⟩
+    obtain ⟨s, hs, v, hv, rfl⟩ := Set.mem_iUnion₂.mp hy
+    have hvZ : v ∈ Z := by
+      rw [← hLinv s v]
+      refine hLZ s⁻¹ ?_ ⟨_, hyZ, rfl⟩
+      exact subset_closure ((hmemP _).mp (inv_mem hs))
+    exact hLS hs ⟨v, huS ⟨hv, hvZ⟩, rfl⟩
+  have hu'P (s) (hs : s ∈ P) : s.left pt ∈ u' := by
+    refine Set.mem_iUnion₂.mpr ⟨s * s₀⁻¹, mul_mem hs (inv_mem hx₀P), x₀, hx₀.1, ?_⟩
+    rw [← hsec x₀ hx₀cl, ← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp,
+      inv_mul_cancel_right]
+  have hu'dense : Z ⊆ closure (u' ∩ Z) := by
+    refine closure_minimal (hdense.trans (closure_mono ?_)) isClosed_closure
+    rintro y ⟨hyS, hycl⟩
+    refine ⟨?_, subset_closure hyS⟩
+    rw [← hsec y hycl]
+    exact hu'P _ (hSpt y hyS hycl)
+  -- every closed point of `Z` lies in `U'`
+  have hZu' : Z ⊆ u' := by
+    by_contra h
+    obtain ⟨y, ⟨hyZ, hyu'⟩, hycl⟩ := nonempty_inter_closedPoints (Set.sdiff_nonempty.mpr h)
+      (isClosed_closure.isLocallyClosed.inter hu'open.isClosed_compl.isLocallyClosed)
+    set t := GrpObj.sectionOfIsClosed H y hycl
+    refine hyu' ?_
+    rw [← hsec y hycl]
+    refine hu'P _ ?_
+    -- `t u'` and `u'` meet in a point of `Z`
+    set O := (GrpObj.mulLeft H t).left '' u'
+    have hOopen : IsOpen O := (GrpObj.mulLeft H t).left.isOpenEmbedding.isOpenMap _ hu'open
+    have hO : (O ∩ (u' ∩ Z)).Nonempty := by
+      have h1 : (1 : 𝟙_ (Over (Spec (.of K))) ⟶ H).left pt ∈ u' := hu'P 1 (one_mem P)
+      have hyO : y ∈ O ∩ closure (u' ∩ Z) := by
+        refine ⟨⟨_, h1, ?_⟩, hu'dense hyZ⟩
+        rw [← happ, GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp, mul_one, hsec]
+      obtain ⟨w, hw⟩ := closure_nonempty_iff.mp ⟨y, hOopen.inter_closure hyO⟩
+      exact ⟨w, hw⟩
+    rw [← Set.inter_assoc] at hO
+    obtain ⟨w, ⟨⟨⟨x, hxu', rfl⟩, hwu'⟩, hwZ⟩, hwcl⟩ := nonempty_inter_closedPoints hO
+      ((hOopen.inter hu'open).isLocallyClosed.inter isClosed_closure.isLocallyClosed)
+    have hxZ : x ∈ Z := by
+      rw [← hLinv t x]
+      refine hLZ t⁻¹ ?_ ⟨_, hwZ, rfl⟩
+      rw [Hom.inv_def, happ]
+      exact hιZ ⟨_, hsec y hycl ▸ hyZ, rfl⟩
+    have hxcl : IsClosed {x} := by
+      have := (GrpObj.mulLeft H t⁻¹).left.isClosedEmbedding.isClosedMap _ hwcl
+      rwa [Set.image_singleton, hLinv] at this
+    have hxP := hSpt x (hu'S ⟨hxu', hxZ⟩) hxcl
+    have hwP := hSpt _ (hu'S ⟨hwu', hwZ⟩) hwcl
+    have htx : t * GrpObj.sectionOfIsClosed H x hxcl = GrpObj.sectionOfIsClosed H _ hwcl := by
+      refine hext ?_
+      rw [hsec, show t * GrpObj.sectionOfIsClosed H x hxcl =
+          GrpObj.sectionOfIsClosed H x hxcl ≫ GrpObj.mulLeft H t by
+        rw [GrpObj.comp_mulLeft, toUnit_unit, Category.id_comp], happ, hsec]
+    change t ∈ P
+    rw [← mul_inv_cancel_right t (GrpObj.sectionOfIsClosed H x hxcl), htx]
+    exact mul_mem hwP (inv_mem hxP)
+  exact closure_subset_iff_isClosed.mp fun y hy ↦ hu'S ⟨hZu' hy, hy⟩
 
 /-- The image of a homomorphism from a group scheme of finite type to a group scheme locally of
 finite type over a field is closed (SGA 3, VI_B, Proposition 1.2).
@@ -626,17 +871,48 @@ finite type over a field is closed (SGA 3, VI_B, Proposition 1.2).
 The source must be quasi-compact: the homomorphism `ℤ ⟶ 𝔾ₐ` from the constant group scheme,
 `n ↦ n`, over `ℚ` has image the infinite non-closed set of closed points `n ∈ 𝔸¹_ℚ`.
 
-Proof sketch (not formalized): after base change to an algebraic closure the image is
-constructible (Chevalley), hence contains a dense open subset of its closure; translating it by
-rational points shows the image is open in its closure, hence closed. Closedness descends along
-the closed surjection from the base change. The matrix-group case over an algebraically closed
+After base change to an algebraic closure the image is closed by
+`isClosed_range_of_isMonHom_of_isAlgClosed`, and closedness descends along the closed surjection
+from the base change. The matrix-group case over an algebraically closed
 field is `AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff` (blueprint
 `lem-ag-homomorphism-image-closed`). (blueprint: `sk-p-geometry`) -/
 theorem isClosed_range_of_isMonHom {G K : Over (Spec (.of k))} [GrpObj G] [GrpObj K]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType K.hom] (f : G ⟶ K)
     [IsMonHom f] :
     IsClosed (Set.range f.left.base) := by
-  sorry
+  let g : Spec (.of (AlgebraicClosure k)) ⟶ Spec (.of k) :=
+    Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
+  let : GrpObj ((Over.pullback g).obj G) := Functor.grpObjObj
+  let : GrpObj ((Over.pullback g).obj K) := Functor.grpObjObj
+  have : LocallyOfFiniteType ((Over.pullback g).obj G).hom :=
+    inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd G.hom g))
+  have : QuasiCompact ((Over.pullback g).obj G).hom :=
+    inferInstanceAs (QuasiCompact (Limits.pullback.snd G.hom g))
+  have : LocallyOfFiniteType ((Over.pullback g).obj K).hom :=
+    inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd K.hom g))
+  have h := isClosed_range_of_isMonHom_of_isAlgClosed ((Over.pullback g).map f)
+  have : IsIntegralHom g := by
+    rw [IsIntegralHom.SpecMap_iff]
+    exact Algebra.IsIntegral.isIntegral
+  have : Surjective g := ⟨fun x ↦ ⟨IsLocalRing.closedPoint _, Subsingleton.elim _ _⟩⟩
+  let pG : ((Over.pullback g).obj G).left ⟶ G.left := Limits.pullback.fst G.hom g
+  let pK : ((Over.pullback g).obj K).left ⟶ K.left := Limits.pullback.fst K.hom g
+  have hsurj : Function.Surjective pG :=
+    (MorphismProperty.pullback_fst (P := @Surjective) G.hom g this).surj
+  have hw : ((Over.pullback g).map f).left ≫ pK = pG ≫ f.left := by
+    simp [pG, pK]
+  have hr {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) :
+      Set.range (a ≫ b) = b '' Set.range a := by
+    rw [← Set.range_comp]
+    rfl
+  have : Set.range f.left.base = pK '' Set.range ((Over.pullback g).map f).left := by
+    calc Set.range f.left.base = f.left '' Set.range pG := by
+          rw [hsurj.range_eq, Set.image_univ]
+      _ = Set.range (pG ≫ f.left) := (hr _ _).symm
+      _ = Set.range (((Over.pullback g).map f).left ≫ pK) := by rw [hw]
+      _ = _ := hr _ _
+  rw [this]
+  exact pK.isClosedMap _ h
 
 /-- A closed subgroup `J` of a connected reduced group scheme `G` locally of finite type over a
 field, with `J` reduced of the same dimension as `G`, is all of `G`.
