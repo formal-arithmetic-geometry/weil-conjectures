@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+ "kind": "statement",
+ "title": "A presheaf of abelian groups or commutative rings is a sheaf iff its underlying presheaf of sets is",
+ "statement": "Let $\\mathcal C$ be a site (Stacks Sites, Definition 00VH) and let $\\mathcal A$ be the category of abelian groups or the category of commutative rings, with forgetful functor $s:\\mathcal A\\to\\textit{Sets}$. Let $\\mathcal F$ be a presheaf on $\\mathcal C$ with values in $\\mathcal A$, i.e. a functor $\\mathcal C^{op}\\to\\mathcal A$, and $s\\circ\\mathcal F$ its underlying presheaf of sets. Then $\\mathcal F$ is a sheaf with values in $\\mathcal A$ (for every covering $\\{U_i\\to U\\}_{i\\in I}$ the diagram $\\mathcal F(U)\\to\\prod_i\\mathcal F(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(U_i\\times_UU_j)$ is an equalizer diagram in $\\mathcal A$, Sites Definition 00VR and the discussion before it) if and only if $s\\circ\\mathcal F$ is a sheaf of sets (the same diagram of underlying sets is an equalizer diagram of sets).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), property ($\\alpha$): a presheaf with values in a type of algebraic structure is a sheaf iff its underlying presheaf of sets is a sheaf, referring to the proof of Sheaves Lemma sheaves-lemma-sheaves-structure (literature/stacks-project/sheaves.tex); abelian groups and rings are types of algebraic structure by Sheaves Lemma sheaves-lemma-list-algebraic-structures"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf of abelian groups is a sheaf iff underlying presheaf of sets is a sheaf",
+   "results": "CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget (Mathlib.CategoryTheory.Sites.Sheaf), AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.toSheaf_obj_val, SheafOfModules.toSheaf, TopCat.Sheaf.presheaf",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget",
+   "results": "CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget : (J) (P' : Cᵒᵖ ⥤ A') (s : A' ⥤ Type (max v₁ u₁)) [HasLimits A'] [PreservesLimits s] [s.ReflectsIsomorphisms] : IsSheaf J P' ↔ IsSheaf J (P' ⋙ s) (Mathlib.CategoryTheory.Sites.Sheaf)",
+   "date": "2026-10-09",
+   "verdict": "match (type checked)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a presheaf of rings on a site is a sheaf if and only if the underlying presheaf of types is a sheaf",
+   "results": "SheafOfModules.isSheaf, SheafOfModules, CategoryTheory.Sheaf.cond, CategoryTheory.Sheaf.mk.inj, SheafOfModules.mk.inj",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; the match was found by the other two searches"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isSheaf_iff_isSheaf_forget\\|isSheaf_iff_isSheaf_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "Mathlib/CategoryTheory/Sites/Sheaf.lean:715 Presheaf.isSheaf_iff_isSheaf_comp, :730 Presheaf.isSheaf_iff_isSheaf_forget (docstring: 'this lemma applies for algebraic categories, e.g. groups, abelian groups and rings'); Mathlib/Topology/Sheaves/Forget.lean:50,55 (topological-space version)",
+   "date": "2026-10-09",
+   "verdict": "match: Presheaf.isSheaf_iff_isSheaf_forget (Sheaf.lean:730), read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget",
+  "file": "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+  "how": "specializes in one line: isSheaf_iff_isSheaf_forget J P (forget A) (line 730) with A = AddCommGrpCat.{w} or CommRingCat.{w} for a site C : Type u with Category.{v} C and w = max v u (for a small site, w = u); the hypotheses HasLimits A, PreservesLimits (forget A) and (forget A).ReflectsIsomorphisms are Mathlib instances for these concrete categories. Mathlib's IsSheaf is the condition of Stacks Definition 00VR (Hom(X, F(-)) a sheaf of sets for every X), equivalent to the equalizer form for covering families by Presheaf.isSheaf_iff_isLimit_pretopology (Sheaf.lean:208) as recorded on def-weil-pbc-abelian-etale-sheaves; the sheaf condition for the underlying presheaf of types is Presieve.IsSheaf via isSheaf_iff_isSheaf_of_type."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Presheaf.isSheaf_iff_isSheaf_forget (Sites/Sheaf.lean:730) with forget AddCommGrpCat / forget CommRingCat."
+ }
+}
