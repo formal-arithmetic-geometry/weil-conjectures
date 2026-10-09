@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-henselian-pair",
+ "kind": "statement",
+ "title": "A filtered colimit of henselian pairs is henselian",
+ "statement": "Let $\\Lambda$ be a directed set and $(A_\\lambda,I_\\lambda)_{\\lambda\\in\\Lambda}$ a directed system of pairs: commutative rings $A_\\lambda$ with ideals $I_\\lambda$ and ring maps $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ for $\\mu\\le\\lambda$ ($\\varphi_{\\lambda\\lambda}=\\mathrm{id}$, $\\varphi_{\\lambda\\nu}\\circ\\varphi_{\\mu\\lambda}=\\varphi_{\\mu\\nu}$) with $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$. Assume every pair $(A_\\lambda,I_\\lambda)$ is henselian [def-weil-pbc-henselian-terminology]. Let $A=\\varinjlim_\\lambda A_\\lambda$ be the colimit of commutative rings [def-weil-pbc-category-colimit], with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$, and $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$. Then $I$ is an ideal of $A$ contained in the Jacobson radical of $A$, and $(A,I)$ is a henselian pair.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885) and its proof (radical: $u\\in1+I$ comes from $u_\\lambda\\in1+I_\\lambda$, a unit by Algebra Lemma lemma-contained-in-radical; henselian: Stacks' Definition Tag 09XE (definition-henselian-pair, lifting of coprime monic factorizations), descending $f,g_0,h_0,g_0',h_0'$ to a stage). Stacks' definition is the factorization form 09XE while [def-weil-pbc-henselian-terminology] is the idempotent form (09XI (3)), so the split of this node either passes through Lemma Tag 09XI (lemma-characterize-henselian-pair) or proves the idempotent form directly; Example Tag 0FWU (example-moret-bailly) shows filteredness is needed"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of henselian rings is henselian",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing, HenselianLocalRing.mk, HenselianRing.mk, IsAdicComplete.henselianRing (Mathlib.RingTheory.Henselian), CommRingCat.FilteredColimits.colimit(CoconeIsColimit), RingCat.FilteredColimits.colimit (Mathlib.Algebra.Category.Ring.FilteredColimits)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct limit of henselian pairs (A_i, I_i) is a henselian pair",
+   "results": "IsAdicComplete.henselianRing, HenselianRing (RingTheory.Henselian), Ring.DirectLimit.exists_of, Ring.DirectLimit.commRing (Algebra.Colimit.Ring), IsAdicComplete.StrictMono.liftRingHom, DirectLimit.instCommRingOfRingHomClass",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "HenselianRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing.jac, HenselianRing.is_henselian, HenselianRing.mk: no instance for a direct limit or filtered colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'colimit|DirectLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean; rg -il henselian Mathlib/",
+   "results": "no colimit or direct limit in Henselian.lean; Henselian.lean is the only Mathlib file mentioning henselian",
+   "date": "2026-10-10",
+   "verdict": "no match (also, Mathlib's HenselianRing is the simple-root form, not the idempotent form of [def-weil-pbc-henselian-terminology])"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is More on Algebra 0FWT in the idempotent-lifting form of the DAG (plus I in the Jacobson radical); self-contained; correct; unsplit (its split must go through 09XI or descend finite algebras)."
+ }
+}

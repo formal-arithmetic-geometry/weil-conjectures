@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-henselization-colimit",
  "kind": "statement",
  "title": "Henselization of pairs commutes with filtered colimits",
- "statement": "Let $\\Lambda$ be a directed set and $(A_\\lambda,I_\\lambda)_{\\lambda\\in\\Lambda}$ a directed system of pairs: commutative rings $A_\\lambda$ with ideals $I_\\lambda$ and ring maps $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ for $\\mu\\le\\lambda$ (compatible, $\\varphi_{\\lambda\\lambda}=\\mathrm{id}$) with $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$. Let $A=\\varinjlim_\\lambda A_\\lambda$ [def-weil-pbc-category-colimit] with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$, and let $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ (an ideal of $A$, the colimit of the $I_\\lambda$). For every $\\lambda$ let $(A_\\lambda^h,I_\\lambda^h)$, $I_\\lambda^h=I_\\lambda A_\\lambda^h$, be the henselization of $(A_\\lambda,I_\\lambda)$ [lem-weil-pbc-pair-henselization]. Then: (1) for $\\mu\\le\\lambda$ there is exactly one ring map $\\varphi^h_{\\mu\\lambda}:A_\\mu^h\\to A_\\lambda^h$ with $\\varphi^h_{\\mu\\lambda}\\circ(A_\\mu\\to A_\\mu^h)=(A_\\lambda\\to A_\\lambda^h)\\circ\\varphi_{\\mu\\lambda}$, so that $(A^h_\\lambda,I^h_\\lambda)$ is a directed system of pairs; (2) $(\\varinjlim_\\lambda A^h_\\lambda,\\varinjlim_\\lambda I^h_\\lambda)$ is the henselization of $(A,I)$. In particular, if $(A,I)$ is a henselian pair [def-weil-pbc-henselian-terminology], then for every $\\lambda$ there is exactly one ring map $\\beta_\\lambda:A_\\lambda^h\\to A$ with $\\beta_\\lambda\\circ(A_\\lambda\\to A_\\lambda^h)=\\alpha_\\lambda$; it maps $I_\\lambda^h$ into $I$, the $\\beta_\\lambda$ are compatible with the $\\varphi^h_{\\mu\\lambda}$, and they induce an isomorphism $\\varinjlim_\\lambda A_\\lambda^h\\cong A$ under which $\\varinjlim_\\lambda I^h_\\lambda$ corresponds to $I$.",
+ "statement": "Let $\\Lambda$ be a directed set and $(A_\\lambda,I_\\lambda)_{\\lambda\\in\\Lambda}$ a directed system of pairs: commutative rings $A_\\lambda$ with ideals $I_\\lambda$ and ring maps $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ for $\\mu\\le\\lambda$ (compatible, $\\varphi_{\\lambda\\lambda}=\\mathrm{id}$) with $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$. Let $A=\\varinjlim_\\lambda A_\\lambda$ [def-weil-pbc-category-colimit] with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$, and let $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ (an ideal of $A$, the colimit of the $I_\\lambda$). For every $\\lambda$ let $(A_\\lambda^h,I_\\lambda^h)$, $I_\\lambda^h=I_\\lambda A_\\lambda^h$, be the henselization of $(A_\\lambda,I_\\lambda)$ [lem-weil-pbc-pair-henselization]. Then: (1) for $\\mu\\le\\lambda$ there is exactly one ring map $\\varphi^h_{\\mu\\lambda}:A_\\mu^h\\to A_\\lambda^h$ with $\\varphi^h_{\\mu\\lambda}\\circ(A_\\mu\\to A_\\mu^h)=(A_\\lambda\\to A_\\lambda^h)\\circ\\varphi_{\\mu\\lambda}$, so that $(A^h_\\lambda,I^h_\\lambda)$ is a directed system of pairs; (2) let $A^h_\\infty=\\varinjlim_\\lambda A^h_\\lambda$ (colimit of rings along the $\\varphi^h_{\\mu\\lambda}$) with coprojections $\\iota_\\lambda$, $I^h_\\infty=\\varinjlim_\\lambda I^h_\\lambda=\\bigcup_\\lambda\\iota_\\lambda(I^h_\\lambda)$, and $\\eta_\\infty:A\\to A^h_\\infty$ the ring map with $\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ(A_\\lambda\\to A_\\lambda^h)$ for all $\\lambda$; then $(A^h_\\infty,I^h_\\infty)$ is the henselization of $(A,I)$: if $\\eta:A\\to A^h$ is the henselization of $(A,I)$ [lem-weil-pbc-pair-henselization], there is exactly one ring map $u:A^h_\\infty\\to A^h$ with $u\\circ\\eta_\\infty=\\eta$, it is an isomorphism, and $u(I^h_\\infty)=IA^h$. In particular, if $(A,I)$ is a henselian pair [def-weil-pbc-henselian-terminology], then for every $\\lambda$ there is exactly one ring map $\\beta_\\lambda:A_\\lambda^h\\to A$ with $\\beta_\\lambda\\circ(A_\\lambda\\to A_\\lambda^h)=\\alpha_\\lambda$; it maps $I_\\lambda^h$ into $I$, the $\\beta_\\lambda$ are compatible with the $\\varphi^h_{\\mu\\lambda}$, and they induce an isomorphism $\\varinjlim_\\lambda A_\\lambda^h\\cong A$ under which $\\varinjlim_\\lambda I^h_\\lambda$ corresponds to $I$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 0A04 (lemma-henselization-colimit, line 3181) and its proof (Categories, adjoint-exact; Lemma 0FWT filtered-colimits-henselian; 'details omitted'); the functoriality (1), the uniqueness of $\\beta_\\lambda$ and $A^h=A$ for henselian $(A,I)$ are the left-adjoint property of Lemma Tag 0A02 (lemma-henselization, line 2980: henselization is left adjoint to the inclusion of henselian pairs into pairs, the inclusion being fully faithful); used in this form in Fundamental Groups, proof of Lemma 0GS2 (pione.tex, General case: 'we see that $A=\\colim A_i^h$')"
@@ -12,9 +12,85 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation; (1) functoriality.* Write $\\eta_\\lambda:A_\\lambda\\to A^h_\\lambda$ for the structure map of the henselization; by [lem-weil-pbc-pair-henselization] (2) each $(A^h_\\lambda,I^h_\\lambda)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Let $\\mu\\le\\lambda$. The ring map $\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}:A_\\mu\\to A^h_\\lambda$ maps $I_\\mu$ into $\\eta_\\lambda(I_\\lambda)\\subseteq I_\\lambda A^h_\\lambda=I^h_\\lambda$, and $(A^h_\\lambda,I^h_\\lambda)$ is henselian, so by [lem-weil-pbc-henselization-universal-property] (applied to $(B,J)=(A_\\mu,I_\\mu)$, $(A',I')=(A^h_\\lambda,I^h_\\lambda)$) there is exactly one ring map $\\varphi^h_{\\mu\\lambda}:A^h_\\mu\\to A^h_\\lambda$ with $\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}$, and $\\varphi^h_{\\mu\\lambda}(I^h_\\mu)\\subseteq I^h_\\lambda$. Directed system: $\\varphi^h_{\\lambda\\lambda}$ and $\\mathrm{id}$ both satisfy $(-)\\circ\\eta_\\lambda=\\eta_\\lambda$; for $\\mu\\le\\lambda\\le\\nu$, $\\varphi^h_{\\lambda\\nu}\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\varphi^h_{\\lambda\\nu}\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta_\\nu\\circ\\varphi_{\\lambda\\nu}\\circ\\varphi_{\\mu\\lambda}=\\eta_\\nu\\circ\\varphi_{\\mu\\nu}=\\varphi^h_{\\mu\\nu}\\circ\\eta_\\mu$. By the uniqueness clause of [lem-weil-pbc-henselization-universal-property], $\\varphi^h_{\\lambda\\lambda}=\\mathrm{id}$ and $\\varphi^h_{\\lambda\\nu}\\circ\\varphi^h_{\\mu\\lambda}=\\varphi^h_{\\mu\\nu}$. So $(A^h_\\lambda,I^h_\\lambda)$ is a directed system of pairs: clause (1).",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0A04 (lemma-henselization-colimit, line 3181): 'The functor of Lemma 0A02 gives ...' (functoriality of the left adjoint of Lemma Tag 0A02, lemma-henselization; written out by the agent from the universal property)"
+   }
+  },
+  {
+   "text": "*The colimit pair $(A^h_\\infty,I^h_\\infty)$ is henselian.* The colimit $A^h_\\infty=\\varinjlim_\\lambda A^h_\\lambda$ of the directed system of step 1 exists in commutative rings (a directed set is a filtered category; the filtered colimit is the disjoint union of the $A^h_\\lambda$ modulo the evident relation, with operations computed at a common later index) [def-weil-pbc-category-colimit], [lem-weil-pbc-filtered-colimit-algebras-elementwise]; let $\\iota_\\lambda:A^h_\\lambda\\to A^h_\\infty$ be the coprojections, and $I^h_\\infty=\\bigcup_\\lambda\\iota_\\lambda(I^h_\\lambda)$. By [lem-weil-pbc-filtered-colimit-henselian-pair], applied to the directed system of henselian pairs $(A^h_\\lambda,I^h_\\lambda)$ of step 1, $I^h_\\infty$ is an ideal of $A^h_\\infty$ and $(A^h_\\infty,I^h_\\infty)$ is a henselian pair. The family $\\iota_\\lambda\\circ\\eta_\\lambda:A_\\lambda\\to A^h_\\infty$ is a cocone on $(A_\\lambda)$: for $\\mu\\le\\lambda$, $\\iota_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\iota_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\iota_\\mu\\circ\\eta_\\mu$. So there is exactly one ring map $\\eta_\\infty:A\\to A^h_\\infty$ with $\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$ [def-weil-pbc-category-colimit]. It maps $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ into $I^h_\\infty$: $\\eta_\\infty(\\alpha_\\lambda(x))=\\iota_\\lambda(\\eta_\\lambda(x))$ with $\\eta_\\lambda(x)\\in I_\\lambda A^h_\\lambda=I^h_\\lambda$ for $x\\in I_\\lambda$. (Stacks: 'Since the colimit is filtered we obtain $\\colim(A_i^h,I_i^h)=(\\colim A_i^h,\\colim I_i^h)$ in the category of pairs; details omitted. Again using the colimit is filtered, this is a henselian pair'.)",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A04 (lemma-henselization-colimit): 'Since the colimit is filtered ... details omitted. Again using the colimit is filtered, this is a henselian pair (Lemma 0FWT, lemma-filtered-colimits-henselian)'"
+   }
+  },
+  {
+   "text": "*(2) The comparison maps $u$ and $v$.* Let $\\eta:A\\to A^h$ be the henselization of $(A,I)$; $(A^h,IA^h)$ is henselian [lem-weil-pbc-pair-henselization] (2). For each $\\lambda$, $\\eta\\circ\\alpha_\\lambda:A_\\lambda\\to A^h$ maps $I_\\lambda$ into $\\eta(I)\\subseteq IA^h$, so [lem-weil-pbc-henselization-universal-property] gives exactly one $u_\\lambda:A^h_\\lambda\\to A^h$ with $u_\\lambda\\circ\\eta_\\lambda=\\eta\\circ\\alpha_\\lambda$, and $u_\\lambda(I^h_\\lambda)\\subseteq IA^h$. They form a cocone: for $\\mu\\le\\lambda$, $u_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=u_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta\\circ\\alpha_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta\\circ\\alpha_\\mu=u_\\mu\\circ\\eta_\\mu$, so $u_\\lambda\\circ\\varphi^h_{\\mu\\lambda}=u_\\mu$ by the uniqueness clause. Let $u:A^h_\\infty\\to A^h$ be the induced map, $u\\circ\\iota_\\lambda=u_\\lambda$ [def-weil-pbc-category-colimit]. Then $u\\circ\\eta_\\infty=\\eta$, since both agree after every $\\alpha_\\lambda$ ($u\\circ\\eta_\\infty\\circ\\alpha_\\lambda=u_\\lambda\\circ\\eta_\\lambda=\\eta\\circ\\alpha_\\lambda$) and $A$ is the colimit; and $u$ is the only ring map with $u\\circ\\eta_\\infty=\\eta$: for any such $u'$, $u'\\circ\\iota_\\lambda\\circ\\eta_\\lambda=u'\\circ\\eta_\\infty\\circ\\alpha_\\lambda=\\eta\\circ\\alpha_\\lambda$, so $u'\\circ\\iota_\\lambda=u_\\lambda$ by uniqueness of $u_\\lambda$, and $u'=u$ by the colimit property. Conversely, $(A^h_\\infty,I^h_\\infty)$ is henselian and $\\eta_\\infty(I)\\subseteq I^h_\\infty$ (step 2), so [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A,I)$) gives exactly one $v:A^h\\to A^h_\\infty$ with $v\\circ\\eta=\\eta_\\infty$, and $v(IA^h)\\subseteq I^h_\\infty$.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-universal-property",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A04 (lemma-henselization-colimit): '$\\Mor((A^h,I^h),(B,J))=\\lim\\Mor((A_i^h,I_i^h),(B,J))=\\Mor(\\colim(A_i^h,I_i^h),(B,J))$' (Categories Lemma Tag 0038, adjoint-exact); the Yoneda argument is replaced by the explicit maps $u$, $v$, written out by the agent"
+   }
+  },
+  {
+   "text": "*(2) $u$ and $v$ are inverse; the ideals.* $u\\circ v\\circ\\eta=u\\circ\\eta_\\infty=\\eta=\\mathrm{id}\\circ\\eta$, and $(A^h,IA^h)$ is henselian with $\\eta(I)\\subseteq IA^h$, so $u\\circ v=\\mathrm{id}_{A^h}$ by the uniqueness clause of [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A,I)$, $(A',I')=(A^h,IA^h)$). For each $\\lambda$: $v\\circ u\\circ\\iota_\\lambda\\circ\\eta_\\lambda=v\\circ\\eta\\circ\\alpha_\\lambda=\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$; since $(A^h_\\infty,I^h_\\infty)$ is henselian and $\\iota_\\lambda\\circ\\eta_\\lambda$ maps $I_\\lambda$ into $I^h_\\infty$, the uniqueness clause (for $(B,J)=(A_\\lambda,I_\\lambda)$) gives $v\\circ u\\circ\\iota_\\lambda=\\iota_\\lambda$; hence $v\\circ u=\\mathrm{id}$ by the uniqueness in the colimit property [def-weil-pbc-category-colimit]. So $u$ is an isomorphism with inverse $v$. Ideals: $u(I^h_\\infty)=\\bigcup_\\lambda u_\\lambda(I^h_\\lambda)\\subseteq IA^h$ (step 3) and $v(IA^h)\\subseteq I^h_\\infty$, i.e. $IA^h\\subseteq u(I^h_\\infty)$; so $u(I^h_\\infty)=IA^h$. This proves clause (2). (Stacks: 'Hence by the Yoneda lemma we find $(A^h,I^h)=(\\colim A_i^h,\\colim I_i^h)$'.)",
+   "uses": [
+    "lem-weil-pbc-henselization-universal-property",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A04 (lemma-henselization-colimit): 'Hence by the Yoneda lemma we find $(A^h,I^h)=(\\colim A_i^h,\\colim I_i^h)$'"
+   }
+  },
+  {
+   "text": "*The case $(A,I)$ henselian.* Assume $(A,I)$ henselian [def-weil-pbc-henselian-terminology]. For each $\\lambda$, $\\alpha_\\lambda$ maps $I_\\lambda$ into $I$, so [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A_\\lambda,I_\\lambda)$, $(A',I')=(A,I)$) gives exactly one ring map $\\beta_\\lambda:A^h_\\lambda\\to A$ with $\\beta_\\lambda\\circ\\eta_\\lambda=\\alpha_\\lambda$, and $\\beta_\\lambda(I^h_\\lambda)\\subseteq I$. Compatibility: for $\\mu\\le\\lambda$, $\\beta_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\beta_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\alpha_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\alpha_\\mu$, so $\\beta_\\lambda\\circ\\varphi^h_{\\mu\\lambda}=\\beta_\\mu$ by uniqueness. Let $\\beta:A^h_\\infty\\to A$ be the induced map, $\\beta\\circ\\iota_\\lambda=\\beta_\\lambda$ [def-weil-pbc-category-colimit]. Then $\\beta\\circ\\eta_\\infty\\circ\\alpha_\\lambda=\\beta_\\lambda\\circ\\eta_\\lambda=\\alpha_\\lambda$ for all $\\lambda$, so $\\beta\\circ\\eta_\\infty=\\mathrm{id}_A$. And $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda\\circ\\eta_\\lambda=\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$, where both $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda$ and $\\iota_\\lambda$ are ring maps $A^h_\\lambda\\to A^h_\\infty$ and $(A^h_\\infty,I^h_\\infty)$ is henselian with $\\iota_\\lambda\\eta_\\lambda(I_\\lambda)\\subseteq I^h_\\infty$ (step 2); by the uniqueness clause of [lem-weil-pbc-henselization-universal-property], $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda=\\iota_\\lambda$ for all $\\lambda$, hence $\\eta_\\infty\\circ\\beta=\\mathrm{id}$. So $\\beta$ is an isomorphism $\\varinjlim A^h_\\lambda\\cong A$ with inverse $\\eta_\\infty$. Ideals: $\\beta(I^h_\\infty)=\\bigcup_\\lambda\\beta_\\lambda(I^h_\\lambda)\\subseteq I$, and $\\eta_\\infty(I)\\subseteq I^h_\\infty$ (step 2), i.e. $I\\subseteq\\beta(I^h_\\infty)$; so $\\beta(I^h_\\infty)=I$. (This argument does not use $A^h$; equivalently it is clause (2) together with $A^h\\cong A$ for a henselian $(A,I)$.)",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselization-universal-property",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0A04 (lemma-henselization-colimit) applied to a henselian $(A,I)$ (the adjunction of Lemma Tag 0A02 with the inclusion fully faithful gives $A^h=A$); used in this form in literature/stacks-project/pione.tex, proof of Lemma Tag 0GS2 ('we see that $A=\\colim A_i^h$'); written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselization-universal-property",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-henselian-pair"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0A04 (lemma-henselization-colimit) and its proof; the Yoneda argument and the omitted details (the colimit of pairs, the ideal $I^h_\\infty$) are written out by the agent as explicit maps through the universal property of Lemma Tag 0A02 (lemma-henselization)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +126,17 @@
    "results": "no occurrence of henselization in Mathlib; Henselian.lean (HenselianRing, HenselianLocalRing, IsAdicComplete.henselianRing) has no colimit statement",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'henseliz' ~/weil-conjectures-slopmaster2/WeilConjectures --glob '*.lean'; rg -n -i henselian ... | grep -i -E 'colim|directlim|filtered' (source repository)",
+   "results": "henselization occurs only in comments of EtaleCohomology/Purity/RealSheaves/Boundary.lean (lines 23, 55, 81, 95); no HenselianRing declaration mentions a colimit or direct limit",
+   "date": "2026-10-10",
+   "verdict": "no Lean for this node in slopmaster2"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +156,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselization-colimit",
+  "worker": "stage1",
+  "summary": "Split along Stacks More on Algebra 0A04 (proof read, lines 3181-3209), together with 0A02 (lines 2980-3086) and 0FWT (lines 2885-2911). [lem-weil-pbc-pair-henselization] states the construction of the henselization but its adjunction clause was dropped at review, so the universal property this node needs is a new node lem-weil-pbc-henselization-universal-property (the last paragraph of the proof of 0A02); 0FWT is a new node lem-weil-pbc-filtered-colimit-henselian-pair (Stacks proves it for the factorization definition 09XE; the DAG's definition is the idempotent form). Five steps: (1) functoriality from the universal property; the colimit pair is henselian (0FWT) and receives eta_infinity; (2) explicit maps u, v through the universal property, inverse by its uniqueness clause, with the ideals (replaces Stacks' 'adjoint exact + Yoneda'); the henselian case proved directly (beta_lambda, inverse eta_infinity). Clause (2) of the statement, 'is the henselization', made precise (the unique u with u eta_infinity = eta is an isomorphism carrying colim I^h onto IA^h); meaning unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 5 steps along More on Algebra 0A04 (functoriality and the comparison maps from the universal property of the henselization, the colimit pair henselian by 0FWT, u and v inverse by the uniqueness clauses, the henselian case directly). Statement: clause (2) made precise, meaning unchanged. Correct. The adjunction clause of 0A02 dropped at the review of lem-weil-pbc-pair-henselization is now its own node."
+ }
 }
