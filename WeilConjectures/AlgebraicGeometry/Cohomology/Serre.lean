@@ -516,11 +516,11 @@ The blueprint asks `X` to be proper over `k`; this is not needed here, since
 (blueprint: `lem-pc-serre-vanishing`) -/
 @[stacks 0B5U]
 theorem Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow (f : X ⟶ Spec (.of k))
-    (ℒ : X.Modules) [ℒ.IsInvertible] (hℒ : IsAmple f ℒ) (ℱ : X.Modules)
+    (ℒ : X.Modules) (hℒ : IsAmple f ℒ) (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
     ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ p : ℕ, 0 < p → Subsingleton ((ℱ ⊗ ℒ.tensorPow n).H p) := by
-  obtain ⟨m, hm, N, i, hN, hi, -, ⟨e⟩⟩ := hℒ
+  obtain ⟨hinv, m, hm, N, i, hN, hi, -, ⟨e⟩⟩ := hℒ
   have key (r : Fin m) : ∃ t₀ : ℕ, ∀ t ≥ t₀, ∀ p : ℕ, 0 < p →
       Subsingleton (((ℱ ⊗ ℒ.tensorPow r) ⊗ ProjectiveSpace.twistRestrict i t).H p) := by
     have := isQuasicoherent_tensorObj ℱ (ℒ.tensorPow r)

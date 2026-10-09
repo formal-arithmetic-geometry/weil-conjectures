@@ -644,6 +644,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
