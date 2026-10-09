@@ -1,0 +1,4 @@
+
+## lem-weil-pbc-descend-surjective (2026-10-09 17:41 UTC, branch head ad5ded85c)
+
+(1) The new node lem-weil-pbc-limit-contained-constructible is unsplit but carries two proof steps: a new node is a statement only (stages/1-dag.md); remove the steps or split it under the protocol. (2) The WANTED lines are wrong: literature/stacks-project/limits.tex and morphisms.tex are in the checkout (05F3, 05F4, 054J are there): cite the lemma labels and tags from the files and remove the WANTED. (3) lem-weil-pbc-chevalley-image: the 'how' must say exactly which Mathlib hypotheses match which clauses (which instance gives QuasiCompact f, what [CompactSpace Y] [QuasiSeparatedSpace Y] stand for) and that the source was read; cite the line. (4) Every new node must cite the DAG definitions it uses (constructible subset: def-weil-constructible-subset; finite presentation: def-sbc-locally-finite-presentation). The review itself is acceptable in form.
