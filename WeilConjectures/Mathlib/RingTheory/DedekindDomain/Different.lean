@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.DedekindDomain.Different
 public import Mathlib.RingTheory.Etale.Field
 public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
 public import WeilConjectures.Mathlib.RingTheory.Conductor
 
 /-!
@@ -42,6 +43,7 @@ two-dimensional.
 @[expose] public section
 
 open Polynomial
+open scoped IntermediateField
 
 namespace Polynomial
 
@@ -271,5 +273,300 @@ lemma aeval_derivative_notMem_or [IsDomain A] [IsIntegrallyClosed A] [IsDomain B
     simpa [hc₁0] using k₂.symm
   apply hs₀
   rw [k₄, this, mul_zero]
+
+end KaehlerDifferential
+
+section TraceDual
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B]
+  (K L : Type*) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra B L]
+  [IsFractionRing B L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L]
+
+omit [IsFractionRing A K] [IsFractionRing B L] in
+lemma algebraMap_mem_adjoin_algebraMap {x c : B} (hc : c ∈ Algebra.adjoin A {x}) :
+    algebraMap B L c ∈ Algebra.adjoin A {algebraMap B L x} := by
+  rw [Algebra.adjoin_singleton_eq_range_aeval] at hc ⊢
+  obtain ⟨P, rfl⟩ := hc
+  exact (AlgHom.mem_range _).2 ⟨P, by simp [aeval_algebraMap_apply]⟩
+
+omit [IsFractionRing A K] in
+/-- If the conductor of `A[x]` in `B` is nonzero, then `x` generates `L` over `K`. -/
+lemma adjoin_algebraMap_eq_top_of_mem_conductor [IsDomain B] {x s : B} (hx : IsIntegral A x)
+    (hs : s ∈ conductor A x) (hs0 : s ≠ 0) :
+    Algebra.adjoin K {algebraMap B L x} = ⊤ := by
+  have hint : IsIntegral K (algebraMap B L x) :=
+    (hx.map (IsScalarTower.toAlgHom A B L)).tower_top
+  rw [← IntermediateField.adjoin_simple_toSubalgebra_of_isAlgebraic hint.isAlgebraic,
+    ← IntermediateField.top_toSubalgebra]
+  congr 1
+  rw [eq_top_iff]
+  intro y _
+  have hle : Algebra.adjoin A {algebraMap B L x} ≤
+      (K⟮algebraMap B L x⟯.toSubalgebra.restrictScalars A) :=
+    Algebra.adjoin_le (by simpa using IntermediateField.mem_adjoin_simple_self K _)
+  have mem (c : B) (hc : c ∈ Algebra.adjoin A {x}) : algebraMap B L c ∈ K⟮algebraMap B L x⟯ :=
+    hle (algebraMap_mem_adjoin_algebraMap L hc)
+  have hs' : algebraMap B L s ≠ 0 := by
+    rwa [ne_eq, map_eq_zero_iff _ (IsFractionRing.injective B L)]
+  have hb (b : B) : algebraMap B L b ∈ K⟮algebraMap B L x⟯ := by
+    have := div_mem (mem _ (hs b)) (mem _ (conductor_subset_adjoin hs))
+    rwa [map_mul, mul_div_cancel_left₀ _ hs'] at this
+  obtain ⟨b₁, b₂, -, rfl⟩ := IsFractionRing.div_surjective B y
+  exact div_mem (hb b₁) (hb b₂)
+
+variable [IsDomain A] [IsIntegrallyClosed A] [IsDomain B]
+  [FiniteDimensional K L] [Algebra.IsSeparable K L]
+
+include K in
+/-- Euler's formula for the inverse different, localized: if `s ≠ 0` lies in the conductor of
+`A[x]`, then the inverse different of `A[x]` is `f'(x)⁻¹ A[x]` for the minimal polynomial `f` of
+`x`. -/
+lemma mem_dualSubmodule_adjoin_iff {x s : B} (hx : IsIntegral A x) (hs : s ∈ conductor A x)
+    (hs0 : s ≠ 0) (z : L) :
+    z ∈ (Algebra.traceForm K L).dualSubmodule
+        (Subalgebra.toSubmodule (Algebra.adjoin A {algebraMap B L x})) ↔
+      algebraMap B L (aeval x (derivative (minpoly A x))) * z ∈
+        Subalgebra.toSubmodule (Algebra.adjoin A {algebraMap B L x}) := by
+  have hKx := adjoin_algebraMap_eq_top_of_mem_conductor K L hx hs hs0
+  have hAx : IsIntegral A (algebraMap B L x) := hx.map (IsScalarTower.toAlgHom A B L)
+  have hμ : aeval (algebraMap B L x) (derivative (minpoly K (algebraMap B L x))) =
+      algebraMap B L (aeval x (derivative (minpoly A x))) := by
+    rw [minpoly.isIntegrallyClosed_eq_field_fractions K L hx, derivative_map,
+      aeval_map_algebraMap, aeval_algebraMap_apply]
+  have hμ0 : algebraMap B L (aeval x (derivative (minpoly A x))) ≠ 0 := by
+    rw [← hμ]
+    exact (Algebra.IsSeparable.isSeparable K _).aeval_derivative_ne_zero (minpoly.aeval _ _)
+  rw [traceForm_dualSubmodule_adjoin A K hKx hAx, hμ, Submodule.mem_smul_pointwise_iff_exists]
+  constructor
+  · rintro ⟨w, hw, rfl⟩
+    rwa [smul_eq_mul, ← mul_assoc, mul_inv_cancel₀ hμ0, one_mul]
+  · intro h
+    exact ⟨_, h, by rw [smul_eq_mul, ← mul_assoc, inv_mul_cancel₀ hμ0, one_mul]⟩
+
+include K in
+lemma mul_mem_adjoin_of_mem_traceDual {x s : B} (hx : IsIntegral A x) (hs : s ∈ conductor A x)
+    (hs0 : s ≠ 0) {z : L} (hz : z ∈ Submodule.traceDual A K (1 : Submodule B L)) :
+    algebraMap B L (aeval x (derivative (minpoly A x))) * z ∈
+      Subalgebra.toSubmodule (Algebra.adjoin A {algebraMap B L x}) := by
+  rw [← mem_dualSubmodule_adjoin_iff K L hx hs hs0, LinearMap.BilinForm.mem_dualSubmodule]
+  intro y hy
+  have hy' : y ∈ (1 : Submodule B L) := by
+    rw [Subalgebra.mem_toSubmodule, Algebra.adjoin_singleton_eq_range_aeval] at hy
+    obtain ⟨P, rfl⟩ := hy
+    exact Submodule.mem_one.2 ⟨aeval x P, by simp [aeval_algebraMap_apply]⟩
+  obtain ⟨a, ha⟩ := Submodule.mem_traceDual.1 hz y hy'
+  exact Submodule.mem_one.2 ⟨a, ha⟩
+
+include K in
+lemma smul_mem_traceDual_of_mul_mem_adjoin {x s : B} (hx : IsIntegral A x)
+    (hs : s ∈ conductor A x) (hs0 : s ≠ 0) {z : L}
+    (hz : algebraMap B L (aeval x (derivative (minpoly A x))) * z ∈
+      Subalgebra.toSubmodule (Algebra.adjoin A {algebraMap B L x})) :
+    s • z ∈ Submodule.traceDual A K (1 : Submodule B L) := by
+  rw [← mem_dualSubmodule_adjoin_iff K L hx hs hs0, LinearMap.BilinForm.mem_dualSubmodule] at hz
+  rw [Submodule.mem_traceDual]
+  intro y hy
+  obtain ⟨b, rfl⟩ := Submodule.mem_one.1 hy
+  obtain ⟨a, ha⟩ := Submodule.mem_one.1 (hz _ (algebraMap_mem_adjoin_algebraMap L (hs b)))
+  refine ⟨a, ha.trans ?_⟩
+  simp only [Algebra.traceForm_apply, Algebra.smul_def, map_mul]
+  ring_nf
+
+end TraceDual
+
+namespace Submodule
+
+variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+
+/-- An element lies in a submodule if, for every maximal ideal `q`, some multiple of it by an
+element outside `q` does. -/
+lemma mem_of_forall_isMaximal_smul_mem (N : Submodule R M) (z : M)
+    (h : ∀ q : Ideal R, q.IsMaximal → ∃ s ∉ q, s • z ∈ N) : z ∈ N := by
+  by_contra hz
+  have hI : N.colon {z} ≠ ⊤ := fun hI ↦
+    hz (by simpa using Submodule.mem_colon_singleton.1 ((Ideal.eq_top_iff_one _).1 hI))
+  obtain ⟨q, hq, hIq⟩ := Ideal.exists_le_maximal _ hI
+  obtain ⟨s, hsq, hs⟩ := h q hq
+  exact hsq (hIq (Submodule.mem_colon_singleton.2 hs))
+
+end Submodule
+
+namespace KaehlerDifferential
+
+section Different
+
+variable (k : Type*) {A B : Type*} [Field k] [CommRing A] [CommRing B] [Algebra k A]
+  [Algebra k B] [Algebra A B] [IsScalarTower k A B]
+variable (K L : Type*) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra B L]
+  [IsFractionRing B L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L]
+  [Algebra k K] [Algebra k L] [IsScalarTower k A K] [IsScalarTower k K L] [IsScalarTower k B L]
+  [IsScalarTower k A L] [Algebra.IsSeparable K L]
+variable (b : Module.Basis (Fin 1) A Ω[A⁄k])
+
+/-- The basis of `Ω_{L/k}` coming from a basis `b` of `Ω_{A/k}` of rank one, for `L` separable over
+the fraction field `K` of `A`: `Ω_{K/k} = K ⊗ Ω_{A/k}` and `Ω_{L/k} = L ⊗ Ω_{K/k}`. -/
+noncomputable def basisFractionRing : Module.Basis (Fin 1) L Ω[L⁄k] :=
+  have : Algebra.FormallyEtale K L := Algebra.FormallyEtale.of_isSeparable K L
+  IsBaseChange.basis (IsBaseChange.basis b
+    ((isLocalizedModule_iff_isBaseChange (nonZeroDivisors A) K (map k k A K)).1 inferInstance))
+    (isBaseChange_of_formallyEtale k K L)
+
+omit [IsFractionRing B L] [Algebra.IsSeparable K L] in
+lemma map_map_fractionRing (ω : Ω[A⁄k]) : map k k K L (map k k A K ω) = map k k A L ω := by
+  have hω : ω ∈ Submodule.span A (Set.range (D k A)) := by
+    rw [span_range_derivation]; exact Submodule.mem_top
+  induction hω using Submodule.span_induction with
+  | mem ω hω =>
+    obtain ⟨a, rfl⟩ := hω
+    simp only [map_D, ← IsScalarTower.algebraMap_apply]
+  | zero => simp
+  | add ω ω' _ _ h h' => simp [h, h']
+  | smul a ω _ h =>
+    rw [LinearMap.map_smul, LinearMap.map_smul, ← IsScalarTower.algebraMap_smul K a,
+      LinearMap.map_smul, h, IsScalarTower.algebraMap_smul]
+
+lemma basisFractionRing_apply (i : Fin 1) :
+    basisFractionRing k K L b i = map k k A L (b i) := by
+  simp only [basisFractionRing, IsBaseChange.basis_apply, map_map_fractionRing]
+
+/-- For a basis `b` of `Ω_{A/k}` of rank one and `L` separable over the fraction field of `A`, the
+`B`-linear map `Ω_{B/k} → L`, `ω ↦ ω / b`, given by `Ω_{L/k} = L b`. -/
+noncomputable def toFractionRing : Ω[B⁄k] →ₗ[B] L :=
+  ((basisFractionRing k K L b).coord 0).restrictScalars B ∘ₗ map k k B L
+
+/-- The `k`-derivation of `A` given by the coordinate of `d a` in the basis `b`. -/
+noncomputable def basisDerivation : A →ₗ[k] A :=
+  (b.coord 0).restrictScalars k ∘ₗ (D k A).toLinearMap
+
+omit [IsScalarTower k A B] in
+lemma basisDerivation_mul (a a' : A) :
+    basisDerivation k b (a * a') = a * basisDerivation k b a' + a' * basisDerivation k b a := by
+  simp [basisDerivation, Derivation.leibniz]
+
+lemma toFractionRing_D_algebraMap (a : A) :
+    toFractionRing k K L b (D k B (algebraMap A B a)) =
+      algebraMap B L (algebraMap A B (basisDerivation k b a)) := by
+  have h : D k A a = basisDerivation k b a • b 0 := by
+    conv_lhs => rw [← b.sum_repr (D k A a)]
+    simp [basisDerivation, Module.Basis.coord_apply]
+  have : map k k B L (D k B (algebraMap A B a)) = map k k A L (D k A a) := by
+    rw [map_D, map_D, ← IsScalarTower.algebraMap_apply]
+  rw [toFractionRing, LinearMap.comp_apply, this, h, LinearMap.map_smul_of_tower,
+    ← basisFractionRing_apply k K L b, LinearMap.restrictScalars_apply,
+    ← IsScalarTower.algebraMap_smul L, LinearMap.map_smul, Module.Basis.coord_apply,
+    Module.Basis.repr_self, Finsupp.single_eq_same, smul_eq_mul, mul_one,
+    ← IsScalarTower.algebraMap_apply]
+
+/-- **The image of `Ω_{B/k}` is the inverse different.** Let `A → B` be a finite torsion-free
+extension of Dedekind domains over `k`, `A` not a field, with fraction fields `K ⊆ L`, `L / K`
+separable and all residue field extensions separable. Let `b` be a basis `d t` of `Ω_{A/k}`, and
+assume that near every maximal ideal `Ω_{B/k}` is generated by one element. Then the image of
+`ω ↦ ω / dt : Ω_{B/k} → L` is the inverse different `{y ∈ L | Tr(y B) ⊆ A}`. -/
+theorem range_toFractionRing [IsDedekindDomain A] [IsDedekindDomain B] [Module.Finite A B]
+    [Module.IsTorsionFree A B] [FiniteDimensional K L] (hA : ¬ IsField A) (t : A)
+    (ht : b 0 = D k A t)
+    (hsep : ∀ q : Ideal B, q.IsMaximal → Algebra.IsSeparable (A ⧸ q.under A) (B ⧸ q))
+    (hΩ : ∀ q : Ideal B, q.IsMaximal →
+      ∃ s₀ ∉ q, ∃ ω₀ : Ω[B⁄k], ∀ ω : Ω[B⁄k], ∃ c : B, s₀ • ω = c • ω₀) :
+    LinearMap.range (toFractionRing k K L b) =
+      Submodule.traceDual A K (1 : Submodule B L) := by
+  classical
+  have : Algebra.IsIntegral A B := Algebra.IsIntegral.of_finite A B
+  set ι := toFractionRing (B := B) k K L b
+  set d := basisDerivation k b
+  have hdt : d t = 1 := by
+    simp [d, basisDerivation, ← ht, Module.Basis.coord_apply]
+  let δ : Derivation k B L := ι.compDer (D k B)
+  have hδ (y : B) : δ y = ι (D k B y) := rfl
+  have hδA (a : A) : δ (algebraMap A B a) = algebraMap B L (algebraMap A B (d a)) :=
+    toFractionRing_D_algebraMap k K L b a
+  -- Local data at a maximal ideal: a generator `x` with a conductor element `s ∉ q`.
+  have hloc (q : Ideal B) (hq : q.IsMaximal) :
+      ∃ x s : B, s ∈ conductor A x ∧ s ∉ q ∧ s ≠ 0 ∧ IsIntegral A x := by
+    have hq0 : q ≠ ⊥ := by
+      rintro rfl
+      exact hA (isField_of_isIntegral_of_isField (FaithfulSMul.algebraMap_injective A B)
+        (Ring.isField_iff_maximal_bot.2 hq))
+    have := hsep q hq
+    obtain ⟨x, hx⟩ := Ideal.exists_not_conductor_le (A := A) q hq0
+    obtain ⟨s, hs, hsq⟩ := Set.not_subset.1 hx
+    exact ⟨x, s, hs, hsq, fun h ↦ hsq (h ▸ q.zero_mem), Algebra.IsIntegral.isIntegral x⟩
+  -- `f'(x) s² δ(y) ∈ A[x]` for every `y : B`.
+  have key (x s : B) (hs : s ∈ conductor A x) (y : B) :
+      algebraMap B L (aeval x (derivative (minpoly A x))) * (algebraMap B L s ^ 2 * δ y) ∈
+        Algebra.adjoin A {algebraMap B L x} := by
+    set μ := algebraMap B L (aeval x (derivative (minpoly A x)))
+    set Ax := Algebra.adjoin A {algebraMap B L x}
+    have hAx (c : B) (hc : c ∈ Algebra.adjoin A {x}) : algebraMap B L c ∈ Ax :=
+      algebraMap_mem_adjoin_algebraMap L hc
+    have hμ : μ ∈ Ax := hAx _ (aeval_mem_adjoin_singleton A x)
+    have hδx : μ * δ x ∈ Ax := by
+      have h0 := Derivation.apply_aeval δ d hδA x (minpoly A x)
+      rw [minpoly.aeval, map_zero] at h0
+      have : μ * δ x = -algebraMap B L (aeval x (mapCoeffsLinear d (minpoly A x))) := by
+        linear_combination -h0
+      rw [this]
+      exact neg_mem (hAx _ (aeval_mem_adjoin_singleton A x))
+    have hδc (c : B) (hc : c ∈ Algebra.adjoin A {x}) : μ * δ c ∈ Ax := by
+      rw [Algebra.adjoin_singleton_eq_range_aeval] at hc
+      obtain ⟨P, rfl⟩ := hc
+      change μ * δ (aeval x P) ∈ Ax
+      rw [Derivation.apply_aeval δ d hδA x P, mul_add, mul_left_comm]
+      exact add_mem (Subalgebra.mul_mem _ hμ (hAx _ (aeval_mem_adjoin_singleton A x)))
+        (Subalgebra.mul_mem _ (hAx _ (aeval_mem_adjoin_singleton A x)) hδx)
+    have h1 := hδc (s * y) (hs y)
+    have h2 := hδc s (conductor_subset_adjoin hs)
+    have hsy : δ (s * y) = algebraMap B L s * δ y + algebraMap B L y * δ s := by
+      rw [Derivation.leibniz, Algebra.smul_def, Algebra.smul_def]
+    have : μ * (algebraMap B L s ^ 2 * δ y) =
+        algebraMap B L s * (μ * δ (s * y)) - algebraMap B L (s * y) * (μ * δ s) := by
+      rw [hsy, map_mul]
+      ring
+    rw [this]
+    exact sub_mem (Subalgebra.mul_mem _ (hAx _ (conductor_subset_adjoin hs)) h1)
+      (Subalgebra.mul_mem _ (hAx _ (hs y)) h2)
+  apply le_antisymm
+  · rintro _ ⟨ω, rfl⟩
+    refine Submodule.mem_of_forall_isMaximal_smul_mem _ _ fun q hq ↦ ?_
+    obtain ⟨x, s, hs, hsq, hs0, hx⟩ := hloc q hq
+    refine ⟨s ^ 3, fun h ↦ hsq (hq.isPrime.mem_of_pow_mem 3 h), ?_⟩
+    have hω : ω ∈ Submodule.span B (Set.range (D k B)) := by
+      rw [span_range_derivation]; exact Submodule.mem_top
+    induction hω using Submodule.span_induction with
+    | mem ω hω =>
+      obtain ⟨y, rfl⟩ := hω
+      have := smul_mem_traceDual_of_mul_mem_adjoin K L hx hs hs0 (key x s hs y)
+      convert this using 1
+      rw [← hδ, Algebra.smul_def, Algebra.smul_def, map_pow]
+      ring
+    | zero => simp
+    | add ω ω' _ _ h h' => simpa [smul_add] using add_mem h h'
+    | smul c ω _ h =>
+      rw [map_smul, smul_comm]
+      exact Submodule.smul_mem _ c h
+  · intro z hz
+    refine Submodule.mem_of_forall_isMaximal_smul_mem _ _ fun q hq ↦ ?_
+    obtain ⟨x, s, hs, hsq, hs0, hx⟩ := hloc q hq
+    have hz' := mul_mem_adjoin_of_mem_traceDual K L hx hs hs0 hz
+    rw [Subalgebra.mem_toSubmodule, Algebra.adjoin_singleton_eq_range_aeval] at hz'
+    obtain ⟨P, hP⟩ := hz'
+    have hc : algebraMap B L (aeval x P) =
+        algebraMap B L (aeval x (derivative (minpoly A x))) * z := by
+      rw [← hP]
+      simp [aeval_algebraMap_apply]
+    have hι1 : ι (D k B (algebraMap A B t)) = 1 := by
+      rw [← hδ, hδA, hdt]
+      simp
+    rcases aeval_derivative_notMem_or (k := k) q d (basisDerivation_mul k b) t hdt hx hs hsq
+      (hΩ q hq) with h | h
+    · refine ⟨_, h, ⟨aeval x P • D k B (algebraMap A B t), ?_⟩⟩
+      rw [map_smul, hι1, Algebra.smul_def, mul_one, hc, Algebra.smul_def]
+    · refine ⟨_, h, ⟨-(aeval x P • D k B x), ?_⟩⟩
+      have h0 := Derivation.apply_aeval δ d hδA x (minpoly A x)
+      rw [minpoly.aeval, map_zero] at h0
+      rw [map_neg, map_smul, ← hδ, Algebra.smul_def, hc, Algebra.smul_def]
+      linear_combination z * h0
+
+end Different
 
 end KaehlerDifferential
