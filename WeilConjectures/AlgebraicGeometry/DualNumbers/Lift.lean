@@ -410,6 +410,96 @@ theorem appLE_dualNumbers_self (Λ : X.dualNumbers ⟶ X.dualNumbers)
     zero_mul, zero_add] at h2
   exact ⟨h1, h2⟩
 
+/-- A morphism fixing a global function fixes its restrictions. -/
+theorem appLE_presheaf_map_top (f : X ⟶ Y) {t : Γ(Y, ⊤)} {t' : Γ(X, ⊤)} (ht : f.appTop t = t')
+    (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) :
+    f.appLE U V e (Y.presheaf.map (homOfLE le_top : U ⟶ ⊤).op t) =
+      X.presheaf.map (homOfLE le_top : V ⟶ ⊤).op t' := by
+  rw [Hom.map_appLE_apply, ← ht, Hom.appTop, Hom.app_eq_appLE]
+  exact (Hom.appLE_map_apply f _ _ _).symm
+
+theorem dualNumbers_dualNumbers_presheaf_map_top_inr (U : X.Opens) :
+    X.dualNumbers.dualNumbers.presheaf.map
+      (homOfLE (le_top : (U : X.dualNumbers.dualNumbers.Opens) ≤ ⊤)).op
+      (inr 1 : DualNumber (DualNumber Γ(X, ⊤))) =
+        (inr 1 : DualNumber (DualNumber Γ(X, U))) := by
+  change DualNumber.mapRingHom _ _ = _
+  ext <;> simp
+
+theorem dualNumbers_dualNumbers_presheaf_map_top_inl_inr (U : X.Opens) :
+    X.dualNumbers.dualNumbers.presheaf.map
+      (homOfLE (le_top : (U : X.dualNumbers.dualNumbers.Opens) ≤ ⊤)).op
+      (inl (inr 1) : DualNumber (DualNumber Γ(X, ⊤))) =
+        (inl (inr 1) : DualNumber (DualNumber Γ(X, U))) := by
+  change DualNumber.mapRingHom _ _ = _
+  ext <;> simp
+  change DualNumber.mapRingHom _ _ = _
+  ext <;> simp
+
+
+theorem dualNumbers_dualNumbersProj_comp_appLE_self (U : X.Opens)
+    (e : U ≤ (X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj) ⁻¹ᵁ U) (a : Γ(X, U)) :
+    ((X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj).appLE U U e a :
+      DualNumber (DualNumber Γ(X, U))) = inl (inl a) := by
+  refine (Hom.appLE_comp_apply X.dualNumbers.dualNumbersProj X.dualNumbersProj U U U le_rfl le_rfl
+    e a).trans ?_
+  have h1 : X.dualNumbersProj.appLE U U le_rfl a = (inl a : DualNumber Γ(X, U)) :=
+    dualNumbersProj_appLE_self U le_rfl a
+  rw [h1]
+  exact dualNumbersProj_appLE_self (X := X.dualNumbers) U le_rfl _
+
+/-- An endomorphism `Λ` of `X[ε][δ]` fixing `ε` and `δ` acts on a function
+`a + εb + δc + εδd` through the morphism `Λ ≫ p ≫ p : X[ε][δ] ⟶ X`. -/
+theorem appLE_dualNumbers_dualNumbers_self
+    (Λ : X.dualNumbers.dualNumbers ⟶ X.dualNumbers.dualNumbers)
+    (hδ : Λ.appTop (inr 1 : DualNumber (DualNumber Γ(X, ⊤))) = inr 1)
+    (hε : Λ.appTop (inl (inr 1) : DualNumber (DualNumber Γ(X, ⊤))) = inl (inr 1)) (U : X.Opens)
+    (e : U ≤ Λ ⁻¹ᵁ U)
+    (e' : U ≤ (Λ ≫ X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj) ⁻¹ᵁ U)
+    (z : Γ(X.dualNumbers.dualNumbers, U)) :
+    let A := (Λ ≫ X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj).appLE U U e'
+    (Λ.appLE U U e z).fst.fst = (A z.fst.fst).fst.fst ∧
+    (Λ.appLE U U e z).fst.snd = (A z.fst.fst).fst.snd + (A z.fst.snd).fst.fst ∧
+    (Λ.appLE U U e z).snd.fst = (A z.fst.fst).snd.fst + (A z.snd.fst).fst.fst ∧
+    (Λ.appLE U U e z).snd.snd = (A z.fst.fst).snd.snd + (A z.fst.snd).snd.fst +
+      (A z.snd.fst).fst.snd + (A z.snd.snd).fst.fst := by
+  intro A
+  let φ : DualNumber (DualNumber Γ(X, U)) →+* DualNumber (DualNumber Γ(X, U)) :=
+    (Λ.appLE U U e).hom
+  let ψ : Γ(X, U) →+* DualNumber (DualNumber Γ(X, U)) := A.hom
+  have hinl (b : Γ(X, U)) : φ (inl (inl b)) = ψ b := by
+    rw [← dualNumbers_dualNumbersProj_comp_appLE_self U le_rfl b]
+    exact (Hom.appLE_comp_apply Λ _ U U U le_rfl e e' b).symm
+  have hinr : φ (inr 1) = inr 1 := by
+    have := appLE_presheaf_map_top Λ hδ U U e
+    rw [dualNumbers_dualNumbers_presheaf_map_top_inr] at this
+    exact this
+  have hinlr : φ (inl (inr 1)) = inl (inr 1) := by
+    have := appLE_presheaf_map_top Λ hε U U e
+    rw [dualNumbers_dualNumbers_presheaf_map_top_inl_inr] at this
+    exact this
+  let z' : DualNumber (DualNumber Γ(X, U)) := z
+  have hz : z' = inl (inl z'.fst.fst) + inl (inr 1) * inl (inl z'.fst.snd) +
+      inr 1 * inl (inl z'.snd.fst) + inl (inr 1) * inr 1 * inl (inl z'.snd.snd) := by
+    ext <;> simp
+  have key : φ z' = ψ z'.fst.fst + inl (inr 1) * ψ z'.fst.snd + inr 1 * ψ z'.snd.fst +
+      inl (inr 1) * inr 1 * ψ z'.snd.snd := by
+    conv_lhs => rw [hz]
+    simp only [map_add, map_mul, hinl, hinr, hinlr]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · have h := congrArg (fun x ↦ x.fst.fst) key
+    simp at h
+    exact h
+  · have h := congrArg (fun x ↦ x.fst.snd) key
+    simp at h
+    exact h
+  · have h := congrArg (fun x ↦ x.snd.fst) key
+    simp at h
+    exact h
+  · have h := congrArg (fun x ↦ x.snd.snd) key
+    simp at h
+    exact h
+
 end Scheme
 
 end AlgebraicGeometry
