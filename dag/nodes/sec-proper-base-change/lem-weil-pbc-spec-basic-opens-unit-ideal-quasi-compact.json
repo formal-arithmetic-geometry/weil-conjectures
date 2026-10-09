@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+ "kind": "statement",
+ "title": "Principal opens cover Spec R iff unit ideal; Spec R is quasi-compact",
+ "statement": "Let $R$ be a commutative ring, $\\operatorname{Spec}R$ its set of prime ideals with the Zariski topology, and for $r\\in R$ let $D(r)=\\{\\mathfrak q\\in\\operatorname{Spec}R: r\\notin\\mathfrak q\\}$. Then: (i) for any family $(r_i)_{i\\in I}$ of elements of $R$, $\\bigcup_{i\\in I}D(r_i)=\\operatorname{Spec}R$ if and only if the $r_i$ generate the unit ideal of $R$; (ii) in particular, for $r\\in R$, $D(r)=\\operatorname{Spec}R$ (i.e. $r$ lies in no prime ideal) if and only if $r$ is a unit of $R$; (iii) the topological space $\\operatorname{Spec}R$ is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00E0 (label lemma-Zariski-topology), items (8) ($V(I)=\\emptyset$ iff $I=R$), (13), (16) ($D(f)=\\operatorname{Spec}R$ implies $f$ a unit); Lemma 00E8 (label lemma-quasi-compact)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "union of basic opens D(f_i) is whole prime spectrum iff the f_i generate the unit ideal",
+   "results": "PrimeSpectrum.iSup_basicOpen_eq_top_iff', PrimeSpectrum.iSup_basicOpen_eq_top_iff (Mathlib.RingTheory.Spectrum.Prime.Topology), IsAffineOpen.self_le_iSup_basicOpen_iff, IsAffineOpen.iSup_basicOpen_eq_self_iff (Mathlib.AlgebraicGeometry.AffineScheme), Proj.iSup_basicOpen_eq_top'",
+   "date": "2026-10-10",
+   "verdict": "match for (i),(ii): iSup_basicOpen_eq_top_iff (for (ii) with the one-element family and Ideal.span_singleton_eq_top)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime spectrum of a commutative ring is quasi-compact",
+   "results": "no PrimeSpectrum result among the top 5 (quasispectrum.isCompact, Spec_carrier, Spec.topObj_forget)",
+   "date": "2026-10-10",
+   "verdict": "no match by this query; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSpace (PrimeSpectrum _)",
+   "results": "PrimeSpectrum.compactSpace : CompactSpace (PrimeSpectrum R) (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match for (iii)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iSup_basicOpen_eq_top_iff\\|instance compactSpace\\|basicOpen_eq_bot_iff' Mathlib/RingTheory/Spectrum/Prime/Topology.lean; grep -n 'theorem span_singleton_eq_top' Mathlib/RingTheory/Ideal/Span.lean",
+   "results": "Topology.lean:292 instance compactSpace : CompactSpace (PrimeSpectrum R); :620 lemma iSup_basicOpen_eq_top_iff {ι} {f : ι → R} : (⨆ i, basicOpen (f i)) = ⊤ ↔ Ideal.span (Set.range f) = ⊤; :628 iSup_basicOpen_eq_top_iff'; :586 basicOpen_eq_bot_iff; Span.lean:205 span_singleton_eq_top : span {x} = ⊤ ↔ IsUnit x",
+   "date": "2026-10-10",
+   "verdict": "match (read at the source lines)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.iSup_basicOpen_eq_top_iff, Ideal.span_singleton_eq_top, PrimeSpectrum.compactSpace",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "how": "a few Mathlib lemmas, one per clause: (i) PrimeSpectrum.iSup_basicOpen_eq_top_iff (Topology.lean:620), for a commutative (semi)ring and any family f : ι → R; (ii) (i) for the one-element family together with Ideal.span_singleton_eq_top (Mathlib/RingTheory/Ideal/Span.lean:205: span {x} = ⊤ ↔ IsUnit x); (iii) the instance PrimeSpectrum.compactSpace (Topology.lean:292)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-standard-open-inclusion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: PrimeSpectrum.iSup_basicOpen_eq_top_iff (Topology.lean:620), Ideal.span_singleton_eq_top (Span.lean:205), PrimeSpectrum.compactSpace (:292); checked."
+ }
+}

@@ -11,9 +11,104 @@
   "def-nagata-affine-proj",
   "def-nagata-homogeneous-localization-degree-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Clause (0): standard opens are open, and intersections.* For $f$ homogeneous of positive degree, $D_+(f)$ is the set $D(f)=\\{\\mathfrak p\\in X: f\\notin\\mathfrak p\\}$ of [lem-weil-pbc-projective-spectrum-basic-opens-basis], hence open by (i) of that lemma. For $f,g$ homogeneous of positive degrees $d,k$, the product $fg$ is homogeneous of degree $d+k>0$, and $D_+(fg)=D(fg)=D(f)\\cap D(g)=D_+(f)\\cap D_+(g)$ by (ii) of that lemma (directly: $fg\\notin\\mathfrak p$ iff $f\\notin\\mathfrak p$ and $g\\notin\\mathfrak p$, $\\mathfrak p$ being prime).",
+   "uses": [
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00JP (label lemma-topology-proj) (1), (2) and their proof"
+   }
+  },
+  {
+   "text": "*Clause (0): the standard opens form a basis.* Let $U\\subseteq X$ be open and $x\\in U$ with prime $\\mathfrak p$. By (i) of [lem-weil-pbc-projective-spectrum-basic-opens-basis] there is $r\\in S$ with $x\\in D(r)\\subseteq U$; write $r=\\sum_ir_i$, $r_i\\in S_i$; by (iii) of that lemma $x\\in D(r_i)\\subseteq D(r)$ for some $i$. If $i\\ge1$, $D(r_i)=D_+(r_i)$ is a standard open with $x\\in D_+(r_i)\\subseteq U$. If $i=0$: since $S_+\\not\\subseteq\\mathfrak p$, some $s\\in S_+$ is not in $\\mathfrak p$; $s$ is the sum of its homogeneous components, all of positive degree, and $\\mathfrak p$ is an ideal, so some homogeneous $h$ of positive degree has $h\\notin\\mathfrak p$. Then $r_0h\\notin\\mathfrak p$ ($\\mathfrak p$ prime), $r_0h$ is homogeneous of degree $\\deg h>0$, and $D_+(r_0h)=D(r_0)\\cap D(h)\\subseteq D(r_0)$ by (ii) of that lemma; so $x\\in D_+(r_0h)\\subseteq U$. Hence every open set is a union of standard opens, and with step 1 the standard opens form a basis of the topology of $X$.",
+   "uses": [
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00JP (label lemma-topology-proj) (3), (4), (5) and their proof"
+   }
+  },
+  {
+   "text": "*Clause (1), forward: the unit of $S_{(g)}$.* Let $f,g$ be homogeneous of positive degrees $d=\\deg f$, $k=\\deg g$, with $D_+(g)\\subseteq D_+(f)$. Let $\\iota_g:\\operatorname{Spec}S_{(g)}\\to X$ be the open immersion with image $D_+(g)$ of [lem-weil-pbc-proj-basic-open-intersection] (the homeomorphism $D_+(g)\\cong\\operatorname{Spec}S_{(g)}$ of Algebra 00JP (6)); by that lemma (with the roles of $f,g$ exchanged) $\\iota_g^{-1}(D_+(f))=D(f^k/g^d)$, the principal open of $u=f^k/g^d\\in S_{(g)}$ [def-nagata-homogeneous-localization-degree-zero]. Since the image $D_+(g)$ of $\\iota_g$ is contained in $D_+(f)$, $\\iota_g^{-1}(D_+(f))$ is all of $\\operatorname{Spec}S_{(g)}$, i.e. $D(u)=\\operatorname{Spec}S_{(g)}$: $u$ lies in no prime ideal of $S_{(g)}$. By (ii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], $u=f^{\\deg g}/g^{\\deg f}$ is a unit of $S_{(g)}$.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01M4 (label lemma-standard-open), first paragraph, proof of (1)(a); Algebra, Lemma 00JP (label lemma-topology-proj) (6) and Lemma 00E0 (label lemma-Zariski-topology)"
+   }
+  },
+  {
+   "text": "*Clause (1), forward: $f$ is a unit of $S_g$ and the homogeneous witness.* Keep the notation of step 3 and let $v\\in S_{(g)}$ with $uv=1$. In $S_g$ (which contains $S_{(g)}$ as the subring of degree-zero fractions [def-nagata-homogeneous-localization-degree-zero]) we have $f\\cdot(f^{k-1}v/g^d)=f^kv/g^d=uv=1$ ($k\\ge1$), so $f$ is a unit of $S_g$. Write its inverse as $b/g^n$ with $b\\in S$, $n\\ge0$; replacing $(b,n)$ by $(bg^t,n+t)$ for large $t$ we may assume $n\\ge1$ and $nk\\ge d$. Then $fb/g^n=1$ in $S_g$ means $g^N(fb-g^n)=0$ in $S$ for some $N\\ge0$, i.e. $g^Nfb=g^{N+n}$. Let $a_0$ be the homogeneous component of $b$ of degree $nk-d$. Since $g^N$ and $f$ are homogeneous, the component of degree $(N+n)k$ of $g^Nfb$ is $g^Nfa_0$, while $g^{N+n}$ is homogeneous of degree $(N+n)k$; comparing components gives $g^Nfa_0=g^{N+n}$. Put $e=N+n\\ge1$ and $a=g^Na_0$, homogeneous of degree $ek-d$: then $g^e=af$. (If $af\\ne0$, any homogeneous $a$ with $g^e=af$ has degree $e\\deg g-\\deg f$, by comparing degrees.)",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01M4 (label lemma-standard-open), first paragraph, proof of (1)(a) and (1)(b) ('Write the inverse of $f$ in $S_g$ as $a/g^d$ ... replace $a$ by its homogeneous part ... $g^e=af$')"
+   }
+  },
+  {
+   "text": "*Clause (1), converse and the unit statements.* Suppose $g^e=af$ with $e\\ge1$, $a$ homogeneous. If $\\mathfrak p\\in D_+(g)$ then $g^e\\notin\\mathfrak p$ ($\\mathfrak p$ prime), so $f\\notin\\mathfrak p$ (else $af\\in\\mathfrak p$): $D_+(g)\\subseteq D_+(f)$. Units: in $S_g$, $f\\cdot a/g^e=g^e/g^e=1$. In $S_{(g)}$ [def-nagata-homogeneous-localization-degree-zero]: if $af=0$ then $g^e=0$, so $S_g=0=S_{(g)}$ and every element is a unit; otherwise $\\deg a=ek-d\\ge0$ ($d=\\deg f$, $k=\\deg g$), $a^k/g^{ek-d}\\in S_{(g)}$ (numerator of degree $k(ek-d)$), and $(f^k/g^d)(a^k/g^{ek-d})=(af)^k/g^{ek}=g^{ek}/g^{ek}=1$. So $f$ is a unit of $S_g$ and $f^{\\deg g}/g^{\\deg f}$ is a unit of $S_{(g)}$; with steps 3 and 4 this proves (1).",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(b),(c) and its proof (the map $b/f^n\\mapsto a^nb/g^{ne}$)"
+   }
+  },
+  {
+   "text": "*Clause (2).* Let $f$ be homogeneous of positive degree and $D_+(f)=\\bigcup_jU_j$ an open covering. The space $D_+(f)$ is quasi-compact: it is the image of $\\operatorname{Spec}S_{(f)}$ under the continuous map $\\iota_f$ of [lem-weil-pbc-proj-basic-open-intersection], and $\\operatorname{Spec}S_{(f)}$ is quasi-compact by (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. For each $x\\in D_+(f)$ choose $j$ with $x\\in U_j$; $U_j$ is open in $X$ (as $D_+(f)$ is, step 1), so by the basis property (step 2) there is $h_x$ homogeneous of positive degree with $x\\in D_+(h_x)\\subseteq U_j$. The open sets $D_+(h_x)$ cover $D_+(f)$, so finitely many $D_+(h_{x_1}),\\dots,D_+(h_{x_n})$ do; with $g_i=h_{x_i}$ we get $D_+(f)=\\bigcup_{i=1}^nD_+(g_i)$ (each $D_+(g_i)\\subseteq U_{j}\\subseteq D_+(f)$), a finite covering by standard opens refining $(U_j)$.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01M4 (label lemma-standard-open), second paragraph (quasi-compactness via Algebra Lemma 00E8, label lemma-quasi-compact, and the basis)"
+   }
+  },
+  {
+   "text": "*Clause (3).* Let $f$ have degree $d>0$ and $g_1,\\dots,g_n$ be homogeneous of positive degrees $k_i$; put $u_i=g_i^{d}/f^{k_i}\\in S_{(f)}$ [def-nagata-homogeneous-localization-degree-zero]. By [lem-weil-pbc-proj-basic-open-intersection], $\\iota_f^{-1}(D_+(g_i))=D(u_i)$ in $\\operatorname{Spec}S_{(f)}$, hence $\\iota_f^{-1}(\\bigcup_iD_+(g_i))=\\bigcup_iD(u_i)$. Since $\\iota_f$ maps $\\operatorname{Spec}S_{(f)}$ onto $D_+(f)$, $D_+(f)\\subseteq\\bigcup_iD_+(g_i)$ iff $\\iota_f^{-1}(\\bigcup_iD_+(g_i))=\\operatorname{Spec}S_{(f)}$ iff $\\bigcup_iD(u_i)=\\operatorname{Spec}S_{(f)}$, and by (i) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] this holds iff $u_1,\\dots,u_n$ generate the unit ideal of $S_{(f)}$.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01M4 (label lemma-standard-open), third paragraph (via Algebra Lemma 00E0, label lemma-Zariski-topology); the identification $\\iota_f^{-1}(D_+(g))=D(g^{\\deg f}/f^{\\deg g})$ is Constructions Lemma 01M4 (1)(f) / Lemma 01MA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+  "def-nagata-affine-proj",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Section 01M3 (label section-proj), the paragraph before Lemma 01M4, and Lemma 01M4 (label lemma-standard-open) with its proof; Algebra, Lemma 00JP (label lemma-topology-proj) for clause (0)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +137,66 @@
    "results": "ProjectiveSpectrum.isTopologicalBasis_basic_opens (Topology.lean:391, basis indexed by ALL r : A, not only homogeneous of positive degree), basicOpen_eq_union_of_projection (:376), basicOpen_mul (:361), basicOpen_pow (:373), Proj.isBasis_basicOpen (Basic.lean:79), Proj.basicOpen_mono (Basic.lean:72, f ∣ g → D(g) ≤ D(f): the converse direction of (1) with e = 1); no D_+(g) ≤ D_+(f) criterion, no unit-ideal criterion",
    "date": "2026-10-09",
    "verdict": "no match as stated: (0) follows from isTopologicalBasis_basic_opens + basicOpen_eq_union_of_projection + basicOpen_mul after a short argument (a degree-0 or inhomogeneous basic open is a union of positive-degree ones), (1) forward direction and (3) are absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "basic open D_+(g) of projective spectrum contained in D_+(f) iff g power is a multiple of f",
+   "results": "Proj.basicOpen_mono (f ∣ g → D(g) ≤ D(f)), Proj.basicOpen, Proj.basicOpen_pow, ProjectiveSpectrum.basicOpen_mul_le_left/right, ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen, PrimeSpectrum.basicOpen_mul_le_left, PrimeSpectrum.basicOpen_pow",
+   "date": "2026-10-10",
+   "verdict": "no match for (1) (only the converse with e = 1)"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum.basicOpen _ _ ≤ ProjectiveSpectrum.basicOpen _ _ ↔ _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no Proj analogue of PrimeSpectrum.basicOpen_le_basicOpen_iff"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.basicOpen _ _ ≤ AlgebraicGeometry.Proj.basicOpen _ _",
+   "results": "AlgebraicGeometry.Proj.basicOpen_mono (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match for (1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if D_+(g) ⊆ D_+(f) in Proj then f is a unit in the homogeneous localization away from g",
+   "results": "mem_basicOpen_den (StructureSheaf), ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff, mem_carrier_iff_of_mem_mul, mem_carrier_iff', mem_carrier_iff, mem_carrier_iff_of_mem (ProjectiveSpectrum/Scheme.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match for (1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard open D_+(f) of Proj covered by D_+(g_i) iff g_i^deg f / f^deg g_i generate unit ideal of degree zero localization",
+   "results": "Proj.openCoverOfISupEqTop, Proj.iSup_basicOpen_eq_top, Proj.openCoverOfMapIrrelevantEqTop, Proj.iSup_basicOpen_eq_top', Proj.affineOpenCoverOfIrrelevantLESpan, Proj.affineOpenCover, FromSpec.mem_carrier_iff_of_mem_mul",
+   "date": "2026-10-10",
+   "verdict": "no match for (3): only coverings of all of Proj"
+  },
+  {
+   "tool": "leansearch",
+   "query": "basic opens of homogeneous elements of positive degree form a basis of the topology of Proj",
+   "results": "Proj.isBasis_basicOpen, ProjectiveSpectrum.isTopologicalBasis_basic_opens (both indexed by all r : A), ProjectiveSpectrum.basicOpen, isOpen_basicOpen, Proj.openCoverOfISupEqTop, Proj.basicOpen_pow, ProjectiveSpectrum.isOpen_iff",
+   "date": "2026-10-10",
+   "verdict": "generalization only (basis by all basic opens); the positive-degree basis is step 2, from lem-weil-pbc-projective-spectrum-basic-opens-basis"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'basicOpen_le_basicOpen_iff\\|basicOpen_eq_bot_iff\\|basicOpen_eq_top' Mathlib/ ; grep -n 'basicOpen.*≤\\|≤.*basicOpen\\|IsUnit\\|isCompact' Mathlib/AlgebraicGeometry/ProjectiveSpectrum/*.lean",
+   "results": "basicOpen_le_basicOpen_iff(_algebraMap_isUnit), basicOpen_eq_bot_iff only for PrimeSpectrum (RingTheory/Spectrum/Prime/Topology.lean:534,539,586) and schemes (Properties.lean:211); ProjectiveSpectrum: only basicOpen_mul_le_left/right (Topology.lean:364,368), Proj.basicOpen_mono (Basic.lean:72); Proper.lean:160 uses isCompact_range (awayι ...).continuous (the transport of quasi-compactness used in step 6); no ProjectiveSpectrum.basicOpen_le_basicOpen_iff, no ProjectiveSpectrum.basicOpen_eq_bot_iff",
+   "date": "2026-10-10",
+   "verdict": "no match for (1),(3) as stated; (0),(2) follow from lem-weil-pbc-projective-spectrum-basic-opens-basis, lem-weil-pbc-proj-basic-open-intersection and lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact as in steps 1, 2, 6"
+  },
+  {
+   "tool": "grep",
+   "query": "source repository: grep -rn 'basicOpen' ~/weil-conjectures-slopmaster2/WeilConjectures --include=*.lean | grep -E 'Proj|ProjectiveSpectrum|HomogeneousLocalization' | grep -E 'theorem|lemma|def '",
+   "results": "Proj.basicOpen_add_le (WeilConjectures/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:60), Proj.iSup_basicOpen_homogeneous_eq_top (.../ProjectiveSpectrum/Functor.lean:69: the D_+(s), s homogeneous of positive degree, cover Proj), Proj.exists_mem_basicOpen_homogeneousSubmodule (ProjectiveSpace/Twist.lean:64), Proj.basicOpen_X_eq_top (ProjectiveSpace/Zero.lean:106), HomogeneousLocalization.Away.exists_factor_of_isUnit (Blowup/BlowupUniversal.lean:754), ProjectiveSpectrum/Twist.lean mem_basicOpen_iff_isUnit_val, isInvertible_twist; sorry map (reach.py): the first five reach no sorry",
+   "date": "2026-10-10",
+   "verdict": "no declaration of the source repository states (1), (2) or (3); Proj.iSup_basicOpen_homogeneous_eq_top (sorry-free) is the covering part of (0) only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +216,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proj-standard-open-inclusion",
+  "worker": "stage1",
+  "summary": "Split along Stacks Constructions Lemma 01M4 (label lemma-standard-open) with its proof and Algebra Lemma 00JP (label lemma-topology-proj) (1)-(6) for clause (0). Seven steps: (0) openness and D_+(f)∩D_+(g)=D_+(fg), then the positive-degree basis (00JP (3),(4),(5): a degree-0 component r_0 is replaced by r_0h with h homogeneous of positive degree outside the prime); (1) forward via the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection (ι_g^{-1}(D_+(f)) = D(f^{deg g}/g^{deg f})) and the unit criterion on Spec, then the homogeneous witness g^e = af by taking a homogeneous component of the inverse of f in S_g (written out), converse and unit statements elementary; (2) quasi-compactness of D_+(f) as continuous image of Spec S_(f) plus the basis; (3) by the same preimage formula and the unit-ideal criterion for principal opens. Two new Mathlib leaves: lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (PrimeSpectrum.iSup_basicOpen_eq_top_iff, Ideal.span_singleton_eq_top, PrimeSpectrum.compactSpace) and lem-weil-pbc-projective-spectrum-basic-opens-basis (ProjectiveSpectrum.isTopologicalBasis_basic_opens, basicOpen_mul, basicOpen_eq_union_of_projection). Statement unchanged. Mathlib re-searched three ways with the exact names: no Proj analogue of basicOpen_le_basicOpen_iff and no unit-ideal criterion for D_+(f); the item stays a split node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Seven steps along Algebra 00JP and Constructions 01M4 (labels corrected by the worker): basis via the homogeneous components and r_0 h; (1) forward via the preimage formula of lem-weil-pbc-proj-basic-open-intersection and the unit criterion, with the homogeneous witness g^e = af extracted by comparing homogeneous components (checked: component of b of degree nk-d); converse and units written out including S_g = 0; (2) quasi-compactness transported; (3) unit-ideal criterion. New Mathlib leaves lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (iSup_basicOpen_eq_top_iff :620, compactSpace :292, Ideal.span_singleton_eq_top Span.lean:205) and lem-weil-pbc-projective-spectrum-basic-opens-basis (isTopologicalBasis_basic_opens :391, basicOpen_mul :361, basicOpen_eq_union_of_projection :376), checked."
+ }
 }

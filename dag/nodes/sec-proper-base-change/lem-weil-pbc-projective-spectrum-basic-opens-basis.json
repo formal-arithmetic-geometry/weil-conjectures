@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+ "kind": "statement",
+ "title": "Basic opens D(r) of Proj: basis, products, homogeneous components",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be an $\\mathbf N$-graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj], the set of homogeneous prime ideals $\\mathfrak p\\subseteq S$ with $S_+=\\bigoplus_{n\\ge1}S_n\\not\\subseteq\\mathfrak p$, with the topology induced from $\\operatorname{Spec}S$ (closed sets: the sets of such $\\mathfrak p$ containing a given subset of $S$). For an arbitrary $r\\in S$ let $D(r)=\\{\\mathfrak p\\in X: r\\notin\\mathfrak p\\}$. Then: (i) every $D(r)$ is open and the sets $D(r)$, $r\\in S$, form a basis of the topology of $X$; (ii) $D(rr')=D(r)\\cap D(r')$ for $r,r'\\in S$; (iii) if $r=\\sum_{i\\ge0}r_i$ with $r_i\\in S_i$, then $D(r)=\\bigcup_{i\\ge0}D(r_i)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00JP (label lemma-topology-proj) (1), (2), (3) and the first sentences of the proof of (5)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "basic opens of homogeneous elements of positive degree form a basis of the topology of Proj",
+   "results": "AlgebraicGeometry.Proj.isBasis_basicOpen (ProjectiveSpectrum/Basic.lean), ProjectiveSpectrum.isTopologicalBasis_basic_opens, ProjectiveSpectrum.basicOpen, ProjectiveSpectrum.isOpen_basicOpen (ProjectiveSpectrum/Topology.lean), Proj.openCoverOfISupEqTop, Proj.basicOpen_pow, ProjectiveSpectrum.isOpen_iff",
+   "date": "2026-10-10",
+   "verdict": "match for (i) (basis indexed by all r : A); not for the positive-degree basis, which the user lem-weil-pbc-proj-standard-open-inclusion derives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard open D_+(f) of Proj covered by D_+(g_i) iff g_i^deg f / f^deg g_i generate unit ideal of degree zero localization",
+   "results": "Proj.openCoverOfISupEqTop, Proj.iSup_basicOpen_eq_top, Proj.openCoverOfMapIrrelevantEqTop, Proj.iSup_basicOpen_eq_top', Proj.affineOpenCoverOfIrrelevantLESpan, Proj.affineOpenCover, ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul",
+   "date": "2026-10-10",
+   "verdict": "no further match (shared search with the item); the clauses here are found by grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|def basicOpen' Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean (lines 330-400)",
+   "results": "def basicOpen (r : A) : carrier {x | r ∉ x.asHomogeneousIdeal} (:332), isOpen_basicOpen (:345), basicOpen_mul (f g) : basicOpen (f*g) = basicOpen f ⊓ basicOpen g (:361), basicOpen_pow (:373), basicOpen_eq_union_of_projection (f) : basicOpen f = ⨆ i, basicOpen (GradedRing.proj 𝒜 i f) (:376), isTopologicalBasis_basic_opens : IsTopologicalBasis (range fun r : A => basicOpen r) (:391)",
+   "date": "2026-10-10",
+   "verdict": "match, one lemma per clause (read at the source lines)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ProjectiveSpectrum.isTopologicalBasis_basic_opens, ProjectiveSpectrum.basicOpen_mul, ProjectiveSpectrum.basicOpen_eq_union_of_projection",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+  "how": "a few Mathlib lemmas, one per clause: ProjectiveSpectrum 𝒜 is the set of homogeneous primes not containing the irrelevant ideal (the elements with zero degree-0 component, i.e. S_+) with the Zariski topology, the underlying space of Mathlib's Proj (def-nagata-affine-proj); basicOpen 𝒜 r = {x | r ∉ x} (Topology.lean:332); (i) isOpen_basicOpen (:345) and isTopologicalBasis_basic_opens (:391); (ii) basicOpen_mul (:361); (iii) basicOpen_eq_union_of_projection (:376), GradedRing.proj 𝒜 i r being the degree-i component"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proj-standard-open-inclusion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in ProjectiveSpectrum/Topology.lean: isTopologicalBasis_basic_opens :391, basicOpen_mul :361, basicOpen_eq_union_of_projection :376; checked."
+ }
+}
