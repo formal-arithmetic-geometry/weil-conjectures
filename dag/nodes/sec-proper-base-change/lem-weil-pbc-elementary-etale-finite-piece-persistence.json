@@ -13,9 +13,74 @@
   "def-weil-finite-integral-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The square $(X_{U'},\\pi,q')$ is cartesian over $(q,\\psi)$. Consider the commutative diagram with rows $X_{U'}\\xrightarrow{\\pi}X_U\\xrightarrow{p}X$ and $U'\\xrightarrow{\\psi}U\\xrightarrow{\\varphi}S$ and columns $q'$, $q$, $f$: it commutes since $q\\circ\\pi=\\psi\\circ q'$ and $f\\circ p=\\varphi\\circ q$. Apply [lem-weil-pbc-cartesian-square-pasting] to it, read with $X'=X_{U'}$, $X=U'$, $Y'=X_U$, $Y=U$, $Z'=X$, $Z=S$ and $a=q'$, $f'=\\pi$, $f=\\psi$, $b=q$, $h'=p$, $h=\\varphi$, $c=f$ (so $fa=bf'$ is $\\psi q'=q\\pi$ and $hb=ch'$ is $\\varphi q=fp$). The lower square is cartesian: $(X_U,q,p)$ is the fibre product of $\\varphi$ and $f$ [def-pc-fibre-product]. The outer rectangle is cartesian: $(X_{U'},q',p\\circ\\pi)=(X_{U'},q',p')$ is the fibre product of $\\varphi\\circ\\psi$ and $f$ by definition of $X_{U'}$. Hence the upper square is cartesian: $(X_{U'},\\pi,q')$ is a fibre product $X_U\\times_UU'$ of $q:X_U\\to U$ and $\\psi:U'\\to U$, with first projection $\\pi$ and second projection $q'$.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954; Stacks gives no proof, the step is the agent's"
+   }
+  },
+  {
+   "text": "(i') $V'\\to U'$ is finite. Apply [lem-weil-pbc-open-fibre-product] to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 (morphisms $q:X_U\\to U$, $\\psi:U'\\to U$, projections $\\pi$, $q'$) with the open subschemes $U\\subseteq U$, $V\\subseteq X_U$, $U'\\subseteq U'$ ($q(V)\\subseteq U$ and $\\psi(U')\\subseteq U$ trivially): the canonical morphism $V\\times_UU'\\to X_{U'}$ is an open immersion [def-weil-open-immersion] with image $\\pi^{-1}(V)\\cap q'^{-1}(U')=\\pi^{-1}(V)=V'$, compatibly with the projections. So the open subscheme $V'$, with the morphism $V'\\hookrightarrow X_{U'}\\xrightarrow{q'}U'$, is isomorphic over $U'$ to $V\\times_UU'$ with its second projection, i.e. to the base change of $q|_V:V\\to U$ along $\\psi$. By hypothesis (i) $q|_V$ is finite [def-weil-finite-integral-morphism], so by [lem-weil-pbc-finite-morphism-permanence] (a) the projection $V\\times_UU'\\to U'$ is finite, and hence so is $V'\\to U'$ (composing with the isomorphism $V'\\cong V\\times_UU'$ over $U'$, an isomorphism being finite).",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954; Stacks gives no proof, the step is the agent's"
+   }
+  },
+  {
+   "text": "(ii') Exactly one point $v'$ of $V'$ over $u'$, and $\\pi(v')=v$. Let $z\\in V'$ with $q'(z)=u'$. Then $y=\\pi(z)\\in V$ and $q(y)=\\psi(q'(z))=\\psi(u')=u$, so $y=v$ by (ii). Conversely every $z\\in X_{U'}$ with $\\pi(z)=v$ lies in $\\pi^{-1}(V)=V'$. Hence $\\{z\\in V':q'(z)=u'\\}=\\pi^{-1}(v)\\cap q'^{-1}(u')$. By [lem-weil-pbc-fibre-product-points], applied to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 (with the points $v\\in X_U$, $u'\\in U'$, $q(v)=u=\\psi(u')$), this set is in bijection with $\\operatorname{Spec}(\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u'))$, the maps $\\kappa(u)\\to\\kappa(v)$, $\\kappa(u)\\to\\kappa(u')$ being induced by $q$ and $\\psi$ [def-weil-residue-field]. Since $r:\\kappa(u)\\to\\kappa(u')$ is an isomorphism by hypothesis, $\\kappa(v)\\to\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$, $a\\mapsto a\\otimes1$, is a ring isomorphism (inverse $a\\otimes b\\mapsto a\\,r^{-1}(b)$), so the tensor product is a field and its spectrum has exactly one point (the zero ideal). Therefore there is exactly one $v'\\in V'$ with $q'(v')=u'$, and $\\pi(v')=v$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954; Stacks gives no proof, the step is the agent's"
+   }
+  },
+  {
+   "text": "(iii') $p'(v')=x$ and $\\kappa(x)\\cong\\kappa(v')$. First $p'(v')=p(\\pi(v'))=p(v)=x$ by step 3 and (iii). Apply [lem-weil-pbc-fibre-product-point-residue-field] to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 and the point $z=v'$ (so $\\pi(z)=v$, $q'(z)=u'$, over $u$): with $R=\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$ and $\\mathfrak p$ the kernel of $R\\to\\kappa(v')$, $a\\otimes b\\mapsto\\pi^\\sharp(a)q'^\\sharp(b)$. By step 3, $R$ is a field, so $\\mathfrak p=0$ and $R/\\mathfrak p=R$ is a field; hence $R\\to\\kappa(v')$ is an isomorphism compatible with the maps from $\\kappa(v)$, i.e. $\\pi^\\sharp:\\kappa(v)\\to\\kappa(v')$ is the composite of the isomorphism $\\kappa(v)\\to R$, $a\\mapsto a\\otimes1$, of step 3 and the isomorphism $R\\to\\kappa(v')$, so $\\pi^\\sharp$ is an isomorphism. The map $\\kappa(x)\\to\\kappa(v')$ induced by $p'=p\\circ\\pi$ is the composite of $\\kappa(x)\\to\\kappa(v)$ induced by $p$ and $\\pi^\\sharp$ (the maps on residue fields [def-weil-residue-field] come from the maps of local rings $\\mathcal O_{X,x}\\to\\mathcal O_{X_U,v}\\to\\mathcal O_{X_{U'},v'}$, whose composite is the map of $p'$); the first is an isomorphism by (iii), so the composite is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954; Stacks gives no proof, the step is the agent's"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-fibre-product-points",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954, stated there without proof; the proof is the agent's, from the fibre-product nodes (points of a fibre product, Stacks 01JT; residue fields of its points)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +125,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-elementary-etale-finite-piece-persistence",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 02LK (more-morphisms.tex 11924-11954; the final assertion is for an elementary etale neighbourhood, and the node's generalization to any psi with kappa(u)=kappa(u') is correct: etaleness is not used). Stacks gives no proof, so the proof is agent-written in four steps: (1) (X_{U'},pi,q') is a fibre product X_U x_U U' by cartesian-square pasting; (2) V'=pi^{-1}(V) is V x_U U' over U' by the open-fibre-product leaf, hence finite over U' by base change of finite morphisms; (3) the points of V' over u' are pi^{-1}(v) cap q'^{-1}(u'), in bijection with Spec(kappa(v) tensor_{kappa(u)} kappa(u')) = Spec kappa(v), one point, by the fibre-product-points leaf; (4) residue field of that point is that tensor product (fibre-product-point-residue-field node), so kappa(v)->kappa(v') and kappa(x)->kappa(v') are isomorphisms. The brief's alternative route through the fibre of a base change (lem-weil-pbc-fibre-of-base-change) is not needed. No new node: every step uses existing nodes (four Mathlib leaves, one reviewed split node, definitions). stmt_deps kept. The item's own Mathlib searches (three kinds, 2026-10-10) were already recorded; no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps (agent proof; Stacks 02LK states the assertion without proof): the square X_{U'} = X_U x_U U' is cartesian (pasting leaf), V' = V x_U U' finite over U' (open fibre product, finite stable under base change), the points over u' are Spec(kappa(v) tensor_{kappa(u)} kappa(u')) = one point since kappa(u) = kappa(u'), residue field of v' is kappa(v) by the fibre-product residue-field node. Correct; 0 new nodes."
+ }
 }
