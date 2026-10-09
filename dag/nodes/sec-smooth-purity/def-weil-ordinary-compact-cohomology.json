@@ -10,22 +10,43 @@
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-scheme-morphism-properties",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
   "def-weil-finite-coefficient-point",
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-direct-image",
   "def-compact-support-direct-image-detailed",
-  "def-coefficient-twists-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-structure-direct-images-constructible",
+  "def-weil-coefficient-cohomology-modules",
   "def-weil-pbc-proetale-site",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-constant-weil-structure",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-endomorphism-trace",
+  "def-weil-endomorphism-determinant"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry/Sites/ElladicCohomology.lean; grep -n 'abbrev H ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites/SheafCohomology/Basic.lean; grep -rli 'weil sheaf\\|geometric Frobenius\\|Tate twist\\|compact support\\|compactly supported' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: `Scheme.ellAdicSheaf X ℓ : Sheaf (ProEt.topology X) Ab` (line 52), the sheaf U ↦ C(U, ℤ_[ℓ]) on the small pro-étale site `X.ProEt` (Bhatt-Scholze Definition 6.8.1), and `Scheme.EllAdicCohomology X ℓ n : Type (u+1)` (line 74) = `(X.ellAdicSheaf ℓ).H n`, where `Sheaf.H F n = Ext (constantSheaf ℤ) F n` (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59), i.e. the abelian groups Hⁿ(X_proet, ℤ_ℓ) for n : ℕ, with only the vanishing for empty X proved. Comparison with this node: it is the special case Λ = O_E with E = ℚ_ℓ, K = Λ_Y, of the ordinary cohomology H^i(Y, ℤ_ℓ), i ≥ 0, read as groups, since C(−, ℤ_ℓ) = lim (ℤ/ℓ^n)_Y (Bhatt-Scholze Lemma 6.8.2(1)) is the completed coefficient sheaf and the derived global sections of a sheaf on s_proet = Spec k̄ compute Ext from the constant sheaf; the node's RΓ(Y,K) as an object of D^b_fg(O_E), the constructibility that makes Fib_s apply, the coefficients A_{E,n}, E, Q̄_ℓ, the compact-support version, the Tate twists and the Weil structure are not in Mathlib. No Weil sheaf, geometric Frobenius, Tate twist or compact-support direct image anywhere in Mathlib",
+   "date": "2026-10-09",
+   "verdict": "no match: `Scheme.EllAdicCohomology` is H^i(Y, ℤ_ℓ) for one coefficient ring, without compact support, twists or Weil structure, and identifying it with this node's H^i(Y, O_E) for E = ℚ_ℓ needs the sheaf comparison of Bhatt-Scholze 6.8.2, not one line"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -54,5 +75,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-ordinary-compact-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint, order 1510): verbatim, kept; slopmaster2 has no copy of this node. Lean state none on both branches. Named every notion the statement is built from. Kept the eleven imported dependencies, each verified to supply what is used (the datum and the l-adic coefficient rings; separated finite type and the structure morphism; the finite coefficient categories over a point and Fib_s; Weil complexes and For; Ra_{Y*}; the finite-level Ra_{Y!,n}; Tate twists; the constant sheaf (A_{E,n})_Y on the pro-etale site; the integral, rational and algebraically closed categories). Added existing nodes the statement uses without citing them: def-weil-finite-torsion-constructibility (the categories D^b_c(Y,A_{E,n}) and D^b_c(s,A_{E,n}) in which K and the direct images live), def-weil-integral-rational-qbar-compact-support (Ra_{Y!} for Lambda = O_E, E, Qbar_l; the cited def-compact-support-direct-image-detailed is finite-level only), lem-sf-proetale-constructible-origin (the finite-level Ra_{Y!,n} is defined only on complexes of etale origin, so this is what puts D^b_c(Y,A_{E,n}) in its domain), def-weil-completed-integral-coefficients (the sheaf O^_{E,Y} itself, which the statement attributes to the derived-complete integral construction), def-weil-derived-tensor (the symbol tensor^L in Lambda_Y(m)), and the linear-algebra leaves def-weil-finite-dimensional-subspace, def-weil-vector-space-dimension, def-weil-endomorphism-determinant. Created five nodes for what the statement uses but no node supplied: def-weil-endomorphism-trace (Mathlib leaf, LinearMap.trace); def-weil-coefficient-cohomology-modules (the symbol H^i on the four coefficient categories, including the stagewise meaning over Qbar_l that the blueprint leaves implicit; unsplit, Mathlib has the first three cases as DerivedCategory.homologyFunctor); lem-weil-constant-coefficient-objects-constructible (that (A_{E,n})_Y and O^_{E,Y} are objects of D^b_c, which H^i(Y,Lambda_Y) presupposes; unsplit); def-weil-constant-weil-structure (the canonical Weil structure on E_Y and (Qbar_l)_Y, which the statement names but no node constructs; unsplit); lem-weil-structure-direct-images-constructible (that Ra_{Y*}K and Ra_{Y!}K lie in D^b_c(s,Lambda), the domain of Fib_s; unsplit; the finite-level theorems thm-dg-finite-type-constructibility, sbc-thm-finiteness-finite-type and prop-finite-compact-support-constructibility are its ingredients, and prop-cohomological-finiteness, which asserts the finiteness of H^i, cannot be used here since its proof cites this node). The displayed equivalences Fib_s are restated from def-weil-finite-coefficient-point, where they are an assertion inside a definition; this definition uses Fib_s only as a functor. Recorded the Mathlib search of the item: Scheme.EllAdicCohomology is H^i(Y, Z_l) on the pro-etale site and nothing more."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

@@ -1,0 +1,45 @@
+{
+ "id": "def-weil-endomorphism-trace",
+ "kind": "definition",
+ "title": "Trace of an endomorphism",
+ "statement": "Let $R$ be a commutative ring and $M$ a free $R$-module with a finite basis $(m_1,\\dots,m_n)$. For an $R$-linear endomorphism $f:M\\to M$, write $f(m_j)=\\sum_ia_{ij}m_i$ with $a_{ij}\\in R$; the trace $\\operatorname{tr}(f\\mid M)\\in R$ is $\\sum_ia_{ii}$, the trace of the matrix $(a_{ij})\\in M_n(R)$. It does not depend on the basis, since the matrices of $f$ in two bases are conjugate and $\\operatorname{tr}(PAP^{-1})=\\operatorname{tr}(A)$. In particular, for a field $K$ and a finite-dimensional $K$-vector space $V$ [def-weil-finite-dimensional-subspace], $\\operatorname{tr}(F\\mid V)\\in K$ is defined for every $K$-linear endomorphism $F$ of $V$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "node def-weil-ordinary-compact-cohomology, order 1510, last sentence: 'its dimension, trace, and determinant have their ordinary linear-algebraic meanings'"
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def trace\\|theorem trace_eq_matrix_trace\\|theorem trace_conj\\|theorem trace_mul_comm' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/LinearAlgebra/Trace.lean; grep -rl 'LinearMap.trace' dag/nodes (no existing node)",
+   "results": "Mathlib/LinearAlgebra/Trace.lean:75 `LinearMap.trace (R) (M) : (M →ₗ[R] M) →ₗ[R] R` (basis-independent; 0 when M has no finite basis), :87 `LinearMap.trace_eq_matrix_trace (b : Basis ι R M) (f) : trace R M f = Matrix.trace (toMatrix b b f)`, :103 `trace_mul_comm`, :292 `trace_conj'`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.trace",
+  "file": "Mathlib/LinearAlgebra/Trace.lean",
+  "how": "exact: `LinearMap.trace R M f` for `f : M →ₗ[R] M` with `M` free of finite rank; basis description is `LinearMap.trace_eq_matrix_trace`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-ordinary-compact-cohomology",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
