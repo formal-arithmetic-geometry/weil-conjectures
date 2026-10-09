@@ -436,7 +436,7 @@ noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
     leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫
       smoothPurityIso Λ f' _ θ' φ'
 
-omit [Finite Λ] [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
+omit [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
 /-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
 
 For a cartesian square `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`, the pullback

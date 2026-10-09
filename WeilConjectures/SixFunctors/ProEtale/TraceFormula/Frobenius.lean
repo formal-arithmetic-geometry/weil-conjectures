@@ -230,7 +230,7 @@ instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m)
 
 section Graph
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
@@ -399,7 +399,7 @@ instance isIso_derivedUpperStarLowerStarAdjunction_counit (r : X ⟶ Y) [IsFinit
 
 section
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 

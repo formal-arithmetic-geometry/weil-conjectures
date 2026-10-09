@@ -159,7 +159,8 @@ instance isIso_closedPieceCoeff [IsIso W.coeff] (m : ℕ) {Z : Scheme.{u}} (i : 
 
 section Pieces
 
-variable [DerivedBraiding A] {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- The coefficient morphism `u^U : LΦ_m^* K^U ⟶ K^U` of the open piece `K^U = Rj_! Lj^* K`,
@@ -239,7 +240,8 @@ end WeilComplex
 
 namespace GeometricOperations
 
-variable [DerivedBraiding A] {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- Localization trace additivity: for a closed immersion `i : Z ⟶ X` and the complementary
