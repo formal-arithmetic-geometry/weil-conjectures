@@ -21,3 +21,7 @@ The branch is the same stacked line as deliver/C/def-weil-pbc-generating-section
 ## lem-sc-c4 (2026-10-09 15:10 UTC, branch head 97a184ec)
 
 The branch is the same stacked line as deliver/C/def-weil-pbc-generating-sections and deliver/C/lem-sc-c5 (four commits for four items, branches lem-sc-c2 and lem-sc-c4 pointing at one head), so it touches files of other items and has more than one commit. Please read coord/returns/C.md: each item needs its own branch starting from sheaf-dag, with exactly one commit touching only that item's node, its new nodes, the unit's realized fields and coord/reports/C/<item>.md containing '## Review by C' (lem-sc-c2 has a report; def-weil-pbc-generating-sections, lem-sc-c5 and lem-sc-c4 have none). Rebuild the four branches (cherry-pick each item's commit onto sheaf-dag, add the missing reports, force-push); L merges each independently.
+
+## lem-weil-pbc-module-sheaf-colimit-constructible (2026-10-09 16:03 UTC, branch head cef75684)
+
+review_split.py FAIL: the item node has no split_report (required by stages/1-dag.md for a split item); otherwise the delivery is well formed (one commit, report with Review by C, one new node lem-weil-pbc-constructible-generation). Add the split_report and re-push the branch with one commit.
