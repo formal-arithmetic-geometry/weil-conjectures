@@ -144,3 +144,122 @@ def mapMod : Mod C A ⥤ Mod D (F.obj A) where
 end Functor
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+namespace Mod
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+
+lemma act_comap_obj {A B : C} [MonObj A] [MonObj B] (f : A ⟶ B) [IsMonHom f] (M : Mod C B) :
+    act ((comap f).obj M).X = f ▷ M.X ≫ act M.X :=
+  rfl
+
+end Mod
+
+namespace Functor
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+open _root_.CategoryTheory.Mod
+
+open scoped Obj
+
+lemma act_mapMod_obj (F : C ⥤ D) [F.LaxMonoidal] {A : C} [MonObj A] (M : Mod C A) :
+    act ((F.mapMod A).obj M).X = LaxMonoidal.μ F A M.X ≫ F.map (act M.X) :=
+  rfl
+
+end Functor
+
+instance IsMonHom.inv {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {M N : C}
+    [MonObj M] [MonObj N] (f : M ⟶ N) [IsIso f] [IsMonHom f] : IsMonHom (inv f) :=
+  inferInstanceAs (IsMonHom (asIso f).inv)
+
+namespace Adjunction
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal _root_.CategoryTheory.Mod
+
+open scoped Obj
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
+  {A : C} {B : D} [MonObj A] [MonObj B] (φ : A ⟶ G.obj B) [IsMonHom φ]
+  [IsIso ((adj.homEquiv _ _).symm φ)] [IsMonHom ((adj.homEquiv _ _).symm φ)]
+
+/-- The left adjoint `M ↦ F M` on module objects, the `F A`-module `F M` viewed as a `B`-module
+along the inverse of the adjoint `F A ⟶ B` of `φ : A ⟶ G B`. -/
+noncomputable def modLeft : Mod C A ⥤ Mod D B :=
+  F.mapMod A ⋙ comap (inv ((adj.homEquiv _ _).symm φ))
+
+/-- The right adjoint `N ↦ G N` on module objects, the `G B`-module `G N` viewed as an
+`A`-module along `φ : A ⟶ G B`. -/
+@[nolint unusedArguments]
+noncomputable def modRight (_adj : F ⊣ G) (φ : A ⟶ G.obj B) [IsMonHom φ] : Mod D B ⥤ Mod C A :=
+  G.mapMod B ⋙ comap φ
+
+variable {adj φ} in
+/-- A morphism `F M ⟶ N` is `B`-linear iff `F (A ⊗ M) ⟶ F M ⟶ N` agrees with
+`F (A ⊗ M) ⟶ F A ⊗ F M ⟶ B ⊗ N ⟶ N`. -/
+lemma modLeft_linear_iff {M : Mod C A} {N : Mod D B} (f : F.obj M.X ⟶ N.X) :
+    act ((adj.modLeft φ).obj M).X ≫ f = B ◁ f ≫ act N.X ↔
+      F.map (act M.X) ≫ f = δ F A M.X ≫ ((adj.homEquiv _ _).symm φ ⊗ₘ f) ≫ act N.X := by
+  set ψ := (adj.homEquiv _ _).symm φ
+  change (inv ψ ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F A M.X ≫ F.map (act M.X)) ≫ f = _ ↔ _
+  constructor
+  · intro h
+    have h' := congrArg (fun k ↦ δ F A M.X ≫ ψ ▷ F.obj M.X ≫ k) h
+    simpa only [Category.assoc, ← comp_whiskerRight_assoc, IsIso.hom_inv_id, id_whiskerRight,
+      Category.id_comp, Functor.Monoidal.δ_μ_assoc, tensorHom_def] using h'
+  · intro h
+    rw [Category.assoc, Category.assoc, h, Functor.Monoidal.μ_δ_assoc, tensorHom_def]
+    simp only [Category.assoc, ← comp_whiskerRight_assoc, IsIso.inv_hom_id, id_whiskerRight,
+      Category.id_comp]
+
+variable {adj φ} in
+/-- A morphism `M ⟶ G N` is `A`-linear iff its adjoint `F M ⟶ N` satisfies the condition of
+`CategoryTheory.Adjunction.modLeft_linear_iff`. -/
+lemma modRight_linear_iff {M : Mod C A} {N : Mod D B} (g : M.X ⟶ G.obj N.X) :
+    act M.X ≫ g = A ◁ g ≫ act ((adj.modRight φ).obj N).X ↔
+      F.map (act M.X) ≫ (adj.homEquiv _ _).symm g =
+        δ F A M.X ≫ ((adj.homEquiv _ _).symm φ ⊗ₘ (adj.homEquiv _ _).symm g) ≫ act N.X := by
+  change act M.X ≫ g = A ◁ g ≫ φ ▷ G.obj N.X ≫ Functor.LaxMonoidal.μ G B N.X ≫ G.map (act N.X) ↔ _
+  rw [← (adj.homEquiv _ _).symm.injective.eq_iff, adj.homEquiv_naturality_left_symm]
+  have key : (adj.homEquiv _ _).symm (A ◁ g ≫ φ ▷ G.obj N.X ≫ Functor.LaxMonoidal.μ G B N.X ≫
+      G.map (act N.X)) = δ F A M.X ≫ ((adj.homEquiv _ _).symm φ ⊗ₘ
+        (adj.homEquiv _ _).symm g) ≫ act N.X := by
+    simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
+      Adjunction.counit_naturality, Adjunction.map_μ_comp_counit_app_tensor_assoc]
+    rw [← δ_natural_left_assoc, ← δ_natural_right_assoc]
+    simp only [tensorHom_def, comp_whiskerRight, MonoidalCategory.whiskerLeft_comp, Category.assoc,
+      whisker_exchange_assoc]
+  rw [key]
+
+/-- **A monoidal adjunction lifts to module objects**: for a monoidal adjunction `F ⊣ G` with `F`
+strong monoidal and a monoid morphism `φ : A ⟶ G B` whose adjoint `F A ⟶ B` is invertible,
+`F` and `G` induce an adjunction between `A`-modules and `B`-modules. -/
+noncomputable def modAdjunction : adj.modLeft φ ⊣ adj.modRight φ :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv M N :=
+        { toFun f := homMk (M := M) (N := (adj.modRight φ).obj N) (adj.homEquiv _ _ f.hom)
+            ((modRight_linear_iff _).2 (by
+              rw [Equiv.symm_apply_apply]
+              exact (modLeft_linear_iff _).1 (act_hom f)))
+          invFun g := homMk (M := (adj.modLeft φ).obj M) (N := N) ((adj.homEquiv _ _).symm g.hom)
+            ((modLeft_linear_iff _).2 ((modRight_linear_iff _).1 (act_hom g)))
+          left_inv f := Mod.hom_ext _ _ (Equiv.symm_apply_apply _ _)
+          right_inv g := Mod.hom_ext _ _ (Equiv.apply_symm_apply _ _) }
+      homEquiv_naturality_left_symm f g :=
+        Mod.hom_ext _ _ (adj.homEquiv_naturality_left_symm f.hom g.hom)
+      homEquiv_naturality_right f g :=
+        Mod.hom_ext _ _ (adj.homEquiv_naturality_right f.hom g.hom) }
+
+lemma modAdjunction_homEquiv_apply_hom {M : Mod C A} {N : Mod D B}
+    (f : (adj.modLeft φ).obj M ⟶ N) :
+    ((adj.modAdjunction φ).homEquiv M N f).hom = adj.homEquiv _ _ f.hom := by
+  simp [modAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+
+end Adjunction
+
+end CategoryTheory

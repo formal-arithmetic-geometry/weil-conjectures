@@ -167,4 +167,64 @@ lemma μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous (S T : Sheaf K A
     sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app, comp_μ, comp_μ] at h
   simpa using h.symm
 
+/-- The componentwise form of
+`CategoryTheory.Functor.μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous`. -/
+@[reassoc]
+lemma μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app (S T : Sheaf K A) (U : Cᵒᵖ) :
+    (LaxMonoidal.μ (sheafToPresheaf J A) ((F.sheafPushforwardContinuous A J K).obj S)
+        ((F.sheafPushforwardContinuous A J K).obj T)).app U ≫
+      (LaxMonoidal.μ (F.sheafPushforwardContinuous A J K) S T).hom.app U =
+    (LaxMonoidal.μ (sheafToPresheaf K A) S T).app (F.op.obj U) := by
+  have := congr_app (μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous F J K S T) U
+  simp only [NatTrans.comp_app] at this
+  exact this.trans (by simp; exact Category.id_comp _)
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+open Sheaf
+
+variable {A : Type u₂} [Category.{v₂} A] [MonoidalCategory A] [BraidedCategory A]
+
+attribute [local instance] Sheaf.monoidalCategory
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology E)
+  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A] [(K.W (A := A)).IsMonoidal]
+  [HasWeakSheafify K A] [(L.W (A := A)).IsMonoidal] [HasWeakSheafify L A]
+
+/-- The identification `G_* ⋙ F_* ≅ FG_*` of pushforwards of sheaves along `F ⋙ G ≅ FG` is a
+monoidal natural isomorphism. -/
+instance isMonoidal_sheafPushforwardContinuousComp' {F : C ⥤ D} {G : D ⥤ E} {FG : C ⥤ E}
+    (e : F ⋙ G ≅ FG) [F.IsContinuous J K] [G.IsContinuous K L] [FG.IsContinuous J L] :
+    NatTrans.IsMonoidal (sheafPushforwardContinuousComp' e A J K L).hom where
+  unit := by
+    rw [ε_sheafPushforwardContinuous_of_iso_comp A J K L e, comp_ε, Category.assoc]
+  tensor X Y := by
+    apply tensor_hom_ext
+    rw [Functor.map_comp, Functor.map_comp, ← μ_natural_assoc]
+    ext U
+    simpa [sheafPushforwardContinuousComp', sheafPushforwardContinuousComp,
+      μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app_assoc,
+      μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app] using
+      ((Functor.LaxMonoidal.μ (sheafToPresheaf L A) X Y).naturality (e.inv.app U.unop).op).symm
+
+/-- The identification `F_* ≅ 𝟭` of the pushforward along `F ≅ 𝟭` is a monoidal natural
+isomorphism. -/
+instance isMonoidal_sheafPushforwardContinuousId' {F : C ⥤ C} (e : F ≅ 𝟭 C)
+    [F.IsContinuous J J] :
+    NatTrans.IsMonoidal (sheafPushforwardContinuousId' e A J).hom where
+  unit := by
+    rw [ε_sheafPushforwardContinuous_of_iso_id A J e, Iso.inv_hom_id_app]
+    rfl
+  tensor X Y := by
+    apply tensor_hom_ext
+    rw [Functor.map_comp, Functor.map_comp, ← μ_natural_assoc]
+    ext U
+    simpa [sheafPushforwardContinuousId', sheafPushforwardContinuousId,
+      μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app_assoc,
+      μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app] using
+      ((Functor.LaxMonoidal.μ (sheafToPresheaf J A) X Y).naturality (e.inv.app U.unop).op).symm
+
 end CategoryTheory.Functor
