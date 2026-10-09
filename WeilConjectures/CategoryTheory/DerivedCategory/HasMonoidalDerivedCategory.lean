@@ -12,6 +12,9 @@ public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 
 /-!
 
@@ -47,25 +50,21 @@ product is additive, and `Λ`-linear if the tensor product of `A` is, in each va
 - `DerivedCategory.monoidalPreadditive`, `DerivedCategory.monoidalLinear`: the derived tensor
   product is additive, and `Λ`-linear if the tensor product of `A` is, in each variable.
 
-## TODO
+## Implementation notes
 
-The proofs are currently `sorry`.
-
-`hasDerivedMonoidalCategory` should go through the K-flat route already available in
+`hasDerivedMonoidalCategory` is the K-flat route of
 `WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat`: the hypotheses above give
 `(HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure`
-(this part is already proved, in `WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat`),
-and the instance `CategoryTheory.MorphismProperty.instHasDerivedMonoidalCategory` then applies.
-What remains is to discharge the ambient graded-object and colimit side conditions from
-`MonoidalClosed A` and `IsGrothendieckAbelian A` rather than assuming them.
+(`WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat`), once `- ⊗ X` is known to preserve
+`ℤ`-indexed colimits, which follows from the closedness and the braiding.
 
-`monoidalLinear` should be proved on K-flat representatives. Since `r • f = f ≫ (r • 𝟙 _)`, it
-suffices that `(r • 𝟙 K) ▷ L = r • 𝟙 (K ⊗ᴸ L)` and symmetrically. By
-`isLeftDerivedFunctor₂CurriedTensor`, on K-flat complexes `K ⊗ᴸ -` is the localization of the
-tensor product of complexes, which is `Λ`-linear by `MonoidalLinear Λ A`, and `DerivedCategory.Qh`
-is `Λ`-linear. `monoidalPreadditive` is the same argument with `ℤ` in place of `Λ`; once
-`monoidalLinear` is proved it follows directly, although Mathlib has no general instance
-`MonoidalLinear ℤ C → MonoidalPreadditive C`.
+The additivity and linearity are proved on K-flat representatives. For a K-flat complex `P`,
+the functor `Qh.obj P ⊗ᴸ -` is induced through the localization `Qh` by `(P ⊗ -) ⋙ Qh`
+(`DerivedCategory.isIso_tensorLeftCounit`). The functor `P ⊗ -` on the homotopy category is
+additive (it is triangulated) and `Λ`-linear (`WeilConjectures.Algebra.Homology.BifunctorLinear`),
+so `Qh.obj P ⊗ᴸ -` is additive and `Λ`-linear by `Localization.functor_additive_iff` and
+`Localization.functor_linear_iff`. Every object of `D(A)` is isomorphic to `Qh.obj P` for a
+K-flat `P` (`DerivedCategory.exists_kFlat_iso`), and the same holds for `- ⊗ᴸ K`.
 
 -/
 
@@ -86,25 +85,98 @@ resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived mono
 structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` is monoidal,
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
 instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
-    Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
-  sorry
+    Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) := by
+  have (X : A) : PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
+  exact ((HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).kFlat_derivesMonoidal
+    Qh).hasDerivedMonoidalCategory
+
+variable {A} [Abelian.HasFunctorialFlatResolution A]
+
+/-- The derived tensor product `K ⊗ᴸ -` is additive. -/
+lemma additive_tensorLeft (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).obj K).Additive := by
+  obtain ⟨P, hP, ⟨e⟩⟩ := exists_kFlat_iso K
+  have := isIso_tensorLeftCounit P hP
+  have : (Qh ⋙ (curriedTensor (DerivedCategory A)).obj (Qh.obj P)).Additive :=
+    Functor.additive_of_iso (asIso (tensorLeftCounit P)).symm
+  have : ((curriedTensor (DerivedCategory A)).obj (Qh.obj P)).Additive :=
+    (Localization.functor_additive_iff Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))
+      _).2 this
+  exact Functor.additive_of_iso ((curriedTensor _).mapIso e)
+
+/-- The derived tensor product `- ⊗ᴸ K` is additive. -/
+lemma additive_tensorRight (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).flip.obj K).Additive := by
+  obtain ⟨P, hP, ⟨e⟩⟩ := exists_kFlat_iso K
+  have := isIso_tensorRightCounit P hP
+  have : (Qh ⋙ (curriedTensor (DerivedCategory A)).flip.obj (Qh.obj P)).Additive :=
+    Functor.additive_of_iso (asIso (tensorRightCounit P)).symm
+  have : ((curriedTensor (DerivedCategory A)).flip.obj (Qh.obj P)).Additive :=
+    (Localization.functor_additive_iff Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))
+      _).2 this
+  exact Functor.additive_of_iso ((curriedTensor _).flip.mapIso e)
 
 /-- The derived tensor product is additive in each variable. -/
-instance monoidalPreadditive [Abelian.HasFunctorialFlatResolution A] :
-    MonoidalPreadditive (DerivedCategory A) :=
-  -- Proof sketch: on K-flat complexes, `K ⊗ᴸ -` is the localization of the tensor product of
-  -- complexes, which is additive by `MonoidalPreadditive A`, and `Qh` is additive.
-  -- See the TODO in the module docstring.
-  sorry
+instance monoidalPreadditive : MonoidalPreadditive (DerivedCategory A) where
+  whiskerLeft_zero {K _ _} := by
+    have := additive_tensorLeft K
+    exact ((curriedTensor (DerivedCategory A)).obj K).map_zero _ _
+  zero_whiskerRight {K _ _} := by
+    have := additive_tensorRight K
+    exact ((curriedTensor (DerivedCategory A)).flip.obj K).map_zero _ _
+  whiskerLeft_add {K _ _} _ _ := by
+    have := additive_tensorLeft K
+    exact ((curriedTensor (DerivedCategory A)).obj K).map_add
+  add_whiskerRight {K _ _} _ _ := by
+    have := additive_tensorRight K
+    exact ((curriedTensor (DerivedCategory A)).flip.obj K).map_add
+
+variable (Λ : Type*) [Ring Λ] [Linear Λ A] [MonoidalLinear Λ A]
+
+/-- If the tensor product of `A` is `Λ`-linear, then the derived tensor product `K ⊗ᴸ -` is
+`Λ`-linear. -/
+lemma linear_tensorLeft (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).obj K).Linear Λ := by
+  obtain ⟨P, hP, ⟨e⟩⟩ := exists_kFlat_iso K
+  have := isIso_tensorLeftCounit P hP
+  let : Localization.Lifting Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))
+      ((curriedTensor _).obj P ⋙ Qh) ((curriedTensor _).obj (Qh.obj P)) :=
+    ⟨asIso (tensorLeftCounit P)⟩
+  have : ((curriedTensor (HomotopyCategory A (.up ℤ))).obj P ⋙ Qh).Linear Λ :=
+    show (((curriedTensor A).bifunctorMapHomotopyCategory
+      (.up ℤ) (.up ℤ) (.up ℤ)).obj P ⋙ Qh (C := A)).Linear Λ from inferInstance
+  have : ((curriedTensor (DerivedCategory A)).obj (Qh.obj P)).Linear Λ :=
+    (Localization.functor_linear_iff Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) Λ
+      ((curriedTensor _).obj P ⋙ Qh) _).1 this
+  exact Functor.linear_of_iso _ ((curriedTensor _).mapIso e)
+
+/-- If the tensor product of `A` is `Λ`-linear, then the derived tensor product `- ⊗ᴸ K` is
+`Λ`-linear. -/
+lemma linear_tensorRight (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).flip.obj K).Linear Λ := by
+  obtain ⟨P, hP, ⟨e⟩⟩ := exists_kFlat_iso K
+  have := isIso_tensorRightCounit P hP
+  let : Localization.Lifting Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))
+      ((curriedTensor _).flip.obj P ⋙ Qh) ((curriedTensor _).flip.obj (Qh.obj P)) :=
+    ⟨asIso (tensorRightCounit P)⟩
+  have : ((curriedTensor (HomotopyCategory A (.up ℤ))).flip.obj P ⋙ Qh).Linear Λ :=
+    show (((curriedTensor A).bifunctorMapHomotopyCategory
+      (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj P ⋙ Qh (C := A)).Linear Λ from inferInstance
+  have : ((curriedTensor (DerivedCategory A)).flip.obj (Qh.obj P)).Linear Λ :=
+    (Localization.functor_linear_iff Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) Λ
+      ((curriedTensor _).flip.obj P ⋙ Qh) _).1 this
+  exact Functor.linear_of_iso _ ((curriedTensor _).flip.mapIso e)
 
 /-- If the tensor product of `A` is `Λ`-linear in each variable, so is the derived tensor
 product on `D(A)`. -/
-instance monoidalLinear [Abelian.HasFunctorialFlatResolution A] (Λ : Type*) [Ring Λ] [Linear Λ A]
-    [MonoidalLinear Λ A] :
-    MonoidalLinear Λ (DerivedCategory A) :=
-  -- Proof sketch: it suffices that `(r • 𝟙 K) ▷ L = r • 𝟙 (K ⊗ᴸ L)` and symmetrically, which
-  -- holds on K-flat representatives, where `⊗ᴸ` is the localization of the `Λ`-linear tensor
-  -- product of complexes. See the TODO in the module docstring.
-  sorry
+instance monoidalLinear : MonoidalLinear Λ (DerivedCategory A) where
+  whiskerLeft_smul K _ _ r f := by
+    have := linear_tensorLeft Λ K
+    exact ((curriedTensor (DerivedCategory A)).obj K).map_smul r f
+  smul_whiskerRight r _ _ f K := by
+    have := linear_tensorRight Λ K
+    exact ((curriedTensor (DerivedCategory A)).flip.obj K).map_smul r f
 
 end DerivedCategory

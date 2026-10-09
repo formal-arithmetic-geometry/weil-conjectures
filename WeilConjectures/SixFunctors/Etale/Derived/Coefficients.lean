@@ -82,14 +82,15 @@ def DerivedCategory.boundedConstructibleFiniteTor :
   DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
     DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
 
-/-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
-with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of
-the Tate object is invertible in this sense, and these are the only invertible objects that
-occur in the purity chapter. -/
+/-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a two-sided tensor inverse: there
+is an `M` with `L ⊗^L M ≅ Λ_X` and `M ⊗^L L ≅ Λ_X`. A lisse rank-one sheaf placed in any degree
+and twisted by any power of the Tate object is invertible in this sense, and these are the only
+invertible objects that occur in the purity chapter. -/
 def DerivedCategory.isInvertible :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   fun L ↦ ∃ M, Nonempty
-    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj M ≅ constantComplex Λ X)
+    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj M ≅ constantComplex Λ X) ∧ Nonempty
+    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj L ≅ constantComplex Λ X)
 
 /-- Reduction of coefficients along a quotient of the coefficient ring: the functor
 `K ↦ K ⊗^L (Λ/J)_X` on `D(X_ét, Λ)`. For `Λ = A_{E,n}` and `J = ϖ^m` this is the finite
