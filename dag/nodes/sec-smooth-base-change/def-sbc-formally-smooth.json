@@ -2,13 +2,14 @@
  "id": "def-sbc-formally-smooth",
  "kind": "definition",
  "title": "Formally smooth morphisms of schemes",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-weil-pbc-scheme-conventions]. $f$ is *formally smooth* if for every first order thickening $T\\subset T'$ of affine schemes over $S$ [def-sbc-first-order-thickening] (so $T'$ is affine, $T'\\to S$ is given, and $T\\to S$ is its restriction) and every morphism $a:T\\to X$ over $S$, there exists a morphism $a':T'\\to X$ over $S$ whose restriction to $T$ is $a$, i.e. $a'\\circ i=a$ and $f\\circ a'$ is the given morphism $T'\\to S$: every solid commutative square\n\n$$\n\\begin{array}{ccc} X & \\xleftarrow{a} & T\\\\ f\\big\\downarrow & & \\big\\downarrow i\\\\ S & \\longleftarrow & T' \\end{array}\n$$\n\nadmits a dotted arrow $T'\\to X$ making both triangles commute.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. $f$ is *formally smooth* if for every first order thickening $T\\subset T'$ of affine schemes over $S$ [def-sbc-first-order-thickening] (so $T'$ is an affine scheme with a given morphism $T'\\to S$, $i:T\\to T'$ is the closed immersion, and $T$ is an $S$-scheme via the composite $T\\to T'\\to S$ [def-weil-scheme-over-base]) and every morphism $a:T\\to X$ over $S$, i.e. with $f\\circ a$ equal to the composite $T\\xrightarrow{i}T'\\to S$, there exists a morphism $a':T'\\to X$ over $S$ whose restriction to $T$ is $a$, i.e. $a'\\circ i=a$ and $f\\circ a'$ is the given morphism $T'\\to S$: every solid commutative square\n\n$$\n\\begin{array}{ccc} X & \\xleftarrow{a} & T\\\\ f\\big\\downarrow & & \\big\\downarrow i\\\\ S & \\longleftarrow & T' \\end{array}\n$$\n\nadmits a dotted arrow $T'\\to X$ making both triangles commute.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Definition 37.11.1 (label definition-formally-smooth), Tag 02H0"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
   "def-sbc-first-order-thickening"
  ],
  "proof": [],
@@ -35,10 +36,38 @@
    "results": "only def-sbc-smooth-morphisms (this item); no definition node",
    "date": "2026-10-09",
    "verdict": "no existing node"
+  },
+  {
+   "tool": "grep",
+   "query": "'^class\\|^def \\|^abbrev ' in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and FormallyUnramified.lean; -rln 'FormallySmooth' Mathlib/",
+   "results": "scheme-level classes: AlgebraicGeometry.Smooth (Smooth.lean:62, affine-locally RingHom.Smooth), SmoothOfRelativeDimension (line 135), Scheme.Hom.smoothLocus (line 305), AlgebraicGeometry.FormallyUnramified (FormallyUnramified.lean:54, affine-locally RingHom.FormallyUnramified, with the lifting criterion FormallyUnramified.hom_ext / of_hom_ext). Files mentioning FormallySmooth: only RingTheory/Smooth/*, RingTheory/RingHom/Smooth.lean, RingTheory/Etale/*, and AlgebraicGeometry/Morphisms/Smooth.lean (stalk statements only). No AlgebraicGeometry.FormallySmooth and no AlgebraicGeometry.FormallyEtale.",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no scheme-level formally smooth morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "'def FormallySmooth\\|propertyIsLocal\\|OfLocalizationSpan' in Mathlib/RingTheory/RingHom/Smooth.lean",
+   "results": "line 31: def RingHom.FormallySmooth f := Algebra.FormallySmooth R S (via f.toAlgebra); it has StableUnderComposition, RespectsIso, IsStableUnderBaseChange, HoldsForLocalizationAway, LocalizationPreserves (lines 45-69), but no PropertyIsLocal / OfLocalizationSpanTarget (those exist only for RingHom.Smooth, lines 131-147), so no HasRingHomProperty instance for an affine-local scheme version either",
+   "date": "2026-10-09",
+   "verdict": "no match: the ring-hom notion exists; an affine-local scheme version would agree with this lifting definition only by Stacks Lemma 37.11.5 (Tag 0D0F, more-morphisms.tex label lemma-formally-smooth), a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "'iff_comp_surjective\\|comp_surjective' in Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "Algebra.FormallySmooth.iff_comp_surjective (line 371): A formally smooth over R iff every R-algebra map A -> B/I with I^2 = 0 lifts to A -> B. This is exactly the affine case T = Spec(B/I), T' = Spec B, X = Spec A, S = Spec R of the scheme definition (Stacks 00TI vs 02H0)",
+   "date": "2026-10-09",
+   "verdict": "no match (affine special case only)"
+  },
+  {
+   "tool": "grep",
+   "query": "'HasLiftingProperty\\|infinitesimal\\|square.zero' in Mathlib/AlgebraicGeometry/",
+   "results": "no HasLiftingProperty in AlgebraicGeometry; 'infinitesimal thickening' only in the docstring of FormallyUnramified.hom_ext (FormallyUnramified.lean:189)",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +85,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-sbc-formally-smooth",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks more-morphisms.tex Definition 37.11.1 (Tag 02H0, label definition-formally-smooth): it agrees; I made explicit that $T$ is over $S$ through $T\\to T'\\to S$ and that $a$ being over $S$ means $f\\circ a=(T'\\to S)\\circ i$. Statement dependencies replaced: def-weil-pbc-scheme-conventions (an unsplit bundle of morphism properties none of which this definition uses) by def-pc-scheme (schemes, morphisms, affine schemes) and def-weil-scheme-over-base (S-schemes, S-morphisms); kept def-sbc-first-order-thickening (first order thickening of affine schemes over S, being split by another worker, not edited). Restriction $a'|_T=a'\\circ i$ is composition, nothing further. No new node: every notion already has a node. Mathlib: no scheme-level FormallySmooth class (only AlgebraicGeometry.FormallyUnramified and Smooth); Algebra.FormallySmooth / RingHom.FormallySmooth exist at ring level, with the lifting criterion Algebra.FormallySmooth.iff_comp_surjective giving the affine case; RingHom.FormallySmooth has no PropertyIsLocal in Mathlib, so even an affine-local scheme version is missing; the comparison with the lifting definition is Stacks Lemma 37.11.5 (Tag 0D0F), a theorem. The node stays without a Mathlib match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
