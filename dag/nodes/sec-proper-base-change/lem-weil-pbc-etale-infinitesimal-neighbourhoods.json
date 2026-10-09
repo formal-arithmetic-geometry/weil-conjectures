@@ -14,9 +14,76 @@
   "def-pc-base-change",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in g^{-1}(Z)$ and put $s=g(x)$. By etale locality on source and target [lem-weil-pbc-etale-locality] we may replace $S$ by an affine neighbourhood of $s$ and $X$ by an affine neighbourhood of $x$. Passing to the local rings at these points gives the finite-type local homomorphism $A=\\mathcal O_{S,s}\\to B=\\mathcal O_{X,x}$; Noetherianity follows from [pqf-def-locnoeth].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 0A43, proof of (2), localization at a point"
+   }
+  },
+  {
+   "text": "Let $I=\\mathcal J_s\\subseteq\\mathfrak m_A$. The stalk of the $(n+1)$-fold ideal product is the product of the stalks, so $(\\mathcal J^{n+1})_s=I^{n+1}$; pulling the ideal back along $A\\to B$ gives $I^{n+1}B$. Hence the pullbacks of $Z_n$ and $X_n=Z_n\\times_SX$ to the chosen local schemes are respectively $\\operatorname{Spec}(A/I^{n+1})$ and $\\operatorname{Spec}(B/I^{n+1}B)$. By [lem-weil-pbc-etale-locality], etaleness of $X_n\\to Z_n$ at $x$ is exactly etaleness of this local ring map at $\\mathfrak q=\\mathfrak m_B$ (the point induced by $x$). Thus every quotient map in the criterion is etale at $\\mathfrak q$.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-pc-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 0A43, proof of (2), identification of infinitesimal neighbourhoods after localization"
+   }
+  },
+  {
+   "text": "Apply the Artinian infinitesimal criterion for etaleness at a point to the local map $\\mathcal O_{S,s}\\to\\mathcal O_{X,x}$; it follows that $g$ is etale at $x$.",
+   "uses": [
+    "lem-weil-pbc-etale-artinian-point-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 0A43, proof of (2), Lemma lemma-lifting-along-artinian-at-point"
+   }
+  },
+  {
+   "text": "By the finite-type locally Noetherian etale-locus openness node [lem-weil-pbc-etale-locus-open] (Stacks 0476 and 0A43), the etale locus of $g$ is open. Taking it as $W$ (or the union of its neighbourhoods) gives an open subscheme containing $g^{-1}(Z)$, and $g|_W$ is etale.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 0A43, conclusion of part (2); etale locus openness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-base-change",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-artinian-point-criterion",
+  "lem-weil-pbc-etale-locality",
+  "lem-weil-pbc-etale-locus-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 0A43 (2), reconstructed from the cited Artinian lifting lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +128,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0A43(2) criterion into localization, identification of the local Artinian thickenings, application of the newly created Artinian point criterion, and openness of the etale locus. Mathlib searches found no matching infinitesimal-neighbourhood theorem; the proof is agent-written from the cited source route."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed four proof steps against More on Morphisms 0A43(2), including Artinian criterion, stalk quotients, and etale-locus openness; five support nodes are properly classified and searched, with route fields intact."
+ }
 }
