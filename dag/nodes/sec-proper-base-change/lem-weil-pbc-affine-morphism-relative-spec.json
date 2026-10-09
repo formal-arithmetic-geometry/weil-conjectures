@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-affine-morphism-relative-spec",
+ "kind": "statement",
+ "title": "Affine morphisms and quasi-coherent algebras (relative spectrum)",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. A *quasi-coherent $\\mathcal O_S$-algebra* is a sheaf $\\mathcal A$ of commutative $\\mathcal O_S$-algebras whose underlying $\\mathcal O_S$-module is quasi-coherent [pqf-def-coherent]. (1) If $f:X\\to S$ is an affine morphism [pqf-def-affine-morphism], then $f_*\\mathcal O_X$ is a quasi-coherent $\\mathcal O_S$-algebra. (2) For every quasi-coherent $\\mathcal O_S$-algebra $\\mathcal A$ there are an affine morphism $\\pi:X\\to S$ (the relative spectrum $\\underline{\\operatorname{Spec}}_S(\\mathcal A)$) and an isomorphism of $\\mathcal O_S$-algebras $\\alpha:\\mathcal A\\xrightarrow{\\sim}\\pi_*\\mathcal O_X$ such that for every affine open $U\\subseteq S$ the morphism $\\pi^{-1}(U)\\to\\operatorname{Spec}\\mathcal A(U)$ corresponding (morphisms into an affine scheme) to the ring map $\\alpha_U:\\mathcal A(U)\\to\\Gamma(\\pi^{-1}(U),\\mathcal O_X)$ is an isomorphism of schemes; in particular $\\pi^{-1}(U)$ is affine. (3) The functor $(f:X\\to S)\\mapsto f_*\\mathcal O_X$, on morphisms $(h:X\\to X'\\text{ over }S)\\mapsto(f'_*h^\\sharp:f'_*\\mathcal O_{X'}\\to f_*\\mathcal O_X)$, is an anti-equivalence from the category of schemes affine over $S$ (morphisms: $S$-morphisms) to the category of quasi-coherent $\\mathcal O_S$-algebras, with quasi-inverse $\\mathcal A\\mapsto\\underline{\\operatorname{Spec}}_S(\\mathcal A)$ of (2); for an algebra map $\\varphi:\\mathcal A\\to\\mathcal B$ and an affine open $U\\subseteq S$, the restriction of the corresponding $S$-morphism $\\underline{\\operatorname{Spec}}_S(\\mathcal B)\\to\\underline{\\operatorname{Spec}}_S(\\mathcal A)$ over $U$ is, under the identifications of (2), $\\operatorname{Spec}(\\varphi_U):\\operatorname{Spec}\\mathcal B(U)\\to\\operatorname{Spec}\\mathcal A(U)$. (4) The anti-equivalence is compatible with restriction to an open $V\\subseteq S$: $\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\times_SV=\\pi^{-1}(V)=\\underline{\\operatorname{Spec}}_V(\\mathcal A|_V)$ and $(f_*\\mathcal O_X)|_V=(f|_{f^{-1}(V)})_*\\mathcal O_{f^{-1}(V)}$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01S8 (lemma-characterize-affine, line 1736) and Lemma 01SA (lemma-affine-equivalence-algebras, line 1818); Constructions, Definition 01LW (definition-relative-spec) and Lemma 01LX (lemma-spec-properties), literature/stacks-project/constructions.tex section-spec (line 428 ff.), with the construction by relative glueing (Constructions, Lemma 01LH)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative spectrum of a quasi-coherent sheaf of algebras on a scheme",
+   "results": "AffineScheme, Spec_sheaf, Spec, isAffine_Spec, Spec.structureSheaf (Mathlib.AlgebraicGeometry.*); nothing relative",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "anti-equivalence between schemes affine over S and quasi-coherent sheaves of O_S-algebras, f -> f_* O_X",
+   "results": "AffineScheme.ΓIsEquiv, AffineSpace.toSpecMvPolyIntEquiv, Scheme.AffineZariskiSite.sheafEquiv, AffineScheme.forgetToScheme, AffineScheme.Spec (absolute case only)",
+   "date": "2026-10-10",
+   "verdict": "no match (only the absolute case S = Spec Z: AffineScheme ≃ CommRingCatᵒᵖ)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'RelativeSpec\\|relativeSpec\\|relative spec\\|01LL\\|01LW\\|01LX\\|01S8\\|01SA' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none; Mathlib/AlgebraicGeometry/RelativeGluing.lean has the relative glueing lemma (Stacks 01LH, Scheme.Cover relative gluing data over a locally directed open cover), which is the construction step of the relative spectrum; IsAffineHom in Morphisms/Affine.lean; no quasi-coherent sheaves of algebras",
+   "date": "2026-10-10",
+   "verdict": "no match (relative glueing 01LH present, usable for the split)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-affine-transition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

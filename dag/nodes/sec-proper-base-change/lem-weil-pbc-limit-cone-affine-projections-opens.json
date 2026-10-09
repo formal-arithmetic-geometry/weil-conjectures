@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-limit-cone-affine-projections-opens",
+ "kind": "statement",
+ "title": "Projections of a limit with affine transition maps are affine; limits restrict to opens of a stage",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ ($i\\ge i'$) an inverse system of schemes [def-pc-scheme] over $I$ with affine transition morphisms [pqf-def-affine-morphism], and let $(S,(f_i)_{i\\in I})$ be a limit of the system in the category of schemes [def-weil-pbc-category-colimit]. Then (1) each projection $f_i:S\\to S_i$ is affine; (2) for every $0\\in I$ and every open $U_0\\subseteq S_0$, the open subschemes $f_{i0}^{-1}(U_0)\\subseteq S_i$ ($i\\ge0$) with the restricted transition morphisms $f_{i0}^{-1}(U_0)\\to f_{i'0}^{-1}(U_0)$ ($i\\ge i'\\ge0$) form an inverse system over $I_{\\ge0}$ whose transition morphisms are affine, and $f_0^{-1}(U_0)\\subseteq S$ with the restricted projections $f_0^{-1}(U_0)\\to f_{i0}^{-1}(U_0)$ is its limit in the category of schemes.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit, line 58), parts (1) and (2), given that the limit exists"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection from the limit of a cofiltered diagram of schemes with affine transition maps is affine",
+   "results": "AlgebraicGeometry.isAffineHom_π_app (Mathlib.AlgebraicGeometry.AffineTransitionLimit), Scheme.isAffine_of_isLimit, exists_appTop_π_eq_of_isAffine_of_isLimit, Scheme.exists_isAffine_of_isLimit, exists_isAffineOpen_preimage_eq",
+   "date": "2026-10-10",
+   "verdict": "match for (1): isAffineHom_π_app"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isLimitOpensCone",
+   "results": "AlgebraicGeometry.isLimitOpensCone {I} [Category.{u,u} I] (D : I ⥤ Scheme) (c : Cone D) (hc : IsLimit c) [IsCofiltered I] (i : I) (U : (D.obj i).Opens) : IsLimit (opensCone D c i U) (Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "match for (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'opensDiagram\\|opensCone\\|isLimitOpensCone\\|isAffineHom_π_app\\|IsAffineHom ((opensDiagram' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (read lines 196-370)",
+   "results": "opensDiagram D i U : Over i ⥤ Scheme, j ↦ D.map j.hom ⁻¹ᵁ U (line 203); opensCone, pt := c.π.app i ⁻¹ᵁ U, π.app j := resLE (line ~220); isLimitOpensCone (line 231); instance IsAffineHom ((opensDiagram D i U).map f) under affine transitions (line 243); isAffineHom_π_app (line 363)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.isLimitOpensCone",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "how": "one Mathlib declaration per clause, for the diagram D : I^op ⥤ Scheme of the inverse system (I^op cofiltered since I is a nonempty directed set) with the limit cone c: (1) isAffineHom_π_app (line 363) gives IsAffineHom (c.π.app i); (2) isLimitOpensCone (line 231) says the cone opensCone D c i U (point c.π.app i ⁻¹ᵁ U, legs the restrictions resLE) is a limit of opensDiagram D i U : Over i ⥤ Scheme, j ↦ D.map j.hom ⁻¹ᵁ U, and Over i for the poset I^op is the poset I_{≥i}; the restricted transition maps are affine by the instance at line 243. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-affine-transition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: AlgebraicGeometry.isAffineHom_π_app and isLimitOpensCone with opensDiagram (AffineTransitionLimit.lean:203-363), one per clause."
+ }
+}
