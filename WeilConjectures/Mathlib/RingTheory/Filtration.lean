@@ -251,6 +251,156 @@ lemma lTensor_inclusion_injective_of_smul_le (hQ : ∀ (N : Type u) [AddCommGrou
   rw [hk', ← LinearMap.comp_apply, ← LinearMap.lTensor_comp, hzero]
   simp
 
+/-- **Relative purity over a flat module.** Let `F` be flat, `K ≤ F` containing `I F`, and assume
+`M ⊗ N' → M ⊗ N` is injective for `N' ≤ N` killed by `I`. Then every element of the kernel of
+`M ⊗ K → M ⊗ F` is a sum of images of `k ⊗ f`, `k` in the kernel of `M ⊗ I → M`, under
+`M ⊗ I → M ⊗ K`, `m ⊗ i ↦ m ⊗ i f`. We state this as: a linear map `ψ` out of `M ⊗ K` killing
+all these images kills the kernel. -/
+lemma map_eq_zero_of_lTensor_subtype_eq_zero_of_flat
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+      ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
+    {F : Type u} [AddCommGroup F] [Module R F] [Flat R F] (K : Submodule R F)
+    (hK : I • (⊤ : Submodule R F) ≤ K) {X : Type*} [AddCommGroup X] [Module R X]
+    (ψ : M ⊗[R] K →ₗ[R] X)
+    (hψ : ∀ k : M ⊗[R] I, TensorProduct.rid R M (I.subtype.lTensor M k) = 0 → ∀ f : F,
+      ψ ((((toSpanSingleton R F f) ∘ₗ I.subtype).codRestrict K
+        fun i ↦ hK (Submodule.smul_mem_smul i.2 trivial)).lTensor M k) = 0)
+    (z : M ⊗[R] K) (hz : K.subtype.lTensor M z = 0) : ψ z = 0 := by
+  set P := I • (⊤ : Submodule R F)
+  let K' : Submodule R (F ⧸ P) := K.map P.mkQ
+  let q : K →ₗ[R] K' := (P.mkQ.restrict fun x hx ↦ Submodule.mem_map_of_mem hx)
+  have hq : Function.Surjective q := by
+    rintro ⟨_, x, hx, rfl⟩
+    exact ⟨⟨x, hx⟩, rfl⟩
+  have hex : Function.Exact (Submodule.inclusion hK) q := by
+    intro x
+    constructor
+    · intro h
+      have : (x : F) ∈ P := by
+        simpa [q, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero] using congr(($h : F ⧸ P))
+      exact ⟨⟨x, this⟩, rfl⟩
+    · rintro ⟨y, rfl⟩
+      apply Subtype.ext
+      simp [q, (Submodule.Quotient.mk_eq_zero P).mpr y.2]
+  have hkill : ∀ i ∈ I, ∀ n : F ⧸ P, i • n = 0 := by
+    intro i hi n
+    induction n using Submodule.Quotient.induction_on with
+    | H n =>
+      rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero]
+      exact Submodule.smul_mem_smul hi trivial
+  have hQ' := hQ _ hkill K'
+  have hcomm : K'.subtype ∘ₗ q = P.mkQ ∘ₗ K.subtype := by ext; rfl
+  have h1 : q.lTensor M z = 0 := by
+    apply hQ'
+    rw [map_zero, ← LinearMap.comp_apply, ← LinearMap.lTensor_comp, hcomm,
+      LinearMap.lTensor_comp, LinearMap.comp_apply, hz, map_zero]
+  obtain ⟨u, rfl⟩ := ((_root_.lTensor_exact M hex hq) z).1 h1
+  have h2 : P.subtype.lTensor M u = 0 := by
+    rw [← hz, ← LinearMap.comp_apply, ← LinearMap.lTensor_comp]
+    rfl
+  -- `ν : I ⊗ F → I F` is surjective.
+  let ν : I ⊗[R] F →ₗ[R] P := (TensorProduct.lid R F ∘ₗ I.subtype.rTensor F).codRestrict P
+    fun x ↦ by
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add]; exact Submodule.add_mem _ hx hy
+      | tmul i f => exact Submodule.smul_mem_smul i.2 trivial
+  have hν : Function.Surjective ν := by
+    rintro ⟨y, hy⟩
+    induction hy using Submodule.smul_induction_on' with
+    | smul i hi f _ => exact ⟨⟨i, hi⟩ ⊗ₜ f, rfl⟩
+    | add x hx y hy hx' hy' =>
+      obtain ⟨a, ha⟩ := hx'
+      obtain ⟨b, hb⟩ := hy'
+      exact ⟨a + b, by rw [map_add, ha, hb]; rfl⟩
+  obtain ⟨v, rfl⟩ := LinearMap.lTensor_surjective M hν u
+  set μ : M ⊗[R] I →ₗ[R] M := (TensorProduct.rid R M).toLinearMap ∘ₗ I.subtype.lTensor M
+  have hΦ : (P.subtype ∘ₗ ν).lTensor M ∘ₗ (TensorProduct.assoc R M I F).toLinearMap =
+      μ.rTensor F := by
+    ext m i f
+    simp [ν, μ, smul_tmul]
+  have hΨ : μ.rTensor F ((TensorProduct.assoc R M I F).symm v) = 0 := by
+    rw [← hΦ, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.apply_symm_apply,
+      LinearMap.lTensor_comp, LinearMap.comp_apply, h2]
+  have hexμ : Function.Exact (LinearMap.ker μ).subtype μ := LinearMap.exact_subtype_ker_map μ
+  obtain ⟨w, hw⟩ := ((rTensor_exact F hexμ) _).1 hΨ
+  rw [← LinearEquiv.apply_symm_apply (TensorProduct.assoc R M I F) v, ← hw]
+  have key (t : M ⊗[R] I) (f : F) :
+      (Submodule.inclusion hK).lTensor M (ν.lTensor M (TensorProduct.assoc R M I F (t ⊗ₜ f))) =
+        (((toSpanSingleton R F f) ∘ₗ I.subtype).codRestrict K
+          fun i ↦ hK (Submodule.smul_mem_smul i.2 trivial)).lTensor M t := by
+    induction t with
+    | zero => simp
+    | add x y hx hy => rw [add_tmul, map_add, map_add, map_add, hx, hy, map_add]
+    | tmul m i => rfl
+  clear hw
+  induction w with
+  | zero => simp
+  | add x y hx hy => simp only [map_add, hx, hy, add_zero]
+  | tmul k f =>
+    rw [LinearMap.rTensor_tmul, Submodule.subtype_apply, key]
+    exact hψ k k.2 f
+
+/-- **Relative purity** (the surjectivity in Stacks, Tag 00MO). Assume `M ⊗ N' → M ⊗ N` is
+injective for `N' ≤ N` killed by `I`. Let `L ≤ N` contain `I N`, and suppose that for every `k` in
+the kernel of `M ⊗ I → M` and every `n : N` the image of `k` under `M ⊗ I → M ⊗ L`,
+`m ⊗ i ↦ m ⊗ i n`, vanishes. Then `M ⊗ L → M ⊗ N` is injective. -/
+theorem lTensor_subtype_injective_of_forall_ker
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+      ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
+    {N : Type u} [AddCommGroup N] [Module R N] (L : Submodule R N)
+    (hL : I • (⊤ : Submodule R N) ≤ L)
+    (hK : ∀ k : M ⊗[R] I, TensorProduct.rid R M (I.subtype.lTensor M k) = 0 → ∀ n : N,
+      (((toSpanSingleton R N n) ∘ₗ I.subtype).codRestrict L
+        fun i ↦ hL (Submodule.smul_mem_smul i.2 trivial)).lTensor M k = 0) :
+    Function.Injective (L.subtype.lTensor M) := by
+  let F := N →₀ R
+  let φ : F →ₗ[R] N := Finsupp.linearCombination R id
+  have hφ : Function.Surjective φ := fun x ↦
+    ⟨Finsupp.single x 1, by rw [Finsupp.linearCombination_single, one_smul]; rfl⟩
+  let LF : Submodule R F := L.comap φ
+  have hLF : I • (⊤ : Submodule R F) ≤ LF := by
+    rw [Submodule.smul_le]
+    intro i hi f _
+    change φ (i • f) ∈ L
+    rw [map_smul]
+    exact hL (Submodule.smul_mem_smul hi trivial)
+  let φL : LF →ₗ[R] L := φ.restrict fun x hx ↦ hx
+  have hφL : Function.Surjective φL := by
+    rintro ⟨y, hy⟩
+    obtain ⟨x, rfl⟩ := hφ y
+    exact ⟨⟨x, hy⟩, rfl⟩
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  obtain ⟨y, rfl⟩ := LinearMap.lTensor_surjective M hφL x
+  have hsq : L.subtype ∘ₗ φL = φ ∘ₗ LF.subtype := by ext; rfl
+  have hz : φ.lTensor M (LF.subtype.lTensor M y) = 0 := by
+    rw [← LinearMap.comp_apply (φ.lTensor M), ← LinearMap.lTensor_comp, ← hsq,
+      LinearMap.lTensor_comp, LinearMap.comp_apply, hx]
+  have hexφ : Function.Exact (LinearMap.ker φ).subtype φ := LinearMap.exact_subtype_ker_map φ
+  obtain ⟨w, hw⟩ := ((_root_.lTensor_exact M hexφ hφ) _).1 hz
+  have hle : LinearMap.ker φ ≤ LF := fun x hx ↦ by
+    change φ x ∈ L
+    rw [LinearMap.mem_ker.mp hx]
+    exact zero_mem _
+  have hzero : φL ∘ₗ Submodule.inclusion hle = 0 := by
+    ext x
+    exact congr(($(LinearMap.mem_ker.mp x.2) : N))
+  have hw' : φL.lTensor M ((Submodule.inclusion hle).lTensor M w) = 0 := by
+    rw [← LinearMap.comp_apply, ← LinearMap.lTensor_comp, hzero]
+    simp
+  have hdiff : LF.subtype.lTensor M (y - (Submodule.inclusion hle).lTensor M w) = 0 := by
+    rw [map_sub, sub_eq_zero, ← hw, ← LinearMap.comp_apply, ← LinearMap.lTensor_comp]
+    rfl
+  have := map_eq_zero_of_lTensor_subtype_eq_zero_of_flat I hQ LF hLF (φL.lTensor M)
+    (fun k hk f ↦ by
+      rw [← LinearMap.comp_apply, ← LinearMap.lTensor_comp]
+      convert hK k hk (φ f) using 3
+      ext i
+      simp [φL, φ, LinearMap.restrict_apply])
+    _ hdiff
+  rwa [map_sub, hw', sub_zero] at this
+
 /-- If `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M` is injective, then `M ⊗ L → M` is
 injective for every ideal `L` containing a power of `I`. This is the vanishing of
 `Tor₁(R ⧸ L, M)` (Stacks, Tag 051C). -/

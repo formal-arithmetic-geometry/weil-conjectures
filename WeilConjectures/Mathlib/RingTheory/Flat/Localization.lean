@@ -34,19 +34,72 @@ Theorem 24.3).
 
 open TensorProduct
 
+namespace Module.Flat
+
+/-- A module over a domain on which every nonzero element acts bijectively is flat: it is a
+vector space over the fraction field. -/
+theorem of_bijective_smul {R M : Type*} [CommRing R] [IsDomain R] [AddCommGroup M] [Module R M]
+    (h : ∀ r : R, r ≠ 0 → Function.Bijective (fun m : M ↦ r • m)) : Flat R M := by
+  let S := nonZeroDivisors R
+  have : IsLocalizedModule S (LinearMap.id : M →ₗ[R] M) :=
+    { map_units := fun s ↦ (Module.End.isUnit_iff _).mpr (h s (nonZeroDivisors.ne_zero s.2))
+      surj := fun y ↦ ⟨(y, 1), by simp⟩
+      exists_of_eq := fun {x y} hxy ↦ ⟨1, by simpa using hxy⟩ }
+  have : Flat R (LocalizedModule S M) :=
+    (Module.flat_iff_of_isLocalization (Localization S) S _).mp inferInstance
+  exact Flat.of_linearEquiv (IsLocalizedModule.iso S (LinearMap.id : M →ₗ[R] M)).symm
+
+variable {R : Type*} {M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+
+/-- **Purity for modules over a prime.** If every `r ∉ p` acts bijectively on `M`, then
+`M ⊗ N' → M ⊗ N` is injective whenever `N' ≤ N` and `N` is killed by `p`: indeed `M ⧸ p M` is
+a vector space over the fraction field of `R ⧸ p`. -/
+theorem lTensor_subtype_injective_of_bijective_smul (p : Ideal R) [p.IsPrime]
+    (hM : ∀ r ∉ p, Function.Bijective (fun m : M ↦ r • m)) {N : Type*} [AddCommGroup N]
+    [Module R N] (hN : ∀ i ∈ p, ∀ n : N, i • n = 0) (N' : Submodule R N) :
+    Function.Injective (N'.subtype.lTensor M) := by
+  have : Flat (R ⧸ p) (M ⧸ p • (⊤ : Submodule R M)) := by
+    refine of_bijective_smul fun r hr ↦ ?_
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
+    have hrp : r ∉ p := fun h ↦ hr (Ideal.Quotient.eq_zero_iff_mem.mpr h)
+    let e := LinearEquiv.ofBijective (DistribSMul.toLinearMap R M r) (hM r hrp)
+    have hsmul (m : M) : (Ideal.Quotient.mk p r) •
+        (Submodule.Quotient.mk m : M ⧸ p • (⊤ : Submodule R M)) =
+          Submodule.Quotient.mk (r • m) := rfl
+    constructor
+    · intro x y hxy
+      induction x using Submodule.Quotient.induction_on with | H x =>
+      induction y using Submodule.Quotient.induction_on with | H y =>
+      simp only [hsmul, Submodule.Quotient.eq] at hxy ⊢
+      have := Submodule.smul_top_le_comap_smul_top p e.symm.toLinearMap hxy
+      rw [Submodule.mem_comap, ← smul_sub] at this
+      convert this using 1
+      exact (e.symm_apply_apply (x - y)).symm
+    · intro x
+      induction x using Submodule.Quotient.induction_on with | H x =>
+      refine ⟨Submodule.Quotient.mk (e.symm x), ?_⟩
+      change _ • _ = _
+      rw [hsmul]
+      congr 1
+      exact e.apply_symm_apply x
+  exact lTensor_subtype_injective_of_smul_eq_zero p hN N'
+
+end Module.Flat
+
 namespace Module
 
 variable {R S M : Type*} [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M] [Module R M]
   [Module S M] [IsScalarTower R S M]
 
-/-- Let `T` be a multiplicative subset of `S`. Then `M_T ⊗ N' → M_T ⊗ N` is injective if and only
-if every element of the kernel of `M ⊗ N' → M ⊗ N` is killed by an element of `T`. -/
-lemma lTensor_localizedModule_injective_iff (T : Submonoid S) {N N' : Type*} [AddCommGroup N]
-    [Module R N] [AddCommGroup N'] [Module R N'] (f : N' →ₗ[R] N) :
-    Function.Injective (f.lTensor (LocalizedModule T M)) ↔
+/-- Let `T` be a multiplicative subset of `S` and `ℓ : M → L` a localization at `T`. Then
+`L ⊗ N' → L ⊗ N` is injective if and only if every element of the kernel of `M ⊗ N' → M ⊗ N` is
+killed by an element of `T`. -/
+lemma lTensor_injective_iff_of_isLocalizedModule (T : Submonoid S) {L : Type*} [AddCommGroup L]
+    [Module R L] [Module S L] [IsScalarTower R S L] (ℓ : M →ₗ[S] L) [IsLocalizedModule T ℓ]
+    {N N' : Type*} [AddCommGroup N] [Module R N] [AddCommGroup N'] [Module R N']
+    (f : N' →ₗ[R] N) :
+    Function.Injective (f.lTensor L) ↔
       ∀ y : M ⊗[R] N', f.lTensor M y = 0 → ∃ t ∈ T, t • y = 0 := by
-  set L := LocalizedModule T M
-  set ℓ := LocalizedModule.mkLinearMap T M
   let g' := AlgebraTensorModule.rTensor R N' ℓ
   let g := AlgebraTensorModule.rTensor R N ℓ
   have : IsLocalizedModule T g' := IsLocalizedModule.rTensor (A := S) T ℓ
@@ -89,6 +142,14 @@ lemma lTensor_localizedModule_injective_iff (T : Submonoid S) {N N' : Type*} [Ad
     have : (algebraMap S (Module.End S _) s) w = (algebraMap S (Module.End S _) s) 0 := by
       rw [map_zero, Module.algebraMap_end_apply, hs]
     exact (Module.End.isUnit_iff _).mp hu |>.1 this
+
+/-- Let `T` be a multiplicative subset of `S`. Then `M_T ⊗ N' → M_T ⊗ N` is injective if and only
+if every element of the kernel of `M ⊗ N' → M ⊗ N` is killed by an element of `T`. -/
+lemma lTensor_localizedModule_injective_iff (T : Submonoid S) {N N' : Type*} [AddCommGroup N]
+    [Module R N] [AddCommGroup N'] [Module R N'] (f : N' →ₗ[R] N) :
+    Function.Injective (f.lTensor (LocalizedModule T M)) ↔
+      ∀ y : M ⊗[R] N', f.lTensor M y = 0 → ∃ t ∈ T, t • y = 0 :=
+  lTensor_injective_iff_of_isLocalizedModule T (LocalizedModule.mkLinearMap T M) f
 
 /-- Let `T` be a multiplicative subset of `S`. Then `M_T` is flat over `R` if and only if every
 element of the kernel of `M ⊗ J → M`, `J` an ideal of `R`, is killed by an element of `T`. -/
