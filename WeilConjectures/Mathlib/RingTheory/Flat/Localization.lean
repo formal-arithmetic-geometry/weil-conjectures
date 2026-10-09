@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 public import WeilConjectures.Mathlib.RingTheory.Filtration
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
@@ -671,3 +672,46 @@ theorem _root_.Algebra.exists_notMem_forall_pow_smul_eq_zero [IsNoetherianRing R
   exact ⟨n, hn⟩
 
 end Module
+
+/-- **Flatness at a point is stable under base change.** Let `S' = R' ⊗[R] S` and let `Q` be a
+prime of `S'` lying over the prime `Q ∩ S` of `S`. If `S` is flat over `R` at `Q ∩ S`, then `S'` is
+flat over `R'` at `Q`. -/
+theorem Module.Flat.localization_of_isPushout_aux {R R' S S' : Type*} [CommRing R] [CommRing R']
+    [CommRing S] [CommRing S'] [Algebra R R'] [Algebra R S] [Algebra R' S'] [Algebra S S']
+    [Algebra R S'] [IsScalarTower R R' S'] [IsScalarTower R S S'] [Algebra.IsPushout R R' S S']
+    (Q : Ideal S') [Q.IsPrime]
+    (h : Module.Flat R (Localization.AtPrime (Q.comap (algebraMap S S')))) :
+    Module.Flat R' (Localization.AtPrime Q) := by
+  set Q₁ := Q.comap (algebraMap S S')
+  set M := Algebra.algebraMapSubmonoid S' Q₁.primeCompl
+  have hle : M ≤ Q.primeCompl := by
+    rintro _ ⟨s, hs, rfl⟩
+    exact hs
+  let : Algebra (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.localizationAlgebraOfSubmonoidLe _ _ M Q.primeCompl hle
+  have : IsScalarTower S' (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.localization_isScalarTower_of_submonoid_le _ _ M Q.primeCompl hle
+  have : IsScalarTower R' (Localization M) (Localization.AtPrime Q) :=
+    .of_algebraMap_eq fun x ↦ by
+      rw [IsScalarTower.algebraMap_apply R' S' (Localization M), ← IsScalarTower.algebraMap_apply,
+        ← IsScalarTower.algebraMap_apply]
+  have : IsLocalization (Q.primeCompl.map (algebraMap S' (Localization M)))
+      (Localization.AtPrime Q) :=
+    IsLocalization.isLocalization_of_submonoid_le _ _ M Q.primeCompl hle
+  have : Module.Flat (Localization M) (Localization.AtPrime Q) :=
+    IsLocalization.flat _ (Q.primeCompl.map (algebraMap S' (Localization M)))
+  have : Algebra.IsPushout S (Localization.AtPrime Q₁) S' (Localization M) :=
+    (Algebra.isPushout_of_isLocalization Q₁.primeCompl (Localization.AtPrime Q₁) S'
+      (Localization M)).symm
+  have : Algebra.IsPushout R S R' S' := Algebra.IsPushout.symm inferInstance
+  have : IsScalarTower R (Localization.AtPrime Q₁) (Localization M) :=
+    .of_algebraMap_eq fun x ↦ by
+      rw [IsScalarTower.algebraMap_apply R S (Localization.AtPrime Q₁),
+        ← IsScalarTower.algebraMap_apply, IsScalarTower.algebraMap_apply R S' (Localization M),
+        IsScalarTower.algebraMap_apply R S S', ← IsScalarTower.algebraMap_apply S S']
+  have : Algebra.IsPushout R (Localization.AtPrime Q₁) R' (Localization M) :=
+    (Algebra.IsPushout.comp_iff R S R' S').mpr inferInstance
+  have : Module.Flat R' (Localization M) :=
+    Module.Flat.isBaseChange R R' (Localization.AtPrime Q₁) (Localization M)
+      (Algebra.IsPushout.symm this).out
+  exact Module.Flat.trans R' (Localization M) (Localization.AtPrime Q)
