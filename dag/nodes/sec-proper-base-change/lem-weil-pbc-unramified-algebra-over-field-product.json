@@ -13,9 +13,69 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unramified ring map. Since $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ is the morphism induced by the structure map $k\\to C$ and is unramified, [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] (direction 'only if') shows that $C$ is a finitely generated $k$-algebra and $\\Omega_{C/k}=0$; that is, $k\\to C$ is an unramified ring map in the sense of Algebra, Definition 00UT. (In Stacks, Morphisms, Lemma 02G7 this is the passage from the scheme to the ring map via Definition 02G4 and Lemma 02G6; in the proof of Lemma 00UW the fibre ring is unramified over $\\kappa(\\mathfrak p)$ by Lemma 00UV.)",
+   "uses": [
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7 (lemma-unramified-over-field, line 7790), proof of part (1), and Lemmas 02GE, 02G6"
+   }
+  },
+  {
+   "text": "Étale. A finitely generated $k$-algebra with $\\Omega_{C/k}=0$ over the field $k$ is étale over $k$ by [lem-weil-pbc-unramified-ring-map-over-field-etale]: $C$ is finitely presented over $k$, $H_1(L_{C/k})=0$ and $\\Omega_{C/k}=0$. (Stacks: 'By Lemma 00TT it is smooth hence étale over $\\kappa(\\mathfrak p)$'.)",
+   "uses": [
+    "lem-weil-pbc-unramified-ring-map-over-field-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591, sentence 'By Lemma 00TT (lemma-characterize-smooth-over-field) it is smooth hence etale over kappa(p)'"
+   }
+  },
+  {
+   "text": "Back to schemes. By [lem-weil-pbc-etale-ring-map-iff-etale-affine] (direction 'if'), applied to $\\varphi:k\\to C$, the morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ is étale [def-weil-etale-morphism].",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591 (the étale ring map is then fed to Lemma 00U3)"
+   }
+  },
+  {
+   "text": "Product decomposition. By [lem-weil-pbc-etale-algebra-over-field-product] applied to the étale morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ there are $n\\ge0$, field extensions $L_1,\\dots,L_n$ of $k$, each finite and separable algebraic [def-weil-pbc-separable-algebraic-extension], and an isomorphism of $k$-algebras $C\\cong L_1\\times\\cdots\\times L_n$ (the zero ring for $n=0$). This is the assertion.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591, sentence 'Hence F = S (x)_R kappa(p) is a finite product of finite separable field extensions of kappa(p), see Lemma 00U3 (lemma-etale-over-field)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+  "lem-weil-pbc-unramified-ring-map-over-field-etale",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591 (for the fibre ring F over kappa(p); here the ring C over k), as used in Morphisms, Lemma 02G7 part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +127,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-algebra-over-field-product",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Morphisms 02G7(1) and Algebra 00UW: kept. def-weil-unramified-morphism is the diagonal definition (LFT + open immersion diagonal), equivalent to Stacks 02G4 by 02GE. Proof written in four steps following the proof of Algebra 00UW: (1) Spec translation to an unramified ring map (finite type, Omega=0) by the new leaf lem-weil-pbc-unramified-ring-map-iff-unramified-affine (HasRingHomProperty.Spec_iff for LocallyOfFiniteType and FormallyUnramified plus the diagonal instances); (2) unramified over a field implies etale by the new leaf lem-weil-pbc-unramified-ring-map-over-field-etale (Algebra.FormallyEtale.of_formallyUnramified_of_field + Algebra.FinitePresentation.of_finiteType; Stacks 'by 00TT smooth hence etale'); (3) back to Spec C -> Spec k etale by the leaf lem-weil-pbc-etale-ring-map-iff-etale-affine; (4) the leaf lem-weil-pbc-etale-algebra-over-field-product (Stacks 00U3, Algebra.Etale.iff_exists_algEquiv_prod, with finiteness of the factors). Not used: lem-weil-pbc-unramified-over-field-discrete (Stacks 02G7's topological route is not needed in the affine case). All cited nodes are in unit sk-thm-p1 or are definitions. The existing Mathlib searches of the item are kept (the item itself is a composite of four Mathlib facts, not one leaf)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps along the proof of Stacks 00UW: unramified morphism of affines iff unramified ring map (new leaf by one Mathlib declaration per clause: HasRingHomProperty.Spec_iff RingHomProperties.lean:360 with the FiniteType/FormallyUnramified instances and the diagonal instances, all lines verified; same pattern as the etale leaf), unramified over a field is etale (new leaf: FormallyEtale.of_formallyUnramified_of_field Etale/Field.lean:175 + FinitePresentation.of_finiteType:69, verified), etale ring map iff etale affine morphism, etale over a field is a product of finite separable extensions (existing leaf). Correct; does not use the discreteness item (no cycle)."
+ }
 }

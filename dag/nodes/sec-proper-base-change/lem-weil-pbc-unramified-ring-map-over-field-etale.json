@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-unramified-ring-map-over-field-etale",
+ "kind": "statement",
+ "title": "An unramified ring map out of a field is étale",
+ "statement": "Let $k$ be a field and $C$ a commutative $k$-algebra which is finitely generated as a $k$-algebra and whose module of Kähler differentials $\\Omega_{C/k}$ [def-weil-pbc-kahler-differentials] is zero (that is, $k\\to C$ is an unramified ring map, Stacks, Algebra, Definition 00UT). Then $k\\to C$ is an étale ring map in the sense of Stacks, Algebra, Definition 00U1 as characterized in [lem-weil-pbc-etale-ring-map-iff-etale-affine]: $C$ is a finitely presented $k$-algebra, $H_1(L_{C/k})=0$ [def-weil-pbc-smooth-ring-map] and $\\Omega_{C/k}=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41584-41588: 'unramified over kappa(p) ... By Lemma 00TT (lemma-characterize-smooth-over-field) it is smooth hence etale over kappa(p)'; the finite-presentation clause because k is Noetherian (Algebra, Lemma 00FP, lemma-Noetherian-finite-type-is-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally unramified algebra of finite type over a field is etale",
+   "results": "Algebra.FormallyEtale.iff_isSeparable (Mathlib.RingTheory.Etale.Field); Algebra.FormallyUnramified.iff_isSeparable (Mathlib.RingTheory.Unramified.Field); RingHom.etale_iff_formallyUnramified_and_smooth (Mathlib.RingTheory.RingHom.Etale); Algebra.FormallyEtale.of_unramified_and_smooth, .of_formallyUnramified_and_formallySmooth (Mathlib.RingTheory.Etale.Basic); AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "related, not the statement; see grep for the field case"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified ?K ?A → Algebra.Etale ?K ?A",
+   "results": "Algebra.Etale.of_formallyUnramified_of_flat [FinitePresentation R S] [Module.Flat R S] [FormallyUnramified R S] : Etale R S (Mathlib.RingTheory.Smooth.Fiber, line 247)",
+   "date": "2026-10-10",
+   "verdict": "generalization: over a field every module is flat and finite type = finite presentation, so it specializes; recorded as alternative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated algebra over a field with zero Kähler differentials is étale",
+   "results": "Algebra.Etale.formallyEtale, Algebra.Etale (Mathlib.RingTheory.Etale.Basic); Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_formallyUnramified_of_field\\|iff_formallyUnramified_of_field' Mathlib; grep -n 'class Etale\\|class FormallyEtale' Mathlib/RingTheory/Etale/Basic.lean; grep -n 'of_finiteType' Mathlib/RingTheory/FinitePresentation.lean Mathlib/RingTheory/EssentialFiniteness.lean",
+   "results": "Etale/Field.lean:175 Algebra.FormallyEtale.of_formallyUnramified_of_field [EssFiniteType K A] [FormallyUnramified K A] : FormallyEtale K A; :185 iff_formallyUnramified_of_field; EssentialFiniteness.lean:95 instance EssFiniteType.of_finiteType; FinitePresentation.lean:69 Algebra.FinitePresentation.of_finiteType [IsNoetherianRing R] : FiniteType R A ↔ FinitePresentation R A; Etale/Basic.lean:47 class FormallyEtale (Subsingleton Ω[A⁄R], Subsingleton (H1Cotangent R A)), :206 class Etale (formallyEtale, finitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match, two Mathlib lemmas one per clause (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallyEtale.of_formallyUnramified_of_field, Algebra.FinitePresentation.of_finiteType",
+  "file": "Mathlib/RingTheory/Etale/Field.lean",
+  "line": 175,
+  "how": "two Mathlib lemmas, one per clause of Algebra.Etale k C (class at Mathlib/RingTheory/Etale/Basic.lean:206 = FormallyEtale ∧ FinitePresentation): the hypothesis is Algebra.FiniteType k C and Algebra.FormallyUnramified k C (= Subsingleton Ω[C⁄k], Unramified/Basic.lean:58); EssFiniteType k C by the instance EssFiniteType.of_finiteType (EssentialFiniteness.lean:95), so FormallyEtale.of_formallyUnramified_of_field k C (Etale/Field.lean:175) gives FormallyEtale k C, i.e. Subsingleton Ω[C⁄k] and Subsingleton (H1Cotangent k C) (Etale/Basic.lean:47); Algebra.FinitePresentation.of_finiteType.mp (Mathlib/RingTheory/FinitePresentation.lean:69, k Noetherian as a field) gives FinitePresentation k C. Algebra.Etale k C is the étale ring map of the node by the match of lem-weil-pbc-etale-ring-map-iff-etale-affine. Alternative: Algebra.Etale.of_formallyUnramified_of_flat (Mathlib/RingTheory/Smooth/Fiber.lean:247) with Module.Flat k C automatic over a field. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-algebra-over-field-product",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

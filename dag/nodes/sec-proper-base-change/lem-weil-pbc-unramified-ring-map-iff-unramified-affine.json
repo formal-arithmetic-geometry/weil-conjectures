@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+ "kind": "statement",
+ "title": "Spec of a ring map is unramified iff the ring map is of finite type with vanishing differentials",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is unramified [def-weil-unramified-morphism] if and only if $\\varphi$ is an unramified ring map in the sense of Stacks, Algebra, Definition 00UT: $S$ is a finitely generated $R$-algebra (via $\\varphi$) and the module of Kähler differentials $\\Omega_{S/R}$ [def-weil-pbc-kahler-differentials] is zero.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02GE (lemma-diagonal-unramified-morphism, line 7853) parts (1),(2) (unramified in the sense of Definition 02G4 iff locally of finite type with open immersion diagonal) together with Lemma 02G6 (lemma-unramified-characterize, line 7669), (1)<=>(2) for the affine opens U=Spec S, V=Spec R, and Algebra, Definition 00UT (algebra-definition-unramified, algebra.tex line 41385)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-unramified-morphism",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec.map of a ring hom is unramified iff the ring hom is of finite type and formally unramified",
+   "results": "Algebra.Unramified.mk, Algebra.Unramified.formallyUnramified (Mathlib.RingTheory.Unramified.Basic); RingHom.formallyUnramified_algebraMap, RingHom.FormallyUnramified (Mathlib.RingTheory.RingHom.Unramified); AlgebraicGeometry.IsFinite.SpecMap_iff (Morphisms.Finite); AlgebraicGeometry.FormallyUnramified.recOn",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the pieces RingHom.FormallyUnramified and HasRingHomProperty (see grep) give the statement one clause at a time"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of affine schemes Spec S to Spec R locally of finite type and formally unramified iff ring map finite type with vanishing Kähler differentials",
+   "results": "AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified); AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "match by clauses: HasRingHomProperty @FormallyUnramified RingHom.FormallyUnramified"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasRingHomProperty\\|instance\\|Spec_iff' Mathlib/AlgebraicGeometry/Morphisms/{FormallyUnramified,FiniteType,RingHomProperties}.lean; grep -n 'class FormallyUnramified' Mathlib/RingTheory/Unramified/Basic.lean; grep -n 'def FormallyUnramified' Mathlib/RingTheory/RingHom/Unramified.lean",
+   "results": "RingHomProperties.lean:360 HasRingHomProperty.Spec_iff : P (Spec.map φ) ↔ Q φ.hom; FiniteType.lean:54 instance HasRingHomProperty @LocallyOfFiniteType RingHom.FiniteType; FormallyUnramified.lean:66 instance HasRingHomProperty @FormallyUnramified RingHom.FormallyUnramified, :79 instance [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f, :126 isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f]; RingHom/Unramified.lean:28 RingHom.FormallyUnramified f := Algebra.FormallyUnramified R S (f.toAlgebra); Unramified/Basic.lean:58 class Algebra.FormallyUnramified := subsingleton_kaehlerDifferential : Subsingleton Ω[A⁄R]; no AlgebraicGeometry.Unramified class in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-10",
+   "verdict": "match, a few Mathlib lemmas one per clause (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.HasRingHomProperty.Spec_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+  "line": 360,
+  "how": "a few Mathlib lemmas, one per clause: def-weil-unramified-morphism is LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f), equivalent to LocallyOfFiniteType f ∧ FormallyUnramified f by the instances of Morphisms/FormallyUnramified.lean :79 and :126 (isOpenImmersion_diagonal); HasRingHomProperty.Spec_iff (:360) with the instances HasRingHomProperty @LocallyOfFiniteType RingHom.FiniteType (Morphisms/FiniteType.lean:54) and HasRingHomProperty @FormallyUnramified RingHom.FormallyUnramified (Morphisms/FormallyUnramified.lean:66) gives LocallyOfFiniteType (Spec.map φ) ↔ φ.FiniteType and FormallyUnramified (Spec.map φ) ↔ φ.FormallyUnramified; RingHom.FormallyUnramified φ is by definition (RingHom/Unramified.lean:28) Algebra.FormallyUnramified R S, the class Subsingleton Ω[S⁄R] (Unramified/Basic.lean:58), i.e. Ω_{S/R}=0; RingHom.FiniteType φ is Algebra.FiniteType R S. Same pattern as the leaf lem-weil-pbc-etale-ring-map-iff-etale-affine. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-algebra-over-field-product",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
