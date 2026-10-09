@@ -18,6 +18,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Compactification.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
@@ -546,6 +550,74 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     (((i)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj (hNt _))
 
 end ClosedImmersion
+
+/-! ### Gluing over a finite open cover -/
+
+section Gluing
+
+open ZeroObject
+
+variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
+/-- A homology sheaf vanishes if it vanishes after restriction to the members of an open
+cover. -/
+lemma isZero_homology_of_openCover {X : Scheme.{u}}
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {n : ℕ} (U : Fin n → X.Opens) (hU : ∀ x, ∃ i, x ∈ U i)
+    (R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (q : ℤ)
+    (h : ∀ i, IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      (D(((U i).ι)^*[A]).obj R))) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj R) := by
+  have := Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective A
+    (ι := ULift.{u} (Fin n)) (fun i ↦ (U i.down).ι)
+    (fun x ↦ by obtain ⟨i, hi⟩ := hU x; exact ⟨⟨i⟩, ⟨x, hi⟩, rfl⟩)
+    (0 : (_root_.DerivedCategory.homologyFunctor _ q).obj R ⟶ 0) (fun i ↦
+      isIso_of_source_target_iso_zero _ ((h i.down).of_iso
+        ((((U i.down).ι)^*[A].mapDerivedCategoryHomologyFunctorIso q).app R)).isoZero
+        (Functor.map_isZero _ (isZero_zero _)).isoZero)
+  exact (isZero_zero _).of_iso
+    (asIso (0 : (_root_.DerivedCategory.homologyFunctor _ q).obj R ⟶ 0))
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
+/-- Concentration in `[a, b]` is local for an open cover. -/
+lemma homologyConcentratedIn_of_openCover {X : Scheme.{u}}
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {n : ℕ} (U : Fin n → X.Opens) (hU : ∀ x, ∃ i, x ∈ U i)
+    (R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) {a b : ℤ}
+    (h : ∀ i, _root_.DerivedCategory.homologyConcentratedIn a b (D(((U i).ι)^*[A]).obj R)) :
+    _root_.DerivedCategory.homologyConcentratedIn a b R :=
+  ⟨(_root_.DerivedCategory.isGE_iff R a).2 fun q hq ↦ isZero_homology_of_openCover A U hU R q
+      fun i ↦ (_root_.DerivedCategory.isGE_iff _ a).1 (h i).1 q hq,
+    (_root_.DerivedCategory.isLE_iff R b).2 fun q hq ↦ isZero_homology_of_openCover A U hU R q
+      fun i ↦ (_root_.DerivedCategory.isLE_iff _ b).1 (h i).2 q hq⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- Tor amplitude in `[a, b]` is local for an open cover. -/
+lemma torAmplitudeIn_of_openCover [UpperStarPreservesFlat A] {X : Scheme.{u}}
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {n : ℕ} (U : Fin n → X.Opens) (hU : ∀ x, ∃ i, x ∈ U i)
+    (R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) {a b : ℤ}
+    (h : ∀ i, torAmplitudeIn A (U i) a b (D(((U i).ι)^*[A]).obj R)) :
+    torAmplitudeIn A X a b R := fun G ↦ by
+  refine homologyConcentratedIn_of_openCover A U hU _ fun i ↦ ?_
+  let j := (U i).ι
+  let e : D((j)^*[A]).obj (R ⊗ (_root_.DerivedCategory.singleFunctor _ 0).obj G) ≅
+      D((j)^*[A]).obj R ⊗ (_root_.DerivedCategory.singleFunctor _ 0).obj ((j)^*[A].obj G) :=
+    ((leftDerivedUpperStarIsoMapDerivedCategory A j).app _).symm ≪≫
+      leftDerivedUpperStarTensorIso A j _ _ ≪≫
+      tensorIso ((leftDerivedUpperStarIsoMapDerivedCategory A j).app R)
+        ((singleFunctorCompLeftDerivedUpperStarIso A j).app G)
+  obtain ⟨h₁, h₂⟩ := h i ((j)^*[A].obj G)
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
+
+end Gluing
 
 /-! ### The derived tensor product at a finite coefficient ring -/
 
@@ -1086,6 +1158,85 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeD
       ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
   sorry
 
+omit [Finite Λ] in
+/-- Membership in `D_c^[a, b]` with Tor amplitude in `[a, b]` is local for a finite open cover
+of a scheme with noetherian underlying space. -/
+theorem constructibleTorAmplitudeIn_of_openCover {X : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace X] {n : ℕ} (U : Fin n → X.Opens) (hU : ∀ x, ∃ i, x ∈ U i)
+    (R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) {a b : ℤ}
+    (h : ∀ i, constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) (U i)
+      a b (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj R)) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X a b R :=
+  ⟨⟨boundedConstructible_of_openCover Λ U hU R fun i ↦ (h i).1.1,
+    homologyConcentratedIn_of_openCover _ U hU R fun i ↦ (h i).1.2⟩,
+    torAmplitudeIn_of_openCover _ U hU R fun i ↦ (h i).2⟩
+
+
+/-- The chart step of clause (iv): for an immersion `c : U ⟶ 𝔸ⁿ_V` over an affine open
+`v : V ⟶ Y`, `R(c ≫ π ≫ v)^!` sends `D_c^[a, b]` to `D_c^[a - 2n, b + 2d + 1]` when
+`dim Y ≤ d`. -/
+theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (v : V ⟶ Y) [IsOpenImmersion v] [IsAffine V] {n : ℕ}
+    (c : U ⟶ 𝔸(ULift.{u} (Fin n); V)) [IsImmersion c] [IsAffine U]
+    [HasCompactification (c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)]
+    (d : ℕ) (hd : topologicalKrullDim Y ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U (a - 2 * n) (b + 2 * d + 1)
+      ((R(c ≫ 𝔸(ULift.{u} (Fin n); V) ↘ V ≫ v)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have : IsNoetherianRing Λ := inferInstance
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+  let π := 𝔸(ULift.{u} (Fin n); V) ↘ V
+  let W := c.coborderRange
+  let ι := c.liftCoborder
+  have : TopologicalSpace.NoetherianSpace V := v.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact v := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : IsLocallyNoetherian V := isLocallyNoetherian_of_isOpenImmersion v
+  have : IsNoetherian V := {}
+  have : IsNoetherianRing Γ(V, ⊤) :=
+    IsLocallyNoetherian.component_noetherian ⟨⊤, isAffineOpen_top V⟩
+  have : IsLocallyNoetherian 𝔸(ULift.{u} (Fin n); V) := LocallyOfFiniteType.isLocallyNoetherian π
+  have : IsNoetherian 𝔸(ULift.{u} (Fin n); V) := {}
+  have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact W.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : HasCompactification v := (Compactification.ofIsOpenImmersion v).hasCompactification
+  have : HasCompactification W.ι := (Compactification.ofIsOpenImmersion W.ι).hasCompactification
+  have : HasCompactification ι := (Compactification.ofIsProper ι).hasCompactification
+  have : HasInvertibleExponent Λ V := HasInvertibleExponent.of_hom v
+  have : HasInvertibleExponent Λ W := HasInvertibleExponent.of_hom (W.ι ≫ π ≫ v)
+  have : SmoothOfRelativeDimension n π := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin n)) V
+  have hdW : topologicalKrullDim W ≤ ((d + n : ℕ) : WithBot ℕ∞) := by
+    refine (W.ι.isOpenEmbedding.isInducing.topologicalKrullDim_le).trans ?_
+    rw [topologicalKrullDim_affineSpace_of_isAffine]
+    have hV := (v.isOpenEmbedding.isInducing.topologicalKrullDim_le).trans hd
+    simp only [Nat.card_eq_fintype_card, Fintype.card_ulift, Fintype.card_fin, Nat.cast_add]
+    exact add_le_add hV le_rfl
+  have h₁ := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion Λ v a b hK
+  have h₂ := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension Λ π
+    n a b h₁
+  have h₃ := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion Λ W.ι _ _ h₂
+  have h₄ := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion Λ
+    (W.ι ≫ π ≫ v ≫ aY) ι (d + n) hdW _ _ h₃
+  have hc : c ≫ π ≫ v = ι ≫ W.ι ≫ π ≫ v := by
+    rw [← Category.assoc ι, c.liftCoborder_ι]
+  have heq : ∀ {g₁ g₂ : U ⟶ Y} [HasCompactification g₁] [HasCompactification g₂], g₁ = g₂ →
+      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+    intro g₁ g₂ _ _ h
+    subst h
+    exact ⟨Iso.refl _⟩
+  obtain ⟨e₀⟩ := heq hc
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ ι (W.ι ≫ π ≫ v)
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ W.ι (π ≫ v)
+  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ π v
+  refine constructibleTorAmplitudeIn_of_iso _ ((e₀ ≪≫ e₁ ≪≫ Functor.isoWhiskerRight e₂ _ ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerRight e₃ _) _).app K).symm ?_
+  have hb : b - 2 * (n : ℤ) + 2 * ((d + n : ℕ) : ℤ) + 1 = b + 2 * d + 1 := by push_cast; ring
+  rw [hb] at h₄
+  exact h₄
+
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
 
@@ -1110,8 +1261,72 @@ theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologica
       ∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
           constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
-            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
-  sorry
+            ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsNoetherian X := {}
+  -- affine charts `U ⊆ f⁻¹ V`
+  have hchart (x : X) : ∃ (U : X.affineOpens) (V : Y.affineOpens),
+      x ∈ (U : X.Opens) ∧ (U : X.Opens) ≤ f ⁻¹ᵁ (V : Y.Opens) := by
+    obtain ⟨V, hV, hxV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp Y.isBasis_affineOpens)
+      (show f.base x ∈ (⊤ : Y.Opens) from trivial)
+    obtain ⟨U, hU, hxU, hUV⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens)
+      (show x ∈ f ⁻¹ᵁ V from hxV)
+    exact ⟨⟨U, hU⟩, ⟨V, hV⟩, hxU, hUV⟩
+  choose U V hxU hUV using hchart
+  -- immersions of the charts into affine spaces over the `V`
+  have hemb (x : X) : ∃ (n : ℕ) (c : ((U x : X.Opens) : Scheme.{u}) ⟶
+      𝔸(ULift.{u} (Fin n); (V x : Y.Opens))), IsImmersion c ∧
+      c ≫ 𝔸(ULift.{u} (Fin n); (V x : Y.Opens)) ↘ _ ≫ (V x : Y.Opens).ι =
+        (U x : X.Opens).ι ≫ f := by
+    have hr : Set.range ((U x : X.Opens).ι ≫ f).base ⊆ Set.range (V x : Y.Opens).ι.base := by
+      rintro - ⟨y, rfl⟩
+      simpa using hUV x y.2
+    let g := IsOpenImmersion.lift (V x : Y.Opens).ι ((U x : X.Opens).ι ≫ f) hr
+    have hg : g ≫ (V x : Y.Opens).ι = (U x : X.Opens).ι ≫ f := IsOpenImmersion.lift_fac _ _ _
+    have : LocallyOfFiniteType (g ≫ (V x : Y.Opens).ι) := by rw [hg]; infer_instance
+    have : LocallyOfFiniteType g := locallyOfFiniteType_of_comp g (V x : Y.Opens).ι
+    have : IsAffine ((U x : X.Opens) : Scheme.{u}) := (U x).2
+    obtain ⟨n, c, hc, himm⟩ := exists_immersion_affineSpace_of_quasiAffine g
+    exact ⟨n, c, himm, by rw [← Category.assoc, hc, hg]⟩
+  choose n c hc hcf using hemb
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ ((U x : X.Opens) : Set X))
+    (fun x ↦ (U x : X.Opens).isOpen) (fun x _ ↦ Set.mem_iUnion.2 ⟨x, hxU x⟩)
+  refine ⟨t.sup n, fun d hd a b K hK ↦ ?_⟩
+  let Uc : Fin t.card → X.Opens := fun i ↦ (U (t.equivFin.symm i)).1
+  refine constructibleTorAmplitudeIn_of_openCover Λ Uc (fun x ↦ ?_) _ fun i ↦ ?_
+  · obtain ⟨y, hy, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+    exact ⟨t.equivFin ⟨y, hy⟩, by simpa [Uc] using hx⟩
+  set x := (t.equivFin.symm i).1
+  have hxt : x ∈ t := (t.equivFin.symm i).2
+  have : IsAffine ((U x : X.Opens) : Scheme.{u}) := (U x).2
+  have : IsAffine ((V x : Y.Opens) : Scheme.{u}) := (V x).2
+  have := hc x
+  have : TopologicalSpace.NoetherianSpace (U x : X.Opens) :=
+    (U x : X.Opens).ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact (U x : X.Opens).ι :=
+    ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : HasCompactification (U x : X.Opens).ι :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  have hK' := constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart Λ aY (V x : Y.Opens).ι
+    (c x) d hd a b hK
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ (U x : X.Opens).ι f
+  have heq : ∀ {g₁ g₂ : ((U x : X.Opens) : Scheme.{u}) ⟶ Y} [HasCompactification g₁]
+      [HasCompactification g₂], g₁ = g₂ →
+      Nonempty (R(g₁)^![ModuleCat.{u + 1} Λ] ≅ R(g₂)^![ModuleCat.{u + 1} Λ]) := by
+    intro g₁ g₂ _ _ h
+    subst h
+    exact ⟨Iso.refl _⟩
+  obtain ⟨e₂⟩ := heq (hcf x)
+  have hmono := hK'
+  refine constructibleTorAmplitudeIn_of_iso _ (((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ
+    (U x : X.Opens).ι).app _).symm ≪≫ (e₁.app K).symm ≪≫ (e₂.app K).symm).symm ?_
+  obtain ⟨⟨hbc, hc₁, hc₂⟩, hta⟩ := hK'
+  have hn : n x ≤ t.sup n := Finset.le_sup hxt
+  exact ⟨⟨hbc, _root_.DerivedCategory.TStructure.t.isGE_of_ge _ _ (a - 2 * n x) (by omega),
+    hc₂⟩, hta.mono (by omega) le_rfl⟩
 
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
