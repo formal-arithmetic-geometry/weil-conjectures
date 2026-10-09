@@ -313,7 +313,8 @@ theorem exists_section [Finite ι] (hU : ∀ i, IsCompact (𝒟.U i : Set X))
     have hr := congrArg (X.presheaf.map (homOfLE (X.basicOpen_le _ :
       W ≤ 𝒟.U l ⊓ 𝒟.U l')).op) (𝒟.ratio_mul l l' i₀)
     simp only [map_mul, map_pow, Scheme.presheaf_map_map] at hel hel' hr
-    simp only [map_sub, map_mul, map_pow, Scheme.presheaf_map_map, hel, hel', hr]
+    simp only [map_sub, map_mul, map_pow, Scheme.presheaf_map_map]
+    rw [hel, hel', hr]
     ring
   choose p hp using Hδ
   set P := Finset.univ.sup fun ll : ι × ι ↦ p ll.1 ll.2
