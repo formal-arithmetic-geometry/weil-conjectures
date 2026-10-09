@@ -325,6 +325,38 @@ noncomputable def adicUpperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z
   (adicUpperStarComp l a b).symm ≪≫ adicUpperStarCongr l h ≪≫ adicUpperStarComp l c d
 
 variable (l) in
+/-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
+lemma conjugateEquiv_adicUpperStarCongr_inv {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :
+    conjugateEquiv (adicUpperStarLowerStarAdjunction l g) (adicUpperStarLowerStarAdjunction l g')
+      (adicUpperStarCongr l h).inv = (adicLowerStarCongr l h).hom := by
+  subst h
+  refine NatTrans.ext (funext fun M ↦ Mod.hom_ext _ _ ?_)
+  simp [adicUpperStarCongr, adicLowerStarCongr_hom_app_hom]
+  rfl
+
+variable (l) in
+/-- The inverse of the composition isomorphism of pullbacks is conjugate to that of
+pushforwards. -/
+lemma conjugateEquiv_adicUpperStarComp_inv {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    conjugateEquiv (adicUpperStarLowerStarAdjunction l (h₁ ≫ h₂))
+      ((adicUpperStarLowerStarAdjunction l h₂).comp (adicUpperStarLowerStarAdjunction l h₁))
+      (adicUpperStarComp l h₁ h₂).inv = (adicLowerStarComp l h₁ h₂).inv :=
+  congrArg Iso.hom ((conjugateIsoEquiv _ _).apply_symm_apply (adicLowerStarComp l h₁ h₂).symm)
+
+variable (l) in
+/-- The composition isomorphism of pullbacks is conjugate to that of pushforwards. -/
+lemma conjugateEquiv_adicUpperStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    conjugateEquiv ((adicUpperStarLowerStarAdjunction l h₂).comp
+        (adicUpperStarLowerStarAdjunction l h₁))
+      (adicUpperStarLowerStarAdjunction l (h₁ ≫ h₂)) (adicUpperStarComp l h₁ h₂).hom =
+        (adicLowerStarComp l h₁ h₂).hom := by
+  have := conjugateEquiv_comm (adicUpperStarLowerStarAdjunction l (h₁ ≫ h₂))
+    ((adicUpperStarLowerStarAdjunction l h₂).comp (adicUpperStarLowerStarAdjunction l h₁))
+    (α := (adicUpperStarComp l h₁ h₂).inv) (β := (adicUpperStarComp l h₁ h₂).hom) (by simp)
+  rw [conjugateEquiv_adicUpperStarComp_inv] at this
+  rw [← cancel_epi (adicLowerStarComp l h₁ h₂).inv, this, Iso.inv_hom_id]
+
+variable (l) in
 /-- **The pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic sheaf**, as sheaves
 of modules over the constant `ℓ`-adic sheaf: `g^* ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,Z`
 (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso`, a ring isomorphism). -/
