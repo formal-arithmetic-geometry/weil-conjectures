@@ -14,9 +14,58 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Constructible Lambda-module sheaves generate Mod(X_Et,Lambda): by the constructible generation lemma, choose an epimorphism from a coproduct of constructible sheaves onto F. The finite-presentation property of each constructible sheaf ensures that maps from it into a filtered colimit factor through one stage and become equal after a common refinement.",
+   "uses": [
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-constructible-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA, proof of (1), and Lemma 09Z4"
+   }
+  },
+  {
+   "text": "Let A be the category whose objects are pairs (G,u) with G constructible and u:G -> F, and whose morphisms commute with the maps to F. The preceding generation and finite-presentation statements imply that A is nonempty, any two objects admit a common refinement, and parallel morphisms become equal after a further refinement; thus A is filtered. The canonical cocone from A to F is a colimit: a compatible family of maps out of the G's descends uniquely through the epimorphism coproduct -> F, and uniqueness follows from local epimorphism detection.",
+   "uses": [
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-constructible-finitely-presented",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA, proof of (1), final paragraph; Categories, Lemma 04AX on filtered categories"
+   }
+  },
+  {
+   "text": "The same construction is internal to Lambda-module sheaves because Lambda is finite and all maps in the diagram are Lambda-linear. Therefore the colimit cocone is a colimit in Mod(X_Et,Lambda), and every object of the filtered diagram is constructible, which proves the assertion.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA, part (3), and Categories, Lemma 04AX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-generation",
+  "lem-weil-pbc-constructible-finitely-presented",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03SA (lemma-torsion-colimit-constructible), part (3), and proof of part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,8 +97,14 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "worker": "stage1",
+  "summary": "Split the filtered-colimit assertion following Stacks Lemma 03SA: constructible module sheaves generate, the comma category of constructible maps to F is filtered, and its canonical cocone is the colimit in Lambda-module sheaves. Added the supporting constructible-generation node and recorded the required Mathlib searches; no Lean or compilation was used."
+ },
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-h1-constructible-representation",
@@ -68,5 +123,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
