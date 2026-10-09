@@ -34,15 +34,15 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 5 | 13 | 0 | 4: lem-weil-pbc-constant-sheaf-sections-connected (0.3), lem-weil-pbc-finite-type-z-g-ring (0.3), lem-weil-pbc-henselization-pair-g-ring (0.3), lemma-weil-pbc-property-iff-acyclicity (0.3) |
+| C1 | 6 | 14 | 0 | 3: lem-weil-pbc-finite-type-z-g-ring (0.5), lem-weil-pbc-henselization-pair-g-ring (0.5), lemma-weil-pbc-property-iff-acyclicity (0.5) |
 | D | 2 | 8 | 0 | 0: none |
-| D1 | 3 | 2 | 0 | 2: lem-weil-pbc-sheaves-directed-colimit-sections (2.1), lem-weil-pbc-surjective-universally-closed-affine-target (2.1) |
+| D1 | 3 | 2 | 0 | 2: lem-weil-pbc-sheaves-directed-colimit-sections (2.3), lem-weil-pbc-surjective-universally-closed-affine-target (2.3) |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 7 | 12 | 0 | 1: lem-weil-pbc-quasi-coherent-module-cokernel-image (2.1) |
+| E1 | 8 | 12 | 0 | 5: lem-weil-pbc-complex-injective-resolution-mono (0.1), lem-weil-pbc-constant-sheaf-sections-locally-constant (0.1), lem-weil-pbc-descend-closed-immersion (0.1), lem-weil-pbc-descend-separated (0.1), lem-weil-pbc-dimension-at-point-open-subspace (0.1) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 7 | 8 | 0 | 2: lem-weil-pbc-etale-free-sheaf-constructible (0.6), lem-weil-pbc-etale-qcqs-sections-filtered-colimit (1.4) |
+| F1 | 7 | 9 | 0 | 2: lem-weil-pbc-etale-free-sheaf-constructible (0.9), lem-weil-pbc-etale-qcqs-sections-filtered-colimit (1.7) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 4 | 6 | 0 | 3: lem-weil-pbc-integral-closure-finite-fibre-part-localization (1.3), lem-weil-pbc-stein-factorization-affine (1.3), lem-weil-pbc-unramified-etale-local-decomposition (1.3) |
+| G1 | 4 | 6 | 0 | 3: lem-weil-pbc-integral-closure-finite-fibre-part-localization (1.5), lem-weil-pbc-stein-factorization-affine (1.5), lem-weil-pbc-unramified-etale-local-decomposition (1.5) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -91,6 +91,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-09 20:08 | 640 | 719 | 403 | 327 | after the eighth account limit (20:02): 7 more items reviewed (colimit-finite-ring-map, g-ring-completion-regular, descend-affine, henselization-universal-property, the two etale/smooth-of-relative-dimension-0 items, horseshoe-delta-functor), 3 E1 repairs merged, 6 deliveries returned; the human's rule 'returns before new work' written into roles/remote-lead.md and SETUP.md and made mechanical in tools/claim.py; F1 bypassed the gate once by releasing its returned item (notice, HUMAN.md); 259 items since the tooling stop |
 | 2026-10-09 20:23 | 640 | 729 | 418 | 327 | 12 more items reviewed (inverse-image-free-etale-module, limit-contained-in-constructible, site-pullback-abelian-exact, injective-resolution-ses-complexes, limit-pullback-sections-colimit, the three spectral-space items, smooth-artinian-lifting-at-point, ...), 1 repaired delivery merged (C1), 3 returned; the human closed the gate bypass (release refuses with an open return or a delivery branch unless 'abandon:'; abandonment counted per group); 271 items since the tooling stop |
 | 2026-10-09 20:38 | 675 | 743 | 432 | 327 | 14 more items reviewed since 20:23 (spectral-space lemmas, smooth-section-etale-lift 07M7 with the definition of smooth ring maps and the 01V6/02H6 identification node, Grothendieck existence 088E with 15 nodes, Popescu 07GC with 12 nodes, module-support 0CYS, site colimits, two definition nodes); 5 repaired deliveries merged (D1 x2, G1 x3), 1 returned; 285 items since the tooling stop |
+| 2026-10-09 20:52 | 675 | 756 | 441 | 327 | 13 more items reviewed since 20:37 (chow-finite-type 0202, chow-noetherian 0200 closed on its Lean ChowModification.nonempty_data, the closed-immersion/coherent nodes of the Grothendieck-existence section, four definition nodes incl. two Mathlib leaves, singular ideal, separable extensions); 3 repaired deliveries merged (C1, E1), 2 returned (C1 unsplit node with proof steps; F1 etale-free-sheaf-constructible creates an 8-node cycle); lean_status had failed silently since 20:35 on a merged node without proof_deps, fixed; 298 items since the tooling stop |
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 
