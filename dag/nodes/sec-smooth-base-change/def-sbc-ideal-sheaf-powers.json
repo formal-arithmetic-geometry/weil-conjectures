@@ -1,0 +1,54 @@
+{
+ "id": "def-sbc-ideal-sheaf-powers",
+ "kind": "definition",
+ "title": "Products and powers of quasi-coherent ideal sheaves; square-zero and nilpotent ideal sheaves",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal I,\\mathcal J\\subseteq\\mathcal O_X$ quasi-coherent sheaves of ideals [pqf-def-coherent]. Their *product* $\\mathcal I\\mathcal J$ is the quasi-coherent sheaf of ideals with $(\\mathcal I\\mathcal J)|_U=(\\mathcal I(U)\\mathcal J(U))^\\sim$ on every affine open $U=\\operatorname{Spec}R$ of $X$ [def-weil-affine-spectrum], where $\\mathcal I(U)\\mathcal J(U)\\subseteq R$ is the product of ideals (these glue, since forming the product of ideals commutes with localization $R\\to R_f$); equivalently, the image of $\\mathcal I\\otimes_{\\mathcal O_X}\\mathcal J\\to\\mathcal O_X$. The powers are $\\mathcal I^0=\\mathcal O_X$ and $\\mathcal I^{n+1}=\\mathcal I^n\\mathcal I$, so $\\mathcal I^n(U)=\\mathcal I(U)^n$ on affine opens $U$. The ideal sheaf $\\mathcal I$ *has square zero* if $\\mathcal I^2=0$, and is *nilpotent* if $\\mathcal I^{n+1}=0$ for some integer $n\\ge0$; equivalently, $\\mathcal I(U)^2=0$, resp. $\\mathcal I(U)^{n+1}=0$, in $\\mathcal O_X(U)$ for every affine open $U$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Definition 37.2.1 (label definition-thickening, Tag 04EX), items (2)-(4), which use $\\mathcal I^2=0$ and $\\mathcal I^{n+1}=0$; the description on affine opens is Schemes, Lemma 26.10.1 (Tag 01IN, literature/stacks-project/schemes.tex)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance : Mul X.IdealSheafData\\|instance : Pow X.IdealSheafData\\|ideal_mul\\|ideal_pow\\|IdemCommSemiring\\|support_pow' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "results": "Basic.lean:410 Mul on IdealSheafData with ideal_mul : (I*J).ideal = I.ideal * J.ideal (componentwise product on affine opens); :416 Pow with ideal_pow : (I^n).ideal = I.ideal^n; :435 IdemCommSemiring X.IdealSheafData (0 = ⊥, 1 = ⊤); support_pow",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNilpotent\\|\\^ 2 = ⊥\\|IsSquareZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "Morphisms/FormallyUnramified.lean:193 hypothesis `IsNilpotent i.ker` (nilpotence of an IdealSheafData in its semiring); no named square-zero predicate: square zero is `I ^ 2 = ⊥` (or `I * I = ⊥`)",
+   "date": "2026-10-09",
+   "verdict": "match (nilpotent via IsNilpotent; square zero as I ^ 2 = ⊥)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData (instances Mul, Pow, IdemCommSemiring) with IsNilpotent",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "how": "specializes in one line: product and powers are `I * J` and `I ^ n` (lines 410, 416; `ideal_mul`, `ideal_pow` give the componentwise description on affine opens); square zero is `I ^ 2 = ⊥`, nilpotent is `IsNilpotent I` in the semiring `X.IdealSheafData` (line 435, `0 = ⊥`), as used in Morphisms/FormallyUnramified.lean:193"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sbc-first-order-thickening",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

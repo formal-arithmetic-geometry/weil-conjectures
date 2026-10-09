@@ -2,13 +2,18 @@
  "id": "def-sbc-first-order-thickening",
  "kind": "definition",
  "title": "Thickenings and first order thickenings",
- "statement": "Let $T'$ be a scheme and $T\\subset T'$ a closed subscheme, i.e. a scheme $T$ with a closed immersion $i:T\\to T'$ [def-weil-pbc-scheme-conventions]; the *ideal sheaf* of $T$ in $T'$ is the quasi-coherent sheaf of ideals $\\mathcal I=\\ker(\\mathcal O_{T'}\\to i_*\\mathcal O_T)\\subset\\mathcal O_{T'}$. The scheme $T'$ is a *thickening* of $T$ if $T$ is a closed subscheme of $T'$ and the underlying topological spaces of $T$ and $T'$ are equal. It is a *first order thickening* of $T$ if $T$ is a closed subscheme of $T'$ and its ideal sheaf $\\mathcal I$ has square zero, $\\mathcal I^2=0$. It is a *finite order thickening* of $T$ if $T$ is a closed subscheme of $T'$ and $\\mathcal I$ is nilpotent, i.e. $\\mathcal I^{n+1}=0$ for some integer $n\\geq0$; an *$n$th order thickening* if $\\mathcal I^{n+1}=0$. (A first order or finite order thickening is a thickening: a nilpotent ideal sheaf cuts out the whole underlying space.) If $S$ is a scheme, a thickening $T\\subset T'$ *over $S$* is one together with a morphism $T'\\to S$ (so $T$ is over $S$ by composition with $i$), and it is a thickening *of affine schemes* if $T'$ is affine (and then so is $T$, a closed subscheme of an affine scheme).",
+ "statement": "Let $T'$ be a scheme and $i:T\\to T'$ a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], so that $T$ is a closed subscheme of $T'$, and let $\\mathcal I=\\ker(\\mathcal O_{T'}\\to i_*\\mathcal O_T)\\subseteq\\mathcal O_{T'}$ be its ideal sheaf, the quasi-coherent sheaf of ideals defining $T$ [def-sbc-closed-immersion-ideal-sheaf]. (1) $T'$ is a *thickening* of $T$ if moreover the underlying topological spaces of $T$ and $T'$ are equal, i.e. the map of underlying spaces of $i$ is surjective (it is then a homeomorphism, $i$ being a homeomorphism onto a closed subset). (2) $T'$ is a *first order thickening* of $T$ if $\\mathcal I$ has square zero, $\\mathcal I^2=0$ [def-sbc-ideal-sheaf-powers]. (3) $T'$ is a *finite order thickening* of $T$ if $\\mathcal I$ is nilpotent, i.e. $\\mathcal I^{n+1}=0$ for some integer $n\\ge0$, and an *$n$th order thickening* if $\\mathcal I^{n+1}=0$ [def-sbc-ideal-sheaf-powers]. (A finite order thickening, in particular a first order one, is a thickening: on an affine open $U=\\operatorname{Spec}R$ of $T'$ [def-weil-affine-spectrum] with $i^{-1}(U)=\\operatorname{Spec}(R/I)$, $I=\\mathcal I(U)$ satisfies $I^{n+1}=0$, so $I$ lies in every prime ideal of $R$ and $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ is surjective.) (4) Let $S$ be a scheme. A thickening (of any of the kinds above) *over $S$* is one in which $T$ and $T'$ are schemes over $S$ and $i$ is a morphism over $S$ [def-weil-scheme-over-base]; equivalently, $T'$ is given a morphism $T'\\to S$ and $T$ is over $S$ through the composite $T\\to T'\\to S$. It is a thickening *of affine schemes* if $T$ and $T'$ are affine schemes [def-pc-scheme]; since $i^{-1}(T')=T\\cong\\operatorname{Spec}(R/I)$ when $T'=\\operatorname{Spec}R$ [def-weil-closed-immersion], this holds as soon as $T'$ is affine.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Definition 37.2.1 (label definition-thickening), Tag 04EX; 'over S' and 'of affine schemes' as used in Definition 37.11.1, Tag 02H0"
+  "place": "Definition 37.2.1 (label definition-thickening), Tag 04EX, items (1)-(4) and (6) ('over S'); 'first order thickening of affine schemes over S' as used in Definition 37.11.1 (label definition-formally-smooth), Tag 02H0"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base"
  ],
  "proof": [],
  "proof_deps": [],
@@ -34,10 +39,17 @@
    "results": "def-nagata-conrad-disjointness-setup mentions thickenings in passing; sbc-lem-thickening-etale-site is a lemma about them; no definition node",
    "date": "2026-10-09",
    "verdict": "no existing node"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class Surjective\\|class IsAffine\\|FormallySmooth.*\\^ 2 = ⊥\\|thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/",
+   "results": "AlgebraicGeometry/Morphisms/UnderlyingMap.lean:59 class Surjective (surjective on points); AffineScheme.lean:59 class IsAffine; no thickening predicate or structure anywhere; the notions are expressible with existing declarations: for i : T ⟶ T', `IsClosedImmersion i ∧ i.ker ^ 2 = ⊥` (first order), `IsClosedImmersion i ∧ IsNilpotent i.ker` (finite order, as in FormallyUnramified.hom_ext), `IsClosedImmersion i ∧ Surjective i` (thickening), `IsAffine T'` and `[T'.Over S]`, but no declaration names them",
+   "date": "2026-10-09",
+   "verdict": "no match (assembled from Mathlib leaves; no single declaration)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +67,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-sbc-first-order-thickening",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Definition 37.2.1 (Tag 04EX, more-morphisms.tex) and the use of 'first order thickening of affine schemes over S' in Definition 37.11.1 (Tag 02H0). Rewrote the statement as items (1)-(4) of Tag 04EX plus 'over S' (item (6)) and 'of affine schemes'; 'equal underlying spaces' is stated as surjectivity of i on points. Replaced the statement dependency def-weil-pbc-scheme-conventions (an unsplit bundle) by the notions actually used: def-pc-scheme (schemes, affine schemes), def-weil-closed-immersion (IsClosedImmersion), def-weil-affine-spectrum, def-weil-scheme-over-base (schemes and morphisms over S), and two new Mathlib leaves: def-sbc-closed-immersion-ideal-sheaf (Scheme.Hom.ker, with Hom.ker_apply on affine opens) and def-sbc-ideal-sheaf-powers (products/powers in the semiring Scheme.IdealSheafData, square zero I^2 = ⊥, nilpotent IsNilpotent). The two parenthetical claims of the statement (finite order thickenings are thickenings; T is affine when T' is) are now justified inline from the affine description of closed immersions in def-weil-closed-immersion. Mathlib has no thickening declaration; the notion is assembled in one line from the leaves (search recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

@@ -1,0 +1,54 @@
+{
+ "id": "def-sbc-closed-immersion-ideal-sheaf",
+ "kind": "definition",
+ "title": "The ideal sheaf of a closed immersion",
+ "statement": "Let $X$ be a scheme and $i:Z\\to X$ a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. The *ideal sheaf* of $i$ (the sheaf of ideals defining the closed subscheme $Z$ of $X$) is the kernel $\\mathcal I=\\ker(i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_Z)\\subset\\mathcal O_X$; for an open $U\\subseteq X$, $\\mathcal I(U)=\\ker(\\mathcal O_X(U)\\to\\mathcal O_Z(i^{-1}U))$. On an affine open $U=\\operatorname{Spec}R$ of $X$ [def-weil-affine-spectrum], where $i^{-1}(U)\\to U$ is identified with $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ for an ideal $I\\subseteq R$, one has $\\mathcal I(U)=I$ and $\\mathcal I|_U=\\widetilde I$; in particular $\\mathcal I$ is a quasi-coherent sheaf of ideals, determined by its ideals $\\mathcal I(U)\\subseteq\\mathcal O_X(U)$ on the affine opens $U$ of $X$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Definition 26.4.1 (label definition-closed-immersion-locally-ringed-spaces, Tag 01HK), item (2) (the kernel $\\mathcal I$); Lemma 26.10.1 (label lemma-closed-subspace-scheme, Tag 01IN), items (2)-(4) (quasi-coherence and $\\mathcal I|_U=\\widetilde I$ on affine opens)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def Hom.ker\\|structure IdealSheafData\\|lemma Hom.ker_apply\\|lemma ker_subschemeι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/",
+   "results": "IdealSheaf/Basic.lean:65 structure Scheme.IdealSheafData (an ideal I(U) ⊆ Γ(X,U) for every affine open U, compatible with basic opens: the quasi-coherent ideal sheaves); Basic.lean:692 def Scheme.Hom.ker (f : X.Hom Y) : IdealSheafData Y (largest quasi-coherent ideal sheaf in the componentwise kernel); Basic.lean:702 Hom.ker_apply: for quasi-compact f and affine U, f.ker.ideal U = RingHom.ker (f.app U); Subscheme.lean:576 ker_subschemeι (the closed subscheme of I has kernel I); Basic.lean:845 Hom.support_ker",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IdealSheafData|Hom\\.ker|ideal sheaf|sheaf of ideals' dag/nodes; titles of definition nodes containing 'ideal'",
+   "results": "only nagata blow-up nodes (def-nagata-invertible-ideal, def-nagata-effective-cartier-ideal, def-nagata-extended-ideal, ...), none defining the kernel ideal sheaf of a closed immersion",
+   "date": "2026-10-09",
+   "verdict": "no existing node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.ker",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "how": "specializes in one line: for a closed immersion i (quasi-compact, `IsClosedImmersion` is affine) `i.ker : X.IdealSheafData` has `i.ker.ideal U = RingHom.ker (i.app U)` on every affine open U by `Scheme.Hom.ker_apply` (line 702), i.e. it is the node's $\\mathcal I$ given by its ideals on affine opens; quasi-coherent ideal sheaves are `Scheme.IdealSheafData` (line 65)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sbc-first-order-thickening",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
