@@ -20,9 +20,103 @@
   "def-weil-pbc-direct-image",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting and the maps $\\theta_{V,\\varphi}$.* By [lem-weil-pbc-etale-graph-section-extension-map](1), for an object $V$ of $X_{\\Et}$ and an $X$-morphism $\\varphi:V\\to U$, $(V,\\varphi)$ and $(V_U,q_V)$ are objects of $U_{\\Et}$ and $\\Gamma_\\varphi:(V,\\varphi)\\to(V_U,q_V)$ is a morphism of $U_{\\Et}$ [def-weil-pbc-etale-site]. $\\Lambda_U$ is a sheaf of commutative rings [def-weil-pbc-constant-sheaf], so its restriction map $\\Lambda_U(\\Gamma_\\varphi):\\Lambda_U(V_U,q_V)\\to\\Lambda_U(V,\\varphi)$ is a ring homomorphism; $\\gamma:\\Lambda_X\\to\\pi_*\\Lambda_U$ is a morphism of sheaves of rings [prop-weil-pbc-inverse-image-modules-exact](1), and $(\\pi_*\\Lambda_U)(V)=\\Lambda_U(V_U,q_V)$ [def-weil-pbc-direct-image], so $\\gamma_V:\\Lambda_X(V)\\to\\Lambda_U(V_U,q_V)$ is a ring homomorphism. Hence $\\theta_{V,\\varphi}=\\Lambda_U(\\Gamma_\\varphi)\\circ\\gamma_V$ is a ring homomorphism. For a morphism $a:V'\\to V$ of $X_{\\Et}$ put $a_U=a\\times_X\\mathrm{id}_U:V'_U\\to V_U$, the morphism with $p_Va_U=a\\,p_{V'}$ and $q_Va_U=q_{V'}$ [def-pc-fibre-product]; it is a morphism $(V'_U,q_{V'})\\to(V_U,q_V)$ of $U_{\\Et}$, and the restriction map of a direct image $\\pi_*F$ along $a$ is $F(a_U)$ [def-weil-pbc-direct-image]. Also $a$ is a morphism $(V',\\varphi a)\\to(V,\\varphi)$ of $U_{\\Et}$, since $\\varphi\\circ a=\\varphi a$ [def-weil-pbc-etale-site].",
+   "uses": [
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof: the section s'_phi of F(V x_X U) pulling back to s_phi by Gamma_phi and restricting to zero off its image; the statement claims the map for sheaves of Lambda-modules, the proof treats abelian sheaves only"
+   }
+  },
+  {
+   "text": "*The graph identity.* For $a:V'\\to V$ in $X_{\\Et}$ and $\\varphi:V\\to U$ an $X$-morphism: $a_U\\circ\\Gamma_{\\varphi a}=\\Gamma_\\varphi\\circ a$ as morphisms $V'\\to V_U$. Indeed $p_V a_U\\Gamma_{\\varphi a}=a\\,p_{V'}\\Gamma_{\\varphi a}=a$ and $q_Va_U\\Gamma_{\\varphi a}=q_{V'}\\Gamma_{\\varphi a}=\\varphi a$, while $p_V\\Gamma_\\varphi a=a$ and $q_V\\Gamma_\\varphi a=\\varphi a$; two morphisms into $V_U=V\\times_XU$ with the same two components are equal by the uniqueness in the universal property of the fibre product [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof: the section s'_phi of F(V x_X U) pulling back to s_phi by Gamma_phi and restricting to zero off its image; the statement claims the map for sheaves of Lambda-modules, the proof treats abelian sheaves only"
+   }
+  },
+  {
+   "text": "*Clause 1.* Let $f\\in\\Lambda_X(V)$. Since $\\gamma$ is a morphism of sheaves on $X_{\\Et}$ [prop-weil-pbc-inverse-image-modules-exact](1) and the restriction of $\\pi_*\\Lambda_U$ along $a$ is $\\Lambda_U(a_U)$ (step 1), $\\gamma_{V'}(f|_{V'})=\\Lambda_U(a_U)(\\gamma_V(f))$. As $\\Lambda_U$ is a contravariant functor on $U_{\\Et}$, step 2 gives $\\theta_{V',\\varphi a}(f|_{V'})=\\Lambda_U(\\Gamma_{\\varphi a})\\Lambda_U(a_U)(\\gamma_Vf)=\\Lambda_U(a_U\\Gamma_{\\varphi a})(\\gamma_Vf)=\\Lambda_U(\\Gamma_\\varphi a)(\\gamma_Vf)=\\Lambda_U(a)\\big(\\Lambda_U(\\Gamma_\\varphi)(\\gamma_Vf)\\big)=\\Lambda_U(a)(\\theta_{V,\\varphi}(f))$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DI (lemma-extension-by-zero, line 2058), proof, first paragraph: f.s = fs with O_U(V -> U) = O(V)"
+   }
+  },
+  {
+   "text": "*Clause 2: $P_M$ is a presheaf of $\\Lambda_X$-modules.* $M(V,\\varphi)$ is a $\\Lambda_U(V,\\varphi)$-module [def-weil-sheaf-of-modules-category], hence a $\\Lambda_X(V)$-module through the ring homomorphism $\\theta_{V,\\varphi}$ (step 1); so $P_M(V)=\\bigoplus_\\varphi M(V,\\varphi)$ [def-weil-pbc-etale-sum-extension] is a $\\Lambda_X(V)$-module, $f\\cdot(s_\\varphi)_\\varphi=(\\theta_{V,\\varphi}(f)s_\\varphi)_\\varphi$, whose additive group is that of the presheaf of abelian groups $P_M$. This is the structure $f\\cdot s=fs$ of Stacks 03DI, with $\\theta_{V,\\varphi}$ in place of $\\mathcal O_U(V\\xrightarrow{\\varphi}U)=\\mathcal O(V)$. Semilinearity: for $a:V'\\to V$, the restriction $P_M(a)$ sends $s\\in M(V,\\varphi)$ to $M(a)(s)$ in the summand of $\\varphi a$ (with $a:(V',\\varphi a)\\to(V,\\varphi)$, step 1). By the semilinearity of the restriction maps of the $\\Lambda_U$-module $M$ [def-weil-sheaf-of-modules-category] and clause 1 (step 3), $M(a)(\\theta_{V,\\varphi}(f)s)=\\Lambda_U(a)(\\theta_{V,\\varphi}(f))\\,M(a)(s)=\\theta_{V',\\varphi a}(f|_{V'})\\,M(a)(s)=f|_{V'}\\cdot M(a)(s)$. Since $P_M(a)$ is additive and every element of $P_M(V)$ is a finite sum of elements of the summands, $P_M(a)(f\\cdot s)=f|_{V'}\\cdot P_M(a)(s)$ for all $s\\in P_M(V)$ (several $\\varphi$ with the same $\\varphi a=\\psi$ land in the summand of $\\psi$, where they are added, and the action of $f|_{V'}$ there is additive). As $\\Lambda_X$ is a sheaf of rings [def-weil-pbc-constant-sheaf], $P_M$ is a presheaf of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification]. For $\\alpha:M\\to M'$, each $\\alpha_{(V,\\varphi)}$ is $\\Lambda_U(V,\\varphi)$-linear [def-weil-sheaf-of-modules-category], hence $\\Lambda_X(V)$-linear through $\\theta_{V,\\varphi}$, so $(P_\\alpha)_V=\\bigoplus_\\varphi\\alpha_{(V,\\varphi)}$ is $\\Lambda_X(V)$-linear; and $(P_\\alpha)_{V'}\\circ P_M(a)=P_{M'}(a)\\circ(P_\\alpha)_V$ because on the summand of $\\varphi$ both sides are $\\alpha_{(V',\\varphi a)}\\circ M(a)=M'(a)\\circ\\alpha_{(V,\\varphi)}$ into the summand of $\\varphi a$ ($\\alpha$ is a morphism of presheaves). So $P_\\alpha$ is a morphism of presheaves of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DI (lemma-extension-by-zero, line 2058), proof, first paragraph: f.s = fs with O_U(V -> U) = O(V)"
+   }
+  },
+  {
+   "text": "*Clause 3: the identity $e_\\varphi(\\theta_{V,\\varphi}(f)s)=\\gamma_V(f)e_\\varphi(s)$.* Let $f\\in\\Lambda_X(V)$, $s\\in M(V,\\varphi)$, and $t=\\gamma_V(f)\\,e_\\varphi(s)\\in M(V_U,q_V)$, the product for the $\\Lambda_U(V_U,q_V)$-module $M(V_U,q_V)$. Let $W=V_U\\setminus\\Gamma_\\varphi(V)$, open by [lem-weil-pbc-etale-graph-section-extension-map](1), with inclusion $j_W$, a morphism $(W,q_Vj_W)\\to(V_U,q_V)$ of $U_{\\Et}$; restriction of sections to $W$ is $M(j_W)$. By semilinearity of the restriction maps of $M$ [def-weil-sheaf-of-modules-category] and [lem-weil-pbc-etale-graph-section-extension-map](2) ($M(\\Gamma_\\varphi)(e_\\varphi s)=s$, $M(j_W)(e_\\varphi s)=0$): $M(\\Gamma_\\varphi)(t)=\\Lambda_U(\\Gamma_\\varphi)(\\gamma_Vf)\\,M(\\Gamma_\\varphi)(e_\\varphi s)=\\theta_{V,\\varphi}(f)\\,s$ and $M(j_W)(t)=\\Lambda_U(j_W)(\\gamma_Vf)\\,M(j_W)(e_\\varphi s)=\\Lambda_U(j_W)(\\gamma_Vf)\\cdot0=0$. So $t$ satisfies the two conditions characterizing $e_\\varphi(\\theta_{V,\\varphi}(f)s)$, and by the uniqueness in [lem-weil-pbc-etale-graph-section-extension-map](2), $t=e_\\varphi(\\theta_{V,\\varphi}(f)s)$. (This uses only semilinearity, not that $f$ is a constant section: $\\Lambda_X(V)$ consists of locally constant functions, not only constants.)",
+   "uses": [
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof: the section s'_phi of F(V x_X U) pulling back to s_phi by Gamma_phi and restricting to zero off its image; the statement claims the map for sheaves of Lambda-modules, the proof treats abelian sheaves only"
+   }
+  },
+  {
+   "text": "*Clause 3: linearity of $c^p_M$.* $\\pi_*M$ is a sheaf of $\\Lambda_X$-modules with $f\\cdot u=\\gamma_V(f)u$ for $f\\in\\Lambda_X(V)$, $u\\in(\\pi_*M)(V)=M(V_U,q_V)$ [prop-weil-pbc-inverse-image-modules-exact](3), [def-weil-pbc-direct-image]. For $s=(s_\\varphi)_\\varphi\\in P_M(V)$ (finitely many nonzero components) and $f\\in\\Lambda_X(V)$, by step 4 and step 5, $c^p_{M,V}(f\\cdot s)=\\sum_\\varphi e_\\varphi(\\theta_{V,\\varphi}(f)s_\\varphi)=\\sum_\\varphi\\gamma_V(f)e_\\varphi(s_\\varphi)=\\gamma_V(f)\\sum_\\varphi e_\\varphi(s_\\varphi)=f\\cdot c^p_{M,V}(s)$, using the distributivity of the $\\Lambda_U(V_U,q_V)$-module $M(V_U,q_V)$. $c^p_{M,V}$ is additive and $c^p_M$ commutes with the restriction maps, since it is a morphism of presheaves of $\\Lambda$-modules [lem-weil-pbc-etale-graph-section-extension-map](3). A morphism of presheaves of abelian groups between presheaves of $\\Lambda_X$-modules that is $\\Lambda_X(V)$-linear on every $V$ is a morphism of presheaves of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification]; with step 4 ($P_M$ is one), $c^p_M:P_M\\to\\pi_*M$ is a morphism of presheaves of $\\Lambda_X$-modules.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof: the section s'_phi of F(V x_X U) pulling back to s_phi by Gamma_phi and restricting to zero off its image; the statement claims the map for sheaves of Lambda-modules, the proof treats abelian sheaves only"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-graph-section-extension-map",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03DI (line 2058), proof, first paragraph (the module structure f.s = fs); the linearity of the graph-section map is written out by the agent, since Etale Cohomology Lemma 0F4L (etale-cohomology.tex line 11517) states the map for sheaves of Lambda-modules but proves only the case of abelian sheaves"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +152,31 @@
    "results": "PresheafOfModules.pushforward, pushforwardId, pushforwardComp, pushforward_map_app_apply (Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean); index unavailable, so not a proof of absence of anything else",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the extension by zero presheaf over a slice category is a presheaf of modules and the map to the pushforward is linear",
+   "results": "Function.ExtendByZero.linearMap (Mathlib.LinearAlgebra.Pi), PresheafOfModules.pushforward0 and its obj/map lemmas (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward), DFinsupp.lmk (Mathlib.LinearAlgebra.DFinsupp), PresheafOfModules.ofPresheaf, PresheafOfModules.map (Mathlib.Algebra.Category.ModuleCat.Presheaf): general constructions, no graph-section map on etale sites",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf of modules: direct sum over Hom(V,U) of sections, module structure through ring homomorphisms compatible with restriction, morphism into direct image is linear",
+   "results": "PresheafOfModules.Elements.freeYoneda, freeYonedaCoproduct, freeObj, freeObj_map, freeObjDesc, freeObjDesc_app (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free, .Generator): free presheaves of modules, not the sum presheaf P_M or the map c^p_M",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'graph|extensionByZero|extendByZero' Mathlib/AlgebraicGeometry/Sites Mathlib/CategoryTheory/Sites Mathlib/Algebra/Category/ModuleCat; grep -n 'graph|Module|Ring' Mathlib/AlgebraicGeometry/Sites/Etale.lean, ConstantSheaf.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only CategoryTheory/Sites/GlobalSections.lean, LocalSite.lean, AlgebraicGeometry/Sites/SmallAffineZariski.lean mention 'graph' (unrelated); the etale site files have no modules over the constant sheaf and no graph sections",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +196,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-graph-section-extension-map-linear",
+  "worker": "stage1",
+  "summary": "Split into six steps, all elementary computations from the definitions: (1) the setting and theta_{V,phi} a ring homomorphism (gamma from prop-weil-pbc-inverse-image-modules-exact (1), graph morphisms from lem-weil-pbc-etale-graph-section-extension-map (1), a_U from the fibre product); (2) the graph identity a_U Gamma_{phi a} = Gamma_phi a by the uniqueness of the fibre product; (3) clause 1 from the naturality of gamma and step 2; (4) clause 2: P_M a presheaf of Lambda_X-modules (the structure f.s = fs of Stacks 03DI) and P_alpha linear; (5) e_phi(theta(f)s) = gamma_V(f) e_phi(s) by semilinearity of the restrictions of M and the uniqueness in lem-weil-pbc-etale-graph-section-extension-map (2); (6) Lambda_X-linearity of c^p_M. Statement and stmt_deps kept. The brief's plan (pull f through e_phi as a constant section) does not cover non-constant f in Lambda_X(V) (locally constant functions); the uniqueness argument of the statement's own ingredients is used instead. proof_origin is agent: Stacks 0F4L claims the map for Lambda-modules but proves only the abelian case; 03DI gives the module structure. Three further Mathlib searches recorded (no match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Six elementary steps: the ring map theta, the graph identity a_U Gamma_{phi a} = Gamma_phi a, naturality of gamma, P_M a presheaf of Lambda_X-modules with semilinear restrictions, the identity e_phi(theta(f)s) = gamma_V(f) e_phi(s) via the uniqueness clause of the graph-section node (correctly handles locally constant f), linearity of c^p_M. Correct; 0 new nodes."
+ }
 }
