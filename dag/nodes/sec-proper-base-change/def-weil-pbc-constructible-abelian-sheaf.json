@@ -1,0 +1,79 @@
+{
+ "id": "def-weil-pbc-constructible-abelian-sheaf",
+ "kind": "definition",
+ "title": "Constructible abelian sheaf on the small etale site",
+ "statement": "Let $T$ be a scheme and $C$ an abelian sheaf on its small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. The sheaf $C$ is a *constructible abelian sheaf* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<r}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<r}T_k$ of the underlying space into pairwise disjoint locally closed subsets, with immersions of schemes $\\iota_k$ with set-theoretic image $T_k$) such that\n(a) every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and\n(b) for every $k$ the abelian inverse image $\\iota_k^{-1}C$ [def-weil-pbc-inverse-image] on $(Z_k)_{\\Et}$ is *finite locally constant* (Stacks 03RU): there are an etale covering $\\{V_i\\to Z_k\\}_{i\\in I}$ and finite abelian groups $A_i$ with $(\\iota_k^{-1}C)|_{V_i}\\cong\\underline{A_i}$, the constant abelian sheaf with value $A_i$ on $(V_i)_{\\Et}$ [def-weil-pbc-constant-sheaf], for every $i$.\nThis is the global-partition form of Stacks Definition 03RW (2) (there: a partition of every affine open); for quasi-compact quasi-separated $T$ the two agree by Stacks Lemma 095E. It is the abelian counterpart of [def-weil-pbc-etale-constructible-sheaf] (no coefficient ring), the notion called 'constructible torsion' in the blueprint (such a sheaf has finite geometric stalks, and on a quasi-compact $T$ it is killed by a positive integer). The schemes $Z_k$ are part of the data; one may take $Z_k=T_k$ with its reduced induced structure.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), part (2), etale-cohomology.tex line 11672, with Definition 03RU (definition-finite-locally-constant), abelian part, line 9917, and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated) (3), line 11717"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf embeds into finite direct sum of pushforwards of constant sheaves along finite morphisms",
+   "results": "CategoryTheory.Sheaf.instHasFiniteCoproducts (Mathlib.CategoryTheory.Sites.Limits), CategoryTheory.Sheaf.IsConstant and isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf), AlgebraicGeometry.Scheme.Modules.instAdditivePushforward: constant sheaves on a general site only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible abelian sheaf on the small étale site of a scheme: finite partition into constructible locally closed subschemes on which the sheaf is finite locally constant",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), SheafOfModules.IsFiniteType, CompHausLike.LocallyConstant.functor: no constructible or locally constant etale sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible, Topology.IsLocallyConstructible and their API (Mathlib.Topology.Constructible): constructible subsets only",
+   "date": "2026-10-10",
+   "verdict": "no match (subsets, not sheaves)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'constructible' over Mathlib/AlgebraicGeometry/Sites/ and Mathlib/CategoryTheory/Sites/ (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "no hit: Mathlib/AlgebraicGeometry/Sites/ (Etale.lean, EtalePoint.lean, AffineEtale.lean, Proetale.lean) defines the small etale site and its points but no locally constant or constructible sheaves; constructibility exists only for subsets (Mathlib/Topology/Constructible.lean: Topology.IsConstructible, IsRetrocompact)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-constructible-finite-pushforward",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition of constructible abelian sheaves after Stacks 03RW (2)/03RU in the global-partition form (agrees with Stacks for qcqs T, as the node says); unsplit (to be verified as a definition node)."
+ }
+}
