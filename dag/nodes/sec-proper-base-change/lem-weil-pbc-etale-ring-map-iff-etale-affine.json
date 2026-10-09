@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+ "kind": "statement",
+ "title": "Spec of a ring map is etale iff the ring map is etale (finitely presented with H_1 = 0 and Omega = 0)",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is étale [def-weil-etale-morphism] if and only if $\\varphi$ is an étale ring map in the sense of Algebra, Definition 00U1: $S$ is a finitely presented $R$-algebra, $H_1(L_{S/R})=0$ [def-weil-pbc-smooth-ring-map] and $\\Omega_{S/R}=0$ [def-weil-pbc-kahler-differentials].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 02GJ (lemma-etale-characterize, line 8090), (1)<=>(2) with U = Spec S, V = Spec R; Definition Tag 02GI (definition-etale, line 8058); etale ring maps: algebra.tex Definition Tag 00U1 (definition-etale, line 39245); the agreement of Definition 02GI with [def-weil-etale-morphism] is recorded in that node (Lemmas 02GV, 02GE)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec.map of a ring homomorphism is étale iff the ring homomorphism is étale",
+   "results": "AlgebraicGeometry.Spec.map, RingHom.Etale, RingHom.etale_algebraMap (Mathlib.RingTheory.RingHom.Etale), AlgebraicGeometry.Spec.map_eq_id",
+   "date": "2026-10-10",
+   "verdict": "partial: ring side; scheme side via HasRingHomProperty.Spec_iff (grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of affine schemes Spec S → Spec R is étale iff ring map R → S is étale",
+   "results": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale (v4.28 snapshot name; here AlgebraicGeometry.Etale), RingHom.Etale.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "partial; see grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasRingHomProperty\\|class Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -n 'theorem Spec_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'def Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Etale.lean; grep -n 'class Etale\\|class FormallyEtale' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean",
+   "results": "Morphisms/Etale.lean:41 class Etale (affine-locally RingHom.Etale), :56 instance HasRingHomProperty @Etale RingHom.Etale; RingHomProperties.lean:360 HasRingHomProperty.Spec_iff : P (Spec.map φ) ↔ Q φ.hom; RingHom/Etale.lean:28 def RingHom.Etale f := Algebra.Etale R S (f.toAlgebra); Etale/Basic.lean:47 class FormallyEtale (Subsingleton Ω[A⁄R], Subsingleton (H1Cotangent R A)), :206 class Etale (FormallyEtale + FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.HasRingHomProperty.Spec_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+  "line": 360,
+  "how": "specializes in one line: with P := @AlgebraicGeometry.Etale (the Mathlib match of def-weil-etale-morphism) and Q := RingHom.Etale (instance HasRingHomProperty @Etale RingHom.Etale, Morphisms/Etale.lean:56), Etale (Spec.map φ) ↔ RingHom.Etale φ; RingHom.Etale φ is by definition (RingHom/Etale.lean:28) Algebra.Etale R S = FormallyEtale R S (Subsingleton Ω[S⁄R] and Subsingleton (H1Cotangent R S), Etale/Basic.lean:47) plus FinitePresentation R S (Etale/Basic.lean:206), i.e. Definition 00U1 with H1Cotangent = H_1(L_{S/R}) by the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

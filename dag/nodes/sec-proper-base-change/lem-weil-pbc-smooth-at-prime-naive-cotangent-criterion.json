@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-smooth-at-prime-naive-cotangent-criterion",
+ "kind": "statement",
+ "title": "Vanishing of H_1 and freeness of the differentials at a prime give a smooth principal localization",
+ "statement": "Let $A\\to C$ be a homomorphism of commutative rings making $C$ a finitely presented $A$-algebra, and let $\\mathfrak q\\subset C$ be a prime ideal such that the localization at $\\mathfrak q$ of the $C$-module $H_1(L_{C/A})$ [def-weil-pbc-smooth-ring-map] vanishes, $H_1(L_{C/A})_{\\mathfrak q}=0$, and the localization $(\\Omega_{C/A})_{\\mathfrak q}$ of the module of Kähler differentials [def-weil-pbc-kahler-differentials] is a finite free $C_{\\mathfrak q}$-module. Then there is $g\\in C\\setminus\\mathfrak q$ such that the ring map $A\\to C\\to C_g$ is smooth [def-weil-pbc-smooth-ring-map] ($C_g$ the localization of $C$ at $\\{1,g,g^2,\\dots\\}$); that is, $A\\to C$ is smooth at $\\mathfrak q$ in the sense of Algebra, Definition 00TB.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07BU (lemma-smooth-at-point, line 37523), implication (2)=>(1); smooth at a prime: Definition Tag 00TB (definition-smooth-at-prime)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra, H1 cotangent vanishes at prime and Kähler differentials free at prime, then smooth after inverting an element not in the prime",
+   "results": "RingHom.smooth_def, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.Smooth.mk (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; see leanfinder"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth at a prime: H1 of cotangent complex localized at prime is zero and differentials localized are free implies exists f not in prime with A_f smooth",
+   "results": "Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.smoothLocus (Mathlib.RingTheory.Smooth.Locus)",
+   "date": "2026-10-10",
+   "verdict": "match (with smoothLocus_eq_compl_support_inter)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^abbrev\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Locus.lean; sed -n 56,57p and 148,152p",
+   "results": "line 46 abbrev IsSmoothAt p := FormallySmooth R (Localization.AtPrime p) [stacks 00TB]; line 56 smoothLocus_eq_compl_support_inter [EssFiniteType R A] : smoothLocus R A = (Module.support A (H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]; line 150 IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p) [IsSmoothAt R p] : ∃ f ∉ p, Smooth R (Localization.Away f)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsSmoothAt.exists_notMem_smooth",
+  "file": "Mathlib/RingTheory/Smooth/Locus.lean",
+  "line": 150,
+  "how": "specializes in one line: the instance IsSmoothAt A q is q ∈ smoothLocus A C, which by Algebra.smoothLocus_eq_compl_support_inter (line 56; EssFiniteType from FinitePresentation) is the conjunction of q ∉ Module.support C (H1Cotangent A C) (Module.notMem_support_iff, RingTheory/Support.lean:55: the localization at q is zero) and q ∈ Module.freeLocus C Ω[C⁄A] (mem_freeLocus, RingTheory/Spectrum/Prime/FreeLocus.lean:54: the localization at q is free); the conclusion Algebra.Smooth A (Localization.Away f) is smoothness of A -> C_f by the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

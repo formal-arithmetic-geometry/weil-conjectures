@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-kahler-differentials-localization",
+ "kind": "statement",
+ "title": "Kähler differentials commute with localization of the algebra",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $S\\subset B$ a multiplicative subset and $S^{-1}B$ the localization, an $A$-algebra via $A\\to B\\to S^{-1}B$. Then the $S^{-1}B$-linear map $S^{-1}\\Omega_{B/A}\\to\\Omega_{S^{-1}B/A}$, $\\mathrm db/s\\mapsto(1/s)\\,\\mathrm d(b/1)$, induced by the map $\\Omega_{B/A}\\to\\Omega_{S^{-1}B/A}$ of $B\\to S^{-1}B$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]), is an isomorphism. In particular, for $g\\in B$, $\\Omega_{B_g/A}\\cong(\\Omega_{B/A})_g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00RT (lemma-differentials-localize, line 34078), part (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials of a localization is the localization of the Kähler differentials",
+   "results": "KaehlerDifferential.isLocalizedModule_map (Mathlib.RingTheory.Etale.Kaehler), KaehlerDifferential.isLocalizedModule, KaehlerDifferential.isLocalizedModule_of_isLocalizedModule (Mathlib.RingTheory.Kaehler.TensorProduct)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module of Kähler differentials of S^{-1}B over A is S^{-1} of Kähler differentials of B over A",
+   "results": "KaehlerDifferential.isLocalizedModule_map (Mathlib.RingTheory.Etale.Kaehler), KaehlerDifferential.isLocalizedModule (localizing the base, Stacks 00RT (1)-type)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocalizedModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Kaehler.lean",
+   "results": "Etale/Kaehler.lean:63 instance KaehlerDifferential.isLocalizedModule_map (M : Submonoid S) [IsLocalization M T] : IsLocalizedModule M (map R R S T); Kaehler/TensorProduct.lean:234,240 (localization of the base)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.isLocalizedModule_map",
+  "file": "Mathlib/RingTheory/Etale/Kaehler.lean",
+  "line": 63,
+  "how": "exact, with R := A, S := B, T := S^{-1}B, M := S: KaehlerDifferential.map R R S T : Ω[S⁄R] → Ω[T⁄R] is a localization of the S-module Ω[S⁄R] at M; the isomorphism is IsLocalizedModule.iso M (map R R S T), extended to T-linear by IsLinearMap.extendScalarsOfIsLocalization as used in Smooth/Locus.lean:73"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

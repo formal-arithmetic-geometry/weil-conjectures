@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-principal-localization",
+ "kind": "statement",
+ "title": "A principal localization of a smooth algebra is smooth",
+ "statement": "Let $R\\to S$ be a smooth ring map [def-weil-pbc-smooth-ring-map] and $g\\in S$, and let $S_g$ be the localization of $S$ at $\\{1,g,g^2,\\dots\\}$. Then the ring map $R\\to S\\to S_g$ is smooth [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00T3 (lemma-localize-smooth, line 37113), first assertion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization away from an element of a smooth algebra is smooth over the base",
+   "results": "Algebra.basicOpen_subset_smoothLocus_iff_smooth (Smooth/Locus), Algebra.Smooth.of_isLocalization_Away (Smooth/Basic), Algebra.IsStandardSmooth.localization_away, RingHom.Smooth.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "match (with Algebra.Smooth.comp)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if R → S is smooth then R → S_g is smooth for g in S",
+   "results": "RingHom.Smooth.holdsForLocalizationAway, Algebra.Smooth.of_isLocalization_Away, Algebra.IsStandardSmooth.localization_away, RingHom.isStandardSmooth_localizationPreserves",
+   "date": "2026-10-10",
+   "verdict": "match (with Algebra.Smooth.comp)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean | grep -i 'locali\\|Away\\|comp'",
+   "results": "line 497 instance [FormallySmooth R A] (M : Submonoid A) : FormallySmooth R (Localization M); line 559 Smooth.of_isLocalization_Away (r : R) [IsLocalization.Away r A] : Smooth R A; line 568 Smooth.comp [Smooth R A] [Smooth A B] : Smooth R B",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth.comp",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 568,
+  "how": "specializes in one line: Algebra.Smooth.comp R S S_g with [Smooth S S_g] from Algebra.Smooth.of_isLocalization_Away g (line 559); smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
