@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-charpoly-locally-free",
+ "kind": "definition",
+ "title": "Characteristic polynomial of an endomorphism of a finite locally free module of constant rank",
+ "statement": "Let $A$ be a commutative ring, $n\\ge0$, $M$ an $A$-module for which there are $f_1,\\dots,f_r\\in A$ generating the unit ideal with $M_{f_i}$ free of rank $n$ over $A_{f_i}$ for all $i$ ($M$ finite locally free of constant rank $n$), and $\\varphi:M\\to M$ an $A$-linear map. The characteristic polynomial $\\mathrm{CharPol}_A(\\varphi:M\\to M)\\in A[T]$ is the unique polynomial $\\chi$ of [lem-weil-pbc-charpoly-locally-free-existence]: for every ring map $A\\to A'$ with $M\\otimes_AA'$ free of rank $n$ over $A'$, the image of $\\chi$ in $A'[T]$ is $\\det(T\\cdot1-\\varphi\\otimes1)$ on $M\\otimes_AA'$. It is of the form $T^n+c_{n-1}T^{n-1}+\\dots+c_0$, and it does not depend on the choice of $f_1,\\dots,f_r$ (the characterizing property does not mention them).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph ('Here CharPol$_A$ denotes the characteristic polynomial of an endomorphism of a finite locally free module over $A$ ... one uses Algebra, Lemma \\ref{algebra-lemma-standard-covering} to glue')"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-charpoly-locally-free-existence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of an endomorphism of a finite projective module (locally free), defined by gluing",
+   "results": "LinearMap.charpoly (free and finite only), LinearMap.polyCharpoly, Matrix.charpoly, LinearMap.charpoly_def",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a linear endomorphism of a finitely generated projective module over a commutative ring, compatible with localization and base change",
+   "results": "LinearMap.polyCharpoly_map_eq_charpoly, LinearMap.eval_charpoly, LinearMap.charpoly_def (free modules only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, Module.Projective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'charpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Projective\\|rankAtStalk\\|IsLocalizedModule'; sed -n 35,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+   "results": "none; LinearMap.charpoly (Charpoly/Basic.lean) is defined only for [Module.Free R M] [Module.Finite R M]",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib has the free case LinearMap.charpoly only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: the definition CharPol_A on finite locally free modules of constant rank; well posed; unsplit."
+ }
+}

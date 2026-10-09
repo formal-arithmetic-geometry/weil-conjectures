@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-charpoly-locally-free-existence",
+ "kind": "statement",
+ "title": "Existence and uniqueness of the characteristic polynomial on a finite locally free module of constant rank",
+ "statement": "Let $A$ be a commutative ring, $n\\ge0$ an integer, $M$ an $A$-module and $\\varphi:M\\to M$ an $A$-linear map. Assume there are $f_1,\\dots,f_r\\in A$ generating the unit ideal such that for each $i$ the $A_{f_i}$-module $M_{f_i}$ is free of rank $n$. Then there is exactly one polynomial $\\chi\\in A[T]$ with the following property: for every ring map $A\\to A'$ such that $M\\otimes_AA'$ is a free $A'$-module of rank $n$, the image of $\\chi$ in $A'[T]$ is the characteristic polynomial $\\det(T\\cdot1-\\varphi_{A'})$ of $\\varphi_{A'}=\\varphi\\otimes1$ on $M\\otimes_AA'$ (computed in any basis). Moreover $\\chi=T^n+c_{n-1}T^{n-1}+\\dots+c_0$ with $c_k\\in A$ (in particular $\\chi$ is monic). In particular, if $M$ itself is free of rank $n$, then $\\chi$ is the usual characteristic polynomial of $\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph: 'Here CharPol$_A$ denotes the characteristic polynomial of an endomorphism of a finite locally free module over $A$. If the module is free the CharPol$_A$ is defined as the characteristic polynomial of the corresponding matrix and in general one uses Algebra, Lemma \\ref{algebra-lemma-standard-covering} to glue. Details omitted.' (gluing by Algebra Lemma Tag 00EJ, lemma-standard-covering, algebra.tex line 4354)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of an endomorphism of a finite projective module (locally free), defined by gluing",
+   "results": "LinearMap.charpoly (Mathlib.LinearAlgebra.Charpoly.Basic; only for [Module.Free R M] [Module.Finite R M]), LinearMap.polyCharpoly (free), Matrix.charpoly, LinearMap.charpoly_monic, LinearMap.charpoly_def, Matrix.charpoly_mulVecLin, Matrix.charpoly.univ, Matrix.charpoly_toLin",
+   "date": "2026-10-10",
+   "verdict": "no match (free case only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a linear endomorphism of a finitely generated projective module over a commutative ring, compatible with localization and base change",
+   "results": "LinearMap.polyCharpolyAux_map_eq_charpoly, LinearMap.polyCharpoly_map_eq_charpoly, LinearMap.eval_charpoly, LinearMap.polyCharpoly, LinearMap.charpoly_def, LinearMap.polyCharpolyAux_map_aeval (all for finite free modules)",
+   "date": "2026-10-10",
+   "verdict": "no match (free case only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, Module.Projective",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'charpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Projective\\|rankAtStalk\\|IsLocalizedModule'; sed -n 35,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean; sed -n 15,35p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/BaseChange.lean",
+   "results": "no file mentions charpoly together with Projective / rankAtStalk / IsLocalizedModule; LinearMap.charpoly requires Module.Free and Module.Finite; pieces for the free case: LinearMap.charpoly_baseChange (Charpoly/BaseChange.lean:23: (f.baseChange A).charpoly = f.charpoly.map (algebraMap R A)), Matrix.charpoly_map, LinearMap.charpoly_toMatrix, LinearEquiv.charpoly_conj (Charpoly/ToMatrix.lean:76)",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces for the free case: LinearMap.charpoly_baseChange, LinearMap.charpoly_toMatrix, LinearEquiv.charpoly_conj)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: existence and uniqueness of the characteristic polynomial on a finite locally free module of constant rank (gluing, 00EJ); well posed; unsplit."
+ }
+}

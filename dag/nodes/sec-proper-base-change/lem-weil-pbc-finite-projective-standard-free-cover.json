@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-finite-projective-standard-free-cover",
+ "kind": "statement",
+ "title": "A direct summand of a finite free module is finite locally free (standard cover)",
+ "statement": "Let $A$ be a commutative ring and $M$ an $A$-module which is a direct summand of a finite free $A$-module (equivalently, $M$ is finite projective). Then there are finitely many elements $f_1,\\dots,f_r\\in A$ generating the unit ideal such that for every $i$ the localization $M_{f_i}$ is a finite free $A_{f_i}$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), implication (3)$\\Rightarrow$(7) (direct summand of a finite free module $\\Rightarrow$ finite locally free), with Definition Tag 00NV of finite locally free"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite projective module is locally free: there exist elements f_i generating the unit ideal such that the localization at each f_i is free",
+   "results": "Module.projective_of_localization_maximal' (Mathlib.RingTheory.LocalProperties.Projective), Module.Finite.exists_comp_eq_id_of_projective, Module.free_of_flat_of_isLocalRing (Mathlib.RingTheory.LocalRing.Module), Module.freeLocus, Module.mem_freeLocus_of_isLocalization, Module.Flat.projective_of_finitePresentation, Module.free_of_isLocalizedModule, Module.Projective.iff_split'",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finitely generated projective module M over R: there exist finitely many f_i generating the unit ideal such that each localization M_{f_i} is a free R_{f_i}-module",
+   "results": "Module.projective_of_localization_maximal, Module.freeLocus_eq_univ_iff (Mathlib.RingTheory.Spectrum.Prime.FreeLocus: freeLocus = univ iff projective, for finitely presented M), Module.finitePresentation_of_projective, Module.projective_of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_free_localizedModule_powers",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers (Mathlib.RingTheory.Localization.Free): M finitely presented, M_S free over R_S ==> exists r in S with M_r free over R_r (and same finrank)",
+   "date": "2026-10-10",
+   "verdict": "no match (piece: the pointwise version)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'span.*= ⊤' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i free; grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Projective.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "results": "no statement 'exists a finite family spanning the unit ideal with free localizations' for projective modules; pieces: Module.freeLocus_eq_univ (FreeLocus.lean:160, finite flat => every stalk free), Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78), Module.finitePresentation_of_projective, Module.Flat.of_projective (Flat/Basic.lean:227); the cover then needs the quasi-compactness of Spec A (the r_p for all primes p generate the unit ideal, finitely many suffice)",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces: Module.freeLocus_eq_univ + Module.FinitePresentation.exists_free_localizedModule_powers + finitely many of the r_p generate the unit ideal)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: Algebra 00NX (3)⇒(7); well posed; unsplit."
+ }
+}

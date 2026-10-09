@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finite-projective-rank-locally-constant",
+ "kind": "statement",
+ "title": "The rank of a finite projective module is locally constant on Spec",
+ "statement": "Let $A$ be a commutative ring and $M$ a finite projective $A$-module (e.g. a direct summand of a finite free $A$-module). Then for every prime $\\mathfrak p\\subset A$ the localization $M_{\\mathfrak p}$ is a finite free $A_{\\mathfrak p}$-module, and the function $\\operatorname{Spec}A\\to\\mathbf N$, $\\mathfrak p\\mapsto\\operatorname{rank}_{A_{\\mathfrak p}}M_{\\mathfrak p}$, is locally constant for the Zariski topology.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), implication (2)$\\Rightarrow$(8)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "rank of a finite projective module at prime ideals is a locally constant function on Spec R",
+   "results": "Module.isLocallyConstant_rankAtStalk (Mathlib.RingTheory.Spectrum.Prime.FreeLocus: [FinitePresentation R M] [Flat R M] : IsLocallyConstant (rankAtStalk M)), Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk, Module.rankAtStalk_eq_finrank_of_free, Module.rankAtStalk_eq_finrank_tensorProduct",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.isLocallyConstant_rankAtStalk",
+   "results": "Module.isLocallyConstant_rankAtStalk {R M} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (Module.rankAtStalk M) (Mathlib.RingTheory.Spectrum.Prime.FreeLocus)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective module is locally free: there exist elements f_i generating the unit ideal such that the localization at each f_i is free",
+   "results": "Module.free_of_flat_of_isLocalRing (finite flat over a local ring is free), Module.freeLocus, Module.Flat.projective_of_finitePresentation",
+   "date": "2026-10-10",
+   "verdict": "pieces for the freeness of stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'rankAtStalk\\|freeLocus_eq_univ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; grep -rn 'instance of_projective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Basic.lean",
+   "results": "FreeLocus.lean:183 def rankAtStalk p = finrank (Localization.AtPrime p) (LocalizedModule p.primeCompl M); :160 freeLocus_eq_univ [Finite][Flat] : freeLocus R M = univ (every stalk free); :224 isLocallyConstant_rankAtStalk [FinitePresentation][Flat]; Flat/Basic.lean:227 instance Flat.of_projective; Module.finitePresentation_of_projective (Mathlib/Algebra/Module/FinitePresentation.lean)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.isLocallyConstant_rankAtStalk",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+  "how": "specializes in one line per clause: a finite projective M is finitely presented (Module.finitePresentation_of_projective) and flat (instance Module.Flat.of_projective); then every stalk is free by Module.freeLocus_eq_univ (FreeLocus.lean:160; i.e. Module.free_of_flat_of_isLocalRing) and p |-> rankAtStalk M p = finrank_{A_p} M_p is locally constant by Module.isLocallyConstant_rankAtStalk (FreeLocus.lean:224). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Module.isLocallyConstant_rankAtStalk (Spectrum/Prime/FreeLocus.lean) with finitePresentation_of_projective, Flat.of_projective, freeLocus_eq_univ; checked."
+ }
+}

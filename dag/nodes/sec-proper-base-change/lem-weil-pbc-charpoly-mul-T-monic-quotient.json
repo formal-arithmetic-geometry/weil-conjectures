@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-charpoly-mul-T-monic-quotient",
+ "kind": "statement",
+ "title": "The characteristic polynomial of multiplication by T on R[T]/(f) is f",
+ "statement": "Let $R$ be a commutative ring and $f\\in R[T]$ monic of degree $n$. Then the characteristic polynomial of the $R$-linear map $\\mu_t:R[T]/(f)\\to R[T]/(f)$, $x\\mapsto tx$ (where $t$ is the class of $T$), on the free $R$-module $R[T]/(f)$ with basis $1,t,\\dots,t^{n-1}$, is $f$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1): '$f=\\mathrm{CharPol}_A(T:B\\to B)$' for $B=A[T]/(f)$ (stated without proof)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of multiplication by root in AdjoinRoot of monic polynomial g equals g",
+   "results": "IsAdjoinRootMonic.mk, AdjoinRoot.isAdjoinRootMonic, AdjoinRoot.minpoly_powerBasis_gen_of_monic (fields only), AdjoinRoot.minpoly_root (fields only), MulSemiringAction.charpoly",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "charpoly of the endomorphism of R[X]/(f) given by multiplication by X equals the monic polynomial f (companion matrix)",
+   "results": "charpoly_leftMulMatrix (Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly: for a power basis h of S over a comm ring R, (leftMulMatrix h.basis h.gen).charpoly = minpoly R h.gen), LinearMap.charpoly_monic, LinearMap.aeval_eq_aeval_mod_charpoly",
+   "date": "2026-10-10",
+   "verdict": "generalization: charpoly_leftMulMatrix"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monic polynomial g over a commutative ring R, the minimal polynomial / characteristic polynomial of root g in AdjoinRoot g (R[X]/(g)) is g",
+   "results": "AdjoinRoot.minpoly_powerBasis_gen_of_monic, AdjoinRoot.minpoly_root (fields), IsAdjoinRootMonic.minpoly_eq (integrally closed domains), minpoly.unique (fields), minpoly.unique' (Mathlib.FieldTheory.Minpoly.Basic: comm ring A, p monic, aeval x p = 0, every nonzero q of smaller degree does not vanish at x ==> p = minpoly A x)",
+   "date": "2026-10-10",
+   "verdict": "piece: minpoly.unique'"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly _ (AdjoinRoot.root _)",
+   "results": "AdjoinRoot.minpoly_root (fields only)",
+   "date": "2026-10-10",
+   "verdict": "no direct match over a ring"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpoly' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'adjoinRoot\\|powerBasis\\|leftMulMatrix'; sed -n 55,95p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean; sed -n 150,215p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerBasis.lean; sed -n 625,660p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdjoinRoot.lean",
+   "results": "charpoly_leftMulMatrix (Matrix/Charpoly/Minpoly.lean:75, R comm ring, S ring, h : PowerBasis R S); AdjoinRoot.powerBasis' (AdjoinRoot.lean:633: for g monic over a comm ring, gen = root g, dim = natDegree g, basis 1, root, ..., root^(d-1)); PowerBasis.dim_le_degree_of_root (PowerBasis.lean:191: a nonzero p with aeval gen p = 0 has degree >= dim); minpoly.unique' (FieldTheory/Minpoly/Basic.lean:141); AdjoinRoot.aeval_eq / mk_self (aeval (root f) f = mk f f = 0)",
+   "date": "2026-10-10",
+   "verdict": "match (a few Mathlib lemmas one per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "charpoly_leftMulMatrix",
+  "file": "Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean",
+  "how": "specializes with one lemma per clause: for f monic take the power basis pb = AdjoinRoot.powerBasis' hf of AdjoinRoot f = R[T]/(f) (Mathlib/RingTheory/AdjoinRoot.lean:633; gen = root f = t, basis 1, t, ..., t^(n-1)); charpoly_leftMulMatrix pb gives (leftMulMatrix pb.basis t).charpoly = minpoly R t, and leftMulMatrix pb.basis t is the matrix of mu_t = Algebra.lmul R _ t in that basis (LinearMap.charpoly_toMatrix). Then minpoly R t = f by minpoly.unique' (Mathlib/FieldTheory/Minpoly/Basic.lean:141) with: f monic; aeval t f = mk f f = 0 (AdjoinRoot.aeval_eq, AdjoinRoot.mk_self); a nonzero q with deg q < deg f = pb.dim has aeval t q != 0 (PowerBasis.dim_le_degree_of_root, Mathlib/RingTheory/PowerBasis.lean:191). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf charpoly_leftMulMatrix (Matrix/Charpoly/Minpoly.lean:75) with AdjoinRoot.powerBasis′, minpoly.unique′; accepted on the worker′s check."
+ }
+}

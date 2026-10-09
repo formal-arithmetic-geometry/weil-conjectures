@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-charpoly-locally-free-direct-sum",
+ "kind": "statement",
+ "title": "The characteristic polynomial on a finite locally free module is multiplicative on direct sums",
+ "statement": "Let $A$ be a commutative ring, $M_1,M_2$ $A$-modules and $n_1,n_2\\ge0$ such that for $k=1,2$ there are $f^{(k)}_1,\\dots,f^{(k)}_{r_k}\\in A$ generating the unit ideal with $(M_k)_{f^{(k)}_i}$ free of rank $n_k$ over $A_{f^{(k)}_i}$, and let $\\varphi_k:M_k\\to M_k$ be $A$-linear. Then $M=M_1\\oplus M_2$ is finite locally free of constant rank $n_1+n_2$ (the products $f^{(1)}_if^{(2)}_j$ generate the unit ideal and $M_{f^{(1)}_if^{(2)}_j}$ is free of rank $n_1+n_2$), and $\\mathrm{CharPol}_A(\\varphi_1\\oplus\\varphi_2:M\\to M)=\\mathrm{CharPol}_A(\\varphi_1:M_1\\to M_1)\\cdot\\mathrm{CharPol}_A(\\varphi_2:M_2\\to M_2)$ in $A[T]$ [def-weil-pbc-charpoly-locally-free].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1): 'CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$' ('Details omitted')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-charpoly-locally-free"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of the direct sum (prodMap) of two endomorphisms equals the product of characteristic polynomials",
+   "results": "LinearMap.charpoly_prodMap (Mathlib.LinearAlgebra.Charpoly.ToMatrix; M1, M2 finite free), LinearMap.det_prodMap (free), LinearMap.polyCharpoly, Matrix.charpoly, LinearMap.charpoly",
+   "date": "2026-10-10",
+   "verdict": "no match (free case: LinearMap.charpoly_prodMap)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a linear endomorphism of a finitely generated projective module over a commutative ring, compatible with localization and base change",
+   "results": "only free-module statements (LinearMap.polyCharpoly_map_eq_charpoly, LinearMap.eval_charpoly, LinearMap.charpoly_def)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpoly_prodMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 55,70p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean",
+   "results": "LinearMap.charpoly_prodMap (Charpoly/ToMatrix.lean:63): [Module.Finite R M1] [Module.Free R M1] [Module.Finite R M2] [Module.Free R M2] (f1.prodMap f2).charpoly = f1.charpoly * f2.charpoly; nothing for projective or locally free modules",
+   "date": "2026-10-10",
+   "verdict": "no match (free case LinearMap.charpoly_prodMap; the locally free case reduces to it on the cover f^(1)_i f^(2)_j)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: multiplicativity of CharPol on direct sums; well posed; unsplit."
+ }
+}
