@@ -25,12 +25,33 @@
    "results": "GeometricallyConnected is defined as geometrically (ConnectedSpace ·), so Mathlib's connectedness of a scheme is ConnectedSpace of its carrier",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "connected topological space: nonempty and not a disjoint union of two nonempty clopen sets",
+   "results": "ConnectedSpace (Mathlib.Topology.Connected.Basic), connectedSpace_iff_clopen, preconnectedSpace_iff_clopen (Mathlib.Topology.Connected.Clopen), IsConnected",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a topological space is connected iff nonempty and every clopen subset is empty or everything",
+   "results": "connectedSpace_iff_clopen : ConnectedSpace α ↔ Nonempty α ∧ ∀ s, IsClopen s → s = ∅ ∨ s = univ (Mathlib.Topology.Connected.Clopen), preconnectedSpace_iff_clopen, isClopen_iff",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'class ConnectedSpace|theorem connectedSpace_iff_clopen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Connected/",
+   "results": "Basic.lean:705 class ConnectedSpace extends PreconnectedSpace (with Nonempty); Clopen.lean:710 connectedSpace_iff_clopen",
+   "date": "2026-10-09",
+   "verdict": "confirmed: the node's decomposition condition is connectedSpace_iff_clopen (T₁ clopen, T₂ its complement)"
   }
  ],
  "mathlib_match": {
   "declaration": "ConnectedSpace",
   "file": "Mathlib/Topology/Connected/Basic.lean",
-  "how": "exact"
+  "how": "exact: `ConnectedSpace X` (Topology/Connected/Basic.lean:705); the node's form (nonempty, and in every decomposition into two open and closed parts one part is empty) is `connectedSpace_iff_clopen` (Topology/Connected/Clopen.lean:710); for a scheme apply it to the underlying space"
  },
  "status": "mathlib",
  "merged_into": null,

@@ -46,6 +46,27 @@
    "results": "AlgebraicGeometry/Morphisms/UnderlyingMap.lean:59 class Surjective (surjective on points); AffineScheme.lean:59 class IsAffine; no thickening predicate or structure anywhere; the notions are expressible with existing declarations: for i : T ⟶ T', `IsClosedImmersion i ∧ i.ker ^ 2 = ⊥` (first order), `IsClosedImmersion i ∧ IsNilpotent i.ker` (finite order, as in FormallyUnramified.hom_ext), `IsClosedImmersion i ∧ Surjective i` (thickening), `IsAffine T'` and `[T'.Over S]`, but no declaration names them",
    "date": "2026-10-09",
    "verdict": "no match (assembled from Mathlib leaves; no single declaration)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "thickening of schemes closed immersion with nilpotent or square zero ideal sheaf",
+   "results": "AlgebraicGeometry.IsClosedImmersion, IsClosedImmersion.mk, isClosedImmersion_iff, IsClosedImmersion.iff_isFinite_and_mono, IsClosedImmersion.iff_isPreimmersion; no thickening",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first order thickening of schemes: closed immersion whose ideal sheaf has square zero",
+   "results": "IdealSheafData.subschemeι, IdealSheafData.subscheme, IsClosedImmersion.instSubschemeι, IsClosedImmersion.Spec_iff (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme / Morphisms.ClosedImmersion); no thickening",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'thickening|square.zero|IsNilpotent .*ker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only Morphisms/FormallyUnramified.lean:189-193 (docstring 'infinitesimal thickening', hypothesis IsNilpotent i.ker in FormallyUnramified.hom_ext)",
+   "date": "2026-10-09",
+   "verdict": "no match: no thickening notion; the clauses are expressible from the leaves IsClosedImmersion, Scheme.Hom.ker, IdealSheafData powers, Surjective, Scheme.Over, IsAffine, so the split ends in leaves; unchanged"
   }
  ],
  "mathlib_match": null,

@@ -30,6 +30,27 @@
    "results": "AlgebraicGeometry/ResidueField.lean:346: Scheme.SpecToEquivOfField K X : (Spec (.of K) ⟶ X) ≃ Σ x, X.residueField x ⟶ .of K",
    "date": "2026-10-09",
    "verdict": "match for the description by a point and a map of residue fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric point of a scheme: morphism from Spec of an algebraically closed field",
+   "results": "Scheme.fromSpecResidueField, Scheme.SpecToEquivOfField (Mathlib.AlgebraicGeometry.ResidueField), Scheme.Hom.fiber, SpecToEquivOfLocalRing, fromSpecStalk",
+   "date": "2026-10-09",
+   "verdict": "match via SpecToEquivOfField (no named geometric point)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "results": "SpecToEquivOfField (K) [Field K] (X) : (Spec ↧K ⟶ X) ≃ (x : X) × (X.residueField x ⟶ ↧K); SpecToEquivOfField_apply_fst : first component = f (closedPoint K)",
+   "date": "2026-10-09",
+   "verdict": "match: the point is the image of the closed point, as in the node"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def SpecToEquivOfField' -A4 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean; rg -n 'class IsAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "ResidueField.lean:346 def SpecToEquivOfField (K : Type u) [Field K] (X : Scheme.{u}); Basic.lean:62 class IsAlgClosed",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {

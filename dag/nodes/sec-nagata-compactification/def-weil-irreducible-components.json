@@ -25,12 +25,33 @@
    "results": "used for schemes in AlgebraicGeometry/Properties.lean:220 (isField_stalk_of_closure_mem_irreducibleComponents) and Noetherian.lean:364 (finite_irreducibleComponents_of_isNoetherian): the components of a scheme are irreducibleComponents of its carrier",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "irreducible components of a topological space: maximal irreducible subsets",
+   "results": "irreducibleComponents, irreducibleComponent_mem_irreducibleComponents, irreducibleComponents_eq_maximals_closed, exists_mem_irreducibleComponents_subset_of_isIrreducible (Mathlib.Topology.Irreducible)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "set of irreducible components of a topological space as maximal irreducible subsets",
+   "results": "irreducibleComponents (Maximal IsIrreducible), irreducibleComponent, isIrreducible_irreducibleComponent (Mathlib.Topology.Irreducible)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def irreducibleComponents|def IsIrreducible|def IsPreirreducible|isPreirreducible_iff_isClosed_union_isClosed|irreducibleComponents_eq_maximals_closed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Irreducible.lean",
+   "results": "line 46 IsPreirreducible (two nonempty opens meet); 52 IsIrreducible := Nonempty ∧ IsPreirreducible; 107 irreducibleComponents := {s | Maximal IsIrreducible s}; 301 isPreirreducible_iff_isClosed_union_isClosed (closed-cover form)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "irreducibleComponents",
   "file": "Mathlib/Topology/Irreducible.lean",
-  "how": "exact"
+  "how": "exact: `irreducibleComponents X = {s | Maximal IsIrreducible s}` (Topology/Irreducible.lean:107); Mathlib's `IsIrreducible s` (nonempty and preirreducible, line 52) is the node's closed-cover definition by `isPreirreducible_iff_isClosed_union_isClosed` (line 301); closedness of components is `irreducibleComponents_eq_maximals_closed`; for a scheme apply it to the underlying space"
  },
  "status": "mathlib",
  "merged_into": null,

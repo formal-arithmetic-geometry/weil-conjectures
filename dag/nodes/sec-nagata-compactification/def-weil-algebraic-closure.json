@@ -24,6 +24,27 @@
    "results": "IsAlgClosed K (Basic.lean:62); IsAlgClosure R K (Basic.lean:264): K is algebraically closed and algebraic over R; AlgebraicClosure k (AlgebraicClosure.lean:127, tagged @[stacks 09GT]) with instances Field (:153), Algebra R for R → k (:142), Algebra.IsAlgebraic k (:179), IsAlgClosure k (:199), IsAlgClosed (:203), CharP p when k has characteristic p (:208); IsAlgClosure K (AlgebraicClosure E) for E algebraic over K (:222); the uniqueness is IsAlgClosure.equiv (Basic.lean), recorded by the node lem-weil-realization-exists",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebraic closure of a field exists and is unique up to isomorphism",
+   "results": "AlgebraicClosure, AlgebraicClosure.instField, AlgebraicClosure.isAlgClosed (Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure), IsAlgClosure.mk (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosure.equiv",
+   "results": "IsAlgClosure.equiv (R) [IsDomain R] (L M) [IsAlgClosure R L] [IsAlgClosure R M] : L ≃ₐ[R] M (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (uniqueness over K; a field is a domain and torsion-free over itself, so the hypotheses hold for R = K)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def AlgebraicClosure|^class IsAlgClosure|^class IsAlgClosed|def equiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/",
+   "results": "AlgebraicClosure.lean:127 def AlgebraicClosure; Basic.lean:62 class IsAlgClosed; :264 class IsAlgClosure (IsAlgClosed K and Algebra.IsAlgebraic R K); :405 IsAlgClosure.equiv",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {

@@ -22,12 +22,40 @@
    "results": "Morphisms/ClosedImmersion.lean:45 class IsClosedImmersion (closed embedding and surjective on stalks); :370 isClosedImmersion_iff_isAffineHom (affine and Γ(Y,U) → Γ(X,f⁻¹U) surjective for affine U); Morphisms/Immersion.lean IsImmersion",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed immersion of schemes: closed embedding with surjective map on structure sheaves",
+   "results": "AlgebraicGeometry.IsClosedImmersion, IsClosedImmersion.mk, isClosedImmersion_iff (SurjectiveOnStalks ∧ IsClosedEmbedding), isClosedImmersion_iff_isAffineHom, IsImmersion.instOfIsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion / Immersion)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+   "results": "isClosedImmersion_iff_isAffineHom : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U, IsAffineOpen U → Function.Surjective (f.app U) (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "match (the node's affine form)"
+  },
+  {
+   "tool": "local_search",
+   "query": "isImmersion_iff_exists",
+   "results": "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists (Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:155): IsImmersion f ↔ ∃ Z g₁ g₂, IsClosedImmersion g₁ ∧ IsOpenImmersion g₂ ∧ g₁ ≫ g₂ = f",
+   "date": "2026-10-09",
+   "verdict": "match for the immersion clause"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'class IsClosedImmersion|isClosedImmersion_iff_isAffineHom|class IsImmersion|lemma isImmersion_iff_exists' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/",
+   "results": "ClosedImmersion.lean:45 class IsClosedImmersion extends SurjectiveOnStalks f with isClosedEmbedding; :370 isClosedImmersion_iff_isAffineHom; Immersion.lean:45 class IsImmersion; :155 isImmersion_iff_exists",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "AlgebraicGeometry.IsClosedImmersion",
   "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
-  "how": "exact: closed embedding with surjective stalk maps (line 45), which is the node's condition since surjectivity of O_X → i_*O_Z is checked on stalks; the affine form is `isClosedImmersion_iff_isAffineHom` (line 370); immersions are `AlgebraicGeometry.IsImmersion`"
+  "how": "exact: `IsClosedImmersion f` (ClosedImmersion.lean:45) is a closed embedding with surjective stalk maps, which is the node's condition since a map of sheaves O_X → i_*O_Z is surjective exactly when it is surjective on stalks; the node's affine form ('affine and induced on affine opens by surjective ring maps') is `isClosedImmersion_iff_isAffineHom` (line 370); an immersion is `AlgebraicGeometry.IsImmersion` (Immersion.lean:45), and the node's definition 'closed immersion followed by an open immersion' is `IsImmersion.isImmersion_iff_exists` (Immersion.lean:155: ∃ Z g₁ g₂, IsClosedImmersion g₁ ∧ IsOpenImmersion g₂ ∧ g₁ ≫ g₂ = f)"
  },
  "status": "mathlib",
  "merged_into": null,

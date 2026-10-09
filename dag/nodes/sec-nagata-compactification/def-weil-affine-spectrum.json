@@ -26,6 +26,27 @@
    "results": "AlgebraicGeometry.Spec (R : CommRingCat) : Scheme (Scheme.lean:470, built on Spec.locallyRingedSpaceObj R, Spec.lean:188, whose space is Spec.topObj R = PrimeSpectrum R, Spec.lean:58); Spec.map (f : R ⟶ S) : Spec S ⟶ Spec R (Scheme.lean:479); Scheme.Spec : CommRingCatᵒᵖ ⥤ Scheme (:494); Spec.fullyFaithful (GammaSpecAdjunction.lean:532), Spec.preimage (:559) and Spec.homEquiv : (Spec S ⟶ Spec R) ≃ (R ⟶ S) (:579)",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectrum of a commutative ring as a scheme, morphisms Spec S to Spec R correspond to ring homomorphisms R to S",
+   "results": "AlgebraicGeometry.Spec.map_apply, Spec.homEquiv_apply (Mathlib.AlgebraicGeometry.GammaSpecAdjunction), Spec.map, Spec.locallyRingedSpaceMap, Scheme.Spec (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-09",
+   "verdict": "match (same declarations as recorded)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Spec.homEquiv",
+   "results": "AlgebraicGeometry.Spec.homEquiv : (Spec S ⟶ Spec R) ≃ (R ⟶ S); homEquiv_apply; homEquiv_symm_apply (= Spec.map) (Mathlib.AlgebraicGeometry.GammaSpecAdjunction)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def Spec |def Spec.map|def Spec.homEquiv|Unique <| Spec' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "results": "Scheme.lean:470 def Spec (R : CommRingCat) : Scheme; :479 def Spec.map (f : R ⟶ S) : Spec S ⟶ Spec R; :627 instance Unique (Spec (.of K)) for a field K; GammaSpecAdjunction.lean:579 def Spec.homEquiv (bijection, inverse Spec.map)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: recorded declarations exist at the recorded places and state the node's clauses (Spec, functorial Spec.map, bijection Hom(Spec B, Spec A) ≃ Hom(A, B), Spec of a field has one point)"
   }
  ],
  "mathlib_match": {

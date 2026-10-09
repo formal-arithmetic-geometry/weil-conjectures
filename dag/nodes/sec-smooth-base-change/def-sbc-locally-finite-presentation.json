@@ -27,12 +27,33 @@
    "results": "def-weil-pbc-scheme-conventions and def-weil-scheme-morphism-properties define 'of finite presentation' (finite covers) only; def-weil-finite-type-morphism defines locally of finite type; def-pc-morphism-conventions only lists the phrase; no node defines locally of finite presentation",
    "date": "2026-10-09",
    "verdict": "no existing node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes locally of finite presentation",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation, .mk, locallyOfFinitePresentation_iff, finitePresentation_appLE, instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE",
+   "results": "HasRingHomProperty.iff_exists_appLE (hQ : StableUnderCompositionWithLocalizationAwaySource Q) : P f ↔ ∀ x, ∃ U V, ∃ (_ : x ∈ V) (e : V ≤ f ⁻¹ᵁ U), Q (f.appLE U V e) (Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties)",
+   "date": "2026-10-09",
+   "verdict": "match: the node's pointwise form"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'class LocallyOfFinitePresentation|lemma iff_exists_appLE|finitePresentation_isLocal|stableUnderCompositionWithLocalizationAway' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/FinitePresentation.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Basic.lean",
+   "results": "FinitePresentation.lean:45 class LocallyOfFinitePresentation (all affine pairs); RingHomProperties.lean:651 HasRingHomProperty.iff_exists_appLE; RingHom/FinitePresentation.lean:68 finitePresentation_isLocal, using finitePresentation_stableUnderComposition.stableUnderCompositionWithLocalizationAway finitePresentation_holdsForLocalizationAway (LocalProperties/Basic.lean:297)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "AlgebraicGeometry.LocallyOfFinitePresentation",
   "file": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
-  "how": "exact: Mathlib asks that Γ(S,V) → Γ(X,U) be of finite presentation for all affine opens V ⊆ S, U ⊆ f⁻¹V; since finite presentation of ring maps is a local property (the HasRingHomProperty instance in that file), this is the same as the condition at every point"
+  "how": "exact: `LocallyOfFinitePresentation f` (Morphisms/FinitePresentation.lean:45) asks Γ(S,V) → Γ(X,U) of finite presentation for all affine opens V ⊆ S, U ⊆ f⁻¹V; the node's pointwise definition (each x has affine U ∋ x and affine V with f(U) ⊆ V and R → A of finite presentation) is exactly the right side of `HasRingHomProperty.iff_exists_appLE` (Morphisms/RingHomProperties.lean:651) for P = LocallyOfFinitePresentation, Q = RingHom.FinitePresentation, whose hypothesis (stability under composition with localizations away) is `(RingHom.finitePresentation_stableUnderComposition.stableUnderCompositionWithLocalizationAway RingHom.finitePresentation_holdsForLocalizationAway)` as used in RingHom/FinitePresentation.lean:68-75; 'of finite presentation' (comparison clause) is LocallyOfFinitePresentation ∧ QuasiCompact ∧ QuasiSeparated"
  },
  "status": "mathlib",
  "merged_into": null,

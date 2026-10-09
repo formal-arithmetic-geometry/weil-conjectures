@@ -18,12 +18,33 @@
    "results": "Topology/Defs/Basic.lean:119: def IsLocallyClosed (s : Set X) : Prop := ∃ (U Z : Set X), IsOpen U ∧ IsClosed Z ∧ s = U ∩ Z",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally closed subset: intersection of an open set and a closed set, equivalently open in its closure",
+   "results": "IsLocallyClosed (Mathlib.Topology.Defs.Basic), isLocallyClosed_tfae, IsLocallyClosed.inter, isLocallyClosed_iff_isOpen_coborder (Mathlib.Topology.LocallyClosed)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally closed set is open in its closure",
+   "results": "IsLocallyClosed.isOpen_preimage_val_closure, isLocallyClosed_tfae (item 5: IsOpen (closure s ↓∩ s)) (Mathlib.Topology.LocallyClosed)",
+   "date": "2026-10-09",
+   "verdict": "match for the 'equivalently' clause"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def IsLocallyClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Defs/Basic.lean; rg -n 'lemma isLocallyClosed_tfae' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/LocallyClosed.lean",
+   "results": "Defs/Basic.lean:119 def IsLocallyClosed s := ∃ U Z, IsOpen U ∧ IsClosed Z ∧ s = U ∩ Z; LocallyClosed.lean:149 isLocallyClosed_tfae",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "IsLocallyClosed",
   "file": "Mathlib/Topology/Defs/Basic.lean",
-  "how": "exact: `IsLocallyClosed s ↔ ∃ U Z, IsOpen U ∧ IsClosed Z ∧ s = U ∩ Z` (line 119); for a scheme apply it to the underlying topological space"
+  "how": "exact: `IsLocallyClosed s ↔ ∃ U Z, IsOpen U ∧ IsClosed Z ∧ s = U ∩ Z` is the definition (Topology/Defs/Basic.lean:119); the 'open in its closure' form is item 5 of `isLocallyClosed_tfae` (Topology/LocallyClosed.lean:149); for a scheme apply it to the underlying topological space"
  },
  "status": "mathlib",
  "merged_into": null,

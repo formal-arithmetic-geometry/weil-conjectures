@@ -29,6 +29,27 @@
    "results": "only nagata blow-up nodes (def-nagata-invertible-ideal, def-nagata-effective-cartier-ideal, def-nagata-extended-ideal, ...), none defining the kernel ideal sheaf of a closed immersion",
    "date": "2026-10-09",
    "verdict": "no existing node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ideal sheaf of a closed immersion: kernel of structure sheaf map",
+   "results": "IdealSheafData.ker_subschemeι, Scheme.Hom.ker, IdealSheafData.ker_fst_of_isClosedImmersion, Hom.ker_eq_bot_of_isIso, ker_subschemeι_app, specTargetImageIdeal",
+   "date": "2026-10-09",
+   "verdict": "match (Scheme.Hom.ker)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel ideal sheaf of a morphism of schemes; on affine opens equal to kernel of the ring map for quasi-compact morphisms",
+   "results": "Scheme.Hom.ker_apply : [QuasiCompact f] → f.ker.ideal U = RingHom.ker (f.app U); Scheme.ker_of_isAffine; ker_morphismRestrict_ideal (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def Hom.ker|lemma Hom.ker_apply|structure IdealSheafData' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; rg -n 'IsAffineHom f\\] : QuasiCompact|IsClosedImmersion f\\] : IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/",
+   "results": "Basic.lean:65 structure IdealSheafData; :692 def Hom.ker; :702 Hom.ker_apply [QuasiCompact f]; Affine.lean:58 instance IsAffineHom → QuasiCompact; ClosedImmersion.lean:151 instance IsClosedImmersion → IsAffineHom",
+   "date": "2026-10-09",
+   "verdict": "confirmed: a closed immersion is quasi-compact by these two instances, so ker_apply applies"
   }
  ],
  "mathlib_match": {
