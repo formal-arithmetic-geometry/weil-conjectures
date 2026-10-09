@@ -5,14 +5,95 @@
  "statement": "Let $R\\to S$ be a homomorphism of commutative rings and $M$ an $R$-module, with symmetric algebras $\\operatorname{Sym}_R(M)$, $\\iota_M:M\\to\\operatorname{Sym}_R(M)$ and $\\operatorname{Sym}_S(S\\otimes_RM)$, $\\iota_{S\\otimes M}$ [lem-weil-pbc-symmetric-algebra-universal-property]. Let $\\beta:\\operatorname{Sym}_R(M)\\to\\operatorname{Sym}_S(S\\otimes_RM)$ be the $R$-algebra homomorphism with $\\beta(\\iota_M(m))=\\iota_{S\\otimes M}(1\\otimes m)$. Then the $S$-algebra homomorphism $S\\otimes_R\\operatorname{Sym}_R(M)\\to\\operatorname{Sym}_S(S\\otimes_RM)$, $s\\otimes a\\mapsto s\\,\\beta(a)$, is an isomorphism. (For $S=R_f$ the localization at the powers of $f\\in R$: $\\operatorname{Sym}_R(M)_f\\cong\\operatorname{Sym}_{R_f}(M_f)$.)",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 0C6F (lemma-tensor-algebra-localization, line 2386: S^{-1}T_R(M) = T_{S^{-1}R}(S^{-1}M), similarly for Sym; proof omitted, hint: Lemma 00DE tensor-product-localization) is the localization case; the general base change follows from the universal properties: for a commutative S-algebra B, Hom_{S-alg}(S⊗_R Sym_R M, B) = Hom_{R-alg}(Sym_R M, B) = Hom_R(M, B) = Hom_S(S⊗_R M, B) = Hom_{S-alg}(Sym_S(S⊗_R M), B), compatibly with the map of the statement"
+  "place": "Algebra, Lemma 0C6F (label lemma-tensor-algebra-localization, line 2386; localization of tensor and symmetric algebras, with proof omitted and hint to Lemma 00DE) and Lemma 00DE (label lemma-tensor-product-localization, line 2124); the general base change follows from the universal properties: for a commutative S-algebra B, Hom_{S-alg}(S⊗_R Sym_R M, B) = Hom_{R-alg}(Sym_R M, B) = Hom_R(M, B) = Hom_S(S⊗_R M, B) = Hom_{S-alg}(Sym_S(S⊗_R M), B), compatibly with the map of the statement"
  },
  "stmt_deps": [
-  "lem-weil-pbc-symmetric-algebra-universal-property"
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-localization-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $A_R=\\operatorname{Sym}_R(M)$ and $A_S=\\operatorname{Sym}_S(S\\otimes_RM)$. By the universal property of the symmetric algebra [lem-weil-pbc-symmetric-algebra-universal-property], the $R$-linear map $m\\mapsto\\iota_{S\\otimes M}(1\\otimes m)$ induces the unique $R$-algebra map $\\beta:A_R\\to A_S$ appearing in the statement. The map is well defined because the displayed map is $R$-linear: the scalar action on $A_S$ is restricted along $R\\to S$ and $1\\otimes(rm)=r(1\\otimes m)$.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00DM and Lemma 0C6F; construction of the map on generators"
+   }
+  },
+  {
+   "text": "The $S$-algebra homomorphism $\\Phi:S\\otimes_RA_R\\to A_S$ is the inverse image of $\\beta$ under the base-change universal property [lem-weil-pbc-algebra-tensor-base-change-universal-property]. Explicitly, $\\Phi(s\\otimes a)=s\\,\\beta(a)$, and in particular $\\Phi(1\\otimes\\iota_M(m))=\\iota_{S\\otimes M}(1\\otimes m)$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0C6F, universal-property paragraph"
+   }
+  },
+  {
+   "text": "Let $j:M\\to S\\otimes_RA_R$ be $m\\mapsto1\\otimes\\iota_M(m)$. The module base-change universal property [lem-weil-pbc-module-base-change-universal-property] gives a unique $S$-linear map $\\widetilde j:S\\otimes_RM\\to S\\otimes_RA_R$ with $\\widetilde j(s\\otimes m)=s\\otimes\\iota_M(m)$. Applying the universal property of $A_S$ to $\\widetilde j$ gives an $S$-algebra homomorphism $\\Psi:A_S\\to S\\otimes_RA_R$ satisfying $\\Psi(\\iota_{S\\otimes M}(s\\otimes m))=s\\otimes\\iota_M(m)$.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-universal-property",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00DM and Lemma 0C6F; universal property applied after extension of scalars"
+   }
+  },
+  {
+   "text": "The composite $\\Phi\\circ\\Psi$ is the identity on $A_S$: on each generator $\\iota_{S\\otimes M}(s\\otimes m)$, the formula for $\\Psi$ followed by the formula for $\\Phi$ gives $s\\,\\iota_{S\\otimes M}(1\\otimes m)=\\iota_{S\\otimes M}(s\\otimes m)$, and the uniqueness clause of the symmetric-algebra universal property makes the two $S$-algebra maps equal.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0C6F, equality of maps by the universal property"
+   }
+  },
+  {
+   "text": "The composite $\\Psi\\circ\\Phi$ is the identity on $S\\otimes_RA_R$. By the base-change universal property [lem-weil-pbc-algebra-tensor-base-change-universal-property], it suffices to compare the restrictions of these $S$-algebra maps along $A_R\\to S\\otimes_RA_R$, $a\\mapsto1\\otimes a$. Their restrictions are $\\Psi\\circ\\beta$ and $a\\mapsto1\\otimes a$. These are equal by the uniqueness clause of the symmetric-algebra universal property: on $\\iota_M(m)$ both give $1\\otimes\\iota_M(m)$, because $\\beta(\\iota_M(m))=\\iota_{S\\otimes M}(1\\otimes m)$ and $\\Psi$ has the displayed generator formula. Thus $\\Phi$ and $\\Psi$ are inverse isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0C6F, equality of maps by the two universal properties"
+   }
+  },
+  {
+   "text": "For $S=R_f$, apply the isomorphism just proved and then the canonical tensor-localization identifications from [lem-weil-pbc-localization-tensor]: $R_f\\otimes_R\\operatorname{Sym}_R(M)\\cong\\operatorname{Sym}_R(M)_f$ and $R_f\\otimes_RM\\cong M_f$. Under these identifications the comparison is exactly $\\operatorname{Sym}_R(M)_f\\cong\\operatorname{Sym}_{R_f}(M_f)$, with the stated map on pure tensors.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0C6F and Lemma 00DE, localization case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-localization-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0C6F (line 2386) and Lemma 00DE (line 2124); universal-property proof expanded from the omitted argument in 0C6F"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,10 +160,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-symmetric-algebra-base-change",
+  "worker": "stage1",
+  "summary": "Split the base-change theorem into six complete steps following Stacks Algebra Lemma 0C6F: construct beta on symmetric-algebra generators; obtain the forward comparison by Mathlib's algebra base-change universal property; construct the inverse from the module base-change universal property and the symmetric-algebra universal property; verify both composites on generators; and specialize to principal localization using the algebra and module tensor-localization identifications. Added three Mathlib leaves for the two universal properties and tensoring with a localization."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: base change of the symmetric algebra (Stacks 0C6F is the localization case); self-contained; correct (both sides corepresent S-linear maps out of S (x) M); unsplit."
+  "group": "D1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D1; spot-checked by L: Repaired as asked at 19:41: the three Mathlib leaves now name the lines read in the pinned Mathlib (AlgHom.liftEquiv RingTheory/TensorProduct/Basic.lean:775 ff.; LinearMap.liftBaseChangeEquiv LinearAlgebra/TensorProduct/Basic.lean:52 ff.; LocalizedModule.equivTensorProduct and IsLocalization.Away.tensorEquiv/tensorRightEquiv Localization/BaseChange.lean:68 ff., 459 ff.; first lines verified) with the pure-tensor formulas, and the WANTED entry is gone (0C6F at algebra.tex:2386). Six steps: beta from the universal property, Phi from the base-change universal property, Psi from the module base change and Sym's universal property, the two composites are identities by uniqueness, the localization case."
  }
 }

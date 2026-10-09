@@ -1,0 +1,55 @@
+{
+ "id": "lem-weil-pbc-module-base-change-universal-property",
+ "kind": "statement",
+ "title": "Universal property of module base change",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, let $M$ be an $R$-module, and let $N$ be an $S$-module with its compatible $R$-module structure. Restriction along $m\\mapsto1\\otimes m$ gives a bijection between $S$-linear maps $S\\otimes_RM\\to N$ and $R$-linear maps $M\\to N$. Its inverse sends $u:M\\to N$ to the unique $S$-linear map with $(s\\otimes m)\\mapsto s\\,u(m)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00CV (tensor products of modules), universal property of the tensor product after extension of scalars"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear maps out of S tensor_R M are equivalent to R-linear maps M to an S-module",
+   "results": "LinearMap.liftBaseChangeEquiv, LinearMap.liftBaseChange, LinearMap.liftBaseChange_tmul and liftBaseChangeEquiv_symm_apply (Mathlib.LinearAlgebra.TensorProduct.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.liftBaseChangeEquiv",
+   "results": "LinearMap.liftBaseChangeEquiv : (M →ₗ[R] N) ≃ₗ[S] (S ⊗[R] M →ₗ[S] N), with tmul and one_tmul formulas",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def liftBaseChangeEquiv\\|liftBaseChange_tmul\\|liftBaseChangeEquiv_symm_apply' Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+   "results": "Basic.lean:52 liftBaseChangeEquiv; :56 liftBaseChange; :60 liftBaseChange_tmul; :65 liftBaseChangeEquiv_symm_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.liftBaseChangeEquiv, LinearMap.liftBaseChange, LinearMap.liftBaseChange_tmul, LinearMap.liftBaseChangeEquiv_symm_apply",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+  "how": "exact pinned Mathlib lines 52-66: LinearMap.liftBaseChangeEquiv (lines 52-53) is the stated bijection; liftBaseChange_tmul (lines 59-60) gives (x ⊗ₜ y) ↦ x • l(y), and liftBaseChangeEquiv_symm_apply (lines 64-66) gives the inverse restriction"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-algebra-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

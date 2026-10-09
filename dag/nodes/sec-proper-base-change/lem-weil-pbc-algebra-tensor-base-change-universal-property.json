@@ -1,0 +1,55 @@
+{
+ "id": "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+ "kind": "statement",
+ "title": "Universal property of algebra base change",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, let $A$ be a commutative $R$-algebra, and let $B$ be a commutative $S$-algebra, regarded as an $R$-algebra through $R\\to S\\to B$. Then restriction along $a\\mapsto 1\\otimes a$ gives a bijection between $S$-algebra homomorphisms $S\\otimes_R A\\to B$ and $R$-algebra homomorphisms $A\\to B$. Its inverse sends $f:A\\to B$ to the unique $S$-algebra homomorphism with $(s\\otimes a)\\mapsto s\\,f(a)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00CV (tensor products of algebras); the displayed universal property is the standard coproduct/base-change property, and is realized in Mathlib by AlgHom.liftEquiv"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of algebra base change: algebra homomorphisms S tensor_R A to B are equivalent to R-algebra homomorphisms A to B",
+   "results": "AlgHom.liftEquiv, AlgHom.liftEquiv_tmul, AlgHom.liftEquiv_symm_apply (Mathlib.RingTheory.TensorProduct.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgHom.liftEquiv",
+   "results": "AlgHom.liftEquiv (S ⊗[R] A →ₐ[S] B) ≃ (A →ₐ[R] B), with liftEquiv_tmul and liftEquiv_symm_apply (Mathlib.RingTheory.TensorProduct.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def liftEquiv\\|liftEquiv_tmul\\|liftEquiv_symm_apply' Mathlib/RingTheory/TensorProduct/Basic.lean",
+   "results": "Basic.lean:775 def AlgHom.liftEquiv; :792 liftEquiv_tmul; :795 liftEquiv_symm_apply; :801 AlgHom.ext_ring",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgHom.liftEquiv, AlgHom.liftEquiv_tmul, AlgHom.liftEquiv_symm_apply, AlgHom.ext_ring",
+  "file": "Mathlib/RingTheory/TensorProduct/Basic.lean",
+  "how": "exact pinned Mathlib lines 775-791: AlgHom.liftEquiv is the stated bijection; AlgHom.liftEquiv_tmul (lines 787-788) gives (s ⊗ₜ a) ↦ s • f(a), and AlgHom.liftEquiv_symm_apply (lines 790-791) gives the inverse restriction f(1 ⊗ₜ a)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-algebra-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
