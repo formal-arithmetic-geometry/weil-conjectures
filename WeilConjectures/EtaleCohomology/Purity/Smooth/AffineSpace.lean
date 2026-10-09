@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.Affine
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
@@ -38,6 +39,8 @@ affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line pu
   `Rp^! K ≅ Lp^* K (1)[2]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: clause (ii),
   affine-space purity `Rp_c^! K ≅ Lp_c^* K (c)[2c]`.
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`: its case `K = Λ_B`,
+  `ω_{p_c} ≅ Λ(c)[2c]`.
 
 ## Implementation notes
 
@@ -390,6 +393,28 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace {k : Type u} [Field k] 
     exact ⟨t ≪≫ (L(((affineSpaceSuccIso d Y).hom)^*[ModuleCat.{u + 1} Λ])).mapIso
       ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin 1);
         𝔸(ULift.{u} (Fin d); Y)) ↘ 𝔸(ULift.{u} (Fin d); Y))).mapIso ih ≪≫ l) ≪≫ s⟩
+
+/-- Blueprint `cor-pur-affine-space-purity`: affine-space purity
+
+*The dualizing complex.* For the projection `p_d : 𝔸^d_Y → Y` of relative affine space over
+a separated scheme of finite type over a field, on which the exponent of `Λ` is invertible,
+
+`ω_{p_d} = Rp_d^! Λ_Y ≅ Λ_{𝔸^d_Y}(d)[2d]`.
+
+This is the case `K = Λ_Y` of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`, with
+`Lp_d^* Λ_Y ≅ Λ_{𝔸^d_Y}`; `Λ_Y` lies in `D^b_{ctf}` as the twisting object `Λ_Y(0)`. -/
+theorem nonempty_iso_dualizingComplex_affineSpace {k : Type u} [Field k] (d : ℕ)
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [HasInvertibleExponent Λ Y] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); Y) ↘ Y) ≅
+      (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj
+        (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpace Λ d Y aY (tateObject Λ Y 0)
+    (boundedConstructibleFiniteTor_tateObject Λ Y 0)
+  exact ⟨(rightDerivedUpperShriek _ _).mapIso (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ e ≪≫
+    (twistShift Λ _ d).mapIso ((L(((𝔸(ULift.{u} (Fin d); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).mapIso
+      (HasTateTwist.twistObjectZeroIso Y) ≪≫ leftDerivedUpperStarUnitIso _ _)⟩
 
 end Etale
 

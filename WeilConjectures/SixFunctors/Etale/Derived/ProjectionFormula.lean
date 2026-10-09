@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude

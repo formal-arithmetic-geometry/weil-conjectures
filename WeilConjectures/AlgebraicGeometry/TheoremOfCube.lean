@@ -7,7 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 
 /-!
 # The theorem of the cube
@@ -105,9 +107,12 @@ Let `X`, `Y` be proper and geometrically integral over a field `K` and let `x` b
 the members `U` of an open cover of `Z`, and are isomorphic on the slice `{x} × Y × Z`, then
 `M ≅ N`.
 
-Since the pushforward of `𝒪` along `X ×_K Y ×_K Z → Z` is `𝒪_Z`, the invertible module
-`L = M ⊗ N⁻¹`, being locally on `Z` trivial, is the pullback of the invertible module
-`𝒩 = p_* L` on `Z`; pulling back along the section `x × y × id_Z` shows `𝒩 ≅ 𝒪_Z`. -/
+We show that `L = M ⊗ Nᵛ` is trivial. Let `π : X ×_K (Y ×_K Z) ⟶ Y ×_K Z` be the projection and
+`σ` the slice `{x} × Y × Z`, a section of `π`. As `X` is proper and geometrically integral, `π`
+induces bijections `Γ(V, 𝒪) ≅ Γ(π⁻¹ V, 𝒪)` on all opens `V`. Local generators of `L` over the
+opens `π⁻¹ V`, `V` lying over an open of the cover of `Z`, can be rescaled so that their
+pullbacks along `σ` agree with a fixed generator of `σ^* L ≅ 𝒪`; they then agree on overlaps and
+glue (`AlgebraicGeometry.Scheme.Modules.exists_isFreeGenerator_top_of_comp_eq_id`). -/
 theorem nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X)
@@ -117,8 +122,53 @@ theorem nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd (X Y Z : Over (Sp
         (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N))
     (hx : Nonempty (overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) M ≅
       overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) N)) :
-    Nonempty (M ≅ N) :=
-  sorry
+    Nonempty (M ≅ N) := by
+  let : X.left.Over (Spec (.of K)) := ⟨X.hom⟩
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : QuasiSeparatedSpace X.left := quasiSeparatedSpace_of_quasiSeparated X.hom
+  have : Scheme.GlobalSectionsBijective K X.left :=
+    have : IsProper (X.left ↘ Spec (.of K)) := inferInstanceAs (IsProper X.hom)
+    have : GeometricallyIntegral (X.left ↘ Spec (.of K)) :=
+      inferInstanceAs (GeometricallyIntegral X.hom)
+    .of_geometricallyIntegral (k := K) (X := X.left)
+  -- The slice `σ : Y × Z ⟶ X × Y × Z` at `x` is a section of the projection `π`.
+  set σ := lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)
+  let π : ((X ⊗ Y) ⊗ Z).left ⟶ (Y ⊗ Z).left := ((α_ X Y Z).hom ≫ snd X (Y ⊗ Z)).left
+  have hσ : σ.left ≫ π = 𝟙 _ := by
+    rw [← Over.comp_left]
+    have : σ ≫ (α_ X Y Z).hom ≫ snd X (Y ⊗ Z) = 𝟙 _ := by simp [σ]
+    rw [this]
+    rfl
+  have hπq : π ≫ (snd Y Z).left = (snd (X ⊗ Y) Z).left := by
+    rw [← Over.comp_left]
+    congr 1
+    simp
+  -- `π` is the base change of `X ⟶ Spec K`, so it induces bijections on sections.
+  have H : IsPullback ((α_ X Y Z).hom ≫ fst X (Y ⊗ Z)).left π (X.left ↘ Spec (.of K))
+      (Y ⊗ Z).hom := by
+    refine IsPullback.of_iso_pullback ⟨?_⟩ ((Over.forget _).mapIso (α_ X Y Z)) rfl rfl
+    change _ ≫ X.hom = _ ≫ (Y ⊗ Z).hom
+    rw [Over.w, Over.w]
+  have hπ (V : (Y ⊗ Z).left.Opens) : Function.Surjective (π.app V) :=
+    (Scheme.Hom.bijective_app_of_comp_eq_id π σ.left hσ (fun _ hA ↦
+      Scheme.GlobalSectionsBijective.isIso_app_of_isPullback H hA) V).2
+  -- `L = M ⊗ Nᵛ` is trivial over the opens `π⁻¹ q⁻¹ U` and on the slice.
+  choose U hU e using hloc
+  have hV : ⨆ t, (snd Y Z).left ⁻¹ᵁ U t = ⊤ :=
+    eq_top_iff.2 fun b _ ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨_, hU ((snd Y Z).left b)⟩
+  have hgen (t : Z.left) :
+      ∃ m : Γ(M ⊗ Nᵛ, π ⁻¹ᵁ ((snd Y Z).left ⁻¹ᵁ U t)), IsFreeGenerator m := by
+    obtain ⟨d⟩ := nonempty_pullback_tensorObj_dual_iso_unit _ M N (e t).some
+    obtain ⟨m, hm⟩ := exists_isFreeGenerator_of_pullback_ι_iso _ _ d
+    have hO : π ⁻¹ᵁ ((snd Y Z).left ⁻¹ᵁ U t) = preimageSnd X Y Z (U t) := by
+      rw [← Scheme.Hom.comp_preimage, hπq]
+    exact ⟨_, hm.map hO.le⟩
+  choose m hm using hgen
+  obtain ⟨d⟩ := nonempty_pullback_tensorObj_dual_iso_unit σ.left M N hx.some
+  obtain ⟨g, hg⟩ := exists_isFreeGenerator_top_of_comp_eq_id π σ.left hσ hπ (M ⊗ Nᵛ) _ hV m hm
+    ((isFreeGenerator_one ⊤).app_hom d.symm)
+  have := isIso_homOfGlobalSection hg
+  exact nonempty_iso_of_tensorObj_dual_iso_unit M N (asIso (homOfGlobalSection _ g)).symm
 
 /-- **The theorem of the cube** (Stacks, Tag 0BF4, over `S = Spec K` with `K`-rational points).
 
