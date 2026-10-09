@@ -60,8 +60,9 @@ subgroup, is not a field: it is a consequence of the other fields and of the Eul
 `L`-functions, `AlgebraicGeometry.WeilGroup.dense_frobenius`.
 
 The identification of `ker deg` with the étale fundamental group of the *geometric* curve
-`C₀ ×_K K̄`, which the rank-one purity theorems use, is the separate hypothesis
-`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`.
+`C₀ ×_K K̄`, which the rank-one purity theorems use, is the separate predicate
+`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`; every Weil group of a geometrically connected
+curve satisfies it by the homotopy exact sequence (`AlgebraicGeometry.WeilGroup.isEtaleQuotient`).
 
 ## Main definitions
 

@@ -362,11 +362,14 @@ theorem exists_constantCover_hom_of_section (U : C.FiniteEtale)
   have : IsFinite U.obj.hom := U.property
   have : Etale U.obj.hom := U.obj.prop
   let i₀ : (FiniteSubfield K)ᵒᵖ := Opposite.op ⟨⊥, inferInstance⟩
-  let q₀ : (constantCoverSchemeDiagram p).obj i₀ ⟶ C := Limits.pullback.fst p i₀.unop.toFiniteEtaleAlgebra.specHom
+  let q₀ : (constantCoverSchemeDiagram p).obj i₀ ⟶ C :=
+    Limits.pullback.fst p i₀.unop.toFiniteEtaleAlgebra.specHom
   let pW := Limits.pullback.snd U.obj.hom q₀
-  let ψ : Limits.pullback (𝟙 ((constantCoverSchemeDiagram p).obj i₀)) ((constantCoverCone p).π.app i₀) ⟶ Limits.pullback U.obj.hom q₀ :=
+  let ψ : Limits.pullback (𝟙 ((constantCoverSchemeDiagram p).obj i₀))
+      ((constantCoverCone p).π.app i₀) ⟶ Limits.pullback U.obj.hom q₀ :=
     Limits.pullback.lift (Limits.pullback.snd _ _ ≫ σ) (Limits.pullback.fst _ _) (by
-      have hc := Limits.pullback.condition (f := 𝟙 ((constantCoverSchemeDiagram p).obj i₀)) (g := (constantCoverCone p).π.app i₀)
+      have hc := Limits.pullback.condition (f := 𝟙 ((constantCoverSchemeDiagram p).obj i₀))
+        (g := (constantCoverCone p).π.app i₀)
       rw [Category.assoc, hσ, ← geometricFiberToConstantCover_fst p i₀.unop, ← Category.assoc]
       change (Limits.pullback.snd _ _ ≫ (constantCoverCone p).π.app i₀) ≫ q₀ = _
       rw [← hc, Category.comp_id])

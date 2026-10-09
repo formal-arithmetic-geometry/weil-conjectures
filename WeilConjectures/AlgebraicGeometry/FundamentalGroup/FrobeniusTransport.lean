@@ -70,6 +70,7 @@ noncomputable def unitFiniteEtale : Y.FiniteEtale :=
 
 variable {e} (τ : FiniteEtale.mapIso e ⋙ fiber t ≅ fiber t)
 
+omit [ConnectedSpace Y] in
 /-- A path `τ : F_t ∘ e_* ≅ F_t` carries the point of `e_* P` on the section `e⁻¹ ≫ σ` to the point
 of `P` on the section `σ`: naturality with respect to the morphism `Y ⟶ P` given by `σ`, the
 geometric fibres of `Y` and of `e_* Y` being points. -/
@@ -83,7 +84,6 @@ lemma transport_section (P : Y.FiniteEtale) (σ : Y ⟶ P.obj.left) (hσ : σ �
     simp)
   have hx₁ : (fiber t).map ((FiniteEtale.mapIso e).map S) x₁ = x := fiber_ext t <| by
     rw [fiber_map_left, hx]
-    simp only [fiberMk_left, Category.assoc]
     rfl
   have hn := ConcreteCategory.congr_hom (τ.hom.naturality S) x₁
   have key : τ.hom.app P x = (fiber t).map S (τ.hom.app T x₁) := by
@@ -131,7 +131,8 @@ lemma geometricGaloisFrobenius_inv_comp_geometricFiberProj :
 lemma geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure :
     p.geometricGaloisFrobenius.inv ≫ p.geometricFiberToAlgebraicClosure ≫
       (specGeometricFrobenius K).hom = p.geometricFiberToAlgebraicClosure := by
-  rw [Iso.inv_comp_eq, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure]
+  rw [Iso.inv_comp_eq,
+    Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure]
 
 /-- The base change `b(P₀) = P₀ ×_{C₀} C` of a finite étale `C₀`-scheme to the geometric fibre is
 isomorphic to its transport `g_* b(P₀)` along the geometric Galois Frobenius `g` of `C`, through
@@ -156,14 +157,14 @@ noncomputable def pullbackMapIsoIso (P₀ : C.FiniteEtale) :
       simp))
   hom_inv_id := by
     apply hom_ext
-    show Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
+    change Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
         (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) ≫
       Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
         (𝟙 _) p.geometricGaloisFrobenius.hom (𝟙 _) (by simp) (by simp) = 𝟙 _
     apply Limits.pullback.hom_ext <;> simp
   inv_hom_id := by
     apply hom_ext
-    show Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
+    change Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
         (𝟙 _) p.geometricGaloisFrobenius.hom (𝟙 _) (by simp) (by simp) ≫
       Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
         (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) = 𝟙 _
@@ -175,7 +176,7 @@ lemma pullbackMapIsoIso_hom_naturality {P₀ Q₀ : C.FiniteEtale} (φ : P₀ �
         (FiniteEtale.mapIso p.geometricGaloisFrobenius).map
           ((pullback p.geometricFiberProj).map φ) := by
   apply hom_ext
-  show ((pullback p.geometricFiberProj).map φ).hom.left ≫
+  change ((pullback p.geometricFiberProj).map φ).hom.left ≫
       Limits.pullback.map Q₀.obj.hom p.geometricFiberProj Q₀.obj.hom p.geometricFiberProj
         (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) =
     Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
@@ -190,6 +191,7 @@ lemma pullbackMapIsoIso_hom_hom_left (P₀ : C.FiniteEtale) :
         (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) :=
   rfl
 
+omit [Finite K] in
 lemma sectionOfPoint_congr (A : FiniteEtaleAlgebra K)
     {u u' : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1)} (h : u = u')
     (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom)
@@ -238,7 +240,9 @@ noncomputable def frobeniusAut : fiber s ≅ fiber s :=
       congr 1
       exact τF.hom.naturality ((pullback p.geometricFiberProj).map φ)) ≪≫ τ
 
-lemma frobeniusAut_hom_app (P₀ : C.FiniteEtale) (z : (fiber t).obj ((pullback p.geometricFiberProj).obj P₀)) :
+omit [ConnectedSpace C] [ConnectedSpace p.geometricFiber] in
+lemma frobeniusAut_hom_app (P₀ : C.FiniteEtale)
+    (z : (fiber t).obj ((pullback p.geometricFiberProj).obj P₀)) :
     (frobeniusAut p τ τF).hom.app P₀ (τ.hom.app P₀ z) =
       τ.hom.app P₀ (τF.hom.app _ ((fiber t).map (pullbackMapIsoIso p P₀).hom z)) := by
   simp only [frobeniusAut, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -257,12 +261,14 @@ variable (G' : Type u) [Group G'] [TopologicalSpace G'] [IsTopologicalGroup G'] 
 noncomputable def frobeniusElement : G :=
   (toAutMulEquiv (fiber s) G).symm (frobeniusAut p τ τF)
 
+omit [ConnectedSpace p.geometricFiber] in
 lemma frobeniusElement_smul (P₀ : C.FiniteEtale) (y : (fiber s).obj P₀) :
     frobeniusElement p τ τF G • y = (frobeniusAut p τ τF).hom.app P₀ y := by
   rw [← toAut_hom_app_apply (F := fiber s) (G := G)]
   change ((toAutMulEquiv (fiber s) G) ((toAutMulEquiv (fiber s) G).symm _)).hom.app P₀ y = _
   rw [MulEquiv.apply_symm_apply]
 
+omit [Finite K] in
 lemma eq_of_forall_smul_eq {g h : G} (H : ∀ P (x : (fiber s).obj P), g • x = h • x) : g = h := by
   have := IsFundamentalGroup.non_trivial (F := fiber s) (h⁻¹ * g) fun X x ↦ by
     rw [mul_smul, H, inv_smul_smul]
@@ -315,6 +321,7 @@ lemma sectionOfPoint_comp_arithmeticFrobenius
 
 end ConstantCover
 
+omit [ConnectedSpace p.geometricFiber] in
 /-- **The Frobenius element lies in the Weil group with degree one**: it acts on the geometric
 fibres of the constant covers as the geometric Frobenius. Through the path `τ`, a point of the
 fibre of `C₀ ×_K Spec A` is a point on the section of `(C₀ ×_K Spec A) ×_{C₀} C` attached to a
