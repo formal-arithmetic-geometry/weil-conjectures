@@ -14,9 +14,50 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Sections over nested affine opens.* Forgetting the algebra multiplication, apply [lem-weil-pbc-quasi-coherent-affine-section-base-change] to the quasi-coherent underlying module of $\\mathcal A$. The resulting isomorphism $A'\\otimes_{R'}R\\cong A$ is compatible with multiplication and units because restriction and the tensor map are induced by the sheaf's $\\mathcal O_S$-algebra structure; hence it is an isomorphism of $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN, first assertion; Schemes Lemmas 01I9 and 01IA"
+   }
+  },
+  {
+   "text": "*The cartesian square and the open immersion.* The fibre product of $\\operatorname{Spec}(A')\\to\\operatorname{Spec}(R')$ with $U=\\operatorname{Spec}(R)\\to U'=\\operatorname{Spec}(R')$ is, by [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}(A'\\otimes_{R'}R)$. Step 1 identifies this ring with $A$, so the canonical square with $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(A')$ is cartesian. Since $U\\hookrightarrow U'$ is an open immersion, its base change is an open immersion; thus $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(A')$ identifies $\\operatorname{Spec}(A)$ with the preimage of $U$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN, second assertion; Schemes Lemmas 01JQ and 01JR"
+   }
+  },
+  {
+   "text": "*Transitivity.* For affine opens $U\\subseteq U'\\subseteq U''$, the restriction maps of the sheaf algebra compose, so the corresponding maps of spectra compose contravariantly. The identity restriction for $U=U'$ gives the identity morphism. Therefore the composite through $\\operatorname{Spec}\\mathcal A(U')$ equals the direct morphism from $\\operatorname{Spec}\\mathcal A(U)$ to $\\operatorname{Spec}\\mathcal A(U'')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LO (lemma-transitive-spec)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemmas 01LN and 01LO"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +82,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,10 +103,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+  "worker": "stage1",
+  "summary": "Split along Constructions Lemmas 01LN and 01LO. The nested-affine tensor base-change assertion is isolated as new unsplit node lem-weil-pbc-quasi-coherent-affine-section-base-change; the cartesian square uses the existing affine-spectrum fibre-product and open-preimage fibre-product leaves; transitivity of spectra is written out as an elementary step."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 01LN/01LO for a quasi-coherent algebra on affine opens U ⊆ U′; correct; unsplit."
+  "group": "D",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D; spot-checked by L: L read the three steps against Constructions 01LN/01LO: the module base-change statement isolated as a self-contained new node, the cartesian square from the reviewed leaves lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-open-preimage-fibre-product, transitivity elementary. Correct; D's review here says what it checked (the first acceptable D delivery)."
  }
 }
