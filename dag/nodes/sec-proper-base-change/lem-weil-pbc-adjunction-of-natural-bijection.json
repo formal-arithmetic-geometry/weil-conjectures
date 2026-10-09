@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-adjunction-of-natural-bijection",
+ "kind": "statement",
+ "title": "An adjunction from hom-set bijections natural in both variables",
+ "statement": "Let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors and let $\\Psi_{X,Y}:\\operatorname{Hom}_{\\mathcal D}(FX,Y)\\to\\operatorname{Hom}_{\\mathcal C}(X,GY)$ be bijections, natural in $X\\in\\mathcal C$ and $Y\\in\\mathcal D$: $\\Psi_{X',Y}(a\\circ F(f))=\\Psi_{X,Y}(a)\\circ f$ and $\\Psi_{X,Y'}(b\\circ a)=G(b)\\circ\\Psi_{X,Y}(a)$. Then $F\\dashv G$ is an adjunction with hom bijection $\\Psi$: the morphisms $\\eta_X=\\Psi_{X,FX}(\\mathrm{id}_{FX}):X\\to GFX$ and $\\varepsilon_Y=\\Psi_{GY,Y}^{-1}(\\mathrm{id}_{GY}):FGY\\to Y$ are natural transformations $\\eta:\\mathrm{id}\\to GF$ (unit) and $\\varepsilon:FG\\to\\mathrm{id}$ (counit) satisfying the triangle identities, and $\\Psi_{X,Y}(a)=G(a)\\circ\\eta_X$, $\\Psi^{-1}_{X,Y}(b)=\\varepsilon_Y\\circ F(b)$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Definition 0037 (definition-adjoint, line 3344) and the paragraph following it (adjunction maps, unit and counit, and the equivalence of (1), (2), (3))"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "construct adjunction from a bijection of hom sets natural in both variables",
+   "results": "Adjunction.adjunctionOfEquivRight, Adjunction.CoreHomEquivUnitCounit.mk, Adjunction.mk', Adjunction.mkOfHomEquiv (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "verdict": "match: Adjunction.mkOfHomEquiv",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction defined from a family of hom-set bijections natural in both arguments",
+   "results": "Adjunction.mkOfHomEquiv, adjunctionOfEquivLeft, adjunctionOfEquivRight, Adjunction.homEquiv, Adjunction.CoreHomEquiv",
+   "verdict": "match",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure CoreHomEquiv\\|def mkOfHomEquiv\\|mkOfHomEquiv_homEquiv\\|alias homEquiv_unit\\|homEquiv_counit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "CoreHomEquiv (:351, homEquiv with the two naturality laws), mkOfHomEquiv (:436, unit app X = homEquiv X (F X) (𝟙 _), counit app Y = (homEquiv _ _).invFun (𝟙 _)), mkOfHomEquiv_homEquiv (:453), homEquiv_unit (:181), homEquiv_counit",
+   "verdict": "match (types read)",
+   "date": "2026-10-09"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.mkOfHomEquiv",
+  "file": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "how": "exact: `Adjunction.mkOfHomEquiv (adj : Adjunction.CoreHomEquiv F G) : F ⊣ G` (line 436), `CoreHomEquiv` (line 351) being the bijections with the two naturality laws (`homEquiv_naturality_left_symm` is the first law read through the inverse); unit and counit by the formulas of the node (line 439-447, @[simps!]); `mkOfHomEquiv_homEquiv` (line 453) says the hom bijection is Ψ; the formulas Ψ(a)=G(a)∘η, Ψ⁻¹(b)=ε∘F(b) are `Adjunction.homEquiv_unit` (line 181) and `homEquiv_counit` (line 182)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-derived-inverse-image-adjunction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

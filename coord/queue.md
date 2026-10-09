@@ -1,12 +1,11 @@
 # Work queue
 
-570 items; claim with `tools/claim.py next <group> [--stage N]`.
+569 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (557)
+## Stage 1: nodes to split (556)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-target-locality` | 1002 | none |
 | `prop-weil-pbc-derived-inverse-image-adjunction` | 1002 | none |
 | `prop-weil-pbc-proper-curve-sepclosed-invariance` | 1002 | rests_on_sorry |
 | `def-weil-pbc-cohomology-pullback` | 1003 | none |
@@ -582,7 +581,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 571 nodes that wait for stage 1, 46 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 47 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

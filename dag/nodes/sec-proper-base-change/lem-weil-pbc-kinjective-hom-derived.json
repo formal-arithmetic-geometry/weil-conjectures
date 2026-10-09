@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-kinjective-hom-derived",
+ "kind": "statement",
+ "title": "Morphisms into a K-injective complex are computed in the homotopy category",
+ "statement": "Let $\\mathcal A$ be an abelian category, $K(\\mathcal A)$ its homotopy category of cochain complexes and $Q:K(\\mathcal A)\\to D(\\mathcal A)$ the localization at the quasi-isomorphisms [def-weil-abstract-derived-category]. Let $I$ be a K-injective complex (every morphism of complexes from an acyclic complex to $I$ is homotopic to zero; [def-weil-pbc-kinjective-resolutions] for sheaves). Then for every complex $N$ the map $Q:\\operatorname{Hom}_{K(\\mathcal A)}(N,I)\\to\\operatorname{Hom}_{D(\\mathcal A)}(QN,QI)$ is bijective. The same holds in the bounded below derived category $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories] when $N$ and $I$ are bounded below, $D^+(\\mathcal A)$ being a full subcategory of $D(\\mathcal A)$. In particular a quasi-isomorphism between K-injective complexes is a homotopy equivalence.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 070I (lemma-K-injective, line 9632), (1) implies (3); Section 070G (section-K-injective)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms in derived category to a K-injective complex are homotopy classes of maps",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective (Mathlib.Algebra.Homology.DerivedCategory.KInjective), CochainComplex.IsKInjective(.mk, .homotopyZero_def, .nonempty_homotopy_zero), DerivedCategory.Q_map_eq_of_homotopy, InjectiveResolution.instIsKInjectiveCochainComplex",
+   "verdict": "match: CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Plus.Qh_map_bijective_of_isKInjective",
+   "results": "DerivedCategory.Plus.Qh_map_bijective_of_isKInjective (K L : HomotopyCategory.Plus C) : CochainComplex.IsKInjective L.obj.as → Function.Bijective DerivedCategory.Plus.Qh.map (Mathlib.Algebra.Homology.DerivedCategory.Plus)",
+   "verdict": "match for the D^+ clause",
+   "date": "2026-10-09"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Qh_map_bijective\\|quasiIso_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; sed -n 30,90p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "results": "KInjective.lean:41 IsKInjective.Qh_map_bijective, :50 IsKInjective.quasiIso_iff (quasi-iso between K-injectives iff homotopy equivalence); Plus.lean:79 Plus.Qh_map_bijective_of_isKInjective; HomotopyCategory/KInjective.lean:42 class IsKInjective (every map from an acyclic complex is homotopic to zero = Stacks Definition 070H)",
+   "verdict": "match (types read)",
+   "date": "2026-10-09"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.IsKInjective.Qh_map_bijective",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+  "how": "specializes in one line per clause: for `[Abelian C] [HasDerivedCategory C]`, `K : HomotopyCategory C (.up ℤ)`, `L : CochainComplex C ℤ` with `[L.IsKInjective]` (the node's K-injectivity, HomotopyCategory/KInjective.lean:42), `Function.Bijective (DerivedCategory.Qh.map : (K ⟶ (HomotopyCategory.quotient _ _).obj L) → _)` (line 41); the D^+ clause is `DerivedCategory.Plus.Qh_map_bijective_of_isKInjective` (Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:79); the last sentence is `CochainComplex.IsKInjective.quasiIso_iff` (KInjective.lean:50)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-derived-inverse-image-adjunction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
