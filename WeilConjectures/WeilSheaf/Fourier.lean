@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Group.AddChar
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.WeilSheaf.Tensor
 
@@ -593,6 +594,45 @@ lemma affineLine.artinSchreierSplitHom_artinSchreierAverageHom (ψ : AddChar k�
   ext ⟨g⟩
   exact congrArg ULift.up (affineLine.artinSchreierAverage_artinSchreierSplit V.unop.hom ψ g)
 
+omit [Finite k₀] in
+/-- The translation by `0` is the identity. -/
+lemma affineLine.geometricTranslationIso_zero_hom :
+    (affineLine.geometricTranslationIso k₀ 0).hom = 𝟙 _ :=
+  Scheme.Hom.geometricFiber_hom_ext _
+    (by rw [affineLine.geometricTranslationIso,
+      Scheme.Hom.geometricFiberMap_comp_geometricFiberProj, affineLine.translation_zero,
+      Category.comp_id, Category.id_comp])
+    (by simp [affineLine.geometricTranslationIso])
+
+/-- Splitting followed by the counit of `ĀS^* ⊣ ĀS_*` (restriction along the section
+`x ↦ (x, v x)`) is the identity: `ψ(0) = 1`. -/
+lemma affineLine.artinSchreierSplitHom_comp_counit (ψ : AddChar k₀ (PadicAlgCl l)) :
+    affineLine.artinSchreierSplitHom l ψ ≫
+      (ProEtale.localizationRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) ĀS
+        inferInstance).counit.app
+        (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) =
+      𝟙 _ := by
+  ext V : 3
+  ext ⟨g⟩
+  simp only [ProEtale.localizationRestrictionLowerStarAdjunction, Functor.comp_obj,
+    Functor.id_obj, Adjunction.sheafPushforwardContinuous, Adjunction.whiskerLeft,
+    Functor.whiskeringLeft_obj_obj, Adjunction.op_unit, Adjunction.op_counit, NatTrans.comp_app,
+    Functor.whiskerRight_app, ObjectProperty.FullSubcategory.comp_hom, NatTrans.op_app,
+    MorphismProperty.Over.mapPullbackAdj_unit_app]
+  simp only [Functor.associator_inv_app, Functor.leftUnitor_hom_app,
+    Category.comp_id, ProEtale.adicConstantSheaf_obj_map, ModuleCat.hom_comp, LinearMap.comp_apply]
+  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  change (affineLine.artinSchreierSplit l V.unop.hom ψ g).1
+    ((pullback.lift (𝟙 V.unop.left) V.unop.hom (by simp)) x) = g.1 x
+  have hs : pullback.lift (𝟙 V.unop.left) V.unop.hom (by simp) =
+      affineLine.artinSchreierSection V.unop.hom 0 := by
+    apply pullback.hom_ext <;> simp [affineLine.geometricTranslationIso_zero_hom]
+  rw [hs, affineLine.artinSchreierSplit_apply]
+  erw [affineLine.artinSchreierIndex_artinSchreierSection,
+    affineLine.artinSchreierSection_fst_apply]
+  rw [AddChar.map_zero_eq_one, one_mul]
+  rfl
+
 end ArtinSchreierTorsor
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
@@ -785,18 +825,73 @@ noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     WeilSheaf k₀ l (affineLine k₀) :=
   (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj (image (WeilSheaf.artinSchreierIdempotent ψ))
 
+local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
 (of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
 becomes `⨁_{c ∈ k₀} ℚ̄_ℓ` with `k₀` permuting the summands by translation, and the image of
 `e_ψ` is the line spanned by `∑_c ψ(c) δ_c`. -/
 theorem WeilSheaf.isLisse_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l)) :
-    (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse :=
-  -- After pullback along `ĀS`, the underlying morphism of sheaves of `e_ψ` is averaging
-  -- followed by splitting (`AlgebraicGeometry.affineLine.restriction_map_artinSchreierIdempotent`),
-  -- a split epi–mono factorisation through `ℚ̄_ℓ` in the category of sheaves of
-  -- `WeilCoefficients`-modules. Concluding requires that factorisation to be one of sheaves of
-  -- `ℚ̄_ℓ,X`-modules, i.e. averaging and splitting to be linear over the sections of `ℚ̄_ℓ,X`.
-  sorry
+    (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse := by
+  let Φ := ObjectProperty.ι (WeilSheaf.objectProperty k₀ l (affineLine k₀)) ⋙
+    IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l (affineLine k₀))
+  have : HasCokernels (ProEtale.AdicSheaf l
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) := inferInstance
+  have : HasCokernel (Φ.map (WeilSheaf.artinSchreierIdempotent ψ)) := HasCokernels.has_colimit _
+  have := ObjectProperty.preservesKernels_ι _ (cokernel.π (WeilSheaf.artinSchreierIdempotent ψ))
+  have := ObjectProperty.preservesCokernels_ι _ (WeilSheaf.artinSchreierIdempotent ψ)
+  refine ProEtale.IsAdicLisseSheaf.of_iso (Φ.mapIso (Abelian.imageIsoImage _).symm ≪≫
+    Abelian.PreservesImage.iso Φ _ ≪≫ Abelian.imageIsoImage _).symm
+    ⟨.singleton ĀS,
+      Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) inferInstance, ?_⟩
+  rintro _ _ ⟨⟩
+  refine ⟨1, ⟨(CategoryTheory.PreservesImage.iso ((ĀS)^*ᵃ[l]) _).symm ≪≫ ?_ ≪≫
+      (biproduct.isoProduct _ ≪≫ productUniqueIso _).symm⟩⟩
+  let E := (ĀS)^*ᵃ[l].map (Φ.map (WeilSheaf.artinSchreierIdempotent ψ))
+  let c := (ProEtale.adicUpperStarLowerStarAdjunction l ĀS).counit.app
+    (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+  let b : _ ⟶ ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    E ≫ c
+  have : IsIso (image.ι E ≫ b) := by
+    let ε := ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+      inferInstance
+    let F := ProEtale.AdicSheaf.forget (l := l)
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber
+    have hE : F.map E = ε.hom.app _ ≫ affineLine.artinSchreierAverageHom l ψ ≫
+        affineLine.artinSchreierSplitHom l ψ ≫ ε.inv.app _ := by
+      have h0 : F.map E = ε.hom.app _ ≫ (ProEtale.localizationRestriction
+          (WeilCoefficients.{u} l) ĀS inferInstance).map
+            ((ObjectProperty.ι _ ⋙ IsoAlgebra.forget _).map
+              (WeilSheaf.artinSchreierIdempotent ψ)).hom ≫ ε.inv.app _ := by
+        simp only [F, E, Mod.forget_map, ProEtale.adicUpperStar_map_hom]
+        rw [← ε.hom.naturality_assoc, Iso.hom_inv_id_app, Category.comp_id]
+      rw [h0, affineLine.restriction_map_artinSchreierIdempotent, Category.assoc]
+      rfl
+    have hb : F.map b = ε.hom.app _ ≫ affineLine.artinSchreierAverageHom l ψ := by
+      have h1 : F.map c = ε.hom.app ((ĀS)_*[WeilCoefficients.{u} l].obj
+            (ProEtale.adicConstantSheaf l
+              (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ≫
+            (ProEtale.localizationRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) ĀS
+              inferInstance).counit.app
+              (ProEtale.adicConstantSheaf l
+                (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) := by
+        simp only [F, c, Mod.forget_map]
+        rw [ProEtale.adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_counit_app_hom]
+        exact (Adjunction.leftAdjointUniq_hom_app_counit _ _ _).symm
+      rw [Functor.map_comp, hE, h1]
+      simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+      rw [affineLine.artinSchreierSplitHom_comp_counit, Category.comp_id]
+    suffices key : IsIso (F.map (image.ι E) ≫ F.map b) by
+      rw [← F.map_comp] at key
+      exact isIso_of_reflects_iso _ F
+    refine isIso_comp_of_fac (F.map (factorThruImage E)) (F.map (image.ι E)) (F.map b)
+      (affineLine.artinSchreierSplitHom l ψ ≫ ε.inv.app _) ?_ ?_
+    · rw [← Functor.map_comp, image.fac, hE, hb]
+      simp only [Category.assoc]
+    · rw [hb]
+      simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+      exact affineLine.artinSchreierSplitHom_artinSchreierAverageHom ψ
+  exact asIso (image.ι E ≫ b)
 
 /-- The Artin–Schreier sheaves are lisse: `ℒ_ψ` is lisse
 (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`), and pullback preserves
