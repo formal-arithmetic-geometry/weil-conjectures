@@ -113,7 +113,6 @@ noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) (m m' : ℤ)
         ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
           (HasTateTwist.twistObjectAddIso X m m'))
 
-omit [Finite Λ] in
 /-- `Lf^* K (m)[2m]` lies in `D^b_{ctf}` when `K` does. -/
 theorem boundedConstructibleFiniteTor_twistShift_leftDerivedUpperStar (f : X ⟶ Y) (m : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

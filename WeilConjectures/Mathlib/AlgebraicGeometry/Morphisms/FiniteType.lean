@@ -153,6 +153,14 @@ lemma exists_topologicalKrullDim_le {K : Type u} [Field K] {X : Scheme.{u}}
     | top => exact absurd rfl h
     | coe n => exact ⟨n, le_rfl⟩
 
+/-- A scheme with a morphism locally of finite type over `S` to a scheme locally of finite type
+over `S` is locally of finite type over `S`. -/
+lemma locallyOfFiniteType_over_of_isOver {X Y S : Scheme.{u}} [X.Over S] [Y.Over S] (f : X ⟶ Y)
+    [f.IsOver S] [LocallyOfFiniteType f] [LocallyOfFiniteType (Y ↘ S)] :
+    LocallyOfFiniteType (X ↘ S) := by
+  rw [← CategoryTheory.comp_over f S]
+  infer_instance
+
 end AlgebraicGeometry
 
 open Limits
@@ -243,3 +251,14 @@ theorem small_skeleton_isAffineHomLocallyOfFiniteType :
   exact Quotient.sound ⟨ObjectProperty.isoMk _ e'⟩
 
 end AlgebraicGeometry.Scheme.Over
+
+namespace AlgebraicGeometry
+
+/-- An open subscheme of a scheme locally of finite type over `S` is locally of finite type over
+`S`. -/
+instance locallyOfFiniteType_opens_over {X S : Scheme.{u}} [X.Over S] [LocallyOfFiniteType (X ↘ S)]
+    (U : X.Opens) : LocallyOfFiniteType (U.toScheme ↘ S) := by
+  rw [← Scheme.Opens.ι_comp_over]
+  infer_instance
+
+end AlgebraicGeometry

@@ -221,8 +221,72 @@ theorem Scheme.IsTorsionSheaf.exists_isColimit (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
     ∃ (J : Type) (_ : SmallCategory J) (_ : IsFiltered J)
       (D : J ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (c : Cocone D)
-      (_ : IsColimit c), c.pt = F ∧ ∀ j, ∃ n : ℕ, 0 < n ∧ n • 𝟙 (D.obj j) = 0 :=
-  sorry
+      (_ : IsColimit c), c.pt = F ∧ ∀ j, ∃ n : ℕ, 0 < n ∧ n • 𝟙 (D.obj j) = 0 := by
+  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    IsGrothendieckAbelian.hasColimits _
+  have : HasColimitsOfSize.{0, 0} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
+  have : HasColimitsOfShape ℕ (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    inferInstance
+  have : AB5OfSize.{0, 0} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} _
+  have : IsConnected ℕ := IsFiltered.isConnected ℕ
+  -- the chain of subsheaves `F[k!]` of `F`
+  have hN : Monotone fun k : ℕ ↦ kernelSubobject (k.factorial • 𝟙 F) := fun k k' hk ↦ by
+    obtain ⟨r, hr⟩ := Nat.factorial_dvd_factorial hk
+    have : k'.factorial • 𝟙 F = (k.factorial • 𝟙 F) ≫ (r • 𝟙 F) := by
+      simp only [hr, Preadditive.comp_nsmul, Category.comp_id, mul_comm, mul_nsmul]
+      exact smul_comm _ _ _
+    change kernelSubobject _ ≤ kernelSubobject _
+    rw [this]
+    exact kernelSubobject_comp_le _ _
+  let K : ℕ ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    hN.functor ⋙ Subobject.underlying
+  let α : K ⟶ (Functor.const ℕ).obj F :=
+    { app k := (kernelSubobject (k.factorial • 𝟙 F)).arrow
+      naturality k k' f := by simp [K] }
+  have : Mono α := NatTrans.mono_of_mono_app α
+  let cK : Cocone K := { pt := F, ι := α }
+  let t := colimit.desc K cK
+  have ht : Mono t := colim.map_mono' α (colimit.isColimit K) (isColimitConstCocone ℕ F) t
+    (fun k ↦ by simp [t, cK])
+  -- `t` is an epimorphism, as can be checked on geometric stalks, which are torsion
+  have : Epi t := by
+    refine ⟨fun {G} g h hgh ↦ ?_⟩
+    have hk (k : ℕ) : α.app k ≫ g = α.app k ≫ h := by
+      simpa [t, cK] using colimit.ι K k ≫= hgh
+    have : AB5OfSize.{u + 1, u + 1} (ModuleCat.{u + 1} Λ) := inferInstance
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
+    refine sheafHom_ext_of_sheafFiber_map_algClosurePoint fun p ↦ ?_
+    have := (pointSmallEtale (T.algClosurePoint p)).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
+    ext x
+    obtain ⟨m, hm, hx⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1
+      (IsTorsionSheaf.isTorsion_sheafFiber (F := F) _ _ x)
+    have hS :=
+      (ShortComplex.kernelSequence_exact (m.factorial • 𝟙 F)).map_of_mono_of_preservesKernel
+        (pointSmallEtale (T.algClosurePoint p)).sheafFiber inferInstance inferInstance
+    have hx' : (pointSmallEtale (T.algClosurePoint p)).sheafFiber.map (m.factorial • 𝟙 F) x =
+        0 := by
+      obtain ⟨r, hr⟩ := Nat.dvd_factorial hm le_rfl
+      simp [hr, mul_nsmul, hx]
+    obtain ⟨y, hy⟩ := (ShortComplex.moduleCat_exact_iff _).1 hS x hx'
+    have e : kernel.ι (m.factorial • 𝟙 F) ≫ g = kernel.ι (m.factorial • 𝟙 F) ≫ h := by
+      rw [← kernelSubobject_arrow', Category.assoc, Category.assoc]
+      exact (kernelSubobjectIso _).inv ≫= hk m
+    have := congr((pointSmallEtale (T.algClosurePoint p)).sheafFiber.map $e y)
+    simp only [Functor.map_comp, ConcreteCategory.comp_apply] at this
+    rw [← hy]
+    exact this
+  have : IsIso ((colimit.isColimit K).desc cK) := isIso_of_mono_of_epi t
+  refine ⟨ℕ, inferInstance, inferInstance, K, cK, IsColimit.ofPointIso (colimit.isColimit K),
+    rfl, fun k ↦ ⟨k.factorial, k.factorial_pos, ?_⟩⟩
+  have := kernelSubobject_arrow_comp (k.factorial • 𝟙 F)
+  rw [Preadditive.comp_nsmul, Category.comp_id] at this
+  rw [← cancel_mono (α.app k), Preadditive.nsmul_comp, Category.id_comp, zero_comp]
+  exact this
 
 section InvertibleOrder
 

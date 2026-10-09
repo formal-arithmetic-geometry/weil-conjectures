@@ -321,7 +321,7 @@ theorem boundedConstructible_fourierTransform_obj_of_boundedConstructible {k : T
       ((fourierTransform Λ π π' Ψ b r).obj K) := by
   have := HasInvertibleExponent.of_hom (Λ := Λ) (pullback.fst π π' ≫ π)
   have h₁ := hK.mapDerivedCategory_upperStar (pullback.fst π π')
-  have h₂ := boundedConstructible_tensor (ModuleCat.{u + 1} Λ) _ h₁
+  have h₂ := boundedConstructible_tensor Λ _ h₁
     (DerivedCategory.boundedConstructible_singleFunctor_obj (fourierKernel Λ π π' Ψ b) 0)
     ⟨0, 0, torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
   have h₃ := boundedConstructible_rightDerivedLowerShriek Λ (pullback.snd π π')

@@ -47,6 +47,8 @@ definition, and it is the only place where the scheme and the matrix groups meet
 - `AlgebraicGeometry.GeneralLinearGroup.range_subgroupSchemeHom_le_identityComponent`: the closed
   subgroup scheme cut out by the ideal `identityComponent I` is the reduced identity component of
   `V(I)`.
+- `AlgebraicGeometry.GeneralLinearGroup.finiteIndex_subgroupOf_zeroLocus_identityComponent`: the
+  `k`-points of `G°` have finite index in the `k`-points of `G`.
 - `AlgebraicGeometry.GeneralLinearGroup.containsCommutators_subgroupSchemeHom`: if `V(J)(R)`
   contains the commutators of `V(I)(R)` for all `R`, then `V(J) ⟶ V(I)` contains the commutators
   scheme-theoretically.
@@ -435,6 +437,62 @@ theorem range_subgroupSchemeHom_le_identityComponent :
     Set.range (subgroupSchemeHom (le_identityComponent I)).left.base =
       connectedComponent (GrpObj.onePoint (subgroupScheme I)) := by
   sorry
+
+/-- A `k`-point of `V(I)` whose image lies in the connected component of the identity is a
+`k`-point of the identity component: its matrix satisfies the equations `identityComponent I`. -/
+theorem mem_zeroLocus_identityComponent_of_range_subset {g : zeroLocus I k}
+    (hg : Set.range (zeroLocusMulEquiv I k g).left.base ⊆
+      connectedComponent (GrpObj.onePoint (subgroupScheme I))) :
+    (g : GL n k) ∈ zeroLocus (identityComponent I) k := by
+  obtain ⟨χ, hχ⟩ := Spec.mapMulEquiv.surjective (zeroLocusMulEquiv I k g)
+  have hev : evalAlgHom (g : GL n k) = χ.ofConv.comp (Ideal.Quotient.mkₐ k I) := by
+    have h := homMulEquiv_zeroLocusMulEquiv_comp g
+    rw [← hχ, mapMulEquiv_comp_subgroupSchemeι, GeneralLinearGroup.homMulEquiv_mapMulEquiv] at h
+    rw [← h]
+    exact congrArg ofConv ((algHomMulEquiv n k k).symm_apply_apply _)
+  let pt : Spec (.of k) := ⟨⊥, Ideal.isPrime_bot⟩
+  obtain ⟨y, hy⟩ := (range_subgroupSchemeHom_le_identityComponent I).symm ▸ hg ⟨pt, rfl⟩
+  intro a ha
+  rw [hev]
+  have hx := congrArg PrimeSpectrum.asIdeal hy
+  rw [← hχ] at hx
+  change Ideal.comap _ y.asIdeal = Ideal.comap _ (⊥ : Ideal k) at hx
+  have : Ideal.Quotient.mk I a ∈
+      Ideal.comap (CommRingCat.Hom.hom (CommRingCat.ofHom χ.ofConv.toRingHom)) ⊥ := by
+    rw [← hx, Ideal.mem_comap]
+    simp [Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  simpa using this
+
+/-- The `k`-points of the identity component `G°` have finite index in the `k`-points of
+`G = V(I)`. This is `AlgebraicGeometry.GrpObj.finiteIndex_range_identityComponentι` for the group
+scheme `V(I)`, read on matrices through `zeroLocusMulEquiv`. (blueprint: `sk-p-geometry`) -/
+theorem finiteIndex_subgroupOf_zeroLocus_identityComponent :
+    ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).FiniteIndex := by
+  let X := (Spec (.of k)).asOver (Spec (.of k))
+  let e : X ≅ 𝟙_ (Over (Spec (.of k))) := Over.isoMk (Iso.refl (Spec (.of k))) (by
+    simp [X, specOverSpec_over, Algebra.algebraMap_self])
+  let α : (𝟙_ (Over (Spec (.of k))) ⟶ subgroupScheme I) →* zeroLocus I k :=
+    (zeroLocusMulEquiv I k).symm.toMonoidHom.comp
+      { toFun p := CartesianMonoidalCategory.toUnit X ≫ p
+        map_one' := MonObj.comp_one _
+        map_mul' p q := MonObj.comp_mul _ _ _ }
+  have hα : Function.Surjective α := fun g ↦ ⟨e.inv ≫ zeroLocusMulEquiv I k g, by
+    simp [α, CartesianMonoidalCategory.toUnit_unique (CartesianMonoidalCategory.toUnit X) e.hom]⟩
+  have := GrpObj.finiteIndex_range_identityComponentι (subgroupScheme I)
+  have hle : (IsMonHom.monoidHom (GrpObj.identityComponentι (subgroupScheme I))
+      (𝟙_ (Over (Spec (.of k))))).range ≤
+        ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).comap α := by
+    rintro _ ⟨q, rfl⟩
+    rw [Subgroup.mem_comap, Subgroup.mem_subgroupOf]
+    refine mem_zeroLocus_identityComponent_of_range_subset I ?_
+    rw [← GrpObj.range_identityComponentι]
+    rintro _ ⟨x, rfl⟩
+    simp only [α, MonoidHom.coe_comp, Function.comp_apply, MulEquiv.coe_toMonoidHom,
+      MulEquiv.apply_symm_apply]
+    exact ⟨_, rfl⟩
+  have := Subgroup.finiteIndex_of_le hle
+  rw [Subgroup.finiteIndex_iff, ← Subgroup.index_comap_of_surjective _ hα]
+  exact Subgroup.FiniteIndex.index_ne_zero
 
 end IdentityComponent
 
