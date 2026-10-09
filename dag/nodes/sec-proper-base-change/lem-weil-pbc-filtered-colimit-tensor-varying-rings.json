@@ -10,9 +10,58 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The canonical map.* The semilinearity hypotheses make $m\\otimes n\\mapsto\\mu_{ij}(m)\\otimes\\nu_{ij}(n)$ balanced over $A_i$, so the displayed maps define a directed system $(T_i)$. The maps $(m,n)\\mapsto\\mu_i(m)\\otimes\\nu_i(n)$ are $A_i$-balanced: for $a\\in A_i$, both sides are $\\alpha_i(a)(\\mu_i(m)\\otimes\\nu_i(n))$. They therefore induce compatible homomorphisms $T_i\\to M\\otimes_A N$, and the universal property of the colimit [def-weil-pbc-category-colimit] gives the unique $A$-linear map $\\psi:T\\to M\\otimes_A N$ with the stated formula. The same balancedness check shows that the displayed formulas define the claimed $A$-module structures on $M$, $N$, and $T$; directedness supplies a common later stage whenever two representatives are compared.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 007K; the universal-property construction is the first part of the omitted algebraic proof"
+   }
+  },
+  {
+   "text": "*Surjectivity.* Every pure tensor in $M\\otimes_A N$ is represented by $\\mu_i(m)\\otimes\\nu_j(n)$ for some stages $i,j$. Choose $k$ receiving maps from both stages. Then this tensor equals $\\mu_k(\\mu_{ik}(m))\\otimes\\nu_k(\\nu_{jk}(n))$, which is the image under $\\psi$ of the class of $\\mu_{ik}(m)\\otimes\\nu_{jk}(n)\\in T_k$. Since pure tensors generate the tensor product, $\\psi$ is surjective.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof: generators of a tensor product and a common later index"
+   }
+  },
+  {
+   "text": "*Injectivity: relations from one stage.* Represent an element of $T$ by a finite sum of tensors from finitely many stages, and move all terms to one common stage $k$. If its image under $\\psi$ is zero, the resulting finite sum in $M\\otimes_A N$ is a finite consequence of additivity and of relations $ar\\otimes s-r\\otimes as$ with $a$ represented at some stage. Move the finitely many coefficients and tensors occurring in this relation to one still later stage $\\ell$. Semilinearity identifies the original element with the image of the corresponding balanced relation in $T_\\ell$, hence its class in $T$ is zero. This is exactly the common-stage argument in Tag 00DD, with the coefficient ring allowed to advance along the directed system; the colimit universal property [def-weil-pbc-category-colimit] identifies the common-stage class with the original class.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to a directed system of coefficient rings"
+   }
+  },
+  {
+   "text": "*Inverse and naturality.* The preceding construction gives a two-sided inverse by sending a pure tensor $\\mu_i(m)\\otimes\\nu_i(n)$ to the class of $m\\otimes n$ in $T$; the common-stage argument proves that this is well defined and balanced over $A$. It is inverse to $\\psi$ on the generators of both tensor products, so $\\psi$ is an isomorphism. For compatible $A_i$-linear maps $f_i,g_i$, both composites in the naturality square send the generator $\\lambda_i(m\\otimes n)$ to $\\mu'_i(f_i(m))\\otimes\\nu'_i(g_i(n))$; generation by such elements proves equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 007K; naturality follows from the same generator calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, with the coefficient ring advanced to a common stage; the application to sheaf stalks is Sheaves Lemma 007K"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +113,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+  "worker": "stage1",
+  "summary": "Parent proof written in four steps following the algebraic content of Stacks Sheaves Lemma 007K and the common-stage tensor argument of Algebra Lemma 10.12.9 (Tag 00DD). No child proof nodes were created: the universal-property construction, common-stage surjectivity and injectivity, inverse, and naturality are carried by this parent. The existing def-weil-pbc-category-colimit is the sole proof dependency; Mathlib searches record that no varying-ring tensor-colimit theorem exists."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Stacks 00DD/007K: construction by the universal property (balancedness via semilinearity), surjectivity from pure tensors at a common stage, injectivity by moving the finitely many relations and coefficients to a later stage, inverse and naturality on generators. Sketchy in places (step 3) but the common-stage argument is the standard one and correct; C's review names what it checked."
+ }
 }
