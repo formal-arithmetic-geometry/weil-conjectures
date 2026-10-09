@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-relative-algebraic-closure-algclosed",
+ "kind": "statement",
+ "title": "The algebraic closure of a field in an algebraically closed field is an algebraic closure",
+ "statement": "Let $F$ be a field and let $\\Omega$ be an algebraically closed field together with a field homomorphism $F\\to\\Omega$ [def-pc-field-extension], [def-weil-algebraic-closure]. Let $\\overline F=\\{\\alpha\\in\\Omega:\\alpha\\text{ algebraic over }F\\}$ be the algebraic closure of $F$ in $\\Omega$ [def-weil-relative-algebraic-closure], a subfield of $\\Omega$ containing the image of $F$. Then $\\overline F$ is algebraically closed, hence (being algebraic over $F$) an algebraic closure of $F$ [def-weil-algebraic-closure]; it is contained in $\\Omega$, so $F\\subseteq\\overline F\\subseteq\\Omega$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Lemma Tag 09GJ (lemma-algebraic-permanence), Lemma Tag 09GR (lemma-algebraically-closed) and Definition Tag 09GS (definition-algebraic-closure): a root in $\\Omega$ of a nonconstant polynomial over $\\overline F$ is algebraic over $\\overline F$, hence over $F$ by 09GJ, hence lies in $\\overline F$"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-relative-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraic closure of a field inside an algebraically closed field is algebraically closed",
+   "results": "algebraicClosure.isAlgClosure (Mathlib.FieldTheory.AlgebraicClosure), IsAlgClosed.algebraicClosure_eq_bot_iff, IsAlgClosure.isAlgClosed, AlgebraicClosure.instIsAlgClosureOfIsAlgebraic, IsAlgClosure.mk, IsAlgClosure.ofAlgebraic",
+   "date": "2026-10-09",
+   "verdict": "match: algebraicClosure.isAlgClosure"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosure _ (algebraicClosure _ _)",
+   "results": "algebraicClosure.isAlgClosure (F E) [Field F] [Field E] [Algebra F E] [IsAlgClosed E] : IsAlgClosure F ↥(algebraicClosure F E) (Mathlib.FieldTheory.AlgebraicClosure)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance isAlgClosure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/AlgebraicClosure.lean",
+   "results": "line 183: instance isAlgClosure [IsAlgClosed E] : IsAlgClosure F (algebraicClosure F E), docstring 'If E is algebraically closed, then the algebraic closure of F in E is an absolute algebraic closure of F'; read lines 175-186",
+   "date": "2026-10-09",
+   "verdict": "match (exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "algebraicClosure.isAlgClosure",
+  "file": "Mathlib/FieldTheory/AlgebraicClosure.lean",
+  "how": "exact: for `[IsAlgClosed E]`, `IsAlgClosure F (algebraicClosure F E)`, i.e. the intermediate field `algebraicClosure F E` of `E/F` (the elements of E algebraic over F) is algebraically closed and algebraic over F; the inclusion into E is its subtype"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-curve-separably-closed-passage",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

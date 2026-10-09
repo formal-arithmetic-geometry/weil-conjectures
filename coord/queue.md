@@ -1,15 +1,14 @@
 # Work queue
 
-560 items; claim with `tools/claim.py next <group> [--stage N]`.
+559 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (545)
+## Stage 1: nodes to split (544)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lemma-weil-pbc-curve-separably-closed-passage` | 1003 | sorry_here |
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
 | `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
-| `def-weil-pbc-derived-direct-image-composition` | 1004 | none |
 | `def-weil-pbc-morphism-to-projective-space-by-sections` | 1004 | none |
 | `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1004 | none |
@@ -572,7 +571,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 560 nodes that wait for stage 1, 73 nodes that wait for a statement dependency.
+Not open yet: 559 nodes that wait for stage 1, 74 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
