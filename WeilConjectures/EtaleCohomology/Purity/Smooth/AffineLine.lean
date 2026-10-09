@@ -41,11 +41,12 @@ line is not acyclic and every statement below fails.
 a scheme `G` with an open immersion `j` whose range is the complement of the range of the
 zero section. This is the same idiom as `AlgebraicGeometry.Etale.openClosedShortComplex`.
 
-The statements that compare the twist with geometry, `R¹π_*Λ(1) ≅ Λ_Y` and
-`Rs^!Λ(1)[2] ≅ Λ_Y`, assume the twist datum normalized
+The statements that compare the twist with geometry, `R¹π_*Λ(1) ≅ Λ_Y`,
+`R^mπ_*Λ(1) = 0` for `m ≥ 2` and `Rs^!Λ(1)[2] ≅ Λ_Y`, assume the twist datum normalized
 (`AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`); they are false for the untwisted datum
-`Λ_X(m) = Λ_X`. The second is then the normalisation itself, transported along the
-identification of the zero section with `V(t)`.
+`Λ_X(m) = Λ_X` or the shifted datum `Λ_X(m) = Λ_X[-2m]` (for the latter
+`R²π_*(Λ_G[-2]) = R⁰π_*Λ_G = Λ_Y ≠ 0`). The last is then the normalisation itself,
+transported along the identification of the zero section with `V(t)`.
 
 Two clauses of the blueprint are stated only in part, and are TODOs.
 
@@ -134,7 +135,7 @@ theorem nonempty_iso_homology_one_multiplicativeGroup [HasTateTwist.IsNormalized
 
 *Vanishing above degree one.* In the situation above `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the
 cohomological dimension of an affine curve. -/
-theorem isZero_homology_multiplicativeGroup
+theorem isZero_homology_multiplicativeGroup [HasTateTwist.IsNormalized Λ]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
     (m : ℤ) (hm : 2 ≤ m) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj

@@ -50,9 +50,8 @@ noncomputable def zeroSectionIsoZeroLocusSubscheme {s : Set Γ(𝔸(n; S), ⊤)}
     simp only [Category.assoc, Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι,
       Category.id_comp]
     refine AffineSpace.hom_ext (by simp) (fun i ↦ ?_)
-    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
-    erw [zeroSection_appTop_coord n S i]
-    simp only [map_zero]
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, zeroSection_appTop_coord,
+      map_zero]
     exact (Scheme.zeroLocusSubschemeι_appTop (hs ▸ ⟨i, rfl⟩)).symm
 
 @[reassoc (attr := simp)]
