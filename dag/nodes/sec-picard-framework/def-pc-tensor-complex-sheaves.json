@@ -1,0 +1,59 @@
+{
+ "id": "def-pc-tensor-complex-sheaves",
+ "kind": "definition",
+ "title": "Tensor product of complexes of modules on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For cochain complexes $\\mathcal F^\\bullet$, $\\mathcal G^\\bullet$ of sheaves of $\\mathcal O$-modules, the double complex $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ has terms $\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (the tensor product of sheaves of modules [def-pur-sheaf-tensor-product]), first differential $d_{\\mathcal F}\\otimes 1$ and second differential $1\\otimes d_{\\mathcal G}$. Its total complex $\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet)$ is the complex with terms $\\bigoplus_{p+q=n}\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (a direct sum in the abelian category of $\\mathcal O$-modules, which has all direct sums) and differential $\\sum_{p+q=n}(d_{\\mathcal F}^p\\otimes 1+(-1)^p\\,1\\otimes d_{\\mathcal G}^q)$. It is written $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ when no confusion arises; it is functorial in both complexes.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition 012Z (homology-definition-associated-simple-complex), applied as in literature/stacks-project/sites-cohomology.tex Section 06YL (sites-cohomology-section-flat), first display of Lemma 06YM"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev mapBifunctor\\|abbrev HasMapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean",
+   "results": "`HomologicalComplex.mapBifunctor K₁ K₂ F c` (Bifunctor.lean:125): for a bifunctor `F : C₁ ⥤ C₂ ⥤ D` into a preadditive category, the total complex of the bicomplex `F(K₁^p, K₂^q)` with the sign rule of `ComplexShape.up ℤ` (TotalComplex.lean), under `HasMapBifunctor` (existence of the coproducts)",
+   "date": "2026-10-09",
+   "verdict": "generalization: take F = the sheaf tensor bifunctor of [def-pur-sheaf-tensor-product], c = ComplexShape.up ℤ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'tensorObj\\|HasTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Monoidal.lean; grep -rln 'SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -l 'MonoidalCategory'",
+   "results": "`HomologicalComplex.tensorObj` (Monoidal.lean:48) needs a `MonoidalCategory` on the terms; no monoidal structure is declared on `SheafOfModules R`, so `tensorObj` does not apply directly",
+   "date": "2026-10-09",
+   "verdict": "no match for tensorObj; use mapBifunctor"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+   "results": "`HasColimitsOfSize (SheafOfModules R)` (Colimits.lean:40): the coproducts needed for `HasMapBifunctor` exist",
+   "date": "2026-10-09",
+   "verdict": "supports the specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.mapBifunctor",
+  "file": "Mathlib/Algebra/Homology/Bifunctor.lean",
+  "how": "specializes in one line: `HomologicalComplex.mapBifunctor F G T (ComplexShape.up ℤ)` with `T : SheafOfModules O ⥤ SheafOfModules O ⥤ SheafOfModules O` the sheaf tensor bifunctor of def-pur-sheaf-tensor-product (sheafification of `PresheafOfModules.Monoidal` curriedTensor), coproducts from `SheafOfModules` colimits"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

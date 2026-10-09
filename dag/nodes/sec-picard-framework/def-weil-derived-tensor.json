@@ -2,20 +2,46 @@
  "id": "def-weil-derived-tensor",
  "kind": "definition",
  "title": "Derived tensor notation",
- "statement": "Fix a scheme $Y$ and a commutative ring $A$, and use the small pro-etale site\n[def-weil-pbc-proetale-site] $Y_{\\mathrm{proet}}$. A complex $P$\nof $A_Y$-modules is *K-flat* if tensoring it with every acyclic complex\npreserves acyclicity. For complexes $K_1,K_2$ of $A_Y$-modules, choose a\nquasi-isomorphism $P\\to K_1$ with $P$ K-flat and define\n\n$$\n K_1\\otimes_A^L K_2=P\\otimes_A K_2\n$$\n\nin $D(Y_{\\mathrm{proet}},A)$. For a ring map $A\\to B$ and a complex $K_1$,\nwrite $K_1\\otimes_A^L B$ for derived tensor with the constant $B_Y$-module.",
+ "statement": "Fix a scheme $Y$ and a commutative ring $A$, and use the small pro-etale site\n[def-weil-pbc-proetale-site] $Y_{\\mathrm{proet}}$, with its constant sheaf of rings $A_Y$, the abelian category of $A_Y$-modules and $D(Y_{\\mathrm{proet}},A)$ as defined there. A complex $P$\nof $A_Y$-modules is *K-flat* if tensoring it with every acyclic complex\npreserves acyclicity, that is, it is K-flat in the sense of [def-pc-kflat-complex] for the ringed site $(Y_{\\mathrm{proet}},A_Y)$. For complexes $K_1,K_2$ of $A_Y$-modules, choose a\nquasi-isomorphism $P\\to K_1$ with $P$ K-flat (one exists by [lem-pc-kflat-resolution]) and define\n\n$$\n K_1\\otimes_A^L K_2=P\\otimes_A K_2\n$$\n\n(the total tensor complex [def-pc-tensor-complex-sheaves] over $A_Y$) regarded as an object of $D(Y_{\\mathrm{proet}},A)$. For a ring map $A\\to B$ and a complex $K_1$,\nwrite $K_1\\otimes_A^L B$ for derived tensor with the constant $B_Y$-module, regarded as an $A_Y$-module by restriction of scalars [def-pc-sheaf-restrict-scalars] along the induced map $A_Y\\to B_Y$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/def-weil-derived-tensor.md",
   "place": "node def-weil-derived-tensor, order 663"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-sheaf-restrict-scalars"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'derivedTensor\\|tensorDerived\\|leftDerivedTensor\\|KFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Monoidal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "none: no derived tensor product on any derived category, no K-flat notion, no monoidal structure on `DerivedCategory`",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "results": "`CategoryTheory.Tor C n : C ⥤ C ⥤ C` (Tor.lean:44), the left derived functors of `⊗` on a monoidal abelian category with enough projectives, objectwise only (no complexes, no derived category)",
+   "date": "2026-10-09",
+   "verdict": "no match: sheaves of A_Y-modules lack enough projectives and Tor_n of objects is not the derived tensor of complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'tensorObj\\|HasTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Monoidal.lean; grep -n 'abbrev mapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean",
+   "results": "`HomologicalComplex.tensorObj` (Monoidal.lean:48, needs a monoidal category of terms) and `HomologicalComplex.mapBifunctor` (Bifunctor.lean:125): the underived tensor product of complexes only",
+   "date": "2026-10-09",
+   "verdict": "ingredient only (used in def-pc-tensor-complex-sheaves)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -34,5 +60,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-derived-tensor",
+  "worker": "stage1",
+  "summary": "Statement checked against its blueprint source (master; Lean state none on both branches) and against Stacks 06YN/06YS/06YU (sites-cohomology.tex, Section 06YL), of which it is the special case of the ringed site (Y_proet, A_Y). Kept the text and named the notions it is built from: the K-flat notion (new def-pc-kflat-complex, ringed site, Stacks 06YN, not in Mathlib), the existence of a K-flat resolution that the choice of P needs (new lem-pc-kflat-resolution, Stacks 06YS, not in Mathlib), the total tensor complex P (x)_A K_2 (new def-pc-tensor-complex-sheaves, Mathlib leaf via HomologicalComplex.mapBifunctor over def-pur-sheaf-tensor-product), and the A_Y-module structure of B_Y (new def-pc-sheaf-restrict-scalars, Mathlib leaf SheafOfModules.restrictScalars); the site, A_Y, B_Y, quasi-isomorphisms and D(Y_proet,A) come from def-weil-pbc-proetale-site. Independence of the choice of P is not needed to define the object (the definition takes a chosen P); it is the existing node lem-weil-derived-tensor-resolution-independent, which depends on this one."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
