@@ -79,6 +79,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.BaseChangeExact
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Coequalizer
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
