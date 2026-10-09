@@ -694,6 +694,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Basi
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer

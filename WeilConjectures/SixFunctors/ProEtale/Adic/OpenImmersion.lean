@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 public import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
 public import Mathlib.CategoryTheory.Adjunction.Triple
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
 
@@ -22,9 +24,18 @@ theorem in the Grothendieck abelian category of sheaves of `ℚ̄_ℓ,X`-modules
 is fully faithful (the counit of `j^* ⊣ j_*` is invertible), hence so is `j_!`, and `j_! F`
 vanishes along every morphism missing the range of `j`.
 
+On underlying sheaves, `j_!` is the extension by zero of sheaves
+(`AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekComparison`), hence exact. The point is
+that the underlying sheaf of `j_! M` is an extension by zero, i.e. the counit of `j_! ⊣ j^*` on
+sheaves is invertible there. For a free module `ℚ̄_ℓ,U ⊗ P` the underlying sheaf of `j_!` is
+`ℚ̄_ℓ,X ⊗ j_! P`, the tensor product of a sheaf with a presheaf vanishing away from `U`,
+sheafified; and every module is a cokernel of a morphism of free modules.
+
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriek`: `j_!`, with notation `(j)_!ᵃ[l]`.
+- `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekComparison`: the comparison
+  `j_! M.X ⟶ (j_! M).X`, an isomorphism, giving the exactness of `j_!`.
 - `AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekToLowerStar`: the comparison
   `j_! ⟶ j_*`.
 -/
@@ -33,7 +44,7 @@ vanishes along every morphism missing the range of `j`.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -107,9 +118,96 @@ instance : IsIso (adicOpenImmersionLowerShriekAdjunction l j).unit :=
     ⟨adicOpenImmersionLowerShriekAdjunction l j, adicUpperStarLowerStarAdjunction l j⟩).2
     inferInstance
 
-/-- **Extension by zero is exact.** -/
-instance : PreservesFiniteLimits (j)_!ᵃ[l] :=
-  sorry
+/-- The tensor product of a sheaf with an extension by zero is again an extension by zero: the
+counit of `j_! ⊣ j^*` is invertible at `B ⊗ j_! P`. Before sheafification, `B ⊗ j_! P` is the
+tensor product of `B` with a presheaf vanishing away from `U`. -/
+lemma isIso_openImmersionLowerShriek_counit_app_tensor
+    {G : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l) ⥤
+      Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)}
+    (adj : (j)_!open[WeilCoefficients.{u} l] ⊣ G)
+    (B : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))
+    (P : Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)) :
+    IsIso (adj.counit.app (B ⊗ (j)_!open[WeilCoefficients.{u} l].obj P)) := by
+  let L := (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op
+  let T := L.lan.obj P.obj
+  have hR (W) (hW : IsEmpty (CostructuredArrow L W)) : IsZero ((B.obj ⊗ T).obj W) :=
+    isZero_tensorObj_of_isZero_right _ (L.isInitialLanObjObj P.obj hW).isZero
+  have e : B ⊗ (j)_!open[WeilCoefficients.{u} l].obj P ≅
+      (presheafToSheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)).obj (B.obj ⊗ T) :=
+    whiskerRightIso (asIso ((sheafificationAdjunction (Scheme.ProEt.topology X)
+      (WeilCoefficients.{u} l)).counit.app B)).symm _ ≪≫
+      Functor.Monoidal.μIso (presheafToSheaf (Scheme.ProEt.topology X)
+        (WeilCoefficients.{u} l)) B.obj T
+  exact adj.isIso_counit_app_of_iso
+    (e ≪≫ presheafToSheafObjIsoOpenImmersionLowerShriek _ j _ hR)
+
+/-- The counit of `j_! ⊣ j^*` on sheaves is invertible at the underlying sheaf of the extension by
+zero `j_! M` of every sheaf of `ℚ̄_ℓ,U`-modules `M`. This holds for free modules, the extension by
+zero of `ℚ̄_ℓ,U ⊗ P` being `ℚ̄_ℓ,X ⊗ j_! P`, and is inherited by cokernels, every module being a
+cokernel of a morphism of free modules. -/
+lemma isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_forget (M : AdicSheaf l U) :
+    IsIso ((openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j).counit.app
+      ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := by
+  let adj := openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j
+  let S : ObjectProperty (AdicSheaf l U) := fun M ↦
+    IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M)))
+  have hiso {M N : AdicSheaf l U} (e : M ≅ N) (hM : S M) : S N := by
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := hM
+    exact NatTrans.isIso_app_of_iso adj.counit
+      ((AdicSheaf.forget X).mapIso ((j)_!ᵃ[l].mapIso e)).symm
+  have hfree (P : Sheaf (Scheme.ProEt.topology U) (WeilCoefficients.{u} l)) :
+      S ((Mod.free _).obj P) := by
+    let e := Adjunction.leftAdjointUniq
+      ((Mod.freeForgetAdjunction (adicConstantSheaf l U)).comp
+        (adicOpenImmersionLowerShriekAdjunction l j))
+      (adj.comp (Mod.freeForgetAdjunction (adicConstantSheaf l X)))
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj
+        ((Mod.free (adicConstantSheaf l X)).obj ((j)_!open[WeilCoefficients.{u} l].obj P)))) :=
+      isIso_openImmersionLowerShriek_counit_app_tensor j adj (adicConstantSheaf l X) P
+    exact @NatTrans.isIso_app_of_iso _ _ _ _ _ _ adj.counit _ _
+      ((AdicSheaf.forget X).mapIso (e.app P)) this
+  have hcoker {M N : AdicSheaf l U} (f : M ⟶ N) (hM : S M) (hN : S N) : S (cokernel f) := by
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj M))) := hM
+    have : IsIso (adj.counit.app ((AdicSheaf.forget X).obj ((j)_!ᵃ[l].obj N))) := hN
+    have : IsIso (adj.counit.app (cokernel (((j)_!ᵃ[l] ⋙ AdicSheaf.forget X).map f))) :=
+      adj.isIso_counit_app_cokernel ((AdicSheaf.forget X).map ((j)_!ᵃ[l].map f))
+    exact NatTrans.isIso_app_of_iso adj.counit
+      (PreservesCokernel.iso ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X) f)
+  -- every module is a cokernel of a morphism of free modules
+  let ε := (Mod.freeForgetAdjunction (adicConstantSheaf l U)).counit
+  have hepi (N : AdicSheaf l U) : Epi (ε.app N) := by
+    have : IsSplitEpi ((Mod.forget _).map (ε.app N)) :=
+      ⟨⟨(λ_ N.X).inv ≫ MonObj.one ▷ N.X, Mod.unit_freeDesc _ (𝟙 N.X)⟩⟩
+    exact (Mod.forget _).epi_of_epi_map inferInstance
+  let p := ε.app M
+  have e : M ≅ cokernel (ε.app (kernel p) ≫ kernel.ι p) :=
+    (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel p)).coconePointUniqueUpToIso
+      (colimit.isColimit _) ≪≫ (cokernelEpiComp _ _).symm
+  exact hiso e.symm (hcoker _ (hfree _) (hfree _))
+
+variable (l) in
+/-- The comparison `j_! M.X ⟶ (j_! M).X` of the extension by zero of the underlying sheaf of a
+sheaf of `ℚ̄_ℓ,U`-modules `M` with the underlying sheaf of its extension by zero. -/
+noncomputable def adicOpenImmersionLowerShriekComparison :
+    AdicSheaf.forget U ⋙ (j)_!open[WeilCoefficients.{u} l] ⟶ (j)_!ᵃ[l] ⋙ AdicSheaf.forget X :=
+  Functor.whiskerRight (Functor.whiskerRight (adicOpenImmersionLowerShriekAdjunction l j).unit
+      (AdicSheaf.forget U)) (j)_!open[WeilCoefficients.{u} l] ≫
+    Functor.whiskerLeft ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X)
+      (openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j).counit
+
+instance : IsIso (adicOpenImmersionLowerShriekComparison l j) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  have := isIso_openImmersionLowerShriekUpperStarAdjunction_counit_app_forget j M
+  dsimp [adicOpenImmersionLowerShriekComparison]
+  infer_instance
+
+/-- **Extension by zero is exact.** On underlying sheaves it is the extension by zero of
+sheaves, which is exact. -/
+instance : PreservesFiniteLimits (j)_!ᵃ[l] := by
+  have : PreservesFiniteLimits ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X) :=
+    preservesFiniteLimits_of_natIso (asIso (adicOpenImmersionLowerShriekComparison l j))
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (AdicSheaf.forget X)
 
 /-- The pullback of `j_! F` along a morphism `g` missing the range of `j` vanishes: the
 adjunctions turn `Hom(g^* j_! F, H)` into `Hom(F, j^* g_* H)`, and the underlying sheaf of
