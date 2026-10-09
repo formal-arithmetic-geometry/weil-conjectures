@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-jacobson-radical-one-plus-units",
+ "kind": "statement",
+ "title": "An ideal lies in the Jacobson radical iff 1 + I consists of units",
+ "statement": "Let $R$ be a commutative ring with Jacobson radical $\\operatorname{rad}(R)$ (the intersection of all maximal ideals of $R$) and $I\\subseteq R$ an ideal. Then $I\\subseteq\\operatorname{rad}(R)$ if and only if every element of $1+I=\\{1+x:x\\in I\\}$ is a unit of $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0AME (lemma-contained-in-radical, line 3555), the equivalence (1)$\\Leftrightarrow$(2)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal contained in Jacobson radical iff every element of 1 + I is a unit",
+   "results": "Ideal.mem_jacobson_iff, Ideal.le_jacobson, Ideal.isUnit_of_sub_one_mem_jacobson_bot, TwoSidedIdeal.mem_jacobson_iff, Ideal.radical_le_jacobson, Ideal.ringJacobson_le_jacobson, Ideal.exists_mul_add_sub_mem_of_mem_jacobson, HenselianRing.jac (Mathlib.RingTheory.Jacobson.Ideal, Mathlib.RingTheory.Henselian)",
+   "date": "2026-10-10",
+   "verdict": "generalization: Ideal.isUnit_of_sub_one_mem_jacobson_bot gives one direction; the elementwise criterion Ideal.mem_jacobson_bot (found by leanfinder) gives both"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an ideal I lies in the Jacobson radical of R if and only if 1 + x is a unit for all x in I",
+   "results": "Ideal.mem_jacobson_bot (x ∈ ⊥.jacobson ↔ ∀ y, IsUnit (x * y + 1)), Ideal.isUnit_of_sub_one_mem_jacobson_bot, Ideal.mem_jacobson_iff, TwoSidedIdeal.mem_jacobson_iff, Ideal.IsLocal.mem_jacobson_or_exists_inv (Mathlib.RingTheory.Jacobson.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "match (Ideal.mem_jacobson_bot, specializing as recorded in mathlib_match)"
+  },
+  {
+   "tool": "loogle",
+   "query": "_ ≤ Ideal.jacobson ⊥ ↔ _ ; and Ideal.jacobson, IsUnit, HAdd.hAdd 1",
+   "results": "none (no ideal-level iff stated directly)",
+   "date": "2026-10-10",
+   "verdict": "no direct ideal-level statement; elementwise form used"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem mem_jacobson_bot\\|isUnit_of_sub_one_mem_jacobson_bot' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Jacobson/Ideal.lean; rg -n 'IsUnit \\(1 \\+' Mathlib/",
+   "results": "Ideal.isUnit_of_sub_one_mem_jacobson_bot (Jacobson/Ideal.lean:282), Ideal.mem_jacobson_bot (Jacobson/Ideal.lean:288, `x ∈ jacobson (⊥ : Ideal R) ↔ ∀ y, IsUnit (x * y + 1)` for CommRing R); IsUnit (1 + _) elsewhere only for nilpotents/quasispectrum",
+   "date": "2026-10-10",
+   "verdict": "match (Ideal.mem_jacobson_bot)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.mem_jacobson_bot",
+  "file": "Mathlib/RingTheory/Jacobson/Ideal.lean",
+  "how": "specializes in one line per direction: `Ideal.mem_jacobson_bot : x ∈ jacobson (⊥ : Ideal R) ↔ ∀ y, IsUnit (x * y + 1)` (line 288; `jacobson ⊥` is the intersection of the maximal ideals, i.e. rad(R)). (⇒) for x ∈ I ≤ jacobson ⊥ take y = 1: IsUnit (x * 1 + 1) = IsUnit (1 + x). (⇐) for x ∈ I and any y, x * y ∈ I, so 1 + x * y is a unit, i.e. IsUnit (x * y + 1) by add_comm; hence x ∈ jacobson ⊥. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-filtered-colimit-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Ideal.mem_jacobson_bot (RingTheory/Jacobson/Ideal.lean:288); Algebra 0AME (1)<=>(2)."
+ }
+}
