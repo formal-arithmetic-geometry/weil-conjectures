@@ -2,18 +2,56 @@
  "id": "lem-weil-pbc-module-sheaves-enough-injectives",
  "kind": "statement",
  "title": "Sheaves of modules on the small etale site have enough injectives",
- "statement": "Let $T$ be a scheme and $R$ a commutative ring, and let $\\Mod(T_{\\Et},R)$ be the abelian category of sheaves of $R_T$-modules on the small etale site of $T$ [def-weil-pbc-etale-sheaves]. Then $\\Mod(T_{\\Et},R)$ has enough injectives: for every object $F$ there are an injective object $J$ of $\\Mod(T_{\\Et},R)$ [def-sp-injective-resolutions] and a monomorphism $F\\hookrightarrow J$ in $\\Mod(T_{\\Et},R)$.",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $R$ a commutative ring, $R_T$ the constant sheaf of rings with value $R$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules on $T_{\\Et}$ [def-weil-sheaf-of-modules-category]. Then $\\Mod(T_{\\Et},R)$ has enough injectives: for every object $F$ there are an injective object $J$ of $\\Mod(T_{\\Et},R)$ [def-sp-injective-resolutions] and a monomorphism $F\\hookrightarrow J$ in $\\Mod(T_{\\Et},R)$. In particular the category $\\Ab(T_{\\Et})$ of abelian sheaves on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] has enough injectives.",
  "source": {
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Injectives, Theorem 01DU (label theorem-sheaves-modules-injectives): the category of sheaves of $\\mathcal O$-modules on a site has enough injectives; used in Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Choose an injective map of sheaves $f^{-1}\\mathcal I\\to\\mathcal J$ where $\\mathcal J$ is an injective sheaf of $\\mathbf Z/\\ell\\mathbf Z$-modules\")"
+  "place": "Injectives, Theorem 079H (label theorem-injective-embedding-grothendieck: a Grothendieck abelian category has functorial injective embeddings), applied to Mod(O) via Modules on Sites, Lemmas 03DA, 03DB, 03EW (literature/stacks-project/sites-modules.tex); the direct statement for any ringed site is Injectives, Theorem 01DU (label theorem-sheaves-modules-injectives); used in Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph"
  },
  "stmt_deps": [
-  "def-weil-pbc-etale-sheaves",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "*$\\Mod(T_{\\Et},R)$ and $\\Ab(T_{\\Et})$ are Grothendieck abelian.* By [lem-weil-pbc-module-sheaves-grothendieck-abelian] with $\\Lambda=R$, the category $\\Mod(T_{\\Et},R)$ of sheaves of $R_T$-modules is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it is abelian, has all small colimits, filtered colimits in it are exact, and it has a generator ($\\bigoplus_U j_{U!}R_U$ over a set of representatives $U$ of an essentially small dense subcategory of $T_{\\Et}$). The same lemma (its case $\\Lambda=\\mathbf Z$) says that $\\Ab(T_{\\Et})$ is Grothendieck abelian.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemmas 03DA, 03DB, 03EW (3), as collected in node lem-weil-pbc-module-sheaves-grothendieck-abelian; cf. Cohomology on Sites, proof of Lemma 07AC (sites-cohomology.tex): 'the category of modules on a ringed site is a Grothendieck abelian category'"
+   }
+  },
+  {
+   "text": "*Enough injectives.* A Grothendieck abelian category has enough injectives [lem-sp-grothendieck-enough-injectives] (Stacks 079H: it even has a functorial injective embedding, i.e. a functor $M\\mapsto I(M)$ with $I(M)$ injective and a natural monomorphism $i_M:M\\to I(M)$; taking $J=I(F)$ and $F\\hookrightarrow J$ the map $i_F$ gives the statement for each $F$). Applied to the two Grothendieck abelian categories of step 1, $\\Mod(T_{\\Et},R)$ and $\\Ab(T_{\\Et})$ have enough injectives, with injectivity in the sense of [def-sp-injective-resolutions] taken inside the respective category.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Theorem 079H (label theorem-injective-embedding-grothendieck) and Homology, Definition 'functorial injective embedding' (homology-definition-functorial-injective-embedding)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-sp-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Theorem 079H (theorem-injective-embedding-grothendieck), applied to Mod(O) as in Cohomology on Sites, proof of Lemma 07AC"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +73,38 @@
    "results": "IsGrothendieckAbelian.enoughInjectives (EnoughInjectives.lean:380, @[stacks 079H]): a Grothendieck abelian category has enough injectives; AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology (Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:149) with the example `IsGrothendieckAbelian.{u} (Sheaf S.smallEtaleTopology (ModuleCat.{u} R))` (line 154); nothing in ModuleCat/Sheaf/ (SheafOfModules, which def-weil-sheaf-of-modules-category matches)",
    "date": "2026-10-09",
    "verdict": "generalization only up to a theorem: Mathlib gives enough injectives for Sheaf T.smallEtaleTopology (ModuleCat R) (sheaves valued in R-modules); Mod(T_et,R) as sheaves of R_T-modules is SheafOfModules over the constant ring sheaf, and its equivalence with ModuleCat R-valued sheaves is itself a theorem, so not a leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaves of modules over a sheaf of rings have enough injectives",
+   "results": "ModuleCat.enoughInjectives, instEnoughInjectivesModuleCatOfSmall (Mathlib.Algebra.Category.ModuleCat.EnoughInjectives); SheafOfModules, SheafOfModules.mk, SheafOfModules.over (Mathlib.Algebra.Category.ModuleCat.Sheaf[.PushforwardContinuous]); AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-09",
+   "verdict": "no match: no EnoughInjectives for SheafOfModules"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnoughInjectives (SheafOfModules _)",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence between sheaves of modules over the constant sheaf of rings R and sheaves of R-modules",
+   "results": "SheafOfModules.unit, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:99: a functor SheafOfModules R ⥤ Sheaf J (ModuleCat (R(X))) for X initial in Cᵒᵖ, not stated to be an equivalence), SheafOfModules.unitHomEquiv",
+   "date": "2026-10-09",
+   "verdict": "no match: the comparison Mod(R_T) ≌ Sheaf T.smallEtaleTopology (ModuleCat R) is not in Mathlib (only the forgetful functor forgetToSheafModuleCat, T being terminal in T_et); the item therefore goes through lem-weil-pbc-module-sheaves-grothendieck-abelian"
+  },
+  {
+   "tool": "grep",
+   "query": "'forgetToSheafModuleCat' over Mathlib/; 'EnoughInjectives' in Mathlib/Algebra/Category/ModuleCat, Mathlib/CategoryTheory/Sites, Mathlib/AlgebraicGeometry; read Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean:378-382 and Basic.lean:55-78; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:100-156",
+   "results": "CategoryTheory.IsGrothendieckAbelian.enoughInjectives (instance, @[stacks 079H], for [Abelian C] [IsGrothendieckAbelian.{w} C]; IsGrothendieckAbelian = locally small + AB5 + separator, @[stacks 079B]); AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology (AffineEtale.lean:149) and the example for Sheaf S.smallEtaleTopology (ModuleCat R) (line 154); forgetToSheafModuleCat used only in Sheaf.lean, PushforwardContinuous.lean:419, AlgebraicGeometry/Modules/Tilde.lean:44, never as an equivalence; EnoughInjectives only for ModuleCat (ModuleCat/EnoughInjectives.lean) and in SheafCohomology/Basic.lean, InjectiveDimension.lean, Ext/DimensionShifting.lean (generic uses)",
+   "date": "2026-10-09",
+   "verdict": "generalization only up to a theorem (confirms the earlier verdict): for Sheaf T.smallEtaleTopology (ModuleCat R) the instances isGrothendieckAbelian_sheaf_smallEtaleTopology + IsGrothendieckAbelian.enoughInjectives give it in Lean, but Mod(T_et,R) as SheafOfModules over constantSheaf R is identified with that category only by a theorem absent from Mathlib; not a leaf. Step 2's lemma lem-sp-grothendieck-enough-injectives is the Mathlib leaf IsGrothendieckAbelian.enoughInjectives"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +124,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-module-sheaves-enough-injectives",
+  "worker": "stage1",
+  "summary": "Split in two steps along Stacks 079H: (1) Mod(T_et,R) and Ab(T_et) are Grothendieck abelian by the sibling node lem-weil-pbc-module-sheaves-grothendieck-abelian (Lambda=R, and its case Lambda=Z); (2) a Grothendieck abelian category has enough injectives, the existing node lem-sp-grothendieck-enough-injectives (Stacks 079H; Mathlib IsGrothendieckAbelian.enoughInjectives, read at EnoughInjectives.lean:380). Statement rewritten to name its objects through def-pc-scheme, def-weil-pbc-etale-site, def-weil-pbc-constant-sheaf and def-weil-sheaf-of-modules-category (as lemma-weil-pbc-prime-proper-base-change does), the grab-bag def-weil-pbc-etale-sheaves replaced; the clause 'in particular Ab(T_et) has enough injectives' added with def-weil-pbc-abelian-etale-sheaves, since lem-weil-pbc-derived-adjunction-commshift cites the node for Ab(V_et). Source corrected: 01DU is Injectives Theorem 01DU (theorem-sheaves-modules-injectives), the route taken is 079H; 0D1C is a Quot tag, not relevant. Item searched again three ways: not a leaf (SheafOfModules over the constant ring sheaf vs Sheaf J (ModuleCat R) is a theorem absent from Mathlib). No new node."
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Stacks 079H route; lem-sp-grothendieck-enough-injectives (sk-prop-av-pqf-finite) accepted as a tool use"
+ }
 }
