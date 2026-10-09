@@ -11,11 +11,12 @@ Your first prompt says who you are and which role document is yours.
 | the maintainer | the launcher | [`roles/maintainer.md`](roles/maintainer.md) |
 | the lead of a group | the launcher | [`roles/lead.md`](roles/lead.md) |
 | a worker on one item | a lead, as a sub-agent | [`roles/worker.md`](roles/worker.md) |
-| the lead of a group on another machine | the human, with the group name and the server login | [`roles/remote-lead.md`](roles/remote-lead.md), after `roles/lead.md` |
+| the lead of a group on another machine | the launcher on that machine, with the group name and the server login | [`roles/remote-lead.md`](roles/remote-lead.md), after `roles/lead.md` |
+| the launcher of groups on another machine | the human on that machine, with the server login, a prefix and a number of groups | [`roles/remote-launcher.md`](roles/remote-launcher.md) |
 
 A worker is started by its lead as a separate agent (in Claude Code, a sub-agent of the `Agent` tool) with the lead's brief as its whole prompt; in any other agent system, any separately started agent given that brief and its item is the worker. `SETUP.md` ("The machine") records what this run used and the equivalents.
 
-The launcher is the agent the human talks to. It works outside this directory: it started the project, keeps the sessions running, and brings the questions in `coord/HUMAN.md` to the human.
+The launcher is the agent the human talks to. It works outside this directory: it started the project, keeps the sessions running, and brings the questions in `coord/HUMAN.md` to the human. A launcher on another machine (`roles/remote-launcher.md`) starts the groups there and keeps them running; it does no work on the project itself.
 
 A session that starts from this file alone reads, in this order: `SETUP.md` (the human's settings, the machine, the decisions of the run and their reasons), `GOAL.md` (the target), `coord/STATE.md` (where the run stands, what is in progress, the numbers), its role document, the open stage documents, `tools/README.md` (the scripts and the regeneration of what git does not hold), and `coord/ledger.md` when it needs the history of a change.
 

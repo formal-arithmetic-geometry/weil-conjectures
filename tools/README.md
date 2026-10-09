@@ -106,6 +106,7 @@ The first build in a new copy may compile the whole library once.
 | `merge_delivery.py show <group> <item>` | Prints a delivery (report, statement, proof) for the maintainer's spot check; merges nothing. |
 | `merge_delivery.py <group> <item> [--spot-checked NOTE]` | Checks the base and the files, cherry-picks, runs `review_split.py` and `check_dag.py`, writes `reviewed` with the group, closes the claim, deletes the branch, appends the ledger line, commits (`roles/maintainer.md` §7). Stops at the first failure and restores the working tree. |
 | `merge_delivery.py return <group> <item> REASONS` | Writes the reasons into `coord/returns/<group>.md` and commits; the claim and the branch stay with the group. |
+| `group_stats.py` | Per group on another machine: items merged (from `coord/deliveries.log`), items returned (from `coord/ledger.md`), claims held and their age (from `coord/claims/`); the table for `coord/STATE.md`. |
 | `install_hooks.sh` | Run once on the server: pushes to this repository are accepted only to `refs/heads/deliver/<group>/<item>`; the checked-out branch is refused. |
 
 `SHEAF_DELIVERY_MAX_AGE_HOURS` (default 48) in `coord/sheaf.env` is how far behind `sheaf-dag` a delivery's base may be. The group's side is `roles/remote-lead.md`.
