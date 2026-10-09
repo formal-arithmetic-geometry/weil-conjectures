@@ -12,9 +12,45 @@
   "def-weil-closed-immersion",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($i$ is surjective and universally closed.) By definition of a thickening [def-sbc-first-order-thickening], $i:X\\to X'$ is a closed immersion whose map of underlying topological spaces is surjective, i.e. $i$ is a surjective morphism of schemes [def-weil-surjective-morphism]. A closed immersion is universally closed [lem-weil-pbc-closed-immersion-integral-separated-uc, clause (d)] in the sense of [def-weil-proper-morphism]. (This is the fact Stacks leaves implicit when it calls 06AD 'a special case' of 05YU.)",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 06AD (lemma-thickening-affine-scheme), first proof: 'This is a special case of Limits, Proposition 05YU'"
+   }
+  },
+  {
+   "text": "($X'$ is affine.) Apply Limits, Proposition 05YU [lem-weil-pbc-surjective-universally-closed-affine-target] to the morphism $f:=i:X\\to S:=X'$: its source $X$ is affine by hypothesis, and $i$ is surjective and universally closed by step 1. Hence $X'$ is an affine scheme.",
+   "uses": [
+    "lem-weil-pbc-surjective-universally-closed-affine-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 06AD (lemma-thickening-affine-scheme), first proof: 'This is a special case of Limits, Proposition 05YU'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 06AD (lemma-thickening-affine-scheme, line 157), first proof (via Limits, Proposition 05YU)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,10 +100,52 @@
    "results": "Properties.lean:129 isReduced_of_isAffine_isReduced (unrelated); Integral.lean:35,136,160 (IsIntegralHom API); 'thickening' only in Morphisms/FormallyUnramified.lean; Chevalley only in UniversallyOpen.lean, FinitePresentation.lean (constructible sets). No affineness of a thickening or of the target of a surjective integral morphism",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "target of a surjective universally closed morphism from an affine scheme is affine",
+   "results": "Surjective.of_universallyClosed_of_isDominant, IsClosedImmersion.isAffine_surjective_of_isAffine (source affine, converse direction), IsClosedImmersion.of_surjective_of_isAffine, UniversallyClosed.of_comp_surjective, AffineTargetMorphismProperty, surjective_of_isDominant_of_isClosed_range, IsIntegralHom.iff_universallyClosed_and_isAffineHom, isIntegral_appTop_of_universallyClosed (Mathlib.AlgebraicGeometry.Morphisms.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre's criterion: a quasi-compact scheme whose quasi-coherent cohomology vanishes is affine; Chevalley: finite surjective image of affine is affine",
+   "results": "AffineScheme, IsAffine.recOn/casesOn, IsFinite.toIsAffineHom, Scheme.instIsQuasiAffineOfIsAffine, IsAffine, instQuasiCompactOfIsAffineHom, quasiSeparatedSpace_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "no match (neither Chevalley's theorem Limits 01ZT-type nor Serre's criterion for schemes)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If f : X → S is a surjective integral morphism of schemes and X is affine, then S is affine (Chevalley)",
+   "results": "IsIntegralHom.hasAffineProperty, IsIntegralHom.toIsAffineHom, isIntegralHom_iff, IsClosedImmersion.isAffine_surjective_of_isAffine, IsIntegralHom.iff_universallyClosed_and_isAffineHom, SurjectiveOnStalks.iff_of_isAffine, Scheme.exists_hom_isAffine_of_isLocalAtSource, Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.Surjective, AlgebraicGeometry.UniversallyClosed",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.Surjective, AlgebraicGeometry.IsIntegralHom",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.Surjective, AlgebraicGeometry.IsFinite",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -92,6 +170,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is More on Morphisms 06AD (a thickening of an affine scheme is affine; general case via Limits 05YU); correct; unsplit."
+  "note": "Split reviewed: 2 steps along the first proof of More on Morphisms 06AD (closed immersion is surjective and universally closed, then Limits 05YU). Correct. The brief misdescribed the proof of 05YU; the worker corrected it in the new node source."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-thickening-affine-scheme",
+  "worker": "stage1",
+  "summary": "Read More on Morphisms 06AD (more-morphisms.tex:157) and its two proofs, and Limits 05YU (limits.tex:2875) with its proof; tags checked in stacks-project/tags/tags (06AD = more-morphisms-lemma-thickening-affine-scheme, 05YU = limits-proposition-affine). Statement kept (matches 06AD, no finite-order hypothesis). Proof follows Stacks' first proof in two steps: a thickening is a surjective closed immersion, hence surjective and universally closed (existing Mathlib leaf lem-weil-pbc-closed-immersion-integral-separated-uc (d), Mathlib instUniversallyClosedOfIsClosedImmersion); then Limits 05YU, a new unsplit node lem-weil-pbc-surjective-universally-closed-affine-target (no existing node states it; Mathlib has neither it nor Chevalley's theorem Limits lemma-affine nor Serre's criterion; searches recorded). The second Stacks proof (finite order only, Serre's criterion 01XF) is not used since the statement has no finite-order hypothesis. No Lean of the source repository states the item or 05YU."
  }
 }
