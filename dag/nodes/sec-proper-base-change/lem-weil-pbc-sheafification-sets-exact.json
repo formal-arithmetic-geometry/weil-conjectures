@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-sheafification-sets-exact",
+ "kind": "statement",
+ "title": "Sheafification of presheaves of sets commutes with finite limits",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category has a set of objects and morphisms, $\\mathrm{PSh}(\\mathcal C)$ the category of presheaves of sets on $\\mathcal C$, $\\Sh(\\mathcal C)$ the full subcategory of sheaves of sets, and $\\#:\\mathrm{PSh}(\\mathcal C)\\to\\Sh(\\mathcal C)$ the sheafification [def-weil-pbc-sheafification], left adjoint to the inclusion. Then $\\#$ commutes with finite limits; in particular it sends the final presheaf $*$ to the final sheaf $*$ and a product $\\mathcal F_1\\times\\mathcal F_2$ (computed sectionwise) to $\\mathcal F_1^\\#\\times\\mathcal F_2^\\#$ via the projections.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma 00WJ (lemma-sheafification-exact) and Proposition 00WH (proposition-sheafification-adjoint)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of presheaves of types preserves finite limits",
+   "results": "CategoryTheory.preservesFiniteLimits_presheafToSheaf (Sites.LeftExact), instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf (Sites.Sheafification), GrothendieckTopology.preservesFiniteLimits_sheafification",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left Kan extension along a finite limit preserving functor preserves finite limits of presheaves of types (results also list sheafification)",
+   "results": "preservesFiniteLimits_presheafToSheaf (Mathlib.CategoryTheory.Sites.LeftExact)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*HasSheafify|PreservesFiniteLimits \\(presheafToSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "Sheafification.lean:76 instance [HasSheafify J A] : PreservesFiniteLimits (presheafToSheaf J A); LeftExact.lean:313 instance : HasSheafify J (Type (max u v)) (C : Type u, Category.{v} C)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf",
+  "file": "Mathlib/CategoryTheory/Sites/Sheafification.lean",
+  "how": "specializes in one line: the instance PreservesFiniteLimits (presheafToSheaf J A) given HasSheafify J A (Sheafification.lean:76) with A = Type (max u v), for which HasSheafify J (Type (max u v)) is the instance at Mathlib/CategoryTheory/Sites/LeftExact.lean:313; for a small site (C : Type v, SmallCategory) this is Type v."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

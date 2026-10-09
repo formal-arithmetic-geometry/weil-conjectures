@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+ "kind": "statement",
+ "title": "Presheaf pullback of presheaves of sets: left adjoint, and left exact for a finite-limit-preserving functor",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories whose objects and morphisms form sets and $b:\\mathcal C\\to\\mathcal D$ a functor. Let $\\mathrm{PSh}(\\mathcal C)$, $\\mathrm{PSh}(\\mathcal D)$ be the categories of presheaves of sets (contravariant functors to sets, natural transformations as morphisms), and $b^p:\\mathrm{PSh}(\\mathcal D)\\to\\mathrm{PSh}(\\mathcal C)$, $\\mathcal G\\mapsto\\mathcal G\\circ b$. For $Y\\in\\mathcal D$ let $\\mathcal I_Y$ be the category of pairs $(X,\\phi)$, $X\\in\\mathcal C$, $\\phi:Y\\to b(X)$, a morphism $(X,\\phi)\\to(X',\\phi')$ being $f:X\\to X'$ with $b(f)\\circ\\phi=\\phi'$, and for $\\mathcal F\\in\\mathrm{PSh}(\\mathcal C)$ put $b_p\\mathcal F(Y)=\\varinjlim_{(X,\\phi)\\in\\mathcal I_Y^{\\mathrm{op}}}\\mathcal F(X)$ (colimit of sets), with restriction maps induced by $(X,\\phi)\\mapsto(X,\\phi\\circ g)$ for $g:Y'\\to Y$. Then: (1) $b_p$ is a functor $\\mathrm{PSh}(\\mathcal C)\\to\\mathrm{PSh}(\\mathcal D)$ left adjoint to $b^p$, $\\operatorname{Hom}(b_p\\mathcal F,\\mathcal G)\\cong\\operatorname{Hom}(\\mathcal F,b^p\\mathcal G)$ naturally in $\\mathcal F,\\mathcal G$, the unit $\\mathcal F(X)\\to b_p\\mathcal F(b(X))$ being the coprojection at $(X,\\mathrm{id}_{b(X)})$; (2) if $\\mathcal C$ has finite limits (a final object and fibre products) and $b$ commutes with them, then every $\\mathcal I_Y^{\\mathrm{op}}$ is filtered and $b_p$ commutes with finite limits (finite limits of presheaves of sets being computed sectionwise); in particular $b_p(*)=*$ and $b_p(\\mathcal F_1\\times\\mathcal F_2)=b_p\\mathcal F_1\\times b_p\\mathcal F_2$ via the projections.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00VC (section-functoriality-PSh), Lemma 00VE (lemma-adjoints-u: u_p left adjoint to u^p), Lemma 00X3 (lemma-directed: the categories (I_V)^opp are filtered when u commutes with the final object and fibre products), proof of Lemma 00X5 (lemma-directed-morphism: u_p commutes with finite limits, by literature/stacks-project/categories.tex Lemma 002W, filtered colimits commute with finite limits in Sets)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left Kan extension along a functor preserving finite limits preserves finite limits of presheaves of types",
+   "results": "CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits, lan_preservesFiniteLimits_of_flat, preservesFiniteLimits_iff_lan_preservesFiniteLimits (Mathlib.CategoryTheory.Functor.Flat)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left Kan extension along a finite limit preserving functor preserves finite limits of presheaves of types",
+   "results": "lan_preservesFiniteLimits_of_preservesFiniteLimits, lan_preservesFiniteLimits_of_flat, preservesFiniteLimits_iff_lan_preservesFiniteLimits (Mathlib.CategoryTheory.Functor.Flat), preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'lan_preservesFiniteLimits_of_preservesFiniteLimits|flat_of_preservesFiniteLimits|lanEvaluationIsoColim|def lanAdjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/",
+   "results": "Functor/Flat.lean:163 flat_of_preservesFiniteLimits, :302 lanEvaluationIsoColim, :344 lan_preservesFiniteLimits_of_preservesFiniteLimits (E any concrete category with limits, colimits, forget reflecting and preserving limits and preserving filtered colimits: E = Type u₁ qualifies); Functor/KanExtension/Adjunction.lean:148 lanAdjunction",
+   "date": "2026-10-09",
+   "verdict": "match (the set-valued case E = Type of the lemmas recorded for lem-weil-pbc-presheaf-pullback-left-exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits",
+  "file": "Mathlib/CategoryTheory/Functor/Flat.lean",
+  "how": "one Mathlib lemma per clause, for small categories C, D : Type u₁ and E = Type u₁: (1) b_p is b.op.lan, left adjoint to precomposition by Functor.lanAdjunction (Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:148), its values being the colimits over CostructuredArrow b.op (op Y), equivalent to I_Y^op (lanEvaluationIsoColim, Flat.lean:302); (2) lan_preservesFiniteLimits_of_preservesFiniteLimits (Flat.lean:344) given HasFiniteLimits C and PreservesFiniteLimits b; filteredness of the index categories is flat_of_preservesFiniteLimits (Flat.lean:163)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+ "kind": "statement",
+ "title": "An adjunction whose left adjoint preserves finite products lifts to abelian group and commutative ring objects",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be categories with finite products (final objects $*$), and $L:\\mathcal A\\to\\mathcal B$ left adjoint to $R:\\mathcal B\\to\\mathcal A$, with unit $\\eta$ and counit $\\varepsilon$; assume $L$ preserves finite products ($L(*)$ final and $L(X\\times Y)\\to LX\\times LY$, induced by the projections, an isomorphism); $R$ preserves all limits, in particular finite products. For an abelian group object $(X,+,0,i)$ of $\\mathcal A$ let $L(X)$ carry $L(+)\\circ\\lambda^{-1}:LX\\times LX\\to LX$, $L(0)\\circ\\lambda_*^{-1}:*\\to LX$, $L(i)$, with $\\lambda$, $\\lambda_*$ the comparison isomorphisms; likewise $R$, and likewise for commutative ring objects (also $\\cdot$ and $1$). Then: (1) these are abelian group (resp. commutative ring) objects, and $L$, $R$ so extended are functors $L^{\\mathrm{gr}}$, $R^{\\mathrm{gr}}$ on abelian group objects (resp. $L^{\\mathrm{rg}}$, $R^{\\mathrm{rg}}$ on commutative ring objects), commuting with the forgetful functors to $\\mathcal A$, $\\mathcal B$; (2) for an abelian group (ring) object $X$ of $\\mathcal A$ and $Y$ of $\\mathcal B$, a morphism $\\alpha:LX\\to Y$ commutes with the structure maps if and only if its adjoint $R(\\alpha)\\circ\\eta_X:X\\to RY$ does; hence $L^{\\mathrm{gr}}\\dashv R^{\\mathrm{gr}}$ (resp. $L^{\\mathrm{rg}}\\dashv R^{\\mathrm{rg}}$), with adjunction bijection the restriction of that of $L\\dashv R$, and unit and counit those of $L\\dashv R$ (which are morphisms of group, resp. ring, objects).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV (proposition-functoriality-algebraic-structures-topoi), proof of (2) ('adjointness follows from adjointness of the set based functors', details left to the reader) and the paragraph on rings as sextuples; the discussion before it ('the axioms are going to be preserved because f^{-1} is a functor which commutes with finite limits')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction lifts to group objects when left adjoint preserves finite products",
+   "results": "CategoryTheory.Adjunction.mapGrp, Adjunction.mapGrp_unit, Adjunction.mapGrp_counit (Mathlib.CategoryTheory.Monoidal.Grp_), Grp.lift_hom, GrpObj.lift_inv_right_eq",
+   "date": "2026-10-09",
+   "verdict": "partial: groups only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.RingObjCat, CategoryTheory.Functor",
+   "results": "RingObjCat.forget, CommRingObjCat.forget₂RingObjCat, RingObjCat.forget₂AddMon, RingObjCat.forget₂Mon (Mathlib.CategoryTheory.Monoidal.Ring), yonedaRing (Monoidal.Cartesian.Ring)",
+   "date": "2026-10-09",
+   "verdict": "no match for rings: no functor RingObjCat C ⥤ RingObjCat D induced by a functor C ⥤ D"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor preserving finite products maps commutative ring objects to commutative ring objects; adjunction lifts to ring objects",
+   "results": "CommRingCat.instIsRightAdjointCommMonCatForget₂, CommRingCat.instIsRightAdjointForget, CommRingCat.forget₂Adj (Algebra.Category.Ring.Adjunctions), commRingObj instances",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def Adjunction.mapGrp|def mapCommGrp|Adjunction.mapCommMon|mapRingObj|mapCommRingObj|RingObjCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "CategoryTheory/Monoidal/CommGrp_.lean:199 Functor.mapCommGrp (for a braided functor of cartesian monoidal categories), :286 Adjunction.mapCommGrp : F.mapCommGrp ⊣ G.mapCommGrp (unit mapCommGrpNatTrans a.unit up to the identity/composition isos), :297 Equivalence.mapCommGrp; Monoidal/Grp_.lean Adjunction.mapGrp; CommMon_.lean:169 mapCommMon; no mapRingObj/mapCommRingObj and RingObjCat used only in Monoidal/Ring.lean and Monoidal/Cartesian/Ring.lean",
+   "date": "2026-10-09",
+   "verdict": "partial: the abelian-group clauses are Adjunction.mapCommGrp (with F, G braided monoidal for the cartesian structures, i.e. product preserving); the commutative-ring clauses are absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
