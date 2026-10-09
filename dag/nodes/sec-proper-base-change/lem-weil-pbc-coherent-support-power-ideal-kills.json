@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-coherent-support-power-ideal-kills",
  "kind": "statement",
  "title": "A coherent module supported in the zero set of an ideal is killed by a power of it",
- "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] with quasi-compact underlying space), $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent] and $\\mathcal K\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, with $\\mathcal K^t\\mathcal F$ as in [def-weil-pbc-coherent-formal-module] (0); let $V(\\mathcal K)=\\{x\\in X:\\mathcal K_x\\ne\\mathcal O_{X,x}\\}$ (the closed subset underlying the closed subscheme cut out by $\\mathcal K$ [def-sbc-closed-immersion-ideal-sheaf]; on an affine open $\\operatorname{Spec}A$ it is $V(\\mathcal K(\\operatorname{Spec}A))$). Then $\\mathcal K^t\\mathcal F=0$ for some $t\\ge0$ if and only if $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$ [def-weil-pbc-closed-subset-proper-over-base] (2).",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] with quasi-compact underlying space), $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent] and $\\mathcal K\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, with $\\mathcal K^t\\mathcal F$ as in [def-weil-pbc-coherent-formal-module] (0) for $t\\ge1$ and $\\mathcal K^0\\mathcal F=\\mathcal F$; let $V(\\mathcal K)=\\{x\\in X:\\mathcal K_x\\ne\\mathcal O_{X,x}\\}$ (the closed subset underlying the closed subscheme cut out by $\\mathcal K$ [def-sbc-closed-immersion-ideal-sheaf]; on an affine open $\\operatorname{Spec}A$ it is $V(\\mathcal K(\\operatorname{Spec}A))$ [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine]). Then $\\mathcal K^t\\mathcal F=0$ for some $t\\ge0$ if and only if $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$ [def-weil-pbc-closed-subset-proper-over-base] (2).",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf, line 2569); its proof: a finite covering by spectra of Noetherian rings and Algebra, Lemma 00L6 (algebra-lemma-Noetherian-power-ideal-kills-module, algebra.tex line 14997)"
@@ -12,11 +12,122 @@
   "pqf-def-coherent",
   "def-weil-pbc-coherent-formal-module",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a finite affine cover with Noetherian rings).* By [pqf-def-locnoeth] $X$ has an affine open covering by opens $U$ with $\\mathcal O_X(U)$ Noetherian [def-weil-pbc-noetherian-ring]; since $X$ is quasi-compact, finitely many of them, $U_1,\\dots,U_r$, cover $X$. Put $A_i=\\mathcal O_X(U_i)$, a Noetherian ring, and identify $U_i$ with $\\operatorname{Spec}A_i$ [def-pc-scheme], [def-weil-affine-spectrum] (an affine scheme, the identification inducing the identity on global sections), $x\\in U_i$ corresponding to the prime $\\mathfrak p_x\\subset A_i$. ('$X$ has a finite covering by spectra of Noetherian rings.')",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof"
+   }
+  },
+  {
+   "text": "*Step 2 ($M_i=\\mathcal F(U_i)$ is a finite $A_i$-module).* $\\mathcal F$ is coherent [pqf-def-coherent], so of finite type, and of finite presentation: every point has an open $W$ with a surjection $\\pi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$, whose kernel is of finite type by coherence, so on a smaller open $V\\ni x$ there is a surjection $\\mathcal O_V^{\\oplus m}\\to\\operatorname{Ker}(\\pi)|_V$ and $\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}\\to\\mathcal F|_V\\to0$ is exact. Hence $\\mathcal F$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-finite-type-affine](0), and, being quasi-coherent of finite type, $M_i=\\mathcal F(U_i)$ is a finitely generated $A_i$-module [def-weil-finitely-generated-module] for every $i$ by [lem-weil-pbc-quasi-coherent-finite-type-affine](c).",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof (the finite module on each member of the covering; Properties, Lemma 01PB, carried by lem-weil-pbc-quasi-coherent-finite-type-affine)"
+   }
+  },
+  {
+   "text": "*Step 3 (the sections of $\\mathcal K^t\\mathcal F$ on $U_i$).* Put $I_i=\\mathcal K(U_i)$, an ideal of $A_i$. Applying [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] to the quasi-coherent $\\mathcal O_X$-module $\\mathcal O_X$: every $\\mathcal K^s$ ($s\\ge1$) is a quasi-coherent sheaf of ideals with $\\mathcal K^s(U_i)=I_i^s$ (part (1) and (2)). Applying it to the quasi-coherent sheaf of ideals $\\mathcal J=\\mathcal K^t$ ($t\\ge1$) and the quasi-coherent module $\\mathcal F$ (Step 2): $\\mathcal K^t\\mathcal F$ (the image of $\\mathcal K^t\\otimes_{\\mathcal O_X}\\mathcal F\\to\\mathcal F$, notation of [def-weil-pbc-coherent-formal-module] (0)) is a quasi-coherent $\\mathcal O_X$-module (part (1)) and $(\\mathcal K^t\\mathcal F)(U_i)=\\mathcal K^t(U_i)\\,\\mathcal F(U_i)=I_i^tM_i$ (part (2)). For $t=0$, $\\mathcal K^0\\mathcal F=\\mathcal F$ and $I_i^0M_i=M_i$, so $(\\mathcal K^t\\mathcal F)(U_i)=I_i^tM_i$ for every $t\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof (the reduction to modules over the rings of the covering, written out by the agent)"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\mathcal K^t\\mathcal F=0$ iff $I_i^tM_i=0$ for all $i$).* If $\\mathcal K^t\\mathcal F=0$ then its sections $I_i^tM_i$ (Step 3) are $0$. Conversely let $I_i^tM_i=0$ for $i=1,\\dots,r$ and put $\\mathcal G=\\mathcal K^t\\mathcal F$, quasi-coherent (Step 3). Fix $i$. The restriction $\\mathcal G|_{U_i}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2), with global sections $\\mathcal G(U_i)=0$; transported to $\\operatorname{Spec}A_i\\cong U_i$ (Step 1), the counit $\\widetilde{\\mathcal G(U_i)}=\\widetilde 0\\to\\mathcal G|_{U_i}$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction](3), and $\\widetilde 0=0$ ($0$ is the colimit of the empty diagram of $A_i$-modules, so $\\widetilde 0$ is the colimit of the empty diagram, the zero module, by [lem-weil-pbc-affine-tilde-gamma-adjunction](4)). So $\\mathcal G(V)=0$ for every open $V\\subseteq U_i$. For any open $V\\subseteq X$ and $s\\in\\mathcal G(V)$, $s|_{V\\cap U_i}=0$ for all $i$, and the $V\\cap U_i$ cover $V$, so $s=0$ by the sheaf property [def-weil-sheaf-of-modules-category]. Hence $\\mathcal K^t\\mathcal F=0$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof (the passage from the covering to $X$, written out by the agent as in the proof of Lemma 01Y8)"
+   }
+  },
+  {
+   "text": "*Step 5 (support and zero set on $U_i$).* As $\\mathcal F$ is quasi-coherent of finite type (Step 2), [lem-weil-pbc-finite-type-module-support-closed] gives, for $x\\in U_i$: $x\\in\\operatorname{Supp}(\\mathcal F)$ iff $\\operatorname{Ann}_{A_i}(M_i)\\subseteq\\mathfrak p_x$, i.e. $\\operatorname{Supp}(\\mathcal F)\\cap U_i=V(\\operatorname{Ann}_{A_i}(M_i))$ (which is $\\operatorname{Supp}(M_i)$ [lem-weil-pbc-finite-module-support-annihilator], Algebra, Lemma 00L2). By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $V(\\mathcal K)\\cap U_i=V(I_i)$. Since $X=U_1\\cup\\dots\\cup U_r$, $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$ holds iff $V(\\operatorname{Ann}_{A_i}(M_i))\\subseteq V(I_i)$ for every $i$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof; Algebra, Lemma 00L2 (lemma-support-closed) as used in the proof of Lemma 00L6"
+   }
+  },
+  {
+   "text": "*Step 6 (Algebra, Lemma 00L6 on each $U_i$).* Let $A$ be a Noetherian ring, $I\\subseteq A$ an ideal and $M$ a finite $A$-module, $\\mathfrak a=\\operatorname{Ann}_A(M)$. Then: (a) for $n\\ge0$, $I^nM=0$ iff $I^n\\subseteq\\mathfrak a$ (definition of the annihilator, as $I^nM$ is generated by the $am$, $a\\in I^n$); (b) if $I^n\\subseteq\\mathfrak a$ then $V(\\mathfrak a)\\subseteq V(I)$: a prime $\\mathfrak p\\supseteq\\mathfrak a$ contains $I^n$, hence $I$ ($a\\in I$ gives $a^n\\in\\mathfrak p$, so $a\\in\\mathfrak p$; for $n=0$, $\\mathfrak a=A$ and $V(\\mathfrak a)=\\emptyset$); (c) if $V(\\mathfrak a)\\subseteq V(I)$, then $I\\subseteq\\bigcap_{\\mathfrak p\\in V(\\mathfrak a)}\\mathfrak p=\\sqrt{\\mathfrak a}$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (Algebra, Lemma 00E0); $I$ is finitely generated since $A$ is Noetherian [def-weil-pbc-noetherian-ring], so $I^n\\subseteq\\mathfrak a$ for some $n\\ge1$ [lem-weil-pbc-fg-ideal-radical-power] (Algebra, Lemma 00IM), i.e. $I^nM=0$ by (a); and then $I^mM\\subseteq I^nM=0$ for every $m\\ge n$. Applied to $(A_i,I_i,M_i)$ (Steps 1, 2, 3): $I_i^tM_i=0$ for some $t$ iff $V(\\operatorname{Ann}_{A_i}(M_i))\\subseteq V(I_i)$, and then $I_i^{t'}M_i=0$ for all $t'\\ge t$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00L6 (lemma-Noetherian-power-ideal-kills-module, line 14997), proof: via Lemma 00IM (lemma-Noetherian-power), Lemma 00E0 (lemma-Zariski-topology) and Lemma 00L2 (lemma-support-closed)"
+   }
+  },
+  {
+   "text": "*Step 7 (conclusion; uniform $t$).* If $\\mathcal K^t\\mathcal F=0$, then $I_i^tM_i=0$ for all $i$ (Step 4), so $V(\\operatorname{Ann}_{A_i}(M_i))\\subseteq V(I_i)$ for all $i$ (Step 6), i.e. $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$ (Step 5). Conversely, if $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$, Step 5 and Step 6 give for each $i$ an $n_i$ with $I_i^{m}M_i=0$ for all $m\\ge n_i$; put $t=\\max(n_1,\\dots,n_r)$ (finitely many $i$; $t=0$ if $r=0$, i.e. $X=\\emptyset$). Then $I_i^tM_i=0$ for all $i$, so $\\mathcal K^t\\mathcal F=0$ by Step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf), proof ('because $X$ has a finite covering by spectra of Noetherian rings')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-fg-ideal-radical-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf, line 2569) with Algebra, Lemma 00L6 (algebra.tex line 14997); the passage between the covering and X (Steps 3-5, 7) and the description of V(K) on affines (new node) written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +159,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +179,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "worker": "stage1",
+  "summary": "Split along Stacks 01Y9 (finite covering by spectra of Noetherian rings) and Algebra 00L6, all tags verified in tags/tags (01Y9, 00L6, 00IM, 00E0, 00L2, 01HM, 01IN, 01HP). Seven steps: finite affine cover with Noetherian rings (pqf-def-locnoeth, as in the reviewed sibling 01Y8 node), F(U_i) finite (quasi-coherent-finite-type-affine), (K^tF)(U_i)=K(U_i)^t F(U_i) (ideal-times-quasi-coherent-affine-sections (1),(2)), K^tF=0 iff zero on the cover (restriction, tilde-gamma counit, sheaf property), Supp(F) cap U_i = V(Ann M_i) (finite-type-module-support-closed) and V(K) cap U_i = V(K(U_i)) (new node), 00L6 written out from the existing Mathlib leaves 00E0 (zero-locus-eq-iff-radical-eq) and 00IM (fg-ideal-radical-power), and t = max over the cover. No 00L6 node was created: 00L6 is not one Mathlib declaration (Mathlib has Module.support_eq_zeroLocus and Ideal.exists_pow_le_of_le_radical_of_fg but no combined lemma) and its three-line proof is now Step 6. Statement: the parenthetical claim V(K) cap Spec A = V(K(Spec A)) now cites the new node lem-weil-pbc-quasi-coherent-ideal-zero-set-affine (added to stmt_deps), and K^0F = F is made explicit since def-weil-pbc-coherent-formal-module (0) defines K^t only for t>=1. Unused in the proof: pqf-lem-coherent-ft-locnoeth (other unit; Step 2 argues coherent => quasi-coherent of finite type directly, as the reviewed 01Y8 node does) and lem-weil-pbc-scheme-theoretic-support."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Seven steps along Stacks 01Y9 with 00L6 written out from existing leaves (00E0, 00IM): finite Noetherian affine cover, F(U_i) finite, sections of K^t F on affines, vanishing checked on the cover via tilde/Gamma, support and zero set on affines (new unsplit node: V(K) cap U = V(K(U)) for a quasi-coherent ideal, 01HM/01IN/01HP), uniform t. Correct. Statement: the affine description of V(K) now cites the new node and K^0 F = F is fixed."
+ }
 }
