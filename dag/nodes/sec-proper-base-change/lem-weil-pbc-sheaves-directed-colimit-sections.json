@@ -10,9 +10,70 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the colimit is the sheafified presheaf colimit).* Regard $I$ as a category (one arrow $i\\to i'$ when $i\\le i'$); it is filtered since $I$ is nonempty and directed [def-weil-pbc-category-colimit], and the system is a functor $i\\mapsto\\mathcal F_i$ to sheaves of sets on the site $\\operatorname{Opens}(X)$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal P(V)=\\varinjlim_i\\mathcal F_i(V)$ with coprojections $\\iota_{i,V}$ and restriction maps induced by those of the $\\mathcal F_i$, and let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification [def-weil-pbc-sheafification]. By [lem-weil-pbc-sheaves-colimit-sheafification], $(\\mathcal P^\\#,(\\eta\\circ\\iota_i)_i)$ is a colimit of the system in sheaves of sets. By uniqueness of colimits [def-weil-pbc-category-colimit] there is an isomorphism of sheaves $\\theta:\\mathcal P^\\#\\to\\mathcal F$ with $\\theta\\circ\\eta\\circ\\iota_i=c_i$ for all $i$. For every open $V$ the maps $\\Psi_V$ and $\\theta_V\\circ\\eta_V$ from $\\mathcal P(V)=\\varinjlim_i\\mathcal F_i(V)$ to $\\mathcal F(V)$ agree after every coprojection $\\iota_{i,V}$ (both give $c_{i,V}$), hence $\\Psi_V=\\theta_V\\circ\\eta_V$ by the uniqueness in the universal property of the colimit of sets. As $\\theta_V$ is bijective: $\\Psi_V(x)=\\Psi_V(y)$ iff $\\eta_V(x)=\\eta_V(y)$, and $t\\in\\mathcal F(V)$ lies in the image of $\\Psi_V$ iff $\\theta_V^{-1}(t)$ lies in the image of $\\eta_V$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheaves-colimit-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009E (section-limits-sheaves), item (3): the colimit of sheaves is the sheafification of the presheaf colimit; used in the proof of Lemma 009F"
+   }
+  },
+  {
+   "text": "*Step 2 (clause (1): injectivity over a quasi-compact open).* Let $U$ be quasi-compact, $s\\in\\mathcal F_i(U)$, $s'\\in\\mathcal F_{i'}(U)$ with $c_{i,U}(s)=c_{i',U}(s')$, i.e. $\\Psi_U(\\iota_{i,U}s)=\\Psi_U(\\iota_{i',U}s')$. By Step 1, $\\eta_U(\\iota_{i,U}s)=\\eta_U(\\iota_{i',U}s')$ in $\\mathcal P^\\#(U)$. By [lem-weil-pbc-site-sheafification-sections-local] (last clause, for the site $\\operatorname{Opens}(X)$, whose coverings are the open coverings) there is an open covering $U=\\bigcup_{k\\in K}W_k$ with $(\\iota_{i,U}s)|_{W_k}=(\\iota_{i',U}s')|_{W_k}$ in $\\mathcal P(W_k)$, i.e. $\\iota_{i,W_k}(s|_{W_k})=\\iota_{i',W_k}(s'|_{W_k})$ in $\\varinjlim_l\\mathcal F_l(W_k)$. By [lem-weil-pbc-filtered-colimit-sets-elementwise] (2) (in the poset category the arrows to a common $k$ are unique) there is $i_k\\ge i,i'$ with $\\varphi_{i_ki,W_k}(s|_{W_k})=\\varphi_{i_ki',W_k}(s'|_{W_k})$. Since $U$ is quasi-compact, finitely many $W_{k_1},\\dots,W_{k_m}$ cover $U$ ($m=0$ allowed when $U=\\emptyset$). As $I$ is directed, choose $i''\\in I$ with $i''\\ge i$, $i''\\ge i'$ and $i''\\ge i_{k_1},\\dots,i_{k_m}$. Applying $\\varphi_{i''i_{k_r}}$, which commutes with restriction, $\\varphi_{i''i,U}(s)$ and $\\varphi_{i''i',U}(s')$ have the same restriction to each $W_{k_r}$; since $\\mathcal F_{i''}$ is a sheaf on $\\operatorname{Opens}(X)$ [def-weil-pbc-sites-and-cohomology] and $\\{W_{k_r}\\to U\\}_r$ is a covering, $\\varphi_{i''i,U}(s)=\\varphi_{i''i',U}(s')$. By [lem-weil-pbc-filtered-colimit-sets-elementwise] (2) this also says $\\iota_{i,U}s=\\iota_{i',U}s'$, so $\\Psi_U$ is injective.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 009F (lemma-directed-colimits-sections), proof of part (2)"
+   }
+  },
+  {
+   "text": "*Step 3 (the hypothesis of (2) implies $U$ quasi-compact).* Assume $U$ has a cofinal system of finite open coverings as in (2). Given any open covering $U=\\bigcup_kW_k$, a covering $U=\\bigcup_{j\\in J}U_j$ of the system refines it, $U_j\\subseteq W_{k(j)}$, so the finitely many $W_{k(j)}$, $j\\in J$, cover $U$. Hence $U$ is quasi-compact and $\\Psi_U$ is injective by Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 009F, proof of part (4), first sentence ('In particular we see that U is quasi-compact')"
+   }
+  },
+  {
+   "text": "*Step 4 (clause (2): surjectivity).* Let $t\\in\\mathcal F(U)$ and $u=\\theta_U^{-1}(t)\\in\\mathcal P^\\#(U)$ (Step 1). By [lem-weil-pbc-site-sheafification-sections-local] there are an open covering $U=\\bigcup_{k\\in K}W_k$ and $p_k\\in\\mathcal P(W_k)$ with $u|_{W_k}=\\eta_{W_k}(p_k)$; by [lem-weil-pbc-filtered-colimit-sets-elementwise] (1), $p_k=\\iota_{i_k,W_k}(s_k)$ with $s_k\\in\\mathcal F_{i_k}(W_k)$. As $\\theta$ is a morphism of sheaves, $t|_{W_k}=\\theta_{W_k}\\eta_{W_k}\\iota_{i_k,W_k}(s_k)=c_{i_k,W_k}(s_k)$ (Step 1). By cofinality there is a covering $U=\\bigcup_{j\\in J}U_j$ of the system, $J$ finite, $U_j\\cap U_{j'}$ quasi-compact, with $U_j\\subseteq W_{k(j)}$; put $i_j=i_{k(j)}$ and $s_j=s_{k(j)}|_{U_j}\\in\\mathcal F_{i_j}(U_j)$, so that $c_{i_j,U_j}(s_j)=t|_{U_j}$ ($c_{i_j}$ commutes with restriction). For $j,j'\\in J$ both $s_j|_{U_j\\cap U_{j'}}$ and $s_{j'}|_{U_j\\cap U_{j'}}$ map under $c_{i_j}$, resp. $c_{i_{j'}}$, to $t|_{U_j\\cap U_{j'}}$; since $U_j\\cap U_{j'}$ is quasi-compact, Step 2 (clause (1) for the open $U_j\\cap U_{j'}$) gives $i_{jj'}\\ge i_j,i_{j'}$ with $\\varphi_{i_{jj'}i_j}(s_j)$ and $\\varphi_{i_{jj'}i_{j'}}(s_{j'})$ equal on $U_j\\cap U_{j'}$. Choose $i\\in I$ with $i\\ge i_{jj'}$ for all (finitely many) $j,j'$ and $i\\ge i_j$ for all $j$ (any $i$ if $J=\\emptyset$; $I$ is nonempty and directed). Then the sections $\\sigma_j=\\varphi_{ii_j,U_j}(s_j)\\in\\mathcal F_i(U_j)$ agree on all overlaps, so by the sheaf property of $\\mathcal F_i$ [def-weil-pbc-sites-and-cohomology] they glue to $\\sigma\\in\\mathcal F_i(U)$. Now $c_{i,U}(\\sigma)|_{U_j}=c_{i,U_j}(\\sigma_j)=c_{i,U_j}\\varphi_{ii_j,U_j}(s_j)=c_{i_j,U_j}(s_j)=t|_{U_j}$ for all $j$ (using $c_i\\varphi_{ii_j}=c_{i_j}$), so $c_{i,U}(\\sigma)=t$ by the sheaf property of $\\mathcal F$. Thus $t=\\Psi_U(\\iota_{i,U}\\sigma)$, $\\Psi_U$ is surjective, and with Step 3 bijective.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 009F (lemma-directed-colimits-sections), proof of part (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 009F (lemma-directed-colimits-sections, line 3444), proof of parts (2) and (4); Section Tag 009E (section-limits-sheaves) item (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +95,31 @@
    "results": "no file of Topology/Sheaves or CategoryTheory/Sites mentions IsCompact/CompactSpace; PreservesFilteredColimits occurs only as hypotheses on forget C (stalks, etale space, points of sites)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf sections functor preserves filtered colimits over a compact open set",
+   "results": "GrothendieckTopology.Point...PreservesColimits (Sites.Point.Basic; fibre functors at points), SheafOfModules.sectionsFunctor, preservesFiniteLimits_presheafToSheaf (Sites.LeftExact), Sheaf.hasFilteredColimitsOfSize (Abelian.GrothendieckAxioms.Sheaf), TopCat.Presheaf.section_ext, isSheaf_pointwiseColimit (Sites.Coherent.ExtensiveColimits; extensive topology only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of sheaves of types at an object preserves filtered colimits when coverings are finite (quasi-compact)",
+   "results": "Sheaf.hasFilteredColimitsOfSize, Sheaf.ab5ofSize, Sheaf.instHasFiniteColimits, isSheaf_pointwiseColimit and the sheafToPresheaf colimit-preservation instance for the extensive topology (Sites.Coherent.ExtensiveColimits), condensed colimit instances: existence/exactness only, nothing for opens of a space",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsCompact|IsQuasiCompact|QuasiCompact' Mathlib/Topology/Sheaves Mathlib/CategoryTheory/Sites; rg -ln 'Filtered' same dirs; rg 'PreservesFilteredColimits.*sheafSections|PreservesColimitsOfShape.*sheafSections' Mathlib",
+   "results": "no compactness hypothesis anywhere in Topology/Sheaves or CategoryTheory/Sites; Filtered occurs only for stalks, etale space, points of sites, LeftExact (plus construction); no statement that sections over an object commute with filtered colimits of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,7 +143,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Sheaves 009F (2),(4) for sheaves of sets; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps along Stacks 009F(2),(4), no new node: the colimit of sheaves is the sheafification of the presheaf colimit (existing node), injectivity over a quasi-compact open via sections-local (the C1 node, unsplit) and the elementwise colimit of sets with a finite subcover and the sheaf axiom at a later stage, cofinality makes U quasi-compact (elementary), surjectivity by local lifting, refinement and gluing. Item back from the stopped group D1; split fresh. Tags verified by the worker (009F, 009E, 0738, 00WB, 00WK)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Sheaves Lemma 009F (parts (2) and (4), sheaves.tex line 3444) and Section 009E item (3); statement kept (clause (1) = 009F(2), clause (2) = 009F(4)). Proof written in four steps following the Stacks proof: (1) identify the given colimit with the sheafification of the sectionwise presheaf colimit [lem-weil-pbc-sheaves-colimit-sheafification] and write Psi_V = theta_V o eta_V; (2) injectivity over quasi-compact U via local equality in the sheafification [lem-weil-pbc-site-sheafification-sections-local], eventual equality in filtered colimits of sets [lem-weil-pbc-filtered-colimit-sets-elementwise], a finite subcover and the sheaf axiom; (3) the cofinality hypothesis implies quasi-compactness (elementary); (4) surjectivity by local lifts, refinement to a covering of the cofinal system, Step 2 on the quasi-compact overlaps, and gluing in F_i. No new nodes were needed; stmt_deps kept. Three further Mathlib searches recorded (no match)."
  }
 }
