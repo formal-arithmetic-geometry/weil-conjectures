@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+ "kind": "statement",
+ "title": "Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring, $\\Lambda_T$ the constant sheaf of rings with value $\\Lambda$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},\\Lambda)=\\Mod(\\Lambda_T)$ the category of sheaves of $\\Lambda_T$-modules [def-weil-sheaf-of-modules-category]. Then $\\Mod(T_{\\Et},\\Lambda)$ is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it is abelian, it has all small colimits, filtered colimits in it are exact, and it has a generator (namely $\\bigoplus_{U}j_{U!}\\Lambda_U$, the direct sum, over a set of representatives $U$ of the isomorphism classes of objects of an essentially small full subcategory of $T_{\\Et}$ equivalent to it as a site, e.g. the affine schemes etale over $T$ of bounded cardinality, of the extensions by zero of the restrictions $\\Lambda_U=\\Lambda_T|_{U}$). In particular (case $\\Lambda=\\mathbf Z$) the category $\\Ab(T_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] is Grothendieck abelian.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) is abelian), Lemma 03DB (label lemma-limits-colimits: all limits and colimits exist, filtered colimits are exact), Lemma 03EW (label lemma-module-quotient-flat, part (3): every O-module is a quotient of a direct sum of modules j_{U!}O_U, which gives the generator); the small etale site as a site with a set of objects: Topologies, Definitions 021A and 021B (literature/stacks-project/topologies.tex); the statement is used in Cohomology on Sites, proof of Lemma 07AC (label lemma-existence-derived-lower-shriek, literature/stacks-project/sites-cohomology.tex, line 9345: 'the category of modules on a ringed site is a Grothendieck abelian category')"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves of modules over a sheaf of rings is a Grothendieck abelian category",
+   "results": "SheafOfModules (Mathlib.Algebra.Category.ModuleCat.Sheaf); SheafOfModules.instAbelian (Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian); CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall and CategoryTheory.Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf); LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-09",
+   "verdict": "no match for SheafOfModules: only abelian (instAbelian); Grothendieck abelian only for sheaves valued in a Grothendieck abelian category (Sheaf J A)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SheafOfModules over a sheaf of rings on a site is Grothendieck abelian (generator, exact filtered colimits)",
+   "results": "SheafOfModules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; CategoryTheory.sheafIsAbelian; AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-09",
+   "verdict": "no match: no IsGrothendieckAbelian instance for SheafOfModules"
+  },
+  {
+   "tool": "grep",
+   "query": "'IsGrothendieckAbelian' in Mathlib/Algebra/Category/ModuleCat/ (incl. Sheaf/) and Mathlib/AlgebraicGeometry/Sites/; 'Equivalence|≌' in Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "ModuleCat/AB.lean (ModuleCat R itself); AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology (Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:149, for Sheaf S.smallEtaleTopology A with A Grothendieck abelian, via AffineEtale.sheafEquiv and Sheaf.isGrothendieckAbelian_of_essentiallySmall) and the example IsGrothendieckAbelian (Sheaf S.smallEtaleTopology (ModuleCat R)) (line 154); nothing in ModuleCat/Sheaf/; the only equivalence there is SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388), not an equivalence SheafOfModules (constant sheaf) ≌ Sheaf J (ModuleCat R)",
+   "date": "2026-10-09",
+   "verdict": "generalization only up to a theorem: Mathlib has it for Sheaf T.smallEtaleTopology (ModuleCat Λ) (Λ-module-valued sheaves); for Mod(Λ_T) = SheafOfModules over the constant ring sheaf the comparison SheafOfModules (constantSheaf Λ) ≌ Sheaf J (ModuleCat Λ) is itself a theorem absent from Mathlib, so not a leaf (same verdict as lem-weil-pbc-module-sheaves-enough-injectives). For Λ = Z, Ab(T_et) = Sheaf T.smallEtaleTopology AddCommGrpCat is covered by the same instance"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-grothendieck-spectral-sequence",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

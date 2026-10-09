@@ -2,38 +2,166 @@
  "id": "lem-weil-pbc-grothendieck-spectral-sequence",
  "kind": "statement",
  "title": "Grothendieck spectral sequence for a composite",
- "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of schemes and let $F$ be\na sheaf on $X_{\\Et}$. There is a functorial first-quadrant spectral sequence\n\n$$\n E_2^{p,q}=R^ph_*R^qf_*F\n \\Longrightarrow R^{p+q}(hf)_*F.\n$$\n\nNo acyclicity hypothesis on $F$ is needed: the construction is via an\ninjective resolution of $F$, and $f_*$ preserves injectives because $f^{-1}$\nis exact (the standard Grothendieck spectral sequence for the left exact\nfunctors $f_*$, $h_*$; for bounded-below complexes with torsion cohomology the\nsame statement holds for the derived pushforwards by the same argument). It is\ncompatible with inverse image in a cartesian base change.",
+ "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of schemes [def-pc-scheme] and $\\Lambda$ a commutative ring. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site], $\\Lambda_T$ the constant sheaf of rings with value $\\Lambda$ on it [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},\\Lambda)=\\Mod(\\Lambda_T)$ the abelian category of sheaves of $\\Lambda_T$-modules [def-weil-sheaf-of-modules-category]. Let $f_*$, $h_*$, $(hf)_*$ be the direct images on these categories [def-weil-pbc-direct-image] and, for $u\\in\\{f,h,hf\\}$, let $R^qu_*$ be the right derived functors of the left exact functor $u_*$ on $\\Mod(-,\\Lambda)$, computed by injective resolutions in $\\Mod(-,\\Lambda)$ [def-sp-left-exact-additive]. Then for every sheaf $F$ of $\\Lambda_X$-modules on $X_{\\Et}$ there is a first-quadrant cohomological spectral sequence $(E_r^{p,q},d_r)_{r\\ge2}$ in $\\Mod(Z_{\\Et},\\Lambda)$, with $d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}$, $d_r\\circ d_r=0$ and $E_{r+1}\\cong\\ker d_r/\\operatorname{im}d_r$, such that\n\n$$\n E_2^{p,q}=R^ph_*\\bigl(R^qf_*F\\bigr)\\ \\ (p,q\\ge0),\\qquad E_2^{p,q}=0\\ \\text{otherwise},\n$$\n\nconverging to $R^{p+q}(hf)_*F$ in the following sense: for $r>\\max(p,q+1)$ one has $E_{r+1}^{p,q}=E_r^{p,q}=:E_\\infty^{p,q}$, and each $H^n=R^n(hf)_*F$ ($n\\ge0$) carries a finite decreasing filtration [def-sp-filtration] $H^n=F^0H^n\\supseteq F^1H^n\\supseteq\\dots\\supseteq F^{n+1}H^n=0$ with $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. The spectral sequence, the filtrations and these isomorphisms are functorial in $F$. No hypothesis on $F$ is needed. For $\\Lambda=\\mathbf Z$ the categories $\\Mod(T_{\\Et},\\mathbf Z)$ are the categories $\\Ab(T_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], so the statement holds for every abelian sheaf $F$ on $X_{\\Et}$, and then $R^qu_*$ are the higher direct images $\\mathcal H^q(Ru_*F)$ of [def-weil-pbc-direct-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-grothendieck-spectral-sequence.md",
   "place": "node lem-weil-pbc-grothendieck-spectral-sequence, order 1186"
  },
  "stmt_deps": [
-  "def-sp-composite-acyclicity",
-  "def-sp-etale-dictionary",
-  "def-weil-pbc-direct-image"
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image",
+  "def-sp-left-exact-additive",
+  "def-sp-filtration",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [
   {
-   "text": "The pair $(f_*,h_*)$ is a composable pair, with the hypothesis of the\nstatement asserting that $f_*F$ is $h_*$-acyclic; for $F$ injective this\nhypothesis holds by [lem-weil-pbc-direct-image-preserves-injectives].\nTherefore the Grothendieck spectral sequence theorem of the spectral-sequence\nchapter supplies the functorial first-quadrant spectral sequence\n$E_2^{p,q}=R^ph_*R^qf_*F\\Longrightarrow R^{p+q}(hf)_*F$, whose $E_2$-page,\nedge maps and convergence are those of the composite of left exact functors;\nthe compatibility with inverse image in a cartesian base change is the\nnaturality of its base-change form, in the dictionary of the\nspectral-sequence chapter.",
+   "text": "*The categories and the functors.* By [lem-weil-pbc-module-sheaves-grothendieck-abelian], applied to $T=X,Y,Z$, the categories $\\mathcal A=\\Mod(X_{\\Et},\\Lambda)$, $\\mathcal B=\\Mod(Y_{\\Et},\\Lambda)$, $\\mathcal C=\\Mod(Z_{\\Et},\\Lambda)$ are Grothendieck abelian [def-sp-grothendieck-abelian]; in particular they have enough injectives, so the right derived functors of the statement are defined. By [prop-weil-pbc-inverse-image-modules-exact] (with $R=\\Lambda$), for each of $u=f,h,hf$ the direct image $u_*$ on $\\Lambda$-module sheaves [def-weil-pbc-direct-image] is right adjoint to the inverse image $u^{-1}$ on $\\Lambda$-module sheaves. A right adjoint preserves all limits, in particular finite products and kernels, so $f_*:\\mathcal A\\to\\mathcal B$, $h_*:\\mathcal B\\to\\mathcal C$ and $(hf)_*:\\mathcal A\\to\\mathcal C$ are additive and left exact [def-sp-left-exact-additive]. Hence $(f_*,h_*)$ is a composable pair in the sense of [def-sp-composite-acyclicity].",
    "uses": [
-    "lem-weil-pbc-direct-image-preserves-injectives"
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-sp-grothendieck-abelian",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-sp-left-exact-additive",
+    "def-sp-composite-acyclicity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 0734 (label lemma-relative-Leray), proof: 'a Grothendieck spectral sequence for composition of functors'; Derived Categories, Lemma 015M (label lemma-compose-derived-functors), hypotheses: F, G left exact, A, B with enough injectives (literature/stacks-project/derived.tex)"
+   }
+  },
+  {
+   "text": "*The composite.* There is a natural isomorphism of functors $(hf)_*\\cong h_*\\circ f_*:\\mathcal A\\to\\mathcal C$. Indeed, for $W\\to Z$ etale, $(h_*f_*F)(W)=F\\bigl((W\\times_ZY)\\times_YX\\bigr)$ and $((hf)_*F)(W)=F(W\\times_ZX)$ [def-weil-pbc-direct-image]. In the diagram formed by the cartesian square $(W\\times_ZY)\\times_YX\\to X$ over $W\\times_ZY\\to Y$ on top of the cartesian square $W\\times_ZY\\to Y$ over $W\\to Z$ [def-pc-fibre-product], the pasting lemma [lem-weil-pbc-cartesian-square-pasting] shows that the outer rectangle is cartesian, i.e. $(W\\times_ZY)\\times_YX$ with its maps to $X$ and to $W$ is a fibre product of $hf$ and $W\\to Z$; so there is a unique isomorphism $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$ over $X$ and over $W$. It is an isomorphism of objects of $X_{\\Et}$, natural in $W$ by uniqueness, so the induced maps on sections of $F$ are $\\Lambda$-linear, compatible with restriction, and natural in $F$. Consequently the right derived functors agree: $R^n(hf)_*F\\cong R^n(h_*\\circ f_*)F$, naturally in $F$, both being $\\mathcal H^n$ of the image of one injective resolution of $F$ under isomorphic functors [def-sp-left-exact-additive].",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 0734 (label lemma-relative-Leray): the composition $g\\circ f$ of morphisms of ringed topoi, whose direct image is $g_*\\circ f_*$"
+   }
+  },
+  {
+   "text": "*$f_*$ sends injectives to $h_*$-acyclics.* Let $I$ be an injective object of $\\mathcal A$ [def-sp-injective-resolutions]. By [lem-weil-pbc-direct-image-preserves-injectives] $f_*I$ is an injective object of $\\mathcal B$. An injective object $J$ of $\\mathcal B$ is $h_*$-acyclic [def-sp-acyclic]: the complex $J$ concentrated in degree $0$ is an injective resolution of $J$, so $R^qh_*(J)=\\mathcal H^q(h_*J[0])=0$ for $q>0$ [def-sp-left-exact-additive]. Hence $f_*I$ is $h_*$-acyclic, i.e. $f_*$ sends injectives to $h_*$-acyclics [def-sp-composite-acyclicity]. (This is the acyclicity hypothesis of the Grothendieck spectral sequence; it concerns the injective objects of $\\mathcal A$ only, and no hypothesis on $F$ is needed. In particular it is not the condition that $f_*F$ be $h_*$-acyclic, which the imported step mistakenly attributed to the statement.)",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-sp-acyclic",
+    "def-sp-left-exact-additive",
+    "def-sp-composite-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 0730 (label lemma-pushforward-injective-flat): for flat f, f_* of an injective O-module is injective (here the ringed-site morphism (X_et, Lambda_X) -> (Y_et, Lambda_Y) is flat since u^{-1}Lambda_Y = Lambda_X); Derived Categories, Lemma 015M (label lemma-compose-derived-functors), condition (1)"
+   }
+  },
+  {
+   "text": "*The spectral sequence.* By steps 1 and 3, [thm-sp-grothendieck] applies to the composable pair $(f_*,h_*)$ and the object $F$ of $\\mathcal A$: there is a first-quadrant spectral sequence, functorial in $F$, with $E_2^{p,q}=R^ph_*(R^qf_*F)$, converging to $R^{p+q}(h_*\\circ f_*)F$ with the image filtration [def-sp-image-filtration] in the sense of [def-sp-convergence]. Its construction (proof of [thm-sp-grothendieck]) is: an injective resolution $F\\to I^\\bullet$ in $\\mathcal A$, a Cartan--Eilenberg resolution $C^{\\bullet,\\bullet}$ of $f_*I^\\bullet$ in $\\mathcal B$, the first-quadrant double complex $D^{p,q}=h_*C^{p,q}$ in $\\mathcal C$, and the spectral sequence of the filtration of $\\operatorname{Tot}D$ by the first degree. By step 2 the abutment $R^{p+q}(h_*\\circ f_*)F$ is $R^{p+q}(hf)_*F$, naturally in $F$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sp-image-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 015N (label lemma-grothendieck-spectral-sequence) with its proof and the remark after it: for an object A, E_2^{p,q} = R^pG(R^qF(A)) converging to R^{p+q}(G o F)(A), bounded, with a finite filtration on each abutment; Cohomology on Sites, Lemma 0734 (literature/stacks-project/sites-cohomology.tex)"
+   }
+  },
+  {
+   "text": "*Convergence made explicit.* Since $R^q$ vanishes in negative degrees and $D$ lies in the first quadrant, $E_2^{p,q}=0$ unless $p,q\\ge0$, hence $E_r^{p,q}=0$ there for all $r\\ge2$ (subquotients). If $r>q+1$ the differential $d_r$ leaving $(p,q)$ lands in $E_r^{p+r,q-r+1}$ with $q-r+1<0$, so it is $0$; if $r>p$ the differential arriving at $(p,q)$ starts at $E_r^{p-r,q+r-1}$ with $p-r<0$, so it is $0$. Hence $E_{r+1}^{p,q}=E_r^{p,q}$ for $r>\\max(p,q+1)$, and this stable value is the $E_\\infty^{p,q}=Z_\\infty/B_\\infty$ of [def-sp-convergence] (the $Z_r$, $B_r$ being constant from that $r$ on). The filtration of $H^n=H^n(\\operatorname{Tot}D)$ is the image filtration $F^pH^n=\\operatorname{im}(H^n(F^p\\operatorname{Tot}D)\\to H^n)$ [def-sp-image-filtration] with $(F^p\\operatorname{Tot}D)^n=\\bigoplus_{i\\ge p}D^{i,n-i}$; as $D^{i,n-i}=0$ for $i>n$ and $F^0\\operatorname{Tot}D=\\operatorname{Tot}D$, this gives $F^{n+1}H^n=0$ and $F^0H^n=H^n$, so the filtration is finite [def-sp-filtration], and convergence [def-sp-convergence] gives $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. Transported along the isomorphism $H^n\\cong R^n(hf)_*F$ of step 4, this is the convergence stated. All constructions are functorial in $F$ by step 4.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-image-filtration",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 015N (label lemma-grothendieck-spectral-sequence): 'this spectral sequence is bounded, converges to H^*(R(G o F)(X)), and induces a finite filtration on each H^n'"
+   }
+  },
+  {
+   "text": "*The abelian case.* For $\\Lambda=\\mathbf Z$ the constant sheaf $\\mathbf Z_T$ acts on every abelian sheaf in exactly one way, through locally constant integers, and every morphism of abelian sheaves is $\\mathbf Z_T$-linear, so the forgetful functor $\\Mod(T_{\\Et},\\mathbf Z)\\to\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] is an isomorphism of categories commuting with the direct images, which are given by the same formula on sections [def-weil-pbc-direct-image]; so steps 1--5 give the spectral sequence for every abelian sheaf $F$. The derived functors $R^qu_*F$ used there are computed by an injective resolution $F\\to I^\\bullet$ in $\\Ab(X_{\\Et})$; by [lem-sp-kinjective-computes] (part 2, in the Grothendieck abelian category $\\Ab(X_{\\Et})$ of [lem-weil-pbc-module-sheaves-grothendieck-abelian] for $\\Lambda=\\mathbf Z$) the bounded-below complex of injectives $I^\\bullet$ is a K-injective resolution of $F[0]$ and $\\mathcal H^q(Ru_*F)=\\mathcal H^q(u_*I^\\bullet)=R^qu_*F$, which identifies them with the higher direct images of [def-weil-pbc-direct-image] (defined through K-injective resolutions [def-weil-pbc-kinjective-resolutions]).",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "lem-sp-kinjective-computes",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-pbc-kinjective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 0734 (label lemma-relative-Leray), for the ringed topoi (Sh(X_et), Z) etc.; Derived Categories, Lemma 015N (literature/stacks-project/derived.tex)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-sp-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "def-sp-left-exact-additive",
+  "def-sp-composite-acyclicity",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-sp-injective-resolutions",
   "lem-weil-pbc-direct-image-preserves-injectives",
+  "def-sp-acyclic",
   "thm-sp-grothendieck",
-  "thm-sp-grothendieck-base-change"
+  "def-sp-image-filtration",
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-sp-kinjective-computes",
+  "def-weil-pbc-kinjective-resolutions"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-grothendieck-spectral-sequence.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 0734 (label lemma-relative-Leray), via Derived Categories, Lemmas 015M and 015N (literature/stacks-project/derived.tex), and Cohomology on Sites, Lemma 0730 (label lemma-pushforward-injective-flat) for the acyclicity hypothesis"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence for the composite of two left exact functors, E_2 = R^p G (R^q F X) converging to R^{p+q}(G ∘ F) X",
+   "results": "CategoryTheory.isCocontinuous_comp, Functor.sheafPushforwardContinuousComp(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Continuous), LeftExactFunctor.whiskeringLeft_obj_obj_obj, Grothendieck.mapCompIso (Grothendieck construction), Functor.isContinuous_comp(')",
+   "date": "2026-10-09",
+   "verdict": "no match: nothing about derived functors of a composite or a spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence for composite of direct images of sheaves R^p h_* R^q f_* F converges to R^{p+q}(h ∘ f)_* F",
+   "results": "RanIsSheafOfIsCocontinuous.fac_assoc; Functor.sheafPushforwardContinuousComp (the underived (G∘F)_* ≅ G_*∘F_* for sheaves); GrothendieckTopology.HasSheafCompose; SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatTrans_comp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous)",
+   "date": "2026-10-09",
+   "verdict": "no match: only the underived composition of pushforwards (relevant to step 2 for Mathlib's Sheaf/SheafOfModules pushforward, not a spectral sequence)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject",
+   "results": "CategoryTheory.Abelian.SpectralObject and its API (.Hom, .H, .sc₁, .sc₂, .sc₃, .exact₁, .exact₂, .composableArrows₅), Mathlib.Algebra.Homology.SpectralObject.Basic",
+   "date": "2026-10-09",
+   "verdict": "no match: the general machinery of spectral objects (and, in SpectralObject/SpectralSequence.lean, the spectral sequence of a spectral object) exists, but no spectral object or spectral sequence attached to a composite of derived functors"
+  },
+  {
+   "tool": "grep",
+   "query": "'grothendieck.*spectral|spectral.*grothendieck|Leray|015N|015M|0734|01F6' (case-insensitive) in Mathlib/; listing of Mathlib/Algebra/Homology/SpectralObject/ and SpectralSequence/; declarations of Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "results": "no hit for any pattern; SpectralObject/{Basic,Cycles,Differentials,EpiMono,FirstPage,HasSpectralSequence,Homology,Page,SpectralSequence}.lean and SpectralSequence/{Basic,ComplexShape}.lean contain the abstract theory only; RightDerivedFunctorPlus.lean defines rightDerivedFunctorPlus and its unit, with no composition theorem",
+   "date": "2026-10-09",
+   "verdict": "no match: the Grothendieck (relative Leray) spectral sequence is not in Mathlib; confirms the re-check"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +195,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-grothendieck-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Rewritten from Stacks 0734 (relative Leray) via 015M/015N, with 0730 for the acyclicity. Statement: coefficient category made explicit (sheaves of Lambda_T-modules on the small etale sites, Lambda a commutative ring; Lambda = Z gives abelian sheaves, with R^q identified with def-weil-pbc-direct-image's), convergence made explicit in the form lem-weil-pbc-first-quadrant-row-collapse and composition-stability step 7 use (finite filtration 0 = F^{n+1} in F^0 = R^n(hf)_*F, gr = E_infty, E_infty = E_r for r > max(p, q+1)). Fixed the inconsistency: the old step spoke of a hypothesis 'f_*F is h_*-acyclic'; the hypothesis of the Grothendieck spectral sequence is that f_* sends injectives to h_*-acyclics, which holds by lem-weil-pbc-direct-image-preserves-injectives, so no hypothesis on F. Dropped from the statement: the base-change compatibility clause (neither user, prop-weil-pbc-composition-stability step 7 nor lemma-weil-pbc-cancellation step 6, uses it; it is thm-sp-grothendieck-base-change if ever needed) and the unused clause on bounded-below complexes with torsion cohomology. Dropped thm-sp-grothendieck-base-change, def-sp-etale-dictionary (only covers Ab(X_et), not needed: steps 1-5 make the substitution directly) from the dependencies. thm-sp-grothendieck requires Grothendieck abelian categories (def-sp-composite-acyclicity): new node lem-weil-pbc-module-sheaves-grothendieck-abelian supplies this for Mod(T_et, Lambda). Underived (hf)_* = h_* f_* written out via the pasting lemma. Mathlib: no Grothendieck spectral sequence (SpectralObject machinery only), three kinds of search recorded."
+ },
+ "tool_uses": [
+  "thm-sp-grothendieck",
+  "lem-sp-kinjective-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "acyclicity hypothesis clarified (f_* preserves injectives), convergence stated in the form the users need, unused clauses dropped; thm-sp-grothendieck and lem-sp-kinjective-computes (sk-prop-av-pqf-finite) accepted as tool uses; 1 new node"
+ }
 }

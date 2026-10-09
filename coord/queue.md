@@ -7,7 +7,6 @@
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
-| `lem-weil-pbc-etale-localization-exchange` | 1003 | none |
 | `lem-weil-pbc-exchange-identity-pasting` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
@@ -28,6 +27,7 @@
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
 | `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
+| `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-inverse-image-composition` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1004 | none |
@@ -570,7 +570,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 557 nodes that wait for stage 1, 58 nodes that wait for a statement dependency.
+Not open yet: 557 nodes that wait for stage 1, 59 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
