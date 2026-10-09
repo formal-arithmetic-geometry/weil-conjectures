@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-charpoly-direct-sum-free",
+ "kind": "statement",
+ "title": "Characteristic polynomial of a direct sum of endomorphisms of finite free modules",
+ "statement": "Let $B$ be a commutative ring, $N_1,N_2$ free $B$-modules of finite ranks $n_1,n_2$, and $\\psi_k:N_k\\to N_k$ $B$-linear maps ($k=1,2$). Then $N_1\\oplus N_2$ is a free $B$-module of rank $n_1+n_2$, and the characteristic polynomials (each $\\det(T\\cdot1-\\psi)$, computed in any basis) satisfy $\\det(T\\cdot1-(\\psi_1\\oplus\\psi_2))=\\det(T\\cdot1-\\psi_1)\\cdot\\det(T\\cdot1-\\psi_2)$ in $B[T]$, where $(\\psi_1\\oplus\\psi_2)(x_1,x_2)=(\\psi_1x_1,\\psi_2x_2)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the free case of the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'): in the concatenated basis the matrix of $\\psi_1\\oplus\\psi_2$ is block diagonal, and the determinant of a block-diagonal matrix is the product of the determinants of the blocks"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of the direct sum (prodMap) of two endomorphisms equals the product of characteristic polynomials",
+   "results": "LinearMap.charpoly_prodMap (Mathlib.LinearAlgebra.Charpoly.ToMatrix), LinearMap.det_prodMap, Matrix.charpoly, LinearMap.charpoly (recorded on the item by its creator, 2026-10-10)",
+   "date": "2026-10-10",
+   "verdict": "match: LinearMap.charpoly_prodMap"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, LinearMap.prodMap",
+   "results": "LinearMap.charpoly_prodMap [Module.Finite R M₁] [Module.Free R M₁] [Module.Finite R M₂] [Module.Free R M₂] : (f₁.prodMap f₂).charpoly = f₁.charpoly * f₂.charpoly (Mathlib.LinearAlgebra.Charpoly.ToMatrix)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a block diagonal endomorphism of a product of two free modules is the product of the characteristic polynomials",
+   "results": "Matrix.charpoly_fromBlocks_zero₁₂, Matrix.charpoly_fromBlocks_zero₂₁, Matrix.BlockTriangular.charpoly, Matrix.charmatrix_fromBlocks (Mathlib.LinearAlgebra.Matrix.Charpoly.Basic), LinearMap.charpoly_prodMap (Mathlib.LinearAlgebra.Charpoly.ToMatrix)",
+   "date": "2026-10-10",
+   "verdict": "match: LinearMap.charpoly_prodMap"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma charpoly_prodMap\\|lemma charpoly_fromBlocks_zero₁₂\\|theorem charpoly_toMatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra",
+   "results": "LinearAlgebra/Charpoly/ToMatrix.lean:63 charpoly_prodMap; :43 charpoly_toMatrix (charpoly computed in any basis b); LinearAlgebra/Matrix/Charpoly/Basic.lean:181 charpoly_fromBlocks_zero₁₂",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.charpoly_prodMap",
+  "file": "Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean",
+  "how": "specializes in one line, one declaration per clause: N_1 × N_2 is free and finite by the instances Module.Free.prod and Module.Finite.prod, of rank n_1+n_2 by Module.finrank_prod; LinearMap.charpoly_prodMap (line 63) gives (ψ₁.prodMap ψ₂).charpoly = ψ₁.charpoly * ψ₂.charpoly, and LinearMap.charpoly_toMatrix (line 43) says LinearMap.charpoly is det(T - matrix) in any finite basis."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-direct-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: LinearMap.charpoly_prodMap (Charpoly/ToMatrix.lean:63) with charpoly_toMatrix, Module.Free.prod, Module.Finite.prod, finrank_prod."
+ }
+}

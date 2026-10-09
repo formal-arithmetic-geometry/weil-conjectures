@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-localization-away-tensor-iso",
+ "kind": "statement",
+ "title": "Localization of a module at an element is base change to the localized ring",
+ "statement": "Let $A$ be a commutative ring, $M$ an $A$-module and $f\\in A$, and let $A_f$ and $M_f$ be the localizations of $A$ and of $M$ at $f$ [def-weil-pbc-module-localization-away]. Then the map $M\\otimes_AA_f\\to M_f$, $m\\otimes(a/f^e)\\mapsto am/f^e$, is well defined and is an isomorphism of $A_f$-modules. In particular, for every $n\\ge0$, $M_f$ is a free $A_f$-module of rank $n$ if and only if $M\\otimes_AA_f$ is.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DK (lemma-tensor-localization, line 2088), with the multiplicative set $S=\\{1,f,f^2,\\dots\\}$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localized module at an element is isomorphic to the base change M ⊗ R_f (IsLocalizedModule iff IsBaseChange)",
+   "results": "isLocalizedModule_iff_isBaseChange, IsLocalizedModule.isBaseChange, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.Away.tensorRightEquiv (Mathlib.RingTheory.Localization.BaseChange), localizedModuleIsLocalizedModule (Mathlib.Algebra.Module.LocalizedModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalizedModule.isBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, IsBaseChange",
+   "results": "IsLocalizedModule.isBaseChange, isLocalizedModule_iff_isBaseChange (Mathlib.RingTheory.Localization.BaseChange), IsBaseChange.finrank_eq_of_le_nonZeroDivisors and variants (Mathlib.LinearAlgebra.Dimension.Localization)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalizedModule.isBaseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a module at an element f is isomorphic to the tensor product with the localized ring R_f",
+   "results": "IsLocalization.moduleTensorEquiv, IsLocalization.moduleLid, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule (Mathlib.RingTheory.Localization.BaseChange)",
+   "date": "2026-10-10",
+   "verdict": "match (same file): IsLocalization.tensorProduct_isLocalizedModule / IsLocalizedModule.isBaseChange"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem IsLocalizedModule.isBaseChange\\|isLocalizedModule_iff_isBaseChange\\|tensorProduct_isLocalizedModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/BaseChange.lean; grep -n 'def IsBaseChange.equiv\\|IsBaseChange.equiv_tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IsTensorProduct.lean",
+   "results": "BaseChange.lean:34 IsLocalizedModule.isBaseChange [IsLocalizedModule S f] : IsBaseChange A f; :52 isLocalizedModule_iff_isBaseChange; :98 instance tensorProduct_isLocalizedModule; IsTensorProduct.lean:404 IsBaseChange.equiv : S ⊗[R] M ≃ₗ[S] N, :416 equiv_tmul s m = s • f m",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalizedModule.isBaseChange",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "how": "specializes in one line: with S = Submonoid.powers f, A := Localization.Away f and the localization map LocalizedModule.mkLinearMap S M (an IsLocalizedModule by the instance localizedModuleIsLocalizedModule), IsLocalizedModule.isBaseChange (line 34) gives IsBaseChange (Localization.Away f) (mkLinearMap S M), whose IsBaseChange.equiv (Mathlib/RingTheory/IsTensorProduct.lean:404) is the A_f-linear isomorphism A_f ⊗[A] M ≃ M_f with s ⊗ m ↦ s • (m/1) (equiv_tmul, :416); Mathlib writes the base change on the left, TensorProduct.comm moves A_f to the right. The 'in particular' clause is transport of a basis along this isomorphism."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-direct-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsLocalizedModule.isBaseChange (Localization/BaseChange.lean:34) with IsBaseChange.equiv."
+ }
+}

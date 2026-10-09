@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-free-base-change-tower",
+ "kind": "statement",
+ "title": "A free base change stays free of the same rank after a further base change",
+ "statement": "Let $A\\to B\\to B'$ be homomorphisms of commutative rings, $M$ an $A$-module and $n\\ge0$. If $M\\otimes_AB$ is a free $B$-module of rank $n$ with basis $e_1,\\dots,e_n$, then $M\\otimes_AB'$ (with $B'$ an $A$-algebra via $A\\to B\\to B'$) is a free $B'$-module of rank $n$, with basis the images of $e_1,\\dots,e_n$ under the map $M\\otimes_AB\\to M\\otimes_AB'$, $m\\otimes b\\mapsto m\\otimes b'$ ($b'$ the image of $b$). The isomorphism behind this is $(M\\otimes_AB)\\otimes_BB'\\xrightarrow{\\sim}M\\otimes_AB'$, $(m\\otimes b)\\otimes c\\mapsto m\\otimes b'c$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00D2 (lemma-tensor-with-bimodule, line 1881) with the $(A,B)$-bimodule $N=B$ and $P=B'$: $(M\\otimes_AB)\\otimes_BB'\\cong M\\otimes_A(B\\otimes_BB')=M\\otimes_AB'$; Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, colimits in the first variable, here a finite direct sum): $B^{\\oplus n}\\otimes_BB'\\cong B'^{\\oplus n}$"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a free module of finite rank n is free of rank n (basis of tensor product with algebra)",
+   "results": "IsBaseChange.free (Mathlib.RingTheory.TensorProduct.IsBaseChangeFree), Algebra.TensorProduct.instFree (Mathlib.RingTheory.TensorProduct.Free), Module.Free.tensor, Module.Basis.baseChange (Mathlib.LinearAlgebra.TensorProduct.Basis), Module.finrank_baseChange (Mathlib.LinearAlgebra.Dimension.Constructions)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Basis.baseChange (rank kept: same index type)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "M ⊗[A] (A ⊗[R] N) ≃ M ⊗[R] N cancel base change for modules",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange, cancelBaseChange_tmul (Mathlib.LinearAlgebra.TensorProduct.Tower), Algebra.TensorProduct.cancelBaseChange (Mathlib.RingTheory.TensorProduct.Maps), IsBaseChange.tensorEquiv",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.AlgebraTensorModule.cancelBaseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M ⊗_A B is a free B-module and B → B' is a ring map then M ⊗_A B' is free over B' with a basis of the same size",
+   "results": "Algebra.TensorProduct.instFree, IsBaseChange.free, Module.Free.tensor, Module.Free.trans, Module.mem_freeLocus_iff_tensor, Module.finrank_baseChange",
+   "date": "2026-10-10",
+   "verdict": "generalization pieces: freeness and finrank of a base change; combined with cancelBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.baseChange",
+   "results": "Module.Basis.baseChange (b : Basis ι R M) : Basis ι S (S ⊗[R] M), baseChange_apply (= 1 ⊗ b i), baseChange_repr_tmul (Mathlib.LinearAlgebra.TensorProduct.Basis)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Basis.lean; grep -n 'def cancelBaseChange\\|theorem cancelBaseChange_tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "Basis.lean:64 def baseChange (b : Basis ι R M) : Basis ι S (S ⊗[R] M); Tower.lean:436 def cancelBaseChange : M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N, :447 cancelBaseChange_tmul : m ⊗ (a ⊗ n) ↦ (a • m) ⊗ n",
+   "date": "2026-10-10",
+   "verdict": "match (two declarations composed in one line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Basis.baseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basis.lean",
+  "how": "specializes in one line: for a basis b : Basis (Fin n) B (B ⊗[A] M) (Mathlib writes base change on the left), (b.baseChange B').map (TensorProduct.AlgebraTensorModule.cancelBaseChange A B B' B' M) : Basis (Fin n) B' (B' ⊗[A] M); baseChange (Basis.lean:64) has vectors 1 ⊗ b i (baseChange_apply), cancelBaseChange (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:436) maps 1 ⊗ (x ⊗ m) to x' ⊗ m (cancelBaseChange_tmul, :447), so the basis vectors are the images of the b i."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-direct-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Basis.baseChange (TensorProduct/Basis.lean:64) composed with AlgebraTensorModule.cancelBaseChange (Tower.lean:436)."
+ }
+}
