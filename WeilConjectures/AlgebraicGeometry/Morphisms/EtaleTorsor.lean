@@ -60,18 +60,25 @@ the prose.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.IsIsomorphic` and
   `AlgebraicGeometry.Scheme.EtaleTorsor.setoid`: the isomorphism relation on torsors, and
   the fact that it is an equivalence relation.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`: the functor of points `U ↦ Hom_Y(U, P)`
+  of a torsor, as a torsor under the constant sheaf `M` on the small étale site.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.classH1`: the canonical bijection between isomorphism
+  classes of `M`-torsors and `H¹(Y_ét, M)`, sending `P` to the class of its sheaf torsor.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_sheafTorsor`: `M`-torsors in the above sense
-  are the same, up to isomorphism, as torsors under the constant sheaf `M` on the small étale
-  site, sections of the structure morphism corresponding to global sections. The proof, by
-  étale descent, is `sorry`.
-- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`: the bijection between
-  isomorphism classes of `M`-torsors on `Y` and `H^1(Y_ét, M)`, under which the class of a
-  torsor vanishes exactly when the torsor has a section. It follows from the previous statement
-  and the classification of torsors under an abelian sheaf by `H¹`,
-  `CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor_equiv_toSheafTorsor_iff` and
+  `AlgebraicGeometry.Scheme.EtaleTorsor.nonempty_toSheafTorsor_sheaf_obj_iff`: two torsors are
+  isomorphic if and only if their sheaf torsors are, and the global sections of the sheaf torsor
+  are the sections of the structure morphism.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv`: every torsor under the
+  constant sheaf `M` comes from an `M`-torsor. This is effective étale descent of finite étale
+  morphisms, and its proof is `sorry`.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.classH1_eq_zero_iff`: the class of a torsor vanishes
+  exactly when the torsor has a section.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_sheafTorsor` and
+  `AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`: the same statements with the
+  maps forgotten.
 
 ## References
 
@@ -416,28 +423,127 @@ lemma isIsomorphic_of_toSheafTorsorContinuousMap_equiv {t₁ t₂ : EtaleTorsor 
 
 end SheafTorsor
 
+/-- **The sheaf torsor of an `M`-torsor.** The functor of points `U ↦ Hom_Y(U, P)` of an
+`M`-torsor `P ⟶ Y`, as a torsor under the constant sheaf `M` on the small étale site of `Y`: the
+constant section `m` acts by composition with the action of `m` on `P`, and a section of the
+constant sheaf over `U`, which is a locally constant function `f : U → M`
+(`AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`), acts on `φ : U ⟶ P` as
+`m` on the open fibre `f⁻¹(m)` (`AlgebraicGeometry.Scheme.EtaleTorsor.smulHom`).
+(blueprint: `sbc-prop-torsors-h1`, `thm-galois-lc-etale`) -/
+noncomputable def toSheafTorsor (t : EtaleTorsor M Y) :
+    Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) :=
+  letI : TopologicalSpace M := ⊥
+  haveI : DiscreteTopology M := ⟨rfl⟩
+  Sheaf.Torsor.ofIso (Etale.constantSheafIsoContinuousMapSheaf Y M).symm
+    t.toSheafTorsorContinuousMap
+
+/-- The sections of the sheaf torsor of `t` over `U` are the `Y`-morphisms `U ⟶ P`. -/
+lemma toSheafTorsor_sheaf (t : EtaleTorsor M Y) :
+    t.toSheafTorsor.sheaf = Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj t.toEtale :=
+  rfl
+
+/-- **Full faithfulness on isomorphism classes.** Two `M`-torsors are isomorphic if and only if
+their sheaf torsors are: an isomorphism of the functors of points is induced by an isomorphism
+of the total spaces, by the Yoneda lemma. -/
+theorem toSheafTorsor_equiv_toSheafTorsor_iff {t₁ t₂ : EtaleTorsor M Y} :
+    t₁.toSheafTorsor ≈ t₂.toSheafTorsor ↔ t₁ ≈ t₂ := by
+  let _ : TopologicalSpace M := ⊥
+  have : DiscreteTopology M := ⟨rfl⟩
+  rw [toSheafTorsor, toSheafTorsor, Sheaf.Torsor.ofIso_equiv_ofIso_iff]
+  exact ⟨isIsomorphic_of_toSheafTorsorContinuousMap_equiv,
+    toSheafTorsorContinuousMap_equiv_of_isIsomorphic⟩
+
+/-- The global sections of the sheaf torsor of `t` are the sections of the structure morphism
+of `t`. -/
+theorem nonempty_toSheafTorsor_sheaf_obj_iff (t : EtaleTorsor M Y) {T : Y.Etale}
+    (hT : IsTerminal T) :
+    Nonempty (t.toSheafTorsor.sheaf.obj.obj (op T)) ↔ ∃ s : Y ⟶ t.P, s ≫ t.π = 𝟙 Y := by
+  let e := hT.uniqueUpToIso (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Y)
+  rw [toSheafTorsor_sheaf]
+  constructor
+  · rintro ⟨⟨φ⟩⟩
+    exact ⟨(e.inv ≫ φ).left, MorphismProperty.Over.w (e.inv ≫ φ)⟩
+  · rintro ⟨s, hs⟩
+    exact ⟨⟨e.hom ≫ MorphismProperty.Over.homMk s hs⟩⟩
+
+variable (M Y) in
+/-- **Essential surjectivity on isomorphism classes.** Every torsor under the constant sheaf `M`
+on the small étale site of `Y` is isomorphic to the sheaf torsor of an `M`-torsor. This is
+effective étale descent of finite étale morphisms: a torsor is trivial on an étale cover, where
+it is represented by the trivial `M`-torsor `∐_{m ∈ M} U`, and these representing schemes descend
+to `Y`. It is the essential surjectivity of the equivalence between finite étale `Y`-schemes and
+finite locally constant sheaves (blueprint `thm-galois-lc-etale`, Stacks `03HC`), restricted to
+`M`-torsors.
+
+The proof is `sorry`: étale descent of affine morphisms is not available. -/
+theorem exists_toSheafTorsor_equiv (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))) :
+    ∃ t : EtaleTorsor M Y, t.toSheafTorsor ≈ P :=
+  sorry
+
 variable (M Y) in
 /-- Blueprint `sbc-prop-torsors-h1`, the finite étale clause: an `M`-torsor on the small étale
 site of `Y` is the same thing as a finite étale `Y`-scheme with a simply transitive
 `M`-action.
 
-The functor of points `P ↦ Hom_Y(-, P)`, with the action of the constant sheaf `M` induced by
-the action of `M` on `P`, sends an `M`-torsor `t` in the sense of
-`AlgebraicGeometry.Scheme.EtaleTorsor` to a torsor `F t` under the constant sheaf `M` in the
-sense of `CategoryTheory.Sheaf.Torsor`. It induces a bijection on isomorphism classes, and the
-global sections of `F t` are the sections of the structure morphism of `t`. Fully faithfulness
-is étale descent of morphisms; essential surjectivity is effective étale descent of finite étale
-morphisms (blueprint `thm-galois-lc-etale`, Stacks `03HC`).
-
-Only the existence of such an assignment `F` is recorded. The proof is `sorry`: neither the
-étale descent of finite étale morphisms nor the comparison of sections of the constant sheaf
-with locally constant functions is available yet. -/
+The sheaf torsor `AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`, the functor of points
+`P ↦ Hom_Y(-, P)` with the action of the constant sheaf `M` induced by the action of `M` on `P`,
+induces a bijection on isomorphism classes, and its global sections are the sections of the
+structure morphism. Full faithfulness is the Yoneda lemma
+(`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor_equiv_toSheafTorsor_iff`); essential
+surjectivity is effective étale descent of finite étale morphisms
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv`, whose proof is `sorry`). -/
 theorem exists_sheafTorsor :
     ∃ F : EtaleTorsor M Y → Sheaf.Torsor
         ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)),
       (∀ t₁ t₂, t₁ ≈ t₂ ↔ F t₁ ≈ F t₂) ∧ (∀ P, ∃ t, F t ≈ P) ∧
       ∀ t, (∃ s : Y ⟶ t.P, s ≫ t.π = 𝟙 Y) ↔ Nonempty ((F t).sheaf.obj.obj (op (⊤_ Y.Etale))) :=
-  sorry
+  ⟨toSheafTorsor, fun _ _ ↦ toSheafTorsor_equiv_toSheafTorsor_iff.symm,
+    exists_toSheafTorsor_equiv M Y,
+    fun t ↦ (t.nonempty_toSheafTorsor_sheaf_obj_iff terminalIsTerminal).symm⟩
+
+variable (M Y) in
+/-- The map from isomorphism classes of `M`-torsors to isomorphism classes of torsors under the
+constant sheaf `M`, induced by `AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`. -/
+noncomputable def quotientToSheafTorsor :
+    Quotient (EtaleTorsor.setoid M Y) → _root_.Quotient (Sheaf.Torsor.setoid (G :=
+      (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))) :=
+  Quotient.map toSheafTorsor fun _ _ h ↦ toSheafTorsor_equiv_toSheafTorsor_iff.2 h
+
+lemma bijective_quotientToSheafTorsor : Function.Bijective (quotientToSheafTorsor M Y) := by
+  refine ⟨fun t₁ t₂ h ↦ ?_, fun P ↦ ?_⟩
+  · induction t₁ using Quotient.inductionOn
+    induction t₂ using Quotient.inductionOn
+    exact Quotient.sound (toSheafTorsor_equiv_toSheafTorsor_iff.1 (Quotient.exact h))
+  · induction P using Quotient.inductionOn with | h P => ?_
+    obtain ⟨t, ht⟩ := exists_toSheafTorsor_equiv M Y P
+    exact ⟨⟦t⟧, Quotient.sound ht⟩
+
+variable (M Y) in
+/-- **The class of an `M`-torsor in `H¹(Y_ét, M)`.** The canonical bijection between the
+isomorphism classes of `M`-torsors over `Y` and the first étale cohomology of the constant sheaf
+`M`: the class of `P ⟶ Y` is the class
+(`CategoryTheory.Sheaf.Torsor.classH1`) of its sheaf torsor of points
+(`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`). Its surjectivity rests on
+`AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv`, whose proof is `sorry`.
+(blueprint: `sk-prop-input-torsors`, `sbc-prop-torsors-h1`) -/
+noncomputable def classH1 :
+    Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
+      ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1 :=
+  (Equiv.ofBijective _ bijective_quotientToSheafTorsor).trans
+    (Sheaf.Torsor.classH1 _ terminalIsTerminal)
+
+lemma classH1_mk (t : EtaleTorsor M Y) :
+    classH1 M Y ⟦t⟧ = Sheaf.Torsor.classH1 _ terminalIsTerminal ⟦t.toSheafTorsor⟧ :=
+  rfl
+
+/-- An `M`-torsor has class `0` in `H¹(Y_ét, M)` if and only if its structure morphism has a
+section. -/
+theorem classH1_eq_zero_iff (t : EtaleTorsor M Y) :
+    classH1 M Y ⟦t⟧ = 0 ↔ ∃ s : Y ⟶ t.P, s ≫ t.π = 𝟙 Y := by
+  rw [classH1_mk, Sheaf.Torsor.classH1_eq_zero_iff,
+    t.nonempty_toSheafTorsor_sheaf_obj_iff terminalIsTerminal]
 
 variable (M Y) in
 /-- Blueprint `sk-prop-input-torsors`: Torsors and étale H^1
@@ -446,38 +552,20 @@ For a scheme `Y` and a finite abelian group `M` the isomorphism classes of `M`-t
 the small étale site of `Y` are in canonical bijection with the first sheaf cohomology
 group `H^1(Y_ét, M)` of the constant sheaf with value `M`, under which the class of a
 torsor vanishes exactly when its structure morphism admits a section, that is, exactly
-when the torsor is trivial.
+when the torsor is trivial. The bijection is `AlgebraicGeometry.Scheme.EtaleTorsor.classH1`;
+this statement forgets it.
 
 An `M`-torsor is, by `AlgebraicGeometry.Scheme.EtaleTorsor`, the same thing as a finite
 étale surjective `Y`-scheme with a simply transitive `M`-action; the naturality of the
 bijection in `(Y, M)` and the connectedness criterion of the sketch are not part of this
-statement, see the implementation notes of this file.
-
-The proof combines the classification of torsors under an abelian sheaf by `H¹`
-(`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`, blueprint `thm-galois-torsor-h1`)
-with the comparison of étale torsors and sheaf torsors
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_sheafTorsor`, blueprint `sbc-prop-torsors-h1`). -/
+statement, see the implementation notes of this file. -/
 @[stacks 02NE]
 theorem exists_quotientEquivSheafH :
     ∃ c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of M)) 1,
-      ∀ t : EtaleTorsor M Y, c ⟦t⟧ = 0 ↔ ∃ s : Y ⟶ t.P, s ≫ t.π = 𝟙 Y := by
-  obtain ⟨F, hF, hFsurj, hFsec⟩ := exists_sheafTorsor M Y
-  obtain ⟨c, hc⟩ := Sheaf.Torsor.exists_quotientEquiv_H_one
-    ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))
-    terminalIsTerminal
-  let Φ : Quotient (EtaleTorsor.setoid M Y) → Quotient (Sheaf.Torsor.setoid (G := _)) :=
-    Quotient.map F fun t₁ t₂ h ↦ (hF t₁ t₂).1 h
-  have hΦ : Function.Bijective Φ := by
-    refine ⟨fun t₁ t₂ h ↦ ?_, fun P ↦ ?_⟩
-    · induction t₁ using Quotient.inductionOn
-      induction t₂ using Quotient.inductionOn
-      exact Quotient.sound ((hF _ _).2 (Quotient.exact h))
-    · induction P using Quotient.inductionOn with | h P => ?_
-      obtain ⟨t, ht⟩ := hFsurj P
-      exact ⟨⟦t⟧, Quotient.sound ht⟩
-  exact ⟨(Equiv.ofBijective Φ hΦ).trans c, fun t ↦ (hc (F t)).trans (hFsec t).symm⟩
+      ∀ t : EtaleTorsor M Y, c ⟦t⟧ = 0 ↔ ∃ s : Y ⟶ t.P, s ≫ t.π = 𝟙 Y :=
+  ⟨classH1 M Y, classH1_eq_zero_iff⟩
 
 end Scheme.EtaleTorsor
 
