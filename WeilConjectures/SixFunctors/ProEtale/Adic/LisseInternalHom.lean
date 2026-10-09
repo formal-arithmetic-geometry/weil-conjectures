@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!
 # The internal hom out of a lisse sheaf is exact
@@ -20,6 +21,11 @@ as a right adjoint, and it preserves epimorphisms since this can be checked afte
 the members of a pro-étale cover trivialising `F`, where `F` becomes `ℚ̄_ℓⁿ` and
 `𝓗om(ℚ̄_ℓⁿ, -) = (-)ⁿ` (`CategoryTheory.Mod.epi_ihom_map_of_iso_biproduct`); weakly étale
 pullback commutes with the internal hom (`AlgebraicGeometry.ProEtale.adicUpperStarIhomIso`).
+
+For any morphism `g`, pullback commutes with the tensor product of modules
+(`AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso`), which gives the projection formula
+`g_* 𝓗om(g^* M, N) ≅ 𝓗om(M, g_* N)`
+(`AlgebraicGeometry.ProEtale.adicLowerStarCompIhomUpperStarIso`).
 -/
 
 @[expose] public section
@@ -128,5 +134,41 @@ theorem IsAdicLisseSheaf.upperStar_ihom {Y : Scheme.{u}} (i : Y ⟶ X) {F G : Ad
       (q)^*ᵃ[l].mapBiproduct _ ≪≫
       biproduct.mapIso fun _ ↦ (adicUpperStarComp l q (g k)).symm.app G ≪≫
         (adicUpperStarCongr l hpq.symm).app G ≪≫ (adicUpperStarComp l p i).app G).symm
+
+section ProjectionFormula
+
+attribute [local instance] Sheaf.symmetricCategory
+
+variable {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+
+variable (l) in
+/-- The ring isomorphism `ℚ̄_ℓ,Z ≅ g^* ℚ̄_ℓ,Y` along which `g^*` acts on modules, for any `g`. -/
+noncomputable abbrev adicUpperStarRingHom : adicConstantSheaf l Z ⟶
+    (g)^*[WeilCoefficients.{u} l].obj (adicConstantSheaf l Y) :=
+  inv (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).homEquiv _ _).symm
+    (adicConstantSheafToLowerStar l g))
+
+variable (l) in
+/-- **Pullback commutes with the tensor product of modules**: `g^*(P ⊗_A M) ≅ g^*P ⊗_A g^*M`,
+for any morphism `g`. -/
+noncomputable def adicUpperStarTensorLeftIso (M : AdicSheaf l Y) :
+    Mod.tensorLeft M ⋙ (g)^*ᵃ[l] ≅ (g)^*ᵃ[l] ⋙ Mod.tensorLeft ((g)^*ᵃ[l].obj M) :=
+  have : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (g)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l g)) :=
+    inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (g)^*ᵃ[l])
+  Mod.tensorLeftCompMapModComapIso (adicUpperStarRingHom l g)
+    (fun _ _ ↦ Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ g) _ _) M
+
+variable (l) in
+/-- **The projection formula for the internal hom**: `g_* 𝓗om(g^* M, N) ≅ 𝓗om(M, g_* N)`,
+naturally in `N`, for any morphism `g`. The left adjoints `g^*(- ⊗_A M)` and
+`g^* - ⊗_A g^* M` agree (`AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso`). -/
+noncomputable def adicLowerStarCompIhomUpperStarIso (M : AdicSheaf l Y) :
+    (g)_*ᵃ[l] ⋙ AdicSheaf.ihom M ≅ AdicSheaf.ihom ((g)^*ᵃ[l].obj M) ⋙ (g)_*ᵃ[l] :=
+  conjugateIsoEquiv ((Mod.ihomAdjunction M).comp (adicUpperStarLowerStarAdjunction l g))
+    ((adicUpperStarLowerStarAdjunction l g).comp (Mod.ihomAdjunction ((g)^*ᵃ[l].obj M)))
+    (adicUpperStarTensorLeftIso l g M).symm
+
+end ProjectionFormula
 
 end AlgebraicGeometry.ProEtale
