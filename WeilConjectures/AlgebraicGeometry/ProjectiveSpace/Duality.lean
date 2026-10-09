@@ -160,6 +160,86 @@ lemma finrank_H_zero_homObj_twist (a : ℤ) :
     have := subsingleton_H_zero_twist_of_neg k (-a + -2) (by omega)
     rw [Module.finrank_zero_of_subsingleton, Module.finrank_zero_of_subsingleton]
 
+/-- For the twists, surjectivity of the duality pairing implies bijectivity, by the dimension
+count `finrank_H_zero_homObj_twist`. -/
+lemma bijective_dualPairing_twist_of_surjective (t : Module.Dual k ((ω).H 1)) (a : ℤ)
+    (h : Function.Surjective (dualPairing t (𝒪(a)))) :
+    Function.Bijective (dualPairing t (𝒪(a))) := by
+  rw [← bijective_dualPairingH_iff]
+  have hs : Function.Surjective (dualPairingH t (𝒪(a))) := fun y ↦ by
+    obtain ⟨φ, rfl⟩ := h y
+    exact ⟨(homObjHZeroAddEquiv _ _).symm φ, by rw [dualPairingH_apply, AddEquiv.apply_symm_apply]⟩
+  have := finiteDimensional_H_one_twist k a
+  have : FiniteDimensional k (H (homObj (𝒪(a)) ω) 0) := by
+    have := finiteDimensional_H_zero_twist k (-a + -2)
+    exact (homObjTwistHZeroLinearEquiv k a).symm.finiteDimensional
+  exact ⟨(LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (finrank_H_zero_homObj_twist k a)).2 hs, hs⟩
+
+/-- The base case `𝒪(-2) ≅ Ω¹` of the duality on the twists: the pairing is nonzero on the
+isomorphism `𝒪(-2) ≅ Ω¹`, and `H¹(ℙ¹_k, 𝒪(-2))^∨` is one-dimensional. -/
+lemma surjective_dualPairing_twist_neg_two (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) :
+    Function.Surjective (dualPairing t (𝒪(-2))) := by
+  let ι := (nonempty_relativeDifferentials_iso_twist k).some
+  obtain ⟨c, hc⟩ : ∃ c, t c ≠ 0 := by
+    by_contra! h
+    exact ht (LinearMap.ext h)
+  have hne : dualPairingH t (𝒪(-2)) ((homObjHZeroAddEquiv _ _).symm ι.inv) ≠ 0 := by
+    rw [dualPairingH_apply, AddEquiv.apply_symm_apply]
+    intro h0
+    refine hc ?_
+    have := LinearMap.congr_fun h0 (H.map ι.hom 1 c)
+    rwa [dualPairing_apply, ← H.map_comp_apply, ι.hom_inv_id, H.map_id_apply] at this
+  have hd : Module.finrank k (Module.Dual k ((𝒪(-2)).H 1)) = 1 := by
+    obtain ⟨e⟩ := nonempty_H_one_twist_equiv_dual k (-2) le_rfl
+    have := finiteDimensional_homogeneousSubmodule k 0
+    have := finiteDimensional_H_one_twist k (-2)
+    rw [Subspace.dual_finrank_eq, e.finrank_eq, Subspace.dual_finrank_eq]
+    exact finrank_homogeneousSubmodule_zero k
+  have := finiteDimensional_H_one_twist k (-2)
+  have hr : LinearMap.range (dualPairingH t (𝒪(-2))) = ⊤ := by
+    refine Submodule.eq_top_of_finrank_eq ?_
+    refine le_antisymm (Submodule.finrank_le _) ?_
+    rw [hd, Nat.one_le_iff_ne_zero, Ne, Submodule.finrank_eq_zero]
+    have hmem := LinearMap.mem_range_self (dualPairingH t (𝒪(-2)))
+      ((homObjHZeroAddEquiv _ _).symm ι.inv)
+    exact fun h ↦ hne (by rw [h] at hmem; exact (Submodule.mem_bot k).1 hmem)
+  intro y
+  obtain ⟨x, rfl⟩ := LinearMap.range_eq_top.1 hr y
+  exact ⟨_, rfl⟩
+
+/-- **Duality on the projective line for the twists.** For every `a`, the duality pairing
+`Hom(𝒪(a), Ω¹) → H¹(ℙ¹_k, 𝒪(a))^∨` is bijective. For `a ≥ -1` both sides vanish. For `a ≤ -2`
+we argue by descending induction from `a = -2`: the Koszul sequence
+`0 → 𝒪(a) → 𝒪(a + 1)² → 𝒪(a + 2) → 0` and `H⁰(𝒪(a + 2)) = 0` show that `H¹(𝒪(a)) → H¹(𝒪(a + 1)²)`
+is injective, which transports surjectivity from `𝒪(a + 1)²` to `𝒪(a)`, and the dimension count
+gives bijectivity. -/
+theorem bijective_dualPairing_twist (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (a : ℤ) :
+    Function.Bijective (dualPairing t (𝒪(a))) := by
+  refine bijective_dualPairing_twist_of_surjective k t a ?_
+  rcases le_or_gt (-1) a with ha | ha
+  · have := subsingleton_H_one_twist k a ha
+    intro y
+    refine ⟨0, LinearMap.ext fun z ↦ ?_⟩
+    rw [Subsingleton.elim z 0, map_zero, map_zero]
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, a = -2 - n := ⟨(-2 - a).toNat, by omega⟩
+    clear ha
+    induction n with
+    | zero =>
+      rw [Nat.cast_zero, sub_zero]
+      exact surjective_dualPairing_twist_neg_two k t ht
+    | succ n ih =>
+      have hb := bijective_dualPairing_twist_of_surjective k t _ ih
+      have e : -2 - ((n + 1 : ℕ) : ℤ) + 1 = -2 - n := by push_cast; ring
+      rw [← e] at hb
+      set m : ℤ := -2 - ((n + 1 : ℕ) : ℤ)
+      have : Subsingleton ((koszul (Spec (.of k)) m).X₃.H 0) := by
+        rw [koszul_X₃]
+        exact subsingleton_H_zero_twist_of_neg k _ (by omega)
+      exact surjective_dualPairing_of_injective t (koszulLeft (Spec (.of k)) m)
+        (H.injective_map_f_one (S := koszul (Spec (.of k)) m) (koszul_shortExact _ m))
+        (bijective_dualPairing_biprod t _ _ hb hb).2
+
 /-- **Duality on the projective line, `H¹`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
 isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. For `𝒢 = 𝒪(d)` both sides
 are computed by the Čech complex, `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` and the monomial pairing is perfect; for
