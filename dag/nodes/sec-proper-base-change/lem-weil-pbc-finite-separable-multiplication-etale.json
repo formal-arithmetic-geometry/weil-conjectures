@@ -13,9 +13,83 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $k'/k$ is finite and separable algebraic, the morphism $\\pi:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ induced by $k\\to k'$ is etale [lem-weil-pbc-finite-separable-extension-etale].",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH (lemma-geometrically-regular-over-separable-algebraic, line 47219), proof, second paragraph: 'Since $k'/k$ is an etale extension of rings'; that is Lemma Tag 00U3 (lemma-etale-over-field, line 39394)"
+   }
+  },
+  {
+   "text": "Let $i_1:k'\\to k'\\otimes_kk'$, $a\\mapsto a\\otimes1$. Applying [lem-weil-pbc-etale-ring-base-change] with $R=k$, $A=k'$ (so that $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is etale by step 1) and $S=k'$, the morphism $g:=\\operatorname{Spec}i_1:\\operatorname{Spec}(k'\\otimes_kk')\\to\\operatorname{Spec}k'$ is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00U2 (lemma-etale, line 39290), part (3): a base change of an etale ring map is etale; this is the 'Lemma 00U2' cited in the proof of Lemma Tag 07QH"
+   }
+  },
+  {
+   "text": "The multiplication map satisfies $\\mu\\circ i_1=\\mathrm{id}_{k'}$, since $\\mu(a\\otimes1)=a\\cdot1=a$ for $a\\in k'$. As $\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum], $f:=\\operatorname{Spec}\\mu:\\operatorname{Spec}k'\\to\\operatorname{Spec}(k'\\otimes_kk')$ satisfies $g\\circ f=\\operatorname{Spec}(\\mu\\circ i_1)=\\operatorname{Spec}(\\mathrm{id}_{k'})=\\mathrm{id}_{\\operatorname{Spec}k'}$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07QH, proof, second paragraph (the factorization $k'\\to A\\otimes_kk'\\to A$ with $A=k'$)"
+   }
+  },
+  {
+   "text": "The identity $\\mathrm{id}_{\\operatorname{Spec}k'}$ is an open immersion [def-weil-open-immersion] (an isomorphism onto the open subscheme $\\operatorname{Spec}k'$ of itself), hence etale by [lem-weil-pbc-etale-composition-cancellation] (1). So in $\\operatorname{Spec}k'\\xrightarrow{f}\\operatorname{Spec}(k'\\otimes_kk')\\xrightarrow{g}\\operatorname{Spec}k'$ both $g\\circ f$ (step 3) and $g$ (step 2) are etale, and [lem-weil-pbc-etale-composition-cancellation] (3) gives that $f=\\operatorname{Spec}\\mu$ is etale [def-weil-etale-morphism]. (This is the scheme form of Algebra, Lemma 00U7: $\\mu$ is a $k'$-algebra map between the etale $k'$-algebras $k'\\otimes_kk'$ and $k'$.)",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 02GP (lemma-open-immersion-etale) and Lemma Tag 02GW (lemma-etale-permanence, line 8491); ring version Algebra, Lemma Tag 00U7 (lemma-map-between-etale, algebra.tex line 39508)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-ring-map-iff-etale-affine], since $\\operatorname{Spec}\\mu$ is etale, $\\mu$ is an etale ring map: $k'$ is a finitely presented $(k'\\otimes_kk')$-algebra, $H_1(L_{k'/k'\\otimes_kk'})=0$ and $\\Omega_{k'/k'\\otimes_kk'}=0$ [def-weil-pbc-kahler-differentials]. The zero module is a finite projective $k'$-module (a direct summand of the finite free module $0$), so conditions (i), (ii), (iii) of [def-weil-pbc-smooth-ring-map] hold and $\\mu$ is a smooth ring map.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 00U1 (definition-etale): an etale ring map is a smooth ring map with $\\Omega_{S/R}=0$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-ring-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07QH (lemma-geometrically-regular-over-separable-algebraic, line 47219), proof, second paragraph ('Since $k'/k$ is an etale extension of rings, we see that $k'\\otimes_kk'\\to k'$ is etale (Lemma 00U2)'), with the steps it leaves out filled in from Lemma Tag 00U3 (line 39394), Lemma Tag 00U2 (3) (line 39290), Lemma Tag 00U7 (line 39508) in its scheme form Morphisms Lemma Tag 02GW, and Definition Tag 00U1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +111,17 @@
    "results": "only WeaklyEtale.flat_lmul' uses (RingTheory/Etale/Weakly.lean:75,94, flatness of lmul' for weakly etale algebras); Algebra.FormallyEtale.of_restrictScalars (Etale/Basic.lean:119) and Algebra.Etale.of_restrictScalars (Etale/Basic.lean:244)",
    "date": "2026-10-10",
    "verdict": "no match; candidates as above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"lmul'\" Mathlib/RingTheory/Etale/ Mathlib/RingTheory/Unramified/ (slopmaster2 .lake/packages/mathlib); grep -rn \"lmul'\\|of_isSeparable\" /home/ubuntu/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "Mathlib: WeaklyEtale.flat_lmul' (Etale/Weakly.lean:39), Algebra.FormallyUnramified finite case: existence of e with lmul' e = 1 (Unramified/Finite.lean:53,151), Unramified/Basic.lean:106 (kerSquareLift of lmul'); source repository: LocallyConstant.isLocalization_lmul' (RingTheory/Spectrum/Prime/LocallyConstant.lean:526, for locally constant functions, not fields), Algebra.Etale.of_finite_of_isSeparable (WeilConjectures/Mathlib/RingTheory/Etale/Field.lean:140, closed)",
+   "date": "2026-10-10",
+   "verdict": "no match for the item; in Lean it is a short composite: Algebra.Etale.of_restrictScalars (Etale/Basic.lean:244) with R = k, A = k' ⊗[k] k' (Etale k A by Etale.comp of the Etale.baseChange instance, Etale/Basic.lean:237,242) and B = k' via lmul', plus the instance [Etale R A] : Smooth R A (Etale/Basic.lean:223)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-separable-multiplication-etale",
+  "worker": "stage1",
+  "summary": "Statement kept (it matches what the proof of Stacks 07QH uses: the multiplication map of a finite separable extension is etale, and smooth as an etale ring map). Stacks' proof of 07QH says only 'k'/k is etale, so k'(x)k' -> k' is etale (Lemma 00U2)'; the missing argument is written out along Stacks' own lemmas: k -> k' etale (00U3, new Mathlib leaf lem-weil-pbc-finite-separable-extension-etale), base change k' -> k'(x)k' etale (00U2(3), existing leaf lem-weil-pbc-etale-ring-base-change), mu o i_1 = id, and cancellation (00U7 / Morphisms 02GW, existing leaf lem-weil-pbc-etale-composition-cancellation) gives Spec mu etale; smoothness from the identification lem-weil-pbc-etale-ring-map-iff-etale-affine (02GJ) and Definition 00U1 (Omega = 0 is finite projective). The route via the primitive element and Lemma 0C2X (localization at one element, 00U2(1)) suggested in source.place was not taken: it would need nodes for the primitive element theorem, the isomorphism k'[x]/(P) = k'(x)k' and the localization identification, none of which exist, while every piece of the chosen route is already a node (four of them Mathlib leaves). All tags checked against tags/tags: 07QH, 00U1, 00U2, 00U3, 00U7, 02GJ, 02GL, 02GP, 02GW, 0C2X; 00U8 is lemma-surjective-flat-finitely-presented and 02GE is morphisms-lemma-diagonal-unramified-morphism, neither used. Item searched in Mathlib once more (grep for lmul'): no single declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps, not the 0C2X route of source.place but the retraction argument: k -> k' etale (new node, 00U3 'if' direction; Mathlib FormallyEtale.of_isSeparable Field.lean:98 plus FinitePresentation.of_finiteType, line verified; Lean Algebra.Etale.of_finite_of_isSeparable (slopmaster2 Field.lean:140, sorry-free) attached by L, exact), i_1: k' -> k' (x) k' etale by base change, mu o i_1 = id (elementary), cancellation (02GW/00U7 via the composition-cancellation leaf) gives Spec mu etale, smoothness from 02GJ and the definition (Omega = 0 finite projective). Overlap noted for stage 3: lem-sc-finite-etale-algebra-criterion (sec-abelian-varieties, imported) contains the new node's statement inside a larger iff. Tags verified by the worker (00U1, 00U2, 00U3, 00U7, 02GJ, 02GL, 02GP, 02GW, 0C2X, 07QH)."
+ }
 }
