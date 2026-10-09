@@ -1,0 +1,55 @@
+{
+ "id": "def-weil-constructible-standard-tstructure",
+ "kind": "definition",
+ "title": "Standard pair of subcategories on the constructible categories",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, the field $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and a scheme $Y$.\n\n1. *Integral level.* For a finite extension $E/\\Ql$ [def-weil-l-adic-coefficient-extension] with valuation ring $\\mathcal O_E$, let $D^b_c(Y,\\mathcal O_E)\\subset D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the derived-complete integral category [def-weil-derived-complete-integral-detailed], and for an object $K$ and $r\\in\\mathbf Z$ let $\\mathcal H^r(K)$ be its $r$-th cohomology sheaf in the abelian category $\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ of $\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-completed-integral-coefficients]. Put\n$$\n D^{\\le0}_c(Y,\\mathcal O_E)=\\{K:\\mathcal H^r(K)=0\\ \\text{for all } r>0\\},\\qquad\n D^{\\ge0}_c(Y,\\mathcal O_E)=\\{K:\\mathcal H^r(K)=0\\ \\text{for all } r<0\\}.\n$$\n\n2. *Rational level.* The rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi] has the same objects as $D^b_c(Y,\\mathcal O_E)$. Let $D^{\\le0}_c(Y,E)$ (resp. $D^{\\ge0}_c(Y,E)$) be the class of objects $K$ of $D^b_c(Y,E)$ that are isomorphic in $D^b_c(Y,E)$ to some $L\\in D^{\\le0}_c(Y,\\mathcal O_E)$ (resp. $L\\in D^{\\ge0}_c(Y,\\mathcal O_E)$).\n\n3. *Algebraically closed level.* Let $D^b_c(Y,\\Qlb)=\\mathcal C_Y$ be the common-stage category of pairs $(E,K)$, $E$ in the directed set $\\mathcal E_\\ell$ of finite extensions of $\\Ql$ in $\\Qlb$ [def-weil-algebraically-closed-coefficients]. Let $D^{\\le0}_c(Y,\\Qlb)$ (resp. $D^{\\ge0}_c(Y,\\Qlb)$) be the class of objects $X$ of $\\mathcal C_Y$ that are isomorphic in $\\mathcal C_Y$ to some $(L,M)$ with $L\\in\\mathcal E_\\ell$ and $M\\in D^{\\le0}_c(Y,L)$ (resp. $M\\in D^{\\ge0}_c(Y,L)$).\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ and $n\\in\\mathbf Z$ put $D^{\\le n}_c(Y,\\Lambda)=\\{K:K[n]\\in D^{\\le0}_c(Y,\\Lambda)\\}$ and $D^{\\ge n}_c(Y,\\Lambda)=\\{K:K[n]\\in D^{\\ge0}_c(Y,\\Lambda)\\}$. The pair $(D^{\\le0}_c(Y,\\Lambda),D^{\\ge0}_c(Y,\\Lambda))$ is the *standard pair* on $D^b_c(Y,\\Lambda)$; all its classes are closed under isomorphism by construction. That it is a bounded t-structure (for $Y$ of finite type over $k$) is a separate statement, not part of this definition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+  "place": "node prop-weil-localized-tstructure (the rational classes as isomorphism closures of the integral ones) together with node prop-weil-pbc-integral-tstructure (the integral classes by cohomology sheaves); cf. literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Proposition 6.8.11(3) (D_cons(X_proet,O_E) is the bounded complexes with constructible cohomology sheaves, so stable under the canonical truncations) and Proposition 6.8.14(2) (D_cons(X_proet,O_E)[l^-1] = D_cons(X_proet,E)); the Qlb level follows the common-stage construction of def-weil-algebraically-closed-coefficients"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'TStructure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "CategoryTheory/Triangulated/TStructure/{Basic,Heart,Induced,TruncLEGT,TruncLTGE,ETrunc,AbelianSubcategory,SpectralObject}.lean; Algebra/Homology/DerivedCategory/TStructure.lean (`DerivedCategory.TStructure.t`, the canonical t-structure on `DerivedCategory C` for an abelian `C`, le n = objects isomorphic to Q.obj K with K strictly <= n); Induced.lean (`ObjectProperty.tStructure`, the t-structure induced on a triangulated subcategory stable under truncation, class `HasInducedTStructure`)",
+   "date": "2026-10-09",
+   "verdict": "no match: the canonical t-structure exists on DerivedCategory of an abelian category, and could induce the integral classes on D^b_c(Y,O_E) once that subcategory is shown stable under truncations (a theorem), but nothing for a rationalized (scalar-localized) triangulated category or a common-stage colimit category"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'proet\\|constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "results": "Proetale.lean: the big and small pro-etale sites (`proetaleTopology`, `ProEt`, `ProEt.topology`); ElladicCohomology.lean: `ellAdicSheaf`, `EllAdicCohomology`; no constructible sheaves, no derived categories of sheaves on them, no t-structure",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-constructible-heart",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -2,24 +2,53 @@
  "id": "def-weil-constructible-heart",
  "kind": "definition",
  "title": "Constructible heart",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure\n$\\Qlb$ of $\\Ql$, and choose a finite-type\n[def-weil-scheme-morphism-properties] $k$-scheme $Y$ and a finite extension\n$E/\\Ql$ contained in $\\Qlb$. Let $\\Lambda\\in\\{E,\\Qlb\\}$. For $\\Lambda=E$, use\nthe rationalized coefficient category\n[def-weil-rationalization-karoubi]; its integral representatives have\nfinite-level reductions satisfying the finite-torsion constructibility\ncondition [def-weil-finite-torsion-constructibility]. For $\\Lambda=\\Qlb$, use\nthe common-stage category\n[def-weil-algebraically-closed-coefficients]. For every $m\\in\\mathbf Z$,\nwrite $\\tau^{\\leq m}$ and $\\tau^{\\geq m}$ for the constructible truncation\nfunctors obtained from the standard $t$-structure. For $\\Lambda=E$ or\n$\\Qlb$, define\n\n$$\n\\begin{aligned}\n D^{\\leq0}_c(Y,\\Lambda)&=\n \\{K:\\tau^{\\geq1}K=0\\},\\\\\n D^{\\geq0}_c(Y,\\Lambda)&=\n \\{K:\\tau^{\\leq-1}K=0\\}.\n\\end{aligned}\n$$\n\nTheir intersection is the abelian category $\\Sh_c(Y,\\Lambda)$, called the\n*constructible heart*; its objects are constructible $\\Lambda$-adic sheaves\nwhose finite-level reductions satisfy the finite-torsion constructibility\ncondition [def-weil-finite-torsion-constructibility], with the rationalized\nand common-stage interpretations supplied by the coefficient constructions.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], choose an algebraic closure\n$\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and choose a finite-type\n[def-weil-scheme-morphism-properties] $k$-scheme $Y$ and a finite extension\n$E/\\Ql$ contained in $\\Qlb$ [def-weil-l-adic-coefficient-extension]. Let $\\Lambda\\in\\{E,\\Qlb\\}$. For $\\Lambda=E$, use\nthe rationalized coefficient category $D^b_c(Y,E)$\n[def-weil-rationalization-karoubi]; its integral representatives have\nfinite-level reductions in $D^b_c(Y,A_{E,n})$, i.e. satisfying the finite-torsion constructibility\ncondition [def-weil-finite-torsion-constructibility]. For $\\Lambda=\\Qlb$, use\nthe common-stage category $D^b_c(Y,\\Qlb)$\n[def-weil-algebraically-closed-coefficients]. Let\n$D^{\\leq0}_c(Y,\\Lambda)$ and $D^{\\geq0}_c(Y,\\Lambda)$ be the classes of the standard pair on $D^b_c(Y,\\Lambda)$\n[def-weil-constructible-standard-tstructure]. Since $Y$ is of finite type over $k$, this pair is a bounded\n$t$-structure [def-weil-t-structure] on $D^b_c(Y,\\Lambda)$, the *standard $t$-structure*\n[prop-constructible-truncations]; for every $m\\in\\mathbf Z$ write $\\tau^{\\leq m}$ and $\\tau^{\\geq m}$ for its\ntruncation functors, the constructible truncation functors. As in every $t$-structure,\n\n$$\n\\begin{aligned}\n D^{\\leq0}_c(Y,\\Lambda)&=\n \\{K:\\tau^{\\geq1}K=0\\},\\\\\n D^{\\geq0}_c(Y,\\Lambda)&=\n \\{K:\\tau^{\\leq-1}K=0\\}.\n\\end{aligned}\n$$\n\nThe *constructible heart* $\\Sh_c(Y,\\Lambda)$ is the full subcategory of $D^b_c(Y,\\Lambda)$ on the objects of\n$D^{\\leq0}_c(Y,\\Lambda)\\cap D^{\\geq0}_c(Y,\\Lambda)$, that is, the heart of the standard $t$-structure\n[def-weil-t-structure]; it is an abelian category [prop-weil-heart-abelian].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-constructible-heart.md",
   "place": "node def-weil-constructible-heart, order 1506"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
   "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-rationalization-karoubi",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-t-structure",
+  "prop-constructible-truncations",
+  "prop-weil-heart-abelian"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def heart\\|class Heart\\|heartEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "CategoryTheory/Triangulated/TStructure/Heart.lean:45 `def heart : ObjectProperty C := t.le 0 ⊓ t.ge 0` for `t : TStructure C`; class `TStructure.Heart` (a category identified with the full subcategory `t.heart`), `hasHeartFullSubcategory`; no `heartEquivalence` anywhere; the file's TODO says the heart is not yet shown abelian",
+   "date": "2026-10-09",
+   "verdict": "generalization of the last step only: once the standard t-structure t on D^b_c(Y,Λ) is built, Sh_c(Y,Λ) is `t.heart.FullSubcategory` in one line; the categories D^b_c(Y,Λ) and their t-structure are not in Mathlib (see def-weil-constructible-standard-tstructure)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'noncomputable def TStructure.t\\|isLE_iff_isZero_truncGT_obj\\|isGE_iff_isZero_truncLE_obj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Algebra/Homology/DerivedCategory/TStructure.lean:34 `DerivedCategory.TStructure.t` (canonical t-structure on DerivedCategory C, C abelian); CategoryTheory/Triangulated/TStructure/TruncLEGT.lean:257 `isLE_iff_isZero_truncGT_obj`, :262 `isGE_iff_isZero_truncLE_obj` (the characterizations τ^{≥n+1}K=0, τ^{≤n-1}K=0 displayed in the statement)",
+   "date": "2026-10-09",
+   "verdict": "the displayed characterizations are Mathlib lemmas for any t-structure; no match for the coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/",
+   "results": "AbelianSubcategory.lean:308 `abelian` (a criterion making a full subcategory of a triangulated category abelian, under Hom-vanishing and admissibility hypotheses); no instance or theorem that `t.heart` is abelian",
+   "date": "2026-10-09",
+   "verdict": "no match for 'the heart is abelian' (prop-weil-heart-abelian stays an item)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -42,5 +71,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-constructible-heart",
+  "worker": "stage1",
+  "summary": "Checked against the master blueprint text (no slopmaster2 copy, no Lean). The source defines Sh_c(Y,Λ), Λ∈{E,Qlb}, as the intersection of {τ^{≥1}K=0} and {τ^{≤-1}K=0} for truncation functors 'obtained from the standard t-structure', a t-structure no node defined for these categories. New definition node def-weil-constructible-standard-tstructure gives the standard pair explicitly (integral level by cohomology sheaves of \\hat O_{E,Y}-modules, rational level as isomorphism closure of the integral classes, following prop-weil-localized-tstructure and Bhatt–Scholze 6.8.11(3)/6.8.14(2), Qlb level as isomorphism closure of finite stages). The item now says that this pair is a bounded t-structure by prop-constructible-truncations (the existing statement of the constructible truncations for Λ∈{E,Qlb}), uses the general notion of t-structure and heart def-weil-t-structure (Mathlib: TStructure, TStructure.heart), keeps the τ-characterization of the source as the general t-structure fact (Mathlib isLE_iff_isZero_truncGT_obj / isGE_iff_isZero_truncLE_obj), and cites prop-weil-heart-abelian for 'abelian' (Mathlib lacks it). Added the deps on def-weil-l-adic-numbers, def-weil-algebraic-closure, def-weil-l-adic-coefficient-extension, which the statement uses. Removed the source's closing gloss ('its objects are constructible Λ-adic sheaves whose finite-level reductions satisfy the finite-torsion constructibility condition'), which uses an undefined notion and is not part of the definition; the finite-torsion condition is kept where the source states it for integral representatives."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
