@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+ "kind": "statement",
+ "title": "A morphism with image in an open subscheme factors uniquely through it",
+ "statement": "Let $h:T\\to X$ be a morphism of schemes [def-pc-scheme] and let $U\\subseteq X$ be an open subscheme with inclusion $j_U:U\\to X$ (an open immersion [def-weil-open-immersion]) such that $h(T)\\subseteq U$ as sets. Then there is a unique morphism of schemes $h':T\\to U$ with $j_U\\circ h'=h$. In particular, for a morphism $f:X\\to S$ and open subschemes $U\\subseteq X$, $V\\subseteq S$ with $f(U)\\subseteq V$ there is a unique morphism $f_{U,V}:U\\to V$ with $j_V\\circ f_{U,V}=f\\circ j_U$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HI (lemma-restrict-map-to-opens), for locally ringed spaces; schemes are a full subcategory of locally ringed spaces and open subspaces of schemes are schemes, Lemma 01IK (lemma-open-subspace-scheme)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes whose image lies in an open subscheme factors uniquely through the open immersion",
+   "results": "AlgebraicGeometry.IsOpenImmersion.lift (Mathlib.AlgebraicGeometry.OpenImmersion), LocallyRingedSpace.IsOpenImmersion.instOfRestrict, Scheme.ofRestrict, Scheme.Opens.instIsOpenImmersionι (Restrict), PresheafedSpace.IsOpenImmersion.toSchemeHom",
+   "date": "2026-10-10",
+   "verdict": "match: IsOpenImmersion.lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.lift",
+   "results": "IsOpenImmersion.lift (f g) (H' : Set.range g ⊆ Set.range f) : Y ⟶ X; IsOpenImmersion.lift_fac : lift f g H' ≫ f = g; IsOpenImmersion.lift_uniq : l ≫ f = g → l = lift f g H'; instLift; isPullback_lift_id (Mathlib.AlgebraicGeometry.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift\\|theorem lift_fac\\|theorem lift_uniq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean; grep -n 'def resLE\\|lemma resLE_comp_ι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Restrict.lean",
+   "results": "OpenImmersion.lean:701 def lift, :705 lift_fac, :708 lift_uniq (docstring: universal property of open immersions); Restrict.lean:775 Scheme.Hom.resLE, :789 resLE_comp_ι",
+   "date": "2026-10-10",
+   "verdict": "match: read at the source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.lift_fac, AlgebraicGeometry.IsOpenImmersion.lift_uniq",
+  "file": "Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "line": 701,
+  "how": "exact: for the open immersion j_U = U.ι and g = h with Set.range h ⊆ Set.range U.ι, lift (line 701) is h', lift_fac (705) is j_U ∘ h' = h and lift_uniq (708) is uniqueness; the 'in particular' is Scheme.Hom.resLE with resLE_comp_ι (Mathlib/AlgebraicGeometry/Restrict.lean:775, 789)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

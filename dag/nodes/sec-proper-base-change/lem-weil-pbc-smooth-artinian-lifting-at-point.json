@@ -14,9 +14,96 @@
   "def-weil-affine-spectrum",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Affine neighbourhoods.) As $S$ is locally Noetherian [pqf-def-locnoeth], it has an affine open cover by opens with Noetherian rings of sections; choose a member $V\\ni f(x)$ and put $R=\\mathcal O_S(V)$, a Noetherian ring [def-weil-pbc-noetherian-ring]. As $f$ is locally of finite type [def-weil-finite-type-morphism], the open $f^{-1}(V)\\ni x$ is covered by affine opens $\\operatorname{Spec}A$ with $A$ a finitely generated $R$-algebra; choose one, $U\\ni x$, and put $A=\\mathcal O_X(U)$. Then $f(U)\\subseteq V$; let $j_U:U\\to X$, $j_V:V\\to S$ be the inclusions and $f_{U,V}:U\\to V$ the unique morphism with $j_V\\circ f_{U,V}=f\\circ j_U$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Fix isomorphisms $U\\cong\\operatorname{Spec}A$, $V\\cong\\operatorname{Spec}R$ [def-pc-scheme]; under them $f_{U,V}$ is $\\pi=\\operatorname{Spec}\\varphi_0$ for a unique ring map $\\varphi_0:R\\to A$ [def-weil-affine-spectrum], the one making $A$ a finitely generated $R$-algebra, and $x$ is a prime $\\mathfrak q\\subset A$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HX (lemma-lifting-along-artinian-at-point, line 3575), proof (reduction to affines, then Algebra Lemma 02HT)"
+   }
+  },
+  {
+   "text": "(Test diagrams at $x$ are diagrams of rings.) Let $\\varphi:B'\\to B$ be a small extension and $i=\\operatorname{Spec}\\varphi$. By [lem-weil-pbc-artinian-local-unique-prime] $\\operatorname{Spec}B=\\{\\mathfrak m_B\\}$ and $\\operatorname{Spec}B'=\\{\\mathfrak m_{B'}\\}$, and $i(\\mathfrak m_B)=\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m_{B'}$. Let $\\alpha:\\operatorname{Spec}B\\to X$, $\\beta:\\operatorname{Spec}B'\\to S$ with $f\\circ\\alpha=\\beta\\circ i$ and $\\alpha(\\mathfrak m_B)=x$. Then $\\alpha(\\operatorname{Spec}B)=\\{x\\}\\subseteq U$ and $\\beta(\\operatorname{Spec}B')=\\{\\beta(i(\\mathfrak m_B))\\}=\\{f(x)\\}\\subseteq V$, so $\\alpha=j_U\\circ\\alpha_U$, $\\beta=j_V\\circ\\beta_V$ for unique $\\alpha_U,\\beta_V$ [lem-weil-pbc-morphism-factors-through-open-subscheme], and via the isomorphisms of step 1, $\\alpha_U=\\operatorname{Spec}a$, $\\beta_V=\\operatorname{Spec}\\rho$ for unique ring maps $a:A\\to B$, $\\rho:R\\to B'$ [def-weil-affine-spectrum]. Since $\\operatorname{Spec}a$ sends a prime $P$ to $a^{-1}(P)$, $\\alpha(\\mathfrak m_B)=x$ means $a^{-1}(\\mathfrak m_B)=\\mathfrak q$. As $j_V$ is a monomorphism [lem-weil-pbc-open-immersion-monomorphism], $f\\circ\\alpha=\\beta\\circ i$, i.e. $j_V\\circ f_{U,V}\\circ\\alpha_U=j_V\\circ\\beta_V\\circ i$, is equivalent to $f_{U,V}\\circ\\alpha_U=\\beta_V\\circ i$, i.e. $\\operatorname{Spec}(a\\circ\\varphi_0)=\\operatorname{Spec}(\\varphi\\circ\\rho)$, i.e. $a\\circ\\varphi_0=\\varphi\\circ\\rho$ (functoriality and uniqueness in [def-weil-affine-spectrum]). Conversely, ring maps $a,\\rho$ with $a\\circ\\varphi_0=\\varphi\\circ\\rho$ and $a^{-1}(\\mathfrak m_B)=\\mathfrak q$ give the test pair $\\alpha=j_U\\circ\\operatorname{Spec}a$, $\\beta=j_V\\circ\\operatorname{Spec}\\rho$ at $x$. So the test data of condition (2) for $f$ at $x$ correspond bijectively to the data $(\\varphi,\\rho,a)$ of condition (2) of [lem-weil-pbc-smooth-at-prime-artinian-lifting] for $(R,\\varphi_0,\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HX (lemma-lifting-along-artinian-at-point, line 3575), proof (reduction to affines, then Algebra Lemma 02HT)"
+   }
+  },
+  {
+   "text": "(Lifts correspond.) In the situation of step 2, let $\\gamma:\\operatorname{Spec}B'\\to X$ satisfy $\\gamma\\circ i=\\alpha$. Its image is $\\{\\gamma(i(\\mathfrak m_B))\\}=\\{x\\}\\subseteq U$, so $\\gamma=j_U\\circ\\gamma_U$ with $\\gamma_U=\\operatorname{Spec}a'$ for a unique ring map $a':A\\to B'$ [lem-weil-pbc-morphism-factors-through-open-subscheme, def-weil-affine-spectrum]. Since $j_U$ and $j_V$ are monomorphisms [lem-weil-pbc-open-immersion-monomorphism], $\\gamma\\circ i=\\alpha$ iff $\\gamma_U\\circ i=\\alpha_U$ iff $\\operatorname{Spec}(\\varphi\\circ a')=\\operatorname{Spec}a$ iff $\\varphi\\circ a'=a$, and $f\\circ\\gamma=\\beta$, i.e. $j_V\\circ f_{U,V}\\circ\\gamma_U=j_V\\circ\\beta_V$, iff $\\operatorname{Spec}(a'\\circ\\varphi_0)=\\operatorname{Spec}\\rho$ iff $a'\\circ\\varphi_0=\\rho$. Conversely a ring map $a'$ with $\\varphi\\circ a'=a$ and $a'\\circ\\varphi_0=\\rho$ gives $\\gamma=j_U\\circ\\operatorname{Spec}a'$ with $\\gamma\\circ i=\\alpha$ and $f\\circ\\gamma=\\beta$. With step 2: condition (2) of this lemma for $f$ at $x$ holds iff condition (2) of [lem-weil-pbc-smooth-at-prime-artinian-lifting] holds for $(R,\\varphi_0,\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HX (lemma-lifting-along-artinian-at-point, line 3575), proof (reduction to affines, then Algebra Lemma 02HT)"
+   }
+  },
+  {
+   "text": "(Smoothness at $x$ is smoothness at $\\mathfrak q$.) Suppose (1): $U'\\ni x$ open with $f|_{U'}:U'\\to S$ smooth [def-sbc-smooth-morphisms]. Then $W_0=U\\cap U'$ is open in $U'$ and in $U$, contains $x$, and $f|_{U'}(W_0)\\subseteq V$; by [lem-weil-pbc-smooth-restrict-open-subschemes] (a) applied to $f|_{U'}$, the induced $W_0\\to V$ is smooth, and by uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] it is the restriction of $f_{U,V}$ to $W_0$. Under $U\\cong\\operatorname{Spec}A$, $V\\cong\\operatorname{Spec}R$, $W_0$ corresponds to an open $W\\ni\\mathfrak q$ of $\\operatorname{Spec}A$ and $W_0\\to V$ to $\\pi|_W$, which is therefore smooth by [lem-weil-pbc-smooth-restrict-open-subschemes] (c): condition (1) of [lem-weil-pbc-smooth-at-prime-artinian-lifting] holds. Conversely, given an open $W\\ni\\mathfrak q$ of $\\operatorname{Spec}A$ with $\\pi|_W$ smooth, let $W_0\\subseteq U$ be the corresponding open; it is open in $X$ and contains $x$, the restriction $W_0\\to V$ of $f_{U,V}$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes] (c), and by [lem-weil-pbc-smooth-restrict-open-subschemes] (b) applied to $f$ with the opens $W_0\\subseteq X$, $V\\subseteq S$, $f|_{W_0}:W_0\\to S$ is smooth. So (1) holds with the open $W_0$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HX (lemma-lifting-along-artinian-at-point, line 3575), proof (reduction to affines, then Algebra Lemma 02HT)"
+   }
+  },
+  {
+   "text": "(Conclusion.) $R$ is Noetherian and $\\varphi_0$ makes $A$ a finitely generated $R$-algebra (step 1), so by [lem-weil-pbc-smooth-at-prime-artinian-lifting] its conditions (1) and (2) for $(R,\\varphi_0,\\mathfrak q)$ are equivalent. By step 4 condition (1) of this lemma is equivalent to the first, and by steps 2 and 3 condition (2) of this lemma is equivalent to the second; hence (1)$\\Leftrightarrow$(2).",
+   "uses": [
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02HX, proof: 'In this affine case the lemma is identical to Algebra, Lemma 02HT'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HX (lemma-lifting-along-artinian-at-point), proof, (1)<=>(3); Algebra Lemma 02HT (lemma-smooth-test-artinian) for the affine case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,7 +159,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is More on Morphisms 02HX (1)<=>(3) with small extensions as in Algebra 02HS; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along the proof of 02HX, four new nodes: lem-weil-pbc-smooth-at-prime-artinian-lifting (02HT (1)<=>(3), unsplit; carries the identification of 'smooth at q' with the DAG's smoothness), and three Mathlib leaves verified by line: lem-weil-pbc-smooth-restrict-open-subschemes (Smooth of resLE, Morphisms/Smooth.lean:200; smooth_comp :109; arrow_mk_iso_iff; under the accepted identification of Mathlib's Smooth with def-sbc-smooth-morphisms), lem-weil-pbc-morphism-factors-through-open-subscheme (IsOpenImmersion.lift/lift_fac/lift_uniq, OpenImmersion.lean:701-708), lem-weil-pbc-artinian-local-unique-prime (IsArtinianRing.isMaximal_of_isPrime, Artinian/Module.lean:550, with IsLocalRing.eq_maximalIdeal). Reduction to affine opens; test diagrams and lifts at x are diagrams of ring maps since Spec of an Artinian local ring is one point and open immersions are monomorphisms; smoothness at x transported to the affine chart; conclusion from 02HT."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "worker": "stage1",
+  "summary": "Checked the statement against More on Morphisms 02HX (1)<=>(3) and Algebra 02HS (tags verified in tags/tags: 02HX more-morphisms-lemma-lifting-along-artinian-at-point, 02HT algebra-lemma-smooth-test-artinian, 02HS algebra-definition-small-extension, 01V5, 01V6 morphisms-lemma-smooth-characterize, 02H6 more-morphisms-lemma-smooth-formally-smooth); statement and stmt_deps kept. Wrote the Stacks proof in five steps: choice of affine opens V=Spec R (Noetherian, from the cover in the definition of locally Noetherian) and U=Spec A (finite type over R, from the definition of locally of finite type), so Properties/Morphisms 01T2 are not needed; translation of test diagrams and lifts into ring maps, using that Spec of an Artinian local ring is one point (instead of Stacks' appeal to Schemes Section 01J5), factorization through open subschemes and the monomorphism property of open immersions; identification of 'smooth at x' with 'Spec A -> Spec R smooth on an open neighbourhood of q' via restriction/composition/isomorphism invariance of smoothness; and the affine case, Algebra 02HT, as a new unsplit node phrased with the DAG's smoothness (the identification with Stacks' 'smooth at q', 00TB/01V6/02H6, is left to its split). New nodes: lem-weil-pbc-smooth-at-prime-artinian-lifting (unsplit), lem-weil-pbc-smooth-restrict-open-subschemes, lem-weil-pbc-morphism-factors-through-open-subscheme, lem-weil-pbc-artinian-local-unique-prime (Mathlib leaves). Item's own Lean state none; its Mathlib search was already recorded."
  }
 }

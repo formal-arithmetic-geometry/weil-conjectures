@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-smooth-restrict-open-subschemes",
+ "kind": "statement",
+ "title": "Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $U\\subseteq X$ and $V\\subseteq S$ be open subschemes with inclusions $j_U:U\\to X$, $j_V:V\\to S$ and $f(U)\\subseteq V$, and let $f_{U,V}:U\\to V$ be the unique morphism with $j_V\\circ f_{U,V}=f\\circ j_U$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Then: (a) if $f$ is smooth [def-sbc-smooth-morphisms], then $f_{U,V}$ is smooth; (b) if $f_{U,V}$ is smooth, then $f\\circ j_U:U\\to S$ is smooth; (c) if $u:X'\\to X$ and $v:S'\\to S$ are isomorphisms of schemes and $f':X'\\to S'$ satisfies $v\\circ f'=f\\circ u$, then $f$ is smooth if and only if $f'$ is smooth.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01V6 (lemma-smooth-characterize), final assertion, for (a); Lemma 01VC (lemma-open-immersion-smooth) and Lemma 01VA (lemma-composition-smooth) for (b); the smooth morphisms of Morphisms Section 01V4 are those of [def-sbc-smooth-morphisms] by More on Morphisms, Lemma 02H6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a smooth morphism of schemes to open subschemes U → V is smooth",
+   "results": "AlgebraicGeometry.IsSmooth (older name, Morphisms.Smooth), AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.Scheme.Hom.resLE (Mathlib.AlgebraicGeometry.Restrict), morphismRestrict_base",
+   "date": "2026-10-10",
+   "verdict": "generalization: resLE is the node's f_{U,V}; smoothness of it found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth (AlgebraicGeometry.Scheme.Hom.resLE _ _ _ _)",
+   "results": "AlgebraicGeometry.instSmoothResLE : [Smooth f] : Smooth (Scheme.Hom.resLE f V U e) (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "match for (a)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; grep -n 'lemma resLE_comp_ι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Restrict.lean; grep -n 'theorem arrow_mk_iso_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Basic.lean",
+   "results": "Smooth.lean:109 instance smooth_comp [Smooth f] [Smooth g] : Smooth (f ≫ g); :183 instance [IsOpenImmersion f] : Smooth f; :200 instance [Smooth f] : Smooth (f.resLE V U e); Restrict.lean:789 resLE_comp_ι : f.resLE U V e ≫ U.ι = V.ι ≫ f; MorphismProperty/Basic.lean:535 arrow_mk_iso_iff [RespectsIso P] (Smooth respects isomorphisms as an IsZariskiLocalAtTarget property from HasRingHomProperty, Smooth.lean:73)",
+   "date": "2026-10-10",
+   "verdict": "match: one Mathlib lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instSmoothResLE; AlgebraicGeometry.smooth_comp; AlgebraicGeometry.Smooth of IsOpenImmersion (instance); CategoryTheory.MorphismProperty.arrow_mk_iso_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "line": 200,
+  "how": "one Mathlib lemma per clause: (a) instance `Smooth (f.resLE V U e)` for [Smooth f] (Smooth.lean:200), f_{U,V} being Scheme.Hom.resLE (Restrict.lean:775, resLE_comp_ι :789); (b) f ≫ ... : U.ι ≫ f = f.resLE V U e ≫ V.ι (resLE_comp_ι) is smooth by smooth_comp (Smooth.lean:109) and the instance that open immersions are smooth (Smooth.lean:183); (c) MorphismProperty.arrow_mk_iso_iff (Mathlib/CategoryTheory/MorphismProperty/Basic.lean:535) with RespectsIso @Smooth. Mathlib's Smooth is identified with [def-sbc-smooth-morphisms] by the match recorded on that node (Stacks 02H6), as for lem-weil-pbc-smooth-coproduct"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

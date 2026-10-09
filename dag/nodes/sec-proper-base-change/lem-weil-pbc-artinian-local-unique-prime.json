@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-artinian-local-unique-prime",
+ "kind": "statement",
+ "title": "An Artinian local ring has exactly one prime ideal",
+ "statement": "Let $B$ be an Artinian local ring with maximal ideal $\\mathfrak m_B$. Then every prime ideal of $B$ equals $\\mathfrak m_B$; hence $\\operatorname{Spec}B$ [def-weil-affine-spectrum] has exactly one point, $\\mathfrak m_B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00KH (lemma-Noetherian-dimension-0, line 14364): an Artinian ring is Noetherian of dimension 0, so every prime is maximal; a local ring has one maximal ideal"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every prime ideal of an Artinian local ring equals the maximal ideal",
+   "results": "IsArtinianRing.isMaximal_of_isPrime, IsArtinianRing.isPrime_iff_isMaximal (Mathlib.RingTheory.Artinian.Module), IsLocalRing.le_maximalIdeal_of_isPrime (LocalRing.MaximalIdeal.Basic), instIsJacobsonRingOfIsArtinianRing",
+   "date": "2026-10-10",
+   "verdict": "match: isMaximal_of_isPrime with IsLocalRing.eq_maximalIdeal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the prime spectrum of an Artinian local ring has exactly one point",
+   "results": "IsArtinianRing.isMaximal_of_isPrime, IsArtinianRing.isPrime_iff_isMaximal, IsArtinianRing.primeSpectrumEquivMaximalSpectrum (Artinian.Module), PrimeSpectrum.unique_of_ringKrullDimLE_zero (Mathlib.RingTheory.KrullDimension.Zero: Unique (PrimeSpectrum R) for local R of Krull dimension <= 0)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isMaximal_of_isPrime\\|isPrime_iff_isMaximal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Artinian/; grep -n 'theorem eq_maximalIdeal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean; grep -n 'unique_of_ringKrullDimLE_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Zero.lean",
+   "results": "Artinian/Module.lean:550 instance isMaximal_of_isPrime (p) [p.IsPrime] [IsArtinianRing R] : p.IsMaximal; :554 isPrime_iff_isMaximal; LocalRing/MaximalIdeal/Basic.lean:56 eq_maximalIdeal (hI : I.IsMaximal) : I = maximalIdeal R; KrullDimension/Zero.lean:178 instance PrimeSpectrum.unique_of_ringKrullDimLE_zero [IsLocalRing R] : Unique (PrimeSpectrum R)",
+   "date": "2026-10-10",
+   "verdict": "match: read at the source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsArtinianRing.isMaximal_of_isPrime, IsLocalRing.eq_maximalIdeal",
+  "file": "Mathlib/RingTheory/Artinian/Module.lean",
+  "line": 550,
+  "how": "specializes in one line: a prime p of B is maximal by IsArtinianRing.isMaximal_of_isPrime (Artinian/Module.lean:550), hence p = maximalIdeal B by IsLocalRing.eq_maximalIdeal (Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean:56); the one-point spectrum is also the instance PrimeSpectrum.unique_of_ringKrullDimLE_zero (Mathlib/RingTheory/KrullDimension/Zero.lean:178)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

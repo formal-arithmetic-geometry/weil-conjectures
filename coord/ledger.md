@@ -422,3 +422,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:16 UTC (2026-10-09) — Reviewed and committed limit-pullback-sections-colimit (09YU/09YQ in degree 0; 7 steps, 1 new unsplit node). Stage-3 note: associativity of the composition isomorphism is stated only in lem-weil-pbc-derived-inverse-image-composition, while lem-weil-pbc-etale-cohomology-limit-of-schemes cites the underived node for it.
 - 20:20 UTC (2026-10-09) — Reviewed and committed spectral-closed-clopen-decomposition-lift (0CAM; 5 steps, 2 new unsplit nodes for 0A31 and 0903).
 - 20:21 UTC (2026-10-09) — Reviewed and committed spectral-closed-subspace (0902 closed case; 2 Mathlib leaves) and spectral-constructible-finite-intersection (0901; 2 Mathlib leaves incl. the definition of the constructible topology, 1 unsplit).
+- 20:23 UTC (2026-10-09) — Reviewed and committed smooth-artinian-lifting-at-point (02HX; 5 steps, 4 new nodes: 3 Mathlib leaves, 02HT unsplit).
