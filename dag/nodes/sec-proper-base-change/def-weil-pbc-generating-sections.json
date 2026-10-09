@@ -19,7 +19,7 @@
    "query": "global sections generate a sheaf of modules: the map from the free sheaf is an epimorphism",
    "results": "SheafOfModules.GeneratingSections (.epi, .mk, .ofEpi, .π) (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), SheafOfModules.generatorsOfIsCokernelFree_π (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent)",
    "date": "2026-10-09",
-   "verdict": "candidate: SheafOfModules.GeneratingSections"
+   "verdict": "near match only: SheafOfModules.GeneratingSections records an epimorphic free-sheaf map, but the required local-surjectivity formulation is not stated there"
   },
   {
    "tool": "loogle",
@@ -37,7 +37,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +57,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-generating-sections",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Project Modules Tag 01AM and Sheaves Tag 007U. The statement explicitly gives the finite free-sheaf map, its local expression for surjectivity, and the existence of a generating family. Its only dependency is def-pc-scheme. LeanSearch, Loogle, and Mathlib source grep found only the near match SheafOfModules.GeneratingSections, whose categorical epimorphism formulation does not state the required local-surjectivity equivalence, so this node remains a non-Mathlib definition leaf for later formalization."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the definition against Stacks 01AM/007U: the finite free map and its local surjectivity are as in the source; the SheafOfModules.GeneratingSections near-match correctly left unmatched (epimorphism vs local surjectivity is a theorem)"
+ }
 }
