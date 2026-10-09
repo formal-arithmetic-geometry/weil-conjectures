@@ -573,6 +573,89 @@ theorem exists_notMem_forall_mul_mem_map_of_tensor {R₀ A S₀ : Type u} [CommR
     LinearEquiv.map_zero, map_pow, smul_tmul', smul_eq_mul] at this
   exact this
 
+lemma _root_.Algebra.TensorProduct.smul_eq_tmul_one_mul {R B K : Type*} [CommRing R] [CommRing B]
+    [CommRing K] [Algebra R B] [Algebra R K] (b : B) (x : B ⊗[R] K) :
+    b • x = (b ⊗ₜ[R] (1 : K)) * x := by
+  induction x with
+  | zero => simp
+  | add x y hx hy => rw [smul_add, hx, hy, mul_add]
+  | tmul c k => rw [smul_tmul', Algebra.TensorProduct.tmul_mul_tmul, one_mul, smul_eq_mul]
+
+/-- **Noetherian approximation** (Stacks, Tag 00QN). A finitely presented `A`-algebra `B`, together
+with two of its elements, is the base change of a finite type algebra `S₀` over a noetherian ring
+`R₀` mapping to `A`, the two elements coming from `S₀`. -/
+theorem exists_noetherian_model {A : Type u} {B : Type*} [CommRing A] [CommRing B] [Algebra A B]
+    [Algebra.FinitePresentation A B] (f t : B) :
+    ∃ (R₀ : Type u) (_ : CommRing R₀) (_ : IsNoetherianRing R₀) (_ : Algebra R₀ A) (S₀ : Type u)
+      (_ : CommRing S₀) (_ : Algebra R₀ S₀) (_ : Algebra.FiniteType R₀ S₀)
+      (e : A ⊗[R₀] S₀ ≃ₐ[A] B) (f₀ t₀ : S₀), e (1 ⊗ₜ f₀) = f ∧ e (1 ⊗ₜ t₀) = t := by
+  classical
+  let P := Algebra.Presentation.ofFinitePresentation A B
+  obtain ⟨F, rfl⟩ := P.aeval_val_surjective f
+  obtain ⟨T, rfl⟩ := P.aeval_val_surjective t
+  let R₀ := Algebra.adjoin P.Core ((F.coeffs ∪ T.coeffs : Finset A) : Set A)
+  have : Algebra.FiniteType ℤ R₀ :=
+    Algebra.FiniteType.trans (S := P.Core) inferInstance
+      (Algebra.FiniteType.adjoin_of_finite (Finset.finite_toSet _))
+  have : IsNoetherianRing R₀ := Algebra.FiniteType.isNoetherianRing ℤ R₀
+  let e : A ⊗[R₀] P.ModelOfHasCoeffs R₀ ≃ₐ[A] B := P.tensorModelOfHasCoeffsEquiv R₀
+  have hlift (X : MvPolynomial (Fin (Algebra.Presentation.ofFinitePresentationVars A B)) A)
+      (hX : (X.coeffs : Set A) ⊆ R₀) :
+      ∃ x₀ : P.ModelOfHasCoeffs R₀, e (1 ⊗ₜ x₀) = MvPolynomial.aeval P.val X := by
+    obtain ⟨X₀, rfl⟩ : X ∈ Set.range (MvPolynomial.map (algebraMap R₀ A)) := by
+      rw [MvPolynomial.mem_range_map_iff_coeffs_subset]
+      intro a ha
+      exact ⟨⟨a, hX ha⟩, rfl⟩
+    refine ⟨Ideal.Quotient.mk _ X₀, ?_⟩
+    rw [MvPolynomial.aeval_map_algebraMap, ← P.tensorModelOfHasCoeffsEquiv_symm_tmul R₀]
+    exact e.apply_symm_apply _
+  obtain ⟨f₀, hf₀⟩ := hlift F (subset_trans (by simp) Algebra.subset_adjoin)
+  obtain ⟨t₀, ht₀⟩ := hlift T (subset_trans (by simp) Algebra.subset_adjoin)
+  exact ⟨R₀, inferInstance, inferInstance, inferInstance, P.ModelOfHasCoeffs R₀, inferInstance,
+    inferInstance, inferInstance, e, f₀, t₀, hf₀, ht₀⟩
+
+/-- **The local criterion for regular elements over a non-noetherian base** (Stacks, Tags 046Z
+and 00MF). Let `B` be flat and of finite presentation over `A`, `q` a prime of `B` and `K` an
+`A`-algebra whose kernel is `q ∩ A`. Let `f, t ∈ B` with `t ∉ q`, such that `t` kills the kernel of
+`f` on `B ⊗[A] K`. Then there is `g ∉ q` such that `f` is a nonzerodivisor on `B_g ⧸ J B_g` for
+every ideal `J` of `A`. -/
+theorem exists_notMem_forall_mul_mem_map {A : Type u} {B : Type*} [CommRing A] [CommRing B]
+    [Algebra A B] [Module.Flat A B] [Algebra.FinitePresentation A B] (q : Ideal B) [q.IsPrime]
+    (f t : B) (ht : t ∉ q) {K : Type*} [CommRing K] [Algebra A K]
+    (hK : RingHom.ker (algebraMap A K) = q.comap (algebraMap A B))
+    (hfib : ∀ x : B ⊗[A] K, f • x = 0 → t • x = 0) :
+    ∃ g ∉ q, ∀ (J : Ideal A) (x : B), f * x ∈ J.map (algebraMap A B) →
+      ∃ n : ℕ, g ^ n * x ∈ J.map (algebraMap A B) := by
+  obtain ⟨R₀, _, _, _, S₀, _, _, _, e, f₀, t₀, hf₀, ht₀⟩ := exists_noetherian_model (A := A) f t
+  have : Module.Flat A (A ⊗[R₀] S₀) := Module.Flat.of_linearEquiv e.toLinearEquiv
+  have he : (e : A ⊗[R₀] S₀ →+* B).comp (algebraMap A _) = algebraMap A B :=
+    RingHom.ext fun a ↦ e.commutes a
+  set q' := q.comap (e : A ⊗[R₀] S₀ →+* B)
+  let E : (A ⊗[R₀] S₀) ⊗[A] K ≃ₐ[A] B ⊗[A] K := Algebra.TensorProduct.congr e AlgEquiv.refl
+  have hE (b : A ⊗[R₀] S₀) (x : (A ⊗[R₀] S₀) ⊗[A] K) : E (b • x) = e b • E x := by
+    rw [Algebra.TensorProduct.smul_eq_tmul_one_mul, Algebra.TensorProduct.smul_eq_tmul_one_mul,
+      map_mul]
+    rfl
+  obtain ⟨g, hg, hP⟩ := exists_notMem_forall_mul_mem_map_of_tensor q' f₀ t₀
+    (by change e (1 ⊗ₜ t₀) ∉ q; rwa [ht₀])
+    (by rw [hK, Ideal.comap_comap, he])
+    (fun x hx ↦ by
+      apply E.injective
+      rw [hE, map_zero, ht₀]
+      apply hfib
+      rw [← hf₀, ← hE, hx, map_zero])
+  have hmap (J : Ideal A) (y : A ⊗[R₀] S₀) : e y ∈ J.map (algebraMap A B) ↔
+      y ∈ J.map (algebraMap A (A ⊗[R₀] S₀)) := by
+    have he' : (e.toRingEquiv : A ⊗[R₀] S₀ →+* B).comp (algebraMap A _) = algebraMap A B := he
+    rw [← he', ← Ideal.map_map, Ideal.map_comap_of_equiv, Ideal.mem_comap]
+    simp
+  refine ⟨e g, hg, fun J x hx ↦ ?_⟩
+  obtain ⟨x, rfl⟩ := e.surjective x
+  obtain ⟨n, hn⟩ := hP J x (by
+    rw [← hmap, map_mul, hf₀]
+    exact hx)
+  exact ⟨n, by rw [← map_pow, ← map_mul, hmap]; exact hn⟩
+
 end Algebra
 
 
