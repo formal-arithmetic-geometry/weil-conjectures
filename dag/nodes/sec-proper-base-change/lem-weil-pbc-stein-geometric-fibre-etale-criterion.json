@@ -12,9 +12,57 @@
   "def-pc-scheme-fibre",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $k=\\kappa(s)$. For an etale neighbourhood $(U,u)\\to(S,s)$, the residue-field map $k\\to\\kappa(u)$ is a finite separable extension by [lem-weil-pbc-etale-residue-field-extension-separable]. Associativity of fibre products identifies the fibre $X_u$ with the base change $X_s\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(u)$ (the fibre and base-change conventions are [def-pc-scheme-fibre] and [def-pc-base-change]).",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-base-change",
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224), with the fibre-product identification written out"
+   }
+  },
+  {
+   "text": "If $X_s$ is geometrically connected, then its base change along every field extension of $k$ is connected by [def-pc-geometrically-irreducible]. Applying this to the finite separable extension $k\\subseteq\\kappa(u)$ from Step 1 and using the fibre identification there shows that every etale-neighbourhood fibre $X_u$ is connected.",
+   "uses": [
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224)"
+   }
+  },
+  {
+   "text": "Conversely, assume every etale-neighbourhood fibre is connected. If $X_s$ were not geometrically connected, [lem-weil-pbc-geometrically-connected-finite-separable-test] would provide a finite separable extension $k\\subseteq k'$ for which $X_s\\times_k\\operatorname{Spec}k'$ is disconnected. By [lem-weil-pbc-etale-neighbourhood-prescribed-residue-field] there is an affine etale neighbourhood $(U,u)\\to(S,s)$ whose residue extension $\\kappa(u)/k$ is identified with $k'/k$. Under that identification Step 1 identifies $X_u$ with the disconnected base change, contradicting the hypothesis. Therefore $X_s$ is geometrically connected.",
+   "uses": [
+    "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 03GZ, proof, second paragraph (lines 15226--15233), using Varieties Lemma 0389 and Lemma 02LF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-pc-base-change",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-geometrically-connected-finite-separable-test",
+  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 37.53.6 (Tag 03GZ, label lemma-characterize-geometrically-connected-fibres), proof lines 15221--15233"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +107,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+  "worker": "stage1",
+  "summary": "Split along More on Morphisms Tag 03GZ. The fibre over an etale point is identified with the base change of X_s along its finite separable residue extension (02G8 and the fibre/base-change conventions); the forward implication is geometric connectedness under field base change; the converse uses the finite-separable characterization of geometric connectedness (new public Tag 0389 node) and realizes the witnessing extension by an etale neighbourhood (02LF)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 3 steps along 03GZ; 0389 (varieties-lemma-characterize-geometrically-disconnected) new unsplit node matches the Stacks statement; 02G8 and 02LF nodes exist; def-pc-geometrically-irreducible defines geometric connectedness; correct. L adds the missing citation of that definition in the item statement in a follow-up commit."
+ }
 }
