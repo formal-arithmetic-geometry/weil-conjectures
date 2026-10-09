@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-finite-permanence-over-separated",
+ "kind": "statement",
+ "title": "A morphism whose composite with a separated morphism is finite is finite",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. If $g\\circ f$ is finite [def-weil-finite-integral-morphism] and $g$ is separated [def-weil-pbc-scheme-conventions], then $f$ is finite. In particular, a morphism over $Z$ between two schemes finite over $Z$ is finite (finite morphisms are affine, hence separated).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 035D (lemma-finite-permanence, line 11203), part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if g ∘ f is finite and g is separated then f is finite morphism of schemes",
+   "results": "AlgebraicGeometry.IsFinite.of_comp, IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, IsFinite.mk (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match: IsFinite.of_comp"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition g ∘ f finite and g separated implies f finite (schemes)",
+   "results": "AlgebraicGeometry.IsFinite.of_comp, IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsFinite.comp_iff, IsFinite.instCompScheme (Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match: IsFinite.of_comp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_comp\\|comp_iff\\|HasOfPostcompProperty' Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "Finite.lean:147 instance HasOfPostcompProperty @IsFinite @IsSeparated; :151 lemma of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f; :154 comp_iff [IsFinite g] : IsFinite (f ≫ g) ↔ IsFinite f",
+   "date": "2026-10-10",
+   "verdict": "match, source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "how": "exact: `IsFinite.of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f` (Finite.lean:151; `f ≫ g` is g∘f); IsFinite is the node's definition (def-weil-finite-integral-morphism's match). The 'in particular' clause: `IsFinite.comp_iff` (Finite.lean:154) with g finite, or of_comp with the instance IsSeparated.of_isAffineHom"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf IsFinite.of_comp, Finite.lean:151 [IsFinite (f ≫ g)] [IsSeparated g]; checked."
+ }
+}

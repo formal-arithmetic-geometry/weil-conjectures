@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+ "kind": "statement",
+ "title": "An integral quasi-coherent algebra on a qcqs scheme is a directed colimit of finite (and finitely presented) quasi-coherent algebras",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. A *quasi-coherent $\\mathcal O_X$-algebra* is a sheaf of commutative $\\mathcal O_X$-algebras whose underlying $\\mathcal O_X$-module is quasi-coherent [pqf-def-coherent]; it is *finite* (resp. *integral*, resp. *of finite presentation*) if for every affine open $U=\\operatorname{Spec}R\\subseteq X$ the $R$-algebra $\\mathcal A(U)$ is finite, i.e. finitely generated as an $R$-module (resp. integral, i.e. every element is a root of a monic polynomial over $R$; resp. of finite presentation, i.e. isomorphic to $R[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$). Let $\\mathcal A$ be an integral quasi-coherent $\\mathcal O_X$-algebra. Then (1) $\\mathcal A$ is the directed colimit of its finite quasi-coherent $\\mathcal O_X$-subalgebras (these form a directed set under inclusion, and the inclusions induce an isomorphism from their colimit to $\\mathcal A$); and (2) there exist a directed set $I$, a system $(\\mathcal A_i,\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'})_{i\\le i'}$ over $I$ of quasi-coherent $\\mathcal O_X$-algebras each of which is finite and of finite presentation, and $\\mathcal O_X$-algebra maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$ with $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$, which induce an isomorphism $\\varinjlim_i\\mathcal A_i\\xrightarrow{\\sim}\\mathcal A$ [def-weil-pbc-category-colimit] (colimit in the category of sheaves of $\\mathcal O_X$-algebras, equivalently of quasi-coherent $\\mathcal O_X$-algebras). The maps $\\varphi_i$ need not be injective.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 0817 (lemma-integral-algebra-directed-colimit-finite, line 3424; proof lines 3436-3496, via Lemmas lemma-algebra-directed-colimit-finite-type (line 3349), lemma-finite-algebra-directed-colimit-finite-finitely-presented (line 3378), lemma-directed-colimit-finite-presentation, lemma-quasi-coherent-colimit-finite-type and Algebra, lemma-characterize-finite-in-terms-of-integral); the definitions of finite/integral/finitely presented quasi-coherent algebras at lines 3289-3293 and 3369-3374"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral algebra is the directed union of its finite subalgebras",
+   "results": "Subalgebra.coe_iSup_of_directed (Algebra.Subalgebra.Directed), IsIntegral.of_mem_of_fg, integralClosure, Algebra.IsIntegral.of_finite (IntegralClosure.Algebra.Basic), Algebra.finite_adjoin_of_finite_of_isIntegral (IntegralClosure.IsIntegral.Basic): ring-level ingredients (a finitely generated subalgebra of an integral algebra is finite), no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-level ingredient only: Algebra.finite_adjoin_of_finite_of_isIntegral)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral quasi-coherent algebra on a quasi-compact quasi-separated scheme is a filtered colimit of finite finitely presented algebras",
+   "results": "AlgHom.FinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation (Algebra.Category.ModuleCat.Sheaf.Quasicoherent), Algebra.FiniteType.of_finitePresentation, Algebra.FinitePresentation: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an integral R-algebra is a directed colimit of finite and finitely presented R-algebras",
+   "results": "Algebra.EssFiniteType, Algebra.QuasiFinite, AlgHom.FinitePresentation.of_finiteType, Algebra.FinitePresentation.of_finiteType, exists_integral_inj_algHom_of_fg, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit: none states it, even for rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent sheaf of algebras on a scheme integral over the structure sheaf is a filtered colimit of finite quasi-coherent subalgebras",
+   "results": "isIntegral_of_isAffine_of_isDomain, IsIntegral.component_integral, affine_isIntegral_iff (AlgebraicGeometry.Properties: integral schemes), IsFinite.iff_isIntegralHom_and_locallyOfFiniteType: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'relativeSpec|RelativeSpec|QuasicoherentAlgebra|quasiCoherentAlgebra' Mathlib/; grep -rln 'Algebra.IsIntegral' Mathlib/RingTheory | xargs grep -ln 'Directed|iSup|colimit'; grep -rn 'finite_of_fg|fg_adjoin_of_finite|IsIntegral.finite' Mathlib/RingTheory/IntegralClosure",
+   "results": "no quasi-coherent algebras or relative Spec in Mathlib; RingTheory hits are Algebra.IsIntegral.finite (IsIntegralClosure/Basic.lean:96, integral + finite type => finite), fg_adjoin_of_finite (IsIntegral/Basic.lean:214), unrelated directed-supremum lemmas",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib has no quasi-coherent sheaves of algebras)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 0817 (1)(2) with the definitions inline; correct; unsplit."
+ }
+}
