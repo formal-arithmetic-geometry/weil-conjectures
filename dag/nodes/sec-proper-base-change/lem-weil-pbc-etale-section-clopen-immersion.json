@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-etale-section-clopen-immersion",
+ "kind": "statement",
+ "title": "A section of a separated etale morphism is an open and closed immersion",
+ "statement": "Let $\\pi:P\\to U$ be a morphism of schemes [def-pc-scheme] that is etale [def-weil-etale-morphism] and separated [def-weil-proper-morphism], and let $s:U\\to P$ be a section, $\\pi\\circ s=\\mathrm{id}_U$. Then: (1) $s$ is etale (since $\\pi\\circ s=\\mathrm{id}_U$ is etale and $\\pi$ is etale, in particular locally of finite type and unramified); (2) $s$ is an open immersion [def-weil-open-immersion] (it is etale by (1), hence flat and locally of finite presentation, and a monomorphism, having the retraction $\\pi$); (3) $s$ is a closed immersion [def-weil-closed-immersion] (since $\\pi\\circ s=\\mathrm{id}_U$ is a closed immersion and $\\pi$ is separated). Hence $s(U)$ is an open and closed subset of $P$, $s$ is an isomorphism of $U$ onto the open and closed subscheme $s(U)$, and $\\pi|_{s(U)}:s(U)\\to U$ is the inverse isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Etale Morphisms, Proposition 024T (proposition-properties-sections: any section of an unramified morphism is an open immersion); Schemes, Lemma 01KT (schemes-lemma-section-immersion: a section of a separated morphism is a closed immersion)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a section of an etale separated morphism of schemes is an open immersion",
+   "results": "AlgebraicGeometry.IsOpenImmersion, isOpenImmersion_eq_inf, IsOpenImmersion.iff_isIso_stalkMap, IsOpenImmersion.le_monomorphisms: no section lemma",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an unramified (or étale) separated morphism of schemes is an open and closed immersion",
+   "results": "FormallyUnramified.isOpenImmersion_diagonal, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, IsEtale.instFormallyUnramified, IsEtale.of_comp (Mathlib.AlgebraicGeometry.Morphisms.{FormallyUnramified,Etale})",
+   "date": "2026-10-09",
+   "verdict": "ingredients: Etale.of_comp gives that a section of an etale morphism is etale"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "results": "IsOpenImmersion.of_flat_of_mono (f) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f (Mathlib.AlgebraicGeometry.Morphisms.FlatMono); IsClosedImmersion.of_comp (f g) [IsClosedImmersion (f ≫ g)] [IsSeparated g] : IsClosedImmersion f (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-09",
+   "verdict": "match, one lemma per clause"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comp_eq_id\\|of_comp\\|of_flat_of_mono' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Etale,Separated,FlatMono,ClosedImmersion}.lean",
+   "results": "Etale.lean:130 Etale.of_comp (g) [Etale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : Etale f; FlatMono.lean:38 IsOpenImmersion.of_flat_of_mono; Separated.lean:242 IsClosedImmersion.of_comp; ClosedImmersion.lean:432 isClosedImmersion_of_comp_eq_id (only for Subsingleton target); no single lemma for sections",
+   "date": "2026-10-09",
+   "verdict": "match by composition of three lemmas"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Etale.of_comp, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.IsClosedImmersion.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "one lemma per clause: (1) Etale.of_comp (Etale.lean:130) with f = s, g = pi, s >> pi = id etale and pi locally of finite type and formally unramified (instances of Etale pi); (2) IsOpenImmersion.of_flat_of_mono s (FlatMono.lean:38), the Flat and LocallyOfFinitePresentation instances coming from Etale s (clause (1)) and Mono s from the retraction pi (CategoryTheory.SplitMono); (3) IsClosedImmersion.of_comp (Separated.lean:242) with s >> pi = id a closed immersion and IsSeparated pi. The consequences after 'hence' are the definitions of open and closed immersion."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-pbc-finite-etale-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified in the pinned source (Etale.lean:130, FlatMono.lean:38, Separated.lean:242); the lead split the open-immersion clause into (1) and (2) so that each clause is one lemma."
+ }
+}

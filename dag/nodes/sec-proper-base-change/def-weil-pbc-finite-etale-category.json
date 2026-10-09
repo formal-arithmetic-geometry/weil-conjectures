@@ -1,0 +1,81 @@
+{
+ "id": "def-weil-pbc-finite-etale-category",
+ "kind": "definition",
+ "title": "The category of finite etale schemes and its base change functors",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme]. A *finite etale $Y$-scheme* is a scheme $U$ with a morphism $p:U\\to Y$ that is finite [def-weil-finite-integral-morphism] and etale [def-weil-etale-morphism]. The category $\\mathsf{FEt}(Y)$ has as objects the finite etale $Y$-schemes and as morphisms $(U,p)\\to(V,q)$ the $Y$-morphisms, i.e. the morphisms of schemes $\\varphi:U\\to V$ with $q\\circ\\varphi=p$ (every such $\\varphi$ is itself finite etale, but no condition is imposed). For a morphism of schemes $g:Y'\\to Y$, the *base change functor* $g^*:\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y')$ sends $U$ to the fibre product $U\\times_YY'$ [def-pc-base-change] with its second projection (finite and etale, since both properties are stable under base change) and a $Y$-morphism $\\varphi$ to $\\varphi\\times_YY'$. For $U\\in\\mathsf{FEt}(Y)$ we also write $U_{Y'}=g^*U$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Section 'Finite etale morphisms' (pione.tex line 924; the category FEt_X) and the functor U -> U x_X X_0 of Lemmas 0A48 / 0GS2; Morphisms, Lemmas 01WL (finite stable under base change) and 02GO (etale stable under base change)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of finite etale schemes over X, base change functor along morphism",
+   "results": "AlgebraicGeometry.Scheme.instCategoryEtale, Scheme.Etale (Mathlib.AlgebraicGeometry.Morphisms.Etale), Scheme.Modules.pullback, Algebra.Etale.baseChange: no named FEt category",
+   "date": "2026-10-09",
+   "verdict": "no direct name; see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of finite étale schemes over a scheme with pullback functor along a morphism",
+   "results": "Scheme.instCategoryEtale, Scheme.instHasPullbacksEtale, Scheme.Etale.forget (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+   "date": "2026-10-09",
+   "verdict": "no direct name; Mathlib's pattern is MorphismProperty.Over"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.Over.pullback",
+   "results": "CategoryTheory.MorphismProperty.Over.pullback (P Q) (f : X ⟶ Y) [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] [Q.IsStableUnderBaseChange] : P.Over Q Y ⥤ P.Over Q X (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction); Over.mapPullbackAdj; isRightAdjoint_pullback",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'protected abbrev Over\\|def Over.pullback\\|IsStableUnderBaseChange.inf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/{Comma,OverAdjunction,Limits}.lean",
+   "results": "Comma.lean:615 protected abbrev Over (P Q X) := P.Comma (𝟭 T) (fromPUnit X) Q ⊤ (objects: P-morphisms to X; morphisms: Q-morphisms over X); OverAdjunction.lean:101 Over.pullback, obj A := Over.mk Q (pullback.snd A.hom f); Limits.lean:411 instance IsStableUnderBaseChange.inf; the source repository uses exactly (@IsFinite ⊓ @Etale).Over ⊤ Y and Over.pullback (WeilConjectures/AlgebraicGeometry/HenselianFiniteEtale.lean)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.Over, CategoryTheory.MorphismProperty.Over.pullback",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Comma.lean",
+  "how": "specializes in one line: FEt(Y) = (@AlgebraicGeometry.IsFinite ⊓ @AlgebraicGeometry.Etale).Over ⊤ Y (Comma.lean:615; morphisms all Y-morphisms, Q = ⊤), and g^* = MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ g (Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean:101), with base-change stability from MorphismProperty.IsStableUnderBaseChange.inf and the Mathlib instances for IsFinite and Etale (the source repository's instance isStableUnderBaseChange_isFinite_inf_etale, closed)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-pbc-finite-etale-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: MorphismProperty.Over (Comma.lean:615) with P = IsFinite inf Etale, Q = top; base change Over.pullback (OverAdjunction.lean:101)."
+ }
+}

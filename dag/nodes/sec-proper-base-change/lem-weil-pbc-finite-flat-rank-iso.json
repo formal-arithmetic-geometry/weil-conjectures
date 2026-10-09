@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-finite-flat-rank-iso",
+ "kind": "statement",
+ "title": "Rank of a finite flat morphism: locally constant, stable under base change, rank one means isomorphism",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] that is finite [def-weil-finite-integral-morphism], flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation] (for instance finite etale). For $s\\in S$ let $r_f(s)\\in\\mathbf Z_{\\ge0}$ be the rank of $f_*\\mathcal O_X$ at $s$, i.e. the rank of the finite free $\\mathcal O_{S,s}$-module $(f_*\\mathcal O_X)_s$, equivalently $\\dim_{\\kappa(s)}\\Gamma(X_s,\\mathcal O_{X_s})$. Then: (1) $r_f:S\\to\\mathbf Z_{\\ge0}$ is locally constant, so each $r_f^{-1}(d)$ is open and closed in $S$; (2) for every morphism $g:S'\\to S$ and the base change $f':X\\times_SS'\\to S'$ [def-pc-base-change], $r_{f'}(s')=r_f(g(s'))$ for all $s'\\in S'$; (3) $f$ is an isomorphism if and only if $r_f(s)=1$ for every $s\\in S$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 04MH (lemma-finite-locally-free: S = coprod S_d by open and closed S_d over which f has degree d), and the discussion after Definition 0AAZ (morphisms.tex, line 13546: finite locally free of degree 1 is an isomorphism); the base-change compatibility of the rank is the base change of the finite locally free module f_*O_X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite flat morphism of schemes is an isomorphism iff its rank is one",
+   "results": "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, Flat, IsFinite, flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "date": "2026-10-09",
+   "verdict": "partial; see loogle and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite flat finitely presented morphism of schemes is an isomorphism iff its rank function is constantly 1; rank is locally constant and compatible with base change",
+   "results": "Flat.isIso_of_surjective_of_mono, flat_iff, Module.free_of_flat_of_finrank_eq",
+   "date": "2026-10-09",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq; AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank",
+   "results": "Scheme.Hom.isIso_iff_finrank_eq (f) [Flat f] [IsFinite f] : IsIso f ↔ Scheme.Hom.finrank f = 1; Scheme.Hom.isLocallyConstant_finrank (f) [Flat f] [IsFinite f] [LocallyOfFinitePresentation f] : IsLocallyConstant (finrank f) (Mathlib.AlgebraicGeometry.Morphisms.FlatRank)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^@\\[stacks\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "results": "def Scheme.Hom.finrank (line 89, @[stacks 02KA]); finrank_of_isPullback (line 165: IsPullback fst snd f g → finrank snd y = finrank f (g y)); finrank_pullback_snd (157); isLocallyConstant_finrank (226); finrank_eq_one_of_isIso (259); isIso_iff_finrank_eq (265)",
+   "date": "2026-10-09",
+   "verdict": "match, one lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank, AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback, AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+  "how": "one lemma per clause, with r_f = Scheme.Hom.finrank f (the rank of f_*O_X at s, defined on an affine chart; @[stacks 02KA]): (1) isLocallyConstant_finrank, (2) finrank_of_isPullback, (3) isIso_iff_finrank_eq (finrank f = 1 as functions)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-pbc-finite-etale-lifting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Scheme.Hom.finrank (FlatRank.lean:89), isLocallyConstant_finrank, finrank_of_isPullback, isIso_iff_finrank_eq, one per clause."
+ }
+}
