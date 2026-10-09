@@ -1,0 +1,72 @@
+{
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-curve-constructible-reduction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-reduction-universal-homeomorphism",
+ "kind": "statement",
+ "title": "The reduction of a scheme is reduced and a universal homeomorphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i_X:X_{\\mathrm{red}}\\to X$ its reduction [def-weil-pbc-scheme-reduction]. Then $X_{\\mathrm{red}}$ is reduced [def-pc-reduced-scheme], and $i_X$ is a surjective closed immersion and a universal homeomorphism [def-weil-universal-homeomorphism]: for every morphism of schemes $X'\\to X$ the base change $X_{\\mathrm{red}}\\times_XX'\\to X'$ [def-pc-fibre-product] is a homeomorphism of underlying spaces.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 054M (morphisms-lemma-reduction-universal-homeomorphism; proof omitted in Stacks: a closed immersion that is surjective stays a surjective closed immersion after any base change, hence a homeomorphism); reducedness: Schemes, Lemma 01J3/Definition 01J4 (schemes.tex)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-reduced-scheme",
+  "def-weil-universal-homeomorphism",
+  "def-pc-fibre-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the reduced closed subscheme X_red to X is a universal homeomorphism",
+   "results": "AlgebraicGeometry.IsReduced.mk, isReduced_of_isReduced_stalk, IsReduced.of_openCover, isReduced_of_isOpenImmersion (Mathlib.AlgebraicGeometry.Properties), isIso_of_isClosedImmersion_of_surjective (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the reduction of a scheme X_red → X is a closed immersion and a universal homeomorphism",
+   "results": "isIso_of_isClosedImmersion_of_surjective, IsClosedImmersion.Spec_iff, IsClosedImmersion.instIsIsoSchemeToImage, isClosedImmersion_of_comp_eq_id (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.nilradical",
+   "results": "Scheme.nilradical, Scheme.nilradical_eq_bot, IdealSheafData.radical_bot, IdealSheafData.vanishingIdeal_top, Scheme.support_nilradical (Mathlib.AlgebraicGeometry.IdealSheaf.Basic); nothing on IsReduced of X.nilradical.subscheme or on universal homeomorphisms",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsReduced.*subscheme\\|subscheme.*IsReduced\\|UniversalHomeomorph\\|universalHomeo' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "none; Mathlib has no class of universal homeomorphisms (the source repository's IsUniversalHomeomorphism is its own) and no reducedness instance for X.nilradical.subscheme; ingredients exist: IsClosedImmersion I.subschemeι (Morphisms/ClosedImmersion.lean:94), range_subschemeι (IdealSheaf/Subscheme.lean:493) with support_nilradical = ⊤ (surjectivity), UniversallyInjective/Surjective stable under base change",
+   "date": "2026-10-09",
+   "verdict": "no match (reducedness of X.nilradical.subscheme and the universal-homeomorphism conclusion are not stated)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit"
+}

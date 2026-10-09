@@ -1,0 +1,73 @@
+{
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-curve-constructible-reduction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+ "kind": "statement",
+ "title": "Pullback maps form a morphism of long exact cohomology sequences",
+ "statement": "Let $u:Y\\to X$ be a morphism of schemes [def-pc-scheme], and let $0\\to G_1\\xrightarrow{\\alpha}G\\xrightarrow{\\beta}G_2\\to0$ be a short exact sequence of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Then:\n\n1. $0\\to u^{-1}G_1\\xrightarrow{u^{-1}\\alpha}u^{-1}G\\xrightarrow{u^{-1}\\beta}u^{-1}G_2\\to0$ is a short exact sequence of abelian sheaves on $Y_{\\Et}$, $u^{-1}$ being the inverse image [def-weil-pbc-inverse-image].\n2. For $T=X$ with the first sequence, and for $T=Y$ with the second, there are homomorphisms $\\delta^q_T:H^q(T_{\\Et},-_2)\\to H^{q+1}(T_{\\Et},-_1)$ ($q\\ge0$) between the cohomology groups of [def-weil-pbc-etale-cohomology] (the connecting maps: $\\mathcal H^q$ of the map $w$ of the distinguished triangle $G_1\\to G\\to G_2\\xrightarrow{w}G_1[1]$ of [lem-sf-derived-ses-triangle], after $\\RGamma(T_{\\Et},-)$) such that\n$$0\\to H^0(G_1)\\to H^0(G)\\to H^0(G_2)\\xrightarrow{\\delta^0}H^1(G_1)\\to\\cdots\\to H^q(G_1)\\xrightarrow{H^q(\\alpha)}H^q(G)\\xrightarrow{H^q(\\beta)}H^q(G_2)\\xrightarrow{\\delta^q}H^{q+1}(G_1)\\to\\cdots$$\nis exact on $X$, and likewise on $Y$ for the pulled-back sequence.\n3. The pullback maps $u^*$ of [def-weil-pbc-cohomology-pullback] form a morphism between these two long exact sequences: $u^*\\circ H^q(\\alpha)=H^q(u^{-1}\\alpha)\\circ u^*$, $u^*\\circ H^q(\\beta)=H^q(u^{-1}\\beta)\\circ u^*$, and $u^*\\circ\\delta^q_X=\\delta^q_Y\\circ u^*:H^q(X_{\\Et},G_2)\\to H^{q+1}(Y_{\\Et},u^{-1}G_1)$ for every $q\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Section 01FT (sites-cohomology-section-cohomology-sheaves: H^i(-) is a universal delta-functor) with Homology, Definition 010S (homology.tex, universal delta-functors: a map in degree 0 extends uniquely to a morphism of delta-functors); for the etale pullback, Etale Cohomology, Section 04I0 (etale-cohomology-section-functoriality). Used without mention in Etale Cohomology, Lemma 0A5C (lemma-ses-statements) and Theorem 03SC (theorem-vanishing-affine-curves)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback map on sheaf cohomology commutes with connecting homomorphism of long exact sequence",
+   "results": "TopCat.Sheaf.pullback (Mathlib.Topology.Sheaves.Functors), groupCohomology.δ (Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence), TopCat.Presheaf.stalkPullbackHom, SheafOfModules.pullback, Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of delta functors: pullback of sheaf cohomology commutes with connecting maps of short exact sequence of sheaves",
+   "results": "ShortComplex.SnakeInput.snd_δ (Mathlib.Algebra.Homology.ShortComplex.SnakeLemma), HomologicalComplex.HomologySequence.δ_naturality (Mathlib.Algebra.Homology.HomologySequenceLemmas), ShortComplex.ShortExact.δ_apply (Mathlib.Algebra.Homology.ConcreteCategory): naturality of δ for maps of short exact sequences of complexes, one category only",
+   "date": "2026-10-09",
+   "verdict": "no match (generic homological tool only: δ_naturality could carry part 3 once u^* is written as a map of short exact sequences of complexes)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.ShortComplex.ShortExact",
+   "results": "CategoryTheory.Sheaf.H.δ, Sheaf.H.longSequence_exact₁/₂/₃ and primed forms, Sheaf.H.longSequence_equiv₀_exact₃ (Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences, in the newer Mathlib of the Loogle server): the long exact sequence of Ext-defined sheaf cohomology on one site; nothing on a morphism of sites",
+   "date": "2026-10-09",
+   "verdict": "no match (part 2 for the Ext-definition only, on one site, and not in the pinned Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/; grep -rn 'δ\\|mapFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/; grep -rn 'mapExactFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "results": "pinned Mathlib has SheafCohomology/{Basic,Cech,MayerVietoris}.lean (no ExactSequences.lean); δ only for Mayer-Vietoris (MayerVietoris.lean:112); Ext.mapExactFunctor, mapExactFunctor_comp (Ext/Map.lean:228), mapExactFunctor_extClass: an exact functor maps Ext classes and extension classes, the generic tool for the Ext-defined map, not for the resolution-defined u^* of the DAG",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit"
+}

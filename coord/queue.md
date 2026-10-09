@@ -1,8 +1,8 @@
 # Work queue
 
-565 items; claim with `tools/claim.py next <group> [--stage N]`.
+567 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (549)
+## Stage 1: nodes to split (551)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-curve-assertions-retract` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
-| `lem-weil-pbc-derived-inverse-image-composition` | 1004 | none |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1004 | none |
 | `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
 | `lem-weil-pbc-etale-local-ring-triples` | 1004 | none |
@@ -38,6 +37,7 @@
 | `prop-weil-pbc-p1-acyclicity` | 1004 | sorry_here |
 | `thm-sc-main` | 1004 | none |
 | `def-cbc-open-immersion-square` | 1005 | none |
+| `def-weil-pbc-etale-constructible-sheaf` | 1005 | none |
 | `def-weil-pbc-generating-sections` | 1005 | none |
 | `lem-sc-c1` | 1005 | none |
 | `lem-sc-c2` | 1005 | none |
@@ -50,6 +50,8 @@
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
+| `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
+| `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1005 | none |
@@ -63,7 +65,6 @@
 | `lemma-weil-pbc-finite-locally-constant-etale-equivalence` | 1006 | none |
 | `prop-weil-pbc-gabber-affine-comparison` | 1006 | none |
 | `thm-weil-pbc-finite-etale-lifting` | 1006 | none |
-| `def-weil-pbc-etale-constructible-sheaf` | 1007 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1007 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
@@ -467,6 +468,7 @@
 | `def-weil-pbc-C5` | - | none |
 | `def-weil-pbc-C6` | - | none |
 | `def-weil-pbc-C8` | - | none |
+| `lem-kun-03sa` | - | none |
 | `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `lem-weil-pbc-noetherian-finite-components` | - | none |
@@ -577,7 +579,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 564 nodes that wait for stage 1, 79 nodes that wait for a statement dependency.
+Not open yet: 567 nodes that wait for stage 1, 81 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

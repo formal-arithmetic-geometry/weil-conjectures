@@ -1,0 +1,73 @@
+{
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-curve-constructible-reduction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "def-weil-pbc-scheme-reduction",
+ "kind": "definition",
+ "title": "The reduction of a scheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Its *nilradical* $\\mathcal N_X\\subseteq\\mathcal O_X$ is the quasi-coherent ideal sheaf whose sections over an affine open $U=\\operatorname{Spec}R$ are the nilradical of $R$ (the ideal of nilpotent elements). The *reduction* of $X$ is the closed subscheme $X_{\\mathrm{red}}$ of $X$ cut out by $\\mathcal N_X$, i.e. the ringed space $(X,\\mathcal O_X/\\mathcal N_X)$, together with its canonical closed immersion [def-weil-closed-immersion] $i_X:X_{\\mathrm{red}}\\to X$, which is the identity on underlying sets.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Definition 01J4 (schemes-definition-reduced-induced-scheme) with Lemma 01J3 (schemes-lemma-reduced-closed-subscheme), the case Z = X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the reduced closed subscheme X_red to X is a universal homeomorphism",
+   "results": "AlgebraicGeometry.IsReduced.mk, isReduced_of_isReduced_stalk, IsReduced.of_openCover (Mathlib.AlgebraicGeometry.Properties), isIso_of_isClosedImmersion_of_surjective (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion): the property IsReduced and closed-immersion facts; the reduction itself not named",
+   "date": "2026-10-09",
+   "verdict": "no match by itself; led to the grep below"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.nilradical",
+   "results": "AlgebraicGeometry.Scheme.nilradical : X.IdealSheafData; Scheme.nilradical_eq_bot [IsReduced X]; IdealSheafData.radical_bot; IdealSheafData.vanishingIdeal_top; Scheme.support_nilradical : X.nilradical.support = ⊤ (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (with IdealSheafData.subscheme)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the reduction of a scheme X_red → X is a closed immersion and a universal homeomorphism",
+   "results": "isIso_of_isClosedImmersion_of_surjective, IsClosedImmersion.Spec_iff, IsClosedImmersion.instIsIsoSchemeToImage, IsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-09",
+   "verdict": "no direct match; closed-immersion API only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'nilradical' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'def subscheme\\|def subschemeι\\|range_subschemeι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; grep -rn 'IsClosedImmersion I.subschemeι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Scheme.nilradical (IdealSheaf/Basic.lean:529, defined as IdealSheafData.radical ⊥), support_nilradical (:533); IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), range_subschemeι (:493); instance IsClosedImmersion I.subschemeι (Morphisms/ClosedImmersion.lean:94)",
+   "date": "2026-10-09",
+   "verdict": "match: X_red = X.nilradical.subscheme with i_X = X.nilradical.subschemeι"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "how": "specializes in one line: X_red is `X.nilradical.subscheme` and i_X is `X.nilradical.subschemeι` (Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:454, :472), a closed immersion by the instance at Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:94; `Scheme.nilradical` is `IdealSheafData.radical ⊥`, whose ideal on an affine open Spec R is the radical of 0, the nilradical of R"
+ },
+ "status": "mathlib"
+}
