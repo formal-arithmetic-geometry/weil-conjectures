@@ -120,6 +120,9 @@ noncomputable def cechComplex :
     ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ CochainComplex AddCommGrpCat.{max u v} ℕ :=
   cechCosimplicialObject U ⋙ AlgebraicTopology.alternatingCofaceMapComplex _
 
+instance : (cechComplex U).Additive where
+  map_add := rfl
+
 variable (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
 
 /-- The Čech differential is the alternating sum of the restrictions of the faces. -/

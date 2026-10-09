@@ -229,6 +229,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneral
 public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
+public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
@@ -1105,6 +1106,8 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Sheaves.Cech
+public import WeilConjectures.Topology.Sheaves.CechCohomology
+public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.Stratification
