@@ -14,9 +14,106 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a set $I$ of pairs $(\\mathcal F_i,\\varphi_i)$, where $\\mathcal F_i$ is of finite presentation and $\\varphi_i:\\mathcal F_i\\to\\mathcal F$, containing a representative of every such pair up to isomorphism over $\\mathcal F$. This is possible by [lem-weil-pbc-module-finite-presentation-representatives]: finite-presentation modules form a set up to isomorphism, and each Hom collection is a set. Make $I$ a category by taking morphisms $i\\to i'$ to be maps $a:\\mathcal F_i\\to\\mathcal F_{i'}$ satisfying $\\varphi_{i'}a=\\varphi_i$.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, first paragraph (lines 3060-3069), using Modules 01BC"
+   }
+  },
+  {
+   "text": "The category $I$ is nonempty (use the zero module). Given $i,i'$, the map $\\mathcal F_i\\oplus\\mathcal F_{i'}\\to\\mathcal F$ induced by $\\varphi_i,\\varphi_{i'}$ has finite-presentation source by [lem-weil-pbc-module-finite-presentation-direct-sum], hence is isomorphic over $\\mathcal F$ to some chosen pair $(\\mathcal F_{i''},\\varphi_{i''})$; the two summand inclusions give morphisms $i\\to i''$ and $i'\\to i''$.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, second paragraph (lines 3070-3090)"
+   }
+  },
+  {
+   "text": "For parallel $a,b:i\\to i'$, put $\\mathcal G=\\operatorname{Coker}(a-b)$. It is of finite presentation by [lem-weil-pbc-module-finite-presentation-cokernel]. Since $\\varphi_{i'}a=\\varphi_i=\\varphi_{i'}b$, $\\varphi_{i'}$ factors through $\\mathcal G\\to\\mathcal F$; representing this pair by some $i''$ gives a morphism $i'\\to i''$ equalizing $a,b$. Thus $I$ is filtered.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, third paragraph (lines 3091-3117)"
+   }
+  },
+  {
+   "text": "The maps $\\varphi_i$ form a cocone, hence induce $\\varphi:\\varinjlim_i\\mathcal F_i\\to\\mathcal F$. By [lem-weil-pbc-module-stalk-filtered-colimit], its stalk at $x$ is the map $\\varinjlim_i(\\mathcal F_i)_x\\to\\mathcal F_x$. To prove that $\\varphi$ is an isomorphism it suffices to prove these stalk maps bijective, by [lem-weil-pbc-module-iso-on-stalks].",
+   "uses": [
+    "lem-weil-pbc-module-stalk-filtered-colimit",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, fourth paragraph (lines 3119-3131); Sheaves Section 009E"
+   }
+  },
+  {
+   "text": "For injectivity, let $s\\in(\\mathcal F_i)_x$ map to zero in $\\mathcal F_x$. On a quasi-compact neighbourhood $U$ of $x$, represent $s$ by a section still denoted $s$ with $\\varphi_i(s)=0$. The cyclic image $\\mathcal K_U=\\operatorname{Im}(\\mathcal O_U\\xrightarrow{1\\mapsto s}\\mathcal F_i|_U)$ is a finite-type quasi-coherent submodule: quasi-coherence and the identification with the image sheaf follow from [lem-weil-pbc-quasi-coherent-module-cokernel-image], and finite type follows because it is a quotient of $\\mathcal O_U$ by its kernel. Since $\\mathcal K_U\\subseteq\\ker(\\varphi_i)|_U$, [lem-weil-pbc-module-finite-type-submodule-extension] extends it to a finite-type quasi-coherent $\\mathcal K\\subseteq\\ker(\\varphi_i)$. The quotient map $\\mathcal F_i\\to\\mathcal F_i/\\mathcal K$ has finite-presentation source and target quotient by [lem-weil-pbc-module-finite-presentation-cokernel], and its induced map to $\\mathcal F$ is represented by some $i'$. The resulting transition $i\\to i'$ kills $s$, so the class of $s$ vanishes in $\\varinjlim_i(\\mathcal F_i)_x$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-module-finite-presentation-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, injectivity paragraph (lines 3132-3162), using Lemma 01PF"
+   }
+  },
+  {
+   "text": "For surjectivity, take $s\\in\\mathcal F_x$ and represent it on a quasi-compact neighbourhood $U$ by $s\\in\\mathcal F(U)$, equivalently by the map $\\mathcal O_U\\to\\mathcal F|_U$, $1\\mapsto s$. By [lem-weil-pbc-module-finite-presentation-extension], this map extends to $\\mathcal G\\to\\mathcal F$ with $\\mathcal G$ of finite presentation on $X$. Represent the pair by some $(\\mathcal F_i,\\varphi_i)$; the section $1$ over $U$ gives a germ in $(\\mathcal F_i)_x$ mapping to $s$. Hence every stalk map is surjective.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, surjectivity paragraph (lines 3163-3187), using Lemma 01PI"
+   }
+  },
+  {
+   "text": "Steps 5 and 6 show every stalk of $\\varphi$ is bijective, so Step 4 gives that $\\varphi$ is an isomorphism. Transporting the canonical colimit cocone across this isomorphism makes $(\\mathcal F,(\\varphi_i)_i)$ a colimit of the filtered diagram, as required.",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PJ proof, conclusion (line 3188)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-finite-presentation-representatives",
+  "lem-weil-pbc-module-finite-presentation-direct-sum",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-module-finite-presentation-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PJ (lemma-directed-colimit-diagram-finite-presentation), proof, lines 3060-3188"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,7 +159,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,7 +183,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Properties 01PJ (quasi-coherent on qcqs = colimit of finitely presented modules over a small filtered category); correct; unsplit (its split needs 01BC, 01PF, 01PI, 01BP)."
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the seven steps against Properties 01PJ (set of representatives; filteredness via direct sums and cokernels; stalkwise comparison; injectivity via 01PF applied to the cyclic image, now justified through the reviewed cokernel-image node; surjectivity via 01PI; conservativity of stalks) and the six new statements (01BC, 01PF, 01PI, 01BN, 0H96, 009E), now self-contained: correct; the E1 review states what was checked"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+  "worker": "stage1",
+  "summary": "Split Stacks 01PJ into seven steps: choose a small representative category, prove its two filteredness conditions using finite direct sums and cokernels, identify the colimit stalkwise, prove injectivity using the existing quasi-coherent image theorem and 01PF, prove surjectivity using 01PI, and conclude by stalkwise detection of isomorphisms. Created six public child nodes for the reusable non-elementary inputs; reused the existing stalkwise-isomorphism and quasi-coherent-image nodes."
  }
 }
