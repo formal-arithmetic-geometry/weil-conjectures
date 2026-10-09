@@ -817,18 +817,298 @@ noncomputable def artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     WeilSheaf k₀ l (affineLine k₀) :=
   (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj (image (WeilSheaf.artinSchreierIdempotent ψ))
 
+local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The counit of `ĀS^* ⊣ ĀS_*`, computed by restriction, evaluates a function on
+`V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` along the diagonal section `x ↦ (x, v x)`. -/
+lemma affineLine.localizationRestrictionLowerStarAdjunction_counit_app_hom_app
+    (V : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber.ProEt) :
+    ((ProEtale.localizationRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) ĀS
+        inferInstance).counit.app
+      (ProEtale.adicConstantSheaf l
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).hom.app (op V) =
+      (adicFunctionsPresheaf l).map
+        (pullback.lift (𝟙 V.left) V.hom (by simp) : V.left ⟶ pullback (V.hom ≫ ĀS) ĀS).op :=
+  rfl
+
+
+variable (l) in
+/-- The evaluation `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` along the section `x ↦ (x, σ̄_c (v x))`, as a morphism
+of sheaves of `ℚ̄_ℓ`-modules: the pullback of the translation `σ_c` followed by the counit of
+`ĀS^* ⊣ ĀS_*`. -/
+noncomputable def affineLine.artinSchreierEvalHom (c : k₀) :
+    (ĀS)^*ᵃ[l].obj ((ĀS)_*ᵃ[l].obj
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ⟶
+      ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  (ĀS)^*ᵃ[l].map (artinSchreierTranslationSheafHom l c) ≫
+    (ProEtale.adicUpperStarLowerStarAdjunction l ĀS).counit.app _
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- On sections over `v : V ⟶ 𝔸¹_{k̄}`, the evaluation along `x ↦ (x, σ̄_c (v x))` pulls functions
+on `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` back along this section. -/
+lemma affineLine.artinSchreierEvalHom_hom_app (c : k₀)
+    (V : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber.ProEt) :
+    ((ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+        inferInstance).inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom).hom.app (op V) =
+      (adicFunctionsPresheaf l).map (affineLine.artinSchreierSection V.hom c).op := by
+  have h₁ : (affineLine.artinSchreierEvalHom l c).hom =
+      (ĀS)^*[WeilCoefficients.{u} l].map (artinSchreierTranslationSheafHom l c).hom ≫
+        (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) ĀS).counit.app
+          (ProEtale.adicConstantSheaf l _) := by
+    rw [affineLine.artinSchreierEvalHom, Mod.comp_hom', ProEtale.adicUpperStar_map_hom]
+    erw [Adjunction.modAdjunction_counit_app_hom]
+    rfl
+  have h₂ := (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l)
+    ĀS).leftAdjointUniq_hom_app_counit
+      (ProEtale.localizationRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) ĀS
+        inferInstance) (ProEtale.adicConstantSheaf l _)
+  rw [h₁, ← Category.assoc, ← (ProEtale.upperStarIsoLocalizationRestriction
+    (WeilCoefficients.{u} l) ĀS inferInstance).inv.naturality, Category.assoc]
+  erw [← h₂, Iso.inv_hom_id_app_assoc]
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ProEtale.localizationRestriction_map_hom_app]
+  erw [artinSchreierTranslationSheafHom_hom_app,
+    affineLine.localizationRestrictionLowerStarAdjunction_counit_app_hom_app]
+  rw [← Functor.map_comp, ← op_comp]
+  congr 2
+  apply pullback.hom_ext
+  · rw [Category.assoc]
+    erw [pullback.lift_fst, Category.comp_id, pullback.lift_fst,
+      affineLine.artinSchreierSection_fst]
+  · rw [Category.assoc]
+    erw [pullback.lift_snd, pullback.lift_snd_assoc, affineLine.artinSchreierSection_snd]
+
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- Morphisms into `ĀS^* ĀS_* ℚ̄_ℓ` are determined by their composites with the evaluations
+along the sections `x ↦ (x, σ̄_c (v x))`, which cover `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}`. -/
+lemma affineLine.artinSchreierEvalHom_hom_ext
+    {T : Sheaf (Scheme.ProEt.topology (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (WeilCoefficients.{u} l)}
+    {f g : T ⟶ ((ĀS)^*ᵃ[l].obj ((ĀS)_*ᵃ[l].obj
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))).X}
+    (h : ∀ c, f ≫ (affineLine.artinSchreierEvalHom l c).hom =
+      g ≫ (affineLine.artinSchreierEvalHom l c).hom) : f = g := by
+  let ε := ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS inferInstance
+  suffices hε : f ≫ ε.hom.app _ = g ≫ ε.hom.app _ by
+    have := congrArg (· ≫ ε.inv.app _) hε
+    simp only [Category.assoc, Iso.hom_inv_id_app] at this
+    erw [Category.comp_id, Category.comp_id] at this
+    exact this
+  ext ⟨V⟩ : 3
+  ext x
+  have key (c : k₀) (φ : T ⟶ affineLine.artinSchreierPullbackPushforward k₀ l) :
+      (φ ≫ ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom).hom.app (op V) x =
+        (adicFunctionsPresheaf l).map (affineLine.artinSchreierSection V.hom c).op
+          (φ.hom.app (op V) x) := by
+    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
+    erw [affineLine.artinSchreierEvalHom_hom_app]
+    rfl
+  have hc (c : k₀) := (key c _).symm.trans ((congrArg (fun φ ↦ φ.hom.app (op V) x)
+    (show (f ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom) =
+      (g ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom) by
+        simpa using h c)).trans (key c _))
+  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
+  have := congrArg (fun y ↦ y.down.1 (pullback.fst (V.hom ≫ ĀS) ĀS z))
+    (hc (affineLine.artinSchreierIndex V.hom z))
+  simp only [adicFunctionsPresheaf_map, ModuleCat.hom_ofHom] at this
+  rw [← affineLine.artinSchreierSection_artinSchreierIndex V.hom z]
+  exact this
+
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- Evaluating the splitting `g ↦ ((x, σ̄_d (v x)) ↦ ψ(d) g(x))` along the section
+`x ↦ (x, σ̄_c (v x))` is multiplication by `ψ(c)`. -/
+lemma affineLine.artinSchreierSplitHom_comp_evalHom (ψ : AddChar k₀ (PadicAlgCl l)) (c : k₀) :
+    affineLine.artinSchreierSplitHom l ψ ≫
+      (ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+        inferInstance).inv.app ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X
+      ≫ (affineLine.artinSchreierEvalHom l c).hom =
+      ULift.up (ψ c) • 𝟙 _ := by
+  ext ⟨V⟩ : 3
+  ext ⟨g⟩
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
+  erw [affineLine.artinSchreierEvalHom_hom_app]
+  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  change ψ (affineLine.artinSchreierIndex V.hom (affineLine.artinSchreierSection V.hom c x)) *
+    g.1 (pullback.fst (V.hom ≫ ĀS) ĀS (affineLine.artinSchreierSection V.hom c x)) = ψ c * g.1 x
+  rw [affineLine.artinSchreierIndex_artinSchreierSection, affineLine.artinSchreierSection_fst_apply]
+
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The averaging map `h ↦ (x ↦ q⁻¹ ∑_c ψ(-c) h(x, σ̄_c (v x)))` is the corresponding linear
+combination of the evaluations. -/
+lemma affineLine.artinSchreierAverageHom_eq_sum (ψ : AddChar k₀ (PadicAlgCl l)) :
+    letI := Fintype.ofFinite k₀
+    affineLine.artinSchreierAverageHom l ψ =
+      ∑ c : k₀, ULift.up ((Nat.card k₀ : PadicAlgCl l)⁻¹ * ψ (-c)) •
+        ((ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+          inferInstance).inv.app ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X
+      ≫ (affineLine.artinSchreierEvalHom l c).hom) := by
+  let := Fintype.ofFinite k₀
+  have hsum {F G : Sheaf (Scheme.ProEt.topology
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) (WeilCoefficients.{u} l)}
+      (s : Finset k₀) (f : k₀ → (F ⟶ G)) (W) :
+      (∑ c ∈ s, f c).hom.app W = ∑ c ∈ s, (f c).hom.app W := by
+    classical
+    induction s using Finset.induction_on with
+    | empty => rfl
+    | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, ← ih]; rfl
+  have hdown {M : Type u} [AddCommMonoid M] (s : Finset k₀) (f : k₀ → ULift.{u + 1} M) :
+      (∑ c ∈ s, f c).down = ∑ c ∈ s, (f c).down :=
+    map_sum AddEquiv.ulift f s
+  ext ⟨V⟩ : 3
+  ext ⟨h⟩
+  rw [hsum, ModuleCat.hom_sum, LinearMap.sum_apply]
+  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  rw [hdown, AddSubmonoidClass.coe_finsetSum, ContinuousMap.coe_sum, Finset.sum_apply]
+  change (affineLine.artinSchreierAverage l V.hom ψ h).1 x = _
+  rw [affineLine.artinSchreierAverage_apply]
+  refine Finset.sum_congr rfl fun c _ ↦ ?_
+  change _ = (ULift.up ((Nat.card k₀ : PadicAlgCl l)⁻¹ * ψ (-c)) •
+    ((ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+      inferInstance).inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom).hom.app (op V)
+        (ULift.up h)).down.1 x
+  erw [affineLine.artinSchreierEvalHom_hom_app]
+  rfl
+
+
+variable (l) in
+/-- The averaging map, as a morphism of sheaves of `ℚ̄_ℓ`-modules: a linear combination of the
+evaluations `AlgebraicGeometry.affineLine.artinSchreierEvalHom`. -/
+noncomputable def affineLine.artinSchreierAverageModHom (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (ĀS)^*ᵃ[l].obj ((ĀS)_*ᵃ[l].obj
+      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ⟶
+      ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  letI := Fintype.ofFinite k₀
+  ∑ c : k₀, affineLine.artinSchreierEvalHom l c ≫
+    ProEtale.AdicSheaf.smul (ULift.up ((Nat.card k₀ : PadicAlgCl l)⁻¹ * ψ (-c))) _
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The underlying morphism of the averaging map of sheaves of modules is the averaging map. -/
+lemma affineLine.artinSchreierAverageModHom_hom (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineLine.artinSchreierAverageModHom l ψ).hom =
+      (ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+        inferInstance).hom.app ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X
+      ≫ affineLine.artinSchreierAverageHom l ψ := by
+  let := Fintype.ofFinite k₀
+  rw [affineLine.artinSchreierAverageHom_eq_sum, Preadditive.comp_sum,
+    affineLine.artinSchreierAverageModHom]
+  refine ((Mod.forget _).map_sum _ _).trans (Finset.sum_congr rfl fun c _ ↦ ?_)
+  change (affineLine.artinSchreierEvalHom l c).hom ≫ (ULift.up _ • 𝟙 _) = _
+  rw [Linear.comp_smul, Category.comp_id, Linear.comp_smul]
+  congr 1
+  erw [Iso.hom_inv_id_app_assoc]
+
+variable (l) in
+/-- The splitting map, as a morphism of sheaves of `ℚ̄_ℓ`-modules: it is `ℚ̄_ℓ`-linear, since its
+composites with the evaluations are multiplications by scalars. -/
+noncomputable def affineLine.artinSchreierSplitModHom (ψ : AddChar k₀ (PadicAlgCl l)) :
+    ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶
+      (ĀS)^*ᵃ[l].obj ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :=
+  Mod.homMk (affineLine.artinSchreierSplitHom l ψ ≫
+      (ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+        inferInstance).inv.app ((ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l
+          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X) (by
+    refine affineLine.artinSchreierEvalHom_hom_ext fun c ↦ ?_
+    rw [Category.assoc, Category.assoc, affineLine.artinSchreierSplitHom_comp_evalHom,
+      Category.assoc, Mod.act_hom, ← MonoidalCategory.whiskerLeft_comp_assoc,
+      Category.assoc, affineLine.artinSchreierSplitHom_comp_evalHom]
+    exact Mod.act_hom (ProEtale.AdicSheaf.smul (ULift.up (ψ c)) (ProEtale.AdicSheaf.unit l _)))
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The underlying morphism of the splitting map of sheaves of modules is the splitting map. -/
+lemma affineLine.artinSchreierSplitModHom_hom (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineLine.artinSchreierSplitModHom l ψ).hom = affineLine.artinSchreierSplitHom l ψ ≫
+      (ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS
+        inferInstance).inv.app ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X :=
+  rfl
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- Averaging after splitting is the identity, as morphisms of sheaves of modules. -/
+lemma affineLine.artinSchreierSplitModHom_averageModHom (ψ : AddChar k₀ (PadicAlgCl l)) :
+    affineLine.artinSchreierSplitModHom l ψ ≫ affineLine.artinSchreierAverageModHom l ψ = 𝟙 _ := by
+  refine Mod.hom_ext _ _ ?_
+  rw [Mod.comp_hom', affineLine.artinSchreierSplitModHom_hom,
+    affineLine.artinSchreierAverageModHom_hom, Category.assoc, Iso.inv_hom_id_app_assoc,
+    affineLine.artinSchreierSplitHom_artinSchreierAverageHom]
+  rfl
+
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- An endomorphism of `ĀS_* ℚ̄_ℓ` which, after pullback along `ĀS`, is averaging followed by
+splitting on underlying sheaves, is so as a morphism of sheaves of `ℚ̄_ℓ`-modules. -/
+lemma affineLine.artinSchreierAverageModHom_splitModHom_of_restriction
+    (ψ : AddChar k₀ (PadicAlgCl l))
+    (f : (ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⟶
+      (ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))
+    (hf : (ProEtale.localizationRestriction (WeilCoefficients.{u} l) ĀS inferInstance).map f.hom =
+      affineLine.artinSchreierAverageHom l ψ ≫ affineLine.artinSchreierSplitHom l ψ) :
+    affineLine.artinSchreierAverageModHom l ψ ≫ affineLine.artinSchreierSplitModHom l ψ =
+      (ĀS)^*ᵃ[l].map f := by
+  let ε := ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) ĀS inferInstance
+  refine Mod.hom_ext _ _ (affineLine.artinSchreierEvalHom_hom_ext fun c ↦ ?_)
+  have h₂ : (ĀS)^*[WeilCoefficients.{u} l].map f.hom ≫ (affineLine.artinSchreierEvalHom l c).hom =
+      ε.hom.app ((ĀS)_*ᵃ[l].obj
+        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)).X
+      ≫ affineLine.artinSchreierAverageHom l ψ ≫
+        (ULift.up (ψ c) • 𝟙 _) :=
+    calc _ = ε.hom.app _ ≫ (ε.inv.app _ ≫ (ĀS)^*[WeilCoefficients.{u} l].map f.hom) ≫
+          (affineLine.artinSchreierEvalHom l c).hom := by
+          rw [Category.assoc, Iso.hom_inv_id_app_assoc]
+      _ = ε.hom.app _ ≫ (ProEtale.localizationRestriction (WeilCoefficients.{u} l) ĀS
+            inferInstance).map f.hom ≫ ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom := by
+          rw [← ε.inv.naturality, Category.assoc]
+      _ = _ := by
+          rw [hf, Category.assoc, affineLine.artinSchreierSplitHom_comp_evalHom]
+  rw [Mod.comp_hom', affineLine.artinSchreierSplitModHom_hom, Category.assoc, Category.assoc,
+    affineLine.artinSchreierSplitHom_comp_evalHom, affineLine.artinSchreierAverageModHom_hom,
+    ProEtale.adicUpperStar_map_hom, h₂, Category.assoc]
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
 (of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
 becomes `⨁_{c ∈ k₀} ℚ̄_ℓ` with `k₀` permuting the summands by translation, and the image of
 `e_ψ` is the line spanned by `∑_c ψ(c) δ_c`. -/
 theorem WeilSheaf.isLisse_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l)) :
-    (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse :=
-  -- After pullback along `ĀS`, the underlying morphism of sheaves of `e_ψ` is averaging
-  -- followed by splitting (`AlgebraicGeometry.affineLine.restriction_map_artinSchreierIdempotent`),
-  -- a split epi–mono factorisation through `ℚ̄_ℓ` in the category of sheaves of
-  -- `WeilCoefficients`-modules. Concluding requires that factorisation to be one of sheaves of
-  -- `ℚ̄_ℓ,X`-modules, i.e. averaging and splitting to be linear over the sections of `ℚ̄_ℓ,X`.
-  sorry
+    (image (WeilSheaf.artinSchreierIdempotent ψ)).IsLisse := by
+  let Φ := ObjectProperty.ι (WeilSheaf.objectProperty k₀ l (affineLine k₀)) ⋙
+    IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l (affineLine k₀))
+  have := ObjectProperty.preservesKernels_ι _ (cokernel.π (WeilSheaf.artinSchreierIdempotent ψ))
+  have := ObjectProperty.preservesCokernels_ι _ (WeilSheaf.artinSchreierIdempotent ψ)
+  have : HasColimitsOfShape WalkingParallelPair
+      (ProEtale.AdicSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+    inferInstance
+  have : HasLimitsOfShape WalkingParallelPair
+      (ProEtale.AdicSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+    inferInstance
+  -- the underlying sheaf of modules of the image is the image of the underlying morphism, which
+  -- becomes `ℚ̄_ℓ` after pullback along the pro-étale cover `ĀS`
+  refine ProEtale.IsAdicLisseSheaf.of_iso (Φ.mapIso (Abelian.imageIsoImage _).symm ≪≫
+    Abelian.PreservesImage.iso Φ _ ≪≫ Abelian.imageIsoImage _).symm
+    ⟨.singleton (affineLine.geometricArtinSchreierMap k₀),
+      Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) inferInstance, ?_⟩
+  rintro _ _ ⟨⟩
+  have hfac := affineLine.artinSchreierAverageModHom_splitModHom_of_restriction ψ
+    (Φ.map (WeilSheaf.artinSchreierIdempotent ψ))
+    (affineLine.restriction_map_artinSchreierIdempotent ψ)
+  have hab := affineLine.artinSchreierSplitModHom_averageModHom (l := l) ψ
+  have : IsSplitEpi (affineLine.artinSchreierAverageModHom l ψ) := ⟨⟨_, hab⟩⟩
+  have : IsSplitMono (affineLine.artinSchreierSplitModHom l ψ) := ⟨⟨_, hab⟩⟩
+  refine ⟨1, ⟨((ĀS)^*ᵃ[l].mapIso (Abelian.imageIsoImage _).symm ≪≫
+    Abelian.PreservesImage.iso _ _ ≪≫ Abelian.imageIsoImage _) ≪≫
+      (image.isoStrongEpiMono _ _ hfac).symm ≪≫
+      (biproduct.isoProduct (fun _ : Fin 1 ↦ ProEtale.AdicSheaf.unit l
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫ productUniqueIso _).symm⟩⟩
 
 /-- The Artin–Schreier sheaves are lisse: `ℒ_ψ` is lisse
 (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`), and pullback preserves
