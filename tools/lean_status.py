@@ -8,7 +8,7 @@ A sorry map is the output of tools/sorry_map.lean for one branch: every declarat
 own term contains `sorry`, and the project declarations it uses. Auxiliary declarations are merged into their owner.
 
 The declarations of a node are the names in its `blueprint_lean`, plus the names the detailed LaTeX blueprint
-gives for the same label (`\\lean{...}` after `\\label{...}`; a label matches a node when it is the node id
+gives for the same label, plus, for a node a worker created (`created` set), the names already in its `lean_audit` decls (`\\lean{...}` after `\\label{...}`; a label matches a node when it is the node id
 with `:` for the first `-`). For each branch the node gets, in `lean_audit[branch]`:
 
   state   none            no declaration of the node exists on the branch
@@ -60,11 +60,22 @@ def tex_names(node_ids):
     return out
 
 
+def hand_names(d):
+    """Declarations a worker attached by hand to a node it created (`created` set): the names in its lean_audit decls."""
+    if not d.get("created"):
+        return []
+    out = []
+    for a in (d.get("lean_audit") or {}).values():
+        if isinstance(a, dict):
+            out += [x["name"] for x in a.get("decls") or [] if isinstance(x, dict) and x.get("name")]
+    return out
+
+
 def main():
     paths = {p.read_text() and json.loads(p.read_text())["id"]: p for p in (ROOT / "dag/nodes").rglob("*.json")}
     nodes = {i: json.loads(p.read_text()) for i, p in paths.items()}
     extra = tex_names(set(nodes))
-    names = {i: list(dict.fromkeys(d.get("blueprint_lean", []) + extra.get(i, []))) for i, d in nodes.items()}
+    names = {i: list(dict.fromkeys(d.get("blueprint_lean", []) + extra.get(i, []) + hand_names(d))) for i, d in nodes.items()}
     node_of = collections.defaultdict(list)
     for i, ns in names.items():
         for n in ns:
