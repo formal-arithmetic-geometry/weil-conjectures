@@ -111,16 +111,14 @@ theorem WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor (φ : X �
     (F : ProEtaleWeilSheaf k₀ l X) (hF : WeilSheaf.objectProperty k₀ l X F) :
     WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor.obj
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1} (Sheaf
-      (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l)) ℤ
-  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1} (Sheaf
-      (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l)) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   let e : (IsoAlgebra.forget _).mapDerivedCategory.obj
       ((ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor.obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) ≅
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].rightDerivedFunctor.obj
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l].rightDerivedFunctor.obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F.carrier) :=
     (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _).app _ ≪≫
       Functor.mapIso _ (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app F)

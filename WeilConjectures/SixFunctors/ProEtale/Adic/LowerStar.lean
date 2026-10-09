@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves
@@ -59,10 +60,10 @@ images `Rⁿf_* F` of a constructible `ℓ`-adic sheaf along a quasi-compact qua
 morphism locally of finite type, with target locally of finite type, are constructible. -/
 theorem isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l)
     [LocallyOfFiniteType s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l X}
     (hF : IsAdicConstructibleSheaf F) (n : ℤ) :
     IsAdicConstructibleSheaf ((DerivedCategory.homologyFunctor _ n).obj
-      ((f)_*[WeilCoefficients.{u} l].rightDerivedFunctor.obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj
         ((DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry
 
@@ -74,12 +75,12 @@ of `AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFun
 `f_*` being left exact. -/
 theorem IsAdicConstructibleSheaf.lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l X}
     (hF : IsAdicConstructibleSheaf F) :
-    IsAdicConstructibleSheaf ((f)_*[WeilCoefficients.{u} l].obj F) :=
+    IsAdicConstructibleSheaf ((f)_*ᵃ[l].obj F) :=
   (isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar s f hK hF 0).of_iso
-    ((f)_*[WeilCoefficients.{u} l].homologyRightDerivedFunctorObjSingleFunctorIso F 0 ≪≫
-      (f)_*[WeilCoefficients.{u} l].rightDerivedZeroIsoSelf.app F)
+    ((f)_*ᵃ[l].homologyRightDerivedFunctorObjSingleFunctorIso F 0 ≪≫
+      (f)_*ᵃ[l].rightDerivedZeroIsoSelf.app F)
 
 /-- **Cohomological dimension of the pushforward of a constructible `ℓ`-adic sheaf**
 (SGA 4½, *Th. finitude*; SGA 4, Exp. X): over an algebraically closed field of characteristic
@@ -89,9 +90,9 @@ locally of finite type, vanish in large degrees: the cohomological dimension of 
 most twice the dimension of the fibres, which is bounded on a quasi-compact target. -/
 theorem exists_isLE_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l X}
     (hF : IsAdicConstructibleSheaf F) :
-    ∃ b : ℤ, ((f)_*[WeilCoefficients.{u} l].rightDerivedFunctor.obj
+    ∃ b : ℤ, ((f)_*ᵃ[l].rightDerivedFunctor.obj
       ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b :=
   sorry
 
@@ -103,12 +104,12 @@ concentrated in degrees `≥ 0`, and bounded above by
 `AlgebraicGeometry.ProEtale.exists_isLE_rightDerivedFunctor_lowerStar`. -/
 theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
-    {F : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)}
+    {F : AdicSheaf l X}
     (hF : IsAdicConstructibleSheaf F) :
     DerivedCategory.TStructure.t.bounded
-      ((f)_*[WeilCoefficients.{u} l].rightDerivedFunctor.obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj
         ((DerivedCategory.singleFunctor _ 0).obj F)) :=
-  ⟨⟨0, (f)_*[WeilCoefficients.{u} l].isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
+  ⟨⟨0, (f)_*ᵃ[l].isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
     exists_isLE_rightDerivedFunctor_lowerStar s f hK hF⟩
 
 end AlgebraicGeometry.ProEtale
