@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-dimension-span-independent-family",
+ "kind": "statement",
+ "title": "The span of a linearly independent family of k vectors has dimension k",
+ "statement": "Let $F$ be a field [def-weil-field], $V$ an $F$-vector space and $v_1,\\ldots,v_k\\in V$ linearly independent over $F$. Then the $F$-linear span $W$ of $v_1,\\ldots,v_k$ is finite-dimensional [def-weil-finite-dimensional-subspace] and $\\dim_FW=k$ [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "none in literature/ (WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8 (vector spaces, rank), or Lang, Algebra, Ch. III §5 and Ch. XIII §4)",
+  "place": "standard linear algebra; written by an agent for lem-weil-matrix-rank-field-extension"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem finrank_span_eq_card\\|theorem finrank_span_set_eq_card' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+   "results": "Constructions.lean:461 `finrank_span_eq_card [Nontrivial R] [Fintype ι] {b : ι → M} (hb : LinearIndependent R b) : finrank R (span R (Set.range b)) = Fintype.card ι`; :470 `finrank_span_set_eq_card`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "finrank_span_eq_card",
+  "file": "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+  "how": "specializes in one line: R := F, ι := Fin k; finite-dimensionality of a span of finitely many vectors is the instance `FiniteDimensional.span_of_finite` / `Module.Finite.span_of_finite`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-matrix-rank-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

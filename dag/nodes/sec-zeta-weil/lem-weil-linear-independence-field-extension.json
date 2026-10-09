@@ -1,0 +1,46 @@
+{
+ "id": "lem-weil-linear-independence-field-extension",
+ "kind": "statement",
+ "title": "Linear independence of vectors with entries in a field is unchanged by field extension",
+ "statement": "Let $K\\subseteq L$ be a field extension [def-pc-field-extension] of fields [def-weil-field], let $n,k\\in\\mathbf Z_{\\geq0}$ and let $v_1,\\ldots,v_k\\in K^n$. View $K^n\\subseteq L^n$ entrywise. Then $v_1,\\ldots,v_k$ are linearly independent over $L$ (no nontrivial relation $\\sum_i\\lambda_iv_i=0$ with $\\lambda_i\\in L$) if and only if they are linearly independent over $K$.",
+ "source": {
+  "document": "none in literature/ (WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8 (vector spaces, rank), or Lang, Algebra, Ch. III §5 and Ch. XIII §4)",
+  "place": "standard linear algebra; written by an agent for lem-weil-matrix-rank-field-extension"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'linearIndependent_algebraMap_comp_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean",
+   "results": "BaseChange.lean:43 `linearIndependent_algebraMap_comp_iff {R S} [CommRing R] [CommRing S] [Algebra R S] [FaithfulSMul R S] [IsDomain S] {v : ι → ι' → R} [Finite ι'] : LinearIndependent S (fun i ↦ algebraMap R S ∘ v i) ↔ LinearIndependent R v`; `FaithfulSMul` for a field K (a simple ring) and a nontrivial K-algebra: instance in Mathlib/Algebra/Algebra/IsSimpleRing.lean:19",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "linearIndependent_algebraMap_comp_iff",
+  "file": "Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean",
+  "how": "specializes in one line: R := K, S := L, ι := Fin k, ι' := Fin n, v i := v_i; the hypotheses `FaithfulSMul K L` (instance for the simple ring K) and `IsDomain L` hold for fields"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-matrix-rank-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

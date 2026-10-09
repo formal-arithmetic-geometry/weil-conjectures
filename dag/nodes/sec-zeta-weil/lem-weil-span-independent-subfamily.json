@@ -1,0 +1,45 @@
+{
+ "id": "lem-weil-span-independent-subfamily",
+ "kind": "statement",
+ "title": "A finite family of vectors has a linearly independent subfamily with the same span",
+ "statement": "Let $F$ be a field [def-weil-field], $V$ an $F$-vector space and $v_1,\\ldots,v_m\\in V$. Then there is a subset $S\\subseteq\\{1,\\ldots,m\\}$ such that the family $(v_i)_{i\\in S}$ is linearly independent over $F$ and spans the same $F$-linear subspace of $V$ as $v_1,\\ldots,v_m$.",
+ "source": {
+  "document": "none in literature/ (WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8 (vector spaces, rank), or Lang, Algebra, Ch. III §5 and Ch. XIII §4)",
+  "place": "standard linear algebra; written by an agent for lem-weil-matrix-rank-field-extension"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem exists_linearIndependent\\|lemma exists_linearIndependent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean",
+   "results": "Lemmas.lean:792 `exists_linearIndependent (t : Set V) : ∃ b ⊆ t, span K b = span K t ∧ LinearIndependent K ((↑) : b → V)` and :799 `exists_linearIndependent' (v : ι → V) : ∃ (κ) (a : κ → ι), Injective a ∧ span K (range (v ∘ a)) = span K (range v) ∧ LinearIndependent K (v ∘ a)` for a division ring K",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_linearIndependent'",
+  "file": "Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean",
+  "how": "specializes in one line: with ι := Fin m and v the family, S := range a (a injective, so (v_i)_{i∈S} is v ∘ a up to reindexing)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-matrix-rank-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

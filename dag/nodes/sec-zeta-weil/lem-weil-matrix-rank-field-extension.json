@@ -9,12 +9,79 @@
  },
  "stmt_deps": [
   "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-matrix",
+  "def-weil-matrix-rank",
   "def-weil-vector-space-dimension",
   "def-weil-finite-dimensional-subspace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1: setup.* Since $K$ is a field, the ring homomorphism $\\iota:K\\to L$ is injective (its kernel is an ideal not containing $1$, hence $0$), so $L$ is a field extension of $K$ [def-pc-field-extension] and we identify $K$ with $\\iota(K)\\subseteq L$, hence $K^n\\subseteq L^n$ entrywise. Write $r_1,\\ldots,r_m\\in K^n$ for the rows of the matrix $A$ [def-weil-matrix]; viewed in $L^n$ they are the rows of $A$ regarded as a matrix over $L$. For $F\\in\\{K,L\\}$, $\\operatorname{rank}_F(A)$ is by definition [def-weil-matrix-rank] the dimension [def-weil-vector-space-dimension] of the $F$-span $W_F\\subseteq F^n$ of $r_1,\\ldots,r_m$, a finite-dimensional space [def-weil-finite-dimensional-subspace] since it is spanned by $m$ vectors.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-matrix",
+    "def-weil-matrix-rank",
+    "def-weil-vector-space-dimension",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+   }
+  },
+  {
+   "text": "*Step 2: rank as the largest independent set of rows.* Let $F\\in\\{K,L\\}$ and let $\\mathcal I_F$ be the set of subsets $S\\subseteq\\{1,\\ldots,m\\}$ such that $(r_i)_{i\\in S}$ is linearly independent over $F$; $\\emptyset\\in\\mathcal I_F$. Claim: $\\operatorname{rank}_F(A)=\\max\\{|S|:S\\in\\mathcal I_F\\}$. (a) By [lem-weil-span-independent-subfamily] there is $S_0\\subseteq\\{1,\\ldots,m\\}$ with $(r_i)_{i\\in S_0}$ linearly independent over $F$ and spanning $W_F$; by [lem-weil-dimension-span-independent-family], $\\dim_FW_F=|S_0|$, so $\\operatorname{rank}_F(A)=|S_0|\\leq\\max$. (b) Conversely, for $S\\in\\mathcal I_F$ the vectors $r_i$, $i\\in S$, lie in the finite-dimensional space $W_F$ and are linearly independent there, so $|S|\\leq\\dim_FW_F=\\operatorname{rank}_F(A)$ by [lem-weil-independent-family-card-le-dimension].",
+   "uses": [
+    "lem-weil-span-independent-subfamily",
+    "lem-weil-dimension-span-independent-family",
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-matrix-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+   }
+  },
+  {
+   "text": "*Step 3: independence of rows does not depend on the field.* For every $S\\subseteq\\{1,\\ldots,m\\}$, the vectors $(r_i)_{i\\in S}$ of $K^n$ are linearly independent over $L$ if and only if they are linearly independent over $K$, by [lem-weil-linear-independence-field-extension] applied to the field extension $K\\subseteq L$ and the family $(r_i)_{i\\in S}$. Hence $\\mathcal I_L=\\mathcal I_K$. This is also the 'equivalently' clause of the statement.",
+   "uses": [
+    "lem-weil-linear-independence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+   }
+  },
+  {
+   "text": "*Step 4: conclusion.* By Step 2 for $F=L$ and $F=K$ and by Step 3, $\\operatorname{rank}_L(A)=\\max\\{|S|:S\\in\\mathcal I_L\\}=\\max\\{|S|:S\\in\\mathcal I_K\\}=\\operatorname{rank}_K(A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-matrix",
+  "def-weil-matrix-rank",
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-span-independent-subfamily",
+  "lem-weil-dimension-span-independent-family",
+  "lem-weil-independent-family-card-le-dimension",
+  "lem-weil-linear-independence-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +103,17 @@
    "results": "~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:318 `RingHom.map_det (f : R →+* S) (M : Matrix n n R) : f M.det = Matrix.det (f.mapMatrix M)` (a minor of A computed in L is the image of the minor computed in K, so it vanishes in L iff in K: the determinant form in which Deligne and Milne use the statement); ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean:864 `Submodule.baseChange_span`",
    "date": "2026-10-09",
    "verdict": "no match; `RingHom.map_det` gives the vanishing of one minor over L iff over K, not the rank equality"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rank_map\\|mapMatrix.*rank\\|rank.*mapMatrix\\|(.*\\.map .*)\\.rank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; grep -n 'theorem rank_\\|lemma rank_' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean",
+   "results": "no lemma on `Matrix.rank (A.map f)` or `(f.mapMatrix A).rank` anywhere in Mathlib (only `rank_submatrix_le`, `rank_reindex`, `rank_transpose`, `rank_eq_finrank_span_row` (:569), `LinearIndependent.rank_matrix` (:574) and determinant/unit lemmas in Rank.lean; no `rank_eq_card_le_iff_det_ne_zero`-type lemma characterizing rank by minors)",
+   "date": "2026-10-09",
+   "verdict": "no match: the whole statement is not a Mathlib lemma; the proof uses four Mathlib leaves (lem-weil-linear-independence-field-extension, lem-weil-span-independent-subfamily, lem-weil-dimension-span-independent-family, lem-weil-independent-family-card-le-dimension)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +131,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-matrix-rank-field-extension",
+  "worker": "stage1",
+  "summary": "Node had no proof. Wrote a 4-step agent proof (no linear-algebra text in literature/): rank over F is the largest size of an F-linearly independent set of rows (from three Mathlib leaves: independent subfamily with the same span, dimension of the span of an independent family, card of an independent family at most the dimension), and linear independence of vectors in K^n is the same over K and over L (Mathlib leaf linearIndependent_algebraMap_comp_iff). Created four new Mathlib-leaf nodes. Added def-pc-field-extension, def-weil-matrix and def-weil-matrix-rank to stmt_deps, since the statement uses a field extension, a matrix and its rank (the statement's row-span definition of rank_F is that of def-weil-matrix-rank). Statement kept. Searched Mathlib again for the whole statement (rank under a ring homomorphism / mapMatrix): not present."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
