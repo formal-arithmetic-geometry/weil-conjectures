@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-integral-transitive",
+ "kind": "statement",
+ "title": "A composition of integral ring maps is integral",
+ "statement": "Let $R\\to S$ and $S\\to T$ be homomorphisms of commutative rings such that $S$ is integral over $R$ and $T$ is integral over $S$ (every element is a root of a monic polynomial with coefficients in the image of the base). Then $T$ is integral over $R$ via the composite $R\\to S\\to T$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GN (lemma-integral-transitive, line 7518); used in literature/stacks-project/more-algebra.tex, proof of Lemma Tag 09XK (lemma-integral-over-henselian-pair, line 2758: 'the fact that the composition of integral ring maps is integral')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of integral ring maps is integral, transitivity of integrality",
+   "results": "isIntegral_trans, RingHom.IsIntegral.trans, Algebra.IsIntegral.trans (Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic), RingHom.isIntegral_stableUnderComposition (Mathlib.RingTheory.RingHom.Integral), AlgebraicGeometry.IsIntegralHom.instCompScheme",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsIntegral ?R ?A → Algebra.IsIntegral ?A ?B → Algebra.IsIntegral ?R ?B",
+   "results": "Algebra.IsIntegral.trans {R} (A) {B} [CommRing R] [CommRing A] [Ring B] [Algebra A B] [Algebra R B] [Algebra R A] [IsScalarTower R A B] [Algebra.IsIntegral R A] [Algebra.IsIntegral A B] : Algebra.IsIntegral R B (Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIntegral.trans\\|isIntegral_trans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean: 479 theorem isIntegral_trans, 504 protected theorem Algebra.IsIntegral.trans, 508 protected theorem RingHom.IsIntegral.trans (f.IsIntegral -> g.IsIntegral -> (g.comp f).IsIntegral); source read",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.IsIntegral.trans",
+  "file": "Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean",
+  "how": "exact: line 508, (hf : f.IsIntegral) (hg : g.IsIntegral) : (g.comp f).IsIntegral for ring homs f : R →+* S, g : S →+* T of commutative rings; algebra form Algebra.IsIntegral.trans (line 504, with IsScalarTower R S T). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-over-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: RingHom.IsIntegral.trans (IntegralClosure/IsIntegralClosure/Basic.lean:508); Algebra 00GN."
+ }
+}
