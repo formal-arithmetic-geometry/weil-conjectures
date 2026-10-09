@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-finite-middle-of-exact",
+ "kind": "statement",
+ "title": "A group exact between two finite groups is finite",
+ "statement": "Let $A\\xrightarrow{f}B\\xrightarrow{g}C$ be homomorphisms of abelian groups which are exact at $B$, i.e. $\\ker g=\\operatorname{im}f$. If $A$ and $C$ are finite, then $B$ is finite. (Indeed $\\operatorname{im}f$ is a quotient of the finite $A$ and $B/\\operatorname{im}f=B/\\ker g\\cong\\operatorname{im}g$ is a subgroup of the finite $C$, so $B$, an extension of two finite groups, is finite.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, proof of Lemma 0A5C (lemma-ses-statements): 'mostly immediate from the definitions and the long exact sequence of cohomology' (the finiteness statements (4), (5) of Situation 0A52 for the middle term)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if A → B → C is exact at B and A and C are finite groups then B is finite",
+   "results": "CategoryTheory.ShortComplex.Exact.ab_finite (Mathlib.Algebra.Homology.ShortComplex.Ab), ShortComplex.ShortExact.ab_finite_iff, AddGroup.fintypeOfKerEqRange, AddGroup.fintypeOfKerLeRange, AddGroup.fintypeOfKerOfCodom (Mathlib.GroupTheory.QuotientGroup.Finite), MonoidHom.finite_iff_finite_ker_range",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.ShortComplex.Exact.ab_finite"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddGroup.fintypeOfKerEqRange",
+   "results": "AddGroup.fintypeOfKerEqRange [Fintype F] [Fintype H] (f : F →+ G) (g : G →+ H) (h : g.ker = f.range) : Fintype G (Mathlib.GroupTheory.QuotientGroup.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match (equivalent form)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of finite abelian groups is finite: kernel of g equals range of f, domain of f and codomain of g finite, middle group finite",
+   "results": "AddGroup.fintypeOfKerEqRange, Group.fintypeOfKerEqRange, AddGroup.fintypeOfKerLeRange, Group.fintypeOfKerLeRange, AddGroup.fintypeOfDomOfCoker (Mathlib.GroupTheory.QuotientGroup.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match (equivalent form)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ab_finite' Mathlib/Algebra/Homology/ShortComplex/Ab.lean; grep -n 'fintypeOfKerEqRange\\|of_subgroup_quotient' Mathlib/GroupTheory/QuotientGroup/Finite.lean",
+   "results": "Ab.lean:152 lemma Exact.ab_finite {S : ShortComplex Ab.{u}} (hS : S.Exact) [Finite S.X₁] [Finite S.X₃] : Finite S.X₂ (proof via of_addSubgroup_quotient and ab_range_eq_ker); Finite.lean: fintypeOfKerEqRange (to_additive), Finite.of_subgroup_quotient line 64",
+   "date": "2026-10-09",
+   "verdict": "match: source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.Exact.ab_finite",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/Ab.lean",
+  "how": "exact: S : ShortComplex Ab is A --f--> B --g--> C with g ∘ f = 0, S.Exact is ker g = im f (ShortComplex.ab_exact_iff_range_eq_ker), and [Finite S.X₁] [Finite S.X₃] give Finite S.X₂. Equivalently AddGroup.fintypeOfKerEqRange f g h (Mathlib/GroupTheory/QuotientGroup/Finite.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-eight-curve-devissage",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
