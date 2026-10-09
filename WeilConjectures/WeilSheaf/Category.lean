@@ -187,6 +187,9 @@ noncomputable instance : Abelian (WeilSheaf k₀ l X) :=
 noncomputable instance : Preadditive (WeilSheaf k₀ l X) :=
   inferInstance
 
+instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderExtensions :=
+  inferInstance
+
 instance : (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
   inferInstance
 
