@@ -2,41 +2,161 @@
  "id": "prop-weil-pbc-composition-stability",
  "kind": "statement",
  "title": "Composition stability",
- "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be proper. If $\\mathrm{IA}(f)$ and\n$\\mathrm{IA}(h)$ hold, then $\\mathrm{IA}(hf)$ and hence $\\mathrm{PBC}(hf)$\nhold.",
+ "statement": "Let $f:X\\to Y$ and $h:Y\\to Z$ be proper morphisms of schemes [def-weil-proper-morphism]. If $\\mathrm{IA}(f)$ and $\\mathrm{IA}(h)$ hold in the sense of [def-weil-pbc-injective-acyclicity-property] (that is, $\\mathrm{IA}_r$ for every prime $r$), then $hf$ is proper, $\\mathrm{IA}(hf)$ holds, and hence $\\mathrm{PBC}(hf)$ holds in the sense of [def-weil-pbc-property].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/prop-weil-pbc-composition-stability.md",
   "place": "node prop-weil-pbc-composition-stability, order 1195"
  },
  "stmt_deps": [
+  "def-weil-proper-morphism",
   "def-weil-pbc-injective-acyclicity-property",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-property"
  ],
  "proof": [
   {
-   "text": "After an arbitrary base change $c:Z'\\to Z$, write $Y'=Y\\times_ZZ'$,\n$X'=X\\times_ZZ'$, with projections $b:Y'\\to Y$ and $a:X'\\to X$, and\nbase-changed maps $f'$, $h'$. Let $I$ be injective in $\\mathbf F_r$-module\nsheaves on $X$. By [lem-weil-pbc-direct-image-preserves-injectives] the sheaf\n$f_*I$ is injective on $Y$. $\\mathrm{IA}_r(f)$ gives $R^qf'_*a^{-1}I=0$ for\n$q>0$, and the underived proper exchange identifies $f'_*a^{-1}I\\cong\nb^{-1}f_*I$; $\\mathrm{IA}_r(h)$ applied to the injective $f_*I$ makes this\nsheaf $h'_*$-acyclic. The Grothendieck spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] therefore vanishes in every\npositive total degree, giving $\\mathrm{IA}_r(hf)$, and $\\mathrm{PBC}(hf)$ by\nthe equivalence between $\\mathrm{PBC}$ and $\\mathrm{IA}$ recorded with\n[def-weil-pbc-property].",
+   "text": "*Properness.* $hf$ is proper as a composite of proper morphisms [lem-weil-pbc-proper-composition], so $\\mathrm{IA}(hf)$ and $\\mathrm{PBC}(hf)$ are defined [def-weil-pbc-injective-acyclicity-property], [def-weil-pbc-property].",
    "uses": [
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-pbc-injective-acyclicity-property",
     "def-weil-pbc-property"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), statement ('proper morphisms'); Morphisms, Lemma 01W3 (label morphisms-lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "*The squares.* Fix a prime $r$ and a base change $c:Z'\\to Z$, with a cartesian square [def-weil-pbc-cartesian-square] for $hf$: a scheme $X'$ with $a:X'\\to X$, $e:X'\\to Z'$, $hfa=ce$, and $(X',a,e)$ a fibre product of $hf$ and $c$. Let $Y'=Y\\times_ZZ'$ [def-pc-fibre-product] with projections $b:Y'\\to Y$, $h':Y'\\to Z'$; the square $(h,h',c,b)$ is cartesian. By the universal property of $Y'$ applied to $fa:X'\\to Y$ and $e:X'\\to Z'$ (which satisfy $h(fa)=ce$) there is a unique $f':X'\\to Y'$ with $bf'=fa$ and $h'f'=e$. In the diagram formed by the upper square $(f,f',b,a)$ over the cartesian lower square $(h,h',c,b)$ the outer rectangle is the given cartesian square $(hf,e=h'f',c,a)$, so by the pasting lemma [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $X'=Z'\\times_ZX=Y'\\times_YX$. Both squares are cartesian squares in the sense of [def-weil-pbc-cartesian-square], with the identifications given by these fibre-product structures.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ('set $Y'=Z'\\times_ZY$ and $X'=Z'\\times_ZX=Y'\\times_YX$'); the pasting is Categories, Lemma 001Y, proof"
+   }
+  },
+  {
+   "text": "*$f_*I$ is injective.* Let $I$ be an injective sheaf of $\\mathbf F_r$-modules on $X_{\\Et}$. The direct image $f_*$ [def-weil-pbc-direct-image] carries $\\mathbf F_r$-module sheaves to $\\mathbf F_r$-module sheaves and is right adjoint to the exact inverse image $f^{-1}$ on them [def-weil-pbc-inverse-image]; by [lem-weil-pbc-direct-image-preserves-injectives], applied in the category of $\\mathbf F_r$-module sheaves, $f_*I$ is an injective sheaf of $\\mathbf F_r$-modules on $Y_{\\Et}$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-direct-image-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, first paragraph (Cohomology on Sites, Lemma 0730, label sites-cohomology-lemma-pushforward-injective-flat)"
+   }
+  },
+  {
+   "text": "*Acyclicity along $f'$.* $\\mathrm{IA}_r(f)$ [def-weil-pbc-injective-acyclicity-property], applied to the base change $b:Y'\\to Y$ with the cartesian square $(f,f',b,a)$ of step 2 and to the injective $I$, gives $R^qf'_*a^{-1}I=0$ for $q>0$.",
+   "uses": [
+    "def-weil-pbc-injective-acyclicity-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ('we know that $R^qf'_*a^{-1}\\mathcal I$ ... are zero for $q>0$')"
+   }
+  },
+  {
+   "text": "*Underived exchange.* $I$ is killed by $r$, so it is a torsion abelian sheaf [def-weil-pbc-etale-sheaves] (every local section is killed by $r$). Since $f$ is proper and the square $(f,f',b,a)$ is cartesian, [lemma-weil-pbc-proper-underived-exchange] gives an isomorphism $b^{-1}f_*I\\xrightarrow{\\sim}f'_*a^{-1}I$ of abelian sheaves on $Y'_{\\Et}$. (That node asks $f$ proper and the sheaf torsion; Stacks' Lemma 0A3U needs only $f$ proper; injectivity of $I$ is not used here.)",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lemma-weil-pbc-proper-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ('By Lemma 0A3U we have $b^{-1}f_*\\mathcal I=f'_*a^{-1}\\mathcal I$'); Lemma 0A3U (label lemma-proper-base-change-f-star)"
+   }
+  },
+  {
+   "text": "*Acyclicity along $h'$.* $\\mathrm{IA}_r(h)$ [def-weil-pbc-injective-acyclicity-property], applied to the base change $c:Z'\\to Z$ with the cartesian square $(h,h',c,b)$ and to the injective $\\mathbf F_r$-module sheaf $f_*I$ of step 3, gives $R^ph'_*b^{-1}f_*I=0$ for $p>0$. Since $R^ph'_*$ is a functor, the isomorphism of step 5 gives $R^ph'_*(f'_*a^{-1}I)\\cong R^ph'_*(b^{-1}f_*I)=0$ for $p>0$.",
+   "uses": [
+    "def-weil-pbc-injective-acyclicity-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ('$R^q(g')_*b^{-1}f_*\\mathcal I$ are zero for $q>0$')"
+   }
+  },
+  {
+   "text": "*The spectral sequence.* For $X'\\xrightarrow{f'}Y'\\xrightarrow{h'}Z'$ and the abelian sheaf $a^{-1}I$ on $X'_{\\Et}$, [lem-weil-pbc-grothendieck-spectral-sequence] gives a first-quadrant spectral sequence $E_2^{p,q}=R^ph'_*R^qf'_*a^{-1}I\\Rightarrow R^{p+q}(h'f')_*a^{-1}I$, converging in the sense of [def-sp-convergence]. Let $n>0$ and $p+q=n$, $p,q\\ge0$. If $q>0$, then $R^qf'_*a^{-1}I=0$ by step 4, so $E_2^{p,q}=R^ph'_*(0)=0$. If $q=0$, then $p=n>0$ and $E_2^{p,0}=R^ph'_*(f'_*a^{-1}I)=0$ by step 6. Each $E_\\infty^{p,q}$ is a subquotient of $E_2^{p,q}$, hence $0$ for $p+q=n$. Convergence of a first-quadrant spectral sequence gives a finite filtration $0=F^{n+1}\\subseteq F^n\\subseteq\\dots\\subseteq F^0=R^n(h'f')_*a^{-1}I$ with $F^p/F^{p+1}\\cong E_\\infty^{p,n-p}=0$, so by descending induction every $F^p$ is $0$ and $R^n(h'f')_*a^{-1}I=0$.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ('Using the spectral sequence (Cohomology on Sites, Lemma 0734) ... we conclude that $R^p(g'\\circ f')_*a^{-1}\\mathcal I=0$ for $p>0$'); the degeneration argument is written out here"
+   }
+  },
+  {
+   "text": "*Conclusion.* Since $h'f'=e$ is the base change of $hf$ along $c$ in the given cartesian square, and $r$, $c$, the square and $I$ were arbitrary, step 7 is $\\mathrm{IA}_r(hf)$ for every prime $r$, i.e. $\\mathrm{IA}(hf)$ [def-weil-pbc-injective-acyclicity-property]. As $hf$ is proper (step 1), [lemma-weil-pbc-property-iff-acyclicity] (direction 2 $\\Rightarrow$ 1) gives $\\mathrm{PBC}(hf)$.",
+   "uses": [
+    "def-weil-pbc-injective-acyclicity-property",
+    "lemma-weil-pbc-property-iff-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, first paragraph ('We will use the equivalence of Lemma 0A4B without further mention'); Lemma 0A4B (label lemma-proper-base-change-in-terms-of-injectives)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-pbc-injective-acyclicity-property",
   "def-weil-pbc-property",
+  "def-weil-pbc-cartesian-square",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "def-weil-pbc-etale-sheaves",
   "lemma-weil-pbc-proper-underived-exchange",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "def-sp-convergence",
   "lemma-weil-pbc-property-iff-acyclicity"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/prop-weil-pbc-composition-stability.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A4D (label lemma-composition), statement and proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change for etale cohomology is stable under composition of proper morphisms",
+   "results": "AlgebraicGeometry.IsProper.instCompScheme, IsProper.isStableUnderBaseChange, IsProper.stableUnderComposition (Mathlib.AlgebraicGeometry.Morphisms.Proper); MorphismProperty.IsStableUnderComposition.mk; nothing on etale cohomology or higher direct images",
+   "date": "2026-10-09",
+   "verdict": "no match (only properness of the composite, used in step 1 via lem-weil-pbc-proper-composition)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images of injective sheaves vanish after base change, stable under composition of morphisms of schemes",
+   "results": "CategoryTheory.Presheaf.comp_isLocallyInjective_iff, Presheaf.isLocallyInjective_of_isLocallyInjective(_fac), ... (Mathlib.CategoryTheory.Sites.LocallyInjective/LocallySurjective): local injectivity of presheaf maps, unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'ProperBaseChange\\|proper base change\\|HasInjectiveAcyclicity' in Mathlib/; 'spectral' in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites; ls Mathlib/AlgebraicGeometry/Sites/",
+   "results": "none (only Topology.Spectral imports); AlgebraicGeometry/Sites has Etale.lean, EtalePoint.lean, ElladicCohomology.lean etc., no higher direct images or base change of etale cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no etale higher direct images, so neither IA nor PBC"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -73,5 +193,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-pbc-composition-stability",
+  "worker": "stage1",
+  "summary": "Rewritten from Stacks Etale Cohomology Lemma 0A4D (lemma-composition), the composition step of 0A4F; the imported one-paragraph proof is split into 8 steps. Statement: 'proper' repointed from def-weil-pbc-scheme-conventions to def-weil-proper-morphism, def-weil-pbc-property added to stmt_deps (PBC is in the statement), properness of hf made explicit. Steps: properness of hf (lem-weil-pbc-proper-composition, tool of sk-thm-br, as already accepted on lem-weil-pbc-reduction-projective-space); construction of Y'=Y x_Z Z' and f' with the top square cartesian by the pasting lemma (new Mathlib leaf lem-weil-pbc-cartesian-square-pasting, CategoryTheory.IsPullback.paste_vert_iff) - the import silently assumed the base-changed squares; f_*I injective in F_r-module sheaves (lem-weil-pbc-direct-image-preserves-injectives, whose statement names only 'etale sheaves'); IA_r(f) along b; underived exchange (lemma-weil-pbc-proper-underived-exchange needs f proper and the sheaf torsion: I is killed by r; injectivity not needed); IA_r(h) along c on f_*I; Grothendieck spectral sequence for h'f' with the degeneration written out (E_2 vanishes in positive total degree, finite filtration of the abutment); conclusion IA(hf) and PBC(hf) via lemma-weil-pbc-property-iff-acyclicity (now in uses; it was in proof_deps only). def-weil-pbc-property is no longer a proof use beyond step 1. All R^q are those of def-weil-pbc-direct-image (abelian sheaves), consistently with def-weil-pbc-injective-acyclicity-property."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "from Stacks 0A4D; pasting of cartesian squares added as a Mathlib leaf; lem-weil-pbc-proper-composition (sk-thm-br) accepted as a tool use"
+ }
 }

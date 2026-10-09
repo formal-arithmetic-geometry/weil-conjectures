@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-cartesian-square-pasting",
+ "kind": "statement",
+ "title": "Pasting lemma for cartesian squares of schemes",
+ "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{a}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{b}&Y\\\\\nh'\\downarrow&&\\downarrow h\\\\\nZ'&\\xrightarrow{c}&Z\n\\end{array}\n$$\n\nbe a commutative diagram of morphisms of schemes ($fa=bf'$, $hb=ch'$) in which the lower square is cartesian, i.e. $(Y',b,h')$ is a fibre product [def-pc-fibre-product] of $h$ and $c$. Then the upper square is cartesian ($(X',a,f')$ is a fibre product of $f$ and $b$) if and only if the outer rectangle is cartesian ($(X',a,h'f')$ is a fibre product of $hf$ and $c$).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma 001Y (label lemma-composition-representable), proof: the claim $x\\times_zt=x\\times_y(y\\times_zt)$; used in Etale Cohomology, Lemma 0A4D (label lemma-composition), proof, second paragraph ($X'=Z'\\times_ZX=Y'\\times_YX$)"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pasting lemma for pullback squares: if the bottom square and the outer rectangle are pullbacks then the top square is a pullback",
+   "results": "CategoryTheory.IsPullback.of_bot, CategoryTheory.IsPullback.paste_vert_iff (Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic); CategoryTheory.Limits.pullbackLeftPullbackSndIso (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); IsPushout.of_left",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.IsPullback.paste_vert_iff"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.of_bot",
+   "results": "CategoryTheory.IsPullback.of_bot (s : IsPullback h₁₁ (v₁₁ ≫ v₂₁) (v₁₂ ≫ v₂₂) h₃₁) (p : h₁₁ ≫ v₁₂ = v₁₁ ≫ h₂₁) (t : IsPullback h₂₁ v₂₁ v₂₂ h₃₁) : IsPullback h₁₁ v₁₁ v₁₂ h₂₁, Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic",
+   "date": "2026-10-09",
+   "verdict": "match (the 'if' direction)"
+  },
+  {
+   "tool": "grep",
+   "query": "'theorem paste_vert_iff\\|theorem of_bot \\|theorem paste_vert ' in Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "results": "paste_vert (line 174), of_bot (line 213), paste_vert_iff (line 237): (s : IsPullback h₂₁ v₂₁ v₂₂ h₃₁) (e : h₁₁ ≫ v₁₂ = v₁₁ ≫ h₂₁) : IsPullback h₁₁ (v₁₁ ≫ v₂₁) (v₁₂ ≫ v₂₂) h₃₁ ↔ IsPullback h₁₁ v₁₁ v₁₂ h₂₁ (source read)",
+   "date": "2026-10-09",
+   "verdict": "match: specializes in one line to C = AlgebraicGeometry.Scheme"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsPullback.paste_vert_iff",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+  "how": "specializes in one line: take C = AlgebraicGeometry.Scheme, h₁₁=a, h₂₁=b, h₃₁=c, v₁₁=f', v₂₁=h', v₁₂=f, v₂₂=h; s is the cartesian lower square, e the commutativity fa=bf'; the iff says outer rectangle cartesian iff upper square cartesian"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-composition-stability",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

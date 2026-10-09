@@ -1,12 +1,11 @@
 # Work queue
 
-563 items; claim with `tools/claim.py next <group> [--stage N]`.
+562 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (551)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-reduction-projective-space` | 1002 | none |
 | `lem-weil-pbc-sheaf-flat-separator` | 1002 | sorry_here |
 | `lemma-weil-pbc-cancellation` | 1002 | none |
 | `lemma-weil-pbc-p1-exchange-geometric-stalk` | 1002 | sorry_here |
@@ -20,7 +19,6 @@
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
 | `lem-weil-pbc-injective-module-abelian-acyclic` | 1003 | none |
-| `lem-weil-pbc-projective-space-zero-isomorphism` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-over-base` | 1003 | none |
@@ -560,7 +558,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (10)
+## Stage 2: nodes to state (11)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -574,8 +572,9 @@
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
+| `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 568 nodes that wait for stage 1, 41 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 42 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
