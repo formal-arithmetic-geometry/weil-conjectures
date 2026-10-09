@@ -2,17 +2,66 @@
  "id": "lem-weil-pbc-sheafification-plus-separated",
  "kind": "statement",
  "title": "The plus construction is separated and injects into its double plus",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$. For an object $U$, define $\\mathcal F^+(U)$ to be the equivalence classes of pairs consisting of a covering $\\{U_i\\to U\\}_{i\\in I}$ and sections $s_i\\in\\mathcal F(U_i)$ whose pullbacks agree after passing to a covering of each $U_i\\times_UU_j$, where two pairs are equivalent when they have a common covering refinement on which the sections agree; restrictions are obtained by pullback of coverings and sections. Then $\\mathcal F^+$ is separated: for every covering $\\{V_a\\to U\\}_{a\\in A}$, the map from $\\mathcal F^+(U)$ to the equalizer of the two restriction maps to the pairwise fibre products $V_a\\times_UV_b$ is injective. Moreover, the canonical map $\\mathcal F^+\\to\\mathcal F^{++}$ is injective. Equivalently, two plus-construction sections that restrict equally to every member of a covering are equal, and equality of their images in the double plus implies equality in the first plus.",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology]. Call a presheaf of sets $\\mathcal G$ on $\\mathcal C$ *separated* if for every covering $\\{U_i\\to U\\}_{i\\in I}$ the map $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)$, $s\\mapsto(s|_{U_i})_i$, is injective (Stacks Sites, Definition 00WA). For a presheaf of sets $\\mathcal G$ let $\\mathcal G^+$, $\\mathcal G^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal G)$ (the colimit over the coverings of $U$ and their refinements of the zeroth Cech sets $H^0(\\mathcal U,\\mathcal G)=\\{(s_i)\\in\\prod_i\\mathcal G(U_i)\\mid s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}\\}$), be its plus construction and $\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^+$, $s\\mapsto[\\{\\mathrm{id}_U\\},s]$, the canonical map [def-weil-pbc-site-plus-construction]; $\\mathcal G^+$ is a presheaf and $\\theta_{\\mathcal G}$ a morphism of presheaves [lem-weil-pbc-site-plus-construction-presheaf]. Let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$ and $\\mathcal F^{++}=(\\mathcal F^+)^+$. Then (1) $\\mathcal F^+$ is separated: if $s,s'\\in\\mathcal F^+(U)$ and $\\{U_i\\to U\\}_{i\\in I}$ is a covering with $s|_{U_i}=s'|_{U_i}$ for all $i$, then $s=s'$; and (2) the canonical map $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to\\mathcal F^{++}$ is injective, i.e. $\\theta_{\\mathcal F^+,U}:\\mathcal F^+(U)\\to\\mathcal F^{++}(U)$ is injective for every object $U$.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Theorem Tag 00WB (theorem-plus), parts (1) and (2), with the plus construction of Section 7.10 and the common-refinement relation used there"
+  "place": "Sites, Theorem 00WB (theorem-plus): part (1) and its proof; for (2), the first sentence of the proof of part (2) (for a separated presheaf $\\mathcal G$ the map $\\mathcal G\\to\\mathcal G^+$ is injective) applied to $\\mathcal G=\\mathcal F^+$, separated by part (1); definition of separated: Definition 00WA; plus construction: Section 00W1"
  },
  "stmt_deps": [
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-site-plus-construction-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Part (1).) Let $s,s'\\in\\mathcal F^+(U)$ and let $\\mathcal U^0=\\{U_i\\to U\\}_{i\\in I}$ be a covering with $s|_{U_i}=s'|_{U_i}$ for all $i$. By [lem-weil-pbc-site-plus-construction-presheaf] (1) write $s=[\\mathcal U,t]$ and $s'=[\\mathcal U',t']$ with $t\\in H^0(\\mathcal U,\\mathcal F)$, $t'\\in H^0(\\mathcal U',\\mathcal F)$, $\\mathcal U=\\{U_a\\to U\\}_{a\\in A}$, $\\mathcal U'=\\{U'_b\\to U\\}_{b\\in B}$. Applying [lem-weil-pbc-site-coverings-common-refinement] twice, there is a covering $\\mathcal W=\\{W_j\\to U\\}_{j\\in J}$ with morphisms of coverings over $\\mathrm{id}_U$ to $\\mathcal U^0$, $\\mathcal U$ and $\\mathcal U'$; so for every $j$ the map $w_j:W_j\\to U$ factors as $W_j\\to U_{i(j)}\\to U$, as $W_j\\xrightarrow{c_j}U_{a(j)}\\to U$ and as $W_j\\xrightarrow{c'_j}U'_{b(j)}\\to U$. Put $x_j=t_{a(j)}|_{W_j}=\\mathcal F(c_j)(t_{a(j)})$ and $x'_j=t'_{b(j)}|_{W_j}\\in\\mathcal F(W_j)$. By [lem-weil-pbc-site-plus-construction-presheaf] (3), $s|_{W_j}=\\mathcal F^+(w_j)(s)=\\theta_{W_j}(x_j)$ and $s'|_{W_j}=\\theta_{W_j}(x'_j)$. Since $w_j$ factors through $U_{i(j)}\\to U$ and $\\mathcal F^+$ is a presheaf [lem-weil-pbc-site-plus-construction-presheaf] (4), $s|_{W_j}=(s|_{U_{i(j)}})|_{W_j}=(s'|_{U_{i(j)}})|_{W_j}=s'|_{W_j}$, hence $\\theta_{W_j}(x_j)=\\theta_{W_j}(x'_j)$. By [lem-weil-pbc-site-plus-construction-presheaf] (2) (the case of $\\theta$) there is for each $j$ a covering $\\{W_{jk}\\to W_j\\}_{k\\in K_j}$ with $x_j|_{W_{jk}}=x'_j|_{W_{jk}}$ for all $k$. By axiom (ii) of a site [def-weil-pbc-sites-and-cohomology], $\\mathcal V=\\{W_{jk}\\to W_j\\to U\\}_{(j,k)}$ is a covering of $U$. The maps $W_{jk}\\to W_j\\xrightarrow{c_j}U_{a(j)}$ with the index map $(j,k)\\mapsto a(j)$ form a morphism of coverings $f:\\mathcal V\\to\\mathcal U$ over $\\mathrm{id}_U$, and likewise $f':\\mathcal V\\to\\mathcal U'$ via $c'_j$ [def-weil-pbc-site-plus-construction] (b); by functoriality of $\\mathcal F$, $(f^*t)_{(j,k)}=t_{a(j)}|_{W_{jk}}=x_j|_{W_{jk}}=x'_j|_{W_{jk}}=(f'^*t')_{(j,k)}$. Hence $f^*t=f'^*t'$, and by [lem-weil-pbc-site-plus-construction-presheaf] (2) $s=[\\mathcal U,t]=[\\mathcal U',t']=s'$. So $\\mathcal F^+$ is separated.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB, proof of (1) (with Lemma 00W6 for the common refinement and Lemma 00W9 for $s|_{W_j}=\\theta(s_j)$)"
+   }
+  },
+  {
+   "text": "(A separated presheaf injects into its plus construction.) Let $\\mathcal G$ be a separated presheaf of sets on $\\mathcal C$ and $a,b\\in\\mathcal G(U)$ with $\\theta_{\\mathcal G,U}(a)=\\theta_{\\mathcal G,U}(b)$, i.e. $[\\{\\mathrm{id}_U\\},a]=[\\{\\mathrm{id}_U\\},b]$ [def-weil-pbc-site-plus-construction] (c). By [lem-weil-pbc-site-plus-construction-presheaf] (2) there is a covering $\\{V_k\\to U\\}_{k\\in K}$ with $a|_{V_k}=b|_{V_k}$ for all $k$, i.e. $a$ and $b$ have the same image in $\\prod_k\\mathcal G(V_k)$. Since $\\mathcal G$ is separated (definition in the statement), $a=b$. Thus $\\theta_{\\mathcal G,U}$ is injective for every $U$.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB, proof of (2), first sentence (the maps $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$ are injective for $\\mathcal F$ separated), Definition 00WA"
+   }
+  },
+  {
+   "text": "(Part (2).) $\\mathcal F^+$ is a presheaf of sets [lem-weil-pbc-site-plus-construction-presheaf] (4), separated by the first step; the second step applied to $\\mathcal G=\\mathcal F^+$ shows that $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to(\\mathcal F^+)^+=\\mathcal F^{++}$ is injective on every object.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB, parts (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "lem-weil-pbc-site-plus-construction-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Theorem 00WB (theorem-plus), proofs of (1) and (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +90,31 @@
    "results": "Mathlib sheafification files provide IsSheafFor and presheafToSheaf but no first-plus separatedness declaration for arbitrary sites",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "plus construction of a presheaf is separated",
+   "results": "CategoryTheory.GrothendieckTopology.Plus.isSheaf_of_sep, Plus.meqOfSep, Plus.sep, Plus.exists_of_sep (Mathlib.CategoryTheory.Sites.ConcreteSheafification), Presheaf.IsSheaf.isSeparated, Sheaf.isSeparated (Mathlib.CategoryTheory.Sites.Whiskering)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism: `Plus.sep` is part (1) for `J.plusObj P` over a Grothendieck topology (covering sieves `J.Cover X`) with values in a concrete category; the site of this node is a Stacks site with families of coverings [def-weil-pbc-sites-and-cohomology] and its F^+ is the colimit over coverings, whose identification with `plusObj` of the associated topology is itself a theorem (Stacks Sites, 00ZB/00ZC/00ZG); not a one-line specialization. Corrects the earlier grep entry, which missed `Plus.sep`"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep",
+   "results": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep (Mathlib.CategoryTheory.Sites.ConcreteSheafification): for P separated with respect to every J.Cover, `(J.toPlus P).app (op X)` is injective",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism (sieves): with `Plus.sep` gives part (2) as `inj_of_sep (J.plusObj P) (fun X S x y => Plus.sep P S x y)` for Grothendieck topologies; same caveat as above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem sep\\|theorem inj_of_sep' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean",
+   "results": "ConcreteSheafification.lean:246 `theorem sep {X : C} (P : Cᵒᵖ ⥤ D) (S : J.Cover X) (x y : ToType ((J.plusObj P).obj (op X))) (h : ∀ I : S.Arrow, (J.plusObj P).map I.f.op x = (J.plusObj P).map I.f.op y) : x = y` ('P⁺ is always separated'); :292 `theorem inj_of_sep`",
+   "date": "2026-10-10",
+   "verdict": "sieve-version match recorded (CategoryTheory.GrothendieckTopology.Plus.sep, Plus.inj_of_sep, Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean lines 246, 292); not a leaf for the Stacks families-of-coverings site, see leansearch entry"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheafification-plus-separated",
+  "worker": "stage1",
+  "summary": "Statement corrected against Stacks 00W1/00WB: the old text defined F^+ by families agreeing only after a further covering of each U_i x_U U_j, which is not Stacks' H^0 (strict agreement on U_i x_U U_j); the statement now uses the Stacks plus construction (colimit over J_U of H^0) from the new definition node def-weil-pbc-site-plus-construction, states separatedness (Def. 00WA) explicitly, and states (2) as injectivity of theta_{F^+}. Proof in three steps following the proof of 00WB(1) and the first sentence of 00WB(2): separatedness of F^+ via a common refinement (new lem-weil-pbc-site-coverings-common-refinement, 00W6) and the description of F^+ (new lem-weil-pbc-site-plus-construction-presheaf: 00W4, 00W7/00W8 description, 00W9); a separated presheaf injects into its plus; apply to F^+. Mathlib has the sieve versions GrothendieckTopology.Plus.sep and Plus.inj_of_sep (ConcreteSheafification.lean:246, 292), recorded but not a leaf since the DAG's site is a Stacks site with families of coverings; the earlier grep entry claiming no match was wrong. No Lean in the source repository."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Three steps along Stacks 00WB (1),(2): separatedness of F^+ by a common refinement of the three coverings and the equality criterion in the colimit; a separated presheaf injects into its plus construction; applied to F^+. Correct and careful. Statement corrected by the worker to the Stacks plus construction (colimit over J_U of the Cech H^0 with strict agreement on U_i x_U U_j; the C1 inline description with agreement only after a further covering was not F^+), separated made explicit (00WA). Three new unsplit nodes: the plus-construction definition (00W1, with a forward pointer only), common refinement (00W6), and the presheaf/colimit description lemma (00W4, 00W7, 00W9). Mathlib Plus.sep / Plus.inj_of_sep (ConcreteSheafification.lean:246/292) recorded but not taken as a leaf since they are for Grothendieck topologies (sieves), the same convention as for smooth morphisms. Follow-up by L: the plus-theorem node (being split) must cite def-weil-pbc-site-plus-construction instead of the old inline description."
+ }
 }

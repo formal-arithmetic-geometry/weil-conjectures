@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-site-plus-construction-presheaf",
+ "kind": "statement",
+ "title": "The plus construction is a presheaf, and its elements and equalities are described by refinements",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], $\\mathcal F$ a presheaf of sets on $\\mathcal C$, and $H^0(\\mathcal U,\\mathcal F)$, morphisms of coverings, $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$, the classes $[\\mathcal U,s]$, the maps $\\mathcal F^+(h)$ and $\\theta$ as in [def-weil-pbc-site-plus-construction]. Then: (1) every element of $\\mathcal F^+(U)$ is of the form $[\\mathcal U,s]$ for some covering $\\mathcal U$ of $U$ and some $s\\in H^0(\\mathcal U,\\mathcal F)$; (2) for coverings $\\mathcal U,\\mathcal U'$ of $U$ and $s\\in H^0(\\mathcal U,\\mathcal F)$, $s'\\in H^0(\\mathcal U',\\mathcal F)$ one has $[\\mathcal U,s]=[\\mathcal U',s']$ if and only if there are a covering $\\mathcal V$ of $U$ and morphisms of coverings $f:\\mathcal V\\to\\mathcal U$, $f':\\mathcal V\\to\\mathcal U'$ over $\\mathrm{id}_U$ with $f^*s=f'^*s'$ in $H^0(\\mathcal V,\\mathcal F)$; in particular, for $a,b\\in\\mathcal F(U)$, $\\theta_U(a)=\\theta_U(b)$ if and only if there is a covering $\\{V_k\\to U\\}$ with $a|_{V_k}=b|_{V_k}$ for all $k$; (3) for every morphism $h:V\\to U$, every covering $\\mathcal U$ of $U$, every covering $\\mathcal W$ of $V$ and every morphism of coverings $g:\\mathcal W\\to\\mathcal U$ lying over $h$, one has $\\mathcal F^+(h)([\\mathcal U,s])=[\\mathcal W,g^*s]$ for all $s\\in H^0(\\mathcal U,\\mathcal F)$; in particular the maps $\\mathcal F^+(h)$ do not depend on the chosen fibre products, and if $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ and $h$ factors as $V\\xrightarrow{c}U_i\\to U$ for some $i$, then $\\mathcal F^+(h)([\\mathcal U,s])=\\theta_V(s_i|_V)$ with $s_i|_V=\\mathcal F(c)(s_i)$; (4) with these maps $\\mathcal F^+$ is a presheaf of sets on $\\mathcal C$ ($\\mathcal F^+(\\mathrm{id}_U)=\\mathrm{id}$ and $\\mathcal F^+(h\\circ k)=\\mathcal F^+(k)\\circ\\mathcal F^+(h)$) and $\\theta:\\mathcal F\\to\\mathcal F^+$ is a morphism of presheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section 00W1: Lemma 00W4 (lemma-plus-presheaf) for (4); Lemma 00W6 (lemma-common-refinement), Lemma 00W7 (lemma-independent-refinement) and the paragraph after Remark 00W8 (the diagram is filtered; description of elements and equality in the colimit) for (1), (2); the remark after Lemma 00W4 and the proof of Lemma 00W9 (lemma-plus-surjective) for (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-plus-construction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element of plus construction is represented by a compatible family on a cover, equal iff equal after refinement",
+   "results": "GrothendieckTopology.Plus.exists_rep, Plus.toPlus_eq_mk, Plus.sep, Plus.toPlus_apply, Plus.exists_of_sep, Plus.toPlus_mk (Mathlib.CategoryTheory.Sites.ConcreteSheafification)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism: exists_rep (1), eq_mk_iff_exists (2), res_mk_eq_mk_pullback (3) state this for `plusObj` over covering sieves of a Grothendieck topology and concrete D; Mathlib's plus construction is defined for a Grothendieck topology (covering sieves, `J.Cover X`), not for a site given by families of coverings as in Stacks 00VH [def-weil-pbc-sites-and-cohomology]; the identification of the Stacks plus construction (colimit over coverings) with `plusObj` of the generated topology is itself a theorem (it passes through the topology associated to a site, Stacks Sites, Section 00ZB and Lemma 00ZC, and the sieve-wise construction $L\\mathcal F$ of Section 00ZG), so this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of P plus are represented by matching families on a cover, two are equal iff they agree on a common refinement cover",
+   "results": "CoversTop.sections_ext, Meq.ext_iff, Meq.ext, Plus.sep, FamilyOfElementsOnObjects.IsCompatible.existsUnique_section, Plus.meqOfSep",
+   "date": "2026-10-10",
+   "verdict": "no match for families of coverings"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem exists_rep\\|theorem eq_mk_iff_exists\\|theorem res_mk_eq_mk_pullback\\|theorem toPlus_eq_mk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean",
+   "results": "ConcreteSheafification.lean:150 res_mk_eq_mk_pullback, :202 toPlus_eq_mk, :208 exists_rep, :217 eq_mk_iff_exists (all in namespace CategoryTheory.GrothendieckTopology.Plus, sieve version)",
+   "date": "2026-10-10",
+   "verdict": "no match (sieve version only; see leansearch entry)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheafification-plus-separated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

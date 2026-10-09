@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-site-plus-construction",
+ "kind": "definition",
+ "title": "Zeroth Cech set of a covering and the plus construction of a presheaf of sets on a site",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and $\\mathcal F$ a presheaf of sets on $\\mathcal C$, i.e. a functor $\\mathcal C^{op}\\to$ sets; for $h:V\\to W$ write $s\\mapsto s|_V=\\mathcal F(h)(s)$. (a) *Zeroth Cech set.* For a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ put $H^0(\\mathcal U,\\mathcal F)=\\{(s_i)_{i\\in I}\\in\\prod_i\\mathcal F(U_i)\\mid s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}\\ \\forall i,j\\in I\\}$ (restrictions along the two projections of the fibre product), with the canonical map $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$, $s\\mapsto(s|_{U_i})_i$. (b) *Morphisms of coverings.* A morphism (refinement) $f:\\mathcal U\\to\\mathcal V$ from $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ to $\\mathcal V=\\{V_j\\to V\\}_{j\\in J}$ consists of a morphism $\\chi:U\\to V$, a map $\\alpha:I\\to J$ and morphisms $f_i:U_i\\to V_{\\alpha(i)}$ such that $U_i\\xrightarrow{f_i}V_{\\alpha(i)}\\to V$ equals $U_i\\to U\\xrightarrow{\\chi}V$ for all $i$; it is said to lie over $\\chi$. It induces $f^*:H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$, $(f^*s)_i=s_{\\alpha(i)}|_{U_i}$ (restriction along $f_i$), which is well defined because $f_i\\times f_{i'}$ maps $U_i\\times_UU_{i'}$ to $V_{\\alpha(i)}\\times_VV_{\\alpha(i')}$ compatibly with the projections, and $f^*$ is compatible with $\\mathcal F(\\chi):\\mathcal F(V)\\to\\mathcal F(U)$ and the canonical maps of (a). A covering $\\mathcal U$ of $U$ *refines* a covering $\\mathcal V$ of $U$ if there is a morphism $\\mathcal U\\to\\mathcal V$ over $\\mathrm{id}_U$. (c) *The plus construction.* Let $\\mathcal J_U$ be the category whose objects are the coverings of $U$ and whose morphisms are the morphisms of coverings over $\\mathrm{id}_U$ (it is small by the set-theoretic conventions of a site and nonempty, containing $\\{\\mathrm{id}_U\\}$); $\\mathcal U\\mapsto H^0(\\mathcal U,\\mathcal F)$, $f\\mapsto f^*$ is a functor $\\mathcal J_U^{opp}\\to$ sets. Define $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$ (colimit of sets) and write $[\\mathcal U,s]\\in\\mathcal F^+(U)$ for the image of $s\\in H^0(\\mathcal U,\\mathcal F)$. For a morphism $h:V\\to U$, choose for every covering $\\mathcal U=\\{U_i\\to U\\}$ the fibre products $U_i\\times_UV$ (axiom (iii) of a site); the covering $\\mathcal U\\times_UV=\\{U_i\\times_UV\\to V\\}$ and the projections give a morphism of coverings $p_{\\mathcal U}:\\mathcal U\\times_UV\\to\\mathcal U$ over $h$, natural in $\\mathcal U\\in\\mathcal J_U$, and $\\mathcal F^+(h):\\mathcal F^+(U)\\to\\mathcal F^+(V)$ is the induced map of colimits, $[\\mathcal U,s]\\mapsto[\\mathcal U\\times_UV,p_{\\mathcal U}^*s]$, i.e. $(s_i)\\mapsto(s_i|_{U_i\\times_UV})$. Finally $\\theta_U:\\mathcal F(U)\\to\\mathcal F^+(U)$, $s\\mapsto[\\{\\mathrm{id}_U\\},s]$, using $H^0(\\{\\mathrm{id}_U\\},\\mathcal F)=\\mathcal F(U)$. That these data form a presheaf $\\mathcal F^+$ (independent of the choices of fibre products) with a morphism of presheaves $\\theta:\\mathcal F\\to\\mathcal F^+$ is a lemma (Stacks Sites, Lemma 00W4), stated as a node of its own.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section 00W1 (section-sheafification): the definition of $H^0(\\mathcal U,\\mathcal F)$ and of the maps induced by morphisms of coverings, the category $\\mathcal J_U$ and $\\mathcal F^+(U)=\\operatorname{colim}_{\\mathcal J_U^{opp}}H^0(\\mathcal U,\\mathcal F)$, the restriction maps via $\\mathcal J_U\\to\\mathcal J_V$, and the map $\\mathcal F(U)\\to\\mathcal F^+(U)$ from the trivial covering; morphisms of coverings as in Sites, Definition 00VT (definition-morphism-coverings)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "plus construction plusObj colimit over covers of the multiequalizer",
+   "results": "CategoryTheory.GrothendieckTopology.plusObj (Mathlib.CategoryTheory.Sites.Plus), GrothendieckTopology.toPlus, plusFunctor_obj, Plus.exists_rep, Plus.toPlus_mk (Mathlib.CategoryTheory.Sites.ConcreteSheafification)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism: Mathlib's plus construction is defined for a Grothendieck topology (covering sieves, `J.Cover X`), not for a site given by families of coverings as in Stacks 00VH [def-weil-pbc-sites-and-cohomology]; the identification of the Stacks plus construction (colimit over coverings) with `plusObj` of the generated topology is itself a theorem (it passes through the topology associated to a site, Stacks Sites, Section 00ZB and Lemma 00ZC, and the sieve-wise construction $L\\mathcal F$ of Section 00ZG), so this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "plus construction of a presheaf on a site: colimit over coverings of compatible families (zeroth Cech cohomology)",
+   "results": "GrothendieckTopology.Plus.mk, GrothendieckTopology.plusObj, plusFunctor_obj, plusPlusSheaf_obj_val, plusFunctor, sheafify",
+   "date": "2026-10-10",
+   "verdict": "no match for families of coverings; plusObj is the sieve version (see leansearch entry)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def plusObj\\|def diagram\\|def toPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Plus.lean; grep -rln 'Cech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "Plus.lean:110 `def plusObj` (colimit over `(J.Cover X)ᵒᵖ` of multiequalizers `J.diagram P X`), `toPlus`; Cech only in SheafCohomology/Cech.lean and NonabelianCohomology/H1.lean (abelian / H^1), nothing indexed by families of coverings with morphisms of coverings",
+   "date": "2026-10-10",
+   "verdict": "no match (sieve version only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheafification-plus-separated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-site-plus-construction-presheaf",
+   "was": [],
+   "reason": "forward pointer, not a dependency: the lemma proves that the data of this definition form a presheaf with a morphism theta (Stacks 00W4) and describes elements and equality in the colimit",
+   "date": "2026-10-10"
+  }
+ ]
+}
