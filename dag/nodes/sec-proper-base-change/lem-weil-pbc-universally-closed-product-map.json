@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-universally-closed-product-map",
+ "kind": "statement",
+ "title": "Fibre product of universally closed morphisms is universally closed",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f_1:X_1\\to Y_1$ and $f_2:X_2\\to Y_2$ be morphisms of schemes over $S$ (that is, $X_i\\to S$ and $Y_i\\to S$ are given and $f_i$ commutes with them). If $f_1$ and $f_2$ are universally closed [def-weil-proper-morphism], then the induced morphism $f_1\\times_Sf_2:X_1\\times_SX_2\\to Y_1\\times_SY_2$ of fibre products [def-pc-fibre-product] is universally closed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma 09MQ (lemma-image-universally-closed-separated), first paragraph: the map $X\\times_SX\\to Y\\times_SY$ is universally closed as the composition $X\\times_SX\\to X\\times_SY\\to Y\\times_SY$ of universally closed morphisms; these are base changes of $f$, universally closed by Lemma 01W4 (lemma-base-change-proper, second sentence), and the composite is universally closed by Lemma 01W3 (lemma-composition-proper, second sentence)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product of two universally closed morphisms over S is universally closed (pullback.map)",
+   "results": "AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, universallyClosed_isStableUnderComposition, UniversallyClosed.universally_isClosedMap, IsProperMap.universally_closed, instIsMultiplicativeSchemeUniversallyClosed, universallyClosedTypeComp (Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "generalization: the two stability instances feed CategoryTheory.MorphismProperty.pullbackMap"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f1: X1 -> Y1 and f2: X2 -> Y2 are universally closed morphisms of schemes over S then X1 x_S X2 -> Y1 x_S Y2 is universally closed",
+   "results": "AlgebraicGeometry.universallyClosed_fst, universallyClosed_snd, universallyClosed_isStableUnderBaseChange, UniversallyClosed.universally_isClosedMap, UniversallyClosed.out",
+   "date": "2026-10-10",
+   "verdict": "generalization: base change stability; the product map itself via MorphismProperty.pullbackMap"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.pullbackMap",
+   "results": "CategoryTheory.MorphismProperty.pullbackMap (Mathlib.CategoryTheory.MorphismProperty.Limits): [P.IsStableUnderBaseChange] [P.IsStableUnderComposition] (h1 : P i1) (h2 : P i2) (e1 : f = i1 >> f') (e2 : g = i2 >> g') : P (pullback.map f g f' g' i1 i2 (id S) _ _)",
+   "date": "2026-10-10",
+   "verdict": "match (specializes with P := @UniversallyClosed)"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.MorphismProperty.pullbackMap (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.MorphismProperty.pullbackMap, theorem, Mathlib/CategoryTheory/MorphismProperty/Limits.lean (index: unavailable, name confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem pullbackMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Limits.lean; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; grep -rn 'UniversallyClosed (pullback.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Limits.lean:254 theorem pullbackMap (alias pullback_map deprecated 2026-03-20, line 275); UniversallyClosed.lean:65 universallyClosed_isStableUnderBaseChange, :72 universallyClosed_isStableUnderComposition, :95/:100 universallyClosed_fst/snd; no instance for pullback.map specialised to UniversallyClosed",
+   "date": "2026-10-10",
+   "verdict": "match via pullbackMap with P := @UniversallyClosed"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.pullbackMap",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+  "line": 254,
+  "how": "specializes in one line: pullbackMap with P := @AlgebraicGeometry.UniversallyClosed, whose hypotheses [IsStableUnderBaseChange P] and [IsStableUnderComposition P] are the instances universallyClosed_isStableUnderBaseChange (Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:65) and universallyClosed_isStableUnderComposition (line 72); with f := X_1 -> S, g := X_2 -> S, f' := Y_1 -> S, g' := Y_2 -> S, i_1 := f_1, i_2 := f_2 the conclusion is UniversallyClosed (pullback.map f g f' g' f_1 f_2 (𝟙 S) _ _), which is f_1 x_S f_2 (the induced morphism of def-pc-fibre-product is pullback.map). Universally closed is Mathlib's UniversallyClosed, the match of def-weil-proper-morphism's notion. Source read 2026-10-10 with sed -n 250,272p"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-surjective-universally-closed-separated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
