@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+ "kind": "statement",
+ "title": "A closed immersion factors through another iff the ideal sheaves are included",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i:Z\\to X$, $i':Z'\\to X$ closed immersions [def-weil-closed-immersion] with ideal sheaves $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ and $\\mathcal I'=\\ker(\\mathcal O_X\\to i'_*\\mathcal O_{Z'})$ [def-sbc-closed-immersion-ideal-sheaf]. Then there is a morphism of schemes $a:Z\\to Z'$ with $i'\\circ a=i$ if and only if $\\mathcal I'\\subseteq\\mathcal I$; and if this holds, $a$ is a closed immersion.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01QP (morphisms-lemma-closed-immersion-ideals), part (1); its proof refers to Schemes, Lemmas 01HO (schemes-lemma-closed-immersion) and 01HP (schemes-lemma-characterize-closed-subspace)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism factors through closed immersion if kernel of closed immersion contained in kernel of morphism, lift",
+   "results": "IsClosedImmersion.lift_fac, IsClosedImmersion.lift, IsClosedImmersion.lift_fac_assoc (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), IsOpenImmersion.lift_fac",
+   "date": "2026-10-10",
+   "verdict": "match (existence)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion i : Z → X factors through closed immersion i' : Z' → X iff ideal sheaf of Z' contained in ideal sheaf of Z, and the factor is a closed immersion",
+   "results": "instIsClosedImmersionInclusion (Morphisms/Separated.lean), IdealSheafData.subschemeMap, IsClosedImmersion.lift, IsClosedImmersion.Spec_iff, IsClosedImmersion.instSubschemeι, IsClosedImmersion.lift_fac",
+   "date": "2026-10-10",
+   "verdict": "match (existence); converse and closed-immersion clause by grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def lift\\|^lemma lift_fac\\|theorem of_comp_isClosedImmersion' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; grep -n 'lemma Hom.le_ker_comp' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "results": "ClosedImmersion.lean:210 IsClosedImmersion.lift (f g) [IsClosedImmersion f] (H : f.ker ≤ g.ker) : Y ⟶ X; :215 lift_fac (lift f g H ≫ f = g); :132 of_comp_isClosedImmersion (f ≫ g and g closed immersions ⇒ f closed immersion); Basic.lean:732 Hom.le_ker_comp (g.ker ≤ (f ≫ g).ker)",
+   "date": "2026-10-10",
+   "verdict": "match (one lemma per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.Hom.le_ker_comp, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "line": "ClosedImmersion.lean:210, 215, 132; Basic.lean:732",
+  "how": "a few Mathlib lemmas, one per clause, with ideal sheaves i.ker, i'.ker (Scheme.Hom.ker, the match of def-sbc-closed-immersion-ideal-sheaf): if i'.ker ≤ i.ker, a = IsClosedImmersion.lift i' i H (:210) satisfies a ≫ i' = i (lift_fac, :215); conversely, if a ≫ i' = i then i'.ker ≤ (a ≫ i').ker = i.ker (Hom.le_ker_comp, Basic.lean:732); a is a closed immersion by of_comp_isClosedImmersion a i' (:132), since a ≫ i' = i and i' are closed immersions. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-theoretic-union",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

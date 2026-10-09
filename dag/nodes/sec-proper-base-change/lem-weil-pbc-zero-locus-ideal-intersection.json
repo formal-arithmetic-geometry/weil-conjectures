@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-zero-locus-ideal-intersection",
+ "kind": "statement",
+ "title": "The zero locus of an intersection of two ideals is the union of the zero loci",
+ "statement": "Let $R$ be a commutative ring and $I,J\\subseteq R$ ideals; for an ideal $\\mathfrak a\\subseteq R$ let $V(\\mathfrak a)=\\{\\mathfrak p\\subset R\\text{ prime}:\\mathfrak a\\subseteq\\mathfrak p\\}$. Then $V(I\\cap J)=V(I)\\cup V(J)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00E0 (algebra-lemma-Zariski-topology), part (9)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zero locus of intersection of ideals is union of zero loci prime spectrum",
+   "results": "PrimeSpectrum.union_zeroLocus, PrimeSpectrum.zeroLocus_inf, PrimeSpectrum.zeroLocus_singleton_mul (Mathlib.RingTheory.Spectrum.Prime.Basic), Scheme.zeroLocus_iInf, Scheme.zeroLocus_iInf_of_nonempty (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.zeroLocus_inf"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.zeroLocus ↑(_ ⊓ _)",
+   "results": "0 declarations",
+   "date": "2026-10-10",
+   "verdict": "no match by this pattern (the lemma is found by the other searches)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "V(I ∩ J) = V(I) ∪ V(J) for ideals of a commutative ring in Spec",
+   "results": "PrimeSpectrum.zeroLocus_inf, PrimeSpectrum.zeroLocus_sup, PrimeSpectrum.union_zeroLocus, Scheme.zeroLocus_inf, PrimeSpectrum.vanishingIdeal_union",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.zeroLocus_inf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem zeroLocus_inf' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+   "results": "Basic.lean:336 theorem zeroLocus_inf (I J : Ideal R) : zeroLocus ((I ⊓ J : Ideal R) : Set R) = zeroLocus I ∪ zeroLocus J (CommSemiring R)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.zeroLocus_inf",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+  "line": 336,
+  "how": "exact (stated for a commutative semiring R; zeroLocus of an ideal's carrier is the set of primes containing it). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-theoretic-union",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

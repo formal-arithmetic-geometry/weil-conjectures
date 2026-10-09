@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-ideal-intersection",
+ "kind": "statement",
+ "title": "The intersection of two quasi-coherent sheaves of ideals is quasi-coherent",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal I,\\mathcal J\\subseteq\\mathcal O_X$ quasi-coherent sheaves of ideals [pqf-def-coherent]. Let $\\mathcal I\\cap\\mathcal J\\subseteq\\mathcal O_X$ be the sheaf of ideals $U\\mapsto\\mathcal I(U)\\cap\\mathcal J(U)$ ($U\\subseteq X$ open). Then $\\mathcal I\\cap\\mathcal J$ is a quasi-coherent sheaf of ideals of $\\mathcal O_X$; in particular, for every affine open $U\\subseteq X$, $(\\mathcal I\\cap\\mathcal J)(U)=\\mathcal I(U)\\cap\\mathcal J(U)$ and $(\\mathcal I\\cap\\mathcal J)|_U=(\\mathcal I(U)\\cap\\mathcal J(U))^\\sim$, and these ideals are compatible with localization: for $f\\in\\mathcal O_X(U)$, $(\\mathcal I(U)\\cap\\mathcal J(U))\\mathcal O_X(U)_f=\\mathcal I(U)\\mathcal O_X(U)_f\\cap\\mathcal J(U)\\mathcal O_X(U)_f$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IC (schemes-lemma-kernel-cokernel-quasi-coherent: on an affine scheme kernels of maps of quasi-coherent modules are quasi-coherent; I cap J is the kernel of O_X -> O_X/I (+) O_X/J); with Algebra, Lemma 0BBY (algebra-lemma-flat-intersect-ideals, literature/stacks-project/algebra.tex: (I cap J)M = IM cap JM for M flat, applied to M = R_f) for the compatibility with localization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "intersection of two quasi-coherent ideal sheaves on a scheme is a quasi-coherent ideal sheaf",
+   "results": "Scheme.IdealSheafData.instSemilatticeInf, IdealSheafData.ideal_inf, IdealSheafData.vanishingIdeal_sup, IdealSheafData.radical_inf, IdealSheafData.ofIdeals (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: instSemilatticeInf with ideal_inf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.ideal (_ ⊓ _)",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.ideal_inf (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance : SemilatticeInf (IdealSheafData X)\\|lemma ideal_inf' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "results": "Basic.lean:147 instance SemilatticeInf (inf I J has ideal := I.ideal ⊓ J.ideal, with map_ideal_basicOpen proved by localization at powers of f, lines 148-163); :192 ideal_inf (rfl)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf, AlgebraicGeometry.Scheme.IdealSheafData.ideal_inf",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "line": "147, 192",
+  "how": "specializes in one line, with the DAG's convention (def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers) that a quasi-coherent sheaf of ideals is a Scheme.IdealSheafData (its ideals on affine opens, compatible with basic-open localization): I ⊓ J is again an IdealSheafData (instance SemilatticeInf, Basic.lean:147; its field map_ideal_basicOpen is the localization compatibility of the statement) with (I ⊓ J).ideal U = I.ideal U ⊓ J.ideal U (ideal_inf, :192). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-theoretic-union",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

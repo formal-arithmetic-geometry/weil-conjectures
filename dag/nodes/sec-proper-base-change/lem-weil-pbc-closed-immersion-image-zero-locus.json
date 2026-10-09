@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-image-zero-locus",
+ "kind": "statement",
+ "title": "The image of a closed immersion on an affine open is the zero locus of its ideal",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $i:Z\\to X$ a closed immersion [def-weil-closed-immersion] with ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf], and $U\\subseteq X$ an affine open with $R=\\mathcal O_X(U)$; for $x\\in U$ let $\\mathfrak p_x\\subset R$ be the prime ideal of $x$ under $U\\cong\\operatorname{Spec}R$ [lem-weil-pbc-affine-open-spec-points], [def-weil-affine-spectrum]. Then $i(Z)$ is a closed subset of $X$ and $i(Z)\\cap U=\\{x\\in U:\\ \\mathcal I(U)\\subseteq\\mathfrak p_x\\}$, i.e. under $U\\cong\\operatorname{Spec}R$ the set $i(Z)\\cap U$ corresponds to $V(\\mathcal I(U))=\\{\\mathfrak p\\in\\operatorname{Spec}R:\\mathcal I(U)\\subseteq\\mathfrak p\\}$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IN (schemes-lemma-closed-subspace-scheme), parts (3) and (4): i^{-1}(U) -> U is identified with Spec(R/I) -> Spec(R) and I|_U = I~, so I = I(U); with Algebra, Lemma 00E5 (algebra-lemma-spec-closed, literature/stacks-project/algebra.tex): Spec(R/I) -> Spec(R) is a homeomorphism onto V(I)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of a closed immersion equals support of its kernel ideal sheaf",
+   "results": "IdealSheafData.range_subschemeι, Scheme.Hom.image, Scheme.Hom.range_subset_ker_support, Scheme.Hom.support_ker, IdealSheafData.support, Scheme.Hom.imageι",
+   "date": "2026-10-10",
+   "verdict": "match: Hom.support_ker"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the image of a closed immersion of schemes is the support (vanishing locus) of its ideal sheaf, on an affine open it is the zero locus of the ideal of sections",
+   "results": "IdealSheafData.range_subschemeι, IsClosedImmersion.instSubschemeι, IdealSheafData.support, isClosed_supportSet, IdealSheafData.support_map, coe_support_mkOfMemSupportIff",
+   "date": "2026-10-10",
+   "verdict": "partial: support pieces; combined with coe_support_inter (grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma Hom.support_ker\\|lemma coe_support_inter' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; grep -n 'lemma IsAffineOpen.fromSpec_image_zeroLocus' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'alias Scheme.Hom.isClosedEmbedding' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "results": "Basic.lean:845 Hom.support_ker (f.ker.support = closure (range f), f quasi-compact); :345 coe_support_inter (I.support ∩ U = X.zeroLocus (I.ideal U) ∩ U, U affine); AffineScheme.lean:1163 IsAffineOpen.fromSpec_image_zeroLocus (hU.fromSpec '' PrimeSpectrum.zeroLocus s = X.zeroLocus s ∩ U); ClosedImmersion.lean:48 Scheme.Hom.isClosedEmbedding",
+   "date": "2026-10-10",
+   "verdict": "match (a few lemmas, one rewrite chain)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter, AlgebraicGeometry.IsAffineOpen.fromSpec_image_zeroLocus, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": "Basic.lean:845, 345; AffineScheme.lean:1163; ClosedImmersion.lean:48",
+  "how": "a few Mathlib lemmas in one rewrite chain: i(Z) = range i is closed (i.isClosedEmbedding.isClosed_range, ClosedImmersion.lean:48), so range i = closure (range i) = i.ker.support (Hom.support_ker, Basic.lean:845; a closed immersion is quasi-compact via the IsAffineHom instance, ClosedImmersion.lean:151); i.ker.support ∩ U = X.zeroLocus (i.ker.ideal U) ∩ U (coe_support_inter, Basic.lean:345) = hU.fromSpec '' PrimeSpectrum.zeroLocus (i.ker.ideal U) (IsAffineOpen.fromSpec_image_zeroLocus, AffineScheme.lean:1163), which is {x in U : I(U) ⊆ p_x} with p_x = hU.primeIdealOf x (the prime of lem-weil-pbc-affine-open-spec-points); i.ker.ideal U = I(U) by Hom.ker_apply (Basic.lean:702). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scheme-theoretic-union",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

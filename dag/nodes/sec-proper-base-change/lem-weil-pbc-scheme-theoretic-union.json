@@ -13,9 +13,63 @@
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construction of $Z'''$. By [def-sbc-closed-immersion-ideal-sheaf], $\\mathcal I'$ and $\\mathcal I''$ are quasi-coherent sheaves of ideals of $\\mathcal O_X$, with $\\mathcal I'(U)=\\ker(\\mathcal O_X(U)\\to\\mathcal O_{Z'}(i'^{-1}U))$ and likewise for $\\mathcal I''$. By [lem-weil-pbc-quasi-coherent-ideal-intersection] the sheaf of ideals $\\mathcal I'\\cap\\mathcal I''$ is quasi-coherent, with $(\\mathcal I'\\cap\\mathcal I'')(U)=\\mathcal I'(U)\\cap\\mathcal I''(U)$ for every affine open $U$. By [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme] there is a closed immersion $i''':Z'''\\to X$ whose ideal sheaf $\\ker(\\mathcal O_X\\to i'''_*\\mathcal O_{Z'''})$ is $\\mathcal I'\\cap\\mathcal I''$, and for every affine open $U=\\operatorname{Spec}A$ of $X$ [def-weil-affine-spectrum], with $I=\\mathcal I'(U)$, $J=\\mathcal I''(U)$ (the ideals cutting out $Z'\\cap U$, $Z''\\cap U$), $i'''^{-1}(U)\\to U$ is $\\operatorname{Spec}(A/(I\\cap J))\\to\\operatorname{Spec}A$. This is the scheme-theoretic union of Definition 0C4H and the affine-local description in the proof of Lemma 0C4J.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-quasi-coherent-ideal-intersection",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition 0C4H (definition-scheme-theoretic-intersection-union), via Lemma 01QQ (lemma-closed-immersion-bijection-ideals) cited before it; proof of Lemma 0C4J (lemma-scheme-theoretic-union): '(X cup Y) cap U corresponds to I cap J'"
+   }
+  },
+  {
+   "text": "(a) The underlying set. Let $U\\subseteq X$ be an affine open, $A=\\mathcal O_X(U)$, $I=\\mathcal I'(U)$, $J=\\mathcal I''(U)$, and for $x\\in U$ let $\\mathfrak p_x\\subset A$ be the prime of $x$ under $U\\cong\\operatorname{Spec}A$ [lem-weil-pbc-affine-open-spec-points]. By [lem-weil-pbc-closed-immersion-image-zero-locus] applied to $i'$, $i''$ and $i'''$ (whose ideal on $U$ is $I\\cap J$ by step 1), $i'(Z')\\cap U=\\{x\\in U: I\\subseteq\\mathfrak p_x\\}$, $i''(Z'')\\cap U=\\{x\\in U: J\\subseteq\\mathfrak p_x\\}$ and $i'''(Z''')\\cap U=\\{x\\in U: I\\cap J\\subseteq\\mathfrak p_x\\}$. By [lem-weil-pbc-zero-locus-ideal-intersection], $V(I\\cap J)=V(I)\\cup V(J)$ in $\\operatorname{Spec}A$, so $I\\cap J\\subseteq\\mathfrak p_x$ iff $I\\subseteq\\mathfrak p_x$ or $J\\subseteq\\mathfrak p_x$, hence $i'''(Z''')\\cap U=(i'(Z')\\cup i''(Z''))\\cap U$. Since the affine opens cover $X$ [def-pc-scheme], $i'''(Z''')=i'(Z')\\cup i''(Z'')$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-closed-immersion-image-zero-locus",
+    "lem-weil-pbc-zero-locus-ideal-intersection",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00E0 (algebra-lemma-Zariski-topology) part (9), V(I) cup V(J) = V(I cap J), applied on each affine open with the affine-local description of the proof of Morphisms, Lemma 0C4J"
+   }
+  },
+  {
+   "text": "(b) The closed immersions $a',a''$. The ideal sheaf $\\mathcal I'\\cap\\mathcal I''$ of $i'''$ (step 1) is contained in $\\mathcal I'$ and in $\\mathcal I''$. By [lem-weil-pbc-closed-immersion-factor-ideal-inclusion] applied to $i=i'$ and the closed immersion $i'''$ there is a morphism $a':Z'\\to Z'''$ with $i'''\\circ a'=i'$, and $a'$ is a closed immersion; applied to $i=i''$ and $i'''$ it gives a closed immersion $a'':Z''\\to Z'''$ with $i'''\\circ a''=i''$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma 0C4J (lemma-scheme-theoretic-union), first sentence: 'X -> X cup Y and Y -> X cup Y are closed immersions by Lemma 01QP (lemma-closed-immersion-ideals)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-quasi-coherent-ideal-intersection",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-closed-immersion-image-zero-locus",
+  "lem-weil-pbc-zero-locus-ideal-intersection",
+  "def-pc-scheme",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Definition 0C4H and Lemma 0C4J (first sentence and affine-local description of its proof), Lemma 01QP; Algebra, Lemma 00E0 (9) (literature/stacks-project/algebra.tex) for (a)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,7 +132,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Morphisms 0C4H/0C4J (scheme-theoretic union, underlying set, the two closed immersions); self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Three steps along Stacks 0C4J with four new Mathlib leaves (lines verified): the intersection of quasi-coherent ideals is quasi-coherent (IdealSheafData SemilatticeInf Basic.lean:147, ideal_inf :192), the image of a closed immersion is the zero locus of its ideal on affines (chain: Hom.support_ker :845, coe_support_inter :345, IsAffineOpen.fromSpec_image_zeroLocus AffineScheme.lean:1163, isClosedEmbedding; accepted as a few declarations), V(I cap J) = V(I) cup V(J) (PrimeSpectrum.zeroLocus_inf Prime/Basic.lean:336, exact), closed immersions factor through a closed immersion with smaller ideal (01QP(1): IsClosedImmersion.lift :210, lift_fac :215, of_comp_isClosedImmersion :132, le_ker_comp Basic.lean:732). Cites the quasi-coherent-ideal-closed-subscheme leaf committed from the reduced-induced split. Tags verified by the worker."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-scheme-theoretic-union",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Morphisms 0C4H (definition-scheme-theoretic-intersection-union) and 0C4J (lemma-scheme-theoretic-union), 01QP (lemma-closed-immersion-ideals), Algebra 00E0 (9) (tags verified in tags/tags): correct, kept; stmt_deps kept. Not a Mathlib leaf: Mathlib has IdealSheafData inf and IsClosedImmersion.lift but no support_inf, so (a) is a chain. Proof in three steps following Stacks: (1) quasi-coherence of I' cap I'' (new leaf lem-weil-pbc-quasi-coherent-ideal-intersection, IdealSheafData inf, Stacks 01IC/0BBY) and the closed immersion it defines (existing leaf lem-weil-pbc-quasi-coherent-ideal-closed-subscheme, 01QQ); (2) underlying set on each affine open via the new leaves lem-weil-pbc-closed-immersion-image-zero-locus (01IN + 00E5; Hom.support_ker, coe_support_inter, fromSpec_image_zeroLocus) and lem-weil-pbc-zero-locus-ideal-intersection (00E0 (9), PrimeSpectrum.zeroLocus_inf); (3) the closed immersions a', a'' by the new leaf lem-weil-pbc-closed-immersion-factor-ideal-inclusion (01QP (1); IsClosedImmersion.lift, lift_fac, Hom.le_ker_comp, of_comp_isClosedImmersion). The product node lem-weil-pbc-product-ideal-closed-subscheme-union is not needed on this route."
  }
 }
