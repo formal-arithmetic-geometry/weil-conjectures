@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-minimal-prime-over-proper-ideal",
+ "kind": "statement",
+ "title": "A proper ideal has a minimal prime over it",
+ "statement": "Let $\\Lambda$ be a commutative ring and $I\\subsetneq\\Lambda$ a proper ideal. Then there is a prime ideal $\\mathfrak q\\supset I$ of $\\Lambda$ that is minimal over $I$: no prime ideal $\\mathfrak q'$ with $I\\subset\\mathfrak q'\\subsetneq\\mathfrak q$ exists.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (lemma-Zariski-topology), parts (2) (every nonzero ring, here Λ/I, has a maximal ideal) and (4) (a prime containing I contains a prime minimal over I); used as 'Pick a prime q ⊃ h_A such that q is minimal over h_A' in Smoothing Ring Maps, proof of Theorem 07GC"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "there exists a minimal prime ideal over a proper ideal contained in a given prime",
+   "results": "Ideal.exists_minimalPrimes_le, Ideal.nonempty_minimalPrimes, Ideal.minimalPrimes (Mathlib.RingTheory.Ideal.MinimalPrime.Basic), Ring.KrullDimLE.mem_minimalPrimes_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a proper ideal has a minimal prime ideal over it",
+   "results": "Ideal.nonempty_minimalPrimes, Ideal.exists_minimalPrimes_le, Ideal.minimalPrimes (Mathlib.RingTheory.Ideal.MinimalPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.nonempty_minimalPrimes",
+   "results": "Ideal.nonempty_minimalPrimes {R} [CommSemiring R] {I : Ideal R} (h : I ≠ ⊤) : Nonempty ↑I.minimalPrimes (Mathlib.RingTheory.Ideal.MinimalPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'nonempty_minimalPrimes\\|def Ideal.minimalPrimes\\|IsMinimalPrime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean",
+   "results": "line 93 theorem Ideal.nonempty_minimalPrimes (h : I ≠ ⊤) : Nonempty I.minimalPrimes; line 40 Ideal.IsMinimalPrime = Minimal (fun q ↦ q.IsPrime ∧ I ≤ q)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.nonempty_minimalPrimes",
+  "file": "Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean",
+  "line": 93,
+  "how": "exact: for I ≠ ⊤ the set I.minimalPrimes of primes minimal among those containing I is nonempty"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-smoothing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-separable-field-extension",
+ "kind": "definition",
+ "title": "Separably generated and separable field extensions (not necessarily algebraic)",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension]. A *transcendence basis* of $K/k$ is a family $(x_i)_{i\\in I}$ of elements of $K$ that is algebraically independent over $k$ [def-kun-transcendence-degree] and such that every element of $K$ is algebraic over the subfield $k(x_i;i\\in I)$. An algebraic extension $K/F$ is *separable algebraic* if the minimal polynomial over $F$ of every element of $K$ is separable (coprime to its derivative). $K$ is *separably generated over $k$* if there is a transcendence basis $(x_i)_{i\\in I}$ of $K/k$ such that $K/k(x_i;i\\in I)$ is separable algebraic. $K$ is *separable over $k$* if for every subextension $k\\subset K'\\subset K$ with $K'$ finitely generated as a field over $k$, the extension $K'/k$ is separably generated.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 030O (definition-separable-field-extension, line 9915)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separably generated field extension definition transcendence basis separable algebraic",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top (Mathlib.FieldTheory.SeparablyGenerated), IsTranscendenceBasis (Mathlib.RingTheory.AlgebraicIndependent.Defs), isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic",
+   "date": "2026-10-10",
+   "verdict": "no match: the pinned Mathlib has IsTranscendenceBasis and Algebra.IsSeparable but no named notion of a separably generated or (non-algebraic) separable field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTranscendenceBasis, Algebra.IsSeparable",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField, ..._of_linearIndepOn_pow_of_essFiniteType, ..._of_linearIndepOn_pow_of_adjoin_eq_top (Mathlib.FieldTheory.SeparablyGenerated); Algebra.IsSeparablyGenerated, Algebra.isSeparablyGenerated_iff (Mathlib.FieldTheory.TranscendentalSeparable: in the newer Mathlib of the Loogle server only)",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib; a newer Mathlib has Algebra.IsSeparablyGenerated (clause 'separably generated' only, not 'separable' = every finitely generated subextension separably generated)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separably generated field extension: transcendence basis with separable algebraic extension",
+   "results": "IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure (Mathlib.FieldTheory.SeparableClosure), exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow(_of_adjoin_eq_top), exists_isTranscendenceBasis_and_isSeparable_of_perfectField (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsSeparablyGenerated\\|SeparablyGenerated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory | grep -i transc",
+   "results": "only FieldTheory/SeparablyGenerated.lean (theorems, no definition; header 'We aim to formalize ...') and its import in RingTheory/Smooth/Field.lean; no FieldTheory/TranscendentalSeparable.lean in the pinned Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-smoothing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

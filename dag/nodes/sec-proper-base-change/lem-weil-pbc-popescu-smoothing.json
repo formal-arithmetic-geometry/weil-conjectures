@@ -13,9 +13,128 @@
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduction to a field. By [lem-weil-pbc-popescu-reduce-to-field] it suffices to show: for every field $k$ and every Noetherian ring $\\Lambda$ with a regular ring map $k\\to\\Lambda$ [def-weil-pbc-g-ring], $\\Lambda$ is a filtered colimit of smooth $k$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras]; this then holds for every regular map $R\\to\\Lambda$ of Noetherian rings [def-weil-pbc-noetherian-ring] (Step 6 translates the conclusion into the form of the statement). Fix such $k\\to\\Lambda$. The only prime of $k$ is $(0)$, with $k_{(0)}=k$ and $\\kappa((0))=k$ [def-weil-pbc-localization-at-prime], so the fibre ring of $\\Lambda$ over $(0)$ is $\\Lambda\\otimes_kk\\cong\\Lambda$; by the definition of a regular ring map, $\\Lambda$ is Noetherian and geometrically regular over $k$ [def-weil-pbc-g-ring]. In particular $\\Lambda$ is regular: $k/k$ is a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension] (of degree $1$; every $\\alpha\\in k$ has $\\alpha^{p^0}\\in k$ in characteristic $p$, and $k'=k$ in characteristic $0$), so $k\\otimes_k\\Lambda\\cong\\Lambda$ is regular, i.e. every $\\Lambda_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Theorem Tag 07GC (theorem-popescu): 'By Lemma lemma-reduce-to-field (Tag 07F5) it suffices to prove this for k -> Lambda where Lambda is Noetherian and geometrically regular over k'"
+   }
+  },
+  {
+   "text": "Reduction to factorizations. Let $\\mathcal E$ be the set of $k$-algebras of the form $k[x_1,\\dots,x_n]/I$ ($n\\ge0$, $I$ an ideal) that are smooth over $k$ [def-weil-pbc-smooth-ring-map]; they are of finite presentation by definition of smoothness. Every smooth $k$-algebra $B$ is finitely presented, hence isomorphic as a $k$-algebra to a member of $\\mathcal E$. So by [lem-weil-pbc-factorization-criterion-filtered-colimit], $\\Lambda$ is a filtered colimit of members of $\\mathcal E$, i.e. of smooth $k$-algebras in the sense of [def-weil-pbc-filtered-colimit-smooth-algebras], as soon as: (*) for every $k$-algebra $A$ of finite presentation and every $k$-algebra homomorphism $\\alpha:A\\to\\Lambda$ there are a smooth $k$-algebra $D$ and $k$-algebra maps $A\\to D\\to\\Lambda$ with composite $\\alpha$ (replace $D$ by an isomorphic member of $\\mathcal E$, composing the maps with the isomorphism). Steps 3-5 prove (*).",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-factorization-criterion-filtered-colimit",
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Theorem Tag 07GC (theorem-popescu): 'Let k -> A -> Lambda be a factorization with A a finite type k-algebra. It suffices to construct a factorization A -> B -> Lambda with B ...'; the criterion is Algebra, Lemma Tag 07C3 (lemma-when-colimit), as cited in the proof of Lemma 07F5"
+   }
+  },
+  {
+   "text": "Resolution at a minimal prime. Let $B$ be a $k$-algebra of finite presentation, $\\gamma:B\\to\\Lambda$ a $k$-algebra map, $\\mathfrak h_B=\\sqrt{H_{B/k}\\Lambda}$ [def-weil-pbc-popescu-resolution] (with the singular ideal $H_{B/k}$ [def-weil-pbc-singular-ideal]), and $\\mathfrak q\\subset\\Lambda$ a prime minimal over $\\mathfrak h_B$. Then $k\\to B\\to\\Lambda\\supset\\mathfrak q$ can be resolved [def-weil-pbc-popescu-resolution] ($k$ is a field, hence Noetherian). The characteristic of $k$ is $0$ or a prime $p$. If it is $0$: $\\Lambda$ is Noetherian, $\\mathfrak q$ is minimal over $\\mathfrak h_B$, $\\Lambda_{\\mathfrak q}$ is a regular local ring by Step 1, and $\\kappa(\\mathfrak q)$ is separable over $k$ [def-weil-pbc-separable-field-extension] by [lem-weil-pbc-char-zero-field-extension-separable]; so [lem-weil-pbc-popescu-resolve-separable] applies. If it is $p>0$: $\\Lambda$ is Noetherian and geometrically regular over $k$ by Step 1 and $\\mathfrak q$ is minimal over $\\mathfrak h_B$, so [lem-weil-pbc-popescu-resolve-char-p] applies.",
+   "uses": [
+    "def-weil-pbc-popescu-resolution",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-weil-pbc-popescu-resolve-separable",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Theorem Tag 07GC (theorem-popescu): 'It now suffices to resolve k -> A -> Lambda ⊃ q (as defined in the text following Situation 07F7). If the characteristic of k is zero, this follows from Lemma lemma-resolve-special (Tag 07FE). If the characteristic of k is p > 0, this follows from Lemma lemma-resolve-general (Tag 07FJ)'; that every field extension in characteristic zero is separable is used without proof in Algebra, proof of Lemma Tag 00TX"
+   }
+  },
+  {
+   "text": "Noetherian induction on $\\mathfrak h$. Fix $A$ and $\\alpha:A\\to\\Lambda$ as in (*). Let $\\Phi$ be the set of ideals $\\mathfrak h_B=\\sqrt{H_{B/k}\\Lambda}\\subset\\Lambda$ [def-weil-pbc-popescu-resolution], for all factorizations $A\\to B\\xrightarrow{\\gamma}\\Lambda$ of $\\alpha$ by $k$-algebra maps with $B$ of finite presentation over $k$; $\\Phi\\ne\\emptyset$ ($B=A$). As $\\Lambda$ is Noetherian, $\\Phi$ has a maximal element $\\mathfrak h_B$ [lem-weil-pbc-noetherian-ideal-set-maximal], for some such factorization $A\\to B\\to\\Lambda$. Claim: $\\mathfrak h_B=\\Lambda$. Otherwise $\\mathfrak h_B$ is a proper ideal and there is a prime $\\mathfrak q\\supset\\mathfrak h_B$ minimal over $\\mathfrak h_B$ [lem-weil-pbc-minimal-prime-over-proper-ideal]. By Step 3 there is a resolution $B\\to C\\to\\Lambda$ of $k\\to B\\to\\Lambda\\supset\\mathfrak q$: $C$ of finite presentation over $k$, $\\mathfrak h_B\\subset\\mathfrak h_C$ and $\\mathfrak h_C\\not\\subset\\mathfrak q$. Then $A\\to B\\to C\\to\\Lambda$ is a factorization of $\\alpha$, so $\\mathfrak h_C\\in\\Phi$, and $\\mathfrak h_C\\neq\\mathfrak h_B$ because $\\mathfrak h_B\\subset\\mathfrak q$; hence $\\mathfrak h_B\\subsetneq\\mathfrak h_C$, contradicting maximality. So there is a factorization $A\\to B\\to\\Lambda$ with $B$ of finite presentation over $k$ and $\\mathfrak h_B=\\Lambda$.",
+   "uses": [
+    "def-weil-pbc-popescu-resolution",
+    "lem-weil-pbc-noetherian-ideal-set-maximal",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Theorem Tag 07GC (theorem-popescu): 'Hence we may perform Noetherian induction on the ideal h_A. Pick a prime q ⊃ h_A such that q is minimal over h_A.'"
+   }
+  },
+  {
+   "text": "Final solve. With $A\\to B\\xrightarrow{\\gamma}\\Lambda$ from Step 4: $1\\in\\mathfrak h_B=\\sqrt{H_{B/k}\\Lambda}$ gives $1=1^n\\in H_{B/k}\\Lambda$, i.e. $H_{B/k}\\Lambda=\\Lambda$ [def-weil-pbc-singular-ideal]. By [lem-weil-pbc-popescu-final-solve] (applied to $k\\to B\\to\\Lambda$, $B$ of finite presentation) there are a smooth $k$-algebra $D$ [def-weil-pbc-smooth-ring-map] and $k$-algebra maps $B\\to D\\to\\Lambda$ with composite $\\gamma$. Then $A\\to B\\to D\\to\\Lambda$ has composite $\\alpha$, which proves (*). By Step 2, $\\Lambda$ is a filtered colimit of smooth $k$-algebras, and by Step 1, for every regular ring map $R\\to\\Lambda$ of Noetherian rings, $\\Lambda$ is a filtered colimit of smooth $R$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras].",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-popescu-final-solve",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Theorem Tag 07GC (theorem-popescu): 'It suffices to construct a factorization A -> B -> Lambda with B of finite type such that h_B = Lambda, see Lemma lemma-final-solve (Tag 07EU)'"
+   }
+  },
+  {
+   "text": "The form of the statement. Let $R\\to\\Lambda$ be regular with $R,\\Lambda$ Noetherian. By Step 5 there are a small filtered category $J$, a functor $j\\mapsto B_j$ to commutative $R$-algebras with every $B_j$ a smooth $R$-algebra [def-weil-pbc-smooth-ring-map], and $R$-algebra maps $\\iota_j:B_j\\to\\Lambda$ forming a colimit in commutative $R$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras]. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], each $\\operatorname{Spec}B_j\\to\\operatorname{Spec}R$ is smooth [def-sbc-smooth-morphisms]; by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1), $(\\Lambda,(\\iota_j)_j)$ is also a colimit of the underlying diagram of commutative rings [def-weil-pbc-category-colimit]. This is the statement.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01V6 (lemma-smooth-characterize), translating smooth ring maps R -> B_j into smooth morphisms Spec B_j -> Spec R"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-popescu-reduce-to-field",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-factorization-criterion-filtered-colimit",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-popescu-resolve-separable",
+  "lem-weil-pbc-popescu-resolve-char-p",
+  "lem-weil-pbc-noetherian-ideal-set-maximal",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-popescu-final-solve",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Theorem Tag 07GC (theorem-popescu), Section 07GB (section-main); with Section 07F1 (PT, Lemma 07F5), Definition 07C5 and Lemma 07EU (Section 07C4), Situation 07F7 and the definition of resolutions (Section 07F6), Lemmas 07FE and 07FJ; criterion Algebra Lemma 07C3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +159,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,7 +183,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Smoothing Ring Maps, Theorem 07GC (Popescu); self-contained; correct; unsplit (very large)."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along the proof of 07GC (smoothing.tex 3112-3134), twelve new nodes checked against the source: definitions of 'filtered colimit of smooth algebras' (PT, 07F1), of the singular ideal (07C5 with 00TB), of resolutions and h_A (Situation 07F7), of separable field extensions (030O); statements 07F5 (reduction to a field), 07C3 (2)=>(1), 07EU (final solve), 07FE and 07FJ (resolution at a prime minimal over h_B in characteristic 0 and p); three Mathlib leaves verified by line (00FM: set_has_maximal_iff_noetherian Noetherian/Defs.lean:155; 00E0: Ideal.nonempty_minimalPrimes MinimalPrime/Basic.lean:93; separability of extensions of characteristic-0 fields: exists_isTranscendenceBasis_and_isSeparable_of_perfectField SeparablyGenerated.lean:312 with PerfectField.ofCharZero and essFiniteType_iff, a few lemmas one per clause, accepted). The Noetherian induction on h_B is written out; 07C3's set E is the smooth algebras of the form k[x]/I. Step 6 uses the identification node lem-weil-pbc-smooth-ring-map-iff-smooth-affine created by the 07M7 worker."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-smoothing",
+  "worker": "stage1",
+  "summary": "Wrote the proof of Stacks Theorem 07GC as it stands in smoothing.tex (lines 3112-3134) in six steps: reduction to a field base (Lemma 07F5, new node), the factorization criterion (Algebra Lemma 07C3 (2)=>(1), new node; the existing node covers only (1)=>(2)), resolution at a prime minimal over h_B in characteristic 0 (Lemma 07FE, new node, with regularity of Lambda_q from geometric regularity with k'=k and separability of kappa(q) from a new Mathlib-leaf node 'char 0 extensions are separable') and characteristic p (Lemma 07FJ, new node), Noetherian induction on h_B written out with two new Mathlib-leaf nodes (maximal element of a set of ideals; minimal prime over a proper ideal), final solve (Lemma 07EU, new node), and the translation smooth ring map -> smooth Spec morphism (existing lem-weil-pbc-smooth-ring-map-iff-smooth-affine) and colimit in R-algebras -> in rings (existing lem-weil-pbc-filtered-colimit-algebras-elementwise). New definitions: PT (filtered colimit of smooth algebras, 07F1), singular ideal H_{A/R} with smoothness at a prime (07C5/00TB), h_A and resolutions (07F7), separable field extension (030O). Statement and stmt_deps unchanged. All tags checked against tags/tags."
  }
 }

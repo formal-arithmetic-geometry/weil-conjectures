@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-char-zero-field-extension-separable",
+ "kind": "statement",
+ "title": "In characteristic zero every field extension is separable",
+ "statement": "Let $k$ be a field of characteristic $0$ and $K/k$ a field extension [def-pc-field-extension]. Then $K$ is separable over $k$ [def-weil-pbc-separable-field-extension]: every subextension $k\\subset K'\\subset K$ finitely generated over $k$ has a (finite) transcendence basis $x_1,\\dots,x_r$ with $K'/k(x_1,\\dots,x_r)$ separable algebraic.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, stated without proof in the proofs of Lemma Tag 00TX (lemma-characteristic-zero-local-smooth, line 38835: 'In characteristic zero any field extension is separable') and of Lemma lemma-domain-char-zero-N-1-2 (line 45378); separability in the sense of Definition Tag 030O"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every field extension of characteristic zero is separable (separably generated)",
+   "results": "Irreducible.separable, IsSeparable.of_integral (Mathlib.FieldTheory.Separable), PerfectField.ofCharZero, Algebra.IsAlgebraic.isSeparable_of_perfectField (Mathlib.FieldTheory.Perfect), IsGalois.to_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "generalization: char 0 fields are perfect (PerfectField.ofCharZero)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated field extension of a perfect field is separably generated",
+   "results": "Algebra.IsAlgebraic.isSeparable_of_perfectField, perfectField_of_isSeparable_of_perfectField_top, Field.exists_primitive_element; and (query 'separably generated field extension: transcendence basis with separable algebraic extension') exists_isTranscendenceBasis_and_isSeparable_of_perfectField (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization over perfect fields)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTranscendenceBasis, Algebra.IsSeparable",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField (Mathlib.FieldTheory.SeparablyGenerated) and its char-p variants",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 306p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Perfect.lean; sed -n 310,318p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/SeparablyGenerated.lean; sed -n 118,119p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean",
+   "results": "Perfect.lean:306 instance PerfectField.ofCharZero [CharZero K] : PerfectField K; SeparablyGenerated.lean:312 lemma exists_isTranscendenceBasis_and_isSeparable_of_perfectField [PerfectField k] [Algebra.EssFiniteType k K] : ∃ s : Finset K, IsTranscendenceBasis k ((↑) : s → K) ∧ Algebra.IsSeparable (IntermediateField.adjoin k (s : Set K)) K; Adjoin/Algebra.lean:118 IntermediateField.essFiniteType_iff : Algebra.EssFiniteType F K ↔ K.FG",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+  "file": "Mathlib/FieldTheory/SeparablyGenerated.lean",
+  "line": 312,
+  "how": "specializes in a few lines, one lemma per clause: for a subextension K' of K finitely generated over k, IntermediateField.essFiniteType_iff (Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean line 118) gives Algebra.EssFiniteType k K', PerfectField.ofCharZero (Mathlib/FieldTheory/Perfect.lean line 306) gives PerfectField k, and the lemma then gives a finite transcendence basis s of K'/k with K' separable algebraic (Algebra.IsSeparable) over k(s) = IntermediateField.adjoin k s, i.e. K'/k separably generated"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-smoothing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
