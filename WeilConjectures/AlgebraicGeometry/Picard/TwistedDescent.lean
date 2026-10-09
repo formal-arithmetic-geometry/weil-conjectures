@@ -330,7 +330,8 @@ lemma pullFunctorObjHom_twist (D : modulesPseudofunctor.DescentData f) ⦃Y : Sc
 lemma pullFunctor_obj_twist (D : modulesPseudofunctor.DescentData f) :
     (DescentData.pullFunctor modulesPseudofunctor w).obj (c.twist D) =
       (c.pull w).twist ((DescentData.pullFunctor modulesPseudofunctor w).obj D) := by
-  change DescentData.pullFunctorObj w (c.twist D) = (c.pull w).twist (DescentData.pullFunctorObj w D)
+  change DescentData.pullFunctorObj w (c.twist D) =
+    (c.pull w).twist (DescentData.pullFunctorObj w D)
   unfold DescentData.pullFunctorObj twist
   congr 1
   funext Y q j₁ j₂ f₁ f₂ hf₁ hf₂
@@ -366,12 +367,14 @@ end FullyFaithful
 
 section BaseChange
 
-@[reassoc (attr := simp)]
+/-- The base change map `X_{T'} ⟶ X_T` commutes with the projections to `X`. -/
+@[reassoc]
 lemma baseChangeMap_fst {X S : Scheme.{u}} (f : X ⟶ S) {T T' : Over S} (φ : T' ⟶ T) :
     baseChangeMap f φ ≫ pullback.fst f T.hom = pullback.fst f T'.hom := by
   rw [pullback.lift_fst, Category.comp_id]
 
-@[reassoc (attr := simp)]
+/-- The base change map `X_{T'} ⟶ X_T` lies over `T' ⟶ T`. -/
+@[reassoc]
 lemma baseChangeMap_snd {X S : Scheme.{u}} (f : X ⟶ S) {T T' : Over S} (φ : T' ⟶ T) :
     baseChangeMap f φ ≫ pullback.snd f T.hom = pullback.snd f T'.hom ≫ φ.left :=
   pullback.lift_snd _ _ _
@@ -424,8 +427,11 @@ noncomputable def ofBaseChange : DescentCocycle fun i ↦ (g i).left where
     have key : pullback.snd f (Over.mk (q' ≫ T.hom)).hom ≫ h =
         baseChangeMap f ho ≫ pullback.snd f (Over.mk (q ≫ T.hom)).hom :=
       (baseChangeMap_snd f ho).symm
-    rw [appTop_ofBaseChangeAux, ← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, key,
-      Scheme.Hom.comp_appTop, ConcreteCategory.comp_apply, appTop_ofBaseChangeAux]
+    have key' (a : Γ(Y, ⊤)) : (pullback.snd f (Over.mk (q' ≫ T.hom)).hom).appTop (h.appTop a) =
+        (baseChangeMap f ho).appTop ((pullback.snd f (Over.mk (q ≫ T.hom)).hom).appTop a) := by
+      change (h.appTop ≫ _) a = (_ ≫ (baseChangeMap f ho).appTop) a
+      rw [← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop, key]
+    rw [appTop_ofBaseChangeAux, key', appTop_ofBaseChangeAux]
     exact c.appTop_c (baseChangeMap f ho) _ _
       (by rw [← baseChangeMap_comp]; congr 1; ext; exact hq) _ _ _ _ _ _
       (by rw [← baseChangeMap_comp]; congr 1; ext; exact hgf₁)
@@ -466,8 +472,9 @@ lemma pull_ofBaseChange :
   calc _ = s.appTop ((pullback.snd f _).appTop (c.ofBaseChangeAux hbij
         (q ≫ pullback.snd f T.hom) (f₁ ≫ pullback.snd f (T' j₁).hom)
         (f₂ ≫ pullback.snd f (T' j₂).hom) (w j₁ f₁ hf₁) (w j₂ f₂ hf₂))) := by
-        rw [← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, hs]
-        rfl
+        change _ = (_ ≫ s.appTop) _
+        rw [← Scheme.Hom.comp_appTop, hs]
+        simp
     _ = _ := by
         rw [appTop_ofBaseChangeAux]
         refine c.appTop_c s _ q ?_ _ _ _ _ f₁ f₂ (e j₁ f₁ hf₁) (e j₂ f₂ hf₂)
