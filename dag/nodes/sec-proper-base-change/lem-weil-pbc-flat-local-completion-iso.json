@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-flat-local-completion-iso",
+ "kind": "statement",
+ "title": "A flat local map with the same maximal ideal and residue field is an isomorphism on completions",
+ "statement": "Let $(A,\\mathfrak m_A)$ and $(B,\\mathfrak m_B)$ be Noetherian [def-weil-pbc-noetherian-ring] local rings and $\\varphi:A\\to B$ a flat [def-weil-pbc-flat-ring-map] local homomorphism ($\\varphi(\\mathfrak m_A)\\subseteq\\mathfrak m_B$) such that $\\mathfrak m_AB=\\mathfrak m_B$ and the induced map of residue fields $A/\\mathfrak m_A\\to B/\\mathfrak m_B$ is an isomorphism. Let $A^\\wedge=\\varprojlim_nA/\\mathfrak m_A^n$ and $B^\\wedge=\\varprojlim_nB/\\mathfrak m_B^n$ be the $\\mathfrak m_A$-adic and $\\mathfrak m_B$-adic completions [def-weil-pbc-adic-completion], with canonical maps $\\iota_A:A\\to A^\\wedge$, $\\iota_B:B\\to B^\\wedge$. Let $\\varphi^\\wedge:A^\\wedge\\to B^\\wedge$ be the ring map $(a_n\\bmod\\mathfrak m_A^n)_n\\mapsto(\\varphi(a_n)\\bmod\\mathfrak m_B^n)_n$ (well defined since $\\varphi(\\mathfrak m_A^n)\\subseteq\\mathfrak m_B^n$); it satisfies $\\varphi^\\wedge\\circ\\iota_A=\\iota_B\\circ\\varphi$. Then $\\varphi^\\wedge$ is an isomorphism of rings.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0AGX (lemma-flat-unramified, line 10764); its proof uses Algebra Lemma 0394 (lemma-finite-after-completion), More on Algebra Lemma 0AGW (lemma-flat-after-completion), Algebra Lemma 00NZ (lemma-finite-flat-local) and Algebra Lemma 05GG (lemma-hathat-finitely-generated)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat local homomorphism of Noetherian local rings with m_A B = m_B and same residue field induces isomorphism of completions",
+   "results": "RingHom.Flat.ofLocalizationSpanTarget, RingHom.Flat.propertyIsLocal, Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.Flat.localRingHom, IsLocalRing.ResidueField.map: no statement on completions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat local homomorphism of Noetherian local rings, m_A B = m_B, equal residue fields, then the induced map on m-adic completions is an isomorphism",
+   "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofAlgEquiv (S ≃ S^ for S already I-adically complete), isLocalRing_of_isAdicComplete_maximal, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'AdicCompletion.*(≃|Equiv)|def map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/",
+   "results": "only linear equivalences for a fixed base ring (AsTensorProduct.lean:127,181,329; Functoriality.lean:180,294,317,329: AdicCompletion I M ≃ AdicCompletion I N for M ≃ N, sums, products) and AdicCompletion.map for linear maps over a fixed ring; nothing comparing completions along a local homomorphism of different rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

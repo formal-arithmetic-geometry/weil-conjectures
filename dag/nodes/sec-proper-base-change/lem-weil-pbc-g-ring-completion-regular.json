@@ -11,9 +11,132 @@
   "def-weil-pbc-g-ring",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $A$ is a G-ring it is Noetherian [def-weil-pbc-g-ring]. Hence $A^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian] and $\\iota:A\\to A^\\wedge$ is flat [lem-weil-pbc-noetherian-completion-flat]. Moreover $I$ is finitely generated.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), first two sentences (Algebra Lemmas 00MB, 0316)"
+   }
+  },
+  {
+   "text": "Since $A^\\wedge$ is Noetherian, by the implication (3)$\\Rightarrow$(1) of [lem-weil-pbc-regular-local-maximal] it suffices to show: for every maximal ideal $\\mathfrak m'\\subset A^\\wedge$, with $\\mathfrak m=\\iota^{-1}(\\mathfrak m')$, the induced map of localizations $\\iota_{\\mathfrak m'}:A_{\\mathfrak m}\\to(A^\\wedge)_{\\mathfrak m'}$ is regular. Fix such $\\mathfrak m'$ and write $B=(A^\\wedge)_{\\mathfrak m'}$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-maximal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'it suffices to check the third condition of Lemma 07C0'"
+   }
+  },
+  {
+   "text": "As $I$ is finitely generated, $A^\\wedge$ is $IA^\\wedge$-adically complete and the map $\\pi:A^\\wedge\\to A/I$, $(x_n)_n\\mapsto x_1$, is surjective with kernel $IA^\\wedge$ and $\\pi\\circ\\iota$ equal to the quotient map $q:A\\to A/I$ [lem-weil-pbc-adic-completion-mod-ideal]. Applying [lem-weil-pbc-adic-complete-jacobson-radical] to the ring $A^\\wedge$ and the ideal $IA^\\wedge$, the ideal $IA^\\wedge$ lies in the Jacobson radical of $A^\\wedge$, hence in the maximal ideal $\\mathfrak m'$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), Algebra Lemma 05GI, part (4); 'A^/IA^ = A/I' is Algebra Lemma 05GG"
+   }
+  },
+  {
+   "text": "Since $\\ker\\pi=IA^\\wedge\\subseteq\\mathfrak m'$ and $\\pi$ is surjective, $\\bar{\\mathfrak m}=\\pi(\\mathfrak m')$ is a maximal ideal of $A/I$ and $\\mathfrak m'=\\pi^{-1}(\\bar{\\mathfrak m})$. Then $\\mathfrak m=\\iota^{-1}(\\mathfrak m')=(\\pi\\circ\\iota)^{-1}(\\bar{\\mathfrak m})=q^{-1}(\\bar{\\mathfrak m})$ is a maximal ideal of $A$ containing $I$, with $q(\\mathfrak m)=\\bar{\\mathfrak m}$. Since $\\pi(\\mathfrak mA^\\wedge)\\supseteq\\pi\\iota(\\mathfrak m)=\\bar{\\mathfrak m}$ we get $\\mathfrak m'=\\mathfrak mA^\\wedge+\\ker\\pi=\\mathfrak mA^\\wedge+IA^\\wedge=\\mathfrak mA^\\wedge$ (as $I\\subseteq\\mathfrak m$). Finally $\\iota$ induces an isomorphism $A/\\mathfrak m\\to A^\\wedge/\\mathfrak m'$, both being identified with $(A/I)/\\bar{\\mathfrak m}$ via $q$ and $\\pi$, and $\\pi\\circ\\iota=q$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'Since A^/IA^ = A/I we see that I ⊂ m, m/I = m'/IA^, and A/m = A^/m' ... m is a maximal ideal as well'"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-local-ring-maps] applied to the flat map $\\iota$ between the Noetherian rings $A$ and $A^\\wedge$ (Step 1), $\\iota_{\\mathfrak m'}:A_{\\mathfrak m}\\to B$ is a flat local homomorphism of Noetherian local rings. Localizing $\\mathfrak m'=\\mathfrak mA^\\wedge$ (Step 4) gives $\\mathfrak mB=\\mathfrak m'B$, the maximal ideal of $B$. The residue fields are $A_{\\mathfrak m}/\\mathfrak mA_{\\mathfrak m}=A/\\mathfrak m$ and $B/\\mathfrak m'B=A^\\wedge/\\mathfrak m'$ (localization at a maximal ideal does not change the quotient by it [def-weil-pbc-localization-at-prime]), and the map between them induced by $\\iota_{\\mathfrak m'}$ is the isomorphism of Step 4.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'Then A_m → A^_m' is a flat local ring homomorphism of Noetherian local rings which identifies residue fields and such that mA^_m' = m'A^_m''"
+   }
+  },
+  {
+   "text": "Let $(A_{\\mathfrak m})^\\wedge$ and $B^\\wedge$ be the completions of $A_{\\mathfrak m}$ and $B$ at their maximal ideals [def-weil-pbc-adic-completion], with canonical maps $c_A:A_{\\mathfrak m}\\to(A_{\\mathfrak m})^\\wedge$, $c_B:B\\to B^\\wedge$. By Step 5 and [lem-weil-pbc-flat-local-completion-iso], the induced ring map $\\psi=(\\iota_{\\mathfrak m'})^\\wedge:(A_{\\mathfrak m})^\\wedge\\to B^\\wedge$ is an isomorphism with $\\psi\\circ c_A=c_B\\circ\\iota_{\\mathfrak m'}$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-completion-iso",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'Thus it induces an isomorphism on complete local rings, see Lemma 0AGX'"
+   }
+  },
+  {
+   "text": "Since $A$ is a G-ring and $\\mathfrak m$ is a prime ideal, $c_A:A_{\\mathfrak m}\\to(A_{\\mathfrak m})^\\wedge$ is regular [def-weil-pbc-g-ring]. Hence $c_B\\circ\\iota_{\\mathfrak m'}=\\psi\\circ c_A:A_{\\mathfrak m}\\to B^\\wedge$ is regular: $\\psi$ is an isomorphism of $A_{\\mathfrak m}$-algebras, so $B^\\wedge$ is flat over $A_{\\mathfrak m}$ because $(A_{\\mathfrak m})^\\wedge$ is, and for each prime $\\mathfrak p$ of $A_{\\mathfrak m}$, $\\psi\\otimes\\kappa(\\mathfrak p)$ is an isomorphism of $\\kappa(\\mathfrak p)$-algebras between the fibre rings, so the fibre rings of $A_{\\mathfrak m}\\to B^\\wedge$ are Noetherian and geometrically regular (both are properties invariant under isomorphism of $\\kappa(\\mathfrak p)$-algebras by the definitions).",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), '... because A_m → (A_m)^ is regular as A is a G-ring'; the identification ((A^)_m')^ = (A_m)^ in the display"
+   }
+  },
+  {
+   "text": "$B$ is a Noetherian local ring (Step 5), so $c_B:B\\to B^\\wedge$ is flat and $\\operatorname{Spec}B^\\wedge\\to\\operatorname{Spec}B$ is surjective [lem-weil-pbc-local-completion-faithfully-flat].",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'is faithfully flat (Algebra, Lemma 00MC)'"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-permanence] to $A_{\\mathfrak m}\\xrightarrow{\\iota_{\\mathfrak m'}}B\\xrightarrow{c_B}B^\\wedge$: the composite is regular (Step 7) and $c_B$ is flat and surjective on spectra (Step 8), so $\\iota_{\\mathfrak m'}:A_{\\mathfrak m}\\to(A^\\wedge)_{\\mathfrak m'}$ is regular. As $\\mathfrak m'$ was an arbitrary maximal ideal, Step 2 shows that $\\iota:A\\to A^\\wedge$ is regular.",
+   "uses": [
+    "lem-weil-pbc-regular-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0AH2 (line 12704ff.), 'Thus we can apply Lemma 07NT to the ring maps A_m → (A^)_m' → (A_m)^ to conclude'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-regular-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0AH2 (lemma-map-G-ring-to-completion-regular, line 12694), proof lines 12704-12740 (Matsumura, Theorem 79)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +158,17 @@
    "results": "no hits (only unrelated names such as RingRing sections, toFractionRingRingEquiv): Mathlib has no regular ring maps, no geometric regularity, no G-rings",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'GeometricallyRegular|RingHom\\.IsRegular|IsRegularRingHom|regular.*fib|geometrically regular' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory .../AlgebraicGeometry; grep -rn 'FaithfullyFlat' .../Mathlib/RingTheory/AdicCompletion",
+   "results": "no regular ring maps / geometric regularity (only IsRegularLocalRing, IsRegularRing in RingTheory/RegularLocalRing/Defs.lean); in AdicCompletion/ only flatness AdicCompletion.flat_of_isNoetherian (AsTensorProduct.lean:379)",
+   "date": "2026-10-10",
+   "verdict": "no match (re-check 2026-10-10: Mathlib has no G-rings and no regular ring maps)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,7 +192,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is More on Algebra 0AH2; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Nine steps, six new nodes. Follows 0AH2: reduction to localizations at maximal ideals of A^ (07C0 (3)=>(1), new node lem-weil-pbc-regular-local-maximal, statement checked against more-algebra.tex line 10390), IA^ in the Jacobson radical so m' = mA^ with equal residue fields (steps 3-4), the completion comparison 0AGX (new node lem-weil-pbc-flat-local-completion-iso, line 10764), regularity of A_m -> B^ from the G-ring property transported along the isomorphism, faithful flatness of B -> B^ (00MC, Mathlib leaf), and descent of regularity 07NT (new node lem-weil-pbc-regular-permanence, line 10507). Mathlib leaves verified by line: AdicCompletion.flat_of_isNoetherian (AsTensorProduct.lean:379), RingHom.Flat.localRingHom (RingHom/Flat.lean:108) with Localization.isLocalHom_localRingHom (AtPrime/Basic.lean:265) and the Noetherian localization instance (Localization/Submodule.lean:86), Module.FaithfullyFlat.of_flat_of_isLocalHom (FaithfullyFlat/Algebra.lean:60) with the IsLocalRing/IsLocalHom instances for the completion (AdicCompletion/LocalRing.lean:85,116) and PrimeSpectrum.comap_surjective_of_faithfullyFlat (:146); a chain of instances assembled in one line is accepted as a leaf. The 'line' key in mathlib_match is kept (the brief asks for it)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks More on Algebra 0AH2 (more-algebra.tex 12704-12740), nine steps. Existing nodes used: def-weil-pbc-g-ring (G-ring clause at p = m, and Noetherianity), lem-weil-pbc-adic-completion-noetherian (0316), lem-weil-pbc-adic-completion-mod-ideal (05GG: A^/IA^ = A/I, IA^-adic completeness), lem-weil-pbc-adic-complete-jacobson-radical (05GI(4) applied to (A^, IA^)), def-weil-pbc-localization-at-prime. New nodes: Mathlib leaves lem-weil-pbc-noetherian-completion-flat (00MB(1), AdicCompletion.flat_of_isNoetherian), lem-weil-pbc-flat-local-ring-maps (00HT(6)+00FN, RingHom.Flat.localRingHom etc.), lem-weil-pbc-local-completion-faithfully-flat (00MC local case, Module.FaithfullyFlat.of_flat_of_isLocalHom); unsplit lem-weil-pbc-regular-local-maximal (07C0), lem-weil-pbc-flat-local-completion-iso (0AGX), lem-weil-pbc-regular-permanence (07NT). The Stacks proof's identification ((A^)_m')^ = (A_m)^ and the transfer of regularity along it are written out (Steps 6-7); the deduction that m is maximal with m' = mA^ is written out (Step 4). Statement unchanged; stmt_deps unchanged. No Lean in slopmaster2 (grep of WeilConjectures for G-ring/regular/AdicCompletion: nothing)."
  }
 }

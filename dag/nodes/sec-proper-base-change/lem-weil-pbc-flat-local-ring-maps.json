@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-flat-local-ring-maps",
+ "kind": "statement",
+ "title": "A flat ring map induces flat local maps of local rings",
+ "statement": "Let $\\varphi:R\\to S$ be a flat ring map [def-weil-pbc-flat-ring-map] of commutative rings, $\\mathfrak q\\subset S$ a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Then the induced map of localizations [def-weil-pbc-localization-at-prime] $\\varphi_{\\mathfrak q}:R_{\\mathfrak p}\\to S_{\\mathfrak q}$, $r/s\\mapsto\\varphi(r)/\\varphi(s)$, is a flat local homomorphism of local rings: it is flat and maps $\\mathfrak pR_{\\mathfrak p}$ into $\\mathfrak qS_{\\mathfrak q}$. If moreover $R$ and $S$ are Noetherian [def-weil-pbc-noetherian-ring], then $R_{\\mathfrak p}$ and $S_{\\mathfrak q}$ are Noetherian local rings.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HT (lemma-flat-localization, line 9196), part (6) (direction: M flat over R implies M_q flat over R_p, for M = S); Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), localizations of Noetherian rings; locality: phi(r)/phi(s) with r in p has phi(r) in q"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat ring hom induces flat local homomorphism of localizations at primes",
+   "results": "RingHom.Flat.localRingHom (Mathlib.RingTheory.RingHom.Flat), RingHom.Flat.holdsForLocalizationAway, RingHom.Flat.propertyIsLocal, RingHom.Flat.ofLocalizationPrime, Module.Flat.of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "match (flat clause): RingHom.Flat.localRingHom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a Noetherian ring at a prime is Noetherian; induced map of localizations R_p → S_q is a local homomorphism",
+   "results": "IsLocalization.instIsNoetherianRingLocalization, IsLocalization.isNoetherianRing (Mathlib.RingTheory.Localization.Submodule), IsNoetherianRing.of_isLocalization_maximal",
+   "date": "2026-10-10",
+   "verdict": "match (Noetherian clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring homomorphism is regular ... iff its localizations at maximal ideals are regular (query of the sibling node)",
+   "results": "RingHom.Flat.localRingHom: 'If f : R → S is flat, P ⊆ S prime, Q = f^{-1}(P), then R_Q → S_P is flat'",
+   "date": "2026-10-10",
+   "verdict": "match (flat clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma localRingHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Flat.lean; grep -n 'isLocalHom_localRingHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/AtPrime/Basic.lean; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Submodule.lean",
+   "results": "RingHom.Flat.localRingHom (RingHom/Flat.lean:108: hf : f.Flat → (Localization.localRingHom Q P f hQP).Flat); Localization.isLocalHom_localRingHom (Localization/AtPrime/Basic.lean:265, an instance: IsLocalHom (localRingHom I J f hIJ)); instance IsNoetherianRing (Localization S) for IsNoetherianRing R (Localization/Submodule.lean:86) and IsLocalization.isNoetherianRing (:82); local ring: Localization.AtPrime.isLocalRing",
+   "date": "2026-10-10",
+   "verdict": "match: one lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.Flat.localRingHom",
+  "file": "Mathlib/RingTheory/RingHom/Flat.lean",
+  "line": 108,
+  "how": "one Mathlib lemma per clause: flatness `RingHom.Flat.localRingHom hf P Q hQP : (Localization.localRingHom Q P f hQP).Flat` (line 108), where `Localization.localRingHom` is the map r/s ↦ f(r)/f(s); locality `Localization.isLocalHom_localRingHom` (Mathlib/RingTheory/Localization/AtPrime/Basic.lean:265); local rings `Localization.AtPrime.isLocalRing`; Noetherian: the instance `IsNoetherianRing (Localization S)` (Mathlib/RingTheory/Localization/Submodule.lean:86, from IsLocalization.isNoetherianRing, line 82) with Localization.AtPrime p = Localization p.primeCompl"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

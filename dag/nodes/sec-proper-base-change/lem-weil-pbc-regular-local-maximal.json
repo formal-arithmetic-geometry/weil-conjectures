@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-regular-local-maximal",
+ "kind": "statement",
+ "title": "Regularity of a ring map is local on the target",
+ "statement": "Let $\\varphi:R\\to\\Lambda$ be a ring map of commutative rings with $\\Lambda$ Noetherian [def-weil-pbc-noetherian-ring]. For a prime ideal $\\mathfrak q\\subset\\Lambda$ with $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ write $\\varphi_{\\mathfrak q}:R_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}$, $r/s\\mapsto\\varphi(r)/\\varphi(s)$, for the induced map of localizations [def-weil-pbc-localization-at-prime]. The following are equivalent: (1) $\\varphi$ is a regular ring map [def-weil-pbc-g-ring]; (2) $\\varphi_{\\mathfrak q}:R_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}$ is regular for every prime ideal $\\mathfrak q\\subset\\Lambda$, $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$; (3) $\\varphi_{\\mathfrak m'}:R_{\\mathfrak m}\\to\\Lambda_{\\mathfrak m'}$ is regular for every maximal ideal $\\mathfrak m'\\subset\\Lambda$, $\\mathfrak m=\\varphi^{-1}(\\mathfrak m')$ (a prime ideal of $R$).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07C0 (lemma-regular-local, line 10390); its proof cites Algebra Definition 00OD (regular ring: all local rings regular) and Algebra Lemma 00HT (lemma-flat-localization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring map is regular if and only if localizations at maximal ideals are regular",
+   "results": "IsLocalization.isRegular_mk', IsLocalization.injective_iff_isRegular (regular elements), OfLocalizationMaximal (Mathlib.RingTheory.LocalProperties.Basic, a predicate on ring properties), bijective_of_isLocalization_isMaximal: no regular ring maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring homomorphism is regular (flat with geometrically regular Noetherian fibres) iff its localizations at maximal ideals are regular",
+   "results": "RingHom.Flat.ofLocalizationPrime, Module.flat_of_localized_maximal, RingHom.Flat.localRingHom (flatness clause only), RingHom.isStandardSmoothOfRelativeDimension_* (other properties)",
+   "date": "2026-10-10",
+   "verdict": "no match (flatness clause only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'GeometricallyRegular|RingHom\\.IsRegular|IsRegularRingHom|regular.*fib|geometrically regular' -i ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'class IsRegularRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no regular ring maps and no geometric regularity; only IsRegularLocalRing / IsRegularRing (Mathlib/RingTheory/RegularLocalRing/Defs.lean:51, :92), regularity of rings, not of ring maps",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

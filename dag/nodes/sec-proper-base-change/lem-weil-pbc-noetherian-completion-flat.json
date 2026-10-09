@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-noetherian-completion-flat",
+ "kind": "statement",
+ "title": "The adic completion of a Noetherian ring is flat",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq R$ an ideal and $R^\\wedge=\\varprojlim_nR/I^n$ the $I$-adic completion of $R$ [def-weil-pbc-adic-completion]. Then the canonical ring map $R\\to R^\\wedge$ is flat [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00MB (lemma-completion-flat, line 22956), part (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion of a Noetherian ring is flat",
+   "results": "AdicCompletion.flat_of_isNoetherian (Mathlib.RingTheory.AdicCompletion.AsTensorProduct), Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian",
+   "date": "2026-10-10",
+   "verdict": "match: AdicCompletion.flat_of_isNoetherian"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat _ (AdicCompletion _ _)",
+   "results": "AdicCompletion.flat_of_isNoetherian {R} [CommRing R] (I : Ideal R) [IsNoetherianRing R] : Module.Flat R (AdicCompletion I R) (only hit)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat local homomorphism of Noetherian local rings ... induced map on completions is an isomorphism (query of the sibling node; first hit concerns this node)",
+   "results": "AdicCompletion.flat_of_isNoetherian: 'If R is a Noetherian commutative ring and I an ideal, the I-adic completion is a flat R-module'",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'flat_of_isNoetherian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "results": "line 379: instance flat_of_isNoetherian : Module.Flat R (AdicCompletion I R), under variable [IsNoetherianRing R] (line 316); docstring 'Adic completion of a Noetherian ring R is flat over R'",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion.flat_of_isNoetherian",
+  "file": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+  "line": 379,
+  "how": "exact: `instance flat_of_isNoetherian [IsNoetherianRing R] (I : Ideal R) : Module.Flat R (AdicCompletion I R)`; the ring map R → R^ is `algebraMap R (AdicCompletion I R)`, flat as a ring map by `RingHom.flat_algebraMap_iff`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

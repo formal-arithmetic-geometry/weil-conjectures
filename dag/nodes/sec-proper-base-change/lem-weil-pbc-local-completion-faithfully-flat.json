@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-local-completion-faithfully-flat",
+ "kind": "statement",
+ "title": "The completion of a Noetherian local ring is faithfully flat",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring and $R^\\wedge=\\varprojlim_nR/\\mathfrak m^n$ its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion]. Then the canonical map $R\\to R^\\wedge$ is faithfully flat: it is flat [def-weil-pbc-flat-ring-map] and the induced map $\\operatorname{Spec}R^\\wedge\\to\\operatorname{Spec}R$, $\\mathfrak q\\mapsto\\mathfrak q\\cap R$, is surjective (for a flat ring map these two conditions are equivalent to faithful flatness, Algebra Lemma 00HP).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00MC (lemma-completion-faithfully-flat, line 22977), 'In particular' clause (I = m is in the Jacobson radical of the local ring R); proof via Lemma 00MB and Lemma 00HP (lemma-ff)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "completion of a Noetherian local ring is faithfully flat",
+   "results": "RingHom.FaithfullyFlat, Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra), Module.FaithfullyFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-10",
+   "verdict": "generalization: of_flat_of_isLocalHom applied to the completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat _ (AdicCompletion _ _)",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no direct statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the maximal-ideal-adic completion of a Noetherian local ring is a faithfully flat algebra; Spec of completion surjects onto Spec",
+   "results": "AdicCompletion.flat_of_isNoetherian, Module.FaithfullyFlat.of_comap_surjective, Module.FaithfullyFlat.of_specComap_surjective, Algebra.Smooth.flat_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "generalization (flat + local)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|lemma algebraMap_isLocalHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/LocalRing.lean; grep -n 'of_flat_of_isLocalHom\\|comap_surjective_of_faithfullyFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean; grep -rn 'FaithfullyFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion",
+   "results": "LocalRing.lean:85 instance [IsNoetherianRing R] [IsLocalRing R] : IsLocalRing (AdicCompletion (maximalIdeal R) R); :116 instance IsLocalHom (algebraMap R (AdicCompletion (maximalIdeal R) R)); Algebra.lean:60 Module.FaithfullyFlat.of_flat_of_isLocalHom; :146 PrimeSpectrum.comap_surjective_of_faithfullyFlat; no FaithfullyFlat in AdicCompletion/",
+   "date": "2026-10-10",
+   "verdict": "match: one line from these"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.of_flat_of_isLocalHom",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+  "line": 60,
+  "how": "specializes in one line: for [IsNoetherianRing R] [IsLocalRing R], `Module.FaithfullyFlat.of_flat_of_isLocalHom (A := R) (B := AdicCompletion (maximalIdeal R) R)` with its instance arguments found by inference: `AdicCompletion.flat_of_isNoetherian` (Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:379), the IsLocalRing instance (Mathlib/RingTheory/AdicCompletion/LocalRing.lean:85) and the IsLocalHom instance (same file, line 116); the Spec surjectivity clause is `PrimeSpectrum.comap_surjective_of_faithfullyFlat` (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:146)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-completion-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
