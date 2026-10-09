@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-proetale-weakly-etale-localization",
+ "kind": "statement",
+ "title": "The small pro-etale site of a weakly etale X-scheme is the localization of X_proet",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring, and let $j:W\\to X$ be a weakly etale morphism with $W$ an object of the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] (for instance an open immersion [def-weil-open-immersion] of an open subscheme $W\\subset X$; open immersions are etale, hence weakly etale). Then: (1) for every object $V\\to W$ of $W_{\\mathrm{proet}}$ the composite $V\\to W\\to X$ is weakly etale, and $\\iota_j:(V\\to W)\\mapsto(V\\to W\\to X,\\ V\\to W)$ is an isomorphism of categories from $W_{\\mathrm{proet}}$ onto the localization $X_{\\mathrm{proet}}/W$ [def-pur-localized-ringed-site] (an $X$-morphism $V\\to W$ from an object $V\\to X$ of $X_{\\mathrm{proet}}$ is weakly etale because $V\\to X$ and $W\\to X$ are), under which the coverings of $W_{\\mathrm{proet}}$ are exactly the coverings of $X_{\\mathrm{proet}}/W$; so $\\iota_j$ identifies the two sites and their categories of sheaves. (2) Under $\\iota_j$ the restriction $A_X|_W$, $(A_X|_W)(V\\to W)=A_X(V\\to X)$, of the constant sheaf of rings $A_X$ [def-weil-pbc-constant-sheaf] is identified with the constant sheaf of rings $A_W$ on $W_{\\mathrm{proet}}$, by the unique map of sheaves of rings $A_W\\to A_X|_W$ that is the identity on the constant sections $a\\in A$, which is an isomorphism. (3) Consequently restriction $F\\mapsto F|_W$, $F|_W(V\\to W)=F(V\\to X)$, is a functor $\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(W_{\\mathrm{proet}},A)$ [def-weil-sheaf-of-modules-category], and sheaves of $A_W$-modules on $W_{\\mathrm{proet}}$ are the same as sheaves of $A_X|_W$-modules on $X_{\\mathrm{proet}}/W$. (4) If $j$ is an open immersion then $j$ is a monomorphism, so every object $V\\to X$ of $X_{\\mathrm{proet}}$ has at most one $X$-morphism to $W$, and it has one exactly when $V\\to X$ factors through the open subscheme $W$ (set-theoretically, when its image lies in $W$).",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "used without statement in Definition 09AE (proetale-definition-extension-zero), which applies Modules on Sites Section 03DH to U ∈ Ob(X_proet); the localized site: literature/stacks-project/sites.tex Section 00XZ (sites-section-localize) with Lemma 00XR (sites-lemma-when-shriek); weakly etale composition and permanence: literature/stacks-project/more-morphisms.tex Lemmas 094T (more-morphisms-lemma-composition-weakly-etale), 0951 (more-morphisms-lemma-weakly-etale-permanence)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def \\|abbrev \\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "results": "`Scheme.ProEt S` (line 100): the small pro-étale site (weakly étale schemes over S, no size bound), `ProEt.topology S` (line 156), `ProEt.forget S : S.ProEt ⥤ Over S` (line 120); no functor W.ProEt ⥤ X.ProEt and no equivalence with `Over` of an object of X.ProEt",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Over.map\\|HasOfPostcompProperty\\|instance \\[WeaklyEtale f\\] \\[WeaklyEtale g\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "results": "`MorphismProperty.Over.map hPf : P.Over Q X ⥤ P.Over Q Y` (OverAdjunction.lean:42, composition with f); weakly etale stable under composition (WeaklyEtale.lean:71) and `HasOfPostcompProperty @WeaklyEtale @WeaklyEtale` (line 112, permanence); `Over.iteratedSliceEquiv : Over f ≌ Over f.left` (CategoryTheory/Comma/Over/Basic.lean:382) for the big slice categories",
+   "date": "2026-10-09",
+   "verdict": "ingredients only: the composition functor and permanence exist; the identification of sites W_proet ≅ X_proet/W and of constant sheaves is not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | grep -i 'over\\|restrict\\|pullback'",
+   "results": "only a docstring in ConstantSheaf.lean:158 about commuting constantSheaf with pullback/pushforward via `equivCommuteConstant'`; no restriction of a constant sheaf to `J.over X`",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-extension-by-zero",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

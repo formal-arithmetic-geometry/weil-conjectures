@@ -1,0 +1,53 @@
+{
+ "id": "def-weil-presheaf-modules-sheafification",
+ "kind": "definition",
+ "title": "Sheafification of a presheaf of modules over a sheaf of rings",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of rings on $\\mathcal C$. A *presheaf of $\\mathcal O$-modules* is a presheaf of abelian groups $\\mathcal P$ on $\\mathcal C$ with an $\\mathcal O(V)$-module structure on each $\\mathcal P(V)$ such that every restriction map $\\mathcal P(V)\\to\\mathcal P(V')$ along $V'\\to V$ is semilinear over $\\mathcal O(V)\\to\\mathcal O(V')$; morphisms are the morphisms of presheaves of abelian groups that are $\\mathcal O(V)$-linear on every $V$. Let $\\mathcal P^\\#$ be the sheafification of $\\mathcal P$ as a presheaf of abelian groups [def-weil-pbc-sheafification]. There is a unique map of sheaves of sets $\\mathcal O\\times\\mathcal P^\\#\\to\\mathcal P^\\#$ extending the module structure $\\mathcal O\\times\\mathcal P\\to\\mathcal P$ along $\\mathcal P\\to\\mathcal P^\\#$, and it makes $\\mathcal P^\\#$ a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], the *sheafification* of $\\mathcal P$. The map $\\mathcal P\\to\\mathcal P^\\#$ is $\\mathcal O$-linear, and every $\\mathcal O$-linear map from $\\mathcal P$ to a sheaf of $\\mathcal O$-modules factors uniquely through it; so $\\mathcal P\\mapsto\\mathcal P^\\#$ is a functor from presheaves of $\\mathcal O$-modules to sheaves of $\\mathcal O$-modules, left adjoint to the inclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03CX (sites-modules-section-sheafification-presheaves-modules), Lemma 03CY (sites-modules-lemma-sheafification-presheaf-modules), with O already a sheaf so that O^# = O; presheaves of modules: Section 03CS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def sheafification\\|def sheafificationAdjunction\\|def sheafificationHomEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "results": "`PresheafOfModules.sheafification (α : R₀ ⟶ R.obj) : PresheafOfModules.{v} R₀ ⥤ SheafOfModules.{v} R` (line 54), for a locally bijective map α from a presheaf of rings to a sheaf of rings, whose underlying sheaf of abelian groups is the abelian-group sheafification (`sheafify α (toSheafify J M₀.presheaf)`); `sheafificationAdjunction α : sheafification α ⊣ SheafOfModules.forget R ⋙ restrictScalars α` (line 125); needs `HasWeakSheafify J AddCommGrpCat.{v}` and `J.WEqualsLocallyBijective AddCommGrpCat.{v}`",
+   "date": "2026-10-09",
+   "verdict": "match: take α = 𝟙 R.obj"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^structure PresheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "results": "`PresheafOfModules R` for `R : Cᵒᵖ ⥤ RingCat`: a presheaf of abelian groups with compatible module structures over R (Presheaf.lean:43), with its category structure",
+   "date": "2026-10-09",
+   "verdict": "match (presheaves of modules)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.sheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "how": "specializes in one line: `PresheafOfModules.sheafification (𝟙 R.obj) : PresheafOfModules R.obj ⥤ SheafOfModules R` with the adjunction `PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)` (line 125), restrictScalars along 𝟙 being the identity"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-extension-by-zero",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
