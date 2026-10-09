@@ -20,8 +20,10 @@ public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardRestrict
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -413,8 +415,29 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
-      ((higherDirectImage f q).obj ℱ).restrict g) :=
-  sorry
+      ((higherDirectImage f q).obj ℱ).restrict g) := by
+  have : IsOpenImmersion g' := MorphismProperty.of_isPullback sq.flip ‹_›
+  let I := injectiveResolution ℱ
+  let r := restrictFunctor g
+  let r' := restrictFunctor g'
+  -- the restriction of the injective resolution of `ℱ` is a resolution of `ℱ|_{X'}` by flasque,
+  -- hence `f'_*`-acyclic, modules
+  let J := (r'.mapHomologicalComplex _).obj I.cocomplex
+  let ι : (CochainComplex.single₀ _).obj (r'.obj ℱ) ⟶ J :=
+    (HomologicalComplex.singleMapHomologicalComplex r' _ 0).inv.app ℱ ≫
+      (r'.mapHomologicalComplex _).map I.ι
+  have : QuasiIso ι := inferInstance
+  have hJ (n : ℕ) : (pushforward f').rightAcyclic (J.X n) :=
+    rightAcyclic_pushforward_of_isFlasque f' ((isFlasque_of_injective (I.cocomplex.X n)).restrict g')
+  let K := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
+  let e : ((pushforward f').mapHomologicalComplex _).obj J ≅ (r.mapHomologicalComplex _).obj K :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun n ↦ ((pushforwardRestrictIso f g g' f' sq).app (I.cocomplex.X n)).symm)
+      (fun _ _ _ ↦ ((pushforwardRestrictIso f g g' f' sq).inv.naturality _).symm)
+  exact ⟨(higherDirectImage f' q).mapIso ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫
+    (pushforward f').rightDerivedObjIsoOfResolution ι hJ q ≪≫
+    HomologicalComplex.homologyMapIso e q ≪≫ (K.sc q).mapHomologyIso r ≪≫
+    r.mapIso (I.isoRightDerivedObj (pushforward f) q).symm⟩
 
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`

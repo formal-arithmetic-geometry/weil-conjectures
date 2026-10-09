@@ -156,7 +156,7 @@ lemma isFlasque_X₃ {S : ShortComplex X.Modules} (hS : S.ShortExact) (h₁ : S.
 
 /-- A morphism of `𝒪_X`-modules which is surjective on the sections over every open is an
 epimorphism. -/
-lemma epi_of_surjective_app {M N : X.Modules} (φ : M ⟶ N)
+lemma epi_of_forall_surjective_app {M N : X.Modules} (φ : M ⟶ N)
     (h : ∀ U : X.Opens, Function.Surjective (φ.app U)) : Epi φ :=
   (SheafOfModules.forget _).epi_of_epi_map
     (PresheafOfModules.epi_of_surjective fun U ↦ h U.unop)
@@ -180,7 +180,7 @@ lemma IsFlasque.pullback {M : Y.Modules} (hM : M.IsFlasque) (f : X ⟶ Y) [IsOpe
 exact: `f_* M₂ ⟶ f_* M₃` is an epimorphism. -/
 lemma epi_pushforward_map_g {S : ShortComplex X.Modules} (hS : S.ShortExact)
     (h : S.X₁.IsFlasque) (f : X ⟶ Y) : Epi ((pushforward f).map S.g) :=
-  epi_of_surjective_app _ fun U ↦ surjective_app_of_isFlasque hS h (f ⁻¹ᵁ U)
+  epi_of_forall_surjective_app _ fun U ↦ surjective_app_of_isFlasque hS h (f ⁻¹ᵁ U)
 
 instance (f : X ⟶ Y) : PreservesFiniteLimits (pushforward f) :=
   have := (pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
