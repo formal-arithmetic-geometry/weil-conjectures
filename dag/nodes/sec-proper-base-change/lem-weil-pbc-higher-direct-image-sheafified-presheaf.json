@@ -2,23 +2,107 @@
  "id": "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
  "kind": "statement",
  "title": "Higher direct images as sheafified cohomology presheaves",
- "statement": "Let $p:X\\to S$ be any morphism of schemes [def-weil-pbc-scheme-conventions] and let $F\\in\\Ab(X_{\\Et})$ be an abelian sheaf on the small etale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-abelian-etale-sheaves]. For an object $U$ of $X_{\\Et}$ write $H^q(U,F)$ for the $q$-th right derived functor, evaluated at $F$, of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive] (computed from an injective resolution of $F$ in $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions]). For an etale $V\\to S$ the base change $X\\times_SV\\to X$ is etale, hence an object of $X_{\\Et}$. Then for every $q\\geq0$ the higher direct image $R^qp_*F=\\mathcal H^q(Rp_*F)$ of [def-weil-pbc-direct-image] is canonically isomorphic to the sheafification [def-weil-pbc-sheafification] of the presheaf on $S_{\\Et}$\n\n$$\n V\\longmapsto H^q(X\\times_SV,F).\n$$\n\nNo hypothesis (quasi-compactness, separatedness) is put on $p$.",
+ "statement": "Let $p:X\\to S$ be any morphism of schemes [def-pc-scheme] and let $F\\in\\Ab(X_{\\Et})$ be an abelian sheaf on the small etale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-abelian-etale-sheaves]. For an object $U$ of $X_{\\Et}$ write $H^q(U,F)$ for the $q$-th right derived functor, evaluated at $F$, of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive] (computed from an injective resolution of $F$ in $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions]). For an etale $V\\to S$ the base change $X\\times_SV\\to X$ is etale, hence an object of $X_{\\Et}$, and a morphism $g:V'\\to V$ of $S_{\\Et}$ gives the morphism $\\mathrm{id}_X\\times g:X\\times_SV'\\to X\\times_SV$ of $X_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits]; the restriction map $H^q(X\\times_SV,F)\\to H^q(X\\times_SV',F)$ is the map induced on $H^q$ by the restriction maps $I^\\bullet(X\\times_SV)\\to I^\\bullet(X\\times_SV')$ of an injective resolution $F\\to I^\\bullet$. Then for every $q\\geq0$ the higher direct image $R^qp_*F=\\mathcal H^q(Rp_*F)$ of [def-weil-pbc-direct-image] is canonically isomorphic to the sheafification [def-weil-pbc-sheafification] of the presheaf on $S_{\\Et}$\n\n$$\n V\\longmapsto H^q(X\\times_SV,F).\n$$\n\nNo hypothesis (quasi-compactness, separatedness) is put on $p$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma Tag 072W (lemma-higher-direct-images), applied to the morphism of sites $X_{\\Et}\\to S_{\\Et}$ given by the continuous functor $u(V)=X\\times_SV$ with $\\mathcal O=\\underline{\\mathbf Z}$ (so that modules are abelian sheaves); the passage from the K-injective definition of $Rp_*$ to an injective resolution is lem-sp-kinjective-computes (2)"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-abelian-etale-sheaves",
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions",
+  "lem-weil-pbc-etale-base-change-finite-limits",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Choice of a resolution and the definition of $R^qp_*F$.) The category $\\Ab(X_{\\Et})$ is a Grothendieck abelian category [def-weil-pbc-etale-sheaves], so it has enough injectives [lem-sp-grothendieck-enough-injectives]. Hence $F$ has an injective resolution $F\\to I^\\bullet$ [def-sp-injective-resolutions]: choose a monomorphism $F\\hookrightarrow I^0$ into an injective, then a monomorphism $\\operatorname{coker}(F\\to I^0)\\hookrightarrow I^1$ into an injective, and inductively $\\operatorname{coker}(I^{n-1}\\to I^n)\\hookrightarrow I^{n+1}$; the complex $0\\to I^0\\to I^1\\to\\cdots$ is exact in degrees $>0$ and has $H^0=F$ by construction. It is a bounded below complex of injective objects, hence K-injective [lem-weil-pbc-dplus-injective-representative] (2), so $F[0]\\to I^\\bullet$ is a K-injective resolution [def-weil-pbc-kinjective-resolutions]. By the definition of the derived direct image [def-weil-pbc-direct-image], $Rp_*F=p_*I^\\bullet$ and $R^qp_*F=\\mathcal H^q(p_*I^\\bullet)$, the $q$-th cohomology sheaf of the complex $p_*I^0\\to p_*I^1\\to\\cdots$ in $\\Ab(S_{\\Et})$. This does not depend on the resolution up to canonical isomorphism: two K-injective resolutions $F[0]\\to I^\\bullet$, $F[0]\\to J^\\bullet$ are chain homotopy equivalent under $F[0]$, by a homotopy equivalence unique up to homotopy [prop-weil-pbc-kinjective-resolutions-exist] (with $R=\\mathbf Z$, so that $\\Mod(X_{\\Et},\\mathbf Z)=\\Ab(X_{\\Et})$), and the additive functor $p_*$ carries chain homotopies to chain homotopies, so $p_*I^\\bullet$ and $p_*J^\\bullet$ are homotopy equivalent and have canonically isomorphic cohomology sheaves.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 21.2 (section-cohomology-sheaves), first paragraph (enough injectives, choice of an injective resolution); proof of Lemma Tag 072W (lemma-higher-direct-images), first sentence"
+   }
+  },
+  {
+   "text": "(Sections of $p_*I^\\bullet$.) By the definition of the direct image [def-weil-pbc-direct-image], for an object $V\\to S$ of $S_{\\Et}$ one has $(p_*I^n)(V)=I^n(X\\times_SV)$, the differential $(p_*I^n)(V)\\to(p_*I^{n+1})(V)$ is the differential $I^n(X\\times_SV)\\to I^{n+1}(X\\times_SV)$, and for a morphism $g:V'\\to V$ of $S_{\\Et}$ the restriction map of $p_*I^n$ is $I^n(\\mathrm{id}_X\\times g)$, where $\\mathrm{id}_X\\times g:X\\times_SV'\\to X\\times_SV$ is a morphism of $X_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits] (1). Hence the presheaf of complexes underlying $p_*I^\\bullet$ is $V\\mapsto I^\\bullet(X\\times_SV)$ with the restriction maps of $I^\\bullet$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Proof of Lemma Tag 072W (lemma-higher-direct-images): $f_*\\mathcal I^i(V)=\\mathcal I^i(u(V))$"
+   }
+  },
+  {
+   "text": "(The presheaf $V\\mapsto H^q(I^\\bullet(X\\times_SV))$ is $V\\mapsto H^q(X\\times_SV,F)$.) For an object $U$ of $X_{\\Et}$ the functor $\\Gamma_U:G\\mapsto G(U)$, $\\Ab(X_{\\Et})\\to\\Ab$, is additive and left exact: finite products (biproducts) and kernels of abelian sheaves are computed sectionwise [lem-weil-pbc-sheafification-exact] (1). By the definition of right derived functors [def-sp-left-exact-additive], $H^q(U,F)=R^q\\Gamma_U(F)=H^q(\\Gamma_U(I^\\bullet))=H^q(I^\\bullet(U))$ for the injective resolution $F\\to I^\\bullet$ of the first step, independently of that resolution up to canonical isomorphism [lem-sp-derived-well-defined]. Take $U=X\\times_SV$. The restriction map of the presheaf $V\\mapsto H^q(X\\times_SV,F)$ along $g:V'\\to V$ is, by the statement, the map induced on $H^q$ by $I^\\bullet(\\mathrm{id}_X\\times g)$, which by the second step is the map induced on $H^q$ by the restriction of $p_*I^\\bullet$ along $g$. So the presheaf $P_q:V\\mapsto H^q(X\\times_SV,F)$ equals the presheaf $V\\mapsto H^q\\bigl((p_*I^\\bullet)(V)\\bigr)=\\Ker\\bigl((p_*I^q)(V)\\to(p_*I^{q+1})(V)\\bigr)/\\Im\\bigl((p_*I^{q-1})(V)\\to(p_*I^q)(V)\\bigr)$. (No comparison with the cohomology of $F|_{X\\times_SV}$ on the site $(X\\times_SV)_{\\Et}$ is needed here: $H^q(U,F)$ is defined by derived functors on $\\Ab(X_{\\Et})$ itself, as in Stacks Section 21.2, equation (21.2.0.1). The comparison with $H^q((X\\times_SV)_{\\Et},F|)$ is Stacks Lemma Tag 03F3 (lemma-cohomology-of-open), carried by lem-weil-pbc-etale-restriction-injectives.)",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 21.2 (section-cohomology-sheaves), equation (equation-cohomology-object-site); Section 21.7 (section-locality), equation (equation-restriction-mapping) for the restriction maps; proof of Lemma Tag 072W: 'this is obviously equal to ... which is equal to $H^i(u(V),\\mathcal F)$'"
+   }
+  },
+  {
+   "text": "(The cohomology sheaf of a complex of sheaves is the sheafification of the presheaf cohomology.) Let $K^\\bullet$ be a complex in $\\Ab(S_{\\Et})$ (here $K^\\bullet=p_*I^\\bullet$), $\\iota:\\Ab(S_{\\Et})\\to\\mathrm{PAb}(S_{\\Et})$ the inclusion and $\\#$ sheafification [def-weil-pbc-sheafification]. In the category $\\mathrm{PAb}(S_{\\Et})$ of presheaves (a functor category) kernels, cokernels and images are computed sectionwise, so the $q$-th cohomology presheaf of $\\iota K^\\bullet$ is the presheaf $Q_q:V\\mapsto H^q(K^\\bullet(V))$ with the induced restriction maps. The functor $\\#$ is additive and exact [lem-weil-pbc-sheafification-exact] (2), so it commutes with cohomology of complexes [lem-weil-pbc-exact-functor-complex-cohomology]: $\\mathcal H^q(\\#\\iota K^\\bullet)\\cong(Q_q)^\\#$, naturally. Finally, for a sheaf $G$ the identity $G\\to G$ satisfies the universal property of the sheafification of $\\iota G$ (every map from $G$ to a sheaf factors uniquely through $\\mathrm{id}_G$), so the canonical map $\\iota G\\to(\\iota G)^\\#$ is an isomorphism, naturally in $G$; hence $\\#\\iota K^\\bullet\\cong K^\\bullet$ as complexes and $\\mathcal H^q(K^\\bullet)\\cong(Q_q)^\\#$ in $\\Ab(S_{\\Et})$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Proof of Lemma Tag 072W (lemma-higher-direct-images): 'By definition of the abelian category structure ... this cohomology sheaf is the sheaf associated to the presheaf $V\\mapsto\\Ker/\\Im$'; the abelian structure on sheaves is literature/stacks-project/sites-modules.tex Lemma Tag 03CN (lemma-abelian-abelian) and Lemma 00WJ (sites.tex, lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "(Conclusion.) By the first step $R^qp_*F\\cong\\mathcal H^q(p_*I^\\bullet)$; by the fourth step with $K^\\bullet=p_*I^\\bullet$ this is the sheafification of $V\\mapsto H^q((p_*I^\\bullet)(V))$; by the third step that presheaf is $V\\mapsto H^q(X\\times_SV,F)$. The isomorphism is canonical, since each identification is independent of the chosen injective resolution up to canonical isomorphism (first and third steps) and the fourth step is natural in the complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Proof of Lemma Tag 072W (lemma-higher-direct-images), last line"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-sheafification-exact",
+  "def-sp-left-exact-additive",
+  "lem-sp-derived-well-defined",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 072W (lemma-higher-direct-images) and its proof, with Section 21.2 (section-cohomology-sheaves, definition of $H^i(U,\\mathcal F)$) and Section 21.7 (equation-restriction-mapping, restriction maps), for the morphism of sites $X_{\\Et}\\to S_{\\Et}$ given by $u(V)=X\\times_SV$ and $\\mathcal O=\\underline{\\mathbf Z}$"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,10 +124,31 @@
    "results": "cohomologyPresheaf is used only in CategoryTheory/Sites/SheafCohomology/Basic.lean and MayerVietoris.lean; no file under Sites, AlgebraicGeometry or ModuleCat/Sheaf mentions rightDerived: Mathlib has no derived pushforward of sheaves on a site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image R^i f_* F sheaf associated to presheaf V ↦ H^i(f^{-1} V, F) for a morphism of sites",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous, TopCat.Sheaf.pushforward(_obj_val), CategoryTheory.Sheaf.cohomologyPresheaf (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), SheafOfModules.pushforward_map_val, TopCat.Sheaf.pullback, SheafOfModules.pushforwardSections: underived pushforward and the cohomology presheaf only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor of the pushforward of abelian sheaves along a continuous functor of sites, higher direct image",
+   "results": "CategoryTheory.Functor.sheafPushforwardCocontinuous, sheafPushforwardContinuousNatTrans, sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardNatTrans, pushforwardContinuousSheafificationCompatibility, the right-adjoint instance of sheafPushforwardContinuous (Sites.Pullback): no derived functor of the pushforward",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'rightDerived' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry ; grep -rn 'higherDirectImage\\|HigherDirectImage\\|derivedPushforward\\|DerivedPushforward' Mathlib ; grep -rn 'PreservesHomology\\|mapHomologyIso' Mathlib/CategoryTheory/Sites (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none for all three: Mathlib has no higher direct images on sites and no statement on cohomology sheaves of complexes of sheaves; the ingredients exist separately (presheafToSheaf exact: Sites/Sheafification.lean:76 and left adjoint; ShortComplex.mapHomologyIso, Functor.preservesHomologyOfExact: Algebra/Homology/ShortComplex/PreservesHomology.lean:60,455; sheafificationIso: Sites/Sheafification.lean:231; IsGrothendieckAbelian (Sheaf S.smallEtaleTopology A): AlgebraicGeometry/Sites/AffineEtale.lean:151 with IsGrothendieckAbelian.enoughInjectives)",
+   "date": "2026-10-09",
+   "verdict": "no match (confirmed: no higher direct images on sites in Mathlib)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +168,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "worker": "stage1",
+  "summary": "Split along Stacks sites-cohomology Lemma 072W and its proof (read in literature/stacks-project/sites-cohomology.tex:747-782), into five steps: (1) an injective resolution exists (Ab(X_et) Grothendieck abelian, enough injectives) and is K-injective, so R^qp_*F = H^q(p_*I) by def-weil-pbc-direct-image, independent of the resolution; (2) (p_*I)(V) = I(X x_S V) by definition, with restriction maps; (3) H^q(I(X x_S V)) = H^q(X x_S V, F) by the definition of H^q(U,-) as derived functors of G -> G(U) on Ab(X_et) (Stacks 21.2), with the restriction maps of Stacks 21.7 (equation-restriction-mapping) -- no restriction-of-injectives argument (03F3) is needed since H^q(U,F) is defined on Ab(X_et); (4) the cohomology sheaf of a complex of abelian sheaves is the sheafification of the presheaf cohomology, from lem-weil-pbc-sheafification-exact (Mathlib leaf) and lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf) and the counit iso; (5) conclusion. Statement: 'morphism of schemes' repointed from def-weil-pbc-scheme-conventions to def-pc-scheme; the restriction maps of the presheaf V -> H^q(X x_S V, F) and the functor V -> X x_S V (lem-weil-pbc-etale-base-change-finite-limits) are now stated explicitly. No new nodes; Mathlib searched three ways again: no higher direct images on sites."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Stacks 072W; presheaf fully specified; K-injective and injective resolutions aligned"
+ }
 }
