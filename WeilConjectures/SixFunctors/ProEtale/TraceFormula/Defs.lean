@@ -193,7 +193,7 @@ section CtfFunctors
 variable {A} {X Y : Scheme.{u}}
 
 /-- The pullback `Lf^* : Dᵇctf(Y) ⥤ Dᵇctf(X)`, given that it preserves `Dᵇctf`. -/
-noncomputable def ctfUpperStar (f : X ⟶ Y)
+noncomputable abbrev ctfUpperStar (f : X ⟶ Y)
     (h : ∀ K, DerivedCategory.constructibleFiniteTor A Y K →
       DerivedCategory.constructibleFiniteTor A X (((upperStar A f).leftDerivedFunctor).obj K)) :
     Ctf A Y ⥤ Ctf A X :=
@@ -202,7 +202,7 @@ noncomputable def ctfUpperStar (f : X ⟶ Y)
 
 /-- The exceptional direct image `Rf_! : Dᵇctf(X) ⥤ Dᵇctf(Y)`, given that it preserves
 `Dᵇctf`. -/
-noncomputable def ctfLowerShriek (f : X ⟶ Y) [HasCompactification f]
+noncomputable abbrev ctfLowerShriek (f : X ⟶ Y) [HasCompactification f]
     (h : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
       DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A f).obj K)) :
     Ctf A X ⥤ Ctf A Y :=
@@ -211,7 +211,7 @@ noncomputable def ctfLowerShriek (f : X ⟶ Y) [HasCompactification f]
 
 /-- The exceptional inverse image `Rf^! : Dᵇctf(Y) ⥤ Dᵇctf(X)`, given that it preserves
 `Dᵇctf`. -/
-noncomputable def ctfUpperShriek (f : X ⟶ Y) [HasCompactification f]
+noncomputable abbrev ctfUpperShriek (f : X ⟶ Y) [HasCompactification f]
     (h : ∀ L, DerivedCategory.constructibleFiniteTor A Y L →
       DerivedCategory.constructibleFiniteTor A X ((rightDerivedUpperShriek A f).obj L)) :
     Ctf A Y ⥤ Ctf A X :=
@@ -219,7 +219,7 @@ noncomputable def ctfUpperShriek (f : X ⟶ Y) [HasCompactification f]
     rightDerivedUpperShriek A f) fun L ↦ h _ L.property
 
 /-- The direct image `Rf_* : Dᵇctf(X) ⥤ Dᵇctf(Y)`, given that it preserves `Dᵇctf`. -/
-noncomputable def ctfLowerStar (f : X ⟶ Y)
+noncomputable abbrev ctfLowerStar (f : X ⟶ Y)
     (h : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
       DerivedCategory.constructibleFiniteTor A Y (((lowerStar A f).rightDerivedFunctor).obj K)) :
     Ctf A X ⥤ Ctf A Y :=
@@ -250,27 +250,6 @@ noncomputable def ctfLowerShriekCongr {f g : X ⟶ Y} (e : f = g) [HasCompactifi
   eqToIso <| by
     subst e
     rfl
-
-/-- An isomorphism of functors into `Dᵇctf(X)` is an isomorphism of their composites with the
-inclusion into `D(X, A)`. -/
-noncomputable def ctfIsoMk {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
-    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ≅
-      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) : F ≅ G :=
-  ((DerivedCategory.constructibleFiniteTor A X).fullyFaithfulι.whiskeringRight C).preimageIso e
-
-@[simp]
-lemma ctfIsoMk_hom_app_hom {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
-    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ≅
-      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) (c : C) :
-    ((ctfIsoMk e).hom.app c).hom = e.hom.app c := by
-  simp [ctfIsoMk]
-
-@[simp]
-lemma ctfIsoMk_inv_app_hom {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
-    (e : F ⋙ (DerivedCategory.constructibleFiniteTor A X).ι ≅
-      G ⋙ (DerivedCategory.constructibleFiniteTor A X).ι) (c : C) :
-    ((ctfIsoMk e).inv.app c).hom = e.inv.app c := by
-  simp [ctfIsoMk]
 
 end CtfFunctors
 
@@ -556,13 +535,11 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
         ctfLowerShriekCongr (Category.comp_id f).symm _ _
   /-- for `f = 𝟙 X`, `properComparison` is the composite
   `R(𝟙 X)_! ≃ 𝟭 ≃ R(𝟙 X)_*` of `lowerShriekId` and the identity isomorphism of `R(𝟙 X)_*`,
-  the conjugate of `leftDerivedUpperStarId`. -/
-  properComparison_id (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) :
-    properComparison (𝟙 X) hX = lowerShriekId X hX ≪≫
-      ctfIsoMk (F := 𝟭 _) (G := toGeometricCoefficients.lowerStarCtf (𝟙 X) hX)
-        (Functor.isoWhiskerLeft (DerivedCategory.constructibleFiniteTor A X).ι
-          (conjugateIsoEquiv Adjunction.id (derivedUpperStarLowerStarAdjunction A (𝟙 X))
-            (leftDerivedUpperStarId A X)))
+  the conjugate of `leftDerivedUpperStarId`, at every object of `Dᵇctf(X)`. -/
+  properComparison_id (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) (K : Ctf A X) :
+    ((properComparison (𝟙 X) hX).hom.app K).hom = ((lowerShriekId X hX).hom.app K).hom ≫
+      (conjugateIsoEquiv Adjunction.id (derivedUpperStarLowerStarAdjunction A (𝟙 X))
+        (leftDerivedUpperStarId A X)).hom.app K.obj
   /-- the normalisation `ω_s ≃ A_s` is `ω_s ≃ (𝟙 s)^! A_s ≃ A_s`, the second map being the
   identity isomorphism of `(𝟙 s)^!` on `Dᵇctf`, the conjugate of `lowerShriekId`. -/
   dualizingBase_eq :
@@ -587,7 +564,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
           (lowerShriekId X (.id a))).symm.app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         eqToIso (congrArg dualizing (Category.id_comp a).symm)
   /-- `properComparison` is compatible with composition: for proper `f` and `g`,
-  `properComparison (f ≫ g)` is the composite
+  `properComparison (f ≫ g)` is, at every object of `Dᵇctf(X)`, the composite
 
   ```
     R(f ≫ g)_! ≃ Rf_! ⋙ Rg_! ≃ Rf_* ⋙ Rg_! ≃ Rf_* ⋙ Rg_* ≃ R(f ≫ g)_*
@@ -597,17 +574,16 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   isomorphism of `R(-)_*`, the conjugate of `leftDerivedUpperStarComp`. -/
   properComparison_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
       (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
-      [HasCompactification g] [HasCompactification (f ≫ g)] [IsProper f] [IsProper g] :
-    properComparison (f ≫ g) hfg =
-      (lowerShriekComp f g hf hg hfg).symm ≪≫
-        Functor.isoWhiskerRight (properComparison f hf) _ ≪≫
-        Functor.isoWhiskerLeft _ (properComparison g hg) ≪≫
-        ctfIsoMk (G := toGeometricCoefficients.lowerStarCtf (f ≫ g) hfg)
-          (Functor.isoWhiskerLeft (DerivedCategory.constructibleFiniteTor A X).ι
-            (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
-              ((derivedUpperStarLowerStarAdjunction A g).comp
-                (derivedUpperStarLowerStarAdjunction A f))
-              (leftDerivedUpperStarComp A f g).symm).symm)
+      [HasCompactification g] [HasCompactification (f ≫ g)] [IsProper f] [IsProper g]
+      (K : Ctf A X) :
+    ((properComparison (f ≫ g) hfg).hom.app K).hom =
+      ((lowerShriekComp f g hf hg hfg).inv.app K).hom ≫
+        (rightDerivedLowerShriek A g).map ((properComparison f hf).hom.app K).hom ≫
+        ((properComparison g hg).hom.app ((toGeometricCoefficients.lowerStarCtf f hf).obj K)).hom ≫
+        (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+          ((derivedUpperStarLowerStarAdjunction A g).comp
+            (derivedUpperStarLowerStarAdjunction A f))
+          (leftDerivedUpperStarComp A f g).symm).inv.app K.obj
   /-- `dualizingComp` is compatible with composition: `dualizingComp (f ≫ g) a` is the
   composite
 
@@ -813,6 +789,18 @@ noncomputable def upperStarUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 lemma upperStarUnit_hom_id (X : Scheme.{u}) :
     (G.upperStarUnit (𝟙 X)).hom = (leftDerivedUpperStarId A X).hom.app (𝟙_ _) :=
   G.upperStarUnit_id X
+
+/-- The inverse form of the field `properComparison_id`. -/
+lemma properComparison_id_inv_app_hom (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X))
+    (K : Ctf A X) :
+    ((G.properComparison (𝟙 X) hX).inv.app K).hom =
+      (conjugateIsoEquiv Adjunction.id (derivedUpperStarLowerStarAdjunction A (𝟙 X))
+          (leftDerivedUpperStarId A X)).inv.app K.obj ≫
+        ((G.lowerShriekId X hX).inv.app K).hom := by
+  rw [← cancel_epi ((G.properComparison (𝟙 X) hX).hom.app K).hom,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app, G.properComparison_id,
+    Category.assoc, Iso.hom_inv_id_app_assoc, ← ObjectProperty.FullSubcategory.comp_hom,
+    Iso.hom_inv_id_app]
 
 /-- The tensor comparison `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N` of the pullback: the inverse of
 the tensor map of the monoidal structure `GeometricOperations.upperStarMonoidal` of
