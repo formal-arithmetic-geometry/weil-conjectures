@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-site-system-strictification",
+ "kind": "statement",
+ "title": "A system of sites compatible up to coherent isomorphism can be replaced by a strict one",
+ "statement": "Let $I$ be a directed set. Suppose given: for each $i\\in I$ a site $\\mathcal C_i$ [def-weil-pbc-sites-and-cohomology] all of whose coverings have finite index sets; for $i\\le i'$ a continuous functor $u_{i'i}:\\mathcal C_i\\to\\mathcal C_{i'}$ defining a morphism of sites $\\mathcal C_{i'}\\to\\mathcal C_i$, with $u_{ii}=\\mathrm{id}$; for $i\\le i'\\le i''$ a natural isomorphism $\\gamma_{i''i'i}:u_{i''i'}\\circ u_{i'i}\\Rightarrow u_{i''i}$, the identity when $i'=i$ or $i''=i'$, satisfying the cocycle condition $\\gamma_{i'''i''i}\\circ(\\gamma_{i'''i''i'}u_{i'i})=\\gamma_{i'''i'i}\\circ(u_{i'''i'}\\gamma_{i''i'i})$ for $i\\le i'\\le i''\\le i'''$; a category $\\mathcal D$ with functors $v_i:\\mathcal C_i\\to\\mathcal D$ and natural isomorphisms $\\delta_{i'i}:v_{i'}\\circ u_{i'i}\\Rightarrow v_i$, $\\delta_{ii}=\\mathrm{id}$, with $\\delta_{i''i}\\circ(v_{i''}\\gamma_{i''i'i})=\\delta_{i'i}\\circ(\\delta_{i''i'}u_{i'i})$. Then there are sites $\\mathcal C'_i$ with finite coverings and functors $e_i:\\mathcal C_i\\to\\mathcal C'_i$ which are equivalences of categories such that a family of morphisms of $\\mathcal C_i$ with common target is a covering if and only if its image under $e_i$ is one, and every covering of $\\mathcal C'_i$ is isomorphic (by isomorphisms of the members over an isomorphism of the targets) to the image of a covering of $\\mathcal C_i$; continuous functors $u'_{i'i}:\\mathcal C'_i\\to\\mathcal C'_{i'}$ ($i\\le i'$) defining morphisms of sites, with $u'_{ii}=\\mathrm{id}$ and $u'_{i''i'}\\circ u'_{i'i}=u'_{i''i}$ (equality of functors), and natural isomorphisms $u'_{i'i}\\circ e_i\\cong e_{i'}\\circ u_{i'i}$; and functors $v'_i:\\mathcal C'_i\\to\\mathcal D$ with $v'_{i'}\\circ u'_{i'i}=v'_i$ (equality) and natural isomorphisms $v'_i\\circ e_i\\cong v_i$. In particular $(\\mathcal C'_i,u'_{i'i})$, indexed by the cofiltered category $I^{\\mathrm{op}}$, is a system of sites as in Situation 0A34 of [lem-weil-pbc-colimit-of-sites], and the $v'_i$ induce a functor $\\varinjlim_i\\mathcal C'_i\\to\\mathcal D$ on the colimit category. (One construction: objects of $\\mathcal C'_i$ are pairs $(j,V)$ with $j\\le i$ and $V\\in\\operatorname{Ob}(\\mathcal C_j)$, $\\operatorname{Hom}((j,V),(k,W))=\\operatorname{Hom}_{\\mathcal C_i}(u_{ij}V,u_{ik}W)$, $u'_{i'i}(j,V)=(j,V)$ and $u'_{i'i}$ on morphisms the conjugate of $u_{i'i}$ by the $\\gamma$'s; $e_i(V)=(i,V)$; $v'_i(j,V)=v_j(V)$.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Situation Tag 0A34 (situation-inverse-limit-sites, line 3770) asks for morphisms of sites with $f_a\\circ f_b=f_c$ exactly, while the base change functors of Etale Cohomology Lemma 0EYL (etale-cohomology.tex line 7336) compose only up to the canonical isomorphisms of fibre products; Stacks passes over this. The statement is the standard strictification of a pseudo-functor on a directed set, written by an agent (no source in literature/)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-of-sites"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strictification of a pseudofunctor to an equivalent strict functor",
+   "results": "CategoryTheory.StrictPseudofunctor (and .mk', .mk'', toFunctor_obj), StrictPseudofunctorPreCore, StrictlyUnitaryPseudofunctor (Mathlib.CategoryTheory.Bicategory.Functor.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: definitions of strict pseudofunctors, no strictification theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every pseudofunctor into Cat is equivalent to a strict functor (strictification, Grothendieck construction)",
+   "results": "Functor.toPseudoFunctor' (functor to pseudofunctor, the other direction), StrictPseudofunctor.mk'', StrictPseudofunctor.mk', StrictlyUnitaryPseudofunctor(.mk', Core)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'strictif\\|rectif' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

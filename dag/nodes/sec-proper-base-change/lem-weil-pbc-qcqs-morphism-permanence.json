@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-qcqs-morphism-permanence",
+ "kind": "statement",
+ "title": "Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change",
+ "statement": "Let $f:U\\to T$ be a morphism of schemes [def-pc-scheme]. (1) If $U$ is quasi-compact and $T$ is quasi-separated, then $f$ is quasi-compact; if $U$ is quasi-separated, then $f$ is quasi-separated [def-weil-pbc-scheme-conventions]. In particular, if $U$ is affine, $T$ quasi-separated and $f$ locally of finite presentation [def-sbc-locally-finite-presentation] (for instance etale [def-weil-etale-morphism]), then $f$ is of finite presentation. (2) If $f$ is quasi-compact (resp. quasi-separated) and $T$ is quasi-compact (resp. quasi-separated), then $U$ is quasi-compact (resp. quasi-separated). (3) The base change of a morphism locally of finite presentation (resp. quasi-compact, quasi-separated, of finite presentation) along any morphism is locally of finite presentation (resp. quasi-compact, quasi-separated, of finite presentation).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "(1) Schemes, Lemma Tag 03GI (lemma-quasi-compact-permanence: $g\\circ f$ quasi-compact and $g$ quasi-separated imply $f$ quasi-compact), applied with $g:T\\to\\operatorname{Spec}\\mathbf Z$; Lemma Tag 01KV (lemma-compose-after-separated: $g\\circ f$ quasi-separated implies $f$ quasi-separated); (2) Lemma lemma-composition-quasi-compact (schemes.tex line 3636) and Lemma Tag 01KU(2) (lemma-separated-permanence), composing with $T\\to\\operatorname{Spec}\\mathbf Z$; (3) Schemes Lemma Tag 01K5 (quasi-compact preserved by base change), Lemma Tag 01KU(4) (quasi-separated), Morphisms Lemma Tag 01TS (lemma-base-change-finite-presentation); finite presentation as in Morphisms Definition 01TP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes from a quasi-compact scheme to a quasi-separated scheme is quasi-compact",
+   "results": "AlgebraicGeometry.quasiCompact_of_compactSpace (instance), quasiCompact_over_affine_iff, quasiCompact_iff_compactSpace, QuasiCompact.of_comp (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-10",
+   "verdict": "match for (1) first part"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism from a quasi-separated scheme is quasi-separated; locally of finite presentation morphism from affine scheme to quasi-separated scheme is of finite presentation",
+   "results": "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace (instance), quasiSeparated_over_affine_iff, IsSeparated.instQuasiSeparated, quasiSeparated_comp",
+   "date": "2026-10-10",
+   "verdict": "match for (1) second part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism from a compact scheme to a quasi-separated scheme is quasi-compact",
+   "results": "quasiCompact_of_compactSpace, quasiCompact_iff_compactSpace, quasiCompact_over_affine_iff, QuasiCompact.compactSpace_of_compactSpace (Morphisms.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "match for (1) and (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'compactSpace_of_compactSpace\\|quasiCompact_isStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean; grep -n 'quasiSeparatedSpace_of_quasiSeparated\\|quasiSeparated_isStableUnderBaseChange\\|of_quasiSeparatedSpace\\|quasiSeparatedSpace_of_isAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; grep -n 'locallyOfFinitePresentation_isStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; grep -n 'compactSpace_of_isAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "results": "QuasiCompact.lean:150 QuasiCompact.compactSpace_of_compactSpace, :165 quasiCompact_isStableUnderBaseChange; QuasiSeparated.lean:155 quasiSeparatedSpace_of_quasiSeparated, :124 quasiSeparated_isStableUnderBaseChange, :234 QuasiSeparated.of_quasiSeparatedSpace, quasiSeparatedSpace_of_isAffine; FinitePresentation.lean:85 locallyOfFinitePresentation_isStableUnderBaseChange; AffineScheme.lean:561 Scheme.compactSpace_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, quasiCompact_isStableUnderBaseChange, quasiSeparated_isStableUnderBaseChange, locallyOfFinitePresentation_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "how": "one Mathlib lemma per clause: (1) quasiCompact_of_compactSpace and QuasiSeparated.of_quasiSeparatedSpace (Morphisms/QuasiSeparated.lean), an affine scheme being a CompactSpace and QuasiSeparatedSpace by Scheme.compactSpace_of_isAffine (AffineScheme.lean:561) and quasiSeparatedSpace_of_isAffine; of finite presentation = LocallyOfFinitePresentation + QuasiCompact + QuasiSeparated (def-weil-pbc-scheme-conventions; Etale implies LocallyOfFinitePresentation by instance); (2) QuasiCompact.compactSpace_of_compactSpace (Morphisms/QuasiCompact.lean:150), quasiSeparatedSpace_of_quasiSeparated (QuasiSeparated.lean:155); (3) the IsStableUnderBaseChange instances quasiCompact_isStableUnderBaseChange (QuasiCompact.lean:165), quasiSeparated_isStableUnderBaseChange (QuasiSeparated.lean:124), locallyOfFinitePresentation_isStableUnderBaseChange (Morphisms/FinitePresentation.lean:85). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: quasiCompact_of_compactSpace (QuasiSeparated.lean:255), QuasiSeparated.of_quasiSeparatedSpace (:233), compactSpace_of_compactSpace (QuasiCompact.lean:150), quasiSeparatedSpace_of_quasiSeparated, and the base-change instances."
+ }
+}

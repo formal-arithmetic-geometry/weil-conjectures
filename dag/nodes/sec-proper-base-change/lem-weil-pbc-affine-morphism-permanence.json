@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-affine-morphism-permanence",
+ "kind": "statement",
+ "title": "Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [pqf-def-affine-morphism]. Then: (1) for every morphism $g:Y'\\to Y$ the base change $X\\times_YY'\\to Y'$ (fibre product [def-pc-fibre-product]) is affine; (2) if $Y$ is affine [def-pc-scheme], then $X$ is affine; (3) $f$ is quasi-compact and separated, in particular quasi-separated [def-weil-pbc-scheme-conventions]; (4) a finite disjoint union of affine schemes is affine.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Section Affine morphisms: Definition Tag 01S6 (morphisms-definition-affine; affine over an affine base: the preimage of the affine target is affine), Lemma Tag 01S7 (lemma-affine-separated, line 1721: an affine morphism is separated and quasi-compact), Lemma Tag 01SD (lemma-base-change-affine: base change); (4) a finite disjoint union $\\coprod\\operatorname{Spec}A_j=\\operatorname{Spec}\\prod A_j$ (the spectrum of a finite product of rings is the disjoint union of the spectra)"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine morphism stable under base change; scheme affine over an affine scheme is affine; affine morphism is quasi-compact and separated",
+   "results": "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, IsStableUnderBaseChange.of_pullback_fst_of_isAffine, HasAffineProperty.affineAnd_isStableUnderBaseChange, isAffineHom_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f : X -> Y is an affine morphism and Y is affine then X is affine; affine morphisms are stable under pullback",
+   "results": "AlgebraicGeometry.isAffine_of_isAffineHom (Morphisms.Affine), HasAffineProperty.of_isPullback, instHasAffinePropertyIsAffineHomIsAffine",
+   "date": "2026-10-10",
+   "verdict": "match for (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isAffineHom_isStableUnderBaseChange\\|lemma isAffine_of_isAffineHom\\|IsAffineHom f\\] : QuasiCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; grep -n 'of_isAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; grep -n 'IsAffine (∐' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Limits.lean",
+   "results": "Affine.lean:171 instance isAffineHom_isStableUnderBaseChange, :185 lemma isAffine_of_isAffineHom, :58 instance [IsAffineHom f] : QuasiCompact f; Separated.lean:119 lemma IsSeparated.of_isAffineHom; Limits.lean:651 instance [Finite σ] [forall i, IsAffine (g i)] : IsAffine (∐ g)",
+   "date": "2026-10-10",
+   "verdict": "match for (1)-(4) (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.IsSeparated.of_isAffineHom, instance IsAffine (∐ g) for finite σ (Mathlib/AlgebraicGeometry/Limits.lean:651)",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+  "how": "one Mathlib lemma per clause: (1) isAffineHom_isStableUnderBaseChange (Affine.lean:171); (2) isAffine_of_isAffineHom (Affine.lean:185); (3) the instance IsAffineHom f -> QuasiCompact f (Affine.lean:58) and IsSeparated.of_isAffineHom (Morphisms/Separated.lean:119), with IsSeparated -> QuasiSeparated (Separated.lean:68); (4) the instance IsAffine (∐ g) for a finite family (Limits.lean:651). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: isAffineHom_isStableUnderBaseChange (Affine.lean:172), isAffine_of_isAffineHom (:185), the QuasiCompact instance and IsSeparated.of_isAffineHom, IsAffine of a finite coproduct (Limits.lean:651)."
+ }
+}

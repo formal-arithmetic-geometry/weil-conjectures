@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-limit-affine-stage",
+ "kind": "statement",
+ "title": "If a limit of qcqs schemes with affine transition maps is affine, so are the late stages",
+ "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system over $I$ of quasi-compact and quasi-separated schemes [def-weil-pbc-scheme-conventions] whose transition morphisms are affine [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. If $S$ is affine, then there is $i_0\\in I$ such that $S_i$ is affine for every $i\\ge i_0$ (Stacks Limits, Lemma 01Z6).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 01Z6 (lemma-limit-affine, line 680), in Situation 01ZN (situation-descent: directed limit of qcqs schemes with affine transition maps)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse system of qcqs schemes with affine transition maps, limit affine implies some stage affine",
+   "results": "AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), Scheme.isAffine_of_isLimit (Mathlib.AlgebraicGeometry.Limits, the converse), isAffineHom_π_app",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.exists_isAffine_of_isLimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, CategoryTheory.Limits.IsLimit, CategoryTheory.IsCofiltered",
+   "results": "AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, Scheme.OpenCover.exists_of_isCofiltered_of_finite, exists_appTop_π_eq_of_isAffine_of_isLimit, exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.exists_isAffine_of_isLimit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 01Z6' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 1035,1062p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "AffineTransitionLimit.lean:1039 @[stacks 01Z6] lemma Scheme.exists_isAffine_of_isLimit [IsCofiltered I] [forall i j f, IsAffineHom (D.map f)] [forall i, CompactSpace (D.obj i)] [forall i, QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : exists i, IsAffine (D.obj i)",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "how": "specializes in one line: the directed set I, viewed as a cofiltered category (I^op), with the limit cone, gives one i_0 with S_{i_0} affine; for i >= i_0 the transition morphism S_i -> S_{i_0} is affine (IsAffineHom), so S_i is affine by AlgebraicGeometry.isAffine_of_isAffineHom (Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:185). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-etale-site-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Scheme.exists_isAffine_of_isLimit (AffineTransitionLimit.lean:1040) with isAffine_of_isAffineHom (Affine.lean:185)."
+ }
+}
