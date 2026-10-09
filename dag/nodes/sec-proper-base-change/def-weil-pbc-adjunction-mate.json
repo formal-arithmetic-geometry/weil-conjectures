@@ -25,6 +25,34 @@
    "results": "CategoryTheory/Adjunction/Mates.lean, CategoryTheory/Bicategory/Adjunction/Mate.lean, CategoryTheory/Bicategory/Adjunction/Cat.lean, CategoryTheory/Monoidal/Closed/Functor.lean",
    "date": "2026-10-09",
    "verdict": "match (Mates.lean)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate of a natural transformation under two adjunctions bijection",
+   "results": "CategoryTheory.mateEquiv_apply (Mathlib.CategoryTheory.Adjunction.Mates); CategoryTheory.Bicategory.mateEquiv_apply, mateEquiv_apply', conjugateEquiv_apply (Mathlib.CategoryTheory.Bicategory.Adjunction.Mate); CategoryTheory.Bicategory.toNatTrans_mateEquiv",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.mateEquiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv : TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂ (for adj₁ : L₁ ⊣ R₁, adj₂ : L₂ ⊣ R₂); mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm (Mathlib.CategoryTheory.Adjunction.Mates)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijection between natural transformations G ⋙ L₂ ⟶ L₁ ⋙ H and R₁ ⋙ G ⟶ H ⋙ R₂ given adjunctions L₁ ⊣ R₁ and L₂ ⊣ R₂",
+   "results": "CategoryTheory.conjugateEquiv (the special case G = H = id), Adjunction.leftAdjointCompNatTrans (Mathlib.CategoryTheory.Adjunction.CompositionIso)",
+   "date": "2026-10-09",
+   "verdict": "generalization found by the other searches; conjugateEquiv is the special case"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 55,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean; rg -n \"def mateEquiv|theorem unit_mateEquiv|theorem mateEquiv_counit\" same file",
+   "results": "line 84 def mateEquiv (docstring: bijection between G ⋙ L₂ ⟶ L₁ ⋙ H and R₁ ⋙ G ⟶ H ⋙ R₂; toFun = unit of adj₂, α whiskered by R₁, counit of adj₁; invFun = unit of adj₁, β, counit of adj₂), lines 123, 136",
+   "date": "2026-10-09",
+   "verdict": "confirmed: the declaration exists and its toFun/invFun are the two composites of the statement"
   }
  ],
  "mathlib_match": {

@@ -25,6 +25,27 @@
    "results": "Basic.lean defines triangles; Pretriangulated.lean, Rotate.lean, TriangleShift.lean, Functor.lean use them",
    "date": "2026-10-09",
    "verdict": "match (Basic.lean)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "triangle in a category with shift, morphism of triangles, isomorphism of triangles from isomorphisms of components",
+   "results": "Pretriangulated.Triangle.isoMk, Triangle.isoMk_hom (Mathlib.CategoryTheory.Triangulated.Basic); isoTriangleOfIso₁₂ (Mathlib.CategoryTheory.Triangulated.Pretriangulated)",
+   "date": "2026-10-09",
+   "verdict": "match: Triangle.isoMk builds the isomorphism from component isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "triangle (X,Y,Z,f,g,h) in a category with shift, h : Z ⟶ X⟦1⟧, category of triangles",
+   "results": "Pretriangulated.Triangle, Triangle.mk, Triangle.mk', triangleCategory (Mathlib.CategoryTheory.Triangulated.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 25,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Basic.lean; rg -n \"structure TriangleMorphism|instance triangleCategory|def Triangle.isoMk|lemma Triangle.isIso_of_isIsos\" same file",
+   "results": "Triangle (line 44, @[stacks 0144], over [Category C] [HasShift C ℤ]), TriangleMorphism (104), triangleCategory (146), Triangle.isoMk (187), Triangle.isIso_of_isIsos (202)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {

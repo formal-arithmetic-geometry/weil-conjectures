@@ -27,6 +27,27 @@
    "results": "CategoryTheory/Abelian/DiagramLemmas/Four.lean (the five-term lemma above), Algebra/Homology/ShortComplex/ShortExact.lean (`isIso₂_of_shortExact_of_isIso₁₃`, the short five lemma, already the node lem-weil-pbc-short-five-lemma)",
    "date": "2026-10-09",
    "verdict": "match: Four.lean line 141"
+  },
+  {
+   "tool": "leansearch",
+   "query": "five lemma abelian category epi iso iso mono implies iso",
+   "results": "LinearMap/AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective (Mathlib.Algebra.FiveLemma), CategoryTheory.Abelian.epi_of_epi_of_epi_of_mono, CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono (Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four)",
+   "date": "2026-10-09",
+   "verdict": "match: isIso_of_epi_of_isIso_of_isIso_of_mono"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "five lemma for composable arrows in an abelian category: epi, iso, iso, mono implies middle iso",
+   "results": "CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono, mono_of_epi_of_mono_of_mono, mono_of_epi_of_epi_of_mono, epi_of_mono_of_epi_of_mono (DiagramLemmas.Four)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -B4 -A12 \"theorem isIso_of_epi_of_isIso_of_isIso_of_mono\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean; rg -n \"^variable\" same file",
+   "results": "line 141, section Five: [Abelian C], R₁ R₂ : ComposableArrows C 4, hR₁ : R₁.Exact, hR₂ : R₂.Exact, φ : R₁ ⟶ R₂; Epi (app' φ 0), IsIso (app' φ 1), IsIso (app' φ 3), Mono (app' φ 4) ⊢ IsIso (app' φ 2)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: ComposableArrows.Exact of a 4-step row is exactness at the three interior objects (A₂,A₃,A₄), as in the statement"
   }
  ],
  "mathlib_match": {

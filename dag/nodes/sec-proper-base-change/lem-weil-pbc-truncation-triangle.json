@@ -29,6 +29,27 @@
    "results": "DerivedCategory.triangleOfSES and triangleOfSES_distinguished (ShortExact.lean:72, the distinguished triangle of a short exact sequence of complexes); HomologicalComplex.truncLE (Embedding/TruncLE.lean) for complexes; singleFunctorIsoCompQ, singleFunctorCompHomologyFunctorIso, singleTriangleIso (single-degree complexes); no isomorphism between a complex with cohomology concentrated in one degree and the single complex of that cohomology, no statement of this triangle",
    "date": "2026-10-09",
    "verdict": "no match: the ingredients (triangle of a short exact sequence of complexes, canonical truncation of complexes, single complexes) are there, the statement is not; lem-sf-derived-truncation-triangle (Mathlib leaf) applied to tau_{<=q}K with b=q gives the triangle with third term tau_{>=q}tau_{<=q}K"
+  },
+  {
+   "tool": "leansearch",
+   "query": "distinguished triangle truncation τ≤(n-1) X → τ≤n X → H^n(X)[-n] → in the derived category",
+   "results": "TStructure.triangleLTGE_distinguished, triangleLTGE_obj_obj₁/mor₁ (Triangulated.TStructure.TruncLTGE), ShortComplex.ShortExact.singleTriangle (DerivedCategory.SingleTriangle), DerivedCategory.triangleOfSES, triangleOfSES_distinguished (DerivedCategory.ShortExact), TStructure.exists_triangle",
+   "date": "2026-10-09",
+   "verdict": "no match: the t-structure triangle τ<n X → X → τ≥n X and the triangle of a short exact sequence of complexes are ingredients; the triangle with third term the complex H^q(K)[-q] and the uniqueness of k_q are not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "t-structure truncation distinguished triangle truncLE (n-1) X ⟶ truncLE n X ⟶ (homology n X)⟦-n⟧ derived category",
+   "results": "TStructure.truncGEδLT, triangleLTGE_obj_mor₂, triangleLTGE_obj_mor₁, truncGEπ, truncLTι (TruncLTGE); CochainComplex.shortComplexTruncLEX₃ToTruncGE (Algebra.Homology.Embedding.CochainComplex)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"^(noncomputable )?(def|lemma|theorem|instance|abbrev)\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean TruncLEGT.lean Heart.lean ETrunc.lean | grep -i \"triangle|homology|heart\"; rg -n \"truncLE.*single|triangle.*truncLE\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated",
+   "results": "triangleLTGE (TruncLTGE.lean:296), triangle truncLE a → A → truncGE b (TruncLEGT.lean:185), truncLE n → A → truncGT n (217), eTriangleLTGE (ETrunc.lean:222); nothing with H^q(K)[-q]",
+   "date": "2026-10-09",
+   "verdict": "no match (generalization only up to the identification τ≥q τ≤q K ≅ H^q(K)[-q], which is itself a theorem)"
   }
  ],
  "mathlib_match": null,

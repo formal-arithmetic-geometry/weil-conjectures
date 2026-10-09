@@ -17,12 +17,40 @@
    "results": "Algebra/Homology/DerivedCategory/Plus.lean:214 DerivedCategory.Plus.isIso_iff {X Y : Plus C} (f : X ⟶ Y) : IsIso f ↔ ∀ n, IsIso ((homologyFunctor C n).map f); Algebra/Homology/DerivedCategory/HomologySequence.lean:88 DerivedCategory.isIso_iff (unbounded)",
    "date": "2026-10-09",
    "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism in the bounded below derived category is an isomorphism iff it induces isomorphisms on all cohomology objects",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_Qh_map_iff, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-09",
+   "verdict": "related (unbounded / complexes), the bounded-below statement found by grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism in bounded below derived category Plus is iso iff homology functor maps are iso for all n",
+   "results": "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, HomotopyCategory.quasiIso, respectsIso_quasiIso (Algebra.Homology.Localization), ShortComplex.QuasiIso.isIso, quasiIso_of_isIso",
+   "date": "2026-10-09",
+   "verdict": "related only; the LeanSearch index does not return DerivedCategory.Plus.isIso_iff (a 2026 file), found by local_search and grep"
+  },
+  {
+   "tool": "local_search",
+   "query": "DerivedCategory.Plus.isIso_iff (project root ~/weil-conjectures-slopmaster2)",
+   "results": "DerivedCategory.Plus.isIso_iff, lemma, .lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean (index: unavailable, name found by the file scan)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: the declaration exists in this Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -B3 -A8 \"lemma isIso_iff\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "results": "line 214: lemma isIso_iff {X Y : Plus C} (f : X ⟶ Y) : IsIso f ↔ ∀ (n : ℤ), IsIso ((homologyFunctor C n).map f), for [Abelian C] [HasDerivedCategory C]; Plus C is the full subcategory t.plus of DerivedCategory C (TStructure.lean:204)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
   "declaration": "DerivedCategory.Plus.isIso_iff",
   "file": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
-  "how": "exact (for C = the abelian category of étale sheaves on the target)"
+  "how": "exact: for C abelian (with HasDerivedCategory C, a choice of model of D(C)), `DerivedCategory.Plus C` is the full subcategory of `DerivedCategory C` of cohomologically bounded below objects (TStructure.lean:204, the D^+ of [def-weil-pbc-derived-categories]) and `homologyFunctor C n` restricted to it is H^n; `isIso_iff (f : X ⟶ Y) : IsIso f ↔ ∀ n : ℤ, IsIso ((homologyFunctor C n).map f)` is the statement word for word, both directions; applied with C = the abelian category of étale sheaves on the target. Checked by reading the source (Plus.lean:214-218) on 2026-10-09."
  },
  "status": "mathlib",
  "lean_audit": {

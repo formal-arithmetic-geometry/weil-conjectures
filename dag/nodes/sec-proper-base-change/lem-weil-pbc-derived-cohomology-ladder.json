@@ -30,6 +30,27 @@
    "results": "line 104 `instance (n : ℤ) : (homologyFunctor C n).IsHomological`; line 110 `instance : (homologyFunctor C 0).ShiftSequence ℤ` induced by `homologyFunctor C`; line 147 `HomologySequence.δ T n₀ n₁ h := (homologyFunctor C 0).shiftMap T.mor₃ n₀ n₁ _`, i.e. `(homologyFunctor C 0).homologySequenceδ T n₀ n₁ h`",
    "date": "2026-10-09",
    "verdict": "match together with the line above: the two squares not involving δ are `Functor.map_comp` with `φ.comm₁`, `φ.comm₂`"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of distinguished triangles commutes with connecting morphism of long exact homology sequence",
+   "results": "CategoryTheory.Functor.homologySequenceδ_naturality, homologySequenceδ_naturality_assoc (Mathlib.CategoryTheory.Triangulated.HomologicalFunctor), DerivedCategory.HomologySequence.δ.congr_simp, HomologySequence.δ_comp_assoc (Algebra.Homology.DerivedCategory.HomologySequence), Octahedron.triangleMorphism₁",
+   "date": "2026-10-09",
+   "verdict": "match: homologySequenceδ_naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the connecting morphism of the long exact homology sequence of a homological functor with respect to a morphism of triangles",
+   "results": "CategoryTheory.Functor.homologySequenceδ_naturality, homologySequenceδ_naturality_assoc, comp_homologySequenceδ (Mathlib.CategoryTheory.Triangulated.HomologicalFunctor)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -A10 \"homologySequenceδ_naturality\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; sed -n 95,125p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "results": "line 182: for F : C ⥤ A with [F.ShiftSequence ℤ], T T' : Triangle C, φ : T ⟶ T', n₀ + 1 = n₁: (F.shift n₀).map φ.hom₃ ≫ F.homologySequenceδ T' n₀ n₁ h = F.homologySequenceδ T n₀ n₁ h ≫ (F.shift n₁).map φ.hom₁; HomologySequence.lean: instance (homologyFunctor C 0).ShiftSequence ℤ, shift_homologyFunctor : (homologyFunctor C 0).shift n = homologyFunctor C n (rfl), DerivedCategory.HomologySequence.δ (line 152) defined from homologySequenceδ",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
  ],
  "mathlib_match": {
