@@ -14,9 +14,214 @@
   "lem-weil-pbc-formal-systems-pullback",
   "lem-weil-pbc-coherent-formal-modules-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Setting.) $f$ is proper [def-weil-proper-morphism], hence of finite type and quasi-compact; as $Y$ is Noetherian, $X$ is locally Noetherian [pqf-lem-locnoeth-lft] with quasi-compact underlying space, i.e. Noetherian. $\\mathcal I=f^{-1}\\mathcal J\\cdot\\mathcal O_X=\\mathcal J\\mathcal O_X$ is a quasi-coherent sheaf of ideals with $\\mathcal I^n=\\mathcal J^n\\mathcal O_X$ for all $n$, and $f^*(\\mathcal G/\\mathcal J^n\\mathcal G)\\cong f^*\\mathcal G/\\mathcal I^nf^*\\mathcal G$ naturally for quasi-coherent $\\mathcal G$ [lem-weil-pbc-module-pullback-ideal-quotient] (1)-(3). So $\\mathit{Coh}(X,\\mathcal I)$, $\\mathcal F^\\wedge=(\\mathcal F/\\mathcal I^n\\mathcal F)_n$ and the system $(f^*\\mathcal G_n)$ (an object of $\\mathit{Coh}(X,\\mathcal I)$ by [lem-weil-pbc-formal-systems-pullback] (1)) make sense [def-weil-pbc-coherent-formal-module]. For an open $W\\subseteq Y$, $f_W:f^{-1}(W)\\to W$ is again proper (base change of $f$ along the open immersion $W\\to Y$, [lem-weil-pbc-proper-fp-permanence] (b)), and all hypotheses restrict to $W$: $f_W$ is an isomorphism over $V\\cap W=W\\setminus V(\\mathcal K|_W)$, and $\\beta|_{f^{-1}W}$ is an isomorphism $(f_W^*(\\mathcal G_n|_W))\\to(\\mathcal F|_{f^{-1}W})^\\wedge$ (restriction to an open is the pullback along the open immersion, [lem-weil-pbc-formal-systems-pullback] (2)).",
+   "uses": [
+    "def-weil-proper-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), setting; the restriction to opens is implicit in 'we may assume Y affine'"
+   }
+  },
+  {
+   "text": "(Coherence of $f_*\\mathcal F$.) $Y$ is locally Noetherian and $f$ proper, so for every coherent $\\mathcal O_X$-module $\\mathcal E$ the $\\mathcal O_Y$-module $f_*\\mathcal E=R^0f_*\\mathcal E$ is coherent [lem-pc-coherent-hi]; in particular $f_*\\mathcal F$ and $f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$ are coherent ($\\mathcal F/\\mathcal I^n\\mathcal F$ is coherent, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (2)), and $(f_*\\mathcal F)^\\wedge$ is an object of $\\mathit{Coh}(Y,\\mathcal J)$. If $Y=\\operatorname{Spec}B$ is affine, $\\Gamma(Y,f_*\\mathcal E)=\\Gamma(X,\\mathcal E)$ by definition of $f_*$.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), first sentence: Proposition 02O5 (proposition-proper-pushforward-coherent)"
+   }
+  },
+  {
+   "text": "(The maps $\\gamma_n$ and $\\kappa_n$.) Let $\\eta:\\mathrm{id}\\to f_*f^*$ be the unit of the adjunction $f^*\\dashv f_*$ on modules [def-pc-module-pullback], and put $\\gamma_n=f_*(\\beta_n)\\circ\\eta_{\\mathcal G_n}:\\mathcal G_n\\to f_*f^*\\mathcal G_n\\to f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$. By naturality of $\\eta$ and since $\\beta$ commutes with the transition maps, the $\\gamma_n$ commute with the transition maps $\\mathcal G_{n+1}\\to\\mathcal G_n$ and $f_*(\\mathcal F/\\mathcal I^{n+1}\\mathcal F)\\to f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$. The map $f_*(\\pi_n):f_*\\mathcal F\\to f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$ ($\\pi_n$ the quotient map) kills $\\mathcal J^nf_*\\mathcal F$, because $\\mathcal J^n$ acts on $f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$ through $f^\\sharp$, i.e. through $\\mathcal J^n\\mathcal O_X=\\mathcal I^n$ [lem-weil-pbc-module-pullback-ideal-quotient] (2), which kills $\\mathcal F/\\mathcal I^n\\mathcal F$; so it induces $\\kappa_n:f_*\\mathcal F/\\mathcal J^nf_*\\mathcal F\\to f_*(\\mathcal F/\\mathcal I^n\\mathcal F)$, compatible with the transition maps. All of this commutes with restriction to opens $W\\subseteq Y$ (the pushforward, the pullback and the unit are computed locally over $Y$), giving the $\\gamma_n,\\kappa_n$ of $f_W$. Claim (proved in the next two steps): there is exactly one morphism $\\alpha:(\\mathcal G_n)\\to(f_*\\mathcal F)^\\wedge$ of $\\mathit{Coh}(Y,\\mathcal J)$ with $\\kappa_n\\circ\\alpha_n=\\gamma_n$ for all $n$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), the compositions gamma_n and the claim"
+   }
+  },
+  {
+   "text": "(The claim for $Y=\\operatorname{Spec}B$ affine.) Let $J=\\mathcal J(Y)$, $B^\\wedge$ the $J$-adic completion, $M=\\Gamma(X,\\mathcal F)=\\Gamma(Y,f_*\\mathcal F)$, $M_n=\\Gamma(X,\\mathcal F/\\mathcal I^n\\mathcal F)=\\Gamma(Y,f_*(\\mathcal F/\\mathcal I^n\\mathcal F))$, $N_n=\\Gamma(Y,\\mathcal G_n)$ and $N=\\varprojlim_nN_n$. As $f_*\\mathcal F$ is quasi-coherent (Step 2), $\\Gamma(Y,f_*\\mathcal F/\\mathcal J^nf_*\\mathcal F)=M/J^nM$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2), and $\\Gamma(\\kappa_n)$ is the map $\\theta_n:M/J^nM\\to M_n$ induced by $\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$. By the theorem on formal functions [lem-weil-pbc-theorem-formal-functions] ($p=0$, $A=B$, $I=J$; $\\mathcal I=J\\mathcal O_X$ by Step 1) $\\psi=\\varprojlim\\theta_n:M^\\wedge=\\varprojlim M/J^nM\\to\\varprojlim M_n$ is bijective, and it is $B^\\wedge$-linear (componentwise). Let $E:\\mathit{Coh}(Y,\\mathcal J)\\to\\mathrm{Mod}^{fg}(B^\\wedge)$, $(\\mathcal H_n)\\mapsto\\varprojlim\\Gamma(Y,\\mathcal H_n)$, be the equivalence of [lem-weil-pbc-coherent-formal-modules-affine] (2): $E((\\mathcal G_n))=N$, with surjective projections $p_n:N\\to N_n$ (ibid. (1)), and $E((f_*\\mathcal F)^\\wedge)=M^\\wedge$, with projections $\\mathrm{pr}_n:M^\\wedge\\to M/J^nM$. Since all sheaves involved are quasi-coherent on the affine $Y$, a map between them is determined by its effect on global sections [lem-weil-pbc-affine-tilde-gamma-adjunction] (3); so a morphism $\\alpha$ with $E(\\alpha)=\\varphi$ satisfies $\\kappa_n\\circ\\alpha_n=\\gamma_n$ iff $\\theta_n\\circ\\mathrm{pr}_n\\circ\\varphi=\\Gamma(\\gamma_n)\\circ p_n$ for all $n$ (using $\\Gamma(\\alpha_n)\\circ p_n=\\mathrm{pr}_n\\circ\\varphi$ and the surjectivity of $p_n$), i.e. iff $\\psi\\circ\\varphi=\\varprojlim_n\\Gamma(\\gamma_n)$ (the $n$-th component of $\\psi$ is $\\theta_n\\circ\\mathrm{pr}_n$). As $\\psi$ is bijective there is exactly one such $\\varphi$, namely $\\varphi=\\psi^{-1}\\circ\\varprojlim_n\\Gamma(\\gamma_n):N\\to M^\\wedge$, which is $B^\\wedge$-linear; as $E$ is an equivalence (bijective on morphisms) there is exactly one $\\alpha$, and $E(\\alpha)=\\varphi$. We write $\\varphi=\\alpha_Y$ (the notation of [lem-weil-pbc-formal-systems-annihilated-by-power]).",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-formal-systems-annihilated-by-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), paragraph 'Because of the uniqueness we may assume that Y = Spec(B) is affine ...': Lemma 02OB (lemma-ML-cohomology-powers-ideal), Theorem 02OC (theorem-formal-functions) and Lemma 087W (lemma-inverse-systems-affine)"
+   }
+  },
+  {
+   "text": "(Globalization, and reduction of the annihilation to affine $Y$.) For every affine open $W\\subseteq Y$ the previous step, applied to $f_W$ (Step 1), gives a unique $\\alpha^W$ on $W$ with $\\kappa_n|_W\\circ\\alpha^W_n=\\gamma_n|_W$. For affine opens $W'\\subseteq W$, $\\alpha^W|_{W'}$ satisfies the defining equations on $W'$ (Step 3: everything commutes with restriction, and $(f_*\\mathcal F)^\\wedge|_{W'}=((f_{W'})_*\\mathcal F|_{f^{-1}W'})^\\wedge$ by [lem-weil-pbc-formal-systems-pullback] (2)), so $\\alpha^W|_{W'}=\\alpha^{W'}$. As the affine opens form a basis of $Y$ stable under the passage to smaller affine opens of intersections, the sheaf maps $\\alpha^W_n$ glue to $\\mathcal O_Y$-linear $\\alpha_n:\\mathcal G_n\\to f_*\\mathcal F/\\mathcal J^nf_*\\mathcal F$ (morphisms of sheaves glue); the identities $\\kappa_n\\circ\\alpha_n=\\gamma_n$ and the compatibility with the transition maps hold since they hold on every affine $W$. Any $\\alpha'$ with $\\kappa_n\\circ\\alpha'_n=\\gamma_n$ restricts on each affine $W$ to $\\alpha^W$, so $\\alpha'=\\alpha$: the claim of Step 3 holds. Now choose a finite covering $Y=W_1\\cup\\dots\\cup W_r$ by affine opens ($Y$ is Noetherian). By [lem-weil-pbc-formal-systems-annihilated-by-power], (3)$\\Rightarrow$(4), it suffices to show: for each $i$ there is $t_i\\ge1$ with $\\mathcal K(W_i)^{t_i}$ killing $\\operatorname{Ker}(\\alpha_{W_i})$ and $\\operatorname{Coker}(\\alpha_{W_i})$ (then take $t=\\max t_i$); here $\\alpha_{W_i}$ is the map $\\varphi$ of Step 4 for $f_{W_i}$, as $\\alpha|_{W_i}=\\alpha^{W_i}$. So from now on $Y=\\operatorname{Spec}B$ is affine, $J=\\mathcal J(Y)$, $K=\\mathcal K(Y)$, and we must show that $\\operatorname{Ker}\\varphi$ and $\\operatorname{Coker}\\varphi$ are killed by a power of $K$.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), 'Because of the uniqueness we may assume that Y = Spec(B) is affine', and Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by)"
+   }
+  },
+  {
+   "text": "(Base change to the completion: the new situation.) Let $B'=B^\\wedge$ be the $J$-adic completion; $B'$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], $JB'$-adically complete [lem-weil-pbc-adic-completion-mod-ideal] (1), the map $B\\to B'$ is flat [lem-weil-pbc-noetherian-completion-flat], and $B/J^n\\to B'/J^nB'$ is an isomorphism for every $n$ [lem-weil-pbc-adic-completion-mod-power]. Put $Y'=\\operatorname{Spec}B'$, $g:Y'\\to Y$, $X'=X\\times_YY'$ with projections $f':X'\\to Y'$, $g':X'\\to X$ [def-pc-base-change]. Then $f'$ is proper [lem-weil-pbc-proper-fp-permanence] (b) and $Y'$, $X'$ are Noetherian (Step 1 for $f'$). Let $\\mathcal J'=\\mathcal J\\mathcal O_{Y'}=(JB')^\\sim$, $\\mathcal K'=\\mathcal K\\mathcal O_{Y'}=(KB')^\\sim$ and $\\mathcal I'=\\mathcal J'\\mathcal O_{X'}=\\mathcal I\\mathcal O_{X'}$ (on affine opens all three are generated by the images of $J$, $K$, [lem-weil-pbc-module-pullback-ideal-quotient] (1)). $V'=g^{-1}(V)$ equals $Y'\\setminus V(\\mathcal K')$ ($B\\to B'$ induces local homomorphisms of the local rings, so $\\mathcal K'_{y'}$ is the unit ideal iff $\\mathcal K_{g(y')}$ is), and $f'^{-1}(V')=f^{-1}(V)\\times_VV'\\to V'$ is the base change of the isomorphism $f^{-1}(V)\\to V$, hence an isomorphism. Put $\\mathcal G'_n=g^*\\mathcal G_n$, an object $(\\mathcal G'_n)$ of $\\mathit{Coh}(Y',\\mathcal J')$ [lem-weil-pbc-formal-systems-pullback] (1), and $\\mathcal F'=g'^*\\mathcal F$, coherent (quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent], of finite type [lem-weil-pbc-support-pullback-finite-type] (3), on a locally Noetherian scheme [pqf-lem-coherent-ft-locnoeth]). With $(fg')^*\\cong(gf')^*$ [def-pc-module-pullback], $\\beta'$ is the composite isomorphism $(f'^*\\mathcal G'_n)\\cong(g'^*f^*\\mathcal G_n)\\xrightarrow{g'^*\\beta}g'^*(\\mathcal F^\\wedge)\\cong\\mathcal F'^\\wedge$ of $\\mathit{Coh}(X',\\mathcal I')$ [lem-weil-pbc-formal-systems-pullback] (1),(2). So the hypotheses of the lemma hold for $(Y',\\mathcal J',\\mathcal K',f',(\\mathcal G'_n),\\mathcal F',\\beta')$; let $\\gamma'_n,\\kappa'_n,\\alpha',\\varphi'=\\alpha'_{Y'}$ be the data of Steps 3-4 for it (the completion of $B'$ along $JB'$ is $B'$ itself).",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-pc-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), paragraph 'Set Y' = Spec(B^) and X' = Y' x_Y X': Algebra Lemma 00MB (algebra-lemma-completion-flat), More on Algebra Lemma 05EC (more-algebra-lemma-neighbourhood-equivalence)"
+   }
+  },
+  {
+   "text": "(Base change does not change $\\varphi$.) Every $\\mathcal O_Y$-module killed by $\\mathcal J^n$ that is quasi-coherent, $\\mathcal P=\\widetilde P$, satisfies $\\Gamma(Y',g^*\\mathcal P)=B'\\otimes_BP=(B'/J^nB')\\otimes_{B/J^n}P=P$ [lem-weil-pbc-associated-module-pullback], [lem-weil-pbc-adic-completion-mod-power]. Hence $N'_n=\\Gamma(Y',\\mathcal G'_n)=N_n$ and $N'=\\varprojlim N'_n=N$. By flat base change for the quasi-compact separated $f$ and the flat $g$ [lem-pc-flat-base-change-cohom] (case $i=0$, $S=\\operatorname{Spec}B$, $S'=\\operatorname{Spec}B'$), $s\\otimes b\\mapsto b\\cdot g'^*s$ gives $M'=\\Gamma(X',\\mathcal F')=M\\otimes_BB'$ and $M'_n=\\Gamma(X',g'^*(\\mathcal F/\\mathcal I^n\\mathcal F))=M_n\\otimes_BB'=M_n$, where $g'^*(\\mathcal F/\\mathcal I^n\\mathcal F)=\\mathcal F'/\\mathcal I'^n\\mathcal F'$ [lem-weil-pbc-module-pullback-ideal-quotient] (3); so $M'/J^nM'=M/J^nM$ and $M'^\\wedge=M^\\wedge$, and under these identifications $\\theta'_n=\\theta_n$, $\\psi'=\\psi$. On global sections $\\Gamma(\\gamma_n)$ sends $x\\in N_n$ to $\\beta_n(f^*x)$ and $\\Gamma(\\gamma'_n)$ sends $b\\otimes x$ to $b\\cdot\\beta'_n(f'^*g^*x)=b\\cdot g'^*(\\beta_n(f^*x))$ (definition of $\\beta'$ in Step 6 and of the unit, [def-pc-module-pullback]); so $\\Gamma(\\gamma'_n)=\\Gamma(\\gamma_n)$ under the identifications, and $\\varphi'=\\psi'^{-1}\\circ\\varprojlim\\Gamma(\\gamma'_n)=\\varphi$ as maps $N\\to M^\\wedge$. The ideal $\\mathcal K'(Y')=KB'$ satisfies $(KB')^t=K^tB'$, and $K^tB'$ kills a $B'$-module iff $K^t$ does. Therefore it suffices to show that $\\operatorname{Ker}\\varphi'$ and $\\operatorname{Coker}\\varphi'$ are killed by a power of $\\mathcal K'(Y')$, i.e. we may assume that $B$ is $J$-adically complete.",
+   "uses": [
+    "lem-weil-pbc-associated-module-pullback",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), 'Hence f'_*F', resp. f'_*(f')^*G'_n is the pullback of f_*F, resp. f_*f^*G_n to Y' by Lemma 02KH (lemma-flat-base-change-cohomology). The uniqueness of our construction shows the pullback of alpha to Y' is the corresponding map alpha' ... Thus we may assume B is complete with respect to J'; the comparison is made here on the modules N, M^ directly instead of on the terms alpha_n (agent's rewording of the same argument)"
+   }
+  },
+  {
+   "text": "(Complete case: algebraizing $(\\mathcal G'_n)$ and $\\beta'$.) Now $B'$ is Noetherian and $JB'$-adically complete, so $B'\\to B'^\\wedge$ is bijective [def-weil-pbc-adically-complete-ring]. $N'$ is a finitely generated $B'$-module [lem-weil-pbc-coherent-formal-modules-affine] (1); $\\mathcal G'=\\widetilde{N'}$ is coherent ([lem-weil-pbc-quasi-coherent-finite-type-affine] (a), [pqf-lem-coherent-ft-locnoeth]) with $\\Gamma(Y',\\mathcal G'/\\mathcal J'^n\\mathcal G')=N'/J^nN'$ ([lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2), [lem-weil-pbc-affine-tilde-gamma-adjunction] (2)), so $\\mathcal G'^\\wedge$ is the image of $N'$ under the quasi-inverse of $E$ in [lem-weil-pbc-coherent-formal-modules-affine] (2), and there is an isomorphism $\\iota:\\mathcal G'^\\wedge\\to(\\mathcal G'_n)$ in $\\mathit{Coh}(Y',\\mathcal J')$ with $E(\\iota)=\\mathrm{id}_{N'}$. $f'^*\\mathcal G'$ is coherent (as for $\\mathcal F'$ in Step 6). The composite $(f'^*\\mathcal G')^\\wedge\\cong f'^*(\\mathcal G'^\\wedge)\\xrightarrow{f'^*\\iota}(f'^*\\mathcal G'_n)\\xrightarrow{\\beta'}\\mathcal F'^\\wedge$ [lem-weil-pbc-formal-systems-pullback] (1),(2) is an isomorphism of $\\mathit{Coh}(X',\\mathcal I')$; since the completion functor is fully faithful for the proper $f':X'\\to\\operatorname{Spec}B'$ over the complete Noetherian $B'$ [lem-weil-pbc-formal-completion-fully-faithful-proper], it is $b^\\wedge$ for a unique $\\mathcal O_{X'}$-linear $b:f'^*\\mathcal G'\\to\\mathcal F'$, and $b$ is an isomorphism (the inverse isomorphism is $b_1^\\wedge$ for some $b_1$, and $(b_1b)^\\wedge=\\mathrm{id}$, $(bb_1)^\\wedge=\\mathrm{id}$ give $b_1b=\\mathrm{id}$, $bb_1=\\mathrm{id}$ by faithfulness).",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), last paragraph: '(G_n) is in the essential image of Coh(O_Y) -> Coh(Y, J) ... Note that f^*(G^) = (f^*G)^. Hence Lemma 0883 (lemma-fully-faithful) tells us that beta comes from an isomorphism b'"
+   }
+  },
+  {
+   "text": "(Complete case: $\\alpha'$ is the completion of an adjunction map.) Let $c:\\mathcal G'\\to f'_*f'^*\\mathcal G'$ be the unit [def-pc-module-pullback] and $c'=f'_*(b)\\circ c:\\mathcal G'\\to f'_*\\mathcal F'$, a map of coherent $\\mathcal O_{Y'}$-modules (Step 2). Put $\\alpha''=c'^\\wedge\\circ\\iota^{-1}:(\\mathcal G'_n)\\to(f'_*\\mathcal F')^\\wedge$. With $q_n:\\mathcal G'\\to\\mathcal G'/\\mathcal J'^n\\mathcal G'$ and the identification $f'^*(\\mathcal G'/\\mathcal J'^n\\mathcal G')=f'^*\\mathcal G'/\\mathcal I'^nf'^*\\mathcal G'$ [lem-weil-pbc-module-pullback-ideal-quotient] (3), under which $\\beta'_n\\circ f'^*(\\iota_n)=b\\bmod\\mathcal I'^n$ (Step 8), naturality of the unit gives $\\gamma'_n\\circ\\iota_n\\circ q_n=f'_*(\\beta'_n\\circ f'^*\\iota_n)\\circ\\eta_{\\mathcal G'/\\mathcal J'^n}\\circ q_n=f'_*((b\\bmod\\mathcal I'^n)\\circ f'^*q_n)\\circ c=f'_*(\\pi'_n\\circ b)\\circ c=f'_*(\\pi'_n)\\circ c'=\\kappa'_n\\circ(c'\\bmod\\mathcal J'^n)\\circ q_n$; as $q_n$ is an epimorphism, $\\kappa'_n\\circ\\alpha''_n=\\gamma'_n$ for all $n$, so $\\alpha''=\\alpha'$ by the uniqueness of Steps 4-5. The components of $\\alpha''$ are $\\alpha''_n=(c'\\bmod\\mathcal J'^n)\\circ\\iota_n^{-1}$, with $\\iota_n$ isomorphisms, so $\\operatorname{Ker}\\alpha'_n\\cong\\operatorname{Ker}(c'\\bmod\\mathcal J'^n)$ and $\\operatorname{Coker}\\alpha'_n\\cong\\operatorname{Coker}(c'\\bmod\\mathcal J'^n)$. Since $f'_*(b)$ is an isomorphism, $\\operatorname{Ker}c'\\cong\\operatorname{Ker}c$ and $\\operatorname{Coker}c'\\cong\\operatorname{Coker}c$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-ideal-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), last paragraph: 'alpha is the completion functor applied to G -> f_*f^*G = f_*F. Hence we are trying to verify that the kernel and cokernel of the adjunction map c are annihilated by a power of K'"
+   }
+  },
+  {
+   "text": "(Complete case: the adjunction map is an isomorphism over $V'$.) The restriction of $c$ to $V'$ is the unit of $f'^*\\dashv f'_*$ for $f'_{V'}:f'^{-1}(V')\\to V'$ (pushforward, pullback and unit are computed locally over $Y'$ [def-pc-module-pullback]); as $f'_{V'}$ is an isomorphism (Step 6), $f'_{V'*}$ and $f'^*_{V'}$ are mutually inverse equivalences and this unit is an isomorphism. So $\\operatorname{Ker}c$ and $\\operatorname{Coker}c$, coherent $\\mathcal O_{Y'}$-modules [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (1) (as $f'_*f'^*\\mathcal G'$ is coherent, Step 2), have zero stalks [def-weil-pbc-module-stalk] at every point of $V'$ (stalks of kernels and cokernels are kernels and cokernels of stalks), i.e. $\\operatorname{Supp}\\subseteq Y'\\setminus V'=V(\\mathcal K')$ [def-weil-pbc-closed-subset-proper-over-base] (2). As $Y'$ is Noetherian, there is $s\\ge1$ with $\\mathcal K'^s\\operatorname{Ker}c=0$ and $\\mathcal K'^s\\operatorname{Coker}c=0$ [lem-weil-pbc-coherent-support-power-ideal-kills].",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-coherent-support-power-ideal-kills"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), last paragraph: 'since the restriction f|_{f^{-1}(V)} is an isomorphism we see that c|_V is an isomorphism. Thus Ker(c) and Coker(c) are supported on V(K) hence are annihilated by a power of K (Lemma 01Y9, lemma-power-ideal-kills-sheaf)'"
+   }
+  },
+  {
+   "text": "(Conclusion.) On the affine $Y'$ take global sections: $u=\\Gamma(Y',c'):P=N'\\to Q=M'$ is $B'$-linear with $\\operatorname{Ker}u=\\Gamma(\\operatorname{Ker}c')$, $\\operatorname{Coker}u=\\Gamma(\\operatorname{Coker}c')$ (quasi-coherent modules on an affine scheme, [lem-weil-pbc-affine-tilde-gamma-adjunction], [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3)), killed by $(KB')^s$ (Steps 9-10, [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2)). By the commutative algebra fact of [lem-weil-pbc-formal-systems-annihilated-by-power] applied to $0\\to\\operatorname{Ker}u\\to P\\xrightarrow{u}Q\\to\\operatorname{Coker}u\\to0$ and $J^nB'$, the kernel and cokernel of $u\\bmod J^n:P/J^nP\\to Q/J^nQ$, which are the global sections of $\\operatorname{Ker}(c'\\bmod\\mathcal J'^n)$ and $\\operatorname{Coker}(c'\\bmod\\mathcal J'^n)$, are killed by $(KB')^{2s}$ for every $n$; hence (sections over the affine $Y'$ determine these quasi-coherent sheaves and their products with $\\mathcal K'^{2s}$, same references) $\\mathcal K'^{2s}$ kills $\\operatorname{Ker}\\alpha'_n$ and $\\operatorname{Coker}\\alpha'_n$ for all $n$ (Step 9). This is condition (1) of [lem-weil-pbc-formal-systems-annihilated-by-power] for $\\alpha'$ on $Y'$, so by (1)$\\Rightarrow$(2) there (with $U=Y'$) $\\operatorname{Ker}\\varphi'$ and $\\operatorname{Coker}\\varphi'$ are killed by a power of $KB'$. By Step 7, $\\operatorname{Ker}\\varphi$ and $\\operatorname{Coker}\\varphi$ are killed by a power of $K$, and by Step 5 there is $t\\ge1$ such that the kernel and cokernel of $\\alpha$ in the abelian category $\\mathit{Coh}(Y,\\mathcal J)$ [lem-weil-pbc-coherent-formal-modules-abelian] are annihilated by $\\mathcal K^t$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-coherent-formal-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull, line 7025), end; Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by) for the passage between the termwise kernels and cokernels and those of the module maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-formal-systems-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-theorem-formal-functions",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-pc-base-change",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-associated-module-pullback",
+  "lem-pc-flat-base-change-cohom",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-formal-completion-fully-faithful-proper",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-formal-modules-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 088B (lemma-inverse-systems-push-pull, line 7025) and its proof, with Remark 0888 (line 6887); the comparison of the base change step is made on the modules N, M^ (Steps 7) and the complete case is concluded through the termwise kernels (Step 11), both details written out by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +253,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +273,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-systems-push-pull",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 088B; f_*F coherent is part of its proof, the 'kernel and cokernel in Coh(Y,J)' formulation is condition (4) of the new Remark-0888 node, equivalent to Stacks' termwise/affine conditions). Proof written in 11 steps after Stacks: coherence of f_*F (02O5 via lem-pc-coherent-hi, a tool of sec-picard-framework), construction of alpha from gamma_n = f_*(beta_n) o unit with uniqueness, affine case by the theorem on formal functions (02OC, new node) and the equivalence 087W, gluing, reduction to the J-adic completion by flat base change (02KH via lem-pc-flat-base-change-cohom, a tool of sec-picard-framework; 00MB, 05GG nodes), the complete case by algebraizing G and beta (fully faithful 0883) and identifying alpha with the completion of the adjunction map c, which is an isomorphism over V, so Ker c and Coker c are killed by a power of K (01Y9, new node). New nodes: lem-weil-pbc-theorem-formal-functions (02OC), lem-weil-pbc-coherent-support-power-ideal-kills (01Y9), lem-weil-pbc-formal-systems-annihilated-by-power (Remark 0888 plus the abelian-category condition)."
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "lead_note": "Off-route tool uses recorded by L: lem-pc-coherent-hi (02O5, proper pushforward of coherent is coherent; unit sk-thm-picard-coherence) in step 2, lem-pc-flat-base-change-cohom (02KH, flat base change of R^i f_*; unit sk-thm-picard-semicon, imported) in step 7; both generic tools used as black boxes.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Eleven steps along Stacks 088B: setting, f_*F coherent (tool use lem-pc-coherent-hi, 02O5), the maps gamma_n and kappa_n, the claim on affine Y via the theorem on formal functions (new unsplit node for the general 02OC; the 087U node created by the fully-faithful item is its complete-base form and should cite it) and 087W, globalization and reduction of the annihilation to affine Y (new unsplit node for Remark 0888 with a condition (4) for the kernel and cokernel objects of Coh(Y,J), the bridge the item needs), base change to the completion (00MB, 05GG, 0316, 0887 nodes), phi unchanged by flat base change (tool use lem-pc-flat-base-change-cohom, 02KH), algebraization in the complete case via 0883 (fully-faithful node), alpha' the completion of the adjunction map, the adjunction map an isomorphism over V' so its kernel and cokernel are killed by a power of K' (new unsplit node for 01Y9), conclusion via Remark 0888 (1)=>(2). Two tool uses recorded by L. Tags verified by the worker (088B, 0888, 02O5, 02OB, 02OC, 087U, 087W, 087X, 0883, 01Y9, 00L6, 02KH, 00MB, 05EC, 0887)."
+ }
 }

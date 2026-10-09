@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-coherent-support-power-ideal-kills",
+ "kind": "statement",
+ "title": "A coherent module supported in the zero set of an ideal is killed by a power of it",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] with quasi-compact underlying space), $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent] and $\\mathcal K\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, with $\\mathcal K^t\\mathcal F$ as in [def-weil-pbc-coherent-formal-module] (0); let $V(\\mathcal K)=\\{x\\in X:\\mathcal K_x\\ne\\mathcal O_{X,x}\\}$ (the closed subset underlying the closed subscheme cut out by $\\mathcal K$ [def-sbc-closed-immersion-ideal-sheaf]; on an affine open $\\operatorname{Spec}A$ it is $V(\\mathcal K(\\operatorname{Spec}A))$). Then $\\mathcal K^t\\mathcal F=0$ for some $t\\ge0$ if and only if $\\operatorname{Supp}(\\mathcal F)\\subseteq V(\\mathcal K)$ [def-weil-pbc-closed-subset-proper-over-base] (2).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01Y9 (lemma-power-ideal-kills-sheaf, line 2569); its proof: a finite covering by spectra of Noetherian rings and Algebra, Lemma 00L6 (algebra-lemma-Noetherian-power-ideal-kills-module, algebra.tex line 14997)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf supported in closed subscheme is annihilated by a power of the ideal sheaf",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support, .Simps.coe_support, .coe_support_vanishingIdeal, .gc, .isClosed_supportSet, .support_eq_bot_iff, .vanishingIdeal_support, .mem_support_iff (Mathlib.AlgebraicGeometry.IdealSheaf.Basic): supports of ideal sheaves only, no modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent sheaf of finite type on Noetherian scheme with support in V(I) is killed by I^n",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs, exists_of_res_zero_of_qcqs_of_top (Morphisms.QuasiSeparated), exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact (Morphisms.QuasiCompact), IdealSheafData.mkOfMemSupportIff(_ideal): statements on sections of O_X, not on modules; the ring-level fact (Algebra 00L6) is close to exists_pow_le_of_le_radical_of_fg (RingTheory/Noetherian/Nilpotent.lean:33 uses it), but there is no sheaf version",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Ideal",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'formal function|FormalFunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'annihilator' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "formal function: only Analysis/Complex/Conformal.lean and Algebra/MonoidAlgebra/PointwiseSMul.lean (unrelated uses of the words); annihilator in AlgebraicGeometry only in SpreadingOut.lean (annihilators of ring elements); AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean: no coherent modules, no cohomology of quasi-coherent modules, no supports of modules, no inverse systems of modules on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-push-pull",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-formal-systems-annihilated-by-power",
+ "kind": "statement",
+ "title": "Morphisms of coherent formal modules whose kernel and cokernel are annihilated by a power of an ideal",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal I,\\mathcal K\\subseteq\\mathcal O_X$ quasi-coherent sheaves of ideals and $\\alpha=(\\alpha_n):(\\mathcal F_n)\\to(\\mathcal G_n)$ a morphism of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. For an affine open $U=\\operatorname{Spec}A\\subseteq X$ with $\\mathcal I|_U=\\widetilde I$, $\\mathcal K|_U=\\widetilde K$ ($I=\\mathcal I(U)$, $K=\\mathcal K(U)$), let $\\alpha_U:M\\to N$ be the $A^\\wedge$-linear map of finitely generated $A^\\wedge$-modules ($A^\\wedge$ the $I$-adic completion) $M=\\varprojlim_n\\mathcal F_n(U)\\to N=\\varprojlim_n\\mathcal G_n(U)$, $\\alpha_U=\\varprojlim_n\\alpha_n(U)$, which corresponds to $\\alpha|_U$ under the equivalence of [lem-weil-pbc-coherent-formal-modules-affine] (2). The following are equivalent: (1) there is $t\\ge1$ such that $\\mathcal K^t\\operatorname{Ker}(\\alpha_n)=0$ and $\\mathcal K^t\\operatorname{Coker}(\\alpha_n)=0$ for all $n\\ge1$ (kernels and cokernels of $\\mathcal O_X$-modules); (2) for every affine open $U=\\operatorname{Spec}A\\subseteq X$ there is $t\\ge1$ with $K^t\\operatorname{Ker}(\\alpha_U)=0$ and $K^t\\operatorname{Coker}(\\alpha_U)=0$; (3) there are a finite covering $X=U_1\\cup\\dots\\cup U_r$ by affine opens and $t\\ge1$ such that the condition of (2) holds for every $\\alpha_{U_i}$; (4) there is $t\\ge1$ such that the kernel and the cokernel of $\\alpha$ in the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-coherent-formal-modules-abelian] are annihilated by $\\mathcal K^t$ in the sense of [def-weil-pbc-coherent-formal-module] (3). (Stacks then says that $\\alpha$ is a map whose kernel and cokernel are annihilated by a power of $\\mathcal K$.) Moreover, the integer $t$ of (1) may be replaced by $2t$ when passing from (3) to (1), and the commutative algebra fact behind this holds: if $0\\to T\\to M\\xrightarrow{u}N\\to Q\\to0$ is an exact sequence of modules over a ring $A$ with $K^tT=K^tQ=0$, then for every ideal $J\\subseteq A$ the kernel and cokernel of $u\\bmod J:M/JM\\to N/JN$ are annihilated by $K^{2t}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by, line 6887), conditions (1)-(3) and the commutative algebra fact of its proof, with Lemma 087W (lemma-inverse-systems-affine) for alpha_U; condition (4) (kernel and cokernel taken in the abelian category Coh(X, I) of Lemma 087X, lemma-inverse-systems-abelian) is added by an agent: it is how the condition is used in the statement of [lem-weil-pbc-formal-systems-push-pull] and [prop-weil-pbc-grothendieck-existence]; its equivalence with (2) comes from the description of kernels and cokernels on affine opens in the proof of Lemma 087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of inverse systems of modules, kernel and cokernel annihilated by a power of an ideal, completion",
+   "results": "AdicCompletion.module, AdicCompletion, AdicCompletion.instCommRing, AdicCompletion.instAddCommGroup, AdicCompletion.congr_symm_apply, IsAdicComplete.of_comp_lift, AdicCompletion.sumInv_comp_sum, AdicCompletion.map_exact (Mathlib.RingTheory.AdicCompletion.*): exactness of completion of finite modules, nothing on systems of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system of coherent sheaves G_n with G_{n+1}/I^n = G_n, morphism with kernel and cokernel killed by power of ideal K",
+   "results": "localCohomology, AdicCompletion.transitionMap, Hausdorffification, Hausdorffification.of, localCohomology.ofSelfLERadical (Mathlib.Algebra.Homology.LocalCohomology, RingTheory.AdicCompletion.Basic): nothing on inverse systems of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Ideal",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlnE 'formal function|FormalFunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'annihilator' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "formal function: only Analysis/Complex/Conformal.lean and Algebra/MonoidAlgebra/PointwiseSMul.lean (unrelated uses of the words); annihilator in AlgebraicGeometry only in SpreadingOut.lean (annihilators of ring elements); AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean: no coherent modules, no cohomology of quasi-coherent modules, no supports of modules, no inverse systems of modules on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-push-pull",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
