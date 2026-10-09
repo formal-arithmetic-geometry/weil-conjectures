@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-locally-surjective-iff-stalks",
+ "kind": "statement",
+ "title": "A map of sheaves on a topological space is surjective iff it is surjective on stalks",
+ "statement": "Let $X$ be a topological space (this node is about sheaves on the space $X$ itself, e.g. the Zariski topology of a scheme; not about the étale site) and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism of presheaves of sets on $X$. Then the following are equivalent: (a) $\\varphi$ is surjective in the sense of sheaves, i.e. for every open $U\\subseteq X$ and every $t\\in\\mathcal G(U)$ there is an open covering $U=\\bigcup_kU_k$ such that each $t|_{U_k}$ lies in the image of $\\varphi_{U_k}:\\mathcal F(U_k)\\to\\mathcal G(U_k)$; (b) for every $x\\in X$ the induced map on stalks $\\varphi_x:\\mathcal F_x\\to\\mathcal G_x$ is surjective. The same holds for presheaves of abelian groups or of modules, by applying it to the underlying presheaves of sets (stalks and surjectivity are those of the underlying sets).",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition 'injective/surjective' (Tag 007U, label definition-injective-surjective), item (5), and Lemma (Tag 0H7H, label lemma-characterize-epi-mono), (2), the part 'surjective maps of sheaves are exactly those which are surjective on all the stalks' (proof omitted in Stacks; it is the statement of the Mathlib match)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves on a topological space is an epimorphism iff surjective on all stalks",
+   "results": "TopCat.Presheaf.mono_of_stalk_mono, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks); CategoryTheory.Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono); PresheafOfModules.epi_iff_surjective (Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono); AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; the stalk form is found by the next two searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.IsLocallySurjective, Function.Surjective",
+   "results": "TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks (Mathlib.Topology.Sheaves.LocallySurjective)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a map of sheaves on a topological space is locally surjective iff it is surjective on every stalk",
+   "results": "TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, TopCat.Presheaf.isLocallySurjective_iff, TopCat.Presheaf.IsLocallySurjective (Mathlib.Topology.Sheaves.LocallySurjective); TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective (Mathlib.Topology.Sheaves.Stalks); CategoryTheory.Presheaf.isLocallySurjective_of_surjective",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'surjective_on_stalks\\|epi_iff_stalk\\|stalk.*[Ss]urjective' Mathlib/Topology/Sheaves Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/AlgebraicGeometry/Modules; sed -n 1,100p Mathlib/Topology/Sheaves/LocallySurjective.lean",
+   "results": "Topology/Sheaves/LocallySurjective.lean:61 def IsLocallySurjective, :65 isLocallySurjective_iff, :80 locally_surjective_iff_surjective_on_stalks; LocalPredicate.lean:315 and Sheafify.lean:90 stalkToFiber_surjective (unrelated)",
+   "date": "2026-10-09",
+   "verdict": "match, read: locally_surjective_iff_surjective_on_stalks (T : ℱ ⟶ 𝒢) : IsLocallySurjective T ↔ ∀ x, Function.Surjective ((stalkFunctor C x).map T), for presheaves with values in a concrete category C with colimits whose forgetful functor preserves filtered colimits (C = Type, AddCommGrpCat, ModuleCat R)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks",
+  "file": "Mathlib/Topology/Sheaves/LocallySurjective.lean",
+  "how": "specializes in one line: take C = Type v (or the category of abelian groups); TopCat.Presheaf.isLocallySurjective_iff (same file, line 65) rewrites IsLocallySurjective T as 'for all U, t ∈ 𝒢(U), x ∈ U there are V ∋ x, V ≤ U and s ∈ ℱ(V) with T s = t|_V', which is (a) (the V's for x ∈ U form the covering, and conversely a covering gives for each x a member containing it); the right side is (b)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-invertible-generating-sections-fibre",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
