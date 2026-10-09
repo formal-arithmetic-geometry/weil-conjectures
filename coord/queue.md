@@ -11,7 +11,6 @@
 | `lem-weil-pbc-curve-assertions-dense-open` | 1004 | none |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1004 | none |
 | `lem-weil-pbc-curve-assertions-retract` | 1004 | none |
-| `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1004 | none |
 | `lem-weil-pbc-etale-inverse-image-restriction` | 1004 | none |
@@ -50,6 +49,7 @@
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
+| `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
@@ -579,7 +579,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 567 nodes that wait for stage 1, 81 nodes that wait for a statement dependency.
+Not open yet: 567 nodes that wait for stage 1, 82 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
