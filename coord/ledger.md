@@ -540,3 +540,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:09 UTC (2026-10-09) — Merged E1 dimension-at-point-open-subspace (second delivery, head fedd6276; 1 new unsplit node). Launched a worker on unramified-base-change-open (02GA/02G6). Returns open: C1 4, D1 2, E1 1, F1 1, G1 1.
 - 22:09 UTC (2026-10-09) — Correction: the ledger commit after the E1 merge had swept in seven untracked nodes of the running popescu-reduce-to-field worker (git add of the nodes directory); amended at once to remove them from the commit, files left in the working tree. Lesson: stage explicit paths only.
 - 22:10 UTC (2026-10-09) — Reviewed and committed popescu-reduce-to-field (07F5; 7 new unsplit nodes).
+- 2026-10-10, delivery of F1: lem-weil-pbc-jacobi-zariski-quotient-smooth returned (c9e81f2fe): Not acceptable as delivered. (a) Four of the five new nodes have status unsplit but carry proof steps ('step 1 ...' in jacobi-zariski-differential-maps, -homolo
