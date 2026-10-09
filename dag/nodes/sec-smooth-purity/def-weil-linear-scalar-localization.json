@@ -2,13 +2,19 @@
  "id": "def-weil-linear-scalar-localization",
  "kind": "definition",
  "title": "Scalar localization of a linear category at one element",
- "statement": "Let $R$ be a commutative ring, let $\\varpi\\in R$, and let $R[1/\\varpi]$ be the localization of $R$ at the multiplicative set $\\{\\varpi^n:n\\geq0\\}$, with its ring map $R\\to R[1/\\varpi]$. (For $R=\\mathcal O_E$ the valuation ring of a finite extension $E/\\Ql$ and $\\varpi=\\varpi_E$ a uniformizer [def-weil-l-adic-coefficient-extension], $R[1/\\varpi_E]=E$.) Let $\\mathcal C$ be an $R$-linear category: every $\\Hom_{\\mathcal C}(K,L)$ is an $R$-module and composition is $R$-bilinear. The *scalar localization* (*rationalization*) $\\mathcal C[1/\\varpi]$ is the category whose objects are those of $\\mathcal C$, with\n\n$$\n \\Hom_{\\mathcal C[1/\\varpi]}(K,L)=\\Hom_{\\mathcal C}(K,L)\\otimes_R R[1/\\varpi],\n$$\n\ncomposition the $R[1/\\varpi]$-bilinear map induced by the $R$-bilinear composition of $\\mathcal C$, $(f\\otimes a)\\circ(g\\otimes b)=(f\\circ g)\\otimes ab$, and identities $\\mathrm{id}_K\\otimes1$; it is an $R[1/\\varpi]$-linear category. The *localization functor* $Q:\\mathcal C\\to\\mathcal C[1/\\varpi]$ is the identity on objects and sends $f$ to $f\\otimes1$; it is $R$-linear. If $\\mathcal C$ carries an automorphism $[1]$ (a shift) acting $R$-linearly on Hom modules, then $[1]$ induces the automorphism of $\\mathcal C[1/\\varpi]$ given by $K\\mapsto K[1]$ and $f\\otimes a\\mapsto f[1]\\otimes a$, and $Q\\circ[1]=[1]\\circ Q$.",
+ "statement": "Let $R$ be a commutative ring, let $\\varpi\\in R$, and let $R[1/\\varpi]$ be the localization of $R$ at the multiplicative set $\\{\\varpi^n:n\\geq0\\}$, with its ring map $R\\to R[1/\\varpi]$ [def-weil-ring-localization-away]. (For $R=\\mathcal O_E$ the valuation ring of a finite extension $E/\\Ql$ and $\\varpi=\\varpi_E$ a uniformizer [def-weil-l-adic-coefficient-extension], $R[1/\\varpi_E]=E$ [lem-weil-l-adic-integers-localization-uniformizer].) Let $\\mathcal C$ be an $R$-linear category [def-weil-linear-category]: every $\\Hom_{\\mathcal C}(K,L)$ is an $R$-module and composition is $R$-bilinear. The *scalar localization* (*rationalization*) $\\mathcal C[1/\\varpi]$ is the category whose objects are those of $\\mathcal C$, with\n\n$$\n \\Hom_{\\mathcal C[1/\\varpi]}(K,L)=\\Hom_{\\mathcal C}(K,L)\\otimes_R R[1/\\varpi],\n$$\n\nthe base change of the $R$-module $\\Hom_{\\mathcal C}(K,L)$ along $R\\to R[1/\\varpi]$ [def-weil-module-base-change], composition the $R[1/\\varpi]$-bilinear map induced by the $R$-bilinear composition of $\\mathcal C$, $(f\\otimes a)\\circ(g\\otimes b)=(f\\circ g)\\otimes ab$, and identities $\\mathrm{id}_K\\otimes1$; it is an $R[1/\\varpi]$-linear category [lem-weil-linear-scalar-localization-category]. The *localization functor* $Q:\\mathcal C\\to\\mathcal C[1/\\varpi]$ is the identity on objects and sends $f$ to $f\\otimes1$; it is an $R$-linear functor [def-weil-linear-functor]. If $\\mathcal C$ carries an automorphism $[1]$ (a shift) that is an $R$-linear functor, then $[1]$ induces the automorphism of $\\mathcal C[1/\\varpi]$ given by $K\\mapsto K[1]$ and $f\\otimes a\\mapsto f[1]\\otimes a$, and $Q\\circ[1]=[1]\\circ Q$ [lem-weil-linear-scalar-localization-category].",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Introduction, the display $D^b_c(X,\\mathbf Q_\\ell):=(\\lim D^b_c(X,\\mathbf Z/\\ell^n\\mathbf Z))\\otimes_{\\mathbf Z_\\ell}\\mathbf Q_\\ell$ (the classical rationalization of Hom modules); stated for a general linear category in literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md"
  },
  "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-ring-localization-away",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "def-weil-linear-category",
+  "def-weil-module-base-change",
+  "lem-weil-linear-scalar-localization-category",
+  "def-weil-linear-functor"
  ],
  "proof": [],
  "proof_deps": [],
@@ -27,10 +33,17 @@
    "results": "Linear R W.Localization (Localization/Linear.lean:54): a localization at a class of morphisms W inherits R-linearity; Linear R on full subcategories (Linear/Basic.lean:117)",
    "date": "2026-10-09",
    "verdict": "generalization not in one line: C[1/ϖ] is equivalent to W.Localization for W = {ϖ^n·id_K}, but the identification of its Hom modules with Hom ⊗_R R[1/ϖ] (a calculus of fractions argument) is not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'baseChange\\|extendScalars\\|Localization.Away\\|IsLocalizedModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Linear/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Enriched/",
+   "results": "none: Mathlib has R-linear categories (CategoryTheory.Linear) and linear functors (Functor.Linear) but no change of the ring of scalars of a linear category",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -44,5 +57,16 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-linear-scalar-localization",
+  "worker": "stage1",
+  "summary": "Checked against the master blueprint text of def-weil-rationalization-karoubi (the only source; Bhatt-Scholze's introduction gives the same rationalization for D^b_c(X,Q_l)); statement kept, with every notion now cited. Split by one level into four Mathlib leaves, def-weil-linear-category (CategoryTheory.Linear; Stacks 09MJ), def-weil-linear-functor (Functor.Additive + Functor.Linear; Stacks 09MK), def-weil-ring-localization-away (Localization.Away / IsLocalization.Away; Stacks 00CO), def-weil-module-base-change (LinearMap.baseChange, distribBaseChange for the induced bilinear map; Stacks 05G3), and two unsplit statements the definition needs: lem-weil-linear-scalar-localization-category (composition well defined, associative, unital, R[1/ϖ]-bilinear; Q an R-linear functor; the induced shift commutes with Q: the proofs the definition requires, per AGENTS.md §5) and lem-weil-l-adic-integers-localization-uniformizer (O_E[1/ϖ_E]=E, asserted parenthetically in the statement and used by def-weil-rationalization-karoubi, which writes Hom ⊗_{O_E} E). The shift hypothesis is phrased as an R-linear automorphism functor. Mathlib has no change of scalars for linear categories (W.Localization at {ϖ^n·id} keeps scalars R and does not identify Hom with Hom ⊗_R R[1/ϖ])."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

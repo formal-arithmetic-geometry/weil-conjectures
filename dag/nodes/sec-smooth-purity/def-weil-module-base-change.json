@@ -1,0 +1,50 @@
+{
+ "id": "def-weil-module-base-change",
+ "kind": "definition",
+ "title": "Base change of a module along a ring map",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings and $M$ an $R$-module. The *base change* (extension of scalars) of $M$ to $A$ is the tensor product $M\\otimes_RA$, an $A$-module by $a\\cdot(m\\otimes b)=m\\otimes ab$, with the $R$-linear map $M\\to M\\otimes_RA$, $m\\mapsto m\\otimes1$. An $R$-linear map $f:M\\to N$ induces the $A$-linear map $f\\otimes_RA:M\\otimes_RA\\to N\\otimes_RA$, $m\\otimes b\\mapsto f(m)\\otimes b$, and $f\\mapsto f\\otimes_RA$ is $R$-linear and compatible with composition and identities. An $R$-bilinear map $\\beta:M\\times N\\to P$ induces the unique $A$-bilinear map $\\beta_A:(M\\otimes_RA)\\times(N\\otimes_RA)\\to P\\otimes_RA$ with $\\beta_A(m\\otimes a,n\\otimes b)=\\beta(m,n)\\otimes ab$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition 05G3 (algebra-definition-base-change), Section 05G3 Base change; tensor product: Section 00CV (algebra-section-tensor-product)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def baseChange\\b\\|def baseChange ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean; grep -n 'instance leftModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Defs.lean",
+   "results": "Tower.lean:661 `LinearMap.baseChange (f : M →ₗ[R] N) : A ⊗[R] M →ₗ[A] A ⊗[R] N`, Tower.lean:717 `baseChangeHom` (R-linear in f); Defs.lean:321 `TensorProduct.leftModule` (the A-module structure on A ⊗[R] M)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'baseChange₂\\|def AlgebraTensorModule.map\\|distribBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/",
+   "results": "Tower.lean:441 `TensorProduct.AlgebraTensorModule.distribBaseChange : A ⊗[R] (N ⊗[R] Q) ≃ₗ[A] (A ⊗[R] N) ⊗[A] (A ⊗[R] Q)` with `distribBaseChange_symm_tmul` ((a⊗n)⊗(b⊗q) ↦ ab⊗(n⊗q)); so β_A = curry of `LinearMap.baseChange A (TensorProduct.lift β) ∘ₗ (distribBaseChange R A M N).symm`",
+   "date": "2026-10-09",
+   "verdict": "match (bilinear part in one line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.baseChange",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+  "how": "specializes in one line: the base change is `A ⊗[R] M` with `TensorProduct.leftModule`, `TensorProduct.mk R A M 1`, `LinearMap.baseChange A f` (Tower.lean:661); the node's order M ⊗_R A differs by `TensorProduct.comm`; the A-bilinear β_A is `LinearMap.baseChange A (TensorProduct.lift β)` composed with `(TensorProduct.AlgebraTensorModule.distribBaseChange R A M N).symm` (Tower.lean:441) and curried"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-linear-scalar-localization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "def-weil-linear-functor",
+ "kind": "definition",
+ "title": "R-linear functor",
+ "statement": "Let $R$ be a commutative ring and $\\mathcal A,\\mathcal B$ be $R$-linear categories [def-weil-linear-category]. An *$R$-linear functor* is a functor $F:\\mathcal A\\to\\mathcal B$ such that for all objects $x,y$ of $\\mathcal A$ the map $F:\\Hom_{\\mathcal A}(x,y)\\to\\Hom_{\\mathcal B}(F(x),F(y))$ is a homomorphism of $R$-modules: $F(f+g)=F(f)+F(g)$ and $F(af)=aF(f)$ for $a\\in R$.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Definition 09MK (dga-definition-functor-linear-categories), Section 09MI Linear categories"
+ },
+ "stmt_deps": [
+  "def-weil-linear-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class Functor.Linear\\|^class Additive' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Linear/LinearFunctor.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "results": "LinearFunctor.lean:36 `class Functor.Linear` (`map_smul : F.map (r • f) = r • F.map f`); AdditiveFunctor.lean `class Functor.Additive` (`map_add`)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.Linear",
+  "file": "Mathlib/CategoryTheory/Linear/LinearFunctor.lean",
+  "how": "specializes in one line: an R-linear functor is `[F.Additive] [F.Linear R]` (Functor.Additive in Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean gives additivity on Hom groups, Functor.Linear the R-homogeneity)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-linear-scalar-localization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
