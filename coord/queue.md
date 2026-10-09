@@ -1,16 +1,11 @@
 # Work queue
 
-562 items; claim with `tools/claim.py next <group> [--stage N]`.
+560 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (557)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-sp-derived-couple-exact` | 3 | none |
-| `lem-weil-pbc-triangle-morphism-extension` | 3 | none |
-| `lem-weil-pbc-truncation-descends` | 3 | none |
-| `lem-weil-pbc-truncation-step-ses` | 3 | none |
-| `def-weil-pbc-scheme-conventions` | 1001 | none |
 | `def-weil-pbc-derived-inverse-image` | 1002 | none |
 | `def-weil-pbc-derived-square-iso` | 1002 | none |
 | `lem-weil-pbc-derived-exchange-triangulated` | 1002 | none |
@@ -449,6 +444,7 @@
 | `lem-pc-projective-space-serre-pairing` | 6012 | none |
 | `lem-pc-twist-cocycle` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | none |
+| `pqf-def-affine-morphism` | - | none |
 | `def-nagata-final-descended-model` | - | none |
 | `def-nagata-finite-type-closed-in-fp` | - | none |
 | `def-weil-t-structure` | - | none |
@@ -504,7 +500,6 @@
 | `lemma-nagata-directed-finite-upper-bound` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lemma-nagata-qc-open-descends` | - | none |
-| `pqf-def-affine-morphism` | - | none |
 | `pqf-def-locnoeth` | - | none |
 | `pqf-def-quasifinite` | - | none |
 | `pqf-lem-affine-local-target` | - | none |
@@ -564,7 +559,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (5)
+## Stage 2: nodes to state (8)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -572,9 +567,12 @@
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
+| `lem-weil-pbc-truncation-descends` | 1 | state |
+| `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 571 nodes that wait for stage 1, 35 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 37 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
