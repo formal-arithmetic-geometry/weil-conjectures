@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+ "kind": "statement",
+ "title": "An etale morphism is smooth with zero-dimensional fibres",
+ "statement": "Let $f:X\\to S$ be an etale morphism of schemes [def-weil-etale-morphism]. Then $f$ is smooth [def-sbc-smooth-morphisms], and for every $x\\in X$, with $s=f(x)$, $\\kappa(s)$ its residue field [def-weil-residue-field] and $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ the fibre [def-pc-base-change], the dimension of $X_s$ at the point of $X_s$ corresponding to $x$ is $0$ [def-kun-dimension]. In other words $f$ is smooth of relative dimension zero in the sense of [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, remark after Definition 02GI (definition-etale, line 8058: 'A morphism is etale if and only if it is smooth of relative dimension 0'); Lemma 02GK (lemma-etale-smooth-unramified, line 8151: etale at x iff smooth and unramified at x); Lemma 02GL (lemma-etale-over-field: the fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions, hence discrete of dimension 0); smoothness in the sense of [def-sbc-smooth-morphisms] by more-morphisms.tex Lemma 02H6"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field",
+  "def-pc-base-change",
+  "def-kun-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism of schemes is smooth of relative dimension zero, fibres are discrete",
+   "results": "AlgebraicGeometry.Etale, Etale.instSmooth (Morphisms/Etale.lean:114), SmoothOfRelativeDimension, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero (RingTheory/Smooth/StandardSmoothOfFree)",
+   "date": "2026-10-10",
+   "verdict": "related, not a leaf: Mathlib's Smooth and SmoothOfRelativeDimension 0 are defined by (standard) smooth ring maps, not by formal smoothness and fibre dimension; the identification with [def-sbc-smooth-morphisms] is Stacks 02H6, a theorem (stages/1-dag.md convention on smooth morphisms)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Smooth",
+   "results": "AlgebraicGeometry.Etale.instSmooth : [Etale f] : Smooth f (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+   "date": "2026-10-10",
+   "verdict": "related, not a leaf (same reason)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the fibre of an etale morphism of schemes over a point is discrete / has dimension zero",
+   "results": "AlgebraicGeometry.Scheme.Etale, Etale.instFormallyUnramified, Etale.of_comp, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff: nothing on fibre dimension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -rn 'Etale.*QuasiFinite\\|dimension\\|discrete' AlgebraicGeometry/Morphisms/{Etale,QuasiFinite,SmoothFiber}.lean",
+   "results": "Etale.lean:99 eq_smoothOfRelativeDimension_zero, :108 iff_smoothOfRelativeDimension_zero, :114 instance Smooth; QuasiFinite.lean:163 Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f] (discrete fibres) but no instance Etale -> LocallyQuasiFinite found and no fibre-dimension statement",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: an etale morphism (def-weil-etale-morphism) is smooth of relative dimension 0 (remark after 02GI, 02GK, 02GL); self-contained; correct; unsplit."
+ }
+}
