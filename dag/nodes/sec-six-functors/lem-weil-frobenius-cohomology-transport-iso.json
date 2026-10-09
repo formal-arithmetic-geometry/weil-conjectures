@@ -18,9 +18,177 @@
   "def-compact-support-direct-image-detailed",
   "def-weil-ordinary-compact-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Point transport, first map ($\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$).* By\n[lem-weil-frobenius-square-cartesian] (1), in the case $Y_0=\\Spec k_0$, $g_s=\\Spec(\\gamma)$ is an\nautomorphism of $s$ with inverse $\\Spec(\\gamma^{-1})$. Hence $(s\\xrightarrow{g_s}s)$ is an object of\n$s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] (an isomorphism is weakly etale), and the morphism\n$g_s:(s\\xrightarrow{g_s}s)\\to(s\\xrightarrow{\\operatorname{id}}s)$ of $s_{\\mathrm{proet}}$ used in\n[def-weil-frobenius-point-transport] has the inverse\n$g_s^{-1}:(s\\xrightarrow{\\operatorname{id}}s)\\to(s\\xrightarrow{g_s}s)$ (a morphism over $s$ because\n$g_s\\circ g_s^{-1}=\\operatorname{id}$). A presheaf is a functor, so the restriction\n$\\operatorname{res}_{g_s}:N^i(s\\xrightarrow{\\operatorname{id}}s)\\to N^i(s\\xrightarrow{g_s}s)$ along an\nisomorphism is bijective, with inverse the restriction along $g_s^{-1}$, for every term $N^i$ of $N$;\nso $\\operatorname{res}_{g_s}$ is an isomorphism of complexes.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "def-weil-pbc-proetale-site",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), p. 151: Gal(k-bar/k) acts on the fibre at Spec(k-bar) 'par transport de structure'; the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Point transport, second map.* Let $\\mathcal F$ be a sheaf on $s_{\\mathrm{proet}}$ (a term $N^i$).\nBy [def-weil-proetale-inverse-image] $(g_s^{-1}\\mathcal F)$ is the sheafification of the presheaf\n$P(U\\xrightarrow{u}s)=\\varinjlim_{(V,\\,U\\to s\\times_{s,g_s}V)}\\mathcal F(V)$. An $s$-morphism\n$U\\to s\\times_{s,g_s}V$, for $V=(V\\xrightarrow{v}s)$, is the same as a morphism $t:U\\to V$ with\n$v\\circ t=g_s\\circ u$, and a morphism of indices $(V,t)\\to(V',t')$ is an $s$-morphism $h:V\\to V'$\nwith $h\\circ t=t'$. The index $(V_U,t_U)=((U\\xrightarrow{g_s\\circ u}s),\\operatorname{id}_U)$ is initial:\nfor any $(V,t)$ the only $h$ with $h\\circ\\operatorname{id}_U=t$ is $h=t$, and $t$ is an $s$-morphism\n$(U,g_s u)\\to(V,v)$ because $v t=g_s u$. Since $\\mathcal F$ is contravariant, the colimit is attained at\nthis index: the insertion $\\mathcal F(U\\xrightarrow{g_su}s)\\to P(U\\xrightarrow{u}s)$ is bijective, and\nthese bijections are natural in $U$, so $P\\cong\\mathcal F\\circ\\Phi_{g_s}$ with\n$\\Phi_{g_s}(U\\xrightarrow{u}s)=(U\\xrightarrow{g_su}s)$. By [lem-weil-proetale-isomorphism-inverse-image]\n(1), $\\Phi_{g_s}$ is an equivalence of $s_{\\mathrm{proet}}$ with itself, and it and its quasi-inverse\nsend coverings to coverings; an equivalence preserves fibre products, so $\\mathcal F\\circ\\Phi_{g_s}$\nsatisfies the sheaf condition for every covering, i.e. $P$ is already a sheaf and the sheafification map\n$P\\to g_s^{-1}\\mathcal F$ is an isomorphism. For $U=(s\\xrightarrow{\\operatorname{id}}s)$ the initial\nindex is $V=(s\\xrightarrow{g_s}s)$ with $t=\\operatorname{id}_s$, i.e. the $s$-morphism\n$(\\operatorname{id}_s,\\operatorname{id}_s):s\\to s\\times_{s,g_s}V$ of\n[def-weil-frobenius-point-transport]; so\n$\\operatorname{ins}:N^i(s\\xrightarrow{g_s}s)\\to(g_s^{-1}N^i)(s\\xrightarrow{\\operatorname{id}}s)$ is an\nisomorphism for every $i$, and $\\operatorname{ins}$ is an isomorphism of complexes.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-frobenius-square-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), p. 151 ('transport de structure'); the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Point transport, third map.* By [lem-weil-proetale-isomorphism-inverse-image] (3), for\n$\\Lambda=A_{E,n}$ the structure map $c^{g_s}_{A_{E,n}}:g_s^{-1}(A_{E,n})_s\\to(A_{E,n})_s$ of\n[def-weil-proetale-inverse-image] is an isomorphism of sheaves of rings. For $\\Lambda=\\mathcal O_E$,\nwith $\\Lambda_s=\\widehat{\\mathcal O}_{E,s}=\\varprojlim_m(A_{E,m})_s$\n[def-weil-completed-integral-coefficients], the structure map used in\n[def-weil-frobenius-point-transport] is the composite of the canonical map\n$g_s^{-1}\\varprojlim_m(A_{E,m})_s\\to\\varprojlim_mg_s^{-1}(A_{E,m})_s$, an isomorphism by\n[lem-weil-proetale-isomorphism-inverse-image] (2), and $\\varprojlim_mc^{g_s}_{A_{E,m}}$, a limit of\nisomorphisms by (3), hence an isomorphism. So $c^{g_s}_\\Lambda:g_s^{-1}\\Lambda_s\\to\\Lambda_s$ is an\nisomorphism of sheaves of rings, in particular of $g_s^{-1}\\Lambda_s$-modules. The derived tensor product\n$g_s^{-1}N\\otimes^L_{g_s^{-1}\\Lambda_s}(-)$ is a functor of the second variable, so\n$\\operatorname{id}\\otimes^Lc^{g_s}_\\Lambda:g_s^{-1}N\\otimes^L_{g_s^{-1}\\Lambda_s}g_s^{-1}\\Lambda_s\\to\ng_s^{-1}N\\otimes^L_{g_s^{-1}\\Lambda_s}\\Lambda_s=Lg_s^*N$ is an isomorphism, and so is its composite with\nthe unit isomorphism $g_s^{-1}N\\cong g_s^{-1}N\\otimes^L_{g_s^{-1}\\Lambda_s}g_s^{-1}\\Lambda_s$; this\ncomposite is the canonical map of [def-weil-frobenius-point-transport]. Its evaluation $\\kappa_N$ at\n$(s\\xrightarrow{\\operatorname{id}}s)$ is the image of an isomorphism under the exact functor\n$\\Gamma(s,-)$ of [def-weil-finite-coefficient-point], hence an isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-frobenius-point-transport",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), p. 151 ('transport de structure'); the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Part 1.* For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$, $\\iota_N=\\kappa_N\\circ\\operatorname{ins}\\circ\n\\operatorname{res}_{g_s}$ [def-weil-frobenius-point-transport] is a composite of three isomorphisms\n(steps 1-3), hence an isomorphism. For $\\Lambda=E$, $\\iota_N$ is by definition obtained from the\n$\\iota$ of $\\mathcal O_E$ by the rationalization [def-weil-rationalization-karoubi]: on an object\n$K\\otimes E$ with $K$ integral it is the image of $\\iota_K$ under the rationalization functor, an\nisomorphism because functors carry isomorphisms to isomorphisms; on a direct summand $N$ of such an\nobject (the Karoubi envelope) it is the restriction of $\\iota_{K\\otimes E}$ to the summand, by naturality,\nand a retract of an isomorphism is an isomorphism. For $\\Lambda=\\Qlb$, $\\iota_N$ is, by the common-stage\nconstruction [def-weil-algebraically-closed-coefficients], the image of $\\iota_{N'}$ for a stage $N'$ of\n$N$ over some $E'$, hence an isomorphism by the case $\\Lambda=E'$.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), p. 151 ('transport de structure'); the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Direct-image exchange at finite level.* Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism of\nfinite-type $k_0$-schemes, $f:X\\to Y$ its base change to $k$, and $A=A_{E,n}$. All schemes involved\nare over $k$ of characteristic $p\\neq\\ell$, so $\\ell$ is invertible on them. By\n[def-weil-frobenius-square-exchange] (1), $\\operatorname{FrEx}_{f,*}$ is the ambient exchange\n$\\Ex^A_{\\square_f}$ of [def-weil-pbc-ambient-ringed-exchange] for the Frobenius square\n$\\square_f=(f,f,g_Y,g_X,(g_X,f))$, Cartesian [def-weil-pbc-cartesian-square] by\n[lem-weil-frobenius-square-cartesian] (3): it is the mate\n$Lg_Y^*Rf_*\\xrightarrow{\\eta Lg_Y^*Rf_*}Rf_*Lf^*Lg_Y^*Rf_*\\xrightarrow{Rf_*\\theta Rf_*}\nRf_*Lg_X^*Lf^*Rf_*\\xrightarrow{Rf_*Lg_X^*\\varepsilon}Rf_*Lg_X^*$ of the natural isomorphism\n$\\theta=\\theta_{\\square_f}:Lf^*Lg_Y^*\\xrightarrow{\\sim}Lg_X^*Lf^*$ under the adjunction\n$Lf^*\\dashv Rf_*$ (unit $\\eta$, counit $\\varepsilon$) between $D(Y_{\\mathrm{proet}},A)$ and\n$D(X_{\\mathrm{proet}},A)$ [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. Apply\n[lem-weil-mate-iso-along-equivalences] with $\\mathcal C=\\mathcal C'=D(Y_{\\mathrm{proet}},A)$,\n$\\mathcal D=\\mathcal D'=D(X_{\\mathrm{proet}},A)$, $L=L'=Lf^*$, $R=R'=Rf_*$, $G=Lg_Y^*$, $G'=Lg_X^*$:\nits mate $\\alpha:GR\\to R'G'$ is exactly the displayed composite. By\n[lem-weil-frobenius-square-cartesian] (1), $g_Y$ and $g_X$ are isomorphisms of schemes, so by\n[lem-weil-isomorphism-derived-pullback-equivalence] $G=Lg_Y^*$ and $G'=Lg_X^*$ are equivalences of\ncategories. Hence $\\operatorname{FrEx}_{f,*}(K)$ is an isomorphism for every\n$K\\in D(X_{\\mathrm{proet}},A_{E,n})$.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-frobenius-square-cartesian",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image",
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-weil-isomorphism-derived-pullback-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)-(1.1.11), pp. 151-152 (the action of W(F/F_q) on X = X_0 (x) F and on the inverse image of a sheaf, by transport of structure) and (1.1.14), p. 153 (action on H^i(X,-) and H^i_c 'par transport de structure'); the reduction to the mate of an isomorphism along equivalences is written by an agent"
+   }
+  },
+  {
+   "text": "*Compact-support exchange at finite level.* With $f_0$ as in step 5, choose the compactification\n$X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{p_0}Y_0$ of [def-weil-frobenius-square-exchange] (2)\n([def-weil-compactifications-refinements], existing by [prop-compactification-refinement]); $p_0$ is\nproper, hence a separated finite-type morphism of finite-type $k_0$-schemes. By definition\n$\\operatorname{FrEx}_{f,!}(K)=Rp_*(b_{g_{\\overline X}}(K))\\circ\\operatorname{FrEx}_{p,*}(j_!K)$\n(composed, if $Rf_!$ was formed with another compactification, with the comparison isomorphisms of\n[prop-compactification-coherence-detailed]). The first factor $\\operatorname{FrEx}_{p,*}(j_!K)$ is an\nisomorphism by step 5 applied to $p_0$. The map $b_{g_{\\overline X}}(K):Lg_{\\overline X}^*j_!K\\to\nj_!Lg_X^*K$ is an isomorphism by [lem-trf-open-square-exchange], applicable because the square\n$(j,j,g_{\\overline X},g_X)$ is Cartesian with $j$ an open immersion by [lem-trf-frobenius-open-square];\nso $Rp_*(b_{g_{\\overline X}}(K))$ is an isomorphism, $Rp_*$ [def-weil-derived-direct-image] being a\nfunctor. Hence $\\operatorname{FrEx}_{f,!}(K)$ is a composite of isomorphisms, an isomorphism, for every\n$K$ in the domain of [def-compact-support-direct-image-detailed].",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-compactifications-refinements",
+    "prop-compactification-refinement",
+    "prop-compactification-coherence-detailed",
+    "lem-trf-open-square-exchange",
+    "lem-trf-frobenius-open-square",
+    "def-weil-derived-direct-image",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "def:weil-compact-support-object (lines 2432-2471): FrEx_{f,!} is the composite Ex_{*,p,g_Y} followed by Rp_*(Ex_{j,g_Xbar}); that both factors are isomorphisms is written by an agent"
+   }
+  },
+  {
+   "text": "*Other coefficient rings.* For $\\Lambda=\\mathcal O_E$ and $K\\in D^b_c(X,\\mathcal O_E)$\n[def-weil-derived-complete-integral-detailed], $\\operatorname{FrEx}_{f,*}(K)$ and\n$\\operatorname{FrEx}_{f,!}(K)$ are, by [def-weil-frobenius-square-exchange], the maps induced on\nderived limits [def-weil-derived-limit] (through the Roos triangles of the integral operations\n[def-pur-integral-derived-operations]) by the morphisms of inverse systems whose $m$-th components are\n$\\operatorname{FrEx}_{f,*}(K\\otimes^L_{\\mathcal O_E}A_{E,m})$, resp.\n$\\operatorname{FrEx}_{f,!}(K\\otimes^L_{\\mathcal O_E}A_{E,m})$, composed with the identification\nisomorphisms by which the integral $Lg^*$, $Rf_*$, $Rf_!$ are obtained from their finite levels. Each\ncomponent is an isomorphism by steps 5 and 6 (restriction of scalars $\\operatorname{Res}_m$, a functor,\npreserves isomorphisms), so by [lem-weil-derived-limit-levelwise-iso] the induced map is an isomorphism.\nFor $\\Lambda=E$ the maps are images of the integral ones under the rationalization functor, or retracts\nof such images on direct summands [def-weil-rationalization-karoubi], hence isomorphisms; for\n$\\Lambda=\\Qlb$ they are the images of the maps at a stage $E'$ [def-weil-algebraically-closed-coefficients],\nhence isomorphisms.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-derived-limit",
+    "def-pur-integral-derived-operations",
+    "lem-weil-derived-limit-levelwise-iso",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 13.34.1 (Tag 08TC), the Roos triangle defining the derived limit, and Tag 014A (lemma-third-isomorphism-triangle); the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Part 2.* Take $f_0=a_{Y_0}:Y_0\\to\\Spec k_0$ (separated of finite type), so $f=a_Y$, $Y$ of steps 5-7\nis $s$, $g_Y$ there is $g_s$ and $g_X$ there is $g_Y$; then $\\operatorname{FrEx}_{Y,*}(M)=\n\\operatorname{FrEx}_{a_Y,*}(M)$ and $\\operatorname{FrEx}_{Y,!}(M)=\\operatorname{FrEx}_{a_Y,!}(M)$\n[def-weil-frobenius-cohomology-transport, def-weil-frobenius-square-exchange], isomorphisms by steps\n5-7. Their source and target lie in the full subcategory $D^b_c(s,\\Lambda)$ (as in\n[def-weil-frobenius-cohomology-transport]), and an isomorphism of the ambient category between objects\nof a full subcategory is an isomorphism of the subcategory.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.14), p. 153; the step is written by an agent"
+   }
+  },
+  {
+   "text": "*Part 3.* By [def-weil-frobenius-cohomology-transport],\n$\\tau_M=\\operatorname{Fib}_s(\\operatorname{FrEx}_{Y,*}(M))\\circ\\iota_{Ra_{Y*}M}$ and\n$\\tau_{c,M}=\\operatorname{Fib}_s(\\operatorname{FrEx}_{Y,!}(M))\\circ\\iota_{Ra_{Y!}M}$. The maps\n$\\iota_{Ra_{Y*}M}$, $\\iota_{Ra_{Y!}M}$ are isomorphisms by part 1 (step 4), and\n$\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point], a functor, carries the isomorphisms of part 2\n(step 8) to isomorphisms; so $\\tau_M$ and $\\tau_{c,M}$ are isomorphisms. They are natural in $M$ by\n[def-weil-frobenius-cohomology-transport] (composites of natural transformations), hence natural\nisomorphisms. Taking the $i$-th cohomology, a functor, gives isomorphisms\n$\\mathrm H^i(\\tau_M):H^i(Y,M)\\to H^i(Y,Lg_Y^*M)$ and $\\mathrm H^i(\\tau_{c,M}):H^i_c(Y,M)\\to\nH^i_c(Y,Lg_Y^*M)$ [def-weil-ordinary-compact-cohomology] for every $i$.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.14), p. 153: 'l'action de F in W(F/F_q), agissant sur H^i(X,F) par transport de structure. De meme pour les H^i_c'; the step is written by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-square-cartesian",
+  "def-weil-pbc-proetale-site",
+  "def-weil-frobenius-point-transport",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-derived-direct-image",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-isomorphism-derived-pullback-equivalence",
+  "def-weil-compactifications-refinements",
+  "prop-compactification-refinement",
+  "prop-compactification-coherence-detailed",
+  "lem-trf-open-square-exchange",
+  "lem-trf-frobenius-open-square",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-limit",
+  "def-pur-integral-derived-operations",
+  "lem-weil-derived-limit-levelwise-iso",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, La conjecture de Weil II, (1.1.7) p. 151, (1.1.10)-(1.1.11) pp. 151-152 and (1.1.14) p. 153 state that Gal(k-bar/k) and W(F/F_q) act on fibres, on inverse images and on H^i, H^i_c 'par transport de structure', with no proof that the maps are invertible; the proof (each transport is built from restrictions along automorphisms, the structure isomorphism of an inverse image along an isomorphism, and the mate of an isomorphism along the equivalences Lg^*) is written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,7 +213,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +231,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-frobenius-cohomology-transport-iso",
+  "worker": "stage1",
+  "summary": "Statement kept. Deligne Weil II (1.1.7) p. 151, (1.1.11) p. 152, (1.1.14) p. 153 (pages checked with pdftotext) only assert the actions by transport of structure, so the proof is written by an agent in 9 steps: the three factors of the point transport iota are isomorphisms (restriction along the automorphism g_s of s_proet; the insertion into the inverse-image colimit, whose index category has an initial object and whose presheaf is already a sheaf by lem-weil-proetale-isomorphism-inverse-image (1); the map induced by the structure isomorphism c, (2)-(3)); FrEx_{f,*} at finite level is the mate of the isomorphism theta of the Frobenius square along the equivalences Lg_Y^*, Lg_X^* (new nodes lem-weil-mate-iso-along-equivalences and lem-weil-isomorphism-derived-pullback-equivalence); FrEx_{f,!} is FrEx_{p,*} followed by Rp_* of the open-square isomorphism b (lem-trf-open-square-exchange); O_E by derived limits (new Mathlib leaf lem-weil-derived-limit-levelwise-iso, Pretriangulated.isIso₁_of_isIso₂₃), E and Qlb by functoriality and retracts; tau = Fib_s(FrEx) o iota. stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

@@ -1,0 +1,46 @@
+{
+ "id": "lem-weil-mate-iso-along-equivalences",
+ "kind": "statement",
+ "title": "The mate of an isomorphism along equivalences is an isomorphism",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal C',\\mathcal D'$ be categories, let\n$L\\dashv R$ be an adjunction with $L:\\mathcal C\\to\\mathcal D$, $R:\\mathcal D\\to\\mathcal C$\n(unit $\\eta$, counit $\\varepsilon$), let $L'\\dashv R'$ be an adjunction with\n$L':\\mathcal C'\\to\\mathcal D'$, $R':\\mathcal D'\\to\\mathcal C'$ (unit $\\eta'$, counit\n$\\varepsilon'$), let $G:\\mathcal C\\to\\mathcal C'$ and $G':\\mathcal D\\to\\mathcal D'$ be\nfunctors, and let $\\theta:L'G\\xrightarrow{\\sim}G'L$ be a natural isomorphism. Let\n\n$$\n \\alpha:GR\\xrightarrow{\\ \\eta'GR\\ }R'L'GR\\xrightarrow{\\ R'\\theta R\\ }R'G'LR\n \\xrightarrow{\\ R'G'\\varepsilon\\ }R'G'\n$$\n\nbe the mate of $\\theta$. If $G$ is an equivalence of categories (fully faithful and\nessentially surjective) and $G'$ is fully faithful, then $\\alpha$ is a natural\nisomorphism.\n\n(Proof to be written: for $c\\in\\mathcal C$, $d\\in\\mathcal D$ the composite bijection\n$\\operatorname{Hom}(Gc,GRd)\\cong\\operatorname{Hom}(c,Rd)\\cong\\operatorname{Hom}(Lc,d)\n\\cong\\operatorname{Hom}(G'Lc,G'd)\\cong\\operatorname{Hom}(L'Gc,G'd)\\cong\n\\operatorname{Hom}(Gc,R'G'd)$, built from full faithfulness of $G$ and $G'$, the two\nadjunctions and $\\theta_c$, is $\\varphi\\mapsto\\alpha_d\\circ\\varphi$, by naturality of\n$\\theta$ and $\\eta'$; since every object of $\\mathcal C'$ is isomorphic to some $Gc$,\nYoneda gives that $\\alpha_d$ is an isomorphism.)",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "no statement in the document: the abstract fact behind 'agit par transport de structure' of Deligne, La conjecture de Weil II, (1.1.7) p. 151 and (1.1.14) p. 153, as used for the exchange maps of the Frobenius square in lem-weil-frobenius-cohomology-transport-iso; written by an agent (standard reference on mates, Kelly-Street, Review of the elements of 2-categories, LNM 420, section 2.2, is not in literature/)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^def\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean ; grep -rn 'isIso.*mateEquiv\\|IsIso (mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mates.lean: mateEquiv (TwoSquare G L1 L2 H ~ TwoSquare R1 H G R2; docstring: 'if one of the transformations is an iso, it does not imply the other is an iso'), conjugateEquiv, instance conjugateEquiv_iso (conjugate of an iso is an iso, vertical functors identities), conjugateIsoEquiv, iterated_mateEquiv_conjugateEquiv (when the vertical functors are left adjoints the iterated mate equals a conjugate); no lemma giving IsIso of mateEquiv when the vertical functors are equivalences",
+   "date": "2026-10-09",
+   "verdict": "no match (Lean route: iterated_mateEquiv_conjugateEquiv with the adjoint equivalences of G, G', conjugateEquiv_iso, and the fact that the mate along adjoint equivalences of a map is an iso iff the map is; several lines, not a one-line specialization)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsEquivalence\\|IsIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/GuitartExact/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/TwoSquare.lean",
+   "results": "GuitartExact/Basic.lean:295 instance guitartExact_of_isEquivalence_of_isIso [L.IsEquivalence] [R.IsEquivalence] [IsIso w.natTrans] : GuitartExact w (a 2-square with invertible 2-cell and equivalence horizontal functors is Guitart exact); nothing on the mate under adjunctions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-frobenius-cohomology-transport-iso",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
