@@ -1,33 +1,19 @@
 # Work queue
 
-776 items; claim with `tools/claim.py next <group> [--stage N]`.
+800 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (657)
+## Stage 1: nodes to split (672)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-stratified-finite` | 1009 | none |
-| `lem-weil-pbc-site-sheafification-sections-local` | 1009 | none |
-| `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1009 | none |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1009 | none |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1009 | none |
 | `lem-weil-pbc-z-g-ring` | 1009 | none |
 | `lem-weil-pbc-grothendieck-existence-projective` | 1010 | none |
-| `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1010 | none |
 | `lem-weil-pbc-regular-composition` | 1010 | none |
-| `lem-weil-pbc-regular-local-maximal` | 1010 | none |
-| `lem-weil-pbc-regular-permanence` | 1010 | none |
-| `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1010 | none |
-| `lem-weil-pbc-sheaf-cokernel-local-image` | 1010 | none |
-| `lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers` | 1010 | none |
-| `lem-weil-pbc-thickening-systems-dictionary` | 1010 | none |
-| `lem-weil-pbc-unramified-algebra-over-field-product` | 1010 | none |
-| `lem-weil-pbc-unramified-over-field-discrete` | 1010 | none |
-| `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1010 | none |
-| `prop-weil-pbc-grothendieck-existence-proper` | 1010 | none |
-| `def-weil-pbc-associated-module` | 1011 | none |
 | `def-weil-pbc-conormal-sheaf-formally-unramified` | 1011 | none |
-| `def-weil-pbc-essentially-smooth-ring-map` | 1011 | none |
+| `def-weil-pbc-site-plus-construction` | 1011 | none |
 | `def-weil-pbc-strictly-standard-element` | 1011 | none |
 | `def-weil-pbc-universal-first-order-thickening` | 1011 | none |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1011 | none |
@@ -40,6 +26,7 @@
 | `lem-weil-pbc-closed-immersion-pushforward-fully-faithful` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
+| `lem-weil-pbc-closed-immersion-unit-quotient` | 1011 | none |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1011 | none |
@@ -73,11 +60,17 @@
 | `lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated` | 1011 | none |
 | `lem-weil-pbc-flat-module-powers` | 1011 | none |
 | `lem-weil-pbc-flat-over-regular` | 1011 | none |
+| `lem-weil-pbc-flat-permanence` | 1011 | none |
+| `lem-weil-pbc-flat-surjective-spectrum-faithfully-flat` | 1011 | none |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1011 | none |
 | `lem-weil-pbc-formal-functions-complete-base` | 1011 | none |
 | `lem-weil-pbc-formal-system-support-constant` | 1011 | none |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
 | `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1011 | none |
+| `lem-weil-pbc-galois-base-change-qc-open-descends` | 1011 | none |
+| `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1011 | none |
+| `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
+| `lem-weil-pbc-grothendieck-existence-devissage` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1011 | none |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1011 | none |
@@ -89,6 +82,10 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1011 | none |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1011 | none |
+| `lem-weil-pbc-jacobi-zariski-differential-maps` | 1011 | none |
+| `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
+| `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1011 | none |
+| `lem-weil-pbc-jacobi-zariski-surjection-h1` | 1011 | none |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-limit-flat-modules` | 1011 | none |
@@ -114,17 +111,30 @@
 | `lem-weil-pbc-popescu-product` | 1011 | none |
 | `lem-weil-pbc-popescu-solution-modulo` | 1011 | none |
 | `lem-weil-pbc-proper-coproduct` | 1011 | none |
+| `lem-weil-pbc-quasi-finite-at-point-isolated` | 1011 | none |
+| `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1011 | none |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1011 | none |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1011 | none |
 | `lem-weil-pbc-regular-local-localization` | 1011 | none |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1011 | none |
+| `lem-weil-pbc-regular-ring-local-criterion` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-polynomial-variables` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-powers` | 1011 | none |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1011 | none |
 | `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1011 | none |
+| `lem-weil-pbc-separable-purely-inseparable-linear-disjoint` | 1011 | none |
+| `lem-weil-pbc-sheaf-basis-surjection` | 1011 | none |
+| `lem-weil-pbc-sheaf-finite-relation-truncations` | 1011 | none |
+| `lem-weil-pbc-sheaf-finite-truncation-colimit` | 1011 | none |
+| `lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer` | 1011 | none |
 | `lem-weil-pbc-singular-ideal-localization-smooth` | 1011 | none |
+| `lem-weil-pbc-site-coverings-common-refinement` | 1011 | none |
 | `lem-weil-pbc-site-module-sheafification-lift-injective` | 1011 | none |
+| `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
+| `lem-weil-pbc-site-plus-construction-presheaf` | 1011 | none |
+| `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
+| `lem-weil-pbc-site-plus-of-sheaf-iso` | 1011 | none |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1011 | none |
@@ -132,6 +142,7 @@
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1011 | none |
 | `lem-weil-pbc-spec-finite-product-fields` | 1011 | none |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1011 | none |
+| `lem-weil-pbc-spec-surjective-base-change` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
 | `lem-weil-pbc-split-injection-after-completion` | 1011 | none |
 | `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1011 | none |
@@ -142,6 +153,7 @@
 | `lem-weil-pbc-universal-first-order-thickening-exists` | 1011 | none |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1011 | none |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1011 | none |
+| `lem-weil-pbc-unramified-quasi-finite-at-points` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
@@ -155,6 +167,7 @@
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
+| `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
@@ -637,6 +650,8 @@
 | `lem-pc-perfect-locus` | - | rests_on_sorry |
 | `lem-sc-canonical-sheaf` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | none |
+| `lem-weil-geometrically-connected-check-after-extension` | - | none |
+| `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `lemma-nagata-scheme-image-ideal-qc` | - | none |
 | `def-sc-zariski-cohomology` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
@@ -664,13 +679,15 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (119)
+## Stage 2: nodes to state (128)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
+| `def-weil-pbc-associated-module` | 1 | state |
+| `def-weil-pbc-essentially-smooth-ring-map` | 1 | state |
 | `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-separable-field-extension` | 1 | state |
@@ -734,6 +751,7 @@
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
+| `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
@@ -752,9 +770,11 @@
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
+| `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
+| `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
@@ -769,6 +789,7 @@
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
+| `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state |
@@ -779,16 +800,19 @@
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
+| `lem-weil-pbc-unramified-algebra-over-field-product` | 1 | state |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state |
 | `lem-weil-pbc-unramified-etale-local-decomposition` | 1 | state |
 | `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state |
+| `lem-weil-pbc-unramified-over-field-discrete` | 1 | state |
+| `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 669 nodes that wait for stage 1, 390 nodes that wait for a statement dependency.
+Not open yet: 684 nodes that wait for stage 1, 399 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
