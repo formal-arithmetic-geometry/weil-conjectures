@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-proper-limit-noetherian",
+ "kind": "statement",
+ "title": "A proper morphism is a limit of proper morphisms over schemes of finite type over Z",
+ "statement": "Let $f:X\\to S$ be a proper morphism of schemes [def-weil-proper-morphism] with $S$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Then there are a directed set $\\Lambda$ and an inverse system $(f_\\lambda:X_\\lambda\\to S_\\lambda)_{\\lambda\\in\\Lambda}$ of morphisms of schemes (transition morphisms $X_\\lambda\\to X_\\mu$, $S_\\lambda\\to S_\\mu$ for $\\lambda\\ge\\mu$, commuting with $f_\\lambda,f_\\mu$) such that: the transition morphisms $X_\\lambda\\to X_\\mu$ and $S_\\lambda\\to S_\\mu$ are affine [pqf-def-affine-morphism]; every $f_\\lambda$ is proper; every $S_\\lambda$ is of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-finite-type-morphism]; and $(X\\to S)=\\varprojlim_\\lambda(X_\\lambda\\to S_\\lambda)$, i.e. $X=\\varprojlim_\\lambda X_\\lambda$ and $S=\\varprojlim_\\lambda S_\\lambda$ in the category of schemes [lem-weil-pbc-limit-affine-transition], with $f$ the limit of the $f_\\lambda$. If moreover $S=\\operatorname{Spec}A$ is affine, the system can be chosen with every $S_\\lambda=\\operatorname{Spec}A_\\lambda$ affine, $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra (generated as a ring by finitely many elements); then $A=\\varinjlim_\\lambda A_\\lambda$ [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346) and its proof (Lemma 09ZR proper-limit-of-proper-finite-presentation, absolute Noetherian approximation Proposition 01ZA, Lemmas 01ZM descend-finite-presentation and 081F eventually-proper; 'some details omitted'); the affine clause: in the proof the $S_j$ come from absolute Noetherian approximation, which for affine $S=\\operatorname{Spec}A$ is the system of finitely generated subrings of $A$ (proof of 01ZA), and it is the form in which Fundamental Groups, proof of Lemma 0GS2 (pione.tex, 'General case', line ~1851), cites 0A0P ('with $S_i$ affine and of finite type over $\\mathbf Z$')"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper morphism over qcqs base is a limit of proper morphisms of finite type over Spec Z",
+   "results": "AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper, isProper_eq, IsProper.mk, IsProper.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Proper), IsProper.of_valuativeCriterion (Mathlib.AlgebraicGeometry.ValuativeCriterion)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme over affine base descends to proper scheme over a Noetherian ring of finite type over Z (absolute Noetherian approximation)",
+   "results": "AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, IsProper.toLocallyOfFiniteType, instIsProperOfIsFinite (Morphisms.Proper), Proj.instIsProperToSpecZero... (ProjectiveSpectrum.Proper), LocallyOfFiniteType.isLocallyNoetherian (AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale morphisms over a cofiltered limit of schemes descend to a finite stage",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType (AffineTransitionLimit: descent of morphisms only), IsEtale.of_comp",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/*Limit* ; rg -n -i 'noetherian approximation|absolute noetherian|exists_.*isLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no IsProper in the limit files; AffineTransitionLimit.lean has only descent of sections/morphisms/affineness (exists_appTop_π_eq_of_isLimit, Scheme.exists_isAffine_of_isLimit:1040), no Noetherian approximation of schemes or proper morphisms",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-limit-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

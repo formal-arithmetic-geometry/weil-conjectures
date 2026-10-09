@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-henselization-colimit",
+ "kind": "statement",
+ "title": "Henselization of pairs commutes with filtered colimits",
+ "statement": "Let $\\Lambda$ be a directed set and $(A_\\lambda,I_\\lambda)_{\\lambda\\in\\Lambda}$ a directed system of pairs: commutative rings $A_\\lambda$ with ideals $I_\\lambda$ and ring maps $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ for $\\mu\\le\\lambda$ (compatible, $\\varphi_{\\lambda\\lambda}=\\mathrm{id}$) with $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$. Let $A=\\varinjlim_\\lambda A_\\lambda$ [def-weil-pbc-category-colimit] with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$, and let $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ (an ideal of $A$, the colimit of the $I_\\lambda$). For every $\\lambda$ let $(A_\\lambda^h,I_\\lambda^h)$, $I_\\lambda^h=I_\\lambda A_\\lambda^h$, be the henselization of $(A_\\lambda,I_\\lambda)$ [lem-weil-pbc-pair-henselization]. Then: (1) for $\\mu\\le\\lambda$ there is exactly one ring map $\\varphi^h_{\\mu\\lambda}:A_\\mu^h\\to A_\\lambda^h$ with $\\varphi^h_{\\mu\\lambda}\\circ(A_\\mu\\to A_\\mu^h)=(A_\\lambda\\to A_\\lambda^h)\\circ\\varphi_{\\mu\\lambda}$, so that $(A^h_\\lambda,I^h_\\lambda)$ is a directed system of pairs; (2) $(\\varinjlim_\\lambda A^h_\\lambda,\\varinjlim_\\lambda I^h_\\lambda)$ is the henselization of $(A,I)$. In particular, if $(A,I)$ is a henselian pair [def-weil-pbc-henselian-terminology], then for every $\\lambda$ there is exactly one ring map $\\beta_\\lambda:A_\\lambda^h\\to A$ with $\\beta_\\lambda\\circ(A_\\lambda\\to A_\\lambda^h)=\\alpha_\\lambda$; it maps $I_\\lambda^h$ into $I$, the $\\beta_\\lambda$ are compatible with the $\\varphi^h_{\\mu\\lambda}$, and they induce an isomorphism $\\varinjlim_\\lambda A_\\lambda^h\\cong A$ under which $\\varinjlim_\\lambda I^h_\\lambda$ corresponds to $I$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0A04 (lemma-henselization-colimit, line 3181) and its proof (Categories, adjoint-exact; Lemma 0FWT filtered-colimits-henselian; 'details omitted'); the functoriality (1), the uniqueness of $\\beta_\\lambda$ and $A^h=A$ for henselian $(A,I)$ are the left-adjoint property of Lemma Tag 0A02 (lemma-henselization, line 2980: henselization is left adjoint to the inclusion of henselian pairs into pairs, the inclusion being fully faithful); used in this form in Fundamental Groups, proof of Lemma 0GS2 (pione.tex, General case: 'we see that $A=\\colim A_i^h$')"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselization of a ring along an ideal",
+   "results": "HenselianRing, HenselianRing.is_henselian, HenselianRing.mk, HenselianRing.recOn, HenselianLocalRing.is_henselian, HenselianRing.jac (Mathlib.RingTheory.Henselian): the class only, no henselization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "henselian ring is a filtered colimit of henselizations; colimit of henselian pairs is henselian",
+   "results": "HenselianRing.mk, HenselianLocalRing, HenselianRing, HenselianLocalRing.TFAE (RingTheory.Henselian), CommRingCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Henselization\"",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "henselization of a pair commutes with filtered colimits; henselian pair is filtered colimit of henselizations of finite type Z-algebras",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Algebra.Category.Ring.FinitePresentation), localCohomology.hasColimitDiagram, CommRingCat.FilteredColimits.colimitCocone(IsColimit)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'henseliz' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; rg -n -i 'colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Henselian.lean",
+   "results": "no occurrence of henselization in Mathlib; Henselian.lean (HenselianRing, HenselianLocalRing, IsAdicComplete.henselianRing) has no colimit statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-limit-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
