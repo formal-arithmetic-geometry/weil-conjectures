@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
+ "kind": "statement",
+ "title": "An adjunction between finite-product-preserving functors lifts to abelian group objects",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be categories with finite products [def-weil-category-product] (final objects $*$; for $f:Z\\to X$, $g:Z\\to Y$ write $\\langle f,g\\rangle:Z\\to X\\times Y$ and $f\\times g=\\langle f\\mathrm{pr}_1,g\\mathrm{pr}_2\\rangle$, and $!_Z:Z\\to*$). An abelian group object of $\\mathcal A$ is $(X,+,0,i)$ with $+:X\\times X\\to X$, $0:*\\to X$, $i:X\\to X$ such that $+\\circ(+\\times\\mathrm{id})=+\\circ(\\mathrm{id}\\times+)\\circ a$ ($a:(X\\times X)\\times X\\to X\\times(X\\times X)$ the associativity isomorphism), $+\\circ\\langle\\mathrm{pr}_2,\\mathrm{pr}_1\\rangle=+$, $+\\circ\\langle0\\circ!_X,\\mathrm{id}_X\\rangle=\\mathrm{id}_X$, $+\\circ\\langle\\mathrm{id}_X,i\\rangle=0\\circ!_X$; a morphism of abelian group objects is $f:X\\to X'$ with $f\\circ+=+'\\circ(f\\times f)$, $f\\circ0=0'$, $f\\circ i=i'\\circ f$ (the last follows from the first two). Let $L:\\mathcal A\\to\\mathcal B$ be left adjoint to $R:\\mathcal B\\to\\mathcal A$, with unit $\\eta$ and counit $\\varepsilon$, and assume $L$ and $R$ preserve finite products: $\\lambda_{X,Y}=\\langle L\\mathrm{pr}_1,L\\mathrm{pr}_2\\rangle:L(X\\times Y)\\to LX\\times LY$ and $\\lambda_*:L(*)\\to*$ are isomorphisms, and likewise $\\rho_{Y,Y'}=\\langle R\\mathrm{pr}_1,R\\mathrm{pr}_2\\rangle$, $\\rho_*$ for $R$. For an abelian group object $(X,+,0,i)$ of $\\mathcal A$ put $L^{\\mathrm{gr}}X=(LX,\\ L(+)\\circ\\lambda_{X,X}^{-1},\\ L(0)\\circ\\lambda_*^{-1},\\ L(i))$, and define $R^{\\mathrm{gr}}Y$ likewise with $\\rho$. Then $L^{\\mathrm{gr}}X$ and $R^{\\mathrm{gr}}Y$ are abelian group objects; $f\\mapsto Lf$ and $g\\mapsto Rg$ send morphisms of abelian group objects to morphisms of abelian group objects, giving functors $L^{\\mathrm{gr}}$, $R^{\\mathrm{gr}}$ between the categories of abelian group objects that commute with the forgetful functors to $\\mathcal A$, $\\mathcal B$; and $L^{\\mathrm{gr}}\\dashv R^{\\mathrm{gr}}$ by an adjunction whose unit and counit have components (with underlying morphisms) $\\eta_X:X\\to RLX$ and $\\varepsilon_Y:LRY\\to Y$; in particular $\\eta_X$ and $\\varepsilon_Y$ are morphisms of abelian group objects, and the adjunction bijection is $\\alpha\\mapsto R(\\alpha)\\circ\\eta_X$, inverse $\\beta\\mapsto\\varepsilon_Y\\circ L(\\beta)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV (proposition-functoriality-algebraic-structures-topoi), proof of (2), and the discussion before it (abelian sheaves as quadruples (F,+,0,i))"
+ },
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction lifts to group objects when left adjoint preserves finite products",
+   "results": "CategoryTheory.Adjunction.mapGrp, Adjunction.mapGrp_unit, Adjunction.mapGrp_counit (Mathlib.CategoryTheory.Monoidal.Grp_); Functor.Monoidal.ofChosenFiniteProducts, Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts (Monoidal.Cartesian.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (with Adjunction.mapCommGrp for the commutative case)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommGrp, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.mapCommGrp (a : F ⊣ G) [F.Braided] [G.Braided] : F.mapCommGrp ⊣ G.mapCommGrp; Adjunction.mapCommGrp_unit, Adjunction.mapCommGrp_counit (Mathlib.CategoryTheory.Monoidal.CommGrp_)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an adjunction between cartesian monoidal categories lifts to an adjunction between categories of commutative group objects",
+   "results": "CategoryTheory.Adjunction.mapGrp (Monoidal.Grp_), CategoryTheory.Adjunction.mapCommGrp, mapCommGrp_counit, mapCommGrp_unit (Monoidal.CommGrp_), CommGrpCat.forget₂CommMonAdj",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapCommGrp\\|def mapCommGrp\\b\\|Adjunction\\|mapCommGrpNatTrans\\|mapCommGrpIdIso\\|mapCommGrpCompIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; grep -n 'monObjObj\\|ι_def\\|def mapGrp\\|inv_hom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Mon.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Grp.lean; grep -n 'ofChosenFiniteProducts\\|μ_of_cartesianMonoidalCategory\\|ε_of_cartesianMonoidalCategory\\|ofHasFiniteProducts\\|ofCartesianMonoidalCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean",
+   "results": "CommGrp_.lean:199 Functor.mapCommGrp (for F.Braided between cartesian braided categories; obj = F.mapGrp.obj with commutativity), :245 mapCommGrpIdIso and :252 mapCommGrpCompIso (components CommGrp.mkIso (.refl _)), :259 mapCommGrpNatTrans, :286 Adjunction.mapCommGrp (unit mapCommGrpIdIso.inv ≫ mapCommGrpNatTrans a.unit ≫ mapCommGrpCompIso.hom, counit dually); Mon.lean:827 Functor.monObjObj (one := ε F ≫ F.map η, mul := μ F X X ≫ F.map μ); Grp.lean:604 obj.ι_def (ι[F.obj G] = F.map ι), :612 mapGrp, :326 GrpObj.inv_hom (a monoid morphism of group objects commutes with ι); Cartesian/Basic.lean:228 CartesianMonoidalCategory.ofHasFiniteProducts, :478 BraidedCategory.ofCartesianMonoidalCategory, :931 ε_of_cartesianMonoidalCategory (ε F = (preservesTerminalIso F).inv), :934 μ_of_cartesianMonoidalCategory (μ F X Y = (prodComparisonIso F X Y).inv), :944 Functor.Monoidal.ofChosenFiniteProducts, :982 Functor.Braided.ofChosenFiniteProducts (F preserving finite products)",
+   "date": "2026-10-09",
+   "verdict": "match (read in the source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.mapCommGrp, CategoryTheory.Functor.mapCommGrp, CategoryTheory.Functor.Braided.ofChosenFiniteProducts",
+  "file": "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+  "how": "specializes in one line: give $\\mathcal A$, $\\mathcal B$ the cartesian monoidal structures `CartesianMonoidalCategory.ofHasFiniteProducts` (Cartesian/Basic.lean:228) with `BraidedCategory.ofCartesianMonoidalCategory` (:478), and $L$, $R$ the braided structures `Functor.Braided.ofChosenFiniteProducts` (:982; $R$ preserves finite products by `Adjunction.rightAdjoint_preservesLimits`); then an abelian group object is an object of `CommGrp` (multiplicative notation: `GrpObj` + `IsCommMonObj`), `Functor.mapCommGrp` (CommGrp_.lean:199) is $L^{\\mathrm{gr}}$ with mul = μ L X X ≫ L.map μ, one = ε L ≫ L.map η (`Functor.monObjObj`, Mon.lean:827), inv = L.map ι (`Functor.obj.ι_def`, Grp.lean:604), and μ L X Y = (prodComparisonIso L X Y).inv = λ^{-1}, ε L = (preservesTerminalIso L).inv = λ_*^{-1} (`Functor.Monoidal.μ_of_cartesianMonoidalCategory`, `ε_of_cartesianMonoidalCategory`, Cartesian/Basic.lean:931-934); `Adjunction.mapCommGrp` (CommGrp_.lean:286) is the adjunction, with unit `mapCommGrpIdIso.inv ≫ mapCommGrpNatTrans a.unit ≫ mapCommGrpCompIso.hom`, whose component at X has underlying morphism a.unit.app X (the two isos have identity components, `CommGrp.mkIso (.refl _)`), and dually the counit; the bijection is `Adjunction.homEquiv_unit`/`homEquiv_counit`. Morphisms of `CommGrp` are monoid morphisms (compatible with mul and one); compatibility with ι follows (`GrpObj.inv_hom`, Grp.lean:326), so they are the morphisms of the statement. The forgetful functors commute by `mapCommGrp` acting as L on underlying objects and morphisms."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Functor.mapCommGrp (Monoidal/CommGrp_.lean:199) and Adjunction.mapCommGrp (:286) for the cartesian monoidal structures with the braided structures of product-preserving functors; the transported structures are mu^{-1}, epsilon^{-1} composed with L of the structure maps, and the unit/counit components are those of L -| R (id/comp isos refl)."
+ }
+}

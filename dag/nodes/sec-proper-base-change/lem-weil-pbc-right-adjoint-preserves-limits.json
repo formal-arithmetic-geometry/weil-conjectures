@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-right-adjoint-preserves-limits",
+ "kind": "statement",
+ "title": "A right adjoint preserves limits",
+ "statement": "Let $L:\\mathcal C\\to\\mathcal D$ be left adjoint to $R:\\mathcal D\\to\\mathcal C$. Let $I$ be a small category and $M:I\\to\\mathcal D$ a diagram with a limit $(\\varprojlim_IM,(\\pi_i)_i)$ in $\\mathcal D$. Then $(R(\\varprojlim_IM),(R\\pi_i)_i)$ is a limit of $R\\circ M$ in $\\mathcal C$. In particular (with $I$ discrete with two objects, resp. empty): if $\\mathcal D$ has finite products, then for objects $Y,Y'$ of $\\mathcal D$ the morphism $(R\\mathrm{pr}_1,R\\mathrm{pr}_2):R(Y\\times Y')\\to RY\\times RY'$ is an isomorphism whenever the product $RY\\times RY'$ exists, and $R(*)$ is a final object of $\\mathcal C$ for a final object $*$ of $\\mathcal D$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 0038 (lemma-adjoint-exact), part (2): a right adjoint commutes with limits"
+ },
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint preserves limits",
+   "results": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits (Mathlib.CategoryTheory.Adjunction.Limits), Functor.instPreservesLimitsOfShapeOfIsRightAdjoint, Functor.instPreservesLimitsOfSizeOfIsRightAdjoint",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+   "results": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) : PreservesLimitsOfSize G (Mathlib.CategoryTheory.Adjunction.Limits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'rightAdjoint_preservesLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Limits.lean; grep -n 'PreservesFiniteProducts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+   "results": "Adjunction/Limits.lean:207 `lemma rightAdjoint_preservesLimits : PreservesLimitsOfSize.{v, u} G` (@[stacks 0038]); Limits/Preserves/Finite.lean:113 instance PreservesFiniteLimits F → PreservesFiniteProducts F",
+   "date": "2026-10-09",
+   "verdict": "match (read at the line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+  "file": "Mathlib/CategoryTheory/Adjunction/Limits.lean",
+  "how": "exact: for adj : L ⊣ R, `PreservesLimitsOfSize.{v, u} R` for every universe pair (line 207, tagged @[stacks 0038]), so `isLimitOfPreserves R hc` makes the image of a limit cone a limit; the finite-product case is `PreservesFiniteProducts R` (instance from PreservesFiniteLimits, Limits/Preserves/Finite.lean:113), with `CartesianMonoidalCategory.prodComparison R Y Y'` an isomorphism (`isIso_prodComparison_of_preservesLimit_pair`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Adjunction.rightAdjoint_preservesLimits (Adjunction/Limits.lean:207, @[stacks 0038])."
+ }
+}
