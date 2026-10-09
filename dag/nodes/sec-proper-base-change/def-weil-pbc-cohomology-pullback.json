@@ -23,6 +23,7 @@
   "prop-weil-pbc-cohomology-resolution-independent"
  ],
  "pointers": [
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
   "lem-weil-pbc-cohomology-pullback-functorial"
  ],
  "proof": [],
@@ -120,5 +121,11 @@
   "item": "def-weil-pbc-cohomology-pullback",
   "worker": "stage1",
   "summary": "Checked the definition against Stacks cohomology.tex 01F7/01F8/01F9/01FA/01FB. The recipe of the node (pull back a K-injective resolution I of G, resolve u^{-1}I by J, take Gamma(X,I) -> Gamma(Y,u^{-1}I) -> Gamma(Y,J)) is Lemma 01F8 applied to phi = eta_{u,I}: I -> u_*u^{-1}I followed by RGamma(X,-) and Gamma(X,u_*J) = Gamma(Y,J) as in 01F9; Remark 01FB is the equivalent recipe with resolutions on X, equal by lem-weil-pbc-cohomology-pullback-functorial. Statement dependencies: 'morphism of schemes' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-pc-scheme; abelian sheaves from def-weil-pbc-etale-sheaves (torsion/constructible grab-bag) to the Mathlib leaf def-weil-pbc-abelian-etale-sheaves; added def-weil-pbc-etale-site, prop-weil-pbc-kinjective-resolutions-exist (existence of the resolutions; bounded below injective complexes are K-injective), def-weil-pbc-derived-inverse-image (u^{-1}K on D^+), def-weil-abstract-derived-category (D^+(Ab)) and prop-weil-pbc-cohomology-resolution-independent (the identification under which independence is stated). Claims inside: the composite u^{-1}G -> u^{-1}I -> J is a K-injective resolution by exactness of u^{-1} [prop-weil-pbc-inverse-image-exact] (an exact functor commutes with cohomology of complexes, one line); Gamma(X,u_*F) = F(Y) is the definition of u_* at W = X; independence of choices and the etale case are lem-weil-pbc-cohomology-pullback-functorial, cited by name only (its stmt_deps contain this definition, so a dependency would be a cycle; it stays in pointers); the etale sentence 'u^{-1}G = G|_Y and u^* is restriction' was moved out of the definition into that citation, being its item 5. The alternative description through the unit of u^{-1} -/ Ru_* and RGamma(X,Ru_*-) = RGamma(Y,-) is the new unsplit statement lem-weil-pbc-cohomology-pullback-derived-unit (cited by name in the text only, since its stmt_deps contain this definition; pointers left as they were, as the brief asks; the new node is flagged unreachable). Alignment: def-weil-pbc-etale-cohomology defines H^q(T,F) as H^q(Gamma(T,I)) for a K-injective resolution I and RGamma(T,K) as Gamma of a K-injective resolution, i.e. through K-injective resolutions, not through an abstract RGamma; this definition uses the same resolutions, so the groups are literally those of that node. Mathlib: Sheaf.H is Ext from the constant sheaf and Sheaf.H.map is functorial in the sheaf on one site only; no map along a morphism of sites (three kinds of search recorded); not a leaf. Source repository: AlgebraicGeometry.Etale.cohomologyMap (slopmaster2, WeilConjectures/SixFunctors/Etale/UpperLowerStar/TopologicalInvariance.lean:178-186, sorry-free) is the Ext-definition (Sheaf.H.mapFunctor of f^* with Z_X = f^*Z_Y); its agreement with this resolution definition is a theorem, so it is not attached."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "recipe aligned with Stacks 01F8/01F9; claims inside cited or elementary; the lead added the two pointers (functoriality lemma, derived-unit description) to pointers"
  }
 }
