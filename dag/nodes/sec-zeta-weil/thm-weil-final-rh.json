@@ -13,42 +13,106 @@
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
   "def-weil-integral-frobenius-factor",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-coefficientwise-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-algebraic-closure",
+  "def-weil-ordinary-reciprocal-roots",
+  "def-weil-numbers"
  ],
  "proof": [
   {
-   "text": "The reversed polynomial is monic because the constant coefficient is one and\nthe coefficients are integral by [prop-integral-recovery]; hence its\nroots are algebraic integers. The root/eigenvalue identification is\n[def-weil-ordinary-reciprocal-roots]. For a root $\\alpha$,\n[lem-embedding-extension] extends every embedding of\n$\\mathbf Q(\\alpha)$ to an isomorphism $\\Qlb\\simeq\\mathbf C$, and\n[prop-weight-purity-roots] gives\n$|\\tau(\\alpha)|=q^{i/2}$. In the terminology of\n[def-weil-numbers], this is precisely the $q$-Weil condition; taking\ninverses gives the ordinary-root bound. The arithmetic formulation and the\ndegree independence are also recorded in [prop-arithmetic-roots] and\n[prop-weil-realization-independent-degrees]; the\nunderlying purity interface is the boundary statement\n[thm-weil-deligne-purity].",
+   "text": "*Step 1: the objects of the statement are those of [prop-arithmetic-roots].* The finite field $k_0=\\mathbf F_q$ of characteristic $p$, with $q=p^a$, and its fixed algebraic closure $k=\\overline{\\mathbf F}_q$ are the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber]; the hypotheses on $X_0$ (smooth of pure dimension $d\\geq0$, proper, geometrically connected) are those of [def-weil-geometric-hypotheses]; $X=X_0\\times_{k_0}k$ is the geometric fiber of [def-weil-finite-field-fiber]. For every prime $\\ell\\neq p$, $H^i(X,\\mathbf Q_\\ell)$ is the ordinary cohomology group of [def-weil-ordinary-compact-cohomology] and $F_{i,\\ell}$ the geometric Frobenius of [def-weil-global-geometric-frobenius] on it; by [def-weil-smooth-proper-cohomological-family] these are $V_{i,\\ell}=H^i(X,\\Ql)$ and $F_{i,\\ell}=F_\\ell|_{V_{i,\\ell}}$, and $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\mathbf Q_\\ell))$, the reverse characteristic polynomial of [def-weil-reverse-characteristic-polynomial], is the determinant factor $P_{i,\\ell}(T)\\in\\Ql[T]$ of that family. The polynomials $P_i\\in\\mathbf Z[T]$ ([def-weil-polynomial-ring]) are those provided by Theorem [thm-weil-final-integrality] for $X_0$: for each $0\\leq i\\leq2d$, $P_i$ is the unique polynomial with $P_i(0)=1$ whose coefficientwise extension $P_i^{(\\ell)}\\in\\Ql[T]$ ([def-weil-coefficientwise-extension]) equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ for every prime $\\ell\\neq p$. Hence $P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$: $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], with $P_i(0)=1$. Fix an integer $i$ with $0\\leq i\\leq2d$ and put $r_i=\\deg P_i$ ([def-weil-polynomial-ring]). The statement takes its roots $\\alpha\\in\\overline{\\mathbf Q}$ in an algebraic closure of $\\mathbf Q$ fixed once and for all ([def-weil-algebraic-closure]; the same fixed $\\overline{\\mathbf Q}$ as in [def-weil-numbers]). These are exactly the data and hypotheses of [prop-arithmetic-roots]: the datum, $X_0$ and $X$, the indeterminates $T$ and $U$, the coefficientwise extension $P^{(\\ell)}$, the cohomological family $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})$, the integer $i$, the integral Frobenius factor $P_i$ with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$, $r_i=\\deg P_i$, and the fixed $\\overline{\\mathbf Q}$. (Deligne states the same objects: the characteristic polynomial of $F^*$ on $H^i(X,\\Ql)$ has integer coefficients independent of $\\ell$, which is Theorem [thm-weil-final-integrality]; the present theorem is the assertion on its complex roots.)",
    "uses": [
-    "prop-integral-recovery",
-    "def-weil-ordinary-reciprocal-roots",
-    "lem-embedding-extension",
-    "prop-weight-purity-roots",
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-reverse-characteristic-polynomial",
+    "def-weil-polynomial-ring",
+    "thm-weil-final-integrality",
+    "def-weil-coefficientwise-extension",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-algebraic-closure",
     "def-weil-numbers",
-    "prop-arithmetic-roots",
-    "prop-weil-realization-independent-degrees",
-    "thm-weil-deligne-purity"
+    "prop-arithmetic-roots"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "Théorème (1.6), p. 276 ('le polynôme caractéristique det(t·1 − F*, H^i(X,Q_ℓ)) est à coefficients entiers indépendants de ℓ'); blueprint literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/thm-weil-final-rh.md ## Proof, 'The root/eigenvalue identification is [def-weil-ordinary-reciprocal-roots]' and 'The arithmetic formulation ... [is] recorded in [prop-arithmetic-roots]'"
+   }
+  },
+  {
+   "text": "*Step 2: reciprocal roots.* The statement's conventions are those of [prop-arithmetic-roots], word for word: $P_i^\\#(U)=U^{r_i}P_i(U^{-1})$, a reciprocal root $\\alpha\\in\\overline{\\mathbf Q}$ is a root of $P_i^\\#$, and $\\beta=\\alpha^{-1}$ is the corresponding ordinary root; by Step 1 of the proof of [prop-arithmetic-roots] (through [lem-weil-reciprocal-polynomial]) $P_i^\\#\\in\\mathbf Z[U]$, every reciprocal root is nonzero, and the ordinary roots are exactly the roots of $P_i$ in $\\overline{\\mathbf Q}$, so this is the convention of [def-weil-ordinary-reciprocal-roots] with $\\overline{\\mathbf Q}$ in place of $\\Qlb$. By Step 1, [prop-arithmetic-roots] applies to $X_0$, $i$ and $P_i$, and its conclusions are: $P_i^\\#$ is monic; every reciprocal root $\\alpha$ is an algebraic integer; for every embedding $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$, $|\\tau(\\alpha)|=q^{i/2}$; and $\\alpha$ is a $q$-Weil number of weight $i$. Here 'algebraic integer', '$q$-Weil number of weight $i$', $\\mathbf Q(\\alpha)$, the embeddings $\\tau$ and $|\\cdot|$ have the meaning of [def-weil-numbers], in [prop-arithmetic-roots] as in the present statement; and since every field homomorphism $\\mathbf Q(\\alpha)\\to\\mathbf C$ is the identity on $\\mathbf Q$, 'every embedding $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$' is the set $\\operatorname{Emb}_{\\mathbf Q}(\\mathbf Q(\\alpha),\\mathbf C)$ of that definition. This is the first assertion of the theorem: every reciprocal root $\\alpha$ is an algebraic integer and a Weil number for $q$ of weight $i$, $|\\tau(\\alpha)|=q^{i/2}$ for every $\\tau$. (This is Deligne's (1.6): the complex roots $\\alpha$ of $\\det(t\\cdot1-F^*,H^i(X,\\Ql))$, the complex conjugates of the eigenvalues of $F^*$, have $|\\alpha|=q^{i/2}$; his roots of $\\det(t-F^*)$ are the reciprocal roots of $P_i(T)=\\det(1-TF_{i,\\ell})$, and 'complex conjugates' are the images $\\tau(\\alpha)$ under all embeddings.)",
+   "uses": [
+    "prop-arithmetic-roots",
+    "lem-weil-reciprocal-polynomial",
+    "def-weil-ordinary-reciprocal-roots",
+    "def-weil-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "Théorème (1.6), p. 276 ('Les racines complexes α de ce polynôme (les conjugués complexes des valeurs propres de F*) sont de valeur absolue |α| = q^{i/2}'); blueprint literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/thm-weil-final-rh.md ## Proof, 'hence its roots are algebraic integers ... [prop-weight-purity-roots] gives |τ(α)|=q^{i/2}. In the terminology of [def-weil-numbers], this is precisely the q-Weil condition'"
+   }
+  },
+  {
+   "text": "*Step 3: ordinary roots.* Let $\\beta$ be an ordinary root, that is, $\\beta=\\alpha^{-1}$ for a reciprocal root $\\alpha$ (Step 2). The last clause of [prop-arithmetic-roots], for the same $X_0$, $i$, $P_i$ and $\\overline{\\mathbf Q}$, states that for every embedding $\\tau:\\mathbf Q(\\beta)\\hookrightarrow\\mathbf C$ one has $|\\tau(\\beta)|=q^{-i/2}$, with the notation of [def-weil-numbers]. This is the 'Then' clause of the theorem. (Directly: $\\mathbf Q(\\beta)=\\mathbf Q(\\alpha)$ and $\\tau(\\beta)=\\tau(\\alpha)^{-1}$ for every $\\tau$, so $|\\tau(\\beta)|=|\\tau(\\alpha)|^{-1}=q^{-i/2}$ by Step 2.)",
+   "uses": [
+    "prop-arithmetic-roots",
+    "def-weil-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/thm-weil-final-rh.md",
+    "place": "## Proof, 'taking inverses gives the ordinary-root bound'"
+   }
   }
  ],
  "proof_deps": [
-  "prop-integral-recovery",
-  "def-weil-ordinary-reciprocal-roots",
-  "lem-embedding-extension",
-  "prop-weight-purity-roots",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-polynomial-ring",
+  "thm-weil-final-integrality",
+  "def-weil-coefficientwise-extension",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-algebraic-closure",
   "def-weil-numbers",
   "prop-arithmetic-roots",
-  "prop-weil-realization-independent-degrees",
-  "thm-weil-deligne-purity"
+  "lem-weil-reciprocal-polynomial",
+  "def-weil-ordinary-reciprocal-roots"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/thm-weil-final-rh.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "Théorème (1.6), p. 276, for the statement; its proof there ('Preuve de (1.7) ⇒ (1.6)', pp. 276–277) is the content of prop-arithmetic-roots, prop-integral-recovery and thm-weil-final-integrality in this DAG, and this node only assembles it; the section sketch literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/_section.md ## Proof says 'This is [sk-thm-rh]', i.e. prop-arithmetic-roots"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'Weil conjecture\\|WeilRiemannHypothesis\\|Riemann hypothesis\\|IsPureOfWeight\\|Weil number' -rl in Mathlib/",
+   "results": "Mathlib/NumberTheory/LSeries/RiemannZeta.lean (the classical Riemann zeta function, docstring only), Mathlib/AlgebraicGeometry/Sites/BigZariski.lean and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean (ℓ-adic cohomology on the pro-étale site; no Frobenius, no zeta function, no weights)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "'zetaSeries\\|étale cohomology\\|EtaleCohomology' -rl in Mathlib/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_multiple"
@@ -140,5 +204,16 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final-rh",
+  "worker": "stage1",
+  "summary": "Statement checked against its master source (verbatim, kept, including the source's 'a algebraic integer'), against the slopmaster2 LaTeX clause (iii) of thm:weil-final (01_final_weil_conjectures.tex, lines 3608-3620; same assertion, stated for the canonical factors and without the det(1-TF) characterization, which the slopmaster2 text puts in clause (ii)), and against Deligne Weil I, Théorème (1.6), p. 276: Deligne's complex roots of det(t·1 − F*, H^i) are the reciprocal roots of P_i, and 'conjugués complexes' are the images under all embeddings, so the statement is his. The section sketch sk-thm-weil3 says the theorem 'is [sk-thm-rh]', whose node is the reviewed prop-arithmetic-roots, and the imported one-paragraph proof cited eight nodes without deriving anything from them, so it is replaced by three steps: identification of the statement's objects (datum, X, H^i, F_{i,l}, det(1-TF), P^{(l)}, the P_i of thm-weil-final-integrality) with the hypotheses of prop-arithmetic-roots, in particular P_i^{(l)}=P_{i,l} so that P_i is an integral Frobenius factor with P_i(0)=1; the reciprocal-root clause read off from prop-arithmetic-roots (same conventions for P_i^#, reciprocal and ordinary roots, algebraic integer, q-Weil number, Q(alpha), embeddings); and the ordinary-root clause from its last clause. Dropped from the direct proof: prop-integral-recovery (its content is already consumed by thm-weil-final-integrality, which the statement cites for the P_i), lem-embedding-extension and prop-weight-purity-roots (used inside prop-arithmetic-roots, steps 5-6), thm-weil-deligne-purity (reached through prop-weight-purity), and prop-weil-realization-independent-degrees (degree independence, which this theorem asserts nothing about; the blueprint cited it as 'also recorded'; after this change no target reaches it, its content being the degree clause of prop-integral-recovery and thm-weil-final-betti). Statement dependencies completed: the cohomological family, the reverse characteristic polynomial, coefficientwise extension, the polynomial ring and degree, the fixed algebraic closure of Q, the reciprocal/ordinary-root convention and the Weil-number/algebraic-integer notions; the imported six kept. No new node needed. Mathlib searched for the item: nothing beyond l-adic cohomology on the pro-étale site. The Lean on both branches (AlgebraicGeometry.Scheme.weil_conjectures, WeilConjectures/Statement.lean 86-98) states something else, the conjunction of all three Weil conjectures for an existentially quantified family P with no cohomological characterization; see the report."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
