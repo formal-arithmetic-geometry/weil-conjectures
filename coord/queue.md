@@ -1,37 +1,23 @@
 # Work queue
 
-802 items; claim with `tools/claim.py next <group> [--stage N]`.
+805 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (667)
+## Stage 1: nodes to split (665)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1009 | none |
-| `lem-weil-pbc-stein-universally-closed-factor` | 1009 | none |
 | `lem-weil-pbc-z-g-ring` | 1009 | none |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
-| `lem-weil-pbc-grothendieck-existence-projective` | 1010 | none |
 | `lem-weil-pbc-regular-composition` | 1010 | none |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1011 | none |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
-| `lem-weil-pbc-coherent-kernel-cokernel-locnoeth` | 1011 | none |
-| `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1011 | none |
-| `lem-weil-pbc-completion-internal-hom` | 1011 | none |
-| `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1011 | none |
-| `lem-weil-pbc-derivation-extends` | 1011 | none |
-| `lem-weil-pbc-diagonal-immersion` | 1011 | none |
-| `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1011 | none |
-| `lem-weil-pbc-essentially-smooth-composition` | 1011 | none |
-| `lem-weil-pbc-essentially-smooth-factors-through-smooth` | 1011 | none |
-| `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1011 | none |
+| `lem-weil-pbc-coherent-twist-global-generation` | 1011 | none |
 | `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-eventually-affine` | 1011 | none |
-| `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1011 | none |
-| `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1011 | none |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1011 | none |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1011 | none |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1011 | none |
@@ -43,10 +29,12 @@
 | `lem-weil-pbc-flat-over-regular` | 1011 | none |
 | `lem-weil-pbc-flat-permanence` | 1011 | none |
 | `lem-weil-pbc-flat-surjective-spectrum-faithfully-flat` | 1011 | none |
+| `lem-weil-pbc-formal-completion-exact` | 1011 | none |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1011 | none |
 | `lem-weil-pbc-formal-functions-complete-base` | 1011 | none |
 | `lem-weil-pbc-formal-system-support-constant` | 1011 | none |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
+| `lem-weil-pbc-formal-systems-surjective` | 1011 | none |
 | `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1011 | none |
 | `lem-weil-pbc-galois-base-change-qc-open-descends` | 1011 | none |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1011 | none |
@@ -93,6 +81,7 @@
 | `lem-weil-pbc-popescu-lifting` | 1011 | none |
 | `lem-weil-pbc-popescu-product` | 1011 | none |
 | `lem-weil-pbc-popescu-solution-modulo` | 1011 | none |
+| `lem-weil-pbc-projective-ample-invertible` | 1011 | none |
 | `lem-weil-pbc-proper-coproduct` | 1011 | none |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1011 | none |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1011 | none |
@@ -138,8 +127,11 @@
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1011 | none |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1011 | none |
 | `lem-weil-pbc-unramified-quasi-finite-at-points` | 1011 | none |
+| `lem-weil-pbc-vanishing-projective` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
+| `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
+| `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
@@ -147,9 +139,13 @@
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
+| `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
+| `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
+| `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
+| `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1012 | none |
@@ -157,6 +153,7 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
+| `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
@@ -164,6 +161,7 @@
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
+| `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
@@ -662,6 +660,7 @@
 | `lem-sc-p1-monomial` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
 | `def-pc-linear-pair-morphism` | - | none |
+| `def-pc-standard-graded-algebra` | - | none |
 | `def-sc-zariski-site` | - | none |
 | `lem-pc-hilb-functorial` | - | none |
 | `lem-pc-linear-pair-morphism-finite` | - | none |
@@ -670,11 +669,10 @@
 | `lem-pc-projective-curve-linear-pair` | - | none |
 | `lem-pc-projective-space-coherent-finiteness` | - | none |
 | `lem-sc-p1-twist-sections` | - | none |
-| `def-pc-standard-graded-algebra` | - | none |
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (135)
+## Stage 2: nodes to state (140)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -706,10 +704,13 @@
 | `lem-weil-pbc-colimit-rings-flat` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
+| `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
+| `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
+| `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
@@ -727,8 +728,10 @@
 | `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
 | `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
+| `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-immersion` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
+| `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
@@ -814,7 +817,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 679 nodes that wait for stage 1, 415 nodes that wait for a statement dependency.
+Not open yet: 677 nodes that wait for stage 1, 425 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
