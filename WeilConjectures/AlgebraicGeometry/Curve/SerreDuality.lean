@@ -8,9 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OrderOfVanishing
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -119,16 +123,39 @@ theorem isInvertible_vanishingIdeal_and_isDiscreteValuationRing {x : X} (hx : Is
 
 end Local
 
-section ProjectiveLine
-
-variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
-  [IsProper (X ↘ Spec (.of k))]
-
 /-- The ring map `k →+* k(X)` of an integral `k`-scheme `X`. -/
 noncomputable abbrev functionFieldRingHom (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (.of k))] [IsIntegral X] : k →+* X.functionField :=
   (X.germToFunctionField ⊤ (h := ⟨⟨genericPoint X, trivial⟩⟩)).hom.comp
     (globalSectionsRingHom k (X := X))
+
+/-- An integral scheme over a field `k` with a point whose local ring is not a field has a
+rational function transcendental over `k`. -/
+theorem exists_transcendental_functionField [X.Over (Spec (.of k))] [IsIntegral X] (x : X)
+    (hx : ringKrullDim (X.presheaf.stalk x) ≠ 0) :
+    ∃ t : X.functionField, letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t := by
+  let := (functionFieldRingHom k X).toAlgebra
+  let : Algebra k (X.presheaf.stalk x) :=
+    ((X.presheaf.germ ⊤ x trivial).hom.comp (globalSectionsRingHom k (X := X))).toAlgebra
+  by_contra! h
+  have : Algebra.IsAlgebraic k X.functionField := ⟨fun t ↦ not_not.mp (h t)⟩
+  have hinj : Function.Injective (algebraMap (X.presheaf.stalk x) X.functionField) :=
+    IsFractionRing.injective _ _
+  have : Algebra.IsAlgebraic k (X.presheaf.stalk x) :=
+    Algebra.IsAlgebraic.of_ringHom_of_comp_eq (RingHom.id k)
+      (algebraMap (X.presheaf.stalk x) X.functionField) Function.surjective_id hinj (by
+        ext a
+        simp only [RingHom.algebraMap_toAlgebra, functionFieldRingHom, RingHom.coe_comp,
+          RingHom.coe_coe, RingHom.coe_id, Function.comp_apply, id_eq]
+        rw [← CommRingCat.comp_apply, TopCat.Presheaf.germ_stalkSpecializes])
+  have hfield : IsField (X.presheaf.stalk x) :=
+    (Algebra.IsIntegral.isField_iff_isField (algebraMap k _).injective).mp (Field.toIsField k)
+  exact hx (ringKrullDim_eq_zero_of_isField hfield)
+
+section ProjectiveLine
+
+variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [IsProper (X ↘ Spec (.of k))]
 
 /-- The homogeneous coordinates `[1 : t]` of a rational function `t`, as global sections of
 `Spec k(X)`: the `k(X)`-point of `ℙ¹` with affine coordinate `t`. -/
@@ -177,8 +204,91 @@ transcendental element `t`, and `π_t` is finite flat
 and the morphisms on the components glue. -/
 theorem exists_isFinite_flat_hom_projectiveLine :
     ∃ f : X ⟶ ProjectiveLine (Spec (.of k)), f.IsOver (Spec (.of k)) ∧ IsFinite f ∧ Flat f ∧
-      LocallyOfFinitePresentation f :=
-  sorry
+      LocallyOfFinitePresentation f := by
+  have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let U : ConnectedComponents X → X.Opens := fun c ↦ ⟨ConnectedComponents.mk ⁻¹' {c}, by
+    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+    rw [connectedComponents_preimage_singleton]
+    exact isOpen_connectedComponent⟩
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have hUc (c) : IsClosed (U c : Set X) :=
+    isClosed_singleton.preimage ConnectedComponents.continuous_coe
+  have key (c) : ∃ g : (U c).toScheme ⟶ ProjectiveLine (Spec (.of k)),
+      g ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = (U c).ι ≫ X ↘ Spec (.of k) ∧
+        IsFinite g ∧ Flat g := by
+    let : (U c).toScheme.Over (Spec (.of k)) := ⟨(U c).ι ≫ X ↘ Spec (.of k)⟩
+    have : SmoothOfRelativeDimension 1 ((U c).toScheme ↘ Spec (.of k)) := by
+      exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) ((U c).ι ≫ X ↘ Spec (.of k)))
+    have : IsClosedImmersion (U c).ι :=
+      .of_isPreimmersion _ ((U c).range_ι ▸ hUc c)
+    have : IsProper ((U c).toScheme ↘ Spec (.of k)) := by
+      change IsProper ((U c).ι ≫ X ↘ Spec (.of k))
+      infer_instance
+    have : ConnectedSpace (U c) := by
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+      have h : (U (ConnectedComponents.mk x) : Set X) = connectedComponent x :=
+        connectedComponents_preimage_singleton
+      exact isConnected_iff_connectedSpace.mp (h ▸ isConnected_connectedComponent)
+    have := SmoothOfRelativeDimension.smooth 1 ((U c).toScheme ↘ Spec (.of k))
+    have : CompactSpace (U c) := isCompact_iff_compactSpace.mp (hUc c).isCompact
+    have := IsRegular.of_smooth ((U c).toScheme ↘ Spec (.of k))
+    have := IsRegular.irreducibleSpace (U c).toScheme
+    have : IsReduced (U c).toScheme := isReduced_of_isReduced_stalk _
+    have : Nonempty (U c) := by
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+      exact ⟨⟨x, rfl⟩⟩
+    have : IsIntegral (U c).toScheme := isIntegral_of_irreducibleSpace_of_isReduced _
+    obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := (U c).toScheme)
+      Set.univ_nonempty
+    obtain ⟨t, ht⟩ := exists_transcendental_functionField (k := k) x (by
+      rw [ringKrullDim_stalk_eq_one_of_isClosed ((U c).toScheme ↘ Spec (.of k)) hx]
+      exact one_ne_zero)
+    obtain ⟨π, hπ, hπ'⟩ := exists_hom_projectiveLine_of_functionField t ht
+    obtain ⟨h₁, -, h₂, -⟩ := isFinite_flat_of_hom_projectiveLine_of_functionField t ht π hπ'
+    exact ⟨π, hπ.comp_over, h₁, h₂⟩
+  choose g hg hfin hflat using key
+  let 𝒰 : X.OpenCover := X.openCoverOfIsOpenCover U <| eq_top_iff.2 fun x _ ↦
+    TopologicalSpace.Opens.mem_iSup.2 ⟨ConnectedComponents.mk x, rfl⟩
+  have hcompat (c d) : pullback.fst (𝒰.f c) (𝒰.f d) ≫ g c = pullback.snd _ _ ≫ g d := by
+    by_cases hcd : c = d
+    · subst hcd
+      have : pullback.fst (𝒰.f c) (𝒰.f c) = pullback.snd _ _ :=
+        (cancel_mono (𝒰.f c)).1 pullback.condition
+      rw [this]
+    · have : IsEmpty (Limits.pullback (𝒰.f c) (𝒰.f d) : Scheme) := by
+        refine ⟨fun z ↦ hcd ?_⟩
+        have h₁ := ((pullback.fst (𝒰.f c) (𝒰.f d)) z).2
+        have h₂ := ((pullback.snd (𝒰.f c) (𝒰.f d)) z).2
+        have h : 𝒰.f c (pullback.fst (𝒰.f c) (𝒰.f d) z) =
+            𝒰.f d (pullback.snd (𝒰.f c) (𝒰.f d) z) := by
+          rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, pullback.condition]
+        simp only [𝒰, Scheme.openCoverOfIsOpenCover_f] at h
+        exact h₁.symm.trans ((congrArg ConnectedComponents.mk h).trans h₂)
+      exact isInitialOfIsEmpty.hom_ext _ _
+  let f := 𝒰.glueMorphisms g hcompat
+  have hf (c) : (U c).ι ≫ f = g c := 𝒰.ι_glueMorphisms g hcompat c
+  have hover : f ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = X ↘ Spec (.of k) :=
+    𝒰.hom_ext _ _ fun c ↦ by
+      simp only [𝒰, Scheme.openCoverOfIsOpenCover_f]
+      rw [reassoc_of% (hf c), hg]
+  have : IsProper (f ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) := by
+    rw [hover]; infer_instance
+  have : IsProper f := IsProper.of_comp f (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
+  have : LocallyQuasiFinite f :=
+    IsZariskiLocalAtSource.of_openCover 𝒰 fun c ↦ by
+      simp only [𝒰, Scheme.openCoverOfIsOpenCover_f]
+      rw [hf]; infer_instance
+  have : Flat f :=
+    IsZariskiLocalAtSource.of_openCover 𝒰 fun c ↦ by
+      simp only [𝒰, Scheme.openCoverOfIsOpenCover_f]
+      rw [hf]; infer_instance
+  have : IsFinite f := IsFinite.of_isProper_of_locallyQuasiFinite f
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
+  exact ⟨f, ⟨hover⟩, inferInstance, inferInstance,
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance⟩
+
 
 end ProjectiveLine
 
@@ -186,13 +296,74 @@ section FiniteDuality
 
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
 
+/-- **Trace identification along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
+`τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Ω¹_{X/k} ⟶ Hom(f_* 𝒪_X, Ω¹_{ℙ¹_k/k})`,
+`ω ↦ (a ↦ τ(a ω))`, is an isomorphism: the comparison `φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. Locally
+over `Spec R ⊆ ℙ¹_k` with `f⁻¹(Spec R) = Spec B` this is `Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`, the
+codifferent of the finite flat extension `R ⊆ B` of Dedekind domains, i.e. Grothendieck duality
+`f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`.
+
+(blueprint: `lem-sc-finite-duality`, the trace identification) -/
+theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+      IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
+  sorry
+
+/-- **Duality along a finite flat morphism to `ℙ¹`, comparison map.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
+`τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Hom(ℳ, Ω¹_{X/k}) ⟶ Hom(f_* ℳ, Ω¹_{ℙ¹_k/k})`,
+`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`. For `ℳ = 𝒪_X` this is the
+trace identification `exists_isIso_pushforwardHomObjComparison_unit`; the general case follows
+since `ℳ` is a direct summand of a free module of finite rank over the affine opens `f⁻¹V`
+(`Modules.isIso_pushforwardHomObjComparison_of_isIso_unit`).
+
+(blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
+theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+      ∀ ℳ : X.Modules, ℳ.IsFiniteLocallyFree →
+        IsIso (Modules.pushforwardHomObjComparison f τ ℳ) := by
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f
+  exact ⟨τ, fun ℳ _ ↦ Modules.isIso_pushforwardHomObjComparison_of_isIso_unit hτ ℳ⟩
+
+/-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
+`Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ f_* Hom_{𝒪_X}(ℳ, Ω¹_{X/k})` as sheaves of modules on `ℙ¹_k`,
+naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` of
+`exists_isIso_pushforwardHomObjComparison`.
+
+(blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
+theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (Modules.pushforward f).op ⋙
+        (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
+          (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
+      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials ⋙
+          Modules.pushforward f) := by
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f
+  have (ℳ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ) :
+      IsIso ((Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+        (Modules.pushforwardHomObjComparisonNatTrans f τ)).app ℳ) :=
+    hτ ℳ.unop.obj ℳ.unop.property
+  have := NatIso.isIso_of_isIso_app (Functor.whiskerLeft
+    (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+    (Modules.pushforwardHomObjComparisonNatTrans f τ))
+  exact ⟨(asIso (Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+    (Modules.pushforwardHomObjComparisonNatTrans f τ))).symm⟩
+
 /-- **Duality along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve over `k` and
 `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ H⁰(X, ℳᵛ ⊗ Ω¹_{X/k})`, naturally in finite locally free
-`ℳ`. It is the composite of the adjunction
-`Hom(f_* ℳ, 𝒢) ≅ Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f`, the trace identification
-`Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat extension of discrete
-valuation rings) and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`.
+`ℳ`. Taking global sections in `nonempty_homObj_pushforward_iso_pushforward_homObj` gives
+`Hom(f_* ℳ, Ω¹_{ℙ¹}) ≅ H⁰(ℙ¹, f_* Hom(ℳ, Ω¹_{X/k})) = H⁰(X, Hom(ℳ, Ω¹_{X/k}))`
+(`Modules.pushforwardCompCohomologyFunctorZeroIso`), and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`
+since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
 
 (blueprint: `lem-sc-finite-duality`) -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))
@@ -203,8 +374,17 @@ theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k))
           (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ⋙
         Modules.cohomologyFunctor k 0 ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) :=
-  sorry
+        tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  exact ⟨Functor.isoWhiskerRight E (Modules.cohomologyFunctor k 0) ≪≫
+    Functor.isoWhiskerLeft ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+      (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials)
+      (Modules.pushforwardCompCohomologyFunctorZeroIso k f) ≪≫
+    Functor.isoWhiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
+      (Functor.isoWhiskerRight (Modules.dualTensorHomIso (X ↘ Spec (.of k)).relativeDifferentials)
+        (Modules.cohomologyFunctor k 0)).symm⟩
 
 end FiniteDuality
 

@@ -34,6 +34,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
@@ -106,10 +107,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
@@ -509,7 +513,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoid
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
@@ -717,6 +723,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProduc
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
