@@ -142,10 +142,15 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
   have : HasInvertibleExponent Λ c.Z := HasInvertibleExponent.of_hom c.g
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
   obtain ⟨hbc, a, b, hta⟩ := hK
+  obtain ⟨N, hN0, hNΛ, -⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ)
+    (X := Spec (.of k))
+  have : NeZero N := ⟨hN0.ne'⟩
+  have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
+  have : IsNoetherianRing Λ := inferInstance
   have hK' : DerivedCategory.boundedConstructibleFiniteTor Λ c.Z
       ((R((c.i)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-    ⟨boundedConstructible_rightDerivedLowerStar _ c.i d hd a b hbc hta,
-      a, b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b hbc hta⟩
+    ⟨boundedConstructible_rightDerivedLowerStar _ c.i d hd a b N hN hbc hta,
+      a, b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b N hN hbc hta⟩
   exact (isPerfect_compactlySupportedGlobalSections Λ c.g _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
@@ -250,10 +255,19 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       ⟨⟨x ^ (n + 1), by rw [hx, Ideal.submodule_span_eq, Ideal.span_singleton_pow]⟩⟩
     obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerStar Λ c.i _ hJ
     obtain ⟨hbc, hta⟩ := hab n
+    -- the reduction is killed by `N = mⁿ⁺¹`, for `m` the exponent of `Λ/I`
+    obtain ⟨m, hm0, hmΛ, -⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I)
+      (X := Spec (.of k))
+    have hmI : (m : Λ) ∈ I := by
+      rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
+      exact hmΛ
+    have : NeZero (m ^ (n + 1)) := ⟨pow_ne_zero _ hm0.ne'⟩
+    have hN := nsmul_id_reductionModIdeal (J := I ^ (n + 1)) (N := m ^ (n + 1))
+      (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
-        (boundedConstructible_rightDerivedLowerStar _ c.i d hd a b hbc hta),
+        (boundedConstructible_rightDerivedLowerStar _ c.i d hd a b _ hN hbc hta),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
-        (torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b _ hN hbc hta)⟩
   exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)

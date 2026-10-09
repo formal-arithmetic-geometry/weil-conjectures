@@ -7,10 +7,13 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.RingTheory.SimpleModule.InjectiveProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-!
@@ -45,6 +48,8 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 - `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom` (`prop-pod-biduality-at-the-point`):
   the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
   any `D`.
+- `DerivedCategory.nonempty_iso_homology_ihom` (`lem-pod-cohomology-of-dual-over-field`): over
+  a field, `H^{-i}(C^∨) ≅ H^i(C)^∨`.
 
 ## Implementation notes
 
@@ -174,30 +179,27 @@ theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPe
     ((ihom C).obj (𝟙_ _)).IsPerfect :=
   sorry
 
-section Field
-
-variable {K : Type u} [Field K] [HasDerivedCategory.{u} (ModuleCat.{u} K)]
-
-omit [HasDerivedCategory.{u} (ModuleCat.{u} K)] in
-/-- A complex of vector spaces is quasi-isomorphic to the complex of its cohomology spaces with
-zero differential: a choice of sections of the surjections `Z^i(L) ↠ H^i(L)` defines a
-quasi-isomorphism from the latter to `L`. -/
-private theorem exists_quasiIso_of_zero_differential (L : CochainComplex (ModuleCat.{u} K) ℤ) :
-    ∃ (H : CochainComplex (ModuleCat.{u} K) ℤ) (φ : H ⟶ L), QuasiIso φ ∧
+omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
+/-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the
+complex of its cohomology modules with zero differential: a choice of sections of the
+surjections `Z^i(L) ↠ H^i(L)` defines a quasi-isomorphism from the latter to `L`. -/
+private theorem exists_quasiIso_of_zero_differential [IsSemisimpleRing R]
+    (L : CochainComplex (ModuleCat.{u} R) ℤ) :
+    ∃ (H : CochainComplex (ModuleCat.{u} R) ℤ) (φ : H ⟶ L), QuasiIso φ ∧ (∀ i j, H.d i j = 0) ∧
       ∀ i, Nonempty (H.X i ≅ L.homology i) := by
   have hs : ∀ i, ∃ s : L.homology i ⟶ L.cycles i, s ≫ L.homologyπ i = 𝟙 _ := fun i ↦ by
     have hπ : Function.Surjective (L.homologyπ i).hom :=
       (ModuleCat.epi_iff_surjective _).1 inferInstance
-    obtain ⟨g, hg⟩ := (L.homologyπ i).hom.exists_rightInverse_of_surjective
-      (LinearMap.range_eq_top.2 hπ)
+    have := Module.projective_of_isSemisimpleRing R (L.homology i)
+    obtain ⟨g, hg⟩ := Module.projective_lifting_property (L.homologyπ i).hom LinearMap.id hπ
     exact ⟨ModuleCat.ofHom g, ModuleCat.hom_ext hg⟩
   choose s hs using hs
-  let H : CochainComplex (ModuleCat.{u} K) ℤ :=
+  let H : CochainComplex (ModuleCat.{u} R) ℤ :=
     { X := fun i ↦ L.homology i
       d := fun _ _ ↦ 0 }
   let φ : H ⟶ L :=
     { f := fun i ↦ s i ≫ L.iCycles i }
-  refine ⟨H, φ, ⟨fun i ↦ ?_⟩, fun i ↦ ⟨Iso.refl _⟩⟩
+  refine ⟨H, φ, ⟨fun i ↦ ?_⟩, fun _ _ ↦ rfl, fun i ↦ ⟨Iso.refl _⟩⟩
   rw [quasiIsoAt_iff_isIso_homologyMap]
   have h₁ := H.isIso_homologyπ (i - 1) i (by simp) rfl
   have h₂ := H.isIso_iCycles i (i + 1) (by simp) rfl
@@ -208,6 +210,10 @@ private theorem exists_quasiIso_of_zero_differential (L : CochainComplex (Module
       Category.assoc, hs, Category.comp_id, IsIso.hom_inv_id_assoc]
   rw [this]
   infer_instance
+
+section Field
+
+variable {K : Type u} [Field K] [HasDerivedCategory.{u} (ModuleCat.{u} K)]
 
 /-- Blueprint `lem-pod-perfect-point-complex-field`: perfect point complexes over a field.
 
@@ -238,7 +244,7 @@ theorem isPerfect_iff (C : DerivedCategory (ModuleCat.{u} K)) :
   · rintro ⟨⟨a, b, ha, hb⟩, hfin⟩
     let L := Q.objPreimage C
     let eL : Q.obj L ≅ C := Q.objObjPreimageIso C
-    obtain ⟨H, φ, hφ, eH⟩ := exists_quasiIso_of_zero_differential L
+    obtain ⟨H, φ, hφ, -, eH⟩ := exists_quasiIso_of_zero_differential L
     let e : ∀ i, (homologyFunctor (ModuleCat.{u} K) i).obj C ≅ H.X i := fun i ↦
       (homologyFunctor (ModuleCat.{u} K) i).mapIso eL.symm ≪≫ homologyQObjIso L i ≪≫
         (eH i).some.symm
@@ -302,5 +308,89 @@ theorem IsPerfect.isIso_ihomUnitTensorToIhom {C : DerivedCategory (ModuleCat.{u}
   exact MonoidalClosed.isIso_ihomUnitTensorToIhom Cᘁ C D
 
 end Biduality
+
+section CohomologyDual
+
+/-- Blueprint `lem-pod-cohomology-of-dual-over-field`: cohomology of the dual of a finite complex
+over a field.
+
+Over a field `R`, the cohomology of the dual `C^∨ = RHom_R(C, R)` of a complex `C` is the dual
+of the cohomology: `H^{-i}(C^∨) ≅ H^i(C)^∨` for every `i`. The blueprint states this for a
+perfect point complex `C` (a bounded complex of finite-dimensional vector spaces); it holds for
+every `C`. Biduality `C ≅ C^∨∨` for perfect `C`, the other half of the node, is
+`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`.
+
+As in the blueprint, `C` is split: it is quasi-isomorphic to the complex `H` of its cohomology
+spaces with zero differential. The single complex `R[0]` is K-injective, `R` being an injective
+`R`-module, so `C^∨` is computed by the internal hom complex `Hom^•(H, R[0])`, which has zero
+differential and the dual `Hom_R(H^i(C), R)` in degree `-i`.
+
+The field is a commutative ring `R` with `IsField R`, so that the statement applies to the module
+categories of the coefficient rings of the six-functor formalism, which are commutative
+rings. -/
+theorem nonempty_iso_homology_ihom (hR : IsField R) (C : DerivedCategory (ModuleCat.{u} R))
+    (i : ℤ) :
+    Nonempty ((homologyFunctor (ModuleCat.{u} R) (-i)).obj ((ihom C).obj (𝟙_ _)) ≅
+      ModuleCat.of R (Module.Dual R ((homologyFunctor (ModuleCat.{u} R) i).obj C))) := by
+  have : IsSemisimpleRing R := by
+    let := hR.toField
+    infer_instance
+  obtain ⟨H, φ, hφ, hd, eH⟩ := exists_quasiIso_of_zero_differential (Q.objPreimage C)
+  let P := (HomotopyCategory.quotient (ModuleCat.{u} R) (ComplexShape.up ℤ)).obj H
+  -- The unit `R[0]` of `D(R)`, a K-injective complex.
+  let Y := (HomologicalComplex.single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0).obj
+    (ModuleCat.of R R)
+  have hY : ∀ n, n ≠ 0 → IsZero (Y.X n) := fun n hn ↦
+    HomologicalComplex.isZero_single_obj_X _ _ _ _ hn
+  have : ∀ n, Injective (Y.X n) := fun n ↦ by
+    by_cases hn : n = 0
+    · subst hn
+      have := Module.injective_of_isSemisimpleRing R R
+      exact Injective.of_iso (HomologicalComplex.singleObjXSelf _ 0 (ModuleCat.of R R)).symm
+        (Module.injective_object_of_injective_module R R)
+    · exact (hY n hn).injective
+  have : CochainComplex.IsKInjective Y := CochainComplex.isKInjective_of_injective Y 0
+  have : IsIso (Q.map φ) := (isIso_Q_map_iff_quasiIso (C := ModuleCat.{u} R) φ).2 hφ
+  let eC : Qh.obj P ≅ C :=
+    (quotientCompQhIso _).app H ≪≫ asIso (Q.map φ) ≪≫ Q.objObjPreimageIso C
+  let U := (HomotopyCategory.quotient (ModuleCat.{u} R) (ComplexShape.up ℤ)).obj Y
+  -- `C^∨` is computed by the internal hom complex `K = Hom^•(H, R[0])`.
+  let K := CochainComplex.internalHomObj H Y
+  let e₁ : (ihom C).obj (𝟙_ _) ≅ Q.obj K :=
+    (MonoidalClosed.internalHom.mapIso eC.op).app _ ≪≫
+      ((ihom.adjunction (Qh.obj P)).rightAdjointUniq (tensorHomAdjunctionQhObj P)).app _ ≪≫
+      (asIso ((internalHomQhObjUnit P).app U)).symm ≪≫ (quotientCompQhIso _).app K
+  have hK : ∀ a b, K.d a b = 0 := fun a b ↦ by
+    refine CochainComplex.internalHomObj_hom_ext fun p q hpq ↦ ?_
+    rw [zero_comp, CochainComplex.internalHomObj_d_π H Y a b p q hpq (p + a) (q - a) rfl
+      (by lia), hd]
+    simp [Y]
+  let e₂ : K.homology (-i) ≅ K.X (-i) :=
+    (K.isoHomologyπ (-i - 1) (-i) (by simp) (hK _ _)).symm ≪≫
+      K.iCyclesIso (-i) (-i + 1) (by simp) (hK _ _)
+  -- In degree `-i`, the only nonzero factor of `K` is `Hom(H^i, R)`.
+  let j₀ : CochainComplex.HomComplex.Triplet (-i) := ⟨i, 0, by lia⟩
+  let e₃ : K.X (-i) ≅ (ihom (H.X i)).obj (ModuleCat.of R R) :=
+    (by classical exact Pi.isoOfIsZero _ j₀ (fun T hT ↦ by
+      have hq : T.q ≠ 0 := by
+        intro hq
+        apply hT
+        obtain ⟨p, q, hpq⟩ := T
+        simp only at hq
+        subst hq
+        obtain rfl : p = i := by lia
+        rfl
+      exact Functor.map_isZero _ (hY _ hq))) ≪≫
+      (ihom (H.X i)).mapIso
+        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (ModuleCat.of R R))
+  let f : H.X i ≅ (homologyFunctor (ModuleCat.{u} R) i).obj C :=
+    (eH i).some ≪≫ ((homologyFunctorFactors _ i).app _).symm ≪≫
+      (homologyFunctor (ModuleCat.{u} R) i).mapIso (Q.objObjPreimageIso C)
+  exact ⟨(homologyFunctor (ModuleCat.{u} R) (-i)).mapIso e₁ ≪≫
+    (homologyFunctorFactors _ (-i)).app K ≪≫ e₂ ≪≫ e₃ ≪≫
+    (ModuleCat.homLinearEquiv (S := R)).toModuleIso ≪≫
+    (f.symm.toLinearEquiv.dualMap).toModuleIso⟩
+
+end CohomologyDual
 
 end DerivedCategory

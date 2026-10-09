@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
@@ -45,6 +46,8 @@ coefficients `ModuleCat Λ`, where the projection formula is available.
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct` (`sk-def-pairing-data`, `def-sf-cup`): `⌣_c`.
 - `AlgebraicGeometry.Etale.smoothTrace` (`sk-def-pairing-data`): `Tr_o`.
 - `AlgebraicGeometry.Etale.poincarePairing` (`sk-def-pairing`, `def-sf-pairing`): `β_K`.
+- `AlgebraicGeometry.Etale.properPoincarePairing`: `β_K` read through `Ra_! ≅ Ra_*` for proper
+  `a`.
 - `AlgebraicGeometry.Etale.poincarePairingOfTrace`: the pairing
   `Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ T` of a trace `(Ra_! Λ_X)[n] ⟶ T`.
 
@@ -58,6 +61,9 @@ coefficients `ModuleCat Λ`, where the projection formula is available.
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing` (`sk-thm-derived-duality`): at
   finite coefficients, the derived Poincaré pairing of an orientation is perfect for `K`
   dualizable.
+- `AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`
+  (`thm-pod-proper-poincare-duality`): the same for the pairing of a proper morphism read
+  through `Ra_! ≅ Ra_*`.
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`
   (`sk-thm-sf-identification`): over a separably closed field, `β_K` is perfect in the point
   category as soon as the projection formula holds at the shifts `Λ_s[r]`, which detect
@@ -207,6 +213,35 @@ noncomputable def poincarePairing (o : Orientation A a d) (e : (L((a)^*[A])).obj
   (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso (2 * d : ℤ)).hom.app _ ≫
     (poincarePairingEvaluation a o.twist K)⟦(2 * d : ℤ)⟧' ≫
       ((R(a)_![A]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ smoothTrace o e
+
+section Proper
+
+variable [IsProper a]
+
+/-- The derived Poincaré pairing of a proper morphism `a`, read through the identification
+`Ra_! ≅ Ra_*` of `AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`:
+
+`Ra_* K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`,
+
+that is `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`. -/
+noncomputable def properPoincarePairing (o : Orientation A a d)
+    (e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) (K : 𝐃(X, A)) :
+    ((derivedTensor A Y).obj ((R((a)_*[A])).obj K)).obj
+        (((R((a)_*[A])).obj (((derivedTensor A X).obj
+          ((DerivedCategory.coefficientDual A X).obj (op K))).obj o.twist))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
+  (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).inv.app K ▷ _ ≫ poincarePairing a o e K
+
+omit [HasSmallSiteSheafify A] in
+variable {a} in
+/-- If the derived Poincaré pairing of a proper morphism is perfect, so is the pairing
+`AlgebraicGeometry.Etale.properPoincarePairing` read through `Ra_! ≅ Ra_*`. -/
+theorem IsPerfectPairing.properPoincarePairing {o : Orientation A a d}
+    {e : (L((a)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _} {K : 𝐃(X, A)}
+    (h : IsPerfectPairing (poincarePairing a o e K)) :
+    IsPerfectPairing (properPoincarePairing a o e K) :=
+  MonoidalClosed.IsPerfectPairing.whiskerRight_comp h _
+
+end Proper
 
 /-- The *pairing of a trace* `t : (Ra_! Λ_X)[n] ⟶ T`,
 
@@ -395,6 +430,24 @@ theorem isPerfectPairing_poincarePairing (o : Orientation (ModuleCat.{u + 1} Λ)
     IsPerfectPairing (poincarePairing a o e K) :=
   isPerfectPairing_poincarePairing_of_hasProjectionFormula _ a o e hKd fun N ↦
     hasProjectionFormula_of_finite Λ a K N
+
+/-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
+
+For `a` proper, a finite coefficient ring `Λ` and `K` dualizable, the derived Poincaré pairing
+read through `Ra_! ≅ Ra_*`,
+
+`Ra_* K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ Λ_Y`
+
+(`AlgebraicGeometry.Etale.properPoincarePairing`), is perfect. Over `Y = Spec k` this is
+`RΓ(X, K^∨(d))[2d] ≅ RΓ(X, K)^∨`. As for
+`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`, the blueprint hypotheses that the
+exponent of `Λ` is invertible on `Y` and that `K ∈ D^b_{ctf}(X, Λ)` are not needed. -/
+theorem isPerfectPairing_properPoincarePairing [IsProper a]
+    (o : Orientation (ModuleCat.{u + 1} Λ) a d)
+    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) {K : DerivedCategoryModule Λ X}
+    (hKd : IsDualizable K) :
+    IsPerfectPairing (properPoincarePairing a o e K) :=
+  (isPerfectPairing_poincarePairing a Λ o e hKd).properPoincarePairing
 
 end ModuleCat
 

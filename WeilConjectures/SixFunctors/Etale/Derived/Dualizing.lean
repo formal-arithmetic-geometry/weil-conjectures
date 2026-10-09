@@ -38,6 +38,12 @@ coefficient category `A` used throughout this directory, so the statements below
 relatively, for an arbitrary morphism `a : X ⟶ S` carrying a compactification. This is the
 uniform convention of the `SixFunctors` folder; the absolute case is `S = Spec k`.
 
+The statements are for torsion coefficients, finitely generated objects of `A` being finite
+(`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`, which holds for `ModuleCat Λ`
+with `Λ` finite). With coefficients `ℤ` they fail: for the origin `i` of `𝔸¹` in characteristic
+zero, `Ri^!ℤ` has `ℚ/ℤ` in degree `3`, so `𝔻(i_*ℤ)` is not constructible, and
+`𝔻𝔻(i_*ℤ) = i_*Ẑ` is not `i_*ℤ`.
+
 -/
 
 @[expose] public section
@@ -80,6 +86,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 The Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, A)` into itself. -/
 theorem constructibleFiniteTor_verdierDual
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K) :
     DerivedCategory.constructibleFiniteTor A X ((verdierDual A a).obj (op K)) :=
@@ -90,6 +97,7 @@ theorem constructibleFiniteTor_verdierDual
 The Verdier dual is a contravariant anti-equivalence of `Dctf(X, A)`: the double-dual morphism
 `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K` of `Dctf(X, A)`. -/
 theorem nonempty_iso_verdierDual_verdierDual
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K) :
     Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) :=

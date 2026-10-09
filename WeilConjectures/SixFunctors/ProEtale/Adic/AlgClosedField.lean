@@ -73,7 +73,7 @@ theorem IsAdicConstructibleSheaf.isAdicLisseSheaf_of_isField
     {F : AdicSheaf l (Spec (.of K))}
     (hF : IsAdicConstructibleSheaf F) : IsAdicLisseSheaf F := by
   obtain ⟨W, j, hj, ⟨w, -⟩, hW⟩ := hF (IsLocalRing.closedPoint K)
-  obtain ⟨ι, -, Z, i, hi, hcover, h⟩ := hW
+  obtain ⟨ι, -, Z, i, hi, -, hcover, h⟩ := hW
   obtain ⟨k, ⟨z, -⟩, -⟩ := hcover w
   have : Nonempty (Z k) := ⟨z⟩
   have := hi k

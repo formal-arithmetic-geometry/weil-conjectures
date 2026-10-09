@@ -31,7 +31,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   changes cover `V` as soon as the étale morphisms are jointly surjective.
 - `AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`: a sheaf on the small étale
   site has terminal sections over an object whose underlying scheme is empty. This is the
-  sheaf condition for the empty covering.
+  sheaf condition for the empty covering. Hence every sheaf on the small étale site of an
+  empty scheme is zero (`AlgebraicGeometry.Scheme.Etale.isZero_sheaf_of_isEmpty`).
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
@@ -200,6 +201,15 @@ def Etale.isTerminalSectionsOfIsEmpty
     (G : Sheaf X.smallEtaleTopology A) (T : X.Etale) [IsEmpty T.left] :
     IsTerminal (G.obj.obj (op T)) :=
   G.isTerminalOfBotCover T (Etale.bot_mem_smallEtaleTopology T)
+
+/-- On the small étale site of an empty scheme every sheaf with values in a category with a
+zero object is zero: its sections over every object are terminal. -/
+lemma Etale.isZero_sheaf_of_isEmpty [Preadditive A] [HasZeroObject A] [IsEmpty X]
+    (G : Sheaf X.smallEtaleTopology A) : IsZero G := by
+  rw [IsZero.iff_id_eq_zero]
+  ext T
+  have : IsEmpty T.unop.left := ⟨fun x ↦ isEmptyElim (show X from T.unop.hom.base x)⟩
+  exact (Etale.isTerminalSectionsOfIsEmpty G T.unop).isZero.eq_of_src _ _
 
 end EmptyObject
 
