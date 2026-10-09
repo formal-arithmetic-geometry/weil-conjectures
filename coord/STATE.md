@@ -1,5 +1,7 @@
 # STATE
 
+PROTOCOL C READY 661865e (2026-10-09 evening; roles/remote-lead.md, roles/maintainer.md §7, tools/merge_delivery.py; the server accepts pushes to refs/heads/deliver/<group>/<item> only)
+
 READY FOR PUSH 1e4e470 (branch `sheaf-dag`, 2026-10-09 evening; the launcher pushes after every few commits; the whole history was scanned for secrets, see the reply of that date and `coord/ledger.md`).
 
 The current state of the run. Only the launcher and the maintainer write here, each in its own section; everyone else reads it. Each section is rewritten to the present state, never appended to. Questions for the human go to `coord/HUMAN.md`, history to `coord/ledger.md`.
