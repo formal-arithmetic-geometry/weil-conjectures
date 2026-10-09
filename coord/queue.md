@@ -1,8 +1,8 @@
 # Work queue
 
-579 items; claim with `tools/claim.py next <group> [--stage N]`.
+583 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (550)
+## Stage 1: nodes to split (554)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-finite-etale-lifting-approximation` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-complete` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1007 | none |
 | `lem-weil-pbc-graded-module-away-restriction` | 1007 | none |
@@ -21,19 +20,24 @@
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
+| `def-weil-pbc-g-ring` | 1008 | none |
 | `def-weil-pbc-site-cech-complex` | 1008 | none |
 | `def-weil-pbc-special-cocontinuous-functor` | 1008 | none |
+| `lem-weil-pbc-adic-completion-noetherian` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
+| `lem-weil-pbc-complete-pair-henselian` | 1008 | none |
 | `lem-weil-pbc-constructible-field-finite-separable-constant` | 1008 | none |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1008 | none |
 | `lem-weil-pbc-constructible-module-limit-descent` | 1008 | none |
 | `lem-weil-pbc-descend-etale` | 1008 | none |
+| `lem-weil-pbc-descend-finite` | 1008 | none |
 | `lem-weil-pbc-descend-surjective` | 1008 | none |
 | `lem-weil-pbc-etale-free-sheaf-constructible` | 1008 | none |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1008 | none |
 | `lem-weil-pbc-filtered-colimit-categories` | 1008 | none |
+| `lem-weil-pbc-henselian-pair-approximation` | 1008 | none |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1008 | none |
 | `lem-weil-pbc-integral-morphism-limit-of-finite` | 1008 | none |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1008 | none |
@@ -591,7 +595,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 564 nodes that wait for stage 1, 198 nodes that wait for a statement dependency.
+Not open yet: 568 nodes that wait for stage 1, 199 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

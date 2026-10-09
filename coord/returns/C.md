@@ -21,3 +21,7 @@ the '## Review by C' says 'Reviewed by C worker': the worker reviewed its own sp
 ## lem-weil-pbc-finite-etale-etale-local-split (2026-10-09 16:28 UTC, branch head 5a6b699c)
 
 the branch is stacked on the delivery of lem-weil-pbc-finite-etale-trace-exists (its range touches coord/reports/C/lem-weil-pbc-finite-etale-trace-exists.md): rebase this item's single commit onto the current sheaf-dag tip and re-push; the report needs the lead's review against the sources and the cited nodes (SETUP.md decision of 2026-10-10).
+
+## lem-weil-pbc-filtered-colimit-tensor-varying-rings (2026-10-09 16:38 UTC, branch head af47dd6b)
+
+the '## Review by C' is a mechanical check (statement against the unit, steps name dependencies, searches recorded), not the lead's review against the source (Stacks 00DD) and the cited node def-weil-pbc-category-colimit (SETUP.md decision of 2026-10-10, roles/remote-lead.md §4); also the four new nodes carry proof steps while their status is unsplit: a node is either split (its proof reviewed) or unsplit (no proof); put the arguments in the item's steps or make the new nodes proper split items. Re-push one commit with the lead's review.
