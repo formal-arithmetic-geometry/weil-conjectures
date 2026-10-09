@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
 public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
 
@@ -92,6 +93,31 @@ lemma IsAffineOpen.fromSpecFunctionField_eq {X : Scheme.{u}} [IsIntegral X] {W :
   rw [← hW.fromSpecStalk_eq_fromSpecStalk hgen]
   rfl
 
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Over an affine open `W`, the normalization of `C` in `X` is finite étale as soon as the integral
+closure of `Γ(C, W)` in `Γ(X, f⁻¹ W)` is finite étale over `Γ(C, W)`. -/
+lemma isFinite_and_etale_fromNormalization_restrict {X C : Scheme.{u}} (f : X ⟶ C)
+    [QuasiCompact f] [QuasiSeparated f] {W : C.Opens} (hW : IsAffineOpen W)
+    (hfin : letI := (f.app W).hom.toAlgebra
+      Module.Finite Γ(C, W) (integralClosure Γ(C, W) Γ(X, f ⁻¹ᵁ W)))
+    (het : letI := (f.app W).hom.toAlgebra
+      Algebra.Etale Γ(C, W) (integralClosure Γ(C, W) Γ(X, f ⁻¹ᵁ W))) :
+    IsFinite (f.fromNormalization ∣_ W) ∧ Etale (f.fromNormalization ∣_ W) := by
+  let := (f.app W).hom.toAlgebra
+  have : IsAffine W := hW
+  have : IsAffine (f.fromNormalization ⁻¹ᵁ W) := hW.preimage f.fromNormalization
+  have happ := Scheme.Hom.fromNormalization_app f hW
+  constructor
+  · rw [HasAffineProperty.iff_of_isAffine (P := @IsFinite)]
+    refine ⟨inferInstance, ?_⟩
+    rw [morphismRestrict_appTop_iff RingHom.finite_respectsIso, happ]
+    exact (RingHom.finite_respectsIso.cancel_right_isIso (CommRingCat.ofHom (algebraMap _ _))
+      (Scheme.Hom.normalizationObjIso f hW).inv).2 (RingHom.finite_algebraMap.2 hfin)
+  · rw [HasRingHomProperty.iff_of_isAffine (P := @Etale)]
+    rw [morphismRestrict_appTop_iff RingHom.Etale.respectsIso, happ]
+    exact (RingHom.Etale.respectsIso.cancel_right_isIso (CommRingCat.ofHom (algebraMap _ _))
+      (Scheme.Hom.normalizationObjIso f hW).inv).2 (RingHom.etale_algebraMap.2 het)
+
 namespace Scheme.FiniteEtale
 
 variable {C U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] {W : C.Opens}
@@ -166,6 +192,164 @@ theorem exists_pullback_iso_of_fromNormalization (Z : U.FiniteEtale)
     Scheme.Hom.pullbackFromNormalizationIso_hom_comp, pullback.congrHom_hom]
   rw [pullback.lift_snd, Category.comp_id]
   exact pullbackLeftPullbackSndIso_hom_snd pN V.ι jV
+
+section Inertia
+
+variable [IsIntegral C] [Nonempty U]
+
+omit [QuasiCompact j] in
+lemma range_fromSpecFunctionField_subset :
+    Set.range C.fromSpecFunctionField.base ⊆ Set.range j.base := by
+  rintro _ ⟨y, rfl⟩
+  have hy : C.fromSpecFunctionField y = genericPoint C := by
+    have : C.fromSpecFunctionField y ⤳ genericPoint C := by
+      have := Scheme.range_fromSpecStalk (X := C) (x := genericPoint C)
+      have hmem : C.fromSpecFunctionField y ∈ Set.range (C.fromSpecStalk (genericPoint C)).base :=
+        ⟨y, rfl⟩
+      rw [this] at hmem
+      exact hmem
+    exact (this.antisymm ((genericPoint_spec C).specializes (Set.mem_univ _))).eq
+  rw [hy]
+  obtain ⟨u⟩ := (inferInstance : Nonempty U)
+  exact ((genericPoint_spec C).specializes (Set.mem_univ (j u))).mem_open
+    j.isOpenEmbedding.isOpen_range ⟨u, rfl⟩
+
+omit [QuasiCompact j] in
+/-- The generic point `Spec k(C) ⟶ U` of a nonempty open `U` of an integral scheme `C`. -/
+noncomputable def genericPointLift : Spec (.of C.functionField) ⟶ U :=
+  IsOpenImmersion.lift j C.fromSpecFunctionField (range_fromSpecFunctionField_subset j)
+
+omit [QuasiCompact j] in
+@[reassoc (attr := simp)]
+lemma genericPointLift_comp : genericPointLift j ≫ j = C.fromSpecFunctionField :=
+  IsOpenImmersion.lift_fac _ _ _
+
+variable (hW : IsAffineOpen W) [Nonempty W] [IsDedekindDomain Γ(C, W)]
+  (ϖ : Γ(C, W)) (hϖ : ϖ ≠ 0) (hWU : j.opensRange ⊓ W = C.basicOpen ϖ)
+  (m : Ideal Γ(C, W)) [m.IsMaximal] [Finite (Γ(C, W) ⧸ m)]
+  (hϖm : ∀ p : Ideal Γ(C, W), p.IsPrime → ϖ ∈ p → p = m)
+  {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+  [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]
+  (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal] [Q.LiesOver m]
+
+include hW ϖ hϖ hWU m hϖm in
+/-- **The normalization of a cover with trivial inertia is finite étale at the point.** -/
+theorem isFinite_and_etale_restrict_of_forall_inertia (Z : U.FiniteEtale)
+    [IsIntegral Z.obj.left] [ConnectedSpace U]
+    (hZ : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
+        (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+    IsFinite ((Z.obj.hom ≫ j).fromNormalization ∣_ W) ∧
+      Etale ((Z.obj.hom ≫ j).fromNormalization ∣_ W) := by
+  have : IsFinite Z.obj.hom := Z.property
+  have : Etale Z.obj.hom := Z.obj.prop
+  let f := Z.obj.hom ≫ j
+  let A := Γ(Z.obj.left, f ⁻¹ᵁ W)
+  let _ : Algebra Γ(C, W) A := (f.app W).hom.toAlgebra
+  have : IsFractionRing Γ(C, W) C.functionField := functionField_isFractionRing_of_isAffineOpen C W hW
+  -- the open `f⁻¹ W = f⁻¹ D(ϖ)` is affine
+  have hDϖ : C.basicOpen ϖ ≤ j.opensRange := by
+    rw [← hWU]
+    exact inf_le_left
+  have hfW : f ⁻¹ᵁ W = f ⁻¹ᵁ C.basicOpen ϖ := by
+    ext x
+    change f x ∈ W ↔ f x ∈ C.basicOpen ϖ
+    rw [← hWU]
+    have hx : f x ∈ j.opensRange := ⟨Z.obj.hom x, rfl⟩
+    exact ⟨fun h ↦ ⟨hx, h⟩, fun h ↦ h.2⟩
+  have hjD : IsAffineOpen (j ⁻¹ᵁ C.basicOpen ϖ) :=
+    (hW.basicOpen ϖ).preimage_of_isOpenImmersion j hDϖ
+  have hV : IsAffineOpen (f ⁻¹ᵁ W) := by
+    rw [hfW]
+    exact hjD.preimage Z.obj.hom
+  -- `R' = Γ(C, D(ϖ))`, over which `A` is finite étale
+  let R' := Γ(C, C.basicOpen ϖ)
+  let _ : Algebra Γ(C, W) R' :=
+    (C.presheaf.map (homOfLE (C.basicOpen_le ϖ)).op).hom.toAlgebra
+  have : IsLocalization.Away ϖ R' :=
+    hW.isLocalization_of_eq_basicOpen ϖ (homOfLE (C.basicOpen_le ϖ)) rfl
+  let _ : Algebra R' A := (f.appLE (C.basicOpen ϖ) (f ⁻¹ᵁ W) hfW.le).hom.toAlgebra
+  have : IsScalarTower Γ(C, W) R' A := IsScalarTower.of_algebraMap_eq fun r ↦ by
+    change (f.app W) r = (f.appLE _ _ hfW.le) ((C.presheaf.map _) r)
+    rw [← CommRingCat.comp_apply, Scheme.Hom.map_appLE, Scheme.Hom.app_eq_appLE]
+  have : Algebra.Etale R' A := by
+    rw [← RingHom.etale_algebraMap]
+    exact HasRingHomProperty.appLE (P := @Etale) f inferInstance ⟨_, hW.basicOpen ϖ⟩ ⟨_, hV⟩
+      hfW.le
+  have : Module.Finite R' A := by
+    rw [← RingHom.finite_algebraMap]
+    change (f.appLE (C.basicOpen ϖ) (f ⁻¹ᵁ W) hfW.le).hom.Finite
+    have : IsIso (j.app (C.basicOpen ϖ)) := Scheme.Hom.isIso_app j _ hDϖ
+    rw [Scheme.Hom.comp_appLE, CommRingCat.hom_comp]
+    refine RingHom.Finite.comp ?_ (RingHom.Finite.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (j.app (C.basicOpen ϖ))).2)
+    have hi : Z.obj.hom ⁻¹ᵁ (j ⁻¹ᵁ C.basicOpen ϖ) = f ⁻¹ᵁ W := by
+      rw [hfW]
+      rfl
+    have h2 : Z.obj.hom.appLE (j ⁻¹ᵁ C.basicOpen ϖ) (f ⁻¹ᵁ W) hi.ge =
+        Z.obj.hom.app _ ≫ Z.obj.left.presheaf.map (eqToHom hi.symm).op := by
+      change Z.obj.hom.app _ ≫ Z.obj.left.presheaf.map _ = _
+      congr 2
+    rw [h2, CommRingCat.hom_comp]
+    refine RingHom.Finite.comp (RingHom.Finite.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (Z.obj.left.presheaf.map (eqToHom hi.symm).op)).2) ?_
+    exact IsFinite.finite_app Z.obj.hom _ hjD
+  -- the generic geometric point factors through `W`
+  have hgen : pointOfAlgebra Ω (genericPointLift j) ≫ j =
+      Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) Ω)) ≫ hW.fromSpec := by
+    rw [Category.assoc, genericPointLift_comp, hW.fromSpecFunctionField_eq, ← Category.assoc,
+      ← Spec.map_comp]
+    congr 2
+    ext r
+    exact (IsScalarTower.algebraMap_apply Γ(C, W) C.functionField Ω r).symm
+  -- `Γ(C, W)`-algebra maps `A → Ω` give points of `Z` over the generic geometric point
+  have hpt (ψ : A →ₐ[Γ(C, W)] Ω) :
+      (Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ hV.fromSpec) ≫ Z.obj.hom =
+        pointOfAlgebra Ω (genericPointLift j) := by
+    rw [← cancel_mono j, hgen, Category.assoc, Category.assoc]
+    change Spec.map _ ≫ hV.fromSpec ≫ f = _
+    rw [← IsAffineOpen.SpecMap_appLE_fromSpec f hW hV le_rfl, ← Category.assoc, ← Spec.map_comp]
+    congr 2
+    ext a
+    change ψ ((f.appLE W (f ⁻¹ᵁ W) le_rfl) a) = _
+    rw [Scheme.Hom.appLE_eq_app]
+    exact ψ.commutes a
+  obtain ⟨t₀⟩ := nonempty_fiber_of_nonempty (pointOfAlgebra Ω (genericPointLift j)) Z
+    inferInstance
+  have ht₀ : t₀.left ≫ f = Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) Ω)) ≫ hW.fromSpec := by
+    rw [← hgen]
+    exact (Category.assoc _ _ _).symm.trans (congrArg (· ≫ j) (fiber_left_comp _ t₀))
+  have hrange (y : Spec (.of Ω)) : t₀.left y ∈ f ⁻¹ᵁ W := by
+    change (t₀.left ≫ f) y ∈ W
+    rw [ht₀, Scheme.Hom.comp_apply, ← SetLike.mem_coe, ← hW.range_fromSpec]
+    exact Set.mem_range_self _
+  obtain ⟨y₀⟩ := (inferInstance : Nonempty (Spec (.of Ω)))
+  have : Nonempty (f ⁻¹ᵁ W) := ⟨⟨t₀.left y₀, hrange y₀⟩⟩
+  obtain ⟨φ₀, hφ₀⟩ := hV.exists_specMap_comp_fromSpec t₀.left (by rintro _ ⟨y, rfl⟩; exact hrange y)
+  have hφ₀R : f.app W ≫ φ₀ = CommRingCat.ofHom (algebraMap Γ(C, W) Ω) := by
+    apply Spec.map_injective
+    rw [← cancel_mono hW.fromSpec, ← ht₀, ← hφ₀, Spec.map_comp, Category.assoc,
+      Scheme.Hom.app_eq_appLE, IsAffineOpen.SpecMap_appLE_fromSpec f hW hV le_rfl]
+    exact (Category.assoc _ _ _).symm
+  let ψ₀ : A →ₐ[Γ(C, W)] Ω :=
+    { φ₀.hom with commutes' := fun r ↦ RingHom.congr_fun (congrArg CommRingCat.Hom.hom hφ₀R) r }
+  -- inertia fixes the ring maps `A → Ω`
+  have hI : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω), ∀ (ψ : A →ₐ[Γ(C, W)] Ω) (x : A),
+      σ (ψ x) = ψ x := by
+    intro σ hσ ψ x
+    let t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z :=
+      Over.homMk (Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ hV.fromSpec) (hpt ψ)
+    have h := congrArg Over.Hom.left (hZ σ hσ t)
+    rw [galoisToAut_hom_app_left] at h
+    change Spec.map _ ≫ Spec.map _ ≫ hV.fromSpec = Spec.map _ ≫ hV.fromSpec at h
+    rw [← Category.assoc, ← Spec.map_comp, cancel_mono] at h
+    have := Spec.map_injective h
+    exact RingHom.congr_fun (congrArg CommRingCat.Hom.hom this) x
+  obtain ⟨het, hfin⟩ := Ideal.etale_integralClosure_of_forall_inertia (K := C.functionField) m Q ϖ
+    (R' := R') hϖ hϖm ψ₀ hI
+  exact isFinite_and_etale_fromNormalization_restrict f hW hfin het
+
+end Inertia
 
 end Scheme.FiniteEtale
 
