@@ -524,3 +524,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of E1: lem-weil-pbc-descend-separated returned (83346b09b): Third delivery (head 83346b09): the corrections asked for are made and the group review is present; one citation gap remains. Step 1 says 'the diagonal Delta_{f
 - 21:58 UTC (2026-10-09) — Returned E1 descend-separated a third time (head 83346b09; only the 01KJ citation missing now).
 - 22:00 UTC (2026-10-09) — Reviewed and committed etale-graph-section-extension-map (no new node).
+- 22:01 UTC (2026-10-09) — Reviewed and committed etale-shriek-base-change-modules (03S6; 2 new nodes; tool use recorded; statement's map direction changed to the conjugate's). Launched a worker on polynomial-complete-local-formal-fibres (07PV paragraphs 2-5).

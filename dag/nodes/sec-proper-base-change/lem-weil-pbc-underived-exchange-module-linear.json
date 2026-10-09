@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-underived-exchange-module-linear",
+ "kind": "statement",
+ "title": "The underived exchange morphism is linear on sheaves of modules",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y,\n \\end{array}\n$$\nlet $\\Lambda$ be a commutative ring and, for a scheme $T$, let $\\Mod(T_{\\Et},\\Lambda)$ be the category of sheaves of $\\Lambda_T$-modules on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. For $u\\in\\{f,f',g,g'\\}$ let $u^{-1}:\\Mod(\\mathrm{target}_{\\Et},\\Lambda)\\to\\Mod(\\mathrm{source}_{\\Et},\\Lambda)$ be the inverse image of sheaves of modules and $u_*$ the direct image of sheaves of modules, $u^{-1}\\dashv u_*$ [prop-weil-pbc-inverse-image-modules-exact]; on underlying abelian sheaves they are the inverse image [def-weil-pbc-inverse-image] and the direct image [def-weil-pbc-direct-image] of abelian sheaves. For $G\\in\\Mod(X_{\\Et},\\Lambda)$ let $\\Ex^0_{\\square,G}:g^{-1}f_*G\\to f'_*g'^{-1}G$ be the underived exchange morphism [def-weil-pbc-underived-exchange] of the underlying abelian sheaf of $G$. Then $\\Ex^0_{\\square,G}$ is $\\Lambda_{Y'}$-linear for the module structures of $g^{-1}f_*G$ and $f'_*g'^{-1}G$ given by [prop-weil-pbc-inverse-image-modules-exact], i.e. it is a morphism of $\\Mod(Y'_{\\Et},\\Lambda)$. Consequently the morphisms $\\Ex^0_{\\square,G}$, $G\\in\\Mod(X_{\\Et},\\Lambda)$, form a natural transformation $\\Ex^0_\\square:g^{-1}\\circ f_*\\to f'_*\\circ g'^{-1}$ of functors $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Y'_{\\Et},\\Lambda)$ whose underlying morphisms of abelian sheaves are the abelian underived exchange morphisms. (This is what makes the exchange of Stacks Project, Etale Cohomology, proof of Lemma 03S6 (lemma-shriek-base-change), available ``on sheaves of modules''.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof (lines 11506-11514): the identification f'_*(j')^{-1}=j^{-1}f_* used on sheaves of modules; the module form of the exchange morphism of def-weil-pbc-underived-exchange"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exchange morphism g^* f_* → f'_* g'^* is linear for sheaves of modules over constant ring",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous / PushforwardContinuous, Mathlib.AlgebraicGeometry.Modules.Sheaf): pullback/pushforward adjunctions of sheaves of modules, no base change (exchange) morphism of a commutative square of sites or schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change natural transformation between pullback of pushforward and pushforward of pullback for sheaves of modules on a site, compatible with forgetful functor to abelian sheaves",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatTrans_app_val_app: composition of pullbacks and adjunctions only; no exchange morphism of a square",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback, CategoryTheory.CommSq",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'basechange\\|CommSq\\|IsPullback' Mathlib/Algebra/Category/ModuleCat/Sheaf/ Mathlib/AlgebraicGeometry/Modules/; grep -rln 'smallEtaleTopology' Mathlib",
+   "results": "no base change / exchange declaration for sheaves of modules; smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean (the site, no inverse/direct images of module sheaves)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-base-change-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
