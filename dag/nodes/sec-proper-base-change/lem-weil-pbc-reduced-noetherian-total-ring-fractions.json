@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+ "kind": "statement",
+ "title": "The total ring of fractions of a reduced Noetherian ring is a finite product of fields",
+ "statement": "Let $R$ be a reduced Noetherian ring [def-weil-pbc-noetherian-ring] (no nonzero nilpotent elements), let $\\mathfrak q_1,\\dots,\\mathfrak q_t$ be its minimal prime ideals, pairwise distinct (finitely many, [lem-weil-pbc-noetherian-finitely-many-minimal-primes]), and let $S\\subset R$ be the set of nonzerodivisors of $R$, with total ring of fractions $Q(R)=S^{-1}R$. Then: (1) for each $i$ the localization $R_{\\mathfrak q_i}$ [def-weil-pbc-localization-at-prime] is a field, $\\mathfrak q_iR_{\\mathfrak q_i}=0$, so $R_{\\mathfrak q_i}=\\kappa(\\mathfrak q_i)$; (2) $S\\subset R\\setminus\\mathfrak q_i$ for each $i$, so there are unique ring maps $Q(R)\\to R_{\\mathfrak q_i}$ compatible with the maps from $R$, and the induced ring map $Q(R)\\to R_{\\mathfrak q_1}\\times\\cdots\\times R_{\\mathfrak q_t}$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points, line 4612), whose hypothesis 'q_1 u ... u q_t is the set of zerodivisors' holds for reduced R by Lemma Tag 00EW (lemma-reduced-ring-sub-product-fields, (3)); R_q a field for q minimal and R reduced: Lemma Tag 00EU (lemma-minimal-prime-reduced-ring); finiteness of minimal primes: Lemma Tag 00FR. Cited together (02LX and 00FR) in Smoothing Ring Maps, proof of Lemma Tag 07F5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "total ring of fractions of a reduced Noetherian ring is a finite product of fields (localizations at minimal primes)",
+   "results": "PrimeSpectrum.PiLocalization, MaximalSpectrum.PiLocalization (Mathlib.RingTheory.Spectrum.Maximal.Localization), minimalPrimes.finite_of_isNoetherianRing, Ideal.finite_minimalPrimes_of_isNoetherianRing, IsArtinianRing.isField_of_isReduced_of_isLocalRing (Mathlib.RingTheory.Artinian.Ring), instIsFractionRingAtPrimeFractionRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the localization of a reduced Noetherian ring at its non-zero-divisors is isomorphic to the product of the residue fields at its minimal primes",
+   "results": "PrimeSpectrum.piLocalizationToMaximalEquiv, PrimeSpectrum.piLocalizationToMaximal_bijective, MaximalSpectrum.toPiLocalizationEquiv (Mathlib.RingTheory.Spectrum.Prime.Topology: R iso to product of localizations when Spec R is discrete), instIsFractionRingQuotientIdealResidueField, quotMapEquivQuotMapMaximalIdealOfIsLocalization: ingredients (with IsArtinianRing.equivPi) but no statement for the total ring of fractions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization (nonZeroDivisors _) _, IsReduced _, minimalPrimes",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | grep -iE 'reduced|isField|nonZeroDiv|zeroDiv'; grep -rnE 'IsLocalization \\(nonZeroDivisors|FractionRing.*IsReduced|totalRingOfFractions'",
+   "results": "Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, notMem_nonZeroDivisors_of_mem_mem_minimalPrimes (RingTheory/Ideal/MinimalPrime/Localization.lean lines 91, 98: S avoids every minimal prime, part of (2)), isStronglyTranscendental_mk_of_mem_minimalPrimes; IsArtinianRing.equivPi (RingTheory/Artinian/Module.lean: reduced Artinian ring is a product of fields); RingTheory/Ideal/AssociatedPrime/Finiteness.lean line 179 (Noetherian total ring of fractions is semilocal); no isomorphism Q(R) = product of R_{q_i}",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-reduce-to-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,59 @@
+{
+ "id": "def-weil-pbc-strictly-standard-element",
+ "kind": "definition",
+ "title": "Elementary standard and strictly standard elements",
+ "statement": "Let $R\\to A$ be a ring map of finite presentation and $a\\in A$. For a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ (an isomorphism of $R$-algebras, $f_j\\in R[x_1,\\dots,x_n]$), write $\\partial f_j/\\partial x_i$ for the formal partial derivatives and also for their images in $A$. (1) $a$ is *elementary standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and an integer $0\\le c\\le\\min(n,m)$ such that $a=a'\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ in $A$ for some $a'\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$ (here $a$ stands for any lift of $a$ to $R[x_1,\\dots,x_n]$; the condition does not depend on the lift since $(f_1,\\dots,f_m)\\cdot f_{c+j}\\subset(f_1,\\dots,f_m)^2$). (2) $a$ is *strictly standard in $A$ over $R$* if there are a presentation $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and $0\\le c\\le\\min(n,m)$ such that $a=\\sum_{I\\subset\\{1,\\dots,n\\},\\,|I|=c}a_I\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}$ in $A$ for some $a_I\\in A$, and $a f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ for $j=1,\\dots,m-c$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Definition Tag 07C7 (definition-strictly-standard, line 192), equations (equation-elementary-standard-one/two) and (equation-strictly-standard-one/two); comparison of the notions in Lemma Tag 07EZ (lemma-compare-standard)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strictly standard element determinant of Jacobian minors in a finitely presented algebra",
+   "results": "Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobian_isUnit, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, jacobian_eq_jacobiMatrix_det (Mathlib.RingTheory.Extension.Presentation.Submersive/Core): Jacobians of submersive presentations, where the Jacobian is a unit; no notion of a standard element",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "element a of a finitely presented R-algebra equal to a multiple of a c x c Jacobian minor and a f_{c+j} in (f_1..f_c) + I^2 (elementary standard element, Elkik)",
+   "results": "Algebra.SubmersivePresentation.jacobianRelations, exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, ofHasCoeffs, jacobianRelationsOfHasCoeffs, invJacobianOfHasCoeffs (Mathlib.RingTheory.Extension.Presentation.Core): submersive presentations only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'strictly standard|elementary standard|strictlyStandard|elementaryStandard|popescu' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rnE 'ind.*Smooth|Smooth.*ind |IsLocalization \\(nonZeroDivisors|FractionRing.*IsReduced|totalRingOfFractions' in RingTheory, Algebra, CategoryTheory/ObjectProperty",
+   "results": "only CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean (Gabriel-Popescu embedding, unrelated) and RingTheory/Localization/FractionRing.lean:54 (definition of IsFractionRing); no strictly/elementary standard elements, no statement about filtered colimits of smooth algebras; RingTheory/Smooth/ (Basic, Locus, Pi, NoetherianDescent, StandardSmooth*) read by file list",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-reduce-to-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
