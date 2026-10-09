@@ -112,6 +112,57 @@ theorem exists_mono_acyclic_of_nsmul_eq_zero {n : ℕ} (hn : n ≠ 0)
       Sheaf.subsingleton_H_kernel_nsmul_of_injective.{_, u + 1, u, u + 1} (P.obj I) hn q
     exact ((Sheaf.functorH _ (q + 1)).mapIso e).addCommGroupIsoToAddEquiv.toEquiv.subsingleton
 
+open Opposite in
+/-- **Lifting sections along an epimorphism.** Let `0 → S.X₁ → S.X₂ → S.X₃ → 0` be a short exact
+sequence of abelian étale sheaves on `X` and `W` an étale `X`-scheme such that the restriction of
+`S.X₁` to `W` has no `H¹`. Then every section of `S.X₃` over `W` lifts to `S.X₂`: on the small
+étale site of `W` this is the long exact cohomology sequence in degree zero. -/
+theorem surjective_app_of_subsingleton_H_one
+    {S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})} (hS : S.ShortExact)
+    (W : X.Etale) [Subsingleton (Sheaf.H ((W.hom)^*[AddCommGrpCat.{u + 1}].obj S.X₁) 1)] :
+    Function.Surjective (S.g.hom.app (op W)) := by
+  have h : AlgebraicGeometry.Etale W.hom := W.prop
+  let P := (W.hom)^*[AddCommGrpCat.{u + 1}]
+  have hS' := hS.map_of_exact P
+  have hT := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale W.left
+  -- surjectivity over the terminal object of the small étale site of `W`
+  have h₁ : Function.Surjective ((P.map S.g).hom.app (op (MorphismProperty.Over.mk ⊤
+      (𝟙 W.left) (MorphismProperty.ContainsIdentities.id_mem _)))) := by
+    intro y
+    have : y ∈ ((S.map P).g.hom.app (op _)).hom.range := by
+      rw [← Sheaf.H.ker_δ hS' hT, AddMonoidHom.mem_ker]
+      exact Subsingleton.elim (h := (inferInstance :
+        Subsingleton (Sheaf.H ((W.hom)^*[AddCommGrpCat.{u + 1}].obj S.X₁) 1))) _ _
+    exact this
+  -- transport along `W.hom^* ≅ localizationRestriction` and the isomorphism of objects
+  let e := Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom h
+  let O := (MorphismProperty.Over.map ⊤ h).obj (MorphismProperty.Over.mk ⊤ (𝟙 W.left)
+    (MorphismProperty.ContainsIdentities.id_mem _))
+  have h₂ : Function.Surjective (S.g.hom.app (op O)) := by
+    intro y
+    obtain ⟨x, hx⟩ := h₁ ((e.inv.app S.X₃).hom.app (op _) y)
+    refine ⟨(e.hom.app S.X₂).hom.app (op _) x, ?_⟩
+    have := congrArg (fun φ ↦ φ.hom.app (op (MorphismProperty.Over.mk ⊤ (𝟙 W.left)
+      (MorphismProperty.ContainsIdentities.id_mem _)))) (e.hom.naturality S.g)
+    rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+      NatTrans.comp_app, NatTrans.comp_app] at this
+    have h' := congrArg (fun f ↦ f x) (congrArg ConcreteCategory.hom this)
+    simp only [ConcreteCategory.comp_apply] at h'
+    rw [Etale.localizationRestriction_map_hom_app] at h'
+    erw [← h', hx]
+    change ((e.inv ≫ e.hom).app S.X₃).hom.app _ y = y
+    rw [e.inv_hom_id]
+    rfl
+  let i : O ≅ W := MorphismProperty.Over.isoMk (Iso.refl _)
+    (by
+      simp only [Functor.const_obj_obj, Iso.refl_hom, Category.id_comp]
+      exact (Category.id_comp _).symm)
+  intro y
+  obtain ⟨x, hx⟩ := h₂ (S.X₃.obj.map i.hom.op y)
+  refine ⟨S.X₂.obj.map i.inv.op x, ?_⟩
+  rw [NatTrans.naturality_apply, hx, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+    ← op_comp, i.inv_hom_id, op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+
 end Etale
 
 end AlgebraicGeometry

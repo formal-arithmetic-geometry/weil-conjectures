@@ -183,4 +183,30 @@ theorem subsingleton_H_kernel_nsmul_of_injective (I : Sheaf J AddCommGrpCat.{max
 
 end Sheaf
 
+section Shift
+
+variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+  [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
+  {S : ShortComplex (Sheaf J AddCommGrpCat.{w})} (hS : S.ShortExact)
+
+include hS in
+/-- **Dimension shifting.** In a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` of abelian
+sheaves, `Hᵠ⁺¹(S.X₁) = 0` as soon as `Hᵠ(S.X₃) = 0` and `Hᵠ⁺¹(S.X₂) = 0`. -/
+lemma Sheaf.H.subsingleton_X₁_of_shortExact (q : ℕ) [Subsingleton (H S.X₃ q)]
+    [Subsingleton (H S.X₂ (q + 1))] : Subsingleton (H S.X₁ (q + 1)) := by
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x (Subsingleton.elim _ _) rfl
+  rw [Subsingleton.elim y 0, Ext.zero_comp]
+
+include hS in
+/-- **Dimension shifting.** In a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` of abelian
+sheaves, `Hᵠ(S.X₃) = 0` as soon as `Hᵠ(S.X₂) = 0` and `Hᵠ⁺¹(S.X₁) = 0`. -/
+lemma Sheaf.H.subsingleton_X₃_of_shortExact (q : ℕ) [Subsingleton (H S.X₂ q)]
+    [Subsingleton (H S.X₁ (q + 1))] : Subsingleton (H S.X₃ q) := by
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₃ _ hS x rfl (Subsingleton.elim _ _)
+  rw [Subsingleton.elim y 0, Ext.zero_comp]
+
+end Shift
+
 end CategoryTheory

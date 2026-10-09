@@ -194,6 +194,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
@@ -301,6 +302,7 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus

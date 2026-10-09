@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
+public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
@@ -49,21 +50,6 @@ namespace AlgebraicGeometry
 
 open Etale TopologicalSpace Limits
 
-/-- The residue field of a closed point of a scheme locally of finite type over an algebraically
-closed field `k` is algebraically closed: it is a finite extension of `k`. -/
-lemma Scheme.isAlgClosed_residueField_of_isClosed {k : Type u} [Field k] [IsAlgClosed k]
-    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x : X)
-    (hx : IsClosed ({x} : Set X)) : IsAlgClosed (X.residueField x) := by
-  let := (f.residueFieldAlgebraMap x).toAlgebra
-  have := isClosed_singleton_iff_isClosedImmersion.mp hx
-  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
-    (f := X.fromSpecResidueField x ≫ f)).mpr inferInstance
-  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
-  have : Module.Finite k (X.residueField x) := this
-  exact IsAlgClosed.of_ringEquiv k _ (RingEquiv.ofBijective (algebraMap k _)
-    (IsAlgClosed.algebraMap_bijective_of_isIntegral (k := k)))
-
-
 variable {k : Type u} [Field k] [IsAlgClosed k]
 
 /-- An irreducible `T₀` space of dimension at most zero is a single point. -/
@@ -97,7 +83,8 @@ lemma IsCurve.exists_isFinite_isIso_subsingleton_sheafH_two {Z : Scheme.{u}} [Is
     refine ⟨Z.normalization, Z.fromNormalization, this, W, hW, hiso, ?_⟩
     have : Smooth (Z.fromNormalization ≫ g) := Scheme.smooth_fromNormalization_comp g hdim
     have : IsAffine Z.normalization := isAffine_of_isAffineHom Z.fromNormalization
-    have : IsIntegral Z.normalization := inferInstanceAs (IsIntegral Z.fromSpecFunctionField.normalization)
+    have : IsIntegral Z.normalization :=
+      inferInstanceAs (IsIntegral Z.fromSpecFunctionField.normalization)
     have hdim' : topologicalKrullDim Z.normalization = 1 :=
       (Z.topologicalKrullDim_normalization g).trans hdim
     have : IsConnectedCurve (Z.fromNormalization ≫ g) :=
@@ -319,24 +306,6 @@ namespace AlgebraicGeometry.IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- **Vanishing in high degrees.** Let `C` be a curve over an algebraically closed field `k`.
-Then `H^q(C_ét, F) = 0` for `q ≥ 3` and every torsion abelian sheaf `F` on `C_ét`: the étale
-cohomological dimension of a curve over an algebraically closed field is at most two. The
-sharper bound for affine `C` is
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
-(blueprint: `sk-prop-cd`) -/
-@[stacks 03SC "(1)"]
-theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
-    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
-    (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
-  -- Proof sketch: after reducing to a smooth integral curve, the cohomology of `F` is compared
-  -- with that of its pushforward from the generic point. The function field `k(C)` has
-  -- cohomological dimension at most one, because every finite separable extension `L` of
-  -- `k(C)` is `C₁` by Tsen's theorem `IsQuasiAlgClosed.of_trdeg_le_one`, hence has
-  -- `Br(L) = 0` by `IsQuasiAlgClosed.subsingleton_cohomologicalBrauerGroup`. The `p`-primary
-  -- part in characteristic `p` goes through the Artin–Schreier sequence.
-  sorry
-
 /-- **Generic replacement in degrees at least two.** Let `C` be a smooth integral curve over an
 algebraically closed field `k`, with generic point `η : Spec k(C) ⟶ C`, and `F` a torsion étale
 sheaf on `C`. Then the unit `F ⟶ η_* η^* F` induces isomorphisms `Hᵠ(C, F) ≅ Hᵠ(C, η_* η^* F)` for
@@ -381,6 +350,72 @@ namespace IsConnectedCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
+/-- **Second cohomology of a smooth affine curve.** Let `C` be a smooth affine connected curve
+over an algebraically closed field `k`. Then `H²(C_ét, F) = 0` for every torsion abelian sheaf
+`F` on `C_ét`: `H²(C, F) ≅ H²(C, η_* η^* F)` for the generic point `η` of `C`
+(`AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField`), and the latter
+vanishes by `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`. -/
+theorem subsingleton_sheafH_two_of_isAffine_of_smooth (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] [IsAffine C]
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
+    Subsingleton (Sheaf.H F 2) := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  have := IsCurve.isIso_functorH_map_unit_fromSpecFunctionField f F hF 2 le_rfl
+  let ε := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} C.fromSpecFunctionField).unit
+  have : Subsingleton ((Sheaf.functorH _ 2).obj ((Etale.upperStar AddCommGrpCat.{u + 1}
+      C.fromSpecFunctionField ⋙ Etale.lowerStar AddCommGrpCat.{u + 1}
+        C.fromSpecFunctionField).obj F)) :=
+    subsingleton_sheafH_two_lowerStar f _ (Etale.isTorsion_upperStar C.fromSpecFunctionField hF)
+  exact (asIso ((Sheaf.functorH _ 2).map (ε.app F))).addCommGroupIsoToAddEquiv.subsingleton
+
+end IsConnectedCurve
+
+namespace IsCurve
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+
+/-- **Second cohomology of an affine curve.** Let `C` be an affine curve over an algebraically
+closed field `k`. Then `H²(C_ét, F) = 0` for every torsion abelian sheaf `F`: this reduces
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`) to smooth affine
+connected curves, where it is
+`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth`. -/
+theorem subsingleton_sheafH_two_of_isAffine (f : C ⟶ Spec (.of k)) [IsCurve f] [IsAffine C]
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
+    Subsingleton (Sheaf.H F 2) :=
+  subsingleton_sheafH_two_of_isAffine_of_forall f F hF fun _ f' _ _ _ F' hF' ↦
+    IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth f' F' hF'
+
+/-- **Vanishing in high degrees.** Let `C` be a curve over an algebraically closed field `k`.
+Then `H^q(C_ét, F) = 0` for `q ≥ 3` and every torsion abelian sheaf `F` on `C_ét`: the étale
+cohomological dimension of a curve over an algebraically closed field is at most two. The
+sharper bound for affine `C` is
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
+
+The proof compares `C` with an affine open `U` whose complement is a finite set of closed
+points and uses only the vanishing of `H²` on affine curves
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine`): by dimension shifting
+through acyclic envelopes of sheaves killed by an integer, the higher direct images of
+`U ⟶ C` in degrees at least two do not contribute
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall`).
+(blueprint: `sk-prop-cd`) -/
+@[stacks 03SC "(1)"]
+theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
+    (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
+  subsingleton_sheafH_of_three_le_of_forall f
+    (fun _ f' _ _ F' hF' ↦ subsingleton_sheafH_two_of_isAffine f' F' hF') F hF q hq
+
+end IsCurve
+
+namespace IsConnectedCurve
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+
 /-- **Cohomological dimension of a smooth affine curve.** Let `C` be a smooth affine connected
 curve over an algebraically closed field `k`. Then `H^q(C_ét, F) = 0` for `q ≥ 2` and every
 torsion abelian sheaf `F` on `C_ét`.
@@ -395,19 +430,7 @@ theorem subsingleton_sheafH_of_two_le_of_isAffine_of_smooth (f : C ⟶ Spec (.of
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 2 ≤ q) : Subsingleton (Sheaf.H F q) := by
   obtain rfl | hq := hq.eq_or_lt
-  · have := IsConnectedCurve.connectedSpace' f
-    have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-    have : IsRegular C := IsRegular.of_smooth f
-    have : IrreducibleSpace C := IsRegular.irreducibleSpace C
-    have : IsReduced C := isReduced_of_isReduced_stalk C
-    have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
-    have := IsCurve.isIso_functorH_map_unit_fromSpecFunctionField f F hF 2 le_rfl
-    let ε := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} C.fromSpecFunctionField).unit
-    have : Subsingleton ((Sheaf.functorH _ 2).obj ((Etale.upperStar AddCommGrpCat.{u + 1}
-        C.fromSpecFunctionField ⋙ Etale.lowerStar AddCommGrpCat.{u + 1}
-          C.fromSpecFunctionField).obj F)) :=
-      subsingleton_sheafH_two_lowerStar f _ (Etale.isTorsion_upperStar C.fromSpecFunctionField hF)
-    exact (asIso ((Sheaf.functorH _ 2).map (ε.app F))).addCommGroupIsoToAddEquiv.subsingleton
+  · exact subsingleton_sheafH_two_of_isAffine_of_smooth f F hF
   · exact IsCurve.subsingleton_sheafH_of_three_le f F hF q hq
 
 end IsConnectedCurve
@@ -431,9 +454,7 @@ theorem subsingleton_sheafH_of_two_le_of_isAffine (f : C ⟶ Spec (.of k)) [IsCu
     [IsAffine C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
     (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H F q) := by
   obtain rfl | hq := hq.eq_or_lt
-  · exact subsingleton_sheafH_two_of_isAffine_of_forall f F hF
-      fun _ f' _ _ _ F' hF' ↦
-        IsConnectedCurve.subsingleton_sheafH_of_two_le_of_isAffine_of_smooth f' F' hF' 2 le_rfl
+  · exact subsingleton_sheafH_two_of_isAffine f F hF
   · exact subsingleton_sheafH_of_three_le f F hF q hq
 
 end IsCurve
