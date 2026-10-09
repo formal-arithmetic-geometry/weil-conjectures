@@ -7,10 +7,103 @@
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
   "place": "statement, the display $P_i^\\#(U)=U^{r_i}P_i(U^{-1})\\in\\mathbf Z[U]$ 'is monic' and the convention 'a reciprocal root means a root of $P_i^\\#$; its inverse is the corresponding ordinary root'; ## Proof, 'so the reversed polynomial is monic' (asserted without argument); also literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/_section.md, ## Proof, first sentence"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-field",
+  "def-weil-coefficientwise-extension",
+  "def-weil-polynomial-root"
+ ],
+ "proof": [
+  {
+   "text": "Coefficients of $P^\\#$. By definition $P^\\#(U)=\\sum_{k=0}^rc_kU^{r-k}$; substituting $j=r-k$, the coefficient of $U^j$ in $P^\\#$ is $c_{r-j}$ for $0\\le j\\le r$ and $0$ for $j>r$. (In Mathlib, since $r=\\mathrm{natDegree}\\,P$, $P^\\#$ is `Polynomial.reverse P = reflect P.natDegree P`, and this is `Polynomial.coeff_reverse` / `coeff_reflect` with `revAt r j = r - j` for $j\\le r$.)",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, the display $P_i^\\#(U)=U^{r_i}P_i(U^{-1})\\in\\mathbf Z[U]$ (definition of the reciprocal polynomial); step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  },
+  {
+   "text": "Clause (1). $R$ is not the zero ring, since $c_r\\neq0$; hence $1\\neq0$ in $R$. By step 1 the coefficient of $U^r$ in $P^\\#$ is $c_0=1\\neq0$ and every coefficient of $U^j$ with $j>r$ is $0$, so $\\deg P^\\#=r$ and its leading coefficient is $1$: $P^\\#$ is monic of degree $r$. Also by step 1, $P^\\#(0)$, the coefficient of $U^0$, is $c_{r-0}=c_r$. (Mathlib: $c_0\\neq0$ gives `natTrailingDegree P = 0` by `Polynomial.natTrailingDegree_eq_zero_of_constantCoeff_ne_zero`; then `Polynomial.reverse_natDegree` gives degree $r-0=r$, `Polynomial.reverse_leadingCoeff` with `Polynomial.trailingCoeff_eq_coeff_zero` gives leading coefficient $c_0=1$, and `Polynomial.coeff_zero_reverse` gives $P^\\#(0)=\\mathrm{leadingCoeff}\\,P=c_r$.)",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, 'The reciprocal polynomial $P_i^\\#(U)\\in\\mathbf Z[U]$ is monic'; ## Proof, 'so the reversed polynomial is monic' (asserted without argument there); step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  },
+  {
+   "text": "Clause (2), degree and constant term. The coefficient of $T^k$ in $\\varphi(P)$ is $\\varphi(c_k)$. Since $\\varphi(c_r)\\neq0$ and $\\varphi(c_k)=\\varphi(0)=0$ for $k>r$, $\\deg\\varphi(P)=r$ with leading coefficient $\\varphi(c_r)$; and $\\varphi(P)(0)=\\varphi(c_0)=\\varphi(1)=1$. So $\\varphi(P)$ satisfies the hypotheses of the statement over $K$ (constant term $1$, nonzero coefficient in degree $r=\\deg$), and $(\\varphi(P))^\\#$ is defined with the same $r$. The hypothesis $\\varphi(c_r)\\neq0$ holds for injective $\\varphi$ because $c_r\\neq0$, and for $R=\\mathbf Z$ and $K$ of characteristic $0$ because then $\\varphi$ is injective [lem-weil-integers-injective-char-zero]. (Mathlib: `Polynomial.natDegree_map_of_leadingCoeff_ne_zero`, `Polynomial.leadingCoeff_map_of_leadingCoeff_ne_zero`, `Polynomial.coeff_map`, `map_one`.)",
+   "uses": [
+    "def-weil-coefficientwise-extension",
+    "def-weil-field",
+    "def-weil-polynomial-coefficient",
+    "lem-weil-integers-injective-char-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, the coefficientwise extension $P^{(\\ell)}$ and the passage from $P_i$ to $P_{i,\\ell}=P_i^{(\\ell)}$; step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  },
+  {
+   "text": "Clause (2), extension commutes with $\\#$. By step 1 applied over $R$, the coefficient of $U^j$ in $\\varphi(P^\\#)$ is $\\varphi(c_{r-j})$ for $j\\le r$ and $\\varphi(0)=0$ for $j>r$; by step 1 applied over $K$ to $\\varphi(P)$, whose degree is $r$ and whose coefficients are $\\varphi(c_k)$ (step 3), the coefficient of $U^j$ in $(\\varphi(P))^\\#$ is the same. Hence $\\varphi(P^\\#)=(\\varphi(P))^\\#$. (Mathlib: `Polynomial.reflect_map` at $N=r$ together with `Polynomial.natDegree_map_of_leadingCoeff_ne_zero`; this needs only $\\varphi(c_r)\\neq0$, whereas the source repository's `Polynomial.reverse_map` in WeilConjectures/Mathlib/Algebra/Polynomial/Reverse.lean assumes $\\varphi$ injective; Mathlib has no `reverse_map`.)",
+   "uses": [
+    "def-weil-coefficientwise-extension",
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, $P_i^\\#$ and $P_{i,\\ell}$ (the reciprocal roots of $P_i$ are compared with those of its coefficientwise extensions); step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  },
+  {
+   "text": "Clause (3), values. Let $x\\in K$. By step 4 and step 1, $\\varphi(P^\\#)(x)=\\sum_{k=0}^r\\varphi(c_k)x^{r-k}$. If $x=0$, every term with $k<r$ vanishes and $\\varphi(P^\\#)(0)=\\varphi(c_r)\\neq0$. If $x\\neq0$, $x$ is invertible in the field $K$ and $\\sum_k\\varphi(c_k)x^{r-k}=x^r\\sum_k\\varphi(c_k)(x^{-1})^k=x^r\\,\\varphi(P)(x^{-1})$. (Mathlib: `Polynomial.eval₂_reverse_mul_pow` with `Invertible x⁻¹` from `invertibleOfNonzero`, read with $x^{-1}$ in place of $x$; `Polynomial.coeff_zero_eq_eval_zero` with `Polynomial.coeff_zero_reverse` for $x=0$.)",
+   "uses": [
+    "def-weil-polynomial-root",
+    "def-weil-field",
+    "def-weil-coefficientwise-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, 'A reciprocal root ... means a root of $P_i^\\#(U)=U^{r_i}P_i(U^{-1})$; its inverse $\\beta=\\alpha^{-1}$ is the corresponding ordinary root'; step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  },
+  {
+   "text": "Clause (3), roots. By step 5, $\\varphi(P^\\#)(0)\\neq0$, and for $x\\neq0$, $x^r\\neq0$ in the field $K$, so $\\varphi(P^\\#)(x)=x^r\\varphi(P)(x^{-1})$ is $0$ if and only if $\\varphi(P)(x^{-1})=0$. Hence $\\varphi(P^\\#)(x)=0$ iff $x\\neq0$ and $\\varphi(P)(x^{-1})=0$. Every root $y$ of $\\varphi(P)$ is nonzero because $\\varphi(P)(0)=1$ (step 3), and $x\\mapsto x^{-1}$ is an involution of $K\\setminus\\{0\\}$; so the roots of $\\varphi(P^\\#)$ in $K$ are exactly the inverses of the roots of $\\varphi(P)$ in $K$, all nonzero. (Mathlib: `Polynomial.eval₂_reverse_eq_zero_iff`.)",
+   "uses": [
+    "def-weil-polynomial-root",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, the convention 'a reciprocal root ... its inverse is the corresponding ordinary root'; step written by an agent (no algebra textbook in literature/; WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV); the assertion is the one of literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md, statement and ## Proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-coefficientwise-extension",
+  "def-weil-field",
+  "lem-weil-integers-injective-char-zero",
+  "def-weil-polynomial-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+  "place": "statement (definition of $P_i^\\#$, 'is monic', the reciprocal-root convention) and ## Proof ('so the reversed polynomial is monic', asserted without argument); no algebra textbook is in literature/ (WANTED: S. Lang, Algebra, 3rd ed., GTM 211, Ch. IV, already in the Wanted table of literature/LIST.md), so the proof was written by an agent from the definitions and checked clause by clause against Mathlib's Polynomial.reverse API"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -25,10 +118,17 @@
    "results": "natTrailingDegree_eq_zero : natTrailingDegree p = 0 ↔ p = 0 ∨ coeff p 0 ≠ 0 and natTrailingDegree_eq_zero_of_constantCoeff_ne_zero (Degree/TrailingDegree.lean:141, 428); natDegree_map_of_leadingCoeff_ne_zero (Eval/Degree.lean:180); natDegree_map_eq_of_injective (Degree/Lemmas.lean:293); Monic.map (Monic.lean:56)",
    "date": "2026-10-09",
    "verdict": "no match; supporting lemmas for clauses (1) and (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem coeff_reverse\\|theorem coeff_zero_reverse\\|theorem reverse_natDegree\\|theorem reverse_leadingCoeff\\|theorem reflect_map\\|theorem eval₂_reverse_mul_pow\\|theorem eval₂_reverse_eq_zero_iff\\|def reverse' Mathlib/Algebra/Polynomial/Reverse.lean; grep -n 'trailingCoeff_eq_coeff_zero\\|natTrailingDegree_eq_zero_of_constantCoeff_ne_zero' Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean; grep -n 'leadingCoeff_map_of_leadingCoeff_ne_zero' Mathlib/Algebra/Polynomial/Eval/Degree.lean; grep -rn 'reverse_map\\|map_reverse' Mathlib/Algebra/Polynomial/  (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "reverse f := reflect f.natDegree f (Reverse.lean:218); coeff_reverse (221); coeff_zero_reverse : coeff (reverse f) 0 = leadingCoeff f (225); reverse_natDegree : natDegree - natTrailingDegree (257); reverse_leadingCoeff : = trailingCoeff (260); eval₂_reverse_mul_pow (332); eval₂_reverse_eq_zero_iff [Invertible x] (337); trailingCoeff_eq_coeff_zero (TrailingDegree.lean:154); natTrailingDegree_eq_zero_of_constantCoeff_ne_zero (428); leadingCoeff_map_of_leadingCoeff_ne_zero (Eval/Degree.lean:184); no reverse_map or map_reverse for polynomials in Mathlib (the source repository's reverse_map, WeilConjectures/Mathlib/Algebra/Polynomial/Reverse.lean, assumes f injective and is proved from reflect_map + natDegree_map_eq_of_injective)",
+   "date": "2026-10-09",
+   "verdict": "no match as one declaration; per clause: (1) natTrailingDegree_eq_zero_of_constantCoeff_ne_zero + reverse_natDegree + reverse_leadingCoeff + trailingCoeff_eq_coeff_zero + coeff_zero_reverse; (2) natDegree_map_of_leadingCoeff_ne_zero + reflect_map (no reverse_map in Mathlib); (3) eval₂_reverse_mul_pow / eval₂_reverse_eq_zero_iff with invertibleOfNonzero. Each step of the proof is elementary and cites these; no new node needed"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -46,5 +146,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-reciprocal-polynomial",
+  "worker": "stage1",
+  "summary": "Checked the statement against prop-arithmetic-roots.md (definition of P^#, 'is monic', reciprocal-root convention); it is correct (R is nontrivial because c_r != 0, so 1 != 0 and P^# is monic; edge case r=0 gives P=P^#=1). Wrote a six-step proof: coefficients of P^# (step 1), clause (1) (step 2), degree and constant term of phi(P) incl. the char-0 example via lem-weil-integers-injective-char-zero (step 3), phi(P^#)=phi(P)^# (step 4), the evaluation identity and value at 0 (step 5), the roots (step 6). Every step is elementary and records its Mathlib counterpart: coeff_reverse, natTrailingDegree_eq_zero_of_constantCoeff_ne_zero, reverse_natDegree, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero, coeff_zero_reverse, natDegree_map_of_leadingCoeff_ne_zero, reflect_map, eval₂_reverse_mul_pow, eval₂_reverse_eq_zero_iff. Mathlib has no reverse_map; the source repository's reverse_map needs injectivity, the node's clause (2) needs only phi(c_r) != 0 and follows from reflect_map. stmt_deps set to the five definitions the statement uses. No new nodes. Proof marked agent-written (no algebra textbook in literature/; Lang, Algebra, already wanted)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
