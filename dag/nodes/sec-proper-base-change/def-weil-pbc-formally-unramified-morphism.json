@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-pbc-formally-unramified-morphism",
+ "kind": "definition",
+ "title": "Formally unramified morphism of schemes (at most one infinitesimal lift)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. The morphism $f$ is *formally unramified* if for every first order thickening $T\\subset T'$ of affine schemes over $S$ [def-sbc-first-order-thickening] (so $T'$ is an affine scheme with a given morphism $b:T'\\to S$, $i:T\\to T'$ is the closed immersion with square-zero ideal sheaf, and $T$ is a scheme over $S$ through $b\\circ i$ [def-weil-scheme-over-base]) and every morphism $a:T\\to X$ over $S$ (i.e. $f\\circ a=b\\circ i$) there is at most one morphism $a':T'\\to X$ over $S$ (i.e. $f\\circ a'=b$) with $a'\\circ i=a$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Definition 02H8 (definition-formally-unramified), Section 02H7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes formally unramified: at most one lift along first order thickening of affine schemes",
+   "results": "Algebra.FormallyUnramified.lift_unique, lift_unique', lift_unique_of_ringHom, ext' (RingTheory/Unramified/Basic, ring level); AlgebraicGeometry.FormallyUnramified (Morphisms/FormallyUnramified, affine-locally RingHom.FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "related: Mathlib's scheme notion is affine-local (Omega = 0 on affine opens), not the lifting definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes: two morphisms from a scheme T' agreeing on a closed subscheme defined by a square-zero ideal are equal (formally unramified, lifting property)",
+   "results": "AlgebraicGeometry.FormallyUnramified, formallyUnramified_iff, FormallyUnramified.formallyUnramified_appLE, instHasRingHomPropertyFormallyUnramified (Morphisms/FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "related, same as above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'thickening\\|conormal\\|hom_ext\\|IsStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry (and grep -rn -i 'universal.*thickening' Mathlib/)",
+   "results": "Morphisms/FormallyUnramified.lean: instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f (:79), IsStableUnderBaseChange @FormallyUnramified (:120), FormallyUnramified.hom_ext (:193, Stacks 04F1, at most one lift along a closed immersion with nilpotent ideal sheaf), FormallyUnramified.of_hom_ext (:240, lifting uniqueness on affine square-zero thickenings Spec(R/I) -> Spec R implies FormallyUnramified); no 'conormal' and no universal first order thickening anywhere in Mathlib/AlgebraicGeometry; 'thickening' elsewhere only metric (Topology/MetricSpace/Thickening) and a docstring in RingTheory/Smooth/Basic.lean:329",
+   "date": "2026-10-10",
+   "verdict": "match through the two agreement lemmas hom_ext (:193) and of_hom_ext (:240)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.hom_ext, AlgebraicGeometry.FormallyUnramified.of_hom_ext",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "line": 193,
+  "how": "exact via the two Mathlib agreement lemmas, as def-weil-flat-morphism is matched via Flat.iff_flat_stalkMap: FormallyUnramified f gives the node's uniqueness by FormallyUnramified.hom_ext (:193; i := T -> T' a closed immersion whose ideal sheaf i.ker has square zero, hence IsNilpotent; hig : i ≫ a'_1 = i ≫ a'_2; hgf : a'_1 ≫ f = a'_2 ≫ f = b), even for non-affine T'; conversely the node's condition gives FormallyUnramified f by FormallyUnramified.of_hom_ext (:240), whose hypothesis is the node's condition for the affine thickenings Spec S -> Spec R with R -> S surjective of square-zero kernel"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-unramified-formally-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

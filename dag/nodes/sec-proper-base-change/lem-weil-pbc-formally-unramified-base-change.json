@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-formally-unramified-base-change",
+ "kind": "statement",
+ "title": "Base change of a formally unramified morphism is formally unramified",
+ "statement": "Let $f:X\\to S$ be a formally unramified morphism of schemes [def-weil-pbc-formally-unramified-morphism] and $g:S'\\to S$ any morphism of schemes. Let $X'=X\\times_SS'$ be the fibre product [def-pc-fibre-product] with projection $f':X'\\to S'$. Then $f'$ is formally unramified [def-weil-pbc-formally-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HB (lemma-base-change-formally-unramified)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of formally unramified morphism of schemes is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme (Morphisms/FormallyUnramified:120), RingHom.FormallyUnramified.isStableUnderBaseChange, Algebra.Unramified.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match for Mathlib's notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the base change of a formally unramified morphism of schemes is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, RingHom.FormallyUnramified.isStableUnderBaseChange, FormallyUnramified.of_comp",
+   "date": "2026-10-10",
+   "verdict": "match for Mathlib's notion"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'thickening\\|conormal\\|hom_ext\\|IsStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry (and grep -rn -i 'universal.*thickening' Mathlib/)",
+   "results": "Morphisms/FormallyUnramified.lean: instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f (:79), IsStableUnderBaseChange @FormallyUnramified (:120), FormallyUnramified.hom_ext (:193, Stacks 04F1, at most one lift along a closed immersion with nilpotent ideal sheaf), FormallyUnramified.of_hom_ext (:240, lifting uniqueness on affine square-zero thickenings Spec(R/I) -> Spec R implies FormallyUnramified); no 'conormal' and no universal first order thickening anywhere in Mathlib/AlgebraicGeometry; 'thickening' elsewhere only metric (Topology/MetricSpace/Thickening) and a docstring in RingTheory/Smooth/Basic.lean:329",
+   "date": "2026-10-10",
+   "verdict": "match: of_hom_ext/hom_ext translate the node's notion, :120 base change"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "line": 120,
+  "how": "the node's notion is Mathlib's FormallyUnramified by the match of def-weil-pbc-formally-unramified-morphism (hom_ext :193, of_hom_ext :240); MorphismProperty.IsStableUnderBaseChange @FormallyUnramified (:120) applied to the pullback square gives FormallyUnramified (pullback.snd f g)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-unramified-formally-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

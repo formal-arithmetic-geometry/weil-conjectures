@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-unramified-formally-unramified",
+ "kind": "statement",
+ "title": "Unramified morphisms are formally unramified",
+ "statement": "Let $f:X\\to S$ be an unramified morphism of schemes [def-weil-unramified-morphism]. Then $f$ is formally unramified [def-weil-pbc-formally-unramified-morphism]. More precisely, for every first order thickening $T\\subset T'$ over $S$ [def-sbc-first-order-thickening], affine or not, with closed immersion $i:T\\to T'$ and structure morphism $b:T'\\to S$, and any two morphisms $a'_1,a'_2:T'\\to X$ with $f\\circ a'_1=f\\circ a'_2=b$ and $a'_1\\circ i=a'_2\\circ i$, one has $a'_1=a'_2$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HE (lemma-unramified-formally-unramified), (1) implies (2); the non-affine form is Lemma 04F1 (lemma-formally-unramified-not-affine)"
+ },
+ "stmt_deps": [
+  "def-weil-unramified-morphism",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unramified morphism of schemes is formally unramified, uniqueness of infinitesimal lifts",
+   "results": "AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.Unramified.formallyUnramified (RingTheory/Unramified/Basic)",
+   "date": "2026-10-10",
+   "verdict": "related"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the diagonal of a morphism of schemes is an open immersion then the morphism is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme (Morphisms/FormallyUnramified:79), FormallyUnramified.isOpenImmersion_diagonal (:126)",
+   "date": "2026-10-10",
+   "verdict": "match for the first half"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsOpenImmersion",
+   "results": "FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, FormallyUnramified.isOpenImmersion_diagonal (Morphisms/FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "match for the first half"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'thickening\\|conormal\\|hom_ext\\|IsStableUnderBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry (and grep -rn -i 'universal.*thickening' Mathlib/)",
+   "results": "Morphisms/FormallyUnramified.lean: instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f (:79), IsStableUnderBaseChange @FormallyUnramified (:120), FormallyUnramified.hom_ext (:193, Stacks 04F1, at most one lift along a closed immersion with nilpotent ideal sheaf), FormallyUnramified.of_hom_ext (:240, lifting uniqueness on affine square-zero thickenings Spec(R/I) -> Spec R implies FormallyUnramified); no 'conormal' and no universal first order thickening anywhere in Mathlib/AlgebraicGeometry; 'thickening' elsewhere only metric (Topology/MetricSpace/Thickening) and a docstring in RingTheory/Smooth/Basic.lean:329",
+   "date": "2026-10-10",
+   "verdict": "match: instance :79 then hom_ext :193"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.hom_ext",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "line": 79,
+  "how": "two Mathlib lemmas, one per clause: def-weil-unramified-morphism is LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f); the instance at :79 gives FormallyUnramified f from the open-immersion diagonal; FormallyUnramified.hom_ext (:193) with i : T ⟶ T' (IsClosedImmersion, ideal sheaf i.ker of square zero hence nilpotent), hig : i ≫ a'_1 = i ≫ a'_2 and hgf : a'_1 ≫ f = a'_2 ≫ f gives a'_1 = a'_2, for every thickening, affine or not"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-unramified-formally-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

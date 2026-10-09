@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-flat-morphism-base-change",
+ "kind": "statement",
+ "title": "Base change of a flat morphism of schemes is flat",
+ "statement": "Let $f:X\\to S$ be a flat morphism of schemes [def-weil-flat-morphism] and $g:S'\\to S$ any morphism of schemes. Let $X'=X\\times_SS'$ be the fibre product [def-pc-fibre-product] with projection $f':X'\\to S'$. Then $f'$ is flat [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01U9 (morphisms-lemma-base-change-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a flat morphism of schemes is flat",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange (Morphisms/Flat:81), RingHom.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd _ _)",
+   "results": "AlgebraicGeometry.Flat.instSndScheme (Morphisms/Flat:89)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conormal sheaf pulled back along a flat morphism is the conormal sheaf of the base change",
+   "results": "AlgebraicGeometry.Flat.instSndScheme, Flat.instFstScheme, Flat.isStableUnderBaseChange (Morphisms/Flat)",
+   "date": "2026-10-10",
+   "verdict": "match for flat base change"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsStableUnderBaseChange\\|instance.*pullback' Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "results": "Flat.lean:81 instance isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @Flat; :85 Flat (pullback.fst f g) from Flat g; :89 Flat (pullback.snd f g) from Flat f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+  "line": 81,
+  "how": "exact: def-weil-flat-morphism is AlgebraicGeometry.Flat; the instance at :89 (Flat f gives Flat (pullback.snd f g)) is the node for f' = pullback.snd f g, and :85 the symmetric projection"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-unramified-formally-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
