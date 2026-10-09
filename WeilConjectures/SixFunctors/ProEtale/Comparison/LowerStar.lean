@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
@@ -206,12 +207,5 @@ theorem isIso_lowerStarComparisonUpperStarBaseChange [QuasiCompact f] [QuasiSepa
       inferInstanceAs (IsIso ((sheafToPresheaf (V.smallEtaleTopology) A).map
         ((comparisonLowerStar A V).map ((lowerStarComparisonUpperStarBaseChange f A).app F))))
     exact (NatTrans.isIso_iff_isIso_app _).1 this (op (K.obj j))
-
-/-- For `f` quasi-compact and quasi-separated, the comparison pullback `ν_U^* I` of an injective
-étale sheaf is acyclic for the pro-étale direct image `f_*`. -/
-theorem rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective [QuasiCompact f]
-    [QuasiSeparated f] (I : Sheaf U.smallEtaleTopology A) [Injective I] :
-    (ProEtale.lowerStar A f).rightAcyclic ((comparisonUpperStar A U).obj I) :=
-  sorry
 
 end AlgebraicGeometry.ProEtale

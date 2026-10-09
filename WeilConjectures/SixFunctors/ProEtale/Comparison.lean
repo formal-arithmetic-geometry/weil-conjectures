@@ -96,7 +96,7 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
   have := isIso_lowerStarComparisonUpperStarBaseChange u A
   have := Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
     (asIso (lowerStarComparisonUpperStarBaseChange u A))
-    (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective u A I)
+    (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A u I)
   ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
     (asIso (lowerStarComparisonUpperStarBaseChange u A)))⟩
 
