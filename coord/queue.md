@@ -1,12 +1,11 @@
 # Work queue
 
-559 items; claim with `tools/claim.py next <group> [--stage N]`.
+563 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (543)
+## Stage 1: nodes to split (547)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-etale-underived-exchange-restriction` | 1004 | none |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1004 | none |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1004 | none |
 | `lem-weil-pbc-p1-power-affine-charts` | 1004 | none |
@@ -40,6 +39,11 @@
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
+| `lem-weil-pbc-invertible-pullback-invertible` | 1005 | none |
+| `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
+| `lem-weil-pbc-module-stalk-pullback` | 1005 | none |
+| `lem-weil-pbc-module-stalk-tensor` | 1005 | none |
+| `lem-weil-pbc-module-tensor-symmetric-monoidal` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
@@ -133,6 +137,7 @@
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `thm-galois-lc-etale` | 3005 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3005 | none |
+| `def-pc-morphism-conventions` | 3006 | none |
 | `def-sc-function-field` | 3006 | none |
 | `def-sc-kummer-sequence` | 3006 | rests_on_sorry |
 | `def-sc-mu-trivialization` | 3006 | none |
@@ -149,6 +154,7 @@
 | `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
 | `thm-av-final` | 3006 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3006 | rests_on_sorry |
+| `def-pc-projective-morphism` | 3007 | none |
 | `def-pc-smooth-projective-curve` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-sc-effective-cartier-divisor` | 3007 | none |
@@ -179,7 +185,6 @@
 | `def-pc-divisor-line-bundle` | 3008 | none |
 | `def-pc-euler-characteristic` | 3008 | none |
 | `def-pc-picard-presheaf` | 3008 | none |
-| `def-pc-projective-morphism` | 3008 | none |
 | `def-sc-etale-qcoherent-module` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-pc-degree-base-change` | 3008 | none |
@@ -195,7 +200,6 @@
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-torsor-h1` | 3008 | none |
 | `def-exc-continuous-cohomology` | 3009 | none |
-| `def-pc-morphism-conventions` | 3009 | none |
 | `lem-pc-ample-positive-degree` | 3009 | none |
 | `lem-pc-closed-imm-base-change` | 3009 | none |
 | `lem-pc-dim-base-change` | 3009 | none |
@@ -246,6 +250,7 @@
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
 | `lem-weil-pbc-proper-closed-image` | 4004 | none |
 | `def-sc-normalization` | 4005 | none |
+| `lem-pc-tensor-dual-invertible` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | none |
 | `lem-sc-brauer-zero` | 4006 | none |
 | `lem-sc-compactification` | 4006 | none |
@@ -314,7 +319,6 @@
 | `lem-pc-hilb-smooth` | 4010 | none |
 | `lem-pc-recd-locally-principal` | 4010 | none |
 | `lem-pc-smooth-characterization` | 4010 | none |
-| `lem-pc-tensor-dual-invertible` | 4010 | none |
 | `lem-pc-zero-scheme-properties` | 4010 | rests_on_sorry |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `def-weil-pbc-etale-site` | 5002 | none |
@@ -452,6 +456,7 @@
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
 | `def-pc-representable-functor` | - | none |
+| `def-pur-sheaf-tensor-product` | - | none |
 | `def-sc-field-extension` | - | none |
 | `def-weil-pbc-C1` | - | none |
 | `def-weil-pbc-C2` | - | none |
@@ -536,7 +541,6 @@
 | `lem-weil-pbc-flat-lfp-open` | - | none |
 | `pqf-lem-qf-locqf-qc` | - | none |
 | `def-pc-linear-pair-morphism` | - | none |
-| `def-pur-sheaf-tensor-product` | - | none |
 | `lem-pc-hilb-functorial` | - | none |
 | `lem-pc-linear-pair-morphism-finite` | - | none |
 | `lem-pc-linear-pair-morphism-gluing` | - | none |
@@ -571,7 +575,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 559 nodes that wait for stage 1, 97 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 98 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

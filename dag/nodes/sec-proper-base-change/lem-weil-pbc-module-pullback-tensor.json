@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-module-pullback-tensor",
+ "kind": "statement",
+ "title": "Pullback of modules commutes with tensor products, compatibly with sections",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F,\\mathcal G$ $\\mathcal O_Y$-modules, with pullback $f^*$ [def-pc-module-pullback] and tensor product $\\otimes$ of modules [def-pur-sheaf-tensor-product]. For an open $V\\subseteq Y$ and a section $u\\in\\mathcal H(V)$ of an $\\mathcal O_Y$-module write $f^*u\\in(f^*\\mathcal H)(f^{-1}V)$ for its image under the unit $\\mathcal H\\to f_*f^*\\mathcal H$ of $f^*\\dashv f_*$, and for sections $s,t$ over one open write $s\\otimes t$ for the image of $s\\otimes t$ in the tensor product sheaf. Then there is an isomorphism of $\\mathcal O_X$-modules\n$$f^*(\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G)\\;\\cong\\;f^*\\mathcal F\\otimes_{\\mathcal O_X}f^*\\mathcal G,$$\nnatural in $\\mathcal F$ and $\\mathcal G$, which sends $f^*(s\\otimes t)$ to $f^*s\\otimes f^*t$ for every open $V\\subseteq Y$ and $s\\in\\mathcal F(V)$, $t\\in\\mathcal G(V)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 17.16.4 (Tag 01CD, label lemma-tensor-product-pullback; proof omitted in the source). A proof: the map is adjoint to the $\\mathcal O_Y$-bilinear map $\\mathcal F\\times\\mathcal G\\to f_*(f^*\\mathcal F\\otimes f^*\\mathcal G)$, $(s,t)\\mapsto f^*s\\otimes f^*t$, and is an isomorphism on stalks by Sheaves Tag 0098 and Modules Tag 01CB together with $(A\\otimes_RB)\\otimes_RS\\cong(A\\otimes_RS)\\otimes_S(B\\otimes_RS)$; isomorphisms are detected on stalks (Modules Tag 01AG). Lean (slopmaster2, sorry_here, existence only): AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorObj_iso, WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean lines 62-68"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of tensor product of sheaves of modules is isomorphic to tensor product of pullbacks",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObj_map_tmul",
+   "date": "2026-10-09",
+   "verdict": "no match: no tensor product of sheaves of modules, so no monoidal structure on the pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves of modules along a morphism commutes with tensor product, monoidal functor",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, pullback_assoc, pullbackIso, pullbackComp, pullback_id_comp, pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous/PullbackFree)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, TensorProduct",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MonoidalCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "no hits (the monoidal structure exists only on presheaves of modules, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-invertible-pullback-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
