@@ -533,3 +533,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:04 UTC (2026-10-09) — Merged G1 unramified-etale-local-decomposition (second delivery, head ef045513; 4 new unsplit nodes). Launched a worker on popescu-resolve-char-p (07FJ). Returns open: C1 4, D1 2, E1 2, G1 1.
 - 22:05 UTC (2026-10-09) — Reviewed and committed def-weil-pbc-etale-shriek-base-change-map (definition; no new node).
 - 22:07 UTC (2026-10-09) — Reviewed and committed popescu-final-solve (07EU; 4 new nodes, 2 Mathlib leaves). STATE row.
+- 2026-10-10, delivery of F1: lem-weil-pbc-henselization-flat-quotients returned (f95d65a42): The report (head f95d65a4) lacks the heading '## Review by F1', the group's own review of the split, required by roles/remote-lead.md; the merge tool refuses it
