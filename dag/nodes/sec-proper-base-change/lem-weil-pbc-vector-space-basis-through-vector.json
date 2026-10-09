@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-vector-space-basis-through-vector",
+ "kind": "statement",
+ "title": "A nonzero vector lies in a basis",
+ "statement": "Let $K$ be a field [def-weil-field] and $V$ a $K$-vector space. Every $K$-linearly independent subset $S\\subseteq V$ is contained in a $K$-basis of $V$, i.e. a subset $\\mathcal B\\supseteq S$ that is linearly independent over $K$ and spans $V$. In particular $V$ has a $K$-basis ($S=\\emptyset$), and for every nonzero $v\\in V$ there is a $K$-basis of $V$ containing $v$ ($S=\\{v\\}$, which is linearly independent since $cv=0$ with $c\\neq0$ gives $v=c^{-1}cv=0$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "standard linear algebra (Zorn's lemma), used in the proof of lem-weil-pbc-finite-purely-inseparable-scalar-descent; Mathlib Module.Basis.extend"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a linearly independent set of vectors in a vector space extends to a basis",
+   "results": "Module.Basis.sumExtendIndex, Module.Basis.extend, Module.Basis.sumExtend (Mathlib.LinearAlgebra.Basis.VectorSpace), exists_linearIndepOn_id_extension, LinearIndepOn.extend (Mathlib.LinearAlgebra.LinearIndependent.Lemmas), Module.Basis.ofVectorSpaceIndex",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Basis.extend"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every nonzero vector of a vector space is contained in some basis",
+   "results": "Module.Basis.exists_basis, Module.Basis.ofVectorSpaceIndex, Module.Basis.ofVectorSpace (Mathlib.LinearAlgebra.Basis.VectorSpace), Module.Basis.index_nonempty, Module.Basis.maximal",
+   "date": "2026-10-10",
+   "verdict": "match (existence part): Module.Basis.exists_basis; the extension is Module.Basis.extend"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def extend |theorem subset_extend|theorem coe_extend|theorem exists_basis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/VectorSpace.lean; rg -n 'linearIndepOn_singleton_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/LinearIndependent/Basic.lean",
+   "results": "VectorSpace.lean:52 def Module.Basis.extend (hs : LinearIndepOn K id s) : Basis (hs.extend (subset_univ s)) K V; :62 coe_extend (the basis vectors are the elements of the set); :90 subset_extend (s ⊆ hs.extend _); :176 exists_basis; LinearIndependent/Basic.lean:575 linearIndepOn_singleton_iff : LinearIndepOn R v {i} ↔ v i ≠ 0",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Basis.extend, Module.Basis.coe_extend, Module.Basis.subset_extend, linearIndepOn_singleton_iff",
+  "file": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+  "how": "specializes in one line: for hs : LinearIndepOn K id S (K a field, a fortiori a division ring), Module.Basis.extend hs (line 52) is a basis of V whose vectors are the elements of hs.extend _ (coe_extend, line 62), a set containing S (subset_extend, line 90); for S = {v} the hypothesis is linearIndepOn_singleton_iff (Mathlib/LinearAlgebra/LinearIndependent/Basic.lean:575) applied to v ≠ 0; S = ∅ is Module.Basis.exists_basis (line 176). Sources read 2026-10-10.",
+  "line": 52
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-purely-inseparable-scalar-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added, verified with sed."
+}

@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-finite-dimensional-domain-is-field",
+ "kind": "statement",
+ "title": "A finite-dimensional domain over a field is a field",
+ "statement": "Let $K$ be a field [def-weil-field] and $B$ a commutative $K$-algebra which is an integral domain ($1\\neq0$ in $B$ and $B$ has no zero divisors) and finite-dimensional as a $K$-vector space [def-weil-finite-dimensional-subspace]. Then $B$ is a field: every nonzero $b\\in B$ has an inverse in $B$ (multiplication by $b$ is an injective $K$-linear endomorphism of the finite-dimensional $K$-vector space $B$, hence surjective, so $by=1$ for some $y\\in B$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "standard (rank–nullity); used in the proof of lem-weil-pbc-finite-purely-inseparable-scalar-descent; Mathlib fieldOfFiniteDimensional"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an integral domain finite-dimensional over a field is a field",
+   "results": "fieldOfFiniteDimensional, FiniteDimensional.exists_mul_eq_one, divisionRingOfFiniteDimensional (Mathlib.LinearAlgebra.FiniteDimensional.Basic), Fintype.fieldOfDomain, Finite.isField_of_domain (Mathlib.RingTheory.IntegralDomain), Finite.isDomain_to_isField",
+   "date": "2026-10-10",
+   "verdict": "match: fieldOfFiniteDimensional / FiniteDimensional.exists_mul_eq_one"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a commutative domain which is a finite-dimensional algebra over a field is a field",
+   "results": "fieldOfFiniteDimensional, FiniteDimensional.isUnit, divisionRingOfFiniteDimensional, FiniteDimensional.exists_mul_eq_one (Mathlib.LinearAlgebra.FiniteDimensional.Basic), instFiniteDimensionalFractionRingOfFinite, FiniteDimensional.left",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def fieldOfFiniteDimensional|def divisionRingOfFiniteDimensional|exists_mul_eq_one|isField_of_domain' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "LinearAlgebra/FiniteDimensional/Basic.lean:496 lemma FiniteDimensional.exists_mul_eq_one (F) [Field F] [Ring K] [IsDomain K] [Algebra F K] [FiniteDimensional F K] {x : K} : x ≠ 0 → ∃ y, x * y = 1; :504 divisionRingOfFiniteDimensional; :525 fieldOfFiniteDimensional (F K) [Field F] [CommRing K] [IsDomain K] [Algebra F K] [FiniteDimensional F K] : Field K; RingTheory/IntegralDomain.lean:112 Finite.isField_of_domain (finite rings only)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "fieldOfFiniteDimensional, FiniteDimensional.exists_mul_eq_one",
+  "file": "Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean",
+  "how": "exact: FiniteDimensional.exists_mul_eq_one F (line 496) gives for x ≠ 0 in a domain K finite-dimensional over the field F some y with x * y = 1, and fieldOfFiniteDimensional F K (line 525) is the resulting Field structure on the commutative ring K. Sources read 2026-10-10.",
+  "line": 525
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-purely-inseparable-scalar-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added, verified with sed."
+}
