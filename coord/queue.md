@@ -1,8 +1,8 @@
 # Work queue
 
-583 items; claim with `tools/claim.py next <group> [--stage N]`.
+585 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (554)
+## Stage 1: nodes to split (556)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-finite-etale-lifting-complete` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1007 | none |
 | `lem-weil-pbc-graded-module-away-restriction` | 1007 | none |
 | `lem-weil-pbc-limit-affine-transition` | 1007 | none |
@@ -24,6 +23,7 @@
 | `def-weil-pbc-site-cech-complex` | 1008 | none |
 | `def-weil-pbc-special-cocontinuous-functor` | 1008 | none |
 | `lem-weil-pbc-adic-completion-noetherian` | 1008 | none |
+| `lem-weil-pbc-algebraize-finite-over-proper` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1008 | none |
@@ -35,6 +35,7 @@
 | `lem-weil-pbc-descend-finite` | 1008 | none |
 | `lem-weil-pbc-descend-surjective` | 1008 | none |
 | `lem-weil-pbc-etale-free-sheaf-constructible` | 1008 | none |
+| `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1008 | none |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1008 | none |
 | `lem-weil-pbc-filtered-colimit-categories` | 1008 | none |
 | `lem-weil-pbc-henselian-pair-approximation` | 1008 | none |
@@ -52,6 +53,7 @@
 | `lem-weil-pbc-site-morphism-composition` | 1008 | none |
 | `lem-weil-pbc-site-sheaves-enough-injectives` | 1008 | none |
 | `lem-weil-pbc-site-system-strictification` | 1008 | none |
+| `lem-weil-pbc-thickening-finite-cartesian` | 1008 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1008 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1008 | none |
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
@@ -595,7 +597,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 568 nodes that wait for stage 1, 199 nodes that wait for a statement dependency.
+Not open yet: 570 nodes that wait for stage 1, 201 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
