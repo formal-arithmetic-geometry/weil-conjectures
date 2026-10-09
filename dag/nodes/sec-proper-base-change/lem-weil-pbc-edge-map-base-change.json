@@ -14,11 +14,117 @@
   "def-weil-pbc-underived-exchange",
   "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-cohomology-pullback-functorial"
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (unwinding the definitions; choices of resolutions).* Put $h=f\\circ g'=g\\circ f':X'\\to Y$ (one morphism, since the square commutes [def-weil-pbc-cartesian-square]) and $A=f_*F$ [def-weil-pbc-direct-image]. The composition isomorphisms of [lem-weil-pbc-inverse-image-composition] (2), for $(u,v)=(f,g')$ and $(u,v)=(g,f')$, are $c_{f,g'}:g'^{-1}f^{-1}\\xrightarrow{\\sim}h^{-1}$ and $c_{g,f'}:f'^{-1}g^{-1}\\xrightarrow{\\sim}h^{-1}$, so $\\theta_{\\square,A}=c_{f,g',A}^{-1}\\circ c_{g,f',A}:f'^{-1}g^{-1}A\\to h^{-1}A\\to g'^{-1}f^{-1}A$. By [def-weil-pbc-underived-exchange], $\\Ex^0=\\Ex^0_{\\square,F}:g^{-1}A\\to f'_*g'^{-1}F$ is the adjoint under $f'^{-1}\\dashv f'_*$ (unit $\\eta_{f'}$, counit $\\varepsilon_{f'}$ [def-weil-pbc-inverse-image]) of $\\varphi=g'^{-1}(\\varepsilon_{f,F})\\circ\\theta_{\\square,A}:f'^{-1}(g^{-1}A)\\to g'^{-1}F$, i.e. $\\Ex^0=f'_*(\\varphi)\\circ\\eta_{f',g^{-1}A}$ (the adjoint of Stacks 0037 (2)). The edge maps are $e^q_{f,F}=H^q(\\varepsilon_{f,F})\\circ f^*$ and $e^q_{f',g'^{-1}F}=H^q(\\varepsilon_{f',g'^{-1}F})\\circ f'^*$, with $f^*$ on $H^q(Y,A)$ and $f'^*$ on $H^q(Y',f'_*g'^{-1}F)$ the pullback maps of [def-weil-pbc-cohomology-pullback]. Fix once and for all a K-injective resolution [def-weil-pbc-kinjective-resolutions] of every sheaf occurring below ($A$; $F$, $f^{-1}A$; $g^{-1}A$, $f'_*g'^{-1}F$; $g'^{-1}F$, $g'^{-1}f^{-1}A$, $f'^{-1}g^{-1}A$, $h^{-1}A$, $f'^{-1}f'_*g'^{-1}F$) and read every group $H^q(T_{\\Et},G)$ below as computed from the fixed resolution of $G$. A pullback map $u^*:H^q(T,G)\\to H^q(S,u^{-1}G)$ ($f^*$, $g^*$, $h^*$ on $A$; $g'^*$ on $F$ and on $f^{-1}A$; $f'^*$ on $g^{-1}A$ and on $f'_*g'^{-1}F$) is computed by [def-weil-pbc-cohomology-pullback] from the fixed resolution $s$ of $G$ and some K-injective resolution $r$ of $u^{-1}I^\\bullet$, and lands in the group computed from $r\\circ u^{-1}(s)$; it is read followed by the identification $H^q(\\mathrm{id}_{u^{-1}G})$ with the group of the fixed resolution of $u^{-1}G$, which by clause 1 of [lem-weil-pbc-cohomology-pullback-functorial] does not depend on $r$. All maps $u^*$, $H^q(\\psi)$ are taken between these groups. By clause 1 of [lem-weil-pbc-cohomology-pullback-functorial] and the independence of $H^q(\\psi)$ from the lift (its preamble), any other choices change every map by the identifications $H^q(\\mathrm{id})$ on source and target, which are compatible with composition by step 2; so the identity to be proved does not depend on the choices.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 0037 and the paragraph after it (the adjoint beta = v(alpha) o unit)"
+   }
+  },
+  {
+   "text": "*Step 2 (functoriality of $H^q$ in the sheaf).* For morphisms $\\psi:G\\to G'$, $\\psi':G'\\to G''$ of abelian sheaves on a scheme $T$ with the fixed resolutions $s,s',s''$, and lifts $\\tilde\\psi$, $\\tilde\\psi'$ as in the preamble of [lem-weil-pbc-cohomology-pullback-functorial] ($\\tilde\\psi s\\simeq s'\\psi$, $\\tilde\\psi's'\\simeq s''\\psi'$), one has $\\tilde\\psi'\\tilde\\psi s\\simeq\\tilde\\psi's'\\psi\\simeq s''\\psi'\\psi$ (composition preserves homotopies), so $\\tilde\\psi'\\tilde\\psi$ is a lift of $\\psi'\\psi$; and $\\mathrm{id}_{I^\\bullet}$ lifts $\\mathrm{id}_G$. Since $\\Gamma(T,-)$ and $\\mathcal H^q$ are functors and $H^q(-)$ does not depend on the lift, $H^q(\\psi'\\circ\\psi)=H^q(\\psi')\\circ H^q(\\psi)$ and $H^q(\\mathrm{id}_G)=\\mathrm{id}$ (the same resolution on both sides). Hence for an isomorphism $\\psi$, $H^q(\\psi)$ is bijective with inverse $H^q(\\psi^{-1})$. (This is step 1(b) of the proof of [lem-weil-pbc-cohomology-pullback-functorial], not among its stated clauses.)",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent"
+   }
+  },
+  {
+   "text": "*Step 3 (the adjoint of the exchange map; the triangle identity).* Apply [lem-weil-pbc-adjunct-counit-identity] to the adjunction $f'^{-1}\\dashv f'_*$ of [def-weil-pbc-inverse-image], the objects $g^{-1}A$ of $\\Ab(Y'_{\\Et})$ and $g'^{-1}F$ of $\\Ab(X'_{\\Et})$, and $\\varphi$, $\\psi=\\Ex^0=f'_*(\\varphi)\\circ\\eta_{f',g^{-1}A}$ (step 1, [def-weil-pbc-underived-exchange]): $$\\varepsilon_{f',g'^{-1}F}\\circ f'^{-1}(\\Ex^0)=\\varphi=g'^{-1}(\\varepsilon_{f,F})\\circ c_{f,g',A}^{-1}\\circ c_{g,f',A}:\\ f'^{-1}g^{-1}A\\to g'^{-1}F.$$ (In the source Lean this is `AlgebraicGeometry.Etale.upperStar_map_baseChangeMap_app_counit`, the mate identity `mateEquiv_counit`, attached to [def-weil-pbc-underived-exchange].)",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 0037, paragraph after it, equivalence (1)-(3) (alpha = counit o u(beta))"
+   }
+  },
+  {
+   "text": "*Step 4 (the left side).* By clause 3 (naturality) of [lem-weil-pbc-cohomology-pullback-functorial] for $u=g':X'\\to X$ and the morphism $\\varepsilon_{f,F}:f^{-1}A\\to F$ of $\\Ab(X_{\\Et})$, $g'^*\\circ H^q(\\varepsilon_{f,F})=H^q(g'^{-1}\\varepsilon_{f,F})\\circ g'^*$, so $g'^*\\circ e^q_{f,F}=H^q(g'^{-1}\\varepsilon_{f,F})\\circ g'^*\\circ f^*$. By clause 4 (composition) for $u=f$, $v=g'$, $G=A$: $h^*=(f\\circ g')^*=H^q(c_{f,g',A})\\circ g'^*\\circ f^*$ as maps $H^q(Y,A)\\to H^q(X',h^{-1}A)$; by step 2, $H^q(c_{f,g',A})$ is invertible with inverse $H^q(c_{f,g',A}^{-1})$, so $g'^*\\circ f^*=H^q(c^{-1}_{f,g',A})\\circ h^*$. Hence, by step 2, $$g'^*\\circ e^q_{f,F}=H^q\\bigl(g'^{-1}(\\varepsilon_{f,F})\\circ c^{-1}_{f,g',A}\\bigr)\\circ h^*.$$",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent"
+   }
+  },
+  {
+   "text": "*Step 5 (the right side).* By clause 3 of [lem-weil-pbc-cohomology-pullback-functorial] for $u=f':X'\\to Y'$ and the morphism $\\Ex^0:g^{-1}A\\to f'_*g'^{-1}F$ of $\\Ab(Y'_{\\Et})$, $f'^*\\circ H^q(\\Ex^0)=H^q(f'^{-1}\\Ex^0)\\circ f'^*$; so $e^q_{f',g'^{-1}F}\\circ H^q(\\Ex^0)\\circ g^*=H^q(\\varepsilon_{f',g'^{-1}F})\\circ H^q(f'^{-1}\\Ex^0)\\circ f'^*\\circ g^*$. By clause 4 for $u=g$, $v=f'$, $G=A$: $h^*=(g\\circ f')^*=H^q(c_{g,f',A})\\circ f'^*\\circ g^*$, so (step 2) $f'^*\\circ g^*=H^q(c^{-1}_{g,f',A})\\circ h^*$; here $(g\\circ f')^*$ and $(f\\circ g')^*$ are the one map $h^*$, computed from the same fixed resolutions (step 1). Hence, by step 2, $$e^q_{f',g'^{-1}F}\\circ H^q(\\Ex^0)\\circ g^*=H^q\\bigl(\\varepsilon_{f',g'^{-1}F}\\circ f'^{-1}(\\Ex^0)\\circ c^{-1}_{g,f',A}\\bigr)\\circ h^*.$$",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent"
+   }
+  },
+  {
+   "text": "*Step 6 (conclusion).* By step 3, $\\varepsilon_{f',g'^{-1}F}\\circ f'^{-1}(\\Ex^0)\\circ c^{-1}_{g,f',A}=g'^{-1}(\\varepsilon_{f,F})\\circ c^{-1}_{f,g',A}\\circ c_{g,f',A}\\circ c^{-1}_{g,f',A}=g'^{-1}(\\varepsilon_{f,F})\\circ c^{-1}_{f,g',A}$ as morphisms $h^{-1}A\\to g'^{-1}F$. So the right sides of steps 4 and 5 are equal: $g'^*\\circ e^q_{f,F}=e^q_{f',g'^{-1}F}\\circ H^q(\\Ex^0_{\\square,F})\\circ g^*$ for every $q\\ge0$. No hypothesis on $f$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent"
+   }
+  },
+  {
+   "text": "*Step 7 (the 'in particular').* Let $f$ be finite; then $f'$ is finite as a base change of $f$ [lem-weil-pbc-finite-morphism-permanence] (a). By [lem-weil-pbc-finite-pushforward-cohomology] for $f$ and $F$, and for $f'$ and $g'^{-1}F$, the edge maps $e^q_{f,F}$ and $e^q_{f',g'^{-1}F}$ are isomorphisms; if $\\Ex^0_{\\square,F}$ is an isomorphism, so is $H^q(\\Ex^0_{\\square,F})$ (step 2). Then step 6 reads $g'^*=\\Psi\\circ g^*\\circ(e^q_{f,F})^{-1}$ with $\\Psi=e^q_{f',g'^{-1}F}\\circ H^q(\\Ex^0_{\\square,F})$ an isomorphism: $g^*$ on $H^q(Y,f_*F)$ and $g'^*$ on $H^q(X,F)$ are identified through the isomorphisms $e^q_{f,F}$ and $\\Psi$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-pushforward-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, proof of Lemma 0A5D (lemma-finite-pushforward-statements, line 15471), use of Lemma 0959; the compatibility is left implicit there, the steps are written by an agent; adjunct formula from literature/stacks-project/categories.tex, Definition 0037"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,10 +146,24 @@
    "results": "none; Mathlib sheaf cohomology (SheafCohomology/Basic.lean) has no functoriality in the site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "edge map H^q(Y, f_* F) → H^q(X, F) compatible with base change of a cartesian square of schemes",
+   "results": "Scheme.Modules.pushforward_map_app, Scheme.Modules.pullbackPushforwardAdjunction, restrictFunctorAdjCounitIso, LocallyRingedSpace.Hom.stalkMap (module sheaves on schemes, no etale cohomology)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Sheaf.H' and 'edgeMap\\|baseChange' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "Sheaf.H only in CategoryTheory/Sites/SheafCohomology/Basic.lean (cohomology of a sheaf on one site, Ext from the constant sheaf); no edge map, no exchange map, no pullback on cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match; the formal part of step 3 is the Mathlib leaf lem-weil-pbc-adjunct-counit-identity (Adjunction.eq_unit_comp_map_iff)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +183,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-edge-map-base-change",
+  "worker": "stage1",
+  "summary": "Split into 7 steps following the intended proof recorded in the source: (1) unwinding e^q, theta = c_{f,g'}^{-1} c_{g,f'} and Ex^0 = f'_*(g'^{-1}eps_f o theta) o eta_{f'} (def-weil-pbc-underived-exchange: the f'-adjoint of g'^{-1}eps_f o theta), with one fixed family of K-injective resolutions and the reduction of other choices to it by clause 1 of the functorial lemma; (2) functoriality H^q(psi' psi)=H^q(psi')H^q(psi), H^q(id)=id, written out from the lift definition (it is only step 1(b) of the proof of lem-weil-pbc-cohomology-pullback-functorial, not a clause of its statement); (3) eps_{f'} o f'^{-1}(Ex^0) = g'^{-1}eps_f o theta from a new Mathlib leaf lem-weil-pbc-adjunct-counit-identity (Adjunction.eq_unit_comp_map_iff; Stacks 0037); (4),(5) clauses 3 and 4 of the functorial lemma for (u,v)=(f,g') and (g,f') reduce both sides to H^q(-) o h^*, h=fg'=gf'; (6) the c's cancel; (7) the 'in particular' from lem-weil-pbc-finite-pushforward-cohomology and finite base change. Source Lean: no slopmaster2 declaration states the cohomological identity; the sheaf-level step 3 is AlgebraicGeometry.Etale.upperStar_map_baseChangeMap_app_counit (sorry-free, already attached to def-weil-pbc-underived-exchange)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "seven steps (unwinding with fixed resolutions; functoriality of H^q in the sheaf written out; the adjunct identity for Ex^0 by the new leaf eq_unit_comp_map_iff (Adjunction/Basic.lean:301, verified); naturality and composition of pullbacks on both sides through the one map h^*; cancellation; the finite case); 1 new Mathlib leaf; the source repository has the sheaf-level identity (upperStar_map_baseChangeMap_app_counit, attached to the exchange definition) but not the cohomological identity, no attachment"
+ }
 }

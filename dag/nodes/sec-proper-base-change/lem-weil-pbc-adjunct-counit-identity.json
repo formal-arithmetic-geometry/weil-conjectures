@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-adjunct-counit-identity",
+ "kind": "statement",
+ "title": "The adjunct of a morphism, composed with the counit, gives back the morphism",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories, $L:\\mathcal C\\to\\mathcal D$ a functor left adjoint to $R:\\mathcal D\\to\\mathcal C$ with unit $\\eta:\\mathrm{id}_{\\mathcal C}\\to RL$ and counit $\\varepsilon:LR\\to\\mathrm{id}_{\\mathcal D}$ (satisfying the triangle identities $\\varepsilon_{LA}\\circ L(\\eta_A)=\\mathrm{id}_{LA}$, $R(\\varepsilon_B)\\circ\\eta_{RB}=\\mathrm{id}_{RB}$). For objects $A$ of $\\mathcal C$, $B$ of $\\mathcal D$ and morphisms $\\varphi:LA\\to B$, $\\psi:A\\to RB$, one has $\\psi=R(\\varphi)\\circ\\eta_A$ if and only if $\\varepsilon_B\\circ L(\\psi)=\\varphi$. In particular the adjunct $\\varphi^\\sharp=R(\\varphi)\\circ\\eta_A$ of $\\varphi$ satisfies $\\varepsilon_B\\circ L(\\varphi^\\sharp)=\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 0037 (definition-adjoint, line 3344) and the paragraph after it: the equivalence of (1) alpha and beta correspond, (2) beta = v(alpha) o unit, (3) alpha = counit o u(beta); Lemma 0038 (lemma-unit-counit-relations, line 3523) for the triangle identities"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction: counit composed with left adjoint applied to the adjunct (unit then right adjoint map) equals the original morphism",
+   "results": "CategoryTheory.Adjunction.unit_comp_map_eq_iff (Mathlib.CategoryTheory.Adjunction.Basic: adj.unit.app A ≫ G.map f = g ↔ f = F.map g ≫ adj.counit.app B), Adjunction.mk, Adjunction.comp_unit_app, CoreUnitCounit.left_triangle, mkOfUnitCounit",
+   "date": "2026-10-09",
+   "verdict": "match: Adjunction.unit_comp_map_eq_iff / eq_unit_comp_map_iff"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.eq_unit_comp_map_iff",
+   "results": "CategoryTheory.Adjunction.eq_unit_comp_map_iff (adj : F ⊣ G) (f : F.obj A ⟶ B) (g : A ⟶ G.obj B) : g = adj.unit.app A ≫ G.map f ↔ F.map g ≫ adj.counit.app B = f (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'unit_comp_map_eq_iff\\|eq_unit_comp_map_iff\\|alias homEquiv_unit\\|alias homEquiv_counit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "homEquiv (:160, toFun f = unit.app X ≫ G.map f, invFun g = F.map g ≫ counit.app Y), homEquiv_unit (:181), homEquiv_counit (:182), unit_comp_map_eq_iff (:296), eq_unit_comp_map_iff (:301, proved by simp from the triangle identities)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.eq_unit_comp_map_iff",
+  "file": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "how": "exact: for adj : F ⊣ G, f : F.obj A ⟶ B, g : A ⟶ G.obj B, `g = adj.unit.app A ≫ G.map f ↔ F.map g ≫ adj.counit.app B = f` (line 301; Lean composition is diagrammatic, so this is psi = R(phi) o eta_A iff eps_B o L(psi) = phi); the 'in particular' is the forward direction applied to rfl (equivalently `(adj.homEquiv A B).symm_apply_apply` with `homEquiv_unit`, `homEquiv_counit`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-edge-map-base-change",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
