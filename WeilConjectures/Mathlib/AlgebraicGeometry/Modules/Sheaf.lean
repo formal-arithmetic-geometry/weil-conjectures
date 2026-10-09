@@ -50,6 +50,8 @@ matrices of morphisms between free modules of finite rank.
   is surjective on stalks is an epimorphism.
 - `AlgebraicGeometry.Scheme.Modules.bijective_stalk_of_isIso_restrict`: a morphism which
   restricts to an isomorphism on an open `U` is bijective on the stalks at points of `U`.
+- `AlgebraicGeometry.Scheme.Modules.hom_ext_of_restrictAdjunction_unit`: morphisms of
+  `𝒪_X`-modules which agree after restriction to the members of an open cover are equal.
 
 ## Main definitions
 
@@ -481,6 +483,24 @@ lemma bijective_stalk_of_isIso_restrict {M N : X.Modules} (φ : M ⟶ N) {U : X.
     infer_instance
   exact ConcreteCategory.bijective_of_isIso
     ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (U.ι y)).map φ)
+
+/-- Two morphisms of `𝒪_X`-modules `M ⟶ N` agree as soon as their composites with the units
+`N ⟶ (U i).ι_* (N|_{U i})` of the restriction adjunctions agree for a family of opens `U i`
+covering `X`, since `N` is a sheaf. -/
+lemma hom_ext_of_restrictAdjunction_unit {ι : Type*} (U : ι → X.Opens)
+    (hU : ∀ x : X, ∃ i, x ∈ U i) {M N : X.Modules} {g₁ g₂ : M ⟶ N}
+    (h : ∀ i, g₁ ≫ (restrictAdjunction (U i).ι).unit.app N =
+      g₂ ≫ (restrictAdjunction (U i).ι).unit.app N) : g₁ = g₂ := by
+  refine hom_ext _ _ fun W ↦ ?_
+  ext s
+  let F : TopCat.Sheaf AddCommGrpCat.{u} X := ⟨N.presheaf, N.isSheaf⟩
+  refine F.eq_of_locally_eq' (fun i ↦ (U i).ι ''ᵁ ((U i).ι ⁻¹ᵁ W))
+    W (fun i ↦ homOfLE ((U i).ι.image_preimage_le W)) (fun x hx ↦ ?_) _ _ fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := hU x
+    refine TopologicalSpace.Opens.mem_iSup.mpr ⟨i, ?_⟩
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
+    exact ⟨hi, hx⟩
+  · exact congr(((($(h i)).app W).hom s))
 
 end Stalk
 
