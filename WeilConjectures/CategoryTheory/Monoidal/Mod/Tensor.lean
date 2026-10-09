@@ -206,6 +206,15 @@ noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') :
       Functor.whiskerRight_id']
     rfl
 
+lemma tensorLeftMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    tensorLeftMap (f ≫ g) = tensorLeftMap f ≫ tensorLeftMap g := by
+  rw [tensorLeftMap, tensorLeftMap, tensorLeftMap, ← Functor.whiskerRight_comp, ← Functor.map_comp,
+    ← tensorLeftDiagramMap_comp]
+
+lemma tensorLeftMap_id (M : Mod C A) : tensorLeftMap (𝟙 M) = 𝟙 _ := by
+  rw [tensorLeftMap, tensorLeftDiagramMap_id, Functor.map_id, Functor.whiskerRight_id']
+  rfl
+
 end TensorLeft
 
 section Hom
@@ -251,6 +260,93 @@ noncomputable def ihomMapIso {M M' : Mod C A} (e : M ≅ M') : ihom M' ≅ ihom 
 /-- The internal hom is contravariant in the first variable. -/
 noncomputable def ihomMap {M M' : Mod C A} (f : M ⟶ M') : ihom M' ⟶ ihom M :=
   conjugateEquiv (ihomAdjunction M') (ihomAdjunction M) (tensorLeftMap f)
+
+omit [BraidedCategory C] [IsCommMonObj A] [IsGrothendieckAbelian.{v} C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)] in
+lemma tensorRightMap_add {X Y : C} (f g : X ⟶ Y) :
+    tensorRightMap A (f + g) = tensorRightMap A f + tensorRightMap A g := by
+  ext P : 2
+  refine Mod.hom_ext _ _ ?_
+  simp [MonoidalPreadditive.whiskerLeft_add, add_hom]
+
+omit [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)] in
+lemma tensorLeftMap_add {M M' : Mod C A} (f g : M ⟶ M') :
+    tensorLeftMap (f + g) = tensorLeftMap f + tensorLeftMap g := by
+  have hd : tensorLeftDiagramMap A (f + g) =
+      tensorLeftDiagramMap A f + tensorLeftDiagramMap A g := by
+    ext j : 2
+    cases j
+    · change tensorRightMap A (A ◁ (f + g).hom) = tensorRightMap A (A ◁ f.hom) +
+        tensorRightMap A (A ◁ g.hom)
+      rw [add_hom, MonoidalPreadditive.whiskerLeft_add, tensorRightMap_add]
+    · change tensorRightMap A (f + g).hom = tensorRightMap A f.hom + tensorRightMap A g.hom
+      rw [add_hom, tensorRightMap_add]
+  ext P : 2
+  refine colimit.hom_ext fun j ↦ ?_
+  simp only [tensorLeftMap, hd, Functor.whiskerRight_app, NatTrans.app_add, colim_map,
+    Preadditive.comp_add]
+  erw [ι_colimMap, ι_colimMap, ι_colimMap]
+  simp only [flipFunctor_map_app_app, NatTrans.app_add, Preadditive.add_comp]
+
+lemma ihomMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    ihomMap (f ≫ g) = ihomMap g ≫ ihomMap f := by
+  rw [ihomMap, ihomMap, ihomMap, tensorLeftMap_comp, conjugateEquiv_comp]
+
+lemma ihomMap_id (M : Mod C A) : ihomMap (𝟙 M) = 𝟙 _ := by
+  rw [ihomMap, tensorLeftMap_id, conjugateEquiv_id]
+
+lemma ihomMap_add {M M' : Mod C A} (f g : M ⟶ M') :
+    ihomMap (f + g) = ihomMap f + ihomMap g := by
+  ext N : 2
+  simp only [ihomMap, tensorLeftMap_add, conjugateEquiv_apply_app, NatTrans.app_add,
+    Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
+
+lemma ihomMap_zero (M M' : Mod C A) : ihomMap (0 : M ⟶ M') = 0 := by
+  have h := ihomMap_add (0 : M ⟶ M') 0
+  rw [add_zero] at h
+  exact (left_eq_add.1 h)
+
+lemma ihomMap_sum {M M' : Mod C A} {J : Type*} (s : Finset J) (f : J → (M ⟶ M')) :
+    ihomMap (∑ j ∈ s, f j) = ∑ j ∈ s, ihomMap (f j) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp [ihomMap_zero]
+  | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, ihomMap_add, ih]
+
+section Biproduct
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+variable {J : Type} [Finite J] (f : J → Mod C A)
+
+/-- The internal hom out of a finite biproduct is the biproduct of the internal homs. -/
+noncomputable def ihomBiproductIso (N : Mod C A) :
+    (ihom (⨁ f)).obj N ≅ ⨁ fun j ↦ (ihom (f j)).obj N where
+  hom := biproduct.lift fun j ↦ (ihomMap (biproduct.ι f j)).app N
+  inv := biproduct.desc fun j ↦ (ihomMap (biproduct.π f j)).app N
+  hom_inv_id := by
+    have := Fintype.ofFinite J
+    rw [biproduct.lift_desc]
+    simp only [← NatTrans.comp_app, ← ihomMap_comp]
+    rw [← NatTrans.app_sum, ← ihomMap_sum, biproduct.total, ihomMap_id, NatTrans.id_app]
+  inv_hom_id := by
+    refine biproduct.hom_ext _ _ fun i ↦ biproduct.hom_ext' _ _ fun j ↦ ?_
+    simp only [Category.assoc, biproduct.lift_π, biproduct.ι_desc_assoc, ← NatTrans.comp_app,
+      ← ihomMap_comp, Category.id_comp]
+    by_cases hij : j = i
+    · subst hij
+      simp [ihomMap_id]
+    · rw [biproduct.ι_π_ne _ (Ne.symm hij), ihomMap_zero, biproduct.ι_π_ne _ hij]
+      rfl
+
+lemma ihomBiproductIso_naturality (N N' : Mod C A) (g : N ⟶ N') :
+    (ihom (⨁ f)).map g ≫ (ihomBiproductIso f N').hom =
+      (ihomBiproductIso f N).hom ≫ biproduct.map fun j ↦ (ihom (f j)).map g := by
+  refine biproduct.hom_ext _ _ fun j ↦ ?_
+  simp [ihomBiproductIso]
+
+end Biproduct
 
 end Hom
 
