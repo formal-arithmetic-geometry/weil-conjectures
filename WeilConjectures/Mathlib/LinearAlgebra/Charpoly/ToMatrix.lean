@@ -19,6 +19,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
   endomorphism `f` of a finite free module.
 * `LinearMap.eval_charpolyRev`, `LinearMap.coeff_zero_charpolyRev`: the reverse characteristic
   polynomial takes the value `1` at `t = 0`, equivalently its constant coefficient is `1`.
+* `LinearMap.charpolyRev_smul_one`: the reverse characteristic polynomial of a homothety.
 * `LinearMap.natDegree_charpolyRev`, `LinearMap.leadingCoeff_charpolyRev`: for an endomorphism
   with invertible determinant, the reverse characteristic polynomial has full degree
   `finrank K V` and leading coefficient `(-1) ^ finrank K V * det f`.
@@ -60,6 +61,36 @@ theorem eval_charpolyRev (f : M →ₗ[R] M) : Polynomial.eval 0 f.charpolyRev =
 @[simp]
 theorem coeff_zero_charpolyRev (f : M →ₗ[R] M) : f.charpolyRev.coeff 0 = 1 := by
   rw [coeff_zero_eq_eval_zero, eval_charpolyRev]
+
+/-- The reverse characteristic polynomial of a homothety `c • 1` is `(1 - c t) ^ n`, for `n` the
+rank of the module. -/
+theorem charpolyRev_smul_one [Nontrivial R] (c : R) :
+    (c • 1 : M →ₗ[R] M).charpolyRev = (1 - C c * X) ^ finrank R M := by
+  classical
+  let b := Module.Free.chooseBasis R M
+  rw [← charpolyRev_toMatrix b, map_smul, toMatrix_one, Matrix.charpolyRev,
+    Module.finrank_eq_card_chooseBasisIndex]
+  have : (1 : Matrix (Module.Free.ChooseBasisIndex R M) (Module.Free.ChooseBasisIndex R M) R[X]) -
+      (X : R[X]) • (c • (1 : Matrix _ _ R)).map C = (1 - C c * X) • 1 := by
+    refine Matrix.ext fun i j ↦ ?_
+    by_cases h : i = j
+    · subst h
+      simp only [Matrix.sub_apply, Matrix.one_apply_eq, Matrix.smul_apply, Matrix.map_apply,
+        smul_eq_mul, mul_one]
+      ring
+    · simp only [Matrix.sub_apply, Matrix.one_apply_ne h, Matrix.smul_apply, Matrix.map_apply,
+        smul_eq_mul, mul_zero, map_zero, sub_zero]
+  rw [this, Matrix.det_smul, Matrix.det_one, mul_one, Fintype.card]
+
+/-- The reverse characteristic polynomial of the identity is `(1 - t) ^ n`. -/
+theorem charpolyRev_one [Nontrivial R] : (1 : M →ₗ[R] M).charpolyRev = (1 - X) ^ finrank R M := by
+  simpa using charpolyRev_smul_one (M := M) (1 : R)
+
+/-- The reverse characteristic polynomial of an endomorphism of the zero module is `1`. -/
+theorem charpolyRev_of_subsingleton [Nontrivial R] [Subsingleton M] (f : M →ₗ[R] M) :
+    f.charpolyRev = 1 := by
+  rw [Subsingleton.elim f ((0 : R) • 1), charpolyRev_smul_one, finrank_zero_of_subsingleton,
+    pow_zero]
 
 /-- Conjugate endomorphisms have the same characteristic polynomial. -/
 theorem charpoly_of_isConj {f g : Module.End R M} (h : IsConj f g) :

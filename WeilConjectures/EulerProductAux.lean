@@ -10,6 +10,7 @@ public import Mathlib.Data.Rat.Star
 public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.Tactic.LinearCombination
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.WellKnown
 
 public import Mathlib.Topology.Connected.Separation
 public import Mathlib.Topology.Separation.Lemmas
@@ -50,26 +51,6 @@ private lemma dvd_iff_dvd_sub {d n : ℕ} (hle : d ≤ n) : d ∣ n ↔ d ∣ n 
   · intro h
     have h2 := dvd_add h (dvd_refl d)
     rwa [Nat.sub_add_cancel hle] at h2
-
-/-- The geometric series: `(1 - X ^ d)⁻¹` has `n`-th coefficient `1` if `d ∣ n` and `0`
-otherwise. -/
-theorem inv_one_sub_X_pow_eq_mk {d : ℕ} (hd : d ≠ 0) :
-    ((1 - X ^ d)⁻¹ : ℚ⟦X⟧) = mk fun n ↦ if d ∣ n then 1 else 0 := by
-  rw [inv_eq_iff_mul_eq_one
-    (by rw [constantCoeff_one_sub_X_pow_eq_one hd]; exact one_ne_zero),
-    mul_comm, sub_mul, one_mul]
-  ext n
-  simp only [map_sub, coeff_X_pow_mul', coeff_mk, coeff_one]
-  by_cases hle : d ≤ n
-  · have hn : n ≠ 0 := by omega
-    rw [if_pos hle, if_neg hn]
-    by_cases hdvd : d ∣ n
-    · rw [if_pos hdvd, if_pos ((dvd_iff_dvd_sub hle).mp hdvd), sub_self]
-    · rw [if_neg hdvd, if_neg fun hc ↦ hdvd ((dvd_iff_dvd_sub hle).mpr hc), sub_zero]
-  · rw [if_neg hle, sub_zero]
-    rcases eq_or_ne n 0 with rfl | hn
-    · rw [if_pos (dvd_zero d), if_pos rfl]
-    · rw [if_neg fun hdvd ↦ hle (Nat.le_of_dvd (Nat.pos_of_ne_zero hn) hdvd), if_neg hn]
 
 theorem constantCoeff_inv_one_sub_X_pow {d : ℕ} (hd : d ≠ 0) :
     constantCoeff ((1 - X ^ d)⁻¹ : ℚ⟦X⟧) = 1 := by
