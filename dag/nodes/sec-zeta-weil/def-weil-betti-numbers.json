@@ -2,23 +2,44 @@
  "id": "def-weil-betti-numbers",
  "kind": "definition",
  "title": "Betti numbers",
- "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$ and\n$k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nLet $X_0/k_0$ be\nsmooth, proper, and geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, and put\n$X=X_0\\times_{k_0}k$. Fix an indeterminate $T$. For every prime\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and for\n$P(T)=\\sum_r c_rT^r\\in\\mathbf Z[T]$ write\n$P^{(\\ell)}(T)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$, and let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper\ncohomological family, and let $P_i(T)\\in\\mathbf Z[T]$ be the\nintegral Frobenius factor\nwith $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$.\nFor\n$0\\leq i\\leq2d$, define\n\n$$\nb_i=\\deg P_i.\n$$\n\nFor every integer $i<0$ or $i>2d$, put $b_i=0$.",
+ "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$ and $k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$ (the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber]). Let $X_0/k_0$ be smooth, proper, and geometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$ [def-weil-geometric-hypotheses], and put $X=X_0\\times_{k_0}k$ [def-weil-finite-field-fiber]; so $\\mathscr X=(X_0,d,X)$ is a smooth-proper datum [def-weil-smooth-proper-datum]. Fix an indeterminate $T$. For every prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], and for $P(T)=\\sum_r c_rT^r$ in the polynomial ring $\\mathbf Z[T]$ [def-weil-polynomial-ring] write $P^{(\\ell)}(T)=\\sum_r(c_r\\cdot1_{\\Ql})T^r\\in\\Ql[T]$ for its coefficientwise extension [def-weil-coefficientwise-extension]. Let $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the smooth-proper cohomological family of $\\mathscr X$ [def-weil-smooth-proper-cohomological-family]. For $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ be the integral Frobenius factor in degree $i$ [def-weil-integral-frobenius-factor] with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$: such a polynomial exists and is unique by [prop-integral-recovery], and it is the canonical integral cohomological factor $P_i(\\mathscr X)$ of [def-weil-canonical-integral-factors]. For $0\\leq i\\leq2d$, define the $i$-th *Betti number* of $\\mathscr X$ as the degree [def-weil-polynomial-ring] of this polynomial,\n\n$$\nb_i=b_i(\\mathscr X)=\\deg P_i\\in\\mathbf Z_{\\geq0}\n$$\n\n(well defined, and $P_i\\neq0$, since $P_i(0)=1$). For every integer $i<0$ or $i>2d$, put $b_i=0$. Inside a statement that has fixed $\\mathscr X$, the argument $\\mathscr X$ is suppressed and the integer is written simply $b_i$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-def-roots/def-weil-betti-numbers.md",
-  "place": "node def-weil-betti-numbers, order 2865"
+  "place": "node def-weil-betti-numbers, order 2865. The slopmaster2 blueprint states the same definition as Definition [Betti numbers], label def:betti-numbers, literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex lines 3240-3251, as b_i(X) = deg P_i(X) for a smooth-proper datum X, with P_i(X) the canonical integral cohomological factor (def:canonical-cohomological-factors), and without the convention b_i = 0 outside 0 <= i <= 2d."
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-datum",
+  "def-weil-l-adic-numbers",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-smooth-proper-cohomological-family",
   "def-weil-integral-frobenius-factor",
-  "def-weil-smooth-proper-cohomological-family"
+  "prop-integral-recovery",
+  "def-weil-canonical-integral-factors"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'betti' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no Betti number of any kind (no topological, singular or etale Betti number)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'weil polynomial\\|WeilPolynomial\\|zeta function of a variety\\|Betti' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no Weil polynomial, Frobenius characteristic factor or zeta function of a variety over a finite field, so the P_i whose degree b_i is do not exist in Mathlib; only the primitive 'degree of a polynomial' (Polynomial.natDegree, Mathlib/Algebra/Polynomial/Degree/Defs.lean) is there, recorded on def-weil-polynomial-ring"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +67,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-betti-numbers",
+  "worker": "stage1",
+  "summary": "Checked the statement against its source (master blueprint node def-weil-betti-numbers, order 2865) and against the slopmaster2 Definition def:betti-numbers (lines 3240-3251), which defines b_i(X) = deg P_i(X) through the smooth-proper datum and the canonical integral cohomological factors; the two agree, the master adding only the convention b_i = 0 outside 0 <= i <= 2d, which was kept. The statement was kept in substance and reworded only to name, where it is used, the node of every notion it is built from, and to make explicit what the master's 'let P_i be the integral Frobenius factor with P_i(0)=1 and P_i^(l)=P_{i,l}' presupposes: that such a polynomial exists and is unique, which is prop-integral-recovery (reviewed; its first clause states exactly this existence and uniqueness), and that it is the canonical integral cohomological factor P_i(X) of def-weil-canonical-integral-factors (the node the slopmaster2 definition uses). So the data b_i is not hollow: it is the degree of the unique witness of prop-integral-recovery. Statement dependencies: kept the four imported ones (finite-field datum and geometric fiber, geometric hypotheses, cohomological family, integral-factor notion), and added def-weil-smooth-proper-datum (the datum X of which b_i is a function, as slopmaster2 states it), def-weil-l-adic-numbers (Q_l), def-weil-polynomial-ring (Z[T] and deg), def-weil-coefficientwise-extension (P^(l)), prop-integral-recovery and def-weil-canonical-integral-factors. The degree of the nonzero polynomial P_i (P_i(0)=1) and the extension by zero of i -> b_i to all integers are judged elementary (Polynomial.natDegree, and a function on Z by cases) and got no node. No new node was created: every notion already had one. Recorded two Mathlib searches: Mathlib has no Betti number of any kind and no Weil polynomial or zeta function of a variety, so the node is not a leaf. Lean on slopmaster2: no declaration defines the Betti numbers; WeilConjectures/ZetaFunction/BettiNumbers.lean writes them inline as (P i).natDegree for a family P : Fin (2d+1) -> Polynomial Z satisfying WeilFunctionalEquation, and proves only their symmetry (WeilFunctionalEquation.natDegree_rev, which is the Betti-symmetry clause of thm-weil-final-betti / prop-duality-reciprocity, not a definition); so the audit state none is right. Users of this node that are being split by other workers at the same time (prop-duality-reciprocity, thm-weil-final-rh) were not touched."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
