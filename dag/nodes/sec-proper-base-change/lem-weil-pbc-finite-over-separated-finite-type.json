@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-finite-over-separated-finite-type",
+ "kind": "statement",
+ "title": "A scheme finite over a separated finite-type scheme",
+ "statement": "Let $\\nu:Y\\to X$ be a finite morphism of schemes and $g:X\\to S$ a morphism which is separated and of finite type [def-weil-pbc-scheme-conventions]. Then $g\\circ\\nu:Y\\to S$ is separated and of finite type. In particular, if $X$ is a separated scheme of finite type over a field $k$, so is every scheme $Y$ with a finite morphism $Y\\to X$ (with the composite structure morphism).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Section 29.44, Definition (definition-integral-finite): a finite morphism is affine with finite ring maps over affine opens; Morphisms Lemma 01S7 (lemma-affine-separated: affine morphisms are separated); affine morphisms are quasi-compact; finite ring maps are of finite type, so finite morphisms are locally of finite type (Morphisms Lemma 01WJ, lemma-finite-integral, with Algebra 00GK); Schemes Lemma 01KU (lemma-separated-permanence (1): composition of separated morphisms) and Morphisms Lemma 01T3 (lemma-composition-finite-type)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite morphism of schemes is separated and of finite type, composition with separated finite type morphism",
+   "results": "IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsFinite.of_comp, IsFinite iff_isIntegralHom_and_locallyOfFiniteType (Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "generalization: one Mathlib lemma per clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsSeparated",
+   "results": "IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsFinite.of_comp, exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage, exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-09",
+   "verdict": "no single declaration; clauses below"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAffineHom f\\] : QuasiCompact\\|of_isAffineHom\\|IsStableUnderComposition\\|instance.*comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Affine,Separated,QuasiCompact,FiniteType,Finite}.lean",
+   "results": "IsFinite has field toIsAffineHom (Finite.lean); Affine.lean:58 [IsAffineHom f] : QuasiCompact f; Separated.lean:119 IsSeparated.of_isAffineHom; Finite.lean:120 [IsFinite f] : LocallyOfFiniteType f; Separated.lean:71 IsStableUnderComposition @IsSeparated; QuasiCompact.lean:69 quasiCompact_comp; FiniteType.lean:68 locallyOfFiniteType_comp",
+   "date": "2026-10-09",
+   "verdict": "match: a few Mathlib lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.of_isAffineHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "one Mathlib lemma per clause: IsFinite.toIsAffineHom with IsSeparated.of_isAffineHom (Separated.lean:119) and the QuasiCompact instance of IsAffineHom (Affine.lean:58), the instance [IsFinite f] : LocallyOfFiniteType f (Finite.lean:120), then the composition instances IsSeparated (Separated.lean:71), quasiCompact_comp (QuasiCompact.lean:69), locallyOfFiniteType_comp (FiniteType.lean:68); finite type = LocallyOfFiniteType and QuasiCompact"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-curve-normalization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-reduced-curve-normalization",
  "kind": "statement",
  "title": "A smooth finite modification of a reduced curve",
- "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $X$ be a reduced separated scheme of finite type over $k$ with $\\dim X\\le1$ [def-kun-topological-krull-dimension]. Then there exist a separated scheme $X^\\nu$ of finite type over $k$ with $\\dim X^\\nu\\le1$ which is smooth over $k$ [def-sbc-smooth-morphisms], a finite morphism of $k$-schemes $\\nu:X^\\nu\\to X$ [def-weil-pbc-scheme-conventions], and a dense open subscheme $X'\\subseteq X$ such that $\\nu$ restricts to an isomorphism $\\nu^{-1}(X')\\to X'$. (One may take for $\\nu$ the normalization of $X$, the disjoint union of the normalizations [def-sc-normalization] of the irreducible components of $X$ with their reduced structure.)",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $X$ be a reduced [def-pc-reduced-scheme] separated scheme of finite type over $k$ with $\\dim X\\le1$ [def-kun-topological-krull-dimension]. Then there exist a separated scheme $X^\\nu$ of finite type over $k$ with $\\dim X^\\nu\\le1$ which is smooth over $k$ [def-sbc-smooth-morphisms], a finite morphism of $k$-schemes $\\nu:X^\\nu\\to X$ [def-weil-pbc-scheme-conventions], and a dense open subscheme $X'\\subseteq X$ such that $\\nu$ restricts to an isomorphism $\\nu^{-1}(X')\\to X'$. (One may take for $\\nu$ the normalization of $X$, the disjoint union of the normalizations [def-sc-normalization] of the irreducible components [def-weil-irreducible-components] of $X$ with their reduced structure.)",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Lemma 0BXR (lemma-normalization-locally-algebraic: nu finite, X^nu a disjoint union of normal irreducible schemes, nu birational for X reduced) and Lemma 0B8Y (lemma-regular-point-on-curve: normal one-dimensional over a perfect field is smooth), as used in Etale Cohomology, proof of Lemma 0A3Q (lemma-somewhat-easier)"
@@ -12,11 +12,119 @@
   "def-kun-topological-krull-dimension",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-scheme-conventions",
-  "def-sc-normalization"
+  "def-sc-normalization",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The empty case, and the irreducible components. If $X=\\emptyset$, take $X^\\nu=X'=\\emptyset$ and $\\nu=\\mathrm{id}$: an isomorphism is finite [lem-weil-pbc-isomorphism-finite], the empty scheme is smooth over $k$ (the conditions of [def-sbc-smooth-morphisms] are vacuous or trivially met on the empty scheme), separated, of finite type and of dimension $-\\infty\\le1$, and $\\emptyset$ is dense in $\\emptyset$. Assume from now on $X\\neq\\emptyset$. $X$ is of finite type over the field $k$, so it is covered by finitely many affine opens $\\operatorname{Spec}A$ with $A$ a finitely generated $k$-algebra, each Noetherian by the Hilbert basis theorem; thus $X$ is a Noetherian scheme, and by [lem-weil-pbc-noetherian-finite-components] it has finitely many irreducible components $X_1,\\dots,X_m$ ($m\\ge1$) [def-weil-irreducible-components]. They are closed, $X=X_1\\cup\\cdots\\cup X_m$, $X_i\\not\\subseteq X_j$ for $i\\neq j$, and each $X_i$ has a unique generic point $\\eta_i$ (a scheme is sober); $\\eta_i\\notin X_j$ for $j\\neq i$, since $\\eta_i\\in X_j$ would give $X_i=\\overline{\\{\\eta_i\\}}\\subseteq X_j$. Give $X_i$ its reduced induced closed subscheme structure, with closed immersion $\\iota_i:X_i\\hookrightarrow X$. Then $X_i$ is reduced [def-pc-reduced-scheme] and irreducible, hence integral [def-pc-integral-scheme]; $\\iota_i$ is finite [lem-weil-pbc-closed-immersion-finite], so $X_i$ (with structure morphism $X_i\\to X\\to\\operatorname{Spec}k$) is separated and of finite type over $k$ [lem-weil-pbc-finite-over-separated-finite-type]; and $\\dim X_i\\le\\dim X\\le1$ [def-kun-topological-krull-dimension], since a chain of irreducible closed subsets of the closed subset $X_i$ is a chain of irreducible closed subsets of $X$. As $X_i\\neq\\emptyset$, $\\dim X_i\\in\\{0,1\\}$.",
+   "uses": [
+    "lem-weil-pbc-isomorphism-finite",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-noetherian-finite-components",
+    "def-weil-irreducible-components",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, proof of Lemma 0BXR (lemma-normalization-locally-algebraic): $X$ locally Noetherian, finitely many irreducible components (Properties 0BA8); Morphisms, Lemma 035P (lemma-description-normalization): the normalization of a reduced $X$ is built from the irreducible components with their reduced structure"
+   }
+  },
+  {
+   "text": "Components of dimension one: normalization. Let $i$ be such that $\\dim X_i=1$, and let $\\nu_i:X_i^\\nu\\to X_i$ be the normalization of the integral scheme $X_i$ in its function field [def-sc-normalization]. $X_i$ is an integral scheme of finite type over the field $k$, so [lem-sc-normalization-properties] applies: by (a), $\\nu_i$ is finite and surjective and $\\dim X_i^\\nu=\\dim X_i=1$; by (c), $X_i^\\nu$ is smooth over $k$, since $\\dim X_i=1$ and $k$ is perfect (an algebraically closed field [def-weil-algebraic-closure] is perfect: in characteristic $p>0$ every $a\\in k$ is a $p$-th power, being a root of $T^p-a$ has a root). By [lem-fin-dense-normal-open] the integral finite-type $k$-scheme $X_i$ has a nonempty open subscheme $U_i\\subseteq X_i$ which is normal, and by (b) of [lem-sc-normalization-properties] the induced morphism $\\nu_i^{-1}(U_i)=X_i^\\nu\\times_{X_i}U_i\\to U_i$ is an isomorphism. $X_i^\\nu$ is a $k$-scheme through $X_i^\\nu\\to X_i\\to\\operatorname{Spec}k$, so $\\nu_i$ is a $k$-morphism.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-sc-normalization-properties",
+    "def-weil-algebraic-closure",
+    "lem-fin-dense-normal-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0BXR (1), (3) (finite, birational) and Lemma 0B8Y (normal points of a curve over a perfect field are smooth points), as used in Etale Cohomology, proof of Lemma 0A3Q"
+   }
+  },
+  {
+   "text": "Components of dimension zero. Let $i$ be such that $\\dim X_i=0$. By [lem-weil-pbc-zero-dim-integral-point] the structure morphism $X_i\\to\\operatorname{Spec}k$ is an isomorphism. Put $X_i^\\nu:=X_i$, $\\nu_i:=\\mathrm{id}_{X_i}$, which is finite [lem-weil-pbc-isomorphism-finite], and $U_i:=X_i$, over which $\\nu_i$ is trivially an isomorphism. $X_i^\\nu\\to\\operatorname{Spec}k$ is an isomorphism, hence smooth [def-sbc-smooth-morphisms]: it is of finite presentation ($k\\to k$ is), and formally smooth, since for a first-order thickening $T\\subset T'$ over $\\operatorname{Spec}k$ and $a:T\\to X_i$ over $k$, the morphism $T'\\to\\operatorname{Spec}k\\cong X_i$ restricts to $a$ on $T$ (both are the structure morphism of $T$ followed by the inverse isomorphism). $\\dim X_i^\\nu=0$. (This agrees with the normalization of $X_i\\cong\\operatorname{Spec}k$, which is normal, by (b) of [lem-sc-normalization-properties]; the identity is used to avoid the dimension-one hypothesis of its part (c).)",
+   "uses": [
+    "lem-weil-pbc-zero-dim-integral-point",
+    "lem-weil-pbc-isomorphism-finite",
+    "def-sbc-smooth-morphisms",
+    "lem-sc-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 06LH (lemma-algebraic-scheme-dim-0); the case of dimension zero of Varieties 0BXR, written out by the agent"
+   }
+  },
+  {
+   "text": "Assembling $X^\\nu$ and $\\nu$. Put $X^\\nu:=X_1^\\nu\\amalg\\cdots\\amalg X_m^\\nu$, a $k$-scheme through the morphisms $X_i^\\nu\\to\\operatorname{Spec}k$, and let $\\nu:X^\\nu\\to X$ be the morphism equal to $\\iota_i\\circ\\nu_i$ on the open and closed summand $X_i^\\nu$; it is a $k$-morphism since each $\\iota_i\\circ\\nu_i$ is. Each $\\iota_i\\circ\\nu_i$ is finite, as a composite of the finite $\\nu_i$ (steps 2, 3) and the finite closed immersion $\\iota_i$ [lem-weil-pbc-closed-immersion-finite], [lem-weil-pbc-finite-composition]; by induction on $m$, writing $X_1^\\nu\\amalg\\cdots\\amalg X_m^\\nu=(X_1^\\nu\\amalg\\cdots\\amalg X_{m-1}^\\nu)\\amalg X_m^\\nu$, [lem-weil-pbc-finite-coproduct] shows that $\\nu$ is finite. Hence $X^\\nu$ is separated and of finite type over $k$ [lem-weil-pbc-finite-over-separated-finite-type] (its structure morphism is $X^\\nu\\xrightarrow{\\nu}X\\to\\operatorname{Spec}k$). $X^\\nu\\to\\operatorname{Spec}k$ is smooth by [lem-weil-pbc-smooth-coproduct], each $X_i^\\nu\\to\\operatorname{Spec}k$ being smooth (steps 2, 3). Finally $\\dim X^\\nu=\\max_i\\dim X_i^\\nu\\le1$ [def-kun-topological-krull-dimension]: an irreducible subset of $X^\\nu$ is connected, so it lies in one of the open and closed summands $X_i^\\nu$, and a chain of irreducible closed subsets of $X^\\nu$ is a chain of irreducible closed subsets of one $X_i^\\nu$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-coproduct",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lem-weil-pbc-smooth-coproduct",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0BXR (1) ($\\nu$ finite, $X^\\nu$ a disjoint union of normal irreducible schemes); Morphisms, Lemmas 01WK (composition of finite morphisms) and 0CYI (finite disjoint union of finite morphisms)"
+   }
+  },
+  {
+   "text": "The dense open $X'$ (topology). For each $i$ let $W_i:=X\\setminus\\bigcup_{j\\neq i}X_j$, open in $X$ (finite union of closed sets), contained in $X_i$ (as $X=\\bigcup_jX_j$), and containing $\\eta_i$ (step 1). Let $V_i:=U_i\\cap W_i$ with $U_i\\subseteq X_i$ the open of steps 2, 3. $V_i$ is open in $X$: $U_i$ is open in $X_i$, so $U_i\\cap W_i$ is open in the subspace $W_i$ of $X_i$, and $W_i$ is open in $X$. $V_i$ is nonempty: $U_i$ and $W_i=W_i\\cap X_i$ are nonempty open subsets of the irreducible space $X_i$, so they meet; consequently $\\eta_i\\in V_i$ (a nonempty open subset of $X_i$ contains its generic point). For $i\\neq j$, $V_i\\cap V_j=\\emptyset$, since $V_i\\subseteq W_i$ is disjoint from $X_j\\supseteq V_j$. Put $X':=V_1\\cup\\cdots\\cup V_m=V_1\\amalg\\cdots\\amalg V_m$, an open subset of $X$, with the open subscheme structure. $X'$ is dense in $X$: its closure contains every $\\eta_i$, hence every $X_i=\\overline{\\{\\eta_i\\}}$, hence $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma 0BAJ (lemma-birational-isomorphism-over-dense-open): 'Since $Y$ has finitely many irreducible components, we can find a dense open which is a disjoint union of its irreducible components'; the elementary topology is written out by the agent"
+   }
+  },
+  {
+   "text": "$\\nu$ is an isomorphism over $X'$. (i) Over $W_i$ the closed immersion $\\iota_i$ is an isomorphism: $\\iota_i^{-1}(W_i)\\to W_i$ is a closed immersion into the reduced open subscheme $W_i$ of the reduced $X$ which is surjective ($W_i\\subseteq X_i$); on an affine open $\\operatorname{Spec}A\\subseteq W_i$ it is $\\operatorname{Spec}A/I\\to\\operatorname{Spec}A$ with $V(I)=\\operatorname{Spec}A$, so $I$ lies in the nilradical of $A$, which is $0$ as $A$ is reduced [def-pc-reduced-scheme]; hence $I=0$. So $V_i$, as an open subscheme of $X_i$ and as an open subscheme of $X$, is the same scheme via $\\iota_i$. (ii) For $j\\neq i$, $(\\iota_j\\circ\\nu_j)^{-1}(V_i)=\\nu_j^{-1}(X_j\\cap V_i)=\\emptyset$, since $V_i\\cap X_j=\\emptyset$ (step 5). Hence $\\nu^{-1}(V_i)=\\nu_i^{-1}(V_i)\\subseteq X_i^\\nu$, and $\\nu^{-1}(V_i)\\to V_i$ is the composite of $\\nu_i^{-1}(V_i)\\to V_i\\subseteq X_i$, the restriction over the open $V_i\\subseteq U_i$ of the isomorphism $\\nu_i^{-1}(U_i)\\to U_i$ of steps 2, 3 (a base change of an isomorphism is an isomorphism), and the isomorphism of (i). (iii) The $V_i$ form a cover of $X'$ by pairwise disjoint opens and $\\nu^{-1}(X')=\\coprod_i\\nu^{-1}(V_i)$; a morphism which restricts to an isomorphism over each member of an open cover of the target is an isomorphism (the inverses agree on overlaps, which are empty here, and glue). Hence $\\nu^{-1}(X')\\to X'$ is an isomorphism, which with step 4 proves the statement; $\\nu$ is, up to the identification of the dimension-zero components, the disjoint union of the normalizations of the irreducible components with their reduced structure.",
+   "uses": [
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma 0BAJ (after reducing to $Y$ irreducible, remove the closed set where $\\nu$ is not an isomorphism), as used for the normalization in Etale Cohomology, proof of Lemma 0A3Q ('As $X$ is reduced the morphism $\\nu$ is an isomorphism over a dense open $j':X'\\to X$'); details written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-isomorphism-finite",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-noetherian-finite-components",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "def-kun-topological-krull-dimension",
+  "def-sc-normalization",
+  "lem-sc-normalization-properties",
+  "def-weil-algebraic-closure",
+  "lem-fin-dense-normal-open",
+  "lem-weil-pbc-zero-dim-integral-point",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-coproduct",
+  "lem-weil-pbc-smooth-coproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "assembled by the agent from Varieties Lemmas 0BXR and 0B8Y and Morphisms Lemmas 035P, 0BAJ, 01WK, 0CYI, as used in Etale Cohomology, proof of Lemma 0A3Q; instead of Stacks' normalization of the reduced $X$ (the normalization in its generic points) the proof takes the disjoint union of the normalizations of the components and obtains the dense open from normal opens of the components (lem-fin-dense-normal-open) instead of from birationality (Morphisms 0BAA)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +153,38 @@
    "results": "Normalization.lean:611 instance [Smooth g] : IsIso (f.normalizationPullback g) (normalization commutes with smooth base change); ZariskisMainTheorem.lean: exists_isIso_morphismRestrict_toNormalization (iso to the normalization over an open, for quasi-finite points), IsFinite.of_isProper_of_locallyQuasiFinite. Ingredients; finiteness of the normalization of a finite-type scheme over a field and smoothness of normal curves are absent",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of a scheme is a disjoint union of normal integral schemes, normal scheme IsNormal",
+   "results": "Scheme.Hom.normalizationDesc, instIsIntegralHomFromNormalization, Scheme.Hom.normalization, instIsIntegralNormalization, instIsIsoToNormalizationOfIsIntegralHom, fromNormalization (Mathlib.AlgebraicGeometry.Normalization): relative normalization of a qcqs morphism; no normal-scheme class, no finiteness over a field, no disjoint-union description",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization of a reduced scheme of finite type over a field is finite and birational, isomorphism over a dense open",
+   "results": "instIsIsoToNormalizationOfIsIntegralHom, instIsIntegralNormalization, instIsReducedNormalization, instIsIntegralHomFromNormalization, instIsAffineHomToNormalization (Mathlib.AlgebraicGeometry.Normalization)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normal integral scheme of dimension one over a perfect field is smooth",
+   "results": "IsSmooth.mk/casesOn/recOn, isSmoothOfRelativeDimension_comp (Morphisms.Smooth), Algebra.FormallySmooth.of_perfectField (RingTheory.Smooth.Field): no smoothness of normal curves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsNormal\\|NormalScheme\\|IsIntegrallyClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln normalization ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only ZariskisMainTheorem.lean and Normalization.lean mention normalization; no class of normal schemes in Mathlib/AlgebraicGeometry; Mathlib has the relative normalization (Scheme.Hom.normalization) but not the absolute normalization of a reduced scheme, its finiteness over a field, or smoothness of normal curves",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +204,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-reduced-curve-normalization",
+  "worker": "stage1",
+  "summary": "Split in six steps following Stacks 0BXR/0B8Y/035P/0BAJ as used in 0A3Q: empty case and irreducible components with reduced structure (integral, separated finite type, dim <= 1); dimension-one components normalized via lem-sc-normalization-properties (a) finite, dim preserved, (c) smooth (k perfect), (b) iso over a nonempty normal open from lem-fin-dense-normal-open; dimension-zero components are Spec k (new unsplit lem-weil-pbc-zero-dim-integral-point) and are kept with the identity; assembly of X^nu = disjoint union with nu finite (new Mathlib leaves lem-weil-pbc-finite-composition, lem-weil-pbc-finite-coproduct), separated finite type (new leaf lem-weil-pbc-finite-over-separated-finite-type), smooth (new leaf lem-weil-pbc-smooth-coproduct), dim <= 1; the dense open X' = disjoint union of U_i minus the other components, and nu an isomorphism over it (elementary, written out). Added def-pc-reduced-scheme and def-weil-irreducible-components to stmt_deps. Off-route statements used as tools: lem-fin-dense-normal-open (unit sk-prop-a1-kummer) and lem-weil-pbc-noetherian-finite-components (unit sk-prop-sf-cbc)."
+ },
+ "tool_uses": [
+  "lem-fin-dense-normal-open",
+  "lem-weil-pbc-noetherian-finite-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "six steps (components, normalization of the 1-dimensional ones with lem-sc-normalization-properties, the 0-dimensional ones are Spec k, the disjoint union is finite/separated/finite type/smooth, the dense open from a normal open of each component minus the other components, isomorphism over it); 5 new nodes, 4 Mathlib leaves verified by the lead (Morphisms/Finite.lean:84/120/159, Basic.lean:305 sigmaDesc, Separated.lean:71/119, Affine.lean:58, QuasiCompact.lean:69, FiniteType.lean:68); Mathlib Smooth accepted as the notion of def-sbc-smooth-morphisms via the match recorded there; lem-fin-dense-normal-open and lem-weil-pbc-noetherian-finite-components (generic) accepted as tool uses"
+ }
 }

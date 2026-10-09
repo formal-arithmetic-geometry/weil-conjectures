@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-finite-coproduct",
+ "kind": "statement",
+ "title": "A disjoint union of finite morphisms is finite",
+ "statement": "Let $f_1:X_1\\to Y$ and $f_2:X_2\\to Y$ be finite morphisms of schemes [def-weil-pbc-scheme-conventions]. Then the induced morphism $(f_1,f_2):X_1\\amalg X_2\\to Y$ from the disjoint union (coproduct) of schemes is finite.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma (lemma-finite-union-finite), tag 0CYI (stated there for $n$ summands; the case $n=2$ here)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a finite disjoint union (coproduct) of schemes is finite if each component morphism is finite",
+   "results": "AlgebraicGeometry.IsFinite.instDescScheme (Morphisms.Finite), IsIntegralHom.instDescScheme (Morphisms.Integral), instIsAffineHomDescScheme (Morphisms.Affine), instHasFiniteCoproductsScheme",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Limits.coprod.desc",
+   "results": "AlgebraicGeometry.IsFinite.instDescScheme : [IsFinite f] [IsFinite g] : IsFinite (coprod.desc f g) (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 155,168p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "line 159: instance {U V X : Scheme} (f : U ⟶ X) (g : V ⟶ X) [IsFinite f] [IsFinite g] : IsFinite (Limits.coprod.desc f g), proved by HasAffineProperty.coprodDesc_affineAnd",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.instDescScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "how": "exact: line 159, IsFinite (coprod.desc f g) for finite f, g"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-curve-normalization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-smooth-coproduct",
+ "kind": "statement",
+ "title": "A disjoint union of smooth schemes over a base is smooth",
+ "statement": "Let $S$ be a scheme, $n\\ge1$, and $f_i:Y_i\\to S$ ($i=1,\\dots,n$) smooth morphisms of schemes [def-sbc-smooth-morphisms]. Then the induced morphism $(f_1,\\dots,f_n):Y_1\\amalg\\cdots\\amalg Y_n\\to S$ from the disjoint union (coproduct) of the $Y_i$ is smooth.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Definition (definition-smooth), tag 01V5: $f$ is smooth if it is smooth at every point $x$, a condition on an affine open neighbourhood of $x$ (so local on the source); each $Y_i$ is an open subscheme of the disjoint union, and the restriction of $(f_1,\\dots,f_n)$ to it is $f_i$. The identification with [def-sbc-smooth-morphisms] is Stacks 02H6 as recorded there"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a disjoint union of schemes is smooth if each component is smooth",
+   "results": "AlgebraicGeometry.IsSmooth.mk, IsSmooth.casesOn, isSmoothOfRelativeDimension_comp (Morphisms.Smooth): no statement about coproducts by name",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism out of a disjoint union of schemes is smooth if each restriction is smooth (Sigma.desc, local on source)",
+   "results": "AlgebraicGeometry.IsLocalAtSource.sigmaDesc (Morphisms.Basic; in this Mathlib named IsZariskiLocalAtSource.sigmaDesc): a Zariski-local-at-source property P holds for Sigma.desc f if it holds for every f i; Flat.instDescScheme",
+   "date": "2026-10-09",
+   "verdict": "generalization: IsZariskiLocalAtSource.sigmaDesc with P = @Smooth"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Limits.Sigma.desc",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n sigmaDesc ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; grep -n 'instance : IsZariskiLocalAtSource P' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'HasRingHomProperty @Smooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "results": "Basic.lean:305 lemma IsZariskiLocalAtSource.sigmaDesc {X} {ι} [Small ι] {Y : ι → Scheme} {f : ∀ i, Y i ⟶ X} (hf : ∀ i, P (f i)) : P (Sigma.desc f); RingHomProperties.lean:382 instance : IsZariskiLocalAtSource P for every P with HasRingHomProperty; Smooth.lean:73 instance : HasRingHomProperty @Smooth RingHom.Smooth",
+   "date": "2026-10-09",
+   "verdict": "generalization: specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "how": "specializes in one line: IsZariskiLocalAtSource.sigmaDesc (P := @Smooth) (index type Fin n), the instance IsZariskiLocalAtSource @Smooth coming from HasRingHomProperty @Smooth (Smooth.lean:73, RingHomProperties.lean:382). Mathlib's Smooth is identified with [def-sbc-smooth-morphisms] by the match recorded on that node (Stacks 02H6), which is not a one-line identification"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-curve-normalization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

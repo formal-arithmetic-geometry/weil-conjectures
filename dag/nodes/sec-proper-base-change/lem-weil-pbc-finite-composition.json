@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-finite-composition",
+ "kind": "statement",
+ "title": "Composition of finite morphisms",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be finite morphisms of schemes [def-weil-pbc-scheme-conventions]. Then $g\\circ f:X\\to Z$ is finite.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma (lemma-composition-finite), tag 01WK"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of finite morphisms of schemes is finite",
+   "results": "AlgebraicGeometry.IsFinite.instCompScheme, IsFinite.instIsStableUnderCompositionScheme, IsFinite.comp_iff, IsFinite.instIsMultiplicativeScheme, IsFinite.of_comp (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsSeparated",
+   "results": "IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsFinite.of_comp (Morphisms.Finite); confirms the composition API lives in Morphisms/Finite.lean",
+   "date": "2026-10-09",
+   "verdict": "match (composition instance confirmed by grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|^lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "results": "line 55 instance IsStableUnderComposition @IsFinite; line 84 instance {Z} (g : Y ⟶ Z) [IsFinite f] [IsFinite g] : IsFinite (f ≫ g) (auto-named IsFinite.instCompScheme)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.instCompScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "how": "exact: the instance at line 84, [IsFinite f] [IsFinite g] : IsFinite (f ≫ g) (also IsStableUnderComposition @IsFinite, line 55); Mathlib's IsFinite (affine, finite ring maps over affine opens) is the notion of [def-weil-pbc-scheme-conventions], as recorded on lem-weil-pbc-closed-immersion-finite"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-curve-normalization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
