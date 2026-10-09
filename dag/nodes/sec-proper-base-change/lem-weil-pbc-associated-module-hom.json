@@ -12,9 +12,83 @@
   "def-weil-pbc-associated-module",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to presheaves.* Let $\\mathcal G$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]; it is in particular a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]. By [def-weil-pbc-associated-module], $\\mathcal F_M=\\mathcal P_M^\\#$ with the $\\mathcal O_X$-linear sheafification map $\\sigma_M:\\mathcal P_M\\to\\mathcal F_M$, and by the universal property of sheafification [def-weil-presheaf-modules-sheafification] (on the site of opens of $X$, as in [def-weil-pbc-associated-module]) every $\\mathcal O_X$-linear map $\\psi:\\mathcal P_M\\to\\mathcal G$ is $\\varphi\\circ\\sigma_M$ for exactly one $\\mathcal O_X$-linear $\\varphi:\\mathcal F_M\\to\\mathcal G$. Hence $\\Sigma_{\\mathcal G}:\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,\\mathcal G)\\to\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O_X)}(\\mathcal P_M,\\mathcal G)$, $\\varphi\\mapsto\\varphi\\circ\\sigma_M$, is bijective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-associated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (4), alpha = id; Sheaves, Lemma 0096 (lemma-adjoint-pullback-pushforward-modules), proof, first equality (Hom out of the sheafified tensor presheaf)"
+   }
+  },
+  {
+   "text": "*From a presheaf map to a linear map.* For an $\\mathcal O_X$-linear $\\psi:\\mathcal P_M\\to\\mathcal G$ put $E(\\psi):M\\to\\Gamma(X,\\mathcal G)$, $E(\\psi)(m)=\\psi_X(1\\otimes m)$, where $\\mathcal P_M(X)=\\mathcal O_X(X)\\otimes_RM=R\\otimes_RM$. The map $m\\mapsto1\\otimes m$ is $R$-linear ($1\\otimes rm=r\\otimes m=r\\cdot(1\\otimes m)$ [def-weil-module-base-change]) and $\\psi_X$ is $\\mathcal O_X(X)=R$-linear, so $E(\\psi)$ is $R$-linear for the $R$-module structure of $\\Gamma(X,\\mathcal G)=\\mathcal G(X)$ as an $\\mathcal O_X(X)$-module [def-weil-sheaf-of-modules-category]. $E(\\psi)$ determines $\\psi$: for an open $U$, $a\\in\\mathcal O_X(U)$, $m\\in M$, the restriction of $\\mathcal P_M$ is $\\rho^X_U\\otimes\\mathrm{id}_M$ [def-weil-pbc-associated-module], so $1\\otimes m\\in\\mathcal P_M(U)$ is the restriction of $1\\otimes m\\in\\mathcal P_M(X)$ ($\\rho^X_U(1)=1$), and $a\\otimes m=a\\cdot(1\\otimes m)$; since $\\psi_U$ is $\\mathcal O_X(U)$-linear and $\\psi$ commutes with restrictions, $\\psi_U(a\\otimes m)=a\\cdot\\psi_U((1\\otimes m)|_U)=a\\cdot(\\psi_X(1\\otimes m))|_U=a\\cdot E(\\psi)(m)|_U$. The elements $a\\otimes m$ generate $\\mathcal P_M(U)$ as an abelian group and $\\psi_U$ is additive, so $\\psi$ is determined by $E(\\psi)$: $E$ is injective.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-associated-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0096 (lemma-adjoint-pullback-pushforward-modules), proof, second and third equalities (adjointness of tensor and restriction, then of restriction to f^{-1}O_Y and pushforward), specialized to pi : (X, O_X) -> ({*}, R), where f^{-1}O_Y is the constant ring R and the presheaf tensor product is P_M"
+   }
+  },
+  {
+   "text": "*From a linear map to a presheaf map.* Let $v:M\\to\\Gamma(X,\\mathcal G)$ be $R$-linear. For an open $U$ the map $\\mathcal O_X(U)\\times M\\to\\mathcal G(U)$, $(a,m)\\mapsto a\\cdot v(m)|_U$, is additive in each variable and $R$-balanced: $R$ acts on $\\mathcal O_X(U)$ through $\\rho^X_U$ [def-weil-pbc-associated-module], and $a\\cdot v(rm)|_U=a\\cdot(r\\,v(m))|_U=a\\rho^X_U(r)\\cdot v(m)|_U$ by the semilinearity of the restriction maps of $\\mathcal G$ [def-weil-sheaf-of-modules-category]. By the universal property of $\\mathcal O_X(U)\\otimes_RM$ (the base change of $M$ to $\\mathcal O_X(U)$ [def-weil-module-base-change]) it induces an additive $\\psi^v_U:\\mathcal P_M(U)\\to\\mathcal G(U)$ with $\\psi^v_U(a\\otimes m)=a\\cdot v(m)|_U$. On generators, $\\psi^v_U(b\\cdot(a\\otimes m))=\\psi^v_U(ba\\otimes m)=ba\\cdot v(m)|_U=b\\cdot\\psi^v_U(a\\otimes m)$ for $b\\in\\mathcal O_X(U)$, so $\\psi^v_U$ is $\\mathcal O_X(U)$-linear; and for $V\\subseteq U$, $\\psi^v_V((\\rho^U_V\\otimes\\mathrm{id})(a\\otimes m))=\\rho^U_V(a)\\cdot v(m)|_V=(a\\cdot v(m)|_U)|_V$ (semilinearity and transitivity of restrictions in $\\mathcal G$), so $\\psi^v$ commutes with restrictions. Thus $\\psi^v:\\mathcal P_M\\to\\mathcal G$ is a morphism of presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification], and $E(\\psi^v)(m)=\\psi^v_X(1\\otimes m)=1\\cdot v(m)|_X=v(m)$. So $E$ is surjective, hence (Step 2) bijective with inverse $v\\mapsto\\psi^v$.",
+   "uses": [
+    "def-weil-pbc-associated-module",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-module-base-change",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0096 (lemma-adjoint-pullback-pushforward-modules), proof, second and third equalities (adjointness of tensor and restriction, then of restriction to f^{-1}O_Y and pushforward), specialized to pi : (X, O_X) -> ({*}, R), where f^{-1}O_Y is the constant ring R and the presheaf tensor product is P_M"
+   }
+  },
+  {
+   "text": "*The composite is the stated map.* By Steps 1-3, $E\\circ\\Sigma_{\\mathcal G}:\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,\\mathcal G)\\to\\operatorname{Hom}_R(M,\\Gamma(X,\\mathcal G))$ is bijective, and $E(\\varphi\\circ\\sigma_M)(m)=\\varphi_X(\\sigma_{M,X}(1\\otimes m))=\\varphi_X(c_M(m))$ by the definition $c_M(m)=\\sigma_{M,X}(1\\otimes m)$ [def-weil-pbc-associated-module]. So $\\varphi\\mapsto\\varphi_X\\circ c_M$ is bijective.",
+   "uses": [
+    "def-weil-pbc-associated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) and assertion (4), alpha = id; Sheaves, Lemma 0096 (lemma-adjoint-pullback-pushforward-modules), proof, first equality (Hom out of the sheafified tensor presheaf)"
+   }
+  },
+  {
+   "text": "*Naturality.* For $\\mathcal O_X$-linear $\\beta:\\mathcal G\\to\\mathcal G'$: $(\\beta\\circ\\varphi)_X\\circ c_M=\\beta_X\\circ(\\varphi_X\\circ c_M)$, since components of a composite are composites of components [def-weil-sheaf-of-modules-category]. For $R$-linear $u:M'\\to M$ and $\\varphi:\\mathcal F_M\\to\\mathcal G$: $(\\varphi\\circ\\mathcal F_u)_X\\circ c_{M'}=\\varphi_X\\circ(\\mathcal F_{u,X}\\circ c_{M'})=\\varphi_X\\circ(c_M\\circ u)=(\\varphi_X\\circ c_M)\\circ u$, by $\\mathcal F_{u,X}\\circ c_{M'}=c_M\\circ u$ [def-weil-pbc-associated-module].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-associated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BH, assertion (4) (the identification is functorial: it is the adjunction bijection of pi^* -| pi_*, natural in both variables)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-associated-module",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BH, assertion (4), alpha = id, proved there by the adjunction pi^* -| pi_* (Sheaves, Lemma 0096, literature/stacks-project/sheaves.tex) for pi : (X, O_X) -> ({*}, R); the steps write that adjunction out for pi at the level of the presheaf P_M (construction (3), which is pi^*M before sheafification): sheafification (first equality of 0096's proof), then tensor/restriction adjointness for the constant ring R, which here is the universal property of O_X(U) (x)_R M"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +117,31 @@
    "results": "unitHomEquiv (Sheaf.lean), freeHomEquiv (Sheaf/Free.lean), restrictHomEquivOfIsLocallySurjective (Sheaf/ChangeOfRings.lean:55), tilde adjunction (AlgebraicGeometry/Modules/Tilde.lean:345)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphisms of presheaves of modules from U ↦ O(U) ⊗ M to G correspond to linear maps from M to global sections of G",
+   "results": "PresheafOfModules.ofPresheaf_map, PresheafOfModules.map, PresheafOfModules.unitHomEquiv (Mathlib.Algebra.Category.ModuleCat.Presheaf: Hom(unit R, M) ≃ M.sections, the case M = R), PresheafOfModules.Hom, PresheafOfModules.Hom.mk, PresheafOfModules.ofPresheaf, AlgebraicGeometry.PresheafedSpace.Γ",
+   "date": "2026-10-10",
+   "verdict": "no match (only the case M = R)"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.pullback",
+   "results": "PresheafOfModules.pullback, pullbackPushforwardAdjunction, pullbackId, pullbackComp (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback), SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous)",
+   "date": "2026-10-10",
+   "verdict": "generalization, not in one line: SheafOfModules.pullbackPushforwardAdjunction (Sheaf/PullbackContinuous.lean:60) is pi^* -| pi_* for a morphism of ringed sites, with pullback defined abstractly as the left adjoint of pushforward (Presheaf/Pullback.lean:44, Sheaf/PullbackContinuous.lean:53), not as the sheafified tensor presheaf; applying it needs the one-point site with the ring R, the continuous functor from it to the opens of X, the morphism of sheaves of rings given by R -> O_X(X), the identification pi_* G = Gamma(X, G), and the identification of pi^*M with F_M of def-weil-pbc-associated-module, none of which is in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def adjunction|def pullback' Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; grep -rln 'TensorProduct' Mathlib/Algebra/Category/ModuleCat/Presheaf Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Presheaf/Pullback.lean:44 pullback := (pushforward φ).leftAdjoint; Sheaf/PullbackContinuous.lean:53 pullback, :79 adjunction (sheafification of the presheaf pullback); tensor products only in Presheaf/Monoidal.lean, PushforwardZeroMonoidal.lean, ColimitFunctor.lean (monoidal structure, not O(U) ⊗_R M)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +161,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-associated-module-hom",
+  "worker": "stage1",
+  "summary": "Read Stacks Modules 01BH (assertion (4), proof via pi^* -| pi_*) and Sheaves 0096 with its proof, and the definition def-weil-pbc-associated-module (F_M = sheafification of P_M: U -> O_X(U) (x)_R M, sigma_M, c_M, F_u). Statement kept. Wrote the proof in five steps that unwind the adjunction for pi : X -> point at the presheaf level: (1) Hom(F_M, G) = Hom of presheaves of modules (P_M, G) by the universal property of sheafification; (2) psi -> (m -> psi_X(1 (x) m)) is R-linear and injective (O_X(U)-linearity and compatibility with restrictions); (3) surjective, inverse v -> psi^v built from the universal property of the tensor product; (4) the composite is phi -> phi_X o c_M; (5) naturality in G and M (elementary, using F_{u,X} o c_{M'} = c_M o u from the definition). Only definitions are used (all Mathlib leaves or the definition node of this unit), no new nodes. stmt_deps kept. Added three Mathlib searches: Mathlib's SheafOfModules.pullbackPushforwardAdjunction is a generalization only after the identification of F_M with an abstractly defined pullback to the point site, absent, so no match. The citer lem-weil-pbc-associated-module-pullback uses the bijection and its naturality in G (and injectivity), which the statement gives."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps: reduction to presheaf maps by the universal property of sheafification, the bijection between presheaf-module maps P_M -> G and R-linear maps M -> Gamma(X,G) in both directions (semilinearity of restrictions, universal property of the base change), composite, naturality via F_{u,X} c_M = c_{M'} u from the definition. Correct; 0 new nodes."
+ }
 }

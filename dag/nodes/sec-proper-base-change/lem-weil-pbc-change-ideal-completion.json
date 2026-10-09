@@ -10,9 +10,83 @@
  "stmt_deps": [
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Inclusions of submodules. For $k\\ge0$: $J^{dk}=(J^d)^k\\subseteq I^k$ (since $J^d\\subseteq I$ and powers of ideals are monotone), hence $J^{dk}M\\subseteq I^kM$; likewise $I^{cn}=(I^c)^n\\subseteq J^n$, hence $I^{cn}M\\subseteq J^nM$. So there are surjective $A$-linear quotient maps $\\pi^{JI}_k:M/J^{dk}M\\to M/I^kM$ and $\\pi^{IJ}_n:M/I^{cn}M\\to M/J^nM$, $x\\bmod(\\cdot)\\mapsto x\\bmod(\\cdot)$. Any composite of such reductions $M/N_1\\to M/N_2\\to M/N_3$ along inclusions $N_1\\subseteq N_2\\subseteq N_3$ of submodules is the reduction $M/N_1\\to M/N_3$ (both send $x\\bmod N_1$ to $x\\bmod N_3$); this is used below without further mention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "$\\theta$ and $\\psi$ are well defined. Let $(x_n)_n\\in M^\\wedge_J$, i.e. $x_n\\in M/J^nM$ with $x_{n'}\\bmod J^nM=x_n$ for $n\\le n'$. Put $y_k=\\pi^{JI}_k(x_{dk})=x_{dk}\\bmod I^kM$. For $k\\le k'$: $y_{k'}\\bmod I^kM=x_{dk'}\\bmod I^kM=(x_{dk'}\\bmod J^{dk}M)\\bmod I^kM=x_{dk}\\bmod I^kM=y_k$, using $J^{dk}M\\subseteq I^kM$ and compatibility of $(x_n)$ for $dk\\le dk'$. So $\\theta((x_n)_n)=(y_k)_k\\in M^\\wedge_I$. Symmetrically, for $(y_k)_k\\in M^\\wedge_I$ the family $\\psi((y_k)_k)=(y_{cn}\\bmod J^nM)_n$ is compatible (for $n\\le n'$: $y_{cn'}\\bmod J^nM=(y_{cn'}\\bmod I^{cn}M)\\bmod J^nM=y_{cn}\\bmod J^nM$), so $\\psi:M^\\wedge_I\\to M^\\wedge_J$ is defined. (Stacks uses the equivalent systems $M/I^nM\\to M/J^{\\lfloor n/c\\rfloor}M$, $M/J^mM\\to M/I^{\\lfloor m/d\\rfloor}M$; the reindexing by $dk$, $cn$ in the statement gives the same maps on the limits, by compatibility.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "$\\theta$ and $\\psi$ are $A$-linear: the $A$-module structures of $M^\\wedge_I$, $M^\\wedge_J$ are componentwise, and each component of $\\theta$ (resp. $\\psi$) is the composite of the projection $(x_n)_n\\mapsto x_{dk}$ (resp. $(y_k)_k\\mapsto y_{cn}$), which is $A$-linear, with the $A$-linear quotient map $\\pi^{JI}_k$ (resp. $\\pi^{IJ}_n$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "$\\psi\\circ\\theta=\\mathrm{id}$. For $(x_n)_n\\in M^\\wedge_J$ and $n\\ge0$, the $n$-th component of $\\psi(\\theta((x_n)))$ is $(x_{d\\cdot cn}\\bmod I^{cn}M)\\bmod J^nM=x_{dcn}\\bmod J^nM$ (reduction along $J^{dcn}M\\subseteq I^{cn}M\\subseteq J^nM$), and since $n\\le dcn$ ($c,d\\ge1$) compatibility of $(x_n)$ gives $x_{dcn}\\bmod J^nM=x_n$. $\\theta\\circ\\psi=\\mathrm{id}$. For $(y_k)_k\\in M^\\wedge_I$ and $k\\ge0$, the $k$-th component of $\\theta(\\psi((y_k)))$ is $(y_{c\\cdot dk}\\bmod J^{dk}M)\\bmod I^kM=y_{cdk}\\bmod I^kM=y_k$ since $k\\le cdk$. Hence $\\theta$ is an isomorphism of $A$-modules with inverse $\\psi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "$\\theta\\circ\\iota_J=\\iota_I$. For $x\\in M$, $\\iota_J(x)=(x\\bmod J^nM)_n$, and $\\theta(\\iota_J(x))_k=(x\\bmod J^{dk}M)\\bmod I^kM=x\\bmod I^kM=\\iota_I(x)_k$. Consequently $\\psi\\circ\\iota_I=\\psi\\circ\\theta\\circ\\iota_J=\\iota_J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "Completeness. Since $\\iota_I=\\theta\\circ\\iota_J$ with $\\theta$ bijective, $\\iota_I$ is bijective if and only if $\\iota_J$ is ($\\iota_J=\\psi\\circ\\iota_I$ with $\\psi=\\theta^{-1}$). So $M$ is $I$-adically complete iff it is $J$-adically complete (completeness meaning bijectivity of the canonical map, as in [def-weil-pbc-adic-completion] for $M=A$ and in the statement for modules).",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  },
+  {
+   "text": "Ring isomorphism for $M=A$. Then $I^kM=I^k$, $J^nM=J^n$, and $M^\\wedge_I=\\varprojlim_kA/I^k$, $M^\\wedge_J=\\varprojlim_nA/J^n$ are the completion rings of [def-weil-pbc-adic-completion] with componentwise operations. Each component of $\\theta$ is the projection to $A/J^{dk}$ (a ring map, operations being componentwise) followed by the quotient map $A/J^{dk}\\to A/I^k$, which is a ring homomorphism since $J^{dk}\\subseteq I^k$. So $\\theta$ preserves $1$ and products; being an additive bijection (previous steps), it is a ring isomorphism, with inverse the ring map $\\psi$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion, lines 22805-22822) and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0319 (lemma-change-ideal-completion), proof (lines 22817-22821): mutually inverse systems of reduction maps; written out with the reindexing $dk$, $cn$ of the statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +122,45 @@
    "results": "only IsHausdorff.StrictMono.funext (Basic.lean:108,131) and AdicCompletion.isMaximal_map_of_le (LocalRing.lean:65); no comparison of completions along different ideals, no stacks 0319 tag",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsAdicComplete I M iff IsAdicComplete J M when I ^ c ≤ J and J ^ d ≤ I",
+   "results": "IsAdicComplete, IsAdicComplete.mk, AdicCompletion.module, AdicCompletion.of_bijective_iff, IsAdicComplete.bot (Mathlib.RingTheory.AdicCompletion.Basic/Algebra)",
+   "date": "2026-10-10",
+   "verdict": "no match: nothing compares completeness along two ideals"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete ?I ?M, IsAdicComplete ?J ?M",
+   "results": "IsAdicComplete.of_subsingleton, toIsHausdorff, toIsPrecomplete, mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton, IsAdicComplete.le_jacobson_bot (all with one ideal)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two ideals with I^c ≤ J and J^d ≤ I define the same adic topology; IsAdic I iff IsAdic J",
+   "results": "is_ideal_adic_pow (IsAdic J → IsAdic (J^n)), IsAdic, Ideal.adicTopology, isAdic_iff, Ideal.adicModuleTopology (Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology)",
+   "date": "2026-10-10",
+   "verdict": "no match: only J vs J^n for topologies on a ring; no statement on completions of modules (IsAdic.isAdicComplete_iff in RingTheory/AdicCompletion/Topology.lean:76 is for M = R only, and its combination with is_ideal_adic_pow is not a one-line specialization)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'equivOf|congrIdeal|ofLE|mapIdeal|IsHausdorff.*(mono|_of_le|anti)|IsPrecomplete.*(mono|_of_le)' Mathlib/RingTheory/AdicCompletion/ Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean; grep isAdic in Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean; read RingTheory/AdicCompletion/RingHom.lean (IsAdicComplete.StrictMono.liftRingHom: lifts along a strictly increasing subsequence of powers of one ideal)",
+   "results": "none for the comparison of two ideals; AdicCompletion.equivOfSubsetPow does not exist",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AdicCompletion.equivOf (project ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (not proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +180,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-change-ideal-completion",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 0319 (algebra.tex 22805-22822): it is the lemma with the mutually inverse maps made explicit (reindexing by dk and cn instead of Stacks' floor(n/c), floor(m/d) systems; same maps on the limits); kept unchanged. Proof written out in 7 elementary steps: inclusions J^{dk}M ⊆ I^kM and I^{cn}M ⊆ J^nM, well-definedness and compatibility of theta and psi, A-linearity, both composites are the identity (via compatibility x_{cdn} ≡ x_n), theta∘iota_J = iota_I, equivalence of completeness, ring isomorphism for M = A. stmt_deps kept (def-weil-pbc-adic-completion, a Mathlib leaf); proof_deps = [def-weil-pbc-adic-completion]. No new nodes. Mathlib re-searched with LeanSearch, Loogle, LeanFinder and grep: Mathlib has no comparison of completions or of IsAdicComplete along two ideals with the same powers up to cofinality, so the item is not a leaf; Lean candidate for stage 2: build theta from AdicCompletion.map-style lifts (AdicCompletion.lift / transitionMap) with Submodule.smul_mono_left and Ideal.pow_le_pow_right, Ideal.pow_mul."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Seven elementary steps along Stacks 0319 with the explicit reindexed maps: inclusions, well-definedness and compatibility with transition maps, linearity, the two composites are identities (x_{dcn} = x_n mod J^n), compatibility with the canonical maps, completeness equivalence, ring isomorphism for M = A. Correct; 0 new nodes."
+ }
 }
