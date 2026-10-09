@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 
 /-!
@@ -70,16 +71,6 @@ attribute [instance] IsRegular.isRegularLocalRing_stalk
 zero ideal. -/
 instance IsRegular.spec_field (k : Type u) [Field k] : IsRegular (Spec (.of k)) :=
   ⟨fun z ↦ IsRegularLocalRing.of_ringEquiv (Spec.stalkIso (.of k) z).commRingCatIsoToRingEquiv.symm⟩
-
-/-- The product of two regular schemes locally of finite type over a perfect field `k` is
-regular: over a perfect field such schemes are smooth, and smoothness is stable under base
-change and composition. -/
-theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k]
-    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f]
-    [LocallyOfFiniteType g] (hX : ∀ x : X, IsRegularLocalRing (X.presheaf.stalk x))
-    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (z : ↥(pullback f g)) :
-    IsRegularLocalRing ((pullback f g).presheaf.stalk z) :=
-  sorry
 
 /-- Let `V` be an affine open of a scheme `X` and `R → Γ(X, V)` an étale ring map from a regular
 ring `R`. Then the local rings of `X` at the points of `V` are regular: they are localizations of
@@ -153,8 +144,41 @@ is smooth over `k` (Stacks `00TV`). This is the main input of
 `AlgebraicGeometry.Scheme.smooth_fromNormalization_comp` (blueprint:
 `lem-sc-normalized-curve-smooth`). -/
 theorem smooth_of_isRegular {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f :=
-  sorry
+    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f := by
+  refine HasRingHomProperty.of_iSup_eq_top (P := @Smooth) (fun V : X.affineOpens ↦ V)
+    (iSup_affineOpens_eq_top X) fun V ↦ ?_
+  set φ := (f.appLE ⊤ V le_top).hom
+  have hφ : φ.FiniteType :=
+    HasRingHomProperty.appLE @LocallyOfFiniteType f ‹_› ⟨⊤, isAffineOpen_top _⟩ V le_top
+  set e := (Scheme.ΓSpecIso (.of k)).inv.hom
+  set e' := (Scheme.ΓSpecIso (.of k)).hom.hom
+  have he : e.comp e' = RingHom.id _ := by
+    rw [← CommRingCat.hom_comp, Iso.hom_inv_id, CommRingCat.hom_id]
+  have he' : Function.Bijective e' :=
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).hom)
+  have hψ : (φ.comp e).Smooth := by
+    have hft : (φ.comp e).FiniteType := hφ.comp (.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2)
+    let := (φ.comp e).toAlgebra
+    have : Algebra.FiniteType k Γ(X, V) := hft
+    exact Algebra.Smooth.of_isRegularLocalRing (k := k)
+      (V.2.isRegularLocalRing_localization fun x _ ↦ IsRegular.isRegularLocalRing_stalk x)
+  have := RingHom.Smooth.comp (RingHom.Smooth.of_bijective he') hψ
+  rwa [RingHom.comp_assoc, he, RingHom.comp_id] at this
+
+/-- The product of two regular schemes locally of finite type over a perfect field `k` is
+regular: over a perfect field such schemes are smooth, and smoothness is stable under base
+change and composition. -/
+theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k]
+    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f]
+    [LocallyOfFiniteType g] (hX : ∀ x : X, IsRegularLocalRing (X.presheaf.stalk x))
+    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (z : ↥(pullback f g)) :
+    IsRegularLocalRing ((pullback f g).presheaf.stalk z) := by
+  have : IsRegular X := ⟨hX⟩
+  have : IsRegular Y := ⟨hY⟩
+  have := smooth_of_isRegular f
+  have := smooth_of_isRegular g
+  exact (IsRegular.of_smooth (pullback.fst f g ≫ f)).isRegularLocalRing_stalk z
 
 /-- A locally noetherian scheme of dimension at most one whose local rings are integrally closed
 domains is regular: each local ring is a field or a discrete valuation ring.
