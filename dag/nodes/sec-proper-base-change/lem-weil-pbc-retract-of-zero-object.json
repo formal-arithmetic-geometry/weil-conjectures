@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-retract-of-zero-object",
+ "kind": "statement",
+ "title": "A retract of a zero object is zero",
+ "statement": "Let $\\mathcal C$ be a category with zero morphisms (for instance an abelian category), $X,Y$ objects of $\\mathcal C$ and $\\iota:X\\to Y$, $\\rho:Y\\to X$ morphisms with $\\rho\\circ\\iota=\\mathrm{id}_X$. If $Y$ is a zero object, then $X$ is a zero object. (Proof: $\\iota$ factors through the zero object $Y$, so $\\iota=0$ and $\\mathrm{id}_X=\\rho\\circ\\iota=0$, hence every morphism into or out of $X$ is $0$.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\"): the step left implicit by \"Thus\""
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a retract of a zero object is a zero object",
+   "results": "ObjectProperty.instContainsZeroIsZeroOfHasZeroObject (Mathlib.CategoryTheory.ObjectProperty.ContainsZero); Retract, Retract.mk (Mathlib.CategoryTheory.Retract); ObjectProperty.instIsClosedUnderSubobjectsIsZeroOfHasZeroMorphisms (Mathlib.CategoryTheory.ObjectProperty.EpiMono); idZeroEquivIsoZero (Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms); IsZero.isoZero",
+   "date": "2026-10-09",
+   "verdict": "generalization: IsZero is closed under subobjects (monos into a zero object); see grep for IsZero.of_mono"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Retract",
+   "results": "CategoryTheory.Limits.IsZero.retract (Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects): a zero object is a retract of every object",
+   "date": "2026-10-09",
+   "verdict": "no direct match (converse direction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if X is a retract of Y (i : X → Y, r : Y → X, r ∘ i = id) and Y is a zero object then X is a zero object",
+   "results": "IsZero.iff_isSplitEpi_eq_zero, IsZero.iff_isSplitMono_eq_zero, IsZero.iff_id_eq_zero, idZeroEquivIsoZero (Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms); ShortComplex.Splitting.ofIsZeroOfIsIso; ObjectProperty.IsStableUnderRetracts.of_retract",
+   "date": "2026-10-09",
+   "verdict": "generalization: IsZero.iff_isSplitMono_eq_zero / IsZero.of_mono"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem of_mono\\|iff_id_eq_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean; grep -rn 'IsStableUnderRetracts.*IsZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ZeroMorphisms.lean:211 `theorem IsZero.of_mono {X Y : C} (f : X ⟶ Y) [Mono f] (i : IsZero Y) : IsZero X` (namespace IsZero, [HasZeroMorphisms C]); iff_id_eq_zero; no IsStableUnderRetracts instance for IsZero",
+   "date": "2026-10-09",
+   "verdict": "generalization, specializes in one line: IsZero.of_mono"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.Limits.IsZero.of_mono",
+   "results": "CategoryTheory.Limits.IsZero.of_mono, of_mono_zero, of_mono_eq_zero (Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean)",
+   "date": "2026-10-09",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.IsZero.of_mono",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
+  "how": "specializes in one line: for `h : Retract X Y` and `hY : IsZero Y`, `IsZero.of_mono h.i hY`; `Mono h.i` holds since h.i is a split mono with retraction h.r (the `IsSplitMono` instance that `@[to_dual]` on `instance : IsSplitEpi h.r` in Mathlib/CategoryTheory/Retract.lean gives; or directly `(IsZero.iff_id_eq_zero X).2 (by rw [← h.retract, hY.eq_of_tgt h.i 0, zero_comp])`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-vanishing-descends-retract",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

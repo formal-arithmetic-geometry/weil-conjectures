@@ -2,30 +2,105 @@
  "id": "lem-weil-pbc-vanishing-descends-retract",
  "kind": "statement",
  "title": "Vanishing descends to a retract",
- "statement": "If $I$ is a direct summand of $M$ and $R^qh_*M=0$ for $q>0$, then\n$R^qh_*I=0$ for $q>0$. This remains true after arbitrary base change.",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and $\\Lambda$ a commutative ring (in the application $\\Lambda=\\mathbf F_r$; $\\Lambda=\\mathbf Z$ is included and gives abelian sheaves). For a scheme $T$ let $\\Mod(T_{\\Et},\\Lambda)$ be the abelian category of sheaves of modules [def-weil-sheaf-of-modules-category] over the constant sheaf of rings $\\underline\\Lambda$ [def-weil-pbc-constant-sheaf] on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. For $q\\ge0$ and $F$ in $\\Mod(X_{\\Et},\\Lambda)$ let $R^qh_*F\\in\\Ab(Y_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] be the $q$-th higher direct image of the underlying abelian sheaf of $F$, $R^qh_*F=\\mathcal H^q(Rh_*F)$ with $Rh_*:\\Dplus(X_{\\Et})\\to\\Dplus(Y_{\\Et})$ [def-weil-pbc-derived-categories] computed with K-injective resolutions of abelian sheaves [def-weil-pbc-direct-image], as in $\\mathrm{IA}_r$. Let $M$, $I$ be objects of $\\Mod(X_{\\Et},\\Lambda)$ with morphisms $\\iota:I\\to M$ and $\\rho:M\\to I$ of $\\Mod(X_{\\Et},\\Lambda)$ such that $\\rho\\circ\\iota=\\mathrm{id}_I$ ($I$ is a direct summand, i.e. a retract, of $M$). If $R^qh_*M=0$ for every $q>0$, then $R^qh_*I=0$ for every $q>0$. (Computing $R^qh_*$ instead with the derived functors of $h_*:\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Y_{\\Et},\\Lambda)$ gives the same underlying abelian sheaves, Stacks 0D6J (3); the proof below uses only that $R^qh_*$ is a functor, so it holds verbatim for that reading too.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-vanishing-descends-retract.md",
   "place": "node lem-weil-pbc-vanishing-descends-retract, order 1188"
  },
  "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "The higher direct image functors are additive, and additive functors preserve\nretracts, so the direct summand structure on $I$ is preserved by $R^qh_*$; the\nasserted vanishing follows from the vanishing on $M$. The argument is\ninsensitive to base change.",
-   "uses": [],
-   "elementary": null
+   "text": "*The retraction on underlying abelian sheaves.* A morphism of sheaves of $\\underline\\Lambda$-modules is a morphism of the underlying abelian sheaves, with the same composition and identities [def-weil-sheaf-of-modules-category], so forgetting the module structure is a functor $\\operatorname{For}:\\Mod(X_{\\Et},\\Lambda)\\to\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. By [lem-weil-pbc-functor-preserves-retract] applied to $\\operatorname{For}$, $\\operatorname{For}(\\rho)\\circ\\operatorname{For}(\\iota)=\\mathrm{id}_{\\operatorname{For}I}$: the underlying abelian sheaf of $I$ is a retract of that of $M$ in $\\Ab(X_{\\Et})$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-functor-preserves-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\")"
+   }
+  },
+  {
+   "text": "*$R^qh_*$ carries the retraction to a retraction.* Fix $q>0$. By [def-weil-pbc-direct-image], $R^qh_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is the composite of the functor sending a sheaf to the complex concentrated in degree $0$ in $\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories], the functor $Rh_*:\\Dplus(X_{\\Et})\\to\\Dplus(Y_{\\Et})$ and the cohomology-sheaf functor $\\mathcal H^q$; so it is a functor. By [lem-weil-pbc-functor-preserves-retract] applied to $R^qh_*$ and the retraction of step 1, $R^qh_*(\\rho)\\circ R^qh_*(\\iota)=\\mathrm{id}_{R^qh_*I}$: $R^qh_*I$ is a retract of $R^qh_*M$ in $\\Ab(Y_{\\Et})$. (Only functoriality is used; additivity of $R^qh_*$ is not needed.)",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-functor-preserves-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\")"
+   }
+  },
+  {
+   "text": "*A retract of zero is zero.* $\\Ab(Y_{\\Et})$ is an abelian category [def-weil-pbc-abelian-etale-sheaves], in particular it has zero morphisms, and $R^qh_*M$ is a zero object by hypothesis. By [lem-weil-pbc-retract-of-zero-object] applied to the retraction of step 2, $R^qh_*I$ is a zero object: $R^qh_*I=0$. As $q>0$ was arbitrary, this is the claim.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-retract-of-zero-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\")"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-functor-preserves-retract",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-retract-of-zero-object"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-vanishing-descends-retract.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\"); the source leaves the step implicit (\"Thus\"), it is written out here"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image of a direct summand vanishes if it vanishes on the sheaf; right derived functor of a direct summand is zero",
+   "results": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, rightDerivedZeroIsoSelf and variants, toRightDerivedZero (Mathlib.CategoryTheory.Abelian.RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor vanishes on a direct summand if it vanishes on the whole object",
+   "results": "Functor.isZero_leftDerived_obj_projective_succ (Mathlib.CategoryTheory.Abelian.LeftDerived); Functor.isZero_rightDerived_obj_injective_succ (RightDerived); Abelian.Ext.mapExactFunctor_zero; HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Retract",
+   "results": "CategoryTheory.Limits.IsZero.retract (Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects) only",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; the generic parts are the leaves lem-weil-pbc-functor-preserves-retract (Retract.map) and lem-weil-pbc-retract-of-zero-object (IsZero.of_mono)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Retract' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/; grep -rln 'directImage\\|pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Retract only in injective/projective dimension (Abelian/Injective/Dimension.lean:161 Retract.hasInjectiveDimensionLT), EpiWithInjectiveKernel, CochainComplexPlus quasiIso; no higher direct image of etale sheaves along a morphism of schemes in AlgebraicGeometry/Sites",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no R^q h_* for etale sheaves; the item is the two generic leaves applied to the project's R^q h_*"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -50,5 +125,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-vanishing-descends-retract",
+  "worker": "stage1",
+  "summary": "Statement made precise: Lambda-module sheaves over the constant sheaf (Lambda = Z included), a retraction iota, rho with rho iota = id, and R^q h_* the higher direct image of the underlying abelian sheaf (def-weil-pbc-direct-image, as IA_r uses it). The clause 'remains true after arbitrary base change' is dropped: the only user, lemma-weil-pbc-cancellation step 7, transports the retraction along b^{-1} itself and applies this lemma to h' and b^{-1}I. The Mod-vs-Ab reading of R^q h_* is noted in the statement (Stacks 0D6J (3); the unsplit node lem-weil-pbc-exchange-forget-coefficients part 2 states that comparison), but not needed: the proof uses only functoriality, not additivity as the blueprint said. Proof in three steps after Stacks 0A4C (first paragraph, the implicit 'Thus'): forgetful functor and R^q h_* carry the retraction to a retraction (new Mathlib leaf lem-weil-pbc-functor-preserves-retract = CategoryTheory.Retract.map), and a retract of a zero object is zero (new Mathlib leaf lem-weil-pbc-retract-of-zero-object = IsZero.of_mono applied to the split mono Retract.i). Searched three ways (leansearch, leanfinder/loogle, grep) for the item and both leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

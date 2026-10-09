@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-functor-preserves-retract",
+ "kind": "statement",
+ "title": "A functor carries a retract to a retract",
+ "statement": "Let $\\mathcal C$, $\\mathcal D$ be categories, $F:\\mathcal C\\to\\mathcal D$ a functor, and $X,Y$ objects of $\\mathcal C$ with morphisms $\\iota:X\\to Y$ and $\\rho:Y\\to X$ such that $\\rho\\circ\\iota=\\mathrm{id}_X$ ($X$ is a retract of $Y$). Then $F(\\rho)\\circ F(\\iota)=\\mathrm{id}_{F(X)}$: $F(X)$ is a retract of $F(Y)$, with section $F(\\iota)$ and retraction $F(\\rho)$. (No additivity of $F$ is needed.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 0A4C (label lemma-sandwich), proof, first paragraph (\"Since $\\mathcal I$ is injective we see that $\\mathcal I$ is a direct summand of $f_*\\mathcal J$. Thus it suffices to prove the desired vanishing for $f_*\\mathcal J$\"): the step left implicit by \"Thus\""
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a functor maps a retract X of Y to a retract F X of F Y",
+   "results": "CategoryTheory.Retract.map, Retract.map_r, Retract.map_i, RetractArrow.map_i_left (Mathlib.CategoryTheory.Retract); Functor.preservesEpimorphisms.ofRetract (Mathlib.CategoryTheory.Functor.EpiMono); NatTrans.retractArrowApp",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Retract.map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Retract ?X ?Y → CategoryTheory.Retract (?F.obj ?X) (?F.obj ?Y)",
+   "results": "CategoryTheory.Retract.trans, Retract.op, Retract.map, RetractArrow.left, RetractArrow.right (Mathlib.CategoryTheory.Retract)",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.Retract.map"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Retract.lean",
+   "results": "Retract.lean:59 `def map (F : C ⥤ D) : Retract (F.obj X) (F.obj Y)` with i := F.map h.i, r := F.map h.r, proof rw [← F.map_comp, h.retract, F.map_id]; Retract.lean:150 RetractArrow.map",
+   "date": "2026-10-09",
+   "verdict": "match (source read): exact"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Retract.map",
+  "file": "Mathlib/CategoryTheory/Retract.lean",
+  "how": "exact: `Retract X Y` is the structure (i : X ⟶ Y, r : Y ⟶ X, retract : i ≫ r = 𝟙 X) (Retract.lean:28); `h.map F : Retract (F.obj X) (F.obj Y)` has i = F.map h.i, r = F.map h.r (simp lemmas Retract.map_i, Retract.map_r), for any functor F : C ⥤ D"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-vanishing-descends-retract",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
