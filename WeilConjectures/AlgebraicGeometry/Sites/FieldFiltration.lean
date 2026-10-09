@@ -288,4 +288,100 @@ lemma mono_constZModHom [Fact ℓ.Prime] {s : X.obj.obj (op 𝟙ₑ)} (hs : ℓ 
 
 end Constant
 
+/-- A section of `B` killed by the cokernel of a monomorphism `ψ : A ⟶ B` comes from `A`. -/
+lemma exists_app_eq_of_cokernel_π_app_eq_zero
+    {A B : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}} (ψ : A ⟶ B) [Mono ψ]
+    {V : (Spec (.of F)).Etale} (w : B.obj.obj (op V)) (hw : (cokernel.π ψ).hom.app (op V) w = 0) :
+    ∃ v, ψ.hom.app (op V) v = w := by
+  obtain ⟨t, rfl⟩ := Etale.exists_kernel_ι_app_eq (cokernel.π ψ) w hw
+  obtain ⟨l, hl⟩ := KernelFork.IsLimit.lift'
+    (Abelian.monoIsKernelOfCokernel _ (cokernelIsCokernel ψ)) (kernel.ι (cokernel.π ψ))
+    (kernel.condition _)
+  refine ⟨l.hom.app (op V) t, ?_⟩
+  rw [← hl]
+  rfl
+
+section Quotient
+
+variable {ℓ : ℕ} [Fact ℓ.Prime]
+  {X : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}}
+  {s : X.obj.obj (op (MorphismProperty.Over.mk ⊤ (𝟙 (Spec (CommRingCat.of F)))
+    (MorphismProperty.id_mem @AlgebraicGeometry.Etale (Spec (CommRingCat.of F)))))}
+  (hs : ℓ • s = 0) (hs0 : s ≠ 0)
+
+include hs0 in
+/-- The sections of `X` over a field killed by the cokernel of `ℤ/ℓ ⟶ X` are the multiples of
+the restriction of `s`. -/
+lemma cokernel_π_app_eq_zero_iff (E : Type u) [Field E] [Algebra F E] [Algebra.Etale F E]
+    (w : X.obj.obj (op (etaleSpec F E))) :
+    have := mono_constZModHom hs hs0
+    (cokernel.π (constZModHom ℓ X s hs)).hom.app (op (etaleSpec F E)) w = 0 ↔
+      w ∈ AddSubgroup.zmultiples (globalRes X (etaleSpec F E) s) := by
+  have := mono_constZModHom hs hs0
+  constructor
+  · intro hw
+    obtain ⟨v, rfl⟩ := exists_app_eq_of_cokernel_π_app_eq_zero _ w hw
+    obtain ⟨⟨a⟩, rfl⟩ := exists_toSheafify_eq ℓ E v
+    obtain ⟨n, rfl⟩ := ZMod.intCast_surjective a
+    exact ⟨n, (constZModHom_app_toSheafify hs _ n).symm⟩
+  · rintro ⟨n, rfl⟩
+    change (cokernel.π (constZModHom ℓ X s hs)).hom.app (op (etaleSpec F E))
+      (n • globalRes X (etaleSpec F E) s) = 0
+    rw [← constZModHom_app_toSheafify hs, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+      ← ObjectProperty.FullSubcategory.comp_hom, cokernel.condition]
+    rfl
+
+include hs0 in
+lemma surjective_cokernel_π_app (hX : IsSplitBy N X) (E : Type u) [Field E] [Algebra F E]
+    [Algebra.Etale F E] (β : N →ₐ[F] E) :
+    Function.Surjective ((cokernel.π (constZModHom ℓ X s hs)).hom.app (op (etaleSpec F E))) := by
+  have := mono_constZModHom hs hs0
+  set π := cokernel.π (constZModHom ℓ X s hs)
+  have : Sheaf.IsLocallySurjective π := (Sheaf.isLocallySurjective_iff_epi' (φ := π)).2 inferInstance
+  intro y
+  have hmem := Presheaf.imageSieve_mem (Spec (.of F)).smallEtaleTopology π.hom y
+  obtain ⟨E', _, _, _, θ, ⟨z, hz⟩, -⟩ := exists_etaleSpec_field_mem_of_mem hmem
+    (show (etaleSpec F E).left from ⟨⊥, Ideal.isPrime_bot⟩)
+  obtain ⟨γ, rfl⟩ := exists_etaleSpecMap_eq θ
+  have hb : Function.Bijective (X.obj.map (etaleSpecMap γ).op) := by
+    have h := hX E' (γ.comp β)
+    rw [← etaleSpecMap_comp, op_comp, Functor.map_comp] at h
+    have e : ⇑(ConcreteCategory.hom (X.obj.map (etaleSpecMap β).op ≫
+        X.obj.map (etaleSpecMap γ).op)) =
+        X.obj.map (etaleSpecMap γ).op ∘ X.obj.map (etaleSpecMap β).op :=
+      funext fun _ ↦ ConcreteCategory.comp_apply _ _ _
+    rw [e] at h
+    exact (Function.Bijective.of_comp_iff _ (hX E β)).1 h
+  obtain ⟨z₀, rfl⟩ := hb.2 z
+  refine ⟨z₀, injective_map_of_surjective _ (etaleSpecMap γ) (surjective_left_of_field _) ?_⟩
+  rw [← hz, NatTrans.naturality_apply]
+
+include hs0 in
+lemma isSplitBy_cokernel (hX : IsSplitBy N X) :
+    IsSplitBy N (cokernel (constZModHom ℓ X s hs)) := by
+  intro E _ _ _ β
+  set π := cokernel.π (constZModHom ℓ X s hs)
+  refine ⟨injective_map_of_surjective _ _ (surjective_left_of_field _), fun y ↦ ?_⟩
+  obtain ⟨w, rfl⟩ := surjective_cokernel_π_app hs hs0 hX E β y
+  obtain ⟨w₀, rfl⟩ := (hX E β).2 w
+  exact ⟨π.hom.app _ w₀, (NatTrans.naturality_apply π.hom _ w₀).symm⟩
+
+include hs0 in
+lemma card_eq_card_cokernel_mul (hX : IsSplitBy N X) [Finite (X.obj.obj (op (etaleSpec F N)))] :
+    Nat.card (X.obj.obj (op (etaleSpec F N))) =
+      Nat.card ((cokernel (constZModHom ℓ X s hs)).obj.obj (op (etaleSpec F N))) * ℓ := by
+  set f := ((cokernel.π (constZModHom ℓ X s hs)).hom.app (op (etaleSpec F N))).hom
+  have hsurj : Function.Surjective f := surjective_cokernel_π_app hs hs0 hX N (AlgHom.id F N)
+  have hker : f.ker = AddSubgroup.zmultiples (globalRes X (etaleSpec F N) s) := by
+    ext w
+    exact cokernel_π_app_eq_zero_iff hs hs0 N w
+  have hne : globalRes X (etaleSpec F N) s ≠ 0 := fun h ↦
+    hs0 (injective_globalRes X N (h.trans (map_zero _).symm))
+  have hord : addOrderOf (globalRes X (etaleSpec F N) s) = ℓ :=
+    addOrderOf_eq_prime (by rw [← map_nsmul, hs, map_zero]) hne
+  rw [AddSubgroup.card_eq_card_quotient_mul_card_addSubgroup f.ker, hker, Nat.card_zmultiples,
+    hord, ← hker, Nat.card_congr (QuotientAddGroup.quotientKerEquivOfSurjective f hsurj).toEquiv]
+
+end Quotient
+
 end AlgebraicGeometry.Scheme
