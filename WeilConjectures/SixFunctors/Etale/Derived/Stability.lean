@@ -428,6 +428,35 @@ theorem constructibleFiniteTor_derivedHom_of_verdierDual {X S : Scheme.{u}} (a :
   exact ⟨(boundedConstructible A X).prop_of_iso e'.symm hbc, c, d,
     (torAmplitudeIn A X c d).prop_of_iso e'.symm hcd⟩
 
+/-- The reduction of the finite étale case of `sk-prop-sf-rf-shriek-preservation`: if the direct
+image along a proper `f` is *left* adjoint to the pullback, then `Rf^! ≅ D(f^*)`, so `Rf^!`
+preserves the constructible interval and the Tor amplitude unchanged. For a finite étale `f`
+the adjunction `f_* ⊣ f^*` holds because `f_*` agrees with the étale extension by zero, but this
+is not available for a general coefficient category `A`. -/
+theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_adjunction
+    [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] (adj : (f)_*[A] ⊣ (f)^*[A]) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (hK : constructibleTorAmplitudeIn A Y a b K) :
+    constructibleTorAmplitudeIn A X a b ((R(f)^![A]).obj K) := by
+  have := adj.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits (f)_*[A] :=
+    PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
+  -- `Rf_! ≅ Rf_* ≅ D(f_*)`, whose right adjoint is `D(f^*)`
+  let e : R(f)_![A] ≅ (f)_*[A].mapDerivedCategory :=
+    rightDerivedLowerShriekIsoRightDerivedLowerStar A f ≪≫
+      (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory
+  let e' : R(f)^![A] ≅ (f)^*[A].mapDerivedCategory :=
+    (rightDerivedUpperShriekAdjunction A f).rightAdjointUniq
+      (adj.mapDerivedCategoryAdjunction.ofNatIsoLeft e.symm)
+  obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
+  refine constructibleTorAmplitudeIn_of_iso _ (e'.app K).symm ⟨⟨?_,
+    ((f)^*[A]).homologyConcentratedIn_mapDerivedCategory_obj hab⟩, ?_⟩
+  · exact hbc.mapDerivedCategory_upperStar f
+  · exact (torAmplitudeIn A X a b).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app K)
+      (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
+
 /-! ### Closed immersions: reduction to the open complement -/
 
 section ClosedImmersion
