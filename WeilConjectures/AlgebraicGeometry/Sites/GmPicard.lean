@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
+public import WeilConjectures.AlgebraicGeometry.Sites.GmTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 
@@ -25,9 +26,8 @@ All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor 
 - `AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf`: the canonical bijection
   `L ↦ Isom(𝒪_X, L)` between invertible modules up to isomorphism and `𝔾ₘ`-torsors on `X_ét`
   (`AlgebraicGeometry.Scheme.Pic.etaleTorsorClass`). It is injective by
-  `AlgebraicGeometry.Scheme.Pic.injective_etaleTorsorClass`; its surjectivity
-  `AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass` (fpqc descent of invertible
-  modules) is `sorry`.
+  `AlgebraicGeometry.Scheme.Pic.injective_etaleTorsorClass` and surjective by fpqc descent of
+  invertible modules, `AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor`: invertible modules up to
   isomorphism are in bijection with `𝔾ₘ`-torsors on `X_ét` and with `𝒪_Xˣ`-torsors on `X_Zar`.
 - `AlgebraicGeometry.Scheme.Pic.toH1Units` and `AlgebraicGeometry.Scheme.Pic.toH1UnitsAddEquiv`:
@@ -55,23 +55,22 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u})
 
 /-- **Every `𝔾ₘ`-torsor is `Isom(𝒪_X, L)`.** Every `𝔾ₘ`-torsor on the small étale site of `X`
-is isomorphic to the torsor `Isom(𝒪_X, L)` of trivialisations of an invertible module `L`.
-This is fpqc descent for invertible modules: on an étale covering trivialising the torsor, the
-differences of the local sections form a `𝔾ₘ`-valued cocycle, which is a descent datum for the
-structure sheaf twisted by multiplication by the cocycle.
-
-The proof is `sorry`. For `X = Spec K` with `K` a field, the descent step is proved in
-`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`.
+is isomorphic to the torsor `Isom(𝒪_X, L)` of trivialisations of an invertible module `L`
+(`AlgebraicGeometry.Scheme.Torsor.exists_etaleIsoTorsor_equiv`). This is fpqc descent for
+invertible modules: on an étale covering trivialising the torsor, the differences of the local
+sections form a `𝔾ₘ`-valued cocycle, which twists the descent datum of the structure sheaf.
 (blueprint: `lem-sc-line-bundle-torsor`, étale part) -/
 theorem Pic.surjective_etaleTorsorClass :
-    Function.Surjective (Pic.etaleTorsorClass (X := X)) :=
-  sorry
+    Function.Surjective (Pic.etaleTorsorClass (X := X)) := by
+  rintro ⟨T⟩
+  obtain ⟨L, hL, h⟩ := Torsor.exists_etaleIsoTorsor_equiv T
+  exact ⟨Pic.mk (L : X.Modules), (Pic.etaleTorsorClass_mk _).trans (Quotient.sound h)⟩
 
 /-- **Line bundles and `𝔾ₘ`-torsors, étale version.** The canonical bijection `L ↦ Isom(𝒪_X, L)`
 (`AlgebraicGeometry.Scheme.Pic.etaleTorsorClass`) from the Picard group of `X` onto the
-isomorphism classes of `𝔾ₘ`-torsors on the small étale site of `X`. It is injective by
-`AlgebraicGeometry.Scheme.Pic.injective_etaleTorsorClass`; its surjectivity
-`AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass` is `sorry`.
+isomorphism classes of `𝔾ₘ`-torsors on the small étale site of `X`: it is injective by
+`AlgebraicGeometry.Scheme.Pic.injective_etaleTorsorClass` and surjective by
+`AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass`.
 (blueprint: `lem-sc-line-bundle-torsor`, étale part) -/
 noncomputable def picEquivQuotientTorsorGmSheaf :
     X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.gmSheaf)) :=

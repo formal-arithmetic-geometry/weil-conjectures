@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.CategoryTheory.Sites.TorsorGluing
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 
 /-!
 # Every `𝔾ₘ`-torsor comes from an invertible module
@@ -23,6 +24,7 @@ gives a descent datum of sheaves of modules.
 universe u
 
 open CategoryTheory Opposite Limits CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
+  MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
 
@@ -76,7 +78,8 @@ noncomputable def transition (i j : ι) : Γ((Etale.inter (V i) (V j)).left, ⊤
 
 /-- The transition function pulled back to `Z` is the difference of the pulled back sections. -/
 lemma appTop_transition {Z : X.Etale} {i j : ι} (u : Z ⟶ V i) (w : Z ⟶ V j) :
-    (Etale.interLift u w).left.appTop (transition T V t i j : Γ((Etale.inter (V i) (V j)).left, ⊤)) =
+    (Etale.interLift u w).left.appTop
+        (transition T V t i j : Γ((Etale.inter (V i) (V j)).left, ⊤)) =
       ((Additive.toMul (T.sub (T.sheaf.obj.map w.op (t j)) (T.sheaf.obj.map u.op (t i))).down :
         Γ(Z.left, ⊤)ˣ) : Γ(Z.left, ⊤)) := by
   have h := T.map_sub_apply (Etale.interLift u w).op
@@ -251,12 +254,108 @@ lemma ofArrows_mem_fpqcTopology :
   rw [mem_grothendieckTopology_iff]
   refine ⟨𝒰, ?_⟩
   rintro _ _ ⟨j⟩
-  have hj : Nonempty (T.sheaf.obj.obj (op ((𝒰.X j).asOverProp X (h j)))) := hle _ _ (Presieve.ofArrows.mk j)
+  have hj : Nonempty (T.sheaf.obj.obj (op ((𝒰.X j).asOverProp X (h j)))) :=
+    hle _ _ (Presieve.ofArrows.mk j)
   refine ⟨_, 𝟙 _, _, Presieve.ofArrows.mk
     (ι := {V : X.Etale // Nonempty (T.sheaf.obj.obj (op V))}) ⟨_, hj⟩, ?_⟩
   rw [Category.id_comp]
   change 𝒰.X j ↘ X = _
   rw [← comp_over (𝒰.f j) X]
   exact Category.comp_id _
+
+end AlgebraicGeometry.Scheme.Torsor
+
+namespace AlgebraicGeometry.Scheme.Torsor
+
+lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M₁ M₂ : 𝒞} (α : Oq ≅ O₁)
+    (β : Mq ≅ M₁) (γ : Oq ≅ O₂) (δ : Mq ≅ M₂) (x₁ : O₁ ⟶ M₁) (x₂ : O₂ ⟶ M₂) (s : O₁ ⟶ O₁)
+    (s' : Oq ⟶ Oq) (hs : α.hom ≫ s = s' ≫ α.hom)
+    (comm : x₁ ≫ β.inv ≫ δ.hom = (s ≫ α.inv ≫ γ.hom) ≫ x₂) :
+    α.hom ≫ x₁ ≫ β.inv = s' ≫ γ.hom ≫ x₂ ≫ δ.inv := by
+  have : x₁ ≫ β.inv = (s ≫ α.inv ≫ γ.hom) ≫ x₂ ≫ δ.inv := by
+    rw [← Category.assoc _ x₂, ← comm]
+    simp
+  rw [this, ← Category.assoc, ← Category.assoc, ← Category.assoc, hs]
+  simp
+
+variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
+
+set_option maxHeartbeats 4000000 in
+-- the defeq checks through the small étale and pro-étale sites are slow
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **Every `𝔾ₘ`-torsor is the torsor of trivialisations of an invertible module.** The descent
+datum `AlgebraicGeometry.Scheme.Torsor.descentData` is effective by fpqc descent, and the
+trivialisations of the descended module over the covering have the transition functions of
+the torsor. -/
+theorem exists_etaleIsoTorsor_equiv :
+    ∃ (L : modulesPseudofunctor.obj (.mk (op X)))
+      (_ : SheafOfModules.IsInvertible.{u, u, u} (L : X.Modules)),
+      Modules.etaleIsoTorsor L ≈ T := by
+  let ι := {V : X.Etale // Nonempty (T.sheaf.obj.obj (op V))}
+  let V : ι → X.Etale := fun i ↦ i.1
+  let t : ∀ i, T.sheaf.obj.obj (op (V i)) := fun i ↦ i.2.some
+  have hcov := ofArrows_mem_fpqcTopology T
+  have hD (i : ι) : ((descentData T V t).obj i : (V i).left.Modules).IsQuasicoherent :=
+    Modules.isQuasicoherent_pullback (V i).hom (Modules.unit X)
+  obtain ⟨M, hM, ⟨e⟩⟩ := exists_isQuasicoherent_toDescentData_iso (fun i : ι ↦ (V i).hom) hcov
+    (descentData T V t) hD
+  have hDinv (i : ι) : SheafOfModules.IsInvertible.{u, u, u}
+      ((descentData T V t).obj i : (V i).left.Modules) :=
+    SheafOfModules.IsInvertible.of_iso.{u, u, u} (M := 𝟙_ (V i).left.Modules)
+      (Modules.pullbackObjUnitIso (V i).hom).symm
+      (h := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ (V i).left.Modules))
+  have hinv := isInvertible_of_toDescentData_iso (fun i : ι ↦ (V i).hom) hcov
+    (descentData T V t) M ⟨e⟩ hDinv
+  have : MorphismProperty.ContainsIdentities
+      (@AlgebraicGeometry.Etale : MorphismProperty Scheme.{u}) :=
+    AlgebraicGeometry.Etale.instIsMultiplicativeScheme.toContainsIdentities
+  have hT : Limits.IsTerminal (Etale.mk (𝟙 X)) := MorphismProperty.Over.mkIdTerminal _ X
+  refine ⟨M, hinv, Setoid.symm (Sheaf.Torsor.equiv_of_sub_eq hT T (Modules.etaleIsoTorsor M)
+    (Sheaf.nonemptySieve T.sheaf.obj (Etale.mk (𝟙 X))) (T.nonemptySieve_mem _)
+    (fun V hV ↦ hV.some)
+    (fun V hV ↦ Modules.etaleIsoTorsorMk M (e.inv.hom ⟨V, hV⟩)
+      ⟨e.hom.hom ⟨V, hV⟩,
+        congrArg (fun φ ↦ Pseudofunctor.DescentData.Hom.hom φ ⟨V, hV⟩) e.inv_hom_id,
+        congrArg (fun φ ↦ Pseudofunctor.DescentData.Hom.hom φ ⟨V, hV⟩) e.hom_inv_id⟩) ?_)⟩
+  intro V₁ V₂ Z h₁ h₂ a b
+  have hc := e.inv.comm Z.hom (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
+    (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
+  have e1 := transitionAt_eq T V t (𝟙 Z.left) (i := ⟨V₂, h₂⟩) (j := ⟨V₁, h₁⟩) b a b.left a.left
+    (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) (Category.id_comp _)
+    (Category.id_comp _)
+  symm
+  rw [Sheaf.Torsor.sub_eq_iff]
+  apply Modules.etaleIsoTorsorVal_injective
+  rw [Modules.etaleIsoTorsorVal_vadd]
+  have e2 : ((Additive.toMul (T.sub (T.sheaf.obj.map a.op (t ⟨V₁, h₁⟩))
+      (T.sheaf.obj.map b.op (t ⟨V₂, h₂⟩))).down : Γ(Z.left, ⊤)ˣ) : Γ(Z.left, ⊤)) =
+      transitionAt T V t (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
+        (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) :=
+    e1.symm
+  erw [e2]
+  change smulMor _ _ ≫ (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
+      ((toProEt X ⋙ ProEt.forget X).map a).op (e.inv.hom ⟨V₁, h₁⟩) =
+    (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
+      ((toProEt X ⋙ ProEt.forget X).map b).op (e.inv.hom ⟨V₂, h₂⟩)
+  simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+  dsimp only [pullHom]
+  let G := toProEt X ⋙ ProEt.forget X
+  let mcB := modulesPseudofunctor.mapComp' (G.obj V₂).hom.op.toLoc (G.map b).left.op.toLoc
+    (G.obj Z).hom.op.toLoc (by
+      rw [← Quiver.Hom.comp_toLoc, ← op_comp, Over.w (G.map b)])
+  let mcA := modulesPseudofunctor.mapComp' (G.obj V₁).hom.op.toLoc (G.map a).left.op.toLoc
+    (G.obj Z).hom.op.toLoc (by
+      rw [← Quiver.Hom.comp_toLoc, ← op_comp, Over.w (G.map a)])
+  have key := comp_eq_of_comm ((Cat.Hom.toNatIso mcB).app (Modules.unitObj X))
+    ((Cat.Hom.toNatIso mcB).app M) ((Cat.Hom.toNatIso mcA).app (Modules.unitObj X))
+    ((Cat.Hom.toNatIso mcA).app M)
+    ((modulesPseudofunctor.map (G.map b).left.op.toLoc).toFunctor.map (e.inv.hom ⟨V₂, h₂⟩))
+    ((modulesPseudofunctor.map (G.map a).left.op.toLoc).toFunctor.map (e.inv.hom ⟨V₁, h₁⟩))
+    _ _ (smulMor_naturality ((Cat.Hom.toNatIso mcB).app (Modules.unitObj X)).hom
+      (transitionAt T V t (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
+        ((MorphismProperty.Over.w b).trans (MorphismProperty.Over.w a).symm))).symm hc
+  simp only [Iso.app_hom, Iso.app_inv, Cat.Hom.toNatIso_hom, Cat.Hom.toNatIso_inv, mcA,
+    mcB] at key
+  exact key.symm
 
 end AlgebraicGeometry.Scheme.Torsor

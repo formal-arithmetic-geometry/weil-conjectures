@@ -197,6 +197,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import WeilConjectures.AlgebraicGeometry.Sites.GmTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
@@ -313,6 +314,7 @@ public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import WeilConjectures.CategoryTheory.Sites.TorsorGluing
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
