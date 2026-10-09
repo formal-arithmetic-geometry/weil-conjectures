@@ -59,8 +59,9 @@ this is the same as a global finite stratification.
   `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.biprod`: binary direct sums of lisse,
   resp. constructible, sheaves are lisse, resp. constructible.
 - The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
-  They are also closed under kernels, cokernels and extensions (the blueprint
-  `def-weil-constructible-heart`); these three are stated here with `sorry`.
+  They are also closed under kernels and cokernels (stated here with `sorry`) and extensions
+  (`WeilConjectures.SixFunctors.ProEtale.Adic.Extension`), the blueprint
+  `def-weil-constructible-heart`.
 -/
 
 @[expose] public section
@@ -346,11 +347,5 @@ instance : (adicConstructibleSheaf l X).IsClosedUnderFiniteProducts := by
       (biprod.isoProd _ _ ≪≫ (HasLimit.isoOfNatIso (diagramIsoPair _)).symm ≪≫
         (p.isLimit.conePointUniqueUpToIso (limit.isLimit _)).symm)
   exact .mk'
-
-/-- **Extensions of constructible sheaves are constructible**: on a common stratification an
-extension of lisse sheaves is lisse, an extension of continuous representations of the
-fundamental group being continuous. -/
-instance : (adicConstructibleSheaf l X).IsClosedUnderExtensions :=
-  sorry
 
 end AlgebraicGeometry.ProEtale
