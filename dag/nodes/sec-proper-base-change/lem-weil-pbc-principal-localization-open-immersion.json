@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-principal-localization-open-immersion",
+ "kind": "statement",
+ "title": "Spec of a principal localization is an open immersion",
+ "statement": "Let $A$ be a commutative ring and $f\\in A$, and let $A_f$ be the localization of $A$ at the multiplicative set $\\{1,f,f^2,\\dots\\}$. Then the morphism of schemes $\\operatorname{Spec}A_f\\to\\operatorname{Spec}A$ induced by the localization map $A\\to A_f$ is an open immersion [def-weil-open-immersion] (with image the principal open $D(f)$).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma Tag 01I3 (lemma-standard-open-affine), proof: the morphism $\\phi:\\Spec(R_f)\\to\\Spec(R)$ induced by $R\\to R_f$ is an open immersion with image $D(f)$; used in literature/stacks-project/more-algebra.tex, proof of Lemma Tag 09XI ('the map $A\\to A_f$ would contradict (2)')"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of the localization R_f to Spec R is an open immersion",
+   "results": "AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, AlgebraicGeometry.IsOpenImmersion.of_isLocalization, AlgebraicGeometry.Scheme.basic_open_isOpenImmersion, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway (Mathlib.AlgebraicGeometry.OpenImmersion), PrimeSpectrum.localization_away_isOpenEmbedding",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap _ (Localization.Away _))))",
+   "results": "AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap {R} [CommRing R] (f : R), AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway (Mathlib.AlgebraicGeometry.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsOpenImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ | grep -i 'away\\|isLocalization'",
+   "results": "AlgebraicGeometry/OpenImmersion.lean:329 instance isOpenImmersion_SpecMap_localizationAway {R : CommRingCat} (f : R), :336 the same for [CommRing R], :348 IsOpenImmersion.of_isLocalization (any S with IsLocalization.Away f S)",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway",
+  "file": "Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "how": "exact: instance (line 336, for a type R with [CommRing R]; line 329 for R : CommRingCat) IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f)))); for any other model S of A_f use AlgebraicGeometry.IsOpenImmersion.of_isLocalization (line 348). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Scheme.isOpenImmersion_SpecMap_localizationAway (OpenImmersion.lean:329/336)."
+ }
+}

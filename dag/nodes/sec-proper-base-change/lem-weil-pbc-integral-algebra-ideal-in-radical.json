@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-integral-algebra-ideal-in-radical",
+ "kind": "statement",
+ "title": "An ideal in the Jacobson radical extends into the Jacobson radical of an integral algebra",
+ "statement": "Let $A\\to B$ be a ring map of commutative rings with $B$ integral over $A$, and let $I\\subseteq A$ be an ideal contained in the Jacobson radical of $A$ (the intersection of the maximal ideals of $A$). Then every maximal ideal $\\mathfrak n$ of $B$ has maximal preimage in $A$, hence contains $IB$; consequently $IB$ is contained in the Jacobson radical of $B$, i.e. $1+x$ is a unit of $B$ for every $x\\in IB$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
+  "place": "more-algebra.tex proof of Lemma Tag 09XI (lemma-characterize-henselian-pair), (2)$\\Rightarrow$(4): 'Hence $IB\\subset B$ is contained in the Jacobson radical of $B$ for $B$ integral over $A$ because $\\Spec(B)\\to\\Spec(A)$ is closed by Algebra, Lemmas 00HZ and 00GU'; algebra.tex Lemma Tag 00GU (lemma-integral-going-up), Lemma Tag 00HZ (lemma-going-up-closed)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral extension maps an ideal contained in the Jacobson radical into the Jacobson radical",
+   "results": "Ideal.ringJacobson_le_jacobson, Ideal.le_jacobson, Ideal.jacobson, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (Mathlib.RingTheory.Ideal.GoingUp), Ideal.isMaximal_of_isIntegral_of_isMaximal_comap', HenselianRing.jac, Ideal.jacobson_mono",
+   "date": "2026-10-10",
+   "verdict": "no single lemma; match by a few lemmas (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for an integral ring map A → B, the image of the Jacobson radical of A lies in the Jacobson radical of B",
+   "results": "isJacobsonRing_of_isIntegral', isJacobsonRing_of_isIntegral, RingHom.FiniteType.isJacobsonRing, Ideal.comap_jacobson (Mathlib.RingTheory.Jacobson.Ideal), Polynomial.isMaximal_comap_C_of_isJacobsonRing",
+   "date": "2026-10-10",
+   "verdict": "no single lemma; Ideal.comap_jacobson is one clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsMaximal (Ideal.comap (algebraMap ?R ?S) ?I)",
+   "results": "none (pattern too specific for the service)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/GoingUp.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/; grep -n 'def jacobson\\|theorem comap_jacobson\\|theorem mem_jacobson_bot' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Jacobson/Ideal.lean; grep -n 'isMaximal_comap_of_isIntegral_of_isMaximal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/GoingUp.lean",
+   "results": "no jacobson lemma for integral maps; Jacobson/Ideal.lean:65 def jacobson I = sInf {J | I <= J and J.IsMaximal}, :201 comap_jacobson, :288 mem_jacobson_bot (x in jacobson bot iff forall y, IsUnit (x*y+1)); GoingUp.lean:204 isMaximal_comap_of_isIntegral_of_isMaximal [Algebra.IsIntegral R S] (I) [I.IsMaximal] : (I.comap (algebraMap R S)).IsMaximal; Ideal/Maps.lean:76 map_le_iff_le_comap",
+   "date": "2026-10-10",
+   "verdict": "match by a few lemmas, one per clause (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.isMaximal_comap_of_isIntegral_of_isMaximal",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "how": "a few Mathlib lemmas, one per clause (as for lem-weil-pbc-finite-algebra-local-radical): for a maximal n of B, (n.comap (algebraMap A B)).IsMaximal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal, GoingUp.lean:204, with [Algebra.IsIntegral A B]); I <= jacobson bot <= that comap (Ideal.jacobson is sInf of the maximal ideals containing bot, Jacobson/Ideal.lean:65, sInf_le); so I.map (algebraMap A B) <= n (Ideal.map_le_iff_le_comap, Ideal/Maps.lean:76); hence I.map <= jacobson bot of B (le_sInf); unit form by Ideal.mem_jacobson_bot (Jacobson/Ideal.lean:288). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (GoingUp.lean:204) with Ideal.jacobson as an sInf, map_le_iff_le_comap and mem_jacobson_bot, one per clause."
+ }
+}

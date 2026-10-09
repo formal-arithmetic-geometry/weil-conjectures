@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-idempotents-determined-modulo-radical",
+ "kind": "statement",
+ "title": "Idempotents are determined modulo an ideal in the Jacobson radical",
+ "statement": "Let $R$ be a commutative ring and $J\\subseteq R$ an ideal contained in the Jacobson radical of $R$. If $e,e'\\in R$ are idempotents ($e^2=e$, $e'^2=e'$) with $e-e'\\in J$, then $e=e'$; that is, the map from idempotents of $R$ to idempotents of $R/J$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), with Definition Tag 0ELY (definition-zariski-pair: a pair $(A,I)$ with $I$ in the Jacobson radical); its proof: an idempotent of a local ring is $0$ or $1$, so an idempotent is determined by the set of maximal ideals where it vanishes (Algebra, Lemma Tag 00HN, lemma-characterize-zero-local)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two idempotents whose difference lies in the Jacobson radical are equal",
+   "results": "Ideal.jacobson_idem, IsJacobsonRing.out', TwoSidedIdeal.jacobson, Ideal.jacobson_eq_iff_jacobson_quotient_eq_bot, Ideal.exists_mul_add_sub_mem_of_mem_jacobson, Ideal.isUnit_of_sub_one_mem_jacobson_bot (Mathlib.RingTheory.Jacobson.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if e and f are idempotents in a commutative ring and e - f lies in the Jacobson radical then e = f",
+   "results": "IsIdempotentElem.sub_iff, IsIdempotentElem.sub, IsIdempotentElem.add_sub_mul, IsIdempotentElem.of_mul_add (Mathlib.Algebra.Ring.Idempotent), IsSemisimpleRing.ideal_eq_span_idempotent, isIdempotentElem_one_sub_one_sub_pow_pow (Mathlib.RingTheory.Idempotents)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem ?e, IsIdempotentElem ?f, Ideal.jacobson",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIdempotentElem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'jacobson\\|local\\|eq_of\\|unit\\|inj'; grep -n 'IsIdempotentElem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Idempotents.lean",
+   "results": "no lemma combining IsIdempotentElem with jacobson; RingTheory/Idempotents.lean:335,369 (eq_of_isNilpotent_sub-type uniqueness and existsUnique_isIdempotentElem_eq_of_ker_isNilpotent:375) need a nilpotent difference / nil kernel only; Spectrum/Prime/Topology.lean:1031 basicOpen_injOn_isIdempotentElem (idempotents determined by basic open, not modulo radical)",
+   "date": "2026-10-10",
+   "verdict": "no match (nilpotent case only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

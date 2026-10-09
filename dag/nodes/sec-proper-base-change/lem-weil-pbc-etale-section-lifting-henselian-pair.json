@@ -11,9 +11,80 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$I\\subseteq\\operatorname{rad}A$.* Suppose not: there is a maximal ideal $\\mathfrak m$ of $A$ with $I\\not\\subseteq\\mathfrak m$, so $I+\\mathfrak m=A$ ($\\mathfrak m$ maximal) and $1=i+f$ with $i\\in I$, $f\\in\\mathfrak m$; $f\\equiv1$ modulo $I$ and $f$ is not a unit. Let $A'=A_f$ (localization at the powers of $f$). $\\operatorname{Spec}A_f\\to\\operatorname{Spec}A$ is an open immersion [lem-weil-pbc-principal-localization-open-immersion], hence etale [lem-weil-pbc-etale-composition-cancellation] (1). The image of $f$ in $A/I$ is $1$, a unit, so by the universal property of localization the quotient map $A\\to A/I$ extends to an $A$-algebra map $\\sigma:A_f\\to A/I$. By hypothesis there is an $A$-algebra map $\\tau:A_f\\to A$; then $f=\\tau(f/1)$ and $1=\\tau((f/1)(1/f))=f\\cdot\\tau(1/f)$, so $f$ is a unit of $A$, a contradiction. Hence $I$ lies in every maximal ideal, i.e. in the Jacobson radical of $A$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 09XI (lemma-characterize-henselian-pair), (2)$\\Rightarrow$(4): 'Then $I$ is contained in the Jacobson radical of $A$, since otherwise there would be a nonunit $f\\in A$ congruent to $1$ modulo $I$ and the map $A\\to A_f$ would contradict (2)'; the existence of $f$ and the unit computation written out by the agent"
+   }
+  },
+  {
+   "text": "*$IB$ lies in the radical of a finite $B$.* Let $B$ be a finite $A$-algebra. $B$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]. Since $I\\subseteq\\operatorname{rad}A$ (step 1), $IB$ is contained in the Jacobson radical of $B$ [lem-weil-pbc-integral-algebra-ideal-in-radical] (every maximal ideal of $B$ lies over a maximal ideal of $A$, which contains $I$).",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 09XI, (2)$\\Rightarrow$(4): 'Hence $IB\\subset B$ is contained in the Jacobson radical of $B$ for $B$ integral over $A$ because $\\Spec(B)\\to\\Spec(A)$ is closed by Algebra, Lemmas 00HZ and 00GU'; and '(4)$\\Rightarrow$(3) is trivial' (finite algebras are integral)"
+   }
+  },
+  {
+   "text": "*Uniqueness of lifts.* Let $B$ be a finite $A$-algebra and $e_1,e_2\\in B$ idempotents with the same image in $B/IB$. Then $e_1-e_2\\in IB$, which lies in the Jacobson radical of $B$ (step 2), so $e_1=e_2$ [lem-weil-pbc-idempotents-determined-modulo-radical] (with $R=B$, $J=IB$).",
+   "uses": [
+    "lem-weil-pbc-idempotents-determined-modulo-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 09XI, (2)$\\Rightarrow$(4): 'Thus the map from idempotents of $B$ to idempotents of $B/IB$ is injective by Lemma 09XF'"
+   }
+  },
+  {
+   "text": "*Existence of lifts.* Let $B$ be a finite $A$-algebra and $\\bar e\\in B/IB$ an idempotent. $B$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral], so by [lem-weil-pbc-lift-idempotent-upstairs] there are a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale, such that $\\alpha:A/I\\to A'/IA'$ is an isomorphism, and an idempotent $e'\\in B\\otimes_AA'$ mapped to $\\bar e$ by $\\rho:B\\otimes_AA'\\to B\\otimes_A(A'/IA')\\xrightarrow{\\mathrm{id}\\otimes\\alpha^{-1}}B\\otimes_A(A/I)=B/IB$. Let $\\sigma:A'\\to A'/IA'\\xrightarrow{\\alpha^{-1}}A/I$; it is an $A$-algebra map ($\\alpha$ is induced by the structure map, so $\\alpha^{-1}$ is $A$-linear). By hypothesis there is an $A$-algebra map $\\tau:A'\\to A$ with $q\\circ\\tau=\\sigma$, $q:A\\to A/I$ the quotient map. Let $\\varphi=\\mathrm{id}_B\\otimes\\tau:B\\otimes_AA'\\to B\\otimes_AA=B$, a ring map, and $e=\\varphi(e')$, an idempotent of $B$ (ring maps preserve idempotents). Its image in $B/IB=B\\otimes_A(A/I)$ is $(\\mathrm{id}_B\\otimes q)(\\varphi(e'))=(\\mathrm{id}_B\\otimes(q\\circ\\tau))(e')=(\\mathrm{id}_B\\otimes\\sigma)(e')=\\rho(e')=\\bar e$, since $\\mathrm{id}_B\\otimes\\sigma$ and $\\rho$ are the same map (both are $b\\otimes a'\\mapsto b\\otimes\\alpha^{-1}(a'\\bmod IA')$). So $e$ lifts $\\bar e$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-lift-idempotent-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 09XI, (2)$\\Rightarrow$(4): 'On the other hand, since (2) holds, every idempotent of $B/IB$ lifts to an idempotent of $B$ by Lemma 07M4'; the descent of the idempotent from $B\\otimes_AA'$ to $B$ along the section supplied by (2) is left implicit in Stacks and written out by the agent"
+   }
+  },
+  {
+   "text": "*Conclusion.* By steps 3 and 4, for every finite $A$-algebra $B$ every idempotent of $B/IB$ lifts uniquely to an idempotent of $B$, i.e. $(A,I)$ is henselian [def-weil-pbc-henselian-terminology]; and $I\\subseteq\\operatorname{rad}A$ by step 1. (Stacks proves the lifting for all integral $B$, its condition (4), and specializes to finite $B$, condition (3); steps 2-4 run the same argument directly for finite $B$.)",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 09XI: 'In this way we see that (2) implies (4). The implication (4)$\\Rightarrow$(3) is trivial.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-weil-pbc-idempotents-determined-modulo-radical",
+  "lem-weil-pbc-lift-idempotent-upstairs",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair), proof of (2)$\\Rightarrow$(4) and (4)$\\Rightarrow$(3); the descent step after Lemma 07M4 and the choice of $f$ in step 1 written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +120,24 @@
    "results": "only RingTheory/Henselian.lean (HenselianRing: $I\\le$ jacobson and simple roots of monic polynomials mod $I$ lift; HenselianLocalRing; HenselianLocalRing.TFAE; IsAdicComplete.henselianRing); idempotent lifting only along nilpotent kernels (RingTheory/Idempotents.lean:249,374)",
    "date": "2026-10-09",
    "verdict": "no match: Mathlib has no etale-section or idempotent characterization of HenselianRing"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "HenselianRing (R) [CommRing R] (I : Ideal R) : Prop, HenselianRing.mk (jac : I <= jacobson bot) (is_henselian: simple roots of monic polynomials mod I lift), HenselianRing.jac, HenselianRing.is_henselian, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing (Mathlib.RingTheory.Henselian): no producer from etale sections or idempotents",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's HenselianRing is the root-lifting definition; no etale-section or idempotent characterization (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'HenselianRing\\|of_exists_algHom\\|HenselianPair' ~/weil-conjectures-slopmaster2/WeilConjectures --include=*.lean (source repository, not Mathlib)",
+   "results": "WeilConjectures/Mathlib/RingTheory/Henselian.lean: HenselianRing.bot, HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq, IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq, IsLocalRing.exists_isRoot_algebraMap_eq_of_exists_algHom_comap_maximalIdeal_eq (all sorry-free per the slopmaster2 sorry map); Etale/QuasiFinite.lean HenselianLocalRing.of_isSepClosed_fractionRing (sorry-free): local rings only, sections through primes over the closed point; no pair version, nothing on idempotents of B/IB",
+   "date": "2026-10-10",
+   "verdict": "no match (local-ring analogue only; not this node)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +157,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "worker": "stage1",
+  "summary": "Split along Stacks 09XI, proof of (2)=>(4)=>(3), read in literature/stacks-project/more-algebra.tex: (1) I in rad A via A -> A_f (new Mathlib leaf lem-weil-pbc-principal-localization-open-immersion, with the reviewed leaf lem-weil-pbc-etale-composition-cancellation (1)); (2) IB in rad B for finite B (new leaves lem-weil-pbc-finite-algebra-is-integral, lem-weil-pbc-integral-algebra-ideal-in-radical, the latter the general form of the reviewed local leaf lem-weil-pbc-finite-algebra-local-radical); (3) uniqueness by 09XF (new unsplit node lem-weil-pbc-idempotents-determined-modulo-radical; Mathlib has only the nilpotent case); (4) existence by 07M4 (new unsplit node lem-weil-pbc-lift-idempotent-upstairs, 'lifting' made precise via the isomorphism A/I = A'/IA') followed by the descent of the idempotent along the section A' -> A given by the hypothesis, which Stacks leaves implicit and is written out; (5) conclusion against def-weil-pbc-henselian-terminology. Statement unchanged; stmt_deps unchanged. Mathlib (HenselianRing = root lifting) and the source repository (local-ring producers only) have no pair version."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps along Stacks 09XI (2) => (4) => (3), run directly for finite algebras: I in the Jacobson radical via the open immersion Spec A_f -> Spec A (new Mathlib leaf lem-weil-pbc-principal-localization-open-immersion: isOpenImmersion_SpecMap_localizationAway OpenImmersion.lean:329/336, verified); IB in the radical of a finite B (new Mathlib leaves lem-weil-pbc-finite-algebra-is-integral: Algebra.IsIntegral.of_finite IntegralClosure/Algebra/Basic.lean:72, and lem-weil-pbc-integral-algebra-ideal-in-radical: isMaximal_comap_of_isIntegral_of_isMaximal GoingUp.lean:204 with the jacobson lemmas, verified); uniqueness via 09XF (new node lem-weil-pbc-idempotents-determined-modulo-radical; one-line proof noted by the worker); existence via 07M4 (new node lem-weil-pbc-lift-idempotent-upstairs) with the descent of the idempotent along the lifted section written out (Stacks leaves it implicit); conclusion. Worker finding recorded: the source repository identifies the DAG's idempotent-lifting henselian pairs with Mathlib's HenselianRing (root lifting); the identification is 09XI itself, which the DAG now carries in both directions through this node and lem-weil-pbc-henselian-local-root-lifting."
+ }
 }
