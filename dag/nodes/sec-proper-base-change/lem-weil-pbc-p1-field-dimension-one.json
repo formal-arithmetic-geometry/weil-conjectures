@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-p1-field-dimension-one",
+ "kind": "statement",
+ "title": "The projective line over a field has dimension at most one",
+ "statement": "Let $k$ be a field and let $\\mathbf P^1_k=\\mathbf P(\\{0,1\\};\\operatorname{Spec}k)$ be the projective line over $k$ in the sense of [def-nagata-projective-space-base-change]. Then the underlying topological space of $\\mathbf P^1_k$ has Krull dimension at most one: every chain $Z_0\\subsetneq Z_1\\subsetneq\\dots\\subsetneq Z_n$ of irreducible closed subsets of $\\mathbf P^1_k$ has $n\\le1$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Lemma Tag 0B7I (topology-lemma-dimension-supremum-local-dimensions), applied to the two standard affine opens $D_+(T_0),D_+(T_1)\\cong\\mathbf A^1_k=\\operatorname{Spec}k[x]$; with algebra.tex Lemma Tag 00OP (algebra-lemma-dim-affine-space), $\\dim k[x]=1$"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|projectiveLine\\|ProjectiveLine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none: Mathlib has no projective space or projective line over a base scheme (only Proj of a graded algebra, AlgebraicGeometry/ProjectiveSpectrum/)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'topologicalKrullDim\\|krullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/",
+   "results": "AlgebraicGeometry/Properties.lean (krullDim of a scheme vs stalks, krullDimLE_of_coheight_le), AlgebraicGeometry/Artinian.lean:66 (dimension zero); nothing on the dimension of Proj or of a projective line",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ringKrullDim_of_isNoetherianRing\\|ringKrullDim_le' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Polynomial.lean; grep -n 'theorem topologicalKrullDim_' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean",
+   "results": "Polynomial.ringKrullDim_of_isNoetherianRing (dim R[X] = dim R + 1), MvPolynomial.ringKrullDim_of_isNoetherianRing; topologicalKrullDim_subspace_le; no lemma bounding the dimension of a space by an open cover",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredients only: dim k[x]=1; the open-cover bound and the identification of the charts are missing)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-projective-line",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

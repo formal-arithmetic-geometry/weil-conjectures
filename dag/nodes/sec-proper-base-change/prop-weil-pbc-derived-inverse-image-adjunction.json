@@ -1,0 +1,60 @@
+{
+ "id": "prop-weil-pbc-derived-inverse-image-adjunction",
+ "kind": "statement",
+ "title": "Derived adjunction of inverse and direct image on D^+",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-weil-pbc-scheme-conventions], with the adjunction $u^{-1}\\dashv u_*$ on etale abelian sheaves, unit $\\eta_u$ and counit $\\varepsilon_u$ [def-weil-pbc-inverse-image], the inverse image $u^{-1}:\\Dplus(V_{\\Et})\\to\\Dplus(U_{\\Et})$ on bounded below derived categories [def-weil-pbc-derived-inverse-image] and the derived direct image $Ru_*:\\Dplus(U_{\\Et})\\to\\Dplus(V_{\\Et})$, $Ru_*K=u_*I(K)$ for a K-injective resolution $K\\to I(K)$ [def-weil-pbc-direct-image], [def-weil-pbc-kinjective-resolutions]. Then $u^{-1}\\dashv Ru_*$: there is an adjunction, with unit $\\eta^D_u:\\mathrm{id}\\to Ru_*u^{-1}$ and counit $\\varepsilon^D_u:u^{-1}Ru_*\\to\\mathrm{id}$, uniquely determined by the following two properties.\n(1) For a bounded below K-injective complex $I$ of sheaves on $U_{\\Et}$ (so that $u_*I$ represents $Ru_*I$), the counit $\\varepsilon^D_{u,I}:u^{-1}u_*I\\to I$ is the class in $\\Dplus(U_{\\Et})$ of the morphism of complexes $(\\varepsilon_{u,I^r})_r$.\n(2) For a bounded below complex $M$ of sheaves on $V_{\\Et}$ and a K-injective resolution $u^{-1}M\\to J$, the unit $\\eta^D_{u,M}:M\\to Ru_*u^{-1}M=u_*J$ is the class of $M\\xrightarrow{(\\eta_{u,M^r})_r}u_*u^{-1}M\\to u_*J$.\nEquivalently, $\\operatorname{Hom}_{\\Dplus(U_{\\Et})}(u^{-1}M,K)\\cong\\operatorname{Hom}_{\\Dplus(V_{\\Et})}(M,Ru_*K)$ bifunctorially, by the bijection sending $a$ to $Ru_*(a)\\circ\\eta^D_{u,M}$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors) and Lemma 09T5 (lemma-derived-adjoint-functors), with Lemma 015F for the exact left adjoint; for ringed topoi Cohomology on Sites, Lemma 07A6 (sites-cohomology.tex, lemma-adjoint), where the base change map of Remark 07A7 uses this adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def derived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; grep -rln 'derivedPlus\\|derivedAdjunctionPlus\\|mapDerivedCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Adjunction.lean:144 `Adjunction.derived` gives G' -| F' for absolute left/right derived functors G', F' of an adjunction G -| F (with derived' / derivedη / derivedε); nothing for D^+, no proof that the termwise exact left adjoint and rightDerivedFunctorPlus satisfy its hypotheses",
+   "date": "2026-10-09",
+   "verdict": "generalization that does not specialize in one line: Adjunction.derived needs both functors to be absolute derived functors on the homotopy categories K^+, which is a theorem (injective resolutions); no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def rightDerivedFunctorPlus\\|def rightDerivedFunctorPlusUnit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "results": "lines 36, 45: the bounded below right derived functor and its unit exist; no adjunction with mapDerivedCategory",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

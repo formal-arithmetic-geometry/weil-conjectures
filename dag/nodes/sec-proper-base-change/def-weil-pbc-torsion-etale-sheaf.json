@@ -1,0 +1,63 @@
+{
+ "id": "def-weil-pbc-torsion-etale-sheaf",
+ "kind": "definition",
+ "title": "Torsion abelian sheaf on the small etale site",
+ "statement": "Let $T$ be a scheme and $F$ an abelian sheaf on the small etale site of $T$, i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. For an integer $n\\ge1$ let $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel] be the kernel of multiplication by $n$, the subsheaf of sections killed by $n$. Order the positive integers by divisibility; this poset is directed ($\\operatorname{lcm}(n,m)$ bounds $n$ and $m$), and for $n\\mid m$ one has $F[n]\\subseteq F[m]$, so $n\\mapsto F[n]$ with the inclusions is a filtered diagram in $\\Ab(T_{\\Et})$, and the inclusions $F[n]\\hookrightarrow F$ induce a canonical map\n\n$$\n c_F:\\varinjlim_{n}F[n]\\longrightarrow F\n$$\n\nfrom its colimit [def-weil-pbc-category-colimit] in $\\Ab(T_{\\Et})$. The sheaf $F$ is *torsion* (a *torsion abelian sheaf*) if $c_F$ is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+  "place": "unit sk-def-pbc, statement ('Here a sheaf of abelian groups F on X_et is torsion if the canonical map colim_n F[n] -> F ... is an isomorphism'); also def-weil-pbc-property.md, detailed form; cf. Stacks Project, Etale cohomology, Section 0DDB (Torsion sheaves), proof of Lemma 'torsion-cohomology': F = union of F[d]"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Torsion\\|torsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "only CategoryTheory/Abelian/Preradical/{Basic,Colon,Radical}.lean (keyword 'torsion theory' in docstrings: preradicals of abelian categories, no torsion sheaf)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAddTorsion\\|IsTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none; IsAddTorsion (all elements of finite additive order) exists only for additive monoids, Mathlib/GroupTheory/Torsion.lean:56 (to_additive of IsMulTorsion)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has torsion groups (IsAddTorsion) but no torsion sheaf; the project-local CategoryTheory.Sheaf.IsTorsion (WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:57, not Mathlib) is the sectionwise notion, which is stronger, and AlgebraicGeometry.Scheme.IsTorsionSheaf (WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/TorsionSheaf.lean:83, not Mathlib) uses torsion geometric stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'pointSmallEtale\\|sheafFiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+   "results": "pointSmallEtale (EtalePoint.lean:64): the point of smallEtaleTopology S at a separably closed field point; Point.sheafFiber (Sites/Point/Basic.lean): stalk functor. Ingredients for the stalk form exist, no torsion predicate",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-property",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-pbc"
+}

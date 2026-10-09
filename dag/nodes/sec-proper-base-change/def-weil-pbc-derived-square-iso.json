@@ -1,0 +1,58 @@
+{
+ "id": "def-weil-pbc-derived-square-iso",
+ "kind": "definition",
+ "title": "Square isomorphism on bounded below derived categories",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nwith its specified isomorphism $\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ of functors $\\Ab(Y_{\\Et})\\to\\Ab(X'_{\\Et})$, and let $f^{-1},g^{-1},f'^{-1},g'^{-1}$ also denote the inverse images on the bounded below derived categories [def-weil-pbc-derived-inverse-image], [def-weil-pbc-derived-categories], each induced termwise through the localization functors $Q$ [def-weil-abstract-derived-category]. The *derived square isomorphism*\n\n$$\n \\theta^D_\\square:f'^{-1}\\circ g^{-1}\\xrightarrow{\\ \\sim\\ }g'^{-1}\\circ f^{-1}\\qquad\\text{of functors }\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})\n$$\n\nis the unique natural isomorphism whose component at $QK^\\bullet$, for every bounded below complex $K^\\bullet$ of sheaves on $Y_{\\Et}$, is, after the identifications $f'^{-1}g^{-1}QK^\\bullet\\cong Q(f'^{-1}g^{-1}K^\\bullet)$ and $g'^{-1}f^{-1}QK^\\bullet\\cong Q(g'^{-1}f^{-1}K^\\bullet)$ of [def-weil-pbc-derived-inverse-image], the class $Q\\bigl((\\theta_{\\square,K^r})_r\\bigr)$ of the termwise isomorphism of complexes. (Existence and uniqueness: both composites are induced by the termwise composite functors on bounded below complexes, which invert quasi-isomorphisms, and a natural transformation between such functors descends uniquely along the localization; only the equality $fg'=gf'$ of the square enters $\\theta_\\square$.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remark 07A7 (remark-base-change), the identification L(f')^* o Lg^* = L(g')^* o Lf^*; for exact pullbacks it is computed termwise (Section 0735, paragraph before Lemma 0736); the general composition isomorphism is Lemma 0D6D (lemma-derived-pullback-composition)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def liftNatTrans\\|def liftNatIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean; grep -rn 'mapDerivedCategoryCompIso\\|mapDerivedCategoryNatIso\\|NatTrans.mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Predicate.lean:326 Localization.liftNatTrans and :357 liftNatIso (descent of a natural transformation between lifted functors along a localization); no mapDerivedCategory composition or NatIso versions, nothing for D^+",
+   "date": "2026-10-09",
+   "verdict": "no match (the descent step is Localization.liftNatIso; the isomorphism itself is not in Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'NatTrans.mapHomotopyCategory\\|def mapHomologicalComplexCompIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Additive.lean",
+   "results": "NatTrans.mapHomotopyCategory (HomotopyCategory.lean:259) and the composition iso for mapHomotopyCategory (HomotopyCategory.lean:294): the termwise transformation on homotopy categories exists, its derived-category version does not",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

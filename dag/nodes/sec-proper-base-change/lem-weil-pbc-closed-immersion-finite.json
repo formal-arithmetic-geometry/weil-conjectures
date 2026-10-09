@@ -1,0 +1,51 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-finite",
+ "kind": "statement",
+ "title": "Closed immersions are finite",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-pbc-scheme-conventions]. Then $i$ is finite, i.e. $i$ is affine and $i_*\\mathcal O_Z$ is a finite $\\mathcal O_X$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma (lemma-closed-immersion-finite), tag 035C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsClosedImmersion.*IsFinite\\|IsFinite.*IsClosedImmersion' Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124 AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono (IsClosedImmersion f <-> IsFinite f /\\ Mono f); line 144 instance (priority := 900) (f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f; ZariskisMainTheorem.lean:396 uses it",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "how": "specializes in one line: the forward direction, ((IsClosedImmersion.iff_isFinite_and_mono f).mp h).1, which is the instance IsClosedImmersion f → IsFinite f at line 144 of the same file; Mathlib's IsFinite is 'affine with finite ring maps on affine opens', the definition of [def-weil-pbc-scheme-conventions]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-reduction-to-projective-line",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-pbc-exact-functor-bounded-below",
+ "kind": "statement",
+ "title": "Exact functors preserve bounded below derived objects",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an exact functor between abelian categories, and let $F:D(\\mathcal A)\\to D(\\mathcal B)$ also denote the functor between the derived categories [def-weil-abstract-derived-category] induced by applying $F$ termwise to cochain complexes [lem-sf-exact-functor-derived-triangulated]. For every $K\\in D(\\mathcal A)$ and every $r\\in\\mathbf Z$ there is an isomorphism $H^r(FK)\\cong F(H^rK)$, natural in $K$. Consequently, for every $n\\in\\mathbf Z$, $F$ carries $D(\\mathcal A)^{\\ge n}$ (the $K$ with $H^r(K)=0$ for $r<n$) into $D(\\mathcal B)^{\\ge n}$, hence carries the bounded below derived category $D^+(\\mathcal A)$ into $D^+(\\mathcal B)$ [def-weil-pbc-bounded-derived-subcategories] (and likewise $D^-$ and $D^b$).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015F (lemma-right-derived-exact-functor): an exact functor carries quasi-isomorphisms to quasi-isomorphisms and every complex computes RF, so RF is defined on D^+ and D; the preservation of the bounded (above, below) subcategories is stated in sites-cohomology.tex, Section 0735 (section-base-change-map), paragraph before Lemma 0736"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsGE\\|isGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; grep -rn 'isGE_of_\\|map_isGE\\|isGE_map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "results": "ExactFunctor.lean has no IsGE/IsLE statement for mapDerivedCategory; TStructure.lean:91 `isGE_iff` (X.IsGE n iff homology vanishes below n) and isGE_of_iso, no statement about an exact functor",
+   "date": "2026-10-09",
+   "verdict": "no match (the ingredients isGE_iff and mapDerivedCategory exist; the preservation is not stated)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mapHomologicalComplex[A-Za-z]*Iso\\|homologyFunctor.*mapHomologicalComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only mapHomologicalComplexCompIso (HomotopyCategory.lean:294) and the uses in Abelian/LeftDerived, RightDerived; no isomorphism H^r(F K) = F(H^r K) for exact F on the derived category",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
