@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-exact-functor-complex-cohomology",
+ "kind": "statement",
+ "title": "An exact functor commutes with cohomology of cochain complexes",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and $F:\\mathcal A\\to\\mathcal B$ an exact functor (additive, preserving finite limits and finite colimits). For a cochain complex $K=(K^r,d^r)$ of $\\mathcal A$ let $F(K)=(F(K^r),F(d^r))$ be the complex obtained by applying $F$ termwise, and let $H^r(K)=\\ker d^r/\\operatorname{im}d^{r-1}$ be its $r$-th cohomology object [def-weil-abstract-derived-category]. Then for every $r\\in\\mathbf Z$ there is an isomorphism $c^r_K:H^r(F(K))\\xrightarrow{\\sim}F(H^r(K))$, natural in the complex $K$ (i.e. an isomorphism of functors $H^r\\circ F\\cong F\\circ H^r$ from cochain complexes of $\\mathcal A$ to $\\mathcal B$); $c^r_K$ is induced by the identifications $\\ker F(d^r)=F(\\ker d^r)$ and $\\operatorname{im}F(d^{r-1})=F(\\operatorname{im}d^{r-1})$ as subobjects of $F(K^r)$, so it is compatible with the inclusions of cycles and the projections onto cohomology.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 010N (lemma-exact-functor), applied in each degree to the complex K^{r-1} -> K^r -> K^{r+1}; used in derived.tex Lemma 015F (lemma-right-derived-exact-functor), proof: 'F transforms ... quasi-isomorphisms into quasi-isomorphisms'"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of mapHomologicalComplex of a functor preserving homology is isomorphic to F applied to homology of the complex",
+   "results": "ShortComplex.mapHomologyIso', ShortComplex.mapHomologyIso, ShortComplex.mapHomologyIso_hom_naturality(_assoc), ShortComplex.mapOpcyclesIso, ShortComplex.homologyFunctorIso (Mathlib.Algebra.Homology.ShortComplex.PreservesHomology); HomologicalComplex.quasiIso_map_of_preservesHomology (Mathlib.Algebra.Homology.QuasiIso)",
+   "date": "2026-10-09",
+   "verdict": "match up to whiskering: ShortComplex.homologyFunctorIso F whiskered by HomologicalComplex.shortComplexFunctor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex, HomologicalComplex.homologyFunctor, CategoryTheory.Iso",
+   "results": "ProjectiveResolution.isoLeftDerivedObj (Mathlib.CategoryTheory.Abelian.LeftDerived), InjectiveResolution.isoRightDerivedObj (Mathlib.CategoryTheory.Abelian.RightDerived); no named iso homologyFunctor ∘ mapHomologicalComplex ≅ F ∘ homologyFunctor",
+   "date": "2026-10-09",
+   "verdict": "no named declaration for complexes; the short-complex iso specializes (see grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'homologyFunctorIso|mapHomologyIso|quasiIsoAt_map_of_preservesHomology|preservesHomologyOfExact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology; rg -n 'shortComplexFunctor.*mapShortComplex|mapShortComplex.*shortComplexFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ShortComplex/PreservesHomology.lean:777 Functor.homologyFunctorIso : F.mapShortComplex ⋙ ShortComplex.homologyFunctor D ≅ ShortComplex.homologyFunctor C ⋙ F (for [F.PreservesHomology]); PreservesHomology.lean:60 instance Functor.preservesHomologyOfExact (F additive, preserving finite limits and colimits); ShortComplex/HomologicalComplex.lean:511 HomologicalComplex.homologyFunctorIso : homologyFunctor C c i ≅ shortComplexFunctor C c i ⋙ ShortComplex.homologyFunctor C (Iso.refl); QuasiIso.lean:259 quasiIsoAt_map_of_preservesHomology, whose proof uses that (shortComplexFunctor C₂ c i).obj ((F.mapHomologicalComplex c).obj K) is definitionally F.mapShortComplex.obj (K.sc i); no named composite iso",
+   "date": "2026-10-09",
+   "verdict": "match (specializes in one line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.homologyFunctorIso",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+  "how": "specializes in one line: for F additive with PreservesFiniteLimits and PreservesFiniteColimits (instance Functor.preservesHomologyOfExact, same file line 60), Functor.isoWhiskerLeft (HomologicalComplex.shortComplexFunctor C₁ (ComplexShape.up ℤ) r) F.homologyFunctorIso, composed with HomologicalComplex.homologyFunctorIso (ShortComplex/HomologicalComplex.lean:511, Iso.refl) on both sides, is F.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor C₂ _ r ≅ HomologicalComplex.homologyFunctor C₁ _ r ⋙ F, since shortComplexFunctor C₂ _ r applied to F.mapHomologicalComplex _ K is definitionally F.mapShortComplex applied to K.sc r (as used in HomologicalComplex.quasiIsoAt_map_of_preservesHomology, QuasiIso.lean:259); componentwise this is ShortComplex.mapHomologyIso (K.sc r) F"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-functor-bounded-below",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
