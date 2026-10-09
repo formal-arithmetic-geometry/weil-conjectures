@@ -9,32 +9,76 @@
  },
  "stmt_deps": [
   "def-weil-pbc-eight-curve-assertions",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-C3"
  ],
  "proof": [
   {
-   "text": "The sheaf $\\mathbf F_p$ is $p$-primary, and\n[lem-sc-artin-schreier-dimension] gives the vanishing for\n$q>1$: via the Artin–Schreier sequence\n([lem-sc-as-sequence]) and the Lang–Steinberg surjectivity of\n$\\wp=F-1$ ([lem-sc-lang-steinberg]), the $p$-cohomological\ndimension of a smooth connected curve over the algebraically closed field\n$k$ is at most one.",
+   "text": "The hypotheses on k and C are exactly those of [lem-sc-artin-schreier-dimension]. Applying that lemma to the constant étale sheaf F_p gives H^q(C_et,F_p)=0 for each integer q>1. Its Artin–Schreier argument is carried by that node; no assertion about arbitrary p-primary sheaves is needed here.",
    "uses": [
-    "lem-sc-artin-schreier-dimension",
-    "lem-sc-as-sequence",
-    "lem-sc-lang-steinberg"
+    "lem-sc-artin-schreier-dimension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c3.md",
+    "place": "Proof, application of lem-sc-artin-schreier-dimension"
+   }
+  },
+  {
+   "text": "Multiplication by p on the constant sheaf F_p is zero, so this sheaf is p-primary. The characteristic-p clause C_3 in [def-weil-pbc-eight-curve-assertions] asks precisely for the vanishings just obtained. Thus C_3(C,F_p) holds.",
+   "uses": [
+    "def-sc-constant-sheaves",
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-C3"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c3.md",
+    "place": "Statement and Proof, identification with C_3"
+   }
   }
  ],
  "proof_deps": [
   "lem-sc-artin-schreier-dimension",
-  "lem-sc-as-sequence",
-  "lem-sc-lang-steinberg"
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-C3"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c3.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the constant F_p sheaf on a smooth curve over an algebraically closed field of characteristic p vanishes in degrees greater than one",
+   "results": "Etale topology declarations and formally etale algebra results; no curve cohomology vanishing theorem.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier etale cohomology smooth algebraic curve characteristic p vanishing above degree one",
+   "results": "Cotangent cohomology and formally etale algebra results; no etale cohomology theorem for F_p on curves.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i artin.?schreier|cohomological.?dimension Mathlib",
+   "results": "Only an Artin-Schreier mention about field Galois groups; no constant-F_p curve cohomology vanishing theorem.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +107,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sc-c3",
+  "worker": "stage1",
+  "summary": "Reuse lem-sc-artin-schreier-dimension for the constant F_p vanishing, then identify p-primary status and the C3 assertion. Direct Artin-Schreier and Lang-Steinberg edges are below the reused lemma. Three Mathlib searches found no match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
