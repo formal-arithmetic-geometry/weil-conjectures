@@ -20,6 +20,9 @@ form is `AlgebraicGeometry.exists_specializes_of_mem_closure_range`.
 
 `PrimeSpectrum.isDomain_of_irreducibleSpace`: a reduced ring with irreducible spectrum is a
 domain.
+
+`PrimeSpectrum.connectedSpace_of_isIdempotentElem`: the spectrum of a nonzero ring whose only
+idempotents are `0` and `1` is connected.
 -/
 
 @[expose] public section
@@ -55,5 +58,14 @@ theorem isDomain_of_irreducibleSpace (R : Type*) [CommRing R] [IsReduced R]
   have := irreducibleSpace_iff_isPrime_nilradical.mp ‹_›
   rw [nilradical_eq_zero] at this
   exact IsDomain.of_bot_isPrime R
+
+/-- The spectrum of a nonzero ring whose only idempotents are `0` and `1` is connected: a clopen
+subset of `Spec R` is `D(e)` for an idempotent `e`. -/
+theorem connectedSpace_of_isIdempotentElem (R : Type*) [CommRing R] [Nontrivial R]
+    (h : ∀ e : R, IsIdempotentElem e → e = 0 ∨ e = 1) : ConnectedSpace (PrimeSpectrum R) := by
+  rw [connectedSpace_iff_clopen]
+  refine ⟨inferInstance, fun s hs ↦ ?_⟩
+  obtain ⟨e, he, rfl⟩ := isClopen_iff.mp hs
+  rcases h e he with rfl | rfl <;> simp
 
 end PrimeSpectrum
