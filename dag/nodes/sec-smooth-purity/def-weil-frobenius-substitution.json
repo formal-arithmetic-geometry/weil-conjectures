@@ -1,0 +1,53 @@
+{
+ "id": "def-weil-frobenius-substitution",
+ "kind": "definition",
+ "title": "Frobenius substitution and geometric Frobenius of a finite field",
+ "statement": "Let $k_0$ be a finite field with $q$ elements [def-weil-finite-field-q-elements] and let $k$ be an algebraic closure of $k_0$ [def-weil-algebraic-closure]; write $\\operatorname{Gal}(k/k_0)$ for the group of field automorphisms of $k$ that fix $k_0$ pointwise. The *Frobenius substitution* (arithmetic Frobenius) is the map\n\n$$\n \\varphi_q:k\\longrightarrow k,\\qquad z\\longmapsto z^q ;\n$$\n\nit is a field automorphism of $k$ fixing $k_0$ pointwise (additive because $q$ is a power of the characteristic $p$, fixing $k_0$ because $c^q=c$ for $c\\in k_0$, injective as a field homomorphism, surjective because every element of $k$ lies in a finite subfield on which it is an injective self-map), so $\\varphi_q\\in\\operatorname{Gal}(k/k_0)$. The *geometric Frobenius* is its inverse\n\n$$\n \\operatorname{Frob}_q=\\varphi_q^{-1}\\in\\operatorname{Gal}(k/k_0).\n$$",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), p. 150 (pdf p. 15): 'La substitution de Frobenius φ ∈ Gal(k̄/k) est l'automorphisme x ↦ x^q de k̄. Le Frobenius géométrique F ∈ Gal(k̄/k) est l'inverse de φ.'"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def frobeniusAlgHom\\|def frobeniusAlgEquiv\\|frobeniusAlgEquivOfAlgebraic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "FieldTheory/Finite/Basic.lean:333 FiniteField.frobeniusAlgHom (K-algebra endomorphism x ↦ x^#K of a K-algebra R, K finite); :349 FiniteField.frobeniusAlgEquiv (perfect R); :363 FiniteField.frobeniusAlgEquivOfAlgebraic K L : Gal(L/K) for L/K algebraic, with coe_frobeniusAlgEquivOfAlgebraic (:366) '= (· ^ q)'",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def frobenius\\b\\|def iterateFrobenius\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharP/",
+   "results": "Algebra/CharP/Lemmas.lean:321 frobenius R p (x ↦ x^p), :327 iterateFrobenius R p n (x ↦ x^(p^n)), ring endomorphisms only, not as elements of a Galois group",
+   "date": "2026-10-09",
+   "verdict": "generalization: ring endomorphism, the Galois element is frobeniusAlgEquivOfAlgebraic"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "FiniteField.frobeniusAlgEquivOfAlgebraic",
+  "file": "Mathlib/FieldTheory/Finite/Basic.lean",
+  "how": "exact for $\\varphi_q$: `FiniteField.frobeniusAlgEquivOfAlgebraic k₀ k : Gal(k/k₀)` (line 363), with `⇑(frobeniusAlgEquivOfAlgebraic k₀ k) = (· ^ Fintype.card k₀)` (coe_frobeniusAlgEquivOfAlgebraic, line 366), the instance `Algebra.IsAlgebraic k₀ k` coming from `IsAlgClosure k₀ k`; the geometric Frobenius specializes in one line: `(FiniteField.frobeniusAlgEquivOfAlgebraic k₀ k)⁻¹` (inverse in the group `Gal(k/k₀) = k ≃ₐ[k₀] k`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

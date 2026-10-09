@@ -1,0 +1,63 @@
+{
+ "id": "def-weil-absolute-frobenius-scheme",
+ "kind": "definition",
+ "title": "Absolute q-power Frobenius of a scheme in characteristic p",
+ "statement": "Let $p$ be a prime number. A scheme $X$ [def-pc-scheme] is *of characteristic $p$* if $p=0$ in $\\mathcal O_X$. For such $X$, the *absolute Frobenius* of $X$ is the morphism of schemes $F_X:X\\to X$ that is the identity on the underlying topological space and whose map of structure sheaves $F_X^\\sharp:\\mathcal O_X\\to\\mathcal O_X$ is $g\\mapsto g^p$ on sections over every open set. (This is a morphism of locally ringed spaces because, for every ring $A$ of characteristic $p$, $a\\mapsto a^p$ is a ring endomorphism of $A$ inducing the identity on $\\operatorname{Spec}A$, and is a local homomorphism when $A$ is local.) For $q=p^a$ with $a\\geq1$, the *absolute $q$-power Frobenius* of $X$ is the $a$-fold iterate\n\n$$\n \\operatorname{Fr}^{(q)}_X=F_X^a:X\\longrightarrow X,\n$$\n\nthe identity on the underlying space with $g\\mapsto g^q$ on $\\mathcal O_X$; on an affine open $\\operatorname{Spec}A\\subseteq X$ it is $\\operatorname{Spec}$ [def-weil-affine-spectrum] of the ring endomorphism $a\\mapsto a^q$ of $A$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Section 33.36 'Frobenii' (tag 0CC6), Definition 33.36.1 (tag 03SM, label definition-absolute-frobenius) for $F_X$; the $q$-power iterate is the 'endomorphisme de Frobenius x ↦ x^q de X_0' of Deligne, Weil II (1.1.14), p. 153 (pdf p. 18)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'frob' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "none: no file under Mathlib/AlgebraicGeometry/ mentions Frobenius in any capitalization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'CharP\\|ExpChar\\|iterateFrobenius\\|frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "only AlgebraicGeometry/EllipticCurve/{IsomOfJ,Weierstrass,NormalForms}.lean, which use CharP of the coefficient ring of a Weierstrass equation; no scheme of characteristic p and no Frobenius morphism of a scheme",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Scheme.*frobenius\\|frobenius.*Scheme' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def frobenius\\b\\|def iterateFrobenius\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/CharP/",
+   "results": "Algebra/CharP/Lemmas.lean:321 frobenius R p : R →+* R (x ↦ x^p, [ExpChar R p]); :327 iterateFrobenius R p n (x ↦ x^(p^n)): the ring-level Frobenius from which the scheme morphism would be built; Spec.map (AlgebraicGeometry/Scheme.lean:479) gives the affine case only",
+   "date": "2026-10-09",
+   "verdict": "generalization: ring Frobenius only; the scheme morphism is missing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
