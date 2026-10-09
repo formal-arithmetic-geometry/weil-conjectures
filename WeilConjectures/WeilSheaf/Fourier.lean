@@ -332,8 +332,10 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 -- TODO(unify): sk-d-real-operations
 /-- `F.HasLinearArtinSchreierConstituent ψ a j` says that the restriction along `j : U ⟶ 𝔸¹` of
 the geometric linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure of
-`k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a subquotient of the
-underlying sheaf of `F` on `Ū`. The geometric sheaf `ℒ_{ψ(a x)}` is the pullback of the
+`k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a quotient of a lisse subsheaf
+of the underlying sheaf of `F` on `Ū`, that is, a subquotient in the category of lisse sheaves,
+a Jordan–Hölder constituent of the geometric monodromy representation
+(`def-a1-constituent-nonexceptional`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback of the
 underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
 (`AlgebraicGeometry.affineLine.geometricSMul`); it is defined over the finite subextension
 `k₀(a)`, where it is `AlgebraicGeometry.artinSchreier` for the character `ψ ∘ Tr`, but only its
@@ -346,7 +348,7 @@ def WeilSheaf.HasLinearArtinSchreierConstituent (F : WeilSheaf k₀ l U)
       (WeilCoefficients.{u} l)) (i : B ⟶ F.obj.carrier)
     (p : B ⟶ (Scheme.Hom.geometricFiberMap j (comp_over j _))^*[WeilCoefficients.{u} l].obj
       ((affineLine.geometricSMul k₀ a)^*[WeilCoefficients.{u} l].obj
-        (artinSchreier ψ 1).obj.carrier)), Mono i ∧ Epi p
+        (artinSchreier ψ 1).obj.carrier)), ProEtale.IsAdicLisseSheaf B ∧ Mono i ∧ Epi p
 
 end Constituent
 

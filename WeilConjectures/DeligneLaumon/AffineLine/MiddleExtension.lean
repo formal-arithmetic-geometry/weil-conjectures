@@ -99,7 +99,9 @@ variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
 -- (`def-wf-fundamental-representation`) and the Jordan–Hölder constituents of its restriction.
 /-- A nonzero geometrically constant lisse sheaf has the trivial rank-one sheaf
 `ℒ_{ψ(0 · x)} = ℚ̄_ℓ` as a geometric constituent: the geometric fundamental group acts trivially
-on its nonzero geometric generic stalk. -/
+on its nonzero geometric generic stalk. The lisse subsheaf is the whole underlying sheaf
+`B = F̄`, a nonzero finite sum of copies of `ℚ̄_ℓ` on the connected `Ū`, which therefore
+surjects onto `ℒ_{ψ(0 · x)}|_U = ℚ̄_ℓ`. -/
 theorem hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant
     (hne : ¬ IsZero D.sheaf) (hc : D.IsGeometricallyConstant) :
     D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j := by
