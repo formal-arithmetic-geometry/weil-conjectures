@@ -262,6 +262,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
@@ -355,6 +356,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -1350,6 +1352,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Com
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Injective
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
