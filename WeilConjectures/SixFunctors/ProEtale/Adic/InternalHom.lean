@@ -41,6 +41,11 @@ noncomputable def ihomIsoIhom' {X : Scheme.{u}} (M : AdicSheaf l X) :
     ihom M ≅ Mod.ihom' (adicConstantSheaf l X) M :=
   (Mod.ihomAdjunction M).rightAdjointUniq (Mod.ihom'Adjunction _ M)
 
+/-- `𝓗om_{ℚ̄_ℓ,X}(ℚ̄_ℓ,X, N) ≅ N`. -/
+noncomputable def ihomUnitIso {X : Scheme.{u}} (N : AdicSheaf l X) :
+    (ihom (unit l X)).obj N ≅ N :=
+  (ihomIsoIhom' (unit l X)).app N ≪≫ Mod.ihom'RegularIso N
+
 end AdicSheaf
 
 variable {V X : Scheme.{u}} (g : V ⟶ X) [WeaklyEtale g]
