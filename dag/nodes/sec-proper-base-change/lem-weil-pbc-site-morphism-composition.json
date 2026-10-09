@@ -12,9 +12,56 @@
   "lem-weil-pbc-site-continuous-pushforward-sheaf",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The composite $u\\circ v$ is continuous: it carries a covering in $\\mathcal C_3$ first to a covering in $\\mathcal C_2$ and then to one in $\\mathcal C_1$, and the two canonical fibre-product comparison isomorphisms compose to the comparison for $u\\circ v$. Applying the sheaf pullback construction twice gives, on every object $T$ of $\\mathcal C_3$, $(v^s u^s\\mathcal G)(T)=\\mathcal G(u(v(T)))=((u\\circ v)^s\\mathcal G)(T)$, with the same restriction maps; this holds for sets and, by the algebraic-structure identification, for abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof of (1) and (2), and Definitions 00WV and 00X1"
+   }
+  },
+  {
+   "text": "For sheaves of sets and for abelian sheaves, the adjunctions $u_s\\dashv u^s$ and $v_s\\dashv v^s$ compose to $u_s v_s\\dashv v^s u^s$; its unit is $v^s\\eta_u v_s\\circ\\eta_v$. By Step 1 the right adjoint of this composite is identified with $(u\\circ v)^s$, while [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] supplies $(u\\circ v)_s\\dashv (u\\circ v)^s$. The unique isomorphism between these left adjoints compatible with the two units is the adjunction uniqueness isomorphism, yielding $(u\\circ v)_s\\cong u_s\\circ v_s$ and the stated unit equation.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof: composition of the two adjunctions and uniqueness of left adjoints; Categories Lemma Tag 0B65"
+   }
+  },
+  {
+   "text": "Since $u_s$ and $v_s$ preserve finite limits and finite colimits, their composite does as well, by applying the preservation property successively to each finite diagram. Thus $(u\\circ v)_s$ is exact because it is naturally isomorphic to $u_s v_s$. Together with Step 1 this says that $u\\circ v$ is a continuous functor whose sheaf left adjoint is exact, hence it defines the composite morphism of sites $g\\circ f$. The direct-image identity $(g\\circ f)_*=g_*f_*$ and inverse-image isomorphism $(g\\circ f)^{-1}\\cong f^{-1}g^{-1}$ are the corresponding sheaf-level identifications from Steps 1 and 2.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00X1, Lemma Tag 03CB, and the sentence after Definition Tag 03CC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB and its proof, Definition Tag 00X1, and the sentence after Definition Tag 03CC"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +113,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-morphism-composition",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Sites Lemma 03CB and Definition 03CC. Replaced the empty proof with three source-traceable steps: continuity and equality of composite sheaf pullbacks, the composite-adjunction/unit-compatible uniqueness isomorphism for left adjoints, and exactness of the composite together with the induced composite morphism of sites. Reused existing nodes for continuous pullback of sheaves, algebraic sheaf structures, the pullback adjunction, composite adjunctions, and adjunction uniqueness; no new DAG nodes were needed. The existing LeanSearch, LeanFinder, and Mathlib grep searches were retained and confirm no exact general-site Mathlib theorem for the full Stacks statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the three steps against Stacks 03CB/03CC: composite continuous functor and (u∘v)^s = v^s u^s on sections, composite adjunction and the unit-compatible isomorphism of left adjoints (cites the reviewed composite-adjunction and conjugate-iso nodes), exactness of the composite. Correct; C's review says what it checked."
+ }
 }
