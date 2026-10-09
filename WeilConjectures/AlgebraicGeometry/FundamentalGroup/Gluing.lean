@@ -99,4 +99,120 @@ theorem exists_pullback_inl_iso (PA : A.FiniteEtale) (PB : B.FiniteEtale)
   exact ⟨P, ⟨isoPullbackOfIsPullback _ PA P _ hinl.flip⟩,
     ⟨isoPullbackOfIsPullback _ PB P _ hinr.flip⟩⟩
 
+section PullbackIsos
+
+variable {X Y W : Scheme.{u}}
+
+/-- Base change of finite étale schemes along a composite is the composite of the base
+changes. -/
+noncomputable def pullbackCompIso (f : X ⟶ Y) (g : Y ⟶ W) (P : W.FiniteEtale) :
+    (pullback (f ≫ g)).obj P ≅ (pullback f).obj ((pullback g).obj P) :=
+  isoPullbackOfIsPullback (f ≫ g) ((pullback f).obj ((pullback g).obj P)) P
+    (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _)
+    ((IsPullback.of_hasPullback _ f).paste_horiz (IsPullback.of_hasPullback P.obj.hom g))
+
+/-- Base change of finite étale schemes along the identity. -/
+noncomputable def pullbackIdIso (P : X.FiniteEtale) : (pullback (𝟙 X)).obj P ≅ P :=
+  isoPullbackOfIsPullback (𝟙 X) P P (𝟙 _) (IsPullback.id_horiz P.obj.hom)
+
+end PullbackIsos
+
+section Cover
+
+variable {X : Scheme.{u}} (iA : A ⟶ X) (iB : B ⟶ X) [IsOpenImmersion iA]
+  [IsOpenImmersion iB] (H : IsPullback dA dB iA iB)
+
+omit [IsOpenImmersion iB] in
+include H in
+lemma preimage_opensRange_pushout_desc_inl :
+    Limits.pushout.desc iA iB H.w ⁻¹ᵁ iA.opensRange =
+      (Limits.pushout.inl dA dB).opensRange := by
+  apply le_antisymm
+  · intro x hx
+    have hcov : x ∈ Set.range (Limits.pushout.inl dA dB) ∪
+        Set.range (Limits.pushout.inr dA dB) := by
+      rw [range_pushout_inl_union_range_pushout_inr]; trivial
+    obtain (hmem | ⟨b, rfl⟩) := hcov
+    · exact hmem
+    · obtain ⟨a, ha⟩ := hx
+      have hb : iB b = iA a := by
+        rw [ha, ← Scheme.Hom.comp_apply, Limits.pushout.inr_desc]
+      obtain ⟨d, rfl, rfl⟩ := Scheme.exists_preimage_of_isPullback H a b hb.symm
+      refine ⟨dA d, ?_⟩
+      rw [← Scheme.Hom.comp_apply, Limits.pushout.condition, Scheme.Hom.comp_apply]
+  · rintro x ⟨a, rfl⟩
+    refine ⟨a, ?_⟩
+    rw [← Scheme.Hom.comp_apply, Limits.pushout.inl_desc]
+
+omit [IsOpenImmersion iA] in
+include H in
+lemma preimage_opensRange_pushout_desc_inr :
+    Limits.pushout.desc iA iB H.w ⁻¹ᵁ iB.opensRange =
+      (Limits.pushout.inr dA dB).opensRange := by
+  apply le_antisymm
+  · intro x hx
+    have hcov : x ∈ Set.range (Limits.pushout.inl dA dB) ∪
+        Set.range (Limits.pushout.inr dA dB) := by
+      rw [range_pushout_inl_union_range_pushout_inr]; trivial
+    obtain (⟨a, rfl⟩ | hmem) := hcov
+    · obtain ⟨b, hb⟩ := hx
+      have ha : iA a = iB b := by
+        rw [hb, ← Scheme.Hom.comp_apply, Limits.pushout.inl_desc]
+      obtain ⟨d, rfl, rfl⟩ := Scheme.exists_preimage_of_isPullback H a b ha
+      refine ⟨dB d, ?_⟩
+      rw [← Scheme.Hom.comp_apply, ← Limits.pushout.condition, Scheme.Hom.comp_apply]
+    · exact hmem
+  · rintro x ⟨b, rfl⟩
+    refine ⟨b, ?_⟩
+    rw [← Scheme.Hom.comp_apply, Limits.pushout.inr_desc]
+
+include H in
+/-- A scheme covered by two open immersions `A ⟶ X` and `B ⟶ X` meeting in `D` is the pushout
+`A ⊔_D B`. -/
+lemma isIso_pushout_desc (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range iB) :
+    IsIso (Limits.pushout.desc iA iB H.w) := by
+  rw [← MorphismProperty.isomorphisms.iff]
+  let 𝒰 : X.OpenCover := Scheme.Cover.mkOfCovers Bool (fun b ↦ cond b A B)
+    (fun b ↦ match b with | true => iA | false => iB) (fun x ↦ by
+      rcases hcov x with ⟨a, ha⟩ | ⟨b, hb⟩
+      exacts [⟨true, a, ha⟩, ⟨false, b, hb⟩])
+    (fun b ↦ by cases b <;> infer_instance)
+  refine IsZariskiLocalAtTarget.of_openCover 𝒰 fun b ↦ ?_
+  rw [MorphismProperty.isomorphisms.iff]
+  match b with
+  | true =>
+    have h := (IsOpenImmersion.isPullback (𝟙 A) (Limits.pushout.inl dA dB) iA _
+      (by simp) (preimage_opensRange_pushout_desc_inl dA dB iA iB H)).flip
+    change IsIso (Limits.pullback.snd (Limits.pushout.desc iA iB H.w) iA)
+    have e : Limits.pullback.snd (Limits.pushout.desc iA iB H.w) iA = h.isoPullback.inv := by
+      rw [← Category.id_comp (Limits.pullback.snd _ iA), ← h.isoPullback.inv_hom_id,
+        Category.assoc, IsPullback.isoPullback_hom_snd, Category.comp_id]
+    rw [e]
+    infer_instance
+  | false =>
+    have h := (IsOpenImmersion.isPullback (𝟙 B) (Limits.pushout.inr dA dB) iB _
+      (by simp) (preimage_opensRange_pushout_desc_inr dA dB iA iB H)).flip
+    change IsIso (Limits.pullback.snd (Limits.pushout.desc iA iB H.w) iB)
+    have e : Limits.pullback.snd (Limits.pushout.desc iA iB H.w) iB = h.isoPullback.inv := by
+      rw [← Category.id_comp (Limits.pullback.snd _ iB), ← h.isoPullback.inv_hom_id,
+        Category.assoc, IsPullback.isoPullback_hom_snd, Category.comp_id]
+    rw [e]
+    infer_instance
+
+include H in
+/-- **Gluing finite étale schemes** over a scheme `X` covered by two open immersions `A ⟶ X`,
+`B ⟶ X` meeting in `D`: finite étale schemes over `A` and over `B` with isomorphic restrictions
+to `D` glue to a finite étale scheme over `X` restricting to the one over `A`. -/
+theorem exists_pullback_iso_of_isPullback (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range iB)
+    (PA : A.FiniteEtale) (PB : B.FiniteEtale) (e : (pullback dA).obj PA ≅ (pullback dB).obj PB) :
+    ∃ P : X.FiniteEtale, Nonempty ((pullback iA).obj P ≅ PA) := by
+  have := isIso_pushout_desc dA dB iA iB H hcov
+  obtain ⟨P', ⟨eA⟩, -⟩ := exists_pullback_inl_iso dA dB PA PB e
+  have h : iA ≫ inv (Limits.pushout.desc iA iB H.w) = Limits.pushout.inl dA dB := by
+    rw [IsIso.comp_inv_eq, Limits.pushout.inl_desc]
+  exact ⟨(pullback (inv (Limits.pushout.desc iA iB H.w))).obj P',
+    ⟨(pullbackCompIso _ _ _).symm ≪≫ eqToIso (by rw [h]) ≪≫ eA⟩⟩
+
+end Cover
+
 end AlgebraicGeometry.Scheme.FiniteEtale
