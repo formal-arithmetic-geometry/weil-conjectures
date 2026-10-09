@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-split-injection-after-completion",
+ "kind": "statement",
+ "title": "A map of finite modules that is split injective modulo arbitrarily high powers of a radical ideal is split injective",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $J\\subseteq A$ an ideal contained in the Jacobson radical of $A$ (the intersection of all maximal ideals), and $u:N\\to M$ a homomorphism of finitely generated $A$-modules. Suppose that for arbitrarily large integers $k$ the induced map $u_k:N/J^kN\\to M/J^kM$ is a split injection, i.e. there is an $A$-linear $v_k:M/J^kM\\to N/J^kN$ with $v_k\\circ u_k=\\mathrm{id}$. Then $u$ is a split injection: there is an $A$-linear $v:M\\to N$ with $v\\circ u=\\mathrm{id}_N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02HO (lemma-split-injection-after-completion, line 18142), Section 'An application of Ext groups'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homomorphism of finite modules over Noetherian local ring which is a split injection modulo m^n for infinitely many n is a split injection",
+   "results": "LinearMap.split_surjective_of_localization_maximal (RingTheory.LocalProperties.Projective), IsLocalRing.split_injective_iff_lTensor_residueField_injective (RingTheory.LocalRing.Module), injective_of_localized_span, Module.Finite.of_injective, Module.Projective.of_split, Module.free_of_maximalIdeal_rTensor_injective, Function.Exact.split_tfae",
+   "date": "2026-10-10",
+   "verdict": "no match; IsLocalRing.split_injective_iff_lTensor_residueField_injective is a different criterion (target finite free over a local ring: split injective iff injective after ⊗ residue field)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring, ideal in Jacobson radical, map of finite modules N → M such that N/I^n N → M/I^n M is split injective for arbitrarily large n, then N → M is split injective",
+   "results": "IsHausdorff.of_le_jacobson (AdicCompletion.Noetherian), Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot (Nakayama), IsSemiprimaryRing.finite_of_isNoetherian, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (Filtration), AdicCompletion.map_injective",
+   "date": "2026-10-10",
+   "verdict": "no match (only Krull intersection ingredients)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/ | xargs grep -ln 'LinearMap.id\\|split'; grep -n 'jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Filtration.lean RingTheory/LocalRing/Module.lean",
+   "results": "RingTheory/Filtration.lean:416 Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (Krull intersection), RingTheory/LocalRing/Module.lean:68 (Nakayama inside split_injective_iff_lTensor_residueField_injective); no lemma on split injections modulo powers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

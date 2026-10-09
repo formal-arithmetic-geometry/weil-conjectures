@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+ "kind": "statement",
+ "title": "A quotient of a Noetherian local ring by an ideal containing a power of the maximal ideal is Artinian local",
+ "statement": "Let $C$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] with maximal ideal $\\mathfrak m$, let $N\\ge1$ be an integer and $K\\subseteq C$ an ideal with $\\mathfrak m^N\\subseteq K\\subseteq\\mathfrak m$. Then $C/K$ is an Artinian local ring (every descending chain of ideals is eventually constant) whose maximal ideal is $\\mathfrak m/K$, and $(\\mathfrak m/K)^N=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 02HT (lemma-smooth-test-artinian, line 38950): 'B'_N is an Artinian local ring since it is the quotient of a local Noetherian ring by a power of its maximal ideal'; with Lemma Tag 00KH (lemma-Noetherian-dimension-0, line 14364: a Noetherian ring of dimension 0 is Artinian)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of a Noetherian local ring by an ideal containing a power of the maximal ideal is Artinian",
+   "results": "IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing (Mathlib.RingTheory.Ideal.KrullsHeightTheorem), instIsNoetherianRingOfIsArtinianRing, IsLocalRing.finite_quotient_iff, IsNoetherianRing.isArtinianRing_of_krullDimLE_zero, isArtinianRing_iff_isNilpotent_maximalIdeal (HopkinsLevitzki), IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient (LocalRing.Quotient)",
+   "date": "2026-10-10",
+   "verdict": "match by specialization: IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing (_ ⧸ _), IsLocalRing.maximalIdeal",
+   "results": "IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient (Mathlib.RingTheory.LocalRing.Quotient), IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing (Mathlib.RingTheory.Ideal.KrullsHeightTheorem)",
+   "date": "2026-10-10",
+   "verdict": "match by specialization (the second; the first is the converse)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsArtinianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/*.lean RingTheory/LocalRing/*.lean RingTheory/Artinian/*.lean | grep -i 'pow\\|quotient\\|⧸'; grep -rn \"theorem of_surjective'\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/",
+   "results": "Ideal/KrullsHeightTheorem.lean:48 IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing; LocalRing/Quotient.lean:110 exists_maximalIdeal_pow_le_of_isArtinianRing_quotient (converse); Artinian/Module.lean:383 quotients of Artinian rings are Artinian; LocalRing/Basic.lean:115 IsLocalRing.of_surjective' (a nontrivial quotient of a local ring is local)",
+   "date": "2026-10-10",
+   "verdict": "match by specialization, one Mathlib lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+  "file": "Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+  "line": 48,
+  "how": "specializes in one line per clause: for C Noetherian local and K with m^N ⊆ K ⊆ m, m is a minimal prime over K (any prime containing K contains m^N hence m), so the lemma gives IsArtinianRing (C ⧸ K); C ⧸ K is nontrivial (K ⊆ m ≠ C) and local by IsLocalRing.of_surjective' (Mathlib/RingTheory/LocalRing/Basic.lean:115) applied to Ideal.Quotient.mk K, its maximal ideal is the image m/K of m (the image of the maximal ideal under a surjection of local rings), and (m/K)^N = image of m^N = 0"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

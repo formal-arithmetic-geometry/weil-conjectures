@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-artinian-ideal-length-one-filtration",
+ "kind": "statement",
+ "title": "An ideal of an Artinian ring has a filtration with length-one quotients",
+ "statement": "Let $B$ be an Artinian ring (a commutative ring in which every descending chain of ideals is eventually constant) and $J\\subseteq B$ an ideal. Then there are an integer $r\\ge0$ and ideals $0=J_0\\subseteq J_1\\subseteq\\cdots\\subseteq J_r=J$ of $B$ such that for each $1\\le i\\le r$ the $B$-module $J_i/J_{i-1}$ has length $1$, i.e. it is nonzero and its only $B$-submodules are $0$ and itself.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 02HT (lemma-smooth-test-artinian, line 38950): 'As B'_N is Artinian such a filtration exists'; from Lemma Tag 00JB (lemma-artinian-finite-length, line 12787: an Artinian ring has finite length over itself), Definition Tag 02LY (definition-length) and Lemma Tag 00J3 (lemma-simple-pieces, line 12546: a maximal chain of submodules of a finite length module has simple successive quotients)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal of an Artinian local ring has a filtration by ideals with successive quotients simple modules of length one",
+   "results": "Ideal.Filtration, Ideal.Filtration.mk, Ideal.stableFiltration (RingTheory.Filtration), IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, IsArtinianRing.setOf_isPrime_finite, IsArtinianRing.instIsSemiprimaryRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated module over Artinian ring has a composition series of submodules with simple successive quotients",
+   "results": "exists_compositionSeries_of_isNoetherian_isArtinian (Mathlib.RingTheory.FiniteLength, line 50), IsSemiprimaryRing.finite_of_isArtinian, isFiniteLength_iff_isNoetherian_isArtinian, IsArtinianRing.tfae (HopkinsLevitzki), isArtinian_of_finite, instIsArtinianOfIsSemisimpleModuleOfFinite",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line: exists_compositionSeries_of_isNoetherian_isArtinian applied to the B-module J (Noetherian and Artinian, as B is Noetherian by the instance at HopkinsLevitzki.lean:141) gives a CompositionSeries of Submodule B J from ⊥ to ⊤ with simple successive quotients; translating it into ideals J_i of B and 'simple' into 'length 1' (Module.length_eq_one_iff, RingTheory/Length.lean:279) takes several steps"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_compositionSeries_of_isNoetherian_isArtinian\\|isFiniteLength_iff_exists_compositionSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FiniteLength.lean; grep -n 'length_eq_one' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Length.lean",
+   "results": "FiniteLength.lean:50 exists_compositionSeries_of_isNoetherian_isArtinian, :82 isFiniteLength_iff_exists_compositionSeries; Length.lean:279 Module.length_eq_one_iff, :286 Module.length_eq_one",
+   "date": "2026-10-10",
+   "verdict": "no exact match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

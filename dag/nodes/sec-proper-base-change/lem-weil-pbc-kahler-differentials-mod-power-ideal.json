@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-kahler-differentials-mod-power-ideal",
+ "kind": "statement",
+ "title": "Kähler differentials modulo a power of an ideal",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $I\\subseteq S$ an ideal, $n\\ge1$ an integer, and $S'=S/I^{n+1}$, an $R$-algebra via $R\\to S\\to S'$. Let $\\Omega_{S/R}\\to\\Omega_{S'/R}$, $\\mathrm ds\\mapsto\\mathrm d\\bar s$, be the map induced by the quotient map $S\\to S'$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]; $\\bar s$ the class of $s$). Then the induced $S/I^n$-linear map $$\\Omega_{S/R}\\otimes_SS/I^n\\longrightarrow\\Omega_{S'/R}\\otimes_{S'}S/I^n,\\qquad \\mathrm ds\\otimes\\bar t\\mapsto\\mathrm d\\bar s\\otimes\\bar t,$$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02HQ (lemma-differential-mod-power-ideal, line 34194); its proof: Lemma Tag 00RU (lemma-differential-seq, line 34103) and d(I^{n+1}) contained in I^n Omega_{S/R} by the Leibniz rule"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials of quotient by power of ideal: Ω_{S/R} ⊗ S/I^n isomorphic to Ω_{(S/I^{n+1})/R} ⊗ S/I^n",
+   "results": "CommRingCat.KaehlerDifferential, KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.fromIdeal, KaehlerDifferential.tensorKaehlerEquiv (Mathlib.RingTheory.Kaehler.TensorProduct), KaehlerDifferential.polynomialEquiv, KaehlerDifferential.quotientCotangentIdealRingEquiv (Mathlib.RingTheory.Kaehler.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For R-algebra S and ideal I, the map Ω_{S/R} → Ω_{(S/I^{n+1})/R} becomes an isomorphism after tensoring with S/I^n",
+   "results": "KaehlerDifferential.quotientCotangentIdealRingEquiv, KaehlerDifferential.quotientCotangentIdeal (Kaehler.Basic); tensorKaehlerQuotKerSqEquiv, tensorKaehlerQuotKerSqEquiv_tmul_D, tensorKaehlerQuotKerSqEquiv_symm_tmul_D (Mathlib.RingTheory.Smooth.Kaehler)",
+   "date": "2026-10-10",
+   "verdict": "no match for general n: tensorKaehlerQuotKerSqEquiv (Mathlib/RingTheory/Smooth/Kaehler.lean:283) is the case n=1 with I the kernel of a map P -> S (S (x)_{P/I^2} Omega_{(P/I^2)/R} = S (x)_P Omega_{P/R}, S = P/I); the general n is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln '\\^ (n + 1)\\|\\^ 2' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/ RingTheory/Smooth/Kaehler.lean; grep -rn 'Ideal.*\\^ n.*Ω\\|Ω.*\\^ n' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/ RingTheory/Smooth/",
+   "results": "only squares of kernels occur (Kaehler/Basic.lean cotangent ideal, Kaehler/JacobiZariski.lean, Smooth/Kaehler.lean tensorKaehlerQuotKerSqEquiv); no statement with I^n, n>1",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
