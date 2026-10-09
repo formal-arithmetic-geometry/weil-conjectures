@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+public import WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
@@ -114,7 +115,7 @@ theorem bijective_toDescentData_map (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTop
     (M N : modulesPseudofunctor.obj (.mk (op T)))
     (hM : (M : T.Modules).IsQuasicoherent) (hN : (N : T.Modules).IsQuasicoherent) :
     Function.Bijective ((modulesPseudofunctor.toDescentData g).map : (M ⟶ N) → _) :=
-  sorry
+  bijective_toDescentData_map_of_mem_fpqcTopology g hg M N hM hN
 
 /-- **Finite presentation descends along an fpqc covering.**
 
