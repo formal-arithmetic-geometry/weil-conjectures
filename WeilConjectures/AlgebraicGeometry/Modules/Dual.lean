@@ -183,6 +183,25 @@ theorem IsFiniteLocallyFree.dual (M : X.Modules) [M.IsFiniteLocallyFree] :
     Mᵛ.IsFiniteLocallyFree :=
   SheafOfModules.IsFiniteLocallyFree.homObj_unit M
 
+/-- If `M` and `N` are free of finite rank on an open `W`, then so is `M ⊗ N`. -/
+lemma nonempty_restrict_tensorObj_iso_free {M N : X.Modules} {W : X.Opens} {I I' : Type u}
+    [Finite I] [Finite I'] (eM : M.restrict W.ι ≅ SheafOfModules.free I)
+    (eN : N.restrict W.ι ≅ SheafOfModules.free I') :
+    Nonempty ((M ⊗ N).restrict W.ι ≅ SheafOfModules.free (Σ _ : I, I')) := by
+  have e₁ : (M ⊗ N).restrict W.ι ≅ (pullback W.ι).obj M ⊗ (pullback W.ι).obj N :=
+    (restrictFunctorIsoPullback _).app _ ≪≫ (Functor.Monoidal.μIso (pullback W.ι) M N).symm
+  have e₂ : (pullback W.ι).obj M ⊗ (pullback W.ι).obj N ≅
+      SheafOfModules.free I ⊗ SheafOfModules.free I' :=
+    (((restrictFunctorIsoPullback _).app M).symm ≪≫ eM) ⊗ᵢ
+      (((restrictFunctorIsoPullback _).app N).symm ≪≫ eN)
+  exact ⟨e₁ ≪≫ e₂ ≪≫ SheafOfModules.freeTensorFreeIso.{u} _ _⟩
+
+/-- A module which is free on an open `U` is free on every open `W ≤ U`. -/
+lemma nonempty_restrict_iso_free_of_le {P : X.Modules} {U W : X.Opens} (h : W ≤ U) {I : Type u}
+    (e : P.over U ≅ SheafOfModules.free I) : Nonempty (P.restrict W.ι ≅ SheafOfModules.free I) :=
+  ⟨restrictCompIso P U.ι (X.homOfLE h) W.ι (X.homOfLE_ι h) ≪≫
+    (restrictFunctor (X.homOfLE h)).mapIso (overIsoFreeEquiv P U I e) ≪≫ restrictFreeIso _ _⟩
+
 /-- The tensor product of two finite locally free `𝒪_X`-modules is finite locally free: on an
 open where `M ≅ 𝒪^r` and `N ≅ 𝒪^s`, it is `𝒪^{rs}`. -/
 theorem IsFiniteLocallyFree.tensorObj (M N : X.Modules) [M.IsFiniteLocallyFree]
@@ -191,26 +210,18 @@ theorem IsFiniteLocallyFree.tensorObj (M N : X.Modules) [M.IsFiniteLocallyFree]
   obtain ⟨q', hq', hf'⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := N)
   have (i : q.I) : Finite (q.generators i).I := (hf.isFiniteType i).finite
   have (j : q'.I) : Finite (q'.generators j).I := (hf'.isFiniteType j).finite
-  -- A module which is free on `U` is free on every open `W ≤ U`.
-  have hres {P : X.Modules} {U W : X.Opens} (h : W ≤ U) {I : Type u}
-      (e : P.over U ≅ SheafOfModules.free I) : P.restrict W.ι ≅ SheafOfModules.free I :=
-    restrictCompIso P U.ι (X.homOfLE h) W.ι (X.homOfLE_ι h) ≪≫
-      (restrictFunctor (X.homOfLE h)).mapIso (overIsoFreeEquiv P U I e) ≪≫ restrictFreeIso _ _
-  refine isFiniteLocallyFree_of_restrict_iso_free (M ⊗ N) (ι := q.I × q'.I)
-    (fun p ↦ Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)) ?_
-    (fun p ↦ Σ _ : (q.generators p.1).I, (q'.generators p.2).I) fun p ↦ ⟨?_⟩
-  · simp only [Scheme.Opens.opensRange_ι]
+  have hcov : ⨆ p : q.I × q'.I, (Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)).opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι]
     rw [← iSup_inf_iSup, (Opens.coversTop_iff _ _).1 q.coversTop,
       (Opens.coversTop_iff _ _).1 q'.coversTop, inf_top_eq]
-  · have := hq.isIso p.1
-    have := hq'.isIso p.2
-    exact (restrictFunctorIsoPullback _).app _ ≪≫
-      (Functor.Monoidal.μIso (pullback (Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2))) M N).symm ≪≫
-      ((((restrictFunctorIsoPullback _).app M).symm ≪≫ hres inf_le_left
-          (asIso (q.generators p.1).π).symm) ⊗ᵢ
-        (((restrictFunctorIsoPullback _).app N).symm ≪≫ hres inf_le_right
-          (asIso (q'.generators p.2).π).symm)) ≪≫
-      SheafOfModules.freeTensorFreeIso.{u} _ _
+  refine isFiniteLocallyFree_of_restrict_iso_free (M ⊗ N) (ι := q.I × q'.I)
+    (fun p ↦ Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)) hcov
+    (fun p ↦ Σ _ : (q.generators p.1).I, (q'.generators p.2).I) fun p ↦ ?_
+  have := hq.isIso p.1
+  have := hq'.isIso p.2
+  exact nonempty_restrict_tensorObj_iso_free
+    (nonempty_restrict_iso_free_of_le inf_le_left (asIso (q.generators p.1).π).symm).some
+    (nonempty_restrict_iso_free_of_le inf_le_right (asIso (q'.generators p.2).π).symm).some
 
 /-- The contravariant functor `ℱ ↦ ℱᵛ ⊗ ω` on finite locally free modules, for an invertible
 `ω`, with values in finite locally free modules. -/
