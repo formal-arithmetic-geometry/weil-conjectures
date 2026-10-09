@@ -12,9 +12,60 @@
   "def-sp-injective-resolutions",
   "lem-weil-pbc-injective-resolution-lift-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (splittings and the preliminary middle map).** Apply [lem-weil-pbc-ses-injective-kernel-splits] degreewise to the two horseshoe rows. Choose $r^n:I_B^n\\to I_A^n$, $\\sigma^n:I_C^n\\to I_B^n$ and $r'^n:I_{B'}'^n\\to I_{A'}'^n$, $\\sigma'^n:I_{C'}'^n\\to I_{B'}'^n$ with $r\\alpha=1$, $\\beta\\sigma=1$, $\\alpha r+\\sigma\\beta=1$ and the analogous primed identities. Set $\\chi^n=\\alpha'^n\\varphi_A^n r^n+\\sigma'^n\\varphi_C^n\\beta^n$. Then $\\chi\\alpha=\\alpha'\\varphi_A$ and $\\beta'\\chi=\\varphi_C\\beta$, because $\\beta'\\alpha'=0$, $\\beta'\\sigma'=1$, $r\\alpha=1$, and $\\beta\\alpha=0$.",
+   "uses": [
+    "lem-weil-pbc-ses-injective-kernel-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma Tag 0136, implication (1) => (3), used for the degreewise splittings in the horseshoe argument"
+   }
+  },
+  {
+   "text": "**Step 2 (defects factor through the outer terms).** Put $D^n=d_{I_{B'}'}^n\\chi^n-\\chi^{n+1}d_{I_B}^n$. Since $\\chi\\alpha=\\alpha'\\varphi_A$ and $\\beta'\\chi=\\varphi_C\\beta$ are morphisms of complexes, $D\\alpha=0$ and $\\beta'D=0$. Exactness of each primed and unprimed row therefore gives unique maps $E^n:I_C^n\\to I_{A'}'^{n+1}$ with $D^n=\\alpha'^{n+1}E^n\\beta^n$. The identity $d'D-Dd=0$ implies $d'E+Ed=0$ after cancelling the monomorphism $\\alpha'$ and epimorphism $\\beta$. At degree zero, $w=\\chi^0s_B-s'_{B'}b$ vanishes after precomposition with $f$, while $\\beta'^0w=0$; hence exactness of $S$ and $S'$ gives a unique $e:C\\to I_{A'}'^0$ with $w=\\alpha'^0eg$. Comparing $D^0s_B$ in the two factorizations gives $E^0s_C=d_{I_{A'}'}^0e$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof of the horseshoe construction; the factorization identities are the standard diagram chase underlying Weibel Theorem 2.4.6"
+   }
+  },
+  {
+   "text": "**Step 3 (remove the defect by a homotopy).** Adjoin $C$ in degree $-1$ to $I_C^\\bullet$ using $s_C:C\\to I_C^0$; this augmented complex is acyclic by the resolution hypothesis. Regard $e$ and the signed maps $u^{-1}=e$, $u^n=(-1)^nE^n$ as a morphism from that augmented complex to the shifted complex with terms $I_{A'}'^{m+1}$. The relation $E^0s_C=d'e$ and $d'E+Ed=0$ are exactly the chain-map identities. By [lem-weil-pbc-acyclic-map-to-injective-nullhomotopy], this map is null-homotopic. Writing the resulting homotopy with $h^{-1}=0$ and putting $k^n=(-1)^nh^n$ gives $e=k^0s_C$ and $E^n=d'k^n-k^{n+1}d$.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013R (lemma-acyclic-is-zero), applied to the augmented resolution of C and the shifted bounded-below injective complex"
+   }
+  },
+  {
+   "text": "**Step 4 (the corrected middle lift).** Define $\\varphi_B^n=\\chi^n-\\alpha'^n k^n\\beta^n$. Its differential defect is $D-\\alpha'(d'k-kd)\\beta=0$, so it is a morphism of complexes. Because $\\beta'\\alpha'=0$ and $\\beta\\alpha=0$, it satisfies $\\beta'\\varphi_B=\\varphi_C\\beta$ and $\\varphi_B\\alpha=\\alpha'\\varphi_A$. Finally, $\\varphi_B^0s_B-s'_{B'}b=\\alpha'^0(e-k^0s_C)g=0$. Thus $(\\varphi_A,\\varphi_B,\\varphi_C)$ is the required morphism of short exact sequences lifting $(a,b,c)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T and the naturality calculation in Weibel Theorem 2.4.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0136 and 013R, with the classical horseshoe naturality calculation of Weibel Theorem 2.4.6"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +117,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-horseshoe-morphism-lift",
+  "worker": "stage1",
+  "summary": "Split the imported horseshoe naturality statement into four steps. Degreewise injective splittings give a preliminary middle map; an explicit defect factorization through the outer terms produces a chain map from the augmented C-resolution to a shifted primed A-resolution; the bounded-below injective null-homotopy leaf removes that defect; and the corrected middle map is checked to commute with both rows and augmentations. Added the Mathlib leaf lem-weil-pbc-acyclic-map-to-injective-nullhomotopy for Stacks Tag 013R."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Four steps (splittings 0136 leaf, defects factor through the outer terms, removal of the defect by a homotopy via the new leaf for 013R: CochainComplex.isKInjective_of_injective with IsKInjective.nonempty_homotopy_zero, corrected middle lift) checked by L; the new leaf lacked the Mathlib line, which L verified and added after the merge. Accepted by L."
+ }
 }

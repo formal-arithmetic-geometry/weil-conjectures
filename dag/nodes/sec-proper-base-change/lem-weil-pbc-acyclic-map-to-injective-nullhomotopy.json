@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+ "kind": "statement",
+ "title": "Maps from an acyclic complex to a bounded-below injective complex are null-homotopic",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $K^\\bullet$ be an acyclic cochain complex and let $I^\\bullet$ be a cochain complex which is zero below some degree and whose terms are injective objects [def-sp-injective-resolutions]. Every morphism of complexes $u:K^\\bullet\\to I^\\bullet$ is chain-homotopic to zero.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013R (lemma-acyclic-is-zero), the assertion that a morphism from an acyclic complex to a bounded-below complex of injectives is homotopic to zero"
+ },
+ "stmt_deps": ["def-sp-abelian", "def-sp-injective-resolutions"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a bounded below cochain complex of injective objects is K-injective, so every map from an acyclic complex is chain homotopic to zero",
+   "results": "CochainComplex.isKInjective_of_injective; CochainComplex.IsKInjective.nonempty_homotopy_zero; CochainComplex.IsKInjective.homotopyZero",
+   "date": "2026-10-10",
+   "verdict": "match by combining the bounded-below injective theorem with the null-homotopy theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below complex of injective objects every map from an acyclic complex is homotopic to zero",
+   "results": "CochainComplex.isKInjective_of_injective; CochainComplex.IsKInjective.nonempty_homotopy_zero; CochainComplex.IsKInjective.homotopyZero",
+   "date": "2026-10-10",
+   "verdict": "match by combining the bounded-below injective theorem with the null-homotopy theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKInjective_of_injective",
+   "results": "CochainComplex.isKInjective_of_injective : (L : CochainComplex C ℤ) (d : ℤ) [L.IsStrictlyGE d] [∀ n, Injective (L.X n)] -> L.IsKInjective",
+   "date": "2026-10-10",
+   "verdict": "match; combine with CochainComplex.IsKInjective.nonempty_homotopy_zero"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isKInjective_of_injective\\|nonempty_homotopy_zero' /home/ubuntu/Poincare-MorganTian/.work 2>/dev/null | head; pinned Mathlib path recorded by the project",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory.KInjective contains CochainComplex.isKInjective_of_injective and CochainComplex.IsKInjective.nonempty_homotopy_zero; no separate horseshoe declaration",
+   "date": "2026-10-10",
+   "verdict": "match by composition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.isKInjective_of_injective",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+  "how": "specializes in one line: use the bounded-below support and termwise injectivity to obtain IsKInjective, then apply CochainComplex.IsKInjective.nonempty_homotopy_zero to u and the acyclicity hypothesis"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-weil-pbc-horseshoe-morphism-lift", "date": "2026-10-10"},
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
