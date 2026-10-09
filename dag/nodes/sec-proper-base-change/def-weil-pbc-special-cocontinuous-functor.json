@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-special-cocontinuous-functor",
  "kind": "definition",
  "title": "Cocontinuous and special cocontinuous functors between sites",
- "statement": "Let $\\mathcal C$, $\\mathcal D$ be sites with coverings and continuous functors as in [def-weil-pbc-sites-and-cohomology], and $u:\\mathcal C\\to\\mathcal D$ a functor. (1) $u$ is *cocontinuous* if for every $U\\in\\operatorname{Ob}(\\mathcal C)$ and every covering $\\{V_j\\to u(U)\\}_{j\\in J}$ of $\\mathcal D$ there is a covering $\\{U_i\\to U\\}_{i\\in I}$ of $\\mathcal C$ such that the family $\\{u(U_i)\\to u(U)\\}_{i\\in I}$ refines $\\{V_j\\to u(U)\\}_{j\\in J}$, i.e. every $u(U_i)\\to u(U)$ factors through some $V_j\\to u(U)$ (Stacks Sites, Definition 00XJ). (2) $u$ is *special cocontinuous* if (a) $u$ is cocontinuous; (b) $u$ is continuous [def-weil-pbc-sites-and-cohomology]; (c) for $a,b:U'\\to U$ in $\\mathcal C$ with $u(a)=u(b)$ there is a covering $\\{f_i:U'_i\\to U'\\}$ of $\\mathcal C$ with $a\\circ f_i=b\\circ f_i$ for all $i$; (d) for $U',U\\in\\operatorname{Ob}(\\mathcal C)$ and a morphism $c:u(U')\\to u(U)$ of $\\mathcal D$ there are a covering $\\{f_i:U'_i\\to U'\\}$ of $\\mathcal C$ and morphisms $c_i:U'_i\\to U$ with $u(c_i)=c\\circ u(f_i)$; (e) every $V\\in\\operatorname{Ob}(\\mathcal D)$ has a covering in $\\mathcal D$ of the form $\\{u(U_i)\\to V\\}_{i\\in I}$. These are conditions (1)-(5) of Stacks Sites, Lemma 03A0 (label lemma-equivalence); Stacks' Definition 03CG (label definition-special-cocontinuous-functor) calls $u$ special cocontinuous when it satisfies the assumptions and the conclusion of Lemma 03A0, and since that lemma derives the conclusion (the morphism of topoi $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ of the cocontinuous $u$, Stacks Sites Lemma 00XO, is an equivalence) from (1)-(5), the two definitions agree; here the conclusion is not part of the definition and is proved where it is needed.",
+ "statement": "Let $\\mathcal C$, $\\mathcal D$ be sites (categories with a set of coverings $\\operatorname{Cov}$, Stacks Sites Definition 00VH) and let continuous functors be as in [def-weil-pbc-sites-and-cohomology] (Sites Definition 00WV), and let $u:\\mathcal C\\to\\mathcal D$ be a functor. A family $\\{W_i\\to W\\}_{i\\in I}$ *refines* a family $\\{W'_j\\to W\\}_{j\\in J}$ with the same target if there are a map $\\alpha:I\\to J$ and morphisms $W_i\\to W'_{\\alpha(i)}$ over $W$, i.e. every $W_i\\to W$ factors through some $W'_j\\to W$ (Sites Definition 00VT(2)). (1) $u$ is *cocontinuous* if for every $U\\in\\operatorname{Ob}(\\mathcal C)$ and every covering $\\{V_j\\to u(U)\\}_{j\\in J}$ of $\\mathcal D$ there is a covering $\\{U_i\\to U\\}_{i\\in I}$ of $\\mathcal C$ such that the family $\\{u(U_i)\\to u(U)\\}_{i\\in I}$ refines $\\{V_j\\to u(U)\\}_{j\\in J}$ (Stacks Sites, Definition 00XJ; the family $\\{u(U_i)\\to u(U)\\}$ need not be a covering of $\\mathcal D$). (2) $u$ is *special cocontinuous* if (a) $u$ is cocontinuous; (b) $u$ is continuous [def-weil-pbc-sites-and-cohomology](3); (c) for $a,b:U'\\to U$ in $\\mathcal C$ with $u(a)=u(b)$ there is a covering $\\{f_i:U'_i\\to U'\\}_{i\\in I}$ of $\\mathcal C$ with $a\\circ f_i=b\\circ f_i$ for all $i$; (d) for $U',U\\in\\operatorname{Ob}(\\mathcal C)$ and a morphism $c:u(U')\\to u(U)$ of $\\mathcal D$ there are a covering $\\{f_i:U'_i\\to U'\\}_{i\\in I}$ of $\\mathcal C$ and morphisms $c_i:U'_i\\to U$ of $\\mathcal C$ with $u(c_i)=c\\circ u(f_i)$ for all $i$; (e) for every $V\\in\\operatorname{Ob}(\\mathcal D)$ there is a covering of $V$ in $\\mathcal D$ of the form $\\{u(U_i)\\to V\\}_{i\\in I}$ with $U_i\\in\\operatorname{Ob}(\\mathcal C)$. These are the assumptions (1)-(5) of Stacks Sites, Lemma 03A0 (label lemma-equivalence), verbatim. Stacks' Definition 03CG (label definition-special-cocontinuous-functor) calls $u$ special cocontinuous when it satisfies the assumptions and the conclusion of Lemma 03A0 (the morphism of topoi $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ of the cocontinuous $u$, Sites Lemma 00XO, is an equivalence); here the definition consists of the conditions (a)-(e) only, and the conclusion is proved where a user needs it (see the remark in the proof field).",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Definition Tag 00XJ (label definition-cocontinuous), Lemma Tag 03A0 (label lemma-equivalence) conditions (1)-(5), Definition Tag 03CG (label definition-special-cocontinuous-functor)"
@@ -10,9 +10,27 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Remark: the definition is well formed and agrees with Stacks' 03CG.* Every clause is a condition on $u$ written with the coverings of $\\mathcal C$ and $\\mathcal D$ and, in (b), with continuity [def-weil-pbc-sites-and-cohomology](3) (whose fibre products $T\\times_VV_i$ exist by the site axiom (iii) for the covering $\\{V_i\\to V\\}$); no choice is made, so (2) is a property of $u$. A functor that is special cocontinuous in Stacks' sense (Definition 03CG: (1)-(5) of Lemma 03A0 and the conclusion that $g$ is an equivalence) satisfies (a)-(e), by dropping the conclusion. The converse is the content of Stacks Sites, Lemma 03A0: (1)-(5) imply that the adjunction maps $\\mathcal G\\to g_*g^{-1}\\mathcal G$ and $g^{-1}g_*\\mathcal F\\to\\mathcal F$ are isomorphisms. That direction is not part of this definition and no node of the DAG uses it through this node: the only user, [lem-weil-pbc-affine-etale-site-topos], proves the equivalence of topoi it needs for the inclusion $S_{affine,\\Et}\\to S_{\\Et}$ directly (its steps 3-4, through Mathlib's AffineEtale.sheafEquiv and Equivalence.sheafCongr), so Lemma 03A0 is a pointer here, not a dependency.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00XJ (definition-cocontinuous, lines 4249-4261); Lemma 03A0 (lemma-equivalence, lines 6773-6798) and its proof; Definition 03CG (definition-special-cocontinuous-functor, lines 6893-6899); Lemma 00XO (lemma-cocontinuous-morphism-topoi, line 4451); Definition 00VT (definition-morphism-coverings, line 1078)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Definitions 00VT, 00XJ, 03CG; Lemma 03A0 (assumptions (1)-(5))"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +52,45 @@
    "results": "CoverLifting.lean: class Functor.IsCocontinuous (cover_lift); DenseSubsite/Basic.lean:538 class IsDenseSubsite (isCoverDense', isLocallyFull', isLocallyFaithful', functorPushforward_mem_iff); no file mentions 'special cocontinuous'",
    "date": "2026-10-10",
    "verdict": "no match for the packaged notion (definition node built from site notions)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functor between sites that is locally full and locally faithful with respect to the topology of the source, covering sieve of equalizer",
+   "results": "Functor.IsLocallyFaithful(.mk, .functorPushforward_equalizer_mem), Functor.functorPushforward_equalizer_mem, Functor.IsLocallyFull.mk (Mathlib.CategoryTheory.Sites.LocallyFullyFaithful); Functor.IsDenseSubsite.isLocallyFaithful' (Sites.DenseSubsite.Basic); Functor.inducedTopology_sieves (Sites.DenseSubsite.InducedTopology)",
+   "date": "2026-10-10",
+   "verdict": "no match per clause: Mathlib's locally full/faithful are relative to the topology K of the TARGET (the pushforward of the image/equalizer sieve is K-covering), whereas Stacks (c),(d) ask for a covering of U' in the SOURCE C"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocallyFull",
+   "results": "Functor.IsLocallyFull, IsLocallyFull.of_full, functorPushforward_imageSieve_mem, IsLocallyFull.ext (Sites.LocallyFullyFaithful); IsDenseSubsite.isLocallyFull(') (Sites.DenseSubsite.Basic); IsCoverDense.compatiblePreserving, IsCoverDense.isContinuous (Sites.DenseSubsite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: IsLocallyFull G K : ∀ f : G U ⟶ G V, (G.imageSieve f).functorPushforward G ∈ K (G U) (topology of D only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor of sites, every covering family maps to a covering family and fibre products with covering members are preserved (continuous functor of sites, Stacks 00WV)",
+   "results": "Functor.isContinuous_of_coverPreserving (Sites.CoverPreserving), Functor.IsContinuous (Sites.Continuous), Functor.IsCocontinuous (Sites.CoverLifting), IsCoverDense.isContinuous (Sites.DenseSubsite.Basic), CoverPreserving, inducedTopology(_isCocontinuous, _coverPreserving) (Sites.DenseSubsite.InducedTopology)",
+   "date": "2026-10-10",
+   "verdict": "no match for (b): Functor.IsContinuous is Stacks' conclusion 00WW (precomposition preserves sheaves), not the conditions 00WV; CoverPreserving + CompatiblePreserving imply it (isContinuous_of_coverPreserving, CoverPreserving.lean:160) but are not 00WV either; the precoverage form (J ≤ K.comap F, Precoverage.PullbacksPreservedBy, Precoverage.lean:311; isContinuous_toGrothendieck_of_pullbacksPreservedBy, Continuous.lean:317) preserves pairwise pullbacks of covering members, not T×_V V_i for arbitrary T→V"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsCocontinuous\\|class IsLocallyFull\\|class IsLocallyFaithful\\|class Functor.IsCoverDense\\|def Sieve.coverByImage\\|class IsDenseSubsite\\|lemma imageSieve_mem\\|lemma equalizer_mem\\|class IsContinuous\\|structure CoverPreserving\\|structure CompatiblePreserving\\|class PullbacksPreservedBy' in Mathlib/CategoryTheory/Sites/{CoverLifting,LocallyFullyFaithful,DenseSubsite/Basic,Continuous,CoverPreserving,Precoverage}.lean; grep -rn 'special cocontinuous\\|SpecialCocontinuous\\|03A0\\|03CG\\|00XJ' Mathlib",
+   "results": "CoverLifting.lean:75 class Functor.IsCocontinuous (cover_lift: S ∈ K (G U) → S.functorPullback G ∈ J U); LocallyFullyFaithful.lean:84 class IsLocallyFull, :93 class IsLocallyFaithful (both: pushforward sieve ∈ K); DenseSubsite/Basic.lean:83 Sieve.coverByImage, :96 class Functor.IsCoverDense (coverByImage G V ∈ K V), :538 class IsDenseSubsite (isCoverDense', isLocallyFull', isLocallyFaithful', functorPushforward_mem_iff : S.functorPushforward G ∈ K ↔ S ∈ J), :557 coverPreserving, :560 instance IsContinuous, :566 instance IsCocontinuous, :585 imageSieve_mem (G.imageSieve f ∈ J), :590 equalizer_mem (Sieve.equalizer f₁ f₂ ∈ J); Continuous.lean:197 class IsContinuous; CoverPreserving.lean:58 CoverPreserving, :78 CompatiblePreserving; Precoverage.lean:289 Functor.PreservesPairwisePullbacks; no 'special cocontinuous' and no Stacks tag 03A0/03CG/00XJ in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "not a Mathlib leaf. Translation for the Grothendieck topologies J, K generated by Cov_C, Cov_D (a sieve covers iff it contains a covering family): (a) is exactly Functor.IsCocontinuous J K (given a K-sieve S ⊇ {V_j}, the refining covering {U_i} lies in S.functorPullback u; conversely the pullback of the sieve generated by {V_j} contains a covering {U_i} whose images factor through the V_j); (b) is stronger than Functor.IsContinuous J K and not one Mathlib predicate; (c) and (d) are the J-forms Sieve.equalizer a b ∈ J U' and u.imageSieve c ∈ J U', which Mathlib has only as consequences of IsDenseSubsite (equalizer_mem :590, imageSieve_mem :585), while the classes IsLocallyFaithful/IsLocallyFull are the weaker K-forms (implied by (c),(d) with (b)); (e) implies Functor.IsCoverDense K (the covering {u(U_i)→V} lies in coverByImage); Stacks' form asks the covering itself to consist of maps from images, so for non-saturated Cov it is not literally the sieve condition. Conditions (a)-(e) imply Functor.IsCocontinuous J K ∧ Functor.IsDenseSubsite J K (functorPushforward_mem_iff: → by (b), ← by (a) with (c),(d) and local character), but that comparison is a theorem, not a one-line specialization (convention of stages/1-dag.md §2), so the node stays a definition node built from def-weil-pbc-sites-and-cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsCocontinuous\\|IsDenseSubsite\\|IsLocallyFull\\|IsLocallyFaithful\\|IsCoverDense' ~/weil-conjectures-slopmaster2/WeilConjectures; reach.py on the sorry map",
+   "results": "instances only, for specific functors, all reaching no sorry: AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous, overToEtale_isCocontinuous (Mathlib/AlgebraicGeometry/Sites/EtaleOver.lean:92,122, and the overEquiv/IsDenseSubsite instances :147-169), AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale (AlgebraicGeometry/Sites/EtaleTopologicalInvariance.lean:189), AlgebraicGeometry.Scheme.isCocontinuous_overMap (Mathlib/AlgebraicGeometry/Sites/Small.lean:107), AlgebraicGeometry.Scheme.ProEt.isCocontinuous_overMap (Proetale.lean:183), CategoryTheory.isCocontinuous_equivalenceOfIsTerminal_inverse (Mathlib/CategoryTheory/Sites/Over.lean:39)",
+   "date": "2026-10-10",
+   "verdict": "source repository (slopmaster2): no declaration defines (special) cocontinuity; nothing to attach"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +110,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-special-cocontinuous-functor",
+  "worker": "stage1",
+  "summary": "Checked against sites.tex: Definition 00XJ (cocontinuous, refinement in the sense of 00VT), Lemma 03A0 (1)-(5) and Definition 03CG. Clauses (a)-(e) were already transcribed exactly (coverings of U' in C in (c),(d); u(c_i)=c∘u(f_i); covering of V of the form {u(U_i)→V} in (e)); statement made self-contained (refinement defined with α as in 00VT, sites as in 00VH) and the claim 'the two definitions agree' moved out of the statement into a remark step (elementary direction 03CG ⇒ (a)-(e); converse = Stacks 03A0, a pointer, used by no node). Not a Mathlib leaf: (a) = Functor.IsCocontinuous for the generated topologies, but (b) is Stacks' 00WV (stronger than Functor.IsContinuous), (c),(d) are the source-topology forms (Mathlib's IsLocallyFaithful/IsLocallyFull are relative to the target topology; the source forms are IsDenseSubsite.equalizer_mem/imageSieve_mem), and (e) implies IsCoverDense; (a)-(e) imply IsCocontinuous ∧ IsDenseSubsite, a theorem. Source repository: only instances for specific functors, all sorry-free."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Definition checked against Sites 00XJ, 03A0 (1)-(5) and 03CG; made self-contained (refinement after 00VT); the claim that it agrees with 03CG moved from the statement to a remark step (the converse direction is 03A0, a pointer, no node needed yet). Not a Mathlib leaf: only (a) is a single Mathlib predicate (Functor.IsCocontinuous, CoverLifting.lean:75); (b) is Stacks 00WV (stronger than Functor.IsContinuous); (c),(d) are source-side conditions, not IsLocallyFaithful/IsLocallyFull (target-side); (e) implies IsCoverDense; together they imply IsCocontinuous and IsDenseSubsite, a theorem. The brief's guesses on (b)-(d) corrected by the worker."
+ }
 }

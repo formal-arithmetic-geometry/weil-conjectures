@@ -2,7 +2,7 @@
 
 588 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (559)
+## Stage 1: nodes to split (558)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
-| `def-weil-pbc-g-ring` | 1008 | none |
 | `def-weil-pbc-site-cech-complex` | 1008 | none |
 | `def-weil-pbc-special-cocontinuous-functor` | 1008 | none |
 | `lem-weil-pbc-adic-completion-noetherian` | 1008 | none |
@@ -566,13 +565,14 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (29)
+## Stage 2: nodes to state (30)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
+| `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
@@ -600,7 +600,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 573 nodes that wait for stage 1, 204 nodes that wait for a statement dependency.
+Not open yet: 572 nodes that wait for stage 1, 204 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
