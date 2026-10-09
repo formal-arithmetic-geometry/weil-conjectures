@@ -14,9 +14,66 @@
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Choice of thickening.) By [lem-weil-pbc-universal-first-order-thickening-exists], the formally unramified morphism $h:Z\\to X$ admits a universal first order thickening $i:Z\\to Z'$ over $X$. The same lemma gives the unique isomorphism over $X$, compatible with $i$, between any two such choices.",
+   "uses": [
+    "lem-weil-pbc-universal-first-order-thickening-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 04F3 (lemma-universal-thickening) and Section Tag 04F2, opening uniqueness discussion"
+   }
+  },
+  {
+   "text": "(The ideal sheaf.) For the chosen closed immersion $i:Z\\to Z'$, let $\\mathcal I=\\ker(\\mathcal O_{Z'}\\to i_*\\mathcal O_Z)$, the ideal sheaf of the immersion [def-sbc-closed-immersion-ideal-sheaf]. Because $Z\\subset Z'$ is first order, the defining ideal satisfies $\\mathcal I^2=0$ [def-sbc-first-order-thickening]. Thus $\\mathcal I/\\mathcal I^2$ is canonically $\\mathcal I$ as an $\\mathcal O_{Z'}$-module.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Definition Tag 04F4 (definition-universal-thickening), item (2), together with Definition Tag 04EX (definition-thickening), item (2), and Morphisms Definition Tag 01R2"
+   }
+  },
+  {
+   "text": "(The conormal module.) Pull the quotient module $\\mathcal I/\\mathcal I^2$ back along $i$ using the module pullback [def-pc-module-pullback]. This produces an $\\mathcal O_Z$-module $\\mathcal C_{Z/X}:=i^*(\\mathcal I/\\mathcal I^2)=i^*\\mathcal I$. It is precisely the conormal sheaf of the closed immersion $i$, so the displayed object has the claimed module structure and notation.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Definition Tag 04F4 item (2), invoking Morphisms Definition Tag 01R2 (morphisms-definition-conormal-sheaf); module pullback is Sheaves Tag 0095"
+   }
+  },
+  {
+   "text": "(Independence of the choice.) If $(Z'_1,i_1)$ and $(Z'_2,i_2)$ are two universal thickenings, the unique compatible isomorphism $\\varphi:Z'_1\\xrightarrow{\\sim}Z'_2$ identifies their ideal sheaves and, after applying the pullback along the common closed subscheme $Z$, identifies $i_1^*(\\mathcal I_1/\\mathcal I_1^2)$ with $i_2^*(\\mathcal I_2/\\mathcal I_2^2)$. The uniqueness clause makes this identification independent of any choices and functorial, so $\\mathcal C_{Z/X}$ is defined up to the unique canonical isomorphism asserted in the statement.",
+   "uses": [
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Section Tag 04F2 and Definition Tag 04F4 item (2), using the unique isomorphism of universal thickenings from Lemma Tag 04F3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-first-order-thickening-exists",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Definition Tag 04F4, with the well-definedness details expanded from Tags 04F2, 04F3, 04EX, and 01R2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +125,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "worker": "stage1",
+  "summary": "Split the conormal-sheaf definition into four explicit well-definedness steps: existence and uniqueness of the universal first-order thickening (04F3), its ideal and square-zero quotient (04F4/04EX/01R2), pullback as an O_Z-module (0095), and independence under the unique compatible isomorphism (04F2/04F3). No new child node was needed; every reusable notion is an existing public dependency.",
+  "checks": [
+   "review_split.py",
+   "check_dag.py --cycles"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: definition split, 4 steps (choice of a universal thickening via the existence node, ideal sheaf square zero, i^* of I/I^2 = i^* I, independence of the choice through the unique isomorphism of universal thickenings). Correct for a definition node; no new nodes."
+ }
 }
