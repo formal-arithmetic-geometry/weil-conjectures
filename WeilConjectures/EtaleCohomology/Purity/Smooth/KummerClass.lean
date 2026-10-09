@@ -304,7 +304,7 @@ end Etale
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 

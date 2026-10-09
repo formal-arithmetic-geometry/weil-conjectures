@@ -445,6 +445,22 @@ theorem torAmplitudeIn_derivedHom
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
   sorry
 
+include aX in
+/-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
+
+If moreover `K` is dualizable, the sharper interval `[c - b, d - a]` holds, from the local
+identification `RHom(K, M) ≅ K^∨ ⊗ᴸ M`. It genuinely fails in general: for the origin
+`i : {0} ⟶ 𝔸¹` both `i_* Λ` and `Λ` have Tor amplitude `[0, 0]` while
+`RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]`. -/
+theorem torAmplitudeIn_derivedHom_of_isDualizable
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
+    (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
+    (hMt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
+  sorry
+
 end DerivedHom
 
 /-! #### The exceptional inverse image -/

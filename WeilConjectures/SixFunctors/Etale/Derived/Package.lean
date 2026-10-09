@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
@@ -37,10 +38,11 @@ product, and stability of the small categories.
 ## Implementation notes
 
 The package is stated in the setting of `sk-def-sf-setting`: the coefficients are
-`ModuleCat Λ` for a finite ring `Λ` (with a Tate twist datum, for the orientation clause) whose
-exponent is invertible on the base field `k`, and `Y` is separated of finite type over `k`. For
-a general coefficient category the clauses are false: for `Λ = 𝔽_p` over `𝔽̄_p`, `Rf_*` of the
-constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible (Artin–Schreier).
+`ModuleCat Λ` for a finite ring `Λ` (with a normalized Tate twist datum, for the orientation
+clause) whose exponent is invertible on the base field `k`, and `Y` is separated of finite
+type over `k`. For a general coefficient category the clauses are false: for `Λ = 𝔽_p` over
+`𝔽̄_p`, `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible
+(Artin–Schreier).
 
 Each clause is one of the statements of this directory, and `sixOperationsPackage` is the
 assembly: the clauses are proved from the corresponding statements, and only smooth base change
@@ -86,7 +88,10 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of k)) [HasCompacti
 
 Let `k` be a field, `Λ` a finite ring with a Tate twist datum, `Y` separated of finite type over
 `k` with structure morphism `a_Y`, and `f : X ⟶ Y` separated of finite type, with
-`a_X = f ≫ a_Y`. The eight clauses of the blueprint, one group of fields each:
+`a_X = f ≫ a_Y`. The twist `Λ_X(d)` of the orientation clause is that of the ambient Tate twist
+datum; the clause is only true for a normalized datum
+(`AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`), which `sixOperationsPackage` assumes.
+The eight clauses of the blueprint, one group of fields each:
 1. **Adjunctions.** `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!`.
 2. **Base change.** For a Cartesian square
    ```
@@ -197,8 +202,10 @@ The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a f
 exponent is invertible on `k`. Every clause is one of the propositions of this directory, and
 the proof is the assembly. Smooth base change on the unbounded derived categories and the
 orientation, which is smooth purity, are not available in this directory and are left open
-here. -/
-theorem sixOperationsPackage [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
+here. The Tate twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the
+orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
+theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
+    [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩
