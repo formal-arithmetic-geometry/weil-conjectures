@@ -300,6 +300,10 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
@@ -710,6 +714,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
@@ -1067,6 +1072,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
+public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
