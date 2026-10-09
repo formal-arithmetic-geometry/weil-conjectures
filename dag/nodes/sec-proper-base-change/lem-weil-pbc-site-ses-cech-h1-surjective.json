@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-site-ses-cech-h1-surjective",
+ "kind": "statement",
+ "title": "Vanishing of Cech H^1 on a cofinal system of coverings gives surjectivity on sections (any site)",
+ "statement": "Let $\\mathcal C$ be a site and $0\\to\\mathcal F\\xrightarrow{\\iota}\\mathcal G\\xrightarrow{\\varphi}\\mathcal H\\to0$ a short exact sequence in the abelian category $\\textit{Ab}(\\mathcal C)$ of abelian sheaves [def-weil-pbc-sites-and-cohomology]. Let $U$ be an object of $\\mathcal C$ and suppose there is a set $\\Sigma$ of coverings of $U$ which is cofinal (every covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ is refined by some $\\{U_t\\to U\\}_{t\\in T}\\in\\Sigma$: for every $t$ there are $j\\in J$ and a morphism $U_t\\to V_j$ over $U$) and such that $\\check H^1(\\mathcal U,\\mathcal F)=0$ for every $\\mathcal U\\in\\Sigma$ (Cech cohomology [def-weil-pbc-site-cech-complex]). Then $\\varphi_U:\\mathcal G(U)\\to\\mathcal H(U)$ is surjective. (General-site version of [lem-weil-pbc-ses-cech-h1-surjective], which is stated for the small etale site and whose proof applies verbatim once 'epimorphism of abelian sheaves = locally surjective' and 'kernels are sectionwise' are available on a general site.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F8 (lemma-ses-cech-h1) and its proof (local lifts of a section of H on a covering, refinement in the cofinal system, the Cech 1-cocycle of differences, correction by a 0-cochain, gluing in G)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of sheaves, first Cech cohomology vanishes on coverings, sections map surjective",
+   "results": "Sheaf.locallySurjective, Sheaf.IsLocallySurjective (Sites.EpiMono, Sites.LocallySurjective), TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheafUniqueGluing, GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective, PresheafOfModules.IsLocallySurjective",
+   "date": "2026-10-10",
+   "verdict": "no match (only the epi/locally-surjective ingredient)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a short exact sequence of abelian sheaves 0 → F → G → H → 0 on a site and a cofinal family of coverings of U with vanishing first Čech cohomology of F, the map G(U) → H(U) is surjective",
+   "results": "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective (Topology.Sheaves.Stalks), MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, extensiveTopology.surjective_of_isLocallySurjective_sheaf_of_types, ShortComplex.ShortExact.surjective_g, Sheaf.isLocallySurjective_iff_epi', Sheaf.epi_of_isLocallySurjective'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnlE 'cechComplex|cechComplexFunctor' Mathlib/; grep -rnE 'surjective' Mathlib/CategoryTheory/Sites/SheafCohomology/ and 'Function.Surjective.*app' Mathlib/CategoryTheory/Sites/*.lean",
+   "results": "Cech complexes only in Sites/SheafCohomology/Cech.lean (definitions cosimplicialObjectFunctor, cochainComplexFunctor, cechComplexFunctor; no theorem); surjectivity statements only LocallyBijective.lean:48, LocallySurjective.lean:121 (sectionwise surjective implies locally surjective), MayerVietoris.lean:101 (biprod equivalence)",
+   "date": "2026-10-10",
+   "verdict": "no match. The source repository has the topological finite-cover analogue TopCat.Sheaf.surjective_app_of_exactAt_cechComplex (WeilConjectures/Topology/Sheaves/CechCriterion.lean:306, sorry-free), not a site statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-cech-vanishing-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 03F8 for a general site; correct; unsplit (its split needs the general-site epi = locally surjective, cf. the etale-only node lem-weil-pbc-abelian-sheaf-epi-locally-surjective whose Mathlib match Sheaf.isLocallySurjective_iff_epi′ is general)."
+ }
+}
