@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-polynomial-scalar-extension",
+ "kind": "statement",
+ "title": "Extension of scalars of a polynomial ring",
+ "statement": "Let $A\\to R$ be a homomorphism of commutative rings and $J$ a set. The map $R\\otimes_AA[U_j:j\\in J]\\to R[U_j:j\\in J]$, $r\\otimes p\\mapsto r\\cdot\\bar p$ ($\\bar p$ the image of $p$ under the coefficient map $A\\to R$), is an isomorphism of $R$-algebras; it sends $r\\otimes1\\mapsto r$ and $1\\otimes U_j\\mapsto U_j$. (Used with $A=\\mathbf Z$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "no statement of its own in algebra.tex (cf. the base change R' ⊗_R R[x_1,...,x_n]/(f) at line 36661); a standard fact, recorded as a Mathlib leaf"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of an algebra with a multivariate polynomial ring is the polynomial ring over the algebra, base change of MvPolynomial",
+   "results": "MvPolynomial.algebraTensorAlgEquiv, MvPolynomial.rTensorAlgEquiv, MvPolynomial.scalarRTensorAlgEquiv (Mathlib.RingTheory.TensorProduct.MvPolynomial); polyEquivTensor, polyEquivTensor' (Mathlib.RingTheory.PolynomialAlgebra)",
+   "date": "2026-10-09",
+   "verdict": "match: MvPolynomial.algebraTensorAlgEquiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars of a polynomial ring: A tensor over R of R[X_i] is isomorphic to A[X_i] as A-algebras, sending a ⊗ X_i to a X_i",
+   "results": "MvPolynomial.scalarRTensorAlgEquiv, MvPolynomial.algebraTensorAlgEquiv, polyEquivTensor', polyEquivTensor, MvPolynomial.rTensorAlgEquiv",
+   "date": "2026-10-09",
+   "verdict": "match: MvPolynomial.algebraTensorAlgEquiv"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'algebraTensorAlgEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/MvPolynomial.lean",
+   "results": "line 97 def algebraTensorAlgEquiv : A ⊗[R] MvPolynomial σ R ≃ₐ[A] MvPolynomial σ A; line 102 algebraTensorAlgEquiv_tmul (a ⊗ p ↦ a • map (algebraMap R A) p); line 107 algebraTensorAlgEquiv_symm_X (X s ↦ 1 ⊗ X s); used in RingTheory/FiniteStability.lean",
+   "date": "2026-10-09",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial.algebraTensorAlgEquiv",
+  "file": "Mathlib/RingTheory/TensorProduct/MvPolynomial.lean",
+  "how": "exact, with the roles named R:=A, A:=R: algebraTensorAlgEquiv A R : R ⊗[A] MvPolynomial J A ≃ₐ[R] MvPolynomial J R (line 97); algebraTensorAlgEquiv_tmul (line 102) gives r ⊗ p ↦ r • map (algebraMap A R) p, algebraTensorAlgEquiv_symm_X (line 107) gives U_j ↦ 1 ⊗ U_j"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-space-standard-charts",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-projective-space-standard-charts; match verified by the lead against the Mathlib source"
+ }
+}
