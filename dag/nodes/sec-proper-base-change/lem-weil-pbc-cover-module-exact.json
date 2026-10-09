@@ -2,15 +2,95 @@
  "id": "lem-weil-pbc-cover-module-exact",
  "kind": "statement",
  "title": "Exactness of the Cech sequence of a module for a principal open covering",
- "statement": "Let $R$ be a commutative ring, $f_1,\\dots,f_n\\in R$ elements generating the unit ideal, and $M$ an $R$-module. Then the sequence $0\\to M\\xrightarrow{\\alpha}\\bigoplus_{i=1}^nM_{f_i}\\xrightarrow{\\beta}\\bigoplus_{i,j=1}^nM_{f_if_j}$ is exact, where $\\alpha(m)=(m/1,\\dots,m/1)$ and $\\beta((m_i/f_i^{e_i})_i)=(m_i/f_i^{e_i}-m_j/f_j^{e_j})_{(i,j)}$ (the differences taken in $M_{f_if_j}$ via the canonical maps $M_{f_i}\\to M_{f_if_j}$, $M_{f_j}\\to M_{f_if_j}$). That is: $m\\in M$ with $m/1=0$ in every $M_{f_i}$ is $0$, and every family $(s_i)\\in\\prod_iM_{f_i}$ whose images in $M_{f_if_j}$ agree for all $i,j$ is $(m/1)_i$ for a (unique) $m\\in M$.",
+ "statement": "Let $R$ be a commutative ring, $f_1,\\dots,f_n\\in R$ elements generating the unit ideal, and $M$ an $R$-module; write $M_{f}$ for the localization of $M$ at $f$ and $M_{f_i}\\to M_{f_if_j}$, $M_{f_j}\\to M_{f_if_j}$ for the canonical maps [def-weil-pbc-module-localization-away]. Then the sequence $0\\to M\\xrightarrow{\\alpha}\\bigoplus_{i=1}^nM_{f_i}\\xrightarrow{\\beta}\\bigoplus_{i,j=1}^nM_{f_if_j}$ is exact, where $\\alpha(m)=(m/1,\\dots,m/1)$ and $\\beta((m_i/f_i^{e_i})_i)=(m_i/f_i^{e_i}-m_j/f_j^{e_j})_{(i,j)}$ (the differences taken in $M_{f_if_j}$ via the canonical maps). That is: $m\\in M$ with $m/1=0$ in every $M_{f_i}$ is $0$, and every family $(s_i)\\in\\prod_iM_{f_i}$ whose images in $M_{f_if_j}$ agree for all $i,j$ is $(m/1)_i$ for a (unique) $m\\in M$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma 00EK (label lemma-cover-module) and its proof"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "*Notation.* Write $\\rho_{ij}:M_{f_i}\\to M_{f_if_j}$, $x/f_i^e\\mapsto f_j^ex/(f_if_j)^e$, and $\\rho'_{ij}:M_{f_j}\\to M_{f_if_j}$, $x/f_j^e\\mapsto f_i^ex/(f_if_j)^e$, for the canonical maps (the unique $R$-linear maps sending $x/1$ to $x/1$) [def-weil-pbc-module-localization-away]; so $\\beta((s_i)_i)=(\\rho_{ij}(s_i)-\\rho'_{ij}(s_j))_{(i,j)}$. Recall from the definition: every element of $M_f$ is $x/f^e$ for some $x\\in M$, $e\\ge0$; $x/f^e=x'/f^e$ iff $f^k(x-x')=0$ for some $k\\ge0$; and $x/f^e=f^cx/f^{e+c}$. Both $\\alpha$ and $\\beta$ are $R$-linear. *$\\beta\\alpha=0$:* $\\rho_{ij}(m/1)=m/1=\\rho'_{ij}(m/1)$ in $M_{f_if_j}$, so the $(i,j)$-component of $\\beta(\\alpha(m))$ is $0$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  },
+  {
+   "text": "*Exactness at $M$ ($\\alpha$ injective).* Let $m\\in M$ with $m/1=0$ in $M_{f_i}$ for all $i$. The set $\\{f_1,\\dots,f_n\\}$ generates the unit ideal, so $m=0$ by [lem-weil-pbc-localized-span-eq-zero]. (Directly: $m/1=0$ in $M_{f_i}$ gives $f_i^{k_i}m=0$; with $k=\\max_ik_i$ we have $f_i^km=0$ for all $i$, and by [lem-weil-pbc-span-pow-eq-top] $1=\\sum_ib_if_i^k$ for some $b_i\\in R$, so $m=\\sum_ib_if_i^km=0$.)",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero",
+    "lem-weil-pbc-span-pow-eq-top",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  },
+  {
+   "text": "*Exactness in the middle, a common denominator.* Let $(s_i)_i\\in\\bigoplus_iM_{f_i}$ with $\\beta((s_i))=0$, i.e. $\\rho_{ij}(s_i)=\\rho'_{ij}(s_j)$ in $M_{f_if_j}$ for all $i,j$. Write $s_i=x_i/f_i^{e_i}$ with $x_i\\in M$, $e_i\\ge0$, put $N=\\max_ie_i$ and $m_i=f_i^{N-e_i}x_i$. Then $s_i=m_i/f_i^N$ for every $i$ (multiply numerator and denominator by $f_i^{N-e_i}$).",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  },
+  {
+   "text": "*Compatibility as an identity in $M$.* By the formulas for $\\rho_{ij},\\rho'_{ij}$, $\\rho_{ij}(s_i)=f_j^Nm_i/(f_if_j)^N$ and $\\rho'_{ij}(s_j)=f_i^Nm_j/(f_if_j)^N$. These two fractions with the same denominator are equal in $M_{f_if_j}$, so there is $k_{ij}\\ge0$ with $(f_if_j)^{k_{ij}}(f_j^Nm_i-f_i^Nm_j)=0$. Put $K=\\max_{i,j}k_{ij}$; then $(f_if_j)^K(f_j^Nm_i-f_i^Nm_j)=0$, i.e. $f_i^Kf_j^{N+K}m_i=f_i^{N+K}f_j^Km_j$, for all $i,j$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  },
+  {
+   "text": "*Construction of the glued element.* By [lem-weil-pbc-span-pow-eq-top] (applied to $\\{f_1,\\dots,f_n\\}$ and the exponent $N+K$) there are $a_1,\\dots,a_n\\in R$ with $\\sum_ia_if_i^{N+K}=1$. Put $m=\\sum_ia_if_i^Km_i\\in M$. For each $j$, using step 4 in the third equality, $f_j^{N+K}m=\\sum_ia_if_i^Kf_j^{N+K}m_i=\\sum_ia_if_i^{N+K}f_j^Km_j=\\bigl(\\sum_ia_if_i^{N+K}\\bigr)f_j^Km_j=f_j^Km_j$. Hence in $M_{f_j}$: $m/1=f_j^{N+K}m/f_j^{N+K}=f_j^Km_j/f_j^{N+K}=m_j/f_j^N=s_j$. So $\\alpha(m)=(s_j)_j$: the kernel of $\\beta$ is contained in the image of $\\alpha$, and with $\\beta\\alpha=0$ (step 1) the sequence is exact at $\\bigoplus_iM_{f_i}$.",
+   "uses": [
+    "lem-weil-pbc-span-pow-eq-top",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  },
+  {
+   "text": "*Uniqueness.* If also $\\alpha(m')=(s_j)_j$, then $(m-m')/1=0$ in every $M_{f_j}$, so $m=m'$ by step 2 ([lem-weil-pbc-localized-span-eq-zero]). Together, steps 1–5 give the exactness of $0\\to M\\to\\bigoplus_iM_{f_i}\\to\\bigoplus_{i,j}M_{f_if_j}$, and step 6 is the uniqueness clause of the statement.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00EK (label lemma-cover-module); direct argument written by the agent (the Stacks proof localizes at maximal ideals instead)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-localized-span-eq-zero",
+  "lem-weil-pbc-span-pow-eq-top"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00EK (label lemma-cover-module). The Stacks proof reduces, by localizing at a maximal ideal m (Lemmas 00HN, 02C7, 07K0), to the case f_1 = 1, where it is trivial; this node instead writes out the direct partition-of-unity argument (common denominator, f_i^{N+K} generate the unit ideal), as the lead's brief asked, which is also the argument of Mathlib's ring case Localization.existsUnique_algebraMap_eq_of_span_eq_top (RingTheory/Localization/Away/Basic.lean:569)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +119,38 @@
    "results": "Module.eq_zero_of_isLocalized_span (Submodule.lean:161); AlgebraicGeometry.tilde M (Tilde.lean:150, a sheaf of modules on Spec R), tilde.toOpen (:170) with instance IsLocalizedModule.Away f (toOpen M (basicOpen f)).hom (:179), toOpen_res (:175); PrimeSpectrum.iSup_basicOpen_eq_top_iff (RingTheory/Spectrum/Prime/Topology.lean:620)",
    "date": "2026-10-09",
    "verdict": "no match as stated: the gluing clause follows from the sheaf condition of tilde M on the cover Spec R = ⋃ D(f_i) (iSup_basicOpen_eq_top_iff, D(f_i) ⊓ D(f_j) = D(f_i f_j)) transported along the localization identifications of toOpen; that is several steps, not one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module M, elements s generating unit ideal, compatible family of elements of localized modules M_f glue to a unique element of M",
+   "results": "Localization.existsUnique_algebraMap_eq_of_span_eq_top (RingTheory/Localization/Away/Basic.lean, ring case only: M = R, Localization.Away), localizedModuleIsLocalizedModule, Module.Finite.of_localizationSpan_finite', Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_, IsLocalizedModule.is_universal, isLocalizedModule_iff, ModuleCat.Tilde.isFraction",
+   "date": "2026-10-10",
+   "verdict": "no match for modules: the ring case (Stacks 00EJ) is Localization.existsUnique_algebraMap_eq_of_span_eq_top"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition for a module over a covering of Spec R by basic opens D(f_i): elements of M_{f_i} agreeing in M_{f_i f_j} come from a unique element of M",
+   "results": "ModuleCat.Tilde.exists_const, StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.sectionsSubmodule, ModuleCat.Tilde.isLocallyFraction_pred, StructureSheaf.locally_const_basicOpen, ModuleCat.Tilde.const, StructureSheaf.const_ext",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span _ = ⊤, LocalizedModule",
+   "results": "bijective_of_localized_span, injective_of_localized_span, surjective_of_localized_span, exact_of_localized_span (RingTheory/LocalProperties/Exactness.lean), Submodule.of_localizationSpan",
+   "date": "2026-10-10",
+   "verdict": "no match (local-to-global criteria for maps, not the gluing); `Ideal.span _ = ⊤, IsLocalizedModule, ExistsUnique`: no results"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'span_eq_top\\|isLocalized_span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/; grep -rln IsLocalizedModule ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -n '∃!'; grep -rn 'awayToAwayRight' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Module.eq_of_isLocalized_span, Module.eq_zero_of_isLocalized_span (LocalProperties/Submodule.lean:153,161), {injective,surjective,bijective}_of_isLocalized_span, exact_of_isLocalized_span (Exactness.lean:155-172), *_of_isLocalization_of_span_eq_top (:298-326), Localization.algebraMap_injective_of_span_eq_top and existsUnique_algebraMap_eq_of_span_eq_top (Localization/Away/Basic.lean:558,569; rings only); the only ∃! for IsLocalizedModule is the universal property (LocalizedModule/Basic.lean:978); awayToAwayRight has no module analogue",
+   "date": "2026-10-10",
+   "verdict": "no match for the gluing clause; the injectivity clause is Module.eq_zero_of_isLocalized_span (node lem-weil-pbc-localized-span-eq-zero)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +170,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cover-module-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks 00EK and its proof (localization at a maximal ideal reduces to f_1 = 1). Following the lead's brief, the proof is the direct elementary argument in six steps: beta∘alpha = 0; injectivity of alpha (Mathlib leaf Module.eq_zero_of_isLocalized_span, with the partition-of-unity argument written out); a common denominator s_i = m_i/f_i^N; compatibility as (f_if_j)^K(f_j^N m_i - f_i^N m_j) = 0; the glued element m = sum a_i f_i^K m_i with sum a_i f_i^{N+K} = 1 and the verification m/1 = s_j; uniqueness. Created the definition leaf def-weil-pbc-module-localization-away (LocalizedModule.Away, IsLocalizedModule.lift for the canonical maps) and the statement leaves lem-weil-pbc-localized-span-eq-zero (Module.eq_zero_of_isLocalized_span) and lem-weil-pbc-span-pow-eq-top (Ideal.span_pow_eq_top). The gluing clause for modules is not in Mathlib (only the ring case Localization.existsUnique_algebraMap_eq_of_span_eq_top); the item stays a split node. Statement unchanged except that it now cites the localization definition. proof_origin agent, since the Stacks proof takes the localization route."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Six steps, the direct partition-of-unity argument (Stacks 00EK's proof localizes at maximal ideals instead; the argument here is the one of Mathlib's ring case existsUnique_algebraMap_eq_of_span_eq_top, Away/Basic.lean:569): notation and beta alpha = 0; injectivity (new Mathlib leaf lem-weil-pbc-localized-span-eq-zero: Module.eq_zero_of_isLocalized_span LocalProperties/Submodule.lean:161, verified; and lem-weil-pbc-span-pow-eq-top: Ideal.span_pow_eq_top Ideal/Basic.lean:161, verified); common denominator; compatibility as an identity in M; the glued element m = sum a_i f_i^K m_i with sum a_i f_i^{N+K} = 1; uniqueness. New definition leaf def-weil-pbc-module-localization-away (LocalizedModule.Away, IsLocalizedModule.Away LocalizedModule/Basic.lean:1469-1475, verified). Worker notes: 00EJ is proved from 00EK (the brief's guess reversed); lem-pc-affine-cech-complex (imported, sec-picard-framework) implies this lemma (stage-3 link)."
+ }
 }

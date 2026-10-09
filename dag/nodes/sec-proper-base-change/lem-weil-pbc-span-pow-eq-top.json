@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-span-pow-eq-top",
+ "kind": "statement",
+ "title": "Powers of generators of the unit ideal generate the unit ideal",
+ "statement": "Let $R$ be a commutative ring, $s\\subseteq R$ a subset generating the unit ideal, and $N\\ge0$ an integer. Then $\\{f^N: f\\in s\\}$ generates the unit ideal; that is, there are finitely many $f_1,\\dots,f_n\\in s$ and $a_1,\\dots,a_n\\in R$ with $\\sum_ia_if_i^N=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00E0 (label lemma-Zariski-topology) (5), (8), (16): a prime contains $f^N$ iff it contains $f$, so $V(\\{f^N\\})=V(s)=V((s))=\\emptyset$, hence $(\\{f^N\\})=R$ ($N\\ge1$; for $N=0$ the set is $\\{1\\}$ or $s=\\emptyset$, $R=0$)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if s generates the unit ideal then the n-th powers of elements of s generate the unit ideal",
+   "results": "Ideal.span_pow_eq_top (Mathlib.RingTheory.Ideal.Basic), Ideal.span_range_pow_eq_top, Ideal.pow_sup_pow_eq_top', Submodule.span_pow",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span_pow_eq_top",
+   "results": "Ideal.span_pow_eq_top {α} [CommSemiring α] (s : Set α) (hs : Ideal.span s = ⊤) (n : ℕ) : Ideal.span ((fun x => x ^ n) '' s) = ⊤ (Mathlib.RingTheory.Ideal.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem span_pow_eq_top' -A6 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/Ideal/Basic.lean:161 Ideal.span_pow_eq_top (statement as above, any n including 0)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.span_pow_eq_top",
+  "file": "Mathlib/RingTheory/Ideal/Basic.lean",
+  "how": "exact (the finite combination by `Ideal.span` membership, `Submodule.mem_span_finite_of_mem_span` / `Ideal.span_eq_top_iff_finite`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cover-module-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Ideal.span_pow_eq_top (Ideal/Basic.lean:161)."
+ }
+}
