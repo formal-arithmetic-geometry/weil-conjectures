@@ -2,25 +2,39 @@
  "id": "def-compact-support-direct-image-detailed",
  "kind": "definition",
  "title": "Compactification-independent finite-level direct image",
- "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}$. Use finite-torsion coefficients\n[def-weil-finite-torsion-constructibility] and the compact-support candidate\n[def-weil-compact-support-candidate]. Choose an object\n$c\\in\\operatorname{Comp}(f)$ in the compactification category\n[def-weil-compactifications-refinements] and define\n\n$$\n Rf_{!,n}=Rf_{!,n}^{c}:\n D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}),\n$$\n\nthe functor of [def-weil-compact-support-candidate] attached to $c$. Its\nindependence of the chosen compactification, and every other property\nasserted of it in this blueprint, are asserted on the subcategory $\\mathcal\nD^{+}_{\\mathrm{et}}(X,A_{E,n})$ of that definition, namely on the complexes\nthat come from the etale site with an etale-origin witness; there the\nsuperscript is dropped. For a refinement $u:c_1\\to c_2$, use the natural\ncomparison isomorphism $Rf_{!,n}^{c_1}\\xrightarrow{\\sim}Rf_{!,n}^{c_2}$\ninduced by proper composition and extension by zero. Require these\ncomparisons to be the identity for identity refinements and transitive under\ncomposition. The independence of the resulting functor from the chosen object\n$c$, and the cocycle condition for the comparisons through a common\nrefinement, are the compactification-coherence proposition; that $Rf_{!,n}$\nis a triangulated functor is\n[lem-compact-support-direct-image-triangulated].",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Use finite-torsion coefficients\n[def-weil-finite-torsion-constructibility] and the compact-support candidate\n[def-weil-compact-support-candidate]. Choose an object\n$c=(j,\\bar f)\\in\\operatorname{Comp}(f)$ in the compactification category\n[def-weil-compactifications-refinements] and define\n\n$$\n Rf_{!,n}=Rf_{!,n}^{c}=R\\bar f_{*,n}\\,j_!:\n D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}),\n$$\n\nthe functor of [def-weil-compact-support-candidate] attached to $c$, between the\nderived categories of $A_{E,n}$-module sheaves on the small pro-etale sites\n[def-weil-pbc-proetale-site], composed from the derived direct image\n[def-weil-derived-direct-image] $R\\bar f_{*,n}$ and the extension by zero\n[def-weil-extension-by-zero] $j_!$. Its\nindependence of the chosen compactification, and every other property\nasserted of it in this blueprint, are asserted on the subcategory $\\mathcal\nD^{+}_{\\mathrm{et}}(X,A_{E,n})$ of that definition [def-sf-etale-origin-subcategory], namely on the complexes\nthat come from the etale site with an etale-origin witness\n[def-weil-pbc-etale-origin-witness]; there the\nsuperscript is dropped. For a refinement $u:c_1\\to c_2$, use the natural\ncomparison isomorphism $Rf_{!,n}^{c_1}\\xrightarrow{\\sim}Rf_{!,n}^{c_2}$\ninduced by proper composition and extension by zero\n[def-sf-refinement-comparison-isomorphism]. Require these\ncomparisons to be the identity for identity refinements and transitive under\ncomposition. The independence of the resulting functor from the chosen object\n$c$, and the cocycle condition for the comparisons through a common\nrefinement, are the compactification-coherence proposition\n[prop-compactification-coherence-detailed]; that $Rf_{!,n}$\nis a triangulated functor is\n[lem-compact-support-direct-image-triangulated].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-compact-support-direct-image-detailed.md",
   "place": "node def-compact-support-direct-image-detailed, order 1486"
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-compact-support-candidate",
   "def-weil-compactifications-refinements",
+  "def-weil-compact-support-candidate",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-sf-etale-origin-subcategory",
   "def-weil-pbc-etale-origin-witness",
+  "def-sf-refinement-comparison-isomorphism",
   "prop-compactification-coherence-detailed"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'compactification\\|lowerShriek\\|shriek\\|compact(ly)? support\\|extension by zero' --include=*.lean Mathlib/CategoryTheory Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves; grep -rln -i 'proetale' Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none for a compact-support direct image: 'compactification' occurs only for Stone-Cech and one-point compactifications of topological spaces, no shriek functor, no extension by zero for sheaves on a site. Mathlib has the small pro-etale site Scheme.ProEt / ProEt.topology (Mathlib/AlgebraicGeometry/Sites/Proetale.lean lines 101, 156) and sheaf cohomology on it (Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean), but no direct image of pro-etale sheaves along a morphism of schemes and no Rf_!",
+   "date": "2026-10-09",
+   "verdict": "no match: the definition is a composite of notions none of which is in Mathlib (compactifications, derived direct image and extension by zero on pro-etale sites, the etale-origin subcategory); each is a statement dependency"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -60,5 +74,16 @@
    "reason": "forward pointer in the text, not a dependency: the lemma proves a property of the defined functor",
    "date": "2026-10-09"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-compact-support-direct-image-detailed",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint node (order 1486; the slopmaster2 blueprint has no file for this node). The text is kept, with bracket citations inserted so that every notion is a statement dependency: the coefficient ring A_{E,n} (def-weil-l-adic-coefficient-extension), the derived categories D(X_proet, A) (def-weil-pbc-proetale-site), the derived direct image and extension by zero out of which the candidate R\\bar f_{*,n} j_! is composed (def-weil-derived-direct-image, def-weil-extension-by-zero), the subcategory D^+_et(X, A) of complexes with an etale-origin witness (new node def-sf-etale-origin-subcategory, which the blueprint only describes in passing inside def-weil-compact-support-candidate), and the comparison isomorphism along a refinement 'induced by proper composition and extension by zero' (new node def-sf-refinement-comparison-isomorphism, the composite of lem-weil-derived-direct-image-composition with the inverse of lem-weil-pbc-proper-open-comparison-proetale, as prop-compactification-coherence-detailed states and proves it). prop-compactification-coherence-detailed stays a statement dependency since the definition relies on it for the independence of c; lem-compact-support-direct-image-triangulated remains a pointer (cut 2026-10-09). Both new nodes were searched in Mathlib (small pro-etale site exists, nothing else does) and are unsplit. Noted for the lead: def-weil-finite-torsion-constructibility is stated for the finite-field datum (ell != p) while this node allows any field K_0 with ell invertible; the DAG has two parallel definitions of Rf_* and of j_! on the pro-etale site (smooth-purity chapter vs proper-base-change chapter) used interchangeably; 'Require these comparisons to be the identity ... and transitive' states properties proved in the coherence proposition, not data of the definition. The source repository's Lean has AlgebraicGeometry.ProEtale.rightDerivedLowerShriek (the functor of this node for the chosen compactification, no sorry) and, on the etale site only, the comparison along a refinement with a cartesian square whose isomorphism property is a sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

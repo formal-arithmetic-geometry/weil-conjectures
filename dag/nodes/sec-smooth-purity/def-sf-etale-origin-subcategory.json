@@ -1,0 +1,53 @@
+{
+ "id": "def-sf-etale-origin-subcategory",
+ "kind": "definition",
+ "title": "The subcategory of pro-etale complexes with an etale origin",
+ "statement": "Let $T$ be a scheme and let $\\Lambda$ be a finite discrete commutative ring, for instance one of the finite coefficient rings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Write $D(T_{\\mathrm{proet}},\\Lambda)$ for the derived category of sheaves of $\\Lambda$-modules on the small pro-etale site of $T$ [def-weil-pbc-proetale-site] and $D^{+}(T_{\\mathrm{proet}},\\Lambda)$ for its full subcategory of complexes whose cohomology sheaves vanish below some integer [def-weil-pbc-proetale-modules] (for a finite discrete $\\Lambda$ the coefficient sheaf $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),\\Lambda)$ of that node is the sheafification of the constant presheaf $\\Lambda$, so the two nodes describe the same category). Write $D^{+}(T_{\\mathrm{et}},\\Lambda)$ for the bounded-below derived category of sheaves of $\\Lambda$-modules on the small etale site [def-weil-pbc-derived-categories], and $\\nu_T^*:D^{+}(T_{\\mathrm{et}},\\Lambda)\\to D^{+}(T_{\\mathrm{proet}},\\Lambda)$ for the inverse image along the comparison morphism of sites $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ [def-weil-pbc-site-comparison-morphism], applied degreewise since $\\nu_T^*$ is exact on sheaves. The category $\\mathcal D^{+}_{\\mathrm{et}}(T,\\Lambda)$ of *complexes coming from the etale site* has as objects the triples $(K,L,\\alpha)$ with $K\\in D^{+}(T_{\\mathrm{proet}},\\Lambda)$, $L\\in D^{+}(T_{\\mathrm{et}},\\Lambda)$ and $\\alpha:\\nu_T^*L\\xrightarrow{\\sim}K$ an isomorphism in $D^{+}(T_{\\mathrm{proet}},\\Lambda)$, that is, an etale-origin witness $(L,\\alpha)$ for $K$ [def-weil-pbc-etale-origin-witness]; a morphism $(K,L,\\alpha)\\to(K',L',\\alpha')$ is a morphism $K\\to K'$ in $D(T_{\\mathrm{proet}},\\Lambda)$, with the composition of $D(T_{\\mathrm{proet}},\\Lambda)$. The forgetful functor $\\mathcal D^{+}_{\\mathrm{et}}(T,\\Lambda)\\to D^{+}(T_{\\mathrm{proet}},\\Lambda)$, $(K,L,\\alpha)\\mapsto K$, is fully faithful, and its essential image is the class of objects admitting an etale-origin witness; through it $\\mathcal D^{+}_{\\mathrm{et}}(T,\\Lambda)$ is regarded as a full subcategory of $D(T_{\\mathrm{proet}},\\Lambda)$, and a functor defined on $D(T_{\\mathrm{proet}},\\Lambda)$ is restricted to $\\mathcal D^{+}_{\\mathrm{et}}(T,\\Lambda)$ by precomposition with the forgetful functor. The witness $(L,\\alpha)$, and not only its existence, is part of the object and is carried along whenever a construction transports it.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-compact-support-candidate.md",
+  "place": "node def-weil-compact-support-candidate, order 1472: 'the full subcategory $\\mathcal D^{+}_{\\mathrm{et}}(X,A)\\subseteq D(X_{\\mathrm{proet}},A)$ of complexes that come from the etale site in the sense of the etale-origin witness of the proper-base-change chapter'; the witness itself is node def-weil-pbc-etale-origin-witness (literature/blueprint/master/blueprint/sec-proper-base-change/, 'The pair $(L,\\alpha)$, rather than only its existence, is retained when maps are transported')"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'proetale\\|pro-etale\\|ProEtale' Mathlib/; grep -n -E '^(def|abbrev|structure|instance)' Mathlib/AlgebraicGeometry/Sites/Proetale.lean Mathlib/AlgebraicGeometry/Sites/Etale.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean: proetaleTopology (big site, line 66), Scheme.ProEt S (schemes weakly etale over S, line 101) and ProEt.topology S (small pro-etale site, line 156), with etaleTopology_le_proetaleTopology (line 79); Mathlib/AlgebraicGeometry/Sites/Etale.lean: smallEtaleTopology X (line 51); Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: ellAdicSheaf and EllAdicCohomology (sheaf cohomology of Sheaf (ProEt.topology X) Ab). No functor between the small etale and small pro-etale sites of a scheme, and no comparison of their derived categories, is defined.",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the small pro-etale site and the small etale site, but not the comparison morphism nu_T between them, nor derived categories of sheaves of modules on them, nor the notion of a complex coming from the etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'DerivedCategory' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -n 'def plus\\|def minus' Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean; grep -rn -i 'etale origin\\|comes from the etale\\|EtaleOrigin' Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "DerivedCategory is used on sites only in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean and MayerVietoris.lean (sheaf cohomology as Ext in DerivedCategory (Sheaf J Ab)); the bounded-below objects of a t-structure are TStructure.plus (Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean line 263), an ObjectProperty whose FullSubcategory (Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean line 39) gives D^+; no declaration about an etale origin of a pro-etale complex",
+   "date": "2026-10-09",
+   "verdict": "no match: the general ingredients (DerivedCategory of a Grothendieck abelian category, TStructure.plus, ObjectProperty.FullSubcategory) exist, but the notion defined here, the full subcategory of D^+(T_proet, Lambda) of objects with a witness nu^* L = K, has no Mathlib counterpart"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-compact-support-direct-image-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

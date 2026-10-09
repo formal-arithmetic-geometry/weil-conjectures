@@ -1,0 +1,57 @@
+{
+ "id": "def-sf-refinement-comparison-isomorphism",
+ "kind": "definition",
+ "title": "Comparison isomorphism of compact-support candidates along a refinement",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type $K_0$-schemes, and let $f:X\\to Y$ be a separated finite-type $K_0$-morphism [def-weil-scheme-morphism-properties]. Fix a prime $\\ell$ invertible in $K_0$, a finite extension $E/\\mathbf Q_\\ell$, an integer $n\\in\\mathbf Z_{\\geq1}$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $c_i=(j_i,\\bar f_i)$, $i=1,2$, be objects of the compactification category $\\operatorname{Comp}(f)$ and let $u:c_1\\to c_2$ be a refinement [def-weil-compactifications-refinements]: a proper $Y$-morphism $u:\\overline X_1\\to\\overline X_2$ with $\\bar f_2\\circ u=\\bar f_1$ and $u\\circ j_1=j_2$. Write $Rf_{!,n}^{c_i}=R\\bar f_{i*,n}\\,j_{i!}:D(X_{\\mathrm{proet}},A)\\to D(Y_{\\mathrm{proet}},A)$ for the compact-support candidates [def-weil-compact-support-candidate], composed from the derived direct image [def-weil-derived-direct-image] and extension by zero [def-weil-extension-by-zero] on the small pro-etale sites. Let $(K,L,\\alpha)$ be an object of $\\mathcal D^{+}_{\\mathrm{et}}(X,A)$ [def-sf-etale-origin-subcategory], so that $K=\\nu_X^*L$ with $L\\in D^{+}(X_{\\mathrm{et}},A)$ through the witness $\\alpha$. The *comparison isomorphism along $u$* is the morphism\n\n$$\n \\theta_u(K):\n Rf_{!,n}^{c_1}K=R\\bar f_{1*,n}\\,j_{1!}K\n \\xrightarrow{\\ c_{\\bar f_2,u}\\ }\n R\\bar f_{2*,n}\\,Ru_{*,n}\\,j_{1!}K\n \\xrightarrow{\\ R\\bar f_{2*,n}(\\alpha_u^{-1})\\ }\n R\\bar f_{2*,n}\\,j_{2!}K=Rf_{!,n}^{c_2}K,\n$$\n\nwhere $c_{\\bar f_2,u}:R(\\bar f_2\\circ u)_{*,n}\\xrightarrow{\\sim}R\\bar f_{2*,n}\\circ Ru_{*,n}$ is the composition isomorphism of derived direct images at finite level [lem-weil-derived-direct-image-composition], applied to $\\bar f_1=\\bar f_2\\circ u$, and $\\alpha_u:j_{2!}K\\xrightarrow{\\sim}Ru_{*,n}\\,j_{1!}K$ is the canonical isomorphism of the proper-open comparison for complexes from the etale site [lem-weil-pbc-proper-open-comparison-proetale], applied to the proper morphism $u:\\overline X_1\\to\\overline X_2$ of Noetherian schemes (they are of finite type over the field $K_0$), the open immersions $j_1,j_2$ with $u\\circ j_1=j_2$, and $K=\\nu_X^*L$ (that lemma is stated for the derived direct image and extension by zero of the proper-base-change chapter [def-weil-pbc-proetale-operations]; these are the same constructions, by a K-injective resolution and by sheafifying the presheaf equal to the given module on objects factoring through the open and to $0$ otherwise, as [def-weil-derived-direct-image] and [def-weil-extension-by-zero]). Being a composite of two isomorphisms, $\\theta_u(K)$ is an isomorphism; it is natural in $(K,L,\\alpha)$, so that $\\theta_u:Rf_{!,n}^{c_1}\\xrightarrow{\\sim}Rf_{!,n}^{c_2}$ is a natural isomorphism of functors $\\mathcal D^{+}_{\\mathrm{et}}(X,A)\\to D(Y_{\\mathrm{proet}},A)$. The witness of $K$ is carried along: $\\theta_u$ is defined on the object $(K,L,\\alpha)$, not on $K$ alone. That $\\theta_u$ is the identity for the identity refinement and that $\\theta_{v\\circ u}=\\theta_v\\circ\\theta_u$ for composable refinements are not part of this definition; they are the first assertions of the compactification-coherence proposition (node prop-compactification-coherence-detailed, which is not cited here as a dependency since it is stated in terms of this comparison).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/prop-compactification-coherence.md",
+  "place": "node prop-compactification-coherence-detailed, order 1485, statement: 'the canonical transformation between the compact-support candidates $R\\bar f_{1*,n}j_{1!}\\to R\\bar f_{2*,n}j_{2!}$ is the composite of the proper-composition isomorphism with the isomorphism $Ru_*j_{1!}\\xrightarrow{\\sim}j_{2!}$ on the ambient derived category', and its proof, steps 1-2 ($\\alpha_u^{-1}$ from lem-weil-pbc-proper-open-comparison-proetale, $R\\bar f_{1*,n}\\simeq R\\bar f_{2*,n}Ru_*$ from lem-weil-derived-direct-image-composition (1)); cited by node def-compact-support-direct-image-detailed, order 1486, as 'the natural comparison isomorphism $Rf_{!,n}^{c_1}\\xrightarrow{\\sim}Rf_{!,n}^{c_2}$ induced by proper composition and extension by zero'"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-weil-compact-support-candidate",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-sf-etale-origin-subcategory",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'compactification\\|Nagata' --include=*.lean Mathlib/ | grep -v -i 'OnePoint\\|Alexandrov\\|StoneCech'; grep -rn -i 'extension by zero\\|extendByZero\\|lowerShriek\\|shriek\\|compact(ly)? support' --include=*.lean Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none: 'compactification' occurs only for the Stone-Cech and one-point compactifications of topological spaces (Mathlib/Topology/Compactification/) and 'Nagata' only in RingTheory/NoetherNormalization.lean; no compactification of a morphism of schemes, no refinement of compactifications, no extension by zero j_! for sheaves on a site, no compact-support direct image",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E '^(noncomputable )?def (Functor\\.)?(sheafPushforwardContinuous|sheafPullback|sheafAdjunctionCocontinuous|sheafPushforwardCocontinuous)' Mathlib/CategoryTheory/Sites; grep -rn 'rightDerived' Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean | head  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Mathlib/CategoryTheory/Sites/Continuous.lean line 362: Functor.sheafPushforwardContinuous (direct image of sheaves along a continuous functor of sites) with sheafPushforwardContinuousComp (line 383, its compatibility with composition); Mathlib/CategoryTheory/Sites/Pullback.lean line 55/70: sheafPullback; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean: bounded-below right derived functors. These give the underived direct image and its composition law for arbitrary sites, not the derived composition isomorphism c_{g,f} on pro-etale sites, and nothing about extension by zero",
+   "date": "2026-10-09",
+   "verdict": "no match: the ingredients of the composite (derived direct image of pro-etale sheaves, its composition isomorphism, extension by zero and the proper-open comparison) are not in Mathlib, so the composite is not either"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-compact-support-direct-image-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
