@@ -833,6 +833,27 @@ noncomputable abbrev picardZero [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)
     [IsProper (X ↘ Spec (.of k))] : Subgroup X.Pic :=
   (picDegreeHom k X).ker
 
+/-- **The fibrewise degree of a class pulled back from `X`** is its degree: for `ℒ ∈ Pic X`, a
+`k`-scheme `T` and a field-valued point `t : Spec K ⟶ T`, the pullback of `ℒ` to `X_T` has degree
+`deg ℒ` on the fibre `X_K`, the degree being invariant under extension of the base field
+(`AlgebraicGeometry.Scheme.Modules.degree_pullback`). -/
+theorem picardFibreDegree_map_fst [IsProper (X ↘ Spec (.of k))] {T : Over (Spec (.of k))}
+    (L : X.Pic) {K : Type u} [Field K] [Algebra k K]
+    (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) :
+    picardFibreDegree (X ↘ Spec (.of k)) (Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) L) t =
+      Modules.degree k ((fromSkeleton X.Modules).obj L.val) := by
+  have hb : baseChangeMap (X ↘ Spec (.of k)) t ≫ pullback.fst (X ↘ Spec (.of k)) T.hom =
+      pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  let : (pullback (X ↘ Spec (.of k))
+      (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom).Over (Spec (.of K)) :=
+    ⟨pullback.snd _ _⟩
+  change Modules.degree K ((fromSkeleton _).obj
+    (Pic.map (baseChangeMap _ t) (Pic.map (pullback.fst _ T.hom) L)).val) = _
+  rw [← Pic.map_comp, hb]
+  exact (Modules.degree_congr K (fromSkeletonToSkeletonIso _)).trans
+    (Modules.degree_pullback k K ((fromSkeleton X.Modules).obj L.val))
+
 /-- **The `k`-points of `Pic^0_{X/k}`.** For a smooth projective curve `X` over a separably
 closed field `k`, the value of the degree-zero part `Pic^0_{X/k}` of the Picard functor on
 `Spec k` is `Pic^0(X)`: the map sending `ℒ ∈ Pic^0(X)` to the image of its pullback to
@@ -848,8 +869,86 @@ theorem exists_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
       (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.obj (.op (𝟙_ (Over (Spec (.of k))))),
       ∀ L, ∃ h, Φ L = (toSheafify (fppfTopology.over (Spec (.of k)))
         (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app _
-          ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1, h⟩ :=
-  sorry
+          ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1, h⟩ := by
+  set f := X ↘ Spec (.of k)
+  let T₀ := 𝟙_ (Over (Spec (.of k)))
+  let J := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  -- a class of degree zero on `X` pulls back to a class of fibrewise degree zero on `X_k`
+  have hmem (L : picardZero k X) : Pic.map (pullback.fst f T₀.hom) L.1 ∈ S.obj (.op T₀) := by
+    intro K _ _ t
+    rw [picardFibreDegree_map_fst]
+    have h := L.2
+    rwa [MonoidHom.mem_ker, picDegreeHom_apply, Hom.picDegree_eq, ofAdd_eq_one] at h
+  -- the comparison `β : Pic^0_{X/k} ⟶ Pic_{X/k}` is injective on sections
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J α (picardFunctor f).property⟩
+  have fac : toSheafify J S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J α _
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α fac
+  have hβ : Function.Injective (β.hom.app (.op T₀)) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T)) :
+      β.hom.app _ ((toSheafify J S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T)) M
+  -- the split exact sequence at `T₀ = Spec k`
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨pt⟩ := Hom.nonempty_fieldPoints (k := k) f
+  have hσ : pt.1 ≫ f = 𝟙 _ := by
+    rw [pt.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have hsplit := bijective_pic_split f pt.1 hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T₀
+  have hone (a : (Spec (.of k)).Pic) : a = 1 := by
+    obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit (X := Spec (.of k)) default
+      ((fromSkeleton _).obj a.val)
+    exact Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ Pic.oneIso.symm⟩
+  -- `X_k ⟶ X` is an isomorphism
+  have : IsIso (pullback.fst f T₀.hom) := by
+    change IsIso (pullback.fst f (𝟙 _))
+    infer_instance
+  have hinv (L : X.Pic) :
+      Pic.map (inv (pullback.fst f T₀.hom)) (Pic.map (pullback.fst f T₀.hom) L) = L := by
+    rw [← Pic.map_comp, IsIso.inv_hom_id, Pic.map_id]
+  have hinv' (M : (pullback f T₀.hom).Pic) :
+      Pic.map (pullback.fst f T₀.hom) (Pic.map (inv (pullback.fst f T₀.hom)) M) = M := by
+    rw [← Pic.map_comp, IsIso.hom_inv_id, Pic.map_id]
+  let φ (L : picardZero k X) : (picardFunctorDegree f 0).obj.obj (.op T₀) :=
+    (toSheafify J S.toFunctor).app _ ⟨_, hmem L⟩
+  refine ⟨Equiv.ofBijective φ ⟨fun L₁ L₂ h ↦ ?_, fun s ↦ ?_⟩, fun L ↦ ⟨hmem L, rfl⟩⟩
+  · have h' := congrArg (β.hom.app _) h
+    simp only [φ, hβS] at h'
+    have hM := hsplit.1 (a₁ := Pic.map (pullback.fst f T₀.hom) L₁.1)
+      (a₂ := Pic.map (pullback.fst f T₀.hom) L₂.1) (Prod.ext (by
+        change Pic.map _ _ = Pic.map _ _
+        exact (hone _).trans (hone _).symm) h')
+    exact Subtype.ext (by rw [← hinv L₁.1, hM, hinv])
+  · -- the degree of the image of `s` in `Pic_{X/k}(T₀)` vanishes everywhere
+    have hdeg (t : T₀.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+      obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+        (Presheaf.imageSieve_mem J (toSheafify J S.toFunctor) s) t
+      rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom,
+        show (picardFunctorDegree f 0).obj.map g.op s = (toSheafify J S.toFunctor).app _ a from
+          ha.symm, hβS,
+        picardDegree_toPicardFunctor]
+      exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+    obtain ⟨M, hM⟩ := hsplit.2 (1, β.hom.app _ s)
+    have hM₂ : (toPicardFunctor f).app _ M = β.hom.app _ s := congrArg Prod.snd hM
+    have hMS : M ∈ S.obj (.op T₀) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun t ↦ by
+      rw [← picardDegree_toPicardFunctor, hM₂]
+      exact hdeg t
+    let L₀ := Pic.map (inv (pullback.fst f T₀.hom)) M
+    have hL₀ : L₀ ∈ picardZero k X := by
+      have h := hMS k (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k k)))
+        (Category.comp_id _))
+      rw [← hinv' M, picardFibreDegree_map_fst] at h
+      rw [MonoidHom.mem_ker, picDegreeHom_apply, Hom.picDegree_eq, h, ofAdd_zero]
+    refine ⟨⟨L₀, hL₀⟩, hβ ?_⟩
+    simp only [φ, hβS]
+    rw [hinv' M]
+    exact hM₂
 
 /-- **The Jacobian is an abelian variety.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k`.  Then there is a `k`-scheme `J` carrying a commutative group
