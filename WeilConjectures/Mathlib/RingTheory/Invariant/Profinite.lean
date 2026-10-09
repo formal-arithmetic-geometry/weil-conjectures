@@ -19,7 +19,9 @@ in `Ω`, `B` being discrete (`Algebra.continuousSMul_integralClosure`). If `R` i
 in `K`, then `R` is the ring of invariants (`Algebra.isInvariant_integralClosure`), so the results
 on profinite groups acting on rings apply: the decomposition group `D` of a prime `Q` of `B` over
 `P` surjects onto the automorphism group of `(B ⧸ Q) / (R ⧸ P)` with kernel the inertia group, and
-`D / I ≅ Aut((B ⧸ Q) / (R ⧸ P))` (`Ideal.Quotient.stabilizerQuotientInertiaEquivOfProfinite`).
+`D / I ≅ Aut((B ⧸ Q) / (R ⧸ P))` (`Ideal.Quotient.stabilizerQuotientInertiaEquivIntegralClosure`).
+For a normal subextension `M / K`, an automorphism acting trivially modulo `Q` on `B ∩ M`
+agrees on `M` with an element of the inertia group of `Q` (`Ideal.exists_mem_inertia_eqOn`).
 -/
 
 @[expose] public section
@@ -111,5 +113,111 @@ noncomputable def stabilizerQuotientInertiaEquivIntegralClosure :
     (stabilizerHom_surjective_integralClosure P Q) (ker_stabilizerHom Q P Gal(Ω/K)).symm
 
 end Ideal.Quotient
+
+namespace Ideal
+
+variable {R K Ω} [IsGalois K Ω]
+
+lemma mem_of_mem_fixingSubgroup_smul (M : IntermediateField K Ω) {x : Ω}
+    (hx : ∀ σ ∈ M.fixingSubgroup, σ • x = x) : x ∈ M := by
+  rw [← InfiniteGalois.fixedField_fixingSubgroup M]
+  exact fun σ ↦ hx σ σ.2
+
+omit [IsGalois K Ω] in
+lemma smul_mem_of_normal (M : IntermediateField K Ω) [Normal K M] (σ : Gal(Ω/K)) {x : Ω}
+    (hx : x ∈ M) : σ x ∈ M := by
+  have h1 := AlgEquiv.restrictNormal_commutes σ M ⟨x, hx⟩
+  have h2 := (σ.restrictNormal M ⟨x, hx⟩).2
+  change ((σ.restrictNormal M ⟨x, hx⟩ : M) : Ω) = σ x at h1
+  rwa [h1] at h2
+
+/-- **Lifting inertia to the separable closure.** Let `M / K` be a normal subextension of
+`Ω / K` and `Q` a maximal ideal of the integral closure `B` of `R` in `Ω`. An automorphism `τ`
+of `Ω / K` acting trivially modulo `Q` on `B ∩ M` agrees on `M` with an element of the inertia
+group of `Q`. -/
+theorem exists_mem_inertia_eqOn (M : IntermediateField K Ω) [Normal K M]
+    (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] (τ : Gal(Ω/K))
+    (hτ : ∀ b : integralClosure R Ω, (b : Ω) ∈ M → τ • b - b ∈ Q) :
+    ∃ σ ∈ Q.inertia Gal(Ω/K), ∀ x ∈ M, σ x = τ x := by
+  let B := integralClosure R Ω
+  let N := M.fixingSubgroup
+  let _ : TopologicalSpace B := ⊥
+  have : DiscreteTopology B := ⟨rfl⟩
+  have hcs := Algebra.continuousSMul_integralClosure R K Ω
+  have : CompactSpace N := isCompact_iff_compactSpace.1 (InfiniteGalois.fixingSubgroup_isClosed M).isCompact
+  have : ContinuousSMul N B := ⟨(hcs.continuous_smul).comp
+    ((continuous_subtype_val.comp continuous_fst).prodMk continuous_snd)⟩
+  let A := FixedPoints.subalgebra R B N
+  have hA (a : A) : ((a : B) : Ω) ∈ M :=
+    mem_of_mem_fixingSubgroup_smul M fun σ hσ ↦ congrArg Subtype.val (a.2 ⟨σ, hσ⟩)
+  have hNM (ρ : N) (x : Ω) (hx : x ∈ M) : (ρ : Gal(Ω/K)) x = x := ρ.2 ⟨x, hx⟩
+  -- `τ Q` and `Q` lie over the same prime of `A = B ^ N`
+  have hτQ : (τ • Q).under A = Q.under A := by
+    ext a
+    change (a : B) ∈ τ • Q ↔ (a : B) ∈ Q
+    rw [Ideal.mem_pointwise_smul_iff_inv_smul_mem]
+    have hmem : ((τ⁻¹ • (a : B) : B) : Ω) ∈ M := smul_mem_of_normal M τ⁻¹ (hA a)
+    have h := hτ _ hmem
+    rw [smul_inv_smul] at h
+    constructor
+    · intro ha
+      have := Q.add_mem h ha
+      simpa using this
+    · intro ha
+      have := Q.sub_mem ha h
+      simpa using this
+  have : (τ • Q).IsPrime := by
+    rw [Ideal.pointwise_smul_eq_comap]
+    exact Ideal.comap_isPrime _ _
+  obtain ⟨ρ, hρ⟩ := Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite (A := A) (G := N)
+    (τ • Q) Q hτQ
+  -- `σ₁ = ρ τ` stabilises `Q` and agrees with `τ` on `M`
+  set σ₁ : Gal(Ω/K) := (ρ : Gal(Ω/K)) * τ
+  have hσ₁ : σ₁ • Q = Q := by
+    rw [mul_smul]
+    exact hρ.symm
+  have hσ₁M (x : Ω) (hx : x ∈ M) : σ₁ x = τ x := by
+    change (ρ : Gal(Ω/K)) (τ x) = τ x
+    exact hNM ρ _ (smul_mem_of_normal M τ hx)
+  -- `σ₁` acts on `B ⧸ Q` linearly over `A ⧸ (Q ∩ A)`
+  let g : MulAction.stabilizer Gal(Ω/K) Q := ⟨σ₁, hσ₁⟩
+  let f₀ := Ideal.Quotient.stabilizerHom Q (Q.under R) Gal(Ω/K) g
+  let f : (B ⧸ Q) ≃ₐ[A ⧸ Q.under A] (B ⧸ Q) :=
+    { f₀.toRingEquiv with
+      commutes' := by
+        intro x
+        obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+        change f₀ (Ideal.Quotient.mk Q (a : B)) = Ideal.Quotient.mk Q (a : B)
+        rw [Ideal.Quotient.stabilizerHom_apply, Ideal.Quotient.eq]
+        change σ₁ • (a : B) - (a : B) ∈ Q
+        have h1 : σ₁ • (a : B) = τ • (a : B) := Subtype.ext (hσ₁M _ (hA a))
+        rw [h1]
+        exact hτ _ (hA a) }
+  obtain ⟨ρ', hρ'⟩ := Ideal.Quotient.stabilizerHom_surjective_of_profinite (G := N)
+    (Q.under A) Q f
+  refine ⟨(ρ'.1 : Gal(Ω/K))⁻¹ * σ₁, ?_, fun x hx ↦ ?_⟩
+  · intro b
+    have hb := congrArg (fun e ↦ e (Ideal.Quotient.mk Q b)) hρ'
+    simp only [Ideal.Quotient.stabilizerHom_apply] at hb
+    change Ideal.Quotient.mk Q (ρ'.1 • b) = Ideal.Quotient.mk Q (σ₁ • b) at hb
+    rw [Ideal.Quotient.eq] at hb
+    have hρ'Q : (ρ'.1 : Gal(Ω/K))⁻¹ • Q = Q := by
+      rw [inv_smul_eq_iff]
+      exact (ρ'.2).symm
+    have := Q.smul_mem_pointwise_smul ((ρ'.1 : Gal(Ω/K))⁻¹) _ (Q.neg_mem_iff.2 hb)
+    rw [hρ'Q] at this
+    have e : ((ρ'.1 : Gal(Ω/K))⁻¹ • (ρ'.1 • b) : B) = b := inv_smul_smul (ρ'.1 : Gal(Ω/K)) b
+    have key : ((ρ'.1 : Gal(Ω/K))⁻¹ * σ₁) • b - b =
+        (ρ'.1 : Gal(Ω/K))⁻¹ • -(ρ'.1 • b - σ₁ • b) := by
+      rw [smul_neg, smul_sub, e, mul_smul, neg_sub]
+    change ((ρ'.1 : Gal(Ω/K))⁻¹ * σ₁) • b - b ∈ Q
+    rw [key]
+    exact this
+  · change ((ρ'.1 : Gal(Ω/K))⁻¹ : Gal(Ω/K)) (σ₁ x) = τ x
+    rw [hσ₁M x hx]
+    have := hNM ρ'.1⁻¹ (τ x) (smul_mem_of_normal M τ hx)
+    exact this
+
+end Ideal
 
 end Galois

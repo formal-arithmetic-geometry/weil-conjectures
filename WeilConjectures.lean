@@ -857,6 +857,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
+public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Invariants
