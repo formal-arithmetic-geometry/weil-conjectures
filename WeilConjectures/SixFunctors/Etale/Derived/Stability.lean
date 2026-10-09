@@ -19,6 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
@@ -347,6 +348,80 @@ theorem torAmplitudeIn_derivedHom_of_isDualizable_aux {X : Scheme.{u}} {a b c d 
   rw [show c - b = -b + c by omega, show d - a = -a + d by omega]
   exact h
 
+/-! ### Internal hom: reductions -/
+
+section DerivedHomReductions
+
+variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+
+omit [HasSmallSiteSheafify A] in
+/-- **Restriction to an open commutes with the internal hom**, `j^* RHom(K, N) ≅
+RHom(j^* K, j^* N)`: the two sides are right adjoint to `G ↦ K ⊗ᴸ j_! G` and to
+`G ↦ j_!(j^* K ⊗ᴸ G)`, which agree by the projection formula for `j_!` (and the symmetry of the
+derived tensor product). -/
+theorem nonempty_iso_mapDerivedCategory_upperStar_derivedHom {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] [Etale.UpperStarPreservesFlat A]
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    (K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty (D((j)^*[A]).obj ((RHom(X)[A].obj (op K)).obj N) ≅
+      (RHom(U)[A].obj (op (D((j)^*[A]).obj K))).obj (D((j)^*[A]).obj N)) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf U.smallEtaleTopology A)
+  let adj₁ := (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).comp
+    (derivedTensorHomAdjunction A K)
+  let adj₂ := (derivedTensorHomAdjunction A (D((j)^*[A]).obj K)).comp
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
+  let e : D((j)_!open[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K ≅
+      (-⊗ᴸ-(U)[A]).obj (D((j)^*[A]).obj K) ⋙ D((j)_!open[A]) :=
+    Functor.isoWhiskerLeft _ (BraidedCategory.tensorLeftIsoTensorRight K) ≪≫
+      (((flipFunctor _ _ _).mapIso
+        (derivedOpenImmersionLowerShriekProjectionIso (FC := FC) A j)).app K).symm ≪≫
+      Functor.isoWhiskerRight ((curriedTensor _).flip.mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory A j).app K) ≪≫
+          (BraidedCategory.tensorLeftIsoTensorRight _).symm) D((j)_!open[A])
+  exact ⟨((adj₁.ofNatIsoLeft e).rightAdjointUniq adj₂).app N⟩
+
+end DerivedHomReductions
+
+omit [HasSmallSiteSheafify A] in
+/-- If `M` is reflexive for the Verdier dual, `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`: currying
+`RHom(𝔻M ⊗ᴸ K, ω) ≅ RHom(K, RHom(𝔻M, ω))`. -/
+theorem nonempty_iso_derivedHom_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
+    [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+    (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (e : M ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op M)))) :
+    Nonempty ((RHom(X)[A].obj (op K)).obj M ≅
+      (verdierDual A a).obj (op ((verdierDual A a).obj (op M) ⊗ K))) := by
+  let N := (verdierDual A a).obj (op M)
+  exact ⟨(RHom(X)[A].obj (op K)).mapIso e ≪≫
+    ((((derivedTensorHomAdjunction A (N ⊗ K)).ofNatIsoLeft (tensorLeftTensor N K)).rightAdjointUniq
+      ((derivedTensorHomAdjunction A K).comp (derivedTensorHomAdjunction A N))).app
+        (dualizingComplex A a)).symm⟩
+
+
+omit [HasSmallSiteSheafify A] in
+/-- If the Verdier dual relative to `a` preserves `Dctf(X, A)` and is reflexive on it, and the
+derived tensor product preserves `Dctf(X, A)`, so does the internal hom. -/
+theorem constructibleFiniteTor_derivedHom_of_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
+    [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+    (hD : ∀ {N}, constructibleFiniteTor A X N →
+      constructibleFiniteTor A X ((verdierDual A a).obj (op N)))
+    (hbid : ∀ {N}, constructibleFiniteTor A X N →
+      Nonempty (N ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op N)))))
+    (htens : ∀ {K M}, constructibleFiniteTor A X K → constructibleFiniteTor A X M →
+      constructibleFiniteTor A X (((-⊗ᴸ-(X)[A]).obj K).obj M))
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : constructibleFiniteTor A X K) (hM : constructibleFiniteTor A X M) :
+    constructibleFiniteTor A X ((RHom(X)[A].obj (op K)).obj M) := by
+  obtain ⟨e⟩ := hbid hM
+  obtain ⟨e'⟩ := nonempty_iso_derivedHom_verdierDual A a K M e
+  obtain ⟨hbc, c, d, hcd⟩ := hD (htens (hD hM) hK)
+  exact ⟨(boundedConstructible A X).prop_of_iso e'.symm hbc, c, d,
+    (torAmplitudeIn A X c d).prop_of_iso e'.symm hcd⟩
+
 /-! ### The derived tensor product at a finite coefficient ring -/
 
 section Tensor
@@ -636,6 +711,109 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
 
 /-! #### Internal hom -/
 
+omit [Finite Λ] in
+/-- Constructibility of a sheaf of modules is local for a finite open cover of a scheme whose
+underlying space is noetherian. -/
+theorem _root_.AlgebraicGeometry.Scheme.isConstructibleSheaf_of_openCover :
+    ∀ (n : ℕ) {X : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace X] (U : Fin n → X.Opens) (_ : ∀ x, ∃ i, x ∈ U i)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+    (∀ i, IsConstructibleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (U i).ι).obj F)) →
+      IsConstructibleSheaf F := by
+  intro n
+  induction n with
+  | zero =>
+    intro X _ U hU F _
+    have : IsEmpty X := ⟨fun x ↦ by obtain ⟨i, -⟩ := hU x; exact i.elim0⟩
+    exact IsConstructibleSheaf.of_isZero (Etale.isZero_sheaf_of_isEmpty _)
+  | succ n ih =>
+    intro X _ U hU F h
+    have : TopologicalSpace.NoetherianSpace (U 0) :=
+      (U 0).ι.isOpenEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact (U 0).ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    rw [Scheme.isConstructibleSheaf_iff_upperStar (U 0).ι (U 0).closedComplement (by simp)]
+    refine ⟨h 0, ?_⟩
+    let i := (U 0).closedComplement
+    have : TopologicalSpace.NoetherianSpace _ := i.isClosedEmbedding.isInducing.noetherianSpace
+    refine ih (fun k ↦ i ⁻¹ᵁ U k.succ) (fun z ↦ ?_) _ (fun k ↦ ?_)
+    · have hz : i.base z ∉ U 0 := by
+        have : i.base z ∈ Set.range i.base := ⟨z, rfl⟩
+        rwa [(U 0).range_closedComplement] at this
+      obtain ⟨k, hk⟩ := hU (i.base z)
+      obtain ⟨k, rfl⟩ := Fin.eq_zero_or_eq_succ k |>.resolve_left (by rintro rfl; exact hz hk)
+      exact ⟨k, hk⟩
+    · have := h k.succ
+      have : IsConstructibleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (U k.succ).ι ⋙
+          Etale.upperStar (ModuleCat.{u + 1} Λ) (i ∣_ U k.succ)).obj F) :=
+        IsConstructibleSheaf.upperStar (i ∣_ U k.succ)
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) (U k.succ).ι).obj F)
+      exact IsConstructibleSheaf.of_iso
+        (((Etale.upperStarComp _ (i ∣_ U k.succ) (U k.succ).ι).app F).symm ≪≫
+          eqToIso (by rw [morphismRestrict_ι]) ≪≫
+          (Etale.upperStarComp _ (i ⁻¹ᵁ U k.succ).ι i).app F)
+
+open ZeroObject in
+omit [Finite Λ] in
+/-- A bounded complex whose restrictions to the members of a finite open cover of a noetherian
+space are bounded constructible is bounded constructible. -/
+theorem boundedConstructible_of_openCover {X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
+    {n : ℕ} (U : Fin n → X.Opens) (hU : ∀ x, ∃ i, x ∈ U i)
+    (R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h : ∀ i, boundedConstructible (ModuleCat.{u + 1} Λ) (U i)
+      (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj R)) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X R := by
+  -- homology commutes with the restrictions
+  have e (i : Fin n) (q : ℤ) :=
+    ((((U i).ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso q).app R
+  refine ⟨?_, fun q ↦ ?_⟩
+  · choose c d hcd using fun i ↦
+      (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).2 (h i).1
+    -- a zero sheaf is detected on the cover
+    have hz (q : ℤ) (hq : ∀ i, IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        (D(((U i).ι)^*[ModuleCat.{u + 1} Λ]).obj R))) :
+        IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj R) := by
+      have := Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
+        (ι := ULift.{u} (Fin n)) (fun i ↦ (U i.down).ι)
+        (fun x ↦ by obtain ⟨i, hi⟩ := hU x; exact ⟨⟨i⟩, ⟨x, hi⟩, rfl⟩)
+        (0 : (_root_.DerivedCategory.homologyFunctor _ q).obj R ⟶ 0) (fun i ↦
+          isIso_of_source_target_iso_zero _ ((hq i.down).of_iso (e i.down q)).isoZero
+            (Functor.map_isZero _ (isZero_zero _)).isoZero)
+      exact (isZero_zero _).of_iso
+        (asIso (0 : (_root_.DerivedCategory.homologyFunctor _ q).obj R ⟶ 0))
+    refine (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded R).1
+      ⟨-∑ i, |c i|, ∑ i, |d i|, ?_, ?_⟩
+    · refine (_root_.DerivedCategory.isGE_iff R _).2 fun q hq ↦ hz q fun i ↦
+        (_root_.DerivedCategory.isGE_iff _ (c i)).1 (hcd i).1 q ?_
+      have := Finset.single_le_sum (f := fun i ↦ |c i|) (fun _ _ ↦ abs_nonneg _)
+        (Finset.mem_univ i)
+      have := neg_abs_le (c i)
+      omega
+    · refine (_root_.DerivedCategory.isLE_iff R _).2 fun q hq ↦ hz q fun i ↦
+        (_root_.DerivedCategory.isLE_iff _ (d i)).1 (hcd i).2 q ?_
+      have := Finset.single_le_sum (f := fun i ↦ |d i|) (fun _ _ ↦ abs_nonneg _)
+        (Finset.mem_univ i)
+      have := le_abs_self (d i)
+      omega
+  · refine Scheme.isConstructibleSheaf_of_openCover Λ n U hU _ fun i ↦ ?_
+    have : IsConstructibleSheaf ((D(((U i).ι)^*[ModuleCat.{u + 1} Λ]) ⋙
+        _root_.DerivedCategory.homologyFunctor _ q).obj R) := (h i).2 q
+    exact IsConstructibleSheaf.of_iso (e i q).symm
+
+
+omit [Finite Λ] in
+/-- A complex of finite Tor amplitude with bounded constructible homology restricts to one along
+a pullback. -/
+lemma constructibleFiniteTor_mapDerivedCategory_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (D((f)^*[ModuleCat.{u + 1} Λ]).obj N) := by
+  obtain ⟨hbc, c, d, hcd⟩ := hN
+  exact ⟨hbc.mapDerivedCategory_upperStar f, c, d,
+    (torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app N)
+      (torAmplitudeIn_leftDerivedUpperStar _ f c d hcd)⟩
+
 section DerivedHom
 
 variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -655,8 +833,33 @@ theorem boundedConstructible_derivedHom
     (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
     (hMt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
     boundedConstructible (ModuleCat.{u + 1} Λ) X
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
-  sorry
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian aX }
+  by_cases hX : IsEmpty X
+  · exact boundedConstructible_of_openCover Λ (n := 0) Fin.elim0
+      (fun x ↦ (hX.false x).elim) _ (fun i ↦ i.elim0)
+  rw [not_isEmpty_iff] at hX
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+  -- a finite cover by affine opens
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun V : X.affineOpens ↦ (V : Set X))
+    (fun V ↦ V.1.isOpen) (fun x _ ↦ by
+      obtain ⟨V, hV, hxV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens)
+        (show x ∈ (⊤ : X.Opens) from trivial)
+      exact Set.mem_iUnion.2 ⟨⟨V, hV⟩, hxV⟩)
+  let U : Fin t.card → X.Opens := fun i ↦ (t.equivFin.symm i).1.1
+  refine boundedConstructible_of_openCover Λ U (fun x ↦ ?_) _ (fun i ↦ ?_)
+  · obtain ⟨V, hV, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+    exact ⟨t.equivFin ⟨V, hV⟩, by simpa [U] using hx⟩
+  have : IsAffine (U i) := (t.equivFin.symm i).1.2
+  let aU := (U i).ι ≫ aX
+  obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_derivedHom _ (U i).ι K M
+  exact (boundedConstructible _ _).prop_of_iso e.symm
+    (constructibleFiniteTor_derivedHom_of_verdierDual _ aU
+      (constructibleFiniteTor_verdierDual Λ aU) (nonempty_iso_verdierDual_verdierDual Λ aU)
+      (constructibleFiniteTor_tensor Λ _)
+      (constructibleFiniteTor_mapDerivedCategory_upperStar Λ _ ⟨hK, a, b, hKt⟩)
+      (constructibleFiniteTor_mapDerivedCategory_upperStar Λ _ ⟨hM, c, d, hMt⟩)).1
 
 include aX hm in
 /-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
