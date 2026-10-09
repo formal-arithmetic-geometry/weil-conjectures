@@ -109,6 +109,7 @@ section Automorphism
 
 variable (h : X ⟶ X) [IsIso h]
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` preserves `D^b_c(X, ℚ̄_ℓ)`: it is exact, so
@@ -123,6 +124,7 @@ lemma DerivedCategory.boundedAdicConstructible_mapDerivedCategory_upperStar
       ((((h)^*ᵃ[l]).mapDerivedCategoryHomologyFunctorIso i).app K)
       ((hK.2 i).upperStar h)⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≤ n}`. -/
@@ -133,6 +135,7 @@ theorem nonempty_truncLE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
         _root_.DerivedCategory.TStructure.t.truncLE n) :=
   ⟨Functor.mapDerivedCategoryTruncLEIso _ n⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≥ n}`. -/
@@ -143,6 +146,7 @@ theorem nonempty_truncGE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
         _root_.DerivedCategory.TStructure.t.truncGE n) :=
   ⟨Functor.mapDerivedCategoryTruncGEIso _ n⟩
 
+omit [IsIso h] in
 /-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
 
 The pullback `h^*` along an automorphism `h` of `X` commutes with the cohomology sheaves:

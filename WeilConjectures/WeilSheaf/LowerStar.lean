@@ -167,6 +167,7 @@ lemma lowerStar_obj_obj_carrier (F : WeilSheaf k₀ l X) :
   rfl
 
 set_option maxHeartbeats 1600000 in
+-- The Weil structure of the pushforward unfolds through several module-object isomorphisms.
 @[simp]
 lemma lowerStar_obj_obj_str (F : WeilSheaf k₀ l X) :
     ((lowerStar φ).obj F).obj.str =

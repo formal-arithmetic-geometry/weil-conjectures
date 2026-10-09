@@ -50,7 +50,8 @@ general `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExcha
 translations commuting with the geometric Frobenius.
 
 That `ℒ_ψ` is lisse (`AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`, stated
-with `sorry`) is to be checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier map is a `k₀`-torsor
+with `sorry`) is to be checked on the pro-étale cover `ĀS` itself. The geometric Artin–Schreier
+map is a `k₀`-torsor
 (`AlgebraicGeometry.affineLine.isIso_sigmaDesc_lift_geometricTranslation`), so for
 `v : V ⟶ 𝔸¹_{k̄}` the fibre product `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}` is a disjoint union of `#k₀` copies
 of `V`. The sections of `ĀS^* ĀS_* ℚ̄_ℓ` over `V` are the locally finite functions on it, and
@@ -654,10 +655,12 @@ lemma artinSchreierTranslationSheafHom_hom (c : k₀) :
         (ProEtale.lowerStarComp (WeilCoefficients.{u} l)
           (affineLine.geometricTranslationIso k₀ c).hom
           (affineLine.geometricArtinSchreierMap k₀)).hom.app
-          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
+          (ProEtale.adicConstantSheaf l
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
         (ProEtale.lowerStarCongr (WeilCoefficients.{u} l)
           (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
-          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+          (ProEtale.adicConstantSheaf l
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
   rfl
 
 lemma artinSchreierPushforward_str_hom_hom :
@@ -669,7 +672,8 @@ lemma artinSchreierPushforward_str_hom_hom :
           (ProEtale.lowerStarComp _
             (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
             (affineLine.geometricArtinSchreierMap k₀)).symm).app
-          (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
+          (ProEtale.adicConstantSheaf l
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
         (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
             (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
