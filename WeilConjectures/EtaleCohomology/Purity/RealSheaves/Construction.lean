@@ -16,11 +16,11 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 # The Weil group of a curve over a finite field
 
 Let `p : C₀ ⟶ Spec 𝔽_q` be a curve which is geometrically connected. This file constructs a
-`AlgebraicGeometry.WeilGroup` of `C₀` (`AlgebraicGeometry.WeilGroup.ofFundamentalGroup`): the Weil group
-`W(C₀, s) ⊆ π₁(C₀, s) × ℤ` of a fundamental group `π₁(C₀, s)` at a geometric point `s` with values
-in `𝔽̄_q`, with the topology induced from `π₁(C₀, s) × ℤ`, `ℤ` being discrete. In this topology
-the geometric part `ker deg` is open and is the subspace `ker (π₁(C₀, s) → Gal(𝔽̄_q / 𝔽_q))` of the
-profinite group `π₁(C₀, s)`.
+`AlgebraicGeometry.WeilGroup` of `C₀` (`AlgebraicGeometry.WeilGroup.ofFundamentalGroup`): the
+Weil group `W(C₀, s) ⊆ π₁(C₀, s) × ℤ` of a fundamental group `π₁(C₀, s)` at a geometric point
+`s` with values in `𝔽̄_q`, with the topology induced from `π₁(C₀, s) × ℤ`, `ℤ` being discrete. In
+this topology the geometric part `ker deg` is open and is the subspace
+`ker (π₁(C₀, s) → Gal(𝔽̄_q / 𝔽_q))` of the profinite group `π₁(C₀, s)`.
 
 The degree is surjective since the geometric Frobenius lifts to `π₁(C₀, s)`
 (`AlgebraicGeometry.Scheme.FiniteEtale.exists_smul_eq_geometricFrobenius`), and the local
@@ -31,6 +31,10 @@ Frobenius at a closed point `x` is a Frobenius element at `x`, of degree `e_x`
 
 - `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`: the Weil group of a geometrically connected
   curve over a finite field.
+- `AlgebraicGeometry.WeilGroup.restrictionOfPath`: the restriction of Weil groups along an open
+  immersion of curves.
+- `AlgebraicGeometry.WeilGroup.toStandard`: every Weil group is isomorphic to the one built from
+  its base point and fundamental group.
 -/
 
 @[expose] public section
@@ -361,6 +365,69 @@ theorem Restriction.nonempty [Smooth p] :
   exact ⟨_, _, ⟨restrictionOfPath j hj τ GU GC⟩⟩
 
 end Restriction
+
+section Standard
+
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  [GeometricallyConnected p] (W : WeilGroup p)
+
+/-- The Weil group `AlgebraicGeometry.WeilGroup.ofFundamentalGroup` built from the base point and
+the fundamental group of a Weil group `W`. -/
+noncomputable abbrev standard : WeilGroup p :=
+  have := W.connectedSpace
+  ofFundamentalGroup p W.basePoint W.fundamentalGroup
+
+/-- **A Weil group is isomorphic, as a topological group, to the standard one** built from its
+base point and fundamental group: the isomorphism is `weilGroupEquiv`, which is a homeomorphism
+because both topologies make the geometric part open, with the topology induced from
+`π₁(C₀, s)`. -/
+noncomputable def toStandard : W.carrier ≃ₜ* W.standard.carrier where
+  toMulEquiv := W.weilGroupEquiv
+  continuous_toFun := by
+    refine continuous_of_continuousAt_one W.weilGroupEquiv.toMonoidHom ?_
+    refine ContinuousOn.continuousAt ?_ (W.isOpen_ker.mem_nhds W.geometric.one_mem)
+    rw [continuousOn_iff_continuous_domRestrict]
+    let ψ : W.geometric → W.standard.geometric := fun g ↦
+      ⟨W.weilGroupEquiv g, (W.deg_eq g).symm.trans (MonoidHom.mem_ker.1 g.2)⟩
+    have hψ : Continuous ψ :=
+      W.standard.isEmbedding_ker.isInducing.continuous_iff.2 W.isEmbedding_ker.continuous
+    exact continuous_subtype_val.comp hψ
+  continuous_invFun := by
+    refine continuous_of_continuousAt_one W.weilGroupEquiv.symm.toMonoidHom ?_
+    refine ContinuousOn.continuousAt ?_
+      (W.standard.isOpen_ker.mem_nhds W.standard.geometric.one_mem)
+    rw [continuousOn_iff_continuous_domRestrict]
+    let ψ : W.standard.geometric → W.geometric := fun g ↦
+      ⟨W.weilGroupEquiv.symm g.1, by
+        rw [MonoidHom.mem_ker, W.deg_eq, MulEquiv.apply_symm_apply]
+        exact MonoidHom.mem_ker.1 g.2⟩
+    have hψ : Continuous ψ := by
+      refine W.isEmbedding_ker.isInducing.continuous_iff.2 ?_
+      refine W.standard.isEmbedding_ker.continuous.congr fun g ↦ ?_
+      simp only [Function.comp_apply, ψ, MulEquiv.apply_symm_apply]
+      rfl
+    exact continuous_subtype_val.comp hψ
+
+lemma toStandard_apply (g : W.carrier) : (W.toStandard g : W.standard.carrier) =
+    W.weilGroupEquiv g :=
+  rfl
+
+/-- The isomorphism with the standard Weil group carries each local Frobenius element to a
+conjugate of the local Frobenius element of the standard Weil group. -/
+lemma isConj_toStandard_frobenius (x : C.finitePoints) :
+    IsConj (W.toStandard (W.frobenius x)) (W.standard.frobenius x) := by
+  have := W.connectedSpace
+  have : Finite (C.residueField x.1) := x.2
+  obtain ⟨c, n, hcW, hc⟩ := (W.isFrobeniusElement_frobenius x).exists_mem_weilGroup_conj p
+    W.basePoint W.fundamentalGroup (isFrobeniusElement_frobeniusElement W.basePoint
+      W.fundamentalGroup x)
+  refine isConj_iff.2 ⟨⟨(c, n), hcW⟩, Subtype.ext (Prod.ext hc ?_)⟩
+  change n * (W.weilGroupEquiv (W.frobenius x)).1.2 * n⁻¹ =
+    Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)
+  rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
+  exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
+
+end Standard
 
 end WeilGroup
 
