@@ -125,6 +125,15 @@ lemma DerivedCategory.boundedConstructible.bounded
   exact _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e
     ((ν^*(X)[A]).bounded_mapDerivedCategory_obj hK'.1)
 
+/-- A bounded constructible pro-étale complex is bounded below of étale origin: it is
+`D(ν^*) K'` for a bounded constructible, hence bounded, étale complex `K'`. -/
+lemma DerivedCategory.boundedConstructible.plusEtaleOrigin
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.boundedConstructible A X K) :
+    DerivedCategory.plusEtaleOrigin A X K := by
+  obtain ⟨K', hK', ⟨e⟩⟩ := hK
+  exact ⟨K', hK'.1.1, ⟨e⟩⟩
+
 variable (A X)
 
 /-- The bounded constructible derived category `Dᵇc_proét(X, A)` of pro-étale sheaves, realized
