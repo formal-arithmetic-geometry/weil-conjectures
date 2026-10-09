@@ -2,20 +2,48 @@
  "id": "def-weil-algebraic-closure-q",
  "kind": "definition",
  "title": "The algebraic closure of $\\mathbf Q$ inside $\\Qlb$",
- "statement": "Fix a prime $p$, $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$.\nFix a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and use\nthe finite-field datum.\nSet\n\n$$\n\\overline{\\mathbf Q}^{(\\ell)}=\n\\{z\\in\\Qlb:z\\text{ is algebraic over }\\mathbf Q\\}.\n$$\n\nThis is an algebraically closed subfield of $\\Qlb$. Fix an algebraic\nclosure $\\overline{\\mathbf Q}$ of $\\mathbf Q$. A $\\mathbf Q$-embedding\n$\\jmath:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$ is an ell-adic realization of algebraic\nnumbers.",
+ "statement": "Fix a prime $p$, $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$.\nFix a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], choose an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and use\nthe finite-field datum [def-weil-finite-field-fiber].\nThe field $\\Qlb$ has characteristic $0$ and is an extension of $\\mathbf Q$ through its prime subfield [def-pc-field-extension]. Set\n\n$$\n\\overline{\\mathbf Q}^{(\\ell)}=\n\\{z\\in\\Qlb:z\\text{ is algebraic over }\\mathbf Q\\},\n$$\n\nthe algebraic closure of $\\mathbf Q$ in $\\Qlb$ [def-weil-algebraic-element, def-weil-relative-algebraic-closure]: a subfield of $\\Qlb$ containing $\\mathbf Q$. (That it is algebraically closed, hence an algebraic closure of $\\mathbf Q$, and that the realizations below exist, is the statement lem-weil-realization-exists, which is proved from this definition and is not part of it.) Fix an algebraic\nclosure $\\overline{\\mathbf Q}$ of $\\mathbf Q$ [def-weil-algebraic-closure]. A $\\mathbf Q$-isomorphism (a bijective $\\mathbf Q$-embedding)\n$\\jmath:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$ [def-weil-field-extension-isomorphism] is an *$\\ell$-adic realization of algebraic\nnumbers*.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/def-weil-algebraic-closure-q.md",
   "place": "node def-weil-algebraic-closure-q, order 2904"
  },
  "stmt_deps": [
-  "def-weil-finite-field-fiber"
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-relative-algebraic-closure",
+  "def-weil-field-extension-isomorphism"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def algebraicClosure' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/AlgebraicClosure.lean",
+   "results": "line 39 `algebraicClosure F E : IntermediateField F E`, the elements of E algebraic over F; line 183 `instance isAlgClosure [IsAlgClosed E] : IsAlgClosure F (algebraicClosure F E)`",
+   "date": "2026-10-09",
+   "verdict": "match for the subfield Q̄^(ℓ) = `algebraicClosure ℚ Qlb` (node def-weil-relative-algebraic-closure)"
+  },
+  {
+   "tool": "grep",
+   "query": "'class IsAlgClosure', 'noncomputable def equiv', 'def lift' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "line 264 `class IsAlgClosure`; line 350 `IsAlgClosed.lift : S →ₐ[R] M`; line 405 `IsAlgClosure.equiv : L ≃ₐ[R] M`",
+   "date": "2026-10-09",
+   "verdict": "these give the existence of a realization (lem-weil-realization-exists), not the definition"
+  },
+  {
+   "tool": "grep",
+   "query": "'realization', 'padicAlgebraicClosure', 'Qbar' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Padics/ and ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/",
+   "results": "none: Mathlib has no named ℓ-adic realization of algebraic numbers",
+   "date": "2026-10-09",
+   "verdict": "no match as a single declaration; the definition is assembled from `Padic`, `AlgebraicClosure`/`IsAlgClosure`, `algebraicClosure` and `AlgEquiv` (each a Mathlib leaf node)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +65,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-algebraic-closure-q",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint (sk-thm-intfactors/def-weil-algebraic-closure-q.md; no slopmaster2 copy; Lean state none). Kept the objects but made every notion a statement dependency: Q_ℓ (def-weil-l-adic-numbers), algebraic closures of Q_ℓ and of Q (def-weil-algebraic-closure), the Q-structure of a characteristic-0 field (def-pc-field-extension), and three new Mathlib-leaf definitions: def-weil-algebraic-element (IsAlgebraic), def-weil-relative-algebraic-closure (algebraicClosure F E, giving that Q̄^(ℓ) is a subfield), def-weil-field-extension-isomorphism (AlgEquiv/AlgHom). The blueprint's sentence 'This is an algebraically closed subfield' is a claim, not data: the subfield part is the Mathlib definition, and 'algebraically closed' plus the existence of a realization are lem-weil-realization-exists, which depends on this node, so it is named in the text but cannot be a dependency (it would close a cycle). 'Q-embedding ȷ: Q̄ ≅ Q̄^(ℓ)' was made precise as a Q-isomorphism, as lem-weil-realization-exists reads it. def-weil-finite-field-fiber is kept since the statement uses the datum (only for ℓ ≠ p; the notion itself does not depend on p). In Lean the whole definition is `Qbar ≃ₐ[ℚ] algebraicClosure ℚ (AlgebraicClosure ℚ_[ℓ])`, so every branch below ends in Mathlib leaves except def-weil-finite-field-fiber."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

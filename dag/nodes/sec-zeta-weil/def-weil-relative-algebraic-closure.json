@@ -1,0 +1,53 @@
+{
+ "id": "def-weil-relative-algebraic-closure",
+ "kind": "definition",
+ "title": "Relative algebraic closure of a subfield in an extension",
+ "statement": "Let $E/F$ be a field extension [def-pc-field-extension]. The *algebraic closure of $F$ in $E$* (the maximal algebraic subextension) is the set\n\n$$\n\\{\\alpha\\in E:\\alpha\\text{ is algebraic over }F\\}\n$$\n\nof elements of $E$ algebraic over $F$ [def-weil-algebraic-element], regarded as a subfield of $E$ containing the image of $F$ (an intermediate field of $E/F$): it contains $F$ and is closed under sums, differences, products and inverses of nonzero elements (Stacks, Lemma 09GI). It is an algebraic extension of $F$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Lemma 09GI (fields-lemma-algebraic-elements)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def algebraicClosure' and 'mem_algebraicClosure_iff' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/AlgebraicClosure.lean",
+   "results": "line 39 `def algebraicClosure : IntermediateField F E` (@[stacks 09GI], 'the intermediate field of E / F consisting of all integral/algebraic elements'); line 54 `mem_algebraicClosure_iff : x ∈ algebraicClosure F E ↔ IsAlgebraic F x`; line 108 `instance isAlgebraic : Algebra.IsAlgebraic F (algebraicClosure F E)`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'structure IntermediateField' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Basic.lean",
+   "results": "line 51 `structure IntermediateField extends Subalgebra K L` (a subfield of L containing the image of K)",
+   "date": "2026-10-09",
+   "verdict": "match (the notion of subfield containing F)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "algebraicClosure",
+  "file": "Mathlib/FieldTheory/AlgebraicClosure.lean",
+  "how": "exact: `algebraicClosure F E : IntermediateField F E` (line 39), membership `mem_algebraicClosure_iff` (line 54), algebraic over F by the instance `algebraicClosure.isAlgebraic` (line 108)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraic-closure-q",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-algebraic-element",
+ "kind": "definition",
+ "title": "Element algebraic over a subfield",
+ "statement": "Let $E/F$ be a field extension [def-pc-field-extension], with structure homomorphism $F\\to E$. An element $\\alpha\\in E$ is *algebraic over $F$* if it is a root of some nonzero polynomial with coefficients in $F$: there is $P\\in F[t]$, $P\\neq0$, with $P(\\alpha)=0$ in $E$ (the coefficients mapped to $E$ by $F\\to E$). The extension is *algebraic* if every element of $E$ is algebraic over $F$. In particular, a field $\\Omega$ of characteristic $0$ is an extension of $\\mathbf Q$ through the unique ring homomorphism $\\mathbf Q\\to\\Omega$ (onto its prime subfield), and '$z\\in\\Omega$ is algebraic over $\\mathbf Q$' is meant for this extension.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Definition 09GC (fields-definition-algebraic); prime subfield, fields.tex line 228"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'def IsAlgebraic' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Algebraic/",
+   "results": "RingTheory/Algebraic/Defs.lean:45 `def IsAlgebraic (x : A) : Prop := ∃ p : R[X], p ≠ 0 ∧ aeval x p = 0` (@[stacks 09GC]); `Algebra.IsAlgebraic R A` (same file) for an algebraic extension",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'toRatAlgebra' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Algebra/Rat.lean",
+   "results": "line 58 `instance DivisionRing.toRatAlgebra : Algebra ℚ R` for a division ring of characteristic zero",
+   "date": "2026-10-09",
+   "verdict": "match (the Q-structure of a characteristic-0 field)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlgebraic",
+  "file": "Mathlib/RingTheory/Algebraic/Defs.lean",
+  "how": "exact: `IsAlgebraic F α` for `[Field F] [Field E] [Algebra F E]`; an algebraic extension is `Algebra.IsAlgebraic F E`; for a field `Ω` with `[CharZero Ω]` the extension of `ℚ` is the instance `DivisionRing.toRatAlgebra` (Mathlib/Algebra/Algebra/Rat.lean:58), so '$z$ algebraic over $\\mathbf Q$' is `IsAlgebraic ℚ z`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraic-closure-q",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
