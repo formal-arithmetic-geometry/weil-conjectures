@@ -1,8 +1,8 @@
 # Work queue
 
-598 items; claim with `tools/claim.py next <group> [--stage N]`.
+599 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (552)
+## Stage 1: nodes to split (553)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -34,7 +34,6 @@
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
-| `lem-weil-pbc-proper-closed-in-proper-fp` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
 | `lem-weil-pbc-site-equivalence-morphism-transport` | 1009 | none |
@@ -43,7 +42,9 @@
 | `lem-weil-pbc-thickening-integral` | 1009 | none |
 | `lem-weil-pbc-thickening-lft-cartesian` | 1009 | none |
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1010 | none |
+| `lem-weil-pbc-chow-finite-type` | 1010 | none |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
+| `lem-weil-pbc-eventually-closed-immersion` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1010 | none |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1010 | none |
@@ -610,7 +611,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 563 nodes that wait for stage 1, 229 nodes that wait for a statement dependency.
+Not open yet: 564 nodes that wait for stage 1, 230 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

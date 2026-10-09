@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+ "kind": "statement",
+ "title": "An equivalence of sites preserving and reflecting coverings and its quasi-inverse define morphisms of sites",
+ "statement": "Let $\\mathcal A$ and $\\mathcal C$ be sites in the sense of Stacks Sites, Definition 00VH [def-weil-pbc-sites-and-cohomology](1). Let $p:\\mathcal A\\to\\mathcal C$ be an equivalence of categories such that a family $\\{X_a\\to X\\}_{a\\in I}$ of morphisms of $\\mathcal A$ with common target is a covering of $\\mathcal A$ if and only if $\\{p(X_a)\\to p(X)\\}_{a\\in I}$ is a covering of $\\mathcal C$. Let $p':\\mathcal C\\to\\mathcal A$ be a quasi-inverse, with natural isomorphisms $\\eta:\\mathrm{id}_{\\mathcal A}\\cong p'\\circ p$ and $\\varepsilon:p\\circ p'\\cong\\mathrm{id}_{\\mathcal C}$. Then: (1) a family $\\{Y_a\\to Y\\}_{a\\in I}$ of morphisms of $\\mathcal C$ is a covering of $\\mathcal C$ if and only if $\\{p'(Y_a)\\to p'(Y)\\}_{a\\in I}$ is a covering of $\\mathcal A$; (2) $p$ and $p'$ are continuous (Sites, Definition 00WV, [def-weil-pbc-sites-and-cohomology](3)); (3) the functors $p^s:\\mathcal G\\mapsto\\mathcal G\\circ p$ from sheaves of sets (resp. abelian sheaves) on $\\mathcal C$ to those on $\\mathcal A$ and $p'^s:\\mathcal F\\mapsto\\mathcal F\\circ p'$ in the other direction are quasi-inverse equivalences of categories; (4) $p_s$ and $p'_s$ on sheaves of sets are exact, so $p$ defines a morphism of sites $\\mathcal C\\to\\mathcal A$ and $p'$ defines a morphism of sites $\\mathcal A\\to\\mathcal C$ (Sites, Definition 00X1), and $p_s$ is a quasi-inverse of $p^s$, $p'_s$ a quasi-inverse of $p'^s$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; the notions are Definitions Tag 00VH (line 679), 00WV (definition-continuous, line 2524), 00X1 (definition-morphism-sites, line 2687), Lemmas 00WW (lemma-pushforward-sheaf) and 00WX (lemma-adjoint-sheaves); the topos-level analogue for cocontinuous functors is Lemma Tag 03A0 (lemma-equivalence, line 6774), whose conditions (1)-(5) hold for such an equivalence; statement written by an agent for lem-weil-pbc-site-equivalence-morphism-transport"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence of categories preserving and reflecting covering sieves is continuous and its sheaf pullback is exact",
+   "results": "Functor.IsContinuous.mk, Functor.IsContinuous (Sites.Continuous), Functor.cover_lift (Sites.CoverLifting), Functor.isContinuous_of_coverPreserving (Sites.CoverPreserving), IsDenseSubsite.sheafEquiv (Sites.DenseSubsite.SheafEquiv), Equivalence.sheafCongrPreregular (Sites.Coherent.Equivalence), CoverPreserving.mk, sheafPullbackConstruction.preservesFiniteLimits (Sites.Pullback)",
+   "date": "2026-10-10",
+   "verdict": "no match: Grothendieck-topology analogues only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an equivalence of sites induces an equivalence of sheaf categories and both functors are continuous with exact sheaf pullback (morphism of sites)",
+   "results": "Equivalence.sheafCongr.functor, Equivalence.sheafCongr, Equivalence.hasSheafCompose, Equivalence.sheafCongr_functor, sheafCongr.functor_obj_val_obj (Sites.Equivalence), IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous (Sites.DenseSubsite.SheafEquiv), Equivalence.sheafCongrPrecoherent, Equivalence.precoherent_isSheaf_iff (Sites.Coherent.Equivalence)",
+   "date": "2026-10-10",
+   "verdict": "no match for Stacks family-sites: Equivalence.sheafCongr (Equivalence.lean:141) is clause (3) for a Grothendieck topology K with e.inverse a dense subsite (K induced, IsDenseSubsite: functorPushforward_mem_iff, DenseSubsite/Basic.lean:538), and IsDenseSubsite gives IsContinuous (DenseSubsite/Basic.lean:560); clause (4) (exactness of the sheaf pullback) is not stated"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous, CategoryTheory.Equivalence",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence and its _unit_app_val_app, _counit_app_val_app (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous), taking [eqv.functor.IsContinuous J K] [eqv.inverse.IsContinuous K J] as hypotheses",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsEquivalence.*IsContinuous\\|isContinuous_of_isEquivalence\\|instance.*IsCoverDense\\|instance.*IsContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "Equivalence.lean:55 instance IsCoverDense G J for [G.IsEquivalence], :66 e.functor.IsDenseSubsite J (e.inverse.inducedTopology J), :103; DenseSubsite/Basic.lean:560 IsDenseSubsite -> IsContinuous, :566 -> IsCocontinuous; DenseSubsite/SheafEquiv.lean:107 sheafPushforwardContinuous is an equivalence for a dense subsite; no instance making an equivalence continuous for arbitrary given topologies, nothing on exactness of the left adjoint for an equivalence",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib sites are Grothendieck topologies; the Stacks site generates one, and the node would specialize only after proving that the generated topologies make p a dense subsite)"
+  }
+ ],
+ "import_flags": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-equivalence-morphism-transport",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: an equivalence preserving and reflecting coverings, with a quasi-inverse, gives continuous functors and morphisms of sites in both directions, with p^s, p′^s quasi-inverse; well posed; unsplit."
+ }
+}

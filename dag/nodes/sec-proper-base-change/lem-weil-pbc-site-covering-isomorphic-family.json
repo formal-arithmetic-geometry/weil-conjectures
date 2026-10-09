@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-site-covering-isomorphic-family",
+ "kind": "statement",
+ "title": "A family isomorphic to a covering is a covering",
+ "statement": "Let $\\mathcal C$ be a site in the sense of Stacks Sites, Definition 00VH [def-weil-pbc-sites-and-cohomology](1): a category with a set $\\operatorname{Cov}(\\mathcal C)$ of families of morphisms with fixed target such that (i) $\\{V\\to U\\}$ is a covering for every isomorphism $V\\to U$, (ii) if $\\{U_i\\to U\\}_{i\\in I}$ is a covering and $\\{V_{ij}\\to U_i\\}_{j\\in J_i}$ is a covering for every $i$ then $\\{V_{ij}\\to U\\}_{i,j}$ is a covering, (iii) for a covering $\\{U_i\\to U\\}_{i\\in I}$ and a morphism $V\\to U$ the fibre products $U_i\\times_UV$ exist and, for some choice of them, $\\{U_i\\times_UV\\to V\\}_{i\\in I}$ is a covering. Let $\\{g_a:U_a\\to U\\}_{a\\in A}$ be a covering of $\\mathcal C$, and let $\\{f_a:V_a\\to V\\}_{a\\in A}$ be a family of morphisms of $\\mathcal C$ with common target, indexed by the same set $A$, together with an isomorphism $\\varphi:V\\to U$ and isomorphisms $\\sigma_a:V_a\\to U_a$ such that $g_a\\circ\\sigma_a=\\varphi\\circ f_a$ for every $a\\in A$. Then $\\{f_a:V_a\\to V\\}_{a\\in A}$ is a covering of $\\mathcal C$. (In particular, for $\\varphi=\\mathrm{id}$: replacing the sources of a covering by isomorphic objects over the target gives a covering.)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; Definition Tag 00VH (definition-site, line 679), axioms (1)-(3) and the \"Clarifications\" paragraph after it (axiom (3) holds for some choice of the fibre products); statement written by an agent for lem-weil-pbc-site-equivalence-morphism-transport"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a family of morphisms isomorphic to a covering family is a covering in a precoverage",
+   "results": "Precoverage.RespectsIso.mk (Mathlib.CategoryTheory.Sites.Hypercover.Zero), Precoverage.mem_coverings_of_isIso, Precoverage.HasIsos (Sites.Precoverage), Coverage.mk, MorphismProperty.precoverage, Scheme.Cover.changeProp",
+   "date": "2026-10-10",
+   "verdict": "no match: Precoverage.RespectsIso is the analogous property, but as a class on a Mathlib Precoverage, not a statement about Stacks sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "covering families of a pretopology are stable under isomorphism of families: if sources and target are replaced by isomorphic objects, still a covering",
+   "results": "Pretopology.has_isos (Sites.Pretopology), Precoverage.RespectsIso, Precoverage.RespectsIso.of_forall_exists_iso, Precoverage.RespectsIso.of_iso (Sites.Hypercover.Zero), Precoverage.toPretopology_toPrecoverage, GrothendieckTopology.instHasIsosToPrecoverage",
+   "date": "2026-10-10",
+   "verdict": "no match (closest: RespectsIso.of_iso, iso of PreZeroHypercovers of a fixed target S)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.RespectsIso",
+   "results": "Precoverage.RespectsIso, Precoverage.instRespectsIsoOfIsStableUnderBaseChange : [J.IsStableUnderBaseChange] -> J.RespectsIso, PreZeroHypercover.presieve₀_mem_of_iso, presieve₀_mem_iff_of_iso, Precoverage.ZeroHypercover.presieve₀_mem_of_iso, RespectsIso.of_forall_exists_iso (all Mathlib.CategoryTheory.Sites.Hypercover.Zero)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib derives RespectsIso (Hypercover/Zero.lean:957) from IsStableUnderBaseChange (Precoverage.lean:95), whose hypothesis is stability for every pullback square (IsPullback), stronger than Stacks axiom (iii) which asks it for some choice of fibre products; for a Stacks site the stability under every choice of fibre product is exactly what this node proves (with fixed target), so the Mathlib instance does not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'RespectsIso\\|presieve₀_mem_of_iso\\|mem_coverings_of_isPullback\\|class HasIsos' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/{Precoverage.lean,Hypercover/Zero.lean}",
+   "results": "Precoverage.lean:87 HasIsos, :95 IsStableUnderBaseChange (any IsPullback), :132 mem_coverings_of_isPullback; Hypercover/Zero.lean:631 class Precoverage.RespectsIso (iso E ≅ F of PreZeroHypercovers of one S), :680 presieve₀_mem_of_iso, :957 instance RespectsIso from IsStableUnderBaseChange (proof: base change along 𝟙 S with isomorphic pullback squares)",
+   "date": "2026-10-10",
+   "verdict": "no match (same argument as the Mathlib instance, for Mathlib precoverages with the stronger base-change axiom; no theorem for Stacks sites, and no change of target)"
+  }
+ ],
+ "import_flags": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-equivalence-morphism-transport",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: a family isomorphic to a covering (sources and target) is a covering; well posed; unsplit (proof from axioms (i)-(iii))."
+ }
+}

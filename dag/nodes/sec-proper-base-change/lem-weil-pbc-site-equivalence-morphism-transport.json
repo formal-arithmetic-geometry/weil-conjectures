@@ -10,9 +10,99 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the equivalences are morphisms of sites).* By [lem-weil-pbc-site-equivalence-is-morphism-of-sites], applied to $p:\\mathcal A\\to\\mathcal C$, $p$ is continuous and defines a morphism of sites $\\mathcal C\\to\\mathcal A$ ($p_s$ exact). Choose a quasi-inverse $q':\\mathcal D\\to\\mathcal B$ of $q$ with a natural isomorphism $\\eta:\\mathrm{id}_{\\mathcal B}\\xrightarrow{\\sim}q'\\circ q$; by the same node applied to $q:\\mathcal B\\to\\mathcal D$ (clauses (2), (4) for the quasi-inverse), $q'$ is continuous and defines a morphism of sites $\\mathcal B\\to\\mathcal D$ ($q'_s$ exact).",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+   }
+  },
+  {
+   "text": "*Step 2 ($u'\\cong q'\\circ u\\circ p$).* Let $\\alpha:q\\circ u'\\xrightarrow{\\sim}u\\circ p$ be the given natural isomorphism and put $w=q'\\circ u\\circ p:\\mathcal A\\to\\mathcal B$. Then $\\theta=(q'\\alpha)\\circ(\\eta u'):u'\\to q'qu'\\to q'up=w$, with components $\\theta_X=q'(\\alpha_X)\\circ\\eta_{u'(X)}$, is a natural isomorphism $u'\\cong w$ (a composite of whiskerings of natural isomorphisms).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+   }
+  },
+  {
+   "text": "*Step 3 ($w$ is continuous and defines a morphism of sites).* Apply [lem-weil-pbc-site-morphism-composition] (Sites, Lemma 03CB) with $\\mathcal C_3=\\mathcal A$, $\\mathcal C_2=\\mathcal C$, $\\mathcal C_1=\\mathcal D$, $v=p$ (Step 1) and $u$ (continuous with $u_s$ exact by hypothesis): $u\\circ p:\\mathcal A\\to\\mathcal D$ is continuous and $(u\\circ p)_s$ is exact. Apply it again with $\\mathcal C_3=\\mathcal A$, $\\mathcal C_2=\\mathcal D$, $\\mathcal C_1=\\mathcal B$, $v=u\\circ p$ and $q'$ in place of $u$ (Step 1): $w=q'\\circ(u\\circ p)$ is continuous, $w_s$ on sheaves of sets is exact, and $w^s=p^s u^s q'^s$.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites, line 2764), applied twice"
+   }
+  },
+  {
+   "text": "*Step 4 ($u'$ is continuous).* Let $\\{g_a:V_a\\to V\\}_{a\\in I}$ be a covering of $\\mathcal A$. (a) By Step 3 $\\{w(g_a):w(V_a)\\to w(V)\\}$ is a covering of $\\mathcal B$; by naturality of $\\theta$ (Step 2), $w(g_a)\\circ\\theta_{V_a}=\\theta_V\\circ u'(g_a)$ with $\\theta_{V_a}$, $\\theta_V$ isomorphisms, so by [lem-weil-pbc-site-covering-isomorphic-family] (with $\\varphi=\\theta_V$, $\\sigma_a=\\theta_{V_a}$) $\\{u'(g_a):u'(V_a)\\to u'(V)\\}$ is a covering of $\\mathcal B$. (b) Let $T\\to V$ be a morphism of $\\mathcal A$ and $P=T\\times_VV_a$ (it exists by axiom (iii) of 00VH). By Step 3 a fibre product $Q=w(T)\\times_{w(V)}w(V_a)$ exists in $\\mathcal B$ and the canonical $c_w:w(P)\\to Q$ is an isomorphism. The cospans $u'(T)\\to u'(V)\\leftarrow u'(V_a)$ and $w(T)\\to w(V)\\leftarrow w(V_a)$ are isomorphic through $(\\theta_T,\\theta_V,\\theta_{V_a})$ (naturality), so $Q$ with the projections composed with $\\theta_T^{-1}$, $\\theta_{V_a}^{-1}$ is a fibre product $u'(T)\\times_{u'(V)}u'(V_a)$, and the canonical morphism $c_{u'}:u'(P)\\to Q$ for $u'$ equals $c_w\\circ\\theta_P$ (both have projections $\\theta_T^{-1}w(\\mathrm{pr}_1)\\theta_P=u'(\\mathrm{pr}_1)$ and $\\theta_{V_a}^{-1}w(\\mathrm{pr}_2)\\theta_P=u'(\\mathrm{pr}_2)$), an isomorphism. Hence $u'$ satisfies (a), (b) of Definition 00WV [def-weil-pbc-sites-and-cohomology](3).",
+   "uses": [
+    "lem-weil-pbc-site-covering-isomorphic-family",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+   }
+  },
+  {
+   "text": "*Step 5 ($u'^s\\cong w^s$).* Since $u'$ and $w$ are continuous (Steps 3, 4), $u'^s\\mathcal G=\\mathcal G\\circ u'$ and $w^s\\mathcal G=\\mathcal G\\circ w$ are sheaves on $\\mathcal A$ for every sheaf of sets (resp. abelian sheaf) $\\mathcal G$ on $\\mathcal B$ [lem-weil-pbc-site-continuous-pushforward-sheaf]. The maps $\\mathcal G(\\theta_X):\\mathcal G(w(X))\\to\\mathcal G(u'(X))$ are bijections (group isomorphisms), natural in $X$ by naturality of $\\theta$ and in $\\mathcal G$ by naturality of morphisms of sheaves; so they form a natural isomorphism $\\delta:w^s\\xrightarrow{\\sim}u'^s$ of functors from sheaves on $\\mathcal B$ to sheaves on $\\mathcal A$.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+   }
+  },
+  {
+   "text": "*Step 6 ($u'_s\\cong w_s$).* By [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (Sites, Lemma 00WX) $u'_s\\dashv u'^s$ and $w_s\\dashv w^s$ on sheaves of sets. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=w_s$, $R_1=w^s$, $L_2=u'_s$, $R_2=u'^s$ and the natural isomorphism $\\delta^{-1}:u'^s\\xrightarrow{\\sim}w^s$ of Step 5 (uniqueness of adjoints, Categories, Lemma 0B65): there is a natural isomorphism $w_s\\cong u'_s$.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 00WX (lemma-adjoint-sheaves); literature/stacks-project/categories.tex Lemma Tag 0B65"
+   }
+  },
+  {
+   "text": "*Step 7 ($u'_s$ is exact).* $w_s$ commutes with finite limits and finite colimits (Step 3). For a finite diagram in $\\Sh(\\mathcal A)$ with limit cone $\\lambda$, the cone $u'_s(\\lambda)$ is isomorphic, through the components of the isomorphism $w_s\\cong u'_s$ of Step 6, to the limit cone $w_s(\\lambda)$, and a cone isomorphic to a limit cone is a limit cone; dually for colimits. Hence $u'_s$ is exact, and with Step 4 the continuous functor $u'$ defines a morphism of sites $\\mathcal B\\to\\mathcal A$ (Sites, Definition 00X1, [def-weil-pbc-sites-and-cohomology](3)).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-site-covering-isomorphic-family",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "no Stacks lemma states it; built from Definitions 00VH, 00WV, 00X1, Lemmas 00WW, 00WX, 03CB and Categories Lemma 0B65; written by an agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +131,24 @@
    "results": "Continuous.lean:280 isContinuous_of_iso, :290 isContinuous_comp, :298 isContinuous_comp'; Equivalence.lean:109-141 sheafCongr (equivalence of sheaf categories along an equivalence with induced topology); no statement about Stacks morphisms of sites",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 275,305p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Continuous.lean; grep -n 'sheafPushforwardContinuous\\|IsDenseSubsite\\|IsCoverDense' Sites/{Continuous.lean,Equivalence.lean,DenseSubsite/Basic.lean,DenseSubsite/SheafEquiv.lean}",
+   "results": "Functor.isContinuous_of_iso {F₁ F₂ : C ⥤ D} (e : F₁ ≅ F₂) [F₁.IsContinuous J K] : F₂.IsContinuous J K (Continuous.lean:280; IsContinuous at :197 = precomposition with F.op carries type-valued K-sheaves to J-sheaves); isContinuous_comp (:290), isContinuous_comp' (:298); Functor.sheafPushforwardContinuous (Continuous.lean:362, precomposition on sheaves); Equivalence.lean:55 instance IsCoverDense for [G.IsEquivalence], :141 Equivalence.sheafCongr; DenseSubsite/Basic.lean:538 IsDenseSubsite (cover dense, locally full/faithful, functorPushforward_mem_iff), :560 IsDenseSubsite -> IsContinuous; DenseSubsite/SheafEquiv.lean:107 sheafPushforwardContinuous is an equivalence for a dense subsite",
+   "date": "2026-10-10",
+   "verdict": "no match. Relation: a Stacks site (00VH) generates a Grothendieck topology (sieves containing the sieve generated by a covering family) with the same sheaves; Stacks continuity (00WV, families and fibre products) implies Mathlib's IsContinuous (sheaves pull back to sheaves, 00WW) but not conversely, and Mathlib has no exactness-of-u_s notion of morphism of sites on this sieve level. isContinuous_of_iso is the sieve-level analogue of Step 4 (via 00WW only), sheafCongr/IsDenseSubsite of node lem-weil-pbc-site-equivalence-is-morphism-of-sites clause (3)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functor naturally isomorphic to a continuous functor between sites is continuous",
+   "results": "Functor.isContinuous_of_iso (Mathlib.CategoryTheory.Sites.Continuous), Functor.isContinuous_comp', Functor.IsContinuous.mk",
+   "date": "2026-10-10",
+   "verdict": "no match for the Stacks notion (see the grep record)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +173,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: continuity and the morphism-of-sites property transported along equivalences preserving and reflecting coverings; correct; unsplit."
+  "note": "Seven agent-written steps: equivalences preserving/reflecting coverings are morphisms of sites in both directions (new unsplit node), u′ ≅ q′∘u∘p, the composite is a morphism of sites (merged node lem-weil-pbc-site-morphism-composition twice), continuity of u′ via the new unsplit node lem-weil-pbc-site-covering-isomorphic-family (the worker noted correctly that axioms (i)+(ii) alone do not give it; (iii) with its choice of fibre products is needed) and the isomorphic cospans, u′^s ≅ w^s, uniqueness of adjoints (reviewed conjugate node), exactness transported along the isomorphism. Checked. The brief′s tags 03A4/039Z/00WX were wrong, as the worker says; Stacks has no lemma for equivalences of sites."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-equivalence-morphism-transport",
+  "worker": "stage1",
+  "summary": "Split into seven steps following the queue sketch: (1) p and a quasi-inverse q' of q are continuous and define morphisms of sites, by the new node lem-weil-pbc-site-equivalence-is-morphism-of-sites (no Stacks lemma states it; the guessed tags 03A4 and 039Z are a sites-modules section and the section 'Morphisms of topoi', and 00WX is lemma-adjoint-sheaves, not an isomorphism-invariance lemma; Lemma 03A0 is only the cocontinuous topos-level analogue); (2) u' ≅ w := q'up (elementary); (3) w continuous with w_s exact by lem-weil-pbc-site-morphism-composition (03CB) twice; (4) continuity of u' from the isomorphism, using the new node lem-weil-pbc-site-covering-isomorphic-family (axioms (i), (ii) of 00VH alone do not give it when the target changes; axiom (iii) with the 'some choice' clarification is needed) and the transport of fibre products along the isomorphic cospans; (5) u'^s ≅ w^s (elementary); (6) u'_s ≅ w_s by uniqueness of adjoints (lem-weil-pbc-conjugate-iso-unit-equation, Categories 0B65) and the 00WX adjunction node; (7) exactness transfers along the isomorphism (elementary). Mathlib searched three ways (sieve-level analogues only: Functor.isContinuous_of_iso, Equivalence.sheafCongr, IsDenseSubsite, sheafPushforwardContinuous); the source repository has no declaration for this statement."
  }
 }
