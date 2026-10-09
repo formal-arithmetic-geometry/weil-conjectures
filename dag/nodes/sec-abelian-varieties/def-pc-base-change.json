@@ -2,21 +2,42 @@
  "id": "def-pc-base-change",
  "kind": "definition",
  "title": "Base change along $T$, geometric fibres",
- "statement": "Let $f:X\\to S$ be a morphism of schemes and let $T$ be a scheme over\n$S$. The *base change* is\n\n$$\nX_T:=X\\times_ST,\\qquad\n\\mathrm{pr}_T:X_T\\longrightarrow T,\\qquad\nf_T:X_T\\longrightarrow X,\n$$\n\nwith the projections; for $g:T'\\to T$ the *base change of a\nmodule* $\\mathcal{F}$ on $X_T$ is $\\mathcal{F}_{T'}=g_X^*\\mathcal{F}$ where\n$g_X:X_{T'}\\to X_T$. For a point $t\\in T$ the *fibre*\n$X_t=X\\times_S\\operatorname{Spec}(\\kappa(t))$ and the *geometric fibre* $X_{\\bar t}$ are as in\nDefinition def:weil-pbc-scheme-conventions.\nIf $f$ has a section $\\sigma:S\\to X$ and $T$ is over $S$, then\n$\\sigma_T:=(\\mathrm{id}_T\\times\\sigma):T\\to X_T$ is the induced section.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $T$ be a scheme over $S$ [def-weil-scheme-over-base], with structure morphism $T\\to S$. The *base change* of $X$ along $T\\to S$ is the fibre product [def-pc-fibre-product]\n\n$$\nX_T:=X\\times_ST,\\qquad\n\\mathrm{pr}_T:X_T\\longrightarrow T,\\qquad\nf_T:X_T\\longrightarrow X,\n$$\n\nwith its two projections; $X_T$ is a scheme over $T$ through $\\mathrm{pr}_T$. For a morphism $h:X\\to Y$ of schemes over $S$, the *base change of $h$* is the induced morphism of fibre products $h_T:=h\\times_S\\mathrm{id}_T:X_T\\to Y_T$, a morphism of schemes over $T$; in particular, for $g:T'\\to T$ a morphism of schemes over $S$, the induced morphism $g_X:=\\mathrm{id}_X\\times_Sg:X_{T'}\\to X_T$ identifies $X_{T'}$ with $X_T\\times_TT'$. For a sheaf of $\\mathcal O_{X_T}$-modules $\\mathcal F$ on $X_T$ and $g:T'\\to T$ as above, the *base change of the module* $\\mathcal F$ is the pullback [def-pc-module-pullback] $\\mathcal F_{T'}=g_X^*\\mathcal F$ along $g_X:X_{T'}\\to X_T$. For a point $t\\in T$ the *fibre* $X_t=X\\times_S\\operatorname{Spec}(\\kappa(t))$ is the scheme-theoretic fibre [def-pc-scheme-fibre] of $\\mathrm{pr}_T$ over $t$, where $\\kappa(t)$ is the residue field [def-weil-residue-field] and $\\operatorname{Spec}\\kappa(t)\\to T\\to S$ [def-weil-affine-spectrum] the canonical morphism; the *geometric fibre* $X_{\\bar t}=X\\times_S\\operatorname{Spec}\\overline{\\kappa(t)}$, for a chosen algebraic closure $\\overline{\\kappa(t)}$ of $\\kappa(t)$, and *geometric points* are as in Definition [def-weil-pbc-scheme-conventions].\nIf $f$ has a section [def-pc-section] $\\sigma:S\\to X$ and $T$ is over $S$, then the *induced section* is the base change of $\\sigma$, regarded as a morphism $S\\to X$ of schemes over $S$: $\\sigma_T:=\\sigma\\times_S\\mathrm{id}_T:T=S\\times_ST\\to X_T$, the unique morphism with $\\mathrm{pr}_T\\circ\\sigma_T=\\mathrm{id}_T$ and $f_T\\circ\\sigma_T=\\sigma\\circ(T\\to S)$; it is a section of $\\mathrm{pr}_T$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
-  "place": "node def-pc-base-change, order 451"
+  "place": "node def-pc-base-change, order 451",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01JX (Schemes, Definition 26.18.1 (5)-(6), base change of a scheme over $S$ and of a morphism of schemes over $S$), Tag 01K0 (Schemes, Definition 26.18.2, the fibre), Tag 0095 (Sheaves, Definition 6.26.1, pullback of modules)"
+   }
+  ]
  },
  "stmt_deps": [
-  "def-pc-morphism-conventions",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-section"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'baseChange\\|IsStableUnderBaseChange' Mathlib/AlgebraicGeometry/Morphisms/Basic.lean Mathlib/AlgebraicGeometry/Pullbacks.lean; grep -rn -i 'geometric fib\\|GeometricPoint\\|AlgebraicClosure' Mathlib/AlgebraicGeometry --include=*.lean; grep -n 'HasPullbacks' Mathlib/AlgebraicGeometry/Pullbacks.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "no declaration named base change of a scheme: in Mathlib the base change of f : X ⟶ S along T ⟶ S is pullback f (T ↘ S) with pullback.snd as pr_T and pullback.fst as f_T (HasPullbacks Scheme, Pullbacks.lean:485), the base change of a morphism is pullback.map, and 'base change' appears only in MorphismProperty.IsStableUnderBaseChange (Morphisms/Basic.lean:432ff); the induced section is pullback.lift (σ ≫ ...) (𝟙 T) _; the fibre is Scheme.Hom.fiber (Fiber.lean:38); the module base change is Scheme.Modules.pullback (pullback.map ...) (Modules/Sheaf.lean:183); no Mathlib notion of geometric fibre or geometric point (AlgebraicClosure appears in AlgebraicGeometry only in Group/Abelian.lean:136, as the base change to Spec (AlgebraicClosure K) written by hand; Geometrically/Basic.lean quantifies over all fields K instead)",
+   "date": "2026-10-09",
+   "verdict": "no match: the node is a bundle of notations; every notion it is built from is a statement dependency, and each of those is a Mathlib leaf except def-weil-pbc-scheme-conventions (geometric fibre and geometric point), which is unsplit"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -40,5 +61,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pc-base-change",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint node (order 451; slopmaster2 has no copy of this node). The blueprint's text names, without defining them, the fibre product of schemes with its projections and induced morphisms, the pullback of a sheaf of modules along a morphism of schemes, the scheme-theoretic fibre over a point, and a section of a morphism; none of these had a node (the DAG's def-weil-pbc-inverse-image, def-pc-derived-pullback and def-weil-pbc-cartesian-square are the etale, derived and etale-square versions). Each became a definition node of its own, stated from Stacks Tags 01JP/001V, 0095/0096, 01K0/01K1 and (for sections) the categorical definition, and each is a Mathlib leaf: CategoryTheory.Limits.pullback with HasPullbacks Scheme, Scheme.Modules.pullback, Scheme.Hom.fiber and CategoryTheory.SplitEpi, line numbers verified in the Mathlib copy. The statement keeps the blueprint's notation (f_T for the projection to X) and was made precise where the blueprint was loose: the base change of a morphism of schemes over S is spelled out (Tag 01JX (6)), because the blueprint's g_X and sigma_T are instances of it; the fibre X_t is identified as the fibre of pr_T over t with the residue field and Spec cited (reviewed leaves def-weil-residue-field, def-weil-affine-spectrum); the induced section is written as the base change of sigma with its characterizing equations, and it is recorded to be a section of pr_T. Scheme over a base now points to the reviewed leaf def-weil-scheme-over-base. The geometric fibre and geometric points stay pointed at def-weil-pbc-scheme-conventions, as the blueprint says; they are not defined here. def-pc-morphism-conventions was removed from stmt_deps: the statement uses no morphism property, and its reference to def:weil-pbc-scheme-conventions is now direct."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

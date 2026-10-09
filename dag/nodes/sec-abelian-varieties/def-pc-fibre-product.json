@@ -1,0 +1,51 @@
+{
+ "id": "def-pc-fibre-product",
+ "kind": "definition",
+ "title": "Fibre product of schemes",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes. The *fibre product* is a scheme $X\\times_SY$ together with two morphisms, the *projections* $p:X\\times_SY\\to X$ and $q:X\\times_SY\\to Y$, with $f\\circ p=g\\circ q$, which is universal among such data: for every scheme $T$ and every pair of morphisms $a:T\\to X$, $b:T\\to Y$ with $f\\circ a=g\\circ b$ there is exactly one morphism $(a,b):T\\to X\\times_SY$ with $p\\circ(a,b)=a$ and $q\\circ(a,b)=b$. The fibre product exists for every pair $(f,g)$, and it is unique up to a unique isomorphism compatible with the projections; one is chosen once and for all. It is functorial: given a commutative diagram of morphisms of schemes $u:X'\\to X$, $v:Y'\\to Y$, $w:S'\\to S$ with $f'=$ the structure map $X'\\to S'$, $g':Y'\\to S'$ and $f\\circ u=w\\circ f'$, $g\\circ v=w\\circ g'$, the *induced morphism* $u\\times_wv:X'\\times_{S'}Y'\\to X\\times_SY$ is the unique morphism with $p\\circ(u\\times_wv)=u\\circ p'$ and $q\\circ(u\\times_wv)=v\\circ q'$. When $S'=S$ and $w=\\mathrm{id}_S$ it is written $u\\times_Sv$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
+  "place": "node def-pc-base-change, order 451: '$X_T:=X\\times_ST$ with the projections' and '$g_X:X_{T'}\\to X_T$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01JP (Schemes, Definition 26.17.1, fibre product of schemes), Tag 001V (Categories, Definition 4.6.1, the universal property), Tag 01JO (Schemes, Section 26.17, existence and the lemmas on fibre products)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasPullbacks\\|namespace' Mathlib/AlgebraicGeometry/Pullbacks.lean; grep -n '^abbrev pullback \\|^abbrev pullback.fst\\|^abbrev pullback.snd\\|^abbrev pullback.lift\\|^abbrev pullback.map' Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "instance : HasPullbacks Scheme (AlgebraicGeometry/Pullbacks.lean:485, in namespace AlgebraicGeometry.Scheme.Pullback, built by gluing fibre products of affines); CategoryTheory.Limits.pullback f g (HasPullback.lean:95), pullback.fst (:111), pullback.snd (:115), pullback.lift h k w (:128, the universal property), pullback.map (:270, the induced morphism of fibre products)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.pullback",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+  "how": "exact: for morphisms of schemes `f : X ⟶ S`, `g : Y ⟶ S`, $X\\times_SY$ is `pullback f g` (line 95), which exists by the instance `HasPullbacks Scheme` (Mathlib/AlgebraicGeometry/Pullbacks.lean:485); the projections are `pullback.fst f g` (line 111) and `pullback.snd f g` (line 115), the universal property is `pullback.lift` (line 128) with `pullback.lift_fst`, `pullback.lift_snd` and `pullback.hom_ext`, and the induced morphism $u\\times_wv$ is `pullback.map f g f' g' u v w _ _` (line 270)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-base-change",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

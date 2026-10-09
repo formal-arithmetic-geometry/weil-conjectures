@@ -1,0 +1,52 @@
+{
+ "id": "def-pc-section",
+ "kind": "definition",
+ "title": "Section of a morphism of schemes",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes. A *section* of $f$ is a morphism of schemes $\\sigma:S\\to X$ with $f\\circ\\sigma=\\mathrm{id}_S$. Equivalently, $\\sigma$ is a morphism of schemes over $S$ from $S$ (with structure morphism $\\mathrm{id}_S$) to $X$ (with structure morphism $f$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
+  "place": "node def-pc-base-change, order 451: 'If $f$ has a section $\\sigma:S\\to X$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "the term is used without a labelled definition; the notion is the categorical one, a right inverse of $f$ in the category of schemes (Tag 01JX, Schemes, Definition 26.18.1 (3), for the equivalent description as a morphism over $S$)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure SplitEpi\\|class IsSplitEpi\\|def section_' Mathlib/CategoryTheory/EpiMono.lean; grep -rn 'section_\\|SplitEpi' Mathlib/AlgebraicGeometry --include=*.lean -l  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "CategoryTheory.SplitEpi (f : X ⟶ Y) : a structure with a field section_ : Y ⟶ X and id : section_ ≫ f = 𝟙 Y (EpiMono.lean:68); CategoryTheory.IsSplitEpi (:79, the proposition that a section exists); CategoryTheory.section_ f (:101, a chosen section); no scheme-specific notion, the general categorical one applies to Scheme",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SplitEpi",
+  "file": "Mathlib/CategoryTheory/EpiMono.lean",
+  "how": "exact: a section of `f : X ⟶ S` in `Scheme` is a term `σ : SplitEpi f` (line 68), whose `σ.section_ : S ⟶ X` satisfies `σ.id : σ.section_ ≫ f = 𝟙 S`; equivalently a morphism `σ : S ⟶ X` with `σ ≫ f = 𝟙 S`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-base-change",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

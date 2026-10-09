@@ -1,0 +1,51 @@
+{
+ "id": "def-pc-module-pullback",
+ "kind": "definition",
+ "title": "Pullback of a sheaf of modules along a morphism of schemes",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes, with underlying continuous map $g$ and ring-sheaf map $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$, equivalently $g^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a sheaf of $\\mathcal O_Y$-modules $\\mathcal G$ (on the Zariski site of $Y$), the *pullback* $g^*\\mathcal G$ is the sheaf of $\\mathcal O_X$-modules\n\n$$\ng^*\\mathcal G=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G,\n$$\n\nwhere $g^{-1}\\mathcal G$ is the inverse image sheaf of abelian groups (sheafification of $V\\mapsto\\varinjlim_{U\\supseteq g(V)}\\mathcal G(U)$) with its $g^{-1}\\mathcal O_Y$-module structure. This is a functor $g^*:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(\\mathcal O_X)$, left adjoint to the pushforward $g_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$, with $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(h\\circ g)^*\\cong g^*h^*$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
+  "place": "node def-pc-base-change, order 451: 'the base change of a module $\\mathcal F$ on $X_T$ is $\\mathcal F_{T'}=g_X^*\\mathcal F$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0095 (Sheaves, Definition 6.26.1, pushforward and pullback of modules along a morphism of ringed spaces), Tag 0096 (Sheaves, Lemma 6.26.2, the adjunction), Tag 008X (Sheaves, Lemma 6.25.3, the module structure on $f^{-1}\\mathcal G$)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/AlgebraicGeometry/Modules/; grep -n '^def pullback\\|^def pushforward\\|^def pullbackPushforwardAdjunction\\|^def pullbackId\\|^def pullbackComp\\|^def Modules' Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; grep -n '^noncomputable def pullback' Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; grep -n '^def pullback' Mathlib/Topology/Sheaves/Functors.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "AlgebraicGeometry.Scheme.Modules X := SheafOfModules X.ringCatSheaf (Modules/Sheaf.lean:39); AlgebraicGeometry.Scheme.Modules.pullback (f : X ⟶ Y) : Y.Modules ⥤ X.Modules := SheafOfModules.pullback f.toRingCatSheafHom (:183); pushforward (:166); pullbackPushforwardAdjunction : pullback f ⊣ pushforward f (:189); pullbackId (:219), pullbackComp (:241); the underlying PresheafOfModules.pullback (Algebra/Category/ModuleCat/Presheaf/Pullback.lean:44) is defined as the left adjoint of pushforward; the inverse image of sheaves of sets/groups is TopCat.Sheaf.pullback (Topology/Sheaves/Functors.lean:91)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "how": "exact: for `g : X ⟶ Y`, `Scheme.Modules.pullback g : Y.Modules ⥤ X.Modules` (line 183) is $g^*$; it is characterized as the left adjoint of `Scheme.Modules.pushforward g` (line 166) by `pullbackPushforwardAdjunction` (line 189), which is the content of Stacks Tag 0096 and determines $g^*\\mathcal G$ up to unique isomorphism, so the tensor-product formula is this functor; `pullbackId` (line 219) and `pullbackComp` (line 241) are the identity and composition isomorphisms"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-base-change",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "id": "def-pc-scheme-fibre",
+ "kind": "definition",
+ "title": "Scheme-theoretic fibre of a morphism over a point",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes and let $s\\in S$ be a point, with residue field $\\kappa(s)$ and canonical morphism $\\operatorname{Spec}\\kappa(s)\\to S$ (the morphism induced by $\\mathcal O_{S,s}\\to\\kappa(s)$, with image $s$). The *scheme-theoretic fibre* of $f$ over $s$, or simply the *fibre* $X_s$, is the fibre product $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ with its projections $X_s\\to X$ and $X_s\\to\\operatorname{Spec}\\kappa(s)$; it is regarded as a scheme over $\\kappa(s)$ through the second projection. The first projection is a homeomorphism from the underlying space of $X_s$ onto the subspace $f^{-1}(s)$ of $X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md",
+  "place": "node def-pc-base-change, order 451: 'the fibre $X_t=X\\times_S\\operatorname{Spec}(\\kappa(t))$'",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01K0 (Schemes, Definition 26.18.2, the scheme theoretic fibre) and Tag 01K1 (Schemes, Lemma 26.18.5, the fibre is homeomorphic to $f^{-1}(s)$)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'fiber\\|fibre' Mathlib/AlgebraicGeometry -l; grep -n 'def Scheme.Hom.fiber\\|def Scheme.Hom.fiberι\\|def Scheme.Hom.fiberHomeo\\|def Scheme.Hom.fiberToSpecResidueField' Mathlib/AlgebraicGeometry/Fiber.lean; grep -n 'def fromSpecResidueField' Mathlib/AlgebraicGeometry/ResidueField.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "AlgebraicGeometry.Scheme.Hom.fiber (f : X ⟶ Y) (y : Y) : Scheme := pullback f (Y.fromSpecResidueField y) (Fiber.lean:38); Scheme.Hom.fiberι (:41, the projection to X), Scheme.Hom.fiberToSpecResidueField (:46, the projection to Spec κ(y)), Scheme.Hom.fiberHomeo : f.fiber y ≃ₜ f ⁻¹' {y} (:103); Scheme.fromSpecResidueField (ResidueField.lean:237)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.fiber",
+  "file": "Mathlib/AlgebraicGeometry/Fiber.lean",
+  "how": "exact: `f.fiber s = pullback f (S.fromSpecResidueField s)` (line 38); the projections are `f.fiberι s` (line 41) and `f.fiberToSpecResidueField s` (line 46); the homeomorphism onto $f^{-1}(s)$ is `f.fiberHomeo s` (line 103); the canonical morphism $\\operatorname{Spec}\\kappa(s)\\to S$ is `S.fromSpecResidueField s` (Mathlib/AlgebraicGeometry/ResidueField.lean:237)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-base-change",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
