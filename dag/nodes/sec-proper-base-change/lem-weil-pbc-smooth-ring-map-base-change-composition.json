@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+ "kind": "statement",
+ "title": "Smooth ring maps are stable under base change and composition",
+ "statement": "(1) Let $R\\to S$ be a smooth ring map [def-weil-pbc-smooth-ring-map] and $R\\to R'$ any homomorphism of commutative rings. Then $R'\\to R'\\otimes_RS$, $r'\\mapsto r'\\otimes1$, is smooth. (2) Let $R\\to S$ and $S\\to T$ be smooth ring maps. Then the composite $R\\to T$ is smooth.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00T4 (lemma-base-change-smooth, line 37133) for (1); Lemma Tag 00TD (lemma-compose-smooth, line 37597) for (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebras are stable under base change and composition",
+   "results": "RingHom.Smooth.isStableUnderBaseChange (Mathlib.RingTheory.RingHom.Smooth), Algebra.Smooth.comp (Mathlib.RingTheory.Smooth.Basic), RingHom.FormallySmooth.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra base change B ⊗ A smooth over B; composition of smooth algebras is smooth",
+   "results": "Algebra.Smooth.baseChange, Algebra.Smooth.comp (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem comp\\|instance baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "line 568: theorem Algebra.Smooth.comp [Smooth R A] [Smooth A B] : Smooth R B; line 573: instance Algebra.Smooth.baseChange [Smooth R A] : Smooth B (B ⊗[R] A)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth.baseChange",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 573,
+  "how": "one Mathlib lemma per clause: (1) is instance Algebra.Smooth.baseChange [Smooth R A] : Smooth B (B ⊗[R] A) (line 573) with B := R', A := S; (2) is Algebra.Smooth.comp (line 568) with A := S, B := T; smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

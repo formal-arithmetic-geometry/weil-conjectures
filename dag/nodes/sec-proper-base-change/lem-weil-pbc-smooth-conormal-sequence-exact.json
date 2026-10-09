@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-smooth-conormal-sequence-exact",
+ "kind": "statement",
+ "title": "Conormal sequence of a section of a smooth algebra is exact",
+ "statement": "Let $A\\to B$ be a smooth ring map [def-weil-pbc-smooth-ring-map], $C$ a commutative ring with a surjective ring map $A\\to C$, and $\\beta:B\\to C$ a ring map whose composite with $A\\to B$ is $A\\to C$ (so $\\beta$ is surjective). Put $I=\\ker(A\\to C)$ and $J=\\ker\\beta$; then $I/I^2$ and $J/J^2$ are $C$-modules ($C=A/I=B/J$). Then the sequence of $C$-modules $$0\\to I/I^2\\xrightarrow{\\ u\\ }J/J^2\\xrightarrow{\\ v\\ }\\Omega_{B/A}\\otimes_BC\\to0$$ is exact, where $u$ is induced by $A\\to B$ and $v(b\\bmod J^2)=\\mathrm db\\otimes1$ ($\\Omega_{B/A}$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 06A9 (lemma-application-NL-smooth, line 38386), the sequence and maps being those of Lemma Tag 065V (lemma-application-NL, line 35519)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence 0 → I/I^2 → J/J^2 → Ω_{B/A} ⊗ B/J → 0 for A → B formally smooth and A → C surjective",
+   "results": "Algebra.FormallySmooth.iff_split_injection (C formally smooth over A iff J/J^2 -> C ⊗ Ω_{B/A} split injective), Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.CotangentSpace.exact, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match: none has I/I^2 -> J/J^2 injective for a smooth A -> B"
+  },
+  {
+   "tool": "leansearch",
+   "query": "for a smooth algebra A → B and surjection A → C, I/I^2 → J/J^2 is injective",
+   "results": "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, iff_injective_lTensor_residueField (Mathlib.RingTheory.Smooth.Local), Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 06A9\\|stacks 065V\\|stacks 031H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'kerCotangentToTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Basic.lean",
+   "results": "no tag hits; KaehlerDifferential.kerCotangentToTensor and exact_kerCotangentToTensor_mapBaseChange give exactness of J/J^2 -> C ⊗ Ω_{B/A} -> Ω_{C/A} -> 0 only (Ω_{C/A}=0 here), not injectivity of I/I^2 -> J/J^2",
+   "date": "2026-10-10",
+   "verdict": "no match; the Jacobi-Zariski lemmas (Algebra.H1Cotangent.exact_map_δ, RingTheory/Kaehler/JacobiZariski.lean line 548) with H1Cotangent R C = I/I^2 would give it in two or three steps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

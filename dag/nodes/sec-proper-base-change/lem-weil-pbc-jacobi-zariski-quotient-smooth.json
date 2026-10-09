@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-jacobi-zariski-quotient-smooth",
+ "kind": "statement",
+ "title": "Jacobi-Zariski sequence for a quotient of a smooth algebra",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings such that $H_1(L_{B/A})=0$ and $\\Omega_{B/A}$ is a projective $B$-module (e.g. $A\\to B$ smooth) [def-weil-pbc-smooth-ring-map], let $\\mathfrak a\\subseteq B$ be an ideal and $C=B/\\mathfrak a$, an $A$-algebra via $A\\to B\\to C$. Then there is an exact sequence of $C$-modules $$0\\to H_1(L_{C/A})\\to\\mathfrak a/\\mathfrak a^2\\xrightarrow{\\ \\delta\\ }C\\otimes_B\\Omega_{B/A}\\xrightarrow{\\ w\\ }\\Omega_{C/A}\\to0,$$ where $\\delta(a\\bmod\\mathfrak a^2)=1\\otimes\\mathrm da$ and $w(c\\otimes\\mathrm db)=c\\,\\mathrm d\\bar b$ ($\\bar b$ the class of $b$ in $C$; $\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL, Jacobi-Zariski sequence, line 35412) for A -> B -> C, including its final assertion (if Tor_1^B(Omega_{B/A},C) = Tor_2^B(Omega_{B/A},C) = 0 then H_1(NL_{B/A} (x)_B C) = H_1(L_{B/A}) (x)_B C), with Lemma Tag 07BP (lemma-NL-surjection, line 35506: H_1(L_{C/B}) = a/a^2, Omega_{C/B} = 0) and Lemma Tag 00RU (lemma-differential-seq, line 34103) for the maps delta and w; this is the sequence used in More on Algebra, proof of Lemma 07M7 ('note that H_1(L_{B/A}) = 0 and that Omega_{B/A} is finite projective, in particular flat so the Tor group vanishes')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Jacobi-Zariski exact sequence H1 cotangent of A → B → C",
+   "results": "Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.CotangentSpace.exact, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.H1Cotangent, Algebra.Generators.H1Cotangent.exact_δ_map (Mathlib.RingTheory.Kaehler.JacobiZariski)",
+   "date": "2026-10-10",
+   "verdict": "partial: the middle of the sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H1 of cotangent complex of quotient B/I over B is I/I^2, exact sequence with Ω_{B/A} ⊗ B/I → Ω_{(B/I)/A}",
+   "results": "Algebra.H1Cotangent, Algebra.Extension.H1Cotangent, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.cotangentComplex, Algebra.Extension.h1Cotangentι",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 00S2' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/JacobiZariski.lean; grep -rn 'h1CotangentEquivOfSurjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/ExtendScalars.lean",
+   "results": "JacobiZariski.lean:548 H1Cotangent.exact_map_δ (H1(L_{T/R}) -> H1(L_{T/S}) -> T ⊗ Ω_{S/R} exact), :556 H1Cotangent.exact_δ_mapBaseChange (-> Ω_{T/R} exact), :563 H1Cotangent.exact_liftBaseChange_map_of_flat (left end, but under [Module.Flat S T], i.e. C flat over B, not Ω_{B/A} flat); Extension/ExtendScalars.lean: h1CotangentEquivOfSurjective (H1 of a surjection = kernel cotangent)",
+   "date": "2026-10-10",
+   "verdict": "no match as stated: the left end under H_1(L_{B/A}) = 0 and Omega_{B/A} projective (Stacks' Tor condition) and the identification H_1(L_{C/B}) = a/a^2 with delta = d are not in Mathlib in this form; candidates recorded for the split"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+ "kind": "statement",
+ "title": "A ring map is smooth iff the morphism of spectra is smooth",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is smooth in the sense of [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth) if and only if the ring map $\\varphi$ is smooth in the sense of [def-weil-pbc-smooth-ring-map] ($S$ finitely presented over $R$, $H_1(L_{S/R})=0$, $\\Omega_{S/R}$ finite projective).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01V6 (lemma-smooth-characterize), (1)<=>(2) with U = Spec S, V = Spec R (the smooth morphisms of Section 01V4, Definition 01V5, defined affine-locally by smooth ring maps, Algebra Definition 00T2); identified with 'locally of finite presentation and formally smooth' by More on Morphisms, Lemma Tag 02H6 (lemma-smooth-formally-smooth, literature/stacks-project/more-morphisms.tex); on rings, Algebra, Proposition Tag 00TN (proposition-smooth-formally-smooth, algebra.tex line 38169)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec B to Spec A is a smooth morphism of schemes iff A → B is a smooth ring map",
+   "results": "AlgebraicGeometry.IsSmooth (deprecated alias of AlgebraicGeometry.Smooth), AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.Spec.map (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's scheme Smooth is defined affine-locally by RingHom.Smooth, not by formal smoothness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of affine schemes Spec S → Spec R is smooth iff the ring homomorphism R → S is smooth",
+   "results": "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, isSmoothOfRelativeDimension_iff (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "no match (see grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth (AlgebraicGeometry.Spec.map _)",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasRingHomProperty\\|class Smooth\\|FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; grep -rn 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "Morphisms/Smooth.lean:63 class Smooth (smooth_appLE: affine-local RingHom.Smooth), :73 instance HasRingHomProperty @Smooth RingHom.Smooth (gives Smooth (Spec.map φ) <-> φ.Smooth = Algebra.Smooth, i.e. Stacks 01V6 for Mathlib's definition); :250-268 only stalkwise formal smoothness; no scheme-level 'locally of finite presentation + formally smooth (lifting for affine thickenings)' definition or comparison (Stacks 02H6) anywhere in AlgebraicGeometry/",
+   "date": "2026-10-10",
+   "verdict": "no match: the content of the node is the comparison of def-sbc-smooth-morphisms (formally smooth) with the ring-theoretic notion; Mathlib's HasRingHomProperty @Smooth RingHom.Smooth covers only the affine-local half (convention of 2026-10-09: stays a split node with the match recorded)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
+ "kind": "statement",
+ "title": "Vanishing of H_1 and of the differentials at a prime gives an etale localization",
+ "statement": "Let $A\\to C$ be a homomorphism of commutative rings making $C$ a finitely presented $A$-algebra, and $\\mathfrak q\\subset C$ a prime ideal such that the localizations at $\\mathfrak q$ of the $C$-modules $H_1(L_{C/A})$ [def-weil-pbc-smooth-ring-map] and $\\Omega_{C/A}$ [def-weil-pbc-kahler-differentials] vanish: $H_1(L_{C/A})_{\\mathfrak q}=0$ and $(\\Omega_{C/A})_{\\mathfrak q}=0$. Then there is $h\\in C\\setminus\\mathfrak q$ such that $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$, induced by $A\\to C\\to C_h$, is etale [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07BU (lemma-smooth-at-point, line 37523), (2)=>(1) with Omega_{C/A,q} = 0 free of rank 0, Definition Tag 00TB (definition-smooth-at-prime: smooth at q = C_h smooth for some h not in q), Definition Tag 00U1 (definition-etale, line 39245: etale = finitely presented with NL quasi-isomorphic to 0, etale at q likewise); comparison with etale morphisms of schemes by literature/stacks-project/morphisms.tex Lemma Tag 02GJ (lemma-etale-characterize); used in More on Algebra, proof of Lemma 07M7 ('By Algebra, Lemma 07BU we see that A -> C is smooth at the prime q-bar ... Since Omega_{C/A,q} = 0 it is actually etale at q-bar')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra with H1 cotangent and Kähler differentials vanishing at prime is étale at that prime",
+   "results": "Algebra.IsEtaleAt, Algebra.etaleLocus, Algebra.formallyEtale_iff (FormallyEtale <-> Subsingleton Ω ∧ Subsingleton H1Cotangent), Algebra.Etale, Algebra.FormallyEtale.mk",
+   "date": "2026-10-10",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale locus equals complement of supports of Kähler differentials and H1 cotangent",
+   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.smoothLocus_eq_compl_support_inter, Algebra.etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff (Mathlib.RingTheory.Etale.Locus)",
+   "date": "2026-10-10",
+   "verdict": "partial: combination of two lemmas, conclusion Algebra.Etale"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^abbrev\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Locus.lean",
+   "results": "line 35 abbrev IsEtaleAt q := FormallyEtale R A_q; line 58 etaleLocus_eq_compl_support : etaleLocus R A = (support Ω)ᶜ ∩ (support H1Cotangent)ᶜ; line 103 exists_etale_of_isEtaleAt [FinitePresentation R A] (P) [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)",
+   "date": "2026-10-10",
+   "verdict": "no match as stated: Mathlib gives Algebra.Etale R C_h from etaleLocus_eq_compl_support + exists_etale_of_isEtaleAt in two lines, but the node concludes etaleness of Spec C_h -> Spec A in the sense of def-weil-etale-morphism, whose agreement with Algebra.Etale is itself a theorem (Stacks 02GJ); candidates recorded for the split"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

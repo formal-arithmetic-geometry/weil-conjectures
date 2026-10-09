@@ -1,0 +1,80 @@
+{
+ "id": "def-weil-pbc-smooth-ring-map",
+ "kind": "definition",
+ "title": "Naive cotangent complex and smooth ring maps",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings. Let $R[S]$ be the polynomial ring over $R$ with one variable $[s]$ for every $s\\in S$, let $\\gamma:R[S]\\to S$ be the surjective homomorphism of $R$-algebras with $\\gamma([s])=s$, and $I=\\ker\\gamma$. The *naive cotangent complex* $\\mathrm{NL}_{S/R}$ is the two-term complex of $S$-modules $I/I^2\\xrightarrow{\\ \\delta\\ }\\bigoplus_{s\\in S}S\\,\\mathrm d[s]$ (with $I/I^2$ in homological degree $1$ and the free $S$-module on the symbols $\\mathrm d[s]$ in degree $0$), where $\\delta(g\\bmod I^2)=\\sum_{s\\in S}\\gamma\\bigl(\\partial g/\\partial[s]\\bigr)\\,\\mathrm d[s]$ ($\\partial/\\partial[s]$ the formal partial derivative of $R[S]$ over $R$; $I/I^2$ is an $S=R[S]/I$-module and $\\delta$ is well defined and $S$-linear by the Leibniz rule). Its homology in degree $1$ is the $S$-module $H_1(L_{S/R}):=\\ker\\delta$. The ring map $\\varphi$ (or the $R$-algebra $S$) is *smooth* if (i) $S$ is a finitely presented $R$-algebra ($S\\cong R[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ as $R$-algebras for some $n,m\\ge0$), (ii) $H_1(L_{S/R})=0$, and (iii) the module of Kähler differentials $\\Omega_{S/R}$ [def-weil-pbc-kahler-differentials] is a finite projective $S$-module (a direct summand of a finite free $S$-module).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 07BN (definition-naive-cotangent-complex, line 35144) with the canonical presentation (equation-canonical-presentation) and the map (equation-naive-cotangent-complex, Tag 07BM) before it; Definition Tag 00T2 (definition-smooth, line 37084: 'of finite presentation and NL_{S/R} quasi-isomorphic to a finite projective S-module placed in degree 0: this means that H_1(NL_{S/R}) = 0 and Omega_{S/R} is a finite projective S-module')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra: finitely presented and H1 of naive cotangent complex vanishes and Kaehler differentials projective",
+   "results": "Algebra.formallySmooth_iff / Algebra.FormallySmooth.iff_subsingleton_and_projective (FormallySmooth R A <-> Module.Projective A Ω[A⁄R] ∧ Subsingleton (H1Cotangent R A)), Algebra.Smooth, Algebra.Smooth.mk (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition: smooth algebra is formally smooth and finitely presented; formally smooth means Kähler differentials projective and H1 cotangent zero",
+   "results": "Algebra.smooth_iff, Algebra.Smooth.formallySmooth, Algebra.Smooth (Mathlib.RingTheory.Smooth.Basic), RingHom.smooth_def (Mathlib.RingTheory.RingHom.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H1 of cotangent complex of an algebra; kernel of I/I^2 -> S ⊗ Ω",
+   "results": "Algebra.H1Cotangent (abbrev, (Generators.self R S).toExtension.H1Cotangent), Algebra.Extension.H1Cotangent (ker of cotangentComplex), Algebra.Extension.cotangentComplex_mk (x ↦ 1 ⊗ D x) (Mathlib.RingTheory.Extension.Cotangent.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.H1Cotangent is Stacks' H_1(L_{S/R}) for the canonical presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.H1Cotangent",
+   "results": "no results (no lemma mentions both names; the link is through Algebra.FormallySmooth)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Smooth\\|class FormallySmooth\\|stacks 00T2\\|abbrev H1Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "results": "Smooth/Basic.lean:70 class FormallySmooth (projective_kaehlerDifferential, subsingleton_h1Cotangent; @[stacks 00TI]); :537-540 @[stacks 00T2 ...] class Smooth (formallySmooth, finitePresentation); Extension/Cotangent/Basic.lean:561 abbrev H1Cotangent := (Generators.self R S).toExtension.H1Cotangent; :339 Extension.H1Cotangent := ker cotangentComplex",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 540,
+  "how": "specializes in one line: Algebra.Smooth R S = Algebra.FormallySmooth R S (line 70: Module.Projective S Ω[S⁄R] and Subsingleton (Algebra.H1Cotangent R S)) plus Algebra.FinitePresentation R S; Algebra.H1Cotangent R S (Mathlib/RingTheory/Extension/Cotangent/Basic.lean line 561) is the kernel of the cotangent complex I/I^2 -> S ⊗ Ω_{R[S]/R} of the canonical presentation Generators.self R S, i.e. H_1(L_{S/R}) of Stacks 07BN; 'finite' projective follows from finite presentation (instance at Smooth/Basic.lean line 189: Ω finitely presented for EssFiniteType + FormallySmooth)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

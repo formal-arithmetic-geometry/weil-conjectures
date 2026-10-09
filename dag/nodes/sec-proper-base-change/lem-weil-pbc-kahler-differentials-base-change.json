@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-kahler-differentials-base-change",
+ "kind": "statement",
+ "title": "Kähler differentials commute with base change",
+ "statement": "Let $R\\to R'$ and $R\\to S$ be homomorphisms of commutative rings and $S'=R'\\otimes_RS$, an $R'$-algebra via $r'\\mapsto r'\\otimes1$. Then there is a unique homomorphism of $R'$-modules $R'\\otimes_R\\Omega_{S/R}\\to\\Omega_{S'/R'}$ with $r'\\otimes\\mathrm ds\\mapsto r'\\,\\mathrm d(1\\otimes s)$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]), and it is an isomorphism; it is $S'$-linear for the $S'$-module structure on $R'\\otimes_R\\Omega_{S/R}$ given by $(r'_1\\otimes s)(r'\\otimes\\omega)=r'_1r'\\otimes s\\omega$, so $\\Omega_{S'/R'}\\cong S'\\otimes_S\\Omega_{S/R}$ as $S'$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00RV (lemma-differentials-base-change, line 34213)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials commute with base change Ω_{A'⊗B/A'} ≅ A' ⊗ Ω_{B/A}",
+   "results": "KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv (Mathlib.RingTheory.Kaehler.TensorProduct), KaehlerDifferential.mapBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kähler differentials of base change S ⊗_R A over S isomorphic to S ⊗_R Ω_{A/R}",
+   "results": "KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquivBase_tmul (a ⊗ b ↦ a • map R S A B b), KaehlerDifferential.tensorKaehlerEquiv_tmul",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def tensorKaehlerEquivBase\\|def tensorKaehlerEquiv ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+   "results": "line 189: def tensorKaehlerEquivBase [Algebra.IsPushout R S A B] : (S ⊗[R] Ω[A⁄R]) ≃ₗ[S] Ω[B⁄S]; line 249: def tensorKaehlerEquiv : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.tensorKaehlerEquivBase",
+  "file": "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+  "line": 189,
+  "how": "exact, with R, S := R', A := S, B := S' = R' ⊗[R] S (Algebra.IsPushout instance of the tensor product): (R' ⊗[R] Ω[S⁄R]) ≃ₗ[R'] Ω[S'⁄R'], r' ⊗ ω ↦ r' • map ω (tensorKaehlerEquivBase_tmul); the S'-module form is KaehlerDifferential.tensorKaehlerEquiv (line 249): S' ⊗[S] Ω[S⁄R] ≃ₗ[S'] Ω[S'⁄R']"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-section-etale-lift",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
