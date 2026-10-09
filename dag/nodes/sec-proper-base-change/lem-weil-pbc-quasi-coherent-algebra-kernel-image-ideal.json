@@ -10,11 +10,110 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 0 (conventions; affine opens).* A sheaf of commutative $\\mathcal O_X$-algebras is a sheaf of commutative rings $\\mathcal B$ with a morphism of sheaves of rings $\\sigma_{\\mathcal B}:\\mathcal O_X\\to\\mathcal B$; its underlying $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] has $r\\cdot b=\\sigma_{\\mathcal B}(r)b$, and a morphism of $\\mathcal O_X$-algebras is $\\mathcal O_X$-linear. Every open $W\\subseteq X$ is a union of affine opens contained in $W$: a point $x\\in W$ has an open neighbourhood isomorphic to some $\\operatorname{Spec}A$ [def-pc-scheme], and the principal opens $D(f)\\subseteq\\operatorname{Spec}A$, which are affine ($D(f)\\cong\\operatorname{Spec}A_f$), form a basis of its topology. Consequently, for a subsheaf $\\mathcal K$ of a sheaf $\\mathcal B$ and $s\\in\\mathcal B(W)$: $s\\in\\mathcal K(W)$ as soon as $s|_V\\in\\mathcal K(V)$ for all affine opens $V\\subseteq W$ (glue the $s|_V$ in $\\mathcal K$; the glued section maps to $s$ by the uniqueness in the sheaf $\\mathcal B$). This remark is used in Steps 4-6.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01LA (line 4717: the properties of QCoh(O_X) are inherited from the affine case since quasi-coherence is local)"
+   }
+  },
+  {
+   "text": "*Step 1 ((a), the kernel).* $\\psi$ is $\\mathcal O_X$-linear (Step 0), so it has a kernel $\\mathcal J=\\ker\\psi$ in $\\Mod(\\mathcal O_X)$, computed sectionwise: $\\mathcal J(U)=\\ker(\\psi_U)$ for every open $U$, in particular for affine $U$ [def-weil-sheaf-of-modules-category]. Each $\\psi_U$ is a ring homomorphism, so $\\ker\\psi_U$ is an ideal of $\\mathcal B(U)$, and restriction maps of $\\mathcal B$ carry $\\mathcal J(U)$ into $\\mathcal J(V)$: $\\mathcal J$ is a sheaf of ideals of $\\mathcal B$. As $\\mathcal B,\\mathcal A$ are quasi-coherent, $\\mathcal J$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IC (line 1419) and Section 01LA (line 4717), item (5)"
+   }
+  },
+  {
+   "text": "*Step 2 ((a), the image).* Apply [lem-weil-pbc-quasi-coherent-module-cokernel-image] to the $\\mathcal O_X$-linear map $\\psi:\\mathcal B\\to\\mathcal A$ between quasi-coherent modules: the subsheaf $\\operatorname{Im}\\psi\\subseteq\\mathcal A$ of local sections locally in the image of $\\psi$ (the subsheaf named in the statement) is a quasi-coherent sub-$\\mathcal O_X$-module of $\\mathcal A$ with $(\\operatorname{Im}\\psi)(U)=\\psi_U(\\mathcal B(U))$ for every affine open $U$. It is a sub-$\\mathcal O_X$-algebra: $1=\\psi_W(1)$ and $\\sigma_{\\mathcal A}(r)=\\psi_W(\\sigma_{\\mathcal B}(r))$ lie in it; if $s,t\\in(\\operatorname{Im}\\psi)(W)$, each point of $W$ has a neighbourhood $V$ (the intersection of the two neighbourhoods given by the definition, restricting the preimages) with $s|_V=\\psi_V(b)$, $t|_V=\\psi_V(c)$, hence $(st)|_V=\\psi_V(bc)$ and $(s-t)|_V=\\psi_V(b-c)$, so $st,s-t\\in(\\operatorname{Im}\\psi)(W)$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IC (line 1419) and Section 01LA (line 4717), item (5)"
+   }
+  },
+  {
+   "text": "*Step 3 ((b), the ideal $\\mathcal I=(e(\\mathcal E))$ as an image).* Let $\\mathcal T=\\mathcal B\\otimes_{\\mathcal O_X}\\mathcal E$ [def-pur-sheaf-tensor-product], the sheafification of the presheaf $\\mathcal T_p:U\\mapsto\\mathcal B(U)\\otimes_{\\mathcal O_X(U)}\\mathcal E(U)$, with sheafification map $t:\\mathcal T_p\\to\\mathcal T$. For each open $U$ the map $\\mathcal B(U)\\times\\mathcal E(U)\\to\\mathcal B(U)$, $(b,s)\\mapsto b\\,e_U(s)$, is $\\mathcal O_X(U)$-bilinear ($e_U$ is $\\mathcal O_X(U)$-linear), so it induces an $\\mathcal O_X(U)$-linear $\\mu^p_U:\\mathcal T_p(U)\\to\\mathcal B(U)$, $b\\otimes s\\mapsto b\\,e_U(s)$; these commute with restrictions ($e$ and the restrictions of $\\mathcal B$ are compatible with restriction and multiplicative), so $\\mu^p$ is a morphism of presheaves of $\\mathcal O_X$-modules into the sheaf $\\mathcal B$, and by the universal property of sheafification [def-weil-pbc-sheafification] there is a unique $\\mathcal O_X$-linear $\\mu:\\mathcal T\\to\\mathcal B$ with $\\mu\\circ t=\\mu^p$. By [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] $\\mathcal T$ is quasi-coherent and $t_U$ is bijective for affine $U$. Put $\\mathcal I:=\\operatorname{Im}\\mu\\subseteq\\mathcal B$. By [lem-weil-pbc-quasi-coherent-module-cokernel-image] applied to $\\mu$, $\\mathcal I$ is a quasi-coherent sub-$\\mathcal O_X$-module of $\\mathcal B$, and for affine $U$: $\\mathcal I(U)=\\mu_U(\\mathcal T(U))=\\mu^p_U(\\mathcal B(U)\\otimes\\mathcal E(U))=\\{\\sum_i b_ie_U(s_i)\\}$, which is the ideal of $\\mathcal B(U)$ generated by $e_U(\\mathcal E(U))$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01LA (line 4717), items (5) and (8); Lemma 01I8 (line 1113) (1); the ideal generated by the image of E as in Properties, Lemma 05JS (properties.tex lines 3320-3335)"
+   }
+  },
+  {
+   "text": "*Step 4 ((b), $\\mathcal I$ is the sheaf of ideals generated by $e(\\mathcal E)$).* (i) $\\mathcal I$ is a sheaf of ideals: for $x\\in\\mathcal I(W)$, $c\\in\\mathcal B(W)$ and any affine open $V\\subseteq W$, $x|_V\\in\\mathcal I(V)$, an ideal of $\\mathcal B(V)$ by Step 3, so $(cx)|_V=c|_Vx|_V\\in\\mathcal I(V)$; by Step 0, $cx\\in\\mathcal I(W)$. (ii) $e_W(\\mathcal E(W))\\subseteq\\mathcal I(W)$ for every open $W$: for $s\\in\\mathcal E(W)$ and affine $V\\subseteq W$, $e_W(s)|_V=e_V(s|_V)\\in\\mathcal I(V)$ (Step 3); apply Step 0. (iii) Minimality: if $\\mathcal K\\subseteq\\mathcal B$ is a sheaf of ideals with $e_U(\\mathcal E(U))\\subseteq\\mathcal K(U)$ for all $U$, then for affine $V$, $\\mathcal I(V)$ is the ideal generated by $e_V(\\mathcal E(V))$, hence $\\subseteq\\mathcal K(V)$; for $x\\in\\mathcal I(W)$ all $x|_V$ ($V\\subseteq W$ affine) lie in $\\mathcal K(V)$, so $x\\in\\mathcal K(W)$ by Step 0. Hence $\\mathcal I=(e(\\mathcal E))$ is the smallest sheaf of ideals containing all $e_U(\\mathcal E(U))$, it is the image of $\\mathcal B\\otimes\\mathcal E\\to\\mathcal B$, quasi-coherent, with the affine sections of Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 05JS (lines 3320-3335: 'the ideal generated by the image of E'); written out by the agent from Steps 0 and 3"
+   }
+  },
+  {
+   "text": "*Step 5 ((b), the quotient algebra).* By Step 4 each $\\mathcal I(U)$ is an ideal of $\\mathcal B(U)$, so $\\mathcal P:U\\mapsto\\mathcal B(U)/\\mathcal I(U)$ (restrictions induced by those of $\\mathcal B$) is a presheaf of commutative rings with the quotient maps $p:\\mathcal B\\to\\mathcal P$. By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](1) it has a sheafification $\\theta:\\mathcal P\\to\\mathcal Q=\\mathcal P^\\#$ as a presheaf of commutative rings; $\\mathcal Q$ with $\\sigma_{\\mathcal Q}=\\theta p\\sigma_{\\mathcal B}$ is a sheaf of commutative $\\mathcal O_X$-algebras and $q:=\\theta\\circ p:\\mathcal B\\to\\mathcal Q$ is a morphism of $\\mathcal O_X$-algebras; this $\\mathcal Q$ is $\\mathcal B/(e(\\mathcal E))$ of the statement. Let $\\iota:\\mathcal I\\to\\mathcal B$ be the inclusion and $q_C:\\mathcal B\\to\\mathcal C=\\operatorname{Coker}\\iota$ its cokernel in the abelian category $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. Since $\\mathcal I,\\mathcal B$ are quasi-coherent (Step 3), [lem-weil-pbc-quasi-coherent-module-cokernel-image] applied to $\\iota$ (whose image is $\\mathcal I$) gives: $\\mathcal C$ is quasi-coherent, $q_C$ is an epimorphism with $q_C\\iota=0$, and for affine $U$, $q_{C,U}$ is surjective with kernel $\\mathcal I(U)$. Compare $\\mathcal C$ and $\\mathcal Q$. (i) $q$ is $\\mathcal O_X$-linear (Step 0) and kills $\\mathcal I$ ($p$ does), so by the universal property of the cokernel there is a unique $\\mathcal O_X$-linear $h:\\mathcal C\\to\\mathcal Q$ with $hq_C=q$. (ii) The maps $\\mathcal P(U)\\to\\mathcal C(U)$, $p_U(b)\\mapsto q_{C,U}(b)$, are well defined additive maps ($q_{C,U}$ kills $\\mathcal I(U)$) compatible with restrictions, a morphism of abelian presheaves from $\\mathcal P$ to the abelian sheaf $\\mathcal C$; by [lem-weil-pbc-ring-sheafification-space-underlying-abelian](2) ($\\theta$ is also the abelian sheafification of $\\mathcal P$) there is a unique morphism of abelian sheaves $g:\\mathcal Q\\to\\mathcal C$ with $g\\theta p=q_C$, i.e. $gq=q_C$. (iii) $ghq_C=gq=q_C$, and $q_{C,V}$ is surjective for every affine open $V$, so $gh$ and $\\mathrm{id}_{\\mathcal C}$ agree on sections over affine opens and hence everywhere (Step 0): $gh=\\mathrm{id}_{\\mathcal C}$; $hg\\theta p=hq_C=q=\\theta p$ and every $p_U$ is surjective, so $hg\\theta=\\theta$, whence $hg=\\mathrm{id}_{\\mathcal Q}$ by the uniqueness in (2). So $h$ is an isomorphism of $\\mathcal O_X$-modules: $\\mathcal Q$ is a quasi-coherent $\\mathcal O_X$-algebra, $q=hq_C$ is surjective (an epimorphism), and for affine $U$, $q_U$ is surjective with kernel $\\mathcal I(U)$, i.e. $\\mathcal Q(U)=\\mathcal B(U)/\\mathcal I(U)$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01IC (line 1419) and Section 01LA (line 4717) item (5) (cokernel quasi-coherent, computed on affines); Modules, Lemma 01AH (modules.tex line 204) (2) (cokernels are sheafified presheaf cokernels); the ring structure written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 6 ((b), universal property).* Let $\\chi:\\mathcal B\\to\\mathcal C'$ be a morphism of sheaves of commutative $\\mathcal O_X$-algebras with $\\chi\\circ e=0$. Its sectionwise kernel $U\\mapsto\\ker\\chi_U$ is a sheaf of ideals of $\\mathcal B$ (as in Step 1, [def-weil-sheaf-of-modules-category]) containing every $e_U(\\mathcal E(U))$, so it contains $\\mathcal I$ by Step 4(iii): $\\chi_U(\\mathcal I(U))=0$ for all $U$. Hence the $\\chi_U$ induce ring maps $\\bar\\chi^p_U:\\mathcal P(U)\\to\\mathcal C'(U)$ with $\\bar\\chi^p_Up_U=\\chi_U$, compatible with restrictions: a morphism of presheaves of commutative rings $\\mathcal P\\to\\mathcal C'$. By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](1) there is exactly one morphism of sheaves of rings $\\bar\\chi:\\mathcal Q\\to\\mathcal C'$ with $\\bar\\chi\\theta=\\bar\\chi^p$; then $\\bar\\chi q=\\bar\\chi^pp=\\chi$, and $\\bar\\chi\\sigma_{\\mathcal Q}=\\chi\\sigma_{\\mathcal B}=\\sigma_{\\mathcal C'}$, so $\\bar\\chi$ is a map of $\\mathcal O_X$-algebras. Uniqueness: if $\\chi'$ is an algebra map with $\\chi'q=\\chi$, then $\\chi'\\theta p=\\bar\\chi\\theta p$, and $p_U$ is surjective for every $U$, so $\\chi'\\theta=\\bar\\chi\\theta$ and $\\chi'=\\bar\\chi$ by the uniqueness in the sheafification property.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 0817 (lines 3450-3480, the factorizations through Sym(F_i)/(E_ik)); written out by the agent (universal property of the quotient by a sheaf of ideals)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-ring-sheafification-space-underlying-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IC (line 1419), Lemma 01I8 (line 1113) (1), Section 01LA (line 4717) items (5), (8); Modules, Lemma 01AH (modules.tex line 204); the module-level statements follow Stacks; the passage to algebras, generated ideals and quotient rings (Steps 0, 2, 4-6), which Stacks leaves implicit in Properties 05JS/0817, is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,6 +170,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks Schemes 01IC / 01LA; self-contained; correct; unsplit."
+  "note": "Split reviewed: 7 steps; module-level facts delegated to three new nodes (kernel, cokernel/image, tensor product affine sections); generated ideal as the image of B (x) E -> B, quotient via ring sheafification compared with the module cokernel through both universal properties; universal property from the sheafification. Correct; stmt_deps extended with sheafification and tensor product."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "worker": "stage1",
+  "summary": "Split into the module-level Stacks results plus algebra bookkeeping. Module level: kernel quasi-coherent (new lem-weil-pbc-quasi-coherent-module-kernel, Schemes 01IC/01LB; stated exactly by the sorry-free slopmaster2 declaration AlgebraicGeometry.Scheme.Modules.isQuasicoherent_kernel), cokernel and image quasi-coherent with sections over affines (new lem-weil-pbc-quasi-coherent-module-cokernel-image, 01IC/01IB/01LA(5)), tensor product quasi-coherent with affine sections the tensor of sections (new lem-weil-pbc-quasi-coherent-tensor-product-affine-sections, 01I8(1)/01CE). Algebra level: kernel is a sheaf of ideals (sectionwise), image a subalgebra (local sections), the ideal (e(E)) = Im(B (x) E -> B) with its minimality checked on affine opens (Step 0: affine opens cover every open), the quotient algebra as ring sheafification of B(U)/I(U) identified with the module cokernel by the two universal properties (existing lem-weil-pbc-ring-sheafification-space-underlying-abelian), universal property from the ring sheafification. Statement kept; stmt_deps gained def-weil-pbc-sheafification and def-pur-sheaf-tensor-product, which the statement uses. Mathlib (LeanSearch, LeanFinder, Loogle, grep) has no kernel/cokernel/image/tensor permanence for quasi-coherent SheafOfModules."
  }
 }

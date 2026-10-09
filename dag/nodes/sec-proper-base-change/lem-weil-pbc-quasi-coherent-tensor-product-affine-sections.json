@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+ "kind": "statement",
+ "title": "The tensor product of quasi-coherent modules is quasi-coherent, with sections over affine opens the tensor product of sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F,\\mathcal G$ quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ be their tensor product [def-pur-sheaf-tensor-product], the sheafification of the presheaf $U\\mapsto\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$, and $t_U:\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)\\to(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)(U)$ the component of the sheafification map. Then $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ is quasi-coherent, and for every affine open $U\\subseteq X$ the $\\mathcal O_X(U)$-linear map $t_U$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions, line 1113, item (1): (M (x)_R N)~ = M~ (x)_{O_X} N~ on X = Spec R) and Section 01LA (section-quasi-coherent, line 4717, item (8)); Modules, Lemma 01CE (modules.tex line 2440, lemma-tensor-product-permanence (3))"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of quasi-coherent sheaves of modules is quasi-coherent, tilde of tensor product of modules",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat (AlgebraicGeometry/Modules/Tilde), CategoryTheory.Sheaf.tensorProd_isSheaf (Sites/CartesianMonoidal: cartesian product, not tensor of modules), SheafOfModules.IsQuasicoherent(.mk), SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of two quasi-coherent sheaves of modules on a scheme is quasi-coherent and its sections over an affine open are the tensor product of sections",
+   "results": "PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj (Algebra/Category/ModuleCat/Presheaf/Monoidal: presheaf tensor product, sectionwise), CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.Sheaf.monoidalCategory (Sites/Monoidal: sheafified tensor for sheaves with values in a monoidal category), LightCondensed monoidal instance: no tensor product of SheafOfModules over a sheaf of rings, no quasi-coherence of a tensor product",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent, CategoryTheory.MonoidalCategoryStruct.tensorObj",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'MonoidalCategory\\|tensorObj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/; grep -rn 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean",
+   "results": "no MonoidalCategory / tensorObj in Algebra/Category/ModuleCat/Sheaf/ or AlgebraicGeometry/Modules/ (only PresheafOfModules has Presheaf/Monoidal.lean, sectionwise); IsQuasicoherent only in Modules/Tilde.lean and Sheaf/LocallyFree.lean, no tensor statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isQuasicoherent_tensorObj' ~/weil-conjectures-slopmaster2/WeilConjectures; reach in local/sorry_map_slopmaster2_full.jsonl",
+   "results": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj (WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean:155): quasi-coherence clause only, for the source repository's tensorObj on X.Modules; reaches sorry in AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorObj_iso (ProjectionFormula.lean:62-68, open, no node); not on master",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository's isQuasicoherent_tensorObj covers the quasi-coherence clause only and rests on sorry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 01I8(1) / 01LA(8), Modules 01CE; self-contained; correct; unsplit. isQuasicoherent_tensorObj (ProjectionFormula.lean:155) covers only the quasi-coherence clause and rests on sorry."
+ }
+}
