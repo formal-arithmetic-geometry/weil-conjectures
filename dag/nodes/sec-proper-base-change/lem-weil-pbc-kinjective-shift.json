@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-kinjective-shift",
+ "kind": "statement",
+ "title": "A shift of a K-injective complex is K-injective",
+ "statement": "Let $\\mathcal A$ be an abelian category and $I$ a cochain complex of $\\mathcal A$ which is K-injective, i.e. $\\operatorname{Hom}_{K(\\mathcal A)}(M,I)=0$ in the homotopy category for every acyclic complex $M$ [def-weil-pbc-kinjective-resolutions], [def-weil-abstract-derived-category]. For $n\\in\\mathbf Z$ let $I[n]$ be the shifted complex, $(I[n])^r=I^{r+n}$, $d_{I[n]}=(-1)^nd_I$. Then $I[n]$ is K-injective for every $n\\in\\mathbf Z$ (and conversely, $I$ is K-injective if $I[n]$ is). Moreover, if $s:K\\to I$ is a K-injective resolution (a quasi-isomorphism into a K-injective complex), then $s[n]:K[n]\\to I[n]$, $(s[n])^r=s^{r+n}$, is a K-injective resolution of $K[n]$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 070H (definition-K-injective, line 9620) and the remark after it (line 9624: Hom_{K(A)}(M[i],I)=0 for all i, the translate of an acyclic complex being acyclic), which gives Hom_{K(A)}(M,I[n])=Hom_{K(A)}(M[-n],I)=0; quasi-isomorphisms are stable under shift since H^r(K[n])=H^{r+n}(K)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "shift of a K-injective cochain complex is K-injective",
+   "results": "CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff, CochainComplex.isKProjective_shift_iff, CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective (Mathlib.Algebra.Homology.HomotopyCategory.KInjective)",
+   "date": "2026-10-09",
+   "verdict": "match: instIsKInjectiveObjIntShiftFunctor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "shifting a K-injective complex gives a K-injective complex",
+   "results": "CochainComplex.isKInjective_shift_iff, CochainComplex.instIsKInjectiveObjIntShiftFunctor (Mathlib.Algebra.Homology.HomotopyCategory.KInjective); CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor (Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence: QuasiIso phi -> QuasiIso (phi shifted by n))",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKInjective_shift_iff",
+   "results": "CochainComplex.isKInjective_shift_iff : ((shiftFunctor (CochainComplex C ℤ) n).obj L).IsKInjective ↔ L.IsKInjective (Mathlib.Algebra.Homology.HomotopyCategory.KInjective)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsKInjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; sed -n 85,99p of that file",
+   "results": "line 88: instance (L : CochainComplex C ℤ) [L.IsKInjective] (n : ℤ) : (L⟦n⟧).IsKInjective; line 95: isKInjective_shift_iff; Mathlib's shift L⟦n⟧ has X_r = L.X (r+n) and differential multiplied by (-1)^n (HomologicalComplex shift, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean), the convention of the node",
+   "date": "2026-10-09",
+   "verdict": "match (read: the source of both declarations)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.instIsKInjectiveObjIntShiftFunctor",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+  "how": "exact: the instance at line 88 gives I[n] K-injective, isKInjective_shift_iff (line 95) the converse; the clause on resolutions is this instance together with CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor (Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean:148, an unnamed instance: the shift of a quasi-isomorphism is a quasi-isomorphism), one lemma per clause"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-adjunction-commshift",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

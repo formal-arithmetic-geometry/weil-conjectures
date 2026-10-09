@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-dplus-injective-representative",
+ "kind": "statement",
+ "title": "Every object of D^+ is represented by a bounded below K-injective complex of injectives",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives (for example $\\Ab(T_{\\Et})$ or $\\Mod(T_{\\Et},R)$ for a scheme $T$ [lem-weil-pbc-module-sheaves-enough-injectives]), $D^+(\\mathcal A)$ its bounded below derived category [def-weil-pbc-bounded-derived-subcategories] and $Q$ the localization functor from cochain complexes [def-weil-abstract-derived-category]. (1) If $K\\in D^+(\\mathcal A)$ and $n\\in\\mathbf Z$ are such that $\\mathcal H^i(K)=0$ for all $i<n$, there are a complex $L$ of injective objects of $\\mathcal A$ with $L^i=0$ for $i<n$ and an isomorphism $QL\\cong K$ in $D^+(\\mathcal A)$. (2) Every bounded below complex of injective objects of $\\mathcal A$ is K-injective [def-weil-pbc-kinjective-resolutions]. In particular every object of $D^+(\\mathcal A)$ is isomorphic to $QI$ for a bounded below K-injective complex $I$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 013K (lemma-injective-resolutions-exist, line 6280), (2)-(3): a complex with bounded below cohomology has an injective resolution by a bounded below complex of injectives; Lemma 070J (lemma-bounded-below-injectives-K-injective, line 9688)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every object of the bounded below derived category is isomorphic to a bounded below complex of injective objects",
+   "results": "InjectiveResolution.instHasInjectiveResolution(s) (Mathlib.CategoryTheory.Abelian.Injective.Resolution), IsGrothendieckAbelian.enoughInjectives, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (objects only, or bounded complexes without injectives)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "object of bounded below derived category isomorphic to image of a complex of injective objects in degrees at least n",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE, exists_iso_Q_obj_of_isLE, exists_iso_Q_obj_of_isGE_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure)",
+   "date": "2026-10-09",
+   "verdict": "partial: a strictly >= n representative, without injectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Plus.exists_injective_nonempty_iso",
+   "results": "DerivedCategory.Plus.exists_injective_nonempty_iso [EnoughInjectives C] (K : DerivedCategory.Plus C) (n : ℤ) [K.IsGE n] : ∃ L, ∃ (_ : L.obj.IsStrictlyGE n), Nonempty (Plus.Q.obj ((InjectiveObject.ι C).mapCochainComplexPlus.obj L) ≅ K) (Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives)",
+   "date": "2026-10-09",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_injective_nonempty_iso\\|exists_quasiIso_injective\\|isKInjective_of_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "DerivedCategory/DerivabilityStructureInjectives.lean:84 exists_injective_nonempty_iso (read, lines 77-97), :61 CochainComplex.Plus.exists_quasiIso_injective, :53 instance IsKInjective for complexes of InjectiveObject; HomotopyCategory/KInjective.lean:133 isKInjective_of_injective (L : CochainComplex C ℤ) (d : ℤ) [L.IsStrictlyGE d] [∀ n, Injective (L.X n)] : L.IsKInjective",
+   "date": "2026-10-09",
+   "verdict": "match: one lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.Plus.exists_injective_nonempty_iso",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+  "how": "one Mathlib lemma per clause: (1) DerivedCategory.Plus.exists_injective_nonempty_iso (line 84; K.IsGE n is the hypothesis H^i(K)=0 for i<n, IsStrictlyGE n is L^i=0 for i<n); (2) CochainComplex.isKInjective_of_injective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:133); enough injectives of the sheaf categories is the cited node"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-adjunction-commshift",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
