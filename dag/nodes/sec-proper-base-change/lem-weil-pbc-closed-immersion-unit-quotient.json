@@ -14,9 +14,103 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The unit $\\eta_{\\mathcal F}:\\mathcal F\\to i_*i^*\\mathcal F$ is a morphism of \\mathcal O_Y-modules by the adjunction in [def-pc-module-pullback]. To identify its kernel and image it is enough to compute its stalk maps and then use the stalkwise criteria for sheaf maps.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Morphisms of Spaces, Lemma 04CJ, with the sheaf-theoretic stalk criteria used in the proof of Modules, Lemma 08KS"
+   }
+  },
+  {
+   "text": "Let $x\\in Y\\setminus i(Z)$. By [lem-weil-pbc-closed-pushforward-stalks](1), $(i_*i^*\\mathcal F)_x=0$. Since $i(Z)$ is closed, choose an open neighbourhood $V$ of $x$ disjoint from $i(Z)$. The kernel definition of $\\mathcal J$ in [def-sbc-closed-immersion-ideal-sheaf] gives $\\mathcal J(V)=\\mathcal O_Y(V)$, so $1\\in\\mathcal J(V)$ and every germ of $\\mathcal F$ at $x$ lies in $(\\mathcal J\\mathcal F)_x$. Thus the stalk of $\\eta_{\\mathcal F}$ is the zero map with kernel $(\\mathcal J\\mathcal F)_x$ and is surjective.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 08KS, proof of the case outside the closed subset; the pushforward stalk calculation is Sheaves, Lemma 00AE"
+   }
+  },
+  {
+   "text": "Now let $z\\in Z$ and $x=i(z)$. Write $R=\\mathcal O_{Y,x}$, $S=\\mathcal O_{Z,z}$, and let $\\varphi:R\\to S$ be the local-ring map induced by $i$. The sheaf map $\\mathcal O_Y\\to i_*\\mathcal O_Z$ is surjective for a closed immersion [def-weil-closed-immersion], and [lem-weil-pbc-closed-pushforward-stalks](2) identifies its target stalk with $S$. Hence $\\varphi$ is surjective. Its kernel is the stalk $K=\\mathcal J_x$: taking stalks preserves the kernel in the definition of $\\mathcal J$ [def-sbc-closed-immersion-ideal-sheaf].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Morphisms of Spaces, Lemma 04CJ; the local-ring description is the stalkwise argument of Modules, Lemma 08KS"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-stalk-pullback], $(i^*\\mathcal F)_z$ is naturally $\\mathcal F_x\\otimes_R S$, and [lem-weil-pbc-closed-pushforward-stalks](2) identifies $(i_*i^*\\mathcal F)_x$ with this tensor product. Under these identifications the stalk of the adjunction unit sends $m\\in\\mathcal F_x$ to $m\\otimes1$: this is exactly the germ description of the pullback unit in [def-pc-module-pullback].",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 08KS, proof at a point of the closed subscheme, using Sheaves, Lemmas 0098 and 00AE"
+   }
+  },
+  {
+   "text": "For a surjective ring map $R\\to S$ with kernel $K$ and an $R$-module $M$, the canonical map $M\\to M\\otimes_R S$, $m\\mapsto m\\otimes1$, is surjective with kernel $KM$: identify $S$ with $R/K$, use the relations $m\\otimes\\bar r=rm\\otimes1$, and define the inverse of $M/KM\\to M\\otimes_RR/K$ by $m\\otimes\\bar r\\mapsto rm+KM$. Applying this with $M=\\mathcal F_x$ and $K=\\mathcal J_x$, and observing from the image definition [def-pur-sheaf-tensor-product] that $(\\mathcal J\\mathcal F)_x=\\mathcal J_x\\mathcal F_x$, shows that the stalk of $\\eta_{\\mathcal F}$ at $x$ is surjective with kernel $(\\mathcal J\\mathcal F)_x$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 08KS, proof of the local algebra fact $G_x\\to G_x\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}$"
+   }
+  },
+  {
+   "text": "The two cases cover every point of $Y$, so [lem-weil-pbc-locally-surjective-iff-stalks] makes $\\eta_{\\mathcal F}$ a surjective sheaf morphism, and the stalk computation identifies its kernel with $\\mathcal J\\mathcal F$. The sheaf first-isomorphism theorem therefore gives the induced map $\\bar\\eta_{\\mathcal F}:\\mathcal F/\\mathcal J\\mathcal F\\to i_*i^*\\mathcal F$. Its stalk maps are the isomorphisms $\\mathcal F_x/\\mathcal J_x\\mathcal F_x\\cong\\mathcal F_x\\otimes_R S$ from the preceding algebra calculation, so [lem-weil-pbc-module-iso-on-stalks] makes $\\bar\\eta_{\\mathcal F}$ an isomorphism. All constructions are induced by the natural adjunction unit and multiplication, hence the isomorphism is natural in $\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Morphisms of Spaces, Lemma 04CJ (1), with the stalkwise proof of Modules, Lemma 08KS and naturality of the adjunction unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Morphisms of Spaces, Lemma 04CJ (spaces-morphisms-lemma-i-star-equivalence) part (1), with the stalkwise local algebra proof in Modules, Lemma 08KS (modules-lemma-i-star-equivalence)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +162,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-immersion-unit-quotient",
+  "worker": "stage1",
+  "summary": "Split the unit-to-quotient statement along Morphisms 04CJ and the stalkwise proof of Modules 08KS. The six steps handle the stalk outside the closed image, the surjective local-ring map and its ideal kernel at a point of the closed subscheme, the pullback stalk and unit germ, the elementary tensor-with-a-quotient calculation, and the global surjectivity, kernel and natural isomorphism. No new DAG nodes were needed: all non-elementary ingredients are existing cited nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 6 steps, 0 new nodes: stalkwise criteria; outside i(Z) the pushforward stalk is zero and J_x = O_{Y,x}; at i(z) the local map is surjective with kernel J_x (stalks node, exactness of stalks), the unit on stalks is m -> m tensor 1 via the stalk-of-pullback node (generic, unit sk-thm-reduction: tool use recorded by L), M -> M tensor_R R/K surjective with kernel KM, conclusion by the stalk criteria; naturality. Correct."
+ }
 }
