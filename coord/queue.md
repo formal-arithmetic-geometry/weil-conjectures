@@ -1,8 +1,8 @@
 # Work queue
 
-592 items; claim with `tools/claim.py next <group> [--stage N]`.
+594 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (560)
+## Stage 1: nodes to split (562)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-proj-standard-open-inclusion` | 1007 | none |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1007 | none |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
@@ -36,11 +35,6 @@
 | `lem-weil-pbc-henselization-colimit` | 1008 | none |
 | `lem-weil-pbc-henselization-pair-g-ring` | 1008 | none |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1008 | none |
-| `lem-weil-pbc-normal-constant-generic` | 1008 | none |
-| `lem-weil-pbc-open-restriction-pullback-unit` | 1008 | none |
-| `lem-weil-pbc-proper-limit-noetherian` | 1008 | none |
-| `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1008 | none |
-| `lem-weil-pbc-right-derived-universal-delta-functor` | 1008 | none |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
 | `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
@@ -53,15 +47,20 @@
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1008 | none |
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
 | `lemma-weil-pbc-pushout-monicity` | 1008 | none |
+| `def-weil-pbc-delta-functor` | 1009 | none |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1009 | none |
+| `lem-weil-pbc-effaceable-delta-functor-universal` | 1009 | none |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1009 | none |
+| `lem-weil-pbc-eventually-proper` | 1009 | none |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1009 | none |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1009 | none |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1009 | none |
 | `lem-weil-pbc-power-series-onto-completion` | 1009 | none |
+| `lem-weil-pbc-proper-closed-in-proper-fp` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1009 | none |
+| `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1010 | none |
@@ -528,10 +527,12 @@
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
 | `lem-pc-k-sheaf` | - | rests_on_sorry |
+| `lem-weil-pbc-closed-immersion-from-composite` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `cor-pc-dense-points-curves-sections` | - | none |
+| `def-nagata-scheme-theoretic-image` | - | none |
 | `def-pc-derived-category` | - | none |
 | `def-pc-derived-direct-image` | - | none |
 | `def-pc-hilb-functor` | - | rests_on_sorry |
@@ -545,6 +546,7 @@
 | `lem-pc-perfect-locus` | - | rests_on_sorry |
 | `lem-sc-canonical-sheaf` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | none |
+| `lemma-nagata-scheme-image-ideal-qc` | - | none |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pc-hilb-sheaf` | - | rests_on_sorry |
 | `lem-pc-projective-coherent-finiteness` | - | none |
@@ -604,7 +606,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 574 nodes that wait for stage 1, 210 nodes that wait for a statement dependency.
+Not open yet: 573 nodes that wait for stage 1, 216 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
