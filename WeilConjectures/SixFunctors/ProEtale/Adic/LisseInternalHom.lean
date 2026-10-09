@@ -1,0 +1,80 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+
+/-!
+# The internal hom out of a lisse sheaf is exact
+
+For a lisse sheaf `F` of `ℚ̄_ℓ,X`-modules, the internal hom `𝓗om_{ℚ̄_ℓ,X}(F, -)` is exact
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.preservesFiniteColimits_ihom`): it is left exact
+as a right adjoint, and it preserves epimorphisms since this can be checked after pullback along
+the members of a pro-étale cover trivialising `F`, where `F` becomes `ℚ̄_ℓⁿ` and
+`𝓗om(ℚ̄_ℓⁿ, -) = (-)ⁿ` (`CategoryTheory.Mod.epi_ihom_map_of_iso_biproduct`); weakly étale
+pullback commutes with the internal hom (`AlgebraicGeometry.ProEtale.adicUpperStarIhomIso`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits ZeroObject
+
+namespace AlgebraicGeometry.ProEtale
+
+variable {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
+
+/-- A sheaf of `ℚ̄_ℓ,X`-modules vanishes if its pullbacks along the members of a pro-étale cover
+vanish. -/
+lemma AdicSheaf.isZero_of_isZero_upperStar {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    [∀ i, WeaklyEtale (g i)] (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
+    {M : AdicSheaf l X} (h : ∀ i, IsZero ((g i)^*ᵃ[l].obj M)) : IsZero M := by
+  refine AdicSheaf.isZero_of_isZero_X ?_
+  have : IsIso (0 : M.X ⟶ M.X) := by
+    refine isIso_of_isIso_localizationRestriction _ _ g hg fun i ↦ ?_
+    have hz : IsZero ((localizationRestriction _ (g i) inferInstance).obj M.X) :=
+      ((AdicSheaf.forget _).map_isZero (h i)).of_iso
+        ((upperStarIsoLocalizationRestriction _ (g i) inferInstance).app M.X).symm
+    rw [hz.eq_of_src ((localizationRestriction _ (g i) inferInstance).map 0) (𝟙 _)]
+    infer_instance
+  exact (IsZero.iff_id_eq_zero _).2 (by rw [← IsIso.hom_inv_id (0 : M.X ⟶ M.X), zero_comp])
+
+/-- **The internal hom out of a lisse sheaf preserves epimorphisms**: after pullback along a
+member `g` of a pro-étale cover trivialising `F`, it becomes the internal hom out of `ℚ̄_ℓⁿ`. -/
+theorem IsAdicLisseSheaf.epi_ihom_map {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F)
+    {M N : AdicSheaf l X} (f : M ⟶ N) [Epi f] : Epi ((AdicSheaf.ihom F).map f) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨ι, V, g, rfl⟩ := R.exists_eq_ofArrows
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  refine Preadditive.epi_of_isZero_cokernel _
+    (AdicSheaf.isZero_of_isZero_upperStar g hR fun i ↦ ?_)
+  obtain ⟨n, ⟨e⟩⟩ := hRF (g i) (.mk i)
+  have : Epi ((g i)^*ᵃ[l].map ((AdicSheaf.ihom F).map f)) := by
+    have key := NatIso.naturality_2 (adicUpperStarIhomIso l (g i) F) f
+    change Epi ((AdicSheaf.ihom F ⋙ (g i)^*ᵃ[l]).map f)
+    rw [← key]
+    have := Mod.epi_ihom_map_of_iso_biproduct e ((g i)^*ᵃ[l].map f)
+    exact epi_comp' inferInstance (epi_comp' this inferInstance)
+  exact (isZero_cokernel_of_epi _).of_iso (PreservesCokernel.iso (g i)^*ᵃ[l] _)
+
+/-- **The internal hom out of a lisse sheaf is exact**: it is left exact as a right adjoint,
+and it preserves epimorphisms (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.epi_ihom_map`). -/
+theorem IsAdicLisseSheaf.preservesFiniteColimits_ihom {F : AdicSheaf l X}
+    (hF : IsAdicLisseSheaf F) : PreservesFiniteColimits (AdicSheaf.ihom F) := by
+  have := (Mod.ihomAdjunction F).rightAdjoint_preservesLimits
+  have : PreservesFiniteLimits (AdicSheaf.ihom F) := inferInstance
+  refine (Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).2 fun S hS ↦ ?_
+  have := hS.epi_g
+  have h := (Functor.preservesFiniteLimits_tfae (AdicSheaf.ihom F)).out 3 0
+  exact ⟨(h.1 ‹_› S hS).1, hF.epi_ihom_map S.g⟩
+
+end AlgebraicGeometry.ProEtale
