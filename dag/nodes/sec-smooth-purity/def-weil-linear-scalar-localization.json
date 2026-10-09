@@ -1,0 +1,48 @@
+{
+ "id": "def-weil-linear-scalar-localization",
+ "kind": "definition",
+ "title": "Scalar localization of a linear category at one element",
+ "statement": "Let $R$ be a commutative ring, let $\\varpi\\in R$, and let $R[1/\\varpi]$ be the localization of $R$ at the multiplicative set $\\{\\varpi^n:n\\geq0\\}$, with its ring map $R\\to R[1/\\varpi]$. (For $R=\\mathcal O_E$ the valuation ring of a finite extension $E/\\Ql$ and $\\varpi=\\varpi_E$ a uniformizer [def-weil-l-adic-coefficient-extension], $R[1/\\varpi_E]=E$.) Let $\\mathcal C$ be an $R$-linear category: every $\\Hom_{\\mathcal C}(K,L)$ is an $R$-module and composition is $R$-bilinear. The *scalar localization* (*rationalization*) $\\mathcal C[1/\\varpi]$ is the category whose objects are those of $\\mathcal C$, with\n\n$$\n \\Hom_{\\mathcal C[1/\\varpi]}(K,L)=\\Hom_{\\mathcal C}(K,L)\\otimes_R R[1/\\varpi],\n$$\n\ncomposition the $R[1/\\varpi]$-bilinear map induced by the $R$-bilinear composition of $\\mathcal C$, $(f\\otimes a)\\circ(g\\otimes b)=(f\\circ g)\\otimes ab$, and identities $\\mathrm{id}_K\\otimes1$; it is an $R[1/\\varpi]$-linear category. The *localization functor* $Q:\\mathcal C\\to\\mathcal C[1/\\varpi]$ is the identity on objects and sends $f$ to $f\\otimes1$; it is $R$-linear. If $\\mathcal C$ carries an automorphism $[1]$ (a shift) acting $R$-linearly on Hom modules, then $[1]$ induces the automorphism of $\\mathcal C[1/\\varpi]$ given by $K\\mapsto K[1]$ and $f\\otimes a\\mapsto f[1]\\otimes a$, and $Q\\circ[1]=[1]\\circ Q$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Introduction, the display $D^b_c(X,\\mathbf Q_\\ell):=(\\lim D^b_c(X,\\mathbf Z/\\ell^n\\mathbf Z))\\otimes_{\\mathbf Z_\\ell}\\mathbf Q_\\ell$ (the classical rationalization of Hom modules); stated for a general linear category in literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsLocalization\\|LocalizedModule\\|Localization.Away\\|TensorProduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/",
+   "results": "CategoryTheory/Center/Localization.lean (localization of the center along a localization functor), Localization/*.lean (localization at a MorphismProperty, IsLocalization of functors); no category with Hom modules tensored with a localized ring",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Linear.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Linear/Basic.lean",
+   "results": "Linear R W.Localization (Localization/Linear.lean:54): a localization at a class of morphisms W inherits R-linearity; Linear R on full subcategories (Linear/Basic.lean:117)",
+   "date": "2026-10-09",
+   "verdict": "generalization not in one line: C[1/ϖ] is equivalent to W.Localization for W = {ϖ^n·id_K}, but the identification of its Hom modules with Hom ⊗_R R[1/ϖ] (a calculus of fractions argument) is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-rationalization-karoubi",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -2,23 +2,44 @@
  "id": "def-weil-rationalization-karoubi",
  "kind": "definition",
  "title": "Rationalization (scalar localization)",
- "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$, a scheme $Y$, and a uniformizer\n$\\varpi_E$ of its valuation ring $\\mathcal O_E$. The derived-complete\nintegral category [def-weil-derived-complete-integral-detailed] is\n$D^b_c(Y,\\mathcal O_E)$, built from the finite-torsion coefficients\n[def-weil-finite-torsion-constructibility] $A_{E,n}=\\mathcal\nO_E/\\varpi_E^n$. If $\\mathcal C$ is an $\\mathcal O_E$-linear triangulated\ncategory, its rationalization $\\mathcal C[1/\\varpi_E]$ has the same objects\nand, for $K,L\\in\\mathcal C$,\n\n$$\n \\Hom_{\\mathcal C[1/\\varpi_E]}(K,L)\n =\\Hom_{\\mathcal C}(K,L)\\otimes_{\\mathcal O_E}E.\n$$\n\nSet\n\n$$\n D^b_c(Y,E)=\n D^b_c(Y,\\mathcal O_E)[1/\\varpi_E].\n$$\n\nNo Karoubi (idempotent) completion is taken in this definition: the notation\n$\\mathcal C[1/\\varpi_E]$ denotes the raw scalar localization displayed above,\nin which no idempotent is formally adjoined. For $E=\\Ql$, this uses $\\mathcal\nO_E=\\Zl$ and $\\varpi_E=\\ell$.\n\nIf $E\\subset L$ is a finite extension, the scalar-extension functor is\n\n$$\n -\\otimes_E L:D^b_c(Y,E)\\longrightarrow D^b_c(Y,L),\n$$\n\ndefined on integral representatives by completed derived tensor product\n[def-weil-derived-tensor] with $\\mathcal O_L$, levelwise modulo powers of the\ntwo uniformizers, followed by rationalization.",
+ "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$ [def-weil-l-adic-coefficient-extension], a scheme $Y$, and a uniformizer\n$\\varpi_E$ of its valuation ring $\\mathcal O_E$. The derived-complete\nintegral category [def-weil-derived-complete-integral-detailed] is\n$D^b_c(Y,\\mathcal O_E)$, built from the finite-torsion coefficients\n[def-weil-finite-torsion-constructibility] $A_{E,n}=\\mathcal\nO_E/\\varpi_E^n$; it is an $\\mathcal O_E$-linear triangulated category with $\\mathcal O_E$-linear shift [lem-weil-integral-constructible-triangulated, lem-weil-integral-constructible-linear]. If $\\mathcal C$ is an $\\mathcal O_E$-linear triangulated\ncategory, its rationalization $\\mathcal C[1/\\varpi_E]$ is its scalar localization at $\\varpi_E$ [def-weil-linear-scalar-localization]: it has the same objects\nand, for $K,L\\in\\mathcal C$,\n\n$$\n \\Hom_{\\mathcal C[1/\\varpi_E]}(K,L)\n =\\Hom_{\\mathcal C}(K,L)\\otimes_{\\mathcal O_E}E,\n$$\n\nwith the induced shift, and with distinguished triangles those isomorphic to images of distinguished triangles of $\\mathcal C$; this makes $\\mathcal C[1/\\varpi_E]$ a triangulated category and $\\mathcal C\\to\\mathcal C[1/\\varpi_E]$ an exact functor [lem-weil-linear-scalar-localization-triangulated]. Set\n\n$$\n D^b_c(Y,E)=\n D^b_c(Y,\\mathcal O_E)[1/\\varpi_E].\n$$\n\nNo Karoubi (idempotent) completion is taken in this definition: the notation\n$\\mathcal C[1/\\varpi_E]$ denotes the raw scalar localization displayed above,\nin which no idempotent is formally adjoined. For $E=\\Ql$, this uses $\\mathcal\nO_E=\\Zl$ and $\\varpi_E=\\ell$.\n\nIf $E\\subset L$ is a finite extension, the scalar-extension functor is\n\n$$\n -\\otimes_E L:D^b_c(Y,E)\\longrightarrow D^b_c(Y,L),\n$$\n\ndefined on integral representatives by the integral scalar extension\n$K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$ [def-weil-integral-scalar-extension] (completed derived tensor product with $\\mathcal O_L$, levelwise modulo powers of the\ntwo uniformizers), which carries $D^b_c(Y,\\mathcal O_E)$ into $D^b_c(Y,\\mathcal O_L)$ [lem-weil-integral-scalar-extension-constructible], followed by rationalization: on objects $K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$, and on morphisms $f\\otimes a\\mapsto(f\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes a$ for $f\\in\\Hom(K,M)$, $a\\in E\\subset L$, which is well defined because integral scalar extension is $\\mathcal O_E$-linear.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
   "place": "node def-weil-rationalization-karoubi, order 1460"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-tensor"
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-integral-constructible-linear",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Karoubi\\|class IsIdempotentComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Karoubi.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Basic.lean",
+   "results": "CategoryTheory.Idempotents.Karoubi (Karoubi.lean) and IsIdempotentComplete (Basic.lean) exist, but the source definition explicitly takes no Karoubi completion, so neither is a dependency",
+   "date": "2026-10-09",
+   "verdict": "no match (not used)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsLocalization\\|LocalizedModule\\|Localization.Away\\|TensorProduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/",
+   "results": "no category whose Hom modules are tensored with a localized ring; see def-weil-linear-scalar-localization",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -40,5 +61,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-rationalization-karoubi",
+  "worker": "stage1",
+  "summary": "Checked against the master blueprint text (no slopmaster2 counterpart, no Lean). The source explicitly takes NO Karoubi completion (raw scalar localization Hom ⊗_{O_E} E), contrary to the node title and the lead's one-line description; kept as in the source, so def-weil-karoubi-envelope is not a dependency. Split by one level: the scalar localization of an R-linear category (new def-weil-linear-scalar-localization), its triangulated structure, which the source leaves implicit but downstream nodes use (new lem-weil-linear-scalar-localization-triangulated, added to the statement), the O_E-linearity of D^b_c(Y,O_E) required by the source's hypothesis (new lem-weil-integral-constructible-linear; triangulatedness cites lem-weil-integral-constructible-triangulated), the integral scalar extension K ↦ Rlim_m Res_m(K ⊗^L_{O_E} O_L/ϖ_L^m) (new def-weil-integral-scalar-extension) and its preservation of D^b_c (new lem-weil-integral-scalar-extension-constructible). def-weil-derived-tensor removed from stmt_deps (it is over a constant ring; the completed tensor product is now in def-weil-integral-scalar-extension); def-weil-l-adic-coefficient-extension added. The action on morphisms of -⊗_E L was written out."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
