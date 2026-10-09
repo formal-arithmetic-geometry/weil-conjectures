@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-morphism-into-affine-scheme",
+ "kind": "statement",
+ "title": "Morphisms into an affine scheme are ring maps on global sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $R$ a commutative ring, $\\operatorname{Spec}R$ its spectrum [def-weil-affine-spectrum]. The map $\\operatorname{Mor}(X,\\operatorname{Spec}R)\\to\\operatorname{Hom}_{\\mathrm{Ring}}(R,\\Gamma(X,\\mathcal O_X))$, $f\\mapsto f^\\sharp$ (on global sections, composed with $R\\cong\\Gamma(\\operatorname{Spec}R,\\mathcal O)$), is bijective. Moreover, if $f$ corresponds to $\\rho:R\\to\\Gamma(X,\\mathcal O_X)$ and $g\\in R$, then $f^{-1}(D(g))=X_{\\rho(g)}=\\{x\\in X:\\ \\rho(g)_x\\in\\mathcal O_{X,x}^\\times\\}$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.6.4 (Tag 01I1, label lemma-morphism-into-affine) and Lemma 26.6.3 (Tag 01HY, label lemma-morphism-into-affine-where-point-goes)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from a scheme to Spec R correspond to ring homomorphisms R to global sections",
+   "results": "AlgebraicGeometry.Scheme.toSpecΓ, Spec.full, ΓSpec.adjunction_homEquiv_apply, Spec.homEquiv_apply (Mathlib.AlgebraicGeometry.GammaSpecAdjunction)",
+   "date": "2026-10-09",
+   "verdict": "match: ΓSpec.adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ΓSpec.adjunction",
+   "results": "ΓSpec.adjunction : Scheme.Γ.rightOp ⊣ Scheme.Spec, isIso_adjunction_counit, adjunction_unit_app (= X.toSpecΓ), adjunction_counit_app', adjunction_homEquiv_apply, adjunction_homEquiv_symm_apply (Mathlib.AlgebraicGeometry.GammaSpecAdjunction)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def adjunction\\|ext_to_Spec\\|adjunction_counit_app' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean; grep -n 'theorem preimage_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "GammaSpecAdjunction.lean:399 def adjunction : Scheme.Γ.rightOp ⊣ Scheme.Spec; :411 lemma ext_to_Spec (two morphisms X ⟶ Spec R with the same map R ⟶ Γ(X) are equal); :432 counit = (ΓSpecIso R).inv.op; Scheme.lean:679 theorem preimage_basicOpen (f⁻¹ᵁ Y.basicOpen r = X.basicOpen (f.app U r))",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.ΓSpec.adjunction",
+  "file": "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+  "how": "specializes in one line: `(ΓSpec.adjunction.homEquiv X (op R)).symm` is the bijection Mor(X, Spec R) ≃ (R ⟶ Γ(X,⊤)) (unop), which by `adjunction_counit_app` is f ↦ (ΓSpecIso R).inv ≫ Γ.map f (cf. `ext_to_Spec`, line 411); the preimage clause is `AlgebraicGeometry.Scheme.preimage_basicOpen` (Mathlib/AlgebraicGeometry/Scheme.lean:679) with D(g) = (Spec R).basicOpen g"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-space-functor-of-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}

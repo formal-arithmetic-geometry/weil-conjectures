@@ -1,13 +1,12 @@
 # Work queue
 
-561 items; claim with `tools/claim.py next <group> [--stage N]`.
+562 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (545)
+## Stage 1: nodes to split (546)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-projective-space-functor-of-points` | 1004 | none |
-| `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1004 | none |
 | `lem-weil-pbc-reduced-curve-normalization` | 1004 | none |
 | `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-torsion-sheaf-characterizations` | 1004 | none |
@@ -35,6 +34,8 @@
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
+| `lem-weil-pbc-invertible-nonvanishing-trivialization` | 1005 | none |
+| `lem-weil-pbc-module-morphism-gluing` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1005 | none |
 | `lem-weil-pbc-module-stalk-pullback` | 1005 | none |
@@ -42,6 +43,7 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1005 | none |
 | `lem-weil-pbc-open-closed-short-exact` | 1005 | none |
 | `lem-weil-pbc-power-set-complex-contractible` | 1005 | none |
+| `lem-weil-pbc-projective-space-chart-coordinates` | 1005 | none |
 | `lem-weil-pbc-projective-space-standard-charts` | 1005 | none |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
@@ -74,7 +76,6 @@
 | `lemma-weil-pbc-direct-image-filtered-colimit` | 2002 | none |
 | `lemma-weil-pbc-property-iff-acyclicity` | 2002 | sorry_here |
 | `def-weil-pbc-strict-henselian-setup` | 2003 | none |
-| `lem-weil-pbc-prime-factor-devissage` | 2003 | none |
 | `lem-weil-pbc-proper-immersion-closed` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
 | `lemma-weil-pbc-five-lemma-transfer` | 2003 | none |
@@ -573,7 +574,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 561 nodes that wait for stage 1, 104 nodes that wait for a statement dependency.
+Not open yet: 562 nodes that wait for stage 1, 106 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

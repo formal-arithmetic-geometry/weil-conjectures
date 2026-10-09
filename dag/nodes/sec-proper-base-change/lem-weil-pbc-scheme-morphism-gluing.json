@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-scheme-morphism-gluing",
+ "kind": "statement",
+ "title": "Morphisms of schemes glue along an open cover",
+ "statement": "Let $X,Z$ be schemes [def-pc-scheme] and $X=\\bigcup_{i\\in I}U_i$ an open covering. Given morphisms $f_i:U_i\\to Z$ with $f_i|_{U_i\\cap U_j}=f_j|_{U_i\\cap U_j}$ for all $i,j$, there is a unique morphism $f:X\\to Z$ with $f|_{U_i}=f_i$ for all $i$. In particular two morphisms $X\\to Z$ whose restrictions to every $U_i$ agree are equal.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Section 26.14 (Tag 01JA, glueing schemes; the morphisms $g_i$ glue as in the proof of Lemma 26.15.4, Tag 01JJ) together with Sheaves, Lemma 6.33.1 (Tag 04TN, glueing maps of sheaves) and Tag 00AN (label lemma-mapping-property-glue)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "glue morphisms of schemes defined on an open cover that agree on intersections",
+   "results": "AlgebraicGeometry.Scheme.Cover.glueMorphisms (Mathlib.AlgebraicGeometry.Gluing), Scheme.OpenCover.glueMorphismsOverOfLocallyDirected, Scheme.OpenCover.glueMorphismsOfLocallyDirected (Mathlib.AlgebraicGeometry.Cover.Directed)",
+   "date": "2026-10-09",
+   "verdict": "match: Scheme.Cover.glueMorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Cover.hom_ext",
+   "results": "Scheme.Cover.hom_ext (𝒰 : X.OpenCover) (f₁ f₂ : X ⟶ Y) (h : ∀ x, 𝒰.f x ≫ f₁ = 𝒰.f x ≫ f₂) : f₁ = f₂ (Mathlib.AlgebraicGeometry.Gluing)",
+   "date": "2026-10-09",
+   "verdict": "match (uniqueness)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def glueMorphisms\\|theorem hom_ext\\|theorem ι_glueMorphisms\\|lemma hom_ext_of_forall' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Gluing.lean",
+   "results": "Gluing.lean:448 def glueMorphisms (𝒰 : OpenCover X) (f : ∀ x, 𝒰.X x ⟶ Y) (hf : ∀ x y, pullback.fst ≫ f x = pullback.snd ≫ f y); :460 theorem hom_ext; :471 theorem ι_glueMorphisms (𝒰.f x ≫ glueMorphisms f hf = f x); :483 lemma hom_ext_of_forall",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Cover.glueMorphisms",
+  "file": "Mathlib/AlgebraicGeometry/Gluing.lean",
+  "how": "specializes in one line: for the open cover by the U_i (pullback of two open immersions = intersection), `glueMorphisms` gives f, `ι_glueMorphisms` (line 471) gives f|U_i = f_i, and `Scheme.Cover.hom_ext` (line 460) gives uniqueness"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-space-functor-of-points",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
