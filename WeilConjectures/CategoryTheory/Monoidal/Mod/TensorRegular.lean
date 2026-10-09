@@ -45,6 +45,7 @@ def unitRight (P : Mod C A) : P ⟶ (tensorRight A A).obj P :=
     rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange]
     simp)
 
+/-- The unit `p ↦ p ⊗ 1` is a section of the right action: `P → P ⊗ A → P` is the identity. -/
 lemma unitRight_rightActHom (P : Mod C A) : unitRight P ≫ rightActHom P = 𝟙 P := by
   ext
   change ((ρ_ P.X).inv ≫ P.X ◁ η[A]) ≫ (β_ P.X A).hom ≫ act P.X = 𝟙 _
@@ -68,13 +69,16 @@ lemma whiskerLeft_mul_rightAct (P : Mod C A) :
         simp only [rightAct, comp_whiskerRight, Category.assoc,
           BraidedCategory.braiding_naturality_left_assoc, h]
 
+/-- The right action is natural: `P ⊗ A → Q ⊗ A → Q` equals `P ⊗ A → P → Q`. -/
 lemma rightActHom_naturality {P Q : Mod C A} (f : P ⟶ Q) :
     (tensorRight A A).map f ≫ rightActHom Q = rightActHom P ≫ f := by
   ext
   change f.hom ▷ A ≫ (β_ Q.X A).hom ≫ act Q.X = ((β_ P.X A).hom ≫ act P.X) ≫ f.hom
   simp only [BraidedCategory.braiding_naturality_left_assoc, Category.assoc, act_hom]
 
-/-- The right action coequalizes the two maps `P ⊗ (A ⊗ A) ⇉ P ⊗ A`. -/
+/-- The right action coequalizes the two maps `P ⊗ (A ⊗ A) ⇉ P ⊗ A`:
+`P ⊗ (A ⊗ A) → P ⊗ A → P` is the same through the multiplication of `A` and through the action
+on `P`. -/
 lemma tensorRightMap_act_comp_rightActHom (P : Mod C A) :
     (tensorRightMap A (act (regular A).X)).app P ≫ rightActHom P =
       (tensorRightRightAct A A).app P ≫ rightActHom P := by
@@ -154,37 +158,6 @@ action. -/
 noncomputable def tensorLeftRegularIso : tensorLeft (regular A) ≅ 𝟭 (Mod C A) :=
   asIso tensorLeftRegularHom
 
-lemma tensorLeftMap_comp' {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
-    tensorLeftMap (f ≫ g) = tensorLeftMap f ≫ tensorLeftMap g := by
-  rw [tensorLeftMap, tensorLeftMap, tensorLeftMap, tensorLeftDiagramMap_comp, Functor.map_comp,
-    Functor.whiskerRight_comp]
-
-lemma tensorLeftMap_id' (M : Mod C A) : tensorLeftMap (𝟙 M) = 𝟙 _ := by
-  rw [tensorLeftMap, tensorLeftDiagramMap_id, CategoryTheory.Functor.map_id,
-    Functor.whiskerRight_id']
-  rfl
-
-section Additive
-
-variable [Preadditive C] [MonoidalPreadditive C]
-
-/-- The tensor product `- ⊗_A M` is additive in `M`. -/
-lemma tensorLeftMap_add {M M' : Mod C A} (f g : M ⟶ M') :
-    tensorLeftMap (f + g) = tensorLeftMap f + tensorLeftMap g := by
-  ext P : 2
-  refine colimit.hom_ext fun j ↦ ?_
-  simp only [tensorLeftMap, Functor.whiskerRight_app, colim_map, ι_colimMap, NatTrans.app_add,
-    Preadditive.comp_add]
-  cases j
-  · ext
-    change P.X ◁ A ◁ (f.hom + g.hom) ≫ _ = P.X ◁ A ◁ f.hom ≫ _ + P.X ◁ A ◁ g.hom ≫ _
-    simp [MonoidalPreadditive.whiskerLeft_add]
-  · ext
-    change P.X ◁ (f.hom + g.hom) ≫ _ = P.X ◁ f.hom ≫ _ + P.X ◁ g.hom ≫ _
-    simp [MonoidalPreadditive.whiskerLeft_add]
-
-end Additive
-
 end TensorLeft
 
 section Hom
@@ -199,17 +172,6 @@ attribute [local instance] Mod.isGrothendieckAbelian Abelian.hasFiniteBiproducts
 noncomputable def ihomRegularIso : ihom (regular A) ≅ 𝟭 (Mod C A) :=
   (ihomAdjunction (regular A)).rightAdjointUniq
     (Adjunction.id.ofNatIsoLeft tensorLeftRegularIso.symm)
-
-lemma ihomMap_add {M M' : Mod C A} (f g : M ⟶ M') : ihomMap (f + g) = ihomMap f + ihomMap g := by
-  ext N
-  simp [ihomMap, tensorLeftMap_add, Preadditive.add_comp, Preadditive.comp_add]
-
-lemma ihomMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
-    ihomMap (f ≫ g) = ihomMap g ≫ ihomMap f := by
-  rw [ihomMap, ihomMap, ihomMap, conjugateEquiv_comp, tensorLeftMap_comp']
-
-lemma ihomMap_id (M : Mod C A) : ihomMap (𝟙 M) = 𝟙 _ := by
-  rw [ihomMap, tensorLeftMap_id', conjugateEquiv_id]
 
 /-- `Hom_A(-, ·)` as an additive map on morphisms. -/
 @[simps]

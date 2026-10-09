@@ -190,6 +190,37 @@ lemma tensorLeftDiagramMap_id (M : Mod C A) : tensorLeftDiagramMap A (𝟙 M) = 
       (tensorRightMap_id _)
   · exact tensorRightMap_id _
 
+lemma tensorLeftMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    tensorLeftMap (f ≫ g) = tensorLeftMap f ≫ tensorLeftMap g := by
+  rw [tensorLeftMap, tensorLeftMap, tensorLeftMap, tensorLeftDiagramMap_comp, Functor.map_comp,
+    Functor.whiskerRight_comp]
+
+lemma tensorLeftMap_id (M : Mod C A) : tensorLeftMap (𝟙 M) = 𝟙 _ := by
+  rw [tensorLeftMap, tensorLeftDiagramMap_id, CategoryTheory.Functor.map_id,
+    Functor.whiskerRight_id']
+  rfl
+
+section Additive
+
+variable [Preadditive C] [MonoidalPreadditive C]
+
+/-- The tensor product `- ⊗_A M` is additive in `M`. -/
+lemma tensorLeftMap_add {M M' : Mod C A} (f g : M ⟶ M') :
+    tensorLeftMap (f + g) = tensorLeftMap f + tensorLeftMap g := by
+  ext P : 2
+  refine colimit.hom_ext fun j ↦ ?_
+  simp only [tensorLeftMap, Functor.whiskerRight_app, colim_map, ι_colimMap, NatTrans.app_add,
+    Preadditive.comp_add]
+  cases j
+  · ext
+    change P.X ◁ A ◁ (f.hom + g.hom) ≫ _ = P.X ◁ A ◁ f.hom ≫ _ + P.X ◁ A ◁ g.hom ≫ _
+    simp [MonoidalPreadditive.whiskerLeft_add]
+  · ext
+    change P.X ◁ (f.hom + g.hom) ≫ _ = P.X ◁ f.hom ≫ _ + P.X ◁ g.hom ≫ _
+    simp [MonoidalPreadditive.whiskerLeft_add]
+
+end Additive
+
 /-- An isomorphism `M ≅ M'` induces `- ⊗_A M ≅ - ⊗_A M'`. -/
 noncomputable def tensorLeftMapIso {M M' : Mod C A} (e : M ≅ M') :
     tensorLeft M ≅ tensorLeft M' where
@@ -252,6 +283,18 @@ noncomputable def ihomMapIso {M M' : Mod C A} (e : M ≅ M') : ihom M' ≅ ihom 
 noncomputable def ihomMap {M M' : Mod C A} (f : M ⟶ M') : ihom M' ⟶ ihom M :=
   conjugateEquiv (ihomAdjunction M') (ihomAdjunction M) (tensorLeftMap f)
 
+
+lemma ihomMap_add {M M' : Mod C A} (f g : M ⟶ M') : ihomMap (f + g) = ihomMap f + ihomMap g := by
+  ext N
+  simp [ihomMap, tensorLeftMap_add, Preadditive.add_comp, Preadditive.comp_add]
+
+lemma ihomMap_comp {M M' M'' : Mod C A} (f : M ⟶ M') (g : M' ⟶ M'') :
+    ihomMap (f ≫ g) = ihomMap g ≫ ihomMap f := by
+  rw [ihomMap, ihomMap, ihomMap, conjugateEquiv_comp, tensorLeftMap_comp]
+
+lemma ihomMap_id (M : Mod C A) : ihomMap (𝟙 M) = 𝟙 _ := by
+  rw [ihomMap, tensorLeftMap_id, conjugateEquiv_id]
+
 end Hom
 
 section Functor
@@ -264,8 +307,8 @@ variable {D : Type u'} [Category.{v'} D] [MonoidalCategory D] {B : D} [MonObj B]
   {G : C ⥤ D} [G.LaxMonoidal] [∀ X Y : C, IsIso (Functor.LaxMonoidal.μ G X Y)]
   (ρ : B ⟶ G.obj A) [IsMonHom ρ]
 
-/-- The functor on modules induced by a lax monoidal endofunctor `G` and a monoid morphism
-`ρ : A ⟶ G A`. -/
+/-- The functor on modules induced by a lax monoidal functor `G : C ⥤ D` and a monoid morphism
+`ρ : B ⟶ G A`. -/
 noncomputable abbrev mapModComap : Mod C A ⥤ Mod D B :=
   G.mapMod A ⋙ comap ρ
 
@@ -293,7 +336,7 @@ noncomputable def tensorRightCompMapModComapIso (X : C) :
 
 variable [BraidedCategory C] [IsCommMonObj A] [BraidedCategory D] [IsCommMonObj B] [IsIso ρ]
 
-/-- The isomorphism `G (A ⊗ M) ≅ A ⊗ G M`, from the inverses of `μ` and of `ρ`. -/
+/-- The isomorphism `G (A ⊗ M) ≅ B ⊗ G M`, from the inverses of `μ` and of `ρ`. -/
 noncomputable def mapTensorIso (M : C) : G.obj (A ⊗ M) ≅ B ⊗ G.obj M :=
   (asIso (Functor.LaxMonoidal.μ G A M)).symm ≪≫ whiskerRightIso (asIso ρ).symm _
 

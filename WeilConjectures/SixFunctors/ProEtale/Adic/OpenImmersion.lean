@@ -253,7 +253,6 @@ lemma adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowe
     CategoryTheory.Functor.map_id, Category.comp_id]
   exact NatIso.isIso_inv_app _ _
 
-
 /-- **The comparison `j_! M ⟶ j_* M` is a monomorphism.** Its kernel `K` restricts to zero on
 `U`, `j^*` of the comparison being invertible, and its underlying sheaf is a subsheaf of the
 extension by zero of the underlying sheaf of `M`; such a subsheaf vanishes
