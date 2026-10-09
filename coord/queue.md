@@ -2,7 +2,7 @@
 
 566 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (546)
+## Stage 1: nodes to split (545)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-projective-space-standard-charts` | 1005 | none |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1005 | none |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1005 | none |
-| `lem-weil-pbc-reduction-universal-homeomorphism` | 1005 | none |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1005 | none |
 | `lem-weil-pbc-zero-dim-integral-point` | 1005 | none |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
@@ -553,7 +552,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (20)
+## Stage 2: nodes to state (21)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -569,6 +568,7 @@
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
+| `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -578,7 +578,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 561 nodes that wait for stage 1, 146 nodes that wait for a statement dependency.
+Not open yet: 560 nodes that wait for stage 1, 146 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

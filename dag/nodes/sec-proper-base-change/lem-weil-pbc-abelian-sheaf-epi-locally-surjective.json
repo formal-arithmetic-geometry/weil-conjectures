@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+ "kind": "statement",
+ "title": "Epimorphisms of abelian etale sheaves are exactly the locally surjective maps",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], and $\\varphi:\\mathcal G\\to\\mathcal H$ a morphism in the abelian category $\\Ab(X_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Then $\\varphi$ is an epimorphism of $\\Ab(X_{\\Et})$ if and only if it is locally surjective: for every object $U$ of $X_{\\Et}$ and every $h\\in\\mathcal H(U)$ there are a covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ in $X_{\\Et}$ and sections $g_j\\in\\mathcal G(V_j)$ with $\\varphi_{V_j}(g_j)=h|_{V_j}$ for all $j\\in J$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma Tag 03CN (lemma-abelian-abelian), part (5) (surjective in the abelian category iff surjective as a map of sheaves), with literature/stacks-project/sites.tex Definition sheaves-injective-surjective (surjective map of sheaves = locally surjective, line 2240) and Lemma Tag 00WN (lemma-mono-epi-sheaves) for sheaves of sets"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an epimorphism of sheaves of abelian groups on a site is locally surjective: every section lifts on a covering",
+   "results": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono), Sheaf.epi_of_isLocallySurjective('), Sheaf.isLocallySurjective_iff_epi (sheaves of types), Sheaf.IsLocallySurjective, Sheaf.locallySurjective, LightCondMod.epi_iff_locallySurjective_on_lightProfinite",
+   "date": "2026-10-09",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism of sheaves on a Grothendieck site iff locally surjective (image sieve is covering)",
+   "results": "Sheaf.epi_of_isLocallySurjective', Sheaf.epi_of_isLocallySurjective, Sheaf.isLocallySurjective_iff_epi, Sheaf.isLocallySurjective_iff_epi', the functorial locally surjective/injective factorization, Sheaf.locallySurjective, Condensed.epi_iff_locallySurjective_on_compHaus",
+   "date": "2026-10-09",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Epi",
+   "results": "Sheaf.epi_of_isLocallySurjective', Sheaf.isLocallySurjective_iff_epi, Sheaf.epi_of_isLocallySurjective, Sheaf.isLocallySurjective_iff_epi' : [HasFunctorialSurjectiveInjectiveFactorization A] [J.WEqualsLocallyBijective A] [HasSheafify J A] [J.HasSheafCompose (forget A)] [Balanced (Sheaf J A)] (φ : F ⟶ G) : IsLocallySurjective φ ↔ Epi φ",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isLocallySurjective_iff_epi\\|epi_of_isLocallySurjective' Mathlib/CategoryTheory/Sites; sed -n 115,140p Mathlib/CategoryTheory/Sites/EpiMono.lean; sed -n 45,100p Mathlib/CategoryTheory/Sites/LocallySurjective.lean; grep -n 'smallGrothendieckTopology_eq_toGrothendieck_smallPretopology\\|mem_toGrothendieck_smallPretopology' Mathlib/AlgebraicGeometry/Sites/Small.lean",
+   "results": "EpiMono.lean:124 isLocallySurjective_iff_epi' (read); LocallySurjective.lean:49 imageSieve (the sieve of g : V ⟶ U with G.map g.op s in the image), :94 Presheaf.IsLocallySurjective (imageSieve ∈ J U), :329 Sheaf.IsLocallySurjective; Small.lean:203 smallGrothendieckTopology_eq_toGrothendieck_smallPretopology, :234 mem_toGrothendieck_smallPretopology (a sieve covers iff every point of X is hit by an etale arrow of the sieve)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi'",
+  "file": "Mathlib/CategoryTheory/Sites/EpiMono.lean",
+  "how": "specializes in one line, plus one lemma for the covering form: take J = X.smallEtaleTopology on X.Etale and A = AddCommGrpCat (Ab(X_et) as in def-weil-pbc-abelian-etale-sheaves); then IsLocallySurjective φ ↔ Epi φ, where IsLocallySurjective φ says (LocallySurjective.lean:94) that the image sieve of every h ∈ H(U) is a covering sieve; by smallGrothendieckTopology_eq_toGrothendieck_smallPretopology and mem_toGrothendieck_smallPretopology (Mathlib/AlgebraicGeometry/Sites/Small.lean:203,234) a sieve is covering iff it contains a jointly surjective family of etale arrows, i.e. a covering {V_j → U} with lifts g_j, which is the node's form (conversely such a family generates a sieve contained in the image sieve). Instances: Balanced from sheafIsAbelian, HasSheafify from Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:112, HasSheafCompose (forget _) from hasSheafCompose_of_preservesLimitsOfSize (Sites/Whiskering.lean:161) with preservesLimitsOfSize_shrink, WEqualsLocallyBijective from the instance at Sites/LocallyBijective.lean:153. Universe: the source repository applies exactly this lemma to the small etale site with A = AddCommGrpCat.{u+1} (WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean:110, PointCohomology.lean:97; HasSheafCompose instance WeilConjectures/AlgebraicGeometry/Sites/RootsOfUnity.lean:242)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ses-cech-h1-surjective",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-ses-cech-h1-surjective; match verified by the lead against the Mathlib source"
+ }
+}

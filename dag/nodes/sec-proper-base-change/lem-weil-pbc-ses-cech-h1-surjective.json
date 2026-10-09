@@ -12,9 +12,86 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (what exactness gives).** Write $\\iota:\\mathcal F\\to\\mathcal G$ and $\\varphi:\\mathcal G\\to\\mathcal H$ for the maps of the sequence. Exactness of $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal H\\to0$ in the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] means: $\\varphi$ is an epimorphism (exactness at $\\mathcal H$), and $\\iota$ is a kernel of $\\varphi$ (exactness at $\\mathcal F$ and $\\mathcal G$). Kernels of abelian sheaves are computed sectionwise [lem-weil-pbc-sheafification-exact, part 1], so for every object $V$ of $X_{\\Et}$ the sequence $0\\to\\mathcal F(V)\\xrightarrow{\\iota_V}\\mathcal G(V)\\xrightarrow{\\varphi_V}\\mathcal H(V)$ is exact: $\\iota_V$ is injective and its image is $\\ker\\varphi_V$. In particular $\\varphi_V\\circ\\iota_V=0$.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: 'Since s_i lifts s we see that s_{i_0i_1} ∈ F(U_{i_0} ×_U U_{i_1})' (kernel computed sectionwise); with sites-modules.tex Lemma Tag 03CN (lemma-abelian-abelian) part (2)"
+   }
+  },
+  {
+   "text": "**Step 2 (local lifts).** Let $h\\in\\mathcal H(U)$. Since $\\varphi$ is an epimorphism of $\\Ab(X_{\\Et})$ (Step 1), it is locally surjective [lem-weil-pbc-abelian-sheaf-epi-locally-surjective]: there are a covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ in $X_{\\Et}$ and sections $g'_j\\in\\mathcal G(V_j)$ with $\\varphi_{V_j}(g'_j)=h|_{V_j}$ for all $j$.",
+   "uses": [
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: 'Since we can certainly find a covering such that (b) holds' (b: s|_{U_i} is the image of a section s_i ∈ G(U_i)); sites-modules.tex Lemma Tag 03CN part (5)"
+   }
+  },
+  {
+   "text": "**Step 3 (refinement into $\\Sigma$).** As $\\Sigma$ is cofinal, there is $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}\\in\\Sigma$ refining $\\{V_j\\to U\\}$: for each $i$ choose $j(i)\\in J$ and a morphism $a_i:U_i\\to V_{j(i)}$ over $U$. Put $g_i=\\mathcal G(a_i)(g'_{j(i)})=g'_{j(i)}|_{U_i}\\in\\mathcal G(U_i)$. By naturality of $\\varphi$ and functoriality of $\\mathcal H$ (the composite $U_i\\xrightarrow{a_i}V_{j(i)}\\to U$ is the structure map of $U_i$), $\\varphi_{U_i}(g_i)=\\mathcal H(a_i)(\\varphi_{V_{j(i)}}(g'_{j(i)}))=\\mathcal H(a_i)(h|_{V_{j(i)}})=h|_{U_i}$. So $\\mathcal U$ satisfies both (a) $\\check H^1(\\mathcal U,\\mathcal F)=0$ (hypothesis on $\\Sigma$) and (b) each $h|_{U_i}$ lifts to $g_i$.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: 'Choose a covering U = {U_i → U} such that (a) Ȟ^1(U,F)=0 and (b) ... it follows from the assumptions of the lemma that we can find a covering such that (a) and (b) both hold'"
+   }
+  },
+  {
+   "text": "**Step 4 (the Cech 1-cocycle of differences).** Write $U_{i_0i_1}=U_{i_0}\\times_UU_{i_1}$, $U_{i_0i_1i_2}=U_{i_0}\\times_UU_{i_1}\\times_UU_{i_2}$, and restrictions along the projections. For $(i_0,i_1)\\in I^2$ put $\\gamma_{i_0i_1}=g_{i_1}|_{U_{i_0i_1}}-g_{i_0}|_{U_{i_0i_1}}\\in\\mathcal G(U_{i_0i_1})$. Then $\\varphi(\\gamma_{i_0i_1})=h|_{U_{i_0i_1}}-h|_{U_{i_0i_1}}=0$ by Step 3 and naturality, so by Step 1 there is a unique $c_{i_0i_1}\\in\\mathcal F(U_{i_0i_1})$ with $\\iota(c_{i_0i_1})=\\gamma_{i_0i_1}$; $c=(c_{i_0i_1})\\in\\check{\\mathcal C}^1(\\mathcal U,\\mathcal F)$ [def-weil-pbc-cech-complex]. It is a cocycle: by the formula for the differential, $d(c)_{i_0i_1i_2}=c_{i_1i_2}|-c_{i_0i_2}|+c_{i_0i_1}|$ on $U_{i_0i_1i_2}$, and its image under the injective map $\\iota_{U_{i_0i_1i_2}}$ is, restriction commuting with $\\iota$ and restrictions composing, $(g_{i_2}-g_{i_1})-(g_{i_2}-g_{i_0})+(g_{i_1}-g_{i_0})=0$ (all restricted to $U_{i_0i_1i_2}$); hence $d(c)=0$.",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: 'Consider the sections s_{i_0i_1} = s_{i_1}|_{U_{i_0}×_U U_{i_1}} − s_{i_0}|_{U_{i_0}×_U U_{i_1}}. Since s_i lifts s we see that s_{i_0i_1} ∈ F(U_{i_0}×_U U_{i_1})' (the cocycle identity is left implicit there)"
+   }
+  },
+  {
+   "text": "**Step 5 (correction by a 0-cochain).** Since $\\check H^1(\\mathcal U,\\mathcal F)=H^1(\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F))=0$ [def-weil-pbc-cech-complex], the cocycle $c$ is a coboundary: there is $t=(t_i)\\in\\check{\\mathcal C}^0(\\mathcal U,\\mathcal F)=\\prod_i\\mathcal F(U_i)$ with $c=d(t)$, i.e. $c_{i_0i_1}=t_{i_1}|_{U_{i_0i_1}}-t_{i_0}|_{U_{i_0i_1}}$. Put $\\tilde g_i=g_i-\\iota(t_i)\\in\\mathcal G(U_i)$. Applying $\\iota$ (which commutes with restriction) gives $g_{i_1}|-g_{i_0}|=\\iota(t_{i_1})|-\\iota(t_{i_0})|$ on $U_{i_0i_1}$, i.e. $\\tilde g_{i_1}|_{U_{i_0i_1}}=\\tilde g_{i_0}|_{U_{i_0i_1}}$ for all $(i_0,i_1)\\in I^2$; and $\\varphi(\\tilde g_i)=\\varphi(g_i)-\\varphi\\iota(t_i)=h|_{U_i}$ since $\\varphi\\circ\\iota=0$ (Step 1).",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: 'By the vanishing of Ȟ^1(U,F) we can find sections t_i ∈ F(U_i) such that s_{i_0i_1} = t_{i_1}| − t_{i_0}|. Then clearly the sections s_i − t_i satisfy the sheaf condition'"
+   }
+  },
+  {
+   "text": "**Step 6 (gluing).** $\\mathcal U$ is a covering of $U$ in $X_{\\Et}$ and $\\mathcal G$ is a sheaf [def-weil-pbc-abelian-etale-sheaves]: $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i_0,i_1}\\mathcal G(U_{i_0i_1})$ is an equalizer. By Step 5 the family $(\\tilde g_i)$ lies in the equalizer, so there is $g\\in\\mathcal G(U)$ with $g|_{U_i}=\\tilde g_i$ for all $i$. Then $\\varphi_U(g)|_{U_i}=\\varphi_{U_i}(\\tilde g_i)=h|_{U_i}$ for all $i$, and since $\\mathcal H$ is a sheaf, the map $\\mathcal H(U)\\to\\prod_i\\mathcal H(U_i)$ is injective, so $\\varphi_U(g)=h$. As $h$ was arbitrary, $\\mathcal G(U)\\to\\mathcal H(U)$ is surjective.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof: '... and glue to a section of G over U which maps to s. Hence we win.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +136,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-ses-cech-h1-surjective",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks sites-cohomology Lemma 03F8 (stated there for any site; here for the small etale site, U an object, Sigma a cofinal set of coverings of U with vanishing Cech H^1 of F): kept unchanged; stmt_deps unchanged. Proof written from Stacks' proof in six steps: (1) exactness gives epi and sectionwise kernel (Mathlib leaf lem-weil-pbc-sheafification-exact, part 1); (2) local lifts by the new Mathlib leaf lem-weil-pbc-abelian-sheaf-epi-locally-surjective (Stacks 03CN(5)/00WN; Sheaf.isLocallySurjective_iff_epi' with the small-pretopology covering form); (3) refinement into Sigma by restriction (elementary); (4) the Cech 1-cocycle of differences, cocycle identity written out (elementary); (5) correction by a 0-cochain from Ȟ^1=0 (elementary); (6) gluing by the sheaf condition of G and identification of the image by separatedness of H (elementary). Steps 3-6 are leaves (elementary instances of def-weil-pbc-cech-complex and def-weil-pbc-abelian-etale-sheaves). Mathlib has no version of the lemma (Sites/NonabelianCohomology/H1.lean lists it as TODO; Sites/SheafCohomology/Cech.lean defines cechComplexFunctor only). Source repository: TopCat.Presheaf.surjective_app_of_exactAt_cechComplex_one (WeilConjectures/Topology/Sheaves/CechCriterion.lean:231, sorry-free) and TopCat.Sheaf.surjective_app_of_exactAt_cechComplex (:306, sorry-free) are the same lemma for finite open coverings of a topological space, not for the etale site: no attachment. The site Cech declarations of WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean (exists_cechToDerivedSpectralSequence :72 and exists_cechDoubleComplex :100 own sorry; ..._of_enoughInjectives :119 rests on them) concern the spectral sequence, not this lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "six steps along Stacks 03F8 (sectionwise kernel, local lifts by the new epi/locally-surjective leaf (EpiMono.lean:124 with Small.lean:203/234, verified), refinement into Σ, the 1-cocycle of differences, correction by a 0-cochain, gluing); 1 new Mathlib leaf; the source repository has the topological finite-cover analogue only"
+ }
 }
