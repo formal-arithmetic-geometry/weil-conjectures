@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+ "kind": "statement",
+ "title": "Pushforward along a closed immersion of the products with the powers of an extended ideal",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] with ideal sheaf $\\mathcal J$ [def-sbc-closed-immersion-ideal-sheaf], let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals, and let $\\mathcal I\\mathcal O_Z\\subseteq\\mathcal O_Z$ be the image of $i^*\\mathcal I\\to i^*\\mathcal O_X\\to\\mathcal O_Z$ [def-nagata-extended-ideal, def-pc-module-pullback]. Products $\\mathcal K\\mathcal F$ of a quasi-coherent ideal and a module, the powers $\\mathcal K^n$ and the quotients $\\mathcal F/\\mathcal K\\mathcal F$ are as in [def-weil-pbc-coherent-formal-module] (0). (1) $\\mathcal I\\mathcal O_Z$ is a quasi-coherent sheaf of ideals of $\\mathcal O_Z$, and for every affine open $U=\\operatorname{Spec}R\\subseteq X$ [def-weil-affine-spectrum], with $i^{-1}(U)=\\operatorname{Spec}(R/\\mathcal J(U))$, one has $(\\mathcal I\\mathcal O_Z)(i^{-1}U)=\\mathcal I(U)\\cdot(R/\\mathcal J(U))$, the image of $\\mathcal I(U)$. (2) For every quasi-coherent $\\mathcal O_Z$-module $\\mathcal G$ [pqf-def-coherent] and every $n\\ge1$, $i_*\\big((\\mathcal I\\mathcal O_Z)^n\\mathcal G\\big)=\\mathcal I^n\\,(i_*\\mathcal G)$ as sub-$\\mathcal O_X$-modules of $i_*\\mathcal G$. (3) Consequently, for the quotient map $q:\\mathcal G\\to\\mathcal G/(\\mathcal I\\mathcal O_Z)^n\\mathcal G$, the map $i_*q$ induces an isomorphism $i_*\\mathcal G/\\mathcal I^n(i_*\\mathcal G)\\to i_*\\big(\\mathcal G/(\\mathcal I\\mathcal O_Z)^n\\mathcal G\\big)$, natural in $\\mathcal G$ and compatible, for $m\\ge n$, with the quotient maps from level $m$ to level $n$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968: Coh(X_e, I_e) is identified 'without further mention' with the objects of Coh(X, I) annihilated by K^e, which needs this; the affine description follows Morphisms Lemma 01QO (morphisms-lemma-closed-immersion), Schemes Lemma 01I9 (schemes-lemma-widetilde-pullback: psi^* M~ = (S (x)_R M)~, psi_* N~ = (N_R)~) and Morphisms Lemma 01QY (morphisms-lemma-i-star-equivalence: i_* exact on quasi-coherent modules); Stacks gives no separate lemma (statement assembled by the agent)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-affine-spectrum",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward along closed immersion of I^n times module equals extended ideal power times module",
+   "results": "Scheme.IdealSheafData.ideal_map, IdealSheafData.map_vanishingIdeal, IdealSheafData.ker_fst_of_isClosedImmersion, IdealSheafData.comap_map_le (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial), IsClosedImmersion.instIsIsoSchemeToImage, IsClosedImmersion.toSurjectiveOnStalks, Scheme.Modules.instFaithfulPushforward",
+   "date": "2026-10-10",
+   "verdict": "no match: ideal sheaves only, no products of an ideal sheaf with a module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a quasi-coherent ideal sheaf along a closed immersion: extended ideal I O_Z, and pushforward of (I O_Z)^n M equals I^n times pushforward of M",
+   "results": "IdealSheafData.ideal_map, le_map_comap, comap_map_le, map_ideal', IdealSheafData.map, map_comp: the pullback ideal sheaf IdealSheafData.comap (Functorial.lean:39, defined as the kernel of the base-changed closed immersion, i.e. the extended ideal I O_Z for quasi-coherent I) exists, but nothing on products with modules or their pushforward",
+   "date": "2026-10-10",
+   "verdict": "no match (IdealSheafData.comap is the notion of (1) without the affine formula as stated)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ideal.*smul|Ideal.map.*• |IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/",
+   "results": "Modules/Tilde.lean only IsQuasicoherent of tilde and of restrictions along open immersions; IdealSheaf/Basic.lean, Functorial.lean, Subscheme.lean work with ideal sheaves alone; no product I*F of an ideal sheaf with a sheaf of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

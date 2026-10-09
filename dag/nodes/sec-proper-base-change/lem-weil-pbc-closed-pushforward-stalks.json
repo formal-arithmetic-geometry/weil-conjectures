@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-closed-pushforward-stalks",
+ "kind": "statement",
+ "title": "Stalks of the pushforward of a module along a closed immersion",
+ "statement": "Let $i:Z\\to X$ be a morphism of schemes [def-pc-scheme] whose underlying continuous map is a homeomorphism of $Z$ onto a closed subset $i(Z)\\subseteq X$ (for instance a closed immersion [def-weil-closed-immersion]), with stalk maps $i^\\sharp_z:\\mathcal O_{X,i(z)}\\to\\mathcal O_{Z,z}$. Let $\\mathcal G$ be an $\\mathcal O_Z$-module and $i_*\\mathcal G$ its pushforward, $(i_*\\mathcal G)(V)=\\mathcal G(i^{-1}V)$ for $V\\subseteq X$ open [def-pc-module-pullback]; stalks and germs are as in [def-weil-pbc-module-stalk]. (1) For every $x\\in X\\setminus i(Z)$ the stalk $(i_*\\mathcal G)_x$ is $0$. (2) For every $z\\in Z$ the map $c_z:(i_*\\mathcal G)_{i(z)}\\to\\mathcal G_z$, $s_{i(z)}\\mapsto s_z$ (for $V\\ni i(z)$ open and $s\\in(i_*\\mathcal G)(V)=\\mathcal G(i^{-1}V)$) is well defined and bijective, and it is $\\mathcal O_{X,i(z)}$-linear when $\\mathcal G_z$ is regarded as an $\\mathcal O_{X,i(z)}$-module through $i^\\sharp_z$; $c_z$ is natural in $\\mathcal G$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00AE (sheaves-lemma-stalks-closed-pushforward), stated there for the inclusion of a closed subset and for sheaves of sets, abelian groups or algebraic structures; the linearity over O_{X,i(z)} is the germ computation used in the proof of Modules, Lemma 08KS (modules-lemma-i-star-equivalence), literature/stacks-project/modules.tex"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of pushforward of a sheaf along a closed embedding at a point outside the image is trivial",
+   "results": "TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing (Mathlib.Topology.Sheaves.Stalks), TopCat.Sheaf.pushforward_sheaf_of_sheaf, skyscraperPresheafStalkOfNotSpecializes (Mathlib.Topology.Sheaves.Skyscraper), Scheme.Modules.restrictStalkNatIso (open immersions)",
+   "date": "2026-10-10",
+   "verdict": "generalization of part (2) only: stalkPushforward_iso_of_isInducing (Stalks.lean:220) says that for an inducing continuous map f and any presheaf F with values in a category with colimits, the map (f_* F)_{f x} -> F_x is an isomorphism; part (1) (vanishing off the closed image) and the O_{X,i(z)}-linearity are not there"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the pushforward sheaf i_* F at a point not in the closed subset Z is zero (terminal)",
+   "results": "skyscraperPresheafStalkOfNotSpecializesIsTerminal, skyscraperPresheafStalkOfNotSpecializes, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app (Mathlib.Topology.Sheaves.Skyscraper), RingedSpace.exists_res_eq_zero_of_germ_eq_zero: skyscraper sheaves only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean */*.lean | grep -i 'IsClosed|closure|notMem|∉|isZero|IsTerminal'; grep -rn 'IsClosedImmersion|IsClosedEmbedding' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "only Skyscraper.lean (stalks of skyscraper presheaves off the closure of the point) and Abelian.lean isZero_iff_stalkFunctor_obj_isZero; no statement about stalks of a pushforward along a closed embedding off its image, no closed-embedding API in Topology/Sheaves or for sheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match (part (2) is stalkPushforward_iso_of_isInducing, Mathlib/Topology/Sheaves/Stalks.lean line 220)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+ "kind": "statement",
+ "title": "Pushforward of modules along a closed immersion is fully faithful",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], and let $i_*:\\mathrm{Mod}(\\mathcal O_Z)\\to\\mathrm{Mod}(\\mathcal O_X)$ and $i^*$ be the pushforward and pullback of modules [def-pc-module-pullback], with the adjunction $i^*\\dashv i_*$. Then for every $\\mathcal O_Z$-module $\\mathcal G$ the counit $\\varepsilon_{\\mathcal G}:i^*i_*\\mathcal G\\to\\mathcal G$ is an isomorphism. Consequently $i_*$ is fully faithful: for all $\\mathcal O_Z$-modules $\\mathcal G,\\mathcal G'$ the map $\\operatorname{Hom}_{\\mathcal O_Z}(\\mathcal G,\\mathcal G')\\to\\operatorname{Hom}_{\\mathcal O_X}(i_*\\mathcal G,i_*\\mathcal G')$, $\\varphi\\mapsto i_*\\varphi$, is bijective.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Sheaves of Modules, Lemma 08KS (modules-lemma-i-star-equivalence), the claim that i^*i_*F -> F is an isomorphism (checked on stalks via Sheaves Lemmas 0098 sheaves-lemma-stalk-pullback-modules and 00AE sheaves-lemma-stalks-closed-pushforward) and 'It follows that i_* is fully faithful'; quoted for schemes in Morphisms, Lemma 01QY (morphisms-lemma-i-star-equivalence), literature/stacks-project/morphisms.tex"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward of sheaves of modules along a closed immersion is fully faithful",
+   "results": "Scheme.Modules.instFaithfulPushforward, Scheme.Modules.instFullPushforward (both [IsOpenImmersion f], Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pushforward, Scheme.Modules.pushforward, Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no match (only open immersions)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a closed immersion of schemes, pushforward of O_Z-modules is fully faithful; counit i^* i_* F to F is an isomorphism",
+   "results": "Scheme.Modules.instFullPushforward, restrictFunctorAdjCounitIso, instIsIsoFunctorCounitRestrictAdjunction, restrictAdjunction, restrictAdjunction_counit_app_app: all for open immersions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "pushforward, instIsRightAdjointPushforward, instFaithfulPushforward and instFullPushforward [IsOpenImmersion f], pullbackPushforwardAdjunction (any f), restrictAdjunction, pushforwardId, pushforwardComp, instAdditivePushforward, pushforward_obj_obj, pushforward_map_app",
+   "date": "2026-10-10",
+   "verdict": "no match: no closed-immersion instance"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Full\\b|Faithful|FullyFaithful|IsClosedImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "only Tilde.lean (modulesSpecToSheaf, tilde.functor fully faithful); IsClosedImmersion does not occur in AlgebraicGeometry/Modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
