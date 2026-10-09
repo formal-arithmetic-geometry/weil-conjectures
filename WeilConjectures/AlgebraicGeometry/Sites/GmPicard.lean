@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
+public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
@@ -34,9 +35,8 @@ All three classify torsors: an invertible module `L` gives the `𝔾ₘ`-torsor 
   the canonical isomorphism of groups `Pic(X) ≃+ H¹(X_Zar, 𝒪_Xˣ)`, `L ↦ [Isom(𝒪_X, L)]`
   (additivity: `AlgebraicGeometry.Scheme.Pic.toH1Units_mul`).
 - `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup` and
-  `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`: the canonical map
-  `Pic(X) ≃+ H¹(X_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_X, L)]`. Its additivity
-  `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup_mul` is `sorry`.
+  `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`: the canonical isomorphism
+  `Pic(X) ≃+ H¹(X_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_X, L)]`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`: Hilbert 90,
   `Pic(X) ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`.
 - `AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`,
@@ -195,16 +195,26 @@ lemma Pic.toCohomologicalPicardGroup_apply (L : X.Pic) :
         L.etaleTorsorClass :=
   rfl
 
-/-- **`Pic(X) → H¹(X_ét, 𝔾ₘ)` is additive**: the torsor `Isom(𝒪_X, L ⊗ L')` is the contracted
-product of `Isom(𝒪_X, L)` and `Isom(𝒪_X, L')`, through `(s, s') ↦ s ⊗ s'`, so its class is the
-sum of their classes (`CategoryTheory.Sheaf.Torsor.classH1_eq_add_of_equivariant`). The proof is
-`sorry`: it needs the compatibility of the monoidal structure of the pullback functors
-(`AlgebraicGeometry.Scheme.Modules.pullbackMonoidal`) with their composition.
+/-- **`Pic(X) → H¹(X_ét, 𝔾ₘ)` is additive**: the class of `Isom(𝒪_X, L ⊗ L')` is the sum of the
+classes of `Isom(𝒪_X, L)` and `Isom(𝒪_X, L')`
+(`AlgebraicGeometry.Scheme.Modules.classH1_etaleIsoTorsor_tensorObj`): over the Zariski opens
+where `L` and `L'` have generators `e`, `e'`, the three torsors are trivialised by `e`, `e'` and
+`e ⊗ e'`, whose transition functions multiply.
 (blueprint: `lem-sc-h1-gm-pic`) -/
 theorem Pic.toCohomologicalPicardGroup_mul (L L' : X.Pic) :
     Pic.toCohomologicalPicardGroup X (L * L') =
-      Pic.toCohomologicalPicardGroup X L + Pic.toCohomologicalPicardGroup X L' :=
-  sorry
+      Pic.toCohomologicalPicardGroup X L + Pic.toCohomologicalPicardGroup X L' := by
+  have := Pic.isInvertible L
+  have := Pic.isInvertible L'
+  have := Pic.isInvertible (L * L')
+  rw [Pic.toCohomologicalPicardGroup_apply, Pic.toCohomologicalPicardGroup_apply,
+    Pic.toCohomologicalPicardGroup_apply]
+  change Sheaf.Torsor.classH1 _ _ ⟦Modules.etaleIsoTorsor
+      ((fromSkeleton X.Modules).obj (L * L').val)⟧ =
+    Sheaf.Torsor.classH1 _ _ ⟦Modules.etaleIsoTorsor ((fromSkeleton X.Modules).obj L.val)⟧ +
+      Sheaf.Torsor.classH1 _ _ ⟦Modules.etaleIsoTorsor ((fromSkeleton X.Modules).obj L'.val)⟧
+  rw [_root_.Quotient.sound (Modules.etaleIsoTorsor_equiv_of_iso _ _ (Pic.mulIso L L'))]
+  exact Modules.classH1_etaleIsoTorsor_tensorObj _ _ _
 
 /-- **Hilbert 90 for a scheme.** For a scheme `X` there are bijections
 

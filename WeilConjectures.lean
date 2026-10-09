@@ -109,6 +109,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
@@ -181,6 +182,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
+public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Coprod
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Cover
