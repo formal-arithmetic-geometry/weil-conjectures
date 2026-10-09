@@ -13,9 +13,64 @@
   "def-pc-base-change",
   "def-weil-pbc-finite-etale-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First assume that A is Noetherian and I-adically complete. Formal etaleness and invariance of the etale site under nilpotent thickenings lift V uniquely to a compatible system of finite etale covers V_r of Y_r=Y\\times_A Spec(A/I^{r+1}). Finiteness is preserved because it can be checked on a finite affine cover and lifted generators remain finite by Nakayama. Grothendieck existence for finite morphisms over a proper scheme algebraizes the compatible system to a finite morphism U\\to Y with closed fibre V. Its etale locus is open and contains V; since U is proper over the local base, every nonempty closed complement meets the closed fibre, so the locus is all of U. Thus U is finite etale.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-lifting-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2, complete Noetherian case"
+   }
+  },
+  {
+   "text": "If A is a Noetherian henselian G-ring, complete it. The preceding construction gives a finite etale cover after completion. A finite affine cover of Y, finite generators and relations for the cover algebras, overlap maps, and cocycle equations form finite presentation data. Descend this data to a finite type A-algebra inside the completion; after enlarging the stage the descended morphism is finite etale. Henselian G-ring approximation supplies a solution in A congruent modulo I to the completed solution, and hence a finite etale Y-scheme whose closed fibre is V.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-lifting-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2, Noetherian G-ring case"
+   }
+  },
+  {
+   "text": "For a general henselian pair, write A as a filtered colimit of henselian localizations of finite type Noetherian G-ring models. Properness and finite presentation descend to a model Y_j. The finite etale cover V, its affine generators and relations, and all overlap and cocycle equations descend to one common index; finite-presentation descent also identifies the closed-fibre cover after base change. Applying the Noetherian G-ring case at that index and base-changing back to A produces a finite etale lift of V.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2, general henselian-pair case"
+   }
+  },
+  {
+   "text": "The construction is functorial under base change to Y_0, so the resulting finite etale U comes with the required Y_0-isomorphism U\\times_YY_0\\cong V. This is precisely essential surjectivity of the restriction functor.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, Lemma 0GS2, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-lifting-complete",
+  "lem-weil-pbc-finite-etale-lifting-approximation",
+  "lem-weil-pbc-finite-etale-lifting-limit-descent",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +122,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0GS2 essential-surjectivity proof into complete Noetherian algebraization, Noetherian G-ring approximation, and general henselian finite-presentation limit descent. The final step identifies the resulting closed fibre with the given finite etale cover. Each new node has LeanSearch, Loogle/LeanFinder, and Mathlib source grep records; no matching Mathlib theorem exists."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
