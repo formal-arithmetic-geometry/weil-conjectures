@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-abelian-pushout-mono",
+ "kind": "statement",
+ "title": "Pushout of a monomorphism in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] (for instance $\\Ab(X_{\\Et})$ for a scheme $X$ [def-weil-pbc-abelian-etale-sheaves], which has all small colimits), let $a:G\\to G'$ be a monomorphism and $b:G\\to F$ any morphism of $\\mathcal A$, and let $F'=G'\\amalg_GF$ be the pushout of $a$ and $b$ [def-weil-pbc-category-colimit], with canonical maps $a':F\\to F'$ and $b':G'\\to F'$, $a'\\circ b=b'\\circ a$. Then $a':F\\to F'$ is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), proof, first paragraph ('Then we can take F' to be the pushout F' = G' amalg_G F'); the fact used (left implicit by Stacks) is that the pushout of a monomorphism in an abelian category is a monomorphism; with the description of pushouts in Homology, Example 05PJ (label example-fibre-product-pushouts, literature/stacks-project/homology.tex line 700) as Coker((a,-b):G -> G' + F)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in an abelian category the pushout of a monomorphism is a monomorphism",
+   "results": "CategoryTheory.Abelian.mono_pushout_of_mono_g, CategoryTheory.Abelian.mono_pushout_of_mono_f, Abelian.mono_inl_of_isColimit (Mathlib.CategoryTheory.Abelian.Basic); Limits.Types.instMonoPushoutInl/Inr",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono (CategoryTheory.Limits.pushout.inr _ _)",
+   "results": "CategoryTheory.Abelian.mono_pushout_of_mono_f : [Abelian C] [HasPushouts C] (f : X ⟶ Y) (g : X ⟶ Z) [Mono f] : Mono (pushout.inr f g) (Mathlib.CategoryTheory.Abelian.Basic); Limits.Types.instMonoPushoutInr",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushout of a monomorphism along any morphism in an abelian category is a monomorphism",
+   "results": "Abelian.mono_pushout_of_mono_f, Abelian.mono_pushout_of_mono_g, Abelian.instIsStableUnderCobaseChangeMonomorphisms (Mathlib.CategoryTheory.Abelian.Monomorphisms), Abelian.mono_inl_of_factor_thru_epi_mono_factorization",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'mono_pushout_of_mono' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "results": "line 744: instance mono_pushout_of_mono_f [Mono f] : Mono (pushout.inr _ _ : Z ⟶ pushout f g); line 767: instance mono_pushout_of_mono_g [Mono g] : Mono (pushout.inl f g) (section MonoPushout, variable [Limits.HasPushouts C])",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.mono_pushout_of_mono_f",
+  "file": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+  "how": "exact: with f := a (Mono) and g := b, pushout.inr f g : F ⟶ pushout a b is a Mono (line 744; requires HasPushouts, which Ab(X_et) has since it has all small colimits)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-gabber-effacement",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf CategoryTheory.Abelian.mono_pushout_of_mono_f (Abelian/Basic.lean:744); checked."
+ }
+}

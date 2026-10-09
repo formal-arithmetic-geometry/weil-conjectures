@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+ "kind": "statement",
+ "title": "Finite covers kill classes with constant coefficients (Stacks 09ZD (2))",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], $Z\\subseteq X$ a closed subscheme (a closed immersion $Z\\to X$ [def-weil-closed-immersion]), $M$ a finite abelian group with constant sheaf $\\underline M$ [def-weil-pbc-constant-sheaf] on the small etale sites, $q\\ge1$ an integer and $\\xi\\in H^q(Z_{\\Et},\\underline M)$ a class of etale cohomology [def-weil-pbc-etale-cohomology]. Then there exists a morphism $X'\\to X$ which is finite [def-weil-finite-integral-morphism], surjective [def-weil-surjective-morphism] and of finite presentation [def-sbc-locally-finite-presentation] such that the pullback [def-weil-pbc-cohomology-pullback] of $\\xi$ along the projection $X'\\times_XZ\\to Z$ [def-pc-fibre-product] is zero in $H^q((X'\\times_XZ)_{\\Et},\\underline M)$ (the inverse image of the constant sheaf $\\underline M$ on $Z$ being identified with the constant sheaf $\\underline M$ on $X'\\times_XZ$, [lemma-constructible-pullback-constant]).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (2), etale-cohomology.tex line 14467; proof: part (1) (integral surjective X' -> X with H^q(Z', M) = 0 for all closed Z' of X', via Lemma 09ZC lemma-gabber-for-absolutely-algebraically-closed), then write X' as a limit of finite finitely presented X'_i (Limits, Lemma 09YZ, label lemma-integral-limit-finite-and-finite-presentation) and use Lemma 03Q6 (label lemma-directed-colimit-cohomology) to stop at a finite stage."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-cohomology-pullback",
+  "def-pc-fibre-product",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology class vanishes after pullback along finite surjective morphism of affine schemes",
+   "results": "AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, IsFinite.recOn, IsFinite.finite_app, IsFinite.toIsAffineHom (Mathlib.AlgebraicGeometry.Morphisms.Affine/Finite): structural facts on finite morphisms only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale cohomology class on closed subscheme of affine scheme vanishes after pullback to finite surjective morphism of finite presentation",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit (structure-sheaf sections only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Sheaf.H",
+   "results": "no results",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no cohomology of sheaves on the small etale site of a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn -i 'absolutely integrally closed\\|effac\\|Gabber' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean (the site, its points); no etale cohomology of schemes, no direct/inverse image on the small etale site, nothing on killing classes by covers",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-gabber-effacement",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 09ZD (2); correct; unsplit."
+ }
+}

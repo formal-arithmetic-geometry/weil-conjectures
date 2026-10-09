@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-finite-surjective-unit-mono",
+ "kind": "statement",
+ "title": "The unit along a finite surjective morphism is a monomorphism",
+ "statement": "Let $\\pi:Y'\\to Y$ be a morphism of schemes which is finite [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism], and let $G$ be an abelian sheaf on $Y_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Then the unit $\\eta_{\\pi,G}:G\\to\\pi_*\\pi^{-1}G$ of the adjunction $\\pi^{-1}\\dashv\\pi_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] is a monomorphism of $\\Ab(Y_{\\Et})$. (Intended proof, Stacks' argument: at a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point] the stalk of $\\pi_*\\pi^{-1}G$ is $\\prod_{\\bar y'}(\\pi^{-1}G)_{\\bar y'}=\\prod_{\\bar y'}G_{\\bar y}$ over the geometric points $\\bar y'$ of $Y'$ with $\\pi\\circ\\bar y'=\\bar y$ [lem-weil-pbc-finite-stalk-formula-restriction], and $\\eta$ induces the diagonal map; the index set is nonempty because $Y'\\times_Y\\operatorname{Spec}\\Omega$ is a nonempty finite $\\Omega$-scheme ($\\pi$ surjective) and $\\Omega$ is algebraically closed; geometric stalks detect monomorphisms [lem-weil-pbc-geometric-stalks-detect-mono].)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph (line ~14955: 'To see the desired injectivity we can look at stalks ... Since Y' -> Y is surjective and finite we see that the induced map on geometric points lifting x is surjective too'), with Proposition 03QP (proposition-finite-higher-direct-image-zero) part (1). Stacks proves injectivity of f_*M -> f'_*M for f' = f o pi; this node is the same stalk argument for the unit along pi, from which Stacks' map is obtained by applying the left exact f_*. Reformulation by an agent."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit of adjunction G → π_* π^* G is a monomorphism for surjective morphism of schemes",
+   "results": "CategoryTheory.Adjunction.unit_mono_of_L_faithful, AlgebraicGeometry.instIsIsoSchemeAppUnit...ΓSpec, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.preservesMonomorphisms_of_adjunction, Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-09",
+   "verdict": "no match (unit_mono_of_L_faithful would need faithfulness of pi^{-1}, itself the content here, and Mathlib has no pi^{-1} on small etale sites)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a surjective finite morphism of schemes the adjunction unit F → π_* π^* F of étale sheaves is injective",
+   "results": "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, Scheme.instFaithfulEtaleOverForget, Sheaf...LocallyInjective factorization instance, SurjectiveOnStalks.mono_of_injective",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'finite.*surjective.*cohomolog\\|unit.*mono.*surjective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rln 'smallEtaleTopology' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no hits for the first pattern; the small etale site appears only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, without direct or inverse images of sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-gabber-effacement",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: unit G → π_*π^{-1}G mono for π finite surjective, with Stacks′ stalk argument indicated; correct; unsplit."
+ }
+}

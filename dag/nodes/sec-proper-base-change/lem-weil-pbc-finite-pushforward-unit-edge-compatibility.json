@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
+ "kind": "statement",
+ "title": "Base-changed edge maps carry the unit of a composite to the pullback",
+ "statement": "Let $f:Y\\to X$, $\\pi:Y'\\to Y$ and $i:Z\\to X$ be morphisms of schemes [def-pc-scheme], $f'=f\\circ\\pi$, and $G$ an abelian sheaf on $Y_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Put $Y_Z=Y\\times_XZ$ and $Y'_Z=Y'\\times_XZ$ [def-pc-fibre-product] with projections $i_Y:Y_Z\\to Y$, $f_Z:Y_Z\\to Z$, $i_{Y'}:Y'_Z\\to Y'$, $f'_Z:Y'_Z\\to Z$, and let $\\pi_Z=\\pi\\times_X\\mathrm{id}_Z:Y'_Z\\to Y_Z$, so that $i_Y\\pi_Z=\\pi i_{Y'}$ and $f_Z\\pi_Z=f'_Z$; regard the two squares $(f,f_Z,i,i_Y)$ and $(f',f'_Z,i,i_{Y'})$ as cartesian squares [def-weil-pbc-cartesian-square] with $\\theta$ built from the composition isomorphisms as in [lem-weil-pbc-edge-map-base-change]. For a cartesian square $\\square=(h,h',i,i')$ with $h:W\\to X$ and an abelian sheaf $E$ on $W_{\\Et}$ write\n$$\\Phi^q_{\\square,E}=e^q_{h',i'^{-1}E}\\circ H^q(\\Ex^0_{\\square,E}):H^q(Z_{\\Et},i^{-1}h_*E)\\to H^q((W\\times_XZ)_{\\Et},i'^{-1}E),$$\nwith $\\Ex^0$ the underived exchange morphism [def-weil-pbc-underived-exchange] and $e^q$ the edge map of [lem-weil-pbc-edge-map-base-change] (pullback map [def-weil-pbc-cohomology-pullback] followed by $H^q$ of the counit). Let $u:f_*G\\to f'_*\\pi^{-1}G$ be $f_*(\\eta_{\\pi,G}):f_*G\\to f_*\\pi_*\\pi^{-1}G$ followed by the identification $f_*\\pi_*=(f\\pi)_*$ of [lem-weil-pbc-inverse-image-composition] ($\\eta_\\pi$ the unit of $\\pi^{-1}\\dashv\\pi_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]), and let $\\kappa:\\pi_Z^{-1}i_Y^{-1}G\\xrightarrow{\\sim}i_{Y'}^{-1}\\pi^{-1}G$ be the composition isomorphism of [lem-weil-pbc-inverse-image-composition] for $i_Y\\pi_Z=\\pi i_{Y'}$. Then for every $q\\ge0$\n$$\\Phi^q_{(f',f'_Z,i,i_{Y'}),\\pi^{-1}G}\\circ H^q(i^{-1}u)=H^q(\\kappa)\\circ\\pi_Z^*\\circ\\Phi^q_{(f,f_Z,i,i_Y),G}:\\ H^q(Z_{\\Et},i^{-1}f_*G)\\to H^q((Y'_Z)_{\\Et},i_{Y'}^{-1}\\pi^{-1}G),$$\n$H^q(\\varphi)$ denoting the map induced by a morphism of sheaves [lem-weil-pbc-cohomology-pullback-functorial]. No finiteness is needed; the case $Z=X$, $i=\\mathrm{id}$ is allowed. (Intended proof: [lem-weil-pbc-edge-map-base-change] for both squares reduces the claim to the case $i=\\mathrm{id}$, where it follows from clauses 3 (naturality) and 4 (composition) of [lem-weil-pbc-cohomology-pullback-functorial] and the triangle identity $\\varepsilon_{f'}\\circ f'^{-1}(u)=\\pi^{-1}(\\varepsilon_f)$ composed with the identifications, up to the composition isomorphisms.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), proof, second paragraph: after 'H^q(Z, f_*M|_Z) = H^q(Y x_X Z, M)' (Lemma 0959, Proposition 03QC, Proposition 03QP) and the choice of Y' -> Y, the sentence 'we claim the map f_*M -> f'_*M is injective which finishes the proof by what was said above' uses, without stating it, that the identification carries f_*M -> f'_*M to pullback along Y' x_X Z -> Y x_X Z. Statement formulated by an agent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-edge-map-base-change",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of Leray edge map H^q(Y, f_* G) ≅ H^q(X, G) with pullback and composition of morphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.Limits.pullback.map_comp, SheafOfModules.pullbackComp, TopCat.Presheaf.Pushforward.comp, Scheme.Modules.pushforward_obj_presheaf_map",
+   "date": "2026-10-09",
+   "verdict": "no match (composition isomorphisms of pullback/pushforward functors only, no cohomology)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "edge map of Leray spectral sequence for direct image is compatible with base change and with the adjunction unit for a composite of morphisms",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pushforwardNatTrans_comp, ExponentiableMorphism.unit_pushforwardComp_hom(_assoc), ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'edgeMap\\|Leray' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "no etale edge maps; Mathlib has no cohomology on the small etale site (see the loogle search 'AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Sheaf.H': no results)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-gabber-effacement",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: the base-changed edge isomorphisms carry f_*(unit along π) to pullback along π_Z; the compatibility Stacks uses silently in 09ZE; well posed; unsplit."
+ }
+}
