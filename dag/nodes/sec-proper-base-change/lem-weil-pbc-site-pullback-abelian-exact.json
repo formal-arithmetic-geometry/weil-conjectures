@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-site-pullback-abelian-exact",
+ "kind": "statement",
+ "title": "The inverse image of abelian sheaves along a morphism of sites is exact",
+ "statement": "Let $f:\\mathcal D\\to\\mathcal C$ be a morphism of sites given by the continuous functor $u:\\mathcal C\\to\\mathcal D$ [def-weil-pbc-sites-and-cohomology] (3), and let $f^{-1}=u_s:\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$ be the inverse image on abelian sheaves, the left adjoint of $f_*=u^s$ on abelian sheaves. Then $f^{-1}$ is an additive functor which commutes with finite limits and finite colimits of $\\textit{Ab}(\\mathcal C)$; in particular it carries kernels and cokernels to kernels and cokernels, short exact sequences $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal E\\to0$ of $\\textit{Ab}(\\mathcal C)$ to short exact sequences of $\\textit{Ab}(\\mathcal D)$, and every exact sequence (finite or infinite, e.g. $0\\to\\mathcal A\\to\\mathcal I^0\\to\\mathcal I^1\\to\\cdots$) to an exact sequence.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma Tag 04JC (lemma-flat-pullback-exact), first assertion and the first paragraph of its proof (the underlying sheaf of sets of the abelian f^{-1}G is the set-theoretic f^{-1} of the underlying sheaf of sets, Sites Section Tag 00YR, so exactness of f^{-1} on sheaves of sets gives exactness on abelian sheaves); stated there for a morphism of topoi, which a morphism of sites induces (Sites, Lemma Tag 00XC, lemma-morphism-sites-topoi); Lemma Tag 03DC (lemma-exactness-pushforward-pullback) for the colimits (left adjoint)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of abelian sheaves along a morphism of sites is exact, preserves finite limits",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits, sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Mathlib.CategoryTheory.Sites.Pullback), HasSheafify.isLeftExact, sheafIsAbelian",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's sheafPullback preserves finite limits under the hypothesis PreservesFiniteLimits (G.op.lan) (Pullback.lean:91-98) or RepresentablyFlat G (:120), not under Stacks' hypothesis that u_s is exact on sheaves of sets; Stacks' sites are not Grothendieck topologies in Mathlib's sense (see def-weil-pbc-sites-and-cohomology)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of abelian sheaves along a continuous functor of sites is an exact functor (preserves finite limits and colimits)",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits, instPreservesFiniteLimitsSheafSheafPullback, sheafPullbackConstruction.sheafPullback, SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat (Sites.Pullback), Sheaf.instHasExactLimitsOfShape... (GrothendieckAxioms.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match (same hypotheses as above)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Additive\\|PreservesFiniteLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "results": "Pullback.lean:91-98 PreservesFiniteLimits (sheafPullback G A J K) assuming PreservesFiniteLimits G.op.lan; :120 under RepresentablyFlat G",
+   "date": "2026-10-10",
+   "verdict": "no match for the Stacks formulation (morphism of sites = continuous u with u_s exact on sets)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-cohomology-pullback",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: the abelian inverse image along a morphism of sites is additive and exact (Modules on Sites 04JC with 00XC, 00YR); self-contained; correct; unsplit."
+ }
+}
