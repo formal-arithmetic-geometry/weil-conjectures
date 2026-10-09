@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-connected-locally-constant-map",
+ "kind": "statement",
+ "title": "Locally constant maps on a connected space are constant",
+ "statement": "Let $X$ be a nonempty connected topological space [def-weil-connected-scheme] and let $E$ be a set. A map $f:X\\to E$ is locally constant when every point has an open neighbourhood on which $f$ is constant; equivalently, every fibre $f^{-1}(\\{e\\})$ is open. If $f$ is locally constant, then $f$ is constant: there is an $e\\in E$ such that $f(x)=e$ for every $x\\in X$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Etale Cohomology, Remark 59.23.2 (Tag 03P5): a Zariski-locally-constant map from a connected nonempty space to a set is constant; the fibre argument is the definition of connectedness."
+ },
+ "stmt_deps": [
+  "def-weil-connected-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If a topological space is preconnected, every locally constant function on it is constant",
+   "results": "IsLocallyConstant.apply_eq_of_preconnectedSpace, IsLocallyConstant.exists_eq_const, LocallyConstant.apply_eq_of_preconnectedSpace in pinned Mathlib/Topology/LocallyConstant/Basic.lean (theorem apply_eq_of_preconnectedSpace at lines 147-149)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocallyConstant.apply_eq_of_preconnectedSpace specializes to a connected space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every locally constant map from a connected topological space is constant",
+   "results": "IsLocallyConstant.apply_eq_of_preconnectedSpace and LocallyConstant.exists_eq_const in pinned Mathlib/Topology/LocallyConstant/Basic.lean:147-159",
+   "date": "2026-10-10",
+   "verdict": "match: specializes in one line via ConnectedSpace.toPreconnectedSpace"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant.apply_eq_of_preconnectedSpace",
+   "results": "IsLocallyConstant.apply_eq_of_preconnectedSpace : [PreconnectedSpace X] -> IsLocallyConstant f -> forall x y, f x = f y, Mathlib/Topology/LocallyConstant/Basic.lean:147-149; fibre equivalence is iff_isOpen_fiber at lines 101-102",
+   "date": "2026-10-10",
+   "verdict": "match: specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem apply_eq_of_preconnectedSpace|theorem exists_eq_const' Mathlib/Topology/LocallyConstant/Basic.lean",
+   "results": "Mathlib/Topology/LocallyConstant/Basic.lean:101-102 (`iff_isOpen_fiber`) and :147-149 (`IsLocallyConstant.apply_eq_of_preconnectedSpace`), with :155-159 (`exists_eq_const`)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocallyConstant.apply_eq_of_preconnectedSpace",
+  "file": "Mathlib/Topology/LocallyConstant/Basic.lean",
+  "how": "specializes in one line: a connected space supplies PreconnectedSpace, and the theorem at pinned Mathlib/Topology/LocallyConstant/Basic.lean:147-149 gives f x = f y for all x,y. The node's fibre-open formulation is exactly Mathlib's IsLocallyConstant by iff_isOpen_fiber at Basic.lean:101-102 (all fibres open iff every subset has open preimage, since preimages are unions of fibres)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-sheaf-sections-connected",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

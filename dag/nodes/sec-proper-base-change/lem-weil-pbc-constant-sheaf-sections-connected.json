@@ -15,9 +15,53 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-constant-sheaf-sections-locally-constant], the canonical map $\\iota_T:E\\to\\underline E(T)$ identifies $\\underline E(T)$ with the abelian group of Zariski locally constant maps $|T|\\to E$, and $\\iota_T(e)$ corresponds to the constant map with value $e$.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 03P5 (Tag 03P5), the identification of sections of the constant sheaf with Zariski locally constant maps."
+   }
+  },
+  {
+   "text": "The underlying space $|T|$ is nonempty and connected by hypothesis. Hence every locally constant map $|T|\\to E$ is constant by [lem-weil-pbc-connected-locally-constant-map] (the fibres of a locally constant map are clopen, so connectedness leaves only one nonempty fibre).",
+   "uses": [
+    "lem-weil-pbc-connected-locally-constant-map",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 59.23.2 (Tag 03P5), with the connected-space conclusion obtained directly from the clopen fibres and [def-weil-connected-scheme]."
+   }
+  },
+  {
+   "text": "Under the identification of Step 1, $\\iota_T$ is the map sending $e$ to the constant map with value $e$. Step 2 gives surjectivity. Since $|T|$ is nonempty, two constant maps are equal only when their values are equal, so $\\iota_T$ is injective. Pointwise addition of locally constant maps makes this identification a homomorphism of abelian groups; therefore $\\iota_T$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 59.23.2 (Tag 03P5): a locally constant map on a connected nonempty space is the unique constant map determined by any point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-connected-locally-constant-map",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark 59.23.2 (Tag 03P5), with representability inputs Groupoids Example 39.5.6 (Tag 03YW) and Etale Cohomology Lemma 59.15.8 (Tag 03O3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,10 +114,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constant-sheaf-sections-connected",
+  "worker": "stage1",
+  "summary": "Replaced the imported empty proof by three steps following Stacks Remark 59.23.2 (Tag 03P5): identify sections of the sheafification of the constant presheaf with Zariski locally constant maps using the constant group scheme and representability (new statement-only node, with Etale Cohomology Lemma 59.15.8, Tag 03O3); use the Mathlib leaf IsLocallyConstant.apply_eq_of_preconnectedSpace via new node lem-weil-pbc-connected-locally-constant-map to make such a map constant on the connected underlying space; and check injectivity and additivity of the canonical constant-section map. The item has no Lean declaration, so no attachment was made."
+ },
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 03P5 for the small etale site of a connected scheme; correct; unsplit."
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 20:14: the 03P5 identification node is statement-only with the tags (03P5, 03O3, 03YW) and defines the Zariski-locally-constant maps; the Mathlib leaf names IsLocallyConstant.apply_eq_of_preconnectedSpace at Topology/LocallyConstant/Basic.lean:147 (verified) with iff_isOpen_fiber :101 for the fibre formulation. Three steps: identification, constancy on a connected space, bijectivity and additivity."
  }
 }
