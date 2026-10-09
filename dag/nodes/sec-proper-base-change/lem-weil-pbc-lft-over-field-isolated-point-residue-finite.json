@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
+ "kind": "statement",
+ "title": "An isolated point of a scheme locally of finite type over a field has residue field finite over the field",
+ "statement": "Let $k$ be a field, let $Y$ be a scheme [def-pc-scheme] and let $g:Y\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] be a morphism which is locally of finite type [def-weil-finite-type-morphism]. Let $y\\in Y$ be a point such that the singleton $\\{y\\}$ is open in $Y$ ($y$ is an isolated point of $Y$). Then the residue field $\\kappa(y)$ [def-weil-residue-field], made a field extension of $k$ by the homomorphism $k\\to\\kappa(y)$ induced by $g$ on residue fields (the residue field of $\\operatorname{Spec}k$ at its unique point being $k$), is a finite extension: $\\dim_k\\kappa(y)<\\infty$ [def-pc-field-extension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00PJ (algebra-lemma-isolated-point, line 30106), (1) => (6) (via its proof: Spec of a finite type k-algebra is Jacobson, Lemmas 00G1 (algebra-lemma-finite-type-field-Jacobson) and 00G3 (algebra-lemma-jacobson), so an isolated prime is closed, hence maximal, and Theorem 00FV (algebra-theorem-nullstellensatz, line 6524) gives the residue field finite), applied to an affine open Spec B of Y containing y with B of finite type over k (Morphisms, Lemma 01T2 lemma-locally-finite-type-characterize); this is the case S = Spec k of Morphisms, Lemma 01TH (morphisms-lemma-quasi-finite-at-point-characterize, line 3664), (2) => (4), with Lemma 01TG (morphisms-lemma-residue-field-quasi-finite, line 3652); compare the proof of Morphisms, Lemma 01TF (morphisms-lemma-closed-point-fibre-locally-finite-type, line 3597)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme locally of finite type over a field, isolated point (open singleton), residue field is a finite extension of the base field",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.Finite: in a Jacobson scheme, x closed iff Spec kappa(x) -> X locally of finite type), Algebra.QuasiFinite.instFiniteResidueField (Mathlib.RingTheory.QuasiFinite.Basic, ring level), AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, Scheme.residueField",
+   "date": "2026-10-10",
+   "verdict": "no match: pieces only (isolated => closed => Spec kappa(y) -> Y lft => kappa(y) finite type over k => finite), several lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated algebra over a field k, a prime ideal which is an isolated point of the prime spectrum has residue field finite over k",
+   "results": "Algebra.instFiniteResidueFieldOfQuasiFiniteAt (Mathlib.RingTheory.QuasiFinite.Basic: Module.Finite p.ResidueField P.ResidueField under Algebra.QuasiFiniteAt R P), Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.ResidueField.finite_of_module_finite, RingHom.EssFiniteType.residueFieldMap",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level, needs Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber (RingTheory/ZariskisMainTheorem.lean:754) plus the identification of the fibre over the zero ideal of k and of scheme residue fields with Ideal.ResidueField; not one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpen {_} → Module.Finite _ (AlgebraicGeometry.Scheme.residueField _ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isClosed_singleton_iff_locallyOfFiniteType|quasiFiniteAt_iff_isOpen_singleton|JacobsonSpace|finite_of_finite_type_of_isJacobsonRing|residueField.*Finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{AlgebraicGeometry,RingTheory,Topology}",
+   "results": "AlgebraicGeometry/Morphisms/Finite.lean:221 isClosed_singleton_iff_locallyOfFiniteType; AlgebraicGeometry/Morphisms/FiniteType.lean:117 LocallyOfFiniteType.jacobsonSpace; Topology/JacobsonSpace.lean:121 isClosed_singleton_of_isLocallyClosed_singleton; RingTheory/Jacobson/Ring.lean:676 finite_of_finite_type_of_isJacobsonRing; RingTheory/ZariskisMainTheorem.lean:754 Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber; AlgebraicGeometry/Morphisms/QuasiFinite.lean:395 Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber; no scheme-level statement that an isolated point of a scheme lft over a field has finite residue field",
+   "date": "2026-10-10",
+   "verdict": "no match: a Lean proof would chain these four or five declarations"
+  },
+  {
+   "tool": "local_search",
+   "query": "isClosed_singleton_iff_locallyOfFiniteType (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType in Mathlib/AlgebraicGeometry/Morphisms/Finite.lean (index unavailable: existence only)",
+   "date": "2026-10-10",
+   "verdict": "tools for the split, not a match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

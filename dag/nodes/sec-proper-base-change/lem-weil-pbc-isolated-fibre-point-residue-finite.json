@@ -14,9 +14,72 @@
   "def-weil-residue-field",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\sigma:\\operatorname{Spec}\\kappa(s)\\to S$ be the canonical morphism, with image $s$, and $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ the fibre with projections $p:X_s\\to X$ and $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre]; $\\pi$ is the base change of $f$ along $\\sigma$. Since $f$ is locally of finite type, $\\pi$ is locally of finite type by [lem-weil-pbc-lft-base-change] (with $g=\\sigma$) [def-weil-finite-type-morphism]. By [def-pc-scheme-fibre] $p$ is a homeomorphism of $X_s$ onto the subspace $f^{-1}(s)\\ni x$, so there is exactly one $\\xi\\in X_s$ with $p(\\xi)=x$; this is the point of $X_s$ corresponding to $x$, and by hypothesis $\\{\\xi\\}$ is open in $X_s$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01TH (lemma-quasi-finite-at-point-characterize), proof of (2) => (1): 'X_s is ... locally of finite type over kappa(s)' (Lemma 01T4 lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lft-over-field-isolated-point-residue-finite] to the field $k=\\kappa(s)$, the scheme $Y=X_s$, the morphism $g=\\pi$ (locally of finite type by step 1) and the point $y=\\xi$ (isolated by step 1): the homomorphism $\\pi^\\sharp:\\kappa(s)\\to\\kappa(\\xi)$ induced by $\\pi$ on residue fields [def-weil-residue-field] makes $\\kappa(\\xi)$ a finite extension of $\\kappa(s)$. Here the residue field of $\\operatorname{Spec}\\kappa(s)$ at its unique point $\\eta$ is identified with $\\kappa(s)$ by [lem-weil-pbc-spec-residue-field-identification] (with $R=\\kappa(s)$, $\\mathfrak p=0$, where $\\kappa(s)_{(0)}/0=\\kappa(s)$); under this identification the map $\\sigma^\\sharp:\\kappa(s)\\to\\kappa(\\eta)$ induced by $\\sigma$ is the identity, because $\\sigma$ is $\\operatorname{Spec}$ of the residue map $\\mathcal O_{S,s}\\to\\kappa(s)$ followed by $\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, so on stalks at $\\eta$ it is $\\mathcal O_{S,s}\\to\\kappa(s)$ itself, which induces the identity of $\\kappa(s)$ on residue fields.",
+   "uses": [
+    "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00PJ (lemma-isolated-point), (1) => (6), through Morphisms, Lemma 01TH (2) => (4) and Lemma 01TG, which deduce finiteness of the residue field extension from the isolatedness of x in an affine open of the fibre"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-point-residue-field] to $f:X\\to S$, $g=\\sigma:\\operatorname{Spec}\\kappa(s)\\to S$ and $z=\\xi$, so that $p(\\xi)=x$, $\\pi(\\xi)=\\eta$ and $f(x)=s=\\sigma(\\eta)$ (residue fields and induced maps as in [def-weil-residue-field]). With $\\kappa(\\eta)=\\kappa(s)$ and $\\sigma^\\sharp=\\mathrm{id}$ (step 2), the ring $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(\\eta)$ is $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s)$, which is isomorphic to the field $\\kappa(x)$ by $a\\otimes b\\mapsto a\\,f^\\sharp(b)$ (here $f^\\sharp:\\kappa(s)\\to\\kappa(x)$ is induced by $f$). A field has only the prime ideal $0$, so the prime $\\mathfrak p$ attached to $\\xi$ is $0$ and the quotient by it is the field $\\kappa(x)$. The lemma gives that the induced map $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s)\\to\\kappa(\\xi)$, $a\\otimes b\\mapsto p^\\sharp(a)\\pi^\\sharp(b)$, is an isomorphism of fields, compatible with the maps from $\\kappa(x)$ and from $\\kappa(s)$. Composing with the isomorphism $\\kappa(x)\\cong\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s)$, $a\\mapsto a\\otimes1$, the map $p^\\sharp:\\kappa(x)\\to\\kappa(\\xi)$ is an isomorphism; and since $1\\otimes b=f^\\sharp(b)\\otimes1$ in the tensor product, $\\pi^\\sharp(b)=p^\\sharp(f^\\sharp(b))$ for $b\\in\\kappa(s)$, i.e. $p^\\sharp$ is an isomorphism of extensions of $\\kappa(s)$ (with $\\kappa(s)$ acting on $\\kappa(x)$ by $f^\\sharp$ and on $\\kappa(\\xi)$ by $\\pi^\\sharp$).",
+   "uses": [
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01TF (lemma-closed-point-fibre-locally-finite-type), proof: 'kappa(x) = kappa(q) = kappa(q-bar)'; the residue field of a point of a fibre product, Schemes, Lemma 01JT (schemes-lemma-points-fibre-product)"
+   }
+  },
+  {
+   "text": "By step 3, $p^\\sharp$ is a $\\kappa(s)$-linear bijection $\\kappa(x)\\to\\kappa(\\xi)$, so $\\dim_{\\kappa(s)}\\kappa(x)=\\dim_{\\kappa(s)}\\kappa(\\xi)$, which is finite by step 2. Hence $\\kappa(s)\\to\\kappa(x)$ (the map induced by $f$) is a finite field extension [def-pc-field-extension].",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01TG (lemma-residue-field-quasi-finite) and Lemma 01TF, last line of the proof ('we win')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01TH (lemma-quasi-finite-at-point-characterize, line 3664), (2) => (4) => (1), with Lemma 01TG (line 3652) and Algebra, Definition 00PL / Lemmas 00PK, 00PJ (1) => (6); the residue field identification as in the proof of Morphisms, Lemma 01TF (line 3597). Arranged so that the passage to the fibre scheme X_s is done first and the field case (an isolated point of a scheme locally of finite type over a field) is a separate node."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +131,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 01TH (2)=>(1) and 01TG; the hypothesis 'isolated in X_s' is 01TH (2)). Proof written in four steps: the fibre projection X_s -> Spec kappa(s) is locally of finite type (lem-weil-pbc-lft-base-change) and x corresponds to a unique isolated point xi of X_s (def-pc-scheme-fibre); the field case, an isolated point of a scheme locally of finite type over a field has finite residue field (new node lem-weil-pbc-lft-over-field-isolated-point-residue-finite, Stacks Algebra 00PJ (1)=>(6) in an affine open, i.e. 01TH (2)=>(4) and 01TG for S = Spec k); kappa(x) -> kappa(xi) is an isomorphism over kappa(s) (lem-weil-pbc-fibre-product-point-residue-field with Y = Spec kappa(s), kappa(x) tensor_kappa(s) kappa(s) = kappa(x) a field); finiteness transported. Mathlib: Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber (Morphisms/QuasiFinite.lean:395) gives (2)<=>(1) but the residue field finiteness exists only at ring level (Algebra.instFiniteResidueFieldOfQuasiFiniteAt, RingTheory/QuasiFinite/Basic.lean:427, Algebra.QuasiFinite.instFiniteResidueField line 278), so the item is not a leaf; existing searches kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps: the fibre is lft over kappa(s) with the open point xi over x, the new unsplit node (Algebra 00PJ (1)=>(6) for a scheme lft over a field: an open point has a finite residue field; via Jacobson 00G1/00G3 and the Nullstellensatz 00FV) gives kappa(xi) finite, kappa(x) = kappa(xi) by the fibre-product residue node, conclusion. Mathlib has only ring-level finiteness of residue fields at quasi-finite primes (QuasiFinite/Basic.lean:427, :278). Tags verified by the worker (01TH, 01TG, 01TF, 00PJ, 00PK, 00PL, 00FV, 00G1, 00G3)."
+ }
 }
