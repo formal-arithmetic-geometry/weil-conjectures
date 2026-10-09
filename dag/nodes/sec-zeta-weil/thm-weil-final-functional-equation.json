@@ -9,52 +9,132 @@
  },
  "stmt_deps": [
   "thm-weil-final-integrality",
-  "thm-weil-final-betti",
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
   "def-weil-integral-frobenius-factor",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-coefficientwise-extension",
+  "def-weil-point-counts-zeta",
+  "def-weil-polynomial-coefficient",
+  "def-weil-betti-numbers",
+  "def-weil-determinant-constants",
+  "lem-weil-leading-coefficient-nonzero",
+  "def-weil-functional-equation-sign"
  ],
  "proof": [
   {
-   "text": "Use the determinant definitions in [def-weil-determinant-constants].\nThe reciprocity calculation [prop-duality-reciprocity], whose duality\ninput is [prop-poincare-pairing], gives\n\n$$\nP_{2d-i}(q^{-d}T^{-1})\n=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T),\n\\qquad D_iD_{2d-i}=q^{db_i}.\n$$",
+   "text": "*The data.* Over the finite-field datum $(p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q)$ of [def-weil-finite-field-fiber], the hypotheses on $X_0$ (smooth of pure dimension $d$, proper, geometrically connected) are those of [def-weil-geometric-hypotheses], and $X=X_0\\times_{k_0}k$ is its geometric fiber. Choose a prime $\\ell\\neq p$ (one exists, since there are infinitely many primes) and keep it fixed; write $\\Ql=\\mathbf Q_\\ell$. For $0\\leq i\\leq2d$ put $V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}=F\\vert_{V_{i,\\ell}}$ and $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$: this is the smooth-proper cohomological family of [def-weil-smooth-proper-cohomological-family], and $P_{i,\\ell}$ is the right-hand side of the displayed characterization of $P_i$ in the statement. By [thm-weil-final-integrality] the polynomials $P_i\\in\\mathbf Z[T]$ of the statement exist, are unique, satisfy $P_i(0)=1$ and $P_i^{(\\ell')}=P_{i,\\ell'}$ for every prime $\\ell'\\neq p$, in particular for the chosen $\\ell$; so each $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$. This is exactly the hypothesis under which the three propositions applied in steps 2, 3 and 5 take their polynomial $P_i$ (each of them assumes the hypotheses of the theorem on $X_0$ and lets $P_i$ be an element of $\\mathbf Z[T]$ with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$, for the fixed $\\ell$ or for every $\\ell$), so they apply to the $P_i$ of the theorem. The integers $b_i=\\deg P_i$ are the Betti numbers of [def-weil-betti-numbers], and $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)$ and $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ are the determinant constants and the Euler characteristic of [def-weil-determinant-constants], defined there by the same formulas. Since $P_i(0)=1$, [lem-weil-leading-coefficient-nonzero] gives $D_i\\in\\mathbf Z\\setminus\\{0\\}$, so $D_i^{-1}$ and $\\prod_{i=0}^{2d}D_i^{(-1)^i}$ are elements of $\\mathbf Q^\\times$, as the statement requires.",
    "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-smooth-proper-cohomological-family",
+    "thm-weil-final-integrality",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-betti-numbers",
     "def-weil-determinant-constants",
-    "prop-duality-reciprocity",
-    "prop-poincare-pairing"
+    "lem-weil-leading-coefficient-nonzero"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "proof of thm:weil-final, clause (v), lines 3741-3751 (first sentence: the definitions of $D_i$, $\\chi$, $\\varepsilon$), and lines 3685-3688 (the hypotheses make $(X_0,d,X)$ a smooth-proper datum)"
+   }
   },
   {
-   "text": "Pairing $i$ with $2d-i$, and using the middle-degree alternating-form\ncase in [prop-duality-reciprocity], shows that $d\\chi$ is even. Thus\nthe sign is defined by [def-weil-functional-equation-sign]. Finally,\nsubstitution into the rational factorization of the\n[def-weil-point-counts-zeta] zeta series and reindexing gives exactly\nthe functional-equation identity in [prop-functional-equation],\nwith $\\chi$ and $b_i$ as in [def-weil-betti-numbers].",
+   "text": "*Degreewise reciprocity.* Proposition [prop-duality-reciprocity], applied to $X_0$, the prime $\\ell$ and the factors $P_i$ of step 1, states that for every integer $i$ with $0\\leq i\\leq2d$: $b_i=b_{2d-i}$, $D_iD_{2d-i}=q^{db_i}$, and, as an identity of Laurent polynomials in $\\mathbf Q[T,T^{-1}]$,\n\n$$\nP_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T).\n$$\n\nThe last identity is the first displayed assertion of the theorem, with the same $b_i$ and $D_i$ (step 1); the two relations before it are not needed further here. In the literature this reciprocity is what Poincaré duality gives in Milne LEC, proof of Theorem 27.12 (p. 158), and in Deligne Weil I (2.4) (p. 281), where it is stated on the Frobenius eigenvalues, $\\alpha\\mapsto q^d/\\alpha$.",
    "uses": [
-    "prop-duality-reciprocity",
-    "def-weil-functional-equation-sign",
-    "def-weil-point-counts-zeta",
-    "prop-functional-equation",
-    "def-weil-betti-numbers"
+    "prop-duality-reciprocity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "proof of thm:weil-final, clause (v), lines 3741-3751 (second sentence: prop:duality-reciprocity supplies the degreewise Laurent reciprocity)"
+   }
+  },
+  {
+   "text": "*Parity of $d\\chi$ and the sign.* Proposition [prop-weil-functional-equation-parity], applied to $X_0$ and the factors $P_i$ of step 1 (its $b_i$ and $\\chi$ are those of step 1), states that the integer $d\\chi$ is even: $d\\chi=2h$ for an integer $h$. This is the first assertion of the theorem, and it makes $q^{-d\\chi/2}=q^{-h}$ and $q^{d\\chi/2}=q^h$ elements of $\\mathbf Q^\\times$. Hence the data $(q,d,(P_i)_{0\\leq i\\leq2d})$ satisfy the hypotheses of [def-weil-functional-equation-sign] ($P_i\\in\\mathbf Z[T]$, $P_i(0)=1$, $d\\chi$ even), and the number\n\n$$\n\\varepsilon=(-1)^\\chi q^{-h}\\prod_{i=0}^{2d}D_i^{(-1)^i}=(-1)^\\chi q^{-d\\chi/2}\\Delta,\n\\qquad\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i},\n$$\n\ndefined by the displayed formula of the theorem, is the normalized functional-equation sign of that definition, as the last sentence of the statement says; negative exponents are inverses in $\\mathbf Q^\\times$ (step 1). That $d\\chi$ is even is also Deligne Weil I (2.6) (p. 281: \"l'entier $n\\chi(X)$ est donc toujours pair\").",
+   "uses": [
+    "prop-weil-functional-equation-parity",
+    "def-weil-functional-equation-sign"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "proof of thm:weil-final, clause (v), lines 3741-3751 (third sentence: prop:functional-equation-parity verifies that $d\\chi/2$ is an integer; the definition of $\\varepsilon$ is def:functional-equation-sign, lines 3500-3519)"
+   }
+  },
+  {
+   "text": "*The zeta series as a rational function.* By [def-weil-point-counts-zeta] with $Y_0=X_0$, $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}\\#X_0(\\mathbf F_{q^n})T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$, and this is the series that step 5 calls $Z(X_0,T)$ (the proposition applied there defines it by the same exponential). By [thm-weil-final-integrality], $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$ in $\\mathbf Q[[T]]$, where each $P_i$ is invertible in $\\mathbf Q[[T]]$ because $P_i(0)=1$. The expansion at $T=0$, from the subring of $\\mathbf Q(T)$ of fractions whose denominator has nonzero constant term to $\\mathbf Q[[T]]$, is an injective ring homomorphism (it extends the injection $\\mathbf Q[T]\\to\\mathbf Q[[T]]$, and such denominators become units of $\\mathbf Q[[T]]$); so $Z(X_0,T)$ is the expansion of the unique rational function $\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)$, with which it is identified. The expression $Z(X_0,q^{-d}T^{-1})$ in the statement denotes the image of this rational function under the substitution $T\\mapsto q^{-d}T^{-1}$, the $\\mathbf Q$-algebra endomorphism of $\\mathbf Q(T)$ sending $T$ to $q^{-d}T^{-1}$ (well defined since $q^{-d}T^{-1}$ is transcendental over $\\mathbf Q$; it is an involution, hence an automorphism). So the second displayed assertion of the theorem is an identity in $\\mathbf Q(T)$, which is the sense in which the proposition of step 5 states it.",
+   "uses": [
+    "def-weil-point-counts-zeta",
+    "thm-weil-final-integrality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "proof of thm:weil-final, clauses (i)-(ii), lines 3689-3713 (prop:integral-recovery gives the factorization by integral polynomials and hence $Z(X_0,T)\\in\\mathbf Q(T)$)"
+   }
+  },
+  {
+   "text": "*The functional equation.* Proposition [prop-functional-equation], applied to $X_0$, the prime $\\ell$ and the factors $P_i$ of step 1, defines $b_i$, $D_i$, $\\chi$, $\\Delta$ and $\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\Delta$ by the formulas of steps 1 and 3 and states that $\\Delta^2=q^{d\\chi}$, that $\\varepsilon^2=1$ and $\\varepsilon\\in\\{1,-1\\}$, and that\n\n$$\nZ(X_0,q^{-d}T^{-1})=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)\\quad\\text{in }\\mathbf Q(T),\n$$\n\nfor the zeta series of step 4. The membership $\\varepsilon\\in\\{1,-1\\}$ is the last assertion of the theorem and the identity is its second displayed assertion. Together with steps 2 and 3 this proves every assertion of the theorem. In the literature this is Milne LEC, Theorem 27.12 (p. 158: $Z(X_0,1/q^dt)=\\pm q^{d\\chi/2}t^\\chi Z(X_0,t)$, $\\chi=\\sum(-1)^r\\beta_r$) and Deligne Weil I (2.6) (p. 281, the same identity solved for $Z(X_0,t)$, with $\\varepsilon=\\pm1$).",
+   "uses": [
+    "prop-functional-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+    "place": "proof of thm:weil-final, clause (v), lines 3741-3751 (last sentence: prop:functional-equation proves $\\varepsilon\\in\\{1,-1\\}$ and the identity in $\\mathbf Q(T)$)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-cohomological-family",
+  "thm-weil-final-integrality",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-betti-numbers",
   "def-weil-determinant-constants",
+  "lem-weil-leading-coefficient-nonzero",
   "prop-duality-reciprocity",
-  "prop-poincare-pairing",
+  "prop-weil-functional-equation-parity",
   "def-weil-functional-equation-sign",
   "def-weil-point-counts-zeta",
-  "prop-functional-equation",
-  "def-weil-betti-numbers"
+  "prop-functional-equation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil5/thm-weil-final-functional-equation.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+  "place": "proof of thm:weil-final, clause (v), lines 3741-3751 (the slopmaster2 blueprint proves this node as clause (v) of its terminal theorem; the master copy of the node's own proof is literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil5/thm-weil-final-functional-equation.md, '## Proof', the same argument with the parity proved inline instead of by prop:functional-equation-parity). Human statements of the result: literature/milne-lectures-on-etale-cohomology_LEC.pdf, Theorem 27.12 and Remark 27.13, pp. 158-159; literature/deligne-weil-I_PMIHES-1974-43.pdf, (2.4)-(2.6), p. 281."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'zetaSeries\\|Weil conjecture\\|WeilFunctionalEquation\\|Hasse-Weil' Mathlib/ ; ls Mathlib/AlgebraicGeometry/",
+   "results": "none: Mathlib has no zeta function of a scheme over a finite field, no Frobenius action on etale cohomology and no Weil conjectures (Mathlib/AlgebraicGeometry/ has no file on point counts or zeta functions)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'functional equation' Mathlib/",
+   "results": "only the functional equations of Dirichlet and Hurwitz L-functions (Mathlib/NumberTheory/LSeries/ZMod.lean, DirichletContinuation.lean, HurwitzZetaOdd.lean), of the Gamma function and of PowerSeries.exp; nothing on zeta functions of varieties",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RatFunc, LaurentPolynomial, Nat.exists_infinite_primes in Mathlib/ (the primitives the statement and the elementary steps use beyond the cited nodes)",
+   "results": "RatFunc (Mathlib/FieldTheory/RatFunc/Defs.lean:67) is the field Q(T) of the second identity; LaurentPolynomial (Mathlib/Algebra/Polynomial/Laurent.lean:84) is the ring Q[T,T^{-1}] of the first; Nat.exists_infinite_primes (Mathlib/Data/Nat/Prime/Infinite.lean:33) gives a prime ell different from p in step 1; Polynomial.coeff/natDegree/leadingCoeff, Even, zpow and Finset.prod are the remaining primitives",
+   "date": "2026-10-09",
+   "verdict": "no match for the node; the primitives exist and are recorded here rather than as leaf nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_multiple"
@@ -146,5 +226,16 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final-functional-equation",
+  "worker": "stage1",
+  "summary": "Statement kept verbatim (it is the master text; the slopmaster2 blueprint has no separate node and states it as clause (v) of thm:weil-final, lines 3633-3657 of 01_final_weil_conjectures.tex, word for word the same), and checked against Milne LEC Theorem 27.12 / Remark 27.13 (pp. 158-159), Deligne Weil I (2.4)-(2.6) (p. 281), and on X_0 = P^1 (b = (1,0,1), D = (1,1,q), chi = 2, epsilon = 1, Z(1/(qT)) = qT^2 Z(T), and the degreewise identity for i = 0, 1, 2). Lean: the node's declaration on slopmaster2 is the whole target AlgebraicGeometry.Scheme.weil_conjectures (WeilConjectures/Statement.lean 92-98, sorry), whose functional-equation clause is the predicate AlgebraicGeometry.WeilFunctionalEquation (Comparator/Weil/Definitions.lean 130-132, listed as 'missing' by the audit because it lives outside the WeilConjectures tree): for every i the complex root multiset of P_{2d-i} is the image of that of P_i under z -> 1/(q^d z), for an existentially quantified family P with IsWeilFactorization; this is equivalent, given P_i(0) = 1, to the node's first displayed identity, and the Lean states neither the parity of d chi, nor the sign, nor the identity for Z (slopmaster2 derives those from the root matching in WeilConjectures/ZetaFunction/ClassicalFunctionalEquation.lean, as identities of complex numbers at nonzero t, with no declaration mentioning Z); the node's statement was not changed, since it is its source's. Proof rewritten in five steps following the slopmaster2 proof of clause (v): the theorem's four assertions are exactly the conclusions of prop-duality-reciprocity (degreewise Laurent identity), prop-weil-functional-equation-parity (d chi even, used instead of the imported inline parity argument), and prop-functional-equation (epsilon in {1,-1} and the identity in Q(T)); the remaining steps are instances of definitions: that the P_i of thm-weil-final-integrality satisfy the hypothesis under which those propositions take their P_i (for a chosen prime ell != p), that b_i, D_i, chi, epsilon are the objects of def-weil-betti-numbers, def-weil-determinant-constants (with D_i != 0 from lem-weil-leading-coefficient-nonzero) and def-weil-functional-equation-sign, and that Z(X_0,T) is identified with the rational function of thm-weil-final-integrality so that Z(X_0,q^{-d}T^{-1}) means its image under T -> q^{-d}T^{-1} in Q(T). Dropped from the proof: prop-poincare-pairing (cited by the imported text only as the input of prop-duality-reciprocity, not used by this proof), def-weil-point-counts-zeta and def-weil-betti-numbers as proof steps (they are statement notions and are now stmt_deps), and the imported re-derivation of the identity by substitution and reindexing (that is the proof of prop-functional-equation, not of this node). stmt_deps rebuilt from the notions the statement names: added def-weil-smooth-proper-cohomological-family, def-weil-reverse-characteristic-polynomial, def-weil-coefficientwise-extension, def-weil-point-counts-zeta, def-weil-polynomial-coefficient, def-weil-betti-numbers, def-weil-determinant-constants, lem-weil-leading-coefficient-nonzero (D_i^{-1} needs D_i != 0) and def-weil-functional-equation-sign; removed thm-weil-final-betti, which the text cites only as 'b_i = deg P_i as in', a pointer: the statement uses only b_i = deg P_i and nothing that theorem proves. No new node was needed. Mathlib was searched for the node itself: no match; Q(T), Q[T,T^{-1}] and the existence of a prime ell != p are recorded as primitives in mathlib_searches."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
