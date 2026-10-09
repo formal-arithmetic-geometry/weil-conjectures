@@ -105,7 +105,7 @@ lemma Scheme.Modules.exists_restrict_eq_smul_tensorPowSectionOne {S : Scheme.{u}
 
 /-- Variant of `exists_finite_subring_closure_divBasicOpen_eq_top`: generation by quotients with
 denominator `1` transports to generation by quotients with any denominator `b = 1`. -/
-lemma subring_closure_divBasicOpen_eq_top_of_eq_one {V S : Scheme.{u}} (g : V ⟶ S)
+private lemma subring_closure_divBasicOpen_eq_top_of_eq_one {V S : Scheme.{u}} (g : V ⟶ S)
     (W : S.Opens) {b : Γ(V, ⊤)} (hb : b = 1) {m : Type*} (t : m → Γ(V, ⊤))
     (hle : V.basicOpen b ≤ g ⁻¹ᵁ W) (hle₁ : V.basicOpen (1 : Γ(V, ⊤)) ≤ g ⁻¹ᵁ W)
     (h : Subring.closure (Set.range (g.resLE W (V.basicOpen 1) hle₁).appTop ∪
