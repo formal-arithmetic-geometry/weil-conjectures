@@ -51,20 +51,6 @@ lemma fiberConstantCoverEquiv_fiberPrecompIso (σ : Ω ≃+* Ω)
   rw [Spec.map_preimage, Spec.map_comp, Spec.map_preimage, Category.assoc]
   rfl
 
-/-- If `T` intertwines two permutations, it intertwines all their integral powers. -/
-lemma _root_.Equiv.Perm.zpow_apply_eq_of_comm {α β : Type*} (T : α → β) (a : Equiv.Perm α)
-    (b : Equiv.Perm β) (h : ∀ y, T (a y) = b (T y)) (n : ℤ) (y : α) :
-    T ((a ^ n) y) = (b ^ n) (T y) := by
-  have hinv (y : α) : T (a⁻¹ y) = b⁻¹ (T y) := by
-    rw [Equiv.Perm.eq_inv_iff_eq, ← h]
-    simp
-  induction n using Int.induction_on generalizing y with
-  | zero => simp
-  | succ n ih => rw [zpow_add_one, zpow_add_one, Equiv.Perm.mul_apply, ih, h,
-      Equiv.Perm.mul_apply]
-  | pred n ih => rw [zpow_sub_one, zpow_sub_one, Equiv.Perm.mul_apply, ih, hinv,
-      Equiv.Perm.mul_apply]
-
 variable [Finite K]
 
 lemma geometricFrobenius_inv_apply (A : FiniteEtaleAlgebra K)
