@@ -85,12 +85,14 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusLift
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisAction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.HomotopyExactSequence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Specialization
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
@@ -901,6 +903,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.LaurentSeries
