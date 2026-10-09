@@ -1,0 +1,55 @@
+{
+ "id": "def-weil-rational-power-series",
+ "kind": "definition",
+ "title": "Rational power series and its rational function",
+ "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate, $K[T]$ the polynomial ring [def-weil-polynomial-ring], $K[[T]]$ the ring of formal power series [def-weil-formal-power-series] and $K(T)$ the field of rational functions [def-weil-rational-function-field]. A formal power series $f\\in K[[T]]$ is *rational* (over $K$) if there are polynomials $P,Q\\in K[T]$ with $Q(0)\\neq0$ such that $Qf=P$ in $K[[T]]$. Since $Q(0)\\neq0$, $Q$ is a unit of $K[[T]]$ and $f=PQ^{-1}$: $f$ is the Taylor expansion at $T=0$ of the fraction $P/Q$. The *rational function of $f$* is $R_f=P/Q\\in K(T)$; it does not depend on the choice of $(P,Q)$, because if also $Q'f=P'$ with $Q'(0)\\neq0$, then $PQ'=QfQ'=P'Q$ in $K[[T]]$, hence in $K[T]$, so $P/Q=P'/Q'$ in $K(T)$. The set of rational power series is written $K[[T]]\\cap K(T)$. The map $f\\mapsto R_f$ is an injective ring homomorphism from $K[[T]]\\cap K(T)$ onto the subring of $K(T)$ of rational functions regular at $T=0$, with inverse $N/D\\mapsto ND^{-1}$ (the expansion at $T=0$; $D(0)\\neq0$ for the reduced denominator $D$): if $Qf=P$ and $Q'g=P'$ then $QQ'(f+g)=PQ'+P'Q$ and $QQ'(fg)=PP'$, and $R_f=R_g$ gives $PQ'=P'Q$, hence $f=PQ^{-1}=P'Q'^{-1}=g$. Through this map a rational power series and its rational function are identified: an assertion about $f$ 'in $K(T)$' (an identity, a value, a substitution, a pole) is the assertion about $R_f$, and an identity in $K(T)$ between rational functions regular at $T=0$ is the same as the identity of their expansions in $K[[T]]$. For a subring $A\\subset K$, '$f\\in1+TA[[T]]\\cap K(T)$' means that $f$ is rational, has all its coefficients in $A$, and has constant coefficient $1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+  "place": "node thm-weil-final, order 2939, clause (i): '$Z(X_0,T)$ ... belongs to $1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$', and clauses (ii), (iv), (v), which treat the power series $Z(X_0,T)$ as an element of $\\mathbf Q(T)$ (factorization, poles, substitution $T\\mapsto q^{-d}T^{-1}$); the convention is spelled out in sk-def-roots/def-weil-normalized-integral-fraction.md ('$Z(T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ ... any rational series with integer coefficients and constant coefficient one, in the formal power series convention ... $Z(T)=A(T)/B(T)$ as a Taylor series at $T=0$'). Textbook: literature/milne-lectures-on-etale-cohomology_LEC.pdf, §27, Corollary 27.8 and Lemma 27.9, p. 156 ('The power series $Z(X_0,t)$ is a rational function with coefficients in $\\mathbf Q$, i.e., it lies in $\\mathbf Q(t)$'; 'let $f(t)\\in k[[t]]$; if $f(t)\\in K(t)$, then $f(t)\\in k(t)$')."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-formal-power-series",
+  "def-weil-rational-function-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'isRational\\|is_rational\\|rational power\\|rationalSeries' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rl 'rational power series\\|\\\\cap\\\\mathbf Q(T)' dag/nodes (DAG)",
+   "results": "Mathlib: only `AlgebraicGeometry.Scheme.IsRationalOver` (rational varieties) and comments on rational exponents; no predicate 'rational' on `PowerSeries`. DAG: def-weil-normalized-integral-fraction, prop-weil-integral-rational-series, prop-weil-zeta-integral-rational, thm-weil-final-rationality use '$1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$' or 'rational over $\\mathbf Q$' without a definition node; prop-weil-rationality-criterion characterizes '$C=P/Q$ with $Q(0)=1$' (a statement, not a definition)",
+   "date": "2026-10-09",
+   "verdict": "no named Mathlib predicate; no existing DAG definition"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'coeToLaurentSeries\\|theorem coe_coe' Mathlib/RingTheory/LaurentSeries.lean; grep -n 'def ofPowerSeries\\|ofPowerSeries_injective' Mathlib/RingTheory/HahnSeries/PowerSeries.lean; grep -n 'coeToPowerSeries.ringHom' Mathlib/RingTheory/PowerSeries/Basic.lean; grep -rn 'theorem isUnit_iff_constantCoeff' Mathlib/RingTheory/PowerSeries/; grep -n 'theorem mk_eq_div' Mathlib/FieldTheory/RatFunc/Basic.lean",
+   "results": "LaurentSeries.lean:372 `instance coeToLaurentSeries : Coe (RatFunc F) F⸨X⸩ := ⟨algebraMap (RatFunc F) F⸨X⸩⟩`, :375 `coe_coe (P : F[X]) : ((P : F⟦X⟧) : F⸨X⸩) = (P : RatFunc F)`; HahnSeries/PowerSeries.lean:90 `HahnSeries.ofPowerSeries : PowerSeries R →+* R⟦Γ⟧`, :97 `ofPowerSeries_injective`; PowerSeries/Basic.lean:836 `Polynomial.coeToPowerSeries.ringHom : R[X] →+* PowerSeries R`; PowerSeries/Inverse.lean:111 `PowerSeries.isUnit_iff_constantCoeff`; RatFunc/Basic.lean:543 `RatFunc.mk_eq_div : RatFunc.mk p q = algebraMap _ _ p / algebraMap _ _ q`",
+   "date": "2026-10-09",
+   "verdict": "generalization that specializes in one line: `K⟦X⟧` and `RatFunc K` both embed in the Laurent series `K⸨X⸩` by injective ring homomorphisms, and $K[[T]]\\cap K(T)$ is the intersection of their images; see mathlib_match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HahnSeries.ofPowerSeries",
+  "file": "Mathlib/RingTheory/HahnSeries/PowerSeries.lean",
+  "how": "specializes in one line: for `f : K⟦X⟧`, '`f` is rational' is `∃ P Q : K[X], Q.coeff 0 ≠ 0 ∧ (Q : K⟦X⟧) * f = (P : K⟦X⟧)` (coercion `Polynomial.coeToPowerSeries.ringHom`, Mathlib/RingTheory/PowerSeries/Basic.lean:836; `Q` is a unit by `PowerSeries.isUnit_iff_constantCoeff`, Inverse.lean:111), and its rational function is `RatFunc.mk P Q` (= `algebraMap P / algebraMap Q`, `RatFunc.mk_eq_div`, Mathlib/FieldTheory/RatFunc/Basic.lean:543); equivalently `HahnSeries.ofPowerSeries ℤ K f ∈ Set.range (algebraMap (RatFunc K) (LaurentSeries K))`, the two embeddings into `K⸨X⸩` being `HahnSeries.ofPowerSeries` (injective, PowerSeries.lean:90, 97) and the coercion `RatFunc F → F⸨X⸩` (`instance coeToLaurentSeries`, Mathlib/RingTheory/LaurentSeries.lean:372; injective as a ring homomorphism out of a field), which agree on polynomials (`coe_coe`, LaurentSeries.lean:375). Mathlib has no named predicate for this notion"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

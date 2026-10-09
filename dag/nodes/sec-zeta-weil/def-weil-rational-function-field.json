@@ -1,0 +1,53 @@
+{
+ "id": "def-weil-rational-function-field",
+ "kind": "definition",
+ "title": "Field of rational functions in one indeterminate",
+ "statement": "Let $K$ be a field [def-weil-field] and $T$ an indeterminate, with polynomial ring $K[T]$ [def-weil-polynomial-ring]. The *field of rational functions* $K(T)$ is the field of fractions of $K[T]$: its elements are the fractions $P/Q$ with $P,Q\\in K[T]$, $Q\\neq0$, where $P/Q=P'/Q'$ if and only if $PQ'=P'Q$, with $P/Q+P'/Q'=(PQ'+P'Q)/(QQ')$ and $(P/Q)(P'/Q')=(PP')/(QQ')$; $K[T]$ is the subring of the fractions $P/1$, and $K\\subset K[T]$ the constants. Every nonzero $R\\in K(T)$ has a unique *reduced presentation* $R=N/D$ with $N,D\\in K[T]$, $D$ monic and $\\gcd(N,D)=1$ (from any presentation $P/Q$, divide $P$ and $Q$ by $\\gcd(P,Q)$ and by the leading coefficient of the quotient of $Q$). For $a\\in K$, $R$ is *regular at $a$* if $D(a)\\neq0$ in its reduced presentation, and its *value* is then $R(a)=N(a)/D(a)\\in K$. For $S\\in K(T)$ transcendental over $K$, *substitution of $S$ for $T$* is the $K$-algebra homomorphism $K(T)\\to K(T)$, $R=P/Q\\mapsto R(S)=P(S)/Q(S)$, where $P(S)$ is the image of $P$ under the $K$-algebra homomorphism $K[T]\\to K(T)$ sending $T$ to $S$; it is well defined because that homomorphism is injective ($S$ is transcendental), so $Q(S)\\neq0$ for $Q\\neq0$, and it is the identity on $K$. For $c\\in K^\\times$, $S=cT^{-1}$ is transcendental over $K$ ($T=cS^{-1}$ is rational in $S$, so if $S$ were algebraic over $K$ then so would be $T$), and substituting $cT^{-1}$ twice gives back $R$; so $R\\mapsto R(cT^{-1})$ is an involutive automorphism of $K(T)$. For a polynomial $P\\in K[T]$ and $S\\in K(T)$, $P(S)$ is the usual evaluation of $P$ at $S$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+  "place": "node thm-weil-final, order 2939: $\\mathbf Q(T)$ in clause (i), the identities of clauses (ii), (iv) and (v), which hold in $\\mathbf Q(T)$ (the blueprint proof writes 'in $\\mathbf Q(T)$'), and the substitution $T\\mapsto q^{-d}T^{-1}$ in $P_{2d-i}(q^{-d}T^{-1})$ and $Z(X_0,q^{-d}T^{-1})$ of clause (v); the same field is used without a definition in sk-thm-intfactors/prop-integral-recovery.md and sk-thm-weil4/thm-weil-final-betti.md. Textbook: literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 187 ('$K=k(T)$, the field of rational functions in the symbol $T$ over $k$. Then $K$ is the field of fractions of the Dedekind domain $k[T]$')."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure RatFunc\\|instance.*IsFractionRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/RatFunc/Defs.lean Basic.lean; grep -rl 'RatFunc' dag/nodes (DAG)",
+   "results": "Mathlib/FieldTheory/RatFunc/Defs.lean:67 `structure RatFunc [CommRing K] : Type u where ofFractionRing ::` (notation `K⟮X⟯`); Mathlib/FieldTheory/RatFunc/Basic.lean:685 `instance : IsFractionRing K[X] K⟮X⟯`. DAG: no definition node for $K(T)$ (only lem-embedding-extension and lem-sc-tsen mention a rational function field in passing)",
+   "date": "2026-10-09",
+   "verdict": "match: RatFunc K is the field of fractions of K[X]"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def num\\b\\|def denom\\b\\|theorem monic_denom\\|theorem num_div_denom\\|theorem isCoprime_num_denom\\|def liftAlgHom' Mathlib/FieldTheory/RatFunc/Basic.lean; grep -n 'def eval\\b\\|theorem eval_mul' Mathlib/FieldTheory/RatFunc/AsPolynomial.lean",
+   "results": "Basic.lean:906 `RatFunc.num`, :948 `RatFunc.denom`, :958 `monic_denom`, :990 `num_div_denom : algebraMap _ _ (num x) / algebraMap _ _ (denom x) = x`, :1004 `isCoprime_num_denom`, :652 `RatFunc.liftAlgHom (φ : K[X] →ₐ[S] L) (hφ : K[X]⁰ ≤ L⁰.comap φ) : K⟮X⟯ →ₐ[S] L`; AsPolynomial.lean:143 `RatFunc.eval (f : K →+* L) (a : L) (p : K⟮X⟯) : L` = num.eval₂ f a / denom.eval₂ f a, :200 `eval_mul` when the denominators do not vanish",
+   "date": "2026-10-09",
+   "verdict": "match: the reduced presentation is num/denom (monic, coprime); the value at a is RatFunc.eval (RingHom.id K) a; substitution of a transcendental S is RatFunc.liftAlgHom (Polynomial.aeval S) (injectivity of aeval S), or RatFunc.eval (algebraMap K K⟮X⟯) S"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RatFunc",
+  "file": "Mathlib/FieldTheory/RatFunc/Defs.lean",
+  "how": "exact: `RatFunc K` (notation `K⟮X⟯`) is the field of fractions of `K[X]` (`instance : IsFractionRing K[X] K⟮X⟯`, Mathlib/FieldTheory/RatFunc/Basic.lean:685); the reduced presentation is `RatFunc.num`/`RatFunc.denom` with `RatFunc.monic_denom`, `RatFunc.isCoprime_num_denom`, `RatFunc.num_div_denom` (Basic.lean:906, 948, 958, 1004, 990); the value at `a` is `RatFunc.eval (RingHom.id K) a` (Mathlib/FieldTheory/RatFunc/AsPolynomial.lean:143); substitution of a transcendental `S` is `RatFunc.liftAlgHom (Polynomial.aeval S) _` (Basic.lean:652), equivalently `RatFunc.eval (algebraMap K K⟮X⟯) S`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

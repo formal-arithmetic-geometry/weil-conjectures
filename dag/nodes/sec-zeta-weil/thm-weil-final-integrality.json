@@ -11,42 +11,149 @@
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
-  "def-weil-integral-frobenius-factor",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-point-counts-zeta"
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-point-counts-zeta",
+  "def-weil-formal-power-series",
+  "def-weil-rational-power-series",
+  "def-weil-integral-frobenius-factor"
  ],
  "proof": [
   {
-   "text": "For each $\\ell$, [prop-weight-purity-roots] fixes the absolute\nvalue of every reciprocal root of the $P_{i,\\ell}$, so that the\nreciprocal roots are separated by their weights, and\n[prop-weight-separation] separates the odd and\neven parity products. The terminal realization-independence interface\n[thm-weil-realization-independence] supplies the integral factors and\ntheir scalar identities, while [thm-weil-realization-independence] supplies\nthe unique intrinsic\n$q$-Weil weight of every reciprocal root and the Galois-stability of the\nresulting root multisets; these are therefore supplied facts rather than\nadditional hypotheses. Thus the hypotheses of the stratum statements\n[prop-galois-weight-strata-integrality] and\n[prop-galois-weight-strata-identification] are met. Applying\n[prop-weil-zeta-normalized-presentation] to the fixed normalized\nfraction and then these two statements to each weight stratum produces\nintegral polynomials. The common realization and uniqueness are exactly\n[prop-integral-recovery]; its scalar-extension statement is the\ndisplayed determinant formula, so the product identity follows.",
+   "text": "*Step 1: the objects of the statement.* Over the global finite-field datum $(p,a,q,k_0=\\Fq,k=\\Fbar)$ of [def-weil-finite-field-fiber], with $q=p^a$ and $\\Ql=\\mathbf Q_\\ell$ for each prime $\\ell\\neq p$, the hypotheses on $X_0$ are those of [def-weil-geometric-hypotheses] (smooth of pure dimension $d$, proper, geometrically connected), and $X=X_0\\times_{k_0}k$ is its geometric fiber. For every prime $\\ell\\neq p$ and every integer $i$ with $0\\leq i\\leq2d$, $H^i(X,\\Ql)$ is the ordinary cohomology group of [def-weil-ordinary-compact-cohomology] with coefficients in the constant Weil sheaf $(\\Ql)_X$, and the geometric Frobenius $F_{i,\\ell}$ of the statement is the action on this group of the global geometric Frobenius $F$ of [def-weil-global-geometric-frobenius]. These are exactly the data $V_{i,\\ell}=H^i(X,\\Ql)$ and $F_{i,\\ell}=F|_{V_{i,\\ell}}$ of the smooth-proper cohomological family [def-weil-smooth-proper-cohomological-family], and the determinant displayed in the statement is the determinant factor of that family,\n\n$$\nP_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T],\n$$\n\nthe reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial] of the endomorphism $F_{i,\\ell}$ of $V_{i,\\ell}$; it is meaningful because $V_{i,\\ell}$ is a finite-dimensional $\\Ql$-vector space, by [prop-cohomological-finiteness] (applied with $E=\\Ql$ to the proper $X_0$), as the definition of the family records. Here $\\mathbf Z[T]$ and $\\Ql[T]$ are polynomial rings in the indeterminate $T$ [def-weil-polynomial-ring], and, for $P(T)=\\sum_{r\\geq0}c_rT^r\\in\\mathbf Z[T]$, the coefficientwise extension $P^{(\\ell)}(T)=\\sum_{r\\geq0}(c_r\\cdot1_{\\Ql})T^r\\in\\Ql[T]$ is that of [def-weil-coefficientwise-extension]. So the condition on $P_i$ in the statement reads $P_i^{(\\ell)}=P_{i,\\ell}$ in $\\Ql[T]$ for every prime $\\ell\\neq p$. Finally $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}\\#X_0(\\mathbf F_{q^n})T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$ is the point-count zeta series of [def-weil-point-counts-zeta] (with $Y_0=X_0$), an element of the formal power series ring $\\mathbf Q[[T]]$ of [def-weil-formal-power-series].",
    "uses": [
-    "prop-weight-purity-roots",
-    "prop-weight-separation",
-    "thm-weil-realization-independence",
-    "prop-galois-weight-strata-integrality",
-    "prop-galois-weight-strata-identification",
-    "prop-weil-zeta-normalized-presentation",
-    "prop-integral-recovery"
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-reverse-characteristic-polynomial",
+    "prop-cohomological-finiteness",
+    "def-weil-polynomial-ring",
+    "def-weil-coefficientwise-extension",
+    "def-weil-point-counts-zeta",
+    "def-weil-formal-power-series"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, (1.3)–(1.5), pp. 274–276 (PDF pp. 2–4): the groups H^i(X,Q_ℓ), finite-dimensional, with the Frobenius F^* and the factors det(1 − F^* t, H^i(X,Q_ℓ)) of (1.5.4); Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Theorem 27.6, p. 156 (printed pagination): P_r(X,t) = det(1 − Ft | H^r(X,Q_ℓ)). Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil2/thm-weil-final-integrality.md, statement (the notation F_{i,ℓ}, H^i(X,Q_ℓ), P_i^{(ℓ)} and Z(X_0,T)); the identification with the DAG's definitions is written out here."
+   }
+  },
+  {
+   "text": "*Step 2: rationality, and the normalized reduced integral presentation.* By Theorem I [thm-weil-final-rationality], applied to the same $X_0$ (same finite field, same hypotheses, same zeta series), $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$: the series has integer coefficients and constant coefficient $1$, and it is the Taylor expansion at $T=0$ of a rational function over $\\mathbf Q$. Fatou's lemma [prop-weil-integral-rational-series], applied to this series, gives unique polynomials $A,B\\in\\mathbf Z[T]$ with $A(0)=B(0)=1$, $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ and $B\\cdot Z(X_0,T)=A$ in $\\mathbf Q[[T]]$; that is, $(A,B)$ is a normalized reduced integral presentation of $Z(X_0,T)$ in the sense of [def-weil-normalized-integral-fraction] ($Z(X_0,T)=A(T)/B(T)$ as a Taylor series at $T=0$), and it is the only one. Fix this pair $(A,B)$; it is the normalized reduced integral presentation that [prop-integral-recovery] is stated for.",
+   "uses": [
+    "thm-weil-final-rationality",
+    "prop-weil-integral-rational-series",
+    "def-weil-normalized-integral-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, 'Preuve de (1.7) ⇒ (1.6)', p. 276 (PDF p. 4): 'Z(X_0,t) ∈ Z[[t]] ∩ Q_ℓ(t) ⊂ Q(t). Écrivons Z(X_0,t) = P/Q, avec P, Q ∈ Z[t], premiers entre eux, et de terme constant positif. D'après un lemme de Fatou, que Z(X_0,t) soit dans Z[[t]] et de terme constant un implique que les termes constants de P et Q sont 1'; Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Corollary 27.8 (rationality) and Proposition 27.11 (integrality of the reduced numerator and denominator), pp. 156 and 158 (printed pagination). In the DAG the rationality is Theorem I and Fatou's lemma is prop-weil-integral-rational-series."
+   }
+  },
+  {
+   "text": "*Step 3: existence and uniqueness of the integral factors.* The hypotheses of [prop-integral-recovery] are in place: the finite-field datum and the geometric hypotheses on $X_0$, the smooth-proper cohomological family $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ [def-weil-smooth-proper-cohomological-family] for every prime $\\ell\\neq p$ (Step 1), the point-count zeta series $Z(X_0,T)$, and its normalized reduced integral presentation $(A,B)$ [def-weil-normalized-integral-fraction] (Step 2). Its first clause states that there are unique polynomials $P_i(T)\\in\\mathbf Z[T]$, $0\\leq i\\leq2d$, with $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$, and that these are the integral Frobenius factors: each $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$. The condition on the tuple $(P_0,\\ldots,P_{2d})$ is the conjunction of one condition on each member, so the two quantifier forms agree: the existence of such a tuple gives, for every integer $i$ with $0\\leq i\\leq2d$, a polynomial $P_i\\in\\mathbf Z[T]$ with $P_i(0)=1$ and\n\n$$\nP_i^{(\\ell)}(T)=P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))\\quad\\text{for every prime }\\ell\\neq p\n$$\n\n(Step 1); and the uniqueness of the tuple gives the uniqueness of each member, for if $P_i'$ is another polynomial in $\\mathbf Z[T]$ with $P_i'(0)=1$ and $P_i'^{(\\ell)}=P_{i,\\ell}$ for every $\\ell\\neq p$, then the tuple obtained from $(P_0,\\ldots,P_{2d})$ by replacing its $i$-th member with $P_i'$ satisfies the same condition, hence equals $(P_0,\\ldots,P_{2d})$, so $P_i'=P_i$. This is the existence-and-uniqueness clause of the statement; 'the integral Frobenius factors' is the name of these $P_i$, and $P\\mapsto P^{(\\ell)}$ is the coefficientwise-extension notation [def-weil-coefficientwise-extension] retained in the statements that use them.",
+   "uses": [
+    "prop-integral-recovery",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-normalized-integral-fraction",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-coefficientwise-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, Théorème (1.6) ('le polynôme caractéristique det(t·1 − F^*, H^i(X,Q_ℓ)) est à coefficients entiers indépendants de ℓ') and 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277 (PDF pp. 4–5), from 'D'après l'hypothèse (1.7), les P_i sont premiers entre eux' to 'il est même à coefficients entiers'; Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Summary 27.14 (c), (d), p. 159 (printed pagination). In the DAG this weight argument is prop-integral-recovery (with thm-weil-realization-independence below it); this step reads its conclusion and unpacks the quantifiers."
+   }
+  },
+  {
+   "text": "*Step 4: the rational factorization, and its independence of $\\ell$.* The factorization clause of [prop-integral-recovery] states, for the polynomials $P_i$ of Step 3, that\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\quad\\text{in }\\mathbf Q(T),\n$$\n\nwhich, in the convention of [def-weil-rational-power-series] (the one of [def-weil-normalized-integral-fraction]), means that $Z(X_0,T)\\in\\mathbf Q[[T]]$ [def-weil-formal-power-series] is a rational power series whose rational function is $\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$, i.e. the Taylor expansion at $T=0$ of this rational function; equivalently $Z(X_0,T)\\cdot\\prod_{i\\text{ even}}P_i(T)=\\prod_{i\\text{ odd}}P_i(T)$ in $\\mathbf Q[[T]]$, the odd $i$ carrying the exponent $(-1)^{i+1}=+1$ and the even $i$ the exponent $-1$, and each $P_i$, having constant coefficient $1$, being invertible in $\\mathbf Q[[T]]$. This is the displayed rational factorization. It is independent of the chosen $\\ell$ in the following sense. Fix a prime $\\ell\\neq p$. The ring homomorphism $\\mathbf Z\\to\\Ql$, $c\\mapsto c\\cdot1_{\\Ql}$, is injective because $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], so the coefficientwise extension $\\mathbf Z[T]\\to\\Ql[T]$, $P\\mapsto P^{(\\ell)}$ [def-weil-coefficientwise-extension], is an injective ring homomorphism [lem-weil-coefficientwise-extension-injective]; hence $P_i$ is the only polynomial in $\\mathbf Z[T]$ with $P_i^{(\\ell)}=P_{i,\\ell}$ for this single prime $\\ell$. Thus each $P_i$, and with it the factorization, is already determined by the $\\ell$-adic determinant factors $P_{i,\\ell}$ of any one prime $\\ell\\neq p$, and by Step 3 the polynomials so determined are the same for every $\\ell\\neq p$: the factorization is one identity in $\\mathbf Q(T)$ between objects defined without reference to $\\ell$, from whichever $\\ell$ it is read off. (Applying $P\\mapsto P^{(\\ell)}$ to the coefficients of the identity $Z(X_0,T)\\cdot\\prod_{i\\text{ even}}P_i=\\prod_{i\\text{ odd}}P_i$ returns $Z(X_0,T)\\cdot\\prod_{i\\text{ even}}P_{i,\\ell}=\\prod_{i\\text{ odd}}P_{i,\\ell}$ in $\\Ql[[T]]$, the $\\ell$-adic factorization, for every $\\ell\\neq p$.)",
+   "uses": [
+    "prop-integral-recovery",
+    "def-weil-normalized-integral-fraction",
+    "def-weil-formal-power-series",
+    "def-weil-rational-power-series",
+    "lem-weil-integers-injective-char-zero",
+    "def-weil-coefficientwise-extension",
+    "lem-weil-coefficientwise-extension-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "§1, 'Preuve de (1.7) ⇒ (1.6)', p. 277 (PDF p. 5): 'P(t) = ∏_{i impair} P_i(t), Q(t) = ∏_{i pair} P_i(t)' and the closing sentence 'La description ci-dessus des racines de P_i(t) est indépendante de ℓ; le polynôme P_i(t) lui-même est donc indépendant de ℓ'; Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Summary 27.14 (b) and (d), p. 159 (printed pagination): 'P_{r,ℓ}(t) is characterized independently of ℓ as the factor of the numerator or denominator of Z(X_0,t) whose roots have absolute value q^{r/2}'. The injectivity used for 'determined by a single ℓ' is left unsaid by both and is written out here from the two Mathlib leaves."
+   }
   }
  ],
  "proof_deps": [
-  "prop-weight-purity-roots",
-  "prop-weight-separation",
-  "thm-weil-realization-independence",
-  "prop-galois-weight-strata-integrality",
-  "prop-galois-weight-strata-identification",
-  "prop-weil-zeta-normalized-presentation",
-  "prop-integral-recovery"
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-reverse-characteristic-polynomial",
+  "prop-cohomological-finiteness",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-extension",
+  "def-weil-point-counts-zeta",
+  "def-weil-formal-power-series",
+  "thm-weil-final-rationality",
+  "prop-weil-integral-rational-series",
+  "def-weil-normalized-integral-fraction",
+  "prop-integral-recovery",
+  "def-weil-integral-frobenius-factor",
+  "def-weil-rational-power-series",
+  "lem-weil-integers-injective-char-zero",
+  "lem-weil-coefficientwise-extension-injective"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil2/thm-weil-final-integrality.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "§1, Théorème (1.6) and 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277 (PDF pp. 4–5): rationality and Fatou's lemma give Z(X_0,t) = P/Q with P, Q ∈ Z[t] coprime of constant term 1, and the weight argument gives the P_i ∈ Z[t], independent of ℓ. Also Milne, literature/milne-lectures-on-etale-cohomology_LEC.pdf, Corollary 27.8, Proposition 27.11 and Summary 27.14 (b)–(d), pp. 156–159 (printed pagination). The division of the weight argument into prop-integral-recovery and thm-weil-realization-independence is the blueprint's (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/_section.md, ## Proof), and the blueprint's own one-paragraph proof of this node (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil2/thm-weil-final-integrality.md, ## Proof) is not followed: it lists the propositions behind prop-integral-recovery without deriving the clauses."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'zeta' Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no zeta function of a scheme over a finite field"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Weil conjecture\\|WeilFactorization\\|zetaSeries\\|HasseWeil\\|Weil number\\|WeilNumber' Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Weil conjectures, Weil factorization or Weil numbers in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Frobenius' Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Frobenius action on cohomology of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'EllAdic\\|ellAdic\\|ℓ-adic\\|l-adic' Mathlib",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: the sheaf U ↦ C(U, ℤ_[ℓ]) on the pro-étale site and its cohomology groups AlgebraicGeometry.Scheme.EllAdicCohomology (H^i(X, ℤ_[ℓ]) in Type (u+1)); no ℚ_ℓ-coefficients, no Weil sheaves, no Frobenius, no determinant factors",
+   "date": "2026-10-09",
+   "verdict": "no match; the only neighbouring notion is the ℤ_ℓ-cohomology groups, without the Frobenius the statement needs"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsPureOfWeight\\|PureOfWeight' Mathlib",
+   "results": "none (the weight-purity predicates of the source repository, WeilConjectures.ZetaLinearAlgebra.Weights, are not in Mathlib)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_multiple"
@@ -138,5 +245,16 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final-integrality",
+  "worker": "stage1",
+  "summary": "Statement checked against its master source (verbatim; the slopmaster2 blueprint has no file or TeX theorem for this node, its content being prop:integral-factor-existence, def:canonical-cohomological-factors and prop:integral-recovery of 01_final_weil_conjectures.tex, lines 3114–3181, which state the same existence, uniqueness and factorization), against Deligne Weil I, Théorème (1.6) with 'Preuve de (1.7) ⇒ (1.6)', pp. 276–277, and against Milne LEC Summary 27.14 (b)–(d), p. 159; kept, as equivalent to Deligne's 'det(t·1 − F^*, H^i) à coefficients entiers indépendants de ℓ' (existence ⇔ the ℓ-adic factors have integer coefficients and coincide across ℓ; uniqueness ⇔ injectivity of Z[T] → Q_ℓ[T]). The section sketch sk-thm-weil2 says the theorem is sk-thm-intfactors restated, and the proof is written that way: the imported one-paragraph proof, which only listed the propositions behind prop-integral-recovery (weight purity, weight separation, the Galois strata, the normalized presentation, thm-weil-realization-independence cited twice as two sources) without deriving any clause, is replaced by four steps following Deligne: the identification of the statement's F_{i,ℓ}, H^i(X,Q_ℓ), det(1 − TF_{i,ℓ}|H^i), P^{(ℓ)} and Z(X_0,T) with the DAG's definitions; rationality from Theorem I (thm-weil-final-rationality) and the normalized reduced integral presentation (A,B) from Fatou's lemma (prop-weil-integral-rational-series), which prop-integral-recovery takes as a hypothesis and the imported proof supplied circularly ('applying prop-weil-zeta-normalized-presentation to the fixed normalized fraction'); existence and uniqueness of the P_i read off from prop-integral-recovery, with the passage from the unique tuple to 'for every i a unique P_i' written out; the factorization in Q(T) from the same proposition, and the ℓ-independence made precise (each P_i is determined by the ℓ-adic factor of any single ℓ, by the two injectivity leaves, and is the same for all ℓ). Statement dependencies completed with the cohomological family, the reverse characteristic polynomial, the polynomial ring, the coefficientwise extension, the formal power series ring and the rational-power-series convention (def-weil-rational-power-series, created by the thm-weil-final worker during this batch); the imported six kept. The seven imported proof dependencies are dropped from the direct proof and remain reached through prop-integral-recovery and thm-weil-realization-independence. No new node was needed. Mathlib searched for the item: nothing beyond ℤ_ℓ-cohomology on the pro-étale site. The Lean on slopmaster2 (WeilConjectures/Statement.lean 86–98) states something else; see the report."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
