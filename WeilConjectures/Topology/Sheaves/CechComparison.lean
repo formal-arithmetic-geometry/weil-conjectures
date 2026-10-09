@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Products
 public import Mathlib.Algebra.Homology.Linear
+public import Mathlib.Algebra.Homology.ShortComplex.Linear
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
@@ -29,12 +31,15 @@ of the underlying presheaf of abelian groups, naturally in the presheaf.
   `cechComplexFunctor U` onto the factor of a tuple `y`.
 - `TopCat.Presheaf.cechComplexFunctorIso`: for a presheaf of modules `P`, the complex of abelian
   groups underlying `(cechComplexFunctor U).obj P` is `(cechComplex U).obj P`.
+- `TopCat.Presheaf.cechComplexFunctorHomologyIso`: the same for their homology.
 
 ## Main statements
 
 - `TopCat.Presheaf.cechComplexFunctorIso_hom_naturality`: the identification is natural in `P`.
 - `TopCat.Presheaf.cechComplexFunctor_map_smul_id`: multiplication by a scalar on the presheaf
   induces multiplication by the scalar on the Čech complex.
+- `TopCat.Presheaf.cechComplexFunctorHomologyIso_hom_smul`: the identification of homology
+  transports the scalar action to the map induced by multiplication on the presheaf.
 -/
 
 @[expose] public section
@@ -218,5 +223,69 @@ lemma cechComplexFunctor_map_smul_id {R : Type u'} [CommRing R]
     Category.comp_id]
 
 end ModuleCat
+
+section Homology
+
+variable {X : TopCat.{u}} {ι : Type u} (U : ι → Opens X) {R : Type u'} [Ring R]
+  (P : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} R)
+
+/-- The homology of Mathlib's Čech complex of a presheaf of modules, as an abelian group, is
+the homology of the explicit Čech complex of the underlying presheaf of abelian groups. -/
+noncomputable def cechComplexFunctorHomologyIso (q : ℕ) :
+    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).obj (((cechComplexFunctor U).obj P).homology q) ≅
+      ((cechComplex U).obj (P ⋙ forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})).homology q :=
+  ((((cechComplexFunctor U).obj P).sc q).mapHomologyIso (forget₂ _ _)).symm ≪≫
+    HomologicalComplex.homologyMapIso (cechComplexFunctorIso U P) q
+
+/-- The identification `TopCat.Presheaf.cechComplexFunctorHomologyIso` is natural in the
+presheaf. -/
+lemma cechComplexFunctorHomologyIso_hom_naturality {Q : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} R}
+    (φ : P ⟶ Q) (q : ℕ) :
+    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).map
+        (HomologicalComplex.homologyMap ((cechComplexFunctor U).map φ) q) ≫
+      (cechComplexFunctorHomologyIso U Q q).hom =
+      (cechComplexFunctorHomologyIso U P q).hom ≫ HomologicalComplex.homologyMap
+        ((cechComplex U).map (Functor.whiskerRight φ (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})))
+          q := by
+  have h := ShortComplex.mapHomologyIso_inv_naturality
+    ((HomologicalComplex.shortComplexFunctor _ _ q).map ((cechComplexFunctor U).map φ))
+    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})
+  have h₂ := congrArg (fun f ↦ HomologicalComplex.homologyMap f q)
+    (cechComplexFunctorIso_hom_naturality U P φ)
+  simp only [HomologicalComplex.homologyMap_comp] at h₂
+  dsimp only [cechComplexFunctorHomologyIso, Iso.trans_hom, Iso.symm_hom,
+    HomologicalComplex.homologyMapIso_hom]
+  rw [Category.assoc]
+  erw [reassoc_of% h]
+  exact congrArg _ h₂
+
+/-- Under `TopCat.Presheaf.cechComplexFunctorHomologyIso`, multiplication by a scalar on the
+homology of Mathlib's Čech complex is the map induced by multiplication by the scalar on the
+presheaf. -/
+lemma cechComplexFunctorHomologyIso_hom_smul {R : Type u'} [CommRing R]
+    (P : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} R) (q : ℕ) (r : R)
+    (x : ((cechComplexFunctor U).obj P).homology q) :
+    (cechComplexFunctorHomologyIso U P q).hom (r • x) =
+      HomologicalComplex.homologyMap ((cechComplex U).map
+        (Functor.whiskerRight (r • 𝟙 P) (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}))) q
+          ((cechComplexFunctorHomologyIso U P q).hom x) := by
+  have h := ConcreteCategory.congr_hom
+    (cechComplexFunctorHomologyIso_hom_naturality U P (r • 𝟙 P) q) x
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
+  rw [← h, cechComplexFunctor_map_smul_id]
+  congr 1
+  have e : (HomologicalComplex.shortComplexFunctor _ _ q).map
+      (r • 𝟙 ((cechComplexFunctor U).obj P)) =
+        r • 𝟙 (((cechComplexFunctor U).obj P).sc q) := by
+    ext <;> rfl
+  have : HomologicalComplex.homologyMap (r • 𝟙 ((cechComplexFunctor U).obj P)) q =
+      r • 𝟙 (((cechComplexFunctor U).obj P).homology q) := by
+    change ShortComplex.homologyMap _ = _
+    rw [e, ShortComplex.homologyMap_smul, ShortComplex.homologyMap_id]
+    rfl
+  rw [this]
+  rfl
+
+end Homology
 
 end TopCat.Presheaf
