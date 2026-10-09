@@ -8,9 +8,32 @@
   "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), with Definition Tag 0ELY (definition-zariski-pair: a pair $(A,I)$ with $I$ in the Jacobson radical); its proof: an idempotent of a local ring is $0$ or $1$, so an idempotent is determined by the set of maximal ideals where it vanishes (Algebra, Lemma Tag 00HN, lemma-characterize-zero-local)"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "*Localization at a maximal ideal.* Let $\\mathfrak m$ be any maximal ideal of $R$ and localize at $\\mathfrak m$. Since $J$ is contained in the Jacobson radical, which is the intersection of all maximal ideals, the image of $e-e'$ lies in the maximal ideal of the local ring $R_{\\mathfrak m}$. An idempotent in a local ring is either $0$ or $1$: for $x^2=x$, the factors $x$ and $1-x$ multiply to zero and one of them is a unit because their sum is $1$. Their images in the residue field of $R_{\\mathfrak m}$ are therefore the distinct possibilities $0$ and $1$; as $e-e'$ maps to zero in that residue field, the two localized idempotents have the same value, hence $e/1=e'/1$ in $R_{\\mathfrak m}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), proof via localization at maximal ideals; Algebra Lemma Tag 00HN (lemma-characterize-zero-local)"
+   }
+  },
+  {
+   "text": "*Equality detected at maximal localizations.* Put $d=e-e'$. Step 1 gives $d/1=0$ in $R_{\\mathfrak m}$ for every maximal ideal $\\mathfrak m$. If $d\\ne0$, its annihilator $\\operatorname{Ann}(d)$ is a proper ideal and is contained in some maximal ideal $\\mathfrak m$. The equality $d/1=0$ in $R_{\\mathfrak m}$ would give an element $s\\notin\\mathfrak m$ with $sd=0$, so $s\\in\\operatorname{Ann}(d)\\subseteq\\mathfrak m$, a contradiction. Thus $d=0$ and $e=e'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), conclusion from equality after all maximal localizations"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical) and Algebra Lemma Tag 00HN"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +65,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +85,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-idempotents-determined-modulo-radical",
+  "worker": "stage1",
+  "summary": "Split along Stacks Tag 09XF: for each maximal ideal, localization puts the difference in the maximal ideal of a local ring, where idempotents are only 0 or 1 and hence the localized idempotents agree; equality at every maximal localization then implies global equality by the annihilator argument. Both proof steps are written out as elementary commutative algebra, so no new DAG node is needed. Mathlib searches found only nilpotent-kernel idempotent uniqueness, not the Jacobson-radical statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "D",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D; spot-checked by L: L read both steps against Stacks 09XF: idempotents of a local ring are 0 or 1 (x and 1-x sum to 1, one is a unit, their product is 0), equality in every R_m by the residue-field values, and the annihilator argument detects equality; correct and elementary. The '## Review by D' is thin (it summarises the split rather than saying what was checked); merged this once on L's own check."
+ }
 }
