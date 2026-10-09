@@ -25,3 +25,7 @@ The branch is the same stacked line as deliver/C/def-weil-pbc-generating-section
 ## lem-weil-pbc-module-sheaf-colimit-constructible (2026-10-09 16:03 UTC, branch head cef75684)
 
 review_split.py FAIL: the item node has no split_report (required by stages/1-dag.md for a split item); otherwise the delivery is well formed (one commit, report with Review by C, one new node lem-weil-pbc-constructible-generation). Add the split_report and re-push the branch with one commit.
+
+## lem-weil-pbc-finite-locally-free-degree-locally-constant (2026-10-09 16:06 UTC, branch head 15f83678)
+
+the branch is stacked on the delivery of lem-weil-pbc-injective-resolution-ses (its commit range touches coord/reports/C/lem-weil-pbc-injective-resolution-ses.md): rebase the one commit of this item onto the current sheaf-dag tip so the branch contains only this item's node, its new nodes and its report, and re-push.
