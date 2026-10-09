@@ -610,3 +610,107 @@ lemma twistMonomial_eq_smul {i : n} (hi : i ∈ s) (e : laurentExponents s m) :
 end Monomial
 
 end AlgebraicGeometry.Proj
+
+namespace AlgebraicGeometry.ProjectiveSpace
+
+open MvPolynomial
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable (n : Type u) (S : Scheme.{u})
+
+/-- The preimage in `ℙ(n; S)` of an open `W` of the integral model `ℙⁿ_ℤ` is the base change of
+`W` along `S ⟶ Spec ℤ`. -/
+lemma isPullback_preimage (W : (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)).Opens) :
+    IsPullback ((toProjInt n S).resLE W (toProjInt n S ⁻¹ᵁ W) le_rfl)
+      ((toProjInt n S ⁻¹ᵁ W).ι ≫ ℙ(n; S) ↘ S) (terminal.from W.toScheme) (terminal.from S) := by
+  have h := (isPullback_morphismRestrict (toProjInt n S) W).paste_vert
+    (isPullback_over_toProjInt n S).flip
+  have hr : (toProjInt n S).resLE W (toProjInt n S ⁻¹ᵁ W) le_rfl = toProjInt n S ∣_ W :=
+    Scheme.Hom.resLE_eq_morphismRestrict ..
+  exact h.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    (by rw [Iso.refl_hom, Category.comp_id]; exact hr.symm.trans (Category.id_comp _).symm)
+    (by rw [Iso.refl_hom, Category.comp_id]; exact (Category.id_comp _).symm)
+    (terminal.hom_ext _ _) (terminal.hom_ext _ _)
+
+/-- The ring of global functions on the terminal scheme `Spec ℤ` is a quotient of `ℤ`. -/
+lemma surjective_intCastRingHom_Γ_terminal :
+    Function.Surjective (Int.castRingHom Γ(⊤_ Scheme.{u}, ⊤)) := by
+  let e : Γ(⊤_ Scheme.{u}, ⊤) ≅ CommRingCat.of (ULift.{u} ℤ) :=
+    Scheme.Γ.mapIso (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).op ≪≫
+      Scheme.ΓSpecIso _
+  intro y
+  refine ⟨(e.hom y).down, e.commRingCatIsoToRingEquiv.injective ?_⟩
+  change e.hom _ = e.hom y
+  rw [eq_intCast, map_intCast]
+  rfl
+
+variable {n} [Fintype n]
+
+/-- The monomial basis of `ℤ[Xᵢ]_{(∏_{i ∈ s} Xᵢ)}`, as a `ℤ`-basis. -/
+noncomputable def awayMonomialBasisInt (s : Set n) :
+    Module.Basis (laurentExponents s 0) ℤ
+      (HomogeneousLocalization.Away (homogeneousSubmodule n (ULift.{u} ℤ))
+        (monomialToNat (ULift.{u} ℤ) (s.indicator 1))) :=
+  (awayMonomialBasis (ULift.{u} ℤ) s).mapCoeffs ULift.ringEquiv fun c x ↦ by
+    conv_rhs => rw [show c = ((c.down : ℤ) : ULift.{u} ℤ) from ULift.ext _ _ (by simp)]
+    rw [Int.cast_smul_eq_zsmul]
+    rfl
+
+@[simp]
+lemma awayMonomialBasisInt_apply (s : Set n) (e : laurentExponents s 0) :
+    awayMonomialBasisInt s e = awayMonomial (ULift.{u} ℤ) s e := by
+  simp [awayMonomialBasisInt]
+
+lemma indicatorDegree_pos {s : Set n} (hs : s.Nonempty) : 0 < indicatorDegree s := by
+  obtain ⟨i, hi⟩ := hs
+  have : 0 < (s.indicator (1 : n → ℤ) i).toNat := by simp [Set.indicator_of_mem hi]
+  exact this.trans_le (Finset.single_le_sum (f := fun j ↦ (s.indicator (1 : n → ℤ) j).toNat)
+    (fun _ _ ↦ Nat.zero_le _) (Finset.mem_univ i))
+
+variable (n) in
+/-- The open `D₊(∏_{i ∈ s} Xᵢ)` of the integral model `ℙⁿ_ℤ`. -/
+noncomputable abbrev basicOpenInt (s : Set n) :
+    (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)).Opens :=
+  Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (monomialToNat _ (s.indicator 1))
+
+/-- **The functions on `⋂_{i ∈ s} D₊(xᵢ) ⊆ ℙ(n; Spec k)`**: every function is uniquely a finite
+`k`-linear combination of the Laurent monomials `xᵉ`, `∑ eᵢ = 0`, `eᵢ ≥ 0` for `i ∉ s`. This is
+the base change to `k` of the monomial basis of `ℤ[Xᵢ]_{(∏_{i ∈ s} Xᵢ)}`. -/
+theorem bijective_sum_awayMonomial (k : Type u) [CommRing k] {s : Set n} (hs : s.Nonempty) :
+    Function.Bijective fun c : laurentExponents s 0 →₀ k ↦ c.sum fun e r ↦
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop ≫
+        ℙ(n; Spec (.of k)).presheaf.map (homOfLE le_top).op) r *
+      (Proj.awayToSection _ _ ≫ (toProjInt n (Spec (.of k))).appLE (basicOpenInt n s)
+        (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s) le_rfl)
+        (awayMonomial (ULift.{u} ℤ) s e) := by
+  have hdeg := indicatorDegree_pos hs
+  have hf := monomialToNat_indicator_mem (ULift.{u} ℤ) s
+  have hW : IsAffineOpen (basicOpenInt n s) := Proj.isAffineOpen_basicOpen _ _ hf hdeg
+  have : IsAffine (basicOpenInt n s).toScheme := hW
+  have hpo := isPushout_appTop_of_isPullback (isPullback_preimage n (Spec (.of k))
+    (basicOpenInt n s))
+  have hpo' := hpo.of_iso (Iso.refl _)
+    ((basicOpenInt n s).topIso ≪≫ (Proj.basicOpenIsoAway _ _ hf hdeg).symm)
+    (Scheme.ΓSpecIso (.of k)) (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s).topIso
+    (f' := Scheme.Hom.appTop (terminal.from (basicOpenInt n s).toScheme) ≫ (basicOpenInt n s).topIso.hom ≫
+      (Proj.basicOpenIsoAway _ _ hf hdeg).inv)
+    (g' := Scheme.Hom.appTop (terminal.from (Spec (.of k))) ≫ (Scheme.ΓSpecIso (.of k)).hom)
+    (inl' := Proj.awayToSection _ _ ≫ (toProjInt n (Spec (.of k))).appLE (basicOpenInt n s)
+        (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s) le_rfl)
+    (inr' := (Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop ≫
+        ℙ(n; Spec (.of k)).presheaf.map (homOfLE le_top).op)
+    (by simp) (by simp) ?_ ?_
+  · convert CommRingCat.IsPushout.bijective_sum_mul hpo' surjective_intCastRingHom_Γ_terminal
+      (awayMonomialBasisInt s) using 1
+    ext c
+    simp
+  · rw [Scheme.Hom.appTop, Scheme.Hom.resLE_app_top, Iso.trans_hom, Iso.symm_hom,
+      Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+      ← Proj.basicOpenIsoAway_hom _ _ hf hdeg, Category.assoc]
+    erw [Iso.inv_hom_id_assoc]
+  · rw [Iso.hom_inv_id_assoc, Scheme.Hom.comp_appTop, Category.assoc,
+      Scheme.Opens.ι_appTop, Scheme.Opens.topIso_hom, ← Functor.map_comp]
+    rfl
+
+end AlgebraicGeometry.ProjectiveSpace
