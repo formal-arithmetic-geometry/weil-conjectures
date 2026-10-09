@@ -38,10 +38,6 @@
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
 | `lem-weil-pbc-eventually-closed-immersion` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
-| `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1010 | none |
-| `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1010 | none |
-| `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1010 | none |
-| `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1010 | none |
 | `lem-weil-pbc-site-covering-isomorphic-family` | 1010 | none |
 | `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
@@ -50,6 +46,7 @@
 | `def-weil-pbc-charpoly-locally-free` | 1011 | none |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1011 | none |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1011 | none |
+| `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1011 | none |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1011 | none |
 | `lem-weil-pbc-gabber-criterion` | 1011 | none |
 | `lem-weil-pbc-gabber-h1-absolutely-algebraically-closed` | 1011 | none |
@@ -58,9 +55,12 @@
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1011 | none |
 | `lem-weil-pbc-nakayama-nilpotent` | 1011 | none |
 | `lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings` | 1011 | none |
+| `lem-weil-pbc-quasi-coherent-module-cokernel-image` | 1011 | none |
+| `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1011 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1011 | none |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1011 | none |
 | `lem-weil-pbc-strictly-henselian-quotient` | 1011 | none |
+| `lem-weil-pbc-tilde-pullback-base-change` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1011 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
@@ -626,7 +626,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 572 nodes that wait for stage 1, 242 nodes that wait for a statement dependency.
+Not open yet: 572 nodes that wait for stage 1, 247 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
