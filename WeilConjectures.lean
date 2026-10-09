@@ -526,6 +526,7 @@ public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
@@ -1004,6 +1005,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comple
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
