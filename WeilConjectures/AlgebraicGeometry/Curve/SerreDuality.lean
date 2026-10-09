@@ -347,7 +347,78 @@ theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
     rw [Submonoid.smul_def, Algebra.smul_def] at hrm
     exact (mul_eq_zero.mp hrm).resolve_left this
   refine ⟨hfin, hsurj, hflat, fun y ↦ ?_⟩
-  sorry
+  have : IsLocallyNoetherian P :=
+    LocallyOfFiniteType.isLocallyNoetherian (P ↘ Spec (.of k))
+  have : LocallyOfFinitePresentation π :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance
+  -- the rank is constant, so it is the rank at `π η`
+  rw [π.isLocallyConstant_finrank.apply_eq_of_preconnectedSpace y (π (genericPoint X))]
+  -- the rank at `π η` is the degree of the residue field extension `κ(η) / κ(π η)`
+  have hrank : π.finrank (π (genericPoint X)) =
+      letI := (π.residueFieldMap (genericPoint X)).hom.toAlgebra
+      Module.finrank (P.residueField (π (genericPoint X)))
+        (X.residueField (genericPoint X)) := by
+    have h₁ := (Scheme.Hom.finrank_pullback_snd π (P.fromSpecResidueField (π (genericPoint X)))
+      (IsLocalRing.closedPoint _)).trans (congrArg π.finrank (P.fromSpecResidueField_apply _ _))
+    rw [← h₁]
+    change (π.fiberToSpecResidueField _).finrank _ = _
+    rw [← Scheme.Hom.finrank_comp_left_of_isIso (π.asFiberHom (genericPoint X))]
+    have h₂ : π.asFiberHom (genericPoint X) ≫ π.fiberToSpecResidueField (π (genericPoint X)) =
+        Spec.map (π.residueFieldMap (genericPoint X)) := by simp
+    have hfin' : IsFinite (Spec.map (π.residueFieldMap (genericPoint X))) := by
+      rw [← h₂]; infer_instance
+    rw [h₂]
+    let := (π.residueFieldMap (genericPoint X)).hom.toAlgebra
+    have : Module.Finite (P.residueField (π (genericPoint X)))
+        (X.residueField (genericPoint X)) := (IsFinite.SpecMap_iff _).mp hfin'
+    rw [show π.residueFieldMap (genericPoint X) = CommRingCat.ofHom (algebraMap
+      (P.residueField (π (genericPoint X))) (X.residueField (genericPoint X))) from rfl,
+      Scheme.Hom.finrank_SpecMap_algebraMap, Module.rankAtStalk_eq_finrank_of_free]
+    rfl
+  rw [hrank]
+  -- the image of `κ(π η)` in `κ(η) = k(X)` is `k(t)`
+  let g := X.fromSpecFunctionField
+  have key : ∀ x : X, x = g (IsLocalRing.closedPoint X.functionField) →
+      (letI := (π.residueFieldMap x).hom.toAlgebra
+      Module.finrank (P.residueField (π x)) (X.residueField x)) =
+        Module.finrank (Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}))
+          X.functionField := by
+    rintro x rfl
+    let a := π.residueFieldMap (g (IsLocalRing.closedPoint X.functionField))
+    let b := Scheme.descResidueField (K := X.functionField) (Scheme.stalkClosedPointTo g)
+    have hc := Scheme.descResidueField_stalkClosedPointTo_comp π g
+    have hrange : (a ≫ b).hom.fieldRange =
+        Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+      erw [← hc]
+      have e := hπ hs
+      rw [hg₀] at e
+      have key' : ∀ h : Spec X.functionField ⟶ P, h = ProjectiveSpace.homOfSections
+          (Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)))
+          (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of X.functionField)).inv
+            (![1, t] i.down)) hs →
+          (Scheme.descResidueField (Scheme.stalkClosedPointTo h)).hom.fieldRange =
+            Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+        rintro h rfl
+        exact ProjectiveLine.fieldRange_descResidueField_homOfSections _ t hs
+      exact key' _ e
+    have hb : Function.Bijective b := by
+      refine ⟨b.hom.injective, ?_⟩
+      have hres : X.residue _ ≫ b = Scheme.stalkClosedPointTo g :=
+        Scheme.residue_descResidueField _
+      rw [Scheme.stalkClosedPointTo_fromSpecStalk] at hres
+      have : Function.Surjective (X.residue _ ≫ b) := by
+        rw [hres]
+        exact (ConcreteCategory.bijective_of_isIso _).2
+      intro y
+      obtain ⟨z, hz⟩ := this y
+      exact ⟨X.residue _ z, by rw [← CommRingCat.comp_apply]; exact hz⟩
+    let := a.hom.toAlgebra
+    refine Algebra.finrank_eq_of_equiv_equiv
+      (((a ≫ b).hom.rangeRestrictFieldEquiv).trans (RingEquiv.subfieldCongr hrange))
+      (RingEquiv.ofBijective b.hom hb) ?_
+    ext z
+    rfl
+  exact key _ Scheme.fromSpecStalk_closedPoint.symm
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
 a finite flat morphism `X ⟶ ℙ¹_k` over `k`. Each connected component of `X` is integral
