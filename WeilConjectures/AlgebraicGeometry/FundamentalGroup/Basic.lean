@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Galois.Equivalence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import WeilConjectures.Mathlib.AlgebraicGeometry.EssentiallySmallOver
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
 /-!
