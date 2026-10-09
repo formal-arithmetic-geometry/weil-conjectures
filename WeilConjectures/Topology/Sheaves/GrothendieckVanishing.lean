@@ -774,4 +774,58 @@ lemma subsingleton_H_of_isSupportedOn_finset (S : Finset (Set X))
 
 end Reducible
 
+/-- An element of `WithBot ℕ∞` below `n + 1` is at most `n`. -/
+private lemma le_of_lt_natCast_add_one {x : WithBot ℕ∞} {n : ℕ} (h : x < (n + 1 : ℕ)) :
+    x ≤ n := by
+  induction x using WithBot.recBotCoe with
+  | bot => exact bot_le
+  | coe x =>
+    induction x using ENat.recTopCoe with
+    | top =>
+      rw [WithBot.coe_top] at h
+      exact absurd h (not_lt.2 le_top)
+    | coe x =>
+      have : x < n + 1 := by exact_mod_cast h
+      exact_mod_cast Nat.lt_succ_iff.1 this
+
+variable [NoetherianSpace X]
+
+/-- **Grothendieck vanishing for sheaves with support of bounded dimension.** On a noetherian
+space, an abelian sheaf supported on a closed subset of dimension less than `n` has vanishing
+cohomology in degrees at least `n`. -/
+theorem vanishingBelow (n : ℕ) : VanishingBelow X n := by
+  induction n with
+  | zero =>
+    intro Z _ hdim F hF i _
+    have hZ : Z = ∅ := by
+      by_contra hZ
+      obtain ⟨z, hz⟩ := Set.nonempty_iff_ne_empty.2 hZ
+      rw [topologicalKrullDim, Order.krullDim_lt_coe_iff] at hdim
+      exact Nat.not_lt_zero _ (hdim (RelSeries.singleton _
+        ⟨closure {(⟨z, hz⟩ : Z)}, isIrreducible_singleton.closure, isClosed_closure⟩))
+    subst hZ
+    exact subsingleton_H_of_isZero hF.isZero i
+  | succ n ih =>
+    intro Z hZ hdim F hF i hi
+    obtain ⟨S, hSf, hSc, hSi, rfl⟩ := NoetherianSpace.exists_finite_set_isClosed_irreducible hZ
+    refine subsingleton_H_of_isSupportedOn_finset ih hSf.toFinset (fun T hT ↦ ?_) F
+      (by simpa [Set.sUnion_eq_biUnion] using hF) i (by omega)
+    rw [Set.Finite.mem_toFinset] at hT
+    refine ⟨hSi T hT, hSc T hT, le_trans ?_ (le_of_lt_natCast_add_one hdim)⟩
+    exact (Topology.IsInducing.of_comp (continuous_inclusion (Set.subset_sUnion_of_mem hT))
+      continuous_subtype_val Topology.IsInducing.subtypeVal).topologicalKrullDim_le
+
+/-- **Grothendieck vanishing.** On a noetherian topological space `X`, `H^q(X, F) = 0` for every
+abelian sheaf `F` and every `q` larger than the dimension of `X`. -/
+@[stacks 02UZ]
+theorem subsingleton_H_of_topologicalKrullDim_lt
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) {q : ℕ}
+    (hq : topologicalKrullDim X < q) : Subsingleton (Sheaf.H F q) := by
+  refine vanishingBelow q Set.univ isClosed_univ ?_ F (fun V hV s ↦ ?_) q le_rfl
+  · rwa [(Homeomorph.Set.univ X).isHomeomorph.topologicalKrullDim_eq]
+  · have hV' : V = ⊥ := eq_bot_iff.2 fun x hx ↦ (Set.disjoint_left.1 hV hx (Set.mem_univ x)).elim
+    have := AddCommGrpCat.subsingleton_of_isZero
+      (isTerminalOfEqEmpty (C := AddCommGrpCat.{u}) F hV').isZero
+    exact Subsingleton.elim _ _
+
 end TopCat.Sheaf
