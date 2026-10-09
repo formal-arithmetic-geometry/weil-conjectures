@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-basic-open-function",
+ "kind": "statement",
+ "title": "The non-vanishing locus of a function on a scheme is open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ open and $g\\in\\mathcal O_X(U)$. For $x\\in U$ write $g_x\\in\\mathcal O_{X,x}$ for the germ and $g(x)$ for its image in the residue field $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ [def-weil-residue-field]. Put $D(g)=\\{x\\in U:\\ g_x\\notin\\mathfrak m_x\\}$. Then (a) for $x\\in U$: $x\\in D(g)$ iff $g_x$ is a unit of the local ring $\\mathcal O_{X,x}$ iff $g(x)\\neq0$ in $\\kappa(x)$; (b) $D(g)$ is open in $X$ and contained in $U$; (c) the restriction $g|_{D(g)}$ is a unit of $\\mathcal O_X(D(g))$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01HZ (lemma-f-open) and its proof (stated there for a global function on a locally ringed space; apply it to the open subspace U)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the set of points of a scheme where a section of the structure sheaf does not vanish in the residue field is open",
+   "results": "AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen (Mathlib.AlgebraicGeometry.ResidueField), LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen, Scheme.evaluation_eq_zero_iff_notMem_basicOpen, Scheme.affineBasicOpen, Scheme.mem_basicOpen_top",
+   "date": "2026-10-09",
+   "verdict": "match (with Scheme.basicOpen and Scheme.mem_basicOpen)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen, IsUnit",
+   "results": "Scheme.basicOpen_of_isUnit, Scheme.mem_basicOpen, Scheme.mem_basicOpen'', Scheme.mem_basicOpen', Scheme.mem_basicOpen_top (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-09",
+   "verdict": "match (Scheme.mem_basicOpen: x ∈ X.basicOpen f ↔ IsUnit (germ f))"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "point x lies in the basic open of a function f on a scheme iff the germ of f at x is a unit iff f(x) nonzero in the residue field",
+   "results": "Scheme.mem_basicOpen, Scheme.mem_basicOpen', Scheme.mem_basicOpen'', Scheme.mem_basicOpen_top (Mathlib.AlgebraicGeometry.Scheme), RingedSpace.mem_basicOpen (Mathlib.Geometry.RingedSpace.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def basicOpen\\|mem_basicOpen\\|basicOpen_le\\|isUnit_res_basicOpen\\|evaluation_ne_zero_iff_mem_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "Scheme.lean:638 def basicOpen : X.Opens (:= RingedSpace.basicOpen), :641 mem_basicOpen, :670 basicOpen_le; RingedSpace/Basic.lean:131 def basicOpen (carrier {x | ∃ hx : x ∈ U, IsUnit (germ f)}, is_open' proved), :144 mem_basicOpen, :163 isUnit_res_basicOpen; ResidueField.lean:111 evaluation_ne_zero_iff_mem_basicOpen",
+   "date": "2026-10-09",
+   "verdict": "match (types read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.basicOpen, AlgebraicGeometry.Scheme.mem_basicOpen, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.Scheme.basicOpen_le, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen",
+  "file": "Mathlib/AlgebraicGeometry/Scheme.lean",
+  "how": "a few Mathlib lemmas, one per clause: X.basicOpen f : X.Opens (Scheme.lean:638, defined as RingedSpace.basicOpen, Geometry/RingedSpace/Basic.lean:131, whose openness is proved in the definition) is D(g), open, and X.basicOpen_le f (Scheme.lean:670) gives D(g) ⊆ U; (a) Scheme.mem_basicOpen (Scheme.lean:641: x ∈ X.basicOpen f ↔ IsUnit (germ f)) with g_x ∉ 𝔪_x ↔ IsUnit g_x in a local ring (IsLocalRing.mem_maximalIdeal, mem_nonunits_iff), and Scheme.evaluation_ne_zero_iff_mem_basicOpen (Mathlib/AlgebraicGeometry/ResidueField.lean:111, X.evaluation U x hx = germ ≫ residue) for g(x) ≠ 0; (c) RingedSpace.isUnit_res_basicOpen (Geometry/RingedSpace/Basic.lean:163) applied to X.toRingedSpace"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-nonvanishing-section-trivializes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of lem-weil-pbc-nonvanishing-section-trivializes; match verified by the lead against the Mathlib source"
+ }
+}
