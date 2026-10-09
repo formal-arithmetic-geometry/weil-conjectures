@@ -517,6 +517,58 @@ lemma subsingleton_H_of_mono {K : CategoryTheory.Sheaf (Opens.grothendieckTopolo
       (topologicalKrullDim_inter_compl_lt hT hTc hdim hW₀) _ hsupp i hi.le
   exact subsingleton_H_X₂ hS i
 
+/-- **Quotients of `ℤ_U` supported on `T`.** If `E` is supported on the irreducible closed set `T`
+and is a quotient of `ℤ_U`, then `H^i(E) = 0` for `i > n`: `E` is a quotient of `constOn T U 1`
+by a subsheaf of `constOn T ⊤ 1`. -/
+lemma subsingleton_H_of_epi_freeYoneda {E : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} (hE : IsSupportedOn E T) {U : Opens X} (π : freeYoneda.obj U ⟶ E)
+    [Epi π] (i : ℕ) (hi : n < i) : Subsingleton (Sheaf.H E i) := by
+  by_cases hUT : ((U : Set X) ∩ T).Nonempty
+  · let e := constOnπ hT U 1
+    have : Epi e := epi_constOnπ hTc U 1
+    have hker : kernel.ι e ≫ π = 0 := by
+      refine hom_eq_zero_of_forall _ fun V σ ↦ ?_
+      let τ := (kernel.ι e).hom.app (op V) σ
+      have hτ : e.hom.app (op V) τ = 0 := by
+        change (kernel.ι e ≫ e).hom.app (op V) σ = 0
+        rw [kernel.condition]
+        rfl
+      change π.hom.app (op V) τ = 0
+      refine eq_zero_of_locally E _ fun x hx ↦ ?_
+      obtain ⟨W, hWV, hxW, hW⟩ := exists_freeYoneda_eq U τ hx
+      refine ⟨W, hWV, hxW, ?_⟩
+      rw [← NatTrans.naturality_apply]
+      rcases hW with ⟨hWU, c, hc⟩ | hc
+      · by_cases hWT : ((W : Set X) ∩ T).Nonempty
+        · obtain ⟨y, hyW, hyT⟩ := hWT
+          have h := congrArg (fun r ↦ constOn.toFun (V := W) r ⟨y, hyW⟩)
+            ((NatTrans.naturality_apply e.hom (homOfLE hWV).op τ).trans
+              (by rw [hτ, map_zero]))
+          change π.hom.app _ ((freeYoneda.obj U).obj.map (homOfLE hWV).op τ) = 0
+          rw [hc, map_zsmul, constOnπ_map_freeYonedaGen, constOn.toFun_zsmul,
+            constOn.toFun_map, constOnGen_toFun _ _ _ hyT, mul_one, constOn.toFun_zero] at h
+          rw [hc, h, zero_smul, map_zero]
+        · refine hE W (Set.disjoint_left.2 fun y hyW hyT ↦ hWT ⟨y, hyW, hyT⟩) _
+      · change π.hom.app _ ((freeYoneda.obj U).obj.map (homOfLE hWV).op τ) = 0
+        rw [hc, map_zero]
+    let p := Abelian.epiDesc e π hker
+    have hp : e ≫ p = π := Abelian.comp_epiDesc e π hker
+    have : Epi p := epi_of_epi_fac hp
+    let S := ShortComplex.mk (kernel.ι p) p (kernel.condition p)
+    have hS : S.ShortExact :=
+      ShortComplex.ShortExact.mk' (ShortComplex.exact_kernel p) inferInstance inferInstance
+    have : Subsingleton (Sheaf.H S.X₂ i) := subsingleton_H_constOn ih hT hTc hdim hUT 1 i hi
+    have : Subsingleton (Sheaf.H S.X₁ (i + 1)) :=
+      subsingleton_H_of_mono ih hT hTc hdim
+        (kernel.ι p ≫ constOnIncl (le_top : U ≤ ⊤) (dvd_refl 1)) (i + 1) (by omega)
+    exact subsingleton_H_X₃ hS i
+  · have hπ : π = 0 := by
+      apply (freeYonedaHomEquiv E U).injective
+      rw [hE U (Set.disjoint_left.2 fun y hyU hyT ↦ hUT ⟨y, hyU, hyT⟩)
+        (freeYonedaHomEquiv E U π), freeYonedaHomEquiv_apply]
+      simp
+    exact subsingleton_H_of_isZero (IsZero.of_epi_eq_zero π hπ) i
+
 end Irreducible
 
 end TopCat.Sheaf
