@@ -2,22 +2,83 @@
  "id": "def-weil-pbc-closed-subset-proper-over-base",
  "kind": "definition",
  "title": "Closed subsets proper over a base; support of a module; modules with support proper over a base",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism]. (1) A closed subset $Z\\subseteq X$ is *proper over $S$* if the morphism $Z\\to X\\to S$ is proper [def-weil-proper-morphism] when $Z$ is given its reduced induced closed subscheme structure (the unique reduced closed subscheme of $X$ [def-weil-closed-immersion] with underlying set $Z$). (2) For an $\\mathcal O_X$-module $\\mathcal F$ [def-weil-sheaf-of-modules-category] its *support* is $\\operatorname{Supp}(\\mathcal F)=\\{x\\in X:\\mathcal F_x\\neq0\\}$, $\\mathcal F_x$ the stalk [def-weil-pbc-module-stalk]. (3) $\\mathcal F$ *has support proper over $S$* if $\\operatorname{Supp}(\\mathcal F)$ is a closed subset of $X$ which is proper over $S$ in the sense of (1).",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism]. (1) A closed subset $Z\\subseteq X$ is *proper over $S$* if the composite $f\\circ i_Z:Z_{\\mathrm{red}}\\to X\\to S$ is proper [def-weil-proper-morphism], where $i_Z:Z_{\\mathrm{red}}\\to X$ is the reduced induced closed subscheme structure on $Z$ [lem-weil-pbc-reduced-induced-closed-subscheme]: the closed subscheme of $X$ [def-weil-closed-immersion] cut out by the quasi-coherent ideal sheaf of the local sections of $\\mathcal O_X$ vanishing at every point of $Z$; it is the unique reduced [def-pc-reduced-scheme] closed subscheme of $X$ with underlying set $Z$, up to unique isomorphism over $X$, so the condition does not depend on any choice. (2) For an $\\mathcal O_X$-module $\\mathcal F$ (a sheaf of $\\mathcal O_X$-modules on the underlying space of $X$ [def-weil-sheaf-of-modules-category]) its *support* is the set $\\operatorname{Supp}(\\mathcal F)=\\{x\\in X:\\mathcal F_x\\neq0\\}$, $\\mathcal F_x$ the stalk [def-weil-pbc-module-stalk]. (3) $\\mathcal F$ *has support proper over $S$* if $\\operatorname{Supp}(\\mathcal F)$ is a closed subset of $X$ and this closed subset is proper over $S$ in the sense of (1).",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Section 'Being proper over a base' (section-proper-over-base): Definition 0CYM (definition-proper-over-base) via condition (1) of Lemma 0CYL (lemma-closed-proper-over-base); the paragraph before Lemma 0CYS for 'the support of F is proper over S' (support closed by Morphisms Lemma 056J)"
+  "place": "Cohomology of Schemes, Section 'Being proper over a base' (section-proper-over-base): Definition 0CYM (definition-proper-over-base) via condition (1) of Lemma 0CYL (lemma-closed-proper-over-base); the paragraph before Lemma 0CYS (lemma-module-support-proper-over-base) for 'the support of F is proper over S' (support closed by Morphisms Lemma 056J, morphisms-lemma-support-finite-type). Reduced induced scheme structure: schemes.tex, Lemma 01J3 (lemma-reduced-closed-subscheme) and Definition 01J4 (definition-reduced-induced-scheme). Support of a module: modules.tex, Definition 01AT (definition-support)."
  },
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
   "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Data: the scheme structure on $Z$.) For a closed subset $Z\\subseteq X$, [lem-weil-pbc-reduced-induced-closed-subscheme] gives the closed immersion $i_Z:Z_{\\mathrm{red}}\\to X$ [def-weil-closed-immersion] cut out by the quasi-coherent ideal sheaf $\\mathcal I_Z$ of sections vanishing at all points of $Z$, with $Z_{\\mathrm{red}}$ reduced [def-pc-reduced-scheme] and $i_Z(Z_{\\mathrm{red}})=Z$, and unique up to unique isomorphism over $X$ among reduced closed subschemes with underlying set $Z$. So the reduced induced structure of Stacks 01J4 is a well-defined object, and any two choices differ by an isomorphism $\\varphi$ over $X$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma 01J3 (lemma-reduced-closed-subscheme), Definition 01J4 (definition-reduced-induced-scheme)"
+   }
+  },
+  {
+   "text": "(Condition (1).) $Z$ is proper over $S$ iff the morphism $f\\circ i_Z$ is proper [def-weil-proper-morphism]. This is condition (1) of Stacks Lemma 0CYL, which Definition 0CYM takes as the definition (the equivalence with conditions (2), (3) of 0CYL is the separate statement lem-weil-pbc-closed-subset-proper-over-base-properties (1), not used here). It does not depend on the choice in step 1: if $\\varphi:Z'\\to Z_{\\mathrm{red}}$ is an isomorphism with $i_Z\\varphi=i'$, then $f\\circ i'=(f\\circ i_Z)\\circ\\varphi$, and composing with an isomorphism preserves properness (isomorphisms are proper and proper morphisms are stable under composition, Mathlib IsProper instances; here only that $\\varphi$ is an isomorphism of schemes over $S$, so separatedness, finite type and universal closedness transfer by definition). The hypothesis that $f$ is locally of finite type [def-weil-finite-type-morphism] is not needed to state (1); Stacks imposes it because the equivalences of 0CYL fail without it.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Definition 0CYM, Lemma 0CYL (1), and the remark after 0CYM"
+   }
+  },
+  {
+   "text": "(Support.) For a sheaf of $\\mathcal O_X$-modules $\\mathcal F$ [def-weil-sheaf-of-modules-category] on the underlying space of $X$ (the Zariski site), the stalk $\\mathcal F_x$ is the colimit of [def-weil-pbc-module-stalk], an $\\mathcal O_{X,x}$-module, so $\\operatorname{Supp}(\\mathcal F)=\\{x:\\mathcal F_x\\neq0\\}$ is a well-defined subset of $X$, as in Stacks Modules Definition 01AT. It need not be closed for an arbitrary $\\mathcal F$; for $\\mathcal F$ quasi-coherent of finite type it is closed (Stacks 056J, the statement lem-weil-pbc-module-support-proper-over-base (1)).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Definition 01AT (definition-support)"
+   }
+  },
+  {
+   "text": "(Condition (3).) $\\mathcal F$ has support proper over $S$ iff $\\operatorname{Supp}(\\mathcal F)$ is closed and, as a closed subset, satisfies (1). Stacks speaks of 'the support of $\\mathcal F$ is proper over $S$' only for finite type quasi-coherent $\\mathcal F$, where closedness holds automatically; requiring closedness in the definition extends the phrase to all $\\mathcal O_X$-modules without changing it in the case Stacks considers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "paragraph before Lemma 0CYS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-proper-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Definition 0CYM, Lemma 0CYL (1), paragraph before Lemma 0CYS; schemes.tex 01J3/01J4; modules.tex 01AT"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +107,45 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, \"support\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no support of a sheaf of modules on a scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "support of a sheaf of modules on a scheme, set of points where the stalk is nonzero",
+   "results": "Scheme.IdealSheafData.support / supportSet / isClosed_supportSet (IdealSheaf/Basic.lean, support of an ideal sheaf = zero locus), Module.support (RingTheory/Support.lean, support of a module over a ring as a subset of PrimeSpectrum), Module.rankAtStalk_eq_zero_iff_notMem_support, Function.support",
+   "date": "2026-10-10",
+   "verdict": "no match: Module.support is the affine case (Spec R, M), not a sheaf of modules on a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed subset of a scheme proper over the base scheme; support of a coherent sheaf proper over S",
+   "results": "Scheme.IdealSheafData.isClosed_supportSet, support_map, support, Scheme.Hom.support_ker, coe_support_mkOfMemSupportIff, Scheme.zeroLocus_isClosed (Mathlib.AlgebraicGeometry.IdealSheaf.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib states nothing about properness of the composite of subschemeι with a morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'support' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean",
+   "results": "none (Modules/Sheaf.lean, Presheaf.lean, Tilde.lean have no support notion)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,6 +170,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Definition is Cohomology of Schemes 0CYM with support of a module; self-contained; unsplit."
+  "note": "Definition split reviewed: 4 well-posedness steps (the reduced induced structure from the new 01J3/01J4 node and independence of the choice; condition (1) as 0CYM; the support via stalks, 01AT; (3) with closedness required). Statement made self-contained (reduced induced structure spelled out); meaning unchanged in the cases Stacks considers. Correct."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-closed-subset-proper-over-base",
+  "worker": "stage1",
+  "summary": "Checked against Stacks coherent.tex 0CYL/0CYM and the paragraph before 0CYS, schemes.tex 01J3/01J4 and modules.tex 01AT (tags verified in tags/tags: 0CYL, 0CYM, 0CYS, 01J3, 01J4, 01AT, 056J). The statement used 'the unique reduced closed subscheme' without a node for its existence and uniqueness (the leaf lem-weil-pbc-closed-subset-closed-subscheme gives only some closed subscheme with underlying set Z), so the definition was not self-contained: created lem-weil-pbc-reduced-induced-closed-subscheme (Schemes 01J3 + 01J4: the ideal sheaf of sections vanishing on Z, quasi-coherent, reduced subscheme with set Z, unique up to unique isomorphism over X), unsplit, and the definition takes its well-definedness from it. Added def-pc-reduced-scheme and the new lemma to stmt_deps. Wrote four construction steps (data, condition (1) and its independence of the choice, support via stalks, condition (3) with the closedness requirement noting that it extends Stacks's finite-type quasi-coherent case). No Mathlib match: no notion of closed subset proper over a base, no support of a sheaf of modules on a scheme (only Module.support over a ring and IdealSheafData.support); searches recorded with all three kinds."
  }
 }

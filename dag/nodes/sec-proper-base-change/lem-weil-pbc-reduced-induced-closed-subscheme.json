@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-reduced-induced-closed-subscheme",
+ "kind": "statement",
+ "title": "Reduced induced closed subscheme structure on a closed subset: existence and uniqueness",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $T\\subseteq X$ a closed subset. For an open $U\\subseteq X$ let $\\mathcal I_T(U)=\\{f\\in\\mathcal O_X(U): f(t)=0\\text{ in }\\kappa(t)\\text{ for all }t\\in T\\cap U\\}$, $f(t)$ the image of $f$ in the residue field $\\kappa(t)$ [def-weil-residue-field]. Then: (1) $\\mathcal I_T$ is a quasi-coherent sheaf of ideals of $\\mathcal O_X$; on an affine open $U=\\operatorname{Spec}R$ [def-weil-affine-spectrum] one has $\\mathcal I_T(U)=I$, the unique radical ideal $I\\subseteq R$ with $V(I)=T\\cap U$, and $\\mathcal I_T|_U=\\widetilde I$. (2) The closed subscheme $i_T:T_{\\mathrm{red}}\\to X$ [def-weil-closed-immersion] cut out by $\\mathcal I_T$ (over each affine open $U=\\operatorname{Spec}R$ it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$) is reduced [def-pc-reduced-scheme] and $i_T(T_{\\mathrm{red}})=T$. (3) Uniqueness: if $i':Z'\\to X$ is a closed immersion with $Z'$ reduced and $i'(Z')=T$, then the ideal sheaf of $i'$ [def-sbc-closed-immersion-ideal-sheaf] equals $\\mathcal I_T$, and there is a unique isomorphism $\\varphi:Z'\\to T_{\\mathrm{red}}$ with $i_T\\circ\\varphi=i'$. The closed subscheme $T_{\\mathrm{red}}$ is the *reduced induced closed subscheme structure* on $T$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduced induced closed subscheme structure on a closed subset of a scheme is reduced and unique",
+   "results": "AlgebraicGeometry.IsReduced, IsReduced.mk, isReduced_of_isReduced_stalk, IsReduced.of_openCover (Mathlib.AlgebraicGeometry.Properties), Scheme.IdealSheafData.subscheme (IdealSheaf/Subscheme), IsClosedImmersion.instIsIsoSchemeToImage: building blocks only; no statement that the subscheme of the vanishing ideal is reduced, nor uniqueness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the closed subscheme defined by the vanishing ideal sheaf of a closed subset is reduced; any reduced closed subscheme with the same support equals it",
+   "results": "Scheme.IdealSheafData.support_eq_top_iff, Scheme.nilradical, nilradical_eq_bot, vanishingIdeal_support (vanishingIdeal I.support = I.radical), IdealSheafData.radical, zeroLocus_radical (Mathlib.AlgebraicGeometry.IdealSheaf.Basic): ingredients; no reducedness or uniqueness statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two closed immersions of reduced schemes into X with the same image are isomorphic over X",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isIso_lift and isIso_of_ker_eq (Morphisms/ClosedImmersion.lean:222,232: closed immersions with equal kernels are isomorphic over X), isIso_of_isClosedImmersion_of_surjective (:417, surjective closed immersion into a reduced scheme is an iso)",
+   "date": "2026-10-10",
+   "verdict": "partial: gives step 'equal ideal sheaves => isomorphic over X' of (3); the equality of the ideal sheaves for reduced Z' is not stated"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.IdealSheafData.subscheme _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.Hom.ker",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'reducedInduced|reduced induced|IsReduced.*(subscheme|vanishingIdeal)|ker.*vanishingIdeal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only the docstring of Scheme.IdealSheafData.vanishingIdeal (IdealSheaf/Basic.lean:563: 'The reduced induced scheme structure on the closed set is the quotient of this ideal'); vanishingIdeal (Basic.lean:565, ideal over affine U = PrimeSpectrum.vanishingIdeal of the preimage of Z, simps coe_support = Z), le_support_iff_le_vanishingIdeal (:611), vanishingIdeal_support (:634); Subscheme.lean: subschemeι, range_subschemeι (:493), ker_subschemeι (:576); Basic.lean Scheme.Hom.support_ker (support of ker f = closure of range for quasi-compact f)",
+   "date": "2026-10-10",
+   "verdict": "no match for the statement: (1) is Mathlib's vanishingIdeal with its support, the existence of the closed immersion with image T is the leaf lem-weil-pbc-closed-subset-closed-subscheme; reducedness (2) and uniqueness (3) are not in Mathlib"
+  },
+  {
+   "tool": "local_search",
+   "query": "grep -rn 'isReduced_subscheme_vanishingIdeal\\|le_ker_iff_range_subset_support' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "source repository (not Mathlib): AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal (WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:143, (2) reducedness) and AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support (WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:49, I <= ker g iff range g in support I for g from a reduced scheme); both sorry-free by the sorry map",
+   "date": "2026-10-10",
+   "verdict": "no Mathlib match; candidates in the source repository for the Lean of (2) and part of (3)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-closed-subset-proper-over-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Schemes 01J3 with Definition 01J4 (the ideal sheaf of sections vanishing on T, the reduced closed subscheme it cuts out, uniqueness); self-contained; correct; unsplit."
+ }
+}
