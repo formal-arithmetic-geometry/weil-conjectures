@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-integral-of-comp-separated",
+ "kind": "statement",
+ "title": "Integral after composing with a separated morphism",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. If $g\\circ f$ is integral [def-weil-finite-integral-morphism] and $g$ is separated [def-weil-proper-morphism], then $f$ is integral.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 035D (label lemma-finite-permanence), part (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if the composite f ≫ g is integral and g is separated then f is an integral morphism of schemes",
+   "results": "IsIntegralHom.of_comp, IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, IsIntegralHom, IsIntegralHom.hasAffineProperty, IsIntegralHom.comp_iff (Mathlib.AlgebraicGeometry.Morphisms.Integral)",
+   "date": "2026-10-10",
+   "verdict": "match: IsIntegralHom.of_comp"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsSeparated",
+   "results": "IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, IsIntegralHom.of_comp (Mathlib.AlgebraicGeometry.Morphisms.Integral)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_comp\\|comp_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+   "results": "Integral.lean:86 lemma of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsIntegralHom (f ≫ g)] [IsSeparated g] : IsIntegralHom f; :89 comp_iff [IsIntegralHom g] : IsIntegralHom (f ≫ g) ↔ IsIntegralHom f",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsIntegralHom.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+  "how": "exact: of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsIntegralHom (f ≫ g)] [IsSeparated g] : IsIntegralHom f (Integral.lean:86; f ≫ g is g∘f); IsIntegralHom and IsSeparated are the matches of def-weil-finite-integral-morphism and def-weil-proper-morphism"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-integral",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf IsIntegralHom.of_comp (Morphisms/Integral.lean:86); checked."
+ }
+}

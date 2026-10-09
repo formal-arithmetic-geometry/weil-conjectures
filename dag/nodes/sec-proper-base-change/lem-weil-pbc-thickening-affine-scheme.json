@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-thickening-affine-scheme",
+ "kind": "statement",
+ "title": "A thickening of an affine scheme is affine",
+ "statement": "Let $i:X\\to X'$ be a thickening of schemes [def-sbc-first-order-thickening], i.e. a closed immersion [def-weil-closed-immersion] that is surjective on underlying topological spaces (no finite order hypothesis). If $X$ is an affine scheme [def-pc-scheme], then $X'$ is an affine scheme.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 06AD (label lemma-thickening-affine-scheme); Stacks proves it as a special case of Limits, Proposition 05YU (label proposition-affine: a scheme receiving a surjective universally closed morphism from an affine scheme is affine), a closed immersion being universally closed; the finite order case is EGA I, Proposition 5.1.9, with a second proof in Stacks by Serre's criterion"
+ },
+ "stmt_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a scheme with a surjective closed immersion from an affine scheme is affine (thickening of affine scheme is affine)",
+   "results": "IsClosedImmersion.hasAffineProperty, IsClosedImmersion.isAffine_surjective_of_isAffine (source of a closed immersion into an affine scheme is affine: the converse direction), IsClosedImmersion.instIsAffineHom, IsClosedImmersion.of_surjective_of_isAffine, Scheme.instIsQuasiAffineOfIsAffine, IsClosedImmersion.isIso_of_injective_of_isAffine, isClosedImmersion_iff_isAffineHom, IsClosedImmersion.Spec_iff (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if f : X ⟶ Y is surjective and universally closed (or integral) and X is affine then Y is affine",
+   "results": "IsIntegralHom.instUniversallyClosed, IsClosedImmersion.of_surjective_of_isAffine, IsIntegralHom.toIsAffineHom, IsIntegralHom.iff_universallyClosed_and_isAffineHom, isAffine_of_isAffineHom (affineness of the source, not the target), isIntegral_appTop_of_universallyClosed, IsIntegralHom.hasAffineProperty, IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "no match (Limits 05YU, the general form, is absent too)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If X is a closed subscheme of X' with the same underlying topological space and X is affine then X' is affine",
+   "results": "instIsAffineToSchemeValOpensMemSetAffineOpens, IsAffineOpen, Scheme.IdealSheafData.subschemeCover, Scheme.instIsQuasiAffineOfIsAffine, IsClosedImmersion.hasAffineProperty, AffineScheme.of, Scheme.IdealSheafData.subscheme, Scheme.IsQuasiAffine",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- AlgebraicGeometry.IsAffine _",
+   "results": "30 hits: isAffine_Spec, IsAffine.of_isIso, isAffine_of_isEmpty, Scheme.isAffine_of_isLimit, instances for coproducts, pullbacks, basic opens, Subsingleton/finite discrete schemes, isAffine_of_isAffineHom, IsAffine.of_isPullback, isAffine_of_isAffineOpen_basicOpen, AffineSpace.instIsAffine, fibres of affine morphisms; none from a thickening, a nilpotent ideal or a surjective (universally closed / integral) morphism out of an affine scheme",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Surjective",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.UniversallyClosed",
+   "results": "isIntegral_appTop_of_universallyClosed (Morphisms/Proper.lean) only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAffine' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iE 'nilpot|reduc|isReduced|homeomorph|universallyInj|Surjective f\\]|isIntegralHom'; grep -rln 'thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln Chevalley ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Properties.lean:129 isReduced_of_isAffine_isReduced (unrelated); Integral.lean:35,136,160 (IsIntegralHom API); 'thickening' only in Morphisms/FormallyUnramified.lean; Chevalley only in UniversallyOpen.lean, FinitePresentation.lean (constructible sets). No affineness of a thickening or of the target of a surjective integral morphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-integral",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is More on Morphisms 06AD (a thickening of an affine scheme is affine; general case via Limits 05YU); correct; unsplit."
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+ "kind": "statement",
+ "title": "Closed immersions are separated, affine, integral and universally closed; composites of integral or universally closed morphisms",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-weil-closed-immersion]. Then (a) $i$ is separated [def-weil-proper-morphism]; (b) $i$ is affine [pqf-def-affine-morphism]; (c) $i$ is integral (indeed finite) [def-weil-finite-integral-morphism]; (d) $i$ is universally closed [def-weil-proper-morphism]. Moreover, for morphisms of schemes $g:X\\to Y$ and $h:Y\\to W$: (e) if $g$ and $h$ are integral then $h\\circ g$ is integral; (f) if $g$ and $h$ are universally closed then $h\\circ g$ is universally closed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, (a) Lemma 01QU (lemma-closed-immersion-separated); (b) Lemma 01SE (lemma-closed-immersion-affine); (c) Lemma 035C (lemma-closed-immersion-finite); (d) Lemma 01W5 (lemma-closed-immersion-proper); (e) Lemma 01WK (lemma-composition-finite, second sentence); (f) the proof of Lemma 01W3 (lemma-composition-proper: 'it is true for universally closed morphisms', immediate from the definition and Lemma 01W4's base change)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion of schemes is universally closed, separated and integral; composition of integral morphisms is integral",
+   "results": "IsIntegralHom.instUniversallyClosed, instUniversallyClosedOfIsClosedImmersion (UniversallyClosed.lean), IsIntegralHom.instOfIsClosedImmersion (Integral.lean), IsIntegralHom.iff_universallyClosed_and_isAffineHom, IsClosedImmersion.of_comp_isClosedImmersion, IsClosedImmersion.of_comp, IsClosedImmersion.comp_iff, isIntegral_appTop_of_universallyClosed",
+   "date": "2026-10-10",
+   "verdict": "match for (c), (d)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a closed immersion is an affine morphism",
+   "results": "IsClosedImmersion.instIsAffineHom (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), IsClosedImmersion.hasAffineProperty, isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-10",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Integral,UniversallyClosed,ClosedImmersion,Preimmersion,Separated}.lean",
+   "results": "Integral.lean:61 instance [IsClosedImmersion f] : IsIntegralHom f; Integral.lean:67 instance [IsIntegralHom f] [IsIntegralHom g] : IsIntegralHom (f ≫ g); UniversallyClosed.lean:55 instance [IsClosedImmersion f] : UniversallyClosed f; UniversallyClosed.lean:87 universallyClosedTypeComp; ClosedImmersion.lean:151 instance [IsClosedImmersion f] : IsAffineHom f; ClosedImmersion.lean:69 instance [IsClosedImmersion f] : IsPreimmersion f; Preimmersion.lean:65 instance [IsPreimmersion f] : Mono f; Separated.lean:61 isSeparated_of_mono",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isSeparated_of_mono, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, the instance IsIntegralHom (f ≫ g) (Integral.lean:67), AlgebraicGeometry.universallyClosedTypeComp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+  "how": "one Mathlib declaration per clause (Mathlib writes h∘g as g ≫ h): (a) the instances IsClosedImmersion f → IsPreimmersion f (ClosedImmersion.lean:69), IsPreimmersion f → Mono f (Preimmersion.lean:65) and isSeparated_of_mono (Separated.lean:61); (b) ClosedImmersion.lean:151; (c) Integral.lean:61; (d) UniversallyClosed.lean:55; (e) Integral.lean:67; (f) universallyClosedTypeComp (UniversallyClosed.lean:87). Separated and universally closed are Mathlib's IsSeparated and UniversallyClosed, the matches of def-weil-proper-morphism's notions; affine is IsAffineHom. Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-integral",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause (isSeparated_of_mono, IsClosedImmersion.instIsAffineHom, IsIntegralHom.instOfIsClosedImmersion, instUniversallyClosedOfIsClosedImmersion, IsIntegralHom comp instance Integral.lean:67, universallyClosedTypeComp); checked."
+ }
+}
