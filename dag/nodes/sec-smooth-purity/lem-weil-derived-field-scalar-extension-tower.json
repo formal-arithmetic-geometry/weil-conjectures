@@ -1,0 +1,44 @@
+{
+ "id": "lem-weil-derived-field-scalar-extension-tower",
+ "kind": "statement",
+ "title": "Derived scalar extensions along a tower of fields compose",
+ "statement": "For a field extension $K\\subset L$ let $T_{L/K}:D(K)\\to D(L)$ be the functor of derived categories of vector spaces [def-weil-abstract-derived-category] induced [lem-sf-exact-functor-derived-triangulated] by the exact functor $-\\otimes_KL$ [lem-weil-field-scalar-extension-exact, def-weil-vector-space-scalar-extension] applied termwise to complexes, with its canonical isomorphism $\\alpha_{L/K}:T_{L/K}(Q C)\\cong Q(C\\otimes_KL)$ for complexes $C$ ($Q$ the localization functor). Then: (1) there is a unique natural isomorphism $\\iota_K:T_{K/K}\\cong\\operatorname{id}_{D(K)}$ whose value at $QC$, composed with $\\alpha_{K/K}^{-1}$, is $Q$ of the termwise isomorphism $C^r\\otimes_KK\\cong C^r$; (2) for a tower $K\\subset L\\subset M$ there is a unique natural isomorphism $c_{M/L/K}:T_{M/L}\\circ T_{L/K}\\cong T_{M/K}$ whose value at $QC$, conjugated by the isomorphisms $\\alpha$, is $Q$ of the termwise tower isomorphism $(C^r\\otimes_KL)\\otimes_LM\\cong C^r\\otimes_KM$ of [def-weil-vector-space-scalar-extension]; (3) these isomorphisms are coherent: $c_{L/L/K}$ and $c_{L/K/K}$ are induced by $\\iota_L$ and $\\iota_K$, and for $K\\subset L\\subset M\\subset N$ the two isomorphisms $T_{N/M}T_{M/L}T_{L/K}\\cong T_{N/K}$ built from the $c$'s agree. Moreover each $c_{M/L/K}$ and $\\iota_K$ commutes with the shift isomorphisms of the triangulated functors.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "node def-weil-finite-coefficient-point (order 1509): the transition functors of the 2-colimit $D^b_{\\mathrm{fd}}(\\Qlb)=\\operatorname{2-colim}_{E}D^b_{\\mathrm{fd}}(E)$, whose composition isomorphisms the blueprint does not write out"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-field-scalar-extension-exact",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mapDerivedCategoryComp\\|mapDerivedCategoryId\\|mapHomologicalComplexUpToQuasiIsoComp\\|mapHomologicalComplexUpToQuasiIsoId' Mathlib/; grep -n 'mapHomologicalComplexIdIso\\|mapHomologicalComplexCompIso\\|NatIso.mapHomologicalComplex' Mathlib/Algebra/Homology/Additive.lean; grep -n 'extendScalarsId\\|extendScalarsComp\\|extendScalars_assoc' Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; grep -n 'liftNatIso' Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "results": "no composition or identity isomorphism for `Functor.mapDerivedCategory` or `mapHomologicalComplexUpToQuasiIso`; ingredients exist: Mathlib/Algebra/Homology/Additive.lean:130 `Functor.mapHomologicalComplexIdIso`, :198 `NatIso.mapHomologicalComplex`, :212 `Functor.mapHomologicalComplexCompIso` (termwise level); Mathlib/Algebra/Homology/HomotopyCategory.lean:290 `Functor.mapHomotopyCategoryCompIso` (homotopy level); Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:954 `ModuleCat.extendScalarsId`, :984 `ModuleCat.extendScalarsComp`, :1015 `ModuleCat.extendScalars_assoc` (the module-level coherence); Mathlib/CategoryTheory/Localization/Predicate.lean:357 `Localization.liftNatIso` (to lift the termwise isomorphisms to derived categories via the `Localization.Lifting` instance of Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:53)",
+   "date": "2026-10-09",
+   "verdict": "no match: the derived-level composition isomorphisms and their coherence are not in Mathlib; they follow from the listed ingredients by `Localization.liftNatIso` and uniqueness of lifts, but not in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-dimensional-complex-scalar-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

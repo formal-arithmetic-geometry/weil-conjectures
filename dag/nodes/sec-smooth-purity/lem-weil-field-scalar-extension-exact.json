@@ -1,0 +1,45 @@
+{
+ "id": "lem-weil-field-scalar-extension-exact",
+ "kind": "statement",
+ "title": "Extension of scalars along a field extension is an exact functor",
+ "statement": "Let $K\\subset L$ be a field extension and let $-\\otimes_KL:\\operatorname{Mod}_K\\to\\operatorname{Mod}_L$, $V\\mapsto V\\otimes_KL$, be the extension-of-scalars functor from $K$-vector spaces to $L$-vector spaces [def-weil-vector-space-scalar-extension]. Then $-\\otimes_KL$ is additive and exact: it preserves finite limits (because $L$ is a free, hence flat, $K$-module, every vector space having a basis) and finite colimits (because it is left adjoint to restriction of scalars). In particular it carries short exact sequences of $K$-vector spaces to short exact sequences of $L$-vector spaces.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "node def-weil-finite-coefficient-point (order 1509): exactness of the transition functors $-\\otimes_EL$ of the 2-colimit $D^b_{\\mathrm{fd}}(\\Qlb)$, used without statement"
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'extendScalars' Mathlib/RingTheory/Flat/ Mathlib/Algebra/Category/ModuleCat/ | grep -i 'preserves\\|flat\\|exact'; grep -n 'of_divisionRing' Mathlib/LinearAlgebra/Basis/VectorSpace.lean; grep -n 'instance of_free' Mathlib/RingTheory/Flat/Basic.lean; grep -n 'flat_algebraMap_iff' Mathlib/RingTheory/RingHom/Flat.lean; grep -n 'extendRestrictScalarsAdj' Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Descent.lean:42 `ModuleCat.preservesFiniteLimits_extendScalars_of_flat (hf : f.Flat) : PreservesFiniteLimits (extendScalars f)`; Mathlib/RingTheory/RingHom/Flat.lean:31 `RingHom.flat_algebraMap_iff`; Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156 instance `Module.Free.of_divisionRing`; Mathlib/RingTheory/Flat/Basic.lean:231 instance `Module.Flat.of_free`; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:885 `ModuleCat.extendRestrictScalarsAdj` (so `extendScalars` is a left adjoint and preserves all colimits; additivity from the adjunction as well)",
+   "date": "2026-10-09",
+   "verdict": "match: specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Descent.lean",
+  "how": "specializes in one line: apply it to `f = algebraMap K L`, flat by `RingHom.flat_algebraMap_iff` (Mathlib/RingTheory/RingHom/Flat.lean:31) and the instances `Module.Free.of_divisionRing`, `Module.Flat.of_free`; finite colimits are preserved because `extendScalars f` is left adjoint to `restrictScalars f` (`ModuleCat.extendRestrictScalarsAdj`, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:885, with `Adjunction.leftAdjoint_preservesColimits`), and it is additive by `Adjunction.left_adjoint_additive` (Mathlib/CategoryTheory/Adjunction/Additive.lean:42) from the instance `(restrictScalars f).Additive` (ChangeOfRings.lean:327)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-dimensional-complex-scalar-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
