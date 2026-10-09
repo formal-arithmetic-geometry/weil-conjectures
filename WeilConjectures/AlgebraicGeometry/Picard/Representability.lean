@@ -44,11 +44,12 @@ of `AlgebraicGeometry.Scheme.Modules.pushforward f_T`; they are used inline rath
 hypotheses.
 
 That the condition is stable under base change is
-`AlgebraicGeometry.IsInvertibleDirectImage.map`; it is the base-change half of the blueprint's
-`sk-thm-picard-semicon`, which
-`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` does not carry. It is stated as a
-named lemma rather than left as an anonymous obligation inside
-`picardFunctorInvertibleDirectImage`, so that the dependency is visible.
+`AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`, for `f` flat, proper and locally of
+finite presentation: the locus of `T` over which a class satisfies the condition is open
+(`AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`). The subfunctor
+`AlgebraicGeometry.picardFunctorInvertibleDirectImage` is only defined under these hypotheses,
+which every smooth projective curve satisfies; for a general `f`, cohomology and base change
+(Stacks 08IB) would need at least `f` quasi-compact and quasi-separated.
 
 Every statement here assumes injective resolutions in the fibres, `∀ T,
 HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; see
@@ -62,11 +63,12 @@ HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; se
 
 ## Main statements
 
-- `AlgebraicGeometry.IsInvertibleDirectImage.map`: cohomology and base change for `F`.
 - `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`: the open locus of `T` over
   which a class lies in `F` (blueprint `lem-pc-f-open-subfunctor`).
 - `AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι`: `F` is an open
   subfunctor of `Pic_{X/k,σ}` (blueprint `sk-lem-picard-f-open`).
+- `AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`: cohomology and base change for `F`
+  (blueprint `lem-pc-f-open-subfunctor`).
 - `AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor`: the representability
   criterion (blueprint `sk-thm-picard-criterion`).
 -/
@@ -80,6 +82,11 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 open Scheme
+
+/-- A morphism smooth of relative dimension `1` is smooth, hence flat and locally of finite
+presentation, as `AlgebraicGeometry.picardFunctorInvertibleDirectImage` requires. -/
+local instance {X Y : Scheme.{u}} (f : X ⟶ Y) [SmoothOfRelativeDimension 1 f] : Smooth f :=
+  SmoothOfRelativeDimension.smooth 1 f
 
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 
@@ -98,39 +105,6 @@ def IsInvertibleDirectImage (f : X ⟶ Spec (.of k)) (T : Over (Spec (.of k)))
     ∀ q : ℕ, 0 < q →
       IsZero (((Modules.pushforward (Limits.pullback.snd f T.hom)).rightDerived q).obj
         ((fromSkeleton _).obj L.val))
-
-/-- **Cohomology and base change for `F`.** The condition `IsInvertibleDirectImage` is stable
-under pullback along a morphism `i : V ⟶ U` of `k`-schemes.
-
-This is the base-change half of the blueprint's `sk-thm-picard-semicon`: the comparison maps
-`R^q f_{T,*} ℒ ⊗ κ(t) → H^q(X_t, ℒ_t)` are isomorphisms in the situation at hand, so the
-condition can be checked after base change. -/
-theorem IsInvertibleDirectImage.map (f : X ⟶ Spec (.of k)) {U V : Over (Spec (.of k))}
-    (i : V ⟶ U) [HasInjectiveResolutions (Limits.pullback f U.hom).Modules]
-    [HasInjectiveResolutions (Limits.pullback f V.hom).Modules]
-    {L : (Limits.pullback f U.hom).Pic} (hL : IsInvertibleDirectImage f U L) :
-    IsInvertibleDirectImage f V (Pic.map (baseChangeMap f i) L) :=
-  sorry
-
-/-- **The subfunctor `F`.** Let `k` be a separably closed field, let `f : X ⟶ Spec k` be a
-smooth projective curve of genus `g` with a `k`-rational point `σ`, and let `G = Pic_{X/k,σ}`
-be the `σ`-normalized Picard functor.  The subfunctor `F ⊆ G` is
-`F(T) = {ℒ ∈ G(T) | Rf_{T,*} ℒ is an invertible 𝒪_T-module placed in degree 0}`,
-where `f_T : X_T ⟶ T` is the base change of `f`.
-
-Being a `CategoryTheory.Subfunctor`, `F` comes with the inclusion natural transformation
-`(picardFunctorInvertibleDirectImage f σ hσ).ι` into
-`(picardFunctorNormalized f σ hσ).toFunctor`.
-
-(blueprint: `sk-def-picard-f`) -/
-noncomputable def picardFunctorInvertibleDirectImage (f : X ⟶ Spec (.of k))
-    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
-    [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules] :
-    Subfunctor (picardFunctorNormalized f σ hσ).toFunctor where
-  obj T := {L | IsInvertibleDirectImage f T.unop (L : (picardPresheaf f).obj T)}
-  map := by
-    rintro ⟨U⟩ ⟨V⟩ ⟨i⟩ L hL
-    exact IsInvertibleDirectImage.map f i hL
 
 /-- **The open locus of `F` for a single class.** Let `f : X ⟶ Spec k` be flat, proper and
 locally of finite presentation, and let `ℒ ∈ Pic (X_T)` for a `k`-scheme `T`. There is an open
@@ -176,9 +150,9 @@ presentation, the condition `IsInvertibleDirectImage` is stable under pullback a
 open `U' ⊆ U` of `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`, so `U' = U`
 and every morphism to `U` factors through `U'`.
 
-This is the subfunctor half of the blueprint's `lem-pc-f-open-subfunctor`, in the situation of
-that lemma; `AlgebraicGeometry.IsInvertibleDirectImage.map` is the general base-change
-statement used to define `AlgebraicGeometry.picardFunctorInvertibleDirectImage`.
+This is the subfunctor half of the blueprint's `lem-pc-f-open-subfunctor`, the base-change half
+of `sk-thm-picard-semicon`; it is what makes `AlgebraicGeometry.picardFunctorInvertibleDirectImage`
+a subfunctor.
 
 (blueprint: `lem-pc-f-open-subfunctor`) -/
 theorem IsInvertibleDirectImage.map_of_isProper (f : X ⟶ Spec (.of k)) [Flat f] [IsProper f]
@@ -193,6 +167,31 @@ theorem IsInvertibleDirectImage.map_of_isProper (f : X ⟶ Spec (.of k)) [Flat f
     rwa [baseChangeMap_id, Pic.map_id]
   refine (hU' V i).2 (subset_trans (fun t _ ↦ ?_) hU)
   exact ⟨t, rfl⟩
+
+/-- **The subfunctor `F`.** Let `k` be a separably closed field, let `f : X ⟶ Spec k` be a
+smooth projective curve of genus `g` with a `k`-rational point `σ`, and let `G = Pic_{X/k,σ}`
+be the `σ`-normalized Picard functor.  The subfunctor `F ⊆ G` is
+`F(T) = {ℒ ∈ G(T) | Rf_{T,*} ℒ is an invertible 𝒪_T-module placed in degree 0}`,
+where `f_T : X_T ⟶ T` is the base change of `f`.
+
+The definition assumes `f` flat, proper and locally of finite presentation, as a smooth
+projective curve is: this is what makes the condition stable under base change
+(`AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`).
+
+Being a `CategoryTheory.Subfunctor`, `F` comes with the inclusion natural transformation
+`(picardFunctorInvertibleDirectImage f σ hσ).ι` into
+`(picardFunctorNormalized f σ hσ).toFunctor`.
+
+(blueprint: `sk-def-picard-f`) -/
+noncomputable def picardFunctorInvertibleDirectImage (f : X ⟶ Spec (.of k)) [Flat f]
+    [IsProper f] [LocallyOfFinitePresentation f]
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules] :
+    Subfunctor (picardFunctorNormalized f σ hσ).toFunctor where
+  obj T := {L | IsInvertibleDirectImage f T.unop (L : (picardPresheaf f).obj T)}
+  map := by
+    rintro ⟨U⟩ ⟨V⟩ ⟨i⟩ L hL
+    exact IsInvertibleDirectImage.map_of_isProper f i hL
 
 /-- **`F` is an open subfunctor.** The inclusion `F ⊆ G = Pic_{X/k,σ}` is a subfunctor by
 construction, and it is representable by open immersions.
@@ -216,9 +215,8 @@ theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι [IsSepClosed k]
     [GeometricallyIntegral f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules] :
     (IsOpenImmersion.inverseImage (Over.forget (Spec (.of k)))).relative
-      uliftYoneda.{u + 1} (picardFunctorInvertibleDirectImage f σ hσ).ι := by
-  have := SmoothOfRelativeDimension.smooth 1 f
-  exact relative_isOpenImmersion_of_exists_opens fun T x ↦
+      uliftYoneda.{u + 1} (picardFunctorInvertibleDirectImage f σ hσ).ι :=
+  relative_isOpenImmersion_of_exists_opens fun _ x ↦
     exists_opens_isInvertibleDirectImage_map_iff f x.1
 
 /-- **The criterion: a functor generated by a representable open subfunctor.** Let

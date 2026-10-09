@@ -50,7 +50,10 @@ The blueprint packages the degree as a morphism `Pic_{X/S} ⟶ ℤ` to the const
 spelled out as a function `AlgebraicGeometry.picardDegree` on sections, together with its
 naturality `AlgebraicGeometry.picardDegree_map` and its local constancy; the sheaf property of
 the target is not needed.  Twisting by a class pulled back from the base (part (2) of the
-blueprint lemma) is not stated, since `AlgebraicGeometry.Scheme.Pic` carries no group law.
+blueprint lemma) is not stated here. The group law of `AlgebraicGeometry.Scheme.Pic` is in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`, which this file does not need; for a
+smooth proper curve, the additivity of the degree on the fibres over field-valued points is
+`AlgebraicGeometry.picardFibreDegree_mul`.
 -/
 
 @[expose] public section
