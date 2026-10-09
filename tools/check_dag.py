@@ -12,7 +12,8 @@ Checked:
   cycles     the graph of statement and proof dependencies is acyclic; each strongly connected component with
              more than one node, and each self-loop, is reported and nothing is changed;
   targets    there is at least one target;
-  reach      a node is reached from a target or carries `unreachable` in `import_flags`, never both.
+  reach      a node is reached from a target, or from a former target (`target_former`, kept so that the subtree of an
+             earlier target is not reported when the target changes), or carries `unreachable` in `import_flags`, never both.
 """
 from __future__ import annotations
 import collections, json, pathlib, sys
@@ -111,11 +112,13 @@ def main() -> int:
 
     if not g.targets:
         errors.append("targets: no node is a target")
+    former = [i for i, d in g.live.items() if d.get("target_former")]
+    reach_all = dq.Dag.distances_from(g, g.targets + former)
     for i, d in g.live.items():
         flagged = "unreachable" in (d.get("import_flags") or [])
-        if i not in g.dist and not flagged:
+        if i not in reach_all and not flagged:
             errors.append(f"reach: {i} is not reached from a target and is not flagged unreachable")
-        if i in g.dist and flagged:
+        if i in reach_all and flagged:
             errors.append(f"reach: {i} is flagged unreachable but a target reaches it")
 
     kinds = collections.Counter(e.split(":")[0] for e in errors)

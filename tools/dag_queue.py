@@ -161,8 +161,11 @@ class Dag:
         self.height = {}   # fewest dependency steps down to a Mathlib leaf
 
     def distances(self, cut: bool) -> dict[str, int]:
+        return self.distances_from(self.targets, cut)
+
+    def distances_from(self, roots, cut: bool = False) -> dict[str, int]:
         dist = {}
-        dq = collections.deque((t, 0) for t in self.targets)
+        dq = collections.deque((t, 0) for t in roots)
         while dq:
             i, k = dq.popleft()
             if i in dist:
