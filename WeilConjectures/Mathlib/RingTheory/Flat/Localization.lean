@@ -29,6 +29,10 @@ Theorem 24.3).
 - `Module.flat_localizedModule_iff`: flatness of `M_T` in terms of the kernels of `M ⊗ J → M`.
 - `Module.exists_notMem_pow_smul_eq_zero`: generic flatness relative to a prime of the base.
 - `Module.Flat.exists_notMem_forall_flat_localizedModule`: openness of the flat locus.
+- `Module.Flat.of_bijective_smul`: a module over a domain on which nonzero elements act bijectively
+  is flat.
+- `Algebra.exists_notMem_forall_pow_smul_eq_zero`: the local criterion for regular elements of
+  the fibre over a noetherian base, for all base changes.
 -/
 
 @[expose] public section
@@ -455,11 +459,13 @@ theorem _root_.Algebra.exists_notMem_flat_localizedModule_quotient [IsNoetherian
     exact fun h ↦ (IsLocalRing.mem_maximalIdeal _).mp hx (isUnit_of_map_unit _ _ h)
   have hmR : mR = p.map (algebraMap R (Localization.AtPrime p)) :=
     (Localization.AtPrime.map_eq_maximalIdeal).symm
-  have hs : ∀ m : Sq, s • m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) → m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) := by
+  have hs : ∀ m : Sq, s • m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) →
+      m ∈ mR • (⊤ : Submodule (Localization.AtPrime p) Sq) := by
     intro m
     rw [hmR, Ideal.mem_map_smul_top_iff, Ideal.mem_map_smul_top_iff, smul_eq_mul]
     exact hfib m
-  have key := Flat.rTensor_toLinearMap_injective (R := Localization.AtPrime p) (M := Sq) mR hmax s hs
+  have key :=
+    Flat.rTensor_toLinearMap_injective (R := Localization.AtPrime p) (M := Sq) mR hmax s hs
   set φ := DistribSMul.toLinearMap (Localization.AtPrime p) Sq s
   -- `s` is a nonzerodivisor of `S_q`.
   have hreg : ∀ m : Sq, s * m = 0 → m = 0 := by
@@ -577,7 +583,8 @@ theorem _root_.Algebra.exists_notMem_forall_pow_smul_eq_zero [IsNoetherianRing R
   classical
   obtain ⟨g₁, hg₁, hreg, hC⟩ := Algebra.exists_notMem_flat_localizedModule_quotient q f hfib
   have hP : Flat R (LocalizedModule q.primeCompl S) := Flat.of_linearEquiv
-    ((IsLocalizedModule.iso q.primeCompl (Algebra.linearMap S (Localization.AtPrime q))).restrictScalars R)
+    ((IsLocalizedModule.iso q.primeCompl
+      (Algebra.linearMap S (Localization.AtPrime q))).restrictScalars R)
   obtain ⟨g₂, hg₂, hopen⟩ := Flat.exists_notMem_forall_flat_localizedModule (M := S) q hP
   have hS : ∀ (J : Ideal R) (y : S ⊗[R] J), J.subtype.lTensor S y = 0 →
       ∃ n : ℕ, g₂ ^ n • y = 0 := by

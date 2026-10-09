@@ -24,6 +24,12 @@ near any point of that fibre.
 
 ## Main results
 
+- `Module.exists_fg_flat_localization_tensor`: noetherian approximation of flatness at a prime
+  (Stacks, Tag 00R6).
+- `Algebra.exists_notMem_forall_mul_mem_map`: the local criterion for regular elements over a
+  non-noetherian base (Stacks, Tags 046Z, 00MF): if `B` is flat and of finite presentation over
+  `A` and `f ∈ B` is a nonzerodivisor of the fibre near `q`, then `f` is a nonzerodivisor on
+  `B_g ⧸ J B_g` for some `g ∉ q` and all ideals `J` of `A`.
 - `Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber` (Stacks, Tags 00MF, 046Z).
 - `Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber` (Stacks, Tag 062Y).
 -/
@@ -41,7 +47,8 @@ variable {R₀ R₁ S₀ : Type*} [CommRing R₀] [CommRing R₁] [CommRing S₀
 noncomputable def tensorCancelEquiv (N : Type*) [AddCommGroup N] [Module R₀ N] [Module R₁ N]
     [IsScalarTower R₀ R₁ N] : (R₁ ⊗[R₀] S₀) ⊗[R₁] N ≃ₗ[R₀] S₀ ⊗[R₀] N :=
   ((_root_.TensorProduct.comm R₁ (R₁ ⊗[R₀] S₀) N).restrictScalars R₀).trans
-    ((_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange R₀ R₁ R₁ N S₀).restrictScalars R₀ |>.trans
+    ((_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange R₀ R₁ R₁ N S₀).restrictScalars
+      R₀ |>.trans
       (_root_.TensorProduct.comm R₀ N S₀))
 
 variable (N : Type*) [AddCommGroup N] [Module R₀ N] [Module R₁ N] [IsScalarTower R₀ R₁ N]
@@ -296,7 +303,9 @@ theorem flat_localization_tensor_of_forall [IsNoetherianRing R₀] [IsNoetherian
       rw [IsScalarTower.algebraMap_apply R₀ S₀ M₀]
       exact IsLocalization.map_units M₀ (⟨algebraMap R₀ S₀ r, hr⟩ : q₀.primeCompl)
     simp_rw [Algebra.smul_def]
-    exact ⟨fun x y hxy ↦ hu.mul_left_cancel hxy, fun y ↦ ⟨hu.unit⁻¹ * y, by simp only; rw [← mul_assoc, hu.mul_val_inv, one_mul]⟩⟩
+    exact ⟨fun x y hxy ↦ hu.mul_left_cancel hxy, fun y ↦ ⟨hu.unit⁻¹ * y, by
+      simp only
+      rw [← mul_assoc, hu.mul_val_inv, one_mul]⟩⟩
   have hQ₀ : ∀ (N : Type u) [AddCommGroup N] [Module R₀ N], (∀ i ∈ p₀, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R₀ N, Function.Injective (N'.subtype.lTensor M₀) :=
     fun N _ _ hN N' ↦ Flat.lTensor_subtype_injective_of_bijective_smul p₀ hbij hN N'
@@ -431,7 +440,72 @@ namespace Algebra
 
 universe u
 
-set_option maxHeartbeats 1600000 in
+/-- The fibre of `S` over the kernel `p` of `R → K`: if `S_q` is flat over `R` and some `t ∉ q`
+kills the kernel of `f` on `S ⊗[R] K`, then `f` is a nonzerodivisor of `S_q ⧸ p S_q`. -/
+lemma mem_map_of_mul_mem_map_of_tensor {R S K : Type*} [CommRing R] [CommRing S] [CommRing K]
+    [Algebra R S] [Algebra R K] (q : Ideal S) [q.IsPrime]
+    (hflat : Module.Flat R (Localization.AtPrime q))
+    (hker : ∀ r : R, algebraMap R K r = 0 ↔ r ∈ q.comap (algebraMap R S)) (f t : S) (ht : t ∉ q)
+    (H : ∀ y : S ⊗[R] K, f • y = 0 → t • y = 0) :
+    ∀ m : Localization.AtPrime q, algebraMap S _ f * m ∈
+        (q.comap (algebraMap R S)).map (algebraMap R (Localization.AtPrime q)) →
+      m ∈ (q.comap (algebraMap R S)).map (algebraMap R (Localization.AtPrime q)) := by
+  set p := q.comap (algebraMap R S)
+  set M₁ := Localization.AtPrime q
+  have Hloc : ∀ z : M₁ ⊗[R] K, (algebraMap S M₁ f) • z = 0 → z = 0 := by
+    intro z hz
+    let ℓ := AlgebraTensorModule.rTensor R K (Algebra.linearMap S M₁)
+    have : IsLocalizedModule q.primeCompl ℓ := IsLocalizedModule.rTensor (A := S) _ _
+    obtain ⟨⟨z', u⟩, hu⟩ := IsLocalizedModule.surj q.primeCompl ℓ z
+    simp only [Submonoid.smul_def] at hu
+    have h1 : ℓ (f • z') = 0 := by
+      rw [map_smul, ← hu, smul_comm, ← algebraMap_smul M₁ f z, hz, smul_zero]
+    obtain ⟨u', hu'⟩ := (IsLocalizedModule.eq_zero_iff q.primeCompl (f := ℓ)).mp h1
+    rw [Submonoid.smul_def] at hu'
+    have h2 : t • ((u' : S) • z') = 0 := H _ (by rw [smul_comm, hu'])
+    have h3 : (t * u' * u : S) • z = 0 := by
+      rw [mul_smul (t * u'), hu, ← map_smul, mul_smul, h2, LinearMap.map_zero]
+    refine (Module.End.isUnit_iff _).mp
+      (IsLocalizedModule.map_units ℓ (⟨t, ht⟩ * u' * u)) |>.1 ?_
+    rw [LinearMap.map_zero, Module.algebraMap_end_apply]
+    exact h3
+  intro m hm
+  have : Module.Flat R M₁ := hflat
+  let ε : M₁ →ₗ[R] M₁ ⊗[R] K :=
+    (Algebra.linearMap R K).lTensor M₁ ∘ₗ (_root_.TensorProduct.rid R M₁).symm.toLinearMap
+  have hε1 (x : M₁) : ε x = x ⊗ₜ 1 := by simp [ε]
+  have hε : ∀ x ∈ p.map (algebraMap R M₁), ε x = 0 := by
+    intro x hx
+    have hx' : x ∈ p • (⊤ : Submodule R M₁) := by
+      rw [Ideal.smul_top_eq_map]
+      exact hx
+    clear hx
+    induction hx' using Submodule.smul_induction_on' with
+    | smul r hr m' _ =>
+      rw [LinearMap.map_smul, hε1, ← tmul_smul, ← Algebra.algebraMap_eq_smul_one,
+        (hker r).mpr hr, tmul_zero]
+    | add x _ y _ hx hy => rw [LinearMap.map_add, hx, hy, add_zero]
+  have h1 : algebraMap S M₁ f • ε m = 0 := by
+    rw [hε1, smul_tmul', smul_eq_mul, ← hε1]
+    exact hε _ hm
+  have h2 : ε m = 0 := Hloc _ h1
+  let ψ : (R ⧸ p) →ₗ[R] K :=
+    (Ideal.Quotient.liftₐ p (Algebra.ofId R K) fun r hr ↦ (hker r).mpr hr).toLinearMap
+  have hψ : Function.Injective ψ := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rw [Ideal.Quotient.eq_zero_iff_mem, ← hker r]
+    exact hx
+  have h3 : m ⊗ₜ[R] (1 : R ⧸ p) = 0 := by
+    apply Module.Flat.lTensor_preserves_injective_linearMap (M := M₁) ψ hψ
+    rw [LinearMap.lTensor_tmul, LinearMap.map_zero, ← h2, hε1]
+    simp [ψ]
+  have h4 := congr(TensorProduct.tensorQuotEquivQuotSMul M₁ p $h3)
+  rw [← map_one (Ideal.Quotient.mk p), TensorProduct.tensorQuotEquivQuotSMul_tmul_mk,
+    one_smul, LinearEquiv.map_zero, Submodule.Quotient.mk_eq_zero, Ideal.smul_top_eq_map] at h4
+  exact h4
+
 /-- **The local criterion for regular elements over a non-noetherian base**, for a noetherian
 model (Stacks, Tags 046Z and 00MF). Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `A`
 an `R₀`-algebra with `B = A ⊗[R₀] S₀` flat over `A`, `q` a prime of `B` and `K` an `A`-algebra
@@ -499,68 +573,15 @@ theorem exists_notMem_forall_mul_mem_map_of_tensor {R₀ A S₀ : Type u} [CommR
     rw [← RingHom.mem_ker, hK, Ideal.mem_comap]
     change _ ↔ ι (algebraMap R₁ S₁ r) ∈ q
     rw [h1]
-  have Hloc : ∀ z : M₁ ⊗[R₁] K, (algebraMap S₁ M₁ f₁) • z = 0 → z = 0 := by
-    intro z hz
-    let ℓ := AlgebraTensorModule.rTensor R₁ K (Algebra.linearMap S₁ M₁)
-    have : IsLocalizedModule q₁.primeCompl ℓ := IsLocalizedModule.rTensor (A := S₁) _ _
-    obtain ⟨⟨z', u⟩, hu⟩ := IsLocalizedModule.surj q₁.primeCompl ℓ z
-    simp only [Submonoid.smul_def] at hu
-    have h1 : ℓ (f₁ • z') = 0 := by
-      rw [map_smul, ← hu, smul_comm, ← algebraMap_smul M₁ f₁ z, hz, smul_zero]
-    obtain ⟨u', hu'⟩ := (IsLocalizedModule.eq_zero_iff q₁.primeCompl (f := ℓ)).mp h1
-    rw [Submonoid.smul_def] at hu'
-    have h2 : t₁ • ((u' : S₁) • z') = 0 := H₁ _ (by rw [smul_comm, hu'])
-    have h3 : (t₁ * u' * u : S₁) • z = 0 := by
-      rw [mul_smul (t₁ * u'), hu, ← map_smul, mul_smul, h2, LinearMap.map_zero]
-    refine (Module.End.isUnit_iff _).mp
-      (IsLocalizedModule.map_units ℓ (⟨t₁, ht₁⟩ * u' * u)) |>.1 ?_
-    rw [LinearMap.map_zero, Module.algebraMap_end_apply]
-    exact h3
-  have hfib₁ : ∀ m : M₁, algebraMap S₁ M₁ f₁ * m ∈ p₁.map (algebraMap R₁ M₁) →
-      m ∈ p₁.map (algebraMap R₁ M₁) := by
-    intro m hm
-    have : Module.Flat R₁ M₁ := hflat
-    let ε : M₁ →ₗ[R₁] M₁ ⊗[R₁] K :=
-      (Algebra.linearMap R₁ K).lTensor M₁ ∘ₗ (_root_.TensorProduct.rid R₁ M₁).symm.toLinearMap
-    have hε1 (x : M₁) : ε x = x ⊗ₜ 1 := by simp [ε]
-    have hε : ∀ x ∈ p₁.map (algebraMap R₁ M₁), ε x = 0 := by
-      intro x hx
-      have hx' : x ∈ p₁ • (⊤ : Submodule R₁ M₁) := by
-        rw [Ideal.smul_top_eq_map]
-        exact hx
-      clear hx
-      induction hx' using Submodule.smul_induction_on' with
-      | smul r hr m' _ =>
-        rw [LinearMap.map_smul, hε1, ← tmul_smul, ← Algebra.algebraMap_eq_smul_one,
-          (hker r).mpr hr, tmul_zero]
-      | add x _ y _ hx hy => rw [LinearMap.map_add, hx, hy, add_zero]
-    have h1 : algebraMap S₁ M₁ f₁ • ε m = 0 := by
-      rw [hε1, smul_tmul', smul_eq_mul, ← hε1]
-      exact hε _ hm
-    have h2 : ε m = 0 := Hloc _ h1
-    let ψ : (R₁ ⧸ p₁) →ₗ[R₁] K :=
-      (Ideal.Quotient.liftₐ p₁ (Algebra.ofId R₁ K) fun r hr ↦ (hker r).mpr hr).toLinearMap
-    have hψ : Function.Injective ψ := by
-      rw [injective_iff_map_eq_zero]
-      intro x hx
-      obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
-      rw [Ideal.Quotient.eq_zero_iff_mem, ← hker r]
-      exact hx
-    have h3 : m ⊗ₜ[R₁] (1 : R₁ ⧸ p₁) = 0 := by
-      apply Module.Flat.lTensor_preserves_injective_linearMap (M := M₁) ψ hψ
-      rw [LinearMap.lTensor_tmul, LinearMap.map_zero, ← h2, hε1]
-      simp [ψ]
-    have h4 := congr(TensorProduct.tensorQuotEquivQuotSMul M₁ p₁ $h3)
-    rw [← map_one (Ideal.Quotient.mk p₁), TensorProduct.tensorQuotEquivQuotSMul_tmul_mk,
-      one_smul, LinearEquiv.map_zero, Submodule.Quotient.mk_eq_zero, Ideal.smul_top_eq_map] at h4
-    exact h4
+  have hfib₁ := mem_map_of_mul_mem_map_of_tensor q₁ hflat hker f₁ t₁ ht₁ H₁
   obtain ⟨g, hg, hP⟩ := Algebra.exists_notMem_forall_pow_smul_eq_zero q₁ f₁ hfib₁
   have hz (J : Ideal A) (b : B) : b ⊗ₜ[A] (1 : A ⧸ J) = 0 ↔ b ∈ J.map (algebraMap A B) := by
     rw [← (TensorProduct.tensorQuotEquivQuotSMul B J).map_eq_zero_iff,
       ← map_one (Ideal.Quotient.mk J), TensorProduct.tensorQuotEquivQuotSMul_tmul_mk, one_smul,
       Submodule.Quotient.mk_eq_zero, Ideal.smul_top_eq_map, Submodule.restrictScalars_mem]
   refine ⟨ι g, hg, fun J x hx ↦ ?_⟩
-  let e := Algebra.TensorProduct.baseChangeTensorEquiv (R₀ := R₀) (A := A) (S₀ := S₀) (R₁ := R₁) (A ⧸ J)
+  let e := Algebra.TensorProduct.baseChangeTensorEquiv (R₀ := R₀) (A := A) (S₀ := S₀) (R₁ := R₁)
+    (A ⧸ J)
   set y := e.symm (x ⊗ₜ[A] (1 : A ⧸ J))
   have hy : f₁ • y = 0 := by
     apply e.injective
@@ -582,7 +603,7 @@ lemma _root_.Algebra.TensorProduct.smul_eq_tmul_one_mul {R B K : Type*} [CommRin
   | add x y hx hy => rw [smul_add, hx, hy, mul_add]
   | tmul c k => rw [smul_tmul', Algebra.TensorProduct.tmul_mul_tmul, one_mul, smul_eq_mul]
 
-/-- **Noetherian approximation** (Stacks, Tag 00QN). A finitely presented `A`-algebra `B`, together
+/-- **Noetherian approximation.** A finitely presented `A`-algebra `B`, together
 with two of its elements, is the base change of a finite type algebra `S₀` over a noetherian ring
 `R₀` mapping to `A`, the two elements coming from `S₀`. -/
 theorem exists_noetherian_model {A : Type u} {B : Type*} [CommRing A] [CommRing B] [Algebra A B]
@@ -942,8 +963,6 @@ lemma _root_.Ideal.IsRegularPrincipal.map_atPrime_of_away {R : Type*} [CommRing 
 
 end Algebra
 
-
-
 /-- **The local criterion for relative effective Cartier divisors**, algebraic form (Stacks,
 Tags 00MF and 046Z; the algebraic content of Tag 062Y). Let `A → B` be flat and of finite
 presentation, let `I = (f)` be a principal ideal of `B`, let `q` be a prime of `B` and let `K`
@@ -951,12 +970,11 @@ be a field over `A` whose kernel is the prime `q ∩ A`. Suppose that the extens
 fibre `B ⊗[A] K` is locally generated by a non-zerodivisor. Then there is `g ∉ q` such that,
 on `B_g`, the ideal `I` is generated by a non-zerodivisor and `B_g ⧸ I` is flat over `A`.
 
-If `f ∉ q` one takes `g = f`. Otherwise, by faithfully flat descent along `κ(q ∩ A) → K`, the
-image of `f` is a non-zerodivisor of the local ring of the fibre at `q`, and the local flatness
-criterion (Tag 00MF), made available over a non-noetherian base by noetherian approximation
-(Tag 02JO), shows that `f` is a non-zerodivisor of `B_q` and that `B_q ⧸ (f)` is flat over `A`;
-both spread out to a neighbourhood `D(g)` of `q` as `B ⧸ (f)` is of finite presentation over
-`A` (Tags 061L, 00RC). -/
+Being locally a nonzerodivisor, the image of `f` is a nonzerodivisor of `B ⊗[A] K`. By the local
+criterion for regular elements over a non-noetherian base
+(`Algebra.exists_notMem_forall_mul_mem_map`, obtained from the noetherian case by noetherian
+approximation), `f` is then a nonzerodivisor on `B_g ⧸ J B_g` for every ideal `J` of `A`, for
+some `g ∉ q`; this gives both conclusions. The field hypothesis on `K` is not needed. -/
 theorem Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber {A B K : Type*}
     [CommRing A] [CommRing B] [CommRing K] [Algebra A B] [Algebra A K] [Module.Flat A B]
     [Algebra.FinitePresentation A B] (_hK : IsField K) (I : Ideal B) (hI : I.IsPrincipal)
@@ -994,12 +1012,12 @@ a prime of `B` and `K` a field over `A` whose kernel is the prime `q ∩ A`. Sup
 extension of `I = ker r` to the fibre `B ⊗[A] K` is locally generated by a non-zerodivisor.
 Then there is `g ∉ q` such that `I B_g` is generated by a non-zerodivisor.
 
-If `I ⊄ q` one takes `g ∈ I \ q`. Otherwise, by Nakayama's lemma on the fibre, some `f ∈ I`
-generates the fibre ideal near `q`, so by
-`Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber`, after shrinking, `f` is a
-non-zerodivisor and `B ⧸ (f)` is flat over `A`. Then `I ⧸ (f)` is a finitely generated
-`B`-module whose fibre at `q ∩ A` vanishes (as `B ⧸ I` is flat and `B ⧸ (f) → B ⧸ I` is an
-isomorphism on fibres near `q`), so it vanishes near `q` by Nakayama's lemma. -/
+If `I ⊄ q` one takes `g ∈ I \ q`. Otherwise choose a prime `P` of the fibre over `q` and
+`f ∈ I` generating the fibre ideal at `P`. As `B ⧸ I` is flat, `I ⊗[A] K` is the fibre ideal, so
+`(I ⧸ f) ⊗[B] (B ⊗[A] K)` vanishes at `P` and, by Nakayama's lemma, `I ⧸ f` vanishes near `q`.
+Then `f` generates the fibre ideal near every prime over `q`, hence is a nonzerodivisor of the
+fibre there, and the local criterion for regular elements
+(`Algebra.exists_notMem_forall_mul_mem_map`) shows that `f` is a nonzerodivisor near `q`. -/
 theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Type*}
     [CommRing A] [CommRing B] [CommRing C] [CommRing K] [Algebra A B] [Algebra A K]
     [Module.Flat A B] [Algebra.FinitePresentation A B] (hK : IsField K) (r : B →+* C)
@@ -1133,7 +1151,8 @@ theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Typ
     intro P' _ ht x hx
     set L' := Localization.AtPrime P'
     obtain ⟨s', hs', hsJ'⟩ := hJP P'
-    have hu : IsUnit (algebraMap E L' (ι t₁)) := IsLocalization.map_units L' (⟨_, ht⟩ : P'.primeCompl)
+    have hu : IsUnit (algebraMap E L' (ι t₁)) :=
+      IsLocalization.map_units L' (⟨_, ht⟩ : P'.primeCompl)
     have hspan : Ideal.span {algebraMap E L' (ι f)} = Ideal.span {s'} := by
       rw [← hsJ']
       apply le_antisymm

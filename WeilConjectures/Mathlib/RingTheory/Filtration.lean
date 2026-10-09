@@ -26,6 +26,8 @@ Jacobson radical of `S`, and `M` a finite `S`-module. If `M ⧸ I M` is flat ove
   of the injectivity of `M ⊗ L → M ⊗ L'` for `L ≤ L'` with `I • L' ≤ L`.
 - `Module.Flat.of_flat_quotient_of_lTensor_injective`: the local criterion for flatness
   (Stacks, Tags 00MK and 0AS8; Matsumura, Theorem 22.3).
+- `Module.Flat.lTensor_subtype_injective_of_forall_ker`: relative purity, the surjectivity
+  statement of Stacks, Tag 00MO.
 -/
 
 @[expose] public section
@@ -146,7 +148,8 @@ lemma lTensor_smul_top_subtype_injective {F : Type*} [AddCommGroup F] [Module R 
 /-- Purity for `I`-torsion quotients of a flat module: if `F` is flat, `K ≤ F` contains `I F`,
 `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M` is injective, then `M ⊗ K → M ⊗ F` is
 injective. -/
-lemma lTensor_subtype_injective_of_flat (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+lemma lTensor_subtype_injective_of_flat
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
     {F : Type u} [AddCommGroup F] [Module R F] [Flat R F]
     (hI : Function.Injective (I.subtype.lTensor M)) (K : Submodule R F)
@@ -192,9 +195,11 @@ lemma lTensor_subtype_injective_of_flat (hQ : ∀ (N : Type u) [AddCommGroup N] 
 /-- **Purity for modules killed by `I`.** If `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M`
 is injective, then for submodules `L ≤ L'` of any module with `I • L' ≤ L`, the map
 `M ⊗ L → M ⊗ L'` is injective. This is the vanishing of `Tor₁(L' ⧸ L, M)` (Stacks, Tag 051C). -/
-lemma lTensor_inclusion_injective_of_smul_le (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+lemma lTensor_inclusion_injective_of_smul_le
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
-    (hI : Function.Injective (I.subtype.lTensor M)) {N : Type u} [AddCommGroup N] [Module R N] {L L' : Submodule R N} (hLL' : L ≤ L')
+    (hI : Function.Injective (I.subtype.lTensor M)) {N : Type u} [AddCommGroup N] [Module R N]
+    {L L' : Submodule R N} (hLL' : L ≤ L')
     (hI' : I • L' ≤ L) : Function.Injective ((Submodule.inclusion hLL').lTensor M) := by
   -- Present `L'` as a quotient of a free module `F`.
   obtain ⟨F, _, _, _, φ, hφ⟩ : ∃ (F : Type u) (_ : AddCommGroup F) (_ : Module R F)
@@ -404,7 +409,8 @@ theorem lTensor_subtype_injective_of_forall_ker
 /-- If `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M` is injective, then `M ⊗ L → M` is
 injective for every ideal `L` containing a power of `I`. This is the vanishing of
 `Tor₁(R ⧸ L, M)` (Stacks, Tag 051C). -/
-lemma lTensor_subtype_injective_of_pow_le (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+lemma lTensor_subtype_injective_of_pow_le
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
     (hI : Function.Injective (I.subtype.lTensor M))
     (n : ℕ) {L : Ideal R} (hL : I ^ n ≤ L) : Function.Injective (L.subtype.lTensor M) := by
@@ -451,7 +457,8 @@ a finite `S`-module. If `M ⊗ N' → M ⊗ N` is injective for all `N' ≤ N` w
 and `M ⊗ I → M` is injective, then `M` is flat over `R`. -/
 theorem of_lTensor_injective_of_forall {S : Type*} [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [IsNoetherianRing S] [Module S M] [IsScalarTower R S M]
-    [Module.Finite S M] (hIS : I.map (algebraMap R S) ≤ Ideal.jacobson ⊥) (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
+    [Module.Finite S M] (hIS : I.map (algebraMap R S) ≤ Ideal.jacobson ⊥)
+    (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
     (hI : Function.Injective (I.subtype.lTensor M)) : Flat R M := by
   rw [iff_lTensor_injective']
@@ -459,7 +466,8 @@ theorem of_lTensor_injective_of_forall {S : Type*} [CommRing S] [Algebra R S]
   rw [injective_iff_map_eq_zero]
   intro x hx
   -- Step 1: `x` lies in the image of `M ⊗ (J ∩ Iⁿ)` for every `n`.
-  have step1 (n : ℕ) : x ∈ LinearMap.range ((Submodule.comap J.subtype (I ^ n)).subtype.lTensor M) := by
+  have step1 (n : ℕ) :
+      x ∈ LinearMap.range ((Submodule.comap J.subtype (I ^ n)).subtype.lTensor M) := by
     set L := J ⊔ I ^ n
     have hJL : J ≤ L := le_sup_left
     have hL := lTensor_subtype_injective_of_pow_le I hQ hI n (L := L) le_sup_right
