@@ -1,0 +1,58 @@
+{
+ "id": "lem-weil-pbc-product-injectives",
+ "kind": "statement",
+ "title": "Products of injective objects are injective",
+ "statement": "Let $\\mathcal A$ be an abelian category with a product $\\prod_{b\\in B} I_b$ for a set-indexed family of objects. If every $I_b$ is injective, then the product $\\prod_{b\\in B} I_b$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 0137 (lemma-product-injectives)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product of a family of injective objects in an abelian category is injective",
+   "results": "CategoryTheory.Injective.instPiObj in Mathlib.CategoryTheory.Preadditive.Injective.Basic",
+   "date": "2026-10-10",
+   "verdict": "match: the instance gives Injective (\\prodᶜ c) from HasProduct c and Injective (c b)"
+  },
+  {
+   "tool": "loogle",
+   "query": "[HasProduct c] -> [∀ b, Injective (c b)] -> Injective (∏ᶜ c)",
+   "results": "CategoryTheory.Injective.instPiObj, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:153",
+   "date": "2026-10-10",
+   "verdict": "match: exact general categorical statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*HasProduct|Injective.*∏ᶜ|∀ b, Injective' Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+   "results": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:153 instance {β : Type v} (c : β → C) [HasProduct c] [∀ b, Injective (c b)] : Injective (∏ᶜ c)",
+   "date": "2026-10-10",
+   "verdict": "match: exact instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Injective.instPiObj",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+  "how": "exact"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-colimit-of-sites-injective-system",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

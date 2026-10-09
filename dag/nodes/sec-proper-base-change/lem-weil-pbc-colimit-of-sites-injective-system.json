@@ -9,12 +9,72 @@
  },
  "stmt_deps": [
   "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheaves-enough-injectives"
+  "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each index $i$, the enough-injectives hypothesis on $\\operatorname{Ab}(\\mathcal C_i)$ supplies an injective embedding $\\gamma_i^0:\\mathcal F_i\\hookrightarrow\\mathcal A_i$. For every arrow $b:k\\to i$, compose the transition map $\\varphi_b:f_b^{-1}\\mathcal F_i\\to\\mathcal F_k$ with $\\gamma_k^0$ and take its adjoint under $f_b^{-1}\\dashv f_{b*}$; this gives a map $\\mathcal F_i\\to f_{b*}\\mathcal A_k$. The family of these maps defines $\\gamma_i:\\mathcal F_i\\to\\mathcal G_i$, where $\\mathcal G_i:=\\prod_{b:k\\to i}f_{b*}\\mathcal A_k$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-colimit-of-sites",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0EXZ proof, first paragraph"
+   }
+  },
+  {
+   "text": "Each $f_{b*}\\mathcal A_k$ is injective: $f_b^{-1}$ is exact by the definition of a morphism of sites, and the right-adjoint criterion for exact functors applies to $f_b^{-1}\\dashv f_{b*}$. Hence $\\mathcal G_i$, a set-indexed product of injectives, is injective by the product-of-injectives lemma.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-product-injectives",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0EXZ proof, final sentence; Homology Tags 0137 and 015Z"
+   }
+  },
+  {
+   "text": "For an arrow $a:j\\to i$, define $\\psi_a:f_a^{-1}\\mathcal G_i\\to\\mathcal G_j$ componentwise: the component indexed by $b:k\\to j$ is the canonical map from $f_a^{-1}f_{a\\circ b,*}\\mathcal A_k$ to $f_{b,*}\\mathcal A_k$, obtained from the composition identity for the inverse-image functors and the adjunctions. Reindexing by composition shows $\\psi_{a\\circ b}=\\psi_b\\circ f_b^{-1}\\psi_a$.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0EXZ proof, displayed definition of psi_a"
+   }
+  },
+  {
+   "text": "The maps $\\gamma_i$ form a map of systems by adjunction naturality and the cocycle identity $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$. The component indexed by $\\operatorname{id}_i:i\\to i$ is the chosen monomorphism $\\gamma_i^0$, so each $\\gamma_i$ is a monomorphism. Thus $(\\mathcal F_i,\\varphi_a)$ embeds into the system $(\\mathcal G_i,\\psi_a)$ of injective sheaves.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0EXZ proof, concluding sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-product-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0EXZ (lemma-colim-sites-injective)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +119,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-colimit-of-sites-injective-system",
+  "worker": "stage1",
+  "summary": "Split Tag 0EXZ into the levelwise injective embeddings, injectivity of pushed-forward factors and their product, construction of transition maps by arrow composition, and verification of system compatibility and monomorphisms. Added the Mathlib leaf lem-weil-pbc-product-injectives for the product step; exact right adjoints use the existing generic node lem-sp-right-adjoint-preserves-injectives."
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: Four steps and one Mathlib leaf (products of injectives: the instance at Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:139, verified). Follows 0EXZ: G_i = product over b:k->i of f_{b*}A_k for injective embeddings A_k (lem-weil-pbc-site-sheaves-enough-injectives); f_{b*} preserves injectives since f_b^{-1} is exact (lem-sp-right-adjoint-preserves-injectives, tool use); psi_a by projection to the factor a.b and the counit; cocycle by reindexing; gamma_i mono via the id_i component. Correctly notes that lem-weil-pbc-direct-image-preserves-injectives is scheme-specific."
+ }
 }
