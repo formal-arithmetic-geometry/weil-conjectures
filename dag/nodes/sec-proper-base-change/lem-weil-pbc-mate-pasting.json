@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-mate-pasting",
+ "kind": "statement",
+ "title": "Mates of pasted squares and of conjugate-whiskered squares",
+ "statement": "Notation of [def-weil-pbc-adjunction-mate]: for adjunctions $L_1\\dashv R_1$ ($L_1:\\mathcal A\\to\\mathcal B$), $L_2\\dashv R_2$ ($L_2:\\mathcal C\\to\\mathcal D$) and functors $G:\\mathcal A\\to\\mathcal C$, $H:\\mathcal B\\to\\mathcal D$, a *square* is a natural transformation $\\alpha:L_2G\\to HL_1$ and $\\alpha^\\flat:GR_1\\to R_2H$ is its mate; conjugates $\\tau^c$ are as in [def-weil-pbc-adjunction-conjugate].\n\n1. (Pasting along $G,H$.) Let moreover $L_3\\dashv R_3$ ($L_3:\\mathcal E\\to\\mathcal F$), $G_2:\\mathcal C\\to\\mathcal E$, $H_2:\\mathcal D\\to\\mathcal F$, $\\alpha:L_2G\\to HL_1$ and $\\beta:L_3G_2\\to H_2L_2$. The pasted square $\\gamma=(H_2\\alpha)\\circ(\\beta G):L_3G_2G\\to H_2HL_1$ has mate $\\gamma^\\flat=(\\beta^\\flat H)\\circ(G_2\\alpha^\\flat):G_2GR_1\\to G_2R_2H\\to R_3H_2H$.\n2. (Pasting along the adjunctions.) Let $L_1\\dashv R_1$ ($\\mathcal A\\to\\mathcal B$), $L_3\\dashv R_3$ ($\\mathcal B\\to\\mathcal C$), $L_2\\dashv R_2$ ($\\mathcal D\\to\\mathcal E$), $L_4\\dashv R_4$ ($\\mathcal E\\to\\mathcal F$), $G:\\mathcal A\\to\\mathcal D$, $H:\\mathcal B\\to\\mathcal E$, $K:\\mathcal C\\to\\mathcal F$, $\\alpha:L_2G\\to HL_1$, $\\beta:L_4H\\to KL_3$. With respect to the composite adjunctions $L_3L_1\\dashv R_1R_3$ and $L_4L_2\\dashv R_2R_4$ (unit $R_1\\eta_3L_1\\circ\\eta_1$, counit $\\varepsilon_3\\circ L_3\\varepsilon_1R_3$), the pasted square $\\delta=(\\beta L_1)\\circ(L_4\\alpha):L_4L_2G\\to KL_3L_1$ has mate $\\delta^\\flat=(R_2\\beta^\\flat)\\circ(\\alpha^\\flat R_3):GR_1R_3\\to R_2HR_3\\to R_2R_4K$.\n3. (Changing the adjunctions by a transformation.) (a) For a square $\\alpha:L_2G\\to HL_1$ and a third adjunction $L_3\\dashv R_3$ with $L_3:\\mathcal C\\to\\mathcal D$ and $\\tau:L_3\\to L_2$, the square $\\alpha\\circ(\\tau G):L_3G\\to HL_1$ has mate (for $L_1\\dashv R_1$, $L_3\\dashv R_3$) equal to $(\\tau^cH)\\circ\\alpha^\\flat:GR_1\\to R_2H\\to R_3H$, $\\tau^c:R_2\\to R_3$. (b) For an adjunction $L_0\\dashv R_0$ with $L_0:\\mathcal A\\to\\mathcal B$, $\\sigma:L_1\\to L_0$, and a square $\\alpha:L_2G\\to HL_1$, the square $(H\\sigma)\\circ\\alpha:L_2G\\to HL_0$ has mate (for $L_0\\dashv R_0$, $L_2\\dashv R_2$) equal to $\\alpha^\\flat\\circ(G\\sigma^c):GR_0\\to GR_1\\to R_2H$, $\\sigma^c:R_0\\to R_1$.\n4. (Identity.) For one adjunction $L\\dashv R$ and $G,H$ identity functors, the mate of $\\mathrm{id}_L$ is $\\mathrm{id}_R$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "mateEquiv_vcomp (line 170), mateEquiv_hcomp (line 209), mateEquiv_conjugateEquiv_vcomp (line 486), conjugateEquiv_mateEquiv_vcomp (line 505), conjugateEquiv_id (line 319); the instances used are literature/stacks-project/sites-cohomology.tex Remarks 0E46 and 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal, lines 4060-4120, 'We omit the verification')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change morphism of pasted squares is composite of base change morphisms (mate of composite square)",
+   "results": "CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_vcomp (Mathlib.CategoryTheory.Adjunction.Mates); CategoryTheory.IsPullback.paste_horiz; Bicategory.mateEquiv_vcomp, Bicategory.mateEquiv_square (Mathlib.CategoryTheory.Bicategory.Adjunction.Mate)",
+   "date": "2026-10-09",
+   "verdict": "match: mateEquiv_vcomp (clause 1), mateEquiv_hcomp (clause 2)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate of a 2-square is natural with respect to whiskering the non-adjoint sides by natural transformations",
+   "results": "CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp (Mathlib.CategoryTheory.Adjunction.Mates); Bicategory.mateEquiv_square, mateEquiv_vcomp, mateEquiv_hcomp, toNatTrans_mateEquiv",
+   "date": "2026-10-09",
+   "verdict": "match for clauses 1-2"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.TwoSquare.whiskerTop",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp : mateEquiv adj₁ adj₃ (β.whiskerLeft α) = (mateEquiv adj₂ adj₃ β).whiskerTop (conjugateEquiv adj₁ adj₂ α) (Mathlib.CategoryTheory.Adjunction.Mates)",
+   "date": "2026-10-09",
+   "verdict": "match: clause 3(b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem mateEquiv_vcomp\\|theorem mateEquiv_hcomp\\|theorem mateEquiv_conjugateEquiv_vcomp\\|theorem conjugateEquiv_mateEquiv_vcomp\\|theorem conjugateEquiv_id' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "170 mateEquiv_vcomp : mateEquiv adj₁ adj₃ (α ≫ₕ β) = mateEquiv adj₁ adj₂ α ≫ᵥ mateEquiv adj₂ adj₃ β; 209 mateEquiv_hcomp : mateEquiv (adj₁.comp adj₃) (adj₂.comp adj₄) (α ≫ᵥ β) = mateEquiv adj₃ adj₄ β ≫ₕ mateEquiv adj₁ adj₂ α; 486 mateEquiv_conjugateEquiv_vcomp : mateEquiv adj₁ adj₃ (α.whiskerRight β) = (mateEquiv adj₁ adj₂ α).whiskerBottom (conjugateEquiv adj₂ adj₃ β); 505 conjugateEquiv_mateEquiv_vcomp; 319 conjugateEquiv_id",
+   "date": "2026-10-09",
+   "verdict": "match (read: TwoSquare.hComp α β is (H₂α)∘(βG₁) as in clause 1, TwoSquare.vComp is (βL₁)∘(L₄α) as in clause 2, whiskerRight/whiskerLeft by β : L₃ ⟶ L₂ / α : L₂ ⟶ L₁ are clause 3(a)/(b))"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.mateEquiv_vcomp",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "a few Mathlib lemmas, one per clause: (1) CategoryTheory.mateEquiv_vcomp (TwoSquare α ≫ₕ β of TwoSquare G₁ L₁ L₂ H₁ and TwoSquare G₂ L₂ L₃ H₂); (2) CategoryTheory.mateEquiv_hcomp with CategoryTheory.Adjunction.comp (Mathlib/CategoryTheory/Adjunction/Basic.lean line 567); (3a) CategoryTheory.mateEquiv_conjugateEquiv_vcomp; (3b) CategoryTheory.conjugateEquiv_mateEquiv_vcomp; (4) CategoryTheory.conjugateEquiv_id (conjugateEquiv is mateEquiv with identity functors modulo unitors)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

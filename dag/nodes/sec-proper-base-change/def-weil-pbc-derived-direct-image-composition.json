@@ -1,0 +1,66 @@
+{
+ "id": "def-weil-pbc-derived-direct-image-composition",
+ "kind": "definition",
+ "title": "Composition isomorphisms of derived direct images (conjugates of those of inverse images)",
+ "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], with the derived direct images $Ru_*,Rv_*,R(u\\circ v)_*$ on the bounded below derived categories of abelian etale sheaves [def-weil-pbc-direct-image], [def-weil-pbc-derived-categories], the adjunctions $u^{-1}\\dashv Ru_*$ [prop-weil-pbc-derived-inverse-image-adjunction] (for $u$, $v$, $u\\circ v$ and $\\mathrm{id}_X$), and the composition and identity isomorphisms $c^D_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$, $e^D_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of the derived inverse images [lem-weil-pbc-derived-inverse-image-composition]. The *composition isomorphism of derived direct images*\n$$\n d^D_{u,v}:R(u\\circ v)_*\\xrightarrow{\\ \\sim\\ }Ru_*\\circ Rv_*\n$$\nis the conjugate [def-weil-pbc-adjunction-conjugate] of $c^D_{u,v}$ with respect to the adjunction $(u\\circ v)^{-1}\\dashv R(u\\circ v)_*$ and the composite adjunction $v^{-1}u^{-1}\\dashv Ru_*Rv_*$ (unit $Ru_*\\eta^D_vu^{-1}\\circ\\eta^D_u$, counit $\\varepsilon^D_v\\circ v^{-1}\\varepsilon^D_uRv_*$); and the *identity isomorphism* $d^D_X:R(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}$ is the conjugate of $e^D_X$ with respect to $\\mathrm{id}_X^{-1}\\dashv R(\\mathrm{id}_X)_*$ and the identity adjunction $\\mathrm{id}\\dashv\\mathrm{id}$. Both are isomorphisms because $c^D_{u,v}$, $e^D_X$ are [def-weil-pbc-adjunction-conjugate]. Explicitly, $d^D_{u,v,K}$ is the composite $R(uv)_*K\\xrightarrow{\\eta}Ru_*Rv_*v^{-1}u^{-1}R(uv)_*K\\xrightarrow{Ru_*Rv_*c^D_{u,v}}Ru_*Rv_*(uv)^{-1}R(uv)_*K\\xrightarrow{Ru_*Rv_*\\varepsilon^D_{uv,K}}Ru_*Rv_*K$, $\\eta$ the unit of the composite adjunction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0D6E (lemma-derived-pushforward-composition, line 4011) and its proof: $Rg_*\\circ Rf_*$ is right adjoint to $Lf^*\\circ Lg^*=L(g\\circ f)^*$ (Lemma 0D6D), hence equal to $R(g\\circ f)_*$ by uniqueness of adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of right adjoints isomorphic by conjugate of isomorphism of left adjoints, adjunction comp",
+   "results": "CategoryTheory.Adjunction.comp, CategoryTheory.conjugateIsoEquiv, conjugateEquiv_comp, Adjunction.leftAdjointCompIso_id_comp, leftAdjointCompIso_hom_app, Adjunction.natIsoOfLeftAdjointNatIso",
+   "date": "2026-10-09",
+   "verdict": "generalization: the construction is Mathlib conjugateIsoEquiv (adj_{uv}) (adj_u.comp adj_v)... applied to the etale c^D, which Mathlib lacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between right adjoints obtained by conjugation from a natural isomorphism between left adjoints; composite adjunction",
+   "results": "Adjunction.leftAdjointCompIso (Mathlib.CategoryTheory.Adjunction.CompositionIso: the converse direction, left adjoints from right adjoints), CategoryTheory.conjugateIsoEquiv, conjugateEquiv_iso",
+   "date": "2026-10-09",
+   "verdict": "no match for the etale objects; the generic construction is def-weil-pbc-adjunction-conjugate"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'rightDerivedFunctorPlusCompIso\\|lowerStarComp\\|Rf_\\*\\|pushforwardComp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "none for derived direct images of sheaves on sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

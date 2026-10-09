@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-derived-inverse-image-composition",
+ "kind": "statement",
+ "title": "Composition isomorphisms of derived inverse images and their coherence",
+ "statement": "Let $u:Y\\to X$, $v:Z\\to Y$, $w:W\\to Z$ be morphisms of schemes [def-pc-scheme], with the sheaf-level inverse images on abelian etale sheaves [def-weil-pbc-inverse-image], their composition isomorphisms $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ and identity isomorphisms $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ [lem-weil-pbc-inverse-image-composition], and the inverse images $u^{-1}:\\Dplus(X_{\\Et})\\to\\Dplus(Y_{\\Et})$ on the bounded below derived categories [def-weil-pbc-derived-categories], [def-weil-pbc-derived-inverse-image], with $\\varphi_{u,K^\\bullet}:u^{-1}(QK^\\bullet)\\xrightarrow{\\sim}Q(u^{-1}K^\\bullet)$ for bounded below complexes $K^\\bullet$.\n\n1. (Sheaf level.) $c$ and $e$ are associative and unital: $c_{u,v\\circ w}\\circ(c_{v,w}u^{-1})=c_{u\\circ v,w}\\circ(w^{-1}c_{u,v}):w^{-1}v^{-1}u^{-1}\\to(u\\circ v\\circ w)^{-1}$, $c_{\\mathrm{id}_X,u}=u^{-1}e_X:u^{-1}\\mathrm{id}_X^{-1}\\to u^{-1}$ and $c_{u,\\mathrm{id}_Y}=e_Yu^{-1}:\\mathrm{id}_Y^{-1}u^{-1}\\to u^{-1}$.\n2. (Derived level.) There are unique natural isomorphisms $c^D_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ of functors $\\Dplus(X_{\\Et})\\to\\Dplus(Z_{\\Et})$ and $e^D_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ on $\\Dplus(X_{\\Et})$ whose components at $QK^\\bullet$ are, after the identifications $\\varphi$, the classes $Q((c_{u,v,K^r})_r)$ and $Q((e_{X,K^r})_r)$ of the termwise isomorphisms, i.e. $\\varphi_{u\\circ v,K^\\bullet}\\circ c^D_{u,v,QK^\\bullet}=Q((c_{u,v,K^r})_r)\\circ\\varphi_{v,u^{-1}K^\\bullet}\\circ v^{-1}(\\varphi_{u,K^\\bullet})$ and $e^D_{X,QK^\\bullet}=Q((e_{X,K^r})_r)\\circ\\varphi_{\\mathrm{id}_X,K^\\bullet}$.\n3. (Derived coherence.) $c^D,e^D$ satisfy the identities of (1) with $c,e$ replaced by $c^D,e^D$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0D6D (lemma-derived-pullback-composition, line 3658): $Lf^*\\circ Lg^*=L(g\\circ f)^*$ computed on representatives by the termwise composite; for the exact etale inverse image no resolution is needed (def-weil-pbc-derived-inverse-image)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition isomorphism of derived functors induced by exact functors on derived categories (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory",
+   "results": "Grothendieck.mapCompIso; Functor.mapDerivedCategory, Functor.mapDerivedCategoryFactorsh (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Abelian.Ext.mapExactFunctor_hom; Functor.leftDerivedNatIso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.comp",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryCompIso : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ (F ⋙ G).mapDerivedCategory and Functor.mapDerivedCategoryIdIso (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor) -- in the Mathlib of the Loogle server only: not in the pinned Mathlib (grep below)",
+   "date": "2026-10-09",
+   "verdict": "no match in the pinned Mathlib; a newer Mathlib has the generic unbounded composition isomorphism of exact functors on D (not D^+, not the etale c_{u,v}, no coherence)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism between the composite of the functors induced on derived categories by two exact functors and the functor induced by the composite exact functor",
+   "results": "Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapDerivedCategoryFactorsh, Functor.mapDerivedCategoryFactors, Functor.mapDerivedCategorySingleFunctor (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor), Abelian.Ext.mapExactFunctor_hom, NatTrans.leftDerived_comp",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mapDerivedCategoryCompIso\\|mapDerivedCategoryIdIso\\|mapDerivedCategoryNatIso\\|mapDerivedCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none (these names exist only in the source repository, WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

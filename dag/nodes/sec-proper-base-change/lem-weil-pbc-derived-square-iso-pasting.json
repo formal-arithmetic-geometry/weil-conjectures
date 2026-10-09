@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-derived-square-iso-pasting",
+ "kind": "statement",
+ "title": "Identity and pasting laws of the derived square isomorphism",
+ "statement": "Use the derived square isomorphisms $\\theta^D_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ of cartesian squares $\\square=(f,f',g,g',\\alpha)$ [def-weil-pbc-cartesian-square], [def-weil-pbc-derived-square-iso] (here $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$, functors $\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})$), and the composition and identity isomorphisms $c^D$, $e^D$ of the derived inverse images [lem-weil-pbc-derived-inverse-image-composition]. Outer rectangles of pasted cartesian squares are cartesian squares [lem-weil-pbc-cartesian-square-pasting].\n\n1. (Identity square.) For $f:X\\to Y$ and the square $\\square_f=(f,f,\\mathrm{id}_Y,\\mathrm{id}_X)$: $\\theta^D_{\\square_f}=((e^D_X)^{-1}f^{-1})\\circ(f^{-1}e^D_Y):f^{-1}\\mathrm{id}_Y^{-1}\\to f^{-1}\\to\\mathrm{id}_X^{-1}f^{-1}$.\n2. (Horizontal pasting.) For $\\square_1=(f,f',g,g')$ and a cartesian square $\\square_2=(f',f'',h,h')$ with $h:Y''\\to Y'$, $h':X''\\to X'$, $f'':X''\\to Y''$, and the outer rectangle $\\square_2\\cdot\\square_1=(f,f'',g\\circ h,g'\\circ h')$:\n$$\n \\theta^D_{\\square_2\\cdot\\square_1}\\circ(f''^{-1}c^D_{g,h})=(c^D_{g',h'}f^{-1})\\circ(h'^{-1}\\theta^D_{\\square_1})\\circ(\\theta^D_{\\square_2}g^{-1}):\\ f''^{-1}h^{-1}g^{-1}\\to(g'h')^{-1}f^{-1}.\n$$\n3. (Vertical pasting.) For $\\square_1$ as above and a cartesian square $\\square_3=(e,e',g',g'')$ with $e:W\\to X$, $e':W'\\to X'$, $g'':W'\\to W$, and the outer rectangle $\\square_1\\circ\\square_3=(f\\circ e,f'\\circ e',g,g'')$:\n$$\n \\theta^D_{\\square_1\\circ\\square_3}\\circ(c^D_{f',e'}g^{-1})=(g''^{-1}c^D_{f,e})\\circ(\\theta^D_{\\square_3}f^{-1})\\circ(e'^{-1}\\theta^D_{\\square_1}):\\ e'^{-1}f'^{-1}g^{-1}\\to g''^{-1}(fe)^{-1}.\n$$\nThe same three identities hold for the sheaf-level isomorphisms $\\theta_\\square$ with $c,e$ of [lem-weil-pbc-inverse-image-composition]. (Proof sketch for the splitter: $\\theta_\\square=c_{f,g'}^{-1}\\circ c_{g,f'}$, as in the source Lean `AlgebraicGeometry.Etale.squareUpperStarIso`, and the coherence of $c,e$; the derived identities follow termwise through the universal property of the localization.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remarks 0E46, 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal, lines 4060-4120), where the identifications $L(f')^*\\circ Lg^*=L(g')^*\\circ Lf^*$ are composites of the equalities of Lemma 0D6D; the verification is omitted there"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-square-iso",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change morphism of pasted squares is composite of base change morphisms (mate of composite square)",
+   "results": "mateEquiv_square, mateEquiv_vcomp, IsPullback.paste_horiz, Square.Hom.comp, pullbackLeftPullbackSndIso_hom_fst_assoc, Bicategory.mateEquiv_vcomp",
+   "date": "2026-10-09",
+   "verdict": "no match for the square isomorphisms of etale inverse images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change map (mate of square isomorphism of pullbacks) for a composite of two cartesian squares equals the composite of the base change maps; proper base change pasting",
+   "results": "MorphismProperty.Over.pullbackComp, Over.pullbackComp, ChosenPullbacksAlong.pullbackMap_comp, Limits.pullback.map_comp (pullbacks in a category, not inverse images of sheaves)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'paste_horiz\\|paste_vert' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only IsPullback pasting of squares of schemes (AlgebraicGeometry/Pullbacks.lean, Fiber.lean, ...); nothing on inverse images of etale sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

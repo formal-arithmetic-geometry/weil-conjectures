@@ -2,39 +2,134 @@
  "id": "lem-weil-pbc-exchange-identity-pasting",
  "kind": "statement",
  "title": "Identity and pasting equations for exchange",
- "statement": "The transformation $\\Ex_{\\square}$ of the derived exchange morphism\n[def-weil-pbc-derived-exchange] is the identity for an identity\nsquare. For horizontally or vertically pasted cartesian squares\n[def-weil-pbc-cartesian-square], the exchange morphism of the outer\nrectangle equals the composite of the exchange morphisms of the two inner\nsquares after inserting the canonical associativity isomorphisms for inverse\nand derived direct images.",
+ "statement": "Use the inverse images $u^{-1}$ on the bounded below derived categories of abelian etale sheaves [def-weil-pbc-derived-categories], [def-weil-pbc-derived-inverse-image], the derived direct images $Ru_*$ [def-weil-pbc-direct-image] with the adjunctions $u^{-1}\\dashv Ru_*$ [prop-weil-pbc-derived-inverse-image-adjunction], the composition and identity isomorphisms $c^D_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$, $e^D_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of the inverse images [lem-weil-pbc-derived-inverse-image-composition], and the composition isomorphisms $d^D_{u,v}:R(u\\circ v)_*\\xrightarrow{\\sim}Ru_*\\circ Rv_*$ of the derived direct images [def-weil-pbc-derived-direct-image-composition]. For a cartesian square $\\square=(f,f',g,g',\\alpha)$ [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$, let $\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$ be the derived exchange transformation [def-weil-pbc-derived-exchange]. Outer rectangles of pasted cartesian squares are cartesian squares [lem-weil-pbc-cartesian-square-pasting]. Then, as natural transformations of functors between bounded below derived categories:\n\n1. (Identity square.) For $f:X\\to Y$ and the square $\\square_f=(f,f,\\mathrm{id}_Y,\\mathrm{id}_X)$,\n$$\n Rf_*(e^D_X)\\circ\\Ex_{\\square_f}=e^D_{Y}Rf_*:\\ \\mathrm{id}_Y^{-1}Rf_*\\longrightarrow Rf_*,\n$$\ni.e. $\\Ex_{\\square_f}$ is the identity of $Rf_*$ once $\\mathrm{id}^{-1}$ is identified with the identity functor by $e^D$.\n2. (Horizontal pasting, composing the base changes.) For $\\square_1=(f,f',g,g')$ and a cartesian square $\\square_2=(f',f'',h,h')$ with $h:Y''\\to Y'$, $h':X''\\to X'$, $f'':X''\\to Y''$, the outer rectangle $\\square_2\\cdot\\square_1=(f,f'',g\\circ h,g'\\circ h')$ satisfies\n$$\n \\Ex_{\\square_2\\cdot\\square_1}=(Rf''_*c^D_{g',h'})\\circ(\\Ex_{\\square_2}g'^{-1})\\circ(h^{-1}\\Ex_{\\square_1})\\circ((c^D_{g,h})^{-1}Rf_*):\n$$\n$$\n (gh)^{-1}Rf_*\\to h^{-1}g^{-1}Rf_*\\to h^{-1}Rf'_*g'^{-1}\\to Rf''_*h'^{-1}g'^{-1}\\to Rf''_*(g'h')^{-1}.\n$$\n3. (Vertical pasting, composing the direct images.) For $\\square_1$ as above and a cartesian square $\\square_3=(e,e',g',g'')$ with $e:W\\to X$, $e':W'\\to X'$, $g'':W'\\to W$, the outer rectangle $\\square_1\\circ\\square_3=(f\\circ e,f'\\circ e',g,g'')$ satisfies\n$$\n \\Ex_{\\square_1\\circ\\square_3}=((d^D_{f',e'})^{-1}g''^{-1})\\circ(Rf'_*\\Ex_{\\square_3})\\circ(\\Ex_{\\square_1}Re_*)\\circ(g^{-1}d^D_{f,e}):\n$$\n$$\n g^{-1}R(fe)_*\\to g^{-1}Rf_*Re_*\\to Rf'_*g'^{-1}Re_*\\to Rf'_*Re'_*g''^{-1}\\to R(f'e')_*g''^{-1}.\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-exchange-identity-pasting.md",
   "place": "node lem-weil-pbc-exchange-identity-pasting, order 1044"
  },
  "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-derived-direct-image-composition",
+  "def-weil-pbc-cartesian-square",
   "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-cartesian-square"
+  "lem-weil-pbc-cartesian-square-pasting"
  ],
  "proof": [
   {
-   "text": "Both equations are the mate versions of the identity and pasting laws for\n$\\theta_\\square$ recorded in [def-weil-pbc-cartesian-square],\ntransported through the adjunction calculus for the adjunctions\n$f'^{-1}\\dashv Rf'_*$ and $f^{-1}\\dashv Rf_*$ of the squares involved. By\n[lemma-weil-pbc-derived-exchange-replacement] every displayed map is the\nspecified derived exchange morphism of\n[def-weil-pbc-derived-exchange].",
+   "text": "*The exchange transformation as a mate.* For a cartesian square $\\square=(f,f',g,g')$ put $\\mathcal A=\\Dplus(Y_{\\Et})$, $\\mathcal B=\\Dplus(X_{\\Et})$, $\\mathcal C=\\Dplus(Y'_{\\Et})$, $\\mathcal D=\\Dplus(X'_{\\Et})$, $L_1=f^{-1}\\dashv R_1=Rf_*$ and $L_2=f'^{-1}\\dashv R_2=Rf'_*$ [prop-weil-pbc-derived-inverse-image-adjunction], $G=g^{-1}$, $H=g'^{-1}$. Then $\\theta^D_\\square:L_2G\\to HL_1$ is a square in the sense of [def-weil-pbc-adjunction-mate] and, by [def-weil-pbc-derived-exchange], $\\Ex_\\square=(\\theta^D_\\square)^\\flat:GR_1\\to R_2H$ is its mate. Only the equality $fg'=gf'$ of each square enters, through $\\theta^D_\\square$. All identities below are identities of mates, computed in this dictionary.",
    "uses": [
-    "def-weil-pbc-cartesian-square",
-    "lemma-weil-pbc-derived-exchange-replacement",
-    "def-weil-pbc-derived-exchange"
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change, line 4033): the base change map is the adjoint of $L(g')^*$ of the counit after $L(f')^*Lg^*=L(g')^*Lf^*$"
+   }
+  },
+  {
+   "text": "*Identity square.* By [lem-weil-pbc-derived-square-iso-pasting] (1), $\\theta^D_{\\square_f}=((e^D_X)^{-1}f^{-1})\\circ(f^{-1}e^D_Y)$. Read with $L_1=L_2=f^{-1}$ (one adjunction $f^{-1}\\dashv Rf_*$ on both rows), this is the square $\\iota=\\mathrm{id}_{f^{-1}}:L_2\\,\\mathrm{id}\\to\\mathrm{id}\\,L_1$ (with $G=H=\\mathrm{id}$) whiskered by $\\sigma=e^D_Y:\\mathrm{id}_Y^{-1}\\to\\mathrm{id}$ on the side of $G$ and by $\\tau=(e^D_X)^{-1}:\\mathrm{id}\\to\\mathrm{id}_X^{-1}$ on the side of $H$, i.e. $\\theta^D_{\\square_f}=(\\tau L_1)\\circ\\iota\\circ(L_2\\sigma)$ [lem-weil-pbc-derived-inverse-image-composition]. By [lem-weil-pbc-mate-whisker], $\\Ex_{\\square_f}=(Rf_*\\tau)\\circ\\iota^\\flat\\circ(\\sigma Rf_*)$. The mate $\\iota^\\flat$ of $\\mathrm{id}_{f^{-1}}$ for $G=H=\\mathrm{id}$ is its conjugate, which is $\\mathrm{id}_{Rf_*}$ by [lem-weil-pbc-mate-pasting] (4) (equivalently [def-weil-pbc-adjunction-conjugate]). Hence $\\Ex_{\\square_f}=Rf_*((e^D_X)^{-1})\\circ e^D_YRf_*$, and composing with $Rf_*(e^D_X)$ gives (1).",
+   "uses": [
+    "lem-weil-pbc-derived-square-iso-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-mate-whisker",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) (conjugateEquiv_id), as in the source Lean AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id"
+   }
+  },
+  {
+   "text": "*Horizontal pasting.* The rectangle $\\square_2\\cdot\\square_1$ is cartesian [lem-weil-pbc-cartesian-square-pasting]. By [lem-weil-pbc-derived-square-iso-pasting] (2), and since $c^D_{g,h}$ is invertible,\n$$\n \\theta^D_{\\square_2\\cdot\\square_1}=(c^D_{g',h'}f^{-1})\\circ P\\circ(f''^{-1}(c^D_{g,h})^{-1}),\\qquad P=(h'^{-1}\\theta^D_{\\square_1})\\circ(\\theta^D_{\\square_2}g^{-1}):f''^{-1}h^{-1}g^{-1}\\to h'^{-1}g'^{-1}f^{-1}.\n$$\n$P$ is the pasting along $G,H$ of the squares $\\alpha=\\theta^D_{\\square_1}$ ($G=g^{-1}$, $H=g'^{-1}$, $L_1=f^{-1}$, $L_2=f'^{-1}$) and $\\beta=\\theta^D_{\\square_2}$ ($G_2=h^{-1}$, $H_2=h'^{-1}$, $L_3=f''^{-1}$), so by [lem-weil-pbc-mate-pasting] (1) its mate (adjunctions $f^{-1}\\dashv Rf_*$ and $f''^{-1}\\dashv Rf''_*$) is $P^\\flat=(\\Ex_{\\square_2}g'^{-1})\\circ(h^{-1}\\Ex_{\\square_1})$ (step 1). The square $\\theta^D_{\\square_2\\cdot\\square_1}$ is $P$ whiskered by $\\sigma=(c^D_{g,h})^{-1}:(gh)^{-1}\\to h^{-1}g^{-1}$ on the side of $G$ and by $\\tau=c^D_{g',h'}:h'^{-1}g'^{-1}\\to(g'h')^{-1}$ on the side of $H$; by [lem-weil-pbc-mate-whisker] its mate, which is $\\Ex_{\\square_2\\cdot\\square_1}$ (step 1, [def-weil-pbc-derived-exchange]), equals $(Rf''_*c^D_{g',h'})\\circ P^\\flat\\circ((c^D_{g,h})^{-1}Rf_*)$. This is (2).",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-derived-square-iso-pasting",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E47 (remark-compose-base-change-horizontal, line 4094; 'We omit the verification'), used by literature/stacks-project/etale-cohomology.tex Lemma 0EZS (lemma-base-change-compose); verification written by an agent from Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) mateEquiv_vcomp, as in the source Lean AlgebraicGeometry.Etale.baseChangeSquare_paste_horiz"
+   }
+  },
+  {
+   "text": "*Vertical pasting.* The rectangle $\\square_1\\circ\\square_3$ is cartesian [lem-weil-pbc-cartesian-square-pasting]. By [lem-weil-pbc-derived-square-iso-pasting] (3),\n$$\n \\theta^D_{\\square_1\\circ\\square_3}=(g''^{-1}c^D_{f,e})\\circ Q\\circ((c^D_{f',e'})^{-1}g^{-1}),\\qquad Q=(\\theta^D_{\\square_3}f^{-1})\\circ(e'^{-1}\\theta^D_{\\square_1}):e'^{-1}f'^{-1}g^{-1}\\to g''^{-1}e^{-1}f^{-1}.\n$$\n$Q$ is the pasting along the adjunctions of $\\alpha=\\theta^D_{\\square_1}$ ($L_1=f^{-1}$, $L_2=f'^{-1}$, $G=g^{-1}$, $H=g'^{-1}$) and $\\beta=\\theta^D_{\\square_3}$ ($L_3=e^{-1}$, $L_4=e'^{-1}$, $K=g''^{-1}$), a square for the composite adjunctions $e^{-1}f^{-1}\\dashv Rf_*Re_*$ and $e'^{-1}f'^{-1}\\dashv Rf'_*Re'_*$; by [lem-weil-pbc-mate-pasting] (2) and step 1 its mate is $Q^\\flat=(Rf'_*\\Ex_{\\square_3})\\circ(\\Ex_{\\square_1}Re_*):g^{-1}Rf_*Re_*\\to Rf'_*Re'_*g''^{-1}$. Now change the adjunctions: on the top row replace $e^{-1}f^{-1}\\dashv Rf_*Re_*$ by $(fe)^{-1}\\dashv R(fe)_*$ through $\\sigma=c^D_{f,e}:e^{-1}f^{-1}\\to(fe)^{-1}$, whose conjugate is $d^D_{f,e}:R(fe)_*\\to Rf_*Re_*$ [def-weil-pbc-derived-direct-image-composition]; by [lem-weil-pbc-mate-pasting] (3)(b) the square $(g''^{-1}\\sigma)\\circ Q$ has mate $Q^\\flat\\circ(g^{-1}d^D_{f,e})$. On the bottom row replace $e'^{-1}f'^{-1}\\dashv Rf'_*Re'_*$ by $(f'e')^{-1}\\dashv R(f'e')_*$ through $\\tau=(c^D_{f',e'})^{-1}:(f'e')^{-1}\\to e'^{-1}f'^{-1}$, whose conjugate is $(d^D_{f',e'})^{-1}$ (the conjugate of the inverse of an isomorphism is the inverse of its conjugate [def-weil-pbc-adjunction-conjugate]); by [lem-weil-pbc-mate-pasting] (3)(a) the square $(g''^{-1}\\sigma)\\circ Q\\circ(\\tau g^{-1})=\\theta^D_{\\square_1\\circ\\square_3}$ has mate $((d^D_{f',e'})^{-1}g''^{-1})\\circ Q^\\flat\\circ(g^{-1}d^D_{f,e})$. By step 1 this mate is $\\Ex_{\\square_1\\circ\\square_3}$, which is (3).",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-derived-square-iso-pasting",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-derived-direct-image-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E46 (remark-compose-base-change, line 4062; 'We omit the verification') with Lemma 0D6E (lemma-derived-pushforward-composition, line 4011) for $Rg_*\\circ Rf_*=R(g\\circ f)_*$; verification written by an agent from Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) mateEquiv_hcomp, mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp, as in the source Lean AlgebraicGeometry.Etale.baseChangeSquare_paste_vert"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cartesian-square",
-  "lemma-weil-pbc-derived-exchange-replacement",
-  "def-weil-pbc-derived-exchange"
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-square-iso-pasting",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-mate-whisker",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-pbc-derived-direct-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-exchange-identity-pasting.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remarks 0E46, 0E47 (verification omitted there) and Remark 07A7; the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean; blueprint literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-exchange-identity-pasting.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change morphism of pasted squares is composite of base change morphisms (mate of composite square)",
+   "results": "CategoryTheory.mateEquiv_square, mateEquiv_vcomp (Mathlib.CategoryTheory.Adjunction.Mates); IsPullback.paste_horiz; Square.Hom.comp; pullbackLeftPullbackSndIso_hom_fst_assoc; Bicategory.mateEquiv_vcomp, mateEquiv_square",
+   "date": "2026-10-09",
+   "verdict": "no match for the etale exchange morphism; the generic mate pasting is lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change map (mate of square isomorphism of pullbacks) for a composite of two cartesian squares equals the composite of the base change maps; proper base change pasting",
+   "results": "MorphismProperty.Over.pullbackComp(_hom_app_left, _left_fst_fst), Over.pullbackComp, ChosenPullbacksAlong.pullbackMap_comp, Limits.pullback.map_comp",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.TwoSquare.whiskerTop",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp only",
+   "date": "2026-10-09",
+   "verdict": "no match for the item (generic tool lemma only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'baseChangeMap\\|exchangeMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rln 'paste_horiz\\|paste_vert' (same directory)",
+   "results": "none for the first; the second only IsPullback pasting of squares (AlgebraicGeometry/Pullbacks.lean, Fiber.lean, ZariskisMainTheorem.lean, ...)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +153,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "worker": "stage1",
+  "summary": "Statement made precise: the identity law with the identity isomorphisms e^D of the derived inverse images, horizontal pasting (Stacks 0E47, composing the base changes, with c^D) and vertical pasting (Stacks 0E46, composing the direct images, with c^D and the derived direct-image composition isomorphisms d^D, defined as conjugates of c^D as in Stacks 0D6E); stmt_deps rewritten. The imported one-paragraph proof is replaced by four steps from the mate calculus: the dictionary Ex = mate of theta^D (definition), and for each law the corresponding pasting law of theta^D (new node lem-weil-pbc-derived-square-iso-pasting) transported by the Mathlib mate lemmas (new leaf lem-weil-pbc-mate-pasting: mateEquiv_vcomp, mateEquiv_hcomp, mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp, conjugateEquiv_id) and the whiskering lemma (new node lem-weil-pbc-mate-whisker, not in Mathlib). The citation of lemma-weil-pbc-derived-exchange-replacement is dropped: with Ex defined as the mate it is a pointer (it concerns the computation on resolutions, not used here). New: lem-weil-pbc-derived-inverse-image-composition (c^D, e^D and coherence; lem-weil-pbc-inverse-image-composition has no associativity clause), def-weil-pbc-derived-direct-image-composition, def-weil-pbc-adjunction-conjugate (leaf). lemma-weil-pbc-derived-exchange-coherence (same unit, imported) states the same pasting laws plus resolution independence: merge candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made explicit with the associativity isomorphisms; proof through the Mathlib mate calculus; 6 new nodes (2 Mathlib leaves, 1 closed by Lean); the Lean pasting laws derivedBaseChangeMapPlus_id/_paste_horiz/_paste_vert (sorry-free, attached to lemma-weil-pbc-derived-exchange-coherence) define Ex through rightDerivedDesc, so they are not attached here; the sheaf-level laws squareUpperStarIso_id/_paste_horiz_hom/_paste_vert_hom (sorry-free) cover the sheaf-level part of lem-weil-pbc-derived-square-iso-pasting only, to be attached when that node is split with the derived part identified; lemma-weil-pbc-derived-exchange-coherence is a merge candidate for stage 3"
+ }
 }

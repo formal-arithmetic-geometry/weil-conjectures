@@ -1,0 +1,65 @@
+{
+ "id": "def-weil-pbc-adjunction-conjugate",
+ "kind": "definition",
+ "title": "Conjugate transformations of adjoint functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories and $L_1\\dashv R_1$, $L_2\\dashv R_2$ two adjunctions with $L_i:\\mathcal C\\to\\mathcal D$, $R_i:\\mathcal D\\to\\mathcal C$, units $\\eta_i$ and counits $\\varepsilon_i$. For a natural transformation $\\tau:L_2\\to L_1$ its *conjugate* is the natural transformation $\\tau^c:R_1\\to R_2$ with components\n$$\n R_1d\\xrightarrow{\\eta_{2,R_1d}}R_2L_2R_1d\\xrightarrow{R_2\\tau_{R_1d}}R_2L_1R_1d\\xrightarrow{R_2\\varepsilon_{1,d}}R_2d ,\n$$\ni.e. the mate [def-weil-pbc-adjunction-mate] of $\\tau$ for $G=\\mathrm{id}_{\\mathcal C}$, $H=\\mathrm{id}_{\\mathcal D}$. The assignment $\\tau\\mapsto\\tau^c$ is a bijection; it is compatible with composition, $(\\tau\\circ\\tau')^c=\\tau'^c\\circ\\tau^c$ for $\\tau':L_3\\to L_2$ and a third adjunction $L_3\\dashv R_3$, and sends $\\mathrm{id}_{L}$ to $\\mathrm{id}_R$ for one adjunction $L\\dashv R$. Consequently $\\tau$ is an isomorphism if and only if $\\tau^c$ is, and for an isomorphism $\\tau$ one has $(\\tau^{-1})^c=(\\tau^c)^{-1}$; this gives a bijection between isomorphisms $L_2\\cong L_1$ and isomorphisms $R_1\\cong R_2$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "conjugateEquiv (line 275), conjugateEquiv_comp (line 350), conjugateEquiv_id (line 319), conjugateIsoEquiv (line 425); the base change of literature/stacks-project/sites-cohomology.tex Lemma 0D6E (lemma-derived-pushforward-composition, line 4011) uses this ('by uniqueness of adjoint functors')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of right adjoints isomorphic by conjugate of isomorphism of left adjoints, adjunction comp",
+   "results": "CategoryTheory.Adjunction.comp (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateEquiv_comp (Mathlib.CategoryTheory.Adjunction.Mates); Bicategory.conjugateIsoEquiv; Adjunction.leftAdjointCompIso_hom_app (Mathlib.CategoryTheory.Adjunction.CompositionIso)",
+   "date": "2026-10-09",
+   "verdict": "match: CategoryTheory.conjugateEquiv / conjugateIsoEquiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between right adjoints obtained by conjugation from a natural isomorphism between left adjoints; composite adjunction",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.conjugateIsoEquiv : (L₂ ≅ L₁) ≃ (R₁ ≅ R₂), CategoryTheory.conjugateEquiv_iso (Mathlib.CategoryTheory.Adjunction.Mates)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def conjugateEquiv\\|theorem conjugateEquiv_comp\\|theorem conjugateEquiv_id\\|def conjugateIsoEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "line 275 def conjugateEquiv : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂) (mateEquiv with identity vertical functors, modulo unitors); 350 conjugateEquiv_comp; 319 conjugateEquiv_id; 408 conjugateEquiv_of_iso; 425 def conjugateIsoEquiv : (L₂ ≅ L₁) ≃ (R₁ ≅ R₂)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.conjugateEquiv",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "exact: conjugateEquiv adj₁ adj₂ : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂) for adj₁ : L₁ ⊣ R₁, adj₂ : L₂ ⊣ R₂, with the component formula of the statement (conjugateEquiv_apply_app); composition clause conjugateEquiv_comp, identity clause conjugateEquiv_id, isomorphism clause conjugateIsoEquiv (and conjugateEquiv_of_iso / conjugateEquiv_iso)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exchange-identity-pasting",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}
