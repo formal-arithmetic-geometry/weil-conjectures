@@ -13,9 +13,135 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Triples are $R$-algebra maps to $K$.* Regard $K$ as an $R$-algebra through $R\\to\\kappa(\\mathfrak p)\\to K$. For a triple $t=(S,\\mathfrak q,\\phi)$ put $\\psi_t:S\\to S/\\mathfrak q\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}K$ ($\\kappa(\\mathfrak q)$ the fraction field of $S/\\mathfrak q$). Since $\\mathfrak q$ lies over $\\mathfrak p$ and $\\phi$ is a $\\kappa(\\mathfrak p)$-map, $\\psi_t$ is an $R$-algebra map, and $\\ker\\psi_t=\\mathfrak q$ ($\\phi$ is a map of fields, hence injective). Conversely, for an etale $R$-algebra $S$ and an $R$-algebra map $\\chi:S\\to K$, $\\ker\\chi$ is a prime (the image of $S$ is a subring of a field), it lies over $\\ker(R\\to K)=\\mathfrak p$, and the injection $S/\\ker\\chi\\to K$ of a domain into a field extends uniquely to $\\bar\\chi:\\kappa(\\ker\\chi)\\to K$, a $\\kappa(\\mathfrak p)$-map; the two constructions are mutually inverse. An $R$-algebra map $\\beta:S\\to S'$ is a morphism $t\\to t'$ iff $\\psi_{t'}\\circ\\beta=\\psi_t$: the kernel of $\\psi_{t'}\\circ\\beta$ is $\\beta^{-1}(\\mathfrak q')$, and its factorization through the residue field is $\\phi'\\circ\\kappa(\\beta)$ (uniqueness of the extension to the fraction field). So $\\mathcal T$ is the category of pairs ($S$ etale over $R$, $R$-algebra map $S\\to K$) with morphisms the $R$-algebra maps over $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GW (lemma-strict-henselization-different): 'this data corresponds to kappa(p)-algebra maps phi: S tensor_R kappa(p) -> kappa^sep'; the same translation as in etale-cohomology.tex, proof of Lemma Tag 04HX"
+   }
+  },
+  {
+   "text": "*$\\mathcal T$ is essentially small, and $C$ exists.* An etale $R$-algebra $S$ is of finite presentation [def-weil-etale-morphism] (locally of finite presentation with affine source and target), so it is isomorphic to a quotient $R[x_1,\\dots,x_n]/I$; equivalently, by [lem-weil-pbc-affine-etale-essentially-small-cover] applied to $T=\\operatorname{Spec}R$, the affine etale $R$-schemes form an essentially small category. Hence the triples whose ring is such a quotient form a set, and their full subcategory $\\mathcal T_0$ is equivalent to $\\mathcal T$ (transport $\\mathfrak q,\\phi$ along an isomorphism); colimits over $\\mathcal T$ are computed over $\\mathcal T_0$ [lem-weil-pbc-colimit-initial-full-subcategory] (2). Filtered colimits of commutative $R$-algebras over a small filtered category exist: take the filtered colimit of the underlying sets (disjoint union modulo $x_i\\sim x_j$ iff they agree in some later stage) with the operations computed at a common stage [def-weil-pbc-category-colimit], [lem-weil-pbc-filtered-colimit-algebras-elementwise]. Once $\\mathcal T$ is filtered (steps 3-4), $C=\\varinjlim_{\\mathcal T}S$ exists, with coprojections $\\iota_t:S\\to C$, and it is by construction a filtered colimit of $R$-algebras etale over $R$: this is the last clause of (1).",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 07N7 (section-colimits), Lemma Tag 00D5 (lemma-colimit) for the construction of filtered colimits; the set-theoretic point is left implicit in Lemma Tag 04GW"
+   }
+  },
+  {
+   "text": "*(1) $\\mathcal T$ is nonempty and any two objects map to a common one.* $(R,\\mathfrak p,\\kappa(\\mathfrak p)\\subset K)$ is a triple: $\\operatorname{Spec}R\\to\\operatorname{Spec}R$ is the identity, an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1). Let $t=(S,\\mathfrak q,\\phi)$, $t'=(S',\\mathfrak q',\\phi')$ be triples and $S''=S\\otimes_RS'$. By [lem-weil-pbc-etale-ring-base-change] (base change of $R\\to S'$ along $R\\to S$) $\\operatorname{Spec}S''\\to\\operatorname{Spec}S$ is etale, so $\\operatorname{Spec}S''\\to\\operatorname{Spec}R$ is etale [lem-weil-pbc-etale-composition-cancellation] (2). The $R$-algebra maps $\\psi_t,\\psi_{t'}$ induce an $R$-algebra map $\\chi''=\\psi_t\\otimes\\psi_{t'}:S''\\to K$, $s\\otimes s'\\mapsto\\psi_t(s)\\psi_{t'}(s')$ (the tensor product is the coproduct of commutative $R$-algebras). By step 1, $\\chi''$ is a triple $t''=(S'',\\mathfrak q'',\\phi'')$ ($\\mathfrak q''=\\ker\\chi''$ lies over $\\mathfrak q$ and $\\mathfrak q'$), and the two coprojections $S\\to S''$, $S'\\to S''$ are morphisms $t\\to t''$, $t'\\to t''$ since $\\chi''$ restricts to $\\psi_t$ and $\\psi_{t'}$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GW (lemma-strict-henselization-different), parts (1) and (2) of Categories Definition 04AX: 'The category contains the triple (R, p, kappa(p) in kappa^sep)'; 'Set S'' = S tensor_R S'. Combining the maps ... phi'' = phi tensor phi' ... The ring map R -> S'' is etale by Lemma 00U2'"
+   }
+  },
+  {
+   "text": "*(1) Parallel morphisms are equalized; $\\mathcal T$ is filtered.* Let $\\beta_1,\\beta_2:t\\to t'$ be morphisms, $t=(S,\\mathfrak q,\\phi)$, $t'=(S',\\mathfrak q',\\phi')$, so $\\psi_{t'}\\beta_1=\\psi_t=\\psi_{t'}\\beta_2$ (step 1). $\\operatorname{Spec}S'$ and $\\operatorname{Spec}S$ are etale over $\\operatorname{Spec}R$, so $\\operatorname{Spec}\\beta_1$ is etale, and so is the multiplication $\\mu:S'\\otimes_RS'\\to S'$ (a map between $R$-algebras etale over $R$, $S'\\otimes_RS'$ being etale by step 3) [lem-weil-pbc-etale-composition-cancellation] (3). Let $E=S'\\otimes_{\\beta_1,S,\\beta_2}S'$; the right factor map $S'\\to E$ is the base change of $\\beta_1$ along $\\beta_2$, hence etale [lem-weil-pbc-etale-ring-base-change], so $E$ is etale over $R$ (composition). Let $S''=E\\otimes_{S'\\otimes_RS'}S'$ (via the natural surjection $S'\\otimes_RS'\\to E$ and $\\mu$); $E\\to S''$ is the base change of $\\mu$, hence etale, and $S''$ is etale over $R$ [lem-weil-pbc-etale-composition-cancellation] (2). The map $\\psi_{t'}\\otimes\\psi_{t'}:E\\to K$ is well defined because $\\psi_{t'}\\beta_1=\\psi_{t'}\\beta_2$, and it agrees with $\\psi_{t'}:S'\\to K$ on $S'\\otimes_RS'$ (both send $a\\otimes b$ to $\\psi_{t'}(a)\\psi_{t'}(b)$), so they induce an $R$-algebra map $\\chi'':S''\\to K$, i.e. a triple $t''$ (step 1). The right-most factor map $c:S'\\to S''$ satisfies $\\chi''c=\\psi_{t'}$, so it is a morphism $t'\\to t''$; and $c\\beta_1=c\\beta_2$: in $S''$, $c(a)=1\\otimes a$ equals the image of $a\\otimes1\\in S'\\otimes_RS'$ and of $1\\otimes a$, so $c(\\beta_1(s))=(\\beta_1(s)\\otimes1)\\otimes1=(1\\otimes\\beta_2(s))\\otimes1=c(\\beta_2(s))$ (the relation $\\beta_1(s)\\otimes1=1\\otimes\\beta_2(s)$ holds in $E$). With step 3, $\\mathcal T$ is filtered.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GW, part (3) of Categories Definition 04AX: 'Consider S'' = (S' tensor_{phi,S,psi} S') tensor_{S' tensor_R S'} S' ... the map phi': F' -> kappa^sep extends to a map phi'': F'' -> kappa^sep ... The canonical map S' -> S'' (using the right most factor) is a morphism of triples which equalizes phi and psi'; Lemma Tag 00U7 (lemma-map-between-etale)"
+   }
+  },
+  {
+   "text": "*(2) The map $\\psi$; $C$ is local with $\\mathfrak m_C=\\ker\\psi$.* By step 1 the $\\psi_t$ satisfy $\\psi_{t'}\\circ\\beta=\\psi_t$ for every morphism $\\beta:t\\to t'$, so they form a cocone and induce the canonical $R$-algebra map $\\psi:C\\to K$ with $\\psi\\iota_t=\\psi_t$ [def-weil-pbc-category-colimit]; $\\psi(1)=1$, so $C\\neq0$ and $\\ker\\psi$ is a proper ideal. Let $x\\in C$ with $\\psi(x)\\neq0$. Write $x=\\iota_t(f)$ with $t=(S,\\mathfrak q,\\phi)$, $f\\in S$ [lem-weil-pbc-filtered-colimit-algebras-elementwise]; then $\\psi_t(f)=\\psi(x)\\neq0$, i.e. $f\\notin\\mathfrak q$. $\\operatorname{Spec}S_f\\to\\operatorname{Spec}S$ is an open immersion, so $S_f$ is etale over $R$ [lem-weil-pbc-etale-composition-cancellation] (1),(2), and $\\psi_t$ extends to $S_f\\to K$ ($\\psi_t(f)$ is invertible in $K$): a triple $t_f$ with the localization map a morphism $t\\to t_f$ (step 1). Then $\\iota_{t_f}(1/f)\\cdot x=\\iota_{t_f}(f\\cdot1/f)=1$, so $x$ is a unit. Elements of $\\ker\\psi$ are non-units ($\\psi(xy)=0\\neq1$). So the non-units of $C$ are exactly $\\ker\\psi$, an ideal: $C$ is local with $\\mathfrak m_C=\\ker\\psi$, and $\\psi(C)\\cong C/\\mathfrak m_C$ is a subfield of $K$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GN (lemma-henselization), third paragraph ('Suppose that x not in mR^h ... (S, q) -> (S_f, qS_f) is a morphism of pairs such that the image of f becomes invertible ... We conclude that R^h is a local ring'), applied with triples as in the proof of Lemma Tag 04GP (lemma-strict-henselization)"
+   }
+  },
+  {
+   "text": "*(2) $\\mathfrak m_C=\\mathfrak pC$.* $\\psi$ restricted to $R$ is $R\\to\\kappa(\\mathfrak p)\\to K$, which kills $\\mathfrak p$; so $\\mathfrak pC\\subset\\ker\\psi$. Conversely let $x\\in\\ker\\psi$, $x=\\iota_t(f)$ with $t=(S,\\mathfrak q,\\phi)$, so $f\\in\\ker\\psi_t=\\mathfrak q$. By [lem-weil-pbc-etale-prime-generates-maximal] $f/1\\in\\mathfrak pS_{\\mathfrak q}$: $f/1=y/g$ with $y\\in\\mathfrak pS$, $g\\in S\\setminus\\mathfrak q$, so $h(gf-y)=0$ for some $h\\in S\\setminus\\mathfrak q$. Put $u=hg\\notin\\mathfrak q$; then $uf=hy\\in\\mathfrak pS$. As in step 5, $(S_u,\\mathfrak qS_u,\\cdot)$ is a triple $t_u$ with a morphism $t\\to t_u$, and in $S_u$ we have $f=hy/u\\in\\mathfrak pS_u$; since $\\iota_{t_u}$ is an $R$-algebra map, $x=\\iota_{t_u}(f)\\in\\mathfrak pC$.",
+   "uses": [
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GN (lemma-henselization), second paragraph ('But since R -> S is etale, we have mS_q = qS_q, see Lemma 00U4. Hence we actually get that mS = q') and third paragraph ('R^h is a local ring with maximal ideal mR^h'); Stacks first shrinks S to make q the only prime over m, here the element u does the same job directly"
+   }
+  },
+  {
+   "text": "*Key step: simple roots in $K$ lift to $C$.* Let $P\\in C[T]$ be monic and $a_0\\in K$ with $P^\\psi(a_0)=0\\neq(P^\\psi)'(a_0)$, where $P^\\psi\\in K[T]$ is the image of $P$ under $\\psi$. Claim: there is $a\\in C$ with $P(a)=0$ and $\\psi(a)=a_0$. The finitely many coefficients of $P$ are $\\iota_{t_j}(s_j)$ [lem-weil-pbc-filtered-colimit-algebras-elementwise]; as $\\mathcal T$ is filtered (steps 3-4) there is one triple $t=(S,\\mathfrak q,\\phi)$ receiving morphisms from all $t_j$, so $P$ is the image under $\\iota_t$ of a monic $Q\\in S[T]$ (same degree), whose image under $\\psi_t$ is $P^\\psi$. Let $S'=S[T]_{Q'}/(Q)$ with $x$ the class of $T$. By [lem-weil-pbc-standard-etale-monic-derivative] (1) $\\operatorname{Spec}S'\\to\\operatorname{Spec}S$ is etale, hence $S'$ is etale over $R$ [lem-weil-pbc-etale-composition-cancellation] (2). Regard $K$ as an $S$-algebra via $\\psi_t$; then $Q(a_0)=P^\\psi(a_0)=0$ and $Q'(a_0)=(P^\\psi)'(a_0)\\neq0$ (derivatives commute with ring maps), a unit of the field $K$; by [lem-weil-pbc-standard-etale-monic-derivative] (2) there is an $S$-algebra map $\\chi:S'\\to K$ with $\\chi(x)=a_0$. It is an $R$-algebra map, so (step 1) a triple $t'$, and the structure map $S\\to S'$ is a morphism $t\\to t'$ since $\\chi$ restricts to $\\psi_t$. Put $a=\\iota_{t'}(x)$. Since $\\iota_{t'}$ restricted to $S$ is $\\iota_t$, $P(a)=\\iota_{t'}(Q(x))=0$, and $\\psi(a)=\\psi_{t'}(x)=\\chi(x)=a_0$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GN (lemma-henselization), last paragraph ('suppose that P in R^h[T] is a monic polynomial and a_0 in kappa is a simple root ... S' = S[T]/(Q) ... Pick g in S', g not in q' such that S'' = S'_g is etale over S ... the triple (S'', q'S'', class of T) determines an element a in R^h with P(a) = 0'), with triples as in the proof of Lemma Tag 04GP; Stacks lifts a_0 to S, which needs a_0 in the residue field of the pair; with triples the root a_0 in K is carried by the map chi instead, and g = Q' is the localization of Definition Tag 00UB"
+   }
+  },
+  {
+   "text": "*(2) $\\psi$ is surjective; $C/\\mathfrak m_C\\cong K$; the preimage of $\\mathfrak m_C$ in $R$ is $\\mathfrak p$.* By step 5, $k'=\\psi(C)$ is a subfield of $K$; it contains the image of $\\kappa(\\mathfrak p)=\\operatorname{Frac}(R/\\mathfrak p)$, since for $r,s\\in R$, $s\\notin\\mathfrak p$, the image of $r/s$ in $K$ is $\\psi(r)\\psi(s)^{-1}$ with $\\psi(s)\\neq0$. Let $\\alpha\\in K$. By hypothesis $\\alpha$ is separable algebraic over $\\kappa(\\mathfrak p)$: its minimal polynomial $\\bar g\\in\\kappa(\\mathfrak p)[T]$ is monic with $\\bar g(\\alpha)=0\\neq\\bar g'(\\alpha)$ (a separable polynomial is coprime to its derivative). Its coefficients lie in $k'=\\psi(C)$; lifting each to $C$ (the leading one to $1$) gives a monic $P\\in C[T]$ with $P^\\psi$ the image of $\\bar g$ in $K[T]$, and step 7 gives $a\\in C$ with $\\psi(a)=\\alpha$. So $\\psi$ is surjective, with kernel $\\mathfrak m_C$ (step 5), and induces a ring isomorphism $C/\\mathfrak m_C\\to K$, which is a $\\kappa(\\mathfrak p)$-algebra map because $\\psi$ is an $R$-algebra map. Finally the preimage of $\\mathfrak m_C=\\ker\\psi$ in $R$ is $\\ker(R\\to\\kappa(\\mathfrak p)\\to K)=\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GW, last paragraph ('by Lemma 00UH (lemma-make-etale-map-prescribed-residue-field) we see that the residue field of R_colim is equal to kappa^sep'); Lemma 00UH's proof (minimal polynomial f-bar of a primitive element, lifted to a monic f, and the standard etale algebra R[x]_{f'}/(f)) is the argument of step 7, run over C, where the coefficients of f-bar already lift because C is local (step 5); this rearrangement is by the agent"
+   }
+  },
+  {
+   "text": "*(3) $C$ is strictly henselian.* $C$ is local (step 5) and $\\psi$ induces an isomorphism $\\bar\\psi:C/\\mathfrak m_C\\to K$ (step 8). Let $P\\in C[T]$ be monic and $\\bar a_0\\in C/\\mathfrak m_C$ a root of $\\overline P$ with $\\overline{P'}(\\bar a_0)\\neq0$. Applying $\\bar\\psi$, $a_0=\\bar\\psi(\\bar a_0)$ is a root of $P^\\psi$ with $(P^\\psi)'(a_0)\\neq0$, and step 7 gives $a\\in C$ with $P(a)=0$ and $\\psi(a)=a_0$, i.e. $a\\bmod\\mathfrak m_C=\\bar a_0$. By [lem-weil-pbc-henselian-local-root-lifting] ((ii)$\\Rightarrow$(i)) $C$ is henselian [def-weil-pbc-henselian-terminology]. Its residue field is isomorphic to $K$, which is separably closed [def-pc-separably-closed]; so $C$ is strictly henselian.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "def-weil-pbc-henselian-terminology",
+    "def-pc-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proof of Lemma Tag 04GN, last paragraph ('We still have to show that R^h is henselian'), with Definition Tag 04GE (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian); Lemma Tag 04GP (2) ('R^{sh} is strictly henselian'). Stacks 04GW instead deduces henselian-ness from R_p^h and Lemmas 04GH, 04GI; the direct argument of 04GN with triples is the one 04GP prescribes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GW (lemma-strict-henselization-different), proof (filteredness); Lemma Tag 04GP (lemma-strict-henselization), proof ('exactly the same proof as used for Lemma 04GN, with triples'), i.e. the proof of Lemma Tag 04GN (lemma-henselization); step 8 rearranges Lemma 00UH by the agent (see its source)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +184,17 @@
    "results": "none for henselization; HenselianLocalRing/HenselianRing occur only in RingTheory/Henselian.lean",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'henseliz|strictlyhensel|IsStrictlyHenselian|StrictHensel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rlnE 'Henselian' Mathlib; read Mathlib/RingTheory/Etale/StandardEtale.lean",
+   "results": "no henselization or strict henselization; Henselian only in RingTheory/Henselian.lean (root-lifting HenselianLocalRing, HenselianLocalRing.TFAE line 119); StandardEtalePair (StandardEtale.lean:49) and its etale ring (instance line 191) exist and are used for the new leaf lem-weil-pbc-standard-etale-monic-derivative",
+   "date": "2026-10-09",
+   "verdict": "no match for the item (steps 1, 5, 7, 8 elementary or built from leaves; the leaves are lem-weil-pbc-etale-ring-base-change, lem-weil-pbc-etale-composition-cancellation, lem-weil-pbc-filtered-colimit-algebras-elementwise, lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-affine-etale-essentially-small-cover, lem-weil-pbc-etale-prime-generates-maximal, lem-weil-pbc-standard-etale-monic-derivative; the only non-leaf is lem-weil-pbc-henselian-local-root-lifting)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +214,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-strict-henselization-triples",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 04GW, 04GP, 04GN: it is 04GP (2)-(5) for R_p with the triples of 04GW). Proof written in 9 steps: triples = R-algebra maps S -> K (step 1); essential smallness and existence of the colimit (2); filteredness exactly as in 04GW with S tensor_R S' and (S' tensor_{beta1,S,beta2} S') tensor_{S' tensor_R S'} S' (3-4); C local with m_C = ker psi by inverting f (04GN) (5); ker psi = pC from pS_q = qS_q (00U4), with a single localization S_u instead of Stacks' shrinking to one prime over p (6); a key root-lifting step (04GN last paragraph, the root a_0 carried by a map to K through the standard etale algebra S[T]_{Q'}/(Q)) (7); surjectivity of psi from step 7 and the locality of C (in place of citing 00UH, whose proof it is) (8); henselian via the characterization 04GG/09XI and separably closed residue field (9). New nodes: lem-weil-pbc-henselian-local-root-lifting (unsplit, equivalence of the idempotent definition with root lifting for local rings), lem-weil-pbc-etale-prime-generates-maximal (Mathlib leaf, Algebra.isUnramifiedAt_iff_map_eq), lem-weil-pbc-standard-etale-monic-derivative (Mathlib leaf, StandardEtalePair). The statement dependency def-weil-etale-morphism etc. kept; the identification with (R_p)^sh is a remark in the statement and is not used by the functoriality node."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "nine steps along Stacks 04GW/04GP/04GN with triples (triples = R-maps to K, essential smallness, filteredness by tensor products and the equalizing ring, ψ and locality by inverting f, m_C = pC by 00U4, the simple-root lift through the standard etale algebra, surjectivity of ψ from separability, henselian via the root-lifting characterization); 3 new nodes, two Mathlib leaves verified by the lead (Unramified/LocalRing.lean:134 with Locus.lean:133; StandardEtale.lean:65/75/143/191); the equivalence of the idempotent-lifting and root-lifting definitions of henselian is the new unsplit node lem-weil-pbc-henselian-local-root-lifting"
+ }
 }

@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-standard-etale-monic-derivative",
+ "kind": "statement",
+ "title": "The standard etale algebra of a monic polynomial localized at its derivative",
+ "statement": "Let $S$ be a commutative ring, $Q\\in S[T]$ a monic polynomial with derivative $Q'$, and $S'=S[T][Y]/(Q,\\,YQ'-1)$ (that is, $S[T]_{Q'}/(Q)$), with $x\\in S'$ the class of $T$. Then (1) $\\operatorname{Spec}S'\\to\\operatorname{Spec}S$ is etale [def-weil-etale-morphism]; (2) for every $S$-algebra $L$ and every $b\\in L$ with $Q(b)=0$ and $Q'(b)$ a unit of $L$ there is exactly one $S$-algebra map $S'\\to L$ sending $x$ to $b$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00UB (definition-standard-etale) with $g=f'$, and Lemma Tag 00UC (lemma-standard-etale), item (1); used in the proof of Lemma Tag 04GN (lemma-henselization), last paragraph, and of Lemma Tag 00UH (lemma-make-etale-map-prescribed-residue-field)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "standard etale algebra R[X][1/g]/(f) with f monic is etale; maps out of it correspond to roots x of f with g(x) a unit",
+   "results": "Algebra.instEtaleOfIsStandardEtale, StandardEtalePresentation.hasMap, Algebra.IsStandardEtale, StandardEtalePair.instEtaleRing, Algebra.instIsStandardEtaleRing (Mathlib.RingTheory.Etale.StandardEtale)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StandardEtalePair.HasMap",
+   "results": "StandardEtalePair.HasMap, hasMap_X, lift, homEquiv : (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }, lift_X, HasMap.map (Mathlib.RingTheory.Etale.StandardEtale)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance\\|^structure\\|^def' Mathlib/RingTheory/Etale/StandardEtale.lean",
+   "results": "StandardEtalePair (line 49: f monic, g, cond ∃ p₁ p₂ n, f'·p₁ + f·p₂ = g^n), StandardEtalePair.Ring = R[X][Y]/(C f, Y·C g − 1) (line 65), HasMap x := f(x)=0 ∧ IsUnit (g(x)) (line 75), lift (79), lift_X (85), hom_ext (119), homEquiv (143), instance Algebra.Etale R P.Ring (191)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "StandardEtalePair, StandardEtalePair.instEtaleRing, StandardEtalePair.homEquiv",
+  "file": "Mathlib/RingTheory/Etale/StandardEtale.lean",
+  "how": "specializes in one line: the pair P = ⟨Q, monic, Q', ⟨1, 0, 1, by ring⟩⟩ (cond: Q'·1 + Q·0 = Q'^1) has P.Ring = S[X][Y]/(Q, Y·Q' − 1) = S' (line 65); (1) is the instance `Algebra.Etale S P.Ring` (line 191), translated to Spec by `RingHom.etale_algebraMap` (RingTheory/RingHom/Etale.lean:37) and `HasRingHomProperty.Spec_iff` (AlgebraicGeometry/Morphisms/RingHomProperties.lean:360) with `HasRingHomProperty @Etale RingHom.Etale` (Morphisms/Etale.lean:56); (2) is `P.homEquiv : (P.Ring →ₐ[S] L) ≃ {b // P.HasMap b}` (line 143), `HasMap b` being Q(b) = 0 ∧ IsUnit (Q'(b)) (line 75), with `lift_X` (85). (The source repository has the same pair as `StandardEtalePair.ofMonic hf 1`, WeilConjectures/Mathlib/RingTheory/Etale/StandardEtale.lean:71, sorry-free.) Source read 2026-10-09."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-henselization-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-henselian-local-root-lifting",
+ "kind": "statement",
+ "title": "A local ring is henselian (idempotent lifting) iff simple roots of monic polynomials lift",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring. The following are equivalent: (i) $R$ is henselian in the sense of [def-weil-pbc-henselian-terminology], i.e. for every finite $R$-algebra $B$ every idempotent of $B/\\mathfrak mB$ lifts uniquely to an idempotent of $B$; (ii) for every monic polynomial $f\\in R[T]$ and every $a_0\\in\\kappa$ with $\\overline f(a_0)=0$ and $\\overline{f'}(a_0)\\neq0$ (where $\\overline f\\in\\kappa[T]$ is the reduction of $f$) there exists $a\\in R$ with $f(a)=0$ and $a\\bmod\\mathfrak m=a_0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "algebra.tex Definition Tag 04GE (definition-henselian: (ii) is Stacks' definition of a henselian local ring) and Lemma Tag 04GG (lemma-characterize-henselian), (1)<=>(10) (every finite R-algebra is a finite product of local rings); more-algebra.tex Definition Tag 09XE (definition-henselian-pair) with the remark following it (for a local ring, (R,m) is a henselian pair iff R is henselian) and Lemma Tag 09XI (lemma-characterize-henselian-pair), (1)<=>(3) (idempotents of B/IB lift uniquely for finite B)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local ring is henselian iff idempotents of every finite algebra lift from the residue ring",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing, HenselianRing, HenselianRing.mk, instHenselianRingMaximalIdeal, HenselianLocalRing.mk (Mathlib.RingTheory.Henselian): all root-lifting formulations, no idempotent formulation",
+   "date": "2026-10-09",
+   "verdict": "no match (Mathlib's HenselianLocalRing is formulation (ii) only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a local ring is henselian iff every finite algebra over it is a product of local rings, idempotent lifting",
+   "results": "HenselianLocalRing, HenselianLocalRing.toIsLocalRing, HenselianLocalRing.TFAE (root lifting over the residue field / over a surjection to a field), instHenselianRingMaximalIdeal, Field.henselian",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, IsIdempotentElem",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Henselian' Mathlib/; grep -rnE 'IsIdempotentElem.*(lift|exists)' Mathlib/RingTheory/; read Mathlib/RingTheory/Idempotents.lean",
+   "results": "Henselian only in Mathlib/RingTheory/Henselian.lean (HenselianRing, HenselianLocalRing defined by root lifting; HenselianLocalRing.TFAE line 119 compares three root-lifting forms); idempotent lifting only along nilpotent kernels (exists_isIdempotentElem_eq_of_ker_isNilpotent, Idempotents.lean:249; existsUnique_isIdempotentElem_eq_of_ker_isNilpotent :374)",
+   "date": "2026-10-09",
+   "verdict": "no match: (ii) is Mathlib's HenselianLocalRing (via HenselianLocalRing.TFAE (2)), but its equivalence with the idempotent formulation (i) is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-henselization-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
