@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-nakayama-nilpotent",
+ "kind": "statement",
+ "title": "Nakayama's lemma for a nilpotent ideal (surjectivity modulo I)",
+ "statement": "Let $R$ be a commutative ring, $I\\subseteq R$ a nilpotent ideal ($I^k=0$ for some $k\\ge1$), and $u:N\\to M$ a homomorphism of $R$-modules (no finiteness assumed on $N$ or $M$). If the induced map $N/IN\\to M/IM$ is surjective, i.e. $M=u(N)+IM$, then $u$ is surjective. (Equivalently, parts (9)-(10) of the source: if $M=IM$ then $M=0$; if $N,N'\\subseteq M$ are submodules with $M=N+IN'$, then $M=N$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00DV (label lemma-NAK, Nakayama's lemma), part (11); proof: 'Part (9) holds because if M = IM then M = I^nM for all n and I being nilpotent means I^n = 0 for some n; Parts (10), (11), and (12) follow from (9) by the arguments used above' (i.e. (11) from (10) applied to the submodules Im(N -> M) and M, (10) from (9) applied to M/N)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if I is a nilpotent ideal and I • M = M then M = 0 (Nakayama for nilpotent ideals)",
+   "results": "Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (Mathlib.RingTheory.Finiteness.Nakayama, needs N.FG), Submodule.le_of_le_smul_of_le_jacobson_bot (Mathlib.RingTheory.Nakayama, needs N'.FG), IsHausdorff.haus', Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (Noetherian, finite M), Ideal.IsNilpotent.induction_on (Mathlib.RingTheory.Ideal.Quotient.Nilpotent, induction principle only), Ideal.pow_eq_zero_of_mem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "linear map which is surjective modulo a nilpotent ideal I (M → N/IN surjective) is surjective",
+   "results": "surjective_of_mkQ_comp_surjective (Mathlib.RingTheory.AdicCompletion.Functoriality:437, needs [IsPrecomplete I M] [IsHausdorff I N]), AdicCompletion.map_surjective, IsLocalizedModule.map_surjective, LinearMap.range_eq_top_of_cancel (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "generalization not specializing in one line: surjective_of_mkQ_comp_surjective covers I nilpotent, but Mathlib has no IsHausdorff/IsPrecomplete instance or lemma for a nilpotent ideal (only bot, top, subsingleton, le_jacobson for finite modules over Noetherian rings, local rings, domains; RingTheory/AdicCompletion/Basic.lean, Noetherian.lean); both would have to be proved first"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nakayama lemma for a nilpotent ideal: a submodule N with N + I M = M equals M when I is nilpotent, no finiteness assumption",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul (Artin-Rees), Ideal.mem_iInf_smul_pow_eq_bot_iff, Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (FG), Ideal.iInf_pow_smul_eq_bot_of_* (Krull intersection), Submodule.le_of_le_smul_of_le_jacobson_bot (FG)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If I is a nilpotent ideal and f : M → N is a linear map such that the composite M → N → N / I N is surjective, then f is surjective",
+   "results": "surjective_of_mkQ_comp_surjective (adic, needs IsPrecomplete/IsHausdorff), AdicCompletion.map_surjective_of_mkQ_comp_surjective, surjective_of_mk_map_comp_surjective (ring version, same instances), AdicCompletion.map_surjective, QuotSMulTop.map_surjective",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization needing instances absent for nilpotent ideals)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent ?I, ?I • ?N = ?N",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent ?I → Function.Surjective _ → Function.Surjective _",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '00DV' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -nE 'theorem|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Nakayama.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Nakayama.lean; grep -rnE 'IsNilpotent' (same files, RingTheory/Ideal/Quotient/Nilpotent.lean, RingTheory/Jacobson/Radical.lean); grep -rnE 'instance.*(IsHausdorff|IsPrecomplete|IsAdicComplete)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/",
+   "results": "00DV is cited only in RingTheory/Nakayama.lean, every lemma there (eq_smul_of_le_smul_of_le_jacobson @[stacks 00DV \"(2)\"], eq_bot_of_le_smul_of_le_jacobson_bot, le_of_le_smul_of_le_jacobson_bot, LinearMap.surjective_of_surjective_comp_mkQ:233 with [Module.Finite R N]) assumes finite generation and I in the Jacobson radical; no IsNilpotent in the Nakayama files; IsHausdorff/IsPrecomplete instances only for bot, top, subsingleton modules, local rings and Noetherian/Jacobson settings, none for nilpotent ideals; RingTheory/Finiteness/NilpotentKer.lean (Module.finite_of_surjective_of_ker_le_nilradical) is about finiteness, not surjectivity",
+   "date": "2026-10-10",
+   "verdict": "no match: parts (9)-(12) of 00DV (nilpotent, no finiteness) are absent from Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-lift-nilpotent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Algebra 00DV (11) (with (9)-(10) as equivalent forms), no finiteness; correct; unsplit; its proof is M = I^k M = 0."
+ }
+}
