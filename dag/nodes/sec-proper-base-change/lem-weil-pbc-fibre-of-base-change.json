@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-fibre-of-base-change",
+ "kind": "statement",
+ "title": "The fibres of a base change are the base changes of the fibres",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be morphisms of schemes [def-pc-scheme], let $X'=X\\times_SS'$ be the fibre product [def-pc-fibre-product] with projections $g':X'\\to X$ and $f':X'\\to S'$, let $s'\\in S'$ and $s=g(s')$, and let $r:\\kappa(s)\\to\\kappa(s')$ be the map induced by $g$ on residue fields [def-weil-residue-field]. Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $X'_{s'}=X'\\times_{S'}\\operatorname{Spec}\\kappa(s')$ be the fibres [def-pc-scheme-fibre] of $f$ at $s$ and of $f'$ at $s'$, with projections $\\iota:X_s\\to X$, $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$, $\\iota':X'_{s'}\\to X'$, $\\pi':X'_{s'}\\to\\operatorname{Spec}\\kappa(s')$. Then there is a unique morphism $h:X'_{s'}\\to X_s$ with $\\iota\\circ h=g'\\circ\\iota'$ and $\\pi\\circ h=\\operatorname{Spec}(r)\\circ\\pi'$ [def-weil-affine-spectrum], and the square formed by $h$, $\\pi'$, $\\pi$ and $\\operatorname{Spec}(r):\\operatorname{Spec}\\kappa(s')\\to\\operatorname{Spec}\\kappa(s)$ is cartesian: $(X'_{s'},h,\\pi')$ is a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proofs of Lemma 02V3 (lemma-set-points-where-fibres-lci, line 5974; display at line 5995: 'X'_{s'} = Spec(kappa(s')) x_{Spec(kappa(s))} X_s. In other words the fibres of the base change are the base changes of the fibres') and Lemma 02V4 (lemma-set-points-where-fibres-smooth, line 7354; same display at line 7381); also algebra.tex, proof of Lemma 00PP (algebra-lemma-quasi-finite-base-change, line 30362), first sentence, in the affine case"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the fiber of the base change of a morphism of schemes is the base change of the fiber along Spec of the residue field map",
+   "results": "Scheme.Hom.fiber, fiberOverSpecResidueField, fiberι, fiberToSpecResidueField_apply (Mathlib.AlgebraicGeometry.Fiber), Scheme.Hom.Spec_map_residueFieldMap_fromSpecResidueField, Scheme.descResidueField_fromSpecResidueField (Mathlib.AlgebraicGeometry.ResidueField)",
+   "date": "2026-10-10",
+   "verdict": "related: the notions; the statement found by leanfinder/grep below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibre of base change of a scheme morphism is the base change of the fibre along residue field extension",
+   "results": "Scheme.Hom.fiberToSpecResidueField, Scheme.Hom.fiber, fiberOverSpecResidueField (Mathlib.AlgebraicGeometry.Fiber), Scheme.Pullback.ofPointTensor, Triplet.tensor, Triplet.tensorInl (Mathlib.AlgebraicGeometry.PullbackCarrier)",
+   "date": "2026-10-10",
+   "verdict": "related only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'fiber.*pullback|pullback.*fiber|isPullback.*fiber|fiber.*IsPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Fiber.lean",
+   "results": "Fiber.lean:65 lemma isPullback_fiberToSpecResidueField_of_isPullback",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isPullback_fiberToSpecResidueField_of_isPullback",
+   "results": "{P X Y Z : Scheme} {fst : P ⟶ X} {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) (y : Y) : IsPullback (pullback.map snd (Y.fromSpecResidueField y) f (Z.fromSpecResidueField (g y)) fst (Spec.map (g.residueFieldMap y)) g _ _) (snd.fiberToSpecResidueField y) (f.fiberToSpecResidueField (g y)) (Spec.map (g.residueFieldMap y)) (Mathlib.AlgebraicGeometry.Fiber)",
+   "date": "2026-10-10",
+   "verdict": "match: type read and compared with the statement"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isPullback_fiberToSpecResidueField_of_isPullback",
+  "file": "Mathlib/AlgebraicGeometry/Fiber.lean",
+  "line": 65,
+  "how": "specializes in one line: apply it to h = IsPullback.of_hasPullback f g (P = X', fst = g', snd = f', Y = S', Z = S) and y = s'; f'.fiber s' = X'_{s'} and f.fiber (g s') = X_s are the fibres as pullbacks along fromSpecResidueField, Spec.map (g.residueFieldMap s') is Spec(r), and h is pullback.map … g' (Spec.map r) g, which satisfies ι∘h = g'∘ι' and π∘h = Spec(r)∘π' by pullback.lift_fst/lift_snd (uniqueness by the universal property of X_s)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-isolated-fibre-point-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

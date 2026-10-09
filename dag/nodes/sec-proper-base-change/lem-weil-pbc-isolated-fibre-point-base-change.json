@@ -13,9 +13,71 @@
   "def-pc-fibre-product",
   "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fibre of the base change. Let $r:\\kappa(s)\\to\\kappa(s')$ be the map induced by $g$ on residue fields. By [lem-weil-pbc-fibre-of-base-change] there is a morphism $h:X'_{s'}\\to X_s$ with $\\iota\\circ h=g'\\circ\\iota'$ (where $\\iota:X_s\\to X$, $\\iota':X'_{s'}\\to X'$ are the first projections) which, together with the projection $X'_{s'}\\to\\operatorname{Spec}\\kappa(s')$, makes $X'_{s'}$ a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$, the map $\\operatorname{Spec}\\kappa(s')\\to\\operatorname{Spec}\\kappa(s)$ being $\\operatorname{Spec}(r)$. Since $f'(x')=s'$, by [def-pc-scheme-fibre] there is a unique point $\\xi'\\in X'_{s'}$ with $\\iota'(\\xi')=x'$; this is the point of the fibre meant by '$x'$ is isolated in $X'_{s'}$'. Put $\\xi=h(\\xi')$. Then $\\iota(\\xi)=g'(\\iota'(\\xi'))=g'(x')=x$, and since $\\iota$ is injective (a homeomorphism onto $f^{-1}(s)$ [def-pc-scheme-fibre]), $\\xi$ is the point of $X_s$ corresponding to $x$; by hypothesis $\\{\\xi\\}$ is open in $X_s$.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00PP (algebra-lemma-quasi-finite-base-change, line 30362), first sentence ('the fibre ring S' (x)_{R'} kappa(p') is the base change of the fibre ring S (x)_R kappa(p) by the field extension kappa(p) -> kappa(p')'), in its scheme form Morphisms, proof of Lemma 02V4 (morphisms.tex line 7381)"
+   }
+  },
+  {
+   "text": "The open point as a scheme over $\\kappa(s)$. Let $W\\subseteq X_s$ be the open subscheme with underlying set $\\{\\xi\\}$ and $w:W\\to X_s$ its inclusion, an open immersion [def-weil-open-immersion]. The morphism $w$ is locally of finite type by [lem-weil-pbc-immersion-base-change-lft] (2); the projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of the morphism $f$, locally of finite type, along $\\operatorname{Spec}\\kappa(s)\\to S$, hence locally of finite type by [lem-weil-pbc-lft-base-change]; so $\\pi\\circ w:W\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence] (e). The underlying space of $W$ is one point, hence discrete.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemmas 01T5 (lemma-immersion-locally-finite-type), 01T4 (lemma-base-change-finite-type), 01T3 (lemma-composition-finite-type); the finite type hypothesis of Algebra, Lemma 00PP"
+   }
+  },
+  {
+   "text": "Base change of the open point is discrete and open. By [lem-weil-pbc-discrete-field-base-change-artinian] (with $k=\\kappa(s)$, $K=\\kappa(s')$ via $r$, and the scheme $W$ of the previous step), the base change $W_{\\kappa(s')}=W\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ has discrete underlying space. By [lem-weil-pbc-open-fibre-product], applied to the fibre product $X'_{s'}=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ of the first step with the opens $W\\subseteq X_s$, $\\operatorname{Spec}\\kappa(s)$ and $\\operatorname{Spec}\\kappa(s')$, the canonical morphism $W_{\\kappa(s')}\\to X'_{s'}$ is an open immersion [def-weil-open-immersion] with image $h^{-1}(W)$. Hence $h^{-1}(W)$ is an open subset of $X'_{s'}$ and, being homeomorphic to $W_{\\kappa(s')}$, is discrete in the subspace topology.",
+   "uses": [
+    "lem-weil-pbc-discrete-field-base-change-artinian",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00PP (line 30362): 'the first assertion follows from the invariance of dimension under field extension (Lemma 00P4, lemma-dimension-at-a-point-preserved-field-extension) and Lemma 00PJ (lemma-isolated-point)', here in the case of dimension 0 at an isolated point, which is what [lem-weil-pbc-discrete-field-base-change-artinian] states"
+   }
+  },
+  {
+   "text": "Conclusion. Since $h(\\xi')=\\xi\\in W$, $\\xi'\\in h^{-1}(W)$. As $h^{-1}(W)$ is discrete, $\\{\\xi'\\}$ is open in $h^{-1}(W)$, and as $h^{-1}(W)$ is open in $X'_{s'}$, $\\{\\xi'\\}$ is open in $X'_{s'}$: $x'$ is an isolated point of $X'_{s'}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00PP (line 30362), conclusion of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-pc-scheme-fibre",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-discrete-field-base-change-artinian",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00PP (algebra-lemma-quasi-finite-base-change, line 30362), proof of part (1), run on the scheme fibres instead of affine fibre rings. Stacks proves Morphisms, Lemma 01TM (1) (morphisms.tex line 3925) by reduction to affine opens (01TH (4), line 3664) and 00PP; the statement here is 01TM (1) read through 01TH (1)<=>(2), and the argument of 00PP (fibre of base change = base change of fibre; dimension 0 / isolatedness preserved by field extension, 00P4 and 00PJ) gives it directly, without passing through quasi-finiteness."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +106,31 @@
    "results": "none at scheme level; Algebra.QuasiFiniteAt.baseChange in RingTheory/QuasiFinite/Basic.lean is the affine (Algebra 00PR-type) statement",
    "date": "2026-10-10",
    "verdict": "no match: ring-level candidate Algebra.QuasiFiniteAt.baseChange plus Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber"
+  },
+  {
+   "tool": "leansearch",
+   "query": "isolated point of fibre stays isolated in fibre of pullback scheme morphism",
+   "results": "Scheme.Hom.fiber, asFiber, fiberToSpecResidueField_apply, fiberι_asFiber (Mathlib.AlgebraicGeometry.Fiber), IsLocalAtTarget.of_isPullback, base-change instances of IsPreimmersion, FormallyUnramified, IsSeparated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt, CategoryTheory.Limits.pullback.fst",
+   "results": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (Mathlib.AlgebraicGeometry.ZariskisMainTheorem) only",
+   "date": "2026-10-10",
+   "verdict": "no match: no pointwise base change of QuasiFiniteAt for schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'QuasiFiniteAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry (outside Morphisms/QuasiFinite.lean) and rg 'QuasiFiniteAt' Mathlib | grep -i 'pullback|baseChange|fst|snd|tensor'",
+   "results": "ZariskisMainTheorem.lean (quasiFiniteLocus, isOpen_quasiFiniteAt, exists_etale_isCompl_of_quasiFiniteAt); ring level only: Algebra.QuasiFiniteAt.baseChange (RingTheory/QuasiFinite/Basic.lean:361), Algebra.WeaklyQuasiFiniteAt.baseChange (RingTheory/QuasiFinite/Weakly.lean:168); Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber (Morphisms/QuasiFinite.lean:396)",
+   "date": "2026-10-10",
+   "verdict": "no match at scheme level; the Lean proof would be the split: isPullback_fiberToSpecResidueField_of_isPullback (Fiber.lean:65) + the Mathlib leaves of the steps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +150,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-isolated-fibre-point-base-change",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Morphisms 01TM (1) (line 3925) with 01TH (1)<=>(2) (line 3664): correct as stated (the 'point x'' of the fibre is the point of X'_{s'} over x'; made explicit in step 1). Stacks proves 01TM (1) through affine opens (01TH (4)) and Algebra 00PP (line 30362), whose proof is: the fibre of the base change is the base change of the fibre by kappa(p) -> kappa(p'), and isolatedness (dimension 0, 00P4 + 00PJ) is preserved by field extension. The split runs that argument directly on the scheme fibres, avoiding quasi-finiteness: (1) X'_{s'} = X_s x_{kappa(s)} kappa(s') (new Mathlib leaf lem-weil-pbc-fibre-of-base-change = isPullback_fiberToSpecResidueField_of_isPullback, Fiber.lean:65; Stacks states it in the proofs of 02V3/02V4); (2) the open point W = {x} of X_s is lft over kappa(s) (existing leaves 01T5, 01T4, 01T3); (3) W_{kappa(s')} is discrete (existing leaf lem-weil-pbc-discrete-field-base-change-artinian, 00P4 case dim 0) and is the open h^{-1}(W) of X'_{s'} (existing leaf lem-weil-pbc-open-fibre-product, 01JR); (4) topology. No Mathlib declaration for the item at scheme level (searches added). One new node, a Mathlib leaf. Tags verified in tags/tags: 01TM, 01TH, 00PP, 00P4, 00PJ, 02V3, 02V4, 01T3, 01T4, 01T5, 01JR. The brief's guesses 00PM/00PL/00PN/01TG for base change were wrong: the algebra lemma is 00PP (00PL is the definition of quasi-finite, 01TG is lemma-residue-field-quasi-finite)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps on the scheme fibres following Algebra 00PP(1): the fibre of the base change is the base change of the fibre (new Mathlib leaf isPullback_fiberToSpecResidueField_of_isPullback, AlgebraicGeometry/Fiber.lean:65, verified), the open point as a discrete lft scheme over kappa(s), its base change to kappa(s') discrete by the existing leaf (00P4 dimension-0 case) and identified with the open preimage, topology (elementary). Route through quasi-finiteness (01TH) not needed. Brief errors: the algebra lemma is 00PP; 00PL/00PM/00PN/01TG are other statements."
+ }
 }
