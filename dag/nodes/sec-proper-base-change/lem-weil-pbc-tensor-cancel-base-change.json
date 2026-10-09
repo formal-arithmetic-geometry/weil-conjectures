@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-tensor-cancel-base-change",
+ "kind": "statement",
+ "title": "Cancellation of base change for tensor products of algebras",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $B$ a commutative $R$-algebra and $A$ a commutative $S$-algebra, regarded as an $R$-algebra via $R\\to S\\to A$. Then there is an isomorphism of $A$-algebras $A\\otimes_S(S\\otimes_RB)\\xrightarrow{\\sim}A\\otimes_RB$, $a\\otimes(s\\otimes b)\\mapsto sa\\otimes b$, with inverse $a\\otimes b\\mapsto a\\otimes(1\\otimes b)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section Tag 00CV (section-tensor-product), Lemma Tag 00D2 (lemma-tensor-with-bimodule: $(M\\otimes_AN)\\otimes_BP\\cong M\\otimes_A(N\\otimes_BP)$, here with $M=A$, the $(S,R)$-bimodule $N=S$, $P=B$ and $A\\otimes_SS=A$), from Lemma Tag 00D0 (lemma-transitive); used implicitly in the proof of Lemma Tag 00U2 (9)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ⊗[S] (S ⊗[R] B) ≃ₐ A ⊗[R] B cancel base change algebra isomorphism",
+   "results": "Algebra.TensorProduct.cancelBaseChange (Mathlib.RingTheory.TensorProduct.Maps), cancelBaseChange_tmul, TensorProduct.AlgebraTensorModule.cancelBaseChange, IsBaseChange.tensorEquiv, KaehlerDifferential.tensorKaehlerEquiv, Algebra.IsPushout.cancelBaseChangeAux",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.TensorProduct.cancelBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.cancelBaseChange",
+   "results": "Algebra.TensorProduct.cancelBaseChange (R S T A B) : A ⊗[S] (S ⊗[R] B) ≃ₐ[T] A ⊗[R] B, with _tmul (a ⊗ (s ⊗ b) ↦ (s • a) ⊗ b) and _symm_tmul (a ⊗ b ↦ a ⊗ (1 ⊗ b)), Mathlib.RingTheory.TensorProduct.Maps",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural algebra isomorphism A ⊗_S (S ⊗_R B) ≅ A ⊗_R B (transitivity of base change of algebras)",
+   "results": "Algebra.TensorProduct.cancelBaseChange, cancelBaseChange_tmul, Algebra.TensorProduct.congr_trans, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def cancelBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "RingTheory/TensorProduct/Maps.lean:476 def cancelBaseChange : A ⊗[S] (S ⊗[R] B) ≃ₐ[T] A ⊗[R] B; LinearAlgebra/TensorProduct/Tower.lean:436 (linear version) (sources read, Maps.lean 469-492)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.TensorProduct.cancelBaseChange",
+  "file": "Mathlib/RingTheory/TensorProduct/Maps.lean",
+  "how": "exact, with T := A (line 476; the formulas are cancelBaseChange_tmul and cancelBaseChange_symm_tmul, lines 483 and 488)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: Algebra.TensorProduct.cancelBaseChange (TensorProduct/Maps.lean:476), exact."
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit",
+ "kind": "statement",
+ "title": "Maps from a ring of finite type over Z into a filtered colimit of rings factor through a stage",
+ "statement": "Let $I$ be a small filtered category, $i\\mapsto A_i$ a functor from $I$ to commutative rings with colimit $A=\\varinjlim_IA_i$ [def-weil-pbc-category-colimit], coprojections $\\iota_i:A_i\\to A$ and transition maps $A(u):A_i\\to A_j$ for $u:i\\to j$. Let $R_0$ be a commutative ring of finite type over $\\mathbf Z$ (generated as a ring by finitely many elements) and $h:R_0\\to A$ a ring map. Then (1) there are $i\\in I$ and a ring map $g:R_0\\to A_i$ with $\\iota_i\\circ g=h$; (2) if $g:R_0\\to A_i$ and $g':R_0\\to A_{i'}$ satisfy $\\iota_i\\circ g=\\iota_{i'}\\circ g'$, there are $k$ and $u:i\\to k$, $u':i'\\to k$ with $A(u)\\circ g=A(u')\\circ g'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00QO (lemma-characterize-finite-presentation), (1) implies (2), with base ring $\\mathbf Z$ (a ring of finite type over the noetherian ring $\\mathbf Z$ is of finite presentation over $\\mathbf Z$: $R_0=\\mathbf Z[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ by the Hilbert basis theorem); stated there for directed systems, here for filtered index categories (Categories, Section Tag 04AX); used in the proof of Lemma Tag 00U2 (9)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring hom from finitely presented algebra into a filtered colimit of rings factors through some stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation), RingHom.FinitePresentation, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, CommRingCat.isFinitelyPresentable_hom, RingCat.FilteredColimits.colimitCocone, CommRingCat.preservesFilteredColimits_coyoneda",
+   "date": "2026-10-10",
+   "verdict": "match: exists_eq_comp_ι_app_of_isColimit (clause 1)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+   "results": "the declaration, Mathlib.Algebra.Category.Ring.FinitePresentation: for J filtered, F : J ⥤ CommRingCat, α : const R ⟶ F, f : R ⟶ S finitely presented, colimit cocone c, g : S ⟶ c.pt compatible with α, ∃ i g', f ≫ g' = α.app i ∧ g = g' ≫ c.ι.app i",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a ring homomorphism from a finitely presented ring into a filtered colimit of rings factors through one of the rings in the diagram",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.isFinitelyPresentable_hom, CommRingCat.preservesFilteredColimits_coyoneda",
+   "date": "2026-10-10",
+   "verdict": "match (both clauses)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated algebra over a noetherian ring is finitely presented",
+   "results": "Algebra.FinitePresentation.of_finiteType, RingHom.FinitePresentation.of_finiteType, AlgHom.FinitePresentation.of_finiteType (Mathlib.RingTheory.FinitePresentation)",
+   "date": "2026-10-10",
+   "verdict": "match for the finite-presentation hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FinitePresentation.lean; grep -n 'of_finiteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean; grep -n forget_preservesFilteredColimits ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+   "results": "FinitePresentation.lean:45 RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, :81 RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, :145 CommRingCat.preservesColimit_coyoneda_of_finitePresentation; RingTheory/FinitePresentation.lean:434 RingHom.FinitePresentation.of_finiteType; FilteredColimits.lean:363 instance CommRingCat.FilteredColimits.forget_preservesFilteredColimits (sources read)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit",
+  "file": "Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+  "how": "a few Mathlib lemmas, one per clause: take R := CommRingCat.of (ULift ℤ) (ℤ lifted to the universe of the rings), α the unique ring maps to the A_i, f : R ⟶ R_0 the unique ring map; the compatibility hypotheses hold because maps out of ULift ℤ are unique; the instance PreservesColimit F (forget CommRingCat) is CommRingCat.FilteredColimits.forget_preservesFilteredColimits (Algebra/Category/Ring/FilteredColimits.lean:363); f.FinitePresentation follows from f.FiniteType by RingHom.FinitePresentation.of_finiteType (RingTheory/FinitePresentation.lean:434) with IsNoetherianRing (ULift ℤ) from isNoetherianRing_of_ringEquiv (RingTheory/Noetherian/Basic.lean:356) and ULift.ringEquiv; then clause (1) is exists_eq_comp_ι_app_of_isColimit (line 81) and clause (2) is exists_comp_map_eq_of_isColimit (line 45, finite type implies EssFiniteType). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit (:45) and exists_eq_comp_ι_app_of_isColimit (:81) in Algebra/Category/Ring/FinitePresentation.lean, with FinitePresentation.of_finiteType over Z."
+ }
+}

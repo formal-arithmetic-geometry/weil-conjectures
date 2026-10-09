@@ -1,8 +1,8 @@
 # Work queue
 
-581 items; claim with `tools/claim.py next <group> [--stage N]`.
+580 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (554)
+## Stage 1: nodes to split (553)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-constructible-module-noetherian-descent` | 1007 | none |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1007 | none |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1007 | none |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1007 | none |
@@ -593,7 +592,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 568 nodes that wait for stage 1, 193 nodes that wait for a statement dependency.
+Not open yet: 567 nodes that wait for stage 1, 194 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
