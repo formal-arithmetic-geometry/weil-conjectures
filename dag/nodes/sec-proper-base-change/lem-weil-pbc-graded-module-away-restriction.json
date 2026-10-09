@@ -8,11 +8,139 @@
   "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
  },
  "stmt_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "*Conventions and the degenerate case.* Write $d=\\deg f\\ge1$, $\\delta=\\deg g\\ge1$. All fractions are taken in $M_f$, $M_g$ (localizations of the $S$-module $M$ at the powers of $f$, resp. $g$ [def-weil-pbc-module-localization-away]: $x/g^n=0$ iff $g^kx=0$ for some $k$), and in the rings $S_f$, $S_g$ [def-weil-ring-localization-away], over which $M_f$, $M_g$ are modules by $(b/f^n)(x/f^m)=bx/f^{n+m}$. $M_{(f)}=\\{x/f^m:x\\in M_{md}\\}$ is an $S_{(f)}$-submodule of $M_f$ ($S_{(f)}$ the ring of [def-nagata-homogeneous-localization-degree-zero]): $x/f^m+y/f^n=(f^nx+f^my)/f^{m+n}$ with $f^nx+f^my\\in M_{(m+n)d}$, and $(b/f^n)(x/f^m)=bx/f^{n+m}$ with $bx\\in M_{(n+m)d}$ for $b\\in S_{nd}$. If $g$ is nilpotent, $g^N=0$, then $M_g=0$ (every $x/g^n=g^Nx/g^{n+N}=0$), $S_g=0$, $M_{(g)}=0$, $S_{(g)}=0$. If $g$ is not nilpotent, then $af=g^e\\neq0$ is homogeneous of degree $e\\delta$, and $a,f$ homogeneous with $af\\ne0$ force $\\deg a=e\\delta-d$ (in particular $e\\delta\\ge d$).",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'Write the inverse of $f$ in $S_g$ as $a/g^d$ ... $a$ homogeneous of degree $e\\deg(g)-\\deg(f)$'; Algebra, Section 00JM (section-proj), definition of $S_{(f)}$ and $M_{(f)}$"
+   }
+  },
+  {
+   "text": "*(i) The map $\\lambda_{f,g}$, its formula, independence.* In $S_g$, $(f/1)(a/g^e)=af/g^e=g^e/g^e=1$, so $f/1$ is a unit of $S_g$ with inverse $a/g^e$; hence multiplication by $f$ on the $S_g$-module $M_g$ (which is multiplication by $f/1$) is bijective, with inverse multiplication by $a/g^e$. The localization map $M\\to M_g$, $x\\mapsto x/1$, is $S$-linear, so by the universal property of $M\\to M_f$ [def-weil-pbc-module-localization-away] (an $S$-linear map from $M$ to a module on which $f$ acts bijectively factors uniquely through $M_f$) there is a unique $S$-linear $\\lambda=\\lambda_{f,g}:M_f\\to M_g$ with $\\lambda(x/1)=x/1$. Formula: $f^m\\cdot(x/f^m)=x/1$ in $M_f$, so $f^m\\lambda(x/f^m)=\\lambda(x/1)=x/1$ and therefore $\\lambda(x/f^m)=(a/g^e)^m(x/1)=a^mx/g^{em}$. Since $\\lambda$ was characterized without reference to $(e,a)$, the right-hand side is the same for every admissible pair $(e,a)$: this is the independence of the choice.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'For (c), the map $S_f\\to S_g$ exists by (a) from the universal property of localization, or we can define it by mapping $b/f^n$ to $a^nb/g^{ne}$ ... We can similarly define $M_f\\to M_g$'"
+   }
+  },
+  {
+   "text": "*(i) Semilinearity.* For $M=S$ step 2 gives the $S$-linear $\\lambda^S=\\lambda^S_{f,g}:S_f\\to S_g$, $b/f^n\\mapsto a^nb/g^{en}$. It is a ring homomorphism: $\\lambda^S(1)=\\lambda^S(1/1)=1/1$, and $\\lambda^S((b/f^n)(c/f^m))=\\lambda^S(bc/f^{n+m})=a^{n+m}bc/g^{e(n+m)}=(a^nb/g^{en})(a^mc/g^{em})$; additivity is $S$-linearity. $\\lambda$ is $\\lambda^S$-semilinear: for $s=b/f^n\\in S_f$ and $z=x/f^m\\in M_f$, $\\lambda(sz)=\\lambda(bx/f^{n+m})=a^{n+m}bx/g^{e(n+m)}=(a^nb/g^{en})(a^mx/g^{em})=\\lambda^S(s)\\lambda(z)$ (every element of $S_f$, $M_f$ has such a form).",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: formulas $b/f^n\\mapsto a^nb/g^{ne}$, $x/f^n\\mapsto a^nx/g^{ne}$"
+   }
+  },
+  {
+   "text": "*(i) Degree zero parts; $\\rho$ and $\\rho^S$.* Let $x/f^m\\in M_{(f)}$ with $x\\in M_{md}$. If $g$ is nilpotent, $\\lambda(x/f^m)\\in M_g=0=M_{(g)}$ (step 1). Otherwise $\\deg a=e\\delta-d$ (step 1), so $a^mx\\in M_{m(e\\delta-d)+md}=M_{me\\delta}$ and $\\lambda(x/f^m)=a^mx/g^{em}\\in M_{(g)}$. Thus $\\lambda$ maps $M_{(f)}$ into $M_{(g)}$; let $\\rho=\\rho_{f,g}$ be the restriction. For $M=S$ the same computation shows that $\\lambda^S$ maps the subring $S_{(f)}$ into the subring $S_{(g)}$, and the restriction $\\rho^S$ is a ring homomorphism (step 3). By step 3, $\\rho(rz)=\\rho^S(r)\\rho(z)$ for $r\\in S_{(f)}$, $z\\in M_{(f)}$, and $\\rho$ is additive: $\\rho$ is semilinear over $\\rho^S$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'This clearly induces a map of the subrings $S_{(f)}\\to S_{(g)}$ of degree zero elements as well'"
+   }
+  },
+  {
+   "text": "*(ii) Identity and transitivity.* For $g=f$ take $e=1$, $a=1$ ($f^1=1\\cdot f$): $\\rho_{f,f}(x/f^m)=1^mx/f^m=x/f^m$, so $\\rho_{f,f}=\\mathrm{id}$ (by independence, step 2, any other choice gives the same map). Let $h^{e'}=a'g$. Then $h^{ee'}=(a'g)^e=a'^eg^e=(a'^ea)f$ with $ee'\\ge1$ and $a'^ea$ homogeneous, so $\\lambda_{f,h}$, $\\rho_{f,h}$ are defined. $\\lambda_{g,h}\\circ\\lambda_{f,g}:M_f\\to M_h$ is $S$-linear and sends $x/1\\mapsto x/1\\mapsto x/1$, so by the uniqueness in step 2 it equals $\\lambda_{f,h}$; restricting to $M_{(f)}$ (step 4) gives $\\rho_{g,h}\\circ\\rho_{f,g}=\\rho_{f,h}$, and likewise $\\rho^S_{g,h}\\circ\\rho^S_{f,g}=\\rho^S_{f,h}$. Explicitly: $\\rho_{g,h}(\\rho_{f,g}(x/f^m))=\\rho_{g,h}(a^mx/g^{em})=a'^{em}a^mx/h^{e'em}=(a'^ea)^mx/h^{ee'm}$, the formula of $\\rho_{f,h}$ for the pair $(ee',a'^ea)$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: formula $x/f^n\\mapsto a^nx/g^{ne}$; Constructions, Section 01M3 after Definition 01M5: 'canonical maps $M_{(f)}\\to M_{(g)}$ and $M_{(g)}\\to M_{(f)}$ which are mutually inverse'"
+   }
+  },
+  {
+   "text": "*(iii) $u\\in S_{(f)}$ and $\\rho^S(u)$ is a unit.* $g^d\\in S_{\\delta d}=S_{d\\delta}$, so $u=g^d/f^\\delta\\in S_{(f)}$, and $v=f^\\delta/g^d\\in S_{(g)}$ ($f^\\delta\\in S_{d\\delta}$). Since $\\lambda^S$ is a ring homomorphism with $\\lambda^S(f/1)=f/1$ and $\\lambda^S(g/1)=g/1$, and $u\\cdot(f/1)^\\delta=g^d/1$ in $S_f$, we get $\\rho^S(u)\\,(f/1)^\\delta=g^d/1$ in $S_g$, hence $\\rho^S(u)\\cdot v=\\rho^S(u)(f/1)^\\delta\\cdot(1/g^d)=g^d/g^d=1$. So $\\rho^S(u)$ is a unit of $S_{(g)}$ with inverse $v=f^\\delta/g^d$. (In $S_g$, $\\rho^S(u)=a^\\delta g^d/g^{e\\delta}$; the inverse is $v$, not a fraction with $a$ in the denominator.)",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: clause (a): '$f^{\\deg(g)}/g^{\\deg(f)}$ is invertible in $S_{(g)}$' (Stacks proves it via primes; here by the formula, as the proof's 'clear from the formulas' allows)"
+   }
+  },
+  {
+   "text": "*(iii) The map $\\theta$.* Regard $M_{(g)}$ as an $S_{(f)}$-module through $\\rho^S$; by step 4, $\\rho:M_{(f)}\\to M_{(g)}$ is $S_{(f)}$-linear, and $u$ acts on $M_{(g)}$ as multiplication by the unit $\\rho^S(u)$ (step 6), i.e. bijectively. By the universal property of the localization $(M_{(f)})_u$ of the $S_{(f)}$-module $M_{(f)}$ at $u$ [def-weil-pbc-module-localization-away] there is a unique $S_{(f)}$-linear $\\theta=\\theta_{f,g}:(M_{(f)})_u\\to M_{(g)}$ with $\\theta(z/1)=\\rho(z)$; as in step 2, $u^k\\cdot(z/u^k)=z/1$ forces $\\theta(z/u^k)=\\rho^S(u)^{-k}\\rho(z)$. For $M=S$ this gives $\\theta^S:(S_{(f)})_u\\to S_{(g)}$, $r/u^k\\mapsto\\rho^S(u)^{-k}\\rho^S(r)$, a ring homomorphism: $\\theta^S(1)=1$ and $\\theta^S((r/u^j)(r'/u^k))=\\rho^S(u)^{-j-k}\\rho^S(rr')=\\theta^S(r/u^j)\\theta^S(r'/u^k)$ ($\\rho^S$ multiplicative). $\\theta$ is $\\theta^S$-semilinear: $\\theta((r/u^j)(z/u^k))=\\theta(rz/u^{j+k})=\\rho^S(u)^{-j-k}\\rho^S(r)\\rho(z)=\\theta^S(r/u^j)\\theta(z/u^k)$ (step 4).",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: clauses (e),(h): 'the map $M_{(f)}\\to M_{(g)}$ induces an isomorphism $(M_{(f)})_{g^{\\deg(f)}/f^{\\deg(g)}}\\cong M_{(g)}$'"
+   }
+  },
+  {
+   "text": "*(iii) $\\theta$ is surjective.* Let $y/g^n\\in M_{(g)}$, $y\\in M_{n\\delta}$. Put $Y=g^{n(d-1)}y\\in M_{n\\delta+n(d-1)\\delta}=M_{nd\\delta}$ (here $d\\ge1$); then $y/g^n=Y/g^{nd}$ in $M_g$, and $z=Y/f^{n\\delta}\\in M_{(f)}$ since $Y\\in M_{(n\\delta)d}$. Compute in $M_g$, where $f/1$ is a unit (step 2): $\\rho(z)=\\lambda(Y/f^{n\\delta})=(f/1)^{-n\\delta}(Y/1)$ and $\\rho^S(u)^{-n}=v^n=(f/1)^{n\\delta}/g^{nd}$ (step 6). Hence $\\theta(z/u^n)=\\rho^S(u)^{-n}\\rho(z)=(f/1)^{n\\delta}(1/g^{nd})(f/1)^{-n\\delta}(Y/1)=Y/g^{nd}=y/g^n$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'clear from the formulas above' (written out by the agent)"
+   }
+  },
+  {
+   "text": "*(iii) $\\theta$ is injective, hence an isomorphism.* Let $\\theta(z/u^k)=0$ with $z=x/f^m$, $x\\in M_{md}$. Multiplying by $\\rho^S(u)^k$ gives $\\rho(z)=0$, i.e. $a^mx/g^{em}=0$ in $M_g$, so $g^Na^mx=0$ in $M$ for some $N\\ge0$ [def-weil-pbc-module-localization-away]. Multiply by $f^m$: $g^{N+em}x=g^N(af)^mx=f^m\\cdot g^Na^mx=0$. Choose $K$ with $Kd\\ge N+em$; then $g^{Kd}x=0$, so $u^K z=g^{Kd}x/f^{K\\delta+m}=0$ in $M_f$, hence in $M_{(f)}$, and therefore $z/u^k=0$ in $(M_{(f)})_u$ (an element $z/u^k$ vanishes when a power of $u$ kills $z$). So $\\theta$ is bijective; being additive and $\\theta^S$-semilinear, it is an isomorphism of modules over the ring map $\\theta^S$, and for $M=S$, $\\theta^S$ is a bijective ring homomorphism, a ring isomorphism. This is (iii).",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'clear from the formulas above' (written out by the agent)"
+   }
+  },
+  {
+   "text": "*(iv) Compatibility with transitivity and the localization maps.* Let $h^{e'}=a'g$ as in (ii), so $h^{ee'}=(a'^ea)f$ and (iii) applies to the pair $(f,h)$ with the element $u'=h^d/f^{\\deg h}$, giving the ring isomorphism $\\theta^S_{f,h}:(S_{(f)})_{u'}\\to S_{(h)}$ and $\\theta_{f,h}$. $u$ is invertible in $(S_{(f)})_{u'}$: $\\theta^S_{f,h}(u/1)=\\rho^S_{f,h}(u)=\\rho^S_{g,h}(\\rho^S_{f,g}(u))$ (step 5) is the image of the unit $\\rho^S_{f,g}(u)$ (step 6) under a ring homomorphism, hence a unit, and $\\theta^S_{f,h}$ is a ring isomorphism, so $u/1$ is a unit. Hence the canonical $S_{(f)}$-linear map $\\kappa:(M_{(f)})_u\\to(M_{(f)})_{u'}$ with $\\kappa(z/1)=z/1$ exists [def-weil-pbc-module-localization-away] (universal property, $u$ acting bijectively on $(M_{(f)})_{u'}$ through the unit $u/1$), $\\kappa(z/u^k)=(u/1)^{-k}(z/1)$. For $z\\in M_{(f)}$: $\\rho_{g,h}(\\theta_{f,g}(z/u^k))=\\rho_{g,h}(\\rho^S_{f,g}(u)^{-k}\\rho_{f,g}(z))=\\rho^S_{f,h}(u)^{-k}\\rho_{f,h}(z)$ (step 4: $\\rho_{g,h}$ is $\\rho^S_{g,h}$-semilinear and $\\rho^S_{g,h}$ preserves inverses of units; step 5), and $\\theta_{f,h}(\\kappa(z/u^k))=\\theta^S_{f,h}(u/1)^{-k}\\theta_{f,h}(z/1)=\\rho^S_{f,h}(u)^{-k}\\rho_{f,h}(z)$ (step 7 for $(f,h)$). So $\\rho_{g,h}\\circ\\theta_{f,g}=\\theta_{f,h}\\circ\\kappa$; likewise for $M=S$ (with $\\rho^S$, $\\theta^S$). The special case $g=f$ ($e=1,a=1$, $u=f^d/f^d=1$, $(M_{(f)})_1=M_{(f)}$, $\\theta_{f,f}=\\mathrm{id}$ by steps 5, 7) says that $\\theta_{f,h}$ carries the canonical map $M_{(f)}\\to(M_{(f)})_{u'}$ to $\\rho_{f,h}$. This is (iv).",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (lemma-standard-open), proof: 'The statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above' (compatibility written out by the agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
   "def-nagata-homogeneous-localization-degree-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M4 (lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (universal property of localization, formulas $x/f^n\\mapsto a^nx/g^{ne}$); Algebra Section 00JM for $S_{(f)}$, $M_{(f)}$. The source calls (e),(h) 'clear from the formulas'; the bijectivity of $\\theta$ (steps 8-9), the unit computation (step 6) and the compatibility (iv) (step 10) are written out by the agent along those formulas."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +169,52 @@
    "results": "no graded-module localization anywhere; for the ring: HomogeneousLocalization.awayMap (HomogeneousLocalization.lean:825, A_(f) → A_(x) for x = f*g, a/f^i ↦ a g^i/(fg)^i), awayMapₐ (:859), Away.map (:727, functoriality in the graded ring, not a restriction)",
    "date": "2026-10-09",
    "verdict": "no match; for M = S and g = f*g' the map ρ is HomogeneousLocalization.awayMap (recorded for stage 2), the general module case and (iii),(iv) are absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homogeneous localization restriction map A_(f) to A_(g) when g^e = a f, D_+(g) subset D_+(f)",
+   "results": "HomogeneousLocalization.mapId, HomogeneousLocalization.map, AlgebraicGeometry.Proj.awayMap_awayToSection, HomogeneousLocalization.awayMap_mk, HomogeneousLocalization.awayMap, IsLocalization.Away.mapₐ, IsLocalization.map, Proj.toSpec",
+   "date": "2026-10-10",
+   "verdict": "no match: awayMap only for the special form x = f*g (ring case); mapId needs P ≤ Q of submonoids (powers f ≤ powers g fails in general)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded module localized at homogeneous element degree zero part, map M_(f) to M_(g)",
+   "results": "HomogeneousLocalization.awayMap_mk, Proj.awayMap_awayToSection, HomogeneousLocalization.algebraMap_eq, HomogeneousLocalization.Away, awayMap_fromZeroRingHom, Away.isLocalization_mul (all ring-only)",
+   "date": "2026-10-10",
+   "verdict": "no match for modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero localization A_(fg) is the localization of A_(f) at g^deg f / f^deg g",
+   "results": "HomogeneousLocalization.NumDenSameDeg.embedding, awayMapAux_mk, HomogeneousLocalization.Away.isLocalization_mul (HomogeneousLocalization.lean:887: for x = f*g, f ∈ 𝒜 d, g ∈ 𝒜 e, d ≠ 0, IsLocalization.Away (isLocalizationElem hf hg = g^d/f^e) (Away 𝒜 x) via (awayMap 𝒜 hg hx).toAlgebra), HomogeneousLocalization.Away, awayMap",
+   "date": "2026-10-10",
+   "verdict": "partial: ring case of (iii) for the pair (f, fg') only (u = g'^{deg f}/f^{deg g'} is isLocalizationElem); general g^e = af and the module case absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, IsLocalization.Away",
+   "results": "HomogeneousLocalization.Away.isLocalization_mul only",
+   "date": "2026-10-10",
+   "verdict": "ring case of (iii) for (f, f*g') only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.awayMap, HomogeneousLocalization.awayMap",
+   "results": "awayMap, Away.isLocalization_mul, val_awayMap_eq_aux, awayMap_mk, awayMapₐ_apply, val_awayMap_mk, awayMap_fromZeroRingHom, val_awayMap, Proj.basicOpenToSpec_SpecMap_awayMap, Proj.SpecMap_awayMap_awayι (no lemma composing two awayMaps)",
+   "date": "2026-10-10",
+   "verdict": "no match for (ii) transitivity or (iv)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 777,937p and grep -n 'theorem\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean; grep -rn 'HomogeneousLocalizedModule\\|GradedModule.*Locali\\|LocalizedModule.*Graded' Mathlib/; grep -rln HomogeneousLocalization Mathlib/",
+   "results": "awayMap (:825, x = f*g, a/f^i ↦ a g^i/(fg)^i), awayMapₐ (:859), awayMap_mk (:867), Away.isLocalization_mul (:887); HomogeneousLocalization only in RingTheory/GradedAlgebra/HomogeneousLocalization.lean and AlgebraicGeometry/ProjectiveSpectrum/{Basic,Scheme,StructureSheaf,Functor,Proper}.lean; no graded-module localization anywhere",
+   "date": "2026-10-10",
+   "verdict": "no match: the module case has no Mathlib; the ring case exists only for g = f*g' ((i) awayMap, (iii) Away.isLocalization_mul), not for g^e = af, and (ii),(iv) are absent; not a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +234,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction"
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-graded-module-away-restriction",
+  "worker": "stage1",
+  "summary": "Split along Stacks Constructions 01M4 (proof of (1)(c),(d),(g) via the universal property of localization and the formula x/f^n ↦ a^n x/g^{ne}; (e),(h) 'clear from the formulas'). Ten steps, all commutative algebra written out: conventions and the degenerate case g nilpotent (M_g = 0) with deg a = e deg g − deg f otherwise; λ by the universal property of M_f (f/1 a unit of S_g with inverse a/g^e), formula and independence; λ^S ring map and semilinearity; degree bookkeeping giving ρ, ρ^S; ρ_{f,f} = id and transitivity by uniqueness; ρ^S(u) a unit with inverse f^{deg g}/g^{deg f} ∈ S_(g); θ by the universal property, θ^S ring map, semilinearity; surjectivity and injectivity of θ by direct computation (no detour via M_(fg)); (iv) with u invertible in (S_(f))_{u'} shown via θ^S_{f,h}. Cites only the Mathlib-leaf definitions def-weil-pbc-module-localization-away and def-weil-ring-localization-away and the definition def-nagata-homogeneous-localization-degree-zero; stmt_deps completed with the two localization definitions. No new nodes. Mathlib re-searched with LeanSearch, LeanFinder, Loogle and grep: the ring case exists only for g = f*g' (HomogeneousLocalization.awayMap, Away.isLocalization_mul), not for g^e = af, and (ii),(iv) and the module case are absent; not a leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Ten steps along Stacks Constructions 01M4 with the parts Stacks calls 'clear from the formulas' written out: the maps lambda from the universal property of localization (f a unit of S_g with inverse a/g^e), the formula and independence of (e, a), semilinearity, the degree-zero parts (with the degenerate nilpotent-g case the statement missed), identity and transitivity, rho^S(u) a unit with inverse f^{deg g}/g^{deg f}, theta from the universal property, surjective and injective by direct computation, clause (iv). Cites only the reviewed localization leaves and def-nagata-homogeneous-localization-degree-zero (unsplit). Mathlib has the ring case for g = f g' only (HomogeneousLocalization.awayMap, Away.isLocalization_mul): recorded for stage 2."
+ }
 }
