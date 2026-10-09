@@ -32,6 +32,12 @@ noncomputable abbrev pullbackUnit (f : Y ⟶ X) (M : X.Modules) :
     M ⟶ (pushforward f).obj ((pullback f).obj M) :=
   (pullbackPushforwardAdjunction f).unit.app M
 
+/-- The unit of `pullback f ⊣ pushforward f` on sections over `U`, with its codomain written as
+sections of `f^* M`. -/
+noncomputable abbrev pullbackUnitApp (f : Y ⟶ X) (M : X.Modules) (U : X.Opens) :
+    Γ(M, U) ⟶ Γ((pullback f).obj M, f ⁻¹ᵁ U) :=
+  (pullbackUnit f M).app U
+
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The units of the pullback-pushforward adjunctions compose, up to `pullbackComp`. -/
 lemma pullbackUnit_comp_app (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) (U : X.Opens) :
