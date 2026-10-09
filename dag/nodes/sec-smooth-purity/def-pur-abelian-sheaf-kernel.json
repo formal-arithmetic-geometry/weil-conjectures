@@ -1,0 +1,43 @@
+{
+ "id": "def-pur-abelian-sheaf-kernel",
+ "kind": "definition",
+ "title": "Kernel of a morphism of sheaves of abelian groups on a site",
+ "statement": "Let $\\mathcal C$ be a site and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism of sheaves\nof abelian groups on $\\mathcal C$. Its *kernel* $\\ker\\varphi$ is the kernel of $\\varphi$\nin the abelian category $\\mathrm{Ab}(\\mathcal C)$ of sheaves of abelian groups. It\nexists and is computed sectionwise: it is the subsheaf\n\n$$\n (\\ker\\varphi)(U)=\\ker\\bigl(\\varphi_U:\\mathcal F(U)\\to\\mathcal G(U)\\bigr)\n =\\{x\\in\\mathcal F(U):\\varphi_U(x)=0\\}\n$$\n\nof $\\mathcal F$, with the restriction maps of $\\mathcal F$, and the inclusion\n$\\ker\\varphi\\to\\mathcal F$ is the canonical morphism. (The presheaf so defined is a\nsheaf because a kernel is a limit and limits of sheaves are the limits of the\nunderlying presheaves.)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03CO (1), (2) (sites-modules-lemma-limits-colimits-abelian-sheaves: all limits exist in Ab(C) and are the limits of the underlying abelian presheaves, computed on sections)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Abelian.lean",
+   "results": "`sheafIsAbelian : Abelian (Sheaf J D)` (Sites/Abelian.lean:40), `createsLimitsOfShape : CreatesLimitsOfShape K (sheafToPresheaf J D)` (Sites/Limits.lean:151), `HasLimitsOfShape K (Sheaf J D)` (line 153), `PreservesFiniteLimits (sheafToPresheaf J D)` (line 176)",
+   "date": "2026-10-09",
+   "verdict": "match: `CategoryTheory.Limits.kernel φ` for `φ` in `Sheaf J AddCommGrpCat`; sheafToPresheaf creates limits, and limits of presheaves (functor categories) are computed objectwise"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafIsAbelian",
+  "file": "Mathlib/CategoryTheory/Sites/Abelian.lean",
+  "how": "specializes in one line: `CategoryTheory.Limits.kernel φ` for `φ : F ⟶ G` in `Sheaf J AddCommGrpCat` (abelian by `sheafIsAbelian`); its sections are the sectionwise kernels because `sheafToPresheaf J AddCommGrpCat` creates limits (Mathlib/CategoryTheory/Sites/Limits.lean:151) and evaluation at an object preserves limits of presheaves"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-roots-of-unity-sheaf",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "id": "def-pur-proetale-structure-sheaf",
+ "kind": "definition",
+ "title": "The structure sheaf of rings on the small pro-etale site",
+ "statement": "Let $S$ be a scheme and $S_{\\mathrm{proet}}$ its small pro-etale site\n[def-weil-pbc-small-proetale-site]. The *structure sheaf* $\\mathcal O_S$ on\n$S_{\\mathrm{proet}}$ is the presheaf of commutative rings\n\n$$\n \\mathcal O_S(U)=\\Gamma(U,\\mathcal O_U)\\qquad(U\\to S\\text{ weakly etale}),\n$$\n\nwhose restriction map along a morphism $h:V\\to U$ over $S$ is the ring map\n$h^\\sharp:\\Gamma(U,\\mathcal O_U)\\to\\Gamma(V,\\mathcal O_V)$ on global sections. It is a\nsheaf of rings on $S_{\\mathrm{proet}}$: as a presheaf of sets it is isomorphic to\n$U\\mapsto\\operatorname{Mor}(U,\\operatorname{Spec}\\mathbf Z[t])$ (a morphism to\n$\\operatorname{Spec}\\mathbf Z[t]$ is a ring map $\\mathbf Z[t]\\to\\Gamma(U,\\mathcal O_U)$,\ni.e. a global section), hence it is representable on schemes and satisfies the sheaf\ncondition for fpqc coverings; the coverings of $S_{\\mathrm{proet}}$ are fpqc coverings,\nand the sheaf condition for a presheaf of rings is that of its underlying presheaf of\nsets.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03P4 (1) (etale-cohomology-definition-additive-sheaf: the sheaf $T\\mapsto\\Gamma(T,\\mathcal O_T)$, denoted $\\mathcal O_S$ or $\\mathbf G_a$) and Definition 04HS (etale-cohomology-definition-structure-sheaf); the sheaf property by Lemma 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc: representable presheaves are fpqc sheaves) or Theorem 03OJ (etale-cohomology-theorem-quasi-coherent)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Γ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/; grep -n 'def Γ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean; grep -n 'def adjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "results": "`AlgebraicGeometry.Scheme.Γ : Schemeᵒᵖ ⥤ CommRingCat` (Scheme.lean:572) and `ΓSpec.adjunction : Scheme.Γ.rightOp ⊣ Scheme.Spec` (GammaSpecAdjunction.lean:399); in AlgebraicGeometry/Sites/ Γ occurs only in SmallAffineZariski.lean (sections over opens of one scheme); no presheaf or sheaf of rings `U ↦ Γ(U, ⊤)` on `S.ProEt`, `Over S` or `Scheme` with a topology",
+   "date": "2026-10-09",
+   "verdict": "no match: the global-sections functor exists, its sheaf property on the pro-etale (or fpqc) site is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'isSheaf|Subcanonical' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+   "results": "`instance : (ProEt.topology S).Subcanonical` (Proetale.lean:175), `proetaleTopology.Subcanonical` (Proetale.lean:85); `GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable` used in ConstantSheaf.lean:65 and Fpqc.lean:91 for `continuousMapPresheaf`; nothing for the structure sheaf",
+   "date": "2026-10-09",
+   "verdict": "no match; the pieces (subcanonical pro-etale topology, representability of Γ by Spec ℤ[t] via ΓSpec.adjunction) are in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-roots-of-unity-sheaf",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
