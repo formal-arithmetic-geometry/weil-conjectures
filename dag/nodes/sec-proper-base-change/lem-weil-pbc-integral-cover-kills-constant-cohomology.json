@@ -19,9 +19,128 @@
   "def-pc-fibre-product",
   "lemma-constructible-pullback-constant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*An integral surjective cover on which every closed subscheme has trivial constant cohomology (Stacks: 'Let $X'\\to X$ be the integral surjective morphism we found above', part (1)).* By [lem-weil-pbc-integral-cover-trivial-cohomology] (Stacks 09ZD (1)) applied to the affine scheme $X$ there is an integral surjective morphism $\\pi:X'\\to X$ such that $H^q(Z'_{\\Et},\\underline M)=0$ for every closed subscheme $Z'\\subseteq X'$, every finite abelian group $M$ and every $q\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-integral-cover-trivial-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), first sentence; part (1) and its proof, first paragraph"
+   }
+  },
+  {
+   "text": "*$\\xi$ dies on $X'\\times_XZ$ (Stacks: 'Certainly, $\\xi$ maps to zero in $H^q_{\\Et}(X'\\times_XZ,\\underline M)$').* Let $i:Z\\to X$ be the closed immersion and $X'_Z=X'\\times_XZ$ [def-pc-fibre-product], with projections $i':X'_Z\\to X'$ and $w:X'_Z\\to Z$. By [lem-weil-pbc-closed-immersion-base-change] $i'$ is a closed immersion, so $X'_Z$ is a closed subscheme of $X'$ and $H^q((X'_Z)_{\\Et},\\underline M)=0$ by step 1 ($q\\ge1$). The pullback $w^*\\xi\\in H^q((X'_Z)_{\\Et},w^{-1}\\underline M)$ [def-weil-pbc-cohomology-pullback] lies in a group isomorphic to this one ($w^{-1}\\underline M\\cong\\underline M$ [lemma-constructible-pullback-constant], and an isomorphism of sheaves induces an isomorphism on $H^q$ [lem-weil-pbc-cohomology-pullback-functorial]), hence $w^*\\xi=0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-pbc-cohomology-pullback",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), second sentence"
+   }
+  },
+  {
+   "text": "*$X'$ as a limit of finite finitely presented $X$-schemes (Stacks: 'We may write $X'$ as a limit $X'=\\lim X'_i$ of schemes finite and of finite presentation over $X$ ... Limits, Lemma 09YZ').* Write $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum]; $X$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine] (applied to $\\mathrm{id}_X$). By [lem-weil-pbc-integral-morphism-limit-of-finite] (Stacks 09YZ) applied to the integral $\\pi$ there are a directed set $I$ (nonempty), an inverse system $(\\nu_i:Y_i\\to X)_{i\\in I}$ of $X$-schemes, each $\\nu_i$ finite and of finite presentation, with transition morphisms $t_{i'i}:Y_{i'}\\to Y_i$ over $X$, and $p_i:X'\\to Y_i$ over $X$ making $X'$ the limit. Each $Y_i$ is affine, being finite over the affine $X$ [lem-weil-pbc-finite-morphism-permanence] (b); put $A_i=\\Gamma(Y_i,\\mathcal O_{Y_i})$, so $Y_i=\\operatorname{Spec}A_i$ over $\\operatorname{Spec}A$, and since every morphism of affine schemes is $\\operatorname{Spec}$ of a unique ring map, functorially [def-weil-affine-spectrum], $t_{i'i}=\\operatorname{Spec}(\\alpha_{ii'})$ for a directed system $(A_i,\\alpha_{ii'})$ of $A$-algebras. Let $A_\\infty=\\varinjlim_iA_i$ [def-weil-pbc-category-colimit]. By [lem-weil-pbc-spec-colimit-limit] $\\operatorname{Spec}A_\\infty$ with the maps induced by the coprojections is a limit of the same system $(Y_i)$; two limits of one diagram are isomorphic by a unique isomorphism compatible with the projections, so there is an isomorphism $X'\\cong\\operatorname{Spec}A_\\infty$ under which $p_i$ becomes $\\operatorname{Spec}$ of the coprojection $A_i\\to A_\\infty$; it is an isomorphism over $X$ since $\\pi=\\nu_i\\circ p_i$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), third sentence; limits.tex Lemma 09YZ (label lemma-integral-limit-finite-and-finite-presentation, line 1697), which Stacks says is 'easy to do in our current affine case'"
+   }
+  },
+  {
+   "text": "*The base change to $Z$ as a directed colimit of rings.* $i:Z\\to X$ is a closed immersion into the affine $X=\\operatorname{Spec}A$, hence affine and induced by a surjective ring map $A\\to B$: $Z=\\operatorname{Spec}B$ [def-weil-closed-immersion]. Put $C_i=A_i\\otimes_AB$ and $C=A_\\infty\\otimes_AB$. By [lem-weil-pbc-fibre-product-affine-spectra] $Y_i\\times_XZ\\cong\\operatorname{Spec}C_i$ and (with step 3) $X'_Z=X'\\times_XZ\\cong\\operatorname{Spec}C$, the projections to $Z$ becoming $v_i=\\operatorname{Spec}(b\\mapsto1\\otimes b)$, $v=\\operatorname{Spec}(b\\mapsto1\\otimes b)$, and the morphisms $t_{i'i}\\times_X\\mathrm{id}_Z$, $p_i\\times_X\\mathrm{id}_Z$ becoming $\\operatorname{Spec}$ of $\\alpha_{ii'}\\otimes\\mathrm{id}_B$ and of (coprojection)$\\otimes\\mathrm{id}_B$ (both sides are characterized by their compositions with the two projections [def-pc-fibre-product]). The $C_i$ with the maps $\\alpha_{ii'}\\otimes\\mathrm{id}_B$ form a directed system of rings, and by [lem-weil-pbc-filtered-colimit-tensor-varying-rings] (constant system of rings $A$, $M_i=A_i$, constant $N_i=B$) the map $\\varinjlim_iC_i\\to C$ induced by the maps (coprojection)$\\otimes\\mathrm{id}_B$ is bijective; it is a ring homomorphism (each coprojection $\\otimes\\,\\mathrm{id}_B$ is one, and the ring structure of a directed colimit of rings is computed at a common stage), so $C=\\varinjlim_iC_i$ as rings, and $v\\circ$ (the morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}C_i$) $=v_i$, $v_i\\circ\\operatorname{Spec}(\\alpha_{ii'}\\otimes\\mathrm{id}_B)=v_{i'}$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), third and fourth sentences (the limit $X'\\times_XZ=\\lim X'_i\\times_XZ$ implicit in Stacks)"
+   }
+  },
+  {
+   "text": "*Continuity of cohomology (Stacks: 'By Lemma 03Q6 we see that ...').* Apply the ring case of [lem-weil-pbc-etale-cohomology-limit-of-schemes] (Stacks 09YQ, in this project's DAG the node carrying 03Q6) to the directed system $(C_i)$ with colimit $C$ (step 4), $T=Z$, $G=\\underline M$ and the compatible maps $v_i:\\operatorname{Spec}C_i\\to Z$ with limit $v$: the pullback maps induce an isomorphism $\\varinjlim_iH^q(\\operatorname{Spec}C_i,v_i^{-1}\\underline M)\\xrightarrow{\\sim}H^q(\\operatorname{Spec}C,v^{-1}\\underline M)$. Put $\\xi_i=v_i^*\\xi$. By the composition rule [lem-weil-pbc-cohomology-pullback-functorial] (4) and $v_i\\circ\\operatorname{Spec}(\\alpha_{ii'}\\otimes\\mathrm{id}_B)=v_{i'}$, the transition map of the system sends $\\xi_i$ to $\\xi_{i'}$, and the canonical map to $H^q(\\operatorname{Spec}C,v^{-1}\\underline M)$ sends the class of $\\xi_i$ to $v^*\\xi$.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), fourth sentence; Lemma 03Q6 (label lemma-directed-colimit-cohomology); Theorem 09YQ (label theorem-colimit)"
+   }
+  },
+  {
+   "text": "*A finite stage kills $\\xi$.* Under the isomorphism $\\operatorname{Spec}C\\cong X'_Z$ of step 4 (over $Z$), $v^*\\xi$ corresponds to $w^*\\xi$ (composition rule [lem-weil-pbc-cohomology-pullback-functorial] (4); pullback along an isomorphism is bijective, its inverse being the pullback along the inverse), so $v^*\\xi=0$ by step 2. Fix $i_0\\in I$. The class $\\iota_{i_0}(\\xi_{i_0})$ of $\\xi_{i_0}$ in the colimit maps to $v^*\\xi=0$ (step 5) under an injective map, so $\\iota_{i_0}(\\xi_{i_0})=0$, hence there is $j\\ge i_0$ with $\\xi_j=(\\text{transition})(\\xi_{i_0})=0$ [def-weil-directed-colimit-abelian-groups]. Transporting along $Y_j\\times_XZ\\cong\\operatorname{Spec}C_j$ (over $Z$) in the same way, the pullback of $\\xi$ along the projection $Y_j\\times_XZ\\to Z$ is zero.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2), fourth sentence ('for some $i$ large enough')"
+   }
+  },
+  {
+   "text": "*The cover $Y_j\\to X$.* $\\nu_j:Y_j\\to X$ is finite and of finite presentation (step 3). It is surjective: $\\pi=\\nu_j\\circ p_j$ is surjective (step 1), so every point of $X$ is the image under $\\nu_j$ of the image under $p_j$ of a point of $X'$ [def-weil-surjective-morphism]. With step 6, $X'':=Y_j\\to X$ is a finite surjective morphism of finite presentation such that $\\xi$ pulls back to zero on $X''\\times_XZ$, which proves the lemma.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-weil-finite-integral-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof of (2) (surjectivity of the finite stages is left implicit by Stacks)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-cover-trivial-cohomology",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-pbc-cohomology-pullback",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, part (2) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +169,38 @@
    "results": "smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean (the site, its points); no etale cohomology of schemes, no direct/inverse image on the small etale site, nothing on killing classes by covers",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "étale cohomology class pulled back to finite surjective finitely presented cover of closed subscheme is zero",
+   "results": "AlgebraicGeometry.Scheme.Cover.pullbackCoverOver', pullbackCoverOver, pullbackCoverOver_I₀ (Mathlib.AlgebraicGeometry.Cover.Over): covers only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cohomology class on a closed subscheme of an affine scheme dies after base change to a finite surjective cover of finite presentation",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_app_map_eq_zero_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit: sections of the structure sheaf vanishing at a finite stage of a limit, the degree-0 Zariski analogue of step 6 only), Scheme.zero_of_zero_cover",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, AlgebraicGeometry.IsFinite",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def H\\b|abbrev H\\b' Mathlib/CategoryTheory; grep -rln 'smallEtaleTopology' Mathlib/",
+   "results": "CategoryTheory.Sheaf.H (Sites/SheafCohomology/Basic.lean:59, Ext-based cohomology of a sheaf on a site, with H.map) exists; nothing pulls it back along a morphism of schemes on small etale sites; smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has generic sheaf cohomology on a site but no etale cohomology theory of schemes (no pullback maps, no continuity, no vanishing results)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,6 +225,15 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 09ZD (2); correct; unsplit."
- }
+  "note": "Seven steps along Stacks 09ZD (2) (the worker corrected the lead′s recalled route: (2) follows from (1) by a limit argument only): the integral cover of (1) as the new unsplit node lem-weil-pbc-integral-cover-trivial-cohomology, closed-subscheme base change, X′ = lim of finite finitely presented Y_i (reviewed 09YZ node) with affine Y_i = Spec A_i, base change to Z as colim of A_i ⊗ B (tool use lem-weil-pbc-filtered-colimit-tensor-varying-rings, merged from C), continuity of cohomology (reviewed 09YQ node, ring case), vanishing at a finite stage, surjectivity of Y_j → X. Checked. The imported sketch nodes lemma-weil-pbc-finite-stage-killing / finite-cover-killing (unreached) and their Lean statements do not state 09ZD."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+  "worker": "stage1",
+  "summary": "Split along Stacks' proof of 09ZD (2) (etale-cohomology.tex line 14467), read in full with part (1) and 09ZC/09ZB/09ZA. Seven steps: (1) part (1) of 09ZD, a new unsplit statement node lem-weil-pbc-integral-cover-trivial-cohomology; (2) xi dies on X' x_X Z since that is a closed subscheme of X' (closed-immersion base change, Mathlib leaf); (3) X' = lim Y_i with Y_i finite of finite presentation over X by the reviewed 09YZ node lem-weil-pbc-integral-morphism-limit-of-finite, the Y_i affine, X' = Spec(colim A_i) by the Spec/colimit leaf; (4) Z = Spec B, Y_i x_X Z = Spec(A_i (x)_A B), X' x_X Z = Spec(colim(A_i (x)_A B)) (affine fibre products leaf, filtered colimit of tensor products node); (5) continuity of etale cohomology, ring case of the reviewed 09YQ node; (6) injectivity of the colimit map gives a finite stage j with xi_j = 0; (7) Y_j -> X is surjective because X' -> X is (elementary). The lead's recalled routes (reduction to finite type over Z, Noetherian induction, lifting finite A/I-algebras to A) are not Stacks' proof; Stacks proves (2) from (1) by the limit argument only. No other new node was needed."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+ ]
 }

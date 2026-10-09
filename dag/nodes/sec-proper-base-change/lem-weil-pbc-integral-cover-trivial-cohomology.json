@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-integral-cover-trivial-cohomology",
+ "kind": "statement",
+ "title": "An integral surjective cover of an affine scheme on whose closed subschemes constant cohomology vanishes (Stacks 09ZD (1))",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme]. Then there exists a morphism of schemes $\\pi:X'\\to X$ which is integral [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism] such that for every closed subscheme $Z'\\subseteq X'$ (a closed immersion $Z'\\to X'$ [def-weil-closed-immersion]), every finite abelian group $M$, with constant sheaf $\\underline M$ [def-weil-pbc-constant-sheaf] on $Z'_{\\Et}$, and every integer $q\\ge1$, the etale cohomology group [def-weil-pbc-etale-cohomology] $H^q(Z'_{\\Et},\\underline M)$ is zero. (Stacks' construction: write $X=\\operatorname{Spec}A$ with $A=\\mathbf Z[x_i]_{i}/J$, let $R$ be the integral closure of $\\mathbf Z[x_i]$ in an algebraic closure of its fraction field and $X'=\\operatorname{Spec}(R/JR)$.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral surjective morphism to affine scheme such that etale cohomology of every closed subscheme vanishes in positive degree",
+   "results": "AlgebraicGeometry.IsIntegralHom, IsIntegralHom.toIsAffineHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.Integral), AlgebraicGeometry.IsIntegral (Properties): the notion of integral morphism only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of polynomial ring over Z in algebraic closure of its fraction field; étale cohomology of closed subschemes vanishes; integral surjective cover kills cohomology classes",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.isField_of_universallyClosed, Algebra.Etale.exists_subalgebra_fg, Algebra.smoothLocus_eq_compl_support_inter, AffineSpace.isIntegralHom_over_iff_isEmpty: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib declaration mentions both integral morphisms and the small etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' Mathlib/; grep -rn -i 'absolutely integrally closed|AbsolutelyIntegrallyClosed|Sheaf.H' Mathlib/AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean; no absolutely integrally closed rings and no sheaf cohomology in AlgebraicGeometry/; the generic Ext-based sheaf cohomology CategoryTheory.Sheaf.H (CategoryTheory/Sites/SheafCohomology/Basic.lean:59) exists but nothing about the small etale site of a scheme or vanishing on integral covers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 09ZD (1) with the construction indicated; correct; unsplit (its split uses 09ZC, 09ZB, 09ZA, 09Z9, 0GY0)."
+ }
+}
