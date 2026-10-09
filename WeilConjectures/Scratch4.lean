@@ -321,4 +321,133 @@ theorem T1 {A B K : Type*}
   exact ⟨g, hg, fun Bg C _ _ _ _ r hr hker ↦
     isRegularPrincipal_and_flat_of_forall_mul_mem_map f g hP Bg C r hr hker⟩
 
+theorem T2 {A B C K : Type*}
+    [CommRing A] [CommRing B] [CommRing C] [CommRing K] [Algebra A B] [Algebra A K]
+    [Module.Flat A B] [Algebra.FinitePresentation A B] (hK : IsField K) (r : B →+* C)
+    (hr : Function.Surjective r) (hflat : (r.comp (algebraMap A B)).Flat)
+    (hfp : (r.comp (algebraMap A B)).FinitePresentation) (q : Ideal B) [q.IsPrime]
+    (hKq : RingHom.ker (algebraMap A K) = q.comap (algebraMap A B))
+    (hfib : ∀ P : Ideal (B ⊗[A] K), P.IsPrime → ∃ g ∉ P,
+      (((RingHom.ker r).map Algebra.TensorProduct.includeLeftRingHom).map
+        (algebraMap (B ⊗[A] K) (Localization.Away g))).IsRegularPrincipal) :
+    ∃ g ∉ q, ∀ (Bg : Type*) [CommRing Bg] [Algebra B Bg] [IsLocalization.Away g Bg],
+      ((RingHom.ker r).map (algebraMap B Bg)).IsRegularPrincipal := by
+  classical
+  set I := RingHom.ker r
+  let := (r.comp (algebraMap A B)).toAlgebra
+  have : Algebra.FinitePresentation A C := hfp
+  have : Module.Flat A C := hflat
+  let rA : B →ₐ[A] C := { r with commutes' := fun _ ↦ rfl }
+  have hIfg : I.FG := Algebra.FinitePresentation.ker_fG_of_surjective rA hr
+  by_cases hIq : ¬ I ≤ q
+  · obtain ⟨a, haI, haq⟩ := Set.not_subset.mp hIq
+    refine ⟨a, haq, fun Bg _ _ _ ↦ ?_⟩
+    have : I.map (algebraMap B Bg) = ⊤ := Ideal.eq_top_of_isUnit_mem _
+      (Ideal.mem_map_of_mem _ haI) (IsLocalization.Away.algebraMap_isUnit a)
+    rw [this, ← Ideal.span_singleton_one]
+    exact Ideal.isRegularPrincipal_span_singleton (one_mem _)
+  push Not at hIq
+  set E := B ⊗[A] K
+  set ι : B →+* E := Algebra.TensorProduct.includeLeftRingHom
+  set J := I.map ι
+  obtain ⟨P, hP, hPq⟩ := exists_isPrime_comap_includeLeft_eq hK q hKq
+  have hJP : ∀ (P' : Ideal E) [P'.IsPrime],
+      (J.map (algebraMap E (Localization.AtPrime P'))).IsRegularPrincipal := fun P' _ ↦ by
+    obtain ⟨g, hg, h⟩ := hfib P' ‹_›
+    exact Ideal.IsRegularPrincipal.map_atPrime_of_away J P' hg h
+  -- A generator of `J` at `P` coming from `I`.
+  obtain ⟨s, hs, hsJ⟩ := hJP P
+  have hspanI : J.map (algebraMap E (Localization.AtPrime P)) =
+      Ideal.span (((algebraMap E (Localization.AtPrime P)).comp ι) '' I) := by
+    rw [Ideal.map_map]
+    rfl
+  obtain ⟨_, ⟨f, hfI, rfl⟩, hfx⟩ :=
+    IsLocalRing.exists_mem_span_singleton_eq hs (hspanI.symm.trans hsJ)
+  -- `E ⊗[B] I → E` is injective, as `B ⧸ I` is flat over `A`.
+  have hinj : Function.Injective (I.subtype.lTensor E) := by
+    rw [LinearMap.lTensor_inj_iff_rTensor_inj]
+    have hA : Function.Injective ((I.subtype.restrictScalars A).rTensor K) := by
+      rw [← LinearMap.lTensor_inj_iff_rTensor_inj]
+      refine LinearMap.lTensor_injective_of_exact_of_flat rA.toLinearMap hr _
+        Subtype.val_injective ?_ K
+      rw [LinearMap.exact_iff]
+      ext x
+      simp [rA, I]
+    have hcomm : ∀ x, AlgebraTensorModule.cancelBaseChange A B B B K (I.subtype.rTensor E x) =
+        (I.subtype.restrictScalars A).rTensor K
+          (AlgebraTensorModule.cancelBaseChange A B B I K x) := by
+      intro x
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
+      | tmul i e =>
+        induction e using TensorProduct.induction_on with
+        | zero => simp
+        | add e e' he he' => simp only [tmul_add, map_add, he, he']
+        | tmul b k =>
+          rw [LinearMap.rTensor_tmul, AlgebraTensorModule.cancelBaseChange_tmul,
+            AlgebraTensorModule.cancelBaseChange_tmul, LinearMap.rTensor_tmul]
+          rfl
+    intro x y hxy
+    apply (AlgebraTensorModule.cancelBaseChange A B B I K).injective
+    apply hA
+    rw [← hcomm, ← hcomm, hxy]
+  -- `I ⧸ f` vanishes near `q`.
+  let F : Submodule B ↥I := (Submodule.span B {f}).comap (Submodule.subtype I)
+  have : Module.Finite B I := _root_.Module.Finite.iff_fg.mpr hIfg
+  have hkey : ∀ i : I, ∃ u ∉ P, u ⊗ₜ[B] (Submodule.Quotient.mk i : I ⧸ F) = 0 := by
+    intro i
+    set LP := Localization.AtPrime P
+    have hmem : algebraMap E LP (ι i) ∈ Ideal.span {algebraMap E LP (ι f)} := by
+      change _ ∈ Ideal.span {((algebraMap E LP).comp ι) f}
+      rw [hfx, ← hsJ]
+      exact Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _ i.2)
+    obtain ⟨l, hl⟩ := Ideal.mem_span_singleton'.mp hmem
+    obtain ⟨μ, u₀, rfl⟩ := IsLocalization.exists_mk'_eq P.primeCompl l
+    have h2 : algebraMap E LP (μ * ι f) = algebraMap E LP (u₀ * ι i) := by
+      rw [map_mul, map_mul, ← hl, ← mul_assoc, mul_comm (algebraMap E LP (u₀ : E)),
+        IsLocalization.mk'_spec_mk]
+    obtain ⟨c, hc⟩ := (IsLocalization.eq_iff_exists P.primeCompl LP).mp h2
+    have h3 : ((c : E) * u₀) ⊗ₜ[B] i = ((c : E) * μ) ⊗ₜ[B] (⟨f, hfI⟩ : I) := by
+      apply hinj
+      rw [LinearMap.lTensor_tmul, LinearMap.lTensor_tmul]
+      apply (_root_.TensorProduct.rid B E).injective
+      rw [_root_.TensorProduct.rid_tmul, _root_.TensorProduct.rid_tmul, Algebra.smul_def,
+        Algebra.smul_def]
+      change ι i * _ = ι f * _
+      linear_combination hc.symm
+    refine ⟨(c : E) * u₀, P.primeCompl.mul_mem c.2 u₀.2, ?_⟩
+    have h4 := congr((F.mkQ).lTensor E $h3)
+    have hfF : (⟨f, hfI⟩ : I) ∈ F := by
+      change f ∈ Submodule.span B {f}
+      exact Submodule.mem_span_singleton_self f
+    rw [LinearMap.lTensor_tmul, LinearMap.lTensor_tmul, Submodule.mkQ_apply, Submodule.mkQ_apply,
+      (Submodule.Quotient.mk_eq_zero F).mpr hfF, tmul_zero] at h4
+    exact h4
+  have hQ : ∀ y : E ⊗[B] (I ⧸ F), ∃ u ∉ P, u • y = 0 := by
+    intro y
+    induction y using TensorProduct.induction_on with
+    | zero => exact ⟨1, fun h ↦ hP.ne_top ((Ideal.eq_top_iff_one _).mpr h), smul_zero _⟩
+    | tmul e z =>
+      obtain ⟨i, rfl⟩ := Submodule.mkQ_surjective F z
+      obtain ⟨u, hu, h⟩ := hkey i
+      refine ⟨u, hu, ?_⟩
+      rw [smul_tmul', smul_eq_mul, mul_comm, ← smul_eq_mul, ← smul_tmul']
+      change e • (u ⊗ₜ[B] (Submodule.Quotient.mk i : I ⧸ F)) = 0
+      rw [h, smul_zero]
+    | add y₁ y₂ h₁ h₂ =>
+      obtain ⟨u₁, hu₁, e₁⟩ := h₁
+      obtain ⟨u₂, hu₂, e₂⟩ := h₂
+      refine ⟨u₁ * u₂, fun h ↦ (hP.mem_or_mem h).elim hu₁ hu₂, ?_⟩
+      rw [smul_add, mul_smul, mul_smul, e₂, smul_zero, add_zero, smul_comm, e₁, smul_zero]
+  obtain ⟨t₁, ht₁, ht₁Q⟩ := Module.exists_notMem_forall_smul_eq_zero_of_tensor P hQ
+  have ht₁q : t₁ ∉ q := by
+    rw [← hPq]
+    exact ht₁
+  have ht₁I : ∀ i ∈ I, t₁ * i ∈ Ideal.span {f} := fun i hi ↦ by
+    have := ht₁Q (Submodule.Quotient.mk ⟨i, hi⟩)
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero] at this
+    exact Submodule.mem_comap.mp this
+  sorry
+
 end Algebra
