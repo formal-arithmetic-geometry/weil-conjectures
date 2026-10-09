@@ -50,6 +50,12 @@ section Sections
 
 variable {F G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
 
+@[simp]
+lemma comp_hom_app_apply {H : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} (f : F ⟶ G) (g : G ⟶ H) (U : (Opens X)ᵒᵖ) (x : F.obj.obj U) :
+    (f ≫ g).hom.app U x = g.hom.app U (f.hom.app U x) :=
+  rfl
+
 /-- A monomorphism of abelian sheaves is injective on sections. -/
 lemma injective_app_of_mono (f : F ⟶ G) [Mono f] (U : (Opens X)ᵒᵖ) :
     Function.Injective (f.hom.app U) := by

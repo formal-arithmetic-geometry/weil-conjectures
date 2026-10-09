@@ -571,4 +571,76 @@ lemma subsingleton_H_of_epi_freeYoneda {E : CategoryTheory.Sheaf (Opens.grothend
 
 end Irreducible
 
+section Reducible
+
+variable {n : ℕ} (ih : VanishingBelow X n)
+
+include ih
+
+/-- **Quotients of `ℤ_U` supported on a finite union of irreducible closed sets.** If `E` is
+supported on a finite union of irreducible closed sets of dimension at most `n` and is a quotient
+of `ℤ_U`, then `H^i(E) = 0` for `i > n`. Removing the other components from `U`, the image of
+`ℤ_{U ∖ Z'}` in `E` is supported on one component `T`, and the quotient by it is supported on the
+union `Z'` of the others. -/
+lemma subsingleton_H_of_epi_freeYoneda_of_finset (S : Finset (Set X))
+    (hS : ∀ T ∈ S, IsIrreducible T ∧ IsClosed T ∧ topologicalKrullDim T ≤ n) :
+    ∀ {E : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}},
+      IsSupportedOn E (⋃ T ∈ S, T) → ∀ {U : Opens X} (π : freeYoneda.obj U ⟶ E) [Epi π]
+        (i : ℕ), n < i → Subsingleton (Sheaf.H E i) := by
+  classical
+  induction S using Finset.induction_on with
+  | empty =>
+    intro E hE U π _ i _
+    exact subsingleton_H_of_isZero (IsSupportedOn.isZero (by simpa using hE)) i
+  | insert T S hTS ihS =>
+    intro E hE U π _ i hi
+    obtain ⟨hT, hTc, hdim⟩ := hS T (Finset.mem_insert_self _ _)
+    have hS' : ∀ T' ∈ S, IsIrreducible T' ∧ IsClosed T' ∧ topologicalKrullDim T' ≤ n :=
+      fun T' hT' ↦ hS T' (Finset.mem_insert_of_mem hT')
+    have hZ'c : IsClosed (⋃ T' ∈ S, T') := isClosed_biUnion_finset fun T' hT' ↦ (hS' T' hT').2.1
+    let Zc : Opens X := ⟨(⋃ T' ∈ S, T')ᶜ, hZ'c.isOpen_compl⟩
+    let Tc : Opens X := ⟨Tᶜ, hTc.isOpen_compl⟩
+    let V : Opens X := U ⊓ Zc
+    let g : freeYoneda.obj V ⟶ E := freeYoneda.map (homOfLE inf_le_left) ≫ π
+    have hg : freeYonedaHomEquiv E V g = E.obj.map (homOfLE inf_le_left).op
+        (freeYonedaHomEquiv E U π) := freeYonedaHomEquiv_naturality E _ π
+    -- the image of `ℤ_V` is supported on `T`
+    have hE' : IsSupportedOn (image g) T := by
+      have h := isSupportedOn_compl_of_epi (factorThruImage g) Tc (by
+        apply injective_app_of_mono (image.ι g)
+        rw [map_zero, NatTrans.naturality_apply, freeYonedaHomEquiv_apply,
+          ← comp_hom_app_apply, image.fac, ← freeYonedaHomEquiv_apply]
+        refine hE _ (Set.disjoint_left.2 fun y hy hy' ↦ ?_) _
+        simp only [Set.mem_iUnion, Finset.mem_insert, exists_prop] at hy'
+        obtain ⟨⟨-, hyZ'⟩, hyT⟩ := hy
+        obtain ⟨T', hT', hyT'⟩ := hy'
+        rcases hT' with rfl | hT'
+        · exact hyT hyT'
+        · exact hyZ' (Set.mem_biUnion hT' hyT'))
+      exact h.mono (by simp [Tc])
+    -- the quotient is supported on the other components
+    let S₀ := ShortComplex.mk (image.ι g) (cokernel.π (image.ι g)) (cokernel.condition _)
+    have hS₀ : S₀.ShortExact :=
+      ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have hQ : IsSupportedOn S₀.X₃ (⋃ T' ∈ S, T') := by
+      have h := isSupportedOn_compl_of_epi (π ≫ cokernel.π (image.ι g)) Zc (by
+        rw [freeYonedaHomEquiv_comp, ← NatTrans.naturality_apply]
+        change (cokernel.π (image.ι g)).hom.app _ (E.obj.map (homOfLE inf_le_left).op
+          (freeYonedaHomEquiv E U π)) = 0
+        have h0 : g ≫ cokernel.π (image.ι g) = 0 :=
+          calc g ≫ cokernel.π (image.ι g) =
+              factorThruImage g ≫ image.ι g ≫ cokernel.π (image.ι g) := by
+                rw [← Category.assoc, image.fac]
+            _ = 0 := by rw [cokernel.condition, comp_zero]
+        rw [← hg, freeYonedaHomEquiv_apply, ← comp_hom_app_apply, h0]
+        rfl)
+      exact h.mono (by simp [Zc])
+    have : Subsingleton (Sheaf.H S₀.X₁ i) :=
+      subsingleton_H_of_epi_freeYoneda ih hT hTc hdim hE' (factorThruImage g) i hi
+    have : Subsingleton (Sheaf.H S₀.X₃ i) :=
+      ihS hS' hQ (π ≫ cokernel.π (image.ι g)) i hi
+    exact subsingleton_H_X₂ hS₀ i
+
+end Reducible
+
 end TopCat.Sheaf
