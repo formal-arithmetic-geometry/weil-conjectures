@@ -27,6 +27,9 @@ every `a ⊗ sᵢ^{⊗ m}` to a global section of `ℒ^{⊗ m}` for one common `
 ## Main statements
 
 - `AlgebraicGeometry.exists_isImmersion_projectiveSpace_of_isAffineOpen`: the immersion.
+- `AlgebraicGeometry.Scheme.Modules.exists_isAffineOpen_compl_support_zeroLocus_of_isAffineHom`:
+  families of sections with affine non-vanishing loci covering the target pull back along
+  affine morphisms.
 -/
 
 @[expose] public section
@@ -214,5 +217,49 @@ theorem exists_isImmersion_projectiveSpace_of_isAffineOpen {X S : Scheme.{u}} (f
   rintro _ ⟨μ, rfl⟩
   exact ⟨⟨Sum.inr ⟨i, μ⟩, Sum.inr_ne_inl⟩,
     congrArg (fun x ↦ (U i).toScheme.divBasicOpen x (s'' (Sum.inl i))) (ht' μ)⟩
+
+section Pullback
+
+variable {X Y : Scheme.{u}}
+
+/-- The non-vanishing locus of the pullback `g^* s` of a section `s : 𝒪_Y ⟶ L` of an invertible
+module is the preimage of the non-vanishing locus of `s`. -/
+lemma Scheme.Modules.compl_support_zeroLocus_pullback (g : X ⟶ Y) {L : Y.Modules}
+    [SheafOfModules.IsInvertible.{u, u, u} L] (s : 𝟙_ Y.Modules ⟶ L) :
+    (Hom.zeroLocus ((pullbackObjUnitIso g).inv ≫ (pullback g).map s)).support.compl =
+      g ⁻¹ᵁ (Hom.zeroLocus s).support.compl := by
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj L) := .pullback inferInstance
+  have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ Y.Modules) :=
+    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf))
+  have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
+    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback g).obj (𝟙_ Y.Modules)) :=
+    .pullback inferInstance
+  have h := Hom.zeroLocus_eq_of_arrowIso ((pullbackObjUnitIso g).inv ≫ (pullback g).map s)
+    ((pullback g).map s) (Arrow.isoMk (pullbackObjUnitIso g).symm (Iso.refl _))
+  rw [h, ← Hom.comap_zeroLocus]
+  ext x
+  simp [Scheme.IdealSheafData.support_comap]
+
+/-- **Ample families pull back along affine morphisms.** Let `g : X ⟶ Y` be an affine
+morphism and `s i` global sections of an invertible module `L` on `Y` whose non-vanishing loci
+are affine and cover `Y`. Then the pullbacks `g^* s i` of the sections to `g^* L` have affine
+non-vanishing loci covering `X`. -/
+theorem Scheme.Modules.exists_isAffineOpen_compl_support_zeroLocus_of_isAffineHom (g : X ⟶ Y)
+    [IsAffineHom g] (L : Y.Modules) [SheafOfModules.IsInvertible.{u, u, u} L] {ι : Type u}
+    (s : ι → (𝟙_ Y.Modules ⟶ L)) (hs : ∀ i, IsAffineOpen (Hom.zeroLocus (s i)).support.compl)
+    (hcov : ⨆ i, (Hom.zeroLocus (s i)).support.compl = ⊤) :
+    ∃ (L' : X.Modules) (_ : SheafOfModules.IsInvertible.{u, u, u} L')
+      (s' : ι → (𝟙_ X.Modules ⟶ L')),
+      (∀ i, IsAffineOpen (Hom.zeroLocus (s' i)).support.compl) ∧
+        ⨆ i, (Hom.zeroLocus (s' i)).support.compl = ⊤ := by
+  refine ⟨(pullback g).obj L, .pullback inferInstance,
+    fun i ↦ (pullbackObjUnitIso g).inv ≫ (pullback g).map (s i), fun i ↦ ?_, ?_⟩
+  · rw [compl_support_zeroLocus_pullback]
+    exact (hs i).preimage g
+  · simp_rw [compl_support_zeroLocus_pullback]
+    rw [← Scheme.Hom.preimage_iSup, hcov, Scheme.Hom.preimage_top]
+
+end Pullback
 
 end AlgebraicGeometry

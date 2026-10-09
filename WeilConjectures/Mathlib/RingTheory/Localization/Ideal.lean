@@ -7,12 +7,14 @@ module
 
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Nilpotent.Lemmas
 
 /-!
 # Colon ideals and localization
 
 Colon ideals commute with localization when the second ideal is finitely generated
-(`Ideal.map_colon_of_isLocalization`).
+(`Ideal.map_colon_of_isLocalization`). A bound on the nilpotency index of the nilradical
+passes to localizations (`nilradical_pow_eq_bot_of_isLocalization`).
 -/
 
 @[expose] public section
@@ -59,3 +61,13 @@ lemma Ideal.map_colon_of_isLocalization {A B : Type*} [CommRing A] [CommRing B] 
     | zero => simp
     | add x y _ _ hx hy => rw [smul_add]; exact add_mem hx hy
     | smul c x _ hx => rw [smul_comm]; exact Ideal.mul_mem_left _ c hx
+
+/-- The nilradical of a localization of `A` is the extension of the nilradical of `A`, so a bound
+`nilradical A ^ N = ⊥` on the nilpotency index passes to localizations. -/
+theorem nilradical_pow_eq_bot_of_isLocalization {A S : Type*} [CommRing A] [CommRing S]
+    [Algebra A S] (M : Submonoid A) [IsLocalization M S] {N : ℕ}
+    (h : nilradical A ^ N = ⊥) : nilradical S ^ N = ⊥ := by
+  have : nilradical S = (nilradical A).map (algebraMap A S) := by
+    rw [nilradical, nilradical, IsLocalization.map_radical M]
+    simp
+  rw [this, ← Ideal.map_pow, h, Ideal.map_bot]

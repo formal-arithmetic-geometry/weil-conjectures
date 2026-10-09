@@ -6,9 +6,11 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.AlgebraicGeometry.Group.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
@@ -43,24 +45,48 @@ namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k]
 
-/-- **Group schemes of finite type over an algebraically closed field carry an ample invertible
-module.** A group scheme `G` of finite type over an algebraically closed field `k` carries an
-invertible module `ℒ` with finitely many global sections `s i` whose non-vanishing loci `G_{s i}`
-are affine and cover `G`; that is, `ℒ` is ample in the sense of Stacks 01PS.
+/-- **Smooth group schemes of finite type over an algebraically closed field carry an ample
+invertible module.** A smooth group scheme `G` of finite type over an algebraically closed field
+`k` carries an invertible module `ℒ` with finitely many global sections `s i` whose non-vanishing
+loci `G_{s i}` are affine and cover `G`; that is, `ℒ` is ample in the sense of Stacks 01PS.
 
-This is the geometric core of Stacks 0BF7: one reduces to `G` smooth and connected (Cartier's
-theorem in characteristic zero, ampleness on `G_red` in characteristic `p`), takes for `D` the
-complement of an affine open neighbourhood of the identity, which is an effective Cartier divisor
+This is the geometric core of Stacks 0BF7. One takes for `D` the complement of an affine open
+neighbourhood of the identity in each connected component, which is an effective Cartier divisor
 because the local rings of `G` are regular, hence factorial (Stacks 0AG0, 0BCW), and shows that
 translates of `D` spread out over an étale chart define a single ample invertible module
 (Stacks 0AGA, 0BEH, 01PS). -/
-theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus [IsAlgClosed k]
-    (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth [IsAlgClosed k]
+    (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [QuasiCompact G.hom] :
     ∃ (L : G.left.Modules) (_ : SheafOfModules.IsInvertible.{u, u, u} L) (ι : Type u)
       (_ : Finite ι) (s : ι → (𝟙_ G.left.Modules ⟶ L)),
       (∀ i, IsAffineOpen (Scheme.Modules.Hom.zeroLocus (s i)).support.compl) ∧
         ⨆ i, (Scheme.Modules.Hom.zeroLocus (s i)).support.compl = ⊤ :=
   sorry
+
+/-- **Group schemes of finite type over an algebraically closed field carry an ample invertible
+module.** A group scheme `G` of finite type over an algebraically closed field `k` carries an
+invertible module `ℒ` with finitely many global sections `s i` whose non-vanishing loci `G_{s i}`
+are affine and cover `G`.
+
+In characteristic zero `G` is reduced by Cartier's theorem, hence smooth; in characteristic `p`
+the reduction `G_red` is a smooth group scheme, a power of the Frobenius gives a surjective affine
+morphism `G ⟶ G_red`, and the ample family of `G_red`
+(`AlgebraicGeometry.GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth`) pulls back
+to `G`. -/
+theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus [IsAlgClosed k]
+    (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+    ∃ (L : G.left.Modules) (_ : SheafOfModules.IsInvertible.{u, u, u} L) (ι : Type u)
+      (_ : Finite ι) (s : ι → (𝟙_ G.left.Modules ⟶ L)),
+      (∀ i, IsAffineOpen (Scheme.Modules.Hom.zeroLocus (s i)).support.compl) ∧
+        ⨆ i, (Scheme.Modules.Hom.zeroLocus (s i)).support.compl = ⊤ := by
+  obtain ⟨f, -, _⟩ := GrpObj.exists_surjective_isAffineHom_reduction G
+  have : QuasiCompact (GrpObj.reduction G).hom :=
+    inferInstanceAs (QuasiCompact (G.left.nilradical.subschemeι ≫ G.hom))
+  obtain ⟨L, _, ι, _, s, hs, hcov⟩ :=
+    GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth (GrpObj.reduction G)
+  obtain ⟨L', hL', s', hs', hcov'⟩ :=
+    Scheme.Modules.exists_isAffineOpen_compl_support_zeroLocus_of_isAffineHom f L s hs hcov
+  exact ⟨L', hL', ι, ‹_›, s', hs', hcov'⟩
 
 /-- **Group schemes of finite type over an algebraically closed field are quasi-projective.**
 A group scheme `G` of finite type over an algebraically closed field `k` admits an immersion
