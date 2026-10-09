@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-prime-residue-field-algebra",
+ "kind": "statement",
+ "title": "The residue field of a prime ideal: kernel, fraction field of R/p, maps out of it",
+ "statement": "Let $R$ be a commutative ring and $\\mathfrak p\\subset R$ a prime ideal, and let $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ be the residue field of the local ring $R_{\\mathfrak p}$, with $\\pi:R\\to R_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$. Then: (a) $\\ker\\pi=\\mathfrak p$; (b) the induced map $R/\\mathfrak p\\to\\kappa(\\mathfrak p)$ is injective and makes $\\kappa(\\mathfrak p)$ a field of fractions of the domain $R/\\mathfrak p$; in particular, if $R$ is a domain, $\\kappa((0))$ is a field of fractions of $R$ via $\\pi$; (c) two ring maps $\\lambda,\\lambda':\\kappa(\\mathfrak p)\\to S$ to any ring $S$ with $\\lambda\\circ\\pi=\\lambda'\\circ\\pi$ are equal; (d) a ring map $f:R\\to S$ with $\\mathfrak p\\subseteq\\ker f$ and $f(R\\setminus\\mathfrak p)\\subseteq S^\\times$ factors as $f=\\lambda\\circ\\pi$ for a (by (c) unique) ring map $\\lambda:\\kappa(\\mathfrak p)\\to S$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, section Local rings, lines 3337-3358 (kappa(p) is the residue field of R_p, identified with the fraction field of R/p) and Proposition Tag 00CT (label proposition-localize-quotient, line 1380: S^{-1}A/S^{-1}I = Sbar^{-1}(A/I)); (c),(d) are the universal properties of localization and quotient (Algebra, section Localization)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field of a prime ideal is the fraction field of the quotient R/p; kernel of R → κ(p) is p",
+   "results": "instIsFractionRingQuotientIdealResidueField, Ideal.ResidueField, IsLocalRing.ResidueField, Ideal.ker_algebraMap_residueField (Mathlib.RingTheory.LocalRing.ResidueField.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "match: (a), (b)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.ker (algebraMap _ (Ideal.ResidueField _))",
+   "results": "Ideal.ker_algebraMap_residueField (Mathlib.RingTheory.LocalRing.ResidueField.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "match: (a)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring homomorphism from residue field of a prime ideal to a field is determined by its composition with algebraMap R to residue field",
+   "results": "Ideal.ResidueField.ringHom_ext_iff, Ideal.ResidueField.ringHom_ext, Ideal.ResidueField.algHom_ext(_iff), Ideal.ResidueField.mapₐ_apply, Ideal.ResidueField.liftₐ (Mathlib.RingTheory.LocalRing.ResidueField.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "match: (c), (d)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev Ideal.ResidueField\\|ker_algebraMap_residueField\\|injective_algebraMap_quotient_residueField\\|IsFractionRing\\|ringHom_ext\\|ResidueField.lift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+   "results": "Ideal.ResidueField (abbrev, :33, = IsLocalRing.ResidueField (Localization.AtPrime I)); Ideal.ker_algebraMap_residueField (:81); Ideal.injective_algebraMap_quotient_residueField (:101); instance IsFractionRing (R ⧸ I) I.ResidueField (:108); instance [IsDomain R] : IsFractionRing R (⊥ : Ideal R).ResidueField (:128); Ideal.ResidueField.lift (:207), lift_algebraMap (:214); Ideal.ResidueField.ringHom_ext (:240)",
+   "date": "2026-10-10",
+   "verdict": "match: every clause, one declaration each"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.ResidueField, Ideal.ker_algebraMap_residueField, Ideal.injective_algebraMap_quotient_residueField, instIsFractionRingQuotientIdealResidueField, Ideal.ResidueField.ringHom_ext, Ideal.ResidueField.lift",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean",
+  "how": "one declaration per clause: kappa(p) is `p.ResidueField` (abbrev, line 33: `IsLocalRing.ResidueField (Localization.AtPrime p)`), pi is `algebraMap R p.ResidueField`; (a) `Ideal.ker_algebraMap_residueField` (line 81); (b) `Ideal.injective_algebraMap_quotient_residueField` (line 101) and the instance `IsFractionRing (R ⧸ I) I.ResidueField` (line 108), for a domain the instance `IsFractionRing R (⊥ : Ideal R).ResidueField` (line 128); (c) `Ideal.ResidueField.ringHom_ext` (line 240); (d) `Ideal.ResidueField.lift` with `Ideal.ResidueField.lift_algebraMap` (lines 207, 214)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Ideal.ker_algebraMap_residueField, injective_algebraMap_quotient_residueField, IsFractionRing (R⧸p) p.ResidueField, ResidueField.ringHom_ext/lift (RingTheory/Ideal/ResidueField.lean); checked."
+ }
+}

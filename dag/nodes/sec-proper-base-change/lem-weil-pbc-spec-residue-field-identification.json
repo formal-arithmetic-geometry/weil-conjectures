@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-spec-residue-field-identification",
+ "kind": "statement",
+ "title": "Residue fields of Spec R and the canonical morphism Spec kappa(p) -> Spec R",
+ "statement": "Let $R$ be a commutative ring, $\\operatorname{Spec}R$ its spectrum [def-weil-affine-spectrum] and $\\mathfrak p\\in\\operatorname{Spec}R$. Let $\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ be the residue field of the scheme $\\operatorname{Spec}R$ at $\\mathfrak p$ [def-weil-residue-field] and $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ with $\\pi:R\\to\\kappa(\\mathfrak p)$. There is a ring isomorphism $e:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)$ (induced by $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\cong R_{\\mathfrak p}$) such that $e^{-1}\\circ\\pi$ is the composite $R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)\\to\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\to\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ (germ followed by residue map), and such that the canonical morphism $j_{\\mathfrak p}:\\operatorname{Spec}\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\operatorname{Spec}R$ (Spec of the residue map followed by $\\operatorname{Spec}\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\to\\operatorname{Spec}R$) equals $\\operatorname{Spec}(e^{-1})\\circ\\operatorname{Spec}(\\pi)$, i.e. $j_{\\mathfrak p}=\\operatorname{Spec}(e^{-1}\\circ\\pi)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01HV (lemma-spec-sheaves, line 692, item: O_{Spec R, p} = R_p); Algebra, section Local rings (literature/stacks-project/algebra.tex lines 3337-3358: kappa(p) the residue field of R_p; Spec(kappa(p)) -> Spec(R_p) -> Spec(R) maps the point to p)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field of Spec R at a prime p is isomorphic to the residue field of the localization, fraction field of R/p",
+   "results": "IsLocalRing.ResidueField, Ideal.ResidueField, IsLocalization.AtPrime.equivQuotMaximalIdeal, Scheme.residueField (search of the creating worker, repeated)",
+   "date": "2026-10-10",
+   "verdict": "partial; Spec.residueFieldIso found by grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field of Spec R at a point p is isomorphic to the residue field of the prime ideal p (residue field of the localization R_p)",
+   "results": "Scheme.Spec_map_residue_apply, Scheme.SpecMap_residue_apply, Scheme.residue, Scheme.residueField, Scheme.descResidueField (Mathlib.AlgebraicGeometry.ResidueField)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the file is the right one"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'residueFieldIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "Scheme.Spec.residueFieldIso (:301, (Spec R).residueField x ≅ .of x.asIdeal.ResidueField), Spec.algebraMap_residueFieldIso_inv (:308), Spec.residue_residueFieldIso_hom (:314), Spec.map_residueFieldIso_inv_eq_fromSpecResidueField (:320)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Spec.residueFieldIso, AlgebraicGeometry.Scheme.Spec.algebraMap_residueFieldIso_inv, AlgebraicGeometry.Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "exact, one declaration per clause: e is `Spec.residueFieldIso R p` (line 301, built from `Spec.stalkIso`); `Spec.algebraMap_residueFieldIso_inv` (line 308): `ofHom (algebraMap R _) ≫ e.inv = (ΓSpecIso R).inv ≫ germ ⊤ p ≫ residue p`; `Spec.map_residueFieldIso_inv_eq_fromSpecResidueField` (line 320): `Spec.map e.inv ≫ Spec.map (ofHom (algebraMap R p.asIdeal.ResidueField)) = (Spec R).fromSpecResidueField p`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Scheme.Spec.residueFieldIso (:301), algebraMap_residueFieldIso_inv (:308), map_residueFieldIso_inv_eq_fromSpecResidueField (:320); checked."
+ }
+}

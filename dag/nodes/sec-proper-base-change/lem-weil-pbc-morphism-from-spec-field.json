@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-morphism-from-spec-field",
+ "kind": "statement",
+ "title": "Morphisms from the spectrum of a field correspond to a point and a residue field embedding",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $x\\in X$, with residue field $\\kappa(x)$ [def-weil-residue-field], and let $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical morphism ($\\operatorname{Spec}$ of the residue map $\\mathcal O_{X,x}\\to\\kappa(x)$ followed by the canonical $\\operatorname{Spec}\\mathcal O_{X,x}\\to X$) [def-weil-affine-spectrum]. Then $j_x$ maps the unique point of $\\operatorname{Spec}\\kappa(x)$ to $x$. Let $K$ be a field and $f:\\operatorname{Spec}K\\to X$ a morphism; put $x=f(\\xi)$, $\\xi$ the point of $\\operatorname{Spec}K$, and let $\\varphi_f:\\kappa(x)\\to K$ be the field map induced by the local homomorphism $f^\\sharp_\\xi:\\mathcal O_{X,x}\\to\\mathcal O_{\\operatorname{Spec}K,\\xi}=K$ (the map induced by $f$ on residue fields). Then $f=j_x\\circ\\operatorname{Spec}(\\varphi_f)$, and $f\\mapsto(f(\\xi),\\varphi_f)$ is a bijection from morphisms $\\operatorname{Spec}K\\to X$ to pairs $(x,\\varphi)$ of a point $x\\in X$ and a ring map $\\varphi:\\kappa(x)\\to K$, with inverse $(x,\\varphi)\\mapsto j_x\\circ\\operatorname{Spec}(\\varphi)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, section Points of schemes (Tag 01J5), discussion before Lemma Tag 01J9 (lemma-characterize-points, lines 2420-2475): a local homomorphism O_{X,x} -> K is the same as kappa(x) -> K, so morphisms Spec(K) -> X correspond to pairs (x, kappa(x) -> K); and the remark after it (morphisms Spec(kappa(x)) -> X factor through Spec(O_{X,x}) -> X)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from Spec of a field K to a scheme X correspond to points x with field map residue field to K (search of the creating worker, repeated)",
+   "results": "AlgebraicGeometry.Scheme.SpecToEquivOfField, SpecToEquivOfLocalRing, Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, SpecToEquivOfField_eq_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from Spec of a field K to a scheme X correspond to a point x and a field homomorphism from the residue field κ(x) to K",
+   "results": "Scheme.SpecToEquivOfField, Scheme.over_def, Scheme.fromSpecResidueField_apply, Scheme.SpecToEquivOfField_eq_iff, Scheme.fromSpecResidueField (Mathlib.AlgebraicGeometry.ResidueField)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "results": "SpecToEquivOfField, SpecToEquivOfField_apply_fst (= f (closedPoint K)), SpecToEquivOfField_symm_apply (= Spec.map φ ≫ X.fromSpecResidueField x), SpecToEquivOfField_apply_snd (= descResidueField (stalkClosedPointTo f))",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def fromSpecResidueField\\|fromSpecResidueField_apply\\|descResidueField_stalkClosedPointTo_fromSpecResidueField\\|def SpecToEquivOfField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "fromSpecResidueField (:237, := Spec.map (X.residue x) ≫ X.fromSpecStalk x), fromSpecResidueField_apply (:272), descResidueField_stalkClosedPointTo_fromSpecResidueField (:286), SpecToEquivOfField (:346)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField_apply",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "exact: j_x is `X.fromSpecResidueField x` (line 237, defined as `Spec.map (X.residue x) ≫ X.fromSpecStalk x`); `fromSpecResidueField_apply` (line 272) gives j_x(ξ)=x; phi_f is `descResidueField (stalkClosedPointTo f)` and `descResidueField_stalkClosedPointTo_fromSpecResidueField` (line 286) is f = Spec.map phi_f ≫ j_{f(ξ)}; the bijection is `SpecToEquivOfField K X` (line 346) with `_apply_fst`, `_apply_snd`, `_symm_apply`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: SpecToEquivOfField (:346), descResidueField_stalkClosedPointTo_fromSpecResidueField (:286), fromSpecResidueField_apply (:272); checked."
+ }
+}

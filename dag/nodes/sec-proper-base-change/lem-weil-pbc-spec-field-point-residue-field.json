@@ -9,11 +9,92 @@
  },
  "stmt_deps": [
   "def-weil-affine-spectrum",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Clause (1).* Let $\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ be the residue field of the scheme $\\operatorname{Spec}R$ at $\\mathfrak p$ [def-weil-residue-field] and $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ with $\\pi:R\\to R_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$. By [lem-weil-pbc-spec-residue-field-identification] there is an isomorphism $e:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\cong\\kappa(\\mathfrak p)$ under which the map $R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)\\to\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}\\to\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ becomes $\\pi$; so the residue field of $\\operatorname{Spec}R$ at $\\mathfrak p$ is the residue field of $R_{\\mathfrak p}$. By [lem-weil-pbc-prime-residue-field-algebra] (a) $\\ker\\pi=\\mathfrak p$, and by (b) $\\kappa(\\mathfrak p)$ is a field of fractions of the domain $R/\\mathfrak p$ via the injection $R/\\mathfrak p\\to\\kappa(\\mathfrak p)$ induced by $\\pi$.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, section Local rings, lines 3337-3358, and Proposition Tag 00CT (proposition-localize-quotient)"
+   }
+  },
+  {
+   "text": "*Clause (2).* Let $U\\subseteq X$ be an affine open, $R=\\mathcal O_X(U)$, $x\\in U$. By [lem-weil-pbc-affine-open-spec-points] there is an open immersion $\\iota_U:\\operatorname{Spec}R\\to X$ with image $U$ (it identifies $\\operatorname{Spec}R$ with $U$) and a prime $\\mathfrak p=\\mathfrak p_x$ with $\\iota_U(\\mathfrak p)=x$. Write $j_z$ for the canonical morphism $\\operatorname{Spec}\\kappa(z)\\to Z$ of a point $z$ of a scheme $Z$. By [lem-weil-pbc-residue-field-point-naturality] applied to $g=\\iota_U$ at $\\mathfrak p$: $\\iota_U\\circ j_{\\mathfrak p}=j_x\\circ\\operatorname{Spec}(r)$, where $r:\\kappa(x)\\to\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ is the map on residue fields, an isomorphism since $\\iota_U$ is an open immersion. By [lem-weil-pbc-spec-residue-field-identification], $j_{\\mathfrak p}=\\operatorname{Spec}(e^{-1}\\circ\\pi)$ with $e,\\pi$ as in step 1. Composing with $\\operatorname{Spec}(r^{-1})$ and using that $\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum]: $j_x=\\iota_U\\circ j_{\\mathfrak p}\\circ\\operatorname{Spec}(r^{-1})=\\iota_U\\circ\\operatorname{Spec}(r^{-1}\\circ e^{-1}\\circ\\pi)$. So $j_x$ factors through $\\iota_U$, i.e. through $U\\cong\\operatorname{Spec}R$, and the factorization is $\\operatorname{Spec}$ of the ring map $R\\xrightarrow{\\pi}\\kappa(\\mathfrak p)\\xrightarrow{\\ \\sim\\ }\\kappa(x)$, the isomorphism being $r^{-1}\\circ e^{-1}$: this is the identification $\\kappa(\\mathfrak p)=\\kappa(x)$ of the statement.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, section Points of schemes (Tag 01J5): discussion before Lemma Tag 01J9 (lemma-characterize-points, lines 2420-2475) and the diagram after it (lines 2478-2498)"
+   }
+  },
+  {
+   "text": "*Clause (3), the point.* $K$ is a field, so its only prime ideal is $(0)$ and $\\operatorname{Spec}K$ has one point $\\xi=(0)$. By the description of $\\operatorname{Spec}\\psi$ on points [def-weil-affine-spectrum] (Algebra 00E2: $\\operatorname{Spec}\\psi$ maps a prime $\\mathfrak q'$ to $\\psi^{-1}(\\mathfrak q')$), $s(\\xi)=\\psi^{-1}(0)=\\ker\\psi=\\mathfrak q$; it is a prime ideal since $R/\\mathfrak q$ embeds in the field $K$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00E2 (lemma-spec-functorial, line 3124: Spec(phi) maps p' to phi^{-1}(p'))"
+   }
+  },
+  {
+   "text": "*Clause (3), the residue field map.* Let $\\varphi:\\kappa_{\\operatorname{Spec}R}(\\mathfrak q)\\to K$ be the map induced by $s$ on residue fields (from the local homomorphism $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}\\to\\mathcal O_{\\operatorname{Spec}K,\\xi}=K$). By [lem-weil-pbc-morphism-from-spec-field], $s=j_{\\mathfrak q}\\circ\\operatorname{Spec}(\\varphi)$, and by [lem-weil-pbc-spec-residue-field-identification] $j_{\\mathfrak q}=\\operatorname{Spec}(e^{-1}\\circ\\pi)$, with $e:\\kappa_{\\operatorname{Spec}R}(\\mathfrak q)\\cong\\kappa(\\mathfrak q)$ and $\\pi:R\\to\\kappa(\\mathfrak q)$. Put $\\lambda=\\varphi\\circ e^{-1}:\\kappa(\\mathfrak q)\\to K$ (this is the residue field map of $s$ read on $\\kappa(\\mathfrak q)$ through $e$, step 1). By functoriality of $\\operatorname{Spec}$, $\\operatorname{Spec}(\\psi)=s=\\operatorname{Spec}(\\lambda\\circ\\pi)$, and since every morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}R$ is $\\operatorname{Spec}$ of exactly one ring map [def-weil-affine-spectrum], $\\psi=\\lambda\\circ\\pi$. As $\\pi$ induces the injection $R/\\mathfrak q\\hookrightarrow\\kappa(\\mathfrak q)=\\operatorname{Frac}(R/\\mathfrak q)$ ([lem-weil-pbc-prime-residue-field-algebra] (a), (b)), $\\lambda$ extends the injection $\\bar\\psi:R/\\mathfrak q\\to K$ induced by $\\psi$. Any ring map $\\lambda':\\kappa(\\mathfrak q)\\to K$ extending $\\bar\\psi$ satisfies $\\lambda'\\circ\\pi=\\psi=\\lambda\\circ\\pi$, hence $\\lambda'=\\lambda$ by [lem-weil-pbc-prime-residue-field-algebra] (c). So the residue field map is the unique extension of $\\bar\\psi$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, section Points of schemes (Tag 01J5): discussion before Lemma Tag 01J9 (lemma-characterize-points, lines 2420-2475) and the diagram after it (lines 2478-2498)"
+   }
+  },
+  {
+   "text": "*Clause (3), the generic case.* Let $R$ be a domain, $\\psi$ injective and $K$ a fraction field of $R$ via $\\psi$. Then $\\mathfrak q=\\ker\\psi=(0)$ (step 3), and $(0)$ is the generic point of $\\operatorname{Spec}R$: it is contained in every prime, so every prime lies in its closure $V((0))=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. By [lem-weil-pbc-prime-residue-field-algebra] (b) $\\kappa((0))$ is a fraction field of $R$ via $\\pi$, and by step 4 $\\lambda:\\kappa((0))\\to K$ satisfies $\\lambda\\circ\\pi=\\psi$. $\\lambda$ is injective, being a ring map out of a field into a nonzero ring. It is surjective: every $k\\in K$ is $\\psi(a)\\psi(b)^{-1}$ with $a,b\\in R$, $b\\neq0$, and $\\pi(b)\\ne0$ since $\\ker\\pi=(0)$, so $k=\\lambda(\\pi(a)\\pi(b)^{-1})$. Hence $\\lambda$, and with it $\\varphi=\\lambda\\circ e$, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, section Local rings, lines 3337-3358, and Proposition Tag 00CT (proposition-localize-quotient)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, section Points of schemes (Tag 01J5), discussion before Lemma Tag 01J9 and after it; with literature/stacks-project/algebra.tex, section Local rings (lines 3337-3358), Proposition Tag 00CT and Lemma Tag 00E2. The sources state clauses (1)-(3) in passing; the steps writing them out (the compositions of the canonical morphisms in steps 2 and 4, the generic case in step 5) are the worker's."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +123,45 @@
    "results": "Spec.residueFieldIso (ResidueField.lean:301, (Spec R).residueField x ≅ x.asIdeal.ResidueField), Spec.algebraMap_residueFieldIso_inv (:308), Spec.map_residueFieldIso_inv_eq_fromSpecResidueField (:320), SpecToEquivOfField (:346); instance IsFractionRing (R ⧸ I) I.ResidueField (Ideal.lean:108)",
    "date": "2026-10-10",
    "verdict": "partial: (1) and (2) are Mathlib (residueFieldIso, the IsFractionRing instance, map_residueFieldIso_inv_eq_fromSpecResidueField with IsAffineOpen.fromSpec); (3) is not stated: no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spec.map of a ring hom R → K into a field sends the closed point to the kernel of the ring hom",
+   "results": "Spec.map, RingHom.specComap, Spec.map_apply/Spec.map_base_apply (point = PrimeSpectrum.comap), range_specComap_of_surjective, Spec_closedPoint (local homs only) (Mathlib.AlgebraicGeometry.Scheme, RingTheory.Spectrum.Prime.RingHom)",
+   "date": "2026-10-10",
+   "verdict": "no match for (3) as a statement; pieces: Spec.map_apply (Scheme.lean:537), IsLocalRing.maximalIdeal_eq_bot (RingTheory/LocalRing/MaximalIdeal/Basic.lean:122), RingHom.ker_eq_comap_bot (RingTheory/Ideal/Maps.lean:757)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical morphism Spec of residue field to X factors through affine open U as Spec of evaluation map Γ(X,U) → κ(x) composed with fromSpec",
+   "results": "Scheme.fromSpecResidueField, instOverSpecResidueField, descResidueField_fromSpecResidueField, Scheme.evaluation, IsAffineOpen.fromSpecStalk, descResidueField_stalkClosedPointTo_fromSpecResidueField, Scheme.fromSpecStalk",
+   "date": "2026-10-10",
+   "verdict": "no single lemma for (2); it is the composite of IsAffineOpen.fromSpec_primeIdealOf, Hom.SpecMap_residueFieldMap_fromSpecResidueField (open-immersion residue iso) and Spec.map_residueFieldIso_inv_eq_fromSpecResidueField"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring homomorphism from residue field of a prime ideal to a field is determined by its composition with algebraMap R to residue field",
+   "results": "Ideal.ResidueField.ringHom_ext(_iff), Ideal.ResidueField.algHom_ext(_iff), Ideal.ResidueField.mapₐ_apply, Ideal.ResidueField.liftₐ",
+   "date": "2026-10-10",
+   "verdict": "match for the uniqueness part of (3) only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "results": "SpecToEquivOfField, _apply_fst, _symm_apply, _apply_snd, isConservativeFamilyOfPoints_pointSmallEtale'",
+   "date": "2026-10-10",
+   "verdict": "match for the bijection used in step 4, not for (3) itself (a loogle pattern `AlgebraicGeometry.Spec.map _ = AlgebraicGeometry.Spec.map _ ↔ _ = _` was refused for an unqualified name, then rate-limited)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'fromSpecResidueField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (outside AlgebraicGeometry/ResidueField.lean); grep -rn 'SpecMap_evaluation\\|evaluation.*fromSpec\\|fromSpec.*evaluation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "uses only in Fiber.lean, UniversallyInjective.lean, PullbackCarrier.lean, ValuativeCriterion.lean; no lemma `Spec.map (X.evaluation U x hx) ≫ hU.fromSpec = X.fromSpecResidueField x`; Spec.map_injective at GammaSpecAdjunction.lean:551",
+   "date": "2026-10-10",
+   "verdict": "no single declaration for (2) or (3); each is a 3-5 lemma composite, so the node is split with five Mathlib leaves rather than marked mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,6 +186,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: residue fields of Spec R, the canonical Spec κ(x) → X on an affine open, and the point/residue map of Spec K → Spec R for ψ: R → K; correct elementary facts (00CT, 01J9); unsplit."
+  "note": "Five elementary steps from five new Mathlib leaves (residue field of a prime: Ideal.ResidueField lemmas; Spec.residueFieldIso ResidueField.lean:301; SpecToEquivOfField :346; SpecMap_residueFieldMap_fromSpecResidueField :261; IsAffineOpen.fromSpec AffineScheme.lean:427 / primeIdealOf :775; lines spot-checked); clauses (2) and (3) are chains of several lemmas, so the item is not itself a leaf. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "worker": "stage1",
+  "summary": "Leaf decision: not a Mathlib leaf as a whole. Clause (1) is Mathlib one declaration per sub-clause (Spec.residueFieldIso + Ideal.ker_algebraMap_residueField + the IsFractionRing (R ⧸ p) p.ResidueField instance), but (2) (no lemma `X.fromSpecResidueField x = Spec.map (evaluation) ≫ hU.fromSpec`) and (3) (no lemma computing the point and residue map of Spec.map ψ for ψ : R → K) are 3-5 lemma composites. Split into five steps, all elementary given five new Mathlib leaves: prime-residue-field-algebra (Ideal.ResidueField API: kernel, fraction field, ringHom_ext, lift), spec-residue-field-identification (Spec.residueFieldIso and its two compatibilities), morphism-from-spec-field (SpecToEquivOfField, Stacks 01J9 discussion), residue-field-point-naturality (SpecMap_residueFieldMap_fromSpecResidueField, residue-field iso for open immersions), affine-open-spec-points (IsAffineOpen.fromSpec, primeIdealOf, fromSpec_primeIdealOf). Statement kept; def-pc-scheme added to stmt_deps (clause (2) speaks of a scheme X). Proof follows Stacks Schemes 01J5/01J9 and Algebra local rings/00CT/00E2; those state the facts in passing, the compositions are written out here. The uses by lem-weil-pbc-normalization-in-residue-field-extension (steps 3 and 6) match clauses (1)-(3) as stated."
  }
 }

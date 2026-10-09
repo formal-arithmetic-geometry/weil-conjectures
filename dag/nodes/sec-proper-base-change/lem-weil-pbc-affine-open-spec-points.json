@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-affine-open-spec-points",
+ "kind": "statement",
+ "title": "An affine open U is the image of an open immersion Spec Γ(U) -> X; points of U are primes of Γ(U)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U\\subseteq X$ an affine open, i.e. an open subset such that the open subscheme $U$ is an affine scheme, and let $R=\\mathcal O_X(U)$. There is a canonical open immersion [def-weil-open-immersion] $\\iota_U:\\operatorname{Spec}R\\to X$ [def-weil-affine-spectrum] (the inverse of the isomorphism $U\\cong\\operatorname{Spec}R$ given by $U$ affine, followed by the inclusion $U\\subseteq X$) whose image is $U$; for every $x\\in U$ there is a prime $\\mathfrak p_x\\subset R$ (the image of $x$ under $U\\cong\\operatorname{Spec}R$) with $\\iota_U(\\mathfrak p_x)=x$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, definition of a scheme Tag 01IJ and the convention after it (lines 1665-1672: U subset X is an affine open if the open subspace U is an affine scheme; U = Spec(R) identifies U with Spec(R)); Lemma Tag 01HH (lemma-open-immersion, line 241)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine open subset U of a scheme gives an open immersion Spec Γ(X,U) → X with range U",
+   "results": "IsAffineOpen.isOpenImmersion_fromSpec, IsAffineOpen.fromSpec, IsAffineOpen.opensRange_fromSpec, IsAffineOpen.range_fromSpec, Scheme.Opens.ι, IsAffineOpen (Mathlib.AlgebraicGeometry.AffineScheme, .Restrict)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine open U of scheme X, point x in U corresponds to prime ideal of Γ(X,U), fromSpec maps primeIdealOf x to x",
+   "results": "IsAffineOpen.fromSpec_primeIdealOf, IsAffineOpen.primeIdealOf, IsAffineOpen.primeIdealOf_eq_map_closedPoint, IsAffineOpen.isoSpec_hom_base_apply, IsAffineOpen.isoSpec_hom_apply (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def fromSpec\\|isOpenImmersion_fromSpec\\|range_fromSpec\\|def primeIdealOf\\|fromSpec_primeIdealOf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "results": "fromSpec (:427, := hU.isoSpec.inv ≫ U.ι), isOpenImmersion_fromSpec (:432), range_fromSpec (:450), primeIdealOf (:775, := hU.isoSpec.hom x), fromSpec_primeIdealOf (:780)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineOpen.fromSpec, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.IsAffineOpen.range_fromSpec, AlgebraicGeometry.IsAffineOpen.primeIdealOf, AlgebraicGeometry.IsAffineOpen.fromSpec_primeIdealOf",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "how": "exact, one declaration per clause: for `hU : IsAffineOpen U`, iota_U is `hU.fromSpec : Spec Γ(X, U) ⟶ X` (line 427, `hU.isoSpec.inv ≫ U.ι`), an open immersion by `isOpenImmersion_fromSpec` (line 432) with image U by `range_fromSpec` (line 450); p_x is `hU.primeIdealOf ⟨x, hx⟩` (line 775) and `fromSpec_primeIdealOf` (line 780) is iota_U(p_x) = x"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: IsAffineOpen.fromSpec (:427), isOpenImmersion_fromSpec, range_fromSpec, primeIdealOf (:775), fromSpec_primeIdealOf; checked."
+ }
+}

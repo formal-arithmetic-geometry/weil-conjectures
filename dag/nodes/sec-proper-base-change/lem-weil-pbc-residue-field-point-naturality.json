@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-residue-field-point-naturality",
+ "kind": "statement",
+ "title": "Naturality of Spec kappa(x) -> X; open immersions induce isomorphisms of residue fields",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme], $x\\in X$, and for a point $z$ of a scheme $Z$ let $j_z:\\operatorname{Spec}\\kappa(z)\\to Z$ be the canonical morphism ($\\operatorname{Spec}$ of the residue map $\\mathcal O_{Z,z}\\to\\kappa(z)$ followed by $\\operatorname{Spec}\\mathcal O_{Z,z}\\to Z$) [def-weil-residue-field, def-weil-affine-spectrum]. Let $r:\\kappa(g(x))\\to\\kappa(x)$ be the map induced by $g$ on residue fields. Then $g\\circ j_x=j_{g(x)}\\circ\\operatorname{Spec}(r)$. If $g$ is an open immersion [def-weil-open-immersion], $r$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, section Points of schemes (Tag 01J5), the commutative diagram after Lemma Tag 01J9 (lemma-characterize-points, lines 2478-2498: Spec(kappa(x)) -> Spec(O_{X,x}) -> X over Spec(kappa(s)) -> Spec(O_{S,s}) -> S); for open immersions Lemma Tag 01HH (lemma-open-immersion, line 241: an open immersion is an isomorphism onto an open subspace, so it induces isomorphisms of local rings and of residue fields)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.Hom.residueFieldMap",
+   "results": "Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField(_assoc) (Mathlib.AlgebraicGeometry.ResidueField), Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, isPullback_fiberToSpecResidueField_of_isPullback",
+   "date": "2026-10-10",
+   "verdict": "match: naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open immersion induces isomorphism on residue fields",
+   "results": "Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion (Mathlib.AlgebraicGeometry.ResidueField), LocallyRingedSpace.IsOpenImmersion.stalk_iso, IsOpenImmersion.iff_stalk_iso",
+   "date": "2026-10-10",
+   "verdict": "match: open immersion clause"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'SpecMap_residueFieldMap_fromSpecResidueField\\|instance \\[IsOpenImmersion f\\] (x) : IsIso (f.residueFieldMap x)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "results": "Hom.SpecMap_residueFieldMap_fromSpecResidueField (:261), instance [IsOpenImmersion f] (x) : IsIso (f.residueFieldMap x) (:177)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField, AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "exact: `Hom.SpecMap_residueFieldMap_fromSpecResidueField g x` (line 261): `Spec.map (g.residueFieldMap x) ≫ Y.fromSpecResidueField (g x) = X.fromSpecResidueField x ≫ g`; the instance at line 177 gives `IsIso (g.residueFieldMap x)` for `[IsOpenImmersion g]`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-field-point-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Hom.SpecMap_residueFieldMap_fromSpecResidueField (:261), IsIso residueFieldMap for open immersions (:177); checked."
+ }
+}
