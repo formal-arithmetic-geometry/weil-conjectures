@@ -46,7 +46,9 @@ def main() -> int:
         d = nodes.get(item)
         if d is None:
             print(f"{item}: no such node"); bad += 1; continue
-        if str(d.get("status")) != "split":
+        if str(d.get("status")) == "mathlib" and d.get("mathlib_match"):
+            notes.append("the item is a Mathlib leaf")
+        elif str(d.get("status")) != "split":
             errs.append(f"status is {d.get('status')!r}, not split")
         if not d.get("split_report"):
             errs.append("no split_report")

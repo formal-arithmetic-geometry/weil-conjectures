@@ -1,0 +1,53 @@
+{
+ "id": "def-pc-field-extension",
+ "kind": "definition",
+ "title": "Field extension",
+ "statement": "Let $k$ be a field. A *field extension* $k'/k$ is a field $k'$ together with a ring homomorphism $k\\to k'$; such a homomorphism is injective, so $k$ is identified with its image and one writes $k\\subseteq k'$. Equivalently, a field extension of $k$ is a $k$-algebra that is a field. The ring homomorphism $k\\to k'$ induces the morphism of schemes $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum], which makes $\\operatorname{Spec}k'$ a scheme over $k$ [def-weil-scheme-over-base].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Definition Tag 09FV (fields-definition-extension), with the remark following it and Lemma Tag 09FU (fields-lemma-field-maps-injective) for the injectivity"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class Algebra\\|^abbrev RingHom.toAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Algebra/Defs.lean; grep -n 'field extension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Basic.lean",
+   "results": "class Algebra (R : Type u) (A : Type v) [CommSemiring R] [Semiring A] (Defs.lean:95); RingHom.toAlgebra (i : R →+* S) : Algebra R S (Defs.lean:197); IntermediateField/Basic.lean:17 'Let L / K be a field extension, given as an instance Algebra K L': Mathlib's convention for a field extension k'/k is [Field k] [Field k'] [Algebra k k'], the homomorphism being algebraMap k k'",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'protected theorem _root_.RingHom.injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/SimpleRing/Basic.lean",
+   "results": "RingTheory/SimpleRing/Basic.lean:67: RingHom.injective, a ring homomorphism out of a division ring (in particular a field) into a nontrivial ring is injective",
+   "date": "2026-10-09",
+   "verdict": "match (for the injectivity remark)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra",
+  "file": "Mathlib/Algebra/Algebra/Defs.lean",
+  "how": "exact: a field extension $k'/k$ is `[Field k] [Field k'] [Algebra k k']` (line 95), the homomorphism $k\\to k'$ being `algebraMap k k'`; a given ring homomorphism `i : k →+* k'` yields the instance by `RingHom.toAlgebra i` (line 197); its injectivity is `RingHom.injective` (Mathlib/RingTheory/SimpleRing/Basic.lean:67); the induced morphism of schemes is `Spec.map (CommRingCat.ofHom (algebraMap k k'))`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-geometrically-irreducible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

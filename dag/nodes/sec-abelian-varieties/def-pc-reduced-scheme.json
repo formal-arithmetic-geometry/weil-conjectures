@@ -1,0 +1,52 @@
+{
+ "id": "def-pc-reduced-scheme",
+ "kind": "definition",
+ "title": "Reduced scheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. $X$ is *reduced* if every local ring $\\mathcal{O}_{X,x}$, $x\\in X$, is a reduced ring (has no nonzero nilpotent element); equivalently, $\\mathcal{O}_X(U)$ is a reduced ring for every open $U\\subseteq X$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Definition Tag 01J0 (schemes-definition-reduced); the equivalence is Lemma Tag 01J1 (schemes-lemma-reduced)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class IsReduced\\|isReduced_stalk\\|theorem affine_isReduced_iff\\|IsClosedUnderIsomorphisms.*IsReduced' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
+   "results": "class IsReduced (X : Scheme) : Prop, field component_reduced : ∀ U, IsReduced Γ(X, U) (Properties.lean:69); isReduced_of_isReduced_stalk (:74) and instance isReduced_stalk_of_isReduced (:84) give the equivalence with the local rings; affine_isReduced_iff (:122): IsReduced (Spec R) ↔ IsReduced R; closed under isomorphisms (:110)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class IsReduced' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Nilpotent/Defs.lean",
+   "results": "IsReduced (R : Type*) [Zero R] [Pow R ℕ] : Prop, the ring-theoretic notion (no nonzero nilpotents) that the scheme-theoretic one is built on",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsReduced",
+  "file": "Mathlib/AlgebraicGeometry/Properties.lean",
+  "how": "specializes in one line: Mathlib defines `IsReduced X` by the section-wise condition (every `Γ(X, U)` reduced, line 69), which is the 'equivalently' clause; the local-ring form of Stacks 01J0 is recovered by `isReduced_of_isReduced_stalk` (line 74) and `isReduced_stalk_of_isReduced` (line 84)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-geometrically-irreducible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

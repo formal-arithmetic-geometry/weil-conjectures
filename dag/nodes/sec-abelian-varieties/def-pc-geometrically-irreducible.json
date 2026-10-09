@@ -2,21 +2,60 @@
  "id": "def-pc-geometrically-irreducible",
  "kind": "definition",
  "title": "Geometric properties",
- "statement": "Let $k$ be a field and $X$ a scheme over $k$. $X$ is\n*geometrically irreducible* (resp. *geometrically reduced*,\n*geometrically connected*, *geometrically integral*) over $k$\nif $X_{k'}$ is irreducible (resp. reduced, connected, integral) for\nevery field extension $k'/k$, where $X_{k'}=X\\times_{\\operatorname{Spec} k}\\operatorname{Spec}(k')$\n([def-pc-base-change]).",
+ "statement": "Let $k$ be a field and $X$ a scheme over $k$ [def-weil-scheme-over-base]. $X$ is\n*geometrically irreducible* (resp. *geometrically reduced*,\n*geometrically connected*, *geometrically integral*) over $k$\nif $X_{k'}$ is irreducible [def-weil-irreducible-components] (resp. reduced [def-pc-reduced-scheme], connected [def-weil-connected-scheme], integral [def-pc-integral-scheme]) for\nevery field extension $k'/k$ [def-pc-field-extension], where $X_{k'}=X\\times_{\\operatorname{Spec} k}\\operatorname{Spec}(k')$\n([def-pc-base-change]) is the base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-geometrically-irreducible.md",
-  "place": "node def-pc-geometrically-irreducible, order 456"
+  "place": "node def-pc-geometrically-irreducible, order 456",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definitions Tag 0365 (geometrically irreducible), Tag 035V (geometrically reduced), Tag 0362 (geometrically connected), Tag 020H (geometrically integral)"
+   }
+  ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-pc-field-extension",
   "def-pc-base-change",
-  "def-pc-scheme"
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-pc-integral-scheme"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/; grep -n '^class\\|^def geometrically' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/*.lean",
+   "results": "Basic.lean:46 def geometrically (P : ObjectProperty Scheme) : MorphismProperty Scheme := fun X Y f ↦ ∀ ⦃K⦄ [Field K] (y : Spec (.of K) ⟶ Y) ⦃Z⦄ fst snd, IsPullback fst snd f y → P Z; class GeometricallyIrreducible f := geometrically (IrreducibleSpace ·) f (Irreducible.lean:42); GeometricallyReduced f := geometrically (IsReduced ·) f (Reduced.lean:44); GeometricallyConnected f := geometrically (ConnectedSpace ·) f (Connected.lean:40); GeometricallyIntegral f := geometrically IsIntegral f (Integral.lean:40)",
+   "date": "2026-10-09",
+   "verdict": "match: the four notions, as properties of the structure morphism f : X ⟶ Spec k"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma geometrically_iff_of_commRing\\|lemma pullback_of_geometrically\\|lemma geometrically_iff_of_isClosedUnderIsomorphisms' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Basic.lean; grep -n 'IsClosedUnderIsomorphisms' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
+   "results": "geometrically_iff_of_commRing (Basic.lean:129): for f : X ⟶ Spec (.of R), geometrically P f ↔ ∀ K [Field K] [Algebra R K], every pullback of f along Spec.map (algebraMap R K) satisfies P; geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms (:138) with the chosen pullback Limits.pullback f (Spec.map (algebraMap R K)); IsClosedUnderIsomorphisms instances for IrreducibleSpace (Properties.lean:62), ConnectedSpace (:65), IsReduced (:110); none written for IsIntegral, but the quantified form (:129) does not need it",
+   "date": "2026-10-09",
+   "verdict": "match: with R = k this is literally 'X_{k'} has P for every field extension k'/k'"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Geometrically' ~/weil-conjectures-slopmaster2/WeilConjectures/Statement.lean",
+   "results": "Statement.lean:8 imports Mathlib.AlgebraicGeometry.Geometrically.Integral and line 93 takes [GeometricallyIntegral f]: the source repository states its targets with Mathlib's notion",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.GeometricallyIrreducible",
+  "file": "Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean",
+  "how": "specializes in one line: for $X$ over $k$ with structure morphism `f : X ⟶ Spec (.of k)`, geometrically irreducible is `GeometricallyIrreducible f` (Irreducible.lean:42), geometrically reduced is `GeometricallyReduced f` (Reduced.lean:44), geometrically connected is `GeometricallyConnected f` (Connected.lean:40), geometrically integral is `GeometricallyIntegral f` (Integral.lean:40); each unfolds through `geometrically_iff_of_commRing` (Basic.lean:129) to 'for every field `K` with `[Algebra k K]`, every pullback of `f` along `Spec.map (algebraMap k K)` is IrreducibleSpace / IsReduced / ConnectedSpace / IsIntegral', i.e. $X_{k'}$ has the property for every field extension $k'/k$ (Mathlib quantifies over fields in the universe of the scheme; `Spec.map_surjective` makes 'every morphism Spec K ⟶ Spec k' the same as 'every field extension')"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -39,5 +78,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pc-geometrically-irreducible",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint node (order 456; no slopmaster2 copy exists) and against Stacks Tags 0365, 035V, 0362, 020H, which it matches (Stacks' footnote that an irreducible, resp. connected, space is nonempty is carried by the leaves def-weil-irreducible-components and def-weil-connected-scheme). Kept the wording, adding only bracket pointers so that every notion is named: scheme over a field (existing leaf def-weil-scheme-over-base), Spec of a field (existing leaf def-weil-affine-spectrum), field extension (new leaf def-pc-field-extension = Algebra, Stacks 09FV), base change (existing def-pc-base-change, being split by another worker), irreducible (existing leaf def-weil-irreducible-components = irreducibleComponents/IrreducibleSpace), reduced (new leaf def-pc-reduced-scheme = AlgebraicGeometry.IsReduced, Stacks 01J0), connected (existing leaf def-weil-connected-scheme = ConnectedSpace), integral (new leaf def-pc-integral-scheme = AlgebraicGeometry.IsIntegral, Stacks 01OK). def-pc-scheme, cited by the blueprint but not in the text, is kept since 'scheme' is used. Mathlib has all four notions as GeometricallyIrreducible/Reduced/Connected/Integral of the structure morphism X ⟶ Spec k (Mathlib/AlgebraicGeometry/Geometrically/), specializing in one line through geometrically_iff_of_commRing; the match is recorded and the item is a Mathlib leaf: every branch below it ends in a Mathlib leaf except def-pc-base-change, which another worker is splitting."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; the item is a Mathlib leaf (status mathlib)"
  }
 }
