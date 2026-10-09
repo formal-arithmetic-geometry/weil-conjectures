@@ -1,8 +1,8 @@
 # Work queue
 
-607 items; claim with `tools/claim.py next <group> [--stage N]`.
+614 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (556)
+## Stage 1: nodes to split (561)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,8 +38,6 @@
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1010 | none |
 | `lem-weil-pbc-eventually-closed-immersion` | 1010 | none |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1010 | none |
-| `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1010 | none |
-| `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1010 | none |
@@ -49,8 +47,13 @@
 | `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
 | `lem-weil-pbc-thickening-affine-scheme` | 1010 | none |
+| `def-weil-pbc-charpoly-locally-free` | 1011 | none |
+| `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1011 | none |
+| `lem-weil-pbc-charpoly-locally-free-existence` | 1011 | none |
+| `lem-weil-pbc-finite-projective-standard-free-cover` | 1011 | none |
 | `lem-weil-pbc-gabber-criterion` | 1011 | none |
 | `lem-weil-pbc-gabber-h1-absolutely-algebraically-closed` | 1011 | none |
+| `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1011 | none |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1011 | none |
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1011 | none |
 | `lem-weil-pbc-nakayama-nilpotent` | 1011 | none |
@@ -58,6 +61,8 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1011 | none |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1011 | none |
 | `lem-weil-pbc-strictly-henselian-quotient` | 1011 | none |
+| `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1011 | none |
+| `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1011 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
@@ -563,7 +568,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (51)
+## Stage 2: nodes to state (53)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -588,7 +593,9 @@
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-geometric-point-lift` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
+| `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
@@ -619,7 +626,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 567 nodes that wait for stage 1, 242 nodes that wait for a statement dependency.
+Not open yet: 572 nodes that wait for stage 1, 242 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
