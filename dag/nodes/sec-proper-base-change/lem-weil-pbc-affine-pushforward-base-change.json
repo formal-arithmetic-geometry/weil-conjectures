@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-affine-pushforward-base-change",
+ "kind": "statement",
+ "title": "Affine base change: pushforward of a quasi-coherent module along an affine morphism commutes with arbitrary base change",
+ "statement": "Let $f:X\\to S$ be an affine morphism of schemes [pqf-def-affine-morphism], $g:S'\\to S$ a morphism, $X'=X\\times_SS'$ [def-pc-fibre-product] with projections $g':X'\\to X$ and $f':X'\\to S'$, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. (1) $f_*\\mathcal F$ is quasi-coherent, and the base change map $g^*f_*\\mathcal F\\to f'_*(g')^*\\mathcal F$ (adjoint [def-pc-module-pullback] to $f_*\\mathcal F\\to f_*g'_*(g')^*\\mathcal F=g_*f'_*(g')^*\\mathcal F$) is an isomorphism; over affine opens $\\operatorname{Spec}R'\\subseteq S'$ above $\\operatorname{Spec}R\\subseteq S$, with $f^{-1}(\\operatorname{Spec}R)=\\operatorname{Spec}B$ and $M=\\mathcal F(\\operatorname{Spec}B)$, it is the identification $R'\\otimes_RM=(R'\\otimes_RB)\\otimes_BM$. (2) For $\\mathcal F=\\mathcal O_X$ it is an isomorphism of $\\mathcal O_{S'}$-algebras $g^*f_*\\mathcal O_X\\cong f'_*\\mathcal O_{X'}$ (the algebra structure on $g^*f_*\\mathcal O_X$ induced through $g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$). (3) The base change maps are compatible with composition: for a further $h:S''\\to S'$, the base change map for $g\\circ h$ equals the composite of $h^*$ of the one for $g$ with the one for $h$ (applied to $f'$ and $(g')^*\\mathcal F$), under $(g\\circ h)^*=h^*g^*$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change) and the base change diagram (equation-base-change-diagram) before it; (2) and (3) are not stated by Stacks: (2) is the affine-local formula of (1) for M = B, which is a ring isomorphism R' (x)_R B = R' (x)_R B; (3) follows from the same local formula"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-fibre-product",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of pushforward of quasi-coherent sheaf along affine morphism is isomorphism",
+   "results": "Scheme.Modules.pushforward, AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, HasAffineProperty.affineAnd_isStableUnderBaseChange, Scheme.Modules.restrictFunctorAdjCounitIso, instFaithfulPushforward, pushforwardComp: no base change isomorphism for modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine base change: pullback of pushforward along affine morphism equals pushforward of pullback for quasi-coherent sheaves",
+   "results": "Scheme.Modules.pullbackPushforwardAdjunction, conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, Scheme.Modules.pushforwardComp, pushforwardComp_hom_app_app (Mathlib.AlgebraicGeometry.Modules.Sheaf): adjunction and composition only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.IsAffineHom",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; sed -n 560,570p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "no IsAffineHom in the module files; Tilde.lean:566 has the TODO 'use this to show that quasicoherent sheaves pushforward to quasicoherent sheaves for affine morphisms' (not even quasi-coherence of the pushforward is in Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-algebraize-finite-over-proper",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is 02KG with the algebra and composition clauses made explicit; self-contained; correct; unsplit."
+ }
+}
