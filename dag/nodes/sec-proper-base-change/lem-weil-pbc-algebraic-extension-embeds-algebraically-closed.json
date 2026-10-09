@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+ "kind": "statement",
+ "title": "An algebraic extension embeds into an algebraically closed extension",
+ "statement": "Let $K$ be a field, $L$ a field extension of $K$ which is algebraic over $K$ (every element of $L$ is a root of a nonzero polynomial with coefficients in $K$), and $\\Omega$ an algebraically closed field [def-weil-algebraic-closure] together with a field homomorphism $\\varphi:K\\to\\Omega$. Then there is a field homomorphism $\\psi:L\\to\\Omega$ with $\\psi|_K=\\varphi$. In particular, for an algebraic closure $\\overline K$ of $K$ every homomorphism of $K$ into an algebraically closed field extends to $\\overline K$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 09GU (lemma-map-into-algebraic-closure): an algebraic extension maps into an algebraically closed extension; Mathlib tags IsAlgClosed.lift with stacks 09GU"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraic extension embeds into algebraically closed field",
+   "results": "Field.embEquivOfIsAlgClosed (FieldTheory.SeparableDegree), IsAlgClosure.ofAlgebraic (FieldTheory.IsAlgClosed.Basic), NumberField.Embeddings.instNonemptyRingHom",
+   "date": "2026-10-10",
+   "verdict": "generalization nearby; see leanfinder"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "there is a K-algebra homomorphism from an algebraic extension of K into an algebraically closed field extending K",
+   "results": "IsAlgClosed.lift, IsAlgClosed.lift_def (FieldTheory.IsAlgClosed.Basic), Field.embEquivOfIsAlgClosed",
+   "date": "2026-10-10",
+   "verdict": "match: IsAlgClosed.lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.lift",
+   "results": "IsAlgClosed.lift : {M} [Field M] [IsAlgClosed M] {R} [CommRing R] [IsDomain R] {S} [CommRing S] [IsDomain S] [Algebra R S] [Algebra R M] [Module.IsTorsionFree R S] [Module.IsTorsionFree R M] [Algebra.IsAlgebraic R S] : S →ₐ[R] M (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean; grep -n 'instIsTorsionFree' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/FreeModule/Basic.lean",
+   "results": "FieldTheory/IsAlgClosed/Basic.lean:350 `noncomputable def lift : S →ₐ[R] M` with @[stacks 09GU]; LinearAlgebra/FreeModule/Basic.lean:103 instance IsTorsionFree R M for free modules (vector spaces over a field are free)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsAlgClosed.lift",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+  "how": "specializes in one line: take R = K, S = L with Algebra K L, M = Ω with the algebra structure φ.toAlgebra; fields are domains, L and Ω are free hence torsion-free K-modules (Module.Free.instIsTorsionFree, LinearAlgebra/FreeModule/Basic.lean:103), and Algebra.IsAlgebraic K L is the hypothesis; IsAlgClosed.lift (line 350) : L →ₐ[K] Ω is the required ψ (a K-algebra map restricts to φ on K)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-support-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsAlgClosed.lift (FieldTheory/IsAlgClosed/Basic.lean:350); Fields 09GU."
+ }
+}

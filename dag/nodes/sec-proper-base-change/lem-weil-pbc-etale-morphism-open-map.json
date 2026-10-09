@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-etale-morphism-open-map",
+ "kind": "statement",
+ "title": "Etale morphisms are open",
+ "statement": "Let $f:U\\to X$ be an etale morphism of schemes [def-weil-etale-morphism]. Then the map of underlying topological spaces of $f$ is open: the image $f(W)$ of every open subset $W\\subseteq U$ is open in $X$. In particular the image of $f$ is open.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 03WT (lemma-etale-open): an etale morphism is open; it follows from Lemma 01UA (lemma-fppf-open), flat and locally of finite presentation morphisms are open"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism of schemes is an open map",
+   "results": "IsEtale, Scheme.Etale (Morphisms.Etale), Scheme.Hom.isOpenMap, isOpenMap_of_generalizingMap, UniversallyOpen.eq (Morphisms.UniversallyOpen), Algebra.isOpen_etaleLocus",
+   "date": "2026-10-10",
+   "verdict": "generalization: Scheme.Hom.isOpenMap for universally open f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale morphism of schemes is an open map on underlying spaces",
+   "results": "IsEtale, Scheme.Etale, Algebra.isOpen_etaleLocus, Scheme.instCategoryEtale, Scheme.Hom.isOpenMap (Morphisms.UniversallyOpen)",
+   "date": "2026-10-10",
+   "verdict": "generalization: Scheme.Hom.isOpenMap"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpenMap, AlgebraicGeometry.UniversallyOpen",
+   "results": "UniversallyOpen.eq, UniversallyOpen.mk, UniversallyOpen.universally_isOpenMap, universallyOpen_iff, Scheme.Hom.isOpenMap : [UniversallyOpen f] → IsOpenMap f",
+   "date": "2026-10-10",
+   "verdict": "generalization: Scheme.Hom.isOpenMap"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance.*UniversallyOpen\\|isOpenMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Etale,Smooth}.lean",
+   "results": "UniversallyOpen.lean:48 Scheme.Hom.isOpenMap; :147 instance UniversallyOpen.of_flat [Flat f] [LocallyOfFinitePresentation f] (stacks 01UA); Etale.lean:114 instance [Etale f] : Smooth f; Smooth.lean:113 instance [Smooth f] : Flat f; Smooth.lean:241 instance [Smooth f] : LocallyOfFinitePresentation f",
+   "date": "2026-10-10",
+   "verdict": "match by instances"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isOpenMap",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+  "how": "specializes in one line: for f with [Etale f] (the node def-weil-etale-morphism is matched with AlgebraicGeometry.Etale) the instances Etale → Smooth (Etale.lean:114), Smooth → Flat (Smooth.lean:113), Smooth → LocallyOfFinitePresentation (Smooth.lean:241) and UniversallyOpen.of_flat (UniversallyOpen.lean:147) give UniversallyOpen f, and Scheme.Hom.isOpenMap f (line 48) : IsOpenMap f"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-support-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Scheme.Hom.isOpenMap (Morphisms/UniversallyOpen.lean:48) with UniversallyOpen.of_flat (:147) and the Etale -> Smooth -> Flat, LocallyOfFinitePresentation instances; Morphisms 03WT."
+ }
+}

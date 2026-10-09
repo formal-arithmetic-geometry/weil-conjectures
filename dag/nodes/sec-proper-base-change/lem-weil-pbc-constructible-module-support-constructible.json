@@ -16,9 +16,117 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Clause (i), for any scheme $X$ and any abelian sheaf $\\mathcal F$ on $X_{\\Et}$ (here the underlying abelian sheaf of $\\mathcal G$). Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ and $\\bar x':\\operatorname{Spec}\\Omega'\\to X$ be geometric points lying over $x$. By [def-weil-geometric-point] they are the pairs $(x,\\alpha:\\kappa(x)\\to\\Omega)$ and $(x,\\alpha':\\kappa(x)\\to\\Omega')$. Fix an algebraic closure $\\iota:\\kappa(x)\\to\\overline{\\kappa(x)}$ [def-weil-algebraic-closure] and let $\\bar x_0:\\operatorname{Spec}\\overline{\\kappa(x)}\\to X$ be the geometric point $(x,\\iota)$. Since $\\overline{\\kappa(x)}$ is algebraic over $\\kappa(x)$ and $\\Omega$ is algebraically closed, [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] gives a field homomorphism $j:\\overline{\\kappa(x)}\\to\\Omega$ with $j\\circ\\iota=\\alpha$; then $\\bar x_0\\circ\\operatorname{Spec}(j)$ is the geometric point $(x,j\\circ\\iota)=(x,\\alpha)=\\bar x$, so $\\operatorname{Spec}(j):\\bar x\\to\\bar x_0$ is a morphism of geometric points, and [lem-weil-pbc-geometric-point-morphism-stalk-bijection] gives an isomorphism of abelian groups $\\mathcal F_{\\bar x_0}\\cong\\mathcal F_{\\bar x}$ of the stalks [def-weil-pbc-geometric-stalks]. In the same way $\\mathcal F_{\\bar x_0}\\cong\\mathcal F_{\\bar x'}$. Hence $\\mathcal F_{\\bar x}\\cong\\mathcal F_{\\bar x'}$, and in particular $\\mathcal F_{\\bar x}=0$ if and only if $\\mathcal F_{\\bar x'}=0$; so $x\\in\\operatorname{Supp}(\\mathcal G)$ if and only if $\\mathcal G_{\\bar x}\\neq0$ for one (equivalently every) geometric point $\\bar x$ over $x$.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 04FN (remark-map-stalks, line 3416) and the paragraph before Definition 04FS (line 3984): the isomorphism class of the stalk at a geometric point over s is well defined"
+   }
+  },
+  {
+   "text": "Choose the data of constructibility [def-weil-pbc-etale-constructible-sheaf]: a stratification $(X_k)_{k<n}$, $\\iota_k:Z_k\\to X$ of the scheme $X$ [def-constructible-stratification], so the $X_k$ are pairwise disjoint, cover $X$, and each $X_k$ is a constructible subset of $X$ [def-weil-constructible-subset]; and for each $k$ an etale covering $\\{t_{k,i}:U_{k,i}\\to Z_k\\}_{i\\in I_k}$ (a jointly surjective family of etale morphisms [def-weil-etale-morphism]) and finite $\\Lambda$-modules $M_{k,i}$ with $(\\iota_k^{-1}\\mathcal G)|_{U_{k,i}}\\cong\\underline{M_{k,i}}$. The immersion $\\iota_k$ [def-weil-closed-immersion] is a closed immersion $Z_k\\to W_k$ followed by an open immersion $W_k\\to X$ [def-weil-open-immersion]; both are homeomorphisms onto their images, so $\\iota_k$ is a homeomorphism of $Z_k$ onto the subspace $X_k$ of $X$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset",
+    "def-weil-etale-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 03RW (definition-constructible, line 11672): a constructible sheaf of Lambda-modules is finite type locally constant on the parts of a finite partition of X into constructible locally closed subschemes; Lemma 09YS proof of (1) uses such a partition"
+   }
+  },
+  {
+   "text": "Stalks along a stratum. Let $z\\in Z_k$ and let $\\bar z$ be a geometric point of $Z_k$ over $z$ (one exists: $(z,\\kappa(z)\\to\\overline{\\kappa(z)})$ for an algebraic closure, [def-weil-geometric-point], [def-weil-algebraic-closure]). Then $\\iota_k\\circ\\bar z$ is a geometric point of $X$ over $\\iota_k(z)$, and [lem-weil-pbc-inverse-image-stalk-germ] gives an isomorphism of abelian groups $(\\iota_k^{-1}\\mathcal G)_{\\bar z}\\cong\\mathcal G_{\\iota_k\\circ\\bar z}$ (the underlying abelian sheaf of the module inverse image $\\iota_k^{-1}\\mathcal G$ is the inverse image of the underlying abelian sheaf of $\\mathcal G$, [def-weil-pbc-inverse-image]). By step 1 (clause (i)), $\\iota_k(z)\\in\\operatorname{Supp}(\\mathcal G)$ if and only if $(\\iota_k^{-1}\\mathcal G)_{\\bar z}\\neq0$.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q1 (lemma-stalk-pullback, line 4649): the stalk of an inverse image at a geometric point; Definition 04FS"
+   }
+  },
+  {
+   "text": "The support is open and closed in each stratum. Fix $k$, put $I^+=\\{i\\in I_k: M_{k,i}\\neq0\\}$, $I^0=\\{i\\in I_k:M_{k,i}=0\\}$, $V^+=\\bigcup_{i\\in I^+}t_{k,i}(U_{k,i})$ and $V^0=\\bigcup_{i\\in I^0}t_{k,i}(U_{k,i})$. Let $z\\in Z_k$ with a geometric point $\\bar z$ over $z$, and let $i\\in I_k$ with $z\\in t_{k,i}(U_{k,i})$. By [lem-weil-pbc-etale-cover-geometric-point-lift] (its second clause, applied to $t_{k,i}$ and a point of $U_{k,i}$ over $z$) there is a geometric point $\\bar u$ of $U_{k,i}$ with $t_{k,i}\\circ\\bar u=\\bar z$, so $\\bar z$ factors through $U_{k,i}$, and by [lem-weil-pbc-finite-locally-constant-module-values] (the clause 'moreover', for the sheaf $\\iota_k^{-1}\\mathcal G$ and its covering of type (1)) $(\\iota_k^{-1}\\mathcal G)_{\\bar z}\\cong M_{k,i}$. With step 3: $\\iota_k(z)\\in\\operatorname{Supp}(\\mathcal G)$ if and only if $M_{k,i}\\neq0$, for every $i$ with $z\\in t_{k,i}(U_{k,i})$. Since the covering is jointly surjective, $V^+\\cup V^0=Z_k$, the two are disjoint (a point in both would have $M_{k,i}\\neq0$ and $M_{k,i'}=0$ for $i,i'$ both computing the same condition), and $V^+=\\iota_k^{-1}(\\operatorname{Supp}(\\mathcal G))$. Both are unions of images of etale morphisms, hence open in $Z_k$ by [lem-weil-pbc-etale-morphism-open-map]. So $V^+$ is open and closed in $Z_k$, and by step 2 ($\\iota_k$ a homeomorphism onto $X_k$) $S_k:=\\operatorname{Supp}(\\mathcal G)\\cap X_k=\\iota_k(V^+)$ is open and closed in the subspace $X_k$.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09YS (lemma-support-constructible, line 11867), proof of (1): on each part of the partition the sheaf is finite locally constant and the condition is checked on a trivializing covering (Lemma 095C, lemma-morphism-locally-constant); the case of the support is omitted in Stacks and written out here"
+   }
+  },
+  {
+   "text": "A subset open and closed in a constructible subset is constructible. $X$ is quasi-compact and quasi-separated, so its underlying space is spectral [lem-weil-pbc-qcqs-scheme-spectral]: quasi-compact, quasi-separated, with a basis of quasi-compact opens [def-weil-spectral-space]. A quasi-compact open $V\\subseteq X$ is retrocompact (for $W$ quasi-compact open, $V\\cap W$ is quasi-compact by quasi-separatedness), hence $V=V\\cap(X\\setminus\\emptyset)$ and $X\\setminus V$ are constructible [def-weil-constructible-subset]. Let $E=X_k$ and $S=S_k$. As $S$ and $E\\setminus S$ are open in $E$, there are opens $W,W'$ of $X$ with $S=E\\cap W$ and $E\\setminus S=E\\cap W'$; write $W=\\bigcup_{j\\in J}W_j$ and $W'=\\bigcup_{j\\in J'}W'_j$ with $W_j,W'_j$ quasi-compact open. Every point of $E$ lies in $W$ or in $W'$, so the family of constructible sets $E$, $X\\setminus W_j$ ($j\\in J$), $X\\setminus W'_j$ ($j\\in J'$) has empty intersection; by [lem-weil-pbc-spectral-constructible-finite-intersection] a finite subfamily already has empty intersection, so there are finite $J_0\\subseteq J$, $J'_0\\subseteq J'$ with $E\\subseteq W_0\\cup W'_0$, where $W_0=\\bigcup_{j\\in J_0}W_j$ and $W'_0=\\bigcup_{j\\in J'_0}W'_j$. Then $S=E\\cap W_0$: $E\\cap W_0\\subseteq E\\cap W=S$, and a point $s\\in S$ lies in $W_0$ or in $W'_0\\subseteq W'$, but not in $E\\cap W'=E\\setminus S$, so $s\\in W_0$. Since $W_0$ is a finite union of constructible sets and the constructible sets form a Boolean algebra [def-weil-constructible-subset], $S_k=E\\cap W_0$ is constructible.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-constructible-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0901 (lemma-constructible-hausdorff-quasi-compact: the constructible topology of a spectral space is quasi-compact, constructible sets being closed in it) and Lemma 005H (lemma-constructible: constructible sets form a Boolean algebra); the argument for an open-and-closed part of a constructible set is written by the agent"
+   }
+  },
+  {
+   "text": "Clause (ii). The strata $X_k$ cover $X$, so $\\operatorname{Supp}(\\mathcal G)=\\bigcup_{k<n}S_k$, a finite union of constructible subsets (step 5), hence constructible [def-weil-constructible-subset].",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09YS (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-constructible-finite-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09YS (lemma-support-constructible, line 11867), part (3): proof omitted in Stacks; written after the proof of part (1) (partition into constructible locally closed parts on which the sheaf is finite locally constant, checked on a trivializing covering) with Remark 04FN for the independence of the geometric point"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,10 +148,31 @@
    "results": "Topology/Constructible.lean, RingTheory/Spectrum/Prime/{Topology,Chevalley,ConstructibleSet}.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean: constructible subsets (Chevalley); no etale sheaves, no supports of sheaves",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "subset of constructible set which is open and closed in it is constructible in a spectral space",
+   "results": "Topology.IsLocallyConstructible.isConstructible, IsLocallyConstructible.isConstructible_of_subset_of_isCompact, IsConstructible.isLocallyConstructible (Topology.Constructible), PrimeSpectrum.ConstructibleSetData.isConstructible_toSet: topology of constructible sets only, no etale sheaves or supports",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, IsClopen",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'support' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+   "results": "none: no support of a sheaf on a site in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,6 +197,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Etale Cohomology 09YS (3) with the independence of the geometric point (04FS); self-contained; correct; unsplit."
+  "note": "Split reviewed: 6 steps (clause (i) via a common geometric point and 04FN; the stratification; stalks along a stratum; support open and closed in each stratum via the trivializing etale covering and openness of etale maps; a clopen part of a constructible set is constructible in a spectral space; finite union). Correct; three new nodes (two Mathlib leaves verified, 04FN unsplit). Stage-3 note: lem-kun-support-geometric-point-independent (unit sk-prop-sf-kunneth-ordinary) states clause (i)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-module-support-constructible",
+  "worker": "stage1",
+  "summary": "Stacks 09YS(3) omits the proof; written in six steps after the proof of 09YS(1) and Remark 04FN. (i) for any scheme and abelian sheaf: both geometric points over x receive a morphism of geometric points from the one given by an algebraic closure of kappa(x) (embedding by IsAlgClosed.lift), and a morphism of geometric points induces an isomorphism of stalks (04FN). (ii): constructibility data; stalks along a stratum by the inverse-image stalk isomorphism; on each stratum the support is the union of the images of the trivializing etale maps with nonzero value and its complement the union of the others, both open since etale maps are open, so the support meets each stratum in a clopen subset; a clopen subset of a constructible set in a spectral space is constructible by the finite intersection property of constructible sets; finite union. New nodes: the 04FN stalk bijection (unsplit), the algebraic-extension embedding (Mathlib leaf IsAlgClosed.lift) and openness of etale morphisms (Mathlib leaf Scheme.Hom.isOpenMap). The existing lem-kun-support-geometric-point-independent states clause (i) but lies in unit sk-prop-sf-kunneth-ordinary, outside the route of sk-thm-p1, and is imported (unchecked); not cited. Statement and stmt_deps unchanged."
  }
 }
