@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-associated-module",
+ "kind": "definition",
+ "title": "Sheaf of modules associated to a module over the global sections",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism] and $R=\\Gamma(X,\\mathcal O_X)$; for an open $U\\subseteq X$ regard $\\mathcal O_X(U)$ as an $R$-algebra through the restriction map $R=\\mathcal O_X(X)\\to\\mathcal O_X(U)$. For an $R$-module $M$ let $\\mathcal P_M$ be the presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] with $\\mathcal P_M(U)=\\mathcal O_X(U)\\otimes_RM$ (the base change of $M$ to $\\mathcal O_X(U)$ [def-weil-module-base-change], an $\\mathcal O_X(U)$-module through the factor $\\mathcal O_X(U)$) and restriction maps $\\rho^U_V\\otimes\\mathrm{id}_M$ for $V\\subseteq U$. The *sheaf of $\\mathcal O_X$-modules associated to $M$* is the sheafification $\\mathcal F_M=\\mathcal P_M^\\#$ [def-weil-presheaf-modules-sheafification], a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with its $\\mathcal O_X$-linear sheafification map $\\sigma_M:\\mathcal P_M\\to\\mathcal F_M$; its *canonical section map* is the $R$-linear map $c_M:M\\to\\Gamma(X,\\mathcal F_M)$, $c_M(m)=\\sigma_{M,X}(1\\otimes m)$. For an $R$-linear map $u:M\\to M'$, the maps $\\mathrm{id}_{\\mathcal O_X(U)}\\otimes u$ form a morphism $\\mathcal P_u:\\mathcal P_M\\to\\mathcal P_{M'}$ of presheaves of $\\mathcal O_X$-modules, and $\\mathcal F_u:\\mathcal F_M\\to\\mathcal F_{M'}$ is the unique $\\mathcal O_X$-linear map with $\\mathcal F_u\\circ\\sigma_M=\\sigma_{M'}\\circ\\mathcal P_u$ (universal property of sheafification); in particular $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$. This makes $M\\mapsto\\mathcal F_M$ a functor from $R$-modules to $\\mathcal O_X$-modules. (Stacks, Modules, Lemma 01BH, construction (3), with $\\alpha=\\mathrm{id}_R$, and Definition 01BI.)",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), construction (3) with alpha = id, and Definition 01BI (definition-sheaf-associated)"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-module-base-change",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules associated to a module over the ring of global sections, sheafification of presheaf U ↦ O(U) ⊗ M, left adjoint to global sections",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat (Mathlib.AlgebraicGeometry.Modules.Tilde, only on Spec R), PresheafOfModules.sheafify, PresheafOfModules.sheafification (Presheaf/Sheafification.lean), CategoryTheory.Sheaf.Γ, AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match: the sheafification functor exists, the construction U ↦ O_X(U) ⊗_R M on a general ringed space does not; on Spec R the analogue is ModuleCat.tilde (isomorphic by Schemes 01I7, a theorem)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor from modules over global sections of a ringed space to sheaves of modules, left adjoint to the global sections functor",
+   "results": "Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, SheafOfModules.forgetToSheafModuleCat (Algebra/Category/ModuleCat/Sheaf.lean), ModuleCat.tilde, Condensed.freeForgetAdjunction",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ModuleCat.extendScalars",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Γ(X, ⊤) ⊗\\|tensorObj.*Γ\\|associatedSheaf\\|globalSections.*extend' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace; read the declaration lists of Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Presheaf/Monoidal.lean, Sheaf/ChangeOfRings.lean, Sheaf/Free.lean",
+   "results": "no hits; closest: SheafOfModules.free I with freeHomEquiv (Sheaf/Free.lean, the case M free, construction (2) of 01BH for free modules), SheafOfModules.Presentation (Sheaf/Quasicoherent.lean:43), PresheafOfModules.tensorObj (Presheaf/Monoidal.lean:63, tensor of two presheaves of modules, not with a constant module)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "associatedModule / sheafOfModulesOfModule (project ~/weil-conjectures-slopmaster2)",
+   "results": "no declaration with these names in Mathlib or the source repository",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-module-pullback",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

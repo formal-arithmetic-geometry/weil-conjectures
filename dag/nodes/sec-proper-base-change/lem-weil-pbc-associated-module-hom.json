@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-associated-module-hom",
+ "kind": "statement",
+ "title": "Morphisms out of the sheaf associated to a module",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], $R=\\Gamma(X,\\mathcal O_X)$, and for an $R$-module $M$ let $\\mathcal F_M$, $c_M:M\\to\\Gamma(X,\\mathcal F_M)$ and, for $R$-linear $u$, $\\mathcal F_u$ be the associated $\\mathcal O_X$-module, its canonical section map and the induced morphism [def-weil-pbc-associated-module]. For every sheaf of $\\mathcal O_X$-modules $\\mathcal G$ [def-weil-sheaf-of-modules-category], regard $\\Gamma(X,\\mathcal G)$ as an $R$-module. Then the map\n$$\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,\\mathcal G)\\longrightarrow\\operatorname{Hom}_R(M,\\Gamma(X,\\mathcal G)),\\qquad\\varphi\\longmapsto\\varphi_X\\circ c_M$$\nis bijective. It is natural in $\\mathcal G$ and in $M$: for an $\\mathcal O_X$-linear $\\beta:\\mathcal G\\to\\mathcal G'$ it carries $\\beta\\circ\\varphi$ to $\\beta_X\\circ(\\varphi_X\\circ c_M)$, and for an $R$-linear $u:M'\\to M$ it carries $\\varphi\\circ\\mathcal F_u$ to $(\\varphi_X\\circ c_M)\\circ u$. (Stacks, Modules, Lemma 01BH, assertion (4), with $\\alpha=\\mathrm{id}_R$.)",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BH (lemma-construct-quasi-coherent-sheaves), assertion (4), with alpha = id; proof there by adjointness of pi_* and pi^* (Sheaves, Lemma 0096) for pi : (X, O_X) -> ({*}, R) and the identification of constructions (1) and (3)"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-associated-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from the sheaf of modules associated to M into G correspond to R-linear maps from M to global sections of G",
+   "results": "SheafOfModules.unitHomEquiv (Algebra/Category/ModuleCat/Sheaf.lean: Hom(unit R, M) ≃ M.sections, the case M = R), SheafOfModules.freeHomEquiv (Sheaf/Free.lean: Hom(free I, M) ≃ (I → M.sections), the case M free), PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-10",
+   "verdict": "no match: only the free case (freeHomEquiv) is in Mathlib; the general module needs the associated-module construction, absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules associated to a module over the ring of global sections, sheafification of presheaf U ↦ O(U) ⊗ M, left adjoint to global sections",
+   "results": "ModuleCat.tilde, ModuleCat.tildeInModuleCat, PresheafOfModules.sheafify, PresheafOfModules.sheafification, CategoryTheory.Sheaf.Γ, AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match (on Spec R: AlgebraicGeometry.tilde.adjunction, recorded on lem-weil-pbc-affine-tilde-gamma-adjunction, is the affine case for tilde, not for F_M on a ringed space)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ModuleCat.extendScalars",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'HomEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "unitHomEquiv (Sheaf.lean), freeHomEquiv (Sheaf/Free.lean), restrictHomEquivOfIsLocallySurjective (Sheaf/ChangeOfRings.lean:55), tilde adjunction (AlgebraicGeometry/Modules/Tilde.lean:345)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-module-pullback",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,18 +2,94 @@
  "id": "lem-weil-pbc-associated-module-pullback",
  "kind": "statement",
  "title": "Pullback of an associated module sheaf",
- "statement": "Let $(X,\\mathcal O_X)$ and $(Y,\\mathcal O_Y)$ be ringed spaces, put $R=\\Gamma(X,\\mathcal O_X)$ and $S=\\Gamma(Y,\\mathcal O_Y)$, let $M$ be an $R$-module, and let $\\mathcal F_M$ be the quasi-coherent $\\mathcal O_X$-module associated to $M$ by the standard ringed-space construction. For a morphism of ringed spaces $g:Y\\to X$, the pullback $g^*\\mathcal F_M$ is canonically and functorially isomorphic to the associated $\\mathcal O_Y$-module for the $S$-module $S\\otimes_R M$.",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], put $R=\\Gamma(X,\\mathcal O_X)$ and $S=\\Gamma(Y,\\mathcal O_Y)$, and regard $S$ as an $R$-algebra through $g^\\sharp_X:R\\to(g_*\\mathcal O_Y)(X)=S$. For an $R$-module $M$ let $\\mathcal F_M$ be the $\\mathcal O_X$-module associated to $M$, with canonical section map $c_M:M\\to\\Gamma(X,\\mathcal F_M)$ and, for $R$-linear $u:M\\to M'$, the induced $\\mathcal F_u:\\mathcal F_M\\to\\mathcal F_{M'}$ [def-weil-pbc-associated-module]; likewise $\\mathcal F_N$, $c_N$ on $Y$ for $S$-modules $N$. Let $g^*\\dashv g_*$ be the pullback and pushforward of modules [def-pc-module-pullback], with unit $\\eta$, and for $t\\in\\Gamma(X,\\mathcal G)$ write $g^*t=\\eta_{\\mathcal G,X}(t)\\in\\Gamma(X,g_*g^*\\mathcal G)=\\Gamma(Y,g^*\\mathcal G)$. Let $S\\otimes_RM$ be the base change [def-weil-module-base-change]. Then there is exactly one morphism of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category] $\\theta_M:g^*\\mathcal F_M\\to\\mathcal F_{S\\otimes_RM}$ with\n$$\\theta_{M,Y}\\bigl(g^*c_M(m)\\bigr)=c_{S\\otimes_RM}(1\\otimes m)\\qquad\\text{for all }m\\in M;$$\n$\\theta_M$ is an isomorphism, and it is natural in $M$: for every $R$-linear $u:M\\to M'$, $\\theta_{M'}\\circ g^*(\\mathcal F_u)=\\mathcal F_{\\mathrm{id}_S\\otimes u}\\circ\\theta_M$. (Stacks, Modules, Lemma 01BJ, for schemes.)",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), including its proof via the ringed-space pullback construction and the tensor extension of scalars"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-associated-module",
   "def-pc-module-pullback",
+  "def-weil-module-base-change",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ring map and module structures. By definition of a morphism of ringed spaces [def-weil-locally-ringed-space-morphism], $g^\\sharp:\\mathcal O_X\\to g_*\\mathcal O_Y$ gives on global sections the ring map $g^\\sharp_X:R=\\mathcal O_X(X)\\to\\mathcal O_Y(g^{-1}X)=\\mathcal O_Y(Y)=S$, which makes $S$ an $R$-algebra. For an $\\mathcal O_Y$-module $\\mathcal H$ the pushforward has $(g_*\\mathcal H)(U)=\\mathcal H(g^{-1}U)$ with $\\mathcal O_X(U)$ acting through $g^\\sharp_U$ [def-pc-module-pullback]; so $\\Gamma(X,g_*\\mathcal H)=\\Gamma(Y,\\mathcal H)$, and its $R$-module structure is the $S$-module structure of $\\Gamma(Y,\\mathcal H)$ restricted along $g^\\sharp_X$. For an $\\mathcal O_Y$-linear $\\beta:\\mathcal H\\to\\mathcal H'$, $(g_*\\beta)_X=\\beta_Y$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 0094 (section-ringed-spaces-functoriality-modules): pushforward of modules; Modules, Lemma 01BJ, the right vertical arrow 'induced by g^sharp' of the square"
+   }
+  },
+  {
+   "text": "A bijection natural in the target. Fix an $R$-module $M$ and put $A=g^*\\mathcal F_M$, $B=\\mathcal F_{S\\otimes_RM}$. For every $\\mathcal O_Y$-module $\\mathcal H$ compose the four bijections\n(a) $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)$, $\\psi\\mapsto g_*\\psi\\circ\\eta_{\\mathcal F_M}$, the adjunction $g^*\\dashv g_*$ [def-pc-module-pullback];\n(b) $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(X,g_*\\mathcal H))=\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, $\\varphi\\mapsto\\varphi_X\\circ c_M$ [lem-weil-pbc-associated-module-hom] on $X$, with Step 1;\n(c) $\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))$, the inverse of $\\chi\\mapsto(m\\mapsto\\chi(1\\otimes m))$ [lem-weil-pbc-scalar-extension-hom], for the $S$-module $N=\\Gamma(Y,\\mathcal H)$, whose restriction to $R$ is the module of (b) by Step 1;\n(d) $\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_{\\mathcal O_Y}(B,\\mathcal H)$, the inverse of $\\chi\\mapsto\\chi_Y\\circ c_{S\\otimes_RM}$ [lem-weil-pbc-associated-module-hom] on $Y$ (whose ring of global sections is $S$).\nCall the composite $\\Phi_{\\mathcal H}$. Each of (a)-(d) is natural in $\\mathcal H$ (for (b) and (c) because $(g_*\\beta)_X=\\beta_Y$ by Step 1, and the naturality clauses of the cited nodes), so $\\Phi_{\\mathcal H'}(\\beta\\circ\\psi)=\\beta\\circ\\Phi_{\\mathcal H}(\\psi)$ for $\\mathcal O_Y$-linear $\\beta:\\mathcal H\\to\\mathcal H'$. Tracing an element: (a) followed by (b) sends $\\psi$ to $m\\mapsto(g_*\\psi)_X(\\eta_{\\mathcal F_M,X}(c_M(m)))=\\psi_Y(g^*c_M(m))$; hence $\\chi=\\Phi_{\\mathcal H}(\\psi)$ is the unique $\\mathcal O_Y$-linear map $B\\to\\mathcal H$ with $\\chi_Y(c_{S\\otimes_RM}(1\\otimes m))=\\psi_Y(g^*c_M(m))$ for all $m\\in M$. In particular the map $\\psi\\mapsto(m\\mapsto\\psi_Y(g^*c_M(m)))$, $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, being (b)$\\circ$(a), is injective.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-associated-module-hom",
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-pbc-associated-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof: F_M = pi^*M (Lemma 01BH (1)) and the square of ringed spaces with ({*}, R), ({*}, S); Sheaves, Lemma 0097 (push-pull-composition-modules), whose proof is pushforwards compose plus uniqueness of adjoints; here unwound into hom bijections, pi_* being Gamma"
+   }
+  },
+  {
+   "text": "Existence and isomorphism. By Step 2 the bijections $\\Phi_{\\mathcal H}:\\operatorname{Hom}(A,\\mathcal H)\\to\\operatorname{Hom}(B,\\mathcal H)$ are natural in $\\mathcal H$ in the category of $\\mathcal O_Y$-modules, so by [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] $\\kappa=\\Phi_A(\\mathrm{id}_A):B\\to A$ is an isomorphism with $\\Phi_{\\mathcal H}(\\psi)=\\psi\\circ\\kappa$. Put $\\theta_M=\\kappa^{-1}:g^*\\mathcal F_M\\to\\mathcal F_{S\\otimes_RM}$. The characterization of Step 2 for $\\psi=\\mathrm{id}_A$ gives $\\kappa_Y(c_{S\\otimes_RM}(1\\otimes m))=g^*c_M(m)$, i.e. $\\theta_{M,Y}(g^*c_M(m))=c_{S\\otimes_RM}(1\\otimes m)$ for all $m\\in M$.",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof: F_M = pi^*M (Lemma 01BH (1)) and the square of ringed spaces with ({*}, R), ({*}, S); Sheaves, Lemma 0097 (push-pull-composition-modules), whose proof is pushforwards compose plus uniqueness of adjoints; here unwound into hom bijections, pi_* being Gamma"
+   }
+  },
+  {
+   "text": "Uniqueness. If $\\theta':g^*\\mathcal F_M\\to\\mathcal F_{S\\otimes_RM}$ is $\\mathcal O_Y$-linear with $\\theta'_Y(g^*c_M(m))=c_{S\\otimes_RM}(1\\otimes m)$ for all $m$, then $\\theta'$ and $\\theta_M$ have the same image $m\\mapsto c_{S\\otimes_RM}(1\\otimes m)$ under the injective map $\\psi\\mapsto(m\\mapsto\\psi_Y(g^*c_M(m)))$ of Step 2 (with $\\mathcal H=\\mathcal F_{S\\otimes_RM}$), so $\\theta'=\\theta_M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof: F_M = pi^*M (Lemma 01BH (1)) and the square of ringed spaces with ({*}, R), ({*}, S); Sheaves, Lemma 0097 (push-pull-composition-modules), whose proof is pushforwards compose plus uniqueness of adjoints; here unwound into hom bijections, pi_* being Gamma"
+   }
+  },
+  {
+   "text": "Naturality in $M$. Let $u:M\\to M'$ be $R$-linear. The two $\\mathcal O_Y$-linear maps $\\theta_{M'}\\circ g^*(\\mathcal F_u)$ and $\\mathcal F_{\\mathrm{id}_S\\otimes u}\\circ\\theta_M$ from $g^*\\mathcal F_M$ to $\\mathcal F_{S\\otimes_RM'}$ agree on the sections $g^*c_M(m)$: naturality of the unit $\\eta$ of $g^*\\dashv g_*$ [def-pc-module-pullback] gives $(g^*\\mathcal F_u)_Y(g^*c_M(m))=g^*(\\mathcal F_{u,X}(c_M(m)))=g^*c_{M'}(u(m))$ by $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$ [def-weil-pbc-associated-module], which $\\theta_{M'}$ sends to $c_{S\\otimes_RM'}(1\\otimes u(m))$ (Step 3); and $\\theta_M$ sends $g^*c_M(m)$ to $c_{S\\otimes_RM}(1\\otimes m)$, which $\\mathcal F_{\\mathrm{id}_S\\otimes u}$ sends to $c_{S\\otimes_RM'}((\\mathrm{id}_S\\otimes u)(1\\otimes m))=c_{S\\otimes_RM'}(1\\otimes u(m))$ [def-weil-pbc-associated-module], [def-weil-module-base-change]. By the injectivity of Step 2 (for $\\mathcal H=\\mathcal F_{S\\otimes_RM'}$) the two maps are equal.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-associated-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BJ (functoriality in M is Lemma 01BH (2), 'the construction gives a functor', with the canonical isomorphism of Sheaves, Lemma 0097); written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-associated-module-hom",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-pbc-associated-module",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent) and its proof via Lemma 01BH and Sheaves, Lemma 0097, with the composition-of-pullbacks isomorphism unwound into the adjunction bijections (pi_* = Gamma, pi^* -| pi_* = Lemma 01BH (4), Algebra 05DQ for the point ({*}, R) -> ({*}, S))"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +141,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "lead_note": "Statement corrected by the worker (2026-10-10): (1) 'the standard ringed-space construction' replaced by the node def-weil-pbc-associated-module (Modules 01BH construction (3), Definition 01BI: sheafification of U -> O_X(U) (x)_R M with c_M : M -> Gamma(X, F_M)); (2) 'canonically and functorially isomorphic' made precise: the unique morphism theta_M with theta_M(g^* c_M(m)) = c_{S(x)M}(1 (x) m), an isomorphism, natural in M (the form the citer lem-weil-pbc-tilde-pullback-base-change uses in its step 3); (3) restricted from morphisms of ringed spaces (Stacks 01BJ) to morphisms of schemes, because the module pullback node def-pc-module-pullback, which the old statement already cited, is defined for schemes only and the only citer applies the lemma to Spec(phi); the proof is the same for ringed spaces given a ringed-space pullback with its adjunction.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-associated-module-pullback",
+  "worker": "stage1",
+  "summary": "Tags checked in stacks-project/tags/tags: 01BH = lemma-construct-quasi-coherent-sheaves, 01BI = definition-sheaf-associated, 01BJ = lemma-restrict-quasi-coherent, 01I7 = schemes-lemma-compare-constructions, 0096/0097 = sheaves adjoint-pullback-pushforward-modules / push-pull-composition-modules, 05DQ = algebra-lemma-adjoint-tensor-restrict (008E/008F of the brief are sheaves of sets, not modules). Statement made precise (see lead_note): F_M is the new definition node def-weil-pbc-associated-module; the isomorphism is characterized by theta(g^* c_M(m)) = c(1 (x) m), unique, natural in M; restricted to schemes to match def-pc-module-pullback. Proof in five steps following the proof of Modules 01BJ (F_M = pi^*M, the square through the one-point ringed spaces ({*},R), ({*},S), Sheaves 0097), with the composition-of-pullbacks isomorphism unwound into hom bijections: Hom(g^*F_M, H) = Hom(F_M, g_*H) = Hom_R(M, Gamma(Y,H)) = Hom_S(S(x)M, Gamma(Y,H)) = Hom(F_{S(x)M}, H), natural in H, then coYoneda (existing Mathlib leaf lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection); uniqueness and naturality in M from the injectivity of psi -> (m -> psi(g^* c_M(m))). New nodes: def-weil-pbc-associated-module (definition, unsplit), lem-weil-pbc-associated-module-hom (Modules 01BH(4), unsplit), lem-weil-pbc-scalar-extension-hom (Algebra 05DQ, Mathlib leaf LinearMap.liftBaseChangeEquiv). The old stmt_dep def-weil-sheaf-of-modules-category is kept; def-pc-scheme, def-weil-pbc-associated-module and def-weil-module-base-change added. No Lean in slopmaster2 states this (grep of WeilConjectures for tilde/pullback/liftBaseChangeEquiv)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Statement made precise by the worker (the associated module F_M now a definition node, def-weil-pbc-associated-module, 01BH/01BI; the isomorphism characterized by theta(g^* c_M(m)) = c(1 (x) m), unique and natural in M) and restricted from ringed spaces to schemes since def-pc-module-pullback is for schemes; the only citer applies it to Spec phi. Five steps along the proof of 01BJ via a chain of natural bijections Hom(g^* F_M, H) = Hom(F_M, g_* H) = Hom_R(M, Gamma(Y,H)) = Hom_S(S (x) M, Gamma(Y,H)) = Hom(F_{S (x) M}, H) and co-Yoneda; two new unsplit nodes (the definition; 01BH(4) the universal property of F_M) and one Mathlib leaf (05DQ; LinearMap.liftBaseChangeEquiv RingTheory/TensorProduct/Basic.lean:52, verified earlier today). Stage-3 note: the citer lem-weil-pbc-tilde-pullback-base-change identifies F_M with tilde M by citing the tilde-Gamma adjunction alone; it needs lem-weil-pbc-associated-module-hom plus uniqueness of left adjoints."
+ }
 }
