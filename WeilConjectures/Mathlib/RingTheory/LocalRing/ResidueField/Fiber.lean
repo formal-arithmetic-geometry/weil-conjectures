@@ -75,6 +75,49 @@ lemma tensorCancelEquiv_lTensor {N' : Type*} [AddCommGroup N'] [Module R₀ N'] 
     | add x y hx hy => simp only [add_tmul, map_add, hx, hy]
     | tmul r s => simp
 
+lemma tensorCancelEquiv_tmul_smul (r : R₁) (s : S₀) (y : (R₁ ⊗[R₀] S₀) ⊗[R₁] N) :
+    tensorCancelEquiv N ((r ⊗ₜ[R₀] s : R₁ ⊗[R₀] S₀) • y) =
+      s • (DistribSMul.toLinearMap R₀ N r).lTensor S₀ (tensorCancelEquiv N y) := by
+  induction y with
+  | zero => simp
+  | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, map_add, smul_add]
+  | tmul x n =>
+    induction x with
+    | zero => simp
+    | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
+    | tmul r' s' =>
+      rw [smul_tmul', smul_eq_mul, Algebra.TensorProduct.tmul_mul_tmul,
+        tensorCancelEquiv_tmul, tensorCancelEquiv_tmul, LinearMap.lTensor_tmul, smul_tmul',
+        smul_eq_mul, DistribSMul.toLinearMap_apply, mul_smul]
+
+variable {A : Type*} [CommRing A] [Algebra R₀ A] [Algebra R₁ A] [IsScalarTower R₀ R₁ A]
+
+/-- For `R₀ → R₁ → A` and an `A`-module `N`,
+`(R₁ ⊗[R₀] S₀) ⊗[R₁] N ≃ (A ⊗[R₀] S₀) ⊗[A] N`. -/
+noncomputable def baseChangeTensorEquiv (N : Type*) [AddCommGroup N] [Module R₀ N]
+    [Module R₁ N] [Module A N] [IsScalarTower R₀ R₁ N] [IsScalarTower R₀ A N]
+    [IsScalarTower R₁ A N] :
+    (R₁ ⊗[R₀] S₀) ⊗[R₁] N ≃ₗ[R₀] (A ⊗[R₀] S₀) ⊗[A] N :=
+  (tensorCancelEquiv N).trans (tensorCancelEquiv N).symm
+
+lemma baseChangeTensorEquiv_smul (N : Type*) [AddCommGroup N] [Module R₀ N]
+    [Module R₁ N] [Module A N] [IsScalarTower R₀ R₁ N] [IsScalarTower R₀ A N]
+    [IsScalarTower R₁ A N] (s : R₁ ⊗[R₀] S₀) (y : (R₁ ⊗[R₀] S₀) ⊗[R₁] N) :
+    baseChangeTensorEquiv N (s • y) =
+      Algebra.TensorProduct.map (IsScalarTower.toAlgHom R₀ R₁ A) (AlgHom.id R₀ S₀) s •
+        baseChangeTensorEquiv (A := A) N y := by
+  apply (tensorCancelEquiv (R₁ := A) (S₀ := S₀) N).injective
+  simp only [baseChangeTensorEquiv, LinearEquiv.trans_apply, LinearEquiv.apply_symm_apply]
+  induction s with
+  | zero => simp
+  | add x y hx hy => rw [add_smul, map_add, hx, hy, map_add, add_smul, map_add]
+  | tmul r s =>
+    rw [tensorCancelEquiv_tmul_smul, Algebra.TensorProduct.map_tmul, tensorCancelEquiv_tmul_smul,
+      LinearEquiv.apply_symm_apply]
+    congr 2
+    ext n
+    simp [IsScalarTower.toAlgHom_apply, algebraMap_smul]
+
 end Algebra.TensorProduct
 
 namespace Module
@@ -380,7 +423,158 @@ theorem exists_fg_flat_localization_tensor {A : Type u} [CommRing A] [Algebra R�
   | add x y _ _ hx hy => rw [map_add, hx, hy, add_zero]
   | smul a x _ hx => rw [map_smul, hx, smul_zero]
 
+
 end Module
+
+namespace Algebra
+
+universe u
+
+set_option maxHeartbeats 1600000 in
+/-- **The local criterion for regular elements over a non-noetherian base**, for a noetherian
+model (Stacks, Tags 046Z and 00MF). Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `A`
+an `R₀`-algebra with `B = A ⊗[R₀] S₀` flat over `A`, `q` a prime of `B` and `K` an `A`-algebra
+whose kernel is `q ∩ A`. Let `f, t ∈ S₀` with `t ∉ q`, such that `t` kills the kernel of `f` on
+`B ⊗[A] K`. Then there is `g ∉ q` such that `f` is a nonzerodivisor on `B_g ⧸ J B_g` for every
+ideal `J` of `A`. -/
+theorem exists_notMem_forall_mul_mem_map_of_tensor {R₀ A S₀ : Type u} [CommRing R₀]
+    [CommRing A] [CommRing S₀] [Algebra R₀ A] [Algebra R₀ S₀] [IsNoetherianRing R₀]
+    [Algebra.FiniteType R₀ S₀] [Module.Flat A (A ⊗[R₀] S₀)] (q : Ideal (A ⊗[R₀] S₀))
+    [q.IsPrime] (f t : S₀) (ht : (1 ⊗ₜ t : A ⊗[R₀] S₀) ∉ q) {K : Type*} [CommRing K]
+    [Algebra A K] (hK : RingHom.ker (algebraMap A K) = q.comap (algebraMap A (A ⊗[R₀] S₀)))
+    (hfib : ∀ x : (A ⊗[R₀] S₀) ⊗[A] K,
+      (1 ⊗ₜ f : A ⊗[R₀] S₀) • x = 0 → (1 ⊗ₜ t : A ⊗[R₀] S₀) • x = 0) :
+    ∃ g ∉ q, ∀ (J : Ideal A) (x : A ⊗[R₀] S₀), (1 ⊗ₜ f) * x ∈ J.map (algebraMap A _) →
+      ∃ n : ℕ, g ^ n * x ∈ J.map (algebraMap A _) := by
+  classical
+  obtain ⟨R₁, -, hR₁, hflat⟩ := Module.exists_fg_flat_localization_tensor (S₀ := S₀) q
+  set B := A ⊗[R₀] S₀
+  set S₁ := R₁ ⊗[R₀] S₀
+  let ι : S₁ →ₐ[R₀] B :=
+    Algebra.TensorProduct.map (IsScalarTower.toAlgHom R₀ R₁ A) (AlgHom.id R₀ S₀)
+  have hι : Algebra.TensorProduct.map R₁.val (AlgHom.id R₀ S₀) = ι := rfl
+  rw [hι] at hflat
+  set q₁ := q.comap ι.toRingHom
+  set f₁ : S₁ := 1 ⊗ₜ f
+  set t₁ : S₁ := 1 ⊗ₜ t
+  have hι1 (s : S₀) : ι (1 ⊗ₜ s) = 1 ⊗ₜ s := by
+    refine (Algebra.TensorProduct.map_tmul _ _ _ _).trans ?_
+    rw [map_one]
+    rfl
+  have hιf : ι f₁ = 1 ⊗ₜ f := hι1 f
+  have hιt : ι t₁ = 1 ⊗ₜ t := hι1 t
+  have ht₁ : t₁ ∉ q₁ := by
+    change ι.toRingHom t₁ ∉ q
+    exact hιt ▸ ht
+  -- `K` as an `R₁`-algebra.
+  have : IsScalarTower R₁ A K := inferInstance
+  let : Algebra R₀ K := ((algebraMap A K).comp (algebraMap R₀ A)).toAlgebra
+  have : IsScalarTower R₀ A K := .of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower R₀ R₁ K := ⟨fun r s k ↦ by
+    change (r • (s : A)) • k = r • ((s : A) • k)
+    exact smul_assoc r (s : A) k⟩
+  -- The fibre hypothesis over `R₁`.
+  have H₁ : ∀ y : S₁ ⊗[R₁] K, f₁ • y = 0 → t₁ • y = 0 := by
+    intro y hy
+    apply (Algebra.TensorProduct.baseChangeTensorEquiv (A := A) K).injective
+    rw [Algebra.TensorProduct.baseChangeTensorEquiv_smul, LinearEquiv.map_zero]
+    change ι t₁ • _ = 0
+    rw [hιt]
+    apply hfib
+    rw [← hιf]
+    change ι f₁ • _ = 0
+    rw [← Algebra.TensorProduct.baseChangeTensorEquiv_smul, hy, LinearEquiv.map_zero]
+  -- The fibre condition at `q₁`.
+  set p₁ := q₁.comap (algebraMap R₁ S₁)
+  set M₁ := Localization.AtPrime q₁
+  have hker : ∀ r : R₁, algebraMap R₁ K r = 0 ↔ r ∈ p₁ := by
+    intro r
+    have h1 : ι (algebraMap R₁ S₁ r) = algebraMap A B r := by
+      rw [Algebra.TensorProduct.algebraMap_apply, Algebra.TensorProduct.algebraMap_apply]
+      refine (Algebra.TensorProduct.map_tmul _ _ _ _).trans ?_
+      rw [map_one]
+      rfl
+    change algebraMap A K r = 0 ↔ ι.toRingHom (algebraMap R₁ S₁ r) ∈ q
+    rw [← RingHom.mem_ker, hK, Ideal.mem_comap]
+    change _ ↔ ι (algebraMap R₁ S₁ r) ∈ q
+    rw [h1]
+  have Hloc : ∀ z : M₁ ⊗[R₁] K, (algebraMap S₁ M₁ f₁) • z = 0 → z = 0 := by
+    intro z hz
+    let ℓ := AlgebraTensorModule.rTensor R₁ K (Algebra.linearMap S₁ M₁)
+    have : IsLocalizedModule q₁.primeCompl ℓ := IsLocalizedModule.rTensor (A := S₁) _ _
+    obtain ⟨⟨z', u⟩, hu⟩ := IsLocalizedModule.surj q₁.primeCompl ℓ z
+    simp only [Submonoid.smul_def] at hu
+    have h1 : ℓ (f₁ • z') = 0 := by
+      rw [map_smul, ← hu, smul_comm, ← algebraMap_smul M₁ f₁ z, hz, smul_zero]
+    obtain ⟨u', hu'⟩ := (IsLocalizedModule.eq_zero_iff q₁.primeCompl (f := ℓ)).mp h1
+    rw [Submonoid.smul_def] at hu'
+    have h2 : t₁ • ((u' : S₁) • z') = 0 := H₁ _ (by rw [smul_comm, hu'])
+    have h3 : (t₁ * u' * u : S₁) • z = 0 := by
+      rw [mul_smul (t₁ * u'), hu, ← map_smul, mul_smul, h2, LinearMap.map_zero]
+    refine (Module.End.isUnit_iff _).mp
+      (IsLocalizedModule.map_units ℓ (⟨t₁, ht₁⟩ * u' * u)) |>.1 ?_
+    rw [LinearMap.map_zero, Module.algebraMap_end_apply]
+    exact h3
+  have hfib₁ : ∀ m : M₁, algebraMap S₁ M₁ f₁ * m ∈ p₁.map (algebraMap R₁ M₁) →
+      m ∈ p₁.map (algebraMap R₁ M₁) := by
+    intro m hm
+    have : Module.Flat R₁ M₁ := hflat
+    let ε : M₁ →ₗ[R₁] M₁ ⊗[R₁] K :=
+      (Algebra.linearMap R₁ K).lTensor M₁ ∘ₗ (_root_.TensorProduct.rid R₁ M₁).symm.toLinearMap
+    have hε1 (x : M₁) : ε x = x ⊗ₜ 1 := by simp [ε]
+    have hε : ∀ x ∈ p₁.map (algebraMap R₁ M₁), ε x = 0 := by
+      intro x hx
+      have hx' : x ∈ p₁ • (⊤ : Submodule R₁ M₁) := by
+        rw [Ideal.smul_top_eq_map]
+        exact hx
+      clear hx
+      induction hx' using Submodule.smul_induction_on' with
+      | smul r hr m' _ =>
+        rw [LinearMap.map_smul, hε1, ← tmul_smul, ← Algebra.algebraMap_eq_smul_one,
+          (hker r).mpr hr, tmul_zero]
+      | add x _ y _ hx hy => rw [LinearMap.map_add, hx, hy, add_zero]
+    have h1 : algebraMap S₁ M₁ f₁ • ε m = 0 := by
+      rw [hε1, smul_tmul', smul_eq_mul, ← hε1]
+      exact hε _ hm
+    have h2 : ε m = 0 := Hloc _ h1
+    let ψ : (R₁ ⧸ p₁) →ₗ[R₁] K :=
+      (Ideal.Quotient.liftₐ p₁ (Algebra.ofId R₁ K) fun r hr ↦ (hker r).mpr hr).toLinearMap
+    have hψ : Function.Injective ψ := by
+      rw [injective_iff_map_eq_zero]
+      intro x hx
+      obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+      rw [Ideal.Quotient.eq_zero_iff_mem, ← hker r]
+      exact hx
+    have h3 : m ⊗ₜ[R₁] (1 : R₁ ⧸ p₁) = 0 := by
+      apply Module.Flat.lTensor_preserves_injective_linearMap (M := M₁) ψ hψ
+      rw [LinearMap.lTensor_tmul, LinearMap.map_zero, ← h2, hε1]
+      simp [ψ]
+    have h4 := congr(TensorProduct.tensorQuotEquivQuotSMul M₁ p₁ $h3)
+    rw [← map_one (Ideal.Quotient.mk p₁), TensorProduct.tensorQuotEquivQuotSMul_tmul_mk,
+      one_smul, LinearEquiv.map_zero, Submodule.Quotient.mk_eq_zero, Ideal.smul_top_eq_map] at h4
+    exact h4
+  obtain ⟨g, hg, hP⟩ := Algebra.exists_notMem_forall_pow_smul_eq_zero q₁ f₁ hfib₁
+  have hz (J : Ideal A) (b : B) : b ⊗ₜ[A] (1 : A ⧸ J) = 0 ↔ b ∈ J.map (algebraMap A B) := by
+    rw [← (TensorProduct.tensorQuotEquivQuotSMul B J).map_eq_zero_iff,
+      ← map_one (Ideal.Quotient.mk J), TensorProduct.tensorQuotEquivQuotSMul_tmul_mk, one_smul,
+      Submodule.Quotient.mk_eq_zero, Ideal.smul_top_eq_map, Submodule.restrictScalars_mem]
+  refine ⟨ι g, hg, fun J x hx ↦ ?_⟩
+  let e := Algebra.TensorProduct.baseChangeTensorEquiv (R₀ := R₀) (A := A) (S₀ := S₀) (R₁ := R₁) (A ⧸ J)
+  set y := e.symm (x ⊗ₜ[A] (1 : A ⧸ J))
+  have hy : f₁ • y = 0 := by
+    apply e.injective
+    rw [Algebra.TensorProduct.baseChangeTensorEquiv_smul, LinearEquiv.apply_symm_apply,
+      LinearEquiv.map_zero, hιf, smul_tmul', smul_eq_mul, hz]
+    exact hx
+  obtain ⟨n, hn⟩ := hP (A ⧸ J) y hy
+  refine ⟨n, (hz J _).mp ?_⟩
+  have := congr(e $hn)
+  rw [Algebra.TensorProduct.baseChangeTensorEquiv_smul, LinearEquiv.apply_symm_apply,
+    LinearEquiv.map_zero, map_pow, smul_tmul', smul_eq_mul] at this
+  exact this
+
+end Algebra
+
 
 
 /-- **The local criterion for relative effective Cartier divisors**, algebraic form (Stacks,
