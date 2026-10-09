@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-completion-maximal-ideal-generators",
+ "kind": "statement",
+ "title": "The maximal ideals of a Noetherian local ring and of its completion need equally many generators",
+ "statement": "Let $(A,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring and $A^\\wedge=\\varprojlim_nA/\\mathfrak m^n$ its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion], a local ring with maximal ideal $\\mathfrak m_{A^\\wedge}=\\mathfrak mA^\\wedge$. For an ideal $I$ write $\\mu(I)$ for the minimal number of elements generating it. Then $\\mu(\\mathfrak m_{A^\\wedge})=\\mu(\\mathfrak m)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05GG (lemma-hathat-finitely-generated: A/m^2 = A^/m^2A^, so m/m^2 = mA^/(mA^)^2 over the common residue field) with Nakayama's Lemma Tag 00DV (lemma-NAK: mu of the maximal ideal of a Noetherian local ring is dim_k m/m^2); used in More on Algebra, proof of Lemma Tag 07NY (lemma-completion-regular)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "minimal number of generators of the maximal ideal of the completion of a Noetherian local ring equals that of the ring",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, Ideal.fg_of_isNoetherianRing, Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing, isArtinianRing_iff_isNilpotent_maximalIdeal: not the statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.spanFinrank (IsLocalRing.maximalIdeal (AdicCompletion _ _))",
+   "results": "AdicCompletion.spanFinrank_maximalIdeal_eq (Mathlib.RingTheory.AdicCompletion.LocalRing)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'spanFinrank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/LocalRing.lean; sed -n 156,199p of that file; grep -n 'def spanFinrank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/SpanRank.lean",
+   "results": "AdicCompletion.spanFinrank_maximalIdeal_eq at LocalRing.lean:156 ([IsNoetherianRing R] [IsLocalRing R] : (maximalIdeal (AdicCompletion (maximalIdeal R) R)).spanFinrank = (maximalIdeal R).spanFinrank, proved via the cotangent spaces); Submodule.spanFinrank (SpanRank.lean:68) is the minimal cardinality of a generating set (as a natural number, 0 if not finitely generated; both ideals are finitely generated here)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AdicCompletion.spanFinrank_maximalIdeal_eq (project ~/weil-conjectures-slopmaster2)",
+   "results": "AdicCompletion.spanFinrank_maximalIdeal_eq, lemma, .lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/LocalRing.lean (index: unavailable; existence confirmed by the grep)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion.spanFinrank_maximalIdeal_eq",
+  "file": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+  "line": 156,
+  "how": "exact: for [IsNoetherianRing R] [IsLocalRing R], (maximalIdeal (AdicCompletion (maximalIdeal R) R)).spanFinrank = (maximalIdeal R).spanFinrank; Submodule.spanFinrank (Mathlib/Algebra/Module/SpanRank.lean:68) is the minimal number of generators mu (both ideals are finitely generated, the rings being Noetherian), and maximalIdeal of the completion is mA^ by AdicCompletion.maximalIdeal_eq_map (LocalRing.lean:95). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-completion-regular-local",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

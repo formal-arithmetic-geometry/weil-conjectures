@@ -637,3 +637,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:30 L reviewed lem-weil-pbc-colimit-surjective-ring-map (worker, 5 steps, 0 new): pass, committed. Notice to C1: the two re-pushes of z-g-ring do not change the false DVR node; the return stands.
 - 23:31 L reviewed lem-weil-pbc-complete-local-quotient (worker, 4 steps, 0 new): pass, committed.
 - 23:32 L reviewed lem-weil-pbc-coherent-support-power-ideal-kills (worker, 7 steps, 1 new unsplit): pass, committed.
+- 23:35 L reviewed lem-weil-pbc-completion-regular-local (worker, 3 steps, 2 new: 07NV unsplit, generator-count leaf): pass, committed.

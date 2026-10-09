@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-completion-dimension",
+ "kind": "statement",
+ "title": "The completion of a Noetherian local ring has the same dimension",
+ "statement": "Let $(A,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring and $A^\\wedge=\\varprojlim_nA/\\mathfrak m^n$ its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion] (a Noetherian local ring with maximal ideal $\\mathfrak mA^\\wedge$). Then the Krull dimensions agree: $\\dim A^\\wedge=\\dim A$ (both finite).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NV (lemma-completion-dimension), and its proof: A/m^n = A^/m^n A^ (Algebra Lemma 05GG), equal Hilbert functions, Algebra Proposition 00KQ (dimension = degree of the Hilbert polynomial); or the alternative given there: Algebra Lemma 00ON (lemma-dimension-base-fibre-equals-total) for the flat local map A -> A^ (Algebra Lemma 00MC) whose closed fibre A^/mA^ = A/m is a field"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of the adic completion of a Noetherian local ring equals Krull dimension of the ring",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, AdicCompletion.flat_of_isNoetherian, Polynomial.ringKrullDim_of_isNoetherianRing, Ideal.primeHeight_eq_ringKrullDim_iff, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, IsLocalRing.maximalIdeal_height_eq_ringKrullDim: nothing on the dimension of AdicCompletion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim (AdicCompletion _ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension of completion of Noetherian local ring equals dimension of the ring, dim A^ = dim A",
+   "results": "instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_quotSMulTop_succ (Mathlib.RingTheory.KrullDimension.Regular): none about completions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ringKrullDim\\|krullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/ ; grep -rn AdicCompletion ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'krull\\|dim\\|height'",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (the flat height formula Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, node lem-weil-pbc-flat-height-formula, gives it in a few lines, not one)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-completion-regular-local",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
