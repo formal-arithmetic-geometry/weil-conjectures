@@ -76,8 +76,8 @@ variable (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)]
 
 /-- If `g` acts as the geometric Frobenius on a point `y` of the fibre of a constant cover, it
 does so on the image of `y` under any morphism of constant covers. -/
-lemma smul_fiber_map_eq_geometricFrobenius [IsNaturalSMul (fiber s) G] {A B : FiniteEtaleAlgebra K} (f : A.1 →ₐ[K] B.1)
-    (g : G) (y : (fiber s).obj (constantCover p B)) (h : g • y = geometricFrobenius p s B y) :
+lemma smul_fiber_map_eq_geometricFrobenius [IsNaturalSMul (fiber s) G]
+    {A B : FiniteEtaleAlgebra K} (f : A.1 →ₐ[K] B.1) (g : G) (y : (fiber s).obj (constantCover p B)) (h : g • y = geometricFrobenius p s B y) :
     g • (fiber s).map (constantCoverHom p f) y =
       geometricFrobenius p s A ((fiber s).map (constantCoverHom p f) y) := by
   rw [← IsNaturalSMul.naturality, h, fiber_map_constantCoverHom_geometricFrobenius]
@@ -148,7 +148,8 @@ lemma fiberConstantCoverEquiv_mem (R : IntermediateField K Ω) [FiniteDimensiona
 /-- If `g` moves the inclusion point of a finite intermediate field `R` by the geometric
 Frobenius, then it acts as the geometric Frobenius on every point of the fibre of a constant
 cover whose embedding lands in `R`. -/
-lemma smul_eq_geometricFrobenius_of_mem [IsNaturalSMul (fiber s) G] (R : IntermediateField K Ω) [FiniteDimensional K R]
+lemma smul_eq_geometricFrobenius_of_mem [IsNaturalSMul (fiber s) G] (R : IntermediateField K Ω)
+    [FiniteDimensional K R]
     (g : G) (hg : g • inclusionPoint hκ R = geometricFrobenius p s _ (inclusionPoint hκ R))
     {A : FiniteEtaleAlgebra K} (y : (fiber s).obj (constantCover p A))
     (hy : ∀ a, (fiberConstantCoverEquiv p s A y).1 a ∈ R) :

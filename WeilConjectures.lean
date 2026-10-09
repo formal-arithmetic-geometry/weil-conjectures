@@ -66,6 +66,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusElement
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusLift
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
