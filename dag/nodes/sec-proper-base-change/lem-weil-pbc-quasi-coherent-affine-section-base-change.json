@@ -12,9 +12,85 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The affine charts.* Let $\\iota_U:\\operatorname{Spec}R\\to S$ and $\\iota_{U'}:\\operatorname{Spec}R'\\to S$ be the canonical open immersions with images $U$ and $U'$ [lem-weil-pbc-affine-open-spec-points], and $\\rho:R'\\to R$ the restriction map. By [lem-weil-pbc-affine-open-inclusion-spec-map], $j:=\\operatorname{Spec}\\rho:\\operatorname{Spec}R\\to\\operatorname{Spec}R'$ is an open immersion and $\\iota_{U'}\\circ j=\\iota_U$; this is the bottom arrow $U\\to U'$ of the square of Constructions 01LN, a morphism of affine schemes given by the ring map $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-inclusion-spec-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemma 01I2 (morphisms of affine schemes are Spec of ring maps)"
+   }
+  },
+  {
+   "text": "*$\\mathcal M$ on $U'$ is $\\widetilde{M'}$.* Put $\\mathcal N'=\\mathcal M|_{\\operatorname{Spec}R'}$, the restriction of $\\mathcal M$ along the open immersion $\\iota_{U'}$ [lem-weil-pbc-module-restriction-open-immersion-colimits]: $\\mathcal N'(V)=\\mathcal M(\\iota_{U'}(V))$, so $\\Gamma(\\operatorname{Spec}R',\\mathcal N')=\\mathcal M(U')=M'$, and $R'=\\Gamma(\\operatorname{Spec}R',\\mathcal O)$ acts on it through $\\iota_{U'}^\\sharp:\\mathcal O_S(U')\\cong R'$, i.e. by the given $R'$-module structure of $M'$. By part (2) of that node $\\mathcal N'$ is quasi-coherent, so by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) the counit $\\varepsilon:\\widetilde{M'}\\to\\mathcal N'$, the map of $\\mathcal O_{\\operatorname{Spec}R'}$-modules corresponding to $\\mathrm{id}_{M'}$, is an isomorphism; by the description of the adjunction bijection in (1), $\\varepsilon_{\\operatorname{Spec}R'}(\\tau(m'))=m'$ for $m'\\in M'$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemmas 01IA (lemma-quasi-coherent-affine) and 01IB (lemma-equivalence-quasi-coherent): a quasi-coherent module on Spec R' is the sheaf associated to its global sections"
+   }
+  },
+  {
+   "text": "*Restricting to $U$.* Restrict $\\mathcal N'$ along $j$: $(\\mathcal N'|_{\\operatorname{Spec}R})(V)=\\mathcal N'(j(V))=\\mathcal M(\\iota_{U'}(j(V)))=\\mathcal M(\\iota_U(V))$, with the same restriction maps and the same $\\mathcal O$-action (both through $\\iota_U^\\sharp$, since $\\iota_{U'}\\circ j=\\iota_U$), so $\\mathcal N'|_{\\operatorname{Spec}R}$ is the restriction of $\\mathcal M$ along $\\iota_U$ and $\\Gamma(\\operatorname{Spec}R,\\mathcal N'|_{\\operatorname{Spec}R})=\\mathcal N'(j(\\operatorname{Spec}R))=\\mathcal M(U)=M$, the $R$-module structure being the given one. For $m'\\in M'=\\mathcal N'(\\operatorname{Spec}R')$ the element $m'|_{j(\\operatorname{Spec}R)}$ of this module is $m'|_U$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); the identification of the square's bottom arrow with $U\\subseteq U'$"
+   }
+  },
+  {
+   "text": "*The pullback of $\\widetilde{M'}$.* Apply the restriction functor along $j$ to the isomorphism $\\varepsilon$ of step 2 and combine with [lem-weil-pbc-open-immersion-module-pullback-restriction] and [lem-weil-pbc-tilde-pullback-base-change] (for $\\varphi=\\rho$, $\\psi=j$): this gives isomorphisms of $\\mathcal O_{\\operatorname{Spec}R}$-modules\n$$\\widetilde{R\\otimes_{R'}M'}\\xrightarrow{\\theta^{-1}}j^*\\widetilde{M'}\\xrightarrow{\\kappa^{-1}}\\widetilde{M'}|_{\\operatorname{Spec}R}\\xrightarrow{\\varepsilon|}\\mathcal N'|_{\\operatorname{Spec}R}.$$\nTaking sections over $\\operatorname{Spec}R$ and precomposing with the isomorphism $\\tau:R\\otimes_{R'}M'\\to\\Gamma(\\operatorname{Spec}R,\\widetilde{R\\otimes_{R'}M'})$ of [lem-weil-pbc-affine-tilde-gamma-adjunction] (2), and using step 3, gives a bijection $\\Phi:R\\otimes_{R'}M'\\to M$. It is $R$-linear: each map in the chain is a morphism of $\\mathcal O_{\\operatorname{Spec}R}$-modules, hence linear over $\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$ on global sections, and $\\tau$ is $R$-linear.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemma 01I9 (lemma-widetilde-pullback) (1): $\\psi^*\\widetilde M=\\widetilde{S\\otimes_RM}$, applied to $\\psi=j$; for an open immersion the pullback of modules is the restriction (Sheaves, Lemma 00A0)"
+   }
+  },
+  {
+   "text": "*$\\Phi$ is the canonical map.* Let $m'\\in M'$. By [lem-weil-pbc-tilde-pullback-base-change], $\\theta^{-1}(\\tau(1\\otimes m'))=\\eta(\\tau(m'))$, the image of $\\tau(m')\\in\\Gamma(\\operatorname{Spec}R',\\widetilde{M'})$ under the unit of $j^*\\dashv j_*$. By [lem-weil-pbc-open-immersion-module-pullback-restriction] (with $W=\\operatorname{Spec}R'$, $f^{-1}W=\\operatorname{Spec}R$), $\\kappa^{-1}(\\eta(\\tau(m')))=\\tau(m')|_{j(\\operatorname{Spec}R)}$. Since $\\varepsilon$ is a morphism of sheaves it commutes with restriction, so $\\varepsilon(\\tau(m')|_{j(\\operatorname{Spec}R)})=\\varepsilon_{\\operatorname{Spec}R'}(\\tau(m'))|_{j(\\operatorname{Spec}R)}=m'|_U$ by steps 2 and 3. Hence $\\Phi(1\\otimes m')=m'|_U$, and by $R$-linearity $\\Phi(r\\otimes m')=r\\,m'|_U$. So $\\Phi$ is the canonical map $M'\\otimes_{R'}R\\cong R\\otimes_{R'}M'\\to M$ of the statement, which is therefore an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); the isomorphism there is 'the map $R\\otimes_{R'}A'\\to A$', i.e. the canonical map; this check is not written in the source and is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-inclusion-spec-map",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof; Schemes, Lemmas 01I9 (lemma-widetilde-pullback), 01IA, 01IB (literature/stacks-project/schemes.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +112,31 @@
    "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean has localization for tilde modules on principal opens; no arbitrary affine-open tensor formula",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections of a quasi-coherent sheaf over an affine open contained in another affine open: M(U') ⊗_{O(U')} O(U) ≅ M(U)",
+   "results": "Scheme.Modules.restrict_obj, Scheme.Hom.appIso, affineOpensRestrict, IsAffineOpen.ΓSpecIso_hom_fromSpec_app, IsAffineOpen.basicOpenSectionsToAffine_isIso (structure sheaf, principal opens), IsAffineOpen.isoSpec, Scheme.Opens.ι_app; no tensor formula for modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent module on a scheme, affine opens U ⊆ V, the map Γ(V,M) ⊗_{Γ(V,O)} Γ(U,O) → Γ(U,M) is an isomorphism",
+   "results": "IsAffineOpen.basicOpenSectionsToAffine_isIso, isIso_ΓSpec_adjunction_unit_app_basicOpen, IsAffineOpen.fromSpec_app_of_le, Scheme.Modules.instIsIsoAbApp, IsAffineOpen.ΓSpecIso_hom_fromSpec_app, IsAffineOpen.appBasicOpenIsoAwayMap, Scheme.Modules.Hom.isIso_iff_isIso_app, IsAffineOpen.fromSpec_app_self; none is about module sections over nested affine opens",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "list of all declarations (^theorem|^lemma|^def|^instance) of ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean and Modules/Sheaf.lean; grep -rn 'extendScalars\\|baseChange' Mathlib/AlgebraicGeometry/",
+   "results": "Tilde.lean: tilde, toOpen, IsLocalizedModule.Away instance on D(f), tilde.adjunction, fromTildeΓ, isIso_fromTildeΓ_of_isQuasicoherent, pushforward results; Sheaf.lean: restrictFunctor, restrictFunctorIsoPullback, restrictFunctorComp; no pullback of tilde and no sections-over-affine tensor formula; extendScalars does not occur in AlgebraicGeometry/",
+   "date": "2026-10-10",
+   "verdict": "no match (the pieces are in Mathlib, the pullback-of-tilde step is not; see lem-weil-pbc-tilde-pullback-base-change)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +156,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "worker": "stage1",
+  "summary": "Split along Stacks Constructions 01LN's proof, which cites Schemes 01I9 for the isomorphism $R\\otimes_{R'}M'\\to M$: (1) the inclusion $U\\subseteq U'$ is $j=\\operatorname{Spec}\\rho$ between the charts $\\iota_U,\\iota_{U'}$ (new Mathlib leaf lem-weil-pbc-affine-open-inclusion-spec-map: IsAffineOpen.map_fromSpec, IsOpenImmersion.of_comp); (2) $\\mathcal M|_{U'}\\cong\\widetilde{M'}$ by the reviewed leaves lem-weil-pbc-module-restriction-open-immersion-colimits (2) and lem-weil-pbc-affine-tilde-gamma-adjunction (3) (Schemes 01IA/01IB); (3) restricting further along $j$ gives $\\mathcal M|_U$ with sections $M$ (elementary); (4) $\\widetilde{M'}|_{U}\\cong j^*\\widetilde{M'}\\cong\\widetilde{R\\otimes_{R'}M'}$ by the new Mathlib leaf lem-weil-pbc-open-immersion-module-pullback-restriction (restrictFunctorIsoPullback, with the unit compatibility) and the new unsplit node lem-weil-pbc-tilde-pullback-base-change (Schemes 01I9(1), not in Mathlib: Mathlib has only the pushforward half, isIso_fromTildeΓ_pushforward); (5) the resulting isomorphism is the canonical map $r\\otimes m'\\mapsto r\\,m'|_U$, checked on $1\\otimes m'$ through the unit compatibilities (the source does not write this check). Statement and stmt_deps kept. Mathlib re-searched with LeanSearch, LeanFinder and grep (no match); the existing loogle record of the creator is a prose query, Loogle queries by name for the pieces are recorded on the new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 5 steps along Constructions 01LN via Schemes 01I9(1); the chain theta^{-1}, kappa^{-1}, epsilon| is traced on 1 (x) m' so the isomorphism is the canonical map; three new nodes (one unsplit, two Mathlib leaves, lines verified). lem-weil-pbc-spec-module-tilde-sections (unit sk-thm-reduction) recorded as tool use."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ]
 }

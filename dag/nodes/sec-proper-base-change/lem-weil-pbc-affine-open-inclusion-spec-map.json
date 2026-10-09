@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-affine-open-inclusion-spec-map",
+ "kind": "statement",
+ "title": "Nested affine opens: the inclusion is Spec of the restriction map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U\\subseteq U'$ affine opens of $X$, with $R=\\mathcal O_X(U)$, $R'=\\mathcal O_X(U')$ and $\\rho:R'\\to R$ the restriction map; let $\\iota_U:\\operatorname{Spec}R\\to X$ and $\\iota_{U'}:\\operatorname{Spec}R'\\to X$ be the canonical open immersions with images $U$, $U'$ of [lem-weil-pbc-affine-open-spec-points]. Then $\\iota_{U'}\\circ\\operatorname{Spec}\\rho=\\iota_U$ [def-weil-affine-spectrum], and $\\operatorname{Spec}\\rho:\\operatorname{Spec}R\\to\\operatorname{Spec}R'$ is an open immersion [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), the bottom arrow $U\\to U'$ of its square, read through Schemes, Lemma 01I2 (lemma-category-affine-schemes: morphisms of affine schemes are Spec of ring maps)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for affine opens V ≤ U, Spec of the restriction map composed with the open immersion Spec Γ(U) → X equals Spec Γ(V) → X",
+   "results": "AlgebraicGeometry.affineOpensRestrict, IsAffineOpen.Spec_map_appLE_fromSpec, IsAffineOpen.map_fromSpec, Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top_assoc, IsAffineOpen.fromSpec_app_of_le (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match: IsAffineOpen.map_fromSpec"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.map_fromSpec",
+   "results": "map_fromSpec {X} {U} (hU : IsAffineOpen U) {V} (hV : IsAffineOpen V) (f : op U ⟶ op V) : Spec.map (X.presheaf.map f) ≫ hU.fromSpec = hV.fromSpec (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'map_fromSpec\\|fromSpec_app_of_le\\|isOpenImmersion_fromSpec' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'lemma of_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+   "results": "AffineScheme.lean:469 map_fromSpec, :499 fromSpec_app_of_le, :432 isOpenImmersion_fromSpec; OpenImmersion.lean:501 IsOpenImmersion.of_comp (f ≫ g and g open immersions ⇒ f open immersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineOpen.map_fromSpec, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.IsOpenImmersion.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "how": "one declaration per clause: with hU' : IsAffineOpen U', hU : IsAffineOpen U and f = (homOfLE (U ≤ U')).op : op U' ⟶ op U, map_fromSpec hU' hU f (AffineScheme.lean:469) is Spec.map ρ ≫ hU'.fromSpec = hU.fromSpec (iota_U = hU.fromSpec as recorded on lem-weil-pbc-affine-open-spec-points); Spec.map ρ is an open immersion by IsOpenImmersion.of_comp (Mathlib/AlgebraicGeometry/OpenImmersion.lean:501) with g = hU'.fromSpec, both fromSpec being open immersions (isOpenImmersion_fromSpec, :432)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsAffineOpen.map_fromSpec (AffineScheme.lean:469), isOpenImmersion_fromSpec (:432), IsOpenImmersion.of_comp (OpenImmersion.lean:501)."
+ }
+}

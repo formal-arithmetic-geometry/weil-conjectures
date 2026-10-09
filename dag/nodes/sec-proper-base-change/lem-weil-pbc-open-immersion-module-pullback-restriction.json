@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+ "kind": "statement",
+ "title": "Pullback of modules along an open immersion is restriction",
+ "statement": "Let $f:X\\to Y$ be an open immersion of schemes [def-pc-scheme], [def-weil-open-immersion]. For an $\\mathcal O_Y$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G|_X$ be its restriction along $f$ as in [lem-weil-pbc-module-restriction-open-immersion-colimits] ($(\\mathcal G|_X)(V)=\\mathcal G(f(V))$), with the adjunction $(-)|_X\\dashv f_*$ whose unit $\\mathcal G\\to f_*(\\mathcal G|_X)$ is, on an open $W\\subseteq Y$, the restriction map $\\mathcal G(W)\\to\\mathcal G(f(f^{-1}W))$; and let $f^*$ be the pullback of modules [def-pc-module-pullback] with unit $\\eta:\\mathcal G\\to f_*f^*\\mathcal G$. Then there is an isomorphism $\\kappa_{\\mathcal G}:\\mathcal G|_X\\xrightarrow{\\sim}f^*\\mathcal G$ of $\\mathcal O_X$-modules, natural in $\\mathcal G$, such that $f_*(\\kappa_{\\mathcal G})$ composed with the unit of $(-)|_X\\dashv f_*$ is $\\eta$: for every open $W\\subseteq Y$ and $g\\in\\mathcal G(W)$, $\\kappa_{\\mathcal G}(g|_{f(f^{-1}W)})=\\eta(g)$ in $\\Gamma(f^{-1}W,f^*\\mathcal G)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00A0 (lemma-j-pullback) (2) and its last sentence (modules), with Sheaves, Definition 'restriction' (definition-restriction); for modules $j^*\\mathcal G=\\mathcal O_U\\otimes_{j^{-1}\\mathcal O_X}j^{-1}\\mathcal G=j^{-1}\\mathcal G$ since $j^{-1}\\mathcal O_X=\\mathcal O_U$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a sheaf of modules along an open immersion is isomorphic to the pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf), Scheme.Modules.restrict, restrict_obj, pullbackRestrictIsoRestrict, SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+   "date": "2026-10-10",
+   "verdict": "match: restrictFunctorIsoPullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "results": "restrictFunctorIsoPullback {X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : restrictFunctor f ≅ pullback f (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'restrictFunctorIsoPullback\\|restrictAdjunction_unit_app_app\\|def pullback\\|pullbackPushforwardAdjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; grep -n 'unit_leftAdjointUniq_hom_app' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "results": "Sheaf.lean:183 pullback, :189 pullbackPushforwardAdjunction, :425 restrictAdjunction, :442 restrictAdjunction_unit_app_app (unit = M.presheaf.map (homOfLE (f.image_preimage_le U)).op), :453 restrictFunctorIsoPullback := (restrictAdjunction f).leftAdjointUniq (pullbackPushforwardAdjunction f); Unique.lean:53 unit_leftAdjointUniq_hom_app (adj1.unit.app x ≫ G.map ((leftAdjointUniq adj1 adj2).hom.app x) = adj2.unit.app x)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "how": "exact, one declaration per clause, for f : X ⟶ Y with [IsOpenImmersion f]: kappa is (restrictFunctorIsoPullback f).app G (Sheaf.lean:453, defined as (restrictAdjunction f).leftAdjointUniq (pullbackPushforwardAdjunction f), natural as a NatIso); restrictFunctor f is the restriction of lem-weil-pbc-module-restriction-open-immersion-colimits and its adjunction unit is the restriction map (restrictAdjunction_unit_app_app, :442); the unit compatibility is Adjunction.unit_leftAdjointUniq_hom_app (Mathlib/CategoryTheory/Adjunction/Unique.lean:53) applied to these two adjunctions. Mathlib's Scheme.Modules.pullback (:183) is SheafOfModules.pullback, the left adjoint of pushforward, which is def-pc-module-pullback up to the unique isomorphism of left adjoints."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: restrictFunctorIsoPullback (Modules/Sheaf.lean:453), restrictAdjunction_unit_app_app (:442), Adjunction.unit_leftAdjointUniq_hom_app (Adjunction/Unique.lean:53)."
+ }
+}

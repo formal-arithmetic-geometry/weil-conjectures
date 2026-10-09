@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-tilde-pullback-base-change",
+ "kind": "statement",
+ "title": "Pullback of the sheaf associated to a module along a morphism of affine schemes",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\psi=\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. For an $R$-module $M$ let $\\widetilde M$ and $\\tau:M\\to\\Gamma(\\operatorname{Spec}R,\\widetilde M)$ be as in [lem-weil-pbc-spec-module-tilde-sections] (and likewise for $S$-modules on $\\operatorname{Spec}S$), and let $\\psi^*$ be the pullback of modules [def-pc-module-pullback], left adjoint to $\\psi_*$, with unit $\\eta:\\mathcal G\\to\\psi_*\\psi^*\\mathcal G$. Then there is an isomorphism of $\\mathcal O_{\\operatorname{Spec}S}$-modules [def-weil-sheaf-of-modules-category] $\\theta_M:\\psi^*\\widetilde M\\xrightarrow{\\sim}\\widetilde{S\\otimes_RM}$, natural in $M$, such that for every $m\\in M$\n$$\\theta_M\\bigl(\\eta_{\\widetilde M}(\\tau(m))\\bigr)=\\tau(1\\otimes m)\\quad\\text{in }\\Gamma(\\operatorname{Spec}S,\\widetilde{S\\otimes_RM}),$$\nwhere $\\eta_{\\widetilde M}(\\tau(m))\\in(\\psi_*\\psi^*\\widetilde M)(\\operatorname{Spec}R)=\\Gamma(\\operatorname{Spec}S,\\psi^*\\widetilde M)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), part (1); its proof uses Schemes Lemma 01I7 (lemma-compare-constructions) and Modules Lemma 01BJ (lemma-restrict-quasi-coherent)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of the sheaf associated to a module M along Spec of a ring map R → S is the sheaf associated to S ⊗_R M",
+   "results": "TopCat.Sheaf.pullback, SheafOfModules.pullback, AlgebraicGeometry.pullbackSpecIso (fibre product of spectra, not modules), ModuleCat.tilde; no pullback-of-tilde isomorphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme.Modules.pullback (Spec.map f) (tilde M) ≅ tilde (extendScalars f M)",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, pullbackSpecIso, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.pullback, Scheme.Modules.pullbackPushforwardAdjunction; none relates pullback and tilde",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of the quasi-coherent sheaf tilde M under Spec(S) → Spec(R) is tilde of the base change S ⊗_R M",
+   "results": "Scheme.Modules.pullback, StructureSheaf.toOpen_comp_comap_apply, Scheme.Hom.toRingCatSheafHom, Spec.sheafedSpaceMap_hom_c_app, Scheme.Modules.pullbackPushforwardAdjunction, Spec.map_app, Spec.map_appLE; no tilde/pullback comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of the sheaf tilde M along an open immersion Spec S → Spec R is tilde of S ⊗_R M",
+   "results": "Scheme.Modules.restrict, restrict_obj, restrict_map, restrictFunctor, StructureSheaf.toOpen_comp_comap_assoc, ModuleCat.Tilde.toOpen_res; no comparison with tilde of a tensor product",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.tilde",
+   "results": "no declaration mentions both",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde, TensorProduct",
+   "results": "no declaration mentions both",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.tilde",
+   "results": "no declaration mentions both",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'pullback\\|baseChange\\|TensorProduct\\|⊗\\|extendScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean; grep -rn 'extendScalars\\|baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/; list of all declarations of Modules/Tilde.lean",
+   "results": "Tilde.lean has no pullback or tensor statement; it has the pushforward results isLocalizing_pushforward_of_isLocalizing and isIso_fromTildeΓ_pushforward (:556, :568: pushforward of a quasi-coherent tilde is tilde, i.e. part (2) of 01I9 only) and restrictAppIso_smul_Spec (:127, scalar compatibility only); no extendScalars in AlgebraicGeometry/",
+   "date": "2026-10-10",
+   "verdict": "no match (only part (2) of Stacks 01I9, the pushforward, is in Mathlib)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks Schemes 01I9(1) with the unit compatibility made explicit; self-contained; correct; unsplit. Searches record only part (2) (pushforward) in Mathlib."
+ }
+}
