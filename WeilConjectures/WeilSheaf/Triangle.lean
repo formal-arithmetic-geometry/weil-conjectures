@@ -29,6 +29,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 namespace WeilSheaf
 
