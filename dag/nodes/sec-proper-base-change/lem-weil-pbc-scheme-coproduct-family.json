@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-scheme-coproduct-family",
+ "kind": "statement",
+ "title": "Coproducts of schemes: open coprojections with disjoint images covering",
+ "statement": "Let $I$ be a set and $(X_i)_{i\\in I}$ a family of schemes [def-pc-scheme]. Then a coproduct $X=\\coprod_{i\\in I}X_i$ exists in the category of schemes: there are morphisms $\\iota_i:X_i\\to X$ such that for every scheme $Y$ and every family of morphisms $f_i:X_i\\to Y$ there is a unique morphism $f:X\\to Y$ with $f\\circ\\iota_i=f_i$ for all $i$. Moreover each $\\iota_i$ is an open immersion [def-weil-open-immersion], the images $\\iota_i(X_i)$ are pairwise disjoint for $i\\ne j$, and $X=\\bigcup_{i\\in I}\\iota_i(X_i)$; consequently each $\\iota_i(X_i)$ is open and closed in $X$ (its complement is the open set $\\bigcup_{j\\ne i}\\iota_j(X_j)$).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.14.1 (Tag 01JB, label lemma-glue) and Lemma 26.14.2 (Tag 01JC, label lemma-glue-schemes), applied to the glueing data with $U_{ii}=X_i$ and $U_{ij}=\\varnothing$ for $i\\ne j$: the glued scheme with the open subspaces $U_i\\cong X_i$, and the first mapping property $\\Mor(X,Y)=\\{(f_i)_{i\\in I}\\}$ (no compatibility condition since $U_{ij}=\\varnothing$)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct of a family of schemes, coprojections are open immersions with disjoint images covering",
+   "results": "AlgebraicGeometry.sigmaOpenCover, instHasFiniteCoproductsScheme, instIsOpenImmersionInl/InrScheme, instIsOpenImmersionSigmaSpec, instMonoCoprodScheme, isOpenImmersion_sigmaDesc, instCoproductsOfShapeDisjointSchemeOfSmall (all Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (one lemma per clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coproduct of an arbitrary small family of schemes exists and the inclusions are open immersions",
+   "results": "instCoproductsOfShapeDisjointSchemeOfSmall, instHasFiniteCoproductsScheme, isOpenImmersion_sigmaDesc, instHasColimitsOfShapeDiscreteSchemeOfSmall, nonempty_isColimit_cofanMk_of (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (existence: HasColimitsOfShape (Discrete σ) Scheme)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.disjoint_opensRange_sigmaι",
+   "results": "AlgebraicGeometry.disjoint_opensRange_sigmaι : Disjoint (Sigma.ι g i).opensRange (Sigma.ι g j).opensRange for i ≠ j (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (disjointness clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'sigma|Sigma|coprod|disjoint' Mathlib/AlgebraicGeometry/Limits.lean",
+   "results": "line 187 instance HasColimitsOfShape (Discrete σ) Scheme [Small σ]; line 202 disjoint_opensRange_sigmaι; line 241 sigmaOpenCover (open cover of ∐ g by the Sigma.ι); line 247 sigmaMk (|∐ f| ≃ₜ Σ i, |f i|); line 313 nonempty_isColimit_cofanMk_of",
+   "date": "2026-10-10",
+   "verdict": "match (one lemma per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall, AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.disjoint_opensRange_sigmaι",
+  "file": "Mathlib/AlgebraicGeometry/Limits.lean",
+  "how": "one Mathlib lemma per clause: existence and universal property of the coproduct ∐ g with coprojections Sigma.ι g i for a family indexed by a small type σ (here σ = I, in the universe of the schemes), instance HasColimitsOfShape (Discrete σ) Scheme (Limits.lean:187), the universal property being Sigma.desc / Sigma.ι_desc / Sigma.hom_ext; the coprojections are the maps of the open cover sigmaOpenCover g (Limits.lean:241), hence open immersions whose images cover ∐ g; pairwise disjointness of images: disjoint_opensRange_sigmaι (Limits.lean:202); the clopen consequence is the complement statement written in the node"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-group-scheme-morphism-clopen",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
