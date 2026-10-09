@@ -313,6 +313,26 @@ theorem constructibleHomology_derivedTensor [PreservesFiniteLimits (CategoryTheo
       ((-⊗ᴸ-(X)[A]).flip.obj M))
     (Etale.constructibleSheaf A X) h₀ K hK.1 hK.2
 
+omit [HasSmallSiteSheafify A] in
+/-- If `K` is dualizable of Tor amplitude in `[a, b]` and `M` has Tor amplitude in `[c, d]`,
+then `RHom(K, M) ≅ K^∨ ⊗ᴸ M` has Tor amplitude in `[c - b, d - a]`, the dual `K^∨` having Tor
+amplitude in `[-b, -a]`
+(`DerivedCategory.torAmplitudeIn_of_exactPairing`). -/
+theorem torAmplitudeIn_derivedHom_of_isDualizable_aux {X : Scheme.{u}} {a b c d : ℤ}
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hKt : torAmplitudeIn A X a b K) (hKd : IsDualizable K) (hMt : torAmplitudeIn A X c d M) :
+    torAmplitudeIn A X (c - b) (d - a) (((RHom(X)[A]).obj (op K)).obj M) := by
+  -- `RHom(K, M) ≅ K^∨ ⊗ᴸ M`, and the dual `K^∨` has Tor amplitude in `[-b, -a]`
+  obtain ⟨_⟩ := hKd
+  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor (isDualizable_of_hasRightDual K) M
+  have hd := _root_.DerivedCategory.torAmplitudeIn_of_exactPairing (L := Kᘁ) hKt
+  have h := _root_.DerivedCategory.torAmplitudeIn_tensor hd hMt
+  refine (torAmplitudeIn A X _ _).prop_of_iso
+    (whiskerRightIso (coefficientDualIsoOfExactPairing Kᘁ K).symm M ≪≫ e) ?_
+  rw [show c - b = -b + c by omega, show d - a = -a + d by omega]
+  exact h
+
 /-! ### The derived tensor product at a finite coefficient ring -/
 
 section Tensor
@@ -639,6 +659,8 @@ theorem torAmplitudeIn_derivedHom
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
   sorry
 
+-- `aX` and the coefficient hypotheses are part of the blueprint setting, unused by the proof
+set_option linter.unusedSectionVars false in
 include aX in
 /-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
 
@@ -647,13 +669,13 @@ identification `RHom(K, M) ≅ K^∨ ⊗ᴸ M`. It genuinely fails in general: f
 `i : {0} ⟶ 𝔸¹` both `i_* Λ` and `Λ` have Tor amplitude `[0, 0]` while
 `RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]`. -/
 theorem torAmplitudeIn_derivedHom_of_isDualizable
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (_hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
-    (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
+    (_hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M)
     (hMt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
-  sorry
+  torAmplitudeIn_derivedHom_of_isDualizable_aux _ hKt hKd hMt
 
 end DerivedHom
 

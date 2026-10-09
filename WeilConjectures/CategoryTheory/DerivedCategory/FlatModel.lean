@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.LeftResolution.Reduced
 public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
@@ -358,5 +359,48 @@ lemma torAmplitudeIn_tensor {a b c d : ℤ} {K M : DerivedCategory C}
   obtain ⟨h₁, h₂⟩ := homologyConcentratedIn_tensor_of_torAmplitudeIn_left hK (hM F)
   exact ⟨TStructure.t.isGE_of_iso (α_ K M _).symm _,
     TStructure.t.isLE_of_iso (α_ K M _).symm _⟩
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` vanishes above `d`, then `K ⊗ᴸ N` vanishes
+above `b + d`. -/
+lemma isLE_tensor_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (N : DerivedCategory C) (d : ℤ) [N.IsLE d] :
+    (K ⊗ N).IsLE (b + d) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  obtain ⟨L, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
+  have := CochainComplex.isStrictlyLE_tensorObj P L b d
+  exact TStructure.t.isLE_of_iso (tensorIso e.symm e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P L (CochainComplex.kFlat_of_bounded_of_flat P a b hP)).symm _
+
+/-- If `K` has Tor amplitude in `[a, b]` and `N` vanishes below `c`, then `K ⊗ᴸ N` vanishes
+below `a + c`. -/
+lemma isGE_tensor_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}
+    (hK : torAmplitudeIn C a b K) (N : DerivedCategory C) (c : ℤ) [N.IsGE c] :
+    (K ⊗ N).IsGE (a + c) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  obtain ⟨L, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isGE c
+  have := CochainComplex.isStrictlyGE_tensorObj P L a c
+  exact TStructure.t.isGE_of_iso (tensorIso e.symm e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P L (CochainComplex.kFlat_of_bounded_of_flat P a b hP)).symm _
+
+/-- **The dual of an object of Tor amplitude in `[a, b]` has Tor amplitude in `[-b, -a]`.**
+If `L` is dual to `K` on both sides, maps `G ⟶ L ⊗ᴸ F[0]` correspond to maps
+`K ⊗ᴸ G ⟶ F[0]`, and maps `L ⊗ᴸ F[0] ⟶ G` to maps `F[0] ⟶ K ⊗ᴸ G`; the Tor amplitude of `K`
+makes these vanish for `G` above `-b - 1`, respectively below `-a + 1`. -/
+lemma torAmplitudeIn_of_exactPairing {a b : ℤ} {K L : DerivedCategory C} [ExactPairing L K]
+    [ExactPairing K L] (hK : torAmplitudeIn C a b K) : torAmplitudeIn C (-b) (-a) L := by
+  intro F
+  refine ⟨(TStructure.t.isGE_iff_orthogonal (-b - 1) (-b) (by omega) _).2 fun Y f hY ↦ ?_,
+    (TStructure.t.isLE_iff_orthogonal (-a) (-a + 1) rfl _).2 fun Y f hY ↦ ?_⟩
+  · have : Y.IsLE (-b - 1) := hY
+    have := isLE_tensor_of_torAmplitudeIn hK Y (-b - 1)
+    obtain ⟨g, rfl⟩ := (tensorLeftHomEquiv Y L K ((singleFunctor C 0).obj F)).surjective f
+    rw [TStructure.t.zero g (b + (-b - 1)) 0 (by omega)]
+    simp [tensorLeftHomEquiv]
+  · have : Y.IsGE (-a + 1) := hY
+    have := isGE_tensor_of_torAmplitudeIn hK Y (-a + 1)
+    have h := TStructure.t.zero
+      (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y f) 0 (a + (-a + 1)) (by omega)
+    rw [← (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y).symm_apply_apply f, h]
+    simp [tensorLeftHomEquiv]
 
 end DerivedCategory
