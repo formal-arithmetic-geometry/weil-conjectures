@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-flat-module-base-change",
+ "kind": "statement",
+ "title": "Base change of a flat module is flat",
+ "statement": "Let $R\\to R'$ be a homomorphism of commutative rings and $M$ a flat $R$-module [def-weil-pbc-flat-ring-map]. Then $R'\\otimes_RM$, an $R'$-module through the first factor, is a flat $R'$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HI (lemma-flat-base-change, line 8889), the flat case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a flat module is flat: M flat over R implies S ⊗_R M flat over S",
+   "results": "Module.Flat.baseChange (Mathlib.RingTheory.Flat.Stability), Module.Flat.isBaseChange (same), Module.Flat.iff_flat_tensorProduct (Flat/FaithfullyFlat/Basic), AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Flat.baseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat ?R ?M → Module.Flat ?S (TensorProduct ?R ?S ?M)",
+   "results": "Module.Flat.baseChange (Mathlib.RingTheory.Flat.Stability)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance baseChange\\|theorem isBaseChange' Mathlib/RingTheory/Flat/Stability.lean",
+   "results": "line 100: instance baseChange [Flat R M] : Flat S (S ⊗[R] M); line 103: theorem isBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.baseChange",
+  "file": "Mathlib/RingTheory/Flat/Stability.lean",
+  "line": 100,
+  "how": "exact: for [CommSemiring R] [CommSemiring S] [Algebra R S] [AddCommMonoid M] [Module R M] [Module.Flat R M], `instance baseChange : Flat S (S ⊗[R] M)`; the ring map R → R' is the algebra structure, and Module.Flat is the node's flatness by the match of def-weil-pbc-flat-ring-map. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-completion-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

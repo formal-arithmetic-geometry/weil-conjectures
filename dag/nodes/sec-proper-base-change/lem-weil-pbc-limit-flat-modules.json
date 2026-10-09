@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-limit-flat-modules",
+ "kind": "statement",
+ "title": "An inverse limit of flat modules over the quotients A/I^n is flat over a Noetherian A",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $I\\subseteq A$ an ideal. Let $(M_n)_{n\\ge1}$ be an inverse system of $A$-modules, with $A$-linear transition maps $M_{n+1}\\to M_n$, such that (1) for every $n$, $I^nM_n=0$ and $M_n$ is a flat $A/I^n$-module [def-weil-pbc-flat-ring-map], and (2) every transition map $M_{n+1}\\to M_n$ is surjective. Let $M=\\varprojlim_nM_n$ (compatible sequences $(x_n)_n$, $x_n\\in M_n$, with componentwise $A$-module structure). Then $M$ is a flat $A$-module, and for every finitely generated $A$-module $Q$ the canonical map $Q\\otimes_AM\\to\\varprojlim_nQ\\otimes_AM_n$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0912 (lemma-limit-flat, line 6475); its proof uses Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), Homology Lemma Tag 070E (homology-lemma-apply-Mittag-Leffler-again) and Algebra Lemma Tag 00HD (lemma-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of flat modules over R/I^n with surjective transition maps is flat over Noetherian R",
+   "results": "AdicCompletion.flat_of_isNoetherian (AdicCompletion.AsTensorProduct; R^ flat over R only), Module.DirectLimit (colimits), Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.eval_lift_apply",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian, (M_n) inverse system, M_n flat over A/I^n, surjective transition maps, then the inverse limit of M_n is a flat A-module",
+   "results": "AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Hausdorffification, IsAdicComplete, AdicCompletion, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian (finite modules: R^ ⊗ M ≅ M^), AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian",
+   "date": "2026-10-10",
+   "verdict": "no match (the tensor-product clause is in Mathlib only for M_n = Q/I^nQ with Q finite, not for a general system of flat M_n)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'limit.*[Ff]lat\\|0912\\|0AGW\\|lemma-limit-flat' Mathlib/RingTheory; grep -rln 'Module.Flat' Mathlib/RingTheory/AdicCompletion/",
+   "results": "no hit for 0912 or a limit of flat modules; in AdicCompletion/ only AsTensorProduct.lean mentions Module.Flat (flat_of_isNoetherian, line 379); Flat/Basic.lean has flatness of direct sums only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-completion-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
