@@ -1,0 +1,72 @@
+{
+ "id": "lem-sf-compact-support-restriction-of-scalars",
+ "kind": "statement",
+ "title": "Finite-level compact-support direct image commutes with restriction of scalars",
+ "statement": "Let $X,Y$ be schemes, let $f:X\\to Y$ be a separated morphism of finite type [def-weil-scheme-morphism-properties], and let $c=(j,\\bar f)$, $X\\xrightarrow{j}\\overline X\\xrightarrow{\\bar f}Y$, be a compactification of $f$ [def-weil-compactifications-refinements]: $j$ an open immersion, $\\bar f$ proper, $\\bar f j=f$. Let $\\varphi:A\\to B$ be a homomorphism of finite commutative rings in which $\\ell$ is invertible on $Y$ (for instance the reduction $A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension]). For $W\\in\\{X,\\overline X,Y\\}$ let $\\operatorname{Res}_\\varphi:\\Sh(W_{\\mathrm{proet}},B)\\to\\Sh(W_{\\mathrm{proet}},A)$ be restriction of scalars along the induced map of constant sheaves of rings $A_W\\to B_W$ on the small pro-etale site [def-weil-pbc-proetale-site]; it is exact, so applied termwise it defines a triangulated functor $\\operatorname{Res}_\\varphi:D(W_{\\mathrm{proet}},B)\\to D(W_{\\mathrm{proet}},A)$. Let $Rf^{c,A}_{!}=R\\bar f^{A}_{*}\\,j_!$ and $Rf^{c,B}_{!}=R\\bar f^{B}_{*}\\,j_!$ be the compact-support candidates attached to $c$ with coefficients $A$ and $B$ [def-weil-compact-support-candidate], built from the extension by zero $j_!$ [def-weil-extension-by-zero] and the derived direct image defined with K-injective resolutions [def-weil-pbc-proetale-operations]. Then there is an isomorphism of functors $D(X_{\\mathrm{proet}},B)\\to D(Y_{\\mathrm{proet}},A)$\n\n$$\n Rf^{c,A}_{!}\\circ\\operatorname{Res}_\\varphi\\xrightarrow{\\ \\sim\\ }\\operatorname{Res}_\\varphi\\circ Rf^{c,B}_{!},\n$$\n\nnatural in the argument, namely the composite of the identification $j_!\\operatorname{Res}_\\varphi=\\operatorname{Res}_\\varphi j_!$ (both are computed termwise on the underlying sheaves of abelian groups) with the isomorphism $R\\bar f^{A}_{*}\\operatorname{Res}_\\varphi\\cong\\operatorname{Res}_\\varphi R\\bar f^{B}_{*}$ of [lem-weil-proetale-direct-image-restriction-of-scalars] for $\\bar f$. For composable ring maps $A\\to B\\to C$ these isomorphisms compose to the one for $A\\to C$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "node def-weil-integral-rational-qbar-compact-support, order 1490: the transition maps of the tower $\\operatorname{Res}_nRf_{!,n}K_n$, which the blueprint does not write out",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition) for the direct-image part, as in lem-weil-proetale-direct-image-restriction-of-scalars"
+   },
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.1 (Lemma 6.1.11-6.1.13: $j_!$ on the pro-etale site, computed on underlying sheaves) and Definition 6.7.6 ($f_!=\\bar f_*\\circ j_!$)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-compact-support-candidate",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'proetale\\|ProEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology and site `S.ProEt`), AlgebraicGeometry/Sites/ElladicCohomology.lean (`ellAdicSheaf`, `EllAdicCohomology`); no direct images, no extension by zero, no compact support",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lowerShriek\\|extendByZero\\|compactSupport' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'restrictScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf*",
+   "results": "`SheafOfModules.restrictScalars` (Sheaf/ChangeOfRings.lean:36) and its use in Sheaf/PushforwardContinuous.lean; no derived version and no comparison with derived direct images",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-integral-rational-qbar-compact-support",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
