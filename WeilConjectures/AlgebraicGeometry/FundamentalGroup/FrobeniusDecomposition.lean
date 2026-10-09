@@ -122,4 +122,107 @@ theorem isFrobeniusElement_galoisToFundamentalGroup
   simp only [Iso.refl_hom, Category.id_comp]
   rfl
 
+section Affine
+
+open scoped Pointwise
+
+variable {C : Scheme.{u}} [IsIntegral C] [ConnectedSpace C] {W : C.Opens} (hW : IsAffineOpen W)
+  [Nonempty W] [IsIntegrallyClosed Γ(C, W)]
+  {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+  [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]
+  (z : C) (hz : z ∈ W) [Finite (C.residueField z)] [(hW.primeIdealOf ⟨z, hz⟩).asIdeal.IsMaximal]
+  (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal]
+  [Q.LiesOver (hW.primeIdealOf ⟨z, hz⟩).asIdeal]
+  {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] {s : Spec (.of Ω') ⟶ C}
+  (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)] [TopologicalSpace G]
+  [IsTopologicalGroup G] [CompactSpace G] [IsFundamentalGroup (fiber s) G]
+
+include hz Q in
+/-- **Frobenius lifts exist in the decomposition group.** Let `W` be an affine open of an integral
+scheme `C` with integrally closed ring of sections, `z ∈ W` a closed point with finite residue
+field and `Q` a maximal ideal over `z` of the integral closure of `Γ(C, W)` in a separable closure
+`Ω` of the function field. Then some element of the decomposition group of `Q` maps to a
+Frobenius element at `z` in `π₁(C, s)`, along any path. -/
+theorem exists_mem_stabilizer_isFrobeniusElement
+    (τ : fiber (pointOfAlgebra Ω (Spec.map (CommRingCat.ofHom
+      (algebraMap Γ(C, W) C.functionField)) ≫ hW.fromSpec)) ≅ fiber s) :
+    ∃ σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) Q,
+      IsFrobeniusElement s G z (galoisToFundamentalGroup _ τ G σ) := by
+  have : IsFractionRing Γ(C, W) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C W hW
+  have : IsIntegrallyClosedIn Γ(C, W) C.functionField :=
+    (isIntegrallyClosed_iff_isIntegrallyClosedIn C.functionField).1 inferInstance
+  let m := (hW.primeIdealOf ⟨z, hz⟩).asIdeal
+  let := Ideal.Quotient.field Q
+  have := Ideal.isSepClosed_quotient_integralClosure (R := Γ(C, W)) C.functionField Q
+  -- the residue field at `z` is `Γ(C, W) ⧸ m`
+  let z' : W := ⟨z, hz⟩
+  let _ : Algebra Γ(C, W) (C.presheaf.stalk z') := TopCat.Presheaf.algebra_section_stalk _ z'
+  have := hW.isLocalization_stalk z'
+  let e : Γ(C, W) ⧸ m ≃+* C.residueField z :=
+    IsLocalization.AtPrime.equivQuotMaximalIdeal m (C.presheaf.stalk z')
+  have : Finite (Γ(C, W) ⧸ m) := Finite.of_equiv _ e.symm.toEquiv
+  let : Fintype (Γ(C, W) ⧸ m) := Fintype.ofFinite _
+  let _ : Algebra (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    ((algebraMap (Γ(C, W) ⧸ m) (integralClosure Γ(C, W) Ω ⧸ Q)).comp e.symm.toRingHom).toAlgebra
+  have he : (algebraMap (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q)).comp e.toRingHom =
+      algebraMap (Γ(C, W) ⧸ m) (integralClosure Γ(C, W) Ω ⧸ Q) := by
+    ext x
+    change algebraMap _ _ (e.symm (e x)) = _
+    rw [e.symm_apply_apply]
+    rfl
+  have : Algebra.IsIntegral (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    ⟨fun x ↦ by
+      simpa using (Algebra.IsIntegral.isIntegral (R := Γ(C, W) ⧸ m) x).map_of_comp_eq
+        e.toRingHom (RingHom.id _) (by rw [he]; rfl)⟩
+  have halg : Algebra.IsAlgebraic (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    ⟨fun x ↦ (Algebra.IsIntegral.isIntegral x).isAlgebraic⟩
+  have : PerfectField (C.residueField z) := PerfectField.ofFinite
+  have : PerfectField (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    Algebra.IsAlgebraic.perfectField (C.residueField z)
+  have : Module.IsTorsionFree (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    DivisionSemiring.to_moduleIsTorsionFree
+  have : IsAlgClosure (C.residueField z) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    ⟨IsSepClosed.isAlgClosed_of_perfectField _, halg⟩
+  -- the special point lies over `z`
+  have hpt : pointOfAlgebra (integralClosure Γ(C, W) Ω ⧸ Q) (integralClosurePoint Ω hW.fromSpec) =
+      Spec.map (CommRingCat.ofHom (algebraMap (C.residueField z)
+        (integralClosure Γ(C, W) Ω ⧸ Q))) ≫ C.fromSpecResidueField z := by
+    rw [Scheme.fromSpecResidueField, ← hW.fromSpecStalk_eq_fromSpecStalk hz,
+      IsAffineOpen.fromSpecStalk]
+    simp only [pointOfAlgebra, integralClosurePoint, ← Category.assoc, ← Spec.map_comp]
+    congr 2
+    ext r
+    have hr : C.residue z (C.presheaf.germ W z hz r) = e (Ideal.Quotient.mk m r) := rfl
+    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom]
+    erw [hr]
+    change _ = algebraMap (Γ(C, W) ⧸ m) _ (e.symm (e (Ideal.Quotient.mk m r)))
+    rw [e.symm_apply_apply]
+    rfl
+  -- a lift of the inverse Frobenius
+  let := Ideal.Quotient.field m
+  have : Algebra.IsAlgebraic (Γ(C, W) ⧸ m) (integralClosure Γ(C, W) Ω ⧸ Q) :=
+    ⟨fun x ↦ (Algebra.IsIntegral.isIntegral x).isAlgebraic⟩
+  let F := FiniteField.frobeniusAlgEquivOfAlgebraic (Γ(C, W) ⧸ m)
+    (integralClosure Γ(C, W) Ω ⧸ Q)
+  obtain ⟨⟨σ, hσ⟩, hσF⟩ := Ideal.Quotient.stabilizerHom_surjective_integralClosure
+    (K := C.functionField) m Q F⁻¹
+  refine ⟨σ, hσ, isFrobeniusElement_galoisToFundamentalGroup hW.fromSpec z G hpt σ
+    (F⁻¹ : _ ≃ₐ[_] _).toRingEquiv ?_ ?_ τ⟩
+  · ext b
+    change _ = F⁻¹ (Ideal.Quotient.mk Q b)
+    rw [← hσF, Ideal.Quotient.stabilizerHom_apply]
+    rfl
+  · intro y
+    have hcard : Nat.card (C.residueField z) = Fintype.card (Γ(C, W) ⧸ m) := by
+      rw [← Nat.card_eq_fintype_card]
+      exact Nat.card_congr e.symm.toEquiv
+    rw [hcard]
+    change ((F⁻¹ : _ ≃ₐ[_] _) y) ^ Fintype.card (Γ(C, W) ⧸ m) = y
+    have h := congrFun (FiniteField.coe_frobeniusAlgEquivOfAlgebraic (Γ(C, W) ⧸ m)
+      (integralClosure Γ(C, W) Ω ⧸ Q)) ((F⁻¹ : _ ≃ₐ[_] _) y)
+    exact h.symm.trans (F.apply_symm_apply y)
+
+end Affine
+
 end AlgebraicGeometry.Scheme.FiniteEtale
