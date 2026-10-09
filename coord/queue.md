@@ -1,18 +1,16 @@
 # Work queue
 
-563 items; claim with `tools/claim.py next <group> [--stage N]`.
+562 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (559)
+## Stage 1: nodes to split (557)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `prop-weil-pbc-inverse-image-exact` | 2 | none |
 | `lem-sp-derived-couple-exact` | 3 | none |
 | `lem-weil-pbc-triangle-morphism-extension` | 3 | none |
 | `lem-weil-pbc-truncation-descends` | 3 | none |
 | `lem-weil-pbc-truncation-step-ses` | 3 | none |
 | `def-weil-pbc-scheme-conventions` | 1001 | none |
-| `def-weil-pbc-torsion-etale-sheaf` | 1001 | none |
 | `def-weil-pbc-derived-inverse-image` | 1002 | none |
 | `def-weil-pbc-derived-square-iso` | 1002 | none |
 | `lem-weil-pbc-derived-exchange-triangulated` | 1002 | none |
@@ -566,16 +564,17 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (4)
+## Stage 2: nodes to state (5)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
+| `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 573 nodes that wait for stage 1, 34 nodes that wait for a statement dependency.
+Not open yet: 571 nodes that wait for stage 1, 35 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

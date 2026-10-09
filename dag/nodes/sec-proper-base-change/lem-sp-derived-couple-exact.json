@@ -2,17 +2,161 @@
  "id": "lem-sp-derived-couple-exact",
  "kind": "statement",
  "title": "The derived couple of an exact couple is exact",
- "statement": "Let $(D,E,\\alpha,f,g)$ be an exact couple in an abelian category [def-sp-exact-couple], with $d=g\\circ f:E^{p,q}\\to E^{p+2,q-1}$. Then $\\ker(d)=f^{-1}(\\ker g)=f^{-1}(\\operatorname{im}\\alpha)$ and $\\operatorname{im}(d)=g(\\operatorname{im}f)=g(\\ker\\alpha)$ (as subobjects of $E^{p,q}$); the maps $\\alpha',f',g'$ of the derived couple $(D',E',\\alpha',f',g')$ of [def-sp-exact-couple] ($D'^{p,q}=\\operatorname{im}(\\alpha:D^{p+1,q-1}\\to D^{p,q})$, $E'^{p,q}=\\ker d/\\operatorname{im}d$) are well defined, $g'$ being the unique map with $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ for the epimorphism $\\bar\\alpha:D^{p+1,q-1}\\twoheadrightarrow D'^{p,q}$, the factorization $\\hat g:D^{p+1,q-1}\\to\\ker d\\subseteq E^{p+1,q-1}$ of $g$ and the projection $\\pi:\\ker d\\to E'^{p+1,q-1}$; and the derived couple is again an exact couple, with $\\alpha'$ of bidegree $(-1,+1)$, $f'$ of bidegree $(+2,-1)$, $g'$ of bidegree $(+1,-1)$, and at every bidegree the kernel of each of its arrows equal to the image of its predecessor. Consequently the iterated couples $C_2=(D,E,\\alpha,f,g)$, $C_{r+1}=C_r'$ are exact couples for all $r\\geq2$; $C_r=(D_r,E_r,\\alpha_r,f_r,g_r)$ has $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r-2,q-r+2}\\to D^{p,q})$, $\\alpha_r$ the restriction of $\\alpha$, $f_r$ of bidegree $(+2,-1)$, $g_r$ of bidegree $(r-2,2-r)$, and $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$ with $d_r=g_r\\circ f_r$ of bidegree $(r,1-r)$.",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $s\\geq0$ an integer. An *exact couple of type $s$* $(D,E,\\alpha,f,g)$ in $\\mathcal A$ consists of objects $D^{p,q},E^{p,q}$ ($p,q\\in\\mathbf Z$) and morphisms $\\alpha:D^{p,q}\\to D^{p-1,q+1}$, $f:E^{p,q}\\to D^{p+2,q-1}$, $g:D^{p,q}\\to E^{p+s,q-s}$ such that at every $(p,q)$ the three sequences\n$$E^{p-2,q+1}\\xrightarrow{f}D^{p,q}\\xrightarrow{\\alpha}D^{p-1,q+1},\\qquad D^{p-s,q+s}\\xrightarrow{g}E^{p,q}\\xrightarrow{f}D^{p+2,q-1},\\qquad D^{p+1,q-1}\\xrightarrow{\\alpha}D^{p,q}\\xrightarrow{g}E^{p+s,q-s}$$\nare complexes and exact in the middle (the kernel of each arrow is the image of its predecessor). Type $0$ is the exact couple of [def-sp-exact-couple]. Put $d=g\\circ f:E^{p,q}\\to E^{p+s+2,q-s-1}$. The *derived couple* $(D',E',\\alpha',f',g')$ is: $D'^{p,q}=\\operatorname{im}(\\alpha:D^{p+1,q-1}\\to D^{p,q})$, with inclusion $\\iota:D'^{p,q}\\hookrightarrow D^{p,q}$ and epimorphism $\\bar\\alpha:D^{p+1,q-1}\\twoheadrightarrow D'^{p,q}$, $\\iota\\circ\\bar\\alpha=\\alpha$; $E'^{p,q}=\\ker(d:E^{p,q}\\to E^{p+s+2,q-s-1})/\\operatorname{im}(d:E^{p-s-2,q+s+1}\\to E^{p,q})$ with projection $\\pi$; $\\alpha':D'^{p,q}\\to D'^{p-1,q+1}$ the unique map with $\\iota\\circ\\alpha'=\\alpha\\circ\\iota$; $f':E'^{p,q}\\to D'^{p+2,q-1}$ the unique map with $\\iota\\circ f'\\circ\\pi=f|_{\\ker d}$; $g':D'^{p,q}\\to E'^{p+s+1,q-s-1}$ the unique map with $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$, where $\\hat g:D^{p+1,q-1}\\to\\ker(d)\\subseteq E^{p+s+1,q-s-1}$ is the factorization of $g$. Then:\n\n1. $\\ker(d:E^{p,q}\\to E^{p+s+2,q-s-1})=f^{-1}(\\ker g)=f^{-1}(\\operatorname{im}\\alpha)$, with $\\ker g=\\operatorname{im}\\alpha\\subseteq D^{p+2,q-1}$, and $\\operatorname{im}(d:E^{p-s-2,q+s+1}\\to E^{p,q})=g(\\operatorname{im}f)=g(\\ker\\alpha)$, with $\\operatorname{im}f=\\ker\\alpha\\subseteq D^{p-s,q+s}$ (equalities of subobjects of $E^{p,q}$; $f^{-1}$ is the pullback of a subobject, $g(S)$ the image of $S\\hookrightarrow D\\xrightarrow{g}E$).\n2. The maps $\\alpha',f',g'$ exist and are unique as stated (in particular $d\\circ d=0$, $f(\\ker d)\\subseteq\\operatorname{im}\\alpha$, $g$ factors through $\\ker d$, and $\\pi\\circ\\hat g$ vanishes on $\\ker\\bar\\alpha$).\n3. The derived couple is an exact couple of type $s+1$: $\\alpha'$ has bidegree $(-1,+1)$, $f'$ bidegree $(+2,-1)$, $g'$ bidegree $(s+1,-s-1)$, and its three sequences are complexes, exact in the middle.\n4. (Iteration, Stacks 011S.) For an exact couple $C=(D,E,\\alpha,f,g)$ of [def-sp-exact-couple] put $C_2=C$ and $C_{r+1}=C_r'$. Then $C_r=(D_r,E_r,\\alpha_r,f_r,g_r)$ is an exact couple of type $r-2$ for all $r\\geq2$; $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r-2,q-r+2}\\to D^{p,q})$ as a subobject of $D^{p,q}$, $\\alpha_r$ is the restriction of $\\alpha$, $f_r$ has bidegree $(+2,-1)$, $g_r$ bidegree $(r-2,2-r)$, $d_r=g_r\\circ f_r$ bidegree $(r,1-r)$, and $E_{r+1}^{p,q}=\\ker(d_r\\text{ out of }E_r^{p,q})/\\operatorname{im}(d_r\\text{ into }E_r^{p,q})$.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21, Lemma 12.21.2 (Tag 011R), proof omitted there; Definition 12.21.3 (Tag 011S) for the iteration; the bigraded (shift-functor) form is Remark 12.21.5 (Tag 0AMJ)."
+  "place": "Section 12.21 (Spectral sequences: exact couples): Lemma 12.21.2 (Tag 011R), proof omitted there; Definition 12.21.1 (Tag 011Q); Definition 12.21.3 (Tag 011S) for the iteration; Remark 12.21.5 (Tag 0AMJ) for the shifted (bigraded) form, whose footnote gives the well-definedness of g'; Lemma 12.21.4 (Tag 011T) for the use of elements T -> X with a test object T."
  },
  "stmt_deps": [
+  "def-sp-abelian",
   "def-sp-exact-couple"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 0 (element calculus).** Elements: as in [lem-sp-abelian-refinements], an element of $X$ is a morphism $a:T\\to X$ from any object $T$ (the test objects of Stacks Lemma 12.21.4, Tag 011T), and \"up to refinement\" means after precomposing with an epimorphism $\\rho:T'\\twoheadrightarrow T$; elements of $X$ with a common $T$ form the abelian group $\\operatorname{Hom}(T,X)$, so differences are literal. No embedding theorem (Freyd-Mitchell) is used. An element $a$ of $X$ *lies in* a subobject $S\\overset{i}\\hookrightarrow X$ if $a=i\\circ b$ for some (unique, $i$ mono) $b:T\\to S$. Facts used below: (F0) if $\\rho$ is an epimorphism and $a\\circ\\rho$ lies in $S$, then $a$ lies in $S$: in an abelian category $i$ is a kernel [def-sp-abelian], namely of its cokernel $c:X\\to X/S$, and $c\\circ a\\circ\\rho=0$ gives $c\\circ a=0$ as $\\rho$ is epi. (F1) $a$ lies in $\\ker u$ iff $u\\circ a=0$ (universal property of the kernel). (F2) $a$ lies in $\\operatorname{im}u$ ($u:Z\\to X$) iff there are an epimorphism $\\rho$ and $z$ with $a\\circ\\rho=u\\circ z$: ($\\Rightarrow$) [lem-sp-abelian-refinements](a) for the epimorphism $Z\\twoheadrightarrow\\operatorname{im}u$; ($\\Leftarrow$) $u\\circ z$ lies in $\\operatorname{im}u$, then (F0). (F3) for $u:X\\to Y$ and $S\\subseteq Y$, $a$ lies in $u^{-1}(S)=X\\times_YS$ iff $u\\circ a$ lies in $S$ (universal property of the fibre product). (F4) $S\\subseteq S'$ iff the arrow of $S$ (an element of $X$) lies in $S'$ (definition of the order on subobjects); hence two subobjects in which the same elements lie are equal. (F5) for $v:Y\\to Z$ and $S\\subseteq Y$, $z$ lies in $v(S)=\\operatorname{im}(S\\hookrightarrow Y\\xrightarrow{v}Z)$ iff up to refinement $z\\circ\\rho=v\\circ y$ with $y$ lying in $S$ (F2). (F6) if $c$ is a cokernel of $u:Z\\to X$, then $c\\circ a=0$ iff up to refinement $a\\circ\\rho=u\\circ z$ ([lem-sp-abelian-refinements](c)). (F7) a three-term complex is exact iff every element killed by the second arrow lifts along the first up to refinement ([lem-sp-abelian-refinements](b)); an epimorphism is surjective up to refinement ((a)); and two morphisms $u,v:X\\to Y$ with $u\\circ a\\circ\\rho=v\\circ a\\circ\\rho$ for $a=\\mathrm{id}_X$ and an epi $\\rho$ are equal. Compositions of epimorphisms are epimorphisms, so refinements may be repeated.",
+   "uses": [
+    "lem-sp-abelian-refinements",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 12.5 (Abelian categories), Lemmas Tag 08N5, 05PK, 010C and Definition Tag 010E; Section 12.21, Lemma 12.21.4 (Tag 011T) for the test-object elements"
+   }
+  },
+  {
+   "text": "**Step 1 ($d\\circ d=0$).** Exactness implies that the three sequences are complexes: $\\alpha\\circ f=0$, $f\\circ g=0$, $g\\circ\\alpha=0$ (image contained in kernel). Hence $d\\circ d=g\\circ(f\\circ g)\\circ f=0$, for $d:E^{p,q}\\to E^{p+s+2,q-s-1}$ followed by $d:E^{p+s+2,q-s-1}\\to E^{p+2s+4,q-2s-2}$. So $\\operatorname{im}d\\subseteq\\ker d$ and $E'$ is defined; let $\\hat d:E^{p-s-2,q+s+1}\\to\\ker(d:E^{p,q}\\to\\cdot)$ be the factorization of $d$, so $\\iota_{\\ker d}\\circ\\hat d=d$; since $E^{p-s-2,q+s+1}\\twoheadrightarrow\\operatorname{im}d\\hookrightarrow\\ker d$, $\\pi:\\ker d\\to E'^{p,q}$ is a cokernel of $\\hat d$. (For $s=0$ this is the remark $d\\circ d=0$ of Stacks Lemma 12.21.2(1); for general $s$ the computation of Remark 12.21.5.)",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), item (1) of the setup; Remark 12.21.5 (Tag 0AMJ), \"Then d o S^{-1}d = ... = 0 because f o S^{-1}g = 0\""
+   }
+  },
+  {
+   "text": "**Step 2 (claim 1, kernel of $d$).** Using elements (Step 0). Let $a:T\\to E^{p,q}$. By (F1) $a$ lies in $\\ker d$ iff $g\\circ(f\\circ a)=0$ iff $f\\circ a$ lies in $\\ker(g:D^{p+2,q-1}\\to E^{p+s+2,q-s-1})$ (F1) iff $a$ lies in $f^{-1}(\\ker g)$ (F3). By (F4) $\\ker d=f^{-1}(\\ker g)$. Exactness of $D^{p+3,q-2}\\xrightarrow{\\alpha}D^{p+2,q-1}\\xrightarrow{g}E^{p+s+2,q-s-1}$ gives $\\ker g=\\operatorname{im}\\alpha$, so $\\ker d=f^{-1}(\\operatorname{im}\\alpha)$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (1); Remark 12.21.5 (Tag 0AMJ), conclusion (1)"
+   }
+  },
+  {
+   "text": "**Step 3 (claim 1, image of $d$).** Using elements. Let $a:T\\to E^{p,q}$. By (F2), $a$ lies in $\\operatorname{im}(d:E^{p-s-2,q+s+1}\\to E^{p,q})$ iff up to refinement $a\\circ\\rho=g\\circ(f\\circ x)$ for some $x:T'\\to E^{p-s-2,q+s+1}$. By (F5) and (F2), $a$ lies in $g(\\operatorname{im}f)$ (with $f:E^{p-s-2,q+s+1}\\to D^{p-s,q+s}$) iff up to refinement $a\\circ\\rho=g\\circ y$ with $y$ lying in $\\operatorname{im}f$, i.e. (F2, a further refinement $\\rho'$) $y\\circ\\rho'=f\\circ x$; then $a\\circ\\rho\\circ\\rho'=g\\circ f\\circ x$. Conversely from $a\\circ\\rho=g\\circ(f\\circ x)$ take $y=f\\circ x$. So the same elements lie in both subobjects, and $\\operatorname{im}d=g(\\operatorname{im}f)$ by (F4). Exactness of $E^{p-s-2,q+s+1}\\xrightarrow{f}D^{p-s,q+s}\\xrightarrow{\\alpha}D^{p-s-1,q+s+1}$ gives $\\operatorname{im}f=\\ker\\alpha$, so $\\operatorname{im}d=g(\\ker\\alpha)$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (2); Remark 12.21.5 (Tag 0AMJ), conclusion (2)"
+   }
+  },
+  {
+   "text": "**Step 4 ($\\alpha'$ well defined).** The morphism $\\alpha\\circ\\iota:D'^{p,q}\\to D^{p-1,q+1}$ equals $\\alpha\\circ(\\iota)$ with $\\iota$ an element of $D^{p,q}$, so it lies in $\\operatorname{im}(\\alpha:D^{p,q}\\to D^{p-1,q+1})=D'^{p-1,q+1}$ (F2 with $\\rho=\\mathrm{id}$): there is a unique $\\alpha':D'^{p,q}\\to D'^{p-1,q+1}$ with $\\iota\\circ\\alpha'=\\alpha\\circ\\iota$ (unique as $\\iota$ is mono). It has bidegree $(-1,+1)$. Moreover $\\alpha'\\circ\\bar\\alpha=\\bar\\alpha\\circ\\alpha$ as maps $D^{p+1,q-1}\\to D'^{p-1,q+1}$ (here $\\alpha:D^{p+1,q-1}\\to D^{p,q}$ and the second $\\bar\\alpha:D^{p,q}\\twoheadrightarrow D'^{p-1,q+1}$): both give $\\alpha\\circ\\alpha$ after $\\iota$, which is mono.",
+   "uses": [
+    "lem-sp-abelian-refinements",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), item (4) of the setup; Remark 12.21.5 (Tag 0AMJ), \"alpha' induced by alpha\""
+   }
+  },
+  {
+   "text": "**Step 5 ($f'$ well defined).** Let $j:\\ker(d)\\hookrightarrow E^{p,q}$. By Step 2, $j$ lies in $\\ker d=f^{-1}(\\operatorname{im}\\alpha)$, so by (F3) $f\\circ j$ lies in $\\operatorname{im}(\\alpha:D^{p+3,q-2}\\to D^{p+2,q-1})=D'^{p+2,q-1}$: $f\\circ j=\\iota\\circ\\hat f$ for a unique $\\hat f:\\ker d\\to D'^{p+2,q-1}$. Then $\\iota\\circ\\hat f\\circ\\hat d=f\\circ j\\circ\\hat d=f\\circ d=(f\\circ g)\\circ f=0$ (Step 1), and $\\iota$ is mono, so $\\hat f\\circ\\hat d=0$. Since $\\pi$ is a cokernel of $\\hat d$ (Step 1), $\\hat f=f'\\circ\\pi$ for a unique $f':E'^{p,q}\\to D'^{p+2,q-1}$, of bidegree $(+2,-1)$; $\\iota\\circ f'\\circ\\pi=f\\circ j$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Remark 12.21.5 (Tag 0AMJ): \"f' induced by f which works because f(Ker(d)) is contained in Ker(g) = Im(T alpha)\"; Lemma 12.21.2 (Tag 011R), item (5) of the setup"
+   }
+  },
+  {
+   "text": "**Step 6 ($g'$ well defined).** Let $g:D^{p+1,q-1}\\to E^{p+s+1,q-s-1}$. Since $d\\circ g=g\\circ(f\\circ g)=0$, $g=j\\circ\\hat g$ for a unique $\\hat g:D^{p+1,q-1}\\to\\ker(d:E^{p+s+1,q-s-1}\\to\\cdot)$ (F1). Also $j\\circ\\hat g\\circ f=g\\circ f=d=j\\circ\\hat d$ for $f:E^{p-1,q}\\to D^{p+1,q-1}$, so $\\hat g\\circ f=\\hat d$ and $\\pi\\circ\\hat g\\circ f=\\pi\\circ\\hat d=0$. The kernel of the epimorphism $\\bar\\alpha:D^{p+1,q-1}\\twoheadrightarrow D'^{p,q}$ is $\\ker\\alpha$ ($\\iota$ mono), which equals $\\operatorname{im}(f:E^{p-1,q}\\to D^{p+1,q-1})$ by exactness; as $f$ factors through the epimorphism $E^{p-1,q}\\twoheadrightarrow\\operatorname{im}f$, $\\pi\\circ\\hat g$ vanishes on $\\ker\\bar\\alpha$. In an abelian category an epimorphism is a cokernel [def-sp-abelian], namely of its kernel, so there is a unique $g':D'^{p,q}\\to E'^{p+s+1,q-s-1}$ with $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$; it has bidegree $(s+1,-s-1)$. This is \\\"$g\\circ\\alpha^{-1}$\\\" of Stacks: changing a preimage under $\\alpha$ by $\\ker\\alpha=\\operatorname{im}f$ changes $g$ of it by $\\operatorname{im}d$ (Step 3).",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), item (6) of the setup; Remark 12.21.5 (Tag 0AMJ), footnote: \"T g(Ker(T alpha)) = T g(Im(T f)) = Im(T(d)) and TS(d)(Im(Tg)) = 0\""
+   }
+  },
+  {
+   "text": "**Step 7 (exactness at $D'$ between $f'$ and $\\alpha'$).** Using elements. Claim: $\\ker(\\alpha':D'^{p,q}\\to D'^{p-1,q+1})=\\operatorname{im}(f':E'^{p-2,q+1}\\to D'^{p,q})$. Complex: $\\iota\\circ\\alpha'\\circ f'\\circ\\pi=\\alpha\\circ\\iota\\circ f'\\circ\\pi=\\alpha\\circ f\\circ j=0$; $\\iota$ mono and $\\pi$ epi give $\\alpha'\\circ f'=0$. Exact: let $y:T\\to D'^{p,q}$ with $\\alpha'\\circ y=0$. Then $\\alpha\\circ(\\iota\\circ y)=\\iota\\circ\\alpha'\\circ y=0$, so $\\iota\\circ y$ lies in $\\ker\\alpha=\\operatorname{im}(f:E^{p-2,q+1}\\to D^{p,q})$: up to refinement $\\iota\\circ y\\circ\\rho=f\\circ x$ (F2). Then $d\\circ x=g\\circ f\\circ x=(g\\circ\\iota)\\circ y\\circ\\rho=0$ because $g\\circ\\iota=0$ ($D'^{p,q}=\\operatorname{im}\\alpha=\\ker g$). So $x=j\\circ\\hat x$ (F1) and $\\iota\\circ f'\\circ(\\pi\\circ\\hat x)=f\\circ j\\circ\\hat x=f\\circ x=\\iota\\circ y\\circ\\rho$, hence $y\\circ\\rho=f'\\circ(\\pi\\circ\\hat x)$ ($\\iota$ mono). By (F7) the complex is exact.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (3), \"Ker(alpha') = Im(f')\"; proof omitted in Stacks, written out here"
+   }
+  },
+  {
+   "text": "**Step 8 (exactness at $E'$ between $g'$ and $f'$).** Using elements. Claim: $\\ker(f':E'^{p,q}\\to D'^{p+2,q-1})=\\operatorname{im}(g':D'^{p-s-1,q+s+1}\\to E'^{p,q})$. Complex: $\\iota\\circ f'\\circ g'\\circ\\bar\\alpha=\\iota\\circ f'\\circ\\pi\\circ\\hat g=f\\circ j\\circ\\hat g=f\\circ g=0$, and $\\iota$ mono, $\\bar\\alpha$ epi, so $f'\\circ g'=0$. Exact: let $e:T\\to E'^{p,q}$ with $f'\\circ e=0$. As $\\pi$ is epi, up to refinement $e\\circ\\rho=\\pi\\circ z$ with $z:T'\\to\\ker d$ (F7). Then $f\\circ(j\\circ z)=\\iota\\circ f'\\circ\\pi\\circ z=\\iota\\circ f'\\circ e\\circ\\rho=0$, so $j\\circ z$ lies in $\\ker f=\\operatorname{im}(g:D^{p-s,q+s}\\to E^{p,q})$: up to refinement $j\\circ z\\circ\\rho'=g\\circ w$, $w:T''\\to D^{p-s,q+s}$ (F2). Then $j\\circ\\hat g\\circ w=g\\circ w=j\\circ z\\circ\\rho'$, so $\\hat g\\circ w=z\\circ\\rho'$, and for the element $\\bar\\alpha\\circ w$ of $D'^{p-s-1,q+s+1}$: $g'\\circ\\bar\\alpha\\circ w=\\pi\\circ\\hat g\\circ w=\\pi\\circ z\\circ\\rho'=e\\circ\\rho\\circ\\rho'$. So $e$ lifts along $g'$ up to refinement; by (F7) the complex is exact.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (3), \"Ker(f') = Im(g')\"; proof omitted in Stacks, written out here"
+   }
+  },
+  {
+   "text": "**Step 9 (exactness at $D'$ between $\\alpha'$ and $g'$).** Using elements. Claim: $\\ker(g':D'^{p,q}\\to E'^{p+s+1,q-s-1})=\\operatorname{im}(\\alpha':D'^{p+1,q-1}\\to D'^{p,q})$. Complex: by Step 4, $g'\\circ\\alpha'\\circ\\bar\\alpha=g'\\circ\\bar\\alpha\\circ\\alpha=\\pi\\circ\\hat g\\circ\\alpha$ (with $\\alpha:D^{p+2,q-2}\\to D^{p+1,q-1}$), and $j\\circ\\hat g\\circ\\alpha=g\\circ\\alpha=0$, so $\\hat g\\circ\\alpha=0$; $\\bar\\alpha$ epi gives $g'\\circ\\alpha'=0$. Exact: let $y:T\\to D'^{p,q}$ with $g'\\circ y=0$. As $\\bar\\alpha$ is epi, up to refinement $y\\circ\\rho=\\bar\\alpha\\circ y'$, $y':T'\\to D^{p+1,q-1}$. Then $\\pi\\circ\\hat g\\circ y'=g'\\circ y\\circ\\rho=0$, so by (F6) ($\\pi$ a cokernel of $\\hat d$) up to refinement $\\hat g\\circ y'\\circ\\rho'=\\hat d\\circ x$ with $x:T''\\to E^{p-1,q}$; applying $j$: $g\\circ y'\\circ\\rho'=d\\circ x=g\\circ(f\\circ x)$. In the group $\\operatorname{Hom}(T'',D^{p+1,q-1})$, $g\\circ(y'\\circ\\rho'-f\\circ x)=0$, so $y'\\circ\\rho'-f\\circ x$ lies in $\\ker g=\\operatorname{im}(\\alpha:D^{p+2,q-2}\\to D^{p+1,q-1})$: up to refinement $(y'\\circ\\rho'-f\\circ x)\\circ\\rho''=\\alpha\\circ z$ (F2). Then, using $\\alpha\\circ f=0$, $\\iota\\circ y\\circ\\rho\\circ\\rho'\\circ\\rho''=\\alpha\\circ y'\\circ\\rho'\\circ\\rho''=\\alpha\\circ f\\circ x\\circ\\rho''+\\alpha\\circ\\alpha\\circ z=\\alpha\\circ\\alpha\\circ z=\\iota\\circ\\bar\\alpha\\circ\\alpha\\circ z=\\iota\\circ\\alpha'\\circ(\\bar\\alpha\\circ z)$ (Step 4), so $y\\circ\\rho\\circ\\rho'\\circ\\rho''=\\alpha'\\circ(\\bar\\alpha\\circ z)$ with $\\bar\\alpha\\circ z$ an element of $D'^{p+1,q-1}$. By (F7) the complex is exact.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (3), \"Ker(g') = Im(alpha')\"; proof omitted in Stacks, written out here"
+   }
+  },
+  {
+   "text": "**Step 10 (claims 2 and 3).** Steps 4-6 construct $\\alpha',f',g'$ with the stated equations and uniqueness, of bidegrees $(-1,+1)$, $(+2,-1)$, $(s+1,-s-1)$. Steps 7-9, read at every $(p,q)$, are exactly the three conditions for an exact couple of type $s+1$: the sequences $E'^{p-2,q+1}\\xrightarrow{f'}D'^{p,q}\\xrightarrow{\\alpha'}D'^{p-1,q+1}$ (Step 7), $D'^{p-s-1,q+s+1}\\xrightarrow{g'}E'^{p,q}\\xrightarrow{f'}D'^{p+2,q-1}$ (Step 8) and $D'^{p+1,q-1}\\xrightarrow{\\alpha'}D'^{p,q}\\xrightarrow{g'}E'^{p+s+1,q-s-1}$ (Step 9) are complexes and exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (Tag 011R), conclusion (3); Remark 12.21.5 (Tag 0AMJ), conclusion (3)"
+   }
+  },
+  {
+   "text": "**Step 11 (claim 4, iteration).** Induction on $r\\geq2$. $C_2=C$ is an exact couple of type $0$ [def-sp-exact-couple] with $D_2=D=\\operatorname{im}(\\alpha^0)$. If $C_r$ is an exact couple of type $r-2$ with $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r-2,q-r+2}\\to D^{p,q})$ and $\\alpha_r$ the restriction of $\\alpha$, then by Step 10 $C_{r+1}=C_r'$ is an exact couple of type $r-1$, $\\alpha_{r+1}$ is the restriction of $\\alpha_r$, hence of $\\alpha$ (Step 4), $f_{r+1}$ has bidegree $(+2,-1)$ and $g_{r+1}$ bidegree $(r-1,1-r)$; and $D_{r+1}^{p,q}=\\operatorname{im}(\\alpha_r:D_r^{p+1,q-1}\\to D_r^{p,q})$, viewed in $D^{p,q}$ through the inclusions, is $\\alpha(D_r^{p+1,q-1})=\\alpha(\\operatorname{im}\\alpha^{r-2})$, which equals $\\operatorname{im}(\\alpha^{r-1}:D^{p+r-1,q-r+1}\\to D^{p,q})$ by the argument of Step 3 (an element lies in either iff up to refinement it is $\\alpha\\circ\\alpha^{r-2}\\circ c$; (F2), (F5), (F4)). The differential $d_r=g_r\\circ f_r$ of a couple of type $r-2$ has bidegree $(2+(r-2),-1-(r-2))=(r,1-r)$, and $E_{r+1}=E_r'=\\ker d_r/\\operatorname{im}d_r$ by the definition of the derived couple. This is the spectral sequence of the couple, Stacks Definition 12.21.3 (Tag 011S), in the bigraded form of Remark 12.21.5 (Tag 0AMJ), with the indexing $E_2=E$ of [def-sp-exact-couple].",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 12.21.3 (Tag 011S); Remark 12.21.5 (Tag 0AMJ), \"We obtain a spectral sequence ... with d_r : E_r -> T^{r-1}SE_r\"; Lemma 12.21.4 (Tag 011T), Z_{r+1}=f^{-1}(Im(alpha^r))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-abelian-refinements",
+  "def-sp-abelian",
+  "def-sp-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +192,31 @@
    "results": "HomologicalComplex.HomologySequence.composableArrows₂_exact / composableArrows₅_exact (long exact homology sequence), ShortComplex.SnakeInput.L₂'_exact, exact_C₂_up/down, L₂_exact: no exact couples",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived couple of an exact couple, exactness of the derived couple",
+   "results": "ShortComplex.SnakeInput.L1'_exact / L2'_exact / L0'_exact (SnakeLemma), ProjectiveResolution.exact_succ, groupCohomology.mapShortComplex1_exact, Abelian.Ext.covariantSequence_exact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple (D, E, i, j, k) with derived couple and associated spectral sequence",
+   "results": "HomologicalComplex.HomologySequence.composableArrows5_exact / composableArrows2_exact / composableArrows3_exact / snakeInput, HomologicalComplex.shortExact_of_degreewise_shortExact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'exact couple\\|ExactCouple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'Pseudoelement' same; sed -n 60,75p Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "results": "no file on exact couples; Pseudoelement only in CategoryTheory/Abelian/Pseudoelements.lean, Abelian/Refinements.lean and a comment of Subobject/Basic.lean (\"Pseudoelements X agrees with Subobject X, but we haven't developed this in mathlib yet\"); the element calculus used is Abelian/Refinements.lean, node lem-sp-abelian-refinements",
+   "date": "2026-10-09",
+   "verdict": "no match for the lemma; element calculus available (lem-sp-abelian-refinements)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +236,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sp-derived-couple-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks homology.tex Section 12.21 (Lemma 011R, proof omitted; Definitions 011Q, 011S; Lemma 011T; Remark 0AMJ with its footnote) and Section 12.5 (Lemmas 08N5, 05PK, 010C). Statement generalized from the type-0 couple of def-sp-exact-couple to an exact couple of type s (g of bidegree (s,-s)), which the iteration needs: the derived couple of a type-0 couple has g' of bidegree (1,-1), so the induction for C_r runs over types r-2; for s=0 the statement is the old one. Claims stated as before (ker d, im d, well-definedness of alpha', f', g', exactness of the derived couple, D_r = im alpha^{r-2}, bidegrees). Proof written in 12 steps: element calculus with elements T -> X up to epimorphic refinement (Stacks 011T/08N5; Mathlib Refinements.lean, new Mathlib-leaf node lem-sp-abelian-refinements), d o d = 0, the two subobject identities, the three constructions by universal properties (epi = cokernel of its kernel, def-sp-abelian), the three exactness chases, assembly, and the induction on r. No Freyd-Mitchell; differences of elements are differences in Hom(T,X). Proof is agent-written (Stacks omits it). Searches: the item's earlier five plus leansearch, leanfinder and grep; Mathlib has no exact couples."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement generalized to exact couples of type s (g of bidegree (s,-s)) so that the iterated couples are covered: a gap of def-sp-exact-couple, to be fixed at its split; Part 1 of lem-sp-exact-functor-couple is to be read for type r-2 couples (same argument)"
+ }
 }

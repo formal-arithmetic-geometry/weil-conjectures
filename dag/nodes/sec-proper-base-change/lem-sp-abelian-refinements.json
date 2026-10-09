@@ -1,0 +1,75 @@
+{
+ "id": "lem-sp-abelian-refinements",
+ "kind": "statement",
+ "title": "Element chasing up to refinements in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Call a morphism $a:T\\to X$ from an arbitrary object $T$ an *element* of $X$, and for an element $a$ an *epimorphic refinement* a composite $a\\circ\\rho$ with $\\rho:T'\\twoheadrightarrow T$ an epimorphism. Then:\n\n(a) A morphism $u:X\\to Y$ is an epimorphism if and only if every element $y:T\\to Y$ lifts after an epimorphic refinement: there are an epimorphism $\\rho:T'\\to T$ and $x:T'\\to X$ with $y\\circ\\rho=u\\circ x$.\n\n(b) A complex $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3$ ($v\\circ u=0$) is exact at $X_2$, i.e. $\\operatorname{im}u=\\ker v$ as subobjects of $X_2$, if and only if for every element $x_2:T\\to X_2$ with $v\\circ x_2=0$ there are an epimorphism $\\rho:T'\\to T$ and $x_1:T'\\to X_1$ with $x_2\\circ\\rho=u\\circ x_1$.\n\n(c) If $c:Y\\to Q$ is a cokernel of $u:X\\to Y$, then for an element $y:T\\to Y$ one has $c\\circ y=0$ if and only if there are an epimorphism $\\rho:T'\\to T$ and $x:T'\\to X$ with $y\\circ\\rho=u\\circ x$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.5 (Abelian categories): Lemma 'check-exactness-fibre-product' (Tag 08N5) is (b); Lemma 'epimorphism-universal-abelian-category' (Tag 05PK)(1) with Lemma 'characterize-injective' (Tag 010C) gives (a) (the pullback $T\\times_YX\\to T$ of an epimorphism is an epimorphism); (c) is (b) for the exact complex $X\\to Y\\to Q$. Definition of exactness: Definition 'exact' (Tag 010E). Mathlib: CategoryTheory/Abelian/Refinements.lean (after G. Bergman's note on element chasing)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pseudoelements in an abelian category: exact sequence implies every pseudoelement in the kernel is in the image",
+   "results": "CategoryTheory.Abelian.Pseudoelement.exact_of_pseudo_exact, pseudo_exact_of_exact, sub_of_eq_image, apply_eq_zero_of_comp_eq_zero (Mathlib.CategoryTheory.Abelian.Pseudoelements); ShortComplex.exact_kernel (Mathlib.CategoryTheory.Abelian.Exact)",
+   "date": "2026-10-09",
+   "verdict": "related: the pseudo-element calculus (quotient type of arrows into X, no extensionality and no subtraction); the refinement form below is the one that matches (a)-(c) for morphisms T -> X"
+  },
+  {
+   "tool": "leansearch",
+   "query": "epimorphism in an abelian category is surjective up to refinements: lift a morphism after precomposing with an epimorphism",
+   "results": "CategoryTheory.surjective_up_to_refinements_of_epi, CategoryTheory.epi_iff_surjective_up_to_refinements (Mathlib.CategoryTheory.Abelian.Refinements); Abelian.epiDesc, Abelian.monoLift (Mathlib.CategoryTheory.Abelian.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match for (a)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements",
+   "results": "CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements (S : ShortComplex C) : S.Exact <-> forall A (x2 : A --> S.X2), x2 >> S.g = 0 -> exists A' pi, Epi pi /\\ exists x1, pi >> x2 = x1 >> S.f (Mathlib.CategoryTheory.Abelian.Refinements)",
+   "date": "2026-10-09",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "diagram chase in abelian category with generalized elements A --> X: exactness iff lift after an epimorphism refinement",
+   "results": "ShortComplex.Exact.exact_up_to_refinements, ShortComplex.exact_iff_exact_up_to_refinements (Mathlib.CategoryTheory.Abelian.Refinements); Abelian.epi_of_epi_of_epi_of_epi (four lemma); Pseudoelement.pseudo_exact_of_exact",
+   "date": "2026-10-09",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^lemma\\|^theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Refinements.lean; grep -rn 'exact_iff_image_eq_kernel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Exact.lean",
+   "results": "epi_iff_surjective_up_to_refinements (l.82), surjective_up_to_refinements_of_epi (l.93), ShortComplex.exact_iff_exact_up_to_refinements (l.97), ShortComplex.Exact.exact_up_to_refinements (l.111), Limits.CokernelCofork.IsColimit.comp_pi_eq_zero_iff_up_to_refinements (l.127), ...; ShortComplex.exact_iff_image_eq_kernel (Abelian/Exact.lean l.94: S.Exact <-> imageSubobject S.f = kernelSubobject S.g)",
+   "date": "2026-10-09",
+   "verdict": "match: (a) epi_iff_surjective_up_to_refinements, (b) ShortComplex.exact_iff_exact_up_to_refinements with exact_iff_image_eq_kernel, (c) CokernelCofork.IsColimit.comp_pi_eq_zero_iff_up_to_refinements"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements",
+  "file": "Mathlib/CategoryTheory/Abelian/Refinements.lean",
+  "how": "one Mathlib lemma per clause, read in this file (morphisms composed diagrammatically there: pi >> y is y o rho here): (a) CategoryTheory.epi_iff_surjective_up_to_refinements; (b) CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements, with ShortComplex.exact_iff_image_eq_kernel (Mathlib/CategoryTheory/Abelian/Exact.lean) identifying ShortComplex.Exact with im u = ker v as subobjects; (c) CategoryTheory.Limits.CokernelCofork.IsColimit.comp_π_eq_zero_iff_up_to_refinements"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-derived-couple-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
