@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-integral-spec-closed-map",
+ "kind": "statement",
+ "title": "Spec of an integral ring map is a closed map",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings with $S$ integral over $R$. Then the induced map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is a closed map for the Zariski topologies: the image of every closed subset of $\\operatorname{Spec}S$ is closed in $\\operatorname{Spec}R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GU (lemma-integral-going-up: going up holds for integral ring maps) combined with Lemma Tag 00HZ (lemma-going-up-closed: going up is equivalent to Spec S -> Spec R being closed), as used in the proof of More on Algebra Lemma 07M4"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of integral ring map is closed map (going up)",
+   "results": "PrimeSpectrum.isClosedMap_comap_of_isIntegral (Mathlib.RingTheory.Spectrum.Prime.Topology), Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime, Ideal.exists_ideal_over_maximal_of_isIntegral, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Spec.topMap",
+   "verdict": "match: PrimeSpectrum.isClosedMap_comap_of_isIntegral",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec of an integral ring map is a closed map",
+   "results": "PrimeSpectrum.isClosedMap_comap_of_isIntegral, PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom, PrimeSpectrum.isClosed_comap_singleton_of_isIntegral, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion",
+   "verdict": "match: PrimeSpectrum.isClosedMap_comap_of_isIntegral",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, PrimeSpectrum.comap, RingHom.IsIntegral",
+   "results": "PrimeSpectrum.isClosedMap_comap_of_isIntegral (f : R →+* S) (hf : f.IsIntegral) : IsClosedMap (PrimeSpectrum.comap f); PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem isClosedMap_comap_of_isIntegral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 1145,1165p RingTheory/Spectrum/Prime/Topology.lean",
+   "results": "RingTheory/Spectrum/Prime/Topology.lean:1156 theorem isClosedMap_comap_of_isIntegral (hf : f.IsIntegral) : IsClosedMap (comap f), proved from Ideal.exists_ideal_over_prime_of_isIntegral (going up, @[stacks 00GU] in RingTheory/Ideal/HasGoingUp.lean:127) and isClosed_image_of_stableUnderSpecialization",
+   "verdict": "match (exact)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isClosedMap_comap_of_isIntegral",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "how": "exact: theorem (line 1156) for f : R →+* S with f.IsIntegral, IsClosedMap (PrimeSpectrum.comap f); for an algebra, f = algebraMap R S and Algebra.IsIntegral R S is (algebraMap R S).IsIntegral (Algebra.isIntegral_def / RingHom.IsIntegral). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-idempotent-upstairs",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf PrimeSpectrum.isClosedMap_comap_of_isIntegral, Spectrum/Prime/Topology.lean:1156; checked."
+ }
+}

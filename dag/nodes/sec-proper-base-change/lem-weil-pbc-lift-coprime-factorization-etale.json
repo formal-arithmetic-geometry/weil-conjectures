@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-lift-coprime-factorization-etale",
+ "kind": "statement",
+ "title": "A coprime factorization of a monic polynomial modulo I lifts after an etale extension trivial modulo I",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $f\\in A[x]$ a monic polynomial. Let $\\bar f=\\bar g\\bar h$ be a factorization of the image $\\bar f$ of $f$ in $(A/I)[x]$ such that (1) the leading coefficient of $\\bar g$ is a unit of $A/I$, and (2) $\\bar g$ and $\\bar h$ generate the unit ideal of $(A/I)[x]$. Then there exist a ring map $A\\to A'$ such that $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism] and the induced map $\\alpha:A/I\\to A'/IA'$ is an isomorphism, and polynomials $g',h'\\in A'[x]$ with $f=g'h'$ in $A'[x]$ (with $f$ mapped to $A'[x]$) lifting the given factorization: the images of $g'$ and $h'$ in $(A'/IA')[x]$ are the images of $\\bar g$ and $\\bar h$ under $\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07M1 (lemma-lift-factorization-easy) and its proof (uses Lemma Tag 07LX lemma-lift-invertible-element and Lemma Tag 0ALH lemma-lift-factorization-monic; the latter uses Algebra Example Tag 00UA, the universal factorization ring, and Lemma Tag 07M0 lemma-localize-upstairs)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift factorization of monic polynomial with coprime factors modulo an ideal after etale extension A to A' with A/I isomorphic A'/IA'",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing (Mathlib.RingTheory.Polynomial.UniversalFactorizationRing), Polynomial.lifts_and_natDegree_eq_and_monic, StandardEtalePair.instFormallyEtaleRing, MvPolynomial.universalFactorizationMapLiftEquiv, Polynomial.UniversalFactorizationRing.factor₁, IsAdjoinRootMonic.liftPolyₗ_apply",
+   "verdict": "no match: the universal coprime factorization ring (Stacks 00UA) is in Mathlib and etale, the ingredient of 0ALH, but not the lifting modulo an ideal I with A/I = A'/IA'",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift a factorization of a monic polynomial modulo an ideal I with coprime factors to an etale algebra A' with A/I ≅ A'/IA'",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.lift, StandardEtalePair.instFormallyEtaleRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (Mathlib.RingTheory.Polynomial.UniversalFactorizationRing, @[stacks 00UH])",
+   "verdict": "no match: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime is the residue-field version (one prime P, kappa(P)=kappa(Q), factors monic), not the version modulo an ideal I with A/I = A'/IA'",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsCoprime, Polynomial.map",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (Mathlib.RingTheory.Polynomial.UniversalFactorizationRing): P prime of R, p monic, p = f*g over the residue field kappa(P) with f,g monic coprime -> etale R', prime Q over P with bijective residue field map, monic coprime f',g' with p = f'*g' lifting f,g",
+   "verdict": "no match (pointwise residue-field version only)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 07M1\\|stacks 0ALH\\|stacks 00UA\\|stacks 07LX' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; read RingTheory/Polynomial/UniversalFactorizationRing.lean (whole file)",
+   "results": "no tag 07M1/0ALH/00UA/07LX; UniversalFactorizationRing.lean has Polynomial.UniversalCoprimeFactorizationRing (line 544) with Algebra.Etale instance (574), homEquiv (591: R-algebra maps to S = coprime monic factorizations of p over S), exists_liesOver_residueFieldMap_bijective (649), and @[stacks 00UH] Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (694)",
+   "verdict": "no match; UniversalCoprimeFactorizationRing.homEquiv + its Etale instance are the ring B of the proof of 0ALH (S=A/I gives the A-algebra map B -> A/I whose kernel J the proof localizes at)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-idempotent-upstairs",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 07M1 (etale A → A′ with A/I ≅ A′/IA′ lifting a factorization with unit leading coefficient and coprime factors); correct; unsplit. Mathlib has UniversalCoprimeFactorizationRing (0ALH ring) but not this lemma."
+ }
+}

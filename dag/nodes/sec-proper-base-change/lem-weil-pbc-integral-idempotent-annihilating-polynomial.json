@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-integral-idempotent-annihilating-polynomial",
+ "kind": "statement",
+ "title": "An integral lift of an idempotent mod IB is a root of a monic polynomial congruent to x^d(x-1)^d",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $A\\to B$ a ring map with $B$ integral over $A$. Let $b\\in B$ be an element whose image in $B/IB$ is idempotent. Then there are an integer $d\\ge1$ and a monic polynomial $f\\in A[x]$ with $f(b)=0$ in $B$ and $f\\equiv x^d(x-1)^d$ modulo $I$, i.e. the image of $f$ in $(A/I)[x]$ is $x^d(x-1)^d$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 09XG (lemma-helper-integral) and its proof (uses Algebra, Lemma Tag 00H5, lemma-integral-integral-over-ideal: an element of IB is a root of a monic polynomial with non-leading coefficients in I)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral ring map, element whose square minus itself lies in IB, monic polynomial f with f(b)=0 and f congruent to x^d (x-1)^d mod I",
+   "results": "Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map (Mathlib.RingTheory.IntegralClosure.Algebra.Ideal, @[stacks 00H5]), isInteger_of_is_root_of_monic, AdjoinRoot.isIntegral_root', IsIntegral, RingHom.IsIntegral",
+   "verdict": "no match: only the ingredient 00H5 (for z=b^2-b in IB); the composition g(x^2-x) and its reduction mod I are not stated",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral algebra over A, element b whose image mod IB is idempotent, monic polynomial f over A with f(b)=0 and f ≡ x^d(x-1)^d mod I",
+   "results": "Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map, Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_isIntegral, Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map (Mathlib.RingTheory.IntegralClosure.Algebra.Ideal), Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top, exists_integral_inj_algHom_of_quotient",
+   "verdict": "no match (ingredient 00H5 only)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Polynomial.aeval, IsIdempotentElem",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 09XG\\|stacks 00H5' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; read RingTheory/IntegralClosure/Algebra/Ideal.lean:85-100",
+   "results": "only @[stacks 00H5] Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map (RingTheory/IntegralClosure/Algebra/Ideal.lean:91): [Algebra.IsIntegral R S], x in I.map (algebraMap R S) -> exists monic p, aeval x p = 0, coeff i in I for i != natDegree; no 09XG",
+   "verdict": "no match; the proof will be 00H5 (Mathlib) applied to z=b^2-b, then f(x)=g(x^2-x)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-idempotent-upstairs",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 09XG; correct; unsplit."
+ }
+}

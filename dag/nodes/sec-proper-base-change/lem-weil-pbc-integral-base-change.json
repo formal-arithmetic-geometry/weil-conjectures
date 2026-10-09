@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-integral-base-change",
+ "kind": "statement",
+ "title": "Base change of an integral algebra is integral",
+ "statement": "Let $R\\to S$ and $R\\to R'$ be homomorphisms of commutative rings. If $S$ is integral over $R$, then $R'\\otimes_RS$ is integral over $R'$ (for the ring map $r'\\mapsto r'\\otimes1$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02JK (lemma-base-change-integral), part (1); used without mention in the proof of More on Algebra Lemma 07M4 ('after replacing A by A'')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of an integral algebra is integral: A ⊗_R B integral over A",
+   "results": "Algebra.IsIntegral.tensorProduct (Mathlib.RingTheory.IntegralClosure.Algebra.Basic), AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, IsIntegral.tmul, RingHom.isIntegral_isStableUnderBaseChange, Algebra.IsIntegral.of_injective",
+   "verdict": "match: Algebra.IsIntegral.tensorProduct",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product A ⊗[R] B is integral over A when B is integral over R",
+   "results": "Algebra.IsIntegral.tensorProduct, IsIntegral.tmul, RingHom.isIntegral_isStableUnderBaseChange, TensorProduct.toIntegralClosure",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsIntegral, TensorProduct",
+   "results": "Algebra.IsIntegral.tensorProduct (R A B) [Algebra.IsIntegral R B] : Algebra.IsIntegral A (TensorProduct R A B); Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux₂",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIntegral.tensorProduct\\|IsIntegral.tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 235,256p RingTheory/IntegralClosure/Algebra/Basic.lean",
+   "results": "RingTheory/IntegralClosure/Algebra/Basic.lean:243 IsIntegral.tmul, :252 instance Algebra.IsIntegral.tensorProduct [CommRing B] [Algebra R A] [Algebra R B] [Algebra.IsIntegral R B] : Algebra.IsIntegral A (A ⊗[R] B)",
+   "verdict": "match (exact)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsIntegral.tensorProduct",
+  "file": "Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean",
+  "how": "exact: instance (line 252) Algebra.IsIntegral A (A ⊗[R] B) from Algebra.IsIntegral R B, with R' = A, S = B; the ring-hom form is RingHom.isIntegral_isStableUnderBaseChange (Mathlib/RingTheory/RingHom/Integral.lean). Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-idempotent-upstairs",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Algebra.IsIntegral.tensorProduct, IntegralClosure/Algebra/Basic.lean:252; checked."
+ }
+}

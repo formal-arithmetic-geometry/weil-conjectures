@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-separate-image-closed-from-closed",
+ "kind": "statement",
+ "title": "Separating V(I) from the closure of the image of V(J) by one element",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, $I\\subseteq R$ an ideal of $R$ and $J\\subseteq S$ an ideal of $S$. If the closure in $\\operatorname{Spec}R$ of the image of $V(J)\\subseteq\\operatorname{Spec}S$ under $\\operatorname{Spec}\\varphi$ is disjoint from $V(I)$, then there is an element $f\\in R$ whose image in $R/I$ is $1$ and with $\\varphi(f)\\in J$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07M3 (lemma-separate-image-closed-from-closed) and its proof (uses Algebra, Lemma Tag 00E0, lemma-Zariski-topology)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring map R to S, ideal I of R, ideal J of S, closure of image of V(J) disjoint from V(I), exists element of R mapping to 1 mod I and into J",
+   "results": "Algebra.ZariskisMainProperty, PrimeSpectrum.isClosedMap_comap_of_isIntegral, Ideal.map, Ideal.relIsoOfSurjective, Ideal.quotientMap, Ideal.map_eq_top_iff_of_ker_le",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if V(I) is disjoint from the closure of the image of V(J) in Spec R then there is f in R with f ≡ 1 mod I and image of f in J",
+   "results": "PrimeSpectrum.exists_image_comap_of_finite_of_free, PrimeSpectrum.zeroLocus_eq_basicOpen_of_mul_add, PrimeSpectrum.basicOpen_eq_zeroLocus_of_mul_add, Ideal.exists_le_prime_disjoint, PrimeSpectrum.mem_compl_zeroLocus_iff_notMem",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.zeroLocus, closure, PrimeSpectrum.comap",
+   "results": "PrimeSpectrum.closure_range_comap; PrimeSpectrum.closure_image_comap_zeroLocus (Mathlib.RingTheory.Spectrum.Prime.Topology): closure (comap f '' zeroLocus I) = zeroLocus (I.comap f)",
+   "verdict": "no match: closure_image_comap_zeroLocus is the first ingredient (closure of the image is V(phi^{-1}J)); then V(I) ∩ V(phi^{-1}J) = ∅ gives I + phi^{-1}J = R and 1 = g + f with f in phi^{-1}J (no power needed with this ingredient)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 07M3\\|closure_image_comap_zeroLocus\\|zeroLocus_empty_iff_eq_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/",
+   "results": "no 07M3; closure_image_comap_zeroLocus (Spectrum/Prime/Topology.lean:1171); zeroLocus_empty_iff_eq_top and zeroLocus_sup in Spectrum/Prime/Basic.lean",
+   "verdict": "no match as one statement; three Mathlib lemmas plus an element choice",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-idempotent-upstairs",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 07M3; correct; unsplit."
+ }
+}
