@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusElement
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjugacy
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
+public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 
 /-!
@@ -209,6 +212,145 @@ theorem nonempty (p : C ⟶ Spec (.of K)) [IsCurve p] [GeometricallyConnected p]
   obtain ⟨s⟩ := p.nonempty_algebraicClosure_point
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   exact ⟨ofFundamentalGroup p s G⟩
+
+
+section Restriction
+
+variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  [GeometricallyConnected p] [ConnectedSpace C] {pU : U ⟶ Spec (.of K)} [IsCurve pU]
+  [GeometricallyConnected pU] [ConnectedSpace U] (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U]
+  (hj : j ≫ p = pU) {sU : Spec (.of (AlgebraicClosure K)) ⟶ U}
+  {sC : Spec (.of (AlgebraicClosure K)) ⟶ C} (τ : fiber (sU ≫ j) ≅ fiber sC)
+  (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
+  [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
+  (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
+  [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
+
+/-- The map `π₁(U₀, s_U) → π₁(C₀, s_C)` induced by `j` and the path `τ`. -/
+noncomputable abbrev restrictionMap : GU →* GC :=
+  fundamentalGroupMap (pullbackFiberIso j sU ≪≫ τ) GU GC
+
+include hj in
+/-- The restriction `W(U₀) → W(C₀)` of Weil groups. -/
+noncomputable def restrictionHom : weilGroup pU sU GU →* weilGroup p sC GC :=
+  ((((restrictionMap j τ GU GC).prodMap (MonoidHom.id _)).comp
+    (weilGroup pU sU GU).subtype).codRestrict _ fun w ↦
+      (mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC _ _).1 w.2)
+
+omit [IsCurve p] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU]
+  [IsOpenImmersion j] [Nonempty U] in
+lemma restrictionHom_apply (w : weilGroup pU sU GU) :
+    (restrictionHom j hj τ GU GC w : GC × Multiplicative ℤ) =
+      (restrictionMap j τ GU GC (w : GU × Multiplicative ℤ).1, (w : GU × Multiplicative ℤ).2) :=
+  rfl
+
+omit [Finite K] [GeometricallyConnected p] [Nonempty U] in
+/-- On a smooth curve, base change to a nonempty open preserves connectedness of finite étale
+covers: a connected finite étale cover is smooth over `K`, hence regular, hence irreducible, and
+a nonempty open subscheme of an irreducible scheme is connected (Stacks `0BQM`). -/
+lemma isConnected_pullback_of_smooth [Smooth p] (P : C.FiniteEtale) (hP : IsConnected P) :
+    IsConnected ((Scheme.FiniteEtale.pullback j).obj P) := by
+  have := connectedSpace_of_isConnected P
+  have : Etale P.obj.hom := P.obj.prop
+  let q : P.obj.left ⟶ Spec (.of K) := P.obj.hom ≫ p
+  have : Smooth q := inferInstance
+  have := LocallyOfFiniteType.isLocallyNoetherian q
+  have := IsRegular.of_smooth q
+  have := IsRegular.irreducibleSpace P.obj.left
+  exact isConnected_pullback_of_irreducibleSpace j P
+
+omit [Finite K] [GeometricallyConnected p] [Nonempty U] in
+/-- **The fundamental group of a dense open of a smooth curve surjects** onto that of the curve
+(Stacks `0BQM`, blueprint `lem-wf-dense-open-pi1-surjective`). -/
+lemma restrictionMap_surjective [Smooth p] : Function.Surjective (restrictionMap j τ GU GC) :=
+  fundamentalGroupMap_surjective _ GC GU fun P hP ↦ isConnected_pullback_of_smooth (p := p) j P hP
+
+omit [GeometricallyConnected p] [IsCurve pU] [Nonempty U] in
+include hj in
+lemma restrictionHom_surjective [Smooth p] :
+    Function.Surjective (restrictionHom j hj τ GU GC) := by
+  rintro ⟨⟨h, n⟩, hw⟩
+  obtain ⟨γ, hγ⟩ := exists_mem_weilGroup_snd_eq_one pU sU GU
+  let g₀ : weilGroup pU sU GU := ⟨(γ, Multiplicative.ofAdd 1), hγ⟩ ^ n.toAdd
+  have hg₀ : (g₀ : GU × Multiplicative ℤ).2 = n := by
+    change (Multiplicative.ofAdd 1) ^ n.toAdd = n
+    rw [← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd]
+  have hρg₀ := (restrictionHom j hj τ GU GC g₀).2
+  rw [restrictionHom_apply, hg₀] at hρg₀
+  have h' : (((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h, 1) : GC × Multiplicative ℤ) ∈
+      weilGroup p sC GC := by
+    convert (weilGroup p sC GC).mul_mem ((weilGroup p sC GC).inv_mem hρg₀) hw using 1
+    simp
+  obtain ⟨g₁, hg₁⟩ := restrictionMap_surjective (p := p) j τ GU GC
+    ((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h)
+  have hg₁W : (g₁, (1 : Multiplicative ℤ)) ∈ weilGroup pU sU GU :=
+    (mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC _ _).2 (hg₁ ▸ h')
+  refine ⟨g₀ * ⟨_, hg₁W⟩, Subtype.ext ?_⟩
+  rw [restrictionHom_apply]
+  simp only [Subgroup.coe_mul, Prod.fst_mul, Prod.snd_mul, map_mul, hg₁, hg₀, mul_one,
+    mul_inv_cancel_left]
+
+omit [ConnectedSpace U] [IsCurve pU] [GeometricallyConnected pU] [Nonempty U] [IsCurve p]
+  [GeometricallyConnected p] [ConnectedSpace C] in
+lemma degreeOver_eq (x : U) (hx : x ∈ U.finitePoints) :
+    p.degreeOver (j x) = pU.degreeOver x := by
+  have : Finite (U.residueField x) := hx
+  have hx' : j x ∈ C.finitePoints :=
+    Finite.of_equiv _ (residueFieldEquiv j x).symm.toEquiv
+  have h1 := p.pointNorm_eq_pow_degreeOver hx'
+  have h2 := pU.pointNorm_eq_pow_degreeOver hx
+  rw [Scheme.pointNorm, natCard_residueField_eq] at h1
+  rw [Scheme.pointNorm] at h2
+  have hq : 1 < Nat.card K := Finite.one_lt_card
+  exact Nat.pow_right_injective hq (h1.symm.trans h2)
+
+include hj in
+/-- **The restriction of Weil groups along an open immersion** of curves `j : U₀ ⟶ C₀`, for a
+smooth curve `C₀`, the Weil groups being those of `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`
+and the path `τ` from `s_U ≫ j` to `s_C` arbitrary. (blueprint `sk-i-real-boundary`,
+`lem-wf-dense-open-pi1-surjective`) -/
+noncomputable def restrictionOfPath [Smooth p] :
+    Restriction j (ofFundamentalGroup pU sU GU) (ofFundamentalGroup p sC GC) where
+  comp_eq := hj
+  restrict := restrictionHom j hj τ GU GC
+  fiberIso := pullbackFiberIso j sU ≪≫ τ
+  restrict_smul g P y := fundamentalGroupMap_smul (pullbackFiberIso j sU ≪≫ τ) GU GC g.1.1 P y
+  continuous_restrict := by
+    have := fun P ↦ IsFundamentalGroup.continuous_smul (F := fiber sU) (G := GU) P
+    refine Continuous.subtype_mk (((continuous_fundamentalGroupMap _ GU GC).comp
+      (continuous_fst.comp continuous_subtype_val)).prodMk
+        (continuous_snd.comp continuous_subtype_val)) _
+  deg_restrict := rfl
+  surjective_restrict := restrictionHom_surjective j hj τ GU GC
+  restrict_frobenius x y hxy := by
+    obtain ⟨x, hx⟩ := x
+    obtain ⟨y, hy⟩ := y
+    obtain rfl : j x = y := hxy
+    have : Finite (U.residueField x) := hx
+    have : Finite (C.residueField (j x)) := hy
+    have h₁ := isFrobeniusElement_frobeniusElement sC GC ⟨j x, hy⟩
+    have h₂ := IsFrobeniusElement.fundamentalGroupMap j x (pullbackFiberIso j sU ≪≫ τ) GU GC
+      (isFrobeniusElement_frobeniusElement sU GU ⟨x, hx⟩)
+    obtain ⟨c, n, hcW, hc⟩ := h₁.exists_mem_weilGroup_conj p sC GC h₂
+    refine isConj_iff.2 ⟨⟨(c, n), hcW⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
+    · exact hc
+    · change n * Multiplicative.ofAdd (p.degreeOver (j x) : ℤ) * n⁻¹ =
+        Multiplicative.ofAdd (pU.degreeOver x : ℤ)
+      rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one, degreeOver_eq j x hx]
+
+include hj in
+/-- A nonempty open `j : U₀ ⟶ C₀` of a smooth geometrically connected curve over a finite field,
+itself geometrically connected, has a restriction of Weil groups. -/
+theorem Restriction.nonempty [Smooth p] :
+    ∃ (WU : WeilGroup pU) (WC : WeilGroup p), Nonempty (Restriction j WU WC) := by
+  obtain ⟨sU⟩ := pU.nonempty_algebraicClosure_point
+  obtain ⟨sC⟩ := p.nonempty_algebraicClosure_point
+  obtain ⟨GU, _, _⟩ := exists_isFundamentalGroup sU
+  obtain ⟨GC, _, _⟩ := exists_isFundamentalGroup sC
+  obtain ⟨τ⟩ := nonempty_iso_of_fiberFunctor (fiber (sU ≫ j)) (fiber sC)
+  exact ⟨_, _, ⟨restrictionOfPath j hj τ GU GC⟩⟩
+
+end Restriction
 
 end WeilGroup
 
