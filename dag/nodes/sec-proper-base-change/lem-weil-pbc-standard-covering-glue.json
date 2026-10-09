@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-standard-covering-glue",
+ "kind": "statement",
+ "title": "Elements of a ring glue uniquely along a standard open covering",
+ "statement": "Let $R$ be a commutative ring and $f_1,\\dots,f_r\\in R$ elements generating the unit ideal; for $i,j$ let $R_{f_i}\\to R_{f_if_j}$ and $R_{f_j}\\to R_{f_if_j}$ be the canonical maps of localizations [def-weil-ring-localization-away] ($x/f_i^e\\mapsto f_j^ex/(f_if_j)^e$). (i) If $x\\in R$ has $x/1=0$ in $R_{f_i}$ for every $i$, then $x=0$. (ii) If $x_i\\in R_{f_i}$ ($i=1,\\dots,r$) are such that $x_i$ and $x_j$ have the same image in $R_{f_if_j}$ for all $i,j$, then there is exactly one $x\\in R$ with $x/1=x_i$ in $R_{f_i}$ for every $i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00EJ (lemma-standard-covering, line 4354): exactness of $0\\to R\\to\\bigoplus_iR_{f_i}\\to\\bigoplus_{i,j}R_{f_if_j}$ (injectivity of $\\alpha$ is (i), exactness in the middle is (ii))"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "elements of localizations R_{f_i} that agree on overlaps R_{f_i f_j} glue to an element of R when f_i span the unit ideal",
+   "results": "Localization.existsUnique_algebraMap_eq_of_span_eq_top (Mathlib.RingTheory.Localization.Away.Basic), AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, TopCat.Presheaf.IsSheafUniqueGluing, AlgebraicGeometry.structureSheafInType, PrimeSpectrum.iSup_basicOpen_eq_top_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Localization.existsUnique_algebraMap_eq_of_span_eq_top"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf property of standard open cover: compatible family of elements of localizations away from f_i, with f_i generating the unit ideal, comes from a unique element of the ring",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, StructureSheaf.locally_const_basicOpen, StructureSheaf.exists_const, StructureSheaf.const_ext, ModuleCat.Tilde.exists_const (structure-sheaf versions only)",
+   "date": "2026-10-10",
+   "verdict": "no direct match (structure-sheaf formulations)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.existsUnique_algebraMap_eq_of_span_eq_top",
+   "results": "Localization.existsUnique_algebraMap_eq_of_span_eq_top : Ideal.span s = ⊤ → (∀ a b, awayToAwayRight a b (f a) = awayToAwayLeft b a (f b)) → ∃! r, ∀ a, algebraMap R (Away a) r = f a (Mathlib.RingTheory.Localization.Away.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'existsUnique_algebraMap_eq_of_span_eq_top\\|def awayToAwayRight\\|def awayToAwayLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Localization.existsUnique_algebraMap_eq_of_span_eq_top (RingTheory/Localization/Away/Basic.lean:569), used in RingTheory/Spectrum/Prime/Topology.lean:751; IsLocalization.Away.awayToAwayLeft (Away/Basic.lean:184), awayToAwayRight (:189)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Localization.existsUnique_algebraMap_eq_of_span_eq_top",
+  "file": "Mathlib/RingTheory/Localization/Away/Basic.lean",
+  "how": "specializes in one line: take `s = {f_1, …, f_r}` (a finite set, `Ideal.span s = ⊤`); the hypothesis on overlaps uses `IsLocalization.Away.awayToAwayRight`/`awayToAwayLeft` (lines 184/189), which are the canonical maps R_{f_i} → R_{f_if_j} ← R_{f_j}; this gives (ii) (line 569); (i) is the uniqueness part applied to x and 0 with the family 0"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Localization.existsUnique_algebraMap_eq_of_span_eq_top (Localization/Away/Basic.lean:569). Overlaps lem-weil-pbc-localized-span-eq-zero (stage-3 merge candidate)."
+ }
+}

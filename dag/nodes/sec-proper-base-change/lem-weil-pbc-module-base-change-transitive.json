@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-module-base-change-transitive",
+ "kind": "statement",
+ "title": "Base change of modules in stages",
+ "statement": "Let $R\\to S\\to T$ be homomorphisms of commutative rings and $M$ an $R$-module. Then there is an isomorphism of $T$-modules $(M\\otimes_RS)\\otimes_ST\\xrightarrow{\\sim}M\\otimes_RT$ [def-weil-module-base-change], $(m\\otimes s)\\otimes t\\mapsto m\\otimes st$, with inverse $m\\otimes t\\mapsto(m\\otimes1)\\otimes t$. It is natural: for an $R$-linear map $\\varphi:M\\to M'$ it carries $(\\varphi\\otimes1_S)\\otimes1_T$ to $\\varphi\\otimes1_T$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00D2 (lemma-tensor-with-bimodule, line 1881): $(M\\otimes_AN)\\otimes_BP\\cong M\\otimes_A(N\\otimes_BP)$, here with $A=R$, the $(R,S)$-bimodule $N=S$, $P=T$ and $S\\otimes_ST=T$; naturality from the formula on generators"
+ },
+ "stmt_deps": [
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product cancellation (M ⊗_R A) ⊗_A B ≃ M ⊗_R B base change in stages linear equivalence",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower), Algebra.TensorProduct.cancelBaseChange_tmul, Algebra.TensorProduct.cancelBaseChange (Mathlib.RingTheory.TensorProduct.Maps), LinearEquiv.baseChange, TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.congr",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.AlgebraTensorModule.cancelBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "results": "cancelBaseChange : M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N, cancelBaseChange_tmul, cancelBaseChange_symm_tmul, cancelBaseChange_self_eq_lid, LinearMap.baseChange_baseChange (B ⊗ (A ⊗ f) = cancel.symm ∘ f.baseChange B ∘ cancel), lTensor_comp_cancelBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear equivalence M ⊗_A (A ⊗_R N) ≅ M ⊗_R N, transitivity of extension of scalars for modules",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.rTensor_tensor, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def cancelBaseChange\\|cancelBaseChange_tmul\\|lemma baseChange_baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "cancelBaseChange (Tower.lean:436), cancelBaseChange_tmul (:447), LinearMap.baseChange_baseChange (:695)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+  "how": "specializes in one line: `cancelBaseChange R S T T M : T ⊗[S] (S ⊗[R] M) ≃ₗ[T] T ⊗[R] M` (line 436, t ⊗ (s ⊗ m) ↦ (s • t) ⊗ m by cancelBaseChange_tmul :447) is the node's isomorphism with base change written on the left (conjugate by `TensorProduct.comm`); naturality is `LinearMap.baseChange_baseChange` (:695): `(φ.baseChange S).baseChange T = cancel.symm ∘ φ.baseChange T ∘ cancel`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: AlgebraTensorModule.cancelBaseChange (Tower.lean:436), LinearMap.baseChange_baseChange (:695)."
+ }
+}

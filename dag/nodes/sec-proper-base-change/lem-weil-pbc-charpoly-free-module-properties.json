@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-charpoly-free-module-properties",
+ "kind": "statement",
+ "title": "Characteristic polynomial of a finite free module: basis independence, isomorphism invariance, monic of degree n, base change",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, $N$ a free $R$-module of rank $n$ (with a basis of $n$ elements) and $\\psi:N\\to N$ an $R$-linear map; for a basis $e$ of $N$ let $\\chi_e\\in R[T]$ be the characteristic polynomial of $\\psi$ in the basis $e$ [def-weil-pbc-charpoly-free-module]. (a) $\\chi_e$ does not depend on the basis $e$ (of $n$ elements); write $\\chi_\\psi$. (b) If $N'$ is an $R$-module, $u:N\\to N'$ an $R$-linear isomorphism and $\\psi'=u\\psi u^{-1}$, then $N'$ is free of rank $n$ and $\\chi_{\\psi'}=\\chi_\\psi$. (c) $\\chi_\\psi=T^n+c_{n-1}T^{n-1}+\\dots+c_0$ with $c_k\\in R$, i.e. its coefficient of $T^n$ is $1$ and those of $T^k$, $k>n$, are $0$. (d) For a ring map $\\rho:R\\to R'$, the base change $N\\otimes_RR'$ [def-weil-module-base-change] is a free $R'$-module of rank $n$ with basis $e_1\\otimes1,\\dots,e_n\\otimes1$, the matrix of $\\psi\\otimes1$ in it is $\\rho(X)$ (entrywise), and $\\chi_{\\psi\\otimes1}=\\rho(\\chi_\\psi)$ (coefficientwise image in $R'[T]$).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph (the characteristic polynomial of a free module, used there as well defined and compatible with base change without comment)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-charpoly-free-module",
+  "def-weil-module-base-change",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of the base change of a linear endomorphism of a free module is the image of the characteristic polynomial",
+   "results": "LinearMap.charpoly_baseChange (Mathlib.LinearAlgebra.Charpoly.BaseChange), LinearMap.polyCharpoly_baseChange, LinearMap.polyCharpolyAux_baseChange, LinearMap.polyCharpoly, Matrix.charpoly_toLin, LinearMap.polyCharpoly_eq_of_basis",
+   "date": "2026-10-10",
+   "verdict": "match for (d): LinearMap.charpoly_baseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a linear endomorphism of a finite free module is independent of the basis and invariant under conjugation by a linear isomorphism",
+   "results": "LinearEquiv.charpoly_conj, LinearMap.polyCharpoly_eq_of_basis, LinearMap.charpoly_def, Matrix.charpoly_toLin, LinearMap.polyCharpoly_map_eq_charpoly, Matrix.charpoly_toLin'",
+   "date": "2026-10-10",
+   "verdict": "match for (b): LinearEquiv.charpoly_conj"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial commutes with extension of scalars: charpoly of f.baseChange A equals the image of charpoly f under algebraMap",
+   "results": "LinearMap.charpoly_baseChange, LinearMap.polyCharpoly_baseChange, LinearMap.polyCharpolyAux_baseChange, LinearMap.toMvPolynomial_baseChange",
+   "date": "2026-10-10",
+   "verdict": "match for (d)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, LinearMap.baseChange",
+   "results": "LinearMap.charpoly_baseChange (Mathlib.LinearAlgebra.Charpoly.BaseChange), LinearMap.polyCharpolyAux_map_aeval",
+   "date": "2026-10-10",
+   "verdict": "match for (d)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'charpoly_toMatrix\\|charpoly_conj\\|charpoly_monic\\|charpoly_natDegree\\|charpoly_baseChange\\|def baseChange' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/{ToMatrix,Basic,BaseChange}.lean, LinearAlgebra/Matrix/Charpoly/Coeff.lean, LinearAlgebra/TensorProduct/Basis.lean",
+   "results": "LinearMap.charpoly_toMatrix (Charpoly/ToMatrix.lean:43), LinearEquiv.charpoly_conj (ToMatrix.lean:76), Matrix.charpoly_monic (Matrix/Charpoly/Coeff.lean:120), Matrix.charpoly_natDegree_eq_dim (Coeff.lean:116, [Nontrivial R]), LinearMap.charpoly_monic/charpoly_natDegree (Charpoly/Basic.lean:72,76), LinearMap.charpoly_baseChange (Charpoly/BaseChange.lean:23), Module.Basis.baseChange (TensorProduct/Basis.lean:64), Matrix.charpoly_map (Matrix/Charpoly/Basic.lean:175)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.charpoly_toMatrix, LinearEquiv.charpoly_conj, Matrix.charpoly_monic, Matrix.charpoly_natDegree_eq_dim, Module.Basis.baseChange, LinearMap.charpoly_baseChange",
+  "file": "Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean",
+  "how": "specializes in one line per clause: (a) `LinearMap.charpoly_toMatrix ψ b : (toMatrix b b ψ).charpoly = ψ.charpoly` (Charpoly/ToMatrix.lean:43) for every finite basis b, so all χ_e equal `LinearMap.charpoly ψ`; (b) `LinearEquiv.charpoly_conj u ψ` (ToMatrix.lean:76), N' free of rank n via `Basis.map`; (c) `Matrix.charpoly_monic` (Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:120) and `Matrix.charpoly_natDegree_eq_dim` (Coeff.lean:116) for nontrivial R, with `Polynomial.Monic.coeff_natDegree`, `Polynomial.coeff_eq_zero_of_natDegree_lt`; for R = 0 every coefficient statement is trivial; (d) `Module.Basis.baseChange` (Mathlib/LinearAlgebra/TensorProduct/Basis.lean:64, basis 1 ⊗ e_i of R' ⊗[R] N) and `LinearMap.charpoly_baseChange ψ R'` (Mathlib/LinearAlgebra/Charpoly/BaseChange.lean:23: `(ψ.baseChange R').charpoly = ψ.charpoly.map (algebraMap R R')`), proved there via `Matrix.charpoly_map`; Mathlib writes base change on the left, N ⊗_R R' ≅ R' ⊗_R N by `TensorProduct.comm`, which carries ψ ⊗ 1 to `ψ.baseChange R'` (then (b))"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: charpoly_toMatrix (Charpoly/ToMatrix.lean:43), LinearEquiv.charpoly_conj (:76), Matrix.charpoly_monic (Coeff.lean:120), charpoly_natDegree_eq_dim (:116), LinearMap.charpoly_baseChange (BaseChange.lean:23)."
+ }
+}

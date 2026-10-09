@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-charpoly-free-module",
+ "kind": "definition",
+ "title": "Characteristic polynomial of an endomorphism of a finite free module (in a basis)",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, $N$ a free $R$-module with a basis $e_1,\\dots,e_n$, and $\\psi:N\\to N$ an $R$-linear map, with matrix $X=(x_{ij})\\in M_n(R)$ in this basis ($\\psi(e_j)=\\sum_ix_{ij}e_i$). The *characteristic polynomial of $\\psi$ in the basis $e$* is $\\det(T\\cdot I_n-X)\\in R[T]$ [def-weil-polynomial-ring], the determinant of the $n\\times n$ matrix over $R[T]$ with entries $T\\delta_{ij}-x_{ij}$ (for $n=0$ it is $1$). It is written $\\det(T-\\psi)$ or $\\det(T-\\psi\\mid N)$ once it is known not to depend on the basis [lem-weil-pbc-charpoly-free-module-properties].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph: 'If the module is free the CharPol$_A$ is defined as the characteristic polynomial of the corresponding matrix'"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic polynomial of a square matrix over a commutative ring det(X·I − A)",
+   "results": "Matrix.charpoly (Mathlib.LinearAlgebra.Matrix.Charpoly.Basic), Matrix.eval_charpoly, Matrix.charpoly.univ, LinearMap.charpoly_def, LinearMap.eval_charpoly",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.charpoly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial of a square matrix over a commutative ring, defined as determinant of the characteristic matrix X·1 − A",
+   "results": "Matrix.charpoly, Matrix.charpoly.univ, Matrix.charpolyRev, Matrix.eval_charpoly, Matrix.charmatrix (all Mathlib.LinearAlgebra.Matrix.Charpoly.*)",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.charpoly"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^def charpoly\\|^def charmatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean; sed -n 35,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Charpoly/Basic.lean",
+   "results": "Matrix.charmatrix (Basic.lean:50) = scalar n X - C.mapMatrix M; Matrix.charpoly (Basic.lean:134) = (charmatrix M).det; LinearMap.charpoly (Charpoly/Basic.lean:44) = charpoly of toMatrix in Module.Free.chooseBasis",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.charpoly",
+  "file": "Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+  "how": "exact: `(LinearMap.toMatrix e e ψ).charpoly` for a basis `e : Module.Basis (Fin n) R N`; `Matrix.charpoly M = (Matrix.charmatrix M).det` (line 134) with `charmatrix M = Matrix.scalar n X - (C : R →+* R[X]).mapMatrix M` (line 50), i.e. det(T·I − X); the basis-free version is `LinearMap.charpoly` (Mathlib/LinearAlgebra/Charpoly/Basic.lean:44), equal to it by `LinearMap.charpoly_toMatrix`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition leaf verified: Matrix.charpoly (Matrix/Charpoly/Basic.lean:134) of LinearMap.toMatrix."
+ }
+}

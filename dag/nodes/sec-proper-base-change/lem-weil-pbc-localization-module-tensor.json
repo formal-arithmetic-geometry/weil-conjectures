@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-localization-module-tensor",
+ "kind": "statement",
+ "title": "Localization of a module at an element is the base change to the localized ring, naturally",
+ "statement": "Let $R$ be a commutative ring, $f\\in R$, $R_f$ the localization of $R$ at $f$ [def-weil-ring-localization-away] and $M$ an $R$-module with localization $M_f$ [def-weil-pbc-module-localization-away]. Then the map $M\\otimes_RR_f\\to M_f$ [def-weil-module-base-change], $m\\otimes(a/f^e)\\mapsto am/f^e$, is an isomorphism of $R_f$-modules. It is natural: for an $R$-linear map $\\varphi:M\\to M'$ it carries $\\varphi\\otimes1$ to the map $\\varphi_f:M_f\\to M'_f$, $m/f^e\\mapsto\\varphi(m)/f^e$ (in particular $\\varphi_f$ is well defined and $R_f$-linear).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DK (lemma-tensor-localization, line 2088), with $S=\\{1,f,f^2,\\dots\\}$ (there written $S^{-1}R\\otimes_RM\\cong S^{-1}M$; the order of the factors is swapped by the symmetry of $\\otimes$); naturality from the formula on generators"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a module S⁻¹M is isomorphic to S⁻¹R ⊗_R M",
+   "results": "IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.moduleLid, ModuleCat.localizedModule, isLocalizedModule_iff_isBaseChange, IsLocalizedModule.rTensor, localizedModuleIsLocalizedModule (Mathlib.RingTheory.Localization.BaseChange, Mathlib.Algebra.Module.LocalizedModule.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: isLocalizedModule_iff_isBaseChange / IsLocalizedModule.isBaseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized module M_S is the base change of M along R → S⁻¹R (tensor product with the localization)",
+   "results": "IsLocalizedModule.isBaseChange, isLocalizedModule_iff_isBaseChange, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, LinearMap.extendScalarsOfIsLocalizationEquiv_apply, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalizedModule.isBaseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.isBaseChange",
+   "results": "IsLocalizedModule.isBaseChange : [IsLocalizedModule S f] → IsBaseChange A f (Mathlib.RingTheory.Localization.BaseChange)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isLocalizedModule_iff_isBaseChange\\|IsLocalizedModule.isBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'equiv_tmul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IsTensorProduct.lean",
+   "results": "IsLocalizedModule.isBaseChange (RingTheory/Localization/BaseChange.lean:34), isLocalizedModule_iff_isBaseChange (:52, docstring: 'an isomorphism between LocalizedModule S M and (Localization S) ⊗[R] M given by m/s ↦ (1/s) ⊗ₜ m'), IsBaseChange.equiv (RingTheory/IsTensorProduct.lean), IsBaseChange.equiv_tmul (:416)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalizedModule.isBaseChange",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "how": "specializes in one line: `IsLocalizedModule.isBaseChange (Submonoid.powers f) (Localization.Away f) (LocalizedModule.mkLinearMap (Submonoid.powers f) M)` (line 34) gives `IsBaseChange`, whose `IsBaseChange.equiv : R_f ⊗[R] M ≃ₗ[R_f] M_f` (RingTheory/IsTensorProduct.lean) sends a ⊗ m ↦ a • (m/1) (`IsBaseChange.equiv_tmul`, :416); composing with `TensorProduct.comm` gives the node's order; naturality: both composites agree on the generators m ⊗ (a/f^e) (ext on pure tensors; φ_f is `LocalizedModule.map`/`IsLocalizedModule.map`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-charpoly-locally-free-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsLocalizedModule.isBaseChange (Localization/BaseChange.lean:34). Overlaps lem-weil-pbc-localization-away-tensor-iso (stage-3 merge candidate)."
+ }
+}
