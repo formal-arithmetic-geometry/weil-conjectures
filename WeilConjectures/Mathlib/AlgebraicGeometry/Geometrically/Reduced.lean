@@ -45,7 +45,8 @@ the members of an étale cover are not open subschemes of the source.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
 
-The smooth case, in which the schemes can moreover be taken affine, is
+The smooth case, in which the schemes can moreover be taken affine and the first leg admits a
+section (Stacks `0EY4`), is
 `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` in
 `WeilConjectures/AlgebraicGeometry/Morphisms/Slicing.lean`.
 
@@ -108,8 +109,9 @@ theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g
 /-- Let `f : X ⟶ S` be flat, locally of finite presentation and with geometrically reduced
 fibres. Then there is an étale covering `p i : U i ⟶ X` of `X`, that is, a family of étale
 morphisms whose images cover `X`, such that each composite `p i ≫ f` factors as `q i ≫ r i`
-with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` flat, locally of finite presentation and
-affine, with geometrically connected fibres, and admitting a section:
+with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` flat of finite presentation (locally of finite
+presentation, quasi-compact and quasi-separated), with geometrically connected and
+geometrically reduced fibres:
 
 ```
 U i --q i--> V i
@@ -119,9 +121,9 @@ p i          r i
  X ----f----> S
 ```
 
-A smooth morphism satisfies the hypotheses, by `AlgebraicGeometry.Smooth.geometricallyReduced`
-and the instances `Smooth → Flat` and `Smooth → LocallyOfFinitePresentation`; that special
-case is Stacks `0EY4`, in which the first leg `q i` is moreover smooth. -/
+For a smooth morphism the first leg can moreover be taken to be a smooth morphism of affine
+schemes admitting a section; that is Stacks `0EY4`,
+`AlgebraicGeometry.Smooth.exists_etaleCover_factorization`. -/
 @[stacks 0EY5]
 theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyReduced f] :
@@ -129,8 +131,9 @@ theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f
       (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S),
       (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
       (∀ i, Etale (r i)) ∧ (∀ i, Flat (q i)) ∧ (∀ i, LocallyOfFinitePresentation (q i)) ∧
-      (∀ i, IsAffineHom (q i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
-      (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) :=
+      (∀ i, QuasiCompact (q i)) ∧ (∀ i, QuasiSeparated (q i)) ∧
+      (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, GeometricallyReduced (q i)) ∧
+      (∀ i, q i ≫ r i = p i ≫ f) :=
   sorry
 
 end AlgebraicGeometry
