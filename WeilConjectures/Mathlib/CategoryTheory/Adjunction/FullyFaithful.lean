@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import Mathlib.CategoryTheory.Yoneda
 
 /-!
-# The unit of an adjunction on the essential image of a fully faithful functor
+# Units of adjunctions: essential images of fully faithful functors and invertible counits
 
 Let `F ⊣ G` be an adjunction between `C` and `D`, and let `J : U ⥤ C` be a fully faithful functor
 with a right adjoint `J'`, such that `J ⋙ F` is again fully faithful. Then the unit
@@ -20,9 +20,15 @@ The typical instance is an extension by zero `J = j_!` along an open immersion, 
 and `F = q^*` the pullback along a morphism `q` which is an isomorphism over the open subset, so
 that `q^* j_! = j'_!` is again fully faithful.
 
+For an adjunction `L ⊣ R` whose counit is an isomorphism at `L X`, the two maps
+`R (L X) ⟶ R (L (R (L X)))` given by `R (L (η X))` and by `η (R (L X))` agree: both are right
+inverse to the isomorphism `R (ε (L X))`.
+
 ## Main statements
 
 - `CategoryTheory.Adjunction.isIso_map_unit_app_obj`: `J' (η_{J K})` is an isomorphism.
+- `CategoryTheory.Adjunction.map_map_unit_app_eq`: `R (L (η X)) = η (R (L X))` when the counit
+  is an isomorphism at `L X`.
 -/
 
 @[expose] public section
@@ -91,6 +97,14 @@ lemma isIso_map_unit_app_obj (adj : F ⊣ G) (adjJ : J ⊣ J') [J.Full] [J.Faith
     simp [Adjunction.homEquiv_naturality_right]
   exact (congrArg Function.Bijective e).mpr ((adjJ.homEquiv _ _).bijective.comp
     ((adj.bijective_comp_unit_app_obj T K).comp (adjJ.homEquiv _ _).symm.bijective))
+
+/-- For an adjunction whose counit is an isomorphism at `L X`, the image of the unit at `X`
+under `L ⋙ R` is the unit at `R (L X)`. -/
+lemma map_map_unit_app_eq {C D : Type*} [Category C] [Category D] {L : C ⥤ D}
+    {R : D ⥤ C} (adj : L ⊣ R) (X : C) [IsIso (adj.counit.app (L.obj X))] :
+    R.map (L.map (adj.unit.app X)) = adj.unit.app (R.obj (L.obj X)) := by
+  rw [← cancel_mono (R.map (adj.counit.app (L.obj X)))]
+  simp [← R.map_comp]
 
 end Adjunction
 
