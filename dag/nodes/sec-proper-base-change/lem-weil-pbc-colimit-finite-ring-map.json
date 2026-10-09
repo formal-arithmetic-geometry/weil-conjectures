@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-colimit-finite-ring-map",
+ "kind": "statement",
+ "title": "Finiteness of a finite type ring map descends along a directed colimit",
+ "statement": "Let $I$ be a directed set and $(A_i)_{i\\in I}$ a directed system of commutative rings (ring maps $A_i\\to A_{i'}$ for $i\\le i'$, compatible), with colimit $A=\\varinjlim_iA_i$ [def-weil-pbc-category-colimit]. Let $0\\in I$, let $B_0$ and $C_0$ be commutative $A_0$-algebras and $\\varphi_0:B_0\\to C_0$ a homomorphism of $A_0$-algebras which is of finite type ($C_0$ is generated as a $B_0$-algebra, via $\\varphi_0$, by finitely many elements). For $i\\ge0$ regard $A_i$ as an $A_0$-algebra via the transition map, and $A$ via the coprojection, and put $B_i=A_i\\otimes_{A_0}B_0$, $C_i=A_i\\otimes_{A_0}C_0$, $\\varphi_i=\\mathrm{id}_{A_i}\\otimes\\varphi_0:B_i\\to C_i$, and $B=A\\otimes_{A_0}B_0$, $C=A\\otimes_{A_0}C_0$, $\\varphi=\\mathrm{id}_A\\otimes\\varphi_0:B\\to C$. If $\\varphi$ is finite ($C$ is a finitely generated $B$-module via $\\varphi$), then there is an $i\\ge0$ such that $\\varphi_i$ is finite ($C_i$ is a finitely generated $B_i$-module via $\\varphi_i$) (Stacks Algebra, Lemma 07RG).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07RG (lemma-colimit-finite, line 47522) and its proof (generators $x_1,\\dots,x_m$ of $C_0$ over $B_0$, monic polynomials $P_j$ over $A\\otimes_{A_0}B_0$ killing $1\\otimes x_j$, lifted to a finite stage)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed colimit of rings: if base change of a finite type algebra map to the colimit is finite, then the base change to some stage is finite",
+   "results": "Ring.DirectLimit, Ring.DirectLimit.commRing, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (Mathlib.Algebra.Category.Ring.FinitePresentation), Ring.DirectLimit.ring, DirectLimit.instCommRingOfRingHomClass, RingHom.finiteType_isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match (factorization of finitely presented maps through a stage, not finiteness)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A = colim A_i filtered colimit of rings, B_0 -> C_0 finite type A_0-algebra map; if A ⊗ B_0 -> A ⊗ C_0 is finite then A_i ⊗ B_0 -> A_i ⊗ C_0 is finite for some i",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, RingHom.Finite.tensorProductMap, Algebra.EssFiniteType.baseChange, TensorProduct.Algebra.exists_of_fg, Algebra.QuasiFinite.baseChange, Algebra.FinitePresentation.baseChange, exists_fg_and_mem_baseChange",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Finite, CategoryTheory.Limits.IsColimit",
+   "results": "none (empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'RingHom.Finite\\|Module.Finite\\|Algebra.Finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Colimit | xargs grep -ln 'IsColimit\\|DirectLimit\\|IsFiltered'; grep -rn 'stacks 07RG' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/PolynomialLaw/Basic.lean and Algebra/Category/Ring/FinitePresentation.lean only; neither states descent of finiteness along a colimit (FinitePresentation.lean: EssFiniteType/FinitePresentation factorization); no stacks 07RG attribute",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-descend-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Algebra 07RG; self-contained; correct; unsplit."
+ }
+}
