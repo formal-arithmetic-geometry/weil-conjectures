@@ -62,6 +62,29 @@ theorem pow_zsmul_mem_range_of_natCard_ker_le [Finite G] {ℓ : ℕ} (hℓ : ℓ
 
 variable {A : Type*} [AddCommGroup A] {ℓ : ℕ}
 
+/-- An element of `ℤ / ℓ ^ (n + k)` killed by `ℓ ^ k` reduces to zero modulo `ℓ ^ n`. -/
+theorem _root_.ZMod.castHom_eq_zero_of_pow_mul_eq_zero (hℓ : ℓ.Prime) {n k : ℕ}
+    {a : ZMod (ℓ ^ (n + k))} (ha : ((ℓ ^ k : ℕ) : ZMod (ℓ ^ (n + k))) * a = 0) :
+    ZMod.castHom (pow_dvd_pow ℓ (Nat.le_add_right n k)) (ZMod (ℓ ^ n)) a = 0 := by
+  have : NeZero (ℓ ^ (n + k)) := ⟨pow_ne_zero _ hℓ.ne_zero⟩
+  rw [ZMod.castHom_apply, ZMod.cast_eq_val, ZMod.natCast_eq_zero_iff]
+  have h' : ℓ ^ (n + k) ∣ ℓ ^ k * a.val := by
+    rw [← ZMod.natCast_eq_zero_iff, Nat.cast_mul, ZMod.natCast_val, ZMod.cast_id', id]
+    exact ha
+  have h'' : ℓ ^ k * ℓ ^ n ∣ ℓ ^ k * a.val := by rwa [← pow_add, add_comm k n]
+  exact Nat.dvd_of_mul_dvd_mul_left (pow_pos hℓ.pos k) h''
+
+/-- Iterating the compatibility of a system `a n ∈ ℤ / ℓ ^ n` under reduction. -/
+theorem _root_.ZMod.castHom_eq_of_forall_castHom_succ (a : ∀ n : ℕ, ZMod (ℓ ^ n))
+    (ha : ∀ n, ZMod.castHom (pow_dvd_pow ℓ (Nat.le_add_right n 1)) (ZMod (ℓ ^ n)) (a (n + 1)) =
+      a n) (n k : ℕ) :
+    ZMod.castHom (pow_dvd_pow ℓ (Nat.le_add_right n k)) (ZMod (ℓ ^ n)) (a (n + k)) = a n := by
+  induction k with
+  | zero => rw [ZMod.castHom_apply]; exact ZMod.cast_id _ _
+  | succ k ih =>
+    rw [← ih, ← ha (n + k), ← RingHom.comp_apply, ZMod.castHom_comp]
+    rfl
+
 /-- Iterating the compatibility `ψ n (ℓ • y) = ψ (n + 1) y mod ℓ ^ n` of a system of characters
 `ψ n : A[ℓ ^ n] → ℤ / ℓ ^ n`. -/
 theorem map_pow_zsmul_eq_castHom (ψ : ∀ n : ℕ, torsionBy A ((ℓ : ℤ) ^ n) →+ ZMod (ℓ ^ n))

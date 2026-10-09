@@ -351,6 +351,38 @@ theorem exists_section_of_isIsomorphic_mapIso_of_isProper
   exact DFunLike.congr_fun hψ0 x
 
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
+curve, the action of Frobenius on the boundary module.
+
+Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
+compactification `c`, with geometric fibres `U ⊆ C` and `j : U ⟶ C`, and let `V ⊆ C` be an open
+containing `U` with `V \ U = {z}`. There is `v` such that for every Frobenius-fixed
+`ℤ / ℓⁿ`-torsor on `U`, `ℓ ^ v` kills its monodromy on the kernel of `π₁(U) → π₁(V)`, the local
+monodromy at `z`.
+
+Indeed this monodromy factors through the tame inertia at `z`, whose `ℓ`-part is `ℤ_ℓ(1)`: the
+residue of the torsor lies in `ℤ / ℓⁿ(-1)`. A power `Φ_Q`, `Q = q ^ m`, of the Frobenius fixes
+`z` and acts on `ℤ / ℓⁿ(-1)` as multiplication by `Q`, so the residue of a Frobenius-fixed torsor
+is killed by `Q - 1`, and one can take `ℓ ^ v` to be the `ℓ`-part of `Q - 1`. -/
+theorem exists_pow_mul_monodromy_eq_zero
+    {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] (c : Compactification p) [IsCurve c.g]
+    [SmoothOfRelativeDimension 1 c.g] [GeometricallyConnected c.g] (l : ℕ) [Fact l.Prime]
+    [Fact (ringChar K ≠ l)] [ConnectedSpace p.geometricFiber]
+    [ConnectedSpace c.g.geometricFiber] (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+    (V : c.g.geometricFiber.Opens)
+    (hV : Set.range (p.geometricFiberMap c.i c.comm.symm).base ⊆ V) (z : c.g.geometricFiber)
+    (hz : (V : Set c.g.geometricFiber) \ Set.range (p.geometricFiberMap c.i c.comm.symm).base =
+      {z}) :
+    ∃ v : ℕ, ∀ (n : ℕ) (T : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber),
+      (T.mapIso p.geometricGaloisFrobenius).IsIsomorphic T →
+      ∀ g ∈ fixingSubgroup s (IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
+          (by rwa [Scheme.Opens.range_ι])) G,
+        ((l ^ v : ℕ) : ZMod (l ^ n)) * (T.monodromy s G g).toAdd.down = 0 := by
+  sorry
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
 curve, the vanishing of the residue at one boundary point.
 
 Let `U₀ ⊆ C₀` be a smooth geometrically connected curve over `K = 𝔽_q` in a smooth proper
@@ -380,7 +412,47 @@ theorem exists_pullback_iso_of_isIsomorphic_mapIso
     ∃ Z : V.toScheme.FiniteEtale, Nonempty ((FiniteEtale.pullback (IsOpenImmersion.lift V.ι
       (p.geometricFiberMap c.i c.comm.symm) (by rwa [Scheme.Opens.range_ι]))).obj Z ≅
         (t n).toFiniteEtale) := by
-  sorry
+  have hl : l.Prime := Fact.out
+  set k := IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
+    (by rwa [Scheme.Opens.range_ι])
+  obtain ⟨v, hv⟩ := exists_pow_mul_monodromy_eq_zero p c l s G V hV z hz
+  -- the geometric fibre `C` is irreducible, so `V` is connected and connected covers of `V` stay
+  -- connected over `U`
+  let q := c.g.geometricFiberToAlgebraicClosure
+  have : SmoothOfRelativeDimension 1 q :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (Limits.pullback.snd c.g _))
+  have : Smooth q := SmoothOfRelativeDimension.smooth 1 q
+  have := LocallyOfFiniteType.isLocallyNoetherian q
+  have : IsRegular c.g.geometricFiber := IsRegular.of_smooth q
+  have : IrreducibleSpace c.g.geometricFiber := IsRegular.irreducibleSpace _
+  obtain ⟨u⟩ : Nonempty p.geometricFiber := inferInstance
+  have : ConnectedSpace V.toScheme := by
+    have hne : (V : Set c.g.geometricFiber).Nonempty := ⟨_, hV ⟨u, rfl⟩⟩
+    have hirr : IsIrreducible (V : Set c.g.geometricFiber) :=
+      ⟨hne, (IrreducibleSpace.isIrreducible_univ c.g.geometricFiber).isPreirreducible.open_subset
+        V.isOpen (Set.subset_univ _)⟩
+    exact isConnected_iff_connectedSpace.1 hirr.isConnected
+  obtain ⟨GV, _, _⟩ := exists_isFundamentalGroup (s ≫ k)
+  have hρ : Function.Surjective (fundamentalGroupMap (pullbackFiberIso k s) G GV) :=
+    fundamentalGroupMap_surjective _ GV G fun P hP ↦ by
+      have := connectedSpace_of_isConnected P
+      have : Etale P.obj.hom := P.obj.prop
+      let w : P.obj.left ⟶ Spec (.of (AlgebraicClosure K)) := P.obj.hom ≫ V.ι ≫ q
+      have : Smooth w := inferInstance
+      have := LocallyOfFiniteType.isLocallyNoetherian w
+      have := IsRegular.of_smooth w
+      have := IsRegular.irreducibleSpace P.obj.left
+      exact isConnected_pullback_of_irreducibleSpace k P
+  -- by compatibility, the local monodromy of `t n` is that of `t (n + v)` reduced, hence zero
+  have hkill : ∀ g ∈ fixingSubgroup s k G, (t n).monodromy s G g = 1 := fun g hg ↦ by
+    have h₁ := ZMod.castHom_eq_of_forall_castHom_succ
+      (fun m ↦ ((t m).monodromy s G g).toAdd.down) (fun m ↦ ht m g) n v
+    have h₂ := ZMod.castHom_eq_zero_of_pow_mul_eq_zero hl (hv (n + v) (t (n + v)) (hfix _) g hg)
+    rw [h₁] at h₂
+    apply Multiplicative.toAdd.injective
+    exact ULift.ext _ _ h₂
+  obtain ⟨T, hT⟩ := exists_isIsomorphic_pullback k s hρ (t n) hkill
+  exact ⟨T.toFiniteEtale, hT.nonempty_iso⟩
 
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
 curve, the consequence used for compatible Frobenius-fixed systems.

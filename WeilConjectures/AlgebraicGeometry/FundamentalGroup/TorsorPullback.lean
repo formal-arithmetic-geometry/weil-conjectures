@@ -93,6 +93,18 @@ lemma vaddHom_pullback (m : M) :
     (t.pullback f s).vaddHom m = (FiniteEtale.pullback f).map (t.vaddHom m) :=
   rfl
 
+/-- Isomorphic torsors are isomorphic as finite étale schemes. -/
+lemma IsIsomorphic.nonempty_iso {Z : Scheme.{u}} {t₁ t₂ : EtaleTorsor M Z}
+    (h : t₁.IsIsomorphic t₂) :
+    Nonempty (t₁.toFiniteEtale ≅ t₂.toFiniteEtale) := by
+  obtain ⟨φ, hπ, -⟩ := h
+  exact ⟨{ hom := ObjectProperty.homMk (MorphismProperty.Over.homMk φ.hom hπ)
+           inv := ObjectProperty.homMk (MorphismProperty.Over.homMk φ.inv (by
+             change φ.inv ≫ t₁.π = t₂.π
+             rw [← hπ, ← Category.assoc, φ.inv_hom_id, Category.id_comp]))
+           hom_inv_id := FiniteEtale.hom_ext φ.hom_inv_id
+           inv_hom_id := FiniteEtale.hom_ext φ.inv_hom_id }⟩
+
 /-- Base change preserves isomorphism of torsors. -/
 lemma IsIsomorphic.pullback {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) :
     (t₁.pullback f s).IsIsomorphic (t₂.pullback f s) := by
