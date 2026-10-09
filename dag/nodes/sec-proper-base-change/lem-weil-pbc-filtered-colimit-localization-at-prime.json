@@ -11,9 +11,81 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the functor $i\\mapsto(R_i)_{\\mathfrak p_i}$).* Write $D_i=(R_i)_{\\mathfrak p_i}$ and $S_i=R_i\\setminus\\mathfrak p_i$. Each $\\mathfrak p_i=\\iota_i^{-1}(\\mathfrak p)$ is a prime ideal of $R_i$ (the preimage of a prime ideal under a ring map: $1\\notin\\mathfrak p_i$ since $\\iota_i(1)=1\\notin\\mathfrak p$, and $xy\\in\\mathfrak p_i$ means $\\iota_i(x)\\iota_i(y)\\in\\mathfrak p$). For $a:i\\to j$ the cocone identity $\\iota_j\\circ R(a)=\\iota_i$ [def-weil-pbc-category-colimit] gives $R(a)^{-1}(\\mathfrak p_j)=R(a)^{-1}\\iota_j^{-1}(\\mathfrak p)=(\\iota_j\\circ R(a))^{-1}(\\mathfrak p)=\\mathfrak p_i$, so $R(a)(S_i)\\subset S_j$. Hence $D(a):D_i\\to D_j$, $x/s\\mapsto R(a)(x)/R(a)(s)$, is well defined [def-weil-pbc-localization-at-prime]: $R(a)(s)\\in S_j$, and if $x/s=x'/s'$ in $D_i$, i.e. $u(xs'-x's)=0$ with $u\\in S_i$, then $R(a)(u)\\in S_j$ and $R(a)(u)\\big(R(a)(x)R(a)(s')-R(a)(x')R(a)(s)\\big)=0$. It is a ring map because the sum and product of fractions are given by the formulas $x/s+x'/s'=(xs'+x's)/(ss')$, $(x/s)(x'/s')=(xx')/(ss')$, $1=1/1$, which the ring map $R(a)$ respects. From $R(\\mathrm{id}_i)=\\mathrm{id}$ and $R(b\\circ a)=R(b)\\circ R(a)$ one reads off $D(\\mathrm{id}_i)=\\mathrm{id}$ and $D(b\\circ a)=D(b)\\circ D(a)$ on every fraction $x/s$: $i\\mapsto D_i$ is a functor $I\\to$ commutative rings. This is part (1).",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 037D (lemma-colimit-normal-ring), line 8321 ('Set $\\mathfrak p_i=R_i\\cap\\mathfrak p$'); fractions as in Definition Tag 00CO (definition-localization), line 1068; written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 2 (the cocone $\\kappa_i$).* For $s\\in S_i$ one has $\\iota_i(s)\\notin\\mathfrak p$ by the definition of $\\mathfrak p_i$, so $\\kappa_i:D_i\\to R_{\\mathfrak p}$, $x/s\\mapsto\\iota_i(x)/\\iota_i(s)$, is defined; it is well defined (if $u(xs'-x's)=0$ with $u\\in S_i$, then $\\iota_i(u)\\notin\\mathfrak p$ witnesses $\\iota_i(x)/\\iota_i(s)=\\iota_i(x')/\\iota_i(s')$) and a ring map, by the formulas for sum, product and $1$ of fractions [def-weil-pbc-localization-at-prime], exactly as in step 1. For $a:i\\to j$, $\\kappa_j(D(a)(x/s))=\\iota_j(R(a)(x))/\\iota_j(R(a)(s))=\\iota_i(x)/\\iota_i(s)=\\kappa_i(x/s)$ by $\\iota_j\\circ R(a)=\\iota_i$; so $(R_{\\mathfrak p},(\\kappa_i))$ is a cocone on $i\\mapsto D_i$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 037D (lemma-colimit-normal-ring), line 8322-8323 (the maps implicit in '$R_{\\mathfrak p}=\\colim_i(R_i)_{\\mathfrak p_i}$'); written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 3 (every element of $R_{\\mathfrak p}$ comes from a stage).* Let $z\\in R_{\\mathfrak p}$, $z=r/\\sigma$ with $r\\in R$, $\\sigma\\in R\\setminus\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Commutative rings are the commutative $\\mathbf Z$-algebras (every ring map is $\\mathbf Z$-linear), so $R$ is the colimit of $i\\mapsto R_i$ in commutative $\\mathbf Z$-algebras, and by part (2) of [lem-weil-pbc-filtered-colimit-algebras-elementwise] (with base ring $\\mathbf Z$) $r=\\iota_i(x)$, $\\sigma=\\iota_j(s)$ for some objects $i,j$ and $x\\in R_i$, $s\\in R_j$. As $I$ is filtered [def-weil-pbc-category-colimit] there are $a:i\\to k$, $b:j\\to k$; then $r=\\iota_k(x')$, $\\sigma=\\iota_k(s')$ with $x'=R(a)(x)$, $s'=R(b)(s)$, and $s'\\in S_k$ because $\\iota_k(s')=\\sigma\\notin\\mathfrak p$. So $z=\\kappa_k(x'/s')$. Combining with filteredness and the cocone identity of step 2, finitely many elements of $R_{\\mathfrak p}$ are images under one $\\kappa_k$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00D6 (lemma-directed-colimit), line 778, for directed systems; here in the filtered form of the leaf; written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (equality criterion).* Let $w\\in D_i$, $w'\\in D_j$ with $\\kappa_i(w)=\\kappa_j(w')$. Then there are $e:i\\to n$, $e':j\\to n$ with $D(e)(w)=D(e')(w')$. Proof: choose $a:i\\to k$, $b:j\\to k$ ($I$ filtered) and replace $w,w'$ by $D(a)(w)=x/s$, $D(b)(w')=y/t$ in $D_k$ (step 2: $\\kappa_k\\circ D(a)=\\kappa_i$). Then $\\iota_k(x)/\\iota_k(s)=\\iota_k(y)/\\iota_k(t)$ in $R_{\\mathfrak p}$, so by the definition of equality of fractions [def-weil-pbc-localization-at-prime] there is $u\\in R\\setminus\\mathfrak p$ with $u\\,\\iota_k(xt-ys)=0$. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) (base ring $\\mathbf Z$, as in step 3) $u=\\iota_l(v)$ with $v\\in R_l$; choose $c:k\\to m$, $d:l\\to m$ and put $v'=R(d)(v)$, $q=R(c)(xt-ys)$; then $\\iota_m(v'q)=u\\,\\iota_k(xt-ys)=0$ and $v'\\in S_m$ since $\\iota_m(v')=u\\notin\\mathfrak p$. By [lem-weil-pbc-filtered-colimit-rings-zero] there is $f:m\\to n$ with $R(f)(v'q)=0$. With $g=f\\circ c:k\\to n$ and $v''=R(f)(v')\\in S_n$ (step 1: $R(f)(S_m)\\subset S_n$) this reads $v''\\big(R(g)(x)R(g)(t)-R(g)(y)R(g)(s)\\big)=0$, i.e. $D(g)(x/s)=D(g)(y/t)$ in $D_n$; so $e=g\\circ a$, $e'=g\\circ b$ work. (Conversely $D(e)(w)=D(e')(w')$ implies $\\kappa_i(w)=\\kappa_j(w')$ by step 2.)",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00D7 (lemma-zero-directed-limit), line 811, for directed systems; here in the filtered form of the leaf; written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 5 (universal property).* Let $(T,(g_i:D_i\\to T))$ be a cocone of commutative rings on $i\\mapsto D_i$. Define $g:R_{\\mathfrak p}\\to T$ by $g(\\kappa_i(w))=g_i(w)$: every $z\\in R_{\\mathfrak p}$ has the form $\\kappa_i(w)$ (step 3), and if $\\kappa_i(w)=\\kappa_j(w')$ then with $e,e'$ from step 4, $g_i(w)=g_n(D(e)(w))=g_n(D(e')(w'))=g_j(w')$, so $g$ is well defined. It is a ring map: for $z,z'\\in R_{\\mathfrak p}$ choose by step 3 one $k$ and $w,w'\\in D_k$ with $z=\\kappa_k(w)$, $z'=\\kappa_k(w')$; then $z+z'=\\kappa_k(w+w')$, $zz'=\\kappa_k(ww')$, so $g(z+z')=g_k(w)+g_k(w')$ and $g(zz')=g_k(w)g_k(w')$; and $g(1)=g_i(1)=1$ for any object $i$ ($I$ is nonempty, being filtered). By construction $g\\circ\\kappa_i=g_i$ for all $i$, and any ring map $h$ with $h\\circ\\kappa_i=g_i$ for all $i$ equals $g$, since the images of the $\\kappa_i$ cover $R_{\\mathfrak p}$ (step 3). Hence $(R_{\\mathfrak p},(\\kappa_i))$ is a colimit of $i\\mapsto(R_i)_{\\mathfrak p_i}$ in commutative rings [def-weil-pbc-category-colimit], which is part (2).",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 037D (lemma-colimit-normal-ring), line 8322-8323 ('Then we see that $R_{\\mathfrak p}=\\colim_i(R_i)_{\\mathfrak p_i}$', asserted without proof); written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 037D (lemma-colimit-normal-ring), lines 8320-8323, where the statement is asserted without proof for a directed system of rings; the proof is written by the agent from the elementwise description of filtered colimits of rings (Lemmas Tag 00D6, line 778, and Tag 00D7, line 811, in their filtered forms, the Mathlib leaves lem-weil-pbc-filtered-colimit-algebras-elementwise and lem-weil-pbc-filtered-colimit-rings-zero) and the description of the localization by fractions (Definition Tag 00CO, line 1068)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +114,38 @@
    "results": "17 files mention both; none states that a localization of a filtered colimit (or Ring.DirectLimit) of rings is the colimit of the localizations",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsLocalization of a filtered colimit of commutative rings at a prime is the colimit of localizations at the comap primes",
+   "results": "AlgebraicGeometry.StructureSheaf.Localizations, CommRingCat.FilteredColimits.colimitCoconeIsColimit, RingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimit, CategoryTheory.Limits.colimitLimitIso, IsLocalization.localizationLocalizationAtPrimeIsoLocalization, IsLocalization.AtPrime; none relates localization to a filtered colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.AtPrime, CategoryTheory.Limits.IsColimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization commutes with direct limit of rings: Localization.AtPrime of colimit is colimit of Localization.AtPrime",
+   "results": "Localization.AtPrime.mapPiEvalRingHom, IsLocalization.AtPrime, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, PrimeSpectrum.PiLocalization, Localization.AtPrime, IsLocalization.isLocalization_atPrime_localization_atPrime; nothing on colimits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln DirectLimit Mathlib | xargs grep -ln Locali (empty); grep -rnE 'DirectLimit|IsFiltered|colimit' Mathlib --include=*.lean | grep -iE 'locali[sz]'; Algebra/Category/Ring/FilteredColimits.lean declarations listed",
+   "results": "no file mentions both DirectLimit and localization; the only localization/colimit hits are AlgebraicGeometry/Sites/SmallAffineZariski.lean PreservesLocalization.colimitDesc_preimage (Zariski site, unrelated) and Serre-class localization of categories; FilteredColimits.lean gives only the construction of filtered colimits of rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +165,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "worker": "stage1",
+  "summary": "Tag 037D = algebra-lemma-colimit-normal-ring checked in literature/stacks-project/tags/tags (algebra.tex line 8312; the assertion is at line 8323, without proof, for a directed system); 00D6, 00D7, 00CO also checked (lines 778, 811, 1068). Statement kept (correct). Split in five steps: (1, elementary) the p_i are primes, R(a)^{-1}(p_j)=p_i by the cocone identity, the induced maps D(a) on localizations are well defined, ring maps and functorial; (2, elementary) kappa_i well defined, ring maps, a cocone; (3) every element of R_p is kappa_k(x/s) for some stage k (leaf lem-weil-pbc-filtered-colimit-algebras-elementwise with base ring Z, s not in p_k because its image is not in p); (4) equality criterion: kappa_i(w)=kappa_j(w') implies equality at a later stage (lift the witness u not in p to a stage, then leaf lem-weil-pbc-filtered-colimit-rings-zero); (5, elementary) universal property from 3 and 4. No new nodes. stmt_deps kept. Mathlib searches repeated with the three kinds (no match; Mathlib has filtered colimits of CommRingCat and localization of localizations, nothing on localization commuting with colimits). Lean candidates: none; slopmaster2 WeilConjectures/Mathlib/Algebra/Category/Ring/FilteredColimits.lean isColimitAwayProdCocone states A_p = colim of A[1/prod s] (Stacks 00CR flavour), a different statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps (agent proof; Stacks asserts it in 037D): contractions compatible and the induced maps functorial, kappa_i well defined and a cocone, every element of R_p comes from a stage, equality criterion lifting the witness u to a stage (elementwise and rings-zero leaves), universal property. Correct; 0 new nodes."
+ }
 }
