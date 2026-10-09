@@ -177,5 +177,15 @@
   "item": "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "worker": "stage1",
   "summary": "Split along Stacks sites-modules 03DB/03DA with 03CO and 03CY into four steps: (1) limits from the new leaf lem-weil-pbc-module-sheaves-limits-sectionwise (SheafOfModules.hasLimitsOfSize/evaluationPreservesLimitsOfSize/forgetPreservesLimitsOfSize) plus lem-weil-pbc-sheafification-exact (1) for forget; (2) colimits as module sheafification of the sectionwise presheaf colimit, using the new leaf lem-weil-pbc-presheaf-modules-colimits-sectionwise (PresheafOfModules colimits, toPresheaf_preservesColimitsOfSize) and the universal property of def-weil-presheaf-modules-sheafification, argument written out; (3) forget commutes with colimits: underlying abelian sheaf of the module sheafification is the abelian sheafification by construction (def-weil-presheaf-modules-sheafification; Mathlib sheafificationCompToSheaf is Iso.refl), and 03CO(4) proved inline from def-weil-pbc-sheafification; (4) faithful, kernels, cokernels, exactness. No Mathlib declaration says SheafOfModules.toSheaf preserves colimits (searched three ways); the source repository has it sorry-free as SheafOfModules.preservesColimitsOfShape_toSheaf. Added def-weil-pbc-category-colimit to stmt_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "four steps along Stacks 03DA/03DB/03CO/03CY (limits sectionwise by the new leaf; colimits as the module sheafification of the sectionwise colimit, written out from the universal property; forget commutes with colimits since the module sheafification is the abelian one; faithfulness, kernels, cokernels); 2 new Mathlib leaves verified by the lead (Sheaf/Limits.lean:62/106/108/111, Presheaf/Colimits.lean:72/114/168/170/173, Sheaf.lean:128); the source repository has clause (3) for colimits (preservesColimitsOfShape_toSheaf, sorry-free), recorded as a candidate"
+ },
+ "lean_candidates": {
+  "branch": "slopmaster2",
+  "note": "SheafOfModules.preservesColimitsOfShape_toSheaf and preservesFiniteColimits_toSheaf (WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:43/64, sorry-free) state clause (3) for colimits; the rest of the node is Mathlib (limits, faithfulness, finite limits at Sheaf/Limits.lean:118)"
  }
 }
