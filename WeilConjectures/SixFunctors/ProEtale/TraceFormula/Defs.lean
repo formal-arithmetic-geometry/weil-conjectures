@@ -274,43 +274,62 @@ lemma ctfIsoMk_inv_app_hom {C : Type*} [Category C] {F G : C ⥤ Ctf A X}
 
 end CtfFunctors
 
+/-- A morphism `f : X ⟶ Y` is a *morphism of geometric schemes* over `s` if there is a structure
+morphism `a_Y : Y ⟶ s` for which `Y` and `X`, via `f ≫ a_Y`, are geometric over `s`
+(blueprint `sk-d-setup`). It is a proposition, so that data indexed by it does not depend on
+the structure morphisms. -/
+def IsGeometricHom (s : Scheme.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
+  ∃ aY : Y ⟶ s, IsGeometric aY ∧ IsGeometric (f ≫ aY)
+
+lemma IsGeometricHom.mk {s X Y : Scheme.{u}} {f : X ⟶ Y} {aX : X ⟶ s} {aY : Y ⟶ s}
+    [IsGeometric aX] [IsGeometric aY] (hf : f ≫ aY = aX) : IsGeometricHom s f :=
+  ⟨aY, inferInstance, IsGeometric.of_eq hf.symm⟩
+
+/-- The identity of a geometric scheme is a morphism of geometric schemes. -/
+lemma IsGeometricHom.id {s X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
+    IsGeometricHom s (𝟙 X) :=
+  .mk (Category.id_comp aX)
+
+/-- The structure morphism of a geometric scheme is a morphism of geometric schemes. -/
+lemma IsGeometricHom.of_isGeometric {s X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
+    IsGeometricHom s aX :=
+  .mk (aY := 𝟙 s) (Category.comp_id aX)
+
 /-- Coefficients and geometric categories (blueprint: `sk-d-setup`): the stability of the
 categories `Dᵇctf(X, A)` of bounded constructible objects of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`) on geometric schemes over
 `s` under the operations: they contain `A_X`, are stable under `⊗ᴸ`, `Lf^*`, `Rf_!`, `Rf^!`
 and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
 (blueprint `sk-thm-sf-ctf-stability`, `sk-prop-sf-rf-shriek-preservation`), which hold at the
-finite coefficient stages `A = 𝒪_E/ϖⁿ` over a field in which `ℓ` is invertible. -/
+finite coefficient stages `A = 𝒪_E/ϖⁿ` over a field in which `ℓ` is invertible. A scheme `X` is
+geometric when `𝟙 X` is a morphism of geometric schemes. -/
 structure GeometricCoefficients (s : Scheme.{u}) : Prop where
   /-- `A_X` lies in `Dᵇctf(X)`. -/
-  ctf_unit {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
+  ctf_unit {X : Scheme.{u}} (hX : IsGeometricHom s (𝟙 X)) :
     DerivedCategory.constructibleFiniteTor A X (𝟙_ _)
   /-- `Dᵇctf(X)` is stable under `⊗ᴸ`. -/
-  ctf_tensor {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX]
+  ctf_tensor {X : Scheme.{u}} (hX : IsGeometricHom s (𝟙 X))
     {K L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K)
     (hL : DerivedCategory.constructibleFiniteTor A X L) :
     DerivedCategory.constructibleFiniteTor A X (K ⊗ L)
   /-- `Dᵇctf` is stable under `Lf^*`. -/
-  ctf_upperStar {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX] [IsGeometric aY]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX) {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+  ctf_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
     (hK : DerivedCategory.constructibleFiniteTor A Y K) :
     DerivedCategory.constructibleFiniteTor A X (((upperStar A f).leftDerivedFunctor).obj K)
   /-- `Dᵇctf` is stable under `Rf_!`. -/
-  ctf_lowerShriek {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-    [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+  ctf_lowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K) :
     DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A f).obj K)
   /-- `Dᵇctf` is stable under the constructible `Rf^!`. -/
-  ctf_upperShriek {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-    [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+  ctf_upperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
     (hL : DerivedCategory.constructibleFiniteTor A Y L) :
     DerivedCategory.constructibleFiniteTor A X ((rightDerivedUpperShriek A f).obj L)
   /-- `Dᵇctf` is stable under `Rf_*` for proper `f`. -/
-  ctf_lowerStar {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX] [IsGeometric aY]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsProper f]
+  ctf_lowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f) [IsProper f]
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (hK : DerivedCategory.constructibleFiniteTor A X K) :
     DerivedCategory.constructibleFiniteTor A Y (((lowerStar A f).rightDerivedFunctor).obj K)
@@ -327,46 +346,48 @@ abbrev ctf (_G : GeometricCoefficients A s) (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedCategory.constructibleFiniteTor A X
 
-variable {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX] [IsGeometric aY]
+variable {X Y : Scheme.{u}}
 
 /-- The pullback `Lf^* : Dᵇctf(Y) ⥤ Dᵇctf(X)` along a morphism of geometric schemes. -/
-noncomputable abbrev upperStarCtf (f : X ⟶ Y) (hf : f ≫ aY = aX) : Ctf A Y ⥤ Ctf A X :=
+noncomputable abbrev upperStarCtf (f : X ⟶ Y) (hf : IsGeometricHom s f) : Ctf A Y ⥤ Ctf A X :=
   ctfUpperStar f fun _ hK ↦ G.ctf_upperStar f hf hK
 
 /-- The exceptional direct image `Rf_! : Dᵇctf(X) ⥤ Dᵇctf(Y)` along a morphism of geometric
 schemes. -/
-noncomputable abbrev lowerShriekCtf (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f] :
-    Ctf A X ⥤ Ctf A Y :=
+noncomputable abbrev lowerShriekCtf (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] : Ctf A X ⥤ Ctf A Y :=
   ctfLowerShriek f fun _ hK ↦ G.ctf_lowerShriek f hf hK
 
 /-- The exceptional inverse image `Rf^! : Dᵇctf(Y) ⥤ Dᵇctf(X)` along a morphism of geometric
 schemes. -/
-noncomputable abbrev upperShriekCtf (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f] :
-    Ctf A Y ⥤ Ctf A X :=
+noncomputable abbrev upperShriekCtf (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] : Ctf A Y ⥤ Ctf A X :=
   ctfUpperShriek f fun _ hL ↦ G.ctf_upperShriek f hf hL
 
 /-- The direct image `Rf_* : Dᵇctf(X) ⥤ Dᵇctf(Y)` along a proper morphism of geometric
 schemes. -/
-noncomputable abbrev lowerStarCtf (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsProper f] :
+noncomputable abbrev lowerStarCtf (f : X ⟶ Y) (hf : IsGeometricHom s f) [IsProper f] :
     Ctf A X ⥤ Ctf A Y :=
   ctfLowerStar f fun _ hK ↦ G.ctf_lowerStar f hf hK
 
 /-- Blueprint `sk-prop-sf-existence` (c): the exceptional adjunction `Rf_! ⊣ Rf^!` between the
 categories `Dᵇctf` of geometric schemes. -/
-noncomputable abbrev exceptionalAdjunction (f : X ⟶ Y) (hf : f ≫ aY = aX)
+noncomputable abbrev exceptionalAdjunction (f : X ⟶ Y) (hf : IsGeometricHom s f)
     [HasCompactification f] : G.lowerShriekCtf f hf ⊣ G.upperShriekCtf f hf :=
   ctfExceptionalAdjunction f _ _
 
 /-- The counit `Rf_! Rf^! L ⟶ L` of the exceptional adjunction at `L ∈ Dᵇctf(Y)`, as a
 morphism of `D(Y, A)`. -/
-noncomputable def exceptionalCounit (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hL : G.ctf Y L) :
+noncomputable def exceptionalCounit (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
+    (hL : G.ctf Y L) :
     (rightDerivedLowerShriek A f).obj ((rightDerivedUpperShriek A f).obj L) ⟶ L :=
   ((G.exceptionalAdjunction f hf).counit.app ⟨L, hL⟩).hom
 
 /-- The exceptional adjunction `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` for `K ∈ Dᵇctf(X)` and
 `L ∈ Dᵇctf(Y)`, as a bijection of `Hom`-sets of `D(X, A)` and `D(Y, A)`. -/
-noncomputable def exceptionalHomEquiv (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+noncomputable def exceptionalHomEquiv (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
     {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L) :
     ((rightDerivedLowerShriek A f).obj K ⟶ L) ≃ (K ⟶ (rightDerivedUpperShriek A f).obj L) :=
@@ -485,20 +506,18 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
       [IsGeometric (f ≫ a)] [HasCompactification f] :
     (rightDerivedUpperShriek A f).obj (dualizing a) ≅ dualizing (f ≫ a)
   /-- `Rf_* = Rf_!` for proper `f`, on `Dᵇctf`. -/
-  properComparison {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-      [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f] [IsProper f] :
+  properComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+      [HasCompactification f] [IsProper f] :
     toGeometricCoefficients.lowerShriekCtf f hf ≅ toGeometricCoefficients.lowerStarCtf f hf
   /-- composition of the exceptional direct images: `Rf_! ⋙ Rg_! ≃ R(f ≫ g)_!` on `Dᵇctf`. -/
-  lowerShriekComp {X Y Z : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {aZ : Z ⟶ s}
-      [IsGeometric aX] [IsGeometric aY] [IsGeometric aZ] (f : X ⟶ Y) (g : Y ⟶ Z)
-      (hf : f ≫ aY = aX) (hg : g ≫ aZ = aY) [HasCompactification f] [HasCompactification g]
-      [HasCompactification (f ≫ g)] :
+  lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
+      (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
+      [HasCompactification g] [HasCompactification (f ≫ g)] :
     toGeometricCoefficients.lowerShriekCtf f hf ⋙ toGeometricCoefficients.lowerShriekCtf g hg ≅
-      toGeometricCoefficients.lowerShriekCtf (aX := aX) (aY := aZ) (f ≫ g)
-        (by rw [Category.assoc, hg, hf])
+      toGeometricCoefficients.lowerShriekCtf (f ≫ g) hfg
   /-- the identity isomorphism of the exceptional direct image: `R(𝟙 X)_! ≃ 𝟭` on `Dᵇctf`. -/
-  lowerShriekId {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
-    toGeometricCoefficients.lowerShriekCtf (𝟙 X) (Category.id_comp aX) ≅ 𝟭 (Ctf A X)
+  lowerShriekId (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) :
+    toGeometricCoefficients.lowerShriekCtf (𝟙 X) hX ≅ 𝟭 (Ctf A X)
   /-- left unit axiom: `lowerShriekComp (𝟙 X) f` is `lowerShriekId` whiskered by `Rf_!`,
   that is, the square
 
@@ -511,11 +530,11 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   ```
 
   commutes. -/
-  lowerShriekComp_id_left {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-      [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+  lowerShriekComp_id_left {X Y : Scheme.{u}} (f : X ⟶ Y) (hX : IsGeometricHom s (𝟙 X))
+      (hf : IsGeometricHom s f) (hf' : IsGeometricHom s (𝟙 X ≫ f)) [HasCompactification f]
       [HasCompactification (𝟙 X ≫ f)] :
-    lowerShriekComp (𝟙 X) f (Category.id_comp aX) hf =
-      Functor.isoWhiskerRight (lowerShriekId aX) _ ≪≫ Functor.leftUnitor _ ≪≫
+    lowerShriekComp (𝟙 X) f hX hf hf' =
+      Functor.isoWhiskerRight (lowerShriekId X hX) _ ≪≫ Functor.leftUnitor _ ≪≫
         ctfLowerShriekCongr (Category.id_comp f).symm _ _
   /-- right unit axiom: `lowerShriekComp f (𝟙 Y)` is `lowerShriekId` whiskered by `Rf_!`,
   that is, the square
@@ -529,19 +548,18 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   ```
 
   commutes. -/
-  lowerShriekComp_id_right {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-      [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+  lowerShriekComp_id_right {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsGeometricHom s (𝟙 Y))
+      (hf : IsGeometricHom s f) (hf' : IsGeometricHom s (f ≫ 𝟙 Y)) [HasCompactification f]
       [HasCompactification (f ≫ 𝟙 Y)] :
-    lowerShriekComp f (𝟙 Y) hf (Category.id_comp aY) =
-      Functor.isoWhiskerLeft _ (lowerShriekId aY) ≪≫ Functor.rightUnitor _ ≪≫
+    lowerShriekComp f (𝟙 Y) hf hY hf' =
+      Functor.isoWhiskerLeft _ (lowerShriekId Y hY) ≪≫ Functor.rightUnitor _ ≪≫
         ctfLowerShriekCongr (Category.comp_id f).symm _ _
   /-- for `f = 𝟙 X`, `properComparison` is the composite
   `R(𝟙 X)_! ≃ 𝟭 ≃ R(𝟙 X)_*` of `lowerShriekId` and the identity isomorphism of `R(𝟙 X)_*`,
   the conjugate of `leftDerivedUpperStarId`. -/
-  properComparison_id {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
-    properComparison (𝟙 X) (Category.id_comp aX) = lowerShriekId aX ≪≫
-      ctfIsoMk (F := 𝟭 _)
-        (G := toGeometricCoefficients.lowerStarCtf (𝟙 X) (Category.id_comp aX))
+  properComparison_id (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) :
+    properComparison (𝟙 X) hX = lowerShriekId X hX ≪≫
+      ctfIsoMk (F := 𝟭 _) (G := toGeometricCoefficients.lowerStarCtf (𝟙 X) hX)
         (Functor.isoWhiskerLeft (DerivedCategory.constructibleFiniteTor A X).ι
           (conjugateIsoEquiv Adjunction.id (derivedUpperStarLowerStarAdjunction A (𝟙 X))
             (leftDerivedUpperStarId A X)))
@@ -550,22 +568,23 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   dualizingBase_eq :
     dualizingBase = dualizingIso (𝟙 s) ≪≫
       (DerivedCategory.constructibleFiniteTor A s).ι.mapIso
-        (X := (toGeometricCoefficients.upperShriekCtf (𝟙 s) (Category.id_comp (𝟙 s))).obj
-          ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (𝟙 s)⟩)
-        (Y := ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (𝟙 s)⟩)
+        (X := (toGeometricCoefficients.upperShriekCtf (𝟙 s) (.id (𝟙 s))).obj
+          ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩)
+        (Y := ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩)
         ((conjugateIsoEquiv Adjunction.id
-          (toGeometricCoefficients.exceptionalAdjunction (𝟙 s) (Category.id_comp (𝟙 s)))
-          (lowerShriekId (𝟙 s))).symm.app ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (𝟙 s)⟩)
+          (toGeometricCoefficients.exceptionalAdjunction (𝟙 s) (.id (𝟙 s)))
+          (lowerShriekId s (.id (𝟙 s)))).symm.app
+            ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩)
   /-- for `f = 𝟙 X`, `dualizingComp` is `(𝟙 X)^! ω_X ≃ ω_X`, the identity isomorphism of
   `(𝟙 X)^!` on `Dᵇctf` (the conjugate of `lowerShriekId`), transported along `𝟙 X ≫ a = a`. -/
   dualizingComp_id {X : Scheme.{u}} (a : X ⟶ s) [IsGeometric a] :
     dualizingComp (𝟙 X) a =
       (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
-        (X := (toGeometricCoefficients.upperShriekCtf (𝟙 X) (Category.id_comp a)).obj
+        (X := (toGeometricCoefficients.upperShriekCtf (𝟙 X) (.id a)).obj
           ⟨dualizing a, ctf_dualizing a⟩) (Y := ⟨dualizing a, ctf_dualizing a⟩)
         ((conjugateIsoEquiv Adjunction.id
-          (toGeometricCoefficients.exceptionalAdjunction (𝟙 X) (Category.id_comp a))
-          (lowerShriekId a)).symm.app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
+          (toGeometricCoefficients.exceptionalAdjunction (𝟙 X) (.id a))
+          (lowerShriekId X (.id a))).symm.app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         eqToIso (congrArg dualizing (Category.id_comp a).symm)
   /-- `properComparison` is compatible with composition: for proper `f` and `g`,
   `properComparison (f ≫ g)` is the composite
@@ -576,22 +595,19 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
 
   of `lowerShriekComp f g`, `properComparison f`, `properComparison g` and the composition
   isomorphism of `R(-)_*`, the conjugate of `leftDerivedUpperStarComp`. -/
-  properComparison_comp {X Y Z : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {aZ : Z ⟶ s}
-      [IsGeometric aX] [IsGeometric aY] [IsGeometric aZ] (f : X ⟶ Y) (g : Y ⟶ Z)
-      (hf : f ≫ aY = aX) (hg : g ≫ aZ = aY) [HasCompactification f] [HasCompactification g]
-      [HasCompactification (f ≫ g)] [IsProper f] [IsProper g] :
-    properComparison (aX := aX) (aY := aZ) (f ≫ g) (by rw [Category.assoc, hg, hf]) =
-      (lowerShriekComp f g hf hg).symm ≪≫
+  properComparison_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
+      (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
+      [HasCompactification g] [HasCompactification (f ≫ g)] [IsProper f] [IsProper g] :
+    properComparison (f ≫ g) hfg =
+      (lowerShriekComp f g hf hg hfg).symm ≪≫
         Functor.isoWhiskerRight (properComparison f hf) _ ≪≫
         Functor.isoWhiskerLeft _ (properComparison g hg) ≪≫
-        ctfIsoMk
-          (G := toGeometricCoefficients.lowerStarCtf (aX := aX) (aY := aZ) (f ≫ g)
-            (by rw [Category.assoc, hg, hf]))
+        ctfIsoMk (G := toGeometricCoefficients.lowerStarCtf (f ≫ g) hfg)
           (Functor.isoWhiskerLeft (DerivedCategory.constructibleFiniteTor A X).ι
-          (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
-            ((derivedUpperStarLowerStarAdjunction A g).comp
-              (derivedUpperStarLowerStarAdjunction A f))
-            (leftDerivedUpperStarComp A f g).symm).symm)
+            (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+              ((derivedUpperStarLowerStarAdjunction A g).comp
+                (derivedUpperStarLowerStarAdjunction A f))
+              (leftDerivedUpperStarComp A f g).symm).symm)
   /-- `dualizingComp` is compatible with composition: `dualizingComp (f ≫ g) a` is the
   composite
 
@@ -607,17 +623,17 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
       [HasCompactification (f ≫ g)] :
     dualizingComp (f ≫ g) a =
       (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
-          (X := (toGeometricCoefficients.upperShriekCtf (f ≫ g) (Category.assoc f g a)).obj
+          (X := (toGeometricCoefficients.upperShriekCtf (f ≫ g) (.mk (aY := a) rfl)).obj
             ⟨dualizing a, ctf_dualizing a⟩)
-          (Y := (toGeometricCoefficients.upperShriekCtf (aY := g ≫ a) f rfl).obj
-            ((toGeometricCoefficients.upperShriekCtf (aY := a) g rfl).obj
+          (Y := (toGeometricCoefficients.upperShriekCtf f (.mk (aY := g ≫ a) rfl)).obj
+            ((toGeometricCoefficients.upperShriekCtf g (.mk (aY := a) rfl)).obj
               ⟨dualizing a, ctf_dualizing a⟩))
           ((conjugateIsoEquiv
-            (toGeometricCoefficients.exceptionalAdjunction (f ≫ g) (Category.assoc f g a))
-            ((toGeometricCoefficients.exceptionalAdjunction (aY := g ≫ a) f rfl).comp
-              (toGeometricCoefficients.exceptionalAdjunction (aY := a) g rfl))
-            (lowerShriekComp (aY := g ≫ a) (aZ := a) f g rfl rfl)).app
-              ⟨dualizing a, ctf_dualizing a⟩) ≪≫
+            (toGeometricCoefficients.exceptionalAdjunction (f ≫ g) (.mk (aY := a) rfl))
+            ((toGeometricCoefficients.exceptionalAdjunction f (.mk (aY := g ≫ a) rfl)).comp
+              (toGeometricCoefficients.exceptionalAdjunction g (.mk (aY := a) rfl)))
+            (lowerShriekComp f g (.mk (aY := g ≫ a) rfl) (.mk (aY := a) rfl)
+              (.mk (aY := a) rfl))).app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
         eqToIso (congrArg dualizing (Category.assoc f g a).symm)
   /-- `!`-base change along a Cartesian square of geometric schemes: `Lg^* Rf_! ≃ Rf'_! Lg'^*`
@@ -630,14 +646,11 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
      ↓          ↓
      Y' ──g───→ Y
   ```
-
-  the structure morphisms being `a_Y`, `f ≫ a_Y`, `g ≫ a_Y` and `f' ≫ g ≫ a_Y`.
   -/
   baseChange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-      (sq : IsPullback g' f' f g) {aX' : X' ⟶ s} {aX : X ⟶ s} {aY' : Y' ⟶ s} {aY : Y ⟶ s}
-      [IsGeometric aX'] [IsGeometric aX] [IsGeometric aY'] [IsGeometric aY]
-      (hf : f ≫ aY = aX) (hg : g ≫ aY = aY') (hf' : f' ≫ aY' = aX') (hg' : g' ≫ aX = aX')
-      [HasCompactification f] [HasCompactification f'] :
+      (sq : IsPullback g' f' f g) (hf : IsGeometricHom s f) (hg : IsGeometricHom s g)
+      (hf' : IsGeometricHom s f') (hg' : IsGeometricHom s g') [HasCompactification f]
+      [HasCompactification f'] :
     toGeometricCoefficients.lowerShriekCtf f hf ⋙ toGeometricCoefficients.upperStarCtf g hg ≅
       toGeometricCoefficients.upperStarCtf g' hg' ⋙ toGeometricCoefficients.lowerShriekCtf f' hf'
   /-- `!`-base change is compatible with vertical pasting of Cartesian squares: for
@@ -658,26 +671,23 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   `lowerShriekComp f h` and `lowerShriekComp f' h'`. -/
   baseChange_paste_vert {X' X Y' Y Z' Z : Scheme.{u}} {gX : X' ⟶ X} {f' : X' ⟶ Y'}
       {f : X ⟶ Y} {gY : Y' ⟶ Y} {h' : Y' ⟶ Z'} {h : Y ⟶ Z} {gZ : Z' ⟶ Z}
-      (sq₁ : IsPullback gX f' f gY) (sq₂ : IsPullback gY h' h gZ)
-      {aX' : X' ⟶ s} {aX : X ⟶ s} {aY' : Y' ⟶ s} {aY : Y ⟶ s} {aZ' : Z' ⟶ s} {aZ : Z ⟶ s}
-      [IsGeometric aX'] [IsGeometric aX] [IsGeometric aY'] [IsGeometric aY] [IsGeometric aZ']
-      [IsGeometric aZ] (hf : f ≫ aY = aX) (hh : h ≫ aZ = aY) (hf' : f' ≫ aY' = aX')
-      (hh' : h' ≫ aZ' = aY') (hgX : gX ≫ aX = aX') (hgY : gY ≫ aY = aY')
-      (hgZ : gZ ≫ aZ = aZ')
+      (sq₁ : IsPullback gX f' f gY) (sq₂ : IsPullback gY h' h gZ) (hf : IsGeometricHom s f)
+      (hh : IsGeometricHom s h) (hf' : IsGeometricHom s f') (hh' : IsGeometricHom s h')
+      (hgX : IsGeometricHom s gX) (hgY : IsGeometricHom s gY) (hgZ : IsGeometricHom s gZ)
+      (hfh : IsGeometricHom s (f ≫ h)) (hfh' : IsGeometricHom s (f' ≫ h'))
       [HasCompactification f] [HasCompactification f'] [HasCompactification h]
       [HasCompactification h'] [HasCompactification (f ≫ h)] [HasCompactification (f' ≫ h')] :
-    baseChange (sq₁.paste_vert sq₂) (by rw [Category.assoc, hh, hf]) hgZ
-        (by rw [Category.assoc, hh', hf']) hgX =
-      Functor.isoWhiskerRight (lowerShriekComp f h hf hh).symm _ ≪≫
+    baseChange (sq₁.paste_vert sq₂) hfh hgZ hfh' hgX =
+      Functor.isoWhiskerRight (lowerShriekComp f h hf hh hfh).symm _ ≪≫
         Functor.associator _ _ _ ≪≫
         Functor.isoWhiskerLeft _ (baseChange sq₂ hh hgZ hh' hgY) ≪≫
         (Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight (baseChange sq₁ hf hgY hf' hgX) _ ≪≫ Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft _ (lowerShriekComp f' h' hf' hh')
+        Functor.isoWhiskerLeft _ (lowerShriekComp f' h' hf' hh' hfh')
   /-- the projection formula `Rf_! K ⊗ᴸ L ≃ Rf_! (K ⊗ᴸ Lf^* L)`, as an isomorphism of
   bifunctors `Dᵇctf(X, A) × Dᵇctf(Y, A) ⥤ D(Y, A)`. -/
-  projectionFormula {X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX]
-      [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f] :
+  projectionFormula {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+      [HasCompactification f] :
     ((toGeometricCoefficients.lowerShriekCtf f hf ⋙
           (DerivedCategory.constructibleFiniteTor A Y).ι).prod
         (DerivedCategory.constructibleFiniteTor A Y).ι) ⋙
@@ -736,27 +746,28 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   available on `pullback aY aX`. -/
   isIso_kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X}
       {pY : Z ⟶ Y} [s.IsSpecOfField] [IsGeometric aX] [IsGeometric aY] [IsGeometric (pX ≫ aX)]
-      [IsGeometric (pY ≫ aY)] [HasCompactification aX] [HasCompactification aY]
+      [HasCompactification aX] [HasCompactification aY]
       (sq : IsPullback pX pY aX aY) [HasCompactification pX]
       (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
       (hM : DerivedCategory.constructibleFiniteTor A X M)
       (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
       (hN : DerivedCategory.constructibleFiniteTor A Y N) :
+    haveI : IsGeometric (pY ≫ aY) := IsGeometric.of_eq sq.w
     IsIso (kunnethVerdierMapOf A
-      (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek (aY := aX) pX rfl hK)
-      (fun _ hK ↦ toGeometricCoefficients.ctf_upperStar (aY := aX) pX rfl hK)
-      (upperStarMonoidal pY) (projectionFormula (aY := aX) pX rfl)
-      (((baseChange sq.flip (Category.comp_id aY) (Category.comp_id aX) rfl sq.w.symm).inv.app
-          ⟨dualizing aY, ctf_dualizing aY⟩).hom ≫
+      (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek pX (.mk (aY := aX) rfl) hK)
+      (fun _ hK ↦ toGeometricCoefficients.ctf_upperStar pX (.mk (aY := aX) rfl) hK)
+      (upperStarMonoidal pY) (projectionFormula pX (.mk (aY := aX) rfl))
+      (((baseChange sq.flip (.of_isGeometric aY) (.of_isGeometric aX) (.mk (aY := aX) rfl)
+          (.mk (aY := aY) rfl)).inv.app ⟨dualizing aY, ctf_dualizing aY⟩).hom ≫
         ((upperStar A aX).leftDerivedFunctor).map
           ((rightDerivedLowerShriek A aY).map (dualizingIso aY).hom ≫
-            toGeometricCoefficients.exceptionalCounit aY (Category.comp_id aY) (𝟙_ _)
-              (toGeometricCoefficients.ctf_unit (𝟙 s))) ≫
+            toGeometricCoefficients.exceptionalCounit aY (.of_isGeometric aY) (𝟙_ _)
+              (toGeometricCoefficients.ctf_unit (.id (𝟙 s)))) ≫
         (upperStarMonoidal aX).εIso.inv)
-      (toGeometricCoefficients.ctf_upperStar (aY := aY) pY rfl (ctf_dualizing aY)) M hM
-      (toGeometricCoefficients.ctf_tensor (pX ≫ aX)
-        (toGeometricCoefficients.ctf_upperStar (aY := aX) pX rfl hM)
-        (toGeometricCoefficients.ctf_upperStar (aY := aY) pY rfl (ctf_dualizing aY)))
+      (toGeometricCoefficients.ctf_upperStar pY (.mk (aY := aY) rfl) (ctf_dualizing aY)) M hM
+      (toGeometricCoefficients.ctf_tensor (.id (pX ≫ aX))
+        (toGeometricCoefficients.ctf_upperStar pX (.mk (aY := aX) rfl) hM)
+        (toGeometricCoefficients.ctf_upperStar pY (.mk (aY := aY) rfl) (ctf_dualizing aY)))
       N)
 
 variable {A}
@@ -815,10 +826,9 @@ noncomputable def upperStarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The identity isomorphism `(𝟙 X)^! ≃ 𝟭` of the exceptional inverse image on `Dᵇctf`: the
 conjugate of the field `lowerShriekId : R(𝟙 X)_! ≃ 𝟭` along the adjunctions
 `R(𝟙 X)_! ⊣ (𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/
-noncomputable def upperShriekId {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
-    G.upperShriekCtf (𝟙 X) (Category.id_comp aX) ≅ 𝟭 (Ctf A X) :=
-  (conjugateIsoEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 X) (Category.id_comp aX))
-    (G.lowerShriekId aX)).symm
+noncomputable def upperShriekId (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) :
+    G.upperShriekCtf (𝟙 X) hX ≅ 𝟭 (Ctf A X) :=
+  (conjugateIsoEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 X) hX) (G.lowerShriekId X hX)).symm
 
 /-- Under the conjugation bijection between the adjunctions `R(𝟙 X)_! ⊣ (𝟙 X)^!` and
 `𝟭 ⊣ 𝟭`, the identity isomorphism of the exceptional direct image corresponds to the inverse
@@ -830,33 +840,29 @@ of the identity isomorphism of the exceptional inverse image:
        𝟭 ⊣ 𝟭               upperShriekId.symm : 𝟭 ≅ (𝟙 X)^!
 ``` -/
 @[simp]
-lemma conjugateIsoEquiv_lowerShriekId {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX] :
-    conjugateIsoEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 X) (Category.id_comp aX))
-        (G.lowerShriekId aX) = (G.upperShriekId aX).symm := by
+lemma conjugateIsoEquiv_lowerShriekId (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X)) :
+    conjugateIsoEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 X) hX) (G.lowerShriekId X hX) =
+      (G.upperShriekId X hX).symm := by
   simp [upperShriekId]
 
 /-- The identity isomorphism `K ≃ (𝟙 X)^! K` of the exceptional inverse image at an object of
 `Dᵇctf(X)`, as an isomorphism of `D(X, A)`. -/
-noncomputable def upperShriekIdIso {X : Scheme.{u}} (aX : X ⟶ s) [IsGeometric aX]
+noncomputable def upperShriekIdIso (X : Scheme.{u}) (hX : IsGeometricHom s (𝟙 X))
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
     K ≅ (rightDerivedUpperShriek A (𝟙 X)).obj K :=
   (DerivedCategory.constructibleFiniteTor A X).ι.mapIso (X := ⟨K, hK⟩)
-    (Y := (G.upperShriekCtf (𝟙 X) (Category.id_comp aX)).obj ⟨K, hK⟩)
-    ((G.upperShriekId aX).symm.app ⟨K, hK⟩)
+    (Y := (G.upperShriekCtf (𝟙 X) hX).obj ⟨K, hK⟩) ((G.upperShriekId X hX).symm.app ⟨K, hK⟩)
 
 /-- The composition isomorphism `(f ≫ g)^! ≃ g^! ⋙ f^!` of exceptional inverse images on
 `Dᵇctf`: the conjugate of `GeometricOperations.lowerShriekComp` along the adjunctions
 `R(f ≫ g)_! ⊣ (f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`. -/
-noncomputable def upperShriekComp {X Y Z : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {aZ : Z ⟶ s}
-    [IsGeometric aX] [IsGeometric aY] [IsGeometric aZ] (f : X ⟶ Y) (g : Y ⟶ Z)
-    (hf : f ≫ aY = aX) (hg : g ≫ aZ = aY) [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)] :
-    G.upperShriekCtf (aX := aX) (aY := aZ) (f ≫ g) (by rw [Category.assoc, hg, hf]) ≅
-      G.upperShriekCtf g hg ⋙ G.upperShriekCtf f hf :=
-  conjugateIsoEquiv (G.exceptionalAdjunction (aX := aX) (aY := aZ) (f ≫ g)
-      (by rw [Category.assoc, hg, hf]))
+noncomputable def upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    G.upperShriekCtf (f ≫ g) hfg ≅ G.upperShriekCtf g hg ⋙ G.upperShriekCtf f hf :=
+  conjugateIsoEquiv (G.exceptionalAdjunction (f ≫ g) hfg)
     ((G.exceptionalAdjunction f hf).comp (G.exceptionalAdjunction g hg))
-    (G.lowerShriekComp f g hf hg)
+    (G.lowerShriekComp f g hf hg hfg)
 
 /-- Under the conjugation bijection between the adjunctions `R(f ≫ g)_! ⊣ (f ≫ g)^!` and
 `Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`, the composition isomorphism of the exceptional direct images
@@ -868,14 +874,12 @@ corresponds to the composition isomorphism of the exceptional inverse images:
   Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!      upperShriekComp f g : (f ≫ g)^! ≅ g^! ⋙ f^!
 ``` -/
 @[simp]
-lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
-    {aZ : Z ⟶ s} [IsGeometric aX] [IsGeometric aY] [IsGeometric aZ] (f : X ⟶ Y) (g : Y ⟶ Z)
-    (hf : f ≫ aY = aX) (hg : g ≫ aZ = aY) [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)] :
-    conjugateIsoEquiv (G.exceptionalAdjunction (aX := aX) (aY := aZ) (f ≫ g)
-          (by rw [Category.assoc, hg, hf]))
+lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    conjugateIsoEquiv (G.exceptionalAdjunction (f ≫ g) hfg)
         ((G.exceptionalAdjunction f hf).comp (G.exceptionalAdjunction g hg))
-        (G.lowerShriekComp f g hf hg) = G.upperShriekComp f g hf hg :=
+        (G.lowerShriekComp f g hf hg hfg) = G.upperShriekComp f g hf hg hfg :=
   rfl
 
 /-- The exceptional trace `Rp_{X!} p_Y^* ω_Y ⟶ A_X` of a Cartesian square `Z = X ×_s Y`: the
@@ -891,11 +895,12 @@ noncomputable def exceptionalTrace {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y �
     [HasCompactification aY] (sq : IsPullback pX pY aX aY) [HasCompactification pX] :
     (rightDerivedLowerShriek A pX).obj (((upperStar A pY).leftDerivedFunctor).obj
         (G.dualizing aY)) ⟶ 𝟙_ _ :=
-  ((G.baseChange sq.flip (Category.comp_id aY) (Category.comp_id aX) rfl sq.w.symm).inv.app
-      ⟨G.dualizing aY, G.ctf_dualizing aY⟩).hom ≫
+  haveI : IsGeometric (pY ≫ aY) := IsGeometric.of_eq sq.w
+  ((G.baseChange sq.flip (.of_isGeometric aY) (.of_isGeometric aX) (.mk (aY := aX) rfl)
+      (.mk (aY := aY) rfl)).inv.app ⟨G.dualizing aY, G.ctf_dualizing aY⟩).hom ≫
     ((upperStar A aX).leftDerivedFunctor).map
       ((rightDerivedLowerShriek A aY).map (G.dualizingIso aY).hom ≫
-        G.exceptionalCounit aY (Category.comp_id aY) (𝟙_ _) (G.ctf_unit (𝟙 s))) ≫
+        G.exceptionalCounit aY (.of_isGeometric aY) (𝟙_ _) (G.ctf_unit (.id (𝟙 s)))) ≫
     (G.upperStarUnit aX).hom
 
 /-- The Künneth-Verdier map `κ_{M,N} : p_X^* M ⊗ᴸ p_Y^* D_Y N ⟶ RHom(p_Y^* N, p_X^! M)` of a
@@ -904,20 +909,20 @@ structure of `Lp_Y^*`, the projection formula for `p_X` and
 `GeometricOperations.exceptionalTrace` (part of blueprint `sk-thm-sf-kunneth-verdier`). -/
 noncomputable def kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
     {pX : Z ⟶ X} {pY : Z ⟶ Y} [IsGeometric aX] [IsGeometric aY] [IsGeometric (pX ≫ aX)]
-    [IsGeometric (pY ≫ aY)] [HasCompactification aY] (sq : IsPullback pX pY aX aY)
-    [HasCompactification pX]
+    [HasCompactification aY] (sq : IsPullback pX pY aX aY) [HasCompactification pX]
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : G.ctf X M)
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     ((upperStar A pX).leftDerivedFunctor).obj M ⊗
         ((upperStar A pY).leftDerivedFunctor).obj (G.verdierDual aY N) ⟶
       (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
         ((rightDerivedUpperShriek A pX).obj M) :=
-  kunnethVerdierMapOf A (fun _ hK ↦ G.ctf_lowerShriek (aY := aX) pX rfl hK)
-    (fun _ hK ↦ G.ctf_upperStar (aY := aX) pX rfl hK) (G.upperStarMonoidal pY)
-    (G.projectionFormula (aY := aX) pX rfl) (G.exceptionalTrace sq)
-    (G.ctf_upperStar (aY := aY) pY rfl (G.ctf_dualizing aY)) M hM
-    (G.ctf_tensor (pX ≫ aX) (G.ctf_upperStar (aY := aX) pX rfl hM)
-      (G.ctf_upperStar (aY := aY) pY rfl (G.ctf_dualizing aY))) N
+  haveI : IsGeometric (pY ≫ aY) := IsGeometric.of_eq sq.w
+  kunnethVerdierMapOf A (fun _ hK ↦ G.ctf_lowerShriek pX (.mk (aY := aX) rfl) hK)
+    (fun _ hK ↦ G.ctf_upperStar pX (.mk (aY := aX) rfl) hK) (G.upperStarMonoidal pY)
+    (G.projectionFormula pX (.mk (aY := aX) rfl)) (G.exceptionalTrace sq)
+    (G.ctf_upperStar pY (.mk (aY := aY) rfl) (G.ctf_dualizing aY)) M hM
+    (G.ctf_tensor (.id (pX ≫ aX)) (G.ctf_upperStar pX (.mk (aY := aX) rfl) hM)
+      (G.ctf_upperStar pY (.mk (aY := aY) rfl) (G.ctf_dualizing aY))) N
 
 /-- The Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)` for
 `M ∈ Dᵇctf(X)` and `N ∈ Dᵇctf(Y)`, where `X` and `Y` are separated of finite type over a
@@ -925,7 +930,7 @@ field `s = Spec k`: the map `GeometricOperations.kunnethVerdierMap`, invertible 
 `isIso_kunnethVerdierMap` (blueprint: `sk-thm-sf-kunneth-verdier`). -/
 noncomputable def kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s}
     {pX : Z ⟶ X} {pY : Z ⟶ Y} [s.IsSpecOfField] [IsGeometric aX] [IsGeometric aY]
-    [IsGeometric (pX ≫ aX)] [IsGeometric (pY ≫ aY)] [HasCompactification aX]
+    [IsGeometric (pX ≫ aX)] [HasCompactification aX]
     [HasCompactification aY] (sq : IsPullback pX pY aX aY) [HasCompactification pX]
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : G.ctf X M)
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : G.ctf Y N) :
