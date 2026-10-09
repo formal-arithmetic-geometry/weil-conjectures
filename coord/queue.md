@@ -1,8 +1,8 @@
 # Work queue
 
-599 items; claim with `tools/claim.py next <group> [--stage N]`.
+600 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (554)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -36,7 +36,6 @@
 | `lem-weil-pbc-eventually-proper` | 1009 | none |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1009 | none |
-| `lem-weil-pbc-site-equivalence-morphism-transport` | 1009 | none |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1009 | none |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1009 | none |
 | `lem-weil-pbc-thickening-integral` | 1009 | none |
@@ -54,6 +53,8 @@
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1010 | none |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1010 | none |
+| `lem-weil-pbc-site-covering-isomorphic-family` | 1010 | none |
+| `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1010 | none |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -611,7 +612,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 564 nodes that wait for stage 1, 230 nodes that wait for a statement dependency.
+Not open yet: 565 nodes that wait for stage 1, 231 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
