@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-derived-category-cohomological-support",
+ "kind": "definition",
+ "title": "Cohomological support and amplitude of an object of a derived category",
+ "statement": "Let $\\mathcal C$ be an abelian category with derived category $D(\\mathcal C)$ [def-weil-abstract-derived-category], and for $r\\in\\mathbf Z$ let $H^r:D(\\mathcal C)\\to\\mathcal C$ be the $r$-th cohomology functor (the cohomology $\\ker d^r/\\operatorname{im}d^{r-1}$ of a representing complex, well defined since quasi-isomorphisms induce isomorphisms on it). For $K\\in D(\\mathcal C)$ the *cohomological support* of $K$ is the set of integers\n\n$$\n \\operatorname{Supp}_{\\mathrm{coh}}(K)=\\{r\\in\\mathbf Z: H^r(K)\\text{ is not a zero object of }\\mathcal C\\}.\n$$\n\nFor integers $a\\le b$, $K$ has *cohomological amplitude in* $[a,b]$ when $\\operatorname{Supp}_{\\mathrm{coh}}(K)\\subseteq[a,b]$; equivalently $K\\in D^{\\ge a}(\\mathcal C)\\cap D^{\\le b}(\\mathcal C)$ for the canonical t-structure, i.e. $H^r(K)=0$ for $r<a$ and for $r>b$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-cohomological-support.md",
+  "place": "node def-weil-cohomological-support, order 1458 (the notion stated for an arbitrary abelian category); the interval use is in def-weil-derived-complete-integral-detailed.md and sec-trace-formula/sk-thm-trace-transport/thm-trf-trace-formula-e.md, Step 0"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'^(noncomputable )?(abbrev|def|class|lemma) (IsLE|IsGE|isLE_iff|isGE_iff|homologyFunctor)' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology and /CategoryTheory/Triangulated",
+   "results": "DerivedCategory.homologyFunctor (Algebra/Homology/DerivedCategory/HomologySequence.lean:34); DerivedCategory.IsLE, DerivedCategory.IsGE (Algebra/Homology/DerivedCategory/TStructure.lean:84,88), abbreviations of TStructure.t.IsLE/IsGE for the canonical t-structure; DerivedCategory.isGE_iff (line 90: X.IsGE n <-> forall i < n, IsZero ((homologyFunctor C i).obj X)) and isLE_iff (line 107: X.IsLE n <-> forall i > n, IsZero (...)); CochainComplex.IsLE/IsGE (Algebra/Homology/Embedding/CochainComplex.lean:106,109, cohomology vanishing on a complex) and CochainComplex.IsStrictlyLE/IsStrictlyGE (lines 100,103, vanishing of the terms themselves, a different notion); DerivedCategory.Plus.IsLE/IsGE (Plus.lean:167,171)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the support set is {r | ¬ IsZero ((DerivedCategory.homologyFunctor C r).obj K)}, one line over Mathlib; containment in [a,b] is K.IsGE a ∧ K.IsLE b by isGE_iff/isLE_iff"
+  },
+  {
+   "tool": "grep",
+   "query": "'support|Support' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/*.lean and /CategoryTheory/Triangulated/TStructure/*.lean; 'homologySupport|cohomologySupport|amplitude' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "none: Mathlib has no named declaration for the set of degrees with nonzero cohomology",
+   "date": "2026-10-09",
+   "verdict": "no exact match; the set is a one-line specialization of DerivedCategory.homologyFunctor and CategoryTheory.Limits.IsZero (CategoryTheory/Limits/Shapes/ZeroObjects.lean:44)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.homologyFunctor",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+  "how": "specializes in one line: Supp_coh(K) = {r : ℤ | ¬ CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C r).obj K)} (IsZero in Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.lean:44); amplitude in [a,b] is K.IsGE a ∧ K.IsLE b (DerivedCategory.IsGE/IsLE, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:84,88), equivalent to the support condition by DerivedCategory.isGE_iff and isLE_iff (lines 90,107)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-cohomological-support",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

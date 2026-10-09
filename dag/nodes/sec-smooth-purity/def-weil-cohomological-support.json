@@ -9,14 +9,30 @@
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-category-cohomological-support"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'^(noncomputable )?(abbrev|def|class|lemma) (IsLE|IsGE|isLE_iff|isGE_iff|homologyFunctor)' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology and /CategoryTheory/Triangulated",
+   "results": "DerivedCategory.homologyFunctor (Algebra/Homology/DerivedCategory/HomologySequence.lean:34); DerivedCategory.IsLE, DerivedCategory.IsGE (Algebra/Homology/DerivedCategory/TStructure.lean:84,88), abbreviations of TStructure.t.IsLE/IsGE for the canonical t-structure; DerivedCategory.isGE_iff (line 90: X.IsGE n <-> forall i < n, IsZero ((homologyFunctor C i).obj X)) and isLE_iff (line 107: X.IsLE n <-> forall i > n, IsZero (...)); CochainComplex.IsLE/IsGE (Algebra/Homology/Embedding/CochainComplex.lean:106,109, cohomology vanishing on a complex) and CochainComplex.IsStrictlyLE/IsStrictlyGE (lines 100,103, vanishing of the terms themselves, a different notion); DerivedCategory.Plus.IsLE/IsGE (Plus.lean:167,171)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the support set is {r | ¬ IsZero ((DerivedCategory.homologyFunctor C r).obj K)}, one line over Mathlib; containment in [a,b] is K.IsGE a ∧ K.IsLE b by isGE_iff/isLE_iff"
+  },
+  {
+   "tool": "grep",
+   "query": "'support|Support' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/*.lean and /CategoryTheory/Triangulated/TStructure/*.lean; 'homologySupport|cohomologySupport|amplitude' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "none: Mathlib has no named declaration for the set of degrees with nonzero cohomology",
+   "date": "2026-10-09",
+   "verdict": "no exact match; the set is a one-line specialization of DerivedCategory.homologyFunctor and CategoryTheory.Limits.IsZero (CategoryTheory/Limits/Shapes/ZeroObjects.lean:44)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -36,5 +52,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-cohomological-support",
+  "worker": "stage1",
+  "summary": "Checked against the blueprint (master; slopmaster2 has no Lean and no separate text for it). The statement is kept: for K in D(Y_proet,A) it is the set of r with H^r(K) nonzero. It is built from D(Y_proet,A) [def-weil-pbc-proetale-site], the cohomology sheaves H^r [def-weil-derived-cohomology-sheaves], and the general notion for an object of the derived category of an abelian category, written as the new Mathlib leaf def-weil-derived-category-cohomological-support (also records amplitude in [a,b], the form in which the users def-weil-derived-complete-integral-detailed and thm-trf-trace-formula-e use it). Mathlib has no named support set; the item is the one-line specialization {r | ¬ IsZero ((DerivedCategory.homologyFunctor C r).obj K)} with C = Sh(Y_proet,A), and containment in [a,b] is DerivedCategory.IsGE a ∧ IsLE b via isGE_iff/isLE_iff. CochainComplex.IsStrictlyLE/GE (vanishing of the terms) is a different notion and is not used. The statement mentions 'complex of sheaves' while the H^r node is stated on D(Y_proet,A); since H^r is invariant under quasi-isomorphism these agree."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
