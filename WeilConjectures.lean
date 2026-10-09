@@ -654,6 +654,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolutio
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
@@ -800,6 +801,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
+public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
