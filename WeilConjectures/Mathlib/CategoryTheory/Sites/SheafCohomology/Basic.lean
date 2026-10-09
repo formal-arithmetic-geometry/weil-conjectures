@@ -20,8 +20,8 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
 
 ## Main definitions
 
-- `CategoryTheory.Sheaf.IsTorsion`: a sheaf of abelian groups all of whose groups of sections
-  are torsion groups.
+- `CategoryTheory.Sheaf.IsTorsion`: a sheaf of abelian groups every section of which is locally
+  torsion.
 - `CategoryTheory.Sheaf.H.mapFunctor`: the map `H F n →+ H (G.obj F) n` on sheaf cohomology
   induced by an exact functor `G` together with an isomorphism `e` between the constant
   sheaf `ℤ` on the target site and the image under `G` of the constant sheaf `ℤ` on the
@@ -38,6 +38,9 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
 - `CategoryTheory.Sheaf.H.exact_δ_map` and `CategoryTheory.Sheaf.H.exact_map_map`: exactness of
   the long exact cohomology sequence `Γ(S.X₃) → H¹(S.X₁) → H¹(S.X₂)` and
   `Hⁿ(S.X₁) → Hⁿ(S.X₂) → Hⁿ(S.X₃)` of a short exact sequence of abelian sheaves.
+- `CategoryTheory.Sheaf.H.δSucc`, `CategoryTheory.Sheaf.H.exact_map_δSucc` and
+  `CategoryTheory.Sheaf.H.exact_δSucc_map`: the connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)`
+  and the exactness of the long exact cohomology sequence around it.
 - `CategoryTheory.Sheaf.H.quotientRangeAddEquiv`: for a short exact sequence
   `0 → F → I → Q → 0` with `H¹(I) = 0`, the connecting homomorphism identifies `H¹(F)` with
   the cokernel of `Γ(I) → Γ(Q)`.
@@ -58,10 +61,25 @@ namespace CategoryTheory
 
 open Abelian Limits AddCommGrpCat
 
-/-- A sheaf of abelian groups is *torsion* if all its groups of sections are torsion groups. -/
+/-- A sheaf of abelian groups is *torsion* if every section is locally torsion: each section
+`s` over `U` restricts to an element of finite order on the members of a covering sieve of `U`.
+On a site with enough points this means that all stalks are torsion groups [Stacks 03SA],
+see `CategoryTheory.Sheaf.isTorsion_iff_isAddTorsion_sheafFiber`.
+
+The sections themselves need not be torsion: on the small étale site sections over an infinite
+disjoint union are infinite products, so a sheaf all of whose groups of sections are torsion
+is killed by a single integer. That stronger condition is
+`CategoryTheory.Sheaf.IsTorsion.of_forall_isAddTorsion`'s hypothesis. -/
 def Sheaf.IsTorsion {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (F : Sheaf J AddCommGrpCat.{w}) : Prop :=
-  ∀ U, IsAddTorsion (F.obj.obj U)
+  ∀ ⦃U : Cᵒᵖ⦄ (s : F.obj.obj U), ∃ S ∈ J U.unop,
+    ∀ ⦃V : C⦄ ⦃f : V ⟶ U.unop⦄, S f → IsOfFinAddOrder (F.obj.map f.op s)
+
+/-- A sheaf of abelian groups all of whose groups of sections are torsion groups is torsion. -/
+lemma Sheaf.IsTorsion.of_forall_isAddTorsion {C : Type u} [Category.{v} C]
+    {J : GrothendieckTopology C} {F : Sheaf J AddCommGrpCat.{w}}
+    (h : ∀ U, IsAddTorsion (F.obj.obj U)) : F.IsTorsion :=
+  fun U _ ↦ ⟨⊤, J.top_mem U.unop, fun _ _ _ ↦ h _ _⟩
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 variable {D : Type u'} [Category.{v'} D] {K : GrothendieckTopology D}
@@ -253,71 +271,76 @@ section Connecting
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
-  {S : ShortComplex (Sheaf J AddCommGrpCat.{w})} (hS : S.ShortExact) (n : ℕ)
+  {S : ShortComplex (Sheaf J AddCommGrpCat.{w})} (hS : S.ShortExact)
 
-/-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` of a short exact sequence of abelian
-sheaves: composition with the class of the extension in `Ext¹(S.X₃, S.X₁)`. -/
-noncomputable def Sheaf.H.connecting : H S.X₃ n →+ H S.X₁ (n + 1) :=
+/-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` of the long exact cohomology sequence
+of a short exact sequence of abelian sheaves: composition with the extension class of `S`. -/
+noncomputable def Sheaf.H.δSucc (n : ℕ) : H S.X₃ n →+ H S.X₁ (n + 1) :=
   hS.extClass.postcomp _ rfl
 
-lemma Sheaf.H.connecting_apply (x : H S.X₃ n) :
-    H.connecting hS n x = x.comp hS.extClass rfl :=
+lemma Sheaf.H.δSucc_apply (n : ℕ) (x : H S.X₃ n) : H.δSucc hS n x = x.comp hS.extClass rfl :=
   rfl
 
+/-- In degree `0`, the connecting homomorphism `H⁰(S.X₃) → H¹(S.X₁)` is the connecting
+homomorphism `CategoryTheory.Sheaf.H.δ` on global sections. -/
+lemma Sheaf.H.δSucc_zero {T : C} (hT : Limits.IsTerminal T) (x : H S.X₃ 0) :
+    H.δSucc hS 0 x = H.δ hS hT (H.equiv₀ S.X₃ hT x) := by
+  rw [H.δ_apply, AddEquiv.symm_apply_apply]
+  rfl
+
+/-- The long exact cohomology sequence is exact at `Hⁿ(S.X₃)`: the kernel of the connecting
+homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` is the image of `Hⁿ(S.X₂) → Hⁿ(S.X₃)`. -/
+lemma Sheaf.H.exact_map_δSucc (n : ℕ) : Function.Exact (H.map S.g n) (H.δSucc hS n) :=
+  (ShortComplex.ab_exact_iff_function_exact _).1 (Ext.covariant_sequence_exact₃' _ hS n _ rfl)
+
+/-- The long exact cohomology sequence is exact at `Hⁿ⁺¹(S.X₁)`: the kernel of
+`Hⁿ⁺¹(S.X₁) → Hⁿ⁺¹(S.X₂)` is the image of the connecting homomorphism. -/
+lemma Sheaf.H.exact_δSucc_map (n : ℕ) : Function.Exact (H.δSucc hS n) (H.map S.f (n + 1)) :=
+  (ShortComplex.ab_exact_iff_function_exact _).1 (Ext.covariant_sequence_exact₁' _ hS n _ rfl)
+
 /-- The connecting homomorphism is natural in the short exact sequence. -/
-lemma Sheaf.H.map_connecting {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
-    (hS' : S'.ShortExact) (φ : S ⟶ S') (x : H S.X₃ n) :
-    H.map φ.τ₁ (n + 1) (H.connecting hS n x) = H.connecting hS' n (H.map φ.τ₃ n x) := by
-  rw [H.connecting_apply, H.connecting_apply, H.map_apply, H.map_apply,
+lemma Sheaf.H.map_δSucc {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
+    (hS' : S'.ShortExact) (φ : S ⟶ S') (n : ℕ) (x : H S.X₃ n) :
+    H.map φ.τ₁ (n + 1) (H.δSucc hS n x) = H.δSucc hS' n (H.map φ.τ₃ n x) := by
+  rw [H.δSucc_apply, H.δSucc_apply, H.map_apply, H.map_apply,
     Ext.comp_assoc_of_third_deg_zero, hS.extClass_naturality hS' φ,
     Ext.comp_assoc_of_second_deg_zero]
 
-/-- The long exact cohomology sequence is exact at `Hⁿ(S.X₃)`: the kernel of the connecting
-homomorphism is the image of `Hⁿ(S.X₂) → Hⁿ(S.X₃)`. -/
-lemma Sheaf.H.connecting_eq_zero_iff (x : H S.X₃ n) :
-    H.connecting hS n x = 0 ↔ x ∈ (H.map S.g n).range := by
-  rw [H.connecting_apply]
-  constructor
-  · intro h
-    obtain ⟨y, hy⟩ := Ext.covariant_sequence_exact₃ _ hS x rfl h
-    exact ⟨y, hy⟩
-  · rintro ⟨y, rfl⟩
-    rw [H.map_apply, Ext.comp_assoc_of_second_deg_zero, hS.comp_extClass, Ext.comp_zero]
-
 /-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)` is surjective when
 `Hⁿ⁺¹(S.X₂) = 0`. -/
-lemma Sheaf.H.connecting_surjective [Subsingleton (H S.X₂ (n + 1))] :
-    Function.Surjective (H.connecting hS n) := by
+lemma Sheaf.H.δSucc_surjective (n : ℕ) [Subsingleton (H S.X₂ (n + 1))] :
+    Function.Surjective (H.δSucc hS n) := by
   intro x
   obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x (Subsingleton.elim _ _) rfl
   exact ⟨y, rfl⟩
 
 /-- The connecting homomorphism `Hⁿ(S.X₃) → Hⁿ⁺¹(S.X₁)`, as a morphism between the values of
 the cohomology functors `CategoryTheory.Sheaf.functorH`. -/
-noncomputable def Sheaf.functorHδ :
+noncomputable def Sheaf.functorHδ (n : ℕ) :
     (functorH.{w'} J n).obj S.X₃ ⟶ (functorH.{w'} J (n + 1)).obj S.X₁ :=
-  AddCommGrpCat.ofHom (H.connecting hS n)
+  AddCommGrpCat.ofHom (H.δSucc hS n)
 
-lemma Sheaf.functorHδ_apply (x : H S.X₃ n) : functorHδ hS n x = H.connecting hS n x :=
+lemma Sheaf.functorHδ_apply (n : ℕ) (x : H S.X₃ n) : functorHδ hS n x = H.δSucc hS n x :=
   rfl
 
 @[reassoc]
-lemma Sheaf.functorHδ_naturality {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
+lemma Sheaf.functorHδ_naturality (n : ℕ) {S' : ShortComplex (Sheaf J AddCommGrpCat.{w})}
     (hS' : S'.ShortExact) (φ : S ⟶ S') :
     functorHδ hS n ≫ (functorH.{w'} J (n + 1)).map φ.τ₁ =
       (functorH.{w'} J n).map φ.τ₃ ≫ functorHδ hS' n := by
   ext x
-  exact H.map_connecting hS n hS' φ x
+  exact H.map_δSucc hS hS' φ n x
 
-lemma Sheaf.functorHδ_eq_zero_iff (x : H S.X₃ n) :
+lemma Sheaf.functorHδ_eq_zero_iff (n : ℕ) (x : H S.X₃ n) :
     functorHδ hS n x = 0 ↔ x ∈ ((functorH.{w'} J n).map S.g).hom.range :=
-  H.connecting_eq_zero_iff hS n x
+  ((H.exact_map_δSucc hS n) x).trans (by rfl)
 
-lemma Sheaf.functorHδ_surjective [Subsingleton (H S.X₂ (n + 1))] :
+lemma Sheaf.functorHδ_surjective (n : ℕ) [Subsingleton (H S.X₂ (n + 1))] :
     Function.Surjective (functorHδ hS n) :=
-  H.connecting_surjective hS n
+  H.δSucc_surjective hS n
 
 end Connecting
+
 
 section Zero
 

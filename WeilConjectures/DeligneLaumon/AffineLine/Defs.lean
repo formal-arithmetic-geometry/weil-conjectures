@@ -37,7 +37,8 @@ a finite sum of copies of `ℚ̄_ℓ`, on every connected open of the geometric 
 - `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`: extension to a lisse sheaf at `∞ ∈ ℙ¹`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen`: a dense open immersion `j : U₀ ↪ 𝔸¹_{k₀}`
   together with a lisse Weil sheaf on `U₀`, with its direct image, its extension by zero, its
-  boundary sheaf and its curve perverse middle extension.
+  boundary sheaf, its curve perverse middle extension and the map
+  `j_!M[1] ⟶ j_*M[1]` (`shiftedExtensionByZeroToMiddleExtension`).
 -/
 
 @[expose] public section
@@ -155,6 +156,12 @@ noncomputable def boundarySheaf : WeilSheaf k₀ l (affineLine k₀) :=
 /-- The shifted zero extension `j_!M[1]`, a curve perverse sheaf. -/
 noncomputable def shiftedExtensionByZero : WeilComplex k₀ l (affineLine k₀) :=
   (WeilSheaf.toComplex.obj D.extensionByZero)⟦(1 : ℤ)⟧
+
+/-- The shift `j_!M[1] ⟶ j_*M[1] = j_{!*}(M[1])` of the canonical map `j_!M ⟶ j_*M`, the middle
+arrow of the rotated triangle `B ⟶ j_!M[1] ⟶ j_*M[1] ⟶ B[1]`. -/
+noncomputable def shiftedExtensionByZeroToMiddleExtension :
+    D.shiftedExtensionByZero ⟶ D.middleExtension :=
+  (WeilSheaf.toComplex.map ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf))⟦(1 : ℤ)⟧'
 
 end LisseOnDenseOpen
 

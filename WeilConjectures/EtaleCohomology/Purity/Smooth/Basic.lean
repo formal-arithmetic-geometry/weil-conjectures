@@ -225,7 +225,8 @@ section invariant is the Tate twist:
 
 by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
 and the compatibility of the twist with pullback. -/
-theorem nonempty_iso_sectionInvariant_affineSpace {k : Type u} [Field k] (c : ℕ)
+theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
     [HasInvertibleExponent Λ B] :
     Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
@@ -264,7 +265,8 @@ trivial of rank `d` (`sk-lem-diag-reg`). Mathlib has neither vector bundles nor 
 the normal cone datum is recorded through `AlgebraicGeometry.Scheme.Hom.NormalConeData`, which
 only asks for a smooth rank-`d` projection with a closed zero section; the trivial bundle
 `𝔸^d_X` is used in step 2, for which step 3 is affine-space purity. -/
-theorem nonempty_iso_dualizingComplex_twistShift {k : Type u} [Field k]
+theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) := by
@@ -330,7 +332,8 @@ dimension `d` and every `K ∈ D^b_{ctf}(Y, Λ)`,
 This is also blueprint `thm-pur-finite-coefficient-smooth-purity` and
 `cor-pur-dualizing-object-purity`: the isomorphism is the smooth purity map
 `AlgebraicGeometry.Etale.smoothPurityIso` built from the two identifications. -/
-theorem nonempty_iso_rightDerivedUpperShriek_twistShift {k : Type u} [Field k]
+theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
@@ -355,7 +358,8 @@ relative dimension `e` and `f` relative dimension `d`, all three objects are Tat
 `ω_{g ≫ f} ≅ Λ_W(e + d)[2(e + d)]`, `ω_g ≅ Λ_W(e)[2e]` and `Lg^* ω_f ≅ Λ_W(d)[2d]`, and
 `Λ_W(e)[2e] ⊗ Λ_W(d)[2d] ≅ Λ_W(e + d)[2(e + d)]`
 (`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
-theorem nonempty_iso_dualizingComplex_comp {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k))
+theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k))
     [IsSeparated aY] [LocallyOfFiniteType aY] {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
     [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
     [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
