@@ -231,6 +231,79 @@ lemma bijective_polyToChart : Function.Bijective (polyToChart k (i := i) (j := j
   rw [Polynomial.toFinsupp_apply, ← chartFun_coordExpEquiv k hij]
   rfl
 
+/-- The ring isomorphism `k[X] ≅ Γ(D₊(xᵢ))`, `X ↦ xⱼ / xᵢ`. -/
+def polyEquivChart : Polynomial k ≃+* Γ(ProjectiveLine (Spec (.of k)), chart k {i}) :=
+  RingEquiv.ofBijective _ (bijective_polyToChart k hij)
+
+lemma polyEquivChart_apply (p : Polynomial k) :
+    polyEquivChart k hij p = polyToChart k (i := i) (j := j) p :=
+  rfl
+
+lemma polyEquivChart_symm_coord :
+    (polyEquivChart k hij).symm (coord k (i := i) (j := j)) = Polynomial.X :=
+  (polyEquivChart k hij).symm_apply_eq.2 (by simp [polyEquivChart_apply, polyToChart])
+
+lemma polyEquivChart_symm_chartConst (c : k) :
+    (polyEquivChart k hij).symm (chartConst k _ c) = Polynomial.C c :=
+  (polyEquivChart k hij).symm_apply_eq.2 (by simp [polyEquivChart_apply, polyToChart])
+
 end Coordinates
+
+section Charts
+
+lemma isAffineOpen_chart {s : Set (ULift.{u} (Fin 2))} (hs : s.Nonempty) :
+    IsAffineOpen (chart k s) := by
+  have : IsAffineHom (toProjInt (ULift.{u} (Fin 2)) (Spec (.of k))) :=
+    MorphismProperty.pullback_snd (P := @IsAffineHom) _ _ inferInstance
+  exact (Proj.isAffineOpen_basicOpen _ _ (monomialToNat_indicator_mem (ULift.{u} ℤ) s)
+    (indicatorDegree_pos hs)).preimage _
+
+/-- The generator `xᵢ⁻²` of `𝒪(-2)` over `D₊(xᵢ)`. -/
+def twistGen (i : ULift.{u} (Fin 2)) :
+    Γ(twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2), chart k {i}) :=
+  twistMonomialSection (Spec (.of k)) {i}
+    (Proj.singleExponent (s := {i}) (m := -2) (Set.mem_singleton i))
+
+lemma isFreeGenerator_twistGen (i : ULift.{u} (Fin 2)) : IsFreeGenerator (twistGen k i) :=
+  isFreeGenerator_twistMonomialSection_singleExponent _
+
+variable {i j : ULift.{u} (Fin 2)} (hij : i ≠ j) (σ : ℤ)
+
+/-- The derivation `σ d / d(xⱼ / xᵢ)` of `Γ(D₊(xᵢ)) = k[xⱼ / xᵢ]`, with values in `𝒪(-2)`
+through its generator `xᵢ⁻²`. -/
+def chartDerivation :
+    Γ(ProjectiveLine (Spec (.of k)), chart k {i}) →+
+      Γ(twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2), chart k {i}) where
+  toFun f := σ • ((polyEquivChart k hij
+    (Polynomial.derivative ((polyEquivChart k hij).symm f))) • twistGen k i)
+  map_zero' := by simp
+  map_add' f g := by simp [add_smul]
+
+lemma chartDerivation_apply (f : Γ(ProjectiveLine (Spec (.of k)), chart k {i})) :
+    chartDerivation k hij σ f = σ • ((polyEquivChart k hij
+      (Polynomial.derivative ((polyEquivChart k hij).symm f))) • twistGen k i) :=
+  rfl
+
+lemma chartDerivation_mul (f g : Γ(ProjectiveLine (Spec (.of k)), chart k {i})) :
+    chartDerivation k hij σ (f * g) =
+      f • chartDerivation k hij σ g + g • chartDerivation k hij σ f := by
+  simp only [chartDerivation_apply, map_mul, Polynomial.derivative_mul, map_add,
+    RingEquiv.apply_symm_apply, add_smul, mul_smul, smul_add]
+  module
+
+lemma chartDerivation_coord :
+    chartDerivation k hij σ (coord k (i := i) (j := j)) = σ • twistGen k i := by
+  simp [chartDerivation_apply, polyEquivChart_symm_coord]
+
+lemma chartDerivation_chartConst (c : k) : chartDerivation k hij σ (chartConst k _ c) = 0 := by
+  simp [chartDerivation_apply, polyEquivChart_symm_chartConst]
+
+/-- The local derivation over `D₊(xᵢ)` extending `chartDerivation`. -/
+def chartLocalDerivation : LocalDerivation (twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2))
+    (chart k {i}) :=
+  LocalDerivation.ofIsAffineOpen (isAffineOpen_chart k (Set.singleton_nonempty i))
+    (chartDerivation k hij σ) (chartDerivation_mul k hij σ)
+
+end Charts
 
 end AlgebraicGeometry.ProjectiveLine
