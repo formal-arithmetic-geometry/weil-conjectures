@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-inverse-image-stalk-germ",
+ "kind": "statement",
+ "title": "Stalk of an inverse image, compatible with germs of pulled-back sections",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme], $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point] and $\\bar x=f\\circ\\bar y$ the image geometric point of $X$. Let $G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], $f^{-1}G$ its inverse image with unit $\\eta_{f,G}:G\\to f_*f^{-1}G$ [def-weil-pbc-inverse-image], so that for $U\\to X$ etale $\\eta_{f,G}(U):G(U)\\to(f_*f^{-1}G)(U)=(f^{-1}G)(U\\times_XY)$ [def-weil-pbc-direct-image]. Stalks are those of [def-weil-pbc-geometric-stalks]. There is an isomorphism of abelian groups\n$$c_{f,\\bar y,G}:(f^{-1}G)_{\\bar y}\\xrightarrow{\\ \\sim\\ }G_{\\bar x},$$\nnatural in $G$, such that for every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar x$ and every $a\\in G(U)$, with $(U\\times_XY,(\\bar u,\\bar y))$ the induced pointed etale neighbourhood of $\\bar y$,\n$$c_{f,\\bar y,G}\\bigl(\\text{germ of }\\eta_{f,G}(U)(a)\\text{ at }(U\\times_XY,(\\bar u,\\bar y))\\bigr)=\\text{germ of }a\\text{ at }(U,\\bar u).$$\nIn particular, for $U=X$ and $a\\in G(X)$: $c_{f,\\bar y,G}\\bigl((\\eta_{f,G}(X)(a))_{\\bar y}\\bigr)=a_{\\bar x}$. (The isomorphism of lemma-openclosed-stalk-upperstar is an isomorphism of the same groups; this statement adds the compatibility with germs, which is what identifies maps built from the unit.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3) and its direct proof (stalks commute with sheafification, Lemma Tag 03PT; the colimit computation of the presheaf inverse image, equation (equation-pullback)); literature/stacks-project/sites.tex Lemma Tag 05V1 (lemma-point-morphism-sites) for the general statement"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of the pullback sheaf along a morphism of sites at a point equals the stalk at the image point",
+   "results": "TopCat.Presheaf.stalkPullbackIso, stalkPullbackHom, stalkPullbackInv, germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks), AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-09",
+   "verdict": "no match: topological-space presheaves only, not the etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "germ of pulled-back section at a point equals germ of the section at the image point under stalk pullback isomorphism",
+   "results": "TopCat.Presheaf.germ_stalkPullbackInv, germToPullbackStalk_stalkPullbackHom, germ_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-09",
+   "verdict": "no match: TopCat.Presheaf.germ_stalkPullbackHom is exactly this compatibility (germ, unit of f^{-1} -| f_*, stalk map) for continuous maps of topological spaces, not for etale sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+   "results": "Point.sheafFiberComapIso : (Φ.comap F hF).sheafFiber ≅ F.sheafPullback A J K ⋙ Φ.sheafFiber, with _hom_app/_inv_app simp lemmas (Mathlib.CategoryTheory.Sites.Point.Comap)",
+   "date": "2026-10-09",
+   "verdict": "partial: the stalk isomorphism for sheaf pullback along a continuous functor at a comap point exists (used by the source repository's Etale.upperStarCompSheafFiberIso together with AlgebraicGeometry.Scheme.pointSmallEtale); no lemma relating it to germs of sections pulled back by the adjunction unit; not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|theorem\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Comap.lean; grep -rn 'sheafFiber\\|stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Comap.lean: skyscraperSheafFunctorCompSheafPushforwardContinuous, sheafFiberComapIso only; AlgebraicGeometry/Sites: nothing on stalks of pullbacks (EtalePoint.lean defines pointSmallEtale)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-zero-dimensional-sections-stalks",
+ "kind": "statement",
+ "title": "Sections on a zero-dimensional scheme are the product of the geometric stalks",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and $C$ a separated scheme of finite type over $k$ [def-weil-pbc-scheme-conventions] with $\\dim C\\le0$ [def-kun-topological-krull-dimension]. For each point $c\\in|C|$ choose a geometric point $\\bar c:\\operatorname{Spec}\\Omega_c\\to C$ lying over $c$ [def-weil-geometric-point]. Then $|C|$ is finite, and for every abelian sheaf $F$ on $C_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] the map\n$$\\gamma_{C,F}:F(C)\\longrightarrow\\prod_{c\\in|C|}F_{\\bar c},\\qquad a\\longmapsto(a_{\\bar c})_{c},$$\nsending a global section to its germs at the pointed etale neighbourhoods $(C,\\bar c)$ (stalks of [def-weil-pbc-geometric-stalks]), is an isomorphism of abelian groups, natural in $F$. (This names the map of the degree-$0$ identification in lem-weil-pbc-zero-dimensional-cohomology.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian): for a strictly henselian local ring $R$, $\\Gamma(\\Spec R,\\mathcal F)=\\mathcal F_{\\bar s}$; applied to the local Artinian pieces $\\Spec\\mathcal O_{C,c}$ (algebra.tex Lemma Tag 00KH: a Noetherian ring of dimension 0 is Artinian, a finite product of local Artinian rings; Section Tag 04GE, an Artinian local ring is complete hence henselian, Lemma Tag 04GM; residue field $k$ by the Nullstellensatz), with the sheaf axiom for the finite Zariski cover by disjoint open points"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of a sheaf on the spectrum of a strictly henselian local ring equal the stalk at the closed point",
+   "results": "AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, StructureSheaf.globalSectionsIso_hom, ΓSpecIso_hom_stalkClosedPointIso_inv, germ_stalkClosedPointIso_hom (Mathlib.AlgebraicGeometry.Stalk)",
+   "date": "2026-10-09",
+   "verdict": "no match: structure sheaf (Zariski) only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of an etale sheaf over Spec of a strictly henselian local ring equal stalk at closed geometric point",
+   "results": "AlgebraicGeometry.Scheme.stalkClosedPointTo, stalkClosedPointTo_fromSpecStalk, germ_stalkClosedPointTo_Spec, stalkClosedPointIso (Mathlib.AlgebraicGeometry.Stalk)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": "pointSmallEtale, pointSmallEtale_fiber, isConservative_pointSmallEtale, isConservativeFamilyOfPoints_pointSmallEtale', pointSmallEtaleFiberObjToPreimage(_surjective) (Mathlib.AlgebraicGeometry.Sites.EtalePoint)",
+   "date": "2026-10-09",
+   "verdict": "no match: geometric points of the small etale site and conservativity exist; nothing identifies global sections with stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'strictly henselian\\|StrictlyHenselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'theorem\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Artinian.lean",
+   "results": "no file mentions strictly henselian rings; Artinian.lean: IsLocallyArtinian.of_topologicalKrullDim_le_zero, IsLocallyArtinian.discreteTopology, IsArtinianScheme.finite (the scheme-theoretic part: a locally Noetherian scheme of dimension <= 0 is locally Artinian, hence discrete)",
+   "date": "2026-10-09",
+   "verdict": "no match for the statement; Mathlib covers only the finiteness/discreteness of |C|"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

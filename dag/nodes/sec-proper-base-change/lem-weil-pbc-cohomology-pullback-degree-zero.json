@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-cohomology-pullback-degree-zero",
+ "kind": "statement",
+ "title": "Degree-zero cohomology and the degree-zero pullback map",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $G$ an abelian sheaf on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], and let $H^q(T_{\\Et},G)$ be the cohomology of [def-weil-pbc-etale-cohomology], computed from a K-injective resolution $s:G\\to I^\\bullet$ [def-weil-pbc-kinjective-resolutions].\n\n1. (Degree zero.) The map $\\epsilon_{T,G}:G(T)\\to\\mathcal H^0(\\Gamma(T,I^\\bullet))=H^0(T_{\\Et},G)$, $g\\mapsto$ the class of $s(g)\\in I^0(T)$, is well defined (it lands in the degree-$0$ cocycles) and is an isomorphism of abelian groups. It is natural in $G$ (for $\\varphi:G\\to G'$, $H^0(\\varphi)\\circ\\epsilon_{T,G}=\\epsilon_{T,G'}\\circ\\varphi(T)$, with $H^0(\\varphi)$ as in [lem-weil-pbc-cohomology-pullback-functorial]) and compatible with the identifications between different choices of $I^\\bullet$ [prop-weil-pbc-cohomology-resolution-independent].\n2. (Pullback in degree zero.) Let $u:Y\\to X$ be a morphism of schemes, $G$ an abelian sheaf on $X_{\\Et}$, $u^{-1}$ the inverse image with unit $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ [def-weil-pbc-inverse-image], and $u^*:H^0(X_{\\Et},G)\\to H^0(Y_{\\Et},u^{-1}G)$ the pullback map of [def-weil-pbc-cohomology-pullback] in degree $0$. Then\n$$u^*\\circ\\epsilon_{X,G}=\\epsilon_{Y,u^{-1}G}\\circ\\eta_{u,G}(X),$$\nwhere $\\eta_{u,G}(X):G(X)\\to(u_*u^{-1}G)(X)=(u^{-1}G)(Y)$ [def-weil-pbc-direct-image] is the unit on global sections. In words: under $H^0=\\Gamma$ the degree-zero pullback map is \"pull back the global section\".",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05TD (lemma-left-exact-higher-derived: $R^0F=F$ for a left exact $F$) and Lemma Tag 05TC (lemma-negative-vanishing), for clause 1; literature/stacks-project/cohomology.tex Section Tag 01F7, equation Tag 01FA (the maps on cohomology attached to a morphism, which in degree 0 are the maps on global sections), for clause 2; the formulation for this DAG's K-injective recipe is the agent's"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zeroth sheaf cohomology is global sections; H^0 of derived functor of global sections",
+   "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf (Mathlib.CategoryTheory.Abelian.RightDerived), CategoryTheory.Sheaf.Γ (Mathlib.CategoryTheory.Sites.GlobalSections), CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no match: generic H^0 = F for derived functors via injective resolutions / Ext; nothing about a pullback map of cohomology along a morphism of sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.equiv₀",
+   "results": "CategoryTheory.Sheaf.H.equiv₀ : F.H 0 ≃+ F(T) for a terminal T, H.equiv₀_naturality, H.equiv₀_symm_naturality, H.longSequence_equiv₀_exact₃ (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic / ExactSequences)",
+   "date": "2026-10-09",
+   "verdict": "partial: clause 1 holds in Mathlib for its Ext-defined sheaf cohomology (H.equiv₀ with naturality), not for the DAG's K-injective definition; clause 2 (pullback along a morphism of schemes) absent; not a leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback map on sheaf cohomology along a morphism of sites, degree zero equals restriction of global sections",
+   "results": "TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem|lemma|def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean; grep -rn 'cohomologyMap\\|pullback' same directory",
+   "results": "Basic.lean: H, H.equiv₀, H.map, functorH, subsingleton_H_of_isZero; Cech.lean; MayerVietoris.lean; no map of cohomology along a continuous functor / morphism of sites",
+   "date": "2026-10-09",
+   "verdict": "no match (pullback map of cohomology absent from Mathlib)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zero-dimensional-field-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

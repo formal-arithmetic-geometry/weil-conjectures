@@ -1,13 +1,11 @@
 # Work queue
 
-566 items; claim with `tools/claim.py next <group> [--stage N]`.
+565 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (550)
+## Stage 1: nodes to split (549)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
-| `lem-weil-pbc-torsion-sheaf-characterizations` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
 | `lemma-weil-pbc-curve-locally-constant-reduction` | 1004 | none |
 | `lemma-weil-pbc-eight-curve-devissage` | 1004 | none |
@@ -31,6 +29,7 @@
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
+| `lem-weil-pbc-henselian-local-root-lifting` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
@@ -578,7 +577,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 564 nodes that wait for stage 1, 108 nodes that wait for a statement dependency.
+Not open yet: 563 nodes that wait for stage 1, 110 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
