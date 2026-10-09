@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+ "kind": "statement",
+ "title": "A finitely presented ring map with the square-zero lifting property is smooth",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings such that $S$ is a finitely presented $R$-algebra and $\\varphi$ is formally smooth in the sense of Stacks Algebra, Definition 00TI: for every commutative ring $D$ with a ring map $R\\to D$, every ideal $N\\subseteq D$ with $N^2=0$, with quotient map $q:D\\to D/N$, and every homomorphism of $R$-algebras $g:S\\to D/N$, there is a homomorphism of $R$-algebras $f:S\\to D$ with $q\\circ f=g$. Then $\\varphi$ is a smooth ring map [def-weil-pbc-smooth-ring-map]: $H_1(L_{S/R})=0$ and $\\Omega_{S/R}$ [def-weil-pbc-kahler-differentials] is a finite projective $S$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00TN (proposition-smooth-formally-smooth, line 38169), (1) implies (2), whose proof is Proposition Tag 031J (proposition-characterize-formally-smooth, line 37986), (1) implies (6), together with Lemma Tag 00RY (lemma-differentials-finitely-presented, line 34342) for the finiteness of Omega_{S/R}; Definition Tag 00TI (definition-formally-smooth, line 37805)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra with infinitesimal lifting property along square-zero ideals is smooth",
+   "results": "RingHom.smooth_def, Algebra.Smooth.mk, Algebra.Smooth, Algebra.Smooth.formallySmooth (Mathlib.RingTheory.Smooth.Basic), Algebra.IsStandardSmooth.finitePresentation",
+   "date": "2026-10-10",
+   "verdict": "match together with loogle: Algebra.Smooth.mk with Algebra.FormallySmooth.of_comp_surjective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, Function.Surjective",
+   "results": "Algebra.FormallySmooth.of_comp_surjective (H : ∀ ⦃B : Type (max u v)⦄ [CommRing B] [Algebra R B] (I : Ideal B), I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp) : Algebra.FormallySmooth R A; Algebra.FormallySmooth.iff_comp_surjective; Algebra.FormallySmooth.comp_surjective (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 60,75p;186,191p;340,375p;536,542p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean",
+   "results": "line 70 class FormallySmooth (projective_kaehlerDifferential, subsingleton_h1Cotangent; @[stacks 00TI 'see 031J (6)']); line 189 instance [EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R]; line 346 theorem of_comp_surjective; line 371 iff_comp_surjective; line 540 class Smooth (formallySmooth, finitePresentation; @[stacks 00T2 '00TN proves equivalence'])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.of_comp_surjective",
+  "file": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "line": 346,
+  "how": "specializes in one line: the lifting hypothesis of the node, applied to rings D in the universe max u v, is the hypothesis H of of_comp_surjective (a lift f with (Ideal.Quotient.mkₐ R N).comp f = g), which gives Algebra.FormallySmooth R S, i.e. (line 70) Module.Projective S Ω[S⁄R] and Subsingleton (Algebra.H1Cotangent R S) = H_1(L_{S/R}) = 0; with FinitePresentation R S, Algebra.Smooth.mk (line 540) gives Algebra.Smooth R S, the match of def-weil-pbc-smooth-ring-map; Ω[S⁄R] is finite by the instance at line 189 (EssFiniteType from FinitePresentation via FiniteType, RingTheory/EssentialFiniteness.lean:95)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

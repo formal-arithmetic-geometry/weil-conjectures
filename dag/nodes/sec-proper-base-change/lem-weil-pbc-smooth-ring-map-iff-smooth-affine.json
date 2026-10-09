@@ -5,16 +5,97 @@
  "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is smooth in the sense of [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth) if and only if the ring map $\\varphi$ is smooth in the sense of [def-weil-pbc-smooth-ring-map] ($S$ finitely presented over $R$, $H_1(L_{S/R})=0$, $\\Omega_{S/R}$ finite projective).",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 01V6 (lemma-smooth-characterize), (1)<=>(2) with U = Spec S, V = Spec R (the smooth morphisms of Section 01V4, Definition 01V5, defined affine-locally by smooth ring maps, Algebra Definition 00T2); identified with 'locally of finite presentation and formally smooth' by More on Morphisms, Lemma Tag 02H6 (lemma-smooth-formally-smooth, literature/stacks-project/more-morphisms.tex); on rings, Algebra, Proposition Tag 00TN (proposition-smooth-formally-smooth, algebra.tex line 38169)"
+  "place": "Morphisms, Lemma Tag 01V6 (lemma-smooth-characterize, line 7048), (1)<=>(2) with U = Spec S, V = Spec R, for the smooth morphisms of Section Tag 01V4 (Definition Tag 01V5, affine-locally by smooth ring maps, Algebra Definition Tag 00T2); for the notion of [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth, Definition Tag 02H0) the statement is the affine case of More on Morphisms, Lemma Tag 02H6 (lemma-smooth-formally-smooth, literature/stacks-project/more-morphisms.tex line 3190), with Lemma Tag 02H4 (lemma-affine-formally-smooth) and Algebra, Proposition Tag 00TN (proposition-smooth-formally-smooth, algebra.tex line 38169)"
  },
  "stmt_deps": [
   "def-weil-affine-spectrum",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Notation.* Write $f=\\operatorname{Spec}\\varphi:X=\\operatorname{Spec}S\\to Y=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Since $\\mathcal O_X(X)=S$, $\\mathcal O_Y(Y)=R$ and $f$ is $\\operatorname{Spec}$ of $\\varphi$, the ring map $\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$ induced by $f$ on the affine opens $X$ and $Y$ (with $f(X)\\subseteq Y$) is $\\varphi$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01I2 (schemes-lemma-category-affine-schemes): Spec is an equivalence between rings and affine schemes, with Gamma(Spec A, O) = A"
+   }
+  },
+  {
+   "text": "*($\\Rightarrow$) finite presentation.* Assume $f$ is smooth in the sense of [def-sbc-smooth-morphisms], so $f$ is locally of finite presentation [def-sbc-locally-finite-presentation] and formally smooth [def-sbc-formally-smooth]. By [lem-weil-pbc-lfp-affine-opens-finite-presentation] applied to the affine opens $U=X$ and $V=Y$, the ring map $\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$, which is $\\varphi$ by the first step, is of finite presentation: $S$ is a finitely presented $R$-algebra.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma Tag 02H6, proof, first paragraph: 'By Morphisms, Lemma 01TQ we see that R -> A is of finite presentation'"
+   }
+  },
+  {
+   "text": "*($\\Rightarrow$) smoothness of $\\varphi$.* Under the same assumption, $f$ is formally smooth [def-sbc-formally-smooth], so by [lem-weil-pbc-affine-formally-smooth-iff-ring-lifting] $\\varphi$ has the square-zero lifting property: for every $R$-algebra $D$, ideal $N\\subseteq D$ with $N^2=0$ and $R$-algebra map $S\\to D/N$ there is a lift $S\\to D$. Since $S$ is finitely presented over $R$ by the previous step, [lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map] shows that $\\varphi$ is smooth [def-weil-pbc-smooth-ring-map]: $H_1(L_{S/R})=0$ and $\\Omega_{S/R}$ is finite projective.",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma Tag 02H6, proof, first paragraph: 'By Lemma 02H4 we see that R -> A is formally smooth ... By Algebra, Proposition 00TN we see that R -> A is smooth' (Lemma 02H3 is not needed: U = X, V = Y)"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$) local finite presentation.* Assume $\\varphi$ is a smooth ring map [def-weil-pbc-smooth-ring-map]; in particular $S$ is a finitely presented $R$-algebra. Then for every point $x\\in X$ the affine open neighbourhood $U=X=\\operatorname{Spec}S$ of $x$ and the affine open $V=Y=\\operatorname{Spec}R$ satisfy $f(U)\\subseteq V$, and the induced ring map is $\\varphi$ (first step), which is of finite presentation; so $f$ is of finite presentation at $x$, hence locally of finite presentation, by the definition [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01TP (definition-finite-presentation), instance with U = Spec S, V = Spec R; cf. Lemma Tag 01TQ"
+   }
+  },
+  {
+   "text": "*($\\Leftarrow$) formal smoothness.* By [lem-weil-pbc-smooth-ring-map-square-zero-lifting], a smooth ring map $\\varphi$ has the square-zero lifting property: for every ring $D$ with a ring map $R\\to D$, ideal $N$ with $N^2=0$ and $R$-algebra map $g:S\\to D/N$ there is an $R$-algebra map $S\\to D$ lifting $g$. By [lem-weil-pbc-affine-formally-smooth-iff-ring-lifting] $f=\\operatorname{Spec}\\varphi$ is formally smooth [def-sbc-formally-smooth]. With the previous step, $f$ is locally of finite presentation and formally smooth, i.e. smooth in the sense of [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "def-sbc-formally-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proposition Tag 00TN (proposition-smooth-formally-smooth, line 38169), (2) implies (1), and More on Morphisms, Lemma Tag 02H4 (affine case of the converse in Lemma 02H6, whose general proof by gluing local lifts is not needed for affine X, Y)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-formally-smooth",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02H6 (lemma-smooth-formally-smooth), proof, first paragraph, specialized to U = Spec S, V = Spec R; converse via Algebra, Proposition Tag 00TN and Lemma Tag 02H4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +124,17 @@
    "results": "Morphisms/Smooth.lean:63 class Smooth (smooth_appLE: affine-local RingHom.Smooth), :73 instance HasRingHomProperty @Smooth RingHom.Smooth (gives Smooth (Spec.map φ) <-> φ.Smooth = Algebra.Smooth, i.e. Stacks 01V6 for Mathlib's definition); :250-268 only stalkwise formal smoothness; no scheme-level 'locally of finite presentation + formally smooth (lifting for affine thickenings)' definition or comparison (Stacks 02H6) anywhere in AlgebraicGeometry/",
    "date": "2026-10-10",
    "verdict": "no match: the content of the node is the comparison of def-sbc-smooth-morphisms (formally smooth) with the ring-theoretic notion; Mathlib's HasRingHomProperty @Smooth RingHom.Smooth covers only the affine-local half (convention of 2026-10-09: stays a split node with the match recorded)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 70,74p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; sed -n 73,74p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; sed -n 360,361p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -rn 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "FinitePresentation.lean:71 LocallyOfFinitePresentation.SpecMap_iff : LocallyOfFinitePresentation (Spec.map f) ↔ f.hom.FinitePresentation; Smooth.lean:73 instance HasRingHomProperty @Smooth RingHom.Smooth; RingHomProperties.lean:360 HasRingHomProperty.Spec_iff; no scheme-level formally smooth notion (only stalk-level, Smooth.lean:250-363)",
+   "date": "2026-10-10",
+   "verdict": "partial: Smooth (Spec.map φ) ↔ RingHom.Smooth φ (Spec_iff with the Smooth instance) proves the item for Mathlib's affine-local AlgebraicGeometry.Smooth, which def-sbc-smooth-morphisms records as 'same notion, not a one-line specialization' (Tag 02H6); so the item is split, its formal-smoothness half going through the new unsplit node lem-weil-pbc-affine-formally-smooth-iff-ring-lifting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +154,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "worker": "stage1",
+  "summary": "Split along the first paragraph of the proof of Stacks More on Morphisms 02H6 specialized to U = Spec S, V = Spec R, where no gluing is needed: (=>) finite presentation of phi by lem-weil-pbc-lfp-affine-opens-finite-presentation (Morphisms 01TQ, Mathlib leaf), formal smoothness of phi by the new node lem-weil-pbc-affine-formally-smooth-iff-ring-lifting (02H4, unsplit; Mathlib has no scheme-level formal smoothness), smoothness of phi by the new node lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map (00TN (1)=>(2), Mathlib leaf Algebra.FormallySmooth.of_comp_surjective line 346 with Algebra.Smooth.mk line 540); (<=) local finite presentation by the definition with U = Spec S (elementary), formal smoothness by the existing leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting and 02H4. Statement and stmt_deps kept; source place corrected (01V6 concerns the Section 01V4 notion, the item's notion is 02H0, so the content is the affine case of 02H6). Tags verified against tags/tags: 01V6, 01V5, 01V4, 00T2, 02H6, 02H0, 02H4, 00TN, 031J, 00TI, 00RY, 01TQ, 01TP, 01I2. 00T7 is lemma-standard-smooth and 02GU is morphisms-lemma-etale-at-point, neither used. Not a Mathlib leaf: HasRingHomProperty.Spec_iff with the Smooth instance covers Mathlib's affine-local Smooth, which def-sbc-smooth-morphisms does not identify in one line."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps (the affine case of More on Morphisms 02H6): the ring map of Spec phi, finite presentation (01TQ leaf), formal smoothness of Spec phi iff the square-zero lifting property of phi (new unsplit node, 02H4) and lifting plus finite presentation gives a smooth ring map (new Mathlib leaf Algebra.FormallySmooth.of_comp_surjective Smooth/Basic.lean:346 with Smooth.mk, verified; Stacks 00TN), the converse by the square-zero lifting leaf committed today. Not a leaf via HasRingHomProperty.Spec_iff because def-sbc-smooth-morphisms is 'lfp + formally smooth', identified with Mathlib's affine-local Smooth only through 02H6. Stage-3 note: lem-weil-pbc-smooth-restrict-open-subschemes treats def-sbc-smooth-morphisms as AlgebraicGeometry.Smooth in one line; the two conventions should be reconciled. Brief errors: 00T7 standard-smooth, 02GU etale-at-point, 031J characterize-formally-smooth; the proposition is 00TN."
+ }
 }

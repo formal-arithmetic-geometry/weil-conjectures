@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+ "kind": "statement",
+ "title": "Spec of a ring map is formally smooth iff the ring map has the square-zero lifting property",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}S\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is formally smooth in the sense of [def-sbc-formally-smooth] (lifting along first order thickenings $T\\subset T'$ of affine schemes over $\\operatorname{Spec}R$ [def-sbc-first-order-thickening]) if and only if $\\varphi$ is a formally smooth ring map in the sense of Stacks Algebra, Definition 00TI: for every commutative ring $D$ with a ring map $R\\to D$, every ideal $N\\subseteq D$ with $N^2=0$, with quotient map $q:D\\to D/N$, and every homomorphism of $R$-algebras $g:S\\to D/N$, there is a homomorphism of $R$-algebras $f:S\\to D$ with $q\\circ f=g$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02H4 (lemma-affine-formally-smooth, line 3164; 'immediate from the definitions' 02H0 and Algebra 00TI 'by the equivalence of categories of rings and affine schemes', Schemes, Lemma Tag 01I2, schemes-lemma-category-affine-schemes); Algebra, Definition Tag 00TI (definition-formally-smooth, algebra.tex line 37805)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-formally-smooth",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of affine schemes is formally smooth iff the ring map of global sections is formally smooth",
+   "results": "RingHom.formallySmooth_algebraMap, RingHom.FormallySmooth (Mathlib.RingTheory.RingHom.Smooth), Algebra.FormallySmooth (Mathlib.RingTheory.Smooth.Basic), AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.FormallyUnramified (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level notions only; no scheme-level formal smoothness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec S → Spec R has the infinitesimal lifting property for first order thickenings of affine schemes iff R → S is formally smooth",
+   "results": "AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, Algebra.Smooth.formallySmooth, AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has a scheme-level FormallyUnramified (affine-local) but no scheme-level formally smooth class or lifting property"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, Function.Surjective",
+   "results": "Algebra.FormallySmooth.comp_surjective, .of_comp_surjective, .iff_comp_surjective (ring-level lifting characterization, Mathlib.RingTheory.Smooth.Basic lines 80, 346, 371), .liftOfSurjective, .iff_of_surjective",
+   "date": "2026-10-10",
+   "verdict": "ring half only: Algebra.FormallySmooth.iff_comp_surjective is the right-hand side of the node (Algebra 00TI in Mathlib's H1/projective form); nothing for Spec"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "only Morphisms/Smooth.lean:250-363 (stalk-level (f.stalkMap x).hom.FormallySmooth, smoothLocus); no class or lemma on lifting along thickenings for schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.FormallySmooth (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (not a proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
