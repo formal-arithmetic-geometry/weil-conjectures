@@ -1,0 +1,55 @@
+{
+ "id": "def-weil-geometric-point",
+ "kind": "definition",
+ "title": "Geometric point of a scheme",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme]. A *geometric point* of $Y$ is a morphism of schemes $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-affine-spectrum] where $\\Omega$ is an algebraically closed field [def-weil-algebraic-closure]. The image of the unique point of $\\operatorname{Spec}\\Omega$ is a point $y\\in Y$, and $\\bar y$ is said to *lie over* $y$. Such a morphism is the same as a point $y\\in Y$ together with a field homomorphism $\\kappa(y)\\to\\Omega$ from the residue field [def-weil-residue-field]; in particular $\\Omega$ is a field extension of $\\kappa(y)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Definition Tag 03PO, items (1) and (2); the description by a point and a map of residue fields is Schemes, Lemma Tag 01J9"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'geometric point\\|geometricPoint\\|GeometricPoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale",
+   "results": "no scheme-level structure; AlgebraicGeometry/Sites/Etale.lean:97 geometricFiber (a point of the big étale topology given by a separably closed field Ω, fibre functor X ↦ Hom(Spec Ω, X)); RingTheory/Etale/Finite.lean uses 'geometric point Ω of R' informally for an algebraically closed R-algebra",
+   "date": "2026-10-09",
+   "verdict": "generalization: no bundled name; specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def SpecToEquivOfField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/ResidueField.lean:346: Scheme.SpecToEquivOfField K X : (Spec (.of K) ⟶ X) ≃ Σ x, X.residueField x ⟶ .of K",
+   "date": "2026-10-09",
+   "verdict": "match for the description by a point and a map of residue fields"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.SpecToEquivOfField, IsAlgClosed",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "how": "specializes in one line: a geometric point is a field `Ω` with `[IsAlgClosed Ω]` and a morphism `Spec (.of Ω) ⟶ Y`; `Scheme.SpecToEquivOfField Ω Y` (line 346) identifies such morphisms with pairs of a point `y` and a ring map `Y.residueField y ⟶ .of Ω`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-scheme-morphism-properties",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

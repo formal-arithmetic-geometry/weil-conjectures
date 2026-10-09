@@ -2,20 +2,36 @@
  "id": "def-weil-scheme-morphism-properties",
  "kind": "definition",
  "title": "Scheme and morphism properties",
- "statement": "Let $f:X\\to Y$ be a morphism. Write $|Y|$ for the set of closed points of\n$Y$, and, for $y\\in|Y|$, write $\\kappa(y)$ for its residue field. The phrase\nof finite type [def-weil-finite-type-morphism] has the preceding meaning. It\nis *of finite presentation* if every affine open $V\\subseteq Y$ has a finite\naffine cover of $f^{-1}(V)$ by $\\operatorname{Spec}B$ with $B$ a finitely\npresented algebra over the coordinate ring of $V$. A ring is *regular* if\neach localization at a prime has Krull dimension equal to the minimal number\nof generators of its maximal ideal; a scheme is regular if all its local\nrings are regular. The morphism $f$ is *flat* if every induced local-ring map\nis flat, and *smooth* if it is locally of finite presentation and flat with\nregular geometric fibers. It is a *closed immersion* if it is affine and is\ninduced locally by a surjective ring homomorphism. It is *separated* if its\ndiagonal $X\\to X\\times_YX$ is a closed immersion, and *universally closed* if\nevery base change of $f$ is a closed map. It is *proper* if it is separated,\nof finite type, and universally closed. An *open immersion* identifies its\nsource with an open subscheme of its target. For $y\\in|Y|$, the geometric\nfiber is\n\n$$\n X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\overline{\\kappa(y)},\n$$\n\nwhere $\\overline{\\kappa(y)}$ is a chosen algebraic closure of $\\kappa(y)$. A\n*geometric point* of $Y$ is a morphism $\\bar y:\\operatorname{Spec}\\Omega\\to\nY$ whose field $\\Omega$ is algebraically closed and contains the residue\nfield of the image point. A scheme of finite type over a field is one whose\nstructure morphism is of finite type. A morphism is *weakly etale* if it is\nflat and its diagonal is flat. A subset of a scheme is *locally closed* if it\nis the intersection of an open and a closed subset, and it is *constructible*\nif it is a finite union of locally closed subsets. A locally closed\nconstructible subscheme means a subscheme whose underlying subset is locally\nclosed and constructible. A sheaf on a locally closed subscheme is locally\nconstant if it becomes a constant sheaf after pulling back along a covering\nfamily in its pro-etale site; its stalk at a geometric point is the filtered\ncolimit of its sections over pointed neighborhoods.",
+ "statement": "This node fixes no notion of its own: it collects the scheme and morphism properties used throughout, each defined in the node named. Let $f:X\\to Y$ be a morphism of schemes.\n\n- *Closed points* and $|Y|$, the set of closed points of $Y$: [def-weil-closed-points]. *Residue field* $\\kappa(y)$ of $y\\in Y$: [def-weil-residue-field].\n- *Locally of finite type*, *quasi-compact*, *of finite type*, and a *scheme of finite type over a field* (its structure morphism is of finite type): [def-weil-finite-type-morphism].\n- *Locally of finite presentation* and *of finite presentation*: [def-sbc-locally-finite-presentation]. The source defined \"of finite presentation\" as \"every affine open $V\\subseteq Y$ has a finite affine cover of $f^{-1}(V)$ by spectra of finitely presented algebras over $\\mathcal O(V)$\", which is locally of finite presentation and quasi-compact; the notion used here (Stacks Tag 01TP) also asks $f$ to be quasi-separated.\n- *Regular local ring*, *regular ring*, *regular scheme*: [def-weil-regular-scheme]. The source omitted the Noetherian hypothesis; the notion used here (Stacks Tags 00KU, 00OD, 02IS) includes it.\n- *Flat*: [def-weil-flat-morphism]. *Weakly étale* (flat with flat diagonal): [def-weil-weakly-etale-morphism].\n- *Smooth*: [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth, equivalently Stacks Tag 01V5). The source defined \"smooth\" as \"locally of finite presentation and flat with regular geometric fibres\", with geometric fibres taken only over closed points. If the fibre condition is imposed over every point $y\\in Y$, this agrees with [def-sbc-smooth-morphisms] (Stacks Tags 01VF, 01VB, 01V8, and 038X with 038V: a scheme locally of finite type over $\\kappa(y)$ is smooth exactly when its base change to $\\overline{\\kappa(y)}$ is regular). Over closed points only it is weaker in general: for a discrete valuation ring $R$ with fraction field $K$, $\\operatorname{Spec}K[\\varepsilon]/(\\varepsilon^2)\\to\\operatorname{Spec}R$ is flat and of finite presentation, its fibre over the closed point is empty, and it is not smooth. Smooth always means [def-sbc-smooth-morphisms].\n- *Closed immersion* (equivalently affine and induced on affine opens by surjective ring maps), and *immersion*: [def-weil-closed-immersion]. *Open immersion* (identifies the source with an open subscheme of the target): [def-weil-open-immersion].\n- *Separated* (diagonal a closed immersion), *universally closed* (every base change is a closed map), and *proper* (separated, of finite type, universally closed): [def-weil-proper-morphism].\n- *Geometric fibre* $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\overline{\\kappa(y)}$ over a point $y$ (the source uses it for $y\\in|Y|$): [def-weil-geometric-fibre]; it is the base change [def-pc-base-change] of the scheme-theoretic fibre $X_y$ [def-pc-scheme-fibre].\n- *Geometric point* $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, $\\Omega$ algebraically closed: [def-weil-geometric-point]. The source's clause that $\\Omega$ \"contains the residue field of the image point\" is not an extra condition: a morphism $\\operatorname{Spec}\\Omega\\to Y$ with image $y$ is the same as a field map $\\kappa(y)\\to\\Omega$.\n- *Locally closed* subset: [def-weil-locally-closed-subset]. *Constructible* subset: [def-weil-constructible-subset]. The source defined \"constructible\" as \"a finite union of locally closed subsets\". This agrees with [def-weil-constructible-subset] on Noetherian topological spaces, for instance schemes of finite type over a field (Stacks Tag 005L), and differs in general: in a quasi-compact scheme a non-quasi-compact open subset is a finite union of locally closed subsets but not constructible. Constructible always means [def-weil-constructible-subset].\n- A *locally closed constructible subscheme* of $Y$ is a subset $Z\\subseteq Y$ that is locally closed and constructible, with a subscheme structure, i.e. an immersion $Z\\to Y$ [def-weil-closed-immersion] whose image is $Z$.\n- The source also defined, in its last sentence, locally constant sheaves on the pro-étale site of a locally closed subscheme and their stalks at geometric points. These are not scheme or morphism properties and are not collected here (the pro-étale site depends on the notions above); they are separate definition nodes on the pro-étale site.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-scheme-morphism-properties.md",
   "place": "node def-weil-scheme-morphism-properties, order 410"
  },
  "stmt_deps": [
-  "def-weil-finite-type-morphism"
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-regular-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-weakly-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-fibre",
+  "def-pc-base-change",
+  "def-pc-scheme-fibre",
+  "def-weil-geometric-point",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -34,5 +50,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-scheme-morphism-properties",
+  "worker": "stage1",
+  "summary": "The node was a grab-bag redefining some twenty notions. It is now a bundle of pointers, one per notion: to the reviewed nodes def-weil-closed-points, def-weil-residue-field, def-weil-finite-type-morphism, def-sbc-locally-finite-presentation, def-sbc-smooth-morphisms, def-weil-proper-morphism, def-pc-base-change, def-pc-scheme-fibre, and to nine new nodes for the notions with no node: geometric point, geometric fibre, locally closed subset, constructible subset, flat, open immersion, closed immersion (with immersion), regular scheme, weakly étale (all Mathlib leaves). The source's last sentence (locally constant pro-étale sheaves and their stalks) is not collected here, since pointing to the pro-étale site from this node closes a cycle (the pro-étale site cites this node for flat); two unsplit nodes were created for it, def-weil-proetale-locally-constant-sheaf and def-weil-proetale-geometric-stalk, for the nodes that cite this one for those notions to point to. Where the source's own definition differs from the node pointed to, the statement says so: smooth (regular geometric fibres over closed points only: weaker in general, with a counterexample; equal when tested over all points), constructible (finite unions of locally closed subsets: equal on Noetherian spaces, different in general), finite presentation (source omitted quasi-separated), regular (source omitted Noetherian). The geometric-point clause on residue fields is automatic. No other node was edited."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
