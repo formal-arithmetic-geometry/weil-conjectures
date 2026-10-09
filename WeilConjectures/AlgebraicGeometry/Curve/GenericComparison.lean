@@ -51,20 +51,6 @@ section Sections
 
 variable {X : Scheme.{u}}
 
-/-- A section of a sheaf which is killed by a morphism lifts to the kernel. -/
-lemma Etale.exists_kernel_ι_app_eq {G H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
-    (ψ : G ⟶ H) {W : X.Etale} (x : G.obj.obj (op W)) (hx : ψ.hom.app (op W) x = 0) :
-    ∃ t : (kernel ψ).obj.obj (op W), (kernel.ι ψ).hom.app (op W) t = x := by
-  let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
-    (evaluation _ _).obj (op W)
-  let e := PreservesKernel.iso E ψ ≪≫ AddCommGrpCat.kernelIsoKer (E.map ψ)
-  refine ⟨e.inv ⟨x, hx⟩, ?_⟩
-  have h₁ := PreservesKernel.iso_inv_ι E ψ
-  have h₂ := AddCommGrpCat.kernelIsoKer_inv_comp_ι (E.map ψ)
-  change (e.inv ≫ E.map (kernel.ι ψ)) ⟨x, hx⟩ = x
-  rw [Iso.trans_inv, Category.assoc, h₁, h₂]
-  rfl
-
 /-- A monomorphism of sheaves is injective on sections. -/
 lemma Etale.injective_app_of_mono {G H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (ψ : G ⟶ H) [Mono ψ] (W : X.Etale) : Function.Injective (ψ.hom.app (op W)) := by
@@ -255,6 +241,9 @@ theorem bijective_H_map_unit_fromSpecFunctionField
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
     Function.Bijective (Sheaf.H.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
       C.fromSpecFunctionField).unit.app F) (n + 2)) := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian C := {}
   let ε := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
     C.fromSpecFunctionField).unit.app F
   let D := C.affineOpensDiagram

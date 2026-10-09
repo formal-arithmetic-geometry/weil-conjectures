@@ -180,11 +180,13 @@ theorem exists_isConstructibleSheaf_mono_of_henselianRing [Finite Λ] {A : Type 
   sorry
 
 /-- **Finite-cover killing.** Let `(A, I)` be a henselian pair, `T = Spec A`,
-`T₀ = Spec (A ⧸ I)` and `C` a constructible sheaf of `Λ`-modules on `T`. Every class
+`T₀ = Spec (A ⧸ I)` and `C` a constructible sheaf of `Λ`-modules on `T`, for a finite ring `Λ`,
+so that `C` is a torsion sheaf with finite stalks. Every class
 `c ∈ Hᵠ(T₀, C|)` of positive degree dies on the closed fibre `V₀ = T₀ ×_T V` of some finite,
 finitely presented `h : V ⟶ T` for which the unit `C ⟶ h_* h^* C` is a monomorphism.
 (blueprint: `lemma-weil-pbc-finite-cover-killing`) -/
-theorem exists_isFinite_cohomologyMap_eq_zero_of_henselianRing {A : Type u} [CommRing A]
+theorem exists_isFinite_cohomologyMap_eq_zero_of_henselianRing [Finite Λ] {A : Type u}
+    [CommRing A]
     (I : Ideal A) [HenselianRing A I]
     (C : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C]
     {q : ℕ} (hq : 0 < q)

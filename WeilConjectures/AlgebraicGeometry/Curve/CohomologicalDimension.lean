@@ -22,7 +22,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 The étale cohomological dimension of a curve over an algebraically closed field is at most two,
 and at most one if the curve is affine: `H^q(C_ét, F) = 0` for every torsion abelian sheaf `F`
-(`CategoryTheory.Sheaf.IsTorsion`) and `q ≥ 3`, resp. `q ≥ 2`.
+(`CategoryTheory.Sheaf.IsTorsion`: every section is locally torsion, equivalently every
+geometric stalk is a torsion group) and `q ≥ 3`, resp. `q ≥ 2`.
 
 Neither statement needs smoothness, connectedness, or `char k` to be prime to the torsion of
 `F`. The affine bound is first proved for smooth connected curves
@@ -466,7 +467,7 @@ end IsCurve
 `d`. -/
 lemma Scheme.isTorsion_constantZMod (X : Scheme.{u}) {d : ℕ} (hd : d ≠ 0) :
     (X.constantZMod d).IsTorsion := by
-  intro U s
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U s ↦ ?_
   refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨d, Nat.pos_of_ne_zero hd, ?_⟩
   have h₀ : d • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} (ZMod d))) = 0 := by
     ext x
