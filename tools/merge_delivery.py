@@ -17,6 +17,11 @@ tools/review_split.py compares the delivery with the version committed here; (4)
 (5) `reviewed` is written with the group, the claim is closed, the branch deleted, the ledger line appended, and one
 commit made with the delivery's author.
 """
+import os as _os, sys as _sys
+if _os.environ.get("SHEAF_LEAD") != "L-only":
+    _sys.stderr.write("merge_delivery.py: refused. This tool is run only by the lead L in the lead's shell (deliveries are merged after review). Remote groups: push deliver/<group>/<item> and wait; any merge not made by L is reverted. Reported to the human in coord/HUMAN.md.\n")
+    _sys.exit(2)
+
 import datetime
 import json
 import pathlib
