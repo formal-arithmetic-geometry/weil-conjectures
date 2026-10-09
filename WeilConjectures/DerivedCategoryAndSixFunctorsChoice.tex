@@ -62,29 +62,44 @@ of the six functors is constructed. It summarizes the work on the branches
 %======================================================================
 
 The formalization follows Bhatt--Scholze, \emph{The pro-\'etale topology for schemes},
-\S6.8, for $\ell$-adic coefficients. Two parallel layers coexist.
+\S6.8, for $\ell$-adic coefficients. Two layers coexist, and they are used for
+\emph{different kinds of coefficients}.
 
 \begin{enumerate}[label=(\Alph*)]
-\item \textbf{Fixed coefficient category.} Sheaves on $X_\proet$ with values in a fixed
-  closed symmetric monoidal Grothendieck abelian category $\mathcal{A}$ (the intended case
-  being $\mathcal{A} = \Mod_\Lambda$ for a ring $\Lambda$ such as $\mathbb{Z}/\ell^n$).
-  The six functors are built on $\Sh(X_\proet,\mathcal{A})$ and its derived category.
-  This is on \texttt{master} (folder \lean{SixFunctors/ProEtale}) and is moved to
-  \lean{SixFunctors/ProEtale/FiniteCoefficient} on \texttt{module-object-six-functors}.
-\item \textbf{Module objects over a coefficient ring sheaf.} Sheaves of modules over a
-  sheaf of rings $\mathcal{R}_X$ on $X_\proet$ which genuinely varies with $X$, for
-  instance $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$. These are
-  modelled as \emph{module objects} over a \emph{ring object} of the category of abelian
-  sheaves, and the six functors are obtained from those of layer (A) with
+\item \textbf{Finite coefficients: fixed coefficient category.} Sheaves on $X_\proet$ with
+  values in a fixed closed symmetric monoidal Grothendieck abelian category $\mathcal{A}$,
+  the intended case being $\mathcal{A} = \Mod_\Lambda$ for a \emph{finite} (discrete) ring
+  $\Lambda$ such as $\mathbb{Z}/\ell^n$. The six functors are built on
+  $\Sh(X_\proet,\mathcal{A})$ and its derived category. This is the folder
+  \lean{SixFunctors/ProEtale/FiniteCoefficient} (on \texttt{master} it is still
+  \lean{SixFunctors/ProEtale}).
+\item \textbf{Non-finite coefficients: module objects over a coefficient ring sheaf.}
+  Sheaves of modules over a sheaf of rings $\mathcal{R}_X$ on $X_\proet$ which genuinely
+  varies with $X$: $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$. These
+  are modelled as \emph{module objects} over a \emph{ring object} of the category of
+  abelian sheaves, and the six functors are obtained from those of layer (A) with
   $\mathcal{A} = \Ab$ by transporting module structures and changing scalars. This is the
   folder \lean{SixFunctors/ProEtale/ModuleObject}.
 \end{enumerate}
 
-Layer (B) is the one that matches Bhatt--Scholze for $\ell$-adic coefficients: an
-$\ell$-adic sheaf there is a sheaf of modules over the sheaf of rings $U \mapsto C(U,
-\mathbb{Z}_\ell)$, which is \emph{not} the constant sheaf with value $\mathbb{Z}_\ell$
-(the latter would be the sheaf of locally constant functions, which is wrong on
-w-contractible objects).
+\begin{choice}[Module objects only for non-finite coefficients]
+The module-object setup is used \emph{only} for the non-finite (topological) coefficients
+$\mathbb{Z}_\ell,\mathbb{Q}_\ell,E,\cO_E$. Finite coefficients $\Lambda=\mathbb{Z}/\ell^n$
+stay in layer (A), as sheaves with values in $\Mod_\Lambda$.
+\end{choice}
+
+The reason is that for a discrete ring $\Lambda$ the sheaf of continuous maps
+$C(-,\Lambda)$ is the constant sheaf $\underline{\Lambda}$. A sheaf of
+$\underline{\Lambda}$-modules is then the same as a $\Mod_\Lambda$-valued sheaf, and the
+coefficient ring does not vary with $X$, since $f^*\underline{\Lambda}_Y=\underline{\Lambda}_X$.
+The simpler fixed-coefficient formalism therefore suffices, and it has exact pullbacks.
+For a non-discrete topological ring $T$ this breaks down. An $\ell$-adic sheaf in the sense
+of Bhatt--Scholze is a sheaf of modules over $U\mapsto C(U,\mathbb{Z}_\ell)$, which is
+\emph{not} the constant sheaf with value $\mathbb{Z}_\ell$: the constant sheaf would be the
+sheaf of locally constant functions, which is wrong on w-contractible objects. Moreover the
+coefficient morphism $\alpha_f\colon f^*\mathcal{A}_Y(T)\to\mathcal{A}_X(T)$ is not an
+isomorphism in general. So the coefficients cannot be absorbed into a fixed category
+$\mathcal{A}$, and the module-object formalism is needed.
 
 \paragraph{Conventions.} Schemes live in \texttt{Type u}. The small pro-\'etale site
 $X_\proet$ is mathlib's \lean{Scheme.ProEt}: schemes \emph{weakly \'etale} over $X$, with
@@ -314,35 +329,23 @@ The derived categories present in the development:
 Category & Definition \\
 \midrule
 $\D(X_\proet,\mathcal{A})$ &
-  $\lean{DerivedCategory}(\Sh(X_\proet,\mathcal{A}))$, fixed coefficients (layer A);
-  $\D^+$ its bounded below part. \\
+  $\lean{DerivedCategory}(\Sh(X_\proet,\mathcal{A}))$, finite coefficients (layer A),
+  e.g.\ $\mathcal{A}=\Mod_{\mathbb{Z}/\ell^n}$; $\D^+$ its bounded below part. \\
 $\D(\Mod_{\mathcal{A}_X(T)})$ &
-  $\lean{DerivedCategory}(\Mod(\Sh(X_\proet,\Ab),\mathcal{A}_X(T)))$, module objects
-  (layer B). For $T=\cO_E$ resp.\ $E$ this is $\D(X_\proet,\cO_E)$ resp.\
-  $\D(X_\proet,E)$. \\
+  $\lean{DerivedCategory}(\Mod(\Sh(X_\proet,\Ab),\mathcal{A}_X(T)))$, non-finite
+  coefficients (layer B). For $T=\cO_E$ resp.\ $E$ this is $\D(X_\proet,\cO_E)$ resp.\
+  $\D(X_\proet,E)$; $\D^+$ its bounded below part. \\
 $\D_{\mathrm{cons}}(X_\proet,\mathcal{R})$ &
   full subcategory of $\D(\Mod_{\mathcal{R}})$ of bounded complexes with constructible
   cohomology sheaves (\S\ref{sec:constructible}). \\
-$\D_{\mathrm{comp}}(J,\cO_E)$ &
-  (\texttt{master}) full subcategory of $\D(\Sh(J,\Mod_{\cO_E}))$ of derived
-  $\mathfrak{m}_E$-complete objects: $K\to R\lim_n K\lotimes\cO_E/\mathfrak{m}_E^n$ is an
-  isomorphism. \\
-$\D_{\mathrm{comp}}(J,E)$ &
-  (\texttt{master}) Verdier quotient of $\D_{\mathrm{comp}}(J,\cO_E)$ by objects killed by
-  a nonzero element of $\cO_E$; $E$-linear triangulated. \\
 \bottomrule
 \end{tabularx}
 \medskip
 
-\begin{remark}[Two models of $\ell$-adic coefficients]
-The derived-complete categories on \texttt{master} use \emph{constant} coefficients:
-sheaves with values in $\Mod_{\cO_E}$ on an abstract site $J$, made complete afterwards.
-The new layer (B) uses sheaves of modules over the \emph{non-constant} ring sheaf
-$\cO_{E,X}=C(-,\cO_E)$, as in Bhatt--Scholze \S6.8; there $E$-coefficients are modules over
-$E_X=C(-,E)$ rather than a Verdier quotient. No derived completeness is imposed in layer
-(B): completeness is regarded as a choice of subcategory on which the functors act, and
-does not affect the coefficient morphisms or the constructions of the functors. Relating
-the two models is not done.
+\begin{remark}
+For non-finite coefficients, $E$-coefficients are modules over the ring sheaf
+$E_X=C(-,E)$ itself. They are \emph{not} obtained from $\cO_E$-coefficients by inverting
+$\ell$ in a triangulated category.
 \end{remark}
 
 \paragraph{Monoidal structure.} On $\D(X_\proet,\mathcal{A})$ and on
@@ -394,7 +397,7 @@ For $\mathcal{R}$ commutative,
 is the full subcategory (\lean{ProEtale.BoundedConstructible}) of complexes $K$ that are
 bounded for the canonical t-structure ($H^i(K)=0$ outside a finite interval) and all of
 whose cohomology sheaves $H^i(K)$ are constructible. Morphisms are computed in
-$\D(\Mod_{\mathcal{R}})$; no derived completeness condition is imposed. On a
+$\D(\Mod_{\mathcal{R}})$. On a
 topologically Noetherian $X$ it is a triangulated subcategory (constructible modules being
 closed under kernels, cokernels and extensions).
 \end{definition}
@@ -410,7 +413,7 @@ the two branches are merged.
 \end{remark}
 
 %======================================================================
-\section{Six functors with fixed coefficients (layer A)}
+\section{Six functors with finite coefficients (layer A)}
 \label{sec:sixA}
 %======================================================================
 
@@ -485,7 +488,7 @@ $\{i,\ \text{complement}\}$).
 \end{itemize}
 
 %======================================================================
-\section{Six functors on module objects (layer B)}
+\section{Six functors on module objects: non-finite coefficients (layer B)}
 \label{sec:sixB}
 %======================================================================
 
@@ -669,11 +672,44 @@ followed by a quotient; $\RHom_{\mathcal{A}_X}$ is its right adjoint
 \lean{ProEtale.ContinuousMapRing.derivedHom}).
 \end{choice}
 
-\paragraph{Exceptional pullback.} $Rf^!$ on module objects is \emph{not yet constructed}.
-The intended route mirrors $f_!$: the projection formula linearizes the $\Ab$-valued right
-adjoint, and $f^!$ is obtained by coextension of scalars along $\alpha_f$,
-$f^!=\Coext_{\alpha_f}\circ G_B$, then $Rf^!$ is assembled as in layer (A) from a right
-adjoint of $Rg_*$ for the proper part and $\D(i^*)$ for the open part.
+\begin{choice}[Exceptional pullback: assembled from the two halves of $Rf_!$]
+For $f$ with chosen compactification $X\xrightarrow{i}\bar X\xrightarrow{g}Y$,
+\[
+  Rf^! := \D(i^*)\circ Rg^!\colon\D(\Mod_{\mathcal{A}_Y})\to\D(\Mod_{\mathcal{A}_X}),
+\]
+(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriek}, attached to a compactification
+by \lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekOfCompactification}), where
+\begin{itemize}
+\item $Rg^!$ is a right adjoint of the module-object derived pushforward
+  $Rg_*=R(\Res_{\eta_g}\circ\mathrm{mapMod}(g_*))$ along the \emph{proper} $g$. It is an
+  abstract choice of right adjoint, used only through the adjunction $Rg_*\dashv Rg^!$.
+  It exists by Brown representability, or alternatively from the $\Ab$-valued exceptional
+  inverse image via the projection formula for $\mathcal{A}_Y(T)$ and coextension of
+  scalars along $\alpha_g$;
+\item $\D(i^*)$ is the levelwise module-object pullback along the open immersion $i$,
+  which is exact because $\alpha_i$ is an isomorphism (so $L(i^*)\cong\D(i^*)$).
+\end{itemize}
+\end{choice}
+
+As in layer (A), $Rf^!$ is a \emph{composite of derived functors}, not the derived functor
+of an underived $f^!$; there is no underived $f^!$ on module objects. The adjunction
+\[
+  Rf_!\dashv Rf^!
+\]
+(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekAdjunction}) is the composite of
+the derived open-immersion adjunction $\D(i_!)\dashv\D(i^*)$ and of $Rg_*\dashv Rg^!$.
+In particular, that $Rf_!=R(g_*)\circ\D(i_!)$ is a left adjoint on module objects is a
+\emph{theorem}; the only input taken for granted is that $Rg_*$ is a left adjoint for
+proper $g$.
+
+On the bounded below derived categories,
+$R^+f^!$ is \emph{defined as the restriction} of the unbounded $Rf^!$ along
+$\D^+\hookrightarrow\D$ (which makes sense since $Rf^!$ preserves bounded below objects;
+the bound is shifted by the amplitude of $Rf_!$). It is not defined as an independently
+chosen right adjoint on $\D^+$. The adjunction $R^+f_!\dashv R^+f^!$ is then the
+restriction of $Rf_!\dashv Rf^!$ along the fully faithful inclusions
+(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekPlusAdjunction}). So there is no
+ambiguity between ``the right adjoint of $R^+f_!$'' and ``the restriction of $Rf^!$''.
 
 %======================================================================
 \section{Summary}
@@ -702,7 +738,11 @@ $Lf^*\dashv Rf_*$ & derived from $f^*\dashv f_*$ & derived from $f^*\dashv f_*$ 
   objects\\
 $Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) &
   $R(g_*)\circ\D(i_!)$ (composite of derived)\\
-$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & not yet\\
+$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ (composite of derived) &
+  $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of the module-object $Rg_*$ (composite of
+  derived)\\
+$Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; on $\D^+$
+  by restriction & same\\
 $\lotimes$ & K-flat derived $\otimes$ & K-flat derived $\otimes_{\mathcal{A}_X}$\\
 $\RHom$ & right adjoint of $\lotimes$ & right adjoint of $\lotimes_{\mathcal{A}_X}$\\
 \bottomrule
@@ -711,14 +751,14 @@ $\RHom$ & right adjoint of $\lotimes$ & right adjoint of $\lotimes_{\mathcal{A}_
 
 \paragraph{Main open directions.}
 \begin{itemize}
-\item $Rf^!$ on module objects, via the projection-formula linearization of a right
-  adjoint and coextension of scalars along $\alpha_f$.
+\item An explicit construction of $Rg^!$ for proper $g$ on module objects, via the
+  projection-formula linearization of the $\Ab$-valued right adjoint and coextension of
+  scalars along $\alpha_g$.
 \item Coefficients $\Qlbar{}_{,X}$, which are not of the form $\mathcal{A}_X(T)$.
-\item Restricting the module-object functors to $\D_{\mathrm{cons}}$ (and to derived
-  complete objects for $\cO_E$), and aligning the restriction-to-strata used in
-  constructibility with the module-object pullback.
-\item Comparing layer (B) with the derived-complete constant-coefficient model on
-  \texttt{master}, and identifying $E_X$ with $\cO_{E,X}[1/\ell]$.
+\item Restricting the module-object functors to $\D_{\mathrm{cons}}$, and aligning the
+  restriction-to-strata used in constructibility with the module-object pullback.
+\item Identifying $E_X$ with $\cO_{E,X}[1/\ell]$, and comparing layer (B) with layer (A)
+  via reduction modulo $\ell^n$.
 \end{itemize}
 
 \paragraph{Branches.}
