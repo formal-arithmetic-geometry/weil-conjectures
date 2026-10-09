@@ -36,6 +36,12 @@ sheafification.
 - `AlgebraicGeometry.relativeDifferentialsSpecTildeHom`: for a ring map `φ : R ⟶ S`, the
   canonical morphism `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}`, adjoint to the map
   `relativeDifferentialsSpecΓHom : Ω_{S/R} → Γ(Spec S, Ω¹)` sending `D b` to `d b`.
+- `AlgebraicGeometry.Scheme.Hom.relativeDifferentialsRestrictIso`: for an open immersion
+  `j : U ⟶ X`, the isomorphism `Ω¹_{X/S}|_U ≅ Ω¹_{U/S}`.
+- `AlgebraicGeometry.Scheme.Hom.relativeDifferentialsCompIso`: for an open immersion
+  `i : V ⟶ S` and `g : X ⟶ V`, the isomorphism `Ω¹_{X/S} ≅ Ω¹_{X/V}`.
+- `AlgebraicGeometry.tildeDerivation`: the derivation `𝒪_{Spec S} → M^~` induced by a
+  derivation `S → M`, given on stalks by the quotient rule.
 - `AlgebraicGeometry.relativeDifferentialsSpecIso`: the isomorphism
   `Ω¹_{Spec S / Spec R} ≅ Ω_{S/R}^~`.
 - `AlgebraicGeometry.relativeDifferentialsSpecΓIso`: the isomorphism
@@ -51,16 +57,17 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 - `AlgebraicGeometry.Scheme.Hom.isInvertible_relativeDifferentials`: `Ω¹_{X/S}` is invertible
   for `f` smooth of relative dimension one.
 - `AlgebraicGeometry.isIso_relativeDifferentialsSpecTildeHom`: the canonical morphism
-  `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}` is an isomorphism (currently `sorry`).
+  `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}` is an isomorphism. Its inverse comes from
+  `tildeDerivation`; that the two composites are the identity uses that derivations into a sheaf
+  on an affine scheme are determined by their global sections
+  (`AlgebraicGeometry.Scheme.Modules.derivation_ext_of_isAffine`).
 
 ## TODO
 
 - Show that the definition does not change when `f⁻¹𝒪_S` is replaced by its sheafification,
   which is the inverse image used in the Stacks project.
-- Prove `isIso_relativeDifferentialsSpecTildeHom`, e.g. via Stacks 01UO (derivations into a sheaf
-  on `Spec S` are determined by their global sections).
-- Deduce the local statement: for affine opens `U ⊆ X` and `V ⊆ S` with `f(U) ⊆ V`,
-  `Ω¹_{X/S}|_U ≅ Ω_{𝒪(U)/𝒪(V)}^~`, and hence that `Ω¹_{X/S}` is quasi-coherent.
+- Deduce that `Ω¹_{X/S}` is quasi-coherent, combining `relativeDifferentialsRestrictIso`,
+  `relativeDifferentialsCompIso` and `relativeDifferentialsSpecIso` on affine charts.
 
 ## References
 
@@ -142,6 +149,8 @@ variable (X) in
 lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
   isZero_relativeDifferentials _
 
+/-- Every section of `f⁻¹𝒪_S` over `W` comes, in `𝒪_X(W)`, from a section of `𝒪_S` over some
+open `V` with `W ⊆ f⁻¹ V`: the colimit defining `f⁻¹𝒪_S` is filtered. -/
 lemma exists_appLE_eq_pullbackPresheafToPresheaf_app (W : X.Opens)
     (x : f.pullbackPresheaf.obj (op W)) :
     ∃ (V : S.Opens) (e : W ≤ f ⁻¹ᵁ V) (a : Γ(S, V)),
@@ -167,7 +176,8 @@ lemma app_eq_pullbackPresheafToPresheaf_app (V : S.Opens) (a : Γ(S, V)) :
   exact ⟨_, rfl⟩
 
 variable {f} in
-lemma _root_.PresheafOfModules.Derivation'.d_app_scheme
+/-- A derivation relative to `f⁻¹𝒪_S ⟶ 𝒪_X` vanishes on the image of `f.app`. -/
+lemma _root_.PresheafOfModules.Derivation'.d_app_app
     {M : _root_.PresheafOfModules.{u} (X.presheaf ⋙ forget₂ _ _)}
     (D : M.Derivation' f.pullbackPresheafToPresheaf) (V : S.Opens) (a : Γ(S, V)) :
     D.d (X := op (f ⁻¹ᵁ V)) (f.app V a) = 0 := by
@@ -256,11 +266,11 @@ noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i
         rw [appIso_hom, Category.assoc, g.naturality, ← Category.assoc, ← comp_app]
         rfl
       rw [← ConcreteCategory.comp_apply, h, ConcreteCategory.comp_apply]
-      erw [D.d_map, D.d_app_scheme]
+      erw [D.d_map, D.d_app_app]
       exact map_zero _)
     (fun M D W a ↦ by
       change D.d (g.app _ (i.app W a)) = 0
-      exact D.d_app_scheme _ _)
+      exact D.d_app_app _ _)
 
 
 section Restrict
@@ -283,7 +293,7 @@ noncomputable def pushforwardDerivation :
           ((j ≫ f).relativeDifferentialsDerivation.d (j.app W₁.unop x))
       rw [← ConcreteCategory.comp_apply, j.naturality, ConcreteCategory.comp_apply]
       exact (j ≫ f).relativeDifferentialsDerivation.d_map _ _)
-    (fun V a ↦ (j ≫ f).relativeDifferentialsDerivation.d_app_scheme V a)
+    (fun V a ↦ (j ≫ f).relativeDifferentialsDerivation.d_app_app V a)
 
 lemma pushforwardDerivation_desc_app_d (W : X.Opens) (s : Γ(X, W)) :
     ((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).val.app (op W)
@@ -313,7 +323,7 @@ noncomputable def restrictDerivation :
       change f.relativeDifferentialsDerivation.d
         ((j.appIso (j ⁻¹ᵁ (f ⁻¹ᵁ V))).inv (j.app (f ⁻¹ᵁ V) (f.app V a))) = 0
       rw [← ConcreteCategory.comp_apply (j.app _), app_appIso_inv]
-      erw [f.relativeDifferentialsDerivation.d_map, f.relativeDifferentialsDerivation.d_app_scheme]
+      erw [f.relativeDifferentialsDerivation.d_map, f.relativeDifferentialsDerivation.d_app_app]
       exact map_zero _)
 
 /-- The morphism `Ω¹_{X/S}|_U ⟶ Ω¹_{U/S}`. -/
@@ -579,7 +589,6 @@ lemma relativeDifferentialsSpecToTilde_comp_tildeHom :
   exact relativeDifferentialsSpecΓHom_d φ b
 
 /-- The canonical morphism `Ω_{S/R}^~ ⟶ Ω¹_{Spec S / Spec R}` is an isomorphism. -/
-@[stacks 01UO]
 instance isIso_relativeDifferentialsSpecTildeHom :
     IsIso (relativeDifferentialsSpecTildeHom φ) :=
   ⟨relativeDifferentialsSpecToTilde φ, relativeDifferentialsSpecTildeHom_comp_toTilde φ,

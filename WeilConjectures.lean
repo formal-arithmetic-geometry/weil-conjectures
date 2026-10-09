@@ -620,6 +620,7 @@ public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Defs
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Lie.Solvable
+public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
@@ -949,6 +950,7 @@ public import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
