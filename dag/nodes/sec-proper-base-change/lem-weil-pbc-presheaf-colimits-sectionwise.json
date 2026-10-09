@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-presheaf-colimits-sectionwise",
+ "kind": "statement",
+ "title": "Colimits of presheaves of sets and of abelian groups are computed sectionwise",
+ "statement": "Let $\\mathcal C$ be a category, let $\\mathcal A$ be the category of sets or the category of abelian groups, and let $\\mathrm{PSh}(\\mathcal C;\\mathcal A)$ be the category of presheaves on $\\mathcal C$ with values in $\\mathcal A$ (functors $\\mathcal C^{op}\\to\\mathcal A$, morphisms the natural transformations). Let $\\mathcal I$ be a small category and $i\\mapsto\\mathcal F_i$ a diagram $\\mathcal I\\to\\mathrm{PSh}(\\mathcal C;\\mathcal A)$. For every object $V$ of $\\mathcal C$ let $(\\mathcal P(V),(\\iota_{i,V})_i)$ be a colimit of the diagram $i\\mapsto\\mathcal F_i(V)$ in $\\mathcal A$ [def-weil-pbc-category-colimit], and for a morphism $g:V'\\to V$ of $\\mathcal C$ let $\\mathcal P(g):\\mathcal P(V)\\to\\mathcal P(V')$ be the unique morphism of $\\mathcal A$ with $\\mathcal P(g)\\circ\\iota_{i,V}=\\iota_{i,V'}\\circ\\mathcal F_i(g)$ for all $i$. Then $\\mathcal P$ is a presheaf ($\\mathcal P(\\mathrm{id})=\\mathrm{id}$, $\\mathcal P(g\\circ h)=\\mathcal P(h)\\circ\\mathcal P(g)$), the families $\\iota_i=(\\iota_{i,V})_V$ are morphisms of presheaves $\\mathcal F_i\\to\\mathcal P$, and $(\\mathcal P,(\\iota_i)_i)$ is a colimit of the diagram in $\\mathrm{PSh}(\\mathcal C;\\mathcal A)$: for every presheaf $\\mathcal Q$ and morphisms $\\mu_i:\\mathcal F_i\\to\\mathcal Q$ with $\\mu_j\\circ\\mathcal F(a)=\\mu_i$ for all $a:i\\to j$ there is exactly one morphism $u:\\mathcal P\\to\\mathcal Q$ with $u\\circ\\iota_i=\\mu_i$ for all $i$, namely $u_V$ the morphism induced by the $\\mu_{i,V}$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section Tag 00VB (section-limits-colimits-PSh), the presheaf F_colim : U -> colim_i F_i(U) and the paragraph proving it is a colimit; abelian version: sites-modules.tex Lemma Tag 03CL (lemma-limits-colimits-abelian-presheaves), parts (1) and (2), and its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of presheaves computed objectwise: a cocone in the functor category is a colimit if each evaluation is a colimit",
+   "results": "CategoryTheory.Limits.evaluationJointlyReflectsColimits (Mathlib.CategoryTheory.Limits.FunctorCategory.Basic), CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation, CategoryTheory.Limits.pointwiseIsColimit (same module), PresheafOfModules.isColimitColimitCocone (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits)",
+   "date": "2026-10-10",
+   "verdict": "match: evaluationJointlyReflectsColimits / combinedIsColimit for K = C^op"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimits in a functor category (presheaves) are computed pointwise; evaluation at each object preserves colimits",
+   "results": "TopCat.instHasColimitsOfShapePresheaf (Mathlib.Topology.Sheaves.Limits), CategoryTheory.Presheaf.isColimitTautologicalCocone, PresheafOfModules.evaluationJointlyReflectsColimits, PresheafOfModules.evaluation_preservesColimit",
+   "date": "2026-10-10",
+   "verdict": "related; the general functor-category statement is found by leansearch and loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.combinedIsColimit",
+   "results": "CategoryTheory.Limits.combinedIsColimit (F : J ⥤ K ⥤ C) (c : (k : K) → ColimitCocone (F.flip.obj k)) : IsColimit (combineCocones F c), module Mathlib.CategoryTheory.Limits.FunctorCategory.Basic",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def evaluationJointlyReflectsColimits\\|def combineCocones\\|def combinedIsColimit\\|instance evaluation_preservesColimitsOfShape' Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "results": "evaluationJointlyReflectsColimits line 108, combineCocones line 134 (pt.obj k = (c k).cocone.pt, ι.app j app k = (c k).cocone.ι.app j, map by the colimit descent), combinedIsColimit line 154, evaluation_preservesColimitsOfShape line 319",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.combinedIsColimit",
+  "file": "Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+  "line": 154,
+  "how": "specializes in one line: with K = Cᵒᵖ, the value category Type v or AddCommGrpCat, F : I ⥤ (Cᵒᵖ ⥤ A) the diagram and c k the chosen colimit cocones (P(V), ι_{·,V}) of F.flip.obj (op V), combineCocones F c (line 134) is the presheaf P of the node with the induced restriction maps and the coprojections ι_i, and combinedIsColimit F c says it is a colimit; for an arbitrary choice of sectionwise colimits this is evaluationJointlyReflectsColimits (line 108)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
