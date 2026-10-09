@@ -11,9 +11,63 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $u:N_1\\to N_2$ be an injective $R$-linear map. By the definition of a flat ring map [def-weil-pbc-flat-ring-map] it suffices to show that $u\\otimes1_S:N_1\\otimes_RS\\to N_2\\otimes_RS$ is injective; by the symmetry isomorphisms $N_i\\otimes_RS\\cong S\\otimes_RN_i$, $n\\otimes s\\mapsto s\\otimes n$, which commute with $u\\otimes1_S$ and $1_S\\otimes u$, it is equivalent to show that $1_S\\otimes u:S\\otimes_RN_1\\to S\\otimes_RN_2$ is injective. (Stacks argues with an exact sequence $N_1\\to N_2\\to N_3$; with the definition of flatness used here, by injective maps, the case $0\\to N_1\\to N_2$ is the one needed.)",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 039V (lemma-flat-permanence), proof, lines 8964-8978"
+   }
+  },
+  {
+   "text": "$M$ is a flat $R$-module (via $R\\to S$), so by [def-weil-pbc-flat-ring-map] $u\\otimes1_M:N_1\\otimes_RM\\to N_2\\otimes_RM$ is injective, hence, composing with the symmetry isomorphisms $N_i\\otimes_RM\\cong M\\otimes_RN_i$, so is $1_M\\otimes_Ru:M\\otimes_RN_1\\to M\\otimes_RN_2$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 039V (lemma-flat-permanence), proof, lines 8964-8978"
+   }
+  },
+  {
+   "text": "(Stacks: 'we may write this as $N_i\\otimes_RS\\otimes_SM$'.) By the natural isomorphisms $c_{N_i}:M\\otimes_S(S\\otimes_RN_i)\\xrightarrow{\\sim}M\\otimes_RN_i$ of [lem-weil-pbc-module-tensor-cancel-base-change], $(1_M\\otimes_Ru)\\circ c_{N_1}=c_{N_2}\\circ(1_M\\otimes_S(1_S\\otimes u))$, so $1_M\\otimes_S(1_S\\otimes u)=c_{N_2}^{-1}\\circ(1_M\\otimes_Ru)\\circ c_{N_1}$ is injective by step 2.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 039V (lemma-flat-permanence), proof, lines 8964-8978"
+   }
+  },
+  {
+   "text": "Consider the complex of $S$-modules $0\\to S\\otimes_RN_1\\xrightarrow{1_S\\otimes u}S\\otimes_RN_2$ (composite zero). Applying $M\\otimes_S-$ gives $0=M\\otimes_S0\\to M\\otimes_S(S\\otimes_RN_1)\\to M\\otimes_S(S\\otimes_RN_2)$, which is exact by step 3. As $M$ is a faithfully flat $S$-module, the definition [def-weil-pbc-faithfully-flat-ring-map] (a complex is exact if and only if its tensor product with $M$ is) shows that $0\\to S\\otimes_RN_1\\to S\\otimes_RN_2$ is exact, i.e. $1_S\\otimes u$ is injective. By step 1, $R\\to S$ is flat [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 039V (lemma-flat-permanence), proof, lines 8964-8978"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-module-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 039V (lemma-flat-permanence), line 8958"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +89,38 @@
    "results": "only separate Module.Flat and Module.FaithfullyFlat APIs; no 039V analogue",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If M is flat over R and faithfully flat over S, with scalar tower R S M, then S is flat over R",
+   "results": "Module.FaithfullyFlat.toFlat, RingHom.FaithfullyFlat.flat, Module.Flat.trans (Mathlib.RingTheory.Flat.Stability), Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top, Module.Flat.isBaseChange, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-10",
+   "verdict": "no match (Flat.trans goes the other way; of_flat_tensorProduct is descent of flatness of a module along a faithfully flat R -> S, a different statement)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat ?S ?M → Module.Flat ?R ?M → Module.Flat ?R ?S",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flatness of S over R follows from an S-module that is faithfully flat over S and flat over R",
+   "results": "Module.FaithfullyFlat.trans, Module.FaithfullyFlat.toFlat, Module.Flat.of_flat_tensorProduct, RingHom.FaithfullyFlat.flat, RingHom.faithfullyFlat_algebraMap_iff, Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'lemma|theorem' Mathlib/RingTheory/Flat/FaithfullyFlat/{Basic,Algebra,Descent}.lean; rg 'FaithfullyFlat [A-Za-z]+ M\\]' Mathlib",
+   "results": "Basic.lean: trans (:545, FaithfullyFlat R S + FaithfullyFlat S M => FaithfullyFlat R M), Flat.of_flat_tensorProduct (:588), lTensor_injective_iff_injective (:385), lTensor_reflects_exact (:362); Algebra.lean: of_comap_surjective, of_flat_of_isLocalHom; Descent.lean: injective_of_tensorProduct; none states 039V",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +140,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-permanence",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 039V (algebra.tex 8958-8978). Statement kept. Proof written in four steps from the Stacks proof, restricted to injections 0 -> N1 -> N2 because def-weil-pbc-flat-ring-map defines flatness by injective maps; the DAG's faithfully-flat definition is the exactness-reflecting one (00HB(2)), so injectivity of 1_S (x) u follows directly by applying it to the complex 0 -> S(x)N1 -> S(x)N2 (no derivation from 'N (x) M = 0 => N = 0' needed). The identification 'N_i (x)_R S (x)_S M = N_i (x)_R M' that Stacks writes without comment became the new Mathlib leaf lem-weil-pbc-module-tensor-cancel-base-change (TensorProduct.AlgebraTensorModule.cancelBaseChange with naturality lTensor_comp_cancelBaseChange); the existing lem-weil-pbc-module-base-change-transitive is only the case M = T a ring and lem-weil-pbc-tensor-cancel-base-change only the algebra case, so neither covers an arbitrary S-module M. No Mathlib match for the item itself (searches recorded). Citer lem-weil-pbc-regular-permanence uses it with R=A, S=B, M=C, which fits the statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps along Stacks 039V: reduce to injectivity of 1_S tensor u, flatness of M over R, the cancellation M tensor_S (S tensor_R N) = M tensor_R N (new leaf cancelBaseChange Tower.lean:436 verified), faithful flatness of M over S reflects exactness. Correct."
+ }
 }

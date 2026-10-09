@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-module-tensor-cancel-base-change",
+ "kind": "statement",
+ "title": "Cancelling a base change against a module over the bigger ring",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $M$ an $S$-module (an $R$-module via $R\\to S$) and $N$ an $R$-module. Then there is an isomorphism of $S$-modules $c_N:M\\otimes_S(S\\otimes_RN)\\xrightarrow{\\sim}M\\otimes_RN$, $m\\otimes(s\\otimes n)\\mapsto sm\\otimes n$, with inverse $m\\otimes n\\mapsto m\\otimes(1\\otimes n)$. It is natural in $N$: for an $R$-linear map $u:N\\to N'$ one has $(1_M\\otimes_R u)\\circ c_N=c_{N'}\\circ(1_M\\otimes_S(1_S\\otimes_R u))$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00D2 (lemma-tensor-with-bimodule, line 1881): $(M\\otimes_SS)\\otimes_RN\\cong M\\otimes_S(S\\otimes_RN)$ with the $(S,R)$-bimodule $S$, composed with $M\\otimes_SS\\cong M$; naturality from the formula on generators"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "M ⊗[S] (S ⊗[R] N) is isomorphic to M ⊗[R] N for an S-module M and R-module N",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower), TensorProduct.lid', TensorProduct.AlgebraTensorModule.distribBaseChange, IsLocalization.moduleLid, Algebra.TensorProduct.cancelBaseChange (Mathlib.RingTheory.TensorProduct.Maps)",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.AlgebraTensorModule.cancelBaseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cancel base change: tensoring an S-module with the base change S ⊗_R N over S gives M ⊗_R N",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.isBaseChange, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, LinearMap.baseChange_baseChange (all Mathlib.LinearAlgebra.TensorProduct.Tower except isBaseChange)",
+   "date": "2026-10-10",
+   "verdict": "match: cancelBaseChange with naturality lTensor_comp_cancelBaseChange"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'cancelBaseChange' Mathlib/LinearAlgebra/TensorProduct/Tower.lean (and rg 'def cancelBaseChange' Mathlib/)",
+   "results": "Tower.lean:436 def cancelBaseChange : M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N; :447 cancelBaseChange_tmul; :452 cancelBaseChange_symm_tmul; :456 lTensor_comp_cancelBaseChange; also the algebra version Algebra.TensorProduct.cancelBaseChange (RingTheory/TensorProduct/Maps.lean:476)",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+  "how": "specializes in one line: `cancelBaseChange R S S M N : M ⊗[S] (S ⊗[R] N) ≃ₗ[S] M ⊗[R] N` (line 436, with A = B = S; the formulas are cancelBaseChange_tmul :447 and cancelBaseChange_symm_tmul :452); naturality in N is `lTensor_comp_cancelBaseChange` (:456): `lTensor _ _ f ∘ₗ cancelBaseChange R A B M N = cancelBaseChange R A B M Q ∘ₗ lTensor _ _ (lTensor _ _ f)`. Source read 2026-10-10.",
+  "line": 436
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-permanence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added (436), verified with sed."
+}
