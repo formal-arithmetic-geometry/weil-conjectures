@@ -2,12 +2,17 @@
  "id": "def-pur-sheaf-hom",
  "kind": "definition",
  "title": "Sheaf Hom of sheaves of modules on a site",
- "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of rings on $\\mathcal C$, and\n$\\mathcal F,\\mathcal G$ sheaves of $\\mathcal O$-modules. For an object $U$ of\n$\\mathcal C$ write $\\mathcal F|_U$ for the restriction of $\\mathcal F$ to the\nlocalized site $\\mathcal C/U$. The *sheaf Hom*\n$\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal G)$ is the presheaf\n\n$$\n U\\longmapsto\\operatorname{Hom}_{\\mathcal O|_U}\n (\\mathcal F|_U,\\mathcal G|_U),\n$$\n\nthe set of $\\mathcal O|_U$-linear maps of sheaves on $\\mathcal C/U$, with the\nrestriction map along $V\\to U$ given by restricting a map on $\\mathcal C/U$ to\n$\\mathcal C/V$, and with $f\\in\\mathcal O(U)$ acting on $\\varphi$ by composing\n$\\varphi$ with multiplication by $f$. This presheaf is a sheaf of\n$\\mathcal O$-modules, and its global sections are\n$\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal G)$. In the twist\nnotation of the blueprint, $\\operatorname{Hom}_{\\Lambda_S}(\\Lambda(-m),\\Lambda_S)$\nfor a sheaf $\\Lambda(-m)$ of $\\Lambda_S$-modules on a site denotes this sheaf\nHom.",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and\n$\\mathcal F,\\mathcal G$ sheaves of $\\mathcal O$-modules. For an object $U$ of\n$\\mathcal C$ write $\\mathcal F|_U$ for the restriction of $\\mathcal F$ to the\nlocalized site $\\mathcal C/U$. The *sheaf Hom*\n$\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal G)$ is the presheaf\n\n$$\n U\\longmapsto\\operatorname{Hom}_{\\mathcal O|_U}\n (\\mathcal F|_U,\\mathcal G|_U),\n$$\n\nthe set of $\\mathcal O|_U$-linear maps of sheaves on $\\mathcal C/U$, with the\nrestriction map along $V\\to U$ given by restricting a map on $\\mathcal C/U$ to\n$\\mathcal C/V$, and with $f\\in\\mathcal O(U)$ acting on $\\varphi$ by composing\n$\\varphi$ with multiplication by $f$. This presheaf is a sheaf of\n$\\mathcal O$-modules, and its global sections are\n$\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal G)$ (the statement\nthat it is a sheaf of $\\mathcal O$-modules is a theorem of its own, from which\nthis definition takes its sheaf structure). In the twist\nnotation of the blueprint, $\\operatorname{Hom}_{\\Lambda_S}(\\Lambda(-m),\\Lambda_S)$\nfor a sheaf $\\Lambda(-m)$ of $\\Lambda_S$-modules on a site denotes this sheaf\nHom.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Section 04TT (sites-modules-section-internal-hom), the displayed rule U ↦ Hom_{O_U}(F|_U, G|_U) with its restriction maps and O-module structure, and Lemma 03EM (sites-modules-lemma-internal-hom: it is a sheaf of O-modules when F and G are sheaves)"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-modules-hom-module",
+  "lem-pur-sheaf-hom-is-sheaf"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -25,10 +30,17 @@
    "results": "the internal Hom of modules over one ring (`ModuleCat.monoidalClosed`), not of sheaves of modules",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -iE 'internalHom|ihom|presheafHom|sheafHom|Linear\\b|instance.*Module' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/; grep -rn 'Sheaf.internalHom\\|internalHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; grep -n 'def overFunctor\\|abbrev over\\|def overMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "results": "no `CategoryTheory.Sheaf.internalHom` and no module-valued internal Hom of `SheafOfModules`/`PresheafOfModules`; `M ⟶ N` in `SheafOfModules R` carries only `AddCommGroup` (Sheaf.lean:131), no `Module` over global sections. What exists: the restriction `SheafOfModules.over M X` to `J.over X` with `overMap` (PushforwardContinuous.lean:59-83), the Type-valued `presheafHom`/`sheafHom` for sheaves in a fixed category (Sites/SheafHom.lean:48, 245), `Sheaf.Γ` (Sites/GlobalSections.lean:64)",
+   "date": "2026-10-09",
+   "verdict": "no match, and not a one-line specialization: the ingredients (localized site, restriction of modules, global sections) exist, but the O(U)-module structure on Hom and the sheaf property for O-linear maps are not in Mathlib; see def-pur-sheaf-modules-hom-module and lem-pur-sheaf-hom-is-sheaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -46,5 +58,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pur-sheaf-hom",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 04TT/03EM (sites-modules.tex, section-internal-hom). Corrected 'sheaf of rings' to 'sheaf of commutative rings': the O(U)-module structure (pre- and post-composition with multiplication by f agree) needs commutativity, which Stacks assumes by convention. Named the notions it is built from: sheaves of O-modules (def-weil-sheaf-of-modules-category, Mathlib leaf), the localized ringed site C/U with restriction of modules and relocalization (new def-pur-localized-ringed-site, Mathlib leaf `SheafOfModules.over`/`overMap` on `J.over U`), Hom of sheaves of modules as a module over global sections (new def-pur-sheaf-modules-hom-module, unsplit: Mathlib has only AddCommGroup on Hom), and the theorem that the rule U ↦ Hom(F|_U,G|_U) is a sheaf of O-modules with global sections Hom_O(F,G) (new lem-pur-sheaf-hom-is-sheaf, unsplit: Mathlib's presheafHom/sheafHom are Type-valued for sheaves in a fixed category), from which the definition takes its sheaf structure instead of asserting it. Searched Mathlib again for a module-valued internal Hom (Sheaf.internalHom, presheafHom, SheafOfModules, PresheafOfModules, ModuleCat.monoidalClosed): none, so the item is not a one-line specialization."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

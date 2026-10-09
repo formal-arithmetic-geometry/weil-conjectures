@@ -1,0 +1,50 @@
+{
+ "id": "lem-pur-sheaf-hom-is-sheaf",
+ "kind": "statement",
+ "title": "The sheaf Hom of sheaves of modules is a sheaf of modules",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$ and $\\mathcal F,\\mathcal G$ sheaves of $\\mathcal O$-modules. For an object $U$ let $H(U)=\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal F|_U,\\mathcal G|_U)$ be the set of morphisms of sheaves of $\\mathcal O_U$-modules on the localized site $\\mathcal C/U$; it is an $\\mathcal O(U)$-module, $\\mathcal O(U)$ being the ring of global sections of $\\mathcal O_U$ (the final object of $\\mathcal C/U$ is $U/U$), by $(f\\varphi)_{V/U}=f|_V\\,\\varphi_{V/U}$. For $a:V\\to U$ let $H(U)\\to H(V)$ send $\\varphi$ to its restriction along the relocalization $\\mathcal C/V\\to\\mathcal C/U$, i.e. $(\\varphi|_V)_{W/V}=\\varphi_{W/U}$. Then: (1) $H$ is a presheaf of $\\mathcal O$-modules on $\\mathcal C$ (the restriction maps are semilinear over $\\mathcal O(U)\\to\\mathcal O(V)$); (2) $H$ is a sheaf on $\\mathcal C$; (3) $H(U)\\cong\\Gamma(\\mathcal C/U,H|_U)$ and the global sections $\\Gamma(\\mathcal C,H)$ (compatible families of elements of the $H(U)$) are in bijection, $\\Gamma(\\mathcal C,\\mathcal O)$-linearly, with $\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal G)$, a morphism $\\varphi$ corresponding to the family $(\\varphi|_U)_U$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 04TT (sites-modules-section-internal-hom), the paragraph defining the restriction maps and O-module structure; Lemma 03EM (sites-modules-lemma-internal-hom; proof omitted there, with the hint: reduce to sheaves and use Sites, Lemma 04TQ, sites-lemma-glue-maps); Lemma sites-modules-lemma-internal-hom-restriction"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-modules-hom-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^def\\|^lemma\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafHom.lean",
+   "results": "`presheafHom F G` (line 48: the presheaf of types X ↦ (F|_{Over X} ⟶ G|_{Over X}) for presheaves with values in a fixed category A), `presheafHom_isSheafFor` (179), `Presheaf.IsSheaf.hom` (216: it is a sheaf when G is), `sheafHom'`/`sheafHom` (226, 245), `sheafHomSectionsEquiv` (251: its sections are F ⟶ G)",
+   "date": "2026-10-09",
+   "verdict": "generalization for sheaves in a fixed category A only: sheaves of O-modules are not sheaves in a fixed category, and taking A = AddCommGrpCat gives the larger sheaf of additive maps, not the O-linear ones nor an O-module structure"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -iE 'internalHom|ihom|presheafHom|sheafHom|MonoidalClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/",
+   "results": "none (MonoidalClosed for sheaves only in CategoryTheory/Sites/CartesianClosed.lean and Sites/Monoidal.lean, for sheaves with values in a fixed monoidal closed category)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-sheaf-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

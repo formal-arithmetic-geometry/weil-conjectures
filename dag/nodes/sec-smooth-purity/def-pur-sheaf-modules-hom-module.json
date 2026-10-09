@@ -1,0 +1,48 @@
+{
+ "id": "def-pur-sheaf-modules-hom-module",
+ "kind": "definition",
+ "title": "Hom of sheaves of modules as a module over global sections",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$ and $\\Gamma(\\mathcal C,\\mathcal O)$ its ring of global sections (the families $(s_V)_{V\\in\\mathcal C}$, $s_V\\in\\mathcal O(V)$, compatible with all restriction maps; when $\\mathcal C$ has a final object $T$ it is $\\mathcal O(T)$). For sheaves of $\\mathcal O$-modules $\\mathcal F,\\mathcal G$ the abelian group $\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal G)$ of morphisms of sheaves of $\\mathcal O$-modules is a $\\Gamma(\\mathcal C,\\mathcal O)$-module by $(s\\varphi)_V(x)=s_V\\,\\varphi_V(x)$ for $x\\in\\mathcal F(V)$; equivalently $s\\varphi=\\varphi\\circ(s\\cdot)=(s\\cdot)\\circ\\varphi$, where $s\\cdot$ is multiplication by $s$ on $\\mathcal F$, resp. $\\mathcal G$ (these agree, and $s\\varphi$ is again $\\mathcal O$-linear, because $\\mathcal O$ is commutative). Composition of morphisms is $\\Gamma(\\mathcal C,\\mathcal O)$-bilinear.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 04TT (sites-modules-section-internal-hom): 'given f ∈ O(U) we can define fφ by either precomposing with multiplication by f on F|_U or postcomposing with multiplication by f on G|_U (it gives the same result)', here stated for the site C/U whose final object is U/U, so that Γ(C/U, O_U) = O(U); global sections: Section 03DD (sites-modules-section-global)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Linear\\b\\|instance.*Module\\|Module (\\|AddCommGroup (M ⟶' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/",
+   "results": "only `instance (M N : SheafOfModules R) : AddCommGroup (M ⟶ N)` (Sheaf.lean:131) and `Preadditive (SheafOfModules R)` (line 138); no `Module` instance on `M ⟶ N` and no `Linear` structure on `SheafOfModules` or `PresheafOfModules` (whose rings are `RingCat`, not commutative)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Sheaf.Γ\\|def Sheaf.ΓNatIsoSheafSections' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/GlobalSections.lean; grep -n 'instance\\|monoidalClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean",
+   "results": "`Sheaf.Γ` (GlobalSections.lean:64, the global-sections functor, giving the ring Γ(C,O) for O : Sheaf J CommRingCat) and `Sheaf.ΓNatIsoSheafSections` (line 80: Γ is evaluation at a terminal object); `ModuleCat.monoidalClosed` gives the module of linear maps over one commutative ring only",
+   "date": "2026-10-09",
+   "verdict": "no match: the ring Γ(C,O) exists, the module structure on Hom_O(F,G) does not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-sheaf-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

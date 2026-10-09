@@ -1,0 +1,52 @@
+{
+ "id": "def-pur-localized-ringed-site",
+ "kind": "definition",
+ "title": "Localization of a ringed site at an object and restriction of modules",
+ "statement": "Let $\\mathcal C$ be a site and $U$ an object of $\\mathcal C$. The *localization* $\\mathcal C/U$ is the category of objects $V\\to U$ over $U$, a family $\\{V_j\\to V\\}$ of morphisms over $U$ being a covering of $\\mathcal C/U$ if and only if it is a covering of $\\mathcal C$ (equivalently: a sieve on $V/U$ covers if and only if its image under the forgetful functor $j_U:\\mathcal C/U\\to\\mathcal C$ generates a covering sieve of $V$). For a sheaf $\\mathcal F$ on $\\mathcal C$ (with values in sets, abelian groups or rings) its *restriction* $\\mathcal F|_U=j_U^{-1}\\mathcal F$ is the sheaf on $\\mathcal C/U$ given by $\\mathcal F|_U(V/U)=\\mathcal F(V)$. For a sheaf of rings $\\mathcal O$ on $\\mathcal C$ this gives the sheaf of rings $\\mathcal O_U=\\mathcal O|_U$ on $\\mathcal C/U$, and for a sheaf of $\\mathcal O$-modules $\\mathcal F$ the sheaf of $\\mathcal O_U$-modules $\\mathcal F|_U$, $\\mathcal F|_U(V/U)=\\mathcal F(V)$ with its $\\mathcal O(V)$-module structure; a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of $\\mathcal O$-modules restricts to $\\varphi|_U:\\mathcal F|_U\\to\\mathcal G|_U$, $(\\varphi|_U)_{V/U}=\\varphi_V$. For a morphism $a:V\\to U$ of $\\mathcal C$ the functor $\\mathcal C/V\\to\\mathcal C/U$, $(W\\to V)\\mapsto(W\\to V\\to U)$, identifies $\\mathcal C/V$ with the localization $(\\mathcal C/U)/(V/U)$ (relocalization), and restricting a sheaf of $\\mathcal O_U$-modules on $\\mathcal C/U$ along it gives a sheaf of $\\mathcal O_V$-modules on $\\mathcal C/V$; restricting $\\mathcal F|_U$ in this way gives $\\mathcal F|_V$, sectionwise the identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03DH (sites-modules-section-localize), Definition 04IX (sites-modules-definition-localize-ringed-site: O_U and F|_U, with the rule F|_U(V/U)=F(V)); for the site C/U: literature/stacks-project/sites.tex Section 00XZ (sites-section-localize), Definition 00Y0; relocalization: sites.tex Lemma 03EH (sites-lemma-relocalize)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def over\\|abbrev Sheaf.over\\|def Sheaf.pushforwardOverMapIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Over.lean",
+   "results": "`GrothendieckTopology.over` (line 248): the topology on `Over X` whose covering sieves are those whose image `Sieve.overEquiv` covers in `J` (the localized site); `Sheaf.over` (line 512): the restriction `(J.overPullback A X).obj F` of a sheaf with values in any category A, sectionwise F(V) (in particular for `A = RingCat`, giving `R.over X`); `Sheaf.pushforwardOverMapIso` (line 518): compatibility with `Over.map f`",
+   "date": "2026-10-09",
+   "verdict": "match (site and restriction of sheaves of rings)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def overFunctor\\|abbrev over\\|abbrev Hom.over\\|def overMap\\|def overFunctorMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "results": "`SheafOfModules.overFunctor R X : SheafOfModules R ⥤ SheafOfModules (R.over X)` (line 59), `SheafOfModules.over M X` (line 65), `SheafOfModules.Hom.over` (line 70), `SheafOfModules.overMap R f` (line 76: relocalization along `Over.map f`), `SheafOfModules.overFunctorMap` (line 83: restricting to Over Y then along f is restricting to Over X, sectionwise the identity)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SheafOfModules.over",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+  "how": "exact: the localized site is `J.over U` (Mathlib/CategoryTheory/Sites/Over.lean:248), O_U is `Sheaf.over O U` (Over.lean:512), F|_U is `SheafOfModules.over F U` = `(SheafOfModules.overFunctor O U).obj F` (lines 59, 65), φ|_U is `SheafOfModules.Hom.over φ U` (line 70), relocalization along a : V ⟶ U is `SheafOfModules.overMap O a` (line 76) with `SheafOfModules.overFunctorMap O a : overFunctor O U ⋙ overMap O a ≅ overFunctor O V` (line 83)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-sheaf-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
