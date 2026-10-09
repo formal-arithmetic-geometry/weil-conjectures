@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-qcqs-over-affine",
+ "kind": "statement",
+ "title": "A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] with $Y$ affine, for instance $Y=\\operatorname{Spec}k$ for a field $k$ [def-weil-affine-spectrum]. If $f$ is quasi-compact [def-weil-finite-type-morphism] (in particular if $f$ is of finite type) and quasi-separated [def-weil-quasi-separated-morphism] (in particular if $f$ is separated [def-weil-proper-morphism]), then the scheme $X$ is quasi-compact (its underlying topological space is quasi-compact, i.e. $X\\to\\operatorname{Spec}\\mathbf Z$ is quasi-compact) and quasi-separated ($X\\to\\operatorname{Spec}\\mathbf Z$ is quasi-separated), conventions of [def-weil-pbc-scheme-conventions]. In particular a scheme separated and of finite type over a field is quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01K4 (lemma-quasi-compact-affine: the inverse image of the affine, hence quasi-compact, $Y$ is quasi-compact); the paragraph after Definition 01KK (definition-separated: a separated morphism is quasi-separated); Lemma 01KN (lemma-affine-separated: an affine scheme is separated, hence quasi-separated, over $\\mathbf Z$) and Lemma 01KU (lemma-separated-permanence, (2): a composition of quasi-separated morphisms is quasi-separated)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme of finite type and separated over a field is quasi-compact and quasi-separated",
+   "results": "AlgebraicGeometry.IsSeparated.instQuasiSeparated (Mathlib.AlgebraicGeometry.Morphisms.Separated); AlgebraicGeometry.Scheme.instQuasiSeparatedSpace...OfIsSeparated; AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-09",
+   "verdict": "match (one clause per lemma, see mathlib_match)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiSeparated, QuasiSeparatedSpace",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-09",
+   "verdict": "match: quasiSeparatedSpace_of_quasiSeparated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a scheme quasi-compact over an affine scheme is quasi-compact as a topological space",
+   "results": "AlgebraicGeometry.quasiCompact_over_affine_iff (v4.28 index; not in the pinned Mathlib, grep finds nothing), AlgebraicGeometry.quasiCompact_of_compactSpace, instQuasiCompactToSpecΓ...",
+   "date": "2026-10-09",
+   "verdict": "generalization present in the pinned Mathlib as QuasiCompact.compactSpace_of_compactSpace (grep below)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'compactSpace_of_compactSpace\\|quasiSeparatedSpace_of_quasiSeparated\\|quasiSeparatedSpace_of_isAffine\\|compactSpace_of_isAffine\\|instance (priority := 900) \\[IsSeparated f\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{Morphisms/QuasiCompact.lean,Morphisms/QuasiSeparated.lean,Morphisms/Separated.lean,AffineScheme.lean}",
+   "results": "Morphisms/QuasiCompact.lean:150 lemma QuasiCompact.compactSpace_of_compactSpace (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X; Morphisms/QuasiSeparated.lean:155 theorem quasiSeparatedSpace_of_quasiSeparated (f : X ⟶ Y) [QuasiSeparatedSpace Y] [QuasiSeparated f] : QuasiSeparatedSpace X; Morphisms/QuasiSeparated.lean:167 instance quasiSeparatedSpace_of_isAffine; AffineScheme.lean:561 instance Scheme.compactSpace_of_isAffine; Morphisms/Separated.lean:68 instance [IsSeparated f] : QuasiSeparated f",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated (with the instances AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine and IsSeparated → QuasiSeparated)",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "how": "specializes in one line per clause: $Y$ affine gives CompactSpace Y and QuasiSeparatedSpace Y by instance; compactSpace_of_compactSpace f gives CompactSpace X, quasiSeparatedSpace_of_quasiSeparated f gives QuasiSeparatedSpace X (QuasiSeparated f from IsSeparated f by the instance at Separated.lean:68); a quasi-compact (quasi-separated) scheme is CompactSpace (QuasiSeparatedSpace) by compactSpace_iff_quasiCompact and quasiSeparatedSpace_iff_quasiSeparated for the terminal map"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-curve-filtered-cohomology",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified against the pinned source: QuasiCompact.compactSpace_of_compactSpace (Morphisms/QuasiCompact.lean:150) and quasiSeparatedSpace_of_quasiSeparated (Morphisms/QuasiSeparated.lean:155), one line per clause."
+ }
+}
