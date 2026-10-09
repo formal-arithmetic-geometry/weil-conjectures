@@ -20,7 +20,11 @@
     "def-sc-field-extension",
     "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c6.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -28,14 +32,39 @@
   "def-sc-field-extension",
   "def-weil-pbc-eight-curve-assertions"
  ],
+ "tool_uses": [
+  "thm-sc-constant-invariance"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c6.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change invariance for constant sheaf etale cohomology over an algebraically closed field extension",
+   "results": "Returned Algebra.Etale.baseChange and CategoryTheory.Sheaf.isConstant_iff_of_equivalence; no theorem about etale cohomology base-change invariance for curves or this pullback map.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (_ -> _) (semantic type search)",
+   "results": "Returned generic CategoryTheory.IsIso suggestions; no declaration for the stated etale cohomology comparison.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'etale.*cohomology|base.*change.*cohomology|algebraically closed' Mathlib/AlgebraicGeometry Mathlib/Topology",
+   "results": "Found only general algebraically-closed scheme facts and unrelated etale algebra base-change declarations; no etale cohomology comparison for curves or constant sheaves.",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +92,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sc-c6",
+  "worker": "stage1",
+  "summary": "Checked the C6 statement against the blueprint and the sk-thm-p1 route. Its single proof step is the prime-to-characteristic specialization n=r of thm-sc-constant-invariance, with the map identification supplied by the two cited definitions. Added the required source location and three Mathlib search records; no new dependency node is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ }
 }
