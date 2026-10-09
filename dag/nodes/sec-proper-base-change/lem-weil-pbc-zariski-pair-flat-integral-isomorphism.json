@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-zariski-pair-flat-integral-isomorphism",
+ "kind": "statement",
+ "title": "Flat integral finitely presented algebra which is an isomorphism modulo a radical ideal is an isomorphism",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal contained in the Jacobson radical of $A$ (a Zariski pair). Let $A\\to B$ be a ring map which is flat ($B$ is a flat $A$-module [def-weil-pbc-flat-ring-map]), integral (every element of $B$ is a root of a monic polynomial with coefficients in the image of $A$) and of finite presentation ($B\\cong A[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ as $A$-algebras for some $n,m\\ge0$), and such that the induced map $A/I\\to B/IB$ is an isomorphism. Then $A\\to B$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0ELZ (lemma-check-isomorphism-zariski, line 2265) and its proof: A -> B finite (Algebra Lemma 02JJ lemma-characterize-finite-in-terms-of-integral), B finitely presented as A-module (Algebra Lemma 0564 lemma-finite-finitely-presented-extension), finite locally free (Algebra Lemma 00NX lemma-finite-projective), rank 1 along V(I) hence everywhere since every closed point lies in V(I), and a locally free algebra of rank 1 is an isomorphism ('pleasant exercise'); Definition Tag 0ELY (definition-zariski-pair)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat finitely presented integral algebra over ring with ideal in Jacobson radical, isomorphism modulo the ideal, then isomorphism",
+   "results": "RingHom.FinitePresentation, Ring.jacobson_quotient_of_le, Ideal.quotientEquivAlg, isJacobsonRing_iso, Ideal.quotientKerAlgEquivOfSurjective; nothing with this conclusion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat integral finitely presented algebra B over A with A/I ≅ B/IB and I in the Jacobson radical; then A → B is bijective",
+   "results": "RingHom.Flat.of_bijective, Algebra.FormallyEtale.comp_bijective, Module.IsLocalRing.linearCombination_bijective_of_flat (Mathlib.RingTheory.LocalRing.Module), RingHom.FaithfullyFlat.of_bijective; no global statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Algebra.IsIntegral, Algebra.FinitePresentation, Function.Bijective (algebraMap _ _)",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rank.*= 1.*bijective|bijective_algebraMap_of|rankAtStalk.*1' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra; grep jacobson in RingTheory/Flat",
+   "results": "RingTheory/Flat/Rank.lean:121 Module.algebraMap_bijective_iff_rankAtStalk (for [Module.Flat R S] [Module.Finite R S]: rankAtStalk S = 1 everywhere iff algebraMap bijective; the 'pleasant exercise' step), LinearAlgebra/Trace.lean:392 Module.Free.bijective_algebraMap_of_finrank_eq_one, Spectrum/Prime/FreeLocus.lean:224 Module.isLocallyConstant_rankAtStalk; no use of the Jacobson radical in RingTheory/Flat; the DAG leaf lem-weil-pbc-finite-flat-rank-iso (scheme version, isIso_iff_finrank_eq) is an ingredient",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients for the proof: Module.algebraMap_bijective_iff_rankAtStalk, Module.isLocallyConstant_rankAtStalk)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 0ELZ; correct; unsplit."
+ }
+}

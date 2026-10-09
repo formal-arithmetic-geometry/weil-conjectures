@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
+ "kind": "statement",
+ "title": "The part of the fibre over V(I) finite over A/I comes from the integral closure",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $A\\to B$ a ring map of finite type ($B$ a finitely generated $A$-algebra). Suppose $B/IB=C_1\\times C_2$ is a product of $A/I$-algebras with $C_1$ finite over $A/I$ (a finitely generated $A/I$-module); let $\\varepsilon\\in B/IB$ be the idempotent $(1,0)$. Let $B'\\subseteq B$ be the integral closure of $A$ in $B$ (the subring of elements of $B$ that are roots of monic polynomials with coefficients in the image of $A$). Then there are an idempotent $\\varepsilon'\\in B'/IB'$ and an element $g\\in B'$ such that: (i) the ring map $B'/IB'\\to B/IB$ induced by the inclusion $B'\\subseteq B$ maps $\\varepsilon'$ to $\\varepsilon$, so that, writing $B'/IB'=C'_1\\times C'_2$ with $C'_1=\\varepsilon'(B'/IB')$, $C'_2=(1-\\varepsilon')(B'/IB')$, it maps $C'_1$ into $C_1$ and $C'_2$ into $C_2$; (ii) the induced map $C'_1\\to C_1$ is an isomorphism; (iii) the image of $g$ in $B'/IB'$ is $\\varepsilon'$; (iv) the map of localizations $B'_g\\to B_g$ induced by the inclusion is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XH (lemma-helper-finite-type, line 2502) and its proof (uses Zariski's Main Theorem, Algebra Theorem 00Q9 theorem-main-theorem; Algebra Lemmas 00HZ lemma-going-up-closed and 00GU lemma-integral-going-up; Algebra Lemma 00EM lemma-disjoint-implies-product; Algebra Lemma 00HN lemma-characterize-zero-local; 'some details omitted'); the statement's 'we can write B'/IB' = C_1 x C'_2' is clauses (i)-(ii) here (end of proof: 'it follows that C'_1 = C_1')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of A in a finite type algebra B, localization at an element is isomorphism, Zariski main theorem",
+   "results": "Algebra.ZariskisMainProperty.of_isIntegral, IsLocalization.Away.integralClosure, isIntegral_localization, Algebra.ZariskisMainProperty, Algebra.zariskisMainProperty_iff (Mathlib.RingTheory.ZariskisMainTheorem); pointwise ZMT only",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient: ZMT at one prime)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of A in finite type algebra B: open and closed piece of fibre over V(I) finite over A/I comes from the integral closure, localization isomorphism B'_g ≅ B_g",
+   "results": "Algebra.ZariskisMainProperty.of_isIntegral, Algebra.ZariskisMainProperty, Algebra.zariskisMainProperty_iff(') , Algebra.QuasiFiniteAt, IsLocalization.Away.integralClosure; nothing about a clopen part of the fibre over V(I)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.ZariskisMainProperty",
+   "results": "10 declarations in Mathlib.RingTheory.ZariskisMainTheorem: ZariskisMainProperty (def: r in integralClosure R S, r notin p, Localization.awayMap bijective), .of_isIntegral, .of_finiteType (@[stacks 00Q9], FiniteType + QuasiFiniteAt p), .of_finiteType_of_weaklyQuasiFiniteAt, .quasiFiniteAt, .restrictScalars, .trans, zariskisMainProperty_iff('), zariskisMainProperty_iff_exists_saturation_eq_top",
+   "date": "2026-10-10",
+   "verdict": "no match (Algebra.ZariskisMainProperty.of_finiteType is the Algebra 00Q9 step of the proof, ZariskisMainTheorem.lean:660)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln integralClosure ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | xargs grep -ln 'IsClopen|IsIdempotentElem'; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/ZariskisMainTheorem.lean and RingTheory/Etale/QuasiFinite.lean",
+   "results": "only DedekindDomain/Ideal/Basic.lean and Etale/QuasiFinite.lean (Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, @[stacks 00UJ], an etale-local splitting: different statement); ZariskisMainTheorem.lean:666 ZariskisMainProperty.exists_fg_and_exists_notMem_and_awayMap_bijective (one prime)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 09XH; correct; unsplit (uses Zariski′s main theorem 00Q9, in Mathlib as Algebra.ZariskisMainProperty.of_finiteType)."
+ }
+}

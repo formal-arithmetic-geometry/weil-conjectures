@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+ "kind": "statement",
+ "title": "An etale algebra is finitely presented, and its principal localizations are etale",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. Then (1) $A\\to B$ is of finite presentation: $B\\cong A[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ as $A$-algebras for some $n,m\\ge0$; in particular $B$ is a finitely generated $A$-algebra; (2) for every $s\\in B$, the morphism $\\operatorname{Spec}B_s\\to\\operatorname{Spec}A$ induced by $A\\to B\\to B_s=B[1/s]$ is etale.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00U1 (definition-etale: an etale ring map is smooth, in particular of finite presentation) and Lemma Tag 00U2 (lemma-etale) (1) R -> R_f is etale and (2) compositions of etale ring maps are etale; with Morphisms Lemma Tag 02GJ (lemma-etale-characterize): Spec B -> Spec A etale iff A -> B etale"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra is of finite presentation; localization away from an element of an etale algebra is etale",
+   "results": "Algebra.Etale.finitePresentation, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away, Algebra.IsStandardEtale.of_isLocalizationAway, Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Basic / Locus)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.finitePresentation",
+   "results": "Algebra.Etale.finitePresentation : [Algebra.Etale R A] : Algebra.FinitePresentation R A (Mathlib.RingTheory.Etale.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 1)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 204,260p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean",
+   "results": "class Etale (line 206) with field finitePresentation (line 208, made an instance line 219); Etale.comp (237); of_isLocalizationAway (252); instance (s : A) [Algebra.Etale R A] : Algebra.Etale R (Localization.Away s) (256); RingTheory/RingHom/Etale.lean:37 RingHom.etale_algebraMap",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Etale.finitePresentation; instance Algebra.Etale R (Localization.Away s) (Etale/Basic.lean:256)",
+  "file": "Mathlib/RingTheory/Etale/Basic.lean",
+  "how": "one per clause, after the translation Spec B -> Spec A etale <-> Algebra.Etale A B used for lem-weil-pbc-etale-ring-base-change (HasRingHomProperty.Spec_iff, AlgebraicGeometry/Morphisms/RingHomProperties.lean; RingHom.etale_algebraMap, RingTheory/RingHom/Etale.lean:37): (1) Algebra.Etale.finitePresentation (field of the class, line 208; Algebra.FinitePresentation is B = A[x_1..x_n]/(finitely generated ideal)); (2) the instance at line 256"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Algebra.Etale.finitePresentation (Etale/Basic.lean:219) and the Etale instance for Localization.Away (:256); checked."
+ }
+}
