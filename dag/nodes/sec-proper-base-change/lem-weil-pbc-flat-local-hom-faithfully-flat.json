@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+ "kind": "statement",
+ "title": "A flat local homomorphism of local rings is surjective on spectra",
+ "statement": "Let $(A,\\mathfrak m_A)$ and $(B,\\mathfrak m_B)$ be local rings and $\\varphi:A\\to B$ a flat [def-weil-pbc-flat-ring-map] local homomorphism ($\\varphi(\\mathfrak m_A)\\subseteq\\mathfrak m_B$). Then $\\varphi$ is faithfully flat; in particular the induced map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is surjective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00HR (algebra-lemma-local-flat-ff, line 9184), with Lemma Tag 00HQ (algebra-lemma-ff-rings: faithfully flat implies surjective on spectra)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat local homomorphism of local rings is faithfully flat",
+   "results": "Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra), Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+   "results": "PrimeSpectrum.comap_surjective_of_faithfullyFlat (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra): [Module.FaithfullyFlat A B] -> Function.Surjective (PrimeSpectrum.comap (algebraMap A B))",
+   "date": "2026-10-10",
+   "verdict": "match (Spec surjectivity clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_flat_of_isLocalHom\\|comap_surjective_of_faithfullyFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+   "results": "line 60 Module.FaithfullyFlat.of_flat_of_isLocalHom [IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)] : Module.FaithfullyFlat A B; line 146 PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.of_flat_of_isLocalHom",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+  "line": 60,
+  "how": "specializes in one line: with phi.toAlgebra, `Module.FaithfullyFlat.of_flat_of_isLocalHom` ([IsLocalRing A] [IsLocalRing B] [Module.Flat A B] [IsLocalHom (algebraMap A B)], line 60; IsLocalHom is equivalent to phi(m_A) in m_B by IsLocalRing.local_hom_TFAE) gives faithful flatness, and the Spec clause is `PrimeSpectrum.comap_surjective_of_faithfullyFlat` (same file, line 146). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

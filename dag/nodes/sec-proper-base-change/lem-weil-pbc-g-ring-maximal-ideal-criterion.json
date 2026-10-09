@@ -1,7 +1,226 @@
 {
- "id":"lem-weil-pbc-g-ring-maximal-ideal-criterion","kind":"statement","title":"A Noetherian ring is a G-ring if its maximal localizations have geometrically regular formal fibres",
- "statement":"Let $R$ be Noetherian [def-weil-pbc-noetherian-ring]. Then $R$ is a G-ring [def-weil-pbc-g-ring] if and only if for every maximal ideal $\\mathfrak m\\subset R$ the local ring $R_{\\mathfrak m}$ has geometrically regular formal fibres; equivalently, the completion map $R_{\\mathfrak m}\\to(R_{\\mathfrak m})^\\wedge$ [def-weil-pbc-adic-completion] is regular in the sense of [def-weil-pbc-g-ring] for every maximal $\\mathfrak m$. This is More on Algebra Lemma Tag 07PT.",
- "source":{"document":"literature/stacks-project/more-algebra.tex","place":"Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals), used in Lemma Tag 0AH3"},"stmt_deps":["def-weil-pbc-noetherian-ring","def-weil-pbc-g-ring","def-weil-pbc-adic-completion"],
- "mathlib_searches":[{"tool":"leansearch","query":"Noetherian G-ring criterion check maximal ideals formal fibres","results":"No G-ring or formal-fibre criterion; only generic Noetherian localization APIs","date":"2026-10-10","verdict":"no match"},{"tool":"loogle","query":"G-ring maximal ideal formal fibre","results":"no result","date":"2026-10-10","verdict":"no match"},{"tool":"grep","query":"rg -n -i 'check-G-ring-maximal|formal fibre|geometrically regular.*completion' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/","results":"no G-ring, formal-fibre, or geometric-regularity criterion","date":"2026-10-10","verdict":"no match"}],
- "status":"unsplit","merged_into":null,"proof":[],"proof_deps":[],"proof_origin":null,"created":{"by":"worker","item":"lem-weil-pbc-henselization-pair-g-ring","date":"2026-10-10"},"lean_audit":{"master":{"state":"none","decls":[],"missing":[]},"slopmaster2":{"state":"none","decls":[],"missing":[]}},"chapter":"sec-proper-base-change","unit":"sk-thm-p1"
+ "id": "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+ "kind": "statement",
+ "title": "A Noetherian ring is a G-ring if its maximal localizations have geometrically regular formal fibres",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring]. Then $R$ is a G-ring [def-weil-pbc-g-ring] if and only if for every maximal ideal $\\mathfrak m\\subset R$ the completion map $R_{\\mathfrak m}\\to(R_{\\mathfrak m})^\\wedge$ is a regular ring map in the sense of [def-weil-pbc-g-ring], where $R_{\\mathfrak m}$ is the localization of $R$ at $\\mathfrak m$ [def-weil-pbc-localization-at-prime] and $(R_{\\mathfrak m})^\\wedge=\\varprojlim_nR_{\\mathfrak m}/\\mathfrak m^nR_{\\mathfrak m}$ its $\\mathfrak mR_{\\mathfrak m}$-adic completion [def-weil-pbc-adic-completion] (in Stacks' words: $R_{\\mathfrak m}$ has geometrically regular formal fibres). This is More on Algebra Lemma Tag 07PT.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals), used in Lemma Tag 0AH3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian G-ring criterion check maximal ideals formal fibres",
+   "results": "No G-ring or formal-fibre criterion; only generic Noetherian localization APIs",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "G-ring maximal ideal formal fibre",
+   "results": "no result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'check-G-ring-maximal|formal fibre|geometrically regular.*completion' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/",
+   "results": "no G-ring, formal-fibre, or geometric-regularity criterion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring is G-ring iff completion maps at maximal ideals are regular",
+   "results": "IsNoetherianRing.of_isLocalization_maximal, isLocalRing_of_isAdicComplete_maximal, IsHausdorff.of_isLocalRing, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsHausdorff.of_isDomain: no G-ring",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'G-ring|IsGRing|geometrically.?regular|regular ring hom|formal fib' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (the earlier grep of this node named a path /home/ubuntu/SHEAF/project/lean/... that is not this machine's Mathlib)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "proof": [
+  {
+   "text": "($\\Rightarrow$) If $R$ is a G-ring, then for every maximal ideal $\\mathfrak m$, which is a prime ideal, the map $R_{\\mathfrak m}\\to(R_{\\mathfrak m})^\\wedge$ is regular by the definition of a G-ring [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Definition Tag 07GH (definition-G-ring, line 12179); the direction is not written out in 07PT"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$) Assume $R_{\\mathfrak m}\\to(R_{\\mathfrak m})^\\wedge$ is regular for every maximal $\\mathfrak m$. Since $R$ is Noetherian, by [def-weil-pbc-g-ring] it suffices to show that $R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$ is regular for a given prime $\\mathfrak p\\subset R$. Choose a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ (every proper ideal lies in a maximal ideal) and put $A=R_{\\mathfrak m}$; then $\\mathfrak pA$ is a prime ideal of $A$ with $\\mathfrak pA\\cap R=\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Applying [lem-weil-pbc-flat-local-ring-maps] to the (flat) identity map of the Noetherian ring $R$ at the primes $\\mathfrak m$ and $\\mathfrak p$, $A$ and $R_{\\mathfrak p}$ are Noetherian local rings. Let $c:A\\to A^\\wedge$ be the $\\mathfrak mA$-adic completion map [def-weil-pbc-adic-completion].",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof"
+   }
+  },
+  {
+   "text": "$A^\\wedge$ is a Noetherian ring [lem-weil-pbc-adic-completion-noetherian], a local ring with maximal ideal $\\mathfrak mA^\\wedge$ [lem-weil-pbc-local-completion-local-ring], and $\\mathfrak mA^\\wedge$-adically complete [lem-weil-pbc-adic-completion-mod-ideal] ($\\mathfrak mA$ is finitely generated as $A$ is Noetherian); so $A^\\wedge$ is a Noetherian complete local ring. The map $c$ is flat and $\\operatorname{Spec}A^\\wedge\\to\\operatorname{Spec}A$ is surjective [lem-weil-pbc-local-completion-faithfully-flat], so there is a prime $\\mathfrak p'\\subset A^\\wedge$ with $c^{-1}(\\mathfrak p')=\\mathfrak pA$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'Since R_m -> R_m^ is faithfully flat we can choose a prime p' in R_m^ lying over pR_m'"
+   }
+  },
+  {
+   "text": "Put $B=(A^\\wedge)_{\\mathfrak p'}$, with localization map $\\lambda:A^\\wedge\\to B$, and let $c_B:B\\to B^\\wedge$ be the completion of $B$ at its maximal ideal $\\mathfrak p'B$. By [lem-weil-pbc-complete-local-g-ring] the Noetherian complete local ring $A^\\wedge$ (Step 3) is a G-ring, so by the definition [def-weil-pbc-g-ring] at its prime $\\mathfrak p'$ the map $c_B$ is regular.",
+   "uses": [
+    "lem-weil-pbc-complete-local-g-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'By Proposition 07PS (R_m^)_{p'} -> (R_m^)_{p'}^ is regular'"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-local-ring-maps] to the flat map $c$ between the Noetherian rings $A$ and $A^\\wedge$ (Step 3) at the prime $\\mathfrak p'$, $c^{-1}(\\mathfrak p')=\\mathfrak pA$: the induced map $\\varphi:A_{\\mathfrak pA}\\to B$, $a/s\\mapsto c(a)/c(s)$, is a flat local homomorphism of Noetherian local rings, $\\varphi(\\mathfrak pA_{\\mathfrak pA})\\subseteq\\mathfrak p'B$. Here $A_{\\mathfrak pA}=(R_{\\mathfrak m})_{\\mathfrak pR_{\\mathfrak m}}$ is canonically $R_{\\mathfrak p}$ (both are the localization of $R$ at $R\\setminus\\mathfrak p$, since $R\\setminus\\mathfrak m\\subseteq R\\setminus\\mathfrak p$) [def-weil-pbc-localization-at-prime]; via this identification the localization map $\\ell:A\\to A_{\\mathfrak pA}$ is the map $R_{\\mathfrak m}\\to R_{\\mathfrak p}$, and $\\varphi\\circ\\ell=\\lambda\\circ c$ by the formula for $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: the commutative diagram"
+   }
+  },
+  {
+   "text": "The composite $c_B\\circ\\lambda\\circ c:A\\to B^\\wedge$ is regular. Indeed $c$ is regular by hypothesis ($\\mathfrak m$ maximal), $\\lambda$ is regular [lem-weil-pbc-localization-regular] and $c_B$ is regular (Step 4). The rings $B$ (Step 5) and $B^\\wedge$ [lem-weil-pbc-adic-completion-noetherian] are Noetherian, so every fibre ring of a ring map into them is Noetherian: $\\Lambda\\otimes_A\\kappa(\\mathfrak q)\\cong\\Lambda_{\\mathfrak q}/\\mathfrak q\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is a quotient of a localization of the Noetherian ring $\\Lambda$, hence Noetherian [def-weil-pbc-noetherian-ring]. So [lem-weil-pbc-regular-composition] applied to $c$ and $\\lambda$ shows $\\lambda\\circ c:A\\to B$ regular, and applied again to $\\lambda\\circ c$ and $c_B$ shows $c_B\\circ\\lambda\\circ c$ regular.",
+   "uses": [
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-regular-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'The localization R_m^ -> (R_m^)_{p'} is regular. Hence R_m -> (R_m^)_{p'}^ is regular by Lemma 07QI (lemma-regular-composition)'"
+   }
+  },
+  {
+   "text": "By Step 5, $c_B\\circ\\lambda\\circ c=(c_B\\circ\\varphi)\\circ\\ell$ with $\\ell:A\\to A_{\\mathfrak pA}=R_{\\mathfrak p}$ the localization at the multiplicative subset $A\\setminus\\mathfrak pA$. Since this composite is regular (Step 6), [lem-weil-pbc-regular-through-localization] shows that $c_B\\circ\\varphi:R_{\\mathfrak p}\\to B^\\wedge$ is regular.",
+   "uses": [
+    "lem-weil-pbc-regular-through-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'Since it factors through the localization R_p, also the ring map R_p -> (R_m^)_{p'}^ is regular'"
+   }
+  },
+  {
+   "text": "Let $c_{\\mathfrak p}:R_{\\mathfrak p}\\to(R_{\\mathfrak p})^\\wedge$ be the completion map and $\\varphi^\\wedge:(R_{\\mathfrak p})^\\wedge\\to B^\\wedge$ the map of completions induced by the flat local homomorphism $\\varphi$ of Noetherian local rings (Step 5), so $\\varphi^\\wedge\\circ c_{\\mathfrak p}=c_B\\circ\\varphi$; by [lem-weil-pbc-flat-completion] $\\varphi^\\wedge$ is flat. By [lem-weil-pbc-local-completion-local-ring] $(R_{\\mathfrak p})^\\wedge$ and $B^\\wedge$ are local with maximal ideals $\\mathfrak p(R_{\\mathfrak p})^\\wedge$ and $\\mathfrak p'B^\\wedge$; as $\\varphi^\\wedge(c_{\\mathfrak p}(x))=c_B(\\varphi(x))\\in\\mathfrak p'B^\\wedge$ for $x\\in\\mathfrak pR_{\\mathfrak p}$, $\\varphi^\\wedge$ is a local homomorphism. Hence $\\operatorname{Spec}B^\\wedge\\to\\operatorname{Spec}(R_{\\mathfrak p})^\\wedge$ is surjective [lem-weil-pbc-flat-local-hom-faithfully-flat].",
+   "uses": [
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: the right square of the diagram (R_p^ -> (R_m^)_{p'}^), whose flatness and surjectivity on spectra Stacks leaves implicit; flatness: More on Algebra Lemma 0C4G (lemma-flat-completion); faithful flatness: Algebra Lemma 00HR (lemma-local-flat-ff)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-permanence] to $R_{\\mathfrak p}\\xrightarrow{c_{\\mathfrak p}}(R_{\\mathfrak p})^\\wedge\\xrightarrow{\\varphi^\\wedge}B^\\wedge$: the composite $c_B\\circ\\varphi$ is regular (Step 7) and $\\varphi^\\wedge$ is flat and surjective on spectra (Step 8), so $c_{\\mathfrak p}$ is regular. As $\\mathfrak p$ was arbitrary and $R$ is Noetherian, $R$ is a G-ring [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-regular-permanence",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'Thus we may apply Lemma 07NT (lemma-regular-permanence) to see that R_p -> R_p^ is regular'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-localization-regular",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-through-localization",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PT (lemma-check-G-ring-maximal-ideals, line 12392) and its proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselization-pair-g-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Statement corrected by the stage-1 split (2026-10-10): the clause 'R_m has geometrically regular formal fibres; equivalently, R_m -> (R_m)^ is regular' replaced by the condition 'R_m -> (R_m)^ is regular in the sense of def-weil-pbc-g-ring', with Stacks' phrase kept as a parenthetical gloss: 'geometrically regular formal fibres' is not a notion of the DAG (def-weil-pbc-g-ring removed it), and Stacks uses it as a synonym of the regularity of A -> A^ (remark before Definition 07GH); same mathematical content. stmt_deps gained def-weil-pbc-localization-at-prime.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "worker": "stage1",
+  "summary": "Read More on Algebra 07PT (lemma-check-G-ring-maximal-ideals) and its proof, Definition 07GH with the remark on formal fibres, 07BZ, 07C0, 07C1, 07QI, 07NT, 07PS, 0C4G, Algebra 00HR, 00HQ, 00HT, 00MC, 05GH. Statement: replaced the undefined phrase 'geometrically regular formal fibres ... equivalently' by the regularity of R_m -> (R_m)^ (the Stacks phrase kept as a gloss); added def-weil-pbc-localization-at-prime to stmt_deps. Proof follows Stacks in 9 steps: the trivial direction; choice of m containing p and a prime p' of (R_m)^ over pR_m (00MC); 07PS at p' for the Noetherian complete local ring (R_m)^; the identification (R_m)_{pR_m}=R_p and the flat local map phi: R_p -> (R_m^)_{p'}; two applications of 07QI (fibre rings Noetherian since the targets are Noetherian) with the regularity of a localization; descent of regularity through the localization R_m -> R_p; flatness (0C4G) and Spec surjectivity (00HR) of phi^: R_p^ -> (R_m^)_{p'}^, which Stacks leaves implicit; 07NT. New nodes: lem-weil-pbc-complete-local-g-ring (07PS), lem-weil-pbc-regular-composition (07QI), lem-weil-pbc-localization-regular and lem-weil-pbc-regular-through-localization (asserted without proof in 07PT), lem-weil-pbc-flat-completion (0C4G, one direction), all unsplit; lem-weil-pbc-flat-local-hom-faithfully-flat (00HR), Mathlib leaf Module.FaithfullyFlat.of_flat_of_isLocalHom with PrimeSpectrum.comap_surjective_of_faithfullyFlat. Existing nodes reused: 07NT, 00MC (also gives the flatness of c, so 00MB is not cited), adic-completion-noetherian, local-completion-local-ring, adic-completion-mod-ideal, flat-local-ring-maps. 07C0 (lem-weil-pbc-regular-local-maximal) is not needed by this proof. Mathlib has no G-rings or regular ring maps (searches recorded); the source repository has no G-ring declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; statement made precise by the worker (the condition is 'R_m -> (R_m)^ regular in the sense of def-weil-pbc-g-ring', Stacks' phrase 'geometrically regular formal fibres' kept as a gloss). Nine steps along the proof of 07PT with Stacks' implicit claims as nodes: six new nodes, one Mathlib leaf (00HR/00HQ flat local homomorphisms are faithfully flat: FaithfullyFlat.of_flat_of_isLocalHom Flat/FaithfullyFlat/Algebra.lean:60, verified) and five unsplit (07PS complete Noetherian local rings are G-rings; 07QI composition of regular maps with Noetherian fibres; localization maps are regular; regularity descends through a localization; 0C4G flatness of the map of completions). Argument: for a prime p in a maximal m, A = R_m, A^ complete local hence a G-ring, so B = (A^)_{p'} -> B^ regular; the composite R_p -> B^ regular by composition and descent through the localization; (R_p)^ -> B^ flat and surjective on spectra (0C4G, 00HR), so 07NT gives R_p -> (R_p)^ regular. Stage-3 note: lem-weil-pbc-flat-completion (0C4G, local rings) and lem-weil-pbc-flat-module-completion-flat (0AGW, modules) are related but distinct."
+ }
 }
