@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-free-sheaf-constructible",
+ "kind": "statement",
+ "title": "Extension by zero of a finite constant sheaf along a qcqs etale map is constructible",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a finite commutative ring, $\\Lambda_X$ the constant sheaf of rings with value $\\Lambda$ on the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], and $M$ a finite $\\Lambda$-module (finite as a set), with $\\underline M_X$ the constant sheaf of $\\Lambda_X$-modules with value $M$ on $X_{\\Et}$. Let $j:U\\to X$ be an etale morphism with $U$ quasi-compact and quasi-separated, an object of $X_{\\Et}$. Let $P_{U,M}$ be the presheaf of $\\Lambda_X$-modules on $X_{\\Et}$ given by $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Hom}_X(V,U)}\\underline M_X(V)$, whose restriction along $\\psi:V'\\to V$ sends the summand of $\\varphi$ to the summand of $\\varphi\\psi$ by the restriction map of $\\underline M_X$ along $\\psi$, and let $j_!\\underline M_U=P_{U,M}^\\#$ be its sheafification as a presheaf of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification], a sheaf of $\\Lambda_X$-modules [def-weil-sheaf-of-modules-category] (this is the extension by zero $v_!$ of [def-weil-pbc-etale-sum-extension] applied to the constant sheaf $\\underline M$ on $U_{\\Et}$; for $M=\\Lambda$ it is the sheafification of the presheaf $\\Lambda_X[h_U]$ of [lem-weil-pbc-free-yoneda-presheaf-module], the sheaf $j_{U!}\\Lambda_U$ of [lem-weil-pbc-module-sheaves-grothendieck-abelian]). Then $j_!\\underline M_U$ is a constructible sheaf of $\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S8 (etale-cohomology-lemma-jshriek-constructible), part (3) with Lambda finite (hence Noetherian), line 12184; proof at line 12198 (via Lemma etale-stratified-finite, shriek-base-change, shriek-equals-star-finite-etale, pushforward-locally-constant)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero along an etale morphism of a constant sheaf is constructible",
+   "results": "CategoryTheory.Sheaf.IsConstant, CategoryTheory.constantSheaf, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf); no constructible sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero j_! along étale morphism, constructible étale sheaf of modules",
+   "results": "ContinuousLinearMap.extend_zero, Function.ExtendByZero.linearMap, Algebra.Etale..., AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale; nothing on j_! or constructible sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "j_! of a constant sheaf along an étale morphism of quasi-compact quasi-separated schemes is a constructible sheaf",
+   "results": "Scheme.Hom.isConstructible_image (Chevalley), Scheme.Hom.isLocallyConstructible_image, Scheme.Hom.isConstructible_preimage, Topology.IsConstructible.image_of_isOpenEmbedding (constructible subsets only)",
+   "date": "2026-10-10",
+   "verdict": "no match (constructible sets only, no constructible sheaves)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; grep -rn 'lowerShriek|extensionByZero|ExtensionByZero|jShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none (constructible occurs only in Topology/Constructible, Topology/Spectral/ConstructibleTopology, RingTheory/Spectrum/Prime/*, AlgebraicGeometry/Morphisms/FinitePresentation: constructible sets); no extension by zero on sites",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-generation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

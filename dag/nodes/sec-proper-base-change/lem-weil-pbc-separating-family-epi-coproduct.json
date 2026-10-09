@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-separating-family-epi-coproduct",
+ "kind": "statement",
+ "title": "A separating coproduct gives an epimorphism from a coproduct of its summands",
+ "statement": "Let $\\mathcal C$ be a category with sets as Hom-sets, and let $(G_b)_{b\\in B}$ be a family of objects of $\\mathcal C$ indexed by a set $B$ whose coproduct $\\coprod_{b\\in B}G_b$ exists in $\\mathcal C$ and is a *separator* of $\\mathcal C$: for every two morphisms $u\\neq v:M\\to N$ of $\\mathcal C$ there is a morphism $h:\\coprod_bG_b\\to M$ with $u h\\neq v h$. Let $A$ be an object of $\\mathcal C$, let $I_A$ be the set of pairs $(Y,h)$ with $Y$ an object of $\\mathcal C$ equal to $G_b$ for some $b\\in B$ and $h:Y\\to A$ a morphism, and suppose that the coproduct $\\coprod_{(Y,h)\\in I_A}Y$ exists in $\\mathcal C$ [def-weil-pbc-category-colimit]. Then the morphism $\\coprod_{(Y,h)\\in I_A}Y\\to A$ whose restriction to the summand indexed by $(Y,h)$ is $h$ is an epimorphism of $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EW (sites-modules-lemma-module-quotient-flat), proof of (1) and (3): the sum over all pairs (U, s) of the maps j_{U!}O_U -> F is surjective; categorical form: Mathlib CategoryTheory/Generator/Basic.lean, isSeparator_sigma (line 699) and ObjectProperty.IsSeparating.epi_coproductFrom (line 371)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separator iff the map from the coproduct over all morphisms G ⟶ A is an epimorphism",
+   "results": "CategoryTheory.isSeparator_iff_epi, CategoryTheory.ObjectProperty.isSeparating_iff_epi, CategoryTheory.ObjectProperty.IsSeparating.epi_coproductFrom, CategoryTheory.ObjectProperty.IsSeparating.isSeparator_coproduct (all Mathlib.CategoryTheory.Generator.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: isSeparator_sigma + IsSeparating.epi_coproductFrom"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsSeparating, CategoryTheory.Epi",
+   "results": "ObjectProperty.IsSeparating.epi_coproductFrom, ObjectProperty.isSeparating_iff_epi, ObjectProperty.IsSeparating.mk_of_exists_epi (Mathlib.CategoryTheory.Generator.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsSeparator, CategoryTheory.Epi",
+   "results": "CategoryTheory.isSeparator_iff_epi (Generator.Basic), Abelian.full_comp_preadditiveCoyonedaObj, Abelian.preadditiveCoyonedaObj_map_surjective",
+   "date": "2026-10-10",
+   "verdict": "related (single separator G, coproduct of copies of G)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isSeparator_sigma\\|IsSeparating.epi_coproductFrom\\|coproductFromFamily\\|def IsSeparating\\|def IsSeparator' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator/Basic.lean",
+   "results": "def IsSeparating (79), def IsSeparator := IsSeparating (.singleton G) (529), coproductFromFamily (indexed by CostructuredArrow P.ι X, i.e. pairs (Y with P Y, h : Y ⟶ X)) (348), coproductFrom := Sigma.desc (fun i ↦ i.hom) (358), IsSeparating.epi_coproductFrom (371), isSeparator_sigma : IsSeparator (∐ f) ↔ (ObjectProperty.ofObj f).IsSeparating (699)",
+   "date": "2026-10-10",
+   "verdict": "match, read in the source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ObjectProperty.IsSeparating.epi_coproductFrom",
+  "file": "Mathlib/CategoryTheory/Generator/Basic.lean",
+  "how": "two Mathlib lemmas, one per clause: CategoryTheory.isSeparator_sigma f (line 699) turns IsSeparator (∐ f) into (ObjectProperty.ofObj f).IsSeparating; then IsSeparating.epi_coproductFrom (line 371) with P = ofObj f and X = A gives Epi (P.coproductFrom A), where P.coproductFromFamily A is indexed by CostructuredArrow P.ι A (pairs (Y, h) with Y = f b for some b and h : Y ⟶ A) and coproductFrom = Sigma.desc (fun i ↦ i.hom), the node's morphism"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-generation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: isSeparator_sigma (Generator/Basic.lean:699) and ObjectProperty.IsSeparating.epi_coproductFrom (:371)."
+ }
+}

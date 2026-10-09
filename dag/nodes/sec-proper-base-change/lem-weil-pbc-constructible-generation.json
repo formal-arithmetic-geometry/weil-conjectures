@@ -2,23 +2,165 @@
  "id": "lem-weil-pbc-constructible-generation",
  "kind": "statement",
  "title": "Constructible module sheaves generate the category",
- "statement": "Let X be a quasi-compact and quasi-separated scheme and Lambda a finite commutative ring. Every sheaf F of Lambda-modules on X_Et is a quotient of a coproduct of constructible sheaves of Lambda-modules.",
- "source": {"document": "literature/stacks-project/etale-cohomology.tex", "place": "Lemma 03SA, proof of part (1), using Lemmas 09Z5 and 09Z6 (constructible maps into constant sheaves)"},
- "stmt_deps": ["def-weil-pbc-scheme-conventions", "def-weil-pbc-etale-sheaves", "def-weil-sheaf-of-modules-category", "def-weil-pbc-etale-constructible-sheaf"],
- "proof": [{"text": "For every section of F over an etale object U, the constructible finite-presentation and finite-pushforward lemmas provide a constructible Lambda-module sheaf together with a map to F carrying a chosen generator to that section. Taking the coproduct over all such pairs (U,s) and using the sheaf-module Yoneda evaluation gives an epimorphism onto F; epimorphisms of sheaves are detected locally, so the maps are jointly locally surjective and the coproduct map is an epimorphism.", "uses": ["lem-weil-pbc-constructible-finitely-presented", "lem-weil-pbc-constructible-module-finite-pushforward-embedding"], "elementary": false, "source": {"document": "literature/stacks-project/etale-cohomology.tex", "place": "Lemma 03SA, proof of (1), paragraphs invoking 09Z5 and 09Z6"}}],
- "proof_deps": ["lem-weil-pbc-constructible-finitely-presented", "lem-weil-pbc-constructible-module-finite-pushforward-embedding"],
- "proof_origin": {"by": "document", "document": "literature/stacks-project/etale-cohomology.tex", "place": "Lemma 03SA, proof of (1)"},
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions] and $\\Lambda$ a finite commutative ring. Every sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ (an object of $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]) is a quotient of a coproduct of constructible sheaves of $\\Lambda$-modules [def-weil-pbc-etale-constructible-sheaf]: there are a set $I$, constructible sheaves of $\\Lambda$-modules $C_i$ ($i\\in I$) whose coproduct $\\bigoplus_{i\\in I}C_i$ exists in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit], and an epimorphism $\\bigoplus_{i\\in I}C_i\\to F$ of sheaves of $\\Lambda$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 093B (sites-modules-lemma-module-quotient-direct-sum) part (2) and Lemma 03EW (lemma-module-quotient-flat) part (3) with its proof (the sum over (U,s) of j_{U!}O_U -> F), applied with B the affine objects of X_et as in the proof of Etale Cohomology Lemma 03SA (etale-cohomology.tex line 12231 ff., part (3)), together with Etale Cohomology Lemma 03S8 (lemma-jshriek-constructible) (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "*A separating family of extensions by zero.* Write $\\Mod=\\Mod(X_{\\Et},\\Lambda)=\\Mod(\\Lambda_X)$. By [lem-weil-pbc-affine-etale-essentially-small-cover] choose a set $\\mathcal S$ of objects $U\\to X$ of $X_{\\Et}$ with $U$ affine such that every object of $X_{\\Et}$ has a covering by members of $\\mathcal S$; for $U\\in\\mathcal S$ let $j_{U!}\\Lambda_U$ be the sheafification of the presheaf of $\\Lambda_X$-modules $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}(V,U)}\\Lambda_X(V)$, as in [lem-weil-pbc-module-sheaves-grothendieck-abelian]. By [lem-weil-pbc-module-sheaves-colimits-forgetful] (2) all small coproducts exist in $\\Mod$, in particular $G=\\bigoplus_{U\\in\\mathcal S}j_{U!}\\Lambda_U$. By [lem-weil-pbc-module-sheaves-grothendieck-abelian] (statement and the fifth step of its proof, 'A generator') $G$ is a separator of $\\Mod$: for $u\\neq v:M\\to N$ there is $h:G\\to M$ with $uh\\neq vh$. (If one reads only the statement's 'generator' in the subobject sense: for $u\\neq v$ put $w=u-v\\neq0$; then $\\ker w\\subsetneq M$ is a proper subobject, so some $h:G\\to M$ does not factor through $\\ker w$, i.e. $wh\\neq0$, i.e. $uh\\neq vh$.)",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 093B (2) (B = a set of affine objects of X_et satisfying Situation 093A (1)), proof via Lemma 03EW (3); the Hom identification Hom(j_{U!}O_U, F) = F(U) is equation 0G1V (equation-map-lower-shriek-OU-into-module)"
+   }
+  },
+  {
+   "text": "*The epimorphism.* Let $F\\in\\Mod$. Let $I_F$ be the set of pairs $(Y,h)$ with $Y=j_{U!}\\Lambda_U$ for some $U\\in\\mathcal S$ and $h:Y\\to F$ a morphism of $\\Mod$; it is a set since $\\mathcal S$ is a set and Hom-sets of $\\Mod$ are sets. The coproduct $\\bigoplus_{(Y,h)\\in I_F}Y$ exists by [lem-weil-pbc-module-sheaves-colimits-forgetful] (2). Apply [lem-weil-pbc-separating-family-epi-coproduct] to $\\mathcal C=\\Mod$, the family $(j_{U!}\\Lambda_U)_{U\\in\\mathcal S}$ (whose coproduct $G$ is a separator by step 1) and $A=F$: the morphism $\\pi:\\bigoplus_{(Y,h)\\in I_F}Y\\to F$ equal to $h$ on the summand $(Y,h)$ is an epimorphism. (Under $\\mathrm{Hom}(j_{U!}\\Lambda_U,F)\\cong F(U)$ the index pairs are the pairs $(U,s)$, $s\\in F(U)$, of Stacks 03EW, and $\\pi$ is the sum of the maps attached to the sections $s$.)",
+   "uses": [
+    "lem-weil-pbc-separating-family-epi-coproduct",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EW (lemma-module-quotient-flat), proof of (1) and (3)"
+   }
+  },
+  {
+   "text": "*Each summand is constructible.* Let $(Y,h)\\in I_F$, $Y=j_{U!}\\Lambda_U$ with $U\\in\\mathcal S$. The structure map $U\\to X$ is etale (an object of $X_{\\Et}$), $U$ is affine, hence quasi-compact (the spectrum of a ring is quasi-compact) and quasi-separated (the diagonal of an affine scheme over $\\mathbf Z$ is a closed immersion, hence quasi-compact) [def-weil-pbc-scheme-conventions], $X$ is quasi-compact and quasi-separated, and $\\Lambda$ is a finite $\\Lambda$-module. By [lem-weil-pbc-etale-free-sheaf-constructible] with $M=\\Lambda$ (whose sheaf $j_!\\underline\\Lambda_U$ is by its definition the sheafification of the same presheaf $V\\mapsto\\bigoplus_{\\varphi}\\Lambda_X(V)$, i.e. $Y$), $Y$ is a constructible sheaf of $\\Lambda$-modules.",
+   "uses": [
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA (lemma-torsion-colimit-constructible), proof of (3) (line 12249: 'By Lemmas 03S8 and 03RZ these cokernels are constructible'), using Lemma 03S8 (3) with U quasi-compact and quasi-separated"
+   }
+  },
+  {
+   "text": "*Conclusion.* Take $I=I_F$ and $C_{(Y,h)}=Y$: by step 3 every $C_i$ is constructible, and by step 2 $\\pi:\\bigoplus_{i\\in I}C_i\\to F$ is an epimorphism, so $F$ is a quotient of a coproduct of constructible sheaves of $\\Lambda$-modules (in the abelian category $\\Mod$, $F\\cong\\mathrm{Coker}(\\ker\\pi\\to\\bigoplus_iC_i)$).",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 093B (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-separating-family-epi-coproduct",
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 093B (2) / Lemma 03EW (3) and its proof (the categorical form via a separator is Mathlib's IsSeparating.epi_coproductFrom), with literature/stacks-project/etale-cohomology.tex Lemma 03SA proof of (3) and Lemma 03S8 (3) for constructibility"
+ },
  "pointers": null,
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "constructible sheaves generate sheaves of modules on the etale site", "results": "No constructible etale sheaf generation theorem; only general sheaf colimit and epimorphism constructions", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "loogle", "query": "|- ∀ F : Sheaf _ _, ∃ G, Epi G.hom", "results": "General CategoryTheory.Presheaf.epi_of_epi_app and sheafification results; no constructible generation", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "grep", "query": "rg -ni 'constructible.*sheaf|sheaf.*constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry", "results": "No constructible etale sheaf generation declarations; only generic sheaf colimit and epi lemmas", "date": "2026-10-09", "verdict": "no match"}
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaves generate sheaves of modules on the etale site",
+   "results": "No constructible etale sheaf generation theorem; only general sheaf colimit and epimorphism constructions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- ∀ F : Sheaf _ _, ∃ G, Epi G.hom",
+   "results": "General CategoryTheory.Presheaf.epi_of_epi_app and sheafification results; no constructible generation",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ni 'constructible.*sheaf|sheaf.*constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No constructible etale sheaf generation declarations; only generic sheaf colimit and epi lemmas",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every sheaf of modules is a quotient of a direct sum of constructible sheaves on the etale site",
+   "results": "SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.GeneratingSections.mk, SheafOfModules.Presentation (Mathlib.Algebra.Category.ModuleCat.Sheaf.*); no constructible sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every sheaf of Λ-modules on the étale site of a quasi-compact quasi-separated scheme is a quotient of a direct sum of constructible sheaves",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none; Mathlib has no constructible etale sheaves (only constructible subsets: Topology/Constructible.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-module-sheaf-colimit-constructible", "date": "2026-10-09"},
- "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-generation",
+  "worker": "stage1",
+  "summary": "Replaced group C's one-paragraph sketch (which cited the finite-presentation and finite-pushforward lemmas, not used by the source) by a four-step split following Stacks Modules on Sites 093B(2)/03EW(3) (every module is a quotient of a sum of j_{U!}O_U over U in a covering set of affine objects) and Etale Cohomology 03SA proof of (3) / 03S8(3) (these j_{U!}Lambda_U are constructible). The epimorphism is obtained from the reviewed separator G = sum of j_{U!}Lambda_U over a set S of affine objects (lem-weil-pbc-module-sheaves-grothendieck-abelian, a generic tool of unit sk-thm-reduction, as are lem-weil-pbc-module-sheaves-colimits-forgetful and the leaf lem-weil-pbc-affine-etale-essentially-small-cover) by a new Mathlib leaf (isSeparator_sigma + IsSeparating.epi_coproductFrom). Constructibility of j_{U!}Lambda_U for U affine etale over qcqs X is the new unsplit node lem-weil-pbc-etale-free-sheaf-constructible (Stacks 03S8(3)). Statement made explicit (set I, existence of the coproduct, epimorphism); source corrected (03SA's proof uses 093C and 03S8/03RZ, not 09Z5/09Z6); def-weil-pbc-category-colimit added to stmt_deps."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "C's one-paragraph sketch replaced by four steps along Stacks 093B/03EW and 03SA with 03S8 (3): a separating family of extensions by zero (reviewed leaf lem-weil-pbc-affine-etale-essentially-small-cover; tool uses lem-weil-pbc-module-sheaves-grothendieck-abelian and lem-weil-pbc-module-sheaves-colimits-forgetful, generic); the epimorphism from the coproduct over all maps (new Mathlib leaf lem-weil-pbc-separating-family-epi-coproduct: isSeparator_sigma Generator/Basic.lean:699 and IsSeparating.epi_coproductFrom :371, verified); each summand constructible (new node lem-weil-pbc-etale-free-sheaf-constructible, 03S8 (3) along etale maps; lem-fin-extension-by-zero covers open immersions only); conclusion. source.place corrected (03SA uses 093C, 03S8, 03RZ, not 09Z5/09Z6). Source repository: exists_epi_sigma_lowerShriek_constantSheaf (Presentation.lean:43, sorry) is a different statement (finite coproduct, Etale.lowerShriek is not j_!)."
+ }
 }
