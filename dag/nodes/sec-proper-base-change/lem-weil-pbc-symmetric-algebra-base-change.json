@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-symmetric-algebra-base-change",
+ "kind": "statement",
+ "title": "The symmetric algebra commutes with base change",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and $M$ an $R$-module, with symmetric algebras $\\operatorname{Sym}_R(M)$, $\\iota_M:M\\to\\operatorname{Sym}_R(M)$ and $\\operatorname{Sym}_S(S\\otimes_RM)$, $\\iota_{S\\otimes M}$ [lem-weil-pbc-symmetric-algebra-universal-property]. Let $\\beta:\\operatorname{Sym}_R(M)\\to\\operatorname{Sym}_S(S\\otimes_RM)$ be the $R$-algebra homomorphism with $\\beta(\\iota_M(m))=\\iota_{S\\otimes M}(1\\otimes m)$. Then the $S$-algebra homomorphism $S\\otimes_R\\operatorname{Sym}_R(M)\\to\\operatorname{Sym}_S(S\\otimes_RM)$, $s\\otimes a\\mapsto s\\,\\beta(a)$, is an isomorphism. (For $S=R_f$ the localization at the powers of $f\\in R$: $\\operatorname{Sym}_R(M)_f\\cong\\operatorname{Sym}_{R_f}(M_f)$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0C6F (lemma-tensor-algebra-localization, line 2386: S^{-1}T_R(M) = T_{S^{-1}R}(S^{-1}M), similarly for Sym; proof omitted, hint: Lemma 00DE tensor-product-localization) is the localization case; the general base change follows from the universal properties: for a commutative S-algebra B, Hom_{S-alg}(S⊗_R Sym_R M, B) = Hom_{R-alg}(Sym_R M, B) = Hom_R(M, B) = Hom_S(S⊗_R M, B) = Hom_{S-alg}(Sym_S(S⊗_R M), B), compatibly with the map of the statement"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric algebra commutes with base change: S ⊗_R Sym_R(M) ≃ Sym_S(S ⊗_R M)",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange, Algebra.IsPushout.cancelBaseChangeAux, SymmetricAlgebra, Algebra.Generators.baseChange, Algebra.TensorProduct.cancelBaseChange, TensorProduct.isBaseChange, IsLocalization.algebraTensorEquiv: none about SymmetricAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of the symmetric algebra: for an R-algebra S, S ⊗[R] SymmetricAlgebra R M is isomorphic to SymmetricAlgebra S (S ⊗[R] M)",
+   "results": "IsSymmetricAlgebra.comp_equiv, TensorAlgebra.SymRel.mul_comm, SymmetricPower.Rel, IsSymmetricAlgebra.of_equiv, Algebra.Generators.baseChange_val, TensorAlgebra.SymRel",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of the symmetric algebra of a module is the symmetric algebra of the localized module over the localized ring",
+   "results": "SymmetricAlgebra.isSymmetricAlgebra_ι, SymmetricAlgebra.algHom, SymmetricAlgebra.lift, SymmetricAlgebra.ι, SymmetricAlgebra, IsSymmetricAlgebra.of_equiv, IsSymmetricAlgebra.comp_equiv, IsSymmetricAlgebra: no localization or base change",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, TensorProduct",
+   "results": "only SymmetricAlgebra.comul_ι (Mathlib.RingTheory.Bialgebra.SymmetricAlgebra)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, IsLocalization",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'SymmetricAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'local\\|baseChange\\|tensor\\|IsBaseChange'; grep -rn 'IsBaseChange.*TensorAlgebra\\|TensorAlgebra.*IsBaseChange\\|baseChange.*TensorAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (and Algebra/Symmetrized.lean, unrelated SymAlg); no base change or localization of SymmetricAlgebra or TensorAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: base change of the symmetric algebra (Stacks 0C6F is the localization case); self-contained; correct (both sides corepresent S-linear maps out of S (x) M); unsplit."
+ }
+}

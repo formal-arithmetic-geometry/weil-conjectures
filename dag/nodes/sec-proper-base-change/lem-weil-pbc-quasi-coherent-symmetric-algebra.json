@@ -10,11 +10,126 @@
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the presheaf $\\mathcal P$ of commutative $\\mathcal O_X$-algebras).* For an open $U\\subseteq X$ put $\\mathcal P(U)=\\operatorname{Sym}_{\\mathcal O_X(U)}(\\mathcal F(U))$ with $\\iota_U:\\mathcal F(U)\\to\\mathcal P(U)$ [lem-weil-pbc-symmetric-algebra-universal-property], a commutative $\\mathcal O_X(U)$-algebra. For opens $V\\subseteq U$, $\\mathcal P(V)$ is a commutative $\\mathcal O_X(U)$-algebra through the restriction $\\mathcal O_X(U)\\to\\mathcal O_X(V)$, and $s\\mapsto\\iota_V(s|_V)$ is $\\mathcal O_X(U)$-linear because the restrictions of $\\mathcal F$ are semilinear [def-weil-sheaf-of-modules-category]; let $\\rho_{UV}:\\mathcal P(U)\\to\\mathcal P(V)$ be the unique $\\mathcal O_X(U)$-algebra map with $\\rho_{UV}(\\iota_U(s))=\\iota_V(s|_V)$. By the uniqueness clause, $\\rho_{UU}=\\mathrm{id}$ and $\\rho_{VW}\\rho_{UV}=\\rho_{UW}$ for $W\\subseteq V\\subseteq U$ (both sides are $\\mathcal O_X(U)$-algebra maps sending $\\iota_U(s)$ to $\\iota_W(s|_W)$). So $\\mathcal P$ is a presheaf of commutative rings, the structure maps $\\mathcal O_X(U)\\to\\mathcal P(U)$ form a morphism of presheaves of rings $\\mathcal O_X\\to\\mathcal P$ (each $\\rho_{UV}$ is an $\\mathcal O_X(U)$-algebra map), and $\\iota:\\mathcal F\\to\\mathcal P$ is a morphism of presheaves of $\\mathcal O_X$-modules. (This is the presheaf $U\\mapsto\\operatorname{Sym}_{\\mathcal O_X(U)}(\\mathcal F(U))$ of Modules, Lemma 01CG, whose sheafification is Stacks' $\\operatorname{Sym}(\\mathcal F)$; the Lemma's proof remarks that it may be more efficient to define $\\operatorname{Sym}(\\mathcal F)$ this way, which we do.)",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Section 01CF (section-symmetric-exterior, line 3255) and Lemma 01CG (lemma-local-tensor-algebra, line 3297, with its proof)"
+   }
+  },
+  {
+   "text": "*Step 2 (definition of $\\operatorname{Sym}(\\mathcal F)$ and $j_{\\mathcal F}$).* By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](1) the presheaf of commutative rings $\\mathcal P$ has a sheafification $\\theta:\\mathcal P\\to\\operatorname{Sym}(\\mathcal F):=\\mathcal P^\\#$ in sheaves of commutative rings [def-weil-pbc-sheafification]. Let $\\sigma=\\theta\\circ(\\mathcal O_X\\to\\mathcal P):\\mathcal O_X\\to\\operatorname{Sym}(\\mathcal F)$, a morphism of sheaves of rings; so $\\operatorname{Sym}(\\mathcal F)$ is a sheaf of commutative $\\mathcal O_X$-algebras, an $\\mathcal O_X$-module by $r\\cdot b=\\sigma(r)b$ [def-weil-sheaf-of-modules-category], and $\\theta$ is a morphism of presheaves of $\\mathcal O_X$-algebras, in particular $\\mathcal O_X$-linear. Put $j_{\\mathcal F}=\\theta\\circ\\iota:\\mathcal F\\to\\operatorname{Sym}(\\mathcal F)$, an $\\mathcal O_X$-linear map. For every open $U$, $\\theta_U:\\operatorname{Sym}_{\\mathcal O_X(U)}(\\mathcal F(U))\\to\\operatorname{Sym}(\\mathcal F)(U)$ is an $\\mathcal O_X(U)$-algebra map with $\\theta_U\\iota_U=j_{\\mathcal F,U}$, hence by the uniqueness in [lem-weil-pbc-symmetric-algebra-universal-property] it is *the* $\\mathcal O_X(U)$-algebra map extending $j_{\\mathcal F,U}$ referred to in (b).",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CG (lemma-local-tensor-algebra, line 3297)"
+   }
+  },
+  {
+   "text": "*Step 3 (the universal property (a) and functoriality).* Let $(\\mathcal B,\\tau)$ be a sheaf of commutative $\\mathcal O_X$-algebras and $u:\\mathcal F\\to\\mathcal B$ $\\mathcal O_X$-linear. Existence: for each open $U$, $\\mathcal B(U)$ is a commutative $\\mathcal O_X(U)$-algebra via $\\tau_U$ and $u_U$ is $\\mathcal O_X(U)$-linear, so there is a unique $\\mathcal O_X(U)$-algebra map $b_U:\\mathcal P(U)\\to\\mathcal B(U)$ with $b_U\\iota_U=u_U$ [lem-weil-pbc-symmetric-algebra-universal-property]. For $V\\subseteq U$, $b_V\\rho_{UV}$ and $(\\cdot)|_V\\circ b_U$ are $\\mathcal O_X(U)$-algebra maps $\\mathcal P(U)\\to\\mathcal B(V)$ which agree on $\\iota_U(s)$ (both give $u_V(s|_V)=u_U(s)|_V$), so they are equal; thus $b:\\mathcal P\\to\\mathcal B$ is a morphism of presheaves of commutative rings with $b\\circ(\\mathcal O_X\\to\\mathcal P)=\\tau$. By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](1) there is exactly one morphism of sheaves of rings $\\tilde u:\\operatorname{Sym}(\\mathcal F)\\to\\mathcal B$ with $\\tilde u\\theta=b$; then $\\tilde u\\sigma=b\\circ(\\mathcal O_X\\to\\mathcal P)=\\tau$, so $\\tilde u$ is a morphism of $\\mathcal O_X$-algebras, and $\\tilde u j_{\\mathcal F}=\\tilde u\\theta\\iota=b\\iota=u$. Uniqueness: if $\\tilde u'$ is a morphism of sheaves of $\\mathcal O_X$-algebras with $\\tilde u'j_{\\mathcal F}=u$, then $(\\tilde u'\\theta)_U$ is an $\\mathcal O_X(U)$-algebra map $\\mathcal P(U)\\to\\mathcal B(U)$ with $(\\tilde u'\\theta)_U\\iota_U=u_U$, hence equals $b_U$; so $\\tilde u'\\theta=b=\\tilde u\\theta$ and $\\tilde u'=\\tilde u$ by the uniqueness in the sheafification property. Functoriality: for $\\mathcal O_X$-linear $v:\\mathcal F\\to\\mathcal F'$ let $\\operatorname{Sym}(v)$ be the map given by (a) for $u=j_{\\mathcal F'}v$; by the uniqueness in (a), $\\operatorname{Sym}(\\mathrm{id})=\\mathrm{id}$ and $\\operatorname{Sym}(wv)=\\operatorname{Sym}(w)\\operatorname{Sym}(v)$ (both sides restrict along $j_{\\mathcal F}$ to $j_{\\mathcal F''}wv$). These two arguments use only that $\\mathcal F,\\mathcal F'$ are $\\mathcal O_X$-modules.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CG (the presheaf description); the universal property is not stated in Stacks and is written here by the agent from the sectionwise universal property of Sym (Algebra, Section 00DM) and that of sheafification"
+   }
+  },
+  {
+   "text": "*Step 4 (local setup on an affine open).* Fix an affine open $U\\subseteq X$, $R=\\mathcal O_X(U)$, $M=\\mathcal F(U)$, $A=\\operatorname{Sym}_R(M)=\\mathcal P(U)$, and let $\\iota_U:\\operatorname{Spec}R\\to X$ be the canonical open immersion with image $U$ [lem-weil-pbc-affine-open-spec-points]; via $\\iota_U$ the opens of $\\operatorname{Spec}R$ are the opens of $X$ contained in $U$, and the affine opens of $\\operatorname{Spec}R$ are the affine opens of $X$ contained in $U$ (an open subscheme isomorphic to an affine scheme). These form a basis of $U$ (every open of a scheme is covered by affine opens: standard opens $D(g)$ of affine opens are affine and form a basis, Schemes, Lemma 01I3 and Algebra, Lemma 00E0). Let $\\mathcal S=\\operatorname{Sym}(\\mathcal F)|_{\\operatorname{Spec}R}$ be the restriction of the $\\mathcal O_X$-module $\\operatorname{Sym}(\\mathcal F)$ along $\\iota_U$ [lem-weil-pbc-module-restriction-open-immersion-colimits], so $\\mathcal S(V)=\\operatorname{Sym}(\\mathcal F)(V)$ for $V\\subseteq U$ and $\\Gamma(\\operatorname{Spec}R,\\mathcal S)=\\operatorname{Sym}(\\mathcal F)(U)$ with its $R$-module structure through $\\sigma_U$. Let $\\widetilde A$ be the $\\mathcal O_{\\operatorname{Spec}R}$-module of the $R$-module $A$, with $\\tau_V:A\\to\\widetilde A(V)$ [lem-weil-pbc-spec-module-tilde-sections]; it is quasi-coherent. The $R$-linear map $\\theta_U:A\\to\\operatorname{Sym}(\\mathcal F)(U)=\\Gamma(\\operatorname{Spec}R,\\mathcal S)$ corresponds by [lem-weil-pbc-affine-tilde-gamma-adjunction](1) to a unique $\\mathcal O_{\\operatorname{Spec}R}$-linear $\\alpha:\\widetilde A\\to\\mathcal S$ with $\\alpha_U\\circ\\tau_U=\\theta_U$. For every affine open $V\\subseteq U$, $\\alpha_V\\tau_V(a)=\\alpha_V(\\tau_U(a)|_V)=\\alpha_U(\\tau_U(a))|_V=\\theta_U(a)|_V=\\theta_V(\\rho_{UV}(a))$ for $a\\in A$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I7 (lemma-compare-constructions: the mapping property of M~) and Section 01I6 (section-quasi-coherent-affine); route written by the agent"
+   }
+  },
+  {
+   "text": "*Step 5 (the sections over affine opens $V\\subseteq U$, before sheafification).* Let $V\\subseteq U$ be an affine open, $R_V=\\mathcal O_X(V)$. (i) By [lem-weil-pbc-quasi-coherent-affine-section-base-change] for $\\mathcal F$ (quasi-coherent) and $V\\subseteq U$, the map $R_V\\otimes_RM\\to\\mathcal F(V)$, $r\\otimes m\\mapsto r\\,m|_V$, is an isomorphism. By [lem-weil-pbc-symmetric-algebra-base-change] (for $R\\to R_V$) and this isomorphism, the $R_V$-algebra map $\\lambda_V:R_V\\otimes_RA\\to\\mathcal P(V)=\\operatorname{Sym}_{R_V}(\\mathcal F(V))$, $r\\otimes a\\mapsto r\\,\\rho_{UV}(a)$, is bijective: indeed $\\rho_{UV}$ is the $R$-algebra map with $\\iota_U(m)\\mapsto\\iota_V(m|_V)$, i.e. Sym of $M\\to R_V\\otimes_RM\\cong\\mathcal F(V)$, $m\\mapsto 1\\otimes m$, so $\\lambda_V$ is the isomorphism of that node composed with $\\operatorname{Sym}_{R_V}$ of an isomorphism. (ii) By [lem-weil-pbc-quasi-coherent-affine-section-base-change] for the quasi-coherent $\\widetilde A$ on $\\operatorname{Spec}R$ (affine opens $V\\subseteq\\operatorname{Spec}R$, $\\Gamma(\\operatorname{Spec}R,\\widetilde A)=A$ via $\\tau_U$ by [lem-weil-pbc-affine-tilde-gamma-adjunction](2)), the map $\\beta_V:R_V\\otimes_RA\\to\\widetilde A(V)$, $r\\otimes a\\mapsto r\\,\\tau_V(a)$, is bijective. (iii) $\\alpha_V\\beta_V=\\theta_V\\lambda_V$: both are $R_V$-linear ($\\alpha$ is $\\mathcal O$-linear, $\\theta_V$ is an $R_V$-algebra map) and agree on $1\\otimes a$ by the last formula of Step 4. (iv) For affine opens $W\\subseteq V\\subseteq U$ and $c\\in R_V\\otimes_RA$, with $c'$ the image of $c$ under $R_V\\otimes A\\to R_W\\otimes A$ (restriction on the first factor): $\\lambda_W(c')=\\rho_{VW}(\\lambda_V(c))$ and $\\beta_W(c')=\\beta_V(c)|_W$, since on $r\\otimes a$ both sides are $r|_W\\rho_{UW}(a)$, resp. $r|_W\\tau_W(a)$ (restrictions of $\\mathcal P$ and $\\widetilde A$ are semilinear and $\\rho_{VW}\\rho_{UV}=\\rho_{UW}$, $\\tau_V(a)|_W=\\tau_W(a)$).",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 0C6F (lemma-tensor-algebra-localization: Sym commutes with localization, here in the base-change form) and Constructions, Lemma 01LN (sections of a quasi-coherent module over nested affines); route written by the agent"
+   }
+  },
+  {
+   "text": "*Step 6 ($\\alpha$ is an isomorphism).* Let $x\\in U$. By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](2) the underlying sheaf of abelian groups of $\\operatorname{Sym}(\\mathcal F)$, with $\\theta$, is the sheafification of the underlying presheaf of abelian groups of $\\mathcal P$, so the map of stalks $\\theta_x:\\mathcal P_x\\to\\operatorname{Sym}(\\mathcal F)_x$ is bijective [lem-weil-pbc-stalk-sheafification-space]; the stalk of $\\mathcal S$ at the point of $\\operatorname{Spec}R$ over $x$ is $\\operatorname{Sym}(\\mathcal F)_x$ (the neighbourhoods of $x$ inside $U$ are cofinal). Stalks are colimits over neighbourhoods [def-weil-pbc-module-stalk], and affine opens $V\\ni x$ in $U$ are cofinal among them (Step 4). *$\\alpha_x$ surjective:* a germ $t_x$, $t\\in\\operatorname{Sym}(\\mathcal F)(V')$, is $\\theta_x(p_x)$ with $p\\in\\mathcal P(W)$, $x\\in W$; take an affine $V\\ni x$ with $V\\subseteq W\\cap U$ and $c=\\lambda_V^{-1}(p|_V)$; then $t_x=(\\theta_V\\lambda_V(c))_x=(\\alpha_V\\beta_V(c))_x=\\alpha_x((\\beta_V c)_x)$ by Step 5 (i),(iii). *$\\alpha_x$ injective:* let $s\\in\\widetilde A(V')$ with $\\alpha_x(s_x)=0$; take an affine $V\\ni x$ in $V'$ and $c=\\beta_V^{-1}(s|_V)$; then $\\theta_x((\\lambda_Vc)_x)=(\\alpha_V\\beta_Vc)_x=0$, so $(\\lambda_Vc)_x=0$ in $\\mathcal P_x$, i.e. $\\lambda_V(c)|_W=0$ for some affine $W\\ni x$, $W\\subseteq V$; by Step 5 (iv) $\\lambda_W(c')=0$, so $c'=0$ ($\\lambda_W$ injective) and $s|_W=\\beta_V(c)|_W=\\beta_W(c')=0$, hence $s_x=0$. So $\\alpha_x$ is bijective for every point of $\\operatorname{Spec}R$, and $\\alpha:\\widetilde A\\to\\mathcal S$ is an isomorphism of $\\mathcal O_{\\operatorname{Spec}R}$-modules by [lem-weil-pbc-module-iso-on-stalks].",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CH (lemma-stalk-tensor-algebra: stalks of Sym(F) are computed from the presheaf, 'clear from Lemma 01CG'); argument written by the agent"
+   }
+  },
+  {
+   "text": "*Step 7 (conclusions: quasi-coherence and (b)).* Every point of $X$ lies in an affine open $U$ (definition of a scheme [def-pc-scheme]), and by Step 6 $\\operatorname{Sym}(\\mathcal F)|_U\\cong\\widetilde A$ for the $\\mathcal O_X(U)$-module $A=\\operatorname{Sym}_{\\mathcal O_X(U)}(\\mathcal F(U))$; so the underlying $\\mathcal O_X$-module of $\\operatorname{Sym}(\\mathcal F)$ is quasi-coherent [pqf-def-coherent]. For (b): for every affine open $U$, $\\theta_U=\\alpha_U\\tau_U$ (Step 4) with $\\tau_U$ bijective [lem-weil-pbc-affine-tilde-gamma-adjunction](2) and $\\alpha_U$ bijective (Step 6), so $\\theta_U:\\operatorname{Sym}_R(\\mathcal F(U))\\to\\operatorname{Sym}(\\mathcal F)(U)$, which by Step 2 is the $R$-algebra map extending $j_{\\mathcal F,U}$, is an isomorphism. (Stacks gets the quasi-coherence from Modules, Lemma 01CL, and the affine description from Schemes, Lemma 01I8(2), $\\widetilde{\\operatorname{Sym}^n(M)}\\cong\\operatorname{Sym}^n(\\widetilde M)$, summed over $n$.)",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CL (lemma-whole-tensor-algebra-permanence, line 3461); Schemes, Lemma 01I8 (lemma-widetilde-constructions, schemes.tex line 1107)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-pc-scheme",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 01CF and Lemmas 01CG, 01CH, 01CL (definition of Sym(F) as the sheafification of U ↦ Sym_{O(U)}(F(U)), quasi-coherence, proofs omitted or sketched); Schemes, Lemma 01I8; Algebra, Lemma 0C6F. The universal property and the affine-section argument are written by the agent from these."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +151,24 @@
    "results": "SymmetricAlgebra only in LinearAlgebra/SymmetricAlgebra/{Basic,Basis}.lean, RingTheory/Bialgebra/SymmetricAlgebra.lean (ring level, no sheaf version, no finite-presentation instance); IsQuasicoherent in AlgebraicGeometry only in Modules/Tilde.lean (tilde M is quasi-coherent); IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definition, implies quasi-coherent and finite type); no IsFiniteType in AlgebraicGeometry; no kernel/image/colimit results for quasi-coherent sheaves; no quasi-coherent algebras",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "symmetric algebra of a sheaf of modules over a scheme",
+   "results": "SymmetricAlgebra, AlgebraicGeometry.Scheme.Modules, SymAlg, SymmetricPower, IsSymmetricAlgebra.of_equiv, SymmetricAlgebra.ι: module level only",
+   "date": "2026-10-10",
+   "verdict": "no match (no sheaf-level Sym)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Symmetric\\|symmetricAlgebra\\|SymAlg' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf*; grep -rln 'TensorAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only Algebra/Category/ModuleCat/Presheaf/Monoidal.lean (symmetric monoidal structure on presheaves of modules, not the symmetric algebra); TensorAlgebra only at module/algebra level (LinearAlgebra/TensorAlgebra, Algebra/Category/AlgCat/TensorAlgebra.lean: TensorAlgebra as a functor ModuleCat R ⥤ AlgCat R) and an import in Algebra/Category/ModuleCat/Sheaf.lean",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no symmetric (or tensor) algebra of a sheaf of modules"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,6 +193,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks Modules 01CF/01CG/01CL; self-contained; correct; unsplit."
+  "note": "Split reviewed: 7 steps (presheaf of Sym, ring sheafification, universal property, comparison alpha: (Sym_R M)~ -> Sym(F)|_U via the affine-section base change of F and of the tilde, bijective on stalks). Correct; route differs from the brief and is better. New: one Mathlib leaf (SymmetricAlgebra lines verified), one unsplit base-change node (0C6F generalized)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "worker": "stage1",
+  "summary": "Split by one level, following Stacks Modules 01CF/01CG (Sym(F) defined as the sheafification, as a presheaf of commutative rings, of U -> Sym_{O(U)}(F(U)), as the proof of 01CG suggests), 01CH/01CL and Schemes 01I8; Stacks omits all proofs and does not state the universal property, so the steps are agent-written. Steps: (1) the presheaf P (restrictions from the universal property of Sym, new Mathlib leaf lem-weil-pbc-symmetric-algebra-universal-property: SymmetricAlgebra.lift/algHom_ext); (2) Sym(F) = P^# via the reviewed ring-sheafification leaf, j = theta o iota, theta_U is the algebra map extending j_U; (3) universal property (a) and functoriality from the sectionwise universal property and that of sheafification; (4)-(6) on an affine U = Spec R: the tilde adjunction gives alpha: (Sym_R F(U))~ -> Sym(F)|_U with alpha_U tau_U = theta_U; on affine V in U both sides have sections R_V (x)_R Sym_R(M) before sheafification (reviewed lem-weil-pbc-quasi-coherent-affine-section-base-change for F and for the tilde, plus the new unsplit node lem-weil-pbc-symmetric-algebra-base-change, Stacks Algebra 0C6F in base-change form), and a germ argument with the reviewed stalk-of-sheafification and iso-on-stalks leaves shows alpha is an isomorphism; (7) quasi-coherence and (b). Statement unchanged; stmt_deps gained the Sym leaf. Mathlib: no sheaf-level Sym (confirmed by LeanSearch, LeanFinder and grep)."
  }
 }
