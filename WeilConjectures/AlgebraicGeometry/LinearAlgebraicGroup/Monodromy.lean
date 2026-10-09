@@ -998,7 +998,7 @@ theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
       refine ⟨⟨c, hG₀ hc₀⟩, hc₀, fun y hy ↦ Subtype.ext (hcc _ hy),
         ⟨h, hH (zeroLocus_anti (le_identityComponent _) hh)⟩,
         zeroLocus_anti (le_identityComponent _) hh, Subtype.ext hch⟩)
-  refine ⟨N, z, hN, (mem_zeroLocus_center_iff _).2 ⟨z.2, fun g hg ↦ ?_⟩,
+  refine ⟨N, z, hN, (mem_centerPoints_iff _).2 ⟨z.2, fun g hg ↦ ?_⟩,
     Set.mem_mul.2 ⟨_, hzF, _, rfl, ?_⟩⟩
   · exact congrArg Subtype.val (Subgroup.mem_center_iff.1 hz ⟨g, hg⟩).symm
   · simp
