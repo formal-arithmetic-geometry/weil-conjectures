@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-constant-ring-sheaf-sections-locally-constant",
+ "kind": "statement",
+ "title": "Sections of the constant sheaf of rings are locally constant",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring and $\\Lambda_T$ the constant sheaf of rings with value $\\Lambda$ on $T_{\\Et}$, i.e. the sheafification in sheaves of rings [def-weil-pbc-sheafification] of the constant presheaf of rings $W\\mapsto\\Lambda$ (all restriction maps $\\mathrm{id}_\\Lambda$) [def-weil-pbc-constant-sheaf]; write $\\iota_W:\\Lambda\\to\\Lambda_T(W)$ for the components of the canonical morphism from the constant presheaf to its sheafification (ring homomorphisms, compatible with restriction: $\\iota_W(c)|_{W'}=\\iota_{W'}(c)$ for every morphism $W'\\to W$ of $T_{\\Et}$). Then every section of $\\Lambda_T$ is locally constant: for every object $W$ of $T_{\\Et}$ and every $\\lambda\\in\\Lambda_T(W)$ there are a covering $\\{W_l\\to W\\}_{l\\in L}$ of $W$ in $T_{\\Et}$ (a jointly surjective family of etale morphisms) and elements $c_l\\in\\Lambda$ with $\\lambda|_{W_l}=\\iota_{W_l}(c_l)$ for all $l\\in L$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00WK (lemma-sections-sheafification): every section of the sheafification of a presheaf of sets is locally the image of a section of the presheaf; Sites, Section 00YR (section-sheaves-algebraic-structures) items (beta), (gamma): for rings the sheafification is computed on the underlying presheaf of sets, so the same holds for the constant sheaf of rings"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the canonical map from a presheaf to its sheafification is locally surjective",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify (Mathlib.CategoryTheory.Sites.LocallyBijective), CategoryTheory.Presheaf.isLocallySurjective_toSheafify and isLocallySurjective_toSheafify' (Mathlib.CategoryTheory.Sites.LocallySurjective), Presheaf.isLocallySurjective_presheafToSheaf_map_iff (LocallyBijective), PresheafOfModules.instIsLocallySurjectiveToSheafify (ModuleCat.Presheaf.Sheafify), GrothendieckTopology.W_toSheafify (Sites.Localization)",
+   "date": "2026-10-10",
+   "verdict": "match: instIsLocallySurjectiveToSheafify, for any concrete A with WEqualsLocallyBijective and HasWeakSheafify"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every section of a constant sheaf is locally constant: locally in the image of the constant presheaf",
+   "results": "CategoryTheory.Sheaf.IsConstant, Sheaf.isConstant_iff_forget, Sheaf.isConstant_of_forget (Sites.ConstantSheaf), TopCat.Presheaf.toType_isSheaf, TopCat.Presheaf.isSheaf_unit: no direct statement about sections of the constant sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match (the general sheafification statement found by leansearch specializes)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocallySurjective' Mathlib/CategoryTheory/Sites/ConstantSheaf.lean Mathlib/CategoryTheory/Sites/LocallyBijective.lean Mathlib/AlgebraicGeometry/Sites/*.lean; grep -n 'def constantSheaf' Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; grep -n 'WEqualsLocallyBijective\\|HasSheafify' Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "results": "LocallyBijective.lean:136 instance Presheaf.IsLocallySurjective J (toSheafify J P) (under [J.WEqualsLocallyBijective A] [HasWeakSheafify J A]); ConstantSheaf.lean:66 constantSheaf J D = Functor.const Cᵒᵖ ⋙ presheafToSheaf J D; AffineEtale.lean:112 HasSheafify S.smallEtaleTopology A and :124 S.smallEtaleTopology.WEqualsLocallyBijective A for concrete A : Type u' with Category.{u} whose forget preserves limits and filtered colimits and reflects isomorphisms; nothing specific to constant sheaves",
+   "date": "2026-10-10",
+   "verdict": "match (specializes in one line, see mathlib_match)"
+  },
+  {
+   "tool": "local_search",
+   "query": "instIsLocallySurjectiveToSheafify / mem_toGrothendieck_smallPretopology (read with sed in the Mathlib source)",
+   "results": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean:136; Mathlib/AlgebraicGeometry/Sites/Small.lean:203 smallGrothendieckTopology_eq_toGrothendieck_smallPretopology, :234 mem_toGrothendieck_smallPretopology; Mathlib/AlgebraicGeometry/Sites/Etale.lean:51 smallEtaleTopology X = X.smallGrothendieckTopology (P := @Etale)",
+   "date": "2026-10-10",
+   "verdict": "declarations exist with the types read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify",
+  "file": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "how": "specializes in one line, plus one lemma for the covering form (as on lem-weil-pbc-abelian-sheaf-epi-locally-surjective): take J = T.smallEtaleTopology, A = CommRingCat.{u} (Λ in universe u, or ULift Λ), P = (Functor.const _).obj (CommRingCat.of Λ), so that (constantSheaf J _).obj Λ = (presheafToSheaf J _).obj P (ConstantSheaf.lean:66) and ι = toSheafify J P (Sheafification.lean:102); the instance at LocallyBijective.lean:136 gives Presheaf.IsLocallySurjective J ι, i.e. (LocallySurjective.lean:94) the image sieve of every λ ∈ Λ_T(W) is J-covering; its instance arguments are AffineEtale.lean:124 (WEqualsLocallyBijective) and :112 (HasSheafify), whose hypotheses on A (forget preserves limits and filtered colimits, reflects isomorphisms, HasLimits, HasColimits) hold for CommRingCat. By smallGrothendieckTopology_eq_toGrothendieck_smallPretopology and mem_toGrothendieck_smallPretopology (Mathlib/AlgebraicGeometry/Sites/Small.lean:203, 234) a sieve of the small etale site is covering iff it contains a jointly surjective family of etale arrows, which is the node's form. Not compiled: instance resolution at the universes of the source repository is to be confirmed in stage 2.",
+  "line": 136
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L (2026-10-10): line field added (136), verified with sed."
+}
