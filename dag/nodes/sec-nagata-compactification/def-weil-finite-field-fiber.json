@@ -2,20 +2,40 @@
  "id": "def-weil-finite-field-fiber",
  "kind": "definition",
  "title": "Finite field and geometric fiber",
- "statement": "Throughout this blueprint, fix a prime $p$ and an integer $a\\in\\mathbf\nZ_{\\geq1}$, and put $q=p^a$. Set\n\n$$\n k_0=\\Fq,\n \\qquad\n k=\\Fbar\\text{ (a fixed algebraic closure of }k_0\\text{)}.\n$$\n\nThe tuple $(p,a,q,k_0,k)$ is the *global finite-field datum* used throughout.\nFor every integer $n\\geq1$, let $\\mathbf F_{q^n}\\subset k$ be the unique\nsubfield with $q^n$ elements. For any scheme $S$, write $|S|$ for its set of\nclosed points and, for $s\\in|S|$, write $\\kappa(s)$ for the residue field at\n$s$. For a $k_0$-scheme $Y_0$ whose structure morphism is of finite type\n[def-weil-finite-type-morphism], write\n\n$$\n Y=Y_0\\times_{k_0}k,\n \\qquad\n a_Y:Y\\longrightarrow\\Spec k\n$$\n\nfor its geometric fiber and structure morphism. For every finite-type\n$k_0$-scheme $Y_0$ and every $n\\geq1$, define\n\n$$\n Y_0(\\mathbf F_{q^n})\n =\\operatorname{Hom}_{k_0}\\bigl(\\operatorname{Spec}\\mathbf F_{q^n},Y_0\\bigr),\n \\qquad\n \\#Y_0(\\mathbf F_{q^n})=\\#\\operatorname{Hom}_{k_0}\n \\bigl(\\operatorname{Spec}\\mathbf F_{q^n},Y_0\\bigr).\n$$\n\nFor each prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic\nclosure $\\Qlb$ of $\\Ql$, and write $\\Zl$ for the valuation ring of $\\Ql$.\nThus $\\Qlb$ is algebraically closed over $\\Ql$, and $\\Zl$ consists of the\nelements of nonnegative $\\ell$-adic valuation. A single choice of $\\ell$ and\nits coefficient fields is understood whenever they occur without a subscript.\nFor every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation\nring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set\n\n$$\n A_{E,n}=\\mathcal O_E/\\varpi_E^n.\n$$",
+ "statement": "Throughout this blueprint, fix a prime $p$ and an integer $a\\in\\mathbf Z_{\\geq1}$, and put $q=p^a$. Set\n\n$$\n k_0=\\Fq,\n \\qquad\n k=\\Fbar\\text{ (a fixed algebraic closure of }k_0\\text{)},\n$$\n\nwhere $\\Fq$ is a field with $q$ elements [def-weil-finite-field-q-elements] and $k$ is an algebraic closure of $k_0$ [def-weil-algebraic-closure], with structure homomorphism $\\iota:k_0\\to k$. The tuple $(p,a,q,k_0,k)$ is the *global finite-field datum* used throughout.\nFor every integer $n\\geq1$, let $\\mathbf F_{q^n}\\subset k$ be the unique subfield with $q^n$ elements; it exists, is unique, and contains $\\iota(k_0)$, so that it is a field extension of $k_0$ [lem-weil-unique-subfield-of-closure]. For any scheme $S$ [def-pc-scheme], write $|S|$ for its set of closed points [def-weil-closed-points] and, for $s\\in|S|$, write $\\kappa(s)$ for the residue field at $s$ [def-weil-residue-field]. For a $k_0$-scheme $Y_0$, that is, a scheme with a structure morphism $Y_0\\to\\operatorname{Spec}k_0$ [def-weil-scheme-over-base, def-weil-affine-spectrum], whose structure morphism is of finite type\n[def-weil-finite-type-morphism], write\n\n$$\n Y=Y_0\\times_{k_0}k,\n \\qquad\n a_Y:Y\\longrightarrow\\Spec k\n$$\n\nfor its geometric fiber and structure morphism: $Y$ is the base change of $Y_0\\to\\operatorname{Spec}k_0$ along the morphism $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$ induced by $\\iota$ [def-pc-base-change], and $a_Y$ is the projection to $\\operatorname{Spec}k$. For every finite-type\n$k_0$-scheme $Y_0$ and every $n\\geq1$, define\n\n$$\n Y_0(\\mathbf F_{q^n})\n =\\operatorname{Hom}_{k_0}\\bigl(\\operatorname{Spec}\\mathbf F_{q^n},Y_0\\bigr),\n \\qquad\n \\#Y_0(\\mathbf F_{q^n})=\\#\\operatorname{Hom}_{k_0}\n \\bigl(\\operatorname{Spec}\\mathbf F_{q^n},Y_0\\bigr),\n$$\n\nthe set of $\\mathbf F_{q^n}$-valued points of $Y_0$ over $k_0$ and its number of elements [def-weil-field-valued-points], where $\\operatorname{Spec}\\mathbf F_{q^n}$ is a $k_0$-scheme through the inclusion $k_0\\to\\mathbf F_{q^n}$ of [lem-weil-unique-subfield-of-closure].\nFor each prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers and $\\Zl$ for its valuation ring, the ring of $\\ell$-adic integers [def-weil-l-adic-numbers], and choose an algebraic\nclosure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure]. Thus $\\Qlb$ is algebraically closed over $\\Ql$, and $\\Zl$ consists of the\nelements of nonnegative $\\ell$-adic valuation. A single choice of $\\ell$ and\nits coefficient fields is understood whenever they occur without a subscript.\nFor every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation\nring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set\n\n$$\n A_{E,n}=\\mathcal O_E/\\varpi_E^n,\n$$\n\nthe finite coefficient ring of $E$ at level $n$ [def-weil-l-adic-coefficient-extension].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
   "place": "node def-weil-finite-field-fiber, order 411"
  },
  "stmt_deps": [
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "lem-weil-unique-subfield-of-closure",
+  "def-pc-scheme",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-field-valued-points",
+  "def-weil-l-adic-numbers",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'GaloisField\\|AlgebraicClosure' Mathlib/AlgebraicGeometry Mathlib/NumberTheory/Padics; grep -rn 'structure.*Datum\\|FiniteFieldDatum\\|finite field datum' Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "none: no Mathlib file combines a finite field, its algebraic closure, schemes over it and the l-adic coefficient rings into one datum; each constituent exists separately and is recorded in the statement dependencies (GaloisField, AlgebraicClosure, Scheme.Over, closedPoints, Scheme.residueField, pullback of schemes, CategoryTheory.Over, Padic/PadicInt)",
+   "date": "2026-10-09",
+   "verdict": "no match: the node is a bundle of conventions; every notion it is built from is a statement dependency, and each of those is a Mathlib leaf except def-weil-finite-type-morphism, def-pc-base-change, lem-weil-unique-subfield-of-closure and def-weil-l-adic-coefficient-extension"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -34,5 +54,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-finite-field-fiber",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint node (order 411) and the slopmaster2 text (01_final_weil_conjectures.tex, def:weil-base-field and def:weil-finite-coefficient-datum, which state the same datum with the transition maps O_E/varpi^{n+1} -> O_E/varpi^n). The text is kept; bracket citations were inserted so that every notion is a statement dependency: the field with q elements, algebraic closure, the unique subfield F_{q^n} of k (stated as a lemma, since existence, uniqueness and the k_0-algebra structure are asserted without argument), schemes, closed points and residue fields (the reviewed nodes def-weil-closed-points and def-weil-residue-field), schemes over a base and Spec, finite type, base change (the existing def-pc-base-change, for Y = Y_0 x_{k_0} k), F_{q^n}-valued points (the reviewed def-weil-field-valued-points), the l-adic numbers and integers, and finite extensions of Q_l with their valuation rings, uniformizers and finite quotients. Of the eight nodes a previous worker left uncommitted for this item, def-weil-scheme-closed-points-residue-field was removed as a duplicate of def-weil-closed-points and def-weil-residue-field; the other seven were checked (statements, sources, Mathlib declarations and line numbers verified in the Mathlib copy) and kept. The finiteness of #Y_0(F_{q^n}) is not asserted here; it is lem-weil-point-counts-finite, which builds on this node."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
