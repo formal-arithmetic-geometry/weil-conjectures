@@ -186,6 +186,15 @@ lemma ofIso_equiv_ofIso_iff {P P' : Torsor G} : ofIso e P ≈ ofIso e P' ↔ P �
   · rintro ⟨φ⟩
     exact ⟨⟨φ.iso, fun U a x ↦ φ.map_vadd U _ x⟩⟩
 
+/-- Transporting a torsor along `e` and back gives an isomorphic torsor. -/
+lemma ofIso_symm_ofIso_equiv (P : Torsor G) : ofIso e.symm (ofIso e P) ≈ P := by
+  refine ⟨⟨CategoryTheory.Iso.refl _, fun U a x ↦ ?_⟩⟩
+  change P.vadd U (e.inv.hom.app U (e.hom.hom.app U a)) x = P.vadd U a x
+  congr 1
+  change ((sheafSections J AddCommGrpCat.{w}).obj U).map (e.hom ≫ e.inv) a = a
+  rw [e.hom_inv_id, Functor.map_id]
+  rfl
+
 end OfIso
 
 end Torsor
