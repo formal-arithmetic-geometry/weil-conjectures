@@ -2,10 +2,10 @@
  "id": "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
  "kind": "statement",
  "title": "Sections over a quasi-compact quasi-separated etale object commute with filtered colimits of sheaves of modules",
- "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring and $\\Mod(X_{\\Et},\\Lambda)$ the category of sheaves of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Let $U\\to X$ be an object of $X_{\\Et}$ such that the scheme $U$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\mathcal I$ be a small filtered category, $i\\mapsto\\mathcal G_i$ a diagram $\\mathcal I\\to\\Mod(X_{\\Et},\\Lambda)$, and $(\\mathcal G,(c_i)_{i})$ a colimit of it in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit]. Then the canonical map\n$$\n\\Psi:\\varinjlim_i\\mathcal G_i(U)\\longrightarrow\\mathcal G(U),\n$$\nthe unique map (colimit of the sets, equivalently of the $\\Lambda$-modules, $\\mathcal G_i(U)$) whose composite with the coprojection of $\\mathcal G_i(U)$ is $(c_i)_U$, is bijective.",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a commutative ring and $\\Mod(X_{\\Et},\\Lambda)$ the category of sheaves of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Let $U\\to X$ be an object of $X_{\\Et}$ such that the scheme $U$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\mathcal I$ be a small filtered category, $i\\mapsto\\mathcal G_i$ a diagram $\\mathcal I\\to\\Mod(X_{\\Et},\\Lambda)$, and $(\\mathcal G,(c_i)_{i})$ a colimit of it in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit]. Then the canonical map\n$$\n\\Psi:\\varinjlim_{i\\in\\mathcal I}\\mathcal G_i(U)\\longrightarrow\\mathcal G(U),\n$$\nthe unique map (colimit of the sets, equivalently of the $\\Lambda$-modules $\\mathcal G_i(U)$) whose composite with the coprojection of $\\mathcal G_i(U)$ is $(c_i)_U$, is bijective. This is Sites, Lemma Tag 0738, part (4), with the etale-site cofinality supplied by Etale Cohomology, Section 59.51, Tag 03Q4.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Lemma 7.17.7 (Tag 0738, label lemma-directed-colimits-sections), part (4), applied to the etale site as in Etale Cohomology, Section 59.51 'Colimits' (Tag 03Q4, label section-colimit, first paragraph): a quasi-compact quasi-separated object has the cofinal system of finite coverings by affine objects, whose pairwise fibre products are quasi-compact."
+  "place": "Sites, Lemma 7.17.7, Tag 0738 (label lemma-directed-colimits-sections), part (4), applied to the etale site using Etale Cohomology, Section 59.51, Tag 03Q4 (label section-colimit), first paragraph"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-site",
@@ -14,9 +14,62 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Finite refinements.* The public node [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings], proved from Etale Cohomology Tag 03Q4 and the affine-etale refinement, supplies the following fact used in the next two steps: every covering of the quasi-compact quasi-separated object $U$ has a refinement $\\{V_b\\to U\\}_{b\\in B}$ with $B$ finite, each $V_b$ affine and etale over $U$, and each fibre product $V_b\\times_UV_{b'}$ quasi-compact. The refinement is cofinal, so it may be applied both to a covering witnessing an equality after sheafification and to a covering representing a sheafified section.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 59.51, Tag 03Q4, first paragraph, together with Sites, Lemma Tag 0738"
+   }
+  },
+  {
+   "text": "*Injectivity.* Put $\\mathcal P(V)=\\varinjlim_{i\\in\\mathcal I}\\mathcal G_i(V)$ for the sectionwise presheaf colimit. By [lem-weil-pbc-module-sheaves-colimits-forgetful], the underlying sheaf of $\\mathcal G$ is the sheafification $\\mathcal P^\\#$ of $\\mathcal P$. Suppose $s\\in\\mathcal G_i(U)$ and $s'\\in\\mathcal G_{i'}(U)$ have equal images in $\\mathcal G(U)$. The local sheafification statement [lem-weil-pbc-site-sheafification-sections-local] (Sites, Tags 00WB and 00WK) gives a covering on which the restrictions of the two sections of $\\mathcal P$ agree. Apply the cofinal refinement from Step 1 to obtain a finite family $\\{V_b\\to U\\}_{b\\in B}$. For each $b$, equality in the filtered colimit $\\mathcal P(V_b)$ is eventual by [lem-weil-pbc-filtered-colimit-sets-elementwise], so there is an index $k_b$ above $i$ and $i'$ at which the two restrictions agree. Filteredness gives one index $k$ above the finite family $(k_b)_{b\\in B}$. The sheaf equalizer condition [lem-weil-pbc-pretopology-sheaf-condition] then gives equality of the transported sections in $\\mathcal G_k(U)$, proving that $\\Psi$ is injective.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 0738, proof of part (2), using Theorem Tag 00WB and Lemma Tag 00WK for the local sheafification description"
+   }
+  },
+  {
+   "text": "*Surjectivity.* Let $t\\in\\mathcal G(U)$. The local sheafification statement [lem-weil-pbc-site-sheafification-sections-local] supplies a covering $\\{W_a\\to U\\}_{a\\in A}$ and sections $p_a\\in\\mathcal P(W_a)$ whose sheafified images are the restrictions of $t$, with pairwise compatibility after further coverings. Apply the cofinal refinement from Step 1 to obtain a finite family $\\{V_b\\to U\\}_{b\\in B}$, each factoring through some $W_{a(b)}$. By [lem-weil-pbc-filtered-colimit-sets-elementwise], choose $i_b\\in\\mathcal I$ and $t_b\\in\\mathcal G_{i_b}(V_b)$ representing the restriction of $p_{a(b)}$. On $V_b\\times_UV_{b'}$ the images of $t_b$ and $t_{b'}$ in $\\mathcal G$ agree because both restrict from $t$. This overlap is quasi-compact by Step 1, so injectivity from Step 2 gives an index $i_{bb'}$ where the two restrictions agree. Choose one index $i$ dominating the finitely many $i_b$ and $i_{bb'}$. The transported sections in $\\mathcal G_i(V_b)$ agree on every pairwise fibre product, hence glue by [lem-weil-pbc-pretopology-sheaf-condition] to a section $t_i\\in\\mathcal G_i(U)$ mapping to $t$. The underlying-set and module statements agree by the forgetful-colimit tool [lem-weil-pbc-module-sheaves-colimits-forgetful]. Thus $\\Psi$ is surjective and bijective.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 0738, proof of part (4), using Lemma Tag 00WK and Theorem Tag 00WB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-pretopology-sheaf-condition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 0738, parts (2) and (4), with Etale Cohomology Section 59.51, Tag 03Q4, for the finite etale refinement; the module formulation uses the reviewed forgetful-colimit tool"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,6 +120,19 @@
    "missing": []
   }
  },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "worker": "F1",
+  "summary": "Repaired the returned item in TeX and with exact Stacks tags. Added public unsplit nodes for the cofinal finite affine etale refinement (Etale Cohomology Tag 03Q4, Sites Tag 0738) and for local sections/equality after sheafification (Sites Tags 00WB and 00WK). Steps 2 and 3 explicitly apply the finite-refinement node where the sheafification witness covers are used. No Lean was written or compiled."
+ },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Repaired as asked at 20:35 and 21:00: TeX throughout, the tags 0738(4)/03Q4 in the statements, the local description of the sheafification now a self-contained node lem-weil-pbc-site-sheafification-sections-local (00WB/00WK), the finite affine refinement node self-contained with 0218, the stray lock file gone, lem-weil-pbc-module-sheaves-colimits-forgetful recorded as a tool use. Three steps along 0738(4): refinement, injectivity by eventual equality on a finite affine refinement and the sheaf condition, surjectivity by gluing representatives at a common index after injectivity on the quasi-compact overlaps."
+ }
 }
