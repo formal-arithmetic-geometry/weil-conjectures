@@ -5,12 +5,79 @@
  "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $A\\to B$ a ring map of finite type ($B$ a finitely generated $A$-algebra). Suppose $B/IB=C_1\\times C_2$ is a product of $A/I$-algebras with $C_1$ finite over $A/I$ (a finitely generated $A/I$-module); let $\\varepsilon\\in B/IB$ be the idempotent $(1,0)$. Let $B'\\subseteq B$ be the integral closure of $A$ in $B$ (the subring of elements of $B$ that are roots of monic polynomials with coefficients in the image of $A$). Then there are an idempotent $\\varepsilon'\\in B'/IB'$ and an element $g\\in B'$ such that: (i) the ring map $B'/IB'\\to B/IB$ induced by the inclusion $B'\\subseteq B$ maps $\\varepsilon'$ to $\\varepsilon$, so that, writing $B'/IB'=C'_1\\times C'_2$ with $C'_1=\\varepsilon'(B'/IB')$, $C'_2=(1-\\varepsilon')(B'/IB')$, it maps $C'_1$ into $C_1$ and $C'_2$ into $C_2$; (ii) the induced map $C'_1\\to C_1$ is an isomorphism; (iii) the image of $g$ in $B'/IB'$ is $\\varepsilon'$; (iv) the map of localizations $B'_g\\to B_g$ induced by the inclusion is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XH (lemma-helper-finite-type, line 2502) and its proof (uses Zariski's Main Theorem, Algebra Theorem 00Q9 theorem-main-theorem; Algebra Lemmas 00HZ lemma-going-up-closed and 00GU lemma-integral-going-up; Algebra Lemma 00EM lemma-disjoint-implies-product; Algebra Lemma 00HN lemma-characterize-zero-local; 'some details omitted'); the statement's 'we can write B'/IB' = C_1 x C'_2' is clauses (i)-(ii) here (end of proof: 'it follows that C'_1 = C_1')"
+  "place": "literature/stacks-project/more-algebra.tex:2502-2510 (Lemma Tag 09XH, lemma-helper-finite-type) and :2512-2550 (proof). The proof uses Algebra Theorem Tag 00Q9, quasi-finite Definition/Lemmas Tags 00PL/00PK/00PM, going-up/closed Tags 00HZ and 00GU, clopen product Tag 00EE, and the local criterion Tag 00E9; the statement's product clauses are the displayed decomposition and the proof's final identification C'_1=C_1."
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T=\\operatorname{Spec}(C_1)$ inside $\\operatorname{Spec}(B)$. Looking at the fibre rings, the finite $A/I$-algebra $C_1$ makes $A\\to B$ quasi-finite at every prime in $T$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": ":2512-2516, proof of Lemma Tag 09XH; affine quasi-finite definition/criteria are Algebra Tags 00PL, 00PK, 00PM"
+   }
+  },
+  {
+   "text": "Write $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ for the map induced by $B'\\subseteq B$. For each prime $\\mathfrak p\\in T$, Zariski's Main Theorem gives $h_{\\mathfrak p}\\in B'$ outside $\\mathfrak p$ for which $B'_{h_{\\mathfrak p}}\\to B_{h_{\\mathfrak p}}$ is an isomorphism. The union $U=\\bigcup_{\\mathfrak p\\in T}D(h_{\\mathfrak p})$ is open, contains $T$ in its inverse image, and $\\phi^{-1}(U)\\to U$ is a homeomorphism with isomorphic local rings.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite",
+    "lem-weil-pbc-integral-closure-zariski-main-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": ":2517-2531, proof of Lemma Tag 09XH, diagram and paragraph invoking Algebra Theorem Tag 00Q9"
+   }
+  },
+  {
+   "text": "The subset $T$ is open in the closed fibre over $V(I)$. Transporting this open subset through the homeomorphism over $U$ makes $\\phi(T)$ open in the closed fibre of $\\operatorname{Spec}(B')$. Since $C_1$ is finite over $A/I$, the map $\\operatorname{Spec}(C_1)\\to\\operatorname{Spec}(B')$ is finite and its image is closed; hence $\\phi(T)$ is open and closed. The clopen decomposition and the inverse-image calculation give $B'/IB'=C'_1\\times C'_2$, with $C'_1\\to C_1$ an isomorphism and the two factors mapping into $C_1$ and $C_2$ respectively.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-fibre-image-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": ":2529-2541, proof of Lemma Tag 09XH; Algebra Tags 00HZ (going-up-closed), 00GU (integral going-up), and 00EE (disjoint clopen product)"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon'\\in B'/IB'$ be the idempotent $(1,0)$ for this product decomposition. Because $\\operatorname{Spec}(C'_1)$ is contained in $U$, choose $g\\in B'$ mapping to $\\varepsilon'$ with $D(g)\\subseteq U$; the same open-and-local-ring comparison gives $B'_g\\xrightarrow{\\sim}B_g$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-fibre-choose-g"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": ":2542-2549, proof of Lemma Tag 09XH; Algebra Tags 00EE (product) and 00E9 (local criterion)"
+   }
+  },
+  {
+   "text": "The product idempotent has image $(1,0)$ in $C'_1\\times C'_2$, so the decomposition in the preceding steps is exactly the decomposition required in (i)--(ii), while the chosen $g$ gives (iii)--(iv).",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
+    "lem-weil-pbc-integral-closure-finite-fibre-choose-g"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": ":2539-2550, proof of Lemma Tag 09XH, factor maps, localization, and final identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite",
+  "lem-weil-pbc-integral-closure-zariski-main-away",
+  "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
+  "lem-weil-pbc-integral-closure-finite-fibre-choose-g"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XH (lemma-helper-finite-type), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,7 +133,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Stacks 09XH; correct; unsplit (uses Zariski′s main theorem 00Q9, in Mathlib as Algebra.ZariskisMainProperty.of_finiteType)."
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Repaired as asked at 19:xx: lem-weil-pbc-integral-closure-finite-fibre-choose-g is self-contained; the quasi-finite node cites pqf-def-quasifinite and the tags 00PL/00PK/00PM; the image-clopen node cites the affine spectrum, integral maps and clopen/idempotent nodes; the Mathlib leaf names Algebra.ZariskisMainProperty.of_finiteType at ZariskisMainTheorem.lean:660 (verified) with its hypotheses and the unfolding of the property; the source is cited by line (more-algebra.tex 2502-2550). Five steps along the proof of 09XH: quasi-finiteness on Spec C_1, Zariski's Main Theorem gives the open U over which Spec B -> Spec B' is an isomorphism, phi(T) clopen in the closed fibre with the product decomposition of B'/IB', the choice of g lifting the idempotent with D(g) in U, conclusion. Two commits (worker + repair) tolerated."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
+  "worker": "stage1",
+  "summary": "Read the official Stacks Tag 09XH page and matched its proof: the finite fibre component is quasi-finite, Zariski's Main Theorem supplies a neighbourhood where the integral-closure map is an isomorphism, the component image is open and closed and yields the product decomposition with C'_1 isomorphic to C_1, and a lift g of the component idempotent gives B'_g isomorphic to B_g. Added four child interfaces: the finite-component quasi-finiteness statement and two unsplit image/localization statements, plus the Mathlib leaf for the Zariski Main localization. The local literature checkout is absent; the cited Stacks source was read online and is recorded as WANTED in the delivery report."
  }
 }

@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-integral-closure-zariski-main-away",
+ "kind": "statement",
+ "title": "Zariski's Main localization at a quasi-finite prime",
+ "statement": "Let $A\\to B$ be a finite-type map of commutative rings, let $B'$ be the integral closure of $A$ in $B$, and let $\\mathfrak q\\subseteq B$ be a prime with $\\mathfrak q$ prime at which $A\\to B$ is quasi-finite in the affine sense of [pqf-def-quasifinite] (Stacks Algebra Definition 10.122.3, Tags 00PL and 00PK). In Mathlib's affine encoding this is the hypothesis `[Algebra.QuasiFiniteAt A q]` for the prime ideal `q : Ideal B`. Then there is an element $h\\in B'$ with $h\\notin\\mathfrak q$ such that the localization map $B'_h\\to B_h$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "literature/stacks-project/more-algebra.tex:2524-2529, proof of Lemma Tag 09XH invoking Theorem Tag 00Q9 (theorem-main-theorem); the theorem's affine quasi-finite-at-a-prime hypothesis is Algebra Definition Tag 00PL/isolated-fibre Lemma Tag 00PK"
+ },
+ "stmt_deps": [
+  "pqf-def-quasifinite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem for a finite type algebra at a quasi-finite prime gives an element of the integral closure whose localization is an isomorphism",
+   "results": "Algebra.ZariskisMainProperty.of_finiteType in Mathlib.RingTheory.ZariskisMainTheorem; Algebra.ZariskisMainProperty is defined by existence of h not in the prime and bijectivity of Localization.awayMap",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure localization isomorphism at a quasi-finite prime",
+   "results": "Algebra.ZariskisMainProperty.of_finiteType and Algebra.ZariskisMainProperty; the former supplies exactly the finite-type quasi-finite case",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.ZariskisMainProperty.of_finiteType",
+   "results": "Algebra.ZariskisMainProperty.of_finiteType : [Algebra.FiniteType A B] -> (q : Ideal B) -> [q.IsPrime] -> [Algebra.QuasiFiniteAt A q] -> Algebra.ZariskisMainProperty A q",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ZariskisMainProperty.of_finiteType' Mathlib/RingTheory/ZariskisMainTheorem.lean and read the definition of ZariskisMainProperty",
+   "results": "Mathlib/RingTheory/ZariskisMainTheorem.lean:660 defines of_finiteType; the property at lines 76-80 is existence of h not in q and a bijective Localization.awayMap from the integral closure",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.ZariskisMainProperty.of_finiteType",
+  "file": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
+  "how": "The exact declaration is `Algebra.ZariskisMainProperty.of_finiteType` in Mathlib/RingTheory/ZariskisMainTheorem.lean:660-663. It has `[Algebra.FiniteType A B]`, `(q : Ideal B)`, `[q.IsPrime]`, and `[Algebra.QuasiFiniteAt A q]`; the last typeclass is Mathlib's affine encoding of the node's quasi-finite-at-q hypothesis ([pqf-def-quasifinite], Stacks Tags 00PL and 00PK). Unfolding `ZariskisMainProperty` at lines 75-78 gives an element of the integral closure outside q and a bijective `Localization.awayMap`, which is exactly h and the localization isomorphism. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
