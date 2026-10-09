@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-closure-image-spec-zero-locus",
+ "kind": "statement",
+ "title": "The closure of the image of V(J) in Spec R is V(phi^{-1}J)",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $J\\subseteq S$ an ideal. Then the closure in $\\operatorname{Spec}R$ of the image of $V(J)=\\{\\mathfrak q\\in\\operatorname{Spec}S:\\ J\\subseteq\\mathfrak q\\}$ under $\\operatorname{Spec}\\varphi:\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$ is $V(\\varphi^{-1}(J))=\\{\\mathfrak p\\in\\operatorname{Spec}R:\\ \\varphi^{-1}(J)\\subseteq\\mathfrak p\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00FL (lemma-image-dense-generic-points): 'V(I) = V(sqrt I) is the closure of the image of Spec(S) -> Spec(R)' with I = Ker(R -> S), applied to R -> S/J (Spec(S/J) = V(J), Ker(R -> S/J) = phi^{-1}(J)); used in the proof of More on Algebra Lemma Tag 07M3"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closure of the image of the zero locus of an ideal under PrimeSpectrum.comap is the zero locus of the comap ideal",
+   "results": "PrimeSpectrum.closure_image_comap_zeroLocus (Mathlib.RingTheory.Spectrum.Prime.Topology), PrimeSpectrum.closure_range_comap, image_comap_zeroLocus_eq_zeroLocus_comap (surjective f only), PrimeSpectrum.preimage_comap_zeroLocus_aux",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.closure_image_comap_zeroLocus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a ring map R → S and an ideal J of S, the closure in Spec R of the image of V(J) is V of the preimage ideal of J",
+   "results": "PrimeSpectrum.closure_image_comap_zeroLocus, PrimeSpectrum.closure_range_comap, PrimeSpectrum.preimage_specComap_zeroLocus, PrimeSpectrum.preimage_comap_zeroLocus",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.closure_image_comap_zeroLocus"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'closure (comap\\|closure (PrimeSpectrum.comap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; sed -n 1150,1182p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "results": "only RingTheory/Spectrum/Prime/Topology.lean:1171 lemma closure_image_comap_zeroLocus (I : Ideal S) : closure (comap f '' zeroLocus I) = zeroLocus (I.comap f), in section IsIntegral but with variables only {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S), no integrality hypothesis",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.closure_image_comap_zeroLocus",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "how": "exact: lemma (line 1171) for f : R →+* S between commutative rings and I : Ideal S, closure (PrimeSpectrum.comap f '' PrimeSpectrum.zeroLocus I) = PrimeSpectrum.zeroLocus (I.comap f); no integrality hypothesis despite the section name. Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separate-image-closed-from-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf PrimeSpectrum.closure_image_comap_zeroLocus (Spectrum/Prime/Topology.lean:1171); checked."
+ }
+}

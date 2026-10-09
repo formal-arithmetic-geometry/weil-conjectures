@@ -8,9 +8,48 @@
   "place": "More on Algebra, Lemma Tag 07M3 (lemma-separate-image-closed-from-closed) and its proof (uses Algebra, Lemma Tag 00E0, lemma-Zariski-topology)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The closure of the image.* Put $I'=\\varphi^{-1}(J)$, an ideal of $R$. The closure in $\\operatorname{Spec}R$ of the image of $V(J)$ under $\\operatorname{Spec}\\varphi$ is $V(I')$ [lem-weil-pbc-closure-image-spec-zero-locus]. (Stacks takes any ideal $I'$ with $V(I')$ equal to that closure, which exists since closed subsets of $\\operatorname{Spec}R$ are of the form $V(I')$; we take this particular one.)",
+   "uses": [
+    "lem-weil-pbc-closure-image-spec-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M3 (lemma-separate-image-closed-from-closed), first sentence ('Let I' be an ideal such that V(I') is the closure of the image of V(J)'), with the choice I' = phi^{-1}(J) made by the agent (Algebra, proof of Lemma Tag 00FL)"
+   }
+  },
+  {
+   "text": "*$I+I'=R$.* By hypothesis $V(I)\\cap V(I')=\\emptyset$ (step 1). Hence $I+I'=R$ [lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal], and there are $g\\in I$ and $f\\in I'$ with $1=g+f$.",
+   "uses": [
+    "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M3, second and third sentences ('hence I + I' = R by Algebra, Lemma lemma-Zariski-topology. Write 1 = g + f with g in I and f in I'') (Algebra Lemma Tag 00E0, parts (8), (10))"
+   }
+  },
+  {
+   "text": "*Conclusion.* $f=1-g$ with $g\\in I$, so the image of $f$ in $R/I$ is $1$. And $f\\in I'=\\varphi^{-1}(J)$ means $\\varphi(f)\\in J$. (Stacks, with an arbitrary $I'$, only gets $V(\\varphi(f))\\supseteq V(J)$, hence $\\varphi(f)^n\\in J$ for some $n$ by Algebra 00E0 (7), and replaces $f$ by $f^n$, still $\\equiv1$ mod $I$; with $I'=\\varphi^{-1}(J)$ one has $n=1$ and this step is not needed.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M3, last three sentences ('We have V(f') ⊃ V(J) ... Replacing f by f^n we win'), simplified to n = 1 by the choice of I' in step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closure-image-spec-zero-locus",
+  "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07M3 (lemma-separate-image-closed-from-closed), proof (more-algebra.tex lines 1947-1957)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +78,17 @@
    "results": "no 07M3; closure_image_comap_zeroLocus (Spectrum/Prime/Topology.lean:1171); zeroLocus_empty_iff_eq_top and zeroLocus_sup in Spectrum/Prime/Basic.lean",
    "verdict": "no match as one statement; three Mathlib lemmas plus an element choice",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 07M3\\|stacks 00E0' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'closure (comap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "no 07M3 or 00E0 attribute; only closure_image_comap_zeroLocus (Spectrum/Prime/Topology.lean:1171), the first ingredient",
+   "date": "2026-10-10",
+   "verdict": "no match as one declaration: the item is a few lines from closure_image_comap_zeroLocus, zeroLocus_sup, zeroLocus_empty_iff_eq_top (or Ideal.isCoprime_tfae for the element form)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,6 +113,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 07M3; correct; unsplit."
+  "note": "Three steps along Stacks 07M3 with I′ = φ^{-1}(J) (which removes Stacks′ power step; checked): closure of the image (new Mathlib leaf lem-weil-pbc-closure-image-spec-zero-locus, closure_image_comap_zeroLocus Topology.lean:1171, no integrality hypothesis; checked), disjoint zero loci ⇒ I + I′ = R (new leaf lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal: zeroLocus_sup :306, zeroLocus_empty_iff_eq_top :284, Ideal.isCoprime_tfae Operations.lean:746; checked), conclusion elementary."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separate-image-closed-from-closed",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof of 07M3 (more-algebra.tex 1938-1957) and Algebra 00E0 / the proof of 00FL. Three steps: (1) take I' = phi^{-1}(J); the closure of the image of V(J) is V(I') [new Mathlib leaf lem-weil-pbc-closure-image-spec-zero-locus = PrimeSpectrum.closure_image_comap_zeroLocus, exact, no integrality hypothesis]; (2) V(I) ∩ V(I') = ∅ gives I + I' = R and 1 = g + f [new Mathlib leaf lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal = zeroLocus_sup + zeroLocus_empty_iff_eq_top, element form Ideal.isCoprime_tfae; Stacks 00E0 (8),(10)]; (3) elementary: f = 1 - g is 1 mod I and phi(f) in J. Stacks allows any I' with V(I') = closure and then needs a power f^n (00E0 (7)); with the choice I' = phi^{-1}(J) the power is n = 1 and is not needed, said in the step. Mathlib has no 07M3 as one declaration (searches recorded on the item, three kinds, plus one grep added). Source repository slopmaster2: no 07M3, 07M4 or closure_image_comap_zeroLocus in WeilConjectures/."
  }
 }

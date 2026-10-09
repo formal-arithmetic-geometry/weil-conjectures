@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal",
+ "kind": "statement",
+ "title": "V(a) and V(b) are disjoint iff a + b is the unit ideal",
+ "statement": "Let $R$ be a commutative ring and $\\mathfrak a,\\mathfrak b\\subseteq R$ ideals. Then $V(\\mathfrak a)\\cap V(\\mathfrak b)=\\emptyset$ in $\\operatorname{Spec}R$ if and only if $\\mathfrak a+\\mathfrak b=R$, that is, if and only if there are $x\\in\\mathfrak a$ and $y\\in\\mathfrak b$ with $x+y=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E0 (lemma-Zariski-topology), parts (8) (V(I) is empty iff I is the unit ideal) and (10) (the intersection of the V(I_a) is V of the union, i.e. V(a) ∩ V(b) = V(a + b)); used in the proof of More on Algebra Lemma Tag 07M3"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zero loci of two ideals are disjoint iff their sum is the unit ideal",
+   "results": "Ideal.isCoprime_iff_add, Ideal.isCoprime_iff_sup_eq, Ideal.isCoprime_iff_codisjoint, Ideal.isCoprime_tfae (Mathlib.RingTheory.Ideal.Operations), PrimeSpectrum.zeroLocus_empty_iff_eq_top, PrimeSpectrum.zeroLocus_sup, PrimeSpectrum.zeroLocus_inf (Mathlib.RingTheory.Spectrum.Prime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match by two lemmas, one per direction of the rewriting: zeroLocus_sup then zeroLocus_empty_iff_eq_top; element form by Ideal.isCoprime_tfae"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.zeroLocus _ ∩ PrimeSpectrum.zeroLocus _ = ∅",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no single declaration with this conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "V(I) and V(J) are disjoint in Spec R if and only if I + J = R",
+   "results": "Ideal.coprime_of_no_prime_ge, Ideal.iSup_iInf_eq_top_iff_pairwise, Ideal.isCoprime_iff_codisjoint, IsCoprime.codisjoint, Ideal.isCoprime_iff_sup_eq, PrimeSpectrum.zeroLocus_sup",
+   "date": "2026-10-10",
+   "verdict": "match by composition: zeroLocus_sup + zeroLocus_empty_iff_eq_top (Ideal.coprime_of_no_prime_ge is the direction 'no common prime => coprime' stated on primes)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem zeroLocus_sup\\|theorem zeroLocus_empty_iff_eq_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Basic.lean; grep -n 'coprime_of_no_prime_ge\\|isCoprime_tfae' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/Operations.lean; grep -rn 'Disjoint (zeroLocus\\|zeroLocus.*∩.*zeroLocus.*∅' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/",
+   "results": "Basic.lean:284 zeroLocus_empty_iff_eq_top {I : Ideal R} : zeroLocus I = ∅ ↔ I = ⊤; Basic.lean:306 zeroLocus_sup (I J : Ideal R) : zeroLocus (I ⊔ J) = zeroLocus I ∩ zeroLocus J (CommSemiring R); Operations.lean:738 coprime_of_no_prime_ge, :746 isCoprime_tfae [IsCoprime I J, Codisjoint I J, I + J = 1, ∃ i ∈ I, ∃ j ∈ J, i + j = 1, I ⊔ J = ⊤]; no Disjoint-of-zeroLocus lemma",
+   "date": "2026-10-10",
+   "verdict": "match by composition of two lemmas (a few Mathlib lemmas applied one per clause, stages/1-dag.md §2)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.zeroLocus_sup, PrimeSpectrum.zeroLocus_empty_iff_eq_top (element form: Ideal.isCoprime_tfae)",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+  "how": "specializes in one line: V(a) ∩ V(b) = V(a ⊔ b) by zeroLocus_sup (Basic.lean:306), and V(a ⊔ b) = ∅ ↔ a ⊔ b = ⊤ by zeroLocus_empty_iff_eq_top (Basic.lean:284); a ⊔ b = ⊤ ↔ ∃ x ∈ a, ∃ y ∈ b, x + y = 1 by Ideal.isCoprime_tfae (Mathlib/RingTheory/Ideal/Operations.lean:746). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separate-image-closed-from-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf (a few lemmas): zeroLocus_sup, zeroLocus_empty_iff_eq_top (Spectrum/Prime/Basic.lean:306/284), Ideal.isCoprime_tfae (Ideal/Operations.lean:746); checked."
+ }
+}
