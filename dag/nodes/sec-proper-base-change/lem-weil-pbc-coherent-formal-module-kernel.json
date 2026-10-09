@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-module-kernel",
+ "kind": "statement",
+ "title": "Kernels in Coh(X, I): the levels are reductions of stabilized images of levelwise kernels",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] with quasi-compact underlying space), $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, and $\\alpha=(\\alpha_n):(\\mathcal F_n)\\to(\\mathcal H_n)$ a morphism of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. For $l\\ge m\\ge1$ let $\\operatorname{Ker}\\alpha_l\\subseteq\\mathcal F_l$ be the kernel of $\\alpha_l$ in $\\mathit{Mod}(\\mathcal O_X)$ (sectionwise) and let $\\mathcal K'_{l,m}\\subseteq\\mathcal F_m$ be the image sheaf [lem-weil-pbc-quasi-coherent-module-cokernel-image] of the composite $\\operatorname{Ker}\\alpha_l\\hookrightarrow\\mathcal F_l\\to\\mathcal F_m$ of the inclusion and the transition map. Then there is an integer $c\\ge0$ such that: (1) $\\mathcal K'_{l,m}=\\mathcal K'_{m+c,m}$ for all $l\\ge m+c$; write $\\mathcal K'_m=\\mathcal K'_{m+c,m}$; (2) for $m'\\ge m$ the transition map $\\mathcal F_{m'}\\to\\mathcal F_m$ maps $\\mathcal K'_{m'}$ into $\\mathcal K'_m$, and putting $\\mathcal K_n=\\mathcal K'_{n+c}/\\mathcal I^n\\mathcal K'_{n+c}$ (notation of [def-weil-pbc-coherent-formal-module] (0)) with the transition maps $\\mathcal K_{n+1}\\to\\mathcal K_n$ induced by $\\mathcal K'_{n+1+c}\\to\\mathcal K'_{n+c}$, the system $(\\mathcal K_n)_{n\\ge1}$ is an object of $\\mathit{Coh}(X,\\mathcal I)$; (3) the maps $\\iota_n:\\mathcal K_n\\to\\mathcal F_n$ induced by the inclusion $\\mathcal K'_{n+c}\\subseteq\\mathcal F_{n+c}$ and the isomorphism $\\mathcal F_{n+c}/\\mathcal I^n\\mathcal F_{n+c}\\cong\\mathcal F_n$ given by the transition maps form a morphism $\\iota=(\\iota_n):(\\mathcal K_n)\\to(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ which is a kernel of $\\alpha$ in $\\mathit{Coh}(X,\\mathcal I)$: $\\alpha\\circ\\iota=0$, and every morphism $\\gamma:(\\mathcal T_n)\\to(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ with $\\alpha\\circ\\gamma=0$ factors as $\\gamma=\\iota\\circ\\delta$ for a unique morphism $\\delta$. (The maps $\\iota_n$ need not be injective.)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 087X (lemma-inverse-systems-abelian), claims (a)-(d) on the kernel of alpha, with the affine computation K'_{l,m} = (K + I^m M)/I^m M for l >= m + c and K_n = K/I^n K"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel in the category of inverse systems of coherent sheaves (F_n) with F_n = F_{n+1}/I^n F_{n+1}; Artin-Rees stabilization of images of kernels",
+   "results": "isArtinian_of_range_eq_ker (RingTheory.Artinian.Module), CategoryTheory.Limits.kernel, ModuleCat.kernelIsLimit, AlgebraicGeometry.Scheme.Hom.ker (IdealSheaf.Basic), CategoryTheory.Limits.kerIsKernel: nothing on systems of coherent sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the kernel of a morphism of adic inverse systems of modules is the system K/I^n K where K is the kernel of the limit map; images of Ker(f_l) in M_m stabilize",
+   "results": "Hausdorffification, Hausdorffification.of, AdicCompletion.submodule, AdicCompletion.kerProj_of, AdicCompletion (RingTheory.AdicCompletion.*), ModuleCat.kernelIsLimit: adic completion of a single module only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/; grep -rn 'theorem\\|lemma\\|def ' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/Exactness.lean; grep -rln 'IsCoherent\\|Coherent' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Modules/ has Presheaf.lean, Sheaf.lean, Tilde.lean only; AdicCompletion/Exactness.lean: map_surjective, map_injective, map_exact (exactness of completion of modules); no coherent sheaves and no category Coh(X, I) in AlgebraicGeometry",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-short-exact-levels",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

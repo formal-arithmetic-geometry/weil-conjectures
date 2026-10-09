@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-abelian-short-exact-kernel",
+ "kind": "statement",
+ "title": "In a short exact sequence of an abelian category the first map is a kernel of the second",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a short exact sequence of $\\mathcal A$ [def-weil-pbc-exact-sequence]. Then $f$ is a kernel of $g$: $g\\circ f=0$, and every morphism $\\varphi:T\\to B$ with $g\\circ\\varphi=0$ factors as $\\varphi=f\\circ\\psi$ for a unique $\\psi:T\\to A$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 0106 (definition-kernel; the image of f is a kernel of y -> Coker f), Definition 010E (definition-exact: exact at B means Im(A -> B) = Ker(B -> C)) and Lemma 010C (lemma-characterize-injective: a monomorphism f has Ker f = 0, so x = Coim(f) = Im(f))"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in an abelian category, in a short exact sequence 0 → A → B → C → 0 the map A → B is a kernel of B → C",
+   "results": "CategoryTheory.ShortComplex.ShortExact.fIsKernel (Mathlib.Algebra.Homology.ShortComplex.ShortExact), CategoryTheory.Limits.kernel, ShortComplex.Exact.ab_range_eq_ker, ShortComplex.exact_iff_image_eq_kernel (Mathlib.CategoryTheory.Abelian.Exact), ShortComplex.Exact.isLimitImage",
+   "date": "2026-10-10",
+   "verdict": "match: ShortComplex.ShortExact.fIsKernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.fIsKernel",
+   "results": "CategoryTheory.ShortComplex.ShortExact.fIsKernel {C} [Category C] [Preadditive C] [Balanced C] {S : ShortComplex C} (hS : S.ShortExact) : IsLimit (KernelFork.ofι S.f _) (Mathlib.Algebra.Homology.ShortComplex.ShortExact)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'fIsKernel' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean; grep -n 'Balanced' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean; grep -n 'regularEpiCategoryOfNormalEpiCategory' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean",
+   "results": "ShortExact.lean:162 noncomputable def ShortExact.fIsKernel [Balanced C] (hS : S.ShortExact) : IsLimit (KernelFork.ofι S.f S.zero); Exact.lean:749 def Exact.fIsKernel (hS : S.Exact) [Mono S.f]; StrongEpi.lean:158 instance balanced_of_strongEpiCategory; NormalMono/Basic.lean:328 instance regularEpiCategoryOfNormalEpiCategory (an abelian category is a normal epi category, hence regular epi, strong epi, balanced)",
+   "date": "2026-10-10",
+   "verdict": "match (sed -n 159,165p ShortExact.lean read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.fIsKernel",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "how": "specializes in one line: an abelian category is Balanced (instances regularEpiCategoryOfNormalEpiCategory, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean:328, and balanced_of_strongEpiCategory, Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean:158), and a short exact sequence of def-weil-pbc-exact-sequence is ShortComplex.ShortExact (ShortComplex.exact_iff_image_eq_kernel, Mathlib/CategoryTheory/Abelian/Exact.lean:94, with Mono f, Epi g); IsLimit (KernelFork.ofι f _) is the universal property of the statement"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-formal-short-exact-levels",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
