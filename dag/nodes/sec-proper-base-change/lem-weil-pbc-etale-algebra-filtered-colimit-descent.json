@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+ "kind": "statement",
+ "title": "Etale algebras over a filtered colimit of rings descend to a finite stage",
+ "statement": "Let $I$ be a small filtered category and $i\\mapsto A_i$ a functor from $I$ to commutative rings with colimit $A=\\varinjlim_IA_i$ [def-weil-pbc-category-colimit] and coprojections $\\iota_i:A_i\\to A$. Let $A\\to B$ be a ring map such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. Then there are an index $i\\in I$, a ring map $A_i\\to B_i$ with $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A_i$ etale, and an isomorphism of $A$-algebras $B\\cong A\\otimes_{A_i}B_i$ (tensor product formed via $\\iota_i$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00U2 (lemma-etale), item (9), and its proof ('Follows from (8) [an etale ring map is the base change of an etale $R_0\\to S_0$ with $R_0$ of finite type over $\\mathbf Z$] since $R_0\\to A$ will factor through $A_i$ for some $i$ by Lemma Tag 00QO (lemma-characterize-finite-presentation)'); cited in more-algebra.tex, proof of Lemma Tag 0A02 (lemma-henselization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra over a filtered colimit of rings is the base change of an etale algebra over some stage",
+   "results": "Algebra.Etale.baseChange, IsEtale stable under base change, Algebra.Etale.comp, Algebra.Etale.exists_subalgebra_fg (Mathlib.RingTheory.Smooth.NoetherianDescent: descent to a finitely generated subalgebra $A_0\\subseteq A$ over a base $R$, not to a stage of a colimit), RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale algebra over a filtered colimit of rings descends to an étale algebra over some ring in the system (Stacks 00U2 (9))",
+   "results": "RingHom.Etale.toAlgebra, Algebra.Etale.comp, RingHom.etale_algebraMap, Algebra.IsEtaleAt.comp, Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-09",
+   "verdict": "no match (exists_subalgebra_fg is the noetherian-approximation variant: $A$ as the union of its finitely generated subalgebras; it would specialize only to a directed union of subrings, not to an arbitrary filtered colimit)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsColimit\\|DirectLimit\\|IsFiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring",
+   "results": "RingTheory/Etale and RingTheory/Smooth: none; Algebra/Category/Ring/FinitePresentation.lean has RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit and CommRingCat.preservesColimit_coyoneda_of_finitePresentation (maps out of a finitely presented algebra into a filtered colimit factor through a stage), which is not descent of an algebra over the colimit",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-pair-henselization",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
