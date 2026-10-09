@@ -2,38 +2,137 @@
  "id": "lem-sp-shift-identification",
  "kind": "statement",
  "title": "Shift rule for derived functors",
- "statement": "Let $v$ be a left exact additive [def-sp-left-exact-additive] functor, let\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$ and let $q\\in\\mathbb Z$. Then the\nderived functor commutes with the shift and the cohomology of a shifted\ncomplex is the shifted cohomology:\n\n$$\n \\mathcal H^{p+q}\\bigl(Rv(\\mathcal H^qK[-q])\\bigr)\n =\\mathcal H^{p}\\bigl(Rv(\\mathcal H^qK)\\bigr)\n =R^pv(\\mathcal H^qK).\n$$",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories, $\\mathcal A$ with enough injectives (for example $\\mathcal A$ Grothendieck abelian [def-sp-grothendieck-abelian]), and let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive], with right derived functor $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ [def-weil-pbc-bounded-derived-subcategories] computed on a bounded below complex $L$ by a K-injective resolution $L\\to I(L)$ (a bounded below complex of injectives will do) as $RvL=v(I(L))$ [def-sp-kinjective-bridge]. For $n\\in\\mathbf Z$ let\n\n$$\n \\sigma^n_L:\\ Rv(L[n])\\xrightarrow{\\ \\sim\\ }(RvL)[n]\n$$\n\nbe the shift isomorphism of $Rv$, i.e. the comparison of the two K-injective resolutions $L[n]\\to I(L[n])$ and $L[n]\\to I(L)[n]$ (for $n=1$ the isomorphism $\\sigma$ making $Rv$ triangulated; for general $n$ its iterate), and for $M\\in D(\\mathcal B)$ and $k+a=a'$ let $\\tau^{k,a}_M:\\mathcal H^a(M[k])\\xrightarrow{\\sim}\\mathcal H^{a'}(M)$ be the canonical identification of the cohomology of a shifted complex [def-weil-abstract-derived-category]. For an object $X$ of $\\mathcal A$ write $X[-q]$ for the complex with $X$ in degree $q$ and $0$ elsewhere, which is the shift $(X[0])[-q]$ of $X$ placed in degree $0$.\n\nLet $K\\in\\operatorname{Ch}^+(\\mathcal A)$ and $p,q\\in\\mathbf Z$. Then:\n\n1. The composite\n\n$$\n \\mathcal H^{p+q}\\bigl(Rv(\\mathcal H^qK[-q])\\bigr)\\xrightarrow{\\ \\mathcal H^{p+q}(\\sigma^{-q}_{\\mathcal H^qK[0]})\\ }\\mathcal H^{p+q}\\bigl(Rv(\\mathcal H^qK[0])[-q]\\bigr)\\xrightarrow{\\ \\tau^{-q,p+q}\\ }\\mathcal H^{p}\\bigl(Rv(\\mathcal H^qK[0])\\bigr)\n$$\n\nis an isomorphism, natural in $K$.\n2. For $p\\geq0$, composing it with the canonical isomorphism $\\mathcal H^p(Rv(X[0]))\\cong R^pv(X)$, $X=\\mathcal H^qK$, where $R^pv$ is the right derived functor defined by injective resolutions [def-sp-left-exact-additive], gives an isomorphism natural in $K$\n\n$$\n \\mathcal H^{p+q}\\bigl(Rv(\\mathcal H^qK[-q])\\bigr)\\cong\\mathcal H^{p}\\bigl(Rv(\\mathcal H^qK)\\bigr)\\cong R^pv(\\mathcal H^qK).\n$$\n\n3. For $p<0$ all three objects are $0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-shift-identification.md",
   "place": "node lem-sp-shift-identification, order 1211"
  },
  "stmt_deps": [
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "def-sp-grothendieck-abelian",
+  "def-sp-kinjective-bridge",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "The derived functor of a left exact additive functor\n[def-sp-left-exact-additive] on $\\operatorname{Ch}^+$ is the functor applied\nto a K-injective resolution, by the definition in\n[def-sp-kinjective-bridge]. It commutes with the shift by part (3) of\n[lem-sp-kinjective-computes], so the cohomology of the shifted complex is the\nshifted cohomology, which is the first displayed identity. The second is the\ndefinition $R^pv=\\mathcal H^p\\circ Rv$ of [def-sp-kinjective-bridge],\ntogether with part (2) of [lem-sp-kinjective-computes] identifying it, on an\nobject, with the derived functor of [def-sp-left-exact-additive].",
+   "text": "*The complex $\\mathcal H^qK[-q]$.* Put $X=\\mathcal H^q(K)$; $K\\mapsto\\mathcal H^q(K)$ is a functor $\\operatorname{Ch}^+(\\mathcal A)\\to\\mathcal A$. By the definition of the shift of a cochain complex, $(X[0])[-q]^i=(X[0])^{i-q}$, which is $X$ for $i=q$ and $0$ otherwise, with zero differential (the sign $(-1)^{-q}$ multiplies the zero map). So $\\mathcal H^qK[-q]=(X[0])[-q]$ as complexes, equal on the nose and functorially in $K$; it is bounded below, so it lies in $D^+(\\mathcal A)$ where $Rv$ is defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Definition 011G (definition-shift-cochain) and the remark after it: for an object $A$, $A[k]$ is $A$ in degree $-k$"
+   }
+  },
+  {
+   "text": "*The shift isomorphisms $\\sigma^n$.* By [lem-weil-pbc-derived-direct-image-triangulated], $Rv$ is a triangulated functor on $D^+$ with an isomorphism $\\sigma_L:Rv(L[1])\\xrightarrow{\\sim}(RvL)[1]$, natural in $L$, given by comparing the K-injective resolutions $L[1]\\to I(L[1])$ and $L[1]\\to I(L)[1]$. Define $\\sigma^0_L=\\mathrm{id}$ and, for $n\\geq0$, $\\sigma^{n+1}_L$ as the composite $Rv(L[n+1])=Rv((L[n])[1])\\xrightarrow{\\sigma_{L[n]}}(Rv(L[n]))[1]\\xrightarrow{\\sigma^n_L[1]}(RvL)[n][1]=(RvL)[n+1]$; for $n>0$ define $\\sigma^{-n}_L$ as the inverse of $\\sigma^n_{L[-n]}[-n]:(Rv L)[-n]=(Rv((L[-n])[n]))[-n]\\to(Rv(L[-n]))[n][-n]=Rv(L[-n])$. Composites, shifts and inverses of natural isomorphisms are natural isomorphisms, so every $\\sigma^n_L$ is an isomorphism natural in $L$. (It is again the comparison of the K-injective resolutions $L[n]\\to I(L[n])$ and $L[n]\\to I(L)[n]$, by the uniqueness up to homotopy of such comparisons; this is the shift compatibility of derived functors, Stacks 05SU.) Take $L=X[0]$ and $n=-q$: $\\sigma^{-q}_{X[0]}:Rv(X[-q])\\xrightarrow{\\sim}Rv(X[0])[-q]$, natural in $X$.",
    "uses": [
-    "def-sp-left-exact-additive",
-    "def-sp-kinjective-bridge",
-    "lem-sp-kinjective-computes"
+    "lem-weil-pbc-derived-direct-image-triangulated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 05SU (lemma-derived-shift, line 4657): $RF(X)[n]=RF(X[n])$ canonically; Proposition 05SE (proposition-derived-functor, line 4895): $RF$ is an exact functor on its domain"
+   }
+  },
+  {
+   "text": "*Cohomology of the shift.* Apply [lem-sp-derived-cohomology-shift] to $M=Rv(X[0])\\in D^+(\\mathcal B)$ with $k=-q$, $a=p+q$, $a'=k+a=p$: $\\tau^{-q,p+q}_M:\\mathcal H^{p+q}(M[-q])\\xrightarrow{\\sim}\\mathcal H^{p}(M)$, natural in $M$, hence natural in $X$ after composing with the functor $X\\mapsto Rv(X[0])$.",
+   "uses": [
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Definition 011H (definition-cohomology-shift); Derived Categories, Section 05RR (derived.tex line 3610): $H^i(K[n])=H^{i+n}(K)$"
+   }
+  },
+  {
+   "text": "*Part 1.* The composite of step 1's equality, $\\mathcal H^{p+q}$ applied to $\\sigma^{-q}_{X[0]}$ of step 2 (a functor carries isomorphisms to isomorphisms and natural transformations to natural transformations), and $\\tau^{-q,p+q}$ of step 3 is the composite displayed in part 1. It is a composite of isomorphisms natural in $X$, hence an isomorphism natural in $X$, and, precomposing with the functor $K\\mapsto X=\\mathcal H^q(K)$, natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 05SU and Section 05RR (line 3610); the composite is the one of the source repository's proof of `Functor.nonempty_grothendieckSpectralObject_H_iso` (WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean, lines 186-203, isomorphisms e5 and e6)"
+   }
+  },
+  {
+   "text": "*Part 2.* For $p\\geq0$, [lem-sp-derived-functor-single-identification] gives the isomorphism $\\theta^p_X:\\mathcal H^p(Rv(X[0]))\\xrightarrow{\\sim}R^pv(X)$, natural in $X$: an injective resolution $X\\to I^\\bullet$ is a K-injective resolution of $X[0]$, so $Rv(X[0])\\cong v(I^\\bullet)$ and $\\mathcal H^p(v(I^\\bullet))$ is $R^pv(X)$ by [def-sp-left-exact-additive]. Composing part 1 with $\\theta^p_{\\mathcal H^qK}$ gives the isomorphism of part 2; it is natural in $K$ because both factors are natural in $X$ and $X=\\mathcal H^q(K)$ is functorial in $K$.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Definition 015A (definition-higher-derived-functors), Lemma 05TH (lemma-injective-acyclic), Proposition 05TA (proposition-enough-acyclics) (1), Lemma 05TI (lemma-enough-injectives-right-derived)"
+   }
+  },
+  {
+   "text": "*Part 3.* Let $p<0$. The complex $X[0]$ has $\\mathcal H^i(X[0])=0$ for $i<0$, so [lem-weil-pbc-derived-functor-negative-vanishing] (with $b=0$) gives $\\mathcal H^p(Rv(X[0]))=0$; by part 1 also $\\mathcal H^{p+q}(Rv(\\mathcal H^qK[-q]))=0$. (Directly: $\\mathcal H^i(X[-q])=0$ for $i<q$, and the same lemma with $b=q$ gives $\\mathcal H^{p+q}(Rv(X[-q]))=0$ for $p+q<q$.) The middle term $\\mathcal H^p(Rv(\\mathcal H^qK))$ is the same object $\\mathcal H^p(Rv(X[0]))$, so all three vanish; this is the convention $R^pv=0$ for $p<0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 05TC (lemma-negative-vanishing) (1)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sp-derived-functor-single-identification",
   "def-sp-left-exact-additive",
-  "def-sp-kinjective-bridge",
-  "lem-sp-kinjective-computes"
+  "lem-weil-pbc-derived-functor-negative-vanishing"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-shift-identification.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 05SU (lemma-derived-shift), Definition 015A (definition-higher-derived-functors), Lemma 05TC (lemma-negative-vanishing); Homology, Definitions 011G, 011H (homology.tex); the Stacks proof of 05SU is omitted and is written out in step 2"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor commutes with shift; cohomology of derived functor applied to object shifted by -q in degree p+q is p-th right derived functor",
+   "results": "Functor.rightDerived, rightDerivedToHomotopyCategory (Mathlib.CategoryTheory.Abelian.RightDerived); Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor, exact functors only); Adjunction.RightAdjointCommShift.iso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor on bounded below derived category commutes with shift (CommShift instance for rightDerivedFunctorPlus)",
+   "results": "Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt and related NatTrans.CommShift instances (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor, exact functors only); DerivedCategory.instCommShiftCochainComplexIntQ",
+   "date": "2026-10-09",
+   "verdict": "no match (index v4.28.0)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+   "results": "Functor.rightDerivedFunctorPlus; Functor.instCommShiftPlusRightDerivedFunctorPlusInt : F.rightDerivedFunctorPlus.CommShift ℤ; NatTrans.instCommShiftPlusRightDerivedFunctorPlusInt; rightDerivedFunctorPlusUnith; NatTrans.rightDerivedFunctorPlus (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus, in the Mathlib version Loogle indexes, newer than the pinned one)",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; the shift part (step 2) is in the Mathlib Loogle indexes but not in the pinned Mathlib (see grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus, CategoryTheory.Functor.rightDerived",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no comparison of rightDerivedFunctorPlus with the classical rightDerived"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,70p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; grep -rn 'CommShift' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/*.lean | grep -v 'mapDerivedCategory\\|Qh'; grep -rn 'singleFunctor.*rightDerived\\|rightDerived.*singleFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "RightDerivedFunctorPlus.lean (pinned Mathlib) defines `rightDerivedFunctorPlus` and its unit only, with 'TODO(@joelriou): show that this functor is triangulated and refactor the definition of Functor.rightDerived'; no CommShift of a right derived functor; no relation with `singleFunctor`/`rightDerived`",
+   "date": "2026-10-09",
+   "verdict": "no match in the pinned Mathlib: the item is the composite of a source-repository instance (CommShift, closed), a Mathlib leaf (ShiftSequence.shiftIso) and a source-repository iso (closed), see the proof"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +156,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sp-shift-identification",
+  "worker": "stage1",
+  "summary": "Made the statement precise: hypotheses (A with enough injectives, e.g. Grothendieck; v left exact additive; Rv on D^+ via K-injective resolutions), the two '=' named as canonical isomorphisms (H^{p+q} of the shift isomorphism sigma^{-q} of Rv at H^qK[0], then the identification tau of the cohomology of a shifted object), naturality in K, the identification with R^pv for p>=0 only (R^pv of def-sp-left-exact-additive is defined for p>=0) and vanishing of all terms for p<0. Replaced the one-paragraph imported proof by six steps. Checked lem-sp-kinjective-computes: part (3) gives Rv(K[n]) ~ (RvK)[n] objectwise only (no naturality, not identified with the triangulated sigma), part (2) gives H^p(Rv(X[0])) ~ R^pv(X) objectwise only (no naturality) and both assume Grothendieck categories; it lies in unit sk-prop-av-pqf-finite, which sk-thm-properbasechange does not cite. So the shift step now uses the closed tool node lem-weil-pbc-derived-direct-image-triangulated (iterated to all n), the object identification uses the new node lem-sp-derived-functor-single-identification (natural in X; Lean closed on slopmaster2: PlusSingle.lean), the cohomology of a shift the new Mathlib leaf lem-sp-derived-cohomology-shift (Functor.ShiftSequence.shiftIso for DerivedCategory(.Plus).homologyFunctor), and p<0 the closed node lem-weil-pbc-derived-functor-negative-vanishing. Dropped def-sp-kinjective-bridge and lem-sp-kinjective-computes from the proof (def-sp-kinjective-bridge stays a statement dependency). The same chain of isomorphisms is written in Lean, sorry-free, inside the proof of Functor.nonempty_grothendieckSpectralObject_H_iso (slopmaster2, Grothendieck.lean 186-203), but not as a declaration of its own. Searched with LeanSearch, LeanFinder, Loogle and grep."
+ }
 }

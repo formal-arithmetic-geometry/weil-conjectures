@@ -1,0 +1,77 @@
+{
+ "id": "lem-sp-derived-cohomology-shift",
+ "kind": "statement",
+ "title": "Cohomology of a shifted object of the derived category",
+ "statement": "Let $\\mathcal B$ be an abelian category with derived category $D(\\mathcal B)$ and cohomology functors $H^n:D(\\mathcal B)\\to\\mathcal B$ [def-weil-abstract-derived-category], and let $D^+(\\mathcal B)\\subset D(\\mathcal B)$ be the bounded below derived category [def-weil-pbc-bounded-derived-subcategories]. For $k,a,a'\\in\\mathbf Z$ with $k+a=a'$ there is a canonical isomorphism\n\n$$\n \\tau^{k,a}_M:\\ H^{a}(M[k])\\xrightarrow{\\ \\sim\\ }H^{a'}(M),\n$$\n\nnatural in $M\\in D(\\mathcal B)$ (and so in $M\\in D^+(\\mathcal B)$); on a complex $M$ it is the identity of $\\ker d/\\operatorname{im}d$ under the equality of terms $M[k]^{a}=M^{a+k}$ (the sign $(-1)^k$ of the differential of $M[k]$ changes neither kernel nor image). These isomorphisms are compatible with $[0]=\\mathrm{id}$ and with $M[k][l]=M[k+l]$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 011G (definition-shift-cochain): $A[k]^n=A^{n+k}$, $d_{A[k]}=(-1)^kd_A$; Definition 011H (definition-cohomology-shift) and the paragraph after it: the identification $H^{i+k}(A^\\bullet)\\to H^i(A[k]^\\bullet)$, functorial and compatible with $[k][l]=[k+l]$; used in the derived category in Derived Categories, Section 05RR (derived.tex line 3610)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of a shifted complex in the derived category is isomorphic to homology in shifted degree",
+   "results": "HomotopyCategory.homologyShiftIso_hom_app, CochainComplex.homologyFunctor_shift, CochainComplex.ShiftSequence.shiftIso (Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence)",
+   "date": "2026-10-09",
+   "verdict": "match on complexes and the homotopy category; the derived-category version is the instance found below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology functors on the derived category form a shift sequence: H^a(X[n]) ≅ H^{n+a}(X)",
+   "results": "DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt (Mathlib.Algebra.Homology.DerivedCategory.HomologySequence); CochainComplex.instShiftSequenceHomologicalComplexIntUpHomologyFunctorOfNat; CochainComplex.ShiftSequence.shiftIso",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Plus.homologyFunctor, CategoryTheory.Functor.ShiftSequence",
+   "results": "DerivedCategory.Plus.instShiftSequenceHomologyFunctorOfNatInt : (DerivedCategory.Plus.homologyFunctor C 0).ShiftSequence ℤ (Mathlib.Algebra.Homology.DerivedCategory.Plus)",
+   "date": "2026-10-09",
+   "verdict": "match (bounded below version)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ShiftSequence.shiftIso, DerivedCategory.Plus.homologyFunctor",
+   "results": "none (the shiftIso is generic, stated for any functor with a ShiftSequence)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; the generic Functor.shiftIso applies to the instance above"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ShiftSequence\\|shift_homologyFunctor\\|def shiftIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/ShiftSequence.lean",
+   "results": "HomologySequence.lean:110 `instance : (homologyFunctor C 0).ShiftSequence ℤ` and :113 `shift_homologyFunctor (n) : (homologyFunctor C 0).shift n = homologyFunctor C n := rfl`; Plus.lean:191 the same instance for `DerivedCategory.Plus.homologyFunctor C 0`; ShiftSequence.lean:92 `Functor.shiftIso (n a a') (ha' : n + a = a') : shiftFunctor C n ⋙ F.shift a ≅ F.shift a'`, with naturality (:97) and compatibility with 0 and addition (`shiftIso_zero`, `shiftIso_add`, :130-:171)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.shiftIso",
+  "file": "Mathlib/CategoryTheory/Shift/ShiftSequence.lean",
+  "how": "specializes in one line: `(DerivedCategory.homologyFunctor C 0).shiftIso k a a' h : shiftFunctor _ k ⋙ homologyFunctor C a ≅ homologyFunctor C a'` for the instance `(DerivedCategory.homologyFunctor C 0).ShiftSequence ℤ` (Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:110, with `shift_homologyFunctor` rfl), and on `DerivedCategory.Plus C` for the instance at Mathlib/Algebra/Homology/DerivedCategory/Plus.lean:191; on complexes it is `CochainComplex.ShiftSequence.shiftIso` (Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean); naturality is `Functor.shiftIso_hom_naturality`, compatibility with 0 and sums `shiftIso_zero`, `shiftIso_add`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-shift-identification",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
