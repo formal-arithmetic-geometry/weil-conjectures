@@ -363,8 +363,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
 /-- Composition of kernel transforms, at a general coefficient category `A`, from the inputs of
-the six-functor formalism it uses besides the composition law of `Rf_!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`): compact-support
+the six-functor formalism it uses: the composition law of `Rf_!` (`hcomp`, which holds for
+torsion coefficients, `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`),
+compact-support
 base change (`hbc`) along the cartesian square
 
 ```
@@ -391,6 +392,9 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
     [HasCompactification (pullback.tripleProj₁₃ π π' π'' ≫ pullback.snd π π'')]
+    (hcomp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
+      [HasCompactification g] [HasCompactification (f ≫ g)],
+      Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]))
     (hbc : Nonempty (R(pullback.snd π π')_![A] ⋙ L((pullback.fst π' π'')^*[A]) ≅
       L((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A]) ⋙
         R(pullback.snd (pullback.snd π π') (pullback.fst π' π''))_![A]))
@@ -429,10 +433,9 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
   obtain ⟨β₁₃⟩ := nonempty_iso_derivedTensor_flip A (pullback π π'')
   obtain ⟨βP⟩ := nonempty_iso_derivedTensor_flip A
     (pullback (pullback.snd π π') (pullback.fst π' π''))
-  obtain ⟨c₂₃⟩ := nonempty_iso_rightDerivedLowerShriek_comp A
+  obtain ⟨c₂₃⟩ := hcomp
     (pullback.snd (pullback.snd π π') (pullback.fst π' π'')) (pullback.snd π' π'')
-  obtain ⟨c₁₃⟩ := nonempty_iso_rightDerivedLowerShriek_comp A
-    (pullback.tripleProj₁₃ π π' π'') (pullback.snd π π'')
+  obtain ⟨c₁₃⟩ := hcomp (pullback.tripleProj₁₃ π π' π'') (pullback.snd π π'')
   obtain ⟨cc⟩ := hcongr hc
   obtain ⟨pf₂₃⟩ := hpf₂₃ 𝒦'
   obtain ⟨bc₀⟩ := hbc
@@ -565,6 +568,7 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ]
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
     (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π''))
   nonempty_iso_kernelTransform_comp_of_nonempty_iso (ModuleCat.{u + 1} Λ) π π' π''
+    (fun f g _ _ _ ↦ nonempty_iso_rightDerivedLowerShriek_comp Λ f g)
     ⟨asIso (rightDerivedLowerShriekBaseChangeMap _
       (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π'')))⟩
     (fun L ↦ nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight _ _ L

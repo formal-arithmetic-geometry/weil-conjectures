@@ -310,7 +310,7 @@ end Morphism
 
 section Exchange
 
-variable {a : X ⟶ Y} [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
+variable [Finite Λ] {a : X ⟶ Y} [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- The Weil datum on `Ra_! K` of a Weil datum `φ : Lg^* K ⟶ K`, for `g ≫ a = a ≫ h`:
 ```

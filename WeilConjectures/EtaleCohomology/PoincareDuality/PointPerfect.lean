@@ -207,11 +207,10 @@ def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
-omit [CommRing Λ] in
 /-- At the integral stage every finite `Λ`-module is annihilated by an integer invertible on any
 scheme `Y` on which the exponent of `Λ / I` is invertible: it is killed by a power of `I`
 (`IsAdicComplete.exists_pow_smul_top_eq_bot`). -/
-theorem exists_isUnit_nsmul_eq_zero_of_isAdicComplete [CommRing Λ] [IsAdicComplete I Λ]
+theorem exists_isUnit_nsmul_eq_zero_of_isAdicComplete [IsAdicComplete I Λ]
     (Y : Scheme.{u}) [HasInvertibleExponent (Λ ⧸ I) Y] (M : Type (u + 1)) [AddCommGroup M]
     [Module Λ M] [Finite M] : ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0 := by
   obtain ⟨k, hk⟩ := IsAdicComplete.exists_pow_smul_top_eq_bot I M

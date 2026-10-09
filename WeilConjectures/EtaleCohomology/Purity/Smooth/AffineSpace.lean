@@ -178,7 +178,6 @@ lemma affineSpaceSuccIso_hom_over_over (c : ℕ) (B : Scheme.{u}) :
   rw [affineSpaceSuccIso, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
     AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
 
-omit [Finite Λ] in
 /-- Blueprint `sk-prop-an`, Step 1: the zero section of `𝔸^{c+1}_B` is that of `𝔸¹_{B'}`
 after that of `B' = 𝔸^c_B`, so by the composition law
 `Rz_{c+1}^! Λ(c+1)[2(c+1)] ≅ Rz_c^! Rs'^! Λ(1 + c)[2(1 + c)]`. -/
@@ -288,7 +287,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLine {k : Type u} [Field k]
         ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) :=
   sorry
 
-omit [Finite Λ] [HasTateTwist Λ] in
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-an`, Step 6: the projection of `𝔸^{d+1}_Y` is that of `𝔸¹_{Y'}`
 followed by that of `Y' = 𝔸^d_Y`, so by the composition law and `Re^! ≅ Le^*` for the
 isomorphism `e : 𝔸^{d+1}_Y ≅ 𝔸¹_{Y'}`, `Rp_{d+1}^! K ≅ Le^* Rp'^! Rp_d^! K`. -/
