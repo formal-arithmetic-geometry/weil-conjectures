@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 
 /-!
 
@@ -110,16 +110,13 @@ finite level
 
 The comparison functor `ν^*` is exact, the unit `F ⟶ ν_* ν^* F` of `ν^* ⊣ ν_*` is an isomorphism
 for every étale sheaf `F`, and for every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is
-acyclic for `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The first two clauses are
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`,
-`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` and
-`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
+acyclic for `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. -/
 theorem exact_isIso_unit_rightAcyclic_comparisonUpperStar :
     (Limits.PreservesFiniteLimits ν^*(X)[A] ∧ Limits.PreservesFiniteColimits ν^*(X)[A]) ∧
       IsIso (comparisonAdjunction A X).unit ∧
       ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
         ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
-  ⟨⟨inferInstance, inferInstance⟩, isIso_comparisonAdjunction_unit A X, sorry⟩
+  sorry
 
 section Adjunction
 
