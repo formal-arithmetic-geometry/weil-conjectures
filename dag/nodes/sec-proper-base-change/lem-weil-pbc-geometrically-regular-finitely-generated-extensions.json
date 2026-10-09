@@ -13,9 +13,111 @@
   "def-pc-field-extension",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Setup: making $K$ separable.) Let $K/k$ be a finitely generated field extension, $K=k(a_1,\\dots,a_n)$. By [lem-weil-pbc-make-separable] there are a field $K'$ with a field homomorphism $\\iota:K\\to K'$ and a subfield $k'\\subseteq K'$ containing the image of $k$, with $k'/k$ and $K'/K$ finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension] and $K'/k'$ separable [def-weil-pbc-separable-field-extension]; the two $k$-algebra structures on $K'$ (through $k\\to K\\xrightarrow{\\iota}K'$ and through $k\\subseteq k'\\subseteq K'$) agree, and we regard $K'$ as a $k$-algebra in this way. The extension $K'/k'$ is finitely generated [def-pc-field-extension]: if $e_1,\\dots,e_m$ is a $K$-basis of $K'$ (finite since $K'/K$ is finite), every element of $K'$ is a $K$-linear combination of the $e_j$ and $K=k(a_1,\\dots,a_n)$, so $K'=k(\\iota(a_1),\\dots,\\iota(a_n),e_1,\\dots,e_m)$, and a fortiori $K'=k'(\\iota(a_1),\\dots,\\iota(a_n),e_1,\\dots,e_m)$ since $k\\subseteq k'\\subseteq K'$.",
+   "uses": [
+    "lem-weil-pbc-make-separable",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-separable-field-extension",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1): 'By Lemma 030R (lemma-make-separable) we can find a diagram ...'"
+   }
+  },
+  {
+   "text": "(A smooth model of $K'$.) $K'/k'$ is a finitely generated separable field extension (Step 1), so by [lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra] there is a $k'$-subalgebra $B\\subseteq K'$ such that $k'\\to B$ is smooth [def-weil-pbc-smooth-ring-map] and $K'$ is the fraction field of $B$. Thus $B$ is a domain, $M=B\\setminus\\{0\\}$ is a multiplicative subset of $B$, and the inclusion $B\\to K'$ is a localization of $B$ at $M$: elements of $M$ are invertible in the field $K'$, every element of $K'$ is $b/b'$ with $b'\\in M$, and $b\\mapsto0$ in $K'$ means $b=0$.",
+   "uses": [
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1): 'By Lemma 037X (lemma-localization-smooth-separable) there exists a smooth k'-algebra B such that K' is the fraction field of B'"
+   }
+  },
+  {
+   "text": "(Stacks Step 1: $C=k'\\otimes_kA$ is regular.) $A$ is Noetherian and geometrically regular over $k$, and $k'/k$ is a finite purely inseparable extension (Step 1); by the definition of geometric regularity in [def-weil-pbc-g-ring] the ring $C:=k'\\otimes_kA$ is regular [def-weil-regular-scheme]. We regard $C$ as a $k'$-algebra through $c\\mapsto c\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1), Step 1"
+   }
+  },
+  {
+   "text": "(Stacks Step 2: $D=C\\otimes_{k'}B$ is regular.) Since $k'\\to B$ is smooth (Step 2), its base change along $k'\\to C$, the ring map $C\\to D:=C\\otimes_{k'}B$, $c\\mapsto c\\otimes1$, is smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition] (1). As $C$ is a regular ring (Step 3), ascent of regularity along smooth ring maps [lem-weil-pbc-regular-ring-smooth-ascent] shows that $D$ is a regular ring [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1), Step 2 (Lemma 00T4 lemma-base-change-smooth and Lemma 07NF lemma-regular-goes-up)"
+   }
+  },
+  {
+   "text": "(Stacks Step 3: $K'\\otimes_kA$ is regular.) Regard $D=C\\otimes_{k'}B$ as a $B$-algebra through $\\psi:B\\to D$, $b\\mapsto1\\otimes b$. By Step 2, $B\\to K'$ is a localization of $B$ at $M=B\\setminus\\{0\\}$, so by [lem-weil-pbc-localization-base-change] the ring map $D\\to D\\otimes_BK'$, $x\\mapsto x\\otimes1$, is a localization of $D$ at $\\psi(M)$. Next, $D\\otimes_BK'=(C\\otimes_{k'}B)\\otimes_BK'\\cong K'\\otimes_B(B\\otimes_{k'}C)$ by the symmetry of the tensor product, and $K'\\otimes_B(B\\otimes_{k'}C)\\cong K'\\otimes_{k'}C$, $y\\otimes(b\\otimes c)\\mapsto by\\otimes c$, by [lem-weil-pbc-tensor-cancel-base-change] (with $R=k'$, $S=B$, the $R$-algebra $C$ and the $S$-algebra $K'$); and $K'\\otimes_{k'}C=K'\\otimes_{k'}(k'\\otimes_kA)\\cong K'\\otimes_kA$, $y\\otimes(c\\otimes a)\\mapsto cy\\otimes a$, again by [lem-weil-pbc-tensor-cancel-base-change] (with $R=k$, $S=k'$, the $k$-algebra $A$ and the $k'$-algebra $K'$). Composing a localization with a ring isomorphism gives a localization (conditions (a)-(c) are transported by the isomorphism), so $K'\\otimes_kA$ is isomorphic to a localization of the regular ring $D$ (Step 4) at a multiplicative subset, hence is a regular ring by [lem-weil-pbc-localization-of-regular-ring]; a ring isomorphic to a regular ring is regular (Noetherianity and the localizations at corresponding primes are transported) [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1), Step 3 ('K' otimes_{k'} k' otimes_k A = K' otimes_k A is a regular ring as it is a localization of a regular ring (immediate from the definition)')"
+   }
+  },
+  {
+   "text": "(Stacks Step 4: descent to $K\\otimes_kA$.) Put $E:=K\\otimes_kA$, a $K$-algebra through $x\\mapsto x\\otimes1$. By [lem-weil-pbc-field-extension-base-change-faithfully-flat], applied to the field extension $\\iota:K\\to K'$ and the $K$-algebra $E$, the ring map $E\\to E\\otimes_KK'$, $e\\mapsto e\\otimes1$, is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. By the symmetry of the tensor product and [lem-weil-pbc-tensor-cancel-base-change] (with $R=k$, $S=K$, the $k$-algebra $A$ and the $K$-algebra $K'$; its $k$-algebra structure is the one fixed in Step 1), $E\\otimes_KK'\\cong K'\\otimes_K(K\\otimes_kA)\\cong K'\\otimes_kA$, and the composite $E\\to K'\\otimes_kA$ sends $x\\otimes a\\mapsto(x\\otimes a)\\otimes1\\mapsto1\\otimes(x\\otimes a)\\mapsto\\iota(x)\\otimes a$. A faithfully flat ring map followed by a ring isomorphism is faithfully flat (the module structures correspond), so $E\\to K'\\otimes_kA$, $x\\otimes a\\mapsto\\iota(x)\\otimes a$, is faithfully flat, and its target is a regular ring by Step 5. By descent of regularity along faithfully flat ring maps [lem-weil-pbc-regular-ring-faithfully-flat-descent], $E=K\\otimes_kA$ is a regular ring [def-weil-regular-scheme]: it is Noetherian and every localization at a prime ideal is a regular local ring. This is the claim. (The Noetherianity of $K\\otimes_kA$, which Stacks gets beforehand from Lemma 045I lemma-Noetherian-field-extension only to make the statement meaningful, is part of the conclusion of [lem-weil-pbc-regular-ring-faithfully-flat-descent], so 045I is not needed.)",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0381 (lemma-geometrically-regular, line 47104), (2) => (1), Step 4 ('by descent of regularity along the faithfully flat ring map K otimes_k A -> K' otimes_k A (Lemma 07NG lemma-descent-regular)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-make-separable",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-pc-field-extension",
+  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-g-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0381 (lemma-geometrically-regular, line 47104), proof of (2) => (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +162,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 0381 (2)=>(1) with the definition of geometric regularity in def-weil-pbc-g-ring (condition (2)); kept unchanged. All cited tags checked against literature/stacks-project/tags/tags (0381, 030R, 037X, 00T4, 07NF, 07NG, 045I all correct). Proof written in six steps following the four steps of the Stacks proof: 030R (new node lem-weil-pbc-make-separable) with K'/k' finitely generated written out; 037X in the fraction-field form the proof uses (new node lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra); Step 1 by the definition; Step 2 by base change of smooth maps (existing leaf) and 07NF (new node lem-weil-pbc-regular-ring-smooth-ascent); Step 3, which Stacks calls immediate, by base change of a localization (new Mathlib leaf lem-weil-pbc-localization-base-change, IsLocalization.tensor), two tensor cancellations (existing leaf) and a new node lem-weil-pbc-localization-of-regular-ring; Step 4 by faithful flatness of base change along a field extension (new Mathlib leaf lem-weil-pbc-field-extension-base-change-faithfully-flat) and 07NG (new node lem-weil-pbc-regular-ring-faithfully-flat-descent). The Noetherianity of K (x)_k A (Stacks 045I) is not needed as a separate node: regularity in the DAG's sense includes Noetherian and 07NG yields it. stmt_deps unchanged. Lean state none; Mathlib has no regular-ring results beyond Defs and polynomial rings."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along Stacks 0381 (2)=>(1): make K separable after finite purely inseparable extensions of k and K (new unsplit node, 030R first assertion), a smooth model B of K'/k' (new unsplit node, 037X in the form used), C = k' (x) A regular by the definition, D = C (x) B regular by smooth ascent (new unsplit node 07NF), K' (x) A a localization of D (new Mathlib leaf IsLocalization.tensor, Localization/BaseChange.lean:271, verified) hence regular (new unsplit node: localizations of regular rings are regular), descent along the faithfully flat K (x) A -> K' (x) A (new Mathlib leaf by instances: FaithfullyFlat/Basic.lean:209/559 with Module.Free.of_divisionRing, verified; new unsplit node 07NG). 045I not needed. Tags verified by the worker."
+ }
 }

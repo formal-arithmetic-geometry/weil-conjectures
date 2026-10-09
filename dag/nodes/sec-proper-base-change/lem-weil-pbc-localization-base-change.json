@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-localization-base-change",
+ "kind": "statement",
+ "title": "Base change of a localization is a localization",
+ "statement": "Let $R$ be a commutative ring, $M\\subseteq R$ a multiplicative subset, and $R\\to R'$ a localization of $R$ at $M$ (every $s\\in M$ maps to a unit; every element of $R'$ is $r/s$ with $r\\in R$, $s\\in M$; $r\\mapsto0$ implies $sr=0$ for some $s\\in M$). Let $\\psi:R\\to D$ be any homomorphism of commutative rings. Then the ring map $D\\to D\\otimes_RR'$, $d\\mapsto d\\otimes1$, is a localization of $D$ at the multiplicative subset $\\psi(M)$ (in the same sense), so $D\\otimes_RR'\\cong\\psi(M)^{-1}D$ as $D$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00DK (lemma-tensor-localization, line 2087: S^{-1}R otimes_R M = S^{-1}M), applied to the R-module D; used in the proof of Lemma Tag 0381 Step 3 ('K' otimes_{k'} (k' otimes_k A) is a localization of B otimes_{k'} k' otimes_k A') and of Lemma Tag 045I"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a localization S ⊗[R] A is a localization of S at the image of M",
+   "results": "IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorRightEquiv, IsLocalization.tensorProduct_tensorProduct, IsLocalizedModule.isBaseChange (RingTheory/Localization/BaseChange.lean)",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a localization: if A is the localization of R at M then S ⊗_R A is the localization of S at the image of M",
+   "results": "IsLocalization.tensor ('Localization commutes with base change'), IsLocalization.tensorRight, IsLocalization.Away.tensor, IsLocalization.Away.tensorRight",
+   "date": "2026-10-10",
+   "verdict": "match: IsLocalization.tensor"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/BaseChange.lean; sed -n 266,275p",
+   "results": "BaseChange.lean:271 instance IsLocalization.tensor (M : Submonoid R) [IsLocalization M A] : IsLocalization (Algebra.algebraMapSubmonoid S M) (S ⊗[R] A); line 278 tensorRight for A ⊗[R] S",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.tensor",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "line": 271,
+  "how": "exact: for [CommSemiring R] [CommSemiring S] [Algebra R S] (S the node's D, via ψ), A the node's R' with [Algebra R A] [IsLocalization M A], the instance gives IsLocalization (Algebra.algebraMapSubmonoid S M) (S ⊗[R] A); Algebra.algebraMapSubmonoid S M is ψ(M), the algebra map S → S ⊗[R] A is d ↦ d ⊗ 1 (Algebra.TensorProduct.includeLeft), and IsLocalization's fields map_units, surj, exists_of_eq are the three conditions of the node. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+ "kind": "statement",
+ "title": "Base change along a field extension is faithfully flat",
+ "statement": "Let $K'/K$ be a field extension [def-pc-field-extension] and let $D$ be a commutative $K$-algebra. Then the ring map $D\\to D\\otimes_KK'$, $d\\mapsto d\\otimes1$, is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra: $K'$ is a free $K$-module with a nonempty basis, hence faithfully flat over $K$ (flat by Definition Tag 00HB, and $K'\\otimes_KN\\neq0$ for $N\\neq0$, so faithfully flat by Lemma Tag 00HP lemma-ff (2)), and faithful flatness is preserved by base change (Lemma Tag 00HI lemma-flat-base-change, line 8889); used in the proof of Lemma Tag 0381 Step 4 ('the faithfully flat ring map K otimes_k A -> K' otimes_k A')"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product with a field extension is faithfully flat over the algebra",
+   "results": "Module.FaithfullyFlat.instTensorProduct (RingTheory/Flat/FaithfullyFlat/Basic.lean: FaithfullyFlat R M → FaithfullyFlat S (S ⊗[R] M)), RingHom.FaithfullyFlat, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.iff_flat_and_rTensor_faithful",
+   "date": "2026-10-10",
+   "verdict": "match (with the free-module instance)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a field extension K'/K and a K-algebra D, D → K' ⊗_K D is faithfully flat; nontrivial free module is faithfully flat",
+   "results": "Module.FaithfullyFlat.instTensorProduct, Module.FaithfullyFlat.faithfulSMul, Module.FaithfullyFlat.injective_of_tensorProduct, Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective",
+   "date": "2026-10-10",
+   "verdict": "match (combination)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'instance.*FaithfullyFlat' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/; grep -n 'of_divisionRing' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+   "results": "FaithfullyFlat/Basic.lean:209 instance [Nontrivial M] [Module.Free R M] : FaithfullyFlat R M; Basic.lean:559 instance (S) [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M); LinearAlgebra/Basis/VectorSpace.lean:156 instance Module.Free.of_divisionRing : Module.Free K V",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.instTensorProduct, Module.Free.of_divisionRing",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 559,
+  "how": "specializes in one line, by instances: K' is a free K-module (Module.Free.of_divisionRing, Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156) and nontrivial (a field), so Module.FaithfullyFlat K K' (unnamed instance at FaithfullyFlat/Basic.lean:209, [Nontrivial M] [Module.Free R M]); the base-change instance at Basic.lean:559 with R := K, M := K', S := D gives Module.FaithfullyFlat D (D ⊗[K] K'), the D-module structure being the left one, i.e. the ring map d ↦ d ⊗ 1 (Algebra.TensorProduct.includeLeft); this is the node's notion by [def-weil-pbc-faithfully-flat-ring-map]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

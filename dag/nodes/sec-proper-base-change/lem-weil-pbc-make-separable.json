@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-make-separable",
+ "kind": "statement",
+ "title": "A finitely generated field extension becomes separable after finite purely inseparable extensions",
+ "statement": "Let $K/k$ be a finitely generated field extension [def-pc-field-extension] (i.e. $K=k(a_1,\\dots,a_n)$ for finitely many $a_1,\\dots,a_n\\in K$). Then there exist a field $K'$ with a field homomorphism $K\\to K'$, and a subfield $k'\\subseteq K'$ containing the image of $k$ under $k\\to K\\to K'$, such that $k'/k$ is a finite purely inseparable extension and $K'/K$ is a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension], and $K'/k'$ is a separable field extension in the sense of [def-weil-pbc-separable-field-extension]. In other words there is a commutative square of field extensions $k\\to k'\\to K'$, $k\\to K\\to K'$ with $k'/k$, $K'/K$ finite purely inseparable and $K'/k'$ separable.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030R (lemma-make-separable, line 10513), first assertion, and its proof (Lemma Tag 04KM lemma-make-separably-generated, Lemma Tag 030X lemma-separably-generated-separable); the further assertions $K'=k'K$, $K'=(k'\\otimes_kK)_{red}$ of 030R are not part of this node"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated field extension, there exist finite purely inseparable extensions k'/k and K'/K with K' separable over k'",
+   "results": "separableClosure.isPurelyInseparable, isPurelyInseparable_iff, isPurelyInseparable_iff_fd_isPurelyInseparable (FieldTheory/PurelyInseparable/Basic.lean); exists_isTranscendenceBasis_and_isSeparable_of_perfectField, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType (FieldTheory/SeparablyGenerated.lean: separably generated over a perfect field, Stacks 030W (2)=>(1)); nothing producing purely inseparable extensions k', K'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated field extension K/k there are finite purely inseparable extensions k'/k and K'/K with k' ⊆ K' and K' separable (separably generated) over k'",
+   "results": "isPurelyInseparable_iff_fd_isPurelyInseparable, separableClosure.isPurelyInseparable, perfectClosure.isPurelyInseparable, separableClosure_le, Field.primitive_element_inf_aux; no make-separable statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'IsPurelyInseparable' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -l 'IsTranscendenceBasis\\|EssFiniteType\\|FiniteType'; grep -rn '030R\\|04KM' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only RingTheory/Unramified/Field.lean (range_eq_top_of_isPurelyInseparable: formally unramified + purely inseparable is trivial); no 030R/04KM tag; Mathlib's Algebra.IsSeparable is the algebraic notion only, the transcendental separability of def-weil-pbc-separable-field-extension is absent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
