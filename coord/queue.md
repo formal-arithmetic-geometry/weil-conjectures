@@ -1,8 +1,8 @@
 # Work queue
 
-582 items; claim with `tools/claim.py next <group> [--stage N]`.
+579 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (553)
+## Stage 1: nodes to split (550)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,11 +11,9 @@
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1006 | none |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1006 | none |
-| `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-approximation` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-complete` | 1007 | none |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1007 | none |
-| `lem-weil-pbc-finite-pushforward-embedding-pullback` | 1007 | none |
 | `lem-weil-pbc-graded-module-away-restriction` | 1007 | none |
 | `lem-weil-pbc-limit-affine-transition` | 1007 | none |
 | `lem-weil-pbc-proj-standard-open-inclusion` | 1007 | none |
@@ -43,7 +41,6 @@
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1008 | none |
 | `lem-weil-pbc-open-restriction-pullback-unit` | 1008 | none |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1008 | none |
-| `lem-weil-pbc-scheme-over-limit` | 1008 | none |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1008 | none |
 | `lem-weil-pbc-site-cohomology-pullback` | 1008 | none |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 1008 | none |
@@ -594,7 +591,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 567 nodes that wait for stage 1, 195 nodes that wait for a statement dependency.
+Not open yet: 564 nodes that wait for stage 1, 198 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

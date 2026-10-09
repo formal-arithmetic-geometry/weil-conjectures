@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-adic-completion",
+ "kind": "definition",
+ "title": "I-adic completion of a ring",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal. The *$I$-adic completion* of $A$ is the ring $A^\\wedge=\\varprojlim_nA/I^n$ (compatible sequences $(x_n)_n$ with $x_n\\in A/I^n$, componentwise operations), with the ring map $A\\to A^\\wedge$, $a\\mapsto(a\\bmod I^n)_n$, making it an $A$-algebra, and the $A$-algebra map $A^\\wedge\\to A/I$, $(x_n)_n\\mapsto x_1$. $A$ is *$I$-adically complete* if $A\\to A^\\wedge$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 00M9 (section-completion, line 22529), completion M^ = lim M/I^nM defined there, Definition 0317 (definition-complete, line 22626); cited in pione.tex, proof of Lemma 0GS2, line 1814"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion of a ring as inverse limit of R / I^n",
+   "results": "AdicCompletion (Mathlib.RingTheory.AdicCompletion.Basic), AdicCompletion.instCommRing (Mathlib.RingTheory.AdicCompletion.Algebra), AdicCompletion.flat_of_isNoetherian",
+   "verdict": "match: AdicCompletion I R with its ring structure",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete _ (AdicCompletion _ _)",
+   "results": "AdicCompletion.isAdicComplete, AdicCompletion.isAdicComplete_self (Mathlib.RingTheory.AdicCompletion.LocalRing)",
+   "verdict": "match (the notion exists)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def AdicCompletion\\|def evalOneₐ\\|class IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/*.lean",
+   "results": "AdicCompletion (Basic.lean: submodule of compatible families in prod M/I^n M), IsAdicComplete (Basic.lean: IsHausdorff and IsPrecomplete), evalOneₐ (Algebra.lean line 177)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion",
+  "file": "Mathlib/RingTheory/AdicCompletion/Basic.lean",
+  "how": "exact: AdicCompletion I A (with AdicCompletion.instCommRing in Mathlib/RingTheory/AdicCompletion/Algebra.lean, its A-algebra structure, and AdicCompletion.evalOneₐ : AdicCompletion I A →ₐ[A] A ⧸ I); IsAdicComplete I A is Mathlib's 'I-adically complete' (Hausdorff and precomplete, equivalent to bijectivity of A → A^ by AdicCompletion.of_bijective / of_injective_iff / of_surjective_iff)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-approximation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf (definition) verified: AdicCompletion I A with instCommRing, the A-algebra structure and evalOneₐ."
+ }
+}

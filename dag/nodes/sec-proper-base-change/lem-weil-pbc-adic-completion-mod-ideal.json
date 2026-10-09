@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-adic-completion-mod-ideal",
+ "kind": "statement",
+ "title": "The completion along a finitely generated ideal is complete with the same quotient",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ a finitely generated ideal and $A^\\wedge$ the $I$-adic completion of $A$ [def-weil-pbc-adic-completion], with $\\pi^\\wedge:A^\\wedge\\to A/I$, $(x_n)_n\\mapsto x_1$. Then (1) $A^\\wedge$ is $IA^\\wedge$-adically complete; (2) $\\pi^\\wedge$ is surjective with kernel $IA^\\wedge$, and its composite with $A\\to A^\\wedge$ is the quotient map $A\\to A/I$; hence $\\pi^\\wedge$ induces an isomorphism of $A$-algebras $A^\\wedge/IA^\\wedge\\cong A/I$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 05GG (lemma-hathat-finitely-generated, line 22645), 'In particular R^ is I-adically complete ... and R^/I^nR^ = R/I^n'; for Noetherian A also Lemma Tag 031C (lemma-completion-complete, line 22995), cited in pione.tex, proof of Lemma 0GS2, line 1816"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete _ (AdicCompletion _ _)",
+   "results": "AdicCompletion.isAdicComplete_self (I : Ideal R) (fg : I.FG) : IsAdicComplete (I.map (algebraMap R (AdicCompletion I R))) (AdicCompletion I R) (Mathlib.RingTheory.AdicCompletion.LocalRing)",
+   "verdict": "match for clause (1)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient of the adic completion by the extended ideal is isomorphic to R / I",
+   "results": "AdicCompletion.evalOneₐ_surjective, AdicCompletion.evalOneₐ_of, AdicCompletion.factorₐ_evalₐ_one (Mathlib.RingTheory.AdicCompletion.Algebra)",
+   "verdict": "match for clause (2), surjectivity and compatibility",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'ker_evalOneₐ_eq_map\\|evalOneₐ_surjective\\|evalOneₐ_comp_algebraMap_eq_mk\\|lemma isAdicComplete_self' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/*.lean",
+   "results": "Completeness.lean:199 ker_evalOneₐ_eq_map (fg : I.FG) : RingHom.ker (evalOneₐ I).toRingHom = I.map (algebraMap R (AdicCompletion I R)); Algebra.lean:193 evalOneₐ_surjective; Algebra.lean:188 evalOneₐ_comp_algebraMap_eq_mk; LocalRing.lean:61 isAdicComplete_self",
+   "verdict": "match: one Mathlib lemma per clause",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion.isAdicComplete_self",
+  "file": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+  "how": "one Mathlib lemma per clause: (1) AdicCompletion.isAdicComplete_self I fg; (2) AdicCompletion.evalOneₐ_surjective I (Mathlib/RingTheory/AdicCompletion/Algebra.lean), AdicCompletion.ker_evalOneₐ_eq_map fg (Mathlib/RingTheory/AdicCompletion/Completeness.lean) and AdicCompletion.evalOneₐ_comp_algebraMap_eq_mk (Algebra.lean); the isomorphism is RingHom.quotientKerEquivOfSurjective applied to evalOneₐ"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-approximation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: AdicCompletion.isAdicComplete_self (LocalRing.lean:61), evalOneₐ_surjective (Algebra.lean:193), ker_evalOneₐ_eq_map, evalOneₐ_comp_algebraMap_eq_mk (:188), one per clause."
+ }
+}

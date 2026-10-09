@@ -2,22 +2,226 @@
  "id": "lem-weil-pbc-finite-etale-lifting-approximation",
  "kind": "statement",
  "title": "Finite etale covers descend by henselian G-ring approximation",
- "statement": "Let (A,I) be a Noetherian henselian pair with A a G-ring, let Y be proper over Spec A, and let Y_0=Y\\times_A Spec(A/I). Every finite etale Y_0-scheme V is the closed fibre of a finite etale Y-scheme U.",
- "source": {"document": "literature/stacks-project/pione.tex", "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, Noetherian G-ring case"},
- "stmt_deps": ["def-weil-pbc-henselian-terminology", "def-weil-proper-morphism", "def-weil-pbc-finite-etale-category", "lem-weil-pbc-finite-etale-lifting-complete"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": {"by": "agent", "document": "literature/stacks-project/pione.tex", "place": "Lemma 0GS2; source file unavailable locally"},
+ "statement": "Let $A$ be a G-ring [def-weil-pbc-g-ring] (in particular Noetherian) and $I\\subseteq A$ an ideal such that $(A,I)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Let $f:Y\\to\\operatorname{Spec}A$ be a proper morphism [def-weil-proper-morphism] and $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ its closed fibre (fibre product [def-pc-fibre-product]). Then for every finite etale $Y_0$-scheme $V\\to Y_0$ [def-weil-pbc-finite-etale-category] there are a finite etale $Y$-scheme $U\\to Y$ and an isomorphism of $Y_0$-schemes $U\\times_YY_0\\cong V$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); it is the proof of Lemma 0A48 (lemma-finite-etale-on-proper-over-henselian, line 1622, local Noetherian G-ring paragraph) with m replaced by I and Smoothing Lemma 0AH5 in place of Theorem 07QY"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Completion. Since $A$ is Noetherian, $I$ is finitely generated. Let $A^\\wedge$ be the $I$-adic completion of $A$ [def-weil-pbc-adic-completion], $\\iota:A\\to A^\\wedge$, and $\\pi^\\wedge:A^\\wedge\\to A/I$ the projection. By [lem-weil-pbc-adic-completion-mod-ideal], $A^\\wedge$ is $IA^\\wedge$-adically complete and $\\pi^\\wedge$ induces an isomorphism of $A$-algebras $A^\\wedge/IA^\\wedge\\cong A/I$ with $\\pi^\\wedge\\circ\\iota$ the quotient map $\\pi:A\\to A/I$. By [lem-weil-pbc-adic-completion-noetherian], $A^\\wedge$ is Noetherian. By [lem-weil-pbc-complete-pair-henselian], $(A^\\wedge,IA^\\wedge)$ is a henselian pair. Put $Y^\\wedge=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A^\\wedge$; it is proper over $\\operatorname{Spec}A^\\wedge$ [lem-weil-pbc-proper-base-change]. Its closed fibre is $Y^\\wedge_0=Y^\\wedge\\times_{A^\\wedge}\\operatorname{Spec}(A^\\wedge/IA^\\wedge)=Y\\times_A\\operatorname{Spec}(A^\\wedge/IA^\\wedge)$ (transitivity of fibre products [def-pc-fibre-product]), and the $A$-algebra isomorphism $A^\\wedge/IA^\\wedge\\cong A/I$ gives an isomorphism $Y^\\wedge_0\\cong Y_0$ over $Y$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'Observe that A^ is a Noetherian ring which is IA^-adically complete, see Algebra, Lemmas 031C and 0316' (lines 1815-1818); the henselian property of (A^, IA^), needed by the complete case as stated in the DAG, is More on Algebra, Lemma 0ALJ"
+   }
+  },
+  {
+   "text": "Complete case. Via $Y^\\wedge_0\\cong Y_0$ regard $V$ as a finite etale $Y^\\wedge_0$-scheme. By [lem-weil-pbc-finite-etale-lifting-complete] applied to the Noetherian $IA^\\wedge$-adically complete henselian pair $(A^\\wedge,IA^\\wedge)$ and the proper $Y^\\wedge\\to\\operatorname{Spec}A^\\wedge$ (step 1), there are a finite etale $W^\\wedge\\to Y^\\wedge$ and an isomorphism $W^\\wedge\\times_{Y^\\wedge}Y^\\wedge_0\\cong V$ over $Y^\\wedge_0\\cong Y_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-lifting-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'By the result above there exists a finite etale morphism V -> X^ whose special fibre is U_0' (line 1820)"
+   }
+  },
+  {
+   "text": "$A^\\wedge$ as a limit of finite type $A$-algebras. For a finite subset $F\\subseteq A^\\wedge$ let $A_F\\subseteq A^\\wedge$ be the $A$-subalgebra generated by $F$; the $F$ are directed by inclusion, $A_F\\subseteq A_{F'}$ for $F\\subseteq F'$, and every element of $A^\\wedge$ lies in some $A_F$, so $A^\\wedge=\\varinjlim_FA_F$ [def-weil-pbc-category-colimit] with the inclusions $\\iota_F:A_F\\to A^\\wedge$. Each $A_F$ is of finite type over the Noetherian ring $A$, hence of finite presentation (Hilbert basis theorem; Mathlib Algebra.FinitePresentation.of_finiteType). Hence $\\operatorname{Spec}A^\\wedge=\\varprojlim_F\\operatorname{Spec}A_F$ with affine transition morphisms [lem-weil-pbc-spec-colimit-limit]. Put $Y_F=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A_F=Y_\\emptyset\\times_{\\operatorname{Spec}A_\\emptyset}\\operatorname{Spec}A_F$; then $Y^\\wedge=\\varprojlim_FY_F$ with affine transition morphisms [lem-weil-pbc-scheme-over-limit] (applied to $T=Y_\\emptyset\\to\\operatorname{Spec}A_\\emptyset$). Each $Y_F\\to\\operatorname{Spec}A_F$ is proper [lem-weil-pbc-proper-base-change], hence quasi-compact and separated [def-weil-proper-morphism], so $Y_F$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], $\\operatorname{Spec}A_F$ being affine.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'Write A^ = colim A_i with A -> A_i of finite type' (line 1823)"
+   }
+  },
+  {
+   "text": "Descent of the cover to a finite stage. $W^\\wedge\\to Y^\\wedge$ is finite, hence affine, quasi-compact and quasi-separated [def-weil-finite-integral-morphism], and etale, hence locally of finite presentation [def-weil-etale-morphism, def-sbc-locally-finite-presentation]; so it is of finite presentation. By [thm-pd-spreading-out] (1), applied to the system $(Y_F)$ of step 3, there are $F_0$ and a morphism of finite presentation $W_{F_0}\\to Y_{F_0}$ with $W_{F_0}\\times_{Y_{F_0}}Y^\\wedge\\cong W^\\wedge$ over $Y^\\wedge$; $W_{F_0}$ is quasi-compact and quasi-separated, being of finite presentation over the qcqs $Y_{F_0}$. For $F\\supseteq F_0$ let $W_F=W_{F_0}\\times_{\\operatorname{Spec}A_{F_0}}\\operatorname{Spec}A_F$, so $W_F\\to Y_F$ is the base change of $W_{F_0}\\to Y_{F_0}$ to the stage $\\operatorname{Spec}A_F$ of the system $(\\operatorname{Spec}A_F)_{F\\supseteq F_0}$ (limit $\\operatorname{Spec}A^\\wedge$) and its base change to the limit is $W^\\wedge\\to Y^\\wedge$, which is finite and etale. By [lem-weil-pbc-descend-finite] (with $W_{F_0}\\to Y_{F_0}$ locally of finite type) and [lem-weil-pbc-descend-etale] (with it locally of finite presentation) there are $F_1,F_2\\supseteq F_0$ with $W_{F_1}\\to Y_{F_1}$ finite and $W_{F_2}\\to Y_{F_2}$ etale; for $F=F_1\\cup F_2$, $W_F\\to Y_F$ is a base change of both, hence finite and etale [def-weil-pbc-finite-etale-category], and $W_F\\times_{Y_F}Y^\\wedge\\cong W^\\wedge$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'By Limits, Lemma 01ZM there exists an i and a finitely presented morphism U_i -> X_{A_i} whose base change to X^ is V. After increasing i we may assume that U_i -> X_{A_i} is finite and etale (Limits, Lemmas 01ZO and 07RP)' (lines 1824-1829)"
+   }
+  },
+  {
+   "text": "Approximation. Write $F=\\{\\hat a_1,\\ldots,\\hat a_n\\}$, so $A[x_1,\\ldots,x_n]\\to A_F$, $x_k\\mapsto\\hat a_k$, is surjective; its kernel is generated by finitely many $f_1,\\ldots,f_m$ ($A[x_1,\\ldots,x_n]$ is Noetherian), and $A_F=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$. The inclusion $\\iota_F$ says $f_j(\\hat a_1,\\ldots,\\hat a_n)=0$ in $A^\\wedge$. By [lem-weil-pbc-henselian-pair-approximation] (with $N=1$; $(A,I)$ henselian, $A$ a G-ring) there are $a_1,\\ldots,a_n\\in A$ with $f_j(a_1,\\ldots,a_n)=0$ and $\\hat a_k-\\iota(a_k)\\in IA^\\wedge$. Let $\\sigma:A_F\\to A$ be the $A$-algebra map $x_k\\mapsto a_k$ (well defined since the $f_j$ vanish at $a$). Then $\\pi\\circ\\sigma=\\pi^\\wedge\\circ\\iota_F=:\\tau:A_F\\to A/I$: both are $A$-algebra maps, and on the generators $\\pi^\\wedge(\\hat a_k)-\\pi(a_k)=\\pi^\\wedge(\\hat a_k-\\iota(a_k))=0$ because $\\ker\\pi^\\wedge=IA^\\wedge$ and $\\pi^\\wedge\\circ\\iota=\\pi$ [lem-weil-pbc-adic-completion-mod-ideal].",
+   "uses": [
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'Writing A_i = A[x_1,...,x_n]/(f_1,...,f_m) the ring map A_i -> A^ can be reinterpreted as a solution (a_1,...,a_n) in A^ ... By Smoothing Ring Maps, Lemma 0AH5 we can approximate this solution (to order 11 for example) by a solution (b_1,...,b_n) in A. Translating back we find an A-algebra map A_i -> A which gives the same closed point as the original map A_i -> A^ (as 11 > 1)' (lines 1830-1837)"
+   }
+  },
+  {
+   "text": "The lift. Since $Y_F\\times_{\\operatorname{Spec}A_F,\\sigma}\\operatorname{Spec}A=Y\\times_A\\operatorname{Spec}A_F\\times_{A_F}\\operatorname{Spec}A=Y$, the morphism $\\operatorname{id}_Y\\times\\operatorname{Spec}\\sigma:Y\\to Y_F$ is a base change of $\\operatorname{Spec}\\sigma$. Put $U=W_F\\times_{Y_F}Y$. As a base change of the finite etale $W_F\\to Y_F$ (step 4), $U\\to Y$ is finite etale [def-weil-pbc-finite-etale-category].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); 'The base change U -> X of V -> X_{A_i} by this ring map will therefore be a finite etale morphism' (lines 1837-1839)"
+   }
+  },
+  {
+   "text": "Its closed fibre. The composite $Y_0\\to Y\\to Y_F$ is $\\operatorname{id}_Y\\times\\operatorname{Spec}(\\pi\\circ\\sigma)=\\operatorname{id}_Y\\times\\operatorname{Spec}\\tau:Y\\times_A\\operatorname{Spec}(A/I)\\to Y\\times_A\\operatorname{Spec}A_F$, and the composite $Y^\\wedge_0\\to Y^\\wedge\\to Y_F$ is $\\operatorname{id}_Y\\times\\operatorname{Spec}(\\bar\\pi^\\wedge\\circ\\iota_F)$ with $\\bar\\pi^\\wedge:A^\\wedge\\to A^\\wedge/IA^\\wedge$; under the isomorphism $Y^\\wedge_0\\cong Y_0$ of step 1, induced by $A^\\wedge/IA^\\wedge\\cong A/I$ which carries $\\bar\\pi^\\wedge$ to $\\pi^\\wedge$, this is again $\\operatorname{id}_Y\\times\\operatorname{Spec}\\tau$ (step 5). Pasting fibre squares [def-pc-fibre-product], $U\\times_YY_0\\cong W_F\\times_{Y_F}Y_0$ and $W^\\wedge\\times_{Y^\\wedge}Y^\\wedge_0\\cong(W_F\\times_{Y_F}Y^\\wedge)\\times_{Y^\\wedge}Y^\\wedge_0\\cong W_F\\times_{Y_F}Y^\\wedge_0$, both fibre products taken along the same morphism $Y_0\\cong Y^\\wedge_0\\to Y_F$. Hence $U\\times_YY_0\\cong W^\\wedge\\times_{Y^\\wedge}Y^\\wedge_0\\cong V$ as $Y_0$-schemes (step 2).",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840); '... whose special fibre is isomorphic to U_0' (lines 1839-1840), written out"
+   }
+  },
+  {
+   "text": "Conclusion: $U\\to Y$ is a finite etale $Y$-scheme (step 6) with an isomorphism of $Y_0$-schemes $U\\times_YY_0\\cong V$ (step 7), as claimed.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-proper-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-etale-lifting-complete",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-etale",
+  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-henselian-pair-approximation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, proof of Lemma 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'Essential surjectivity when (A, I) is a henselian pair and A is a Noetherian G-ring' (lines 1811-1840)"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "henselian G-ring approximation descends a finite etale cover of the closed fibre of a proper scheme", "results": "RingTheory.Henselian has root lifting only; no scheme approximation theorem", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "loogle", "query": "HenselianRing -> IsEtale -> IsProper", "results": "no results for a scheme finite-etale lifting statement", "date": "2026-10-09", "verdict": "no match"},
-  {"tool": "grep", "query": "rg -n 'approximation|G.Ring|G-ring|henselian.*etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/", "results": "only ring-level Henselian definitions; no G-ring approximation for schemes", "date": "2026-10-09", "verdict": "no match"}
+  {
+   "tool": "leansearch",
+   "query": "henselian G-ring approximation descends a finite etale cover of the closed fibre of a proper scheme",
+   "results": "RingTheory.Henselian has root lifting only; no scheme approximation theorem",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing -> IsEtale -> IsProper",
+   "results": "no results for a scheme finite-etale lifting statement",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'approximation|G.Ring|G-ring|henselian.*etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only ring-level Henselian definitions; no G-ring approximation for schemes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every finite étale cover of the closed fibre of a proper scheme over a henselian pair lifts to a finite étale cover",
+   "results": "IsEtale.of_comp, IsEtale postcomposition instance, Scheme.Etale, IsEtale.instFormallyUnramified, StandardEtalePair.instFormallyEtaleRing: no lifting theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Popescu\\|approximation property\\|ArtinApprox\\|G-ring\\|GRing' -i ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'GRing\\|Artin\\|approximation\\|HenselianFiniteEtale' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "Mathlib: only DirectSum.GRing (graded rings) and Gabriel-Popescu (unrelated); source repository: WeilConjectures/AlgebraicGeometry/HenselianFiniteEtale.lean has Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing (own sorry, the whole equivalence = thm-weil-pbc-finite-etale-lifting) and no G-ring or approximation helper",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-finite-etale-lifting-essential-surjectivity", "date": "2026-10-09"},
- "lean_audit": {"master": {"state": "none", "decls": [], "missing": []}, "slopmaster2": {"state": "none", "decls": [], "missing": []}},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-etale-lifting-approximation",
+  "worker": "stage1",
+  "summary": "Read Stacks pione.tex Lemma 0GS2 (paragraph for a henselian pair with A a Noetherian G-ring, lines 1811-1840), the parallel paragraph of Lemma 0A48, and Smoothing Lemma 0AH5. Made the statement precise (G-ring includes Noetherian; explicit closed fibre and Y_0-isomorphism) and removed lem-weil-pbc-finite-etale-lifting-complete from stmt_deps (it is a proof dependency). Wrote the proof in 8 steps following Stacks: completion (A^ Noetherian, IA^-adically complete, henselian, A^/IA^ = A/I), complete case, A^ as directed union of finite type A-subalgebras A_F with Y^ = lim Y_F, descent of the cover to a finite etale W_F -> Y_F (Limits 01ZM via thm-pd-spreading-out, 01ZO, 07RP), approximation of the solution by 0AH5 with N=1 giving sigma: A_F -> A agreeing with A_F -> A^ modulo I, base change U = W_F x_{Y_F} Y, and identification of the closed fibre by pasting fibre squares. New nodes: def-weil-pbc-g-ring (unsplit), def-weil-pbc-adic-completion (Mathlib AdicCompletion), lem-weil-pbc-adic-completion-mod-ideal (Mathlib, one lemma per clause), lem-weil-pbc-adic-completion-noetherian (0316, unsplit), lem-weil-pbc-complete-pair-henselian (0ALJ, unsplit: Mathlib's IsAdicComplete.henselianRing is the root-lifting definition), lem-weil-pbc-descend-finite (01ZO, unsplit), lem-weil-pbc-henselian-pair-approximation (0AH5, unsplit). Tool uses outside the unit: thm-pd-spreading-out (sk-prop-jacobian-descent), lem-weil-pbc-proper-base-change (sk-thm-br)."
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Statement made precise (G-ring henselian pair, proper Y, lift with a Y_0-isomorphism); eight steps along the Noetherian G-ring paragraph of Stacks 0GS2/0A48: completion (new leaves def-weil-pbc-adic-completion = AdicCompletion and lem-weil-pbc-adic-completion-mod-ideal = isAdicComplete_self LocalRing.lean:61, evalOneₐ_surjective Algebra.lean:193, ker_evalOneₐ_eq_map, evalOneₐ_comp_algebraMap_eq_mk :188, verified; new unsplit nodes lem-weil-pbc-adic-completion-noetherian (0316) and lem-weil-pbc-complete-pair-henselian (0ALJ, needed because the complete-case node assumes henselian)); the complete case; A^ as a directed union of finite type A-subalgebras; descent of the cover to a stage (tool use thm-pd-spreading-out, new node lem-weil-pbc-descend-finite (01ZO), lem-weil-pbc-descend-etale); Artin approximation for henselian pairs (new node lem-weil-pbc-henselian-pair-approximation, Smoothing 0AH5 (2); new definition def-weil-pbc-g-ring, 07GH); the lift by base change along the approximated map; its closed fibre by pasting; conclusion. Worker's corrections: the brief's tag 07QY is the local case, 0AH5 is the pair case; Stacks descends to a stage where the cover is already finite etale and approximates the map, no Jacobian equations; proof_origin fixed (the source is in literature/). Cites lem-weil-pbc-proper-base-change (imported, sk-thm-br; not flagged by review_split)."
+ }
 }
