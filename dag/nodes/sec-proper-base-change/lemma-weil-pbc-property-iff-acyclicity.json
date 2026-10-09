@@ -14,18 +14,23 @@
  ],
  "proof": [
   {
-   "text": "Suppose $\\mathrm{PBC}(f)$ holds. If $I$ is injective among $\\mathbf\nF_r$-module sheaves, then $Rf_*I=f_*I$ in that category; after arbitrary base\nchange, [def-weil-pbc-property] identifies $Rf'_*g'^{-1}I$ with the\ndegree-zero complex $g^{-1}f_*I$, so $R^qf'_*g'^{-1}I=0$ for $q>0$, which is\n$\\mathrm{IA}_r(f)$ by [def-weil-pbc-injective-acyclicity-property].",
+   "text": "The implication $\\mathrm{PBC}(f)\\Rightarrow\\mathrm{IA}(f)$ is the reusable direction [lem-weil-pbc-property-implies-acyclicity]. It applies PBC to an injective $\\mathbf F_r$-module sheaf in degree zero, uses module-to-abelian direct-image acyclicity and exact inverse image, and transfers the resulting vanishing across the specified exchange isomorphism for every base change.",
    "uses": [
-    "def-weil-pbc-property",
-    "def-weil-pbc-injective-acyclicity-property"
+    "lem-weil-pbc-property-implies-acyclicity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B, proof of direction (1) => (2)"
+   }
   },
   {
    "text": "Conversely assume $\\mathrm{IA}(f)$. For an $\\mathbf F_r$-module sheaf $E$,\ntake an injective resolution $E\\to I^\\bullet$. Acyclicity and\n[lemma-weil-pbc-leray-acyclicity] make $f'_*g'^{-1}I^\\bullet$ compute\n$Rf'_*g'^{-1}E$, while $g^{-1}f_*I^\\bullet$ computes $g^{-1}Rf_*E$; the\nunderived proper exchange of [lemma-weil-pbc-proper-underived-exchange] is an\nisomorphism in every degree, and by naturality these maps form an isomorphism\nof complexes, which is the derived exchange morphism of\n[def-weil-pbc-derived-exchange]. For a sheaf $F$ killed by $n$,\ninduction on the number of prime factors of $n$ using the exact sequence of\n[lem-weil-pbc-prime-factor-devissage] and the five-lemma transfer of\n[lemma-weil-pbc-five-lemma-transfer] gives the assertion for $F[n]$. Finally\nevery torsion sheaf is the filtered union of the $F[n]$ by\n[lemma-weil-pbc-torsion-filtered-union], and\n[lemma-weil-pbc-direct-image-filtered-colimit] passes the isomorphism to the\ncolimit, since proper maps are quasi-compact and quasi-separated. This proves\n$\\mathrm{PBC}(f)$ by [def-weil-pbc-property].",
    "uses": [
     "lemma-weil-pbc-leray-acyclicity",
     "lemma-weil-pbc-proper-underived-exchange",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lemma-weil-pbc-derived-exchange-replacement",
     "def-weil-pbc-derived-exchange",
     "lem-weil-pbc-prime-factor-devissage",
     "lemma-weil-pbc-five-lemma-transfer",
@@ -33,33 +38,77 @@
     "lemma-weil-pbc-direct-image-filtered-colimit",
     "def-weil-pbc-property"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B, proof after reduction to prime-torsion coefficients"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-property-implies-acyclicity",
   "def-weil-pbc-property",
-  "def-weil-pbc-injective-acyclicity-property",
   "lemma-weil-pbc-leray-acyclicity",
   "lemma-weil-pbc-proper-underived-exchange",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lemma-weil-pbc-derived-exchange-replacement",
   "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-prime-factor-devissage",
   "lemma-weil-pbc-five-lemma-transfer",
   "lemma-weil-pbc-torsion-filtered-union",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "lemma-weil-pbc-prime-torsion-devissage"
+  "lemma-weil-pbc-direct-image-filtered-colimit"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-property-iff-acyclicity.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence between proper base change for torsion etale sheaves and injective acyclicity",
+   "results": "Only generic proper-morphism stability and unrelated derived declarations; no theorem for etale cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso _ -> CategoryTheory.Limits.IsZero _",
+   "results": "Generic triangle and spectral-object isZero results, but no proper-base-change equivalence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change theorem for torsion etale sheaves and injective acyclicity",
+   "results": "Generic etale morphism stability only; no derived etale direct-image base-change theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'proper base change|HasInjectiveAcyclicity|derivedBaseChange|rightAcyclic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No etale cohomology, derived exchange, HasInjectiveAcyclicity, or rightAcyclic declaration in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
   "two_proofs"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-property-iff-acyclicity",
+  "worker": "stage1",
+  "summary": "Replaced the imported first implication by the reusable PBC-implies-acyclicity node and added Stacks 0A4B source locations to both proof steps. The converse retains the imported detailed route through Leray acyclicity, underived exchange and naturality (with injective-resolution existence and exchange-replacement nodes named), prime-factor and filtered-union dévissage, the five-lemma transfer, and filtered-colimit direct images; its proof dependency union includes every cited node."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lemma-weil-pbc-torsion-filtered-union"
  ],
  "blueprint_kind": "lemma",
  "blueprint_order": 1092,
@@ -123,5 +172,12 @@
    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity"
   ],
   "note": "attached by the lead at review (2026-10-09), found by the opus workers of the target and of prop-weil-pbc-projective-line: the Lean gives only the direction injective acyclicity implies the base-change property, for complexes and any coefficient ring; sorry here"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 20:45: the new node lem-weil-pbc-property-implies-acyclicity is now statement-only (PBC for torsion sheaves implies IA_r after any base change, explicit form). Two steps: the implication via the new node; the converse is the unit paragraph of sk-thm-iff with every node named (Leray acyclicity, underived proper exchange, injective resolutions, prime-factor devissage, five-lemma transfer, torsion filtered unions, direct images of filtered colimits). The unit file dag/units/sk-thm-iff.json is realized by this node (accepted). The review by C1 is a real review."
  }
 }
