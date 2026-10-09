@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-immersion-closed-image-closed-immersion",
+ "kind": "statement",
+ "title": "An immersion with closed image is a closed immersion",
+ "statement": "Let $f:X\\to Y$ be an immersion of schemes, i.e. $f=j\\circ i$ with $i:X\\to U$ a closed immersion and $j:U\\to Y$ an open immersion onto an open subscheme $U\\subseteq Y$ [def-weil-closed-immersion], [def-weil-open-immersion]. Then $f$ is a closed immersion if and only if its image $f(X)$ is a closed subset of $Y$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01IQ (lemma-immersion-when-closed)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an immersion of schemes whose image is closed is a closed immersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.iff_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), IsImmersion.instOfIsClosedImmersion (Morphisms.Immersion), IsClosedImmersion.mk",
+   "date": "2026-10-10",
+   "verdict": "match: IsClosedImmersion.iff_isPreimmersion / of_isPreimmersion, with IsImmersion extends IsPreimmersion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsPreimmersion, IsClosed",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iff_isPreimmersion\\|of_isPreimmersion\\|class IsImmersion\\|isImmersion_iff_exists' in Mathlib/AlgebraicGeometry/Morphisms/{ClosedImmersion,Immersion}.lean",
+   "results": "ClosedImmersion.lean:61 IsClosedImmersion.iff_isPreimmersion (IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)); :65 of_isPreimmersion; Immersion.lean:45 class IsImmersion extends IsPreimmersion (plus isLocallyClosed_range); :155 isImmersion_iff_exists (closed immersion followed by open immersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "how": "specializes in one line: iff_isPreimmersion (ClosedImmersion.lean:61) says IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f); an immersion in the node's sense is AlgebraicGeometry.IsImmersion by isImmersion_iff_exists (Immersion.lean:155, the match recorded on def-weil-closed-immersion), and IsImmersion extends IsPreimmersion (Immersion.lean:45), so the iff reduces to the closedness of the range; the direction used is IsClosedImmersion.of_isPreimmersion (line 65)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proper-immersion-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsClosedImmersion.iff_isPreimmersion (ClosedImmersion.lean:61); Stacks Schemes 01IQ."
+ }
+}

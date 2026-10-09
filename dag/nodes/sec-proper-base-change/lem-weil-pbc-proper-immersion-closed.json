@@ -2,36 +2,97 @@
  "id": "lem-weil-pbc-proper-immersion-closed",
  "kind": "statement",
  "title": "Proper immersions are closed immersions",
- "statement": "A proper [def-weil-pbc-scheme-conventions] morphism which is an immersion is\na closed immersion, and the image of a proper immersion is closed.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes which is proper (separated, of finite type and universally closed, [def-weil-proper-morphism], as in [def-weil-pbc-scheme-conventions]) and an immersion (it factors as a closed immersion $X\\to U$ followed by an open immersion $U\\to Y$, [def-weil-closed-immersion], [def-weil-open-immersion]). Then the image $f(X)$ is a closed subset of $Y$, and $f$ is a closed immersion. (Only universal closedness of $f$ is used.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-weil-pbc-proper-immersion-closed.md",
-  "place": "node lem-weil-pbc-proper-immersion-closed, order 1060"
+  "place": "node lem-weil-pbc-proper-immersion-closed, order 1060; Stacks: Schemes, Lemma Tag 01IQ (lemma-immersion-when-closed) with Morphisms, Definition Tag 01U2; the same deduction in Morphisms, Lemma Tag 01W6 (lemma-image-proper-scheme-closed) and in the proof of Morphisms, lemma-proper-ample-locally-projective"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "Write $f=i\\circ j$ with $j:U\\hookrightarrow W$ an open immersion and\n$i:W\\hookrightarrow Y$ a closed immersion, as in the definition of an\nimmersion of [def-weil-pbc-scheme-conventions]. By\n[lem-weil-pbc-proper-closed-image], $f(U)=i(j(U))$ is closed in $Y$, so\n$j(U)=i^{-1}(f(U))$ is closed in $W$ as the inverse image of a closed subset\nalong the closed immersion $i$; being also open in $W$, $j(U)$ is an\nopen-and-closed subscheme of $W$, and such a subscheme is a closed subscheme\nof $W$. Therefore $U\\hookrightarrow W\\hookrightarrow Y$ is a composite of\nclosed immersions, so $f$ is a closed immersion, and the image of a proper\nimmersion is closed by [lem-weil-pbc-proper-closed-image].",
+   "text": "$f(X)$ is closed. By [def-weil-proper-morphism] $f$ is universally closed: for every $Y'\\to Y$ the base change $X\\times_YY'\\to Y'$ is a closed map. Take $Y'=Y$ with the identity: $X\\times_YY\\cong X$ and the base change is $f$ itself, so $f$ is a closed map of underlying spaces and $f(X)$, the image of the closed set $X$, is closed in $Y$.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-proper-closed-image"
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition Tag 01U2 (definition-universally-closed); Lemma Tag 01W6, last sentence"
+   }
+  },
+  {
+   "text": "$f$ is a closed immersion. By [def-weil-closed-immersion] write $f=j\\circ i$ with $i:X\\to U$ a closed immersion and $j:U\\to Y$ an open immersion onto an open $U\\subseteq Y$ [def-weil-open-immersion]. An immersion whose image is closed is a closed immersion [lem-weil-pbc-immersion-closed-image-closed-immersion], and $f(X)$ is closed by step 1. (Stacks' proof of 01IQ: the ideal sheaf $\\mathcal I\\subseteq\\mathcal O_U$ of $i$ and the unit ideal $\\mathcal O_{Y\\setminus f(X)}$ agree on $U\\setminus f(X)$ and glue to a quasi-coherent ideal $\\mathcal J\\subseteq\\mathcal O_Y$ whose closed subscheme is $X$.)",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01IQ (lemma-immersion-when-closed) and its proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-proper-closed-image"
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-weil-pbc-proper-immersion-closed.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01IQ and its proof; Morphisms (morphisms.tex), Definition Tag 01U2 and Lemma Tag 01W6"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an immersion of schemes which is proper (universally closed) is a closed immersion",
+   "results": "IsImmersion.instOfIsClosedImmersion, IsClosedImmersion.of_isPreimmersion, instUniversallyClosedOfIsClosedImmersion, IsClosedImmersion.mk, IsClosedImmersion.instIsPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.*)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; generalization by composition: of_isPreimmersion with the closed range of a universally closed map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a proper immersion of schemes is a closed immersion",
+   "results": "IsClosedImmersion.of_isPreimmersion, IsClosedImmersion.iff_isPreimmersion, IsClosedImmersion.instIsPreimmersion, IsImmersion.instOfIsClosedImmersion, IsClosedImmersion",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; same one-line composition"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.UniversallyClosed",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no declaration mentions all three"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.UniversallyClosed",
+   "results": "AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion only (the converse direction)",
+   "date": "2026-10-10",
+   "verdict": "no declaration concluding IsClosedImmersion from UniversallyClosed"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln IsImmersion Mathlib/ | xargs grep -ln 'UniversallyClosed\\|IsProper'; grep -rn 'of_isPreimmersion\\|isClosedMap.isClosed_range' Mathlib/AlgebraicGeometry",
+   "results": "no Mathlib file mentions IsImmersion together with UniversallyClosed or IsProper; the pattern `.of_isPreimmersion _ f.isClosedMap.isClosed_range` is used inline in ValuativeCriterion.lean:251 (for the diagonal); Scheme.Hom.isClosedMap (UniversallyClosed.lean:49); class IsProper extends IsSeparated, UniversallyClosed, LocallyOfFiniteType (Proper.lean:42); class IsImmersion extends IsPreimmersion (Immersion.lean:45)",
+   "date": "2026-10-10",
+   "verdict": "match by one-line composition (below)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "how": "specializes in one line, one Mathlib lemma per clause: for f with [IsProper f] [IsImmersion f], the closed image is `f.isClosedMap.isClosed_range` (Scheme.Hom.isClosedMap, Morphisms/UniversallyClosed.lean:49, with UniversallyClosed f a parent of IsProper f, Proper.lean:42), and the closed immersion is `IsClosedImmersion.of_isPreimmersion f f.isClosedMap.isClosed_range` (ClosedImmersion.lean:65, IsPreimmersion f a parent of IsImmersion f, Immersion.lean:45). The node's immersion (closed immersion followed by open immersion) is IsImmersion by isImmersion_iff_exists (Immersion.lean:155), its proper is IsProper (match of def-weil-proper-morphism). The source repository has the same as AlgebraicGeometry.IsClosedImmersion.of_universallyClosed (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:100, not Mathlib)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +115,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-chow"
+ "unit": "sk-thm-chow",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proper-immersion-closed",
+  "worker": "stage1",
+  "summary": "Decided as a Mathlib leaf: no single Mathlib declaration, but IsClosedImmersion.of_isPreimmersion f f.isClosedMap.isClosed_range gives both clauses in one line from [IsProper f] [IsImmersion f]. Statement made self-contained (proper and immersion spelled out with their definition nodes; stmt_deps add def-weil-proper-morphism, def-weil-closed-immersion, def-weil-open-immersion); meaning unchanged. The imported proof was rewritten: it factored the immersion as an open immersion followed by a closed immersion, which is not the definition fixed in def-weil-closed-immersion / def-weil-pbc-scheme-conventions (closed immersion followed by open immersion; the other order is not equivalent in general, Stacks 01QW), and it used lem-weil-pbc-proper-closed-image of unit sk-thm-br, which sk-thm-chow does not cite. New proof follows Stacks: closed image from universal closedness (Morphisms 01U2, base change along the identity; elementary) and Schemes 01IQ, now the new Mathlib-leaf node lem-weil-pbc-immersion-closed-image-closed-immersion."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf (two lemmas): IsClosedImmersion.of_isPreimmersion (ClosedImmersion.lean:65) with Scheme.Hom.isClosedMap (UniversallyClosed.lean:49); IsProper extends UniversallyClosed (Proper.lean:42), IsImmersion extends IsPreimmersion (Immersion.lean:45), isImmersion_iff_exists (:155); lines verified. Statement made self-contained (definitions spelled out); the imported proof had the factorization in the wrong order and used a node off the route. Two-step proof kept."
+ }
 }
