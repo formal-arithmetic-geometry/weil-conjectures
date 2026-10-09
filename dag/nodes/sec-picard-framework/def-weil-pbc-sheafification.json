@@ -1,0 +1,43 @@
+{
+ "id": "def-weil-pbc-sheafification",
+ "kind": "definition",
+ "title": "Sheafification on a site",
+ "statement": "Let $\\mathcal C$ be a site and let $\\mathcal A$ be one of the categories of sets, abelian groups, rings or modules over a fixed ring (more generally a category of values in which sheafification exists). For a presheaf $\\mathcal F:\\mathcal C^{\\mathrm{op}}\\to\\mathcal A$, its *sheafification* is a sheaf $\\mathcal F^\\#$ on $\\mathcal C$ with values in $\\mathcal A$ together with a morphism of presheaves $\\mathcal F\\to\\mathcal F^\\#$ through which every morphism from $\\mathcal F$ to a sheaf factors uniquely; equivalently, $\\mathcal F\\mapsto\\mathcal F^\\#$ is a left adjoint to the inclusion of sheaves into presheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Project, Sites and Sheaves, Section sites-section-sheafification (Tag 00W1), Proposition sites-proposition-sheafification-adjoint (Tag 00WH)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class HasSheafify\\|def presheafToSheaf\\|def sheafificationAdjunction' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Sheafification.lean; grep -n 'HasSheafify J D' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LeftExact.lean; grep -n 'hasSheafifyEssentiallySmallSite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Equivalence.lean",
+   "results": "`CategoryTheory.presheafToSheaf J A` (Sheafification.lean:73) with `sheafificationAdjunction J A : presheafToSheaf J A ⊣ sheafToPresheaf J A` (line 80) under `[HasWeakSheafify J A]`; existence: `HasSheafify J D` for concrete categories D whose forgetful functor preserves the relevant limits and filtered colimits (LeftExact.lean:308, via the plus construction), and `hasSheafifyEssentiallySmallSite` (Equivalence.lean:216) for essentially small sites such as `Y.ProEt` (essentially small in u+1)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.presheafToSheaf",
+  "file": "Mathlib/CategoryTheory/Sites/Sheafification.lean",
+  "how": "exact: `presheafToSheaf J A` with the adjunction `sheafificationAdjunction J A`; for `J = Scheme.ProEt.topology Y` the values are taken in the universe u+1 (`Type (u+1)`, `AddCommGrpCat.{u+1}`, `RingCat.{u+1}`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-proetale-site",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

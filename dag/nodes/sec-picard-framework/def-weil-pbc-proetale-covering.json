@@ -1,0 +1,47 @@
+{
+ "id": "def-weil-pbc-proetale-covering",
+ "kind": "definition",
+ "title": "Pro-etale covering of a scheme",
+ "statement": "Let $U$ be a scheme [def-pc-scheme]. A family of morphisms of schemes $\\{f_i:U_i\\to U\\}_{i\\in I}$ is a *pro-etale covering* if every $f_i$ is weakly etale [def-weil-pbc-weakly-etale-morphism] and the family is an fpqc covering [def-weil-pbc-fpqc-covering]: for every affine open $V\\subset U$ there are finitely many indices $i_1,\\dots,i_n$ and affine opens $V_j\\subset U_{i_j}$ with $\\bigcup_j f_{i_j}(V_j)=V$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt-Scholze, The pro-etale topology for schemes, Definition 4.1.1, p. 27 (covers of X_proet are the families that are covers in the fpqc topology)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-weakly-etale-morphism",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def proetalePrecoverage' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; grep -n 'proetalePrecoverage_le_fpqcPrecoverage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "results": "`AlgebraicGeometry.Scheme.proetalePrecoverage` (Proetale.lean:52) = `propQCPrecoverage @WeaklyEtale` = `qcPrecoverage ⊓ Scheme.precoverage @WeaklyEtale`, docstring 'fpqc covers of weakly étale morphisms [Definition 4.1.1][proetale2015]'; `proetalePrecoverage_le_fpqcPrecoverage`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.proetalePrecoverage",
+  "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+  "how": "exact: quasi-compact (`QuasiCompactCover`), jointly surjective families of weakly etale morphisms; since weakly etale implies flat this is the intersection of `fpqcPrecoverage` with `Scheme.precoverage @WeaklyEtale`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-proetale-site",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

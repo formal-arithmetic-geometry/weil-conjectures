@@ -2,23 +2,51 @@
  "id": "def-weil-pbc-proetale-site",
  "kind": "definition",
  "title": "Small pro-etale site",
- "statement": "Fix a scheme $Y$. Choose Grothendieck universes $\\mathcal U\\in\\mathcal V$ and\na $\\mathcal V$-small skeleton, as required by the size convention\n[def-weil-size-convention], and form all categories below inside $\\mathcal\nV$. The site $Y_{\\mathrm{proet}}$ has as objects the $\\mathcal U$-bounded\nweakly etale maps $U\\to Y$, where a weakly etale map\n[def-weil-scheme-morphism-properties] is flat with flat diagonal. A family\n$\\{U_i\\to U\\}_{i\\in I}$ is a covering if every arrow is weakly etale and, for\nevery affine open $V\\subset U$, finitely many affine opens $V_j\\subset\nU_{i_j}$ have images covering $V$.\n\nFor a commutative ring $A$, let $A_Y$ be the sheafification of the constant\npresheaf $U\\mapsto A$ on $Y_{\\mathrm{proet}}$. Let\n$\\Sh(Y_{\\mathrm{proet}},A)$ be the abelian category of sheaves of\n$A_Y$-modules, and set\n\n$$\n D(Y_{\\mathrm{proet}},A)=D\\bigl(\\Sh(Y_{\\mathrm{proet}},A)\\bigr),\n$$\n\nusing the derived category of cochain complexes\n[def-weil-abstract-derived-category].",
+ "statement": "Fix a scheme $Y$ [def-pc-scheme]. Choose Grothendieck universes $\\mathcal U\\in\\mathcal V$ and\na $\\mathcal V$-small skeleton, as required by the size convention\n[def-weil-size-convention], and form all categories below inside $\\mathcal\nV$. The site $Y_{\\mathrm{proet}}$ [def-weil-pbc-small-proetale-site] has as objects the $\\mathcal U$-bounded\nweakly etale maps $U\\to Y$, where a weakly etale map\n[def-weil-pbc-weakly-etale-morphism] is flat with flat diagonal, and as morphisms the $Y$-morphisms. A family\n$\\{U_i\\to U\\}_{i\\in I}$ is a covering if it is a pro-etale covering [def-weil-pbc-proetale-covering], i.e. an fpqc covering [def-weil-pbc-fpqc-covering]: every arrow is weakly etale and, for\nevery affine open $V\\subset U$, finitely many affine opens $V_j\\subset\nU_{i_j}$ have images whose union is $V$.\n\nFor a commutative ring $A$, let $A_Y$ be the constant sheaf of rings [def-weil-pbc-constant-sheaf], the sheafification [def-weil-pbc-sheafification] of the constant\npresheaf $U\\mapsto A$ on $Y_{\\mathrm{proet}}$. Let\n$\\Sh(Y_{\\mathrm{proet}},A)$ be the abelian category of sheaves of\n$A_Y$-modules [def-weil-sheaf-of-modules-category], and set\n\n$$\n D(Y_{\\mathrm{proet}},A)=D\\bigl(\\Sh(Y_{\\mathrm{proet}},A)\\bigr),\n$$\n\nusing the derived category of cochain complexes\n[def-weil-abstract-derived-category].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/def-weil-pbc-proetale-site.md",
   "place": "node def-weil-pbc-proetale-site, order 662"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-weil-size-convention",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-pbc-weakly-etale-morphism",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sed -n 1,260p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; grep -n 'class WeaklyEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "results": "`Scheme.ProEt`, `Scheme.ProEt.topology`, `Scheme.proetalePrecoverage`, `WeaklyEtale`: the site part of the item (first paragraph) is in Mathlib exactly (see def-weil-pbc-small-proetale-site)",
+   "date": "2026-10-09",
+   "verdict": "match for the site part"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; grep -rn 'def constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 1,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "results": "AlgebraicGeometry/Sites/ConstantSheaf.lean defines only `continuousMapPresheaf` (U ↦ C(U,T)) and its fpqc sheaf property, not the constant sheaf; the constant sheaf is `CategoryTheory.constantSheaf` (CategoryTheory/Sites/ConstantSheaf.lean:66). ElladicCohomology.lean works with `Sheaf (ProEt.topology X) Ab.{u+1}` and `EssentiallySmall.{u+1} X.ProEt`; Mathlib has no declaration for sheaves of A_Y-modules on the pro-etale site or for D(Y_proet, A)",
+   "date": "2026-10-09",
+   "verdict": "no match for the whole; generalization: the whole is the composite `DerivedCategory (SheafOfModules.{u+1} ((constantSheaf (Scheme.ProEt.topology Y) RingCat.{u+1}).obj (RingCat.of (ULift A))))` of Mathlib declarations, the last step resting on def-weil-abstract-derived-category"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean -l",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean only",
+   "date": "2026-10-09",
+   "verdict": "no match for D(Y_proet, A)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form"
@@ -54,5 +82,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-proetale-site",
+  "worker": "stage1",
+  "summary": "Checked against Bhatt-Scholze, The pro-etale topology for schemes (literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf), Definition 4.1.1 and Remark 4.1.2 (p. 27), Lemma 4.1.7 (p. 27), Example 4.2.10 (p. 30, constant sheaf), and against Mathlib. Split by one level into its notions: weakly etale morphism, fpqc covering, pro-etale covering, the site Y_proet, sheafification, constant sheaf (six new definition nodes, all Mathlib leaves: WeaklyEtale, Scheme.fpqcPrecoverage, Scheme.proetalePrecoverage, Scheme.ProEt with ProEt.topology, presheafToSheaf, CategoryTheory.constantSheaf), plus the existing leaves def-weil-sheaf-of-modules-category (SheafOfModules) and def-pc-scheme, the size convention, and def-weil-abstract-derived-category (unsplit; Mathlib's DerivedCategory). The covering condition was corrected from 'images covering V' to 'images whose union is V' (B-S Def. 4.1.1, Stacks 022B: the images of the affines must be exactly V, matching Mathlib's IsCompactOpenCovered). Removed stmt_deps def-weil-scheme-morphism-properties and def-weil-pbc-scheme-conventions (multi-definition convention nodes; weakly etale and affine opens are now def-weil-pbc-weakly-etale-morphism and def-pc-scheme). The universe bound of the blueprint is B-S Remark 4.1.2 with kappa the inaccessible cardinal of U, and is Mathlib's Scheme.{u}. Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean is not the constant sheaf (it is U -> C(U,T)); the constant sheaf is CategoryTheory.constantSheaf. The item as a whole is a composite of Mathlib declarations (one line, see mathlib_searches) but is not recorded as a leaf because its last ingredient def-weil-abstract-derived-category is still unsplit."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

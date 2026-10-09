@@ -1,0 +1,46 @@
+{
+ "id": "def-weil-pbc-fpqc-covering",
+ "kind": "definition",
+ "title": "fpqc covering of a scheme",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. A family of morphisms of schemes $\\{f_i:T_i\\to T\\}_{i\\in I}$ is an *fpqc covering* of $T$ if every $f_i$ is flat [def-weil-scheme-morphism-properties] and for every affine open $V\\subset T$ there are $n\\ge0$, indices $i_1,\\dots,i_n\\in I$ and affine opens $V_j\\subset T_{i_j}$ with $\\bigcup_{j=1}^n f_{i_j}(V_j)=V$. (Then $T=\\bigcup_i f_i(T_i)$, since $T$ is covered by affine opens.)",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Stacks Project, Topologies, Definition topologies-definition-fpqc-covering (Tag 022B); used in Bhatt-Scholze, The pro-etale topology for schemes, Definition 4.1.1, p. 27 (literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def fpqcPrecoverage\\|abbrev fpqcTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; grep -n 'qcPrecoverage\\|propQCPrecoverage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; grep -n 'class QuasiCompactCover' -A3 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; grep -n 'def IsCompactOpenCovered' -A5 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sets/CompactOpenCovered.lean",
+   "results": "`AlgebraicGeometry.Scheme.fpqcPrecoverage` (Fpqc.lean:60) = `propQCPrecoverage @Flat` = `qcPrecoverage ⊓ Scheme.precoverage @Flat` (QuasiCompact.lean:112): jointly surjective families of flat morphisms that are `QuasiCompactCover`s, i.e. every affine open U of the target is `IsCompactOpenCovered`: a finite union of images of quasi-compact opens of the sources equals U",
+   "date": "2026-10-09",
+   "verdict": "match: Mathlib uses quasi-compact opens where Stacks uses affine opens; equivalent because an affine open is quasi-compact and a quasi-compact open is a finite union of affine opens; joint surjectivity, which Mathlib also requires, follows from the affine condition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.fpqcPrecoverage",
+  "file": "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+  "how": "exact: a presieve is in `fpqcPrecoverage T` iff its arrows are flat, jointly surjective and form a `QuasiCompactCover` (Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean:38), whose condition with quasi-compact opens is equivalent to the Stacks condition with affine opens"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-proetale-site",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

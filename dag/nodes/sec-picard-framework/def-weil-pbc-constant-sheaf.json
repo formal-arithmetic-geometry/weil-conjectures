@@ -1,0 +1,45 @@
+{
+ "id": "def-weil-pbc-constant-sheaf",
+ "kind": "definition",
+ "title": "Constant sheaf on a site",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal A$ a category of values in which sheafification exists (sets, abelian groups, rings). For an object $E$ of $\\mathcal A$ the *constant sheaf* $\\underline E$ on $\\mathcal C$ is the sheafification [def-weil-pbc-sheafification] of the constant presheaf $U\\mapsto E$, all of whose restriction maps are the identity of $E$. For a commutative ring $A$ the constant sheaf of rings $\\underline A$ is a sheaf of commutative rings; on $Y_{\\mathrm{proet}}$ it is written $A_Y$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Project, Sites and Sheaves, Example sites-example-constant-sheaf (Tag 0H7J); Bhatt-Scholze, The pro-etale topology for schemes, Example 4.2.10, p. 30 (constant sheaf on X_proet; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 1,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+   "results": "`CategoryTheory.constantSheaf J D : D ⥤ Sheaf J D := Functor.const Cᵒᵖ ⋙ presheafToSheaf J D` (CategoryTheory/Sites/ConstantSheaf.lean:66), with `constantSheafAdj` (left adjoint to sections over a terminal object). Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean is NOT this: it defines `continuousMapPresheaf T` (U ↦ C(U,T)) and proves it an fpqc sheaf; its docstring leaves 'this is the constant sheaf when T is discrete' as a TODO (that identification is B-S Lemma 4.2.12)",
+   "date": "2026-10-09",
+   "verdict": "match: `CategoryTheory.constantSheaf`; the AlgebraicGeometry file does not give the constant sheaf"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.constantSheaf",
+  "file": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+  "how": "exact: `(constantSheaf J D).obj E`; for A_Y take `J = Scheme.ProEt.topology Y`, `D = RingCat.{u+1}` (or `CommRingCat.{u+1}`) and `E = RingCat.of (ULift A)`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-proetale-site",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
