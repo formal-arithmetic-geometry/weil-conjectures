@@ -2,50 +2,178 @@
  "id": "lem-weil-pbc-derived-exchange-termwise",
  "kind": "statement",
  "title": "The termwise construction of the derived exchange morphism",
- "statement": "Let $\\square$ be a cartesian square\n[def-weil-pbc-cartesian-square] and let $K\\in\\Dplus(X_{\\Et})$. If\n$K\\to I$ is a K-injective resolution\n[def-weil-pbc-kinjective-resolutions] of $K$ and $g'^{-1}I\\to J$ is a\nK-injective resolution of $g'^{-1}I$ on $X'$, then the morphism\n\n$$\n g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n$$\n\nof the derived category [def-weil-pbc-derived-categories] obtained by\napplying the underived exchange morphism\n[def-weil-pbc-underived-exchange] $\\Ex^0_{\\square,I}$ term by term\nto $I$ and comparing $g'^{-1}I$ with $J$ is the derived exchange morphism\n$\\Ex_{\\square,K}$ of [def-weil-pbc-derived-exchange].",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square],\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\nwith its natural isomorphism $\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ of the sheaf-level inverse images [def-weil-pbc-inverse-image] (adjunctions $u^{-1}\\dashv u_*$ with unit $\\eta_u$, counit $\\varepsilon_u$). Write $Q$ for the localization functors from cochain complexes to the derived categories [def-weil-abstract-derived-category], [def-weil-pbc-derived-categories]; for an edge $u$ of the square write $u^{-1}$ also for the inverse image on derived categories and $\\varphi^u_P:u^{-1}(QP)\\xrightarrow{\\sim}Q(u^{-1}P)$, natural in complexes $P$, for its comparison with the termwise inverse image [def-weil-pbc-derived-inverse-image]; and $Ru_*L=Q(u_*I(L))$, with chosen K-injective resolution $\\rho_L:L\\xrightarrow{\\sim}QI(L)$, for the derived direct image [def-weil-pbc-direct-image], on morphisms as in [lem-weil-pbc-derived-direct-image-triangulated]. For $L\\in\\Dplus(U_{\\Et})$ ($u:U\\to V$ one of $f,f'$), a K-injective complex $P$ on $U_{\\Et}$ [def-weil-pbc-kinjective-resolutions] and an isomorphism $t:L\\xrightarrow{\\sim}QP$ in $D(U_{\\Et})$, let $h:P\\to I(L)$ be the unique homotopy class of morphisms of complexes with $Q(h)\\circ t=\\rho_L$ [lem-weil-pbc-kinjective-hom-derived]; $h$ is a homotopy equivalence and\n$$\n \\chi_{(P,t)}:=Q(u_*h):Q(u_*P)\\xrightarrow{\\ \\sim\\ }Ru_*L .\n$$\nNow let $K\\in\\Dplus(X_{\\Et})$ and let $(I,s)$ be a K-injective resolution of $K$: a K-injective complex $I$ of abelian sheaves on $X_{\\Et}$ and an isomorphism $s:K\\xrightarrow{\\sim}QI$ in $D(X_{\\Et})$ (the class of a quasi-isomorphism $K\\to I$ when $K$ is given as a complex). Let $j:g'^{-1}I\\to J$ be a K-injective resolution of the termwise complex $g'^{-1}I$ on $X'_{\\Et}$. Then:\n(a) the underived exchange morphisms [def-weil-pbc-underived-exchange] of the terms form a morphism of complexes $\\Ex^0_{\\square,I}=(\\Ex^0_{\\square,I^r})_r:g^{-1}f_*I\\to f'_*g'^{-1}I$; put $e:=f'_*(j)\\circ\\Ex^0_{\\square,I}:g^{-1}f_*I\\to f'_*J$;\n(b) with the isomorphisms\n$$\n \\sigma_{\\rm src}:=g^{-1}(\\chi_{(I,s)})\\circ(\\varphi^g_{f_*I})^{-1}:Q(g^{-1}f_*I)\\xrightarrow{\\sim}g^{-1}Rf_*K,\\qquad\n \\sigma_{\\rm tgt}:=\\chi_{(J,t)}:Q(f'_*J)\\xrightarrow{\\sim}Rf'_*g'^{-1}K,\\quad t:=Q(j)\\circ\\varphi^{g'}_I\\circ g'^{-1}(s),\n$$\nthe derived exchange morphism $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ of [def-weil-pbc-derived-exchange] satisfies\n$$\n \\Ex_{\\square,K}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q(e).\n$$\nThat is, the morphism obtained by applying $\\Ex^0_\\square$ term by term to $I$ and comparing $g'^{-1}I$ with $J$ is $\\Ex_{\\square,K}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-derived-exchange-termwise.md",
   "place": "node lem-weil-pbc-derived-exchange-termwise, order 1041"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-hom-derived",
   "def-weil-pbc-underived-exchange",
   "def-weil-pbc-derived-exchange"
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-derived-exchange] the morphism $\\Ex_{\\square,K}$ is\nthe mate, under the derived adjunction $f'^{-1}\\dashv Rf'_*$, of the\ncomposite $g'^{-1}\\varepsilon_f\\circ\\theta_\\square$ of the identification\n$\\theta_\\square$ of [def-weil-pbc-cartesian-square] with the counit\nof the adjunction of [def-weil-pbc-inverse-image]. The termwise construction\napplies to $I$ the mate of the same composite in the underived adjunction\n$f'^{-1}\\dashv f'_*$, namely the underived exchange morphism\n$\\Ex^0_{\\square,I}$ of [def-weil-pbc-underived-exchange]; its source\n$g^{-1}Rf_*K$ is computed by $g^{-1}I$ and its target $Rf'_*g'^{-1}K$ by the\nK-injective resolution $J$ of $g'^{-1}I$, both resolutions existing by\n[prop-weil-pbc-kinjective-resolutions-exist] and being K-injective in the\nsense of [def-weil-pbc-kinjective-resolutions]. Since the derived direct\nimage of [def-weil-pbc-direct-image] is computed by K-injective resolutions,\nforming mates commutes with the passage from the underived adjunction to the\nderived one, so the two procedures produce the same morphism of the derived\ncategory, namely $\\Ex_{\\square,K}$ as defined in\n[def-weil-pbc-derived-exchange].",
+   "text": "(Representatives of the derived direct image.) Let $u:U\\to V$ be $f$ or $f'$, $L\\in\\Dplus(U_{\\Et})$, $P$ K-injective and $t:L\\xrightarrow{\\sim}QP$. By [lem-weil-pbc-kinjective-hom-derived] ($I(L)$ being K-injective) the morphism $\\rho_L t^{-1}:QP\\to QI(L)$ is $Q(h)$ for a unique homotopy class $h:P\\to I(L)$, and likewise $t\\rho_L^{-1}=Q(h')$ for a unique $h':I(L)\\to P$; $Q(h'h)=\\mathrm{id}=Q(\\mathrm{id}_P)$ and $Q(hh')=Q(\\mathrm{id})$, so by the injectivity in that node $h'h\\simeq\\mathrm{id}$, $hh'\\simeq\\mathrm{id}$. The termwise functor $u_*$ carries homotopic maps to homotopic maps ([lem-weil-pbc-termwise-adjunction-homotopy] (b), for $u^{-1}\\dashv u_*$ of [def-weil-pbc-inverse-image]), so $u_*h$ is a homotopy equivalence and $\\chi_{(P,t)}=Q(u_*h)$ is an isomorphism; for $(P,t)=(I(L),\\rho_L)$, $h=\\mathrm{id}$ and $\\chi=\\mathrm{id}$. Naturality: let $a:L\\to L'$ in $\\Dplus(U_{\\Et})$, $(P,t)$, $(P',t')$ as above, and $\\tilde a:P\\to P'$ the unique homotopy class with $Q(\\tilde a)t=t'a$ [lem-weil-pbc-kinjective-hom-derived]. By the definition of $Ru_*$ on morphisms [def-weil-pbc-direct-image], [lem-weil-pbc-derived-direct-image-triangulated], $Ru_*(a)=Q(u_*\\hat a)$ with $\\hat a:I(L)\\to I(L')$ the unique class with $Q(\\hat a)\\rho_L=\\rho_{L'}a$. Then $Q(\\hat ah)t=\\rho_{L'}a=Q(h_{P'}\\tilde a)t$ ($h_{P'}$ the class $h$ for $(P',t')$), so $\\hat ah\\simeq h_{P'}\\tilde a$ by uniqueness, and applying $u_*$ and $Q$:\n$$\n Ru_*(a)\\circ\\chi_{(P,t)}=\\chi_{(P',t')}\\circ Q(u_*\\tilde a).\\qquad(\\ast)\n$$",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570), Lemma 070I (lemma-K-injective), Lemma 070K"
+   }
+  },
+  {
+   "text": "(The counit $\\varepsilon^D_f$ on a K-injective resolution.) Claim: $\\varepsilon^D_{f,K}\\circ f^{-1}(\\chi_{(I,s)})=s^{-1}\\circ Q(\\varepsilon_{f,I})\\circ\\varphi^f_{f_*I}$, where $\\varepsilon_{f,I}=(\\varepsilon_{f,I^r})_r$ and $\\varepsilon^D_f$ is the counit of $f^{-1}\\dashv Rf_*$ [prop-weil-pbc-derived-inverse-image-adjunction]. Put $P=I(K)$, bounded below and K-injective. Property (1) of [prop-weil-pbc-derived-inverse-image-adjunction] says, with the identification of $Q(f_*P)$ with $Rf_*(QP)$ used there, which is $\\chi_{(P,\\mathrm{id})}$ of step 1: $\\varepsilon^D_{f,QP}\\circ f^{-1}(\\chi_{(P,\\mathrm{id})})=Q(\\varepsilon_{f,P})\\circ\\varphi^f_{f_*P}$. Naturality of $\\varepsilon^D_f$ along $\\rho_K:K\\to QP$ gives $\\rho_K\\varepsilon^D_{f,K}=\\varepsilon^D_{f,QP}\\circ f^{-1}Rf_*(\\rho_K)$, and $(\\ast)$ for $a=\\rho_K$, $(P,\\rho_K)$, $(P,\\mathrm{id})$, $\\tilde a=\\mathrm{id}$ gives $Rf_*(\\rho_K)=Rf_*(\\rho_K)\\chi_{(P,\\rho_K)}=\\chi_{(P,\\mathrm{id})}$. Hence $\\varepsilon^D_{f,K}=\\rho_K^{-1}Q(\\varepsilon_{f,P})\\varphi^f_{f_*P}$. For general $(I,s)$ let $h:I\\to P$ be as in step 1 ($Q(h)s=\\rho_K$, $\\chi_{(I,s)}=Q(f_*h)$). By naturality of $\\varphi^f$ [def-weil-pbc-derived-inverse-image] and of the termwise counit [lem-weil-pbc-termwise-adjunction-homotopy] (a), $\\varphi^f_{f_*P}\\circ f^{-1}Q(f_*h)=Q(f^{-1}f_*h)\\varphi^f_{f_*I}$ and $\\varepsilon_{f,P}\\circ f^{-1}f_*h=h\\circ\\varepsilon_{f,I}$; so $\\varepsilon^D_{f,K}f^{-1}(\\chi_{(I,s)})=\\rho_K^{-1}Q(h)Q(\\varepsilon_{f,I})\\varphi^f_{f_*I}=s^{-1}Q(\\varepsilon_{f,I})\\varphi^f_{f_*I}$.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570), Lemma 070I (lemma-K-injective), Lemma 070K"
+   }
+  },
+  {
+   "text": "(The unit $\\eta^D_{f'}$ on a bounded below complex.) Let $N$ be a bounded below complex on $Y'_{\\Et}$. A K-injective resolution $r:f'^{-1}N\\to J_1$ exists: with $L=f'^{-1}(QN)$ and its chosen resolution $\\rho_L$ [def-weil-pbc-direct-image], $\\rho_L(\\varphi^{f'}_N)^{-1}=Q(r)$ for a unique class $r:f'^{-1}N\\to I(L)$ [lem-weil-pbc-kinjective-hom-derived], and $r$ is a quasi-isomorphism because $Q(r)$ is an isomorphism (the cohomology functors factor through $Q$ [def-weil-abstract-derived-category]). For any such $r$, put $t_1=Q(r)\\varphi^{f'}_N:f'^{-1}(QN)\\xrightarrow{\\sim}QJ_1$. Property (2) of [prop-weil-pbc-derived-inverse-image-adjunction], with its identification $Rf'_*f'^{-1}(QN)\\cong Q(f'_*J_1)$, which is $\\chi_{(J_1,t_1)}$ of step 1 (for $J_1=I(L)$, $t_1=\\rho_L$ it is the identity; for another $J_1$ the comparison $c$ with $cr=r'$ there is the inverse of the class $h$ of step 1), reads\n$$\n \\eta^D_{f',QN}=\\chi_{(J_1,t_1)}\\circ Q\\bigl(f'_*(r)\\circ\\eta_{f',N}\\bigr),\\qquad \\eta_{f',N}=(\\eta_{f',N^r})_r .\n$$",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570), Lemma 070I (lemma-K-injective), Lemma 070K"
+   }
+  },
+  {
+   "text": "(The derived square isomorphism on complexes.) By [def-weil-pbc-derived-square-iso], $\\theta^D_\\square$ is the restriction to $\\Dplus$ of a natural isomorphism $\\theta^D_{\\square,\\mathrm{unb}}$ on $D$, and for every complex $M$ on $Y_{\\Et}$\n$$\n \\theta^D_{\\square,\\mathrm{unb},QM}=\\beta_2^{-1}\\circ Q(\\theta_{\\square,M})\\circ\\beta_1,\\quad \\beta_1=\\varphi^{f'}_{g^{-1}M}\\circ f'^{-1}(\\varphi^g_M),\\ \\beta_2=\\varphi^{g'}_{f^{-1}M}\\circ g'^{-1}(\\varphi^f_M),\n$$\nwith $\\theta_{\\square,M}=(\\theta_{\\square,M^r})_r$ (the isomorphisms $\\beta_u$ of that node are the comparison isomorphisms $\\varphi^u$ of [def-weil-pbc-derived-inverse-image], both being those of [lem-sf-exact-functor-derived-triangulated]).",
+   "uses": [
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0736 (lemma-base-change-map-flat-case, line 2427: the base change map built from injective resolutions $\\mathcal F\\to\\mathcal I$, $g'^*\\mathcal F\\to\\mathcal J$) and Remark 07A7 (remark-base-change, line 4033: the base change map as the adjoint of $L(g')^*$ of the counit); Stacks uses the two interchangeably (etale-cohomology.tex line 7600) without comparing them; the comparison is written here by an agent"
+   }
+  },
+  {
+   "text": "(Part (a): the termwise exchange is a morphism of complexes.) By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square,F}$ is the transpose under $f'^{-1}\\dashv f'_*$ of $c_F:=g'^{-1}(\\varepsilon_{f,F})\\circ\\theta_{\\square,f_*F}$, i.e. $\\Ex^0_{\\square,F}=f'_*(c_F)\\circ\\eta_{f',g^{-1}f_*F}$ (the hom bijection of the adjunction [def-weil-pbc-inverse-image]). For the complex $I$ put $N=g^{-1}f_*I$ and $c=(c_{I^r})_r:f'^{-1}N\\to g'^{-1}I$; $c$ commutes with the differentials because $\\theta_\\square$ [def-weil-pbc-cartesian-square] and $\\varepsilon_f$ are natural and $g'^{-1}$ is a functor, and $\\eta_{f',N}$ is a morphism of complexes [lem-weil-pbc-termwise-adjunction-homotopy] (a). So $\\Ex^0_{\\square,I}=f'_*(c)\\circ\\eta_{f',N}$ is a morphism of complexes, and so is $e=f'_*(j)\\circ f'_*(c)\\circ\\eta_{f',N}=f'_*(jc)\\circ\\eta_{f',N}$.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0736 (lemma-base-change-map-flat-case, line 2427: the base change map built from injective resolutions $\\mathcal F\\to\\mathcal I$, $g'^*\\mathcal F\\to\\mathcal J$) and Remark 07A7 (remark-base-change, line 4033: the base change map as the adjoint of $L(g')^*$ of the counit); Stacks uses the two interchangeably (etale-cohomology.tex line 7600) without comparing them; the comparison is written here by an agent"
+   }
+  },
+  {
+   "text": "(Part (b) when $I$ is bounded below.) Assume $I$ bounded below; then $M:=f_*I$ and $N=g^{-1}M$ are bounded below ([lem-weil-pbc-termwise-adjunction-homotopy] (c)). Let $x=\\chi_{(I,s)}:QM\\xrightarrow{\\sim}Rf_*K$, so $\\sigma_{\\rm src}=g^{-1}(x)(\\varphi^g_M)^{-1}$. By [def-weil-pbc-derived-exchange] (explicit form), $\\Ex_{\\square,K}=Rf'_*(b_K)\\circ\\eta^D_{f',g^{-1}Rf_*K}$ with $b_K=g'^{-1}(\\varepsilon^D_{f,K})\\circ\\theta^D_{\\square,Rf_*K}$. (i) Naturality of $\\eta^D_{f'}$ along $\\sigma_{\\rm src}:QN\\to g^{-1}Rf_*K$: $\\Ex_{\\square,K}\\sigma_{\\rm src}=Rf'_*\\bigl(b_Kf'^{-1}(\\sigma_{\\rm src})\\bigr)\\circ\\eta^D_{f',QN}$. (ii) By naturality of $\\theta^D_{\\square,\\mathrm{unb}}$ along $x$, step 4, step 2 and naturality of $\\varphi^{g'}$ along $\\varepsilon_{f,I}$:\n$$\n b_Kf'^{-1}(\\sigma_{\\rm src})=g'^{-1}\\bigl(\\varepsilon^D_{f,K}f^{-1}(x)\\bigr)\\circ\\beta_2^{-1}Q(\\theta_{\\square,M})\\varphi^{f'}_N\n =g'^{-1}(s)^{-1}(\\varphi^{g'}_I)^{-1}\\,Q(g'^{-1}\\varepsilon_{f,I})\\,Q(\\theta_{\\square,M})\\,\\varphi^{f'}_N=w\\circ Q(c)\\circ\\varphi^{f'}_N,\n$$\n$w:=g'^{-1}(s)^{-1}(\\varphi^{g'}_I)^{-1}$, $c$ as in step 5. (iii) Step 3 with $r:f'^{-1}N\\to J_1$: $\\eta^D_{f',QN}=\\chi_{(J_1,t_1)}Q(f'_*(r)\\eta_{f',N})$. (iv) Apply $(\\ast)$ (for $u=f'$) to $a:=wQ(c)\\varphi^{f'}_N:f'^{-1}(QN)\\to g'^{-1}K$, $(J_1,t_1)$ and $(J,t)$, noting $t=Q(j)w^{-1}$: the class $\\tilde a:J_1\\to J$ is determined by $Q(\\tilde a)Q(r)\\varphi^{f'}_N=Q(j)Q(c)\\varphi^{f'}_N$, i.e. $Q(\\tilde ar)=Q(jc)$, so $\\tilde ar\\simeq jc$ [lem-weil-pbc-kinjective-hom-derived]; and $Rf'_*(a)\\chi_{(J_1,t_1)}=\\chi_{(J,t)}Q(f'_*\\tilde a)$. (v) Combining, and using that $f'_*$ preserves homotopies and step 5:\n$$\n \\Ex_{\\square,K}\\sigma_{\\rm src}=\\chi_{(J,t)}Q\\bigl(f'_*(\\tilde ar)\\eta_{f',N}\\bigr)=\\chi_{(J,t)}Q\\bigl(f'_*(jc)\\eta_{f',N}\\bigr)=\\sigma_{\\rm tgt}\\circ Q(e).\n$$",
    "uses": [
     "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-underived-exchange",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-kinjective-resolutions",
-    "def-weil-pbc-direct-image"
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0736 (lemma-base-change-map-flat-case, line 2427: the base change map built from injective resolutions $\\mathcal F\\to\\mathcal I$, $g'^*\\mathcal F\\to\\mathcal J$) and Remark 07A7 (remark-base-change, line 4033: the base change map as the adjoint of $L(g')^*$ of the counit); Stacks uses the two interchangeably (etale-cohomology.tex line 7600) without comparing them; the comparison is written here by an agent"
+   }
+  },
+  {
+   "text": "(Part (b) in general: reduction to a bounded below resolution.) Let $P=I(K)$ (bounded below, K-injective), $h:I\\to P$ the homotopy equivalence of step 1 with $Q(h)s=\\rho_K$, $h'$ a homotopy inverse. The termwise functors $g'^{-1}$, $g^{-1}$, $f_*$, $f'_*$ preserve homotopies ([lem-weil-pbc-termwise-adjunction-homotopy] (b)), so $j_P:=j\\circ g'^{-1}(h'):g'^{-1}P\\to J$ is a quasi-isomorphism, a K-injective resolution, and step 6 applies to $(P,\\rho_K,j_P)$. Compare the data: (1) by naturality of $\\Ex^0_\\square$ [lemma-weil-pbc-underived-exchange-naturality], $e_P\\circ g^{-1}f_*(h)=f'_*(j)f'_*g'^{-1}(h'h)\\Ex^0_{\\square,I}\\simeq e$; (2) $\\chi_{(P,\\rho_K)}=\\mathrm{id}$, and by naturality of $\\varphi^g$, $\\sigma_{\\rm src}(I)=g^{-1}Q(f_*h)(\\varphi^g_{f_*I})^{-1}=(\\varphi^g_{f_*P})^{-1}Q(g^{-1}f_*h)=\\sigma_{\\rm src}(P)\\circ Q(g^{-1}f_*h)$; (3) by naturality of $\\varphi^{g'}$, $t_P=Q(j)Q(g'^{-1}h')\\varphi^{g'}_Pg'^{-1}(Q(h)s)=Q(j)Q(g'^{-1}(h'h))\\varphi^{g'}_Ig'^{-1}(s)=t$, so $\\sigma_{\\rm tgt}$ is the same. Hence $\\Ex_{\\square,K}\\sigma_{\\rm src}(I)=\\Ex_{\\square,K}\\sigma_{\\rm src}(P)Q(g^{-1}f_*h)=\\sigma_{\\rm tgt}Q(e_P)Q(g^{-1}f_*h)=\\sigma_{\\rm tgt}Q(e)$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0736 (lemma-base-change-map-flat-case, line 2427: the base change map built from injective resolutions $\\mathcal F\\to\\mathcal I$, $g'^*\\mathcal F\\to\\mathcal J$) and Remark 07A7 (remark-base-change, line 4033: the base change map as the adjoint of $L(g')^*$ of the counit); Stacks uses the two interchangeably (etale-cohomology.tex line 7600) without comparing them; the comparison is written here by an agent"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
   "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-square-iso",
   "def-weil-pbc-underived-exchange",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "lemma-weil-pbc-underived-exchange-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-derived-exchange-termwise.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0736 (termwise construction on injective resolutions) and Remark 07A7 (mate construction); Stacks does not compare them. Derived adjunction: derived.tex Lemma 0DVC, through prop-weil-pbc-derived-inverse-image-adjunction (1)-(2). The comparison is written by an agent."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate of a natural transformation under derived adjunctions is computed termwise on K-injective complexes",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq, Functor.rightDerived_map_eq, NatTrans.rightDerivedToHomotopyCategory_comp (Mathlib.CategoryTheory.Abelian.RightDerived: classical R^nF on objects); CategoryTheory.Adjunction.derived, derivedη (Mathlib.CategoryTheory.Functor.Derived.Adjunction); CategoryTheory.mateEquiv (Adjunction.Mates)",
+   "date": "2026-10-09",
+   "verdict": "no match: no statement comparing a mate of derived adjunctions with a termwise mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change morphism g^* Rf_* K → Rf'_* g'^* K computed by applying underived base change to an injective resolution",
+   "results": "Functor.rightDerived_map_eq, InjectiveResolution.isoRightDerivedObj_hom_naturality(_assoc), isoRightDerivedObj_inv_naturality, rightDerived_app_eq, toRightDerivedZero'_naturality (Mathlib.CategoryTheory.Abelian.RightDerived)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.derived",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Mathlib declaration mentions both mates and derived adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'mateEquiv' Mathlib/CategoryTheory/Functor/Derived Mathlib/Algebra/Homology; grep -rn 'derivedPlus\\|mapDerivedCategoryPlus\\|baseChangeMap' Mathlib (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib); grep -n 'def derived\\|lemma derived' Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "results": "no mateEquiv in Functor/Derived or Algebra/Homology; no derivedPlus/mapDerivedCategoryPlus/baseChangeMap in Mathlib; Functor/Derived/Adjunction.lean has Adjunction.derived', derivedη(_fac_app), derivedε(_fac_app), derived (generic derived adjunction, no mates)",
+   "date": "2026-10-09",
+   "verdict": "no match (the source repository has it: Adjunction.derivedPlus_mateEquiv_app_fac, not in Mathlib)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +202,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-derived-exchange-termwise",
+  "worker": "stage1",
+  "summary": "Statement made precise (kept in substance): the identifications 'g^{-1}Rf_*K computed by g^{-1}f_*I' and 'Rf'_*g'^{-1}K computed by f'_*J' are now named isomorphisms sigma_src, sigma_tgt built from the comparison chi_{(P,t)}=Q(u_*h) of a K-injective representative with the chosen resolution defining Ru_*, and the claim is Ex_K o sigma_src = sigma_tgt o Q(f'_*j o Ex^0_I); stmt_deps gained the notions this uses (Q, derived inverse image with phi, Ru_* on morphisms, K-injective Hom). The one-paragraph imported proof ('forming mates commutes with the passage to the derived adjunction') was not a proof; replaced by 7 steps: Ru_* on arbitrary K-injective representatives (naturality (*)), the derived counit on a resolution from property (1) of prop-weil-pbc-derived-inverse-image-adjunction, the derived unit from property (2), theta^D on complexes from def-weil-pbc-derived-square-iso, Ex^0_I = f'_*(c) o eta termwise, the computation for bounded below I, and the reduction of an arbitrary K-injective I to the bounded below I(K). prop-weil-pbc-kinjective-resolutions-exist (unit sk-prop-cd, off route) no longer used: the resolution needed is produced from the chosen one of def-weil-pbc-direct-image. Sources: Stacks sites-cohomology 0736 (termwise construction) and 07A7 (mate), derived 0DVC; Stacks does not compare the two constructions, so the proof is agent-written. No new nodes. Mathlib searched three ways: absent."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }
