@@ -1,24 +1,32 @@
 # Work queue
 
-561 items; claim with `tools/claim.py next <group> [--stage N]`.
+570 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (550)
+## Stage 1: nodes to split (557)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-sheaf-flat-separator` | 1002 | sorry_here |
-| `lemma-weil-pbc-cancellation` | 1002 | none |
-| `lemma-weil-pbc-p1-exchange-geometric-stalk` | 1002 | sorry_here |
 | `lemma-weil-pbc-target-locality` | 1002 | none |
 | `prop-weil-pbc-derived-inverse-image-adjunction` | 1002 | none |
 | `prop-weil-pbc-proper-curve-sepclosed-invariance` | 1002 | rests_on_sorry |
+| `def-weil-pbc-cohomology-pullback` | 1003 | none |
+| `lem-weil-pbc-cohomology-pullback-functorial` | 1003 | none |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1003 | none |
+| `lem-weil-pbc-derived-exchange-termwise` | 1003 | none |
 | `lem-weil-pbc-derived-square-iso-commshift` | 1003 | none |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1003 | none |
+| `lem-weil-pbc-etale-cover-detects-iso` | 1003 | none |
+| `lem-weil-pbc-etale-localization-exchange` | 1003 | none |
+| `lem-weil-pbc-exchange-identity-pasting` | 1003 | none |
+| `lem-weil-pbc-first-quadrant-row-collapse` | 1003 | none |
+| `lem-weil-pbc-free-sheaf-flat` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
 | `lem-weil-pbc-injective-module-abelian-acyclic` | 1003 | none |
+| `lem-weil-pbc-inverse-image-torsion` | 1003 | none |
+| `lem-weil-pbc-module-sheaves-enough-injectives` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
+| `lem-weil-pbc-strict-henselization-functoriality` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-over-base` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-properties` | 1003 | none |
@@ -32,7 +40,6 @@
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1003 | none |
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
 | `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
-| `prop-weil-pbc-strict-local-exchange` | 1003 | none |
 | `def-weil-pbc-extension-by-zero` | 1004 | none |
 | `def-weil-pbc-finite-open-comparison` | 1004 | none |
 | `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
@@ -82,6 +89,7 @@
 | `lemma-weil-pbc-chow-factorization` | 2002 | none |
 | `lemma-weil-pbc-direct-image-filtered-colimit` | 2002 | none |
 | `lemma-weil-pbc-property-iff-acyclicity` | 2002 | sorry_here |
+| `def-weil-pbc-strict-henselian-setup` | 2003 | none |
 | `lem-weil-pbc-prime-factor-devissage` | 2003 | none |
 | `lem-weil-pbc-proper-immersion-closed` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -90,7 +98,6 @@
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | none |
 | `def-weil-pbc-etale-sum-extension` | 2004 | none |
 | `def-weil-pbc-henselian-terminology` | 2004 | none |
-| `def-weil-pbc-strict-henselian-setup` | 2004 | none |
 | `lem-sp-right-adjoint-preserves-injectives` | 2004 | none |
 | `lem-weil-pbc-etale-restriction-injectives` | 2004 | none |
 | `lemma-weil-pbc-etale-degree-zero` | 2004 | none |
@@ -119,15 +126,16 @@
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-kinjective-resolutions` | 3002 | none |
 | `def-pc-module-pullback` | 3003 | none |
+| `def-weil-pbc-etale-cohomology` | 3003 | none |
+| `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 3003 | none |
 | `lemma-weil-pbc-leray-acyclicity` | 3003 | none |
 | `lemma-weil-pbc-torsion-filtered-union` | 3003 | none |
+| `prop-weil-pbc-geometric-stalks-exact` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3003 | none |
-| `def-weil-pbc-etale-cohomology` | 3004 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
-| `def-weil-pbc-strict-henselization-limit` | 3004 | none |
 | `lem-pc-homeo-pure-insep` | 3004 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3004 | none |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
@@ -146,7 +154,6 @@
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
-| `prop-weil-pbc-geometric-stalks-exact` | 3005 | none |
 | `def-sc-gm-torsor` | 3006 | none |
 | `def-sc-kummer-sequence` | 3006 | rests_on_sorry |
 | `def-sc-mu-trivialization` | 3006 | none |
@@ -557,7 +564,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (11)
+## Stage 2: nodes to state (13)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -567,13 +574,15 @@
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
+| `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 565 nodes that wait for stage 1, 43 nodes that wait for a statement dependency.
+Not open yet: 571 nodes that wait for stage 1, 46 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
