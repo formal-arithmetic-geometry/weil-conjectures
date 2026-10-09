@@ -8,30 +8,122 @@
   "place": "node cor-weil-pbc-geometric-fiber-finite, order 1322"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof": [
   {
-   "text": "Specialize [prop-weil-proet-finite-proper-base-change] to the cartesian square\n[def-weil-pbc-cartesian-square] defined by the geometric point $\\bar y$, whose\nbase change is $\\operatorname{Spec}\\Omega\\to Y$; the second formula is the\ncohomological consequence for the sheaf $F$ placed in degree zero.",
+   "text": "Setup. Put $Y'=\\operatorname{Spec}\\Omega$, $g=\\bar y$, $X'=X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\Omega$ (the fibre product [def-pc-fibre-product]), $g'=i_{\\bar y}$ and $f'=a_{\\bar y}$ the two projections. With the identification $\\alpha=\\mathrm{id}:X_{\\bar y}\\to X\\times_Y\\operatorname{Spec}\\Omega$ this is a cartesian square $\\square_{\\bar y}=(f,a_{\\bar y},\\bar y,i_{\\bar y},\\mathrm{id})$ [def-weil-pbc-cartesian-square] with $f$ proper [def-weil-proper-morphism]. The etale base-change morphism of the statement is the derived exchange morphism $\\Ex^\\Lambda_{\\square_{\\bar y},K}$ of [def-weil-pbc-derived-exchange] for this square, formed for $\\Lambda$-module sheaves.",
    "uses": [
-    "prop-weil-proet-finite-proper-base-change",
-    "def-weil-pbc-cartesian-square"
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-proper-morphism",
+    "def-weil-geometric-point",
+    "def-weil-pbc-derived-exchange"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0DDF (lemma-proper-base-change-stalk) and its proof: 'X_{\\bar y}=\\bar y\\times_Y X' is the scheme theoretic fibre and the pullback by $\\bar y$"
+   }
+  },
+  {
+   "text": "$K$ has torsion cohomology. Let $n=\\#\\Lambda\\geq1$. The additive group of $\\Lambda$ has order $n$, so $n\\cdot1_\\Lambda=0$ (Lagrange), hence every $\\Lambda$-module sheaf $M$ is killed by $n$: for every etale $U$ and $s\\in M(U)$, $ns=(n\\cdot1_\\Lambda)s=0$. Each cohomology sheaf $\\mathcal H^q(K)$ is a $\\Lambda$-module sheaf, so its underlying abelian sheaf is torsion in the sense of [def-weil-pbc-etale-sheaves] (take the trivial covering and $n_i=n$). Let $\\operatorname{For}K\\in\\Dplus(X_{\\Et})$ be the underlying complex of abelian sheaves [lem-weil-pbc-exchange-forget-coefficients]; since $\\operatorname{For}$ is exact, $\\mathcal H^q(\\operatorname{For}K)=\\operatorname{For}\\mathcal H^q(K)$, so $\\operatorname{For}K$ is bounded below with torsion cohomology [def-weil-pbc-derived-categories].",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0DDE (lemma-proper-base-change), hypothesis 'E in D^+(X_et) has torsion cohomology sheaves'; Lambda-module complexes reduced to abelian ones as in Tag 0D6J"
+   }
+  },
+  {
+   "text": "First formula. By [thm-weil-pbc-bounded-below] applied to the cartesian square $\\square_{\\bar y}$ of step 1 (with $f$ proper) and to $\\operatorname{For}K\\in\\Dplus(X_{\\Et})$, which has torsion cohomology by step 2, the derived exchange morphism of abelian sheaves $\\Ex_{\\square_{\\bar y},\\operatorname{For}K}:\\bar y^{-1}Rf_*\\operatorname{For}K\\to Ra_{\\bar y,*}i_{\\bar y}^{-1}\\operatorname{For}K$ is an isomorphism in $\\Dplus((\\operatorname{Spec}\\Omega)_{\\Et})$. By [lem-weil-pbc-exchange-forget-coefficients] (last assertion) the $\\Lambda$-linear exchange morphism $\\Ex^\\Lambda_{\\square_{\\bar y},K}:\\bar y^{-1}Rf_*K\\to Ra_{\\bar y,*}i_{\\bar y}^{-1}K$ is then an isomorphism in $\\Dplus((\\operatorname{Spec}\\Omega)_{\\Et},\\Lambda)$. This is the first displayed formula.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0DDF (lemma-proper-base-change-stalk) and its proof part (2): 'a special case of Lemma [0DDE]'"
+   }
+  },
+  {
+   "text": "Cohomology sheaves of the left side. Let $F$ be a sheaf of $\\Lambda$-modules on $X_{\\Et}$ (finiteness of $F$ is not used) and apply step 3 to $K=F[0]$. The functor $\\bar y^{-1}$ is exact on sheaves [def-weil-pbc-inverse-image] (a left adjoint, Stacks Tag 03Q1 (1); it is computed termwise on complexes), so $\\mathcal H^q(\\bar y^{-1}Rf_*F)=\\bar y^{-1}\\mathcal H^q(Rf_*F)=\\bar y^{-1}R^qf_*F$ with $R^qf_*F=\\mathcal H^q(Rf_*F)$ [def-weil-pbc-direct-image]. By [lem-weil-pbc-geometric-point-pullback-stalk] (2), applied to the underlying abelian sheaf, $\\Gamma(\\operatorname{Spec}\\Omega,\\bar y^{-1}R^qf_*F)\\cong(R^qf_*F)_{\\bar y}$ [def-weil-pbc-geometric-stalks]; the isomorphism is $\\Lambda$-linear because it is natural in the sheaf and the $\\Lambda$-action is by sheaf endomorphisms.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0DDF (lemma-proper-base-change-stalk) and its proof: 'pulling back by $\\bar y\\to Y$ produces the stalk'; Remark Tag 04JN"
+   }
+  },
+  {
+   "text": "Cohomology sheaves of the right side. Write $G=i_{\\bar y}^{-1}F=F|_{X_{\\bar y}}$ and $P=\\operatorname{Spec}\\Omega$. By [lem-weil-pbc-geometric-point-pullback-stalk] (1), $\\Gamma(P,-)$ is exact on (abelian or $\\Lambda$-module) sheaves on $P_{\\Et}$. Hence for every bounded below complex $M$ on $P_{\\Et}$ the map $\\Gamma(P,M)\\to\\Gamma(P,I)$ to a K-injective resolution $M\\to I$ is a quasi-isomorphism (an exact functor preserves quasi-isomorphisms, the cone of $M\\to I$ being acyclic), i.e. $\\RGamma(P,M)=\\Gamma(P,M)$ [def-weil-pbc-etale-cohomology], and $\\Gamma(P,\\mathcal H^q(M))=\\mathcal H^q(\\Gamma(P,M))=H^q(P,M)$. Apply this to $M=Ra_{\\bar y,*}G$: $\\Gamma(P,\\mathcal H^q(Ra_{\\bar y,*}G))=H^q(\\RGamma(P,Ra_{\\bar y,*}G))$, and by the composition of derived functors $\\RGamma(P,Ra_{\\bar y,*}G)\\cong\\RGamma(X_{\\bar y},G)$ [lem-kun-leray-bdd] this is $H^q(X_{\\bar y},G)=H^q(X_{\\bar y},F|_{X_{\\bar y}})$ [def-weil-pbc-etale-cohomology]. (For the $\\Lambda$-module version, the abelian groups so computed agree with those computed with $\\Lambda$-module resolutions by [lem-weil-pbc-exchange-forget-coefficients] (2) and the case $u=a_{\\bar y}$ of that comparison together with $\\Gamma(P,-)$ exact.)",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-etale-cohomology",
+    "lem-kun-leray-bdd",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-12_reedition.pdf",
+    "place": "Expose XII, paragraph before Corollaire 5.2 (p. 88-89 of the original): 'un faisceau sur xi est determine par ses sections globales, on a H^0(xi, R^q f'_* G)=H^q(X',G)'"
+   }
+  },
+  {
+   "text": "Second formula. Apply $\\Gamma(\\operatorname{Spec}\\Omega,\\mathcal H^q(-))$ to the isomorphism $\\Ex^\\Lambda_{\\square_{\\bar y},F[0]}$ of step 3. By steps 4 and 5 its source becomes $(R^qf_*F)_{\\bar y}$ and its target $H^q(X_{\\bar y},F|_{X_{\\bar y}})$, so for every $q\\geq0$ we obtain the isomorphism $(R^qf_*F)_{\\bar y}\\xrightarrow{\\sim}H^q(X_{\\bar y},F|_{X_{\\bar y}})$; an isomorphism stays one after applying the functor $\\Gamma(\\operatorname{Spec}\\Omega,\\mathcal H^q(-))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-12_reedition.pdf",
+    "place": "Expose XII, Corollaire 5.2 (iii); Stacks Lemma Tag 0DDF (lemma-proper-base-change-stalk) and its proof part (1)"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-proet-finite-proper-base-change",
-  "def-weil-pbc-cartesian-square"
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-weil-pbc-bounded-below",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-cohomology",
+  "lem-kun-leray-bdd"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0DDF (lemma-proper-base-change-stalk), from Lemma Tag 0DDE; with SGA 4 Expose XII Corollaire 5.2 (literature/sga/SGA4-expose-12_reedition.pdf) and Tags 0D6J, 07A7, 03Q1, 04JN for the steps those proofs omit"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -59,5 +151,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "cor-weil-pbc-geometric-fiber-finite",
+  "worker": "stage1",
+  "summary": "Rewrote the one-line imported proof as six steps following Stacks Tag 0DDF (proper base change at a geometric stalk) and SGA 4 XII Cor. 5.2(iii). The blueprint proof specialized prop-weil-proet-finite-proper-base-change, which is stated only for a torsion sheaf F, while the first formula is for complexes K in D^+(X_et, Lambda); the proof now uses thm-weil-pbc-bounded-below (Stacks 0DDE) directly, and prop-weil-proet-finite-proper-base-change is no longer used. Hidden arguments made into new nodes: lem-weil-pbc-exchange-forget-coefficients (Lambda-linear exchange vs. the abelian one, Stacks 0D6J/07A7: the existing theorems are for abelian sheaves) and lem-weil-pbc-geometric-point-pullback-stalk (inverse image to Spec Omega is the stalk, Gamma(Spec Omega,-) an exact equivalence, Stacks 03Q1/04JN/04JQ). Torsionness of Lambda-module cohomology (n = #Lambda) and the derivation of the stalk formula (exactness of pullback and of Gamma on Spec Omega, Leray composition lem-kun-leray-bdd) are written out. stmt_deps: def-weil-pbc-scheme-conventions replaced by the reviewed leaves def-weil-proper-morphism and def-weil-geometric-point, plus the notions the statement uses (fibre product, Lambda-module derived categories, exchange morphism, Rf_*, inverse image, stalk, etale cohomology). The hypothesis 'finite' on F is not used."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

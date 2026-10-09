@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-pbc-geometric-point-pullback-stalk",
+ "kind": "statement",
+ "title": "Inverse image to a geometric point is the stalk",
+ "statement": "Let $\\Omega$ be an algebraically closed field and $P=\\operatorname{Spec}\\Omega$ [def-weil-affine-spectrum].\n\n1. The global-sections functor $\\Gamma(P,-):\\Ab(P_{\\Et})\\to\\Ab$ on abelian sheaves on the small etale site [def-weil-pbc-etale-sheaves] is an equivalence of categories; in particular it is exact. The same holds for $\\Mod(P_{\\Et},\\Lambda)\\to\\Mod_\\Lambda$ for every ring $\\Lambda$.\n2. Let $Y$ be a scheme and $\\bar y:P\\to Y$ a geometric point [def-weil-geometric-point]. For every abelian sheaf $G$ on $Y_{\\Et}$ there is an isomorphism $\\Gamma(P,\\bar y^{-1}G)\\cong G_{\\bar y}$, natural in $G$, between the global sections of the inverse image [def-weil-pbc-inverse-image] and the stalk of $G$ at $\\bar y$ [def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark Tag 04JN (remark-stalk-pullback), with Lemma Tag 03Q1 (lemma-stalk-pullback) (3) applied to $f=\\bar y$ and the trivial geometric point of $P$; Lemma Tag 04JQ (lemma-equivalence-abelian-sheaves-point) with trivial Galois group for (1)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isoStalk\\|stalk.*Spec\\|IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Etale.lean:97 geometricFiber (a point of the big etale topology given by a separably closed field); Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64 pointSmallEtale (the point of the small etale site of S defined by Spec Omega -> S, Omega separably closed), :126 isConservative_pointSmallEtale; no inverse image of sheaves along Spec Omega -> S and no statement identifying the fiber of pointSmallEtale with global sections of a pulled-back sheaf; no equivalence Sheaf (smallEtaleTopology (Spec Omega)) ~ sets",
+   "date": "2026-10-09",
+   "verdict": "no match (the stalk itself exists as the fiber functor of Scheme.pointSmallEtale, but not the identification with the inverse image)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'smallEtale\\|Etale.forget' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'pullback\\|inverseImage\\|pushforward\\|map'",
+   "results": "none beyond Etale.lean:73",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "cor-weil-pbc-geometric-fiber-finite",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
