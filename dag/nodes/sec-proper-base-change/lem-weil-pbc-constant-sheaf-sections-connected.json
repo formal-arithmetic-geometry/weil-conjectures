@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-constant-sheaf-sections-connected",
+ "kind": "statement",
+ "title": "Global sections of a constant etale sheaf on a connected scheme",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] whose underlying topological space is connected (in particular nonempty) [def-weil-connected-scheme], let $E$ be an abelian group, and let $\\underline E$ be the constant sheaf with value $E$ on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], i.e. the sheafification [def-weil-pbc-sheafification] of the constant presheaf $U\\mapsto E$ [def-weil-pbc-constant-sheaf], an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]; write $\\iota_T:E\\to\\underline E(T)$ for the component at the final object $T$ of the canonical map from the constant presheaf to its sheafification. Then $\\iota_T$ is an isomorphism of abelian groups: every global section of $\\underline E$ is the constant section of a unique $e\\in E$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Etale Cohomology, Remark (Tag 03P5, label etale-cohomology-remark-constant-locally-constant-maps): on the small etale site the sheafification of the constant presheaf with value a group G has Gamma(U, G) = the Zariski locally constant maps U -> G (the Zariski sheafification is representable by the constant group scheme G_S, Groupoids Example Tag 03YW, and representable presheaves are etale (fpqc) sheaves, Lemma Tag 03O3); a locally constant map on a connected space is constant"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of constant sheaf on connected space are constant",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso, Sheaf.isConstant_iff_mem_essImage, Sheaf.mem_essImage_of_isConstant, Sheaf.IsConstant.mk, constantSheaf (Mathlib.CategoryTheory.Sites.ConstantSheaf), TopCat.Presheaf.section_ext (Topology.Sheaves.Stalks), ModuleCat.Tilde.const",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of the constant étale sheaf on a connected scheme equal the group; locally constant functions on a connected space are constant",
+   "results": "Scheme.instSubsingleton...Bot, Scheme.Γ_obj_op, StructureSheaf.toOpen_eq_const, CategoryTheory.Sheaf.ΓObjEquivHom and Sheaf.ΓObjEquivSections (Mathlib.CategoryTheory.Sites.GlobalSections: global sections = Hom from the constant sheaf on a point, not the value of the constant sheaf), Scheme.empty_presheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, ConnectedSpace",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | grep -iE 'connected|locallyConstant|sections|Etale'; sed -n 1,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+   "results": "no result on sections of a constant sheaf over a connected object. Nearest: AlgebraicGeometry/Sites/ConstantSheaf.lean defines continuousMapPresheaf U ↦ C(U, T) on Scheme, proves it a Zariski sheaf (isSheaf_zariskiTopology_continuousMapPresheaf :59) and fpqc sheaf (:68), and continuousMapPresheafEquivOfTotallyDisconnectedSpace (:90, U ↦ C(ConnectedComponents U, T)); its docstring lists 'When T is discrete, this is the constant sheaf associated to T' as a TODO. Condensed/Discrete/LocallyConstant.lean is for condensed sets only",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib has the sheaf of locally constant maps but not its identification with the constant sheaf, which is a TODO there)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normal-constant-generic",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 03P5 for the small etale site of a connected scheme; correct; unsplit."
+ }
+}

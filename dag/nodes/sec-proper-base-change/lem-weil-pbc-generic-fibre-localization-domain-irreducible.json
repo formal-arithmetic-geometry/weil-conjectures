@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+ "kind": "statement",
+ "title": "The generic fibre of a domain over a domain is an irreducible spectrum",
+ "statement": "Let $A$ be an integral domain with field of fractions $K$, and let $A\\to C$ be a ring map into an integral domain $C$ such that every nonzero $a\\in A$ has nonzero image in $C$. Let $S\\subset C$ be the image of $A\\setminus\\{0\\}$, a multiplicative subset not containing $0$. Then $K\\otimes_AC$ is a localization $S^{-1}C$ of $C$ at $S$; it is an integral domain; and its spectrum $\\operatorname{Spec}(K\\otimes_AC)$ [def-weil-affine-spectrum] is nonempty and irreducible, in particular connected [def-weil-connected-scheme].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra: localization commutes with tensor products, Lemma (Tag 00DK); a localization of a domain at a multiplicative set not containing 0 is a domain (Section Tag 00CM); Spec of a domain is irreducible with generic point (0), Lemma (Tag 00ES); an irreducible space is connected (Topology, Section Tag 004U, text after Definition topology-definition-irreducible-components: \"An irreducible space is obviously connected\")"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of an integral domain at a submonoid not containing zero is a domain",
+   "results": "IsLocalization.isDomain_of_le_nonZeroDivisors, IsLocalization.isDomain_localization, IsLocalization.noZeroDivisors, Localization.instNoZeroDivisors (Mathlib.RingTheory.Localization.Defs), Submonoid.LocalizationMap.noZeroDivisors, IsIntegralClosure.isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match (domain clause): IsLocalization.isDomain_of_le_nonZeroDivisors"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsDomain, nonZeroDivisors",
+   "results": "IsLocalization.isDomain_of_le_nonZeroDivisors (Mathlib.RingTheory.Localization.Defs), IsLocalization.bot_lt_comap_prime, IsLocalization.bot_lt_under_prime, Module.IsTorsionFree.of_isLocalization, IsLocalization.integerNormalization_eq_zero_iff, isIntegrallyClosed_of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "match (domain clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 265,285p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/BaseChange.lean; grep -n 'irreducibleSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean; grep -n 'IrreducibleSpace.connectedSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Connected/Basic.lean; grep -n 'theorem isDomain_of_le_nonZeroDivisors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean",
+   "results": "IsLocalization.tensor (Localization/BaseChange.lean:271): for [IsLocalization M A'] the ring S ⊗[R] A' is IsLocalization (Algebra.algebraMapSubmonoid S M); PrimeSpectrum.irreducibleSpace [IsDomain R] (Spectrum/Prime/Topology.lean:280); IrreducibleSpace.connectedSpace (Topology/Connected/Basic.lean:796), IrreducibleSpace.toNonempty (Topology/Irreducible.lean:175); IsLocalization.isDomain_of_le_nonZeroDivisors (Localization/Defs.lean:891)",
+   "date": "2026-10-10",
+   "verdict": "match: a few Mathlib lemmas, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.tensor, IsLocalization.isDomain_of_le_nonZeroDivisors, PrimeSpectrum.irreducibleSpace, IrreducibleSpace.connectedSpace",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "how": "a few Mathlib lemmas, one per clause: with K = FractionRing A (IsLocalization (nonZeroDivisors A) K), IsLocalization.tensor (Localization/BaseChange.lean:271; or tensorRight :278 for K ⊗[A] C) makes C ⊗[A] K a localization of C at Algebra.algebraMapSubmonoid C (nonZeroDivisors A) = S; the hypothesis gives S ≤ nonZeroDivisors C (C a domain, images nonzero), so IsLocalization.isDomain_of_le_nonZeroDivisors (Localization/Defs.lean:891) makes it a domain; PrimeSpectrum.irreducibleSpace (Spectrum/Prime/Topology.lean:280) gives Spec irreducible, hence nonempty (IrreducibleSpace.toNonempty, Topology/Irreducible.lean:175) and connected (IrreducibleSpace.connectedSpace, Topology/Connected/Basic.lean:796)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normal-constant-generic",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: IsLocalization.tensor (Localization/BaseChange.lean:271), IsLocalization.isDomain_of_le_nonZeroDivisors (Localization/Defs.lean:891), PrimeSpectrum.irreducibleSpace (Spectrum/Prime/Topology.lean:280), IrreducibleSpace.connectedSpace; checked."
+ }
+}
