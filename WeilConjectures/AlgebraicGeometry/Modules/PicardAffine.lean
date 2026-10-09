@@ -52,7 +52,7 @@ lemma exists_isFreeGenerator_basicOpen (L : X.Modules) [SheafOfModules.IsInverti
 `𝒪_X`-module over an affine open `U` form an invertible `Γ(X, U)`-module: they are finitely
 presented, and localize to the free modules of rank one `Γ(L, D(g))` over the basic opens `D(g)`
 on which `L` is trivial. -/
-theorem invertible_sections_of_isAffineOpen (L : X.Modules)
+private theorem invertible_sections_of_isAffineOpen (L : X.Modules)
     [SheafOfModules.IsInvertible.{u, u, u} L] {U : X.Opens} (hU : IsAffineOpen U) :
     Module.Invertible Γ(X, U) Γ(L, U) := by
   have := SheafOfModules.IsInvertible.isFiniteLocallyFree L
