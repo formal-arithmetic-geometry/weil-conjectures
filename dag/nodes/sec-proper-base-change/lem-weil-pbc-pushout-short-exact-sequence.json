@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-pushout-short-exact-sequence",
+ "kind": "statement",
+ "title": "Pushout of a short exact sequence along a morphism",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a short exact sequence in $\\mathcal A$ and let $u:A\\to I$ be any morphism. Let $E=I\\amalg_AB$ be the pushout of $u$ and $f$ (it exists, being $\\operatorname{Coker}((u,-f):A\\to I\\oplus B)$), with canonical morphisms $\\iota:I\\to E$ and $v:B\\to E$, $\\iota\\circ u=v\\circ f$. Then there is a unique morphism $p:E\\to C$ with $p\\circ v=g$ and $p\\circ\\iota=0$, and $0\\to I\\xrightarrow{\\iota}E\\xrightarrow{p}C\\to0$ is a short exact sequence; thus $(u,v,\\mathrm{id}_C)$ is a morphism from the first short exact sequence to the second.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Tag 010I (section-extensions, line 1260), item (2) after the definition of Ext (line 1349: the pushout E' = A' amalg_A E of an extension via A -> A', a commutative diagram of short exact sequences, 'by Lemma lemma-cartesian-cocartesian'); Lemma Tag 08N4 (lemma-cartesian-cocartesian) part (2) for the monomorphism, Lemma Tag 08N3 (lemma-cartesian-kernel) part (2) for the cokernel, Example Tag 05PJ (example-fibre-product-pushouts) for the pushout; used in derived.tex Lemma Tag 013T, proof Step 1"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushout of a short exact sequence along a morphism from the first object is a short exact sequence",
+   "results": "IsPushout.exact_shortComplex (Mathlib.CategoryTheory.Abelian.CommSq), ShortComplex.SnakeInput.P', IsPushout.epi_shortComplex_g (Mathlib.Algebra.Homology.CommSq), MorphismProperty.pushouts, ShortComplex.ShortExact.exact",
+   "date": "2026-10-10",
+   "verdict": "no match: IsPushout.exact_shortComplex is the sequence X1 -> X2 (+) X3 -> X4 of a pushout square, not the pushed-out extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout, CategoryTheory.ShortComplex.ShortExact",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in an abelian category, pushout of an extension 0 -> A -> B -> C -> 0 along A -> I gives an extension 0 -> I -> E -> C -> 0 (cokernels of the two parallel sides of a pushout square are isomorphic)",
+   "results": "IsPushout.exact_shortComplex, ShortComplex.SnakeInput.P', Abelian.Ext.covariant_sequence_exact1/2/3, contravariant_sequence_exact1/2, IsPushout.hom_eq_add_up_to_refinements",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mono_pushout_of_mono_f\\|isIso_cokernel_map_of_isPushout\\|exact_shortComplex' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Basic.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Kernels.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/CommSq.lean; grep -rln 'IsPushout\\|pushout' Algebra/Homology CategoryTheory/Abelian | xargs grep -ln ShortExact",
+   "results": "Abelian/Basic.lean:744 instance Abelian.mono_pushout_of_mono_f (pushout.inr of a mono is mono); Limits/Shapes/Pullback/IsPullback/Kernels.lean:48 Limits.isIso_cokernel_map_of_isPushout (in a pushout square the induced map of cokernels of the horizontal maps is an isomorphism); no file combining pushouts with ShortExact",
+   "date": "2026-10-10",
+   "verdict": "no match as one statement: the two ingredients are in Mathlib (mono: mono_pushout_of_mono_f; cokernel: isIso_cokernel_map_of_isPushout on the flipped square), the short exact sequence with p is not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-ses-injective-kernel-splits",
+ "kind": "statement",
+ "title": "A short exact sequence starting with an injective object splits",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $0\\to I\\xrightarrow{i}E\\xrightarrow{p}C\\to0$ a short exact sequence in $\\mathcal A$ with $I$ an injective object [def-sp-injective-resolutions]. Then the sequence splits: there are morphisms $\\pi:E\\to I$ and $s:C\\to E$ with $\\pi\\circ i=\\mathrm{id}_I$, $p\\circ s=\\mathrm{id}_C$ and $i\\circ\\pi+s\\circ p=\\mathrm{id}_E$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 0136 (lemma-characterize-injectives, line 7095), implication (1) => (3)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence whose first object is injective splits",
+   "results": "ShortComplex.ShortExact.splittingOfInjective, ShortExact.splittingOfProjective (Mathlib.Algebra.Homology.ShortComplex.ShortExact), Splitting.ofExactOfSection, Splitting.exact, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a short exact sequence 0 -> I -> E -> C -> 0 in an abelian category with I injective is split",
+   "results": "ShortComplex.ShortExact.splittingOfInjective, Abelian.epiWithInjectiveKernel_iff, exact_f_d, Splitting.ofExactOfSection, Exact.descToInjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'splittingOfInjective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'structure Splitting' -A11 /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "results": "Algebra/Homology/ShortComplex/ShortExact.lean:205 noncomputable def splittingOfInjective {S : ShortComplex C} (hS : S.ShortExact) [Injective S.X₁] [Balanced C] : S.Splitting; ShortComplex/Exact.lean:497 structure Splitting with r, s, f_r : S.f ≫ r = 𝟙, s_g : s ≫ S.g = 𝟙, id : r ≫ S.f + S.g ≫ s = 𝟙",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.splittingOfInjective",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "line": 205,
+  "how": "exact: S = (i, p) with hS : S.ShortExact, [Injective S.X₁] for I, an abelian category is Balanced; the resulting S.Splitting (structure at Mathlib/Algebra/Homology/ShortComplex/Exact.lean:497) has r = π, s = s, f_r : i ≫ π = 𝟙 (π∘i = id), s_g : s ≫ p = 𝟙 (p∘s = id), id : π ≫ i + p ≫ s = 𝟙 (i∘π + s∘p = id; diagrammatic order)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

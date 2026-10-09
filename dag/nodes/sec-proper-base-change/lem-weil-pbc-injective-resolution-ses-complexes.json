@@ -11,9 +11,149 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (resolution of $A^\\bullet$).** By [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ applied to $A^\\bullet$ there are a cochain complex $I_1^\\bullet$ with injective terms and $I_1^n=0$ for $n<0$ and a quasi-isomorphism $\\varphi_1:A^\\bullet\\to I_1^\\bullet$. (That the $\\varphi_1^n$ are monomorphisms is not needed.)",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T (lemma-injective-resolution-ses, line 6571), proof Step 1: 'Choose an injective resolution A -> I (see Lemma 013K)', with part (2) of 013T (bounded at 0)"
+   }
+  },
+  {
+   "text": "**Step 2 (pushout along $\\varphi_1$).** The category of cochain complexes of $\\mathcal A$ is abelian and a sequence of complexes is short exact in it if and only if it is short exact in each degree [lem-weil-pbc-cochain-complexes-degreewise-exact]; so $0\\to A^\\bullet\\xrightarrow{f}B^\\bullet\\xrightarrow{g}C^\\bullet\\to0$ is short exact in that category. Apply [lem-weil-pbc-pushout-short-exact-sequence] there with $u=\\varphi_1$: we get a complex $E^\\bullet$, morphisms of complexes $\\iota:I_1^\\bullet\\to E^\\bullet$, $v:B^\\bullet\\to E^\\bullet$, $p:E^\\bullet\\to C^\\bullet$ with $v\\circ f=\\iota\\circ\\varphi_1$, $p\\circ v=g$, $p\\circ\\iota=0$, and $0\\to I_1^\\bullet\\xrightarrow{\\iota}E^\\bullet\\xrightarrow{p}C^\\bullet\\to0$ short exact, hence short exact in each degree [lem-weil-pbc-cochain-complexes-degreewise-exact]. For $n<0$ the object $E^n$ sits in a short exact sequence $0\\to I_1^n\\to E^n\\to C^n\\to0$ with $I_1^n=C^n=0$, so $E^n=0$.",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 1: 'Recall that Comp^+(A) is an abelian category, see Homology, Lemma 0114. Hence we may form the pushout along the map A -> I'"
+   }
+  },
+  {
+   "text": "**Step 3 ($v$ is a quasi-isomorphism).** Both rows $0\\to A^\\bullet\\to B^\\bullet\\to C^\\bullet\\to0$ and $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ are short exact in each degree, so they have long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact], and since $(\\varphi_1,v,\\mathrm{id}_C)$ commutes with the maps of the rows ($v f=\\iota\\varphi_1$, $p v=g$) the maps $H^n(\\varphi_1),H^n(v),H^n(\\mathrm{id}_C)$ form a morphism of long exact sequences [lem-weil-pbc-complex-ses-long-exact-naturality]. For each $n$ apply the five lemma [lem-weil-pbc-five-lemma] to the segment $H^{n-1}(C^\\bullet)\\to H^n(A^\\bullet)\\to H^n(B^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(A^\\bullet)$ mapping to $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$: the outer vertical maps $\\mathrm{id}$, $H^n(\\varphi_1)$, $\\mathrm{id}$, $H^{n+1}(\\varphi_1)$ are isomorphisms ($\\varphi_1$ is a quasi-isomorphism), hence so is $H^n(v)$. Thus $v:B^\\bullet\\to E^\\bullet$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 1: 'Because of the 5-lemma and the last assertion of Homology, Lemma 0117 the map B -> E is a quasi-isomorphism'"
+   }
+  },
+  {
+   "text": "**Step 4 (the lower row is termwise split).** For every $n$ the sequence $0\\to I_1^n\\xrightarrow{\\iota^n}E^n\\xrightarrow{p^n}C^n\\to0$ is short exact and $I_1^n$ is injective, so by [lem-weil-pbc-ses-injective-kernel-splits] there are $\\pi^n:E^n\\to I_1^n$ and $s^n:C^n\\to E^n$ with $\\pi^n\\iota^n=\\mathrm{id}$, $p^ns^n=\\mathrm{id}$, $\\iota^n\\pi^n+s^np^n=\\mathrm{id}_{E^n}$ (for $n<0$ all are $0$). From these identities also $\\pi^ns^n=0$ (compose $\\iota\\pi s+sps=s$ with $\\iota$ monic: $\\iota\\pi s=0$) and $p^n\\iota^n=0$.",
+   "uses": [
+    "lem-weil-pbc-ses-injective-kernel-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 1: 'Note that the lower short exact sequence is termwise split, see Homology, Lemma 0136. Hence it suffices to prove the lemma when 0 -> A -> B -> C -> 0 is termwise split'"
+   }
+  },
+  {
+   "text": "**Step 5 (the morphism $\\delta$).** By [lem-weil-pbc-degreewise-split-connecting-morphism] applied to $I_1^\\bullet\\xrightarrow{\\iota}E^\\bullet\\xrightarrow{p}C^\\bullet$ with the splittings of Step 4, the maps $\\delta^n=\\pi^{n+1}d_E^ns^n:C^n\\to I_1^{n+1}$ form a morphism of complexes $\\delta:C^\\bullet\\to I_1[1]^\\bullet$, i.e. $d_{I_1}^{n+1}\\delta^n+\\delta^{n+1}d_C^n=0$. Moreover the differential of $E^\\bullet$ is $d_E^n=\\iota^{n+1}d_{I_1}^n\\pi^n+\\iota^{n+1}\\delta^np^n+s^{n+1}d_C^np^n$: write $d_E^n=(\\iota\\pi+sp)\\,d_E^n\\,(\\iota\\pi+sp)$ and use $d_E\\iota=\\iota d_{I_1}$, $p\\,d_E=d_Cp$ ($\\iota$, $p$ are morphisms of complexes), $\\pi\\iota=\\mathrm{id}$, $ps=\\mathrm{id}$, $p\\iota=0$; the four terms are $\\iota d_{I_1}\\pi$, $\\iota\\delta p$, $s\\,d_C\\,p\\,\\iota\\,\\pi=0$ and $s\\,d_C\\,p$.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-connecting-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2: 'Choose splittings. In other words, write B^n = A^n (+) C^n. Denote delta : C -> A[1] the morphism as in Homology, Lemma 011J'"
+   }
+  },
+  {
+   "text": "**Step 6 (resolution of $C^\\bullet$).** By [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ applied to $C^\\bullet$ there are a complex $I_3^\\bullet$ with injective terms and $I_3^n=0$ for $n<0$ and a quasi-isomorphism $f_3:C^\\bullet\\to I_3^\\bullet$ with every $f_3^n$ a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2: 'Choose injective resolutions f_1 : A -> I_1 and f_3 : C -> I_3 ... If A^n = C^n = 0 for n < 0, then pick these such that I_1^n = I_3^n = 0 for n < 0, see Lemma 013K ... We may assume f_3 is injective in every degree' (013K part (3))"
+   }
+  },
+  {
+   "text": "**Step 7 (lifting $\\delta$).** The complex $I_1^\\bullet$ already consists of injectives, so (as Stacks allows) we resolve it by itself, $f_1=\\mathrm{id}$. The complex $I_1[1]^\\bullet$ ($I_1[1]^n=I_1^{n+1}$, zero for $n<-1$) is bounded below with injective terms, $C^\\bullet$ and $I_3^\\bullet$ are bounded below, and $f_3$ is a degreewise monomorphic quasi-isomorphism. By [lem-weil-pbc-lift-along-injective-quasi-iso] with $\\alpha=f_3$, $\\gamma=\\delta$ there is a morphism of complexes $\\delta':I_3^\\bullet\\to I_1[1]^\\bullet$ with $\\delta'\\circ f_3=\\delta$; explicitly $\\delta'^n:I_3^n\\to I_1^{n+1}$ with $d_{I_1}^{n+1}\\delta'^n+\\delta'^{n+1}d_{I_3}^n=0$ and $\\delta'^nf_3^n=\\delta^n$.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2: '(If A is a complex of injectives, then use I_1 = A.) ... By Lemma 013P we may find a morphism delta' : I_3 -> I_1[1] such that delta' o f_3 = f_1[1] o delta' (013P part (2))"
+   }
+  },
+  {
+   "text": "**Step 8 (the complex $I_2^\\bullet$).** Put $I_2^n=I_1^n\\oplus I_3^n$ with inclusions $j^n:I_1^n\\to I_2^n$, $\\epsilon^n:I_3^n\\to I_2^n$ and projections $\\mathrm{pr}^n:I_2^n\\to I_1^n$, $q^n:I_2^n\\to I_3^n$, and $d_{I_2}^n=\\begin{pmatrix}d_{I_1}^n&\\delta'^n\\\\0&d_{I_3}^n\\end{pmatrix}$, i.e. $d_{I_2}^n=j\\,d_{I_1}\\mathrm{pr}+j\\,\\delta'q+\\epsilon\\,d_{I_3}q$. Then $d_{I_2}^{n+1}d_{I_2}^n=\\begin{pmatrix}d_{I_1}d_{I_1}&d_{I_1}\\delta'+\\delta'd_{I_3}\\\\0&d_{I_3}d_{I_3}\\end{pmatrix}=0$ by Step 7, so $I_2^\\bullet$ is a complex; $I_2^n=0$ for $n<0$; $I_2^n$, a product of two injectives, is injective [lem-weil-pbc-product-injectives]. The first column and the second row of the matrix give $d_{I_2}j=j\\,d_{I_1}$ and $q\\,d_{I_2}=d_{I_3}q$, so $j:I_1^\\bullet\\to I_2^\\bullet$ and $q:I_2^\\bullet\\to I_3^\\bullet$ are morphisms of complexes, and $0\\to I_1^n\\xrightarrow{j^n}I_2^n\\xrightarrow{q^n}I_3^n\\to0$ is (split) short exact for every $n$.",
+   "uses": [
+    "lem-weil-pbc-product-injectives",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2: 'Set I_2^n = I_1^n (+) I_3^n. Define d_{I_2}^n = ((d_{I_1}^n, (delta')^n), (0, d_{I_3}^n))'"
+   }
+  },
+  {
+   "text": "**Step 9 (the morphism $\\psi:E^\\bullet\\to I_2^\\bullet$).** Define $\\psi^n=j^n\\pi^n+\\epsilon^nf_3^np^n:E^n\\to I_2^n$ (the sum of $\\mathrm{id}_{I_1^n}$ and $f_3^n$ in the splitting $E^n=I_1^n\\oplus C^n$). By Step 5 and $\\pi\\iota=\\mathrm{id}$, $\\pi s=0$, $p\\iota=0$, $ps=\\mathrm{id}$: $\\psi^{n+1}d_E^n=j(d_{I_1}\\pi+\\delta p)+\\epsilon f_3d_Cp$, while $d_{I_2}\\psi^n=j(d_{I_1}\\pi+\\delta'f_3p)+\\epsilon d_{I_3}f_3p$; these agree since $\\delta'f_3=\\delta$ (Step 7) and $d_{I_3}f_3=f_3d_C$. So $\\psi$ is a morphism of complexes, with $\\psi\\circ\\iota=j$ and $q\\circ\\psi=f_3\\circ p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2: 'define the maps B^n -> I_2^n to be given as the sum of the maps A^n -> I_1^n and C^n -> I_3^n. Everything is clear.'"
+   }
+  },
+  {
+   "text": "**Step 10 ($\\psi$ is a quasi-isomorphism).** $(\\mathrm{id}_{I_1},\\psi,f_3)$ is a morphism from the degreewise short exact sequence $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ to $0\\to I_1^\\bullet\\xrightarrow{j}I_2^\\bullet\\xrightarrow{q}I_3^\\bullet\\to0$ (Step 9). Their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact] are related by the maps $H^n(\\mathrm{id}),H^n(\\psi),H^n(f_3)$ [lem-weil-pbc-complex-ses-long-exact-naturality], and the five lemma [lem-weil-pbc-five-lemma] on $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$, with outer vertical maps $H^{n-1}(f_3)$, $\\mathrm{id}$, $H^n(f_3)$, $\\mathrm{id}$ isomorphisms, shows that $H^n(\\psi)$ is an isomorphism for every $n$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof Step 2, 'Everything is clear' (that B -> I_2 is a quasi-isomorphism), written out with Homology Lemma Tag 0117 and the 5-lemma Tag 05QB as in Step 1"
+   }
+  },
+  {
+   "text": "**Step 11 (conclusion).** Put $\\varphi_2=\\psi\\circ v:B^\\bullet\\to I_2^\\bullet$ and $\\varphi_3=f_3$. Then $\\varphi_2$ is a quasi-isomorphism, $H^n(\\varphi_2)=H^n(\\psi)H^n(v)$ being a composite of isomorphisms (Steps 3, 10); $\\varphi_2\\circ f=\\psi v f=\\psi\\iota\\varphi_1=j\\circ\\varphi_1$ (Steps 2, 9) and $q\\circ\\varphi_2=q\\psi v=f_3pv=f_3g=\\varphi_3\\circ g$. The complexes $I_1^\\bullet,I_2^\\bullet,I_3^\\bullet$ have injective terms and vanish in negative degrees (Steps 1, 6, 8), and $0\\to I_1^n\\to I_2^n\\to I_3^n\\to0$ is short exact for every $n$ (Step 8).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 013T, proof, end of Step 2 combined with the reduction of Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-product-injectives",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013T (lemma-injective-resolution-ses, line 6571), proof Steps 1-2, with part (2) (complexes zero in negative degrees)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +185,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,7 +209,13 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Derived Categories 013T for short exact sequences of complexes bounded below at 0; self-contained; correct; unsplit."
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Eleven steps along Steps 1-2 of the proof of 013T with its part (2); five new nodes: three Mathlib leaves verified by line (0136 (1)=>(3): ShortExact.splittingOfInjective, ShortComplex/ShortExact.lean:205; 011J: CochainComplex.homOfDegreewiseSplit, DegreewiseSplit.lean:63 with homOfDegreewiseSplit_f :68; 013P(2) for bounded-below complexes: the lifting-property instance of the injective model structure, ModelCategory/Injective.lean:160, a specialization through the translation lemmas, accepted) and two unsplit (013K(3) resolution by a degreewise monomorphism; the pushout of a short exact sequence along a morphism, Homology 010I item (2)). The argument: resolve A, push out along phi_1 (v a quasi-isomorphism by the long exact sequences, naturality and the five lemma), split the lower row termwise, build delta: C -> I_1[1] and the matrix form of d_E, resolve C by a degreewise mono quasi-isomorphism f_3, lift delta along f_3, form I_2 = I_1 (+) I_3 with the twisted differential, psi: E -> I_2 a quasi-isomorphism by the five lemma again, phi_2 = psi v. Steps 9 and 11 are elementary identities from the splitting relations, checked. Noted for stage 3: the object version lem-weil-pbc-injective-resolution-ses asserts its second pushout is I_A^0 (+) I_C^0 without a reason and could be re-split as this lemma applied to A[0], B[0], C[0]."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 013T (main assertion with part (2)); unchanged, stmt_deps kept. Wrote the proof in 11 steps following 013T Steps 1-2: resolve A (013K(3)), push out along A -> I_1 in the abelian category of complexes, quasi-isomorphism by the long exact sequence and the five lemma, termwise splitting (0136), delta : C -> I_1[1] (011J), resolve C degreewise-monomorphically (013K(3)), lift delta along f_3 (013P(2)), build I_2 = I_1 (+) I_3 with the twisted differential, the comparison E -> I_2 and its quasi-isomorphism, and compose. New nodes: lem-weil-pbc-complex-injective-resolution-mono (013K(3), unsplit; Mathlib has only the mono version one degree lower or the non-mono version), lem-weil-pbc-pushout-short-exact-sequence (Homology 010I(2)/08N4/08N3, unsplit), lem-weil-pbc-ses-injective-kernel-splits (0136, Mathlib ShortExact.splittingOfInjective), lem-weil-pbc-degreewise-split-connecting-morphism (011J, Mathlib CochainComplex.homOfDegreewiseSplit), lem-weil-pbc-lift-along-injective-quasi-iso (013P(2) for bounded below complexes, Mathlib lifting instance of the Quillen model structure on CochainComplex.Plus). Existing leaves cited: cochain-complexes-degreewise-exact, complex-ses-homology-long-exact, complex-ses-long-exact-naturality, five-lemma, product-injectives."
  }
 }

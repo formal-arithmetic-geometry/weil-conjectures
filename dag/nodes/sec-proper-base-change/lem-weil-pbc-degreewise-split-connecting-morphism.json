@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-degreewise-split-connecting-morphism",
+ "kind": "statement",
+ "title": "The morphism C -> A[1] of a termwise split short exact sequence of complexes",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $A^\\bullet\\xrightarrow{i}B^\\bullet\\xrightarrow{p}C^\\bullet$ be morphisms of cochain complexes of $\\mathcal A$ indexed by $\\mathbf Z$ with $p\\circ i=0$. Suppose given for every $n\\in\\mathbf Z$ morphisms $\\pi^n:B^n\\to A^n$ and $s^n:C^n\\to B^n$ with $\\pi^n\\circ i^n=\\mathrm{id}_{A^n}$, $p^n\\circ s^n=\\mathrm{id}_{C^n}$ and $i^n\\circ\\pi^n+s^n\\circ p^n=\\mathrm{id}_{B^n}$ (a splitting $B^n=A^n\\oplus C^n$ compatible with $i$ and $p$; the $\\pi^n$, $s^n$ need not commute with the differentials). Let $A[1]^\\bullet$ be the shifted complex, $A[1]^n=A^{n+1}$, $d_{A[1]}^n=-d_A^{n+1}$. Then the morphisms $\\delta^n=\\pi^{n+1}\\circ d_B^n\\circ s^n:C^n\\to A^{n+1}$ form a morphism of complexes $\\delta:C^\\bullet\\to A[1]^\\bullet$, that is, $\\delta^{n+1}\\circ d_C^n=-d_A^{n+1}\\circ\\delta^n$ for all $n$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 011J (lemma-ses-termwise-split-cochain, line 3520), for an abelian (in particular additive) category; shift as in Definition Tag 011G (definition-shift-cochain, line 3427)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise split short exact sequence of cochain complexes gives morphism X3 to X1 shifted by one",
+   "results": "CochainComplex.homOfDegreewiseSplit, homOfDegreewiseSplit_f, triangleOfDegreewiseSplit_mor₃, triangleOfDegreewiseSplit (Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit), DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.homOfDegreewiseSplit",
+   "results": "CochainComplex.homOfDegreewiseSplit (S : ShortComplex (CochainComplex C ℤ)) (σ : (n : ℤ) → (S.map (eval C (up ℤ) n)).Splitting) : S.X₃ ⟶ S.X₁⟦1⟧; triangleOfDegreewiseSplit_mor₃; triangleOfDegreewiseSplitRotateRotateIso; mappingConeHomOfDegreewiseSplitXIso",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def homOfDegreewiseSplit\\|lemma homOfDegreewiseSplit_f\\|def cocycleOfDegreewiseSplit' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean; grep -n \"lemma shiftFunctor_obj_d'\" /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "results": "DegreewiseSplit.lean:43 cocycleOfDegreewiseSplit (Cochain.mk fun p q _ => (σ p).s ≫ S.X₂.d p q ≫ (σ q).r); :63 homOfDegreewiseSplit : S.X₃ ⟶ S.X₁⟦1⟧; :68 homOfDegreewiseSplit_f : (homOfDegreewiseSplit S σ).f n = (cocycleOfDegreewiseSplit S σ).1.v n (n+1) rfl; Shift.lean:144 shiftFunctor_obj_d' : (K⟦n⟧).d i j = n.negOnePow • K.d _ _",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.homOfDegreewiseSplit",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean",
+  "line": 63,
+  "how": "specializes in one line: S := ShortComplex.mk i p (p∘i=0) in CochainComplex C ℤ (C preadditive), σ n := the splitting (r := π^n, s := s^n) of S.map (eval n) (structure ShortComplex.Splitting, Exact.lean:497); homOfDegreewiseSplit S σ : C^• ⟶ A^•⟦1⟧ is a morphism of complexes, and by homOfDegreewiseSplit_f (line 68) with cocycleOfDegreewiseSplit (line 43) its degree-n component is (σ n).s ≫ B.d n (n+1) ≫ (σ (n+1)).r = π^{n+1}∘d_B^n∘s^n = δ^n; the differential of A⟦1⟧ is (-1)•d_A (shiftFunctor_obj_d', HomotopyCategory/Shift.lean:144), so this is the shift of Stacks 011G"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

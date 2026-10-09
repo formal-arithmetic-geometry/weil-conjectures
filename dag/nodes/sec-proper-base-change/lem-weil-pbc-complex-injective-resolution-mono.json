@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-complex-injective-resolution-mono",
+ "kind": "statement",
+ "title": "Bounded below complexes embed quasi-isomorphically into complexes of injectives",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with enough injectives, let $a\\in\\mathbf Z$ and let $K^\\bullet$ be a cochain complex of $\\mathcal A$ (indexed by $\\mathbf Z$) with $K^n=0$ for $n<a$. Then there exist a cochain complex $I^\\bullet$ of $\\mathcal A$ whose terms $I^n$ are injective objects [def-sp-injective-resolutions], with $I^n=0$ for $n<a$, and a morphism of complexes $\\alpha:K^\\bullet\\to I^\\bullet$ such that every $\\alpha^n:K^n\\to I^n$ is a monomorphism and $\\alpha$ is a quasi-isomorphism, i.e. $H^n(\\alpha):H^n(K^\\bullet)\\to H^n(I^\\bullet)$ is an isomorphism for every $n\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013K (lemma-injective-resolutions-exist, line 6280), part (3); Stacks proves (3) as a special case of Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded below complex has a quasi-isomorphism which is a monomorphism into a complex of injective objects in the same degrees",
+   "results": "InjectiveResolution.quasiIso, QuasiIso, InjectiveResolution.self, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b (Mathlib.Algebra.Homology.Factorizations.CM5b)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every bounded below cochain complex in an abelian category with enough injectives embeds by a quasi-isomorphism monomorphism into a complex of injectives vanishing in the same degrees",
+   "results": "CochainComplex.isKInjective_of_injective, CochainComplex.cm5b and its instances cm5b.instInjectiveXIntI, cm5b.instMonoIntI, CochainComplex.IsKInjective",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective (name check, also by lean_local_search)",
+   "results": "CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective (Mathlib/Algebra/Homology/Factorizations/CM5a.lean:659)",
+   "date": "2026-10-10",
+   "verdict": "near miss: see grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_mono_quasiIso\\|exists_quasiIso_injective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Factorizations/CM5a.lean:659 exists_mono_quasiIso_injective K n0 n1 (n0+1=n1, K.IsStrictlyGE n1): Mono i, QuasiIso i, L of injectives, but only L.IsStrictlyGE n0 = n1-1 (one degree lower); CM5a.lean:668 exists_quasiIso_injective K n: L of injectives IsStrictlyGE n with QuasiIso i, but i not a monomorphism (comment at line 685: 'it may not be [mono] in degree n'); DerivedCategory/DerivabilityStructureInjectives.lean:61 CochainComplex.Plus.exists_quasiIso_injective (same, in CochainComplex.Plus)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the mono version with the bound lowered by one and the version with the same bound without mono, not both at once; deriving (3) from them needs an argument (truncation of the mono version at a), not one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

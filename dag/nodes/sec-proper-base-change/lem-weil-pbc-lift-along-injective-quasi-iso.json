@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-lift-along-injective-quasi-iso",
+ "kind": "statement",
+ "title": "Extending a morphism into a bounded below complex of injectives along a degreewise injective quasi-isomorphism",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $K^\\bullet$, $L^\\bullet$ be bounded below cochain complexes of $\\mathcal A$ (indexed by $\\mathbf Z$, zero in all sufficiently negative degrees) and $\\alpha:K^\\bullet\\to L^\\bullet$ a morphism of complexes which is a quasi-isomorphism ($H^n(\\alpha)$ an isomorphism for all $n$) and such that every $\\alpha^n:K^n\\to L^n$ is a monomorphism. Let $I^\\bullet$ be a bounded below cochain complex whose terms $I^n$ are injective objects [def-sp-injective-resolutions], and $\\gamma:K^\\bullet\\to I^\\bullet$ a morphism of complexes. Then there is a morphism of complexes $\\beta:L^\\bullet\\to I^\\bullet$ with $\\beta\\circ\\alpha=\\gamma$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013P (lemma-morphisms-lift, line 6386), part (2), stated here for bounded below K and L (Stacks does not need this; it is the case used)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extend a morphism along a monomorphism quasi-isomorphism of bounded below complexes into a complex of injectives",
+   "results": "Injective.factorThru, CochainComplex.cm5b, InjectiveResolution.descFSucc, InjectiveResolution.quasiIso, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, quasiIsoAt_extendMap_iff, Injective.ι_mono",
+   "date": "2026-10-10",
+   "verdict": "no match in the results; see loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lifting property of a monomorphism quasi-isomorphism of bounded below cochain complexes against a complex of injective objects",
+   "results": "CochainComplex.cm5b and instances, CochainComplex.IsKInjective, isSplitMono_from_singleFunctor_obj_of_injective, isKInjective_of_injective, isKInjective_of_injective_aux",
+   "date": "2026-10-10",
+   "verdict": "no match in the results; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasLiftingProperty, CochainComplex.Plus",
+   "results": "CochainComplex.Plus.modelCategoryQuillen.instHasLiftingPropertyOfMonoOfWeakEquivalenceOfFibration (i : A ⟶ B) (p : X ⟶ Y) [Mono i] [WeakEquivalence i] [Fibration p] : HasLiftingProperty i p; ...instHasLiftingPropertyOfMonoOfFibrationOfWeakEquivalence (Mathlib.Algebra.Homology.ModelCategory.Injective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'HasLiftingProperty\\|lemma isFibrant_iff\\|lemma weakEquivalence_iff\\|lemma fibration_iff' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ModelCategory/Injective.lean; grep -n 'degreewiseEpiWithInjectiveKernel_iff_of_isZero' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Factorizations/Basic.lean; grep -n 'lemma mono_iff' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/CochainComplexPlus.lean",
+   "results": "ModelCategory/Injective.lean:160 instance HasLiftingProperty i p for [Mono i] [WeakEquivalence i] [Fibration p] in CochainComplex.Plus C (no EnoughInjectives needed, the variable comes at line 170); :73 fibration_iff (Fibration p ↔ degreewiseEpiWithInjectiveKernel p.hom); :77 isFibrant_iff; :83 weakEquivalence_iff (↔ QuasiIso f.hom); Factorizations/Basic.lean:60 degreewiseEpiWithInjectiveKernel_iff_of_isZero (target zero: ↔ ∀ n, Injective (K.X n)); CochainComplexPlus.lean:96 Plus.mono_iff (Mono f ↔ Mono f.hom)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.Plus.modelCategoryQuillen.instHasLiftingPropertyOfMonoOfWeakEquivalenceOfFibration",
+  "file": "Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+  "line": 160,
+  "how": "specializes in one line: in CochainComplex.Plus C (bounded below complexes, open scoped modelCategoryQuillen) take i := α : K ⟶ L and p := I ⟶ 0; Mono i by Plus.mono_iff (CochainComplexPlus.lean:96) and HomologicalComplex.mono_of_mono_f from the degreewise monomorphisms, WeakEquivalence i by weakEquivalence_iff (line 83) from QuasiIso α, Fibration p by fibration_iff (line 73) and degreewiseEpiWithInjectiveKernel_iff_of_isZero (Factorizations/Basic.lean:60) from the injectivity of the I^n; the lift of the commutative square (γ, 0) is β with α ≫ β = γ (HasLiftingProperty.sq_hasLift)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-resolution-ses-complexes",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
