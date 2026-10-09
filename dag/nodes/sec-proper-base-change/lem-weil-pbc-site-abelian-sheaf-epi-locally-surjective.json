@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+ "kind": "statement",
+ "title": "An epimorphism of abelian sheaves on a site is locally surjective (and conversely)",
+ "statement": "Let $\\mathcal C$ be a site and $\\varphi:\\mathcal G\\to\\mathcal H$ a morphism in the abelian category $\\textit{Ab}(\\mathcal C)$ of abelian sheaves on $\\mathcal C$ [def-weil-pbc-sites-and-cohomology]. Then $\\varphi$ is an epimorphism of $\\textit{Ab}(\\mathcal C)$ if and only if it is locally surjective: for every object $U$ of $\\mathcal C$ and every $h\\in\\mathcal H(U)$ there are a covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ in $\\mathcal C$ and sections $g_j\\in\\mathcal G(V_j)$ with $\\varphi_{V_j}(g_j)=h|_{V_j}$ for all $j\\in J$. (General-site version of [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], which is stated for the small etale site.)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma Tag 03CN (lemma-abelian-abelian) part (5) ('surjective' in the abelian category, i.e. Coker = 0, homology.tex Definition Tag 010B (definition-injective-surjective), iff surjective as a map of sheaves); the latter notion is sites.tex Definition Tag 00WM (definition-sheaves-injective-surjective) part (2); for sheaves of sets the same statement is sites.tex Lemma Tag 00WN (lemma-mono-epi-sheaves)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves of abelian groups on a site is an epimorphism iff it is locally surjective",
+   "results": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi' (Mathlib.CategoryTheory.Sites.EpiMono), Sheaf.isLocallySurjective_iff_epi (Sites.LocallySurjective, sheaves of types), Sheaf.epi_of_isLocallySurjective('), PresheafOfModules.epi_of_surjective, Sheaf.locallySurjective, Sheaf.IsLocallySurjective",
+   "date": "2026-10-10",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Epi",
+   "results": "Sheaf.epi_of_isLocallySurjective', Sheaf.isLocallySurjective_iff_epi, Sheaf.epi_of_isLocallySurjective (Sites.LocallySurjective); Sheaf.isLocallySurjective_iff_epi' (Sites.EpiMono): [HasFunctorialSurjectiveInjectiveFactorization A] [J.WEqualsLocallyBijective A] [HasSheafify J A] [J.HasSheafCompose (forget A)] [Balanced (Sheaf J A)] (φ : F ⟶ G) : IsLocallySurjective φ ↔ Epi φ",
+   "date": "2026-10-10",
+   "verdict": "match: Sheaf.isLocallySurjective_iff_epi'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Grothendieck pretopology given by covering families, a sieve covers iff it contains a covering family; epimorphism of abelian sheaves gives local lifts on a covering family",
+   "results": "Presieve.isSheaf_pretopology (Sites.SheafOfTypes), GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, GrothendieckTopology.WEqualsLocallyBijective(.mk'), Sheaf.isLocallySurjective_iff_epi' (Sites.EpiMono), the locally surjective/injective factorization instances, Sheaf.epi_of_isLocallySurjective'",
+   "date": "2026-10-10",
+   "verdict": "match for the epi part (isLocallySurjective_iff_epi'); covering-family form from grep below"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isLocallySurjective_iff_epi\\|mem_toGrothendieck' Mathlib/CategoryTheory/Sites/",
+   "results": "EpiMono.lean:124 isLocallySurjective_iff_epi' (any A concrete, the instances above); LocallySurjective.lean:94 class IsLocallySurjective (imageSieve f s ∈ J U), :49 imageSieve; LocallySurjective.lean:378 isLocallySurjective_iff_epi (types); PrecoverageToGrothendieck.lean:166 Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition ([IsStableUnderComposition J] [IsStableUnderBaseChange J] [J.HasPullbacks] [HasIsos J]: S ∈ J.toGrothendieck X ↔ ∃ R ∈ J X, R ≤ S; no HasPullbacks C needed); Coverage.lean:383 Precoverage.toGrothendieck_toCoverage; Pretopology.lean:128 Pretopology.mem_toGrothendieck (needs HasPullbacks C)",
+   "date": "2026-10-10",
+   "verdict": "match (with the covering-family form from Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi'",
+  "file": "Mathlib/CategoryTheory/Sites/EpiMono.lean",
+  "how": "specializes in one line, plus one lemma for the covering form. Setting as recorded on lem-weil-pbc-site-sheaves-enough-injectives: C a SmallCategory, the coverings of the site form a Precoverage K (K U = the presieves Presieve.ofArrows of the covering families of U; multiplicities and the index set are invisible to a presieve), J = K.toGrothendieck (= K.toCoverage.toGrothendieck by Precoverage.toGrothendieck_toCoverage, Coverage.lean:383), Ab(C) = Sheaf J AddCommGrpCat. Then isLocallySurjective_iff_epi' (EpiMono.lean:124) gives IsLocallySurjective φ ↔ Epi φ, where IsLocallySurjective φ (LocallySurjective.lean:94) says that the image sieve {V → U : h|_V ∈ im φ_V} (imageSieve, :49) of every h ∈ H(U) is J-covering. By Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition (Sites/PrecoverageToGrothendieck.lean:166) a sieve is J-covering iff it contains a covering family of the site, which is the node's form (a covering family inside the image sieve gives the lifts g_j; conversely the family with lifts lies in the image sieve). Its hypotheses are the site axioms: HasIsos K by axiom (i); IsStableUnderComposition K by axiom (ii); HasPullbacks K and IsStableUnderBaseChange K by axiom (iii), the latter for any choice of fibre products because a family {P_i → V} isomorphic over V to {U_i ×_U V → V} is a covering by (i) and (ii) (compose with the single isomorphisms P_i → U_i ×_U V). Instances for A = AddCommGrpCat: HasSheafify J A for a small site (Sites/LeftExact.lean:308); HasSheafCompose (forget A) from hasSheafCompose_of_preservesLimitsOfSize (Sites/Whiskering.lean:161); Balanced (Sheaf J A) as Sheaf J A is abelian (sheafIsAbelian, Sites/Abelian.lean:40; balanced_of_strongEpiCategory, Limits/Shapes/StrongEpi.lean:158); HasFunctorialSurjectiveInjectiveFactorization A from ConcreteCategory/EpiMono.lean:148; WEqualsLocallyBijective from the instance at Sites/LocallyBijective.lean:153 (with PreservesSheafification J (forget A) from Sites/PreservesSheafification.lean:298). The source repository applies this lemma with A = AddCommGrpCat on sites (WeilConjectures/Topology/Sheaves/CechCriterion.lean:77, CategoryTheory/Sites/Torsor.lean:310)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-ses-cech-h1-surjective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Sheaf.isLocallySurjective_iff_epi′ (Sites/EpiMono.lean:124) in the covering-family form via Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition (PrecoverageToGrothendieck.lean:166); checked. General-site version of the etale-only node."
+ }
+}
