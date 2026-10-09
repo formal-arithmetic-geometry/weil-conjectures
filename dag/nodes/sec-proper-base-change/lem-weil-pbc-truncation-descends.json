@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-truncation-descends",
  "kind": "statement",
  "title": "Canonical truncations and H^q(-)[-q] descend to functors on D(A), with i_q, j_q natural",
- "statement": "Let $\\mathcal A$ be an abelian category with derived category $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category], and for $q\\in\\mathbf Z$ let $\\tau_{\\leq q}$ be the canonical truncation of complexes ($(\\tau_{\\leq q}K)^r=K^r$ for $r<q$, $\\Ker d^q_K$ for $r=q$, $0$ for $r>q$), a functor on cochain complexes, $H^q(-)[-q]$ the functor $K\\mapsto$ (the complex with $H^q(K)$ in degree $q$, $0$ elsewhere), $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$ the inclusion and $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ the projection $\\Ker d^q\\to H^q$ in degree $q$, natural transformations of functors on complexes. Then: (a) if $s:K\\to L$ is a quasi-isomorphism, so are $\\tau_{\\leq q}s$ (indeed $H^r(\\tau_{\\leq q}K)=H^r(K)$ for $r\\le q$ and $0$ for $r>q$, naturally) and $H^q(s)[-q]$; (b) hence there are functors $\\tau_{\\leq q},\\ H^q(-)[-q]:D(\\mathcal A)\\to D(\\mathcal A)$, unique up to unique isomorphism, with $\\tau_{\\leq q}\\circ Q=Q\\circ\\tau_{\\leq q}$ and $H^q(-)[-q]\\circ Q=Q\\circ H^q(-)[-q]$, and unique natural transformations $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$, $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ of functors on $D(\\mathcal A)$ whose composites with $Q$ are $Q(i_q)$, $Q(j_q)$. In particular a morphism $f:K\\to L$ of $D(\\mathcal A)$ between complexes $K,L$ gives morphisms $\\tau_{\\leq q}f$, $\\tau_{\\leq q-1}f$, $H^q(f)[-q]$ with $\\tau_{\\leq q}f\\circ i_q=i_q\\circ\\tau_{\\leq q-1}f$ and $H^q(f)[-q]\\circ j_q=j_q\\circ\\tau_{\\leq q}f$, and these are the images under $Q$ of the morphisms of complexes when $f=Q(\\phi)$.",
+ "statement": "Let $\\mathcal A$ be an abelian category with derived category $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category], and for $q\\in\\mathbf Z$ let $\\tau_{\\leq q}$ be the canonical truncation of complexes ($(\\tau_{\\leq q}K)^r=K^r$ for $r<q$, $\\Ker d^q_K$ for $r=q$, $0$ for $r>q$), a functor on cochain complexes, $H^q(-)[-q]$ the functor $K\\mapsto$ (the complex with $H^q(K)$ in degree $q$, $0$ elsewhere), $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$ the inclusion and $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ the projection $\\Ker d^q\\to H^q$ in degree $q$, natural transformations of functors on complexes. Then: (a) if $s:K\\to L$ is a quasi-isomorphism, so are $\\tau_{\\leq q}s$ (indeed $H^r(\\tau_{\\leq q}K)=H^r(K)$ for $r\\le q$ and $0$ for $r>q$, naturally) and $H^q(s)[-q]$; (b) hence there are functors $\\tau_{\\leq q},\\ H^q(-)[-q]:D(\\mathcal A)\\to D(\\mathcal A)$, unique up to unique isomorphism, with specified natural isomorphisms $\\tau_{\\leq q}\\circ Q\\cong Q\\circ\\tau_{\\leq q}$ and $H^q(-)[-q]\\circ Q\\cong Q\\circ H^q(-)[-q]$ (equalities when $D(\\mathcal A)$ is constructed as a category of fractions), and unique natural transformations $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$, $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ of functors on $D(\\mathcal A)$ whose composites with $Q$ are $Q(i_q)$, $Q(j_q)$ (up to these isomorphisms). In particular a morphism $f:K\\to L$ of $D(\\mathcal A)$ between complexes $K,L$ gives morphisms $\\tau_{\\leq q}f$, $\\tau_{\\leq q-1}f$, $H^q(f)[-q]$ with $\\tau_{\\leq q}f\\circ i_q=i_q\\circ\\tau_{\\leq q-1}f$ and $H^q(f)[-q]\\circ j_q=j_q\\circ\\tau_{\\leq q}f$, and when $f=Q(\\phi)$ for a morphism of complexes $\\phi$ these are, up to these isomorphisms, the images under $Q$ of $\\tau_{\\leq q}\\phi$, $\\tau_{\\leq q-1}\\phi$, $H^q(\\phi)[-q]$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076, 'canonical truncation functors'); the descent to D(A) by the universal property of the localization, Definition 05RU / Section 05RR; homology.tex Section 0118 (the cohomology of tau_{<=n}, line 3612ff.)"
@@ -10,9 +10,85 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 ((a) for $\\tau_{\\leq q}$).** Let $s:K\\to L$ be a quasi-isomorphism. The morphism $\\tau_{\\leq q}s$ is the restriction of $s$ to the subcomplexes ($s^r$ for $r<q$, the map $\\Ker d^q_K\\to\\Ker d^q_L$ induced by $s^q$, $0$ for $r>q$), so $c_{q,L}\\circ\\tau_{\\leq q}s=s\\circ c_{q,K}$ for the inclusions $c_q:\\tau_{\\leq q}\\to\\mathrm{id}$, and $H^r(c_{q,L})\\circ H^r(\\tau_{\\leq q}s)=H^r(s)\\circ H^r(c_{q,K})$ by functoriality of $H^r$. For $r\\le q$, $H^r(c_{q,K})$ and $H^r(c_{q,L})$ are isomorphisms [lem-weil-pbc-truncation-cohomology] and $H^r(s)$ is one by hypothesis, so $H^r(\\tau_{\\leq q}s)=H^r(c_{q,L})^{-1}H^r(s)H^r(c_{q,K})$ is an isomorphism. For $r>q$, $H^r(\\tau_{\\leq q}K)=H^r(\\tau_{\\leq q}L)=0$ [lem-weil-pbc-truncation-cohomology], and a morphism between zero objects is an isomorphism. So $\\tau_{\\leq q}s$ is a quasi-isomorphism; the same with $q-1$ for $\\tau_{\\leq q-1}s$. (Mathlib: `CochainComplex.quasiIso_truncLEMap_iff`, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:305.)",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Section 12.15 (Tag 0118, section-truncations), canonical truncation tau_{<=n}A^bullet for cochain complexes, lines 3777-3804"
+   }
+  },
+  {
+   "text": "**Step 2 ((a) for $H^q(-)[-q]$).** For a quasi-isomorphism $s:K\\to L$, $H^q(s)[-q]:H^q(K)[-q]\\to H^q(L)[-q]$ is the morphism of complexes whose component in degree $q$ is $H^q(s)$ and whose other components are maps between zero objects. $H^q(s)$ is an isomorphism by hypothesis, so every component is an isomorphism, and the componentwise inverses (they commute with the zero differentials) form an inverse morphism of complexes: $H^q(s)[-q]$ is an isomorphism of complexes, hence a quasi-isomorphism, since each functor $H^r$ sends isomorphisms to isomorphisms [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Section 12.15 (Tag 0118, section-truncations), canonical truncation tau_{<=n}A^bullet for cochain complexes, lines 3777-3804"
+   }
+  },
+  {
+   "text": "**Step 3 (naturality on complexes).** $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$ and $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ are natural transformations of functors on cochain complexes: for $\\phi:K\\to L$, $(\\tau_{\\leq q-1}\\phi,\\tau_{\\leq q}\\phi)$ is part of a morphism of short exact sequences, so $\\tau_{\\leq q}\\phi\\circ i_{q,K}=i_{q,L}\\circ\\tau_{\\leq q-1}\\phi$, and $j_q=\\bar j_q\\circ p_q$ with $H^q(\\phi)[-q]\\circ\\bar j_{q,K}=\\bar j_{q,L}\\circ M_q(\\phi)$ and $M_q(\\phi)\\circ p_{q,K}=p_{q,L}\\circ\\tau_{\\leq q}\\phi$, whence $H^q(\\phi)[-q]\\circ j_{q,K}=j_{q,L}\\circ\\tau_{\\leq q}\\phi$ [lem-weil-pbc-truncation-step-ses] (c). (Degreewise: in degree $q$ the projection $\\Ker d^q_K\\to H^q(K)$ followed by $H^q(\\phi)$ is the class of $\\phi^q$ restricted to cycles.)",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Section 12.15 (Tag 0118, section-truncations), canonical truncation tau_{<=n}A^bullet for cochain complexes, lines 3777-3804"
+   }
+  },
+  {
+   "text": "**Step 4 ((b) the functors).** $Q$ sends quasi-isomorphisms to isomorphisms [def-weil-abstract-derived-category], so by Steps 1 and 2 the functors $Q\\circ\\tau_{\\leq q}$, $Q\\circ\\tau_{\\leq q-1}$ and $Q\\circ H^q(-)[-q]:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ invert the quasi-isomorphisms. Since $Q$ is the localization at the quasi-isomorphisms [def-weil-abstract-derived-category], part (1) of [lem-weil-pbc-localization-universal-property] gives functors $\\tau_{\\leq q},\\tau_{\\leq q-1},H^q(-)[-q]:D(\\mathcal A)\\to D(\\mathcal A)$ with natural isomorphisms $\\phi:\\tau_{\\leq q}\\circ Q\\xrightarrow{\\sim}Q\\circ\\tau_{\\leq q}$ etc. (equalities for the category of fractions, Stacks 04VG (3)), and by part (2) these functors are unique up to unique isomorphism compatible with the $\\phi$'s.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma 04VG (lemma-properties-left-localization) (3); D(A) as localization: derived.tex Section 05RR, Definition 05RU"
+   }
+  },
+  {
+   "text": "**Step 5 ((b) the transformations).** Whiskering the natural transformations of Step 3 with $Q$ gives natural transformations $Q i_q:Q\\circ\\tau_{\\leq q-1}\\to Q\\circ\\tau_{\\leq q}$ and $Q j_q:Q\\circ\\tau_{\\leq q}\\to Q\\circ H^q(-)[-q]$ between functors inverting quasi-isomorphisms. By part (2) of [lem-weil-pbc-localization-universal-property], applied with the functors and isomorphisms $\\phi$ of Step 4, there are unique natural transformations $i_q:\\tau_{\\leq q-1}\\to\\tau_{\\leq q}$ and $j_q:\\tau_{\\leq q}\\to H^q(-)[-q]$ of functors on $D(\\mathcal A)$ with $i_{q,QK}=\\phi^{-1}\\circ Q(i_{q,K})\\circ\\phi$ and $j_{q,QK}=\\phi^{-1}\\circ Q(j_{q,K})\\circ\\phi$ for every complex $K$; this is the statement that their composites with $Q$ are $Q(i_q)$, $Q(j_q)$ up to the $\\phi$'s.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma 04VG (lemma-properties-left-localization) (3); D(A) as localization: derived.tex Section 05RR, Definition 05RU"
+   }
+  },
+  {
+   "text": "**Step 6 (the consequences for a morphism $f$).** For a morphism $f:K\\to L$ of $D(\\mathcal A)$ put $\\tau_{\\leq q}f$, $\\tau_{\\leq q-1}f$, $H^q(f)[-q]$ for the images of $f$ under the functors of Step 4. The two identities $\\tau_{\\leq q}f\\circ i_{q,K}=i_{q,L}\\circ\\tau_{\\leq q-1}f$ and $H^q(f)[-q]\\circ j_{q,K}=j_{q,L}\\circ\\tau_{\\leq q}f$ are the naturality squares of the transformations of Step 5 at $f$. If $f=Q(\\phi)$, naturality of the isomorphism $\\phi:\\tau_{\\leq q}\\circ Q\\xrightarrow{\\sim}Q\\circ\\tau_{\\leq q}$ of Step 4 at $\\phi$ gives $\\tau_{\\leq q}(Q\\phi)=\\phi_L^{-1}\\circ Q(\\tau_{\\leq q}\\phi)\\circ\\phi_K$, and likewise for $\\tau_{\\leq q-1}$ and $H^q(-)[-q]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma 04VG (lemma-properties-left-localization) (3); D(A) as localization: derived.tex Section 05RR, Definition 05RU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-step-ses",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; literature/stacks-project/categories.tex",
+  "place": "homology.tex Section 0118 (cohomology of tau_{<=n}); categories.tex Lemma 04VG (3) (universal property of the localization); derived.tex Remark 08J5 uses these 'canonical truncation functors' on D(A) without writing the descent out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +110,38 @@
    "results": "only TStructure.lean:68,121 (truncLE used to prove the t-structure axioms of DerivedCategory.TStructure.t) and Fractions.lean:78-149 (truncLEMap of a quasi-isomorphism); Localization.lift (Predicate.lean:304), Localization.liftNatTrans (:326)",
    "date": "2026-10-09",
    "verdict": "no match as a statement; the ingredients are CochainComplex.quasiIso_truncLEMap_iff and Localization.lift / liftNatTrans (with Lifting instances), which give it in several lines, not one"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical truncation functor on the derived category compatible with truncation of cochain complexes, Q.obj (K.truncLE n) isomorphic to truncLE of Q.obj K",
+   "results": "ComplexShape.Embedding.truncGEFunctor, truncLEFunctor (Embedding.TruncGE/TruncLE); Triangulated.TStructure.truncLT, truncGE (TStructure.TruncLTGE); CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE",
+   "date": "2026-10-09",
+   "verdict": "no match for the compatibility; the t-structure truncation t.truncLE n exists on DerivedCategory (TStructure/TruncLEGT.lean:38, with natTransTruncLEOfLE :112) but no isomorphism Q ⋙ t.truncLE n ≅ truncLEFunctor ⋙ Q is in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "truncation functor on DerivedCategory C commuting with DerivedCategory.Q and CochainComplex.truncLE; natural transformation tau_{<=n-1} to tau_{<=n} to H^n[-n]",
+   "results": "CochainComplex.πTruncGE_naturality(_assoc), ιTruncLE_naturality(_assoc), ComplexShape.Embedding.πTruncGENatTrans(_app), ιTruncLENatTrans, CochainComplex.shortComplexTruncLEX₃ToTruncGE",
+   "date": "2026-10-09",
+   "verdict": "no match (complex-level naturality of ι only; no complex-level map tau_{<=q-1} -> tau_{<=q} or tau_{<=q} -> H^q[-q])"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q, CochainComplex.truncLE",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Mathlib declaration mentions both"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'truncLE\\|truncLT' Mathlib/Algebra/Homology/DerivedCategory/ Mathlib/CategoryTheory/Localization/; grep -rn 'liftTruncLE\\|homologyFunctor.*single' Mathlib/Algebra/Homology/",
+   "results": "only DerivedCategory/TStructure.lean:68,121 and Fractions.lean:78-153 (uses inside proofs); TStructure.liftTruncLE (TruncLEGT.lean:291) is t-structure only; DerivedCategory/FullyFaithful.lean:31 singleFunctor ⋙ homologyFunctor ≅ 𝟭",
+   "date": "2026-10-09",
+   "verdict": "no match as a statement; split: (a) from lem-weil-pbc-truncation-cohomology and an elementary check, (b) from the new leaf lem-weil-pbc-localization-universal-property (Localization.lift / liftNatTrans)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -54,5 +158,16 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-truncation-descends",
+  "worker": "stage1",
+  "summary": "Not a leaf: Mathlib has clause (a) for tau (CochainComplex.quasiIso_truncLEMap_iff) and the localization universal property (Localization.lift/fac/liftNatTrans/natTrans_ext), and the t-structure truncation t.truncLE on DerivedCategory, but no complex-level i_q, j_q and no isomorphism between Q ⋙ t.truncLE n and truncLE ⋙ Q (searched with LeanSearch, LeanFinder, Loogle, grep). Split in 6 steps: (a) for tau from lem-weil-pbc-truncation-cohomology (natural comparison by c_q), (a) for H^q[-q] elementary (componentwise isomorphism), naturality of i_q, j_q on complexes from lem-weil-pbc-truncation-step-ses (c), descent of functors and transformations by the new Mathlib leaf lem-weil-pbc-localization-universal-property (Stacks 04VG (3); Mathlib Localization.lift, liftNatTrans), and the consequences for a morphism f as naturality squares. Statement corrected in a detail: tau o Q = Q o tau holds up to specified natural isomorphisms (equality only for the construction by fractions); the composites with Q are Q(i_q), Q(j_q) up to these."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

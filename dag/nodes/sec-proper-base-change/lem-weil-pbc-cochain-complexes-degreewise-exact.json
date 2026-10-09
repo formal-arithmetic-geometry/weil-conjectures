@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-cochain-complexes-degreewise-exact",
+ "kind": "statement",
+ "title": "Complexes of an abelian category form an abelian category; short exactness is degreewise; the second map of a short exact sequence is a cokernel of the first",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $\\mathrm{CoCh}(\\mathcal A)$ be the category of cochain complexes of $\\mathcal A$ indexed by $\\mathbf Z$ [def-weil-abstract-derived-category]. Then: (1) $\\mathrm{CoCh}(\\mathcal A)$ is an abelian category; (2) a sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of morphisms of complexes with $g\\circ f=0$ is short exact in $\\mathrm{CoCh}(\\mathcal A)$ ($f$ a monomorphism, $g$ an epimorphism, exact at $B$) if and only if for every $r\\in\\mathbf Z$ the sequence $0\\to A^r\\xrightarrow{f^r}B^r\\xrightarrow{g^r}C^r\\to0$ is short exact in $\\mathcal A$; (3) in a short exact sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of an abelian category (in particular of $\\mathrm{CoCh}(\\mathcal A)$), $g$ is an epimorphism and a cokernel of $f$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 0114 (label lemma-cat-cochain-abelian, line 3113): the category of cochain complexes is abelian, injectivity, surjectivity and exactness are degreewise; clause (3): Tag 0109 (definition-abelian-category, line 608), an epimorphism of an abelian category is the cokernel of its kernel"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of homological complexes in an abelian category is abelian; short exact iff degreewise short exact",
+   "results": "HomologicalComplex.shortExact_of_degreewise_shortExact, HomologicalComplex.shortExact_iff_degreewise_shortExact, HomologicalComplex.instAbelian, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact (Mathlib.Algebra.Homology.HomologicalComplexAbelian)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a short complex of homological complexes in an abelian category is short exact iff it is short exact in each degree",
+   "results": "HomologicalComplex.shortExact_of_degreewise_shortExact, shortExact_iff_degreewise_shortExact, exact_of_degreewise_exact, exact_iff_degreewise_exact (Mathlib.Algebra.Homology.HomologicalComplexAbelian)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.shortExact_iff_degreewise_shortExact",
+   "results": "HomologicalComplex.shortExact_iff_degreewise_shortExact : S.ShortExact ↔ ∀ i, (S.map (HomologicalComplex.eval C c i)).ShortExact, for [Abelian C], S : ShortComplex (HomologicalComplex C c) (Mathlib.Algebra.Homology.HomologicalComplexAbelian)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance : Abelian\\|shortExact_iff_degreewise_shortExact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; grep -n 'gIsCokernel' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+   "results": "HomologicalComplexAbelian.lean:45 `noncomputable instance : Abelian (HomologicalComplex C c)`, :56 shortExact_of_degreewise_shortExact, :70 shortExact_iff_degreewise_shortExact; ShortExact.lean:169 `ShortComplex.ShortExact.gIsCokernel [Balanced C] (hS : S.ShortExact) : IsColimit (CokernelCofork.ofπ S.g S.zero)` (abelian categories are balanced), `ShortExact.epi_g` field",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.shortExact_iff_degreewise_shortExact",
+  "file": "Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+  "how": "one Mathlib declaration per clause: (1) the instance `HomologicalComplex.instAbelian : Abelian (HomologicalComplex C c)` (line 45) for `c = ComplexShape.up ℤ`, i.e. `CochainComplex C ℤ`; (2) `HomologicalComplex.shortExact_iff_degreewise_shortExact S` (line 70), `S.map (eval C c i)` being the degree-i sequence; (3) `CategoryTheory.ShortComplex.ShortExact.gIsCokernel` (Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean:169) and the field `ShortExact.epi_g`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-step-ses",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

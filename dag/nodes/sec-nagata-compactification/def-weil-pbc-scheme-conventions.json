@@ -2,18 +2,67 @@
  "id": "def-weil-pbc-scheme-conventions",
  "kind": "definition",
  "title": "Scheme and morphism conventions",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes. It is *quasi-compact* if the\npreimage of every affine open of $Y$ is quasi-compact, and *quasi-separated*\nif its diagonal $X\\to X\\times_YX$ is quasi-compact. A scheme is *affine* if\nit is isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$. The\nmorphism $f$ is *separated* if its diagonal is a closed immersion, of *finite\ntype* if it is quasi-compact and every affine open of $Y$ is covered by\nfinitely many affine opens of $X$ whose coordinate rings are finitely\ngenerated over the coordinate ring of the corresponding affine open of $Y$,\nand of *finite presentation* if the same holds with finitely presented\nalgebras. It is *surjective* if it is surjective on underlying topological\nspaces, an *open immersion* if it identifies $X$ with an open subscheme of\n$Y$, and a *closed immersion* if it is affine and is induced locally by a\nsurjective ring homomorphism. It is an *immersion* if it factors as a closed\nimmersion followed by an open immersion (equivalently, as an open immersion\nfollowed by a closed immersion). It is *universally closed* if every base\nchange of $f$ is a closed map, and *proper* if it is separated, of finite\ntype, and universally closed. It is *finite* if it is affine and\n$f_*\\mathcal O_X$ is a finite $\\mathcal O_Y$-algebra, and *integral* if it is\naffine and $f_*\\mathcal O_X$ is integral over $\\mathcal O_Y$. It is\n*radicial* if for every field $K$ the map $X(K)\\to Y(K)$ is injective, and a\n*universal homeomorphism* if every base change of $f$ is a homeomorphism of\nunderlying spaces. It is *flat* if every induced local-ring map is flat, and\n*unramified* if it is locally of finite type and its diagonal is an open\nimmersion. It is *etale* if it is locally of finite presentation, flat, and\nunramified, and *weakly etale* if it is flat and its diagonal is flat.\n\nFor $y\\in|Y|$, the *geometric fiber* over $y$ is\n\n$$\n X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\overline{\\kappa(y)},\n$$\n\nwhere $\\overline{\\kappa(y)}$ is a chosen algebraic closure of the residue\nfield $\\kappa(y)$. A *geometric point* of $Y$ is a morphism $\\bar\ny:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega$ algebraically closed. A\nsubset of a scheme is *locally closed* if it is the intersection of an open\nand a closed subset, and *constructible* if it is a finite union of locally\nclosed subsets; a *locally closed constructible subscheme* is a subscheme\nwhose underlying set is locally closed and constructible. A topological space\nis *spectral* if it is quasi-compact, quasi-separated, sober, and has a basis\nof quasi-compact opens.",
+ "statement": "This node fixes no notion of its own: it collects the conventions on schemes and morphisms of schemes used throughout, each defined in the node named. Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme].\n\n- *Quasi-compact* (the preimage of every affine open of $Y$ is quasi-compact): [def-weil-finite-type-morphism]. *Quasi-separated* (the diagonal $X\\to X\\times_YX$ into the fibre product [def-pc-fibre-product] is quasi-compact): [def-weil-quasi-separated-morphism].\n- A scheme is *affine* if it is isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$: [def-pc-scheme], with $\\operatorname{Spec}A$ as in [def-weil-affine-spectrum].\n- *Separated* (the diagonal is a closed immersion), *universally closed* (every base change of $f$ is a closed map), and *proper* (separated, of finite type, and universally closed): [def-weil-proper-morphism].\n- *Of finite type* (quasi-compact, and the preimage of every affine open $\\operatorname{Spec}R$ of $Y$ is covered by finitely many affine opens $\\operatorname{Spec}B$ with $B$ a finitely generated $R$-algebra; equivalently, locally of finite type and quasi-compact): [def-weil-finite-type-morphism].\n- *Of finite presentation*: locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-quasi-separated-morphism] (Stacks Tag 01TP). The source asked only that the preimage of every affine open $\\operatorname{Spec}R$ of $Y$ be covered by finitely many affine opens $\\operatorname{Spec}B$ with $B$ a finitely presented $R$-algebra, which is \"locally of finite presentation and quasi-compact\" and is weaker in general: for a field $k$, $A=k[x_1,x_2,\\ldots]$, $Y=\\operatorname{Spec}A$ and the non-quasi-compact open $U=\\bigcup_nD(x_n)$ of $Y$, let $X$ be two copies of $Y$ glued along $U$ and $f:X\\to Y$ the identity on each copy; the preimage of an affine open $V$ is covered by the two copies of $V$, but the two copies of $Y$ are affine opens of $X$ meeting in $U$, so $f$ is not quasi-separated. *Of finite presentation* always means the notion of Stacks Tag 01TP.\n- *Surjective* (surjective on underlying topological spaces): [def-weil-surjective-morphism].\n- *Open immersion* (identifies $X$ with an open subscheme of $Y$): [def-weil-open-immersion]. *Closed immersion* (equivalently, affine and induced on affine opens by surjective ring homomorphisms) and *immersion* (a closed immersion followed by an open immersion): [def-weil-closed-immersion]. The source added \"equivalently, an open immersion followed by a closed immersion\"; that is not an equivalence in general (Stacks Remark Tag 01IP, Example Tag 01QW give an immersion that does not factor so; a quasi-compact immersion does, Stacks Lemma Tag 01QV), and it is not part of this definition.\n- *Finite* (affine [pqf-def-affine-morphism] with $f_*\\mathcal O_X$ a finite $\\mathcal O_Y$-algebra, i.e. finite ring maps over affine opens) and *integral* (affine with $f_*\\mathcal O_X$ integral over $\\mathcal O_Y$, i.e. integral ring maps over affine opens): [def-weil-finite-integral-morphism].\n- *Radicial* (for every field $K$ the map $X(K)\\to Y(K)$ is injective; equivalently universally injective, or injective with purely inseparable residue field extensions): [def-weil-radicial-morphism]. *Universal homeomorphism* (every base change of $f$ is a homeomorphism of underlying spaces): [def-weil-universal-homeomorphism].\n- *Flat* (every induced map of local rings $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is flat): [def-weil-flat-morphism]. *Unramified* (locally of finite type with diagonal an open immersion): [def-weil-unramified-morphism]. *Étale* (locally of finite presentation, flat and unramified): [def-weil-etale-morphism]. *Weakly étale* (flat with flat diagonal): [def-weil-weakly-etale-morphism].\n- *Geometric fibre* $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\overline{\\kappa(y)}$ over a point $y\\in Y$, for the residue field $\\kappa(y)$ [def-weil-residue-field] and a chosen algebraic closure $\\overline{\\kappa(y)}$ [def-weil-algebraic-closure]: [def-weil-geometric-fibre]. The source wrote it for $y\\in|Y|$; where $|Y|$ means the set of closed points [def-weil-closed-points] this is the special case of closed points.\n- *Geometric point* $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega$ algebraically closed: [def-weil-geometric-point].\n- *Locally closed* subset (intersection of an open and a closed subset): [def-weil-locally-closed-subset]. *Constructible* subset: [def-weil-constructible-subset]. The source defined \"constructible\" as \"a finite union of locally closed subsets\"; this agrees with [def-weil-constructible-subset] on Noetherian topological spaces (Stacks Tag 005L) and differs in general (in a quasi-compact scheme a non-quasi-compact open subset is a finite union of locally closed subsets but not constructible). Constructible always means [def-weil-constructible-subset].\n- A *locally closed constructible subscheme* of $Y$ is a subset $Z\\subseteq Y$ that is locally closed and constructible, with a subscheme structure, i.e. an immersion $Z\\to Y$ [def-weil-closed-immersion] whose image is $Z$.\n- *Spectral* topological space (quasi-compact, quasi-separated, sober, with a basis of quasi-compact opens): [def-weil-spectral-space].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-conv/def-weil-pbc-scheme-conventions.md",
   "place": "node def-weil-pbc-scheme-conventions, order 2"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-radicial-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-flat-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-fibre",
+  "def-weil-closed-points",
+  "def-weil-geometric-point",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
+  "def-weil-spectral-space"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "conventions on morphisms of schemes: quasi-compact, separated, finite type, proper",
+   "results": "AlgebraicGeometry.isProper_iff, isProper_eq, QuasiCompact, IsProper.toIsSeparated, quasiCompact_iff_isSpectralMap, IsProper.mk, IsProper.toLocallyOfFiniteType",
+   "date": "2026-10-09",
+   "verdict": "no single match: a collection of notions, each matched in its own node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definitions of properties of morphisms of schemes: quasi-compact, quasi-separated, separated, finite type, finite presentation, proper, immersion",
+   "results": "AlgebraicGeometry.IsProper, IsPreimmersion, isProper_iff, isProper_eq, QuasiCompact, topologically",
+   "date": "2026-10-09",
+   "verdict": "no single match: a collection of notions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class \\(QuasiCompact\\|QuasiSeparated\\|IsSeparated\\|Surjective\\|IsImmersion\\|IsClosedImmersion\\|UniversallyClosed\\|IsProper\\|IsFinite\\|IsIntegralHom\\|UniversallyInjective\\|Flat\\|FormallyUnramified\\|Etale\\|WeaklyEtale\\|LocallyOfFinitePresentation\\|LocallyOfFiniteType\\|IsAffineHom\\|IsAffine\\)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn '^class SpectralSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "one class per notion (Morphisms/QuasiCompact.lean:43, QuasiSeparated.lean:50, Separated.lean:44, UnderlyingMap.lean:59, Immersion.lean:45, UniversallyClosed.lean:43, Finite.lean:39, Integral.lean:35, UniversallyInjective.lean:47, Flat.lean:42, FormallyUnramified.lean:54, Etale.lean:41, WeaklyEtale.lean:44, FinitePresentation.lean:45, Affine.lean:47, AffineScheme.lean:59; Topology/Spectral/Basic.lean:38); no bundled scheme-level Unramified or universal homeomorphism class; no declaration collecting the conventions",
+   "date": "2026-10-09",
+   "verdict": "no single match: each notion is matched in the node named for it"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -32,5 +81,16 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-def-conv"
+ "unit": "sk-def-conv",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-scheme-conventions",
+  "worker": "stage1",
+  "summary": "The node was a grab-bag redefining some twenty-five notions. It is now a bundle of pointers, one per notion, like def-weil-scheme-morphism-properties: to the existing leaves def-pc-scheme (morphism, affine scheme), def-weil-affine-spectrum, def-pc-fibre-product, def-weil-finite-type-morphism (quasi-compact, finite type), def-weil-proper-morphism (separated, universally closed, proper), def-sbc-locally-finite-presentation, def-weil-open-immersion, def-weil-closed-immersion (closed immersion, immersion), pqf-def-affine-morphism, def-weil-flat-morphism, def-weil-weakly-etale-morphism, def-weil-residue-field, def-weil-algebraic-closure, def-weil-geometric-fibre, def-weil-closed-points, def-weil-geometric-point, def-weil-locally-closed-subset, def-weil-constructible-subset, and to eight new Mathlib leaves: def-weil-quasi-separated-morphism (QuasiSeparated), def-weil-surjective-morphism (Surjective), def-weil-finite-integral-morphism (IsFinite, IsIntegralHom), def-weil-radicial-morphism (UniversallyInjective with tfae_universallyInjective, Stacks 01S4), def-weil-universal-homeomorphism ((topologically IsHomeomorph).universally), def-weil-unramified-morphism (LocallyOfFiniteType ∧ IsOpenImmersion diagonal), def-weil-etale-morphism (Etale via Etale.iff_flat_and_formallyUnramified), def-weil-spectral-space (SpectralSpace). Corrections against Stacks, written in the statement: the source's 'finite presentation' omits quasi-separated (counterexample given; Stacks 01TP); the source's 'equivalently, an open immersion followed by a closed immersion' for immersions is false in general (Stacks 01IP, 01QW) and is dropped; 'constructible' as a finite union of locally closed subsets differs from Stacks' notion outside Noetherian spaces. The sheaf phrasing of finite/integral agrees with the affine-local definition (Mathlib's) only through Stacks 01PB; recorded in def-weil-finite-integral-morphism. Every notion now has a node and the item adds nothing of its own."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

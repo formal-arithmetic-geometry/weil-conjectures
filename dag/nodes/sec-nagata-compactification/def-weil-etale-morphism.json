@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-etale-morphism",
+ "kind": "definition",
+ "title": "Etale morphism of schemes",
+ "statement": "A morphism of schemes $f:X\\to Y$ [def-pc-scheme] is *étale* if it is locally of finite presentation [def-sbc-locally-finite-presentation], flat [def-weil-flat-morphism] and unramified [def-weil-unramified-morphism]. (This is the notion of Stacks Definition 02GI, where $f$ is étale if it is covered by affine opens $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ with $R\\to A$ an étale ring map: by Stacks Lemma 02GV $f$ is étale exactly when it is flat and G-unramified, and by Lemma 02GE a morphism locally of finite presentation is G-unramified exactly when its diagonal is an open immersion.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Definition with Tag 02GI, Lemma with Tag 02GV, Lemma with Tag 02GE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism of schemes iff flat formally unramified locally of finite presentation",
+   "results": "AlgebraicGeometry.IsEtale (deprecated alias of Etale), Scheme.Etale, IsEtale.instFormallyUnramified, RingHom.etale_iff_formallyUnramified_and_smooth, RingHom.Etale",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is étale iff it is flat, formally unramified and locally of finite presentation",
+   "results": "IsEtale.instFormallyUnramified, RingHom.etale_iff_formallyUnramified_and_smooth, IsEtale.instIsSmooth, IsEtale.of_comp (index v4.28.0, older name IsEtale)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Etale\\|iff_flat_and_formallyUnramified' -A2 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "line 41 class Etale (etale_appLE: Γ(Y,U) → Γ(X,V) étale for affine U, V ≤ f⁻¹U); line 140 lemma Etale.iff_flat_and_formallyUnramified : Etale f ↔ Flat f ∧ FormallyUnramified f ∧ LocallyOfFinitePresentation f",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Etale",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+  "how": "a few Mathlib lemmas, one per clause: `Etale.iff_flat_and_formallyUnramified` (Etale.lean:140) gives Etale f ↔ Flat f ∧ FormallyUnramified f ∧ LocallyOfFinitePresentation f; LocallyOfFinitePresentation gives LocallyOfFiniteType (FinitePresentation.lean:109), and for a morphism locally of finite type FormallyUnramified f ↔ IsOpenImmersion (pullback.diagonal f) (FormallyUnramified.lean:79 and :126), the node's unramified clause"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

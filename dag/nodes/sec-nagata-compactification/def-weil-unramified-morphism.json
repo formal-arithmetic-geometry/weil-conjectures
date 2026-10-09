@@ -1,0 +1,68 @@
+{
+ "id": "def-weil-unramified-morphism",
+ "kind": "definition",
+ "title": "Unramified morphism of schemes",
+ "statement": "A morphism of schemes $f:X\\to Y$ [def-pc-scheme] is *unramified* if it is locally of finite type [def-weil-finite-type-morphism] and its diagonal $\\Delta_f:X\\to X\\times_YX$ into the fibre product [def-pc-fibre-product] is an open immersion [def-weil-open-immersion]. (By Stacks Lemma 02GE, parts (1) and (2), this is the notion of Stacks Definition 02G4, where $f$ is unramified if it is covered by affine opens $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ with $R\\to A$ of finite type and $\\Omega_{A/R}=0$.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Lemma with Tag 02GE and Definition with Tag 02G4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unramified morphism locally of finite type diagonal open immersion",
+   "results": "FormallyUnramified.isOpenImmersion_diagonal, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified), IsOpenImmersion, locallyOfFiniteType_of_isOpenImmersion",
+   "date": "2026-10-09",
+   "verdict": "match (conjunction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "diagonal of a formally unramified morphism locally of finite type is an open immersion",
+   "results": "FormallyUnramified.isOpenImmersion_diagonal, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, IsImmersion.instDiagonalScheme, FormallyUnramified",
+   "date": "2026-10-09",
+   "verdict": "match (conjunction)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class Unramified\\|def Unramified\\|isOpenImmersion_diagonal\\|IsOpenImmersion (pullback.diagonal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no scheme-level Unramified class; Morphisms/FormallyUnramified.lean:54 class FormallyUnramified, :79 instance [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f, :126 instance isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f]",
+   "date": "2026-10-09",
+   "verdict": "match (conjunction)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsOpenImmersion",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "how": "exact as a conjunction of Mathlib notions: `LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)`; it is equivalent to `LocallyOfFiniteType f ∧ FormallyUnramified f` by the two instances of Morphisms/FormallyUnramified.lean (:79 and :126 `isOpenImmersion_diagonal`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

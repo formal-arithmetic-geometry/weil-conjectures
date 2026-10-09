@@ -1,0 +1,67 @@
+{
+ "id": "def-weil-quasi-separated-morphism",
+ "kind": "definition",
+ "title": "Quasi-separated morphism of schemes",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $\\Delta_f:X\\to X\\times_YX$ be its diagonal, the morphism into the fibre product [def-pc-fibre-product] whose two components are the identity of $X$. The morphism $f$ is *quasi-separated* if $\\Delta_f$ is quasi-compact [def-weil-finite-type-morphism], that is, the inverse image under $\\Delta_f$ of every quasi-compact open (equivalently, of every affine open) of $X\\times_YX$ is quasi-compact. A scheme $X$ is *quasi-separated* if $X\\to\\operatorname{Spec}\\mathbf Z$ is quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Stacks Project, Schemes, Definition with Tag 01KK, items (2) and (4); quasi-compact morphism: Definition with Tag 01K3 and Lemma 01K4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes is quasi-separated if its diagonal is quasi-compact",
+   "results": "AlgebraicGeometry.QuasiSeparated, QuasiSeparated.mk, quasiSeparated_iff, quasiSeparated_iff_quasiSeparatedSpace, quasiSeparatedSpace_iff_quasiCompact_prod_lift (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is quasi-separated when the diagonal morphism is quasi-compact",
+   "results": "AlgebraicGeometry.quasiSeparated_iff, quasiSeparated_eq_diagonal_is_quasiCompact, QuasiSeparated.quasiCompact_diagonal (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class QuasiSeparated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Morphisms/QuasiSeparated.lean:50 class QuasiSeparated (f : X ⟶ Y) : Prop where quasiCompact_diagonal : QuasiCompact (pullback.diagonal f)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.QuasiSeparated",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "how": "exact: `QuasiSeparated f` (line 50) is `QuasiCompact (pullback.diagonal f)`; a quasi-separated scheme is `QuasiSeparatedSpace X` (`quasiSeparated_iff_quasiSeparatedSpace`, for the terminal map)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

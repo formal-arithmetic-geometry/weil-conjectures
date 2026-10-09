@@ -1,0 +1,73 @@
+{
+ "id": "def-weil-universal-homeomorphism",
+ "kind": "definition",
+ "title": "Universal homeomorphism of schemes",
+ "statement": "A morphism of schemes $f:X\\to Y$ [def-pc-scheme] is a *universal homeomorphism* if for every morphism of schemes $Y'\\to Y$ the base change $X\\times_YY'\\to Y'$ (the projection from the fibre product [def-pc-fibre-product]) is a homeomorphism of underlying topological spaces.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Definition with Tag 04DD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal homeomorphism of schemes every base change is a homeomorphism",
+   "results": "AlgebraicGeometry.UniversallyInjective, Scheme.Hom.injective, universallyClosed_iff, UniversallyClosed, UniversallyInjective.mk, UniversallyOpen; no universal-homeomorphism class",
+   "date": "2026-10-09",
+   "verdict": "no named match; constructors found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal homeomorphism of schemes: base change along every morphism is a homeomorphism",
+   "results": "UniversallyOpen, UniversallyClosed, universallyOpen_iff ((topologically IsOpenMap).universally), UniversallyOpen.eq, topologically_iso_le; no universal-homeomorphism class",
+   "date": "2026-10-09",
+   "verdict": "no named match; constructors found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.topologically, IsHomeomorph",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no named match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'universally.*Homeomorph\\|UniversalHomeomorph\\|universallyHomeomorph' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -n '^def topologically' AlgebraicGeometry/Morphisms/Constructors.lean; grep -n '^def universally' CategoryTheory/MorphismProperty/Limits.lean; grep -n '^structure IsHomeomorph' Topology/Homeomorph/Defs.lean",
+   "results": "no named class; Constructors.lean:259 def topologically (P on maps of spaces) : MorphismProperty Scheme; MorphismProperty/Limits.lean:872 def universally (P holds for every base change f' in an IsPullback square); Topology/Homeomorph/Defs.lean:511 structure IsHomeomorph",
+   "date": "2026-10-09",
+   "verdict": "generalization: specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.universally, AlgebraicGeometry.topologically, IsHomeomorph",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean, Mathlib/Topology/Homeomorph/Defs.lean",
+  "how": "specializes in one line: a universal homeomorphism is `(topologically IsHomeomorph).universally f` (universally: Limits.lean:872; topologically: Constructors.lean:259; IsHomeomorph: Homeomorph/Defs.lean:511), the same construction by which Mathlib defines `UniversallyClosed` (`(topologically IsClosedMap).universally`) and `UniversallyInjective`; Mathlib has no bundled name for it"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

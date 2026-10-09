@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-coimage-mono",
+ "kind": "statement",
+ "title": "In an abelian category the map from the coimage A/Ker f to the target of f is a monomorphism",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $f:A\\to B$ a morphism of $\\mathcal A$, with kernel $\\ker f\\hookrightarrow A$ and coimage $\\mathrm{Coim}(f)=A/\\ker f=\\mathrm{coker}(\\ker f\\to A)$, $\\pi:A\\to A/\\ker f$ the projection. Since $f$ vanishes on $\\ker f$, $f=\\bar f\\circ\\pi$ for a unique $\\bar f:A/\\ker f\\to B$; then $\\bar f$ is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition Tag 0109 (label definition-abelian-category, line 608): in an abelian category the natural map Coim(f) -> Im(f) is an isomorphism, and Im(f) = Ker(B -> Coker f) -> B is a monomorphism, so Coim(f) -> B is a monomorphism"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in an abelian category the canonical map from coimage to image is an isomorphism",
+   "results": "CategoryTheory.Abelian.coimageIsoImage, coimageIsoImage', coimageIsoImage'_hom, instIsIsoCoimageImageComparison (Mathlib.CategoryTheory.Abelian.Basic); coimage_image_factorisation (Mathlib.CategoryTheory.Abelian.Images)",
+   "date": "2026-10-09",
+   "verdict": "match (generalization: Coim f ≅ Im f, composed with the mono Im f -> B)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in an abelian category, the induced map from the coimage (cokernel of the kernel of f) to the target of f is a monomorphism",
+   "results": "CategoryTheory.Abelian.instMonoFactorThruCoimage : Mono (Abelian.factorThruCoimage f) (Mathlib.CategoryTheory.Abelian.Basic); NonPreadditiveAbelian.instMonoFactorThruCoimage; Abelian.mono_factorThruImage",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'factorThruCoimage\\|abbrev coimage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Images.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "results": "Images.lean:72 `Abelian.coimage f := cokernel (kernel.ι f)`, :80 `Abelian.factorThruCoimage f : coimage f ⟶ Q := cokernel.desc _ f _`, :84 `coimage.fac : coimage.π f ≫ factorThruCoimage f = f`; Basic.lean:310 `instance : Mono (Abelian.factorThruCoimage f)`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.instMonoFactorThruCoimage",
+  "file": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+  "how": "exact: `Abelian.coimage f = cokernel (kernel.ι f)` is A/Ker f, `Abelian.factorThruCoimage f` is the induced map with `coimage.fac : coimage.π f ≫ factorThruCoimage f = f` (Mathlib/CategoryTheory/Abelian/Images.lean:72-84), and the instance at Basic.lean:310 says it is a monomorphism; uniqueness of the factorization is the universal property of the cokernel `cokernel.desc`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-truncation-step-ses",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

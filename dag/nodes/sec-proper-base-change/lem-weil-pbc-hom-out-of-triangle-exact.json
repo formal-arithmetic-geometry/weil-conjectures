@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-hom-out-of-triangle-exact",
+ "kind": "statement",
+ "title": "Hom(-,W) applied to a distinguished triangle: exactness at Y and at Z",
+ "statement": "Let $\\mathcal T$ be a pre-triangulated category [def-weil-triangulated-category], $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{d}X[1]$ a distinguished triangle and $W$ an object of $\\mathcal T$. (i) If $a:Y\\to W$ satisfies $a\\circ u=0$, there is $b:Z\\to W$ with $a=b\\circ v$ (exactness of $\\Hom(Z,W)\\to\\Hom(Y,W)\\to\\Hom(X,W)$). (ii) If $c:Z\\to W$ satisfies $c\\circ v=0$, there is $k:X[1]\\to W$ with $c=k\\circ d$ (exactness of $\\Hom(X[1],W)\\to\\Hom(Z,W)\\to\\Hom(Y,W)$).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0149 (lemma-representable-homological, line 386: Hom(-,W) is cohomological), (ii) applied to the rotated triangle (TR2)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from third object of distinguished triangle with mor₂ ≫ f = 0 factors through mor₃",
+   "results": "Triangle.coyoneda_exact₃, Triangle.distinguished_iff_of_isZero₃, Triangle.mor₃, Triangle.mono₃, Triangle.mono₁, Triangle.mor₁_eq_zero_iff_epi₃",
+   "date": "2026-10-09",
+   "verdict": "no direct match in this query (coyoneda_exact₃ is the covariant analogue); the match was found by the next two"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom(-, W) is cohomological on a pretriangulated category: a morphism out of the third object killed by the second arrow factors through the connecting morphism",
+   "results": "Triangle.coyoneda_exact₂, DerivedCategory.mem_distTriang_iff, Functor.mem_homologicalKernel_W_iff, DerivedCategory.triangleOfSESδ, Functor.mem_homologicalKernel_trW_iff, Triangle.coyoneda_exact₃",
+   "date": "2026-10-09",
+   "verdict": "no match in this query (covariant lemmas only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if Hom(X[1], Z) = 0 then the third morphism of a distinguished triangle X → Y → Z → X[1] is uniquely determined by the first two",
+   "results": "TStructure.triangle_map_ext, Triangle.yoneda_exact₃, Triangle.coyoneda_exact₃, complete_distinguished_triangle_morphism₂, Triangle.hom_ext, Triangle.yoneda_exact₂",
+   "date": "2026-10-09",
+   "verdict": "match: yoneda_exact₂ for (i), yoneda_exact₃ for (ii) (type read, Pretriangulated.lean:248,254)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃ ; CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+   "results": "yoneda_exact₃ (T) (hT) {X} (f : T.obj₃ ⟶ X) (hf : T.mor₂ ≫ f = 0) : ∃ g, f = T.mor₃ ≫ g; yoneda_exact₂ (T) (hT) {X} (f : T.obj₂ ⟶ X) (hf : T.mor₁ ≫ f = 0) : ∃ g, f = T.mor₂ ≫ g",
+   "date": "2026-10-09",
+   "verdict": "match (types read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comp_distTriang_mor_zero₁₂\\|lemma yoneda_exact\\|lemma coyoneda_exact\\|complete_distinguished_triangle_morphism₁\\|stacks 0146\\|stacks 0149' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/*.lean; sed -n 115,275p Pretriangulated.lean",
+   "results": "Pretriangulated.lean:122 comp_distTriang_mor_zero₁₂ (@[stacks 0146]), :134/:146 comp_distTriang_mor_zero₂₃/₃₁, :189 complete_distinguished_triangle_morphism₁, :207 complete_distinguished_triangle_morphism₂, :248 yoneda_exact₂, :254 yoneda_exact₃, :260 coyoneda_exact₂, :267 coyoneda_exact₁, :271 coyoneda_exact₃; Yoneda.lean:42,50 the @[stacks 0149] instances (preadditiveCoyoneda.obj A).IsHomological, (preadditiveYoneda.obj B).IsHomological",
+   "date": "2026-10-09",
+   "verdict": "match: yoneda_exact₂ (i), yoneda_exact₃ (ii)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+  "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+  "how": "one Mathlib lemma per clause, for T = Triangle.mk u v d with hT : T ∈ distTriang C, diagrammatic order: (i) Triangle.yoneda_exact₂ T hT (f : T.obj₂ ⟶ W) (T.mor₁ ≫ f = 0) : ∃ g, f = T.mor₂ ≫ g (line 248); (ii) Triangle.yoneda_exact₃ T hT (f : T.obj₃ ⟶ W) (T.mor₂ ≫ f = 0) : ∃ g : T.obj₁⟦1⟧ ⟶ W, f = T.mor₃ ≫ g (line 254)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-triangle-morphism-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

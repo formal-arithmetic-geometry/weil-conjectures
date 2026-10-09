@@ -1,0 +1,63 @@
+{
+ "id": "def-weil-spectral-space",
+ "kind": "definition",
+ "title": "Spectral topological space",
+ "statement": "A topological space $X$ is *spectral* if it is quasi-compact, quasi-separated (the intersection of two quasi-compact open subsets is quasi-compact), sober (every irreducible closed subset has a unique generic point), and the quasi-compact open subsets form a basis of the topology.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Stacks Project, Topology, Definition with Tag 08YG"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectral topological space compact quasi-separated sober basis of compact opens",
+   "results": "PrespectralSpace.isBasis_opens, SpectralSpace (Mathlib.Topology.Spectral.Basic), PrespectralSpace.of_isTopologicalBasis', PrespectralSpace.mk, PrespectralSpace.of_isTopologicalBasis",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral space: quasi-compact, quasi-separated, sober, compact open sets form a basis",
+   "results": "PrespectralSpace.isBasis_opens, PrespectralSpace.isTopologicalBasis, prespectralSpace_iff, PrespectralSpace.of_isTopologicalBasis' (Mathlib.Topology.Spectral.Prespectral)",
+   "date": "2026-10-09",
+   "verdict": "match (PrespectralSpace is the basis clause of SpectralSpace)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class SpectralSpace\\|^class PrespectralSpace\\|^class QuasiSeparatedSpace\\|^class QuasiSober' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "Spectral/Basic.lean:38 @[stacks 08YG] class SpectralSpace extends T0Space, CompactSpace, QuasiSober, QuasiSeparatedSpace, PrespectralSpace; Spectral/Prespectral.lean:29 PrespectralSpace (compact opens form a basis); QuasiSeparated.lean:47; Sober.lean:109",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SpectralSpace",
+  "file": "Mathlib/Topology/Spectral/Basic.lean",
+  "how": "exact: `SpectralSpace X` (line 38, @[stacks 08YG]) is T0 ∧ compact ∧ quasi-sober ∧ quasi-separated ∧ prespectral (compact opens a basis); sober in the node's sense (unique generic points) is QuasiSober (existence) with T0 (uniqueness)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

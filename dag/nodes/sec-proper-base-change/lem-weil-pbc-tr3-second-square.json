@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-tr3-second-square",
+ "kind": "statement",
+ "title": "TR3 from the second square: a commutative square on the second arrows extends to a morphism of distinguished triangles",
+ "statement": "Let $\\mathcal T$ be a pre-triangulated category [def-weil-triangulated-category], $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{d}X[1]$ and $X'\\xrightarrow{u'}Y'\\xrightarrow{v'}Z'\\xrightarrow{d'}X'[1]$ distinguished triangles, and $b:Y\\to Y'$, $c:Z\\to Z'$ morphisms with $c\\circ v=v'\\circ b$. Then there is $a:X\\to X'$ with $b\\circ u=u'\\circ a$ and $a[1]\\circ d=d'\\circ c$, i.e. $(a,b,c)$ is a morphism of triangles.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.1.9, proof, p. 24 (pdf page 25): 'un argument dual fournit (a) <=> (b')' (the implication (b') => (c)); it is TR3 applied to the rotated triangles (TR2), literature/stacks-project/derived.tex Definition 0145 (definition-triangulated-category, line 95)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative square on mor₂ of two distinguished triangles extends to a morphism of triangles",
+   "results": "Pretriangulated.completeDistinguishedTriangleMorphism, complete_distinguished_triangle_morphism₂, TriangleMorphism.mk, Octahedron.triangleMorphism₂, TriangleMorphism.comm₂, HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism",
+   "date": "2026-10-09",
+   "verdict": "no direct match in this query (₂ is the variant from the outer squares); the match was found by the next two"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "given two distinguished triangles and morphisms on the second and third objects commuting with mor₂, there is a morphism on the first object completing a morphism of triangles",
+   "results": "complete_distinguished_triangle_morphism₂, complete_distinguished_triangle_morphism, completeDistinguishedTriangleMorphism, complete_distinguished_triangle_morphism₁, Triangle.homMk (Mathlib.CategoryTheory.Triangulated.Pretriangulated / Basic)",
+   "date": "2026-10-09",
+   "verdict": "match: complete_distinguished_triangle_morphism₁"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁",
+   "results": "complete_distinguished_triangle_morphism₁ (T₁ T₂) (hT₁) (hT₂) (b : T₁.obj₂ ⟶ T₂.obj₂) (c : T₁.obj₃ ⟶ T₂.obj₃) (comm : T₁.mor₂ ≫ c = b ≫ T₂.mor₂) : ∃ a, T₁.mor₁ ≫ b = a ≫ T₂.mor₁ ∧ T₁.mor₃ ≫ a⟦1⟧' = c ≫ T₂.mor₃",
+   "date": "2026-10-09",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comp_distTriang_mor_zero₁₂\\|lemma yoneda_exact\\|lemma coyoneda_exact\\|complete_distinguished_triangle_morphism₁\\|stacks 0146\\|stacks 0149' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/*.lean; sed -n 115,275p Pretriangulated.lean",
+   "results": "Pretriangulated.lean:122 comp_distTriang_mor_zero₁₂ (@[stacks 0146]), :134/:146 comp_distTriang_mor_zero₂₃/₃₁, :189 complete_distinguished_triangle_morphism₁, :207 complete_distinguished_triangle_morphism₂, :248 yoneda_exact₂, :254 yoneda_exact₃, :260 coyoneda_exact₂, :267 coyoneda_exact₁, :271 coyoneda_exact₃; Yoneda.lean:42,50 the @[stacks 0149] instances (preadditiveCoyoneda.obj A).IsHomological, (preadditiveYoneda.obj B).IsHomological",
+   "date": "2026-10-09",
+   "verdict": "match: complete_distinguished_triangle_morphism₁ (Pretriangulated.lean:189)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁",
+  "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+  "how": "exact: for T₁ = Triangle.mk u v d, T₂ = Triangle.mk u' v' d' distinguished, b, c with T₁.mor₂ ≫ c = b ≫ T₂.mor₂ (i.e. c∘v = v'∘b) it gives a with T₁.mor₁ ≫ b = a ≫ T₂.mor₁ (b∘u = u'∘a) and T₁.mor₃ ≫ a⟦1⟧' = c ≫ T₂.mor₃ (a[1]∘d = d'∘c) (line 189)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-triangle-morphism-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-hom-into-triangle-exact",
+ "kind": "statement",
+ "title": "Hom(W,-) applied to a distinguished triangle: zero composite and exactness at the middle and at X[1]",
+ "statement": "Let $\\mathcal T$ be a pre-triangulated category [def-weil-triangulated-category], $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{d}X[1]$ a distinguished triangle and $W$ an object of $\\mathcal T$. (i) $v\\circ u=0$. (ii) If $a:W\\to Y$ satisfies $v\\circ a=0$, there is $b:W\\to X$ with $a=u\\circ b$ (exactness of $\\Hom(W,X)\\to\\Hom(W,Y)\\to\\Hom(W,Z)$). (iii) If $c:W\\to X[1]$ satisfies $u[1]\\circ c=0$, there is $k:W\\to Z$ with $c=d\\circ k$ (exactness of $\\Hom(W,Z)\\to\\Hom(W,X[1])\\to\\Hom(W,Y[1])$).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0146 (lemma-composition-zero, line 358) for (i); Lemma 0149 (lemma-representable-homological, line 386: Hom(W,-) is homological) for (ii) and, applied to the twice rotated triangle (TR2), for (iii)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism W to middle object of distinguished triangle with zero composite to third object factors through first object",
+   "results": "Triangle.mor₁_eq_zero_iff_epi₃, Triangle.mono₁, Limits.factorThruKernelSubobject, Triangle.epi₃, Triangle.mono₂, Triangulated.Subcategory.W.mk",
+   "date": "2026-10-09",
+   "verdict": "no match in this query (the match was found by the next two)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of two consecutive morphisms of a distinguished triangle is zero",
+   "results": "Pretriangulated.comp_distTriang_mor_zero₁₂ (and _assoc), Mathlib.CategoryTheory.Triangulated.Pretriangulated",
+   "date": "2026-10-09",
+   "verdict": "match for (i)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any object W of a pretriangulated category, Hom(W, -) applied to a distinguished triangle gives an exact sequence of abelian groups",
+   "results": "Triangle.coyoneda_exact₁, Triangle.coyoneda_exact₂, Triangle.yoneda_exact₂, Triangle.coyoneda_exact₃ (Mathlib.CategoryTheory.Triangulated.Pretriangulated), preadditiveYoneda_map_distinguished (Triangulated.Yoneda)",
+   "date": "2026-10-09",
+   "verdict": "match: coyoneda_exact₂ for (ii), coyoneda_exact₁ for (iii)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂ ; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁",
+   "results": "coyoneda_exact₂ (T) (hT : T ∈ distTriang) {X} (f : X ⟶ T.obj₂) (hf : f ≫ T.mor₂ = 0) : ∃ g, f = g ≫ T.mor₁; coyoneda_exact₁ (T) (hT) {X} (f : X ⟶ T.obj₁⟦1⟧) (hf : f ≫ T.mor₁⟦1⟧' = 0) : ∃ g, f = g ≫ T.mor₃",
+   "date": "2026-10-09",
+   "verdict": "match (types read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comp_distTriang_mor_zero₁₂\\|lemma yoneda_exact\\|lemma coyoneda_exact\\|complete_distinguished_triangle_morphism₁\\|stacks 0146\\|stacks 0149' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/*.lean; sed -n 115,275p Pretriangulated.lean",
+   "results": "Pretriangulated.lean:122 comp_distTriang_mor_zero₁₂ (@[stacks 0146]), :134/:146 comp_distTriang_mor_zero₂₃/₃₁, :189 complete_distinguished_triangle_morphism₁, :207 complete_distinguished_triangle_morphism₂, :248 yoneda_exact₂, :254 yoneda_exact₃, :260 coyoneda_exact₂, :267 coyoneda_exact₁, :271 coyoneda_exact₃; Yoneda.lean:42,50 the @[stacks 0149] instances (preadditiveCoyoneda.obj A).IsHomological, (preadditiveYoneda.obj B).IsHomological",
+   "date": "2026-10-09",
+   "verdict": "match: comp_distTriang_mor_zero₁₂ (i), coyoneda_exact₂ (ii), coyoneda_exact₁ (iii)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂",
+  "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+  "how": "one Mathlib lemma per clause, for T = Triangle.mk u v d with hT : T ∈ distTriang C, in Mathlib's diagrammatic order (a ≫ b = b∘a): (i) comp_distTriang_mor_zero₁₂ T hT : T.mor₁ ≫ T.mor₂ = 0 (line 122, @[stacks 0146]); (ii) Triangle.coyoneda_exact₂ T hT (f : W ⟶ T.obj₂) (f ≫ T.mor₂ = 0) : ∃ g, f = g ≫ T.mor₁ (line 260); (iii) Triangle.coyoneda_exact₁ T hT (f : W ⟶ T.obj₁⟦1⟧) (f ≫ T.mor₁⟦1⟧' = 0) : ∃ g, f = g ≫ T.mor₃ (line 267)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-triangle-morphism-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

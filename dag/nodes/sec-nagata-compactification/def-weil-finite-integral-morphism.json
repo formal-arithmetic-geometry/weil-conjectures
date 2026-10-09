@@ -1,0 +1,67 @@
+{
+ "id": "def-weil-finite-integral-morphism",
+ "kind": "definition",
+ "title": "Finite and integral morphisms of schemes",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. The morphism $f$ is *integral* if it is affine [pqf-def-affine-morphism] and for every affine open $V=\\operatorname{Spec}R\\subseteq Y$ [def-weil-affine-spectrum], with (affine) inverse image $f^{-1}(V)=\\operatorname{Spec}A$, the ring map $R\\to A$ is integral (every element of $A$ satisfies a monic polynomial with coefficients in the image of $R$). It is *finite* if it is affine and for every such $V$ the ring map $R\\to A$ is finite ($A$ is a finitely generated $R$-module). Since a quasi-coherent module $\\widetilde M$ on $\\operatorname{Spec}R$ is of finite type exactly when $M$ is a finite $R$-module (Stacks Lemma 01PB), $f$ is finite exactly when it is affine and $f_*\\mathcal O_X$ is a finite (finite type, quasi-coherent) $\\mathcal O_Y$-algebra; in the same sense, $f$ is integral when it is affine and $f_*\\mathcal O_X$ is integral over $\\mathcal O_Y$ on every affine open.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Definition with Tag 01WH; finite type modules on affines: Properties, Lemma with Tag 01PB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes: affine and finite ring map on affine opens",
+   "results": "AlgebraicGeometry.IsFinite.recOn, Scheme.Hom.finite_app, IsFinite.finite_app, IsFinite.mk, isFinite_iff (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match (finite)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral morphism of schemes: affine and integral ring maps on affine opens; finite morphism of schemes",
+   "results": "AlgebraicGeometry.isIntegralHom_iff, IsIntegralHom.toIsAffineHom, IsIntegralHom.hasAffineProperty (Mathlib.AlgebraicGeometry.Morphisms.Integral); IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, IsFinite.instIsIntegralHom (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-09",
+   "verdict": "match (integral and finite)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class IsFinite\\|^class IsIntegralHom\\|^class IsAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/Finite.lean:39 class IsFinite extends IsAffineHom f where finite_app : ∀ U, IsAffineOpen U → (f.app U).hom.Finite; Morphisms/Integral.lean:35 class IsIntegralHom extends IsAffineHom f where isIntegral_app : ∀ U, IsAffineOpen U → (f.app U).hom.IsIntegral; Morphisms/Affine.lean:47 class IsAffineHom (preimage of affine open is affine)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsIntegralHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+  "how": "exact: `IsFinite f` (Finite.lean:39) is `IsAffineHom f` and `(f.app U).hom.Finite` for every affine open U of Y, i.e. Γ(U) → Γ(f⁻¹U) finite, the node's affine-local definition; `IsIntegralHom f` (Integral.lean:35) likewise with `IsIntegral`. The sheaf phrasing ('f_*O_X a finite O_Y-algebra') agrees only through Stacks 01PB, which is recorded in the statement, not matched"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}

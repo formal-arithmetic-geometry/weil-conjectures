@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-radicial-morphism",
+ "kind": "definition",
+ "title": "Radicial and universally injective morphisms of schemes",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. The morphism $f$ is *universally injective* if for every morphism of schemes $Y'\\to Y$ the base change $X\\times_YY'\\to Y'$ (the projection from the fibre product [def-pc-fibre-product]) is injective on underlying sets. It is *radicial* if it is injective on underlying sets and for every $x\\in X$ the extension of residue fields $\\kappa(f(x))\\subseteq\\kappa(x)$ [def-weil-residue-field] is purely inseparable. The following are equivalent (Stacks Lemma 01S4): (1) for every field $K$ the map $X(K)=\\operatorname{Mor}(\\operatorname{Spec}K,X)\\to Y(K)=\\operatorname{Mor}(\\operatorname{Spec}K,Y)$, $x\\mapsto f\\circ x$ [def-weil-affine-spectrum], is injective; (2) $f$ is universally injective; (3) $f$ is radicial; (4) the diagonal $X\\to X\\times_YX$ is surjective [def-weil-surjective-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Definition with Tag 01S3 and Lemma with Tag 01S4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "radicial morphism injective on field-valued points universally injective",
+   "results": "AlgebraicGeometry.UniversallyInjective, UniversallyInjective.mk, Scheme.Hom.injective, universallyInjective_eq, universallyInjective_iff (Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universally injective morphism equivalent to injective on K-points for every field K, radicial, purely inseparable residue fields",
+   "results": "UniversallyInjective.universally_injective, Scheme.Hom.injective, UniversallyInjective, universallyInjective_iff (Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class UniversallyInjective\\|tfae_universallyInjective' -A6 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "results": "line 47 class UniversallyInjective := universally (topologically Injective); line 107 @[stacks 01S4] theorem tfae_universallyInjective : TFAE [UniversallyInjective f, ∀ K [Field K], Injective (fun g : Spec (.of K) ⟶ X ↦ g ≫ f), Injective f ∧ ∀ x, (f.residueFieldMap x).hom.IsPurelyInseparable, Surjective (pullback.diagonal f)]",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.UniversallyInjective",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+  "how": "exact: `UniversallyInjective f` (line 47) is the node's universally injective; the node's four-way equivalence is `tfae_universallyInjective` (line 107, @[stacks 01S4]), whose items are (2), (1), (3), (4) of the node in that order (field points: `∀ K [Field K], Function.Injective (fun g : Spec (.of K) ⟶ X ↦ g ≫ f)`; radicial: `Function.Injective f ∧ ∀ x, (f.residueFieldMap x).hom.IsPurelyInseparable`)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-scheme-conventions",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-conv"
+}
