@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 
 /-!
 # The duality pairing on `H¹`
@@ -31,6 +32,27 @@ open CategoryTheory Limits
 noncomputable section
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+section LongExact
+
+variable {X : Scheme.{u}} {S : ShortComplex X.Modules}
+
+/-- In a short exact sequence `0 → M₁ → M₂ → M₃ → 0` with `H⁰(M₃) = 0`, the map
+`H¹(M₁) ⟶ H¹(M₂)` is injective. -/
+lemma H.injective_map_f_one (hS : S.ShortExact) [Subsingleton (S.X₃.H 0)] :
+    Function.Injective (H.map S.f 1) := by
+  refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+  obtain ⟨y, rfl⟩ := (H.ker_map_f_eq_range_δ hS 0).le hx
+  rw [Subsingleton.elim y 0, map_zero]
+
+/-- In a short exact sequence `0 → M₁ → M₂ → M₃ → 0` with `H^{n+1}(M₁) = 0`, the map
+`H^n(M₂) ⟶ H^n(M₃)` is surjective. -/
+lemma H.surjective_map_g (hS : S.ShortExact) (n : ℕ) [Subsingleton (S.X₁.H (n + 1))] :
+    Function.Surjective (H.map S.g n) := by
+  intro x
+  exact (H.ker_δ_eq_range_map_g hS n).le (Subsingleton.elim (H.δ hS n x) 0)
+
+end LongExact
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] {ω : X.Modules}
   (t : Module.Dual k (ω.H 1))
@@ -95,6 +117,33 @@ lemma bijective_dualPairing_sigma {ι : Type u} [Finite ι] (f : ι → X.Module
     rw [dualPairing_apply, ← H.map_comp_apply, Sigma.ι_desc, ← dualPairing_apply, hx j]
     rfl
 
+/-- **The duality pairing and binary biproducts.** -/
+lemma bijective_dualPairing_biprod (A B : X.Modules) (hA : Function.Bijective (dualPairing t A))
+    (hB : Function.Bijective (dualPairing t B)) :
+    Function.Bijective (dualPairing t (A ⊞ B)) := by
+  have hsum (c : (A ⊞ B).H 1) :
+      c = H.map biprod.inl 1 (H.map biprod.fst 1 c) +
+        H.map biprod.inr 1 (H.map biprod.snd 1 c) := by
+    conv_lhs => rw [← H.map_id_apply (A ⊞ B) 1 c, ← biprod.total]
+    rw [H.map_add_apply, H.map_comp_apply, H.map_comp_apply]
+  constructor
+  · intro x y hxy
+    refine biprod.hom_ext' _ _ (hA.1 ?_) (hB.1 ?_) <;>
+    rw [dualPairing_comp, dualPairing_comp, hxy]
+  · intro y
+    obtain ⟨x₁, hx₁⟩ := hA.2 (y ∘ₗ H.mapLinearMap k biprod.inl 1)
+    obtain ⟨x₂, hx₂⟩ := hB.2 (y ∘ₗ H.mapLinearMap k biprod.inr 1)
+    have e₁ (z : A.H 1) : t (H.map (biprod.desc x₁ x₂) 1 (H.map biprod.inl 1 z)) =
+        y (H.map biprod.inl 1 z) := by
+      rw [← H.map_comp_apply, biprod.inl_desc]
+      exact LinearMap.congr_fun hx₁ z
+    have e₂ (z : B.H 1) : t (H.map (biprod.desc x₁ x₂) 1 (H.map biprod.inr 1 z)) =
+        y (H.map biprod.inr 1 z) := by
+      rw [← H.map_comp_apply, biprod.inr_desc]
+      exact LinearMap.congr_fun hx₂ z
+    refine ⟨biprod.desc x₁ x₂, LinearMap.ext fun c ↦ ?_⟩
+    rw [hsum c, map_add, map_add, dualPairing_apply, dualPairing_apply, e₁, e₂]
+
 /-- **The duality pairing on a presentation.** Let `E₁ ⟶ E₀ ⟶ G ⟶ 0` be exact, i.e. `p : E₀ ⟶ G`
 is an epimorphism and `q : E₁ ⟶ ker p` is an epimorphism, and assume that `H¹(p)` is
 surjective. If the duality pairing is bijective for `E₀` and injective for `E₁`, then it is
@@ -126,5 +175,30 @@ lemma bijective_dualPairing_of_epi {E₀ E₁ G : X.Modules} (p : E₀ ⟶ G) [E
     change dualPairing t G x ∘ₗ H.mapLinearMap k p 1 = y ∘ₗ H.mapLinearMap k p 1
     rw [← dualPairing_comp]
     exact (congrArg (dualPairing t E₀) hx).trans hz
+
+/-- **The duality pairing on `H⁰(X, Hom(G, ω))`**, as a `k`-linear map
+`H⁰(X, Hom(G, ω)) ⟶ H¹(X, G)^∨`: the duality pairing `dualPairing` composed with
+`H⁰(X, Hom(G, ω)) ≃ Hom(G, ω)`. -/
+def dualPairingH (G : X.Modules) :
+    H (X := X) (SheafOfModules.homObj (R := X.sheaf) G ω) 0 →ₗ[k] Module.Dual k (G.H 1) where
+  toFun x := dualPairing t G (homObjHZeroAddEquiv G ω x)
+  map_add' x y := by
+    rw [map_add, map_add]
+  map_smul' c x := by
+    rw [smul_H_eq_globalSectionsRingHom_smul, homObjHZeroAddEquiv_smul]
+    ext y
+    rw [dualPairing_apply, H.map_comp_apply, ← smul_H_eq_map,
+      ← smul_H_eq_globalSectionsRingHom_smul, LinearMap.map_smul, RingHom.id_apply,
+      LinearMap.smul_apply, dualPairing_apply]
+
+lemma dualPairingH_apply (G : X.Modules)
+    (x : H (X := X) (SheafOfModules.homObj (R := X.sheaf) G ω) 0) :
+    dualPairingH t G x = dualPairing t G (homObjHZeroAddEquiv G ω x) :=
+  rfl
+
+lemma bijective_dualPairingH_iff (G : X.Modules) :
+    Function.Bijective (dualPairingH t G) ↔ Function.Bijective (dualPairing t G) := by
+  change Function.Bijective (dualPairing t G ∘ homObjHZeroAddEquiv G ω) ↔ _
+  exact Function.Bijective.of_comp_iff _ (homObjHZeroAddEquiv G ω).bijective
 
 end AlgebraicGeometry.Scheme.Modules
