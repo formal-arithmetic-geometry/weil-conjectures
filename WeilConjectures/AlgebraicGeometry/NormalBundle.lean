@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.AlgebraicGeometry.RelativeGluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
@@ -46,6 +48,9 @@ bundle of rank `c` (blueprint `def-pur-normal-bundle`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_symSpecι`: over an affine open `U`, `V(I)`
   is `Spec (Sym_{Γ(U)} I(U))`.
 - `AlgebraicGeometry.Scheme.Hom.isPullback_normalBundle`: `N_{Z/X} = V(I) ×_X Z`.
+- `AlgebraicGeometry.Scheme.ker_specMap_lmul'`: the ideal of the diagonal of `Spec A ⟶ Spec R`
+  is the ideal whose conormal module is `Ω[A⁄R]`, so that the normal bundle of the diagonal of
+  a smooth morphism is the relative tangent bundle.
 -/
 
 @[expose] public section
@@ -398,5 +403,30 @@ instance [IsLocallyNoetherian X] : LocallyOfFiniteType i.normalBundleProj :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
 
 end Hom
+
+open TensorProduct in
+/-- The ideal of the diagonal of `Spec A ⟶ Spec R`. Up to the identification
+`Spec A ×_{Spec R} Spec A ≅ Spec (A ⊗[R] A)` the diagonal is `Spec` of the multiplication
+`A ⊗[R] A ⟶ A` (`AlgebraicGeometry.diagonal_SpecMap`), whose ideal is the ideal
+`KaehlerDifferential.ideal R A = ker (A ⊗[R] A ⟶ A)`. Its conormal module is by definition the
+module of Kähler differentials `Ω[A⁄R]`, so the normal bundle of the diagonal is
+`Spec_A (Sym Ω[A⁄R])`, the relative tangent bundle. -/
+lemma ker_specMap_lmul' (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] :
+    (Spec.map (CommRingCat.ofHom
+      (Algebra.TensorProduct.lmul' R : A ⊗[R] A →ₐ[R] A).toRingHom)).ker =
+      IdealSheafData.ofIdealTop ((KaehlerDifferential.ideal R A).map
+        (Scheme.ΓSpecIso (.of (A ⊗[R] A))).inv.hom) := by
+  rw [ker_of_isAffine]
+  congr 1
+  set φ := CommRingCat.ofHom (Algebra.TensorProduct.lmul' R : A ⊗[R] A →ₐ[R] A).toRingHom
+  have h : (Spec.map φ).appTop =
+      (Scheme.ΓSpecIso (.of (A ⊗[R] A))).hom ≫ φ ≫ (Scheme.ΓSpecIso (.of A)).inv := by
+    rw [← Category.assoc, ← Scheme.ΓSpecIso_naturality, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  rw [h, CommRingCat.hom_comp, CommRingCat.hom_comp, ← RingHom.comap_ker,
+    RingHom.ker_comp_of_injective _
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).inv).1]
+  exact (Ideal.map_comap_of_equiv
+    (Scheme.ΓSpecIso (.of (A ⊗[R] A))).commRingCatIsoToRingEquiv.symm).symm
 
 end AlgebraicGeometry.Scheme
