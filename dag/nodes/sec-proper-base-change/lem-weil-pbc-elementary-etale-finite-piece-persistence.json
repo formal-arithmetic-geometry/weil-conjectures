@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-elementary-etale-finite-piece-persistence",
+ "kind": "statement",
+ "title": "A finite piece with one point over u survives a further base change with trivial residue field extension",
+ "statement": "Let $f:X\\to S$ and $\\varphi:U\\to S$ be morphisms of schemes [def-pc-scheme], $u\\in U$, $s=\\varphi(u)$, $x\\in X$ with $f(x)=s$. Let $X_U=X\\times_SU$ be the fibre product [def-pc-fibre-product] with projections $p:X_U\\to X$, $q:X_U\\to U$, and let $V\\subseteq X_U$ be an open subscheme such that (i) $V\\hookrightarrow X_U\\xrightarrow{q}U$ is finite [def-weil-finite-integral-morphism], (ii) there is exactly one point $v\\in V$ with $q(v)=u$, (iii) $p(v)=x$ and the map $\\kappa(x)\\to\\kappa(v)$ induced by $p$ on residue fields [def-weil-residue-field] is an isomorphism. Let $\\psi:U'\\to U$ be a morphism of schemes and $u'\\in U'$ with $\\psi(u')=u$ such that $\\kappa(u)\\to\\kappa(u')$ (induced by $\\psi$) is an isomorphism. Let $X_{U'}=X\\times_SU'$ be the fibre product of $f$ and $\\varphi\\circ\\psi$, with projections $p':X_{U'}\\to X$, $q':X_{U'}\\to U'$, let $\\pi:X_{U'}\\to X_U$ be the morphism with $p\\circ\\pi=p'$ and $q\\circ\\pi=\\psi\\circ q'$, and let $V'=\\pi^{-1}(V)$, an open subscheme of $X_{U'}$. Then (i') $V'\\hookrightarrow X_{U'}\\xrightarrow{q'}U'$ is finite, (ii') there is exactly one point $v'\\in V'$ with $q'(v')=u'$, and (iii') $p'(v')=x$ and $\\kappa(x)\\to\\kappa(v')$ (induced by $p'$) is an isomorphism; moreover $\\pi(v')=v$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion (lines 11951-11954: for an elementary etale neighbourhood $(U',u')\\to(U,u)$ the triple $(U',u',U'\\times_UV)$ again satisfies (i)-(iii)); Stacks gives no proof of it, and its proof of Lemma 02LL (lines 11998-12011) applies it to opens $V_i$ obtained earlier, i.e. to any triple satisfying (i)-(iii). Stated here for an arbitrary $\\psi$ with $\\kappa(u)\\cong\\kappa(u')$ (etaleness of $\\psi$ is not needed); the agent's formulation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a finite morphism along a morphism with trivial residue field extension keeps a unique point in the fibre with the same residue field",
+   "results": "Scheme.Hom.fiberToSpecResidueField_apply, Scheme.Hom.fiber, fiberOverSpecResidueField (Mathlib.AlgebraicGeometry.Fiber), IsFinite.instIsStableUnderBaseChangeScheme (Morphisms.Finite), Algebra.QuasiFinite.baseChange, Algebra.Unramified.baseChange",
+   "date": "2026-10-10",
+   "verdict": "no match (only the clause (i'), finite is stable under base change, which is lem-weil-pbc-finite-morphism-permanence)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a scheme morphism: points of the fibre over u' of the base change correspond to points over u when residue field of u' equals residue field of u",
+   "results": "Scheme.Hom.fiberToSpecResidueField, Scheme.Hom.fiber, Scheme.Pullback.ofPointTensor, Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, Scheme.Pullback.Triplet.tensor, Triplet.isPullback_SpecMap_tensor (Mathlib.AlgebraicGeometry.PullbackCarrier)",
+   "date": "2026-10-10",
+   "verdict": "no match: the PullbackCarrier API (points of a pullback = triplets with a prime of the tensor product of residue fields) is the tool for the proof, not the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'residueField.*Bijective|Bijective.*residueField|elementary' Mathlib/AlgebraicGeometry ; rg -n '02LK' Mathlib/ (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

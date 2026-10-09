@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-local-finite-at-point-elementary",
+ "kind": "statement",
+ "title": "An isolated fibre point becomes a finite piece after an elementary etale base change",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $x\\in X$ and $s=f(x)$, and assume that $x$ is an isolated point of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] (the singleton $\\{x\\}$ is open in $X_s$). Then there are a scheme $U$, an etale morphism $\\varphi:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $\\varphi(u)=s$ such that the map $\\kappa(s)\\to\\kappa(u)$ induced by $\\varphi$ on residue fields [def-weil-residue-field] is an isomorphism (an elementary etale neighbourhood of $(S,s)$), and an open subscheme $V$ of the fibre product $X_U=X\\times_SU$ [def-pc-fibre-product], with projections $p:X_U\\to X$ and $q:X_U\\to U$, such that: (i) the composite $V\\hookrightarrow X_U\\xrightarrow{q}U$ is finite [def-weil-finite-integral-morphism]; (ii) there is exactly one point $v\\in V$ with $q(v)=u$; (iii) $p(v)=x$, and the map $\\kappa(x)\\to\\kappa(v)$ induced by $p$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point, lines 11924-11967), statement (a), (b), (i)-(iii) and proof (reduction to affine opens $x\\in Y\\subseteq X$, $f(Y)\\subseteq W\\subseteq S$, then Algebra, Lemma 00UJ, algebra-lemma-etale-makes-quasi-finite-finite-one-prime). The final assertion of 02LK (persistence under a further elementary etale neighbourhood) is the separate node lem-weil-pbc-elementary-etale-finite-piece-persistence, stated there for any triple with (i)-(iii)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism locally of finite type quasi-finite at a point becomes finite on an open after etale base change with the same residue field",
+   "results": "Algebra.QuasiFinite.baseChange, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFiniteAt.baseChange (Mathlib.RingTheory.QuasiFinite.Basic), AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite (Morphisms.QuasiFinite), IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-finite at x morphism of schemes: there is an etale neighbourhood (U,u) of s with kappa(u)=kappa(s) and an open V of X x_S U finite over U with unique point over u mapping to x",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite, locallyQuasiFinite_iff, IsEtale.of_comp, Scheme.Etale, instLocallyQuasiFiniteOfIsImmersion (Mathlib.AlgebraicGeometry.Morphisms.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "results": "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (Mathlib.AlgebraicGeometry.ZariskisMainTheorem, line 49): f lft and IsSeparated, quasi-finite at x; gives etale g:U->S with s in range g and complementary opens V, W of pullback f g with V finite over U and a point v of V over x",
+   "date": "2026-10-10",
+   "verdict": "no match: separatedness assumed, no point u with kappa(u)=kappa(s), no uniqueness of v over u, no residue field clause (Mathlib's own comment: weaker than stacks#02LN)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '02LK|02LL|02LN|02LM' Mathlib/ ; rg -n 'theorem|lemma' Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean ; rg -n 'Etale.*residueField' Mathlib/AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only the comment 'weaker than stacks#02LN' at ZariskisMainTheorem.lean:47 above exists_etale_isCompl_of_quasiFiniteAt; no @[stacks 02LK]; ring level: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (@[stacks 00UJ], RingTheory/Etale/QuasiFinite.lean:379), the algebraic input of the proof (it omits clause (5) of 00UJ, that B has no prime over q and p')",
+   "date": "2026-10-10",
+   "verdict": "no match: 00UJ declaration is a candidate for the split of this node (affine case)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

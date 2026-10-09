@@ -16,9 +16,109 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induction on $n$, base case $n=0$ (Stacks: 'We will use induction on $n$'; the base case is left implicit there and written out by the agent). For $n=0$ take $U=S$, $\\varphi=\\mathrm{id}_S$ and $u=s$: the identity is an open immersion [def-weil-open-immersion], hence etale by [lem-weil-pbc-etale-composition-cancellation] (1) [def-weil-etale-morphism], and $\\kappa(s)\\to\\kappa(u)$ is the identity of $\\kappa(s)$ [def-weil-residue-field]; there are no $V_i$ to choose. For the induction step let $n\\ge1$ and suppose that an etale $\\varphi:U\\to S$, a point $u\\in U$ with $\\varphi(u)=s$ and $\\kappa(s)\\to\\kappa(u)$ an isomorphism, and open subschemes $V_1,\\dots,V_{n-1}$ of $X_U=X\\times_SU$ (projections $p:X_U\\to X$, $q:X_U\\to U$) satisfying (i)-(iii) for $x_1,\\dots,x_{n-1}$ are given (the statement for $x_1,\\dots,x_{n-1}$).",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  },
+  {
+   "text": "The point $x'_n$ (Stacks: 'Since $\\kappa(s)=\\kappa(u)$ the fibre $(X_U)_u=X_s$. Hence there exists a unique point $x'_n\\in X_u$ corresponding to $x_n$'). By [lem-weil-pbc-fibre-product-points] the points $y\\in X_U$ with $p(y)=x_n$ and $q(y)=u$ are in bijection with the primes of $T=\\kappa(x_n)\\otimes_{\\kappa(s)}\\kappa(u)$ [def-pc-fibre-product]. Since $\\beta:\\kappa(s)\\to\\kappa(u)$ is an isomorphism, the ring map $\\kappa(x_n)\\to T$, $a\\mapsto a\\otimes1$, is an isomorphism, with inverse $a\\otimes b\\mapsto a\\,\\alpha(\\beta^{-1}(b))$ where $\\alpha:\\kappa(s)\\to\\kappa(x_n)$ is induced by $f$ [def-weil-residue-field]; so $T$ is a field, its only prime is $0$, and there is exactly one such point, call it $x'_n$. As $T/0=T$ is a field, [lem-weil-pbc-fibre-product-point-residue-field] gives that $T\\to\\kappa(x'_n)$ is an isomorphism compatible with the maps from $\\kappa(x_n)$; composing with the isomorphism $\\kappa(x_n)\\to T$, the map $\\kappa(x_n)\\to\\kappa(x'_n)$ induced by $p$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-pc-fibre-product",
+    "def-weil-residue-field",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  },
+  {
+   "text": "Hypotheses of the one-point case for $x'_n$ (Stacks: 'Also $x'_n$ is isolated in $X_u$'). The second projection $q:X_U\\to U$ is locally of finite type by [lem-weil-pbc-lft-base-change], and $q(x'_n)=u$. Since $p(x'_n)=x_n$ is an isolated point of $X_s$, [lem-weil-pbc-isolated-fibre-point-base-change] (with $g=\\varphi$) shows that $x'_n$ is an isolated point of the fibre $(X_U)_u$ of $q$ [def-pc-scheme-fibre].",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-isolated-fibre-point-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  },
+  {
+   "text": "Application of the one-point case (Stacks: 'Hence by Lemma 02LK there exists an elementary etale neighbourhood $(U',u')\\to(U,u)$ and an open $V_n\\subset X_{U'}$ which works for $x'_n$'). By [lem-weil-pbc-etale-local-finite-at-point-elementary] applied to $q:X_U\\to U$ and $x'_n$ there are an etale $\\psi:U'\\to U$, a point $u'\\in U'$ with $\\psi(u')=u$ and $\\kappa(u)\\to\\kappa(u')$ an isomorphism, and an open subscheme $V_n$ of $X_U\\times_UU'$ (projections $\\pi:X_U\\times_UU'\\to X_U$, $q':X_U\\times_UU'\\to U'$) finite over $U'$, with exactly one point $v_n$ over $u'$, such that $\\pi(v_n)=x'_n$ and $\\kappa(x'_n)\\to\\kappa(v_n)$ is an isomorphism [def-weil-finite-integral-morphism]. By [lem-weil-pbc-cartesian-square-pasting] (lower square $X_U\\to X$ over $\\varphi$, upper square $\\pi$ over $\\psi$), $X_U\\times_UU'$ with $p'=p\\circ\\pi$ and $q'$ is a fibre product $X_{U'}=X\\times_SU'$ of $f$ and $\\varphi\\circ\\psi$ [def-pc-fibre-product], and $\\pi$ is the morphism with $p\\circ\\pi=p'$, $q\\circ\\pi=\\psi\\circ q'$. The composite $\\varphi\\circ\\psi$ is etale by [lem-weil-pbc-etale-composition-cancellation] (2) [def-weil-etale-morphism], maps $u'$ to $s$, and $\\kappa(s)\\to\\kappa(u')$ is the composite of the isomorphisms $\\kappa(s)\\to\\kappa(u)\\to\\kappa(u')$ [def-weil-residue-field]: $(U',u')$ with $\\varphi\\circ\\psi$ is an elementary etale neighbourhood of $(S,s)$; it is the one of the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-at-point-elementary",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  },
+  {
+   "text": "$V_n$ works for $x_n$ (Stacks: '... which works for $x'_n$ and hence for $x_n$'; written out by the agent). Properties (i) and (ii) for $V_n\\subseteq X_{U'}$ and $u'$ are those of the previous step. For (iii): $p'(v_n)=p(\\pi(v_n))=p(x'_n)=x_n$, and the map $\\kappa(x_n)\\to\\kappa(v_n)$ induced by $p'=p\\circ\\pi$ is the composite of $\\kappa(x_n)\\to\\kappa(x'_n)$ (an isomorphism by step 2) and $\\kappa(x'_n)\\to\\kappa(v_n)$ (an isomorphism by step 4) [def-weil-residue-field], hence an isomorphism.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  },
+  {
+   "text": "The earlier opens still work (Stacks: 'By the final assertion of Lemma 02LK the open subschemes $V'_i=U'\\times_UV_i$ for $i=1,\\dots,n-1$ still work with respect to $x_1,\\dots,x_{n-1}$. Hence we win.'). For $i<n$ put $V'_i=\\pi^{-1}(V_i)$, an open subscheme of $X_{U'}$. Since $V_i$ satisfies (i)-(iii) for $x_i$ with respect to $(U,u)$ and $\\kappa(u)\\to\\kappa(u')$ is an isomorphism, [lem-weil-pbc-elementary-etale-finite-piece-persistence] (with $\\varphi$, $\\psi$, $\\pi$, $p'$, $q'$ as in step 4) gives that $V'_i\\to U'$ is finite, that $V'_i$ has exactly one point $v'_i$ over $u'$, and that $p'(v'_i)=x_i$ with $\\kappa(x_i)\\to\\kappa(v'_i)$ an isomorphism. Together with step 5, the elementary etale neighbourhood $(U',u')$ of step 4 and the opens $V'_1,\\dots,V'_{n-1},V_n$ of $X_{U'}$ satisfy (i)-(iii) for $x_1,\\dots,x_n$, which completes the induction.",
+   "uses": [
+    "lem-weil-pbc-elementary-etale-finite-piece-persistence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-isolated-fibre-point-base-change",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-elementary-etale-finite-piece-persistence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LL, proof (lines 11998-12011); the base case n=0 and the verification of (iii) for V_n are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +170,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 02LL (tag verified in tags/tags: 02LL = more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points, line 11974): correct, kept, stmt_deps unchanged (def-pc-scheme etc.). Proof follows the Stacks induction on n in six steps: base case n=0 (identity, written out), the unique point x'_n of X_U over (x_n,u) with kappa(x_n)=kappa(x'_n) (01JT and its residue field clause, using kappa(s)=kappa(u)), hypotheses for 02LK (lft base change, 01TM), application of 02LK to X_U->U and x'_n with pasting of fibre products and composition of etale maps, V_n works for x_n (written out), and persistence of V_1..V_{n-1} (the final assertion of 02LK, which Stacks applies to arbitrary triples satisfying (i)-(iii)). New unsplit nodes: lem-weil-pbc-etale-local-finite-at-point-elementary (02LK, without its final assertion; its split goes through Algebra 00UJ, for which Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq is the Mathlib candidate, missing clause (5) of 00UJ) and lem-weil-pbc-elementary-etale-finite-piece-persistence (the final assertion of 02LK, stated for any triple and any psi with kappa(u)=kappa(u')). Neither is in Mathlib (three kinds of search recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Six steps along the proof of Stacks 02LL (induction on n): base case written out, the unique point x'_n over (x_n, u) with the same residue field (fibre-product-points leaf and the 01JT residue node), lft and isolatedness after base change, the one-point case 02LK (new unsplit node; Mathlib's @[stacks 00UJ] declaration covers clauses (1)-(4) of 00UJ but not (5), so 00UJ stays for the 02LK split) with pasting and composition, V_n works for x_n (written out), the earlier opens persist (new unsplit node for the final assertion of 02LK, stated in the generality Stacks uses without proof). Tags verified (02LL, 02LK, 00UJ). cartesian-square-pasting is a Mathlib leaf (tool)."
+ }
 }
