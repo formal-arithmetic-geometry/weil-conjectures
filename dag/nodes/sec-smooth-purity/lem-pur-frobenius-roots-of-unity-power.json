@@ -1,0 +1,53 @@
+{
+ "id": "lem-pur-frobenius-roots-of-unity-power",
+ "kind": "statement",
+ "title": "Frobenius acts on roots of unity by the q-th power",
+ "statement": "Let $k_0$ be a finite field with $q$ elements, $q=p^a$ with $p$ prime, and $k$ an algebraic closure of $k_0$ [def-weil-finite-field-fiber]; let $\\varphi_q\\in\\operatorname{Gal}(k/k_0)$, $z\\mapsto z^q$, be the arithmetic Frobenius and $\\gamma=\\varphi_q^{-1}$ the geometric Frobenius [def-weil-frobenius-substitution]. Let $N\\geq1$ be an integer prime to $p$ and $\\mu_N(k)=\\{\\zeta\\in k^\\times:\\zeta^N=1\\}$. Then:\n\n1. $\\mu_N(k)$ is a cyclic group of order $N$, and every automorphism $\\sigma$ of the field $k$ maps $\\mu_N(k)$ to itself.\n2. $\\varphi_q(\\zeta)=\\zeta^q$ and $\\gamma(\\zeta)=\\zeta^{q'}$ for every $\\zeta\\in\\mu_N(k)$, where $q'\\in\\mathbf Z$ is any integer with $qq'\\equiv1\\pmod N$ (it exists since $\\gcd(q,N)=1$).\n3. Let $\\ell\\neq p$ be a prime and $T_\\ell\\mu(k)=\\varprojlim_r\\mu_{\\ell^r}(k)$, the limit along the maps $\\zeta\\mapsto\\zeta^\\ell$. It is a free $\\mathbf Z_\\ell$-module of rank one [def-weil-l-adic-numbers] (written additively), $\\varphi_q$ and $\\gamma$ act on it componentwise, and $\\varphi_q$ acts as multiplication by $q\\in\\mathbf Z_\\ell^\\times$ and $\\gamma$ as multiplication by $q^{-1}\\in\\mathbf Z_\\ell^\\times$.",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), p. 281: 'si k = F_q, la substitution de Frobenius phi : x -> x^q agit [sur Q_l(1)] par multiplication par q'; the geometric Frobenius F = phi^{-1}: literature/deligne-weil-II_PMIHES-1980-52.pdf, (1.1.7), pp. 150-151"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-substitution",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean",
+   "results": "modularCyclotomicCharacter (L ≃+* L →* (ZMod n)ˣ) with .spec g ζ = ζ^(χ g).val and .unique; cyclotomicCharacter L p : (L ≃+* L) →* ℤ_[p]ˣ with cyclotomicCharacter.spec and .toZModPow; nothing evaluates the character at a Frobenius",
+   "date": "2026-10-09",
+   "verdict": "generalization: (3) is the statement cyclotomicCharacter k ℓ (frobenius) = q, which follows from cyclotomicCharacter.toZModPow, modularCyclotomicCharacter.unique and FiniteField.coe_frobeniusAlgEquivOfAlgebraic in several lines, not one; no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem.*frobenius\\|lemma.*frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean; grep -rln frobenius ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln 'rootsOfUnity\\|IsPrimitiveRoot'",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic K L : Gal(L/K) with coe_frobeniusAlgEquivOfAlgebraic : ⇑ = (· ^ q) (this is (2) for phi_q, by definition); RingTheory/RootsOfUnity/PrimitiveRoots.lean and RingTheory/Polynomial/Cyclotomic/Factorization.lean use frobenius only for injectivity/factorization; rootsOfUnity.isCyclic (RingTheory/RootsOfUnity/Basic.lean) and RingTheory/RootsOfUnity/AlgebraicallyClosed.lean give (1)",
+   "date": "2026-10-09",
+   "verdict": "no match for the whole statement (parts (1) and the phi_q half of (2) are in Mathlib)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-coefficient-twists",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [
+  "unreachable"
+ ]
+}

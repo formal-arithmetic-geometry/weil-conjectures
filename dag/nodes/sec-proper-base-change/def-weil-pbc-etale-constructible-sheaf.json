@@ -1,0 +1,60 @@
+{
+ "id": "def-weil-pbc-etale-constructible-sheaf",
+ "kind": "definition",
+ "title": "Constructible sheaf of modules on the small etale site",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite commutative ring, let $T_{\\Et}$ be the small etale site of $T$ [def-weil-pbc-etale-site] and $\\Lambda_T$ its constant sheaf of rings, and let $\\mathcal F$ be a sheaf of $\\Lambda_T$-modules on $T_{\\Et}$ [def-weil-pbc-etale-sheaves]. The sheaf $\\mathcal F$ is *constructible* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<n}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<n}T_k$ of the underlying space into pairwise disjoint locally closed subsets, with immersions $\\iota_k$ of schemes $Z_k$ having set-theoretic image $T_k$) such that every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and for every $k$ the inverse image $\\iota_k^{-1}\\mathcal F$ [def-weil-pbc-inverse-image], a sheaf of $\\Lambda_{Z_k}$-modules on $(Z_k)_{\\Et}$, is finite locally constant as a sheaf of $\\Lambda$-modules [def-constructible-finite-locally-constant]: there is an etale covering $\\{U_i\\to Z_k\\}$ such that each restriction to $U_i$ is isomorphic, as a sheaf of $\\Lambda$-modules, to a constant sheaf $\\underline{M_i}$ of a $\\Lambda$-module $M_i$, and its stalk at every geometric point of $Z_k$ is a finite set.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Lemma Tag 095E, condition (3) (label lemma-constructible-quasi-compact-quasi-separated), the form for sheaves of Lambda-modules over a Noetherian ring Lambda, here Lambda finite; equivalent for quasi-compact quasi-separated T to Definition Tag 03RW (label definition-constructible), which asks for such a partition on every affine open; finite locally constant as in Definition Tag 03RU. The global form is the constructibility clause of literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-inverse-image",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'onstructible' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Topology/Constructible.lean (Topology.IsConstructible, line 178), Topology/Spectral/ConstructibleTopology.lean, RingTheory/Spectrum/Prime/{Topology,Chevalley,ChevalleyComplexity,ConstructibleSet}.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean: all about constructible subsets of spaces/spectra; nothing about constructible sheaves on a site",
+   "date": "2026-10-09",
+   "verdict": "no match (only the subset notion, recorded in def-weil-constructible-subset)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocallyConstant\\b\\|LocallyConstantSheaf\\|isLocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only AlgebraicGeometry/Morphisms/FlatRank.lean (IsLocallyConstant of the rank function, a function on a space); no locally constant or finite locally constant sheaf on a site",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'smallEtaleTopology\\|class IsConstant\\|pointSmallEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "Scheme.smallEtaleTopology (AlgebraicGeometry/Sites/Etale.lean:51) on Scheme.Etale; HasSheafify and Grothendieck abelian sheaf categories (Sites/AffineEtale.lean:29,112); geometric points as points of the small etale site (Sites/EtalePoint.lean:62, enough points line 160); Sheaf.IsConstant (CategoryTheory/Sites/ConstantSheaf.lean:81). AlgebraicGeometry/Sites/ConstantSheaf.lean is the sheaf U -> C(U,T), not locally constant sheaves.",
+   "date": "2026-10-09",
+   "verdict": "no match (the site, its points and constant sheaves exist; locally constant and constructible sheaves do not)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-constructible-complexes",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

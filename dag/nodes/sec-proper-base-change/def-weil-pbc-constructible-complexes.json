@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-constructible-complexes",
  "kind": "definition",
  "title": "Constructible finite-coefficient complexes",
- "statement": "Let $\\Lambda$ be a finite commutative ring. A sheaf of $\\Lambda_T$-modules on\nthe small etale site [def-weil-pbc-etale-site] $T_{\\Et}$ is *lisse* if it is\nlocally constant with finite stalks [def-weil-pbc-etale-sheaves], and\n*constructible* if $T$ admits a finite partition by locally closed\nconstructible subschemes on each of which the restriction is lisse. A complex\n$K\\in D(T_{\\Et},\\Lambda)$ is *bounded constructible* if every $\\mathcal\nH^i(K)$ is constructible and there are integers $a\\leq b$ with $\\mathcal\nH^i(K)=0$ for $i\\notin[a,b]$. The corresponding full subcategory\nis denoted\n\n$$\n \\Dbc(T_{\\Et},\\Lambda)\\subset D(T_{\\Et},\\Lambda).\n$$",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and $T$ a scheme. A sheaf of $\\Lambda_T$-modules [def-weil-pbc-etale-sheaves] on\nthe small etale site [def-weil-pbc-etale-site] $T_{\\Et}$ is *lisse* if it is\nlocally constant with finite stalks, i.e. finite locally constant as a sheaf of $\\Lambda$-modules [def-constructible-finite-locally-constant], and\n*constructible* if $T$ admits a finite partition by locally closed\nconstructible subschemes on each of which the restriction is lisse [def-weil-pbc-etale-constructible-sheaf]. A complex\n$K\\in D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories] is *bounded constructible* if every cohomology sheaf $\\mathcal\nH^i(K)$ [def-weil-derived-cohomology-sheaves] is constructible and there are integers $a\\leq b$ with $\\mathcal\nH^i(K)=0$ for $i\\notin[a,b]$. The corresponding full subcategory\nis denoted\n\n$$\n \\Dbc(T_{\\Et},\\Lambda)\\subset D(T_{\\Et},\\Lambda).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md",
   "place": "node def-weil-pbc-constructible-complexes, order 1108"
@@ -10,14 +10,39 @@
  "stmt_deps": [
   "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-derived-categories"
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'onstructible' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only constructible subsets (Topology/Constructible.lean: Topology.IsConstructible line 178; Topology/Spectral/ConstructibleTopology.lean; RingTheory/Spectrum/Prime/*); no constructible sheaf, no D^b_c",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocallyConstant\\b\\|LocallyConstantSheaf\\|smallEtaleTopology\\|class IsConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
+   "results": "Scheme.smallEtaleTopology (AlgebraicGeometry/Sites/Etale.lean:51), Sheaf.IsConstant (CategoryTheory/Sites/ConstantSheaf.lean:81), points of the small etale site (Sites/EtalePoint.lean); no locally constant (lisse) sheaf on a site",
+   "date": "2026-10-09",
+   "verdict": "no match (lisse = def-constructible-finite-locally-constant, closed on slopmaster2 as AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf with A = ModuleCat Λ)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class IsLE\\|class IsGE\\|homologyFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "TStructure.IsLE / IsGE (Triangulated/TStructure/Basic.lean:160,165) and DerivedCategory.homologyFunctor exist; no bounded constructible subcategory",
+   "date": "2026-10-09",
+   "verdict": "no match (boundedness is elementary from the cohomology sheaves)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +66,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-constructible-complexes",
+  "worker": "stage1",
+  "summary": "Checked the statement against its blueprint source (master; no slopmaster2 copy differs: the node has no Lean on either branch) and against Stacks 03RU (finite locally constant), 03RW (constructible, affine-local) and 095E(3) (the global finite partition into constructible locally closed subschemes, equivalent to 03RW for qcqs T; for Lambda finite, 'of finite type and locally constant' is 'finite locally constant'). Statement kept for finite commutative rings only (no Q-bar_l convention here, as the reviewers asked); added 'T a scheme' and the citations of the notions. Statement dependencies named: the small etale site [def-weil-pbc-etale-site]; Lambda_T and its module sheaves [def-weil-pbc-etale-sheaves]; lisse = finite locally constant as a sheaf of Lambda-modules [def-constructible-finite-locally-constant, closed on slopmaster2 as Scheme.IsFiniteLocallyConstantSheaf with A = ModuleCat Lambda]; constructibility, the new unsplit definition def-weil-pbc-etale-constructible-sheaf (a stratification [def-constructible-stratification] with constructible strata [def-weil-constructible-subset, Mathlib] on whose strata the inverse image [def-weil-pbc-inverse-image] is finite locally constant), which is not def-constructible-constructible: that node (and its Lean Scheme.IsConstructibleSheaf) does not ask the strata to be constructible, so for non-Noetherian T it admits e.g. j_! of a constant sheaf along a non-retrocompact open; D(T_et,Lambda) [def-weil-pbc-derived-categories]; the cohomology sheaves H^i [def-weil-derived-cohomology-sheaves, Mathlib leaf for any ringed site]. Boundedness (H^i = 0 outside [a,b]) is elementary. The statement only defines a full subcategory and claims no triangulated structure, so no lemma is hidden. Mathlib has the etale site, its points, Sheaf.IsConstant, IsConstructible/IsLocallyClosed for subsets and DerivedCategory, but no locally constant or constructible sheaves."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

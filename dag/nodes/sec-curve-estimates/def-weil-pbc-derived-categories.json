@@ -2,21 +2,56 @@
  "id": "def-weil-pbc-derived-categories",
  "kind": "definition",
  "title": "Derived categories of etale sheaves",
- "statement": "For a scheme $T$ and a commutative ring $R$, let\n$\\mathsf{Cpx}(\\Mod(T_{\\Et},R))$ be the abelian category of cochain complexes\nof $R_T$-module sheaves and let\n\n$$\n D(T_{\\Et},R)=\\mathsf{Cpx}(\\Mod(T_{\\Et},R))\n [\\{\\text{quasi-isomorphisms}\\}^{-1}]\n$$\n\nbe its Verdier localization at quasi-isomorphisms; the notation without $R$\nrefers to sheaves of abelian groups. The triangulated category\n$\\Dplus(T_{\\Et},R)$ is the full subcategory of objects whose cohomology\nsheaves vanish below some integer, and $D^b(T_{\\Et},R)$ is the full\nsubcategory of objects with only finitely many nonzero cohomology sheaves.\nFor $K\\in D(T_{\\Et},R)$ write $\\mathcal H^i(K)$ for its $i$-th cohomology\nsheaf (with respect to the standard t-structure). An object has *torsion\ncohomology* if every $\\mathcal H^i(K)$ is a torsion sheaf\n[def-weil-pbc-etale-sheaves].",
+ "statement": "For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site], and for a commutative ring $R$ let $R_T$ be the constant sheaf of rings on $T_{\\Et}$ [def-weil-pbc-constant-sheaf] and\n$\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category], [def-weil-pbc-etale-sheaves]. Define\n\n$$\n D(T_{\\Et},R)=D(\\Mod(T_{\\Et},R))\n$$\n\nto be its derived category [def-weil-abstract-derived-category]: the localization of the category of cochain complexes of $R_T$-module sheaves at the quasi-isomorphisms, with its triangulated structure. The notation without $R$, $D(T_{\\Et})$, means $D(\\Ab(T_{\\Et}))$ for the category $\\Ab(T_{\\Et})$ of sheaves of abelian groups [def-weil-pbc-etale-sheaves] (the case $R=\\mathbf Z$). For $K\\in D(T_{\\Et},R)$ and $i\\in\\mathbf Z$ write $\\mathcal H^i(K)\\in\\Mod(T_{\\Et},R)$ for its $i$-th cohomology sheaf [def-weil-derived-cohomology-sheaves], the cohomology $\\Ker d^i/\\Im d^{i-1}$ of any representing complex.\nLet\n\n$$\n \\Dplus(T_{\\Et},R)=D^+(\\Mod(T_{\\Et},R)),\\qquad D^b(T_{\\Et},R)=D^b(\\Mod(T_{\\Et},R))\n$$\n\nbe the bounded below and bounded derived categories [def-weil-pbc-bounded-derived-subcategories]: the strictly full triangulated subcategories of $D(T_{\\Et},R)$ of the $K$ for which there is an integer $n$ with $\\mathcal H^i(K)=0$ for all $i<n$ (equivalently $K\\in D(T_{\\Et},R)^{\\ge n}$ for the standard t-structure [def-sbc-standard-tstructure-derived-category]), respectively for which $\\mathcal H^i(K)\\neq0$ for only finitely many $i$. An object $K$ has *torsion cohomology* if every $\\mathcal H^i(K)$, as a sheaf of abelian groups, is a torsion sheaf [def-weil-pbc-etale-sheaves].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-derived-categories.md",
   "place": "node def-weil-pbc-derived-categories, order 933"
  },
  "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'smallEtaleTopology\\|HasSheafify S.smallEtaleTopology\\|isGrothendieckAbelian_sheaf_smallEtaleTopology' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Etale.lean:51 `Scheme.smallEtaleTopology X : GrothendieckTopology X.Etale`; AffineEtale.lean:112 `HasSheafify S.smallEtaleTopology A` for concrete A with limits and colimits (A = AddCommGrpCat.{u}, RingCat.{u}); AffineEtale.lean:136 `Abelian (Sheaf S.smallEtaleTopology A)`, :152 IsGrothendieckAbelian; no sheaf-of-modules or derived category on the etale site",
+   "date": "2026-10-09",
+   "verdict": "generalization: the site and sheafification exist"
+  },
+  {
+   "tool": "grep",
+   "query": "'instance : Abelian (SheafOfModules' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean and 'def constantSheaf' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "Abelian.lean:37-40 `Abelian (SheafOfModules.{v} R)` for `R : Sheaf J RingCat.{u}` given `HasSheafify J AddCommGrpCat.{v}`; ConstantSheaf.lean:66 `constantSheaf J D : D ⥤ Sheaf J D`",
+   "date": "2026-10-09",
+   "verdict": "generalization: Mod(R_T) = SheafOfModules.{u} ((constantSheaf T.smallEtaleTopology RingCat.{u}).obj (RingCat.of R))"
+  },
+  {
+   "tool": "grep",
+   "query": "'abbrev Plus\\|abbrev Bounded\\|homologyFunctor' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "TStructure.lean:204,207 `DerivedCategory.Plus C`, `DerivedCategory.Bounded C`; HomologySequence.lean:34 `DerivedCategory.homologyFunctor C n`",
+   "date": "2026-10-09",
+   "verdict": "generalization: D, D^+, D^b, H^i of an abelian category"
+  },
+  {
+   "tool": "grep",
+   "query": "'IsTorsion\\|torsion' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "none: Mathlib has no notion of torsion sheaf",
+   "date": "2026-10-09",
+   "verdict": "no match (torsion cohomology rests on def-weil-pbc-etale-sheaves)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -39,5 +74,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-derived-categories",
+  "worker": "stage1",
+  "summary": "Rewrote the statement to introduce D(T_et,R) as D(Mod(R_T)) for the constant sheaf of rings R_T on the small etale site, H^i as the cohomology functors of the derived category, and D^+ and D^b precisely as the full triangulated subcategories of Stacks 05RU (H^i = 0 for i << 0, resp. for |i| >> 0; equivalently the union of the D^{>=n} of the standard t-structure, resp. D^+ cap D^-), replacing 'Verdier localization of the abelian category of complexes', which mixed the localization at quasi-isomorphisms with the Verdier quotient of K(A). Named every notion as a statement dependency: etale site, constant sheaf, sheaves of modules, etale sheaves (Ab, Mod(T_et,R), torsion), abstract derived category, cohomology sheaves, standard t-structure, and a new Mathlib leaf def-weil-pbc-bounded-derived-subcategories (DerivedCategory.Plus/Minus/Bounded). Removed def-weil-pbc-geometric-stalks, which the statement does not use. The D, D^+, D^b, H^i parts specialize in one line each from Mathlib (DerivedCategory/Plus/Bounded/homologyFunctor of SheafOfModules over constantSheaf on Scheme.smallEtaleTopology), but the item as a whole is not a one-line specialization: Mathlib has no torsion sheaf, so 'torsion cohomology' rests on the unsplit def-weil-pbc-etale-sheaves."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

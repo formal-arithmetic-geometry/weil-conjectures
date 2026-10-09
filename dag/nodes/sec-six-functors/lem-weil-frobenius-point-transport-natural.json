@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-frobenius-point-transport-natural",
+ "kind": "statement",
+ "title": "The point transport along Frobenius is linear and natural",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in $\\Qlb$, $n\\geq1$, $s=\\Spec k$ and $g_s=\\Spec(\\operatorname{Frob}_q):s\\to s$ [def-weil-frobenius-detailed]. Let $\\sigma_N$ and $\\iota_N$ be the maps of the point transport [def-weil-frobenius-point-transport], $\\kappa_N$ and $c_\\Lambda$ the comparison morphism and structure isomorphism of [def-weil-inverse-image-pullback-comparison] for $g=g_s$, $Lg_s^*$ the derived pullback [def-weil-derived-pullback-tensor-hom] and $\\operatorname{Fib}_s$ the point fiber functor [def-weil-finite-coefficient-point]. Then:\n\n1. For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ and every complex $N$ of $\\Lambda_s$-modules on $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], $\\sigma_N:\\Gamma(s,N)\\to\\Gamma(s,g_s^{-1}N)$ is $\\Lambda$-linear, $\\Lambda$ acting on $\\Gamma(s,N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and on $\\Gamma(s,g_s^{-1}N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and $c_\\Lambda^{-1}$; $\\sigma_N$ is natural in morphisms of complexes $N\\to N'$; hence, $\\Gamma(s,-)$ [lem-weil-point-proetale-sections-exact] and $g_s^{-1}$ [def-weil-proetale-inverse-image] being exact, the $\\sigma_N$ define a natural transformation $\\Gamma(s,-)\\to\\Gamma(s,g_s^{-1}(-))$ of functors $D(s_{\\mathrm{proet}},\\Lambda)\\to D(\\Lambda)$.\n\n2. For each $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ the morphisms $\\iota_N$, $N\\in D^b_c(s,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients], form a natural transformation $\\iota:\\operatorname{Fib}_s\\to\\operatorname{Fib}_s\\circ Lg_s^*$ of functors on $D^b_c(s,\\Lambda)$: for every morphism $u:N\\to N'$ of $D^b_c(s,\\Lambda)$, $\\operatorname{Fib}_s(Lg_s^*u)\\circ\\iota_N=\\iota_{N'}\\circ\\operatorname{Fib}_s(u)$. For $\\Lambda=\\Qlb$ this includes the compatibility of $\\iota^{E'}$ with the scalar extensions $E'\\subset L$, under the isomorphisms $\\operatorname{Fib}_s(K\\otimes_{E'}L)\\cong\\operatorname{Fib}_s(K)\\otimes_{E'}L$ of [lem-weil-point-sections-scalar-extension] and $(Lg_{s,E'}^*K)\\otimes_{E'}L\\cong Lg_{s,L}^*(K\\otimes_{E'}L)$ of [lem-pur-integral-operations-scalar-extension].",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, La conjecture de Weil II, (1.1.7), pp. 150-151 (the action of Gal(k-bar/k) on the fibre by transport of structure, used as functorial); the statement for the explicit point transport of def-weil-frobenius-point-transport is written by an agent (split off from that definition, which asserted it without proof)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-proetale-inverse-image",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n -E 'def (comap|sheafFiberComapIso)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Comap.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/",
+   "results": "Point/Comap.lean:41 Point.comap (a point of (C,J) from a point of (D,K) and a continuous functor) and :69 sheafFiberComapIso : (Phi.comap F).sheafFiber = F.sheafPullback >> Phi.sheafFiber, a natural isomorphism of underived fibre functors of sheaves on abstract sites; nothing on derived categories of modules, linearity over a coefficient ring, or derived pullback",
+   "date": "2026-10-09",
+   "verdict": "no match (sheafFiberComapIso is an underived abstract analogue, not the statement for the pro-etale site of Spec k and the derived pullback)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli -E 'transport of structure|geometric point|proetale|ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean, ElladicCohomology.lean, EtalePoint.lean (Scheme.pointSmallEtale, etale site only); no inverse image along automorphisms of a scheme, no derived pullback",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-point-transport",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [
+  "unreachable"
+ ]
+}

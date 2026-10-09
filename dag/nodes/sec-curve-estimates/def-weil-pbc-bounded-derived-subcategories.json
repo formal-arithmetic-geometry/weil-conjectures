@@ -1,0 +1,60 @@
+{
+ "id": "def-weil-pbc-bounded-derived-subcategories",
+ "kind": "definition",
+ "title": "Bounded below, bounded above and bounded derived categories",
+ "statement": "Let $\\mathcal A$ be an abelian category, $D(\\mathcal A)$ its derived category with cohomology functors $H^n:D(\\mathcal A)\\to\\mathcal A$ [def-weil-abstract-derived-category], and $(D(\\mathcal A)^{\\le n},D(\\mathcal A)^{\\ge n})$ the standard t-structure [def-sbc-standard-tstructure-derived-category]. The *bounded below*, *bounded above* and *bounded* derived categories are the strictly full subcategories $D^+(\\mathcal A)$, $D^-(\\mathcal A)$, $D^b(\\mathcal A)$ of $D(\\mathcal A)$ whose objects are the $X$ such that, respectively, $H^n(X)=0$ for all $n\\ll0$; $H^n(X)=0$ for all $n\\gg0$; $H^n(X)=0$ for all $|n|\\gg0$. Equivalently $D^+(\\mathcal A)=\\bigcup_{n}D(\\mathcal A)^{\\ge n}$, $D^-(\\mathcal A)=\\bigcup_nD(\\mathcal A)^{\\le n}$ and $D^b(\\mathcal A)=D^+(\\mathcal A)\\cap D^-(\\mathcal A)$, i.e. $X\\in D^b(\\mathcal A)$ iff only finitely many $H^n(X)$ are nonzero. Each is closed under isomorphisms and under the shifts $[k]$, contains $0$, and with two vertices of a distinguished triangle of $D(\\mathcal A)$ contains the third (by the long exact cohomology sequence), so each is a full triangulated subcategory of $D(\\mathcal A)$; $D^b(\\mathcal A)$ is called the bounded derived category.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Project, Tag 05RU (Definition derived-definition-unbounded-derived-category, derived.tex lines 3689-3723)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'abbrev Plus\\|abbrev Bounded\\|abbrev Minus' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "TStructure.lean:201-207: `DerivedCategory.Minus C`, `DerivedCategory.Plus C`, `DerivedCategory.Bounded C` := `(t : TStructure (DerivedCategory C)).minus/plus/bounded.FullSubcategory`, with inclusions `Minus.ι`, `Plus.ι`, `Bounded.ι` (lines 211-218)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'def plus\\|def minus\\|def bounded\\|t.plus.IsTriangulated' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/",
+   "results": "Basic.lean:260-266: `t.minus X := ∃ n, t.IsLE X n`, `t.plus X := ∃ n, t.IsGE X n`, `t.bounded := t.plus ⊓ t.minus`; closed under isomorphisms and shift (Basic.lean:277-291); `instance : t.minus.IsTriangulated`, `t.plus.IsTriangulated`, `t.bounded.IsTriangulated` (TruncLTGE.lean:637-655); induced t-structures `t.onPlus` etc. (Induced.lean:132-143)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "'isGE_iff\\|isLE_iff' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "results": "`DerivedCategory.isGE_iff` (line 90), `isLE_iff` (line 107): X.IsGE n iff homology vanishes in degrees < n, X.IsLE n iff it vanishes in degrees > n, giving the cohomological description",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory.Plus",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+  "how": "exact: `DerivedCategory.Plus C` (line 204), `DerivedCategory.Minus C` (line 201), `DerivedCategory.Bounded C` (line 207) are the full subcategories `TStructure.t.plus/minus/bounded` of `DerivedCategory C` (CategoryTheory/Triangulated/TStructure/Basic.lean:260-266, `plus X := ∃ n, t.IsGE X n`, `bounded := plus ⊓ minus`), triangulated by the instances `t.plus.IsTriangulated` etc. (TStructure/TruncLTGE.lean:637-655); membership is described by cohomology through `DerivedCategory.isGE_iff`/`isLE_iff` (DerivedCategory/TStructure.lean:90,107)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-derived-categories",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
