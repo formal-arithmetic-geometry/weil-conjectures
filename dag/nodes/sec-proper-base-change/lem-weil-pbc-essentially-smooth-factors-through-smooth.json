@@ -11,9 +11,68 @@
   "def-weil-pbc-essentially-smooth-ring-map",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Presentation of $D$; the smooth algebras $P_f$.) By definition of essential smoothness [def-weil-pbc-essentially-smooth-ring-map] there are a smooth $R$-algebra $P$ [def-weil-pbc-smooth-ring-map], a multiplicative subset $S\\subseteq P$ and an isomorphism of $R$-algebras $\\varphi:D\\to S^{-1}P$. For $f\\in S$ let $P_f$ be the localization of $P$ at $\\{1,f,f^2,\\dots\\}$, an $R$-algebra through $R\\to P\\to P_f$. Since $R\\to P$ is smooth, $R\\to P\\to P_f$ is smooth [lem-weil-pbc-smooth-ring-map-principal-localization]: every $P_f$, $f\\in S$, is a smooth $R$-algebra.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074 ('D' is essentially smooth ... Hence D'[t_1,...,t_d] is a filtered colimit of smooth ... algebras and B (x) ... factors through one of these')"
+   }
+  },
+  {
+   "text": "($S^{-1}P$ is a filtered colimit of the $P_f$ as $R$-algebras.) Preorder $S$ by divisibility ($f\\le g$ iff $g=fh$ for some $h\\in P$). By [lem-weil-pbc-localization-colimit-principal-localizations] this preorder, regarded as a category $J$, is filtered, $f\\mapsto P_f$ with the maps $\\rho_{fg}:P_f\\to P_g$, $a/f^e\\mapsto ah^e/g^e$, is a functor from $J$ to commutative rings, and $(S^{-1}P,(\\kappa_f)_{f\\in S})$, $\\kappa_f(a/f^e)=a/f^e$, is its colimit in the category of commutative rings [def-weil-pbc-category-colimit]. All these maps are homomorphisms of $R$-algebras: $\\rho_{fg}(a/1)=a/1$ and $\\kappa_f(a/1)=a/1$ for $a\\in P$, so $\\rho_{fg}$ and $\\kappa_f$ commute with the structure maps from $P$, hence with those from $R$ (which factor through $R\\to P$).",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243: S^{-1}M = colim_{f in S} M_f, here M = P) and Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886, (1) implies (3))"
+   }
+  },
+  {
+   "text": "(Factorization through a stage.) Choose an isomorphism of $R$-algebras $C\\cong R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and replace $C$ by this quotient (transporting $g$ along the isomorphism and back at the end). The map $\\varphi\\circ g:C\\to S^{-1}P$ is a homomorphism of $R$-algebras into the filtered colimit of Step 2, whose stages $P_f$, transition maps $\\rho_{fg}$ and coprojections $\\kappa_f$ are $R$-algebras and $R$-algebra maps. By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] there are $f\\in S$ and a homomorphism of $R$-algebras $g':C\\to P_f$ with $\\kappa_f\\circ g'=\\varphi\\circ g$ (this is Stacks, Algebra, Lemma 00QO, (1) implies (3)).",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243: S^{-1}M = colim_{f in S} M_f, here M = P) and Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886, (1) implies (3))"
+   }
+  },
+  {
+   "text": "(Conclusion.) Put $T=P_f$, smooth over $R$ by Step 1, with the $R$-algebra maps $g':C\\to T$ and $\\varphi^{-1}\\circ\\kappa_f:T\\to D$. Then $(\\varphi^{-1}\\circ\\kappa_f)\\circ g'=\\varphi^{-1}\\circ\\varphi\\circ g=g$, so $g$ factors as $C\\to T\\to D$ with $T$ a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074 ('D' is essentially smooth ... Hence D'[t_1,...,t_d] is a filtered colimit of smooth ... algebras and B (x) ... factors through one of these')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074; the colimit and factorization steps are Algebra, Lemmas Tag 00CR and Tag 00QO (literature/stacks-project/algebra.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +117,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-essentially-smooth-factors-through-smooth",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07FJ item (item-eighth-resolve) and against its use in lem-weil-pbc-popescu-resolve-char-p Step 10 (there R = R_0[t], C = B (x)_{k[x]} R_0[t], D = D'[t]): it matches; kept unchanged with stmt_deps. Proof written in four steps following Stacks: D = S^{-1}P with P smooth (definition), P_f smooth (lem-weil-pbc-smooth-ring-map-principal-localization, Mathlib leaf), S^{-1}P = colim_{f in S} P_f filtered (lem-weil-pbc-localization-colimit-principal-localizations, Stacks 00CR, created by the concurrent item lem-weil-pbc-essentially-smooth-composition; cited, not duplicated), and the factorization of a map from a finitely presented algebra through a stage (lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit, Stacks 00QO, Mathlib leaf). Checked that the colimit transition maps and coprojections are R-algebra maps, which the factorization lemma requires. No new node created. Tags 07FJ, 00CR, 00QO verified in stacks-project/tags/tags."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps along the 07FJ proof: D = S^{-1}P = colim P_f with P_f smooth, a finitely presented algebra maps into a filtered colimit through a stage (existing 00QO leaf), T = P_f. Correct; 0 new nodes (cites the 00CR node created by the sibling split, committed together)."
+ }
 }
