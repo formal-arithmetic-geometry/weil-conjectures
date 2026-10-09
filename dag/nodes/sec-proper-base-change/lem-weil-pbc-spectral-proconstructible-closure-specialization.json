@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
  "kind": "statement",
  "title": "Closure points of an intersection of constructible sets in a spectral space are specializations",
- "statement": "Let $X$ be a spectral space [def-weil-spectral-space], let $(E_a)_{a\\in A}$ be a family of constructible subsets of $X$ [def-weil-constructible-subset], and let $E=\\bigcap_{a\\in A}E_a$ (with $E=X$ if $A=\\emptyset$). If $x\\in X$ lies in the closure $\\overline{E}$ of $E$, then there is a point $e\\in E$ with $x\\in\\overline{\\{e\\}}$, i.e. $x$ is a specialization of a point of $E$. (The sets $E$ of this form are exactly the subsets of $X$ closed in the constructible topology.)",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space], let $(E_a)_{a\\in A}$ be a family of constructible subsets of $X$ [def-weil-constructible-subset], and let $E=\\bigcap_{a\\in A}E_a$ (with $E=X$ if $A=\\emptyset$). If $x\\in X$ lies in the closure $\\overline{E}$ of $E$, then there is a point $e\\in E$ with $x\\in\\overline{\\{e\\}}$, i.e. $x$ is a specialization of a point of $E$.",
  "source": {
   "document": "literature/stacks-project/topology.tex",
   "place": "Topology, Lemma 0903 (label lemma-constructible-stable-specialization-closed, line 4461), part (1), with its proof; used in Etale Cohomology, proof of Lemma 0CAM (lemma-connected-topological, line 15071)"
@@ -11,9 +11,64 @@
   "def-weil-spectral-space",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal U$ be the set of quasi-compact open subsets $U\\subseteq X$ with $x\\in U$. Every $U\\in\\mathcal U$ is a constructible subset of $X$: since $X$ is spectral, the open set $U$ is retrocompact because it is quasi-compact [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact], the empty set is open and retrocompact, and $U=U\\cap(X\\setminus\\emptyset)$ is of the form required in [def-weil-constructible-subset].",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0903 (lemma-constructible-stable-specialization-closed, line 4461), proof of part (1)"
+   }
+  },
+  {
+   "text": "For finitely many $U_1,\\dots,U_m\\in\\mathcal U$ ($m\\ge 0$) the intersection $U=U_1\\cap\\dots\\cap U_m$ (which is $X$ for $m=0$) lies in $\\mathcal U$: it is open and contains $x$, and it is quasi-compact because $X$ is quasi-compact and the intersection of two quasi-compact opens of the spectral space $X$ is quasi-compact [def-weil-spectral-space] (induction on $m$). As $U$ is an open neighbourhood of $x$ and $x\\in\\overline{E}$, we get $U\\cap E\\neq\\emptyset$. Hence for all finite $A_0\\subseteq A$ and $U_1,\\dots,U_m\\in\\mathcal U$: $\\bigcap_{a\\in A_0}E_a\\cap U_1\\cap\\dots\\cap U_m\\supseteq E\\cap U\\neq\\emptyset$. (Stacks: 'A finite intersection of the $U_i$ is another one. The intersection $U_i\\cap E$ is nonempty for all $i$.')",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0903 (lemma-constructible-stable-specialization-closed, line 4461), proof of part (1)"
+   }
+  },
+  {
+   "text": "Consider the family of constructible subsets of $X$ consisting of the $E_a$ ($a\\in A$) and the $U\\in\\mathcal U$ (step 1). If its intersection $E\\cap\\bigcap_{U\\in\\mathcal U}U$ were empty, then, $X$ being spectral, some finite subfamily would already have empty intersection [lem-weil-pbc-spectral-constructible-finite-intersection], contradicting step 2. Hence there is a point $e\\in E$ with $e\\in U$ for every $U\\in\\mathcal U$. (This is the Stacks argument: the sets $U_i\\cap E$ are closed in the constructible topology and have the finite intersection property, so their intersection is nonempty by quasi-compactness of the constructible topology, Lemmas 0901 and 005D; the cited node packages exactly this for families of constructible sets.)",
+   "uses": [
+    "lem-weil-pbc-spectral-constructible-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0903 (lemma-constructible-stable-specialization-closed, line 4461), proof of part (1)"
+   }
+  },
+  {
+   "text": "Let $W$ be any open neighbourhood of $x$. Since the quasi-compact opens form a basis of the topology of the spectral space $X$ [def-weil-spectral-space], there is $U\\in\\mathcal U$ with $U\\subseteq W$, so $e\\in U\\subseteq W$ by step 3. Thus every open neighbourhood of $x$ meets $\\{e\\}$, i.e. $x\\in\\overline{\\{e\\}}$, and $x$ is a specialization of the point $e\\in E$. (Stacks: '$\\bigcap U_i$ is the set of generalizations of $x$'.)",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma 0903 (lemma-constructible-stable-specialization-closed, line 4461), proof of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-constructible-finite-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 0903 (lemma-constructible-stable-specialization-closed, line 4461), proof of part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +104,31 @@
    "results": "no specialization statement in Topology/Spectral or Topology/Constructible.lean; only PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible and isOpen_of_stableUnderGeneralization_of_isConstructible (RingTheory/Spectrum/Prime/ConstructibleSet.lean:161-172); no @[stacks 0903]",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "x in closure of a set closed in the constructible topology of a spectral space specializes from a point of the set",
+   "results": "Specializes, specializes_TFAE, specializes_iff_closure_subset, specializes_iff_mem_closure (Mathlib.Topology.Inseparable), isClosed_setOf_specializes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WithConstructibleTopology",
+   "results": "WithConstructibleTopology, compactSpace_withConstructibleTopology, WithConstructibleTopology.isClosed_iff, WithConstructibleTopology.isOpen_iff (Mathlib.Topology.Spectral.ConstructibleTopology); nothing on closures or specialization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' Mathlib/Topology/Spectral/ConstructibleTopology.lean; grep -rn 'stacks 0903' Mathlib/",
+   "results": "only isOpen_iff/isClosed_iff, IsCompact.isOpen_constructibleTopology_of_isOpen/_of_isClosed, isCompact_sInter_of_subset_constructibleTopologySubbasis, compactSpace_withConstructibleTopology; no @[stacks 0903]",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +148,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Topology Lemma 0903 (1) (topology.tex line 4461; tag verified in tags/tags: 0903 = topology-lemma-constructible-stable-specialization-closed) and wrote its proof in four steps: quasi-compact opens are constructible (via the retrocompact-iff-quasi-compact leaf), finite intersections of quasi-compact open neighbourhoods of x meet E, compactness argument giving e in E inside all of them, and the basis property giving x in the closure of {e}. The Stacks compactness step (0901 quasi-compactness of the constructible topology + 005D finite intersection property in a quasi-compact space, on the sets U_i cap E closed in the constructible topology) is carried by the existing node lem-weil-pbc-spectral-constructible-finite-intersection, which packages exactly this for families of constructible sets; so no new node was needed. Removed from the statement the unproved parenthetical claim that the sets of the form E are exactly the subsets closed in the constructible topology (a remark not used by the citer lem-weil-pbc-spectral-closed-clopen-decomposition-lift, and not proved here). stmt_deps unchanged. Mathlib: no match (searches added)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps following Stacks 0903(1): qc open nbhds of x are constructible (retrocompact), finite intersections meet E, the finite-intersection node (which packages 0901+005D) gives e in E in every qc open nbhd of x, basis gives x in closure{e}. Correct. Worker removed the unproved parenthetical claim (pro-constructible = closed in the constructible topology) from the statement; the citer closed-clopen-decomposition-lift uses only the intersection form."
+ }
 }
