@@ -662,3 +662,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:51 L merged F1 deliver/F1/lem-weil-pbc-closed-immersion-unit-quotient (0 new); tool_uses lem-weil-pbc-module-stalk-pullback recorded by L.
 - 23:51 L reviewed lem-weil-pbc-filtered-colimit-localization-at-prime (worker, 5 steps, 0 new): pass, committed.
 - 23:53 L reviewed lem-weil-pbc-finite-over-complete-ring (worker, 4 elementary steps, 0 new): pass, committed.
+- 2026-10-10, delivery of E1: lem-weil-pbc-stein-normalized-fibre-idempotent returned (e32e16731): Second delivery (head e32e16731): the structure is now right, but step 3 has a gap: the lift r in R_s of the idempotent e (given by the image lemma) is an eleme
