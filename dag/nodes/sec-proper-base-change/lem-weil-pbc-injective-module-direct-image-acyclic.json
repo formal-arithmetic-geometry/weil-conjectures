@@ -11,9 +11,53 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I_{ab}$ for the underlying abelian sheaf of $I$ and, for an object $U$ of $X_{\\Et}$, $H^q(U,-)$ for the derived functors of $G\\mapsto G(U)$ on $\\Ab(X_{\\Et})$. By [lem-weil-pbc-higher-direct-image-sheafified-presheaf] applied to $p$ and $F=I_{ab}$, for each $q\\geq0$ the sheaf $R^qp_*I_{ab}$ is canonically isomorphic to the sheafification of the presheaf $P_q:V\\mapsto H^q(X\\times_SV,I_{ab})$ on $S_{\\Et}$.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W (lemma-higher-direct-images)"
+   }
+  },
+  {
+   "text": "Let $q>0$ and let $V\\to S$ be etale. Then $X\\times_SV\\to X$ is etale (base change of an etale morphism), so $X\\times_SV$ is an object of $X_{\\Et}$, and by [lem-weil-pbc-injective-module-abelian-acyclic] applied to the injective $R_X$-module $I$ and $U=X\\times_SV$ we get $H^q(X\\times_SV,I_{ab})=0$. Hence $P_q(V)=0$ for every $V$: $P_q$ is the zero presheaf for $q>0$.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), second paragraph of the proof"
+   }
+  },
+  {
+   "text": "The zero presheaf is a sheaf, and a morphism from it to any sheaf is the zero map, so it satisfies the universal property of its own sheafification [def-weil-pbc-sheafification]: the sheafification of $P_q$ is $0$. By the first step $R^qp_*I_{ab}=0$ in $\\Ab(S_{\\Et})$ for every $q>0$, which is the claim.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0731 (lemma-limp-acyclic), proof of part (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-injective-module-abelian-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0731 (lemma-limp-acyclic) part (4), proof: the description of higher direct images in Lemma Tag 072W (lemma-higher-direct-images) plus the vanishing of cohomology on objects; for an injective module that vanishing is the second paragraph of the proof of Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +93,31 @@
    "results": "only SheafCohomology/Basic.lean:97 (H F (n+1) subsingleton for an injective abelian sheaf F); no higher direct images on sites, no forgetful-functor statement",
    "date": "2026-10-09",
    "verdict": "no match: confirms the earlier verdict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "forgetful functor from sheaves of modules to sheaves of abelian groups preserves injective objects",
+   "results": "SheafOfModules.toSheaf, SheafOfModules.toSheaf_obj_val, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, AlgebraicGeometry.Scheme.Modules.toPresheaf, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app: the forgetful functor and its exactness on finite limits; nothing on injectives or derived functors",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf, CategoryTheory.Injective",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'map_injective\\|PreservesInjectiveObjects' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/*.lean",
+   "results": "Functor.PreservesInjectiveObjects and Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Preserves.lean:49, via Adjunction.map_injective): a right adjoint whose left adjoint preserves monomorphisms preserves injectives. Not applicable: the left adjoint of Mod(X_et,R) -> Ab(X_et) is G |-> G tensor_Z R_X, which does not preserve monomorphisms unless R is Z-flat (R = F_r in the use)",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +137,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "worker": "stage1",
+  "summary": "Statement kept (correct for any morphism p; the case used in prop-weil-pbc-projective-line is p proper). Proof written from Stacks sites-cohomology: Lemma 072W describes R^q p_* of the abelian sheaf I_ab as the sheafification of V |-> H^q(X x_S V, I_ab); the proof of Lemma 03FD (via 03FC and 03F9) shows H^q(U, I_ab)=0 for q>0 for an injective module I on every object U; this is the route of Lemma 0731 (4). Two new unsplit nodes: lem-weil-pbc-higher-direct-image-sheafified-presheaf (072W for etale abelian sheaves, any p; it generalizes the first half of lem-weil-pbc-qcqs-higher-direct-image of unit sk-thm-iff, which needs p qcqs and so could not be used for general p) and lem-weil-pbc-injective-module-abelian-acyclic (03FD's core). The brief's suggested route through the forgetful functor preserving injectives fails (its left adjoint tensor_Z R_X is not exact for R=F_r); the comparison route through Stacks 0D6J(3) is also available but heavier. Mathlib searched three ways: no higher direct images on sites, no vanishing for injective modules as abelian sheaves (only Sheaf.H of an injective abelian sheaf)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ }
 }

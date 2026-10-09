@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+ "kind": "statement",
+ "title": "Higher direct images as sheafified cohomology presheaves",
+ "statement": "Let $p:X\\to S$ be any morphism of schemes [def-weil-pbc-scheme-conventions] and let $F\\in\\Ab(X_{\\Et})$ be an abelian sheaf on the small etale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-abelian-etale-sheaves]. For an object $U$ of $X_{\\Et}$ write $H^q(U,F)$ for the $q$-th right derived functor, evaluated at $F$, of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive] (computed from an injective resolution of $F$ in $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions]). For an etale $V\\to S$ the base change $X\\times_SV\\to X$ is etale, hence an object of $X_{\\Et}$. Then for every $q\\geq0$ the higher direct image $R^qp_*F=\\mathcal H^q(Rp_*F)$ of [def-weil-pbc-direct-image] is canonically isomorphic to the sheafification [def-weil-pbc-sheafification] of the presheaf on $S_{\\Et}$\n\n$$\n V\\longmapsto H^q(X\\times_SV,F).\n$$\n\nNo hypothesis (quasi-compactness, separatedness) is put on $p$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 072W (lemma-higher-direct-images), applied to the morphism of sites $X_{\\Et}\\to S_{\\Et}$ given by the continuous functor $u(V)=X\\times_SV$ with $\\mathcal O=\\underline{\\mathbf Z}$ (so that modules are abelian sheaves); the passage from the K-injective definition of $Rp_*$ to an injective resolution is lem-sp-kinjective-computes (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image sheaf is the sheafification of presheaf of cohomology groups of the preimage",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), TopCat.Presheaf.sheafify, CategoryTheory.sheafification: the presheaf U |-> H^n(U,F) exists (as Ext from the free sheaf on U), no higher direct images and no comparison with a sheafification",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R^q f_* F is the sheaf associated to the presheaf V ↦ H^q(f^{-1}V, F)",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, TopCat.Sheaf.pushforward, CategoryTheory.Functor.sheafPushforwardContinuous(_obj_val_obj), HasGlobalSectionsFunctor: underived pushforward and the cohomology presheaf only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'cohomologyPresheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rln 'rightDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf*",
+   "results": "cohomologyPresheaf is used only in CategoryTheory/Sites/SheafCohomology/Basic.lean and MayerVietoris.lean; no file under Sites, AlgebraicGeometry or ModuleCat/Sheaf mentions rightDerived: Mathlib has no derived pushforward of sheaves on a site",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

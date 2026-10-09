@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-injective-module-abelian-acyclic",
+ "kind": "statement",
+ "title": "Injective module sheaves are acyclic as abelian sheaves on every object",
+ "statement": "Let $X$ be a scheme, let $R$ be a commutative ring, and let $I$ be an injective object of the category $\\Mod(X_{\\Et},R)$ of sheaves of $R_X$-modules on the small etale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-etale-sheaves]; write $I_{ab}\\in\\Ab(X_{\\Et})$ for its underlying abelian sheaf [def-weil-pbc-abelian-etale-sheaves]. For an object $U$ of $X_{\\Et}$ let $H^q(U,-)$ be the $q$-th right derived functor of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive] (cohomology computed in abelian sheaves, not in modules). Then $H^q(U,I_{ab})=0$ for every object $U$ of $X_{\\Et}$ and every $q>0$. ($I_{ab}$ need not be an injective abelian sheaf: the left adjoint $G\\mapsto G\\otimes_{\\mathbf Z}R_X$ of the forgetful functor is not exact in general.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), second paragraph of the proof: Lemma Tag 03F9 (lemma-cech-vanish-collection) with $\\mathcal B=\\mathcal C$ and all coverings, its assumption (3) given by Lemma Tag 03FC (lemma-injective-module-trivial-cech), which rests on Lemma Tag 03FB (lemma-injective-module-injective-presheaf); stated there for any ringed site"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective sheaf of modules has vanishing higher cohomology as a sheaf of abelian groups",
+   "results": "SheafOfModules.toSheaf, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf, PresheafOfModules.IsLocallyInjective, AlgebraicGeometry.Scheme.Modules.toPresheaf: the forgetful functor exists, nothing on cohomology of injective modules",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an injective sheaf of modules over a sheaf of rings is acyclic for sections over every object as an abelian sheaf",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.isKInjective_of_injective, InjectiveResolution.instInjectiveXNatOfCocomplex, InjectiveResolution.instIsKInjectiveCochainComplex, InjectiveResolution.injective: general injective resolutions only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Čech cohomology of an injective sheaf of modules vanishes in positive degrees for every covering",
+   "results": "same injective-resolution instances, CochainComplex.IsKInjective, CategoryTheory.Sheaf.cohomologyPresheaf: no Cech vanishing for injectives",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Sheaf.H",
+   "results": "CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): H^(n+1)(F) is subsingleton for an INJECTIVE ABELIAN sheaf F, global cohomology only",
+   "date": "2026-10-09",
+   "verdict": "no match (the abelian-injective case; I_ab is not an injective abelian sheaf in general)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf, CategoryTheory.Injective",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf* (excluding LocallyInjective, Function.Injective); grep -rln 'Cech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; sed -n 49,52p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean",
+   "results": "no injective objects in the sheaf-of-modules files; CategoryTheory/Sites/SheafCohomology/Cech.lean defines the Cech complex functor (cechComplexFunctor) with no vanishing lemma; Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms needs a mono-preserving left adjoint, which the forgetful functor Mod(R_X) -> Ab lacks in general",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

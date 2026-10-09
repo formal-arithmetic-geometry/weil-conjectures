@@ -1,14 +1,13 @@
 # Work queue
 
-559 items; claim with `tools/claim.py next <group> [--stage N]`.
+561 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (551)
+## Stage 1: nodes to split (552)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `def-weil-pbc-derived-inverse-image` | 1002 | none |
 | `lem-weil-pbc-derived-exchange-triangulated` | 1002 | none |
-| `lem-weil-pbc-exact-functor-bounded-below` | 1002 | none |
 | `lem-weil-pbc-injective-module-direct-image-acyclic` | 1002 | none |
 | `lem-weil-pbc-reduction-projective-space` | 1002 | none |
 | `lem-weil-pbc-sheaf-flat-separator` | 1002 | sorry_here |
@@ -21,6 +20,8 @@
 | `def-weil-pbc-symmetric-product-morphism` | 1003 | none |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
+| `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1003 | none |
+| `lem-weil-pbc-injective-module-abelian-acyclic` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-surjective` | 1003 | none |
@@ -558,7 +559,7 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (8)
+## Stage 2: nodes to state (9)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -566,12 +567,13 @@
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 565 nodes that wait for stage 1, 38 nodes that wait for a statement dependency.
+Not open yet: 566 nodes that wait for stage 1, 38 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
