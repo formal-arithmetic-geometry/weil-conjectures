@@ -1,0 +1,54 @@
+{
+ "id": "lem-weil-pbc-five-lemma",
+ "kind": "statement",
+ "title": "Five lemma in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and consider a commutative diagram in $\\mathcal A$\n\n$$\n\\begin{array}{ccccccccc}\nA_1&\\to&A_2&\\to&A_3&\\to&A_4&\\to&A_5\\\\\n\\downarrow{\\scriptstyle\\alpha_1}&&\\downarrow{\\scriptstyle\\alpha_2}&&\\downarrow{\\scriptstyle\\alpha_3}&&\\downarrow{\\scriptstyle\\alpha_4}&&\\downarrow{\\scriptstyle\\alpha_5}\\\\\nB_1&\\to&B_2&\\to&B_3&\\to&B_4&\\to&B_5\n\\end{array}\n$$\n\nwhose rows are exact at $A_2,A_3,A_4$ and at $B_2,B_3,B_4$. If $\\alpha_1$ is an epimorphism, $\\alpha_2$ and $\\alpha_4$ are isomorphisms and $\\alpha_5$ is a monomorphism, then $\\alpha_3$ is an isomorphism. In particular $\\alpha_3$ is an isomorphism when $\\alpha_1,\\alpha_2,\\alpha_4,\\alpha_5$ are.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 05QB (lemma-five-lemma, line 1227)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|Five' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean",
+   "results": "line 141 `CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono (hR₁ : R₁.Exact) (hR₂ : R₂.Exact) (φ : R₁ ⟶ R₂) (h₀ : Epi (app' φ 0)) (h₁ : IsIso (app' φ 1)) (h₃ : IsIso (app' φ 3)) (h₄ : Mono (app' φ 4)) : IsIso (app' φ 2)` for `R₁ R₂ : ComposableArrows C 4` in an abelian category (docstring 'The five lemma'); primed variant at line 194 for five consecutive indices of longer exact sequences",
+   "date": "2026-10-09",
+   "verdict": "match: a row $A_1\\to\\dots\\to A_5$ is an object of `ComposableArrows C 4`, `Exact` is exactness at the three inner spots, and the commutative diagram is a morphism `φ`"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'five lemma\\|five_lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "CategoryTheory/Abelian/DiagramLemmas/Four.lean (the five-term lemma above), Algebra/Homology/ShortComplex/ShortExact.lean (`isIso₂_of_shortExact_of_isIso₁₃`, the short five lemma, already the node lem-weil-pbc-short-five-lemma)",
+   "date": "2026-10-09",
+   "verdict": "match: Four.lean line 141"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono",
+  "file": "Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean",
+  "how": "exact: the two rows are `R₁ R₂ : ComposableArrows C 4` with `R₁.Exact`, `R₂.Exact`, the diagram is `φ : R₁ ⟶ R₂` with `app' φ i = α_{i+1}`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-torsion-assembly",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -2,7 +2,7 @@
  "id": "lemma-weil-pbc-torsion-assembly",
  "kind": "statement",
  "title": "Torsion coefficient assembly",
- "statement": "For every proper $f:X\\to Y$, every cartesian base change, and every torsion\nabelian sheaf $F$ on $X_{\\Et}$, the derived exchange morphism\n[def-weil-pbc-derived-exchange] is an isomorphism in every cohomological\ndegree. This is the sheaf-level instance of the bounded-below theorem of this\nchapter applied to $K=F[0]$, whose exchange isomorphism has these degreewise\nmaps as its cohomology-sheaf components; the direct assembly from\n[lemma-weil-pbc-prime-proper-base-change] given below is the step used in the proof of\nthe bounded-below theorem.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nwith $f$ proper [def-weil-proper-morphism] and $g$ arbitrary, and let $F$ be a torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], regarded as a complex concentrated in degree $0$, an object of $\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories]. Then the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n\\Ex_{\\square,F}:g^{-1}Rf_*F\\longrightarrow Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$. Equivalently, for every $p\\in\\mathbf Z$ the induced map of cohomology sheaves $\\mathcal H^p(\\Ex_{\\square,F})$ is an isomorphism; through $\\mathcal H^p(g^{-1}Rf_*F)\\cong g^{-1}\\mathcal H^p(Rf_*F)=g^{-1}R^pf_*F$ and $\\mathcal H^p(Rf'_*g'^{-1}F)=R^pf'_*g'^{-1}F$ [def-weil-pbc-direct-image] this is the base change map $g^{-1}R^pf_*F\\to R^pf'_*g'^{-1}F$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-torsion-assembly.md",
   "place": "node lemma-weil-pbc-torsion-assembly, order 1314",
@@ -30,41 +30,179 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-derived-exchange",
-  "lemma-weil-pbc-prime-proper-base-change",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "If $nF=0$ and $n=rn'$, the prime-factor devissage sequence expresses $F$\nthrough an $\\mathbf F_r$-module sheaf and a sheaf killed by $n'$; the long\nexact direct-image sequences, the prime-coefficient case\n[lemma-weil-pbc-prime-proper-base-change], and the five-lemma transfer induct on the\nnumber of prime factors of $n$. For arbitrary torsion $F$, the filtered union\nof its finite-order subsheaves and the exact filtered-colimit theorem for\ndirect images pass the isomorphism to the colimit; naturality keeps the\ncomparison equal to the named exchange morphism of\n[def-weil-pbc-derived-exchange].",
+   "text": "**Step 0 (notation; reduction to cohomology sheaves).** Fix $\\square$ with $f$ proper. Write $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$, functors $\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})$, and $\\Ex=\\Ex_\\square:\\Phi\\to\\Psi$ for the derived exchange transformation [def-weil-pbc-derived-exchange], natural in its argument. For an abelian sheaf $G$ on $X_{\\Et}$ (in degree $0$) say that $P(G)$ holds if $\\mathcal H^p(\\Ex_G):\\mathcal H^p(\\Phi G)\\to\\mathcal H^p(\\Psi G)$ is an isomorphism for every $p\\in\\mathbf Z$. A morphism of $\\Dplus(Y'_{\\Et})$ is an isomorphism if and only if it induces isomorphisms on all cohomology sheaves [lem-weil-pbc-derived-plus-iso-on-cohomology]; so $\\Ex_G$ is an isomorphism if and only if $P(G)$ holds, and the lemma (both of its formulations) says $P(F)$ for every torsion sheaf $F$. The identification $\\mathcal H^p(\\Phi G)\\cong g^{-1}R^pf_*G$ in the statement is the natural isomorphism $\\mathcal H^p(g^{-1}L)\\cong g^{-1}\\mathcal H^p(L)$ for the exact functor $g^{-1}$ [prop-weil-pbc-inverse-image-exact], [lem-weil-pbc-exact-functor-bounded-below], applied to $L=Rf_*G$, together with $R^pf_*G=\\mathcal H^p(Rf_*G)$ [def-weil-pbc-direct-image].",
    "uses": [
-    "lemma-weil-pbc-prime-proper-base-change",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (line 18360), proof, paragraph 1 (lines 18375-18384: 'We want to show the maps of sheaves $g^{-1}R^qf_*\\mathcal F\\to R^qf'_*(g')^{-1}\\mathcal F$ are isomorphisms for all $q$')"
+   }
+  },
+  {
+   "text": "**Step 1 (prime coefficients; unit step 2).** Let $r$ be a prime and $G$ an abelian sheaf on $X_{\\Et}$ killed by $r$. Then multiplication by any integer on $G$ depends only on its class mod $r$, so $G$ is a sheaf of $\\mathbf F_r$-modules, and by the prime case of proper base change [lemma-weil-pbc-prime-proper-base-change] (for the proper $f$ and the cartesian square $\\square$) $\\Ex_G$ is an isomorphism. Applying the functors $\\mathcal H^p$ gives $P(G)$.",
+   "uses": [
+    "lemma-weil-pbc-prime-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (line 18360), proof, paragraph 3, last sentence ('In this way we reduce to the case that $\\mathcal F$ is annihilated by a prime number $\\ell$'), and paragraph 4; Theorem 095T (line 18610) proves that case"
+   }
+  },
+  {
+   "text": "**Step 2 (the devissage sequence).** Let $G$ be an abelian sheaf on $X_{\\Et}$ killed by $n=rn'$ with $r$ prime, and let $G[r]=\\ker(r:G\\to G)$ [def-weil-pbc-torsion-etale-sheaf]. In the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] the sequence $0\\to G[r]\\xrightarrow{i}G\\xrightarrow{\\pi}G/G[r]\\to0$, with $i$ the kernel inclusion and $\\pi$ its cokernel, is short exact. $G[r]$ is killed by $r$, since $r\\circ i=0$ by definition of the kernel. $G/G[r]$ is killed by $n'$: the composite $G\\xrightarrow{n'}G\\xrightarrow{r}G$ is $n=0$, so $n':G\\to G$ factors through $i$, hence $\\pi\\circ n'=0$; as $\\pi$ is additive, $\\pi\\circ n'=n'\\circ\\pi$, and $\\pi$ is an epimorphism, so $n'\\cdot\\mathrm{id}_{G/G[r]}=0$.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 3 (lines 18403-18414), first two sentences"
+   }
+  },
+  {
+   "text": "**Step 3 (the exchange maps form a morphism of triangles).** The short exact sequence of Step 2 gives a distinguished triangle $G[r]\\xrightarrow{i}G\\xrightarrow{\\pi}G/G[r]\\xrightarrow{\\delta}G[r][1]$ in $D(X_{\\Et})$ [lem-sf-derived-ses-triangle], all of whose vertices lie in the full triangulated subcategory $\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories], so it is distinguished there. The functor $\\Phi$ is the composite of the triangulated functors $Rf_*$ [lem-weil-pbc-derived-direct-image-triangulated] and $g^{-1}$ [def-weil-pbc-derived-inverse-image] (triangulated by [lem-sf-exact-functor-derived-triangulated]), and $\\Psi$ the composite of $g'^{-1}$ and $Rf'_*$; a composite of triangulated functors is triangulated with the composite shift isomorphisms $\\xi$, resp. $\\zeta$. Hence $\\Phi G[r]\\to\\Phi G\\to\\Phi(G/G[r])\\xrightarrow{\\xi\\circ\\Phi\\delta}(\\Phi G[r])[1]$ and $\\Psi G[r]\\to\\Psi G\\to\\Psi(G/G[r])\\xrightarrow{\\zeta\\circ\\Psi\\delta}(\\Psi G[r])[1]$ are distinguished in $\\Dplus(Y'_{\\Et})$, and by the compatibility of the exchange transformation with shifts and triangles [lem-weil-pbc-derived-exchange-triangulated], part (2), the triple $(\\Ex_{G[r]},\\Ex_G,\\Ex_{G/G[r]})$ is a morphism between these two triangles [def-weil-pbc-triangles-with-shift].",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 3 (lines 18403-18414) ('the long exact sequence of higher direct images'; the long exact sequences are those of the triangles written here)"
+   }
+  },
+  {
+   "text": "**Step 4 (five lemma).** In the situation of Step 3 assume $P(G[r])$ and $P(G/G[r])$. The two distinguished triangles have long exact cohomology sequences [lem-sf-derived-homology-long-exact], and the morphism of triangles of Step 3 makes $(\\mathcal H^p(\\Ex_{G[r]}),\\mathcal H^p(\\Ex_G),\\mathcal H^p(\\Ex_{G/G[r]}))_p$ a morphism between them, commuting also with the connecting maps [lem-weil-pbc-derived-cohomology-ladder]. For each $p$, the five-term piece\n$$\\mathcal H^{p-1}(\\Phi(G/G[r]))\\to\\mathcal H^p(\\Phi G[r])\\to\\mathcal H^p(\\Phi G)\\to\\mathcal H^p(\\Phi(G/G[r]))\\to\\mathcal H^{p+1}(\\Phi G[r])$$\nand its $\\Psi$-counterpart are exact rows, and the vertical maps $\\mathcal H^{p-1}(\\Ex_{G/G[r]})$, $\\mathcal H^p(\\Ex_{G[r]})$, $\\mathcal H^p(\\Ex_{G/G[r]})$, $\\mathcal H^{p+1}(\\Ex_{G[r]})$ are isomorphisms by hypothesis. By the five lemma [lem-weil-pbc-five-lemma] $\\mathcal H^p(\\Ex_G)$ is an isomorphism. Hence $P(G)$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 3 (lines 18403-18414) ('if the result holds for both $\\mathcal F[\\ell]$ and $\\mathcal F/\\mathcal F[\\ell]$, then the result holds by the long exact sequence of higher direct images (and the 5 lemma)')"
+   }
+  },
+  {
+   "text": "**Step 5 (induction on the number of prime factors; unit step 3, first half).** For an integer $n\\ge1$ let $\\Omega(n)$ be the number of prime factors of $n$ counted with multiplicity. We show by induction on $\\Omega(n)$ that $P(G)$ holds for every abelian sheaf $G$ on $X_{\\Et}$ killed by $n$. If $\\Omega(n)=0$, then $n=1$ and $G=0$; $\\Phi$ and $\\Psi$ are additive, so $\\Phi G$ and $\\Psi G$ are zero objects and $P(G)$ holds. If $\\Omega(n)\\ge1$, choose a prime $r\\mid n$ and write $n=rn'$, so $\\Omega(n')=\\Omega(n)-1$. By Step 2, $G[r]$ is killed by $r$ and $G/G[r]$ by $n'$; $P(G[r])$ holds by Step 1 and $P(G/G[r])$ by the induction hypothesis; Step 4 gives $P(G)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 3 (lines 18403-18414) ('In this way we reduce to the case that $\\mathcal F$ is annihilated by a prime number $\\ell$')"
+   }
+  },
+  {
+   "text": "**Step 6 (the source side commutes with the colimit).** Let $F$ be a torsion sheaf on $X_{\\Et}$: by definition [def-weil-pbc-torsion-etale-sheaf] the canonical map $c_F:\\varinjlim_nF[n]\\to F$, the colimit taken over the positive integers ordered by divisibility (a directed set), is an isomorphism; let $\\iota_n:F[n]\\hookrightarrow F$ be the inclusions. The morphism $f$ is proper, hence quasi-compact and quasi-separated [pqf-lem-proper-basic]. Each $F[n]$ is killed by $n$, so every local section of it is killed by $n$ and $(F[n])_n$ is a filtered system of torsion sheaves in the sense of [lemma-weil-pbc-direct-image-filtered-colimit], which gives that $\\varinjlim_nR^pf_*F[n]\\to R^pf_*(\\varinjlim_nF[n])$ is an isomorphism for every $p\\ge0$ (for $p<0$ all terms are $0$). Composing with $R^pf_*(c_F)$, the map $\\varinjlim_nR^pf_*F[n]\\to R^pf_*F$ induced by the $R^pf_*\\iota_n$ is an isomorphism. Applying $g^{-1}$, which commutes with colimits [lem-weil-pbc-inverse-image-preserves-colimits], the map $\\varinjlim_ng^{-1}R^pf_*F[n]\\to g^{-1}R^pf_*F$ induced by the $g^{-1}R^pf_*\\iota_n$ is an isomorphism. Through the isomorphisms $\\mathcal H^p(\\Phi G)\\cong g^{-1}R^pf_*G$ of Step 0, which are natural in $G$, this says: the map $a_p:\\varinjlim_n\\mathcal H^p(\\Phi F[n])\\to\\mathcal H^p(\\Phi F)$ induced by the $\\mathcal H^p(\\Phi\\iota_n)$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "pqf-lem-proper-basic",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-weil-pbc-inverse-image-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 2 (lines 18386-18400); Lemma 09Z1 (lemma-relative-colimit, line 7535) is the commutation of $R^pf_*$ with filtered colimits for $f$ quasi-compact and quasi-separated, here applied with the constant system of schemes"
+   }
+  },
+  {
+   "text": "**Step 7 (the target side commutes with the colimit).** The base change $f'$ of the proper morphism $f$ along $g$ is proper [lem-weil-pbc-proper-base-change], hence quasi-compact and quasi-separated [pqf-lem-proper-basic]. Since $g'^{-1}$ commutes with colimits [lem-weil-pbc-inverse-image-preserves-colimits], the map $\\varinjlim_ng'^{-1}F[n]\\to g'^{-1}F$ induced by the $g'^{-1}\\iota_n$ is the isomorphism $g'^{-1}(c_F)$ composed with that canonical isomorphism. Each $g'^{-1}F[n]$ is killed by $n$ ($g'^{-1}$ is additive, so it carries multiplication by $n$, which is $0$ on $F[n]$, to multiplication by $n$), hence is torsion, and [lemma-weil-pbc-direct-image-filtered-colimit] for $f'$ gives that $\\varinjlim_nR^pf'_*g'^{-1}F[n]\\to R^pf'_*(\\varinjlim_ng'^{-1}F[n])$ is an isomorphism. Composing, and using $\\mathcal H^p(\\Psi G)=R^pf'_*g'^{-1}G$ [def-weil-pbc-direct-image], the map $b_p:\\varinjlim_n\\mathcal H^p(\\Psi F[n])\\to\\mathcal H^p(\\Psi F)$ induced by the $\\mathcal H^p(\\Psi\\iota_n)$ is an isomorphism for every $p$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 2 (lines 18386-18400)"
+   }
+  },
+  {
+   "text": "**Step 8 (passage to the colimit; conclusion).** By naturality of $\\Ex$ [def-weil-pbc-derived-exchange], for every $n$ one has $\\Ex_F\\circ\\Phi\\iota_n=\\Psi\\iota_n\\circ\\Ex_{F[n]}$, and likewise for the inclusions $F[n]\\hookrightarrow F[m]$, $n\\mid m$; applying $\\mathcal H^p$, the maps $\\mathcal H^p(\\Ex_{F[n]})$ form a morphism of filtered diagrams $(\\mathcal H^p(\\Phi F[n]))_n\\to(\\mathcal H^p(\\Psi F[n]))_n$ and $\\mathcal H^p(\\Ex_F)\\circ a_p=b_p\\circ\\varinjlim_n\\mathcal H^p(\\Ex_{F[n]})$. Each $F[n]$ is killed by $n$, so $\\mathcal H^p(\\Ex_{F[n]})$ is an isomorphism by Step 5; a morphism of diagrams whose components are isomorphisms has an inverse morphism of diagrams, so $\\varinjlim_n\\mathcal H^p(\\Ex_{F[n]})$ is an isomorphism. As $a_p$ (Step 6) and $b_p$ (Step 7) are isomorphisms, so is $\\mathcal H^p(\\Ex_F)$, for every $p$. This is $P(F)$, and by Step 0 $\\Ex_{\\square,F}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$.",
+   "uses": [
     "def-weil-pbc-derived-exchange"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraph 2 (lines 18386-18400) ('Hence we see that $g^{-1}R^qf_*\\mathcal F=\\colim g^{-1}R^qf_*\\mathcal F[n]$ and $R^qf'_*(g')^{-1}\\mathcal F=\\colim R^qf'_*(g')^{-1}\\mathcal F[n]$. Thus it suffices to prove the result in case $\\mathcal F$ is annihilated by a positive integer $n$'); the compatibility of the identifications with the base change maps, left implicit there, is the naturality used here"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-prime-proper-base-change",
   "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-prime-factor-devissage",
-  "lemma-weil-pbc-chow-factorization",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-direct-image",
+  "lemma-weil-pbc-prime-proper-base-change",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "def-weil-pbc-triangles-with-shift",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-five-lemma",
+  "pqf-lem-proper-basic",
   "lemma-weil-pbc-direct-image-filtered-colimit",
-  "lemma-weil-pbc-five-lemma-transfer",
-  "lemma-weil-pbc-prime-factor-induction",
-  "lemma-weil-pbc-torsion-filtered-union",
-  "prop-weil-pbc-reduction-to-projective-line",
-  "thm-weil-pbc-stein-inputs"
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-torsion-assembly.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), proof, paragraphs 1-3 (lines 18375-18414), the implication (2)=>(1) with the prime case supplied by Theorem 095T (theorem-proper-base-change, line 18610); statement: Theorem 095T"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProperBaseChange\\|properBaseChange\\|proper_base_change\\|baseChange.*IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no etale cohomology of schemes nor proper base change"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'smallEtaleTopology\\|Etale.*Sheaf.*pushforward\\|higherDirectImage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
+   "results": "AlgebraicGeometry/Sites/Etale.lean: the etale pretopology and `Scheme.smallEtaleTopology` (line 51); no direct image, higher direct images or derived functors of etale sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -126,5 +264,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-torsion-assembly",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 0A4B (proof, paragraphs 1-3) and 095T (statement), 09Z1, 0038 and 05QB. Statement: removed the sentence calling it the sheaf-level instance of the bounded-below theorem (a pointer to the target, which would make a cycle); the statement now stands alone, introduces the cartesian square, f proper and F torsion, and states Ex iso in D^+ with the equivalent degreewise form g^{-1}R^pf_*F -> R^pf'_*g'^{-1}F. stmt_deps: dropped lemma-weil-pbc-prime-proper-base-change (proof dependency only), def-weil-pbc-etale-sheaves and def-weil-pbc-scheme-conventions (grab-bags), added def-weil-pbc-cartesian-square, def-weil-proper-morphism, def-weil-pbc-torsion-etale-sheaf, def-weil-pbc-derived-categories, def-weil-pbc-direct-image. Proof: the one-paragraph imported proof replaced by nine steps (reduction to cohomology sheaves; prime case; devissage sequence; morphism of triangles via lem-weil-pbc-derived-exchange-triangulated; long exact sequences, ladder and five lemma; induction on the number of prime factors; colimit on each side via lemma-weil-pbc-direct-image-filtered-colimit (Stacks 09Z1) and commutation of inverse images with colimits; passage to the colimit by naturality). Of the imported proof_deps, lemma-weil-pbc-direct-image-filtered-colimit is used; lem-weil-pbc-prime-factor-devissage, lemma-weil-pbc-five-lemma-transfer, lemma-weil-pbc-prime-factor-induction and lemma-weil-pbc-torsion-filtered-union are replaced by the steps written here and finer nodes (reasons in the report); lemma-weil-pbc-chow-factorization, prop-weil-pbc-reduction-to-projective-line and thm-weil-pbc-stein-inputs belong to the reduction and the P^1 case, not to this devissage, and are dropped. New nodes: lem-weil-pbc-five-lemma (Mathlib leaf), lem-weil-pbc-derived-cohomology-ladder (Mathlib leaf), lem-weil-pbc-inverse-image-preserves-colimits (unsplit)."
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "worker stopped with the session before reporting; files complete on disk; statement freed of the pointer to the target; pqf-lem-proper-basic (sk-prop-av-pqf-finite) and lem-weil-pbc-proper-base-change (sk-thm-br) accepted as tool uses"
+ }
 }

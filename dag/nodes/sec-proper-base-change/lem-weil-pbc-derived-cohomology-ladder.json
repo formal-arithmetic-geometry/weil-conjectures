@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-pbc-derived-cohomology-ladder",
+ "kind": "statement",
+ "title": "A morphism of distinguished triangles gives a morphism of the long exact cohomology sequences",
+ "statement": "Let $\\mathcal C$ be an abelian category, $D(\\mathcal C)$ its derived category [def-weil-abstract-derived-category], a triangulated category [def-weil-triangulated-category], with cohomology functors $H^n:D(\\mathcal C)\\to\\mathcal C$, and for a distinguished triangle $T=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ let\n\n$$\n\\cdots\\to H^n(X)\\xrightarrow{H^n(u)}H^n(Y)\\xrightarrow{H^n(v)}H^n(Z)\\xrightarrow{\\delta^n_T}H^{n+1}(X)\\to\\cdots\n$$\n\nbe its long exact cohomology sequence [lem-sf-derived-homology-long-exact], with $\\delta^n_T$ the map induced by $w$ through the identification $H^{n+1}(X)=H^n(X[1])$. Let $T'=(X'\\xrightarrow{u'}Y'\\xrightarrow{v'}Z'\\xrightarrow{w'}X'[1])$ be another distinguished triangle and $(a,b,c):T\\to T'$ a morphism of triangles [def-weil-pbc-triangles-with-shift]. Then for every $n\\in\\mathbf Z$\n\n$$\nH^n(b)\\circ H^n(u)=H^n(u')\\circ H^n(a),\\qquad H^n(c)\\circ H^n(v)=H^n(v')\\circ H^n(b),\\qquad H^{n+1}(a)\\circ\\delta^n_T=\\delta^n_{T'}\\circ H^n(c),\n$$\n\nso that $(H^n(a),H^n(b),H^n(c))_{n\\in\\mathbf Z}$ is a morphism of long exact sequences.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 0147 (definition-homological, line 261) and the long exact sequence (equation-long-exact-cohomology-sequence, lines 277-296), whose maps $H(f),H(g),H(h)$ are the images of the maps of the triangle, so that a morphism of triangles commutes with them"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'δ_naturality\\|homologySequenceδ_naturality' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "CategoryTheory/Triangulated/HomologicalFunctor.lean:182 `Functor.homologySequenceδ_naturality (T T' : Triangle C) (φ : T ⟶ T') (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) : (F.shift n₀).map φ.hom₃ ≫ F.homologySequenceδ T' n₀ n₁ h = F.homologySequenceδ T n₀ n₁ h ≫ (F.shift n₁).map φ.hom₁`; Algebra/Homology/DerivedCategory/ShortExact.lean:55 `triangleOfSESδ_naturality` (a different statement, about short exact sequences of complexes)",
+   "date": "2026-10-09",
+   "verdict": "generalization: naturality of the connecting map of any homological functor with a shift sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsHomological\\|ShiftSequence\\|def δ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "results": "line 104 `instance (n : ℤ) : (homologyFunctor C n).IsHomological`; line 110 `instance : (homologyFunctor C 0).ShiftSequence ℤ` induced by `homologyFunctor C`; line 147 `HomologySequence.δ T n₀ n₁ h := (homologyFunctor C 0).shiftMap T.mor₃ n₀ n₁ _`, i.e. `(homologyFunctor C 0).homologySequenceδ T n₀ n₁ h`",
+   "date": "2026-10-09",
+   "verdict": "match together with the line above: the two squares not involving δ are `Functor.map_comp` with `φ.comm₁`, `φ.comm₂`"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.homologySequenceδ_naturality",
+  "file": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+  "how": "specializes in one line: take `F = DerivedCategory.homologyFunctor C 0` with its shift sequence (Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:110), for which `F.homologySequenceδ` is `DerivedCategory.HomologySequence.δ` and `F.shift n = homologyFunctor C n`; the other two squares are `(homologyFunctor C n).map` applied to `φ.comm₁`, `φ.comm₂`"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-torsion-assembly",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

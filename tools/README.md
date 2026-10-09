@@ -105,6 +105,10 @@ The first build in a new copy may compile the whole library once.
 | `fetch_literature.sh [--dry]` | Fetches every document of the Obtained table of `literature/LIST.md` by its recorded URL and clones the Stacks project and the two blueprint branches at their recorded commits (`literature/LIST.md`, "Rebuilding literature/"). |
 | `sorry_map.lean` | Run inside a compiled checkout of the source repository (`lake env lean`) to produce a sorry map; the maps are committed compressed in `local/` (see `lean_status.py` above). |
 
+## Searching Mathlib (stage 1)
+
+The search rule (`stages/1-dag.md` §2, `coord/brief-stage1.md` §5) needs three kinds of search per node: LeanSearch, Loogle or Lean Finder, and a grep of the Mathlib source. On this machine they are the tools of the MCP server `lean-lsp` (lean-lsp-mcp, run with `uvx lean-lsp-mcp`, project path `~/weil-conjectures-slopmaster2`, with `lean_build` disabled: nothing is built here): `lean_leansearch`, `lean_loogle`, `lean_leanfinder`, `lean_local_search`, and `lean_declaration_file` / `lean_hover_info` for reading. An agent system without MCP uses the HTTP services directly: LeanSearch `https://leansearch.net` (its JSON API, see the lean-lsp-mcp source), Loogle `https://loogle.lean-lang.org/json?q=<query>`, Lean Finder `https://leanfinder.github.io`; and `rg` over `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/`. Each query and its results are recorded in the node's `mathlib_searches` with its tool name (`leansearch`, `loogle`, `leanfinder`, `local_search`, `grep`).
+
 ## Importing the blueprint
 
 This project's DAG was not split from the target by hand: `import_blueprint.py` wrote it from the blueprint in `literature/blueprint/master/blueprint/`. It can be run again; it replaces `dag/nodes/` and `dag/notes/` entirely, so it is for the state before stage 1 has changed any node.

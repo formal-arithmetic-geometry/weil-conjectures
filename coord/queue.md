@@ -1,13 +1,11 @@
 # Work queue
 
-567 items; claim with `tools/claim.py next <group> [--stage N]`.
+565 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (563)
+## Stage 1: nodes to split (561)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-hypercohomology-convergence` | 1 | none |
-| `lemma-weil-pbc-prime-proper-base-change` | 1 | none |
 | `lemma-weil-pbc-torsion-assembly` | 1 | none |
 | `lem-sp-exact-functor-couple` | 2 | none |
 | `lem-sp-shift-identification` | 2 | none |
@@ -579,7 +577,7 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 577 nodes that wait for stage 1, 22 nodes that wait for a statement dependency.
+Not open yet: 575 nodes that wait for stage 1, 24 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

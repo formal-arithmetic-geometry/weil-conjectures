@@ -55,7 +55,13 @@ A proof follows a document in `literature/` (`literature/LIST.md` lists what is 
 
 ## 5. Mathlib searches
 
-Mathlib is at `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (read only). Search every new node by name and by concept: `grep -rn` for the key words and the likely declaration names, and look at the file where the notion would live. Record each search as `{"tool": "grep", "query": "<the pattern and directory>", "results": "<what came up, or none>", "date": "2026-10-09", "verdict": "<match | no match | generalization: ...>"}`. Mathlib has it when it states the same thing for the same kind of object, or a generalization that specializes in one line.
+Three kinds of search, each recorded, before a node is declared absent from Mathlib (rule of 2026-10-09, `stages/1-dag.md` §2):
+
+1. **LeanSearch** (natural language): the tool `mcp__lean-lsp__lean_leansearch` (query in words, or a Lean term; `num_results` 5–10).
+2. **Loogle or LeanFinder**: `mcp__lean-lsp__lean_loogle` (type pattern or name substring, e.g. `CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃`, `|- IsIso _ → _`) or `mcp__lean-lsp__lean_leanfinder` (semantic search by mathematical meaning; 10 requests per 30 s).
+3. **grep of the Mathlib source**: `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (read only): `grep -rn` (or `rg`) for the key words and the likely declaration names, and a look at the file where the notion would live. `mcp__lean-lsp__lean_local_search` (project root `~/weil-conjectures-slopmaster2`) checks that a name exists in Mathlib or in the source repository; an empty result from it is proof of absence only when its answer says `index: consulted`.
+
+Search every new node by name and by concept with all three, and the item itself when its own Lean state is `none`. Record each query as `{"tool": "leansearch" | "loogle" | "leanfinder" | "local_search" | "grep", "query": "<the query, or the pattern and directory>", "results": "<the declarations that came up, with module, or none>", "date": "2026-10-09", "verdict": "<match | no match | generalization: ...>"}` in `mathlib_searches`; a node whose record lacks one of the three kinds is sent back. Mathlib has it when it states the same thing for the same kind of object, or a generalization that specializes in one line; check a candidate by reading its source (`mcp__lean-lsp__lean_declaration_file` or `sed -n` on the file) before recording a match. The lean-lsp server may be used only for searching and reading (`lean_leansearch`, `lean_loogle`, `lean_leanfinder`, `lean_local_search`, `lean_declaration_file`, `lean_hover_info`); never `lean_build`, `lean_run_code`, `lean_multi_attempt`, `lean_verify` or anything that compiles, and never open or change a file of the two source checkouts with it: nothing is built in this stage.
 
 ## 6. Delivering
 
