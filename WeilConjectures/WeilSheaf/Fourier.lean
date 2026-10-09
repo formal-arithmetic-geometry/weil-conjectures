@@ -1206,7 +1206,7 @@ instance (A : ProEtaleWeilSheaf k₀ l X) :
     preservesFiniteLimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
   exact preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
 
-omit [Fact (ringChar k₀ ≠ l)] in
+omit [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The internal hom out of a pro-étale Weil sheaf with lisse underlying sheaf is exact
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.preservesFiniteColimits_ihom`). -/
 theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilSheaf k₀ l X)
@@ -1217,6 +1217,7 @@ theorem ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (A : ProEtaleWeilS
     preservesFiniteColimits_of_natIso (ProEtaleWeilSheaf.ihomFunctorCompForgetIso k₀ l X A).symm
   exact preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Finiteness for the tensor product with a lisse Weil sheaf, on a single Weil sheaf.** For
 a lisse Weil sheaf `F` and a Weil sheaf `G` placed in degree `0`, the right derived functor of
 `[F, -]` on pro-étale Weil sheaves gives a Weil complex: `[F, -]` is exact
