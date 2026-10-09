@@ -195,6 +195,19 @@ instance hasCompactification_fixι [IsSeparated aX] (c : Correspondence aX aX K 
     HasCompactification c.fixι :=
   .of_isPullback c.isPullback_fixι_toProd.flip
 
+/-- The inclusion `Fix(c) ⟶ C` of the fixed scheme is a closed immersion when `aX` is
+separated, being the base change of the diagonal of `aX` along the support map. -/
+instance isClosedImmersion_fixι [IsSeparated aX] (c : Correspondence aX aX K K) :
+    IsClosedImmersion c.fixι :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion) c.isPullback_fixι_toProd.flip
+    (inferInstanceAs (IsClosedImmersion (pullback.diagonal aX)))
+
+/-- The fixed scheme of an endocorrespondence on a geometric scheme with geometric support is
+geometric. -/
+instance isGeometric_fixStr [IsSeparated aX] (c : Correspondence aX aX K K) [IsGeometric c.str] :
+    IsGeometric c.fixStr :=
+  inferInstanceAs (IsGeometric (c.fixι ≫ c.str))
+
 /-- The structure morphism of the intersection support `E(C, D)` factors through the first
 projection of `Y × X`: the diagram
 

@@ -298,6 +298,36 @@ lemma IsGeometricHom.of_isGeometric {s X : Scheme.{u}} (aX : X ⟶ s) [IsGeometr
     IsGeometricHom s aX :=
   .mk (aY := 𝟙 s) (Category.comp_id aX)
 
+namespace IsGeometricHom
+
+variable {s X Y Z : Scheme.{u}}
+
+/-- A morphism of geometric schemes is separated. -/
+lemma isSeparated {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsSeparated f := by
+  obtain ⟨a, _, _⟩ := hf
+  exact IsSeparated.of_comp (f := f) (g := a)
+
+/-- A morphism of geometric schemes is locally of finite type. -/
+lemma locallyOfFiniteType {f : X ⟶ Y} (hf : IsGeometricHom s f) : LocallyOfFiniteType f := by
+  obtain ⟨a, _, _⟩ := hf
+  exact locallyOfFiniteType_of_comp f a
+
+/-- A morphism of geometric schemes is quasi-compact. -/
+lemma quasiCompact {f : X ⟶ Y} (hf : IsGeometricHom s f) : QuasiCompact f := by
+  obtain ⟨a, _, _⟩ := hf
+  exact QuasiCompact.of_comp f a
+
+/-- Morphisms of geometric schemes are stable under composition. -/
+lemma comp {f : X ⟶ Y} {g : Y ⟶ Z} (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) :
+    IsGeometricHom s (f ≫ g) := by
+  have := hf.isSeparated
+  have := hf.locallyOfFiniteType
+  have := hf.quasiCompact
+  obtain ⟨c, _, _⟩ := hg
+  exact ⟨c, inferInstance, by rw [Category.assoc]; infer_instance⟩
+
+end IsGeometricHom
+
 /-- Coefficients and geometric categories (blueprint: `sk-d-setup`): the stability of the
 categories `Dᵇctf(X, A)` of bounded constructible objects of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`) on geometric schemes over
