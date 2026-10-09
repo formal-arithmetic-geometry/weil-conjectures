@@ -2,21 +2,111 @@
  "id": "prop-weil-pbc-inverse-image-modules-exact",
  "kind": "statement",
  "title": "Inverse image of etale sheaves of modules over a constant ring is exact",
- "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $R$ a commutative ring, $R_U$ and $R_V$ the constant sheaves of rings with value $R$ on the small etale sites $U_{\\Et}$, $V_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category]. Let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image of abelian sheaves [def-weil-pbc-inverse-image], [def-weil-pbc-abelian-etale-sheaves]. Then: (1) the inverse image of the sheaf of rings $R_V$ is canonically isomorphic to $R_U$; (2) for a sheaf $G$ of $R_V$-modules, $u^{-1}G$ carries a unique structure of sheaf of $u^{-1}R_V$-modules, hence of $R_U$-modules through (1), such that $u^{-1}$ of the action map is the action map; this defines a functor $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ compatible with $u^{-1}$ on abelian sheaves under the forgetful functors, equal to the module pullback $u^*G=u^{-1}G\\otimes_{u^{-1}R_V}R_U$; (3) this functor is additive and exact (it preserves finite limits and finite colimits), and it is left adjoint to the direct image $u_*$ on sheaves of modules.",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $R$ a commutative ring, $R_U$ and $R_V$ the constant sheaves of rings with value $R$ on the small etale sites $U_{\\Et}$, $V_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category]. Let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image of abelian sheaves [def-weil-pbc-inverse-image], [def-weil-pbc-abelian-etale-sheaves], and $u^{-1}$ also the inverse image of sheaves of sets and of rings [lem-weil-pbc-etale-inverse-image-algebraic-structures]. Then: (1) the inverse image of the sheaf of rings $R_V$ is canonically isomorphic to $R_U$: the morphism of sheaves of rings $c:u^{-1}R_V\\to R_U$ adjoint to the map $\\gamma:R_V\\to u_*R_U$ induced, by the universal property of sheafification, by the constant sections $R\\to R_U(U\\times_VW)$, is an isomorphism; (2) for a sheaf $G$ of $R_V$-modules, $u^{-1}G$ carries a unique structure of sheaf of $u^{-1}R_V$-modules, hence of $R_U$-modules through (1), such that $u^{-1}$ of the action map is the action map; this defines a functor $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ compatible with $u^{-1}$ on abelian sheaves under the forgetful functors, equal (up to a canonical isomorphism natural in $G$) to the module pullback $u^*G=u^{-1}G\\otimes_{u^{-1}R_V}R_U$ [def-pur-sheaf-tensor-product]; (3) this functor is additive and exact (it preserves finite limits and finite colimits), and it is left adjoint to the direct image $u_*:\\Mod(U_{\\Et},R)\\to\\Mod(V_{\\Et},R)$, $(u_*F)(W)=F(U\\times_VW)$ with $R_V$ acting through $\\gamma$ [def-weil-pbc-direct-image], the unit and counit being those of the adjunction $u^{-1}\\dashv u_*$ on abelian sheaves.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Lemma 04JC (lemma-flat-pullback-exact): f^{-1} is exact on abelian sheaves and f^* is exact for a flat morphism of ringed topoi; here u is flat as a morphism of ringed sites because u^{-1}R_V -> R_U is an isomorphism (constant sheaves: sites.tex Example 0H7J, Mor(E, F) = Map(E, Gamma(F))); used in sites-cohomology.tex Section 0735 (section-base-change-map) for flat pullback on D^+"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-abelian-etale-sheaves"
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1) The constant ring.* The final object of $V_{\\Et}$ is $\\mathrm{id}:V\\to V$ and that of $U_{\\Et}$ is $\\mathrm{id}:U\\to U$ [def-weil-pbc-etale-site], and $U\\times_VV=U$, so for a sheaf $F$ on $U_{\\Et}$ we have $\\Gamma(V_{\\Et},u_*F)=(u_*F)(V)=F(U)=\\Gamma(U_{\\Et},F)$, naturally in $F$. Let $F$ be any sheaf of commutative rings on $U_{\\Et}$. By [lem-weil-pbc-etale-inverse-image-algebraic-structures] (2) (adjunction $u^{-1}\\dashv u_*$ on sheaves of rings) and by [lem-weil-pbc-constant-sheaf-maps-global-sections] (for rings) applied on $V_{\\Et}$ and on $U_{\\Et}$ we get bijections, each natural in $F$: $\\operatorname{Hom}(u^{-1}R_V,F)\\cong\\operatorname{Hom}(R_V,u_*F)\\cong\\operatorname{Hom}_{\\mathrm{Ring}}(R,(u_*F)(V))=\\operatorname{Hom}_{\\mathrm{Ring}}(R,F(U))\\cong\\operatorname{Hom}(R_U,F)$. By the Yoneda lemma (in the category of sheaves of commutative rings on $U_{\\Et}$) there is a unique isomorphism of sheaves of rings $c:u^{-1}R_V\\to R_U$ such that this composite bijection is $\\psi\\mapsto\\psi\\circ c$. To identify $c$, take $F=R_U$ and $\\psi=\\mathrm{id}$: the composite sends $\\mathrm{id}_{R_U}$ to the ring map $c_R:R\\to R_U(U)$, $r\\mapsto$ the constant section $r$, which corresponds to the morphism $\\gamma:R_V\\to u_*R_U$ with $\\gamma_V\\circ c^V_R=c_R$; by naturality of the bijection of [lem-weil-pbc-constant-sheaf-maps-global-sections] under restriction, $\\gamma_W$ sends the image of the constant section $r$ to the constant section $r$ of $R_U(U\\times_VW)$, i.e. $\\gamma$ is the map induced by the universal property of sheafification [def-weil-pbc-sheafification] from the constant presheaf maps $R\\to R_U(U\\times_VW)$; and $c$ is the adjoint of $\\gamma$, i.e. $c=\\varepsilon_{R_U}\\circ u^{-1}\\gamma$. So the morphism $c$ of the statement is an isomorphism of sheaves of rings; by [lem-weil-pbc-etale-inverse-image-algebraic-structures] (2), (3) it is also an isomorphism of the underlying abelian sheaves, $u^{-1}R_V$ being computed by the abelian inverse image.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Example 0H7J (example-constant-sheaf) with the adjunction of Definition 00X1 / Proposition 00YV; the same argument is Stacks proetale.tex Example 09B0-area remark 'the constant sheaf is the pullback from the final topos' (line 4248)"
+   }
+  },
+  {
+   "text": "*(2) The module structure.* Let $G$ be a sheaf of $R_V$-modules [def-weil-sheaf-of-modules-category], with action $\\mu:R_V\\times G\\to G$, a morphism of sheaves of sets. By [lem-weil-pbc-etale-inverse-image-algebraic-structures] (1) $u^{-1}$ commutes with finite products, so $u^{-1}\\mu$ is a morphism $u^{-1}R_V\\times u^{-1}G=u^{-1}(R_V\\times G)\\to u^{-1}G$; by (2) of that lemma the ring and group structures of $u^{-1}R_V$ and $u^{-1}G$ are $u^{-1}$ of those of $R_V$ and $G$. The module axioms (associativity $\\mu\\circ(m\\times\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\times\\mu)$, unit, the two distributivity laws) are equalities between morphisms out of finite products built from $\\mu$ and the structure maps; applying the functor $u^{-1}$, which preserves finite products and projections, gives the same equalities for $u^{-1}\\mu$. So $u^{-1}G$ is a sheaf of $u^{-1}R_V$-modules with action $u^{-1}\\mu$, and this structure is unique with that property since the action map is prescribed. Transporting along the ring isomorphism $c$ of step 1, $R_U$ acts by $u^{-1}\\mu\\circ(c^{-1}\\times\\mathrm{id})$. If $\\varphi:G\\to G'$ is $R_V$-linear, i.e. $\\mu'\\circ(\\mathrm{id}\\times\\varphi)=\\varphi\\circ\\mu$, applying $u^{-1}$ shows that $u^{-1}\\varphi$ is $u^{-1}R_V$-linear, hence $R_U$-linear; so $u^{-1}$ is a functor $\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$. Its underlying abelian sheaf is the abelian inverse image of the underlying abelian sheaf of $G$, and on morphisms it is the abelian $u^{-1}$, by [lem-weil-pbc-etale-inverse-image-algebraic-structures] (2), (3): $\\mathrm{forget}\\circ u^{-1}=u^{-1}\\circ\\mathrm{forget}$ (up to the canonical isomorphism of (3)).",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D2 (lemma-pullback-module) and its proof"
+   }
+  },
+  {
+   "text": "*(2) Equality with the module pullback.* The module pullback of $(u,c)$ is $u^*G=u^{-1}G\\otimes_{u^{-1}R_V}R_U$, the change of rings along $c$ [def-pur-sheaf-tensor-product], i.e. the sheafification of the presheaf $W\\mapsto u^{-1}G(W)\\otimes_{u^{-1}R_V(W)}R_U(W)$. Since each $c_W:u^{-1}R_V(W)\\to R_U(W)$ is a ring isomorphism, the map $u^{-1}G(W)\\otimes_{u^{-1}R_V(W)}R_U(W)\\to u^{-1}G(W)$, $x\\otimes a\\mapsto c_W^{-1}(a)x$, is an isomorphism of $R_U(W)$-modules with inverse $x\\mapsto x\\otimes1$ (for an $A$-module $M$ and a ring isomorphism $A\\to A'$, $M\\otimes_AA'\\cong M$), compatible with the restriction maps and natural in $G$. So the presheaf tensor product is isomorphic to the sheaf $u^{-1}G$ with the $R_U$-module structure of step 2, and the sheafification of a presheaf isomorphic to a sheaf is that sheaf (the isomorphism satisfies the universal property of [def-weil-pbc-sheafification]). Hence $u^*G\\cong u^{-1}G$ as sheaves of $R_U$-modules, naturally in $G$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 03D6 (definition-pushforward, (2): f^*G = O_C tensor_{f^{-1}O_D} f^{-1}G)"
+   }
+  },
+  {
+   "text": "*(3) Additivity and exactness.* By [lem-weil-pbc-module-sheaves-colimits-forgetful] (1) the forgetful functor $\\mathrm{forget}:\\Mod(R_T)\\to\\Ab(T_{\\Et})$ is faithful and preserves kernels and cokernels; the addition of morphisms in $\\Mod(R_T)$ is the sectionwise addition, that of $\\Ab(T_{\\Et})$ [def-weil-sheaf-of-modules-category]. By [prop-weil-pbc-inverse-image-exact] the abelian $u^{-1}$ is additive and preserves kernels and cokernels. Additivity: $\\mathrm{forget}(u^{-1}(\\varphi+\\psi))=u^{-1}(\\mathrm{forget}\\varphi+\\mathrm{forget}\\psi)=\\mathrm{forget}(u^{-1}\\varphi)+\\mathrm{forget}(u^{-1}\\psi)$ by step 2, and $\\mathrm{forget}$ is faithful and additive. Kernels: let $\\varphi:G\\to G'$ be a morphism of $\\Mod(V_{\\Et},R)$ with kernel $k:K\\to G$. Then $\\mathrm{forget}(k)$ is a kernel of $\\mathrm{forget}(\\varphi)$, so $u^{-1}\\mathrm{forget}(k)=\\mathrm{forget}(u^{-1}k)$ is a kernel of $\\mathrm{forget}(u^{-1}\\varphi)$; the comparison morphism $\\kappa:u^{-1}K\\to\\ker(u^{-1}\\varphi)$ in $\\Mod(U_{\\Et},R)$ becomes, after $\\mathrm{forget}$ (which preserves the kernel on the right), a morphism between two kernels of the same map compatible with the inclusions, hence an isomorphism of abelian sheaves. A morphism of sheaves of $R_U$-modules whose components are bijective has $R_U(W)$-linear inverse components (the inverse of a bijective linear map is linear), so $\\kappa$ is an isomorphism in $\\Mod(U_{\\Et},R)$: $u^{-1}$ preserves kernels. The same argument with cokernels (or step 5 below and [lem-weil-pbc-left-adjoint-preserves-colimits]) shows that $u^{-1}$ preserves cokernels. An additive functor preserves the zero object and finite direct sums (= finite products and coproducts), and preserving kernels (resp. cokernels) it preserves equalizers $\\ker(f-g)$ (resp. coequalizers $\\operatorname{coker}(f-g)$); as every finite limit (colimit) is built from a final (initial) object, binary products (coproducts) and equalizers (coequalizers), $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ commutes with finite limits and finite colimits, i.e. is exact.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 04JC (lemma-flat-pullback-exact): f^{-1} exact on abelian sheaves; here f^* = f^{-1} (step 3) and exactness is read off on the underlying abelian sheaves"
+   }
+  },
+  {
+   "text": "*(3) The adjunction.* Apply [lem-weil-pbc-inverse-image-module-adjunction] with $\\mathcal O=R_V$: for a sheaf of $R_V$-modules $G$ and a sheaf of $u^{-1}R_V$-modules $F$, a morphism of abelian sheaves $u^{-1}G\\to F$ is $u^{-1}R_V$-linear iff its adjoint $G\\to u_*F$ is $R_V$-linear, where $R_V$ acts on $u_*F$ through $R_V\\xrightarrow{\\eta}u_*u^{-1}R_V$. Let now $F$ be a sheaf of $R_U$-modules, regarded as a $u^{-1}R_V$-module through the isomorphism $c$ of step 1. A morphism $u^{-1}G\\to F$ is $R_U$-linear iff it is $u^{-1}R_V$-linear, both module structures being transported along $c$ (step 2). The resulting $R_V$-module structure on $u_*F$ is restriction along $u_*c\\circ\\eta_{R_V}:R_V\\to u_*R_U$, which is the adjoint of $c$, i.e. $\\gamma$ (step 1): so $R_V(W)$ acts on $(u_*F)(W)=F(U\\times_VW)$ through $\\gamma_W$, the image of the constant section $r$ acting as the constant section $r$ of $R_U(U\\times_VW)$, which is the $R_V$-module structure of the direct image $u_*F$ of [def-weil-pbc-direct-image]. Hence the adjunction bijection $\\operatorname{Hom}_{\\Ab}(u^{-1}G,F)\\cong\\operatorname{Hom}_{\\Ab}(G,u_*F)$ of [def-weil-pbc-inverse-image] restricts to a bijection $\\operatorname{Hom}_{R_U}(u^{-1}G,F)\\cong\\operatorname{Hom}_{R_V}(G,u_*F)$, natural in $G$ and $F$ (naturality is inherited from the abelian adjunction, the forgetful functors being faithful), whose unit and counit are the abelian ones (linear by the same lemma). So $u^{-1}\\dashv u_*$ on $\\Mod(-,R)$; with steps 3 and 4 this is the module pullback $u^*$ of the morphism of ringed sites $(u,c)$, a flat one since $c$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D3 (lemma-adjoint-push-pull-modules) and Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03D2, 03D3, 03D7, Definition 03D6, Lemma 04JC; for (1) sites.tex Example 0H7J with the adjunction of Proposition 00YV (the Yoneda argument is assembled by the worker from these)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +128,31 @@
    "results": "Sites/Pullback.lean:93,98 (sheafPullback preserves finite limits given PreservesFiniteLimits G.op.lan), :120 (for RepresentablyFlat G); no exactness for SheafOfModules.pullback; Sites/ConstantSheaf.lean only, no pullback-of-constant-sheaf statement",
    "date": "2026-10-09",
    "verdict": "no match (the identification of Sheaf J (ModuleCat R) with R_T-modules, the flatness of the etale base-change functor and the constant-ring isomorphism are theorems)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of constant sheaf is constant sheaf",
+   "results": "Sheaf.isConstant_of_iso, Sheaf.IsConstant.mk, Sheaf.mem_essImage_of_isConstant, Sheaf.isConstant_iff_mem_essImage, Sheaf.isConstant_of_forget (Mathlib.CategoryTheory.Sites.ConstantSheaf)",
+   "date": "2026-10-09",
+   "verdict": "no match: nothing on pullback of constant sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Functor.sheafPullback",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 150,160p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "line 158: TODO 'find suitable assumptions for proving generalizations of equivCommuteConstant ... to commute constantSheaf with pullback/pushforward of sheaves'",
+   "date": "2026-10-09",
+   "verdict": "no match: clause (1) is explicitly missing from Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "created": {
@@ -62,5 +173,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-pbc-inverse-image-modules-exact",
+  "worker": "stage1",
+  "summary": "Split along Stacks sites-modules 03D2/03D3/03D6/03D7/04JC and sites 0H7J. The abelian inverse image of def-weil-pbc-inverse-image cannot carry the bilinear action map or the ring structure, so a new node (lem-weil-pbc-etale-inverse-image-algebraic-structures, Stacks 00X6/00YV) supplies u^{-1} on sheaves of sets and rings, exact, compatible with the abelian one. Step 1: u^{-1}R_V = R_U by Yoneda from the adjunction and the constant-sheaf adjunction (new Mathlib leaf lem-weil-pbc-constant-sheaf-maps-global-sections = constantSheafAdj). Step 2: module structure (03D2), compatibility with forget. Step 3: u^* = u^{-1} since the change of rings is along an isomorphism. Step 4: additive and exact through the faithful exact forgetful functor (lem-weil-pbc-module-sheaves-colimits-forgetful) and prop-weil-pbc-inverse-image-exact. Step 5: adjunction from the new node lem-weil-pbc-inverse-image-module-adjunction (03D3), with the R_V-structure on u_*F identified as restriction along gamma. Statement clarified (not changed in substance): the map c and gamma are named, the set/ring inverse image, the tensor product and the direct image are cited, and it is said that unit and counit are the abelian ones (used by lem-weil-pbc-retract-supplied)."
+ }
 }

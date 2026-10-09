@@ -1,12 +1,11 @@
 # Work queue
 
-578 items; claim with `tools/claim.py next <group> [--stage N]`.
+576 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (561)
+## Stage 1: nodes to split (559)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
 | `prop-weil-pbc-p1-acyclicity` | 1004 | sorry_here |
 | `thm-sc-main` | 1004 | none |
@@ -50,7 +49,6 @@
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1005 | none |
 | `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
-| `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
 | `lemma-weil-pbc-h1-constructible-representation` | 1005 | sorry_here |
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
@@ -590,7 +588,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 575 nodes that wait for stage 1, 115 nodes that wait for a statement dependency.
+Not open yet: 574 nodes that wait for stage 1, 118 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
