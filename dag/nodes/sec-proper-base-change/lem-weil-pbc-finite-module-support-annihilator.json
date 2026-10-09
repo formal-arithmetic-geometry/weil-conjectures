@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-finite-module-support-annihilator",
+ "kind": "statement",
+ "title": "The support of a finite module is the zero locus of its annihilator",
+ "statement": "Let $A$ be a commutative ring and $M$ a finitely generated $A$-module [def-weil-finitely-generated-module], with annihilator $\\operatorname{Ann}_A(M)=\\{a\\in A: am=0\\text{ for all }m\\in M\\}$, an ideal of $A$. For a prime ideal $\\mathfrak p\\subset A$ let $M_{\\mathfrak p}=S^{-1}M$, $S=A\\setminus\\mathfrak p$, be the localization (elements $m/s$ with $m\\in M$, $s\\in S$; $m/s=0$ if and only if $tm=0$ for some $t\\in S$). Then $M_{\\mathfrak p}\\neq0$ if and only if $\\operatorname{Ann}_A(M)\\subseteq\\mathfrak p$. Equivalently, the support $\\operatorname{Supp}(M)=\\{\\mathfrak p\\in\\operatorname{Spec}A: M_{\\mathfrak p}\\neq0\\}$ equals $V(\\operatorname{Ann}_A(M))=\\{\\mathfrak p:\\operatorname{Ann}_A(M)\\subseteq\\mathfrak p\\}$, a closed subset of $\\operatorname{Spec}A$ [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00L2 (algebra-lemma-support-closed), with Definition 00L1 (algebra-definition-support-module) for the support"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module localization at prime is nonzero iff annihilator contained in prime",
+   "results": "Module.mem_support_iff_of_finite, Module.support_eq_zeroLocus, Module.annihilator_le_of_mem_support (Mathlib.RingTheory.Support); LocalizedModule.AtPrime; IsAssociatedPrime.annihilator_le; ModuleCat.Tilde.Localizations",
+   "date": "2026-10-10",
+   "verdict": "match: Module.mem_support_iff_of_finite"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support, Module.annihilator, PrimeSpectrum.zeroLocus",
+   "results": "Module.support_eq_zeroLocus (Mathlib.RingTheory.Support)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "support of a finite module equals the zero locus of its annihilator",
+   "results": "Module.support_eq_zeroLocus, Module.mem_support_iff_of_finite, Module.annihilator_le_of_mem_support, Module.support_quotSMulTop, Module.mem_support_iff_exists_annihilator (Mathlib.RingTheory.Support)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'support_eq_zeroLocus\\|mem_support_iff_of_finite\\|00L2' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 46,49p;200,201p;215,218p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Support.lean",
+   "results": "Module.support (Support.lean:49, @[stacks 00L1], {p | Nontrivial (LocalizedModule p.asIdeal.primeCompl M)}), Module.mem_support_iff_of_finite (:200, [Module.Finite R M]), Module.support_eq_zeroLocus (:216, @[stacks 00L2])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.mem_support_iff_of_finite (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.mem_support_iff_of_finite in .lake/packages/mathlib/Mathlib/RingTheory/Support.lean (index unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.mem_support_iff_of_finite, Module.support_eq_zeroLocus",
+  "file": "Mathlib/RingTheory/Support.lean",
+  "line": 200,
+  "how": "exact: for [CommRing R] [Module R M] [Module.Finite R M] and p : PrimeSpectrum R, Module.mem_support_iff_of_finite (Support.lean:200) is p ∈ Module.support R M ↔ Module.annihilator R M ≤ p.asIdeal, where Module.support R M (Support.lean:49) is {p | Nontrivial (LocalizedModule p.asIdeal.primeCompl M)}, i.e. M_p ≠ 0; Module.support_eq_zeroLocus (Support.lean:216, @[stacks 00L2]) is the set form Supp M = zeroLocus (Ann M), and zeroLocus of a set is closed (PrimeSpectrum.isClosed_zeroLocus)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-module-support-closed",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
