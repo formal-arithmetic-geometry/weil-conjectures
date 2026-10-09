@@ -94,11 +94,13 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅
       D+(comparisonUpperStar A U) ⋙ R+(ProEtale.lowerStar A u)) :=
   have := isIso_lowerStarComparisonUpperStarBaseChange u A
-  have := Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
-    (asIso (lowerStarComparisonUpperStarBaseChange u A))
-    (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A u I)
+  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange
+      (lowerStarComparisonUpperStarBaseChange u A)) :=
+    Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
+      (asIso (lowerStarComparisonUpperStarBaseChange u A))
+      (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A u I)
   ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
-    (asIso (lowerStarComparisonUpperStarBaseChange u A)))⟩
+    (lowerStarComparisonUpperStarBaseChange u A))⟩
 
 end ProEtale
 
