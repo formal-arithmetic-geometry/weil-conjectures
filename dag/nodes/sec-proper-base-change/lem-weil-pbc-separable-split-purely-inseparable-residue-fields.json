@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+ "kind": "statement",
+ "title": "A finite separable extension making all residue fields of finitely many finite extensions purely inseparable",
+ "statement": "Let $k$ be a field and let $K_1,\\dots,K_n$ be finite field extensions of $k$ [def-pc-field-extension]. Then there is a finite field extension $L/k$ which is separable algebraic [def-weil-pbc-separable-algebraic-extension] such that for every $i\\in\\{1,\\dots,n\\}$: (a) the ring $L\\otimes_kK_i$ has only finitely many prime ideals; (b) for every prime ideal $\\mathfrak p$ of $L\\otimes_kK_i$ the quotient $(L\\otimes_kK_i)/\\mathfrak p$ is a field, and, regarded as an extension of $L$ through $l\\mapsto l\\otimes1$, it is a finite purely inseparable extension of $L$ [def-weil-pbc-finite-purely-inseparable-extension]. (One may take for $L$ a finite Galois extension of $k$ into which the separable closures $L_i$ of $k$ in $K_i$ all embed over $k$.)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Proof of More on Morphisms, Lemma 02LM (more-morphisms.tex lines 12060-12079: choice of the separable subfields L_i, of a finite Galois L receiving all L_i, and 'by our choice of L (and elementary field theory) we see that kappa(u) subset kappa(y_{i,j}) is finite purely inseparable'); field theory in Fields, Lemma 030K (fields-lemma-separable-first, line 1704), Lemma 09DT (fields-lemma-normal-closure, line 2086) and Lemma 0EXM (fields-lemma-normal-closure-galois, line 2704)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite extension, maximal separable subextension, normal closure, quotient of tensor product purely inseparable",
+   "results": "separableClosure.isPurelyInseparable, separableClosure_le_iff, IsPurelyInseparable.normal, isPurelyInseparable_iff (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients only (separable closure in E with E purely inseparable over it, 030K)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite field extensions K_i of k; a finite Galois extension L such that every residue field of L tensor_k K_i is purely inseparable over L",
+   "results": "perfectClosure.isPurelyInseparable, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.instNonemptyAlgHomOfPerfectField, FiniteGaloisIntermediateField (Mathlib.FieldTheory.Galois.GaloisClosure)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, TensorProduct",
+   "results": "no declaration combining IsPurelyInseparable with a tensor product of fields",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsPurelyInseparable.*TensorProduct|TensorProduct.*IsPurelyInseparable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; rg -l 'normalClosure|separableClosure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "no tensor-product statement; separableClosure / normalClosure live in FieldTheory/SeparableClosure.lean, FieldTheory/PurelyInseparable/*.lean, FieldTheory/Normal/Closure",
+   "date": "2026-10-10",
+   "verdict": "no match: the pieces (separableClosure.isPurelyInseparable = 030K, normalClosure) exist, the statement does not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

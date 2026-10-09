@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-fibre-product-point-residue-field",
+ "kind": "statement",
+ "title": "Residue field of a point of a fibre product",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme] with fibre product $X\\times_SY$ and projections $p,q$ [def-pc-fibre-product]. Let $z\\in X\\times_SY$, put $x=p(z)$, $y=q(z)$, $s=f(x)=g(y)$, and let $\\mathfrak p$ be the kernel of the ring map $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y)\\to\\kappa(z)$, $a\\otimes b\\mapsto p^\\sharp(a)q^\\sharp(b)$, where $p^\\sharp:\\kappa(x)\\to\\kappa(z)$, $q^\\sharp:\\kappa(y)\\to\\kappa(z)$ are the maps induced by $p$ and $q$ on residue fields [def-weil-residue-field] (this $\\mathfrak p$ is the prime ideal attached to $z$ in [lem-weil-pbc-fibre-product-points]). Then the induced field homomorphism from the residue field $\\kappa(\\mathfrak p)$ of $\\mathfrak p$ (the fraction field of $(\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y))/\\mathfrak p$) to $\\kappa(z)$ is an isomorphism; it is compatible with the maps from $\\kappa(x)$ and from $\\kappa(y)$. In particular, if $(\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y))/\\mathfrak p$ is a field, then $(\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(y))/\\mathfrak p\\to\\kappa(z)$ is an isomorphism of extensions of $\\kappa(x)$ and of $\\kappa(y)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01JT (schemes-lemma-points-fibre-product, line 3265), last sentence of the statement: 'The residue field of z corresponds to the residue field of the prime p'; the existing node lem-weil-pbc-fibre-product-points states the rest of 01JT without this sentence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field of a point of the fibre product of schemes is residue field of prime of tensor product of residue fields",
+   "results": "AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.ofPointTensor (Mathlib.AlgebraicGeometry.PullbackCarrier), Scheme.residueField, PrimeSpectrum.preimageEquivFiber",
+   "date": "2026-10-10",
+   "verdict": "no match: ofPointTensor is the map T.tensor -> kappa(t), no isomorphism statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field of a point of a pullback of schemes equals residue field of the corresponding prime of the tensor product of residue fields",
+   "results": "Scheme.Pullback.ofPointTensor, Triplet.tensor, tensorInl, tensorInr, Triplet.Spec_map_tensorInl_fromSpecResidueField, Triplet.Spec_ofPointTensor_SpecTensorTo (PullbackCarrier)",
+   "date": "2026-10-10",
+   "verdict": "no match: Spec_ofPointTensor_SpecTensorTo (PullbackCarrier.lean line 235) relates the residue field maps of SpecTensorTo and ofPointTensor; the isomorphism kappa(p) = kappa(z) is not stated"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.residueField, CategoryTheory.Limits.pullback, AlgebraicGeometry.Scheme.Pullback.Triplet",
+   "results": "specTensorTo_fst, specTensorTo_snd (+assoc), Triplet.Spec_ofPointTensor_SpecTensorTo (PullbackCarrier)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'residueField|stacks 01JT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "results": "residueFieldCongr / residueFieldMap uses at lines 70-136 inside the construction; no IsIso / iso statement for the residue field of a pullback point; no @[stacks 01JT]",
+   "date": "2026-10-10",
+   "verdict": "no match: candidate glue carrierEquiv + Spec_ofPointTensor_SpecTensorTo"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

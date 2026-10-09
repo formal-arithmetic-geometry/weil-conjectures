@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+ "kind": "statement",
+ "title": "Finitely many isolated fibre points become finite pieces after an elementary etale base change",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $s\\in S$, and let $x_1,\\dots,x_n\\in X$ be points with $f(x_i)=s$ each of which is an isolated point of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre]. Then there are a scheme $U$, an etale morphism $\\varphi:U\\to S$ [def-weil-etale-morphism] and a point $u\\in U$ with $\\varphi(u)=s$ such that the map $\\kappa(s)\\to\\kappa(u)$ induced by $\\varphi$ on residue fields [def-weil-residue-field] is an isomorphism (an elementary etale neighbourhood of $(S,s)$), and open subschemes $V_1,\\dots,V_n$ of $X_U=X\\times_SU$ [def-pc-fibre-product] such that for each $i$: (i) the composite $V_i\\hookrightarrow X_U\\to U$ of the inclusion and the second projection is finite [def-weil-finite-integral-morphism]; (ii) there is exactly one point $v_i\\in V_i$ mapping to $u$; (iii) the first projection $X_U\\to X$ maps $v_i$ to $x_i$, and the induced map of residue fields $\\kappa(x_i)\\to\\kappa(v_i)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points, line 11974), statement and proof (lines 11974-12011; induction on n from Lemma 02LK, more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point, line 11924, itself reduced to Algebra, Lemma 00UJ)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-finite morphism becomes finite after etale base change near a point",
+   "results": "Algebra.QuasiFinite.*, Algebra.QuasiFiniteAt.baseChange, AlgebraicGeometry.LocallyQuasiFinite, RingHom.QuasiFinite.of_finite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "elementary etale neighbourhood such that finitely many quasi-finite points become finite open subschemes with a unique point over u",
+   "results": "Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff (Mathlib.RingTheory.Etale.Locus)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "includes AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean line 49): for f lft and SEPARATED, quasi-finite at one point x, an etale g:U->S with s in its range and a decomposition of pullback f g into complementary opens V, W with V finite over U and a point v of V over x",
+   "date": "2026-10-10",
+   "verdict": "no match: one point only, separatedness assumed, no uniqueness of v over u, no residue field statement; a related weaker scheme-level result"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'stacks 02LK|stacks 02LL|stacks 00UJ|stacks 00UL' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (@[stacks 00UJ], RingTheory/Etale/QuasiFinite.lean line 379: ring-level one-prime version with kappa(p) = kappa(P), the algebraic input of 02LK) and Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (@[stacks 00UL], line 613, finite S only); no @[stacks 02LK/02LL]",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level candidates for the split of this node (00UJ)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

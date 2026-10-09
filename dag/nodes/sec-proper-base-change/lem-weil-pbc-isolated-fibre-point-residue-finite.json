@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+ "kind": "statement",
+ "title": "An isolated point of a fibre of a locally finite type morphism has finite residue field extension",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $x\\in X$, put $s=f(x)$, and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ [def-pc-scheme-fibre]. If the point of $X_s$ corresponding to $x$ is isolated in $X_s$ (the singleton is open in $X_s$), then the field extension $\\kappa(s)\\to\\kappa(x)$ induced by $f$ on residue fields [def-weil-residue-field] is finite, i.e. $\\kappa(x)$ is a finite-dimensional $\\kappa(s)$-vector space [def-pc-field-extension].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01TH (morphisms-lemma-quasi-finite-at-point-characterize, line 3664), (2) => (1), and Lemma 01TG (morphisms-lemma-residue-field-quasi-finite, line 3652); used in this form in the proof of More on Morphisms, Lemma 02LM (more-morphisms.tex lines 12056-12059)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism locally of finite type, point isolated in its fibre, residue field extension is finite",
+   "results": "Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instFiniteResidueField (Mathlib.RingTheory.QuasiFinite.Basic, ring level), AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level pieces only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme morphism quasi-finite at point implies residue field extension finite",
+   "results": "Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instFiniteResidueField, Algebra.quasiFinite_iff (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: ring level only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "QuasiFiniteAt, quasiFiniteAt_iff_isOpen_singleton_asFiber (= Stacks 01TH (1)<=>(2) for lft f), QuasiFiniteAt.isClopen_singleton_asFiber, quasiFiniteAt_comp_iff, isOpen_quasiFiniteAt (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite, ZariskisMainTheorem); none concludes finiteness of the residue field extension",
+   "date": "2026-10-10",
+   "verdict": "no match: (2)=>(1) is Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber, the residue field step (01TG) is only ring-level (Algebra.instFiniteResidueFieldOfQuasiFiniteAt on stalks); several lines of glue"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'QuasiFiniteAt|residueField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; rg -n 'stacks 01TG|stacks 01TH' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Scheme.Hom.QuasiFiniteAt (line 339, stalk map quasi-finite), quasiFiniteAt_iff_isOpen_singleton_asFiber (line 395); no residueField statement in the file; no @[stacks 01TG/01TH]",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-finite-multiple-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
