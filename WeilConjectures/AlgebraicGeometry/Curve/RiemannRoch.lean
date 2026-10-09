@@ -456,21 +456,23 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealShe
 
 include k in
 /-- **The degree of a multiple of a divisor.** For an effective Cartier divisor `D` on a smooth
-proper curve, `deg (n D) ≥ n deg D`; in fact equality holds, by additivity of the degree of
-divisors (`AlgebraicGeometry.Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp`). -/
-theorem IdealSheafData.IsInvertible.le_finrankΓ_subschemeι_pow_comp {J : X.IdealSheafData}
+proper curve, `deg (n D) = n deg D`, by additivity of the degree of divisors
+(`AlgebraicGeometry.Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp`). -/
+theorem IdealSheafData.IsInvertible.finrankΓ_subschemeι_pow_comp {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (n : ℕ) :
-    n * (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ ≤
-      ((J ^ n).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+    ((J ^ n).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ =
+      n * (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
   induction n with
-  | zero => simp
+  | zero =>
+    rw [zero_mul, pow_zero, IdealSheafData.one_eq_top]
+    let := ((⊤ : X.IdealSheafData).subschemeι ≫ X ↘ Spec (.of k)).ΓAlgebra
+    exact Module.finrank_zero_of_subsingleton
   | succ n ih =>
     have := hJ.isFinite_subschemeι_comp (k := k)
     have := (hJ.pow n).isFinite_subschemeι_comp (k := k)
     have : IsFinite ((J ^ n * J).subschemeι ≫ X ↘ Spec (.of k)) :=
       ((hJ.pow n).mul hJ).isFinite_subschemeι_comp
-    rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, Nat.succ_mul]
-    omega
+    rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, ih, Nat.succ_mul]
 
 /-- **Twisting by a large multiple of a divisor produces sections.** Let `D` be a non-empty
 effective Cartier divisor on a smooth proper curve, with invertible ideal sheaf `J = 𝒪_X(-D)`,
@@ -491,7 +493,8 @@ theorem Modules.exists_finrankH_zero_pos_tensorObj_dual_pow (ℒ : X.Modules) [�
   have h₁ := (hJ.pow n).eulerChar_tensorObj_dual_toModules (k := k) ℒ
   have h₂ := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k)
     (ℒ ⊗ (J ^ n).toModulesᵛ)
-  have h₃ := (hJ.le_finrankΓ_subschemeι_pow_comp (k := k) n).trans' (Nat.le_mul_of_pos_right n hd)
+  have h₃ := (hJ.finrankΓ_subschemeι_pow_comp (k := k) n).ge.trans'
+    (Nat.le_mul_of_pos_right n hd)
   have h₄ := Int.self_le_toNat (1 - ℒ.eulerChar k)
   omega
 
@@ -868,7 +871,6 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
 
 end Duality
-
 
 section PointIdeal
 

@@ -252,6 +252,10 @@ lemma IsAffineOpen.isClosed_singleton_of_isMaximal [JacobsonSpace X] {U : X.Open
     exact h2
   exact h3
 
+/-- **A criterion for closed immersions.** Let `f : X ⟶ Y` be a proper morphism of schemes over
+an algebraically closed field `k`, with `X` quasi-compact and locally of finite type over `k`. If
+`f` is injective on closed points and unramified at closed points, i.e. `𝔪_{Y, f x}` generates
+`𝔪_{X, x}`, then `f` is a closed immersion (compare Hartshorne II.7.3). -/
 theorem isClosedImmersion_of_injective_of_le_map_maximalIdeal {k : Type u} [Field k]
     [IsAlgClosed k] (f : X ⟶ Y) [IsProper f] (fX : X ⟶ Spec (.of k)) [LocallyOfFiniteType fX]
     (fY : Y ⟶ Spec (.of k)) (hf : f ≫ fY = fX) [CompactSpace X]
