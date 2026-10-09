@@ -8,9 +8,41 @@
   "place": "Algebra, Lemma 00DV (label lemma-NAK, Nakayama's lemma), part (11); proof: 'Part (9) holds because if M = IM then M = I^nM for all n and I being nilpotent means I^n = 0 for some n; Parts (10), (11), and (12) follow from (9) by the arguments used above' (i.e. (11) from (10) applied to the submodules Im(N -> M) and M, (10) from (9) applied to M/N)"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "First prove part (9) of the source. Let $Q$ be any $R$-module with $Q=IQ$. By induction on $n\\geq 0$, $Q=I^nQ$: the case $n=0$ is immediate, and if $Q=I^nQ$, then $Q=IQ=I(I^nQ)=I^{n+1}Q$. Choose $k\\geq1$ with $I^k=0$. Then $Q=I^kQ=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), proof of part (9)"
+   }
+  },
+  {
+   "text": "Now let $L,L'\\subseteq M$ be submodules with $M=L+IL'$. In the quotient $Q=M/L$, every class is represented by an element $l+\\sum_j i_jx_j$ with $l\\in L$, $i_j\\in I$, and $x_j\\in L'$, hence lies in $IQ$; conversely $IQ\\subseteq Q$, so $Q=IQ$. Step 1 gives $Q=0$, and therefore $M=L$. This is part (10) of the source.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), part (10) and the proof's reference to the quotient argument used for part (3)"
+   }
+  },
+  {
+   "text": "Apply Step 2 with $L=u(N)$ and $L'=M$. Surjectivity of $N/IN\\to M/IM$ is equivalent to $M=u(N)+IM$, so Step 2 yields $M=u(N)$. Thus $u$ is surjective, proving part (11) and the stated result.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), part (11) and the proof's reference to the image-submodule argument used for part (5)"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +95,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,7 +119,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement is Algebra 00DV (11) (with (9)-(10) as equivalent forms), no finiteness; correct; unsplit; its proof is M = I^k M = 0."
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the three elementary steps against Algebra 00DV (9)-(11): correct; the E1 review checks the route and the searches, not a restatement"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-nakayama-nilpotent",
+  "worker": "stage1",
+  "summary": "Checked the statement and proof against Stacks Algebra Lemma 00DV (9)-(11). Split the proof into the nilpotent-power argument for Q = IQ, its application to M/L for the submodule form, and its application with L = u(N) for surjectivity. All transitions are elementary module identities, so no new DAG nodes are needed; the prior three-kind Mathlib search correctly finds no matching no-finiteness theorem."
  }
 }
