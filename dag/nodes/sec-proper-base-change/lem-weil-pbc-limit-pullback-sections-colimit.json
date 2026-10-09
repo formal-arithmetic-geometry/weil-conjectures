@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-limit-pullback-sections-colimit",
+ "kind": "statement",
+ "title": "Sections of a pulled-back sheaf over a descended affine etale object on a limit of qcqs schemes are the colimit of the sections at the stages (Stacks 09YQ in degree 0)",
+ "statement": "Let $I$ be a directed set and $(X_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:X_i\\to X_{i'}$ ($i\\ge i'$) are affine [pqf-def-affine-morphism], every $X_i$ being quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], with limit $X=\\varprojlim_iX_i$ and projections $f_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $\\Lambda$ be a commutative ring, $0\\in I$, $\\mathcal G$ a sheaf of $\\Lambda$-modules on $(X_0)_{\\Et}$ (an object of $\\Mod((X_0)_{\\Et},\\Lambda)$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]) and $V_0\\to X_0$ an etale morphism [def-weil-etale-morphism] with $V_0$ affine, an object of $(X_0)_{\\Et}$ [def-weil-pbc-etale-site]. For $i\\ge0$ put $V_i=V_0\\times_{X_0}X_i$ (fibre product [def-pc-fibre-product] along $f_{i0}$; an object of $(X_i)_{\\Et}$), $V=V_0\\times_{X_0}X$ (along $f_0$; an object of $X_{\\Et}$), $\\mathcal G_i=f_{i0}^{-1}\\mathcal G$ and $\\mathcal G_\\infty=f_0^{-1}\\mathcal G$, the inverse images of sheaves of $\\Lambda$-modules [def-weil-pbc-inverse-image], [prop-weil-pbc-inverse-image-modules-exact] ($f_{00}=\\mathrm{id}$, $\\mathcal G_0=\\mathrm{id}^{-1}\\mathcal G$). For $i'\\ge i\\ge0$ let $\\rho_{i'i}:\\mathcal G_i(V_i)\\to\\mathcal G_{i'}(V_{i'})$ be the composite of the unit $\\eta:\\mathcal G_i\\to f_{i'i,*}f_{i'i}^{-1}\\mathcal G_i$ on sections over $V_i$, which lands in $(f_{i'i}^{-1}\\mathcal G_i)(V_i\\times_{X_i}X_{i'})$ by the definition of the direct image [def-weil-pbc-direct-image], of the composition isomorphism $c:f_{i'i}^{-1}f_{i0}^{-1}\\mathcal G\\xrightarrow{\\sim}f_{i'0}^{-1}\\mathcal G$ [lem-weil-pbc-inverse-image-composition], and of the restriction along the canonical isomorphism $V_{i'}\\xrightarrow{\\sim}V_i\\times_{X_i}X_{i'}$ of iterated fibre products over $X_{i'}$; let $\\rho_i:\\mathcal G_i(V_i)\\to\\mathcal G_\\infty(V)$ be defined in the same way from the unit of $f_i^{-1}\\dashv f_{i,*}$, the composition isomorphism $f_i^{-1}f_{i0}^{-1}\\mathcal G\\xrightarrow{\\sim}f_0^{-1}\\mathcal G$ and the canonical isomorphism $V\\xrightarrow{\\sim}V_i\\times_{X_i}X$ over $X$. Then $\\rho_{i''i'}\\circ\\rho_{i'i}=\\rho_{i''i}$, $\\rho_{ii}=\\mathrm{id}$ and $\\rho_{i'}\\circ\\rho_{i'i}=\\rho_i$ for $i''\\ge i'\\ge i\\ge0$, and the induced map of $\\Lambda$-modules\n$$\\varinjlim_{i\\ge0}\\mathcal G_i(V_i)\\longrightarrow\\mathcal G_\\infty(V)$$\nis bijective; in particular every $t\\in\\mathcal G_\\infty(V)$ is $\\rho_i(s)$ for some $i\\ge0$ and some $s\\in\\mathcal G_i(V_i)$. (Stacks, Etale Cohomology, Theorem 09YQ (theorem-colimit) in degree $p=0$, applied to the system $(V_i)_{i\\ge0}$ with limit $V$ and the system of sheaves $\\mathcal G_i|_{V_i}$; this is the special case used in the paragraph 'Fully faithful' of the proof of Lemma 09YU.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09YU (lemma-category-is-colimit), proof, paragraph 'Fully faithful' (lines 12589-12605): 'f_0^{-1}G(U) = colim_{i>=0} f_{i0}^{-1}G(U_i) ... This is a special case of Theorem 09YQ (theorem-colimit, lines 7400-7421)'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of the pullback of a sheaf to a limit of schemes over a qcqs etale object are the colimit of sections at finite stages",
+   "results": "RelativeGluingData.isPullback_natTrans_ι_toBase (RelativeGluing), SheafOfModules.Presentation.isColimit (Sheaf.Quasicoherent), PresheafedSpace.colimit, sheafPullbackConstruction.preservesFiniteLimits (Sites.Pullback), Sheaf.ΓNatIsoLim (Sites.GlobalSections): nothing on sheaves on the etale site of a limit of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of colimit of pulled back sheaves on a cofiltered limit of schemes equal colimit of sections",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, exists_appTop_π_eq_of_isLimit, nonempty_isColimit_Γ_mapCocone, exists_appTop_π_eq_of_isAffine_of_isLimit (AffineTransitionLimit: sections of the structure sheaf only, Stacks 01Z0-type), GlueData.sheafValGluedMk (GluingOneHypercover)",
+   "date": "2026-10-10",
+   "verdict": "no match (structure sheaf only, not etale sheaves)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Limits.IsLimit",
+   "results": "no declaration mentions both",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Sheaf\\|sheaf' Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; grep -rn 'IsCofiltered\\|cofiltered' Mathlib/CategoryTheory/Sites/*.lean Mathlib/AlgebraicGeometry/Sites/*.lean; grep -n 'theorem\\|def ' Mathlib/AlgebraicGeometry/Sites/Etale.lean Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean | grep -i 'limit\\|colim\\|pullback\\|inverse'",
+   "results": "AffineTransitionLimit.lean treats the structure presheaf only (ideal sheaves, restrictions); Sites: CoverPreserving.lean:125 (cofiltered structured arrows in the proof of continuity), EtalePoint.lean:56 (cofiltered neighbourhoods of an etale point); nothing on inverse images along a limit of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-limit-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Etale Cohomology 09YQ in degree 0 for an affine etale V_0 (sections of f_0^{-1}G over V as the colimit of the sections over the V_i, maps rho written out); self-contained; correct; unsplit."
+ }
+}
