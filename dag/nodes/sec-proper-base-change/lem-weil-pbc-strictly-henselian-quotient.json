@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The quotient A/I is local because I is contained in the maximal ideal m; its maximal ideal is the image m/I and the quotient map is local.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 05WS (label lemma-quotient-strict-henselization), line 43703 and its proof"
+   }
+  },
+  {
+   "text": "The residue ring of A/I at its maximal ideal m/I is canonically A/m by the third isomorphism theorem for ideals, so it is the given residue field kappa.",
+   "uses": [
+    "lem-weil-pbc-quotient-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 05WS (label lemma-quotient-strict-henselization), line 43703 and its proof"
+   }
+  },
+  {
+   "text": "View any finite (A/I)-algebra B as a finite A-algebra via A -> A/I. The ideals mB and (m/I)B agree, so the henselian idempotent-lifting property of (A,m) lifts every idempotent modulo (m/I)B uniquely in B. Thus (A/I,m/I) is henselian.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-quotient-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 05WS (label lemma-quotient-strict-henselization), line 43703 and its proof"
+   }
+  },
+  {
+   "text": "Combining the local structure, henselianity, and the identification of the residue field with the separably closed field kappa from the hypotheses, the definition of strictly henselian gives the asserted conclusion.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-quotient-residue-field",
+    "lem-weil-pbc-quotient-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 05WS (label lemma-quotient-strict-henselization), line 43703 and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-quotient-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 05WS (label lemma-quotient-strict-henselization), proof and the direct idempotent-lifting specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,7 +133,14 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: a quotient of a strictly henselian local ring by an ideal in the maximal ideal is strictly henselian (05WS); correct; unsplit."
+  "group": "D1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D1; spot-checked by L: L read the four steps (A/I local with maximal ideal m/I; residue field by the third isomorphism theorem, DoubleQuot.quotQuotEquivQuotOfLE verified to exist in Ideal/Quotient/Operations.lean; a finite A/I-algebra is a finite A-algebra with mB = (m/I)B, so idempotents lift; separably closed residue field unchanged): correct; the D1 review states what was checked against Algebra 05WS"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-strictly-henselian-quotient",
+  "worker": "stage1",
+  "summary": "Split Stacks 05WS into local quotient structure, the third-isomorphism identification of the residue field, and descent of henselian idempotent lifting through I <= m; combined these with the inherited separably closed residue field to conclude strict henselianity. Added one unsplit proof node and two Mathlib/search nodes."
  }
 }
