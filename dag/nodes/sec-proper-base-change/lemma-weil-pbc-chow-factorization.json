@@ -9,6 +9,7 @@
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
+  "def-nagata-projective-space-base-change",
   "cor-chow-lemma-proper"
  ],
  "proof": [
@@ -17,7 +18,8 @@
    "uses": [
     "def-nagata-projective-space-base-change",
     "lemma-nagata-projective-space-base-change-proper",
-    "lem-weil-pbc-proper-base-change"
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false
   },
@@ -46,32 +48,59 @@
   },
   {
    "text": "*Step 4: base change to $Y$.* Put $X'':=X'_0\\times_{Y_0}Y$ and let\n$\\pi'':=\\epsilon\\circ(\\pi_0\\times_{Y_0}\\operatorname{id}_Y):X''\\to\nX^{\\mathrm{fp}}$ and\n$i'':=i_0\\times_{Y_0}\\operatorname{id}_Y:X''\\to\\mathbf P^n_{Y_0}\\times_{Y_0}Y\n=\\mathbf P^n_Y$. Then $\\pi''$ is proper and surjective, $i''$ is an\nimmersion, and both are morphisms over $Y$, so that\n$g\\circ\\pi''=p\\circ i''$ (base change of the identity of Step 3).",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "def-pc-fibre-product",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR, proof after the Chow-lemma construction: base change of the proper surjection and the factorization identity"
+   }
   },
   {
    "text": "*Step 5: restriction to $X$.* Define $\\widetilde X$ as the preimage of the\nclosed subscheme $X$ under $\\pi''$:\n\n$$\n \\widetilde X:=X''\\times_{X^{\\mathrm{fp}}}X,\n \\qquad \\pi:=\\operatorname{pr}_2:\\widetilde X\\to X,\n \\qquad k:=\\operatorname{pr}_1:\\widetilde X\\hookrightarrow X'',\n$$\n\nthe fibre product being formed with $\\pi''$ and $i^{\\mathrm{fp}}$. Then $\\pi$\nis the base change of $\\pi''$ along $i^{\\mathrm{fp}}$, hence proper and\nsurjective, and $k$ is the base change of the closed immersion\n$i^{\\mathrm{fp}}$ along $\\pi''$, hence a closed immersion. Set\n$i:=i''\\circ k:\\widetilde X\\to\\mathbf P^n_Y$, an immersion. It is a morphism\nover $Y$ with\n\n$$\n p\\circ i=p\\circ i''\\circ k=g\\circ\\pi''\\circ k\n =g\\circ i^{\\mathrm{fp}}\\circ\\pi=f\\circ\\pi,\n$$\n\nusing the cartesian square $\\pi''\\circ k=i^{\\mathrm{fp}}\\circ\\pi$.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 09ZR, proof: pullback of the closed subscheme and preservation of properness and surjectivity"
+   }
   },
   {
    "text": "*Step 6: $i$ is a closed immersion.* The composite $f\\circ\\pi$ is proper by\n[lem-weil-pbc-proper-composition], since $\\pi$ and $f$ are proper. So\n$\\widetilde X$ is proper over $Y$, and $i$ is a $Y$-morphism to the separated\n$Y$-scheme $\\mathbf P^n_Y$; by [lem-weil-pbc-proper-to-separated] the morphism\n$i$ is proper. A proper immersion is a closed immersion\n[lem-weil-pbc-proper-immersion-closed]. Hence $(\\pi,n,i)$ has all the required\nproperties.",
    "uses": [
     "lem-weil-pbc-proper-composition",
     "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed"
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false
   },
   {
    "text": "*Step 7: base-change stability.* Given such data $(\\pi,n,i)$ for $f$ and any\nmorphism $Y'\\to Y$, the base changes\n$\\pi\\times_Y Y':\\widetilde X\\times_YY'\\to X\\times_YY'$ and\n$i\\times_YY':\\widetilde X\\times_YY'\\to\\mathbf P^n_Y\\times_YY'=\\mathbf\nP^n_{Y'}$ are a proper surjection and a closed immersion, and the identity\n$f\\circ\\pi=p\\circ i$ of morphisms over $Y$ base changes to the corresponding\nidentity over $Y'$. $\\square$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "## Remark\n\nThe proof never descends $X$ itself: when $f$ is not of finite presentation\nno descent $X=X_0\\times_{Y_0}Y$ need exist. Only the separated finitely presented\nenvelope $X^{\\mathrm{fp}}$ is descended, Chow's lemma is applied to its\nnoetherian model, which is merely separated of finite type, and properness of\nthe resulting closed immersion is recovered on $X$ in Step 6.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "def-pc-fibre-product",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemmas Tags 01QR and 01S1: properness, closed immersions, and surjectivity are stable under base change"
+   }
   }
  ],
  "proof_deps": [
@@ -83,6 +112,12 @@
   "def-nagata-final-descended-model",
   "lemma-nagata-final-descended-model",
   "thm-chow-lemma",
+  "def-pc-fibre-product",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-proper-composition",
   "lem-weil-pbc-proper-to-separated",
   "lem-weil-pbc-proper-immersion-closed"
@@ -92,14 +127,55 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lemma-weil-pbc-chow-factorization.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "tool_uses": [
+  "lemma-nagata-final-descended-model",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-to-separated"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Chow factorization: every proper morphism of schemes over an affine base is dominated by a proper surjective morphism from a scheme admitting a closed immersion into relative projective space, stable under arbitrary base change",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme; no Chow factorization declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- AlgebraicGeometry.IsProper f -> ∃ g, AlgebraicGeometry.IsClosedImmersion g",
+   "results": "No exact match; suggestions include unrelated IsProper predicates and AlgebraicGeometry.IsProper",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow's lemma for a proper morphism over an affine scheme with a relative projective embedding",
+   "results": "Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.isSeparated, Proj.fromOfGlobalSections, Proj.valuativeCriterion_existence; no Chow lemma or factorization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'Chow|chow|relative projective|factorization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "No Mathlib declaration for Chow's lemma or the asserted proper-surjective/projective factorization; only Proj properness and separatedness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "embedded_statements",
   "cites_outside_uses"
  ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-chow-factorization",
+  "worker": "stage1",
+  "summary": "Rechecked the imported approximation-to-Chow proof for a proper morphism over an affine base. Added the projective-space statement dependency, attached the existing proper/closed-immersion/surjective base-change and fibre-product-pasting nodes to the base-change and restriction steps, used the reviewed immersion-composition tool, and removed the non-proof remark from the proof list. The item itself has no Mathlib match after LeanSearch, Loogle, LeanFinder, and source grep."
+ },
  "blueprint_kind": "lemma",
  "blueprint_order": 1064,
  "blueprint_uses": [
@@ -130,5 +206,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-chow"
+ "unit": "sk-thm-chow",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Reviewed statement, route, all proof steps, cited reusable nodes, Mathlib searches, and independent review; no private reusable lemma or module."
+ }
 }
