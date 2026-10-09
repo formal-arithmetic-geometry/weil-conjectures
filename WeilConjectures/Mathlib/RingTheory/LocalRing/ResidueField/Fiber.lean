@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Extension.Presentation.Core
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+public import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 
 /-!
@@ -26,6 +30,309 @@ near any point of that fibre.
 @[expose] public section
 
 open TensorProduct
+
+namespace Algebra.TensorProduct
+
+variable {R₀ R₁ S₀ : Type*} [CommRing R₀] [CommRing R₁] [CommRing S₀] [Algebra R₀ R₁]
+  [Algebra R₀ S₀]
+
+/-- For an `R₁`-module `N`, `(R₁ ⊗[R₀] S₀) ⊗[R₁] N ≃ S₀ ⊗[R₀] N`. -/
+noncomputable def tensorCancelEquiv (N : Type*) [AddCommGroup N] [Module R₀ N] [Module R₁ N]
+    [IsScalarTower R₀ R₁ N] : (R₁ ⊗[R₀] S₀) ⊗[R₁] N ≃ₗ[R₀] S₀ ⊗[R₀] N :=
+  ((_root_.TensorProduct.comm R₁ (R₁ ⊗[R₀] S₀) N).restrictScalars R₀).trans
+    ((_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange R₀ R₁ R₁ N S₀).restrictScalars R₀ |>.trans
+      (_root_.TensorProduct.comm R₀ N S₀))
+
+variable (N : Type*) [AddCommGroup N] [Module R₀ N] [Module R₁ N] [IsScalarTower R₀ R₁ N]
+
+@[simp]
+lemma tensorCancelEquiv_tmul (r : R₁) (s : S₀) (n : N) :
+    tensorCancelEquiv N ((r ⊗ₜ[R₀] s) ⊗ₜ[R₁] n) = s ⊗ₜ (r • n) := rfl
+
+lemma tensorCancelEquiv_smul (s : S₀) (y : (R₁ ⊗[R₀] S₀) ⊗[R₁] N) :
+    tensorCancelEquiv N ((1 ⊗ₜ[R₀] s : R₁ ⊗[R₀] S₀) • y) = s • tensorCancelEquiv N y := by
+  induction y with
+  | zero => simp
+  | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add]
+  | tmul x n =>
+    induction x with
+    | zero => simp
+    | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
+    | tmul r s' =>
+      rw [smul_tmul', smul_eq_mul, Algebra.TensorProduct.tmul_mul_tmul, one_mul,
+        tensorCancelEquiv_tmul, tensorCancelEquiv_tmul, smul_tmul', smul_eq_mul]
+
+lemma tensorCancelEquiv_lTensor {N' : Type*} [AddCommGroup N'] [Module R₀ N'] [Module R₁ N']
+    [IsScalarTower R₀ R₁ N'] (f : N' →ₗ[R₁] N) (y : (R₁ ⊗[R₀] S₀) ⊗[R₁] N') :
+    tensorCancelEquiv N (f.lTensor _ y) =
+      (f.restrictScalars R₀).lTensor S₀ (tensorCancelEquiv N' y) := by
+  induction y with
+  | zero => simp
+  | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
+  | tmul x n =>
+    induction x with
+    | zero => simp
+    | add x y hx hy => simp only [add_tmul, map_add, hx, hy]
+    | tmul r s => simp
+
+end Algebra.TensorProduct
+
+namespace Module
+
+variable {R₀ R₁ S₀ : Type*} [CommRing R₀] [CommRing R₁] [CommRing S₀] [Algebra R₀ R₁]
+  [Algebra R₀ S₀]
+
+/-- Injectivity of `M ⊗ N' → M ⊗ N` at the localization of `R₁ ⊗[R₀] S₀` at a prime `q₁` follows
+from the injectivity over `R₀` at the localization of `S₀` at the prime below. -/
+theorem lTensor_injective_localization_tensor (q₁ : Ideal (R₁ ⊗[R₀] S₀)) [q₁.IsPrime]
+    {N N' : Type*} [AddCommGroup N] [Module R₀ N] [Module R₁ N] [IsScalarTower R₀ R₁ N]
+    [AddCommGroup N'] [Module R₀ N'] [Module R₁ N'] [IsScalarTower R₀ R₁ N'] (f : N' →ₗ[R₁] N)
+    (h : Function.Injective ((f.restrictScalars R₀).lTensor
+      (Localization.AtPrime (q₁.comap Algebra.TensorProduct.includeRight.toRingHom)))) :
+    Function.Injective (f.lTensor (Localization.AtPrime q₁)) := by
+  set q₀ := q₁.comap (Algebra.TensorProduct.includeRight.toRingHom : S₀ →+* R₁ ⊗[R₀] S₀)
+  rw [lTensor_injective_iff_of_isLocalizedModule (S := S₀) q₀.primeCompl
+    (Algebra.linearMap S₀ (Localization.AtPrime q₀))] at h
+  rw [lTensor_injective_iff_of_isLocalizedModule (S := R₁ ⊗[R₀] S₀) q₁.primeCompl
+    (Algebra.linearMap _ (Localization.AtPrime q₁))]
+  intro y hy
+  obtain ⟨t, ht, hty⟩ := h (Algebra.TensorProduct.tensorCancelEquiv N' y) (by
+    rw [← Algebra.TensorProduct.tensorCancelEquiv_lTensor, hy, map_zero])
+  refine ⟨1 ⊗ₜ t, ht, ?_⟩
+  apply (Algebra.TensorProduct.tensorCancelEquiv N').injective
+  rw [Algebra.TensorProduct.tensorCancelEquiv_smul, hty, map_zero]
+
+end Module
+
+namespace Module
+
+variable {R₀ A S₀ : Type*} [CommRing R₀] [CommRing A] [Algebra R₀ A] [CommRing S₀]
+  [Algebra R₀ S₀]
+
+/-- **Elements of `Tor₁` die at a finite stage** (the first step of Stacks, Tag 00R6). Let
+`A ⊗[R₀] S₀` be flat over `A`, `p` an ideal of the noetherian ring `R₀` and `ξ` in the kernel of
+`S₀ ⊗ p → S₀`. Then there is a finite subset `T` of `A` such that `ξ` vanishes in `S₀ ⊗ p R₁` for
+every subalgebra `R₁ ⊆ A` containing `T`. -/
+theorem exists_finset_lTensor_eq_zero [IsNoetherianRing R₀] [Flat A (A ⊗[R₀] S₀)] (p : Ideal R₀)
+    (ξ : S₀ ⊗[R₀] p) (hξ : TensorProduct.rid R₀ S₀ (p.subtype.lTensor S₀ ξ) = 0) :
+    ∃ T : Finset A, ∀ R₁ : Subalgebra R₀ A, (T : Set A) ⊆ R₁ →
+      (((Algebra.linearMap R₀ R₁) ∘ₗ p.subtype).codRestrict
+        ((p.map (algebraMap R₀ R₁)).restrictScalars R₀)
+        (fun a ↦ Ideal.mem_map_of_mem _ a.2)).lTensor S₀ ξ = 0 := by
+  classical
+  set J := p.map (algebraMap R₀ A)
+  let τ : p →ₗ[R₀] J :=
+    { toFun := fun a ↦ ⟨algebraMap R₀ A a, Ideal.mem_map_of_mem _ a.2⟩
+      map_add' := fun a b ↦ Subtype.ext (by simp)
+      map_smul' := fun r a ↦ Subtype.ext (by simp [Algebra.smul_def]) }
+  -- `J ⊗[R₀] S₀ → A ⊗[R₀] S₀` is injective, by flatness of `A ⊗[R₀] S₀` over `A`.
+  have hinj : Function.Injective (AlgebraTensorModule.rTensor R₀ S₀ J.subtype) := by
+    have hflat := Flat.rTensor_preserves_injective_linearMap (M := A ⊗[R₀] S₀) J.subtype
+      Subtype.val_injective
+    have hcomm : ∀ x, AlgebraTensorModule.rTensor R₀ S₀ J.subtype
+        (AlgebraTensorModule.cancelBaseChange R₀ A A J S₀ x) =
+          AlgebraTensorModule.cancelBaseChange R₀ A A A S₀ (J.subtype.rTensor _ x) := by
+      intro x
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
+      | tmul j y =>
+        induction y with
+        | zero => simp
+        | add y z hy hz => simp only [tmul_add, map_add, hy, hz]
+        | tmul a s => simp
+    intro x y hxy
+    obtain ⟨x, rfl⟩ := (AlgebraTensorModule.cancelBaseChange R₀ A A J S₀).surjective x
+    obtain ⟨y, rfl⟩ := (AlgebraTensorModule.cancelBaseChange R₀ A A J S₀).surjective y
+    rw [hcomm, hcomm] at hxy
+    rw [hflat ((AlgebraTensorModule.cancelBaseChange R₀ A A A S₀).injective hxy)]
+  have himage : ∀ x : S₀ ⊗[R₀] p, AlgebraTensorModule.rTensor R₀ S₀ J.subtype
+      (τ.rTensor S₀ (TensorProduct.comm R₀ S₀ p x)) =
+        (1 : A) ⊗ₜ TensorProduct.rid R₀ S₀ (p.subtype.lTensor S₀ x) := by
+    intro x
+    induction x with
+    | zero => simp
+    | add x y hx hy => rw [map_add, map_add, map_add, hx, hy, map_add, map_add, tmul_add]
+    | tmul s a =>
+      simp [τ, Algebra.algebraMap_eq_smul_one, smul_tmul]
+  set P := LinearMap.range τ
+  have hPfg : P.FG := by
+    change (LinearMap.range τ).FG
+    rw [LinearMap.range_eq_map]
+    exact (Module.Finite.fg_top).map τ
+  set t := τ.rangeRestrict.rTensor S₀ (TensorProduct.comm R₀ S₀ p ξ)
+  have ht : P.subtype.rTensor S₀ t = 0 := by
+    apply hinj
+    rw [map_zero, ← LinearMap.comp_apply (P.subtype.rTensor S₀), ← LinearMap.rTensor_comp]
+    change AlgebraTensorModule.rTensor R₀ S₀ J.subtype
+      (τ.rTensor S₀ (TensorProduct.comm R₀ S₀ p ξ)) = 0
+    rw [himage, hξ, tmul_zero]
+  obtain ⟨Q, hPQ, ⟨G, hG⟩, hQ⟩ := TensorProduct.eq_zero_of_fg_of_subtype_eq_zero hPfg ht
+  have hrep : ∀ g : J, ∃ (n : ℕ) (c : Fin n → A) (d : Fin n → p),
+      ∑ i, c i * algebraMap R₀ A (d i) = g := by
+    intro g
+    obtain ⟨n, c, d, hcd⟩ := Submodule.mem_span_set'.mp g.2
+    choose a ha had using fun i ↦ (d i).2
+    exact ⟨n, c, fun i ↦ ⟨a i, ha i⟩, by rw [← hcd]; simp [had, smul_eq_mul]⟩
+  choose n c d hcd using hrep
+  refine ⟨G.biUnion fun g ↦ Finset.univ.image (c g), fun R₁ hT ↦ ?_⟩
+  set I₁ := (p.map (algebraMap R₀ R₁)).restrictScalars R₀
+  have hmem : ∀ x ∈ I₁, ((x : R₁) : A) ∈ J := by
+    intro x hx
+    have := Ideal.mem_map_of_mem R₁.val.toRingHom hx
+    rwa [Ideal.map_map, show R₁.val.toRingHom.comp (algebraMap R₀ R₁) = algebraMap R₀ A from
+      RingHom.ext fun r ↦ by simp] at this
+  let κ : I₁ →ₗ[R₀] J :=
+    { toFun := fun x ↦ ⟨((x : R₁) : A), hmem x x.2⟩
+      map_add' := fun x y ↦ rfl
+      map_smul' := fun r x ↦ Subtype.ext (by simp [Algebra.smul_def]) }
+  have hκ : Function.Injective κ := fun x y h ↦
+    Subtype.ext (Subtype.ext congr(($h : A)))
+  have hQκ : Q ≤ LinearMap.range κ := by
+    rw [← hG, Submodule.span_le]
+    intro g hg
+    have hc : ∀ i, c g i ∈ R₁ := fun i ↦
+      hT (Finset.mem_biUnion.mpr ⟨g, hg, Finset.mem_image_of_mem _ (Finset.mem_univ i)⟩)
+    refine ⟨⟨∑ i, ⟨c g i, hc i⟩ * algebraMap R₀ R₁ (d g i), ?_⟩, Subtype.ext ?_⟩
+    · exact Submodule.sum_mem _ fun i _ ↦
+        Ideal.mul_mem_left _ _ (Ideal.mem_map_of_mem _ (d g i).2)
+    · simp [κ, ← hcd g]
+  obtain ⟨ψ, hψ⟩ : ∃ ψ : Q →ₗ[R₀] I₁, ψ ∘ₗ Submodule.inclusion hPQ ∘ₗ τ.rangeRestrict =
+      ((Algebra.linearMap R₀ R₁) ∘ₗ p.subtype).codRestrict I₁
+        (fun a ↦ Ideal.mem_map_of_mem _ a.2) := by
+    refine ⟨(LinearEquiv.ofInjective κ hκ).symm.toLinearMap ∘ₗ Submodule.inclusion hQκ,
+      LinearMap.ext fun a ↦ hκ ?_⟩
+    change κ ((LinearEquiv.ofInjective κ hκ).symm _) = _
+    rw [LinearEquiv.ofInjective_symm_apply]
+    rfl
+  have key : (ψ ∘ₗ Submodule.inclusion hPQ ∘ₗ τ.rangeRestrict).rTensor S₀
+      (TensorProduct.comm R₀ S₀ p ξ) = ψ.rTensor S₀ ((Submodule.inclusion hPQ).rTensor S₀ t) := by
+    rw [LinearMap.rTensor_comp, LinearMap.comp_apply, LinearMap.rTensor_comp, LinearMap.comp_apply]
+  rw [← hψ, ← (TensorProduct.comm R₀ p S₀).apply_symm_apply ξ, TensorProduct.comm_symm,
+    LinearMap.lTensor_comm, key, hQ, map_zero, map_zero]
+
+end Module
+
+namespace Module
+
+universe u
+
+variable {R₀ R₁ S₀ : Type u} [CommRing R₀] [CommRing R₁] [CommRing S₀] [Algebra R₀ R₁]
+  [Algebra R₀ S₀]
+
+/-- **Flatness at a prime of a finite stage** (Stacks, Tag 00R6, via Tag 00MO). Let `R₁` be a
+noetherian `R₀`-algebra, `S₀` a finite type `R₀`-algebra, `q₁` a prime of `R₁ ⊗[R₀] S₀` lying over
+the primes `q₀` of `S₀` and `p₀` of `R₀`. If every element of the kernel of `S₀ ⊗ p₀ → S₀`
+vanishes in `S₀ ⊗ p₀ R₁`, then the localization of `R₁ ⊗[R₀] S₀` at `q₁` is flat over `R₁`. -/
+theorem flat_localization_tensor_of_forall [IsNoetherianRing R₀] [IsNoetherianRing R₁]
+    [Algebra.FiniteType R₀ S₀] (q₁ : Ideal (R₁ ⊗[R₀] S₀)) [q₁.IsPrime]
+    (h : ∀ ξ : S₀ ⊗[R₀] ((q₁.comap Algebra.TensorProduct.includeRight.toRingHom).comap
+        (algebraMap R₀ S₀)),
+      TensorProduct.rid R₀ S₀ (Submodule.subtype _ |>.lTensor S₀ ξ) = 0 →
+      (((Algebra.linearMap R₀ R₁) ∘ₗ Submodule.subtype _).codRestrict
+        ((((q₁.comap Algebra.TensorProduct.includeRight.toRingHom).comap
+          (algebraMap R₀ S₀)).map (algebraMap R₀ R₁)).restrictScalars R₀)
+        (fun a ↦ Ideal.mem_map_of_mem _ a.2)).lTensor S₀ ξ = 0) :
+    Flat R₁ (Localization.AtPrime q₁) := by
+  classical
+  set q₀ := q₁.comap (Algebra.TensorProduct.includeRight.toRingHom : S₀ →+* R₁ ⊗[R₀] S₀)
+  set p₀ := q₀.comap (algebraMap R₀ S₀)
+  set I₁ : Ideal R₁ := p₀.map (algebraMap R₀ R₁)
+  set L := I₁.restrictScalars R₀
+  set σ : p₀ →ₗ[R₀] L := ((Algebra.linearMap R₀ R₁) ∘ₗ p₀.subtype).codRestrict L
+    (fun a ↦ Ideal.mem_map_of_mem _ a.2)
+  set M₀ := Localization.AtPrime q₀
+  set M₁ := Localization.AtPrime q₁
+  have : IsNoetherianRing S₀ := Algebra.FiniteType.isNoetherianRing R₀ S₀
+  have : IsNoetherianRing (R₁ ⊗[R₀] S₀) := Algebra.FiniteType.isNoetherianRing R₁ _
+  -- Elements of `R₀` outside `p₀` act bijectively on `M₀`.
+  have hbij : ∀ r ∉ p₀, Function.Bijective (fun m : M₀ ↦ r • m) := by
+    intro r hr
+    have hu : IsUnit (algebraMap R₀ M₀ r) := by
+      rw [IsScalarTower.algebraMap_apply R₀ S₀ M₀]
+      exact IsLocalization.map_units M₀ (⟨algebraMap R₀ S₀ r, hr⟩ : q₀.primeCompl)
+    simp_rw [Algebra.smul_def]
+    exact ⟨fun x y hxy ↦ hu.mul_left_cancel hxy, fun y ↦ ⟨hu.unit⁻¹ * y, by simp only; rw [← mul_assoc, hu.mul_val_inv, one_mul]⟩⟩
+  have hQ₀ : ∀ (N : Type u) [AddCommGroup N] [Module R₀ N], (∀ i ∈ p₀, ∀ n : N, i • n = 0) →
+      ∀ N' : Submodule R₀ N, Function.Injective (N'.subtype.lTensor M₀) :=
+    fun N _ _ hN N' ↦ Flat.lTensor_subtype_injective_of_bijective_smul p₀ hbij hN N'
+  -- The kernel of `M₀ ⊗ p₀ → M₀` dies in `M₀ ⊗ p₀ R₁`.
+  have hloc : ∀ k : M₀ ⊗[R₀] p₀, TensorProduct.rid R₀ M₀ (p₀.subtype.lTensor M₀ k) = 0 →
+      σ.lTensor M₀ k = 0 := by
+    intro k hk
+    let ℓ : S₀ →ₗ[S₀] M₀ := Algebra.linearMap S₀ M₀
+    let g' : S₀ ⊗[R₀] p₀ →ₗ[S₀] M₀ ⊗[R₀] p₀ := AlgebraTensorModule.rTensor R₀ p₀ ℓ
+    let gL : S₀ ⊗[R₀] L →ₗ[S₀] M₀ ⊗[R₀] L := AlgebraTensorModule.rTensor R₀ L ℓ
+    have : IsLocalizedModule q₀.primeCompl g' := IsLocalizedModule.rTensor (A := S₀) _ ℓ
+    have : IsLocalizedModule q₀.primeCompl gL := IsLocalizedModule.rTensor (A := S₀) _ ℓ
+    let μ₀ : M₀ ⊗[R₀] p₀ →ₗ[S₀] M₀ := (AlgebraTensorModule.rid R₀ S₀ M₀).toLinearMap ∘ₗ
+      AlgebraTensorModule.lTensor S₀ M₀ p₀.subtype
+    let μ' : S₀ ⊗[R₀] p₀ →ₗ[S₀] S₀ := (AlgebraTensorModule.rid R₀ S₀ S₀).toLinearMap ∘ₗ
+      AlgebraTensorModule.lTensor S₀ S₀ p₀.subtype
+    have hnat1 (x : S₀ ⊗[R₀] p₀) : μ₀ (g' x) = ℓ (μ' x) := by
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
+      | tmul s a =>
+        simp [μ₀, μ', g', ℓ, Algebra.smul_def, IsScalarTower.algebraMap_apply R₀ S₀ M₀]
+    have hnat2 (x : S₀ ⊗[R₀] p₀) : AlgebraTensorModule.lTensor S₀ M₀ σ (g' x) =
+        gL (AlgebraTensorModule.lTensor S₀ S₀ σ x) := by
+      induction x with
+      | zero => simp
+      | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
+      | tmul s a => rfl
+    obtain ⟨⟨k', s⟩, hs⟩ := IsLocalizedModule.surj q₀.primeCompl g' k
+    simp only [Submonoid.smul_def] at hs
+    have h1 : ℓ (μ' k') = 0 := by
+      rw [← hnat1, ← hs, map_smul]
+      change (s : S₀) • (TensorProduct.rid R₀ M₀ (p₀.subtype.lTensor M₀ k)) = 0
+      rw [hk, smul_zero]
+    obtain ⟨t, ht⟩ := (IsLocalizedModule.eq_zero_iff q₀.primeCompl (f := ℓ)).mp h1
+    rw [Submonoid.smul_def, ← map_smul] at ht
+    have h3 : AlgebraTensorModule.lTensor S₀ S₀ σ ((t : S₀) • k') = 0 := h _ ht
+    have h4 : ((t : S₀) * s) • AlgebraTensorModule.lTensor S₀ M₀ σ k = 0 := by
+      rw [mul_smul, ← map_smul, hs, ← map_smul, ← map_smul g', hnat2, h3, map_zero]
+    have hu := IsLocalizedModule.map_units gL ⟨t * s, mul_mem t.2 s.2⟩
+    refine (Module.End.isUnit_iff _).mp hu |>.1 ?_
+    rw [map_zero, Module.algebraMap_end_apply]
+    exact h4
+  have hI₀ : Function.Injective (L.subtype.lTensor M₀) := by
+    have hL : p₀ • (⊤ : Submodule R₀ R₁) ≤ L := by
+      rw [Submodule.smul_le]
+      intro a ha n _
+      rw [Algebra.smul_def]
+      exact Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ ha)
+    refine Flat.lTensor_subtype_injective_of_forall_ker p₀ hQ₀ L hL fun k hk n ↦ ?_
+    let mn : L →ₗ[R₀] L := (DistribSMul.toLinearMap R₁ I₁ n).restrictScalars R₀
+    have : ((LinearMap.toSpanSingleton R₀ R₁ n) ∘ₗ p₀.subtype).codRestrict L
+        (fun i ↦ hL (Submodule.smul_mem_smul i.2 trivial)) = mn ∘ₗ σ := by
+      ext a
+      simp [σ, Algebra.smul_def, mul_comm]
+      rfl
+    rw [this, LinearMap.lTensor_comp, LinearMap.comp_apply, hloc k hk, map_zero]
+  -- The local criterion over `R₁` with the ideal `I₁`.
+  have hIS : I₁.map (algebraMap R₁ M₁) ≤ Ideal.jacobson ⊥ := by
+    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top, Ideal.map_le_iff_le_comap,
+      Ideal.map_le_iff_le_comap]
+    intro a ha
+    rw [Ideal.mem_comap, Ideal.mem_comap,
+      IsScalarTower.algebraMap_apply R₁ (R₁ ⊗[R₀] S₀) M₁,
+      IsLocalization.AtPrime.to_map_mem_maximal_iff M₁ q₁,
+      ← IsScalarTower.algebraMap_apply R₀ R₁ (R₁ ⊗[R₀] S₀),
+      ← (Algebra.TensorProduct.includeRight : S₀ →ₐ[R₀] R₁ ⊗[R₀] S₀).commutes a]
+    exact ha
+  refine Flat.of_lTensor_injective_of_forall (S := M₁) (M := M₁) I₁ hIS ?_ ?_
+  · intro N _ _ hN N'
+    let : Module R₀ N := Module.compHom N (algebraMap R₀ R₁)
+    have : IsScalarTower R₀ R₁ N := ⟨fun r s n ↦ by
+      change (r • s) • n = algebraMap R₀ R₁ r • s • n
+      rw [Algebra.smul_def, mul_smul]⟩
+    apply lTensor_injective_localization_tensor q₁ N'.subtype
+    exact hQ₀ N (fun i hi n ↦ hN _ (Ideal.mem_map_of_mem _ hi) n) (N'.restrictScalars R₀)
+  · exact lTensor_injective_localization_tensor q₁ I₁.subtype hI₀
+
+end Module
+
 
 /-- **The local criterion for relative effective Cartier divisors**, algebraic form (Stacks,
 Tags 00MF and 046Z; the algebraic content of Tag 062Y). Let `A → B` be flat and of finite
