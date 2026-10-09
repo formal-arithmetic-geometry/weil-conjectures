@@ -729,6 +729,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
@@ -998,6 +999,7 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.WellKnown
+public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
 public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence

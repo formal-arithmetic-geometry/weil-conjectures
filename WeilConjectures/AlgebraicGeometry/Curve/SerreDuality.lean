@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.RingTheory.RamificationInertia.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
@@ -24,6 +25,8 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
+public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
@@ -635,8 +638,171 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
     (ht : maximalIdeal (Y.presheaf.stalk y) = Ideal.span {Y.presheaf.germ V y hyV t}) :
     ∑ᶠ (x : X) (hx : π.base x = y), X.ord (algebraMap (X.presheaf.stalk x) X.functionField
       (X.presheaf.germ (π ⁻¹ᵁ V) x (show π.base x ∈ V from hx ▸ hyV) (π.app V t))) x =
-      π.finrank (genericPoint Y) :=
-  sorry
+      π.finrank (genericPoint Y) := by
+  classical
+  have := SmoothOfRelativeDimension.smooth 1 (Y ↘ Spec (.of k))
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  obtain ⟨_, ⟨W, hW, rfl⟩, hyW, hWV⟩ :=
+    Y.isBasis_affineOpens.exists_subset_of_mem_open hyV V.2
+  replace hW : IsAffineOpen W := hW
+  have hU : IsAffineOpen (π ⁻¹ᵁ W) := hW.preimage π
+  have := hW.isOpenImmersion_fromSpec
+  have := hU.isOpenImmersion_fromSpec
+  let φ : Γ(Y, W) ⟶ Γ(X, π ⁻¹ᵁ W) := π.appLE W (π ⁻¹ᵁ W) le_rfl
+  letI : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := φ.hom.toAlgebra
+  have : Module.Finite Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := by
+    have := π.finite_app W hW
+    rwa [← Scheme.Hom.appLE_eq_app] at this
+  have : Module.Flat Γ(Y, W) Γ(X, π ⁻¹ᵁ W) :=
+    HasRingHomProperty.appLE @Flat π inferInstance ⟨W, hW⟩ ⟨_, hU⟩ le_rfl
+  have : Nonempty W := ⟨⟨y, hyW⟩⟩
+  let p := (hW.primeIdealOf ⟨y, hyW⟩).asIdeal
+  have : Fintype (p.primesOver Γ(X, π ⁻¹ᵁ W)) :=
+    (Algebra.QuasiFinite.finite_primesOver p).fintype
+  have hsum := Ideal.sum_ramification_inertia_eq_finrank p Γ(X, π ⁻¹ᵁ W)
+  -- the rank of `π` is the rank of `Γ(X, π⁻¹ W)` over `Γ(Y, W)`
+  have hpb : IsPullback hU.fromSpec (Spec.map φ) π hW.fromSpec :=
+    (IsOpenImmersion.isPullback (Spec.map φ) hU.fromSpec hW.fromSpec π
+      (IsAffineOpen.SpecMap_appLE_fromSpec π hW hU le_rfl).symm
+      (by rw [hU.opensRange_fromSpec, hW.opensRange_fromSpec])).flip
+  have hrank : π.finrank (genericPoint Y) = Module.finrank Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := by
+    have hη : genericPoint Y ∈ W :=
+      (genericPoint_spec Y).mem_open_set_iff W.2 |>.mpr ⟨y, trivial, hyW⟩
+    have h₁ := Scheme.Hom.finrank_of_isPullback _ _ _ _ hpb (hW.primeIdealOf ⟨_, hη⟩)
+    rw [hW.fromSpec_primeIdealOf] at h₁
+    rw [← h₁, show φ = CommRingCat.ofHom (algebraMap Γ(Y, W) Γ(X, π ⁻¹ᵁ W)) from rfl,
+      Scheme.Hom.finrank_SpecMap_algebraMap, Module.rankAtStalk_eq,
+      Ideal.finrank_fiber_eq_finrank]
+  rw [hrank, ← hsum]
+  -- reindex the points over `y` by the primes over `p`
+  let G : X → ℤ := fun x ↦ if h : π x ∈ V then X.ord (algebraMap (X.presheaf.stalk x)
+    X.functionField (X.presheaf.germ (π ⁻¹ᵁ V) x h (π.app V t))) x else 0
+  have hLHS : (∑ᶠ (x : X) (hx : π.base x = y), X.ord (algebraMap (X.presheaf.stalk x)
+      X.functionField (X.presheaf.germ (π ⁻¹ᵁ V) x (show π.base x ∈ V from hx ▸ hyV)
+        (π.app V t))) x) = ∑ᶠ x ∈ {x | π x = y}, G x :=
+    finsum_congr fun x ↦ finsum_congr fun hx ↦ by
+      simp only [G, dif_pos (show π x ∈ V from hx ▸ hyV)]
+  let e : p.primesOver Γ(X, π ⁻¹ᵁ W) → X := fun q ↦ hU.fromSpec ⟨q.1, q.2.1⟩
+  have he : Function.Injective e := fun q q' h ↦
+    Subtype.ext (congrArg PrimeSpectrum.asIdeal (hU.fromSpec.isOpenEmbedding.injective h))
+  have hπe (q : p.primesOver Γ(X, π ⁻¹ᵁ W)) : π (e q) = y := by
+    have hq : Spec.map φ ⟨q.1, q.2.1⟩ = hW.primeIdealOf ⟨y, hyW⟩ :=
+      PrimeSpectrum.ext (Ideal.LiesOver.over (P := q.1) (p := p)).symm
+    calc π (e q) = hW.fromSpec (Spec.map φ ⟨q.1, q.2.1⟩) :=
+          (congrArg (fun f ↦ f ⟨q.1, q.2.1⟩)
+            (IsAffineOpen.SpecMap_appLE_fromSpec π hW hU le_rfl)).symm
+      _ = y := by rw [hq]; exact hW.fromSpec_primeIdealOf _
+  have hrange : Set.range e = {x | π x = y} := by
+    ext x
+    refine ⟨fun ⟨q, hq⟩ ↦ hq ▸ hπe q, fun hx ↦ ?_⟩
+    have hxU : x ∈ π ⁻¹ᵁ W := by
+      change π x ∈ W
+      rw [show π x = y from hx]; exact hyW
+    have hc := IsAffineOpen.comap_primeIdealOf_appLE W hW (π ⁻¹ᵁ W) hU le_rfl hxU
+    refine ⟨⟨(hU.primeIdealOf ⟨x, hxU⟩).asIdeal, inferInstance, ⟨?_⟩⟩, ?_⟩
+    · change p = Ideal.comap φ.hom (hU.primeIdealOf ⟨x, hxU⟩).asIdeal
+      have := congrArg PrimeSpectrum.asIdeal hc
+      simp only [PrimeSpectrum.comap_asIdeal] at this
+      rw [this]
+      exact congrArg (fun z : W ↦ (hW.primeIdealOf z).asIdeal)
+        (Subtype.ext (show π x = y from hx).symm)
+    · exact hU.fromSpec_primeIdealOf ⟨x, hxU⟩
+  rw [hLHS, ← hrange, finsum_mem_range he, finsum_eq_sum_of_fintype]
+  push_cast
+  refine Finset.sum_congr rfl fun q _ ↦ ?_
+  -- the point `x` of `X` corresponding to `q`
+  have hxy : π (e q) = y := hπe q
+  have hxV : π (e q) ∈ V := hxy ▸ hyV
+  have hxU : e q ∈ π ⁻¹ᵁ W := show π (e q) ∈ W from hxy ▸ hyW
+  have hpq : hU.primeIdealOf ⟨e q, hxU⟩ = ⟨q.1, q.2.1⟩ := by
+    generalize hr : (⟨q.1, q.2.1⟩ : PrimeSpectrum Γ(X, π ⁻¹ᵁ W)) = r
+    have h : (⟨e q, hxU⟩ : (π ⁻¹ᵁ W : X.Opens)) = hU.isoSpec.inv r := by
+      apply Subtype.ext
+      change hU.fromSpec ⟨q.1, q.2.1⟩ = (π ⁻¹ᵁ W).ι (hU.isoSpec.inv r)
+      rw [hr]
+      exact (congrArg (fun f ↦ f r) hU.isoSpec_inv_ι).symm
+    rw [IsAffineOpen.primeIdealOf, h]
+    exact congrArg (fun f ↦ f r) hU.isoSpec.inv_hom_id
+  -- `x` is a closed point: the fibre of `π` over the closed point `y` is discrete
+  have hxc : IsClosed {e q} := by
+    have := (π.isDiscrete_preimage_singleton y).to_subtype
+    have hc := (isClosed_discrete ({⟨e q, hxy⟩} : Set (π ⁻¹' {y}))).trans
+      (hy.preimage π.continuous)
+    simpa using hc
+  obtain ⟨_, hdvr⟩ := isDiscreteValuationRing_stalk_of_isClosed (X ↘ Spec (.of k)) hxc
+  have hcoh : Order.coheight (e q) = 1 := by
+    have := ringKrullDim_stalk_eq_one_of_isClosed (X ↘ Spec (.of k)) hxc
+    rw [ringKrullDim_stalk_eq_coheight] at this
+    exact_mod_cast this
+  -- `π^* t` does not vanish at `x`
+  have hinjx : Function.Injective (π.stalkMap (e q)) := by
+    algebraize [(π.stalkMap (e q)).hom]
+    have : Module.Flat (Y.presheaf.stalk (π (e q))) (X.presheaf.stalk (e q)) :=
+      Flat.stalkMap π (e q)
+    have : IsLocalHom (algebraMap (Y.presheaf.stalk (π (e q))) (X.presheaf.stalk (e q))) :=
+      inferInstanceAs (IsLocalHom (π.stalkMap (e q)).hom)
+    have := Module.FaithfullyFlat.of_flat_of_isLocalHom
+      (A := Y.presheaf.stalk (π (e q))) (B := X.presheaf.stalk (e q))
+    exact FaithfulSMul.algebraMap_injective _ _
+  have key : ∀ (z : Y) (_ : z = y) (hzV : z ∈ V),
+      maximalIdeal (Y.presheaf.stalk z) = Ideal.span {Y.presheaf.germ V z hzV t} := by
+    rintro z rfl hzV
+    exact ht
+  have ht' := key _ hxy hxV
+  have hy' : IsClosed {π (e q)} := hxy ▸ hy
+  obtain ⟨_, hdvrY⟩ := isDiscreteValuationRing_stalk_of_isClosed (Y ↘ Spec (.of k)) hy'
+  have hgt : Y.presheaf.germ V _ hxV t ≠ 0 := by
+    intro h
+    rw [h, Ideal.span_singleton_eq_bot.mpr rfl] at ht'
+    exact IsDiscreteValuationRing.not_a_field _ ht'
+  have hs0 : X.presheaf.germ (π ⁻¹ᵁ V) (e q) hxV (π.app V t) ≠ 0 := by
+    rw [← Scheme.Hom.germ_stalkMap_apply]
+    exact (map_ne_zero_iff _ hinjx).mpr hgt
+  simp only [G, dif_pos hxV]
+  rw [Scheme.ord_algebraMap_stalk hcoh hs0]
+  -- the inertia degree is `1`
+  let κA : k →+* Γ(Y, W) :=
+    ((Scheme.ΓSpecIso (.of k)).inv ≫ (Y ↘ Spec (.of k)).appLE ⊤ W le_top).hom
+  letI : Algebra k Γ(Y, W) := κA.toAlgebra
+  letI : Algebra k Γ(X, π ⁻¹ᵁ W) := (φ.hom.comp κA).toAlgebra
+  have : IsScalarTower k Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : Algebra.FiniteType k Γ(Y, W) := by
+    have h := HasRingHomProperty.appLE @LocallyOfFiniteType (Y ↘ Spec (.of k)) inferInstance
+      ⟨⊤, isAffineOpen_top _⟩ ⟨W, hW⟩ le_top
+    have h₂ : (Scheme.ΓSpecIso (.of k)).inv.hom.FiniteType :=
+      RingHom.FiniteType.of_surjective _ (ConcreteCategory.bijective_of_isIso _).2
+    exact h.comp h₂
+  have : Algebra.FiniteType k Γ(X, π ⁻¹ᵁ W) := Algebra.FiniteType.trans (S := Γ(Y, W))
+    inferInstance inferInstance
+  have hpmax : p.IsMaximal := hW.primeIdealOf_isMaximal_of_isClosed ⟨y, hyW⟩ hy
+  have : q.1.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap _
+    ((Ideal.LiesOver.over (P := q.1) (p := p)) ▸ hpmax)
+  rw [Ideal.inertiaDeg_eq_one_of_isAlgClosed (k := k) p q.1, Nat.cast_one, mul_one]
+  -- the ramification index is the order of vanishing
+  letI := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨e q, hxU⟩
+  have hloc := hU.isLocalization_stalk ⟨e q, hxU⟩
+  rw [hpq] at hloc
+  letI : Algebra Γ(Y, W) (X.presheaf.stalk (e q)) :=
+    ((algebraMap Γ(X, π ⁻¹ᵁ W) (X.presheaf.stalk (e q))).comp φ.hom).toAlgebra
+  have : IsScalarTower Γ(Y, W) Γ(X, π ⁻¹ᵁ W) (X.presheaf.stalk (e q)) :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  letI := TopCat.Presheaf.algebra_section_stalk Y.presheaf ⟨π (e q), show π (e q) ∈ W from hxU⟩
+  have hlocY := hW.isLocalization_stalk ⟨π (e q), show π (e q) ∈ W from hxU⟩
+  have hpy : hW.primeIdealOf ⟨π (e q), show π (e q) ∈ W from hxU⟩ =
+      hW.primeIdealOf ⟨y, hyW⟩ := congrArg _ (Subtype.ext hxy)
+  rw [hpy] at hlocY
+  have hcomp : algebraMap Γ(Y, W) (X.presheaf.stalk (e q)) =
+      (π.stalkMap (e q)).hom.comp (algebraMap Γ(Y, W) (Y.presheaf.stalk (π (e q)))) := by
+    ext a
+    change X.presheaf.germ (π ⁻¹ᵁ W) (e q) hxU (π.appLE W (π ⁻¹ᵁ W) le_rfl a) =
+      π.stalkMap (e q) (Y.presheaf.germ W (π (e q)) hxU a)
+    rw [Scheme.Hom.appLE_eq_app]
+    exact (Scheme.Hom.germ_stalkMap_apply π W (e q) hxU a).symm
+  have hs : p.map (algebraMap Γ(Y, W) (X.presheaf.stalk (e q))) =
+      Ideal.span {X.presheaf.germ (π ⁻¹ᵁ V) (e q) hxV (π.app V t)} := by
+    rw [hcomp, ← Ideal.map_map, IsLocalization.AtPrime.map_eq_maximalIdeal, ht',
+      Ideal.map_span, Set.image_singleton, Scheme.Hom.germ_stalkMap_apply]
+  rw [Ideal.ramificationIdx_eq_ord p q.1 _ hs]
 
 variable (k X) in
 include k in
