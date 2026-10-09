@@ -73,6 +73,8 @@ lemma appTop_map_apply_of_cocone (c : Cocone K) (g : G) (z : Γ(c.pt.left, ⊤))
     (c.w (j := SingleObj.star G) (j' := SingleObj.star G) g)
   rwa [MorphismProperty.Comma.comp_left, Hom.comp_appTop] at this
 
+section Affine
+
 variable [IsAffine X]
 
 include hP in
@@ -359,5 +361,67 @@ lemma preservesColimit_pullback [Finite G] {U : Scheme.{u}} [IsAffine U] (f : U 
     (fun x hx ↦ hrange x (AlgHom.mem_fixedPoints.mp hx))
   have hA' (W : P.Over ⊤ U) : IsAffine W.left := isAffine_left hP W
   exact isColimitOfInjectiveAppTop hP K' c' hinj' hrange'
+
+end Affine
+
+instance isAffine_directedAffineCover_X {Y : Scheme.{u}} (U : Y.directedAffineCover.I₀) :
+    IsAffine (Y.directedAffineCover.X U) :=
+  U.2
+
+section Global
+
+variable [P.IsStableUnderBaseChange] [P.IsMultiplicative] [IsZariskiLocalAtTarget P]
+  (hP' : ∀ {Y Z : Scheme.{u}} (f : Y ⟶ Z), IsAffine Y → IsAffine Z → P f) [Finite G]
+  {Y : Scheme.{u}} (D : SingleObj G ⥤ P.Over ⊤ Y)
+
+omit [P.IsMultiplicative] [IsZariskiLocalAtTarget P] in
+include hP hP' in
+lemma preservesColimitsOfShape_pullback {U V : Scheme.{u}} [IsAffine U] [IsAffine V] (f : U ⟶ V)
+    [Flat f] : PreservesColimitsOfShape (SingleObj G) (MorphismProperty.Over.pullback P ⊤ f) :=
+  ⟨fun {K} ↦ preservesColimit_pullback hP K hP' f⟩
+
+include hP in
+/-- The gluing data for the quotient of an affine `Y`-scheme by a finite monoid action: the
+quotients over the affine opens of `Y`. -/
+noncomputable def quotientGluingData : Y.directedAffineCover.ColimitGluingData D where
+  cocone U := quotientCocone (D ⋙ MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.f U))
+    hP'
+  isColimit _ := isColimitQuotientCocone hP _ hP'
+  prop_trans _ := hP' _ inferInstance inferInstance
+
+include hP hP' in
+/-- **Quotients of affine `Y`-schemes by finite monoid actions.** If `P` is a property of affine
+morphisms containing all morphisms of affine schemes, then `P.Over ⊤ Y` has quotients by finite
+monoid actions: over every affine open of `Y` the quotient is `Spec` of the invariants, and these
+glue. -/
+theorem hasColimitsOfShape_singleObj : HasColimitsOfShape (SingleObj G) (P.Over ⊤ Y) := by
+  have : ∀ {U V : Y.directedAffineCover.I₀} (hUV : U ⟶ V),
+      PreservesColimitsOfShape (SingleObj G)
+        (MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.trans hUV)) :=
+    fun _ ↦ preservesColimitsOfShape_pullback hP hP' _
+  exact ⟨fun D ↦ ⟨_, (quotientGluingData hP hP' D).isColimitGluedCocone⟩⟩
+
+include hP hP' in
+/-- Restriction to an affine open of `Y` preserves quotients by finite monoid actions. -/
+lemma preservesColimit_pullback_directedAffineCover (U : Y.directedAffineCover.I₀) :
+    PreservesColimit D (MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.f U)) := by
+  have : ∀ {U V : Y.directedAffineCover.I₀} (hUV : U ⟶ V),
+      PreservesColimitsOfShape (SingleObj G)
+        (MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.trans hUV)) :=
+    fun _ ↦ preservesColimitsOfShape_pullback hP hP' _
+  let d := quotientGluingData hP hP' D
+  refine preservesColimit_of_preserves_colimit_cocone d.isColimitGluedCocone
+    (IsColimit.ofIsoColimit (d.isColimit U) (Cocone.ext (d.pullbackGluedIso U).symm ?_))
+  intro j
+  obtain rfl : j = SingleObj.star G := rfl
+  ext1
+  apply pullback.hom_ext
+  · erw [MorphismProperty.Comma.comp_left, Category.assoc, d.pullbackGluedIso_inv_fst]
+    exact (d.fst_gluedCocone_ι _ _).symm.trans (pullback.lift_fst _ _ _).symm
+  · erw [MorphismProperty.Comma.comp_left, Category.assoc, d.pullbackGluedIso_inv_snd]
+    exact (MorphismProperty.Over.w ((d.cocone U).ι.app (SingleObj.star G))).trans
+      (pullback.lift_snd (f := d.gluedCocone.pt.hom) (g := Y.directedAffineCover.f U) _ _ _).symm
+
+end Global
 
 end AlgebraicGeometry.Scheme
