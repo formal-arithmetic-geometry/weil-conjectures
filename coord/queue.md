@@ -1,12 +1,11 @@
 # Work queue
 
-565 items; claim with `tools/claim.py next <group> [--stage N]`.
+566 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (549)
+## Stage 1: nodes to split (550)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-reduced-curve-normalization` | 1004 | none |
 | `lem-weil-pbc-strict-henselization-triples` | 1004 | none |
 | `lem-weil-pbc-torsion-sheaf-characterizations` | 1004 | none |
 | `lem-weil-pbc-zero-dimensional-field-extension` | 1004 | none |
@@ -27,6 +26,7 @@
 | `lem-sc-c7` | 1005 | none |
 | `lem-sc-c8` | 1005 | none |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1005 | none |
+| `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
@@ -463,6 +463,7 @@
 | `def-weil-pbc-C8` | - | none |
 | `lem-fin-dense-normal-open` | - | none |
 | `lem-kun-03sa` | - | none |
+| `lem-kun-stalks-commute-colimits` | - | none |
 | `lem-pc-sepclosed-finite-sep-trivial` | - | none |
 | `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
@@ -577,7 +578,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 563 nodes that wait for stage 1, 107 nodes that wait for a statement dependency.
+Not open yet: 564 nodes that wait for stage 1, 108 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

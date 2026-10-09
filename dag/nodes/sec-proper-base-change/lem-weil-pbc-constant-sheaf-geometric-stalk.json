@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+ "kind": "statement",
+ "title": "Geometric stalks of a constant etale sheaf",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $E$ an abelian group, and $\\underline E$ the constant sheaf with value $E$ on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], i.e. the sheafification [def-weil-pbc-sheafification] of the constant presheaf $U\\mapsto E$ (all restriction maps the identity), an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-constant-sheaf], [def-weil-pbc-abelian-etale-sheaves]; write $\\iota_U:E\\to\\underline E(U)$ for the component at $U$ of the canonical map from the constant presheaf to its sheafification. Let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be a geometric point [def-weil-geometric-point] and $\\underline E_{\\bar t}$ the stalk [def-weil-pbc-geometric-stalks]. Then the homomorphism $E\\to\\underline E_{\\bar t}$ sending $e$ to the class of $\\iota_T(e)$ at the pointed etale neighbourhood $(T,\\bar t)$ is an isomorphism of abelian groups.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03PT (2) (lemma-stalk-exact: $(\\mathcal F^\\#)_{\\bar s}=\\mathcal F_{\\bar s}$ for a presheaf $\\mathcal F$), with Definition 040R (definition-stalk: the stalk as a colimit over the filtered category of etale neighbourhoods, Lemma 03PQ cofinal-etale); the stalk of the constant presheaf is the colimit of a constant diagram over a connected (filtered, nonempty) index category"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fiber of constant sheaf at a point of a site is isomorphic to the value",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso, Sheaf.isConstant_iff_mem_essImage, Sheaf.mem_essImage_of_isConstant, Sheaf.isConstant_iff_isIso_counit_app', Sheaf.IsConstant.mem_essImage, Sheaf.isConstant_of_forget, constantSheaf (all Mathlib.CategoryTheory.Sites.ConstantSheaf); none about fibres/stalks",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the stalk of the constant sheaf with value M at a point of a site is M",
+   "results": "TopCat.Presheaf.algebra_section_stalk, ModuleCat.Tilde.toStalk, TopCat.Presheaf.Γgerm, StructureSheaf.toOpen_eq_const, TopCat.Presheaf.stalk_open_algebraMap, ModuleCat.Tilde.const_apply (topological stalks only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.constantSheaf",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no Mathlib declaration mentions both the fibre functor of a point and the constant sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafFiberConstantSheafIso\\|constantSheafCompSheafFiberIso\\|presheafFiberConstIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'sheafFiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | grep -i const",
+   "results": "none in Mathlib. Ingredients present: Point.presheafToSheafCompSheafFiberIso (Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean:282, the fibre of the sheafification is the fibre of the presheaf), Point.presheafFiber as a colimit over the cofiltered category of elements (Sites/Point/Basic.lean:96), pointSmallEtale (AlgebraicGeometry/Sites/EtalePoint.lean:64, at separably closed points). The source repository (not Mathlib) has CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso (WeilConjectures/Mathlib/CategoryTheory/Sites/Point/ConstantSheaf.lean:81-85, sorry-free in local/sorry_map_slopmaster2_full.jsonl) for an arbitrary point of a site",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib; the statement needs Skyscraper.lean:282 plus the colimit of a constant functor over a connected category plus the identification of pointSmallEtale's fibre with this node's stalk, more than one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-torsion-sheaf-characterizations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-pbc",
+ "import_flags": []
+}

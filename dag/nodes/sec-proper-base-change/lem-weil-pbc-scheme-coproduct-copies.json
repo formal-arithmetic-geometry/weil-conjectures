@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-scheme-coproduct-copies",
+ "kind": "statement",
+ "title": "Coproduct of copies of a scheme is etale over it",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $I$ a countable set. The coproduct $U=\\coprod_{i\\in I}T$ exists in the category of schemes; each coprojection $\\iota_i:T\\to U$ is an open immersion [def-weil-open-immersion], in particular a monomorphism, so $T\\times_{\\iota_i,U,\\iota_i}T=T$; the images of the $\\iota_i$ cover $U$; for $i\\ne j$ the fibre product $T\\times_{\\iota_i,U,\\iota_j}T$ [def-pc-fibre-product] is the empty scheme; and the codiagonal $\\nabla:U\\to T$ (the morphism with $\\nabla\\circ\\iota_i=\\mathrm{id}_T$ for all $i$) is etale [def-weil-etale-morphism], so $(U,\\nabla)$ is an object of the small etale site $T_{\\Et}$ and $\\{\\iota_i:T\\to U\\}_{i\\in I}$ is a covering of $U$ in $T_{\\Et}$ [def-weil-pbc-etale-site].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties",
+  "place": "def-weil-pbc-etale-sheaves (the scheme $U=\\coprod_{n\\ge1}T$ of the Q/Z example); standard facts on coproducts of schemes, Stacks Schemes Lemma 01JA (disjoint union of schemes); stated by an agent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct of schemes coprojections open immersions disjoint, morphism from coproduct etale",
+   "results": "AlgebraicGeometry.instIsOpenImmersionInrScheme, instHasFiniteCoproductsScheme, instIsOpenImmersionInlScheme, coprodSpec, instCoproductsOfShapeDisjointSchemeOfSmall, isOpenImmersion_sigmaDesc, sigmaOpenCover (Mathlib.AlgebraicGeometry.Limits), instIsOpenImmersionMapScheme",
+   "date": "2026-10-09",
+   "verdict": "match (clauses on the coproduct): sigmaOpenCover, CoproductsOfShapeDisjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc {P} [IsZariskiLocalAtSource P] {X} {ι} [Small ι] {Y : ι → Scheme} {f : (i : ι) → Y i ⟶ X} (hf : ∀ i, P (f i)) : P (Sigma.desc f) (Mathlib.AlgebraicGeometry.Morphisms.Basic)",
+   "date": "2026-10-09",
+   "verdict": "match (the codiagonal clause, with P = Etale, f i = id)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'sigma\\|disjoint\\|Coproduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Limits.lean; grep -n 'instance : IsZariskiLocalAtSource P' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'instance mono' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+   "results": "Limits.lean:187 HasColimitsOfShape (Discrete σ) Scheme for Small σ; :202 disjoint_opensRange_sigmaι; :219 isEmpty_pullback_sigmaι_of_ne; :241 sigmaOpenCover (open cover of ∐ g by the Sigma.ι); RingHomProperties.lean:382 IsZariskiLocalAtSource P for every HasRingHomProperty P (Etale has one, Morphisms/Etale.lean:56); OpenImmersion.lean:546 IsOpenImmersion.mono",
+   "date": "2026-10-09",
+   "verdict": "match, one Mathlib lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne, AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc, AlgebraicGeometry.IsOpenImmersion.mono",
+  "file": "Mathlib/AlgebraicGeometry/Limits.lean",
+  "how": "one Mathlib lemma per clause: existence of the coproduct for a small (e.g. countable) index type, instance HasColimitsOfShape (Discrete σ) Scheme (Limits.lean:187); the coprojections Sigma.ι are the maps of the open cover sigmaOpenCover (Limits.lean:241), hence open immersions covering the coproduct; monomorphism: IsOpenImmersion.mono (Mathlib/AlgebraicGeometry/OpenImmersion.lean:546); empty fibre products for i ≠ j: isEmpty_pullback_sigmaι_of_ne (Limits.lean:219); codiagonal etale: IsZariskiLocalAtSource.sigmaDesc (Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305) with P = @Etale (IsZariskiLocalAtSource from HasRingHomProperty @Etale, Morphisms/Etale.lean:56 and Morphisms/RingHomProperties.lean:382) and the identities etale (Etale is multiplicative, Etale.lean:63)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-torsion-sheaf-characterizations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-pbc",
+ "import_flags": []
+}

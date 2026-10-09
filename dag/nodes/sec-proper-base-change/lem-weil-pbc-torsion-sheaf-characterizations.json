@@ -2,21 +2,144 @@
  "id": "lem-weil-pbc-torsion-sheaf-characterizations",
  "kind": "statement",
  "title": "Characterizations of torsion abelian sheaves on the etale site",
- "statement": "Let $T$ be a scheme and $F\\in\\Ab(T_{\\Et})$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves]. The following are equivalent: (1) $F$ is torsion [def-weil-pbc-torsion-etale-sheaf], i.e. the canonical map $\\varinjlim_nF[n]\\to F$ is an isomorphism; (2) every local section is locally killed by a positive integer: for every etale $U\\to T$ and $s\\in F(U)$ there are an etale covering $\\{U_i\\to U\\}$ and integers $n_i\\ge1$ with $n_i\\,s|_{U_i}=0$; (3) for every geometric point [def-weil-geometric-point] $\\bar t$ of $T$ the stalk $F_{\\bar t}$ [def-weil-pbc-geometric-stalks] is a torsion abelian group. Moreover these conditions do not imply that every group $F(U)$ is torsion: if $T\\neq\\emptyset$, the constant sheaf $\\mathbf Q/\\mathbf Z$ [def-weil-pbc-constant-sheaf] on $T_{\\Et}$ is torsion, while its group of sections over the etale $T$-scheme $U=\\coprod_{n\\ge1}T$ contains $(1/2^n)_{n\\ge1}$, an element of infinite order.",
+ "statement": "Let $T$ be a scheme and $F\\in\\Ab(T_{\\Et})$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-etale-site]. The following are equivalent: (1) $F$ is torsion [def-weil-pbc-torsion-etale-sheaf], i.e. the canonical map $c_F:\\varinjlim_nF[n]\\to F$ is an isomorphism; (2) every local section is locally killed by a positive integer: for every etale $U\\to T$ and $s\\in F(U)$ there are an etale covering $\\{U_i\\to U\\}$ and integers $n_i\\ge1$ with $n_i\\,s|_{U_i}=0$; (3) for every geometric point [def-weil-geometric-point] $\\bar t$ of $T$ the stalk $F_{\\bar t}$ [def-weil-pbc-geometric-stalks] is a torsion abelian group. Moreover these conditions do not imply that every group $F(U)$ is torsion: if $T\\neq\\emptyset$, the constant sheaf $\\underline{\\mathbf Q/\\mathbf Z}$ [def-weil-pbc-constant-sheaf] on $T_{\\Et}$ is torsion, while over the etale $T$-scheme $U=\\coprod_{n\\ge1}T$ (structure map the codiagonal) restriction along the coprojections is an isomorphism $\\underline{\\mathbf Q/\\mathbf Z}(U)\\cong\\prod_{n\\ge1}\\underline{\\mathbf Q/\\mathbf Z}(T)$, and the section corresponding to $(\\iota_T(1/2^n))_{n\\ge1}$, where $\\iota_T:\\mathbf Q/\\mathbf Z\\to\\underline{\\mathbf Q/\\mathbf Z}(T)$ is the canonical map from the constant presheaf to its sheafification, has infinite order.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
   "place": "unit sk-def-pbc, statement (the parenthetical 'equivalently, every stalk ... is a torsion group, i.e. every local section is, locally, killed by a positive integer; this is weaker than asking that each group F(U) be torsion'); def-weil-pbc-property.md detailed form; the Q/Z example from sec-abelian-varieties def-weil-pbc-etale-sheaves"
  },
  "stmt_deps": [
   "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-torsion-etale-sheaf",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Stalks of $F[n]$ and of $c_F$.* Fix a geometric point $\\bar t$ of $T$. The stalk functor $G\\mapsto G_{\\bar t}$, $\\Ab(T_{\\Et})\\to\\Ab$, is exact [prop-weil-pbc-geometric-stalks-exact] (Stacks 03PT (3)), hence additive, so it sends the endomorphism $n=n\\cdot\\mathrm{id}_F$ to $n\\cdot\\mathrm{id}_{F_{\\bar t}}$ and the kernel $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel] to the kernel: the inclusion $F[n]\\hookrightarrow F$ induces an isomorphism of $(F[n])_{\\bar t}$ onto the subgroup $F_{\\bar t}[n]=\\{x\\in F_{\\bar t}:nx=0\\}$. The stalk functor commutes with colimits [lem-kun-stalks-commute-colimits], so $(\\varinjlim_nF[n])_{\\bar t}=\\varinjlim_n(F[n])_{\\bar t}=\\varinjlim_nF_{\\bar t}[n]$, the colimit taken in $\\Ab$ over the positive integers ordered by divisibility with the inclusions as transition maps, and $(c_F)_{\\bar t}$ is the map $\\varinjlim_nF_{\\bar t}[n]\\to F_{\\bar t}$ induced by the inclusions (both are induced by the inclusions $F[n]\\hookrightarrow F$, by functoriality of the stalk and the universal property of the colimit [def-weil-pbc-category-colimit]). A filtered colimit in $\\Ab$ of subgroups of a fixed group along inclusions is their union: $(c_F)_{\\bar t}$ is injective with image $\\bigcup_nF_{\\bar t}[n]$, the torsion subgroup of $F_{\\bar t}$ (an element of a filtered colimit of abelian groups comes from some term and is zero iff it is zero in some later term; here all transition maps and all maps to $F_{\\bar t}$ are injective). Hence $(c_F)_{\\bar t}$ is an isomorphism if and only if $F_{\\bar t}$ is a torsion group.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-pur-abelian-sheaf-kernel",
+    "lem-kun-stalks-commute-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03PT (stalk functor exact), Section 0DDB proof of Lemma 0DDC and proof of Lemma 03SA (2) ('write F = union of F[n]'); written out by an agent"
+   }
+  },
+  {
+   "text": "*(1)$\\Leftrightarrow$(3).* By step 1, $(c_F)_{\\bar t}$ is an isomorphism exactly when $F_{\\bar t}$ is torsion. If $c_F$ is an isomorphism, so is every $(c_F)_{\\bar t}$ (a functor preserves isomorphisms), hence every $F_{\\bar t}$ is torsion. Conversely, if every $F_{\\bar t}$ is torsion, then $c_F$ is a morphism of $\\Ab(T_{\\Et})$ that is an isomorphism on every geometric stalk, hence an isomorphism [lemma-weil-pbc-geometric-stalk-conservative] (Stacks Theorem 03PU).",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03PU (theorem-exactness-stalks; Remark 03PV (1): the geometric points form a conservative family)"
+   }
+  },
+  {
+   "text": "*(2)$\\Rightarrow$(3).* Let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be a geometric point and $\\gamma\\in F_{\\bar t}$. The stalk is the colimit of the $F(U)$ over the opposite of the category of pointed etale neighbourhoods $(U,\\bar u)$ of $\\bar t$ [def-weil-pbc-pointed-etale-neighbourhoods], which is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; so $\\gamma$ is the class of some $s\\in F(U)$ for a pointed etale neighbourhood $(U,\\bar u)$ (Stacks, remark after Definition 040R: elements of the stalk are triples $(U,\\bar u,s)$). By (2) there are an etale covering $\\{\\varphi_i:U_i\\to U\\}$ and $n_i\\ge1$ with $n_is|_{U_i}=0$. A covering of $T_{\\Et}$ is a jointly surjective family of etale morphisms [def-weil-pbc-etale-site], so by [lem-weil-pbc-etale-cover-geometric-point-lift] (Stacks Lemma 03PR) there are $i$ and $\\bar u_i:\\operatorname{Spec}\\Omega\\to U_i$ with $\\varphi_i\\bar u_i=\\bar u$. As $U_i\\to U\\to T$ is etale [lem-weil-pbc-etale-composition-cancellation] (2), $(U_i,\\bar u_i)$ is a pointed etale neighbourhood of $\\bar t$ and $\\varphi_i$ a morphism $(U_i,\\bar u_i)\\to(U,\\bar u)$, so $\\gamma$ is also the class of $s|_{U_i}$. The maps $F(V)\\to F_{\\bar t}$ are homomorphisms, so $n_i\\gamma$ is the class of $n_is|_{U_i}=0$, i.e. $n_i\\gamma=0$. Thus $F_{\\bar t}$ is torsion.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 040R and the description of stalk elements after it; Lemma 03PR (lemma-geometric-lift-to-cover)"
+   }
+  },
+  {
+   "text": "*(3)$\\Rightarrow$(2).* Let $U\\to T$ be etale and $s\\in F(U)$. For each point $u\\in U$ choose an algebraic closure $\\Omega_u$ of the residue field $\\kappa(u)$ [def-weil-algebraic-closure]; this gives a geometric point $\\bar u:\\operatorname{Spec}\\Omega_u\\to U$ lying over $u$ [def-weil-geometric-point], and $\\bar t_u=(U\\to T)\\circ\\bar u$ is a geometric point of $T$ with pointed etale neighbourhood $(U,\\bar u)$ [def-weil-pbc-pointed-etale-neighbourhoods]. By (3) the class $\\gamma_u$ of $s$ in $F_{\\bar t_u}$ is killed by some $n_u\\ge1$; $n_u\\gamma_u$ is the class of $n_us$, and an element $(U,\\bar u,\\sigma)$ of the colimit over the cofiltered category of pointed neighbourhoods [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] is zero iff $\\sigma$ restricts to zero on some neighbourhood mapping to $(U,\\bar u)$ (Stacks, remark after Definition 040R). So there is a morphism of pointed etale neighbourhoods $h_u:(V_u,\\bar v_u)\\to(U,\\bar u)$ with $n_us|_{V_u}=0$. The $T$-morphism $h_u$ between etale $T$-schemes is etale [lem-weil-pbc-etale-composition-cancellation] (3), and $u$ lies in its image since $h_u\\bar v_u=\\bar u$ lies over $u$. Hence $\\{h_u:V_u\\to U\\}_{u\\in U}$ is a jointly surjective family of etale morphisms, a covering of $U$ in $T_{\\Et}$ [def-weil-pbc-etale-site], with $n_us|_{V_u}=0$: this is (2). (The same argument as Stacks' proof of Theorem 03PU, surjectivity part.)",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem 03PU (theorem-exactness-stalks), surjectivity part; Definition 040R and the description of stalk elements after it"
+   }
+  },
+  {
+   "text": "*$\\underline{\\mathbf Q/\\mathbf Z}$ is torsion.* Let $F=\\underline{\\mathbf Q/\\mathbf Z}$ [def-weil-pbc-constant-sheaf]. For every geometric point $\\bar t$ of $T$, $F_{\\bar t}\\cong\\mathbf Q/\\mathbf Z$ [lem-weil-pbc-constant-sheaf-geometric-stalk], a torsion group ($a/b+\\mathbf Z$ is killed by $b$). By (3)$\\Rightarrow$(1) (steps 1-2), $F$ is torsion.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties",
+    "place": "def-weil-pbc-etale-sheaves (the Q/Z example); written out by an agent"
+   }
+  },
+  {
+   "text": "*Sections over $U=\\coprod_{n\\ge1}T$.* By [lem-weil-pbc-scheme-coproduct-copies], $U$ with the codiagonal is an object of $T_{\\Et}$, $\\{\\iota_n:T\\to U\\}_{n\\ge1}$ is a covering in $T_{\\Et}$, $T\\times_{\\iota_n,U,\\iota_m}T=\\emptyset$ for $n\\ne m$ and $T\\times_{\\iota_n,U,\\iota_n}T=T$ (both projections the identity). For any $G\\in\\Ab(T_{\\Et})$ the sheaf condition [def-weil-pbc-abelian-etale-sheaves] for the empty covering of the empty scheme gives $G(\\emptyset)=0$ (an equalizer of maps into the empty product); so in the sheaf condition for $\\{\\iota_n\\}$ the two maps $\\prod_nG(T)\\rightrightarrows\\prod_{n,m}G(T\\times_UT)$ agree (on the factor $(n,n)$ both are the identity, the other factors are $0$), and $G(U)\\to\\prod_nG(T)$, $x\\mapsto(\\iota_n^*x)_n$, is an isomorphism of groups.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-copies",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties",
+    "place": "def-weil-pbc-etale-sheaves; written out by an agent"
+   }
+  },
+  {
+   "text": "*An element of infinite order.* Assume $T\\ne\\emptyset$, let $F=\\underline{\\mathbf Q/\\mathbf Z}$ and let $x\\in F(U)$ correspond under step 6 to $(\\iota_T(1/2^n))_{n\\ge1}$. Choose a point $t\\in T$ and an algebraic closure $\\Omega$ of $\\kappa(t)$ [def-weil-algebraic-closure], giving a geometric point $\\bar t$ [def-weil-geometric-point]. The composite $\\mathbf Q/\\mathbf Z\\xrightarrow{\\iota_T}F(T)\\to F_{\\bar t}$ is an isomorphism [lem-weil-pbc-constant-sheaf-geometric-stalk], so $\\iota_T$ is an injective homomorphism. If $kx=0$ for some $k\\ge1$, then by step 6 $k\\,\\iota_T(1/2^n)=\\iota_T(k/2^n)=0$ for all $n$, hence $k/2^n\\in\\mathbf Z$ for all $n$, false for $2^n>k$. So $x$ has infinite order and $F(U)$ is not a torsion group, although $F$ is a torsion sheaf (step 5).",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties",
+    "place": "def-weil-pbc-etale-sheaves; written out by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-kun-stalks-commute-colimits",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-scheme-coproduct-copies",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks gives no statement of these equivalences; the proof is assembled by an agent from Definition 040R, Lemma 03PR, Lemma 03PT, Theorem 03PU and the use 'F = union of the F[n]' in Lemma 03SA (2) and Lemma 0DDC; the Q/Z example follows the blueprint def-weil-pbc-etale-sheaves (sec-abelian-varieties)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -24,10 +147,31 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match: Mathlib has no torsion sheaves, hence no characterization of them"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of abelian groups whose stalks are torsion is the union of its n-torsion subsheaves",
+   "results": "AddSubgroup.torsionBy, AddSubgroup.torsionBy.nsmul_iff, AddSubgroup.torsionBy.nsmul, AddSubgroup.torsionBy.zmodModule (Algebra.Module.Torsion.Basic), sheafIsAbelian, Scheme.Modules.isSheaf, instPreadditiveSheaf, IsTorsion.addSubgroup (GroupTheory.Torsion)",
+   "date": "2026-10-09",
+   "verdict": "no match: group-level torsion only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of abelian groups is torsion iff every stalk is a torsion group iff every section is locally annihilated by a positive integer",
+   "results": "ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, PresheafOfModules.Sheafify.instNonemptySMulCandidate, SheafOfModules.IsFiniteType, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsTorsion\\|IsAddTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: no torsion sheaves in Mathlib. Ingredients for steps 1-2 exist: Point.sheafFiber preserves colimits (instance via the skyscraper adjunction, Sites/Point/Skyscraper.lean) and finite limits (Sites/Point/Basic.lean:289), AlgebraicGeometry.Scheme.isConservative_pointSmallEtale (Sites/EtalePoint.lean:126) with ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectIsomorphisms (Sites/Point/Conservative.lean:74); the equivalence itself is not stated"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -48,5 +192,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-pbc",
- "import_flags": []
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-torsion-sheaf-characterizations",
+  "worker": "stage1",
+  "summary": "Stacks states no such lemma (Section 0DDB and Lemma 03SA (2) only use 'F = union of the F[n]'); the proof is agent-written from Stacks Definition 040R, Lemmas 03PR, 03PT, Theorem 03PU. Route chosen: (1)<=>(3) via stalks (step 1: the stalk functor is exact [prop-weil-pbc-geometric-stalks-exact] and commutes with colimits [lem-kun-stalks-commute-colimits], so (c_F)_t is the inclusion of the torsion subgroup of F_t; step 2: conservativity [lemma-weil-pbc-geometric-stalk-conservative, Lean closed]); (2)<=>(3) directly from the description of stalk elements as triples (cofiltered neighbourhoods, Mathlib leaf), the lift of geometric points to coverings (Mathlib leaf, Stacks 03PR) and composition/cancellation of etale morphisms (Mathlib leaf), as in the proof of 03PU. This avoids the sheafification/locally-surjective description of colimits suggested in the brief (no AB5 or epi-iff-locally-surjective node is needed). The Q/Z example (steps 5-7) needs two new nodes: lem-weil-pbc-constant-sheaf-geometric-stalk (stalk of a constant etale sheaf is E; unsplit; slopmaster2 has the sorry-free CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso for a general point) and lem-weil-pbc-scheme-coproduct-copies (Mathlib leaf: coproduct of copies of T, open coprojections, disjointness, codiagonal etale). Statement made precise (not changed in content): the 'section (1/2^n)_n' is now the section corresponding to (iota_T(1/2^n))_n under F(U) = prod F(T); def-weil-pbc-etale-site added to stmt_deps (coverings in (2)). The tool uses outside unit sk-def-pbc's route (sk-def-conv, sk-def-exchange): prop-weil-pbc-geometric-stalks-exact (sk-prop-h2), lem-kun-stalks-commute-colimits (sk-prop-sf-kunneth-ordinary), lemma-weil-pbc-geometric-stalk-conservative (sk-prop-cd, closed); all generic facts on stalks used as black boxes."
+ },
+ "tool_uses": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "seven steps (stalks of F[n] and of c_F, (1)⇔(3) by the stalk criterion 03PU, (2)⇒(3) and (3)⇒(2) through pointed neighbourhoods as in the proof of 03PU, the Q/Z example through the coproduct of copies of T); 2 new nodes, one Mathlib leaf (coproduct of copies: Limits.lean:187/219/241, OpenImmersion.lean:546, Etale sigmaDesc) verified by the lead; the generic stalk facts prop-weil-pbc-geometric-stalks-exact and lem-kun-stalks-commute-colimits accepted as tool uses"
+ }
 }
