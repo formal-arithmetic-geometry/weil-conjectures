@@ -48,14 +48,17 @@ the conormal sheaf of the immersion is the subject of the smooth-purity follow-u
 `prove2/sk-thm-smooth-purity-2`); once it lands, `N` in `DeformationToNormalConeData d g s N`
 becomes the normal cone of `s` and no field needs to be added here.
 
+TODO: state the existence of the datum (blueprint `sk-lem-geometry`) once `N` is tied to `s`. The
+existence statement for an arbitrary `N : NormalConeData d s` is false, and was removed: let `B`
+be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
+`d = 1`, and `N` the total space of `L`. For a datum `𝒟`, the line bundle `s̃^* Ω_{𝒟/𝔸¹_B}` on
+`𝔸¹_B` restricts to `𝒪_B` at `t = 1` and to `L^∨` at `t = 0`, contradicting
+`Pic(𝔸¹_B) = Pic(B)`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData`: the deformation space `𝒟_s V`
   together with `g̃`, `s̃` and the properties characterising them.
-
-## Main statements
-
-- `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`
 -/
 
 @[expose] public section
@@ -103,8 +106,7 @@ identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
 The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
 
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
-arbitrary closed subscheme, so the datum cannot be constructed here; existence is
-`AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
+arbitrary closed subscheme, so the datum cannot be constructed here. -/
 -- TODO(unify): sk-def-purity-conv
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
     (N : NormalConeData d s) where
@@ -145,31 +147,6 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
-
-/-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
-
-**Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
-relative dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
-with its zero section. Then the deformation datum of
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists: étale-locally there are
-relative coordinates `x₁, …, x_d` on `V` in which `s` is `x_i = 0`, and on the deformation
-chart `u_i = x_i / t` the deformation is `𝔸^d × 𝔸¹` over the base, which gives both the
-smoothness of `g̃` and the two cartesian squares.
-
-All of this commutes with base change in `B` and with étale localization.
-
-As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
-module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
-be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
-`d = 1`, and `N` the total space of `L` with its zero section. For a datum `𝒟`, the line bundle
-`s̃^* Ω_{𝒟/𝔸¹_B}` on `𝔸¹_B` restricts to `s^* Ω_{V/B} ≅ 𝒪_B` at `t = 1` and to `L^∨` at `t = 0`,
-contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
-`s`. -/
-theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
-    (N : NormalConeData d s) :
-    Nonempty (DeformationToNormalConeData d g s N) :=
-  sorry
 
 end Scheme.Hom
 
