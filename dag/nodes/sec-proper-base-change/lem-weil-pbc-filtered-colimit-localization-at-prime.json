@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-localization-at-prime",
+ "kind": "statement",
+ "title": "Localization at a prime commutes with filtered colimits of rings",
+ "statement": "Let $I$ be a small filtered category and $i\\mapsto R_i$ a functor from $I$ to the category of commutative rings, with colimit $R=\\varinjlim_IR_i$ in that category [def-weil-pbc-category-colimit] and coprojections $\\iota_i:R_i\\to R$. Let $\\mathfrak p\\subset R$ be a prime ideal and put $\\mathfrak p_i=\\iota_i^{-1}(\\mathfrak p)$, a prime ideal of $R_i$. Then: (1) for every morphism $a:i\\to j$ of $I$ one has $R(a)^{-1}(\\mathfrak p_j)=\\mathfrak p_i$, so $R(a)$ induces a ring map $(R_i)_{\\mathfrak p_i}\\to(R_j)_{\\mathfrak p_j}$, $x/s\\mapsto R(a)(x)/R(a)(s)$, between the localizations [def-weil-pbc-localization-at-prime], and these maps form a functor $i\\mapsto(R_i)_{\\mathfrak p_i}$ from $I$ to commutative rings; (2) the ring maps $\\kappa_i:(R_i)_{\\mathfrak p_i}\\to R_{\\mathfrak p}$, $x/s\\mapsto\\iota_i(x)/\\iota_i(s)$, are well defined and make $R_{\\mathfrak p}$ a colimit of this functor in the category of commutative rings: $R_{\\mathfrak p}=\\varinjlim_I(R_i)_{\\mathfrak p_i}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, proof of Lemma Tag 037D (lemma-colimit-normal-ring), algebra.tex line 8323: 'Then we see that $R_{\\mathfrak p} = \\colim_i (R_i)_{\\mathfrak p_i}$', asserted there without proof for a directed system; the description of a directed colimit of rings is Lemma Tag 00D6 (lemma-directed-colimit) and Lemma Tag 00D7 (lemma-zero-directed-limit); localization is Definition Tag 00CO (definition-localization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization at a prime ideal commutes with filtered colimits of rings",
+   "results": "AlgebraicGeometry.StructureSheaf.Localizations, Localization.AtPrime, IsLocalization.localizationLocalizationAtPrimeIsoLocalization, IsLocalization.AtPrime, LocalizedModule.AtPrime, RingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit (Mathlib.Algebra.Category.Ring.FilteredColimits); none relates a localization to a filtered colimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the localization of a direct limit of rings at a prime is the direct limit of the localizations at the preimage primes",
+   "results": "IsLocalization.AtPrime, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, IsLocalization.isLocalization_atPrime_localization_atPrime (Mathlib.RingTheory.Localization.LocalizationLocalization), Localization.AtPrime.mapPiEvalRingHom, PrimeSpectrum.PiLocalization; localization of a localization, nothing on colimits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Ring.DirectLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsLocalization\\|Localization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -lE 'IsFiltered|DirectLimit|colimit', then grep -nE 'IsFiltered|DirectLimit|colimit' | grep -iE 'locali|filtered' in RingTheory/RingHomProperties.lean, AlgebraicGeometry/ZariskisMainTheorem.lean, Algebra/Category/Ring/Constructions.lean, AlgebraicGeometry/Limits.lean, AlgebraicGeometry/Normalization.lean",
+   "results": "17 files mention both; none states that a localization of a filtered colimit (or Ring.DirectLimit) of rings is the colimit of the localizations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-filtered-colimit-normal-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
