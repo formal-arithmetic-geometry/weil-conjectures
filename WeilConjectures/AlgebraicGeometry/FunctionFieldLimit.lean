@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.CategoryTheory.Filtered.Final
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
@@ -122,5 +123,22 @@ lemma fromSpecFunctionField_eq_functionFieldCone_comp (U : X.NonemptyAffineOpens
     X.fromSpecFunctionField =
       X.functionFieldCone.π.app U ≫ X.affineOpensDiagramι.app U := by
   exact (U.2.1.fromSpecStalk_eq_fromSpecStalk U.genericPoint_mem).symm
+
+variable {X}
+
+instance (U : X.NonemptyAffineOpens) : IsOpenImmersion (X.affineOpensDiagramι.app U) :=
+  inferInstanceAs (IsOpenImmersion U.2.1.fromSpec)
+
+instance (U : X.NonemptyAffineOpens) : IsAffine (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (IsAffine (Spec Γ(X, U.1)))
+
+instance (U : X.NonemptyAffineOpens) : CompactSpace (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (CompactSpace (Spec Γ(X, U.1)))
+
+instance (U : X.NonemptyAffineOpens) : QuasiSeparatedSpace (X.affineOpensDiagram.obj U) :=
+  inferInstanceAs (QuasiSeparatedSpace (Spec Γ(X, U.1)))
+
+instance {U V : X.NonemptyAffineOpens} (f : U ⟶ V) : IsAffineHom (X.affineOpensDiagram.map f) :=
+  isAffineHom_of_isAffine _
 
 end AlgebraicGeometry.Scheme

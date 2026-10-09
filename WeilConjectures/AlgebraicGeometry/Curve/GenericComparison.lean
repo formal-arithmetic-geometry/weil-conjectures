@@ -78,21 +78,6 @@ namespace Scheme
 
 variable {X : Scheme.{u}} [IsIntegral X]
 
-instance (U : X.NonemptyAffineOpens) : IsOpenImmersion (X.affineOpensDiagramι.app U) :=
-  inferInstanceAs (IsOpenImmersion U.2.1.fromSpec)
-
-instance (U : X.NonemptyAffineOpens) : IsAffine (X.affineOpensDiagram.obj U) :=
-  inferInstanceAs (IsAffine (Spec Γ(X, U.1)))
-
-instance (U : X.NonemptyAffineOpens) : CompactSpace (X.affineOpensDiagram.obj U) :=
-  inferInstanceAs (CompactSpace (Spec Γ(X, U.1)))
-
-instance (U : X.NonemptyAffineOpens) : QuasiSeparatedSpace (X.affineOpensDiagram.obj U) :=
-  inferInstanceAs (QuasiSeparatedSpace (Spec Γ(X, U.1)))
-
-instance {U V : X.NonemptyAffineOpens} (f : U ⟶ V) : IsAffineHom (X.affineOpensDiagram.map f) :=
-  isAffineHom_of_isAffine _
-
 /-- The unit `G ⟶ j_* j^* G` of the open immersion `j : Spec Γ(X, U) ⟶ X` of a nonempty affine
 open `U`. -/
 noncomputable abbrev affineOpenUnit (U : X.NonemptyAffineOpens)
