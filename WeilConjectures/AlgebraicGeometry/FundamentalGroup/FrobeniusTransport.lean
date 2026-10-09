@@ -296,8 +296,8 @@ lemma sectionOfPoint_comp_pullbackMapIsoIso (u : Spec (.of (AlgebraicClosure K))
         (by rw [Category.assoc, hu, specGeometricFrobenius_hom_comp_specAlgebraicClosure]) := by
   rw [pullbackMapIsoIso_hom_hom_left]
   apply hom_ext_pullback_constantCover
-  · simp
-  · simp
+  · simp [-constantCover_obj_hom]
+  · simp [-constantCover_obj_hom]
 
 omit [ConnectedSpace C] [ConnectedSpace p.geometricFiber] in
 lemma sectionOfPoint_comp_arithmeticFrobenius
@@ -310,8 +310,8 @@ lemma sectionOfPoint_comp_arithmeticFrobenius
           specGeometricFrobenius_hom_comp_specAlgebraicClosure]) := by
   rw [pullback_map_hom_left]
   apply hom_ext_pullback_constantCover
-  · simp [arithmeticFrobenius, constantCoverIso, comp_specMap_frobenius]
-  · simp
+  · simp [-constantCover_obj_hom, arithmeticFrobenius, constantCoverIso, comp_specMap_frobenius]
+  · simp [-constantCover_obj_hom]
 
 end ConstantCover
 
