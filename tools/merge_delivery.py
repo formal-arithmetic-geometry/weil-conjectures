@@ -169,8 +169,10 @@ def cmd_merge(group, item, spot_note=None):
         if rs.returncode != 0 or "FAIL" in rs.stdout:
             raise RuntimeError("review_split.py:\n" + rs.stdout + rs.stderr)
         cd = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, text=True, capture_output=True)
-        bad = [l for l in (cd.stdout + cd.stderr).splitlines() if l.startswith(("error", "unit", "route", "cycle")) or "ERROR" in l]
-        if cd.returncode != 0 or bad:
+        # "reach:" warnings are not errors of the delivery (new nodes of other workers in progress are unreached until
+        # their item is written); check_dag.py exits 1 on them, so only the listed kinds fail the merge
+        bad = [l for l in (cd.stdout + cd.stderr).splitlines() if l.startswith(("error", "unit", "route", "cycle", "deps")) or "ERROR" in l]
+        if bad:
             raise RuntimeError("check_dag.py:\n" + "\n".join(bad) + "\n" + (cd.stdout + cd.stderr)[-2000:])
     except Exception:
         undo(kinds)
