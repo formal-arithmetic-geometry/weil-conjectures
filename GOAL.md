@@ -1,5 +1,7 @@
 # GOAL
 
+**Decision of the human (2026-10-09, evening): the whole Weil conjecture is too large a target for now. The target of the run is the single node `thm-weil-pbc-bounded-below` (bounded-below derived proper base change), chapter `sec-proper-base-change`, unit `sk-thm-properbasechange`. Its Lean declarations are `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` and `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring` in `WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/Proper.lean` (both branches; on master the first contains a `sorry`, on slopmaster2 neither does, but they may rest on sorries). `thm-weil-final` keeps its node and loses the `target` flag; nodes the new target does not reach stop being items. The text below is the earlier goal, kept for the record.**
+
 Formalize the following result of the Weil-conjectures blueprint (`literature/blueprint/master/blueprint/`, from `github.com/formal-arithmetic-geometry/weil-conjectures`, branch `master`) with no `sorry`.
 
 | Label in the paper | Statement in one line | Lean declaration | Module |
