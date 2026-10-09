@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-sheaf-morphism-on-basis",
+ "kind": "statement",
+ "title": "Morphisms of sheaves are determined by, and can be built from, their values on a basis",
+ "statement": "Let $X$ be a topological space, $\\mathcal C$ a category, and $\\mathcal B$ a set of open subsets of $X$ which is a basis of the topology, viewed as a full subcategory of the poset of opens. Let $\\mathcal F$ be a presheaf and $\\mathcal G$ a sheaf on $X$ with values in $\\mathcal C$. (a) For every family of morphisms $\\psi_U:\\mathcal F(U)\\to\\mathcal G(U)$, $U\\in\\mathcal B$, compatible with the restrictions along inclusions $V\\subseteq U$ of members of $\\mathcal B$, there is exactly one morphism of presheaves $\\Psi:\\mathcal F\\to\\mathcal G$ with $\\Psi_U=\\psi_U$ for all $U\\in\\mathcal B$; in particular two morphisms $\\mathcal F\\to\\mathcal G$ which agree on every $U\\in\\mathcal B$ are equal. (b) If $\\mathcal F$ is a sheaf too and $\\varphi:\\mathcal F\\to\\mathcal G$ is a morphism such that $\\varphi_U$ is an isomorphism for every $U\\in\\mathcal B$, then $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H (sheaves on a basis): Lemma 009O (label lemma-restrict-basis-equivalence: restriction to a basis is an equivalence of sheaf categories, in particular fully faithful), with Lemmas 009R/009U for sheaves with algebraic structure and of modules"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves determined by its components on a basis of opens; isomorphism if iso on basis",
+   "results": "TopCat.Sheaf.hom_ext (Mathlib.Topology.Sheaves.SheafCondition.Sites), GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, Scheme.Modules.Hom.isIso_iff_isIso_app, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso",
+   "date": "2026-10-10",
+   "verdict": "match: TopCat.Sheaf.hom_ext"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.restrictHomEquivHom",
+   "results": "restrictHomEquivHom (F : X.Presheaf C) (F' : Sheaf C X) (h : Opens.IsBasis (Set.range B)) : ((inducedFunctor B).op ⋙ F ⟶ (inducedFunctor B).op ⋙ F'.obj) ≃ (F ⟶ F'.obj); extend_hom_app (Mathlib.Topology.Sheaves.SheafCondition.Sites)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism between sheaves on a topological space is an isomorphism if it is an isomorphism on every open of a basis",
+   "results": "W_sheafToPresheaf_map_iff_isIso, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, IsCoverDense.Types.sheafIso, Scheme.Modules.Hom.isIso_iff_isIso_app",
+   "date": "2026-10-10",
+   "verdict": "related; the exact statement is TopCat.Sheaf.isIso_iff_isIso_basis found by grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'restrictHomEquivHom\\|extend_hom_app\\|theorem hom_ext\\|isIso_iff_isIso_basis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "results": "Sites.lean:240 restrictHomEquivHom, :246 extend_hom_app, :252 hom_ext, :258 isIso_iff_isIso_basis {F G : Sheaf C X} (h : Opens.IsBasis (Set.range B)) (hi : ∀ i, IsIso (φ.hom.app (op (B i)))) : IsIso φ",
+   "date": "2026-10-10",
+   "verdict": "match (source read 2026-10-10)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Sheaf.restrictHomEquivHom, TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.hom_ext, TopCat.Sheaf.isIso_iff_isIso_basis",
+  "file": "Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+  "how": "one Mathlib declaration per clause, with B the inclusion of the subtype 𝓑 (Set.range B = 𝓑): (a) existence and uniqueness: restrictHomEquivHom F G h (line 240) is a bijection from compatible families on the basis (natural transformations of the restrictions along inducedFunctor B) to morphisms F ⟶ G, with extend_hom_app (:246) saying the extension has the given components; equality from agreement on the basis is hom_ext (:252); (b) isIso_iff_isIso_basis (:258). Any category C (here: commutative rings)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-morphism-relative-spec",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause in Topology/Sheaves/SheafCondition/Sites.lean: restrictHomEquivHom :240, extend_hom_app :246, hom_ext :252, isIso_iff_isIso_basis :258; checked."
+ }
+}

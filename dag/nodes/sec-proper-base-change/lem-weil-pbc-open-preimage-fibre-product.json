@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-open-preimage-fibre-product",
+ "kind": "statement",
+ "title": "The preimage of an open subscheme is the fibre product",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $V\\subseteq Y$ an open subscheme. Then the open subscheme $f^{-1}(V)\\subseteq X$, together with its inclusion into $X$ and the restriction $f|_{f^{-1}(V)}:f^{-1}(V)\\to V$, is a fibre product $X\\times_YV$ [def-pc-fibre-product] of $f$ and the inclusion $V\\hookrightarrow Y$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01JR (label lemma-open-fibre-product, line 3197), the case $X\\times_S Y$ with $S=Y$, the second factor $V$, opens $f^{-1}(V)\\subseteq X$, $V$ and $U=V$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of an open subscheme under a morphism is the fibre product X ×_Y U",
+   "results": "IsAffineHom.isAffine_preimage, IsAffineOpen.preimage, Scheme.Hom.coe_preimage, Scheme.preimage_basicOpen, Scheme.Hom.preimage_mono",
+   "date": "2026-10-10",
+   "verdict": "no match in the top results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open subscheme f^{-1}(U) is the pullback of U along f, pullback square of morphism restriction",
+   "results": "AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.isPullback_morphismRestrict, Scheme.Hom.resLE_preimage, AlgebraicGeometry.pullbackRestrictIsoRestrict, image_morphismRestrict_preimage (Mathlib.AlgebraicGeometry.Restrict)",
+   "date": "2026-10-10",
+   "verdict": "match: isPullback_morphismRestrict"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isPullback_morphismRestrict",
+   "results": "isPullback_morphismRestrict (f : X ⟶ Y) (U : Y.Opens) : IsPullback (f ∣_ U) (f ⁻¹ᵁ U).ι U.ι f (Mathlib.AlgebraicGeometry.Restrict)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def pullbackRestrictIsoRestrict\\|theorem isPullback_morphismRestrict\\|def morphismRestrict' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Restrict.lean",
+   "results": "Restrict.lean:553 pullbackRestrictIsoRestrict : pullback f U.ι ≅ f ⁻¹ᵁ U; :572 morphismRestrict; :586 isPullback_morphismRestrict",
+   "date": "2026-10-10",
+   "verdict": "match (source read 2026-10-10)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isPullback_morphismRestrict",
+  "file": "Mathlib/AlgebraicGeometry/Restrict.lean",
+  "how": "exact: IsPullback (f ∣_ V) (f ⁻¹ᵁ V).ι V.ι f (line 586), with pullbackRestrictIsoRestrict (:553) the isomorphism pullback f V.ι ≅ f ⁻¹ᵁ V"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-morphism-relative-spec",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf isPullback_morphismRestrict, Restrict.lean:586; checked."
+ }
+}

@@ -9,13 +9,134 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent",
   "pqf-def-affine-morphism",
-  "lem-weil-pbc-morphism-into-affine-scheme"
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (part (1)).* Let $f:X\\to S$ be affine. By [lem-weil-pbc-affine-morphism-permanence](3) $f$ is quasi-compact and quasi-separated, so by [pqf-lem-pushforward-qcoh] (Schemes, Lemma 01LC) $f_*\\mathcal O_X$, an $\\mathcal O_S$-module [def-weil-sheaf-of-modules-category] via $f^\\sharp:\\mathcal O_S\\to f_*\\mathcal O_X$, is quasi-coherent. Its sections $(f_*\\mathcal O_X)(U)=\\mathcal O_X(f^{-1}U)$ are commutative rings, the restrictions are ring maps and $f^\\sharp_U$ is a ring map, so $f_*\\mathcal O_X$ is a sheaf of commutative $\\mathcal O_S$-algebras, hence a quasi-coherent $\\mathcal O_S$-algebra.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-pushforward-qcoh",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma 01S8 ((2) implies (3), first three sentences)"
+   }
+  },
+  {
+   "text": "*Step 2 (the local pieces).* Let $\\mathcal A$ be a quasi-coherent $\\mathcal O_S$-algebra. For an affine open $U\\subseteq S$ identify $U=\\operatorname{Spec}\\mathcal O_S(U)$ [def-weil-affine-spectrum] (the morphism $U\\to\\operatorname{Spec}\\mathcal O_S(U)$ corresponding to $\\mathrm{id}_{\\mathcal O_S(U)}$ by [lem-weil-pbc-morphism-into-affine-scheme], an isomorphism since $U$ is affine) and put $X_U=\\operatorname{Spec}\\mathcal A(U)$ with $f_U:X_U\\to U$ induced by the structure map $\\mathcal O_S(U)\\to\\mathcal A(U)$. For affine opens $V\\subseteq U$ let $\\rho^U_V:X_V\\to X_U$ be $\\operatorname{Spec}$ of the restriction $\\mathcal A(U)\\to\\mathcal A(V)$; it is a morphism over $U$ because the restriction is compatible with the structure maps. By [lem-weil-pbc-quasi-coherent-algebra-affine-inclusion](ii) $\\rho^U_V$ identifies $X_V$, over $V$, with the open subscheme $f_U^{-1}(V)$ (condition (a) of relative glueing), and by its part (iii) $\\rho^U_U=\\mathrm{id}$ and $\\rho^U_W=\\rho^U_V\\circ\\rho^V_W$ for affine $W\\subseteq V\\subseteq U$ (condition (b)).",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Section 01LL (Situation 01LM, Lemmas 01LN and 01LO)"
+   }
+  },
+  {
+   "text": "*Step 3 (part (2): the scheme $\\underline{\\operatorname{Spec}}_S(\\mathcal A)$; it is affine over $S$).* By Step 2 and [lem-weil-pbc-relative-glueing-affine-opens] there are a morphism $\\pi:X\\to S$ and isomorphisms $i_U:\\pi^{-1}(U)\\to X_U=\\operatorname{Spec}\\mathcal A(U)$ over $U$, for every affine open $U\\subseteq S$, such that $i_U\\circ(\\pi^{-1}V\\hookrightarrow\\pi^{-1}U)\\circ i_V^{-1}=\\rho^U_V$ for affine $V\\subseteq U$. Put $\\underline{\\operatorname{Spec}}_S(\\mathcal A):=(X,\\pi)$. For every affine open $U$, $\\pi^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A(U)$ is affine, so $\\pi$ is affine [pqf-def-affine-morphism].",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LP (lemma-glue-relative-spec) and Lemma 01LX (1)"
+   }
+  },
+  {
+   "text": "*Step 4 (part (2): the isomorphism $\\alpha:\\mathcal A\\to\\pi_*\\mathcal O_X$).* For an affine open $U\\subseteq S$ let $\\alpha_U:\\mathcal A(U)\\to\\Gamma(\\pi^{-1}U,\\mathcal O_X)=(\\pi_*\\mathcal O_X)(U)$ be the composite of the canonical isomorphism $\\mathcal A(U)\\cong\\Gamma(\\operatorname{Spec}\\mathcal A(U),\\mathcal O)$ [def-weil-affine-spectrum] with the map on global sections of the isomorphism $i_U$; $\\alpha_U$ is a ring isomorphism, and an $\\mathcal O_S(U)$-algebra map because $i_U$ is a morphism over $U$. For affine $V\\subseteq U$, taking global sections in $i_U\\circ(\\text{incl})\\circ i_V^{-1}=\\rho^U_V=\\operatorname{Spec}(\\mathcal A(U)\\to\\mathcal A(V))$ shows $\\alpha_V(a|_V)=\\alpha_U(a)|_{\\pi^{-1}V}$. The affine opens form a basis of $S$, so by [lem-weil-pbc-sheaf-morphism-on-basis](a) (sheaves of commutative rings) the $\\alpha_U$ are the components on affine opens of a unique morphism of sheaves of rings $\\alpha:\\mathcal A\\to\\pi_*\\mathcal O_X$, an isomorphism by its part (b); the two morphisms $\\mathcal O_S\\to\\pi_*\\mathcal O_X$, $\\alpha\\circ(\\text{structure map})$ and $\\pi^\\sharp$, agree on affine opens, hence are equal by part (a), i.e. $\\alpha$ is an isomorphism of $\\mathcal O_S$-algebras. Finally the morphism $\\pi^{-1}(U)\\to\\operatorname{Spec}\\mathcal A(U)$ which corresponds to $\\alpha_U$ under [lem-weil-pbc-morphism-into-affine-scheme] is $i_U$ (both have the ring map $\\alpha_U$ on global sections, and that bijection is injective), an isomorphism of schemes; this proves (2).",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, proof of Lemma 01LV (first paragraph: the isomorphisms A(U) → R(U) on affines, compatible with restriction, glue by Sheaves 009U) and Lemma 01LX (3)"
+   }
+  },
+  {
+   "text": "*Step 5 (the functor).* For an $S$-morphism $h:X\\to X'$ between schemes $f:X\\to S$, $f':X'\\to S$ affine over $S$, and an open $U\\subseteq S$, $h^{-1}(f'^{-1}U)=f^{-1}U$, so $h^\\sharp$ gives ring maps $(f'_*h^\\sharp)_U:\\mathcal O_{X'}(f'^{-1}U)\\to\\mathcal O_X(f^{-1}U)$, compatible with restrictions, and compatible with the structure maps from $\\mathcal O_S(U)$ because $f'\\circ h=f$; by Step 1 this is a morphism of quasi-coherent $\\mathcal O_S$-algebras $f'_*\\mathcal O_{X'}\\to f_*\\mathcal O_X$. $(\\mathrm{id})^\\sharp=\\mathrm{id}$ and $(h'\\circ h)^\\sharp=h_*(h^\\sharp)\\circ h'^\\sharp$ make $f\\mapsto f_*\\mathcal O_X$ a contravariant functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SA (the functor f ↦ f_*O_X)"
+   }
+  },
+  {
+   "text": "*Step 6 (part (3): the functor is fully faithful).* Let $f:X\\to S$, $g:Y\\to S$ be affine over $S$; for an affine open $U\\subseteq S$ put $X_U=f^{-1}U$, $Y_U=g^{-1}U$, both affine [pqf-def-affine-morphism]. (i) By [lem-weil-pbc-morphism-into-affine-scheme] ($Y_U$ affine, $Y_U\\cong\\operatorname{Spec}\\Gamma(Y_U)$) $k\\mapsto k^\\sharp$ is a bijection from morphisms $X_U\\to Y_U$ to ring maps $\\Gamma(Y_U)\\to\\Gamma(X_U)$; and $k$ is over $U$ iff $g\\circ k=f$ on $X_U$, iff (both being morphisms into the affine $U$, same lemma) $k^\\sharp\\circ g^\\sharp_U=f^\\sharp_U$, i.e. iff $k^\\sharp$ is an $\\mathcal O_S(U)$-algebra map. (ii) Faithful: if $S$-morphisms $h,h':X\\to Y$ have $g_*h^\\sharp=g_*h'^\\sharp$, then for every affine $U$ the restrictions $X_U\\to Y_U$ have the same ring map, hence are equal by (i); the $X_U$ cover $X$, so $h=h'$ by [lem-weil-pbc-scheme-morphism-gluing]. (iii) Full: let $\\varphi:g_*\\mathcal O_Y\\to f_*\\mathcal O_X$ be an $\\mathcal O_S$-algebra map. For affine $U$ let $k_U:X_U\\to Y_U$ be the $U$-morphism with $k_U^\\sharp=\\varphi_U$ (by (i)). For affine $V\\subseteq U$, $k_U|_{X_V}$ and $k_V$ (followed by $Y_V\\subseteq Y_U$) are morphisms $X_V\\to Y_U$ into an affine scheme with ring maps $\\mathrm{res}\\circ\\varphi_U$ and $\\varphi_V\\circ\\mathrm{res}$, equal by naturality of $\\varphi$; so they are equal. For affine $U,U'$, $X_U\\cap X_{U'}=f^{-1}(U\\cap U')$ is covered by the $X_V$ with $V\\subseteq U\\cap U'$ affine, on each of which $k_U$ and $k_{U'}$ both equal $k_V$; so $k_U$ and $k_{U'}$ agree on $X_U\\cap X_{U'}$ by [lem-weil-pbc-scheme-morphism-gluing] (uniqueness), and the same lemma glues the $k_U$ to $h:X\\to Y$ with $h|_{X_U}=k_U$. Then $g\\circ h=f$ (they agree on every $X_U$), and $g_*h^\\sharp$ and $\\varphi$ agree on every affine $U$ (both are $\\varphi_U$), hence are equal by [lem-weil-pbc-sheaf-morphism-on-basis](a).",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SA with its proof (the functors are mutually inverse by Lemma 01S8 and Constructions 01LX (3)); the local argument is written out by the agent after Constructions, Lemma 01LT (morphisms into Spec of an algebra over an affine base, via Schemes 01I1) and Lemma 01LY (the canonical morphism restricted over affines)"
+   }
+  },
+  {
+   "text": "*Step 7 (part (3): essential surjectivity, the quasi-inverse and $\\operatorname{Spec}(\\varphi_U)$).* By Steps 3–4 every quasi-coherent $\\mathcal A$ is isomorphic to $\\pi_*\\mathcal O_X$ for the affine $\\pi:\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$; with Step 6 the functor is an anti-equivalence and $\\mathcal A\\mapsto\\underline{\\operatorname{Spec}}_S(\\mathcal A)$, with $\\varphi:\\mathcal A\\to\\mathcal B$ sent to the unique $S$-morphism $\\Phi:\\underline{\\operatorname{Spec}}_S(\\mathcal B)\\to\\underline{\\operatorname{Spec}}_S(\\mathcal A)$ with $\\pi_{\\mathcal A*}\\Phi^\\sharp=\\alpha_{\\mathcal B}\\circ\\varphi\\circ\\alpha_{\\mathcal A}^{-1}$, is a quasi-inverse (in particular every $X$ affine over $S$ is $S$-isomorphic to $\\underline{\\operatorname{Spec}}_S(f_*\\mathcal O_X)$, Morphisms 01S8 'moreover'). For an affine open $U$ the restriction $\\Phi_U$ of $\\Phi$ over $U$ has the ring map $\\alpha_{\\mathcal B,U}\\varphi_U\\alpha_{\\mathcal A,U}^{-1}$, so $i_{\\mathcal A,U}\\circ\\Phi_U\\circ i_{\\mathcal B,U}^{-1}:\\operatorname{Spec}\\mathcal B(U)\\to\\operatorname{Spec}\\mathcal A(U)$ has the ring map $\\varphi_U$ on global sections (Step 4: the ring map of $i_U$ is $\\alpha_U$), as has $\\operatorname{Spec}(\\varphi_U)$; by [lem-weil-pbc-morphism-into-affine-scheme] they are equal.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01SA (proof) and Lemma 01S8 ('Moreover'); Constructions, Lemma 01LY (restriction over affines)"
+   }
+  },
+  {
+   "text": "*Step 8 (part (4): restriction to an open $V\\subseteq S$).* $(f_*\\mathcal O_X)|_V=(f|_{f^{-1}V})_*\\mathcal O_{f^{-1}V}$, since both have sections $\\mathcal O_X(f^{-1}W)$ on opens $W\\subseteq V$, with the same restrictions and structure maps. $\\mathcal A|_V$ is a quasi-coherent $\\mathcal O_V$-algebra: a point $s\\in V$ has an affine neighbourhood $U=\\operatorname{Spec}R$ with $\\mathcal A|_U=\\widetilde M$ [pqf-def-coherent], and a basic open $s\\in D(r)\\subseteq U\\cap V$; by [lem-weil-pbc-spec-module-tilde-sections] the sections of $\\widetilde M$ on the basic opens $D(rr')$ of $D(r)=\\operatorname{Spec}R_r$ are $M_{rr'}$, compatibly with restrictions, as are those of $\\widetilde{M_r}$ on $\\operatorname{Spec}R_r$, so $\\mathcal A|_{D(r)}\\cong\\widetilde{M_r}$ by [lem-weil-pbc-sheaf-morphism-on-basis]. By [lem-weil-pbc-open-preimage-fibre-product] $\\pi^{-1}(V)$ with $\\pi|:\\pi^{-1}(V)\\to V$ is $\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\times_SV$. The affine opens of $V$ are the affine opens of $S$ contained in $V$; so $\\pi|$ is affine, and with the same $i_U$ ($U\\subseteq V$ affine) and $\\alpha|_V:\\mathcal A|_V\\cong(\\pi|)_*\\mathcal O_{\\pi^{-1}V}$ it has all the properties of (2) for $\\mathcal A|_V$, i.e. it is $\\underline{\\operatorname{Spec}}_V(\\mathcal A|_V)$ (unique up to unique $V$-isomorphism by (3) over $V$). Restricting an $S$-morphism of schemes affine over $S$ to the preimages of $V$ corresponds to restricting the algebra map to $V$, by the first sentence; so the anti-equivalences over $S$ and $V$ commute with restriction.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01LX (2) (base change, here along the open immersion V → S) and Lemma 01LS; Morphisms, Lemma 01SA (compatibility with base change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-pushforward-qcoh",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Sections 01LL and 01LQ (Lemmas 01LN, 01LO, 01LP, 01LV, Definition 01LW, Lemma 01LX), with Morphisms (literature/stacks-project/morphisms.tex), Lemmas 01S8 and 01SA; Step 6 (full faithfulness) is written out locally by the agent where Stacks argues via the functor of points (01LT, 01LY)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +158,31 @@
    "results": "none; Mathlib/AlgebraicGeometry/RelativeGluing.lean has the relative glueing lemma (Stacks 01LH, Scheme.Cover relative gluing data over a locally directed open cover), which is the construction step of the relative spectrum; IsAffineHom in Morphisms/Affine.lean; no quasi-coherent sheaves of algebras",
    "date": "2026-10-10",
    "verdict": "no match (relative glueing 01LH present, usable for the split)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of the structure sheaf along an affine morphism is quasi-coherent",
+   "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf, TopCat.Sheaf.pushforward, Scheme.IdealSheafData.map_top, Scheme.Modules.pushforward, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforward_map_val (no quasi-coherence statement)",
+   "date": "2026-10-10",
+   "verdict": "no match for part (1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushforward of a quasi-coherent module along a quasi-compact quasi-separated (or affine) morphism of schemes is quasi-coherent",
+   "results": "Scheme.Modules.pushforward, instIsRightAdjointPushforward, QuasiCompact.of_comp, SheafOfModules.pushforward, Scheme.Modules.pushforwardComp",
+   "date": "2026-10-10",
+   "verdict": "no match for part (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pushforward.*IsQuasicoherent\\|IsQuasicoherent.*pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:329 isQuasicoherent_pushforward and :340 isQuasicoherent_pushforward_of_isLeftAdjoint (pushforward along a ringed-site morphism whose pullback of the unit is the unit, used for open immersions, Tilde.lean:576); Tilde.lean:566 'TODO: ... show that quasicoherent sheaves pushforward to quasicoherent sheaves for affine morphisms' (isIso_fromTildeΓ_pushforward only for Spec.map φ)",
+   "date": "2026-10-10",
+   "verdict": "no match for part (1) (Mathlib's own TODO); the source repository has AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom (WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean:1096), which reaches sorry"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +202,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-morphism-relative-spec",
+  "worker": "stage1",
+  "summary": "Split along Stacks: (1) by Morphisms 01S8's proof via the existing node pqf-lem-pushforward-qcoh (Schemes 01LC) and the reviewed leaf lem-weil-pbc-affine-morphism-permanence(3); (2) by the glueing construction of Constructions 01LL: the local pieces Spec A(U) with Lemmas 01LN/01LO as the new unsplit node lem-weil-pbc-quasi-coherent-algebra-affine-inclusion, the relative glueing lemma 01LH for the basis of affine opens as the new Mathlib leaf lem-weil-pbc-relative-glueing-affine-opens (Scheme.Cover.RelativeGluingData over S.directedAffineCover), and the isomorphism A ≅ π_*O_X glued from affine opens by the new Mathlib leaf lem-weil-pbc-sheaf-morphism-on-basis (TopCat.Sheaf.restrictHomEquivHom / hom_ext / isIso_iff_isIso_basis); (3) full faithfulness written out locally on affine opens with the reviewed leaves lem-weil-pbc-morphism-into-affine-scheme and lem-weil-pbc-scheme-morphism-gluing (Stacks argues through the functor of points 01LT/01LV/01LY; the local argument avoids the representability lemma 01LU), essential surjectivity from (2), Spec(φ_U) on affines by morphism-into-affine; (4) via the new Mathlib leaf lem-weil-pbc-open-preimage-fibre-product (Schemes 01JR, isPullback_morphismRestrict) and lem-weil-pbc-spec-module-tilde-sections for quasi-coherence of A|_V. Statement kept; stmt_deps gained def-weil-sheaf-of-modules-category, def-weil-affine-spectrum, def-pc-fibre-product (used in the statement). The 'uniqueness up to unique isomorphism' of Spec_S is a consequence of (3), not of 01LH's uniqueness clause."
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Eight steps: (1) via 01LC (pqf-lem-pushforward-qcoh, imported, in another unit: recorded as a tool use); (2) relative gluing over affine opens (new Mathlib leaf RelativeGluingData with directedAffineCover, RelativeGluing.lean:74/114, Cover/Directed.lean:310, checked); (3) full faithfulness argued locally on affine opens instead of the functor-of-points route of 01LT-01LY (recorded in proof_origin; valid); (4) restriction via isPullback_morphismRestrict (Restrict.lean:586, checked). Leaves lem-weil-pbc-sheaf-morphism-on-basis (restrictHomEquivHom :240, extend_hom_app :246, hom_ext :252, isIso_iff_isIso_basis :258, checked) and lem-weil-pbc-open-preimage-fibre-product verified; lem-weil-pbc-quasi-coherent-algebra-affine-inclusion (01LN/01LO) unsplit."
+ }
 }

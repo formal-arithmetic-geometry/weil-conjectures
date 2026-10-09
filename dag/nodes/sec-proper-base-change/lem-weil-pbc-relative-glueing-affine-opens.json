@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-relative-glueing-affine-opens",
+ "kind": "statement",
+ "title": "Relative glueing over the affine opens of a scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Suppose given, for every affine open $U\\subseteq S$, a scheme $X_U$ with a morphism $f_U:X_U\\to U$, and for all affine opens $V\\subseteq U\\subseteq S$ a morphism $\\rho^U_V:X_V\\to X_U$ over $U$ (i.e. $f_U\\circ\\rho^U_V=f_V$ followed by $V\\subseteq U$), such that (a) $\\rho^U_V$ induces an isomorphism of $X_V$ onto the open subscheme $f_U^{-1}(V)$ of $X_U$, over $V$, and (b) $\\rho^U_U=\\mathrm{id}$ and $\\rho^U_W=\\rho^U_V\\circ\\rho^V_W$ for affine opens $W\\subseteq V\\subseteq U$. Then there are a scheme $X$, a morphism $f:X\\to S$ and, for every affine open $U\\subseteq S$, an isomorphism $i_U:f^{-1}(U)\\to X_U$ of schemes over $U$, such that for affine opens $V\\subseteq U$ the composition $X_V\\xrightarrow{i_V^{-1}}f^{-1}(V)\\hookrightarrow f^{-1}(U)\\xrightarrow{i_U}X_U$ is $\\rho^U_V$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01LH (label lemma-relative-glueing, line 39), existence part, for the basis $\\mathcal B$ of all affine opens of $S$ ((b) of 01LH with $W=V=U$ and (a) give $\\rho^U_U=\\mathrm{id}$)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative gluing of schemes over a locally directed open cover, preimage of U_i is X_i",
+   "results": "AlgebraicGeometry.Scheme.Cover.RelativeGluingData (+ .mk, .rec) (Mathlib.AlgebraicGeometry.RelativeGluing), Scheme.OpenCover.glueMorphismsOverOfLocallyDirected, Scheme.IsLocallyDirected.glueData, Scheme.Pullback.gluing",
+   "date": "2026-10-10",
+   "verdict": "match: RelativeGluingData"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "gluing schemes X_U over affine opens U of S with compatible open immersions to a scheme over S",
+   "results": "Scheme.GlueData.gluedScheme, Scheme.Cover.RelativeGluingData.glued (Mathlib.AlgebraicGeometry.RelativeGluing), Scheme.GlueData.glued, Scheme.LocalRepresentability.toGlued",
+   "date": "2026-10-10",
+   "verdict": "match: RelativeGluingData.glued"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase",
+   "results": "IsPullback (d.natTrans.app i) (colimit.ι d.functor i) (𝒰.f i) d.toBase for [Small 𝒰.I₀] [Quiver.IsThin 𝒰.I₀] (Mathlib.AlgebraicGeometry.RelativeGluing)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 01LH\\|def toBase\\|isPullback_natTrans_ι_toBase\\|directedAffineCover' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/RelativeGluing.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Cover/Directed.lean",
+   "results": "RelativeGluing.lean:73 @[stacks 01LH] structure RelativeGluingData (functor : 𝒰.I₀ ⥤ Scheme, natTrans : functor ⟶ 𝒰.functorOfLocallyDirected, equifibered); :99 glued := colimit d.functor; :114 toBase; :124 ι_toBase; :172 toBase_preimage_eq_opensRange_ι; :178 isPullback_natTrans_ι_toBase. Cover/Directed.lean:310 directedAffineCover (I₀ = X.affineOpens, f U = U.ι), :325 instance LocallyDirected, :332 directedAffineCover_trans = homOfLE; :116 functorOfLocallyDirected (obj = 𝒰.X, map = 𝒰.trans)",
+   "date": "2026-10-10",
+   "verdict": "match (source read 2026-10-10)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Cover.RelativeGluingData (glued, toBase, isPullback_natTrans_ι_toBase), with AlgebraicGeometry.Scheme.directedAffineCover",
+  "file": "Mathlib/AlgebraicGeometry/RelativeGluing.lean",
+  "how": "specializes in one line per clause: take 𝒰 = S.directedAffineCover (Cover/Directed.lean:310; index poset S.affineOpens, thin and small, LocallyDirected instance :325, transition maps the inclusions :332); the data (X_U, ρ^U_V) with (b) is a functor S.affineOpens ⥤ Scheme and the f_U a natural transformation to 𝒰.functorOfLocallyDirected (U ↦ U); (a) is exactly that each naturality square is a pullback (`NatTrans.Equifibered`, an open immersion's preimage being the pullback, Restrict.lean:586 isPullback_morphismRestrict). Then X = d.glued, f = d.toBase, i_U from isPullback_natTrans_ι_toBase (RelativeGluing.lean:178) composed with isPullback_morphismRestrict, and the compatibility i_U∘incl∘i_V^{-1} = ρ^U_V is colimit.w (colimit.ι V = F.map(V≤U) ≫ colimit.ι U). Stacks' uniqueness clause is not part of this node."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-morphism-relative-spec",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Scheme.Cover.RelativeGluingData (glued, toBase, isPullback_natTrans_ι_toBase) over directedAffineCover; RelativeGluing.lean:74, Cover/Directed.lean:310-333; checked. Uniqueness clause of 01LH not in Mathlib and not claimed by the node."
+ }
+}
