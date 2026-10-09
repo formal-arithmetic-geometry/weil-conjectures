@@ -68,6 +68,21 @@ lemma monomialToNat_mem_of_sum {a : n → ℤ} (ha : 0 ≤ a) {k : ℕ} (h : ∑
   rw [← h]
   exact Finset.sum_congr rfl fun i _ ↦ (Int.toNat_of_nonneg (ha i)).symm
 
+lemma monomialToNat_eq_prod (a : n → ℤ) :
+    monomialToNat R a = ∏ i, X i ^ (a i).toNat := by
+  rw [monomialToNat, monomial_eq, C_1, one_mul, Finsupp.prod_fintype _ _ (fun _ ↦ pow_zero _)]
+  rfl
+
+lemma monomialToNat_mem_iff {P : Ideal (MvPolynomial n R)} [P.IsPrime] (a : n → ℤ) :
+    monomialToNat R a ∈ P ↔ ∃ i, 0 < a i ∧ X i ∈ P := by
+  rw [monomialToNat_eq_prod, Ideal.IsPrime.prod_mem_iff]
+  refine ⟨fun ⟨i, _, hi⟩ ↦ ⟨i, ?_, ?_⟩, fun ⟨i, hi, hX⟩ ↦ ⟨i, Finset.mem_univ _, ?_⟩⟩
+  · by_contra h
+    rw [Int.toNat_of_nonpos (not_lt.1 h), pow_zero, ← Ideal.eq_top_iff_one] at hi
+    exact Ideal.IsPrime.ne_top ‹_› hi
+  · exact Ideal.IsPrime.mem_of_pow_mem ‹_› _ hi
+  · exact Ideal.pow_mem_of_mem _ hX _ (by omega)
+
 section Away
 
 omit [Fintype n] in
@@ -101,7 +116,7 @@ lemma monomialToNat_indicator_mem :
 
 /-- The number `∑ᵢ max(-eᵢ, 0)`, large enough that `e + N • 1_s ≥ 0` for `e` nonnegative
 outside `s`. -/
-def negPart (e : n → ℤ) : ℕ := ∑ i, (-e i).toNat
+def negExponentSum (e : n → ℤ) : ℕ := ∑ i, (-e i).toNat
 
 variable {s m}
 
@@ -114,8 +129,8 @@ lemma add_nsmul_indicator_nonneg {e : n → ℤ} (he : ∀ i ∉ s, 0 ≤ e i) {
     linarith [hN i]
   · simp [Set.indicator_of_notMem hi, he i hi]
 
-lemma neg_le_negPart (e : n → ℤ) (i : n) : -e i ≤ negPart e := by
-  have h : (-e i).toNat ≤ negPart e :=
+lemma neg_le_negExponentSum (e : n → ℤ) (i : n) : -e i ≤ negExponentSum e := by
+  have h : (-e i).toNat ≤ negExponentSum e :=
     Finset.single_le_sum (f := fun j ↦ (-e j).toNat) (fun _ _ ↦ Nat.zero_le _)
       (Finset.mem_univ i)
   have := Int.self_le_toNat (-e i)
@@ -139,9 +154,9 @@ variable (R s) in
 `eᵢ ≥ 0` for `i ∉ s`: the fraction `x^{e + N 1_s} / (∏_{i ∈ s} Xᵢ)^N` for `N` large. -/
 noncomputable def awayMonomial (e : laurentExponents s 0) :
     Away (homogeneousSubmodule n R) (monomialToNat R (s.indicator 1)) :=
-  Away.mk _ (monomialToNat_indicator_mem R s) (negPart e.1)
-    (monomialToNat R (e.1 + negPart e.1 • s.indicator 1))
-    (monomialToNat_add_nsmul_indicator_mem e.2 (neg_le_negPart e.1))
+  Away.mk _ (monomialToNat_indicator_mem R s) (negExponentSum e.1)
+    (monomialToNat R (e.1 + negExponentSum e.1 • s.indicator 1))
+    (monomialToNat_add_nsmul_indicator_mem e.2 (neg_le_negExponentSum e.1))
 
 /-- `awayMonomial` may be computed with any large enough power of the denominator. -/
 lemma awayMonomial_eq (e : laurentExponents s 0) {N : ℕ} (hN : ∀ i, -e.1 i ≤ N) :
@@ -152,7 +167,7 @@ lemma awayMonomial_eq (e : laurentExponents s 0) {N : ℕ} (hN : ∀ i, -e.1 i �
     (monomialToNat_indicator_mem R s) _ _ ?_
   rw [monomialToNat_pow h0, monomialToNat_pow h0,
     monomialToNat_mul (add_nsmul_indicator_nonneg e.2.2 hN) (nsmul_nonneg h0 _),
-    monomialToNat_mul (add_nsmul_indicator_nonneg e.2.2 (neg_le_negPart e.1))
+    monomialToNat_mul (add_nsmul_indicator_nonneg e.2.2 (neg_le_negExponentSum e.1))
       (nsmul_nonneg h0 _)]
   congr 1
   rw [add_assoc, add_assoc, ← add_nsmul, ← add_nsmul, add_comm N]
@@ -176,9 +191,9 @@ theorem linearIndependent_awayMonomial : LinearIndependent R (awayMonomial R s) 
   rw [linearIndependent_iff']
   intro t g hg e₀ he₀
   have h0 := indicator_one_nonneg s
-  set N := ∑ e ∈ t, negPart e.1
-  have hN : ∀ e ∈ t, ∀ i, -e.1 i ≤ N := fun e he i ↦ (neg_le_negPart e.1 i).trans
-    (Nat.cast_le.2 (Finset.single_le_sum (f := fun e : laurentExponents s 0 ↦ negPart e.1)
+  set N := ∑ e ∈ t, negExponentSum e.1
+  have hN : ∀ e ∈ t, ∀ i, -e.1 i ≤ N := fun e he i ↦ (neg_le_negExponentSum e.1 i).trans
+    (Nat.cast_le.2 (Finset.single_le_sum (f := fun e : laurentExponents s 0 ↦ negExponentSum e.1)
       (fun _ _ ↦ Nat.zero_le _) he))
   have hv := congrArg HomogeneousLocalization.val hg
   rw [val_sum_smul_awayMonomial t g hN, HomogeneousLocalization.val_zero,
@@ -324,3 +339,274 @@ theorem IsPushout.bijective_sum_mul {R A B X : CommRingCat.{u}} {f : R ⟶ A} {g
   rfl
 
 end CommRingCat
+
+namespace AlgebraicGeometry.Proj
+
+open ProjectiveSpectrum.Twist HomogeneousLocalization
+
+variable {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] {𝒜 : ℕ → σ}
+  [GradedRing 𝒜] {m : ℤ}
+
+/-- Sections of `𝒪(m)` restrict pointwise. -/
+lemma twist_presheaf_map_apply {U V : (Proj 𝒜).Opens} (h : V ≤ U) (s : Γ(twist 𝒜 m, U))
+    (x : V) : ((twist 𝒜 m).presheaf.map (homOfLE h).op s).1 x = s.1 ⟨x.1, h x.2⟩ :=
+  rfl
+
+/-- Sections of the structure sheaf act on sections of `𝒪(m)` by pointwise multiplication. -/
+lemma coe_twist_smul_apply {U : (Proj 𝒜).Opens} (r : Γ(Proj 𝒜, U)) (s : Γ(twist 𝒜 m, U))
+    (x : U) : ((r • s).1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+      (r.1 x).val * (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) :=
+  rfl
+
+/-- **A section of `𝒪(m)` with a pointwise inverse is a free generator**: if `ε` is a section of
+`𝒪(m)` over `U` and `ε'` a section of `𝒪(-m)` over `U` with `ε ε' = 1` at every point, then every
+section of `𝒪(m)` over an open `V ⊆ U` is uniquely `r • ε|_V`. -/
+lemma isFreeGenerator_twist_of_mul_eq_one {U : (Proj 𝒜).Opens} (ε : Γ(twist 𝒜 m, U))
+    (ε' : Γ(twist 𝒜 (-m), U))
+    (h : ∀ x : U, (ε.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * ε'.1 x = 1) :
+    Scheme.Modules.IsFreeGenerator ε := by
+  intro V hV
+  constructor
+  · intro r r' hrr
+    refine Subtype.ext (funext fun x ↦ val_injective _ ?_)
+    have hx := congrArg (fun s : Γ(twist 𝒜 m, V) ↦
+      (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal)) hrr
+    dsimp only at hx
+    rw [coe_twist_smul_apply, coe_twist_smul_apply, twist_presheaf_map_apply] at hx
+    have hx' := congrArg (· * (ε'.1 ⟨x.1, hV x.2⟩ :
+      Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal)) hx
+    dsimp only at hx'
+    rwa [mul_assoc, mul_assoc, h, mul_one, mul_one] at hx'
+  · intro t
+    let ε'V := (twist 𝒜 (-m)).presheaf.map (homOfLE hV).op ε'
+    refine ⟨sectionsZeroInv ⟨fun x ↦ ⟨t.1 x * ε'V.1 x, add_neg_cancel m ▸
+      mul_mem_degreePart (t.1 x).2 (ε'V.1 x).2⟩, isLocallyFraction_mul (add_neg_cancel m) t.2
+        ε'V.2⟩, ?_⟩
+    refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
+    rw [coe_twist_smul_apply, twist_presheaf_map_apply]
+    have := zeroEquiv_sectionsZeroInv (U := Opposite.op V) ⟨fun x ↦ ⟨t.1 x * ε'V.1 x, add_neg_cancel m ▸
+      mul_mem_degreePart (t.1 x).2 (ε'V.1 x).2⟩, isLocallyFraction_mul (add_neg_cancel m) t.2
+        ε'V.2⟩ x
+    have hv := congrArg Subtype.val this
+    rw [degreePart.coe_zeroEquiv_apply] at hv
+    rw [hv]
+    change (t.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) *
+      (ε'.1 ⟨x.1, hV x.2⟩ : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) *
+      (ε.1 ⟨x.1, hV x.2⟩ : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) = _
+    have hx := h ⟨x.1, hV x.2⟩
+    rw [mul_comm] at hx
+    rw [mul_assoc, hx, mul_one]
+
+section Monomial
+
+open MvPolynomial
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable {n : Type u} [Fintype n] {R : Type u} [CommRing R] {s : Set n}
+
+/-- A point lies in `D₊(∏_{i ∈ s} Xᵢ)` if and only if it lies in every `D₊(Xᵢ)`, `i ∈ s`. -/
+lemma mem_basicOpen_monomialToNat_indicator {x : Proj (homogeneousSubmodule n R)} :
+    x ∈ Proj.basicOpen _ (monomialToNat R (s.indicator 1)) ↔
+      ∀ i ∈ s, x ∈ Proj.basicOpen (homogeneousSubmodule n R) (X i) := by
+  simp only [Proj.mem_basicOpen]
+  change monomialToNat R (s.indicator 1) ∉ x.asHomogeneousIdeal.toIdeal ↔
+    ∀ i ∈ s, X i ∉ x.asHomogeneousIdeal.toIdeal
+  rw [monomialToNat_mem_iff]
+  constructor
+  · intro h i hi hX
+    exact h ⟨i, by simp [Set.indicator_of_mem hi], hX⟩
+  · rintro h ⟨i, hi, hX⟩
+    by_cases his : i ∈ s
+    · exact h i his hX
+    · simp [Set.indicator_of_notMem his] at hi
+
+lemma basicOpen_monomialToNat_indicator_mono {s t : Set n} (h : t ⊆ s) :
+    Proj.basicOpen (homogeneousSubmodule n R) (monomialToNat R (s.indicator 1)) ≤
+      Proj.basicOpen _ (monomialToNat R (t.indicator 1)) := fun _ hx ↦
+  mem_basicOpen_monomialToNat_indicator.2 fun i hi ↦
+    mem_basicOpen_monomialToNat_indicator.1 hx i (h hi)
+
+/-- Two fractions of monomials agree in a localization as soon as their exponents do. -/
+lemma mk_monomialToNat_eq_mk {M : Submonoid (MvPolynomial n R)} {a b a' b' : n → ℤ}
+    (ha : 0 ≤ a) (hb : 0 ≤ b) (ha' : 0 ≤ a') (hb' : 0 ≤ b') (h : a + b' = a' + b)
+    (hbM : monomialToNat R b ∈ M) (hbM' : monomialToNat R b' ∈ M) :
+    Localization.mk (monomialToNat R a) ⟨_, hbM⟩ =
+      Localization.mk (monomialToNat R a') ⟨_, hbM'⟩ := by
+  rw [Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  refine ⟨1, ?_⟩
+  simp only [OneMemClass.coe_one, one_mul]
+  rw [monomialToNat_mul hb' ha, monomialToNat_mul hb ha', add_comm b', h, add_comm]
+
+omit [Fintype n] in
+lemma cast_sum_toNat {a : n → ℤ} (ha : 0 ≤ a) (t : Finset n) :
+    ((∑ i ∈ t, (a i).toNat : ℕ) : ℤ) = ∑ i ∈ t, a i := by
+  push_cast
+  exact Finset.sum_congr rfl fun i _ ↦ Int.toNat_of_nonneg (ha i)
+
+variable (R m) in
+/-- **The section `xᵃ / xᵇ` of `𝒪(m)`** over an open `U` of `Proj R[Xᵢ]` on which `xᵇ` does not
+vanish, for nonnegative exponent vectors `a`, `b` with `∑ aᵢ = ∑ bᵢ + m`. -/
+noncomputable def twistMonomialFraction {a b : n → ℤ} (h : ∑ i, a i = ∑ i, b i + m) (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (U : (Proj (homogeneousSubmodule n R)).Opens)
+    (hU : ∀ x ∈ U, monomialToNat R b ∉ x.asHomogeneousIdeal) :
+    Γ(twist (homogeneousSubmodule n R) m, U) :=
+  ⟨fun x ↦ degreePart.mk ⟨monomialToNat R a, monomialToNat_mem a⟩
+    ⟨monomialToNat R b, monomialToNat_mem b⟩ (hU x.1 x.2) (by
+      rw [cast_sum_toNat ha, cast_sum_toNat hb, h]),
+    isLocallyFraction_mk (by rw [cast_sum_toNat ha, cast_sum_toNat hb, h]) _ _
+      fun x ↦ hU x.1 x.2⟩
+
+lemma coe_twistMonomialFraction_apply {a b : n → ℤ} (h : ∑ i, a i = ∑ i, b i + m) (ha : 0 ≤ a)
+    (hb : 0 ≤ b) (U : (Proj (homogeneousSubmodule n R)).Opens)
+    (hU : ∀ x ∈ U, monomialToNat R b ∉ x.asHomogeneousIdeal) (x : U) :
+    ((twistMonomialFraction (R := R) (m := m) h ha hb U hU).1 x :
+      Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+      Localization.mk (monomialToNat R a) ⟨monomialToNat R b, hU x.1 x.2⟩ :=
+  rfl
+
+lemma monomialToNat_nsmul_indicator_notMem {x : Proj (homogeneousSubmodule n R)}
+    (hx : x ∈ Proj.basicOpen _ (monomialToNat R (s.indicator 1))) (N : ℕ) :
+    monomialToNat R (N • s.indicator (1 : n → ℤ)) ∉ x.asHomogeneousIdeal := by
+  rw [← monomialToNat_pow (indicator_one_nonneg s)]
+  exact fun h ↦ hx (x.isPrime.mem_of_pow_mem N h)
+
+lemma sum_add_nsmul_indicator_eq {e : n → ℤ} (he : ∑ i, e i = m) (N : ℕ) :
+    ∑ i, (e + N • s.indicator (1 : n → ℤ)) i = ∑ i, (N • s.indicator (1 : n → ℤ)) i + m := by
+  simp only [Pi.add_apply, Finset.sum_add_distrib, he]
+  ring
+
+variable (R s) in
+/-- **The Laurent monomial `xᵉ` as a section of `𝒪(m)`** over `D₊(∏_{i ∈ s} Xᵢ)`, for an
+exponent vector `e` with `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`. -/
+noncomputable def twistMonomial (e : laurentExponents s m) :
+    Γ(twist (homogeneousSubmodule n R) m,
+      Proj.basicOpen _ (monomialToNat R (s.indicator 1))) :=
+  twistMonomialFraction (R := R) (m := m) (sum_add_nsmul_indicator_eq e.2.1 (negExponentSum e.1))
+    (add_nsmul_indicator_nonneg e.2.2 (neg_le_negExponentSum e.1))
+    (nsmul_nonneg (indicator_one_nonneg s) _) _
+    fun _ hx ↦ monomialToNat_nsmul_indicator_notMem hx _
+
+lemma coe_twistMonomial_apply (e : laurentExponents s m)
+    (x : Proj.basicOpen (homogeneousSubmodule n R) (monomialToNat R (s.indicator 1))) :
+    ((twistMonomial R s e).1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+      Localization.mk (monomialToNat R (e.1 + negExponentSum e.1 • s.indicator 1))
+        ⟨monomialToNat R (negExponentSum e.1 • s.indicator 1),
+          monomialToNat_nsmul_indicator_notMem x.2 _⟩ :=
+  rfl
+
+/-- The Laurent monomial `xᵉ` on `D₊(∏_{i ∈ t} Xᵢ)` restricts to the Laurent monomial `xᵉ` on
+the smaller open `D₊(∏_{i ∈ s} Xᵢ)`, for `t ⊆ s`. -/
+lemma twist_presheaf_map_twistMonomial {t : Set n} (hts : t ⊆ s) (e : laurentExponents t m) :
+    (twist (homogeneousSubmodule n R) m).presheaf.map
+        (homOfLE (basicOpen_monomialToNat_indicator_mono (R := R) hts)).op
+        (twistMonomial R t e) =
+      twistMonomial R s ⟨e.1, e.2.1, fun i hi ↦ e.2.2 i fun h ↦ hi (hts h)⟩ := by
+  refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
+  rw [twist_presheaf_map_apply, coe_twistMonomial_apply, coe_twistMonomial_apply]
+  have h0 := indicator_one_nonneg s
+  have h0' := indicator_one_nonneg t
+  refine mk_monomialToNat_eq_mk (add_nsmul_indicator_nonneg e.2.2 (neg_le_negExponentSum e.1))
+    (nsmul_nonneg h0' _) (add_nsmul_indicator_nonneg (fun i hi ↦ e.2.2 i fun h ↦ hi (hts h))
+      (neg_le_negExponentSum e.1)) (nsmul_nonneg h0 _) ?_ _ _
+  abel
+
+/-- A fraction of monomials in a localization only depends on the difference of the exponents. -/
+lemma mk_eq_mk_of_monomialToNat {M : Submonoid (MvPolynomial n R)} {x x' : MvPolynomial n R}
+    {d d' : M} {a b a' b' : n → ℤ} (ha : 0 ≤ a) (hb : 0 ≤ b) (ha' : 0 ≤ a') (hb' : 0 ≤ b')
+    (hx : x = monomialToNat R a) (hd : (d : MvPolynomial n R) = monomialToNat R b)
+    (hx' : x' = monomialToNat R a') (hd' : (d' : MvPolynomial n R) = monomialToNat R b')
+    (h : a + b' = a' + b) : Localization.mk x d = Localization.mk x' d' := by
+  rw [Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  refine ⟨1, ?_⟩
+  simp only [OneMemClass.coe_one, one_mul]
+  rw [hx, hd, hx', hd', monomialToNat_mul hb' ha, monomialToNat_mul hb ha', add_comm b', h,
+    add_comm]
+
+lemma monomialToNat_zero : monomialToNat R (0 : n → ℤ) = 1 := by
+  rw [monomialToNat]
+  have : (Finsupp.equivFunOnFinite.symm fun i ↦ ((0 : n → ℤ) i).toNat) = 0 := by
+    ext i
+    simp
+  rw [this, ← C_1, C_apply]
+
+variable (s m) in
+open Classical in
+/-- The exponent vector `m eᵢ` of the monomial `Xᵢ ^ m`, for `i ∈ s`. -/
+noncomputable def singleExponent {i : n} (hi : i ∈ s) : laurentExponents s m :=
+  ⟨Pi.single i m, by simp, fun j hj ↦ by
+    rw [Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi)]⟩
+
+/-- `xᵢ ^ m` is a free generator of `𝒪(m)` on `D₊(∏_{j ∈ s} Xⱼ)`, for `i ∈ s`. -/
+lemma isFreeGenerator_twistMonomial_singleExponent {i : n} (hi : i ∈ s) :
+    Scheme.Modules.IsFreeGenerator (twistMonomial R s (singleExponent (s := s) (m := m) hi)) := by
+  refine isFreeGenerator_twist_of_mul_eq_one _ (twistMonomial R s (singleExponent (s := s) (m := -m) hi))
+    fun x ↦ ?_
+  rw [coe_twistMonomial_apply, coe_twistMonomial_apply, Localization.mk_mul,
+    ← Localization.mk_one]
+  have h0 := indicator_one_nonneg s
+  have ha := add_nsmul_indicator_nonneg (singleExponent (s := s) (m := m) hi).2.2
+    (neg_le_negExponentSum (singleExponent (s := s) (m := m) hi).1)
+  have ha' := add_nsmul_indicator_nonneg (singleExponent (s := s) (m := -m) hi).2.2
+    (neg_le_negExponentSum (singleExponent (s := s) (m := -m) hi).1)
+  have hN := nsmul_nonneg h0 (negExponentSum (singleExponent (s := s) (m := m) hi).1)
+  have hN' := nsmul_nonneg h0 (negExponentSum (singleExponent (s := s) (m := -m) hi).1)
+  refine mk_eq_mk_of_monomialToNat (add_nonneg ha ha') (add_nonneg hN hN') le_rfl le_rfl
+    (monomialToNat_mul ha ha') ?_ monomialToNat_zero.symm monomialToNat_zero.symm ?_
+  · exact monomialToNat_mul hN hN'
+  · ext j
+    simp only [singleExponent, Pi.add_apply, Pi.zero_apply, Pi.smul_apply, Pi.single_apply]
+    split_ifs <;> ring
+
+/-- The value at a point of the function `xᵉ` on `D₊(∏_{i ∈ s} Xᵢ)`. -/
+lemma val_awayToSection_awayMonomial_apply (e : laurentExponents s 0)
+    (x : Proj.basicOpen (homogeneousSubmodule n R) (monomialToNat R (s.indicator 1))) :
+    ((Proj.awayToSection _ _ (awayMonomial R s e)).1 x).val =
+      Localization.mk (monomialToNat R (e.1 + negExponentSum e.1 • s.indicator 1))
+        ⟨monomialToNat R (negExponentSum e.1 • s.indicator 1),
+          monomialToNat_nsmul_indicator_notMem x.2 _⟩ := by
+  have := ProjectiveSpectrum.Proj.awayToSection_apply (homogeneousSubmodule n R)
+    (monomialToNat R (s.indicator 1)) (awayMonomial R s e) x
+  erw [this]
+  rw [awayMonomial, Away.val_mk, Localization.mk_eq_mk', IsLocalization.map_mk',
+    RingHom.id_apply, ← Localization.mk_eq_mk']
+  have h0 := indicator_one_nonneg s
+  have ha := add_nsmul_indicator_nonneg e.2.2 (neg_le_negExponentSum e.1)
+  exact mk_eq_mk_of_monomialToNat ha (nsmul_nonneg h0 _) ha (nsmul_nonneg h0 _) rfl
+    (monomialToNat_pow h0 _) rfl rfl rfl
+
+open Classical in
+variable (m) in
+/-- The exponent vector `e - m eᵢ` of `xᵉ / xᵢ ^ m`, for `i ∈ s`. -/
+noncomputable def shiftExponent {i : n} (hi : i ∈ s) (e : laurentExponents s m) :
+    laurentExponents s 0 :=
+  ⟨e.1 - Pi.single i m, by simp [Finset.sum_sub_distrib, e.2.1], fun j hj ↦ by
+    rw [Pi.sub_apply, Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi), sub_zero]
+    exact e.2.2 j hj⟩
+
+/-- **`xᵉ = (xᵉ / xᵢ ^ m) xᵢ ^ m`** in `𝒪(m)` over `D₊(∏_{j ∈ s} Xⱼ)`, for `i ∈ s`. -/
+lemma twistMonomial_eq_smul {i : n} (hi : i ∈ s) (e : laurentExponents s m) :
+    twistMonomial R s e = Proj.awayToSection _ _ (awayMonomial R s (shiftExponent m hi e)) •
+      twistMonomial R s (singleExponent (s := s) (m := m) hi) := by
+  refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
+  change ((twistMonomial R s e).1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) = _
+  rw [coe_twist_smul_apply, coe_twistMonomial_apply, coe_twistMonomial_apply,
+    val_awayToSection_awayMonomial_apply, Localization.mk_mul]
+  have h0 := indicator_one_nonneg s
+  have ha := add_nsmul_indicator_nonneg e.2.2 (neg_le_negExponentSum e.1)
+  have hb := add_nsmul_indicator_nonneg (shiftExponent m hi e).2.2
+    (neg_le_negExponentSum (shiftExponent m hi e).1)
+  have hc := add_nsmul_indicator_nonneg (singleExponent (s := s) (m := m) hi).2.2
+    (neg_le_negExponentSum (singleExponent (s := s) (m := m) hi).1)
+  have hN := nsmul_nonneg h0 (negExponentSum (shiftExponent m hi e).1)
+  have hN' := nsmul_nonneg h0 (negExponentSum (singleExponent (s := s) (m := m) hi).1)
+  refine mk_eq_mk_of_monomialToNat ha (nsmul_nonneg h0 _) (add_nonneg hb hc)
+    (add_nonneg hN hN') rfl rfl (monomialToNat_mul hb hc) (monomialToNat_mul hN hN') ?_
+  ext j
+  simp only [shiftExponent, singleExponent, Pi.add_apply, Pi.sub_apply, Pi.smul_apply,
+    Pi.single_apply]
+  split_ifs <;> ring
+
+end Monomial
+
+end AlgebraicGeometry.Proj
