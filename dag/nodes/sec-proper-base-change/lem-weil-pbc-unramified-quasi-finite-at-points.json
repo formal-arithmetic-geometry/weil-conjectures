@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-unramified-quasi-finite-at-points",
+ "kind": "statement",
+ "title": "An unramified morphism is quasi-finite at every point",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is unramified [def-weil-unramified-morphism]. Then $f$ is quasi-finite at every point $x\\in X$ in the sense of [pqf-def-quasifinite] (1): there are an affine open $\\operatorname{Spec}A=U\\subseteq X$ containing $x$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ with $f(U)\\subseteq V$ such that $R\\to A$ is of finite type and $x$, viewed as a prime $\\mathfrak q\\subset A$ over $\\mathfrak p\\subset R$, is an isolated point of $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. In other words, $f$ is locally quasi-finite [pqf-def-quasifinite] (2). (Stacks Project, Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite); proof: Algebra, Lemma 02UR (lemma-unramified-quasi-finite).)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite), lines 7779-7788; its proof is Algebra, Lemma 02UR (algebra.tex, lemma-unramified-quasi-finite, line 41599), which uses Algebra, Lemmas lemma-isolated-point-fibre (2) and lemma-unramified-at-prime"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-unramified-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an unramified morphism of schemes is locally quasi-finite",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite (+ .mk, .recOn, locallyQuasiFinite_iff), instLocallyQuasiFiniteOfIsFinite, FormallyUnramified.recOn/casesOn, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite / FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match: no scheme-level FormallyUnramified -> LocallyQuasiFinite"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally unramified finite type algebra is quasi-finite",
+   "results": "Algebra.Unramified.finiteType, Algebra.FormallyUnramified.finite_of_free (Mathlib.RingTheory.Unramified.Finite), Algebra.Unramified.formallyUnramified, Algebra.FormallyUnramified.isReduced_of_field",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFinite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified; grep -rln 'FormallyUnramified' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | xargs grep -ln 'QuasiFinite'; sed -n 55,75p RingTheory/QuasiFinite/Basic.lean",
+   "results": "algebra-level instance `[EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S` (RingTheory/Unramified/LocalStructure.lean:331-333); Mathlib's Algebra.QuasiFinite (RingTheory/QuasiFinite/Basic.lean:67) is 'every fibre kappa(p) (x)_R S is finite over kappa(p)', which its docstring says differs from Stacks 00PL; scheme-level LocallyQuasiFinite (Morphisms/QuasiFinite.lean:73) is the affine-local version of it; no file of AlgebraicGeometry mentions both FormallyUnramified and QuasiFinite",
+   "date": "2026-10-10",
+   "verdict": "no match: candidate route (algebra instance + HasRingHomProperty for LocallyQuasiFinite + Scheme.Hom.quasiFiniteAt / quasiFiniteAt_iff_isOpen_singleton_asFiber), but Mathlib's quasi-finiteness differs from Stacks' and the agreement is a theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-over-field-discrete",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

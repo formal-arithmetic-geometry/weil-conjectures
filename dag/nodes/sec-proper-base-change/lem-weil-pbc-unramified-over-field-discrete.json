@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-unramified-over-field-discrete",
  "kind": "statement",
  "title": "A scheme unramified over a field is discrete",
- "statement": "Let $k$ be a field, let $Y$ be a scheme [def-pc-scheme] and let $g:Y\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] be an unramified morphism [def-weil-unramified-morphism]. Then the underlying topological space of $Y$ is discrete: every point $y\\in Y$ is open in $Y$ (so every subset of $Y$ is open, and every point of $Y$ is also closed). (Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (1), direction \"only if\", topological part; Stacks proves it from Algebra, Lemma 00UW (residue fields finite separable), Morphisms, Lemma 02V5 (unramified implies locally quasi-finite) and Morphisms, Lemma 01TH (a point at which a morphism locally of finite type is quasi-finite is isolated in its fibre).)",
+ "statement": "Let $k$ be a field, let $Y$ be a scheme [def-pc-scheme] and let $g:Y\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] be an unramified morphism [def-weil-unramified-morphism]. Then the underlying topological space of $Y$ is discrete: every point $y\\in Y$ is open in $Y$ (so every subset of $Y$ is open, and every point of $Y$ is also closed). (Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (1), direction \"only if\", topological part; Stacks proves it from Morphisms, Lemma 02V5 (unramified implies locally quasi-finite) and Morphisms, Lemma 01TH (a point at which a morphism locally of finite type is quasi-finite is isolated in its fibre); Algebra, Lemma 00UW (residue fields finite separable) is used only for the other parts of 02G7 (1).)",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Morphisms, Lemma 02G7 (lemma-unramified-over-field), statement part (1) and proof, lines 7790-7826"
@@ -12,9 +12,56 @@
   "def-weil-affine-spectrum",
   "def-weil-unramified-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $g:Y\\to\\operatorname{Spec}k$ is unramified [def-weil-unramified-morphism], it is quasi-finite at every point $y\\in Y$ (in the sense of [pqf-def-quasifinite]) by [lem-weil-pbc-unramified-quasi-finite-at-points]. Moreover $g$ is locally of finite type, which is part of [def-weil-unramified-morphism].",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, proof of part (1), lines 7813-7814 ('Since X -> Spec(k) is locally quasi-finite (Lemma 02V5)'); Lemma 02V5 (lemma-unramified-quasi-finite), line 7779"
+   }
+  },
+  {
+   "text": "The spectrum $\\operatorname{Spec}k$ [def-weil-affine-spectrum] has exactly one point $\\eta$, the zero ideal, since $0$ is the only prime ideal of the field $k$; hence $g(y)=\\eta$ for every $y\\in Y$ and $g^{-1}(\\eta)=Y$. Let $y\\in Y$. Apply [lem-weil-pbc-quasi-finite-at-point-isolated] to $f=g$ (locally of finite type, quasi-finite at $y$ by step 1), the point $x=y$ and $s=\\eta$: the set $\\{y\\}$ is open in the subspace $g^{-1}(\\eta)$ of $Y$, which is $Y$ itself. So every point of $Y$ is open in $Y$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, proof of part (1), lines 7815-7816 ('all points of X are isolated ... see Lemma 01TH'); Lemma 01TH (lemma-quasi-finite-at-point-characterize), (1) => (2), line 3664"
+   }
+  },
+  {
+   "text": "By step 2 every subset of $Y$, being the union of its points, is open: the space $Y$ is discrete. In particular, for $y\\in Y$ the complement $Y\\setminus\\{y\\}$ is open, so every point of $Y$ is closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, proof of part (1), lines 7815-7817 ('all points of X are isolated closed points ... Thus X is a discrete space')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-def-quasifinite",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G7 (lemma-unramified-over-field), proof of part (1), 'only if' direction, lines 7810-7817"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +134,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-over-field-discrete",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Morphisms 02G7 (lemma-unramified-over-field, line 7790) proof of (1), 02V5 (lemma-unramified-quasi-finite, line 7779, proof = Algebra 02UR line 41599), 01TH (lemma-quasi-finite-at-point-characterize, line 3664) and Definition 01TD (line 3538); all tags verified in tags/tags. Statement kept; only its parenthetical source remark corrected: Algebra 00UW (residue fields finite separable) is not used for the topological part. Proof in three steps following Stacks: unramified => quasi-finite at every point (new unsplit node lem-weil-pbc-unramified-quasi-finite-at-points, 02V5), quasi-finite at a point of a locally finite type morphism => isolated in the fibre (new unsplit node lem-weil-pbc-quasi-finite-at-point-isolated, 01TH (1)=>(2)), the fibre over the single point of Spec k being Y itself, and the elementary passage to discreteness and closedness. Quasi-finiteness is the existing definition pqf-def-quasifinite (Stacks 01TD). The route via lem-weil-pbc-unramified-algebra-over-field-product was not taken: that node is 02G7(1) in the affine case, whose Stacks proof itself passes through the discreteness proved here, so citing it would risk a cycle. Mathlib: no scheme-level FormallyUnramified -> LocallyQuasiFinite; Mathlib's quasi-finiteness (Algebra.QuasiFinite, Scheme.Hom.QuasiFiniteAt) differs from Stacks' by a theorem, so neither new node is a leaf; candidate Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber recorded."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Three steps along Stacks 02G7(1) proof: unramified => quasi-finite at every point (new unsplit 02V5 node), locally finite type + quasi-finite at x => x isolated in its fibre (new unsplit 01TH node), fibre over the single point of Spec k is Y. Correct. Worker corrected the parenthetical source remark in the statement (00UW is not used for discreteness); content unchanged. Stage-3 note: pqf-def-quasifinite is still imported."
+ }
 }

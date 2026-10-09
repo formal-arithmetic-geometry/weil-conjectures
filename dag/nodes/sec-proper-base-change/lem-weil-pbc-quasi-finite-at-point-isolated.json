@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-quasi-finite-at-point-isolated",
+ "kind": "statement",
+ "title": "Quasi-finite at a point implies isolated in the fibre",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism], let $x\\in X$, put $s=f(x)$, and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ with first projection $p:X_s\\to X$ [def-pc-scheme-fibre]. If $f$ is quasi-finite at $x$ [pqf-def-quasifinite], then the unique point $\\xi\\in X_s$ with $p(\\xi)=x$ is isolated in $X_s$: $\\{\\xi\\}$ is open in $X_s$. Equivalently, $\\{x\\}$ is open in the subspace $f^{-1}(s)$ of $X$. (Stacks Project, Morphisms, Lemma 01TH (lemma-quasi-finite-at-point-characterize), (1) implies (2).)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01TH (lemma-quasi-finite-at-point-characterize), line 3664, first paragraph of the proof ((1) implies (2)); Definition 01TD (definition-quasi-finite), line 3538"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism locally of finite type is quasi-finite at x iff x is isolated in its fibre",
+   "results": "LocallyOfFiniteType.mk, instLocallyQuasiFiniteOfIsFinite, LocallyQuasiFinite (.mk, .recOn), isClosed_singleton_iff_locallyOfFiniteType, IsProper.toLocallyOfFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt, IsOpen",
+   "results": "AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber [LocallyOfFiniteType f] : f.QuasiFiniteAt x <-> IsOpen {f.asFiber x} (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite, line 395); Scheme.Hom.isOpen_quasiFiniteAt (Mathlib.AlgebraicGeometry.ZariskisMainTheorem)",
+   "date": "2026-10-10",
+   "verdict": "generalization in Mathlib's language, not a leaf: Scheme.Hom.QuasiFiniteAt (Morphisms/QuasiFinite.lean:339) is defined through the stalk map 𝒪_{Y,f x} -> 𝒪_{X,x} being Mathlib-quasi-finite, not as Stacks 01TD (1); identifying the two is itself a theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-finite at a point implies the point is open in its fiber",
+   "results": "LocallyQuasiFinite, isOpenMap_of_generalizingMap, locallyQuasiFinite_iff, instLocallyQuasiFiniteOfIsFinite, instLocallyQuasiFiniteMorphismRestrict",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFiniteAt\\|isClopen_singleton_asFiber\\|isOpen_singleton' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "results": "def Scheme.Hom.QuasiFiniteAt (line 339), Scheme.Hom.QuasiFiniteAt.quasiFiniteAt (line 343, to RingHom.QuasiFiniteAt on affine opens), Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber (line 395), Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber (line 442)",
+   "date": "2026-10-10",
+   "verdict": "no match for the Stacks notion; Mathlib candidate recorded for stage 2: quasiFiniteAt_iff_isOpen_singleton_asFiber, once Stacks 01TD(1) is matched with Scheme.Hom.QuasiFiniteAt"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-over-field-discrete",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
