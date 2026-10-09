@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-spec-finite-product-fields",
+ "kind": "statement",
+ "title": "The spectrum of a finite product of fields is a finite discrete scheme whose points are the spectra of the factors",
+ "statement": "Let $n\\ge0$, let $L_1,\\dots,L_n$ be fields and let $C=L_1\\times\\cdots\\times L_n$ be the product ring (the zero ring for $n=0$), with projections $\\pi_j:C\\to L_j$. Then:\n\n1. the prime ideals of $C$ are exactly the ideals $\\mathfrak p_j=\\ker\\pi_j=\\{(c_1,\\dots,c_n):c_j=0\\}$, $j=1,\\dots,n$, and these are pairwise distinct; so $\\operatorname{Spec}C$ [def-weil-affine-spectrum] has exactly $n$ points;\n2. the underlying topological space of $\\operatorname{Spec}C$ is discrete (every subset is open);\n3. for every $j$ the morphism $\\operatorname{Spec}\\pi_j:\\operatorname{Spec}L_j\\to\\operatorname{Spec}C$ is an open immersion [def-weil-open-immersion] whose image is the one-point set $\\{\\mathfrak p_j\\}$; hence the open subscheme $\\{\\mathfrak p_j\\}$ of $\\operatorname{Spec}C$ is isomorphic to $\\operatorname{Spec}L_j$ through $\\operatorname{Spec}\\pi_j$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00ED (algebra-lemma-spec-product, line 3822: Spec(R_1 x R_2) = Spec(R_1) disjoint union Spec(R_2), by R_1 = R_{e_1}), applied n-1 times; Algebra, Lemma 00EC (algebra-lemma-idempotent-spec, line 3775) and Lemma 00E4 (algebra-lemma-standard-open, line 3207: D(f) = Spec(R_f)); a field has the single prime ideal (0). Used in the proof of Morphisms, Lemma 02GL (morphisms-lemma-etale-over-field), morphisms.tex line 8193 (\"U is a finite disjoint union of spectra of finite separable field extensions\")."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectrum of a finite product of fields is a finite discrete space, open subscheme at each point is Spec of the factor",
+   "results": "PrimeSpectrum.primeSpectrumProd, PrimeSpectrum.primeSpectrumProdHomeo, PrimeSpectrum.primeSpectrumProdOfSum (Mathlib.RingTheory.Spectrum.Prime.Basic/Topology); AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.instIsOpenImmersionSigmaSpec (Mathlib.AlgebraicGeometry.Limits); Algebra.QuasiFinite.discreteTopology_primeSpectrum; PrimeSpectrum.instDiscreteTopology (Mathlib.RingTheory.Spectrum.Prime.Noetherian, IsArtinianRing R); PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero",
+   "date": "2026-10-10",
+   "verdict": "no match (pieces only): no single declaration stating the three clauses for a finite product of fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec of a product of rings Π i, R i is the disjoint union (coproduct) of the Spec R i as schemes",
+   "results": "AlgebraicGeometry.coprodSpec, AlgebraicGeometry.sigmaSpec, coprodSpec_apply, instIsIsoSchemeCoprodSpec, coprodSpec_coprodMk, instIsIsoSchemeSigmaSpecOfFinite (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-10",
+   "verdict": "no match: Spec(Π R_i) is the coproduct of the Spec R_i for finite index (a generalization of clause 3 up to identifying the coprojections), but clauses 1-2 for fields and the one-point images need further lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteTopology (PrimeSpectrum ((i : _) → _))",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Pi.evalRingHom _ _)))",
+   "results": "AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom (Mathlib.AlgebraicGeometry.Limits, line 615): Spec.map (Pi.evalRingHom R i) is an open immersion for any family of rings; IsOpenImmersion.of_isLocalization; Scheme.isOpenImmersion_SpecMap_localizationAway",
+   "date": "2026-10-10",
+   "verdict": "piece only (clause 3 without the image)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sigmaSpec\\|primeSpectrumProd\\|sigmaToPi\\|DiscreteTopology (PrimeSpectrum\\|Unique (PrimeSpectrum\\|IsArtinianRing (Π' in Mathlib/AlgebraicGeometry and Mathlib/RingTheory",
+   "results": "AlgebraicGeometry/Limits.lean:607 sigmaSpec, :611 ι_sigmaSpec (Sigma.ι i ≫ sigmaSpec R = Spec.map (Pi.evalRingHom i)), :615 instance IsOpenImmersion (Spec.map (Pi.evalRingHom i)), :629 IsOpenImmersion (sigmaSpec R), :641 [Finite ι] IsIso (sigmaSpec R); RingTheory/Spectrum/Prime/Topology.lean:718 sigmaToPiHomeo [Finite ι] (Σ i, PrimeSpectrum (R i)) ≃ₜ PrimeSpectrum (Π i, R i), :301 discreteTopology_iff_finite_and_krullDimLE_zero; RingTheory/Spectrum/Prime/Noetherian.lean:54 instance [IsArtinianRing R] DiscreteTopology (PrimeSpectrum R); RingTheory/Artinian/Module.lean:441 instance [Finite ι] IsArtinianRing (Π i, R i); RingTheory/Spectrum/Prime/Basic.lean:399 Unique (PrimeSpectrum K) for a field K; AlgebraicGeometry/Scheme.lean:627 Unique (Spec (.of K))",
+   "date": "2026-10-10",
+   "verdict": "no match as one statement; every clause follows from these pieces (clause 1: sigmaToPiHomeo + Unique (PrimeSpectrum L_j); clause 2: IsArtinianRing (Π) + PrimeSpectrum.instDiscreteTopology; clause 3: Limits.lean:615 + Unique (Spec L_j) + sigmaToPi_apply), which the lead may judge a leaf of several lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

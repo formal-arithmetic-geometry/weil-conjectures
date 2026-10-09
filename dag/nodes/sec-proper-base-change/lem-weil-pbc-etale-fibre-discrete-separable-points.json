@@ -2,21 +2,107 @@
  "id": "lem-weil-pbc-etale-fibre-discrete-separable-points",
  "kind": "statement",
  "title": "The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions",
- "statement": "Let $f:X\\to S$ be an etale morphism of schemes [def-weil-etale-morphism], let $s\\in S$ with residue field $\\kappa(s)$ [def-weil-residue-field], and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre [def-pc-base-change]. Then $X_s$ is a disjoint union of spectra of finite separable field extensions of $\\kappa(s)$: the underlying topological space of $X_s$ is discrete (every point of $X_s$ is open and closed in $X_s$), and for every point $y\\in X_s$ the open subscheme $\\{y\\}$ of $X_s$ is isomorphic over $\\kappa(s)$ to $\\operatorname{Spec}\\kappa(y)$ [def-weil-affine-spectrum], where the residue field $\\kappa(y)$ is a finite field extension of $\\kappa(s)$ every element of which is a root of a separable polynomial over $\\kappa(s)$ [def-pc-separable-polynomial].",
+ "statement": "Let $f:X\\to S$ be an etale morphism of schemes [def-weil-etale-morphism], let $s\\in S$ with residue field $\\kappa(s)$ [def-weil-residue-field], and let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre [def-pc-scheme-fibre]. Then $X_s$ is a disjoint union of spectra of finite separable field extensions of $\\kappa(s)$: the underlying topological space of $X_s$ is discrete (every point of $X_s$ is open and closed in $X_s$), and for every point $y\\in X_s$ the open subscheme $\\{y\\}$ [def-pc-scheme] of $X_s$ is isomorphic over $\\kappa(s)$ to $\\operatorname{Spec}\\kappa(y)$ [def-weil-affine-spectrum], where the residue field $\\kappa(y)$ is a finite field extension [def-pc-field-extension] of $\\kappa(s)$ every element of which is a root of a separable polynomial over $\\kappa(s)$ [def-pc-separable-polynomial].",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 02GL (lemma-etale-over-field), part (2), line 8175; its proof: part (1) via Algebra, Lemma 00U3 (algebra-lemma-etale-over-field) and Morphisms, Lemma 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre); the fibre is etale over kappa(s) by Morphisms, Lemma 02GO (lemma-base-change-etale)"
+  "place": "Morphisms, Lemma 02GL (morphisms-lemma-etale-over-field, label at line 8175), part (2) (line 8186); Stacks writes out only the proof of part (1) (lines 8191-8207: via Algebra, Lemma 00U3 = algebra-lemma-etale-over-field, algebra.tex line 39394, and Morphisms, Lemma 01TE = morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre, line 3565); part (2) is part (1) applied to X_s -> Spec kappa(s), etale by Morphisms, Lemma 02GO (morphisms-lemma-base-change-etale, line 8136)"
  },
  "stmt_deps": [
   "def-weil-etale-morphism",
   "def-weil-residue-field",
-  "def-pc-base-change",
+  "def-pc-scheme-fibre",
+  "def-pc-scheme",
   "def-weil-affine-spectrum",
+  "def-pc-field-extension",
   "def-pc-separable-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is a scheme over $\\kappa(s)$ through the second projection $p:X_s\\to\\operatorname{Spec}\\kappa(s)$, which is the base change of the etale morphism $f:X\\to S$ along $\\operatorname{Spec}\\kappa(s)\\to S$. By clause 1 of [lem-weil-pbc-etale-base-change-finite-limits] (with $V=S$, $W=X\\xrightarrow{f}S$, $U=\\operatorname{Spec}\\kappa(s)$) the projection $p$ is etale [def-weil-etale-morphism].",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GO (morphisms-lemma-base-change-etale, line 8136), which reduces part (2) of Lemma 02GL to part (1)"
+   }
+  },
+  {
+   "text": "Let $y\\in X_s$. Since $X_s$ is a scheme [def-pc-scheme], $y$ has an affine open neighbourhood $U\\subseteq X_s$ and an isomorphism $U\\cong\\operatorname{Spec}C$ for a commutative ring $C$ [def-weil-affine-spectrum]. The composite $\\operatorname{Spec}C\\cong U\\hookrightarrow X_s\\xrightarrow{p}\\operatorname{Spec}\\kappa(s)$ is etale: the inclusion of the open subscheme $U$ is an open immersion, hence etale, and a composite of etale morphisms is etale (clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]; an isomorphism is an open immersion), with step 1. Every morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}\\kappa(s)$ is $\\operatorname{Spec}$ of a unique ring map $\\kappa(s)\\to C$ [def-weil-affine-spectrum]; this makes $C$ a $\\kappa(s)$-algebra with $\\operatorname{Spec}C\\to\\operatorname{Spec}\\kappa(s)$ etale. By [lem-weil-pbc-etale-algebra-over-field-product] there are $n\\ge0$, fields $L_1,\\dots,L_n$, each a finite and separable algebraic extension of $\\kappa(s)$ [def-weil-pbc-separable-algebraic-extension], and a $\\kappa(s)$-algebra isomorphism $\\alpha:C\\xrightarrow{\\sim}L_1\\times\\cdots\\times L_n$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL, proof, lines 8201-8203 (\"for any affine open U of X we see that U is a finite disjoint union of spectra of finite separable field extensions of k\"), using Algebra, Lemma 00U3"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-finite-product-fields] to $L_1\\times\\cdots\\times L_n$ with projections $\\pi_j$, and transport along the isomorphism $\\operatorname{Spec}\\alpha:\\operatorname{Spec}(L_1\\times\\cdots\\times L_n)\\xrightarrow{\\sim}\\operatorname{Spec}C\\cong U$. The point $y\\in U$ corresponds to $\\mathfrak p_j=\\ker\\pi_j$ for exactly one $j$ (clause 1); the set $\\{y\\}$ is open in $U$ (clause 2), hence open in $X_s$ since $U$ is open in $X_s$; and the morphism $\\iota_y:\\operatorname{Spec}L_j\\xrightarrow{\\operatorname{Spec}\\pi_j}\\operatorname{Spec}(\\prod_iL_i)\\xrightarrow{\\operatorname{Spec}\\alpha}\\operatorname{Spec}C\\cong U\\hookrightarrow X_s$ is an open immersion (clause 3, composed with an isomorphism and the inclusion of an open subscheme) with image $\\{y\\}$, i.e. it is an isomorphism of $\\operatorname{Spec}L_j$ onto the open subscheme $\\{y\\}$ of $X_s$ [def-weil-open-immersion]. Since $\\pi_j\\circ\\alpha$ is a homomorphism of $\\kappa(s)$-algebras, functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] gives $p\\circ\\iota_y=\\operatorname{Spec}(\\kappa(s)\\to L_j)$: the isomorphism $\\operatorname{Spec}L_j\\cong\\{y\\}$ is an isomorphism over $\\kappa(s)$.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-product-fields",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL, proof, lines 8201-8207 (\"U is a finite disjoint union of spectra ...; thus X is a discrete space\"); the finite disjoint union is Algebra, Lemma 00ED applied n-1 times"
+   }
+  },
+  {
+   "text": "By step 3 every point of $X_s$ is open, so every subset of $X_s$, being the union of its points, is open: the space $X_s$ is discrete; in particular every point is also closed (its complement is a union of open points). (Stacks first shows that all points are closed, by Morphisms, Lemma 01TE, since their residue fields are algebraic over $\\kappa(s)$, and concludes discreteness from the finite discrete affine opens; the openness of the points from step 3 gives both at once, so Lemma 01TE is not needed.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL, proof, lines 8203-8207 (all points closed via Lemma 01TE; \"Thus X is a discrete space\")"
+   }
+  },
+  {
+   "text": "The residue field $\\kappa(y)$ [def-weil-residue-field] is the residue field at $y$ of the open subscheme $\\{y\\}$ (the stalk of $\\mathcal O_{X_s}$ at $y$ equals that of the open subscheme containing $y$ [def-pc-scheme]). Through the isomorphism $\\iota_y$ over $\\kappa(s)$ of step 3 it is identified, compatibly with the maps from $\\kappa(s)$, with the residue field of $\\operatorname{Spec}L_j$ at its single point, which is $L_j$ [def-weil-affine-spectrum]. Hence $\\kappa(y)\\cong L_j$ as extensions of $\\kappa(s)$, so $\\kappa(y)/\\kappa(s)$ is finite and separable algebraic (step 2) [def-weil-pbc-separable-algebraic-extension]: every element of $\\kappa(y)$ is a root of its minimal polynomial over $\\kappa(s)$, which is separable [def-pc-separable-polynomial]. Finally $\\{y\\}\\cong\\operatorname{Spec}L_j\\cong\\operatorname{Spec}\\kappa(y)$ over $\\kappa(s)$, the second isomorphism being $\\operatorname{Spec}$ of the $\\kappa(s)$-isomorphism $\\kappa(y)\\cong L_j$. With step 4 this is the statement.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GL, statement part (2), line 8186 (\"disjoint union of spectra of finite separable field extensions of kappa(s)\")"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-etale-morphism",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "def-pc-separable-polynomial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02GL (morphisms-lemma-etale-over-field), proof (lines 8191-8207) for part (1), with Lemma 02GO (line 8136) for part (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +138,24 @@
    "results": "QuasiFinite.lean:163 Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f] (discrete fibres), :158 IsLocallyArtinian (f.fiber y); instances LocallyQuasiFinite only from IsFinite, IsImmersion (:90, :97); RingTheory/Unramified/LocalStructure.lean:332 ring-level instance [EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S; RingTheory/Etale/Field.lean:271 Algebra.Etale.iff_exists_algEquiv_prod (etale algebra over a field = finite product of finite separable extensions)",
    "date": "2026-10-10",
    "verdict": "no match (pieces only): the statement needs Etale -> LocallyQuasiFinite (not in Mathlib) plus the field description on affine opens"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale scheme over a field is a disjoint union of spectra of finite separable field extensions",
+   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.of_isSeparable (Mathlib.RingTheory.Etale.Field); AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale); AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level only (the affine case, lem-weil-pbc-etale-algebra-over-field-product)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyQuasiFinite' Mathlib --include=*.lean | grep -i 'etale\\|unramified\\|instance'; sed -n 100,112p Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; sed -n 155,170p Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; and in the source repository WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:43",
+   "results": "Mathlib: unnamed instance at Sites/EtalePoint.lean:108 [Etale f] : Etale (f.fiberToSpecResidueField x) (the fibre is etale over Spec kappa(x); step 1); QuasiFinite.lean:158 instance [LocallyQuasiFinite f] IsLocallyArtinian (f.fiber y), :163 Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f]; no Etale -> LocallyQuasiFinite instance in Mathlib. Source repository (not Mathlib): instance AlgebraicGeometry.LocallyQuasiFinite.of_etale (sorry-free by the sorry map), which with isDiscrete_preimage_singleton gives the discreteness half (as a subset f^{-1}(s) of X, not the field description)",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib (pieces only); Lean candidate for the discreteness half reported to the lead"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +175,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Morphisms 02GL (tag verified: morphisms-lemma-etale-over-field, line 8175), 00U3 (algebra-lemma-etale-over-field, algebra.tex 39394), 01TE (morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre, line 3565) and 02GO (morphisms-lemma-base-change-etale, line 8136). Stacks proves part (1) only; part (2) is part (1) for X_s -> Spec kappa(s), etale by base change (step 1). Proof in five steps: base change (lem-weil-pbc-etale-base-change-finite-limits), affine open + restriction (lem-weil-pbc-etale-composition-cancellation) + 00U3 (lem-weil-pbc-etale-algebra-over-field-product), the new node lem-weil-pbc-spec-finite-product-fields (Algebra 00ED/00EC/00E4) for the points as open subschemes Spec L_j, discreteness (elementary; Stacks' detour through 01TE replaced by openness of the points), residue fields. Statement kept; citation of the fibre changed from def-pc-base-change to def-pc-scheme-fibre (the exact notion, a Mathlib leaf), and def-pc-field-extension and def-pc-scheme added to the statement's citations. New node: lem-weil-pbc-spec-finite-product-fields (unsplit; Mathlib pieces recorded, no single match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 02GL(2): the fibre is etale over kappa(s) by base change (02GO), an affine open around y is Spec of an etale kappa(s)-algebra, hence a finite product of finite separable extensions (00U3 leaf), Spec of a finite product of fields is discrete with each point the open subscheme Spec L_j (new unsplit node; Stacks 00ED/00EC/00E4; the worker reports Mathlib pieces for every clause: Spec.map (Pi.evalRingHom i) open immersion Limits.lean:615, IsIso (sigmaSpec R) for finite index Limits.lean:641, sigmaToPiHomeo, Spec of a field one point; its reviewer may make it a leaf of several lemmas), discreteness from open points (01TE not needed), residue field kappa(y) = L_j. Statement citations changed only (def-pc-scheme-fibre instead of def-pc-base-change; def-pc-field-extension and def-pc-scheme added), mathematics unchanged. Lean candidate reported, not attached: LocallyQuasiFinite.of_etale (QuasiFinite.lean:43, sorry-free) gives only discreteness of f^{-1}(s)."
+ }
 }
