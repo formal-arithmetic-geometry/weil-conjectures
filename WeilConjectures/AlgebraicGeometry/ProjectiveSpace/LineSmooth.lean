@@ -17,8 +17,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 - `AlgebraicGeometry.ProjectiveLine.smoothOfRelativeDimension_one`: `ℙ¹_S ⟶ S` is smooth of
   relative dimension one; it is covered by the two standard opens, each an affine line.
 - `AlgebraicGeometry.ProjectiveLine.isIntegral`: `ℙ¹_k` is integral for a field `k`.
+- `AlgebraicGeometry.ProjectiveLine.homOfSections_eq_SpecMap_comp`: the `K`-point `[1 : t]` of
+  `ℙ¹_k` is `Spec` of `k[T] → K`, `T ↦ t`, in the chart `D₊(T₀)`.
 - `AlgebraicGeometry.ProjectiveLine.not_isClosed_homOfSections`: for `t` transcendental over
   `k`, the point `[1 : t]` of `ℙ¹_k` is not closed.
+- `AlgebraicGeometry.ProjectiveLine.fieldRange_descResidueField_homOfSections`: the residue field
+  of `ℙ¹_k` at `[1 : t]` embeds into `K` with image `k(t)`.
 -/
 
 @[expose] public section
