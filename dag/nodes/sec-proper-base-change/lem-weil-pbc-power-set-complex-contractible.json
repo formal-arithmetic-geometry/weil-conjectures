@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-power-set-complex-contractible",
+ "kind": "statement",
+ "title": "The augmented complex of free modules on the powers of a nonempty set is exact",
+ "statement": "Let $A$ be a ring and $S$ a set. For $p\\geq0$ let $C_p(S;A)=A[S^{p+1}]$ be the free left $A$-module on the set $S^{p+1}$ of $(p+1)$-tuples, with basis elements $[(s_0,\\ldots,s_p)]$, and let $d:C_{p+1}(S;A)\\to C_p(S;A)$ be the $A$-linear map $[(s_0,\\ldots,s_{p+1})]\\mapsto\\sum_{j=0}^{p+1}(-1)^j[(s_0,\\ldots,\\widehat{s_j},\\ldots,s_{p+1})]$; let $\\varepsilon:C_0(S;A)\\to A$ be the $A$-linear map $[s]\\mapsto1$. Then $d\\circ d=0$ and $\\varepsilon\\circ d=0$, and if $S$ is nonempty the augmented complex $\\cdots\\to C_2(S;A)\\to C_1(S;A)\\to C_0(S;A)\\xrightarrow{\\varepsilon}A\\to0$ is exact in every degree; in particular $H_p(C_\\bullet(S;A))=0$ for $p>0$ and $\\varepsilon$ induces $H_0(C_\\bullet(S;A))\\cong A$. (If $S$ is empty, every $C_p(S;A)$ is $0$.) Concretely, for a chosen $s\\in S$ the maps $h:C_p(S;A)\\to C_{p+1}(S;A)$, $[(s_0,\\ldots,s_p)]\\mapsto[(s,s_0,\\ldots,s_p)]$, and $h:A\\to C_0(S;A)$, $1\\mapsto[s]$, form a contracting homotopy of the augmented complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof: the extended complex Z[S x S x S] -> Z[S x S] -> Z[S] -> Z (sum) -> 0 is exact for nonempty S, by the homotopy n_(s_0..s_p) -> n_(s,s_0..s_p); with coefficients A (= O(V)) as in the first argument of the proof of Lemma Tag 03F5 (lemma-complex-tensored-still-exact)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extra degeneracy gives homotopy equivalence of alternating face map complex with single complex in degree zero",
+   "results": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib.AlgebraicTopology.ExtraDegeneracy): for X augmented simplicial in a preadditive C with zero object and an extra degeneracy, HomotopyEquiv (AlternatingFaceMapComplex.obj X.left) ((ChainComplex.single₀ C).obj X.right); ChainComplex.alternatingConstHomotopyEquiv; DoldKan.homotopyPToId",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredient: ExtraDegeneracy.homotopyEquiv)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "free module on functions Fin (n+1) → S, standard complex for a set S, exact, homotopy equivalent to the base ring",
+   "results": "Rep.standardComplex, Rep.standardComplex.d (k[Fin (n+1) → G] →ₗ k[Fin n → G], the same alternating deletion differential), Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv (Mathlib.RepresentationTheory.Homological.Resolution): the case S = G a monoid, k commutative, over ModuleCat k; Module.Free.function, ModuleCat.free",
+   "date": "2026-10-09",
+   "verdict": "no match: Rep.standardComplex is the special case of a set carrying a monoid structure (the group structure is only used for the G-action); an arbitrary nonempty set does not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a nonempty set S, the complex of free modules on S^{n+1} with alternating sum of face maps is acyclic in positive degrees",
+   "results": "ChainComplex.alternatingConst_exactAt, SimplicialObject.Splitting.nondegComplex, AlternatingFaceMapComplex.obj, NormalizedMooreComplex.obj, singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Rep.standardComplex.x_projective",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy",
+   "results": "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy (f : Arrow C) [∀ n, HasWidePullback f.right (fun _ => f.left) fun _ => f.hom] (S : SplitEpi f.hom) : f.augmentedCechNerve.ExtraDegeneracy (Mathlib.AlgebraicTopology.ExtraDegeneracy)",
+   "date": "2026-10-09",
+   "verdict": "ingredient: for f = (S → terminal) in Type, split by a chosen s ∈ S"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ExtraDegeneracy.homotopyEquiv\\|AugmentedCechNerve.extraDegeneracy\\|cechNerveTerminalFrom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (AlgebraicTopology/ExtraDegeneracy.lean, AlgebraicTopology/CechNerve.lean, RepresentationTheory/Homological/Resolution.lean, CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean)",
+   "results": "ExtraDegeneracy.lean:368 Arrow.AugmentedCechNerve.extraDegeneracy, :96 ExtraDegeneracy.map (transport along a functor, e.g. the free functor Type ⥤ ModuleCat A), :415 ExtraDegeneracy.homotopyEquiv; CechNerve.lean:339 cechNerveTerminalFrom X ([n] ↦ X^{n+1}) and :422 CechNerveTerminalFrom.iso (Arrow.mk (terminal.from X)).cechNerve ≅ cechNerveTerminalFrom X; Resolution.lean:134-162 assembles exactly these for a monoid G (extraDegeneracyAugmentedCechNerve, extraDegeneracyCompForgetAugmentedToModule); FormalCoproducts/ExtraDegeneracy.lean:96 extraDegeneracyCech for formal coproducts with a point T → U_{i0}",
+   "date": "2026-10-09",
+   "verdict": "no single declaration for an arbitrary set S; the statement is the composite of four Mathlib pieces (Cech nerve of S → * in Type identified with S^{•+1} by CechNerveTerminalFrom.iso, its extra degeneracy from a chosen s, ExtraDegeneracy.map along the free A-module functor, ExtraDegeneracy.homotopyEquiv), so the node stays unsplit with these as its expected Lean route"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-free-cech-complex-exact",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
