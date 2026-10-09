@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
+public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
@@ -76,7 +77,7 @@ include f
 /-- The local ring of a smooth curve at a closed point has dimension one. -/
 theorem ringKrullDim_stalk_eq_one_of_isClosed {x : X} (hx : IsClosed {x}) :
     ringKrullDim (X.presheaf.stalk x) = 1 :=
-  sorry
+  ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one f hx
 
 /-- The local ring of a smooth curve at a closed point is a discrete valuation ring: it is a
 regular local ring (`AlgebraicGeometry.IsRegular.of_smooth`), in particular a domain, of
@@ -110,7 +111,7 @@ divisor.
 (blueprint: `lem-sc-point-cartier`) -/
 theorem isInvertible_vanishingIdeal_of_isClosed {x : X} (hx : IsClosed {x}) :
     (IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).IsInvertible :=
-  sorry
+  isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f hx
 
 /-- **Closed points of curves are Cartier divisors.** A closed point `x` of a smooth curve has
 invertible ideal sheaf, and `𝒪_{X,x}` is a discrete valuation ring.
