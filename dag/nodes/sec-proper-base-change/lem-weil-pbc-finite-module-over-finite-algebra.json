@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-finite-module-over-finite-algebra",
+ "kind": "statement",
+ "title": "A finite module over a finite algebra is finite over the base",
+ "statement": "Let $\\varphi:R\\to B$ be a homomorphism of commutative rings such that $B$ is a finitely generated $R$-module [def-weil-finitely-generated-module] (via $\\varphi$), and let $M$ be a finitely generated $B$-module. Then $M$, viewed as an $R$-module through $\\varphi$, is a finitely generated $R$-module: if $b_1,\\dots,b_n$ generate $B$ over $R$ and $m_1,\\dots,m_k$ generate $M$ over $B$, the products $b_im_j$ generate $M$ over $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00GJ (lemma-finite-module-over-finite-extension, line 642), the implication 'finite over S implies finite over R'"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if S is a finite R-algebra and M is a finite S-module then M is a finite R-module",
+   "results": "Module.Finite.trans (Mathlib.RingTheory.Finiteness.Basic), Module.Finite.finiteType, Algebra.finite_iff_isIntegral_and_finiteType, Algebra.IsIntegral.finite",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Finite.trans"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.trans",
+   "results": "Module.Finite.trans {R} (A M) [Semiring R] [Semiring A] [Module R A] [AddCommMonoid M] [Module R M] [Module A M] [IsScalarTower R A M] [Module.Finite R A] [Module.Finite A M] : Module.Finite R M (Mathlib.RingTheory.Finiteness.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tower: finitely generated module over a finite algebra is finitely generated over the base ring",
+   "results": "Algebra.FiniteType.of_restrictScalars_finiteType, Algebra.FiniteType.trans, Algebra.fg_trans', Module.Finite.right, Algebra.EssFiniteType.of_comp (algebra-finite-type analogues; the module statement is Module.Finite.trans)",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; match is Module.Finite.trans"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem trans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Basic.lean",
+   "results": "Basic.lean:369 theorem trans {R : Type*} (A M : Type*) [Semiring R] [Semiring A] [Module R A] ... (namespace Module.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.trans",
+  "file": "Mathlib/RingTheory/Finiteness/Basic.lean",
+  "how": "specializes in one line (line 369): with A = B an R-algebra via φ and M a B-module given the R-module structure by restriction of scalars (IsScalarTower R B M), Module.Finite R B and Module.Finite B M give Module.Finite R M; stated for semirings"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-pushforward-coherent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: Module.Finite.trans (RingTheory/Finiteness/Basic.lean:369); Algebra 00GJ."
+ }
+}

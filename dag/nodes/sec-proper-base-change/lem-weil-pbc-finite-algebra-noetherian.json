@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-finite-algebra-noetherian",
+ "kind": "statement",
+ "title": "A module-finite algebra over a Noetherian ring is Noetherian",
+ "statement": "Let $\\varphi:R\\to B$ be a homomorphism of commutative rings such that $B$ is a finitely generated $R$-module [def-weil-finitely-generated-module] (via $\\varphi$). If $R$ is a Noetherian ring [def-weil-pbc-noetherian-ring], then $B$ is a Noetherian ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00FN (lemma-Noetherian-permanence, line 5991): 'any finitely generated ring over a Noetherian ring is Noetherian' (B is generated as an R-algebra by finitely many R-module generators); used in Morphisms, Lemma 01T6 (lemma-finite-type-noetherian)"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite algebra over a Noetherian ring is a Noetherian ring",
+   "results": "Algebra.FiniteType.isNoetherianRing (Mathlib.RingTheory.FiniteType), Algebra.EssFiniteType.isNoetherianRing, isNoetherian_of_isNoetherianRing_of_finite, isNoetherianRing_of_fg, IsNoetherianRing.of_finite (Mathlib.RingTheory.Noetherian.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IsNoetherianRing.of_finite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module-finite algebra over a Noetherian commutative ring is Noetherian",
+   "results": "Algebra.FiniteType.isNoetherianRing, Algebra.EssFiniteType.isNoetherianRing, IsNoetherianRing.of_finite, isNoetherianRing_of_fg",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem IsNoetherianRing.of_finite\\|isNoetherian_of_tower' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Noetherian/Basic.lean",
+   "results": "Noetherian/Basic.lean:340 theorem IsNoetherianRing.of_finite (R S) [Ring R] [Ring S] [Module R S] [IsScalarTower R S S] [IsNoetherianRing R] [Module.Finite R S] : IsNoetherianRing S, proved by isNoetherian_of_tower (:320)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsNoetherianRing.of_finite",
+  "file": "Mathlib/RingTheory/Noetherian/Basic.lean",
+  "how": "specializes in one line (line 340): for B an R-algebra via φ (Algebra gives Module R B and IsScalarTower R B B) with Module.Finite R B and IsNoetherianRing R, IsNoetherianRing B; alternatively Algebra.FiniteType.isNoetherianRing (RingTheory/FiniteType.lean) with the instance Module.Finite.finiteType"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-pushforward-coherent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsNoetherianRing.of_finite (RingTheory/Noetherian/Basic.lean:340); Algebra 00FN."
+ }
+}
