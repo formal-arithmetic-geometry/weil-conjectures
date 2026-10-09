@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.Descent.DescentData
+public import Mathlib.Tactic.IrreducibleDef
 
 /-!
 # The unit of the pullback-pushforward adjunction on sections
@@ -21,7 +22,8 @@ composition of morphisms and under restriction along open immersions, and that m
 
 universe u
 
-open CategoryTheory Opposite CategoryTheory.Bicategory CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
+open CategoryTheory Opposite CategoryTheory.Bicategory
+  CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -157,5 +159,95 @@ lemma modulesPseudofunctor_pullHom_eq {X₁ X₂ Y Y' : Scheme.{u}} {M₁ : X₁
   dsimp only [pullHom]
   rw [h₁, h₂]
   rfl
+
+/-- The comparison `mapComp'` of `modulesPseudofunctor` on global sections in the image of the
+unit, for a factorization `g ≫ f = fg`. -/
+lemma modulesPseudofunctor_mapComp'_hom_app_top (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
+    ((modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
+      (by rw [← h]; rfl)).hom.toNatTrans.app M).app ⊤ (pullbackUnitApp fg M ⊤ m) =
+      pullbackUnitApp g ((pullback f).obj M) ⊤ (pullbackUnitApp f M ⊤ m) := by
+  subst h
+  exact modulesPseudofunctor_mapComp'_hom_app_pullbackUnit f g M ⊤ m
+
+/-- The comparison `mapComp'` of `modulesPseudofunctor` on global sections in the image of the
+unit, for a factorization `g ≫ f = fg`, inverse direction. -/
+lemma modulesPseudofunctor_mapComp'_inv_app_top (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
+    ((modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
+      (by rw [← h]; rfl)).inv.toNatTrans.app M).app ⊤
+        (pullbackUnitApp g ((pullback f).obj M) ⊤ (pullbackUnitApp f M ⊤ m)) =
+      pullbackUnitApp fg M ⊤ m := by
+  rw [← modulesPseudofunctor_mapComp'_hom_app_top f g fg h M m]
+  have k := Cat.Hom.hom_inv_id_toNatTrans_app (modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc
+    fg.op.toLoc (by rw [← h]; rfl)) M
+  exact congr(Hom.app (X := Z) $k ⊤ (pullbackUnitApp fg M ⊤ m))
+
+/-- `pullbackComp` followed by `pullbackCongr`, for a factorization `g ≫ f = fg`. -/
+noncomputable def pullbackCompOfEq (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X) (h : g ≫ f = fg)
+    (M : X.Modules) : (pullback g).obj ((pullback f).obj M) ≅ (pullback fg).obj M :=
+  (pullbackComp g f).app M ≪≫ (pullbackCongr h).app M
+
+lemma modulesPseudofunctor_mapComp'_inv_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) :
+    (modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
+      (by rw [← h]; rfl)).inv.toNatTrans.app M = (pullbackCompOfEq g f fg h M).hom := by
+  subst h
+  have : modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc (g ≫ f).op.toLoc =
+      modulesPseudofunctor.mapComp f.op.toLoc g.op.toLoc :=
+    Pseudofunctor.mapComp'_eq_mapComp _ _ _
+  rw [this, modulesPseudofunctor_mapComp_inv_app]
+  simp [pullbackCompOfEq, pullbackCongr]
+  try rfl
+
+lemma modulesPseudofunctor_mapComp'_hom_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) :
+    (modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
+      (by rw [← h]; rfl)).hom.toNatTrans.app M = (pullbackCompOfEq g f fg h M).inv := by
+  subst h
+  have : modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc (g ≫ f).op.toLoc =
+      modulesPseudofunctor.mapComp f.op.toLoc g.op.toLoc :=
+    Pseudofunctor.mapComp'_eq_mapComp _ _ _
+  rw [this, modulesPseudofunctor_mapComp_hom_app]
+  simp [pullbackCompOfEq, pullbackCongr]
+  try rfl
+
+lemma pullbackCompOfEq_hom_app_top (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X) (h : g ≫ f = fg)
+    (M : X.Modules) (m : Γ(M, ⊤)) :
+    ((pullbackCompOfEq g f fg h M).hom).app ⊤
+      (pullbackUnitApp g ((pullback f).obj M) ⊤ (pullbackUnitApp f M ⊤ m)) =
+      pullbackUnitApp fg M ⊤ m := by
+  rw [← modulesPseudofunctor_mapComp'_inv_app_eq f g fg h]
+  exact modulesPseudofunctor_mapComp'_inv_app_top f g fg h M m
+
+/-- The unit of `pullback f ⊣ pushforward f` on global sections. (This is irreducible: unfolding
+it forces the kernel to identify `f ⁻¹ᵁ ⊤` with `⊤`, which is expensive for concrete `f`.) -/
+noncomputable irreducible_def pullbackΓ (f : Y ⟶ X) (M : X.Modules) :
+    Γ(M, ⊤) ⟶ Γ((pullback f).obj M, ⊤) :=
+  (pullbackUnit f M).app ⊤
+
+lemma pullbackΓ_apply (f : Y ⟶ X) (M : X.Modules) (m : Γ(M, ⊤)) :
+    pullbackΓ f M m = pullbackUnitApp f M ⊤ m := by
+  rw [pullbackΓ_def]
+  rfl
+
+lemma pullbackΓ_naturality (f : Y ⟶ X) {M N : X.Modules} (φ : M ⟶ N) (m : Γ(M, ⊤)) :
+    ((pullback f).map φ).app ⊤ (pullbackΓ f M m) = pullbackΓ f N (φ.app ⊤ m) := by
+  rw [pullbackΓ_apply, pullbackΓ_apply]
+  exact pullbackUnit_naturality_apply f φ ⊤ m
+
+lemma pullbackCompOfEq_hom_app_pullbackΓ (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
+    ((pullbackCompOfEq g f fg h M).hom).app ⊤ (pullbackΓ g _ (pullbackΓ f M m)) =
+      pullbackΓ fg M m := by
+  rw [pullbackΓ_apply, pullbackΓ_apply, pullbackΓ_apply]
+  exact pullbackCompOfEq_hom_app_top g f fg h M m
+
+lemma pullbackCompOfEq_inv_app_pullbackΓ (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X)
+    (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
+    ((pullbackCompOfEq g f fg h M).inv).app ⊤ (pullbackΓ fg M m) =
+      pullbackΓ g _ (pullbackΓ f M m) := by
+  rw [← pullbackCompOfEq_hom_app_pullbackΓ g f fg h M m]
+  exact congr($((pullbackCompOfEq g f fg h M).hom_inv_id).app ⊤ _)
 
 end AlgebraicGeometry

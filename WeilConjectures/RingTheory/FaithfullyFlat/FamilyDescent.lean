@@ -42,11 +42,10 @@ namespace TensorProduct
 section Pi
 
 variable {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]
-  {ι : Type*} [Fintype ι] [DecidableEq ι] {P : ι → Type*} [∀ i, AddCommGroup (P i)]
-  [∀ i, Module R (P i)]
+  {ι : Type*} {P : ι → Type*} [∀ i, AddCommGroup (P i)] [∀ i, Module R (P i)]
 
 /-- The `i`-th component of `TensorProduct.piRight` is `lTensor M (proj i)`. -/
-lemma piRight_apply_eq_lTensor_proj (x : M ⊗[R] (∀ i, P i)) (i : ι) :
+lemma piRight_apply_eq_lTensor_proj [Fintype ι] [DecidableEq ι] (x : M ⊗[R] (∀ i, P i)) (i : ι) :
     piRight R R M P x i = (LinearMap.proj i : (∀ i, P i) →ₗ[R] P i).lTensor M x := by
   induction x using TensorProduct.induction_on with
   | zero => simp
@@ -55,8 +54,10 @@ lemma piRight_apply_eq_lTensor_proj (x : M ⊗[R] (∀ i, P i)) (i : ι) :
 
 /-- An element of `M ⊗[R] (∀ i, P i)` (with `ι` finite) vanishes if all its components
 `lTensor M (proj i) x` vanish. -/
-lemma eq_zero_of_lTensor_proj_eq_zero (x : M ⊗[R] (∀ i, P i))
+lemma eq_zero_of_lTensor_proj_eq_zero [Finite ι] (x : M ⊗[R] (∀ i, P i))
     (h : ∀ i, (LinearMap.proj i : (∀ i, P i) →ₗ[R] P i).lTensor M x = 0) : x = 0 := by
+  classical
+  have := Fintype.ofFinite ι
   apply (piRight R R M P).injective
   ext i
   simp only [piRight_apply_eq_lTensor_proj, h, map_zero]
@@ -148,8 +149,10 @@ theorem bijective_descentLift_of_flat (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] 
     (hcocycle : ∀ j k l (x : N j),
       ((θ k l).restrictScalars A).lTensor (B j) (θ j k x) =
         (TensorProduct.mk A (B k) (N l) 1).lTensor (B j) (θ j l x))
-    [Fintype J] [DecidableEq J] (l : J) [Module.Flat A (B l)] :
+    [Finite J] (l : J) [Module.Flat A (B l)] :
     Function.Bijective (descentLift θ l) := by
+  classical
+  have := Fintype.ofFinite J
   have hinj : Function.Injective ((descentSubmodule θ).subtype.lTensor (B l)) :=
     Module.Flat.lTensor_preserves_injective_linearMap _ (descentSubmodule θ).injective_subtype
   have hex : Function.Exact ((descentSubmodule θ).subtype.lTensor (B l))
@@ -200,7 +203,7 @@ noncomputable def descentEquiv (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     (hcocycle : ∀ j k l (x : N j),
       ((θ k l).restrictScalars A).lTensor (B j) (θ j k x) =
         (TensorProduct.mk A (B k) (N l) 1).lTensor (B j) (θ j l x))
-    [Fintype J] [DecidableEq J] (l : J) [Module.Flat A (B l)] :
+    [Finite J] (l : J) [Module.Flat A (B l)] :
     B l ⊗[A] descentSubmodule θ ≃ₗ[B l] N l :=
   LinearEquiv.ofBijective (descentLift θ l) (bijective_descentLift_of_flat θ hunit hcocycle l)
 
@@ -211,7 +214,7 @@ lemma descentEquiv_apply (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     (hcocycle : ∀ j k l (x : N j),
       ((θ k l).restrictScalars A).lTensor (B j) (θ j k x) =
         (TensorProduct.mk A (B k) (N l) 1).lTensor (B j) (θ j l x))
-    [Fintype J] [DecidableEq J] (l : J) [Module.Flat A (B l)] (w : B l ⊗[A] descentSubmodule θ) :
+    [Finite J] (l : J) [Module.Flat A (B l)] (w : B l ⊗[A] descentSubmodule θ) :
     descentEquiv θ hunit hcocycle l w = descentLift θ l w :=
   rfl
 
@@ -221,7 +224,7 @@ lemma descentEquiv_tmul (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     (hcocycle : ∀ j k l (x : N j),
       ((θ k l).restrictScalars A).lTensor (B j) (θ j k x) =
         (TensorProduct.mk A (B k) (N l) 1).lTensor (B j) (θ j l x))
-    [Fintype J] [DecidableEq J] (l : J) [Module.Flat A (B l)] (b : B l) (n : descentSubmodule θ) :
+    [Finite J] (l : J) [Module.Flat A (B l)] (b : B l) (n : descentSubmodule θ) :
     descentEquiv θ hunit hcocycle l (b ⊗ₜ n) = b • (n : ∀ j, N j) l :=
   rfl
 

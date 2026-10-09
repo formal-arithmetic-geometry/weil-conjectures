@@ -115,6 +115,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
@@ -308,6 +310,7 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
+public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
@@ -924,6 +927,7 @@ public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier

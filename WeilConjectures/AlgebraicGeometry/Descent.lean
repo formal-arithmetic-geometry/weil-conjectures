@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-!
 # Fpqc descent for quasi-coherent modules and for finite locally free closed subschemes
@@ -95,15 +96,6 @@ universe w u
 open CategoryTheory Opposite CategoryTheory.Bicategory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
-
-/-- The pseudofunctor sending a scheme `X` to its category `X.Modules` of sheaves of
-modules and a morphism to the pullback functor. This is the pseudofunctor underlying
-`AlgebraicGeometry.Scheme.Modules.pseudofunctor`, which also records the pushforward
-functors and the adjunctions; here we only keep the contravariant part, which is the
-shape required by `CategoryTheory.Pseudofunctor.DescentData`. -/
-noncomputable abbrev modulesPseudofunctor :
-    Pseudofunctor (LocallyDiscrete Scheme.{u}ᵒᵖ) Cat :=
-  Scheme.Modules.pseudofunctor.comp Adj.forget₁
 
 variable {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
 

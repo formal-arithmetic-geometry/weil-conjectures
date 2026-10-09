@@ -72,7 +72,8 @@ noncomputable def ModuleCat.tensorEquivExtendScalars (R S : Type u) [CommRing R]
 lemma ModuleCat.tensorEquivExtendScalars_tmul (R S : Type u) [CommRing R] [CommRing S]
     [Algebra R S] (N : ModuleCat.{u} R) (s : S) (n : N) :
     ModuleCat.tensorEquivExtendScalars R S N (s ⊗ₜ n) =
-      TensorProduct.tmul R (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
+      TensorProduct.tmul R
+        (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
         s n :=
   rfl
 
@@ -184,36 +185,44 @@ lemma pullbackSpecΓEquiv_one_tmul (M : (Spec R).Modules) [M.IsQuasicoherent] (m
 
 section Algebra
 
-/-- Sections of an `𝒪_{Spec R}`-module are `R`-modules, for `R` a commutative ring. -/
+/-- The ring map `R → Γ(Spec R, U)`. -/
+noncomputable abbrev toΓSpec (R : Type u) [CommRing R] (U : (Spec (.of R)).Opens) :
+    R →+* Γ(Spec (.of R), U) :=
+  ((ΓSpecIso (.of R)).inv ≫ (Spec (.of R)).presheaf.map (homOfLE le_top).op).hom
+
+/-- Sections of an `𝒪_{Spec R}`-module are `R`-modules, for `R` a commutative ring, through
+`R → Γ(Spec R, U)`. (This agrees with the instance for `R : CommRingCat`, but is defined directly
+through the `Γ(Spec R, U)`-module structure.) -/
 noncomputable instance moduleOf {R : Type u} [CommRing R] (M : (Spec (.of R)).Modules)
     (U : (Spec (.of R)).Opens) : Module R Γ(M, U) :=
-  inferInstanceAs (Module (CommRingCat.of R) ((modulesSpecToSheaf.obj M).obj.obj (.op U)))
+  Module.compHom Γ(M, U) (toΓSpec R U)
+
+lemma smul_of_def {R : Type u} [CommRing R] {M : (Spec (.of R)).Modules}
+    {U : (Spec (.of R)).Opens} (r : R) (x : Γ(M, U)) : r • x = toΓSpec R U r • x :=
+  rfl
+
+/-- On sections, morphisms of `𝒪_{Spec R}`-modules are `R`-linear. -/
+lemma Hom.app_smul_of {R : Type u} [CommRing R] {P Q : (Spec (.of R)).Modules} (g : P ⟶ Q)
+    (U : (Spec (.of R)).Opens) (r : R) (x : Γ(P, U)) : g.app U (r • x) = r • g.app U x :=
+  Hom.app_smul g _ x
 
 variable {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
 
 /-- On global sections over `Spec A`, the unit of the adjunction for `Spec B ⟶ Spec A` is
 semilinear along `algebraMap A B`. -/
-lemma pullbackUnitApp_top_smul (P : (Spec (.of A)).Modules) (a : A) (x : Γ(P, ⊤)) :
-    pullbackUnitApp (Spec.map (CommRingCat.ofHom (algebraMap A B))) P ⊤ (a • x) =
-      algebraMap A B a • pullbackUnitApp (Spec.map (CommRingCat.ofHom (algebraMap A B))) P ⊤ x := by
+lemma pullbackΓ_smul (P : (Spec (.of A)).Modules) (a : A) (x : Γ(P, ⊤)) :
+    pullbackΓ (Spec.map (CommRingCat.ofHom (algebraMap A B))) P (a • x) =
+      algebraMap A B a • pullbackΓ (Spec.map (CommRingCat.ofHom (algebraMap A B))) P x := by
   set f := Spec.map (CommRingCat.ofHom (algebraMap A B))
-  have h₁ : (a • x : Γ(P, ⊤)) = (ΓSpecIso (.of A)).inv a • x :=
-    (smul_Spec_def (R := CommRingCat.of A) (M := P) (U := ⊤) a x).trans (by
-      rw [show (⊤ : (Spec (.of A)).Opens).leTop = 𝟙 _ from rfl, op_id,
-        CategoryTheory.Functor.map_id]
-      rfl)
-  have h₂ : (algebraMap A B a • pullbackUnitApp f P ⊤ x : Γ((pullback f).obj P, f ⁻¹ᵁ ⊤)) =
-      (show Γ(Spec (.of B), f ⁻¹ᵁ ⊤) from (ΓSpecIso (.of B)).inv (algebraMap A B a)) •
-        pullbackUnitApp f P ⊤ x :=
-    (smul_Spec_def (R := CommRingCat.of B) (M := (pullback f).obj P) (U := ⊤)
-      (algebraMap A B a) (pullbackUnitApp f P ⊤ x)).trans (by
-      rw [show (⊤ : (Spec (.of B)).Opens).leTop = 𝟙 _ from rfl, op_id,
-        CategoryTheory.Functor.map_id]
-      rfl)
-  rw [h₁, h₂]
-  refine (Hom.app_smul (pullbackUnit f P) ((ΓSpecIso (.of A)).inv a) x).trans ?_
-  have hr : f.app ⊤ ((ΓSpecIso (.of A)).inv a) = (ΓSpecIso (.of B)).inv (algebraMap A B a) :=
-    (congr($(ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap A B))) a)).symm
+  rw [smul_of_def, smul_of_def, pullbackΓ_apply, pullbackΓ_apply]
+  refine (Hom.app_smul (pullbackUnit f P) (toΓSpec A ⊤ a) x).trans ?_
+  have hr : f.app ⊤ (toΓSpec A ⊤ a) = toΓSpec B ⊤ (algebraMap A B a) := by
+    simp only [toΓSpec, homOfLE_leOfHom, CommRingCat.hom_comp, RingHom.coe_comp,
+      Function.comp_apply]
+    rw [show (homOfLE le_top : (⊤ : (Spec (.of A)).Opens) ⟶ ⊤) = 𝟙 _ from rfl,
+      show (homOfLE le_top : (⊤ : (Spec (.of B)).Opens) ⟶ ⊤) = 𝟙 _ from rfl, op_id, op_id,
+      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    exact (congr($(ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap A B))) a)).symm
   exact congrArg (fun r : Γ(Spec (.of B), f ⁻¹ᵁ ⊤) ↦ r • pullbackUnitApp f P ⊤ x) hr
 
 /-- **Base change for quasi-coherent modules along `Spec B ⟶ Spec A`**, for an `A`-algebra `B`:
@@ -223,13 +232,33 @@ theorem exists_linearEquiv_pullback_Spec (M : (Spec (.of A)).Modules) [M.IsQuasi
     ∃ e : B ⊗[A] Γ(M, ⊤) ≃ₗ[B]
       Γ((pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).obj M, ⊤),
       ∀ m : Γ(M, ⊤), e (1 ⊗ₜ m) =
-        pullbackUnitApp (Spec.map (CommRingCat.ofHom (algebraMap A B))) M ⊤ m := by
+        pullbackΓ (Spec.map (CommRingCat.ofHom (algebraMap A B))) M m := by
   let φ : CommRingCat.of A ⟶ CommRingCat.of B := CommRingCat.ofHom (algebraMap A B)
-  let e₁ : (ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj M) ≃ₗ[B]
-      Γ((pullback (Spec.map φ)).obj M, ⊤) := pullbackSpecΓEquiv φ M
-  let e₀ : B ⊗[A] Γ(M, ⊤) ≃ₗ[B] (ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj M) :=
-    ModuleCat.tensorEquivExtendScalars A B (ModuleCat.of A Γ(M, ⊤))
-  exact ⟨e₀ ≪≫ₗ e₁, fun m ↦ pullbackSpecΓEquiv_one_tmul φ M m⟩
+  let e₁ := pullbackSpecΓEquiv φ M
+  -- identify the two `A`-module structures on `Γ(M, ⊤)`
+  let M₀ : ModuleCat (CommRingCat.of A) := @ModuleCat.of (CommRingCat.of A) _ Γ(M, ⊤) _
+    (moduleOf M ⊤)
+  let i : M₀ ≅ (moduleSpecΓFunctor (R := .of A)).obj M := LinearEquiv.toModuleIso
+    (X₁ := M₀) (X₂ := (moduleSpecΓFunctor (R := .of A)).obj M)
+    { toFun x := x
+      invFun x := x
+      map_add' _ _ := rfl
+      map_smul' r x := (smul_Spec_def (R := .of A) (M := M) (U := ⊤) r x).symm
+      left_inv _ := rfl
+      right_inv _ := rfl }
+  let e₀ := ModuleCat.tensorEquivExtendScalars A B M₀ ≪≫ₗ
+    ((ModuleCat.extendScalars φ.hom).mapIso i).toLinearEquiv
+  let e : B ⊗[A] Γ(M, ⊤) ≃ₗ[B] Γ((pullback (Spec.map φ)).obj M, ⊤) :=
+    { toFun t := e₁ (e₀ t)
+      invFun y := e₀.symm (e₁.symm y)
+      map_add' x y := by rw [map_add, map_add]
+      map_smul' b t := by
+        rw [LinearEquiv.map_smul]
+        exact (e₁.map_smul b (e₀ t)).trans
+          (smul_Spec_def (R := .of B) (M := (pullback (Spec.map φ)).obj M) (U := ⊤) b _)
+      left_inv t := by simp
+      right_inv y := by simp }
+  exact ⟨e, fun m ↦ (pullbackSpecΓEquiv_one_tmul φ M m).trans (pullbackΓ_apply _ M m).symm⟩
 
 end Algebra
 
