@@ -11,9 +11,61 @@
   "def-weil-pbc-g-ring",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $B\\to C$ is flat and surjective on spectra, it is faithfully flat by the public descent criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. Since the composite $A\\to C$ is regular, $C$ is flat as an $A$-module by [def-weil-pbc-g-ring]. Apply the flat-permanence lemma [lem-weil-pbc-flat-permanence] with $R=A$, $S=B$, and the $B$-module $M=C$: $M$ is flat over $A$ and faithfully flat over $B$, so $A\\to B$ is flat.",
+   "uses": [
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-flat-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NT, first sentence; Algebra Lemma Tag 039V"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$. Base changing the flat map $B\\to C$ along $A\\to\\kappa(\\mathfrak p)$ gives a flat map $B\\otimes_A\\kappa(\\mathfrak p)\\to C\\otimes_A\\kappa(\\mathfrak p)$ by flat base change [lem-weil-pbc-flat-module-base-change]. The original map on spectra is surjective, so its base change is surjective by [lem-weil-pbc-spec-surjective-base-change]. It is therefore faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. The target fibre $C\\otimes_A\\kappa(\\mathfrak p)$ is geometrically regular over $\\kappa(\\mathfrak p)$ because $A\\to C$ is regular [def-weil-pbc-g-ring]. Geometric regularity descends through this faithfully flat map by [lem-weil-pbc-geometrically-regular-descent], so the fibre $B\\otimes_A\\kappa(\\mathfrak p)$ is geometrically regular.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-spec-surjective-base-change",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-geometrically-regular-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NT, second and third sentences; Algebra Lemma Tags 00HI and 07NH"
+   }
+  },
+  {
+   "text": "The fibre $B\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian as required in the definition of a regular ring map: geometric regularity in [def-weil-pbc-g-ring] includes Noetherianity after every finite purely inseparable field extension, and the descent lemma [lem-weil-pbc-geometrically-regular-descent] preserves this regular-ring condition. Thus $A\\to B$ is flat with Noetherian geometrically regular fibres, exactly the definition of a regular ring map [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-geometrically-regular-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 07BZ and proof of Lemma Tag 07NT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-flat-permanence",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-spec-surjective-base-change",
+  "lem-weil-pbc-geometrically-regular-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NT (lemma-regular-permanence), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,12 +90,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-g-ring-completion-regular",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-permanence",
+  "worker": "stage1",
+  "summary": "Split Stacks More on Algebra Lemma 07NT into flatness descent (039V) and fibrewise geometric-regularity descent (07NH), with public nodes for the reusable faithfully-flat criterion (00HQ) and surjective-spectrum base change (00FI). The proof follows the source: B to C flat and spectrum-surjective is faithfully flat; apply 039V to the composite A to C; for each prime of A, flat base change and 00FI give a faithfully flat map of fibres, then 07NH descends geometric regularity and Noetherianity.",
+  "sources": [
+   "07NT",
+   "039V",
+   "00HQ",
+   "00FI",
+   "07NH"
+  ]
  },
  "lean_audit": {
   "master": {
@@ -58,5 +123,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 3 steps along Stacks 07NT: B -> C faithfully flat (flat + Spec surjective, new unsplit 00HQ node), A -> B flat by flat permanence (new unsplit 039V node), fibres: base change keeps flatness and Spec-surjectivity (new unsplit node), geometric regularity (with Noetherianity in def-weil-pbc-g-ring) descends along faithfully flat maps (new unsplit 07NH node). Correct."
+ }
 }

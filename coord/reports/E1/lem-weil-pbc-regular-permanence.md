@@ -1,0 +1,9 @@
+# Delivery report: `lem-weil-pbc-regular-permanence`
+
+The item is split from More on Algebra, Lemma 07NT. The proof first uses Algebra Lemma 00HQ to turn the assumed flat, spectrum-surjective map `B -> C` into a faithfully flat map, then applies Algebra Lemma 039V to descend flatness of the composite `A -> C` to `A -> B`. For each prime of `A`, flat base change (00HI) and the spectrum base-change assertion of 00FI give a faithfully flat map between the two fibre rings. Algebra Lemma 07NH descends geometric regularity of the target fibre to the source fibre, giving the regularity criterion in Definition 07BZ.
+
+Four reusable facts are public DAG nodes created by this item: flatness permanence (039V), the flat plus spectrum-surjective faithful-flat criterion (00HQ), spectrum-surjectivity under base change (00FI), and geometric-regularity descent (07NH). They are unsplit statement-only nodes with their own Mathlib searches; no Lean code was written.
+
+## Review by E1
+
+I checked the item statement against the exact hypotheses and conclusion of Stacks 07NT: the composite `A -> C` is regular, `B -> C` is flat and surjective on spectra, and the conclusion is regularity of `A -> B`. The first proof step correctly invokes 00HQ and 039V, with the composite's flatness supplied by the regular-map definition. For each prime, 00HI supplies flatness after tensoring with the residue field, while 00FI supplies surjectivity on spectra after the same base change; 00HQ therefore applies again. The target fibre is geometrically regular by the definition of the regular composite, and 07NH gives geometric regularity of the source fibre, including the required Noetherian regular-ring condition. Every Stacks tag quoted in the item proof is carried by a cited node or by the item source, and all four new nodes are statement-only, cite their dependencies, have `created.item` equal to this item, and record three Mathlib search kinds.
