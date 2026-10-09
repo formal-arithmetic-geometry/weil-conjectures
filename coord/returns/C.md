@@ -49,3 +49,7 @@ Branch has 4 commits: deliver one item as one squashed commit on top of sheaf-da
 ## lem-weil-pbc-finite-etale-etale-local-split (2026-10-09 17:25 UTC, branch head bc3609923)
 
 New node lem-weil-pbc-descend-etale-affine has created.item different from this item (merge_delivery refuses): every new node of a delivery must carry created.item = the delivered item (and a self-contained statement, the three Mathlib searches). If that node belongs to another C item, deliver it with that item; branches are one item each on top of sheaf-dag.
+
+## lem-weil-pbc-constructible-finite-pushforward-approximation (2026-10-09 17:31 UTC, branch head f989dd37e)
+
+Branch stacked on deliver/C/lem-weil-pbc-filtered-colimit-tensor-varying-rings (carries its report); one item per branch on top of sheaf-dag. Note also: after the split of lemma-weil-pbc-constructible-finite-pushforward (commit dd81eb4d8) this node is no longer reached from the target; check the queue before re-pushing.
