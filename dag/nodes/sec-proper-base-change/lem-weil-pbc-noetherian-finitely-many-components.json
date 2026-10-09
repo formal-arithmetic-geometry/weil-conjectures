@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-noetherian-finitely-many-components",
+ "kind": "statement",
+ "title": "A Noetherian scheme has finitely many irreducible components",
+ "statement": "Let $X$ be a Noetherian scheme, i.e. a locally Noetherian [pqf-def-locnoeth] quasi-compact scheme. Then the underlying topological space of $X$ has only finitely many irreducible components [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 0BA8 (lemma-Noetherian-irreducible-components), with Lemma 01OZ (lemma-Noetherian-topology)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian scheme has finitely many irreducible components",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian (Mathlib.AlgebraicGeometry.Noetherian), TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib.Topology.NoetherianSpace), NoetherianSpace.exists_finite_set_closeds_irreducible",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, irreducibleComponents",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian : {X : Scheme} [IsNoetherian X] : (irreducibleComponents X).Finite (Mathlib.AlgebraicGeometry.Noetherian); Scheme.irreducibleComponent and related (Mathlib.AlgebraicGeometry.IdealSheaf.IrreducibleComponent)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'finite_irreducibleComponents\\|irreducibleComponents.*Finite' Mathlib/Topology/NoetherianSpace.lean Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Noetherian.lean:364 theorem finite_irreducibleComponents_of_isNoetherian [IsNoetherian X] : (irreducibleComponents X).Finite, tagged @[stacks 0BA8]; Topology/NoetherianSpace.lean:193 NoetherianSpace.finite_irreducibleComponents",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "finite_irreducibleComponents_of_isNoetherian",
+   "results": "see mathlib_match; source read with sed -n 360,365p",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "line": 364,
+  "how": "exact: for X : Scheme with [IsNoetherian X] (Mathlib's IsNoetherian = IsLocallyNoetherian + CompactSpace, the node's definition), (irreducibleComponents X).Finite; carries @[stacks 0BA8]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-chow-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

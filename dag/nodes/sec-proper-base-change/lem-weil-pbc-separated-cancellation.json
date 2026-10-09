@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-separated-cancellation",
+ "kind": "statement",
+ "title": "Immersions are separated; cancellation for separated morphisms",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. (a) If $f$ is an immersion [def-weil-closed-immersion] (in particular an open immersion [def-weil-open-immersion] or a closed immersion), then $f$ is separated [def-weil-proper-morphism]. (b) If $g\\circ f$ is separated, then $f$ is separated.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01L7 (lemma-immersions-monomorphisms: an immersion is a monomorphism, in particular separated) and Lemma 01KV (lemma-compose-after-separated)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if the composition f ≫ g of morphisms of schemes is separated then f is separated",
+   "results": "AlgebraicGeometry.IsSeparated.of_comp, IsSeparated.comp_iff, IsSeparated.instCompScheme, IsSeparated.stableUnderComposition (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match for (b): AlgebraicGeometry.IsSeparated.of_comp"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every immersion of schemes is a separated morphism; monomorphisms of schemes are separated",
+   "results": "AlgebraicGeometry.IsSeparated.isSeparated_of_mono, isSeparated_of_injective, IsSeparated.of_isAffineHom, Scheme.instIsSeparatedOfIsSeparated (Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match for (a) via isSeparated_of_mono and the instance IsPreimmersion -> Mono"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_comp\\|isSeparated_of_mono' Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; grep -n 'Mono' Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean; grep -n 'IsPreimmersion' Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "results": "Separated.lean:61 instance isSeparated_of_mono [Mono f] : IsSeparated f; Separated.lean:256 lemma IsSeparated.of_comp [IsSeparated (f ≫ g)] : IsSeparated f; Preimmersion.lean:65 instance [IsPreimmersion f] : Mono f; Immersion.lean:45 class IsImmersion extends IsPreimmersion",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.of_comp; AlgebraicGeometry.IsSeparated.isSeparated_of_mono",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "line": 256,
+  "how": "exact, one declaration per clause: (b) IsSeparated.of_comp (Separated.lean:256); (a) isSeparated_of_mono (Separated.lean:61) applied to an immersion, which is a monomorphism by the instance at Morphisms/Preimmersion.lean:65 since IsImmersion extends IsPreimmersion (Morphisms/Immersion.lean:45). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-chow-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
