@@ -11,9 +11,68 @@
   "def-weil-pbc-sets-extension-by-empty",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (basis-generated epimorphism).* Apply [lem-weil-pbc-sheaf-basis-surjection] to obtain an epimorphism $p:\\mathcal F_0=\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}\\twoheadrightarrow\\mathcal F$, with each $U_a$ in the basis and each $S_a$ finite. The construction in Tag 0CAH chooses a basis neighbourhood for every germ of $\\mathcal F$ and uses the adjunction and stalk description of [lem-weil-pbc-sets-extension-by-empty-adjunction] to prove surjectivity on stalks.",
+   "uses": [
+    "lem-weil-pbc-sheaf-basis-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (lemma-surjection), line 2992 and proof"
+   }
+  },
+  {
+   "text": "*Step 2 (the relation presentation).* Form the kernel pair $K=\\mathcal F_0\\times_{\\mathcal F}\\mathcal F_0$ of $p$. Apply [lem-weil-pbc-sheaf-basis-surjection] to $K$ and write the resulting epimorphism as $e:\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}\\twoheadrightarrow K$, with $V_b$ in the basis and $T_b$ finite. By [lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer], composing $e$ with the two projections of $K$ gives maps $r,s:\\coprod_{b\\in B}j_{V_b!}\\underline{T_b}\\rightrightarrows\\coprod_{a\\in A}j_{U_a!}\\underline{S_a}$ whose coequalizer is $\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer",
+    "lem-weil-pbc-sheaf-basis-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3038-3046"
+   }
+  },
+  {
+   "text": "*Step 3 (finite support of the relation maps).* For a finite subset $B'\\subset B$, each of the two maps from $\\coprod_{b\\in B'}j_{V_b!}\\underline{T_b}$ into the right-hand coproduct factors through a finite subcoproduct indexed by some finite $A'\\subset A$. Indeed, the value on each quasi-compact $V_b$ commutes with the directed colimit expressing the infinite coproduct, by [lem-weil-pbc-sheaves-directed-colimit-sections]; the factorization for both maps is obtained by taking the union of their finite supports. Thus the relation data has finite truncations.",
+   "uses": [
+    "lem-weil-pbc-sheaf-finite-relation-truncations",
+    "lem-weil-pbc-sheaves-directed-colimit-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3047-3058"
+   }
+  },
+  {
+   "text": "*Step 4 (directed colimit of finite coequalizers).* Let $\\Lambda$ be the directed set of finite relation truncations, ordered by inclusion and enlargement of the finite supports in $A$. For $\\lambda=(B',A')$, let $\\mathcal F_\\lambda$ be the coequalizer of the two restricted maps between the corresponding finite coproducts. Enlarging supports gives transition maps, and the canonical cocone to the coequalizer $\\mathcal F$ is compatible. The finite-support assertion of [lem-weil-pbc-sheaf-finite-relation-truncations] shows that every relation in the infinite presentation appears at some stage; hence the induced map from the colimit of the $\\mathcal F_\\lambda$ to $\\mathcal F$ is both locally surjective and locally injective, so is an isomorphism of sheaves. Therefore $\\mathcal F$ is the directed colimit of the stated finite coequalizers.",
+   "uses": [
+    "lem-weil-pbc-sheaf-finite-truncation-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3058-3064"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-basis-surjection",
+  "lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer",
+  "lem-weil-pbc-sheaf-finite-relation-truncations",
+  "lem-weil-pbc-sheaf-finite-truncation-colimit",
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 0CAI (lemma-filtered-colimit-constructibles), proof at lines 3038-3064"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +117,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers",
+  "worker": "stage1",
+  "summary": "Checked Tag 0CAI against modules.tex lines 3016 and 3038-3064. Split the proof into the basis-generated epimorphism (0CAH), effectiveness of the kernel-pair coequalizer, finite-support factorization over quasi-compact basis opens using 009F, and the directed colimit of finite relation truncations. Added three statement-only nodes, each with Stacks source and LeanSearch, LeanFinder/Loogle, and Mathlib grep searches; the item now cites all reusable lemmas and keeps the directed-set formulation used by the source proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 steps along Stacks 0CAI (0CAH surjection, kernel pair coequalizer, finite support of the relation maps via 009F on quasi-compact V_b, colimit of finite truncations); 4 new unsplit nodes are genuine lemmas (basis surjection 0CAH, regular-epi/kernel-pair coequalizer, finite support, colimit of truncations = colimits commute with colimits). Correct. Trailing proof-hint sentences in two new statements removed by L after merge."
+ }
 }
