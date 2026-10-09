@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
 public import Mathlib.CategoryTheory.Adjunction.Triple
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 
 /-!
 # Extension by zero of sheaves of modules over the constant `ℓ`-adic sheaf
@@ -107,9 +109,32 @@ instance : IsIso (adicOpenImmersionLowerShriekAdjunction l j).unit :=
     ⟨adicOpenImmersionLowerShriekAdjunction l j, adicUpperStarLowerStarAdjunction l j⟩).2
     inferInstance
 
-/-- **Extension by zero is exact.** -/
+/-- The pullback along an open immersion sends cofree sheaves of `ℚ̄_ℓ,X`-modules `[ℚ̄_ℓ,X, Y]` to
+cofree sheaves of modules, the pullback commuting with internal homs
+(`AlgebraicGeometry.ProEtale.isIso_ihomComparison_upperStar`). -/
+noncomputable def adicUpperStarCofreeIso :
+    Mod.cofree (adicConstantSheaf l X) ⋙ (j)^*ᵃ[l] ≅
+      (j)^*[WeilCoefficients.{u} l] ⋙ Mod.cofree (adicConstantSheaf l U) :=
+  have := isIso_ihomComparison_upperStar (WeilCoefficients.{u} l) j (adicConstantSheaf l X)
+  (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) j).modLeftCofreeIso
+    (adicConstantSheafToLowerStar l j)
+
+/-- The underlying sheaf of `j_! F` is the extension by zero of the underlying sheaf of `F`:
+both functors are left adjoint to `Y ↦ j^* [ℚ̄_ℓ,X, Y] ≅ [ℚ̄_ℓ,U, j^* Y]`. -/
+noncomputable def adicOpenImmersionLowerShriekCompForgetIso :
+    (j)_!ᵃ[l] ⋙ AdicSheaf.forget X ≅ AdicSheaf.forget U ⋙ (j)_!open[WeilCoefficients.{u} l] :=
+  (((adicOpenImmersionLowerShriekAdjunction l j).comp
+      (Mod.forgetCofreeAdjunction (adicConstantSheaf l X))).ofNatIsoRight
+    (adicUpperStarCofreeIso j)).leftAdjointUniq
+    ((Mod.forgetCofreeAdjunction (adicConstantSheaf l U)).comp
+      (openImmersionLowerShriekUpperStarAdjunction (WeilCoefficients.{u} l) j))
+
+/-- **Extension by zero is exact**: on underlying sheaves it is the extension by zero of sheaves
+of `ℚ̄_ℓ`-modules (`AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekCompForgetIso`). -/
 instance : PreservesFiniteLimits (j)_!ᵃ[l] :=
-  sorry
+  have : PreservesFiniteLimits ((j)_!ᵃ[l] ⋙ AdicSheaf.forget X) :=
+    preservesFiniteLimits_of_natIso (adicOpenImmersionLowerShriekCompForgetIso j).symm
+  preservesFiniteLimits_of_reflects_of_preserves _ (AdicSheaf.forget X)
 
 /-- The pullback of `j_! F` along a morphism `g` missing the range of `j` vanishes: the
 adjunctions turn `Hom(g^* j_! F, H)` into `Hom(F, j^* g_* H)`, and the underlying sheaf of
