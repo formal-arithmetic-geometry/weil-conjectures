@@ -2,21 +2,77 @@
  "id": "def-weil-pbc-finite-etale-trace",
  "kind": "definition",
  "title": "Restriction and trace of a finite etale morphism",
- "statement": "Let $f:Y\\to X$ be a finite etale morphism of schemes [def-weil-pbc-scheme-conventions] and $F$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-sheaves]. The *restriction* $\\operatorname{res}_{f,F}:F\\to f_*f^{-1}F$ is the unit $\\eta_{f,F}$ of the adjunction $f^{-1}\\dashv f_*$ of [def-weil-pbc-inverse-image] (direct image [def-weil-pbc-direct-image]). The *trace* $\\operatorname{tr}_{f,F}:f_*f^{-1}F\\to F$ is the morphism of abelian sheaves given by [lem-weil-pbc-finite-etale-trace-exists]: natural in $F$, compatible with etale localization on $X$, and equal to the sum map $F^{\\oplus d}\\to F$ when $Y=\\coprod_{i=1}^dX$. If $F$ is a sheaf of $R$-modules for a ring $R$, both maps are $R$-linear when $R=\\mathbf Z/n$ (additive maps of $\\mathbf Z/n$-module sheaves).",
+ "statement": "Let $f:Y\\to X$ be a finite etale morphism of schemes [def-weil-pbc-scheme-conventions] and $F$ an abelian sheaf on the small etale site $X_{\\Et}$, i.e. $F\\in\\Ab(X_{\\Et})$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]; let $f^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ and $f_*:\\Ab(Y_{\\Et})\\to\\Ab(X_{\\Et})$ be the inverse and direct image, $f^{-1}\\dashv f_*$ with unit $\\eta_f$ [def-weil-pbc-inverse-image, def-weil-pbc-direct-image].\n\n1. The *restriction* of $f$ at $F$ is the morphism of abelian sheaves $\\operatorname{res}_{f,F}=\\eta_{f}(F):F\\to f_*f^{-1}F$, the component at $F$ of the unit of $f^{-1}\\dashv f_*$.\n2. The *trace* of $f$ at $F$ is the morphism of abelian sheaves $\\operatorname{tr}_{f,F}:f_*f^{-1}F\\to F$ which is the member at $(f,F)$ of the unique family $(\\operatorname{tr}_{f,F})_{f,F}$, indexed by all finite etale morphisms $f$ and all $F\\in\\Ab(X_{\\Et})$, that [lem-weil-pbc-finite-etale-trace-exists] provides: the family that is (0) natural in $F$, (1) compatible with etale localization on $X$, and (2) equal to the sum map $F^{\\oplus d}\\to F$ under $f_*f^{-1}F=F^{\\oplus d}$ when $Y=\\coprod_{i=1}^dX$ and $f$ is the identity on each summand.\n\nWhen $F$ is a sheaf of $\\mathbf Z/n$-modules ($n\\ge1$), $\\operatorname{res}_{f,F}$ and $\\operatorname{tr}_{f,F}$ are taken on the underlying abelian sheaf; $f^{-1}F$ and $f_*f^{-1}F$ are again killed by $n$, so both maps are maps of sheaves of $\\mathbf Z/n$-modules (see the last construction step).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Stacks Definition 03SE (definition-trace-map) and the paragraphs around it in Section 03SH (section-trace-method)"
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
   "lem-weil-pbc-finite-etale-trace-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Restriction.* $f^{-1}\\dashv f_*$ on abelian sheaves is part of [def-weil-pbc-inverse-image] (with $f_*$ of [def-weil-pbc-direct-image]); $\\operatorname{res}_{f,F}$ is its unit at $F$, as in Stacks Section 03SH: 'The adjunction map $\\mathrm{id}\\to f_*f^{-1}$ is called restriction.' Nothing beyond the adjunction is used; finiteness and etaleness of $f$ play no role here.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH, first paragraph (line 10333 ff.)"
+   }
+  },
+  {
+   "text": "*Trace: choice of formulation.* Stacks first describes the trace as the counit $f_!f^{-1}\\to\\mathrm{id}$ of $f_!\\dashv f^{-1}$, transported along $f_!\\cong f_*$ (Lemma 03S7, `lemma-shriek-equals-star-finite-etale`, line 11571, whose proof is itself 'omitted' in the split case), and then says: 'The trace map is characterized by the following two properties: (1) it commutes with etale localization on $X$ and (2) if $Y=\\coprod_{i=1}^dX$ then the trace map is the sum map ... Hence we can define the trace map using the characterization given; in particular we do not need to know about the existence of $f_!$ and the agreement of $f_!$ with $f_*$ in order to construct the trace map.' The DAG follows this second formulation: it is the one the DAG supports, since [lem-weil-pbc-finite-etale-trace-exists] states existence and uniqueness of the characterized family, while the DAG has $v_!$ for etale $v$ only as the imported, unsplit [def-weil-pbc-etale-sum-extension] (unit sk-thm-iff, with its adjunction in the imported lem-weil-pbc-etale-restriction-injectives) and no node for the comparison $f_!\\to f_*$ (Stacks 0F4L) or its invertibility for finite etale $f$; [def-weil-pbc-extension-by-zero] covers open immersions only. The identification of the trace with the counit of $f_!\\dashv f^{-1}$ is not used by any node and is not stated.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH (section-trace-method), line 10333 ff., Definition 03SE (definition-trace-map, line 10353) and the paragraph after it; Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571)"
+   }
+  },
+  {
+   "text": "*Trace: the definition.* Given $f$ finite etale and $F\\in\\Ab(X_{\\Et})$, [lem-weil-pbc-finite-etale-trace-exists] gives a family $(\\operatorname{tr}_{f',F'})$ over all finite etale $f':Y'\\to X'$ and all $F'\\in\\Ab(X'_{\\Et})$ with properties (0), (1), (2), and says it is the only such family. Set $\\operatorname{tr}_{f,F}$ to be its member at $(f,F)$. By uniqueness this does not depend on any choice (in particular not on the etale covering trivializing $f$ used to construct it), so $\\operatorname{tr}_{f,F}$ is well defined; it is a morphism of abelian sheaves $f_*f^{-1}F\\to F$, natural in $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH (section-trace-method), line 10333 ff., Definition 03SE (definition-trace-map, line 10353) and the paragraph after it"
+   }
+  },
+  {
+   "text": "*Linearity for $\\mathbf Z/n$-coefficients.* Let $F$ be a sheaf of $\\mathbf Z/n$-modules [def-weil-pbc-etale-sheaves]. Then $n\\cdot\\mathrm{id}_F=0$, and since $f^{-1}$ and $f_*$ are additive, $n\\cdot\\mathrm{id}=0$ on $f^{-1}F$ and on $f_*f^{-1}F$; an abelian group killed by $n$ has exactly one $\\mathbf Z/n$-module structure, and every additive map between such groups is $\\mathbf Z/n$-linear; so on every etale $W\\to X$ the components of $\\operatorname{res}_{f,F}$ and $\\operatorname{tr}_{f,F}$ are $\\mathbf Z/n$-linear. (For a general ring $R$ and a sheaf of $R$-modules, $R$-linearity of both maps would follow from naturality of $\\eta_f$ and property (0) of [lem-weil-pbc-finite-etale-trace-exists] applied to the endomorphism $r\\cdot$ of $F$, $r\\in R$; no node uses this, so it is not stated.)",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH (the trace is applied to sheaves of $\\mathbf F_\\ell$-vector spaces in Lemma 0A3R and the methode de la trace paragraph)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-finite-etale-trace-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Section 03SH (section-trace-method), line 10333 ff., Definition 03SE (definition-trace-map, line 10353) and the paragraph after it"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,10 +94,38 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", CategoryTheory.Sheaf",
+   "results": "none (empty result)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "trace morphism from pushforward of pullback of a sheaf along a finite covering back to the sheaf, sum over the fibre",
+   "results": "Scheme.Modules.pushforward_map_app, pushforward_obj_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullbackObjFreeIso, pullbackObjUnitToUnit, pushforwardSections (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree): pushforward/pullback API, no trace",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left adjoint of pullback along etale morphism of sheaves, extension by zero, finite etale lower shriek equals pushforward",
+   "results": "Scheme.Modules.instIsLeftAdjointPullback, TopCat.Presheaf.pushforwardPullbackAdjunction, Functor.sheafAdjunctionContinuous, SheafOfModules.pullback, Functor.sheafPullback: only the pullback-pushforward adjunction (the unit giving res), no f_! for etale morphisms and no trace",
+   "date": "2026-10-09",
+   "verdict": "no match (res is a unit of an adjunction, which Mathlib has generically; the trace is absent)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'extension by zero\\|lowerShriek\\|extendByZero' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves; grep -rn -i trace Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry/Sites",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +145,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-pbc-finite-etale-trace",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Section 03SH (Definition 03SE, the characterization paragraph, Lemma lemma-shriek-equals-star-finite-etale). The statement now says exactly which objects res and tr are: res is the unit of f^{-1} -| f_*; tr is the member at (f,F) of the unique family of lem-weil-pbc-finite-etale-trace-exists (Stacks' characterization, which Stacks itself says suffices to define the trace without f_!). Stacks' primary description as the counit of f_! -| f^{-1} transported along f_! = f_* was not followed: the DAG has v_! for etale v only as the imported unsplit def-weil-pbc-etale-sum-extension and no node for f_! = f_* (def-weil-pbc-extension-by-zero is for open immersions). The R-linearity claim was removed from the statement as a claim; the Z/n case is justified in an elementary construction step (additive maps of groups killed by n are Z/n-linear), which is all lemma-weil-pbc-curve-locally-constant-reduction step 6 uses; the general-R case (from naturality) is recorded but not stated as a node since nothing uses it. Added def-weil-pbc-etale-site to stmt_deps. Mathlib searches extended by loogle, a second leanfinder, a leansearch and a grep on f_!/trace: no match. Source repository slopmaster2: no declaration defines this trace (only the existence of a retraction in exists_finite_etale_reduction, own sorry)."
+ },
+ "pointers": [
+  "lem-weil-pbc-finite-etale-trace-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "definition made precise: res = unit of f^{-1} ⊣ f_*, tr = the member of the unique characterized family of lem-weil-pbc-finite-etale-trace-exists (Stacks 03SE with the characterization paragraph of 03SH, not the counit of f_! ⊣ f^{-1}, which the DAG does not support); the R-linearity claim removed, Z/n-linearity justified in one line; no new nodes; no Lean for the trace in the source repository"
+ }
 }

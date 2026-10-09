@@ -6,8 +6,6 @@
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
-| `prop-weil-pbc-p1-acyclicity` | 1004 | sorry_here |
 | `thm-sc-main` | 1004 | none |
 | `def-weil-pbc-etale-constructible-sheaf` | 1005 | none |
 | `def-weil-pbc-finite-etale-trace` | 1005 | none |
@@ -26,11 +24,13 @@
 | `lem-weil-pbc-curve-constructible-sub-quotient` | 1005 | none |
 | `lem-weil-pbc-derived-functor-long-exact` | 1005 | none |
 | `lem-weil-pbc-edge-map-base-change` | 1005 | none |
+| `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1005 | none |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1005 | none |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1005 | none |
 | `lem-weil-pbc-henselian-etale-retraction` | 1005 | none |
 | `lem-weil-pbc-henselian-local-root-lifting` | 1005 | none |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1005 | none |
+| `lem-weil-pbc-inverse-image-module-adjunction` | 1005 | none |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lem-weil-pbc-module-pullback-tensor` | 1005 | none |
@@ -50,19 +50,19 @@
 | `lem-weil-pbc-zero-dimensional-sections-stalks` | 1005 | none |
 | `lemma-weil-pbc-curve-filtered-cohomology` | 1005 | none |
 | `lemma-weil-pbc-h1-constructible-representation` | 1005 | sorry_here |
-| `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
+| `lemma-weil-pbc-h1-torsor-comparison` | 1005 | sorry_here |
 | `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
+| `thm-weil-pbc-finite-etale-lifting` | 1005 | sorry_here |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
 | `lemma-weil-pbc-constructible-finite-pushforward` | 1006 | none |
 | `lemma-weil-pbc-finite-etale-henselian-lifting` | 1006 | none |
 | `lemma-weil-pbc-finite-locally-constant-etale-equivalence` | 1006 | none |
 | `prop-weil-pbc-gabber-affine-comparison` | 1006 | none |
-| `thm-weil-pbc-finite-etale-lifting` | 1006 | none |
+| `thm-weil-pbc-henselian-idempotent-lifting` | 1006 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1007 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
-| `thm-weil-pbc-henselian-idempotent-lifting` | 1007 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1008 | none |
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
 | `lemma-weil-pbc-pushout-monicity` | 1008 | none |
@@ -588,7 +588,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 574 nodes that wait for stage 1, 118 nodes that wait for a statement dependency.
+Not open yet: 574 nodes that wait for stage 1, 120 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

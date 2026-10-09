@@ -88,6 +88,18 @@ def take(who, m, quiet=False) -> bool:
     return False
 
 
+def node_finished(m: str) -> bool:
+    """A stage-1 item is finished when its node file is no longer unsplit/imported (the queue may be stale)."""
+    hits = list((li.ROOT / "dag" / "nodes").glob(f"*/{m}.json"))
+    if not hits:
+        return False
+    try:
+        d = json.loads(hits[0].read_text())
+    except Exception:
+        return False
+    return d.get("status") in ("split", "mathlib", "merged") and bool(d.get("reviewed")) or d.get("status") == "merged"
+
+
 def queue(stage: str | None = None):
     q = WORK / "queue.tsv"
     if not q.exists():
@@ -113,6 +125,8 @@ def main() -> int:
             if got >= n:
                 break
             if sorries(m) == 0:  # finished since the queue was written
+                continue
+            if node_finished(m):  # a DAG node split or matched since the queue was written (stale queue.tsv)
                 continue
             r = read(m)
             if (r is None or expired(r)) and take(who, m, quiet=True):
