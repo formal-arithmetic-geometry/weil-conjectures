@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.SixFunctors.BaseChange.Etale
@@ -12,6 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 
@@ -61,6 +64,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {U Z X : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-prop-sf-closed-unit`: Closed-immersion unit
 
 For a closed immersion `i : Z ⟶ X` and `Q ∈ D^b_{ctf}(Z, Λ)` the unit
@@ -70,12 +74,40 @@ For a closed immersion `i : Z ⟶ X` and `Q ∈ D^b_{ctf}(Z, Λ)` the unit
 of the exceptional adjunction `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` is
 an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this says that `Ri_*`
 is fully faithful on the exceptional side. It is the derived counterpart of the full
-faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`. -/
+faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`.
+
+The unit is invertible for every `Q ∈ D(Z_ét, A)` because `Ri_!` is fully faithful. Write
+`Ri_! = D(k_!) ⋙ Rg_*` for the chosen compactification `Z ⟶[k] Z̄ ⟶[g] X` of `i`. As `i` is
+proper, `k` has closed range, so `k_! ≅ k_*`
+(`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range`); hence
+`k_!` preserves K-injective complexes and `Ri_! ≅ R(k_! ⋙ g_*)`. On sheaves `k_! ⋙ g_* ≅ i_*`
+(`AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`), which is fully faithful for any
+coefficients (`AlgebraicGeometry.Etale.full_lowerStar_of_isClosedImmersion`), and the right
+derived functor of a fully faithful functor preserving K-injective complexes is fully faithful
+(`CategoryTheory.Functor.full_rightDerivedFunctor`). -/
 theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
     [HasCompactification i]
     [(R(i)_![A]).IsLeftAdjoint] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) :=
-  sorry
+    IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) := by
+  let c := HasCompactification.compactification i
+  -- `k_! ≅ k_*` for the open immersion `k` of the compactification, whose range is closed
+  have : IsIso (Etale.openImmersionLowerShriekToLowerStar A c.i) :=
+    Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A c.i
+      (c.isClopen_range_openImmersion inferInstance).isClosed
+  have : ((c.i)_!open[A]).PreservesKInjectiveComplexes :=
+    Functor.preservesKInjectiveComplexes_of_iso
+      (asIso (Etale.openImmersionLowerShriekToLowerStar A c.i)).symm
+  -- on sheaves, `k_! ⋙ g_* ≅ i_*` is fully faithful
+  let e : (c.i)_!open[A] ⋙ (c.g)_*[A] ≅ (i)_*[A] := asIso (Etale.lowerShriekToLowerStar A i)
+  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Full := Functor.Full.of_iso e.symm
+  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Faithful := Functor.Faithful.of_iso e.symm
+  -- hence so is `Ri_! = D(k_!) ⋙ Rg_* ≅ R(k_! ⋙ g_*)`
+  let e' : R(i)_![A] ≅ R((c.i)_!open[A] ⋙ (c.g)_*[A]) :=
+    Functor.isoWhiskerRight ((c.i)_!open[A]).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
+      (Functor.rightDerivedFunctorCompIso _ _).symm
+  have : (R(i)_![A]).Full := Functor.Full.of_iso e'.symm
+  have : (R(i)_![A]).Faithful := Functor.Faithful.of_iso e'.symm
+  infer_instance
 
 /-- **Étale base change kills what the pullback kills.** Let `g : W ⟶ X` be a morphism and
 `j : U ⟶ X` an open immersion, with base change `j' : W ×_X U ⟶ W`. If `D(j'^*) M = 0`, then
