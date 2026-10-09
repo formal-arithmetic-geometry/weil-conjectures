@@ -65,7 +65,7 @@ theorem isLisse_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π'
     IsLisse ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
   ⟨isDualizable_fourierKernel Λ π π' Ψ b,
     ⟨DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, 0, 0,
-      torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩,
+      torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩, torAmplitudeIn_fourierKernel Λ π π' Ψ b,
     fourierKernel Λ π π' Ψ b, inferInstance, ⟨Iso.refl _⟩⟩
 
 variable [LocallyOfFiniteType π] [IsSeparated π] [QuasiCompact π] [HasCompactification π]

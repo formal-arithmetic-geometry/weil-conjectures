@@ -31,9 +31,9 @@ proper map of `c`. The blueprint states it on `D⁺` instead.
 The statement for the canonical exchange map
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` is a corollary. That map is only
 defined for `f'` quasi-compact, and it goes through the comparison isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which rests on an unproved instance that is
-not expected to hold on unbounded derived categories in this generality. Both the hypothesis
-`[QuasiCompact f']` and this dependence should disappear once `Ex_!` is constructed on `D⁺`.
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which is defined for torsion coefficients
+and rests on unbounded proper base change. The hypothesis `[QuasiCompact f']` should disappear
+once `Ex_!` is constructed on `D⁺`.
 
 The projection formula is stated as the invertibility of the projection map
 `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of `AlgebraicGeometry.Etale.projectionMap`
@@ -121,16 +121,15 @@ functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
 `Ex_!` is `Ex_!(c)` for the chosen compactification `c` of `f`, followed by the comparison
 isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'`, so this follows from
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`.
-That comparison isomorphism rests on the unproved instance
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is not
-expected to hold on unbounded derived categories in this generality; the blueprint states this
-theorem on `D⁺`. If `f` is quasi-compact, `[QuasiCompact f']` is obtained from `sq` by
-`MorphismProperty.of_isPullback`. -/
+That comparison isomorphism is
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which rests
+on unbounded proper base change; the blueprint states this theorem on `D⁺`. If `f` is
+quasi-compact, `[QuasiCompact f']` is obtained from `sq` by `MorphismProperty.of_isPullback`. -/
 -- TODO: state this for the `D⁺` exchange map built from `derivedBaseChangeMapPlus`, and drop
 -- `[QuasiCompact f']` once `Ex_!` is constructed without it.
 theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    IsIso (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq) := by
+    IsIso (rightDerivedLowerShriekBaseChangeMap Λ sq) := by
   have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite Λ sq
     (HasCompactification.compactification f)
   unfold rightDerivedLowerShriekBaseChangeMap

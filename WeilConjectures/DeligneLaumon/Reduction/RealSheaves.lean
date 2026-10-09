@@ -89,7 +89,7 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
         (i ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
       (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
-        ((i)^*[WeilCoefficients.{u} l].obj (𝒮 j).obj.carrier)) ∧
+        ((i)^*ᵃ[l].obj (𝒮 j).obj.carrier)) ∧
       ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
         φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
   sorry

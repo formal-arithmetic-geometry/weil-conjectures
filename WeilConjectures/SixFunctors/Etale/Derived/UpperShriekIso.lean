@@ -47,7 +47,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 exceptional inverse image along an equation of morphisms, which a rewrite cannot do since the
 functor also depends on the `HasCompactification` instance. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y}
-    [HasCompactification f] [HasCompactification g] (h : f = g) :
+    [HasCompactification f] [HasCompactification g] [(R(f)_![A]).IsLeftAdjoint]
+    [(R(g)_![A]).IsLeftAdjoint] (h : f = g) :
     Nonempty (R(f)^![A] ≅ R(g)^![A]) := by
   subst h
   exact ⟨Iso.refl _⟩
@@ -57,6 +58,16 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
+
+/-- For an isomorphism of schemes `e : X ≅ Y`, the derived lower shriek `Re_!` is a left
+adjoint, for any coefficient category: `Re_! ≅ Re_* ≅ L(e⁻¹)^*`, and `L(e⁻¹)^*` is left adjoint to
+`R(e⁻¹)_*`. -/
+instance isLeftAdjoint_rightDerivedLowerShriek_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
+    (R(e.hom)_![A]).IsLeftAdjoint :=
+  have := (derivedUpperStarLowerStarAdjunction A e.inv).isLeftAdjoint
+  Functor.isLeftAdjoint_of_iso
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar A e.hom ≪≫
+      rightDerivedLowerStarIsoLeftDerivedUpperStarInv A e).symm
 
 /-- For an isomorphism of schemes `e : X ≅ Y`, the exceptional inverse image along `e` is the
 derived pullback, `Re^! ≅ Le^*`: both are right adjoint to `Re_! ≅ Re_* ≅ L(e⁻¹)^*`. -/

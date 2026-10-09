@@ -344,6 +344,12 @@ instance isContinuous_toProEt :
   exact MorphismProperty.Over.coverPreserving_changeProp X etale_le_weaklyEtale
     etaleTopology_le_proetaleTopology
 
+/-- **The small étale site is subcanonical**: the representable presheaves `U ↦ Hom_X(U, V)` are
+sheaves, as the small étale site embeds fully faithfully and continuously into the small
+pro-étale site, which is subcanonical. -/
+instance subcanonical_smallEtaleTopology : (smallEtaleTopology X).Subcanonical :=
+  GrothendieckTopology.subcanonical_of_full_of_faithful (toProEt X) _ (ProEt.topology X)
+
 end ToProEt
 
 /-! ### Open immersions into objects of the pro-étale site -/

@@ -11,10 +11,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Topology.Sheaves.CechCohomology
+public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.CechCriterion
+public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 
 /-!
 # Cohomology of quasi-coherent sheaves on affine schemes
@@ -303,6 +307,153 @@ theorem subsingleton_H_succ_of_isAffine [IsAffine X] (ℱ : X.Modules)
   · rintro n _ ⟨V, hV, f, rfl, hf⟩ q
     exact exactAt_cechComplex_basicOpen ℱ hV f hf q
 
+/-! ### Sheaves which are Čech-acyclic on affine opens -/
+
+section CechAcyclic
+
+open TopCat.Presheaf Opposite
+
+/-- Every open covering of an affine open `V` is refined by a standard covering
+`D(f₁), …, D(fₙ)` of `V` by finitely many basic opens. -/
+lemma exists_basicOpen_cover_of_isAffineOpen {V : X.Opens} (hV : IsAffineOpen V)
+    (W : V → X.Opens) (hW : ∀ x, x.1 ∈ W x) :
+    ∃ (n : ℕ) (f : Fin n → Γ(X, V)), ⨆ i, X.basicOpen (f i) = V ∧
+      ∀ i, ∃ x, X.basicOpen (f i) ≤ W x := by
+  choose g hgW hxg using fun x : V ↦ hV.exists_basicOpen_le (V := W x) ⟨x.1, hW x⟩ x.2
+  obtain ⟨t, ht⟩ := hV.isCompact.elim_finite_subcover (fun x : V ↦ (X.basicOpen (g x) : Set X))
+    (fun x ↦ (X.basicOpen (g x)).isOpen) (fun x hx ↦ Set.mem_iUnion.2 ⟨⟨x, hx⟩, hxg _⟩)
+  have hsup : ⨆ i, X.basicOpen (g (t.equivFin.symm i).1) = V := by
+    refine le_antisymm (iSup_le fun i ↦ X.basicOpen_le _) fun x hx ↦ ?_
+    obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.1 (ht hx)
+    exact Opens.mem_iSup.2 ⟨t.equivFin ⟨y, hy⟩, by simpa using hxy⟩
+  exact ⟨t.card, fun i ↦ g (t.equivFin.symm i).1, hsup, fun i ↦ ⟨(t.equivFin.symm i).1, hgW _⟩⟩
+
+variable (X) in
+/-- The abelian sheaves on `X` whose Čech complexes on the standard coverings
+`D(f₁), …, D(fₙ)` of the affine opens `V` of `X` are exact in positive degrees. Quasi-coherent
+modules (`exactAt_cechComplex_basicOpen`) and injective abelian sheaves have this property. -/
+def cechAcyclicOnAffines :
+    ObjectProperty (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
+  fun F ↦ ∀ ⦃V : X.Opens⦄, IsAffineOpen V → ∀ {n : ℕ} (f : Fin n → Γ(X, V)),
+    ⨆ i, X.basicOpen (f i) = V → ∀ q : ℕ,
+      ((cechComplex fun i ↦ X.basicOpen (f i)).obj F.obj).ExactAt (q + 1)
+
+/-- The underlying abelian sheaf of a quasi-coherent module is Čech-acyclic on affine opens. -/
+lemma cechAcyclicOnAffines_of_isQuasicoherent (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
+    cechAcyclicOnAffines X ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ) :=
+  fun _ hV _ f hf q ↦ exactAt_cechComplex_basicOpen ℱ hV f hf q
+
+/-- An injective abelian sheaf is Čech-acyclic on affine opens. -/
+lemma cechAcyclicOnAffines_of_injective (I : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    [Injective I] : cechAcyclicOnAffines X I :=
+  fun _ _ _ _ _ q ↦ exactAt_cechComplex_of_injective _ I q
+
+/-- A short exact sequence `0 → F → G → H → 0` of abelian sheaves with `F` Čech-acyclic on
+affine opens is surjective on the sections over every affine open. -/
+lemma surjective_app_of_cechAcyclicOnAffines
+    {S : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})}
+    (hS : S.ShortExact) (h : cechAcyclicOnAffines X S.X₁) {V : X.Opens} (hV : IsAffineOpen V) :
+    Function.Surjective (S.g.hom.app (op V)) :=
+  TopCat.Sheaf.surjective_app_of_exactAt_cechComplex hS IsAffineOpen
+    (fun {n} U ↦ ∃ (V : X.Opens) (_ : IsAffineOpen V) (f : Fin n → Γ(X, V)),
+      U = (fun i ↦ X.basicOpen (f i)) ∧ ⨆ i, X.basicOpen (f i) = V)
+    (fun V hV W hW ↦ by
+      obtain ⟨n, f, hf, hfW⟩ := exists_basicOpen_cover_of_isAffineOpen hV W hW
+      exact ⟨n, _, ⟨V, hV, f, rfl, hf⟩, hf, hfW⟩)
+    (by
+      rintro n _ ⟨V, hV, f, rfl, hf⟩
+      exact h hV f hf 0) V hV
+
+/-- In a short exact sequence `0 → F → G → H → 0` of abelian sheaves with `F` and `G`
+Čech-acyclic on affine opens, `H` is Čech-acyclic on affine opens. -/
+lemma cechAcyclicOnAffines_X₃
+    {S : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})}
+    (hS : S.ShortExact) (h₁ : cechAcyclicOnAffines X S.X₁) (h₂ : cechAcyclicOnAffines X S.X₂) :
+    cechAcyclicOnAffines X S.X₃ := by
+  intro V hV n f hf q
+  refine exactAt_cechComplex_of_sectionwise _ S.f.hom S.g.hom TopCat.Sheaf.app_g_app_f
+    (TopCat.Sheaf.injective_app_f hS) (TopCat.Sheaf.exists_app_f_eq hS) (fun k y ↦ ?_) q
+    (h₁ hV f hf (q + 1)) (h₂ hV f hf q)
+  refine surjective_app_of_cechAcyclicOnAffines hS h₁ ?_
+  rw [Scheme.iInf_basicOpen_eq_basicOpen_prod]
+  exact hV.basicOpen _
+
+/-- Being Čech-acyclic on affine opens passes from `F` to the chosen injective sheaf under `F`
+and to the cokernel of `F ⟶ I`. -/
+lemma cechAcyclicOnAffines_under_cokernel
+    {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}} (h : cechAcyclicOnAffines X F) :
+    cechAcyclicOnAffines X (Injective.under F) ∧
+      cechAcyclicOnAffines X (cokernel (Injective.ι F)) := by
+  have h₂ : cechAcyclicOnAffines X (Injective.under F) :=
+    cechAcyclicOnAffines_of_injective (Injective.under F)
+  have hS := ObjectProperty.shortExact_injectiveShortComplex F
+  have h₃ := cechAcyclicOnAffines_X₃ hS h h₂
+  exact ⟨h₂, h₃⟩
+
+end CechAcyclic
+
+/-- The action of a global function on cohomology is the map induced by multiplication. -/
+lemma H.smul_eq_map (ℱ : X.Modules) (q : ℕ) (r : Γ(X, ⊤)) (x : ℱ.H q) :
+    r • x = H.map (ℱ.smulHom r) q x :=
+  rfl
+
+/-- The presheaf of abelian groups underlying `ℱ.presheafModuleCat` is that of `ℱ`. -/
+noncomputable def presheafModuleCatCompForget₂Iso (ℱ : X.Modules) :
+    ℱ.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u} ≅
+      ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ).obj :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ rfl
+
+/-- Multiplication by a global function on `ℱ.presheafModuleCat` is multiplication by it on
+the underlying abelian sheaf of `ℱ`. -/
+lemma whiskerRight_smul_presheafModuleCat (ℱ : X.Modules) (r : Γ(X, ⊤)) :
+    Functor.whiskerRight (r • 𝟙 ℱ.presheafModuleCat) (forget₂ (ModuleCat.{u} Γ(X, ⊤))
+      AddCommGrpCat.{u}) ≫ (presheafModuleCatCompForget₂Iso ℱ).hom =
+      (presheafModuleCatCompForget₂Iso ℱ).hom ≫
+        ((SheafOfModules.toSheaf X.ringCatSheaf).map (ℱ.smulHom r)).hom := by
+  ext V x
+  rfl
+
+/-- The homology of Mathlib's Čech complex of `ℱ.presheafModuleCat` is the Čech cohomology of the
+underlying abelian sheaf of `ℱ`. -/
+noncomputable def cechComplexHomologyAddEquiv {ι : Type u} (U : ι → X.Opens) (ℱ : X.Modules)
+    (q : ℕ) : ((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q ≃+
+      (TopCat.Sheaf.cechCohomologyFunctor U q).obj
+        ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ) :=
+  (TopCat.Presheaf.cechComplexFunctorHomologyIso U ℱ.presheafModuleCat q ≪≫
+    HomologicalComplex.homologyMapIso ((TopCat.Presheaf.cechComplex U).mapIso
+      (presheafModuleCatCompForget₂Iso ℱ)) q).addCommGroupIsoToAddEquiv
+
+/-- The identification `cechComplexHomologyAddEquiv` transports multiplication by a global
+function to the map induced on Čech cohomology by multiplication on `ℱ`. -/
+lemma cechComplexHomologyAddEquiv_smul {ι : Type u} (U : ι → X.Opens) (ℱ : X.Modules)
+    (q : ℕ) (r : Γ(X, ⊤)) (x : ((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) :
+    cechComplexHomologyAddEquiv U ℱ q (r • x) =
+      (TopCat.Sheaf.cechCohomologyFunctor U q).map
+        ((SheafOfModules.toSheaf X.ringCatSheaf).map (ℱ.smulHom r))
+          (cechComplexHomologyAddEquiv U ℱ q x) := by
+  have key : HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+      (Functor.whiskerRight (r • 𝟙 ℱ.presheafModuleCat)
+        (forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}))) q ≫
+      HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+        (presheafModuleCatCompForget₂Iso ℱ).hom) q =
+      HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+        (presheafModuleCatCompForget₂Iso ℱ).hom) q ≫
+      HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+        ((SheafOfModules.toSheaf X.ringCatSheaf).map (ℱ.smulHom r)).hom) q := by
+    rw [← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp,
+      ← Functor.map_comp, ← Functor.map_comp, whiskerRight_smul_presheafModuleCat]
+  change HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+      (presheafModuleCatCompForget₂Iso ℱ).hom) q
+      ((TopCat.Presheaf.cechComplexFunctorHomologyIso U ℱ.presheafModuleCat q).hom (r • x)) =
+    HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+      ((SheafOfModules.toSheaf X.ringCatSheaf).map (ℱ.smulHom r)).hom) q
+      (HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex U).map
+        (presheafModuleCatCompForget₂Iso ℱ).hom) q
+        ((TopCat.Presheaf.cechComplexFunctorHomologyIso U ℱ.presheafModuleCat q).hom x))
+  rw [TopCat.Presheaf.cechComplexFunctorHomologyIso_hom_smul]
+  exact ConcreteCategory.congr_hom key _
+
 /-- **Leray's theorem for quasi-coherent sheaves.** Let `𝔘 = (U i)` be an open covering of `X`
 all of whose nonempty finite intersections `U i₀ ⊓ ⋯ ⊓ U iₙ` are affine. Then for every
 quasi-coherent `𝒪_X`-module `ℱ` and every `q` the Čech cohomology of the covering agrees with
@@ -321,8 +472,30 @@ implementation notes of this module for what is lost by not naming it. -/
 theorem nonempty_cechComplex_linearEquiv_H {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
     (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Nonempty (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q ≃ₗ[Γ(X, ⊤)] ℱ.H q) :=
-  sorry
+    Nonempty (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q ≃ₗ[Γ(X, ⊤)] ℱ.H q) := by
+  classical
+  have hU₀ (k : ℕ) (y : Fin (k + 1) → ι) : IsAffineOpen (⨅ l, U (y l)) := by
+    have h := hU (Finset.univ.image y) (Finset.univ_nonempty.image y)
+    convert h using 1
+    refine le_antisymm (le_iInf₂ fun i hi ↦ ?_)
+      (le_iInf fun l ↦ iInf₂_le (y l) (Finset.mem_image_of_mem y (Finset.mem_univ l)))
+    obtain ⟨l, -, rfl⟩ := Finset.mem_image.1 hi
+    exact iInf_le _ l
+  obtain ⟨e⟩ := TopCat.Sheaf.nonempty_cechCohomologyFunctor_iso_functorH U hU'
+    (cechAcyclicOnAffines X) (fun _ h ↦ cechAcyclicOnAffines_under_cokernel h)
+    (fun _ hS h k y ↦ surjective_app_of_cechAcyclicOnAffines hS h (hU₀ k y)) q
+  let F : (cechAcyclicOnAffines X).FullSubcategory :=
+    ⟨(SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ, cechAcyclicOnAffines_of_isQuasicoherent ℱ⟩
+  let E : ((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q ≃+ ℱ.H q :=
+    (cechComplexHomologyAddEquiv U ℱ q).trans (e.app F).addCommGroupIsoToAddEquiv
+  have hE (r : Γ(X, ⊤)) (x : ((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) :
+      E (r • x) = H.map (ℱ.smulHom r) q (E x) := by
+    have h := ConcreteCategory.congr_hom (e.hom.naturality (ObjectProperty.homMk
+      ((SheafOfModules.toSheaf X.ringCatSheaf).map (ℱ.smulHom r)) : F ⟶ F))
+        (cechComplexHomologyAddEquiv U ℱ q x)
+    refine (congrArg (e.app F).hom (cechComplexHomologyAddEquiv_smul U ℱ q r x)).trans ?_
+    exact h
+  exact ⟨{ toAddEquiv := E, map_smul' := fun r x ↦ (hE r x).trans (H.smul_eq_map ℱ q r _).symm }⟩
 
 /-- **Leray's theorem for schemes separated over an affine base.** Let `X` be separated over an
 affine base `S` and let `𝔘 = (U i)` be a covering of `X` by open affines. Then for every
@@ -345,6 +518,21 @@ theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : 
   nonempty_cechComplex_linearEquiv_H U
     (fun s hs ↦ IsAffineOpen.biInf (s : Set ι) s.finite_toSet hs (fun i _ ↦ hU i)) hU' ℱ q
 
+/-- **Cohomology along an affine morphism, for abelian sheaves.** Let `g : X ⟶ Y` be an affine
+morphism. Then `H^q(X, F) ≅ H^q(Y, g_* F)`, naturally in the abelian sheaves `F` on `X` which are
+Čech-acyclic on affine opens. Indeed `g_*` is exact on short exact sequences starting in such a
+sheaf, since these are surjective on the sections over the affine opens `g ⁻¹ᵁ V`. -/
+theorem nonempty_functorH_iso_pushforwardAb_of_isAffineHom {Y : Scheme.{u}} (g : X ⟶ Y)
+    [IsAffineHom g] (q : ℕ) :
+    Nonempty ((cechAcyclicOnAffines X).ι ⋙
+        Sheaf.functorH.{u} (Opens.grothendieckTopology X) q ≅
+      (cechAcyclicOnAffines X).ι ⋙ TopCat.Sheaf.pushforwardAb g.base ⋙
+        Sheaf.functorH.{u} (Opens.grothendieckTopology Y) q) :=
+  TopCat.Sheaf.nonempty_functorH_iso_pushforwardAb g.base (cechAcyclicOnAffines X)
+    (fun _ h ↦ cechAcyclicOnAffines_under_cokernel h)
+    (fun _ hS h ↦ TopCat.Sheaf.shortExact_map_pushforward hS Y.isBasis_affineOpens
+      fun _ hV ↦ surjective_app_of_cechAcyclicOnAffines hS h (IsAffineOpen.preimage hV g)) q
+
 section AffineMorphism
 
 variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -362,8 +550,40 @@ theorem nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom (g : X ⟶ Y)
     [g.IsOver (Spec (.of k))] [IsAffineHom g] (q : ℕ) :
     Nonempty ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ cohomologyFunctor k q ≅
       (SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ pushforward g ⋙
-        cohomologyFunctor k q) :=
-  sorry
+        cohomologyFunctor k q) := by
+  obtain ⟨e⟩ := nonempty_functorH_iso_pushforwardAb_of_isAffineHom g q
+  let Q := SheafOfModules.isQuasicoherent X.ringCatSheaf
+  let F (ℱ : Q.FullSubcategory) : (cechAcyclicOnAffines X).FullSubcategory :=
+    ⟨(SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj,
+      have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ.obj := ℱ.property
+      cechAcyclicOnAffines_of_isQuasicoherent ℱ.obj⟩
+  have hE {ℱ ℱ' : Q.FullSubcategory} (φ : ℱ ⟶ ℱ')
+      (x : Sheaf.H ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj) q) :
+      e.hom.app (F ℱ') (Sheaf.H.map ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom) q x) =
+        Sheaf.H.map ((TopCat.Sheaf.pushforwardAb g.base).map
+          ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom)) q (e.hom.app (F ℱ) x) := by
+    -- Elaborating the naturality square before unifying it with the goal avoids a timeout.
+    have h := NatTrans.naturality_apply e.hom (ObjectProperty.homMk
+      ((SheafOfModules.toSheaf X.ringCatSheaf).map φ.hom) : F ℱ ⟶ F ℱ') x
+    exact h
+  have hsmul (ℱ : Q.FullSubcategory) (c : k)
+      (x : Sheaf.H ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ.obj) q) :
+      e.hom.app (F ℱ) (Sheaf.H.map ((SheafOfModules.toSheaf X.ringCatSheaf).map
+        (smulHom ℱ.obj (globalSectionsRingHom k c))) q x) =
+      Sheaf.H.map ((SheafOfModules.toSheaf Y.ringCatSheaf).map
+        (smulHom ((pushforward g).obj ℱ.obj) (globalSectionsRingHom k c))) q
+          (e.hom.app (F ℱ) x) := by
+    rw [← Hom.appTop_globalSectionsRingHom k g c, ← pushforward_map_smulHom]
+    exact hE (ObjectProperty.homMk (smulHom ℱ.obj (g.appTop (globalSectionsRingHom k c)))) x
+  -- The components are `k`-linear: multiplication by `c` on `H^q(Y, g_* ℱ)` is induced by
+  -- multiplication by `g^♯ c` on `ℱ`.
+  refine ⟨NatIso.ofComponents (fun ℱ ↦ LinearEquiv.toModuleIso
+    ({ toAddEquiv := (e.app (F ℱ)).addCommGroupIsoToAddEquiv
+       map_smul' := fun c x ↦ ?_ } : (Q.ι ⋙ cohomologyFunctor k q).obj ℱ ≃ₗ[k]
+        (Q.ι ⋙ pushforward g ⋙ cohomologyFunctor k q).obj ℱ)) fun {ℱ ℱ'} φ ↦ ?_⟩
+  · exact hsmul ℱ c x
+  · ext x
+    exact hE φ x
 
 /-- **Cohomology along an affine morphism.** Let `g : X ⟶ Y` be an affine morphism of
 `k`-schemes. For every quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have

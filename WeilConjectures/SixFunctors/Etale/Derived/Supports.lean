@@ -148,6 +148,7 @@ Apply `Hom(K, -)` to the supported localization triangle in the bottom row: by a
 `Hom(K, Rj_* Lj^* L)` and `Hom(K[1], Rj_* Lj^* L)` vanish, which gives existence and
 uniqueness. -/
 theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint]
     [IsOpenImmersion j] (hij : Set.range i = (Set.range j)ᶜ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsZero ((L((j)^*[A])).obj K)) (φ : K ⟶ L) :
@@ -181,6 +182,7 @@ the counits `Rc_! Rc^! T ⟶ T` and `Rd_! Rd^! T ⟶ T` are isomorphisms. With `
 lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
     (c : Z₁ ⟶ X) (d : Z₂ ⟶ X) (a : U₁ ⟶ X) (b : U₂ ⟶ X)
     [IsClosedImmersion c] [IsClosedImmersion d] [IsOpenImmersion a] [IsOpenImmersion b]
+    [(R(c)_![A]).IsLeftAdjoint] [(R(d)_![A]).IsLeftAdjoint]
     (hca : Set.range c = (Set.range a)ᶜ) (hdb : Set.range d = (Set.range b)ᶜ)
     (hcd : Disjoint (Set.range c) (Set.range d))
     {T : DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -211,7 +213,7 @@ lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
 complement of `Z₁ ×_X U` in `U`. Then `L(a ≫ j)^* Ri₁_! M = 0`, the range of `a ≫ j` being
 disjoint from `Z₁`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek
-    (i₁ : Z₁ ⟶ X) [IsClosedImmersion i₁] (j : U ⟶ X)
+    (i₁ : Z₁ ⟶ X) [IsClosedImmersion i₁] [(R(i₁)_![A]).IsLeftAdjoint] (j : U ⟶ X)
     (M : DerivedCategory (Sheaf Z₁.smallEtaleTopology A)) :
     IsZero ((L(((pullback.snd i₁ j).openComplement.ι ≫ j)^*[A])).obj
       ((R(i₁)_![A]).obj M)) := by
@@ -246,6 +248,7 @@ This is `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero` for the ope
 `j : ∅ ⟶ U` of the empty open complement: the derived category of the empty scheme is zero, so
 `Lj^* K = 0`. -/
 theorem existsUnique_comp_counit_of_range_eq_univ (i : Z ⟶ U) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)} (φ : K ⟶ L) :
     ∃! ψ : K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L),
@@ -261,6 +264,7 @@ It is *defined* as `Classical.choose` of
 `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_range_eq_univ`; uniqueness is what makes
 the choice canonical. -/
 noncomputable def liftCounitOfRangeEqUniv (i : Z ⟶ U) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)} (φ : K ⟶ L) :
     K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L) :=
@@ -285,6 +289,9 @@ immersions commutes with tensor products, and these two complements cover the so
 factorisation is then `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`. -/
 theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
+    [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     ∃! ψ : ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
@@ -324,6 +331,9 @@ It is *defined* as `Classical.choose` of
 canonical. -/
 noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
+    [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     (M N : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     ((derivedTensor A U).obj ((R(i₁)_![A]).obj ((R(i₁)^![A]).obj M))).obj
@@ -342,6 +352,9 @@ inverse of the unitor. Degrees are carried by the coefficients: a class of degre
 with coefficients `M[a]`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
+    [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₁ i.openComplement.ι)_![A]).IsLeftAdjoint]
+    [(R(pullback.snd i₂ i.openComplement.ι)_![A]).IsLeftAdjoint]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
     {K M N : DerivedCategory (Sheaf U.smallEtaleTopology A)}
     (Δ : K ⟶ ((derivedTensor A U).obj K).obj K)
@@ -354,7 +367,8 @@ noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z
 /-- A class `K ⟶ (Ri_! Ri^! L)[n]` of degree `n` with supports, read as a class with
 coefficients `L[n]`, `K ⟶ Ri_! Ri^! (L[n])`, through the shift compatibility of `Ri_!` and
 `Ri^!`. -/
-noncomputable def shiftSupportedClass (i : Z ⟶ U) [IsClosedImmersion i] (n : ℤ)
+noncomputable def shiftSupportedClass (i : Z ⟶ U) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint] (n : ℤ)
     {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)}
     (α : K ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦n⟧) :
     K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj (L⟦n⟧)) :=
@@ -384,7 +398,8 @@ The source `Le^* Ri_! Ri^! L` is supported on `Z'`: its pullback to the open com
 `Z'` is `L(j' ≫ e)^* Ri_! Ri^! L`, which vanishes because `j' ≫ e` misses the range of `i`. The
 factorisation is then `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`. -/
 theorem existsUnique_supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
-    [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
     ∃! ψ : (L((e)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)) ⟶
@@ -412,7 +427,8 @@ It is *defined* as `Classical.choose` of
 `AlgebraicGeometry.Etale.existsUnique_supportedRestriction`; uniqueness is what makes the
 choice canonical. -/
 noncomputable def supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
-    [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     (L : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
     (L((e)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L)) ⟶
@@ -425,7 +441,8 @@ comparison `σ : K' ⟶ Le^* K` of sources:
 `AlgebraicGeometry.Etale.supportedRestriction`. For cohomology classes `σ` is the
 identification `Λ_U ≅ Le^* Λ_X` of the constant complexes. -/
 noncomputable def restrictSupportedClass (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
-    [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology A)}
     {K' L' : DerivedCategory (Sheaf U.smallEtaleTopology A)}
     (σ : K' ⟶ (L((e)^*[A])).obj K) (τ : (L((e)^*[A])).obj L ≅ L')
