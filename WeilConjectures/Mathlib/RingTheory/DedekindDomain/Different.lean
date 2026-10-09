@@ -567,6 +567,130 @@ theorem range_toFractionRing [IsDedekindDomain A] [IsDedekindDomain B] [Module.F
       rw [map_neg, map_smul, ← hδ, Algebra.smul_def, hc, Algebra.smul_def]
       linear_combination z * h0
 
+/-- If `Ω_{B/k}` is torsion-free, then `ω ↦ ω / dt : Ω_{B/k} → L` is injective. -/
+lemma toFractionRing_injective [IsDomain B] [Module.IsTorsionFree B Ω[B⁄k]] :
+    Function.Injective (toFractionRing (B := B) k K L b) := by
+  rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
+  intro ω hω
+  have hω' : map k k B L ω = 0 := by
+    rw [← (basisFractionRing k K L b).sum_repr (map k k B L ω), Fin.sum_univ_one]
+    have : (basisFractionRing k K L b).repr (map k k B L ω) 0 = 0 := hω
+    rw [this, zero_smul]
+  obtain ⟨⟨c, hc⟩, hcω⟩ := (IsLocalizedModule.eq_zero_iff (nonZeroDivisors B) (map k k B L)).1 hω'
+  exact (smul_eq_zero.1 hcω).resolve_left (nonZeroDivisors.ne_zero hc)
+
+/-- The comparison map `Ω_{B/k} → Hom_A(B, Ω_{A/k})`, `ω ↦ (b ↦ τ(b ω))`, of an `A`-linear map
+`τ : Ω_{B/k} → Ω_{A/k}`. -/
+noncomputable def traceComparison (τ : Ω[B⁄k] →ₗ[A] Ω[A⁄k]) (ω : Ω[B⁄k]) : B →ₗ[A] Ω[A⁄k] :=
+  τ ∘ₗ (LinearMap.toSpanSingleton B Ω[B⁄k] ω).restrictScalars A
+
+@[simp]
+lemma traceComparison_apply (τ : Ω[B⁄k] →ₗ[A] Ω[A⁄k]) (ω : Ω[B⁄k]) (y : B) :
+    traceComparison k τ ω y = τ (y • ω) := rfl
+
+/-- **The trace on Kähler differentials of a finite separable extension of Dedekind domains.**
+Under the hypotheses of `KaehlerDifferential.range_toFractionRing`, with `B` free over `A` and
+`Ω_{B/k}` torsion-free, there is an `A`-linear map `τ : Ω_{B/k} → Ω_{A/k}` with
+`τ(y · d a) = Tr_{B/A}(y) d a`, and `ω ↦ (y ↦ τ(y ω))` is a bijection
+`Ω_{B/k} ≃ Hom_A(B, Ω_{A/k})`. -/
+theorem exists_trace_bijective_traceComparison [IsDedekindDomain A] [IsDedekindDomain B]
+    [Module.Finite A B] [Module.Free A B] [Module.IsTorsionFree A B] [FiniteDimensional K L]
+    [Module.IsTorsionFree B Ω[B⁄k]] (hA : ¬ IsField A) (t : A) (ht : b 0 = D k A t)
+    (hsep : ∀ q : Ideal B, q.IsMaximal → Algebra.IsSeparable (A ⧸ q.under A) (B ⧸ q))
+    (hΩ : ∀ q : Ideal B, q.IsMaximal →
+      ∃ s₀ ∉ q, ∃ ω₀ : Ω[B⁄k], ∀ ω : Ω[B⁄k], ∃ c : B, s₀ • ω = c • ω₀) :
+    ∃ τ : Ω[B⁄k] →ₗ[A] Ω[A⁄k],
+      (∀ (y : B) (a : A), τ (y • D k B (algebraMap A B a)) = Algebra.trace A B y • D k A a) ∧
+      Function.Bijective (traceComparison k τ) := by
+  classical
+  have : Algebra.IsIntegral A B := Algebra.IsIntegral.of_finite A B
+  have : IsIntegralClosure B A L := IsIntegralClosure.of_isIntegrallyClosed B A L
+  have : IsLocalization (Algebra.algebraMapSubmonoid B (nonZeroDivisors A)) L :=
+    IsIntegralClosure.isLocalization A K L B
+  set ι := toFractionRing (B := B) k K L b
+  have hrange := range_toFractionRing k K L b hA t ht hsep hΩ
+  have hι := toFractionRing_injective (B := B) k K L b
+  have hinjA : Function.Injective (algebraMap A K) := IsFractionRing.injective A K
+  -- `Tr(ι ω) ∈ A`.
+  have hTr (ω : Ω[B⁄k]) : Algebra.trace K L (ι ω) ∈ LinearMap.range (Algebra.linearMap A K) := by
+    have hω : ι ω ∈ Submodule.traceDual A K (1 : Submodule B L) := hrange ▸ ⟨ω, rfl⟩
+    obtain ⟨a, ha⟩ := Submodule.mem_traceDual.1 hω 1 (Submodule.mem_one.2 ⟨1, map_one _⟩)
+    exact ⟨a, by simpa using ha⟩
+  let T : Ω[B⁄k] →ₗ[A] K := (Algebra.trace K L).restrictScalars A ∘ₗ ι.restrictScalars A
+  let τ₀ : Ω[B⁄k] →ₗ[A] A :=
+    (LinearEquiv.ofInjective (Algebra.linearMap A K) hinjA).symm.toLinearMap ∘ₗ
+      T.codRestrict _ hTr
+  have hτ₀ (ω : Ω[B⁄k]) : algebraMap A K (τ₀ ω) = Algebra.trace K L (ι ω) := by
+    have := (LinearEquiv.ofInjective (Algebra.linearMap A K) hinjA).apply_symm_apply
+      ⟨T ω, hTr ω⟩
+    exact congr_arg Subtype.val this
+  let τ : Ω[B⁄k] →ₗ[A] Ω[A⁄k] := LinearMap.toSpanSingleton A Ω[A⁄k] (D k A t) ∘ₗ τ₀
+  have hτ (ω : Ω[B⁄k]) : τ ω = τ₀ ω • D k A t := rfl
+  have hDa (a : A) : D k A a = basisDerivation k b a • D k A t := by
+    conv_lhs => rw [← b.sum_repr (D k A a), Fin.sum_univ_one, ht]
+    rfl
+  have hTrB (y : B) : Algebra.trace K L (algebraMap B L y) = algebraMap A K (Algebra.trace A B y) :=
+    Algebra.trace_localization A (nonZeroDivisors A) y
+  have hD0 : D k A t ≠ 0 := ht ▸ b.ne_zero 0
+  have : Module.Free A Ω[A⁄k] := .of_basis b
+  refine ⟨τ, fun y a ↦ ?_, ⟨fun ω ω' h ↦ ?_, fun φ ↦ ?_⟩⟩
+  · have h1 : τ₀ (y • D k B (algebraMap A B a)) = basisDerivation k b a * Algebra.trace A B y := by
+      apply hinjA
+      rw [hτ₀, map_smul, toFractionRing_D_algebraMap, Algebra.smul_def, ← map_mul, mul_comm,
+        ← Algebra.smul_def, hTrB, map_smul, smul_eq_mul, map_mul]
+    rw [hτ, h1, mul_comm, mul_smul, ← hDa]
+  · have h0 (y : B) : Algebra.trace K L (algebraMap B L y * ι (ω - ω')) = 0 := by
+      have h' := LinearMap.congr_fun h y
+      simp only [traceComparison_apply, hτ] at h'
+      have : τ₀ (y • (ω - ω')) = 0 := by
+        rw [smul_sub, map_sub, sub_eq_zero]
+        exact smul_left_injective A hD0 h'
+      rw [← Algebra.smul_def, ← map_smul, ← hτ₀, this, map_zero]
+    have hz : ι (ω - ω') = 0 := by
+      refine (traceForm_nondegenerate K L).1 _ fun w ↦ ?_
+      obtain ⟨⟨y, m⟩, hm⟩ :=
+        IsLocalization.surj (Algebra.algebraMapSubmonoid B (nonZeroDivisors A)) w
+      obtain ⟨a, ha, hma⟩ := m.2
+      have hK : algebraMap A K a ≠ 0 :=
+        (map_ne_zero_iff _ hinjA).2 (nonZeroDivisors.ne_zero ha)
+      rw [Algebra.traceForm_apply]
+      apply mul_left_injective₀ hK
+      dsimp only
+      rw [zero_mul, mul_comm, ← smul_eq_mul, ← map_smul, Algebra.smul_def, ← mul_assoc,
+        ← IsScalarTower.algebraMap_apply, IsScalarTower.algebraMap_apply A B L, hma, mul_comm _ w,
+        ← mul_assoc]
+      erw [hm]
+      exact h0 y
+    exact sub_eq_zero.1 (hι (by rw [hz, map_zero]))
+  · let φ₀ : B →ₗ[A] A := b.coord 0 ∘ₗ φ
+    have hloc : IsLocalizedModule (nonZeroDivisors A)
+        (IsScalarTower.toAlgHom A B L).toLinearMap :=
+      isLocalizedModule_iff_isLocalization.2 inferInstance
+    let φK : L →ₗ[K] K := IsLocalizedModule.mapExtendScalars (nonZeroDivisors A)
+      (IsScalarTower.toAlgHom A B L).toLinearMap (Algebra.linearMap A K) K φ₀
+    have hφK (y : B) : φK (algebraMap B L y) = algebraMap A K (φ₀ y) := by
+      simp only [φK, IsLocalizedModule.mapExtendScalars_apply_apply]
+      exact IsLocalizedModule.map_apply (nonZeroDivisors A) _ _ φ₀ y
+    let z := ((Algebra.traceForm K L).toDual (traceForm_nondegenerate K L)).symm φK
+    have hz (w : L) : Algebra.trace K L (z * w) = φK w := by
+      have := LinearMap.BilinForm.toDual_def (traceForm_nondegenerate K L) (m := z) (n := w)
+      rw [LinearEquiv.apply_symm_apply] at this
+      rw [← Algebra.traceForm_apply, ← this]
+    have hzC : z ∈ Submodule.traceDual A K (1 : Submodule B L) := by
+      rw [Submodule.mem_traceDual]
+      intro w hw
+      obtain ⟨y, rfl⟩ := Submodule.mem_one.1 hw
+      rw [Algebra.traceForm_apply, hz, hφK]
+      exact ⟨_, rfl⟩
+    rw [← hrange] at hzC
+    obtain ⟨ω, hω⟩ := hzC
+    refine ⟨ω, LinearMap.ext fun y ↦ ?_⟩
+    rw [traceComparison_apply, hτ]
+    have : τ₀ (y • ω) = φ₀ y :=
+      hinjA (by rw [hτ₀, map_smul, hω, Algebra.smul_def, mul_comm, hz, hφK])
+    rw [this]
+    conv_rhs => rw [← b.sum_repr (φ y), Fin.sum_univ_one, ht]
+    rfl
 end Different
 
 end KaehlerDifferential
