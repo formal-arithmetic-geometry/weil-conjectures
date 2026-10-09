@@ -24,8 +24,8 @@ abelian étale sheaves is an isomorphism, i.e. that `η_*` is fully faithful.
 Over the base change `W_K` of a quasi-compact quasi-separated étale `X`-scheme `W`, every section
 of `η^* η_* Y` comes from a section of `η_* Y` over `W` under the unit, by continuity of sections
 at the limit `Spec K = lim_U Spec Γ(X, U)`
-(`AlgebraicGeometry.Etale.unitComparison_app_surjective_of_isLimit`) and since `η_* Y` is pushed forward from every affine open `U`; by the triangle identity the
-counit is bijective over `W_K`. Every finite separable extension `E` of `K` spreads out to a
+(`AlgebraicGeometry.Etale.unitComparison_app_surjective_of_isLimit`) and since `η_* Y` is pushed
+forward from every affine open `U`; by the triangle identity the counit is bijective over `W_K`. Every finite separable extension `E` of `K` spreads out to a
 standard étale algebra over some `Γ(X, U)`, so the `W_K` cover the small étale site of `Spec K`.
 
 ## Main statements
