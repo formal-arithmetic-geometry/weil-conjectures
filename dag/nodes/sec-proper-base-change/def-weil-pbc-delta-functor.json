@@ -2,17 +2,61 @@
  "id": "def-weil-pbc-delta-functor",
  "kind": "definition",
  "title": "Cohomological delta-functors, their morphisms, and universal delta-functors",
- "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. A *(cohomological) $\\delta$-functor* $F=(F^n,\\delta_F)$ from $\\mathcal A$ to $\\mathcal B$ consists of (a) additive functors $F^n:\\mathcal A\\to\\mathcal B$, $n\\ge0$, and (b) for every short exact sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of $\\mathcal A$, morphisms $\\delta_{F,A\\to B\\to C}^n:F^n(C)\\to F^{n+1}(A)$, $n\\ge0$, such that (1) for every short exact sequence the sequence $0\\to F^0(A)\\xrightarrow{F^0(f)}F^0(B)\\xrightarrow{F^0(g)}F^0(C)\\xrightarrow{\\delta^0}F^1(A)\\xrightarrow{F^1(f)}F^1(B)\\to\\cdots\\to F^n(C)\\xrightarrow{\\delta^n}F^{n+1}(A)\\to\\cdots$ is exact, and (2) for every morphism $(a,b,c)$ of short exact sequences from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$ (morphisms $a:A\\to A'$, $b:B\\to B'$, $c:C\\to C'$ commuting with the maps of the sequences) one has $F^{n+1}(a)\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{F,A'\\to B'\\to C'}\\circ F^n(c)$ for all $n\\ge0$. A *morphism of $\\delta$-functors* $F\\to G$ is a family of natural transformations $t^n:F^n\\to G^n$, $n\\ge0$, such that $t^{n+1}_A\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{G,A\\to B\\to C}\\circ t^n_C$ for every short exact sequence and every $n\\ge0$. A $\\delta$-functor $F$ is *universal* if for every $\\delta$-functor $G$ from $\\mathcal A$ to $\\mathcal B$ and every natural transformation $t:F^0\\to G^0$ there is a unique morphism of $\\delta$-functors $(t^n)_{n\\ge0}:F\\to G$ with $t^0=t$.",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. A *(cohomological) $\\delta$-functor* $F=(F^n,\\delta_F)$ from $\\mathcal A$ to $\\mathcal B$ consists of (a) additive functors [def-weil-pbc-additive-functor] $F^n:\\mathcal A\\to\\mathcal B$, $n\\ge0$, and (b) for every short exact sequence [def-weil-pbc-exact-sequence] $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of $\\mathcal A$ (the morphisms $f,g$ being part of the data), morphisms $\\delta_{F,A\\to B\\to C}^n:F^n(C)\\to F^{n+1}(A)$ of $\\mathcal B$, $n\\ge0$, such that (1) for every short exact sequence the sequence $0\\to F^0(A)\\xrightarrow{F^0(f)}F^0(B)\\xrightarrow{F^0(g)}F^0(C)\\xrightarrow{\\delta^0}F^1(A)\\xrightarrow{F^1(f)}F^1(B)\\xrightarrow{F^1(g)}F^1(C)\\xrightarrow{\\delta^1}F^2(A)\\to\\cdots$ is exact [def-weil-pbc-exact-sequence], and (2) for every morphism $(a,b,c)$ of short exact sequences from $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ to $0\\to A'\\xrightarrow{f'}B'\\xrightarrow{g'}C'\\to0$ (morphisms $a:A\\to A'$, $b:B\\to B'$, $c:C\\to C'$ with $b\\circ f=f'\\circ a$ and $c\\circ g=g'\\circ b$) one has $F^{n+1}(a)\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{F,A'\\to B'\\to C'}\\circ F^n(c)$ for all $n\\ge0$. A *morphism of $\\delta$-functors* $F\\to G$ between $\\delta$-functors $F=(F^n,\\delta_F)$, $G=(G^n,\\delta_G)$ from $\\mathcal A$ to $\\mathcal B$ is a family of natural transformations $t^n:F^n\\to G^n$, $n\\ge0$, such that $t^{n+1}_A\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{G,A\\to B\\to C}\\circ t^n_C$ for every short exact sequence $0\\to A\\to B\\to C\\to0$ of $\\mathcal A$ and every $n\\ge0$. A $\\delta$-functor $F$ is *universal* if for every $\\delta$-functor $G$ from $\\mathcal A$ to $\\mathcal B$ and every natural transformation $t:F^0\\to G^0$ there is a unique morphism of $\\delta$-functors $(t^n)_{n\\ge0}:F\\to G$ with $t^0=t$.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section Tag 010P (section-cohomological-delta-functor): Definition Tag 010Q (definition-cohomological-delta-functor), Definition Tag 010R (definition-morphism-delta-functors), Definition Tag 010S (definition-universal-delta-functor)"
+  "place": "Section 010P (section-cohomological-delta-functor): Definitions 010Q, 010R, 010S; Definition 010E (exact sequences); Definition 00ZY (additive functors)"
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Remark: the $\\delta$-functor clauses agree with Stacks' Definition 010Q.* Data (a) is 010Q data (1): a collection $F^n:\\mathcal A\\to\\mathcal B$, $n\\ge0$, of *additive* functors (Stacks does require additivity, in the sense of 00ZY, which is [def-weil-pbc-additive-functor]). Data (b) is 010Q data (2): for every short exact sequence $0\\to A\\to B\\to C\\to0$ of $\\mathcal A$ (Stacks 010E: an exact complex, [def-weil-pbc-exact-sequence]) a collection $\\delta_{A\\to B\\to C}:F^n(C)\\to F^{n+1}(A)$, $n\\ge0$; Stacks writes $\\delta$ without the index $n$, the node writes $\\delta^n$; Stacks indexes $\\delta$ by the sequence $A\\to B\\to C$, i.e. by its morphisms, and the node says so explicitly. Axiom (1) is 010Q axiom (1): the displayed long sequence with unlabelled horizontal arrows, which are $F^n(f)$, $F^n(g)$, and diagonal arrows $\\delta_{A\\to B\\to C}$, is exact; 'exact' for this one-sided infinite sequence is the variant of 010E for $x_1\\to x_2\\to\\cdots$, i.e. a complex exact at every object after the initial $0$, which is how [def-weil-pbc-exact-sequence] reads; exactness at $F^0(A)$ says $F^0(f)$ is a monomorphism. Axiom (2) is 010Q axiom (2): for every morphism $(A\\to B\\to C)\\to(A'\\to B'\\to C')$ of short exact sequences the square with horizontal arrows $\\delta_{A\\to B\\to C}$, $\\delta_{A'\\to B'\\to C'}$ and vertical arrows $F^n(C)\\to F^n(C')$, $F^{n+1}(A)\\to F^{n+1}(A')$ commutes. Stacks does not define 'morphism of short exact sequences' in Section 010P; it is a commutative diagram, i.e. a triple $(a,b,c)$ with $bf=f'a$, $cg=g'b$, and the vertical arrows of the square are $F^n(c)$ and $F^{n+1}(a)$; the node now writes the two commutation conditions out. No discrepancy: the earlier text already had additivity, $n\\ge0$, the exact long sequence and the naturality square; only the two commutation conditions and the dependence of $\\delta$ on $f,g$ were made explicit, and the maps $F^1(g)$, $\\delta^1$ were added to the displayed sequence.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-additive-functor",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 010Q (definition-cohomological-delta-functor); Definition 010E (definition-exact), including the variant x_1 -> x_2 -> x_3 -> ...; Definition 00ZY (definition-preadditive)"
+   }
+  },
+  {
+   "text": "*Remark: morphisms and universality agree with Stacks' Definitions 010R and 010S.* 010R: for $\\delta$-functors $(F^n,\\delta_F)$, $(G^n,\\delta_G)$ from $\\mathcal A$ to $\\mathcal B$, a morphism is a collection of transformations of functors (natural transformations) $t^n:F^n\\to G^n$, $n\\ge0$, such that for every short exact sequence $0\\to A\\to B\\to C\\to0$ the square $F^n(C)\\xrightarrow{\\delta_F}F^{n+1}(A)$, $G^n(C)\\xrightarrow{\\delta_G}G^{n+1}(A)$ with vertical arrows $t^n$ (at $C$) and $t^{n+1}$ (at $A$) commutes: this is the node's $t^{n+1}_A\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{G,A\\to B\\to C}\\circ t^n_C$. 010S: $F$ is universal iff for every $\\delta$-functor $G$ and every morphism of functors $t:F^0\\to G^0$ there is a unique morphism of $\\delta$-functors $\\{t^n\\}_{n\\ge0}:F\\to G$ with $t=t^0$: the node's last sentence, word for word. Natural transformations are those of Mathlib (`CategoryTheory.NatTrans`); no node is needed for them.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 010R (definition-morphism-delta-functors); Definition 010S (definition-universal-delta-functor)"
+   }
+  },
+  {
+   "text": "*Remark: no claim is hidden in the definition.* The node only names data and conditions on them; it asserts no property. In particular it does not assert (i) the remark after 010Q that $F^0$ is left exact (a consequence of axiom (1): exactness of $0\\to F^0(A)\\to F^0(B)\\to F^0(C)$), (ii) that $\\delta$-functors with their morphisms form a category (identity $t^n=\\mathrm{id}$; composite $(s^n\\circ t^n)$, whose squares commute by pasting the two squares), or (iii) Lemma 010U, uniqueness of a universal $\\delta$-functor with given $F^0$ up to unique isomorphism, which is a lemma, not part of 010S. Neither user of the node, [lem-weil-pbc-effaceable-delta-functor-universal] (Stacks 010T) and [lem-weil-pbc-right-derived-universal-delta-functor], cites (i)-(iii) through this node; a later user that needs 010U must cite a statement node for it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "remark after Definition 010Q; Lemma 010U (lemma-uniqueness-universal-delta-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 010P: Definitions 010Q, 010R, 010S (with Definitions 010E and 00ZY for exact sequences and additive functors)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +85,38 @@
    "results": "only the comment CategoryTheory/Monoidal/Tor.lean:22 ('Possibly it's best to axiomatize delta functors') and the docstring of CategoryTheory/Triangulated/HomologicalFunctor.lean:41 (homological functors on triangulated categories, a different notion)",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no delta-functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "delta functor: sequence of functors with connecting homomorphisms natural in short exact sequences, universal delta functor",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality, δ_naturality_assoc (Mathlib.Algebra.Homology.HomologySequenceLemmas); CategoryTheory.ShortComplex.ShortExact.δ, comp_δ, epi_δ (Mathlib.Algebra.Homology.HomologySequence); ShortExact.δ_apply (Mathlib.Algebra.Homology.ConcreteCategory)",
+   "date": "2026-10-10",
+   "verdict": "no match: the connecting map of the homology long exact sequence of a short exact sequence of complexes and its naturality, i.e. the δ-functor axioms for the particular family H^n on complexes, not a δ-functor structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUniversal\"",
+   "results": "CategoryTheory.StructuredArrow.IsUniversal, CategoryTheory.CostructuredArrow.IsUniversal (+ .lift/.desc/.uniq/.hom_desc) (Mathlib.CategoryTheory.Comma.StructuredArrow.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: initial/terminal (co)structured arrows, not universal δ-functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of delta functors commuting with connecting morphisms; universal delta functor unique extension of a natural transformation in degree zero",
+   "results": "ComposableArrows.hom_ext_succ, CochainComplex.mappingCone.map_δ, DoldKan.natTransQ_app, Functor.mapDifferentialObject_map_f, DoldKan.natTransP, AlternatingFaceMapComplex.ε, HomotopyCategory.composableArrowsFunctor_map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'δ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/RightDerived.lean; grep -n 'homology_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologySequence.lean; grep -rn 'covariant_sequence_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Ext/",
+   "results": "RightDerived.lean: no δ (Functor.rightDerived has no connecting maps or long exact sequence in Mathlib; only isoRightDerivedObj, rightDerivedZeroIsoSelf, NatTrans.rightDerived); HomologySequence.lean:303/309/324 ShortComplex.ShortExact.homology_exact₁/₂/₃ (exactness of the homology sequence of a short exact sequence of complexes, with δ := ShortExact.δ, HomologySequence.lean); Ext/ExactSequences.lean: Ext.covariant_sequence_exact₁/₂/₃, contravariant_sequence_exact₁/₂/₃ (long exact Ext sequences)",
+   "date": "2026-10-10",
+   "verdict": "no match: the closest are the homology long exact sequence (ShortComplex.ShortExact.δ with homology_exact₁₂₃ and HomologySequence.δ_naturality) and the Ext long exact sequences; Mathlib has no δ-functor structure, no morphisms of δ-functors, no universality, and no connecting maps for Functor.rightDerived"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +141,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Definition of δ-functors, morphisms and universality as in Stacks 010Q/010R/010S; correct; unsplit."
+  "note": "Definition node verified clause by clause against Stacks Homology 010Q/010R/010S (three elementary remarks): additivity in the 00ZY sense (new definition leaf def-weil-pbc-additive-functor, Functor.Additive, checked), short exact sequences per 010E (new definition leaf def-weil-pbc-exact-sequence: ShortComplex.Exact / exact_iff_image_eq_kernel, ComposableArrows.Exact, ShortComplex.ShortExact, checked), morphism of short exact sequences written out, no hidden claims (F^0 left exact, the category of δ-functors, 010U are not asserted). Mathlib has no δ-functors."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-delta-functor",
+  "worker": "stage1",
+  "summary": "Checked clause by clause against Stacks homology.tex Section 010P: data (a),(b) and axioms (1),(2) = Definition 010Q (Stacks requires the F^n additive, as the node said; a morphism of short exact sequences is a commutative diagram (a,b,c), now written out as bf=f'a, cg=g'b; δ indexed by the sequence with its maps; the displayed long sequence completed with F^1(g), δ^1); morphisms = 010R; universality = 010S. No discrepancy of substance. No hidden claim: the left exactness of F^0 (remark after 010Q), the category of δ-functors and Lemma 010U are not asserted, and neither user uses them through this node. New statement dependencies, both Mathlib leaves: def-weil-pbc-additive-functor (Stacks 00ZY = CategoryTheory.Functor.Additive, exact) and def-weil-pbc-exact-sequence (Stacks 010E = ShortComplex.Exact via exact_iff_image_eq_kernel, ShortComplex.ShortExact, ComposableArrows.Exact); the DAG had no node for either. Mathlib searched three more ways for the δ-functor structure: none; the closest are ShortComplex.ShortExact.δ / homology_exact₁₂₃ / HomologySequence.δ_naturality and Ext.covariant_sequence_exact*; Functor.rightDerived (abelian) has no connecting maps in Mathlib. Source repository: no DeltaFunctor/deltaFunctor/universal δ-functor; the only IsUniversal hits are Kan-extension universality (RightExtension/LeftExtension.IsUniversal.op/unop in FromJoel/.../Derived/LeftDerived.lean, sorry-free), unrelated."
  }
 }

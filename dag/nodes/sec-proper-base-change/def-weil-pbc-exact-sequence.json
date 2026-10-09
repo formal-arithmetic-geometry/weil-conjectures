@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-exact-sequence",
+ "kind": "definition",
+ "title": "Exact sequences and short exact sequences in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. A sequence of morphisms $\\cdots\\to x_{i-1}\\xrightarrow{d_{i-1}}x_i\\xrightarrow{d_i}x_{i+1}\\to\\cdots$ of $\\mathcal A$ (finite, $x_1\\to\\cdots\\to x_n$, or infinite in one or both directions) is a *complex* if $d_i\\circ d_{i-1}=0$ for every two consecutive arrows; a complex is *exact at* an object $x_i$ that has an arrow in and an arrow out if $\\mathrm{Im}(d_{i-1})=\\mathrm{Ker}(d_i)$ as subobjects of $x_i$, and it is *exact* if it is exact at every such object. A *short exact sequence* is an exact complex $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$; equivalently $g\\circ f=0$, $f$ is a monomorphism, $g$ is an epimorphism and $\\mathrm{Im}(f)=\\mathrm{Ker}(g)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition Tag 010E (definition-exact), lines 715-742"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in an abelian category a sequence is exact iff image equals kernel; short exact sequence",
+   "results": "CategoryTheory.ShortComplex.exact_iff_image_eq_kernel (Mathlib.CategoryTheory.Abelian.Exact), CategoryTheory.ShortComplex.ShortExact, ShortComplex.ShortExact.exact (Mathlib.Algebra.Homology.ShortComplex.ShortExact), exact_iff_isIso_imageToKernel, exact_iff_epi_imageToKernel'",
+   "date": "2026-10-10",
+   "verdict": "match: ShortComplex.Exact with exact_iff_image_eq_kernel; ShortComplex.ShortExact"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact, CategoryTheory.Limits.imageSubobject, CategoryTheory.Limits.kernelSubobject",
+   "results": "CategoryTheory.ShortComplex.exact_iff_image_eq_kernel : S.Exact ↔ imageSubobject S.f = kernelSubobject S.g [Abelian C] (Mathlib.CategoryTheory.Abelian.Exact); Exact.isIso_imageToKernel; exact_iff_epi_imageToKernel; exact_iff_isIso_imageToKernel",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure Exact\\|structure ShortExact\\|exact_iff_image_eq_kernel\\|lemma exact_iff_mono\\|lemma exact_iff_epi' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/{Exact,ShortExact}.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Exact.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ExactSequence.lean",
+   "results": "ShortComplex.Exact (ShortComplex/Exact.lean:45, homology zero); ShortComplex.exact_iff_mono (:276, for S.f = 0), exact_iff_epi (:292, for S.g = 0); ShortComplex.ShortExact (ShortComplex/ShortExact.lean:35: exact, Mono f, Epi g); exact_iff_image_eq_kernel (Abelian/Exact.lean:94); ComposableArrows.Exact (ExactSequence.lean:128: a complex all of whose consecutive short complexes are exact)",
+   "date": "2026-10-10",
+   "verdict": "match, one Mathlib lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.Exact",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+  "how": "specializes in one line per clause: exactness at $x_i$ of $x_{i-1}\\to x_i\\to x_{i+1}$ is `ShortComplex.Exact` of that short complex by `CategoryTheory.ShortComplex.exact_iff_image_eq_kernel` (Mathlib/CategoryTheory/Abelian/Exact.lean, Abelian C); a finite exact sequence is `CategoryTheory.ComposableArrows.Exact` (Mathlib/Algebra/Homology/ExactSequence.lean), an infinite one is exactness of every consecutive short complex; a short exact sequence is `CategoryTheory.ShortComplex.ShortExact` (Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean: Exact, Mono f, Epi g), exactness at A and at C being Mono f and Epi g by `ShortComplex.exact_iff_mono` / `exact_iff_epi` (Mathlib/Algebra/Homology/ShortComplex/Exact.lean:276, 292)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-delta-functor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition leaf: ShortComplex.Exact with exact_iff_image_eq_kernel (Abelian/Exact.lean), ComposableArrows.Exact (ExactSequence.lean:128), ShortComplex.ShortExact (ShortExact.lean:35), exact_iff_mono/epi (Exact.lean:276/292); checked."
+ }
+}
