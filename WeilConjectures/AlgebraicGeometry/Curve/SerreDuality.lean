@@ -298,12 +298,27 @@ variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
 
 /-- **Trace identification along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
+`τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Ω¹_{X/k} ⟶ Hom(f_* 𝒪_X, Ω¹_{ℙ¹_k/k})`,
+`ω ↦ (a ↦ τ(a ω))`, is an isomorphism: the comparison `φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. Locally
+over `Spec R ⊆ ℙ¹_k` with `f⁻¹(Spec R) = Spec B` this is `Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`, the
+codifferent of the finite flat extension `R ⊆ B` of Dedekind domains, i.e. Grothendieck duality
+`f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`.
+
+(blueprint: `lem-sc-finite-duality`, the trace identification) -/
+theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+      IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
+  sorry
+
+/-- **Duality along a finite flat morphism to `ℙ¹`, comparison map.** Let `X` be a smooth curve
+over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
 `τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Hom(ℳ, Ω¹_{X/k}) ⟶ Hom(f_* ℳ, Ω¹_{ℙ¹_k/k})`,
-`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`. This is the combination of
-the adjunction `Hom(f_* ℳ, 𝒢) ≅ f_* Hom(ℳ, Hom(f_* 𝒪_X, 𝒢))` of the finite morphism `f` with
-the trace identification `Hom(f_* 𝒪_X, Ω¹_{ℙ¹}) ≅ f_* Ω¹_{X/k}` (the codifferent of a finite flat
-extension of discrete valuation rings), i.e. Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for
-`f`.
+`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`. For `ℳ = 𝒪_X` this is the
+trace identification `exists_isIso_pushforwardHomObjComparison_unit`; the general case follows
+since `ℳ` is a direct summand of a free module of finite rank over the affine opens `f⁻¹V`
+(`Modules.isIso_pushforwardHomObjComparison_of_isIso_unit`).
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
@@ -311,8 +326,9 @@ theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
       ∀ ℳ : X.Modules, ℳ.IsFiniteLocallyFree →
-        IsIso (Modules.pushforwardHomObjComparison f τ ℳ) :=
-  sorry
+        IsIso (Modules.pushforwardHomObjComparison f τ ℳ) := by
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f
+  exact ⟨τ, fun ℳ _ ↦ Modules.isIso_pushforwardHomObjComparison_of_isIso_unit hτ ℳ⟩
 
 /-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
