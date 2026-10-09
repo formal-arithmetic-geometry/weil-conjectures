@@ -77,7 +77,8 @@ variable (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)]
 /-- If `g` acts as the geometric Frobenius on a point `y` of the fibre of a constant cover, it
 does so on the image of `y` under any morphism of constant covers. -/
 lemma smul_fiber_map_eq_geometricFrobenius [IsNaturalSMul (fiber s) G]
-    {A B : FiniteEtaleAlgebra K} (f : A.1 →ₐ[K] B.1) (g : G) (y : (fiber s).obj (constantCover p B)) (h : g • y = geometricFrobenius p s B y) :
+    {A B : FiniteEtaleAlgebra K} (f : A.1 →ₐ[K] B.1) (g : G)
+    (y : (fiber s).obj (constantCover p B)) (h : g • y = geometricFrobenius p s B y) :
     g • (fiber s).map (constantCoverHom p f) y =
       geometricFrobenius p s A ((fiber s).map (constantCoverHom p f) y) := by
   rw [← IsNaturalSMul.naturality, h, fiber_map_constantCoverHom_geometricFrobenius]
