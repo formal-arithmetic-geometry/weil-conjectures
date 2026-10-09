@@ -1,26 +1,29 @@
 # Work queue
 
-566 items; claim with `tools/claim.py next <group> [--stage N]`.
+568 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (562)
+## Stage 1: nodes to split (564)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `def-weil-pbc-hypercohomology-filtrations` | 1 | none |
 | `def-weil-pbc-truncation-exact-couples` | 1 | none |
-| `lem-weil-pbc-exact-couple-differential` | 1 | none |
 | `lemma-weil-pbc-exact-couple-abutment` | 1 | none |
 | `lemma-weil-pbc-hypercohomology-convergence` | 1 | none |
 | `lemma-weil-pbc-prime-proper-base-change` | 1 | none |
 | `lemma-weil-pbc-torsion-assembly` | 1 | none |
-| `lem-sp-shift-identification` | 2 | none |
+| `lem-sp-exact-functor-couple` | 2 | none |
+| `lem-sp-truncation-couple-exact` | 2 | none |
+| `lem-weil-pbc-derived-functor-negative-vanishing` | 2 | none |
+| `lem-weil-pbc-derived-functor-truncation-iso` | 2 | none |
+| `prop-weil-pbc-inverse-image-exact` | 2 | none |
 | `thm-sp-truncation-e2` | 2 | none |
-| `lem-sp-truncation-couple-exact` | 3 | none |
-| `prop-weil-pbc-inverse-image-exact` | 3 | none |
+| `lem-sp-shift-identification` | 3 | none |
 | `def-weil-pbc-scheme-conventions` | 1001 | none |
 | `def-weil-pbc-torsion-etale-sheaf` | 1001 | none |
 | `def-weil-pbc-derived-inverse-image` | 1002 | none |
 | `def-weil-pbc-derived-square-iso` | 1002 | none |
+| `lem-weil-pbc-derived-exchange-triangulated` | 1002 | none |
+| `lem-weil-pbc-exact-functor-bounded-below` | 1002 | none |
 | `lem-weil-pbc-injective-module-direct-image-acyclic` | 1002 | none |
 | `lem-weil-pbc-reduction-projective-space` | 1002 | none |
 | `lem-weil-pbc-sheaf-flat-separator` | 1002 | sorry_here |
@@ -32,7 +35,6 @@
 | `prop-weil-pbc-proper-curve-sepclosed-invariance` | 1002 | rests_on_sorry |
 | `def-weil-pbc-symmetric-product-morphism` | 1003 | none |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1003 | none |
-| `lem-weil-pbc-exact-functor-bounded-below` | 1003 | none |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1003 | none |
 | `lem-weil-pbc-retract-supplied` | 1003 | none |
 | `lem-weil-pbc-symmetric-product-finite` | 1003 | none |
@@ -131,8 +133,8 @@
 | `def-weil-pbc-direct-image` | 3002 | none |
 | `def-weil-pbc-geometric-stalks` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
+| `def-weil-pbc-kinjective-resolutions` | 3002 | none |
 | `lemma-weil-pbc-torsion-filtered-union` | 3002 | none |
-| `def-weil-pbc-kinjective-resolutions` | 3003 | none |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 3003 | none |
 | `lem-weil-pbc-etale-finite-data-descent` | 3003 | none |
 | `lem-weil-pbc-etale-section-continuity` | 3003 | none |
@@ -386,25 +388,25 @@
 | `def-sp-convergence` | 6002 | none |
 | `def-sp-exact-couple` | 6002 | none |
 | `def-sp-filtration` | 6002 | none |
+| `def-sp-image-filtration` | 6002 | none |
+| `def-sp-kinjective-bridge` | 6002 | none |
 | `def-sp-spectral-sequence` | 6002 | none |
 | `def-sp-truncation-couple` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
 | `def-sp-abelian` | 6003 | none |
 | `def-sp-grothendieck-abelian` | 6003 | none |
-| `def-sp-image-filtration` | 6003 | none |
 | `def-sp-injective-resolutions` | 6003 | none |
-| `def-sp-kinjective-bridge` | 6003 | none |
 | `def-sp-left-exact-additive` | 6003 | none |
-| `lem-sp-kinjective-computes` | 6003 | none |
+| `lem-sp-long-exact-of-triangle` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
 | `def-sp-composite-acyclicity` | 6004 | none |
+| `def-sp-homological-functor` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
-| `lem-sp-long-exact-of-triangle` | 6004 | none |
+| `lem-sp-kinjective-computes` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `thm-sp-if-e1` | 6004 | none |
 | `def-sp-double-complex-total` | 6005 | none |
-| `def-sp-homological-functor` | 6005 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
 | `lem-sp-grothendieck-enough-injectives` | 6005 | none |
 | `lem-weil-pbc-finite-proper` | 6005 | none |
@@ -578,7 +580,7 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 576 nodes that wait for stage 1, 16 nodes that wait for a statement dependency.
+Not open yet: 578 nodes that wait for stage 1, 18 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

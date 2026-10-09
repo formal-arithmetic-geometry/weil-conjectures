@@ -1,0 +1,57 @@
+{
+ "id": "lem-weil-pbc-truncation-triangle",
+ "kind": "statement",
+ "title": "The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished",
+ "statement": "Let $\\mathcal A$ be an abelian category with derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category], cohomology functors $H^n$ and shift $[1]$, $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$. For a complex $K$ of $\\mathcal A$ and $q\\in\\mathbf Z$ let $\\tau_{\\leq q}K$ be the canonical truncation, the subcomplex $\\cdots\\to K^{q-2}\\to K^{q-1}\\to\\Ker(d^q_K)\\to0\\to\\cdots$ of $K$ (the truncation of the standard t-structure [def-sbc-standard-tstructure-derived-category]), so that $\\tau_{\\leq q-1}K\\subseteq\\tau_{\\leq q}K$, and let $H^q(K)[-q]$ be the complex with the single object $H^q(K)$ placed in degree $q$. Let $i_q:\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K$ be the inclusion and $j_q:\\tau_{\\leq q}K\\to H^q(K)[-q]$ the morphism of complexes which in degree $q$ is the projection $\\Ker(d^q_K)\\to H^q(K)$ and zero in the other degrees. Then there is a unique morphism $k_q:H^q(K)[-q]\\to(\\tau_{\\leq q-1}K)[1]$ in $D(\\mathcal A)$ such that\n$$\n \\tau_{\\leq q-1}K\\xrightarrow{\\,i_q\\,}\\tau_{\\leq q}K\\xrightarrow{\\,j_q\\,}H^q(K)[-q]\\xrightarrow{\\,k_q\\,}(\\tau_{\\leq q-1}K)[1]\n$$\nis a distinguished triangle of $D(\\mathcal A)$ (namely $k_q=\\delta\\circ\\bar j_q^{-1}$, where $\\delta$ is the boundary morphism of the distinguished triangle of the short exact sequence of complexes $0\\to\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\tau_{\\leq q}K/\\tau_{\\leq q-1}K\\to0$ and $\\bar j_q:\\tau_{\\leq q}K/\\tau_{\\leq q-1}K\\to H^q(K)[-q]$ is the quasi-isomorphism induced by $j_q$). The triangle is functorial in $K$: a morphism $K\\to L$ of $D(\\mathcal A)$ induces a morphism of triangles. If $K$ is bounded below, so are the three terms; in particular for $\\mathcal A=\\Ab(T_{\\Et})$ the triangle lies in $\\Dplus(T_{\\Et})$ [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Remark 08J5 (remark-truncation-distinguished-triangle, line 4076): the canonical distinguished triangle tau_{<=a}K -> tau_{<=a+1}K -> H^{a+1}(K)[-a-1] -> (tau_{<=a}K)[1], from the short exact sequence of truncations and the quasi-isomorphism to H^{a+1}(K)[-a-1]; here a=q-1"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'triangleLEGE_distinguished\\|def truncLE\\|natTransTruncLEOfLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; grep -n 'triangleω₁δ_distinguished\\|def triangleω₁δ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean",
+   "results": "TStructure.triangleLEGE_distinguished (TruncLEGT.lean:206, the triangle tau_{<=a}X -> X -> tau_{>=a+1}X ->); TStructure.triangleω₁δ and triangleω₁δ_distinguished (SpectralObject.lean:97, 124): for a <= b <= c in EInt the triangle tau_{[a,b)}X -> tau_{[a,c)}X -> tau_{[b,c)}X -> is distinguished, functorially in X; with (a,b,c)=(-inf,q,q+1) this is tau_{<=q-1}X -> tau_{<=q}X -> tau_{[q,q]}X ->",
+   "date": "2026-10-09",
+   "verdict": "generalization only up to an identification: Mathlib's triangle has third term tau_{>=q}tau_{<=q}X, not the complex H^q(X)[-q]; the isomorphism tau_{>=q}tau_{<=q}X = H^q(X)[-q] (an object of D(A) with cohomology only in degree q is its cohomology placed in degree q) is a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def .*[Ss]ingle.*Iso\\|isoSingle' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/; grep -n 'def triangleOfSES\\|triangleOfSES_distinguished' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/TruncLE*.lean",
+   "results": "DerivedCategory.triangleOfSES and triangleOfSES_distinguished (ShortExact.lean:72, the distinguished triangle of a short exact sequence of complexes); HomologicalComplex.truncLE (Embedding/TruncLE.lean) for complexes; singleFunctorIsoCompQ, singleFunctorCompHomologyFunctorIso, singleTriangleIso (single-degree complexes); no isomorphism between a complex with cohomology concentrated in one degree and the single complex of that cohomology, no statement of this triangle",
+   "date": "2026-10-09",
+   "verdict": "no match: the ingredients (triangle of a short exact sequence of complexes, canonical truncation of complexes, single complexes) are there, the statement is not; lem-sf-derived-truncation-triangle (Mathlib leaf) applied to tau_{<=q}K with b=q gives the triangle with third term tau_{>=q}tau_{<=q}K"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-truncation-exact-couples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
