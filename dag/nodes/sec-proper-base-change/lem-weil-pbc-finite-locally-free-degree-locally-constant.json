@@ -49,11 +49,49 @@
    "verdict": "not Mathlib; in the source repository the node follows in two lines from Mathlib's Scheme.Hom.isLocallyConstant_finrank and this closed lemma (no single declaration states it)"
   }
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because f is finite, flat and locally of finite presentation, the rank lemma applies to f. It gives a finite-valued rank function r_f on X, locally constant on X, and identifies r_f(x) with the dimension over kappa(x) of Gamma(Y_x, O_{Y_x}). Thus delta_f is finite everywhere and equals r_f.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 04MH together with Definition 02KA; the Mathlib rank API packages the stalk-rank/fibre-dimension identification"
+   }
+  },
+  {
+   "text": "For each d >= 0, let X_d = delta_f^{-1}(d). Since delta_f is locally constant, X_d is open; its complement is the union of the other fibres and is open, so X_d is also closed. The X_d are pairwise disjoint and cover X. For the restriction f_d over X_d, finite, flat, and locally finitely presented are preserved by restricting to an open subscheme, while the rank lemma's base-change statement gives rank d at every point of X_d. Hence f_d is finite locally free of degree d.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 04MH (the decomposition into open and closed subschemes on which the finite locally free morphism has fixed degree)"
+   }
+  },
+  {
+   "text": "The equality delta_f = r_f from Step 1 shows that the sets X_d and the degrees of the restricted morphisms in Step 2 are exactly those in the asserted equivalent formulation. Therefore delta_f is locally constant and the stated open-and-closed decomposition holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition 02KA and Lemma 04MH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-flat-rank-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Definition 02KA and Lemma 04MH; the fibre-dimension identification is supplied by the finite-flat rank lemma"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +111,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "worker": "C",
+  "summary": "Split into (1) application of the finite-flat rank lemma to identify fibre dimension with the finite locally constant rank, (2) the open-and-closed decomposition by rank and restriction to each component, and (3) the equivalence with the stated delta_f formulation. LeanSearch, Loogle/LeanFinder, and Mathlib grep searches were recorded above; only the generic rank lemma is a Mathlib leaf, while the scheme fibre-degree statement is not directly in Mathlib."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the three steps against lem-weil-pbc-finite-flat-rank-iso (reviewed Mathlib leaf: rank of f_*O_X, locally constant, base change, isomorphism iff rank 1): delta_f = r_f and the clopen decomposition follow; the C review restates the worker's steps rather than checking them against the source, which the new rule for remote groups will return from now on"
+ }
 }
