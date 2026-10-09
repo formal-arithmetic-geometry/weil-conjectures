@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-delta-functor",
+ "kind": "definition",
+ "title": "Cohomological delta-functors, their morphisms, and universal delta-functors",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. A *(cohomological) $\\delta$-functor* $F=(F^n,\\delta_F)$ from $\\mathcal A$ to $\\mathcal B$ consists of (a) additive functors $F^n:\\mathcal A\\to\\mathcal B$, $n\\ge0$, and (b) for every short exact sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of $\\mathcal A$, morphisms $\\delta_{F,A\\to B\\to C}^n:F^n(C)\\to F^{n+1}(A)$, $n\\ge0$, such that (1) for every short exact sequence the sequence $0\\to F^0(A)\\xrightarrow{F^0(f)}F^0(B)\\xrightarrow{F^0(g)}F^0(C)\\xrightarrow{\\delta^0}F^1(A)\\xrightarrow{F^1(f)}F^1(B)\\to\\cdots\\to F^n(C)\\xrightarrow{\\delta^n}F^{n+1}(A)\\to\\cdots$ is exact, and (2) for every morphism $(a,b,c)$ of short exact sequences from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$ (morphisms $a:A\\to A'$, $b:B\\to B'$, $c:C\\to C'$ commuting with the maps of the sequences) one has $F^{n+1}(a)\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{F,A'\\to B'\\to C'}\\circ F^n(c)$ for all $n\\ge0$. A *morphism of $\\delta$-functors* $F\\to G$ is a family of natural transformations $t^n:F^n\\to G^n$, $n\\ge0$, such that $t^{n+1}_A\\circ\\delta^n_{F,A\\to B\\to C}=\\delta^n_{G,A\\to B\\to C}\\circ t^n_C$ for every short exact sequence and every $n\\ge0$. A $\\delta$-functor $F$ is *universal* if for every $\\delta$-functor $G$ from $\\mathcal A$ to $\\mathcal B$ and every natural transformation $t:F^0\\to G^0$ there is a unique morphism of $\\delta$-functors $(t^n)_{n\\ge0}:F\\to G$ with $t^0=t$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Tag 010P (section-cohomological-delta-functor): Definition Tag 010Q (definition-cohomological-delta-functor), Definition Tag 010R (definition-morphism-delta-functors), Definition Tag 010S (definition-universal-delta-functor)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomological delta functor: family of additive functors with connecting morphisms for short exact sequences, long exact sequence",
+   "results": "groupCohomology.δ (RepresentationTheory.Homological.GroupCohomology.LongExactSequence), ShortComplex.ShortExact.singleδ (Algebra.Homology.DerivedCategory.SingleTriangle), DerivedCategory.triangleOfSESδ (DerivedCategory.ShortExact), ShortComplex.ShortExact.δ (Algebra.Homology.HomologySequence)",
+   "date": "2026-10-10",
+   "verdict": "no match: connecting maps of particular long exact sequences, no structure of a delta-functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DeltaFunctor\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "delta functor between abelian categories: sequence of additive functors F^n with connecting morphisms F^n(C) -> F^(n+1)(A) for every short exact sequence, natural, long exact",
+   "results": "ShortComplex.SnakeInput.composableArrowsFunctor, SnakeInput.functorL1', functorL2', functorL1 (Algebra.Homology.ShortComplex.SnakeLemma), HomologicalComplex.HomologySequence.composableArrows3Functor_obj",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'delta.?functor|δ-functor|effac|cohomological functor' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only the comment CategoryTheory/Monoidal/Tor.lean:22 ('Possibly it's best to axiomatize delta functors') and the docstring of CategoryTheory/Triangulated/HomologicalFunctor.lean:41 (homological functors on triangulated categories, a different notion)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no delta-functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-right-derived-universal-delta-functor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition of δ-functors, morphisms and universality as in Stacks 010Q/010R/010S; correct; unsplit."
+ }
+}

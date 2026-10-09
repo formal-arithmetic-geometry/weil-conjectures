@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-injective-resolution-lift-exists",
+ "kind": "statement",
+ "title": "A morphism lifts to a morphism of injective resolutions",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $h:X\\to Y$ a morphism of $\\mathcal A$, and $s_X:X\\to P^\\bullet$, $s_Y:Y\\to Q^\\bullet$ injective resolutions [def-sp-injective-resolutions] with $P^q=Q^q=0$ for $q<0$ (so $0\\to X\\xrightarrow{s_X}P^0\\to P^1\\to\\cdots$ and $0\\to Y\\xrightarrow{s_Y}Q^0\\to Q^1\\to\\cdots$ are exact). Then there is a morphism of complexes $\\varphi:P^\\bullet\\to Q^\\bullet$ with $\\varphi^0\\circ s_X=s_Y\\circ h$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 013P (lemma-morphisms-lift), part (2), applied to alpha = s_X : X[0] -> P (a quasi-isomorphism injective in every degree) and gamma = s_Y o h : X[0] -> Q (Q bounded below of injectives)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of objects lifts to a cochain map between injective resolutions commuting with the augmentation",
+   "results": "InjectiveResolution.Hom.mk, InjectiveResolution.Hom (Preadditive.Injective.Resolution), InjectiveResolution.desc (Abelian.Injective.Resolution), injectiveResolutions, InjectiveResolution.Hom.hom'",
+   "date": "2026-10-10",
+   "verdict": "match: InjectiveResolution.desc"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.desc",
+   "results": "InjectiveResolution.desc : (f : Z ⟶ Y) (I : InjectiveResolution Y) (J : InjectiveResolution Z) : J.cocomplex ⟶ I.cocomplex; desc_commutes; desc_commutes_zero : J.ι.f 0 ≫ (desc f I J).f 0 = f ≫ I.ι.f 0; descIdHomotopy; descCompHomotopy (Mathlib.CategoryTheory.Abelian.Injective.Resolution)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def desc\\|desc_commutes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean",
+   "results": "def desc (line 94), theorem desc_commutes (line 102), lemma desc_commutes_zero (line 108)",
+   "date": "2026-10-10",
+   "verdict": "match, source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.InjectiveResolution.desc",
+  "file": "Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean",
+  "how": "specializes in one line: for f : X ⟶ Y (Mathlib's arguments: desc f I J with J a resolution of the source X and I of the target Y), desc f I J : J.cocomplex ⟶ I.cocomplex is the morphism φ, and desc_commutes_zero (line 108) is φ^0 ∘ s_X = s_Y ∘ h, where InjectiveResolution Z is an ℕ-indexed cochain complex of injectives (i.e. zero in negative degrees) with ι.f 0 = s_Z and the exactness of 0 -> Z -> I^0 -> I^1 -> ..."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-right-derived-universal-delta-functor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf InjectiveResolution.desc (Abelian/Injective/Resolution.lean:94) with desc_commutes_zero (:108); checked."
+ }
+}

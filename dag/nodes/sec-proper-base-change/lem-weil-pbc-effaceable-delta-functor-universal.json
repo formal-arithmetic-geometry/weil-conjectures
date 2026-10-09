@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-effaceable-delta-functor-universal",
+ "kind": "statement",
+ "title": "An effaceable delta-functor is universal (Grothendieck)",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and $F=(F^n,\\delta_F)$ a $\\delta$-functor from $\\mathcal A$ to $\\mathcal B$ [def-weil-pbc-delta-functor]. Suppose that for every $n>0$ and every object $A$ of $\\mathcal A$ there is a monomorphism $u:A\\to B$ (depending on $A$ and $n$) such that $F^n(u):F^n(A)\\to F^n(B)$ is zero. Then $F$ is a universal $\\delta$-functor [def-weil-pbc-delta-functor]: for every $\\delta$-functor $G=(G^n,\\delta_G)$ from $\\mathcal A$ to $\\mathcal B$ and every natural transformation $t:F^0\\to G^0$ there is a unique morphism of $\\delta$-functors $(t^n)_{n\\ge0}:F\\to G$ with $t^0=t$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 010T (lemma-efface-implies-universal), with its proof (induction on n through the cokernel description F^{n+1}(A)=Coker(F^n(B)->F^n(C)); the verification that t^{n+1} is a natural transformation is 'omitted' in Stacks and must be written out at the split)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "effaceable delta functor is universal (Grothendieck)",
+   "results": "Functor.isUniversalOfIsRightKanExtension (CategoryTheory.Functor.KanExtension.Basic), LeftExtension.IsPointwiseLeftKanExtension.isUniversal, Functor.leftDerivedUnique, Functor.rightDerivedUnique (CategoryTheory.Functor.Derived), PresheafOfModules.Derivation.Universal",
+   "date": "2026-10-10",
+   "verdict": "no match: Kan-extension universality, not delta-functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal delta functor: effaceable cohomological functor from abelian category, unique extension of natural transformation in degree zero",
+   "results": "InjectiveResolution.extMk_hom, extMk_eq_zero_iff, extMk_zero, extMk_surjective (CategoryTheory.Abelian.Injective.Ext), Abelian.Ext.singleFunctor_map_comp_hom, Abelian.Ext.mapExactFunctor (DerivedCategory.Ext)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'delta.?functor|δ-functor|effac|cohomological functor' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only CategoryTheory/Monoidal/Tor.lean:22 (comment) and CategoryTheory/Triangulated/HomologicalFunctor.lean:41 (docstring)",
+   "date": "2026-10-10",
+   "verdict": "no match: no delta-functors, no effaceability in Mathlib; unsplit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-right-derived-universal-delta-functor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 010T (Grothendieck: effaceable ⇒ universal); correct; unsplit; the split must write out the naturality of t^{n+1} which Stacks omits."
+ }
+}

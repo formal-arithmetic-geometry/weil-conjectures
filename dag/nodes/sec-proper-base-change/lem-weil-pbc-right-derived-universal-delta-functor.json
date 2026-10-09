@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-right-derived-universal-delta-functor",
  "kind": "statement",
  "title": "Right derived functors form a universal delta-functor",
- "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, $\\mathcal B$ an abelian category [def-sp-abelian], $v:\\mathcal A\\to\\mathcal B$ a left exact additive functor and $R^nv$ ($n\\ge0$) its right derived functors computed by injective resolutions [def-sp-left-exact-additive], [def-sp-injective-resolutions]. A *$\\delta$-functor* from $\\mathcal A$ to $\\mathcal B$ (Stacks Homology, Definition 010Q) is a family $(G^n)_{n\\ge0}$ of additive functors $\\mathcal A\\to\\mathcal B$ together with, for every short exact sequence $0\\to A\\to B\\to C\\to0$ of $\\mathcal A$, morphisms $\\delta^n_G:G^n(C)\\to G^{n+1}(A)$ such that $0\\to G^0(A)\\to G^0(B)\\to G^0(C)\\xrightarrow{\\delta^0_G}G^1(A)\\to\\cdots$ is exact and such that for every morphism of short exact sequences $(a,b,c)$ from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$ one has $G^{n+1}(a)\\circ\\delta^n_G=\\delta'^n_G\\circ G^n(c)$; a morphism of $\\delta$-functors is a family of natural transformations $t^n:G^n\\to H^n$ with $t^{n+1}\\circ\\delta_G=\\delta_H\\circ t^n$; a $\\delta$-functor $G$ is *universal* (Homology, Definition 010S) if for every $\\delta$-functor $H$ and every natural transformation $t:G^0\\to H^0$ there is a unique morphism of $\\delta$-functors $(t^n)$ with $t^0=t$. Then there are morphisms $\\delta^n:R^nv(C)\\to R^{n+1}v(A)$, one for each short exact sequence, making $(R^nv,\\delta)$ a $\\delta$-functor, and this $\\delta$-functor is universal; moreover $R^0v\\cong v$ naturally (Stacks Derived Categories, Lemma 015B (2), (4), and Lemma 05TE; Homology, Lemma 010T: a $\\delta$-functor $G$ such that for every $n>0$ and every object $A$ there is a monomorphism $A\\to B$ with $G^n(A)\\to G^n(B)$ zero is universal).",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, $\\mathcal B$ an abelian category [def-sp-abelian], $v:\\mathcal A\\to\\mathcal B$ a left exact additive functor and $R^nv$ ($n\\ge0$) its right derived functors computed by injective resolutions [def-sp-left-exact-additive], [def-sp-injective-resolutions]. A *$\\delta$-functor* from $\\mathcal A$ to $\\mathcal B$ (Stacks Homology, Definition 010Q) [def-weil-pbc-delta-functor] is a family $(G^n)_{n\\ge0}$ of additive functors $\\mathcal A\\to\\mathcal B$ together with, for every short exact sequence $0\\to A\\to B\\to C\\to0$ of $\\mathcal A$, morphisms $\\delta^n_G:G^n(C)\\to G^{n+1}(A)$ such that $0\\to G^0(A)\\to G^0(B)\\to G^0(C)\\xrightarrow{\\delta^0_G}G^1(A)\\to\\cdots$ is exact and such that for every morphism of short exact sequences $(a,b,c)$ from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$ one has $G^{n+1}(a)\\circ\\delta^n_G=\\delta'^n_G\\circ G^n(c)$; a morphism of $\\delta$-functors is a family of natural transformations $t^n:G^n\\to H^n$ with $t^{n+1}\\circ\\delta_G=\\delta_H\\circ t^n$; a $\\delta$-functor $G$ is *universal* (Homology, Definition 010S) [def-weil-pbc-delta-functor] if for every $\\delta$-functor $H$ and every natural transformation $t:G^0\\to H^0$ there is a unique morphism of $\\delta$-functors $(t^n)$ with $t^0=t$. Then there are morphisms $\\delta^n:R^nv(C)\\to R^{n+1}v(A)$, one for each short exact sequence, making $(R^nv,\\delta)$ a $\\delta$-functor, and this $\\delta$-functor is universal; moreover $R^0v\\cong v$ naturally (Stacks Derived Categories, Lemma 015B (2), (4), and Lemma 05TE; Homology, Lemma 010T: a $\\delta$-functor $G$ such that for every $n>0$ and every object $A$ there is a monomorphism $A\\to B$ with $G^n(A)\\to G^n(B)$ zero is universal).",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Lemma Tag 015B (lemma-higher-derived-functors, line 7048) items (2) and (4), whose proof of (4) cites Lemma Tag 05TE (lemma-right-derived-delta-functor); homology.tex Definitions 010Q, 010S and Lemma Tag 010T (lemma-efface-implies-universal)"
@@ -10,11 +10,158 @@
  "stmt_deps": [
   "def-sp-abelian",
   "def-sp-left-exact-additive",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-delta-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the $R^nv$ are additive functors).** Every object $X$ has an injective resolution $s_X:X\\to P^\\bullet$ with $P^q=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). By [lem-weil-pbc-derived-functor-map-via-lift] each $R^nv$ is a functor $\\mathcal A\\to\\mathcal B$, with isomorphisms $\\iota^n_P:R^nv(X)\\to H^n(v(P^\\bullet))$ such that $R^nv(h)=(\\iota^n_Q)^{-1}H^n(v(\\varphi))\\iota^n_P$ for every morphism $h:X\\to Y$, resolution $s_Y:Y\\to Q^\\bullet$ and morphism of complexes $\\varphi:P^\\bullet\\to Q^\\bullet$ with $\\varphi^0s_X=s_Yh$; such a $\\varphi$ exists by [lem-weil-pbc-injective-resolution-lift-exists]. Additivity: for $h,h':X\\to Y$ with lifts $\\varphi,\\varphi'$, the sum $\\varphi+\\varphi'$ is a morphism of complexes with $(\\varphi^0+\\varphi'^0)s_X=s_Y(h+h')$, so it lifts $h+h'$; $v$ is additive [def-sp-left-exact-additive], so $v(\\varphi+\\varphi')=v(\\varphi)+v(\\varphi')$ termwise, and $H^n$ is additive on morphisms of complexes (it is induced on subquotients); hence $R^nv(h+h')=R^nv(h)+R^nv(h')$.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 015A (definition-higher-derived-functors: R^iF = H^i o RF, a composite of additive functors) and Lemma Tag 013P (lemma-morphisms-lift) for the lifts; Lemma Tag 015B (lemma-higher-derived-functors), whose (1)-(4) presuppose the functors R^iF"
+   }
+  },
+  {
+   "text": "**Step 2 ($R^0v\\cong v$ naturally).** For each $X$ fix a resolution $s_X:X\\to P_X^\\bullet$ as in Step 1. Since $v$ is left exact, [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) gives an isomorphism $\\eta_X:v(X)\\to H^0(v(P_X^\\bullet))=\\ker v(d^0)$, the factorization of $v(s_X)$ through $\\ker v(d^0)\\subset v(P_X^0)$. Put $\\epsilon_X=(\\iota^0_{P_X})^{-1}\\eta_X:v(X)\\xrightarrow{\\sim}R^0v(X)$. Naturality: for $h:X\\to Y$ choose a lift $\\varphi$ [lem-weil-pbc-injective-resolution-lift-exists]; $H^0(v\\varphi)$ is the restriction of $v(\\varphi^0)$ to the kernels, and $v(\\varphi^0)v(s_X)=v(\\varphi^0s_X)=v(s_Yh)=v(s_Y)v(h)$, so after composing with the monomorphism $\\ker v(d^0_Q)\\hookrightarrow v(Q^0)$ one gets $H^0(v\\varphi)\\eta_X=\\eta_Yv(h)$; with $R^0v(h)=(\\iota^0_{P_Y})^{-1}H^0(v\\varphi)\\iota^0_{P_X}$ [lem-weil-pbc-derived-functor-map-via-lift] this is $R^0v(h)\\epsilon_X=\\epsilon_Yv(h)$. So $\\epsilon:v\\to R^0v$ is a natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015B (lemma-higher-derived-functors) part (2), which is Lemma Tag 05TD (lemma-left-exact-higher-derived) part (3) and its proof: for 0 -> A -> K^0 -> K^1 exact, F left exact gives F(A) = H^0(F(K))"
+   }
+  },
+  {
+   "text": "**Step 3 (the distinguished triangle of a short exact sequence).** Let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be short exact in $\\mathcal A$. The complexes $A[0],B[0],C[0]$ concentrated in degree $0$ with the morphisms $f[0],g[0]$ form a sequence of complexes which is short exact in every degree (the given sequence in degree $0$, zero elsewhere), i.e. a short exact sequence of complexes [lem-weil-pbc-cochain-complexes-degreewise-exact] (2). By [lem-weil-pbc-complex-ses-triangle] there is $w_{A\\to B\\to C}:C[0]\\to A[0][1]$ in $D(\\mathcal A)$ such that $T_{A\\to B\\to C}=(A[0]\\xrightarrow{f}B[0]\\xrightarrow{g}C[0]\\xrightarrow{w}A[0][1])$ is distinguished, and for a morphism $(a,b,c)$ of short exact sequences $(a[0],b[0],c[0])$ is a morphism of short exact sequences of complexes, so $(a,b,c)$ (images under $Q$) is a morphism of triangles $T_{A\\to B\\to C}\\to T_{A'\\to B'\\to C'}$ [def-weil-pbc-triangles-with-shift]: $a[1]\\circ w=w'\\circ c$. All three vertices have cohomology only in degree $0$, so they lie in $D^+(\\mathcal A)$, a full triangulated subcategory [def-weil-pbc-bounded-derived-subcategories]; $T$ is a distinguished triangle there.",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-pbc-triangles-with-shift",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE (lemma-right-derived-delta-functor), proof: 'The functor A -> Comp^+(A), A |-> A[0] is exact. The functor Comp^+(A) -> D^+(A) is a delta-functor, see Lemma 0152 (lemma-derived-canonical-delta-functor)'"
+   }
+  },
+  {
+   "text": "**Step 4 (apply $Rv$).** Let $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ be the right derived functor of $v$ with its shift isomorphism $\\sigma$; by [lem-weil-pbc-derived-direct-image-triangulated] it is a triangulated functor, so $Rv(T)=(Rv(A[0])\\xrightarrow{Rv f}Rv(B[0])\\xrightarrow{Rv g}Rv(C[0])\\xrightarrow{\\sigma_{A[0]}\\circ Rv(w)}Rv(A[0])[1])$ is distinguished in $D^+(\\mathcal B)$, hence in $D(\\mathcal B)$. For a morphism $(a,b,c)$ of short exact sequences, $(Rv\\,a,Rv\\,b,Rv\\,c)$ is a morphism of triangles $Rv(T)\\to Rv(T')$ [def-weil-pbc-triangles-with-shift]: the first two squares commute by functoriality of $Rv$, and the third by Step 3 and naturality of $\\sigma$: $\\sigma_{A'[0]}Rv(w')Rv(c)=\\sigma_{A'[0]}Rv(a[1])Rv(w)=(Rv\\,a)[1]\\sigma_{A[0]}Rv(w)$.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE, proof: 'The functor RF : D^+(A) -> D^+(B) is exact'; Lemma Tag 0159 (lemma-right-derived-properties) parts (1), (3), (4); Lemma Tag 05TI (lemma-enough-injectives-right-derived): RF everywhere defined"
+   }
+  },
+  {
+   "text": "**Step 5 (the connecting maps and the long exact sequence).** Apply the long exact cohomology sequence of a distinguished triangle of $D(\\mathcal B)$ [lem-sf-derived-homology-long-exact], with connecting maps $\\partial^n:H^n(Rv(C[0]))\\to H^{n+1}(Rv(A[0]))$ induced by the third morphism $\\sigma_{A[0]}Rv(w)$ through $H^{n+1}(X)=H^n(X[1])$ as in [lem-weil-pbc-derived-cohomology-ladder], to $Rv(T)$: the sequence $\\cdots\\to H^n(Rv(A[0]))\\to H^n(Rv(B[0]))\\to H^n(Rv(C[0]))\\xrightarrow{\\partial^n}H^{n+1}(Rv(A[0]))\\to\\cdots$ is exact. By [lem-sp-derived-functor-single-identification] there are isomorphisms $\\theta^n_X:H^n(Rv(X[0]))\\to R^nv(X)$, $n\\ge0$, natural in $X$; naturality for $f$ and $g$ gives $\\theta^n_BH^n(Rv f)=R^nv(f)\\theta^n_A$ and $\\theta^n_CH^n(Rv g)=R^nv(g)\\theta^n_B$. Define $\\delta^n_{A\\to B\\to C}:=\\theta^{n+1}_A\\circ\\partial^n\\circ(\\theta^n_C)^{-1}:R^nv(C)\\to R^{n+1}v(A)$. The $\\theta$'s then form an isomorphism from the part in degrees $\\ge0$ of the exact sequence above to $R^0v(A)\\to R^0v(B)\\to R^0v(C)\\xrightarrow{\\delta^0}R^1v(A)\\to\\cdots\\xrightarrow{\\delta^n}R^{n+1}v(A)\\to\\cdots$, so the latter is exact at every term from $R^0v(B)$ on (exactness at a term is preserved by an isomorphism of sequences).",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE (1), proof: 'the functor H^0 : D^+(B) -> B is a homological functor ... Hence we get the structure of a delta-functor from Lemma 05SR (lemma-compose-delta-functor-homological) and Lemma 0151 (lemma-exact-compose-delta-functor)'; Lemma Tag 015B (1) and Definition Tag 015A (R^iF = H^i o RF)"
+   }
+  },
+  {
+   "text": "**Step 6 (the start $0\\to R^0v(A)\\to R^0v(B)$).** By Step 2, $R^0v(f)=\\epsilon_Bv(f)\\epsilon_A^{-1}$. As $f$ is a kernel of $g$ and $v$ is left exact (preserves kernels) [def-sp-left-exact-additive], $v(f)$ is a kernel of $v(g)$, in particular a monomorphism; hence $R^0v(f)$ is a monomorphism and the sequence of Step 5 preceded by $0$ is exact.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TD (lemma-left-exact-higher-derived) proof of (2): 0 -> R^0F(A) -> R^0F(B) -> R^0F(C) is exact; Homology Definition 010Q axiom (1)"
+   }
+  },
+  {
+   "text": "**Step 7 (naturality of $\\delta$).** Let $(a,b,c)$ be a morphism from $0\\to A\\to B\\to C\\to0$ to $0\\to A'\\to B'\\to C'\\to0$. By Step 4, $(Rv\\,a,Rv\\,b,Rv\\,c)$ is a morphism of distinguished triangles $Rv(T)\\to Rv(T')$, so by [lem-weil-pbc-derived-cohomology-ladder] $H^{n+1}(Rv\\,a)\\circ\\partial^n=\\partial'^n\\circ H^n(Rv\\,c)$. Naturality of $\\theta$ [lem-sp-derived-functor-single-identification] for $a$ (degree $n+1$) and $c$ (degree $n$) turns this into $R^{n+1}v(a)\\circ\\delta^n_{A\\to B\\to C}=\\delta^n_{A'\\to B'\\to C'}\\circ R^nv(c)$.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE (1) (the delta-functor structure includes compatibility with morphisms of short exact sequences, Homology Definition 010Q (2)); Lemma Tag 0152 (functoriality of the triangle)"
+   }
+  },
+  {
+   "text": "**Step 8 ($\\delta$-functor).** By Step 1 the $R^nv$ are additive functors; Steps 5 and 6 give axiom (1) and Step 7 axiom (2) of a $\\delta$-functor [def-weil-pbc-delta-functor]. So $(R^nv,\\delta)_{n\\ge0}$ is a $\\delta$-functor from $\\mathcal A$ to $\\mathcal B$.",
+   "uses": [
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE part (1)"
+   }
+  },
+  {
+   "text": "**Step 9 (effaceability).** Let $n>0$ and $A\\in\\mathcal A$. As $\\mathcal A$ has enough injectives there is a monomorphism $u:A\\to I$ with $I$ injective [def-sp-injective-resolutions]. By [lem-weil-pbc-derived-functor-injective-vanishing] $R^nv(I)=0$, so $R^nv(u):R^nv(A)\\to R^nv(I)=0$ is the zero morphism.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015B part (3) ('injective objects are acyclic'); Lemma Tag 05TE (2) hypothesis 'every object is a subobject of a right acyclic object', with Lemma Tag 015C (lemma-F-acyclic) giving R^iF(I)=0 for i>0 on acyclics"
+   }
+  },
+  {
+   "text": "**Step 10 (universality).** By Steps 8 and 9 the $\\delta$-functor $(R^nv,\\delta)$ satisfies the hypothesis of [lem-weil-pbc-effaceable-delta-functor-universal] (for every $n>0$ and every $A$ a monomorphism $u$ with $R^nv(u)=0$), hence it is universal. Together with Step 2 ($R^0v\\cong v$) this proves the statement.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05TE part (2), proof: 'Part (2) follows from Homology, Lemma 010T (lemma-efface-implies-universal) and the description of acyclics in Lemma 015C'; Lemma Tag 015B part (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-pbc-triangles-with-shift",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-sp-derived-functor-single-identification",
+  "def-weil-pbc-delta-functor",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-effaceable-delta-functor-universal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015B (lemma-higher-derived-functors) parts (2)-(4), proved by Lemma Tag 05TD (3), Lemma Tag 05TE (lemma-right-derived-delta-functor) and its proof (delta-functor structure through D^+, universality by Homology Lemma Tag 010T), and Lemma Tag 015C; homology.tex Definitions 010Q-010S and Lemma 010T"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +183,45 @@
    "results": "only the comment Mathlib/CategoryTheory/Monoidal/Tor.lean:22 ('Possibly it's best to axiomatize delta functors'); no connecting morphism for Functor.rightDerived",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no delta-functors; unsplit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "Functor.rightDerived, rightDerivedZeroIsoSelf, isZero_rightDerived_obj_injective_succ, toRightDerivedZero, NatTrans.rightDerived, rightDerived_map_eq, InjectiveResolution.isoRightDerivedObj (+naturality), toRightDerivedZero_eq (all Mathlib.CategoryTheory.Abelian.RightDerived); nothing about short exact sequences",
+   "date": "2026-10-10",
+   "verdict": "no match for the delta-functor; R^0 iso (rightDerivedZeroIsoSelf) and injective vanishing are the leaves already recorded on lem-weil-pbc-left-exact-injective-resolution-degree-zero and lem-weil-pbc-derived-functor-injective-vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.ShortComplex.ShortExact",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no long exact sequence of Functor.rightDerived in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connecting homomorphism of right derived functors of a short exact sequence, R^n F C to R^{n+1} F A, long exact sequence",
+   "results": "ShortComplex.ShortExact.singleδ (DerivedCategory.SingleTriangle), ShortComplex.ShortExact.δ (HomologySequence), Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, ...Yoneda... (DerivedCategory.Ext.ExactSequences), δ_apply, δ_apply' (Homology.ConcreteCategory)",
+   "date": "2026-10-10",
+   "verdict": "no match: only Ext and complexes; the triangle singleδ is the leaf of lem-sf-derived-ses-triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of right derived functors for a short exact sequence, connecting morphism natural",
+   "results": "ShortExact.singleδ, DerivedCategory.triangleOfSESδ, Functor.rightDerived_map_eq, Functor.toRightDerivedZero, InjectiveResolution.isoRightDerivedObj_(hom|inv)_naturality, NatTrans.rightDerived_comp",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'δ\\|shortExact\\|ShortExact' Mathlib/CategoryTheory/Abelian/RightDerived.lean Mathlib/CategoryTheory/Abelian/LeftDerived.lean; sed -n 1,60p Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "results": "no hits in RightDerived/LeftDerived; RightDerivedFunctorPlus.lean defines rightDerivedFunctorPlus with 'TODO(@joelriou): show that this functor is triangulated and refactor the definition of Functor.rightDerived'",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has neither the triangulated R^+F nor the long exact sequence of rightDerived"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +241,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-right-derived-universal-delta-functor",
+  "worker": "stage1",
+  "summary": "Checked every tag in derived.tex/homology.tex: 015B = lemma-higher-derived-functors (items (2) R^0F=F via 05TD, (3) injectives acyclic, (4) universal delta-functor via 05TE), 05TE = lemma-right-derived-delta-functor, 010Q/010R/010S/010T as cited; the statement's citations are correct (only the def node of delta-functors was added to it). Split along Stacks' own route (05TE), not the horseshoe: delta^n is H^n of R v applied to the triangle A[0]->B[0]->C[0]->A[0][1] of Lemma 0152, transported by the natural iso H^n(Rv(X[0])) = R^nv(X); exactness and naturality then come from the long exact sequence of a triangle and its ladder, with no independence-of-resolution argument needed. Ten steps: additivity of R^nv (map-via-lift + new Mathlib leaf lem-weil-pbc-injective-resolution-lift-exists, Stacks 013P(2), InjectiveResolution.desc); R^0v = v naturally (leaf degree-zero node + lifts); triangle (leaves complex-ses-triangle, degreewise-exact; D^+ subcategory); Rv triangulated (closed node lem-weil-pbc-derived-direct-image-triangulated); LES and delta (leaf lem-sf-derived-homology-long-exact, leaf ladder, closed lem-sp-derived-functor-single-identification); start of the sequence (left exactness, elementary); naturality (ladder); delta-functor (elementary); effaceability (leaf injective-vanishing); universality (new unsplit lem-weil-pbc-effaceable-delta-functor-universal, Homology 010T). New def node def-weil-pbc-delta-functor (010Q-010S, unsplit, not in Mathlib). Mathlib: no delta-functors, no long exact sequence for Functor.rightDerived (rightDerivedFunctorPlus not yet triangulated, TODO in Mathlib). The source repository has the sorry-free CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_delta_exact (exactness at R^qF(C) and R^{q+1}F(A) only, existential delta, no naturality): a partial cover by the same route, not attached."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Ten steps along Stacks 015B via the derived category (05TE), all tags confirmed: R^n v additive and R^0 v ≅ v from the reviewed resolution nodes plus the new leaf lem-weil-pbc-injective-resolution-lift-exists (InjectiveResolution.desc :94, desc_commutes_zero :108; checked), connecting maps from the triangle of a short exact sequence and the triangulated Rv (closed nodes), naturality from the ladder, effaceability from injective vanishing, universality from the new 010T node (unsplit; the naturality of t^{n+1} omitted by Stacks is flagged for its split). New definition node def-weil-pbc-delta-functor (010Q/010R/010S). Note: the δ of this item (triangle) and the δ of lem-weil-pbc-derived-functor-long-exact (horseshoe) are not proved equal; lead_note added to def-weil-pbc-sites-and-cohomology."
+ }
 }
