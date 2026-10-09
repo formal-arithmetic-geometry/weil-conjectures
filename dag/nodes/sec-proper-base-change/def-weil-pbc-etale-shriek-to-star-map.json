@@ -2,7 +2,7 @@
  "id": "def-weil-pbc-etale-shriek-to-star-map",
  "kind": "definition",
  "title": "The canonical map from extension by zero to direct image for a finite etale morphism",
- "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring and $M$ a sheaf of $\\Lambda_U$-modules on $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. Let $P_M$ be the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$ on $X_{\\Et}$ and $\\pi_!M=P_M^\\#$ its sheafification as a presheaf of $\\Lambda_X$-modules, the extension by zero of [def-weil-pbc-etale-sum-extension], with sheafification map $\\eta_M:P_M\\to\\pi_!M$ [def-weil-presheaf-modules-sheafification]; let $\\pi_*M$ be the direct image, $(\\pi_*M)(V)=M(V\\times_XU)$ [def-weil-pbc-direct-image], a sheaf of $\\Lambda_X$-modules; and let $c^p_M:P_M\\to\\pi_*M$ be the morphism of presheaves of $\\Lambda$-modules of [lem-weil-pbc-etale-graph-section-extension-map] (sending $s\\in M(V,\\varphi)$ to the unique section of $M(V\\times_XU)$ that pulls back to $s$ along the graph $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi)$ and vanishes off $\\Gamma_\\varphi(V)$).\n\nThe *canonical map from extension by zero to direct image* is the unique morphism of sheaves of $\\Lambda_X$-modules\n$$\nc_M:\\pi_!M\\longrightarrow\\pi_*M\\qquad\\text{with}\\qquad c_M\\circ\\eta_M=c^p_M,\n$$\ngiven by the universal property of sheafification. It is natural in $M$: for $\\alpha:M\\to M'$, $\\pi_*\\alpha\\circ c_M=c_{M'}\\circ\\pi_!\\alpha$, since both sides composed with $\\eta_M$ equal $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$ (naturality of $c^p$ and of $\\eta$) and the factorization through $\\eta_M$ is unique. (Stacks constructs the same map for every separated etale $\\pi$; only the finite etale case is used here.)",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring and $M$ a sheaf of $\\Lambda_U$-modules on $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. Let $P_M$ be the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$ on $X_{\\Et}$ and $\\pi_!M=P_M^\\#$ its sheafification as a presheaf of $\\Lambda_X$-modules, $\\Lambda_X$ the constant sheaf of rings [def-weil-pbc-constant-sheaf] acting on $P_M$ as in [lem-weil-pbc-etale-graph-section-extension-map-linear](2), the extension by zero of [def-weil-pbc-etale-sum-extension], with sheafification map $\\eta_M:P_M\\to\\pi_!M$ [def-weil-presheaf-modules-sheafification]; let $\\pi_*M$ be the direct image, $(\\pi_*M)(V)=M(V\\times_XU)$ [def-weil-pbc-direct-image], a sheaf of $\\Lambda_X$-modules with $\\Lambda_X$ acting through $\\gamma:\\Lambda_X\\to\\pi_*\\Lambda_U$ [prop-weil-pbc-inverse-image-modules-exact](3); and let $c^p_M:P_M\\to\\pi_*M$ be the morphism of presheaves of $\\Lambda$-modules of [lem-weil-pbc-etale-graph-section-extension-map], which is a morphism of presheaves of $\\Lambda_X$-modules by [lem-weil-pbc-etale-graph-section-extension-map-linear](3) (sending $s\\in M(V,\\varphi)$ to the unique section of $M(V\\times_XU)$ that pulls back to $s$ along the graph $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi)$ and vanishes off $\\Gamma_\\varphi(V)$).\n\nThe *canonical map from extension by zero to direct image* is the unique morphism of sheaves of $\\Lambda_X$-modules\n$$\nc_M:\\pi_!M\\longrightarrow\\pi_*M\\qquad\\text{with}\\qquad c_M\\circ\\eta_M=c^p_M,\n$$\ngiven by the universal property of sheafification. It is natural in $M$: for $\\alpha:M\\to M'$, $\\pi_*\\alpha\\circ c_M=c_{M'}\\circ\\pi_!\\alpha$, since both sides composed with $\\eta_M$ equal $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$ (naturality of $c^p$ and of $\\eta$) and the factorization through $\\eta_M$ is unique. (Stacks constructs the same map for every separated etale $\\pi$; only the finite etale case is used here.)",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517): 'Sheafification of this map will be the desired map j_!F -> j_*F', on abelian sheaves and sheaves of Lambda-modules; the map of Lemma 03S7 (lemma-shriek-equals-star-finite-etale, line 11571)"
@@ -16,11 +16,93 @@
   "def-weil-pbc-etale-sum-extension",
   "def-weil-presheaf-modules-sheafification",
   "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-graph-section-extension-map",
+  "def-weil-pbc-constant-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-graph-section-extension-map-linear"
+ ],
+ "proof": [
+  {
+   "text": "*The objects are defined.* $P_M$ is the presheaf of [def-weil-pbc-etale-sum-extension] for $v=\\pi$, a presheaf of $\\Lambda$-modules on $X_{\\Et}$; with $f\\in\\Lambda_X(V)$ acting on the summand $M(V,\\varphi)$ through the ring map $\\theta_{V,\\varphi}=\\Lambda_U(\\Gamma_\\varphi)\\circ\\gamma_V:\\Lambda_X(V)\\to\\Lambda_U(V,\\varphi)$ it is a presheaf of $\\Lambda_X$-modules [lem-weil-pbc-etale-graph-section-extension-map-linear](2). Hence its sheafification $\\eta_M:P_M\\to\\pi_!M=P_M^\\#$ as a presheaf of $\\Lambda_X$-modules exists, $\\pi_!M$ is a sheaf of $\\Lambda_X$-modules and $\\eta_M$ is $\\Lambda_X$-linear [def-weil-presheaf-modules-sheafification] (sheafification of abelian presheaves exists on $X_{\\Et}$, which is what that node needs). The direct image $\\pi_*M$, $(\\pi_*M)(V)=M(V_U,q_V)$ [def-weil-pbc-direct-image], is a sheaf of $\\Lambda_X$-modules with $f\\in\\Lambda_X(V)$ acting by $\\gamma_V(f)$ [prop-weil-pbc-inverse-image-modules-exact](3), an object of $\\Mod(\\Lambda_X)$ [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-graph-section-extension-map-linear",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof, first paragraph: 'Sheafification of this map will be the desired map'; sheafification of presheaves of modules: literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules, line 815); module structure on the sum presheaf: sites-modules.tex Lemma 03DI (lemma-extension-by-zero, line 2058)"
+   }
+  },
+  {
+   "text": "*The presheaf map is $\\Lambda_X$-linear.* By [lem-weil-pbc-etale-graph-section-extension-map](3), $c^p_M:P_M\\to\\pi_*M$, $c^p_{M,V}((s_\\varphi)_\\varphi)=\\sum_\\varphi e_\\varphi(s_\\varphi)$, is a morphism of presheaves of $\\Lambda$-modules, i.e. its components commute with the restriction maps; by [lem-weil-pbc-etale-graph-section-extension-map-linear](3) each component $c^p_{M,V}$ is moreover $\\Lambda_X(V)$-linear for the structures of step 1. So $c^p_M$ is a morphism of presheaves of $\\Lambda_X$-modules from $P_M$ to (the presheaf underlying) the sheaf of $\\Lambda_X$-modules $\\pi_*M$. (Stacks proves 0F4L for abelian sheaves only and asserts the $\\Lambda$-module case; this step and the cited node are the $\\Lambda$-module case.)",
+   "uses": [
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "lem-weil-pbc-etale-graph-section-extension-map-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof, first paragraph: 'Sheafification of this map will be the desired map'; sheafification of presheaves of modules: literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules, line 815); module structure on the sum presheaf: sites-modules.tex Lemma 03DI (lemma-extension-by-zero, line 2058)"
+   }
+  },
+  {
+   "text": "*Existence and uniqueness of $c_M$.* By the universal property of sheafification of presheaves of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification], applied to the $\\Lambda_X$-linear map $c^p_M$ of step 2 into the sheaf of $\\Lambda_X$-modules $\\pi_*M$ of step 1, there is exactly one morphism of sheaves of $\\Lambda_X$-modules $c_M:\\pi_!M\\to\\pi_*M$ with $c_M\\circ\\eta_M=c^p_M$. This is the map of the definition; no choice is involved, so $c_M$ is well defined (up to the choice of the sheafification $(\\pi_!M,\\eta_M)$, with which it is transported by the unique isomorphism of sheafifications).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof, first paragraph: 'Sheafification of this map will be the desired map'; sheafification of presheaves of modules: literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules, line 815); module structure on the sum presheaf: sites-modules.tex Lemma 03DI (lemma-extension-by-zero, line 2058)"
+   }
+  },
+  {
+   "text": "*$\\pi_!$ and $\\pi_*$ on morphisms.* Let $\\alpha:M\\to M'$ be a morphism of sheaves of $\\Lambda_U$-modules. $P_\\alpha=\\bigoplus_\\varphi\\alpha_{(V,\\varphi)}:P_M\\to P_{M'}$ is a morphism of presheaves of $\\Lambda_X$-modules [lem-weil-pbc-etale-graph-section-extension-map-linear](2), and $\\pi_!\\alpha=P_\\alpha^\\#$ is the unique morphism of sheaves of $\\Lambda_X$-modules with $\\pi_!\\alpha\\circ\\eta_M=\\eta_{M'}\\circ P_\\alpha$, the value of the sheafification functor on $P_\\alpha$ [def-weil-presheaf-modules-sheafification], [def-weil-pbc-etale-sum-extension]; it is the universal property of step 3 applied to $\\eta_{M'}\\circ P_\\alpha$. $\\pi_*\\alpha$, $(\\pi_*\\alpha)_V=\\alpha_{(V_U,q_V)}$, is a morphism of sheaves of $\\Lambda_X$-modules, $\\pi_*$ being a functor $\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ [prop-weil-pbc-inverse-image-modules-exact](3), [def-weil-pbc-direct-image].",
+   "uses": [
+    "lem-weil-pbc-etale-graph-section-extension-map-linear",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-sum-extension",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof, first paragraph: 'Sheafification of this map will be the desired map'; sheafification of presheaves of modules: literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules, line 815); module structure on the sum presheaf: sites-modules.tex Lemma 03DI (lemma-extension-by-zero, line 2058)"
+   }
+  },
+  {
+   "text": "*Naturality in $M$.* For $\\alpha:M\\to M'$ as in step 4, both $\\pi_*\\alpha\\circ c_M$ and $c_{M'}\\circ\\pi_!\\alpha$ are morphisms of sheaves of $\\Lambda_X$-modules $\\pi_!M\\to\\pi_*M'$. Composed with $\\eta_M$: $\\pi_*\\alpha\\circ c_M\\circ\\eta_M=\\pi_*\\alpha\\circ c^p_M$ (step 3) and $c_{M'}\\circ\\pi_!\\alpha\\circ\\eta_M=c_{M'}\\circ\\eta_{M'}\\circ P_\\alpha=c^p_{M'}\\circ P_\\alpha$ (steps 4 and 3), and $\\pi_*\\alpha\\circ c^p_M=c^p_{M'}\\circ P_\\alpha$ by the naturality in [lem-weil-pbc-etale-graph-section-extension-map](3). By the uniqueness in the universal property of $\\eta_M$ [def-weil-presheaf-modules-sheafification], $\\pi_*\\alpha\\circ c_M=c_{M'}\\circ\\pi_!\\alpha$. Hence $c:\\pi_!\\to\\pi_*$ is a natural transformation of functors $\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ (that $\\pi_!$ is a functor, $\\pi_!(\\beta\\alpha)=\\pi_!\\beta\\circ\\pi_!\\alpha$, $\\pi_!\\mathrm{id}=\\mathrm{id}$, follows from the same uniqueness).",
+   "uses": [
+    "lem-weil-pbc-etale-graph-section-extension-map",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F4L (lemma-shriek-into-star-separated-etale, line 11517), proof, first paragraph: 'Sheafification of this map will be the desired map'; sheafification of presheaves of modules: literature/stacks-project/sites-modules.tex Lemma 03CY (lemma-sheafification-presheaf-modules, line 815); module structure on the sum presheaf: sites-modules.tex Lemma 03DI (lemma-extension-by-zero, line 2058)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-graph-section-extension-map-linear",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-etale-graph-section-extension-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F4L (proof, first paragraph: the map is the sheafification of the presheaf map j_{p!}F -> j_*F), with sites-modules.tex Lemmas 03CY and 03DI for the module structures"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +131,17 @@
    "results": "Mathlib has none; the source repository has AlgebraicGeometry.Etale.etaleLowerShriek (WeilConjectures/SixFunctors/Etale/LowerShriek/EtaleMap.lean:55, the functor v_! of def-weil-pbc-etale-sum-extension) and Etale.lowerShriekToLowerStar (LowerShriek/Comparison.lean:196, for open immersions), but no map v_! -> v_* for finite etale v",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "etaleLowerShriek; lowerShriekToLowerStar (project ~/weil-conjectures-slopmaster2); reach.py on local/sorry_map_slopmaster2_full.jsonl",
+   "results": "AlgebraicGeometry.Etale.etaleLowerShriek (WeilConjectures/SixFunctors/Etale/LowerShriek/EtaleMap.lean:55, on Sheaf X.smallEtaleTopology (ModuleCat Λ), sheafification via sheafPullback along Over.map; reaches no sorry) and Etale.lowerShriekToLowerStar (LowerShriek/Comparison.lean:196: the compactly supported f_! -> f_* through a compactification, open immersion part only; reaches no sorry): neither is the map pi_! -> pi_* of etale extension by zero for finite etale pi",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidates for stage 2 only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +161,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-etale-shriek-to-star-map",
+  "worker": "stage1",
+  "summary": "Split into five well-formedness steps following Stacks 0F4L (sheafify the presheaf map) with sites-modules 03CY/03DI: objects defined (P_M as presheaf of Lambda_X-modules, pi_!M = P_M^#, pi_*M as Lambda_X-module through gamma), Lambda_X-linearity of c^p_M, existence and uniqueness of c_M by the universal property, pi_! and pi_* on morphisms, naturality. Gap found: lem-weil-pbc-etale-graph-section-extension-map only gives c^p_M as a morphism of presheaves of Lambda-modules, and def-weil-pbc-etale-sum-extension does not say how Lambda_X acts on P_M; the universal property of def-weil-presheaf-modules-sheafification needs a Lambda_X-linear map. Factored out as the new node lem-weil-pbc-etale-graph-section-extension-map-linear (ring maps theta_{V,phi} = Lambda_U(Gamma_phi) o gamma_V, the Lambda_X-structure on P_M after 03DI, Lambda_X(V)-linearity of e_phi and c^p_M, linearity of P_alpha). Statement: added the Lambda_X-structures (new node (2), gamma of prop-weil-pbc-inverse-image-modules-exact(3)) and the corresponding stmt_deps (def-weil-pbc-constant-sheaf, prop-weil-pbc-inverse-image-modules-exact, the new node). def-weil-pbc-direct-image says only vaguely that the functors act on module sheaves; the explicit Lambda_X-structure of pi_*M is cited from prop-weil-pbc-inverse-image-modules-exact(3). lem-weil-pbc-etale-shriek-to-star-injective and lem-weil-pbc-etale-shriek-star-finite-modules cite this node and are not used (they would make cycles). Not a Mathlib leaf; no Lean in slopmaster2."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Definition node split by five elementary well-formedness steps: the objects (P_M as a presheaf of Lambda_X-modules with the action through theta_{V,phi}, a claim factored into the new unsplit node lem-weil-pbc-etale-graph-section-extension-map-linear; pi_*M a sheaf of Lambda_X-modules via prop-weil-pbc-inverse-image-modules-exact (3), cited as a definition-level input), c^p_M Lambda_X-linear (new node), existence and uniqueness of c_M by the universal property of sheafification, functoriality, naturality. Statement: the Lambda_X-structures added, mathematics unchanged. Stage-3 notes: def-weil-pbc-direct-image and def-weil-pbc-etale-sum-extension do not specify the module structures; the Lean works with Lambda-valued sheaves (Sheaf (ModuleCat Lambda)) rather than sheaves of Lambda_X-modules, and no node states the equivalence. Lean candidates reported, not attached. Tags verified (0F4L, 03S7, 03DI, 03CY)."
+ }
 }

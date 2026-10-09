@@ -525,3 +525,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:58 UTC (2026-10-09) — Returned E1 descend-separated a third time (head 83346b09; only the 01KJ citation missing now).
 - 22:00 UTC (2026-10-09) — Reviewed and committed etale-graph-section-extension-map (no new node).
 - 22:01 UTC (2026-10-09) — Reviewed and committed etale-shriek-base-change-modules (03S6; 2 new nodes; tool use recorded; statement's map direction changed to the conjugate's). Launched a worker on polynomial-complete-local-formal-fibres (07PV paragraphs 2-5).
+- 22:01 UTC (2026-10-09) — Reviewed and committed def-weil-pbc-etale-shriek-to-star-map (definition; 1 new node). Launched a worker on def-weil-pbc-etale-shriek-base-change-map.

@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-etale-graph-section-extension-map-linear",
+ "kind": "statement",
+ "title": "The presheaf map from the etale sum presheaf to direct image is linear over the constant sheaf of rings",
+ "statement": "Let $\\pi:U\\to X$ be a finite etale morphism of schemes [def-weil-pbc-finite-etale-category, def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, $\\Lambda_X$ and $\\Lambda_U$ the constant sheaves of rings with value $\\Lambda$ on the small etale sites $X_{\\Et}$ and $U_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-constant-sheaf], and $M$ a sheaf of $\\Lambda_U$-modules on $U_{\\Et}$ [def-weil-pbc-etale-sheaves, def-weil-sheaf-of-modules-category]. For an object $V$ of $X_{\\Et}$ write $V_U=V\\times_XU$ with projections $p_V:V_U\\to V$, $q_V:V_U\\to U$; for an $X$-morphism $\\varphi:V\\to U$ write $(V,\\varphi)$ for $V$ as an object of $U_{\\Et}$ and $\\Gamma_\\varphi=(\\mathrm{id}_V,\\varphi):(V,\\varphi)\\to(V_U,q_V)$ for its graph, a morphism of $U_{\\Et}$; let $e_\\varphi:M(V,\\varphi)\\to M(V_U,q_V)$, the presheaf $P_M:V\\mapsto\\bigoplus_{\\varphi\\in\\operatorname{Hom}_X(V,U)}M(V,\\varphi)$ on $X_{\\Et}$ and the morphism of presheaves of $\\Lambda$-modules $c^p_M:P_M\\to\\pi_*M$ be those of [lem-weil-pbc-etale-graph-section-extension-map] (with $P_M$ the presheaf of [def-weil-pbc-etale-sum-extension] for $v=\\pi$). Let $\\gamma:\\Lambda_X\\to\\pi_*\\Lambda_U$ be the morphism of sheaves of rings of [prop-weil-pbc-inverse-image-modules-exact](1), induced through the universal property of sheafification by the constant sections, so that $\\gamma_V:\\Lambda_X(V)\\to\\Lambda_U(V_U,q_V)$, and give the direct image $\\pi_*M$, $(\\pi_*M)(V)=M(V_U,q_V)$ [def-weil-pbc-direct-image], its structure of sheaf of $\\Lambda_X$-modules through $\\gamma$: $f\\cdot t=\\gamma_V(f)\\,t$ for $f\\in\\Lambda_X(V)$, $t\\in M(V_U,q_V)$ [prop-weil-pbc-inverse-image-modules-exact](3). For an $X$-morphism $\\varphi:V\\to U$ let\n$$\\theta_{V,\\varphi}=\\Lambda_U(\\Gamma_\\varphi)\\circ\\gamma_V:\\Lambda_X(V)\\longrightarrow\\Lambda_U(V,\\varphi),$$\na ring homomorphism. Then:\n\n1. For every morphism $a:V'\\to V$ of $X_{\\Et}$ and every $X$-morphism $\\varphi:V\\to U$, regarding $a$ as a morphism $(V',\\varphi a)\\to(V,\\varphi)$ of $U_{\\Et}$: $\\theta_{V',\\varphi a}(f|_{V'})=\\Lambda_U(a)(\\theta_{V,\\varphi}(f))$ for all $f\\in\\Lambda_X(V)$.\n2. Letting $f\\in\\Lambda_X(V)$ act on the summand $M(V,\\varphi)$ of $P_M(V)$ by multiplication with $\\theta_{V,\\varphi}(f)$ makes $P_M$ a presheaf of $\\Lambda_X$-modules [def-weil-presheaf-modules-sheafification] (the restriction maps of $P_M$ are semilinear); this is the $\\mathcal O$-module structure of Stacks, Modules on Sites, Lemma 03DI, $\\theta_{V,\\varphi}$ playing the role of the identification $\\mathcal O_U(V\\xrightarrow{\\varphi}U)=\\mathcal O(V)$. For a morphism $\\alpha:M\\to M'$ of sheaves of $\\Lambda_U$-modules, $P_\\alpha=\\bigoplus_\\varphi\\alpha_{(V,\\varphi)}:P_M\\to P_{M'}$ is a morphism of presheaves of $\\Lambda_X$-modules.\n3. For every $X$-morphism $\\varphi:V\\to U$, $f\\in\\Lambda_X(V)$ and $s\\in M(V,\\varphi)$: $e_\\varphi(\\theta_{V,\\varphi}(f)\\,s)=\\gamma_V(f)\\,e_\\varphi(s)$. Consequently every $c^p_{M,V}:P_M(V)\\to(\\pi_*M)(V)$ is $\\Lambda_X(V)$-linear for the structures of (2) and of $\\pi_*M$ above, and $c^p_M:P_M\\to\\pi_*M$ is a morphism of presheaves of $\\Lambda_X$-modules.\n\n(Ingredients: $\\gamma$ is a morphism of sheaves on $X_{\\Et}$, so $\\gamma_{V'}(f|_{V'})=\\Lambda_U(a\\times_X\\mathrm{id}_U)(\\gamma_V(f))$, and $(a\\times_X\\mathrm{id}_U)\\circ\\Gamma_{\\varphi a}=\\Gamma_\\varphi\\circ a$, which gives (1); (2) follows from (1) and the semilinearity of the restriction maps of $M$; for (3), $\\gamma_V(f)e_\\varphi(s)$ pulls back along $\\Gamma_\\varphi$ to $\\theta_{V,\\varphi}(f)s$ and restricts to $0$ off $\\Gamma_\\varphi(V)$, so equals $e_\\varphi(\\theta_{V,\\varphi}(f)s)$ by the uniqueness in [lem-weil-pbc-etale-graph-section-extension-map](2).)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03DI (lemma-extension-by-zero, line 2058) and its proof (the O-module structure f.s = fs on the presheaf V -> sum over phi of G(V -> U), with O_U(V/U)=O(V)); used in Etale Cohomology Lemma 0F4L (lemma-shriek-into-star-separated-etale, literature/stacks-project/etale-cohomology.tex line 11517), whose map is stated 'on abelian sheaves and sheaves of Lambda-modules' with the proof given only for abelian sheaves"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-graph-section-extension-map",
+  "def-weil-pbc-etale-sum-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf of modules over the restriction of a sheaf of rings to a slice category, extension by zero along localization is O-linear",
+   "results": "PresheafOfModules.mk, PresheafOfModules.ofPresheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf), PresheafOfModules.freeObj (…Presheaf.Free), PresheafOfModules.restrictScalarsObj (…Presheaf.ChangeOfRings), ModuleCat.tildeInModuleCat: general constructors only; no module structure on the sum presheaf over Hom_X(V,U), no graph-section extension map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module structure on the direct sum over morphisms V -> U of sections of a sheaf of modules on the slice site, and linearity of the map into the pushforward",
+   "results": "SheafOfModules.pushforwardSections, SheafOfModules.unitToPushforwardObjUnit (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree), PresheafOfModules.pushforward and its simp lemmas (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward): pushforward of modules along a continuous functor with a ring map phi : S -> F_*R (the analogue of the Lambda_X-structure of pi_*M through gamma), but nothing about P_M or e_phi",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "PresheafOfModules.sheafification (alpha : R0 -> R.obj, locally bijective), sheafificationAdjunction, sheafificationCompToSheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification): the universal property the definition node uses, not this linearity statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Over.map|overPullback|Over.forget' Mathlib/Algebra/Category/ModuleCat/ ; grep -rn 'extendByZero|lowerShriek|jShriek' Mathlib/Algebra/Category/ModuleCat Mathlib/CategoryTheory/Sites (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only Sheaf/Quasicoherent.lean and Sheaf/PushforwardContinuous.lean mention Over (localization of modules, no sum over Hom(V,U)); no extension by zero of modules along a localization",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PresheafOfModules.pushforward (project ~/weil-conjectures-slopmaster2)",
+   "results": "PresheafOfModules.pushforward, pushforwardId, pushforwardComp, pushforward_map_app_apply (Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean); index unavailable, so not a proof of absence of anything else",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-etale-shriek-to-star-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
