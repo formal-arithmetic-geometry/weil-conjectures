@@ -133,6 +133,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.Modules.PicardAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
@@ -636,6 +637,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
@@ -943,6 +945,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Maps
+public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
 public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure

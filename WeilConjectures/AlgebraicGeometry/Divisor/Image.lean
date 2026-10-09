@@ -340,7 +340,7 @@ theorem Ideal.exists_notMem_mul_mem_span_radical_span_singleton {A : Type*} [Com
   have hf' : (Ideal.span {a}).radical.map (algebraMap A S) = Ideal.span {f} := by
     rw [IsLocalization.map_radical p.primeCompl, Ideal.map_span, Set.image_singleton, hf]
   obtain ⟨g, hg, b, hb, hspan, hgb⟩ :=
-    Ideal.exists_not_mem_mul_mem_span_singleton_of_map_eq p _ f hf'
+    Ideal.exists_notMem_mul_mem_span_singleton_of_map_eq p _ f hf'
   refine ⟨g, hg, b, hb, ?_, hgb⟩
   rintro rfl
   exact hf0 (Ideal.span_singleton_eq_bot.mp (hf'.symm.trans (hspan.trans (by simp))))
