@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-truncation-cohomology",
+ "kind": "statement",
+ "title": "Cohomology of the canonical truncation",
+ "statement": "Let $\\mathcal A$ be an abelian category, $K$ a cochain complex of $\\mathcal A$ with cohomology objects $H^i(K)=\\Ker(d^i)/\\Im(d^{i-1})$ [def-weil-abstract-derived-category], and $n\\in\\mathbf Z$. Let $\\tau_{\\leq n}K$ be the canonical truncation, the subcomplex $\\cdots\\to K^{n-2}\\to K^{n-1}\\to\\Ker(d^n_K)\\to0\\to0\\to\\cdots$ of $K$ [def-sbc-standard-tstructure-derived-category], and $c_n:\\tau_{\\leq n}K\\to K$ the inclusion. Then $H^i(c_n):H^i(\\tau_{\\leq n}K)\\to H^i(K)$ is an isomorphism for every $i\\leq n$, and $H^i(\\tau_{\\leq n}K)=0$ for every $i>n$. Consequently, in the derived category $D(\\mathcal A)$, the cohomology functors $H^i$ applied to the image of $c_n$ give the same statements; and if $K$ is bounded below, so is $\\tau_{\\leq n}K$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Section 12.15 (Tag 0118, label section-truncations), item 'canonical truncation $\\tau_{\\leq n}A^\\bullet$' for cochain complexes (lines 3777-3804): $H^i(\\tau_{\\leq n}A^\\bullet)=H^i(A^\\bullet)$ for $i\\leq n$ and $0$ for $i>n$"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical truncation truncLE of a cochain complex: the inclusion ιTruncLE induces isomorphism in homology in degrees q ≤ n",
+   "results": "HomologicalComplex.ιTruncLE (Mathlib.Algebra.Homology.Embedding.TruncLE), CochainComplex.ιTruncLE, CochainComplex.truncLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.quasiIso_ιTruncLE_iff (Mathlib.Algebra.Homology.Embedding.CochainComplex)",
+   "date": "2026-10-09",
+   "verdict": "match (the notions; the degree-wise statement found by loogle and grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ιTruncLE, QuasiIsoAt",
+   "results": "CochainComplex.quasiIsoAt_ιTruncLE (n q : ℤ) (hq : q ≤ n) : QuasiIsoAt (K.ιTruncLE n) q; CochainComplex.instQuasiIsoAtIntιTruncLE (Mathlib.Algebra.Homology.Embedding.CochainComplex)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the canonical truncation τ≤n K → K of a cochain complex is an isomorphism on cohomology in degrees ≤ n and τ≤n K has zero cohomology above n",
+   "results": "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.quasiIso_πTruncGE_iff (Mathlib.Algebra.Homology.Embedding.CochainComplex)",
+   "date": "2026-10-09",
+   "verdict": "related (whole-complex quasi-isomorphism criteria); the degree-wise lemma is quasiIsoAt_ιTruncLE"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'quasiIsoAt_ιTruncLE\\|IsStrictlySupported\\|exactAt_of_isSupported' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/",
+   "results": "Embedding/CochainComplex.lean:57 lemma quasiIsoAt_ιTruncLE (n q : ℤ) (hq : q ≤ n) : QuasiIsoAt (K.ιTruncLE n) q; Embedding/TruncLE.lean:189 instance (K.truncLE e).IsStrictlySupported e (so K.truncLE n is IsStrictlyLE n, CochainComplex.IsStrictlyLE at CochainComplex.lean:103); Embedding/IsSupported.lean:75 exactAt_of_isSupported (exactness, i.e. zero homology, outside the support); TruncLE.lean docstring: truncLE is dual to truncGE, whose boundary term is opcycles (TruncGE.lean truncGE'XIsoOpcycles), so the degree-n term of truncLE is the cycles Ker(d^n), as in Stacks",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.quasiIsoAt_ιTruncLE",
+  "file": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+  "how": "specializes in one line, one Mathlib lemma per clause: `K.quasiIsoAt_ιTruncLE n i hi` (line 57; `QuasiIsoAt` = `IsIso (homologyMap _ i)`) for $i\\leq n$; for $i>n$, `(K.truncLE n).IsStrictlyLE n` (instance `IsStrictlySupported`, Mathlib/Algebra/Homology/Embedding/TruncLE.lean:189) gives `IsLE n`, hence `exactAt_of_isSupported` (Mathlib/Algebra/Homology/Embedding/IsSupported.lean:75) and `ExactAt.isZero_homology`; in the derived category via `DerivedCategory.homologyFunctorFactors`; `CochainComplex.truncLE n` is Stacks' $\\tau_{\\leq n}$ (degree $n$ term the cycles)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-functor-truncation-iso",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -15,28 +15,133 @@
  ],
  "proof": [
   {
-   "text": "Exactness of a couple means the three identities of subobjects of\n[def-sp-exact-couple] in every bidegree. Fix $q$ and apply the homological\nfunctor $\\mathcal H^{p+q}\\circ Rv$ to the distinguished triangle $\\tau_{\\leq\nq-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\to$ of\n[def-sp-truncation-couple]; by [lem-sp-long-exact-of-triangle] the result is\nthe long exact sequence\n\n$$\n \\cdots\\to D^{p+1,q-1}\\xrightarrow{\\ \\alpha\\ }D^{p,q}\n \\xrightarrow{\\ g\\ }E^{p,q}\\xrightarrow{\\ f\\ }D^{p+2,q-1}\\to\\cdots,\n$$\n\nwhere the three maps are the ones recorded in\n[def-sp-truncation-couple], and the exactness of this sequence at its three\ndisplayed spots is precisely $\\ker\\alpha=\\operatorname{im}f$,\n$\\ker f=\\operatorname{im}g$ and $\\ker g=\\operatorname{im}\\alpha$ in the\nbidegree $(p,q)$. As $q$ and $p$ are arbitrary this is the assertion.",
+   "text": "**Step 1 (the structure maps, read off the triangles).** For $q\\in\\mathbf Z$ let $T_q:\\ \\tau_{\\leq q-1}K\\xrightarrow{i_q}\\tau_{\\leq q}K\\xrightarrow{j_q}\\mathcal H^q(K)[-q]\\xrightarrow{k_q}(\\tau_{\\leq q-1}K)[1]$ be the truncation triangle of [lem-weil-pbc-truncation-triangle] ($i_q$ the inclusion of canonical truncations, $j_q$ the projection $\\Ker d^q_K\\to\\mathcal H^q(K)$ in degree $q$, $k_q$ the unique third map making $T_q$ distinguished in $D(\\mathcal A)$); these are the triangles named in [def-sp-truncation-couple]. Since $K$ is bounded below, so are $\\tau_{\\leq q-1}K$, $\\tau_{\\leq q}K$ and $\\mathcal H^q(K)[-q]$, so $T_q$ lies in $D^+(\\mathcal A)$. With $D^{p,q}=\\mathcal H^{p+q}(Rv\\,\\tau_{\\leq q}K)$ and $E^{p,q}=\\mathcal H^{p+q}(Rv(\\mathcal H^q(K)[-q]))$, the only maps between these objects that $T_q$ and $T_{q+1}$ provide with the bidegrees prescribed in [def-sp-truncation-couple] are\n$$\\alpha=\\mathcal H^{p+q}(Rv\\,i_{q+1}):D^{p,q}\\to D^{p-1,q+1},\\qquad g=\\mathcal H^{p+q}(Rv\\,j_q):D^{p,q}\\to E^{p,q},$$\n$$f:E^{p,q}\\xrightarrow{\\ \\mathcal H^{p+q}(\\sigma_{\\tau_{\\leq q-1}K}\\circ Rv\\,k_q)\\ }\\mathcal H^{p+q}\\bigl((Rv\\,\\tau_{\\leq q-1}K)[1]\\bigr)=\\mathcal H^{p+q+1}(Rv\\,\\tau_{\\leq q-1}K)=D^{p+2,q-1},$$\nwith $\\sigma$ the shift isomorphism of [lem-weil-pbc-derived-direct-image-triangulated] and $\\mathcal H^{n}(M[1])=\\mathcal H^{n+1}(M)$ the literal equality of subquotients for the convention $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$ (negating the differential changes neither its kernel nor its image). Bidegree check: $\\tau_{\\leq q}K$ has $D$-index $q$, total degree $p+q$ is kept by $\\alpha$ and $g$, so $\\alpha$ lands in $\\mathcal H^{p+q}(Rv\\,\\tau_{\\leq q+1}K)=D^{p-1,q+1}$, i.e. bidegree $(-1,+1)$, and $g$ has bidegree $(0,0)$; $f$ raises the total degree by one and lowers $q$ by one, so it lands in $D^{p',q-1}$ with $p'+q-1=p+q+1$, $p'=p+2$, bidegree $(+2,-1)$. This $f$ is the boundary named in [def-sp-truncation-couple]. Here $Rv$ is applied to the morphism $k_q$ of $D^+(\\mathcal A)$, which is not a chain map: so $Rv$ must be the functor on $D^+(\\mathcal A)$ of [lem-weil-pbc-derived-direct-image-triangulated], which on objects is the $Rv$ of [def-sp-kinjective-bridge] ($v$ applied to a K-injective resolution; any two choices canonically isomorphic and the construction functorial, [lem-sp-kinjective-computes] (1)), and which exists because a Grothendieck abelian category has enough injectives [lem-sp-grothendieck-enough-injectives]. The hypothesis $\\mathcal H^q(K)=0$ for $q<a$ is not used anywhere in this proof.",
    "uses": [
-    "def-sp-exact-couple",
     "def-sp-truncation-couple",
-    "lem-sp-long-exact-of-triangle"
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-sp-kinjective-bridge",
+    "lem-sp-kinjective-computes",
+    "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076; the triangle tau_{<=a}K -> tau_{<=a+1}K -> H^{a+1}(K)[-a-1] -> (tau_{<=a}K)[1] at line 4101, here a=q-1); Proposition 05SE (proposition-derived-functor, line 4895) and Lemma 05SU (lemma-derived-shift) for Rv on D^+ and its shift isomorphism"
+   }
+  },
+  {
+   "text": "**Step 2 (the image triangles are distinguished).** By [lem-weil-pbc-derived-direct-image-triangulated], applied to $v$ (additive, left exact, $\\mathcal A$ with enough injectives by [lem-sp-grothendieck-enough-injectives]) and to the distinguished triangle $T_q$ of $D^+(\\mathcal A)$ (Step 1, [lem-weil-pbc-truncation-triangle]), the triangle\n$$Rv(T_q):\\quad Rv\\,\\tau_{\\leq q-1}K\\xrightarrow{Rv\\,i_q}Rv\\,\\tau_{\\leq q}K\\xrightarrow{Rv\\,j_q}Rv(\\mathcal H^q(K)[-q])\\xrightarrow{\\sigma_{\\tau_{\\leq q-1}K}\\circ Rv\\,k_q}(Rv\\,\\tau_{\\leq q-1}K)[1]$$\nis distinguished in $D^+(\\mathcal B)$, hence in $D(\\mathcal B)$ ($D^+(\\mathcal B)$ being a full triangulated subcategory).",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05SE (proposition-derived-functor, line 4895), parts (2) and (7): a right derived functor is exact on the triangulated subcategory where it is defined"
+   }
+  },
+  {
+   "text": "**Step 3 (the long exact sequence, and its connecting map is $f$).** Apply the long exact cohomology sequence of a distinguished triangle of $D(\\mathcal B)$ [lem-sf-derived-homology-long-exact] to $Rv(T_q)$ (Step 2). With $n=p+q$ it reads\n$$\\cdots\\to\\mathcal H^{n}(Rv\\,\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^n(Rv\\,i_q)}\\mathcal H^{n}(Rv\\,\\tau_{\\leq q}K)\\xrightarrow{\\mathcal H^n(Rv\\,j_q)}\\mathcal H^{n}(Rv(\\mathcal H^q(K)[-q]))\\xrightarrow{\\ \\delta^n\\ }\\mathcal H^{n+1}(Rv\\,\\tau_{\\leq q-1}K)\\xrightarrow{\\mathcal H^{n+1}(Rv\\,i_q)}\\mathcal H^{n+1}(Rv\\,\\tau_{\\leq q}K)\\to\\cdots$$\nexact at every spot. Its connecting map is, as in Stacks (0148: the map $H^0(Z)\\to H^1(X)$ is $H(h)$ with $H^1(X)=H(X[1])$, 'we will not use any signs') and in the Mathlib match of [lem-sf-derived-homology-long-exact] (`DerivedCategory.HomologySequence.δ T n₀ n₁ h := (homologyFunctor C 0).shiftMap T.mor₃ n₀ n₁ _`), $\\mathcal H^n$ of the third map of the triangle followed by the identification $\\mathcal H^n(M[1])=\\mathcal H^{n+1}(M)$; for $Rv(T_q)$ that is $\\delta^n=\\mathcal H^{n}(\\sigma\\circ Rv\\,k_q)$, which is $f:E^{p,q}\\to D^{p+2,q-1}$ of Step 1. In the notation of Step 1 the sequence is\n$$\\cdots\\to D^{p+1,q-1}\\xrightarrow{\\ \\alpha\\ }D^{p,q}\\xrightarrow{\\ g\\ }E^{p,q}\\xrightarrow{\\ f\\ }D^{p+2,q-1}\\xrightarrow{\\ \\alpha\\ }D^{p+1,q}\\to\\cdots$$\n(the first map is $\\alpha=\\mathcal H^{(p+1)+(q-1)}(Rv\\,i_q)$ out of $D^{p+1,q-1}$, the last $\\alpha=\\mathcal H^{(p+2)+(q-1)}(Rv\\,i_q)$ out of $D^{p+2,q-1}$). Sign conventions: other conventions in the literature put a sign $\\pm1$ (depending on $n$, or on the rotation used, cf. the remark after 0148) on the connecting map or on the identification $\\mathcal H^n(M[1])\\cong\\mathcal H^{n+1}(M)$; this replaces $f$ by $\\pm f$ in each bidegree, which changes neither $\\Ker f$ nor $\\operatorname{im}f$, so nothing below depends on the convention. (The same sequence is what [lem-sp-long-exact-of-triangle] gives for the homological functor $\\mathcal H^0:D(\\mathcal B)\\to\\mathcal B$, Stacks 05RS; the Mathlib leaf [lem-sf-derived-homology-long-exact] is used instead because it needs no node for '$\\mathcal H^0$ is homological'.)",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-sp-truncation-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 0147 (definition-homological, line 261) and the long exact sequence 0148 (equation-long-exact-cohomology-sequence, line 281, 'we will not use any signs'); Lemma 05RS (lemma-cohomology-homological, line 3618) and the sequence equation-long-exact-cohomology-sequence-D (line 3640)"
+   }
+  },
+  {
+   "text": "**Step 4 (the three identities of an exact couple).** Exactness of the sequence of Step 3 (for the triangle $T_q$) at $D^{p,q}$ is $\\Ker(g:D^{p,q}\\to E^{p,q})=\\operatorname{im}(\\alpha:D^{p+1,q-1}\\to D^{p,q})$, and at $E^{p,q}$ it is $\\Ker(f:E^{p,q}\\to D^{p+2,q-1})=\\operatorname{im}(g:D^{p,q}\\to E^{p,q})$. Exactness of the sequence of Step 3 for the triangle $T_{q+1}$, at its spot $\\mathcal H^{p+q}(Rv\\,\\tau_{\\leq q}K)=D^{p,q}$ (the term $\\mathcal H^{n+1}(Rv\\,\\tau_{\\leq (q+1)-1}K)$ with $n=p+q-1$), is $\\Ker(\\alpha:D^{p,q}\\to D^{p-1,q+1})=\\operatorname{im}(f:E^{p-2,q+1}\\to D^{p,q})$, since $E^{p-2,q+1}=\\mathcal H^{p+q-1}(Rv(\\mathcal H^{q+1}(K)[-q-1]))$. These are the three identities of [def-sp-exact-couple] at $(p,q)$; the inclusions $\\operatorname{im}\\subseteq\\Ker$ among them are the vanishing of the composites of two consecutive structure maps also required there. As $p,q\\in\\mathbf Z$ are arbitrary, $(D,E,\\alpha,f,g)$ is an exact couple.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 12.21 (011P), Definition 011Q (definition-exact-couple, line 5289): Ker(alpha)=Im(f), Ker(f)=Im(g), Ker(g)=Im(alpha); bigraded with the bidegrees of def-sp-exact-couple"
+   }
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
   "def-sp-truncation-couple",
-  "lem-sp-long-exact-of-triangle"
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-sp-kinjective-bridge",
+  "lem-sp-kinjective-computes",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sf-derived-homology-long-exact",
+  "def-sp-exact-couple"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-truncation-couple-exact.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark 08J5 (line 4076), Proposition 05SE (line 4895), 0147/0148 (line 261-300); homology.tex Definition 011Q (line 5289). Stacks does not state the exactness of the truncation couple; the steps are written by an agent from these places, following the blueprint proof (literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-sp-truncation-couple-exact.md)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact couple from truncation triangles of a complex, long exact sequence of derived functor",
+   "results": "DerivedCategory.HomologySequence.exact₁/comp_δ (Mathlib.Algebra.Homology.DerivedCategory.HomologySequence), ShortComplex.ShortExact.singleTriangle (…DerivedCategory.SingleTriangle), DerivedCategory.triangleOfSES_distinguished (…DerivedCategory.ShortExact), HomologicalComplex.shortComplexTruncLE_shortExact (…Embedding.TruncLEHomology); no exact couple",
+   "date": "2026-10-09",
+   "verdict": "no match (only the ingredients: long exact homology sequence, triangles of short exact sequences)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple in an abelian category",
+   "results": "IsPushout.exact_shortComplex, ShortComplex.Exact.isIso_imageToKernel, ShortComplex.exact_iff_image_eq_kernel (Mathlib.CategoryTheory.Abelian.Exact); no exact couple",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactCouple\"",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.triangleLEGE_distinguished",
+   "results": "TStructure.triangleLEGE_distinguished (Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT): truncation triangle of an abstract t-structure, tau_{<=a} X -> X -> tau_{>=b} X; not the triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] and no couple",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredient of lem-weil-pbc-truncation-triangle only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple: bigraded objects D, E with maps alpha, f, g such that kernel of each equals image of the previous",
+   "results": "ComposableArrows.Exact.sc', ComposableArrows.Exact.toIsComplex, exact₂_mk (Mathlib.Algebra.Homology.ExactSequence), HomologicalComplex.ExactAt, exactAt_iff'; no exact couple",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connecting morphism of the long exact homology sequence of a distinguished triangle in the derived category is the homology of the third morphism of the triangle",
+   "results": "DerivedCategory.HomologySequence.δ (Mathlib.Algebra.Homology.DerivedCategory.HomologySequence, defined as (homologyFunctor C 0).shiftMap T.mor₃), CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, mappingCone.homologySequenceδ_triangleh (…HomotopyCategory.ShortExact)",
+   "date": "2026-10-09",
+   "verdict": "no match for the item; confirms the connecting map used in Step 3 is H^n of the third map (lem-sf-derived-homology-long-exact)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'exact.?couple|ExactCouple|spectral sequence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no exact couple anywhere; spectral sequences only via spectral objects: Mathlib/Algebra/Homology/SpectralObject/{SpectralSequence,HasSpectralSequence,FirstPage,Page}.lean, Mathlib/Algebra/Homology/SpectralSequence/{Basic,ComplexShape}.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean",
+   "date": "2026-10-09",
+   "verdict": "no match (Mathlib builds spectral sequences from spectral objects, not exact couples)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'truncLE\\|triangleLEGE\\|homologySequenceδ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{Algebra/Homology,CategoryTheory/Triangulated}",
+   "results": "CochainComplex/HomologicalComplex.truncLE (Algebra/Homology/Embedding/TruncLE.lean), TStructure.truncLE/triangleLEGE_distinguished (CategoryTheory/Triangulated/TStructure/TruncLEGT.lean), DerivedCategory.TStructure.t (Algebra/Homology/DerivedCategory/TStructure.lean), Functor.homologySequenceδ (CategoryTheory/Triangulated/HomologicalFunctor.lean:174), DerivedCategory.HomologySequence.δ/exact₁/exact₂/exact₃ (Algebra/Homology/DerivedCategory/HomologySequence.lean:152-185); Functor.rightDerivedFunctorPlus (Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, triangulatedness a TODO there)",
+   "date": "2026-10-09",
+   "verdict": "no match: the ingredients exist, the couple and its exactness do not"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +167,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sp-truncation-couple-exact",
+  "worker": "stage1",
+  "summary": "Statement kept. The one-step imported proof is split into four steps. Step 1 reads the structure maps off def-sp-truncation-couple (which names only f and the bidegrees): alpha = H^{p+q}(Rv i_{q+1}), g = H^{p+q}(Rv j_q), f = H^{p+q}(sigma o Rv k_q) followed by H^n(M[1]) = H^{n+1}(M), with the bidegrees (-1,+1), (0,0), (+2,-1) checked; it cites the truncation triangle lem-weil-pbc-truncation-triangle (silent in def-sp-truncation-couple) and notes that Rv must be the functor on D^+ of lem-weil-pbc-derived-direct-image-triangulated (k_q is not a chain map), equal on objects to the Rv of def-sp-kinjective-bridge, defined since Grothendieck categories have enough injectives. Step 2: Rv(T_q) distinguished (lem-weil-pbc-derived-direct-image-triangulated, Lean closed). Step 3: the long exact sequence by the Mathlib leaf lem-sf-derived-homology-long-exact (replacing lem-sp-long-exact-of-triangle, which would need a node for 'H^0 is homological'); its connecting map is H^n of the third map (Stacks 0148, no signs; Mathlib HomologySequence.δ = shiftMap of mor₃), i.e. f; sign conventions only change f by a unit. Step 4: the three identities of def-sp-exact-couple, the first one from the sequence of T_{q+1}, the other two from that of T_q (the imported text put all three at bidegree (p,q) of one sequence, which is off by one for ker alpha = im f). The hypothesis H^q(K)=0 for q<a is unused. Same argument as Step 2 of lem-weil-pbc-truncation-couple-morphism (for Phi = g^{-1}Rf_*, Psi = Rf'_*g'^{-1}); not duplicated. Not in Mathlib (no exact couples; three kinds of search recorded). No new nodes."
+ },
+ "tool_uses": [
+  "lem-sp-kinjective-computes",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "the off-by-one of the imported proof corrected (ker α = im f comes from the sequence of T_{q+1}); lem-sp-kinjective-computes and lem-sp-grothendieck-enough-injectives (sk-prop-av-pqf-finite) accepted as tool uses; lem-sf-derived-homology-long-exact is a Mathlib leaf"
+ }
 }
