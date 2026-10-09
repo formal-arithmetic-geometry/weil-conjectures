@@ -1201,6 +1201,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
