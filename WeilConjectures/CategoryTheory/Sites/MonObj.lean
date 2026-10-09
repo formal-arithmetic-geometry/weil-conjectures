@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Mon
+public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -140,51 +141,6 @@ lemma isMonHom_of_isMonHom_map {S T : Sheaf J A} [MonObj S] [MonObj T] (f : S �
     rw [Functor.map_comp, Functor.map_comp, this, ← μ_natural_assoc])
 
 end CategoryTheory.Sheaf
-
-namespace CategoryTheory.Functor
-
-open Sheaf
-
-variable {C : Type u₁} [Category.{v₁} C] {D : Type*} [Category D] (F : C ⥤ D)
-  {A : Type u₂} [Category.{v₂} A] [MonoidalCategory A] [BraidedCategory A]
-  (J : GrothendieckTopology C) (K : GrothendieckTopology D) [F.IsContinuous J K]
-  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A] [(K.W (A := A)).IsMonoidal]
-  [HasWeakSheafify K A]
-
-attribute [local instance] Sheaf.monoidalCategory
-
-/-- The tensor comparison of the pushforward of sheaves restricts, on underlying presheaves, to
-the restriction of the tensor comparison `S ⊗ₚ T ⟶ S ⊗ T`. -/
-lemma μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous (S T : Sheaf K A) :
-    LaxMonoidal.μ (sheafToPresheaf J A) ((F.sheafPushforwardContinuous A J K).obj S)
-        ((F.sheafPushforwardContinuous A J K).obj T) ≫
-      (sheafToPresheaf J A).map (LaxMonoidal.μ (F.sheafPushforwardContinuous A J K) S T) =
-    LaxMonoidal.μ ((whiskeringLeft _ _ A).obj F.op) _ _ ≫
-      ((whiskeringLeft _ _ A).obj F.op).map (LaxMonoidal.μ (sheafToPresheaf K A) S T) := by
-  have h := NatTrans.IsMonoidal.tensor
-    (τ := (sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward F A J K).hom)
-    S T
-  rw [sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app,
-    sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app,
-    sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app, comp_μ, comp_μ] at h
-  simpa using h.symm
-
-/-- The componentwise form of
-`CategoryTheory.Functor.μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous`. -/
-@[reassoc]
-lemma μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app (S T : Sheaf K A) (U : Cᵒᵖ) :
-    (LaxMonoidal.μ (sheafToPresheaf J A) ((F.sheafPushforwardContinuous A J K).obj S)
-        ((F.sheafPushforwardContinuous A J K).obj T)).app U ≫
-      (LaxMonoidal.μ (F.sheafPushforwardContinuous A J K) S T).hom.app U =
-    (LaxMonoidal.μ (sheafToPresheaf K A) S T).app (F.op.obj U) := by
-  have := congr_app (μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous F J K S T) U
-  simp only [NatTrans.comp_app] at this
-  refine this.trans ?_
-  simp only [ObjectProperty.ι_obj, CategoryTheory.Monoidal.tensorObj_obj, whiskeringLeft_obj_obj,
-    comp_obj, op_obj, Monoidal.whiskeringLeft_μ_app, whiskeringLeft_obj_map, whiskerLeft_app]
-  exact Category.id_comp _
-
-end CategoryTheory.Functor
 
 namespace CategoryTheory.Functor
 
