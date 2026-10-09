@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+ "kind": "statement",
+ "title": "The ring map of a morphism on affine opens induces the morphism on their spectra",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], and let $U\\subseteq X$ and $V\\subseteq S$ be affine opens with $f(U)\\subseteq V$, $A=\\mathcal O_X(U)$, $R=\\mathcal O_S(V)$. Let $\\varphi:R\\to A$ be the ring map induced by $f$, i.e. the composite of $f^\\sharp_V:\\mathcal O_S(V)\\to\\mathcal O_X(f^{-1}(V))$ with the restriction map $\\mathcal O_X(f^{-1}(V))\\to\\mathcal O_X(U)$ (defined since $U\\subseteq f^{-1}(V)$), and let $\\iota_U:\\operatorname{Spec}A\\to X$ and $\\iota_V:\\operatorname{Spec}R\\to S$ be the canonical open immersions with images $U$ and $V$ of [lem-weil-pbc-affine-open-spec-points]. Then $\\iota_V\\circ\\operatorname{Spec}\\varphi=f\\circ\\iota_U$ as morphisms $\\operatorname{Spec}A\\to S$ [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I1 (lemma-morphism-into-affine, line 841: morphisms into an affine scheme correspond to ring maps on global sections), applied to the two morphisms Spec A -> V; this is the identification used in Morphisms, Lemma 01V6 (lemma-smooth-characterize) and Definition 02GI (definition-etale) when they speak of 'the ring map O_S(V) -> O_X(U)' of f(U) in V"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of the ring map induced on affine opens composed with fromSpec equals fromSpec composed with the morphism",
+   "results": "AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec (Mathlib.AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec (newer name in the leansearch index, absent from this Mathlib), SpecMap_appLE_fromSpec_assoc, Spec.map, Spec.map_comp",
+   "date": "2026-10-10",
+   "verdict": "match: SpecMap_appLE_fromSpec"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.appLE, AlgebraicGeometry.IsAffineOpen.fromSpec",
+   "results": "AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec, AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec_assoc (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match: SpecMap_appLE_fromSpec"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a morphism of schemes and affine opens U, V with V in the preimage of U, Spec of the induced ring map O(U) -> O(V) is compatible with the open immersions Spec O(V) -> X and Spec O(U) -> Y",
+   "results": "AlgebraicGeometry.IsAffineOpen.map_fromSpec (the case f = id, matched on lem-weil-pbc-affine-open-inclusion-spec-map), Spec_map_appLE_fromSpec, SpecMap_appLE_fromSpec, fromSpec_toSpecΓ",
+   "date": "2026-10-10",
+   "verdict": "match: SpecMap_appLE_fromSpec"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'SpecMap_appLE_fromSpec\\|def appLE\\|def fromSpec' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{AffineScheme,Scheme}.lean",
+   "results": "AffineScheme.lean:482 lemma SpecMap_appLE_fromSpec (f : X ⟶ Y) {V : X.Opens} {U : Y.Opens} (hU : IsAffineOpen U) (hV : IsAffineOpen V) (i : V ≤ f ⁻¹ᵁ U) : Spec.map (f.appLE U V i) ≫ hU.fromSpec = hV.fromSpec ≫ f; Scheme.lean:196 def appLE U V e := f.app U ≫ X.presheaf.map (homOfLE e).op; AffineScheme.lean:427 def fromSpec : Spec Γ(X, U) ⟶ X",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  },
+  {
+   "tool": "local_search",
+   "query": "SpecMap_appLE_fromSpec (project root ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean (index: unavailable, name confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "line": 482,
+  "how": "exact: with X, Y, V, U of Mathlib being the node's X, S, U, V, f.appLE V U i : Γ(S, V) ⟶ Γ(X, U) is by definition (Scheme.lean:196) f.app V followed by the restriction X.presheaf.map (U ≤ f⁻¹V), i.e. the node's φ; hV.fromSpec, hU.fromSpec are ι_V, ι_U as recorded on lem-weil-pbc-affine-open-spec-points; the lemma states Spec.map φ ≫ ι_V = ι_U ≫ f, which in diagrammatic order is ι_V ∘ Spec φ = f ∘ ι_U"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-zero-differentials-affine-open-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

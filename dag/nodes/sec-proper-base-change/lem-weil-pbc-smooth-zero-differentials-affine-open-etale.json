@@ -14,9 +14,96 @@
   "def-weil-pbc-kahler-differentials",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The restriction $W\\to V$ is smooth.) Let $j_W:W\\to U$ and $j_V:V\\to S$ be the inclusions of the open subschemes. Since $g(W)\\subseteq V$, by [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique morphism $g_{W,V}:W\\to V$ with $j_V\\circ g_{W,V}=g\\circ j_W=g|_W$; this is the morphism $g|_W:W\\to V$ of the statement. Since $g$ is smooth [def-sbc-smooth-morphisms], $g_{W,V}$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a).",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01V6 (lemma-smooth-characterize, line 7048), last sentence: if f is smooth, then for open subschemes U of X, V of S with f(U) in V the restriction U -> V is smooth"
+   }
+  },
+  {
+   "text": "($g_{W,V}$ is $\\operatorname{Spec}$ of the ring map $\\varphi:R\\to A$.) Let $\\varphi:R=\\mathcal O_S(V)\\to A=\\mathcal O_U(W)$ be the ring map induced by $g$ ($g^\\sharp_V$ followed by restriction from $g^{-1}(V)$ to $W$), which is the ring map of the statement, and let $\\iota_W:\\operatorname{Spec}A\\to U$, $\\iota_V:\\operatorname{Spec}R\\to S$ be the canonical open immersions with images $W$ and $V$ of [lem-weil-pbc-affine-open-spec-points] [def-weil-affine-spectrum]; by their construction there, $\\iota_W=j_W\\circ\\alpha$ and $\\iota_V=j_V\\circ\\beta$ for the isomorphisms $\\alpha:\\operatorname{Spec}A\\to W$, $\\beta:\\operatorname{Spec}R\\to V$ inverse to $W\\cong\\operatorname{Spec}A$, $V\\cong\\operatorname{Spec}R$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square] applied to $g$, $W$, $V$: $\\iota_V\\circ\\operatorname{Spec}\\varphi=g\\circ\\iota_W$. Hence $j_V\\circ(\\beta\\circ\\operatorname{Spec}\\varphi)=\\iota_V\\circ\\operatorname{Spec}\\varphi=g\\circ j_W\\circ\\alpha=j_V\\circ(g_{W,V}\\circ\\alpha)$. The two morphisms $\\beta\\circ\\operatorname{Spec}\\varphi$ and $g_{W,V}\\circ\\alpha$ from $\\operatorname{Spec}A$ to $V$ have the same composite with $j_V$, so by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] (applied to this composite, whose image lies in $V$) they are equal: $\\beta\\circ\\operatorname{Spec}\\varphi=g_{W,V}\\circ\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I1 (lemma-morphism-into-affine, line 841: morphisms into an affine scheme are determined by the ring map on global sections); the identification of f|_U : U -> V with Spec of the induced ring map O_S(V) -> O_X(U) is used without comment in Morphisms Lemma 01V6 and Definition 02GI"
+   }
+  },
+  {
+   "text": "($\\varphi$ is a smooth ring map.) In [lem-weil-pbc-smooth-restrict-open-subschemes](c) take $f=g_{W,V}:W\\to V$, $f'=\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}R$ and the isomorphisms $u=\\alpha$, $v=\\beta$; step 2 gives $v\\circ f'=f\\circ u$, and $f$ is smooth by step 1, so $\\operatorname{Spec}\\varphi$ is smooth [def-sbc-smooth-morphisms]. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $\\varphi$ is a smooth ring map [def-weil-pbc-smooth-ring-map]: $A$ is a finitely presented $R$-algebra, $H_1(L_{A/R})=0$, and $\\Omega_{A/R}$ is finite projective.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01V6 (lemma-smooth-characterize), (1) implies (2): for affine opens U of X, V of S with f(U) in V the ring map O_S(V) -> O_X(U) is smooth; smoothness of def-sbc-smooth-morphisms agrees with Definition 01V5 by more-morphisms.tex Lemma 02H6"
+   }
+  },
+  {
+   "text": "($\\operatorname{Spec}\\varphi$ is etale.) By step 3, $A$ is a finitely presented $R$-algebra and $H_1(L_{A/R})=0$ [def-weil-pbc-smooth-ring-map], and $\\Omega_{A/R}=0$ by hypothesis [def-weil-pbc-kahler-differentials]. So $\\varphi$ is an etale ring map in the sense of Algebra, Definition 00U1 as stated in [lem-weil-pbc-etale-ring-map-iff-etale-affine], and by that lemma $\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism].",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Section 02GH, sentence before Definition 02GI (line 8050: a ring map R -> A is etale if it is smooth and Omega_{A/R} = 0, Algebra Definition 00U1), and Definition 02GI (definition-etale, line 8058)"
+   }
+  },
+  {
+   "text": "($g|_W:W\\to S$ is etale.) An isomorphism of schemes is a homeomorphism onto the whole target, which is open, and induces an isomorphism of structure sheaves, so it is an open immersion [def-weil-open-immersion]; hence $\\alpha^{-1}$ and $\\beta$ are open immersions, and so is $j_V$. By [lem-weil-pbc-etale-composition-cancellation](1) $\\alpha^{-1}$, $\\beta$ and $j_V$ are etale [def-weil-etale-morphism]. By step 2, $g_{W,V}=\\beta\\circ\\operatorname{Spec}\\varphi\\circ\\alpha^{-1}$, which is etale by step 4 and [lem-weil-pbc-etale-composition-cancellation](2) (applied twice). Finally $g|_W=g\\circ j_W=j_V\\circ g_{W,V}$ (step 1) is etale by [lem-weil-pbc-etale-composition-cancellation](2).",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02GP (lemma-open-immersion-etale) and Lemma 02GN (lemma-composition-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Section 02GH (Definition 02GI with the definition of an etale ring map recalled at line 8050), Lemma 01V6 (lemma-smooth-characterize), Lemmas 02GP and 02GN; Schemes Lemma 01I1 for the identification of g|_W with Spec of R -> A. Stacks does not state the lemma as such: with Definition 02GI it is immediate; the steps make the identifications explicit for the DAG's definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +132,17 @@
    "results": "Etale.lean: HasRingHomProperty @Etale RingHom.Etale (line 56), iff_flat_and_formallyUnramified (line 140), of_formallyUnramified_of_flat (line 145), open immersions etale (line 78); Smooth.lean: Smooth → Flat (line 113), Smooth → LocallyOfFinitePresentation (line 241), restriction to opens (line 200); Fiber.lean:247 Algebra.Etale.of_formallyUnramified_of_flat; nothing stating that a smooth scheme morphism with Ω_{A/R}=0 on an affine open is etale there",
    "date": "2026-10-10",
    "verdict": "no match (the pieces exist; assembling them and the formal-smoothness definition is the proof)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem appLE' Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; sed -n 36,46p Mathlib/RingTheory/RingHom/Etale.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "HasRingHomProperty.appLE (RingHomProperties.lean:293: P f -> Q (f.appLE U V e) for affine opens; with P = Smooth, Q = RingHom.Smooth this is Stacks 01V6 (1)=>(2)); RingHom.etale_iff_formallyUnramified_and_smooth (RingHom/Etale.lean:40); Smooth.lean:200 instance Smooth (f.resLE V U e); Restrict.lean:861 arrowResLEAppIso",
+   "date": "2026-10-10",
+   "verdict": "no match for the whole statement: the Lean proof would chain HasRingHomProperty.appLE (Smooth), RingHom.etale_iff_formallyUnramified_and_smooth with FormallyUnramified <-> Subsingleton Ω, HasRingHomProperty.iff_of_isAffine with arrowResLEAppIso, and Etale of an open immersion and composition: several lemmas, not one line"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +162,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-zero-differentials-affine-open-etale",
+  "worker": "stage1",
+  "summary": "Statement and stmt_deps kept (correct against Stacks Morphisms Section 02GH: with Definition 02GI the lemma is immediate). Tags checked in literature/stacks-project/tags/tags: 02GH = morphisms-section-etale, 02GI = morphisms-definition-etale, 00U1 = algebra-definition-etale, 01V6 = morphisms-lemma-smooth-characterize (its last sentence is the restriction to opens; (1)=>(2) the smoothness of O_S(V) -> O_X(U)), 02GP = morphisms-lemma-open-immersion-etale, 02GN = morphisms-lemma-composition-etale, 01V5 = morphisms-definition-smooth, 02H6 = more-morphisms-lemma-smooth-formally-smooth, 01I1 = schemes-lemma-morphism-into-affine. Proof in five steps: (1) g_{W,V}: W -> V smooth by lem-weil-pbc-smooth-restrict-open-subschemes (a); (2) g_{W,V} corresponds to Spec(phi) under W = Spec A, V = Spec R, by the new Mathlib leaf lem-weil-pbc-affine-opens-induced-ring-map-spec-square (iota_V o Spec phi = g o iota_W, IsAffineOpen.SpecMap_appLE_fromSpec) and uniqueness of factorization through j_V; (3) Spec(phi) smooth by (c) of the same lemma, so phi smooth by lem-weil-pbc-smooth-ring-map-iff-smooth-affine (cited as it stands, being split by another worker); (4) with Omega = 0, phi is etale in the sense of 00U1 as stated in lem-weil-pbc-etale-ring-map-iff-etale-affine, so Spec(phi) etale; (5) isomorphisms and j_V are open immersions, hence etale, and composites of etale maps are etale (lem-weil-pbc-etale-composition-cancellation (1),(2)). All cited statements are in unit sk-thm-p1. One new node; one more grep search recorded on the item (HasRingHomProperty.appLE etc.: pieces exist, no one-line match)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Five steps: restriction of the smooth g to W -> V smooth (restrict-open-subschemes leaf), the restriction is Spec of the induced ring map (new Mathlib leaf IsAffineOpen.SpecMap_appLE_fromSpec AffineScheme.lean:482, verified), the ring map smooth by the identification node (02H6 affine case, committed), etale since Omega = 0 (00U1 via the 02GJ leaf), composite with the open immersion etale. Tags verified by the worker (02GH, 02GI, 00U1, 01V6, 02GP, 02GN, 01I1)."
+ }
 }
