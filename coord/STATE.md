@@ -29,19 +29,19 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-09 23:23 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-09 23:35 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 12 | 21 | 0 | 2: lem-weil-pbc-grothendieck-existence-projective (1.7), lem-weil-pbc-z-g-ring (2.3) |
+| C1 | 12 | 21 | 0 | 2: lem-weil-pbc-grothendieck-existence-projective (0.1), lem-weil-pbc-z-g-ring (0.1) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 13 | 19 | 0 | 3: lem-weil-pbc-regular-composition (0.1), lem-weil-pbc-stein-normalized-fibre-idempotent (0.1), lem-weil-pbc-stein-universally-closed-factor (0.1) |
+| E1 | 13 | 20 | 0 | 3: lem-weil-pbc-regular-composition (0.3), lem-weil-pbc-stein-normalized-fibre-idempotent (0.3), lem-weil-pbc-stein-universally-closed-factor (0.3) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 14 | 17 | 1 | 5: lem-weil-pbc-closed-immersion-residue-field-iso (0.1), lem-weil-pbc-closed-immersion-unit-quotient (0.1), lem-weil-pbc-closed-pushforward-stalks (0.1), lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image (0.1), lem-weil-pbc-etale-stratification-local-gluing (0.1) |
+| F1 | 14 | 17 | 1 | 5: lem-weil-pbc-closed-immersion-residue-field-iso (0.2), lem-weil-pbc-closed-immersion-unit-quotient (0.2), lem-weil-pbc-closed-pushforward-stalks (0.2), lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image (0.2), lem-weil-pbc-etale-stratification-local-gluing (0.2) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 13 | 7 | 0 | 2: lem-weil-pbc-artinian-ideal-length-one-filtration (0.1), lem-weil-pbc-coherent-kernel-cokernel-locnoeth (0.0) |
+| G1 | 13 | 7 | 0 | 2: lem-weil-pbc-artinian-ideal-length-one-filtration (0.1), lem-weil-pbc-coherent-kernel-cokernel-locnoeth (0.1) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -104,6 +104,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-09 22:59 | 776 | 864 | 523 | 328 | 12 more items since 22:43 (02HT with 5 new, 02G1 with 5 new incl. standard-smooth leaves, 0CAL with 3 new, 0903, 0A31, 056J, 09MQ, 07M6 by a local route, exchange module-linear, ...); merged G1 stein-flat-base-change-global-sections (tool_uses recorded by L); 5 workers running (unramified x2, thickening dictionary, 0EM0, existence-proper); open returns C1 x3, F1 x2 |
 | 2026-10-09 23:12 | 800 | 882 | 531 | 330 | 12 more items since 22:59 (088C with the 088A node, 088F written out, 0EM0, 00UW, 02G7, two definitions, 00WB in three nodes with the plus construction corrected to Stacks' F^+, 0389 with tool_uses 0363/054N); merged G1 x3 (separable-tensor, stein-geometric-fibre, sheaf-cokernel, directed-colimit-coequalizers), C1 site-sheafification (2nd), F1 jacobi-zariski (3rd), E1 regular-permanence, E1 regular-local-maximal; returned E1 stein-universally-closed-factor (schema split) and E1 regular-composition (07QI gap); 5 workers running |
 | 2026-10-09 23:23 | 799 | 895 | 535 | 330 | 13 more items since 23:12 (07PU with 5 new incl. 07PM and 07N9, 07C7 and three other definitions, 02H4, 0BUF, 08KS, 0319, 01BH(4), ...); merged G1 conormal-sheaf definition, F1 etale-stratified-finite (4th), E1 regular-local-maximal (line fixed by L); returned E1 regular-composition (07QI gap) and C1 z-g-ring (3rd: DVR node false without char 0); 5 workers running |
+| 2026-10-09 23:35 | 802 | 905 | 538 | 330 | 12 more items since 23:23 (07RZ route with the F1 statement corrected (qc added), 03S9 gluing, 087W, 087X kernel, 01CQ, 01Y9, 07NY, 07RH, 0325, 08KS, ...); merged F1 etale-stratified-finite (4th), G1 conormal definition; returned E1 stein-normalized-fibre-idempotent; C1 re-pushed z-g-ring twice without the characteristic-zero fix (notice written); 5 workers running |
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 
