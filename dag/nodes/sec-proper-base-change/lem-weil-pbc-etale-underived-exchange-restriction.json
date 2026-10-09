@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-etale-underived-exchange-restriction",
+ "kind": "statement",
+ "title": "Underived exchange along an etale morphism is the restriction identification",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $j:V\\to Y$ an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ (etale, as a base change of $j$) and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the cartesian square [def-weil-pbc-cartesian-square] with identification the identity of $X\\times_YV$. Use the small etale sites [def-weil-pbc-etale-site], the abelian sheaves on them [def-weil-pbc-abelian-etale-sheaves], the direct images $(u_*F)(W)=F(W\\times_TU)$ for $u:U\\to T$ [def-weil-pbc-direct-image] and the inverse images [def-weil-pbc-inverse-image]. For an abelian sheaf $G$ on $Y_{\\Et}$ write $G|_V(W)=G(W\\xrightarrow{p}V\\xrightarrow{j}Y)$ ($p:W\\to V$ etale) and $\\rho_{j,G}:j^{-1}G\\xrightarrow{\\sim}G|_V$ for the natural isomorphism of [lem-weil-pbc-etale-inverse-image-restriction]; likewise $F|_{X_V}(T)=F(T\\to X_V\\xrightarrow{j_X}X)$ and $\\rho_{j_X,F}:j_X^{-1}F\\xrightarrow{\\sim}F|_{X_V}$ for an abelian sheaf $F$ on $X_{\\Et}$. For an object $p:W\\to V$ of $V_{\\Et}$ let\n$$c_W:W\\times_VX_V\\longrightarrow W\\times_YX,\\qquad c_W=(\\mathrm{pr}_W,\\ j_X\\circ\\mathrm{pr}_{X_V}),$$\nan isomorphism of schemes over $X$ (inverse $(\\mathrm{pr}_W,(\\mathrm{pr}_X,p\\circ\\mathrm{pr}_W))$), hence an isomorphism in $X_{\\Et}$, and put\n$$\\psi_{F,W}=F(c_W):(f_*F)|_V(W)=F(W\\times_YX)\\longrightarrow F(W\\times_VX_V\\to X)=F|_{X_V}(W\\times_VX_V)=\\bigl(f_{V*}(F|_{X_V})\\bigr)(W).$$\nThen:\n1. $\\psi_F=(\\psi_{F,W})_W:(f_*F)|_V\\to f_{V*}(F|_{X_V})$ is an isomorphism of abelian sheaves on $V_{\\Et}$ (compatible with the restriction maps along morphisms $W'\\to W$ of $V_{\\Et}$), natural in $F$.\n2. The underived exchange morphism [def-weil-pbc-underived-exchange] $\\Ex^0_{\\square_j,F}:j^{-1}f_*F\\to f_{V*}j_X^{-1}F$ satisfies\n$$f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}.$$\nIn particular $\\Ex^0_{\\square_j,F}$ is an isomorphism for every abelian sheaf $F$ on $X_{\\Et}$: the underived exchange along an etale base change is, on sections, the identity $F(W\\times_YX)=F(W\\times_VX_V)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma label lemma-localize-morphism, Tag 03CF (last assertion $f'_*j_U^{-1}=j_V^{-1}f_*$) and Lemma label lemma-localize-morphism-strong, Tag 03EF; used as an identification of base change maps in Etale Cohomology, proof of Lemma label lemma-base-change-local, Tag 0EZR, part (1) (literature/stacks-project/etale-cohomology.tex), and as 'it is clear that $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$' in Cohomology on Sites, proof of Lemma Tag 0D6G (literature/stacks-project/sites-cohomology.tex); the base change map is Cohomology on Sites, Remark Tag 07A7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct image of a sheaf commutes with restriction to a localized site over an object (pushforward then restrict equals restrict then pushforward)",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.pushforward_obj_presheaf_map (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, open immersions), TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf (Mathlib.Topology.Sheaves.Functors), SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward",
+   "date": "2026-10-09",
+   "verdict": "no match: nothing on etale sites, no commutation of a direct image with restriction to an over site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf pushforward along continuous functor commutes with overPullback / restriction to Over category: (f_* F)|_V ≅ f_V*(F|_U)",
+   "results": "TopCat.Sheaf.pushforwardForgetIso, TopCat.Sheaf.pushforward_forget (Mathlib.Topology.Sheaves.Functors), Functor.sheafPushforwardContinuousCompSheafToPresheafIso, Functor.sheafPushforwardContinuousComp_inv_app_val_app, Functor.sheafPushforwardContinuousComp'_inv_app_val_app (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-09",
+   "verdict": "no match: composition of pushforwards only; the localization of a morphism of sites at an object of the target is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Functor.sheafPushforwardContinuous",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'pushforward\\|def \\|lemma ' Mathlib/CategoryTheory/Sites/Over.lean; grep -rn 'overPullback' Mathlib/ ; grep -rn 'baseChange\\|exchange' Mathlib/AlgebraicGeometry/Sites/*.lean",
+   "results": "Sites/Over.lean:520 Sheaf.pushforwardOverMapIso (F.over Y pushed along Over.map f is F.over X, one site), :531 Sheaf.toPushforwardOverPullback (F.over Y -> pushforward of F.over X along Over.pullback f, induced by pullback.fst: the unit of restriction along a morphism inside one site, not a direct image along a morphism of sites); Sites/LocalProperties.lean (isIso detected by overPullback); Topology/Sheaves/Over.lean (open subsets); AlgebraicGeometry/Sites/*.lean: no base change or exchange map",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no direct image between small etale sites of a morphism of schemes and no underived exchange morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-localization-exchange",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction"
+}
