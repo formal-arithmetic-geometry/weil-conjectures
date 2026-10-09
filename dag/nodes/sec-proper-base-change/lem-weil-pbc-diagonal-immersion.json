@@ -22,10 +22,36 @@
    "results": "Mathlib has IsImmersion.isStableUnderBaseChange and the definition of IsImmersion, but no general theorem matching Schemes Lemma 01KJ in the searched imports",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the diagonal morphism of a morphism of schemes is an immersion",
+   "results": "AlgebraicGeometry.IsImmersion.instDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.Immersion): ∀ {X Y : Scheme} (f : X ⟶ Y), IsImmersion (pullback.diagonal f); also instLiftSchemeId, IsSeparated.mk, isSeparated_iff, IsSeparated.isClosedImmersion_diagonal (Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsImmersion.instDiagonalScheme (the earlier leansearch entry of this node, 'no exact match', was wrong)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal _)",
+   "results": "AlgebraicGeometry.IsImmersion.instDiagonalScheme {X Y : Scheme} (f : X ⟶ Y) : IsImmersion (pullback.diagonal f) (Mathlib.AlgebraicGeometry.Morphisms.Immersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'diagonal\\|^class\\|isImmersion_iff' Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "results": "line 45 class IsImmersion extends IsPreimmersion (embedding, surjective stalk maps) with isLocallyClosed_range; line 155 isImmersion_iff_exists (closed immersion followed by open immersion); lines 196-207 `/-- The diagonal morphism is always an immersion. -/ @[stacks 01KJ] instance : IsImmersion (pullback.diagonal f)` inside namespace IsImmersion (108-273); line 229 IsImmersion (prod.lift (𝟙 X) (𝟙 X))",
+   "date": "2026-10-10",
+   "verdict": "match (tagged @[stacks 01KJ])"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+  "line": 198,
+  "how": "exact: the anonymous instance `instance : IsImmersion (pullback.diagonal f)` (line 198, tagged @[stacks 01KJ], auto-named AlgebraicGeometry.IsImmersion.instDiagonalScheme) for every morphism of schemes f : X ⟶ Y, where `pullback.diagonal f : X ⟶ pullback f f` is the diagonal into the fibre product (def-pc-fibre-product = CategoryTheory.Limits.pullback); Mathlib's IsImmersion (line 45: embedding + surjective stalk maps + locally closed range) is the node's notion 'closed immersion into an open subscheme followed by the open immersion' by `AlgebraicGeometry.IsImmersion.isImmersion_iff_exists` (line 155: IsImmersion f ↔ ∃ Z g₁ g₂, IsClosedImmersion g₁ ∧ IsOpenImmersion g₂ ∧ g₁ ≫ g₂ = f)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -45,5 +71,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-diagonal-immersion",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 01KJ (schemes.tex lemma-diagonal-immersion, line 4038) and kept. Mathlib has it exactly: the instance IsImmersion (pullback.diagonal f) at Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:198, tagged @[stacks 01KJ] (name AlgebraicGeometry.IsImmersion.instDiagonalScheme, confirmed by LeanSearch and Loogle); its notion of immersion agrees with def-weil-closed-immersion's by isImmersion_iff_exists (line 155). The node's earlier leansearch record ('no exact match') was wrong. Made a Mathlib leaf; no proof steps; stmt_deps unchanged. Citers (lem-weil-pbc-descend-separated, lem-weil-pbc-surjective-universally-closed-separated) use exactly this statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf: instance IsImmersion (pullback.diagonal f), Morphisms/Immersion.lean:198 (@[stacks 01KJ]), verified; immersion notions agree by IsImmersion.isImmersion_iff_exists (line 155). review_split patched by L to accept a leaf item without proof steps."
+ }
 }

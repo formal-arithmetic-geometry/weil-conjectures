@@ -47,7 +47,8 @@ def main() -> int:
         d = nodes.get(item)
         if d is None:
             print(f"{item}: no such node"); bad += 1; continue
-        if str(d.get("status")) == "mathlib" and d.get("mathlib_match"):
+        leaf = str(d.get("status")) == "mathlib" and bool(d.get("mathlib_match"))
+        if leaf:
             notes.append("the item is a Mathlib leaf")
         elif str(d.get("status")) != "split":
             errs.append(f"status is {d.get('status')!r}, not split")
@@ -57,6 +58,9 @@ def main() -> int:
         if dq.is_def(d):
             if not d.get("stmt_deps"):
                 errs.append("definition with no stmt_deps")
+        elif leaf:
+            if d.get("proof"):
+                errs.append("Mathlib leaf with proof steps")
         else:
             pf = d.get("proof")
             if not isinstance(pf, list) or not pf:
