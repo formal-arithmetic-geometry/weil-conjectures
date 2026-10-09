@@ -669,6 +669,85 @@ lemma omegaGen_compat (i j : ULift.{u} (Fin 2)) (W : (ProjectiveLine (Spec (.of 
     hd hj, (dΩ k).app_eq_neg_sq_smul_of_mul_eq_one le_top hcc, sign_eq_neg hij, hb]
   module
 
+/-- **The morphism `𝒪(-2) ⟶ Ω¹_{ℙ¹/k}`** sending the generator `xᵢ⁻²` over `D₊(xᵢ)` to
+`± d(x_{other i} / xᵢ)`. -/
+def fromTwist : twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2) ⟶
+    (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials :=
+  glueHom (iSup_chart k) (isFreeGenerator_twistGen k) (omegaGen_compat k)
+
+lemma fromTwist_twistGen (i : ULift.{u} (Fin 2)) :
+    (fromTwist k).app (chart k {i}) (twistGen k i) = omegaGen k i :=
+  glueHom_app_self _ _ _ i
+
+lemma sign_mul_self (i : ULift.{u} (Fin 2)) : sign i * sign i = 1 := by
+  unfold sign
+  split_ifs <;> norm_num
+
+lemma fromTwist_comp_toTwist : fromTwist k ≫ toTwist k = 𝟙 _ := by
+  refine hom_ext_of_isFreeGenerator (iSup_chart k) (isFreeGenerator_twistGen k) fun i ↦ ?_
+  change (toTwist k).app _ ((fromTwist k).app _ (twistGen k i)) = twistGen k i
+  rw [fromTwist_twistGen, omegaGen, map_zsmul, toTwist_app_dΩ, twistDerivation_app k i _ le_rfl,
+    localD, chartLocalDerivation_app_self, chartDerivation_coord, smul_smul, sign_mul_self,
+    one_smul]
+
+lemma dΩ_chartConst (W : (ProjectiveLine (Spec (.of k))).Opens) (c : k) :
+    (dΩ k).app W le_top (chartConst k W c) = 0 := by
+  have e : W ≤ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) ⁻¹ᵁ ⊤ := le_top
+  have h := appLE_top_eq_chartConst k W e ((Scheme.ΓSpecIso (.of k)).inv c)
+  have hc : (Scheme.ΓSpecIso (.of k)).hom ((Scheme.ΓSpecIso (.of k)).inv c) = c := by simp
+  rw [hc] at h
+  rw [← h, Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app, CommRingCat.comp_apply,
+    CommRingCat.comp_apply]
+  exact (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentialsDerivation.d_app _
+
+lemma closure_chart {i j : ULift.{u} (Fin 2)} (hij : i ≠ j) :
+    Subring.closure (Set.range (chartConst k (chart k {i})) ∪ {coord k (i := i) (j := j)}) = ⊤ := by
+  refine eq_top_iff.2 ?_
+  rintro f -
+  obtain ⟨p, rfl⟩ := (bijective_polyToChart k hij).2 f
+  induction p using Polynomial.induction_on with
+  | C a => exact Subring.subset_closure (Or.inl ⟨a, by simp [polyToChart]⟩)
+  | add p q hp hq => rw [map_add]; exact Subring.add_mem _ hp hq
+  | monomial n a h =>
+    rw [pow_succ, ← mul_assoc, map_mul]
+    exact Subring.mul_mem _ h (Subring.subset_closure (Or.inr (by simp [polyToChart])))
+
+lemma fromTwist_twistDerivation (W : (ProjectiveLine (Spec (.of k))).Opens)
+    (a : Γ(ProjectiveLine (Spec (.of k)), W)) :
+    (fromTwist k).app W ((twistDerivation k).app W le_top a) = (dΩ k).app W le_top a := by
+  refine LocalDerivation.ext_of_cover (fun i ↦ chart k {i}) (iSup_chart k)
+    ((twistDerivation k).postcomp (fromTwist k)) (dΩ k) (fun i W hW a ↦ ?_) W a
+  refine LocalDerivation.ext_of_isAffineOpen (isAffineOpen_chart k (Set.singleton_nonempty i))
+    (((twistDerivation k).postcomp (fromTwist k)).restrict le_top) ((dΩ k).restrict le_top)
+    (fun a ↦ ?_) W hW a
+  refine LocalDerivation.app_eq_of_closure _ _ le_rfl _ (closure_chart k (ne_other i)) ?_ a
+  rintro a (⟨c, rfl⟩ | rfl)
+  · simp only [LocalDerivation.restrict_app, LocalDerivation.postcomp_app]
+    rw [twistDerivation_app k i _ le_rfl, localD, chartLocalDerivation_app_self,
+      chartDerivation_chartConst, map_zero, dΩ_chartConst]
+  · simp only [LocalDerivation.restrict_app, LocalDerivation.postcomp_app]
+    rw [twistDerivation_app k i _ le_rfl, localD, chartLocalDerivation_app_self,
+      chartDerivation_coord, map_zsmul, fromTwist_twistGen, omegaGen, smul_smul, sign_mul_self,
+      one_smul]
+
+lemma toTwist_comp_fromTwist : toTwist k ≫ fromTwist k = 𝟙 _ := by
+  apply ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentialsHomEquiv _).injective
+  rw [Scheme.Hom.relativeDifferentialsHomEquiv_apply,
+    Scheme.Hom.relativeDifferentialsHomEquiv_apply]
+  ext V a
+  change (fromTwist k).app V.unop ((toTwist k).app V.unop ((dΩ k).app V.unop le_top a)) =
+    (dΩ k).app V.unop le_top a
+  rw [toTwist_app_dΩ, fromTwist_twistDerivation]
+
+/-- **The canonical sheaf of `ℙ¹_k`**: `Ω¹_{ℙ¹/k} ≅ 𝒪(-2)`. -/
+def relativeDifferentialsIsoTwist :
+    (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
+      twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2) where
+  hom := toTwist k
+  inv := fromTwist k
+  hom_inv_id := toTwist_comp_fromTwist k
+  inv_hom_id := fromTwist_comp_toTwist k
+
 end Differentials
 
 end AlgebraicGeometry.ProjectiveLine
