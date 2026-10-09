@@ -51,3 +51,43 @@ lemma IsLocalizedModule.of_injective_of_exact {R : Type*} [CommRing R] (S : Subm
     refine ⟨c, hι ?_⟩
     rw [Submonoid.smul_def, Submonoid.smul_def, map_smul, map_smul]
     exact hc
+
+/-- **Localization commutes with extensions.** Let `K → M → N → 0` and `0 → K' → M' → N'` be exact
+sequences of `R`-modules, compatible with maps `K → K'`, `M → M'`, `N → N'`, the first and the
+last of which are localizations at `S`. If the elements of `S` act invertibly on `M'`, then
+`M → M'` is a localization at `S`. -/
+lemma IsLocalizedModule.of_exact_of_surjective {R : Type*} [CommRing R] (S : Submonoid R)
+    {K M N K' M' N' : Type*} [AddCommGroup K] [AddCommGroup M] [AddCommGroup N]
+    [AddCommGroup K'] [AddCommGroup M'] [AddCommGroup N'] [Module R K] [Module R M] [Module R N]
+    [Module R K'] [Module R M'] [Module R N'] {ι : K →ₗ[R] M} {φ : M →ₗ[R] N}
+    {ι' : K' →ₗ[R] M'} {φ' : M' →ₗ[R] N'} (lK : K →ₗ[R] K') (lM : M →ₗ[R] M')
+    (lN : N →ₗ[R] N') [IsLocalizedModule S lK] [IsLocalizedModule S lN]
+    (hex : Function.Exact ι φ) (hφ : Function.Surjective φ) (hι' : Function.Injective ι')
+    (hex' : Function.Exact ι' φ') (h₁ : ∀ k, lM (ι k) = ι' (lK k))
+    (h₂ : ∀ m, lN (φ m) = φ' (lM m)) (hu : ∀ s : S, IsUnit (algebraMap R (Module.End R M') s)) :
+    IsLocalizedModule S lM where
+  map_units := hu
+  surj y := by
+    obtain ⟨⟨n, s⟩, hn⟩ := IsLocalizedModule.surj S lN (φ' y)
+    dsimp only at hn
+    obtain ⟨m, rfl⟩ := hφ n
+    rw [h₂, Submonoid.smul_def, ← map_smul] at hn
+    obtain ⟨k', hk'⟩ := (hex' (s.1 • y - lM m)).mp (by rw [map_sub, hn, sub_self])
+    obtain ⟨⟨k, t⟩, hk⟩ := IsLocalizedModule.surj S lK k'
+    dsimp only at hk
+    refine ⟨⟨t.1 • m + ι k, t * s⟩, ?_⟩
+    change (t * s).1 • y = lM (t.1 • m + ι k)
+    rw [map_add, map_smul, h₁, ← hk, Submonoid.smul_def, map_smul, hk', Submonoid.coe_mul,
+      mul_smul, smul_sub, add_sub_cancel]
+  exists_of_eq {m₁ m₂} h := by
+    have : lN (φ (m₁ - m₂)) = 0 := by rw [h₂, map_sub, h, sub_self, map_zero]
+    obtain ⟨c, hc⟩ := IsLocalizedModule.exists_of_eq (S := S) (this.trans (map_zero lN).symm)
+    rw [smul_zero, Submonoid.smul_def, ← map_smul] at hc
+    obtain ⟨k, hk⟩ := (hex _).mp hc
+    have hk0 : lK k = lK 0 := by
+      refine hι' ?_
+      rw [← h₁, hk, map_zero, map_zero, map_smul, map_sub, h, sub_self, smul_zero]
+    obtain ⟨d, hd⟩ := IsLocalizedModule.exists_of_eq (S := S) hk0
+    refine ⟨d * c, ?_⟩
+    rw [← sub_eq_zero, Submonoid.smul_def, Submonoid.smul_def, ← smul_sub, Submonoid.coe_mul,
+      mul_smul, ← hk, ← map_smul, ← Submonoid.smul_def, hd, smul_zero, map_zero]
