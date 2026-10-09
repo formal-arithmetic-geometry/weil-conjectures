@@ -6,9 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
@@ -109,6 +112,120 @@ lemma isFinitePresentation_toModules [IsLocallyNoetherian X] (J : X.IdealSheafDa
   have := IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
   exact isFinitePresentation_kernel J.toPushforwardSubscheme
 
+
+section Tensor
+
+/-- Tensoring with an invertible module is an autoequivalence. -/
+lemma isEquivalence_tensorRight (P : X.Modules) [P.IsInvertible] :
+    (tensorRight P).IsEquivalence :=
+  (BraidedCategory.tensorRightEquivalence P Pᵛ
+    (nonempty_tensorObj_dual_iso_unit P).some).isEquivalence_functor
+
+/-- A module vanishing on `U` stays zero on `U` after tensoring with an invertible module. -/
+lemma isZero_restrict_tensorObj {M : X.Modules} (N : X.Modules) [N.IsInvertible] {U : X.Opens}
+    (h : IsZero (M.restrict U.ι)) : IsZero ((M ⊗ N).restrict U.ι) := by
+  have h₁ : IsZero ((pullback U.ι).obj M) :=
+    h.of_iso ((restrictFunctorIsoPullback U.ι).app M).symm
+  have := isEquivalence_tensorRight ((pullback U.ι).obj N)
+  have h₂ : IsZero ((pullback U.ι).obj M ⊗ (pullback U.ι).obj N) :=
+    (tensorRight ((pullback U.ι).obj N)).map_isZero h₁
+  exact (h₂.of_iso (Functor.Monoidal.μIso (pullback U.ι) M N).symm).of_iso
+    ((restrictFunctorIsoPullback U.ι).app _)
+
+end Tensor
+
+section EulerChar
+
+variable (K : Type u) [Field K] [X.Over (Spec (.of K))] [IsProper (X ↘ Spec (.of K))]
+
+include K in
+/-- A proper scheme over a field is Noetherian. -/
+lemma isNoetherian_of_isProper : IsNoetherian X := by
+  have := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))
+  have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  exact {}
+
+include K in
+/-- On a proper scheme over a field all cohomology vanishes above some degree, by Grothendieck
+vanishing. -/
+lemma exists_forall_subsingleton_H :
+    ∃ D : ℕ, ∀ (M : X.Modules) (q : ℕ), D < q → Subsingleton (M.H q) := by
+  have := isNoetherian_of_isProper K (X := X)
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of K))
+  exact ⟨d, fun M q hq ↦ subsingleton_H_of_topologicalKrullDim_lt M
+    (hd.trans_lt (by exact_mod_cast hq))⟩
+
+omit [IsProper (X ↘ Spec (.of K))] in
+/-- The Euler characteristic of the zero module is zero. -/
+lemma eulerChar_eq_zero_of_isZero {M : X.Modules} (h : IsZero M) : M.eulerChar K = 0 := by
+  have (q : ℕ) : M.finrankH K q = 0 := by
+    have := subsingleton_H_of_isZero h q
+    exact Module.finrank_zero_of_subsingleton
+  simp [eulerChar, this]
+
+/-- **The Euler characteristic of a four-term exact sequence.** For a morphism `φ : M ⟶ N` of
+coherent modules on a proper scheme over a field,
+`χ(N) - χ(M) = χ(coker φ) - χ(ker φ)`, by additivity of `χ` on
+`0 ⟶ ker φ ⟶ M ⟶ coim φ ⟶ 0` and `0 ⟶ im φ ⟶ N ⟶ coker φ ⟶ 0`. -/
+theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N) :
+    N.eulerChar K - M.eulerChar K = (cokernel φ).eulerChar K - (kernel φ).eulerChar K := by
+  have := isNoetherian_of_isProper K (X := X)
+  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H K (X := X)
+  have := isQuasicoherent_kernel φ
+  have := isFinitePresentation_kernel φ
+  have := isQuasicoherent_cokernel φ
+  have := isFinitePresentation_cokernel φ
+  have := isQuasicoherent_cokernel (kernel.ι φ)
+  have := isFinitePresentation_cokernel (kernel.ι φ)
+  have := isQuasicoherent_kernel (cokernel.π φ)
+  have := isFinitePresentation_kernel (cokernel.π φ)
+  let S₁ := ShortComplex.mk (kernel.ι φ) (cokernel.π (kernel.ι φ)) (cokernel.condition _)
+  have hS₁ : S₁.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  let S₂ := ShortComplex.mk (kernel.ι (cokernel.π φ)) (cokernel.π φ) (kernel.condition _)
+  have hS₂ : S₂.ShortExact := .mk' (ShortComplex.exact_kernel _) inferInstance inferInstance
+  have i₁ : ∀ q, FiniteDimensional K (S₁.X₁.H q) := finiteDimensional_H_of_isProper (kernel φ)
+  have i₂ : ∀ q, FiniteDimensional K (S₁.X₂.H q) := finiteDimensional_H_of_isProper M
+  have i₃ : ∀ q, FiniteDimensional K (S₁.X₃.H q) :=
+    finiteDimensional_H_of_isProper (cokernel (kernel.ι φ))
+  have j₁ : ∀ q, FiniteDimensional K (S₂.X₁.H q) :=
+    finiteDimensional_H_of_isProper (kernel (cokernel.π φ))
+  have j₂ : ∀ q, FiniteDimensional K (S₂.X₂.H q) := finiteDimensional_H_of_isProper N
+  have j₃ : ∀ q, FiniteDimensional K (S₂.X₃.H q) := finiteDimensional_H_of_isProper (cokernel φ)
+  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD _) (hD _) (hD _)
+  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD _) (hD _) (hD _)
+  have h₃ := eulerChar_congr K (Abelian.coimageIsoImage φ)
+  change M.eulerChar K = (kernel φ).eulerChar K + (cokernel (kernel.ι φ)).eulerChar K at h₁
+  change N.eulerChar K = (kernel (cokernel.π φ)).eulerChar K + (cokernel φ).eulerChar K at h₂
+  change (cokernel (kernel.ι φ)).eulerChar K = (kernel (cokernel.π φ)).eulerChar K at h₃
+  linarith
+
+/-- The four-term identity of `AlgebraicGeometry.Scheme.Modules.eulerChar_sub_eulerChar_eq`
+twisted by an invertible module `P`: `χ(N ⊗ P) - χ(M ⊗ P) = χ(coker φ ⊗ P) - χ(ker φ ⊗ P)`,
+since tensoring with `P` is exact. -/
+theorem eulerChar_tensorObj_sub_eulerChar_tensorObj_eq {M N : X.Modules}
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N)
+    (P : X.Modules) [P.IsInvertible] :
+    (N ⊗ P).eulerChar K - (M ⊗ P).eulerChar K =
+      (cokernel φ ⊗ P).eulerChar K - (kernel φ ⊗ P).eulerChar K := by
+  have := isQuasicoherent_tensorObj M P
+  have := isFinitePresentation_tensorObj M P
+  have := isQuasicoherent_tensorObj N P
+  have := isFinitePresentation_tensorObj N P
+  have := isEquivalence_tensorRight P
+  have e₁ : (kernel (φ ▷ P)).eulerChar K = (kernel φ ⊗ P).eulerChar K :=
+    eulerChar_congr K (PreservesKernel.iso (tensorRight P) φ).symm
+  have e₂ : (cokernel (φ ▷ P)).eulerChar K = (cokernel φ ⊗ P).eulerChar K :=
+    eulerChar_congr K (PreservesCokernel.iso (tensorRight P) φ).symm
+  rw [eulerChar_sub_eulerChar_eq K (φ ▷ P), e₁, e₂]
+
+end EulerChar
 
 section Ample
 
