@@ -1,0 +1,7 @@
+# Worker report
+
+Repaired `lem-weil-pbc-stein-universally-closed-factor` from the E1 return. Removed the six schema-split child nodes that merely repeated clauses of Tag 03GY. The item now follows the source proof and cites existing public nodes for quasi-compactness, relative normalization, image universal closedness, pushforward quasi-coherence, affine tilde/global-sections, and flat global-sections base change. Three genuine reusable nodes were added: `lem-weil-pbc-universally-closed-global-sections-integral` (a Mathlib leaf at `Proper.lean:138`), `lem-weil-pbc-relative-spec-base-change` (Stacks Constructions 01LX), and `lem-weil-pbc-qc-scheme-vanishing-section-nilpotent` (the quasi-compact vanishing-section fact used in the surjectivity argument). No Lean was written or compiled. The lead must add the E1 review section before final delivery.
+
+## Review by E1
+
+I checked the repaired proof against More on Morphisms Lemma 37.53.4 (Tag 03GY). The schema-split duplicates are gone: the four steps cite public permanence, relative-normalization, image-universal-closedness, pushforward quasi-coherence, affine tilde/global-sections, and flat global-sections base change. The three new nodes are genuine reusable statements, statement-only when unsplit, with exact sources and `created.item` equal to this item; the 01LX base-change statement and nilpotent vanishing lemma are cited by the relevant steps. The report and split report are present, with no private module or Lean change.

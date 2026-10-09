@@ -11,9 +11,86 @@
   "def-pc-scheme",
   "def-weil-pbc-stein-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The universally closed, quasi-separated morphism $f$ is quasi-compact by the quasi-compactness permanence result [lem-weil-pbc-qcqs-morphism-permanence]. Hence the normalization of $\\operatorname{Spec}A$ in $X$ is defined. The relative-normalization description [lem-weil-pbc-relative-normalization] identifies the intermediate scheme locally with the spectrum of the integral closure of $A$ in $B=H^0(X,\\mathcal O_X)$, while [lem-weil-pbc-universally-closed-global-sections-integral] says that this closure is all of $B$. Thus the intermediate scheme is $\\operatorname{Spec}B$, the second map $s$ is integral, and the factorization is the relative spectrum of $f_*\\mathcal O_X$ [def-weil-pbc-stein-factorization].",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-universally-closed-global-sections-integral",
+    "def-weil-pbc-stein-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof using Morphisms Lemmas 03GI, 035H and 03GV"
+   }
+  },
+  {
+   "text": "The factor map $q$ is universally closed by the image-of-a-universally-closed-morphism lemma [lem-weil-pbc-image-universally-closed], applied to the factorization after the image argument of the source. It is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence], since $s$ is affine and hence quasi-separated and $s\\circ q=f$ is quasi-compact; it is quasi-separated by the same composition-permanence result because $s\\circ q=f$ is quasi-separated. This gives all three morphism properties required for the subsequent pushforward argument.",
+   "uses": [
+    "lem-weil-pbc-image-universally-closed",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof using Morphisms Lemma 03GN and Schemes Lemmas 03GI, 01KV"
+   }
+  },
+  {
+   "text": "Since $q$ is quasi-compact and quasi-separated, [pqf-lem-pushforward-qcoh] makes $q_*\\mathcal O_X$ quasi-coherent. On the affine target $\\operatorname{Spec}B$, the global sections of this sheaf are $H^0(X,\\mathcal O_X)=B$. The affine tilde/global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies a quasi-coherent sheaf on $\\operatorname{Spec}B$ with the tilde of its global sections, so $q_*\\mathcal O_X=\\mathcal O_{\\operatorname{Spec}B}$.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof of clause (3), using Schemes Lemmas 01LC and 01IA"
+   }
+  },
+  {
+   "text": "The image of $q$ is closed because $q$ is universally closed. Write it as $V(I)\\subseteq\\operatorname{Spec}B$. For $h\\in I$, the pullback of $h$ is a global section of $\\mathcal O_X$ whose germ vanishes at every point, hence is nilpotent by [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent]. Since the pullback identifies $B$ with $H^0(X,\\mathcal O_X)$, $h$ itself is nilpotent. Thus $I$ is nil and $V(I)=\\operatorname{Spec}B$, proving that $q$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), surjectivity paragraph"
+   }
+  },
+  {
+   "text": "For a flat base change of $\\operatorname{Spec}A$, degree-zero flat base change for proper global sections is the same calculation supplied by [lem-weil-pbc-stein-flat-base-change-global-sections]. The relative-spectrum construction then commutes with this base change by [lem-weil-pbc-relative-spec-base-change], so the displayed Stein factorization commutes with every flat base change.",
+   "uses": [
+    "lem-weil-pbc-stein-flat-base-change-global-sections",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), final paragraph using Cohomology Lemma 30.5.2 (Tag 02KH) and Constructions Lemma 01LX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-universally-closed-global-sections-integral",
+  "def-weil-pbc-stein-factorization",
+  "lem-weil-pbc-image-universally-closed",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "lem-weil-pbc-stein-flat-base-change-global-sections",
+  "lem-weil-pbc-relative-spec-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), clauses (1)--(5) and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +135,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-stein-universally-closed-factor",
+  "worker": "stage1",
+  "summary": "Repaired the split along Stacks 03GY without schema-split child duplicates. The proof cites public permanence, relative-normalization, global-sections integrality, image universal-closedness, pushforward quasi-coherence, affine tilde/global-sections, flat global-sections base change, and a genuine relative-Spec base-change node. The only new nodes are the reusable Mathlib leaf for integral global sections, the reusable relative-Spec base-change statement, and the reusable quasi-compact vanishing-section nilpotence statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 2nd delivery repairs the return: 5 steps along 03GY citing existing nodes (qcqs permanence, relative normalization, image universally closed, pushforward quasi-coherent (pqf-lem-pushforward-qcoh, imported, unit sk-prop-av-pqf-finite: tool use recorded by L), tilde/Gamma, flat base change of global sections) and three genuine new nodes: A -> H^0 integral for universally closed f (leaf isIntegral_appTop_of_universallyClosed Proper.lean:138 verified), vanishing section on a quasi-compact scheme nilpotent (unsplit), relative Spec commutes with base change 01LX (unsplit; L adds the citation of the relative-Spec node). Correct."
+ }
 }
