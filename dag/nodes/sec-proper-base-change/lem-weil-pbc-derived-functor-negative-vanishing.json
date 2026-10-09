@@ -1,0 +1,52 @@
+{
+ "id": "lem-weil-pbc-derived-functor-negative-vanishing",
+ "kind": "statement",
+ "title": "Right derived functors move to the right",
+ "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive] between Grothendieck abelian categories [def-sp-grothendieck-abelian], and let $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ be its right derived functor, computed on a bounded below complex $L$ by a K-injective resolution $L\\to I$ as $RvL=v(I)$ [def-sp-kinjective-bridge]. Let $b\\in\\mathbf Z$. If $L\\in D^+(\\mathcal A)$ satisfies $\\mathcal H^i(L)=0$ for all $i<b$, then $\\mathcal H^j(RvL)=0$ for all $j<b$. In particular, for an object $X$ of $\\mathcal A$ placed in degree $0$, $R^jv(X)=\\mathcal H^j(RvX)=0$ for all $j<0$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (1): if $H^i(K^\\bullet)=0$ for $i<a$ and $RF$ is defined at $K^\\bullet$ then $H^i(RF(K^\\bullet))=0$ for $i<a$"
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-grothendieck-abelian",
+  "def-sp-kinjective-bridge"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|def\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; grep -rn 'IsGE\\|isGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/",
+   "results": "RightDerivedFunctorPlus.lean defines `CategoryTheory.Functor.rightDerivedFunctorPlus : DerivedCategory.Plus C ⥤ DerivedCategory.Plus D` (F additive, C with enough injectives), its unit and the `IsRightDerivedFunctor` instance only (its docstring has a TODO for triangulatedness); no lemma on `IsGE` or on vanishing of homology of the derived functor. Plus.lean has `DerivedCategory.Plus.IsGE`, `isGE_ι_obj_iff`, `isZero_homology_of_isGE` (about objects, not about the derived functor).",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; grep -rn 'rightDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/RightDerived.lean | head",
+   "results": "TStructure.lean: `DerivedCategory.isGE_iff`, `isZero_of_isGE`, `isGE_Q_obj_iff`, `exists_iso_Q_obj_of_isGE` (the standard t-structure, no derived functors). Abelian/RightDerived.lean: `Functor.rightDerived F n` for `n : ℕ` on objects (via injective resolutions), so negative degrees do not occur and complexes are not covered.",
+   "date": "2026-10-09",
+   "verdict": "no match (the statement for complexes is not in Mathlib; the sorry-free declaration `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE` of slopmaster2, WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean lines 111-132, states it for `rightDerivedFunctorPlus` of an additive functor out of an abelian category with enough injectives: reported to the lead for attachment)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-exact-couple-abutment",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -1,14 +1,13 @@
 # Work queue
 
-567 items; claim with `tools/claim.py next <group> [--stage N]`.
+566 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (563)
+## Stage 1: nodes to split (562)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | none |
 | `def-weil-pbc-truncation-exact-couples` | 1 | none |
-| `lem-sp-finite-filtration-induction` | 1 | none |
 | `lem-weil-pbc-exact-couple-differential` | 1 | none |
 | `lemma-weil-pbc-exact-couple-abutment` | 1 | none |
 | `lemma-weil-pbc-hypercohomology-convergence` | 1 | none |
@@ -579,7 +578,7 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 
-Not open yet: 577 nodes that wait for stage 1, 15 nodes that wait for a statement dependency.
+Not open yet: 576 nodes that wait for stage 1, 16 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

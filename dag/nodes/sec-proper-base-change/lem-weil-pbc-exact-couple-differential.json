@@ -2,38 +2,134 @@
  "id": "lem-weil-pbc-exact-couple-differential",
  "kind": "statement",
  "title": "Compatibility of the exact-couple differential",
- "statement": "Using the standard cohomological cone convention, the morphism of\n[def-weil-pbc-truncation-exact-couples] commutes with the connecting\nmaps and with every differential of the two spectral sequences. Its $E_2$ map\nis the derived exchange morphism for the torsion cohomology sheaf $\\mathcal\nH^q(K)$; explicitly, in bidegree $(p,q)$ it is\n\n$$\n g^{-1}R^pf_*\\mathcal H^q(K)\\longrightarrow\n R^pf'_*g'^{-1}\\mathcal H^q(K).\n$$",
+ "statement": "Let $\\square$ be a cartesian square with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, let $K\\in\\Dplus(X_{\\Et})$ have torsion cohomology with $\\mathcal H^q(K)=0$ for $q<a$, and let $A_q=g^{-1}Rf_*\\tau_{\\leq q}K$, $G_q=g^{-1}Rf_*\\mathcal H^q(K)[-q]$, $B_q=Rf'_*g'^{-1}\\tau_{\\leq q}K$, $H_q=Rf'_*g'^{-1}\\mathcal H^q(K)[-q]$, the two exchanged truncation triangles $A_{q-1}\\xrightarrow{i_q}A_q\\xrightarrow{j_q}G_q\\xrightarrow{k_q}A_{q-1}[1]$, $B_{q-1}\\xrightarrow{i'_q}B_q\\xrightarrow{j'_q}H_q\\xrightarrow{k'_q}B_{q-1}[1]$ and the exchange maps $e_q=\\Ex_{\\square,\\tau_{\\leq q}K}$, $\\bar e_q=\\Ex_{\\square,\\mathcal H^q(K)[-q]}$ between them be as in [def-weil-pbc-truncation-exact-couples] [def-weil-pbc-derived-exchange]. Use the standard cohomological shift convention $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$, so that $\\mathcal H^{n}(M[1])=\\mathcal H^{n+1}(M)$, and let the connecting maps $k_q$, $k'_q$ be the images of the connecting map of $\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\to$ followed by the shift-commutation isomorphisms of $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ (the identity for the inverse images [def-weil-pbc-derived-inverse-image]; for $Ru_*$ [def-weil-pbc-direct-image] the comparison of the K-injective resolutions $K[1]\\to I(K[1])$ and $K[1]\\to I(K)[1]$ [def-weil-pbc-kinjective-resolutions]). Index the two couples as in [def-sp-exact-couple]: $D_A^{p,q}=\\mathcal H^{p+q}(A_q)$, $E_A^{p,q}=\\mathcal H^{p+q}(G_q)$, $\\alpha=\\mathcal H(i_{q+1})$, $g=\\mathcal H(j_q)$, $f=\\mathcal H(k_q)$, and likewise $D_B,E_B$. Then:\n\n(1) both are exact couples, and $t_D=\\mathcal H^{p+q}(e_q)$, $t_E=\\mathcal H^{p+q}(\\bar e_q)$ form a morphism of exact couples; in particular they commute with the connecting maps: $\\mathcal H^{p+q+1}(e_{q-1})\\circ\\mathcal H^{p+q}(k_q)=\\mathcal H^{p+q}(k'_q)\\circ\\mathcal H^{p+q}(\\bar e_q)$;\n\n(2) the induced maps $E_{A,r}\\to E_{B,r}$ ($r\\geq2$) of the spectral sequences of the two couples commute with every differential $d_r$;\n\n(3) the $E_2$ map in bidegree $(p,q)$, read through the identifications $\\mathcal H^{p+q}(G_q)\\cong g^{-1}R^pf_*\\mathcal H^q(K)$ and $\\mathcal H^{p+q}(H_q)\\cong R^pf'_*g'^{-1}\\mathcal H^q(K)$ given by the same shift-commutation isomorphisms and $\\mathcal H^{p+q}(N[-q])=\\mathcal H^p(N)$, is the degree-$p$ exchange map of the torsion sheaf $F=\\mathcal H^q(K)$,\n\n$$\n \\mathcal H^p(\\Ex_{\\square,F}):\\ g^{-1}R^pf_*\\mathcal H^q(K)\\longrightarrow\n R^pf'_*g'^{-1}\\mathcal H^q(K).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-exact-couple-differential.md",
   "place": "node lem-weil-pbc-exact-couple-differential, order 1319"
  },
  "stmt_deps": [
   "def-weil-pbc-truncation-exact-couples",
-  "def-sp-exact-couple"
+  "def-sp-exact-couple",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions"
  ],
  "proof": [
   {
-   "text": "The datum of [def-weil-pbc-truncation-exact-couples] is a morphism of\nexact couples: the exchange morphisms of [def-weil-pbc-derived-exchange] on\nthe three terms of each truncation triangle commute with the connecting maps\nby naturality, so the structure maps $\\alpha,f,g$ are preserved. A morphism of\nexact couples therefore induces morphisms of the two spectral sequences\ncompatible with every differential, and the connecting maps being part of the\nexact-couple structure, the compatibility covers them. The $E_2$-map in\nbidegree $(p,q)$ is the first graded component of the couple morphism, namely\nthe derived exchange morphism of [def-weil-pbc-derived-exchange] for the\ntorsion cohomology sheaf $\\mathcal H^q(K)$, as displayed.",
+   "text": "**Step 1 (the two couples are exact).** With $v=f_*$ in [def-sp-truncation-couple], the couple $(D_A,E_A)$ is $g^{-1}$ applied termwise to the truncation couple of $K$: $\\mathcal H^n(g^{-1}M)\\cong g^{-1}\\mathcal H^n(M)$ naturally in $M$ [lem-weil-pbc-exact-functor-bounded-below], the shift-commutation isomorphism of $g^{-1}$ is the identity, and $Rv$ on $\\operatorname{Ch}^+$ computes $Rf_*$ as recorded in [def-weil-pbc-hypercohomology-filtrations]. That couple is exact [lem-sp-truncation-couple-exact], and $g^{-1}$ is an exact functor of abelian sheaves [prop-weil-pbc-inverse-image-exact], so it preserves the three equalities $\\ker=\\operatorname{im}$ of [def-sp-exact-couple]; hence $(D_A,E_A)$ is exact. With $v=f'_*$, the couple $(D_B,E_B)$ is the truncation couple of $g'^{-1}K$: $g'^{-1}$ is exact, so it commutes with canonical truncation ($\\tau_{\\leq q}M$ is built from $M^r$, $r<q$, and $\\ker d^q_M$, and exact functors preserve kernels), $g'^{-1}\\tau_{\\leq q}K=\\tau_{\\leq q}g'^{-1}K$, $g'^{-1}(\\mathcal H^q(K)[-q])=\\mathcal H^q(g'^{-1}K)[-q]$, and $g'^{-1}$ carries the truncation triangle of $K$ to that of $g'^{-1}K$; $g'^{-1}K$ is bounded below with $\\mathcal H^q=0$ for $q<a$ [lem-weil-pbc-exact-functor-bounded-below]. Hence $(D_B,E_B)$ is exact by [lem-sp-truncation-couple-exact].",
    "uses": [
     "def-weil-pbc-truncation-exact-couples",
-    "def-weil-pbc-derived-exchange"
+    "def-sp-truncation-couple",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "lem-sp-truncation-couple-exact",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-sp-exact-couple"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DDE (lemma-proper-base-change, line 18708), proof: the spectral sequences E_2^{p,q}=R^pf_*H^q(E) and E'_2^{p,q}=R^pf'_*(g')^{-1}H^q(E) ('some details omitted'; Stacks constructs them by Cartan-Eilenberg resolutions, the blueprint by truncation couples, def-weil-pbc-truncation-exact-couples)"
+   }
+  },
+  {
+   "text": "**Step 2 (the exchange maps form a morphism of the two triangles).** Apply [lem-weil-pbc-derived-exchange-triangulated] (2) to the truncation triangle $\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\xrightarrow{\\delta_q}\\tau_{\\leq q-1}K[1]$ (a triangle in the sense of [def-weil-pbc-triangles-with-shift]). Its image triangles under $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$, with the third arrow followed by the shift-commutation isomorphism, are exactly the two rows $(A_{q-1},A_q,G_q,i_q,j_q,k_q)$ and $(B_{q-1},B_q,H_q,i'_q,j'_q,k'_q)$ of [def-weil-pbc-truncation-exact-couples]. Hence $e_q i_q=i'_q e_{q-1}$, $\\bar e_q j_q=j'_q e_q$ and $e_{q-1}[1]\\circ k_q=k'_q\\circ\\bar e_q$: the first two squares are the naturality of $\\Ex_\\square$, the third is its compatibility with the shift. This is the content of 'commutes with the connecting maps' at the level of triangles.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "def-weil-pbc-truncation-exact-couples",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290), for the shift isomorphism of the right adjoints; Definition of a morphism of triangles, Tag 0145 (derived.tex, section on triangulated categories)"
+   }
+  },
+  {
+   "text": "**Step 3 (a morphism of exact couples).** Apply the functor $\\mathcal H^{p+q}$ to the three commutative squares of Step 2 (the first one for $q+1$), using $\\mathcal H^{p+q}(M[1])=\\mathcal H^{p+q+1}(M)$ (same cycles and boundaries, the sign of the differential being irrelevant), so that $\\mathcal H^{p+q}(e_{q-1}[1])=\\mathcal H^{p+q+1}(e_{q-1})$. One gets $\\alpha_B\\circ t_D=t_D\\circ\\alpha_A$ on $D^{p,q}\\to D^{p-1,q+1}$, $g_B\\circ t_D=t_E\\circ g_A$ on $D^{p,q}\\to E^{p,q}$, and $f_B\\circ t_E=t_D\\circ f_A$ on $E^{p,q}\\to D^{p+2,q-1}$, which is the displayed identity of (1). These are the three conditions of a morphism of exact couples (Stacks, Homology, Definition 011Q (2), read bidegree by bidegree), so $(t_D,t_E)$ is a morphism of the exact couples of Step 1, compatible with the connecting maps $f_A,f_B$.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-weil-pbc-truncation-exact-couples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 12.21.1 (definition-exact-couple, Tag 011Q), part (2): morphism of exact couples"
+   }
+  },
+  {
+   "text": "**Step 4 (all pages and all differentials).** By [lem-sp-couple-morphism] the morphism $(t_D,t_E)$ of exact couples induces for every $r\\geq2$ a map $\\varphi_r:E_{A,r}\\to E_{B,r}$ of the pages of the spectral sequences of the couples ([def-sp-exact-couple]: $E_2=E$, $E_{r+1}=E'_r$), commuting with the differentials $d_r$, with $\\varphi_2=t_E$. Written out for one derivation (Stacks, Homology, Lemma 011R and Definition 011S): $d_B t_E=g_Bf_Bt_E=g_Bt_Df_A=t_Eg_Af_A=t_Ed_A$, so $t_E$ maps $\\ker d_A$ into $\\ker d_B$ and $\\operatorname{im}d_A$ into $\\operatorname{im}d_B$ and induces $E'_A\\to E'_B$; $t_D\\alpha_A=\\alpha_Bt_D$ gives $t_D(\\operatorname{im}\\alpha_A)\\subseteq\\operatorname{im}\\alpha_B$, i.e. $D'_A\\to D'_B$; these commute with $\\alpha'$ (restriction of $\\alpha$), with $f'$ (induced by $f$) and with $g'$ (if $y=\\alpha_A(y')$ then $t_Dy=\\alpha_B(t_Dy')$ and $g'_B(t_Dy)=\\overline{g_B(t_Dy')}=\\overline{t_E g_A(y')}$). So the derived morphism is again a morphism of exact couples, and induction on $r$ gives the compatibility with $d_{r}=g^{(r-2)}\\circ f^{(r-2)}$ and with the connecting maps $f^{(r-2)}$ of every derived couple. This is (2).",
+   "uses": [
+    "lem-sp-couple-morphism",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.21.2 (lemma-derived-exact-couple, Tag 011R) and Definition 12.21.3 (Tag 011S); functoriality in the couple is not stated there and is written out here"
+   }
+  },
+  {
+   "text": "**Step 5 (the $E_2$ map).** Let $F=\\mathcal H^q(K)$. By Step 4, $\\varphi_2^{p,q}=t_E^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,F[-q]})$. By [lem-weil-pbc-derived-exchange-triangulated] (1) with $n=-q$, $\\Ex_{\\square,F[-q]}=(\\zeta^{(-q)}_F)^{-1}\\circ\\Ex_{\\square,F}[-q]\\circ\\xi^{(-q)}_F$, where $\\xi^{(-q)}_F:G_q\\xrightarrow{\\sim}(g^{-1}Rf_*F)[-q]$ and $\\zeta^{(-q)}_F:H_q\\xrightarrow{\\sim}(Rf'_*g'^{-1}F)[-q]$ are the shift-commutation isomorphisms. Applying $\\mathcal H^{p+q}$ and $\\mathcal H^{p+q}(N[-q])=\\mathcal H^p(N)$, the map $t_E^{p,q}$ becomes $\\mathcal H^p(\\Ex_{\\square,F}):\\mathcal H^p(g^{-1}Rf_*F)\\to\\mathcal H^p(Rf'_*g'^{-1}F)$ under the identifications $E_A^{p,q}\\cong\\mathcal H^p(g^{-1}Rf_*F)\\cong g^{-1}\\mathcal H^p(Rf_*F)=g^{-1}R^pf_*F$ ([lem-weil-pbc-exact-functor-bounded-below], $R^p$ as in [def-weil-pbc-direct-image]) and $E_B^{p,q}\\cong\\mathcal H^p(Rf'_*g'^{-1}F)=R^pf'_*(g'^{-1}F)$. That is the degree-$p$ exchange map $g^{-1}R^pf_*F\\to R^pf'_*g'^{-1}F$ induced by $\\Ex_{\\square,F}$ [def-weil-pbc-derived-exchange], the map whose bijectivity for torsion $F$ is [lemma-weil-pbc-torsion-assembly] and is used in Step 4 of [thm-weil-pbc-bounded-below]. This is (3); the identifications are the ones [def-weil-pbc-truncation-exact-couples] writes as equalities, made explicit.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-truncation-exact-couples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DDE (lemma-proper-base-change, line 18708), proof: the map of E_2 terms R^pf_*H^q(E) -> R^pf'_*(g')^{-1}H^q(E) is the base change map of Theorem 095T for the sheaf H^q(E) ('some details omitted', written out here)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-truncation-exact-couples",
-  "def-weil-pbc-derived-exchange",
-  "lem-sp-couple-morphism"
+  "def-sp-truncation-couple",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "lem-sp-truncation-couple-exact",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-sp-exact-couple",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "def-weil-pbc-triangles-with-shift",
+  "lem-sp-couple-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-exact-couple-differential.md",
-  "place": "## Proof"
+  "place": "## Proof; completed from literature/stacks-project/etale-cohomology.tex Lemma 0DDE (line 18708, 'some details omitted') and literature/stacks-project/homology.tex Tags 011Q-011S (section-exact-couple)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'exact couple\\|ExactCouple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no exact couples"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'spectral sequence\\|SpectralSequence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Algebra/Homology/SpectralSequence/Basic.lean (SpectralSequence, SpectralSequence.Hom, pageFunctor), Algebra/Homology/SpectralObject/{SpectralSequence,Page,FirstPage,HasSpectralSequence}.lean (spectral sequence of a spectral object in an abelian category), CategoryTheory/Triangulated/SpectralObject.lean (spectral objects in a triangulated category, mapTriangulatedFunctor, SpectralObject.Hom)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib builds spectral sequences from spectral objects, not from exact couples, and has no truncation spectral sequence of a complex under a derived functor and nothing about the exchange morphism; a Lean proof could take the route spectral object of the truncations -> SpectralObject.spectralSequence, but that is a different construction from the node's"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def spectralSequence\\|Functor\\|map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+   "results": "spectralSequence (line 482) and its page isomorphisms; no functor from spectral objects to spectral sequences (no map of a SpectralObject.Hom to a SpectralSequence.Hom)",
+   "date": "2026-10-09",
+   "verdict": "no match for the functoriality statement (2)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +158,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-exact-couple-differential",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 0DDE (etale-cohomology.tex line 18708, 'some details omitted', via Cartan-Eilenberg spectral sequences) and Stacks Homology 011Q-011S (exact couples, derived couple), and against the blueprint nodes def-weil-pbc-truncation-exact-couples, lem-sp-couple-morphism, def-sp-exact-couple, def-sp-truncation-couple. The imported one-paragraph proof asserted that the exchange maps commute with the connecting maps 'by naturality'; naturality gives only two of the three squares, the third (with the connecting map k_q) needs the compatibility of Ex with the shift isomorphisms of g^{-1}Rf_* and Rf'_*g'^{-1}, which no node stated: new node lem-weil-pbc-derived-exchange-triangulated (unsplit). The same compatibility is needed for the E_2 identification H^{p+q}(Ex_{F[-q]}) = H^p(Ex_F). The statement was made precise (objects, indexing as in def-sp-exact-couple, shift convention, which identifications read the E_2 map), without changing its content. Proof now five steps: exactness of both couples (lem-sp-truncation-couple-exact plus exactness of g^{-1}, g'^{-1}), the morphism of triangles (new node), the morphism of exact couples (elementary), all pages and differentials (lem-sp-couple-morphism, with the derivation written out from Stacks 011R), and the E_2 map. def-weil-pbc-truncation-exact-couples is a real dependency (it defines the objects A_q, G_q, B_q, H_q, the triangles and the maps e_q, bar e_q); what it gives as 'first graded component' names only source and target, the identification with H^p(Ex_F) is Step 5 here. lem-sp-couple-morphism (unit sk-prop-av-pqf-finite) is used as a generic tool lemma, as the blueprint cites it. Mathlib: no exact couples; spectral sequences only from spectral objects."
+ },
+ "tool_uses": [
+  "lem-sp-couple-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "lem-sp-couple-morphism (unit sk-prop-av-pqf-finite, off the route) accepted as a tool use per the ruling in SETUP.md; the new node lem-weil-pbc-derived-exchange-triangulated filed by the lead under sk-def-exchange"
+ }
 }

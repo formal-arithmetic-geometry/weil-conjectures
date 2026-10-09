@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-derived-exchange-triangulated",
+ "kind": "statement",
+ "title": "The derived exchange transformation commutes with shifts and maps triangles to morphisms of triangles",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, and let $\\Ex_\\square:\\Phi:=g^{-1}Rf_*\\to\\Psi:=Rf'_*g'^{-1}$ be the derived exchange transformation of functors $\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-exchange]. Write $[1]$ for the shift of complexes, $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$. Give each of the four functors $u^{-1}$ [def-weil-pbc-derived-inverse-image] and $Ru_*$ [def-weil-pbc-direct-image] its shift-commutation isomorphism: for $u^{-1}$ the identity $u^{-1}(M[1])=(u^{-1}M)[1]$ of termwise shifted complexes; for $Ru_*$ the isomorphism $Ru_*(K[1])\\cong u_*(I(K)[1])=(u_*I(K))[1]$ obtained by comparing the K-injective resolution $K[1]\\to I(K[1])$ with the K-injective resolution $K[1]\\to I(K)[1]$ [def-weil-pbc-kinjective-resolutions]. Let $\\xi_K:\\Phi(K[1])\\xrightarrow{\\sim}\\Phi(K)[1]$ and $\\zeta_K:\\Psi(K[1])\\xrightarrow{\\sim}\\Psi(K)[1]$ be the composite shift-commutation isomorphisms, and $\\xi^{(n)}_K:\\Phi(K[n])\\xrightarrow{\\sim}\\Phi(K)[n]$, $\\zeta^{(n)}_K$ ($n\\in\\mathbf Z$) their iterates (for $n<0$ the inverses of the iterates at $K[n]$). Then:\n\n(1) for every $K\\in\\Dplus(X_{\\Et})$, $\\zeta_K\\circ\\Ex_{\\square,K[1]}=\\Ex_{\\square,K}[1]\\circ\\xi_K$; hence $\\zeta^{(n)}_K\\circ\\Ex_{\\square,K[n]}=\\Ex_{\\square,K}[n]\\circ\\xi^{(n)}_K$ for every $n\\in\\mathbf Z$;\n\n(2) for every triangle $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3\\xrightarrow{w}X_1[1]$ in $\\Dplus(X_{\\Et})$ [def-weil-pbc-triangles-with-shift], the triple $(\\Ex_{\\square,X_1},\\Ex_{\\square,X_2},\\Ex_{\\square,X_3})$ is a morphism of triangles from $(\\Phi X_1,\\Phi X_2,\\Phi X_3,\\Phi u,\\Phi v,\\xi_{X_1}\\circ\\Phi w)$ to $(\\Psi X_1,\\Psi X_2,\\Psi X_3,\\Psi u,\\Psi v,\\zeta_{X_1}\\circ\\Psi w)$.\n\n(Part (2) follows from (1) and the naturality of $\\Ex_\\square$; part (1) says that $\\Ex_\\square$ is a morphism of triangulated functors.)",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290): the right adjoint of an exact functor is exact, with the shift isomorphism G(A)[1] -> G(A[1]) adjoint to eps_A[1] o xi_{G(A)}; applied to the adjunctions f^{-1} -| Rf_*, f'^{-1} -| Rf'_* and to the base change map of literature/stacks-project/etale-cohomology.tex, equation (equation-base-change), line 18332, defined in literature/stacks-project/sites-cohomology.tex, Remark (remark-base-change), line 4033, as a composite of unit, square isomorphism and counit. The statement is assembled by an agent: the Stacks project uses it without stating it (Lemma 0DDE, 'some details omitted')."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'class CommShift\\|NatTrans.CommShift\\|instance comp\\|instance whisker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "results": "NatTrans.CommShift (a natural transformation commuting with the shift isomorphisms, CommShift.lean:346) with instances id, comp, whiskerLeft, whiskerRight, of_iso_inv (lines 389-422)",
+   "date": "2026-10-09",
+   "verdict": "generalization of the notion, not of the statement: Mathlib has the notion used in (1) and its stability under composition and whiskering, but nothing about etale sheaves, the derived inverse and direct images, or the exchange transformation"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class CommShift\\|unit_app_commShiftIso\\|rightAdjointCommShift\\|commShift_of_leftAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Adjunction.lean; grep -rln 'mateEquiv\\|conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln CommShift",
+   "results": "Adjunction.CommShift (unit and counit commute with shifts, Adjunction.lean:208), rightAdjointCommShift (Adjunction.lean:388, the right adjoint of a CommShift functor gets a CommShift structure, Stacks 0A8D); the only file mentioning both mates/conjugates and CommShift is Shift/Adjunction.lean, which has no statement that the mate of a CommShift transformation is CommShift",
+   "date": "2026-10-09",
+   "verdict": "no match: the tools for a proof are there (the exchange transformation is unit, then theta, then counit, whiskered; each commutes with shifts), the statement is not"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapTriangle\\|mapTriangleIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean",
+   "results": "Functor.mapTriangle (line 42) and mapTriangleIso (line 168): a natural isomorphism e with NatTrans.CommShift e.hom gives an isomorphism of the image triangles; no version for a non-invertible natural transformation",
+   "date": "2026-10-09",
+   "verdict": "no match for (2) for a non-invertible transformation; the isomorphism case's proof (naturality plus the CommShift square) is the proof of (2)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-exact-couple-differential",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

@@ -1,0 +1,60 @@
+{
+ "id": "lem-sp-exact-functor-couple",
+ "kind": "statement",
+ "title": "Exact functors carry exact couples and their spectral sequences",
+ "statement": "Let $\\Phi:\\mathcal A\\to\\mathcal B$ be an exact additive functor between abelian categories [def-sp-abelian], and let $(D,E,\\alpha,f,g)$ be an exact couple in $\\mathcal A$ [def-sp-exact-couple], with spectral sequence $(E_r,d_r)_{r\\geq2}$, $E_2=E$. Then:\n\n1. $(\\Phi D,\\Phi E,\\Phi\\alpha,\\Phi f,\\Phi g)$, obtained by applying $\\Phi$ to every component $D^{p,q}$, $E^{p,q}$ and every structure map, is an exact couple in $\\mathcal B$.\n2. Write $(\\Phi E)_r$, $d_r^\\Phi$ for the pages and differentials of its spectral sequence. There are isomorphisms $\\phi_r^{p,q}:\\Phi(E_r^{p,q})\\xrightarrow{\\sim}(\\Phi E)_r^{p,q}$ for all $r\\geq2$ and $(p,q)$, with $\\phi_2=\\mathrm{id}$, such that $\\phi_r\\circ\\Phi(d_r)=d_r^\\Phi\\circ\\phi_r$ and $\\phi_{r+1}$ is the map induced by $\\phi_r$ on cohomology, $\\Phi$ commuting with cohomology because it is exact; likewise $\\Phi(D_r)\\cong(\\Phi D)_r$ for the iterated derived couples.\n3. If $(D,E)$ satisfies the hypotheses of [thm-sp-half-plane-convergence] ($D^{p,q}=0$ for $q<a$, $E^{p,q}=0$ unless $p\\geq0$ and $q\\geq a$), so does $(\\Phi D,\\Phi E)$; then, with $A^n=D^{0,n}$ and the finite filtration $F^pA^n=\\operatorname{im}(\\alpha^p:D^{p,n-p}\\to A^n)$ of that theorem [def-sp-filtration], the filtration of $\\Phi A^n=(\\Phi D)^{0,n}$ given by the theorem for $(\\Phi D,\\Phi E)$ is $F^p\\Phi A^n=\\Phi(F^pA^n)$ (as subobjects of $\\Phi A^n$), and the isomorphism $(\\Phi E)_\\infty^{p,q}\\cong F^p\\Phi A^{p+q}/F^{p+1}\\Phi A^{p+q}$ of the theorem is $\\Phi$ applied to $E_\\infty^{p,q}\\cong F^pA^{p+q}/F^{p+1}A^{p+q}$, composed with the isomorphisms $\\phi_r$ (for $r$ large) and $\\Phi(F^p/F^{p+1})\\cong\\Phi F^p/\\Phi F^{p+1}$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.21 (Spectral sequences: exact couples), Definitions 12.21.1, 12.21.3 and Lemma 12.21.2 (Tags 011Q, 011S, 011R), transported along an exact functor; the transport is not stated there. Needed by def-weil-pbc-hypercohomology-filtrations (the first spectral sequence after applying the exact functor g^{-1}, as in Step 4 of thm-weil-pbc-bounded-below)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-exact-couple",
+  "thm-sp-half-plane-convergence",
+  "def-sp-filtration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ExactCouple\\|exactCouple\\|exact couple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none: Mathlib has no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def map\\|mapSpectralSequence\\|Functor.mapSpectral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject",
+   "results": "only Abelian.SpectralObject.map (Page.lean:116, a map between objects E^n of one spectral object); no image of a spectral sequence or of an abelian spectral object under an exact functor (SpectralSequence/Basic.lean defines SpectralSequence C c r0 and its Hom only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesHomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/*.lean",
+   "results": "Functor.PreservesHomology used in QuasiIso.lean:248-289 and Localization.lean:342 (exact functors preserve homology of complexes and quasi-isomorphisms): the one-page ingredient, not the statement about couples, pages and filtrations",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredient only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-hypercohomology-filtrations",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
