@@ -1,0 +1,61 @@
+{
+ "id": "def-weil-finite-subextension-directed-set",
+ "kind": "definition",
+ "title": "The directed set of finite subextensions of an algebraic closure",
+ "statement": "Let $\\ell$ be a prime, $\\mathbf Q_\\ell$ the field of $\\ell$-adic numbers [def-weil-l-adic-numbers] and $\\overline{\\mathbf Q}_\\ell$ a fixed algebraic closure of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure]. Let $\\mathcal E_\\ell$ be the set of intermediate fields $\\mathbf Q_\\ell\\subset E\\subset\\overline{\\mathbf Q}_\\ell$ that are finite extensions of $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], that is, finite-dimensional as $\\mathbf Q_\\ell$-vector spaces, ordered by inclusion. For $E,E'\\in\\mathcal E_\\ell$ the *compositum* $EE'\\subset\\overline{\\mathbf Q}_\\ell$ is the smallest subfield of $\\overline{\\mathbf Q}_\\ell$ containing $E$ and $E'$; it is again finite over $\\mathbf Q_\\ell$ (it is the image of $E\\otimes_{\\mathbf Q_\\ell}E'$, of dimension at most $[E:\\mathbf Q_\\ell]\\,[E':\\mathbf Q_\\ell]$). Hence $\\mathcal E_\\ell$ is nonempty (it contains $\\mathbf Q_\\ell$) and *directed*: any two elements $E,E'$ have a common upper bound $L\\supset E,E'$ in $\\mathcal E_\\ell$, namely $EE'$. Every element of $\\overline{\\mathbf Q}_\\ell$ lies in some $E\\in\\mathcal E_\\ell$ (namely $\\mathbf Q_\\ell(\\alpha)$, finite since $\\alpha$ is algebraic), so $\\overline{\\mathbf Q}_\\ell=\\bigcup_{E\\in\\mathcal E_\\ell}E$. For $E\\subset L$ in $\\mathcal E_\\ell$, $L$ is a finite extension of $E$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "node def-weil-algebraically-closed-coefficients, order 1462: 'Let $\\mathcal E_\\ell$ be the directed set of finite extensions $E/\\Ql$ contained in $\\Qlb$'; on slopmaster2, Definition def:finext (The filtered coefficient index) and Proposition prop:finext-filtered (Filteredness), literature/blueprint/slopmaster2/src/version/sketch/42_qbarl_triangulated_colimit.tex lines 62-80, which also state finiteness of the compositum"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^structure IntermediateField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Basic.lean; grep -n 'instance : CompleteLattice' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; grep -rn 'finiteDimensional_sup\\|finiteDimensional_iSup_of_finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IntermediateField/",
+   "results": "Mathlib/FieldTheory/IntermediateField/Basic.lean:51 `structure IntermediateField K L` (intermediate fields of an extension `L/K`); Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean:72 `instance : CompleteLattice (IntermediateField F E)` (so `E1 ⊔ E2` is the compositum, the smallest intermediate field containing both, and `≤` is inclusion); Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:78 `instance IntermediateField.finiteDimensional_sup [FiniteDimensional K E1] [FiniteDimensional K E2] : FiniteDimensional K (E1 ⊔ E2)`, :130 `finiteDimensional_iSup_of_finite`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsDirectedOrder\\|exists_ge_ge' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/Directed.lean; grep -n '^def Padic\\|notation \"ℚ_\\[\"' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Padics/PadicNumbers.lean; grep -n '^def AlgebraicClosure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean",
+   "results": "Mathlib/Order/Directed.lean:150 `IsDirectedOrder α` (= `IsDirected α (· ≤ ·)`), :190 `exists_ge_ge`; Mathlib/NumberTheory/Padics/PadicNumbers.lean:531 `Padic p` with notation `ℚ_[p]` (:536); Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean:127 `AlgebraicClosure`",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'IntermediateField\\|finiteDimensional_sup\\|compositum' dag/nodes; ls dag/nodes/*/ | grep -E 'directed|subextension|finite-extensions'",
+   "results": "dag/nodes: lem-weil-unique-subfield-of-closure, def-pc-field-extension, def-weil-number-field and others mention `IntermediateField` for other purposes; def-nagata-directed-finite-upper-bound is about directed posets of refinements; no node states the directed set of finite subextensions of $\\overline{\\mathbf Q}_\\ell$ (def-weil-pbc-finite-stage-pair-category contains it inline as $\\mathsf{FinExt}_\\ell$ without a node)",
+   "date": "2026-10-09",
+   "verdict": "no existing node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IntermediateField.finiteDimensional_sup",
+  "file": "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+  "how": "specializes in one line: $\\mathcal E_\\ell$ is the subtype `{E : IntermediateField ℚ_[ℓ] (AlgebraicClosure ℚ_[ℓ]) // FiniteDimensional ℚ_[ℓ] E}` with the order `≤` of the complete lattice `IntermediateField` (Adjoin/Defs.lean:72); the compositum is `E ⊔ E'`, finite by `IntermediateField.finiteDimensional_sup` (line 78), which gives `IsDirectedOrder` of the subtype (Mathlib/Order/Directed.lean:150); `⊥` (the image of `ℚ_[ℓ]`) is finite-dimensional, so the set is nonempty"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

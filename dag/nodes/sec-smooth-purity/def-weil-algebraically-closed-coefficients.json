@@ -2,21 +2,33 @@
  "id": "def-weil-algebraically-closed-coefficients",
  "kind": "definition",
  "title": "Algebraically closed coefficient category",
- "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]\n$(p,a,q,k_0,k)$, a prime $\\ell\\neq p$, and a scheme $Y$. Set\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and use\nthe rationalized category [def-weil-rationalization-karoubi] for every finite\ncoefficient field. Let $\\mathcal E_\\ell$ be the directed set of finite\nextensions $E/\\Ql$ contained in $\\Qlb$. For $E\\subset L$, the transition\nfunctor is $K\\mapsto K\\otimes_E L$. Form a triangulated category $\\mathcal\nC_Y$ whose objects are pairs $(E,K)$ with $E\\in\\mathcal E_\\ell$ and $K\\in\nD^b_c(Y,E)$, and whose morphisms between $(E,K)$ and $(E',K')$ are\n\n$$\n \\Hom_{\\mathcal C_Y}((E,K),(E',K'))\n =\\varinjlim_{\\substack{L\\in\\mathcal E_\\ell\\\\L\\supset E,E'}}\n \\Hom_{D^b_c(Y,L)}\n \\bigl(K\\otimes_E L,K'\\otimes_{E'}L\\bigr).\n$$\n\nComposition and distinguished triangles are represented over one common\nfinite extension. Define\n\n$$\n D^b_c(Y,\\Qlb)=\\mathcal C_Y.\n$$\n\nNo Karoubi completion is taken: the notation $\\mathcal C_Y$ denotes the\ncommon-stage category displayed above, in which no idempotent is formally\nadjoined. Every object, morphism, and distinguished triangle has a finite\ncoefficient field of definition, after enlarging that field if necessary.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]\n$(p,a,q,k_0,k)$, a prime $\\ell\\neq p$, and a scheme $Y$. Set\n$\\Ql=\\mathbf Q_\\ell$, the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], choose an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and use\nthe rationalized category [def-weil-rationalization-karoubi] $D^b_c(Y,E)$ for every finite\ncoefficient field $E/\\Ql$ [def-weil-l-adic-coefficient-extension]. Let $\\mathcal E_\\ell$ be the directed set of finite\nextensions $E/\\Ql$ contained in $\\Qlb$, ordered by inclusion, in which two elements have the compositum as a common upper bound [def-weil-finite-subextension-directed-set]. For $E\\subset L$ in $\\mathcal E_\\ell$, the transition\nfunctor is the scalar-extension functor $K\\mapsto K\\otimes_E L$ of [def-weil-rationalization-karoubi]; it is an exact functor of triangulated categories [def-weil-triangulated-category, lem-weil-scalar-extension-exact-triangulated], and for $E\\subset L\\subset M$ the canonical isomorphisms $(K\\otimes_EL)\\otimes_LM\\cong K\\otimes_EM$ of [lem-weil-scalar-extension-composition] identify the composite of two transition functors with the direct one. Form a triangulated category $\\mathcal\nC_Y$ whose objects are pairs $(E,K)$ with $E\\in\\mathcal E_\\ell$ and $K\\in\nD^b_c(Y,E)$, and whose morphisms between $(E,K)$ and $(E',K')$ are\n\n$$\n \\Hom_{\\mathcal C_Y}((E,K),(E',K'))\n =\\varinjlim_{\\substack{L\\in\\mathcal E_\\ell\\\\L\\supset E,E'}}\n \\Hom_{D^b_c(Y,L)}\n \\bigl(K\\otimes_E L,K'\\otimes_{E'}L\\bigr),\n$$\n\nthe directed colimit of abelian groups [def-weil-directed-colimit-abelian-groups] over the directed set of $L\\in\\mathcal E_\\ell$ containing $E$ and $E'$, whose transition maps for $L\\subset L'$ send $u:K\\otimes_EL\\to K'\\otimes_{E'}L$ to $u\\otimes_LL'$ composed with the identifications of [lem-weil-scalar-extension-composition]. Thus a morphism is represented by a map $u$ over some common finite extension $L$, and two representatives are equal when they agree after extension to a further common finite extension.\nComposition and distinguished triangles are represented over one common\nfinite extension: the composite of $[L,u]:(E,K)\\to(E',K')$ and $[L',v]:(E',K')\\to(E'',K'')$ is the class of $v\\circ u$ formed over a common finite extension $M\\supset L,L'$; the shift is $(E,K)[1]=(E,K[1])$; and a triangle in $\\mathcal C_Y$ is distinguished when it is isomorphic to the image of a distinguished triangle $K\\otimes_EL\\xrightarrow{u}K'\\otimes_{E'}L\\to C\\to(K\\otimes_EL)[1]$ of $D^b_c(Y,L)$ for some $L\\in\\mathcal E_\\ell$, the cone being the object $(L,C)$. This is the finite-stage pair category [def-weil-pbc-finite-stage-pair-category] with the common-stage cones of [def-weil-pbc-common-stage-cones], formed with the finite stages $D^b_c(Y,E)$ and transition functors of [def-weil-rationalization-karoubi]; that these data satisfy the Verdier axioms of a triangulated category is [thm-weil-pbc-verdier-axioms]. Define\n\n$$\n D^b_c(Y,\\Qlb)=\\mathcal C_Y.\n$$\n\nNo Karoubi completion [def-weil-karoubi-envelope] is taken: the notation $\\mathcal C_Y$ denotes the\ncommon-stage category displayed above, in which no idempotent is formally\nadjoined. Every object, morphism, and distinguished triangle has a finite\ncoefficient field of definition, after enlarging that field if necessary.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
   "place": "node def-weil-algebraically-closed-coefficients, order 1462"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-rationalization-karoubi"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-triangulated-category",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-common-stage-cones",
+  "thm-weil-pbc-verdier-axioms",
+  "def-weil-karoubi-envelope"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -36,5 +48,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "worker": "stage1",
+  "summary": "Checked the statement against the master blueprint node (order 1462) and the slopmaster2 note 42_qbarl_triangulated_colimit.tex (def:finext to thm:pair-triangulated, def:karoubi-triples). The mathematical content is unchanged; the statement now names every notion it is built from: $\\mathbf Q_\\ell$, the algebraic closure and finite extensions (reviewed leaves def-weil-l-adic-numbers, def-weil-algebraic-closure, def-weil-l-adic-coefficient-extension), the directed set $\\mathcal E_\\ell$ (new Mathlib leaf def-weil-finite-subextension-directed-set), the finite stages and transition functors (def-weil-rationalization-karoubi) with the exactness and composition compatibilities the directed Hom system and the triangles need (lem-weil-scalar-extension-exact-triangulated, lem-weil-scalar-extension-composition), the directed colimit of abelian groups (new Mathlib leaf def-weil-directed-colimit-abelian-groups), the notion of triangulated category and exact functor (new Mathlib leaf def-weil-triangulated-category), and the Karoubi envelope it says it does not take (def-weil-karoubi-envelope). The common-stage construction (representatives, transport, equality at a common stage, composition, shift, cones, Verdier axioms) is not restated in new nodes: it is the finite-stage pair category of the proper-base-change chapter, def-weil-pbc-finite-stage-pair-category with def-weil-pbc-common-stage-cones and thm-weil-pbc-verdier-axioms, to which the statement now points; those nodes are written for the finite stages $\\Dbc(T,E)$ of def-weil-pbc-rational-category, the proper-base-change counterpart of def-weil-rationalization-karoubi, and def-weil-pbc-qbar-category (order 1311) states the same object $\\Dbc(T,\\Qlb)=\\mathcal P_T$ as this node; the merge of the two chains is reported to the lead. The hidden steps 'composition and distinguished triangles are represented over one common finite extension' are written out. The slopmaster2 version differs: there $\\Dbc(X,\\Qlb)_{2colim}=\\Kar(\\mathrm{Pair})$ is the Karoubi envelope, while master takes no Karoubi completion and proves idempotent completeness separately (lem-weil-qbar-idempotent-complete, which depends on this node and is therefore not cited here)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }
