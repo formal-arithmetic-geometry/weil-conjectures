@@ -333,28 +333,38 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
+omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
 
-Let `Λ` be a finite ring annihilated by an integer invertible on `Y`, and let `f : X ⟶ Y` be a
-morphism of finite-type `k`-schemes. Then `Rf_*` carries `Dᵇc(X, Λ)` into `Dᵇc(Y, Λ)`. -/
+Let `Λ` be a ring every finite module of which is annihilated by an integer invertible on `Y`
+(for instance a finite ring annihilated by such an integer, or the integral stage `𝒪_E`), and
+let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes. Then `Rf_*` carries `Dᵇc(X, Λ)` into
+`Dᵇc(Y, Λ)`. The hypothesis on `Λ` makes the finite stalks of a constructible complex torsion of
+order invertible on `Y`. -/
 theorem boundedConstructible_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
-    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasInvertibleExponent Λ Y]
+    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    (hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
+      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   sorry
 
+omit [Finite Λ] in
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 
-Let `Λ` be a finite ring annihilated by an integer invertible on `Y`, let `f : X ⟶ Y` be a
+Let `Λ` be a ring every finite module of which is annihilated by an integer invertible on `Y`
+(as in `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`), let `f : X ⟶ Y` be a
 separated morphism of finite-type `k`-schemes with `dim X ≤ d`, and let `K` be a bounded
 constructible complex on `X_ét` of Tor amplitude in `[a, b]`. Then `Rf_* K` has Tor amplitude
 in `[a, b + 2d]`. The shift `2d` is the uniform vanishing of `Rᵖf_*` above twice the dimension
 of the source. -/
 theorem torAmplitudeIn_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
-    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [HasInvertibleExponent Λ Y]
+    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f]
+    (hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
+      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0)
     (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
@@ -379,8 +389,11 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
   obtain ⟨hbc, a, b, hta⟩ := hK
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
-  exact ⟨boundedConstructible_rightDerivedLowerStar Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
-    torAmplitudeIn_rightDerivedLowerStar Λ aX aY f hf d hd a b hbc hta⟩
+  have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
+      ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0 :=
+    fun M ↦ HasInvertibleExponent.exists_isUnit_nsmul_eq_zero Λ Y M
+  exact ⟨boundedConstructible_rightDerivedLowerStar Λ aX aY f hf hΛ hbc, a, b + 2 * (d : ℤ),
+    torAmplitudeIn_rightDerivedLowerStar Λ aX aY f hf hΛ d hd a b hbc hta⟩
 
 /-! #### Internal hom -/
 

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
@@ -144,8 +145,12 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
   obtain ⟨hbc, a, b, hta⟩ := hK
   have hK' : DerivedCategory.boundedConstructibleFiniteTor Λ c.Z
       ((R((c.i)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-    ⟨boundedConstructible_rightDerivedLowerStar _ c.i d hd a b hbc hta,
-      a, b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b hbc hta⟩
+    have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
+        ∃ n : ℕ, IsUnit (n : Γ(c.Z, ⊤)) ∧ ∀ m : M, n • m = 0 :=
+      fun M ↦ HasInvertibleExponent.exists_isUnit_nsmul_eq_zero Λ c.Z M
+    ⟨boundedConstructible_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ hbc,
+      a, b + 2 * (d : ℤ),
+      torAmplitudeIn_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ d hd a b hbc hta⟩
   exact (isPerfect_compactlySupportedGlobalSections Λ c.g _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
@@ -202,6 +207,25 @@ def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
+omit [CommRing Λ] in
+/-- At the integral stage every finite `Λ`-module is annihilated by an integer invertible on any
+scheme `Y` on which the exponent of `Λ / I` is invertible: it is killed by a power of `I`
+(`IsAdicComplete.exists_pow_smul_top_eq_bot`). -/
+theorem exists_isUnit_nsmul_eq_zero_of_isAdicComplete [CommRing Λ] [IsAdicComplete I Λ]
+    (Y : Scheme.{u}) [HasInvertibleExponent (Λ ⧸ I) Y] (M : Type (u + 1)) [AddCommGroup M]
+    [Module Λ M] [Finite M] : ∃ n : ℕ, IsUnit (n : Γ(Y, ⊤)) ∧ ∀ m : M, n • m = 0 := by
+  obtain ⟨k, hk⟩ := IsAdicComplete.exists_pow_smul_top_eq_bot I M
+  obtain ⟨n, -, hn, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I) (X := Y)
+  have hnI : (n : Λ) ∈ I := by
+    rw [← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
+    exact hn
+  refine ⟨n ^ k, by rw [Nat.cast_pow]; exact hu.pow k, fun m ↦ ?_⟩
+  have hmem : ((n : Λ) ^ k) • m ∈ I ^ k • (⊤ : Submodule Λ M) :=
+    Submodule.smul_mem_smul (Ideal.pow_mem_pow hnI k) Submodule.mem_top
+  rw [hk, Submodule.mem_bot] at hmem
+  rw [← Nat.cast_smul_eq_nsmul Λ, Nat.cast_pow]
+  exact hmem
+
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -250,10 +274,14 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       ⟨⟨x ^ (n + 1), by rw [hx, Ideal.submodule_span_eq, Ideal.span_singleton_pow]⟩⟩
     obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerStar Λ c.i _ hJ
     obtain ⟨hbc, hta⟩ := hab n
+    have : HasInvertibleExponent (Λ ⧸ I) c.Z := HasInvertibleExponent.of_hom c.g
+    have hΛ : ∀ (M : Type (u + 1)) [AddCommGroup M] [Module Λ M] [Finite M],
+        ∃ n : ℕ, IsUnit (n : Γ(c.Z, ⊤)) ∧ ∀ m : M, n • m = 0 :=
+      fun M ↦ exists_isUnit_nsmul_eq_zero_of_isAdicComplete I c.Z M
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
-        (boundedConstructible_rightDerivedLowerStar _ c.i d hd a b hbc hta),
+        (boundedConstructible_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
-        (torAmplitudeIn_rightDerivedLowerStar _ c.i d hd a b hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar Λ aX c.g c.i c.comm.symm hΛ d hd a b hbc hta)⟩
   exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)

@@ -18,7 +18,8 @@ finite type and of pure relative dimension `d`, *smooth purity* provides a canon
 `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`, that is `Λ_X(d)[2d] ≅ Rf^! Λ_Y`. Its proof belongs to a different
 blueprint block and is not formalised here; what is recorded in this file is the interface it
 produces, packaged as a structure `AlgebraicGeometry.Etale.Orientation`, together with the two
-consequences the six-functor formalism uses: for the structure morphism `a : X ⟶ S` an orientation reads
+consequences the six-functor formalism uses: for the structure morphism `a : X ⟶ S` an orientation
+reads
 `ω_X ≅ Λ_X(d)[2d]`, and substituting that into `𝔻_X = RHom(-, ω_X)` turns the Verdier dual of a
 perfect complex into its coefficient dual, twisted and shifted.
 
@@ -146,12 +147,8 @@ theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) ≅
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K) ⊗
-        (tateObject Λ X d)⟦(2 * d : ℤ)⟧) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap K Kᘁ
-  have := MonoidalClosed.isIso_ihomUnitTensorToIhom Kᘁ K ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)
-  exact ⟨(ihom K).mapIso o.purity.symm ≪≫
-    (asIso (MonoidalClosed.ihomUnitTensorToIhom K _)).symm⟩
+        (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+  sorry
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.
 

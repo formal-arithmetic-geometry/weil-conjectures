@@ -227,10 +227,10 @@ theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
-Let `Λ` be a finite ring whose exponent is invertible on `B`, a scheme of finite type over a
-field `k`. Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
+Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
 `i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions, with product
-`i ×_B j : Z ×_B W ⟶ X ×_B Y`. For `K` in `Dctf(X, A)` and `L` in `Dctf(Y, A)`,
+`i ×_B j : Z ×_B W ⟶ X ×_B Y`. For `K` and `L` on `X` and `Y` such that `i_* i^* K` and `j_* j^* L`
+lie in `Dctf`,
 
 `Rf_!(i_* i^* K) ⊗ᴸ Rg_!(j_* j^* L) ≅ Rh_!((i ×_B j)_* (i ×_B j)^* (K ⊠ L))`.
 
@@ -238,34 +238,28 @@ This is the relative product theorem
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the
 complexes `i_* i^* K` and `j_* j^* L`, rewritten with
 `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
-is the Künneth formula for the compactly supported cohomology of `Z ×_k W`. -/
-theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] {k : Type u} [Field k] (aB : B ⟶ Spec (.of k))
-    [LocallyOfFiniteType aB] [QuasiCompact aB] [HasInvertibleExponent Λ B]
+is the Künneth formula for the compactly supported cohomology of `Z ×_k W`.
+
+The hypotheses are on `i_* i^* K` and `j_* j^* L` rather than on `K` and `L`: that `Ri_*` preserves
+`Dctf` is a finiteness theorem for torsion coefficients of exponent invertible on the base
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`), which in the blueprint's
+setting turns `K, L ∈ Dctf` into these hypotheses. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
     [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
-    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
-    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
-          ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) ⊗
-        (R(g)_![ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
-          ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
-      (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
-        ((R((pullback.mapOverBase i j f g)_*[ModuleCat.{u + 1} Λ])).obj
-          ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
-            (externalProduct _ f g K L)))) := by
-  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
-  have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom g
-  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion _ f g i j K L
-  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct _ f g
-    (constructibleFiniteTor_rightDerivedLowerStar Λ (i ≫ f ≫ aB) (f ≫ aB) i rfl
-      (constructibleFiniteTor_leftDerivedUpperStar _ i hK))
-    (constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aB) (g ≫ aB) j rfl
-      (constructibleFiniteTor_leftDerivedUpperStar _ j hL))
-  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)))
+    (hL : DerivedCategory.constructibleFiniteTor A Y ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :
+    Nonempty ((R(f)_![A]).obj ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) ⊗
+        (R(g)_![A]).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) ≅
+      (R(pullback.toBase f g)_![A]).obj
+        ((R((pullback.mapOverBase i j f g)_*[A])).obj
+          ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)))) := by
+  obtain ⟨e⟩ := nonempty_iso_externalProduct_closedImmersion A f g i j K L
+  obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A f g hK hL
+  exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![A]).mapIso e.symm⟩
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
@@ -330,35 +324,30 @@ variable {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ �
 `D((X₁ ×_S X₂)_ét)`, writing `e : X₁ ×_S X₂ ≅ (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)` with
 `B = Y₁ ×_S Y₂` and `h` for the structure morphism of the fibre product over `B`,
 
-`R(f₁ × f₂)_! Z ≅ Rh_! (L(e⁻¹)^* Z)`, for torsion coefficients, whose `Rf_!` satisfies the
-composition law. -/
-theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase (Λ : Type (u + 1)) [CommRing Λ]
-    [Finite Λ]
+`R(f₁ × f₂)_! Z ≅ Rh_! (L(e⁻¹)^* Z)`, given the composition isomorphism
+`R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` (`hcomp`), which holds for torsion coefficients
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`). -/
+theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
     [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
       (pullback.snd f₂ (pullback.snd b₁ b₂)))]
-    (Z : _root_.DerivedCategory
-      (Sheaf (pullback (f₁ ≫ b₁) (f₂ ≫ b₂)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj Z ≅
+    [HasCompactification (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom]
+    (hcomp : Nonempty (R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A] ≅
+      R((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom)_![A] ⋙
+        R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+          (pullback.snd f₂ (pullback.snd b₁ b₂)))_![A]))
+    (Z : _root_.DerivedCategory (Sheaf (pullback (f₁ ≫ b₁) (f₂ ≫ b₂)).smallEtaleTopology A)) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj Z ≅
       (R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
-        (pullback.snd f₂ (pullback.snd b₁ b₂)))_![ModuleCat.{u + 1} Λ]).obj
-        ((L(((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv)^*[ModuleCat.{u + 1} Λ])).obj Z)) := by
+        (pullback.snd f₂ (pullback.snd b₁ b₂)))_![A]).obj
+        ((L(((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv)^*[A])).obj Z)) := by
   set e := pullback.mapOverBaseIso f₁ f₂ b₁ b₂
   set h := pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
       (pullback.snd f₂ (pullback.snd b₁ b₂))
-  have he : e.hom ≫ h = pullback.mapOverBase f₁ f₂ b₁ b₂ :=
-    pullback.mapOverBaseIso_hom_toBase ..
-  have : HasCompactification (e.hom ≫ h) := .of_eq he.symm
-  have hcongr : ∀ (ψ : _ ⟶ _) [HasCompactification ψ], ψ = pullback.mapOverBase f₁ f₂ b₁ b₂ →
-      Nonempty (R(ψ)_![ModuleCat.{u + 1} Λ] ≅
-        R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]) := by
-    rintro ψ _ rfl; exact ⟨Iso.refl _⟩
-  obtain ⟨c₀⟩ := hcongr _ he
-  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ e.hom h
-  obtain ⟨c₂⟩ :=
-    nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) e.hom
-  exact ⟨(c₀.app Z).symm ≪≫ c₁.app Z ≪≫ (R(h)_![ModuleCat.{u + 1} Λ]).mapIso
-    (c₂.app Z ≪≫ (rightDerivedLowerStarIsoLeftDerivedUpperStarInv (ModuleCat.{u + 1} Λ) e).app Z)⟩
+  obtain ⟨c₁⟩ := hcomp
+  obtain ⟨c₂⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A e.hom
+  exact ⟨c₁.app Z ≪≫ (R(h)_![A]).mapIso
+    (c₂.app Z ≪≫ (rightDerivedLowerStarIsoLeftDerivedUpperStarInv A e).app Z)⟩
 
 omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with `pullback.mapOverBaseIso`: writing
@@ -386,48 +375,47 @@ theorem nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
   exact ⟨leftDerivedUpperStarTensorIso A e.inv _ _ ≪≫ (pb₁ ⊗ᵢ pb₂)⟩
 
 /-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
-torsion coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
-`Y₁ ×_S Y₂ ⟶ Yᵢ`. It is the relative product theorem
+general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
+`Y₁ ×_S Y₂ ⟶ Yᵢ` and the composition isomorphism `R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase`; both hold for torsion
+coefficients. It is the relative product theorem
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
 `B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [UpperStarPreservesFlat A]
     [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM₁ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₁ M₁)
-    (hM₂ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₂ M₂)
-    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁) ≅
-      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
-        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₁)))
-    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂) ≅
-      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
-        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₂))) :
-    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
-      externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁)
-        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂)) := by
-  have he := pullback.mapOverBaseIso_hom_toBase f₁ f₂ b₁ b₂
-  have : HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
-      (pullback.snd f₂ (pullback.snd b₁ b₂))) :=
-    ((HasCompactification.compactification (pullback.mapOverBase f₁ f₂ b₁ b₂)).transport
-      (pullback.mapOverBaseIso f₁ f₂ b₁ b₂) (Iso.refl _)
-      (by rw [Iso.refl_hom, Category.comp_id, he])).hasCompactification
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase Λ b₁ b₂ f₁ f₂
-    (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
-  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
-    (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂
+    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A)}
+    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)}
+    (hM₁ : DerivedCategory.constructibleFiniteTor A X₁ M₁)
+    (hM₂ : DerivedCategory.constructibleFiniteTor A X₂ M₂)
+    [HasCompactification (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom]
+    [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+      (pullback.snd f₂ (pullback.snd b₁ b₂)))]
+    (hcomp : Nonempty (R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A] ≅
+      R((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom)_![A] ⋙
+        R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+          (pullback.snd f₂ (pullback.snd b₁ b₂)))_![A]))
+    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[A])).obj ((R(f₁)_![A]).obj M₁) ≅
+      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![A]).obj
+        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁)))
+    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[A])).obj ((R(f₂)_![A]).obj M₂) ≅
+      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![A]).obj
+        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂))) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj
+        (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+      externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂)) := by
+  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase A b₁ b₂ f₁ f₂ hcomp
+    (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
+  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct A b₁ b₂ f₁ f₂
     M₁ M₂
-  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct (ModuleCat.{u + 1} Λ)
+  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A
     (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂))
-    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₁ _) hM₁)
-    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₂ _) hM₂)
+    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₁ _) hM₁)
+    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₂ _) hM₂)
   obtain ⟨e₁⟩ := hbc₁
   obtain ⟨e₂⟩ := hbc₂
-  exact ⟨t ≪≫ (R(_)_![ModuleCat.{u + 1} Λ]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
+  exact ⟨t ≪≫ (R(_)_![A]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.
@@ -458,8 +446,23 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
     (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂))
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
     (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂))
-  exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange Λ
-    b₁ b₂ f₁ f₂ hM₁ hM₂
+  set e := pullback.mapOverBaseIso f₁ f₂ b₁ b₂
+  set h := pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
+      (pullback.snd f₂ (pullback.snd b₁ b₂))
+  have he : e.hom ≫ h = pullback.mapOverBase f₁ f₂ b₁ b₂ :=
+    pullback.mapOverBaseIso_hom_toBase ..
+  have : HasCompactification h :=
+    ((HasCompactification.compactification (pullback.mapOverBase f₁ f₂ b₁ b₂)).transport
+      e (Iso.refl _) (by rw [Iso.refl_hom, Category.comp_id, he])).hasCompactification
+  have : HasCompactification (e.hom ≫ h) := .of_eq he.symm
+  have hcongr : ∀ (ψ : _ ⟶ _) [HasCompactification ψ], ψ = pullback.mapOverBase f₁ f₂ b₁ b₂ →
+      Nonempty (R(ψ)_![ModuleCat.{u + 1} Λ] ≅
+        R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]) := by
+    rintro ψ _ rfl; exact ⟨Iso.refl _⟩
+  obtain ⟨c₀⟩ := hcongr _ he
+  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ e.hom h
+  exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange _
+    b₁ b₂ f₁ f₂ hM₁ hM₂ ⟨c₀.symm ≪≫ c₁⟩
     ⟨asIso ((rightDerivedLowerShriekBaseChangeMap _
       (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂))).app M₁)⟩
     ⟨asIso ((rightDerivedLowerShriekBaseChangeMap _

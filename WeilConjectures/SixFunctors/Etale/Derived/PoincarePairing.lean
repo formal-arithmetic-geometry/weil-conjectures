@@ -412,7 +412,8 @@ isomorphism.
 `a : X ⟶ Spec k` admit a compactification, `γ : V[2d] ≅ ω_X` be a purity isomorphism (from an
 orientation of `a` of relative dimension `d`, with `V = Λ_X(d)`), and `K` be perfect over
 `Λ_X`. If the projection formula holds for `a` at `K` and the shifts `Λ_s[r]` of the constant
-complex of the point `s = Spec k`, then the tensor–internal-hom adjoint of the derived Poincaré pairing
+complex of the point `s = Spec k`, then the tensor–internal-hom adjoint of the derived Poincaré
+pairing
 
 `β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ`
 
