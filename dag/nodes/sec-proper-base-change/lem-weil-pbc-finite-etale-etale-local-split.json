@@ -40,13 +40,118 @@
    "results": "no 04HN/04HJ; FiniteEtale only in Mathlib/RingTheory/Etale/Finite.lean (the category of finite etale algebras, equivOfIsSepClosed over a separably closed field), nothing over a scheme base",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale algebra becomes a product of copies of the base after an etale base change",
+   "results": "Algebra.Etale.baseChange, Algebra.Unramified.baseChange, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod (over a field: product of finite separable extensions), Algebra.Etale.finitePresentation, Algebra.FormallyEtale.pi_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite étale cover splits as disjoint union of copies of the base étale locally",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite, IsEtale.of_comp",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Etale",
+   "results": "none (empty)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00U\\|stacks 04H\\|FiniteEtale\\|completeOrthogonalIdempotents' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{AlgebraicGeometry,RingTheory/Etale,RingTheory/Unramified}",
+   "results": "RingTheory/Etale/QuasiFinite.lean:613 Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (@[stacks 00UL], algebra form of the etale localization of a finite algebra, pieces with one prime over P; no splitting into copies of the base) and :379 (00UJ); RingTheory/Etale/Finite.lean (FiniteEtale category over a field); nothing for schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Etale localization to closed immersions.* $f$ is finite by hypothesis [def-weil-pbc-scheme-conventions] and etale, and an etale morphism is in particular unramified [def-weil-etale-morphism]. Apply [lem-weil-pbc-finite-unramified-etale-local] to $f$ and $x$: there are an etale $g:U\\to X$, a point $u\\in U$ with $g(u)=x$, a finite set $J_0$ and pairwise disjoint open and closed subschemes $V_j\\subseteq Y_U:=Y\\times_XU$ ($j\\in J_0$) covering $Y_U$, such that each $p_j:V_j\\hookrightarrow Y_U\\xrightarrow{\\mathrm{pr}_2}U$ is a closed immersion. (The residue field condition of that lemma is not used.)",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-unramified-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HN (line 1856): 'An etale morphism is unramified, hence we may apply Lemma 04HJ'"
+   }
+  },
+  {
+   "text": "*Each $p_j$ is an open and closed immersion.* The projection $\\mathrm{pr}_2:Y_U\\to U$ is the base change of the etale morphism $f$ along $g$, hence etale ([lem-weil-pbc-etale-base-change-finite-limits], clause 1, with $u:=g$ and $W:=Y$). The inclusion $V_j\\hookrightarrow Y_U$ of an open subscheme is an open immersion, hence etale, and so the composite $p_j$ is etale ([lem-weil-pbc-etale-composition-cancellation], clauses (1) and (2)). Thus $p_j$ is an etale closed immersion, and by [lem-weil-pbc-etale-closed-immersion-open] it is an open immersion: its image $T_j:=p_j(V_j)$ is open and closed in $U$ and $p_j$ is an isomorphism of $V_j$ onto the open subscheme $T_j$ of $U$ [def-weil-open-immersion]. Moreover $\\mathrm{pr}_2(V_j)=T_j$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-closed-immersion-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HL (line 1794): 'Now $V_{i,j}\\to U$ is a closed immersion and etale. Hence it is an open immersion'; cited in the proof of Lemma 04HN"
+   }
+  },
+  {
+   "text": "*Shrinking $U$.* Let $J=\\{j\\in J_0: u\\in T_j\\}$ and $U'=\\bigcap_{j\\in J}T_j\\setminus\\bigcup_{j\\in J_0\\setminus J}T_j$ (with $\\bigcap_{j\\in\\emptyset}T_j=U$). Since $J_0$ is finite and every $T_j$ is open and closed (step 2), $U'$ is a finite intersection of open subsets minus a finite union of closed subsets, hence open in $U$, and $u\\in U'$ by the choice of $J$. Give $U'$ the open subscheme structure, with inclusion $\\iota:U'\\to U$, an open immersion [def-weil-open-immersion], hence etale; put $g'=g\\circ\\iota:U'\\to X$, which is etale as a composite of etale morphisms ([lem-weil-pbc-etale-composition-cancellation], clauses (1) and (2)), and $g'(u)=g(u)=x$. By construction: $U'\\subseteq T_j$ for $j\\in J$ and $U'\\cap T_j=\\emptyset$ for $j\\in J_0\\setminus J$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HN (line 1856), 'we win after replacing U by the intersection of their images', with the argument of the proof of Lemma 04HL (lemma-etale-etale-local, line 1794)"
+   }
+  },
+  {
+   "text": "*The base change to $U'$ is an open subscheme of $Y_U$.* Let $Y'=\\mathrm{pr}_2^{-1}(U')\\subseteq Y_U$, an open subscheme. By [lem-weil-pbc-open-fibre-product] (applied to $\\mathrm{pr}_2:Y_U\\to U$ and $\\mathrm{id}_U$ over $U$, with the opens $Y_U$, $U'$ and $U$) the fibre product $Y_U\\times_UU'$ is $Y'$, with projections the inclusion $Y'\\hookrightarrow Y_U$ and $\\mathrm{pr}_2|_{Y'}:Y'\\to U'$. By the universal property of fibre products [def-pc-fibre-product], $(Y\\times_XU)\\times_UU'$ together with the composite $(Y\\times_XU)\\times_UU'\\to Y\\times_XU\\to Y$ and the projection to $U'$ is a fibre product $Y\\times_{X,g'}U'$: a pair of morphisms $a:T\\to Y$, $b:T\\to U'$ with $f\\circ a=g'\\circ b=g\\circ(\\iota\\circ b)$ is the same as a morphism $(a,\\iota\\circ b):T\\to Y_U$ together with $b$, compatible over $U$. Hence $Y\\times_XU'=Y'$, with second projection $\\mathrm{pr}_2|_{Y'}$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HN (line 1856), 'we win after replacing U by the intersection of their images', with the argument of the proof of Lemma 04HL (lemma-etale-etale-local, line 1794)"
+   }
+  },
+  {
+   "text": "*The decomposition.* For $j\\in J_0$ put $V'_j=V_j\\cap Y'$, an open and closed subscheme of $Y'$ (intersection with $Y'$ of an open and closed subset of $Y_U$, with the open subscheme structure); the $V'_j$ are pairwise disjoint and cover $Y'$, because the $V_j$ do so in $Y_U$. If $j\\notin J$ then $\\mathrm{pr}_2(V_j)=T_j$ is disjoint from $U'$ (step 3), so $V'_j=\\emptyset$; hence $Y'=\\coprod_{j\\in J}V'_j$. If $j\\in J$ then $U'\\subseteq T_j$ and $V'_j=p_j^{-1}(U')$; since $p_j:V_j\\to T_j$ is an isomorphism of schemes (step 2), its restriction $V'_j=p_j^{-1}(U')\\to U'$ to the open subscheme $U'$ of $T_j$ is an isomorphism [def-weil-open-immersion], and it is the composite $V'_j\\hookrightarrow Y'\\xrightarrow{\\mathrm{pr}_2}U'$. With step 4 ($Y\\times_XU'=Y'$) and step 3 ($g'$ etale, $g'(u)=x$, $J\\subseteq J_0$ finite), $(g',u,J,(V'_j)_{j\\in J})$ is as claimed. (If $Y_x=\\emptyset$ then $J=\\emptyset$ and $Y\\times_XU'=\\emptyset$, which is allowed.)",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Stacks Etale Morphisms, proof of Lemma 04HN (line 1856), 'we win after replacing U by the intersection of their images', with the argument of the proof of Lemma 04HL (lemma-etale-etale-local, line 1794)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-finite-unramified-etale-local",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-closed-immersion-open",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Lemma 04HN (lemma-finite-etale-etale-local, line 1856), with the argument of Lemma 04HL (line 1794); the shrinking of U (steps 3-5) written out by the worker: Stacks says only 'replacing U by the intersection of their images'"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +171,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-etale-etale-local-split",
+  "worker": "stage1",
+  "summary": "Proof written in five steps following Stacks 04HN: (1) 04HJ, new node lem-weil-pbc-finite-unramified-etale-local, gives an etale neighbourhood over which Y_U is a finite disjoint union of closed immersions V_j -> U; (2) each V_j -> U is etale (base change + open immersion + composition, existing Mathlib leaves) hence an open immersion by the new Mathlib leaf lem-weil-pbc-etale-closed-immersion-open (IsOpenImmersion.of_flat_of_mono), so V_j is isomorphic to an open and closed T_j of U; (3)-(5) shrinking U to U' = (intersection of the T_j containing u) minus (union of the others), written out since Stacks only says 'intersection of their images' (the 04HJ statement does not say every V_j passes through u, so the V_j missing u must be removed, which the Stacks wording leaves implicit), identifying Y x_X U' with the preimage of U' and checking the decomposition. Statement and stmt_deps unchanged; Mathlib re-searched with the three kinds (no match; the algebra-level 00UL is in Mathlib)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Split reviewed: 5 steps along Etale Morphisms 04HN via 04HJ (closed immersions V_j -> U, etale hence open immersions by the new Mathlib leaf; shrink U to the intersection of the images through u minus the others; base change to the open U' is the open preimage). Correct, with the shrinking Stacks leaves implicit written out."
+ }
 }

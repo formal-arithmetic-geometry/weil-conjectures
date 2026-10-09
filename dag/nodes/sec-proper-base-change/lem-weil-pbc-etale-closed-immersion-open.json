@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-etale-closed-immersion-open",
+ "kind": "statement",
+ "title": "An etale closed immersion is an open immersion",
+ "statement": "Let $i:V\\to U$ be a morphism of schemes [def-pc-scheme] which is a closed immersion [def-weil-closed-immersion] and etale [def-weil-etale-morphism]. Then $i$ is an open immersion [def-weil-open-immersion]. Consequently the image $T=i(V)$ is an open and closed subset of $U$, and $i$ is an isomorphism of $V$ onto the open subscheme $(T,\\mathcal O_U|_T)$ of $U$.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, proof of Lemma 04HL (lemma-etale-etale-local, line 1794): 'Now $V_{i,j}\\to U$ is a closed immersion and etale. Hence it is an open immersion, for example by Theorem 025G (theorem-etale-radicial-open, line 1370)'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an etale closed immersion of schemes is an open immersion",
+   "results": "IsOpenImmersion, IsImmersion.instOfIsOpenImmersion, IsImmersion.instOfIsClosedImmersion, IsClosedImmersion, IsPreimmersion.instOfIsOpenImmersion, isOpenImmersion_eq_inf, IsClosedImmersion.mk, IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-10",
+   "verdict": "no direct match; see leanfinder"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a flat monomorphism of schemes locally of finite presentation is an open immersion",
+   "results": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono (Mathlib.AlgebraicGeometry.Morphisms.FlatMono), Flat.instOfIsOpenImmersion, UniversallyOpen.of_flat, locallyOfFinitePresentation_of_isOpenImmersion, Flat.isIso_of_surjective_of_mono",
+   "date": "2026-10-10",
+   "verdict": "generalization: IsOpenImmersion.of_flat_of_mono"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+   "results": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono {X Y} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f (Mathlib.AlgebraicGeometry.Morphisms.FlatMono)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization specializing in one line)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_flat_of_mono\\|IsPreimmersion\\|instance.*Flat\\|instance.*LocallyOfFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{FlatMono,ClosedImmersion,Preimmersion,Smooth,Etale}.lean",
+   "results": "FlatMono.lean:38 theorem IsOpenImmersion.of_flat_of_mono; ClosedImmersion.lean:69 instance [IsClosedImmersion f] : IsPreimmersion f; Preimmersion.lean:65 instance [IsPreimmersion f] : Mono f; Etale.lean:114 instance [Etale f] : Smooth f; Smooth.lean:113 instance [Smooth f] : Flat f; Smooth.lean:241 instance [Smooth f] : LocallyOfFinitePresentation f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+  "line": 38,
+  "how": "specializes in one line: apply IsOpenImmersion.of_flat_of_mono to i; Flat i and LocallyOfFinitePresentation i come from Etale i via the instances Etale.lean:114 (Smooth), Smooth.lean:113 (Flat) and Smooth.lean:241 (LocallyOfFinitePresentation); Mono i from IsClosedImmersion i via ClosedImmersion.lean:69 (IsPreimmersion) and Preimmersion.lean:65 (Mono). The consequences after 'Consequently' are the definitions of open and closed immersion (the range is open, i.isOpenEmbedding.isOpen_range, and closed, i.isClosedEmbedding.isClosed_range)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-etale-etale-local-split",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf verified: IsOpenImmersion.of_flat_of_mono (Morphisms/FlatMono.lean:38), flat and locally of finite presentation from etale, mono from closed immersion."
+ }
+}
