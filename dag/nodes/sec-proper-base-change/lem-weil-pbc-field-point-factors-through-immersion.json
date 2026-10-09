@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-field-point-factors-through-immersion",
+ "kind": "statement",
+ "title": "A point with values in a field lying over the image of an immersion factors through it",
+ "statement": "Let $\\iota:Z\\to X$ be an immersion of schemes [def-pc-scheme], [def-weil-closed-immersion] (a closed immersion $Z\\to W$ followed by an open immersion $W\\to X$), let $z\\in Z$ and $x=\\iota(z)$. (1) The map $\\kappa(x)\\to\\kappa(z)$ induced by $\\iota$ on residue fields [def-weil-residue-field] is an isomorphism. (2) Let $K$ be a field and $s:\\operatorname{Spec}K\\to X$ [def-weil-affine-spectrum] a morphism of schemes mapping the unique point of $\\operatorname{Spec}K$ to $x$. Then there is exactly one morphism $s':\\operatorname{Spec}K\\to Z$ with $\\iota\\circ s'=s$, and $s'$ maps the unique point to $z$. In particular, if $\\bar x=s$ is a geometric point of $X$ [def-weil-geometric-point] lying over a point of $\\iota(Z)$, then $\\bar x=\\iota\\circ\\bar z$ for a unique geometric point $\\bar z:\\operatorname{Spec}K\\to Z$ (with the same algebraically closed field $K$).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Definition 01IO (definition-immersion, line 1781: (5) immersion = closed immersion followed by open immersion), Definition 01HK (definition-closed-immersion-locally-ringed-spaces, line 344: O_X -> i_*O_Z surjective), the discussion before Lemma 01J9 (lemma-characterize-points, lines 2420-2475: morphisms Spec(K) -> X correspond to pairs (x, kappa(x) -> K)), and Lemma 01L7 (lemma-immersions-monomorphisms, line 4639) for uniqueness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from Spec of a field into a scheme factors through an immersion if its image point lies in the image of the immersion",
+   "results": "AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, Scheme.instIsPreimmersionFromSpecResidueField (Mathlib.AlgebraicGeometry.ResidueField), IsPreimmersion.Spec_map_iff (Morphisms.Preimmersion), IsClosedImmersion.instIsIsoSchemeToImage, IsImmersion.instToImage, IsImmersion.mk (Morphisms.Immersion)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "immersion of schemes induces isomorphism on residue fields",
+   "results": "Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion (ResidueField.lean:177, open immersions only), IsImmersion, LocallyRingedSpace.residueFieldMap, Scheme.residueFieldCongr, IsOpenImmersion.instIsIsoCommRingCatStalkMap",
+   "date": "2026-10-10",
+   "verdict": "no match (only the open-immersion case of (1))"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism Spec K -> X from the spectrum of a field whose point lies in the range of an immersion Z -> X factors through the immersion",
+   "results": "Scheme.Hom.liftCoborder, Scheme.Hom.liftCoborder_ι (Morphisms.Immersion: factorization of the immersion itself through an open), specTargetImageFactorization, Scheme.Hom.imageι, IsImmersion.instToImage",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.Scheme.Hom.residueFieldMap",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Spec",
+   "results": "Scheme.IsQuasiAffine.toIsImmersion, Scheme.IsQuasiAffine.mk, isIso_of_comp_eq_sigmaSpec (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'residueFieldMap' AlgebraicGeometry | grep -i 'immersion|isIso'; grep 'lift' in AlgebraicGeometry/Morphisms/{ClosedImmersion,Immersion,Preimmersion}.lean and OpenImmersion.lean; grep -rln residueField AlgebraicGeometry/Morphisms/ in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ResidueField.lean:177 IsIso residueFieldMap for IsOpenImmersion; IsClosedImmersion.lift (ClosedImmersion.lean:210, needs f.ker <= g.ker, a scheme-theoretic not a pointwise hypothesis); IsOpenImmersion.lift (OpenImmersion.lean:701, range condition, open immersions only); Scheme.SpecToEquivOfField (ResidueField.lean:346); IsPreimmersion -> Mono (Preimmersion.lean:65, gives uniqueness only); no residue-field statement for closed immersions or immersions",
+   "date": "2026-10-10",
+   "verdict": "no match: the pieces (SpecToEquivOfField, open-immersion residue iso, Mono of a preimmersion) are there, the closed-immersion residue iso and the lift are not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-stalks",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement: residue fields along an immersion and the unique factorization of a morphism from Spec of a field through an immersion whose image contains the point (Schemes 01IO/01HK/01L7 area); self-contained; correct; unsplit."
+ }
+}
