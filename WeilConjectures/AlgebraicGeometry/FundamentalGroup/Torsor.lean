@@ -21,7 +21,7 @@ isomorphism class of `P` (`AlgebraicGeometry.Scheme.EtaleTorsor.monodromy`). Thr
 Galois correspondence `AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction` the
 construction `P ↦ f_P` is a bijection between isomorphism classes of `M`-torsors and
 continuous homomorphisms `π₁(Y, s) → M`, and together with the torsor description of `H¹`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`) this identifies
+(`AlgebraicGeometry.Scheme.EtaleTorsor.classH1`) this identifies
 `H¹(Y_ét, M)` with `Hom_cont(π₁(Y, s), M)`.
 
 ## Main definitions
@@ -36,6 +36,8 @@ continuous homomorphisms `π₁(Y, s) → M`, and together with the torsor descr
   transitively on the geometric fibre of a torsor.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.bijective_monodromy`: the bijection between
   isomorphism classes of torsors and continuous homomorphisms.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_of_classH1_eq`: the canonical class in
+  `H¹(Y_ét, M)` determines the monodromy character.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_equiv_sheafH_continuousMonoidHom`: the
   identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`.
 -/
@@ -431,6 +433,14 @@ theorem bijective_monodromy :
 
 /-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
 
+Torsors with the same class in `H¹(Y_ét, M)` under the canonical class map
+`AlgebraicGeometry.Scheme.EtaleTorsor.classH1` have the same monodromy character. -/
+theorem monodromy_eq_of_classH1_eq {t₁ t₂ : EtaleTorsor M Y}
+    (h : classH1 M Y ⟦t₁⟧ = classH1 M Y ⟦t₂⟧) : t₁.monodromy s G = t₂.monodromy s G :=
+  monodromy_eq_of_isIsomorphic s G (Quotient.exact (injective_classH1 h))
+
+/-- Blueprint `cor-galois-abelian-h1`: Abelian case: torsors, characters and H^1.
+
 Let `Y` be a connected scheme with geometric point `s`, let `G = π₁(Y, s)` be the étale
 fundamental group (a fundamental group of the fibre functor on finite étale `Y`-schemes) and
 let `M` be a finite abelian group. Then there is a bijection
@@ -438,7 +448,10 @@ let `M` be a finite abelian group. Then there is a bijection
 `g • p = f_P(g) +ᵥ p` for `p` in the geometric fibre `P_s`: the class of a torsor `P` under
 the bijection `c` of `AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH` is sent
 to `f_P`. The map `c` is pinned down only as far as `exists_quotientEquivSheafH` does: it is a
-bijection under which exactly the classes of torsors admitting a section vanish. -/
+bijection under which exactly the classes of torsors admitting a section vanish; the canonical
+class map `AlgebraicGeometry.Scheme.EtaleTorsor.classH1` is injective and determines the
+character (`AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_of_classH1_eq`), but its
+surjectivity needs effective étale descent. -/
 theorem exists_equiv_sheafH_continuousMonoidHom :
     ∃ (c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
         ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj

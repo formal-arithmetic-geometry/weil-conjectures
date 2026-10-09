@@ -223,23 +223,22 @@ theorem isDualizable_derivedTensor
     (hM : IsDualizable M) : IsDualizable (((derivedTensor A X).obj K).obj M) :=
   hK.tensorObj hM
 
-/-- An invertible complex is dualizable: a one-sided tensor inverse is two-sided, the derived
-tensor product being symmetric (`DerivedCategory.nonempty_braidedCategory`). -/
+/-- An invertible complex is dualizable. -/
 theorem isDualizable_of_isInvertible
     {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) :
-    IsDualizable T := by
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
-  obtain ⟨M, ⟨e⟩⟩ := hT
-  exact isDualizable_of_tensorIso e (β_ M T ≪≫ e)
+    IsDualizable T :=
+  hT.isDualizable
 
-/-- A shift of an invertible complex is invertible: `T⟦n⟧ ⊗ᴸ M⟦-n⟧ ≅ (T ⊗ᴸ M)⟦0⟧ ≅ Λ_X` for a
-tensor inverse `M` of `T`. -/
+/-- A shift of an invertible complex is invertible: `T⟦n⟧ ⊗ᴸ M⟦-n⟧ ≅ (T ⊗ᴸ M)⟦0⟧ ≅ Λ_X`, and
+symmetrically, for a tensor inverse `M` of `T`. -/
 theorem isInvertible_shift
     {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) (n : ℤ) :
     IsInvertible (T⟦n⟧) := by
-  obtain ⟨M, ⟨e⟩⟩ := hT
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hT
   exact ⟨M⟦-n⟧, ⟨derivedTensorShiftIso A T M n (-n) ≪≫ (shiftFunctor _ (n + -n)).mapIso e ≪≫
-    (shiftFunctorZero' _ (n + -n) (by simp)).app _⟩⟩
+    (shiftFunctorZero' _ (n + -n) (by simp)).app _⟩,
+    ⟨derivedTensorShiftIso A M T (-n) n ≪≫ (shiftFunctor _ (-n + n)).mapIso e' ≪≫
+    (shiftFunctorZero' _ (-n + n) (by simp)).app _⟩⟩
 
 end Etale.DerivedCategory
 
