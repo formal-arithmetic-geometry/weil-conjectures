@@ -122,6 +122,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
