@@ -1,0 +1,51 @@
+{
+ "id": "lem-weil-l-adic-extension-complete",
+ "kind": "statement",
+ "title": "A finite extension of $\\mathbf Q_\\ell$ is complete",
+ "statement": "Let $\\ell$ be a prime number, $\\mathbf Q_\\ell$ the field of $\\ell$-adic numbers with its absolute value $|\\cdot|_\\ell$ [def-weil-l-adic-numbers], and $E/\\mathbf Q_\\ell$ a field extension [def-pc-field-extension] with $E$ finite-dimensional as a $\\mathbf Q_\\ell$-vector space, of degree $d=[E:\\mathbf Q_\\ell]=\\dim_{\\mathbf Q_\\ell}E$ [def-weil-vector-space-dimension]. Let $|\\cdot|_E$ be an absolute value on $E$ whose restriction to $\\mathbf Q_\\ell$ (through the structure homomorphism) is $|\\cdot|_\\ell$ (it exists and is unique by lem-weil-l-adic-extension-absolute-value, which is not needed to state this). Then $E$ is complete for $|\\cdot|_E$: every sequence $(x_n)$ in $E$ with $|x_n-x_m|_E\\to0$ as $n,m\\to\\infty$ converges in $E$ for $|\\cdot|_E$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$' (used there without proof); the claim '$E$ is complete for $|\\cdot|_E$' is made in def-weil-l-adic-coefficient-extension. No document in literature/ proves it; references: J.-P. Serre, Local Fields, GTM 67 (wanted in literature/LIST.md, not obtained), Ch. II, §2, Proposition 3; Bosch-Güntzer-Remmert, Non-Archimedean Analysis, Theorem 3.2.4/2 (not obtained)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance (priority := 100) completeSpace\\|def normedField\\|theorem spectralNorm_unique_field_norm_ext' Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean; grep -n 'theorem FiniteDimensional.complete' Mathlib/Topology/Algebra/Module/FiniteDimension.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "spectralNorm.completeSpace [FiniteDimensional K L] : @CompleteSpace L (uniformSpace K L) (SpectralNorm.lean:939; K complete, nontrivially normed, ultrametric), for the normed field spectralNorm.normedField K L (:854); spectralNorm_unique_field_norm_ext (:770); FiniteDimensional.complete 𝕜 E : CompleteSpace E for a finite-dimensional normed space over a complete field (FiniteDimension.lean:508)",
+   "date": "2026-10-09",
+   "verdict": "match: K = ℚ_[ℓ], L = E"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "spectralNorm.completeSpace",
+  "file": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "how": "specializes in one line: by `spectralNorm_unique_field_norm_ext` (line 770) $|\\cdot|_E$ is `spectralNorm ℚ_[ℓ] E`, and `spectralNorm.completeSpace` (line 939) says E is complete for it when E is finite-dimensional over ℚ_[ℓ]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-l-adic-coefficient-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

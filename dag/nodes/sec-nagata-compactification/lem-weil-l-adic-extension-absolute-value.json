@@ -1,0 +1,51 @@
+{
+ "id": "lem-weil-l-adic-extension-absolute-value",
+ "kind": "statement",
+ "title": "The absolute value of $\\mathbf Q_\\ell$ extends uniquely to a finite extension",
+ "statement": "Let $\\ell$ be a prime number, $\\mathbf Q_\\ell$ the field of $\\ell$-adic numbers with its absolute value $|\\cdot|_\\ell$ [def-weil-l-adic-numbers], and $E/\\mathbf Q_\\ell$ a field extension [def-pc-field-extension] with $E$ finite-dimensional as a $\\mathbf Q_\\ell$-vector space, of degree $d=[E:\\mathbf Q_\\ell]=\\dim_{\\mathbf Q_\\ell}E$ [def-weil-vector-space-dimension]. Then there is exactly one absolute value $|\\cdot|_E:E\\to\\mathbf R_{\\geq0}$ (that is: $|x|_E=0$ iff $x=0$, $|xy|_E=|x|_E|y|_E$, $|x+y|_E\\leq|x|_E+|y|_E$) whose restriction to $\\mathbf Q_\\ell$ is $|\\cdot|_\\ell$, i.e. $|a|_E=|a|_\\ell$ for $a\\in\\mathbf Q_\\ell$. It is nonarchimedean: $|x+y|_E\\leq\\max(|x|_E,|y|_E)$ for all $x,y\\in E$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$' (used there without proof); the claim 'the absolute value of $\\mathbf Q_\\ell$ extends uniquely to $E$' is made in def-weil-l-adic-coefficient-extension. No document in literature/ proves it; references: J.-P. Serre, Local Fields, GTM 67 (wanted in literature/LIST.md, not obtained), Ch. II, §2, Proposition 3 and its corollaries (unique extension of the valuation of a complete discretely valued field to a finite extension); S. Bosch, U. Güntzer, R. Remmert, Non-Archimedean Analysis, Theorem 3.2.4/2 (the source cited by Mathlib; not obtained)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def spectralMulAlgNorm\\|theorem spectralNorm_extends\\|theorem isNonarchimedean_spectralNorm\\b\\|theorem spectralNorm_unique_field_norm_ext\\|theorem spectralNorm_unique\\b' Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean; grep -n 'def mulRingNormEquivAbsoluteValue' Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean; grep -n 'instance : IsUltrametricDist\\|instance : NontriviallyNormedField\\|instance : CompleteSpace' Mathlib/NumberTheory/Padics/PadicNumbers.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "for K a nontrivially normed, ultrametric field and L/K algebraic: spectralNorm_extends (k : K) : spectralNorm K L (algebraMap K L k) = ‖k‖ (SpectralNorm.lean:573); isNonarchimedean_spectralNorm (:645); with [CompleteSpace K]: spectralMulAlgNorm K L : MulAlgebraNorm K L (:841, multiplicative by spectralAlgNorm_mul :827); spectralNorm_unique_field_norm_ext {f : AbsoluteValue L ℝ} (hf_ext : ∀ x : K, f (algebraMap K L x) = ‖x‖) (x : L) : f x = spectralNorm K L x (:770); MulRingNorm.mulRingNormEquivAbsoluteValue : MulRingNorm R ≃ AbsoluteValue R ℝ (RingSeminorm.lean:375); ℚ_[p] is IsUltrametricDist (PadicNumbers.lean:781), NontriviallyNormedField (:872), CompleteSpace (:1026); a finite-dimensional extension is algebraic (Algebra.IsAlgebraic.of_finite)",
+   "date": "2026-10-09",
+   "verdict": "match: K = ℚ_[ℓ], L = E"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "spectralNorm_unique_field_norm_ext",
+  "file": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "how": "specializes in one line with K = ℚ_[ℓ], L = E: uniqueness is `spectralNorm_unique_field_norm_ext` (line 770: every `AbsoluteValue E ℝ` extending ‖·‖ on ℚ_[ℓ] equals `spectralNorm ℚ_[ℓ] E`); existence is `spectralMulAlgNorm ℚ_[ℓ] E` (line 841) turned into an `AbsoluteValue E ℝ` by `MulRingNorm.mulRingNormEquivAbsoluteValue` (Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean:375), extending ‖·‖ by `spectralNorm_extends` (line 573); nonarchimedean is `isNonarchimedean_spectralNorm` (line 645)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-l-adic-coefficient-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

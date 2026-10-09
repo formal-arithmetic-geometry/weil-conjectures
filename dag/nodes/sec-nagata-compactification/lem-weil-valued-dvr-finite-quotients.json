@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-valued-dvr-finite-quotients",
+ "kind": "statement",
+ "title": "Finite quotients of a discrete valuation ring with finite residue field",
+ "statement": "Let $K$ be a field with a nonarchimedean absolute value $|\\cdot|$, let $\\mathcal O=\\{x\\in K:|x|\\leq1\\}$ and $\\mathfrak m=\\{x\\in K:|x|<1\\}$, and assume that $\\mathcal O$ is a discrete valuation ring with maximal ideal $\\mathfrak m$ and finite residue field $\\mathcal O/\\mathfrak m$. Let $\\varpi\\in\\mathcal O$ with $\\varpi\\mathcal O=\\mathfrak m$. Then for every integer $n\\geq1$:\n\n1. $\\varpi^n\\mathcal O=\\mathfrak m^n$; in particular the ideal $\\varpi^n\\mathcal O$ does not depend on the choice of $\\varpi$;\n2. the quotient ring $\\mathcal O/\\varpi^n\\mathcal O$ is finite, and it is a local ring with maximal ideal $\\mathfrak m/\\varpi^n\\mathcal O$;\n3. since $\\varpi^{n+1}\\mathcal O\\subseteq\\varpi^n\\mathcal O$, the identity of $\\mathcal O$ induces a ring homomorphism $\\mathcal O/\\varpi^{n+1}\\mathcal O\\to\\mathcal O/\\varpi^n\\mathcal O$, and it is surjective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$' (used there without proof); the claims ('$A_{E,n}$ is a finite local ring', 'the transition maps are surjective', '$A_{E,n}$ does not depend on the choice of $\\varpi_E$') are made in def-weil-l-adic-coefficient-extension. No document in literature/ proves them; reference: J.-P. Serre, Local Fields, GTM 67 (wanted in literature/LIST.md, not obtained), Ch. I, §1 (ideals of a discrete valuation ring are the $\\mathfrak m^n$) and Ch. II, §2"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma finite_quotient_maximalIdeal_pow_of_finite_residueField' Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; grep -n 'theorem irreducible_iff_uniformizer' Mathlib/RingTheory/DiscreteValuationRing/Basic.lean; grep -n 'theorem span_singleton_pow' Mathlib/RingTheory/Ideal/Operations.lean; grep -n 'theorem of_surjective' Mathlib/RingTheory/LocalRing/Basic.lean; grep -n 'def factor\\|lemma factor_surjective' Mathlib/RingTheory/Ideal/Quotient/Defs.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField [IsDiscreteValuationRing 𝒪[K]] (h : Finite 𝓀[K]) (n : ℕ) : Finite (𝒪[K] ⧸ 𝓂[K] ^ n) (LocallyCompact.lean:111); IsDiscreteValuationRing.irreducible_iff_uniformizer : Irreducible ϖ ↔ maximalIdeal R = Ideal.span {ϖ} (DiscreteValuationRing/Basic.lean:93); Ideal.span_singleton_pow : span {s} ^ n = span {s ^ n} (Operations.lean:418); IsLocalRing.of_surjective' (LocalRing/Basic.lean:115); Ideal.Quotient.factor (H : S ≤ T) : R ⧸ S →+* R ⧸ T (Quotient/Defs.lean:172) and Ideal.Quotient.factor_surjective (:201)",
+   "date": "2026-10-09",
+   "verdict": "match: clause 2 (finiteness) is exactly finite_quotient_maximalIdeal_pow_of_finite_residueField for the Valued field K; clause 1 is span_singleton_pow with the maximal ideal = span {ϖ}; locality is IsLocalRing.of_surjective' for the quotient map (the quotient is nonzero as ϖ is not a unit); clause 3 is Ideal.Quotient.factor and factor_surjective"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField",
+  "file": "Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+  "how": "specializes in one line per clause: (2) finiteness is `Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField` (line 111) after rewriting $\\varpi^n\\mathcal O=\\mathfrak m^n$, which is (1): `Ideal.span_singleton_pow` (Mathlib/RingTheory/Ideal/Operations.lean:418) with `IsDiscreteValuationRing.irreducible_iff_uniformizer` (Mathlib/RingTheory/DiscreteValuationRing/Basic.lean:93); locality is `IsLocalRing.of_surjective'` (Mathlib/RingTheory/LocalRing/Basic.lean:115) for `Ideal.Quotient.mk`; (3) is `Ideal.Quotient.factor` with `Ideal.Quotient.factor_surjective` (Mathlib/RingTheory/Ideal/Quotient/Defs.lean:172, 201)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-l-adic-coefficient-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

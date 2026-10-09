@@ -1,0 +1,54 @@
+{
+ "id": "lem-weil-l-adic-extension-integers-dvr",
+ "kind": "statement",
+ "title": "The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field",
+ "statement": "Let $\\ell$ be a prime number, $\\mathbf Q_\\ell$ the field of $\\ell$-adic numbers with its absolute value $|\\cdot|_\\ell$ [def-weil-l-adic-numbers], and $E/\\mathbf Q_\\ell$ a field extension [def-pc-field-extension] with $E$ finite-dimensional as a $\\mathbf Q_\\ell$-vector space, of degree $d=[E:\\mathbf Q_\\ell]=\\dim_{\\mathbf Q_\\ell}E$ [def-weil-vector-space-dimension]. Let $|\\cdot|_E$ be an absolute value on $E$ whose restriction to $\\mathbf Q_\\ell$ (through the structure homomorphism) is $|\\cdot|_\\ell$ (it exists and is unique by lem-weil-l-adic-extension-absolute-value, which is not needed to state this). Put $\\mathcal O_E=\\{x\\in E:|x|_E\\leq1\\}$ and $\\mathfrak m_E=\\{x\\in E:|x|_E<1\\}$. Then:\n\n1. $\\mathcal O_E$ is a subring of $E$, $\\mathfrak m_E$ is an ideal of $\\mathcal O_E$, and $\\mathcal O_E^\\times=\\{x\\in E:|x|_E=1\\}$; hence $\\mathcal O_E$ is a local ring with maximal ideal $\\mathfrak m_E$, and $E$ is its field of fractions.\n2. $\\mathcal O_E$ is a discrete valuation ring: a principal ideal domain with exactly one nonzero prime ideal, namely $\\mathfrak m_E\\neq0$.\n3. The residue field $\\mathcal O_E/\\mathfrak m_E$ is finite.\n4. The set $\\{|y|_E:y\\in\\mathfrak m_E,\\ y\\neq0\\}$ has a largest element, and for $\\varpi\\in\\mathcal O_E$ one has $\\varpi\\mathcal O_E=\\mathfrak m_E$ if and only if $\\varpi\\neq0$ and $|\\varpi|_E$ is that largest element; such elements (uniformizers) exist and any two differ by a factor in $\\mathcal O_E^\\times$.\n5. If $\\varpi$ is a uniformizer, every $x\\in E^\\times$ is written uniquely as $x=u\\,\\varpi^m$ with $u\\in\\mathcal O_E^\\times$ and $m\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "node def-weil-finite-field-fiber, order 411: 'For every finite extension $E/\\Ql$, write $\\mathcal O_E$ for its valuation ring, choose a uniformizer $\\varpi_E$, and, for every $n\\geq1$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$' (used there without proof); the claims ('$\\mathcal O_E$ is a discrete valuation ring with finite residue field', the description of uniformizers and of $E^\\times$) are made in def-weil-l-adic-coefficient-extension. No document in literature/ proves them for this $E$; references: J.-P. Serre, Local Fields, GTM 67 (wanted in literature/LIST.md, not obtained), Ch. II, §2, Proposition 3 and its corollaries ($\\mathcal O_E$ is a discrete valuation ring, free of rank $d$ over $\\mathbf Z_\\ell$, $d=ef$) and Ch. I, §1, Proposition 1 (structure of a discrete valuation ring)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsNonarchimedeanLocalField\\|instance : IsDiscreteValuationRing\\|Finite 𝓀\\[K\\]\\|CompleteSpace K' Mathlib/NumberTheory/LocalField/Basic.lean; grep -rn 'IsNonarchimedeanLocalField\\|IsLocalField' Mathlib --include=*.lean | grep -v NumberTheory/LocalField/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "IsNonarchimedeanLocalField K (Basic.lean:45) with IsDiscreteValuationRing 𝒪[K] (:108) and Finite 𝓀[K] (:140); outside that file the class is used nowhere: no instance for ℚ_[p] or any finite extension; IsLocalField does not exist",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\\|lemma isUnit_iff_norm_eq_one\\|lemma mem_iff\\|NormedField.v_eq_valuation' Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; grep -n 'theorem FiniteDimensional.proper' Mathlib/Analysis/Normed/Module/FiniteDimension.lean; grep -n 'instance : ProperSpace' Mathlib/NumberTheory/Padics/ProperSpace.lean; grep -n 'theorem eq_unit_mul_pow_irreducible\\|theorem irreducible_iff_uniformizer\\|theorem associated_of_irreducible' Mathlib/RingTheory/DiscreteValuationRing/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "for K a nontrivially normed ultrametric field with its valuation (Valued K ℝ≥0): Valued.integer.mem_iff : x ∈ 𝒪[K] ↔ ‖x‖ ≤ 1 (LocallyCompact.lean:47), isUnit_iff_norm_eq_one (:60), properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField : ProperSpace K ↔ CompleteSpace K ∧ IsDiscreteValuationRing 𝒪[K] ∧ Finite 𝓀[K] (:350); FiniteDimensional.proper 𝕜 E : ProperSpace E for E finite-dimensional over a proper field (FiniteDimension.lean:553); ProperSpace ℚ_[p] (Padics/ProperSpace.lean:64); IsDiscreteValuationRing.irreducible_iff_uniformizer (DiscreteValuationRing/Basic.lean:93), associated_of_irreducible (:141), eq_unit_mul_pow_irreducible (:338)",
+   "date": "2026-10-09",
+   "verdict": "no match as one statement; a route of several lines: E with the normed field spectralNorm.normedField ℚ_[ℓ] E is a finite-dimensional normed space over the proper field ℚ_[ℓ], hence proper (FiniteDimensional.proper), hence 𝒪[E] is a DVR with finite residue field by properSpace_iff_...; clauses 4-5 from the DiscreteValuationRing API. The instance juggling (spectralNorm.normedField is a def, not an instance) is more than one line, so the node stays in the queue"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-l-adic-coefficient-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
