@@ -36,7 +36,7 @@ One item is one delivery: one commit on a branch of your clone started from the 
 git push <server>:weil-conjectures-sheaf HEAD:refs/heads/deliver/<group>/<item>
 ```
 
-A later push to the same branch (after a return, §5) may be forced. The maintainer looks for `deliver/*` after each of its own reviews and at least every ten minutes.
+Before every push run `python3 tools/preflight_delivery.py <group> <item>` on your clone after `git fetch origin` (decision of the human, 2026-10-09 evening): it lists the reasons for which the maintainer returns a delivery without reading it (one commit on top of the current `origin/sheaf-dag`, only the item's files, the report with your own review, new nodes without proof steps and with cited statements, a verified Mathlib line for a leaf, steps that cite nodes rather than quote tags, `review_split.py` and `check_dag.py`). A delivery that fails it is not pushed. A later push to the same branch (after a return, §5) may be forced. The maintainer looks for `deliver/*` after each of its own reviews and at least every ten minutes.
 
 ## 5. What the maintainer does with it
 
