@@ -137,6 +137,27 @@ lemma existsUnique_comp_kummerAlgHom [NeZero n] (hf : IsUnit f) {Ω : Type u} [F
     have hpow : w ^ m.val = w ^ i := mul_right_cancel₀ ha0 (hm.trans hwi.symm)
     rw [← ZMod.natCast_zmod_val m, hζΩ.pow_inj (ZMod.val_lt m) hin hpow]
 
+/-- The map `Γ(Y)[T']/(T'ⁿ - f ^ a) → Γ(Y)[T]/(Tⁿ - f)`, `T' ↦ T ^ a`. -/
+noncomputable def kummerPowAlgHom (a : ℕ) :
+    KummerAlgebra Y n (f ^ a) →ₐ[Γ(Y, ⊤)] KummerAlgebra Y n f :=
+  AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) (AdjoinRoot.root _ ^ a) (by
+    have hr := AdjoinRoot.eval₂_root (X ^ n - C f : Γ(Y, ⊤)[X])
+    simp only [eval₂_sub, eval₂_X_pow, eval₂_C, sub_eq_zero] at hr ⊢
+    rw [← pow_mul, mul_comm, pow_mul, hr, map_pow]
+    rfl)
+
+lemma kummerPowAlgHom_root (a : ℕ) :
+    kummerPowAlgHom (n := n) (f := f) a (AdjoinRoot.root _) = AdjoinRoot.root _ ^ a :=
+  AdjoinRoot.liftAlgHom_root _ _ _ _
+
+lemma kummerAlgHom_comp_kummerPowAlgHom (a m : ℕ) (hζ' : ζ ^ n = 1) :
+    (kummerAlgHom ζ hζ (f := f) m).comp (kummerPowAlgHom a) =
+      (kummerPowAlgHom a).comp (kummerAlgHom ζ hζ' (f := f ^ a) (a * m)) :=
+  AdjoinRoot.algHom_ext (by
+    simp only [AlgHom.comp_apply, kummerPowAlgHom_root, kummerAlgHom_root, map_pow, map_mul,
+      AlgHom.commutes, mul_pow, ← pow_mul]
+    ring)
+
 section Torsor
 
 variable (n f)
@@ -179,6 +200,37 @@ lemma kummerVadd_zero : kummerVadd ζ hζ (f := f) 0 = 𝟙 _ := by
 lemma kummerVadd_pow (k m : ℕ) (hζk : (ζ ^ k) ^ n = 1) :
     kummerVadd (ζ ^ k) hζk (f := f) m = kummerVadd ζ hζ (k * m) := by
   simp only [kummerVadd, kummerAlgHom_pow ζ hζ k m hζk]
+
+/-- The map `T ↦ T ^ a` from the Kummer cover of `f` to that of `f ^ a`. -/
+noncomputable def kummerPowMap (a : ℕ) : Y.kummerCover n f ⟶ Y.kummerCover n (f ^ a) :=
+  pullback.map _ _ _ _ (𝟙 Y)
+    (Spec.map (CommRingCat.ofHom (kummerPowAlgHom (n := n) (f := f) a).toRingHom)) (𝟙 _)
+    (by simp)
+    (by
+      rw [Category.comp_id, ← Spec.map_comp]
+      congr 1
+      ext r
+      exact ((kummerPowAlgHom a).commutes r).symm)
+
+lemma kummerPowMap_comp_π (a : ℕ) :
+    kummerPowMap (n := n) (f := f) a ≫ Y.kummerCoverπ n (f ^ a) = Y.kummerCoverπ n f := by
+  simp [kummerPowMap, kummerCoverπ]
+
+lemma kummerVadd_comp_kummerPowMap (a m : ℕ) :
+    kummerVadd ζ hζ (f := f) m ≫ kummerPowMap a =
+      kummerPowMap a ≫ kummerVadd ζ hζ (f := f ^ a) (a * m) := by
+  apply pullback.hom_ext
+  · simp [kummerVadd, kummerPowMap]
+  · simp only [kummerVadd, kummerPowMap, Category.assoc, pullback.lift_snd,
+      pullback.lift_snd_assoc]
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    have e₁ : CommRingCat.ofHom (kummerPowAlgHom (n := n) (f := f) a).toRingHom ≫
+        CommRingCat.ofHom (kummerAlgHom ζ hζ (f := f) m).toRingHom =
+        CommRingCat.ofHom ((kummerAlgHom ζ hζ m).comp (kummerPowAlgHom a)).toRingHom := rfl
+    have e₂ : CommRingCat.ofHom (kummerAlgHom ζ hζ (f := f ^ a) (a * m)).toRingHom ≫
+        CommRingCat.ofHom (kummerPowAlgHom (n := n) (f := f) a).toRingHom =
+        CommRingCat.ofHom ((kummerPowAlgHom a).comp (kummerAlgHom ζ hζ (a * m))).toRingHom := rfl
+    rw [e₁, e₂, kummerAlgHom_comp_kummerPowAlgHom ζ hζ a m hζ]
 
 lemma kummerVadd_mod (m : ℕ) : kummerVadd ζ hζ (f := f) (m % n) = kummerVadd ζ hζ m := by
   simp only [kummerVadd, kummerAlgHom_mod]
@@ -338,6 +390,37 @@ lemma _root_.AlgebraicGeometry.Scheme.EtaleTorsor.mul_monodromy_of_iso
     rw [Category.assoc, Category.assoc, hv m']
   rw [key]
   rfl
+
+/-- If a morphism of total spaces over `Y` carries the action of `m` on `t` to the action of
+`k * m` on `t'`, then `f_{t'} = k • f_t`. -/
+lemma _root_.AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_mul_of_hom
+    (t t' : EtaleTorsor (ULift.{u + 1} (ZMod n)) Y) (φ : t.P ⟶ t'.P) (hφ : φ ≫ t'.π = t.π)
+    (k : ZMod n) (hv : ∀ m : ZMod n, t.vadd ⟨m⟩ ≫ φ = φ ≫ t'.vadd ⟨k * m⟩) (g : G) :
+    (t'.monodromy s G g).toAdd.down = k * (t.monodromy s G g).toAdd.down := by
+  let Φ : t.toFiniteEtale ⟶ t'.toFiniteEtale :=
+    ObjectProperty.homMk (MorphismProperty.Over.homMk φ hφ)
+  let x := (t.nonempty_fiber s).some
+  set m := (t.monodromy s G g).toAdd.down
+  have key : t'.monodromy s G g = Multiplicative.ofAdd (ULift.up (k * m)) := by
+    refine (t'.monodromy_eq_iff s G g ((fiber s).map Φ x) _).2 ?_
+    rw [← IsNaturalSMul.naturality, ← t.fiber_map_vaddHom_monodromy s G g x]
+    apply FiniteEtale.fiber_ext s
+    change (x.left ≫ φ) ≫ t'.vadd ⟨k * m⟩ = (x.left ≫ t.vadd ⟨m⟩) ≫ φ
+    rw [Category.assoc, Category.assoc, hv m]
+  rw [key]
+  rfl
+
+/-- **Kummer torsors are multiplicative**: `f_{f ^ a} = a • f_f`, via `T ↦ T ^ a`. -/
+lemma EtaleTorsor.monodromy_kummer_pow (a : ℕ) (hζs : IsPrimitiveRoot ((pointRingHom s).hom ζ) n)
+    (g : G) :
+    ((EtaleTorsor.kummer ζ hζ hn (hf.pow a) s hζs).monodromy s G g).toAdd.down =
+      (a : ZMod n) * ((EtaleTorsor.kummer ζ hζ hn hf s hζs).monodromy s G g).toAdd.down := by
+  refine EtaleTorsor.monodromy_eq_mul_of_hom s G _ _ (kummerPowMap a) (kummerPowMap_comp_π a)
+    (a : ZMod n) (fun m ↦ ?_) g
+  change kummerVadd ζ hζ m.val ≫ kummerPowMap a =
+    kummerPowMap a ≫ kummerVadd ζ hζ ((a : ZMod n) * m).val
+  rw [kummerVadd_comp_kummerPowMap, ZMod.val_mul, ZMod.val_natCast, Nat.mod_mul_mod,
+    kummerVadd_mod]
 
 /-- Replacing `ζ` by `ζ ^ k` divides the monodromy of the Kummer torsor by `k`:
 `k • f_{ζ ^ k} = f_ζ`. -/
