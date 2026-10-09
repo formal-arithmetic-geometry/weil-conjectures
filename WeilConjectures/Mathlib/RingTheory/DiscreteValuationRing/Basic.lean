@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
@@ -16,6 +17,11 @@ that of `O`, so that a uniformiser of `R` stays a uniformiser of `O`. Then the b
 `O ⊗[R] K` of the fraction field `K` of `R` is the fraction field of `O`
 (`IsDiscreteValuationRing.isFractionRing_tensorProduct`): inverting a uniformiser of `O` already
 inverts every nonzero element.
+
+We also show that if `B` is a flat algebra over a discrete valuation ring `R` with uniformiser
+`ϖ` whose special fibre `B ⧸ ϖB` is reduced, then every idempotent of `B[1/ϖ]` comes from `B`
+(`IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`, the algebraic core of
+Stacks 055J).
 -/
 
 @[expose] public section
@@ -70,5 +76,42 @@ lemma isFractionRing_tensorProduct
       (pow_ne_zero n hϖ.ne_zero), rfl⟩, ?_⟩
     rw [map_pow]
     exact ⟨↑u⁻¹, by rw [mul_comm (u : O), mul_assoc, Units.mul_inv, mul_one]⟩
+
+omit [IsDiscreteValuationRing R] in
+/-- Let `R` be a discrete valuation ring with uniformiser `ϖ` and `B` a flat `R`-algebra whose
+special fibre `B ⧸ ϖB` is reduced. Then every idempotent of `B[1/ϖ]` comes from `B`.
+
+The proof only uses that `R` is a domain and `ϖ ≠ 0`. -/
+theorem exists_eq_algebraMap_of_isIdempotentElem {B : Type*} [CommRing B] [Algebra R B]
+    [Module.Flat R B] {ϖ : R} (hϖ : Irreducible ϖ)
+    (hred : IsReduced (B ⧸ Ideal.span {algebraMap R B ϖ}))
+    {e : Localization.Away (algebraMap R B ϖ)} (he : IsIdempotentElem e) :
+    ∃ b : B, algebraMap B _ b = e := by
+  have hcancel (m : ℕ) (x y : B) (h : algebraMap R B ϖ ^ m * x = algebraMap R B ϖ ^ m * y) :
+      x = y := by
+    refine ((Module.Flat.isSMulRegular_of_nonZeroDivisors
+      (mem_nonZeroDivisors_of_ne_zero hϖ.ne_zero)).pow m) ?_
+    simpa [Algebra.smul_def] using h
+  have hinj (x y : B) (h : algebraMap B (Localization.Away (algebraMap R B ϖ)) x =
+      algebraMap B _ y) : x = y := by
+    obtain ⟨⟨_, m, rfl⟩, hc⟩ :=
+      (IsLocalization.eq_iff_exists (Submonoid.powers (algebraMap R B ϖ)) _).1 h
+    exact hcancel m x y hc
+  obtain ⟨n, b, hb⟩ := IsLocalization.Away.surj (algebraMap R B ϖ) e
+  induction n generalizing b with
+  | zero => exact ⟨b, by simpa using hb.symm⟩
+  | succ n ih =>
+    have hsq : b * b = algebraMap R B ϖ ^ (n + 1) * b := by
+      refine hinj _ _ ?_
+      rw [map_mul, map_mul, map_pow, ← hb]
+      linear_combination (algebraMap B (Localization.Away (algebraMap R B ϖ))
+        (algebraMap R B ϖ) ^ (n + 1)) ^ 2 * he.eq
+    have hb0 : Ideal.Quotient.mk (Ideal.span {algebraMap R B ϖ}) b = 0 := by
+      refine IsReduced.eq_zero _ ⟨2, ?_⟩
+      rw [pow_two, ← map_mul, Ideal.Quotient.eq_zero_iff_mem, hsq, pow_succ, mul_assoc]
+      exact Ideal.mul_mem_left _ _ (Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _))
+    obtain ⟨c, rfl⟩ := Ideal.mem_span_singleton'.1 (Ideal.Quotient.eq_zero_iff_mem.1 hb0)
+    refine ih c ((IsLocalization.Away.algebraMap_isUnit (algebraMap R B ϖ)).mul_left_inj.1 ?_)
+    rw [mul_assoc, ← pow_succ, hb, map_mul]
 
 end IsDiscreteValuationRing
