@@ -2,6 +2,10 @@
 
 Written by the lead. Your prompt names your item; this file says what to deliver. Read `AGENTS.md`, `roles/worker.md`, `SETUP.md` (its section "Requirements of the human" rules) and `stages/1-dag.md` first. No Lean is written and nothing is built or compiled. Use the Bash tool for reading and writing (cat, grep, python3 for JSON). Temporary scripts go into a subdirectory of the scratchpad named after your item (ten workers share the scratchpad; a script named like another worker's was once overwritten and run on the wrong files).
 
+## 0. The unit and the chapter
+
+Your node carries `chapter` and `unit`. Read `dag/chapters/<chapter>.json` and `dag/units/<unit>.json` (the chapter and unit files of the blueprint, verbatim) before the node. The chapter is fixed. The unit's statement and the steps of its proof are what your node and its neighbours realize: your proof keeps to the route the unit's steps give and to the units the unit cites; definitions and Mathlib leaves from anywhere are notions, not route. If a step of the unit is mathematically wrong, do not route around it silently: write in your node the step, what is wrong with it, and the counterexample or the failing inference, and report it; the lead confirms and reports to the human. Hard, long or not in Mathlib is not wrong. When your item is the unit's key node (its statement), fill the unit record's `realized` fields: `statement` with the node ids that state the unit, and `steps[k]` with the node ids that carry step k, and set `realized_by` to `{"date", "item"}`; the unit file is the only file outside `dag/nodes/` you may write, and only those two fields.
+
 ## 1. Your item
 
 One node in `dag/nodes/<chapter>/<id>.json`. Split it by one level (`stages/1-dag.md` §3): afterwards its statement names every notion it is built from, and (for a statement) its proof is complete, in steps, each step naming the nodes it uses or judged elementary. The nodes you point to exist; the new ones you create are stated and searched in Mathlib but not split themselves.
@@ -55,7 +59,7 @@ Mathlib is at `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (
 
 ## 6. Delivering
 
-Write your new nodes first and your item last, each file in one write, so that an interruption leaves no citation of a node that does not exist; then run `python3 tools/check_dag.py` and `python3 tools/review_split.py <your item>` from the project root and fix what they report about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). These two scripts only read (review_split.py reads the committed version with `git show`); apart from them, do not run `git`. Do not edit any file other than your item and the new nodes you created, and never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
+Write your new nodes first and your item last, each file in one write, so that an interruption leaves no citation of a node that does not exist; then run `python3 tools/check_dag.py` and `python3 tools/review_split.py <your item>` from the project root and fix what they report about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). These two scripts only read (review_split.py reads the committed version with `git show`); apart from them, do not run `git`. Do not edit any file other than your item, the new nodes you created and, for a key node, the `realized` fields of your unit's record; never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
 
 1. files written (item, new nodes with one line each: id, kind, Mathlib verdict);
 2. attachments: `<Lean declaration> belongs to <existing node id>` lines;

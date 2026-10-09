@@ -8,6 +8,7 @@ Checked, for the item: status is `split`; a statement has a proof in steps, each
 true/false, and `proof_deps` is exactly the union of the steps' `uses`; a definition has `stmt_deps`; every id cited exists
 and is not merged; `proof_origin.by` is `document` or `agent` with a document; `split_report` is present; the blueprint_*
 fields and import_flags of the committed version are unchanged (read from git HEAD).
+The item's proof dependencies stay inside its unit's route, and the unit record is read (stages/1-dag.md §7).
 For each node whose `created.item` is the item: id equals the file name, kind, statement, source and `created` are present,
 at least one Mathlib search with a verdict, a `mathlib` status has a match, every id cited exists.
 It prints what it finds and changes nothing; the mathematical review is the lead's.
@@ -77,6 +78,21 @@ def main() -> int:
             elif po.get("by") == "agent":
                 notes.append("proof written by an agent")
         check_ids(d, nodes, g.merged, item, errs)
+        # the unit route (stages/1-dag.md §7): proof dependencies on statements stay inside the unit's route
+        import units as un
+        units_, _ = un.load_units(); u = d.get("unit")
+        if u and u in units_ and not dq.is_def(d) and (units_[u].get("uses") or units_[u].get("steps")):
+            allowed = un.closure(units_, u)
+            for c in dq.deps_of(d, "proof"):
+                cn = nodes.get(c)
+                if cn and not dq.is_def(cn) and not dq.is_leaf(cn) and cn.get("unit") and cn.get("unit") not in allowed:
+                    errs.append(f"route: proof uses {c} of unit {cn.get('unit')}, which {u} does not cite (a departure from the unit's route needs an established error, SETUP.md)")
+        if u and u in units_:
+            r = units_[u].get("realized") or {}
+            if item in (r.get("statement") or []) or any(item in st for st in (r.get("steps") or [])):
+                notes.append(f"realizes unit {u}")
+            elif not (r.get("statement") or any(r.get("steps") or [])):
+                notes.append(f"unit {u} has no realization recorded yet")
         hv = head_version(files[item])
         if hv:
             for k in list(hv):

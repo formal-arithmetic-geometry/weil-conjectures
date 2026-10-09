@@ -12,6 +12,9 @@ Checked:
   cycles     the graph of statement and proof dependencies is acyclic; each strongly connected component with
              more than one node, and each self-loop, is reported and nothing is changed;
   targets    there is at least one target;
+  units      the checks of tools/units.py: every node has a chapter and a unit that exist; a unit whose `realized` fields are
+             filled has a node for its statement and every step and reaches the units it cites;
+  route      a split and reviewed statement whose proof uses a statement of a unit its unit does not cite (stages/1-dag.md §7);
   reach      a node is reached from a target, or from a former target (`target_former`, kept so that the subtree of an
              earlier target is not reported when the target changes), or carries `unreachable` in `import_flags`, never both.
 """
@@ -121,6 +124,8 @@ def main() -> int:
         if i in reach_all and flagged:
             errors.append(f"reach: {i} is flagged unreachable but a target reaches it")
 
+    import units as un  # noqa: E402
+    errors += un.check(nodes, verbose=False)
     kinds = collections.Counter(e.split(":")[0] for e in errors)
     for e in errors:
         print(e)

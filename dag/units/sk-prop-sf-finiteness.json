@@ -1,0 +1,41 @@
+{
+ "id": "sk-prop-sf-finiteness",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "Finiteness and constructibility",
+ "lean": [
+  "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar",
+  "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek"
+ ],
+ "uses": [],
+ "statement": "*Proposition (sketch).*\n\nLet $\\Lambda$ be a finite ring annihilated by an integer invertible on the\nschemes in question and let $f:X\\to Y$ be a morphism of finite-type\n$k$-schemes. Then $Rf_*$ carries $\\Dbc(X,\\Lambda)$ into $\\Dbc(Y,\\Lambda)$\n(*separatedness of $f$ is not needed*); if $e$ bounds the dimensions of\nthe geometric fibres and $f$ is separated, then $Rf_!$ carries\n$\\Dbc(X,\\Lambda)$ into $\\Dbc(Y,\\Lambda)$ and $R^qf_!\\mathcal F=0$ for $q>2e$.\nMoreover the torsion cohomological dimension of a finite-type $k$-scheme of\ndimension $d$ over a field $k$ with $\\mathrm{cd}_{\\mathrm{tor}}(k)\\le c$ is\nbounded by $2d+c$; in particular $\\mathrm{cd}_{\\mathrm{tor}}(\\Spec K)=0$ for\n$K$ separably closed.\nChapter 15 (finiteness and constructibility of direct images):\nthm:dg-finite-type-constructibility for ordinary direct images and\nsbc-thm-finiteness-finite-type for compact support; Chapter 4 for the\nproper case thm:weil-pbc-direct-image-finiteness-proper; Chapter 12\n(`06c`) for thm:sc-finite-type-torsion-cd; Chapter 16 for\nlem:kun-cd-sep-closed-point.",
+ "steps": [
+  {
+   "text": "*The engine: generic constructibility for an open immersion*\n(thm:fin-deligne-generic-open). Let $S$ be integral of finite type over\n$k$ and $j:X\\hookrightarrow Y$ an open immersion of finite-type $S$-schemes.\nReplacing $Y$ by the scheme-theoretic closure of $X$ — closed direct image\nis exact, preserves constructibility and commutes with base change — one may\nassume $X$ dense. Induct on $n=\\dim X_{k(S)}$, the case $n=0$ being the\nobservation that a closed subscheme with empty generic fibre becomes empty\nafter inverting one element of the base. *First*, viewing\n$X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ over the base $\\mathbf A^1_S$ for\neach affine chart and each coordinate drops the generic source dimension by\none, so the induction hypothesis gives a dense open $G\\subseteq Y$ over which\n$Rj_*F$ is bounded constructible and commutes with base change, with\n$Z=Y\\setminus G$ finite over $S$ after shrinking $S$. *Second*, for\nsmooth $X\\to S$ and locally constant $F$, compactify to $b:Y\\to S$\nprojective, put $K=Rj_*F$ and $a=bj$: the first step gives $K|_G\\in\\Dbc(G)$,\ngeneric smooth direct image gives $Ra_*F=Rb_*K\\in\\Dbc(S)$ after a further\nshrinking, and finite-boundary reconstruction over $Z$ gives $K\\in\\Dbc(Y)$;\nthe exchange morphism is an isomorphism on $G_T$, hence after $Rb_{T,*}$ by\nproper base change, hence everywhere by finite-boundary comparison.\n*Third*, for arbitrary constructible $F$, a finite radicial surjective\nbase change and a shrinking produce a dense smooth open $v:V\\hookrightarrow X$\non which $F$ is locally constant. The triangle\n$F\\to Rv_*v^*F\\to\\Delta\\to F[1]$ has $\\Delta=i_*i^*\\Delta$ supported on the\nreduced closed complement $i:W\\hookrightarrow X$, whose generic dimension is\n$<n$; the induction hypothesis applies to $ji:W\\to Y$ and to the finitely many\n$\\mathcal H^q(i^*\\Delta)$, and the long exact sequence of $Rj_*$ applied to\nthe triangle gives the claim, with the three exchange morphisms forming a\nmorphism of triangles. Radicial descent\n(lem:fin-radicial-exchange-descent) returns the result to $S$. Taking\n$S=\\Spec k$, whose only nonempty open is $S$ itself, turns the generic\nstatement into the absolute one: $Rj_*F\\in\\Dbc(Y,\\mathbf F_\\ell)$ for every\nopen immersion of finite-type $k$-schemes\n(cor:fin-deligne-open-over-field). Passing from $\\mathbf F_\\ell$ to a\nfinite ring $\\Lambda$ is dévissage: split a constructible sheaf into its\nprimary parts, filter the $\\ell$-primary part by $\\ell^iF$, compute each\n$\\ell$-torsion quotient over $\\mathbf F_\\ell$\n(lem:fin-coefficients-forgetful-direct-image), and assemble by the finite\nsequence of long exact sequences and the truncation triangles; the $\\Lambda$-action\nis carried along. This gives $Rj_*:\\Dbc(X,\\Lambda)\\to\\Dbc(Y,\\Lambda)$\n(cor:fin-deligne-open-finite-coefficients)."
+  },
+  {
+   "text": "*Ordinary direct image, $f$ not necessarily separated*\n(thm:dg-finite-type-constructibility). The assertion is local on $Y$, so\ntake $Y$ affine, and cover $X$ by finitely many affine opens\n$X_1,\\dots,X_r$. For $\\emptyset\\neq I\\subseteq\\{1,\\dots,r\\}$ the intersection\n$X_I=\\bigcap_{i\\in I}X_i$ is a quasi-compact open of an affine $X_i$, hence\nlocally closed in some $\\mathbf P^m_Y$; in its scheme-theoretic closure it is\nopen and dense, giving $f_I:X_I\\xrightarrow{j_I}\\overline X_I \\xrightarrow{p_I}Y$ with $j_I$ open and $p_I$ projective. The previous\nparagraph bounds $Rj_{I,*}$ and the proper case below bounds $Rp_{I,*}$, so\neach $Rf_{I,*}$ is bounded constructible. The finite alternating  Cech\nresolution of the cover — exact because inserting the index of a member\ncontaining a given point contracts the augmented complex, and termwise\ninjective because restriction to an open preserves injectives — yields\n\n$$\nE_1^{p,q}=\\bigoplus_{|I|=p+1}\\mathcal H^q\\bigl(Rf_{I,*}K|_{X_I}\\bigr)\n\\ \\Longrightarrow\\ \\mathcal H^{p+q}(Rf_*K),\n$$\n\nconcentrated in $0\\le p\\le r-1$ and in the finite union of the ranges just\nobtained. Constructible sheaves form a Serre subcategory, so every page is\nconstructible and the abutment has a finite constructible filtration.\nSeparatedness is never used."
+  },
+  {
+   "text": "*Compact supports* (sbc-thm-finiteness-finite-type). For separated\n$f$ write $f=rj$ by [sk-thm-nagata-compactification], so $Rf_!=Rr_*j_!$ by\n[sk-def-sf-operations] (iv). Extension by zero preserves constructibility,\nand $Rr_*$ is bounded constructible by the proper case; the vanishing\n$R^qf_!\\mathcal F=0$ for $q>2e$ is read off the *original* fibres of $f$,\nno fibre-dimension bound for the compactification being needed."
+  },
+  {
+   "text": "*The proper case* (thm:weil-pbc-direct-image-finiteness-proper).\nFor proper $f$ with geometric fibres of dimension $\\le e$, constructibility of\n$R^qf_*F$ and its vanishing for $q>2e$ are the classical finiteness theorem\n(Deligne, SGA41/2, *Théorème de finitude*, Th. 1.1,\ntogether with 095U); the pro-étale form follows by applying\n$\\nu^*$ through [sk-prop-sf-comparison]."
+  },
+  {
+   "text": "*The cohomological-dimension bound*\n(thm:sc-finite-type-torsion-cd). Let\n$\\epsilon:X_{\\Et}\\to X_{\\mathrm{Zar}}$ be the comparison. Its inverse image\nis exact, since the geometric stalk of $\\epsilon^{-1}G$ is the Zariski stalk\n$G_x$, so $\\epsilon_*$ preserves injectives and there is a Leray spectral\nsequence $H^p(X_{\\mathrm{Zar}},R^q\\epsilon_*F)\\Rightarrow H^{p+q}(X_{\\Et},F)$.\nThe Zariski stalk of $R^q\\epsilon_*F$ at $x$ is\n$\\varinjlim_{x\\in V}H^q(V_{\\Et},F|_V)$, computed over the cofinal affine\nneighbourhoods, which have dimension $\\le d$; the affine bound kills it for\n$q>d+c$. Grothendieck vanishing kills the spectral sequence for $p>d$. Hence\nall surviving total degrees are $\\le2d+c$. For $K$ separably closed every\ntorsion étale sheaf on $\\Spec K$ is acyclic in positive degrees, so\n$\\mathrm{cd}_{\\mathrm{tor}}(\\Spec K)=0$ (lem:kun-cd-sep-closed-point)."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

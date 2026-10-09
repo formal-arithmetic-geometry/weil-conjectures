@@ -1,0 +1,51 @@
+{
+ "id": "sk-prop-a1-kummer",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "The affine line and $\\mathbf G_m$ with $\\Lambda(1)$-coefficients",
+ "lean": [
+  "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine",
+  "AlgebraicGeometry.Etale.nonempty_iso_homology_zero_multiplicativeGroup",
+  "AlgebraicGeometry.Etale.nonempty_iso_homology_one_multiplicativeGroup",
+  "AlgebraicGeometry.Etale.isZero_homology_multiplicativeGroup"
+ ],
+ "uses": [
+  "sk-def-av-pic",
+  "sk-def-curve",
+  "sk-def-purity-conv",
+  "sk-prop-cd",
+  "sk-prop-cd-affine",
+  "sk-prop-kummer-exact",
+  "sk-thm-smooth-base-change"
+ ],
+ "statement": "*Proposition (sketch).*\n\nIn the conventions of [sk-def-purity-conv], write\n$p:\\Aaf^1_Y\\to Y$ for the projection, $j:\\mathbf G_{m,Y}\\hookrightarrow \\Aaf^1_Y$ for the open complement of the zero section, and $\\pi=pj$.\nFor every separated finite-type $Y$:\n\n- **(a)** *Acyclicity of the affine line.*\n$Rp_*\\Lambda\\simeq\\Lambda_Y$; equivalently $R^mp_*\\Lambda=0$ for $m>0$.\n- **(b)** *The Kummer generator.* $R^0\\pi_*\\Lambda(1)\\simeq\\Lambda_Y(1)$,\nwith $p^*$ an isomorphism onto it, and $R^1\\pi_*\\Lambda(1)\\simeq\\Lambda_Y$\nis free of rank one on the Kummer class $\\kappa(t)$.\n- **(c)** *Vanishing above degree one.* $R^m\\pi_*\\Lambda(1)=0$ for $m\\ge2$.\n\nAll three are compatible with base change on $Y$, as is $\\kappa(t)$.\nEquivalently, (a)–(c) are the corresponding statements for\n$\\Aaf^1$ and $\\mathbf G_m$ over a geometric point.\nCompare Milne, *Lectures on Étale Cohomology*, §16; SGA 4, IX.",
+ "steps": [
+  {
+   "text": "*Reduction to a geometric fibre.* Smoothness of $p$ and $\\pi$ is\n*not* what reduces the statement to a fibre: smooth base change\n([sk-thm-smooth-base-change]) requires the *base-changing* arrow to\nbe smooth, and the formation of a direct image does not in general commute\nwith an arbitrary base change of $Y$ (for $j:\\mathbf G_{m,k}\\hookrightarrow \\Aaf^1_k$ one has $(j_*\\Lambda)_{\\bar 0}=\\Lambda$, while the source\nbase-changed to $\\bar 0$ is empty). The reduction is the following, with\n$k=\\overline{\\mathbf F}_q$ the algebraically closed field of\n[sk-def-sf-setting] over which $Y$ lives. Let $\\bar y$ be a geometric\npoint of $Y$ and $S'=\\Spec\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ its strict\nhenselization, a $k$-scheme. As $p$ and $\\pi$ are quasi-compact and\nquasi-separated, the stalk formula gives\n$(Rp_*\\Lambda)_{\\bar y}\\simeq R\\Gamma(\\Aaf^1_{S'},\\Lambda)$ and\n$(R\\pi_*\\Lambda(1))_{\\bar y}\\simeq R\\Gamma(\\mathbf G_{m,S'},\\Lambda(1))$,\ncompatibly with $p^*$ and with the restriction of $\\kappa(t)$. Now\n$\\Aaf^1_{S'}=\\Aaf^1_k\\times_kS'$, and smooth base change applies to the\nCartesian square whose *smooth* side is $\\Aaf^1_k\\to\\Spec k$ and whose\nbase-changing arrow is $g:S'\\to\\Spec k$ (quasi-compact quasi-separated), for\nthe constant sheaf $\\Lambda$ on $S'$: with $h:\\Aaf^1_{S'}\\to\\Aaf^1_k$ the\nprojection, $f^{-1}R^qg_*\\Lambda\\xrightarrow{\\sim}R^qh_*\\Lambda$. Since $S'$\nis strictly henselian and $k$ algebraically closed, $R^qg_*\\Lambda$ is the\nconstant sheaf $H^q(S',\\Lambda)$, i.e. $\\Lambda$ for $q=0$ and $0$ for\n$q>0$; hence $\\Lambda_{\\Aaf^1_k}\\xrightarrow{\\sim}Rh_*\\Lambda$ and\n$h^*:R\\Gamma(\\Aaf^1_k,\\Lambda)\\xrightarrow{\\sim}R\\Gamma(\\Aaf^1_{S'},\\Lambda)$.\nThe same square with $\\mathbf G_{m,k}$ in place of $\\Aaf^1_k$ gives\n$h^*:R\\Gamma(\\mathbf G_{m,k},\\Lambda(1))\\xrightarrow{\\sim} R\\Gamma(\\mathbf G_{m,S'},\\Lambda(1))$, carrying the Kummer class of the\ncoordinate of $\\mathbf G_{m,k}$ to the restriction of $\\kappa(t)$ (the Kummer\nboundary commutes with pullback). These are the specific\n$\\Aaf^1$- and $\\mathbf G_m$-homotopy-invariance inputs over a strictly\nhenselian base (§[sec-smooth-base-change] does not use the present\nsection, so the reference is not circular). All three clauses are\nstatements about cohomology sheaves and about the sections $p^*$, $\\kappa(t)$\nof them, so they may be checked on geometric stalks, where they become the\ncorresponding statements for $\\Aaf^1_k$ and $\\mathbf G_{m,k}$ over the\nalgebraically closed $k$; geometric stalks are conservative. Then\n$\\Aaf^1_k$ and $\\mathbf G_{m,k}$ are affine curves in the sense of\n[sk-def-curve]. The twist $\\Lambda(1)$ is pulled back from $Y$, so by the\nprojection formula the twisted and untwisted statements determine one\nanother."
+  },
+  {
+   "text": "*Base change on $Y$.* For $g:Y'\\to Y$ with base changes $p',\\pi'$ and\ncoordinate $t'$, the base-change maps $g^*Rp_*\\Lambda\\to Rp'_*\\Lambda$ and\n$g^*R\\pi_*\\Lambda(1)\\to R\\pi'_*\\Lambda(1)$ are compatible with the units\n$p^*,\\pi^*$ and carry $g^*\\kappa(t)$ to $\\kappa(t')$. Once (a)–(c) are\nknown over $Y$ and over $Y'$, both sides have cohomology sheaves only in\ndegree $0$ (resp. degrees $0,1$), identified by these sections, so the\nbase-change maps are isomorphisms. The compatibility with base change in\nthe statement is thus a consequence of (a)–(c), not an input to their proof."
+  },
+  {
+   "text": "*Coefficients.* With $N$ as in [sk-def-purity-conv], $\\ell^NA=0$ and\n$\\Lambda(1)=\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N\\Z}A$. We reduce to\n$\\mu_{\\ell^N}$-coefficients by dévissage on $n$. For $n=1$,\n$A=F=\\mathcal O_E/\\varpi$ is a finite-dimensional $\\mathbf F_\\ell$-vector\nspace, so $F(1)=\\mu_\\ell\\otimes_{\\mathbf F_\\ell}F$ is a finite direct sum of\ncopies of $\\mu_\\ell$ and (a)–(c) for $F$ follow from the computation below\n(with $\\ell^N=\\ell$). For $n>1$ the exact sequence\n$0\\to A_{E,n-1}\\xrightarrow{\\varpi}A_{E,n}\\to F\\to0$ of coefficient modules\ngives an exact sequence of twisted sheaves; the vanishings in (a) and (c)\npass through the long exact sequence, and for (b), on $C=\\mathbf G_{m,k}$,\nthe connecting map $H^0(C,F(1))\\to H^1(C,A_{E,n-1}(1))$ vanishes because\n$H^0(C,A_{E,n}(1))=\\mu_{\\ell^N}(k)\\otimes A_{E,n}\\to H^0(C,F(1))$ is\nsurjective ($k$ algebraically closed) and $H^2(C,A_{E,n-1}(1))=0$ by\ninduction; since $a\\mapsto a\\cdot\\kappa(t)$ and $p^{*}$ are natural in the\ncoefficient module, the five lemma applied to\n$0\\to A_{E,n-1}\\to A_{E,n}\\to F\\to0$ and\n$0\\to H^1(C,A_{E,n-1}(1))\\to H^1(C,A_{E,n}(1))\\to H^1(C,F(1))\\to0$ (and to\nthe corresponding $H^0$-sequence) gives (b) for $A_{E,n}$. (When\n$e(E/\\mathbf Q_\\ell)\\mid n$ and $N=n/e$, $A\\cong(\\Z/\\ell^N\\Z)^{ef}$ is free\nover $\\Z/\\ell^N\\Z$, and one may instead tensor the $\\mu_{\\ell^N}$-computation\nwith $A$ directly.)"
+  },
+  {
+   "text": "*Clause (c).* $\\ell$ is prime to $\\operatorname{char}k$ and both curves\nare affine, so [sk-prop-cd-affine] gives $H^q(-,\\mu_{\\ell^N})=0$ for $q\\ge2$.\nThis is (c), and it reduces (a) and (b) to degrees $0$ and $1$."
+  },
+  {
+   "text": "*Degrees $0$ and $1$.* By [sk-prop-kummer-exact] with $n=\\ell^N$\ninvertible, the Kummer sequence gives\n\n$$\n0\\to H^0(C,\\mu_{\\ell^N})\\to\\Gamma(C,\\mathbb G_m)\n\\xrightarrow{\\ \\ell^N\\ }\\Gamma(C,\\mathbb G_m)\\to H^1(C,\\mu_{\\ell^N})\\to\\Pic(C).\n$$\n\nFor $C=\\Aaf^1_k$: $\\Gamma(C,\\mathbb G_m)=k^\\times$ and $\\Pic(C)=0$, since\n$k[T]$ is a principal ideal domain. As $k$ is algebraically closed,\n$k^\\times$ is divisible, so the $\\ell^N$-power map is surjective and\n$H^1(\\Aaf^1_k,\\mu_{\\ell^N})=0$. With (c) this gives $R^mp_*\\Lambda=0$ for\n$m>0$, and $R^0p_*\\Lambda=\\Lambda_Y$ because the geometric fibres $\\Aaf^1_k$ are\nconnected; this is (a).\nFor $C=\\mathbf G_{m,k}$: $\\Gamma(C,\\mathbb G_m)=k^\\times\\times t^{\\Z}$, the\nunits of $k[T,T^{-1}]$, and $\\Pic(C)=0$. Divisibility of $k^\\times$ leaves\n$\\Gamma(C,\\mathbb G_m)/\\ell^N\\cong t^{\\Z}/\\ell^Nt^{\\Z}\\cong\\Z/\\ell^N\\Z$, so\n$H^1(\\mathbf G_{m,k},\\mu_{\\ell^N})$ is free of rank one on the class of $t$,\nwhich is $\\kappa(t)$ by [sk-def-purity-conv]; and\n$H^0(\\mathbf G_{m,k},\\mu_{\\ell^N})=\\mu_{\\ell^N}(k)$ is free of rank one, with\nrestriction from $\\Aaf^1_k$ an isomorphism onto it. Tensoring with $F$\nand the dévissage above give (b)."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

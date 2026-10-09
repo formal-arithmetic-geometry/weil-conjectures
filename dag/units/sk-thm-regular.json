@@ -1,0 +1,49 @@
+{
+ "id": "sk-thm-regular",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "Purity for regular closed immersions",
+ "lean": [
+  "AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion"
+ ],
+ "uses": [
+  "sk-def-purity-conv",
+  "sk-lem-coprojection",
+  "sk-lem-regular-smooth",
+  "sk-prop-a1",
+  "sk-prop-a1-inv",
+  "sk-prop-an",
+  "sk-thm-dnc",
+  "sk-thm-smooth-purity"
+ ],
+ "statement": "*Theorem (sketch).*\n\nLet $i:Z\\hookrightarrow X$ be a regular closed immersion of pure codimension\n$c$, with $X$ smooth over the perfect field $k$ and $Z$ regular.\n\n*The fundamental class.* A *frame* of $Z$ is an étale\n$U\\to X$ together with $f_1,\\dots,f_c\\in\\Gamma(U,\\mathcal O_U)$ generating\nthe ideal of $Z_U=Z\\times_XU$. Each $f_j$ is a unit on $U\\setminus V(f_j)$,\nso it has a Kummer class $\\kappa(f_j)\\in H^1(U\\setminus V(f_j),\\Lambda(1))$\nas in [sk-def-purity-conv], and the boundary of the localization sequence\nof $V(f_j)\\subset U$ gives\n$\\partial\\kappa(f_j)\\in H^2_{V(f_j)}(U,\\Lambda(1))$. The *class of\nthe frame* is the cup product with supports\n\n$$\n\\operatorname{cl}(f)=\\partial\\kappa(f_1)\\cup\\cdots\\cup\\partial\\kappa(f_c)\n\\ \\in\\ H^{2c}_{Z_U}\\bigl(U,\\Lambda(c)\\bigr).\n$$\n\nThen:\n- **(a)** $Ri^{!}\\Lambda_X(c)[2c]$ is concentrated in degree $0$ with\n$\\mathcal H^0$ free of rank one; hence\n$H^0(Z,Ri^{!}\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))=\\Gamma(Z,\\mathcal H^0)$,\nand likewise after any étale $U\\to X$.\n- **(b)** $\\operatorname{cl}(f)$ depends only on $Z_U\\subset U$, not on\nthe frame, and the frame classes glue to a unique global class, the\n*fundamental class*\n\n$$\n[Z\\subset X]=\\operatorname{cl}_{Z/X}\\ \\in\\ H^{2c}_Z\\bigl(X,\\Lambda(c)\\bigr)\n=H^0\\bigl(Z,Ri^{!}\\Lambda_X(c)[2c]\\bigr),\n$$\n\nwhich generates $\\mathcal H^0$ at every geometric point. (The frame\nclasses and their gluing make sense for every regular closed immersion;\nfor the zero section of $\\Aaf^1_Y$ the class so defined is\n$\\mathrm{pur}_s$ of [sk-prop-a1], and for the zero section of $\\Aaf^c_B$\nit is the generator $\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$\nof [sk-prop-an] (i), by the definition of those classes; these pairs are\nin the situation of the theorem when $Y$, resp. $B$, is smooth over $k$.)\n- **(c)** The morphism\n\n$$\n\\operatorname{cl}_i:\\ \\Lambda_Z\\ \\xrightarrow{\\ \\sim\\ }\\ Ri^{!}\\Lambda_X(c)[2c],\n\\qquad 1\\longmapsto[Z\\subset X],\n$$\n\nis an isomorphism, and it equals the isomorphism assembled from smooth\npurity of $a_X$ and $a_Z$ in Steps 1–2 below. Since twists pass through\n$Ri^{!}$ ([sk-lem-coprojection]), equivalently the inverse of\n$\\operatorname{cl}_i(-c)[-2c]$ is a canonical isomorphism\n\n$$\nRi^{!}\\Lambda_X\\ \\xrightarrow{\\ \\sim\\ }\\ \\Lambda_Z(-c)[-2c].\n$$\n\n- **(d)** It is compatible with étale base change,\n$[Z_U\\subset U]=[Z\\subset X]|_U$, and with exterior products: for two such\npairs $(X_1,Z_1)$, $(X_2,Z_2)$ over $k$, the product\n$(X_1\\times_kX_2,Z_1\\times_kZ_2)$ is again such a pair, of codimension\n$c_1+c_2$, and\n$[Z_1\\times Z_2\\subset X_1\\times X_2]=[Z_1\\subset X_1]\\boxtimes[Z_2\\subset X_2]$\nunder the exterior product of classes with supports.",
+ "steps": [
+  {
+   "text": "*Step 1: the $\\omega$-identification.* Work on a connected component of\n$X$; the resulting isomorphisms assemble over the disjoint union. By\n[sk-lem-regular-smooth], $a_X$ and $a_Z$ are smooth of dimensions $n$ and\n$m=n-c$ with $a_Z=a_X\\circ i$, so the composition law for the exceptional\ninverse image gives\n\n$$\n\\omega_{Z/k}=Ra_Z^{!}\\Lambda_k\\ \\cong\\ Ri^{!}Ra_X^{!}\\Lambda_k=Ri^{!}\\omega_{X/k},\n$$\n\nwhile [sk-thm-smooth-purity] applied to $a_X$ and to $a_Z$ gives\n$\\omega_{X/k}\\cong\\Lambda_X(n)[2n]$ and $\\omega_{Z/k}\\cong\\Lambda_Z(m)[2m]$."
+  },
+  {
+   "text": "*Step 2: the co-projection removes the twist.* By\n[sk-lem-coprojection] with $K=\\Lambda_X$ and the invertible\n$L=\\Lambda_X(n)[2n]$,\n\n$$\nRi^{!}\\bigl(\\Lambda_X(n)[2n]\\bigr)\\ \\cong\\\nRi^{!}\\Lambda_X\\otimes^{\\mathbb L}_{\\Lambda_Z}\\Lambda_Z(n)[2n].\n$$\n\nCombining with Step 1 and cancelling the invertible $\\Lambda_Z(n)[2n]$,\n\n$$\nRi^{!}\\Lambda_X\\ \\cong\\ \\Lambda_Z(m-n)[2m-2n]=\\Lambda_Z(-c)[-2c],\n$$\n\nand twisting by $(c)[2c]$ (again [sk-lem-coprojection]) gives an\nisomorphism $\\Phi_i:\\Lambda_Z\\xrightarrow{\\sim}Ri^{!}\\Lambda_X(c)[2c]$.\nThis proves (a): $H^0(Z,Ri^{!}K)=H^0R\\Gamma_Z(X,K)$ because $Ri_*Ri^{!}$\nis $R\\underline\\Gamma_Z$, and the construction restricts to every étale\n$U\\to X$ since $Ru^{!}=u^{*}$ for étale $u$."
+  },
+  {
+   "text": "*Step 3: the frame class is well defined.* By (a), frame classes are\nsections of the sheaf $\\mathcal H^0$ on $Z_{\\Et}$, so it suffices to compare\ntwo frames $f,f'$ on the same $U$ Zariski-locally. There $f'=Mf$ with\n$M\\in GL_c(\\mathcal O)$, and after shrinking $M$ is a product of diagonal,\npermutation and elementary matrices. The argument of [sk-prop-an], Step 3\napplies verbatim: a unit $u$ has $\\kappa(u)$ defined on all of $U$, so\n$\\partial\\kappa(u)=0$ and $\\partial\\kappa(uf_j)=\\partial\\kappa(f_j)$; the\nfactors $\\partial\\kappa(f_j)$ have even degree, so permuting them costs no\nsign; for a shear $f_1+tuf_2$ the frame over $\\Aaf^1_U$ of the pair\n$(\\Aaf^1\\times U,\\Aaf^1\\times Z_U)$, to which (a) applies, gives a section of\nthe constant rank-one $\\mathcal H^0$ on $\\Aaf^1_{Z_U}$, constant along the\nline by [sk-prop-a1-inv](i), so its values at $t=0,1$ agree. The sheaf axiom\nfor $\\mathcal H^0$ glues the local frame classes (frames exist locally, $i$\nbeing regular) to a unique global $[Z\\subset X]$."
+  },
+  {
+   "text": "*Step 4: comparison with the smooth-purity isomorphism.* We show\n$\\Phi_i(1)=[Z\\subset X]$; both are sections of $\\mathcal H^0$, so this is\nétale-local on $X$. Let $z\\in Z$, choose a frame $f_1,\\dots,f_c$ near $z$\nand functions $g_1,\\dots,g_m$ near $z$ whose restrictions to $Z$ (smooth by\n[sk-lem-regular-smooth]) have differentials forming a basis of\n$\\Omega_{Z/k}\\otimes k(z)$. The conormal sequence\n$0\\to I/I^2\\otimes k(z)\\to\\Omega_{X/k}\\otimes k(z)\\to\\Omega_{Z/k}\\otimes k(z)\\to0$\nshows that $u=(f,g):U\\to\\Aaf^c_k\\times\\Aaf^m_k=\\Aaf^n_k$ is étale near $z$,\nand $u^{-1}(0\\times\\Aaf^m_k)=V(f)=Z_U$; call $u':Z_U\\to\\Aaf^m_k$ the\nrestriction and $i_0:\\Aaf^m_k\\hookrightarrow\\Aaf^n_k$ the zero section of\n$p:\\Aaf^c_{\\Aaf^m}\\to\\Aaf^m$.\n(i) Since $u,u'$ are étale, $Ri_U^{!}u^{*}=R(u i_U)^{!}=R(i_0u')^{!}=u'^{*}Ri_0^{!}$.\n(ii) As $a_U=a_{\\Aaf^n}\\circ u$ and $a_{Z_U}=a_{\\Aaf^m}\\circ u'$ with\n$\\omega_u=\\Lambda$, $\\omega_{u'}=\\Lambda$, compatibility of\n[sk-thm-smooth-purity] with composition gives $\\Phi_{i_U}=u'^{*}\\Phi_{i_0}$.\n(iii) On the model, $a_{\\Aaf^n}=a_{\\Aaf^m}\\circ p$ and $p\\,i_0=\\mathrm{id}$, so by\ncomposition compatibility again $\\Phi_{i_0}$ is $Ri_0^{!}$ of the\nsmooth-purity isomorphism $\\Lambda(c)[2c]\\cong Rp^{!}\\Lambda$ of\n[sk-thm-smooth-purity] for $p$, composed with\n$Ri_0^{!}Rp^{!}=\\mathrm{id}$ (twists passing through $Ri_0^{!}$ by\n[sk-lem-coprojection]). By the agreement clause of\n[sk-thm-smooth-purity] ($p$ is the projection of a trivial vector bundle;\nthe clause rests on the normalization of [sk-thm-dnc] in standard\ncoordinates), that isomorphism is the $R\\pi^{!}$-form $\\gamma_{p,\\Lambda}$\nof [sk-prop-an] (ii), and by the normalization [sk-prop-an] (iii),\n$Ri_0^{!}\\gamma_{p,\\Lambda}$ composed with $Ri_0^{!}Rp^{!}=\\mathrm{id}$ is the\ninverse of the Thom class. Hence $\\Phi_{i_0}(1)$ is the generator of\n[sk-prop-an] (i),\n$\\mathrm{pur}_s\\boxtimes\\cdots\\boxtimes\\mathrm{pur}_s\n=\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$ ([sk-prop-an],\nStep 1, with [sk-prop-a1]): the class of the coordinate frame.\n(iv) Kummer classes, boundaries and cup products with supports commute with\npullback and $u^{*}t_j=f_j$, so $\\Phi_i(1)|_{Z_U}=u'^{*}\\Phi_{i_0}(1)\n=\\operatorname{cl}(f)=[Z\\subset X]|_{Z_U}$. Such $U$ cover $Z$, hence\n$\\Phi_i(1)=[Z\\subset X]$. As $\\Phi_i$ is an isomorphism, $[Z\\subset X]$\ngenerates every stalk and $\\operatorname{cl}_i=\\Phi_i$; this is (b) and (c)."
+  },
+  {
+   "text": "*Step 5: compatibilities.* An étale $X'\\to X$ pulls frames back to\nframes and frame classes to frame classes, so\n$[Z_{X'}\\subset X']=[Z\\subset X]|_{X'}$, and by (c) $\\operatorname{cl}_i$\nrestricts to $\\operatorname{cl}_{i'}$. For products, $Z_1\\times_kZ_2$ is smooth\nover $k$, and frames $f$ on $U_1$, $g$ on $U_2$ give the frame\n$(\\mathrm{pr}_1^{*}f,\\mathrm{pr}_2^{*}g)$ on $U_1\\times_kU_2$, whose class is\n$\\mathrm{pr}_1^{*}\\operatorname{cl}(f)\\cup\\mathrm{pr}_2^{*}\\operatorname{cl}(g)\n=\\operatorname{cl}(f)\\boxtimes\\operatorname{cl}(g)$ by naturality and\nassociativity of supported cup products (no signs, all degrees even);\ngluing gives the asserted identity, and by (c) the exterior product of\n$\\operatorname{cl}_{i_1}$ and $\\operatorname{cl}_{i_2}$ is\n$\\operatorname{cl}_{i_1\\times i_2}$."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-regular/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

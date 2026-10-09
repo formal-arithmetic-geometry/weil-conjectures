@@ -1,0 +1,50 @@
+{
+ "id": "sk-thm-groth-ss",
+ "kind": "unit",
+ "chapter": "sec-picard-framework",
+ "title": "Grothendieck spectral sequence and its Leray specialization",
+ "lean": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
+ ],
+ "uses": [
+  "sk-def-groth-ss"
+ ],
+ "statement": "*Theorem (sketch).*\n\nLet $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of sites (or\nschemes with their étale or small Zariski sites). For an abelian\nsheaf $F$ on $X$, since $f_*$ carries injectives\nto $h_*$-acyclics ($f_*$ is right adjoint to the exact $f^{-1}$, so\nit preserves injectives), there is a functorial spectral sequence\n\n$$\nE_2^{p,q}=R^ph_*R^qf_*F\\ \\Longrightarrow\\ R^{p+q}(hf)_*F,\n$$\n\ncompatible with base change.\n\nFor $Z$ the punctual site, so that $h_*=\\Gamma(Y,-)$, this is the\n*Leray* spectral sequence\n\n$$\nE_2^{p,q}=H^p(Y,R^qf_*F)\\ \\Longrightarrow\\ H^{p+q}(X,F),\n$$\n\nwith the same functoriality and base-change compatibility. In\nparticular this includes $Y_{\\mathrm{zar}}$ and $X_{\\mathrm{zar}}$\nfor a morphism of schemes. For proper $f$ and coherent $F$ the\nZariski sequence is the spectral sequence of\n$\\Gamma(Y,-)\\circ f_*$ on $\\cO$-modules. The reduction of proper\nbase change uses the general composite form.",
+ "steps": [
+  {
+   "text": "*Step 1 (the acyclicity hypothesis).* The functor $f^{-1}$ is exact\nand left adjoint to $f_*$, so $f_*$ carries injectives to injectives, and\nan injective sheaf is $h_*$-acyclic. Hence $(f_*,h_*)$ is a composable\npair with acyclicity in the sense of [sk-def-groth-ss]."
+  },
+  {
+   "text": "*Step 2 (the double complex).* Choose an injective resolution\n$F\\to I^\\bullet$ and put $C^\\bullet=f_*I^\\bullet$, so that\n$R^qf_*F=\\mathcal H^q(C^\\bullet)$. Let $C^{\\bullet,\\bullet}$ be a\nCartan–Eilenberg resolution of $C^\\bullet$ and set $D^{p,q}=h_*C^{p,q}$,\na first-quadrant double complex."
+  },
+  {
+   "text": "*Step 3 (filtration by the second degree).* This filtration has\n$E_1^{p,q}=R^qh_*\\bigl(f_*I^p\\bigr)$, which vanishes for $q>0$ by\nStep 1. The sequence therefore collapses on the bottom edge, and since\n$(hf)_*=h_*f_*$,\n\n$$\nH^n(\\operatorname{Tot}D)\\cong\n\\mathcal H^n\\bigl(h_*f_*I^\\bullet\\bigr)=R^n(hf)_*F .\n$$\n\n*Step 4 (filtration by the first degree).* By the defining property\nof a Cartan–Eilenberg resolution, the other filtration of the same\ndouble complex has\n\n$$\nE_2^{p,q}=R^ph_*\\bigl(R^qf_*F\\bigr).\n$$\n\nBoth filtrations abut to $H^\\bullet(\\operatorname{Tot}D)$, which Step 3\nidentifies with $R^{p+q}(hf)_*F$; this is the displayed spectral\nsequence, with the image filtration of [sk-def-groth-ss] on the\nabutment, finite in each degree."
+  },
+  {
+   "text": "*Step 5 (functoriality and base change).* The construction depends\nonly on the chosen resolutions, hence is functorial in $F$. A cartesian\nsquare induces compatible maps of the two double complexes, hence a\nmorphism of exact couples and so of spectral sequences; taking\n$\\alpha=g'^{-1}$ and $\\gamma=g^{-1}$ gives the asserted compatibility\nwith base change."
+  },
+  {
+   "text": "*Step 6 (the Zariski coherent case).* On $\\cO$-modules the\ncomposite is $\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$, but $f^*$ is no\nlonger exact, so acyclicity is supplied differently: an injective\n$\\cO_X$-module $\\cI$ is flasque (apply injectivity to\n$j_!\\cI|_U\\to\\cI$ for $j:U\\hookrightarrow X$ open to extend a section\nover $U$), $f_*$ preserves flasqueness, and a flasque module is\n$\\Gamma$-acyclic on every open, hence $f_*$-acyclic. So\n$(f_*,\\Gamma(Y,-))$ is again a composable pair with acyclicity in the\nsense of [sk-def-groth-ss], and the construction applies verbatim.\nFor proper $f$ and coherent $F$, this gives the coherent sequence\nnamed in the statement."
+  },
+  {
+   "text": "This is Blueprint 05, `thm-sp-grothendieck` together with\n`thm-sp-grothendieck-base-change`, read through the étale\ndictionary `def-sp-etale-dictionary`; the Cartan–Eilenberg input\nof Step 2 is `thm-sp-if-e1` and the collapse of Step 3 is\n`lem-sp-edge-collapse`."
+  },
+  {
+   "text": "The topos form of the sequence and of the acyclicity criterion are\nStacks, Cohomology on Sites, Lemmas 21.14.5/21.14.6\n([`0732`](https://stacks.math.columbia.edu/tag/0732),\n[`0733`](https://stacks.math.columbia.edu/tag/0733)), and\nfor ringed spaces Lemmas 20.13.4/20.13.8\n([`01F2`](https://stacks.math.columbia.edu/tag/01F2),\n[`01F6`](https://stacks.math.columbia.edu/tag/01F6)); the\ndetailed form is Blueprint 17, `pqf-lem-leray`."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

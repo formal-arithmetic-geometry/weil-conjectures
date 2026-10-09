@@ -1,0 +1,33 @@
+{
+ "id": "sk-prop-picard-jacobian-tangent",
+ "kind": "unit",
+ "chapter": "sec-picard-framework",
+ "title": "The tangent space of the Jacobian",
+ "lean": [
+  "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
+ ],
+ "uses": [
+  "sk-def-av-jacobian",
+  "sk-def-picard-pic",
+  "sk-lem-picard-cech-computes",
+  "sk-prop-picard-degree-decomposition"
+ ],
+ "statement": "*Proposition (sketch).*\n\nThe tangent space of the group scheme $\\underline{\\Pic}^0_{C/k}$ of\n[sk-prop-picard-degree-decomposition] at the unit is\n$k$-linearly isomorphic to $H^1(C,\\cO_C)$:\n\n$$\nT_e\\underline{\\Pic}^0_{C/k}\\cong H^1(C,\\cO_C)\\qquad(\\text{isomorphism of $k$-vector spaces}),\n$$\n\na $k$-vector space of dimension $g$.",
+ "steps": [
+  {
+   "text": "Let $k[\\varepsilon]=k[x]/(x^2)$. The tangent space at $e$ is the set of\n$k[\\varepsilon]$-points of $\\underline{\\Pic}^0_{C/k}$ reducing to $e$, that is, by\n[sk-def-picard-pic] and the normalization along $P$, the set of\ninvertible modules on $C_{k[\\varepsilon]}$ whose restriction to $C$ is\ntrivial, up to isomorphism (a degree-$0$ condition that is automatic,\nsince the degree is locally constant). Fix a finite affine open cover\n$\\mathfrak U=\\{U_i\\}$ of $C$. Such a module is trivial on every\n$U_i\\times_kk[\\varepsilon]$ (an invertible module trivial modulo the\nnilpotent $\\varepsilon$ on an affine scheme is trivial), so it is given\nby transition functions in\n$\\ker\\bigl(\\cO(U_{ij}\\times k[\\varepsilon])^\\times\\to\\cO(U_{ij})^\\times\\bigr) =\\{1+\\varepsilon g_{ij}\\}$. Since\n$(1+\\varepsilon a)(1+\\varepsilon b)=1+\\varepsilon(a+b)$, the cocycle\ncondition reads $g_{ij}+g_{jk}=g_{ik}$, and changing the trivializations\nby $1+\\varepsilon h_i$ changes $g_{ij}$ by $h_j-h_i$. So\n$(1+\\varepsilon g_{ij})\\mapsto[(g_{ij})]$ is a bijection from the\ntangent space onto $\\check H^1(\\mathfrak U,\\cO_C)$."
+  },
+  {
+   "text": "*The $k$-linear structures.* On the tangent space\n$T_e=\\ker\\bigl(\\underline{\\Pic}^0_{C/k}(k[\\varepsilon])\\to\\underline{\\Pic}^0_{C/k}(k)\\bigr)$\nthe addition is the group law of $\\underline{\\Pic}^0_{C/k}$ (which agrees\nwith the addition defined through\n$k[\\varepsilon]\\times_kk[\\varepsilon]=k[\\varepsilon_1,\\varepsilon_2]/(\\varepsilon_1,\\varepsilon_2)^2$),\nand a scalar $\\lambda\\in k$ acts through the $k$-algebra map\n$\\sigma_\\lambda:k[\\varepsilon]\\to k[\\varepsilon]$, $\\varepsilon\\mapsto\\lambda\\varepsilon$,\nby $\\xi\\mapsto\\underline{\\Pic}^0_{C/k}(\\sigma_\\lambda)(\\xi)$; both\npreserve $T_e$ because $\\sigma_\\lambda$ and the group law commute with\nreduction modulo $\\varepsilon$. The group law is the tensor product of\ninvertible modules (Yoneda), whose transition functions multiply:\n$(1+\\varepsilon a)(1+\\varepsilon b)=1+\\varepsilon(a+b)$, so the bijection\nis additive. Pulling back along $\\mathrm{id}_C\\times\\Spec\\sigma_\\lambda$\nreplaces the transition functions $1+\\varepsilon g_{ij}$ by\n$\\sigma_\\lambda(1+\\varepsilon g_{ij})=1+\\varepsilon\\lambda g_{ij}$, so the\nclass $[(g_{ij})]$ goes to $\\lambda[(g_{ij})]$. Hence the bijection is\na $k$-linear isomorphism\n$T_e\\underline{\\Pic}^0_{C/k}\\cong\\check H^1(\\mathfrak U,\\cO_C)$, and\n$\\check H^1(\\mathfrak U,\\cO_C)\\cong H^1(C,\\cO_C)$ $k$-linearly by\n[sk-lem-picard-cech-computes]; its dimension is the genus $g$ by the\nconventions."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-jacobian-tangent/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

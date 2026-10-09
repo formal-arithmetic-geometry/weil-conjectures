@@ -1,0 +1,38 @@
+{
+ "id": "sk-cor-trace",
+ "kind": "unit",
+ "chapter": "sec-poincare-duality",
+ "title": "The trace isomorphism",
+ "lean": [],
+ "uses": [
+  "sk-def-trace-cup",
+  "sk-lem-finite",
+  "sk-prop-an",
+  "sk-thm-purity-transport",
+  "sk-thm-regular",
+  "sk-thm-sf-identification",
+  "sk-thm-smooth-purity"
+ ],
+ "statement": "*Corollary (sketch).*\n\nIn the setting of [sk-def-pairing] with $X_0$ in addition\n*proper*, for the constant sheaf $K=\\Lambda_X$,\n\n$$\n\\operatorname{tr}^{(-d)}_X:H^{2d}(X,\\Lambda)\\xrightarrow{\\ \\sim\\ }\n\\Lambda(-d)\n$$\n\nis an isomorphism, and it is the map produced by the duality at $i=0$;\nits twist $\\operatorname{tr}^{(-d)}_X(d):H^{2d}(X,\\Lambda(d))\\to\\Lambda$\nsends the class of a $k$-point $x\\in X(k)$ (the image in\n$H^{2d}(X,\\Lambda(d))$ of the fundamental class $[x\\subset X]$ of\n[sk-thm-regular], $c=d$) to $1$. This is not an independent\nconvention: it follows from [sk-thm-regular](c), which identifies the\nfundamental class with the isomorphism assembled from smooth purity of\n$a_X$ and of $a_{\\Spec k}=\\mathrm{id}$, together with the compatibility\nof smooth purity and of the counits with composition\n([sk-thm-smooth-purity], [sk-thm-purity-transport]). Here\n$[x\\subset X]$ is defined at $\\Lambda=A_{E,n}$; at $\\Oe$ it means the\ncompatible system of the finite-level classes, and at $E$, $\\Qlb$ its\nimage under scalar extension. (Blueprint 13, cor:sf-trace; 15,\ncor:pod-constant-coefficients, thm:pod-trace-isomorphism.)",
+ "steps": [
+  {
+   "text": "Take $K=\\Lambda_X$ in the proper case of [sk-thm-sf-identification]\nand $i=0$: the\ndegreewise form reads $H^0_c(X,\\Lambda)^\\vee\\cong H^{2d}(X,\\Lambda)(d)$.\n(At $\\Lambda\\in\\{A_{E,n},E,\\Qlb\\}$ this is the degreewise clause. At\n$\\Lambda=\\Oe$ the derived form gives\n$H^{2d}(X,\\Oe)(d)\\cong\\operatorname{Hom}(H^0,\\Oe)\\oplus\\operatorname{Ext}^1(H^1,\\Oe)$,\nand the Ext term vanishes: $H^1(X,\\Oe)$ is torsion-free, since\n$H^0(X,\\Oe)\\to H^0(X,A_{E,1})$ is surjective, $X$ being connected.)\nSince $X$ is proper, $Ra_{X!}\\cong Ra_{X*}$ by [sk-def-ops] and hence\n$H^0_c=H^0$; since $X$ is geometrically connected, $H^0(X,\\Lambda)\\cong \\Lambda$ with the geometric Frobenius acting as the identity, which is the\n$H^0$-clause of the finiteness interface\nprop:cohomological-finiteness. Therefore\n$\\Lambda^\\vee\\cong H^{2d}(X,\\Lambda)(d)$, i.e. $H^{2d}(X,\\Lambda)\\cong\\Lambda(-d)$. The isomorphism produced this way is\nthe composite of the counit $\\varepsilon_{a_X}$ of\n$Ra_{X!}\\dashv Ra_X^!$ with the orientation\n$\\gamma:\\Lambda_X(d)[2d]\\cong\\omega_{X,\\Lambda}$ of\n[sk-thm-smooth-purity] and [sk-thm-purity-transport], which is exactly\nthe map $\\operatorname{tr}^{(-d)}_X$ of [sk-def-trace-cup]."
+  },
+  {
+   "text": "*Normalization at finite level.* Let $\\Lambda=A_{E,n}$ and\n$x\\in X(k)$. Since $X$ is smooth over the algebraically closed field\n$k$, the point $x:\\Spec k\\hookrightarrow X$ is a regular closed immersion\nof codimension $d$ with $a_X\\circ x=\\mathrm{id}_{\\Spec k}$, and\n$\\Spec k$ is regular, so [sk-thm-regular] applies with $c=d$. The\nimage of $[x\\subset X]\\in H^0(\\Spec k,Rx^!\\Lambda_X(d)[2d])\n=H^{2d}_x(X,\\Lambda(d))$ in $H^{2d}(X,\\Lambda(d))$ is obtained by\nforgetting supports, i.e. by applying $Ra_{X*}$ to the counit\n$\\varepsilon_x:Rx_*Rx^!\\to\\mathrm{id}$ of $Rx_!=Rx_*\\dashv Rx^!$\n([sk-def-ops]). By [sk-thm-regular](c), $[x\\subset X]=\n\\operatorname{cl}_x(1)$ is the image of $1$ under the isomorphism\n$\\Phi_x:\\Lambda\\cong Rx^!\\Lambda_X(d)[2d]$ assembled, in Steps 1–2 of\n[sk-thm-regular], from the orientations of $a_X$ and of\n$a_{\\Spec k}=\\mathrm{id}$ through the composition law\n$Rx^!Ra_X^!\\Lambda\\cong R(a_X\\circ x)^!\\Lambda=\\Lambda$; and the\norientation of the identity is the identity of $\\Lambda$, by the\ncompatibility with composition in [sk-thm-smooth-purity] applied to\n$\\mathrm{id}=\\mathrm{id}\\circ\\mathrm{id}$. Hence, transported along\n$\\gamma$, the class $[x\\subset X]$ corresponds to\n$1\\in\\Lambda=H^0(Rx^!Ra_X^!\\Lambda)$, and\n$\\operatorname{tr}^{(-d)}_X(d)[x\\subset X]$ is the image of $1$ under\n\n$$\n\\Lambda=R(a_X\\circ x)_!R(a_X\\circ x)^!\\Lambda\n\\cong Ra_{X!}Rx_!Rx^!Ra_X^!\\Lambda\n\\xrightarrow{\\ Ra_{X!}(\\varepsilon_x)\\ }Ra_{X!}Ra_X^!\\Lambda\n\\xrightarrow{\\ \\varepsilon_{a_X}\\ }\\Lambda .\n$$\n\nThe composition isomorphism for $(-)^!$ is the adjoint of\n$Ra_{X!}Rx_!\\cong R(a_X\\circ x)_!$, so this composite is the counit\n$\\varepsilon_{a_X\\circ x}=\\varepsilon_{\\mathrm{id}}=\\mathrm{id}_\\Lambda$;\ntherefore $\\operatorname{tr}^{(-d)}_X(d)[x\\subset X]=1$. (This is the\nsense in which the trace is normalized by the fundamental class of\n[sk-prop-an]: étale locally at $x$, $[x\\subset X]$ is the frame class\n$\\partial\\kappa(t_1)\\cup\\dots\\cup\\partial\\kappa(t_d)$ of\n[sk-thm-regular](b).)"
+  },
+  {
+   "text": "*The other coefficient stages.* The frame classes of\n[sk-thm-regular] are built from Kummer classes, boundaries and cup\nproducts, which reduce to their counterparts under $A_{E,n}\\to A_{E,m}$;\nso $([x\\subset X]_n)_n$ is a compatible system, which defines\n$[x\\subset X]$ over $\\Oe$, and its images define it over $E$ and\n$\\Qlb$. At these stages $\\operatorname{tr}^{(-d)}_X$ is the transported\ncounit read through the transported orientation, compatibly with the finite\nreductions and with scalar extension ([sk-thm-purity-transport]). Hence\n$\\operatorname{tr}^{(-d)}_X(d)[x\\subset X]\\in\\Oe$ reduces to $1$ at\nevery level, so it equals $1$, and the $E$- and $\\Qlb$-statements\nfollow by scalar extension."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-cor-trace/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

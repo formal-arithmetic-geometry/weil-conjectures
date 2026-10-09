@@ -1,0 +1,32 @@
+{
+ "id": "sk-thm-picard-rr",
+ "kind": "unit",
+ "chapter": "sec-picard-framework",
+ "title": "Riemann–Roch for curves, and its geometric corollary",
+ "lean": [
+  "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+  "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+  "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+  "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
+  "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
+ ],
+ "uses": [
+  "sk-def-av-jacobian",
+  "sk-def-av-pic",
+  "sk-thm-picard-duality"
+ ],
+ "statement": "*Theorem (sketch).*\n\nLet $X$ be a smooth proper curve over $k$ with $H^0(X,\\cO_X)=k$ (e.g.\nthe base change to any field of a smooth projective curve over an\nalgebraically closed field), of genus $g=\\dim_kH^1(X,\\cO_X)$ (as in the\nconventions; flat base change preserves $h^0$ and $h^1$), and $\\cF$\ncoherent, with $\\chi(\\cF)=\\sum_q(-1)^q\\dim_kH^q(X,\\cF)$.\n\n*Degrees.* For a divisor $D=\\sum_xn_x\\,x$ ($x$ closed points)\nput $\\deg D=\\sum_xn_x[\\kappa(x):k]$. Principal divisors have degree\n$0$ (for $f\\in k(X)\\setminus k$, $\\operatorname{div}f=f^*(0)-f^*(\\infty)$\nfor the finite flat $f:X\\to\\mathbf P^1_k$, both of degree $[k(X):k(f)]$),\nand every line bundle is $\\cL\\cong\\cO_X(D)$ (divisor of a nonzero\nrational section), so $\\deg\\cL:=\\deg D$ is well defined and additive.\nFor coherent $\\cF$ with torsion subsheaf $\\mathcal T$ and locally free quotient\n$\\mathcal E=\\cF/\\mathcal T$ of rank $\\rk\\cF$, put\n$\\deg\\cF:=\\sum_x\\operatorname{length}_{\\cO_{X,x}}(\\cT_x)[\\kappa(x):k]+\\deg(\\det\\mathcal E)$\n$=\\dim_kH^0(X,\\mathcal T)+\\deg(\\det\\mathcal E)$.\n\n1. ****(RR)**** $\\chi(\\cF)=\\deg\\cF+\\rk(\\cF)(1-g)$; in\nparticular $\\chi(\\cO_X)=1-g$, and for every line bundle\n$\\deg\\cL=\\chi(\\cL)-\\chi(\\cO_X)$, i.e. the divisor degree agrees with\nthe $\\chi$-degree used for the Picard scheme below (so the two\ndefinitions of $\\Pic^0$, as kernel of either degree, coincide); and\nfor a line bundle of degree $d$ with $d\\ge2g-1$: $h^0(\\cL)=d+1-g$.\n1. ****(G)**** *positive degree $\\Rightarrow$ ample:* if\n$\\cL$ is a line bundle on $X$ with $\\deg\\cL>0$, then $\\cL$ is ample\n($h^0(\\cL^{\\otimes m})=m\\deg\\cL+1-g$ grows, and after base change to\n$\\bar k$, where all closed points are rational, base-point freeness and\nthe separation of points and tangent vectors follow from (RR) by\nsubtracting one or two points; over a general $k$ subtracting a closed\npoint $P$ changes $h^0$ by $[\\kappa(P):k]$, not by $1$).\n1. ****(H)**** *affine complement:* if $\\cL$ is ample\nand $D$ an effective Cartier divisor with $\\cL\\cong\\cO_X(D)$, then\n$X\\setminus\\operatorname{Supp}(D)$ is affine.",
+ "steps": [
+  {
+   "text": "(RR): by additivity of $\\chi$ in short exact sequences, the torsion\npart of $\\cF$ (for which $\\chi=h^0$ is the length, i.e. the degree) and a\nfiltration of the locally free quotient by line bundles (along which\n$\\deg\\det$ is additive) reduce the formula to\nline bundles $\\cO_X(D)$. There $0\\to\\cO_X(D-x)\\to\\cO_X(D)\\to\\kappa(x)\\to0$\ngives $\\chi(\\cO_X(D))=\\chi(\\cO_X(D-x))+[\\kappa(x):k]$ (coherent\ncohomology vanishes in degrees $\\ge2$ on the one-dimensional noetherian\nspace $X$, so $\\chi=h^0-h^1$ throughout); applied to $D$ when $n_x>0$\nand to $D+x$ when $n_x<0$ (where it reads\n$\\chi(\\cO_X(D))=\\chi(\\cO_X(D+x))-[\\kappa(x):k]$), it lowers\n$\\sum_x|n_x|$ by one and leaves $\\chi-\\deg$ unchanged, so by induction on\n$\\sum_x|n_x|$, $\\chi(\\cO_X(D))=\\deg D+\\chi(\\cO_X)$, and\n$\\chi(\\cO_X)=h^0-h^1=1-g$ by the hypotheses; this is also the equality\n$\\deg\\cL=\\chi(\\cL)-\\chi(\\cO_X)$. For $d\\ge2g-1$,\n[sk-thm-picard-duality] gives\n$H^1(\\cL)^\\vee\\cong H^0(\\omega_X\\otimes\\cL^{-1})=0$, the latter of\nnegative degree ($\\deg\\omega_X=\\chi(\\omega_X)-\\chi(\\cO_X)=2g-2$, as\nduality gives $h^0(\\omega_X)=g$, $h^1(\\omega_X)=1$; a nonzero section\nwould give an effective divisor of negative degree), whence $h^0(\\cL)=d+1-g$. (G): ampleness descends along the\nfpqc cover $\\Spec\\bar k\\to\\Spec k$ and $\\deg$ is preserved by flat\nbase change, and $X_{\\bar k}$ is again a smooth proper connected curve\nof genus $g$ with $H^0=\\bar k$ ($X$ is geometrically reduced with\n$H^0(X,\\cO_X)=k$, hence geometrically integral); so we may take $k$\nalgebraically closed, where every closed point is rational. Then for\n$m\\deg\\cL\\ge2g+1$ and closed points $P,Q$ (possibly equal), (RR) in\nthe range $d\\ge2g-1$ gives\n$h^0(\\cL^{\\otimes m}(-P))=h^0(\\cL^{\\otimes m})-1$ and\n$h^0(\\cL^{\\otimes m}(-P-Q))=h^0(\\cL^{\\otimes m})-2$, i.e.\n$\\cL^{\\otimes m}$ is base-point free and separates points and tangent\nvectors; hence $\\cL^{\\otimes m}$ is very ample and $\\cL$ is ample.\n(H): classical (the complement of an\nample effective divisor is affine)."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   []
+  ]
+ },
+ "realized_by": null
+}

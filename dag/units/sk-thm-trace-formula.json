@@ -1,0 +1,52 @@
+{
+ "id": "sk-thm-trace-formula",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Finite-coefficient Lefschetz trace formula",
+ "lean": [
+  "AlgebraicGeometry.ProEtale.trace_globalOperator_eq_sum_trace_stalkFrobenius"
+ ],
+ "uses": [
+  "sk-c-proper-global",
+  "sk-d-lines",
+  "sk-d-operator",
+  "sk-d-relative-frob",
+  "sk-d-six",
+  "sk-d-trace",
+  "sk-d-weil",
+  "sk-d-weil-push",
+  "sk-i-global-additivity",
+  "sk-i-relative-frob",
+  "sk-i-topology",
+  "sk-p-frob",
+  "sk-p-local",
+  "sk-p-trace",
+  "sk-thm-sf-package"
+ ],
+ "statement": "*Proposition (sketch).*\n\nFor every Weil datum on a separated finite-type\n$X_0/\\mathbf F_q$ and every $m\\ge1$, with\ncompact cohomology and ordinary traces,\n\n$$\n\\boxed{\\tr_A(F_{c,m}\\mid R\\Gamma_c(X,K))\n=\\sum_{x\\in X_0(\\mathbf F_{q^m})}\\tr_A(F_{x,m}\\mid K_{\\bar x}).}\n$$",
+ "steps": [
+  {
+   "text": "First prove the formula for every closed subscheme of the affine\nline, uniformly over all finite extensions. For a finite scheme,\n[sk-i-topology] permits reduction, preserving the Weil maps,\ncompact cohomology, and geometric stalks. Being reduced of dimension\nzero, its geometric base change is a finite disjoint union of spectra of\nfinite extensions, hence of points (06LH).\nFrobenius permutes their perfect stalk complexes; the chain\nsupertrace in [sk-p-trace] receives contributions only from\nthe diagonal blocks, exactly the fixed points."
+  },
+  {
+   "text": "For $\\mathbf A^1$, extend the [sk-d-weil] datum by zero to\nthe projective line of [sk-d-lines], which is proper (0FMG)\nand smooth of pure dimension one (0B2P).\nOpen base change and composition in [sk-thm-sf-package] identify its\ncompact cohomology and global operator with the originals.\nApply [sk-c-proper-global] on this smooth proper curve, then\n[sk-p-local] and [sk-p-frob]. The coefficient stalk at\n$\\infty$ is zero, so its computed local term is zero.\nFinally a closed subscheme of $\\mathbf A^1_F$ has coordinate ring\n$F[t]/I$. If $I=0$, it is the line; otherwise a nonzero polynomial\nin $I$ makes the quotient finite-dimensional over $F$, and the\nfinite-scheme case applies. This includes nonreduced schemes."
+  },
+  {
+   "text": "Now prove the formula for all affine schemes with a presentation\n$F[t_1,\\ldots,t_n]/I$, by induction on $n$, simultaneously over all\nfinite extensions and for every Weil complex and every iterate.\nThe cases $n\\le1$ were just proved. For $n\\ge2$, forget $t_n$ to\nobtain $f_0:X_0\\to Y_0=\\mathbf A^{n-1}_F$. Use the Weil\n$!$-pushforward $(L,\\psi)$ of [sk-d-weil-push].\nIts compact global operator is conjugate to the original one.\nInduction on $Y_0$ gives\n\n$$\n\\tr_A(F_{c,m},R\\Gamma_c(X,K))\n=\\sum_{y\\in Y_0(\\mathbf F_{q^m})}\\tr_A(\\psi_{m,\\bar y},L_{\\bar y}).\n$$\n\nBase change identifies the operator at $\\bar y$ with the compact\nFrobenius operator on the fiber, considered over $\\mathbf F_{q^m}$\nwith one-step Weil map $\\varphi_m$. This follows by pasting the\nbase-change squares and relative-Frobenius units defining $\\psi_m$.\nThe fiber is a closed subscheme of the affine line over that field,\nso the base case computes its trace. Summing over the fibers gives\nthe rational-point sum on $X_0$."
+  },
+  {
+   "text": "For a general separated finite-type scheme, take a finite affine\ncover $U_1,\\ldots,U_N$ and the affine pieces\n$U_i\\setminus\\bigcup_{j<i}U_j$. The successive closed complements\ngive a finite localization filtration. Repeated\n[sk-i-global-additivity] combines their proven trace formulas;\ntheir rational points form the same disjoint partition."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

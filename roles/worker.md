@@ -5,7 +5,7 @@ You do one item, given to you by a lead in a brief. Your lead claims it, reviews
 ## 1. Before writing
 
 1. Read `AGENTS.md`, this file, `SETUP.md` and the stage document of your item.
-2. Read the DAG node of the item, and its module if it has one.
+2. Read the DAG node of the item, and its module if it has one; in stage 1 also the unit file (`sk-*/_section.md`) and the chapter file (`sec-*/_section.md`) of the node, which `dag/units/` and `dag/chapters/` record. You may not change them: the chapter level is fixed, and a unit's route is left only for an established mathematical error, written as `SETUP.md` says (`stages/1-dag.md` §5).
 3. Search the library, the DAG and Mathlib for what already exists, by name and by concept, and use it.
 
 ## 2. The work

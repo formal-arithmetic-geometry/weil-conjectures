@@ -1,0 +1,36 @@
+{
+ "id": "sk-thm-vanishing",
+ "kind": "unit",
+ "chapter": "sec-smooth-base-change",
+ "title": "Vanishing in the universal curve test",
+ "lean": [
+  "AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf"
+ ],
+ "uses": [
+  "sk-def-smooth",
+  "sk-prop-cd-affine",
+  "sk-prop-etale-normal",
+  "sk-prop-ext-invariance",
+  "sk-prop-input-spreading",
+  "sk-prop-input-torsors",
+  "sk-prop-normal-form"
+ ],
+ "statement": "*Theorem (sketch).*\n\nLet $X\\to S$ be affine smooth of relative dimension one with $X$\naffine, $S=\\Spec A$ normal with algebraically closed fraction field\n$L$, $K/L$ an extension of algebraically closed fields, $d$\ninvertible on $S$, and\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y=X\\times_S\\Spec K\\\\\nf\\downarrow & & \\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & \\Spec K.\n\\end{array}\n$$\n\nThen\n\n$$\nR^qh_*(\\Z/d\\Z)=0\\qquad(q\\ge1).\n$$",
+ "steps": [
+  {
+   "text": "$R^qh_*(\\Z/d\\Z)$ is the sheaf associated with\n$U\\mapsto H^q(U\\times_S\\Spec K,\\Z/d\\Z)$ on $X_{\\Et}$; we must kill\neach $\\xi$ in one of these groups on an étale cover of $U$."
+  },
+  {
+   "text": "- $q>1$: $U\\times_S\\Spec K$ is an affine smooth curve over\n$K$, and [sk-prop-cd-affine] gives the vanishing.\n- $q=1$: by [sk-prop-normal-form] replace $U$ by an étale\ncover with $U\\to V\\to S$, $U\\to V$ affine smooth with geometrically connected fibres\nand a section $\\sigma$, $V\\to S$ étale; by\n[sk-prop-etale-normal], $V$ is an open\nof the normal $S$, so we may assume $X\\to S$ affine smooth, with\ngeometrically connected fibres and a section $\\sigma$, and\n$\\xi\\in H^1(Y,\\Z/d\\Z)$. By [sk-prop-ext-invariance] the pullback\nmap $H^1(X_L,\\Z/d\\Z)\\to H^1(Y,\\Z/d\\Z)$ is an isomorphism, so $\\xi$ comes from a class on\n$X_L$; by [sk-prop-input-torsors] this\nclass is a $\\Z/d\\Z$-torsor $P\\to X_L$, a finite étale cover with a\nfree transitive $\\Z/d\\Z$-action. It need not be connected ($X_L$ is\nconnected, and $P$ is connected only when the class corresponds to a\n*surjection* $\\pi_1(X_L)\\to\\Z/d\\Z$), so it need not be Galois;\nlet $P_0\\subseteq P$ be a connected component. Then $P_0\\to X_L$ is\na finite étale Galois cover whose group is the stabiliser\n$G\\subseteq\\Z/d\\Z$ of $P_0$ (the image of $\\pi_1(X_L)$), $|G|$\ndivides $d$, and $P$ is the torsor induced from the $G$-torsor\n$P_0$; in particular $P_0\\to X_L$ trivializes $P$ (the diagonal\nsection of $P_0\\times_{X_L}P_0$). Over the $L$-point $\\sigma(\\eta)$\nthe cover $P_0$ is split ($L$ algebraically closed), so $P_0$ has an\n$L$-point above $\\sigma(\\eta)$; by [sk-prop-input-spreading] $P_0$\nspreads to a finite étale Galois cover $X'\\to X$ with group $G$\nand $X'\\times_XX_L=P_0$; then $X'\\times_XY\\to Y$ is the pullback of\n$P_0\\to X_L$, over which $P$, hence $\\xi$, is trivial, so the class\nof $\\xi$ is killed in $H^1(X'\\times_XY,\\Z/d\\Z)$: $\\{X'\\to X\\}$ is\nthe required étale cover and the sheaf is zero."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

@@ -1,0 +1,35 @@
+{
+ "id": "sk-thm-smooth-purity",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "Finite-coefficient smooth purity",
+ "lean": [
+  "AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift",
+  "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift"
+ ],
+ "uses": [
+  "sk-def-purity-conv",
+  "sk-lem-diag-reg",
+  "sk-prop-an",
+  "sk-prop-cohsm",
+  "sk-thm-dnc"
+ ],
+ "statement": "*Theorem (sketch).*\n\nIn the conventions of [sk-def-purity-conv], let $f:X\\to Y$ be smooth\nseparated of pure relative dimension $d$. Then\n\n$$\n\\omega_f=Rf^{!}\\Lambda_Y\\ \\cong\\ \\Lambda_X(d)[2d],\n$$\n\ncanonically; for every $K\\in D^b_{ctf}(Y,\\Lambda)$ the tensor formula\n[sk-prop-cohsm] (b) gives the purity isomorphism\n\n$$\nRf^{!}K\\ \\cong\\ Lf^{*}K(d)[2d].\n$$\n\nThese isomorphisms are compatible with base change and with composition\nof smooth morphisms (twist additivity). *Agreement on the model:*\nfor the projection $\\pi$ of a vector bundle of rank $d$ (in particular for\n$p_d:\\Aaf^d_Y\\to Y$) the isomorphism $\\omega_\\pi\\cong\\Lambda(d)[2d]$\nconstructed below is the $R\\pi^{!}$-form $\\gamma_{\\pi,\\Lambda}$ of\n[sk-prop-an] (ii) (detailed: lem:pur-projection-purity-agreement).",
+ "steps": [
+  {
+   "text": "Put $W=X\\times_YX$, let $p_1,p_2$ be its projections and let\n$\\Delta:X\\hookrightarrow W$ be the diagonal.\n*Step 1: the section invariant of the diagonal is $\\omega_f$.* The\nsquare with $p_1,p_2$ over $f$ is Cartesian and $p_1$ is the base change of\n$f$, so $\\omega_{p_1}\\cong Lp_2^{*}\\omega_f$ by [sk-prop-cohsm] (c). Since\n$p_2\\circ\\Delta=\\mathrm{id}_X$,\n\n$$\n\\mathcal C(p_1,\\Delta)=L\\Delta^{*}\\omega_{p_1}\n\\cong L\\Delta^{*}Lp_2^{*}\\omega_f\\cong\\omega_f .\n$$\n\n*Step 2: the deformation to the normal cone of that section.* $\\Delta$\nis a closed section of the smooth map $p_1$, with normal bundle\n$N_\\Delta\\cong T_{X/Y}$ of rank $d$ by [sk-lem-diag-reg]. Applying\n[sk-thm-dnc] to $(p_1,\\Delta)$ gives\n\n$$\n\\mathcal C(p_1,\\Delta)\\ \\cong\\ \\mathcal C(\\pi_T,0_T),\\qquad\n\\pi_T:T_{X/Y}\\to X .\n$$\n\n*Step 3: the other side is the Tate twist.* Vector-bundle purity,\nthe $R\\pi^{!}$-form [sk-prop-an] (ii) applied to $\\pi_T$, gives\n$\\omega_{\\pi_T}=R\\pi_T^{!}\\Lambda_X\\cong\\Lambda_{T_{X/Y}}(d)[2d]$, and\npulling back along the zero section,\n\n$$\n\\mathcal C(\\pi_T,0_T)=L0_T^{*}\\omega_{\\pi_T}\n\\cong L0_T^{*}\\Lambda_{T_{X/Y}}(d)[2d]\\cong\\Lambda_X(d)[2d].\n$$\n\nCombining the three steps gives $\\omega_f\\cong\\Lambda_X(d)[2d]$. Every step\nis canonical, by the uniqueness clause of [sk-thm-dnc]; base-change\ncompatibility follows from that of the diagonal, of [sk-thm-dnc] and of\n[sk-prop-an] (ii), the normal bundle of the diagonal of a base change being the\nbase change of the normal bundle. Substitution into [sk-prop-cohsm] (b)\ngives the purity map for every $K$. Compatibility with composition is\nthat of [sk-prop-cohsm] (a),(c) and of the twist."
+  },
+  {
+   "text": "*Agreement on the model.* Let $f=\\pi:E\\to Z$ be a vector bundle of\nrank $d$ with zero section $0_E$. Then $p_1:W=E\\times_ZE\\to E$ is the\nbundle $\\pi^{*}E$ and $\\Delta$ is the translate of its zero section by the\ntautological section; translation is an automorphism of $W$ over $E$\ncarrying $(p_1,\\Delta)$ to $(\\pi^{*}E,0)$, and the trace $\\int_{\\pi^{*}E}$,\nhence $\\gamma_{\\pi^{*}E,\\Lambda}$, is translation invariant, because the\nclass of every section of a vector bundle integrates to $1$ (the integral\nof the class of the universal section is a locally constant function on\n$E$, equal to $1$ along the zero section by [sk-prop-an] (iii), and every\nconnected component of $E$ meets the zero section, the fibres of $\\pi$\nbeing connected). Under $\\gamma_{\\pi,\\Lambda}$ and $\\gamma_{\\pi^{*}E,\\Lambda}$\nthe base-change isomorphism of Step 1 is the identity (base-change\ncompatibility in [sk-prop-an] (ii)); on the standard pair $(\\pi^{*}E,0)$\nthe deformation space is $\\pi^{*}E\\times\\Aaf^1$ with constant family object\n([sk-lem-geometry] (4)) and the isomorphism of [sk-thm-dnc] is the\nidentity on the standard section invariant (its normalization clause); and\nStep 3 is $L0^{*}$ of $\\gamma_{\\pi_T,\\Lambda}$ with\n$T=N_\\Delta\\cong\\pi^{*}E$. Hence the composite of Steps 1–3 is\n$\\gamma_{\\pi,\\Lambda}^{-1}$: the isomorphism $\\omega_\\pi\\cong\\Lambda_E(d)[2d]$\nof this theorem for $\\pi$ is the $R\\pi^{!}$-form of [sk-prop-an] (ii)\n(detailed: lem:pur-projection-purity-agreement)."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

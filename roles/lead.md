@@ -27,7 +27,8 @@ A delivery passes when:
 - no definition is hollow, and every `sorry` meets `AGENTS.md` §5;
 - unused imports are removed;
 - the DAG nodes agree with the Lean code;
-- the report says where the brief, the DAG or earlier work was wrong.
+- the report says where the brief, the DAG or earlier work was wrong;
+- in stage 1, the split respects the levels of the blueprint (`SETUP.md`; `stages/1-dag.md` §5–6): a departure from the chapter level is rejected; a departure from a unit's route is rejected unless the delivery establishes a mathematical error in the unit, which the lead confirms and reports in `coord/HUMAN.md`; the unit's `realized` fields, when the item is the unit's key node, name a node for its statement and for every step.
 
 ## 4. Landing
 

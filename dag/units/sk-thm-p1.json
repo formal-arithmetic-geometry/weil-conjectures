@@ -1,0 +1,43 @@
+{
+ "id": "sk-thm-p1",
+ "kind": "unit",
+ "chapter": "sec-proper-base-change",
+ "title": "Curve calculations $\\Rightarrow$ PBC($\\Pone$)",
+ "lean": [
+  "AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine"
+ ],
+ "uses": [
+  "sk-def-br",
+  "sk-def-conv",
+  "sk-def-ia",
+  "sk-def-pbc",
+  "sk-thm-curveestimate",
+  "sk-thm-iff"
+ ],
+ "statement": "*Theorem (sketch).*\n\nFor every scheme $S$, the projection $\\Pone_S\\to S$ satisfies\n$\\mathrm{PBC}$.",
+ "steps": [
+  {
+   "text": "It suffices ([sk-thm-iff]) to prove $\\mathrm{IA}_r$ for the\nprojection, i.e. the vanishings of [sk-def-ia]. The proof depends\non the *curve calculations*, which we now exhibit."
+  },
+  {
+   "text": "*(i) The curve calculations.* For $C$ separated of finite type\nover an algebraically closed $k$ with $\\dim C\\le1$ and $F$ torsion,\nthey are the eight assertions on\n$(C_1)\\ H^q(C_{\\Et},F)=0\\ (q>2);$  \n$(C_2)\\ C\\ \\text{affine}\\ \\Rightarrow\\ H^q=0\\ (q>1);$  \n$(C_3)\\ \\operatorname{char}k=p,\\ F\\ p\\text{-primary}\\ \\Rightarrow\\ H^q=0\\ (q>1);$  \n$(C_4)\\ F\\ \\text{constructible, prime to }p\\ \\Rightarrow\\ H^q(C,F)\\ \\text{finite};$  \n$(C_5)\\ C\\ \\text{proper},\\ F\\ \\text{constructible}\\ \\Rightarrow\\ H^q(C,F)\\ \\text{finite};$  \n$(C_6)\\ k\\subset k'\\ \\text{algebraically closed},\\ F\\ \\text{prime to }p \\Rightarrow\\ H^q(C,F)\\cong H^q(C_{k'},F);$  \n$(C_7)\\ C\\ \\text{proper}\\ \\Rightarrow\\ H^q(C,F)\\cong H^q(C_{k'},F) \\text{ for all torsion }F;$  \n$(C_8)\\ a:U\\hookrightarrow C\\ \\text{open}\\ \\Rightarrow\\ a^*:H^2(C,F)\\twoheadrightarrow H^2(U,a^{-1}F).$\n(**Uses Thm [sk-thm-curveestimate]**) For the constant sheaf\n$\\Fq=\\Z/n$ of order $n$ prime to $\\operatorname{char}k$ on a smooth\nproper connected curve $C$ of genus $g$ these are explicit\ncomputations (the ``Kummer route'': a primitive $n$-th root of unity\nidentifies $\\Z/n\\simeq\\mu_n$, and the Kummer sequence reads $H^1$ and\n$H^2$ off $\\Pic(C)$): $H^0(C,\\Z/n)=\\Z/n$,\n$H^1(C,\\Z/n)=\\Pic(C)[n]\\simeq(\\Z/n)^{2g}$,\n$H^2(C,\\Z/n)=\\Pic(C)/n\\simeq\\Z/n$ (via the degree), and\n$H^q(C,\\Z/n)=0$ for $q\\ge3$; this is [sk-thm-curveestimate]. For\nan affine open $j:U\\hookrightarrow C$ one has $H^q(U,\\Z/n)=0$ for\n$q\\ge2$ (the étale cohomological dimension of an *affine*\ncurve is $1$; that of the proper $C$ is $2$), and $H^q(C,j_!\\Z/n)=0$\nfor $q\\ge3$ with $H^2(C,j_!\\Z/n)\\to H^2(C,\\Z/n)$ surjective (its\ncokernel injects into $H^2$ of the finite set $C\\setminus U$, which\nis $0$); these are $(C_2)$ and $(C_8)$ for the constant sheaf. In\ncharacteristic $p$ the analogues for $\\Fp$ come from the\nArtin–Schreier sequence\n$0\\to\\Fp\\to\\mathcal O_C\\xrightarrow{F-1}\\mathcal O_C\\to0$:\n$H^0(C,\\Fp)=\\Fp$, $H^1(C,\\Fp)=\\ker(F-1\\mid H^1(C,\\mathcal O_C))$ is\nfinite of $\\Fp$-dimension the $p$-rank of $C$ (at most $g$, not\n$2g$), $H^2(C,\\Fp)=\\operatorname{coker}(F-1\\mid H^1(C,\\mathcal O_C))=0$\n($F-1$ is surjective on a finite-dimensional vector space over the\nalgebraically closed $k$), and $H^q(C,\\Fp)=0$ for $q\\ge3$; on an\naffine $U$ one has $H^q(U,\\Fp)=0$ for $q\\ge2$ because $\\mathcal O_U$\nhas no higher cohomology.  \nFrom these,\nby finiteness of the normalization, constructible and dense-open\nreduction\n($0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0$), locally constant\nreduction (finite $r$-group filtration + trace splitting) and\ndévissage, $(C_1)$–$(C_8)$ hold for every torsion $F$ and every\nsuch $C$. In particular $(C_6)$/$(C_7)$ give the *invariance*\n$H^q(C,F)\\cong H^q(C_{k'},F)$ under algebraically closed extension\nof the base field, and hence — passing to algebraic closures and\nusing that universal homeomorphisms do not change the étale site\n— under *separably closed* extension $k\\subset k'$."
+  },
+  {
+   "text": "*(ii) Strictly henselian base.* For $A$ strictly henselian\nwith closed point $s$, the degree-zero comparison\n$\\Gamma(Z,F)\\cong\\Gamma(Z_s,F|_{Z_s})$ ($Z$ proper over $A$; Stein's\nconnectedness), applied through the Mayer–Vietoris sequence to the\ntwo affine opens of $\\Pone_A$, kills $H^q$ of an injective for\n$q\\ge2$; the remaining class in $H^1$ is killed by the\nconstructible/finite-étale machinery (Gabber's affine comparison +\ntorsor lifting over a proper henselian pair). Hence\n$H^q(\\Pone_A,F)\\cong H^q(\\Pone_s,F|)$ for every torsion $F$. (This\ncomparison is where the curve calculations of (i) enter for the\nconstant sheaf on the closed fibre $\\Pone_s$.)"
+  },
+  {
+   "text": "*(iii) Arbitrary $S$.* The stalk of the exchange morphism at a\ngeometric point $\\bar t\\to T$ (over $\\bar s\\to S$) is the canonical\npullback $H^q(\\Pone_{\\kappa(\\bar s)},F)\\to H^q(\\Pone_{\\kappa(\\bar t)},F)$ between separably closed fields, an\nisomorphism by the invariance obtained in (i) (the curve\ncalculations). So the exchange map is an isomorphism at every\ngeometric stalk: $\\mathrm{IA}_r$ holds for the projection (geometric\nstalks are conservative), and [sk-thm-iff] converts it into\n$\\mathrm{PBC}$."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

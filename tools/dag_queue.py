@@ -18,7 +18,9 @@ What is open follows the stage documents. A node that no target reaches is not o
            worker has checked it against stages/1-dag.md (`status` is `split`) and the lead has reviewed that
            (`reviewed` is set); the `imported` status of the blueprint import does not count. Every other
            reached node (states none, sorry_here, rests_on_sorry, closed_part) is an item, nearest to a
-           target first, the distance counted through unfinished nodes only;
+           target first, the distance counted through unfinished nodes only; since 2026-10-09 the order is first the rank of the
+           node's unit on the targets' unit route (tools/units.py route; units outside the route last), then the distance
+           (the key printed by `items` is rank*1000 + distance);
   stage 2  when stage 1 has split it (a definition naming the notions it is built from, or a statement with its proof in steps),
            it has no Lean declaration yet, and every node its statement needs has one or is a Mathlib leaf;
            nearest to Mathlib first (the fewest dependency steps down to a Mathlib leaf), so that the
@@ -205,7 +207,17 @@ class Dag:
         return d is None or is_leaf(d) or has_decl(d)   # a dependency on a missing node is reported by the DAG check, not here
 
     def stage1(self) -> list[tuple[int, str]]:
-        return sorted((self.dist1[i], i) for i, d in self.live.items() if i in self.dist1 and not unfolded(d))
+        """nearest to a target first; since 2026-10-09 (SETUP.md) ordered first by the unit route: the rank of the node's unit in
+        the breadth-first walk of the units from the targets' units through `uses` (tools/units.py route), nodes of units
+        outside the route last, then by distance."""
+        try:
+            import units as un
+            rank = {u: k for k, u, _ in un.route(self.n)}
+        except Exception:
+            rank = {}
+        big = 10**6
+        return sorted(((rank.get(self.live[i].get("unit"), big) if rank else 0) * 1000 + self.dist1[i], i)
+                      for i, d in self.live.items() if i in self.dist1 and not unfolded(d))
 
     def stage1_states(self) -> collections.Counter:
         return collections.Counter(audit_state(self.live[i]) for _, i in self.stage1())

@@ -46,12 +46,31 @@ The stage goes on until every branch ends in a Mathlib leaf or in a node whose L
 - A reference is not a proof: the steps go into the node. Where the source omits a step or calls it obvious or standard, write the step out.
 - A proof written by a human is preferred to one written by an agent. When you cannot obtain a document, add it to the wanted documents in `literature/LIST.md`, so that the human is asked for it. Until it arrives, write the proof yourself and mark the node as written by an agent. When it arrives, rewrite the proof from it and remove the mark.
 
-## 5. After this stage
+## 5. The three levels of the blueprint
+
+`SETUP.md` fixes what an agent may change at each level of the blueprint. In this stage:
+
+- A node's proof realizes the steps of its unit's `sk-*/_section.md`: the unit's statement and each step of its proof are carried by nodes of the DAG, and the units the unit cites are the ones the DAG passes through. A split keeps to that route. A step the unit calls obvious is still written out, below the unit, in nodes the worker is free to choose.
+- A departure from a unit's route needs an established mathematical error in the unit: the step, what is wrong with it, and the counterexample or the inference that fails, written in the node that meets it, confirmed by the lead on review, and reported in `coord/HUMAN.md` with the replacement route, as `SETUP.md` says. A step that is hard, long, or absent from Mathlib is not an error.
+- The chapter level is never touched: not the key theorem, not the reference route, not which chapters a chapter uses.
+
+## 6. Units and chapters in the DAG
+
+The 16 chapter files and the 389 unit files of the blueprint are records beside the nodes, written by `tools/units.py build`:
+
+- `dag/chapters/<sec>.json`: the chapter's key theorem, reference and the chapters it uses, verbatim.
+- `dag/units/<sk>.json`: the unit's statement and the paragraphs of its proof as `steps`, the units it cites (`uses`), its Lean names, and the binding fields `realized` (`statement`: the node ids that state the unit; `steps`: for each step, the node ids that carry it) and `realized_by`. The worker of the unit's key node fills `realized` as part of its split, and the lead confirms it on review.
+- Every node carries `chapter` and `unit`, from its blueprint path; a node a worker created inherits them from the item it was created for.
+
+A node's route is its unit and the units its unit cites, transitively. The route is about proofs: a step of a statement may use a statement of another unit only if the node's unit cites that unit; definitions and Mathlib leaves are notions, not route. `tools/check_dag.py` reports a unit whose `realized` fields leave a step with no node or a cited unit unreached, and a reviewed statement whose proof uses a statement outside its route; `tools/review_split.py` reports the same for one item, and the lead rejects the split (§5) unless the departure is an established error.
+
+## 7. After this stage
 
 The DAG keeps changing while statements and proofs are formalized. Nodes are added and revised under the same rules. A node is updated from Lean twice: when its statement is formalized, with the module, the declaration and the Lean statement; when its proof is done, with the proof dependencies the Lean proof uses.
 
-## 6. Finished when
+## 8. Finished when
 
 - every target has a node, and every branch of statement and proof dependencies ends in a Mathlib leaf or in a node whose Lean is written (§2);
 - every other statement has a complete proof, and every step of it names the nodes it uses or is marked elementary, unless its Lean is written (§2);
-- the graph is acyclic, and no node points to a missing or merged node.
+- the graph is acyclic, and no node points to a missing or merged node;
+- every unit the targets' route passes through has its statement and every step realized by nodes (§6), and no reviewed statement leaves its unit's route without an established error (§5).

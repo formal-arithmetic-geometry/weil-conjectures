@@ -1,0 +1,42 @@
+{
+ "id": "sk-thm-purity-transport",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "Smooth purity over $\\mathcal O_E$, $E$ and $\\overline{\\mathbf Q}_\\ell$",
+ "lean": [
+  "AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek"
+ ],
+ "uses": [
+  "sk-def-purity-conv",
+  "sk-lem-sf-flat-model",
+  "sk-prop-a1",
+  "sk-prop-cohsm",
+  "sk-thm-smooth-purity"
+ ],
+ "statement": "*Theorem (sketch).*\n\nKeep the geometric conventions of [sk-def-purity-conv], but let the\ncoefficient ring range over the remaining three stages\n\n$$\n\\Lambda\\in\\{\\mathcal O_E,\\ E,\\ \\overline{\\mathbf Q}_\\ell\\},\n$$\n\nwhere $D^b_{ctf}(-,\\mathcal O_E)$ is the adic category of normalized\nsystems $(K_n)_n$ with $K_n\\in D^b_{ctf}(-,A_{E,n})$ and common bounds and\nstratifications, $D^b_{ctf}(-,E)$ its rationalization, and\n$D^b_{ctf}(-,\\overline{\\mathbf Q}_\\ell)$ the colimit over finite\n$E/\\mathbf Q_\\ell$ (Blueprint 01,\n`def-weil-pbc-adic-coefficient-datum`,\n`def-weil-pbc-rational-category`,\n`def-weil-pbc-qbar-category`). Let $f:X\\to Y$ be smooth separated\nof relative dimension $d$ and let $K\\in D^b_{ctf}(Y,\\Lambda)$. Then the\npurity map\n\n$$\n\\gamma_{f,K}:Lf^{*}K(d)[2d]\\ \\xrightarrow{\\ \\sim\\ }\\ Rf^{!}K\n$$\n\nextends the finite-coefficient isomorphism of [sk-thm-smooth-purity]\nto these stages, naturally in $K$ and\ncompatibly with composition, étale base change, the finite reductions\n$A_{E,n}\\to A_{E,m}$ and scalar extension of coefficient fields. In\nparticular, for the structure morphism $a_X$ of a smooth $X$ of pure\ndimension $d$,\n\n$$\n\\omega_{X,\\Lambda}=Ra_X^{!}\\Lambda\\ \\cong\\ \\Lambda_X(d)[2d],\n$$\n\nand the counit of $Ra_{X!}\\dashv Ra_X^{!}$ is the normalized integration\nmap $R\\Gamma_c(X,\\Lambda_X(d)[2d])\\to\\Lambda$.\nThe coefficient compatibilities and this counit normalization also hold\nfor the finite-coefficient isomorphisms of [sk-thm-smooth-purity].\n(Blueprint 14,\n`thm-pur-finite-reduction-of-purity`,\n`thm-pur-adic-reconstruction`,\n`thm-pur-rational-and-qbar-purity` and\n`cor-pur-adic-and-rational-smooth-dualizing-complexes`.)",
+ "steps": [
+  {
+   "text": "*Step 1 (compatibility with the finite reductions).* For $m\\le n$\nwrite $\\mathrm{red}_{n,m}=(-)\\otimes^{L}_{A_{E,n}}A_{E,m}$. By\n[sk-thm-smooth-purity] the map $\\gamma_{f,K}$ is the composite of three\nconstituents: the canonical twist reassociation, the inverse of the\ndiagonal identification $\\omega_f\\cong\\Lambda_X(d)[2d]$ of\n[sk-thm-smooth-purity], and the tensor formula [sk-prop-cohsm] (b). Each\nis compatible with $\\mathrm{red}_{n,m}$: the finite-level twist\n$A(1)=\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N}A$ of [sk-def-purity-conv] and the\nKummer boundary $\\kappa(t)$ that orients it ([sk-prop-a1]) reduce to\ntheir counterparts over $A_{E,m}$, and the exceptional adjunction\n$Rf_!\\dashv Rf^{!}$ is compatible with reduction of the coefficient ring.\nHence $\\mathrm{red}_{n,m}(\\gamma_{f,K})=\\gamma_{f,\\mathrm{red}_{n,m}K}$,\nand likewise for the orientations, the smooth traces and the composition\nand base-change squares of [sk-prop-cohsm] (a),(c)."
+  },
+  {
+   "text": "*Step 2 (the adic stage).* Let\n$K\\in D^b_{ctf}(Y,\\mathcal O_E)$ be the normalized system $(K_n)_n$. By\nStep 1 the isomorphisms $\\gamma_{f,K_n}$ commute with the transition maps\nof the system, so they form a morphism of normalized systems, the common\nbounds and stratifications being those of $K$ with the same $d$-shift.\nThe uniform-tower reconstruction realizes that morphism as a single map\n$Lf^{*}K(d)[2d]\\to Rf^{!}K$ over $\\mathcal O_E$ whose reduction at every\nlevel $n$ is $\\gamma_{f,K_n}$; a map of towers that is an isomorphism at\nevery level is an isomorphism, so $\\gamma_{f,K}$ is one."
+  },
+  {
+   "text": "*Step 3 (the $E$- and $\\overline{\\mathbf Q}_\\ell$-stages).* An\n$E$-object is presented by a lattice $K_{\\mathcal O_E}$ with\n$K_E=K_{\\mathcal O_E}\\otimes^{L}_{\\mathcal O_E}E$. Since\n$\\mathcal O_E\\to E$ is flat, $(-)\\otimes^{L}_{\\mathcal O_E}E$ is exact and\ncarries the isomorphism of Step 2 for the lattice to an isomorphism\n$\\gamma_{f,K_E}$, independently of the chosen lattice because two lattices\nagree after inverting $\\varpi$. A $\\overline{\\mathbf Q}_\\ell$-object is\nrepresented by an $E$-object for some finite $E/\\mathbf Q_\\ell$, the\nfinite-stage categories being idempotent complete, and $\\gamma$ transports\nalong $E\\hookrightarrow\\overline{\\mathbf Q}_\\ell$; the transport is well\ndefined because the purity isomorphisms are transitive in coefficient\nextensions and preserve idempotent summands."
+  },
+  {
+   "text": "*Step 4 (the dualizing complex).* Apply Steps 1–3 to $f=a_X$ and\n$K=\\Lambda_{\\Spec k}$: the purity isomorphism reads\n$\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$, and the counit of\n$Ra_{X!}\\dashv Ra_X^{!}$ becomes the transported normalized integration\nmap. Only the finite stage is proved in this document; Steps 2–4 are\nsketches of Blueprint 14, where the reconstruction and transport lemmas\nare carried out in full."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

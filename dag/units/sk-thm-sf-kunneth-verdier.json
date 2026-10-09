@@ -1,0 +1,47 @@
+{
+ "id": "sk-thm-sf-kunneth-verdier",
+ "kind": "unit",
+ "chapter": "sec-six-functors",
+ "title": "Künneth–Verdier isomorphism",
+ "lean": [
+  "AlgebraicGeometry.Etale.hasKunnethComparisons"
+ ],
+ "uses": [
+  "sk-def-sf-kv-maps",
+  "sk-def-sf-operations",
+  "sk-lem-sf-ctf-generation",
+  "sk-lem-sf-kunneth-star",
+  "sk-lem-sf-mate",
+  "sk-prop-sf-biduality-general",
+  "sk-prop-sf-closed-unit",
+  "sk-prop-sf-dualizable-biduality",
+  "sk-prop-sf-localization",
+  "sk-prop-sf-open-closed-triangle",
+  "sk-thm-regular",
+  "sk-thm-sf-ctf-stability",
+  "sk-thm-sf-tensor-hom",
+  "sk-thm-smooth-purity"
+ ],
+ "statement": "*Theorem (sketch).*\n\nThe three maps of [sk-def-sf-kv-maps] are isomorphisms, natural in their\nvariables, under the hypotheses of that definition (the $Rf_i^!$ are the\nconstructible exceptional adjoints of [sk-def-sf-operations] (vi); no\nadmissibility datum of [sk-def-sf-admissible] is assumed): the\nexceptional Künneth $\\alpha$, the external Hom $\\beta$, and\nin particular, for $X,Y$ separated of finite type over $k$, with the structure\nmorphism $a_Y$ and the product projection $p_X=\\operatorname{id}_X\\times a_Y$\nas in [sk-def-sf-kv-maps] (iv), and\n$M\\in\\Dctf(X,\\Lambda)$, $N\\in\\Dctf(Y,\\Lambda)$,\n\n$$\n\\kappa_{M,N}:M\\boxtimes\\mathbb D_YN\\ \\xrightarrow{\\ \\sim\\ }\\\n\\RHom\\bigl(p_Y^*N,Rp_X^!M\\bigr).\n$$",
+ "steps": [
+  {
+   "text": "*The map $\\alpha$.* Take first a constant auxiliary coefficient. For\nsmooth $f_i$ of relative dimension $d_i$, [sk-thm-smooth-purity] identifies\n$Rf_i^!$ with $Lf_i^*(d_i)[2d_i]$, and its compatibility with base change and\nwith composition identifies the smooth product comparison with the ordinary\npullback–tensor comparison and the sum of the twists; the smooth trace is the\nexceptional counit under this orientation, and its base-change square is the\nadjoint of the same purity comparison, using the adjunction coherence of\nfix-prop-adjunctions and the mate calculus [sk-lem-sf-mate]. Closed immersions are handled by supported\nlocalization [sk-prop-sf-localization] together with the closed-immersion unit\n[sk-prop-sf-closed-unit] and the case $Q=\\Lambda_Z$ of\n[sk-lem-sf-kunneth-star]; the regular case carries the fundamental class of\n[sk-thm-regular]. An affine factorization of a general $f_i$ into a closed\nimmersion followed by a smooth projection gives the map locally. This\nsettles constant coefficients $L_i=\\Lambda_{Y_i}$, hence, by additivity,\nfinite free ones. For $L_i$ lisse with flat stalks the invertibility of\n$\\alpha$ is étale-local on $Y_1\\times Y_2$ — $Rf^!$ commutes with étale\npullback (for étale $u$, $Ru^!=Lu^*$, and the composition isomorphism of\n[sk-lem-sf-mate]), compatibly with $\\alpha$ — and on a finite étale cover\ntrivializing the $L_i$ they become finite free, the case just treated; this\nis a local reduction, not a dévissage (the lisse coefficients cannot be\nreplaced by constant ones globally, [sk-lem-sf-ctf-generation]). For\ngeneral $L_i\\in\\Dctf(Y_i,\\Lambda)$ argue by induction on\n$\\delta=\\dim\\operatorname{supp}L_1+\\dim\\operatorname{supp}L_2$; the claim is\ntrivial if some $L_i=0$, and both sides of $\\alpha$ are exact in each $L_i$,\nso two-out-of-three applies to triangles in either variable.\n*Closed pushforward.* For a closed immersion $g_1:Z_1\\hookrightarrow\nY_1$, with $g_1':X_1\\times_{Y_1}Z_1\\hookrightarrow X_1$ and\n$f_1':X_1\\times_{Y_1}Z_1\\to Z_1$ the projections, the dual base change\n$Rf_1^!Rg_{1*}\\cong Rg'_{1*}Rf_1'^!$ (the mate of $\\operatorname{Ex}_!$ under\n[sk-lem-sf-mate]) and $Rg_{1*}M_1\\boxtimes L_2\\cong\nR(g_1\\times\\mathrm{id})_*(M_1\\boxtimes L_2)$ ([sk-lem-sf-kunneth-star])\nidentify $\\alpha_f(Rg_{1*}M_1,L_2)$ with\n$R(g_1'\\times\\mathrm{id})_*\\,\\alpha_{f_1'\\times f_2}(M_1,L_2)$, compatibly\nwith the definition of $\\alpha$ as an exceptional adjoint (a mate-calculus\ncheck, [sk-lem-sf-mate]); likewise in the second variable. Since\n$L_i\\cong Rg_{i*}g_i^*L_i$ for $Z_i=\\operatorname{supp}L_i$\n([sk-prop-sf-open-closed-triangle], as $L_i$ vanishes on the complement),\nwe may assume $\\dim Y_i=\\dim\\operatorname{supp}L_i$. Then by the generation\n[sk-lem-sf-ctf-generation] on $Y_i$ it suffices to treat the generators\n$L_i=Rg_{i*}j_{i!}F_i$ with $F_i$ lisse with flat stalks on a stratum $U_i$\ndense in $\\overline U_i$, $\\dim\\overline U_i\\le\\dim Y_i$, and by the closed\npushforward just described we may take $\\overline U_i=Y_i$, $L_i=j_{i!}F_i$.\n*Open localization.* $Rf^!$ does not commute with $j_!$, so pass\nthrough $Rj_*$: for the open immersion $j=j_1\\times j_2$ with base changes\n$j'$ and $f'$, the dual base change $Rf^!Rj_*\\cong Rj'_*Rf'^!$ (the mate of\nthe base change for $j_!$) and [sk-lem-sf-kunneth-star], which gives\n$Rj_{1*}F_1\\boxtimes Rj_{2*}F_2\\cong Rj_*(F_1\\boxtimes F_2)$ and\n$Rj'_{1*}Rf_1'^!F_1\\boxtimes Rj'_{2*}Rf_2'^!F_2\\cong\nRj'_*(Rf_1'^!F_1\\boxtimes Rf_2'^!F_2)$, identify\n$\\alpha_f(Rj_{1*}F_1,Rj_{2*}F_2)$ with $Rj'_*\\,\\alpha_{f'}(F_1,F_2)$,\ncompatibly with $\\alpha$ as before; the latter is the lisse case already\ntreated, so $\\alpha$ is invertible on $(Rj_{1*}F_1,Rj_{2*}F_2)$. The\nopen–closed triangle [sk-prop-sf-open-closed-triangle] for\n$M=Rj_{i*}F_i$ reads\n$j_{i!}F_i\\to Rj_{i*}F_i\\to T_i\\xrightarrow{+1}$ with\n$T_i=i_{i*}i_i^*Rj_{i*}F_i\\in\\Dctf(Y_i,\\Lambda)$\n([sk-thm-sf-ctf-stability]), a general object of $\\Dctf$ supported on the\nboundary $Z_i=Y_i\\setminus U_i$, of dimension $<\\dim Y_i$. By the induction\nhypothesis $\\alpha$ is invertible on $(T_1,j_{2!}F_2)$ and on\n$(Rj_{1*}F_1,T_2)$, the support dimensions having dropped; two-out-of-three\nin the second variable gives $(Rj_{1*}F_1,j_{2!}F_2)$, and then in the first\nvariable $(j_{1!}F_1,j_{2!}F_2)$. Hence $\\alpha$ is invertible."
+  },
+  {
+   "text": "*The map $\\beta$.* Both sides are exact in each $E_i$, so dévissage in\nboth $E_i$, by [sk-lem-sf-ctf-generation], reduces to $E_i=Rh_{i!}F_i$ with\n$h_i=g_ij_i$, $g_i$ finite and $j_i$ open, and $F_i$ lisse on $U_i$ with flat\nstalks. Such an $F_i$ is dualizable: its stalks are finite flat, hence free,\nover the local ring $\\Lambda$, so $F_i$ is locally finite free and\n[sk-prop-sf-dualizable-biduality] gives $\\RHom(F_i,-)\\simeq\nF_i^\\vee\\otimes^L-$. Tensor–Hom and the exceptional adjunction then give\n$\\RHom(E_i,L_i)\\simeq Rh_{i*}\\RHom(F_i,Rh_i^!L_i)\\simeq\nRh_{i*}\\bigl(F_i^\\vee\\otimes^LRh_i^!L_i\\bigr)$ ([sk-thm-sf-tensor-hom]).\nWith $h=h_1\\times h_2$ and $F=F_1\\boxtimes F_2$, so that\n$F^\\vee\\simeq F_1^\\vee\\boxtimes F_2^\\vee$ and $E_1\\boxtimes E_2\\simeq Rh_!F$\n($\\mathrm{Ku}_!$), the comparison becomes\n\n$$\n Rh_{1*}\\bigl(F_1^\\vee\\otimes^LRh_1^!L_1\\bigr)\\boxtimes\n Rh_{2*}\\bigl(F_2^\\vee\\otimes^LRh_2^!L_2\\bigr)\n \\xrightarrow[\\text{twice}]{\\ \\mathrm{Ku}_*\\ }\n Rh_*\\bigl(F^\\vee\\otimes^L(Rh_1^!L_1\\boxtimes Rh_2^!L_2)\\bigr)\n \\xrightarrow{\\ Rh_*(1\\otimes\\alpha)\\ }\n Rh_*\\bigl(F^\\vee\\otimes^LRh^!(L_1\\boxtimes L_2)\\bigr),\n$$\n\nthe first arrow being [sk-lem-sf-kunneth-star] in each factor (after the\nsymmetry of $\\otimes^L$) and the second the $\\alpha$ just proved; by the same\nidentifications the target is $\\RHom(E_1\\boxtimes E_2,L_1\\boxtimes L_2)$.\nTaking ordinary and then exceptional adjoints identifies this composite with\nthe specified $\\beta$: both paths become the tensor product of the two\nevaluation maps after the projection formula. Hence $\\beta$ is invertible."
+  },
+  {
+   "text": "*The map $\\kappa$.* Apply $\\beta$ to the pairs $(\\Lambda_X,M)$ and\n$(N,\\omega_Y)$, then $\\RHom(1,\\alpha)$ for the identification\n$M\\boxtimes\\omega_Y\\simeq Rp_X^!M$, which is $\\alpha$ for\n$\\operatorname{id}_X\\times a_Y$. Their composite is $\\kappa_{M,N}$ by\n[sk-def-sf-kv-maps] (iv), and both factors have just been shown invertible."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

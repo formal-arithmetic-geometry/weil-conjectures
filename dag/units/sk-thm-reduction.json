@@ -1,0 +1,55 @@
+{
+ "id": "sk-thm-reduction",
+ "kind": "unit",
+ "chapter": "sec-proper-base-change",
+ "title": "Reduction to $\\Pone$",
+ "lean": [
+  "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper"
+ ],
+ "uses": [
+  "sk-def-conv",
+  "sk-def-pbc",
+  "sk-thm-chow",
+  "sk-thm-groth-ss",
+  "sk-thm-iff",
+  "sk-thm-p1"
+ ],
+ "statement": "*Theorem (sketch).*\n\nAssume that $\\Pone_S\\to S$ satisfies $\\mathrm{PBC}$ for every scheme\n$S$ (in the sense of [sk-def-pbc]). Then every\nproper morphism of schemes satisfies\n$\\mathrm{PBC}$.",
+ "steps": [
+  {
+   "text": "We use the following elementary manipulations, each argued where it\noccurs: finite morphisms satisfy PBC; PBC composes; PBC cancels\nalong a proper surjection; $\\Pone$ gives $\\Pqn$; PBC is étale\nlocal on the target."
+  },
+  {
+   "text": "*Reduction to an affine base.* For quasi-compact\nquasi-separated $f$, the restriction of $R^qf_*F$ to an étale\n$V\\to Y$ is the sheafification of\n$U\\mapsto H^q(X\\times_YU,F|)$, compatible with exchange; exchange is\ntherefore an isomorphism iff it is one over the geometric points of\nan étale cover of $Y$, and geometric stalks are conservative: PBC\nis étale local on the target, so we may assume $Y$ affine."
+  },
+  {
+   "text": "*Chow's factorization.* By [sk-thm-chow] there are\n$\\pi:\\widetilde X\\to X$ proper surjective and a closed immersion\n$i_Y:\\widetilde X\\hookrightarrow\\Pqn_Y$ with $f\\pi=q_Yi_Y$; the\ngraph map $i_X=(\\pi,i_Y):\\widetilde X\\hookrightarrow\\Pqn_X$ is a\nclosed immersion over $X$, so $\\pi=q_Xi_X$."
+  },
+  {
+   "text": "*Closed immersions are finite, and finite morphisms satisfy\nPBC.* After base change to the strict henselization at a geometric\npoint $\\bar y$ the finite fibre is a finite disjoint union of\nstrictly henselian local schemes, whence\n$(f_*F)_{\\bar y}=\\prod_{\\bar x\\to\\bar y}F_{\\bar x}$ as a finite\nproduct; $f_*$ is exact, $R^qf_*=0$ for $q>0$, exchange is the\nidentity summand-wise, and the same holds after every base change.\nThus $\\mathrm{PBC}(i_X)=\\mathrm{PBC}(i_Y)$."
+  },
+  {
+   "text": "*From $\\Pone$ to $\\Pqn$.* The symmetric-product morphism\n\n$$\n\\sigma_n:(\\Pone_S)^n\\to\\Pqn_S,\\quad\n([x_i:y_i])_i\\mapsto[F_0:\\dots:F_n],\\ \\\n\\textstyle\\prod_{i=1}^n(x_it+y_i)=\\sum_jF_jt^j,\n$$\n\nis finite (each $z_i=x_i/y_i$ is integral over the elementary\nsymmetric subring) and surjective (over an algebraically closed\nfield every binary form of degree $n$ factors into linear forms).\nThe projection $(\\Pone_T)^n\\to T$ is a composite of $n$\nprojective-line projections over successive bases: by\n[sk-thm-p1] and the composition step below it satisfies PBC;\n$\\sigma_n$ being finite satisfies PBC; and since the composite\n$(\\Pone_T)^n\\to\\Pqn_T\\to T$ is the product projection, cancellation\nalong the surjective $\\sigma_n$ (below) gives PBC for\n$\\Pqn_T\\to T$."
+  },
+  {
+   "text": "*Composition.* If $f,h$ are proper with $\\mathrm{PBC}(f)$,\n$\\mathrm{PBC}(h)$, then $\\mathrm{PBC}(hf)$: convert both to\n$\\mathrm{IA}$ via [sk-thm-iff]; $f_*I$ is injective for $I$\ninjective ($f_*$ is right adjoint to the exact $f^{-1}$), the\n$q>0$ higher direct images of $a^{-1}I$ along $f'$ vanish, and the\nconjugates are identified by the degree-zero exchange used in\n[sk-thm-iff]; in the spectral sequence [sk-thm-groth-ss] for\nthe composite only the $q=0$ row survives, killed in positive\ndegrees by $\\mathrm{IA}(h)$; convert back. Hence\n$\\mathrm{PBC}(\\pi)$ ($\\pi=q_Xi_X$) and $\\mathrm{PBC}(f\\pi)$\n($f\\pi=q_Yi_Y$)."
+  },
+  {
+   "text": "*Cancellation.* If $f$ is proper surjective with\n$\\mathrm{PBC}(f)$, $\\mathrm{PBC}(hf)$, then $\\mathrm{PBC}(h)$:\nconvert to $\\mathrm{IA}$; an injective $I$ on $Y$ embeds\n$I_{\\bar y}\\hookrightarrow J_{\\bar x}$ into an injective $J$ on $X$\nover the fibre, so $I\\to f_*J$ splits and $I$ is a direct summand\nof $f_*J$; by the spectral sequence [sk-thm-groth-ss] together\nwith $\\mathrm{IA}(f)$ and $\\mathrm{IA}(hf)$ the higher direct\nimages of $b^{-1}f_*J\\cong f'_*a^{-1}J$ vanish, and vanishing passes\nto direct summands; convert back. [sk-thm-p1] supplies the\nhypothesis, so cancel $\\pi$: $\\mathrm{PBC}(f)$."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

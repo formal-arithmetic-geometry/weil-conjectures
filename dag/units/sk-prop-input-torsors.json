@@ -1,0 +1,51 @@
+{
+ "id": "sk-prop-input-torsors",
+ "kind": "unit",
+ "chapter": "sec-smooth-base-change",
+ "title": "Torsors and étale $H^1$",
+ "lean": [
+  "AlgebraicGeometry.Scheme.EtaleTorsor",
+  "AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH"
+ ],
+ "uses": [
+  "sk-def-smooth"
+ ],
+ "statement": "*Proposition (sketch).*\n\nLet $Y$ be a scheme and $M$ a finite abelian group. Then there is a\ncanonical bijection, natural in $(Y,M)$,\n\n$$\n\\mathrm{Tor}^1(Y,M)\\xrightarrow{\\ \\sim\\ }H^1(Y_{\\Et},\\underline M)\n$$\n\nbetween the isomorphism classes of $M$-torsors on $Y_{\\Et}$ and\n$H^1(Y_{\\Et},\\underline M)$, and an $M$-torsor is the same thing as a\nfinite étale $Y$-scheme with a simply transitive $M$-action. For\n$M=\\Z/d\\Z$ and $Y$ connected with geometric point $\\bar y$, the\ntorsor attached to a class is connected — that is, a Galois cover\nwith group $\\Z/d\\Z$, the input taken by [sk-prop-input-spreading]\n— exactly when the corresponding continuous homomorphism\n$\\pi_1(Y,\\bar y)\\to\\Z/d\\Z$ is surjective.\n(02NE, together with the finite-étale correspondence;\ncf. Milne, *Lectures on Étale Cohomology*, III.3.)\nThe sketch below condenses the proofs of the detailed blueprint,\nCh. 02b.",
+ "steps": [
+  {
+   "text": "*A flasque embedding.* For a sheaf $\\mathcal G$ on $Y_{\\Et}$\nthe Godement sheaf $G(\\mathcal G)(U)=\\prod_{u\\in U}\\mathcal G_u$\ncontains $\\mathcal G$ and is flasque, its restriction maps only\ndiscarding coordinates. A flasque sheaf is acyclic: in\n$0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ with $\\mathcal A$\nflasque, local liftings of a section of $\\mathcal C$ patch, so global\nsections are right exact on such sequences and dimension shifting\ngives $H^q(\\mathcal A)=0$ for $q\\ge1$. Put $I=G(\\underline M)$ and\n$J=I/\\underline M$, so that\n$0\\to\\underline M\\to I\\xrightarrow{d}J\\to0$ is exact with $I$\nacyclic; the long exact sequence gives\n$H^1(Y_{\\Et},\\underline M)=\\operatorname{coker}(d_Y)$. (Only the\nacyclicity of $I$ is used: $J$ is not acyclic in general, since\n$H^a(J)=H^{a+1}(\\underline M)$ for $a\\ge1$, which is nonzero e.g. for\n$\\Z/\\ell$ on $\\Pone$ over an algebraically closed field.)"
+  },
+  {
+   "text": "*From a class to a torsor.* For $s\\in J(Y)$ put\n$P_s(U)=\\{x\\in I(U):d(x)=s|_U\\}$, with $M$ acting by translation.\nTwo lifts of $s$ differ by a section of $\\ker d=\\underline M$, so the\naction is simply transitive; $P_s$ is locally nonempty because $J$ is\nthe quotient sheaf of $I$, and over a cover trivializing it\n$P_s\\cong\\underline M$. So $P_s$ is an $M$-torsor. Translation by\n$x\\in I(Y)$ gives $P_{s+d(x)}\\cong P_s$, so $s\\mapsto[P_s]$ is\ndefined on $\\operatorname{coker}(d_Y)$, and functoriality of\n$I,J,d$ and of pullback makes it natural in $(Y,M)$."
+  },
+  {
+   "text": "*Injectivity.* An isomorphism $P_s\\cong P_{s'}$ is, over a\ncover trivializing both by sections $p_i,p_i'$, translation by\n$a_i=p_i'-p_i\\in I(U_i)$. Compatibility with the torsor structures\nsays exactly that the $a_i$ agree on overlaps, so they glue to $a\\in I(Y)$ with $d(a)=s'-s$, i.e. $s$ and $s'$ have the same class."
+  },
+  {
+   "text": "*Surjectivity.* Trivialize an $M$-torsor $P$ over a cover\n$\\{U_i\\to Y\\}$ by sections $p_i$ and put\n$c_{ij}=p_i-p_j\\in\\underline M(U_{ij})$, a Čech $1$-cocycle. The\nČech complex of the Godement sheaf $I$ with respect to any\ncovering is acyclic in positive degrees (at each geometric point it\nis the cochain complex of the nerve of a surjection of sets, which is\ncontractible), so $c_{ij}=a_i|_{U_{ij}}-a_j|_{U_{ij}}$ with\n$a_i\\in I(U_i)$; the sections $d(a_i)\\in J(U_i)$ agree on overlaps\nand glue to $s\\in J(Y)$. Then $a_i\\in P_s(U_i)$ trivialize $P_s$\nwith the same cocycle $(c_{ij})$, so $P$ and $P_s$ are glued from the\nsame trivial torsors by the same transition data, and $P\\cong P_s$."
+  },
+  {
+   "text": "*Torsors are finite étale covers.* The functor\n$P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ from finite étale\n$Y$-schemes to finite locally constant sheaves is an equivalence: a\nfinite étale cover is trivialized by a surjective étale base\nchange, which makes the sheaf locally constant, and effective étale\ndescent for finite étale morphisms produces the inverse. It is\ncompatible with base change and carries simply transitive\n$M$-actions to simply transitive ones, so an $M$-torsor sheaf is\nrepresented by a finite étale $Y$-scheme with a simply transitive\n$M$-action, and conversely."
+  },
+  {
+   "text": "*Connectedness.* Let $Y$ be connected. Under the fibre-functor\nequivalence a torsor $P$ is a finite continuous\n$\\pi_1(Y,\\bar y)$-set whose $M$-action is simply transitive and\ncommutes with the $\\pi_1$-action; choosing $p\\in P_{\\bar y}$ there is\na unique $f_P(g)\\in M$ with $g\\cdot p=p+f_P(g)$, and commutation\nmakes $f_P$ a homomorphism, continuous because $g\\mapsto g\\cdot p$ is\ncontinuous into the finite discrete $P_{\\bar y}$. Since $M$ is\nabelian, $f_P$ does not depend on $p$. Now $P$ is connected exactly\nwhen $\\pi_1(Y,\\bar y)$ acts transitively on $P_{\\bar y}$, i.e. when\n$f_P$ is surjective; for $M=\\Z/d\\Z$ a surjective $f_P$ is a connected\nfinite étale cover whose automorphism group $\\Z/d\\Z$ acts simply\ntransitively on the fibre, that is, a Galois cover with group\n$\\Z/d\\Z$."
+  },
+  {
+   "text": "*Scope of the Lean statement.* The bijection is stated together with\nthe one further property that [sk-thm-vanishing] uses, namely that the\nclass of a torsor vanishes exactly when its structure morphism admits\na section. Its naturality in $Y$ is not stated: expressing it needs a\npullback map $H^1(Y_{\\Et},M)\\to H^1(Y'_{\\Et},M)$ on sheaf cohomology\nalong a morphism of schemes, which is not yet available. The\nconnectedness criterion above, which needs the étale fundamental\ngroup, is likewise left to the prose."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

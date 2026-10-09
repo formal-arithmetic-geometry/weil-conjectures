@@ -1,0 +1,28 @@
+{
+ "id": "sk-prop-br-inj",
+ "kind": "unit",
+ "chapter": "sec-curve-estimates",
+ "title": "Generic-point injection for the Brauer group",
+ "lean": [
+  "AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two"
+ ],
+ "uses": [
+  "sk-def-br",
+  "sk-prop-divisor-gen",
+  "sk-prop-hilbert90"
+ ],
+ "statement": "*Proposition (sketch).*\n\nLet $X$ be as in [sk-prop-divisor-gen] with function field\n$k(X)$. Then (Grothendieck's residue sequence) the base change map\nis injective:\n\n$$\n\\Br(X)=H^2(X,\\mathbb G_m)\\hookrightarrow\nH^2(\\eta,\\mathbb G_m)=\\Br(k(X)).\n$$\n\nIn particular this holds for $C$ a smooth curve.",
+ "steps": [
+  {
+   "text": "Take the long exact cohomology sequence of [sk-prop-divisor-gen].\nThe third term is a direct sum of the sheaves $i_{x*}\\Z$, and\n$H^1\\big(X,i_{x*}\\Z\\big)=0$ for each $x$: in low degrees the Leray\nspectral sequence for $i_x$ reduces this to\n$H^1(\\kappa(x),\\Z)=\\mathrm{Hom}_{\\mathrm{cont}}(\\mathrm{Gal} (\\kappa(x)^{\\mathrm{sep}}/\\kappa(x)),\\Z)$, which vanishes because a\ncontinuous homomorphism from a profinite group to the discrete\ntorsion-free group $\\Z$ has finite — hence trivial — image.\nCohomology commutes with the direct sum here: $X$ is noetherian, hence\nquasi-compact and quasi-separated, so étale cohomology on $X$ commutes\nwith filtered colimits of abelian sheaves, and the direct sum is the\nfiltered colimit of its finite partial sums. Hence\n\n$$\n0=H^1\\Big(X,\\bigoplus_xi_{x*}\\Z\\Big)\\to H^2(X,\\mathbb G_m)\n\\to H^2(X,i_*\\mathbb G_{m,\\eta})\n$$\n\nis exact, so $H^2(X,\\mathbb G_m)\\hookrightarrow H^2(X,i_*\\mathbb G_{m,\\eta})$. Next, $R^1i_*\\mathbb G_{m,\\eta}=0$:\nits stalk at a geometric point $\\bar x$ over $x\\in X$ is\n$H^1(\\Spec(A\\otimes_{\\mathcal O_{X,x}}k(X)),\\mathbb G_m)\n=\\Pic(A\\otimes_{\\mathcal O_{X,x}}k(X))$ by Hilbert 90\n([sk-prop-hilbert90]), where $A=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$\nis a regular local ring, hence a UFD, and a localization of a UFD is\na UFD, whose Picard group is trivial. In the Leray spectral sequence\n$E_2^{a,b}=H^a(X,R^bi_*\\mathbb G_{m,\\eta})\\Rightarrow\nH^{a+b}(\\eta,\\mathbb G_m)$ the only differential into $E_2^{2,0}$\ncomes from $E_2^{0,1}=H^0(X,R^1i_*\\mathbb G_{m,\\eta})=0$, so the edge\nmap $H^2(X,i_*\\mathbb G_{m,\\eta})\\to H^2(\\eta,\\mathbb G_m)=\\Br(k(X))$\nis injective, and the composite is the claimed injection. (We do\n*not* assert $H^2(X,i_*\\mathbb G_{m,\\eta})=\\Br(k(X))$ or\n$R^2i_*\\mathbb G_{m,\\eta}=0$: both fail for\n$X=\\Spec\\mathbf C[[x,y]]$, where $H^2(X,i_*\\mathbb G_{m,\\eta})=0$\nbecause $X$ is strictly local (Stacks `03QO`) while\n$\\Br(\\mathbf C((x,y)))$ contains the quaternion class $(x,y)$,\ndetected by its $x$-adic residue.) (In degrees $0$ and $1$ the same\nsequence gives $H^0(X,\\mathbb G_m)=k^\\times$ for $X$ proper\nconnected over algebraically closed $k$ and\n$H^1(X,\\mathbb G_m)=\\Pic(X)=\\mathrm{Div}(X)/\\mathrm{Princ}(X)$,\nwhich is (P1) of [sk-def-pic].)"
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-br-inj/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   []
+  ]
+ },
+ "realized_by": null
+}

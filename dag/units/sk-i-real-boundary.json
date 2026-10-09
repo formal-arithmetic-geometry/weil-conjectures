@@ -1,0 +1,49 @@
+{
+ "id": "sk-i-real-boundary",
+ "kind": "unit",
+ "chapter": "sec-purity-real-sheaves",
+ "title": "Boundary stalks and restriction to an open",
+ "lean": [
+  "AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar",
+  "AlgebraicGeometry.Scheme.isIso_unit_upperStarLowerStarAdjunction"
+ ],
+ "uses": [
+  "sk-d-real-boundary",
+  "sk-d-real-setup",
+  "sk-d-real-weil"
+ ],
+ "statement": "*Proposition (sketch).*\n\nIn the situation of [sk-d-real-boundary]: the sheaf $J=j_*\\mathcal F$\nis constructible, and $J_{\\bar s}=V_s^{I_s}$ equivariantly for Frobenius.\nIf $\\mathcal G$ is lisse on all of $C_0$, then\n$\\mathcal G\\simeq j_*(\\mathcal G|_{U_0})$. The map\n$\\pi_1(U)\\to\\pi_1(C)$ is surjective, and hence so is the Weil-group map\nof [sk-d-real-weil].",
+ "steps": [
+  {
+   "text": "*Step 0 (normality).* $C_0$ is a smooth curve, hence normal and\nintegral, and a *quasi-compact* etale scheme $W$ over a normal\nintegral Noetherian scheme is a finite disjoint union of open-and-closed\nnormal integral schemes: $W$ is Noetherian, its local rings are normal\ndomains because normality ascends along etale ring maps\n([Stacks `033C`](https://stacks.math.columbia.edu/tag/033C)),\nso its finitely many irreducible components are pairwise disjoint (a point\non two of them would give two minimal primes of its local domain) and\nhence open and closed. Quasi-compactness cannot be dropped:\n$\\coprod_{m\\in\\mathbf N}\\operatorname{Spec}k\\to\\operatorname{Spec}k$ is\netale but not a finite disjoint union. Every etale scheme to which this is\napplied below is quasi-compact: the finite etale covers of Steps 1 and 4\nand the affine etale $W\\to Y$ of Step 3."
+  },
+  {
+   "text": "*Step 1 (constructibility of $J$).* A lisse $\\Qlb$-sheaf need not\nbe trivialized by any finite etale cover (on $\\mathbf G_m$ the unipotent\nKummer extension, on which $\\mathbf Z_\\ell(1)$ acts by\n$\\left(\\begin{smallmatrix}1&t\\\\0&1\\end{smallmatrix}\\right)$, has infinite\ngeometric monodromy), so the argument is made at the finite levels\n$\\mathcal F_n$ of an $\\mathcal O_E$-model of $\\mathcal F$, which are\nlocally constant sheaves of finite $\\mathcal O_E/\\mathfrak m_E^n$-modules.\nTrivialize $\\mathcal F_n$ by a\nfinite etale surjection $p:P\\to U_0$, so that $p^*\\mathcal F_n$ is constant\nwith finite fibre $M_a$ on each connected component $P_a$. The\nadjunction unit $\\mathcal F_n\\to p_*p^*\\mathcal F_n$ is injective, being a\ndiagonal into a nonempty finite product on stalks, so\n$j_*\\mathcal F_n\\hookrightarrow\\prod_a(jp_a)_*\\underline{M_a}$. Extend $P_a$ to the\nnormalization $g_a:Y_a\\to C_0$ in $k(P_a)$, which is finite and restricts\nover $U_0$ to $P_a$; by Step 3 below applied on the normal integral\n$Y_a$, the constant sheaf extends, so\n$(jp_a)_*\\underline{M_a}=g_{a,*}\\underline{M_a}$, which is constructible\nbecause $g_a$ is finite. A finite product of constructible sheaves is\nconstructible, and on a Noetherian scheme a subobject of a constructible\nsheaf is constructible; hence $j_*\\mathcal F_n$ is, for every $n$. For\n$J$ itself no trivializing cover is needed: $J|_{U_0}=\\mathcal F$ is\nlisse, and at each of the finitely many boundary points $s$ the stalk\n$J_{\\bar s}=V_s^{I_s}$ of Step 2 is a finite-dimensional representation of\nthe residue Weil group, so $J$ is lisse on each stratum of\n$U_0\\sqcup(C_0\\setminus U_0)$, i.e. constructible in the sense of\n[sk-d-real-weil]."
+  },
+  {
+   "text": "*Step 2 (the boundary stalk).* The stalk of $J$ at a geometric\nboundary point $\\bar s$ is computed on the punctured strict henselian\ntrait at $s$. The strict-henselization stalk formula is a statement\nabout torsion sheaves, so it is applied at each finite level: it\nidentifies $(j_*\\mathcal F_n)_{\\bar s}$ with the invariants $M_n^{I_s}$ of\nthe finite-level geometric generic stalk under the inertia group\n$I_s=\\Gal(\\overline{K_s}/K_s^{\\mathrm{sh}})$. The geometric stalk of the\nadic sheaf $J$ is formed from these levels,\n$J_{\\bar s}=(\\varprojlim_nM_n^{I_s})\\otimes_{\\mathcal O_E}E$; invariants\ncommute with inverse limits, so $\\varprojlim_nM_n^{I_s}=M^{I_s}$ for the\nlattice $M=\\varprojlim_nM_n$ of $V_s$, and $M^{I_s}=M\\cap V_s^{I_s}$ is\nsaturated in $M$, so $M^{I_s}\\otimes_{\\mathcal O_E}E=V_s^{I_s}$. (The\ntower $(M_n^{I_s})_n$ need not be adic; only its limit enters.) Hence\n$J_{\\bar s}=V_s^{I_s}$,\nwhere $K_s$ is the fraction field of the henselization as in\n[sk-d-real-boundary] and $K_s^{\\mathrm{sh}}\\subset\\overline{K_s}$ is\nthe fraction field of the strict henselization, the generic point of the\ntrait. Since $\\Gal(K_s^{\\mathrm{sh}}/K_s)=\\Gal(\\overline{k(s)}/k(s))$,\nthis is the kernel of\n$\\Gal(\\overline{K_s}/K_s)\\to\\Gal(\\overline{k(s)}/k(s))$ of\n[sk-d-real-boundary], whereas $\\Gal(\\overline{K_s}/K_s)$ itself is the\ndecomposition group.\nThe Weil structures descend through the trait, so the identification is\nequivariant for the residue Frobenius lift."
+  },
+  {
+   "text": "*Step 3 (lisse sheaves extend from a dense open).* For a finite\nmodule $M$ on a normal integral Noetherian $Y$ and a nonempty open\n$v:V\\hookrightarrow Y$, the canonical map\n$\\underline M_Y\\to v_*\\underline M_V$ is an isomorphism: evaluate on an\naffine etale $W\\to Y$, decompose $W$ by Step 0, and note that each\ncomponent meets $W\\times_YV$ because it is integral and $V$ is dense, so\na section over $W\\times_YV$ is determined by, and extends to, a section\nover $W$. For $\\mathcal G$ lisse on $C_0$, trivialize each finite level\n$\\mathcal G_n$ as in Step 1 and apply this componentwise to get\n$\\mathcal G_n\\simeq j_*(\\mathcal G_n|_{U_0})$ for every $n$; these\nisomorphisms are compatible in $n$ and $j_*$ of an adic sheaf is formed\nlevelwise, so $\\mathcal G\\simeq j_*(\\mathcal G|_{U_0})$. (Equivalently,\nStep 2 at $s\\in C_0\\setminus U_0$ gives\n$J_{\\bar s}=\\mathcal G_{\\bar s}^{I_s}=\\mathcal G_{\\bar s}$, inertia acting\ntrivially on the stalk of a sheaf lisse at $s$.)"
+  },
+  {
+   "text": "*Step 4 (surjectivity on fundamental groups).* Let $W\\to C$ be\nconnected finite etale. By Step 0 it is normal integral, hence its\nrestriction $W\\times_CU$ is again integral, so connected: a connected\ncover of $C$ stays connected over the nonempty open $U$. Equivalently\n$\\pi_1(U)\\to\\pi_1(C)$ is surjective. The Weil-group map of\n[sk-d-real-weil] is the pullback of this one along the degree map to\n$\\mathbf Z$, so it is surjective too."
+  },
+  {
+   "text": "The detailed forms are Blueprint 07, `lem-fin-normal-open-lisse-image`\n(Step 1), `lem-fin-normal-constant-open-image` (Step 3),\n`lem-fin-etale-normal-components` (Steps 0 and 4),\n`fin2-lem-lisse-trivialized-finite-etale` and\n`lem-fin-normalization-extends-cover`; and Blueprint 12,\n`lem-wf-boundary-stalk-invariants` (Step 2), resting on\nBlueprint 02, `prop-weil-pbc-strict-henselization-stalk-formula`."
+  }
+ ],
+ "source": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}
