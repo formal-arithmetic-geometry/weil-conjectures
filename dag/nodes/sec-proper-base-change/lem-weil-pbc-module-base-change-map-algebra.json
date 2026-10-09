@@ -14,9 +14,73 @@
   "lem-weil-pbc-module-pullback-tensor",
   "lem-weil-pbc-module-pullback-structure-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1) Conventions.* For a morphism of schemes $h:Y\\to Z$, the adjunction $h^*\\dashv h_*$ of [def-pc-module-pullback] with unit $\\eta_h$ gives the bijection $\\operatorname{Hom}_{\\mathcal O_Y}(h^*\\mathcal M,\\mathcal N)\\to\\operatorname{Hom}_{\\mathcal O_Z}(\\mathcal M,h_*\\mathcal N)$, $\\psi\\mapsto h_*(\\psi)\\circ\\eta_{h,\\mathcal M}$ (Stacks, Sheaves, Lemma 008Z); in particular two morphisms $\\psi_1,\\psi_2:h^*\\mathcal M\\to\\mathcal N$ are equal as soon as $h_*(\\psi_1)\\circ\\eta_{h,\\mathcal M}=h_*(\\psi_2)\\circ\\eta_{h,\\mathcal M}$. The unit is natural: $h_*h^*(u)\\circ\\eta_{h,\\mathcal M}=\\eta_{h,\\mathcal M'}\\circ u$ for $u:\\mathcal M\\to\\mathcal M'$. On sections, $(h_*\\mathcal N)(W)=\\mathcal N(h^{-1}W)$ and $h_*(\\psi)_W=\\psi_{h^{-1}W}$. For $a\\in\\mathcal M(W)$ write $h^*a=\\eta_{h,\\mathcal M}(a)\\in(h^*\\mathcal M)(h^{-1}W)$; then $\\psi(h^*a)=(h_*(\\psi)\\circ\\eta_{h,\\mathcal M})(a)$. Since $f\\circ g'=g\\circ f'$ [def-pc-scheme], $f_*g'_*=g_*f'_*$ on sheaves (sections over $W$ are sections over $g'^{-1}f^{-1}W=f'^{-1}g^{-1}W$, and the same on morphisms), and the two $\\mathcal O_S$-module structures agree because $f_*(g'^\\sharp)\\circ f^\\sharp=(f\\circ g')^\\sharp=(g\\circ f')^\\sharp=g_*(f'^\\sharp)\\circ g^\\sharp$ (composition of morphisms of ringed spaces, Stacks, Sheaves, Definition 0093); this identification is used without comment below. These are the definitions and the formal properties of an adjunction.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008Z (sheaves-lemma-adjoint-pull-push-modules: g^* left adjoint to g_* on modules) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces: (f\\circ g')^\\sharp=f_*(g'^\\sharp)\\circ f^\\sharp); the argument itself is not in the Stacks project (agent-written)"
+   }
+  },
+  {
+   "text": "*(2) Part (i).* By definition of $\\beta$ (step (1) with $h=g$), $g_*(\\beta)\\circ\\eta_{g,\\mathcal A}=f_*(\\eta_{g',\\mathcal O_X})$. By [lem-weil-pbc-module-pullback-structure-sheaf], $g'_*(\\epsilon_{g'})\\circ\\eta_{g',\\mathcal O_X}=g'^\\sharp$. Hence\n$$g_*(\\gamma)\\circ\\eta_{g,\\mathcal A}=g_*f'_*(\\epsilon_{g'})\\circ g_*(\\beta)\\circ\\eta_{g,\\mathcal A}=f_*g'_*(\\epsilon_{g'})\\circ f_*(\\eta_{g',\\mathcal O_X})=f_*\\big(g'_*(\\epsilon_{g'})\\circ\\eta_{g',\\mathcal O_X}\\big)=f_*(g'^\\sharp),$$\nso $\\gamma$ is the morphism corresponding to $f_*(g'^\\sharp):\\mathcal A\\to f_*g'_*\\mathcal O_{X'}=g_*\\mathcal A'$. Evaluated on $a\\in\\mathcal A(W)=\\mathcal O_X(f^{-1}W)$ (step (1)): $\\gamma(g^*a)=f_*(g'^\\sharp)(a)=g'^\\sharp_{f^{-1}W}(a)\\in\\mathcal O_{X'}(g'^{-1}f^{-1}W)=\\mathcal O_{X'}(f'^{-1}g^{-1}W)$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008Z (sheaves-lemma-adjoint-pull-push-modules: g^* left adjoint to g_* on modules) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces: (f\\circ g')^\\sharp=f_*(g'^\\sharp)\\circ f^\\sharp); the argument itself is not in the Stacks project (agent-written)"
+   }
+  },
+  {
+   "text": "*(3) Multiplications.* Both $\\gamma\\circ g^*(\\mu)$ and $\\mu'\\circ(\\gamma\\otimes\\gamma)\\circ t$ are $\\mathcal O_{S'}$-linear maps $g^*(\\mathcal A\\otimes\\mathcal A)\\to\\mathcal A'$ ($\\gamma\\otimes\\gamma$ the induced map of tensor products [def-pur-sheaf-tensor-product], the sheafification of $s\\otimes s'\\mapsto\\gamma(s)\\otimes\\gamma(s')$, so $(\\gamma\\otimes\\gamma)(s\\otimes s')=\\gamma(s)\\otimes\\gamma(s')$ on sections). By step (1) it suffices to show that their adjoints $\\Phi_1=g_*(\\gamma\\circ g^*(\\mu))\\circ\\eta_{g,\\mathcal A\\otimes\\mathcal A}$ and $\\Phi_2=g_*(\\mu'\\circ(\\gamma\\otimes\\gamma)\\circ t)\\circ\\eta_{g,\\mathcal A\\otimes\\mathcal A}$, $\\mathcal O_S$-linear maps $\\mathcal A\\otimes_{\\mathcal O_S}\\mathcal A\\to g_*\\mathcal A'$, are equal. The sheaf $\\mathcal A\\otimes\\mathcal A$ is the sheafification of the presheaf tensor product [def-pur-sheaf-tensor-product] and $g_*\\mathcal A'$ is a sheaf of $\\mathcal O_S$-modules, so by the uniqueness in the universal property of sheafification [def-weil-presheaf-modules-sheafification] it suffices that $\\Phi_1$ and $\\Phi_2$ agree after composition with $\\mathcal A\\otimes_p\\mathcal A\\to\\mathcal A\\otimes\\mathcal A$, i.e. on the images of the elements $a\\otimes b$, $a,b\\in\\mathcal A(W)$, $W\\subseteq S$ open, which generate $\\mathcal A(W)\\otimes_{\\mathcal O_S(W)}\\mathcal A(W)$ as an abelian group. By naturality of the unit, $\\Phi_1=g_*(\\gamma)\\circ\\eta_{g,\\mathcal A}\\circ\\mu=f_*(g'^\\sharp)\\circ\\mu$ (step (2)), so $\\Phi_1(a\\otimes b)=g'^\\sharp(ab)$. On the other side, $\\eta_{g,\\mathcal A\\otimes\\mathcal A}(a\\otimes b)=g^*(a\\otimes b)$, which $t$ sends to $g^*a\\otimes g^*b$ [lem-weil-pbc-module-pullback-tensor]; $\\gamma\\otimes\\gamma$ sends this to $\\gamma(g^*a)\\otimes\\gamma(g^*b)=g'^\\sharp(a)\\otimes g'^\\sharp(b)$ (step (2)), and $\\mu'$ to the product $g'^\\sharp(a)\\,g'^\\sharp(b)$ in $\\mathcal O_{X'}(f'^{-1}g^{-1}W)$. So $\\Phi_2(a\\otimes b)=g'^\\sharp(a)g'^\\sharp(b)=g'^\\sharp(ab)=\\Phi_1(a\\otimes b)$, because $g'^\\sharp_{f^{-1}W}:\\mathcal O_X(f^{-1}W)\\to\\mathcal O_{X'}(g'^{-1}f^{-1}W)$ is a ring homomorphism ($g'$ a morphism of schemes [def-pc-scheme]). Hence $\\gamma\\circ g^*(\\mu)=\\mu'\\circ(\\gamma\\otimes\\gamma)\\circ t$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008Z (sheaves-lemma-adjoint-pull-push-modules: g^* left adjoint to g_* on modules) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces: (f\\circ g')^\\sharp=f_*(g'^\\sharp)\\circ f^\\sharp); the argument itself is not in the Stacks project (agent-written)"
+   }
+  },
+  {
+   "text": "*(4) Units.* Both $\\gamma\\circ g^*(f^\\sharp)$ and $f'^\\sharp\\circ\\epsilon_g$ are $\\mathcal O_{S'}$-linear maps $g^*\\mathcal O_S\\to\\mathcal A'$; by step (1) it suffices to compare their adjoints. By naturality of the unit and step (2), $g_*(\\gamma\\circ g^*(f^\\sharp))\\circ\\eta_{g,\\mathcal O_S}=g_*(\\gamma)\\circ\\eta_{g,\\mathcal A}\\circ f^\\sharp=f_*(g'^\\sharp)\\circ f^\\sharp=(f\\circ g')^\\sharp$. By the defining property of $\\epsilon_g$ [lem-weil-pbc-module-pullback-structure-sheaf], $g_*(f'^\\sharp\\circ\\epsilon_g)\\circ\\eta_{g,\\mathcal O_S}=g_*(f'^\\sharp)\\circ g^\\sharp=(g\\circ f')^\\sharp$. These agree as $f\\circ g'=g\\circ f'$ (step (1)). Hence $\\gamma\\circ g^*(f^\\sharp)=f'^\\sharp\\circ\\epsilon_g$, i.e. $\\gamma$ sends the unit $g^*(f^\\sharp)\\circ\\epsilon_g^{-1}$ of $g^*\\mathcal A$ to the unit $f'^\\sharp$ of $\\mathcal A'$. With step (3) and the $\\mathcal O_{S'}$-linearity of $\\gamma$ (it is a morphism of $\\mathcal O_{S'}$-modules by construction), $\\gamma$ is a morphism of $\\mathcal O_{S'}$-algebras; this proves (ii).",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 008Z (sheaves-lemma-adjoint-pull-push-modules: g^* left adjoint to g_* on modules) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces: (f\\circ g')^\\sharp=f_*(g'^\\sharp)\\circ f^\\sharp); the argument itself is not in the Stacks project (agent-written)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "not in the Stacks project; written by an agent from the adjunction g^* -| g_* (Sheaves, Lemma 008Z), composition of morphisms of ringed spaces (Sheaves, Definition 0093) and Modules, Lemma 01CD (tensor product commutes with pullback, here lem-weil-pbc-module-pullback-tensor); the base change map is that of Cohomology, Section 02N6 / Remark 08HY in degree 0"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +109,45 @@
    "results": "no tensor product of sheaves of modules on schemes and no sheaves of algebras in these directories, so the statement cannot even be formulated over Mathlib's Scheme.Modules",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left adjoint of a lax monoidal functor is oplax monoidal; adjoint of a monoid morphism is a monoid morphism",
+   "results": "CategoryTheory.Adjunction.IsMonoidal, Adjunction.IsMonoidal.leftAdjoint_μ, Adjunction.mapMon, Adjunction.rightAdjointLaxMonoidal (Mathlib.CategoryTheory.Monoidal.Functor, .Mon)",
+   "date": "2026-10-10",
+   "verdict": "generalization in the abstract: Adjunction.mapMon (Mathlib/CategoryTheory/Monoidal/Mon.lean:1072, F.mapMon -| G.mapMon for F monoidal, G lax monoidal, adj.IsMonoidal) would give the statement, but it cannot be instantiated: Mathlib has no monoidal structure on SheafOfModules and no monoidal structure on SheafOfModules.pullback; no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monoidal adjunction induces adjunction between categories of monoid objects",
+   "results": "Adjunction.mapMon, Adjunction.instIsMonoidal, Adjunction.mapMon_unit, Adjunction.mapMon_counit, Adjunction.isMonoidal_comp, Adjunction.IsMonoidal.instIsMonoidalUnit",
+   "date": "2026-10-10",
+   "verdict": "no match (same reason)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.IsMonoidal",
+   "results": "Adjunction.instIsMonoidalId, Adjunction.IsMonoidal, Adjunction.instIsMonoidal, Adjunction.isMonoidal_comp, IsMonoidal.leftAdjoint_ε, map_ε_comp_counit_app_unit, unit_app_unit_comp_map_η (Mathlib.CategoryTheory.Monoidal.Functor)",
+   "date": "2026-10-10",
+   "verdict": "no match (categorical generality only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MonoidalCategory' Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/Algebra/Category/ModuleCat/Presheaf Mathlib/AlgebraicGeometry/Modules; grep -n 'def mapMon' Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "results": "monoidal structure only on presheaves of modules (Presheaf/Monoidal.lean:125 PresheafOfModules.monoidalCategory, Presheaf/PushforwardZeroMonoidal.lean:33 pushforward₀ monoidal); none on SheafOfModules or Scheme.Modules; Mon.lean:867 Functor.mapMon, 1072 Adjunction.mapMon",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pullback.*tensor\\|baseChangeMap\\|pullbackTensor' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only AlgebraicGeometry/PicardFunctor.lean baseChangeMap (a morphism of schemes X x_S T' -> X x_S T, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no Lean candidate in the source repository"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,7 +171,17 @@
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
-  "result": "accepted",
-  "note": "Statement: the base change map for O_X composed with g'^* O_X = O_{X'} is an algebra map; self-contained (cites lem-weil-pbc-module-pullback-tensor, unit sk-thm-reduction: tool use when split); correct; unsplit."
- }
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Agent-formulated statement (Stacks does not state it; 08HY is the derived map, 02N6/02N7 the underived flat one); four steps, no new node: adjunction conventions, part (i) via the structure-sheaf pullback leaf, multiplications compared on sections a (x) b through the universal property of sheafification and the formula t(g^*(a (x) b)) = g^*a (x) g^*b of the pullback-tensor node (tool use recorded), units. Mathlib has only the abstract Adjunction.mapMon with no monoidal structure on sheaves of modules on schemes. Tags verified by the worker (008Z, 0093, 01CD, 02KG, 08HY)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-base-change-map-algebra",
+  "worker": "stage1",
+  "summary": "Statement kept (correct; checked the directions of t, epsilon_g, epsilon_g' and the identification f_*g'_*=g_*f'_*). Wrote a four-step proof by adjunction and sections: (1) conventions of the adjunction g^*-|g_* (bijection psi -> g_*(psi) o eta, naturality of the unit) and f_*g'_*=g_*f'_*; (2) part (i): the adjoint of gamma is f_*(g'^sharp), from the defining property of epsilon_{g'}; (3) multiplicativity: compare adjoints A(x)A -> g_*A', reduce by uniqueness of sheafification to elementary tensors a(x)b, use t(g^*(a(x)b))=g^*a(x)g^*b and that g'^sharp is a ring map; (4) units: adjoints are (f o g')^sharp and (g o f')^sharp. No new node needed: the categorical route (monoidal adjunction, Mathlib Adjunction.mapMon) is avoided by working on sections. Stacks tags verified: 008Z sheaves-lemma-adjoint-pull-push-modules, 0093 sheaves-definition-composition-maps-ringed-spaces, 01CD modules-lemma-tensor-product-pullback, 02N6 cohomology-section-base-change-map, 08HY cohomology-remark-base-change (derived; the underived map is the degree-0 one of 02N6/02N7), 02KG coherent-lemma-affine-base-change. The proof uses lem-weil-pbc-module-pullback-tensor (unit sk-thm-reduction) as a generic tool lemma, as the review of the statement anticipated."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "lead_note": "Off-route tool use recorded by L: lem-weil-pbc-module-pullback-tensor (Modules 01CD, pullback commutes with tensor products; unit sk-thm-reduction) used as a black box in step 3."
 }
