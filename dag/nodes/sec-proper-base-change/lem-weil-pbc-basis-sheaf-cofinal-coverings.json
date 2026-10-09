@@ -8,9 +8,59 @@
   "place": "Sheaves on Spaces, Section 009H: Lemma 009L (label lemma-cofinal-systems-coverings-standard-case), whose proof is that of Lemma 009K (label lemma-cofinal-systems-coverings) with the coverings U_ij of U_i cap U_j the single member U_i cap U_j; Definition 009J (label definition-sheaf-basis) for the sheaf condition (**)"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "*Notation and refinement.* Fix $U\\in\\mathcal B$ and an arbitrary $\\mathcal B$-covering $\\mathcal U=(U_i)_{i\\in I}$ of $U$. By cofinality of $C(U)$ choose $\\mathcal V=(V_j)_{j\\in J}$ in $C(U)$ and a map $\\alpha:J\\to I$ with $V_j\\subseteq U_{\\alpha(j)}$ for all $j$. All intersections below of members of $\\mathcal B$ lie in $\\mathcal B$ by hypothesis, so all restrictions written are defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009K, first paragraph"
+   }
+  },
+  {
+   "text": "*Uniqueness for an arbitrary $\\mathcal B$-covering.* Let $s,s'\\in\\mathcal F(U)$ with $s|_{U_i}=s'|_{U_i}$ for all $i\\in I$. For every $j\\in J$, $s|_{V_j}=(s|_{U_{\\alpha(j)}})|_{V_j}=(s'|_{U_{\\alpha(j)}})|_{V_j}=s'|_{V_j}$ (transitivity of restriction). The family $(s|_{V_j})_j$ is compatible (both $(s|_{V_j})|_{V_j\\cap V_{j'}}$ and $(s|_{V_{j'}})|_{V_j\\cap V_{j'}}$ equal $s|_{V_j\\cap V_{j'}}$), and $s$ and $s'$ both glue it; by the uniqueness in the gluing condition for $\\mathcal V\\in C(U)$, $s=s'$. Since $U$ and $\\mathcal U$ were arbitrary: (U) for every $W\\in\\mathcal B$ and every $\\mathcal B$-covering $(W_k)_k$ of $W$, two sections of $\\mathcal F(W)$ with the same restrictions to all $W_k$ are equal. (For the empty covering $I=\\emptyset$ of $U=\\emptyset$, the map $\\alpha:J\\to\\emptyset$ forces $J=\\emptyset$, so the empty covering of $\\emptyset$ is in $C(\\emptyset)$ and its gluing condition says that $\\mathcal F(\\emptyset)$ has exactly one element; the argument above covers this case, the hypotheses on $s,s'$ and on the family being vacuous.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009K, second paragraph"
+   }
+  },
+  {
+   "text": "*A compatible family on $\\mathcal V$.* Let $s_i\\in\\mathcal F(U_i)$ with $s_i|_{U_i\\cap U_{i'}}=s_{i'}|_{U_i\\cap U_{i'}}$ for all $i,i'\\in I$. Put $t_j=s_{\\alpha(j)}|_{V_j}\\in\\mathcal F(V_j)$. For $j,j'\\in J$, $V_j\\cap V_{j'}\\subseteq U_{\\alpha(j)}\\cap U_{\\alpha(j')}$, hence $t_j|_{V_j\\cap V_{j'}}=s_{\\alpha(j)}|_{V_j\\cap V_{j'}}=(s_{\\alpha(j)}|_{U_{\\alpha(j)}\\cap U_{\\alpha(j')}})|_{V_j\\cap V_{j'}}=(s_{\\alpha(j')}|_{U_{\\alpha(j)}\\cap U_{\\alpha(j')}})|_{V_j\\cap V_{j'}}=t_{j'}|_{V_j\\cap V_{j'}}$. (In 009K this is the 'small kink', which needs the uniqueness of step 2 because there the overlaps are covered by arbitrary $U_{ii'k}$; with the single members $U_i\\cap U_{i'}$ of the present gluing condition it is the displayed transitivity of restriction.) By the existence in the gluing condition for $\\mathcal V\\in C(U)$ there is $t\\in\\mathcal F(U)$ with $t|_{V_j}=t_j$ for all $j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009K, third and fourth paragraphs, with U_ijk = U_i cap U_j as in Lemma 009L"
+   }
+  },
+  {
+   "text": "*$t$ restricts to $s_i$.* Fix $i\\in I$. The sets $W_j=U_i\\cap V_j\\in\\mathcal B$, $j\\in J$, form a $\\mathcal B$-covering of $U_i$, since $\\bigcup_jW_j=U_i\\cap\\bigcup_jV_j=U_i\\cap U=U_i$. For each $j$, $W_j\\subseteq U_i\\cap U_{\\alpha(j)}$, so $(t|_{U_i})|_{W_j}=t|_{W_j}=(t|_{V_j})|_{W_j}=t_j|_{W_j}=s_{\\alpha(j)}|_{W_j}=(s_{\\alpha(j)}|_{U_{\\alpha(j)}\\cap U_i})|_{W_j}=(s_i|_{U_i\\cap U_{\\alpha(j)}})|_{W_j}=s_i|_{W_j}$. So $t|_{U_i}$ and $s_i$ in $\\mathcal F(U_i)$ have the same restriction to every member of the $\\mathcal B$-covering $(W_j)_j$ of $U_i\\in\\mathcal B$; by (U) of step 2 applied to $W=U_i$, $t|_{U_i}=s_i$. (This is where the hypothesis on $C(U_i)$, not only on $C(U)$, is used.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, proof of Lemma 009K, last paragraph (the sets U_{i alpha(j) k} cap V_j, here U_i cap V_j, cover U_i; 'we leave it to the reader' written out)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By step 4 the section $t$ restricts to $s_i$ on every $U_i$, and by step 2 (for the covering $\\mathcal U$ of $U$) it is the only section of $\\mathcal F(U)$ doing so. Hence $\\mathcal F$ satisfies the gluing condition for $\\mathcal U$; as $U\\in\\mathcal B$ and $\\mathcal U$ were arbitrary, for every $\\mathcal B$-covering of every member of $\\mathcal B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009H, end of the proof of Lemma 009K; Lemma 009L"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 009H: proof of Lemma 009K (label lemma-cofinal-systems-coverings) specialized as Lemma 009L (label lemma-cofinal-systems-coverings-standard-case) says, the coverings of U_i cap U_j being the single member U_i cap U_j"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +96,38 @@
    "results": "PairwiseIntersections.lean:117 (the diagram of the U_i and U_i cap U_j is cofinal in the diagram of opens below some U_i: a different cofinality, on X); no Finite/Fintype in SheafCondition",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if a presieve is refined by a presieve for which a presheaf is a sheaf, the presheaf is a sheaf for the coarser presieve",
+   "results": "CategoryTheory.Presieve.isSheaf_of_le, IsSheaf.isSheafFor, IsSheaf.isSheafFor_of_mem_precoverage, isSeparated_of_le (Sites/SheafOfTypes, Sites/PrecoverageToGrothendieck), Presheaf.isSheaf_bot, Presieve.isSheafFor_subsieve (Sites/IsSheafFor.lean:787), le_topology_of_closedSieves_isSheaf",
+   "date": "2026-10-10",
+   "verdict": "no match: the closest is isSheafFor_subsieve (S ≤ R and P sheaf for every pullback of the sieve S implies P sheaf for R); on the poset category of B with S generated by the refining covering V, the pullbacks of S to the members W of B are the coverings (W cap V_j)_j, which are arbitrary B-coverings, not members of C(W): to feed it one needs this node itself, and the translation of IsSheafFor on the poset of B into the pairwise-intersection gluing condition is a further lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheafFor, CategoryTheory.Sieve.generate",
+   "results": "Presieve.isSheafFor_iff_generate, Presieve.IsSheaf.isSheafFor, Presheaf.isLimit_iff_isSheafFor_presieve, Precoverage.isSheaf_toGrothendieck_iff, PreOneHypercover.IsStronglySheafFor.isSheafFor_of_pullback, OneHypercover.isSheafFor_of_pullback",
+   "date": "2026-10-10",
+   "verdict": "no match: isSheafFor_iff_generate only replaces a presieve by the sieve it generates (same covering, not a refinement); no isSheafFor_of_refines exists (grep below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition on a basis of open sets with intersections only needs to be checked on a cofinal family of covers",
+   "results": "TopCat.Presheaf.isSheafOpensLeCover_iff_isSheafPairwiseIntersections, isSheaf_iff_isSheafOpensLeCover, isSheaf_iff_isSheafPairwiseIntersections, IsSheaf.isSheafOpensLeCover, IsSheafOpensLeCover, isLimitOpensLeEquivGenerate₁, generateEquivalenceOpensLe, SheafCondition.pairwiseToOpensLeCoverObj (Topology/Sheaves/SheafCondition)",
+   "date": "2026-10-10",
+   "verdict": "no match: equivalent forms of the sheaf condition for presheaves on all opens of X; nothing on a basis or on a cofinal family"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isSheafFor_subsieve' -A12 Mathlib/CategoryTheory/Sites/IsSheafFor.lean; grep -rn 'isSheafFor_of_refines\\|isSheafFor_iff_of_refine' Mathlib; grep -rln 'IsBasis' Mathlib/Topology/Sheaves Mathlib/CategoryTheory/Sites; grep -n 'theorem isSheaf_coverage' Mathlib/CategoryTheory/Sites/Coverage.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "isSheafFor_subsieve (IsSheafFor.lean:787, statement as above); no isSheafFor_of_refines/isSheafFor_iff_of_refine; IsBasis only in Topology/Sheaves/Stalks.lean and SheafCondition/Sites.lean (coverDense_inducedFunctor :135, restrictHomEquivHom :240, extend_hom_app, hom_ext, isIso_iff_isIso_basis: morphisms of sheaves on X, not presheaves on B); isSheaf_coverage (Coverage.lean:402)",
+   "date": "2026-10-10",
+   "verdict": "no match: the statement concerns a presheaf on B with the gluing condition assumed only on members of C(U); a Lean proof would go through isSheafFor_subsieve or isSheaf_coverage only after this node's argument, so it is not a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,6 +152,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 009L in the presheaf-of-sets form with explicit refinement; correct; unsplit."
+  "note": "Five elementary steps written out along Stacks 009K/009L: refinement, uniqueness for arbitrary B-coverings from the cofinal member, compatibility of the restricted family (transitivity of restriction, the single-overlap form), gluing, t|_{U_i} = s_i by uniqueness on the covering (U_i ∩ V_j)_j of U_i (the part Stacks leaves to the reader), uniqueness. Empty covering handled. Checked line by line; no new nodes; not a Mathlib leaf (isSheafFor_subsieve needs the arbitrary pullback coverings)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-basis-sheaf-cofinal-coverings",
+  "worker": "stage1",
+  "summary": "Read Stacks Sheaves 009H: Definition 009J, Lemma 009K (lemma-cofinal-systems-coverings) with its proof, Lemma 009L (lemma-cofinal-systems-coverings-standard-case), whose proof is 009K with the overlap coverings the single member U_i cap U_j. Statement kept (it is 009L, direction (2)=>(1), with the stronger hypothesis that B is closed under all pairwise intersections, which makes the gluing condition with single overlaps the sheaf condition (**)). Proof written out in five elementary steps following 009K: refinement; uniqueness for every B-covering via the refining member of C(U); the compatible family t_j = s_alpha(j)|V_j (the 'kink' of 009K is a transitivity of restriction here); t|U_i = s_i via the B-covering (U_i cap V_j)_j of U_i and the uniqueness of step 2 for U_i (009K's 'left to the reader' written out); uniqueness. 009K is inlined, so no new node. Mathlib: three kinds of search added; the nearest is CategoryTheory.Presieve.isSheafFor_subsieve (IsSheafFor.lean:787), which needs the sheaf condition for all pullback coverings and so needs this node; no leaf. Source repository: no declaration on sheaves on a basis or cofinal coverings (the only IsBasis declaration is AlgebraicGeometry.isBasis_affineOpens_le_preimage, unrelated, reaches no sorry)."
  }
 }
