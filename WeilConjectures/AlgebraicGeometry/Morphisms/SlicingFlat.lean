@@ -39,6 +39,8 @@ fibres (Stacks `057I`), and it contains a point over `x`.
 - `AlgebraicGeometry.exists_mem_smoothLocus_of_geometricallyReduced`: smooth points are dense in
   the fibres of a flat morphism, locally of finite presentation, with geometrically reduced
   fibres.
+- `AlgebraicGeometry.preimage_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
+  connected component of a section commutes with base change (Stacks `055M`).
 - `AlgebraicGeometry.isOpen_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a flat morphism of finite presentation with geometrically
   reduced fibres is open (Stacks `055R`).
@@ -137,6 +139,110 @@ theorem exists_mem_smoothLocus_of_geometricallyReduced {X S : Scheme.{u}} (f : X
     (f.fiberι (f x) ⁻¹ᵁ U).2 ⟨f.asFiber x, by simpa using hx⟩
   exact ⟨f.fiberι _ w, hwU, (f.range_fiberι _).subset ⟨w, rfl⟩,
     f.fiberι_mem_smoothLocus hw⟩
+
+/-- The connected component of a point `x` in the fibre of a morphism `f` locally of finite type
+is open in that fibre: it is cut out on the fibre by an open subset of `X`. -/
+theorem Scheme.Hom.exists_opens_inter_preimage_eq_connectedComponentIn {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [LocallyOfFiniteType f] (y : Y) (x : X) :
+    ∃ U : X.Opens, (U : Set X) ∩ f ⁻¹' {y} = connectedComponentIn (f ⁻¹' {y}) x := by
+  by_cases hx : x ∈ f ⁻¹' {y}
+  · obtain ⟨t, ht, hct⟩ := isOpen_induced_iff.mp
+      (isOpen_connectedComponent (x := (⟨x, hx⟩ : f ⁻¹' {y})))
+    refine ⟨⟨t, ht⟩, ?_⟩
+    rw [connectedComponentIn_eq_image hx, ← hct, Set.image_preimage_eq_inter_range,
+      Subtype.range_coe]
+    rfl
+  · exact ⟨⊥, by simp [connectedComponentIn_eq_empty hx]⟩
+
+/-- Let `q : U ⟶ Y` be a morphism whose fibre over `g y'` is connected and has a rational point
+`s`. Then the fibre over `y'` of the base change of `q` along `g : Y' ⟶ Y` is connected: the
+fibre of `q` is a connected scheme over `κ(g y')` with a rational point, hence geometrically
+connected (Stacks `04KV`), and the fibre over `y'` of the base change is its base change to
+`κ(y')`. -/
+theorem isConnected_preimage_singleton_of_isPullback {P U Y Y' : Scheme.{u}} {fst : P ⟶ U}
+    {snd : P ⟶ Y'} {q : U ⟶ Y} {g : Y' ⟶ Y} (h : IsPullback fst snd q g) (y' : Y')
+    (s : Spec (Y.residueField (g y')) ⟶ U) (hs : s ≫ q = Y.fromSpecResidueField (g y'))
+    (hq : _root_.IsPreconnected (q ⁻¹' {g y'})) : _root_.IsConnected (snd ⁻¹' {y'}) := by
+  let s' : Spec (Y.residueField (g y')) ⟶ q.fiber (g y') :=
+    pullback.lift s (𝟙 _) (by simp [hs])
+  have : Nonempty (q ⁻¹' {g y'}) := ⟨q.fiberHomeo _ (s' (Nonempty.some inferInstance))⟩
+  have : PreconnectedSpace (q ⁻¹' {g y'}) := isPreconnected_iff_preconnectedSpace.mp hq
+  have : ConnectedSpace (q ⁻¹' {g y'}) := ⟨inferInstance⟩
+  have : ConnectedSpace (q.fiber (g y')) := (q.fiberHomeo _).connectedSpace_iff.mpr inferInstance
+  have : ConnectedSpace (snd.fiber y') :=
+    (GeometricallyConnected.of_connectedSpace_of_section (q.fiberToSpecResidueField (g y')) s'
+      (pullback.lift_snd _ _ _)).geometrically_connectedSpace _ _ _
+      (isPullback_fiberToSpecResidueField_of_isPullback h y')
+  exact isConnected_iff_connectedSpace.mpr ((snd.fiberHomeo y').connectedSpace_iff.mp this)
+
+/-- **The relative connected component commutes with base change** (Stacks `055M`). Let
+`f : X ⟶ Y` be locally of finite type with a section `σ`, and let `g : Y' ⟶ Y`. A point `x'` of
+`X ×_Y Y'` lies in the connected component of the base-changed section in its fibre if and only
+if its image in `X` lies in the connected component of `σ` in its fibre.
+
+Write `y'` for the image of `x'` in `Y'` and `y = g y'`. The image in `X` of the component of the
+section in the fibre over `y'` is connected, so lies in the component `C` of `σ y`. Conversely,
+`C` is cut out on the fibre over `y` by an open `U ⊆ X`, and the fibre over `y'` of the base
+change of `U ⟶ Y` is connected by `isConnected_preimage_singleton_of_isPullback`. -/
+@[stacks 055M]
+theorem preimage_setOf_mem_connectedComponentIn_preimage_singleton {X Y Y' : Scheme.{u}}
+    (f : X ⟶ Y) [LocallyOfFiniteType f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) (g : Y' ⟶ Y) :
+    pullback.fst f g ⁻¹' {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} =
+      {x' | x' ∈ connectedComponentIn (pullback.snd f g ⁻¹' {pullback.snd f g x'})
+        (pullback.lift (g ≫ σ) (𝟙 Y') (by simp [hσ]) (pullback.snd f g x'))} := by
+  ext x'
+  set y' := pullback.snd f g x'
+  have hgσ : (g ≫ σ) ≫ f = 𝟙 Y' ≫ g := by simp [hσ]
+  set p := pullback.lift (g ≫ σ) (𝟙 Y') hgσ y'
+  have hfx : f (pullback.fst f g x') = g y' := by
+    rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
+  have hp₁ : pullback.fst f g p = σ (g y') := by
+    rw [← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply]
+  have hp₂ : pullback.snd f g p = y' := by
+    rw [← Scheme.Hom.comp_apply, pullback.lift_snd]
+    rfl
+  have hσy (y : Y) : f (σ y) = y := by
+    rw [← Scheme.Hom.comp_apply, hσ]
+    rfl
+  simp only [Set.mem_preimage, Set.mem_ofPred_eq, hfx]
+  constructor
+  · intro hx
+    obtain ⟨U, hU⟩ := f.exists_opens_inter_preimage_eq_connectedComponentIn (g y') (σ (g y'))
+    have hσU : σ (g y') ∈ U := (hU.ge (mem_connectedComponentIn (hσy _))).1
+    let W := pullback.fst f g ⁻¹ᵁ U
+    have hW := (isPullback_morphismRestrict (pullback.fst f g) U).paste_vert
+      (IsPullback.of_hasPullback f g)
+    have hs := IsOpenImmersion.lift_fac U.ι (Y.fromSpecResidueField (g y') ≫ σ) (by
+      rintro _ ⟨z, rfl⟩
+      rw [Scheme.Opens.range_ι, Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply]
+      exact hσU)
+    have hq : _root_.IsPreconnected ((U.ι ≫ f) ⁻¹' {g y'}) := by
+      rw [← U.ι.isOpenEmbedding.isInducing.isPreconnected_image, Scheme.Hom.comp_base,
+        TopCat.coe_comp, Set.preimage_comp, Set.image_preimage_eq_inter_range,
+        Scheme.Opens.range_ι, Set.inter_comm, hU]
+      exact isPreconnected_connectedComponentIn
+    have hconn := (isConnected_preimage_singleton_of_isPullback hW y' _
+      (by rw [← Category.assoc, hs, Category.assoc, hσ, Category.comp_id]) hq)
+    have hmem (z) (hzU : pullback.fst f g z ∈ U) (hz : pullback.snd f g z = y') :
+        z ∈ W.ι '' ((W.ι ≫ pullback.snd f g) ⁻¹' {y'}) := by
+      obtain ⟨w, rfl⟩ : z ∈ Set.range W.ι := by
+        rw [Scheme.Opens.range_ι]
+        exact hzU
+      exact ⟨w, by simpa using hz, rfl⟩
+    refine (hconn.isPreconnected.image _ W.ι.continuous.continuousOn).subset_connectedComponentIn
+      (hmem p (hp₁ ▸ hσU) hp₂) ?_ (hmem x' (hU.ge hx).1 rfl)
+    rintro _ ⟨w, hw, rfl⟩
+    simpa using hw
+  · intro hx
+    refine (isPreconnected_connectedComponentIn.image _
+      (pullback.fst f g).continuous.continuousOn).subset_connectedComponentIn ?_ ?_
+      ⟨x', hx, rfl⟩
+    · exact ⟨p, mem_connectedComponentIn hp₂, hp₁⟩
+    · rintro _ ⟨z, hz, rfl⟩
+      have hz' : z ∈ pullback.snd f g ⁻¹' {y'} := connectedComponentIn_subset _ _ hz
+      rw [Set.mem_preimage, Set.mem_singleton_iff] at hz'
+      rw [Set.mem_preimage, Set.mem_singleton_iff, ← Scheme.Hom.comp_apply, pullback.condition,
+        Scheme.Hom.comp_apply, hz']
 
 /-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
 be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a section of
