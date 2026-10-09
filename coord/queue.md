@@ -1,14 +1,12 @@
 # Work queue
 
-559 items; claim with `tools/claim.py next <group> [--stage N]`.
+558 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (544)
+## Stage 1: nodes to split (542)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `prop-weil-pbc-algebraically-closed-extension` | 1003 | sorry_here |
-| `prop-weil-pbc-p1-strict-henselian-comparison` | 1003 | none |
-| `def-weil-pbc-symmetric-product-morphism` | 1004 | none |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1004 | none |
 | `lem-weil-pbc-curve-constructible-reduction` | 1004 | none |
 | `lem-weil-pbc-curve-dense-open-localization` | 1004 | none |
@@ -35,7 +33,7 @@
 | `lemma-weil-pbc-finite-pushforward-extension-zero` | 1004 | none |
 | `lemma-weil-pbc-normalization-exact-sequence` | 1004 | none |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1004 | none |
-| `prop-weil-pbc-p1-acyclicity` | 1004 | none |
+| `prop-weil-pbc-p1-acyclicity` | 1004 | sorry_here |
 | `thm-sc-main` | 1004 | none |
 | `def-weil-pbc-extension-by-zero` | 1005 | none |
 | `def-weil-pbc-finite-open-comparison` | 1005 | none |
@@ -50,9 +48,9 @@
 | `lem-sc-c8` | 1005 | none |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1005 | none |
 | `lemma-weil-pbc-finite-open-comparison-inverse` | 1005 | none |
-| `lemma-weil-pbc-h1-constructible-representation` | 1005 | none |
+| `lemma-weil-pbc-h1-constructible-representation` | 1005 | sorry_here |
 | `lemma-weil-pbc-h1-torsor-comparison` | 1005 | none |
-| `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | none |
+| `lemma-weil-pbc-injective-restriction-acyclicity` | 1005 | sorry_here |
 | `def-cbc-open-immersion-square` | 1006 | none |
 | `def-weil-pbc-etale-constructible-sheaf` | 1006 | none |
 | `lemma-weil-pbc-constructible-approximation` | 1006 | none |
@@ -551,13 +549,14 @@
 | `pqf-lem-qs-intersection-qc` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 
-## Stage 2: nodes to state (15)
+## Stage 2: nodes to state (16)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
+| `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
@@ -571,7 +570,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 559 nodes that wait for stage 1, 76 nodes that wait for a statement dependency.
+Not open yet: 557 nodes that wait for stage 1, 77 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

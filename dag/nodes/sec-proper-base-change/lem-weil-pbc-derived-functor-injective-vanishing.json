@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-derived-functor-injective-vanishing",
+ "kind": "statement",
+ "title": "Higher right derived functors vanish on injective objects",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives, $\\mathcal B$ an abelian category [def-sp-abelian], $v:\\mathcal A\\to\\mathcal B$ an additive (for instance left exact) functor with right derived functors $R^nv$ computed by injective resolutions [def-sp-left-exact-additive]. If $I$ is an injective object of $\\mathcal A$ [def-sp-injective-resolutions], then $R^nv(I)=0$ for every $n>0$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015B (lemma-higher-derived-functors), part (3)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor vanishes on injective objects in positive degree",
+   "results": "Functor.isZero_rightDerived_obj_injective_succ (Mathlib.CategoryTheory.Abelian.RightDerived), Functor.isZero_leftDerived_obj_projective_succ, Functor.rightDerived, instIsIsoAppToRightDerivedZeroOfInjective",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "results": "(F : C ⥤ D) [F.Additive] (n : ℕ) (X : C) [Injective X] : IsZero ((F.rightDerived (n + 1)).obj X), Mathlib.CategoryTheory.Abelian.RightDerived",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 150,160p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "results": "line 153: lemma Functor.isZero_rightDerived_obj_injective_succ, proved from the resolution InjectiveResolution.self X; Functor.rightDerived (line 110) is the homology of F applied to a chosen injective resolution (isoRightDerivedObj, line 114), as in def-sp-left-exact-additive",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+  "file": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "how": "exact: for F := v (additive), n+1 for n>0, X := I with [Injective I]; Mathlib's F.rightDerived n is the n-th cohomology of F applied to an injective resolution (InjectiveResolution.isoRightDerivedObj), i.e. R^nv of def-sp-left-exact-additive; HasInjectiveResolutions follows from EnoughInjectives (instance InjectiveResolution.instHasInjectiveResolution / HasInjectiveResolutions)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

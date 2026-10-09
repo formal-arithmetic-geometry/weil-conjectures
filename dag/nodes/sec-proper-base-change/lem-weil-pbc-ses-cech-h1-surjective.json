@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-ses-cech-h1-surjective",
+ "kind": "statement",
+ "title": "Vanishing Cech H^1 of the kernel on a cofinal system of coverings makes sections surjective",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], and let $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal H\\to0$ be a short exact sequence in the abelian category $\\Ab(X_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Let $U$ be an object of $X_{\\Et}$ and suppose there is a set $\\Sigma$ of coverings of $U$ in $X_{\\Et}$ which is cofinal (every covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ is refined by some $\\{U_i\\to U\\}_{i\\in I}\\in\\Sigma$: for every $i$ there are $j$ and a morphism $U_i\\to V_j$ over $U$) and such that $\\check H^1(\\mathcal U,\\mathcal F)=0$ for every $\\mathcal U\\in\\Sigma$ (Cech cohomology [def-weil-pbc-cech-complex]). Then $\\mathcal G(U)\\to\\mathcal H(U)$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F8 (lemma-ses-cech-h1) and its proof (local lifts of a section of H on a covering, a refinement in the cofinal system, the Cech 1-cocycle of differences, correction by a 0-cochain, gluing in G)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of sheaves, vanishing first Cech cohomology on cofinal coverings implies surjective on sections",
+   "results": "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Sheaf.existsUnique_gluing, Sheaf.locallySurjective, TopCat.Presheaf.IsSheafUniqueGluing, Sheaf.isLocallySurjective_iff_epi', MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism of abelian sheaves G → H, Čech H^1 of kernel vanishes for cofinal coverings, then G(U) → H(U) is surjective",
+   "results": "Sheaf.epi_of_isLocallySurjective('), Sheaf.isLocallySurjective_iff_epi('), the locally surjective/injective factorization, MayerVietorisSquare epi instance: only \"epi = locally surjective\", not the global lifting",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean; grep -rn 'cofinal\\|Cofinal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+   "results": "NonabelianCohomology/H1.lean defines OneCocycle/H1 of a presheaf of groups on a family and lists this exact statement under TODO (\"show that if 1 → G1 → G2 → G3 → 1 is a short exact sequence of sheaves of groups, and x3 ... can be locally lifted ... trivial iff x3 can be lifted\"; \"deduce a similar result for abelian sheaves\"); no cofinal-system lemma in Sites",
+   "date": "2026-10-09",
+   "verdict": "no match (Mathlib TODO)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

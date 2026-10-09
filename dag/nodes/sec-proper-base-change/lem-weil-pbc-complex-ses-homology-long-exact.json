@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-complex-ses-homology-long-exact",
+ "kind": "statement",
+ "title": "Long exact cohomology sequence of a short exact sequence of cochain complexes",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] and $0\\to K_1\\xrightarrow{f}K_2\\xrightarrow{g}K_3\\to0$ a sequence of cochain complexes of $\\mathcal C$ (indexed by $\\mathbf N$ or $\\mathbf Z$) which is short exact in each degree. Then there are morphisms $\\delta^n:H^n(K_3)\\to H^{n+1}(K_1)$ such that $\\cdots\\to H^n(K_1)\\xrightarrow{H^n(f)}H^n(K_2)\\xrightarrow{H^n(g)}H^n(K_3)\\xrightarrow{\\delta^n}H^{n+1}(K_1)\\xrightarrow{H^{n+1}(f)}H^{n+1}(K_2)\\to\\cdots$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 0117 (homology-lemma-long-exact-sequence-cochain), via the snake lemma"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact homology sequence of a short exact sequence of homological complexes",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₅(_exact) (Mathlib.Algebra.Homology.HomologySequenceLemmas), ShortComplex.ShortExact.homology_exact₃, ShortComplex.ShortExact.δ (Mathlib.Algebra.Homology.HomologySequence), HomologicalComplex.opcycles_right_exact",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+   "results": "(hS : S.ShortExact) (i : ι) : exactness of S.X₁.homology i → S.X₂.homology i → S.X₃.homology i, Mathlib.Algebra.Homology.HomologySequence",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence of right derived functors R^n F of a left exact functor associated to a short exact sequence 0 → A → B → C → 0",
+   "results": "also returned HomologicalComplex.HomologySequence.composableArrows₂_exact and composableArrows₅_exact (long exact homology sequence of a short exact sequence of complexes)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def δ\\|lemma homology_exact\\|composableArrows₅_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologySequence.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologySequenceLemmas.lean",
+   "results": "HomologySequence.lean:292 ShortExact.δ, :303 homology_exact₁, :309 homology_exact₂, :324 homology_exact₃; HomologySequenceLemmas.lean:82 composableArrows₅_exact",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+  "file": "Mathlib/Algebra/Homology/HomologySequence.lean",
+  "how": "one Mathlib lemma per position of the sequence: for S : ShortComplex (HomologicalComplex C c) with hS : S.ShortExact (degreewise short exactness gives S.ShortExact by HomologicalComplex.shortExact_iff_degreewise_shortExact), c = ComplexShape.up ℕ or up ℤ, j = i+1: the connecting map is hS.δ i j (line 292); exactness at H^i(K_2) is homology_exact₂ (line 309), at H^i(K_3) homology_exact₃ (line 324), at H^{i+1}(K_1) homology_exact₁ (line 303)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

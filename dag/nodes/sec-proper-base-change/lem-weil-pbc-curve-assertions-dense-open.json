@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-curve-assertions-dense-open",
+ "kind": "statement",
+ "title": "The eight curve assertions and restriction to a dense open",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $X$ be a separated scheme of finite type over $k$ with $\\dim X\\le1$, and let $F$ be a torsion abelian sheaf on $X_{\\Et}$ which is constructible [def-weil-pbc-constructible-torsion], so that $(X,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting]. Let $j:X'\\hookrightarrow X$ be the inclusion of a dense open subscheme, $j^{-1}F$ the restriction of $F$ to $X'$ [def-weil-pbc-inverse-image] and $j_!j^{-1}F$ its extension by zero [def-weil-pbc-extension-by-zero], again a constructible torsion sheaf on $X_{\\Et}$. Then the eight assertions $\\mathcal C(X,F)$ of [def-weil-pbc-eight-curve-assertions] hold if and only if $\\mathcal C(X,j_!j^{-1}F)$ hold.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Section 03SB (section-vanishing-torsion), Lemma 0GJA (lemma-restrict-to-open), with Situation 0A52; the proof uses the sequence of Lemma 095L (lemma-ses-associated-to-open), Proposition 03QP and the Leray spectral sequence for the closed immersion of the finite set Z = X \\ X' of k-points"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-eight-curve-assertions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence j_! j^* F → F → i_* i^* F open closed complement sheaves",
+   "results": "CategoryTheory.ShortComplex.ShortExact, ShortExact.exact, ShortExact.mk' (Mathlib.Algebra.Homology.ShortComplex.ShortExact); exact_iff_kernel_ι_comp_cokernel_π_zero. Generic short complexes only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero along an open immersion of sheaves, exact sequence with restriction to closed complement",
+   "results": "AlgebraicGeometry.liftCoborder_app, IsOpenImmersion.ΓIso, Scheme.Modules.restrict, restrict_map, SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app: restriction of structure/module sheaves only; no extension by zero of etale sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'lowerShriek\\|extensionByZero\\|extension by zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only NumberTheory/MulChar/Basic.lean (unrelated 'extension by zero' of characters); no j_! on etale sites, no curve assertions",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smallEtale\"",
+   "results": "Mathlib.AlgebraicGeometry.Sites.Etale: Scheme.smallEtaleTopology, smallEtalePretopology, ofArrows_mem_smallEtaleTopology_iff; Mathlib.AlgebraicGeometry.Sites.AffineEtale: dense-subsite and sheafification instances. Only the site; no etale cohomology of schemes, no pullback map, no curve results",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Mathlib.CategoryTheory.Sites.SheafCohomology.Basic: Sheaf.H (Ext from the constant sheaf), Sheaf.H.map, subsingleton_H_of_isZero, H.equiv0. Generic sheaf cohomology on a site; nothing about curves, finite morphisms, extension by zero or base field extension",
+   "date": "2026-10-09",
+   "verdict": "no match (generic ingredient only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-algebraically-closed-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

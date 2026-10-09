@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-curve-assertions-retract",
+ "kind": "statement",
+ "title": "The eight curve assertions pass to retracts",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $X$ be a separated scheme of finite type over $k$ with $\\dim X\\le1$, and let $G$, $H$ be torsion abelian sheaves on $X_{\\Et}$, so that $(X,G)$ and $(X,H)$ are curve coefficient pairs [def-weil-pbc-curve-setting]. Let $a:G\\to H$ and $b:H\\to G$ be morphisms of abelian sheaves with $b\\circ a$ an automorphism of $G$. Assume that $H$ is constructible whenever $G$ is [def-weil-pbc-constructible-torsion], that $H$ is torsion prime to $\\operatorname{char}k$ whenever $G$ is, and that $H$ is $p$-primary whenever $\\operatorname{char}k=p>0$ and $G$ is $p$-primary [def-weil-pbc-primary-torsion]. If the eight assertions $\\mathcal C(X,H)$ of [def-weil-pbc-eight-curve-assertions] hold, then $\\mathcal C(X,G)$ hold.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Section 03SB, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit in Stacks)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-eight-curve-assertions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology of a direct summand (retract) is a retract of the cohomology; isomorphism passes to retracts",
+   "results": "CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, isSplitMono_from_singleFunctor_obj_of_injective, HomologicalComplex.instIsStableUnderRetractsQuasiIso, quasiIsoAt_of_retract, ShortComplex.quasiIso_of_retract: retract stability of quasi-isomorphisms; nothing on etale curve cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match (generic ingredient)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a retract of an isomorphism is an isomorphism; direct summand of a finite group is finite",
+   "results": "CategoryTheory.Retract.ofIso, Iso.retract, MorphismProperty.IsStableUnderRetracts.isomorphisms (Mathlib.CategoryTheory.MorphismProperty.Retract), Iso.retract_r, Iso.retract_i",
+   "date": "2026-10-09",
+   "verdict": "no match (IsStableUnderRetracts.isomorphisms is the categorical ingredient of the C6/C7 part only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'IsStableUnderRetracts.isomorphisms' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "CategoryTheory/MorphismProperty/Retract.lean only",
+   "date": "2026-10-09",
+   "verdict": "no match (generic ingredient)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smallEtale\"",
+   "results": "Mathlib.AlgebraicGeometry.Sites.Etale: Scheme.smallEtaleTopology, smallEtalePretopology, ofArrows_mem_smallEtaleTopology_iff; Mathlib.AlgebraicGeometry.Sites.AffineEtale: dense-subsite and sheafification instances. Only the site; no etale cohomology of schemes, no pullback map, no curve results",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Mathlib.CategoryTheory.Sites.SheafCohomology.Basic: Sheaf.H (Ext from the constant sheaf), Sheaf.H.map, subsingleton_H_of_isZero, H.equiv0. Generic sheaf cohomology on a site; nothing about curves, finite morphisms, extension by zero or base field extension",
+   "date": "2026-10-09",
+   "verdict": "no match (generic ingredient only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-algebraically-closed-extension",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

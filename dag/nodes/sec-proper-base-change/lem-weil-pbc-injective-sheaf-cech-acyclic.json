@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-injective-sheaf-cech-acyclic",
+ "kind": "statement",
+ "title": "An injective abelian sheaf on the small etale site has vanishing higher Cech cohomology for every covering",
+ "statement": "Let $X$ be a scheme, $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site], and let $\\mathcal I$ be an injective object [def-sp-injective-resolutions] of the category $\\Ab(X_{\\Et})$ of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Then for every object $U$ of $X_{\\Et}$ and every covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ of $U$ in $X_{\\Et}$ (finite or not), the Cech cohomology [def-weil-pbc-cech-complex] satisfies $\\check H^p(\\mathcal U,\\mathcal I)=0$ for all $p>0$. (Stacks states this for any site, together with $\\check H^0(\\mathcal U,\\mathcal I)=\\mathcal I(U)$, which is not needed here.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AW (lemma-injective-trivial-cech) and its proof: Lemma Tag 03F6 (lemma-injective-abelian-sheaf-injective-presheaf: an injective abelian sheaf is an injective abelian presheaf) and the first part of the proof of Lemma Tag 03AU (lemma-cech-cohomology-derived-presheaves: Hom(Z_{U,.}, I) is the Cech complex, Lemma Tag 03AS, and Z_{U,.} is exact in positive degrees, Lemma Tag 03AT). The module version for Mod(X_et,R) is carried out in steps 1-3 of lem-weil-pbc-injective-module-abelian-acyclic, through lem-weil-pbc-free-cech-complex-exact and lem-weil-pbc-injective-module-injective-presheaf; the case R = Z is this statement up to the identification Ab(X_et) = Mod(X_et, Z)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective abelian sheaf has vanishing higher Cech cohomology for every covering",
+   "results": "InjectiveResolution.instHasInjectiveResolution, Sheaf.mono_of_injective, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, Sheaf.IsLocallyInjective, InjectiveResolution.of: nothing on Cech cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Čech cohomology of an injective sheaf of abelian groups vanishes in positive degrees for any covering",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI, InjectiveResolution.instInjectiveXIntCochainComplex, CochainComplex.isKInjective_of_injective, Sheaf.cohomologyPresheaf, InjectiveResolution.instIsKInjectiveCochainComplex: none about the Cech complex",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "only the definition (Mathlib.CategoryTheory.Sites.SheafCohomology.Cech); no lemma about it, in particular none for injective sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'cech' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rn 'Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean",
+   "results": "Cech files: SheafCohomology/Cech.lean (definition cechComplexFunctor only), NonabelianCohomology/H1.lean (degree-1 cochains of a presheaf of groups); injective sheaves in SheafCohomology only at Basic.lean:97 (Subsingleton (H F (n+1)) for injective F, derived-functor not Cech vanishing)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

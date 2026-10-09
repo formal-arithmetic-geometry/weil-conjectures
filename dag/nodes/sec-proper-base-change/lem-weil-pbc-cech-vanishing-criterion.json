@@ -13,9 +13,110 @@
   "def-sp-left-exact-additive",
   "def-weil-pbc-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the induction).** Fix $\\mathcal B$ and $\\mathrm{Cov}$ satisfying (1) and (2). Call an abelian sheaf $\\mathcal G\\in\\Ab(X_{\\Et})$ *Cech-acyclic on* $\\mathrm{Cov}$ if $\\check H^p(\\mathcal U,\\mathcal G)=0$ for all $p>0$ and all $\\mathcal U\\in\\mathrm{Cov}$, i.e. if $\\mathcal G$ satisfies (3). For $p\\geq1$ let $P(p)$ be the assertion: for every abelian sheaf $\\mathcal G$ Cech-acyclic on $\\mathrm{Cov}$ and every $U\\in\\mathcal B$, $H^p(U,\\mathcal G)=0$. We prove $P(p)$ for all $p\\geq1$ by induction on $p$, the assertion being quantified over all such $\\mathcal G$ at once (Steps 2-6 for a fixed $\\mathcal G$, Step 7 the induction); the lemma is $P(p)$ for $\\mathcal G=\\mathcal F$, which is Cech-acyclic on $\\mathrm{Cov}$ by (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof (\"Since F was an arbitrary abelian sheaf with vanishing higher Cech cohomology ... And so on and so forth\")"
+   }
+  },
+  {
+   "text": "**Step 2 (embedding into an injective).** Let $\\mathcal G$ be Cech-acyclic on $\\mathrm{Cov}$. Since $\\Ab(X_{\\Et})$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], choose a monomorphism $\\mathcal G\\to\\mathcal I$ with $\\mathcal I$ an injective object of $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions], and let $\\mathcal Q=\\mathcal I/\\mathcal G$ be its cokernel in the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], so that $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$ is a short exact sequence of abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof, first paragraph (\"Choose an embedding F -> I into an injective abelian sheaf ... Q = I/F\")"
+   }
+  },
+  {
+   "text": "**Step 3 ($\\mathcal I$ is Cech-acyclic).** By [lem-weil-pbc-injective-sheaf-cech-acyclic], $\\check H^p(\\mathcal U,\\mathcal I)=0$ for every $p>0$ and every covering $\\mathcal U$ of $X_{\\Et}$, in particular for every $\\mathcal U\\in\\mathrm{Cov}$.",
+   "uses": [
+    "lem-weil-pbc-injective-sheaf-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof (\"By Lemma 03AW I has vanishing higher Cech cohomology for any U in Cov\")"
+   }
+  },
+  {
+   "text": "**Step 4 (sections over objects of $\\mathcal B$).** Let $U\\in\\mathcal B$. The sequence $0\\to\\mathcal G(U)\\to\\mathcal I(U)\\to\\mathcal Q(U)\\to0$ is exact. Exactness at $\\mathcal G(U)$ and $\\mathcal I(U)$: apply the long exact sequence of the right derived functors of the left exact functor $v=\\Gamma(U,-):\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [lem-weil-pbc-derived-functor-long-exact] to the sequence of Step 2; its beginning $0\\to R^0v(\\mathcal G)\\to R^0v(\\mathcal I)\\to R^0v(\\mathcal Q)$ is exact, and $R^0v\\cong v$ naturally [lem-sp-derived-well-defined], so $0\\to\\mathcal G(U)\\to\\mathcal I(U)\\to\\mathcal Q(U)$ is exact. Surjectivity of $\\mathcal I(U)\\to\\mathcal Q(U)$: by (2) the coverings of $U$ belonging to $\\mathrm{Cov}$ form a cofinal system of coverings of $U$, and for each of them $\\check H^1(\\mathcal U,\\mathcal G)=0$ because $\\mathcal G$ is Cech-acyclic on $\\mathrm{Cov}$; so [lem-weil-pbc-ses-cech-h1-surjective], applied to $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$ and this cofinal system, gives that $\\mathcal I(U)\\to\\mathcal Q(U)$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sp-derived-well-defined",
+    "lem-weil-pbc-ses-cech-h1-surjective",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof (\"By Lemma 03F8 and our assumption (2) this sequence gives rise to an exact sequence 0 -> F(U) -> I(U) -> Q(U) -> 0 for every U in B\")"
+   }
+  },
+  {
+   "text": "**Step 5 (short exact sequence of Cech complexes).** Let $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}\\in\\mathrm{Cov}$. The morphisms $\\mathcal G\\to\\mathcal I\\to\\mathcal Q$ induce morphisms of Cech complexes $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)$ (functoriality of the Cech complex [def-weil-pbc-cech-complex]). In degree $p$ this is the product over $(i_0,\\ldots,i_p)\\in I^{p+1}$ of the sequences $0\\to\\mathcal G(V)\\to\\mathcal I(V)\\to\\mathcal Q(V)\\to0$ with $V=U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$; by (1) every such $V$ lies in $\\mathcal B$, so each factor is short exact by Step 4, and a product of short exact sequences of abelian groups is short exact (kernels and images of a product of homomorphisms are the products of the kernels and images). Hence $0\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)\\to0$ is a short exact sequence of cochain complexes of abelian groups, short exactness of complexes being degreewise [lem-weil-pbc-cochain-complexes-degreewise-exact].",
+   "uses": [
+    "def-weil-pbc-cech-complex",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof (\"Hence for any U in Cov we get a short exact sequence of Cech complexes ... since each term in the Cech complex is made up out of a product of values over elements of B by assumption (1)\")"
+   }
+  },
+  {
+   "text": "**Step 6 ($\\mathcal Q$ is Cech-acyclic).** For $\\mathcal U\\in\\mathrm{Cov}$, the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] of the short exact sequence of Step 5 contains, for each $p\\geq1$, the exact piece $\\check H^p(\\mathcal U,\\mathcal I)\\to\\check H^p(\\mathcal U,\\mathcal Q)\\xrightarrow{\\delta^p}\\check H^{p+1}(\\mathcal U,\\mathcal G)$. The left term is $0$ by Step 3 and the right term is $0$ since $\\mathcal G$ is Cech-acyclic on $\\mathrm{Cov}$ and $p+1>0$; so $\\check H^p(\\mathcal U,\\mathcal Q)=0$. Thus $\\mathcal Q$ is again an abelian sheaf Cech-acyclic on $\\mathrm{Cov}$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof (\"In particular we have a long exact sequence of Cech cohomology groups ... This implies that Q is also an abelian sheaf with vanishing higher Cech cohomology for all U in Cov\")"
+   }
+  },
+  {
+   "text": "**Step 7 (dimension shifting).** Let $U\\in\\mathcal B$ and apply the long exact sequence of the derived functors $H^n(U,-)=R^n\\Gamma(U,-)$ [lem-weil-pbc-derived-functor-long-exact] to $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$; since $\\mathcal I$ is injective, $H^n(U,\\mathcal I)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing]. Case $p=1$: the piece $H^0(U,\\mathcal I)\\to H^0(U,\\mathcal Q)\\to H^1(U,\\mathcal G)\\to H^1(U,\\mathcal I)=0$ is exact, and under $H^0(U,-)\\cong\\Gamma(U,-)$ [lem-sp-derived-well-defined] its first map is $\\mathcal I(U)\\to\\mathcal Q(U)$, surjective by Step 4; hence $H^1(U,\\mathcal G)=0$. This holds for every $\\mathcal G$ Cech-acyclic on $\\mathrm{Cov}$ and every $U\\in\\mathcal B$, which is $P(1)$. Case $p\\geq2$, assuming $P(p-1)$: the piece $H^{p-1}(U,\\mathcal Q)\\to H^p(U,\\mathcal G)\\to H^p(U,\\mathcal I)=0$ is exact, and $H^{p-1}(U,\\mathcal Q)=0$ by $P(p-1)$ applied to $\\mathcal Q$, which is Cech-acyclic on $\\mathrm{Cov}$ by Step 6; hence $H^p(U,\\mathcal G)=0$, which is $P(p)$. By induction $P(p)$ holds for all $p\\geq1$; with $\\mathcal G=\\mathcal F$ (Step 1) this is the lemma.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, proof, last paragraph (long exact cohomology sequence; H^n(U,I)=0 for n>0 by Derived Categories Lemma 015B; H^1(U,F)=0; H^1(U,Q)=0; H^2(U,F)=0, and so on)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sp-derived-well-defined",
+  "lem-weil-pbc-ses-cech-h1-surjective",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +148,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +168,11 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks sites-cohomology Lemma 03F9 (for the small etale site; kept). The proof follows Stacks' proof exactly, which does not use the Cech-to-cohomology spectral sequence 03AZ but dimension shifting: embed into an injective abelian sheaf (enough injectives: lem-weil-pbc-module-sheaves-enough-injectives, whose statement includes Ab(X_et)), injective sheaves are Cech-acyclic (03AW, new node lem-weil-pbc-injective-sheaf-cech-acyclic), sections over objects of B are short exact by 03F8 (new node lem-weil-pbc-ses-cech-h1-surjective) and left exactness, a short exact sequence of Cech complexes by (1) and the long exact Cech sequence (new Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact) show the quotient is again Cech-acyclic, and the long exact sequence of derived functors (new node lem-weil-pbc-derived-functor-long-exact, Stacks 015B(1)) with vanishing on injectives (new Mathlib leaf lem-weil-pbc-derived-functor-injective-vanishing) gives the induction, quantified over all Cech-acyclic sheaves. lem-weil-pbc-cech-criterion (imported, unit sk-thm-properbasechange) is a finite-basis-covering variant for module sheaves with the same proof sketch; it is not used. lem-sc-cech-spectral (03AZ) is not used. The source repository's Cech criterion WeilConjectures/Topology/Sheaves/CechCriterion.lean (subsingleton_H_succ_of_exactAt_cechComplex, line 324, Stacks 01EV) is for topological spaces only; WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean (exists_cechToDerivedSpectralSequence :72, exists_cechDoubleComplex :100, both sorry; ..._of_enoughInjectives :119) states the spectral sequence for sites, not this criterion: no attachment."
+ }
 }

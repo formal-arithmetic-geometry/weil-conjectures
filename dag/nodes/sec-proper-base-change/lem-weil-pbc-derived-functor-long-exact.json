@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-derived-functor-long-exact",
+ "kind": "statement",
+ "title": "Long exact sequence of the right derived functors of a left exact functor",
+ "statement": "Let $\\mathcal A$ be an abelian category with enough injectives and $\\mathcal B$ an abelian category [def-sp-abelian], let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor and $R^nv$ ($n\\geq0$) its right derived functors, computed by injective resolutions [def-sp-left-exact-additive], [def-sp-injective-resolutions]. For every short exact sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ in $\\mathcal A$ there are morphisms $\\delta^n:R^nv(C)\\to R^{n+1}v(A)$ ($n\\geq0$) such that the sequence $0\\to R^0v(A)\\xrightarrow{R^0v(f)}R^0v(B)\\xrightarrow{R^0v(g)}R^0v(C)\\xrightarrow{\\delta^0}R^1v(A)\\to\\cdots\\to R^nv(A)\\xrightarrow{R^nv(f)}R^nv(B)\\xrightarrow{R^nv(g)}R^nv(C)\\xrightarrow{\\delta^n}R^{n+1}v(A)\\to\\cdots$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015B (lemma-higher-derived-functors), part (1) for complexes concentrated in degree 0, with part (2) for the start of the sequence; classically: horseshoe lemma (an injective resolution of B compatible with given resolutions of A and C, degreewise split) and the long exact cohomology sequence of the resulting short exact sequence of complexes v(I_A) -> v(I_B) -> v(I_C)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of right derived functors for a short exact sequence",
+   "results": "HomologicalComplex.opcycles_right_exact, Functor.rightDerived_map_eq, Functor.rightDerived, Abelian.Ext.covariantSequence_exact, Functor.IsRightDerivedFunctor, Functor.totalRightDerived: no connecting map for Functor.rightDerived",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.ShortComplex.ShortExact",
+   "results": "no results",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence of right derived functors R^n F of a left exact functor associated to a short exact sequence 0 → A → B → C → 0",
+   "results": "Abelian.Ext.mapExactFunctor(_hom), Abelian.Ext.covariantSequence_exact, Abelian.Ext.contravariantSequence_exact, HomologySequence.composableArrows₂_exact/₅_exact: long exact sequences for Ext and for complexes only",
+   "date": "2026-10-09",
+   "verdict": "no match (the Ext sequence covariantSequence_exact is the analogue for v = Hom(X,-) only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^noncomputable def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/RightDerived.lean; grep -rn 'rightDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'δ\\|delta\\|exact\\|connecting'",
+   "results": "RightDerived.lean has rightDerived, isoRightDerivedObj, isZero_rightDerived_obj_injective_succ, rightDerivedZeroIsoSelf, NatTrans.rightDerived; no connecting morphism or exactness lemma for rightDerived anywhere; DerivedCategory/RightDerivedFunctorPlus.lean defines rightDerivedFunctorPlus with \"TODO: show that this functor is triangulated\"",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cech-vanishing-criterion",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
