@@ -1,0 +1,52 @@
+{
+ "id": "def-weil-canonical-integral-factors",
+ "kind": "definition",
+ "title": "Canonical integral cohomological factors",
+ "statement": "Let $\\mathscr X=(X_0,d,X)$ be a smooth-proper datum over the finite-field datum $(p,a,q,k_0,k)$, and fix an indeterminate $T$. For every prime $\\ell\\neq p$ let $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))\\in\\Ql[T]$, $0\\leq i\\leq2d$, be the determinant factors of the smooth-proper cohomological family of $\\mathscr X$, and for $P=\\sum_rc_rT^r\\in\\mathbf Z[T]$ write $P^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$ for its coefficientwise extension. By [prop-integral-recovery] there is exactly one tuple $(P_0,\\ldots,P_{2d})\\in\\mathbf Z[T]^{2d+1}$ such that, for every $0\\leq i\\leq2d$, $P_i(0)=1$ and $P_i^{(\\ell)}=P_{i,\\ell}$ for every prime $\\ell\\neq p$; each $P_i$ is an integral realization-independent factor in degree $i$ in the sense of [def-weil-integral-frobenius-factor], normalized by $P_i(0)=1$. The *canonical integral cohomological factor* of $\\mathscr X$ in degree $i$ is the $i$-th member of this tuple, written $P_i(\\mathscr X)$, or simply $P_i$ once $\\mathscr X$ is fixed; thus $P_i(\\mathscr X)\\in\\mathbf Z[T]$ and $P_i(\\mathscr X)(0)=1$. The tuple depends only on $\\mathscr X$: it involves no choice of an algebraic closure of $\\mathbf Q$ or of an embedding comparing algebraic numbers with $\\ell$-adic numbers.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+  "place": "Definition [Canonical integral cohomological factors], label def:canonical-cohomological-factors, lines 3138-3149. The existence and uniqueness it rests on is Proposition [Existence and uniqueness of integral cohomological factors], label prop:integral-factor-existence, lines 3117-3135, whose statement is the first part of the master node prop-integral-recovery (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-integral-recovery.md). The master blueprint has no file for this definition; thm-weil-final.md refers to it by name."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-smooth-proper-datum",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-integral-frobenius-factor",
+  "prop-integral-recovery"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'weil\\|zeta' Mathlib/AlgebraicGeometry --include=*.lean; grep -rln -i 'etale cohomology\\|EtaleCohomology\\|EllAdic' Mathlib --include=*.lean",
+   "results": "no zeta function, Weil polynomial or Frobenius characteristic polynomial in Mathlib/AlgebraicGeometry; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:75 defines Scheme.EllAdicCohomology X ℓ n = Hⁿ(X, ℤ_ℓ) on the pro-étale site (no Frobenius action, no ℚ_ℓ-coefficients, no finiteness, no comparison between primes)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def charpolyRev' Mathlib/LinearAlgebra/Matrix/Charpoly",
+   "results": "Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:292 Matrix.charpolyRev M = det (1 - X • M.map C), with charpoly.reverse = charpolyRev (:295)",
+   "date": "2026-10-09",
+   "verdict": "no match: this is the shape of one ℓ-adic factor det(1 - T F_{i,ℓ}) once a basis is chosen, not an integral polynomial realized for every ℓ"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

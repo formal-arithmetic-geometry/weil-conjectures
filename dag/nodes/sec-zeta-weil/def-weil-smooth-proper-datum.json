@@ -1,0 +1,49 @@
+{
+ "id": "def-weil-smooth-proper-datum",
+ "kind": "definition",
+ "title": "Smooth-proper datum",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$, with $k_0=\\Fq$ and $k=\\Fbar$ its fixed algebraic closure. A *smooth-proper datum* $\\mathscr X=(X_0,d,X)$ consists of a $k_0$-scheme $X_0$ that is smooth, proper and geometrically connected, an integer $d\\geq0$ such that $X_0$ is smooth of pure dimension $d$ (its structure morphism is smooth and every irreducible component of $X_0\\times_{k_0}k$ has dimension $d$), and the geometric fiber $X=X_0\\times_{k_0}k$. When $X_0$ and $d$ are given, 'the resulting smooth-proper datum' is $(X_0,d,X_0\\times_{k_0}k)$. Every object later defined from $\\mathscr X$ (the cohomological family, the Frobenius characteristic factors, the canonical integral factors, the Betti numbers, the determinant constants, the Euler characteristic and the functional-equation sign) is a function of $\\mathscr X$, even when that argument is suppressed.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
+  "place": "Definition [Smooth-proper datum], label def:smooth-proper-datum, lines 2868-2876. The master blueprint has no file for it; literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md refers to it by name ('the resulting smooth-proper datum', '$\\mathscr X=(X_0,d,X)$ a smooth-proper datum')."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class GeometricallyConnected\\|^class GeometricallyIntegral\\|^class IsProper\\|^class SmoothOfRelativeDimension' Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:40 class GeometricallyConnected (f : X ⟶ Y); Geometrically/Integral.lean:40 class GeometricallyIntegral; Morphisms/Proper.lean:42 class IsProper (separated, universally closed, locally of finite type); Morphisms/Smooth.lean:135 class SmoothOfRelativeDimension (smooth of pure relative dimension d). Each component predicate exists for a structure morphism f : X_0 ⟶ Spec k.",
+   "date": "2026-10-09",
+   "verdict": "no match: the four component predicates exist, but no declaration bundles (X_0, d, X_0 ×_k k̄); the datum is the conjunction [SmoothOfRelativeDimension d f] [IsProper f] [GeometricallyConnected f] together with the base change of X_0 to an algebraic closure (the source repository's weil_conjectures uses [GeometricallyIntegral f] in place of geometric connectedness)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'smooth.*proper\\|proper.*smooth' Mathlib/AlgebraicGeometry --include=*.lean | grep -i 'structure\\|class'",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-final",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

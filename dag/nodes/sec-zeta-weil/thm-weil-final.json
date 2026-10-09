@@ -8,84 +8,128 @@
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
   "place": "node thm-weil-final, order 2939"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-datum",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-canonical-integral-factors",
+  "def-weil-point-counts-zeta",
+  "def-weil-formal-power-series",
+  "def-weil-rational-power-series",
+  "def-weil-rational-function-pole-order",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-reciprocal-roots",
+  "def-weil-numbers"
+ ],
  "proof": [
   {
-   "text": "The hypotheses make $\\mathscr X=(X_0,d,X)$ a smooth-proper datum, so all\ndegreewise factors and Frobenius operators in Definitions\n`[def-weil-smooth-proper-cohomological-family]` and\n*Frobenius characteristic factors* are available.",
+   "text": "*The datum and the factors.* Over the finite-field datum $(p,a,q,k_0=\\Fq,k)$ of [def-weil-finite-field-fiber], the hypotheses on $X_0$ are those of [def-weil-geometric-hypotheses] (smooth of pure dimension $d$, proper, geometrically connected), so $\\mathscr X=(X_0,d,X)$ with $X=X_0\\times_{\\Fq}k$ is a smooth-proper datum in the sense of [def-weil-smooth-proper-datum]. For every prime $\\ell\\neq p$ the smooth-proper cohomological family $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ of [def-weil-smooth-proper-cohomological-family] is therefore defined, with $V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}$ the geometric Frobenius $F$ restricted to it, and $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$; this determinant is what the statement writes $\\det(1-TF\\mid H^i(X,\\Ql))$ (the blueprint's 'Frobenius characteristic factors' are these $P_{i,\\ell}$). By [def-weil-canonical-integral-factors], the canonical factors $P_i=P_i(\\mathscr X)$, $0\\leq i\\leq2d$, are the members of the unique tuple in $\\mathbf Z[T]^{2d+1}$ with $P_i(0)=1$ and $(\\mathbf Z[T]\\to\\Ql[T])(P_i)=P_{i,\\ell}$ for every prime $\\ell\\neq p$. Theorem [thm-weil-final-integrality], applied to the same $X_0$, asserts that for each $i$ there is exactly one polynomial in $\\mathbf Z[T]$ with constant term $1$ whose coefficientwise extension equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))=P_{i,\\ell}$ for every $\\ell\\neq p$, and calls it the integral Frobenius factor of degree $i$. The canonical factor $P_i(\\mathscr X)$ has exactly this property, so by that uniqueness it is the integral Frobenius factor of degree $i$ of [thm-weil-final-integrality]. Theorems III, IV and V below are stated for 'the integral Frobenius factors provided by [thm-weil-final-integrality]', hence for these same $P_i$; so every clause below concerns the same $X_0$, $X$, $Z(X_0,T)$ and $P_i$ as the five theorems I--V.",
    "uses": [
-    "def-weil-smooth-proper-cohomological-family"
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-smooth-proper-datum",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-canonical-integral-factors",
+    "thm-weil-final-integrality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, first paragraph ('The hypotheses make $\\mathscr X=(X_0,d,X)$ a smooth-proper datum ...'); the identification of the canonical factors with the integral Frobenius factors of Theorem II is written out by the worker from Definition [Canonical integral cohomological factors] (literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, label def:canonical-cohomological-factors)"
+   }
   },
   {
-   "text": "*Clause (i).*\nDefinition [def-weil-point-counts-zeta] is the exponential point-counting\ndescription. Proposition [prop-euler-product] gives the closed-point\nEuler product and membership in $1+T\\mathbf Z[[T]]$. Proposition\n`prop-integral-recovery` gives the factorization by integral\npolynomials and hence $Z(X_0,T)\\in\\mathbf Q(T)$.\nThis proves exactly the two displayed descriptions and both coefficient\nclaims in (i).",
+   "text": "*Clause (i).* By [def-weil-point-counts-zeta] (with $Y_0=X_0$), $\\#X_0(\\mathbf F_{q^n})=N_n(X_0)$ and $Z(X_0,T)=\\exp\\bigl(\\sum_{n\\geq1}N_n(X_0)T^n/n\\bigr)\\in1+T\\mathbf Q[[T]]$; this is the first displayed equality of (i), and the same definition fixes the set $|X_0|$ of closed points and $\\deg(x)=[\\kappa(x):\\Fq]$. Theorem [thm-weil-final-rationality] applies to $X_0$ (same hypotheses, same zeta series, same closed points and degrees) and states $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$ and $Z(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}$. These are the second displayed equality and the membership claim of (i).",
    "uses": [
     "def-weil-point-counts-zeta",
-    "prop-euler-product",
-    "prop-integral-recovery"
+    "thm-weil-final-rationality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, *Clause (i)*; Theorem I (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md) states this clause and is proved there from the propositions the paragraph cites (prop-euler-product and the rationality route)"
+   }
   },
   {
-   "text": "*Clause (ii).*\nProposition `prop-integral-recovery` applies to the fixed datum and says\nthat the canonical $P_i\\in\\mathbf Z[T]$ have constant term one, satisfy\n\n$$\n\\bigl((\\mathbf Z[T]\\longrightarrow\\Ql[T])(P_i)\\bigr)(T)=P_{i,\\ell}(T)\n=\\det(1-TF\\mid H^i(X,\\Ql))\n$$\n\nfor every prime $\\ell\\neq p$, are the unique integral family with those\nrealizations, and obey\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\mathbf Q(T).\n$$\n\nThese are precisely all assertions of (ii).",
+   "text": "*Clause (ii).* By step 1, $P_i=P_i(\\mathscr X)$ is the integral Frobenius factor of degree $i$ of [thm-weil-final-integrality]. That theorem states that $P_i$ is the unique polynomial in $\\mathbf Z[T]$ with $P_i(0)=1$ whose coefficientwise extension $P_i^{(\\ell)}=(\\mathbf Z[T]\\to\\Ql[T])(P_i)$ equals $\\det(1-TF_{i,\\ell}\\mid H^i(X,\\Ql))$ for every prime $\\ell\\neq p$, and that $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}$ (an identity of rational power series, i.e. in $\\mathbf Q(T)$). With $F_{i,\\ell}$ the restriction of $F$ to $H^i(X,\\Ql)$ (step 1), these are exactly the two assertions of (ii).",
    "uses": [
-    "prop-integral-recovery"
+    "thm-weil-final-integrality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, *Clause (ii)*; Theorem II (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil2/thm-weil-final-integrality.md) states this clause and is proved there from prop-integral-recovery, which the paragraph cites"
+   }
   },
   {
-   "text": "*Clause (iii).*\nFix $0\\leq i\\leq2d$. Proposition\n`prop-arithmetic-roots` applies to the polynomial $P_i$ in the fixed\nalgebraic closure. It states that every reciprocal root is an algebraic\ninteger and a $q$-Weil number of weight $i$, with the displayed equality\nfor every complex embedding. The same proposition identifies an ordinary\nroot $\\beta$ with the inverse of a reciprocal root of this same\npolynomial $P_i$, and gives $|\\tau(\\beta)|=q^{-i/2}$. This proves\n(iii) without changing the root terminology.",
+   "text": "*Clause (iii).* Fix an algebraic closure $\\overline{\\mathbf Q}$ of $\\mathbf Q$ and $0\\leq i\\leq2d$; put $r_i=\\deg P_i$ and $P_i^\\#(U)=U^{r_i}P_i(U^{-1})\\in\\mathbf Z[U]$. In the convention of [def-weil-ordinary-reciprocal-roots], applied to $P_i\\in\\mathbf Z[T]\\subset\\overline{\\mathbf Q}[T]$ (which has $P_i(0)=1$) with roots taken in $\\overline{\\mathbf Q}$, a reciprocal root of $P_i$ is an $\\alpha\\in\\overline{\\mathbf Q}^\\times$ with $P_i(\\alpha^{-1})=0$ and an ordinary root is a $\\beta\\in\\overline{\\mathbf Q}$ with $P_i(\\beta)=0$, necessarily nonzero. Since $P_i^\\#(\\alpha)=\\alpha^{r_i}P_i(\\alpha^{-1})$ for $\\alpha\\neq0$ and $P_i^\\#(0)=[T^{r_i}]P_i\\neq0$, the reciprocal roots of $P_i$ are exactly the roots of $P_i^\\#$, which is the convention of Theorem [thm-weil-final-rh]; and $\\beta\\mapsto\\beta^{-1}$ is a bijection from the ordinary roots onto the reciprocal roots, with inverse $\\alpha\\mapsto\\alpha^{-1}$. Theorem [thm-weil-final-rh], applied to $X_0$ and the same $P_i$ (step 1), states that every reciprocal root $\\alpha$ is an algebraic integer and a $q$-Weil number of weight $i$, that is $|\\tau(\\alpha)|=q^{i/2}$ for every embedding $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$, in the sense of [def-weil-numbers] (which fixes $\\overline{\\mathbf Q}$, $\\mathbf Q(\\alpha)$, the embeddings, algebraic integers and $q$-Weil numbers), and that $\\beta=\\alpha^{-1}$ satisfies $|\\tau(\\beta)|=q^{-i/2}$ for every embedding $\\tau:\\mathbf Q(\\beta)\\hookrightarrow\\mathbf C$. Since every ordinary root of $P_i$ is such a $\\beta$, this is (iii).",
    "uses": [
-    "prop-arithmetic-roots"
+    "def-weil-ordinary-reciprocal-roots",
+    "def-weil-numbers",
+    "thm-weil-final-rh"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, *Clause (iii)*; Theorem III (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil3/thm-weil-final-rh.md) states this clause and is proved there from prop-arithmetic-roots, which the paragraph cites; the reciprocal-root/ordinary-root correspondence is written out by the worker"
+   }
   },
   {
-   "text": "*Clause (iv).*\nFix an integer $0\\leq i\\leq2d$. For every prime $\\ell\\neq p$,\nProposition `prop-integral-recovery` gives\n\n$$\nb_i=\\deg P_i=\\dim_{\\Ql}H^i(X,\\Ql),\n$$\n\nso the left-hand side is independent of $\\ell$. Proposition\n`prop-duality-reciprocity` gives $b_i=b_{2d-i}$, and Proposition\n`prop-endpoints` gives\n\n$$\nb_0=b_{2d}=1,\\qquad P_0(T)=1-T,\\qquad P_{2d}(T)=1-q^dT.\n$$\n\nTheorem [thm-weil-final-betti] states all of these equalities for the\nsame datum and, in addition, that $Z(X_0,T)$ has a pole of order exactly\n$1$ at $T=1$ and, when $d\\geq1$, at $T=q^{-d}$. This is exactly (iv).",
+   "text": "*Clause (iv).* Put $b_i=\\deg P_i$ for $0\\leq i\\leq2d$. Theorem [thm-weil-final-betti], applied to $X_0$ and the same $P_i$ (step 1), uses the same $b_i=\\deg P_i$ and states: $b_i=\\dim_{\\Ql}H^i(X,\\Ql)$ for every prime $\\ell\\neq p$, so that this dimension is independent of $\\ell$; $b_i=b_{2d-i}$; $b_0=b_{2d}=1$; $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$; and that the rational function $Z(X_0,T)=\\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\in\\mathbf Q(T)$ (the one of clause (ii)) has a pole of order exactly $1$ at $T=1$ and, if $d\\geq1$, a pole of order exactly $1$ at $T=q^{-d}$. This is (iv) word for word.",
    "uses": [
-    "prop-integral-recovery",
-    "prop-duality-reciprocity",
-    "prop-endpoints",
     "thm-weil-final-betti"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, *Clause (iv)* ('Theorem [thm-weil-final-betti] states all of these equalities for the same datum and, in addition, ... This is exactly (iv).'); the propositions the paragraph also cites (prop-integral-recovery, prop-duality-reciprocity, prop-endpoints) are the proof of Theorem IV"
+   }
   },
   {
-   "text": "*Clause (v).*\nThe definitions of $D_i,\\chi,\\varepsilon$ are respectively\nDefinitions `def-weil-determinant-constants`,\n*Euler characteristic*,\nand `def-weil-functional-equation-sign`. Proposition\n`prop-duality-reciprocity` supplies, for every $i$, the asserted\ndegreewise Laurent reciprocity. Proposition\n*Parity of the functional-equation exponent* verifies that $d\\chi/2$ is an\ninteger. Finally Proposition `prop-functional-equation` proves\n\n$$\n\\varepsilon\\in\\{1,-1\\},\\qquad\nZ(X_0,q^{-d}T^{-1})\n=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)\n$$\n\nin $\\mathbf Q(T)$. Hence all assertions of (v) follow.\n\nThe five independently verified clauses are exactly the conjunction stated\nin the theorem.",
+   "text": "*Clause (v).* With $b_i=\\deg P_i$, define $D_i=(-1)^{b_i}[T^{b_i}]P_i(T)$, $\\chi=\\sum_{i=0}^{2d}(-1)^ib_i$ and $\\varepsilon=(-1)^\\chi q^{-d\\chi/2}\\prod_{i=0}^{2d}D_i^{(-1)^i}$ by the formulas of (v); $D_i$ is a nonzero integer because $b_i=\\deg P_i$, so $D_i^{-1}$ and the product make sense in $\\mathbf Q^\\times$. Theorem [thm-weil-final-functional-equation], applied to $X_0$ and the same $P_i$ (step 1), defines $D_i$, $\\chi$ and $\\varepsilon$ by the same three formulas, with $Z(X_0,T)$ the same point-count zeta series, and states that $d\\chi$ is even, that $P_{2d-i}(q^{-d}T^{-1})=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$ for every $0\\leq i\\leq2d$, and that $Z(X_0,q^{-d}T^{-1})=\\varepsilon q^{d\\chi/2}T^\\chi Z(X_0,T)$ with $\\varepsilon\\in\\{1,-1\\}$. This is (v). The five clauses together are the statement.",
    "uses": [
-    "def-weil-determinant-constants",
-    "def-weil-functional-equation-sign",
-    "prop-duality-reciprocity",
-    "prop-functional-equation"
+    "thm-weil-final-functional-equation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
+    "place": "## Proof, *Clause (v)* and the closing sentence; Theorem V (literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil5/thm-weil-final-functional-equation.md) states this clause and is proved there from prop-duality-reciprocity, prop-functional-equation and the sign definition, which the paragraph cites; the parity of $d\\chi$ (the blueprint's 'Parity of the functional-equation exponent') is part of Theorem V's statement"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-datum",
   "def-weil-smooth-proper-cohomological-family",
-  "def-weil-point-counts-zeta",
-  "prop-euler-product",
-  "prop-integral-recovery",
-  "prop-arithmetic-roots",
-  "prop-duality-reciprocity",
-  "prop-endpoints",
-  "thm-weil-final-betti",
-  "def-weil-determinant-constants",
-  "def-weil-functional-equation-sign",
-  "prop-functional-equation",
-  "thm-weil-final-functional-equation",
+  "def-weil-canonical-integral-factors",
   "thm-weil-final-integrality",
+  "def-weil-point-counts-zeta",
   "thm-weil-final-rationality",
-  "thm-weil-final-rh"
+  "def-weil-ordinary-reciprocal-roots",
+  "def-weil-numbers",
+  "thm-weil-final-rh",
+  "thm-weil-final-betti",
+  "thm-weil-final-functional-equation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-the-five-assembled-theorems--remark-1/thm-weil-final.md",
-  "place": "## Proof"
+  "place": "## Proof (identical to the proof of thm:weil-final in literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, lines 3672-3745); clause-by-clause assembly, agent-written blueprint"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'weil\\|zeta' Mathlib/AlgebraicGeometry --include=*.lean; grep -rn -i 'WeilNumber\\|weil number' Mathlib --include=*.lean",
+   "results": "none for the Weil conjectures, zeta functions of schemes or Weil numbers; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:75 defines Scheme.EllAdicCohomology X ℓ n = Hⁿ(X, ℤ_ℓ) on the pro-étale site, without Frobenius, ℚ_ℓ-coefficients or finiteness",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "backtick_citation",
@@ -197,5 +241,11 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final",
+  "worker": "stage1",
+  "summary": "Statement unchanged (GOAL.md states it word for word). Checked the six imported steps against the master md and the identical slopmaster2 LaTeX proof (01_final_weil_conjectures.tex, thm:weil-final): each paragraph only names the propositions behind one clause and says the clause follows, so none was a proof of the clause from the propositions. The four title-only references the import could not resolve are definitions and a proposition that exist only in the slopmaster2 LaTeX sketch: 'Smooth-proper datum' and 'Canonical integral cohomological factors' are now the nodes def-weil-smooth-proper-datum and def-weil-canonical-integral-factors (the latter takes its tuple from prop-integral-recovery, the master counterpart of prop:integral-factor-existence); 'Frobenius characteristic factors' is the determinant family P_{i,l} already inside def-weil-smooth-proper-cohomological-family; 'Euler characteristic' is chi inside def-weil-determinant-constants; 'Parity of the functional-equation exponent' is the assertion 'd chi is even' of thm-weil-final-functional-equation. The proof is rewritten as the assembly the master frontmatter declares: step 1 identifies the datum and, by the uniqueness in thm-weil-final-integrality, the canonical factors with the integral Frobenius factors that Theorems I-V are stated for; steps 2-6 show that clauses (i)-(v) are, for these objects, exactly the statements of thm-weil-final-rationality, -integrality, -rh, -betti and -functional-equation (clause (iii) needs the elementary reciprocal-root/ordinary-root correspondence, written out). The propositions the text cites (prop-euler-product, prop-integral-recovery, prop-arithmetic-roots, prop-duality-reciprocity, prop-endpoints, prop-functional-equation) and the two sign/constant definitions are each used by exactly the theorem whose clause they prove and remain reached through it; they are no longer direct dependencies of the target. Statement dependencies now name every notion the statement uses; two standard notions had no node and are new Mathlib leaves: def-weil-rational-power-series (a series in K[[T]] ∩ K(T) and its rational function) and def-weil-rational-function-pole-order (pole of order exactly m). Lean on slopmaster2 (WeilConjectures/Statement.lean 86-98, 77-84) states less than the node; see the report."
  }
 }
