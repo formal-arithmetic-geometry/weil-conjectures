@@ -2,21 +2,82 @@
  "id": "lem-weil-pbc-unramified-fibre-point-isolated",
  "kind": "statement",
  "title": "A point unramified in a locally finite type morphism is isolated in its fibre",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $x\\in X$, put $s=f(x)$, and write $\\kappa(s)$ for the residue field [def-weil-residue-field]. Assume that $f$ is locally of finite type [def-weil-finite-type-morphism] and unramified at $x$ in the sense of [def-weil-unramified-morphism]. Then the point of the scheme-theoretic fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ corresponding to $x$ is open (and hence isolated) in $X_s$ [def-pc-scheme-fibre]. Equivalently, the singleton $\\{x\\}$ is open in the underlying topological fibre. (Stacks Project, Tags [02GF] and [02G8], with local quasi-finiteness from Tag [02V5].)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $x\\in X$, put $s=f(x)$, and write $\\kappa(s)$ for the residue field [def-weil-residue-field]. Assume that $f$ is locally of finite type [def-weil-finite-type-morphism] and unramified at $x$: there is an open neighbourhood $X'\\subseteq X$ of $x$ (an open subscheme [def-weil-open-immersion]) such that the restriction $f|_{X'}:X'\\to S$ is unramified [def-weil-unramified-morphism] (this is Stacks, Morphisms, Definition 02G4 (1), and already implies that $f$ is locally of finite type near $x$). Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre with first projection $p:X_s\\to X$ [def-pc-scheme-fibre], and let $\\xi\\in X_s$ be the unique point with $p(\\xi)=x$. Then $\\{\\xi\\}$ is open in $X_s$ (so $\\xi$ is an isolated point of $X_s$). Equivalently, $\\{x\\}$ is open in the subspace $f^{-1}(s)$ of $X$. (Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (2), applied to an unramified neighbourhood of $x$; compare Lemma 02GF (lemma-unramified-at-point) and Lemma 02V5 (lemma-unramified-quasi-finite).)",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 02GF (lemma-unramified-at-point, lines 7875-7930), Lemma 02G8 (lemma-unramified-etale-fibres, lines 7814-7860), and Lemma 02V5 (lemma-unramified-quasi-finite, lines 7779-7788)"
+  "place": "Morphisms, Definition 02G4 (definition-unramified, line 7616), Lemma 02G7 (lemma-unramified-over-field, lines 7790-7826) with Lemma 02GA (lemma-base-change-unramified, line 7718); related: Lemma 02GF (lemma-unramified-at-point, lines 7875-7930), Lemma 02V5 (lemma-unramified-quasi-finite, lines 7779-7788)"
  },
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-scheme-fibre",
   "def-weil-finite-type-morphism",
   "def-weil-unramified-morphism",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the open neighbourhood $X'\\subseteq X$ of $x$ with $f':=f|_{X'}:X'\\to S$ unramified. Let $\\sigma:\\operatorname{Spec}\\kappa(s)\\to S$ be the canonical morphism and $X'_s=X'\\times_S\\operatorname{Spec}\\kappa(s)$ the fibre of $f'$ over $s$ [def-pc-scheme-fibre], with second projection $q':X'_s\\to\\operatorname{Spec}\\kappa(s)$; $q'$ is the base change of $f'$ along $\\sigma$. By clause (1) of [lem-weil-pbc-unramified-base-change-open] (with $g=\\sigma$), $q'$ is unramified [def-weil-unramified-morphism].",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-unramified-base-change-open",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, proof (line 7804: part (2) follows from part (1) and Lemma 02GA), Lemma 02GA (line 7718)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-unramified-over-field-discrete] to the field $k=\\kappa(s)$ and the unramified morphism $q':X'_s\\to\\operatorname{Spec}\\kappa(s)$ of step 1: every point of $X'_s$ is open in $X'_s$.",
+   "uses": [
+    "lem-weil-pbc-unramified-over-field-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, part (1) and proof (lines 7806-7820: all points of an unramified scheme over a field are isolated, so it is discrete)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-fibre-product] to $f:X\\to S$, $\\sigma:\\operatorname{Spec}\\kappa(s)\\to S$ and the open subschemes $V=X'\\subseteq X$, $W=\\operatorname{Spec}\\kappa(s)$, $U=S$ (so $f(V)\\subseteq U$, $\\sigma(W)\\subseteq U$): the canonical morphism $j:X'_s=X'\\times_S\\operatorname{Spec}\\kappa(s)\\to X\\times_S\\operatorname{Spec}\\kappa(s)=X_s$ is an open immersion [def-weil-open-immersion] with image the open set $p^{-1}(X')$, compatibly with the projections, so $p\\circ j=\\iota\\circ p'$ where $p':X'_s\\to X'$ is the first projection and $\\iota:X'\\hookrightarrow X$ the inclusion.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JR (schemes-lemma-open-fibre-product), as recorded in lem-weil-pbc-open-fibre-product"
+   }
+  },
+  {
+   "text": "Since $p(\\xi)=x\\in X'$, the point $\\xi$ lies in the open set $p^{-1}(X')=j(X'_s)$; write $\\xi=j(\\xi')$ with $\\xi'\\in X'_s$. By step 2 the set $\\{\\xi'\\}$ is open in $X'_s$; an open immersion is an open map onto an open subset, so $\\{\\xi\\}=j(\\{\\xi'\\})$ is open in $X_s$ (step 3). Finally, by [def-pc-scheme-fibre] the projection $p$ is a homeomorphism of $X_s$ onto the subspace $f^{-1}(s)$ of $X$; it carries $\\xi$ to $x$ and the open set $\\{\\xi\\}$ to the open set $\\{x\\}$ of $f^{-1}(s)$ (and conversely), which is the equivalent form of the statement. (The point $\\xi$ is unique for the same reason.)",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02G7, part (2), lines 7797-7799 (the fibre of an unramified morphism is a disjoint union of spectra of fields, hence discrete), applied to the unramified neighbourhood $X'$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-unramified-base-change-open",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-over-field-discrete",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (2) and its proof (lines 7790-7826), applied to an unramified open neighbourhood of x (Definition 02G4 (1))"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +106,17 @@
    "results": "No direct scheme-level fibre-isolation theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyQuasiFinite' Mathlib/AlgebraicGeometry | grep -i 'unramif'; grep -rln 'FormallyUnramified' Mathlib/AlgebraicGeometry",
+   "results": "no scheme-level link FormallyUnramified -> LocallyQuasiFinite (FormallyUnramified occurs only in Morphisms/Etale.lean, Morphisms/FormallyUnramified.lean, Morphisms/LocalFlatDescent.lean); Scheme.Hom.isDiscrete_preimage_singleton (Morphisms/QuasiFinite.lean:163) needs [LocallyQuasiFinite f]",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +136,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-fibre-point-isolated",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Morphisms 02G4 (definition-unramified, line 7616), 02G7 (lemma-unramified-over-field, line 7790), 02GA (lemma-base-change-unramified, line 7718), 02GF (lemma-unramified-at-point, line 7875), 02V5 (lemma-unramified-quasi-finite, line 7779); tags verified in tags/tags. Statement corrected: def-weil-unramified-morphism has no pointwise notion, so 'unramified at x' is now stated explicitly as Stacks 02G4 (1) (an open neighbourhood X' with f|X' unramified), as the citer lem-weil-pbc-unramified-etale-local-decomposition uses it; the point xi of X_s over x is named; the tag citation is corrected: the discreteness of fibres of unramified morphisms is 02G7 (lemma-unramified-over-field) part (2), not 02G8 (lemma-unramified-etale-fibres, which is about residue fields and the converse); def-weil-open-immersion added to stmt_deps for the open subscheme. The locally-finite-type hypothesis is kept though redundant near x. Proof in four steps following the proof of 02G7: base change of the unramified neighbourhood to the fibre (lem-weil-pbc-unramified-base-change-open, unsplit), discreteness of a scheme unramified over a field (new node lem-weil-pbc-unramified-over-field-discrete, 02G7 (1)), the fibre of X' as the open p^{-1}(X') of X_s (lem-weil-pbc-open-fibre-product, a Mathlib leaf), and the elementary transfer via the homeomorphism X_s -> f^{-1}(s) of def-pc-scheme-fibre."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Four steps: the fibre of the unramified neighbourhood X' is unramified over kappa(s) (02GA node), discrete (new unsplit node for Morphisms 02G7(1) 'only if': unramified over a field => every point open; route hint recorded: over a field unramified is etale, then the etale-fibre-discrete node), the fibre of X' is the open p^{-1}(X') of X_s (open-fibre-product leaf), elementary transfer through the fibre homeomorphism. Statement corrected: 'unramified at x' is now defined as 'f unramified on an open neighbourhood of x' (Stacks 02G4(1)), as the citer uses it; tag corrected to 02G7(2) (02G8 is about residue fields). Stage-3 overlap: lem-weil-pbc-unramified-algebra-over-field-product (02G7(1) affine, created by the one-point-closed split) and the new discrete node both are parts of 02G7(1)."
+ }
 }

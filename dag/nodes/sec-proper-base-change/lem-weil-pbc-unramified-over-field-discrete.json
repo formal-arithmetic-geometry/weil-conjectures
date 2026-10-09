@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-unramified-over-field-discrete",
+ "kind": "statement",
+ "title": "A scheme unramified over a field is discrete",
+ "statement": "Let $k$ be a field, let $Y$ be a scheme [def-pc-scheme] and let $g:Y\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] be an unramified morphism [def-weil-unramified-morphism]. Then the underlying topological space of $Y$ is discrete: every point $y\\in Y$ is open in $Y$ (so every subset of $Y$ is open, and every point of $Y$ is also closed). (Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (1), direction \"only if\", topological part; Stacks proves it from Algebra, Lemma 00UW (residue fields finite separable), Morphisms, Lemma 02V5 (unramified implies locally quasi-finite) and Morphisms, Lemma 01TH (a point at which a morphism locally of finite type is quasi-finite is isolated in its fibre).)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G7 (lemma-unramified-over-field), statement part (1) and proof, lines 7790-7826"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a scheme unramified over a field has discrete underlying topological space",
+   "results": "AlgebraicGeometry.IsLocallyArtinian.discreteTopology (instance), IsLocallyArtinian.discreteTopology_of_isAffine, IsArtinianScheme.iff_isNoetherian_and_discreteTopology, IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology (Mathlib.AlgebraicGeometry.Artinian), FormallyUnramified.recOn/casesOn, Algebra.unramifiedLocus",
+   "date": "2026-10-10",
+   "verdict": "no match: discreteness only for locally Artinian schemes; nothing deduces it from unramified over a field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally unramified locally of finite type morphism of schemes is locally quasi-finite, fibres discrete",
+   "results": "AlgebraicGeometry.FormallyUnramified, FormallyUnramified.instHasRingHomPropertyFormallyUnramified, IsEtale.instFormallyUnramified, formallyUnramified_iff, IsEtale HasOfPostcompProperty (LocallyOfFiniteType ⊓ FormallyUnramified), FormallyUnramified.of_comp, Algebra.Unramified.finiteType, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no scheme-level lemma relating the two"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, DiscreteTopology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocallyQuasiFinite' Mathlib/AlgebraicGeometry Mathlib/RingTheory | grep -i 'unramif|instance|isDiscrete'; grep -rn 'QuasiFinite' Mathlib/RingTheory/Unramified Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "Algebra-level instance `[EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S` (Mathlib/RingTheory/Unramified/LocalStructure.lean:331-333); scheme-level `LocallyQuasiFinite` instances only from IsFinite, IsImmersion, IsPreimmersion, composition, base change (Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:90-136, 269); `Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f] (y) : IsDiscrete (f ⁻¹' {y})` (QuasiFinite.lean:163); `locallyQuasiFinite_iff_isDiscrete_preimage_singleton` (QuasiFinite.lean:277); no scheme-level instance FormallyUnramified + LocallyOfFiniteType ⇒ LocallyQuasiFinite",
+   "date": "2026-10-10",
+   "verdict": "no match: pieces only (algebra QuasiFinite instance, then HasRingHomProperty for LocallyQuasiFinite, then isDiscrete_preimage_singleton over the one point of Spec k), several lines"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iff_formallyUnramified_of_field|of_formallyUnramified_of_flat|iff_exists_algEquiv_prod' Mathlib/RingTheory/Etale/Field.lean Mathlib/AlgebraicGeometry/Morphisms/Etale.lean Mathlib/RingTheory/Unramified/Field.lean",
+   "results": "Algebra.FormallyEtale.iff_formallyUnramified_of_field [EssFiniteType K A] (Mathlib/RingTheory/Etale/Field.lean:185), Algebra.FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194), AlgebraicGeometry.Etale.of_formallyUnramified_of_flat [Flat f] [FormallyUnramified f] [LocallyOfFinitePresentation f] (Morphisms/Etale.lean:145); Unramified/Field.lean has no product decomposition (only iff_isSeparable for fields, isReduced_of_field)",
+   "date": "2026-10-10",
+   "verdict": "no match; route hint for the split: over a field an unramified morphism is flat and locally of finite presentation, hence etale (Etale.of_formallyUnramified_of_flat), and then lem-weil-pbc-etale-fibre-discrete-separable-points applies to Y -> Spec k at its one point"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Etale.of_formallyUnramified_of_flat (project root ~/weil-conjectures-slopmaster2)",
+   "results": "found: lemma in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean (index: unavailable, file found)",
+   "date": "2026-10-10",
+   "verdict": "exists; not a match by itself"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-unramified-fibre-point-isolated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
