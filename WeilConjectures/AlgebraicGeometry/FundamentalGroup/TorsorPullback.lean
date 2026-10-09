@@ -76,6 +76,19 @@ lemma toFiniteEtale_pullback :
     (t.pullback f s).toFiniteEtale = (FiniteEtale.pullback f).obj t.toFiniteEtale :=
   rfl
 
+@[simp]
+lemma pullback_P : (t.pullback f s).P = Limits.pullback t.π f :=
+  rfl
+
+@[simp]
+lemma pullback_π : (t.pullback f s).π = Limits.pullback.snd t.π f :=
+  rfl
+
+lemma pullback_vadd (m : M) :
+    (t.pullback f s).vadd m = Limits.pullback.map t.π f t.π f (t.vadd m) (𝟙 X) (𝟙 Y)
+      (by rw [Category.comp_id, t.vadd_π]) (by rw [Category.comp_id, Category.id_comp]) :=
+  rfl
+
 lemma vaddHom_pullback (m : M) :
     (t.pullback f s).vaddHom m = (FiniteEtale.pullback f).map (t.vaddHom m) :=
   rfl
