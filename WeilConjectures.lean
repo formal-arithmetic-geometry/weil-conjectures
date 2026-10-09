@@ -220,6 +220,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple

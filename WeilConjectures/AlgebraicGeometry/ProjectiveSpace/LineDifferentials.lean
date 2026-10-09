@@ -90,7 +90,8 @@ lemma presheaf_map_awayToSection_awayMonomial {t : Set n} (hts : t ⊆ s)
     (Proj (homogeneousSubmodule n R)).presheaf.map
         (homOfLE (basicOpen_monomialToNat_indicator_mono (R := R) hts)).op
         (Proj.awayToSection _ _ (awayMonomial R t e)) =
-      Proj.awayToSection _ _ (awayMonomial R s ⟨e.1, e.2.1, fun i hi ↦ e.2.2 i fun h ↦ hi (hts h)⟩) := by
+      Proj.awayToSection _ _
+        (awayMonomial R s ⟨e.1, e.2.1, fun i hi ↦ e.2.2 i fun h ↦ hi (hts h)⟩) := by
   refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
   change ((Proj.awayToSection _ _ (awayMonomial R t e)).1 ⟨x.1, _⟩).val = _
   rw [val_awayToSection_awayMonomial_apply, val_awayToSection_awayMonomial_apply]
@@ -152,7 +153,8 @@ lemma chart_mono {s t : Set (ULift.{u} (Fin 2))} (hts : t ⊆ s) : chart k s ≤
 `ℤ[x₀, x₁]` away from `∏_{i ∈ s} xᵢ`. -/
 def chartFun (s : Set (ULift.{u} (Fin 2))) :
     Away (homogeneousSubmodule (ULift.{u} (Fin 2)) (ULift.{u} ℤ))
-      (monomialToNat (ULift.{u} ℤ) (s.indicator 1)) →+* Γ(ProjectiveLine (Spec (.of k)), chart k s) :=
+      (monomialToNat (ULift.{u} ℤ) (s.indicator 1)) →+*
+      Γ(ProjectiveLine (Spec (.of k)), chart k s) :=
   (Proj.awayToSection _ _ ≫ (toProjInt _ (Spec (.of k))).appLE (basicOpenInt _ s)
     (chart k s) le_rfl).hom
 
@@ -362,7 +364,8 @@ lemma iSup_chart : ⨆ i, chart k {i} = ⊤ := by
 variable {i j : ULift.{u} (Fin 2)}
 
 /-- The Laurent monomial `xⱼ / xᵢ` on the overlap. -/
-def overlapCoordExp (i j : ULift.{u} (Fin 2)) : laurentExponents (Set.univ : Set (ULift.{u} (Fin 2))) 0 :=
+def overlapCoordExp (i j : ULift.{u} (Fin 2)) :
+    laurentExponents (Set.univ : Set (ULift.{u} (Fin 2))) 0 :=
   ⟨(coordExp (i := i) (j := j)).1, (coordExp (i := i) (j := j)).2.1, fun _ hl ↦ (hl trivial).elim⟩
 
 lemma coord_restrict :
@@ -459,7 +462,8 @@ lemma chartLocalDerivation_app_self (hij : i ≠ j) (σ : ℤ)
     (chartLocalDerivation k hij σ).app (chart k {i}) le_rfl f = chartDerivation k hij σ f :=
   LocalDerivation.ofIsAffineOpen_app_self _ _ _ f
 
-lemma chartLocalDerivation_app_restrict (hij : i ≠ j) (σ : ℤ) {W : (ProjectiveLine (Spec (.of k))).Opens}
+lemma chartLocalDerivation_app_restrict (hij : i ≠ j) (σ : ℤ)
+    {W : (ProjectiveLine (Spec (.of k))).Opens}
     (hW : W ≤ chart k {i}) (f : Γ(ProjectiveLine (Spec (.of k)), chart k {i})) :
     (chartLocalDerivation k hij σ).app W hW
         ((ProjectiveLine (Spec (.of k))).presheaf.map (homOfLE hW).op f) =

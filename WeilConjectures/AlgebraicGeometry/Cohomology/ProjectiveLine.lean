@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 
 /-!
@@ -239,7 +240,7 @@ This is part (iii) of the blueprint lemma.
 theorem nonempty_relativeDifferentials_iso_twist :
     Nonempty ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
       ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) :=
-  sorry
+  ⟨relativeDifferentialsIsoTwist k⟩
 
 /-- **Vanishing above the dimension on `ℙ¹_k`.** For every quasi-coherent `𝒪_{ℙ¹_k}`-module `ℱ`,
 `H^q(ℙ¹_k, ℱ) = 0` for all `q ≥ 2`: the Čech complex of the standard cover by the two affine
