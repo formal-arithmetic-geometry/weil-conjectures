@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
@@ -41,9 +42,12 @@ contains a point over `x`.
   fibres.
 - `AlgebraicGeometry.preimage_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section commutes with base change (Stacks `055M`).
+- `AlgebraicGeometry.stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_singleton`:
+  the relative connected component of a section of a flat morphism of finite presentation with
+  geometrically reduced fibres is stable under generalization (Stacks `055Q`).
 - `AlgebraicGeometry.isOpen_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a flat morphism of finite presentation with geometrically
-  reduced fibres is open (Stacks `055R`).
+  reduced fibres between affine schemes is open (Stacks `055R`).
 - `AlgebraicGeometry.isCompact_setOf_mem_connectedComponentIn_preimage_singleton`: the relative
   connected component of a section of a quasi-compact morphism of finite presentation between
   quasi-compact, quasi-separated schemes is quasi-compact.
@@ -244,28 +248,82 @@ theorem preimage_setOf_mem_connectedComponentIn_preimage_singleton {X Y Y' : Sch
       rw [Set.mem_preimage, Set.mem_singleton_iff, ← Scheme.Hom.comp_apply, pullback.condition,
         Scheme.Hom.comp_apply, hz']
 
-/-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
-be flat, of finite presentation, with geometrically reduced fibres, and let `σ` be a section of
-`f`. The points `x` lying in the connected component of `σ (f x)` in their fibre form an open
-subset of `X`.
+/-- The relative connected component of a section is transported along homeomorphisms compatible
+with the maps and the sections. -/
+theorem setOf_mem_connectedComponentIn_preimage_singleton_eq_preimage {X Y X' Y' : Type*}
+    [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace X'] [TopologicalSpace Y']
+    {f : X → Y} {σ : Y → X} {f' : X' → Y'} {σ' : Y' → X'} (eX : X ≃ₜ X') (eY : Y ≃ₜ Y')
+    (hf : ∀ x, f' (eX x) = eY (f x)) (hσ : ∀ y, σ' (eY y) = eX (σ y)) :
+    {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} =
+      eX ⁻¹' {x' : X' | x' ∈ connectedComponentIn (f' ⁻¹' {f' x'}) (σ' (f' x'))} := by
+  ext x
+  have himage : eX '' (f ⁻¹' {f x}) = f' ⁻¹' {eY (f x)} := by
+    ext x'
+    obtain ⟨x', rfl⟩ := eX.surjective x'
+    simp [hf, eX.injective.eq_iff]
+  by_cases hmem : σ (f x) ∈ f ⁻¹' {f x}
+  · rw [Set.mem_preimage, Set.mem_ofPred_eq, Set.mem_ofPred_eq, hf, hσ, ← himage,
+      ← eX.image_connectedComponentIn hmem, eX.injective.mem_set_image]
+  · rw [Set.mem_preimage, Set.mem_ofPred_eq, Set.mem_ofPred_eq, connectedComponentIn_eq_empty hmem,
+      hf, hσ, ← himage, connectedComponentIn_eq_empty (by simpa using hmem)]
+    simp
 
-The proof is still missing. Quasi-compactness of this set is
-`isCompact_setOf_mem_connectedComponentIn_preimage_singleton`, and it commutes with base change
-(`preimage_setOf_mem_connectedComponentIn_preimage_singleton`, Stacks `055M`). What remains is:
-- local constructibility (Stacks `055P`), via the Noetherian case `055N`, which needs geometric
-  connectedness to spread out from the generic fibre (`055G`, from `0559`, whose ring-theoretic
-  form is `exists_ne_zero_forall_isIrreducible_fiber`);
-- stability under generalisation over a Noetherian base (Stacks `055Q`), via DVRs dominating
-  specialisations (Krull–Akizuki) and
-  `IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`;
-- descent of flatness and of geometric reducedness of fibres along Noetherian approximation
-  (`Algebra.FinitePresentation.exists_fg_subalgebra_with_section`, Stacks `04AI`). -/
+/-- **The relative connected component of a section is stable under generalization** (Stacks
+`055Q`). Let `f : X ⟶ Y` be a flat morphism of finite presentation between affine schemes, with
+geometrically reduced fibres, and let `σ` be a section of `f`. The points `x` lying in the
+connected component of `σ (f x)` in their fibre form a subset of `X` stable under
+generalization.
+
+The proof is still missing. It goes through the Noetherian case, via DVRs dominating
+specialisations (Krull–Akizuki) and
+`IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem`, together with the descent
+of flatness and of geometric reducedness of fibres along Noetherian approximation
+(`Algebra.FinitePresentation.exists_fg_subalgebra_with_section`, Stacks `04AI`) and the
+compatibility with base change (`preimage_setOf_mem_connectedComponentIn_preimage_singleton`,
+Stacks `055M`). -/
+@[stacks 055Q]
+theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_singleton
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f]
+    [GeometricallyReduced f] [IsAffine X] [IsAffine Y] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
+    StableUnderGeneralization {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
+  sorry
+
+/-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
+be a flat morphism of finite presentation between affine schemes, with geometrically reduced
+fibres, and let `σ` be a section of `f`. The points `x` lying in the connected component of
+`σ (f x)` in their fibre form an open subset of `X`.
+
+Writing `f = Spec (A → B)` and `σ = Spec s`, this set is the relative component
+`PrimeSpectrum.relativeComponent s`, which is constructible (Stacks `055P`,
+`PrimeSpectrum.isConstructible_relativeComponent_of_finitePresentation`). It is stable under
+generalization (Stacks `055Q`), hence open. -/
 @[stacks 055R]
 theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
-    [GeometricallyReduced f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
-    IsOpen {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} :=
-  sorry
+    (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [GeometricallyReduced f] [IsAffine X]
+    [IsAffine Y] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) :
+    IsOpen {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} := by
+  algebraize [f.appTop.hom]
+  have : Algebra.FinitePresentation Γ(Y, ⊤) Γ(X, ⊤) :=
+    (HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFinitePresentation) (f := f)).mp ‹_›
+  let s : Γ(X, ⊤) →ₐ[Γ(Y, ⊤)] Γ(Y, ⊤) :=
+    { σ.appTop.hom with commutes' a := congr(CommRingCat.Hom.hom (Scheme.Hom.appTop $hσ) a) }
+  have heq := setOf_mem_connectedComponentIn_preimage_singleton_eq_preimage
+    (f' := Spec.map f.appTop) (σ' := Spec.map σ.appTop) X.isoSpec.hom.homeomorph
+    Y.isoSpec.hom.homeomorph (fun x ↦ by
+      rw [Scheme.Hom.homeomorph_apply, Scheme.Hom.homeomorph_apply, ← Scheme.Hom.comp_apply,
+        Scheme.isoSpec_hom_naturality, Scheme.Hom.comp_apply])
+    (fun y ↦ by
+      rw [Scheme.Hom.homeomorph_apply, Scheme.Hom.homeomorph_apply, ← Scheme.Hom.comp_apply,
+        Scheme.isoSpec_hom_naturality, Scheme.Hom.comp_apply])
+  rw [heq]
+  have hgen := (stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_singleton
+    f σ hσ).preimage X.isoSpec.hom.homeomorph.symm.continuous
+  rw [heq, Homeomorph.preimage_symm, Homeomorph.image_preimage] at hgen
+  -- the relative component of `σ` in `Spec Γ(X, ⊤)` is `PrimeSpectrum.relativeComponent s`
+  exact X.isoSpec.hom.homeomorph.continuous.isOpen_preimage _
+    (PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible
+      (s := PrimeSpectrum.relativeComponent s) hgen
+      (PrimeSpectrum.isConstructible_relativeComponent_of_finitePresentation s))
 
 /-- **The relative connected component of a section is quasi-compact.** Let `f : X ⟶ Y` be
 locally of finite presentation and quasi-compact between quasi-compact, quasi-separated schemes,
