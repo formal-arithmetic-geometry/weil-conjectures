@@ -302,8 +302,9 @@ section ModuleCat
 
 variable {Λ : Type (u + 1)} [Ring Λ]
 
-/-- Constructible sheaves of `Λ`-modules are closed under kernels. -/
-instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
+/-- Constructible sheaves of `Λ`-modules over a noetherian ring are closed under kernels. -/
+instance [IsNoetherianRing Λ] :
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
   kernels_le := by
     rintro _ ⟨f, k, hk, hf⟩
     have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1

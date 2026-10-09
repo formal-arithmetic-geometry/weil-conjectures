@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -40,8 +42,7 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
   (`sk-thm-sf-pf-adic`) : the projection formula at the integral stage `𝒪_E`, for derived
   complete objects of finite Tor amplitude.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
-  projection formula over a field of coefficients, for bounded constructible objects of
-  finite Tor amplitude.
+  projection formula over a field of coefficients, at a dualizable object.
 - `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite` : the projection formula at a finite
   coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` : its objectwise form, a
@@ -82,10 +83,12 @@ integers of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` (transported to the
 derived completeness for the maximal ideal `𝔪_E`.
 
 `AlgebraicGeometry.Etale.hasProjectionFormula_field` is stated for an arbitrary field of
-coefficients. The blueprint proves the two instances it needs, `F = E` and `F = ℚ̄_ℓ`, by
-rationalizing the integral statement and passing to the `2`-colimit over the finite stages;
-that argument does not apply to a general field, so the general case as stated here will need
-a different proof.
+coefficients and a dualizable second argument. The blueprint proves the two instances it needs,
+`F = E` and `F = ℚ̄_ℓ`, for constructible objects, by rationalizing the integral statement and
+passing to the `2`-colimit over the finite stages; on the étale site with discrete coefficients
+the projection formula fails for constructible objects over a field of characteristic zero, the
+skyscraper sheaves reducing it to proper base change (see the docstring of
+`AlgebraicGeometry.Etale.hasProjectionFormula_field`).
 
 -/
 
@@ -215,12 +218,23 @@ stages.
 
 Over a field `F` of coefficients — the blueprint names the two instances `F = E`, the
 rational stage, and `F = ℚ̄_ℓ`, the algebraically closed stage — the projection formula
-holds for `f` at any bounded constructible `K` and `L` of finite Tor amplitude. -/
+holds for `f` at any `K` and any dualizable `L`, that is, a lisse `L` (for instance a
+bounded complex with locally constant cohomology sheaves of finite rank).
+
+On the étale site with the discrete field `F` as coefficients, the projection formula does not
+hold for every bounded constructible `L`. For `L = y_* F` the skyscraper at the closed point
+`y` of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular
+proper curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
+`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal,
+while `H¹(X_y, F) = F`. The blueprint reaches the constructible objects at the stages `E` and
+`ℚ̄_ℓ` through the `ℓ`-adic formalism instead. For dualizable `L` the projection formula is formal:
+it holds for the open immersion of a compactification, and for its proper part `g` the
+projection map of `Rg_*` is the mate of the monoidal structure of `Lg^*`, invertible at a
+dualizable object. -/
 theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} F)))
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X K)
-    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) Y L) :
+    (hL : IsDualizable L) :
     HasProjectionFormula (ModuleCat.{u + 1} F) f K L :=
   sorry
 

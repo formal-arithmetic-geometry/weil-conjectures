@@ -44,6 +44,9 @@ total left derived functors `L(g^*)` through the isomorphism
   `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_\
   openImmersionLowerShriek_of_disjoint_range`
   (blueprint: `lemma:openclosed-vanishing-lowerShriek-derived`).
+- `AlgebraicGeometry.Etale.exists_distTriang_openClosed`: the open–closed triangle
+  `j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1]`
+  (blueprint: `sk-prop-sf-open-closed-triangle`).
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_closedComplement_map` and
   `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_closedComplement_obj_\
   openImmersionLowerShriek`: the two results for `i = j.closedComplement`.
@@ -185,5 +188,35 @@ lemma isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek
     A j j.closedComplement (by rw [j.range_closedComplement]; exact disjoint_compl_left) K
 
 end Vanishing
+
+section Triangle
+
+variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- Blueprint `sk-prop-sf-open-closed-triangle`: The open–closed triangle
+
+Let `j : U ⟶ X` and `i : Z ⟶ X` be complementary open and closed immersions. For every
+`M ∈ D(X_ét, A)` the counit of `D(j_!) ⊣ D(j^*)` and the unit of `D(i^*) ⊣ Ri_*` extend to a
+distinguished triangle
+
+```
+  j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1].
+```
+
+It is the derived form of the open–closed short exact sequence
+`0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`
+(`AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`), applied termwise to a complex
+representing `M`, using that `i_*` is exact. That sequence is so far only proved for a concrete
+coefficient category `A`, whose stalks detect isomorphisms. -/
+theorem exists_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ∃ w, Pretriangulated.Triangle.mk
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)
+      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w ∈ distTriang _ :=
+  sorry
+
+end Triangle
 
 end AlgebraicGeometry.Etale

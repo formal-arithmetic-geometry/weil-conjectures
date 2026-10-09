@@ -14,6 +14,7 @@ public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
@@ -973,19 +974,6 @@ lemma Hom.isClosed_singleton_fieldPoints (f : X ⟶ Spec (.of k)) [LocallyOfFini
     (show IsClosed {default} from isClosed_discrete _)
 
 end ClosedPoint
-
-section H
-
-variable {X : Scheme.{u}}
-
-/-- On `H⁰ = Γ`, the map induced by a morphism of modules is its action on global sections. -/
-lemma Modules.H.zeroLinearEquiv_map {M N : X.Modules} (φ : M ⟶ N) (z : M.H 0) :
-    Modules.H.zeroLinearEquiv N (Modules.H.map φ 0 z) =
-      φ.app ⊤ (Modules.H.zeroLinearEquiv M z) :=
-  (Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
-    ((SheafOfModules.toSheaf X.ringCatSheaf).map φ) z).symm
-
-end H
 
 section VeryAmpleCurve
 
