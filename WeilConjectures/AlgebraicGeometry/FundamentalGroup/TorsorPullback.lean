@@ -53,8 +53,8 @@ lemma existsUnique_fiber_map_pullback_map_vaddHom (t : EtaleTorsor M Y)
 variable [ConnectedSpace X]
 
 /-- The base change `P ×_Y X` of an `M`-torsor `P` over `Y` along `f : X ⟶ Y`, with the action of
-`M` on the first factor. The geometric point `s` of the connected scheme `X` is only used to see
-that the action is simply transitive. -/
+`M` on the first factor. The action is simply transitive since it is so on the geometric fibre
+at any geometric point of the connected, hence nonempty, scheme `X`. -/
 noncomputable def pullback (t : EtaleTorsor M Y) : EtaleTorsor M X where
   P := Limits.pullback t.π f
   π := Limits.pullback.snd t.π f
@@ -65,32 +65,37 @@ noncomputable def pullback (t : EtaleTorsor M Y) : EtaleTorsor M X where
   vadd_π m := hom_left_comp ((FiniteEtale.pullback f).map (t.vaddHom m))
   zero_vadd := by rw [vaddHom_zero, CategoryTheory.Functor.map_id]; rfl
   add_vadd m n := by rw [vaddHom_add, Functor.map_comp]; rfl
-  isIso_sigmaDesc := isIso_sigmaDesc_of_existsUnique s
-    ((FiniteEtale.pullback f).obj t.toFiniteEtale)
-    (fun m ↦ (FiniteEtale.pullback f).map (t.vaddHom m))
-    (existsUnique_fiber_map_pullback_map_vaddHom f s t)
+  isIso_sigmaDesc := by
+    obtain ⟨x⟩ := ConnectedSpace.toNonempty (α := X)
+    let s' : Spec (.of (AlgebraicClosure (X.residueField x))) ⟶ X :=
+      Spec.map (CommRingCat.ofHom
+        (algebraMap (X.residueField x) (AlgebraicClosure (X.residueField x)))) ≫
+        X.fromSpecResidueField x
+    exact isIso_sigmaDesc_of_existsUnique s' ((FiniteEtale.pullback f).obj t.toFiniteEtale)
+      (fun m ↦ (FiniteEtale.pullback f).map (t.vaddHom m))
+      (existsUnique_fiber_map_pullback_map_vaddHom f s' t)
 
 variable (t : EtaleTorsor M Y)
 
 lemma toFiniteEtale_pullback :
-    (t.pullback f s).toFiniteEtale = (FiniteEtale.pullback f).obj t.toFiniteEtale :=
+    (t.pullback f).toFiniteEtale = (FiniteEtale.pullback f).obj t.toFiniteEtale :=
   rfl
 
 @[simp]
-lemma pullback_P : (t.pullback f s).P = Limits.pullback t.π f :=
+lemma pullback_P : (t.pullback f).P = Limits.pullback t.π f :=
   rfl
 
 @[simp]
-lemma pullback_π : (t.pullback f s).π = Limits.pullback.snd t.π f :=
+lemma pullback_π : (t.pullback f).π = Limits.pullback.snd t.π f :=
   rfl
 
 lemma pullback_vadd (m : M) :
-    (t.pullback f s).vadd m = Limits.pullback.map t.π f t.π f (t.vadd m) (𝟙 X) (𝟙 Y)
+    (t.pullback f).vadd m = Limits.pullback.map t.π f t.π f (t.vadd m) (𝟙 X) (𝟙 Y)
       (by rw [Category.comp_id, t.vadd_π]) (by rw [Category.comp_id, Category.id_comp]) :=
   rfl
 
 lemma vaddHom_pullback (m : M) :
-    (t.pullback f s).vaddHom m = (FiniteEtale.pullback f).map (t.vaddHom m) :=
+    (t.pullback f).vaddHom m = (FiniteEtale.pullback f).map (t.vaddHom m) :=
   rfl
 
 /-- Isomorphic torsors are isomorphic as finite étale schemes. -/
@@ -107,7 +112,7 @@ lemma IsIsomorphic.nonempty_iso {Z : Scheme.{u}} {t₁ t₂ : EtaleTorsor M Z}
 
 /-- Base change preserves isomorphism of torsors. -/
 lemma IsIsomorphic.pullback {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) :
-    (t₁.pullback f s).IsIsomorphic (t₂.pullback f s) := by
+    (t₁.pullback f).IsIsomorphic (t₂.pullback f) := by
   obtain ⟨φ, hπ, hv⟩ := h
   let Φ : t₁.toFiniteEtale ≅ t₂.toFiniteEtale :=
     { hom := ObjectProperty.homMk (MorphismProperty.Over.homMk φ.hom hπ)
@@ -137,13 +142,13 @@ variable [ConnectedSpace Y] (G : Type u) [Group G] [TopologicalSpace G] [IsTopol
 /-- The monodromy character of the base change of a torsor `P` along `f` is that of `P` composed
 with the induced map `π₁(X, s) → π₁(Y, s ≫ f)`. -/
 lemma monodromy_pullback (g : G) :
-    (t.pullback f s).monodromy s G g =
+    (t.pullback f).monodromy s G g =
       t.monodromy (s ≫ f) G' (fundamentalGroupMap (pullbackFiberIso f s) G G' g) := by
   let τ := pullbackFiberIso f s
   have hinj : Function.Injective (τ.hom.app t.toFiniteEtale) :=
     (ConcreteCategory.bijective_of_isIso (τ.hom.app t.toFiniteEtale)).1
-  let x := ((t.pullback f s).nonempty_fiber s).some
-  refine ((t.pullback f s).monodromy_eq_iff s G g x _).mpr (hinj ?_)
+  let x := ((t.pullback f).nonempty_fiber s).some
+  refine ((t.pullback f).monodromy_eq_iff s G g x _).mpr (hinj ?_)
   have hτ := ConcreteCategory.congr_hom (τ.hom.naturality
     (t.vaddHom (t.monodromy (s ≫ f) G' (fundamentalGroupMap τ G G' g)).toAdd)) x
   simp only [Functor.comp_map, ConcreteCategory.comp_apply] at hτ
@@ -158,7 +163,7 @@ variable {G G'}
 are isomorphic. -/
 lemma isIsomorphic_of_isIsomorphic_pullback
     (hρ : Function.Surjective (fundamentalGroupMap (pullbackFiberIso f s) G G'))
-    {t₁ t₂ : EtaleTorsor M Y} (h : (t₁.pullback f s).IsIsomorphic (t₂.pullback f s)) :
+    {t₁ t₂ : EtaleTorsor M Y} (h : (t₁.pullback f).IsIsomorphic (t₂.pullback f)) :
     t₁.IsIsomorphic t₂ := by
   refine isIsomorphic_of_monodromy_eq (s ≫ f) G' (ContinuousMonoidHom.ext fun g' ↦ ?_)
   obtain ⟨g, rfl⟩ := hρ g'
@@ -169,7 +174,7 @@ trivial on the kernel of this map is isomorphic to the base change of a torsor o
 lemma exists_isIsomorphic_pullback
     (hρ : Function.Surjective (fundamentalGroupMap (pullbackFiberIso f s) G G'))
     (t : EtaleTorsor M X) (ht : ∀ g ∈ fixingSubgroup s f G, t.monodromy s G g = 1) :
-    ∃ T : EtaleTorsor M Y, (T.pullback f s).IsIsomorphic t := by
+    ∃ T : EtaleTorsor M Y, (T.pullback f).IsIsomorphic t := by
   let ρ := fundamentalGroupMap (pullbackFiberIso f s) G G'
   let χ := t.monodromy s G
   have hker : ρ.ker = fixingSubgroup s f G := ker_fundamentalGroupMap s f G _ G'
