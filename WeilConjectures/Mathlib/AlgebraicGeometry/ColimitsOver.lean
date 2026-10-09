@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.ColimitsOver
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.CategoryTheory.SingleObj
 public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import Mathlib.Algebra.Category.Ring.Constructions
@@ -108,7 +110,7 @@ noncomputable def isColimitOfInjectiveAppTop (c : Cocone K)
       MorphismProperty.Over.w _
     have h₂ : (c.ι.app (SingleObj.star G)).left ≫ c.pt.hom = (K.obj (SingleObj.star G)).hom :=
       MorphismProperty.Over.w _
-    rw [h₁, h₂]
+    exact congr($(h₁.trans h₂.symm).appTop.hom x)
   refine
     { desc s := Over.homMk (homOfAppTop (CommRingCat.ofHom (β s))) (hdesc s) trivial
       fac s j := ?_
@@ -150,8 +152,7 @@ lemma appTop_hom_mem_invariants (x : Γ(X, ⊤)) :
   intro g
   have h : (K.map g).left ≫ (K.obj (SingleObj.star G)).hom = (K.obj (SingleObj.star G)).hom :=
     MorphismProperty.Over.w _
-  have := congr_arg (fun f ↦ f.appTop.hom x) h
-  simpa only [Hom.comp_appTop, CommRingCat.hom_comp, RingHom.comp_apply] using this
+  exact congr($(h).appTop.hom x)
 
 variable (hP' : ∀ {Y Z : Scheme.{u}} (f : Y ⟶ Z), IsAffine Y → IsAffine Z → P f)
 
@@ -362,6 +363,50 @@ lemma preservesColimit_pullback [Finite G] {U : Scheme.{u}} [IsAffine U] (f : U 
   have hA' (W : P.Over ⊤ U) : IsAffine W.left := isAffine_left hP W
   exact isColimitOfInjectiveAppTop hP K' c' hinj' hrange'
 
+include hP hP' in
+/-- Over an affine base, the quotient of a finite étale scheme by a finite monoid action is
+finite étale: its ring is the ring of invariants (`AlgHom.finite_and_etale_fixedPoints`). -/
+lemma isFinite_and_etale_quotientPt [Finite G] [IsFinite (K.obj (SingleObj.star G)).hom]
+    [Etale (K.obj (SingleObj.star G)).hom] :
+    IsFinite (quotientPt K hP').hom ∧ Etale (quotientPt K hP').hom := by
+  let W := K.obj (SingleObj.star G)
+  have : IsAffine W.left := isAffine_left hP W
+  have : IsAffine ((Functor.fromPUnit X).obj W.right) := ‹IsAffine X›
+  have : IsAffine ((𝟭 Scheme).obj W.left) := ‹IsAffine W.left›
+  let R := Γ(X, ⊤)
+  let A := Γ(W.left, ⊤)
+  let : Algebra R A := W.hom.appTop.hom.toAlgebra
+  have : Module.Finite R A := W.hom.finite_appTop
+  have : Algebra.Etale R A := RingHom.etale_algebraMap.mp
+    ((HasRingHomProperty.iff_of_isAffine (P := @Etale) (f := W.hom)).mp ‹_›)
+  have hσ (g : G) : W.hom.appTop ≫ (K.map g).left.appTop = W.hom.appTop := by
+    rw [← Hom.comp_appTop]
+    congr 1
+    exact MorphismProperty.Over.w _
+  let σ (g : G) : A →ₐ[R] A :=
+    { (K.map g).left.appTop.hom with
+      commutes' r := congr($(hσ g).hom r) }
+  obtain ⟨hfin, het⟩ := AlgHom.finite_and_etale_fixedPoints σ
+  have heq : invariants K = (AlgHom.fixedPoints σ).toSubring := by
+    ext a
+    rw [mem_invariants, Subalgebra.mem_toSubring, AlgHom.mem_fixedPoints]
+    rfl
+  let ψ : invariants K ≃+* AlgHom.fixedPoints σ := RingEquiv.subringCongr heq
+  have hψ : (invariantsStructure K).hom = ψ.symm.toRingHom.comp
+      (algebraMap R (AlgHom.fixedPoints σ)) := by
+    ext x
+    rfl
+  have hfin' : (invariantsStructure K).hom.Finite := by
+    rw [hψ]
+    exact RingHom.finite_respectsIso.1 _ ψ.symm (RingHom.finite_algebraMap.mpr hfin)
+  have het' : (invariantsStructure K).hom.Etale := by
+    rw [hψ]
+    exact RingHom.Etale.respectsIso.1 _ ψ.symm (RingHom.etale_algebraMap.mpr het)
+  have h1 : IsFinite (Spec.map (invariantsStructure K)) := (IsFinite.SpecMap_iff _).mpr hfin'
+  have h2 : Etale (Spec.map (invariantsStructure K)) :=
+    (HasRingHomProperty.Spec_iff (P := @Etale)).mpr het'
+  exact ⟨inferInstanceAs (IsFinite (Spec.map _ ≫ _)), inferInstanceAs (Etale (Spec.map _ ≫ _))⟩
+
 end Affine
 
 instance isAffine_directedAffineCover_X {Y : Scheme.{u}} (U : Y.directedAffineCover.I₀) :
@@ -421,6 +466,35 @@ lemma preservesColimit_pullback_directedAffineCover (U : Y.directedAffineCover.I
   · erw [MorphismProperty.Comma.comp_left, Category.assoc, d.pullbackGluedIso_inv_snd]
     exact (MorphismProperty.Over.w ((d.cocone U).ι.app (SingleObj.star G))).trans
       (pullback.lift_snd (f := d.gluedCocone.pt.hom) (g := Y.directedAffineCover.f U) _ _ _).symm
+
+include hP hP' in
+/-- A quotient of a finite étale `Y`-scheme by a finite monoid action, computed in `P.Over ⊤ Y`,
+is finite étale over `Y`: this is local on `Y`, and over an affine open it is the ring of
+invariants. -/
+lemma isFinite_and_etale_of_isColimit {c : Cocone D} (hc : IsColimit c)
+    [IsFinite (D.obj (SingleObj.star G)).hom] [Etale (D.obj (SingleObj.star G)).hom] :
+    IsFinite c.pt.hom ∧ Etale c.pt.hom := by
+  suffices H : ∀ U, IsFinite (Y.directedAffineCover.pullbackHom c.pt.hom U) ∧
+      Etale (Y.directedAffineCover.pullbackHom c.pt.hom U) by
+    exact ⟨(IsZariskiLocalAtTarget.iff_of_openCover (P := @IsFinite) _).mpr fun U ↦ (H U).1,
+      (IsZariskiLocalAtTarget.iff_of_openCover (P := @Etale) _).mpr fun U ↦ (H U).2⟩
+  intro U
+  let F := MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.f U)
+  have := preservesColimit_pullback_directedAffineCover hP hP' D U
+  let e := (isColimitOfPreserves F hc).coconePointUniqueUpToIso
+    (isColimitQuotientCocone hP (D ⋙ F) hP')
+  have : IsFinite ((D ⋙ F).obj (SingleObj.star G)).hom :=
+    inferInstanceAs (IsFinite (pullback.snd _ _))
+  have : Etale ((D ⋙ F).obj (SingleObj.star G)).hom :=
+    inferInstanceAs (Etale (pullback.snd _ _))
+  obtain ⟨h₁, h₂⟩ := isFinite_and_etale_quotientPt hP (D ⋙ F) hP'
+  have he : e.hom.left ≫ (quotientPt (D ⋙ F) hP').hom = (F.obj c.pt).hom :=
+    MorphismProperty.Over.w e.hom
+  have : IsIso e.hom.left :=
+    inferInstanceAs (IsIso ((MorphismProperty.Over.forget P ⊤ _ ⋙ Over.forget _).map e.hom))
+  change IsFinite (F.obj c.pt).hom ∧ Etale (F.obj c.pt).hom
+  rw [← he]
+  exact ⟨inferInstance, inferInstance⟩
 
 end Global
 

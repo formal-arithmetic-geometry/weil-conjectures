@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 /-!
 # The étale fundamental group of a connected scheme
 
@@ -67,76 +68,9 @@ open CategoryTheory Limits PreGaloisCategory
 
 namespace AlgebraicGeometry.Scheme
 
-variable (Y : Scheme.{u})
-
-/-- The category `FÉt(Y)` of finite étale `Y`-schemes, as a full subcategory of the small étale
-site of `Y`. -/
-protected abbrev FiniteEtale : Type (u + 1) :=
-  ObjectProperty.FullSubcategory fun P : Y.Etale ↦ IsFinite P.hom
-
 namespace FiniteEtale
 
-variable {Y} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
-
-lemma hom_ext {P Q : Y.FiniteEtale} {f g : P ⟶ Q}
-    (h : f.hom.left = g.hom.left) : f = g :=
-  ObjectProperty.hom_ext _ (MorphismProperty.Over.Hom.ext h)
-
-lemma hom_left_comp {P Q : Y.FiniteEtale}
-    (f : P ⟶ Q) : f.hom.left ≫ Q.obj.hom = P.obj.hom := by
-  simp
-
-/-- Blueprint `rem-ptr-galois-categories-1`: the geometric fibre of a finite étale `Y`-scheme
-at a geometric point is finite.
-
-The geometric fibre `|P_s|` is the set of `Y`-morphisms `Spec Ω ⟶ P`, which are the sections of
-the base change `P ×_Y Spec Ω ⟶ Spec Ω`; by blueprint `lem-galois-geometric-fibre`
-(`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`) this base change is finite
-étale, so its sections are the `Ω`-algebra maps out of a finite `Ω`-algebra, of which there are
-finitely many. -/
-lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P.obj) := by
-  have : IsFinite P.obj.hom := P.property
-  set h := pullback.snd P.obj.hom s
-  have : IsAffine (pullback P.obj.hom s) := isAffine_of_isAffineHom h
-  let := h.ΓAlgebra
-  have := h.etale_ΓAlgebra
-  have := Algebra.FormallyUnramified.finite_of_free Ω Γ(pullback P.obj.hom s, ⊤)
-  have hid : Spec.map (CommRingCat.ofHom (algebraMap Ω Ω)) = 𝟙 _ := by
-    rw [Algebra.algebraMap_self]
-    exact Spec.map_id _
-  let φ (x : (pointSmallEtale s).fiber.obj P.obj) :
-      Over.mk (Spec.map (CommRingCat.ofHom (algebraMap Ω Ω))) ⟶ Over.mk h :=
-    Over.homMk (pullback.lift x.left (Spec.map (CommRingCat.ofHom (algebraMap Ω Ω)))
-      (by simpa [hid] using Over.w x)) (by simp [h])
-  refine Finite.of_injective (h.overHomEquivAlgHom Ω ∘ φ) fun x y hxy ↦ ?_
-  have := congrArg (fun u ↦ u.left ≫ pullback.fst P.obj.hom s)
-    ((h.overHomEquivAlgHom Ω).injective hxy)
-  exact Over.OverMorphism.ext (by simpa [φ] using this)
-
-/-- Blueprint `def-galois-fibre-functor`: The fibre functor.
-
-The fibre functor `F_s : FÉt(Y) ⥤ FintypeCat` at a geometric point `s : Spec Ω ⟶ Y`, sending a
-finite étale `P ⟶ Y` to the finite set of `Y`-morphisms `Spec Ω ⟶ P`. -/
-noncomputable def fiber : Y.FiniteEtale ⥤ FintypeCat.{u} :=
-  ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ (pointSmallEtale s).fiber) (finite_fiber s)
-
-@[simp]
-lemma fiber_obj_obj (P : Y.FiniteEtale) :
-    ((fiber s).obj P).obj = (pointSmallEtale s).fiber.obj P.obj := rfl
-
-lemma fiber_map_apply {P Q : Y.FiniteEtale} (f : P ⟶ Q) (x : (fiber s).obj P) :
-    (fiber s).map f x = (pointSmallEtale s).fiber.map f.hom x := rfl
-
-lemma fiber_map_left {P Q : Y.FiniteEtale}
-    (f : P ⟶ Q) (x : (fiber s).obj P) : ((fiber s).map f x).left = x.left ≫ f.hom.left := rfl
-
-lemma fiber_ext {P : Y.FiniteEtale}
-    {x y : (fiber s).obj P} (h : x.left = y.left) : x = y :=
-  Over.OverMorphism.ext h
-
-lemma fiber_left_comp {P : Y.FiniteEtale}
-    (x : (fiber s).obj P) : x.left ≫ P.obj.hom = s :=
-  Over.w x
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
 variable (Y) in
 /-- Blueprint `lem-fet-galois-category`: The finite etale category is a Galois category.
@@ -208,20 +142,6 @@ theorem exists_isFundamentalGroup :
       IsFundamentalGroup (fiber s) G := by
   have := essentiallySmall Y
   exact PreGaloisCategory.exists_isFundamentalGroup (fiber s)
-
-/-- A finite étale scheme over a connected scheme with nonempty geometric fibre is surjective:
-its image is open, as étale morphisms are open, closed, as finite morphisms are closed, and
-nonempty. -/
-lemma surjective_of_nonempty_fiber
-    (P : Y.FiniteEtale) (h : Nonempty ((fiber s).obj P)) : Surjective P.obj.hom := by
-  let f : P.obj.left ⟶ Y := P.obj.hom
-  have : IsFinite f := P.property
-  have : Etale f := P.obj.prop
-  have hc : IsClopen (Set.range f) := ⟨f.isClosedMap.isClosed_range, f.isOpenMap.isOpen_range⟩
-  obtain ⟨x⟩ := h
-  let x' : Spec (.of Ω) ⟶ P.obj.left := x.left
-  have hne : (Set.range f).Nonempty := ⟨_, x' default, rfl⟩
-  exact ⟨fun y ↦ (hc.eq_univ hne ▸ Set.mem_univ y : y ∈ Set.range f)⟩
 
 /-- A finite étale `Y`-scheme `P` over a connected scheme with an action of `M` by
 `Y`-automorphisms which is simply transitive on the geometric fibre at `s` is an `M`-torsor:
