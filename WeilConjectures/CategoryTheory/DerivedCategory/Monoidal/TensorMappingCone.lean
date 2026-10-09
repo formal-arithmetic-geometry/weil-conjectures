@@ -215,4 +215,102 @@ lemma reduction_reductionIso_hom (X : CochainComplex A ℤ) :
 
 end Reduction
 
+section ChangeOfScalar
+
+variable {r₁ r₂ s : R} (hr : r₂ * s = r₁)
+  {M₁ M₂ : A} {p₁ : 𝟙_ A ⟶ M₁} {p₂ : 𝟙_ A ⟶ M₂} (w₁ : (r₁ • 𝟙 (𝟙_ A)) ≫ p₁ = 0)
+  (w₂ : (r₂ • 𝟙 (𝟙_ A)) ≫ p₂ = 0)
+  (hS₁ : (ShortComplex.mk (r₁ • 𝟙 (𝟙_ A)) p₁ w₁).ShortExact)
+  (hS₂ : (ShortComplex.mk (r₂ • 𝟙 (𝟙_ A)) p₂ w₂).ShortExact)
+  (q : M₁ ⟶ M₂) (hq : p₁ ≫ q = p₂)
+
+omit [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] [MonoidalCategory A]
+  [MonoidalClosed A] [MonoidalPreadditive A] [BraidedCategory A]
+  [Abelian.HasFunctorialFlatResolution A] [MonoidalLinear R A] in
+include hr in
+lemma smul_comp_smul_eq (X : A) : (s • 𝟙 X) ≫ (r₂ • 𝟙 X) = (r₁ • 𝟙 X) ≫ 𝟙 X := by
+  rw [comp_id, Linear.smul_comp, id_comp, smul_smul, mul_comm, hr]
+
+/-- The morphism of short complexes `(r₁, p₁) ⟶ (r₂, p₂)` given by `s`, `𝟙` and `q`. -/
+@[simps]
+noncomputable def scalarShortComplexMap :
+    ShortComplex.mk (r₁ • 𝟙 (𝟙_ A)) p₁ w₁ ⟶ ShortComplex.mk (r₂ • 𝟙 (𝟙_ A)) p₂ w₂ where
+  τ₁ := s • 𝟙 _
+  τ₂ := 𝟙 _
+  τ₃ := q
+  comm₁₂ := smul_comp_smul_eq hr _
+  comm₂₃ := by simp [hq]
+
+omit [HasDerivedCategory A] [Abelian.HasFunctorialFlatResolution A] in
+omit [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] [MonoidalClosed A]
+  [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
+  [MonoidalLinear R A] in
+include hr in
+lemma single_smul_comm :
+    (HomologicalComplex.single A (.up ℤ) 0).map (r₁ • 𝟙 (𝟙_ A)) ≫ 𝟙 _ =
+      (HomologicalComplex.single A (.up ℤ) 0).map (s • 𝟙 (𝟙_ A)) ≫
+        (HomologicalComplex.single A (.up ℤ) 0).map (r₂ • 𝟙 (𝟙_ A)) := by
+  rw [← CategoryTheory.Functor.map_comp, smul_comp_smul_eq hr, comp_id, comp_id]
+
+omit [HasDerivedCategory A] [Abelian.HasFunctorialFlatResolution A] in
+include hr in
+/-- The map `cone(r₁ : 𝟙 ⟶ 𝟙) ⟶ cone(r₂ : 𝟙 ⟶ 𝟙)` given by `s` is compatible with
+`tensorScalarConeIso'`. -/
+lemma whiskerLeft_tensorScalarConeIso'_hom (X : CochainComplex A ℤ) :
+    X ◁ mappingCone.map ((HomologicalComplex.single A (.up ℤ) 0).map (r₁ • 𝟙 (𝟙_ A)))
+        ((HomologicalComplex.single A (.up ℤ) 0).map (r₂ • 𝟙 (𝟙_ A)))
+        ((HomologicalComplex.single A (.up ℤ) 0).map (s • 𝟙 (𝟙_ A))) (𝟙 _)
+        (single_smul_comm hr) ≫
+        (tensorScalarConeIso' X r₂).hom =
+      (tensorScalarConeIso' X r₁).hom ≫ mappingCone.map (r₁ • 𝟙 X) (r₂ • 𝟙 X) (s • 𝟙 X)
+        (𝟙 X) (smul_comp_smul_eq hr X).symm := by
+  have h := mapBifunctorMappingCone₂Iso_hom_naturality (curriedTensor A) (𝟙 X)
+    ((HomologicalComplex.single A (.up ℤ) 0).map (r₁ • 𝟙 (𝟙_ A)))
+    ((HomologicalComplex.single A (.up ℤ) 0).map (r₂ • 𝟙 (𝟙_ A)))
+    ((HomologicalComplex.single A (.up ℤ) 0).map (s • 𝟙 (𝟙_ A))) (𝟙 _)
+    (single_smul_comm hr)
+  simp only [tensorScalarConeIso', Iso.trans_hom, assoc]
+  erw [reassoc_of% h]
+  congr 1
+  rw [← mappingCone.map_comp, ← mappingCone.map_comp]
+  congr 1
+  · rw [single_map_smul, CategoryTheory.Functor.map_id]
+    erw [mapBifunctorMap_id_smul_id]
+    rw [Linear.smul_comp, Linear.comp_smul]
+    erw [id_comp, comp_id]
+  · ext n p q hpq
+    simp
+
+include hr hq in
+/-- `reductionIso` is compatible with a change of the scalar `r₁ = r₂ s`. -/
+lemma whiskerLeft_reductionIso_hom (X : CochainComplex A ℤ) :
+    (Q.obj X ◁ Q.map ((HomologicalComplex.single A (.up ℤ) 0).map q)) ≫
+        (reductionIso w₂ hS₂ X).hom =
+      (reductionIso w₁ hS₁ X).hom ≫ Q.map (mappingCone.map (r₁ • 𝟙 X) (r₂ • 𝟙 X) (s • 𝟙 X)
+        (𝟙 X) (smul_comp_smul_eq hr X).symm) := by
+  have := isIso_Q_map_scalarConeDesc w₁ hS₁
+  have := isIso_Q_map_scalarConeDesc w₂ hS₂
+  have hd := mappingCone.descShortComplex_naturality
+    ((HomologicalComplex.single A (.up ℤ) 0).mapShortComplex.map
+      (scalarShortComplexMap hr w₁ w₂ q hq))
+  have hd' : Q.map ((HomologicalComplex.single A (.up ℤ) 0).map q) ≫
+      inv (Q.map (scalarConeDesc w₂)) = inv (Q.map (scalarConeDesc w₁)) ≫
+        Q.map (mappingCone.map ((HomologicalComplex.single A (.up ℤ) 0).map (r₁ • 𝟙 (𝟙_ A)))
+        ((HomologicalComplex.single A (.up ℤ) 0).map (r₂ • 𝟙 (𝟙_ A)))
+        ((HomologicalComplex.single A (.up ℤ) 0).map (s • 𝟙 (𝟙_ A))) (𝟙 _)
+        (single_smul_comm hr)) := by
+    rw [IsIso.comp_inv_eq, assoc, IsIso.eq_inv_comp, ← Q.map_comp, ← Q.map_comp]
+    congr 1
+    simp only [Functor.mapShortComplex_map_τ₁, Functor.mapShortComplex_map_τ₂,
+      Functor.mapShortComplex_map_τ₃, scalarShortComplexMap_τ₁, scalarShortComplexMap_τ₂,
+      scalarShortComplexMap_τ₃, CategoryTheory.Functor.map_id] at hd
+    exact hd.symm
+  simp only [reductionIso, tensorScalarConeIso, Iso.trans_hom, whiskerLeftIso_hom, Iso.symm_hom,
+    asIso_inv, asIso_hom, Functor.mapIso_hom, assoc]
+  rw [← MonoidalCategory.whiskerLeft_comp_assoc, hd', MonoidalCategory.whiskerLeft_comp_assoc,
+    Functor.LaxMonoidal.μ_natural_right_assoc, ← Q.map_comp, ← Q.map_comp,
+    whiskerLeft_tensorScalarConeIso'_hom hr]
+
+end ChangeOfScalar
+
 end DerivedCategory

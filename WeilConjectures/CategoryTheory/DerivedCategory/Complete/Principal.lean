@@ -351,13 +351,13 @@ noncomputable def tensorQuotPowTriangleTransition
     tensorQuotPowTriangle hϖ hI Y (n + 1) ⟶ tensorQuotPowTriangle hϖ hI Y n :=
   ((curriedTensor _).obj Y).mapTriangle.map (quotPowTriangleMap J hϖ hI n)
 
-/-- Tensoring with `R/I` commutes with countable products. -/
-noncomputable def isLimit_fan_whiskerRight_quot
+/-- Tensoring with `R/Iⁿ` commutes with countable products. -/
+noncomputable def isLimit_fan_whiskerRight_quotPow (n : ℕ)
     {Y : ℕ → DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} {P : Fan Y} (hP : IsLimit P) :
-    IsLimit (Fan.mk (P.pt ⊗ (quotPowFunctor J I).obj (op 1)) fun j ↦ P.proj j ▷ _) := by
-  let T := fun j ↦ tensorQuotPowTriangle hϖ hI (Y j) 1
-  let ψ : tensorQuotPowTriangle hϖ hI P.pt 1 ⟶ productTriangle T :=
-    productTriangle.lift T fun j ↦ tensorQuotPowTriangleMap hϖ hI (P.proj j) 1
+    IsLimit (Fan.mk (P.pt ⊗ (quotPowFunctor J I).obj (op n)) fun j ↦ P.proj j ▷ _) := by
+  let T := fun j ↦ tensorQuotPowTriangle hϖ hI (Y j) n
+  let ψ : tensorQuotPowTriangle hϖ hI P.pt n ⟶ productTriangle T :=
+    productTriangle.lift T fun j ↦ tensorQuotPowTriangleMap hϖ hI (P.proj j) n
   have hU := isLimit_fan_whiskerRight_unit (J := J) hP
   have h₁ : IsIso ψ.hom₁ := by
     have : ψ.hom₁ = (hU.conePointUniqueUpToIso (productIsProduct _)).hom := by
@@ -375,12 +375,18 @@ noncomputable def isLimit_fan_whiskerRight_quot
       rfl
     rw [this]
     infer_instance
-  have h₃ : IsIso ψ.hom₃ := isIso₃_of_isIso₁₂ ψ (tensorQuotPowTriangle_distinguished hϖ hI _ 1)
-    (productTriangle_distinguished T fun j ↦ tensorQuotPowTriangle_distinguished hϖ hI _ 1) h₁ h₂
+  have h₃ : IsIso ψ.hom₃ := isIso₃_of_isIso₁₂ ψ (tensorQuotPowTriangle_distinguished hϖ hI _ n)
+    (productTriangle_distinguished T fun j ↦ tensorQuotPowTriangle_distinguished hϖ hI _ n) h₁ h₂
   refine IsLimit.ofIsoLimit (productIsProduct _) (Fan.ext (asIso ψ.hom₃).symm fun j ↦ ?_)
   rw [Iso.symm_hom, asIso_inv, IsIso.eq_inv_comp]
   simp only [ψ, productTriangle.lift_hom₃, tensorQuotPowTriangleMap, Fan.mk_pt]
   exact Pi.lift_π _ _
+
+/-- Tensoring with `R/I` commutes with countable products. -/
+noncomputable def isLimit_fan_whiskerRight_quot
+    {Y : ℕ → DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} {P : Fan Y} (hP : IsLimit P) :
+    IsLimit (Fan.mk (P.pt ⊗ (quotPowFunctor J I).obj (op 1)) fun j ↦ P.proj j ▷ _) :=
+  isLimit_fan_whiskerRight_quotPow hϖ hI 1 hP
 
 end Products
 
