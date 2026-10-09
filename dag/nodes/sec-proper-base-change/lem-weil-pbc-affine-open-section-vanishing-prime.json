@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-affine-open-section-vanishing-prime",
+ "kind": "statement",
+ "title": "Sections over an affine open: vanishing at a point iff membership in its prime; basic opens are affine with ring the localization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an affine open, $R=\\mathcal O_X(U)$, and for $x\\in U$ let $\\mathfrak p_x\\subset R$ be the prime ideal of $x$ given by $U\\cong\\operatorname{Spec}R$ [lem-weil-pbc-affine-open-spec-points], [def-weil-affine-spectrum]. For $f\\in R$ and $x\\in U$ write $f(x)$ for the image of $f$ in the residue field $\\kappa(x)$ [def-weil-residue-field], and let $D(f)=\\{x\\in U: f(x)\\neq0\\}$ [lem-weil-pbc-basic-open-function]. Then: (a) for every $x\\in U$, $f(x)=0$ in $\\kappa(x)$ if and only if $f\\in\\mathfrak p_x$; equivalently, under $U\\cong\\operatorname{Spec}R$ the open $D(f)\\subseteq U$ corresponds to $\\{\\mathfrak p\\in\\operatorname{Spec}R: f\\notin\\mathfrak p\\}$; (b) $D(f)$ is an affine open of $X$, and the restriction map $R=\\mathcal O_X(U)\\to\\mathcal O_X(D(f))$ is a localization of $R$ at the multiplicative set $\\{1,f,f^2,\\dots\\}$, i.e. induces an isomorphism $R_f\\cong\\mathcal O_X(D(f))$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), the sentence 'f(t)=0 iff f in p' for (a); Lemma 26.5.6 (Tag 01I3, lemma-standard-open-affine) and Lemma 26.5.1 (Tag 01HV, lemma-spec-sheaves: O(D(f)) = R_f) for (b)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section over affine open vanishes at point in residue field iff it lies in the corresponding prime ideal",
+   "results": "AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, Scheme.evaluation_ne_zero_iff_mem_basicOpen (Mathlib.AlgebraicGeometry.ResidueField), LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero",
+   "date": "2026-10-10",
+   "verdict": "match for (a) in combination with fromSpec_preimage_basicOpen (see grep)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for an affine open U of a scheme, a section f of O(U) is in the prime ideal of x iff x is not in the basic open of f",
+   "results": "Scheme.affineBasicOpen, Scheme.affineBasicOpen_le, IsAffineOpen.basicOpen_basicOpen_is_basicOpen (Mathlib.AlgebraicGeometry.AffineScheme), Scheme.mem_zeroLocus_iff (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-10",
+   "verdict": "ingredients; affineBasicOpen gives (b) affineness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.fromSpec, AlgebraicGeometry.Scheme.basicOpen, PrimeSpectrum.basicOpen",
+   "results": "IsAffineOpen.fromSpec_image_basicOpen, IsAffineOpen.fromSpec_preimage_basicOpen, IsAffineOpen.basicOpen_fromSpec_app (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match: fromSpec_preimage_basicOpen is the 'equivalently' clause of (a)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'evaluation_eq_zero_iff_notMem_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ResidueField.lean; grep -n 'fromSpec_preimage_basicOpen\\|theorem basicOpen\\|isLocalization_basicOpen\\|fromSpec_primeIdealOf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'theorem mem_basicOpen' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "results": "ResidueField.lean:107 Scheme.evaluation_eq_zero_iff_notMem_basicOpen; AffineScheme.lean:588 IsAffineOpen.fromSpec_preimage_basicOpen, :607 IsAffineOpen.basicOpen, :673 IsAffineOpen.isLocalization_basicOpen, :775/:780 primeIdealOf / fromSpec_primeIdealOf; Topology.lean:514 PrimeSpectrum.mem_basicOpen",
+   "date": "2026-10-10",
+   "verdict": "match: a few lemmas, one per clause (sources read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen, AlgebraicGeometry.IsAffineOpen.fromSpec_primeIdealOf, PrimeSpectrum.mem_basicOpen, AlgebraicGeometry.IsAffineOpen.basicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen",
+  "file": "Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": "ResidueField.lean:107; AffineScheme.lean:588, 780, 607, 673; Topology.lean:514",
+  "how": "a few Mathlib lemmas, one per clause: f(x) is X.evaluation U x hx f (ResidueField.lean:96, germ followed by residue); (a) evaluation f = 0 iff x not in X.basicOpen f (evaluation_eq_zero_iff_notMem_basicOpen, :107), and with p_x = hU.primeIdealOf x, hU.fromSpec p_x = x (fromSpec_primeIdealOf, AffineScheme.lean:780), hU.fromSpec^{-1}(X.basicOpen f) = PrimeSpectrum.basicOpen f (fromSpec_preimage_basicOpen, :588), and p in basicOpen f iff f not in p (PrimeSpectrum.mem_basicOpen, Topology.lean:514): a one-line rewrite chain; (b) IsAffineOpen.basicOpen (:607) and IsAffineOpen.isLocalization_basicOpen (:673, IsLocalization.Away f Gamma(X, X.basicOpen f) for the restriction algebra structure). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

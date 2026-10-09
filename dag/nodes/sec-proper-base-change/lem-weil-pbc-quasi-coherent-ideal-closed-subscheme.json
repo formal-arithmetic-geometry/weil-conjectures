@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+ "kind": "statement",
+ "title": "A quasi-coherent sheaf of ideals cuts out a closed subscheme, locally Spec(R/I)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal J\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals [pqf-def-coherent]. Then there is a closed immersion $i:Z\\to X$ [def-weil-closed-immersion] whose ideal sheaf $\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf] equals $\\mathcal J$, and for every affine open $U\\subseteq X$ with $R=\\mathcal O_X(U)$, $U\\cong\\operatorname{Spec}R$ [def-weil-affine-spectrum], the open subscheme $i^{-1}(U)$ of $Z$ is affine and $i^{-1}(U)\\to U$ is identified, over $U\\cong\\operatorname{Spec}R$, with the morphism $\\operatorname{Spec}(R/\\mathcal J(U))\\to\\operatorname{Spec}R$ induced by the quotient map $R\\to R/\\mathcal J(U)$. ($Z$ is the closed subscheme of $X$ cut out by $\\mathcal J$.)",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Example 26.4.1 (Tag 01HM, example-closed-subspace) and Definition 26.4.2 (Tag 01HN, definition-closed-subspace): the closed subspace of a sheaf of ideals; Lemma 26.10.1 (Tag 01IN, lemma-closed-subspace-scheme): it is a scheme, its ideal is quasi-coherent and on affine U = Spec R it is Spec(R/I) -> Spec R; Lemma 26.8.2 (Tag 01IH, lemma-closed-immersion-affine-case) with Example 01IG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed subscheme defined by a quasi-coherent ideal sheaf, on affine open it is Spec of quotient ring",
+   "results": "Scheme.IdealSheafData.subscheme, subschemeCover, subschemeObjIso, glueDataObj, subschemeι_app, subschemeι_app_surjective (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme); IsClosedImmersion.Spec_iff, IsClosedImmersion.spec_of_quotient_mk (Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent ideal sheaf on a scheme gives closed subscheme whose kernel is the ideal sheaf",
+   "results": "Scheme.IdealSheafData.ker_subschemeι, IdealSheafData.subscheme, IdealSheafData.subschemeFunctor_obj, IdealSheafData.ker_subschemeι_app (IdealSheaf.Subscheme), Scheme.IdealSheafData (IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover",
+   "results": "subschemeCover, subschemeCover_map_subschemeι, subSchemeCover_map_inclusion, opensRange_subschemeCover_map (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme)",
+   "date": "2026-10-10",
+   "verdict": "match for the affine-local clause"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^\\(theorem\\|lemma\\|def\\|noncomputable def\\|instance\\)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; grep -n 'IsClosedImmersion I.subschemeι' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "results": "Subscheme.lean:46 glueDataObj (Spec(Gamma(X,U)/I(U))), :51 glueDataObjι (Spec.map of the quotient map followed by U.isoSpec.inv), :454 subscheme, :472 subschemeι, :507 subschemeCover, :520 opensRange_subschemeCover_map, :526 subschemeCover_map_subschemeι, :565 ker_subschemeι_app, :576 ker_subschemeι; ClosedImmersion.lean:94 instance IsClosedImmersion I.subschemeι",
+   "date": "2026-10-10",
+   "verdict": "match (sources read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_subschemeCover_map, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover_map_subschemeι",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": "Subscheme.lean:454, 472, 576, 507, 520, 526, 51; ClosedImmersion.lean:94",
+  "how": "a few Mathlib declarations, one per clause, with the DAG's convention (def-sbc-closed-immersion-ideal-sheaf) that a quasi-coherent sheaf of ideals is a Scheme.IdealSheafData J (its ideals J(U) on affine opens): Z = J.subscheme, i = J.subschemeι (Subscheme.lean:454, :472), a closed immersion by the instance at ClosedImmersion.lean:94; its ideal sheaf i.ker = J is ker_subschemeι (:576); the affine-local clause: subschemeCover.f U : Spec(Gamma(X,U)/J(U)) -> Z (:507) is an open immersion with opensRange = i^{-1}(U) (opensRange_subschemeCover_map, :520) and subschemeCover.f U >> i = glueDataObjι U >> U.ι (:526), where glueDataObjι U = Spec.map (quotient map) >> U.isoSpec.inv (:51). Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

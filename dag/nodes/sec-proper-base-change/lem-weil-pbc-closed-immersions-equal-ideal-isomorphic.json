@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+ "kind": "statement",
+ "title": "Closed immersions with the same ideal sheaf are uniquely isomorphic over the target",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i_1:Z_1\\to X$, $i_2:Z_2\\to X$ closed immersions [def-weil-closed-immersion] whose ideal sheaves $\\ker(\\mathcal O_X\\to i_{1*}\\mathcal O_{Z_1})$ and $\\ker(\\mathcal O_X\\to i_{2*}\\mathcal O_{Z_2})$ [def-sbc-closed-immersion-ideal-sheaf] are equal. Then there is a unique morphism of schemes $\\varphi:Z_1\\to Z_2$ with $i_2\\circ\\varphi=i_1$, and $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.4.5 (Tag 01HO, lemma-closed-immersion: a closed immersion is uniquely isomorphic over X to the closed subspace of its ideal sheaf; proof omitted in Stacks), applied to i_1 and i_2; uniqueness also from Lemma 26.4.6 (Tag 01HP, lemma-characterize-closed-subspace)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two closed immersions with the same kernel ideal sheaf are isomorphic over the base",
+   "results": "IsClosedImmersion.isIso_lift, IsClosedImmersion.isIso_of_ker_eq, IsClosedImmersion.isIso_iff_ker_eq_bot, IsClosedImmersion.overEquivIdealSheafData, IsClosedImmersion.instIsIsoSchemeToImage (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "IsClosedImmersion.lift, isIso_lift, lift_fac, lift_fac_assoc (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift\\|lemma lift_fac\\|lemma isIso_lift\\|lemma isIso_of_ker_eq\\|IsPreimmersion f' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; grep -n 'Mono f' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean",
+   "results": "ClosedImmersion.lean:69 instance IsClosedImmersion f -> IsPreimmersion f, :210 def lift (f.ker <= g.ker), :215 lift_fac, :222 isIso_of_ker_eq, :232 isIso_lift; Preimmersion.lean:65 instance IsPreimmersion f -> Mono f",
+   "date": "2026-10-10",
+   "verdict": "match (sources read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.IsClosedImmersion.isIso_lift",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean",
+  "line": "ClosedImmersion.lean:210, 215, 232, 69; Preimmersion.lean:65",
+  "how": "a few Mathlib lemmas, one per clause: with ideal sheaves i.ker (Scheme.Hom.ker, the match of def-sbc-closed-immersion-ideal-sheaf) and h : i_1.ker = i_2.ker, phi = IsClosedImmersion.lift i_2 i_1 h.symm.le : Z_1 -> Z_2 (:210) satisfies phi >> i_2 = i_1 (lift_fac, :215) and is an isomorphism (isIso_lift i_2 i_1 h.symm, :232); uniqueness: i_2 is a monomorphism (instances ClosedImmersion.lean:69 and Preimmersion.lean:65), so cancel_mono. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
