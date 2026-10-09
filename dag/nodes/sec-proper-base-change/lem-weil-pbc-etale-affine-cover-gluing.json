@@ -14,9 +14,133 @@
   "def-weil-pbc-finite-etale-category",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation: for $a,b$ write $U_{ab}=U_a\\cap U_b$, an open subscheme of $U$ (so $U_{aa}=U_a$). The base $X$ is quasi-compact and quasi-separated: $X\\cong\\operatorname{Spec}R$ is quasi-compact (if $\\operatorname{Spec}R=\\bigcup_\\lambda D(f_\\lambda)$, the $f_\\lambda$ generate the unit ideal, so finitely many do and the corresponding $D(f_\\lambda)$ cover), and $X\\to\\operatorname{Spec}\\mathbf Z$ is a morphism of affine schemes, hence affine, hence quasi-separated. Each $U_a\\to X$ (the restriction $j|_{U_a}$) is a morphism of affine schemes, hence affine [pqf-def-affine-morphism], hence quasi-compact and separated. The open immersion $U_{ab}\\to U_a$ is separated (an immersion), so the composite $U_{ab}\\to U_a\\to X$ is separated. $U_{ab}$ is quasi-compact: the open immersion $U_a\\to U$ has affine (so quasi-compact) source and quasi-separated target, so it is quasi-compact, and $U_{ab}$ is the preimage of the affine open $U_b$ under it; hence $U_{ab}\\to X$ is quasi-compact (quasi-compact source, quasi-separated target). Finally $U_{ab}\\to X$ is the composite of the open immersion $U_{ab}\\to U$ (etale) with the etale $j$, hence etale. So each of the finitely many morphisms $g\\in F:=\\{U_{ab}\\to X: 1\\le a\\le b\\le m\\}$ is a separated, quasi-compact etale morphism with quasi-compact source over the quasi-compact and quasi-separated scheme $X$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'Choose a finite affine open covering $U=\\bigcup U_j$. Apply the previous case to all the morphisms $U_j\\to X$ and $U_j\\cap U_{j'}\\to X$' (that these morphisms are separated, etale and quasi-compact is left implicit)"
+   }
+  },
+  {
+   "text": "For each $g:W_g\\to X$ in $F$ the separated case gives a finite partition of $X$ by constructible locally closed subschemes, i.e. immersions $\\iota^g_k:Z^g_k\\to X$ ($k<n_g$) whose images $X^g_k$ are pairwise disjoint, constructible and locally closed and cover $X$, with $W_g\\times_XZ^g_k\\to Z^g_k$ finite etale for every $k$.",
+   "uses": [
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'Apply the previous case to all the morphisms $U_j\\to X$ and $U_j\\cap U_{j'}\\to X$' (previous case: More on Morphisms, Lemma 07RZ)"
+   }
+  },
+  {
+   "text": "Common refinement. Enumerate $F=\\{g_1,\\dots,g_N\\}$ and apply the common refinement of stratifications $N-1$ times: its strata are indexed by tuples $\\underline k=(k_1,\\dots,k_N)$, with scheme $T_{\\underline k}=Z^{g_1}_{k_1}\\times_X\\cdots\\times_XZ^{g_N}_{k_N}$, immersion $\\iota_{\\underline k}:T_{\\underline k}\\to X$ (the projection to $Z^{g_1}_{k_1}$ followed by $\\iota^{g_1}_{k_1}$) and image $\\bigcap_sX^{g_s}_{k_s}$ (empty strata may be dropped). These images are pairwise disjoint, cover $X$, are locally closed, and are constructible as finite intersections of constructible sets (the constructible subsets form a Boolean algebra). For each $s$, $\\iota_{\\underline k}$ factors as the projection $\\pi_s:T_{\\underline k}\\to Z^{g_s}_{k_s}$ followed by $\\iota^{g_s}_{k_s}$, so $W_{g_s}\\times_XT_{\\underline k}\\cong(W_{g_s}\\times_XZ^{g_s}_{k_s})\\times_{Z^{g_s}_{k_s}}T_{\\underline k}$ over $T_{\\underline k}$ (transitivity of fibre products), which is finite etale over $T_{\\underline k}$ as a base change of a finite etale morphism.",
+   "uses": [
+    "lemma-constructible-common-refinement",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'choose a common refinement $X=\\coprod X_i$ of the resulting partitions'"
+   }
+  },
+  {
+   "text": "Affine refinement. Each $\\iota_{\\underline k}:T_{\\underline k}\\to X$ is an immersion into the affine scheme $X$ with constructible image, so there are finitely many affine schemes $T_{\\underline k,l}$ with immersions $\\kappa_{\\underline k,l}:T_{\\underline k,l}\\to T_{\\underline k}$ such that the composites $\\iota_{\\underline k}\\circ\\kappa_{\\underline k,l}$ are immersions with pairwise disjoint, locally closed, constructible images covering $\\iota_{\\underline k}(T_{\\underline k})$. Let $(X_i\\to X)_i$ be the finite family of all these $\\iota_{\\underline k}\\circ\\kappa_{\\underline k,l}$: their images are pairwise disjoint (pieces of one stratum are disjoint, and pieces of different strata lie in disjoint strata) and cover $X$, so this is a finite partition of $X$ by constructible locally closed affine subschemes. For $X_i=T_{\\underline k,l}$ and every $g\\in F$, $W_g\\times_XX_i\\cong(W_g\\times_XT_{\\underline k})\\times_{T_{\\underline k}}X_i$ is finite etale over $X_i$ as a base change of the finite etale $W_g\\times_XT_{\\underline k}\\to T_{\\underline k}$ (step 3). Thus every $U_a\\times_XX_i\\to X_i$ and every $U_{ab}\\times_XX_i\\to X_i$ is finite etale (for $a>b$ use $U_{ab}=U_{ba}$).",
+   "uses": [
+    "lem-weil-pbc-immersion-affine-constructible-pieces",
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'After refining the partition further we may assume $X_i$ affine as well.'"
+   }
+  },
+  {
+   "text": "Charts and overlaps over a stratum. Fix $i$, let $p:V=U\\times_XX_i\\to U$ be the first projection and $V_a=p^{-1}(U_a)$. Applied to the open subschemes $U_{ab}\\subseteq U$ and $X_i\\subseteq X_i$, the open fibre product lemma identifies $U_{ab}\\times_XX_i$, compatibly with the projections to $X_i$, with the open subscheme $p^{-1}(U_{ab})=V_a\\cap V_b$ of $V$; in particular $V_a\\cong U_a\\times_XX_i$, and the $V_a$ cover $V$ since the $U_a$ cover $U$. By step 4, $V_a\\to X_i$ and $V_a\\cap V_b\\to X_i$ are finite etale. A finite morphism is affine, so, $X_i$ being affine, $V_a$ and $V_a\\cap V_b$ are affine schemes, and $V_a\\to X_i$ is separated (affine morphisms are separated). The identity of $X_i$ is a closed immersion, hence proper, so the finite morphism $V_a\\cap V_b\\to X_i$ is proper (a finite morphism followed by a proper one is proper).",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'The morphisms $V_j=U_j\\times_XX_i\\to X_i$ and $V_{jj'}=(U_j\\cap U_{j'})\\times_XX_i\\to X_i$ are finite etale. Hence $V_j$ and $V_{jj'}$ are affine schemes'"
+   }
+  },
+  {
+   "text": "Overlaps are closed in the charts. The inclusion $e:V_a\\cap V_b\\to V_a$ is a morphism over $X_i$ from the proper $X_i$-scheme $V_a\\cap V_b$ to the separated $X_i$-scheme $V_a$, so $e$ is proper. Being an open immersion, $e$ is an immersion; a proper immersion is a closed immersion (its image is closed). Since $V_a$ is affine, the closed immersion $e$ induces a surjection $\\mathcal O_V(V_a)\\to\\mathcal O_V(V_a\\cap V_b)$ on global sections (the restriction map). Hence the ring map $\\mathcal O_V(V_a)\\otimes_{\\mathbf Z}\\mathcal O_V(V_b)\\to\\mathcal O_V(V_a\\cap V_b)$, $x\\otimes y\\mapsto x|\\cdot y|$, is surjective: already its restriction to the elements $x\\otimes1$ is the surjective restriction map.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: '$V_{jj'}\\subset V_j$ is closed as well as open (since $V_{jj'}\\to X_i$ is proper, so Morphisms, Lemma 01W6 applies) ... $\\mathcal O(V_j)\\to\\mathcal O(V_{jj'})$ is surjective'"
+   }
+  },
+  {
+   "text": "Separatedness. $V=\\bigcup_aV_a$ is a covering by affine opens whose pairwise intersections $V_a\\cap V_b$ are affine with $\\mathcal O_V(V_a)\\otimes_{\\mathbf Z}\\mathcal O_V(V_b)\\to\\mathcal O_V(V_a\\cap V_b)$ surjective (steps 5 and 6), over the affine scheme $X_i$; by the affine-cover criterion for separatedness, $V=U\\times_XX_i\\to X_i$ is separated. Together with step 4 this proves the lemma.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, lines 12045-12060: 'Then $V=\\bigcup V_j$ is separated because $\\mathcal O(V_j)\\to\\mathcal O(V_{jj'})$ is surjective, see Schemes, Lemma 01KP'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-separated-stratified-finite",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-finite-etale-category",
+  "lemma-constructible-common-refinement",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-immersion-affine-constructible-pieces",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-separated-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, lines 12045-12060"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +165,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +185,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-affine-cover-gluing",
+  "worker": "stage1",
+  "summary": "Read Stacks 03S9 (etale-cohomology.tex 12035-12061), 01KP (schemes.tex 4157) and the cited nodes. Statement kept. Proof written in 7 steps following the second paragraph of the 03S9 proof: (1) charts U_a and overlaps U_a cap U_b are separated, quasi-compact and etale over the qcqs affine X (left implicit in Stacks); (2) separated case on each; (3) common refinement via the fibre-product construction of lemma-constructible-common-refinement, with constructibility of intersections and finite-etale base change; (4) affine refinement, new unsplit node lem-weil-pbc-immersion-affine-constructible-pieces; (5) V_a, V_a cap V_b affine, overlaps identified via lem-weil-pbc-open-fibre-product, finite implies proper; (6) inclusion of the overlap is proper (proper-over-separated) and an open immersion, hence a closed immersion (01W6 route), giving surjective restriction on global sections; (7) Stacks 01KP(2) over affine base, new unsplit node lem-weil-pbc-separated-affine-cover-criterion. The separated-case node lem-weil-pbc-etale-separated-stratified-finite lacks the hypothesis that f be quasi-compact (without it the statement is false: an infinite disjoint union of copies of Y); here it is applied only to quasi-compact morphisms."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Seven steps along Stacks 03S9 second paragraph: charts and overlaps separated quasi-compact etale over the affine X, the separated case (committed node, hypothesis qc satisfied), common refinement by fibre products of strata, affine refinement (new unsplit node: an immersion with constructible image in an affine scheme splits into finitely many affine constructible pieces), V_a and V_a cap V_b affine and finite over X_i, overlaps closed in charts (proper immersion = closed immersion, leaf of sk-thm-chow; global sections surjective), separatedness by 01KP(2) over an affine base (new unsplit node, a correct specialization). Correct."
+ }
 }
