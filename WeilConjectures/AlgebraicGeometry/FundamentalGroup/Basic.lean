@@ -88,8 +88,9 @@ attribute [instance] preGaloisCategory
 
 For connected `Y` the geometric fibre at a geometric point is a fibre functor on the
 finite étale `Y`-schemes. -/
-theorem fiberFunctor [ConnectedSpace Y] : FiberFunctor (fiber s) := by
-  sorry
+theorem fiberFunctor [ConnectedSpace Y] : FiberFunctor (fiber s) where
+  preservesQuotientsByFiniteGroups _ _ _ := inferInstance
+  reflectsIsos := ⟨fun f _ ↦ isIso_of_isIso_fiber_map s f⟩
 
 attribute [instance] fiberFunctor
 
