@@ -7,8 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
@@ -90,6 +92,27 @@ theorem isIntegrallyClosed_stalk_normalization [QuasiCompact f] [QuasiSeparated 
   exact isIntegrallyClosed_of_isLocalization _ _
     (hV.primeIdealOf ⟨y, hyU⟩).asIdeal.primeCompl_le_nonZeroDivisors
 
+/-- The relative normalization `f.fromNormalization` is finite as soon as, over every nonempty
+affine open `U` of `Y`, the integral closure of `Γ(Y, U)` in `Γ(X, f⁻¹ U)` is a finite
+`Γ(Y, U)`-module. -/
+theorem isFinite_fromNormalization_of_finite [QuasiCompact f] [QuasiSeparated f]
+    (H : ∀ U : Y.Opens, IsAffineOpen U → (U : Set Y).Nonempty →
+      let := (f.app U).hom.toAlgebra
+      Module.Finite Γ(Y, U) (integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U))) :
+    IsFinite f.fromNormalization := by
+  rw [isFinite_iff]
+  refine ⟨inferInstance, fun U hU ↦ ?_⟩
+  rw [f.fromNormalization_app hU, CommRingCat.hom_comp]
+  let := (f.app U).hom.toAlgebra
+  refine RingHom.Finite.comp (RingHom.Finite.of_surjective _
+    (f.normalizationObjIso hU).commRingCatIsoToRingEquiv.symm.surjective) ?_
+  by_cases hne : (U : Set Y).Nonempty
+  · exact H U hU hne
+  · have : Subsingleton Γ(Y, U) := CommRingCat.subsingleton_of_isTerminal
+      (Y.sheaf.isTerminalOfEqEmpty (by simpa [Set.not_nonempty_iff_eq_empty] using hne))
+    have : Subsingleton (integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U)) := Module.subsingleton Γ(Y, U) _
+    exact RingHom.finite_algebraMap.mpr inferInstance
+
 /-- The normalization of a scheme `Y` locally of finite type over a field `K` in a
 quasi-compact integral open subscheme `X` is finite over `Y`.
 
@@ -100,7 +123,52 @@ latter is a finite `A`-module by E. Noether's finiteness theorem. -/
 theorem isFinite_fromNormalization {K : Type u} [Field K] [IsOpenImmersion f] [QuasiCompact f]
     [IsIntegral X] (q : Y ⟶ Spec (.of K)) [LocallyOfFiniteType q] :
     IsFinite f.fromNormalization := by
-  sorry
+  refine f.isFinite_fromNormalization_of_finite fun U hU _ ↦ ?_
+  let := (f.app U).hom.toAlgebra
+  let := ((q.appLE ⊤ U le_top).hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom).toAlgebra
+  have : Algebra.FiniteType K Γ(Y, U) :=
+    RingHom.FiniteType.comp (HasRingHomProperty.appLE @LocallyOfFiniteType q ‹_›
+      ⟨⊤, isAffineOpen_top _⟩ ⟨U, hU⟩ le_top) (RingHom.FiniteType.of_surjective _
+        (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv.symm.surjective)
+  have := Algebra.FiniteType.isNoetherianRing K Γ(Y, U)
+  by_cases hV : (f ⁻¹ᵁ U : Set X).Nonempty
+  swap
+  · have : Subsingleton Γ(X, f ⁻¹ᵁ U) := CommRingCat.subsingleton_of_isTerminal
+      (X.sheaf.isTerminalOfEqEmpty ((TopologicalSpace.Opens.not_nonempty_iff_eq_bot _).mp hV))
+    infer_instance
+  have : Nonempty (f ⁻¹ᵁ U) := hV.to_subtype
+  have hη : genericPoint X ∈ f ⁻¹ᵁ U :=
+    ((genericPoint_spec X).mem_open_set_iff (f ⁻¹ᵁ U).isOpen).mpr (by simpa using hV)
+  let : Algebra Γ(Y, U) X.functionField :=
+    (f.app U ≫ X.germToFunctionField (f ⁻¹ᵁ U)).hom.toAlgebra
+  have : IsScalarTower Γ(Y, U) Γ(X, f ⁻¹ᵁ U) X.functionField := .of_algebraMap_eq' rfl
+  have halg (a : Γ(Y, U)) : algebraMap Γ(Y, U) X.functionField a =
+      f.stalkMap (genericPoint X) (Y.presheaf.germ U _ hη a) := by
+    rw [Scheme.Hom.germ_stalkMap_apply]; rfl
+  have hdiv (z : X.functionField) :
+      ∃ a b, z = algebraMap Γ(Y, U) _ a / algebraMap Γ(Y, U) _ b := by
+    let := TopCat.Presheaf.algebra_section_stalk Y.presheaf (⟨_, hη⟩ : U)
+    have := hU.isLocalization_stalk ⟨_, hη⟩
+    obtain ⟨⟨a, s⟩, hw⟩ := IsLocalization.surj (hU.primeIdealOf ⟨_, hη⟩).asIdeal.primeCompl
+      (inv (f.stalkMap (genericPoint X)) z)
+    have hs := IsLocalization.map_units (Y.presheaf.stalk (f (genericPoint X))) s
+    refine ⟨a, s, eq_div_of_mul_eq ?_ ?_⟩
+    · rw [halg]
+      exact ((hs.map (f.stalkMap (genericPoint X)).hom)).ne_zero
+    · have := congr(f.stalkMap (genericPoint X) $hw)
+      rw [map_mul, ← CommRingCat.comp_apply, IsIso.inv_hom_id, CommRingCat.id_apply] at this
+      rw [halg, halg]
+      exact this
+  have := Algebra.FiniteType.finite_integralClosure_of_forall_eq_div K hdiv
+  let e : Γ(X, f ⁻¹ᵁ U) →ₐ[Γ(Y, U)] X.functionField :=
+    { (X.germToFunctionField (f ⁻¹ᵁ U)).hom with commutes' _ := rfl }
+  let ψ : integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U) →ₗ[Γ(Y, U)]
+      integralClosure Γ(Y, U) X.functionField :=
+    { toFun x := ⟨e x, x.2.map e⟩
+      map_add' x y := Subtype.ext (map_add e x.1 y.1)
+      map_smul' a x := Subtype.ext (map_smul e a x.1) }
+  refine Module.Finite.of_injective ψ fun x y h ↦ ?_
+  exact Subtype.ext (X.germToFunctionField_injective (f ⁻¹ᵁ U) congr($h.1))
 
 end AlgebraicGeometry.Scheme.Hom
 
@@ -132,35 +200,6 @@ instance surjective_fromNormalization : Surjective X.fromNormalization :=
   have : UniversallyClosed X.fromNormalization :=
     (IsIntegralHom.iff_universallyClosed_and_isAffineHom.mp inferInstance).1
   inferInstance
-
-/-- **Finiteness of the normalization.** For an integral scheme `X` locally of finite type over a
-field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
-`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
-finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
-`X` is. (blueprint: `lem-sc-normalization-exists`) -/
-theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
-    (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization :=
-  sorry
-
-/-- **The normalization is birational.** For an integral scheme `X` locally of finite type over
-a field `k`, the normalization `ν : X^ν ⟶ X` is an isomorphism over a nonempty, hence dense,
-open subscheme of `X`. (blueprint: `lem-sc-normalization-exists`) -/
-theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
-    [LocallyOfFiniteType q] :
-    ∃ U : X.Opens, (U : Set X).Nonempty ∧ IsIso (X.fromNormalization ∣_ U) :=
-  sorry
-
-/-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
-over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
-specializations, and identifies no two distinct points one of which specializes to the other.
-(blueprint: `lem-sc-normalization-exists`) -/
-theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
-    [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
-  have := X.isFinite_fromNormalization_of_locallyOfFiniteType q
-  exact le_antisymm (topologicalKrullDim_le_of_continuous X.fromNormalization.continuous
-      fun _ _ h e ↦ X.fromNormalization.eq_of_specializes_of_apply_eq h e)
-    (topologicalKrullDim_le_of_specializingMap X.fromNormalization.isClosedMap.specializingMap
-      X.fromNormalization.surjective)
 
 /-- Over a nonempty affine open `V` of an integral scheme `X` with `Γ(X, V)` integrally closed,
 the normalization `ν : X^ν ⟶ X` in the function field induces an isomorphism on sections:
@@ -277,8 +316,48 @@ integral closure of the finitely generated `k`-domain `B` in `L` is a finite `B`
 (blueprint: `lem-fin-normalization-extension-finite`) -/
 theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [FiniteDimensional X.functionField L] :
-    IsFinite (X.fromNormalizationIn L) :=
-  sorry
+    IsFinite (X.fromNormalizationIn L) := by
+  set φ := X.fromSpecOfAlgebraFunctionField L
+  refine φ.isFinite_fromNormalization_of_finite fun U hU hne ↦ ?_
+  let := (φ.app U).hom.toAlgebra
+  have hηU : genericPoint X ∈ U :=
+    ((genericPoint_spec X).mem_open_set_iff U.isOpen).mpr (by simpa using hne)
+  have : Nonempty U := ⟨⟨_, hηU⟩⟩
+  have hxU : φ (closedPoint L) ∈ U := by
+    rw [Hom.comp_apply, Spec_closedPoint]
+    convert hηU
+    exact fromSpecStalk_closedPoint
+  have hφU : φ ⁻¹ᵁ U = ⊤ := preimage_eq_top_of_closedPoint_mem φ hxU
+  let θ : Γ(Spec (.of L), φ ⁻¹ᵁ U) ≅ .of L :=
+    (Spec (.of L)).presheaf.mapIso (eqToIso hφU.symm).op ≪≫ ΓSpecIso (.of L)
+  have hθφ : φ.app U ≫ θ.hom =
+      X.germToFunctionField U ≫ CommRingCat.ofHom (algebraMap X.functionField L) := by
+    have h1 := germ_stalkClosedPointTo φ U hxU
+    have h2 := germ_stalkClosedPointTo_Spec_fromSpecStalk
+      (CommRingCat.ofHom (algebraMap X.functionField L)) U hxU
+    exact h1.symm.trans h2
+  let : Algebra Γ(X, U) L := (φ.app U ≫ θ.hom).hom.toAlgebra
+  have := functionField_isFractionRing_of_isAffineOpen X U hU
+  have : IsScalarTower Γ(X, U) X.functionField L := IsScalarTower.of_algebraMap_eq' <| by
+    change (φ.app U ≫ θ.hom).hom = _
+    rw [hθφ]
+    rfl
+  let := ((q.appLE ⊤ U le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
+  have : Algebra.FiniteType k Γ(X, U) :=
+    RingHom.FiniteType.comp (HasRingHomProperty.appLE @LocallyOfFiniteType q ‹_›
+      ⟨⊤, isAffineOpen_top _⟩ ⟨U, hU⟩ le_top) (RingHom.FiniteType.of_surjective _
+        (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm.surjective)
+  have := Algebra.FiniteType.finite_integralClosure k (A := Γ(X, U)) X.functionField L
+  let e : Γ(Spec (.of L), φ ⁻¹ᵁ U) →ₐ[Γ(X, U)] L :=
+    { θ.hom.hom with commutes' _ := rfl }
+  let ψ : integralClosure Γ(X, U) Γ(Spec (.of L), φ ⁻¹ᵁ U) →ₗ[Γ(X, U)]
+      integralClosure Γ(X, U) L :=
+    { toFun x := ⟨e x, x.2.map e⟩
+      map_add' x y := Subtype.ext (map_add e x.1 y.1)
+      map_smul' a x := Subtype.ext (map_smul e a x.1) }
+  have := Algebra.FiniteType.isNoetherianRing k Γ(X, U)
+  refine Module.Finite.of_injective ψ fun x y h ↦ ?_
+  exact Subtype.ext ((ConcreteCategory.bijective_of_isIso θ.hom).1 congr($h.1))
 
 /-- **The function field of the normalization in `L` is `L`.** For an integral scheme `X` and
 an algebraic extension `L` of its function field, the morphism `Spec L ⟶ X^L` is the generic
@@ -382,5 +461,71 @@ theorem exists_iso_toNormalization_normalizationIn
   exact ⟨asIso (Spec.map ψ), hgψ⟩
 
 end FiniteExtension
+
+/-- **Finiteness of the normalization.** For an integral scheme `X` locally of finite type over a
+field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
+`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
+finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
+`X` is. (blueprint: `lem-sc-normalization-exists`) -/
+theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
+    (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization := by
+  have h : X.fromSpecOfAlgebraFunctionField X.functionField = X.fromSpecFunctionField := by
+    simp [fromSpecOfAlgebraFunctionField]
+  have key {T : Scheme.{u}} (φ ψ : T ⟶ X) [QuasiCompact φ] [QuasiSeparated φ] [QuasiCompact ψ]
+      [QuasiSeparated ψ] (h : φ = ψ) (hφ : IsFinite φ.fromNormalization) :
+      IsFinite ψ.fromNormalization := by
+    subst h; exact hφ
+  exact key _ _ h (X.isFinite_fromNormalizationIn X.functionField q)
+
+/-- **The normalization is birational.** For an integral scheme `X` locally of finite type over
+a field `k`, the normalization `ν : X^ν ⟶ X` is an isomorphism over a nonempty, hence dense,
+open subscheme of `X`. (blueprint: `lem-sc-normalization-exists`) -/
+theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] :
+    ∃ U : X.Opens, (U : Set X).Nonempty ∧ IsIso (X.fromNormalization ∣_ U) := by
+  obtain ⟨x⟩ := (inferInstance : Nonempty X)
+  obtain ⟨V, hV, hxV, -⟩ := exists_isAffineOpen_mem_and_subset (x := x) (U := ⊤) trivial
+  have : Nonempty V := ⟨⟨x, hxV⟩⟩
+  let := ((q.appLE ⊤ V le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
+  have : Algebra.FiniteType k Γ(X, V) :=
+    RingHom.FiniteType.comp (HasRingHomProperty.appLE @LocallyOfFiniteType q ‹_›
+      ⟨⊤, isAffineOpen_top _⟩ ⟨V, hV⟩ le_top) (RingHom.FiniteType.of_surjective _
+        (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm.surjective)
+  have := functionField_isFractionRing_of_isAffineOpen X V hV
+  have := Algebra.FiniteType.finite_integralClosure k (A := Γ(X, V)) X.functionField
+    X.functionField
+  obtain ⟨b, hb, hbint⟩ := exists_isInteger_smul_of_finite_integralClosure (A := Γ(X, V))
+    (K := X.functionField)
+  have hb0 : b ≠ 0 := nonZeroDivisors.ne_zero hb
+  have hηV : genericPoint X ∈ V :=
+    ((genericPoint_spec X).mem_open_set_iff V.isOpen).mpr (by simpa using ‹Nonempty V›)
+  have hηW : genericPoint X ∈ X.basicOpen b := by
+    rw [X.mem_basicOpen b _ hηV]
+    exact isUnit_iff_ne_zero.mpr ((map_ne_zero_iff _ (X.germToFunctionField_injective V)).mpr hb0)
+  have hW : IsAffineOpen (X.basicOpen b) := hV.basicOpen b
+  have : Nonempty (X.basicOpen b) := ⟨⟨_, hηW⟩⟩
+  have := hV.isLocalization_basicOpen b
+  have := functionField_isFractionRing_of_isAffineOpen X _ hW
+  have : IsScalarTower Γ(X, V) Γ(X, X.basicOpen b) X.functionField :=
+    .of_algebraMap_eq fun a ↦ (X.presheaf.germ_res_apply _ _ _ a).symm
+  have : IsIntegrallyClosed Γ(X, X.basicOpen b) :=
+    isIntegrallyClosed_of_isLocalization_away hb0 hbint
+  refine ⟨X.basicOpen b, ⟨_, hηW⟩, X.isIso_fromNormalization_restrict _ fun y hy ↦ ?_⟩
+  let := TopCat.Presheaf.algebra_section_stalk X.presheaf (⟨y, hy⟩ : X.basicOpen b)
+  have := hW.isLocalization_stalk ⟨y, hy⟩
+  exact isIntegrallyClosed_of_isLocalization _ _
+    (hW.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl_le_nonZeroDivisors
+
+/-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
+over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
+specializations, and identifies no two distinct points one of which specializes to the other.
+(blueprint: `lem-sc-normalization-exists`) -/
+theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
+  have := X.isFinite_fromNormalization_of_locallyOfFiniteType q
+  exact le_antisymm (topologicalKrullDim_le_of_continuous X.fromNormalization.continuous
+      fun _ _ h e ↦ X.fromNormalization.eq_of_specializes_of_apply_eq h e)
+    (topologicalKrullDim_le_of_specializingMap X.fromNormalization.isClosedMap.specializingMap
+      X.fromNormalization.surjective)
 
 end AlgebraicGeometry.Scheme

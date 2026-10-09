@@ -101,6 +101,35 @@ def isoMk {M N : Mod C A} (e : M.X ≅ N.X) (h : act M.X ≫ e.hom = A ◁ e.hom
   hom_inv_id := Mod.hom_ext _ _ e.hom_inv_id
   inv_hom_id := Mod.hom_ext _ _ e.inv_hom_id
 
+/-- The linear map `A ⟶ M` sending `1` to `x`. -/
+def regularLift (M : Mod C A) (x : 𝟙_ C ⟶ M.X) : regular A ⟶ M :=
+  homMk ((ρ_ A).inv ≫ A ◁ x ≫ act M.X) (by
+    change (MonObj.mul : A ⊗ A ⟶ A) ≫ (ρ_ A).inv ≫ A ◁ x ≫ act M.X =
+      A ◁ ((ρ_ A).inv ≫ A ◁ x ≫ act M.X) ≫ act M.X
+    rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc]
+    erw [mul_act]
+    simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+    monoidal)
+
+lemma one_comp_regularLift (M : Mod C A) (x : 𝟙_ C ⟶ M.X) :
+    (MonObj.one : 𝟙_ C ⟶ A) ≫ (regularLift M x).hom = x := by
+  change (MonObj.one : 𝟙_ C ⟶ A) ≫ (ρ_ A).inv ≫ A ◁ x ≫ act M.X = x
+  rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc]
+  erw [one_act]
+  monoidal
+
+lemma regular_hom_ext {M : Mod C A} {f g : regular A ⟶ M}
+    (h : (MonObj.one : 𝟙_ C ⟶ A) ≫ f.hom = (MonObj.one : 𝟙_ C ⟶ A) ≫ g.hom) :
+    f = g := by
+  have key (f : regular A ⟶ M) : f = regularLift M ((MonObj.one : 𝟙_ C ⟶ A) ≫ f.hom) := by
+    refine Mod.hom_ext _ _ ?_
+    change f.hom = (ρ_ A).inv ≫ A ◁ ((MonObj.one : 𝟙_ C ⟶ A) ≫ f.hom) ≫ act M.X
+    rw [MonoidalCategory.whiskerLeft_comp_assoc]
+    erw [← IsModHom.smul_hom (A := A) (f := f.hom)]
+    change f.hom = (ρ_ A).inv ≫ A ◁ (MonObj.one : 𝟙_ C ⟶ A) ≫ (MonObj.mul : A ⊗ A ⟶ A) ≫ f.hom
+    rw [MonObj.mul_one_assoc, Iso.inv_hom_id_assoc]
+  rw [key f, key g, h]
+
 end Mod
 
 namespace Functor

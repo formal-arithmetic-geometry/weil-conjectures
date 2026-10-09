@@ -38,75 +38,9 @@ open CategoryTheory Limits PreGaloisCategory
 
 namespace AlgebraicGeometry
 
-/-- A geometric point `y : Spec Ω ⟶ Y`, `Ω` separably closed, whose image lies in the image of a
-finite étale morphism `f : P ⟶ Y` lifts along `f`: the fibre `P ×_Y Spec Ω` is a nonempty
-disjoint union of copies of `Spec Ω`, so it has a section. -/
-lemma Scheme.Hom.exists_lift_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y) [IsFinite f] [Etale f]
-    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (y : Spec (.of Ω) ⟶ Y)
-    (h : ∃ z, y z ∈ Set.range f) : ∃ x : Spec (.of Ω) ⟶ P, x ≫ f = y := by
-  obtain ⟨z, w, hw⟩ := h
-  obtain ⟨t, -, -⟩ := Scheme.Pullback.exists_preimage_pullback w z hw
-  obtain ⟨ι, _, -, ⟨e⟩⟩ := f.exists_overIso_sigma_of_isSepClosed y
-  obtain ⟨i, -⟩ := (sigmaMk fun _ : ι ↦ Spec (.of Ω)).symm (e.hom.left t)
-  have he : e.inv.left ≫ pullback.snd f y = Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of Ω)) :=
-    Over.w e.inv
-  refine ⟨Sigma.ι (fun _ : ι ↦ Spec (.of Ω)) i ≫ e.inv.left ≫ pullback.fst f y, ?_⟩
-  rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc e.inv.left, he,
-    Sigma.ι_desc_assoc, Category.id_comp]
-
 namespace Scheme.FiniteEtale
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
-
-/-- The geometric fibre of a nonempty finite étale scheme over a connected scheme is nonempty:
-the image of `P` is open and closed, hence everything, so `s` lifts. -/
-lemma nonempty_fiber_of_nonempty [ConnectedSpace Y] (P : Y.FiniteEtale)
-    (h : Nonempty P.obj.left) : Nonempty ((fiber s).obj P) := by
-  let f : P.obj.left ⟶ Y := P.obj.hom
-  have : IsFinite f := P.property
-  have : Etale f := P.obj.prop
-  have hc : IsClopen (Set.range f) := ⟨f.isClosedMap.isClosed_range, f.isOpenMap.isOpen_range⟩
-  obtain ⟨x⟩ := h
-  have hr : Set.range f = Set.univ := hc.eq_univ ⟨_, x, rfl⟩
-  obtain ⟨z⟩ := (inferInstance : Nonempty (Spec (.of Ω)))
-  obtain ⟨t, ht⟩ := f.exists_lift_of_isSepClosed s ⟨z, hr ▸ Set.mem_univ _⟩
-  exact ⟨Over.homMk t ht⟩
-
-/-- The fibre of a finite étale scheme is nonempty if and only if the scheme is, over a
-connected base. -/
-lemma nonempty_fiber_iff [ConnectedSpace Y] (P : Y.FiniteEtale) :
-    Nonempty ((fiber s).obj P) ↔ Nonempty P.obj.left := by
-  refine ⟨fun ⟨x⟩ ↦ ?_, nonempty_fiber_of_nonempty s P⟩
-  obtain ⟨z⟩ := (inferInstance : Nonempty (Spec (.of Ω)))
-  exact ⟨x.left z⟩
-
-/-- A morphism of finite étale `Y`-schemes is finite. -/
-instance isFinite_hom_left {P Q : Y.FiniteEtale} (φ : P ⟶ Q) : IsFinite φ.hom.left := by
-  have : IsFinite P.obj.hom := P.property
-  have : IsFinite Q.obj.hom := Q.property
-  have : IsFinite (φ.hom.left ≫ Q.obj.hom) := by rw [hom_left_comp]; infer_instance
-  exact IsFinite.of_comp φ.hom.left Q.obj.hom
-
-/-- A morphism of finite étale `Y`-schemes is étale. -/
-instance etale_hom_left {P Q : Y.FiniteEtale} (φ : P ⟶ Q) : Etale φ.hom.left := by
-  have : Etale P.obj.hom := P.obj.prop
-  have : Etale Q.obj.hom := Q.obj.prop
-  have : Etale (φ.hom.left ≫ Q.obj.hom) := by rw [hom_left_comp]; infer_instance
-  exact Etale.of_comp φ.hom.left Q.obj.hom
-
-/-- A morphism of finite étale `Y`-schemes whose underlying morphism is surjective induces a
-surjection on geometric fibres. -/
-lemma surjective_fiber_map_of_surjective {P Q : Y.FiniteEtale} (φ : P ⟶ Q)
-    (h : Function.Surjective φ.hom.left) : Function.Surjective ((fiber s).map φ) := by
-  intro x
-  obtain ⟨z⟩ := (inferInstance : Nonempty (Spec (.of Ω)))
-  obtain ⟨t, ht⟩ := φ.hom.left.exists_lift_of_isSepClosed x.left ⟨z, h _⟩
-  refine ⟨Over.homMk t ?_, fiber_ext s ?_⟩
-  · change t ≫ P.obj.hom = s
-    rw [← hom_left_comp φ, ← Category.assoc, ht, fiber_left_comp]
-  · rw [fiber_map_left]
-    exact ht
-
 variable [ConnectedSpace Y]
 
 /-- A finite étale `Y`-scheme whose underlying scheme is connected is a connected object of the
@@ -133,26 +67,6 @@ theorem isConnected_of_connectedSpace (P : Y.FiniteEtale) [ConnectedSpace P.obj.
     have hlt := lt_card_fiber_of_mono_of_notIso (fiber s) i hni
     exact (Nat.card_le_card_of_surjective _ hs).not_gt hlt
 
-
-/-- The open and closed subscheme `V` of a finite étale `Y`-scheme `P`, as a finite étale
-`Y`-scheme. -/
-noncomputable abbrev ofIsClopen (P : Y.FiniteEtale) (V : P.obj.left.Opens)
-    (hV : IsClosed (V : Set P.obj.left)) : Y.FiniteEtale :=
-  ⟨MorphismProperty.Over.mk ⊤ (V.ι ≫ P.obj.hom) (by have : Etale P.obj.hom := P.obj.prop
-                                                    infer_instance),
-    by
-      have : IsFinite P.obj.hom := P.property
-      have : IsClosedImmersion V.ι := IsClosedImmersion.of_isOpenImmersion V.ι (by simpa using hV)
-      exact inferInstanceAs (IsFinite (V.ι ≫ P.obj.hom))⟩
-
-/-- The inclusion of an open and closed subscheme of a finite étale `Y`-scheme. -/
-noncomputable abbrev ofIsClopenι (P : Y.FiniteEtale) (V : P.obj.left.Opens)
-    (hV : IsClosed (V : Set P.obj.left)) : ofIsClopen P V hV ⟶ P :=
-  ObjectProperty.homMk (MorphismProperty.Over.homMk V.ι rfl)
-
-instance (P : Y.FiniteEtale) (V : P.obj.left.Opens) (hV : IsClosed (V : Set P.obj.left)) :
-    Mono (ofIsClopenι P V hV) :=
-  ⟨fun _ _ h ↦ hom_ext ((cancel_mono V.ι).1 congr(($h).hom.left))⟩
 
 /-- The underlying scheme of a connected object of `FÉt(Y)` is connected: an open and closed
 subscheme is a subobject, which is either empty or everything. -/
