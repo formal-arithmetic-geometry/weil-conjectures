@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-colimit-initial-full-subcategory",
+ "kind": "statement",
+ "title": "Colimits over a weakly initial full subcategory of a cofiltered category, and over equivalent index categories",
+ "statement": "Let $\\mathcal C$ be a category [def-weil-pbc-category-colimit]. (1) Let $\\mathcal I$ be a cofiltered category and $\\mathcal J\\subset\\mathcal I$ a full subcategory such that every object $i$ of $\\mathcal I$ receives a morphism $j\\to i$ from some object $j$ of $\\mathcal J$. Then $\\mathcal J$ is cofiltered, and for every functor $D:\\mathcal I^{\\mathrm{op}}\\to\\mathcal C$ the colimit of $D$ exists if and only if the colimit of its restriction $D|_{\\mathcal J^{\\mathrm{op}}}$ exists, and then the canonical map $\\varinjlim_{\\mathcal J^{\\mathrm{op}}}D|_{\\mathcal J^{\\mathrm{op}}}\\to\\varinjlim_{\\mathcal I^{\\mathrm{op}}}D$ (induced by the coprojections $\\iota_j$, $j\\in\\mathcal J$) is an isomorphism. (2) Let $e:\\mathcal K\\to\\mathcal L$ be an equivalence of categories and $G:\\mathcal L\\to\\mathcal C$, $F:\\mathcal K\\to\\mathcal C$ functors with a natural isomorphism $w:G\\circ e\\cong F$. If $\\varinjlim F$ and $\\varinjlim G$ exist, there is an isomorphism $\\varinjlim F\\cong\\varinjlim G$ whose composite with the coprojection $\\iota_k$ of $F$ is $\\iota_{e(k)}\\circ w_k^{-1}$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 0BUC (lemma-cofinal-in-filtered, dual form) and Lemma Tag 04E7 (lemma-cofinal) for (1); (2) is the special case of Tag 04E7 for an equivalence (an equivalence is cofinal)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful functor from C into a cofiltered category D such that every object of D receives a map from the image is initial, so C is cofiltered and limits agree",
+   "results": "CategoryTheory.Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful, Functor.initial_iff_of_isCofiltered, Functor.initial_of_exists_of_isCofiltered, IsCofiltered.of_initial, IsCofilteredOrEmpty.of_exists_of_isCofiltered_of_fullyFaithful (Mathlib.CategoryTheory.Filtered.Final, Mathlib.CategoryTheory.Limits.Final)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "colimit over a final subcategory is isomorphic to the colimit; colimits along an equivalence of index categories are isomorphic",
+   "results": "CategoryTheory.Functor.Final.colimitIso (Mathlib.CategoryTheory.Limits.Final, @[stacks 04E7]); CategoryTheory.Limits.HasColimit.isoOfEquivalence (Mathlib.CategoryTheory.Limits.HasLimits)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'initial_of_exists_of_isCofiltered_of_fullyFaithful\\|IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Final.lean; grep -n 'def colimitIso\\|final_op_of_initial\\|hasColimit_of_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Final.lean; grep -n 'HasColimit.isoOfEquivalence' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "results": "Filtered/Final.lean:176 IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful, :196 Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful; Limits/Final.lean:109 final_op_of_initial, :350 Final.colimitIso (asIso (colimit.pre G F)); HasLimits.lean:757 HasColimit.isoOfEquivalence, :765 HasColimit.ι_isoOfEquivalence_hom",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful, CategoryTheory.IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful, CategoryTheory.Functor.Final.colimitIso, CategoryTheory.Limits.HasColimit.isoOfEquivalence",
+  "file": "Mathlib/CategoryTheory/Filtered/Final.lean",
+  "how": "a few Mathlib lemmas, one per clause: for the full inclusion ι : J ⥤ I (Full, Faithful), `IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful` (Filtered/Final.lean:176) gives J cofiltered and `Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful` (line 196) gives ι initial; `final_op_of_initial` (Mathlib/CategoryTheory/Limits/Final.lean:109) makes ι.op final, and `Functor.Final.colimitIso` (Limits/Final.lean:350, `asIso (colimit.pre D ι.op)`, Stacks 04E7) is the canonical isomorphism (existence transfers by `Functor.Final.hasColimit_of_comp` (line 388) and the instance `Functor.Final.comp_hasColimit` (line 310)); (2) is `HasColimit.isoOfEquivalence` (Mathlib/CategoryTheory/Limits/HasLimits.lean:757) with `HasColimit.ι_isoOfEquivalence_hom` (line 765)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+ "kind": "statement",
+ "title": "Restrictions along adjoint continuous functors of sites are adjoint; uniqueness of the left adjoint",
+ "statement": "Let $\\mathcal C$, $\\mathcal D$ be sites and $\\lambda:\\mathcal C\\to\\mathcal D$, $\\beta:\\mathcal D\\to\\mathcal C$ functors with $\\lambda$ left adjoint to $\\beta$, with counit $\\varepsilon:\\lambda\\beta\\to\\mathrm{id}_{\\mathcal D}$ and unit $\\theta:\\mathrm{id}_{\\mathcal C}\\to\\beta\\lambda$. Assume that precomposition with $\\lambda$ carries sheaves of sets on $\\mathcal D$ to sheaves of sets on $\\mathcal C$, and precomposition with $\\beta$ carries sheaves of sets on $\\mathcal C$ to sheaves of sets on $\\mathcal D$ (so the same holds for sheaves of abelian groups, whose sheaf condition is that of the underlying presheaf of sets). Write $\\Ab(\\mathcal C)$, $\\Ab(\\mathcal D)$ for the categories of abelian sheaves, $\\lambda^s:\\Ab(\\mathcal D)\\to\\Ab(\\mathcal C)$, $G\\mapsto G\\circ\\lambda$, and $\\beta^s:\\Ab(\\mathcal C)\\to\\Ab(\\mathcal D)$, $F\\mapsto F\\circ\\beta$. Then:\n\n1. $\\lambda^s$ is left adjoint to $\\beta^s$, with unit $u_G:G\\to\\beta^s\\lambda^sG=G\\circ\\lambda\\circ\\beta$ given at $W\\in\\mathcal D$ by the restriction map $G(\\varepsilon_W):G(W)\\to G(\\lambda\\beta W)$, and counit $F\\circ\\beta\\circ\\lambda\\to F$ given at $V\\in\\mathcal C$ by $F(\\theta_V):F(\\beta\\lambda V)\\to F(V)$.\n2. If $L:\\Ab(\\mathcal D)\\to\\Ab(\\mathcal C)$ is any functor left adjoint to $\\beta^s$, with unit $\\eta:\\mathrm{id}\\to\\beta^sL$, then there is a unique natural isomorphism $\\rho:L\\xrightarrow{\\sim}\\lambda^s$ with $\\beta^s(\\rho_G)\\circ\\eta_G=u_G$ for every $G$; i.e. for every $W\\in\\mathcal D$, $\\rho_G(\\beta W)\\circ\\eta_G(W)=G(\\varepsilon_W):G(W)\\to G(\\lambda\\beta W)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section Tag 00XW (section-cocontinuous-adjoint), Lemma Tag 00XX (lemma-have-functor-other-way) with its proof, and Lemma Tag 09VQ (lemma-adjoint-functors) (4),(5): for $u\\dashv v$, ${}_pu=v^p$ and $u^p=v_p$ \"by the uniqueness of adjoint functors\"; Lemma Tag 00WW (lemma-pushforward-sheaf) for precomposition with a continuous functor"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left Kan extension along a right adjoint is isomorphic to precomposition with the left adjoint",
+   "results": "CategoryTheory.Functor.lanAdjunction (Functor.KanExtension.Adjunction), leftKanExtensionCompIsoOfPreserves, lanCompIsoOfPreserves (Functor.KanExtension.Preserves), LeftExtension.precomp (Functor.KanExtension.Basic)",
+   "date": "2026-10-09",
+   "verdict": "no direct hit (lanAdjunction gives one left adjoint; the iso follows from uniqueness of adjoints, see below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If L ⊣ R then precomposition with L is left adjoint to precomposition with R on functor categories (left Kan extension along R is precomposition with L)",
+   "results": "Functor.lanAdjunction, Functor.ranAdjunction (Functor.KanExtension.Adjunction), Bicategory.LeftExtension.instCommuteWithOfIsLeftAdjoint, CategoryTheory.Adjunction.whiskerLeft (Mathlib.CategoryTheory.Adjunction.Whiskering): F ⊣ G gives (whiskeringLeft E D C).obj G ⊣ (whiskeringLeft D E C).obj F",
+   "date": "2026-10-09",
+   "verdict": "presheaf-level match: Adjunction.whiskerLeft"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.whiskerLeft",
+   "results": "Adjunction.whiskerLeft, whiskerLeft_unit_app_app : ((whiskerLeft C adj).unit.app X).app _ = X.map (adj.unit.app _), whiskerLeft_counit_app_app (Mathlib.CategoryTheory.Adjunction.Whiskering)",
+   "date": "2026-10-09",
+   "verdict": "match for the presheaf level of clause 1"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Functor.sheafAdjunctionContinuous : G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K (Mathlib.CategoryTheory.Sites.Pullback)",
+   "date": "2026-10-09",
+   "verdict": "the abstract left adjoint L of clause 2 in Mathlib's form; no iso with restriction along a left adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Adjunction.whiskerLeft\\|adj.op.whiskerLeft' Mathlib/CategoryTheory; sed -n 430,450p Mathlib/CategoryTheory/Sites/Continuous.lean; grep -n 'leftAdjointUniq\\|unit_leftAdjointUniq_hom_app' Mathlib/CategoryTheory/Adjunction/Unique.lean; grep -n 'def op ' Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "results": "Sites/Continuous.lean:438 Adjunction.sheafPushforwardContinuous (adj : F ⊣ G) J K [F.IsContinuous J K] [G.IsContinuous K J] : F.sheafPushforwardContinuous E J K ⊣ G.sheafPushforwardContinuous E K J, unit.app P = (adj.op.whiskerLeft _).unit.app P.obj (@[simps!]); Adjunction/Unique.lean:36 leftAdjointUniq, :53 unit_leftAdjointUniq_hom_app; Adjunction/Opposites.lean:47 Adjunction.op (h : G ⊣ F) : F.op ⊣ G.op with unit = NatTrans.op h.counit",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.sheafPushforwardContinuous",
+  "file": "Mathlib/CategoryTheory/Sites/Continuous.lean",
+  "how": "a few Mathlib lemmas, one per clause: (1) `Adjunction.sheafPushforwardContinuous adj J K` (Sites/Continuous.lean:438) with F = λ, G = β, E = AddCommGrpCat; the hypotheses `[λ.IsContinuous J K] [β.IsContinuous K J]` are Mathlib's continuity (Functor.IsContinuous, Sites/Continuous.lean:197: precomposition carries type-valued sheaves to sheaves), which is the node's hypothesis; `sheafPushforwardContinuous` is precomposition (Sites/Continuous.lean:362); the unit is `(adj.op.whiskerLeft _).unit.app P.obj` (simps lemma of :438), whose component at W is `P.obj.map (adj.op.unit.app (op W)) = P.obj.map (adj.counit.app W).op` by `Adjunction.whiskerLeft_unit_app_app` (Adjunction/Whiskering.lean) and `Adjunction.op_unit` (Adjunction/Opposites.lean:47), i.e. G(ε_W); the counit likewise G(θ_V); (2) `Adjunction.leftAdjointUniq` (Adjunction/Unique.lean:36) gives ρ, and `Adjunction.unit_leftAdjointUniq_hom_app` (:53) the unit compatibility; uniqueness of ρ from the hom bijection `homEquiv_leftAdjointUniq_hom_app` (:39)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-inverse-image-restriction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

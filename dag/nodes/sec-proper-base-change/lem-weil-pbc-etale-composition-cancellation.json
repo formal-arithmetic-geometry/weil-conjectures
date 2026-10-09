@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-etale-composition-cancellation",
+ "kind": "statement",
+ "title": "Open immersions are etale; etale morphisms compose and cancel",
+ "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be morphisms of schemes [def-pc-scheme]. (1) If $f$ is an open immersion [def-weil-open-immersion], then $f$ is etale [def-weil-etale-morphism]. (2) If $f$ and $g$ are etale, then $g\\circ f$ is etale. (3) If $g\\circ f$ and $g$ are etale, then $f$ is etale; in particular any morphism between two schemes etale over $Z$ which commutes with the structure morphisms is etale.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 02GP (lemma-open-immersion-etale) for (1); Lemma Tag 02GN (lemma-composition-etale) for (2); Lemma Tag 02GW (lemma-etale-permanence) for (3); summarized in etale-cohomology.tex Proposition Tag 03PC (5),(10) and Remark Tag 03PP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "if f ≫ g is étale and g is étale then f is étale (cancellation for étale morphisms of schemes)",
+   "results": "AlgebraicGeometry.IsEtale.of_comp (f ≫ g etale, g locally of finite type and formally unramified ⇒ f etale); IsEtale.instHasOfPostcompPropertyScheme (HasOfPostcompProperty @Etale @Etale); instIsStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Etale; LeanFinder index names the class IsEtale, this Mathlib calls it Etale)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open immersion is étale; composition of étale morphisms of schemes is étale",
+   "results": "AlgebraicGeometry.Etale instances in Mathlib.AlgebraicGeometry.Morphisms.Etale: instance [IsOpenImmersion f] : Etale f; etale_comp; MorphismProperty.IsMultiplicative @Etale",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|lemma of_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "line 63 IsMultiplicative @Etale; 69 etale_comp; 78 instance (priority := 900) [IsOpenImmersion f] : Etale f; 130 lemma of_comp (g) [Etale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : Etale f; 134 HasOfPostcompProperty @Etale @Etale; 118 Etale ⇒ FormallyUnramified",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Etale.of_comp, AlgebraicGeometry.Etale.etale_comp, instance [IsOpenImmersion f] : Etale f",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+  "how": "one Mathlib lemma per clause: (1) the instance at line 78; (2) `etale_comp` (line 69); (3) `Etale.of_comp` (line 130), g being etale hence locally of finite type and formally unramified (instance line 118), or `MorphismProperty.of_postcomp` with `HasOfPostcompProperty @Etale @Etale` (line 134)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

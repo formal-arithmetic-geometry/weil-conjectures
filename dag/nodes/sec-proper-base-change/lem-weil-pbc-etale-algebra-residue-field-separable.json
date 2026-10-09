@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-residue-field-separable",
+ "kind": "statement",
+ "title": "Residue field extensions of an etale algebra are finite separable",
+ "statement": "Let $A\\to B$ be a ring map such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], let $\\mathfrak q\\subset B$ be a prime ideal and $\\mathfrak p=\\mathfrak q\\cap A$ (the preimage of $\\mathfrak q$ in $A$). Then the residue field $\\kappa(\\mathfrak q)$ (the fraction field of $B/\\mathfrak q$) is a finite separable extension of $\\kappa(\\mathfrak p)$ via the induced map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$; in particular every element of $\\kappa(\\mathfrak q)$ is a root of a separable polynomial with coefficients in $\\kappa(\\mathfrak p)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00U3 (lemma-etale-over-field) applied to the fibre ring $B\\otimes_A\\kappa(\\mathfrak p)$, which is etale over $\\kappa(\\mathfrak p)$ (base change, Algebra Tag 00U2 (4)) and has $\\kappa(\\mathfrak q)$ as a localization at a prime, hence as a factor; equivalently Morphisms, Lemma Tag 02GL (lemma-etale-over-field) (2); quoted in etale-cohomology.tex Remark Tag 04HT and in the proof of Lemma Tag 04HX"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field extension of an étale morphism of schemes is separable",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified (Mathlib.RingTheory.Unramified.LocalRing); Algebra.FormallyEtale.iff_isSeparable (Mathlib.RingTheory.Etale.Field); Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+   "date": "2026-10-09",
+   "verdict": "generalization: formally unramified local maps have separable residue extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field extension at a point of an étale or unramified morphism of schemes is separable",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.isUnramifiedAt_iff_map_eq (Mathlib.RingTheory.Unramified.LocalRing): IsUnramifiedAt R q ↔ IsSeparable p.ResidueField q.ResidueField ∧ ...",
+   "date": "2026-10-09",
+   "verdict": "match (ring version)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, AlgebraicGeometry.Scheme.residueField",
+   "results": "AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueField...OfLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified, line 158): for f formally unramified and locally of finite type, IsSeparable κ(f x) κ(x)",
+   "date": "2026-10-09",
+   "verdict": "match (scheme version, separability)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance \\[Algebra.IsUnramifiedAt R q\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/LocalRing.lean; grep -n 'formallyUnramified_iff_forall' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/Locus.lean; grep -n 'theorem Spec_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'etale_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Etale.lean",
+   "results": "LocalRing.lean:148 instance IsSeparable p.ResidueField q.ResidueField, :151 instance Module.Finite p.ResidueField q.ResidueField (both under [IsUnramifiedAt R q], [EssFiniteType R S], q.LiesOver p); Locus.lean:133 formallyUnramified_iff_forall; RingHomProperties.lean:360 HasRingHomProperty.Spec_iff; RingHom/Etale.lean:37 etale_algebraMap",
+   "date": "2026-10-09",
+   "verdict": "match (a few lemmas)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsUnramifiedAt instances IsSeparable / Module.Finite (p.ResidueField) (q.ResidueField); Algebra.formallyUnramified_iff_forall; AlgebraicGeometry.HasRingHomProperty.Spec_iff",
+  "file": "Mathlib/RingTheory/Unramified/LocalRing.lean",
+  "how": "a few Mathlib lemmas: Spec B → Spec A etale ↔ (algebraMap A B).Etale (`HasRingHomProperty.Spec_iff`, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean:360, with `instance : HasRingHomProperty @Etale RingHom.Etale`, Morphisms/Etale.lean:56) ↔ `Algebra.Etale A B` (`RingHom.etale_algebraMap`, Mathlib/RingTheory/RingHom/Etale.lean:37); an etale algebra is formally unramified and of finite presentation (so EssFiniteType), hence `IsUnramifiedAt A q` for every prime q (`Algebra.formallyUnramified_iff_forall`, Mathlib/RingTheory/Unramified/Locus.lean:133); then the instances at LocalRing.lean:148 and :151 give `Algebra.IsSeparable p.ResidueField q.ResidueField` and `Module.Finite p.ResidueField q.ResidueField` for q lying over p = q.comap. `Ideal.ResidueField` is the fraction field of B/q (the residue field of B_q)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

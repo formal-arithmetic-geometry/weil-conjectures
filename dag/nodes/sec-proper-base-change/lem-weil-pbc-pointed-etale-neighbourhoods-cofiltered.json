@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+ "kind": "statement",
+ "title": "Pointed etale neighbourhoods of a geometric point form a cofiltered category",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\Omega$ a field and $\\bar s:\\operatorname{Spec}\\Omega\\to S$ a morphism of schemes (for instance a geometric point [def-weil-geometric-point]). Let $\\mathcal N^{\\mathrm{all}}_{\\bar s}$ be the category whose objects are pairs $(V,\\bar v)$ with $V\\to S$ an etale morphism [def-weil-etale-morphism] and $\\bar v:\\operatorname{Spec}\\Omega\\to V$ a morphism over $S$ (i.e. $(V\\to S)\\circ\\bar v=\\bar s$), and whose morphisms $(V',\\bar v')\\to(V,\\bar v)$ are the $S$-morphisms $h:V'\\to V$ with $h\\circ\\bar v'=\\bar v$ (this is the category of pointed etale neighbourhoods of [def-weil-pbc-pointed-etale-neighbourhoods]). Then $\\mathcal N^{\\mathrm{all}}_{\\bar s}$ is cofiltered: it is nonempty ($(S,\\bar s)$ is an object); for two objects $(V_1,\\bar v_1),(V_2,\\bar v_2)$ the fibre product $(V_1\\times_SV_2,(\\bar v_1,\\bar v_2))$ is an object mapping to both by the projections; and for two morphisms $h_1,h_2:(V,\\bar v)\\to(V',\\bar v')$ there is a morphism $h:(V'',\\bar v'')\\to(V,\\bar v)$ with $h_1\\circ h=h_2\\circ h$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03PQ (lemma-cofinal-etale), with Remark Tag 03PP (remark-etale-between-etale) and Proposition Tag 03PC (proposition-etale-morphisms) (4),(5),(10)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-pointed-etale-neighbourhoods"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of étale neighbourhoods of a geometric point is cofiltered",
+   "results": "CategoryTheory.GrothendieckTopology.Point.isCofiltered (Mathlib.CategoryTheory.Sites.Point.Basic); IsCofiltered.of_hasFiniteLimits, isCofiltered_of_isFiltered_op (Mathlib.CategoryTheory.Filtered.Basic)",
+   "date": "2026-10-09",
+   "verdict": "partial: Point.isCofiltered applied to Scheme.pointSmallEtale gives the same; the direct instance found by loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCofiltered (CategoryTheory.Functor.Elements (CategoryTheory.Functor.comp (AlgebraicGeometry.Scheme.Etale.forget _) _))",
+   "results": "AlgebraicGeometry.Scheme.instIsCofilteredElementsEtaleCompOverForgetObjOppositeFunctorTypeCoyonedaOpMk (Mathlib.AlgebraicGeometry.Sites.EtalePoint): {S} {Ω} [Field Ω] (s : Spec Ω ⟶ S) : IsCofiltered (Etale.forget S ⋙ coyoneda.obj (op (Over.mk s))).Elements",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsCofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/; read EtalePoint.lean and CategoryTheory/Functor/TypeValuedFlat.lean:38",
+   "results": "EtalePoint.lean:56 instance : IsCofiltered (Etale.forget S ⋙ coyoneda.obj (op (Over.mk s))).Elements := Functor.isCofiltered_elements _ ; Functor.isCofiltered_elements (TypeValuedFlat.lean:38) for F : C ⥤ Type w with HasFiniteLimits C and PreservesFiniteLimits F",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.instIsCofilteredElementsEtaleCompOverForgetObjOppositeFunctorTypeCoyonedaOpMk",
+  "file": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+  "how": "specializes in one line (line 56, the anonymous instance `IsCofiltered (Etale.forget S ⋙ coyoneda.obj (op (Over.mk s))).Elements`, needing only `[Field Ω]`): an object of the category of elements is an etale `X : S.Etale` with `x : Over.mk s ⟶ (Etale.forget S).obj X`, i.e. a morphism `Spec Ω ⟶ X.left` over `S`; a morphism `(X,x) ⟶ (Y,y)` is `f : X ⟶ Y` in `S.Etale` (an `S`-morphism) with `x ≫ f = y`; so the category is $\\mathcal N^{\\mathrm{all}}_{\\bar s}$. Proved via `Functor.isCofiltered_elements` (Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean:38) from finite limits of `S.Etale` (fibre products as in Stacks 03PQ (1)) and `PreservesFiniteLimits (Etale.forget S)` (Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:218). Universe: Ω : Type u with S : Scheme.{u}."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -14,11 +14,140 @@
   "def-weil-residue-field",
   "def-weil-pbc-pointed-etale-neighbourhoods",
   "def-weil-etale-morphism",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting up the affine chart.* Write $\\iota:U=\\operatorname{Spec}A\\to Y$ for the open immersion of the chosen affine open. Since $\\bar x$ has image $y\\in U$, it factors uniquely as $\\bar x=\\iota\\circ\\bar x_U$ with $\\bar x_U:\\operatorname{Spec}\\Omega\\to U$ (universal property of the open immersion $\\iota$); by [def-weil-affine-spectrum] $\\bar x_U=\\operatorname{Spec}\\chi$ for a unique ring map $\\chi:A\\to\\Omega$. The image point of $\\bar x_U$ is the prime $\\ker\\chi$, so $\\ker\\chi=\\mathfrak p$, and $\\chi$ factors as $A\\to\\kappa(\\mathfrak p)\\xrightarrow{\\bar\\chi}\\Omega$; under the identification $\\kappa(\\mathfrak p)=\\kappa(y)$ (the open immersion $\\iota$ induces an isomorphism of local rings $A_{\\mathfrak p}=\\mathcal O_{U,y}\\cong\\mathcal O_{Y,y}$, [def-weil-open-immersion], [def-weil-residue-field]) $\\bar\\chi$ is the field map $\\kappa(y)\\to\\Omega$ of $\\bar x$ [def-weil-geometric-point]. Hence $\\kappa(\\bar x)$ is the separable algebraic closure of $\\kappa(\\mathfrak p)$ in $\\Omega$ via $\\bar\\chi$ [def-weil-pbc-relative-separable-closure]. Throughout, a morphism $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}B$ is $\\operatorname{Spec}\\psi$ for a unique ring map $\\psi:B\\to\\Omega$, its image point is the prime $\\ker\\psi$, and $\\psi$ factors uniquely as $B\\to\\kappa(\\ker\\psi)\\xrightarrow{\\bar\\psi}\\Omega$ ($B/\\ker\\psi\\to\\Omega$ is an injective map of a domain into a field, which extends uniquely to its fraction field); composition with $\\operatorname{Spec}\\beta$ corresponds to $\\psi\\mapsto\\psi\\circ\\beta$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "def-weil-geometric-point",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first sentences: 'Let Spec(A) ⊂ S be an affine neighbourhood of s ... canonical isomorphisms O_{S,s}=A_p and κ(s)=κ(p)'"
+   }
+  },
+  {
+   "text": "*Shrinking.* Let $\\mathcal N^{\\mathrm{all}}$ be the category of all pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar x$ [def-weil-pbc-pointed-etale-neighbourhoods] ($V\\to Y$ etale, $\\bar v$ over $\\bar x$, morphisms the $Y$-morphisms respecting the points); $\\mathcal N$ is its full subcategory of affine objects. For every $(V,\\bar v)$ in $\\mathcal N^{\\mathrm{all}}$ with image point $v$ and every open $W\\subset V$ containing $v$, [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] gives an affine $(V_0=\\operatorname{Spec}R,\\bar v_0)$ in $\\mathcal N$ and a morphism $j:(V_0,\\bar v_0)\\to(V,\\bar v)$ with $j$ an open immersion and $j(V_0)\\subset W$. With $W=V$: every object of $\\mathcal N^{\\mathrm{all}}$ receives a morphism from an object of $\\mathcal N$.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX: 'A cofinal system is given by those etale neighbourhoods (U,u) such that U is affine'"
+   }
+  },
+  {
+   "text": "*Part (1): $\\mathcal N$ is cofiltered.* By [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] (Stacks 03PQ: the fibre product $V_1\\times_YV_2$ with the point $(\\bar v_1,\\bar v_2)$, and for $h_1,h_2:(V,\\bar v)\\rightrightarrows(V',\\bar v')$ the etale neighbourhood $V''=V'\\times_{\\Delta,V'\\times_YV',(h_1,h_2)}V$) the category $\\mathcal N^{\\mathrm{all}}$ is cofiltered. $\\mathcal N$ is a full subcategory of $\\mathcal N^{\\mathrm{all}}$ and by the previous step every object of $\\mathcal N^{\\mathrm{all}}$ receives a morphism from an object of $\\mathcal N$; so by [lem-weil-pbc-colimit-initial-full-subcategory] (1) $\\mathcal N$ is cofiltered. Concretely: $\\mathcal N$ is nonempty (shrink $(Y,\\bar x)$); for two objects of $\\mathcal N$ shrink $(V_1\\times_YV_2,(\\bar v_1,\\bar v_2))$, which need not be affine when $Y$ is not separated, to an affine object and compose with the projections; for two parallel morphisms of $\\mathcal N$ shrink the equalizing $(V'',\\bar v'')$ of 03PQ (2) and compose; morphisms of $\\mathcal N^{\\mathrm{all}}$ between objects of $\\mathcal N$ are morphisms of $\\mathcal N$ (fullness).",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03PQ (lemma-cofinal-etale) and its proof; categories.tex Lemma Tag 0BUC (lemma-cofinal-in-filtered), dual form"
+   }
+  },
+  {
+   "text": "*Part (2): $\\mathcal N_U$ is initial, and the colimit restricts.* Let $(V,\\bar v)$ be in $\\mathcal N$ with structure map $f:V\\to Y$ and image point $v$; then $f(v)=y\\in U$, so $W=f^{-1}(U)$ is an open of $V$ containing $v$. The shrinking step gives $j:(V_0,\\bar v_0)\\to(V,\\bar v)$ with $V_0$ affine and $j(V_0)\\subset W$, so $f\\circ j$ has image in $\\iota(U)$ and factors through the open immersion $\\iota$ [def-weil-open-immersion]: $(V_0,\\bar v_0)$ lies in $\\mathcal N_U$. So every object of $\\mathcal N$ receives a morphism from an object of the full subcategory $\\mathcal N_U$. As $\\mathcal N$ is cofiltered (part (1)), [lem-weil-pbc-colimit-initial-full-subcategory] (1) says that $\\mathcal N_U$ is cofiltered and initial in $\\mathcal N$, and that for the diagram $(V,\\bar v)\\mapsto A_V=\\Gamma(V,\\mathcal O_V)$ on $\\mathcal N^{\\mathrm{op}}$ (with the pullback maps $\\Gamma(h):A_V\\to A_{V'}$) the canonical map $\\varinjlim_{\\mathcal N_U}A_V\\to\\varinjlim_{\\mathcal N}A_V$ [def-weil-pbc-category-colimit] is an isomorphism, either colimit existing with the other (both exist: filtered colimits of commutative rings exist).",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX: 'A cofinal system is given by those etale neighbourhoods (U,u) such that U is affine and U → S factors through Spec(A)'; categories.tex Lemma Tag 04E7 (lemma-cofinal)"
+   }
+  },
+  {
+   "text": "*Part (3), objects: the triple of an object of $\\mathcal N_U$.* Let $(V=\\operatorname{Spec}B,\\bar v)$ be in $\\mathcal N_U$, with $f=\\iota\\circ g$, $g:V\\to U$. By [lem-weil-pbc-etale-composition-cancellation] (1) $\\iota$ is etale, so by (3) $g$ is etale; by [def-weil-affine-spectrum] $g=\\operatorname{Spec}\\alpha$ for a unique ring map $\\alpha:A\\to B$, which makes $B$ an $A$-algebra with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale. Write $\\bar v=\\operatorname{Spec}\\psi_v$ with $\\psi_v:B\\to\\Omega$, $\\mathfrak q_v=\\ker\\psi_v$ (the prime of the image point $v$) and $\\phi_v=\\bar\\psi_v:\\kappa(\\mathfrak q_v)\\to\\Omega$ (step 1; this is the field map of $\\bar v$ of [def-weil-geometric-point] under $\\kappa(v)=\\kappa(\\mathfrak q_v)$). The condition $f\\circ\\bar v=\\bar x$ is $\\iota\\circ g\\circ\\bar v=\\iota\\circ\\bar x_U$, i.e. ($\\iota$ is a monomorphism) $g\\circ\\bar v=\\bar x_U$, i.e. $\\psi_v\\circ\\alpha=\\chi$. Taking kernels, $\\alpha^{-1}(\\mathfrak q_v)=\\ker\\chi=\\mathfrak p$, so $\\mathfrak q_v$ lies over $\\mathfrak p$; passing to residue fields, $\\phi_v\\circ\\kappa(\\alpha)=\\bar\\chi$, i.e. $\\phi_v$ is a $\\kappa(\\mathfrak p)$-algebra map. By [lem-weil-pbc-etale-algebra-residue-field-separable] every $z\\in\\kappa(\\mathfrak q_v)$ is a root of a separable polynomial $P$ over $\\kappa(\\mathfrak p)$, so $\\phi_v(z)$ is a root of the separable polynomial $\\bar\\chi(P)$ over $\\bar\\chi(\\kappa(\\mathfrak p))$: $\\phi_v(z)\\in\\kappa(\\bar x)$ (step 1, [def-weil-pbc-relative-separable-closure]). So $(B,\\mathfrak q_v,\\phi_v)$, with $\\phi_v$ viewed as a map to $\\kappa(\\bar x)$, is an object of $\\mathcal T$; conversely the condition $\\psi_v\\circ\\alpha=\\chi$ holds for any $\\psi:B\\to\\Omega$ whose kernel lies over $\\mathfrak p$ and whose residue map is a $\\kappa(\\mathfrak p)$-algebra map, because $\\chi$ and $\\psi\\circ\\alpha$ both factor through $A\\to\\kappa(\\mathfrak p)$ and agree after it.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-affine-spectrum",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX: 'we see that (O_S)_s = colim_{(B,q,φ)} B where the colimit is over etale A-algebras B endowed with a prime q lying over p and a κ(p)-algebra map φ: κ(q) → κ(s̄). Note that since κ(q) is finite separable over κ(p) the image of φ is contained in κ^sep'; Remark Tag 04HT"
+   }
+  },
+  {
+   "text": "*Part (3), morphisms: full faithfulness.* Let $(V'=\\operatorname{Spec}B',\\bar v')$, $(V=\\operatorname{Spec}B,\\bar v)$ be in $\\mathcal N_U$ with $f'=\\iota\\circ g'$, $f=\\iota\\circ g$. A $Y$-morphism $h:V'\\to V$ satisfies $\\iota\\circ g\\circ h=f\\circ h=f'=\\iota\\circ g'$, hence $g\\circ h=g'$ since $\\iota$ is a monomorphism (an open immersion, [def-weil-open-immersion]); conversely every $U$-morphism is a $Y$-morphism. By [def-weil-affine-spectrum] the $U$-morphisms $h$ are the $\\operatorname{Spec}\\beta$ for the $A$-algebra maps $\\beta:B\\to B'$, bijectively and compatibly with composition. The condition $h\\circ\\bar v'=\\bar v$ reads $\\psi_{v'}\\circ\\beta=\\psi_v$ (step 1), which holds iff $\\beta^{-1}(\\mathfrak q_{v'})=\\mathfrak q_v$ and $\\phi_{v'}\\circ\\kappa(\\beta)=\\phi_v$: the kernel of $\\psi_{v'}\\circ\\beta$ is $\\beta^{-1}(\\mathfrak q_{v'})$, and the factorization of $\\psi_{v'}\\circ\\beta$ through its residue field is $\\phi_{v'}\\circ\\kappa(\\beta)$ (uniqueness of the factorization in step 1). Hence $(V,\\bar v)\\mapsto(B,\\mathfrak q_v,\\phi_v)$, $\\operatorname{Spec}\\beta\\mapsto\\beta$ is a contravariant functor $\\mathcal N_U\\to\\mathcal T$ (a functor $\\mathcal N_U\\to\\mathcal T^{\\mathrm{op}}$) which is bijective on morphism sets.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX (translation of the affine neighbourhoods over Spec(A) into triples)"
+   }
+  },
+  {
+   "text": "*Part (3), essential surjectivity.* Let $(B,\\mathfrak q,\\phi)$ be in $\\mathcal T$, with structure map $\\alpha:A\\to B$. Put $V=\\operatorname{Spec}B$, $g=\\operatorname{Spec}\\alpha$ (etale by hypothesis) and $f=\\iota\\circ g$, etale by [lem-weil-pbc-etale-composition-cancellation] (1),(2). Let $\\psi:B\\to B/\\mathfrak q\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}\\kappa(\\bar x)\\subset\\Omega$ and $\\bar v=\\operatorname{Spec}\\psi$; then $\\ker\\psi=\\mathfrak q$ ($\\phi$ is injective, a map of fields) and $\\bar\\psi=\\phi$. Since $\\mathfrak q$ lies over $\\mathfrak p$ and $\\phi$ is a $\\kappa(\\mathfrak p)$-algebra map, $\\psi\\circ\\alpha=\\chi$ (end of the objects step), i.e. $f\\circ\\bar v=\\bar x$. So $(V,\\bar v)$ is an object of $\\mathcal N_U$ and its triple is exactly $(B,\\mathfrak q,\\phi)$. Together with full faithfulness, the functor $\\mathcal N_U\\to\\mathcal T^{\\mathrm{op}}$ is an equivalence (indeed surjective on objects).",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-affine-spectrum",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX; Remark Tag 04HT (an etale neighbourhood (U,u) of (S,s) with an embedding κ(u) ⊂ κ(s̄) over κ(s) gives an etale neighbourhood of s̄)"
+   }
+  },
+  {
+   "text": "*The colimits.* For $(V=\\operatorname{Spec}B,\\bar v)$ in $\\mathcal N_U$ one has $A_V=\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$, and for $h=\\operatorname{Spec}\\beta$ the map $\\Gamma(h)$ is $\\beta$ [def-weil-affine-spectrum]. So the diagram $A_\\bullet$ on $\\mathcal N_U^{\\mathrm{op}}$ is, through the equivalence $\\mathcal N_U^{\\mathrm{op}}\\simeq\\mathcal T$ of the previous steps, isomorphic to the diagram $(B,\\mathfrak q,\\phi)\\mapsto B$ on $\\mathcal T$. By [lem-weil-pbc-colimit-initial-full-subcategory] (2) $\\varinjlim_{\\mathcal N_U}A_V\\cong\\varinjlim_{\\mathcal T}B$, the coprojection of $(V,\\bar v)$ going to that of its triple; composing with part (2), $\\varinjlim_{\\mathcal N}A_V=\\varinjlim_{(B,\\mathfrak q,\\phi)\\in\\mathcal T}B$ canonically, compatibly with the maps from each $A_V$, $(V,\\bar v)\\in\\mathcal N_U$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 04HX: 'In other words, we see that (O_S)_s̄ = colim_{(B,q,φ)} B'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-geometric-point",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 03PQ (lemma-cofinal-etale) and its proof; Remark Tag 04HT (remark-etale-neighbourhoods); proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph; categories.tex Lemmas Tag 0BUC and 04E7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +183,24 @@
    "results": "RingTheory/Etale/QuasiFinite.lean:15,602 (etale neighbourhoods splitting fibres of finite algebras, a different statement); EtalePoint.lean as above; no tag 03PQ/04HX",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of structure sheaf at geometric point on the étale site equals colimit over étale algebras B with prime q over p and embedding of residue field into separable closure (strict henselization)",
+   "results": "AlgebraicGeometry.Scheme.residue, residueField, descResidueField (Mathlib.AlgebraicGeometry.ResidueField), Scheme.stalkClosedPointTo (Mathlib.AlgebraicGeometry.Stalk), LocallyRingedSpace.residueField; nothing on etale stalks or triples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'strictHenselization\\|StrictHenselization\\|strict henselization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'IsCofiltered' .../Mathlib/AlgebraicGeometry/Sites/",
+   "results": "no strict henselization in Mathlib; Sites/EtalePoint.lean:56 only (cofilteredness of all pointed etale neighbourhoods, recorded as the leaf lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered)",
+   "date": "2026-10-09",
+   "verdict": "no match for the whole statement; part (1) for all neighbourhoods is a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +220,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 03PQ, 04HT and the first paragraph of the proof of 04HX; N is the affine neighbourhoods, as in the user lem-weil-pbc-strict-henselization-functoriality and def-weil-pbc-strict-henselization-limit). Proof written in 8 steps following 04HX: affine chart and ring-level description of Spec-Omega points; shrinking to affine opens; (1) cofilteredness of the affine neighbourhoods from cofilteredness of all pointed etale neighbourhoods (03PQ; Mathlib instance in Sites/EtalePoint.lean) plus a full weakly initial subcategory argument (the fibre product of two affine neighbourhoods need not be affine over a non-separated Y, which the statement's 'affine' requires); (2) N_U initial via the preimage of U, and restriction of the colimit; (3) the equivalence N_U = T^op (objects, using that residue extensions of etale algebras are separable algebraic so phi lands in kappa(x-bar); full faithfulness using that the open immersion U -> Y is a monomorphism; surjectivity on objects); colimit identification via invariance under equivalence and Gamma(Spec B)=B. Five new nodes, all Mathlib leaves: pointed-etale-neighbourhoods-cofiltered, pointed-etale-neighbourhood-affine-shrink, etale-algebra-residue-field-separable, etale-composition-cancellation, colimit-initial-full-subcategory. lem-weil-pbc-etale-base-change-finite-limits is not needed: the fibre products of 03PQ are inside the cofilteredness leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Stacks 04HX; 5 new Mathlib leaves"
+ }
 }

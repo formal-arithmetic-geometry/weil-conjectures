@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+ "kind": "statement",
+ "title": "Shrinking a pointed etale neighbourhood to an affine open around the point",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:V\\to S$ an etale morphism [def-weil-etale-morphism], $\\Omega$ a field and $\\bar v:\\operatorname{Spec}\\Omega\\to V$ a morphism of schemes whose image is the point $v\\in V$, and let $W\\subset V$ be an open subset containing $v$. Then there are a commutative ring $R$ and an open immersion [def-weil-open-immersion] $j:\\operatorname{Spec}R\\to V$ [def-weil-affine-spectrum] with $v\\in j(\\operatorname{Spec}R)\\subset W$; the composite $f\\circ j$ is etale; and there is exactly one morphism $\\bar v_0:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ with $j\\circ\\bar v_0=\\bar v$. In particular $(\\operatorname{Spec}R,\\bar v_0)$ is an affine pointed etale neighbourhood of $f\\circ\\bar v$ [def-weil-pbc-pointed-etale-neighbourhoods] and $j$ is a morphism of pointed etale neighbourhoods $(\\operatorname{Spec}R,\\bar v_0)\\to(V,\\bar v)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma Tag 04HX (lemma-describe-etale-local-ring): 'A cofinal system is given by those etale neighbourhoods (U,u) such that U is affine'; the facts used: affine opens form a basis (Schemes, Tag 01HR), an open immersion is etale (Morphisms, Lemma Tag 02GP), compositions of etale morphisms are etale (Morphisms, Lemma Tag 02GN), universal property of open immersions (Schemes, Tag 01JR)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-pointed-etale-neighbourhoods"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every point of a scheme in an open subset has an affine open neighbourhood Spec R contained in it, open immersion",
+   "results": "AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset (Mathlib.AlgebraicGeometry.OpenImmersion); exists_isAffineOpen_mem_and_subset (Mathlib.AlgebraicGeometry.AffineScheme); IsAffineOpen.isOpenImmersion_fromSpec",
+   "date": "2026-10-09",
+   "verdict": "match for the first clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointed étale neighbourhood: given étale X over S and a geometric point of X, an affine open of X containing the point gives a smaller neighbourhood",
+   "results": "Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff(_etale), Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Locus): ring-theoretic etale locus, not the statement",
+   "date": "2026-10-09",
+   "verdict": "no match as one lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_affine_mem_range_and_range_subset\\|theorem lift_fac\\|theorem lift_uniq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean; grep -n 'IsOpenImmersion f\\] : Etale\\|etale_comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "OpenImmersion.lean:362 exists_affine_mem_range_and_range_subset; :705 IsOpenImmersion.lift_fac; :708 lift_uniq; Etale.lean:69 etale_comp, :78 instance [IsOpenImmersion f] : Etale f; the same construction is inlined in the proof of Scheme.pointSmallEtale (EtalePoint.lean, initiallySmall field)",
+   "date": "2026-10-09",
+   "verdict": "match (a few lemmas, one per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.lift_fac, AlgebraicGeometry.IsOpenImmersion.lift_uniq",
+  "file": "Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "how": "a few Mathlib lemmas, one per clause: `exists_affine_mem_range_and_range_subset` (line 362, with U := W) gives R and the open immersion j with v ∈ range j ⊆ W; f ∘ j etale by the instances `[IsOpenImmersion f] : Etale f` (Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:78) and `etale_comp` (line 69); since range v̄ = {v} ⊆ range j, `IsOpenImmersion.lift j v̄` with `lift_fac` (line 705) and `lift_uniq` (line 708) give the unique v̄₀. Exactly this argument is inlined in `Scheme.pointSmallEtale` (Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, field initiallySmall)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

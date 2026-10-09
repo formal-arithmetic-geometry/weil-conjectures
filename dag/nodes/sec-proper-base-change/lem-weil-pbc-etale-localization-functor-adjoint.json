@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-etale-localization-functor-adjoint",
+ "kind": "statement",
+ "title": "Composition with an etale morphism is left adjoint to base change on small etale sites",
+ "statement": "Let $j:Y\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], and let $Y_{\\Et}$, $X_{\\Et}$ be the small etale sites [def-weil-pbc-etale-site]. Then:\n\n1. For an object $(V,v:V\\to Y)$ of $Y_{\\Et}$ the composite $j\\circ v:V\\to X$ is etale, and $\\iota_j(V,v)=(V,j\\circ v)$, $\\iota_j(a)=a$ on morphisms, is a functor $\\iota_j:Y_{\\Et}\\to X_{\\Et}$.\n2. For an object $(W,w:W\\to X)$ of $X_{\\Et}$ choose a fibre product [def-pc-fibre-product] $W\\times_XY$ (of $w$ and $j$) with projections $p_W:W\\times_XY\\to W$ and $q_W:W\\times_XY\\to Y$. Then $q_W$ is etale, and $b_j(W)=(W\\times_XY,q_W)$, $b_j(g)=g\\times\\mathrm{id}_Y$ on morphisms, is a functor $b_j:X_{\\Et}\\to Y_{\\Et}$.\n3. $\\iota_j$ is left adjoint to $b_j$: for $V\\in Y_{\\Et}$ and $W\\in X_{\\Et}$ the map $\\operatorname{Hom}_{Y_{\\Et}}(V,b_jW)\\to\\operatorname{Hom}_{X_{\\Et}}(\\iota_jV,W)$, $\\varphi\\mapsto p_W\\circ\\varphi$, is bijective and natural in $V$ and $W$. The counit $\\varepsilon_W:\\iota_jb_jW\\to W$ is the projection $p_W:(W\\times_XY,\\,j\\circ q_W)\\to(W,w)$, and the unit $V\\to b_j\\iota_jV$ is $(\\mathrm{id}_V,v):V\\to V\\times_XY$.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 021H (lemma-morphism-big-etale), proof: \"the functor $v$ is a right adjoint because given $U/T$ and $V/S$ we have $\\Mor_S(u(U), V) = \\Mor_T(U, V \\times_S T)$\" (stated there for big etale sites; the same computation on the small sites, with Lemma Tag 021D for fibre products and Lemma Tag 0217 for base change of etale coverings)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composing with an etale morphism Y → X is left adjoint to pullback along it on schemes etale over X",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Subobject.mapPullbackAdj, CategoryTheory.MonoOver.mapPullbackAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; none on the categories of etale schemes directly",
+   "date": "2026-10-09",
+   "verdict": "no direct hit; see loogle/leanfinder"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For f : X ⟶ Y satisfying P, Over.map along f is left adjoint to Over.pullback along f in the category of P-morphisms over X",
+   "results": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction); CategoryTheory.Over.mapPullbackAdj (Mathlib.CategoryTheory.Comma.Over.Pullback); ChosenPullbacksAlong.mapPullbackAdj; Over.pullbackIsRightAdjoint",
+   "date": "2026-10-09",
+   "verdict": "match: MorphismProperty.Over.mapPullbackAdj with P = @Etale, Q = ⊤"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj",
+   "results": "MorphismProperty.Over.mapPullbackAdj : Over.map Q hPf ⊣ Over.pullback P Q f; mapPullbackAdj_counit_app = Over.homMk (pullback.fst A.hom f); mapPullbackAdj_unit_app = Over.homMk (pullback.lift (𝟙 A.left) A.hom _) (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction)",
+   "date": "2026-10-09",
+   "verdict": "match (read: OverAdjunction.lean:195-204)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def \\|lemma ' Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean; grep -n 'protected def Etale\\|IsMultiplicative @Etale\\|isStableUnderBaseChange\\|HasOfPostcompProperty' Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep -rn 'HasOfPostcompProperty' Mathlib/CategoryTheory/MorphismProperty/Composition.lean",
+   "results": "OverAdjunction.lean:42 Over.map (composition with f, needs P.IsStableUnderComposition), :101 Over.pullback, :195 Over.mapPullbackAdj (simps unit_app counit_app); Etale.lean:157 Scheme.Etale X := MorphismProperty.Over @Etale ⊤ X, :63 IsMultiplicative @Etale, :74 etale_isStableUnderBaseChange, :134 HasOfPostcompProperty @Etale @Etale, :166 morphisms of X.Etale are etale; Composition.lean:420 instance (⊤).HasOfPostcompProperty W",
+   "date": "2026-10-09",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean",
+  "how": "specializes in one line: with T = Scheme, P = @AlgebraicGeometry.Etale, Q = ⊤, f = j, hPf : Etale j, hQf = trivial, `Over.mapPullbackAdj @Etale ⊤ j hj trivial : Over.map ⊤ hj ⊣ Over.pullback @Etale ⊤ j` between Y.Etale = MorphismProperty.Over @Etale ⊤ Y and X.Etale (Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:157); clause 1 is the functor Over.map ⊤ hj (OverAdjunction.lean:42, needs IsStableUnderComposition from IsMultiplicative @Etale, Etale.lean:63); clause 2 is Over.pullback @Etale ⊤ j (OverAdjunction.lean:101, IsStableUnderBaseChange Etale.lean:74, pullbacks of schemes); clause 3 is the adjunction, with counit pullback.fst (= p_W, the fibre product being pullback w j = W ×_X Y) and unit pullback.lift (𝟙) v by the simps lemmas mapPullbackAdj_counit_app / mapPullbackAdj_unit_app; the hom bijection of clause 3 is homEquiv, given by composing with the counit. Morphisms of X.Etale are all X-morphisms (Q = ⊤), as in the node's site."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-inverse-image-restriction",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
