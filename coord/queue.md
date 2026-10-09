@@ -1,6 +1,6 @@
 # Work queue
 
-588 items; claim with `tools/claim.py next <group> [--stage N]`.
+590 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (558)
 
@@ -16,9 +16,6 @@
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1007 | none |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1007 | none |
 | `lemma-weil-pbc-gabber-effacement` | 1007 | none |
-| `def-weil-pbc-site-cech-complex` | 1008 | none |
-| `lem-weil-pbc-adic-completion-noetherian` | 1008 | none |
-| `lem-weil-pbc-affine-morphism-relative-spec` | 1008 | none |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-cech-complex` | 1008 | none |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1008 | none |
@@ -39,8 +36,6 @@
 | `lem-weil-pbc-henselization-colimit` | 1008 | none |
 | `lem-weil-pbc-henselization-pair-g-ring` | 1008 | none |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1008 | none |
-| `lem-weil-pbc-integral-morphism-limit-of-finite` | 1008 | none |
-| `lem-weil-pbc-lift-idempotent-upstairs` | 1008 | none |
 | `lem-weil-pbc-normal-constant-generic` | 1008 | none |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1008 | none |
 | `lem-weil-pbc-open-restriction-pullback-unit` | 1008 | none |
@@ -60,7 +55,12 @@
 | `lemma-weil-pbc-finite-cover-killing` | 1008 | none |
 | `lemma-weil-pbc-pushout-monicity` | 1008 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-approximation` | 1009 | none |
+| `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1009 | none |
+| `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1009 | none |
+| `lem-weil-pbc-lift-coprime-factorization-etale` | 1009 | none |
 | `lem-weil-pbc-power-series-onto-completion` | 1009 | none |
+| `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1009 | none |
+| `lem-weil-pbc-separate-image-closed-from-closed` | 1009 | none |
 | `lemma-weil-pbc-finite-stage-killing` | 1009 | none |
 | `lem-weil-pbc-constructible-finite-pushforward-noetherian` | 1010 | none |
 | `def-weil-pbc-injective-acyclicity-property` | 2002 | none |
@@ -565,7 +565,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (32)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -577,6 +577,7 @@
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
+| `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
@@ -584,6 +585,7 @@
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
@@ -600,7 +602,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 572 nodes that wait for stage 1, 205 nodes that wait for a statement dependency.
+Not open yet: 572 nodes that wait for stage 1, 208 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
