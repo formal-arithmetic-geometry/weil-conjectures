@@ -228,7 +228,7 @@ theorem mem_relativeComponent_of_le_of_isNoetherianRing {A B : Type u} [CommRing
     lt_of_le_of_ne hle fun h ↦ hxx (PrimeSpectrum.ext h)
   have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing A B
   obtain ⟨R, _, _, _, φ, hker, hmax⟩ := Ideal.exists_isDiscreteValuationRing_of_lt hlt
-  letI : Algebra A R := (φ.comp (algebraMap A B)).toAlgebra
+  let : Algebra A R := (φ.comp (algebraMap A B)).toAlgebra
   let φA : B →ₐ[A] R := { φ with commutes' := fun _ ↦ rfl }
   let C := R ⊗[A] B
   let σ : C →ₐ[R] R := Algebra.TensorProduct.lift (Algebra.ofId R R)
@@ -266,9 +266,9 @@ theorem mem_relativeComponent_of_le_of_isNoetherianRing {A B : Type u} [CommRing
     (by rw [hrel, Set.mem_preimage, h₁]; exact hx)
   · rwa [hrel, Set.mem_preimage, h₂] at key
   · -- the special fibre `κ ⊗[R] (R ⊗[A] B) = κ ⊗[A] B` is reduced
-    letI : Algebra A (ResidueField R) :=
+    let : Algebra A (ResidueField R) :=
       ((algebraMap R (ResidueField R)).comp (algebraMap A R)).toAlgebra
-    haveI : IsScalarTower A R (ResidueField R) := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+    have : IsScalarTower A R (ResidueField R) := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
     have := hred (ResidueField R) (by
       rw [← congrArg PrimeSpectrum.asIdeal hAR]
       change RingHom.ker ((residue R).comp (algebraMap A R)) = _
