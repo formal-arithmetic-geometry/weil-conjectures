@@ -522,3 +522,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:57 UTC (2026-10-09) — Reviewed and committed direct-image-split-cover-product (no new node). STATE row.
 - 21:58 UTC (2026-10-09) — Reviewed and committed module-base-change-map-pasting (no new node). Launched a worker on etale-shriek-to-star-injective.
 - 2026-10-10, delivery of E1: lem-weil-pbc-descend-separated returned (83346b09b): Third delivery (head 83346b09): the corrections asked for are made and the group review is present; one citation gap remains. Step 1 says 'the diagonal Delta_{f
+- 21:58 UTC (2026-10-09) — Returned E1 descend-separated a third time (head 83346b09; only the 01KJ citation missing now).
