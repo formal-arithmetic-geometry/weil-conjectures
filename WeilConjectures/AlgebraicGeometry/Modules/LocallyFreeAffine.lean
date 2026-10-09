@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
 /-!
 # Finite locally free modules over affine opens
@@ -27,6 +28,9 @@ summand of a free module of finite rank.
   finite locally free module over an affine open are a finitely presented projective module.
 - `AlgebraicGeometry.Scheme.Modules.exists_sum_comp_eq_id_over`: over an affine open `U`, `M|_U`
   is a direct summand of `𝒪_U^n`.
+- `AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_of_isAffineOpen`: conversely, a
+  quasi-coherent module whose sections over affine opens are finitely presented and flat is finite
+  locally free.
 - `AlgebraicGeometry.Scheme.Modules.isIso_of_bijective_app_of_isAffineOpen`: a morphism of
   `𝒪_X`-modules is an isomorphism if it is bijective on sections over affine opens.
 -/
@@ -212,5 +216,43 @@ theorem exists_sum_comp_eq_id_over (M : X.Modules) [M.IsFiniteLocallyFree] {U : 
     ((overEquiv U).inverse.mapIso (restrictUnitIso hU.isoSpec.hom ≪≫
       overEquivFunctorObjUnitIso U) ≪≫ ((overEquiv U).unitIso.app _).symm)
     (exists_sum_comp_eq_id_restrict_fromSpec M hU)
+
+/-- **Finite local freeness from sections over affine opens.** A quasi-coherent `𝒪_X`-module whose
+sections over every affine open `U` form a finitely presented flat `Γ(X, U)`-module is finite
+locally free: around a point of `U` some localization `Γ(M, U)_r` is free of finite rank, so `M`
+is free of finite rank on the basic open `D(r)`. -/
+theorem isFiniteLocallyFree_of_isAffineOpen (M : X.Modules) [M.IsQuasicoherent]
+    (h : ∀ U : X.Opens, IsAffineOpen U →
+      Module.FinitePresentation Γ(X, U) Γ(M, U) ∧ Module.Flat Γ(X, U) Γ(M, U)) :
+    M.IsFiniteLocallyFree := by
+  have key (x : X) : ∃ (Y : Scheme.{u}) (f : Y ⟶ X) (_ : IsOpenImmersion f) (κ : Type u)
+      (_ : Finite κ), x ∈ f.opensRange ∧ Nonempty (M.restrict f ≅ SheafOfModules.free κ) := by
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+    replace hU : IsAffineOpen U := hU
+    obtain ⟨hfp, hfl⟩ := h U hU
+    let N := M.restrict hU.fromSpec
+    have : N.IsQuasicoherent := isQuasicoherent_restrictFunctor hU.fromSpec M
+    let e := sectionsRestrictFromSpecLinearEquiv M hU
+    let S := moduleSpecΓFunctor.obj N
+    have : Module.FinitePresentation Γ(X, U) S := Module.FinitePresentation.of_equiv e.symm
+    have : Module.Flat Γ(X, U) S := Module.Flat.of_linearEquiv e
+    let p := hU.primeIdealOf ⟨x, hxU⟩
+    obtain ⟨r, hr, hfree, hfin⟩ :=
+      Module.exists_free_localizedModule_powers_of_flat (R := Γ(X, U)) (M := S) p.asIdeal
+    let jr := Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) (Localization.Away r)))
+    obtain ⟨E⟩ := nonempty_restrict_iso_free_of_localizedModule N r
+      (Module.Free.chooseBasis (Localization.Away r) (LocalizedModule.Away r S)).repr
+    refine ⟨_, jr ≫ hU.fromSpec, inferInstance, _, inferInstance, ?_,
+      ⟨(restrictFunctorComp jr hU.fromSpec).app M ≪≫ E⟩⟩
+    have hp : p ∈ jr.opensRange := by
+      rw [Hom.opensRange_localizationAway]
+      exact hr
+    obtain ⟨q, hq⟩ := hp
+    refine ⟨q, (Hom.comp_apply _ _ q).trans ?_⟩
+    exact (congrArg hU.fromSpec hq).trans (hU.fromSpec_primeIdealOf ⟨x, hxU⟩)
+  choose Y f hf κ hκ hx e using key
+  exact isFiniteLocallyFree_of_restrict_iso_free M f
+    (eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨x, hx x⟩) κ e
 
 end AlgebraicGeometry.Scheme.Modules

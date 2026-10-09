@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
@@ -44,6 +45,8 @@ the members of an étale cover are not open subschemes of the source.
   morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.exists_etaleCover_factorization`: the étale-local slicing of a flat,
   locally finitely presented morphism with geometrically reduced fibres.
+- `AlgebraicGeometry.GeometricallyReduced.of_perfectField`: over a perfect field, every reduced
+  scheme is geometrically reduced.
 
 The smooth case, in which the schemes can moreover be taken affine and the first leg admits a
 section (Stacks `0EY4`), is
@@ -105,6 +108,34 @@ theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g
       (by simp [l]) (IsPullback.of_hasPullback g y)
   have : Etale l := MorphismProperty.of_isPullback hl inferInstance
   exact isReduced_of_etale l
+
+/-- Over a perfect field `k`, the fibre product of the spectra of two reduced `k`-algebras is
+reduced: it is the spectrum of their tensor product, which is reduced by
+`isReduced_tensorProduct_of_perfectField`. -/
+theorem isReduced_pullback_spec_map_of_perfectField {k : Type u} [Field k] [PerfectField k]
+    {R S : CommRingCat.{u}} (φ : .of k ⟶ R) (ψ : .of k ⟶ S) [IsReduced (Spec R)]
+    [IsReduced (Spec S)] : IsReduced (Limits.pullback (Spec.map φ) (Spec.map ψ)) := by
+  algebraize [φ.hom, ψ.hom]
+  have : _root_.IsReduced R := (affine_isReduced_iff R).1 ‹_›
+  have : _root_.IsReduced S := (affine_isReduced_iff S).1 ‹_›
+  have := isReduced_tensorProduct_of_perfectField k R S
+  exact isReduced_of_isOpenImmersion (pullbackSpecIso k R S).hom
+
+/-- **Over a perfect field every reduced scheme is geometrically reduced.** For a field
+extension `L / k`, the base change `X ×_k L` is covered by the spectra of the tensor products
+`A ⊗[k] L` for affine opens `Spec A` of `X`, which are reduced as `k` is perfect
+(`isReduced_tensorProduct_of_perfectField`). -/
+theorem GeometricallyReduced.of_perfectField {k : Type u} [Field k] [PerfectField k]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsReduced X] : GeometricallyReduced f := by
+  refine ⟨(geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms).2 fun L _ _ ↦ ?_⟩
+  refine @IsReduced.of_openCover _ (X.affineCover.pullback₁ (Limits.pullback.fst f _))
+    fun i ↦ ?_
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective (X.affineCover.f i ≫ f)
+  have := @isReduced_pullback_spec_map_of_perfectField _ _ _ _ _ φ
+    (CommRingCat.ofHom (algebraMap k L)) (isReduced_of_isOpenImmersion (X.affineCover.f i)) _
+  exact isReduced_of_isOpenImmersion (Limits.pullbackSymmetry _ _ ≪≫
+    Limits.pullbackRightPullbackFstIso f _ (X.affineCover.f i) ≪≫
+    Limits.pullback.congrHom hφ.symm rfl).hom
 
 /-- Let `f : X ⟶ S` be flat, locally of finite presentation and with geometrically reduced
 fibres. Then there is an étale covering `p i : U i ⟶ X` of `X`, that is, a family of étale
