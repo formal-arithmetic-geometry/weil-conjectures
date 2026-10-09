@@ -83,8 +83,8 @@ lemma coe_integralClosureMap {T : Type*} [CommRing T] [Algebra R T] [Algebra.IsI
     (ψ : T →ₐ[R] Ω) (x : T) : (integralClosureMap ψ x : Ω) = ψ x :=
   rfl
 
-/-- An `R`-algebra map from a domain integral over `R` to `Ω` is injective. -/
 omit [IsFractionRing R K] [IsGalois K Ω] in
+/-- An `R`-algebra map from a domain integral over `R` to `Ω` is injective. -/
 lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T]
     [Algebra.IsIntegral R T] (ψ : T →ₐ[R] Ω) (hR : Function.Injective (algebraMap R Ω)) :
     Function.Injective ψ := by
