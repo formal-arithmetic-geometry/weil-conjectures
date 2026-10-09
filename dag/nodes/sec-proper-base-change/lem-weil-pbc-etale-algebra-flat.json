@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-etale-algebra-flat",
+ "kind": "statement",
+ "title": "An etale algebra is flat",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. Then $B$ is a flat $A$-module [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Lemma Tag 00U2 (lemma-etale), item (6): an etale ring map is syntomic, in particular flat; with Morphisms, Lemma Tag 02GJ (lemma-etale-characterize) (2): Spec B -> Spec A etale iff A -> B is an etale ring map"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "étale algebra is flat",
+   "results": "Algebra.Etale, Algebra.FormallyEtale, Algebra.Smooth.flat (Mathlib.RingTheory.Smooth.Flat, instance [Smooth R A] : Module.Flat R A), AlgebraicGeometry.IsEtale, Algebra.Etale.finitePresentation",
+   "date": "2026-10-10",
+   "verdict": "match (via Smooth)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Module.Flat",
+   "results": "Algebra.Etale.of_formallyUnramified_of_flat (Mathlib.RingTheory.Smooth.Fiber; the converse direction)",
+   "date": "2026-10-10",
+   "verdict": "no direct lemma; instance chain below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an étale algebra is a flat module",
+   "results": "RingHom.Etale.toAlgebra, Algebra.Etale.formallyEtale, RingHom.etale_algebraMap, RingHom.etale_iff_formallyUnramified_and_smooth (Mathlib.RingTheory.RingHom.Etale)",
+   "date": "2026-10-10",
+   "verdict": "match via Etale => Smooth => Flat"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Etale.*Smooth\\|Smooth.flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Flat.lean",
+   "results": "`instance [Etale R A] : Smooth R A` (Etale/Basic.lean:223); `instance Smooth.flat [Smooth R A] : Module.Flat R A` (Smooth/Flat.lean:58, no Noetherian hypothesis); `RingHom.Smooth.flat` (line 66)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth.flat",
+  "file": "Mathlib/RingTheory/Smooth/Flat.lean",
+  "how": "a few Mathlib lemmas, one per clause: `Spec A → Spec B` etale ↔ `(algebraMap A B).Etale` (`HasRingHomProperty.Spec_iff`, AlgebraicGeometry/Morphisms/RingHomProperties.lean:360, with `HasRingHomProperty @Etale RingHom.Etale`, Morphisms/Etale.lean:56) ↔ `Algebra.Etale A B` (`RingHom.etale_algebraMap`, RingTheory/RingHom/Etale.lean:37); then the instances `Algebra.Etale.instSmooth` (`instance [Etale R A] : Smooth R A`, RingTheory/Etale/Basic.lean:223) and `Algebra.Smooth.flat` (Smooth/Flat.lean:58) give `Module.Flat A B`, the node's flatness by def-weil-pbc-flat-ring-map's match. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: HasRingHomProperty.Spec_iff, RingHom.etale_algebraMap, Etale ⇒ Smooth (Etale/Basic.lean:223), Algebra.Smooth.flat (Smooth/Flat.lean:58); checked."
+ }
+}

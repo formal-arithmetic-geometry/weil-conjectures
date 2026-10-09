@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-rings-zero",
+ "kind": "statement",
+ "title": "Equality and vanishing in a filtered colimit of rings",
+ "statement": "Let $I$ be a small filtered category and $i\\mapsto R_i$ a functor from $I$ to the category of commutative rings, with colimit $R=\\varinjlim_IR_i$ in that category [def-weil-pbc-category-colimit] and coprojections $\\iota_i:R_i\\to R$. Then for $x\\in R_i$ and $y\\in R_j$ one has $\\iota_i(x)=\\iota_j(y)$ if and only if there are an object $k$ and morphisms $f:i\\to k$, $g:j\\to k$ with $R(f)(x)=R(g)(y)$. In particular $\\iota_i(x)=0$ if and only if $R(f)(x)=0$ for some morphism $f:i\\to k$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Lemma Tag 00D6 (lemma-directed-colimit, the directed colimit as a quotient of the disjoint union) and Lemma Tag 00D7 (lemma-zero-directed-limit), for directed systems; a filtered colimit is a directed colimit by Categories, Lemma Tag 0032"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "element of a filtered colimit of commutative rings is zero iff it becomes zero at some later stage",
+   "results": "Ring.DirectLimit.of.zero_exact (Mathlib.Algebra.Colimit.Ring, directed preorders), CommRingCat.FilteredColimits.nontrivial, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero (ModuleCat), CommRingCat.FilteredColimits.colimit",
+   "date": "2026-10-10",
+   "verdict": "generalization (via concrete categories, below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a filtered colimit in a concrete category whose forgetful functor preserves the colimit, two representatives are equal iff they become equal at some stage",
+   "results": "CategoryTheory.Limits.Concrete.colimit_rep_eq_iff_exists, Concrete.isColimit_rep_eq_iff_exists, Concrete.colimit_exists_of_rep_eq, Concrete.isColimit_exists_of_rep_eq (Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic), Types.FilteredColimit.isColimit_eq_iff'",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'forget_preservesFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FilteredColimits.lean; sed -n 166,190p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+   "results": "`instance forget_preservesFilteredColimits : PreservesFilteredColimits (forget CommRingCat.{u})` (FilteredColimits.lean:363); `theorem isColimit_rep_eq_iff_exists` (ConcreteCategory/Basic.lean:175)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists",
+  "file": "Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+  "how": "specializes in one line: for `F : J ⥤ CommRingCat` with `[IsFiltered J]` and a colimit cocone `D` (`hD : IsColimit D`), `Concrete.isColimit_rep_eq_iff_exists F hD x y : D.ι.app i x = D.ι.app j y ↔ ∃ k (f : i ⟶ k) (g : j ⟶ k), F.map f x = F.map g y` (line 175), its hypothesis `PreservesColimit F (forget CommRingCat)` given by `CommRingCat.FilteredColimits.forget_preservesFilteredColimits` (Algebra/Category/Ring/FilteredColimits.lean:363); the 'in particular' is the case j = i, y = 0: ring maps send 0 to 0, so F.map g 0 = 0 and F.map f x = 0. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf Concrete.isColimit_rep_eq_iff_exists (ConcreteCategory/Basic.lean) with CommRingCat.FilteredColimits.forget_preservesFilteredColimits (FilteredColimits.lean:363); checked."
+ }
+}

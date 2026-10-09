@@ -1,0 +1,69 @@
+{
+ "id": "def-weil-pbc-normal-ring",
+ "kind": "definition",
+ "title": "Normal domain and normal ring",
+ "statement": "Let $R$ be a commutative ring. If $R$ is an integral domain, it is a *normal domain* if it is integrally closed in its field of fractions: every element of $\\operatorname{Frac}(R)$ that is a root of a monic polynomial with coefficients in $R$ lies in $R$. The ring $R$ is a *normal ring* if for every prime ideal $\\mathfrak p\\subset R$ the localization $R_{\\mathfrak p}$ is a normal domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Definition Tag 0309 (definition-domain-normal: a domain is normal if integrally closed in its field of fractions) and Definition Tag 00GV (definition-ring-normal: R is normal if every R_p is a normal domain)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normal ring: localization at every prime is an integrally closed domain",
+   "results": "IsIntegrallyClosed.of_localization, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal (Mathlib.RingTheory.LocalProperties.IntegrallyClosed), IsLocalization.isDomain_of_atPrime, isIntegrallyClosed_of_isLocalization; no notion of normal ring",
+   "date": "2026-10-10",
+   "verdict": "no match for 'normal ring' as a notion; normal domain = IsDomain ∧ IsIntegrallyClosed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition of a normal ring: every localization at a prime ideal is an integrally closed domain",
+   "results": "IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization (Mathlib.RingTheory.LocalProperties.IntegrallyClosed), isDedekindRing_iff",
+   "date": "2026-10-10",
+   "verdict": "no match for the notion; the conjunction below is the definition"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE '(class|def|abbrev|structure) (Is)?Normal(Ring|Domain)?\\b|NormalRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; sed -n 60,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+   "results": "no NormalRing / IsNormalRing / NormalDomain in Mathlib (only field-theoretic Normal, Order.IsNormal, a monoidal Normal); `abbrev IsIntegrallyClosed (R) := IsIntegrallyClosedIn R (FractionRing R)` (IntegrallyClosed.lean:74), `IsIntegrallyClosedIn` (line 66)",
+   "date": "2026-10-10",
+   "verdict": "match by one-line conjunction of Mathlib notions"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegrallyClosed, IsDomain, Localization.AtPrime",
+  "file": "Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+  "how": "specializes in one line: a normal domain is `IsDomain R ∧ IsIntegrallyClosed R` (`IsIntegrallyClosed R := IsIntegrallyClosedIn R (FractionRing R)`, IntegrallyClosed.lean:74, integrally closed in the fraction field; `isIntegrallyClosed_iff` line 125 gives the elementwise form); a normal ring is `∀ (p : Ideal R) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)` (`Localization.AtPrime`, Mathlib/RingTheory/Localization/AtPrime/Basic.lean). Mathlib has no named class for a normal ring; the lead decides whether this conjunction counts as a leaf."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition leaf: normal domain = IsDomain ∧ IsIntegrallyClosed; normal ring = every Localization.AtPrime p is a normal domain (Stacks 0309/00GV); one-line conjunction of Mathlib notions; accepted."
+ }
+}

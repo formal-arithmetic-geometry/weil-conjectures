@@ -2,18 +2,102 @@
  "id": "lem-weil-pbc-etale-colimit-normal-local-domain",
  "kind": "statement",
  "title": "A local filtered colimit of etale algebras over a normal domain is a normal domain",
- "statement": "Let $A$ be an integral domain which is a *normal ring*: for every prime $\\mathfrak q\\subset A$ the localization $A_{\\mathfrak q}$ is a normal domain (a domain integrally closed in its field of fractions). Let $C$ be an $A$-algebra which is the colimit $C=\\varinjlim_{i\\in I}B_i$ [def-weil-pbc-category-colimit] of a filtered diagram $i\\mapsto B_i$ of $A$-algebras such that each $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], and suppose that $C$ is a local ring. Then:\n\n(a) $C$ is a normal domain (an integral domain integrally closed in its field of fractions);\n\n(b) the structure map $A\\to C$ is injective: every nonzero $a\\in A$ has nonzero image in $C$.\n\n(This applies to the strict henselization $C=(A_{\\mathfrak p})^{sh}$ of [lem-weil-pbc-strict-henselization-triples], which is such a colimit and local; it is the implication 'R normal domain $\\Rightarrow$ $R^{sh}$ normal domain' of Stacks 06DI, in the colimit form its proof uses.)",
+ "statement": "Let $A$ be an integral domain which is a normal ring [def-weil-pbc-normal-ring]: for every prime $\\mathfrak q\\subset A$ the localization $A_{\\mathfrak q}$ is a normal domain (a domain integrally closed in its field of fractions). Let $C$ be an $A$-algebra which is the colimit $C=\\varinjlim_{i\\in I}B_i$ [def-weil-pbc-category-colimit] of a filtered diagram $i\\mapsto B_i$ of $A$-algebras such that each $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], and suppose that $C$ is a local ring. Then:\n\n(a) $C$ is a normal domain [def-weil-pbc-normal-ring] (an integral domain integrally closed in its field of fractions);\n\n(b) the structure map $A\\to C$ is injective: every nonzero $a\\in A$ has nonzero image in $C$.\n\n(This applies to the strict henselization $C=(A_{\\mathfrak p})^{sh}$ of [lem-weil-pbc-strict-henselization-triples], which is such a colimit and local; it is the implication 'R normal domain $\\Rightarrow$ $R^{sh}$ normal domain' of Stacks 06DI, in the colimit form its proof uses.)",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Stacks Project, More on Algebra, Lemma (Tag 06DI, label more-algebra-lemma-henselization-normal), proof of 'R normal => R^sh normal': R^sh is a filtered colimit of etale (hence smooth) R-algebras; Algebra, Lemma (Tag 033C, normal goes up along smooth maps) and Lemma (Tag 037D, a directed colimit of normal rings is normal); a local normal ring is a normal domain (Algebra, Definition Tag 00GV and the remark after it). For (b): etale ring maps are flat (Algebra, Lemma Tag 00U2 / 08WD), so a nonzero a, a nonzerodivisor of A, acts injectively on each B_i, hence on the filtered colimit C, and C is nonzero, being local."
  },
  "stmt_deps": [
   "def-weil-pbc-category-colimit",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The colimit as a colimit of rings.* Write $\\iota_i:B_i\\to C$ for the coprojections; they are $A$-algebra maps, and $I$ is filtered, in particular nonempty. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1), $(C,(\\iota_i))$ is also a colimit of the underlying diagram $i\\mapsto B_i$ of commutative rings (with the same transition maps $B(\\phi):B_i\\to B_j$, which are $A$-algebra maps).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06DI (lemma-henselization-normal), proof of R normal => R^sh normal ('R^sh is a filtered colimit of etale R-algebras')"
+   }
+  },
+  {
+   "text": "*Each $B_i$ is a normal ring.* $A$ is a normal ring [def-weil-pbc-normal-ring] by hypothesis and $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is etale, so $B_i$ is a normal ring by [lem-weil-pbc-etale-over-normal-ring-normal] (Stacks: etale hence smooth, and normality goes up along smooth ring maps, Algebra Lemma 033C).",
+   "uses": [
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06DI (lemma-henselization-normal), proof of R normal => R^sh normal, citing Algebra Lemma 033C (lemma-normal-goes-up)"
+   }
+  },
+  {
+   "text": "*$C$ is a normal ring.* By step 1, $C$ is the colimit of the filtered diagram of commutative rings $i\\mapsto B_i$, each of which is a normal ring by step 2; hence $C$ is a normal ring by [lem-weil-pbc-filtered-colimit-normal-ring] (Stacks Algebra Lemma 037D; no condition on the transition maps is needed).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06DI (lemma-henselization-normal), proof of R normal => R^sh normal, citing Algebra Lemma 037D (lemma-colimit-normal-ring)"
+   }
+  },
+  {
+   "text": "*Proof of (a): a local normal ring is a normal domain.* Let $\\mathfrak m$ be the maximal ideal of the local ring $C$; it is prime. Every $s\\in C\\setminus\\mathfrak m$ is a unit of $C$, so the localization map $C\\to C_{\\mathfrak m}$, $c\\mapsto c/1$, is an isomorphism of rings: it is injective ($c/1=0$ means $sc=0$ for some unit $s$, so $c=0$) and surjective ($c/s=(cs^{-1})/1$). By step 3 and the definition of a normal ring [def-weil-pbc-normal-ring], $C_{\\mathfrak m}$ is a normal domain; a ring isomorphism carries a domain to a domain and extends to an isomorphism of the fields of fractions compatible with the inclusions, under which monic equations and their roots correspond, so $C$ is a normal domain. (Stacks, proof of 06DI: 'a local ring is normal if and only if it is a normal domain'.)",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06DI (lemma-henselization-normal), proof of R normal => R^sh normal (the preliminary remark) and Algebra Definition Tag 00GV"
+   }
+  },
+  {
+   "text": "*Nonzero elements of $A$ act injectively on each $B_i$.* By [lem-weil-pbc-etale-algebra-flat], $B_i$ is a flat $A$-module [def-weil-pbc-flat-ring-map]. Let $a\\in A$, $a\\ne0$. As $A$ is a domain, $\\mu_a:A\\to A$, $x\\mapsto ax$, is an injective $A$-linear map; by flatness $\\mu_a\\otimes\\mathrm{id}:A\\otimes_AB_i\\to A\\otimes_AB_i$ is injective, and under the isomorphism $A\\otimes_AB_i\\cong B_i$, $x\\otimes b\\mapsto xb$, it is the map $b\\mapsto ab$. So $b\\mapsto ab$ is injective on $B_i$, for every $i$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00U2 (lemma-etale) (6): etale ring maps are flat; Definition Tag 00HB (definition-flat). The argument for (b) is written by an agent: Stacks uses it implicitly in Etale Cohomology, Lemma 09Z5, where Spec K x_X Spec O^sh is the generic fibre"
+   }
+  },
+  {
+   "text": "*Proof of (b).* Let $a\\in A$, $a\\neq0$, and fix an object $i$ of $I$. Since $\\iota_i$ is an $A$-algebra map, the image of $a$ in $C$ is $\\iota_i(a\\cdot1_{B_i})$. Suppose it is $0=\\iota_i(0)$. By step 1 and [lem-weil-pbc-filtered-colimit-rings-zero] there is a morphism $f:i\\to k$ with $B(f)(a\\cdot1_{B_i})=0$; as $B(f)$ is an $A$-algebra map, $a\\cdot1_{B_k}=0$. Then $ab=(a\\cdot1_{B_k})b=0$ for every $b\\in B_k$, so by step 4 every $b\\in B_k$ is $0$: $B_k=0$, i.e. $1_{B_k}=0$. Hence $1_C=\\iota_k(1_{B_k})=\\iota_k(0)=0$ and $C$ is the zero ring, which is not local (a local ring has a maximal ideal, a proper ideal, so $1\\neq0$). This contradiction shows that the image of $a$ in $C$ is nonzero, i.e. $A\\to C$ is injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00D7 (lemma-zero-directed-limit); argument written by an agent (Stacks leaves (b) implicit in Etale Cohomology, Lemma 09Z5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-etale-algebra-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, More on Algebra, Lemma Tag 06DI (lemma-henselization-normal), proof of 'R normal => R^h, R^sh normal' (steps 1-4); part (b) (steps 5-6) is not stated in Stacks and was written by an agent from Algebra Lemmas 00U2 (6) and 00D7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,6 +175,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: a local filtered colimit of etale algebras over a normal domain is a normal domain with A → C injective (06DI in the form its proof uses); correct; unsplit."
+  "note": "Six steps along Stacks 06DI (tags all verified by the worker): colimit of rings, each B_i normal (033C as the new unsplit node lem-weil-pbc-etale-over-normal-ring-normal), filtered colimit of normal rings normal (037D as the new unsplit node lem-weil-pbc-filtered-colimit-normal-ring), local normal ring = normal domain (elementary, written out), nonzero a acts injectively on flat B_i (new Mathlib leaf lem-weil-pbc-etale-algebra-flat: Etale ⇒ Smooth (Etale/Basic.lean:223) ⇒ Smooth.flat (Smooth/Flat.lean:58); checked), and (b) via zero elements of filtered colimits (new Mathlib leaf lem-weil-pbc-filtered-colimit-rings-zero: Concrete.isColimit_rep_eq_iff_exists + forget_preservesFilteredColimits; checked) and C ≠ 0. The brief′s sketch for (b) was wrong (A → B_j need not be injective: B_j = 0 is etale); the worker′s argument is correct. New definition leaf def-weil-pbc-normal-ring (IsDomain ∧ IsIntegrallyClosed of Localization.AtPrime, a one-line conjunction, accepted as a definition leaf)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "worker": "stage1",
+  "summary": "Split along Stacks 06DI (checked in more-algebra.tex l.11110-11129: R^sh is a filtered colimit of etale hence smooth R-algebras; Algebra 033C normal goes up along smooth maps, l.46563; Algebra 037D directed colimit of normal rings is normal, l.8312, no condition on transition maps; local normal ring = normal domain, Definition 00GV). Steps: (1) the A-algebra colimit is a ring colimit (existing elementwise node); (2) each B_i normal (new unsplit node lem-weil-pbc-etale-over-normal-ring-normal, 033C + 00U9 + 02GJ); (3) C normal (new unsplit node lem-weil-pbc-filtered-colimit-normal-ring, 037D + Categories 0032 for filtered vs directed); (4) a local normal ring is a normal domain (elementary from the new definition node def-weil-pbc-normal-ring, Mathlib leaf as a conjunction); (5)-(6) injectivity of A -> C: flatness of etale algebras (new Mathlib leaf lem-weil-pbc-etale-algebra-flat: Spec_iff + etale_algebraMap + Etale=>Smooth instance + Algebra.Smooth.flat) makes a nonzero a act injectively on each B_i, and if a died in C it would die at a stage B_k (new Mathlib leaf lem-weil-pbc-filtered-colimit-rings-zero), forcing B_k = 0 and C = 0, impossible for a local ring. The brief's suggestion that A -> B_i is injective for every i is false when B_i = 0 (the zero algebra is etale); the proof uses that C is nonzero instead. Statement unchanged except for citing def-weil-pbc-normal-ring. No Lean exists on either branch (checked: no strict henselization or normality-ascent declaration in slopmaster2; the user AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed has its own sorry)."
  }
 }
