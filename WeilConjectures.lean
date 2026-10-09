@@ -75,6 +75,7 @@ public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Extension
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
