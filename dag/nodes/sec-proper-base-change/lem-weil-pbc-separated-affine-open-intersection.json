@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-separated-affine-open-intersection",
+ "kind": "statement",
+ "title": "Affine opens of a separated scheme over an affine base intersect in affine opens",
+ "statement": "Let $A$ be a commutative ring and $f:Y\\to\\operatorname{Spec}A$ a separated morphism of schemes [def-weil-pbc-scheme-conventions] (its diagonal $Y\\to Y\\times_{\\operatorname{Spec}A}Y$ is a closed immersion, hence an affine morphism, so $f$ has affine diagonal). If $U,V\\subseteq Y$ are affine open subschemes, then $U\\cap V$ is an affine open subscheme. Consequently, if $Y=U_0\\cup\\cdots\\cup U_n$ with all $U_j$ affine, then for $V=U_1\\cup\\cdots\\cup U_n$ the open $U_0\\cap V=\\bigcup_{j\\ge1}(U_0\\cap U_j)$ is covered by $n$ affine opens.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma Tag 01KP (lemma-characterize-separated (1)(a): f separated, U, V affine opens mapping into a common affine open of S, then U ∩ V affine) and morphisms.tex Lemma Tag 01SE (lemma-closed-immersion-affine: closed immersions are affine); used in etale-cohomology.tex, proof of Lemma Tag 0A51 ('using that the diagonal of X is affine')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "intersection of two affine open subschemes of a separated scheme is affine",
+   "results": "quasiSeparatedSpace_iff_affine, IsAffineOpen.sup_of_disjoint, Scheme.instIsSeparatedOfIsAffine, IsAffineOpen, IsAffineOpen.iSup_of_disjoint",
+   "date": "2026-10-09",
+   "verdict": "no direct match from this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen (_ ⊓ _)",
+   "results": "AlgebraicGeometry.diagonal_isAffine_iff_forall_isAffineOpen_inf, AlgebraicGeometry.IsAffineOpen.inf, AlgebraicGeometry.isAffineHom_diagonal_iff (Mathlib.AlgebraicGeometry.Morphisms.Affine)",
+   "date": "2026-10-09",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAffineOpen.*inf\\|IsClosedImmersion.*IsAffineHom\\|class IsSeparated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/Affine.lean:309 isAffineHom_diagonal_iff, :335 IsAffineOpen.inf; Morphisms/ClosedImmersion.lean:151 instance IsClosedImmersion f -> IsAffineHom f; Morphisms/Separated.lean:44 class IsSeparated (isClosedImmersion_diagonal)",
+   "date": "2026-10-09",
+   "verdict": "match: read the sources"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isAffineHom_diagonal_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+  "how": "specializes in one line: IsSeparated f gives IsClosedImmersion (pullback.diagonal f) (Morphisms/Separated.lean:44), hence IsAffineHom (pullback.diagonal f) by the instance at Morphisms/ClosedImmersion.lean:151; then isAffineHom_diagonal_iff.mp _ ⊤ (isAffineOpen_top _) U le_top V le_top hU hV : IsAffineOpen (U ⊓ V). (The absolute form is IsAffineOpen.inf.) The 'consequently' clause is the distributivity U ⊓ ⨆ U_j = ⨆ (U ⊓ U_j)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-injective-restriction-acyclicity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: isAffineHom_diagonal_iff (Morphisms/Affine.lean:319) applied with U = top, after IsSeparated f -> IsClosedImmersion (diagonal) -> IsAffineHom (diagonal) (Separated.lean:44, ClosedImmersion.lean:151); the absolute form IsAffineOpen.inf is at Affine.lean:337."
+ }
+}

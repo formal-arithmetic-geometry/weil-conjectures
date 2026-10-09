@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+ "kind": "statement",
+ "title": "Etale cohomology of a limit of schemes",
+ "statement": "Let $(X_i,f_{i'i})_{i\\in I}$ be a directed inverse system of schemes [def-pc-scheme] with affine transition morphisms $f_{i'i}:X_{i'}\\to X_i$ ($i'\\ge i$), each $X_i$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], let $X=\\varprojlim_iX_i$ with projections $f_i:X\\to X_i$, let $(\\mathcal F_i,\\varphi_{i'i})$ be a system of abelian sheaves on $(X_i)_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] with $\\varphi_{i'i}:f_{i'i}^{-1}\\mathcal F_i\\to\\mathcal F_{i'}$ [def-weil-pbc-inverse-image], and set $\\mathcal F=\\varinjlim_if_i^{-1}\\mathcal F_i$. Then the pullback maps induce an isomorphism\n$$\n\\varinjlim_iH^p((X_i)_{\\Et},\\mathcal F_i)\\xrightarrow{\\ \\sim\\ }H^p(X_{\\Et},\\mathcal F)\\qquad(p\\ge0)\n$$\n($H^p$ etale cohomology [def-weil-pbc-etale-cohomology], the maps those of [def-weil-pbc-cohomology-pullback] followed by $\\varphi$ and the coprojections). In particular, for a directed system of rings $(C_i)$ with colimit $C$, $\\operatorname{Spec}C=\\varprojlim\\operatorname{Spec}C_i$ with affine transition maps (Stacks Limits, Lemma 01YW), and for an abelian sheaf $G$ on $T_{\\Et}$ and compatible maps $v_i:\\operatorname{Spec}C_i\\to T$ with limit $v:\\operatorname{Spec}C\\to T$ one gets $\\varinjlim_iH^p(\\operatorname{Spec}C_i,v_i^{-1}G)\\cong H^p(\\operatorname{Spec}C,v^{-1}G)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit); limits.tex Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit) for the affine case"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "étale cohomology of a limit of schemes with affine transition maps is the colimit of cohomologies",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, isAffineHom_π_app, exists_app_map_eq_map_of_isLimit, Scheme.exists_isOpenCover_and_isAffine (Mathlib.AlgebraicGeometry.AffineTransitionLimit); Scheme.AffineZariskiSite.isColimitCocone",
+   "date": "2026-10-09",
+   "verdict": "no match: only global sections / structure sheaf, degree 0"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale cohomology of the inverse limit of qcqs schemes with affine transition maps equals colimit of étale cohomology",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, exists_appTop_π_eq_of_isLimit, exists_app_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_app_map_eq_map_of_isLimit (all Mathlib.AlgebraicGeometry.AffineTransitionLimit)",
+   "date": "2026-10-09",
+   "verdict": "no match: Γ of the structure sheaf only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Sheaf.H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory; ls AlgebraicGeometry/Sites/",
+   "results": "Sheaf.H used only in CategoryTheory/Sites/SheafCohomology/Basic.lean; AlgebraicGeometry/Sites has Etale.lean, Small.lean, AffineEtale.lean etc. but no cohomology of limits",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-injective-restriction-acyclicity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
