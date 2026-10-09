@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+ "kind": "statement",
+ "title": "A factorization modulo I of a monic polynomial into coprime monic factors lifts after an etale extension trivial modulo I",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $f\\in A[x]$ a monic polynomial, with image $\\bar f\\in(A/I)[x]$. Let $\\bar f=\\bar g\\bar h$ in $(A/I)[x]$ with $\\bar g,\\bar h$ monic and generating the unit ideal of $(A/I)[x]$. Then there exist a ring map $A\\to A'$ such that $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism] and the induced map $\\alpha:A/I\\to A'/IA'$ is an isomorphism, and monic polynomials $g',h'\\in A'[x]$ with $f=g'h'$ in $A'[x]$ ($f$ mapped to $A'[x]$) whose images in $(A'/IA')[x]$ are $\\alpha(\\bar g)$ and $\\alpha(\\bar h)$ ($\\alpha$ applied coefficientwise).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0ALH (lemma-lift-factorization-monic) and its proof (uses Algebra Example Tag 00UA algebra-example-factor-polynomials-etale, Lemma Tag 07M0 lemma-localize-upstairs, Algebra lemma-map-between-etale and lemma-surjective-flat-finitely-presented)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift factorization of monic polynomial into coprime monic factors modulo ideal to etale algebra",
+   "results": "Algebra.instIsStandardEtaleRing, Algebra.instEtaleOfIsStandardEtale, Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.FormallyEtale.of_isSeparable, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.of_isLocalization, Polynomial.monic_of_monic_mapAlg",
+   "date": "2026-10-10",
+   "verdict": "no match: only the universal coprime factorization ring and the one-prime residue-field version (00UH)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monic polynomial f over A, f ≡ g h mod I with g h monic coprime, exists etale A → A' with A/I ≅ A'/IA' and monic lifts g', h' with f = g' h'",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.cond, StandardEtalePresentation, StandardEtalePair.instEtaleRing, StandardEtalePair.Ring, Algebra.instIsStandardEtaleRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.UniversalCoprimeFactorizationRing",
+   "results": "Polynomial.UniversalCoprimeFactorizationRing, .factor₁, .factor₂, instEtaleUniversalCoprimeFactorizationRing, .homEquiv, .isCoprime_factor₁_factor₂, .factor₁_mul_factor₂, .homEquiv_comp_fst, .homEquiv_comp_snd, .exists_liesOver_residueFieldMap_bijective (all Mathlib.RingTheory.Polynomial.UniversalFactorizationRing)",
+   "date": "2026-10-10",
+   "verdict": "no match for the lemma; these are its ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 0ALH\\|stacks 00UA\\|stacks 07M0\\|stacks 07M1' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean (all 715 lines)",
+   "results": "no tag 0ALH/00UA/07M0/07M1. The file defines UniversalFactorizationRing m k hn p (the ring B = A ⊗_R S of the 0ALH proof, :400), homEquiv (:455, A-algebra maps B → S = factorizations p = q1 q2 over S into monic factors of degrees m, k), UniversalCoprimeFactorizationRing (:543) = B localized at the jacobian of its presentation, which is ± the resultant of the universal factors (jacobian_resentation :518), with instance Algebra.Etale (:574), homEquiv (:591: maps to S = coprime monic factorizations over S), homEquiv_comp_fst/snd (:629/:637, naturality), and the one-prime @[stacks 00UH] Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (:694)",
+   "date": "2026-10-10",
+   "verdict": "no match. Route for the split of this node: with p = f, m = deg g-bar, k = deg h-bar (when A/I ≠ 0), B' := UniversalCoprimeFactorizationRing is etale over A and plays the role of Stacks' B_g (the 07M0 localization is replaced by the localization at the resultant, which maps to a unit of A/I since g-bar, h-bar are coprime); homEquiv (A/I) applied to (g-bar, h-bar) gives an A-algebra map B' → A/I, surjective; B'/IB' is etale over A/I and the induced section B'/IB' → A/I gives an idempotent e (node lem-weil-pbc-etale-section-idempotent-splitting); A' := B'_h for a lift h of e; the factors are the images of factor₁, factor₂, and homEquiv_comp_fst/snd give the reduction mod I"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-coprime-factorization-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement is Stacks 0ALH (monic coprime factorizations lift after an etale A → A′ with A/I ≅ A′/IA′); correct; unsplit; Mathlib route recorded."
+ }
+}

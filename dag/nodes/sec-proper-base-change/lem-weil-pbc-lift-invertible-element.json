@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-lift-invertible-element",
+ "kind": "statement",
+ "title": "Inverting a lift of a unit modulo I is etale and does not change A/I",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, and $a\\in A$ an element whose image $\\bar a$ in $A/I$ is a unit. Let $A_a$ be the localization of $A$ at $\\{1,a,a^2,\\dots\\}$. Then (1) $\\operatorname{Spec}A_a\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]; (2) the map $\\alpha:A/I\\to A_a/IA_a$ induced by $A\\to A_a$ is an isomorphism; (3) the image $u=a/1$ of $a$ in $A_a$ is a unit of $A_a$, and its image in $A_a/IA_a$ is $\\alpha(\\bar a)$. In particular (Stacks 07LX): for every unit $\\bar u$ of $A/I$ there is a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale, $A/I\\to A'/IA'$ an isomorphism $\\alpha$, and a unit $u'\\in A'$ whose image in $A'/IA'$ is $\\alpha(\\bar u)$ (take $a$ any lift of $\\bar u$, $A'=A_a$).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07LX (lemma-lift-invertible-element) and its proof ('Choose any lift f of u and set A' = A_f'), made explicit: the statement records the ring A_a the proof constructs"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertible element of A/I lifts to a unit of an etale A-algebra A' with A/I isomorphic to A'/IA'",
+   "results": "instCanLiftUnitsValIsUnit, IsNilpotent.isUnit_quotient_mk_iff, Algebra.FormallyEtale.iff_of_equiv, Algebra.Etale.of_isLocalizationAway (Mathlib.RingTheory.Etale.Basic), factorPowSucc.isUnit_of_isUnit_image, Algebra.FormallyEtale.iff_comp_bijective, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; Algebra.Etale.of_isLocalizationAway is clause (1) at the ring level"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of A at an element a whose image in A/I is a unit: the map A/I → A_a / I A_a is an isomorphism",
+   "results": "quotMapEquivQuotMapMaximalIdealOfIsLocalization, IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply, IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot, IsLocalization.localizationLocalizationAtPrimeIsoLocalization, localization_unit_isIso', Algebra.isStandardOpenImmersion_iff",
+   "date": "2026-10-10",
+   "verdict": "no single declaration (the prime/maximal versions are not this)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization (Algebra.algebraMapSubmonoid (_ ⧸ _) _) (_ ⧸ Ideal.map _ _)",
+   "results": "IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap (Mathlib.RingTheory.Localization.Ideal): for IsLocalization M S and an ideal I of R, S ⧸ I.map (algebraMap R S) is the localization of R ⧸ I at the image of M",
+   "date": "2026-10-10",
+   "verdict": "match for clause (2), together with IsLocalization.atUnits"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 07LX' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'atUnits\\|atUnit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Away/Basic.lean; sed -n 385,395p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Ideal.lean; sed -n 75,90p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Away/Basic.lean; sed -n 66,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; sed -n 326,350p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean; grep -n 'algebraMapSubmonoid_powers' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Algebra/Basic.lean",
+   "results": "no tag 07LX; IsLocalization.atUnits (Localization/Basic.lean:309, R ≃ₐ[R] S, built as AlgEquiv.ofBijective (Algebra.ofId R S)) and IsLocalization.atUnit (Away/Basic.lean:349); the quotient instance at Localization/Ideal.lean:391; IsLocalization.Away.algebraMap_isUnit (Away/Basic.lean:82); instance isOpenImmersion_SpecMap_localizationAway (OpenImmersion.lean:329/336) and IsOpenImmersion.of_isLocalization (:348); instance [IsOpenImmersion f] : Etale f (Morphisms/Etale.lean:78); Algebra.algebraMapSubmonoid_powers (Algebra/Basic.lean:138)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause (see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Etale (instance of IsOpenImmersion), IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap, IsLocalization.atUnits, IsLocalization.Away.algebraMap_isUnit",
+  "file": "Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/RingTheory/Localization/Ideal.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Away/Basic.lean",
+  "how": "one Mathlib declaration per clause: (1) instance IsOpenImmersion (Spec.map (algebraMap R (Localization.Away a))) (OpenImmersion.lean:336; for another model of A_a, IsOpenImmersion.of_isLocalization :348) followed by the instance [IsOpenImmersion f] : Etale f (Morphisms/Etale.lean:78) (as in the leaves lem-weil-pbc-principal-localization-open-immersion and lem-weil-pbc-etale-composition-cancellation (1)); (2) the instance IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap (Localization/Ideal.lean:391) with M = powers a says A_a/IA_a is the localization of A/I at algebraMapSubmonoid (A/I) (powers a) = powers ā (Algebra.algebraMapSubmonoid_powers), a submonoid of units since ā is a unit, so IsLocalization.atUnits (Localization/Basic.lean:309) gives A/I ≃ₐ[A/I] A_a/IA_a whose underlying map is Algebra.ofId, i.e. the induced map α; (3) IsLocalization.Away.algebraMap_isUnit (Away/Basic.lean:82); the image of a/1 in A_a/IA_a is α(ā) because α is induced by A → A_a. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-coprime-factorization-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause (Stacks 07LX with A′ = A_a); checked."
+ }
+}

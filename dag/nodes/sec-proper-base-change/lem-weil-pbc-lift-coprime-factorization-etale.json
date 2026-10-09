@@ -10,9 +10,63 @@
  "stmt_deps": [
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Making the leading coefficient a unit upstairs.* Let $\\bar c\\in A/I$ be the leading coefficient of $\\bar g$, a unit by (1), and choose $a\\in A$ with image $\\bar c$. Put $A_1=A_a$. By [lem-weil-pbc-lift-invertible-element], $\\operatorname{Spec}A_1\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], the induced map $\\alpha_1:A/I\\to A_1/IA_1$ is an isomorphism, and $u=a/1$ is a unit of $A_1$ whose image $\\bar u$ in $A_1/IA_1$ is $\\alpha_1(\\bar c)$.",
+   "uses": [
+    "lem-weil-pbc-lift-invertible-element",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M1 (lemma-lift-factorization-easy), first sentence ('Applying Lemma lemma-lift-invertible-element we may assume that the leading coefficient of g-bar is the reduction of an invertible element u of A'; Lemma Tag 07LX)"
+   }
+  },
+  {
+   "text": "*Reduction to monic factors.* Apply $\\alpha_1$ coefficientwise: $\\bar g_1=\\alpha_1(\\bar g)$, $\\bar h_1=\\alpha_1(\\bar h)$. Since $\\alpha_1$ is a ring map compatible with $A\\to A/I$ and $A\\to A_1\\to A_1/IA_1$, the image $\\bar f_1$ of $f$ in $(A_1/IA_1)[x]$ is $\\alpha_1(\\bar f)=\\bar g_1\\bar h_1$; since $\\alpha_1$ is injective, the leading coefficient of $\\bar g_1$ is $\\alpha_1(\\bar c)=\\bar u$. Put $G=\\bar u^{-1}\\bar g_1$ and $H=\\bar u\\bar h_1$. Then $GH=\\bar f_1$ and $G$ is monic. $G,H$ generate the unit ideal: if $p\\bar g+q\\bar h=1$ in $(A/I)[x]$, then $\\alpha_1(p)\\bar g_1+\\alpha_1(q)\\bar h_1=1$, i.e. $(\\bar u\\alpha_1(p))G+(\\bar u^{-1}\\alpha_1(q))H=1$. $H$ is monic: if $A_1/IA_1=0$ every polynomial is monic; otherwise $\\bar f_1$ is monic ($f$ is monic), hence nonzero, so $H\\neq0$, and since $G$ is monic the top coefficient of $GH$, in degree $\\deg G+\\deg H$, is the leading coefficient of $H$; thus $\\deg\\bar f_1=\\deg G+\\deg H$ and the leading coefficient of $H$ equals that of $\\bar f_1$, which is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M1, second to fourth sentences ('Then we may replace g-bar by u-bar^{-1} g-bar and h-bar by u-bar h-bar. Thus we may assume that g-bar is monic. Since f is monic we conclude that h-bar is monic too'); the transport along alpha_1, the coprimality and the leading-coefficient argument (including the case A_1/IA_1 = 0), left implicit in Stacks, are written out"
+   }
+  },
+  {
+   "text": "*The monic case.* Apply [lem-weil-pbc-lift-monic-coprime-factorization-etale] to the ring $A_1$, the ideal $IA_1$, the image $f_1$ of $f$ in $A_1[x]$ (monic) and the factorization $\\bar f_1=GH$ of step 2 into monic polynomials generating the unit ideal. It gives a ring map $A_1\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A_1$ etale and $\\beta:A_1/IA_1\\to A'/IA'$ an isomorphism (note $(IA_1)A'=IA'$), and monic $g_1,h_1\\in A'[x]$ with $f=g_1h_1$ in $A'[x]$ whose images in $(A'/IA')[x]$ are $\\beta(G)$ and $\\beta(H)$.",
+   "uses": [
+    "lem-weil-pbc-lift-monic-coprime-factorization-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M1, last sentence ('In this case the result follows from Lemma lemma-lift-factorization-monic'; Lemma Tag 0ALH)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is the composite of $\\operatorname{Spec}A'\\to\\operatorname{Spec}A_1$ and $\\operatorname{Spec}A_1\\to\\operatorname{Spec}A$ (functoriality of $\\operatorname{Spec}$), both etale, hence etale [lem-weil-pbc-etale-composition-cancellation] (2). The map $A/I\\to A'/IA'$ induced by $A\\to A'$ is $\\alpha=\\beta\\circ\\alpha_1$ (both are induced by $A\\to A_1\\to A'$), an isomorphism. Let $v$ be the image of $u$ in $A'$, a unit, whose image in $A'/IA'$ is $\\beta(\\bar u)$. Put $g'=vg_1$ and $h'=v^{-1}h_1$. Then $g'h'=g_1h_1=f$ in $A'[x]$; modulo $IA'$, $g'\\mapsto\\beta(\\bar u)\\beta(G)=\\beta(\\bar g_1)=\\beta(\\alpha_1(\\bar g))=\\alpha(\\bar g)$ and $h'\\mapsto\\beta(\\bar u)^{-1}\\beta(H)=\\beta(\\bar h_1)=\\alpha(\\bar h)$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Section 15.11 (section-lifting), remark before Lemma Tag 07LX ('given etale ring maps A → A' → A'' such that A/I ≅ A'/IA' and A'/IA' ≅ A''/IA'' the composition A → A'' is also etale and also satisfies A/I ≅ A''/IA''', used without mention); undoing the replacement of g-bar, h-bar by u-bar^{-1} g-bar, u-bar h-bar, implicit in Stacks' 'we may replace', is written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-lift-invertible-element",
+  "lem-weil-pbc-lift-monic-coprime-factorization-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.11.6, Tag 07M1 (lemma-lift-factorization-easy), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +95,17 @@
    "results": "no tag 07M1/0ALH/00UA/07LX; UniversalFactorizationRing.lean has Polynomial.UniversalCoprimeFactorizationRing (line 544) with Algebra.Etale instance (574), homEquiv (591: R-algebra maps to S = coprime monic factorizations of p over S), exists_liesOver_residueFieldMap_bijective (649), and @[stacks 00UH] Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (694)",
    "verdict": "no match; UniversalCoprimeFactorizationRing.homEquiv + its Etale instance are the ring B of the proof of 0ALH (S=A/I gives the A-algebra map B -> A/I whose kernel J the proof localizes at)",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'UniversalCoprimeFactorization\\|lift_factorization\\|exists_etale.*factor' ~/weil-conjectures-slopmaster2/WeilConjectures; grep -rln IsCoprime ~/weil-conjectures-slopmaster2/WeilConjectures | xargs grep -ln Etale",
+   "results": "source repository slopmaster2: no UniversalCoprimeFactorization and no lift_factorization; exists_etale.*factor hits only AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem (+ private _aux) and Smooth.exists_etaleCover_factorization (Morphisms/Slicing.lean), AlgebraicGeometry.exists_etaleCover_factorization (Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean): slicings of smooth/flat morphisms, unrelated; no file uses both IsCoprime and Etale",
+   "date": "2026-10-10",
+   "verdict": "no Lean for this node in the source repository"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,6 +130,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Stacks 07M1 (etale A → A′ with A/I ≅ A′/IA′ lifting a factorization with unit leading coefficient and coprime factors); correct; unsplit. Mathlib has UniversalCoprimeFactorizationRing (0ALH ring) but not this lemma."
+  "note": "Four steps along Stacks 07M1: invert a lift of the leading coefficient (07LX as the new Mathlib leaf lem-weil-pbc-lift-invertible-element: Spec of a localization away is an open immersion (OpenImmersion.lean:336) hence etale (Morphisms/Etale.lean:78), A/I ≅ A_a/IA_a via the quotient-localization instance (Localization/Ideal.lean:391) and IsLocalization.atUnits (:309), Away.algebraMap_isUnit (:82); checked), reduction to monic factors with the coprimality and the monic-ness of H written out (incl. the zero-ring case), the monic case (0ALH as the new unsplit node lem-weil-pbc-lift-monic-coprime-factorization-etale, with the Mathlib route via UniversalCoprimeFactorizationRing + lem-weil-pbc-etale-section-idempotent-splitting recorded), conclusion undoing the twist. Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lift-coprime-factorization-etale",
+  "worker": "stage1",
+  "summary": "Read Stacks 07M1 (more-algebra.tex:1899-1924), 07LX (:1771-1782), 0ALH (:1843-1897), 07M0 (:1820-1838) and Example 00UA's use, tags checked in stacks-project/tags/tags (07LX, 07M0, 07M1, 0ALH, 00UA). Not a Mathlib leaf: Mathlib has the universal (coprime) factorization ring (UniversalFactorizationRing.lean, read in full: etale instance, homEquiv, naturality) and the one-prime version 00UH, but not 07M1 or 0ALH, and 0ALH needs in addition the idempotent splitting of an etale section modulo I, so no one-declaration-per-clause route. Split along the 07M1 proof in four steps: (1) invert a lift of the leading coefficient, new Mathlib leaf lem-weil-pbc-lift-invertible-element (07LX, stated with the explicit A_a; clauses: open immersion => etale, IsLocalization quotient instance + IsLocalization.atUnits, Away.algebraMap_isUnit); (2) reduction to monic G = u^{-1} g_1, H = u h_1 (elementary, coprimality and monicity of H written out, including A_1/IA_1 = 0); (3) new unsplit node lem-weil-pbc-lift-monic-coprime-factorization-etale (0ALH), with the Mathlib route through UniversalCoprimeFactorizationRing recorded in its search verdict; (4) composite etale (existing leaf lem-weil-pbc-etale-composition-cancellation), alpha = beta∘alpha_1, and undoing the twist g' = v g_1, h' = v^{-1} h_1. Statement unchanged. Source repository slopmaster2 has no Lean for this (grep recorded)."
  }
 }
