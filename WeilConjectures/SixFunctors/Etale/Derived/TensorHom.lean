@@ -147,11 +147,12 @@ theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
 
 omit [HasCompactification f] [HasCompactification (f ≫ aY)] in
 /-- The dualizing complex `ω_Y = Ra_Y^! Λ_S` lies in `Dctf(Y, A)` when the unit `Λ_S` does
-and `S` is Noetherian, by the stability of `Dctf` under `Ra_Y^!`. In the blueprint's setting
-(`S` the spectrum of a field and `A` the modules over a finite ring) the unit is in `Dctf`,
-so this discharges the hypothesis `hω` of
+and `S` is Noetherian, for torsion coefficients, by the stability of `Dctf` under `Ra_Y^!`. In
+the blueprint's setting (`S` the spectrum of a field and `A` the modules over a finite ring) the
+unit is in `Dctf`, so this discharges the hypothesis `hω` of
 `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`. -/
 theorem constructibleFiniteTor_dualizingComplex [QuasiCompact aY] [IsNoetherian S]
+    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     (hΛ : DerivedCategory.constructibleFiniteTor A S (𝟙_ _)) :
     DerivedCategory.constructibleFiniteTor A Y (dualizingComplex A aY) :=
   constructibleFiniteTor_rightDerivedUpperShriek A aY hΛ

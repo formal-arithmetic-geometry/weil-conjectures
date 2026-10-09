@@ -8,9 +8,11 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 
 /-!
-# Detecting isomorphisms in the point category
+# The point category
 
 Let `k` be a separably closed field and `s = Spec k`. An étale sheaf on `s` is determined by its
 global sections (`AlgebraicGeometry.Scheme.isZero_of_subsingleton_sections_of_isSepClosed`). In
@@ -22,13 +24,16 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 - `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed` (`lem-sf-detection`): a
   morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
   `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`
+  (`lem-sf-point`, duality part): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of
+  an object of `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits MonoidalCategory Opposite
 
 namespace AlgebraicGeometry.Etale
 
@@ -132,5 +137,32 @@ theorem isIso_iff_bijective_comp_of_isSepClosed
         ((Functor.map_isZero _ (isZero_zero _)).isoZero)
     exact IsZero.of_iso (isZero_zero _) (asIso (0 : C ⟶ 0))
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hC
+
+section Duality
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+
+/-- Blueprint `lem-sf-point`: The point, evaluated (the duality part).
+
+Let `k` be a separably closed field, `s = Spec k` and `Λ` a finite coefficient ring. For every
+object `C` of the point category `D^b_c(s, Λ)`, the dual `RHom_s(C, ω_s)`, where
+`ω_s = Ra_s^! Λ = Λ_s` is the unit (`AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`),
+is computed after evaluation at the point by the dual over `Λ`:
+
+`RΓ(s, RHom_s(C, Λ_s)) ≅ RHom_Λ(RΓ(s, C), Λ)`.
+
+Evaluation at the geometric point is the derived global sections `RΓ(s, -)`. The blueprint
+takes this identification from the description of the point category in
+`def-weil-finite-coefficient-point`. -/
+theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual
+    {C : DerivedCategoryModule Λ (Spec (.of k))}
+    (hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
+        ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj (op C)) ≅
+      (ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)).obj
+        (𝟙_ _)) :=
+  sorry
+
+end Duality
 
 end AlgebraicGeometry.Etale

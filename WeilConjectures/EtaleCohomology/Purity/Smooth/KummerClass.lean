@@ -48,6 +48,8 @@ of the blueprint, and it also pins down the twisting object `Λ(1)`.
 - `AlgebraicGeometry.Etale.supportedClassMap`: the adjoint `Λ_Z ⟶ Ri^! L` of a class with
   supports.
 - `AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`: the rank-one normalisation.
+- `AlgebraicGeometry.Etale.HasTateTwist.IsNormalized`: a twist datum underlying a normalized
+  rank-one datum, the hypothesis of every statement comparing the twist with geometry.
 - `AlgebraicGeometry.Etale.cupWithSupportsTateObject`: the cup product of classes with supports
   and Tate coefficients.
 - `AlgebraicGeometry.Etale.kummerBoundaryProduct`: `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)`.
@@ -210,7 +212,10 @@ zero section: its adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
 This is the rank-one local calculation `H²_{0}(𝔸¹_ȳ, Λ(1)) ≅ Λ`, `∂κ(t) ↦ 1`, of the blueprint,
 a theorem for the concrete model. Naturality and multiplicativity alone do not imply it (the
 zero class satisfies both), and it also pins down the twisting object `Λ(1)`: by purity
-`Rs^! Λ ≅ Λ(-1)[-2]` for the true twist. -/
+`Rs^! Λ ≅ Λ(-1)[-2]` for the true twist, so the isomorphism forces `Λ_B(1) ≅ μ_n ⊗ Λ`, whereas
+the fields of `AlgebraicGeometry.Etale.HasTateTwist` alone also admit `Λ_B(1) = Λ_B` and
+`Λ_B(1) = Λ_B[-2]`. Its twist-side form `AlgebraicGeometry.Etale.HasTateTwist.IsNormalized` is
+what the statements comparing the twist with geometry assume. -/
 class HasKummerClass.IsNormalized : Prop where
   /-- The adjoint of the Kummer boundary of the coordinate of `𝔸¹_B` is an isomorphism. -/
   isIso_supportedClassMap_kummerBoundary_coord (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
@@ -288,6 +293,34 @@ noncomputable def kummerBoundaryProduct : {n : ℕ} → (f : Fin n → Γ(U, ⊤
         eqToHom (by rw [Nat.cast_succ, add_comm (1 : ℤ)])
 
 end BoundaryProduct
+
+end Etale
+
+namespace Etale
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+
+A Tate twist datum is *normalized* if it underlies a normalized rank-one datum: Kummer classes on
+it whose boundary for the coordinate of `𝔸¹_B` is the fundamental class of the zero section
+(`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`). This pins down the twist: it forces
+`Λ_B(1) ≅ μ_n ⊗ Λ`, and hence `Λ_B(m) ≅ Λ_B(1)^{⊗ m}`, on every scheme `B` on which the exponent
+`n` of `Λ` is invertible, whereas the fields of `AlgebraicGeometry.Etale.HasTateTwist` alone also
+admit the untwisted datum `Λ_B(m) = Λ_B` and the shifted datum `Λ_B(m) = Λ_B[-2m]`.
+
+The statements that compare the twist with geometry — `Rs^! Λ(1)[2] ≅ Λ` for the zero section of
+the affine line, affine-space and smooth purity, purity for regular immersions, Fourier
+inversion — assume it; they are false for the two data above. -/
+class HasTateTwist.IsNormalized [inst : HasTateTwist Λ] : Prop where
+  /-- The twist datum underlies a normalized rank-one datum. -/
+  exists_hasKummerClass :
+    ∃ K : HasKummerClass Λ, K.toHasTateTwist = inst ∧ @HasKummerClass.IsNormalized Λ _ K
+
+/-- The twist datum underlying a normalized rank-one datum is normalized. -/
+instance HasKummerClass.IsNormalized.hasTateTwistIsNormalized [HasKummerClass Λ]
+    [HasKummerClass.IsNormalized Λ] : HasTateTwist.IsNormalized Λ :=
+  ⟨⟨‹_›, rfl, ‹_›⟩⟩
 
 end Etale
 

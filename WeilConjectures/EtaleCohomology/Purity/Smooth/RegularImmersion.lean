@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -48,7 +49,6 @@ supported localization triangle; for the closed immersion `i` it is `Ri_*`. The 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion`,
   `isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`,
   `exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`:
@@ -72,40 +72,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 
 open Scheme
-
-namespace Etale
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Z : Scheme.{u}}
-
-/-- Blueprint `sk-lem-coprojection`: Co-projection for a closed immersion
-
-For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an object `L` of
-`D^b_{ctf}(X, Λ)` that is *invertible*, the canonical co-projection
-
-`Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L`
-
-is an isomorphism: an invertible tensor factor passes through `i^!` at the cost of restricting
-it. Testing against an arbitrary `A ∈ D^b_{ctf}(Z, Λ)` and using `Ri_! = Ri_*`, the projection
-formula for `Ri_*` and invertibility of `L`, the two Hom-functors agree naturally in `A`, so
-Yoneda gives the isomorphism.
-
-Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
-`Ri^!(K(m)[2m]) ≅ (Ri^! K)(m)[2m]`; taking `L = Lf^* B` for `B` invertible on `Y` and
-`f' = f ∘ i` it reads `Ri^!(K ⊗ Lf^* B) ≅ Ri^! K ⊗ Lf'^* B`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
-    (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
-    (hLctf : DerivedCategory.boundedConstructibleFiniteTor Λ X L)
-    (hL : DerivedCategory.isInvertible Λ X L) :
-    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
-          ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj K)).obj
-        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
-  sorry
-
-end Etale
 
 namespace Scheme.Hom
 
@@ -381,6 +347,7 @@ the former into the latter. The relative dimension of `a_Z` is carried as `m` wi
 `hm : m + c = n` rather than as `n - c`: truncated subtraction would silently read `0` when
 `c > n`. -/
 theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [Finite Λ] [HasTateTwist Λ]
+    [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
     [IsRegularImmersion c i] [HasCompactification i] (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
     [SmoothOfRelativeDimension n aX] [HasCompactification aX]
