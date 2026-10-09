@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-tensor-product-finitely-presented-algebras",
+ "kind": "statement",
+ "title": "The tensor product of two finitely presented algebras is finitely presented (Stacks 00F4, 05G5)",
+ "statement": "Let $R$ be a commutative ring and $A$, $A'$ commutative $R$-algebras of finite presentation over $R$ [def-weil-pbc-finitely-presented-algebra]. Then the $R$-algebra $A\\otimes_RA'$ (with multiplication $(a\\otimes a')(b\\otimes b')=ab\\otimes a'b'$ and structure map $r\\mapsto r\\otimes1=1\\otimes r$) is of finite presentation over $R$. (Proof in the source: by base change (Stacks 05G5 (4)) the ring map $A\\to A\\otimes_RA'$ is of finite presentation, and the composition $R\\to A\\to A\\otimes_RA'$ of ring maps of finite presentation is of finite presentation (Stacks 00F4 (2)).)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00F4 (lemma-compose-finite-type) part (2) and Lemma Tag 05G5 (lemma-base-change-finiteness) part (4), as combined in the proof of Lemma Tag 0BUF (lemma-ring-colimit-fp-category)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of two finitely presented R-algebras is finitely presented",
+   "results": "instFinitePresentationTensorProduct (Mathlib.Algebra.Module.FinitePresentation, modules), Algebra.FinitePresentation.baseChange (Mathlib.RingTheory.FiniteStability), Module.Finite.tensorProduct, RingHom.Finite.tensorProductMap, Algebra.TensorProduct.instAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match by composition: Algebra.FinitePresentation.baseChange with Algebra.FinitePresentation.trans"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation ?R (TensorProduct ?R ?A ?B)",
+   "results": "none (no direct instance over the base ring R)",
+   "date": "2026-10-10",
+   "verdict": "no direct instance; the statement follows in one line from baseChange and trans"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A and B are finitely presented R-algebras then A ⊗[R] B is a finitely presented R-algebra",
+   "results": "Algebra.FinitePresentation.baseChange (Mathlib.RingTheory.FiniteStability), instFinitePresentationTensorProduct, RingHom.Finite.tensorProductMap, Algebra.EssFiniteType.baseChange, Algebra.FiniteType.baseChange",
+   "date": "2026-10-10",
+   "verdict": "generalization: baseChange gives finite presentation over A, trans brings it down to R"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'TensorProduct\\|⊗\\[' Mathlib/RingTheory/FinitePresentation.lean; grep -rn 'instance.*FinitePresentation.*⊗\\|FinitePresentation.*tensor' Mathlib (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "RingTheory/FiniteStability.lean:55 instance Algebra.FinitePresentation.baseChange [FinitePresentation R A] : FinitePresentation B (B ⊗[R] A); RingTheory/FinitePresentation.lean:181 theorem Algebra.FinitePresentation.trans [Algebra A B] [IsScalarTower R A B] [FinitePresentation R A] [FinitePresentation A B] : FinitePresentation R B; Finiteness/Descent.lean:98 (faithfully flat descent, not relevant)",
+   "date": "2026-10-10",
+   "verdict": "match (specializes in one line)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FinitePresentation.baseChange, Algebra.FinitePresentation.trans",
+  "file": "Mathlib/RingTheory/FiniteStability.lean",
+  "line": 55,
+  "how": "specializes in one line: `Algebra.FinitePresentation.trans R A (A ⊗[R] A')`, its hypothesis `FinitePresentation A (A ⊗[R] A')` being the instance `Algebra.FinitePresentation.baseChange` (FiniteStability.lean:55, with B := A, A := A') and `IsScalarTower R A (A ⊗[R] A')` the standard tensor-product instance; `trans` is Mathlib/RingTheory/FinitePresentation.lean:181. Mathlib's `Algebra.FinitePresentation` is the node's definition by `Algebra.FinitePresentation.iff` (FinitePresentation.lean:128)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
