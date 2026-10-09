@@ -15,9 +15,88 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Noetherian approximation of $X$.* Since $X$ is quasi-compact and quasi-separated, by [prop-nagata-noetherian-inverse-system] it admits a Noetherian approximation [def-nagata-noetherian-inverse-system]: a small cofiltered category $\\mathcal I$, a functor $\\lambda\\mapsto S_\\lambda$ from $\\mathcal I$ to schemes such that every $S_\\lambda$ is of finite type over $\\operatorname{Spec}\\mathbf Z$ (its structure morphism to $\\operatorname{Spec}\\mathbf Z$ is locally of finite type and $S_\\lambda$ is quasi-compact) and every transition morphism $S_\\mu\\to S_\\lambda$ is affine, and a limit cone $(X,(p_\\lambda:X\\to S_\\lambda)_\\lambda)$ of this diagram in the category of schemes. (Stacks cites Limits, Proposition 01ZA, which gives directly a directed set; the DAG node, whose Lean is closed, gives a cofiltered index category, and step 2 passes to a directed set.)",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "def-nagata-noetherian-inverse-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072: 'by Limits, Proposition 01ZA we can write X = lim_{t in T} X_t with each X_t of finite type over Spec(Z) and with affine transition morphisms'; literature/stacks-project/limits.tex, Proposition 01ZA (proposition-approximate), line 1255"
+   }
+  },
+  {
+   "text": "*Reindexing by a directed set.* By [lem-weil-pbc-cofiltered-limit-directed-reindex] applied to the cofiltered $\\mathcal I$, the diagram $\\lambda\\mapsto S_\\lambda$ and the limit cone of step 1, there are a nonempty directed set $T$, objects $\\lambda_t\\in\\mathcal I$ ($t\\in T$) and compatible morphisms $\\lambda_s\\to\\lambda_t$ ($t\\le s$) such that, with $X_t=S_{\\lambda_t}$, $f_{st}:X_s\\to X_t$ the image of $\\lambda_s\\to\\lambda_t$ and $\\nu_t=p_{\\lambda_t}:X\\to X_t$, the cone $(X,(\\nu_t)_t)$ is a limit of the inverse system $(X_t,f_{st})$ over $T$ in the category of schemes. Every $X_t$ is one of the $S_\\lambda$, hence of finite type over $\\operatorname{Spec}\\mathbf Z$, and every $f_{st}$ is one of the transition morphisms of step 1, hence affine [pqf-def-affine-morphism]. So $X=\\varprojlim_{t\\in T}X_t$ is a limit of a directed inverse system with affine transition morphisms, as in [lem-weil-pbc-limit-affine-transition] (which also says that this limit is the one of that node, limits being unique up to unique isomorphism compatible with the projections).",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0032 (lemma-directed-category-system), line 2710; the source (Limits 01ZA) states the approximation over a directed set directly"
+   }
+  },
+  {
+   "text": "*Every $X_t$ is Noetherian, in particular quasi-compact and quasi-separated.* The ring $\\mathbf Z$ is Noetherian (a principal ideal domain), so $\\operatorname{Spec}\\mathbf Z$, covered by the single affine open $\\operatorname{Spec}\\mathbf Z$ with Noetherian ring of sections, is locally Noetherian [pqf-def-locnoeth]. The structure morphism $X_t\\to\\operatorname{Spec}\\mathbf Z$ is locally of finite type (step 2), so $X_t$ is locally Noetherian by [pqf-lem-locnoeth-lft] (Stacks 01T6). $X_t$ is quasi-compact (step 2), hence Noetherian (locally Noetherian and quasi-compact), and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated] (Stacks 01OY); so $X_t$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01T6 (lemma-finite-type-noetherian); Properties, Lemma 01OY (properties.tex line 481); the source (09Z7 proof, line 13063: 'reduce this lemma to the Noetherian case') uses that X_t is Noetherian without comment"
+   }
+  },
+  {
+   "text": "*Descent of $F$ to a stage.* By steps 2 and 3, $(X_t,f_{st})_{t\\in T}$ is an inverse system over a directed set with affine transition morphisms and quasi-compact and quasi-separated terms, with limit $X$ and projections $\\nu_t$. By [lem-weil-pbc-constructible-module-limit-descent] (Stacks 09YU (3), essential surjectivity) applied to it, the finite (hence Noetherian) ring $\\Lambda$ and the constructible sheaf of $\\Lambda$-modules $F$ on $X_{\\Et}$, there are $t\\in T$, a constructible sheaf of $\\Lambda$-modules $F_t$ on $(X_t)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf] and an isomorphism of sheaves of $\\Lambda$-modules $\\alpha:\\nu_t^{-1}F_t\\xrightarrow{\\sim}F$ [def-weil-pbc-inverse-image].",
+   "uses": [
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072: 'By Lemma 09YU the category of constructible sheaves (of sets, abelian groups, or Lambda-modules) on X_etale is the colimit of the corresponding categories for X_t. Thus our constructible sheaf F is the pullback of a similar constructible sheaf F_t over X_t for some t'"
+   }
+  },
+  {
+   "text": "*Conclusion.* Put $X'=X_t$, $\\nu=\\nu_t:X\\to X'$ and $F'=F_t$. By step 3, $X'$ is Noetherian and of finite type over $\\operatorname{Spec}\\mathbf Z$; by step 4, $F'$ is a constructible sheaf of $\\Lambda$-modules on $X'_{\\Et}$ and $\\alpha:\\nu^{-1}F'\\cong F$. This is the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-noetherian-inverse-system",
+  "def-nagata-noetherian-inverse-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072, with Limits Proposition 01ZA (limits.tex line 1255) and Lemma 09YU (3) (etale-cohomology.tex line 12552)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +132,31 @@
    "results": "no constructible sheaf, no etale direct image or inverse image along a morphism of schemes in Mathlib/AlgebraicGeometry/Sites (Etale.lean defines smallEtaleTopology only; AffineEtale.lean the abelian sheaf category); 'constructible' occurs only for constructible sets (Morphisms/FinitePresentation.lean, Topology.IsConstructible)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact quasi-separated scheme is a limit of schemes of finite type over Z with affine transition maps",
+   "results": "quasiSeparatedSpace_iff_affine, quasiSeparatedSpace_iff_forall_affineOpens, quasiCompact_affineProperty_iff_quasiSeparatedSpace, quasiSeparated_iff_quasiSeparatedSpace (Morphisms.QuasiSeparated), QuasiCompact: no absolute Noetherian approximation",
+   "date": "2026-10-10",
+   "verdict": "no match (step 1 is the closed source-repository Lean AlgebraicGeometry.Scheme.nonempty_noetherianApproximation, not Mathlib)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "absolute Noetherian approximation: every quasi-compact quasi-separated scheme is a cofiltered limit of schemes of finite type over Spec Z with affine transition morphisms",
+   "results": "AlgebraicGeometry.IsNoetherian, IsLocallyNoetherian, noetherianSpace_of_isAffine (Noetherian), Scheme.exists_isAffine_of_isLimit, Scheme.exists_isQuasiAffine_of_isLimit (AffineTransitionLimit)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln '01ZA\\|NoetherianApproximation\\|noetherianApproximation' Mathlib/; grep -n 'stacks' Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "no file; AffineTransitionLimit.lean tags 01Z2, 01Z3, 01Z4, 01Z5, 01ZC only (no 01ZA): Noetherian approximation is absent from the pinned Mathlib; it is in the source repository, WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:2148 (closed)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +183,17 @@
    "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
    "note": "FinitePushforward.lean:118-129, own sorry; false as stated with the source repository's IsConstructibleSheaf (locally closed strata without constructibility); not attached; see coord/HUMAN.md"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-module-noetherian-descent",
+  "worker": "stage1",
+  "summary": "Split along the first paragraph of the proof of Stacks 09Z7 (etale-cohomology.tex 13063-13072): (1) Noetherian approximation of the qcqs X by the existing node prop-nagata-noetherian-inverse-system (Stacks 01ZA; Lean closed on slopmaster2: AlgebraicGeometry.Scheme.nonempty_noetherianApproximation), which gives a cofiltered index category; (2) reindexing by a directed set via the new Mathlib leaf lem-weil-pbc-cofiltered-limit-directed-reindex (Stacks 0032; IsFiltered.exists_directed + Initial.isLimitWhiskerEquiv); (3) the stages are Noetherian and qcqs by pqf-lem-locnoeth-lft (01T6) and the new Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated (01OY); (4) descent of F to a stage by the new unsplit node lem-weil-pbc-constructible-module-limit-descent (essential surjectivity of Stacks 09YU (3), stated for finite Lambda); (5) assembly, elementary. Statement unchanged. The lean_candidate exists_isNoetherian_upperStar_iso remains unattached (known defect: the repository's IsConstructibleSheaf does not require constructible strata). Three Mathlib searches added for the item (absent: no Noetherian approximation, no constructible etale sheaves in the pinned Mathlib)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps along the first paragraph of the proof of Stacks 09Z7: Noetherian approximation (prop-nagata-noetherian-inverse-system, closed by Lean nonempty_noetherianApproximation), reindexing the cofiltered system by a directed set (new Mathlib leaf lem-weil-pbc-cofiltered-limit-directed-reindex: IsFiltered.exists_directed Presentable/Directed.lean, @[stacks 0032], with initial_op_of_final and Initial.isLimitWhiskerEquiv Limits/Final.lean:656, verified), the stages Noetherian and qcqs (pqf-lem-locnoeth-lft, 01T6, imported; new Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated: IsLocallyNoetherian.quasiSeparatedSpace Noetherian.lean:220, verified), descent of F to a stage (new node lem-weil-pbc-constructible-module-limit-descent: the essential surjectivity of 09YU (3), whose module case Stacks leaves as 'details omitted'), assembly. Worker notes: the brief's guess that 09YU uses 09YT was wrong (09Y9/095N, 09YQ, 01ZM, 07RP); pqf-lem-locnoeth-lft is a Mathlib leaf candidate (LocallyOfFiniteType.isLocallyNoetherian Noetherian.lean:239); lem-weil-pbc-constructible-finite-pushforward-approximation (imported) repeats this argument for torsion abelian sheaves (stage-3 merge candidate); Scheme.NoetherianApproximation.isNoetherian_obj (closed) belongs to no node."
+ }
 }

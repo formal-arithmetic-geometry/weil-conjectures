@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-constructible-module-limit-descent",
+ "kind": "statement",
+ "title": "A constructible sheaf of $\\Lambda$-modules on a limit of qcqs schemes descends to some stage (Stacks 09YU (3), essential surjectivity)",
+ "statement": "Let $I$ be a directed set and $(X_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:X_i\\to X_{i'}$ ($i\\ge i'$) are affine [pqf-def-affine-morphism], every $X_i$ being quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; let $X=\\varprojlim_iX_i$ be its limit, with projections $f_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $\\Lambda$ be a finite commutative ring and $\\mathcal F$ a constructible sheaf of $\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], an object of $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Then there are an index $i\\in I$, a constructible sheaf of $\\Lambda$-modules $\\mathcal F_i$ on $(X_i)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf] and an isomorphism of sheaves of $\\Lambda$-modules $f_i^{-1}\\mathcal F_i\\cong\\mathcal F$, where $f_i^{-1}$ is the inverse image [def-weil-pbc-inverse-image]. (This is the essential surjectivity half of Stacks, Lemma 09YU (3): 'the category of constructible sheaves of $\\Lambda$-modules on $X_{\\Et}$ is the colimit of the categories of constructible sheaves of $\\Lambda$-modules on $(X_i)_{\\Et}$', there for a Noetherian ring $\\Lambda$; it is stated here for finite $\\Lambda$, the generality of [def-weil-pbc-etale-constructible-sheaf]. The faithfulness and full faithfulness halves of 09YU are not part of this statement, but the source's proof of essential surjectivity uses full faithfulness to descend the map between two presentations.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09YU (lemma-category-is-colimit) (3), etale-cohomology.tex lines 12551-12568; proof: paragraph 'Essentially surjective' for sheaves of sets (lines 12607-12619: via Lemma 09Y9 (lemma-category-constructible-sets), the faithful and fully faithful parts (the latter via Theorem 09YQ), Limits 01ZM (descend-finite-presentation) and 07RP (descend-etale)) and 'Proof of (3). The argument is very similar ... using Lemma 095N (lemma-category-constructible-modules) instead of Lemma 09Y9. Details omitted.' (lines 12621-12625)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf on a limit of schemes descends to a constructible sheaf on some stage",
+   "results": "TopCat.isSheaf_of_isLimit, TopCat.limit_isSheaf (Topology.Sheaves.Limits), AlgebraicGeometry.exists_appTop_π_eq_of_isLimit (AffineTransitionLimit: global sections of a limit), Sheaf.createsColimitOfIsSheaf, Functor.sheafPullbackConstruction (Sites.Pullback): no descent of etale sheaves along limits of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of constructible etale sheaves on a limit of schemes is the colimit of the categories of constructible sheaves on the stages",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone (AffineTransitionLimit: Γ of a limit is the colimit of the Γ's), LightCondensed/Condensed.isColimitLocallyConstantPresheaf (Condensed.Discrete.Colimit), Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace (Gluing): nothing on etale sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology (item search, 2026-10-09: site and its abelian sheaf category only; Mathlib has no inverse image along a morphism of small etale sites and no constructible sheaf)",
+   "results": "smallEtaleTopology, ofArrows_mem_smallEtaleTopology_iff (Sites.Etale); AffineEtale.sheafEquiv (Sites.AffineEtale)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni constructible Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry/Sites Mathlib/Topology/Sheaves; grep -n 'stacks' Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "no file mentions constructible sheaves; AffineTransitionLimit.lean has Stacks 01Z2, 01Z3, 01Z4, 01Z5, 01ZC (schemes, opens, global sections, morphisms of finite type over a limit), nothing on sheaves on the etale site of a limit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-noetherian-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

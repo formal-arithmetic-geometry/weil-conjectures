@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-cofiltered-limit-directed-reindex",
+ "kind": "statement",
+ "title": "A limit over a cofiltered category is a limit over a directed set (Stacks 0032)",
+ "statement": "Let $\\mathcal I$ be a small cofiltered category, $\\mathcal C$ a category, $D:\\mathcal I\\to\\mathcal C$ a functor and $(S,(\\pi_x:S\\to D(x))_{x\\in\\mathcal I})$ a limit cone of $D$ (a limit in $\\mathcal C$ is a colimit in $\\mathcal C^{\\mathrm{op}}$ [def-weil-pbc-category-colimit]: for every family $g_x:T\\to D(x)$ with $D(a)\\circ g_x=g_y$ for all $a:x\\to y$ there is exactly one $u:T\\to S$ with $\\pi_x\\circ u=g_x$ for all $x$). Then there are a nonempty directed set $(A,\\le)$, objects $x_a\\in\\mathcal I$ ($a\\in A$) and morphisms $\\varphi_{ba}:x_b\\to x_a$ ($a\\le b$) with $\\varphi_{aa}=\\mathrm{id}$ and $\\varphi_{ba}\\circ\\varphi_{cb}=\\varphi_{ca}$ ($a\\le b\\le c$), such that $(S,(\\pi_{x_a})_{a\\in A})$ is a limit of the inverse system $(D(x_a),D(\\varphi_{ba}))$ over $A$. In particular, if every $D(x)$ has a property and every $D(a)$ is of a class of morphisms, then so are the terms $D(x_a)$ and transition maps $D(\\varphi_{ba})$ of the inverse system.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 0032 (lemma-directed-category-system), categories.tex line 2710, applied to the filtered category $\\mathcal I^{\\mathrm{op}}$ and the opposite diagram (limits in $\\mathcal C$ are colimits in $\\mathcal C^{\\mathrm{op}}$)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cofiltered category has an initial functor from a directed poset",
+   "results": "CategoryTheory.initial_eval, Functor.initial_of_isCofiltered_costructuredArrow, Functor.initial_of_exists_of_isCofiltered, IsCofiltered.of_initial, Functor.initial_iff_of_isCofiltered (Filtered.Final, Limits.Final), Limits.IsCofiltered.sequentialFunctor_initial (Shapes.Countable, countable case)",
+   "date": "2026-10-10",
+   "verdict": "generalization: the criteria for initiality; the directed set itself comes from IsFiltered.exists_directed (loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered.exists_directed",
+   "results": "CategoryTheory.IsFiltered.exists_directed (J : Type w) [SmallCategory J] [IsFiltered J] : ∃ α _ (_ : IsDirected α (· ≤ ·)) (_ : Nonempty α), ∃ F : α ⥤ J, F.Final (Mathlib.CategoryTheory.Presentable.Directed)",
+   "date": "2026-10-10",
+   "verdict": "match (with the clauses below)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '@\\[stacks 0032\\]\\|isLimitWhiskerEquiv\\|initial_op_of_final\\|isFiltered_op_of_isCofiltered' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "Presentable/Directed.lean:527 IsCardinalFiltered.exists_cardinal_directed and :544 IsFiltered.exists_directed (both @[stacks 0032]); Limits/Shapes/Countable.lean:229 (countable case); Limits/Final.lean:112 instance initial_op_of_final, :656 Functor.Initial.isLimitWhiskerEquiv (t : Cone G) : IsLimit (t.whisker F) ≃ IsLimit t; Filtered/Basic.lean:955 instance isFiltered_op_of_isCofiltered",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsFiltered.exists_directed, CategoryTheory.isFiltered_op_of_isCofiltered, CategoryTheory.Functor.initial_op_of_final, CategoryTheory.Functor.Initial.isLimitWhiskerEquiv",
+  "file": "Mathlib/CategoryTheory/Presentable/Directed.lean",
+  "how": "a few Mathlib lemmas, one per clause: `IsFiltered.exists_directed` (Presentable/Directed.lean:544, @[stacks 0032]) applied to `𝓘ᵒᵖ`, filtered by the instance `isFiltered_op_of_isCofiltered` (Filtered/Basic.lean:955), gives a nonempty directed partial order `α` and a final functor `F : α ⥤ 𝓘ᵒᵖ`; `initial_op_of_final` (Limits/Final.lean:112) makes `F.op : αᵒᵖ ⥤ 𝓘ᵒᵖᵒᵖ` initial, and composing with the equivalence `𝓘ᵒᵖᵒᵖ ≌ 𝓘` (unopUnop) keeps it initial; `Functor.Initial.isLimitWhiskerEquiv` (Limits/Final.lean:656) says the whiskered cone `(S, π_{x_a})` is a limit of `F.op ⋙ D` exactly when `(S, π)` is a limit of `D`. The last sentence of the statement is the definition of the restricted system."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-noetherian-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf verified: IsFiltered.exists_directed (Presentable/Directed.lean, @[stacks 0032]) on the opposite category, initial_op_of_final, Functor.Initial.isLimitWhiskerEquiv (Limits/Final.lean:656)."
+ }
+}
