@@ -354,6 +354,57 @@ theorem exists_section [Finite ι] (hU : ∀ i, IsCompact (𝒟.U i : Set X))
 
 end Extension
 
+section OfSections
+
+variable {α : Type u} {N : ℕ} (σ : α → 𝒟.Section N) (c : α → ι)
+  (hc : ∀ a, (σ a).nonvanishing ≤ 𝒟.U (c a)) (hcov : ⨆ a, (σ a).nonvanishing = ⊤)
+
+include hc in
+lemma nonvanishing_eq_basicOpen (a : α) :
+    (σ a).nonvanishing = X.basicOpen ((σ a).s (c a)) := by
+  rw [← (σ a).nonvanishing_inf (c a), inf_eq_left.mpr (hc a)]
+
+lemma isUnit_map_s (a : α) : IsUnit (X.presheaf.map (homOfLE (hc a)).op ((σ a).s (c a))) :=
+  X.isUnit_map_of_le_basicOpen _ (nonvanishing_eq_basicOpen σ c hc a).le
+
+/-- The coordinate cover by the non-vanishing loci `X_{σₐ}` of finitely many sections of the same
+degree, each contained in a chart `U_{c a}`, with the ratios `σ_b / σₐ`. -/
+def ofSections : X.CoordinateCover α where
+  U a := (σ a).nonvanishing
+  ratio a b := X.presheaf.map (homOfLE (hc a)).op ((σ b).s (c a)) * ↑(isUnit_map_s σ c hc a).unit⁻¹
+  ratio_self a := IsUnit.mul_val_inv _
+  basicOpen_ratio a b := by
+    have key := ((σ b).nonvanishing_inf (c a)).symm
+    rw [Scheme.basicOpen_mul, X.basicOpen_of_isUnit (Units.isUnit _), Scheme.basicOpen_res]
+    apply le_antisymm
+    · rintro x ⟨⟨hxa, hxB⟩, -⟩
+      exact ⟨hxa, (key.le hxB).1⟩
+    · rintro x ⟨hxa, hxb⟩
+      exact ⟨⟨hxa, key.ge ⟨hxb, hc a hxa⟩⟩, hxa⟩
+  ratio_mul a b d := by
+    set W := (σ a).nonvanishing ⊓ (σ b).nonvanishing
+    have hWa : W ≤ 𝒟.U (c a) := inf_le_left.trans (hc a)
+    have hWb : W ≤ 𝒟.U (c b) := inf_le_right.trans (hc b)
+    have hWab : W ≤ 𝒟.U (c a) ⊓ 𝒟.U (c b) := le_inf hWa hWb
+    have hs (τ : 𝒟.Section N) := congrArg (X.presheaf.map (homOfLE hWab).op) (τ.s_eq (c a) (c b))
+    simp only [map_mul, map_pow, Scheme.presheaf_map_map] at hs
+    have hva := congrArg (X.presheaf.map (homOfLE (inf_le_left :
+      W ≤ (σ a).nonvanishing)).op) (isUnit_map_s σ c hc a).mul_val_inv
+    have hvb := congrArg (X.presheaf.map (homOfLE (inf_le_right :
+      W ≤ (σ b).nonvanishing)).op) (isUnit_map_s σ c hc b).mul_val_inv
+    simp only [map_mul, map_one, Scheme.presheaf_map_map] at hva hvb ⊢
+    rw [hs (σ d), hs (σ b)]
+    linear_combination (-(X.presheaf.map (homOfLE (hWab.trans inf_le_left)).op
+      (𝒟.ratio (c a) (c b)) ^ N * X.presheaf.map (homOfLE hWb).op ((σ d).s (c b)) *
+      X.presheaf.map (homOfLE (inf_le_left : W ≤ (σ a).nonvanishing)).op
+        ↑(isUnit_map_s σ c hc a).unit⁻¹)) * hvb
+  iSup_U := hcov
+
+@[simp]
+lemma ofSections_U (a : α) : (ofSections σ c hc hcov).U a = (σ a).nonvanishing := rfl
+
+end OfSections
+
 end Scheme.CoordinateCover
 
 namespace Proj
