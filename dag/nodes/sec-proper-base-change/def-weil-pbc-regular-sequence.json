@@ -1,0 +1,64 @@
+{
+ "id": "def-weil-pbc-regular-sequence",
+ "kind": "definition",
+ "title": "Regular sequences on a module",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. A finite sequence $f_1,\\dots,f_r$ of elements of $R$ is an *$M$-regular sequence* if (1) for each $i=1,\\dots,r$ the element $f_i$ is a nonzerodivisor on $M/(f_1,\\dots,f_{i-1})M$ (multiplication by $f_i$ on this module is injective), and (2) $M/(f_1,\\dots,f_r)M\\neq0$. If $I\\subset R$ is an ideal and all $f_i\\in I$ it is an $M$-regular sequence in $I$; for $M=R$ it is called a *regular sequence* (in $I$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00LF (definition-regular-sequence, Section 00LE)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if f_1,...,f_r is a regular sequence then f_1^e_1,...,f_r^e_r is a regular sequence",
+   "results": "RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsWeaklyRegular (Mathlib.RingTheory.Regular.RegularSequence), IsRegular.toIsWeaklyRegular",
+   "date": "2026-10-10",
+   "verdict": "match: RingTheory.Sequence.IsRegular is the definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a regular local ring a minimal system of generators of the maximal ideal is a regular sequence",
+   "results": "RingTheory.Sequence.isRegular_iff (IsRegular M rs <-> IsWeaklyRegular M rs and top != Ideal.ofList rs * top), IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "match (definition)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure IsRegular\\|structure IsWeaklyRegular\\|isWeaklyRegular_iff_Fin' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "results": "line 135 structure IsWeaklyRegular, line 140 isWeaklyRegular_iff_Fin (each rs[i] IsSMulRegular on M/(rs.take i)M), line 146 structure IsRegular extends IsWeaklyRegular with top_ne_smul : (top : Submodule R M) != Ideal.ofList rs * top",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingTheory.Sequence.IsRegular",
+  "file": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "line": 146,
+  "how": "exact: IsRegular M rs extends IsWeaklyRegular M rs (line 135; by isWeaklyRegular_iff_Fin, line 140, rs[i] is IsSMulRegular on M/(rs.take i)M, i.e. condition (1)) with top_ne_smul: M != (rs)M, condition (2). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-resolve-char-p",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

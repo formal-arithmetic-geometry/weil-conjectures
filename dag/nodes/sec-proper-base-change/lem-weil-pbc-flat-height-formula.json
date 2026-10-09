@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-flat-height-formula",
+ "kind": "statement",
+ "title": "Height formula for flat ring maps of Noetherian rings",
+ "statement": "Let $\\varphi:R\\to S$ be a flat ring map [def-weil-pbc-flat-ring-map] of Noetherian rings [def-weil-pbc-noetherian-ring], $\\mathfrak Q\\subset S$ a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak Q)$. Write $\\operatorname{ht}$ for the height of a prime ideal (the supremum of the lengths of chains of primes descending from it; $\\operatorname{ht}\\mathfrak Q=\\dim S_{\\mathfrak Q}$ and $\\operatorname{ht}\\mathfrak p=\\dim R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]). Then $\\operatorname{ht}\\mathfrak Q=\\operatorname{ht}\\mathfrak p+\\operatorname{ht}(\\mathfrak Q/\\mathfrak pS)$, the last term being the height of the prime $\\mathfrak Q/\\mathfrak pS$ of $S/\\mathfrak pS$; equivalently $\\dim S_{\\mathfrak Q}=\\dim R_{\\mathfrak p}+\\dim(S_{\\mathfrak Q}/\\mathfrak pS_{\\mathfrak Q})$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ON (lemma-dimension-base-fibre-equals-total), for R -> S with going down, which holds for flat maps (Algebra, Lemma 00HS, lemma-flat-going-down)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of localization of flat extension equals dimension of base plus dimension of fibre, going down",
+   "results": "Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (Mathlib.RingTheory.Ideal.KrullsHeightTheorem), Algebra.HasGoingDown.of_flat (Mathlib.RingTheory.Ideal.GoingDown), IsLocalization.AtPrime.ringKrullDim_eq_height",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of target of flat local homomorphism of Noetherian local rings equals dimension of base plus dimension of closed fibre",
+   "results": "ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_card (KrullDimension.Regular), IsLocalization.AtPrime.ringKrullDim_eq_height (Ideal.Height): only inequalities and the height/dimension dictionary",
+   "date": "2026-10-10",
+   "verdict": "no match by itself (the leansearch hit is the match)"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Module.Flat, IsLocalRing",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00ON' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; sed -n 455,466p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+   "results": "KrullsHeightTheorem.lean:461 @[stacks 00ON] lemma Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown [IsNoetherianRing S] [Algebra.HasGoingDown R S] (p) [p.IsPrime] (P) [P.IsPrime] [P.LiesOver p] : P.height = p.height + (P.map (Quotient.mk (p.map (algebraMap R S)))).height (R Noetherian by the variable at line 46); GoingDown.lean:155 instance Algebra.HasGoingDown.of_flat [Module.Flat R S]",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown",
+  "file": "Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+  "line": 462,
+  "how": "specializes in one line: tagged @[stacks 00ON] (line 461); with phi.toAlgebra, [Module.Flat R S] gives [Algebra.HasGoingDown R S] by the instance Algebra.HasGoingDown.of_flat (Mathlib/RingTheory/Ideal/GoingDown.lean:155), P := Q, p := comap, [P.LiesOver p] by definition; the height form is the node's statement; the dimension form is IsLocalization.AtPrime.ringKrullDim_eq_height (Mathlib/RingTheory/Ideal/Height.lean:418) for each term. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-resolve-char-p",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
