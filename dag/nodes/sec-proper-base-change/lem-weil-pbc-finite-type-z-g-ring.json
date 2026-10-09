@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-finite-type-z-g-ring",
  "kind": "statement",
  "title": "Finitely generated Z-algebras are G-rings",
- "statement": "Every finitely generated $\\mathbf Z$-algebra, i.e. every commutative ring $R$ generated as a ring by finitely many elements, is a G-ring [def-weil-pbc-g-ring].",
+ "statement": "Every finitely generated $\\mathbf Z$-algebra, i.e. every commutative ring $R$ generated as a ring by finitely many elements, is a G-ring [def-weil-pbc-g-ring] (Stacks Project, More on Algebra, Proposition Tag 07PX, items (3) and (5), using Proposition Tag 07PV).",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Proposition Tag 07PX (proposition-ubiquity-G-ring, line 12652), items (3) ($\\mathbf Z$, a Dedekind domain of characteristic zero whose completions at maximal ideals are discrete valuation rings) and (5) (finite type ring extensions, Proposition Tag 07PV proposition-finite-type-over-G-ring)"
@@ -10,9 +10,38 @@
  "stmt_deps": [
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The canonical map $\\mathbf Z\\to R$ exhibits $R$ as a finite type $\\mathbf Z$-algebra: if $r_1,\\ldots,r_n$ generate $R$ as a ring, the map $\\mathbf Z[X_1,\\ldots,X_n]\\to R$ sending $X_i$ to $r_i$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proposition Tag 07PX proof, item (5), specialized to a finitely generated $\\mathbf Z$-algebra"
+   }
+  },
+  {
+   "text": "By the G-ring fact for $\\mathbf Z$ [lem-weil-pbc-z-g-ring] and the finite-type permanence proposition [lem-weil-pbc-finite-type-over-g-ring], this finite type $\\mathbf Z$-algebra is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-z-g-ring",
+    "lem-weil-pbc-finite-type-over-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Proposition 07PX (tag 07PX, label proposition-ubiquity-G-ring, line 12652), items (3) and (5), with Proposition 07PV (tag 07PV, label proposition-finite-type-over-G-ring)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-z-g-ring",
+  "lem-weil-pbc-finite-type-over-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Proposition 07PX (tag 07PX, label proposition-ubiquity-G-ring), proof and items (3),(5), using Proposition 07PV (tag 07PV, label proposition-finite-type-over-G-ring)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +73,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +93,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-type-z-g-ring",
+  "worker": "stage1",
+  "summary": "Read More on Algebra Proposition 07PX and its proof. Split the imported statement into the elementary finite-type presentation over Z and the two reusable facts the source invokes: Z is a G-ring (exact tag 07PX (3)) and finite type algebras over G-rings are G-rings (exact tag 07PV, used by 07PX (5)). Both reusable facts are new unsplit nodes with three-kind Mathlib searches; the assigned statement now has a two-step proof following 07PX (3),(5)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 19:xx: the 07PV node is stated for ring maps of finite type (defined inline) with the tag in the statement, and the Z node cites 07PX (3) in the statement. Two steps: a finitely generated ring is of finite type over Z; Z is a G-ring (07PX (3)) and finite type algebras over G-rings are G-rings (07PV). The review by C1 is a real review."
+ }
 }
