@@ -16,9 +16,98 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Affine opens on which $f$ is standard smooth.) By [lem-weil-pbc-smooth-locally-standard-smooth] applied to the smooth morphism $f$ and the point $x$ there are affine open subschemes $V\\subseteq S$ and $W\\subseteq X$ [def-weil-affine-spectrum] with $x\\in W$ and $f(W)\\subseteq V$ such that, with $R=\\mathcal O_S(V)$, $A=\\mathcal O_X(W)$ and $\\varphi:R\\to A$ the ring map induced by $f$ (the ring map corresponding to $f|_W:W\\to V$), the $R$-algebra $A$ has a standard smooth presentation [def-weil-pbc-standard-smooth-algebra]: integers $n\\ge c\\ge0$, polynomials $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ and an isomorphism of $R$-algebras $\\alpha:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}A$ under which $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ maps to a unit of $A$. These $V$, $W$ are the affine opens of the statement; it remains to show $\\dim_{x'}(X_s)=n-c$ and that $\\Omega_{A/R}$ is free of rank $n-c$.",
+   "uses": [
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma 02G1 (lemma-smooth-omega-finite-locally-free, line 7214): 'The statement is local on X and S. By Lemma 01V7 (lemma-smooth-locally-standard-smooth) above we may assume that f is a standard smooth morphism of affines'"
+   }
+  },
+  {
+   "text": "(The differentials are free of rank $n-c$.) By [lem-weil-pbc-standard-smooth-kahler-basis] applied to the standard smooth presentation of step 1, the $A$-module $\\Omega_{A/R}$ [def-weil-pbc-kahler-differentials] is free with basis $\\mathrm da_{c+1},\\dots,\\mathrm da_n$, $a_i\\in A$ the image of $x_i$; so $\\Omega_{A/R}\\cong A^{n-c}$ is a free $A$-module of rank $n-c$.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-kahler-basis",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00T7 (lemma-standard-smooth, line 37274), part (2), as invoked in the proof of Morphisms Lemma 02G1 ('In this case the result follows from Algebra, Lemma 00T7')"
+   }
+  },
+  {
+   "text": "(The fibre near $x'$ is the spectrum of the fibre ring.) Let $\\iota_W:\\operatorname{Spec}A\\to X$ and $\\iota_V:\\operatorname{Spec}R\\to S$ be the canonical open immersions with images $W$ and $V$, and $\\mathfrak q\\subset A$, $\\mathfrak p\\subset R$ primes with $\\iota_W(\\mathfrak q)=x$, $\\iota_V(\\mathfrak p)=s$ [lem-weil-pbc-affine-open-spec-points]. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $\\iota_V\\circ\\operatorname{Spec}\\varphi=f\\circ\\iota_W$; as $\\operatorname{Spec}\\varphi$ sends $\\mathfrak q$ to $\\varphi^{-1}(\\mathfrak q)$ [def-weil-affine-spectrum] and $\\iota_V$ is injective, $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. Let $\\pi:R\\to\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ and $t=\\iota_V\\circ\\operatorname{Spec}\\pi:\\operatorname{Spec}\\kappa(\\mathfrak p)\\to S$. Since $\\iota_V$ is an open immersion [def-weil-open-immersion] it induces an isomorphism $\\mathcal O_{S,s}\\cong\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}$ and hence of residue fields [def-weil-residue-field]; composed with the isomorphism $e$ of [lem-weil-pbc-spec-residue-field-identification] (which identifies $\\operatorname{Spec}\\pi$ with the canonical morphism $\\operatorname{Spec}\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\to\\operatorname{Spec}R$) this gives an isomorphism $\\theta:\\kappa(s)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)$ with $t=j_s\\circ\\operatorname{Spec}\\theta$, $j_s:\\operatorname{Spec}\\kappa(s)\\to S$ the canonical morphism [lem-weil-pbc-morphism-from-spec-field]. As $\\operatorname{Spec}\\theta$ is an isomorphism over $S$, the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is isomorphic, compatibly with the first projections to $X$, to $X\\times_S\\operatorname{Spec}\\kappa(\\mathfrak p)$ formed with $t$ [def-pc-fibre-product]; write $p_1:X_s\\to X$ for the first projection, so $p_1(x')=x$. Since $t$ factors through $V$ and $f(W)\\subseteq V$, [lem-weil-pbc-open-fibre-product] (opens $W\\subseteq X$, $\\operatorname{Spec}\\kappa(\\mathfrak p)$ itself, $V\\subseteq S$) shows that $W\\times_V\\operatorname{Spec}\\kappa(\\mathfrak p)\\to X_s$ is an open immersion with image the open $O=p_1^{-1}(W)\\ni x'$, compatible with the projections to $X$. Via the isomorphisms $\\iota_W:\\operatorname{Spec}A\\cong W$, $\\iota_V:\\operatorname{Spec}R\\cong V$ (compatible with $f$ and $\\operatorname{Spec}\\varphi$ by the square above), $W\\times_V\\operatorname{Spec}\\kappa(\\mathfrak p)\\cong\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}\\kappa(\\mathfrak p)\\cong\\operatorname{Spec}C$ with $C=A\\otimes_R\\kappa(\\mathfrak p)$, the first projection becoming $\\operatorname{Spec}j$, $j:A\\to C$, $a\\mapsto a\\otimes1$ [lem-weil-pbc-fibre-product-affine-spectra]. So there is a homeomorphism $h:\\operatorname{Spec}C\\to O$ with $p_1\\circ h=\\iota_W\\circ\\operatorname{Spec}j$. Let $\\mathfrak Q=h^{-1}(x')$; then $\\iota_W(j^{-1}(\\mathfrak Q))=p_1(x')=x=\\iota_W(\\mathfrak q)$, so $j^{-1}(\\mathfrak Q)=\\mathfrak q$. Finally $\\dim_{x'}(X_s)=\\dim_{x'}(O)$ by [lem-weil-pbc-dimension-at-point-open-subspace] ($O$ open in $X_s$), and a homeomorphism carries open neighbourhoods to open neighbourhoods and strict chains of irreducible closed subsets to strict chains of the same length, so $\\dim_{x'}(O)=\\dim_{\\mathfrak Q}(\\operatorname{Spec}C)$ [def-kun-topological-dimension-at-point, def-kun-dimension]. Hence $\\dim_{x'}(X_s)=\\dim_{\\mathfrak Q}(\\operatorname{Spec}C)$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "The locality 'The statement is local on X and S' of the proof of Morphisms Lemma 02G1, written out: Schemes, Lemma 01JR (lemma-open-fibre-product, line 3198: open subschemes of a fibre product), Lemma 01JQ (lemma-fibre-product-affines: fibre product of affines is Spec of the tensor product), Lemma 01K1 (lemma-fibre-topological, line 3511: points of the fibre); Topology, Definition 0055 (definition-Krull) and the remark after it (dimension at a point computed on small open neighbourhoods)"
+   }
+  },
+  {
+   "text": "(The fibre ring has dimension $n-c$ at every point; conclusion.) The ring isomorphism $C=A\\otimes_R\\kappa(\\mathfrak p)\\cong\\kappa(\\mathfrak p)\\otimes_RA$, $a\\otimes\\lambda\\mapsto\\lambda\\otimes a$, gives a homeomorphism $\\operatorname{Spec}(\\kappa(\\mathfrak p)\\otimes_RA)\\cong\\operatorname{Spec}C$ [def-weil-affine-spectrum]; let $\\mathfrak Q'$ correspond to $\\mathfrak Q$, so $\\dim_{\\mathfrak Q}(\\operatorname{Spec}C)=\\dim_{\\mathfrak Q'}(\\operatorname{Spec}(\\kappa(\\mathfrak p)\\otimes_RA))$ as in step 3. By [lem-weil-pbc-standard-smooth-base-change] applied to the standard smooth presentation of step 1 and $\\pi:R\\to\\kappa(\\mathfrak p)$, the $\\kappa(\\mathfrak p)$-algebra $\\kappa(\\mathfrak p)\\otimes_RA$ has a standard smooth presentation $\\kappa(\\mathfrak p)[x_1,\\dots,x_n]/(f_1^\\pi,\\dots,f_c^\\pi)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)\\otimes_RA$ with the same $n\\ge c\\ge0$ [def-weil-pbc-standard-smooth-algebra]. Since $\\kappa(\\mathfrak p)$ is a field, [lem-weil-pbc-standard-smooth-over-field-dimension-at-points] gives $\\dim_{\\mathfrak Q'}(\\operatorname{Spec}(\\kappa(\\mathfrak p)\\otimes_RA))=n-c$. With step 3, $d=\\dim_{x'}(X_s)=n-c$, a non-negative integer because $n\\ge c$. By step 2, $\\Omega_{A/R}$ is a free $A$-module of rank $n-c=d$, for the affine opens $V$, $W$ of step 1, which contain $s$ and $x$ and satisfy $f(W)\\subseteq V$. This is the statement.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-standard-smooth-base-change",
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00T7 (lemma-standard-smooth, line 37274), parts (5) and (7) (the fibres of a standard smooth algebra are standard smooth over the residue fields and have dimension n − c), with the definition of a relative global complete intersection (Definition 00SP, line 36506), as invoked in the proof of Morphisms Lemma 02G1; the remark after Definition 00S9 (line 35827) for the dimension at every point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-dimension",
+  "lem-weil-pbc-standard-smooth-base-change",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 02G1 (lemma-smooth-omega-finite-locally-free, line 7214) and its proof (local on X and S; Lemma 01V7; Algebra Lemma 00T7 and Definition 00SP), read on the affine opens of Lemma 01V7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +159,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "worker": "stage1",
+  "summary": "Statement kept (correct against Stacks 02G1 read on an affine open); stmt_deps kept. Proof follows the proof of Morphisms 02G1 exactly: locally f is standard smooth on affines (Morphisms 01V7, new node lem-weil-pbc-smooth-locally-standard-smooth, unsplit), Omega of a standard smooth presentation is free on dx_{c+1..n} (Algebra 00T7(2), new Mathlib leaf lem-weil-pbc-standard-smooth-kahler-basis = SubmersivePresentation.basisKaehler), the fibre over s near x' is Spec of the fibre ring A⊗_R κ(p) (written out from existing leaves: open-fibre-product, fibre-product-affine-spectra, spec-residue-field-identification, morphism-from-spec-field, dimension-at-point-open-subspace), the fibre ring is standard smooth over κ(p) with the same n, c (Algebra 00T7(5), new Mathlib leaf lem-weil-pbc-standard-smooth-base-change = SubmersivePresentation.baseChange) and a standard smooth algebra over a field has dimension n−c at every point (Algebra 00T7(7) + remark after 00S9 + 00OT, new node lem-weil-pbc-standard-smooth-over-field-dimension-at-points, unsplit). New definition def-weil-pbc-standard-smooth-algebra (Stacks 00T6, Mathlib leaf Algebra.IsStandardSmooth). The route suggested in the brief (Omega finite projective, 00NX, rank = fibre dimension via 00TT) was not taken: it is not the proof of the source, and 00TT (1)⇒(3) is itself proved in Stacks through standard smooth algebras. Tags checked in tags/tags: 02G1, 01V7, 01UT, 00T6, 00T7, 00TA, 00SP, 00S9, 00SC, 00T5, 00OT, 00NX, 00TT (= lemma-characterize-smooth-over-field), 00TE (= lemma-relative-global-complete-intersection-smooth), 00TF (= lemma-flat-fibre-smooth), 01JQ, 01JR, 01K1, 0055. 01UT is not needed: the statement is about Omega_{A/R}, not the sheaf Omega_{X/S}."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps along Stacks 02G1 through 01V7 (locally standard smooth), 00T7(2) (Omega free on dx_{c+1..n}), 00T7(5) (base change) and the over-field dimension (00T7(7) with the equidimensionality remark after Definition 00S9, algebra.tex 35838-35850). Step 3 writes out the affine-local identification dim_{x'}(X_s) = dim at a prime of Spec(A tensor kappa(p)) with existing nodes only. Five new nodes: def standard smooth (mathlib, Algebra.IsStandardSmooth via SubmersivePresentation, lines 62/495 verified), kahler basis (mathlib basisKaehler StandardSmoothCotangent.lean:226 verified), base change (mathlib SubmersivePresentation.baseChange Submersive.lean:563 verified), two unsplit (01V7; over-field pointwise dimension). Note: the pointwise node is stronger than 00T7(7) as worded (Krull dimension of the ring); it is correct by the equidimensionality remark after 00S9 (dim S_m = n-c for all maximal m and 00OT), which its source field names. Worker reports Lean candidates in slopmaster2 Smooth.lean (isLocallyConstant_topologicalKrullDimAt_asFiber @[stacks 02G1], rests on sorry)."
+ }
 }

@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-standard-smooth-base-change",
+ "kind": "statement",
+ "title": "Base change of a standard smooth presentation",
+ "statement": "Let $R$ be a commutative ring, $A$ an $R$-algebra with a standard smooth presentation [def-weil-pbc-standard-smooth-algebra] given by $n\\ge c\\ge0$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ and $\\alpha:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}A$, and let $\\psi:R\\to R'$ be a homomorphism of commutative rings. For $f\\in R[x_1,\\dots,x_n]$ let $f^\\psi\\in R'[x_1,\\dots,x_n]$ be the polynomial obtained by applying $\\psi$ to the coefficients. Then the $R'$-algebra homomorphism $R'[x_1,\\dots,x_n]\\to R'\\otimes_RA$, $x_i\\mapsto1\\otimes\\alpha(\\bar x_i)$, induces an isomorphism of $R'$-algebras $R'[x_1,\\dots,x_n]/(f_1^\\psi,\\dots,f_c^\\psi)\\xrightarrow{\\sim}R'\\otimes_RA$, and this is a standard smooth presentation of $R'\\otimes_RA$ over $R'$ with the same integers $n$ and $c$; in particular $R'\\otimes_RA$ is standard smooth over $R'$ with a presentation of relative dimension $n-c$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00T7 (label lemma-standard-smooth, line 37274), part (5) and the paragraph of its proof beginning 'Let φ : R → R′ be any ring map' (S' = R'[x]/(f^φ) ≅ R' ⊗_R S, determinant g^φ)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-standard-smooth-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a standard smooth algebra is standard smooth of the same relative dimension",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.baseChange, Algebra.IsStandardSmooth.baseChange (Mathlib.RingTheory.Smooth.StandardSmooth), RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.Smooth.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.SubmersivePresentation.baseChange",
+   "results": "Algebra.SubmersivePresentation.baseChange (T) (P : SubmersivePresentation R S ι σ) : SubmersivePresentation T (T ⊗[R] S) ι σ (Mathlib.RingTheory.Extension.Presentation.Submersive)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard smooth presentation base change along a ring map gives a standard smooth presentation of the tensor product with the same variables and relations",
+   "results": "Algebra.SubmersivePresentation.baseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange (same declarations as the leansearch query)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Presentation/Submersive.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/StandardSmooth.lean",
+   "results": "Submersive.lean:392 PreSubmersivePresentation.baseChange (relations Presentation.baseChange_relation = coefficients mapped, same map), :404 baseChange_jacobian = 1 ⊗ jacobian, :563 SubmersivePresentation.baseChange; StandardSmooth.lean:169 IsStandardSmooth.baseChange, :175 IsStandardSmoothOfRelativeDimension.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.SubmersivePresentation.baseChange",
+  "file": "Mathlib/RingTheory/Extension/Presentation/Submersive.lean",
+  "line": 563,
+  "how": "exact up to the encoding of [def-weil-pbc-standard-smooth-algebra] as a SubmersivePresentation: the base-changed presentation of T ⊗[R] S has the same index types ι, σ (so the same n, c and dimension), relations the images of the f_j under MvPolynomial.map (Presentation.baseChange_relation) and Jacobian 1 ⊗ jacobian (baseChange_jacobian, line 404); the relative-dimension form is IsStandardSmoothOfRelativeDimension.baseChange (StandardSmooth.lean line 175)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

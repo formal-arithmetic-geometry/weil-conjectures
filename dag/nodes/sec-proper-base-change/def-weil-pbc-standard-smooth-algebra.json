@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-standard-smooth-algebra",
+ "kind": "definition",
+ "title": "Standard smooth algebra",
+ "statement": "Let $R$ be a commutative ring and $A$ a commutative $R$-algebra. A *standard smooth presentation* of $A$ over $R$ consists of integers $n\\ge c\\ge0$, polynomials $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ and an isomorphism of $R$-algebras $\\alpha:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}A$ such that the image in $A$ (under $R[x_1,\\dots,x_n]\\to R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\alpha}A$) of the determinant $g=\\det\\bigl(\\partial f_j/\\partial x_i\\bigr)_{1\\le i,j\\le c}$ of the $c\\times c$ matrix of formal partial derivatives of $f_1,\\dots,f_c$ with respect to the first $c$ variables is a unit of $A$. The integer $n-c$ is the *relative dimension* of the presentation. The $R$-algebra $A$ (or the ring map $R\\to A$) is *standard smooth* if it has a standard smooth presentation.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition 00T6 (label definition-standard-smooth, line 37236)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "standard smooth algebra: presentation with invertible Jacobian determinant",
+   "results": "Algebra.IsStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmooth), Algebra.SubmersivePresentation.jacobian_isUnit, Algebra.SubmersivePresentation.mk (Mathlib.RingTheory.Extension.Presentation.Submersive), Algebra.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.IsStandardSmooth via SubmersivePresentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition of standard smooth algebra via a presentation whose Jacobian determinant is a unit",
+   "results": "Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth, RingHom.IsStandardSmooth, Algebra.IsStandardSmooth.out, Algebra.IsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmooth",
+   "results": "Algebra.IsStandardSmooth, Algebra.IsStandardSmooth.relativeDimension, Algebra.instIsStandardSmoothOfSubsingleton, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth, Algebra.IsStandardSmooth.finitePresentation (Mathlib.RingTheory.Smooth.StandardSmooth)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsStandardSmooth\\|structure SubmersivePresentation\\|structure PreSubmersivePresentation\\|def dimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/StandardSmooth.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Presentation/Submersive.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+   "results": "StandardSmooth.lean:62 class IsStandardSmooth (exists finite ι, σ and a SubmersivePresentation R S ι σ); StandardSmooth.lean:88 class IsStandardSmoothOfRelativeDimension; Submersive.lean:67 PreSubmersivePresentation (Presentation with injective map : σ → ι), :495 SubmersivePresentation (jacobian_isUnit); Presentation/Basic.lean:106 dimension = Nat.card ι - Nat.card σ",
+   "date": "2026-10-10",
+   "verdict": "match (generalization by renumbering)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsStandardSmooth",
+  "file": "Mathlib/RingTheory/Smooth/StandardSmooth.lean",
+  "line": 62,
+  "how": "specializes in one line: a SubmersivePresentation R S ι σ (Mathlib/RingTheory/Extension/Presentation/Submersive.lean, line 495) is a finite presentation S = R[x_i, i∈ι]/(relations indexed by σ) with an injective map σ → ι such that the determinant of the partial derivatives of the relations with respect to the variables in the image of σ is a unit of S; numbering ι as 1..n so that the image of σ is 1..c gives exactly the presentation of Stacks 00T6, and conversely; its dimension (Presentation.dimension, Basic.lean line 106) is n − c"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

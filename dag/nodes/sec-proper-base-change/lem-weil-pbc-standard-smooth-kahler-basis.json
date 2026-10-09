@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-standard-smooth-kahler-basis",
+ "kind": "statement",
+ "title": "Differentials of a standard smooth algebra are free of rank n-c",
+ "statement": "Let $R$ be a commutative ring and $A$ an $R$-algebra with a standard smooth presentation [def-weil-pbc-standard-smooth-algebra]: integers $n\\ge c\\ge0$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ and an isomorphism of $R$-algebras $\\alpha:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}A$ under which $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ maps to a unit of $A$. Let $a_i\\in A$ be the image of $x_i$. Then the $A$-module of Kähler differentials $\\Omega_{A/R}$ [def-weil-pbc-kahler-differentials] is free with basis $\\mathrm da_{c+1},\\dots,\\mathrm da_n$; in particular it is free of rank $n-c$ (of rank $n-c$ in the sense that it is isomorphic to $A^{n-c}$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00T7 (label lemma-standard-smooth, line 37274), part (2) and the first paragraph of its proof (naive cotangent complex of the presentation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials of a standard smooth algebra are free with basis dx_i for variables not in the relations",
+   "results": "Algebra.IsStandardSmooth.free_kaehlerDifferential (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential.mvPolynomialEquiv",
+   "date": "2026-10-10",
+   "verdict": "match (free); basis below"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.SubmersivePresentation.basisKaehler",
+   "results": "Algebra.SubmersivePresentation.basisKaehler (P : SubmersivePresentation R S ι σ) : Basis ↑(Set.range P.map)ᶜ S Ω[S⁄R]; basisKaehler_apply : P.basisKaehler k = D R S (P.val k) (Mathlib.RingTheory.Smooth.StandardSmoothCotangent)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebra over a field: dimension of the spectrum at a point equals the rank of the module of Kähler differentials there",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, iff_of_isStandardSmooth, Algebra.SubmersivePresentation.rank_kaehlerDifferential (rank Ω = P.dimension, S nontrivial)",
+   "date": "2026-10-10",
+   "verdict": "match for the rank part"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+   "results": "line 226 basisKaehler (tagged @[stacks 00T7 \"(2)\"]), line 233 basisKaehler_apply, line 239 free_kaehlerDifferential, line 247 rank_kaehlerDifferential",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.SubmersivePresentation.basisKaehler",
+  "file": "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+  "line": 226,
+  "how": "specializes in one line: for the submersive presentation of [def-weil-pbc-standard-smooth-algebra] (ι = {1..n}, σ = {1..c}, map = inclusion) the basis is indexed by the complement {c+1..n} of the range of map and sends k to D(a_k) (basisKaehler_apply, line 233); Stacks tag 00T7(2) is recorded on the declaration"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

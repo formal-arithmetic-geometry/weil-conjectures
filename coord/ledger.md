@@ -589,3 +589,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:51 L merged G1 deliver/G1/lem-weil-pbc-stein-flat-base-change-global-sections (ae8c9d4a9): one step applying generic 02KH node; off-route tool_uses lem-pc-flat-base-change-cohom recorded by L in a follow-up commit.
 - 22:51 L reviewed lem-weil-pbc-spectral-generalizations-of-quasi-compact (worker, 0 new, 0A31): pass, committed.
 - 22:51 L reviewed lem-weil-pbc-spectral-proconstructible-closure-specialization (worker, 0 new, 0903(1); unproved parenthetical removed from statement): pass, committed.
+- 22:54 L reviewed lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension (worker, 5 new: def standard smooth + kahler basis + base change as Mathlib leaves, 01V7 and over-field pointwise dimension unsplit): pass, committed. Stage-3 note: the over-field dimension node is pointwise (equidimensionality remark after 00S9), stronger than 00T7(7) as worded.
