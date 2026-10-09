@@ -328,7 +328,8 @@ fibre of `C₀ ×_K Spec A` is a point on the section of `(C₀ ×_K Spec A) ×_
 `K̄`-point `u` of `Spec A`; the transport along `g` carries it to the section attached to
 `σ ≫ u`, `σ` the geometric Frobenius of `K̄`, which the arithmetic Frobenius of `A` carries back
 to `u`. -/
-theorem mem_weilGroup_frobeniusElement (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _) :
+theorem mem_weilGroup_frobeniusElement [GeometricallyConnected p]
+    (ht : t ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _) :
     (frobeniusElement p τ τF G, Multiplicative.ofAdd (1 : ℤ)) ∈ weilGroup p s G := by
   refine (mem_weilGroup_iff p s G).2 fun A y ↦ ?_
   simp only [toAdd_ofAdd, zpow_one]

@@ -146,7 +146,8 @@ lemma fundamentalGroupMap_smul_constantCoverFiberMap (g : GU) (A : FiniteEtaleAl
   rw [h, ← IsNaturalSMul.naturality, pullbackFiberIso_constantCoverToPullback]
 
 /-- The map of fundamental groups induced by `j` preserves the Weil groups and the degrees. -/
-theorem mem_weilGroup_fundamentalGroupMap_iff (g : GU) (n : Multiplicative ℤ) :
+theorem mem_weilGroup_fundamentalGroupMap_iff [GeometricallyConnected p]
+    [GeometricallyConnected pU] (g : GU) (n : Multiplicative ℤ) :
     (g, n) ∈ weilGroup pU s GU ↔
       (fundamentalGroupMap (pullbackFiberIso j s ≪≫ τ) GU GC g, n) ∈ weilGroup p t GC := by
   rw [mem_weilGroup_iff, mem_weilGroup_iff]

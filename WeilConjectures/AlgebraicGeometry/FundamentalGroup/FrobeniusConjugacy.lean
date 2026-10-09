@@ -142,8 +142,9 @@ lemma IsFrobeniusElement.exists_conj {x : X₀} [Finite (X₀.residueField x)] {
 
 /-- **Frobenius elements are conjugate in the Weil group.** Two Frobenius elements `f₁, f₂` at
 the same point `x` are conjugate by an element of the Weil group `W(X₀, s)`. -/
-theorem IsFrobeniusElement.exists_mem_weilGroup_conj {x : X₀} [Finite (X₀.residueField x)]
-    {f₁ f₂ : G} (h₁ : IsFrobeniusElement s G x f₁) (h₂ : IsFrobeniusElement s G x f₂) :
+theorem IsFrobeniusElement.exists_mem_weilGroup_conj [GeometricallyConnected p] {x : X₀}
+    [Finite (X₀.residueField x)] {f₁ f₂ : G} (h₁ : IsFrobeniusElement s G x f₁)
+    (h₂ : IsFrobeniusElement s G x f₂) :
     ∃ (c : G) (n : Multiplicative ℤ), (c, n) ∈ weilGroup p s G ∧ c * f₁ * c⁻¹ = f₂ := by
   open scoped FintypeCatDiscrete in
   have hW₁ := h₁.mem_weilGroup p

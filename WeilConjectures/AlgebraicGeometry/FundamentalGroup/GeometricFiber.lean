@@ -229,7 +229,7 @@ variable [Finite K] [ConnectedSpace C] {s : Spec (.of (AlgebraicClosure K)) ⟶ 
 include ht in
 /-- The image of the fundamental group of the geometric fibre in `π₁(C₀, s)` acts trivially on
 the geometric fibres of the constant covers: it lies in the geometric part of the Weil group. -/
-lemma mem_weilGroup_fundamentalGroupMap (G' : Type u) [Group G']
+lemma mem_weilGroup_fundamentalGroupMap [GeometricallyConnected p] (G' : Type u) [Group G']
     [∀ P, MulAction G' ((fiber t).obj P)] [IsNaturalSMul (fiber t) G'] (g : G') :
     (fundamentalGroupMap τ G' G g, (1 : Multiplicative ℤ)) ∈ weilGroup p s G := by
   refine (mem_weilGroup_iff p s G).2 fun A y ↦ ?_

@@ -537,7 +537,7 @@ trivially on the geometric fibres of the constant covers lies in the image of
 fixed by this image corresponds to a section over `C₀ ×_K K̄` of the base change of `U`; it descends
 to a morphism `C₀ ×_K Spec L ⟶ U` from a constant cover, through which `u` comes from a point of
 the geometric fibre of the constant cover, fixed by `g`. -/
-theorem mem_range_fundamentalGroupMap_of_mem_weilGroup (g : G)
+theorem mem_range_fundamentalGroupMap_of_mem_weilGroup [GeometricallyConnected p] (g : G)
     (hg : (g, (1 : Multiplicative ℤ)) ∈ weilGroup p s G) :
     g ∈ (fundamentalGroupMap τ G' G).range := by
   have : T2Space G := (toAutHomeo (fiber s) G).isEmbedding.t2Space

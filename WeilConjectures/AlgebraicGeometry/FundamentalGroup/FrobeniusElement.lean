@@ -124,7 +124,8 @@ variable (G : Type u) [Group G] [∀ P, MulAction G ((fiber s).obj P)]
 /-- A Frobenius element at a point `x` lies in the Weil group, with degree `e_x = [κ(x) : k₀]`:
 it acts on the geometric fibres of the constant covers as the `e_x`-th power of the geometric
 Frobenius. -/
-theorem IsFrobeniusElement.mem_weilGroup {x : X₀} [Finite (X₀.residueField x)] {g : G}
+theorem IsFrobeniusElement.mem_weilGroup [GeometricallyConnected p] {x : X₀}
+    [Finite (X₀.residueField x)] {g : G}
     (hg : IsFrobeniusElement s G x g) :
     (g, Multiplicative.ofAdd (p.degreeOver x : ℤ)) ∈ weilGroup p s G := by
   obtain ⟨τ, hτ⟩ := hg
