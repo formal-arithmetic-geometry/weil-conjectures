@@ -149,7 +149,7 @@ private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
 
 /-- A constructible subset of `Spec R` (`R` a domain) not containing the generic point is
 contained in `V(a)` for some `a ≠ 0`. -/
-private lemma exists_ne_zero_forall_mem_of_isConstructible {R : Type*} [CommRing R] [IsDomain R]
+lemma exists_ne_zero_forall_mem_of_isConstructible {R : Type*} [CommRing R] [IsDomain R]
     {Z : Set (PrimeSpectrum R)} (hZ : IsConstructible Z)
     (h : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R) ∉ Z) :
     ∃ a : R, a ≠ 0 ∧ ∀ p ∈ Z, a ∈ p.asIdeal := by
@@ -198,7 +198,7 @@ private lemma ker_mem_range_factorAlg (P : MvPolynomial (Fin n) A) {k : Type*} [
   exact Iff.rfl
 
 
-private lemma totalDegree_map_of_injective {σ R S : Type*} [CommSemiring R] [CommSemiring S]
+lemma totalDegree_map_of_injective {σ R S : Type*} [CommSemiring R] [CommSemiring S]
     {f : R →+* S} (hf : Function.Injective f) (p : MvPolynomial σ R) :
     totalDegree (map f p) = totalDegree p := by
   simp [totalDegree, support_map_of_injective p hf]

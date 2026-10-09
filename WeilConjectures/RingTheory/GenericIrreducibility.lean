@@ -395,7 +395,7 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_birational {A C F : Type*} [Co
       (hE.trans (locSub_congr hy (by rw [map_mul, hκD]; rfl) _)) fun _ ↦ rfl
   obtain ⟨a₁, ha₁, hflat⟩ :=
     Module.exists_flat_localizedModule_powers (R := A) (S := C) (C ⧸ Ideal.span {g * c})
-  obtain ⟨a₂, ha₂, hBN⟩ := BertiniNoether.bertini_noether P K L hP
+  obtain ⟨a₂, ha₂, hBN⟩ := MvPolynomial.bertini_noether P K L hP
   obtain ⟨a₃, ha₃, hJ⟩ := exists_ne_zero_forall_dvd P J (IsNoetherian.noetherian J)
     fun Q hQ ↦ hker Q hQ
   have hgen : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum A) ∉
