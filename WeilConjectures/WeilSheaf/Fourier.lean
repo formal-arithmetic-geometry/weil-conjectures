@@ -663,6 +663,38 @@ lemma artinSchreierTranslationSheafHom_hom (c : k₀) :
             (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
   rfl
 
+/-- The Weil structure of the pushforward `φ_* ℚ̄_ℓ` of the constant Weil sheaf, on underlying
+sheaves: the exchange of `φ̄_*` with the Frobenius pushforwards followed by `φ̄_*` of the Weil
+structure of `ℚ̄_ℓ`. -/
+lemma WeilSheaf.lowerStar_adicConstant_str_hom_hom {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    ((WeilSheaf.lowerStar φ).obj (WeilSheaf.adicConstant k₀ l X)).obj.obj.str.hom =
+      ((ProEtale.lowerStarComp _ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+          ProEtale.lowerStarCongr _
+            (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
+          (ProEtale.lowerStarComp _
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+            (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).symm).app
+          -- Stated with this form of `ℚ̄_ℓ,X̄` rather than `ProEtale.adicConstantSheaf`: closing
+          -- the goal up to the definitional unfolding of `WeilSheaf.adicConstant` times out in
+          -- the kernel.
+          (IsoAlgebra.carrier (WeilSheaf.adicConstant k₀ l X).obj).X ≪≫
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l].mapIso
+          (ProEtale.adicConstantSheafLowerStarIso l
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom := by
+  rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
+    Mod.comp_hom', Functor.mapIso_hom, ProEtale.adicLowerStar_map_hom]
+  erw [WeilSheaf.adicConstant_str_hom_hom]
+  rw [ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.app_hom, Iso.trans_hom,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, NatTrans.comp_app, Mod.comp_hom',
+    Mod.comp_hom', ProEtale.adicLowerStarComp_hom_app_hom, ProEtale.adicLowerStarComp_inv_app_hom,
+    ProEtale.adicLowerStarCongr_hom_app_hom]
+  simp only [Iso.trans_hom, Iso.app_hom, NatTrans.comp_app, Iso.symm_hom, Functor.mapIso_hom,
+    Category.assoc]
+
 lemma artinSchreierPushforward_str_hom_hom :
     (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str.hom =
       ((ProEtale.lowerStarComp _ (affineLine.geometricArtinSchreierMap k₀)
@@ -677,9 +709,7 @@ lemma artinSchreierPushforward_str_hom_hom :
         (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
             (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
-  -- Componentwise this is `WeilSheaf.lowerStar_obj_obj_str` and
-  -- `WeilSheaf.adicConstant_str_hom_hom`; the kernel times out on the definitional unfolding.
-  sorry
+  WeilSheaf.lowerStar_adicConstant_str_hom_hom (affineLine.artinSchreierMap k₀)
 
 /-- The action of `σ_c` on `AS_* ℚ̄_ℓ` commutes with its Weil structure: the translation and
 the Artin–Schreier map are defined over `k₀`, hence commute with the geometric Frobenius. -/
