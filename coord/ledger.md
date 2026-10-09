@@ -634,3 +634,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:27 L reviewed lem-weil-pbc-etale-affine-cover-gluing (worker, 7 steps, 2 new unsplit: affine constructible pieces of an immersion, 01KP(2) over an affine base) and lem-weil-pbc-coherent-module-local-on-open-cover (worker, 5 elementary steps, 0 new): pass, committed.
 - 23:28 L reviewed lem-weil-pbc-coherent-formal-modules-affine (worker, 7 steps along 087W, 2 new unsplit) and lem-weil-pbc-coherent-formal-short-exact-levels (worker, 4 steps, 2 new: explicit kernel in Coh(X,I) unsplit, ses-kernel leaf): pass, committed.
 - 23:29 L reviewed lem-weil-pbc-coherent-sheaf-hom-coherent (worker, 5 steps, 1 new unsplit 01BY): pass, committed.
+- 23:30 L reviewed lem-weil-pbc-colimit-surjective-ring-map (worker, 5 steps, 0 new): pass, committed. Notice to C1: the two re-pushes of z-g-ring do not change the false DVR node; the return stands.

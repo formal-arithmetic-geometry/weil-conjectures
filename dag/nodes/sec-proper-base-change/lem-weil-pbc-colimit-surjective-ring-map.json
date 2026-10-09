@@ -10,9 +10,74 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the rings and maps, and their compatibilities).* Write $\\alpha_{i'i}:A_i\\to A_{i'}$ ($i\\le i'$) for the transition maps and $\\alpha_i:A_i\\to A$ for the coprojections, so $\\alpha_{i'}\\circ\\alpha_{i'i}=\\alpha_i$ and $\\alpha_{i''i'}\\circ\\alpha_{i'i}=\\alpha_{i''i}$ [def-weil-pbc-category-colimit]. For $T$ equal to $A_i$ ($i\\ge0$) or to $A$, the $A_0$-modules $B_T=T\\otimes_{A_0}B_0$ and $C_T=T\\otimes_{A_0}C_0$ [def-weil-module-base-change] are commutative rings with $(t\\otimes b)(t'\\otimes b')=tt'\\otimes bb'$ and unit $1\\otimes1$, additively spanned by the pure tensors. For $0\\le i\\le i'$ put $\\mu^B_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id}:B_i\\to B_{i'}$, $\\mu^B_i=\\alpha_i\\otimes\\mathrm{id}:B_i\\to B$, and likewise $\\mu^C_{i'i}$, $\\mu^C_i$ with $C_0$. By [lem-weil-pbc-algebra-tensor-map-ring-hom] (applied to the $A_0$-algebra maps $\\alpha_{i'i}$, $\\alpha_i$ with $N=B_0$ or $C_0$, and to $\\varphi_0$ with $N=T$, composed with the symmetry isomorphisms $T\\otimes_{A_0}N\\cong N\\otimes_{A_0}T$, which are ring isomorphisms) the maps $\\mu^B_{i'i},\\mu^B_i,\\mu^C_{i'i},\\mu^C_i$ and $\\varphi_i,\\varphi$ are ring homomorphisms. Moreover (a) $\\varphi_{i'}\\circ\\mu^B_{i'i}=\\mu^C_{i'i}\\circ\\varphi_i$ and (b) $\\varphi\\circ\\mu^B_i=\\mu^C_i\\circ\\varphi_i$, since both sides of (a) send $a\\otimes b\\mapsto\\alpha_{i'i}(a)\\otimes\\varphi_0(b)$, both sides of (b) send $a\\otimes b\\mapsto\\alpha_i(a)\\otimes\\varphi_0(b)$, and all maps are additive; (c) $\\mu^B_{i'}\\circ\\mu^B_{i'i}=\\mu^B_i$, $\\mu^B_{i''i'}\\circ\\mu^B_{i'i}=\\mu^B_{i''i}$ and the same for $C$, by the relations among the $\\alpha$'s, checked on pure tensors; (d) $\\mu^C_{i'i}(1\\otimes c)=1\\otimes c$ and $\\mu^C_i(1\\otimes c)=1\\otimes c$ for $c\\in C_0$, the $\\alpha$'s being unital.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), proof (lines 47560-47568); the maps the proof leaves implicit, written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 2 (generators and their preimages over $A$).* As $\\varphi_0$ is of finite type, choose $x_1,\\dots,x_m\\in C_0$ generating $C_0$ as a $B_0$-algebra via $\\varphi_0$, i.e. every element of $C_0$ is a finite sum of terms $\\varphi_0(b)x_1^{\\nu_1}\\cdots x_m^{\\nu_m}$ with $b\\in B_0$. Since $\\varphi$ is surjective, choose $b_j\\in B$ with $\\varphi(b_j)=1\\otimes x_j$ in $C$, $j=1,\\dots,m$. (Stacks: 'Let $x_1,\\ldots,x_m$ be generators for $C_0$ over $B_0$. Pick $b_j\\in A\\otimes_{A_0}B_0$ mapping to $1\\otimes x_j$'.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), proof (lines 47560-47568), lines 47561-47563"
+   }
+  },
+  {
+   "text": "*Step 3 (lifting the $b_j$ to a stage).* By [lem-weil-pbc-directed-colimit-base-change-elementwise](1) with $M_0=B_0$ (so $M_i=B_i$, $M=B$, $\\mu_i=\\mu^B_i$), each $b_j$ equals $\\mu^B_{i_j}(t_j)$ for some $i_j\\ge0$ and $t_j\\in B_{i_j}$. $I$ being directed, choose $i\\in I$ with $i\\ge0$ and $i\\ge i_j$ for all $j$ (any $i\\ge0$ if $m=0$), and replace $t_j$ by $\\mu^B_{ii_j}(t_j)\\in B_i$; by step 1(c), $\\mu^B_i(t_j)=b_j$ for all $j$. (Stacks: 'For some $i\\ge0$ we can find $b_{j,i}\\in A_i\\otimes_{A_0}B_0$ mapping to $b_j$'.)",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), proof (lines 47560-47568), lines 47563-47564"
+   }
+  },
+  {
+   "text": "*Step 4 (the lifts hit $1\\otimes x_j$ after increasing $i$).* Put $d_j=\\varphi_i(t_j)-1\\otimes x_j\\in C_i$. By step 1(b),(d), $\\mu^C_i(d_j)=\\varphi(\\mu^B_i(t_j))-1\\otimes x_j=\\varphi(b_j)-1\\otimes x_j=0$. By [lem-weil-pbc-directed-colimit-base-change-elementwise](2) with $M_0=C_0$ (so $\\mu_i=\\mu^C_i$, $\\mu_{i'i}=\\mu^C_{i'i}$) there is $i'_j\\ge i$ with $\\mu^C_{i'_ji}(d_j)=0$. Choose $i'\\ge i'_j$ for all $j$ ($i'=i$ if $m=0$); by step 1(c), $\\mu^C_{i'i}(d_j)=\\mu^C_{i'i'_j}(\\mu^C_{i'_ji}(d_j))=0$. Put $t'_j=\\mu^B_{i'i}(t_j)\\in B_{i'}$. By step 1(a),(d), $\\varphi_{i'}(t'_j)=\\mu^C_{i'i}(\\varphi_i(t_j))=\\mu^C_{i'i}(1\\otimes x_j)+\\mu^C_{i'i}(d_j)=1\\otimes x_j$ in $C_{i'}$ for all $j$. (Stacks: 'After increasing $i$ we may assume that $b_{j,i}$ maps to $1\\otimes x_j$ in $A_i\\otimes_{A_0}C_0$ for all $j$'.)",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), proof (lines 47560-47568), lines 47565-47566"
+   }
+  },
+  {
+   "text": "*Step 5 ($\\varphi_{i'}$ is surjective).* The image $R=\\varphi_{i'}(B_{i'})$ is a subring of $C_{i'}$, $\\varphi_{i'}$ being a ring homomorphism (step 1). It contains $a\\otimes1=\\varphi_{i'}(a\\otimes1)$ for $a\\in A_{i'}$, $1\\otimes\\varphi_0(b)=\\varphi_{i'}(1\\otimes b)$ for $b\\in B_0$, and $1\\otimes x_j$ (step 4). The map $C_0\\to C_{i'}$, $c\\mapsto1\\otimes c$, is a ring homomorphism, so for $c=\\sum\\varphi_0(b)x_1^{\\nu_1}\\cdots x_m^{\\nu_m}$ (step 2) one has $1\\otimes c=\\sum(1\\otimes\\varphi_0(b))(1\\otimes x_1)^{\\nu_1}\\cdots(1\\otimes x_m)^{\\nu_m}\\in R$, and then $a\\otimes c=(a\\otimes1)(1\\otimes c)\\in R$. The pure tensors $a\\otimes c$ span $C_{i'}$ additively [def-weil-module-base-change], so $R=C_{i'}$: $\\varphi_{i'}$ is surjective, with $i'\\ge0$. (Stacks: 'Then this $i$ works.')",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), proof (lines 47560-47568), line 47567"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "proof of Lemma Tag 07RH (lemma-colimit-surjective, line 47547; proof lines 47560-47568); the ring structures and compatibilities (step 1), the passage to a common stage via directedness and the generation argument (step 5), which the source leaves implicit, are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +106,31 @@
    "results": "no @[stacks 07RH]; nothing in Algebra/Colimit (DirectLimit, Finiteness, Module, Ring, TensorProduct) about surjectivity at a stage; no colimit lemma in RingTheory/FiniteType.lean",
    "date": "2026-10-10",
    "verdict": "no match. Related in the source repository slopmaster2 (not Mathlib): AlgebraicGeometry.Scheme.exists_isClosedImmersion_comp_π_of_isAffine and CommRingCat.exists_isPushout_of_finitePresentation_of_surjective (WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean) use the same lifting-of-generators argument in other formulations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product of a direct limit of rings with an algebra, surjective algebra map at some index of the direct limit",
+   "results": "Algebra.TensorProduct.includeRight_surjective, TensorProduct.directLimitLeft_rTensor_of, TensorProduct.toDirectLimit, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.directLimitLeft_tmul_of (LinearAlgebra.TensorProduct.DirectLimit), Module.FaithfullyFlat.surjective_of_tensorProduct, RingHom.SurjectiveOnStalks.tensorProductMap",
+   "date": "2026-10-10",
+   "verdict": "no match (only the module isomorphism colim(G_i ⊗ M) ≅ (colim G_i) ⊗ M, which the elementwise node carries)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, Algebra.TensorProduct.map, DirectLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'DirectLimit' Mathlib | xargs grep -ln 'Surjective'; grep -rn 'theorem.*urjective' Mathlib/Algebra/Colimit/ Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean",
+   "results": "only Mathlib/RingTheory/PolynomialLaw/Basic.lean and Mathlib/ModelTheory/DirectLimit.lean, neither about surjectivity at a stage; no surjectivity theorem in Algebra/Colimit or TensorProduct/DirectLimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +150,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-colimit-surjective-ring-map",
+  "worker": "stage1",
+  "summary": "Split in five steps along the proof of Stacks Algebra 07RH (algebra.tex line 47547, tag checked in tags/tags line 9867). Statement and stmt_deps kept (checked against the source; the citer lem-weil-pbc-descend-closed-immersion step 7 uses it exactly in this form over I_{>=k}). Step 1 sets up the ring structures and the compatibilities phi_{i'} mu^B = mu^C phi_i, phi mu^B_i = mu^C_i phi_i (def-weil-module-base-change, Mathlib leaf lem-weil-pbc-algebra-tensor-map-ring-hom); steps 3-4 lift the preimages b_j to a stage and equalize phi_i(t_j) with 1 (x) x_j at a later stage by the existing node lem-weil-pbc-directed-colimit-base-change-elementwise (1) with M_0=B_0 and (2) with M_0=C_0 (same unit sk-thm-p1; preferred to lem-weil-pbc-filtered-colimit-tensor-varying-rings, which is of unit sk-thm-reduction and more general); step 5 shows the image is a subring containing the generators, hence everything. No new nodes. Three more Mathlib searches of the item recorded (DirectLimit/TensorProduct): no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Five steps along Stacks 07RH with the setup written out: rings and maps of the base changes, generators and preimages, lifting to a stage and equalizing at a later stage by the existing elementwise node (same unit), surjectivity from the generators. Correct; 0 new nodes."
+ }
 }
