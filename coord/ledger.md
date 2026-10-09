@@ -468,3 +468,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:00 UTC (2026-10-09) — Deliveries: merged the repaired C1 property-iff-acyclicity (unit sk-thm-iff realized); returned F1 etale-qcqs-sections-filtered-colimit (a claim lock file in the branch).
 - 21:00 UTC (2026-10-09) — Reviewed and committed etale-ring-map-conormal-criterion (4 steps; 2 new Mathlib leaves).
 - 21:01 UTC (2026-10-09) — Reviewed and committed eventually-closed-immersion (0A0N; 6 steps, 2 new nodes: 09ZM unsplit, 01QO leaf).
+- 21:03 UTC (2026-10-09) — Reviewed and committed flat-local-completion-iso (0AGX; 7 steps, 3 new nodes: 1 Mathlib leaf, 0394 and 0AGW unsplit).
