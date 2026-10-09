@@ -253,7 +253,11 @@ noncomputable def amitsurInclusion : N →ₗ[A] descentSubmodule (amitsurCoacti
   map_smul' a n := by ext; simp [tmul_smul]
 
 /-- **Amitsur exactness in degree zero.** For a faithfully flat `A`-algebra `B`, an element of
-`B ⊗[A] N` whose two images in `B ⊗[A] B ⊗[A] N` agree is of the form `1 ⊗ n`. -/
+`B ⊗[A] N` whose two images in `B ⊗[A] B ⊗[A] N` agree is of the form `1 ⊗ n`.
+
+This is the degree-zero part of `Module.FaithfullyFlat.exact_amitsurComplex`, stated with the
+tensor factors in the order `B ⊗ N` and the maps `includeLeft`, `includeRight`; here it is
+deduced from the descent statement `TensorProduct.bijective_descentLift_of_flat`. -/
 theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.FaithfullyFlat A B]
     (t : B ⊗[A] N)
     (ht : (Algebra.TensorProduct.includeLeft : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N t =

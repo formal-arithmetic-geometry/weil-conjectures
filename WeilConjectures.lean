@@ -352,7 +352,6 @@ public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
-public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf

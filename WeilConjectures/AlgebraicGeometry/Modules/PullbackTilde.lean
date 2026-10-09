@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Pullback of quasi-coherent modules along morphisms of affine schemes
@@ -22,60 +23,6 @@ under the unit of the adjunction `f^* ⊣ f_*`.
 universe u
 
 open CategoryTheory Opposite TensorProduct
-
-/-- For an `R`-algebra `S`, `S ⊗[R] N` is `(ModuleCat.extendScalars (algebraMap R S)).obj N`. -/
-noncomputable def ModuleCat.tensorEquivExtendScalars (R S : Type u) [CommRing R] [CommRing S]
-    [Algebra R S] (N : ModuleCat.{u} R) :
-    S ⊗[R] N ≃ₗ[S] (ModuleCat.extendScalars (algebraMap R S)).obj N := by
-  let T := (ModuleCat.extendScalars (algebraMap R S)).obj N
-  let S' := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S)
-  let toFun : S ⊗[R] N →ₗ[R] TensorProduct R S' N :=
-    TensorProduct.lift
-      { toFun s := TensorProduct.mk R S' N s
-        map_add' s s' := (TensorProduct.mk R S' N).map_add s s'
-        map_smul' r s :=
-          (congrArg (TensorProduct.mk R S' N) (Algebra.smul_def r s)).trans
-            ((TensorProduct.mk R S' N).map_smul r (s : S')) }
-  let invFun : TensorProduct R S' N →ₗ[R] S ⊗[R] N :=
-    TensorProduct.lift
-      { toFun s := TensorProduct.mk R S N (show S from s)
-        map_add' s s' := (TensorProduct.mk R S N).map_add (show S from s) (show S from s')
-        map_smul' r s :=
-          (congrArg (TensorProduct.mk R S N) (Algebra.smul_def r (show S from s)).symm).trans
-            ((TensorProduct.mk R S N).map_smul r (show S from s)) }
-  have h₁ : ∀ x, invFun (toFun x) = x := by
-    intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
-    | tmul s n => rfl
-    | add x y hx hy => simp only [map_add, hx, hy]
-  have h₂ : ∀ x, toFun (invFun x) = x := by
-    intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
-    | tmul s n => rfl
-    | add x y hx hy => simp only [map_add, hx, hy]
-  exact
-    { toFun := toFun
-      invFun := invFun
-      map_add' := toFun.map_add
-      map_smul' s x := by
-        induction x using TensorProduct.induction_on with
-        | zero => exact (map_zero toFun).trans (show (0 : T) = s • (0 : T) from (smul_zero s).symm)
-        | tmul s' n => rfl
-        | add x y hx hy =>
-          rw [smul_add, map_add, hx, hy, map_add]
-          exact (smul_add s _ _).symm
-      left_inv := h₁
-      right_inv := h₂ }
-
-lemma ModuleCat.tensorEquivExtendScalars_tmul (R S : Type u) [CommRing R] [CommRing S]
-    [Algebra R S] (N : ModuleCat.{u} R) (s : S) (n : N) :
-    ModuleCat.tensorEquivExtendScalars R S N (s ⊗ₜ n) =
-      TensorProduct.tmul R
-        (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
-        s n :=
-  rfl
 
 namespace AlgebraicGeometry
 
@@ -193,7 +140,7 @@ noncomputable abbrev toΓSpec (R : Type u) [CommRing R] (U : (Spec (.of R)).Open
 /-- Sections of an `𝒪_{Spec R}`-module are `R`-modules, for `R` a commutative ring, through
 `R → Γ(Spec R, U)`. (This agrees with the instance for `R : CommRingCat`, but is defined directly
 through the `Γ(Spec R, U)`-module structure.) -/
-noncomputable instance moduleOf {R : Type u} [CommRing R] (M : (Spec (.of R)).Modules)
+noncomputable scoped instance moduleOf {R : Type u} [CommRing R] (M : (Spec (.of R)).Modules)
     (U : (Spec (.of R)).Opens) : Module R Γ(M, U) :=
   Module.compHom Γ(M, U) (toΓSpec R U)
 

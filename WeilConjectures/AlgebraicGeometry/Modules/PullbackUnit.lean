@@ -41,7 +41,15 @@ noncomputable abbrev pullbackUnitApp (f : Y ⟶ X) (M : X.Modules) (U : X.Opens)
   (pullbackUnit f M).app U
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The units of the pullback-pushforward adjunctions compose, up to `pullbackComp`. -/
+/-- The units of the pullback-pushforward adjunctions compose, up to `pullbackComp`:
+
+```
+  Γ(M, U) ───── η_f ─────▶ Γ(f^* M, f⁻¹ U)
+     │                            │
+  η_(g ≫ f)                      η_g
+     ▼                            ▼
+  Γ((g ≫ f)^* M, ⋯) ──(pullbackComp g f).inv──▶ Γ(g^* f^* M, g⁻¹ f⁻¹ U)
+``` -/
 lemma pullbackUnit_comp_app (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) (U : X.Opens) :
     (pullbackUnit (g ≫ f) M).app U ≫ ((pullbackComp g f).inv.app M).app ((g ≫ f) ⁻¹ᵁ U) =
       (pullbackUnit f M).app U ≫ (pullbackUnit g ((pullback f).obj M)).app (f ⁻¹ᵁ U) := by
@@ -132,7 +140,15 @@ lemma modulesPseudofunctor_mapComp_inv_app (f : Y ⟶ X) (g : Z ⟶ Y) (M : X.Mo
       (pullbackComp g f).hom.app M :=
   rfl
 
-/-- The comparison `mapComp'` of `modulesPseudofunctor` on the image of the unit. -/
+/-- The comparison `mapComp'` of `modulesPseudofunctor` on the image of the unit:
+
+```
+  Γ((g ≫ f)^* M) ─── mapComp'.hom ───▶ Γ(g^* f^* M)
+        ▲                                   ▲
+   η_(g ≫ f)                               η_g
+        │                                   │
+     Γ(M) ─────────────── η_f ─────────▶ Γ(f^* M)
+``` -/
 lemma modulesPseudofunctor_mapComp'_hom_app_pullbackUnit (f : Y ⟶ X) (g : Z ⟶ Y)
     (M : X.Modules) (U : X.Opens) (m : Γ(M, U)) :
     ((modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc (g ≫ f).op.toLoc).hom.toNatTrans.app
@@ -161,7 +177,8 @@ lemma modulesPseudofunctor_pullHom_eq {X₁ X₂ Y Y' : Scheme.{u}} {M₁ : X₁
   rfl
 
 /-- The comparison `mapComp'` of `modulesPseudofunctor` on global sections in the image of the
-unit, for a factorization `g ≫ f = fg`. -/
+unit, for a factorization `g ≫ f = fg`: the square of the previous lemma with `g ≫ f`
+replaced by `fg`. -/
 lemma modulesPseudofunctor_mapComp'_hom_app_top (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
     (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
     ((modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
@@ -183,11 +200,17 @@ lemma modulesPseudofunctor_mapComp'_inv_app_top (f : Y ⟶ X) (g : Z ⟶ Y) (fg 
     fg.op.toLoc (by rw [← h]; rfl)) M
   exact congr(Hom.app (X := Z) $k ⊤ (pullbackUnitApp fg M ⊤ m))
 
-/-- `pullbackComp` followed by `pullbackCongr`, for a factorization `g ≫ f = fg`. -/
+/-- `pullbackComp` followed by `pullbackCongr`, for a factorization `g ≫ f = fg`:
+
+```
+  g^* f^* M ──(pullbackComp g f).app M──▶ (g ≫ f)^* M ──(pullbackCongr h).app M──▶ fg^* M
+``` -/
 noncomputable def pullbackCompOfEq (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X) (h : g ≫ f = fg)
     (M : X.Modules) : (pullback g).obj ((pullback f).obj M) ≅ (pullback fg).obj M :=
   (pullbackComp g f).app M ≪≫ (pullbackCongr h).app M
 
+/-- The inverse comparison `mapComp'` of `modulesPseudofunctor` is `pullbackCompOfEq`:
+`(mapComp' f g fg).inv.app M = (pullbackCompOfEq g f fg h M).hom : g^* f^* M ⟶ fg^* M`. -/
 lemma modulesPseudofunctor_mapComp'_inv_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
     (h : g ≫ f = fg) (M : X.Modules) :
     (modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
@@ -200,6 +223,8 @@ lemma modulesPseudofunctor_mapComp'_inv_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg :
   simp [pullbackCompOfEq, pullbackCongr]
   try rfl
 
+/-- The comparison `mapComp'` of `modulesPseudofunctor` is the inverse of `pullbackCompOfEq`:
+`(mapComp' f g fg).hom.app M = (pullbackCompOfEq g f fg h M).inv : fg^* M ⟶ g^* f^* M`. -/
 lemma modulesPseudofunctor_mapComp'_hom_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg : Z ⟶ X)
     (h : g ≫ f = fg) (M : X.Modules) :
     (modulesPseudofunctor.mapComp' f.op.toLoc g.op.toLoc fg.op.toLoc
@@ -212,6 +237,12 @@ lemma modulesPseudofunctor_mapComp'_hom_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg :
   simp [pullbackCompOfEq, pullbackCongr]
   try rfl
 
+/-- `pullbackCompOfEq` on global sections in the image of the units:
+
+```
+  Γ(M) ──η_f──▶ Γ(f^* M) ──η_g──▶ Γ(g^* f^* M) ──pullbackCompOfEq──▶ Γ(fg^* M)
+     └─────────────────────────── η_fg ──────────────────────────────────┘
+``` -/
 lemma pullbackCompOfEq_hom_app_top (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X) (h : g ≫ f = fg)
     (M : X.Modules) (m : Γ(M, ⊤)) :
     ((pullbackCompOfEq g f fg h M).hom).app ⊤
@@ -226,16 +257,20 @@ noncomputable irreducible_def pullbackΓ (f : Y ⟶ X) (M : X.Modules) :
     Γ(M, ⊤) ⟶ Γ((pullback f).obj M, ⊤) :=
   (pullbackUnit f M).app ⊤
 
+/-- `pullbackΓ` is the unit on sections over `⊤`. -/
 lemma pullbackΓ_apply (f : Y ⟶ X) (M : X.Modules) (m : Γ(M, ⊤)) :
     pullbackΓ f M m = pullbackUnitApp f M ⊤ m := by
   rw [pullbackΓ_def]
   rfl
 
+/-- Naturality of `pullbackΓ`: `(f^* φ) (η_f m) = η_f (φ m)`. -/
 lemma pullbackΓ_naturality (f : Y ⟶ X) {M N : X.Modules} (φ : M ⟶ N) (m : Γ(M, ⊤)) :
     ((pullback f).map φ).app ⊤ (pullbackΓ f M m) = pullbackΓ f N (φ.app ⊤ m) := by
   rw [pullbackΓ_apply, pullbackΓ_apply]
   exact pullbackUnit_naturality_apply f φ ⊤ m
 
+/-- `pullbackCompOfEq` on global sections in the image of the units, in terms of `pullbackΓ`:
+`pullbackCompOfEq (η_g (η_f m)) = η_fg m`. -/
 lemma pullbackCompOfEq_hom_app_pullbackΓ (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X)
     (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
     ((pullbackCompOfEq g f fg h M).hom).app ⊤ (pullbackΓ g _ (pullbackΓ f M m)) =
@@ -243,6 +278,8 @@ lemma pullbackCompOfEq_hom_app_pullbackΓ (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z �
   rw [pullbackΓ_apply, pullbackΓ_apply, pullbackΓ_apply]
   exact pullbackCompOfEq_hom_app_top g f fg h M m
 
+/-- The inverse of `pullbackCompOfEq` on global sections in the image of the units:
+`(pullbackCompOfEq)⁻¹ (η_fg m) = η_g (η_f m)`. -/
 lemma pullbackCompOfEq_inv_app_pullbackΓ (g : Z ⟶ Y) (f : Y ⟶ X) (fg : Z ⟶ X)
     (h : g ≫ f = fg) (M : X.Modules) (m : Γ(M, ⊤)) :
     ((pullbackCompOfEq g f fg h M).inv).app ⊤ (pullbackΓ fg M m) =
