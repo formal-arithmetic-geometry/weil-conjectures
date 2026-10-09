@@ -1,0 +1,47 @@
+{
+ "id": "lem-weil-exp-coefficientwise-map",
+ "kind": "statement",
+ "title": "Coefficientwise ring homomorphisms commute with the formal exponential",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative $\\mathbf Q$-algebras (any ring homomorphism between $\\mathbf Q$-algebras is $\\mathbf Q$-linear), $T$ an indeterminate, and $\\varphi:R[[T]]\\to S[[T]]$ also the coefficientwise map $\\sum_nc_nT^n\\mapsto\\sum_n\\varphi(c_n)T^n$ [def-weil-coefficientwise-ring-hom-map]. For every $U\\in TR[[T]]$ (constant coefficient $0$), $\\varphi(U)\\in TS[[T]]$ and\n\n$$\n \\varphi\\bigl(\\exp(U)\\bigr)=\\exp\\bigl(\\varphi(U)\\bigr)\n$$\n\nin $S[[T]]$, where $\\exp$ is the formal exponential [def-weil-power-series-exponential].",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "proof of Corollary 27.8, p. 156: Z(X_0,t), a series with coefficients in Q, is read in Q_l[[t]] in Theorem 27.6 (used without statement)"
+ },
+ "stmt_deps": [
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-power-series-exponential",
+  "def-weil-formal-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'map_exp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Exp.lean; grep -n 'map_subst' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Substitution.lean",
+   "results": "PowerSeries.map_exp (Exp.lean:64): map f (exp A) = exp A' for f : A →+* A' of Q-algebras; PowerSeries.map_subst (Substitution.lean:329): (f.subst a).map h = (f.map h).subst (a.map h) for HasSubst a",
+   "date": "2026-10-09",
+   "verdict": "generalization: the two lemmas give the statement in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PowerSeries.map_subst",
+  "file": "Mathlib/RingTheory/PowerSeries/Substitution.lean",
+  "how": "specializes in one line: with exp(U) = (PowerSeries.exp R).subst U, `PowerSeries.map_subst (HasSubst.of_constantCoeff_zero' hU) (exp R)` gives ((exp R).subst U).map φ = ((exp R).map φ).subst (U.map φ), and `PowerSeries.map_exp` (Mathlib/RingTheory/PowerSeries/Exp.lean:64) rewrites (exp R).map φ = exp S"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-trace-determinant",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

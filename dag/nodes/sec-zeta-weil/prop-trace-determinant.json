@@ -2,45 +2,132 @@
  "id": "prop-trace-determinant",
  "kind": "statement",
  "title": "Trace-to-determinant factorization",
- "statement": "Let $K$ be a characteristic-zero field, fix an indeterminate $T$, let\n$I\\subset\\mathbf Z$ be finite, and let\n$(V_i,u_i)_{i\\in I}$ be a finite graded family of finite-dimensional vector\nspaces and endomorphisms over $K$. Put\n\n$$\nP_i(T)=\\det(1-Tu_i\\mid V_i),\n\\qquad\n\\Delta(T)=\\prod_iP_i(T)^{(-1)^{i+1}}.\n$$\n\nThen, for every $i\\in I$,\n\n$$\n-\\log P_i(T)=\n\\sum_{n\\geq1}\\Tr(u_i^n\\mid V_i)\\frac{T^n}{n},\n$$\n\nand, with the displayed parity signs,\n\n$$\n\\log\\Delta(T)=\n\\sum_{n\\geq1}\\left(\\sum_{i\\in I}(-1)^i\\Tr(u_i^n\\mid V_i)\\right)\n\\frac{T^n}{n}.\n$$\n\nFor the geometric application, let $d\\in\\mathbf Z_{\\geq0}$, take\n$I=\\{0,\\ldots,2d\\}$, and use the\nfinite-field datum; fix a prime\n$p$, an integer $a\\geq1$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$.\nChoose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, and let\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Put\n$X=X_0\\times_{k_0}k$, $V_i=H^i(X,\\Ql)$, and $u_i=F_{i,\\ell}$, where\n$(V_{i,\\ell},F_{i,\\ell})$ is the\nsmooth-proper\ncohomological family. The\npoint-count and zeta series and the\nordinary cohomology\nconstruction give, after coefficient extension\n$\\mathbf Q[[T]]\\to\\Ql[[T]]$, the identity\n\n$$\nZ(X_0,T)=\n\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}.\n$$\n\nThis identity belongs to $\\Ql(T)\\cap\\Ql[[T]]$.",
+ "statement": "Let $K$ be a field of characteristic zero [def-weil-field], fix an indeterminate $T$, let $I\\subset\\mathbf Z$ be finite, and let $(V_i,u_i)_{i\\in I}$ be a family of finite-dimensional $K$-vector spaces [def-weil-finite-dimensional-subspace] with $K$-linear endomorphisms $u_i:V_i\\to V_i$. Put\n\n$$\nP_i(T)=\\det(1-Tu_i\\mid V_i)\\in K[T]\n$$\n\n[def-weil-reverse-characteristic-polynomial], regarded in $K[[T]]$ [def-weil-formal-power-series, def-weil-polynomial-as-power-series], and let $\\Tr(u_i^n\\mid V_i)\\in K$ be the trace of the $n$-th iterate [def-weil-endomorphism-trace]. Then:\n\n1. every $P_i(T)$ is a unit of $K[[T]]$, and\n$$\n\\exp\\Bigl(\\sum_{n\\geq1}\\Tr(u_i^n\\mid V_i)\\frac{T^n}{n}\\Bigr)=P_i(T)^{-1},\n$$\nwhere $\\exp$ is the formal exponential [def-weil-power-series-exponential] (equivalently $-\\log P_i(T)=\\sum_{n\\geq1}\\Tr(u_i^n\\mid V_i)T^n/n$);\n\n2. with $\\Delta(T)=\\prod_{i\\in I}P_i(T)^{(-1)^{i+1}}\\in K[[T]]$,\n$$\n\\exp\\Bigl(\\sum_{n\\geq1}\\Bigl(\\sum_{i\\in I}(-1)^i\\Tr(u_i^n\\mid V_i)\\Bigr)\\frac{T^n}{n}\\Bigr)=\\Delta(T)\n$$\n(equivalently $\\log\\Delta(T)=\\sum_{n\\geq1}\\bigl(\\sum_{i}(-1)^i\\Tr(u_i^n\\mid V_i)\\bigr)T^n/n$).\n\n3. (Geometric application.) Fix the finite-field datum $p,a,q=p^a,k_0=\\Fq,k=\\Fbar$ [def-weil-finite-field-fiber], let $X_0/k_0$ be smooth, proper, geometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$ [def-weil-geometric-hypotheses], put $X=X_0\\times_{k_0}k$, choose a prime $\\ell\\neq p$ and write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers]. Let $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the smooth-proper cohomological family [def-weil-smooth-proper-cohomological-family], so $V_{i,\\ell}=H^i(X,\\Ql)$ [def-weil-ordinary-compact-cohomology] and $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$, and let $N_\\ell=\\prod_{i\\text{ odd}}P_{i,\\ell}$ and $D_\\ell=\\prod_{i\\text{ even}}P_{i,\\ell}$ be the parity products [def-weil-parity-products]. Let $Z(X_0,T)\\in\\mathbf Q[[T]]$ be the zeta series [def-weil-point-counts-zeta] and $\\varphi:\\mathbf Q[[T]]\\to\\Ql[[T]]$ the coefficientwise extension along $\\mathbf Q\\subset\\Ql$ [def-weil-coefficientwise-ring-hom-map]. Then, in $\\Ql[[T]]$,\n$$\n\\varphi\\bigl(Z(X_0,T)\\bigr)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}},\n\\qquad\\text{equivalently}\\qquad\n\\varphi\\bigl(Z(X_0,T)\\bigr)\\cdot D_\\ell(T)=N_\\ell(T),\n$$\nand since $D_\\ell(0)=1$, $\\varphi(Z(X_0,T))$ is a rational power series over $\\Ql$ whose rational function is $N_\\ell/D_\\ell$ [def-weil-rational-power-series]: the identity holds in $\\Ql(T)\\cap\\Ql[[T]]$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-trace-determinant.md",
   "place": "node prop-trace-determinant, order 2884"
  },
  "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-endomorphism-trace",
+  "def-weil-power-series-exponential",
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-l-adic-numbers",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-parity-products",
+  "def-weil-point-counts-zeta",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-rational-power-series"
  ],
  "proof": [
   {
-   "text": "Over an algebraic closure of $K$, let\n$\\lambda_{i,1},\\ldots,\\lambda_{i,n_i}$ denote the eigenvalues of\n$u_i$, counted with algebraic multiplicity, where\n$n_i=\\dim_KV_i$. Then $P_i(T)=\\prod_j(1-\\lambda_{i,j}T)$ and, in the\nring of formal power series,\n\n$$\n-\\log P_i(T)\n=\\sum_j\\sum_{n\\geq1}\\lambda_{i,j}^n\\frac{T^n}{n}\n=\\sum_{n\\geq1}\\operatorname{Tr}_K(u_i^n\\mid V_i)\\frac{T^n}{n},\n$$\n\nthe last equality because the trace is the sum of the eigenvalues after\nscalar extension. Summing over $i$ with the parity signs in\n$\\Delta(T)=\\prod_iP_i(T)^{(-1)^{i+1}}$ gives\n\n$$\n\\log\\Delta(T)=\\sum_{n\\geq1}\\Bigl(\\sum_{i\\in I}(-1)^i\n\\operatorname{Tr}_K(u_i^n\\mid V_i)\\Bigr)\\frac{T^n}{n},\n$$\n\nwhich proves the linear-algebra part of the statement.",
-   "uses": [],
-   "elementary": null
+   "text": "*Clause 1.* Fix $i\\in I$. By [lem-weil-reverse-charpoly-coefficients, clause 1] the constant coefficient of $P_i(T)=\\det(1-Tu_i\\mid V_i)$ is $1$, so $P_i$, regarded in $K[[T]]$ [def-weil-polynomial-as-power-series], has constant coefficient $1$, a unit of $K$, and is therefore a unit of $K[[T]]$. Since $K$ has characteristic zero it contains $\\mathbf Q$, the series $A_i(T)=\\sum_{n\\geq1}\\Tr(u_i^n\\mid V_i)T^n/n$ is defined and has constant coefficient $0$, and the exp–det identity [lem-weil-exp-trace-determinant] (Milne's Lemma 27.5) applied to $(V_i,u_i)$ gives $P_i(T)\\exp(A_i(T))=1$, i.e. $\\exp(A_i(T))=P_i(T)^{-1}$.",
+   "uses": [
+    "lem-weil-reverse-charpoly-coefficients",
+    "def-weil-polynomial-as-power-series",
+    "lem-weil-exp-trace-determinant",
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Lemma 27.5 and its proof, pp. 155-156; also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5.3), pp. 275-276"
+   }
   },
   {
-   "text": "For the geometric application, $Z(X_0,T)$ is the point-count zeta\nseries of [def-weil-point-counts-zeta], and by\n[prop-every-iterate-trace] applied to the constant Weil sheaf on\nthe smooth proper geometrically connected $X_0$,\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\operatorname{Tr}_{\\Ql}(F_{i,\\ell}^n\\mid V_{i,\\ell})\n$$\n\nfor every $n\\geq1$, where $(V_{i,\\ell},F_{i,\\ell})$ is the\nsmooth-proper cohomological family of\n[def-weil-smooth-proper-cohomological-family]. Hence\n$\\log Z(X_0,T)$ equals the logarithm of\n$\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}$ after the coefficient\nextension $\\mathbf Q[[T]]\\to\\Ql[[T]]$, and exponentiating gives the\ndisplayed identity. Both sides are Taylor expansions of rational\nfunctions, so the identity belongs to\n$\\Ql(T)\\cap\\Ql[[T]]$.",
+   "text": "*Clause 2.* With $A_i$ as in clause 1, the coefficient of $T^n$ in $\\sum_{i\\in I}(-1)^iA_i(T)$ is $\\frac1n\\sum_{i\\in I}(-1)^i\\Tr(u_i^n\\mid V_i)$ (a finite sum over $I$, exchanged with the coefficient extraction), so\n$$\n\\sum_{n\\geq1}\\Bigl(\\sum_{i\\in I}(-1)^i\\Tr(u_i^n\\mid V_i)\\Bigr)\\frac{T^n}{n}=\\sum_{i\\in I}(-1)^iA_i(T)\n$$\n(\"move the inner sum outside\"). Each $A_i$ lies in $TK[[T]]$, so by the homomorphism property of the formal exponential [lem-weil-power-series-exp-hom], applied to the finite family $(A_i)_{i\\in I}$ with the integers $\\varepsilon_i=(-1)^i$,\n$$\n\\exp\\Bigl(\\sum_{i\\in I}(-1)^iA_i\\Bigr)=\\prod_{i\\in I}\\exp(A_i)^{(-1)^i}=\\prod_{i\\in I}\\bigl(P_i^{-1}\\bigr)^{(-1)^i}=\\prod_{i\\in I}P_i^{(-1)^{i+1}}=\\Delta(T),\n$$\nusing clause 1 for $\\exp(A_i)=P_i^{-1}$.",
+   "uses": [
+    "lem-weil-power-series-exp-hom",
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "proof of Theorem 27.6, p. 156, third and fourth lines ('move the inner sum outside', '(27.5)'); also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5), p. 276, the line before (1.5.4)"
+   }
+  },
+  {
+   "text": "*Clause 3, the trace formula.* By the cohomological-finiteness proposition [prop-cohomological-finiteness] (as recorded in [def-weil-smooth-proper-cohomological-family]) each $V_{i,\\ell}=H^i(X,\\Ql)$, $0\\leq i\\leq2d$, is a finite-dimensional $\\Ql$-vector space and $F_{i,\\ell}$ is a $\\Ql$-linear endomorphism of it, so traces and $P_{i,\\ell}=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$ are defined. The trace formula for every iterate [prop-every-iterate-trace], in its final form for smooth proper geometrically connected $X_0$ of pure dimension $d$, gives for every $n\\geq1$\n$$\nN_n(X_0)\\cdot1_{\\Ql}=\\sum_{i=0}^{2d}(-1)^i\\Tr\\bigl(F_{i,\\ell}^n\\mid V_{i,\\ell}\\bigr)\\quad\\text{in }\\Ql,\n$$\nwhere $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ is the point count of [def-weil-point-counts-zeta].",
+   "uses": [
+    "prop-cohomological-finiteness",
+    "def-weil-smooth-proper-cohomological-family",
+    "prop-every-iterate-trace",
+    "def-weil-point-counts-zeta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 27.3, p. 155, used in the second line of the proof of Theorem 27.6, p. 156; also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5.1), p. 275"
+   }
+  },
+  {
+   "text": "*Clause 3, the product formula.* By definition [def-weil-point-counts-zeta], $Z(X_0,T)=\\exp(U)$ with $U=\\sum_{n\\geq1}N_n(X_0)T^n/n\\in T\\mathbf Q[[T]]$. The coefficientwise map $\\varphi$ along the ring homomorphism $\\mathbf Q\\to\\Ql$ [def-weil-coefficientwise-ring-hom-map] is a homomorphism of $\\mathbf Q$-algebras, so $\\varphi(U)=\\sum_{n\\geq1}(N_n(X_0)\\cdot1_{\\Ql})T^n/n\\in T\\Ql[[T]]$, and $\\varphi(\\exp U)=\\exp(\\varphi U)$ by [lem-weil-exp-coefficientwise-map]. By the previous step,\n$$\n\\varphi\\bigl(Z(X_0,T)\\bigr)=\\exp\\Bigl(\\sum_{n\\geq1}\\Bigl(\\sum_{i=0}^{2d}(-1)^i\\Tr(F_{i,\\ell}^n\\mid V_{i,\\ell})\\Bigr)\\frac{T^n}{n}\\Bigr).\n$$\n$\\Ql$ is a field of characteristic zero [def-weil-l-adic-numbers], so clause 2, applied with $K=\\Ql$, $I=\\{0,\\ldots,2d\\}$ and $(V_i,u_i)=(V_{i,\\ell},F_{i,\\ell})$, for which $P_i=P_{i,\\ell}$, gives\n$$\n\\varphi\\bigl(Z(X_0,T)\\bigr)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\\quad\\text{in }\\Ql[[T]].\n$$",
    "uses": [
     "def-weil-point-counts-zeta",
-    "prop-every-iterate-trace",
+    "def-weil-coefficientwise-ring-hom-map",
+    "lem-weil-exp-coefficientwise-map",
+    "def-weil-l-adic-numbers",
     "def-weil-smooth-proper-cohomological-family"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "proof of Theorem 27.6, p. 156 (the four displayed lines) and proof of Corollary 27.8, p. 156 (Z(X_0,t) has coefficients in Q and is read in Q_l[[t]]); also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5.4), p. 276"
+   }
+  },
+  {
+   "text": "*Clause 3, the parity form and rationality.* For $0\\leq i\\leq2d$, $(-1)^{i+1}=1$ when $i$ is odd and $=-1$ when $i$ is even, so with the parity products [def-weil-parity-products]\n$$\n\\prod_{i=0}^{2d}P_{i,\\ell}^{(-1)^{i+1}}=\\Bigl(\\prod_{i\\text{ odd}}P_{i,\\ell}\\Bigr)\\Bigl(\\prod_{i\\text{ even}}P_{i,\\ell}\\Bigr)^{-1}=N_\\ell\\,D_\\ell^{-1},\n$$\nwhere $D_\\ell$ is a unit of $\\Ql[[T]]$ as a product of the units $P_{i,\\ell}$ (clause 1; each has constant coefficient $1$ by [lem-weil-reverse-charpoly-coefficients, clause 1]). Multiplying the previous step by $D_\\ell$ gives $\\varphi(Z(X_0,T))\\cdot D_\\ell=N_\\ell$ in $\\Ql[[T]]$, and conversely this identity gives back the product formula after multiplying by $D_\\ell^{-1}$. Since $N_\\ell,D_\\ell\\in\\Ql[T]$ and $D_\\ell(0)=1\\neq0$ (the constant coefficient of a product is the product of the constant coefficients [def-weil-polynomial-as-power-series]), this is exactly the definition of a rational power series over $\\Ql$ with rational function $N_\\ell/D_\\ell$ [def-weil-rational-power-series].",
+   "uses": [
+    "def-weil-parity-products",
+    "lem-weil-reverse-charpoly-coefficients",
+    "def-weil-polynomial-as-power-series",
+    "def-weil-rational-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 27.6 (the statement in quotient form P_1...P_{2d-1}/(P_0...P_{2d})), p. 156, and proof of Corollary 27.8, p. 156; also literature/deligne-weil-I_PMIHES-1974-43.pdf, after (1.5.4), p. 276 ('Le membre de droite est un élément de Q_l(t)')"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-point-counts-zeta",
+  "lem-weil-reverse-charpoly-coefficients",
+  "def-weil-polynomial-as-power-series",
+  "lem-weil-exp-trace-determinant",
+  "def-weil-power-series-exponential",
+  "lem-weil-power-series-exp-hom",
+  "prop-cohomological-finiteness",
+  "def-weil-smooth-proper-cohomological-family",
   "prop-every-iterate-trace",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-point-counts-zeta",
+  "def-weil-coefficientwise-ring-hom-map",
+  "lem-weil-exp-coefficientwise-map",
+  "def-weil-l-adic-numbers",
+  "def-weil-parity-products",
+  "def-weil-rational-power-series"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-trace-determinant.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Ch. II, §27, Proposition 27.3, Lemma 27.5, Theorem 27.6 and Corollary 27.8, pp. 155-156; with literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5), pp. 275-276"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'charpolyRev\\|trace_pow\\|sum_roots_charpoly\\|exp' over ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra and RingTheory/PowerSeries",
+   "results": "Matrix.charpolyRev, Matrix.coeff_charpolyRev_eq_neg_trace, LinearMap.trace_eq_sum_roots_charpoly_of_splits, PowerSeries.exp, PowerSeries.map_exp, PowerSeries.exp_mul_exp_eq_exp_add (e^{aX} only), PowerSeries.log/logOf; no exp-det identity, no exp of a sum of substituted series, nothing about zeta series",
+   "date": "2026-10-09",
+   "verdict": "no match: the linear-algebra clauses need the new nodes lem-weil-exp-trace-determinant and lem-weil-power-series-exp-hom; the geometric clause is not in Mathlib (no etale cohomology)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -73,5 +160,16 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-trace-determinant",
+  "worker": "stage1",
+  "summary": "Checked the imported proof against Milne LEC Ch. II §27 (Prop. 27.3, Lemma 27.5, Thm 27.6, Cor. 27.8, pp. 155-156) and Deligne Weil I (1.5), pp. 275-276, and rewrote it as five steps following Milne. The statement keeps its three parts but replaces the undefined formal logarithm by the formal exponential (the log forms are kept as parenthetical equivalents), states that each P_i is a unit, makes the coefficient extension Q[[T]] -> Q_l[[T]] explicit as the coefficientwise map phi, adds the equivalent parity form phi(Z)*D_l = N_l used by thm-weil-final-rationality, and makes 'belongs to Q_l(T) cap Q_l[[T]]' precise via def-weil-rational-power-series. Hidden arguments made into nodes: the exp-det identity (lem-weil-exp-trace-determinant, Milne Lemma 27.5, unsplit, not in Mathlib), the homomorphism property of exp used to pass the alternating sum over degrees into a product (lem-weil-power-series-exp-hom, unsplit, Mathlib has only e^{aX}e^{bX}), and compatibility of exp with coefficientwise maps (lem-weil-exp-coefficientwise-map, Mathlib leaf via PowerSeries.map_subst and PowerSeries.map_exp). stmt_deps now list every notion the statement uses; proof_deps add lem-weil-reverse-charpoly-coefficients, prop-cohomological-finiteness, def-weil-coefficientwise-ring-hom-map, def-weil-l-adic-numbers, def-weil-parity-products, def-weil-rational-power-series."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
  }
 }

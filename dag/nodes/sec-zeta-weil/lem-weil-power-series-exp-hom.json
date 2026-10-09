@@ -1,0 +1,56 @@
+{
+ "id": "lem-weil-power-series-exp-hom",
+ "kind": "statement",
+ "title": "The formal exponential turns sums into products",
+ "statement": "Let $R$ be a commutative $\\mathbf Q$-algebra and $T$ an indeterminate, with the ring $R[[T]]$ of formal power series [def-weil-formal-power-series] and the formal exponential $\\exp:TR[[T]]\\to1+TR[[T]]$ [def-weil-power-series-exponential], defined on series with constant coefficient $0$. Then $\\exp(0)=1$ and, for all $U,W\\in TR[[T]]$,\n\n$$\n \\exp(U+W)=\\exp(U)\\exp(W).\n$$\n\nConsequently $\\exp(U)$ is a unit of $R[[T]]$ with $\\exp(-U)=\\exp(U)^{-1}$, and for every finite family $(U_i)_{i\\in I}$ in $TR[[T]]$ and every family of integers $(\\varepsilon_i)_{i\\in I}$,\n\n$$\n \\exp\\Bigl(\\sum_{i\\in I}\\varepsilon_iU_i\\Bigr)=\\prod_{i\\in I}\\exp(U_i)^{\\varepsilon_i}.\n$$",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "proof of Theorem 27.6, p. 156, the step 'move the inner sum outside' (used without statement); also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5), p. 276 (passage from (1.5.2)-(1.5.3) to (1.5.4), used without statement)"
+ },
+ "stmt_deps": [
+  "def-weil-formal-power-series",
+  "def-weil-power-series-exponential"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exp_add\\|exp.*mul.*exp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries",
+   "results": "only PowerSeries.exp_mul_exp_eq_exp_add (Exp.lean:123): rescale a (exp A) * rescale b (exp A) = rescale (a+b) (exp A), i.e. e^{aX}e^{bX}=e^{(a+b)X} for constants a,b of A, and exp_mul_exp_neg_eq_one (Exp.lean:150)",
+   "date": "2026-10-09",
+   "verdict": "no match: the functional equation is stated only for e^{aX} with a a constant, not for (exp R).subst U with U of constant coefficient 0; deducing the substituted form needs a bivariate argument, not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Substitution.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Substitution.lean",
+   "results": "no lemma about exp (only the word 'explicit' in a docstring)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Log.lean",
+   "results": "log, logOf, HasSubst.log, HasSubst.exp_sub_one, constantCoeff_logOf, logOf_one_add_X; no logOf_mul or exp/log inverse statements",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-trace-determinant",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
