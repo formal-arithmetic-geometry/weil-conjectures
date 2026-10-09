@@ -12,9 +12,94 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the presheaf colimit $\\mathcal P$ is a presheaf of commutative rings under $\\mathcal O_X$).* $I$ is nonempty (a directed set is nonempty, Stacks Categories, Definition 00D3) and, regarded as a category ($i\\to i'$ iff $i\\le i'$), filtered. Fix an open $U\\subseteq X$ and put $R=\\mathcal O_X(U)$. Each $\\mathcal A_i(U)$ is a commutative $R$-algebra by $\\sigma_{i,U}$, and the $\\varphi_{i'i,U}$ are $R$-algebra maps (they commute with the structure maps). By [lem-weil-pbc-commutative-algebras-colimits-exist] the system $(\\mathcal A_i(U),\\varphi_{i'i,U})$ has a colimit $(\\mathcal P(U),(c_{i,U}))$ in commutative $R$-algebras, with structure map $\\sigma_{\\mathcal P,U}:R\\to\\mathcal P(U)$, and by [lem-weil-pbc-filtered-colimit-algebras-elementwise](1) $(\\mathcal P(U),(c_{i,U}))$ is also a colimit [def-weil-pbc-category-colimit] of the underlying system of commutative rings; this is the directed colimit of the statement (any other choice is uniquely isomorphic to it compatibly with the coprojections). Since $c_{i,U}$ is an $R$-algebra map, $c_{i,U}\\circ\\sigma_{i,U}=\\sigma_{\\mathcal P,U}$ for every $i$: the map $r\\mapsto c_{i,U}(\\sigma_{i,U}(r))$ is independent of $i$. For opens $V\\subseteq U$ the ring maps $c_{i,V}\\circ\\mathrm{res}^{\\mathcal A_i}_{U,V}:\\mathcal A_i(U)\\to\\mathcal P(V)$ satisfy $c_{i',V}\\,\\mathrm{res}\\,\\varphi_{i'i,U}=c_{i',V}\\varphi_{i'i,V}\\,\\mathrm{res}=c_{i,V}\\,\\mathrm{res}$ (the $\\varphi_{i'i}$ are morphisms of presheaves), so by the universal property of the ring colimit there is exactly one ring map $\\rho_{U,V}:\\mathcal P(U)\\to\\mathcal P(V)$ with $\\rho_{U,V}c_{i,U}=c_{i,V}\\,\\mathrm{res}_{U,V}$ for all $i$. Uniqueness gives $\\rho_{U,U}=\\mathrm{id}$ and $\\rho_{V,W}\\rho_{U,V}=\\rho_{U,W}$ for $W\\subseteq V\\subseteq U$ (both sides satisfy the defining identity), so $\\mathcal P$ is a presheaf of commutative rings and the $c_i:\\mathcal A_i\\to\\mathcal P$ are morphisms of presheaves of rings with $c_{i'}\\varphi_{i'i}=c_i$. Finally $\\sigma_{\\mathcal P}$ is a morphism of presheaves of rings $\\mathcal O_X\\to\\mathcal P$: $\\rho_{U,V}\\sigma_{\\mathcal P,U}(r)=\\rho_{U,V}c_{i,U}\\sigma_{i,U}(r)=c_{i,V}(\\sigma_{i,U}(r)|_V)=c_{i,V}\\sigma_{i,V}(r|_V)=\\sigma_{\\mathcal P,V}(r|_V)$, since $\\sigma_i$ is a morphism of sheaves.",
+   "uses": [
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D (section-limits-presheaves: colimits of presheaves are computed sectionwise, $(\\colim_i\\mathcal F_i)(U)=\\colim_i\\mathcal F_i(U)$, 'the proofs are all easy'); written out here for presheaves of rings under $\\mathcal O_X$, with Algebra, Lemma 00D6 for the directed colimit"
+   }
+  },
+  {
+   "text": "*Step 2 (the underlying presheaf of $\\mathcal O_X$-modules of $\\mathcal P$ is the colimit in presheaves of modules).* Regard $\\mathcal A_i$ and $\\mathcal P$ as presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] by $r\\cdot a=\\sigma_i(r)a$ and $r\\cdot p=\\sigma_{\\mathcal P}(r)p$; the restriction maps are semilinear because $\\sigma_i,\\sigma_{\\mathcal P}$ commute with restriction and the restrictions are ring maps (Step 1), and $\\varphi_{i'i}$, $c_i$ are $\\mathcal O_X$-linear because they are ring maps commuting with the structure maps. Claim: for each open $U$, $(\\mathcal P(U),(c_{i,U}))$ is a colimit of the $R$-modules $\\mathcal A_i(U)$, $R=\\mathcal O_X(U)$. Let $g_i:\\mathcal A_i(U)\\to M$ be $R$-linear with $g_{i'}\\varphi_{i'i,U}=g_i$. By [lem-weil-pbc-filtered-colimit-algebras-elementwise](2) every element of $\\mathcal P(U)$ is $c_{i,U}(a)$ for some $i$ and $a\\in\\mathcal A_i(U)$; put $g(c_{i,U}(a))=g_i(a)$. This is well defined: if $c_{i,U}(a)=c_{j,U}(b)$ then by [lem-weil-pbc-filtered-colimit-rings-zero] there is $k\\ge i,j$ with $\\varphi_{ki}(a)=\\varphi_{kj}(b)$, so $g_i(a)=g_k\\varphi_{ki}(a)=g_k\\varphi_{kj}(b)=g_j(b)$. It is additive: two elements can be written $c_{k,U}(a),c_{k,U}(b)$ at a common index $k$ ($I$ directed, $c_{k}\\varphi_{ki}=c_i$), and $c_{k,U}(a)+c_{k,U}(b)=c_{k,U}(a+b)$. It is $R$-linear: $r\\cdot c_{i,U}(a)=\\sigma_{\\mathcal P}(r)c_{i,U}(a)=c_{i,U}(\\sigma_i(r))c_{i,U}(a)=c_{i,U}(r\\cdot a)$, so $g(r\\cdot c_{i,U}(a))=g_i(ra)=rg_i(a)$. Clearly $gc_{i,U}=g_i$, and $g$ is unique with this property because the images of the $c_{i,U}$ cover $\\mathcal P(U)$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] the sectionwise colimit $\\mathcal Q:V\\mapsto\\colim_i\\mathcal A_i(V)$ (colimit of $\\mathcal O_X(V)$-modules) with its coprojections $q_i$ is a colimit of the diagram $(\\mathcal A_i)$ in the category $\\mathrm{PMod}(\\mathcal O_X)$ of presheaves of $\\mathcal O_X$-modules. By the claim, for each $U$ there is a unique $\\mathcal O_X(U)$-linear isomorphism $\\alpha_U:\\mathcal Q(U)\\to\\mathcal P(U)$ with $\\alpha_Uq_{i,U}=c_{i,U}$ (comparison of two colimits [def-weil-pbc-category-colimit]); $\\alpha$ commutes with restrictions, since $\\rho_{U,V}\\alpha_U$ and $\\alpha_V\\,\\mathrm{res}^{\\mathcal Q}_{U,V}$ agree on every $q_{i,U}(a)$ and maps out of $\\mathcal Q(U)$ are determined by their composites with the $q_{i,U}$. So $\\alpha:\\mathcal Q\\to\\mathcal P$ is an isomorphism in $\\mathrm{PMod}(\\mathcal O_X)$ carrying $q_i$ to $c_i$, and $(\\mathcal P,(c_i))$ is a colimit of $(\\mathcal A_i)$ in $\\mathrm{PMod}(\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00D6 (lemma-directed-colimit: the directed colimit of modules as $\\coprod M_i/\\sim$ with operations at a common later index; the same set and addition underlie the directed colimit of rings) and Lemma 00D7 (lemma-zero-directed-limit); Sheaves, Section 009D (sheaves.tex, colimits of presheaves sectionwise); Modules, Lemma 01AH (modules.tex, lemma-limits-colimits) for presheaves of modules"
+   }
+  },
+  {
+   "text": "*Step 3 (the sheafification is a sheaf of $\\mathcal O_X$-algebras and the $\\iota_i$ form a cocone; first half of (1)).* By [lem-weil-pbc-ring-sheafification-space-underlying-abelian](1) the presheaf of commutative rings $\\mathcal P$ of Step 1 has a sheafification $\\theta:\\mathcal P\\to\\mathcal A=\\mathcal P^\\#$ in sheaves of commutative rings [def-weil-pbc-sheafification]. Put $\\sigma=\\theta\\circ\\sigma_{\\mathcal P}:\\mathcal O_X\\to\\mathcal A$, a composite of morphisms of presheaves of rings between sheaves, hence a morphism of sheaves of rings; so $(\\mathcal A,\\sigma)$ is a sheaf of commutative $\\mathcal O_X$-algebras, an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] by $r\\cdot a=\\sigma(r)a$ (restriction is semilinear since $\\sigma$ and the restrictions of $\\mathcal A$ are ring maps compatible with restriction). The maps $\\iota_i=\\theta\\circ c_i$ are morphisms of sheaves of rings with $\\iota_i\\sigma_i=\\theta c_i\\sigma_i=\\theta\\sigma_{\\mathcal P}=\\sigma$ (Step 1), i.e. morphisms of sheaves of commutative $\\mathcal O_X$-algebras, and $\\iota_{i'}\\varphi_{i'i}=\\theta c_{i'}\\varphi_{i'i}=\\theta c_i=\\iota_i$. Moreover $\\theta$ is $\\mathcal O_X$-linear from the presheaf of modules $\\mathcal P$ of Step 2 to $\\mathcal A$: $\\theta(\\sigma_{\\mathcal P}(r)p)=\\theta(\\sigma_{\\mathcal P}(r))\\theta(p)=\\sigma(r)\\theta(p)$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures) for commutative rings; Section 009E (section-limits-sheaves) item (3): the colimit is the sheafification of the presheaf colimit"
+   }
+  },
+  {
+   "text": "*Step 4 (universal property in sheaves of commutative $\\mathcal O_X$-algebras; rest of (1)).* Let $(\\mathcal B,\\tau)$ be a sheaf of commutative $\\mathcal O_X$-algebras and $\\beta_i:\\mathcal A_i\\to\\mathcal B$ morphisms of such with $\\beta_{i'}\\varphi_{i'i}=\\beta_i$. For each open $U$ the ring maps $\\beta_{i,U}$ are compatible with the $\\varphi_{i'i,U}$, so by the colimit property of $(\\mathcal P(U),(c_{i,U}))$ in rings (Step 1, [def-weil-pbc-category-colimit]) there is exactly one ring map $b_U:\\mathcal P(U)\\to\\mathcal B(U)$ with $b_Uc_{i,U}=\\beta_{i,U}$ for all $i$. The family $b$ is a morphism of presheaves: $\\mathrm{res}^{\\mathcal B}_{U,V}b_U$ and $b_V\\rho_{U,V}$ are ring maps $\\mathcal P(U)\\to\\mathcal B(V)$ whose composites with $c_{i,U}$ both equal $\\beta_{i,V}\\,\\mathrm{res}_{U,V}$ ($\\beta_i$ commutes with restriction), so they are equal by uniqueness. And $b\\sigma_{\\mathcal P}=bc_i\\sigma_i=\\beta_i\\sigma_i=\\tau$. By the universal property of $\\theta$ ([lem-weil-pbc-ring-sheafification-space-underlying-abelian](1)) there is exactly one morphism of sheaves of commutative rings $u:\\mathcal A\\to\\mathcal B$ with $u\\theta=b$. Then $u\\iota_i=u\\theta c_i=bc_i=\\beta_i$ and $u\\sigma=u\\theta\\sigma_{\\mathcal P}=b\\sigma_{\\mathcal P}=\\tau$, so $u$ is a morphism of sheaves of $\\mathcal O_X$-algebras with $u\\iota_i=\\beta_i$. Uniqueness: if $u'$ is a morphism of sheaves of $\\mathcal O_X$-algebras with $u'\\iota_i=\\beta_i$ for all $i$, then $(u'\\theta)_Uc_{i,U}=\\beta_{i,U}$ for all $i,U$, so $u'\\theta=b$ by the uniqueness of each $b_U$, hence $u'=u$ by the uniqueness in the universal property of $\\theta$. So $(\\mathcal A,(\\iota_i))$ is a colimit [def-weil-pbc-category-colimit] of the system in sheaves of commutative $\\mathcal O_X$-algebras.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009E (section-limits-sheaves) item (3) and Lemma 0087 (2) (universal property of the sheafification of a presheaf of algebraic structures); the assembly for algebras under $\\mathcal O_X$ is not stated in Stacks and is written out here"
+   }
+  },
+  {
+   "text": "*Step 5 (the underlying $\\mathcal O_X$-module is the colimit in $\\Mod(\\mathcal O_X)$; clause (2)).* Let $\\eta:\\mathcal P\\to\\mathcal P^\\#_{\\mathrm{mod}}$ be the sheafification of the presheaf of $\\mathcal O_X$-modules $\\mathcal P$ of Step 2 [def-weil-presheaf-modules-sheafification] (on the opens of $X$, abelian presheaves have sheafifications: Stacks Sheaves, Lemma 0085, [def-weil-pbc-sheafification]); it is left adjoint to the inclusion $\\Mod(\\mathcal O_X)\\to\\mathrm{PMod}(\\mathcal O_X)$. (a) *$\\mathcal P^\\#_{\\mathrm{mod}}$ with the $\\eta c_i$ is a colimit of $(\\mathcal A_i)$ in $\\Mod(\\mathcal O_X)$.* By Step 2, $(\\mathcal P,(c_i))$ is a colimit of the $\\mathcal A_i$ in $\\mathrm{PMod}(\\mathcal O_X)$; by [lem-weil-pbc-left-adjoint-preserves-colimits] the sheafification sends it to a colimit $(\\mathcal P^\\#_{\\mathrm{mod}},(c_i^\\#))$ of the $\\mathcal A_i^\\#$, where $c_i^\\#\\eta_{\\mathcal A_i}=\\eta c_i$. Since $\\mathcal A_i$ is already a sheaf of $\\mathcal O_X$-modules, $\\eta_{\\mathcal A_i}:\\mathcal A_i\\to\\mathcal A_i^\\#$ is an isomorphism (the identity of $\\mathcal A_i$ factors as $e\\eta_{\\mathcal A_i}$, and $\\eta_{\\mathcal A_i}e\\eta_{\\mathcal A_i}=\\eta_{\\mathcal A_i}$ gives $\\eta_{\\mathcal A_i}e=\\mathrm{id}$ by uniqueness of factorizations), natural in $i$; replacing $\\mathcal A_i^\\#$ by $\\mathcal A_i$ along these isomorphisms, $(\\mathcal P^\\#_{\\mathrm{mod}},(\\eta c_i))$ is a colimit of $(\\mathcal A_i)$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. (b) *Comparison with $\\mathcal A$.* By Step 3, $\\theta:\\mathcal P\\to\\mathcal A$ is an $\\mathcal O_X$-linear map into a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], so $\\theta=v\\eta$ for exactly one $\\mathcal O_X$-linear $v:\\mathcal P^\\#_{\\mathrm{mod}}\\to\\mathcal A$. Forget the module structures: the underlying abelian sheaf of $\\mathcal P^\\#_{\\mathrm{mod}}$ with $\\eta$ is the sheafification of the underlying abelian presheaf of $\\mathcal P$ (by the construction in [def-weil-presheaf-modules-sheafification]), and so is the underlying abelian sheaf of $\\mathcal A$ with $\\theta$ ([lem-weil-pbc-ring-sheafification-space-underlying-abelian](2)). By the universal property of $\\theta$ among abelian sheaves there is a morphism of abelian sheaves $w:\\mathcal A\\to\\mathcal P^\\#_{\\mathrm{mod}}$ with $w\\theta=\\eta$; then $wv\\eta=\\eta$ and $vw\\theta=\\theta$, so $wv=\\mathrm{id}$ and $vw=\\mathrm{id}$ by the uniqueness parts of the two universal properties [def-weil-pbc-sheafification]. Hence $v$ is bijective on every open; the inverse of an $\\mathcal O_X(U)$-linear bijection is linear, so $v$ is an isomorphism in $\\Mod(\\mathcal O_X)$, and $v\\eta c_i=\\theta c_i=\\iota_i$. Transporting (a) along $v$: the underlying $\\mathcal O_X$-module of $\\mathcal A$, with the $\\iota_i$, is a colimit of the underlying $\\mathcal O_X$-modules of the $\\mathcal A_i$ in $\\Mod(\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (lemma-limits-colimits) (2): colimits in $\\Mod(\\mathcal O_X)$ are the sheafification of the presheaf colimit; Sheaves, Lemma 0089 (sheaves.tex, lemma-sheafification-presheaf-modules: the module sheafification is the abelian sheafification with its module structure, and its adjointness) and Lemma 0087 (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-category-colimit",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Sections 009D and 009E (3), Lemmas 0087 and 0089; Modules, Lemma 01AH (2); Algebra, Lemma 00D6. Stacks gives the ingredients for sheaves of sets, of algebraic structures and of modules; the assembly for sheaves of commutative O_X-algebras (Step 4) and the comparison of the algebra colimit with the module colimit (Steps 2 and 5) is written by the agent from them."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +128,38 @@
    "results": "no sheaf-of-algebras notion in Mathlib; filtered colimits: CommRingCat.FilteredColimits.forget_preservesFilteredColimits (Ring/FilteredColimits.lean:363), AlgCat forget₂ to RingCat preserves filtered colimits (AlgCat/FilteredColimits.lean:92); Sheaf.instHasColimitsOfShape (Sites/Limits.lean) for CommRingCat-valued sheaves",
    "date": "2026-10-10",
    "verdict": "no match (ingredients only: CommRingCat-valued sheaf colimits by sheafification, filtered colimits of rings computed on sets)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "results": "CategoryTheory.Sheaf.isColimitSheafifyCocone {F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (Sheaf.sheafifyCocone E) (Mathlib.CategoryTheory.Sites.Limits, line 213; sheafifyCocone line 189, sheafifyCocone_ι_app_val; instance HasColimitsOfShape K (Sheaf J D) line 218)",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (D-valued sheaves for a fixed D; gives the CommRingCat-valued colimit, but no structure map from a sheaf of rings O_X and no comparison with Mod(O_X)); usable in stage 2 for Step 4 with D = CommRingCat if sheaves of O_X-algebras are modelled as Under O_X in Sheaf J CommRingCat"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of algebras over a sheaf of commutative rings; colimit of sheaves of algebras",
+   "results": "AlgebraicGeometry.PresheafedSpace.colimit, LocallyRingedSpace.coproductCofanIsColimit, LocallyRingedSpace.instHasColimits, SheafOfModules.Presentation.isColimit, SheafOfModules, CategoryTheory.Sheaf.createsColimitOfIsSheaf, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat (Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'SheafOfAlgebras\\|PresheafOfAlgebras\\|SheafOfCommAlg\\|CommAlgCat.*Sheaf\\|Sheaf.*CommAlgCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'instance' Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+   "results": "no file: Mathlib has no notion of a sheaf of algebras over a sheaf of rings; SheafOfModules colimits: instances HasColimitsOfShape K (SheafOfModules R) (Sheaf/Colimits.lean:32, :40) from colimits of presheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match (confirmed: sheaves of algebras over a sheaf of rings are not in Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafify.*colimit\\|colimit.*sheafif' ~/weil-conjectures-slopmaster2/WeilConjectures (source repository, not Mathlib)",
+   "results": "CategoryTheory.GrothendieckTopology.hasCountableCoproducts_sheaf_of_essentiallySmall (WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape; no sorry reachable, 78 decls), AlgebraicGeometry.Etale.hasCountableCoproducts_sheaf (same module, no sorry reachable), CategoryTheory.HasSmallSiteSheafify.of_concreteCategory (GrothendieckAbelian.ConcreteCoefficients, no sorry reachable); docstring mentions in SixFunctors/Finite/Exact.lean and SixFunctors/OpenClosed/Exact.lean",
+   "date": "2026-10-10",
+   "verdict": "no declaration of the source repository states the item (countable coproducts of abelian sheaves and small-site sheafification only)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,6 +184,12 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement: directed colimits of sheaves of commutative O_X-algebras on a ringed space exist as the sheafification of the presheaf colimit, with the module colimit underlying (Sheaves 009E/0087/0089, Modules 01AH); correct; unsplit."
+  "note": "Five agent-written steps (Stacks has no algebra-case lemma; 009E/0087/0089/01AH/00D6-00D7 cited): presheaf colimit of algebras (new leaf lem-weil-pbc-commutative-algebras-colimits-exist, instHasColimitsCommAlgCat CommAlgCat/Basic.lean:213, checked), sectionwise module colimit written out, ring sheafification (new leaf lem-weil-pbc-ring-sheafification-space-underlying-abelian: sheafificationAdjunction + sheafifyComposeIso PreservesSheafification.lean:233, checked), universal property in sheaves of algebras, the module colimit via the left-adjoint leaf and the identification of the two sheafifications. Checked. The brief′s suggestion to cite lem-weil-pbc-module-sheaves-colimits-forgetful was avoided (route), fine."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Sheaves 009D/009E(3), 0087, 0089 and Modules 01AH; a directed set is nonempty by Categories 00D3, so the structure map O_X -> P is defined). Proof written in five steps: (1) the presheaf colimit P is a presheaf of commutative rings under O_X (colimit in R-algebras exists, new leaf lem-weil-pbc-commutative-algebras-colimits-exist, and is the ring colimit by lem-weil-pbc-filtered-colimit-algebras-elementwise(1)); (2) P is sectionwise the colimit of O_X(U)-modules (elementwise(2) and filtered-colimit-rings-zero), hence the colimit in PMod(O_X) (presheaf-modules-colimits-sectionwise); (3) the ring sheafification theta (new leaf lem-weil-pbc-ring-sheafification-space-underlying-abelian, Stacks 0087, Mathlib sheafifyComposeIso) with sigma = theta o sigma_P, iota_i = theta o c_i; (4) universal property among sheaves of O_X-algebras via the sectionwise ring colimit and the universal property of theta; (5) the module sheafification of P is a colimit in Mod(O_X) (left adjoint preserves colimits) and is isomorphic to A by comparing the two abelian sheafifications. The brief's suggested lem-weil-pbc-module-sheaves-colimits-forgetful (unit sk-thm-reduction, not on this unit's route) and lem-weil-pbc-ring-sheafification-underlying-sets (stated for the etale site only) are not used; lem-weil-pbc-sheaf-algebraic-structures-objects is not needed. Mathlib: no sheaves of algebras over a sheaf of rings; isColimitSheafifyCocone covers the CommRingCat-valued part only."
  }
 }

@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+ "kind": "statement",
+ "title": "Sheafification of a presheaf of commutative rings on a space: existence and underlying abelian sheaf",
+ "statement": "Let $X$ be a topological space and $\\mathcal P$ a presheaf of commutative rings on $X$. Then (1) $\\mathcal P$ has a sheafification $\\theta:\\mathcal P\\to\\mathcal P^\\#$ in sheaves of commutative rings [def-weil-pbc-sheafification]: $\\mathcal P^\\#$ is a sheaf of commutative rings on $X$, $\\theta$ is a morphism of presheaves of commutative rings, and every morphism of presheaves of commutative rings from $\\mathcal P$ to a sheaf of commutative rings $\\mathcal B$ factors as $u\\circ\\theta$ for exactly one morphism of sheaves of commutative rings $u:\\mathcal P^\\#\\to\\mathcal B$; (2) the underlying presheaf of abelian groups of $\\mathcal P^\\#$ is a sheaf of abelian groups, and with the map $\\theta$ (regarded as a morphism of presheaves of abelian groups) it is a sheafification of the underlying presheaf of abelian groups of $\\mathcal P$: every morphism of presheaves of abelian groups from $\\mathcal P$ to a sheaf of abelian groups factors uniquely through $\\theta$ by a morphism of sheaves of abelian groups. (Likewise the underlying sheaf of sets of $\\mathcal P^\\#$, with $\\theta$, is the sheafification of the underlying presheaf of sets of $\\mathcal P$.)",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures: for a type of algebraic structure $(\\mathcal C,F)$, (1) the underlying sheaf of sets of $\\mathcal F^\\#$ is the sheafification of the underlying presheaf of sets, (2) the universal property among sheaves with values in $\\mathcal C$), applied to commutative rings and to abelian groups, which are types of algebraic structure by Lemma 007N (lemma-list-algebraic-structures); clause (2) follows by applying 0087 to the underlying abelian presheaf and comparing the two sheafifications on underlying sheaves of sets (both are the sheafification of the same presheaf of sets); for sites: Sites, Section 00YR (section-sheaves-algebraic-structures), property ($\\gamma$)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of a presheaf of commutative rings, underlying presheaf of abelian groups is the sheafification of the underlying abelian presheaf",
+   "results": "TopCat.Presheaf.sheafify (Topology.Sheaves.Sheafify, types only), PresheafOfModules.sheafification, PresheafOfModules.toSheafify, PresheafOfModules.sheafify (Algebra.Category.ModuleCat.Presheaf.Sheafify), SheafOfModules.toSheaf_obj_val",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the general statement is CategoryTheory.sheafifyComposeIso (found by loogle and grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafifyComposeIso",
+   "results": "CategoryTheory.sheafifyComposeIso (F : A ⥤ B) [HasWeakSheafify J A] [HasWeakSheafify J B] [J.HasSheafCompose F] [J.PreservesSheafification F] (P : Cᵒᵖ ⥤ A) : sheafify J (P ⋙ F) ≅ sheafify J P ⋙ F; sheafComposeIso_hom_fac : toSheafify J (P ⋙ F) ≫ (sheafifyComposeIso J F P).hom = whiskerRight (toSheafify J P) F; sheafComposeIso_inv_fac (Mathlib.CategoryTheory.Sites.PreservesSheafification)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization, specializes in one line)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from commutative rings to abelian groups commutes with sheafification on a Grothendieck topology",
+   "results": "PresheafOfModules.sheafification, PresheafOfModules.toPresheaf_map_toSheafify, PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafify",
+   "date": "2026-10-10",
+   "verdict": "no direct hit for rings (module analogues only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|def sheafifyComposeIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; grep -n 'Preserves' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/Ring/FilteredColimits.lean; sed -n 280,316p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/LeftExact.lean",
+   "results": "sheafifyComposeIso (line 233), sheafComposeIso_hom_fac (239); instance PreservesSheafification J F (line 298) for F : D ⥤ E between concrete categories whose forgetful functors preserve limits and the colimits over (J.Cover X)ᵒᵖ and reflect isos, F preserving those colimits and multicospan limits; forget₂ CommRingCat RingCat preserves filtered colimits (FilteredColimits.lean:355), forget₂ RingCat AddCommGrpCat preserves filtered colimits (line 301), forget CommRingCat preserves filtered colimits (363); HasSheafify J D for concrete D (LeftExact.lean:308, via plusPlusAdjunction)",
+   "date": "2026-10-10",
+   "verdict": "match: the instances apply to F = forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat on Opens.grothendieckTopology X"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafifyComposeIso",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "how": "specializes in one line: with J = Opens.grothendieckTopology X, A = CommRingCat, (1) is the adjunction sheafificationAdjunction J CommRingCat (HasSheafify J CommRingCat from the plus construction, Sites/LeftExact.lean:308) as recorded on def-weil-pbc-sheafification; (2) is sheafifyComposeIso J F P (line 233) with sheafComposeIso_hom_fac (line 239) for F = forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat, PreservesSheafification J F by the instance at line 298 (F preserves filtered colimits: Ring/FilteredColimits.lean:355 and :301; and limits); the sets clause is the same with F = forget CommRingCat (instance line 305). That the instances resolve at the universes of the source repository is to be confirmed in stage 2."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: sheafificationAdjunction (HasSheafify, LeftExact.lean:308) and sheafifyComposeIso / sheafComposeIso_hom_fac (PreservesSheafification.lean:233/239) with the forgetful functor to AddCommGrpCat; checked."
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-commutative-algebras-colimits-exist",
+ "kind": "statement",
+ "title": "Colimits of commutative algebras over a commutative ring exist",
+ "statement": "Let $R$ be a commutative ring and $\\mathcal C_R$ the category of commutative $R$-algebras (commutative rings $A$ with a ring homomorphism $R\\to A$; morphisms are ring homomorphisms commuting with the structure maps). Then every diagram $D:I\\to\\mathcal C_R$ indexed by a small category $I$ (in particular every directed system $(A_i,\\varphi_{i'i})_{i\\le i'}$ over a directed set $I$) has a colimit [def-weil-pbc-category-colimit] in $\\mathcal C_R$. For $R=\\mathbf Z$ this says that every small diagram of commutative rings has a colimit.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 07N7 (section-colimits), Lemma 00D6 (lemma-directed-colimit: the directed colimit of modules as the disjoint union modulo the relation, with sum and scalar multiplication defined at a common later index; the ring structure is defined in the same way, the product of the classes of $a\\in A_i$, $a'\\in A_{i'}$ being the class of $\\varphi_{ji}(a)\\varphi_{ji'}(a')$ for $j\\ge i,i'$, and the structure map $R\\to A$ is $r\\mapsto$ class of $\\sigma_i(r)$); general small diagrams: Categories, Lemma 002P (lemma-colimits-coproducts-coequalizers) with coproducts the tensor products over $R$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of commutative algebras over a commutative ring has colimits",
+   "results": "instHasColimitsCommAlgCat (Mathlib.Algebra.Category.CommAlgCat.Basic), CommAlgCat.binaryCofanIsColimit, CommRingCat.pushoutCoconeIsColimit, CommRingCat.Colimits.colimit (Mathlib.Algebra.Category.Ring.Colimits)",
+   "date": "2026-10-10",
+   "verdict": "match: instHasColimitsCommAlgCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the category of commutative R-algebras has all colimits",
+   "results": "instHasColimitsCommAlgCat : ∀ {R : Type u} [CommRing R], HasColimits (CommAlgCat R) (Mathlib.Algebra.Category.CommAlgCat.Basic); CommRingCat.Colimits.hasColimits_commRingCat (Mathlib.Algebra.Category.Ring.Colimits)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|Colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/CommAlgCat/Basic.lean",
+   "results": "line 213: instance : HasColimits (CommAlgCat.{u} R) := Adjunction.has_colimits_of_equivalence (commAlgCatEquivUnder (.of R)).functor (R : Type u, algebras in the same universe u)",
+   "date": "2026-10-10",
+   "verdict": "match (read the source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instHasColimitsCommAlgCat",
+  "file": "Mathlib/Algebra/Category/CommAlgCat/Basic.lean",
+  "how": "exact: `instance : HasColimits (CommAlgCat.{u} R)` (line 213), for `R : Type u` a commutative ring and algebras in the same universe; the commutative-ring case is `CommRingCat.Colimits.hasColimits_commRingCat` (Mathlib/Algebra/Category/Ring/Colimits.lean)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf instHasColimitsCommAlgCat (CommAlgCat/Basic.lean:213), CommRingCat.Colimits.hasColimits_commRingCat; checked."
+ }
+}
