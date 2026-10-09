@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Stalk
 
@@ -55,7 +56,7 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
 
 universe u
 
-open CategoryTheory MonoidalCategory Endofunctor
+open CategoryTheory MonoidalCategory Endofunctor Limits
 
 namespace AlgebraicGeometry
 
@@ -68,16 +69,48 @@ section Monoidal
 sums of copies of `ℚ̄_ℓ,X`, and `𝓗om_{ℚ̄_ℓ,X}(ℚ̄_ℓ,X, ℚ̄_ℓ,X) = ℚ̄_ℓ,X`. -/
 theorem ProEtale.IsAdicLisseSheaf.ihom {Z : Scheme.{u}}
     {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
-    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
-  sorry
+    (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf ((ProEtale.AdicSheaf.ihom F).obj G) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨R', hR', hR'G⟩ := hG
+  obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  obtain ⟨ι', V', f', rfl⟩ := R'.exists_eq_ofArrows
+  refine ⟨_, Precoverage.comp_mem_coverings f hR (fun i j ↦ pullback.fst (f i) (f' j))
+    (fun i ↦ Precoverage.mem_coverings_of_isPullback f' hR' (f i) _ _
+      fun j ↦ IsPullback.of_hasPullback (f i) (f' j)), ?_⟩
+  rintro _ _ ⟨⟨i, j⟩⟩
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR' (.mk j)
+  have : WeaklyEtale (pullback.fst (f i) (f' j)) :=
+    MorphismProperty.pullback_fst _ _ ‹WeaklyEtale (f' j)›
+  have : WeaklyEtale (pullback.fst (f i) (f' j) ≫ f i) :=
+    have : MorphismProperty.IsStableUnderComposition
+        (@WeaklyEtale : MorphismProperty Scheme.{u}) :=
+      MorphismProperty.IsMultiplicative.toIsStableUnderComposition
+    MorphismProperty.comp_mem _ _ _ ‹_› ‹_›
+  obtain ⟨n, ⟨e⟩⟩ := hRF (f i) (.mk i)
+  obtain ⟨m, ⟨e'⟩⟩ := hR'G (f' j) (.mk j)
+  obtain ⟨e₁⟩ := ProEtale.nonempty_upperStar_iso_biproduct (pullback.fst (f i) (f' j))
+    ⟨ProEtale.adicUpperStarUnitIso l _⟩ e
+  obtain ⟨e₂⟩ := ProEtale.nonempty_upperStar_iso_biproduct (pullback.snd (f i) (f' j))
+    ⟨ProEtale.adicUpperStarUnitIso l _⟩ e'
+  refine ⟨n * m, ⟨(ProEtale.adicUpperStarIhomIso l (pullback.fst (f i) (f' j) ≫ f i) F).app G ≪≫
+    (Mod.ihomMapIso ((ProEtale.adicUpperStarComp l _ _).app F ≪≫ e₁)).symm.app _ ≪≫
+    (ProEtale.AdicSheaf.ihom _).mapIso ((ProEtale.adicUpperStarCongr l pullback.condition).app G ≪≫
+      (ProEtale.adicUpperStarComp l _ _).app G ≪≫ e₂) ≪≫ Mod.ihomFreeIso n m⟩⟩
 
 /-- The internal hom from a lisse sheaf into a constructible sheaf is constructible: on the
-strata of the second sheaf it is the internal hom of two lisse sheaves. -/
+strata of the second sheaf it is the internal hom of two lisse sheaves
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar_ihom`). -/
 theorem ProEtale.IsAdicConstructibleSheaf.ihom_of_isAdicLisseSheaf {Z : Scheme.{u}}
     {F G : ProEtale.AdicSheaf l Z} (hF : IsAdicLisseSheaf F)
     (hG : IsAdicConstructibleSheaf G) :
-    IsAdicConstructibleSheaf ((ProEtale.AdicSheaf.ihom F).obj G) :=
-  sorry
+    IsAdicConstructibleSheaf ((ProEtale.AdicSheaf.ihom F).obj G) := by
+  intro x
+  obtain ⟨W, j, hj, hx, ι, hι, S, i, hi, hc, hcover, h⟩ := hG x
+  have : WeaklyEtale j := inferInstance
+  exact ⟨W, j, hj, hx, ι, hι, S, i, hi, hc, hcover, fun k ↦
+    ((hF.upperStar j).upperStar_ihom (i k) (h k)).of_iso
+      ((ProEtale.adicUpperStar l (i k)).mapIso ((ProEtale.adicUpperStarIhomIso l j F).app G).symm)⟩
 
 variable (k₀ l X) in
 /-- The internal hom `𝓗om_{ℚ̄_ℓ,X̄}(A, B)` of two pro-étale Weil sheaves, with the Weil
@@ -117,6 +150,51 @@ lemma ProEtaleWeilSheaf.ihom_map_comm (A : ProEtaleWeilSheaf k₀ l X)
   rw [reassoc_of% h₁, reassoc_of% h₂, ← Functor.map_comp, ← Functor.map_comp]
   congr 3
   exact f.hom.h
+
+variable (k₀ l X) in
+/-- The tensor product `B ⊗_{ℚ̄_ℓ,X̄} A` of two pro-étale Weil sheaves, with the Weil structure
+```
+  Fr^* (B ⊗ A) ≅ Fr^* B ⊗ Fr^* A ≅ Fr^* B ⊗ A ≅ B ⊗ A
+```
+given by the compatibility of the pushforward along the automorphism `Fr⁻¹` with tensor
+products (`AlgebraicGeometry.ProEtale.adicLowerStarTensorLeftIso`) and the Weil structures of `A`
+and `B`. -/
+noncomputable def ProEtaleWeilSheaf.tensor (A B : ProEtaleWeilSheaf k₀ l X) :
+    ProEtaleWeilSheaf k₀ l X :=
+  IsoAlgebra.mk ((Mod.tensorLeft A.carrier).obj B.carrier)
+    ((ProEtale.adicLowerStarTensorLeftIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).app B.carrier ≪≫
+      (Mod.tensorLeftMapIso A.str).app _ ≪≫ (Mod.tensorLeft A.carrier).mapIso B.str)
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The Weil structure of the tensor product `B ⊗ A` is natural in `B`. -/
+lemma ProEtaleWeilSheaf.tensor_map_comm (A : ProEtaleWeilSheaf k₀ l X)
+    {B B' : ProEtaleWeilSheaf k₀ l X} (f : B ⟶ B') :
+    (WeilSheaf.frobeniusPullback k₀ l X).map ((Mod.tensorLeft A.carrier).map f.hom.f) ≫
+        (ProEtaleWeilSheaf.tensor k₀ l X A B').obj.str =
+      (ProEtaleWeilSheaf.tensor k₀ l X A B).obj.str ≫ (Mod.tensorLeft A.carrier).map f.hom.f := by
+  simp only [ProEtaleWeilSheaf.tensor, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom, IsoAlgebra.str_hom, Category.assoc]
+  have h₁ := (ProEtale.adicLowerStarTensorLeftIso l
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).hom.naturality f.hom.f
+  have h₂ := (Mod.tensorLeftMapIso A.str).hom.naturality
+    ((WeilSheaf.frobeniusPullback k₀ l X).map f.hom.f)
+  simp only [Functor.comp_map] at h₁ h₂
+  rw [reassoc_of% h₁, reassoc_of% h₂, ← Functor.map_comp, ← Functor.map_comp]
+  congr 3
+  exact f.hom.h
+
+variable (k₀ l X) in
+/-- The tensor product `- ⊗ A` with a fixed pro-étale Weil sheaf, as a functor. -/
+noncomputable def ProEtaleWeilSheaf.tensorFunctor (A : ProEtaleWeilSheaf k₀ l X) :
+    ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X where
+  obj B := ProEtaleWeilSheaf.tensor k₀ l X A B
+  map f := ObjectProperty.homMk ⟨(Mod.tensorLeft A.carrier).map f.hom.f,
+    ProEtaleWeilSheaf.tensor_map_comm A f⟩
+  map_id _ := ObjectProperty.hom_ext _
+    (Algebra.Hom.ext ((Mod.tensorLeft A.carrier).map_id _))
+  map_comp _ _ := ObjectProperty.hom_ext _
+    (Algebra.Hom.ext ((Mod.tensorLeft A.carrier).map_comp _ _))
 
 end Monoidal
 

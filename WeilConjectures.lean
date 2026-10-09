@@ -349,6 +349,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
@@ -840,6 +841,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
@@ -1149,6 +1151,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
@@ -1184,6 +1187,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Com
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
@@ -1235,6 +1239,7 @@ public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
+public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation

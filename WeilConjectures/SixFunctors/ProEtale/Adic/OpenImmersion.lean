@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Ker
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 
 /-!
 # Extension by zero of sheaves of modules over the constant `ℓ`-adic sheaf
@@ -251,6 +252,30 @@ lemma adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowe
     (adicOpenImmersionLowerShriekAdjunction l j).right_triangle_components_assoc ((j)_*ᵃ[l].obj F),
     CategoryTheory.Functor.map_id, Category.comp_id]
   exact NatIso.isIso_inv_app _ _
+
+/-- **The comparison `j_! M ⟶ j_* M` is a monomorphism.** Its kernel `K` restricts to zero on
+`U`, `j^*` of the comparison being invertible, and its underlying sheaf is a subsheaf of the
+extension by zero of the underlying sheaf of `M`; such a subsheaf vanishes
+(`AlgebraicGeometry.ProEtale.isZero_of_mono_openImmersionLowerShriek`). -/
+instance mono_adicOpenImmersionLowerShriekToLowerStar_app (M : AdicSheaf l U) :
+    Mono ((adicOpenImmersionLowerShriekToLowerStar l j).app M) := by
+  let c := (adicOpenImmersionLowerShriekToLowerStar l j).app M
+  have : IsIso ((j)^*ᵃ[l].map c) := by
+    have : IsIso ((adicOpenImmersionLowerShriekAdjunction l j).unit.app M ≫ (j)^*ᵃ[l].map c) := by
+      rw [adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((adicOpenImmersionLowerShriekAdjunction l j).unit.app M) _
+  refine Preadditive.mono_of_isZero_kernel _ (AdicSheaf.isZero_of_isZero_X ?_)
+  let i : (kernel c).X ⟶ (j)_!open[WeilCoefficients.{u} l].obj M.X :=
+    (AdicSheaf.forget X).map (kernel.ι c) ≫ inv ((adicOpenImmersionLowerShriekComparison l j).app M)
+  have : Mono i := by
+    have : Mono ((AdicSheaf.forget X).map (kernel.ι c)) := inferInstance
+    infer_instance
+  refine isZero_of_mono_openImmersionLowerShriek _ j i ?_
+  refine IsZero.of_iso ?_ ((upperStarIsoOpenImmersionRestriction _ j).app _).symm
+  change IsZero ((AdicSheaf.forget U).obj ((j)^*ᵃ[l].obj (kernel c)))
+  exact (AdicSheaf.forget U).map_isZero
+    ((isZero_kernel_of_mono ((j)^*ᵃ[l].map c)).of_iso (PreservesKernel.iso (j)^*ᵃ[l] c))
 
 end AlgebraicGeometry.ProEtale
 
