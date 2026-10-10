@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-cohomology-sections-affine-base",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence: 'The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]'; the passage, over the affine base Spec k, from the higher direct images R^if_*F of [lem-pc-coherent-hi] to the groups H^i(X,F) (Stacks 0BEJ, remark after the definition, cites 01XJ for it)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology over an affine base is the global sections of the higher direct images",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], and assume that $S$ is affine [def-pc-scheme]. For every integer $q\\geq0$ and every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent] there is an isomorphism of abelian groups\n$$\ne_{\\mathcal F}:\\;\\Gamma\\bigl(S,R^qf_*\\mathcal F\\bigr)=H^0\\bigl(S,R^qf_*\\mathcal F\\bigr)\\xrightarrow{\\ \\sim\\ }H^q(X,\\mathcal F),\n$$\nwhere $H^q(X,-)$ is the cohomology of $\\mathcal O_X$-modules and $R^qf_*$ the $q$-th higher direct image [pqf-def-cohomology]; these isomorphisms are natural in $\\mathcal F$: for every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of quasi-coherent $\\mathcal O_X$-modules, $e_{\\mathcal G}\\circ\\Gamma(S,R^qf_*\\varphi)=H^q(X,\\varphi)\\circ e_{\\mathcal F}$. (The source states it for $f$ quasi-compact and quasi-separated; the separated case is the one stated here.)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 01XK (coherent-lemma-quasi-coherence-higher-direct-images-application), stated there for f quasi-compact and quasi-separated; proof by the Leray spectral sequence (Cohomology 01F2), quasi-coherence of R^qf_*F (01XJ (1)) and vanishing of higher cohomology of quasi-coherent modules on affines (01XB)",
+  "lean": {
+   "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+   "lines": [
+    307,
+    324
+   ],
+   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H"
+  }
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image global sections over affine base equals sheaf cohomology",
+   "results": "service error (HTTP 500 from leansearch.net, via lean-lsp and via curl to https://leansearch.net/search); no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict rests on the other two kinds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H^q(X, F) is isomorphic to global sections of R^q f_* F when the base S is affine and F quasi-coherent",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); no higher direct images, no comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence degenerates: cohomology of X equals sections of higher direct image over affine scheme",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.cohomologyPresheaf; nothing on Leray or R^q f_*",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'higherDirectImage|HigherDirectImage|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none (only Mathlib/Algebra/Homology/EulerCharacteristic.lean matched the companion pattern eulerChar, unrelated); Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean define sheaf cohomology only",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no higher direct images of O_X-modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-euler-characteristic-well-defined",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+     "lines": [
+      307,
+      324
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

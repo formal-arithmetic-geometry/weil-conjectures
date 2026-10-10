@@ -3,40 +3,132 @@
  "blueprint": {
   "is": "lem-pc-euler-characteristic-well-defined",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Well-definedness of the Euler characteristic",
- "statement": "Let $k$ be a field, $X$ a proper scheme over $k$ and $\\mathcal{F}$ a coherent\n$\\mathcal{O}_X$-module. Then the set\n$\\{i:H^i(X,\\mathcal{F})\\neq0\\}$ is finite and each $H^i(X,\\mathcal{F})$ is a finite\ndimensional $k$-vector space; hence\n$\\chi(X,\\mathcal{F})=\\sum_i(-1)^i\\dim_kH^i(X,\\mathcal{F})$ is well defined.",
+ "statement": "Let $k$ be a field, let $X$ be a scheme proper over $k$ [def-weil-proper-morphism] and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Each cohomology group $H^i(X,\\mathcal F)$ [pqf-def-cohomology] ($i\\geq0$) is a $\\Gamma(X,\\mathcal O_X)$-module, hence a $k$-vector space through the structure map $k\\to\\Gamma(X,\\mathcal O_X)$. Then every $H^i(X,\\mathcal F)$ is a finite-dimensional $k$-vector space, and the set $\\{i\\geq0: H^i(X,\\mathcal F)\\neq0\\}$ is finite. Hence\n$$\n\\chi(X,\\mathcal F)=\\sum_{i\\geq0}(-1)^i\\dim_kH^i(X,\\mathcal F)\n$$\n[def-weil-vector-space-dimension] is a finite sum of integers, a well-defined element of $\\mathbf Z$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-characteristic-well-defined.md",
   "place": "node lem-pc-euler-characteristic-well-defined, order 734"
  },
  "stmt_deps": [
-  "def-pc-morphism-conventions"
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-weil-vector-space-dimension"
  ],
  "proof": [
   {
-   "text": "The assertion is a consequence of proper coherent-finiteness over a\nNoetherian base, which is recorded as [lem-pc-coherent-hi]; its\ngeneral proof is still a pending obligation below. In the smooth\nprojective curve case over an algebraically closed field, the complete\nargument is instead [lem-pc-curve-coherent-finiteness]. Thus this\nlemma is not being used as an unproved finite-module consequence of a\nfinite-type affine algebra.",
+   "text": "*Setup.* Let $f:X\\to S:=\\operatorname{Spec}k$ [def-weil-affine-spectrum] be the structure morphism. By [def-weil-proper-morphism] $f$ is proper, i.e. separated, of finite type and universally closed; being of finite type it is locally of finite type and quasi-compact [def-weil-finite-type-morphism]. The base $S=\\operatorname{Spec}k$ is affine and has one point, so it is quasi-compact; the ring $k$ is Noetherian (its only ideals are $0$ and $k$), so $S$ is locally Noetherian [pqf-def-locnoeth] (the cover by $S$ itself).",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definition 0BEJ (varieties-definition-euler-characteristic) and the paragraph after it: 'Let $k$ be a field. Let $X$ be a proper scheme over $k$'"
+   }
+  },
+  {
+   "text": "*$\\mathcal F$ is quasi-coherent.* Since $S$ is locally Noetherian and $f$ is locally of finite type, $X$ is locally Noetherian [pqf-lem-locnoeth-lft]. On a locally Noetherian scheme a coherent module is quasi-coherent (of finite type) [pqf-lem-coherent-ft-locnoeth]; so $\\mathcal F$ is quasi-coherent.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XZ (coherent-lemma-coherent-Noetherian), with Morphisms Lemma 01T6"
+   }
+  },
+  {
+   "text": "*Finite dimensionality.* Apply [lem-pc-coherent-hi] to the proper morphism $f:X\\to S$ with $S=\\operatorname{Spec}(A)$, $A=k$ Noetherian (Step 1), and the coherent module $\\mathcal F$: each $H^i(X,\\mathcal F)$ is a finite $k$-module, the $k$-module structure being the one through $f^\\sharp:k=\\Gamma(S,\\mathcal O_S)\\to\\Gamma(X,\\mathcal O_X)$, i.e. the structure map of the statement. A finitely generated $k$-vector space is finite-dimensional: a finite generating family contains a basis, so $\\dim_kH^i(X,\\mathcal F)\\in\\mathbf Z_{\\geq0}$ is defined [def-weil-vector-space-dimension].",
    "uses": [
     "lem-pc-coherent-hi",
-    "lem-pc-curve-coherent-finiteness"
+    "def-weil-vector-space-dimension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 02O6 (coherent-lemma-proper-over-affine-cohomology-finite), cited in varieties.tex after Definition 0BEJ: 'each of these spaces is finite dimensional'"
+   }
+  },
+  {
+   "text": "*Vanishing in large degrees.* Since $S$ is quasi-compact (Step 1), [lem-pc-coherent-hi] gives an integer $n\\geq0$ with $R^if_*\\mathcal F=0$ for all $i\\geq n$. The morphism $f$ is quasi-compact and separated with $S$ affine, and $\\mathcal F$ is quasi-coherent (Step 2), so [lem-pc-cohomology-sections-affine-base] gives isomorphisms $H^i(X,\\mathcal F)\\cong\\Gamma(S,R^if_*\\mathcal F)$; for $i\\geq n$ the right side is $\\Gamma(S,0)=0$. Hence $\\{i\\geq0:H^i(X,\\mathcal F)\\neq0\\}\\subseteq\\{0,\\dots,n-1\\}$ is finite.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-pc-cohomology-sections-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "paragraph after Definition 0BEJ: 'only a finite number of the vector spaces $H^i(X,\\mathcal{F})$ are nonzero (Cohomology of Schemes, Lemma 01XJ)'; the passage from $R^if_*$ to $H^i$ is Lemma 01XK"
+   }
+  },
+  {
+   "text": "*Conclusion.* By Steps 3 and 4 the family $\\bigl((-1)^i\\dim_kH^i(X,\\mathcal F)\\bigr)_{i\\geq0}$ consists of integers [def-weil-vector-space-dimension] and vanishes for $i\\geq n$ (a zero vector space has dimension $0$), so $\\chi(X,\\mathcal F)=\\sum_{i=0}^{n-1}(-1)^i\\dim_kH^i(X,\\mathcal F)\\in\\mathbf Z$ is a finite sum, independent of the choice of $n$ (the added terms are $0$).",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "paragraph after Definition 0BEJ: 'Thus $\\chi(X, \\mathcal{F}) \\in \\mathbf{Z}$ is well defined.'"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-pc-coherent-hi",
-  "lem-pc-curve-coherent-finiteness"
+  "def-weil-vector-space-dimension",
+  "lem-pc-cohomology-sections-affine-base"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-characteristic-well-defined.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Section 0BEI (Euler characteristics), Definition 0BEJ and the paragraph after it, citing Cohomology of Schemes Lemmas 01XJ and 02O6; the step from R^if_* to H^i is coherent.tex Lemma 01XK"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of coherent sheaf on proper scheme over a field is finite dimensional (also: sheaf cohomology vanishes above dimension noetherian scheme)",
+   "results": "service error (HTTP 500 from leansearch.net, via lean-lsp and via curl); no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict rests on the other two kinds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of coherent sheaf on proper scheme over a field, cohomology finite dimensional and vanishes in large degree",
+   "results": "DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff (Mathlib.Algebra.Homology.DerivedCategory.TStructure), AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; nothing on coherent cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, FiniteDimensional ; CategoryTheory.Sheaf.H, FiniteDimensional",
+   "results": "none; none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FiniteDimensional' Mathlib/AlgebraicGeometry | grep -i 'coher|proper|H '; grep -rl 'eulerChar|EulerChar' Mathlib",
+   "results": "no FiniteDimensional statement on scheme cohomology; eulerChar only in Mathlib/Algebra/Homology/EulerCharacteristic.lean (graded objects and homological complexes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +155,18 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-euler-characteristic-well-defined",
+  "worker": "stage1",
+  "summary": "Rewritten from Stacks 0BEJ (Varieties, Section 0BEI): finite dimensionality from 02O6 and finitely many nonzero groups from 01XJ, both clauses of the existing node lem-pc-coherent-hi applied to X -> Spec k; the passage from R^if_*F = 0 to H^i(X,F) = 0, hidden in Stacks' citation of 01XJ, is 01XK and became the new node lem-pc-cohomology-sections-affine-base (it is also the Lean split-off exists_addEquiv_sections_higherDirectImage_H, which had no node). Quasi-coherence of F (needed for 01XK) from 01T6 and 01XZ (existing pqf nodes). Statement made self-contained (def-weil-proper-morphism, pqf-def-coherent, pqf-def-cohomology, def-weil-vector-space-dimension; the k-structure on H^i spelled out); def-pc-morphism-conventions dropped from stmt_deps (no longer used). The blueprint's citation of lem-pc-curve-coherent-finiteness is dropped: it is a special case (smooth projective curves over an algebraically closed field) and is not needed for the general statement. slopmaster2: AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper (DirectImage.lean 1425) states the finiteness clause but rests on the sorry finite_sections_higherDirectImage; Grothendieck vanishing subsingleton_H_of_topologicalKrullDim_lt is sorry; no sorry-free declaration states the item, so rule 0 does not apply.",
+  "blueprint": "The blueprint proof has one paragraph: 'The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]'. Steps 3 and 4 realize it (finiteness and vanishing clauses of lem-pc-coherent-hi), Step 4 with the comparison H^i = Gamma(Spec k, R^if_*) the blueprint leaves implicit; Steps 1, 2, 5 write out what the blueprint takes for granted. The blueprint's second sentence (the curve case via lem-pc-curve-coherent-finiteness) is not used."
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": "2026-10-10 L: 5 steps along the paragraph after Varieties 0BEJ checked (proper gives separated, quasi-compact; coherent is quasi-coherent on the locally Noetherian X; finiteness by lem-pc-coherent-hi; vanishing of R^i f_* for i large and H^i = Gamma(S, R^i f_*) by the new 01XK node; chi a finite sum). tool_uses lem-pc-coherent-hi, pqf-lem-locnoeth-lft, pqf-lem-coherent-ft-locnoeth. New node lem-pc-cohomology-sections-affine-base (01XK, separated case; Lean exists_addEquiv_sections_higherDirectImage_H sorry_here recorded by the worker). Statement made self-contained. LeanSearch down."
 }

@@ -1522,3 +1522,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:40 L: accepted lem-galois-finite-etale-connected-object: attachment Scheme.FiniteEtale.isConnected_of_connectedSpace verified, closed, not split
 - 2026-10-10, delivery of M1: def-sc-picard-functor returned (9d9b9f3bf): Reviewed in full (reviewer sub-agent of L). E1/B3: the definition is stated for 'a proper smooth connected curve over a field k', but the cited nodes for the de
 - 13:40 L: returned deliver/M1/def-sc-picard-functor (reviewer RETURN: E1/B3 hypotheses not covered by the cited degree nodes, C4 Pic^d wording, C1 geometric vs residue fibre, B9 same_as)
+- 13:41 L: accepted lem-pc-euler-characteristic-well-defined: 5 steps, new node lem-pc-cohomology-sections-affine-base (01XK), tool_uses 3
