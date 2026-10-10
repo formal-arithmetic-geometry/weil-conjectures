@@ -1,8 +1,8 @@
 # Work queue
 
-888 items; claim with `tools/claim.py next <group> [--stage N]`.
+890 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (332)
+## Stage 1: nodes to split (333)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
-| `lem-weil-pbc-radicial-etale-open` | 2007 | none |
 | `lem-weil-pbc-filtered-category-directed-cofinal` | 2009 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
@@ -30,8 +29,9 @@
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
-| `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-etale-standard-cover-cech` | 3008 | none |
+| `lem-sc-zariski-module-abelian-cohomology-agree` | 3008 | none |
+| `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
@@ -64,13 +64,14 @@
 | `lem-sc-ext-tensor-exact` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
-| `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-smooth-proper-curve-dualizing` | 3013 | none |
 | `lem-sc-p1-finite-homogeneous-generators` | 3014 | none |
 | `lem-sc-p1-graded-kernel-finite` | 3014 | none |
 | `lem-sc-p1-graded-nakayama-free` | 3014 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
+| `lem-sc-p1-proj-degreezero-localization-exact` | 3014 | none |
+| `lem-sc-p1-proj-tilde-functorial` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
@@ -279,6 +280,7 @@
 | `def-nagata-morphism-descent` | - | none |
 | `def-nagata-qc-open-descent` | - | none |
 | `def-nagata-relative-finite-affine-presentation` | - | none |
+| `def-sc-zariski-cohomology` | - | none |
 | `def-sc-zariski-site` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-projective-coherent-higher-images` | - | sorry_here |
@@ -307,7 +309,6 @@
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
-| `def-sc-zariski-cohomology` | - | none |
 | `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
 | `lem-kun-finite-closed-subscheme` | - | none |
@@ -339,7 +340,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (556)
+## Stage 2: nodes to state (557)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -735,6 +736,7 @@
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
+| `lem-weil-pbc-radicial-etale-open` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
@@ -900,7 +902,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 352 nodes that wait for stage 1, 1072 nodes that wait for a statement dependency.
+Not open yet: 353 nodes that wait for stage 1, 1074 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
