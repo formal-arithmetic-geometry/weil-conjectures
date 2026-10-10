@@ -301,10 +301,11 @@ quasi-compact and quasi-separated the converse holds, so this global definition 
 cover, whose members are retrocompact, have a common refinement by constructible locally closed
 subsets of `X`. For a general `X` the present definition is stronger: it asks for a single
 finite stratification of all of `X`, whereas loc. cit. lets the decomposition depend on the
-affine open. For instance let `X` be the disjoint union over `n` of the affine spaces `𝔸ⁿ`
-over a field, each with a flag `𝔸ⁿ = Z₀ ⊃ Z₁ ⊃ ⋯ ⊃ Zₙ` of irreducible closed subsets, and let
-`F` be on `𝔸ⁿ` the direct sum of the pushforwards of the constant sheaf `Λ` from the `Zᵢ`, so
-that the stalk of `F` at the generic point of `Zᵢ` is free of rank `i + 1`. A subset of `X` on
+affine open. For instance let `Λ` be a nonzero coefficient ring, let `X` be the disjoint union
+over `n` of the affine spaces `𝔸ⁿ` over a field, each with a flag `𝔸ⁿ = Z₀ ⊃ Z₁ ⊃ ⋯ ⊃ Zₙ` of
+irreducible closed subsets, and let `F` be on `𝔸ⁿ` the direct sum of the pushforwards of the
+constant sheaf `Λ` from the `Zᵢ`, so that the stalk of `F` at the generic point of `Zᵢ` is
+free of rank `i + 1` over `Λ`. A subset of `X` on
 which `F` is locally constant cannot contain the generic points of two members of a flag (the
 later one is a specialization of the earlier one, so every neighbourhood of it in the subset
 contains the earlier one, where the rank differs), so a stratification trivializing `F` has at
