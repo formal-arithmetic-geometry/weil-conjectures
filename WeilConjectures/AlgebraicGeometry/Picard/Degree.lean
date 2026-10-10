@@ -110,6 +110,28 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
       ((Modules.pullback (baseChangeMap f g)).obj ((fromSkeleton _).obj (Pic.val L))))]
   rfl
 
+/-- **The fibrewise degree is compatible with cartesian squares of families.** Let `f' : X' ⟶ S'`
+be another morphism, `T'` a scheme over `S'` and `e : X'_{T'} ⟶ X_T` a morphism over
+`φ : T' ⟶ T` exhibiting `X'_{T'}` as `X_T ×_T T'`. Then the fibrewise degree of the pullback of
+`ℒ ∈ Pic (X_T)` along `e` at `t'` is the fibrewise degree of `ℒ` at `φ(t')`. -/
+theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinitePresentation f]
+    {X' S' : Scheme.{u}} (f' : X' ⟶ S') {T : Over S} {T' : Over S'} (φ : T'.left ⟶ T.left)
+    (e : pullback f' T'.hom ⟶ pullback f T.hom)
+    (sq : IsPullback e (pullback.snd f' T'.hom) (pullback.snd f T.hom) φ)
+    (L : (picardPresheaf f).obj (.op T)) (t : T'.left) :
+    picardPresheafDegree f' (Pic.map e L) t = picardPresheafDegree f L (φ t) := by
+  have := Modules.isGrothendieckAbelian (pullback f T.hom)
+  have := Pic.isInvertible (Y := pullback f T.hom) L
+  have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  simp only [picardPresheafDegree]
+  rw [← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    ← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    Modules.eulerCharFiber_congr (Modules.pullbackObjUnitIso _),
+    ← Modules.eulerCharFiber_congr (fromSkeletonToSkeletonIso
+      ((Modules.pullback e).obj ((fromSkeleton _).obj (Pic.val L))))]
+  rfl
+
 /-- **The fibrewise degree is locally constant** when `f` is proper, flat and locally of finite
 presentation: the fibre Euler characteristics of `ℒ` and of `𝒪_{X_T}` are locally constant on `T`
 since both modules are invertible, hence of finite presentation and flat over `T`.

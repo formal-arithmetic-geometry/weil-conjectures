@@ -168,6 +168,27 @@ lemma exists_quasiIso_flat_of_isStrictlyLE (L : CochainComplex C ℤ) (b : ℤ)
   exact ⟨_, inferInstance, Λ.totalπ K, inferInstance, fun n ↦ (((Λ.bicomplexFunctor.obj
     K.obj).total (.up ℤ)).X n).property⟩
 
+/-- Every complex has a K-flat resolution by a complex of flat objects: the functorial flat
+resolution of an unbounded complex is a colimit of bounded above complexes of flat objects. -/
+lemma exists_quasiIso_flat_kFlat (L : CochainComplex C ℤ) :
+    ∃ (P : CochainComplex C ℤ) (π : P ⟶ L), QuasiIso π ∧ (∀ n, ObjectProperty.flat (P.X n)) ∧
+      (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
+  have (X : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
+  let Λ := (Classical.arbitrary (Abelian.LeftResolution
+    (ObjectProperty.flat.ι : _ ⥤ C))).reduced
+  have hι : (ObjectProperty.flat.ι : _ ⥤ C).essImage ≤ ObjectProperty.flat := by
+    rintro X ⟨Y, ⟨e⟩⟩
+    exact ObjectProperty.prop_of_iso _ e Y.property
+  refine ⟨Λ.resolutionFunctor.obj L, Λ.resolutionNatTrans.app L, inferInstance, fun n ↦ ?_,
+    Λ.kFlat_resolutionFunctor_obj hι L⟩
+  have := CochainComplex.closedUnderColimitsOfShape_flat C ℤ
+  let c := Λ.colimitOfShapeResolutionFunctorObj L
+  exact ObjectProperty.prop_of_isColimit _
+    (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n) c.isColimit)
+    (fun i ↦ hι _ ((c.prop_diag_obj i).1 n))
+
 end CochainComplex
 
 namespace DerivedCategory
@@ -328,6 +349,38 @@ noncomputable def QObjTensorQObjIsoOfKFlatRight (L P : CochainComplex C ℤ)
     Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient C (.up ℤ)) _ _) ≪≫
     (quotientCompQhIso C).app _
 
+/-- The isomorphism `L ⊗ᴸ P ≅ L ⊗ P` for a K-flat complex `P` is natural in `L`: for
+`f : L ⟶ L'` the square
+```
+  Q(L) ⊗ᴸ Q(P) ──≅──▶ Q(L ⊗ P)
+       │                  │
+  Q(f) ▷ Q(P)          Q(f ▷ P)
+       ▼                  ▼
+  Q(L') ⊗ᴸ Q(P) ─≅──▶ Q(L' ⊗ P)
+```
+commutes. -/
+@[reassoc]
+lemma qObjTensorQObjIsoOfKFlatRight_hom_naturality {L L' : CochainComplex C ℤ} (f : L ⟶ L')
+    (P : CochainComplex C ℤ) (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Q.map f ▷ Q.obj P ≫ (QObjTensorQObjIsoOfKFlatRight L' P hP).hom =
+      (QObjTensorQObjIsoOfKFlatRight L P hP).hom ≫ Q.map (f ▷ P) := by
+  have h₁ := (tensorRightCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P)).naturality
+    ((HomotopyCategory.quotient C (.up ℤ)).map f)
+  have h₂ := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient C (.up ℤ)) f P
+  have h₃ := (quotientCompQhIso C).hom.naturality (f ▷ P)
+  have h₄ := (quotientCompQhIso C).inv.naturality f
+  dsimp at h₁ h₂ h₃ h₄
+  simp only [QObjTensorQObjIsoOfKFlatRight, Iso.trans_hom, tensorIso_hom, Iso.app_hom,
+    Iso.symm_hom, asIso_hom, Functor.mapIso_hom, Category.assoc]
+  have key : Q.map f ▷ Q.obj P ≫
+      ((quotientCompQhIso C).inv.app L' ⊗ₘ (quotientCompQhIso C).inv.app P) =
+      ((quotientCompQhIso C).inv.app L ⊗ₘ (quotientCompQhIso C).inv.app P) ≫
+        Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map f) ▷ _ := by
+    rw [← tensorHom_id, ← tensorHom_id, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, h₄,
+      Category.comp_id, Category.id_comp]
+  rw [reassoc_of% key, reassoc_of% h₁, ← h₃, Functor.Monoidal.μIso_hom, ← Qh.map_comp_assoc,
+    h₂, Qh.map_comp_assoc, Functor.Monoidal.μIso_hom]
+
 /-- If `K` has Tor amplitude in `[a, b]` and `N` has homology concentrated in `[c, d]`, then
 `K ⊗ᴸ N` has homology concentrated in `[a + c, b + d]`: represent `K` by a complex of flat
 objects in degrees `[a, b]` and `N` by a complex in degrees `[c, d]`. -/
@@ -382,6 +435,18 @@ lemma isLE_tensor_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}
   have := CochainComplex.isStrictlyLE_tensorObj P L b d
   exact TStructure.t.isLE_of_iso (tensorIso e.symm e' ≪≫
     QObjTensorQObjIsoOfKFlatLeft P L (CochainComplex.kFlat_of_bounded_of_flat P a b hP)).symm _
+
+/-- The derived tensor product of an object vanishing above `b` and one vanishing above `d`
+vanishes above `b + d`: represent the first by a bounded above complex of flat objects. -/
+lemma isLE_tensor (K N : DerivedCategory C) (b d : ℤ) [K.IsLE b] [N.IsLE d] :
+    (K ⊗ N).IsLE (b + d) := by
+  obtain ⟨L, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
+  obtain ⟨P, _, π, _, hP⟩ := L.exists_quasiIso_flat_of_isStrictlyLE b
+  have : IsIso (Q.map π) := by rwa [isIso_Q_map_iff_quasiIso]
+  obtain ⟨M, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
+  have := CochainComplex.isStrictlyLE_tensorObj P M b d
+  exact TStructure.t.isLE_of_iso (tensorIso (e ≪≫ (asIso (Q.map π)).symm) e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P M (CochainComplex.kFlat_of_isStrictlyLE_of_flat P b hP)).symm _
 
 /-- If `K` has Tor amplitude in `[a, b]` and `N` vanishes below `c`, then `K ⊗ᴸ N` vanishes
 below `a + c`. -/

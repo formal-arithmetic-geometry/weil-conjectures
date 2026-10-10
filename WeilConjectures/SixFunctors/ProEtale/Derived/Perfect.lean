@@ -31,6 +31,10 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
 
 ## Main statements
 
+- `AlgebraicGeometry.ProEtale.derivedDual_obj`,
+  `AlgebraicGeometry.ProEtale.derivedDualEval_eq_uncurry` (`rem-ptr-pod-perfect-complex-on-x-5`):
+  the coefficient dual and its evaluation `AlgebraicGeometry.ProEtale.derivedDualEval` are
+  formed with the derived internal hom.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn_single_of_retract`
   (`prop-pod-perfect-local-model`): a finite projective `Λ_X`-module is flat and constructible.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
@@ -78,6 +82,25 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A]
 
 variable {A} {X : Scheme.{u}}
+
+/-- Blueprint `rem-ptr-pod-perfect-complex-on-x-5`: the coefficient dual `K^∨ = RHom(K, Λ_X)` is
+formed with the derived internal hom: it is the internal hom of the monoidal closed structure of
+`D(X_proét)` into the unit `Λ_X`. -/
+lemma derivedDual_obj (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (derivedDual A X).obj (op K) = (ihom K).obj (𝟙_ _) := rfl
+
+/-- Blueprint `rem-ptr-pod-perfect-complex-on-x-5`: the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` of the
+tensor–internal-hom adjunction, for the coefficient dual `K^∨ = RHom(K, Λ_X)`. -/
+noncomputable def derivedDualEval (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    K ⊗ (derivedDual A X).obj (op K) ⟶ 𝟙_ _ :=
+  (ihom.ev K).app (𝟙_ _)
+
+/-- Blueprint `rem-ptr-pod-perfect-complex-on-x-5`: the evaluation of the coefficient dual is the
+map corresponding to the identity of `K^∨` under the tensor–internal-hom adjunction. -/
+lemma derivedDualEval_eq_uncurry
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    derivedDualEval K = MonoidalClosed.uncurry (𝟙 ((derivedDual A X).obj (op K))) :=
+  (MonoidalClosed.uncurry_id_eq_ev _ _).symm
 
 /-- Blueprint `lem-pod-coefficient-dual-perfect`: Perfectness is preserved by coefficient
 duality.
