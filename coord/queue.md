@@ -1,8 +1,8 @@
 # Work queue
 
-930 items; claim with `tools/claim.py next <group> [--stage N]`.
+934 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (245)
+## Stage 1: nodes to split (247)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,16 +16,19 @@
 | `lem-pc-skyscraper-complex` | 3014 | none |
 | `lem-pc-stalk-tensor-complex` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
-| `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
+| `def-pc-derived-category-qcoh-algebra` | 3016 | none |
+| `def-pc-derived-rhom-algebra-module` | 3016 | none |
 | `def-pc-ringed-spaces-derived-direct-image` | 3016 | none |
+| `def-pur-pseudo-coherent-complex` | 3016 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
-| `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
-| `lem-sc-bounded-below-injective-resolution` | 3016 | none |
+| `lem-sc-coherent-pseudo-coherent` | 3016 | none |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
+| `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-direct-sums` | 3016 | none |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
+| `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3018 | none |
@@ -63,7 +66,6 @@
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
-| `lem-pc-derived-acyclic-resolution` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5013 | none |
 | `lem-pc-kflat-closure` | 5013 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5013 | none |
@@ -252,7 +254,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (685)
+## Stage 2: nodes to state (687)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -337,6 +339,7 @@
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
+| `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
@@ -372,6 +375,7 @@
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
+| `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
@@ -942,7 +946,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1344 nodes that wait for a statement dependency, 280 nodes that wait for stage 1.
+Not open yet: 1346 nodes that wait for a statement dependency, 282 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
