@@ -215,6 +215,16 @@ instance isMonHom_sheafComposeToSheafify : IsMonHom (sheafComposeToSheafify J S 
   inferInstanceAs (IsMonHom ((sheafifyRingPresheafIso J S).inv ≫
     (presheafToSheaf J Ab.{w}).map (Functor.whiskerRight g (forget₂ RingCat.{w} Ab.{w}))))
 
+omit [(J.W (A := Ab.{w})).IsMonoidal] in
+variable {S} in
+/-- Precomposing `sheafComposeToSheafify J S g` with the morphism of abelian sheaves underlying a
+morphism of sheaves of rings `f' : S' ⟶ S` gives `sheafComposeToSheafify J S' (f'.hom ≫ g)`. -/
+lemma sheafCompose_map_comp_sheafComposeToSheafify {S' : Sheaf J RingCat.{w}} (f' : S' ⟶ S) :
+    (sheafCompose J (forget₂ RingCat.{w} Ab.{w})).map f' ≫ sheafComposeToSheafify J S g =
+      sheafComposeToSheafify J S' (f'.hom ≫ g) := by
+  rw [sheafCompose_map_eq, sheafComposeToSheafify, sheafComposeToSheafify]
+  simp [Functor.whiskerRight_comp]
+
 end SheafCompose
 
 end Sheaf
