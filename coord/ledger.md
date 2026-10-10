@@ -2162,3 +2162,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:42 L: merged deliver/E1/lem-sc-ext-locally-free-second-naturality (reviewer FIX; first push; new nodes: 0)
 - 17:42 L: merged deliver/H1/lem-sc-isogeny-facts (reviewer PASS; first push; new nodes: 0)
 - 17:43 L: merged deliver/M1/lem-sc-smooth-proper-diagonal-pushforward-structure (reviewer FIX; first push; new nodes: 1)
+- 17:44 L: returned deliver/E1/lem-sc-smooth-proper-diagonal-tensor-formula (reviewer RETURN: R-dtf1744. 1 (D1, C2): no real split. The single step, marked elementary, carries the whole conclusion by invoking Tag 0)
