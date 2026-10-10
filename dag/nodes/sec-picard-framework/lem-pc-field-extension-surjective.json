@@ -46,15 +46,43 @@
    "results": "Only generic faithfully-flat spectrum results; no exact field-extension statement",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Subsingleton Y' Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; grep -n 'Unique <| Spec' Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "UnderlyingMap.lean:76-77 instance (priority := low) [Nonempty X] [Subsingleton Y] (f : X ⟶ Y) : Surjective f; Scheme.lean:627 instance Unique (Spec (.of K)) for a field K; Scheme.lean:546 Nonempty (Spec A) for A nontrivial",
+   "date": "2026-10-10",
+   "verdict": "match: inferInstance (reviewer R-fes)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Surjective",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+  "line": 76,
+  "how": "specializes in one line: the instance at Morphisms/UnderlyingMap.lean:76-77 (Surjective f for X nonempty and Y subsingleton) with f = Spec.map (CommRingCat.ofHom (algebraMap k K)); Spec K is nonempty by Scheme.lean:546 and Spec k is a single point by the instance Unique (Spec (.of k)) at Scheme.lean:627. `example [Field k] [Field K] [Algebra k K] : Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) := inferInstance` compiled with lean_run_code by reviewer R-fes, 2026-10-10."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-field-extension-fpqc-cover",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-field-extension-surjective",
+  "worker": "stage1",
+  "summary": "Mathlib leaf (reviewer fix R-fes): the statement is obtained by inferInstance from the instance Surjective f for nonempty source and subsingleton target (Morphisms/UnderlyingMap.lean:76) with Unique (Spec K) for a field (Scheme.lean:627). The worker's one-step singleton-spectrum proof was correct but is not needed.",
+  "blueprint": "Mathlib leaf; the preliminary fact of the ancestor blueprint proof (Spec K -> Spec k is surjective) is the instance at Morphisms/UnderlyingMap.lean:76.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fes",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fes (reviewer sub-agent of L); spot-checked: Statement (Spec K -> Spec k surjective for a field extension k in K) is true; source Stacks Algebra (Spec of a field is one point). The worker's single step was correct: def-weil-affine-spectrum states Spec of a field has one point, def-pc-field-extension gives the induced morphism, def-weil-surjective-morphism is surjectivity on points; K=k case checked. But the statement is a one-line Mathlib specialization, so made a leaf as for lem-pc-field-extension-flat. Fixes: dag/nodes/sec-picard-framework/lem-pc-field-extension-surjective.json: status: mathlib; proof, proof_deps, proof_origin: emptied; stmt_deps: dropped def-weil-affine-spectrum (not cited by the statement); mathlib_match: AlgebraicGeometry.Surjective instance at Morphisms/UnderlyingMap.lean:76-77 (Nonempty X, Subsingleton Y) with Unique (Spec .of K) at Scheme.lean:627 and Nonempty (Spec A) at Scheme.lean:546, lines read with sed -n, inferInstance compiled with lean_run_code; mathlib_searches: added the grep; split_report summary/blueprint rewritten for the leaf. No new nodes, no tool uses. Start Sat Oct 10 04:49:10 PM UTC 2026, end Sat Oct 10 04:50:01 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
