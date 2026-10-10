@@ -7,49 +7,101 @@
  },
  "kind": "statement",
  "title": "Etale and Zariski cohomology agree for quasi-coherent sheaves",
- "statement": "Let $C$ be a curve and $\\mathcal F$ a\nquasi-coherent module. For the\nassociated etale sheaf,\n\n$$\nH^q(C_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})\n\\cong H^q(C_{\\mathrm{Zar}},\\mathcal F)\\quad(q\\geq0).\n$$\n\nIn particular $H^q(C_{\\mathrm{et}},\\mathbf G_a)=H^q(C,\\mathcal O_C)$,\nand these groups vanish for $q\\geq2$ when $C$ is a smooth connected curve.",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a separated finite-type curve over $k$ of dimension at most one [def-sc-curves]. For every quasi-coherent $\\mathcal O_C$-module $\\mathcal F$ [pqf-def-coherent], let $\\mathcal F_{\\mathrm{et}}$ be its associated sheaf on the small etale site [def-sc-etale-qcoherent-module]. For every $q\\geq0$ there is an isomorphism $H^q(C_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})\\cong H^q(C_{\\mathrm{Zar}},\\mathcal F)$ [def-weil-pbc-etale-cohomology], [pqf-def-cohomology]. In particular, for the additive etale sheaf $\\mathbf G_a=(\\mathcal O_C)_{\\mathrm{et}}$, one has $H^q(C_{\\mathrm{et}},\\mathbf G_a)\\cong H^q(C,\\mathcal O_C)$; both groups vanish for every $q\\geq2$ when $C$ is a smooth connected curve.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-ga-cohomology.md",
   "place": "node lem-sc-ga-cohomology, order 1003"
  },
  "stmt_deps": [
   "def-sc-curves",
-  "def-sc-etale-qcoherent-module"
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-etale-cohomology",
+  "pqf-def-cohomology"
  ],
  "proof": [
   {
-   "text": "Take a finite affine Zariski open cover of the separated curve $C$.\nIts intersections are affine. The Cech spectral sequence of\n[lem-sc-cech-spectral] on the etale site has only row zero,\nby [lem-sc-etale-affine-qcoherent]. The corresponding Zariski\nspectral sequence also has only row zero, by\n[lem-pc-affine-vanishing]. Both row-zero complexes have terms\n$\\Gamma(U_J,\\mathcal F)$ and the same differentials, so their\ncohomology groups agree naturally.",
+   "text": "Apply [lem-sc-etale-zariski-qcoh-comparison] to the scheme $X=C$ and the quasi-coherent module $\\mathcal F$. Its canonical isomorphism $c^q_{\\mathcal F}:H^q(C,\\mathcal F)\\to H^q(C_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})$ gives the first displayed isomorphism by inversion for each $q\\geq0$. This is the specialization to the small etale site of Stacks Proposition 03DW, part (2).",
    "uses": [
-    "lem-sc-cech-spectral",
-    "lem-sc-etale-affine-qcoherent",
-    "lem-pc-affine-vanishing"
+    "lem-sc-etale-zariski-qcoh-comparison"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2)"
+   }
   },
   {
-   "text": "For smooth $C$, choose a compactification $\\overline C$ by\n[lem-sc-compactification]. Choose distinct closed points\n$P,Q\\in\\overline C$, which exist because a positive-dimensional\nvariety over an algebraically closed field has infinitely many\nclosed points. Both $C\\setminus\\{P\\}$ and $C\\setminus\\{Q\\}$\nare proper open subschemes of $\\overline C$, hence affine by\n[lem-sc-affine-open-proper]. They cover $C$, and their\nintersection is affine for the same reason. The alternating\nCech complex has only degrees zero and one. Its cohomology\ntherefore vanishes in degrees at least two, proving the assertion.",
+   "text": "A curve $C$ of [def-sc-curves] is of finite type over the field $k$, whose spectrum is Noetherian; hence $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The definition of curve gives $\\dim C\\leq1$. If $q\\geq2$, then $q>\\dim C$, so [lem-sc-noetherian-cohomology-above-dimension] applied to $\\mathcal F$ gives $H^q(C,\\mathcal F)=0$. In particular this holds for $\\mathcal F=\\mathcal O_C$. The last case is within the smooth connected hypothesis of the statement, and the same argument covers an empty or zero-dimensional curve.",
    "uses": [
-    "lem-sc-compactification",
-    "lem-sc-affine-open-proper"
+    "def-sc-curves",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-cohomology-above-dimension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), dimension at most one"
+   }
+  },
+  {
+   "text": "By [def-sc-etale-qcoherent-module], the sheaf associated to $\\mathcal O_C$ has sections $\\Gamma(U,u^*\\mathcal O_C)=\\Gamma(U,\\mathcal O_U)$ on every etale $u:U\\to C$, with its additive group law. Thus it is $\\mathbf G_a$ as named in the statement. Specializing the comparison from step 1 to $\\mathcal F=\\mathcal O_C$ and using step 2 gives $H^q(C_{\\mathrm{et}},\\mathbf G_a)\\cong H^q(C,\\mathcal O_C)=0$ for $q\\geq2$.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2), specialized to the structure sheaf; with Cohomology, Proposition 02UZ"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-cech-spectral",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-pc-affine-vanishing",
-  "lem-sc-compactification",
-  "lem-sc-affine-open-proper"
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "def-sc-etale-qcoherent-module",
+  "def-sc-curves",
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-ga-cohomology.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Proposition 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2), and Cohomology, Proposition 02UZ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of additive group equals Zariski cohomology of structure sheaf on algebraic curve",
+   "results": "CategoryTheory.Sheaf.instAddCommGroupH (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), Scheme.smallEtaleTopology and zariskiTopology_le_etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); no comparison or vanishing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale and Zariski cohomology comparison for a quasi-coherent sheaf on a curve",
+   "results": "Algebra.etaleLocus_eq_compl_support, IsEtale.instFormallyUnramified, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; unrelated to sheaf cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'etale.*zarisk|Zariski.*etale|cohomology.*quasi.?coherent' /home/ubuntu/weil-src-slopmaster2/WeilConjectures; grep by blueprint id and G_a cohomology in WeilConjectures and Comparator; local .lake/packages/mathlib absent",
+   "results": "WeilConjectures/AlgebraicGeometry/Sites/ArtinSchreier.lean:22-27 records the comparison as unavailable; no exact slopmaster2 declaration. Mathlib source unavailable locally; LeanSearch/Loogle queried its index.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +133,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ga-cohomology",
+  "worker": "stage1",
+  "summary": "The imported Cech proof was replaced by Stacks 03DW (etale/Zariski comparison for any quasi-coherent module on any scheme) and 02UZ (Noetherian topological dimension bounds Zariski sheaf cohomology). The former is already stated, more strongly and naturally, by lem-sc-etale-zariski-qcoh-comparison; the latter becomes the new unsplit node lem-sc-noetherian-cohomology-above-dimension, which matches the sorry theorem AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt in slopmaster2. Since a finite-type curve over a field is Noetherian of dimension at most one, the vanishing applies to its structure sheaf; the associated etale sheaf is G_a. Statement made self-contained with its definitions and the stronger fact that all quasi-coherent modules vanish above degree one. No new Lean was written.",
+  "blueprint": "Step 1 realizes the blueprint's first paragraph (comparison), via existing lem-sc-etale-zariski-qcoh-comparison; step 2 realizes the second paragraph's degree-at-least-two vanishing via Stacks 02UZ; step 3 realizes its specialization to G_a. The imported second paragraph's compactification/two-open-cover argument is replaced below this node because its choice of P,Q merely in the compactification does not ensure either open C minus {P} is proper in the compactification."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: two wording fixes in split_report.blueprint and the new node's from.place): 03DW(2) and 02UZ read, 3 steps checked, route via the unit's step 5 (descent for quasi-coherent modules), small cases tested"
+ }
 }
