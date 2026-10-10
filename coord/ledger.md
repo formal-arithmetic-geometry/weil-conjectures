@@ -1764,3 +1764,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:18 L: merged deliver/M1/lem-sc-normalization-properties (reviewer PASS; first push; new nodes: 0)
 - 15:18 L: merged deliver/F1/lem-sc-ample-square-zero-thickening (reviewer FIX; after a return; new nodes: 2)
 - 15:18 L: merged deliver/F1/lem-sc-dvr-saturation-line (reviewer FIX; first push; new nodes: 1)
+- 15:19 L: returned deliver/G1/lem-sc-affine-cap-section-open (reviewer RETURN: 1. D1/C3: item steps 2-5: these steps are the proof of the new node lem-sc-affine-cap-section-open-algebra (construction)
