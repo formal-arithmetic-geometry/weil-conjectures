@@ -1553,3 +1553,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:52 L: merged deliver/C1/lem-galois-aut-profinite (reviewer FIX applied; first push; new leaf lem-galois-closed-subgroup-product-finite-groups)
 - 2026-10-10, delivery of K1: lem-weil-pbc-simplicial-hom-object-exists returned (40288a74a): Reviewed in full (reviewer sub-agent of L). E2/B7: the new node lem-weil-pbc-simplicial-index-finite-initial states the wrong direction of initiality and is fal
 - 13:52 L: returned deliver/K1/lem-weil-pbc-simplicial-hom-object-exists (reviewer RETURN: E2 initiality direction wrong and false as stated, C1 002R quoted, F)
+- 2026-10-10, delivery of M1: lem-exc-field-discrete-modules returned (245278c76): Reviewed in full (reviewer sub-agent of L). D3/C1: the four steps are the imported blueprint paragraphs copied, citing only definitions and thm-galois-fundament
