@@ -1245,3 +1245,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:38 L: merged F1 lem-weil-pbc-module-finite-type-surjective-on-stalk (01B8, 0 new).
 - 2026-10-10, delivery of E1: def-weil-pbc-henselian-terminology merged from deliver/E1/def-weil-pbc-henselian-terminology (1 commit(s), 0 new node(s), spot-checked by L: L: definition checked against 09XI (3)/09XE/04GF); claim closed
 - 2026-10-10, delivery of F1: lem-weil-pbc-coherent-artin-rees merged from deliver/F1/lem-weil-pbc-coherent-artin-rees (1 commit(s), 0 new node(s), spot-checked by L: L: 01YA via 00IN on a finite affine cover checked); claim closed
+- 2026-10-10, delivery of F1: lem-weil-pbc-sections-annihilated-by-ideal merged from deliver/F1/lem-weil-pbc-sections-annihilated-by-ideal (1 commit(s), 0 new node(s), spot-checked by L: L: 01PO checked: sheaf property, affine description, localization of the annihilated submodule, stalks); claim closed
