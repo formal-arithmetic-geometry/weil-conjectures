@@ -1,8 +1,8 @@
 # Work queue
 
-867 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (60)
+## Stage 1: nodes to split (59)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,10 +10,9 @@
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
-| `lem-sc-derived-mayer-vietoris-triangle` | 3016 | none |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
+| `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
-| `lem-pc-kflat-tensor-product` | 3020 | none |
 | `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
@@ -43,12 +42,12 @@
 | `lem-sp-ce-horizontal-lift` | 6008 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
-| `lem-sc-picard-h1-product-injective` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-perfect-jump-loci` | 6014 | none |
+| `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-picard-valuation-probe-closure` | 6014 | none |
 | `lem-sc-square-injective-free-map-dual-coker-zero` | 6014 | none |
 | `lem-sc-base-change-curve` | - | none |
@@ -879,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1680 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
+Not open yet: 1683 nodes that wait for a statement dependency, 99 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
