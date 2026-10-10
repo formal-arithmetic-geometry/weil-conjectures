@@ -23,30 +23,63 @@
   "def-weil-affine-spectrum",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-lft-over-field-jacobson-space] to X: for every closed subset Z of X, the closed points of X lying in Z are dense in Z.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (2)"
+   }
+  },
+  {
+   "text": "Let Z be the closure of {x} in X. Since U is open in X [def-weil-affine-spectrum], the closure of {x} in U is Z cap U, and it equals {x} because x is a closed point of U [def-weil-closed-points]. So Z cap U = {x} is a nonempty open subset of Z. By step 1 the closed points of X in Z are dense in Z, so some closed point y of X lies in Z cap U = {x}; hence y = x and x is a closed point of X [def-weil-closed-points].",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 with Properties, Definition of Jacobson scheme (closed points dense in every closed subset)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0478 (lemma-locally-finite-type-Jacobson)"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "closed point of an affine open in a scheme locally of finite type over a field is closed in the scheme",
-   "results": "LeanSearch unavailable (HTTP 500); no result",
-   "date": "2026-10-11",
-   "verdict": "service unavailable; no absence conclusion"
-  },
-  {
    "tool": "leanfinder",
-   "query": "Jacobson space locally of finite type scheme over field affine open closed points",
-   "results": "No declaration with this ambient scheme conclusion",
+   "query": "closed points of an affine open in a scheme locally of finite type over a field are closed in the ambient scheme",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/Finite), AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints (Mathlib/AlgebraicGeometry/Morphisms/Finite), and related affine-open declarations",
+   "date": "2026-10-11",
+   "verdict": "generalization: JacobsonSpace plus open-embedding closed-point pullback gives the stated conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyOfFiniteType.jacobsonSpace, Topology.IsOpenEmbedding.preimage_closedPoints",
+   "results": "unknown identifier 'LocallyOfFiniteType.jacobsonSpace'",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "rg -n 'closed.*affine.*open|JacobsonSpace|locallyOfFiniteType.*Jacobson' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "Mathlib has Jacobson-space infrastructure but no theorem in this scheme form",
+   "tool": "leansearch",
+   "query": "closed point of affine open ambient scheme locally finite type over field",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
@@ -54,15 +87,42 @@
    "results": "LocallyOfFiniteType.jacobsonSpace (Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:117) and Topology.IsOpenEmbedding.preimage_closedPoints (Mathlib/Topology/JacobsonSpace.lean:127) together give it (with Spec of a field Jacobson); no single declaration states it",
    "date": "2026-10-10",
    "verdict": "no exact match; a combination of two declarations (reviewer R-pdc2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- JacobsonSpace _",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace (Mathlib.AlgebraicGeometry.Morphisms.FiniteType); JacobsonSpace.of_isOpenEmbedding (Mathlib.Topology.JacobsonSpace)",
+   "date": "2026-10-11",
+   "verdict": "match: supporting declarations found"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'LocallyOfFiniteType.jacobsonSpace' Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; sed -n 126,132p Mathlib/Topology/JacobsonSpace.lean (slopmaster2 .lake/packages/mathlib)",
+   "results": "FiniteType.lean:117 'nonrec lemma LocallyOfFiniteType.jacobsonSpace' is a lemma, not an instance, so Lean does not infer JacobsonSpace X; IsOpenEmbedding.preimage_closedPoints (JacobsonSpace.lean:127) needs it as an instance argument",
+   "date": "2026-10-10",
+   "verdict": "no single declaration: a chain of two (reviewer R-mpc1727)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-positive-dimensional-locally-algebraic-closed-points",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "blueprint": "Step 1 is the Jacobson property of X (Tag 0478 (2)), a Mathlib leaf; step 2 is the elementary deduction for a point closed in the affine open U, realizing the point-fibre clause of the blueprint ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mpc1727",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mpc1727 (reviewer sub-agent of L); spot-checked: Read both Mathlib lines with sed: IsOpenEmbedding.preimage_closedPoints (JacobsonSpace.lean:127) needs [JacobsonSpace Y]; LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) is a lemma, not an instance (Mathlib itself uses it via have :=, e.g. Group/Smooth.lean:41), so the leaf is a chain of two declarations for one clause (B8). Statement, hypotheses and source tag of the item unchanged and right. No existing node states Tag 0478(2) (grep of dag for jacobson/0478). FIX more, RETURN less: item json: status mathlib -> split, mathlib_match null, two steps: step 1 cites new statement-only node lem-sc-lft-over-field-jacobson-space (closed points dense in every closed subset; leaf candidate LocallyOfFiniteType.jacobsonSpace for X -> Spec k recorded in its mathlib_searches), step 2 elementary (closure Z of {x}, Z cap U = {x} open nonempty in Z, a closed point of X lies in it), proof_deps set, my grep recorded in mathlib_searches, split_report.blueprint rewritten (B8); new node added with blueprint.from copied from the item. Edge case U = X immediate.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-mpc1727): The lead's leaf premise was false: LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) is a nonrec lemma, not an instance, so Lean does not infer JacobsonSpace X and the leaf chains two declarations (B8). Reviewer split it as the 17:09 return asked; the new node lem-sc-lft-over-field-jacobson-space is unsplit with its Mathlib leaf candidate recorded."
 }
