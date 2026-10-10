@@ -89,7 +89,8 @@ lemma exists_isIntegral_app_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersi
     (p : ∀ i, D.obj i ⟶ S) (hp : ∀ {i j} (f : i ⟶ j), D.map f ≫ p j = p i)
     [∀ i, LocallyOfFiniteType (p i)] (q : c.pt ⟶ S) (hq : ∀ i, c.π.app i ≫ p i = q)
     [IsIntegralHom q] {U : S.Opens} (hU : IsAffineOpen U) (k : I)
-    (hk : IsAffineOpen (p k ⁻¹ᵁ U)) : ∃ j : I, ((p j).app U).hom.IsIntegral := by
+    (hk : IsAffineOpen (p k ⁻¹ᵁ U)) :
+    ∃ j : I, IsAffineOpen (p j ⁻¹ᵁ U) ∧ ((p j).app U).hom.IsIntegral := by
   classical
   -- the comparison maps to the sections of the limit over the preimage of `U`
   have hle (j : I) : q ⁻¹ᵁ U ≤ c.π.app j ⁻¹ᵁ p j ⁻¹ᵁ U := by
@@ -170,8 +171,8 @@ lemma exists_isIntegral_app_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersi
           rw [e1, ← Polynomial.hom_eval₂, e2]
           exact hσz
         · exact RingHom.IsIntegralElem.map' σ.hom (hρt y hy)
-  obtain ⟨j, ρ, -, hρs, hρp, -, hρs'⟩ := key s
-  refine ⟨j, fun y ↦ ?_⟩
+  obtain ⟨j, ρ, hjU, hρs, hρp, -, hρs'⟩ := key s
+  refine ⟨j, hjU, fun y ↦ ?_⟩
   obtain ⟨a, rfl⟩ := hρs y
   let := ((p k).app U).hom.toAlgebra
   have ha : a ∈ Algebra.adjoin Γ(S, U) (↑s : Set Γ(D.obj k, p k ⁻¹ᵁ U)) := by
@@ -187,5 +188,55 @@ lemma exists_isIntegral_app_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersi
   | mul x y _ _ hx hy =>
     rw [map_mul]
     exact RingHom.IsIntegralElem.mul _ hx hy
+
+include hc in
+/-- **Finiteness descends to a stage of a limit.** Let `{Dᵢ}` be a cofiltered system of
+quasi-compact quasi-separated schemes with closed immersions as transition morphisms, locally of
+finite type over a quasi-compact quasi-separated scheme `S`. If the limit `lim Dᵢ` is finite over
+`S`, then so is some stage `Dᵢ`. -/
+theorem Scheme.exists_isFinite_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersion (D.map f)]
+    [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] {S : Scheme.{u}}
+    [CompactSpace S] [QuasiSeparatedSpace S] (p : ∀ i, D.obj i ⟶ S)
+    (hp : ∀ {i j} (f : i ⟶ j), D.map f ≫ p j = p i) [∀ i, LocallyOfFiniteType (p i)]
+    (q : c.pt ⟶ S) (hq : ∀ i, c.π.app i ≫ p i = q) [IsFinite q] :
+    ∃ i, IsFinite (p i) := by
+  classical
+  obtain ⟨t, ht⟩ := (isCompact_univ (X := S)).elim_finite_subcover
+    (fun U : S.affineOpens ↦ (U : Set S)) (fun U ↦ U.1.isOpen) fun x _ ↦ by
+      obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+        S.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+      exact Set.mem_iUnion.mpr ⟨⟨U, hU⟩, hxU⟩
+  have htop : ⨆ U : t, ((U : S.affineOpens) : S.Opens) = ⊤ := by
+    refine eq_top_iff.mpr fun x _ ↦ ?_
+    obtain ⟨U, hUt, hx⟩ : ∃ U ∈ t, x ∈ (U : Set S) := by simpa using ht (Set.mem_univ x)
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hUt⟩, hx⟩
+  -- the property of a stage to be affine and integral over `U`
+  let P (U : S.affineOpens) (j : I) : Prop :=
+    IsAffineOpen (p j ⁻¹ᵁ (U : S.Opens)) ∧ ((p j).app U).hom.IsIntegral
+  have hPmap (U : S.affineOpens) {j j' : I} (f : j' ⟶ j) (h : P U j) : P U j' := by
+    have hpre : D.map f ⁻¹ᵁ p j ⁻¹ᵁ (U : S.Opens) = p j' ⁻¹ᵁ U := by
+      rw [← Scheme.Hom.comp_preimage, hp]
+    refine ⟨hpre ▸ h.1.preimage (D.map f), ?_⟩
+    have hσp : (p j).app U ≫ (D.map f).appLE _ _ hpre.ge = (p j').app U := by
+      rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE,
+        Scheme.Hom.appLE_eq_of_eq (hp f) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
+    rw [← hσp, CommRingCat.hom_comp]
+    have : IsIso (homOfLE hpre.ge).op := (eqToIso hpre).op.isIso_inv
+    have hσs : Function.Surjective ((D.map f).appLE _ _ hpre.ge).hom :=
+      (ConcreteCategory.bijective_of_isIso
+        ((D.obj j').presheaf.map (homOfLE hpre.ge).op)).2.comp
+        ((D.map f).app_surjective _ h.1)
+    exact RingHom.IsIntegral.trans _ _ h.2 (RingHom.Finite.of_surjective _ hσs).to_isIntegral
+  have hPex (U : S.affineOpens) : ∃ j, P U j := by
+    obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := I)
+    obtain ⟨k, -, hk⟩ := exists_isAffineOpen_preimage_of_isLimit D c hc p hp q hq U.2
+      (U.2.preimage q) i₀
+    exact exists_isIntegral_app_of_isLimit D c hc p hp q hq U.2 k hk
+  choose j hj using hPex
+  obtain ⟨j₀, hj₀⟩ := IsCofiltered.inf_objs_exists (t.image j)
+  refine ⟨j₀, (IsFinite.iff_isIntegralHom_and_locallyOfFiniteType (f := p j₀)).mpr
+    ⟨?_, inferInstance⟩⟩
+  refine isIntegralHom_of_iSup_eq_top (p j₀) (fun U : t ↦ U.1) htop fun U ↦ ?_
+  exact hPmap U.1 (hj₀ (Finset.mem_image_of_mem j U.2)).some (hj U.1)
 
 end AlgebraicGeometry
