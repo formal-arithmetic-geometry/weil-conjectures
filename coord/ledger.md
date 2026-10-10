@@ -1714,3 +1714,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:03 L: returned deliver/J1/lem-sc-p1-coherent-proj-representation (reviewer RETURN: 1. E1: lem-sc-p1-serre-section-module-finite: the statement is false. The module M = bigoplus_{n in Z} Gamma(P, G(n)) ov)
 - 15:04 L: returned deliver/F1/lem-sc-ample-square-zero-thickening (reviewer RETURN: 1. C1/C2: step 1 of lem-sc-ample-square-zero-thickening: it is marked elementary with uses [] but carries three non-elem)
 - 15:04 L: FIX more, RETURN less (human): merge tool accepts reviewer-added statement nodes (FIX+NODE), brief-review, maintainer.md (4c), STATE line
+- 15:05 L: merged deliver/E1/lem-sc-group-cd-one (reviewer PASS; after a return; new nodes: 3)
