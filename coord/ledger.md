@@ -2654,3 +2654,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:21 L: merged deliver/F1/lem-pc-kflat-tensor-cone-two-out-of-three (reviewer FIX; first push; new nodes: 2)
 - 21:21 L: merged deliver/K1/lem-sc-pseudo-coherent-support-annihilation (reviewer FIX+NODE(1); after a return; new nodes: 3)
 - 21:21 L: merged deliver/G1/lem-pc-proper-support-descent (reviewer FIX; first push; new nodes: 0)
+- 21:21 L: merged deliver/H1/lem-sc-hilbert-affine-denominator-module (reviewer FIX; first push; new nodes: 0)

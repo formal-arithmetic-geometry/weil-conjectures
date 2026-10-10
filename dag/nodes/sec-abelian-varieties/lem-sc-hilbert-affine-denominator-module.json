@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Affine denominator maps are injective on a full-support module without embedded primes",
- "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and M a finite A-module [def-weil-pbc-module-finite-type-presentation] whose support is Spec(A) and whose associated primes are all minimal primes of A. Let a and b be non-zero-divisors of A, let q be the total quotient ring of A, and put I = {x in A | x(a/b) belongs to A inside q}. Then I is an ideal of A (and hence is finitely generated), multiplication gives an injective A-linear map I M \\to M, and the rule x m \\mapsto (a/b)(x m), interpreted in the localization M_b and using that b is a non-zero-divisor on M, gives an injective A-linear map I M \\to M. The cokernel of the first map is annihilated by I, and the cokernel of the second map is annihilated by the submodule (a/b)I of A.",
+ "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and M a finite A-module [def-weil-pbc-module-finite-type-presentation] whose support is Spec(A) and whose associated primes are all minimal primes of A. Let a and b be non-zero-divisors of A, let q be the localization of A at the multiplicative set of all non-zero-divisors (the total quotient ring), and put I = {x in A | x(a/b) belongs to A inside q}. Then I is an ideal of A (and hence is finitely generated), multiplication gives an injective A-linear map I M \\to M, and the rule x m \\mapsto (a/b)(x m), interpreted in the localization M_b and using that b is a non-zero-divisor on M, gives an injective A-linear map I M \\to M. The cokernel of the first map is annihilated by I, and the cokernel of the second map is annihilated by the submodule (a/b)I of A.",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 02P2 (Lemma 31.25.5), affine proof after writing s=a/b"
@@ -22,9 +22,65 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The set I is closed under addition and under multiplication by arbitrary elements of A: if x(a/b) and y(a/b) lie in A, then (x+y)(a/b) lies in A, and for r in A one has (rx)(a/b)=r(x(a/b)). Thus I is an ideal. Since A is Noetherian, every ideal is finitely generated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 proof, definition of I and Noetherian finite generation"
+   }
+  },
+  {
+   "text": "A non-zero-divisor c of A lies in no minimal prime of A by [lem-pc-minimal-prime-avoids-nonzerodivisor]; since every associated prime of M is a minimal prime of A, c lies in no associated prime of M, so by [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes] c is not a zerodivisor on M. Applied to c = a and c = b, a and b act injectively on M, and hence the canonical map M to M_b is injective. For x in I, the scalar (a/b)x belongs to A by definition of I, so multiplication by a/b sends IM into M inside M_b.",
+   "uses": [
+    "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 proof, paragraphs beginning 'For any A-module M consider the map 1' and 'Consider on the other hand the map sigma'"
+   }
+  },
+  {
+   "text": "Multiplication gives the first A-linear map IM to M. The preceding localization construction gives the second A-linear map by sending x m to (a/b)(x m); it is injective because a acts injectively on M (step 2) and M embeds in M_b.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 proof, construction and injectivity of the maps 1 and s"
+   }
+  },
+  {
+   "text": "The cokernel of the first map is M/IM. Every element of I kills this quotient because i m is in IM for i in I and m in M, so it is annihilated by I.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 proof, final sentence on M/IM"
+   }
+  },
+  {
+   "text": "The cokernel of the second map is M/s(IM). For i in I and m in M, the scalar (a/b)i belongs to A by the definition of I, and its product with the class of m is the class of s(i m), which is zero in this quotient. Hence the quotient is annihilated by the submodule (a/b)I of A.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02P2 proof, final sentence on M/s(IM)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02P2 (Lemma 31.25.5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +112,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-difference",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-affine-denominator-module",
+  "worker": "stage1",
+  "summary": "Split the affine denominator calculation from Stacks Tag 02P2 into four proof steps: ideal and finite generation, the two injective maps using module regularity, and the two annihilation statements. Added one unsplit dependency recording the associated-prime criterion for ring nonzerodivisors to act injectively on M.",
+  "blueprint": "Realizes the ancestor lem-sc-hilbert-polynomial proof sentence describing the affine calculation after writing the regular meromorphic section as a/b.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-adm2550",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adm2550 (reviewer sub-agent of L); spot-checked: Statement vs Tag 02P2 affine proof and vs citer lem-sc-hilbert-difference (affine step: full support + no embedded primes => Ass(M) = minimal primes of A; maps IM->M, cokernels killed by I and (a/b)I): matches (C4). Steps 1,4,5 elementary and correct; total quotient ring now defined (E7 reason given). FIX more, RETURN less: new node lem-sc-hilbert-module-regular-from-minimal-assoc is class (d), two lines from existing lem-pc-minimal-prime-avoids-nonzerodivisor (nzd avoids minimal primes) and lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes (M-zerodivisors = union of Ass(M)); dropped it, step 2 now cites those two nodes with the argument written out, step 3 made elementary (uses step 2), proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
