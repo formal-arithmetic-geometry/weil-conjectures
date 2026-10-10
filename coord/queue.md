@@ -1,6 +1,6 @@
 # Work queue
 
-817 items; claim with `tools/claim.py next <group> [--stage N]`.
+818 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (655)
 
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-limit-fibre-products` | 1011 | none |
 | `lem-weil-pbc-limit-flat-modules` | 1011 | none |
 | `lem-weil-pbc-limit-residue-field` | 1011 | none |
-| `lem-weil-pbc-linear-equation-localization-polynomial` | 1011 | none |
 | `lem-weil-pbc-local-completion-quotient` | 1011 | none |
 | `lem-weil-pbc-localization-of-regular-ring` | 1011 | none |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1011 | none |
@@ -154,6 +153,7 @@
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
+| `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -662,7 +662,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (162)
+## Stage 2: nodes to state (163)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -770,6 +770,7 @@
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
+| `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
