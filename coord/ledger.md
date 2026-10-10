@@ -2580,3 +2580,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:52 L: merged deliver/F1/lem-sc-hilbert-embedded-points (reviewer FIX; first push; new nodes: 3)
 - 20:53 L: merged deliver/J1/def-pur-sheaf-tensor-product (reviewer FIX; first push; new nodes: 1)
 - 20:53 L: returned deliver/G1/lem-sc-intersection-effective-cartier (reviewer RETURN: 1. E (missing hypothesis) / C4: the right-hand side (L_2...L_d . D) is only defined by def-sc-intersection-number when D)
+- 20:54 L: attached AlgebraicGeometry.IsCurve.SurjectiveRestrictionTwo to def-weil-pbc-C8 (Assertions.lean:140-145, sorry-free; reviewer R-dc82425)
