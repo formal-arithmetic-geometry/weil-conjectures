@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+ "kind": "statement",
+ "title": "In characteristic p, N-2 is tested on finite purely inseparable extensions",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] integral domain whose field of fractions $K$ has characteristic $p>0$. Suppose that for every finite purely inseparable field extension $L/K$ [def-weil-pbc-finite-purely-inseparable-extension] (a field extension [def-pc-field-extension] with $\\dim_K L<\\infty$ such that every $\\alpha\\in L$ satisfies $\\alpha^{p^n}\\in K$ for some $n\\ge0$) the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure] is a finitely generated $R$-module [def-weil-finitely-generated-module]. Then $R$ is N-2 [def-weil-pbc-japanese-domain]: for every finite field extension $L/K$ the integral closure of $R$ in $L$ is a finitely generated $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032N (lemma-domain-char-p-N-1-2, line 45382), direction 'if' (the converse is immediate from the definition); tag verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-japanese-domain"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of a Noetherian domain in every finite extension is finite if it is finite in every purely inseparable extension",
+   "results": "IsIntegralClosure.finite, IsIntegralClosure.isNoetherian, IsIntegralClosure.isDedekindDomain (Mathlib.RingTheory.DedekindDomain.IntegralClosure: separable extensions of a Noetherian integrally closed domain only), integralClosure.isIntegrallyClosedOfFiniteExtension, Ring.instIsIntegrallyClosedNormalClosure; none reduces finiteness to purely inseparable extensions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian domain of characteristic p: finiteness of integral closure in finite purely inseparable extensions implies finiteness in all finite extensions (Japanese ring criterion)",
+   "results": "IsIntegralClosure.finite, IsIntegralClosure.isNoetherian, IsIntegralClosure.isNoetherianRing, integralClosure.isNoetherianRing (separable case, Mathlib.RingTheory.DedekindDomain.IntegralClosure), Ring.instFiniteNormalClosure (Mathlib.RingTheory.NormalClosure, needs a perfect fraction field and Dedekind S); no N-2 notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, Module.Finite, integralClosure",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsJapanese\\|Japanese\\|IsNagata\\|N-2' and grep -rln IsPurelyInseparable | xargs grep -ln 'integralClosure\\|IsIntegralClosure' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only Analysis/SpecialFunctions/JapaneseBracket.lean (unrelated); no file mentions both IsPurelyInseparable and integral closure; the only finiteness theorem for integral closures is IsIntegralClosure.finite (RingTheory/DedekindDomain/IntegralClosure.lean:175, separable case)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsJapanese (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (no proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-polynomial-ring-n2",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 032N (\"if\" direction) at algebra.tex line 45382",
+ "lead_note": "split following the 032N proof (finite normal extension M containing L, the purely inseparable subfield of M over K, then 032L for the separable top)"
+}
