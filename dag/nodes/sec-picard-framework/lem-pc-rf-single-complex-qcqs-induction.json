@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Quasi-compact quasi-separated derived base change from the single-complex condition",
- "statement": "In a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S quasi-compact and quasi-separated [def-pc-scheme, def-pc-base-change], let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). Assume that for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism. Then the composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' is an isomorphism in D(\\mathcal O_{S'}), where f' is the base change of f.",
+ "statement": "In a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S quasi-compact and quasi-separated [def-pc-scheme, def-pc-base-change], write f':X'\\to S' for the base change of f. Let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). Assume that for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism. Then the composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' is an isomorphism in D(\\mathcal O_{S'}).",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9 (lemma-single-complex-base-change), proof by induction principle and relative Mayer–Vietoris"
@@ -23,9 +23,68 @@
   "def-pc-derived-pullback",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The assertion that the displayed composite is an isomorphism is local on S'. Restricting to an affine open of S' preserves the derived pullback, derived direct image, and the canonical comparison map, so it is enough to take g:S'\\to S with S' and S affine; then X is quasi-compact and quasi-separated by the hypotheses and the cartesian square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, proof, first paragraph"
+   }
+  },
+  {
+   "text": "Let U\\subseteq X be an affine open, so U=Spec(A), S=Spec(R), S'=Spec(R') and U'=U\\times_S S'=Spec(A') with A'=A\\otimes_R R' are affine, and the stalk hypothesis restricts to U'. Write K|_U and K'|_{U'} as \\widetilde{M^\\bullet} and \\widetilde{N^\\bullet} by the affine equivalence D(A)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_U) [lem-pc-affine-qcoh-derived-equivalence]. Since U\\to S and U'\\to S' are affine, hence qcqs, their derived direct images lie in D_{\\mathrm{QCoh}} [lem-pc-derived-direct-image-preserves-qcoh] and correspond under the same equivalence on S and S' to M^\\bullet and N^\\bullet viewed over R and R' (derived global sections of a composite); derived pullback along Spec R'\\to Spec R and Spec A'\\to Spec A is -\\otimes^L_R R' and -\\otimes^L_A A' on these sheaves [lem-pc-affine-derived-pullback-tensor-tilde]. Thus the base-change composite for U is the module map M^\\bullet\\otimes_R^L R'\\to M^\\bullet\\otimes_A^L A'\\to N^\\bullet, which is an isomorphism in D(R') by the affine criterion [lem-pc-rf-single-complex-affine-base-change].",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-rf-single-complex-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0DJ8 and 0DJ9, affine case"
+   }
+  },
+  {
+   "text": "Define P(W) for a quasi-compact open W of X to mean that the analogous composite Lg^*R(W\\to S)_*K|_W\\to R(W'\\to S')_*K'|_{W'}, with W'=(g')^{-1}(W), is an isomorphism. Step 2 gives P(W) for every affine W. By the qcqs induction principle [lem-sc-invert-s-cohomology-induction], applied to the qcqs scheme X of Step 1, P(X) follows once P(U\\cup V) is shown for U a quasi-compact open and V an affine open with P(U), P(V), P(U\\cap V). In that situation U\\cap V is quasi-compact because X is quasi-separated [pqf-lem-qs-intersection-qc], and U\\cup V is quasi-compact and quasi-separated over the affine S.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction",
+    "pqf-lem-qs-intersection-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, proof by the induction principle"
+   }
+  },
+  {
+   "text": "Apply the relative Mayer--Vietoris gluing lemma [lem-pc-rf-single-complex-relative-mayer-vietoris] to the cartesian square for f|_{U\\cup V}:U\\cup V\\to S and its base change (U\\cup V)'\\to S', with K|_{U\\cup V}\\to K'|_{(U\\cup V)'}: its hypotheses are U, V, U\\cap V quasi-compact (Step 3) and the three comparison isomorphisms P(U), P(V), P(U\\cap V). It gives P(U\\cup V), so P holds for every quasi-compact open, in particular P(X).",
+   "uses": [
+    "lem-pc-rf-single-complex-relative-mayer-vietoris"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-rf-single-complex-affine-base-change",
+  "lem-sc-invert-s-cohomology-induction",
+  "pqf-lem-qs-intersection-qc",
+  "lem-pc-rf-single-complex-relative-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +116,61 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-base-change-single-complex-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-single-complex-qcqs-induction",
+  "worker": "stage1",
+  "summary": "Split Tag 0DJ9 into the affine stalkwise-to-derived-module case, the qcqs induction-principle application, and the relative Mayer--Vietoris gluing step. Added statement-only nodes for the affine case and relative Mayer--Vietoris comparison; reused the existing induction principle and Mathlib triangle-isomorphism leaf.",
+  "blueprint": "Realizes the proof paragraph of lem-pc-rf-perfect-base-change that invokes the single-complex base-change criterion, specifically the affine reduction, qcqs induction, and relative Mayer--Vietoris steps.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Its statement is the generic qcqs induction principle needed to pass from affine opens and Mayer--Vietoris gluing to all quasi-compact opens; no node in this unit supplies that generic induction."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "generic affine equivalence D(A)=D_QCoh(Spec A), used to translate the affine base case into modules"
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "generic: Rf_* of a qcqs morphism preserves D_QCoh, needed to apply the affine equivalence on S and S'"
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "generic: derived pullback between affine schemes is derived tensor on tilde complexes"
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "generic: in a quasi-separated scheme the intersection of two quasi-compact opens is quasi-compact"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "pqf-lem-qs-intersection-qc",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "pqf-lem-qs-intersection-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rqi2908",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rqi2908 (reviewer sub-agent of L); spot-checked: E7: statement diffed against sheaf-dag, only 'where f' is the base change' moved before use, mathematically identical, reason named in second reading; accepted. Proof follows Tag 0DJ9 (local on S', affine base case, induction principle lem-sc-invert-s-cohomology-induction cited as generic tool, relative MV gluing). C4 of the downstream E1 criterion unaffected. FIX more, RETURN less: (1) C1 Step 2: the affine translation 'under the affine quasi-coherent identification' was uncited; now cites lem-pc-affine-qcoh-derived-equivalence, lem-pc-derived-direct-image-preserves-qcoh, lem-pc-affine-derived-pullback-tensor-tilde with the affine node. (2) E Step 3/4: the induction principle gives U qc and V affine, not U, V, U cap V qc on a cover of X; added U cap V qc by quasi-separatedness [pqf-lem-qs-intersection-qc] and applied the relative MV node to f restricted to U cup V. (3) B3 lem-pc-rf-single-complex-relative-mayer-vietoris carried a proof sketch ('Indeed, ...', citing lem-sf-triangle-morphism-iso outside stmt_deps) inside its statement; stripped it and dropped lem-pc-derived-mayer-vietoris-triangle from stmt_deps; Step 4 now cites only the relative node (lem-sf-triangle-morphism-iso removed from proof_deps). Affine node: real lemma (Tag 0DJ8 affine direction), not a duplicate of the listed 0DJ8 nodes.; 2 file(s) fixed by the reviewer"
+ }
 }
