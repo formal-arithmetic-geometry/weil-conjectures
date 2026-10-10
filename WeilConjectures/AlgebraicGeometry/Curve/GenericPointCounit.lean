@@ -332,4 +332,53 @@ theorem isIso_counit_app_fromSpecFunctionField
 
 end Scheme
 
+namespace IsCurve
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
+  [IsCurve f] [IsIntegral C]
+
+include f in
+/-- **A sheaf with zero generic restriction is acyclic.** Let `C` be an integral curve over an
+algebraically closed field, with generic point `η`, and `G` an abelian étale sheaf on `C` with
+`η^* G = 0`. Then `Hⁱ(C, G) = 0` for `i ≥ 1`: the unit `G ⟶ η_* η^* G` is zero, so by continuity
+of sections at the generic point every section of `G` vanishes under the unit of some nonempty
+affine open (`AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing`).
+(blueprint: `lem-sc-zero-generic-acyclic`) -/
+theorem subsingleton_H_of_isZero_upperStar_fromSpecFunctionField
+    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hG : IsZero ((C.fromSpecFunctionField)^*[AddCommGrpCat.{u + 1}].obj G)) (i : ℕ) :
+    Subsingleton (Sheaf.H G (i + 1)) := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian C := {}
+  let ε := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} C.fromSpecFunctionField).unit.app G
+  let D := C.affineOpensDiagram
+  let ι := C.affineOpensDiagramι
+  let c := C.functionFieldCone
+  have hc : IsLimit c := C.isLimitFunctionFieldCone
+  have hP := C.fromSpecFunctionField_eq_functionFieldCone_comp
+  let τ (U : C.NonemptyAffineOpens) := unitComparison (c.π.app U) (ι.app U)
+    C.fromSpecFunctionField (hP U) G
+  have hτ (U : C.NonemptyAffineOpens) : C.affineOpenUnit U G ≫ τ U = ε :=
+    unit_app_comp_unitComparison _ _ _ _ G
+  have hz : IsZero ((C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj
+      ((C.fromSpecFunctionField)^*[AddCommGrpCat.{u + 1}].obj G)) := Functor.map_isZero _ hG
+  refine subsingleton_H_of_genericVanishing f G (fun V s ↦ ?_) i
+  refine Etale.mem_smallEtaleTopology_of_forall_isAffine _ fun W g hW ↦ ?_
+  let x := G.obj.map g.op s
+  have hx : ε.hom.app (op W) x = 0 :=
+    ConcreteCategory.congr_hom
+      ((((sheafSections _ _).obj (op W)).map_isZero hz).eq_of_src (𝟙 _) 0) _
+  let U₀ : C.NonemptyAffineOpens := Classical.arbitrary _
+  have h₀ : (τ U₀).hom.app (op W) ((C.affineOpenUnit U₀ G).hom.app (op W) x) = 0 := by
+    rw [← hτ U₀] at hx
+    exact hx
+  obtain ⟨U, f', hU⟩ := exists_unitComparison_app_eq_zero_of_isLimit D ι c
+    C.fromSpecFunctionField hP hc G W U₀ _ h₀
+  refine ⟨U, ?_⟩
+  rw [← C.affineOpenUnit_comp_transition f' G]
+  exact hU
+
+end IsCurve
+
 end AlgebraicGeometry
