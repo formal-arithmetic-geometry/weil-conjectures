@@ -10,9 +10,38 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The empty family has the empty disjoint refinement. For a nonempty family, construct refinements inductively. Suppose a finite pairwise-disjoint family \\(\\mathcal C_t\\) of basic sets has union \\(B_1\\cup\\cdots\\cup B_t\\). For every \\(C\\in\\mathcal C_t\\), apply [lem-weil-pbc-affine-basic-set-difference] to write \\(C\\setminus B_{t+1}\\) as a finite pairwise-disjoint family of basic sets. These families remain pairwise disjoint for distinct \\(C\\), since the \\(C\\)'s are disjoint.",
+   "uses": [
+    "lem-weil-pbc-affine-basic-set-difference"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S0, proof at line 12049 (the refinement is asserted there); induction and set operations written out by the agent"
+   }
+  },
+  {
+   "text": "It remains to add the part of \\(B_{t+1}\\) not already covered. Start with the one-element family \\(\\{B_{t+1}\\}\\). Process the finitely many members \\(C\\) of \\(\\mathcal C_t\\) one at a time: replace every current basic piece \\(P\\) by the finite pairwise-disjoint basic decomposition of \\(P\\setminus C\\) supplied by [lem-weil-pbc-affine-basic-set-difference]. At each replacement the pieces stay pairwise disjoint, and after all \\(C\\)'s the resulting finite family \\(\\mathcal R\\) consists of pairwise-disjoint basic sets with \\(\\bigcup\\mathcal R=B_{t+1}\\setminus\\bigcup\\mathcal C_t\\). The family formed by all pieces of the \\(C\\setminus B_{t+1}\\) differences together with \\(\\mathcal R\\) is finite and pairwise disjoint, and its union is \\(\\bigcup\\mathcal C_t\\cup B_{t+1}\\). Thus it is \\(\\mathcal C_{t+1}\\). Induction through \\(t=m\\) gives the required finite pairwise-disjoint basic family; when \\(m=0\\), take the empty family.",
+   "uses": [
+    "lem-weil-pbc-affine-basic-set-difference"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma Tag 03S0, proof at line 12049; finite disjointization induction written out by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-basic-set-difference"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma Tag 03S0, proof at line 12049; the source's refinement step is expanded using the explicit basic-set difference calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +73,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +93,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-basic-sets-disjoint-refinement",
+  "worker": "stage1",
+  "summary": "Split the missing refinement behind Stacks Tag 03S0. Added one unsplit supporting node giving an explicit finite pairwise-disjoint basic decomposition of the difference of two basic sets; then proved the item's finite-family statement by induction, subtracting the new basic set from existing disjoint pieces and subtracting all existing pieces from the new set. The empty-family case is included. The item's existing three Mathlib searches were retained and the new node has LeanSearch, LeanFinder and grep searches, all with no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the induction (differences C\\B_{t+1} and B_{t+1}\\∪C_t decomposed by the new difference node) and the new node's statement; proof by agent, the source only asserts the refinement"
+ }
 }
