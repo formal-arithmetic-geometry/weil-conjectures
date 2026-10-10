@@ -8,9 +8,31 @@
   "place": "Algebra, proof of Lemma Tag 02HT (lemma-smooth-test-artinian, line 38950): 'As B'_N is Artinian such a filtration exists'; from Lemma Tag 00JB (lemma-artinian-finite-length, line 12787: an Artinian ring has finite length over itself), Definition Tag 02LY (definition-length) and Lemma Tag 00J3 (lemma-simple-pieces, line 12546: a maximal chain of submodules of a finite length module has simple successive quotients)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $B$ as a module over itself. The Artinian-ring finite-length lemma [lem-weil-pbc-artinian-ring-self-finite-length] gives a finite bound on strict chains of $B$-submodules of $B$.",
+   "uses": [
+    "lem-weil-pbc-artinian-ring-self-finite-length"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal $J$ is a $B$-submodule of $B$, so every strict chain of $B$-submodules in $J$ is a strict chain in $B$; hence $J$ has finite length. Apply the simple-filtration lemma [lem-weil-pbc-finite-length-module-simple-filtration] to $M=J$ to obtain $0=J_0\\subsetneq\\cdots\\subsetneq J_r=J$ with each quotient nonzero and without a proper nonzero $B$-submodule. The $B$-submodules of the ideal $J$ are exactly the ideals of $B$ contained in $J$, and the quotient modules are the same, so this is the required ideal filtration. If $J=0$, take $r=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "lem-weil-pbc-finite-length-module-simple-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 02HT (lemma-smooth-test-artinian), using Tags 00JB, 00J3 and 02LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,7 +57,8 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
+ "split_report": "Split into the reusable Artinian self-module finite-length lemma and the finite-length module simple-filtration lemma. The two steps apply these facts to the ideal J and identify B-submodules of J with ideals of B contained in J; the zero ideal is handled by r=0.",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +78,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: second delivery: helpers define Artinian and length inline (02LY/00IV), route 00JB + 00J3; L removed the stray def-weil-pbc-kahler-differentials citation from both helpers post-merge"
+ }
 }

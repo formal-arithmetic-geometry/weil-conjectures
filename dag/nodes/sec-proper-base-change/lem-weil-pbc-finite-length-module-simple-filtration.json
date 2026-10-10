@@ -1,0 +1,50 @@
+{
+ "id": "lem-weil-pbc-finite-length-module-simple-filtration",
+ "kind": "statement",
+ "title": "A finite-length module has a filtration with simple quotients",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module [def-weil-pbc-kahler-differentials]. Define the module length as the supremum of the numbers of proper inclusions in strict chains of $R$-submodules (Stacks Tags 02LY and 00IV), and assume this supremum is finite. Then there are an integer $r\\ge0$ and strict inclusions $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$ such that each quotient $M_i/M_{i-1}$ is nonzero and has no proper nonzero $R$-submodule.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 02LY (definition-length, line 12350; the same definition is indexed as Tag 00IV) and Lemma Tag 00J3 (lemma-simple-pieces, line 12546): a maximal chain in a finite-length module has simple successive quotients"
+ },
+ "stmt_deps": ["def-weil-pbc-kahler-differentials"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite length module has a composition series with simple successive quotients",
+   "results": "exists_compositionSeries_of_isNoetherian_isArtinian; CompositionSeries.exists_of_finiteLength",
+   "date": "2026-10-10",
+   "verdict": "general composition-series machinery, not an exact theorem in the stated notation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exists composition series for finite length module simple quotients",
+   "results": "isFiniteLength_iff_exists_compositionSeries and CompositionSeries factors in Mathlib.RingTheory.FiniteLength",
+   "date": "2026-10-10",
+   "verdict": "ingredients only; translating CompositionSeries to an explicit submodule chain takes additional steps"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isFiniteLength_iff_exists_compositionSeries\\\\|exists_compositionSeries_of_isNoetherian_isArtinian' Mathlib/RingTheory/FiniteLength.lean",
+   "results": "FiniteLength.lean:50 and :82 provide composition-series existence criteria",
+   "date": "2026-10-10",
+   "verdict": "no exact one-line declaration matching the explicit filtration statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
