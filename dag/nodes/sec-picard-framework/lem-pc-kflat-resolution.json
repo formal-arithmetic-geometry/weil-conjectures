@@ -4,25 +4,79 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-tensor",
-   "place": "its statement (a notion the statement uses)",
+   "place": "the existence assertion proved by successive bounded-above flat replacements and their homotopy colimit",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence of K-flat resolutions on a ringed site",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For every cochain complex $\\mathcal G^\\bullet$ of sheaves of $\\mathcal O$-modules there exist a K-flat complex $\\mathcal K^\\bullet$ [def-pc-kflat-complex] whose terms are flat $\\mathcal O$-modules and a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ [def-weil-abstract-derived-category] which is surjective in every degree.",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For every cochain complex $\\mathcal G^\\bullet$ of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] there exist a K-flat complex $\\mathcal K^\\bullet$ [def-pc-kflat-complex] whose terms are flat $\\mathcal O$-modules [def-pc-flat-sheaf-modules] and a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ [def-pc-quasi-iso-modules] which is surjective in every degree.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 06YS (sites-cohomology-lemma-K-flat-resolution)"
  },
  "stmt_deps": [
+  "def-pc-cochain-complex-modules",
   "def-pc-kflat-complex",
-  "def-weil-abstract-derived-category"
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer $N$, take the good truncation $\\tau_{\\le N}\\mathcal G^\\bullet$. It is bounded above, so [lem-pc-kflat-bounded-flat-replacement] gives a bounded-above complex $\\mathcal E_N^\\bullet$ of flat $\\mathcal O$-modules and a termwise surjective quasi-isomorphism $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$. Functoriality of the replacements supplies compatible maps $\\mathcal E_N^\\bullet\\to\\mathcal E_{N+1}^\\bullet$.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS"
+   }
+  },
+  {
+   "text": "Form the homotopy colimit $\\mathcal K^\\bullet=\\operatorname{hocolim}_N\\mathcal E_N^\\bullet$, represented by the cone of $1-\\operatorname{shift}\\colon\\bigoplus_N\\mathcal E_N^\\bullet\\to\\bigoplus_N\\mathcal E_N^\\bullet$. By [lem-pc-kflat-closure], bounded-above flat complexes are K-flat, cones and countable direct sums of K-flat complexes are K-flat, and countable direct sums of flat sheaves are flat; hence $\\mathcal K^\\bullet$ is K-flat and every term $\\mathcal K^i=\\bigoplus_N\\mathcal E_N^{i+1}\\oplus\\bigoplus_N\\mathcal E_N^i$ is flat. Since the maps $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$ commute strictly with the transition maps, they induce a map of cones $\\mathcal K^\\bullet\\to\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet$, which in each degree is a direct sum of the termwise surjective maps of [lem-pc-kflat-bounded-flat-replacement], hence termwise surjective. The canonical map $\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is $(x,y)\\mapsto\\sum_N y_N$ in degree $i$; it is surjective because $(\\tau_{\\le N}\\mathcal G^\\bullet)^i=\\mathcal G^i$ for $N>i$. So the composite $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ is termwise surjective.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS"
+   }
+  },
+  {
+   "text": "Each $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$ is a quasi-isomorphism. A countable direct sum is the filtered colimit of its finite partial sums, so by [lem-pc-kflat-hocolim-truncations] (filtered colimits of quasi-isomorphisms are quasi-isomorphisms) the map $\\bigoplus_N\\mathcal E_N^\\bullet\\to\\bigoplus_N\\tau_{\\le N}\\mathcal G^\\bullet$ is a quasi-isomorphism. The map $\\mathcal K^\\bullet\\to\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet$ of Step 2 is a map of cones whose two components are this quasi-isomorphism; the long exact cohomology sequences of the cones and the five lemma show it is a quasi-isomorphism. By [lem-pc-kflat-hocolim-truncations] the canonical map $\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is a quasi-isomorphism; composing, $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-hocolim-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 give a K-flat complex $\\mathcal K^\\bullet$ with flat terms and a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ which, by Step 2, is surjective in every degree, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-closure",
+  "lem-pc-kflat-hocolim-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 06YS"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +142,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-resolution",
+  "worker": "stage1",
+  "summary": "Split the Stacks 06YS existence proof into bounded-above flat replacement, closure of K-flat complexes under the homotopy-colimit construction, and the truncation/filtered-colimit quasi-isomorphism. The item statement and hypotheses were retained.",
+  "blueprint": "The steps realize the bounded replacements, homotopy-colimit K-flatness, and final truncation comparison in the def-weil-derived-tensor ancestor proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kfr1904",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfr1904 (reviewer sub-agent of L); spot-checked: No cycle: item cites only its three new nodes, none of def-pc-derived-pullback / lem-pc-ringed-spaces-derived-pullback-composition. Existing 06YD (lem-pc-bounded-above-flat-kflat) and 06YB (lem-pc-kflat-stalk-criterion) are ringed-space statements, not usable on an arbitrary site, so lem-pc-kflat-closure is not a duplicate (it is the site version incl. 06Y5-type closure); lem-kun-* are etale-site only. New statements true (functorial bounded-above flat replacement via Tot of functorial j_! resolutions; K-flat closed under cones/sums; hocolim of truncations). Mathlib grep KFlat: no hit. FIX more, RETURN less: (1) Step 3 (C1) applied the filtered-colimit clause directly to a homotopy colimit, which is not a filtered colimit; rewritten: direct sums as filtered colimits of finite sums, then map of cones + five lemma, then the truncation comparison; (2) Step 2 surjectivity argument was muddled (attributed surjectivity onto hocolim of truncations to eventual identity, and never argued hocolim tau->G surjective); rewritten with explicit degreewise components; Step 4 restated accordingly.; 1 file(s) fixed by the reviewer"
+ }
 }

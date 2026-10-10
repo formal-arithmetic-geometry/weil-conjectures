@@ -2326,3 +2326,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:03 L: attached lem-pc-ideal-sheaf-comap-affine-extension: AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE (B10, sorry-free)
 - 19:04 L: returned deliver/J1/lem-pc-proper-support-perfect-direct-image (reviewer RETURN: Reviewer R-psp1904. 1. C4 step 1: cited lem-pc-rf-base-change-flat-module needs f quasi-compact SEPARATED and a single q)
 - 19:04 L: merged deliver/C1/thm-picard-serre-a (reviewer FIX; first push; new nodes: 1)
+- 19:04 L: merged deliver/M1/lem-pc-kflat-resolution (reviewer FIX; first push; new nodes: 3)
