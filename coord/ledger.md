@@ -2447,3 +2447,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:51 L: merged deliver/C1/thm-sp-if-e1 (reviewer FIX; first push; new nodes: 0)
 - 19:52 L: merged deliver/M1/lem-pc-kflat-hocolim-truncations (reviewer FIX; first push; new nodes: 1)
 - 19:52 L: merged deliver/J1/pqf-lem-associated-sections-localize (reviewer PASS; first push; new nodes: 0)
+- 19:52 L: merged deliver/C1/lem-pc-perfect-object-compact (reviewer FIX; first push; new nodes: 0)

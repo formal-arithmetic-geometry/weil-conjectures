@@ -24,9 +24,61 @@
   "def-pc-perfect-complex",
   "def-pc-compact-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let P^\\vee be the dual of P supplied by [lem-pc-perfect-tensor-hom-duality]. For every M in D_{\\mathrm{QCoh}}(\\mathcal O_X), its first tensor-Hom isomorphism with A=\\mathcal O_X and B=M (and P\\otimes^L\\mathcal O_X=P, as \\mathcal O_X is a flat module in degree 0) identifies Hom(P,M) with Hom(\\mathcal O_X,P^\\vee\\otimes^L M), naturally in M; in particular P^\\vee\\otimes^L M lies in D_{\\mathrm{QCoh}}(\\mathcal O_X).",
+   "uses": [
+    "lem-pc-perfect-tensor-hom-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
+   }
+  },
+  {
+   "text": "Derived tensoring with the fixed complex P^\\vee commutes with set-indexed direct sums. Choose a K-flat resolution of P^\\vee using [lem-pc-kflat-resolution]; the direct sum of the K_i, which exists in D_{\\mathrm{QCoh}} by [lem-pc-derived-qcoh-direct-sums], is represented by the termwise direct sum of representative complexes by [lem-pc-derived-ambient-direct-sums]; form the total tensor complexes using [def-pc-tensor-complex-sheaves]. The termwise tensor products and the direct sums indexed by total degree commute, so the direct sum of the complexes P^\\vee\\otimes^L K_i is P^\\vee\\otimes^L(\\bigoplus_i K_i), compatibly with the inclusions of the summands.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-ambient-direct-sums",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
+   }
+  },
+  {
+   "text": "Let Y=\\operatorname{Spec}(\\mathbb Z) and let a:X\\to Y be the structure morphism; it is quasi-compact and quasi-separated because X is. Since \\mathcal O_Y is a flat module in degree 0, La^*\\mathcal O_Y=\\mathcal O_X, so by the adjunction [lem-pc-ringed-spaces-derived-adjoint] Hom(\\mathcal O_X,N)\\cong Hom(\\mathcal O_Y,Ra_*N) naturally in N. By [lem-pc-derived-direct-image-preserves-direct-sums], Ra_* maps D_{\\mathrm{QCoh}}(\\mathcal O_X) to D_{\\mathrm{QCoh}}(\\mathcal O_Y) and commutes with direct sums. By [lem-pc-affine-qcoh-derived-equivalence] with A=\\mathbb Z, R\\Gamma(Y,-) is an equivalence D_{\\mathrm{QCoh}}(\\mathcal O_Y)\\to D(\\mathbb Z) sending \\mathcal O_Y to \\mathbb Z; an equivalence preserves direct sums, so Hom(\\mathcal O_Y,L)\\cong Hom_{D(\\mathbb Z)}(\\mathbb Z,R\\Gamma(Y,L))=H^0(R\\Gamma(Y,L)) commutes with direct sums, because in D(\\mathbb Z) direct sums are termwise and H^0 commutes with direct sums of abelian groups. Composing with Steps 1 and 2, Hom(P,-) is naturally isomorphic to a functor on D_{\\mathrm{QCoh}}(\\mathcal O_X) whose canonical comparison map for direct sums is an isomorphism; by naturality the canonical map \\bigoplus_i Hom(P,K_i)\\to Hom(P,\\bigoplus_i K_i) is an isomorphism, including for the empty family.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-tensor-hom-duality",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, forward implication"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +103,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-tensor-direct-sums",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-object-compact",
+  "worker": "stage1",
+  "summary": "Split the forward implication of Stacks Tag 09M1 into the dual tensor-Hom identification, preservation of direct sums by derived tensor, and the degree-zero global-sections direct-sum comparison. All non-elementary inputs are existing DAG nodes; no new child node was needed.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place 'right adjoint commutes with direct sums: a perfect object is compact' through the compactness paragraph of Tag 09M1.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 2 needs existence of K-flat resolutions to compute the derived tensor product; this generic ringed-site result is not supplied by the Picard compactness route."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Step 2 uses the generic total-complex construction for tensor products of sheaf complexes; the Picard unit has no more specific replacement."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Step 3 needs the generic affine comparison D_QCoh(Spec Z) = D(Z) to identify Hom(O_Y,-) with H^0 of derived global sections and see it commutes with direct sums."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-poc2103",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-poc2103 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against lem-pc-perfect-tensor-hom-duality (A=O_X), Step 2 tensor/direct-sum argument, Step 3 against lem-pc-derived-direct-image-preserves-direct-sums; accepted tool_uses kflat-resolution, tensor-complex-sheaves; no new nodes, no merged node restated (class b n/a). FIX more, RETURN less: (1) C4 Step 2: lem-pc-derived-qcoh-direct-sums only gives existence of sums, not termwise representatives; now also cites lem-pc-derived-ambient-direct-sums for the termwise sum. (2) C1 Step 3: 'H^0(X,-) = degree-zero cohomology of Ra_* commutes with direct sums' was asserted, not derived (H^0(X,-)=Hom(O_X,-) via composite with Gamma(Spec Z) and sums on the affine target uncited); rewrote via lem-pc-ringed-spaces-derived-adjoint (Hom(O_X,N)=Hom(O_Y,Ra_*N)), lem-pc-derived-direct-image-preserves-direct-sums, and lem-pc-affine-qcoh-derived-equivalence (Hom(O_Y,L)=H^0(RGamma(Y,L)), equivalence preserves sums), plus naturality to get the canonical map; Step 1 no longer appeals to 'definition of derived global sections'. Added tool_use lem-pc-affine-qcoh-derived-equivalence (unit sk-thm-picard-f-representable, generic affine comparison).; 1 file(s) fixed by the reviewer"
+ }
 }
