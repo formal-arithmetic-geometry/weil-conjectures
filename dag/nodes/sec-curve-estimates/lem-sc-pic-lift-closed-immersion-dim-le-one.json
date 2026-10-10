@@ -26,9 +26,67 @@
   "def-sc-invertible-module",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let I be the quasi-coherent ideal sheaf defining the closed immersion i: Z \\to X. The unit sheaves fit into the short exact sequence 0 \\to (1 + I) \\cap O_X^* \\to O_X^* \\to i_*O_Z^* \\to 0, where the last map is restriction of units and the kernel consists exactly of units congruent to 1 modulo I.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 09NY, proof, opening displayed short exact sequence"
+   }
+  },
+  {
+   "text": "The underlying space of X is Noetherian and has dimension at most one by hypothesis. Applying [lem-sc-noetherian-cohomology-vanishing-abelian-dim-one] to the abelian sheaf (1 + I) \\cap O_X^* gives H^2(X, (1 + I) \\cap O_X^*) = 0. By [def-sc-topological-abelian-cohomology], the short exact sequence in step 1 has a long exact cohomology sequence, so H^1(X, O_X^*) \\to H^1(X, i_*O_Z^*) is surjective.",
+   "uses": [
+    "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 09NY, proof, sentences beginning 'Since dim(X) <= 1' and 'Hence the map'"
+   }
+  },
+  {
+   "text": "By [lem-sc-cohomology-closed-immersion-pushforward] with p=1 and the sheaf O_Z^*, H^1(X, i_*O_Z^*) is naturally isomorphic to H^1(Z, O_Z^*). Thus the surjection of step 2 is a surjection H^1(X, O_X^*) \\to H^1(Z, O_Z^*).",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 09NY, proof, sentence beginning 'By Cohomology, Lemma 02UV'"
+   }
+  },
+  {
+   "text": "The isomorphism between isomorphism classes of invertible modules and H^1 of the sheaf of units from [thm-sc-hilbert-90], applied to X and to Z, identifies H^1(X, O_X^*) and H^1(Z, O_Z^*) with Pic(X) and Pic(Z), respectively. By [lem-sc-picard-h1-restriction-compatibility], these identifications carry the map in step 3 to the pullback map L \\mapsto i^*L. Hence the surjection in step 3 is the asserted surjection Pic(X) \\to Pic(Z), so every invertible O_Z-module is isomorphic to the pullback of an invertible O_X-module.",
+   "uses": [
+    "thm-sc-hilbert-90",
+    "lem-sc-picard-h1-restriction-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 09NY, proof, final sentence 'This proves the lemma by Cohomology, Lemma 09NU'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "thm-sc-hilbert-90",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-picard-h1-restriction-compatibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NY (varieties-lemma-lift-line-bundle-from-reduction-dimension-1), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +134,30 @@
   "slopmaster2": {
    "state": "none"
   }
- }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "worker": "stage1",
+  "summary": "Repaired the 09NY split by defining cohomology for arbitrary abelian sheaves on topological spaces, correcting the Noetherian hypothesis, making closed-immersion pushforward self-contained, and stating the missing compatibility between Picard restriction and H^1 of units.",
+  "blueprint": "Realizes the blueprint proof's cited 09NY route: the opening short exact sequence, the 02UZ vanishing and induced H^1 surjection, the 02UV comparison, and the 09NU Picard identification with its naturality under restriction.",
+  "tool_uses": [
+   {
+    "node": "thm-sc-hilbert-90",
+    "why": "Its general-scheme H^1(O^*) classification supplies the 09NU Picard identification, which is a generic cohomological tool not replaced by a node in this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sc-hilbert-90"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pl2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pl2 (reviewer sub-agent of L); spot-checked: Re-review of the 14:57 return (head a7c19b263): all four points repaired. 1 (B3/C4): new def-sc-topological-abelian-cohomology defines H^p on Ab(X) of a topological space with the long exact sequence and identifies the scheme case with def-sc-zariski-cohomology; both new nodes and steps 2-3 cite it. 2: lem-sc-noetherian-cohomology-vanishing-abelian-dim-one now uses the minimal-closed-subset definition of Noetherian; agrees with 02UZ at d=1, p=2. 3: lem-sc-cohomology-closed-immersion-pushforward defines a topological closed embedding and i_* sectionwise and states a natural iso H^p(Z,F)=H^p(X,i_*F), as 02UV. 4: new lem-sc-picard-h1-restriction-compatibility states the commutation of L|->i^*L with the 03P8/thm-sc-hilbert-90 isomorphisms and the H^1 map; true (functoriality of the Isom-torsor class), cited in step 4. Item statement unchanged against sheaf-dag (09NY, hypotheses: Noetherian space, dim<=1, closed immersion). Steps: 1 short exact sequence of units from def-weil-closed-immersion (stalkwise lifting along surjective local maps); 2 vanishing node + LES give H^1 surjection; 3 pushforward node p=1, F=O_Z^*; 4 thm-sc-hilbert-90 for X and Z plus compatibility node. All cited nodes read (thm-sc-hilbert-90, def-sc-zariski-cohomology, def-sc-zariski-site, def-sc-gm-torsor, def-sc-picard-group, def-kun-topological-krull-dimension, def-pc-module-pullback, def-sc-invertible-module, def-weil-closed-immersion, def-pc-scheme). Declared tool use thm-sc-hilbert-90 (unit sk-prop-hilbert90) accepted as generic 09NU/03P8 identification. No Mathlib leaf. Small cases: Z=X (identity), Z empty, dim 0. Start Sat Oct 10 03:18:56 PM UTC 2026, end Sat Oct 10 03:19:38 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-pl2): def-sc-topological-abelian-cohomology: source.place cites Lemmas 03FD/03F3 (sites-cohomology.tex, not cohomology.tex); the definition is Cohomology Section 01DZ (cohomology.tex line 33, section-cohomology-sheaves) - maintainer may correct source. Report still lists WANTED Stacks TeX that is present (varieties.tex 8138, cohomology.tex); ignore."
 }
