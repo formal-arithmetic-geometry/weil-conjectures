@@ -1244,6 +1244,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring

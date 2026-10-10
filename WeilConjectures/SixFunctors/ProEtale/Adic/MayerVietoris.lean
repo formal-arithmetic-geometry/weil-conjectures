@@ -58,6 +58,34 @@ lemma isIso_of_isIso_mapDerivedCategory_adicUpperStar {ι : Type*} {W : ι → S
     (inferInstanceAs (IsIso ((DerivedCategory.homologyFunctor _ n).map
       ((g i)^*ᵃ[l].mapDerivedCategory.map ψ))))
 
+/-- The restriction to an open subscheme `j : Z ⟶ X` of the unit `I ⟶ j_* j^* I` is a
+quasi-isomorphism, by a triangle identity, the counit of `j^* ⊣ j_*` being invertible. -/
+lemma isIso_mapDerivedCategory_Q_map_unit {Z : Scheme.{u}} (j : Z ⟶ X) [IsOpenImmersion j]
+    (I : CochainComplex (AdicSheaf l X) ℤ) :
+    IsIso ((j)^*ᵃ[l].mapDerivedCategory.map (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+      (adicUpperStarLowerStarAdjunction l j).unit (ComplexShape.up ℤ)).app I))) := by
+  refine (NatIso.isIso_map_iff ((j)^*ᵃ[l].mapDerivedCategoryFactors) _).2 ?_
+  have : IsIso (((j)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l j).unit
+        (ComplexShape.up ℤ)).app I)) := by
+    have (n : ℤ) : IsIso ((((j)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l j).unit
+          (ComplexShape.up ℤ)).app I)).f n) := by
+      change IsIso ((j)^*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l j).unit.app (I.X n)))
+      have h := (adicUpperStarLowerStarAdjunction l j).left_triangle_components (I.X n)
+      have : IsIso ((j)^*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l j).unit.app
+          (I.X n)) ≫ (adicUpperStarLowerStarAdjunction l j).counit.app
+            ((j)^*ᵃ[l].obj (I.X n))) := by
+        rw [h]
+        exact IsIso.id _
+      exact IsIso.of_isIso_comp_right _
+        ((adicUpperStarLowerStarAdjunction l j).counit.app ((j)^*ᵃ[l].obj (I.X n)))
+    exact HomologicalComplex.Hom.isIso_of_components _
+  exact Functor.map_isIso DerivedCategory.Q
+    (((j)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l j).unit
+        (ComplexShape.up ℤ)).app I))
+
 section MayerVietoris
 
 variable {U V : Scheme.{u}} (jU : U ⟶ X) (jV : V ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jV]
@@ -97,28 +125,7 @@ lemma isIso_Q_map_unit_of_isZero (hcov : ∀ x, x ∈ Set.range jU.base ∨ x �
   refine isIso_of_isIso_mapDerivedCategory_adicUpperStar l (pairCover jU jV)
     (pairCover_mem_proetalePrecoverage jU jV hcov) _ ?_
   rintro (_ | _)
-  · -- on `V`: the restriction of the unit is invertible by a triangle identity
-    refine (NatIso.isIso_map_iff ((jV)^*ᵃ[l].mapDerivedCategoryFactors) _).2 ?_
-    have : IsIso (((jV)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
-        ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l jV).unit
-          (ComplexShape.up ℤ)).app I)) := by
-      have (n : ℤ) : IsIso ((((jV)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
-          ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l jV).unit
-            (ComplexShape.up ℤ)).app I)).f n) := by
-        change IsIso ((jV)^*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l jV).unit.app (I.X n)))
-        have h := (adicUpperStarLowerStarAdjunction l jV).left_triangle_components (I.X n)
-        have : IsIso ((jV)^*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l jV).unit.app
-            (I.X n)) ≫ (adicUpperStarLowerStarAdjunction l jV).counit.app
-              ((jV)^*ᵃ[l].obj (I.X n))) := by
-          rw [h]
-          exact IsIso.id _
-        exact IsIso.of_isIso_comp_right _
-          ((adicUpperStarLowerStarAdjunction l jV).counit.app ((jV)^*ᵃ[l].obj (I.X n)))
-      exact HomologicalComplex.Hom.isIso_of_components _
-    exact Functor.map_isIso DerivedCategory.Q
-      (((jV)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).map
-        ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l jV).unit
-          (ComplexShape.up ℤ)).app I))
+  · exact isIso_mapDerivedCategory_Q_map_unit l jV I
   · -- on `U`: both sides vanish
     have hsq : IsPullback (pullback.fst jU jV) (pullback.snd jU jV) jU jV :=
       IsPullback.of_hasPullback jU jV

@@ -18,6 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 
 /-!
@@ -135,6 +136,102 @@ lemma finiteLowerStar_of_bounded [IsLocallyNoetherian Y]
     (hK' : _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X) K) :
     finiteLowerStar l f K :=
   DerivedCategory.prop_of_bounded _ (adicConstructibleSheaf l X) h K hK hK'
+
+instance {Z W : Scheme.{u}} (g : Z ⟶ W) : (g)_*ᵃ[l].PreservesKInjectiveComplexes :=
+  (adicUpperStarLowerStarAdjunction l g).preservesKInjectiveComplexes
+
+/-- Transport of the finiteness property along an isomorphism of derived pushforwards. -/
+lemma finiteLowerStar_of_iso {X' : Scheme.{u}} {g : X' ⟶ Y} {K : DerivedCategory (AdicSheaf l X)}
+    {K' : DerivedCategory (AdicSheaf l X')}
+    (e : (f)_*ᵃ[l].rightDerivedFunctor.obj K ≅ (g)_*ᵃ[l].rightDerivedFunctor.obj K')
+    (h : finiteLowerStar l g K') : finiteLowerStar l f K :=
+  ObjectProperty.prop_of_iso (DerivedCategory.TStructure.t.bounded ⊓
+    _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y)) e.symm h
+
+variable (l) in
+/-- For an open immersion `j : Z ⟶ X` and a K-injective complex `I` on `X`,
+`Rf_* (j_* j^* I) ≅ R(j ≫ f)_* (j^* I)`. -/
+noncomputable def rightDerivedFunctorLowerStarObjQIso {Z : Scheme.{u}} (j : Z ⟶ X)
+    [IsOpenImmersion j] (I : CochainComplex (AdicSheaf l X) ℤ) [I.IsKInjective] :
+    (f)_*ᵃ[l].rightDerivedFunctor.obj (DerivedCategory.Q.obj
+        (((j)_*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          (((j)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj I))) ≅
+      (j ≫ f)_*ᵃ[l].rightDerivedFunctor.obj
+        ((j)^*ᵃ[l].mapDerivedCategory.obj (DerivedCategory.Q.obj I)) :=
+  (f)_*ᵃ[l].rightDerivedFunctor.mapIso ((j)_*ᵃ[l].rightDerivedFunctorObjQIso _).symm ≪≫
+    (Functor.rightDerivedFunctorCompIso' (j)_*ᵃ[l] (f)_*ᵃ[l] (adicLowerStarComp l j f)).app _ ≪≫
+    (j ≫ f)_*ᵃ[l].rightDerivedFunctor.mapIso (((j)^*ᵃ[l].mapDerivedCategoryFactors).app I).symm
+
+/-- **Mayer–Vietoris for the finiteness theorem** (the Čech step of `sk-prop-sf-finiteness`):
+let `X = U ∪ V` be an open cover. An object `K` of the derived category of `ℓ`-adic sheaves on
+`X` has bounded constructible derived pushforward along `f` as soon as its restrictions to
+`U`, `V` and `U ∩ V` have, along the restrictions of `f`.
+
+The unit `K ⟶ Rj_{U*} K|_U` has a cone `C` vanishing on `U`, hence `C ≅ Rj_{V*} C|_V`
+(`AlgebraicGeometry.ProEtale.isIso_Q_map_unit_of_isZero`); restricting the triangle to `V`
+and computing `(Rj_{U*} K|_U)|_V` on `U ∩ V` by open base change, `C|_V` sits in a triangle
+with `K|_V` and the pushforward of `K|_{U ∩ V}`. -/
+theorem finiteLowerStar_of_openCover [IsLocallyNoetherian Y] {U V : Scheme.{u}} (jU : U ⟶ X)
+    (jV : V ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jV]
+    (hcov : ∀ x, x ∈ Set.range jU.base ∨ x ∈ Set.range jV.base)
+    (K : DerivedCategory (AdicSheaf l X))
+    (hU : finiteLowerStar l (jU ≫ f) ((jU)^*ᵃ[l].mapDerivedCategory.obj K))
+    (hV : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj K))
+    (hW : finiteLowerStar l (pullback.fst jV jU ≫ jV ≫ f)
+      ((pullback.snd jV jU)^*ᵃ[l].mapDerivedCategory.obj
+        ((jU)^*ᵃ[l].mapDerivedCategory.obj K))) :
+    finiteLowerStar l f K := by
+  obtain ⟨I, _, ⟨eK⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  refine (finiteLowerStar l f).prop_of_iso eK.symm ?_
+  obtain ⟨C, v, w, hT⟩ := Pretriangulated.distinguished_cocone_triangle
+    (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+      (adicUpperStarLowerStarAdjunction l jU).unit (ComplexShape.up ℤ)).app I))
+  -- the pushforward of `K|_U`
+  have h₂ : finiteLowerStar l f (DerivedCategory.Q.obj
+      (((jU)_*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        (((jU)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj I))) :=
+    finiteLowerStar_of_iso f (rightDerivedFunctorLowerStarObjQIso l f jU I)
+      ((finiteLowerStar l (jU ≫ f)).prop_of_iso
+        ((jU)^*ᵃ[l].mapDerivedCategory.mapIso eK) hU)
+  -- the cone vanishes on `U`
+  have hCU : IsZero ((jU)^*ᵃ[l].mapDerivedCategory.obj C) :=
+    Pretriangulated.Triangle.isZero₃_of_isIso₁ _ ((jU)^*ᵃ[l].mapDerivedCategory.map_distinguished _ hT)
+      (isIso_mapDerivedCategory_Q_map_unit l jU I)
+  -- hence the cone is pushed forward from `V`
+  obtain ⟨J, _, ⟨eC⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective C
+  have hJ := isIso_Q_map_unit_of_isZero l jU jV hcov J
+    (hCU.of_iso ((jU)^*ᵃ[l].mapDerivedCategory.mapIso eC.symm))
+  -- the restriction of the triangle to `V`
+  have hTV := (jV)^*ᵃ[l].mapDerivedCategory.map_distinguished _ hT
+  have hsq : IsPullback (pullback.fst jV jU) (pullback.snd jV jU) jV jU :=
+    IsPullback.of_hasPullback jV jU
+  let J₀ := ((jU)^*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj I
+  have h₁V : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj
+      (DerivedCategory.Q.obj I)) :=
+    (finiteLowerStar l (jV ≫ f)).prop_of_iso ((jV)^*ᵃ[l].mapDerivedCategory.mapIso eK) hV
+  have h₂V : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj
+      (DerivedCategory.Q.obj (((jU)_*ᵃ[l].mapHomologicalComplex (ComplexShape.up ℤ)).obj J₀))) :=
+    finiteLowerStar_of_iso (jV ≫ f)
+      ((jV ≫ f)_*ᵃ[l].rightDerivedFunctor.mapIso
+          ((jV)^*ᵃ[l].mapDerivedCategory.mapIso ((jU)_*ᵃ[l].rightDerivedFunctorObjQIso J₀).symm ≪≫
+            (adicDerivedBaseChangeIso l hsq).app _) ≪≫
+        (Functor.rightDerivedFunctorCompIso' (pullback.fst jV jU)_*ᵃ[l] (jV ≫ f)_*ᵃ[l]
+          (adicLowerStarComp l (pullback.fst jV jU) (jV ≫ f))).app _)
+      ((finiteLowerStar l (pullback.fst jV jU ≫ jV ≫ f)).prop_of_iso
+        ((pullback.snd jV jU)^*ᵃ[l].mapDerivedCategory.mapIso
+          ((jU)^*ᵃ[l].mapDerivedCategory.mapIso eK ≪≫
+            ((jU)^*ᵃ[l].mapDerivedCategoryFactors).app I)) hW)
+  have h₃V : finiteLowerStar l (jV ≫ f) ((jV)^*ᵃ[l].mapDerivedCategory.obj C) :=
+    (finiteLowerStar l (jV ≫ f)).ext_of_isTriangulatedClosed₃ _ hTV h₁V h₂V
+  have h₃ : finiteLowerStar l f C :=
+    finiteLowerStar_of_iso f
+      ((f)_*ᵃ[l].rightDerivedFunctor.mapIso (eC ≪≫ asIso (DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (adicUpperStarLowerStarAdjunction l jV).unit
+            (ComplexShape.up ℤ)).app J))) ≪≫
+        rightDerivedFunctorLowerStarObjQIso l f jV J ≪≫
+        (jV ≫ f)_*ᵃ[l].rightDerivedFunctor.mapIso
+          ((jV)^*ᵃ[l].mapDerivedCategory.mapIso eC.symm)) h₃V
+  exact (finiteLowerStar l f).ext_of_isTriangulatedClosed₁ _ hT h₂ h₃
 
 end Devissage
 
