@@ -20,28 +20,126 @@
   "def-sc-ample",
   "def-sc-hilbert-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $g=0$, apply [lem-pc-chi-zero-dim-support] with $\\mathcal F=\\mathcal O_X$ (whose support is $X$ of dimension $0$) and $\\mathcal N=\\mathcal L^{\\otimes m}$. It gives $\\chi(X,\\mathcal L^{\\otimes m})=\\chi(X,\\mathcal O_X)=\\dim_k\\Gamma(X,\\mathcal O_X)$, and this dimension is at least $1$ because $X$ is nonempty; hence the degree is positive.",
+   "uses": [
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, induction on d, base case d=0, using Tag 0AYT"
+   }
+  },
+  {
+   "text": "For $g>0$, [lem-sc-top-dimensional-reduction-intersection] (Tag 0BES) reduces the top self-intersection on $X$ to the sum, with positive generic multiplicities, of the self-intersections on the integral top-dimensional components $Z_i$. Each $Z_i$ is a closed subscheme of $X$, hence proper over $k$ of dimension $g$, and $\\mathcal L|_{Z_i}$ is ample in the sense of [def-sc-ample]: choose $r\\ge1$ with $\\mathcal L^{\\otimes r}$ very ample, giving a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$ with $i^*\\mathcal O(1)\\cong\\mathcal L^{\\otimes r}$; the composite closed immersion $Z_i\\hookrightarrow X\\hookrightarrow\\mathbf P^N_k$ pulls $\\mathcal O(1)$ back to $\\mathcal L^{\\otimes r}|_{Z_i}$, which is therefore ample by [lem-pc-very-ample-ample]; so some power $\\mathcal L^{\\otimes rm}|_{Z_i}$ is very ample and $\\mathcal L|_{Z_i}$ is ample by [def-sc-ample]. Thus it is enough to prove positivity after replacing $X$ by an integral proper component of dimension $g$ and $\\mathcal L$ by its restriction.",
+   "uses": [
+    "lem-sc-top-dimensional-reduction-intersection",
+    "def-sc-ample",
+    "lem-pc-very-ample-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV proof, reduction to the integral case via Tag 0BES and restriction of ampleness to a closed subscheme"
+   }
+  },
+  {
+   "text": "Write $P(m)=\\chi(X,\\mathcal L^{\\otimes m})$ and let $Q$ be the Hilbert polynomial supplied by [lem-sc-hilbert-polynomial], so $P(m)=Q(m)$. By [def-sc-intersection-number], $(\\mathcal L^g\\cdot X)$ is the coefficient of $n_1\\cdots n_g$ in $Q(n_1+\\cdots+n_g)$. If $Q(t)=a_g t^g+\\cdots$, then the only contribution to that squarefree monomial comes from $a_g(n_1+\\cdots+n_g)^g$, whose coefficient is $g!$; hence $(\\mathcal L^g\\cdot X)=g!a_g$. Once positivity is established below, this forces $a_g>0$, so $\\deg Q=g$ and [def-sc-hilbert-degree] gives $\\deg_{\\mathcal L}(X)=g!a_g=(\\mathcal L^g\\cdot X)$. Replacing $\\mathcal L$ by a positive tensor power replaces $Q(m)$ by $Q(rm)$ and multiplies both sides by $r^g$, so positivity is unchanged.",
+   "uses": [
+    "lem-sc-hilbert-polynomial",
+    "def-sc-intersection-number",
+    "def-sc-hilbert-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV proof together with Definition Tag 0BEP and the remark after Definition Tag 0BEW"
+   }
+  },
+  {
+   "text": "By [def-sc-ample], choose $r\\ge1$ such that $\\mathcal L^{\\otimes r}$ is very ample, giving a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$ with $i^*\\mathcal O(1)=\\mathcal L^{\\otimes r}$. Since $X$ is nonempty, some coordinate $x_j$ has $i(X)$ not contained in $V(x_j)$. The section $s=i^*x_j$ has nonempty nonvanishing locus $X_s=i^{-1}(D_+(x_j))$, a nonempty closed subscheme of the affine $D_+(x_j)\\cong\\mathbf A^N_k$, hence affine. Replacing $\\mathcal L$ by this power is allowed by the preceding step.",
+   "uses": [
+    "def-sc-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV (lemma-ample-positive), choose a power and a section with affine principal open"
+   }
+  },
+  {
+   "text": "The integral proper scheme $X$ of positive dimension cannot itself be affine: if it were, the proper-and-affine finiteness criterion would make $X$ finite over the field, hence $0$-dimensional. Therefore the complement $D:=X\\setminus X_s=Z(s)$ is nonempty.",
+   "uses": [
+    "lem-sc-proper-affine-finite-general"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV (lemma-ample-positive), using Tag 01WN (lemma-finite-proper)"
+   }
+  },
+  {
+   "text": "The section $s$ is nonzero because $X_s$ is nonempty. On the integral scheme, its zero scheme $D$ is an effective Cartier divisor by the nonzero-section criterion. Tag 0BEU gives that $D$ is proper of dimension $g-1$, that the restricted module remains ample, and that $(\\mathcal L^g\\cdot X)=(\\mathcal L^{g-1}\\cdot D)$.",
+   "uses": [
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-sc-intersection-effective-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV (lemma-ample-positive), using Tag 0BEU and the nonzero-section Cartier fact"
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to the nonempty proper scheme $D$ of dimension $g-1$ with its restricted ample module. The equality in the preceding step then makes $(\\mathcal L^g\\cdot X)$ positive, completing the induction and hence the Hilbert-degree inequality.",
+   "uses": [
+    "lem-sc-intersection-effective-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV (lemma-ample-positive), final application of the induction hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-chi-zero-dim-support",
+  "lem-sc-top-dimensional-reduction-intersection",
+  "lem-sc-hilbert-polynomial",
+  "def-sc-hilbert-degree",
+  "def-sc-intersection-number",
+  "def-sc-ample",
+  "lem-pc-very-ample-ample",
+  "lem-sc-proper-affine-finite-general",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-sc-intersection-effective-cartier"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0BEV (label lemma-ample-positive), induction proof with Tags 0AYT, 0BES, 0BEU, 01WN and Definition Tag 0BEP"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "ample line bundle on projective variety has positive top self intersection degree",
-   "results": "8 hits, including ChevalleyThm.MvPolynomialC.degBound_pos and AmpleSet.of_one_lt_codim; no algebraic-geometry degree theorem",
+   "results": "no algebraic-geometry degree theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "IsAmple, 0 < AlgebraicGeometry.Scheme.Hom.degree",
-   "results": "0 hits; unknown identifier IsAmple",
+   "query": "IsAmple",
+   "results": "unknown identifier; no match",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "ample.*pos|pos.*ample|degree.*pos",
-   "results": "25 hits; none states positivity of the Hilbert degree of an ample invertible sheaf on a proper scheme",
+   "query": "ample.*pos|pos.*ample|degree.*pos Mathlib/AlgebraicGeometry",
+   "results": "none for Hilbert-degree positivity",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -54,12 +152,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mult-n-finite-flat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-positive-ample-hilbert-degree",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by expanding Tag 0BEV into the induction on dimension: the zero-dimensional base, reduction to integral top-dimensional components, Hilbert-polynomial/intersection normalization, affine nonvanishing section, nonemptiness of its Cartier divisor, and induction through the Cartier intersection formula. Added three statement-only Stacks inputs and one Mathlib leaf for the proper-affine finiteness criterion; replaced section-number citations by tags.",
+  "blueprint": "Realizes the ancestor proof paragraph invoking positivity via Tag 0BEV, including its induction on dimension and divisor-intersection subarguments.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "zero-dimensional base case uses its Euler-characteristic and tensor-invariance statement"
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "step 6 uses its statement that a nonzero section on an integral scheme has an effective Cartier zero scheme; the abelian-variety route has no replacement for this generic Cartier fact"
+   },
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "step 2 uses its statement that the pullback of O(1) under a closed immersion into projective space is ample, to restrict ampleness to the top-dimensional components"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-very-ample-ample",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-very-ample-ample"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pah2215",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pah2215 (reviewer sub-agent of L); spot-checked: 19:25 return points: 2 (step 1 now cites lem-pc-chi-zero-dim-support, special node dropped), 4 (step 4 argues from def-sc-ample) and the step-3 minor are repaired; points 1 and 3 were not. FIX more, RETURN less: (1) B5: item source.place still said Definition 33.45.3, set to Definition Tag 0BEP (both K1 second readings missed this); (2) C1 at step 2: ampleness of L restricted to the components rested on Tag 0893 (base change of relative ampleness, no node); step 2 now argues from def-sc-ample: a very ample power L^r gives X->P^N, the composite Z_i->P^N pulls O(1) back to L^r|Z_i, ample by existing lem-pc-very-ample-ample (generic tool, def-sc-ample sense), so L|Z_i is ample; uses/proof_deps/tool_uses updated; (3) declared tool_use lem-sc-ample-complement-affine is no longer used by any step, dropped. Steps 3, 5-7 and the four new nodes were accepted earlier and not reopened.; 1 file(s) fixed by the reviewer"
+ }
 }
