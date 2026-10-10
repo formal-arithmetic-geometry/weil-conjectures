@@ -2,7 +2,7 @@
 
 856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (386)
+## Stage 1: nodes to split (385)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -46,7 +46,6 @@
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
-| `lem-weil-pbc-sets-finite-pushforward-stalk` | 2007 | none |
 | `lem-weil-pbc-finite-over-henselian-local-product` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
@@ -393,7 +392,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (470)
+## Stage 2: nodes to state (471)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -758,6 +757,7 @@
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
+| `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
@@ -868,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 404 nodes that wait for stage 1, 868 nodes that wait for a statement dependency.
+Not open yet: 403 nodes that wait for stage 1, 868 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
