@@ -115,7 +115,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra in
 /-- **Finite sets of points of a projective scheme lie in an affine open.** Let `X` be a scheme
 with a closed immersion `i : X ⟶ ℙ(α; Spec k)` into a projective space. Then every finite set of
 points of `X` is contained in an affine open subscheme: by graded prime avoidance
-(`ProjectiveSpectrum.exists_mem_graded_forall_not_mem`) there is a form `f` of positive degree
+(`ProjectiveSpectrum.exists_homogeneous_notMem_of_finset`) there is a form `f` of positive degree
 over `ℤ` not vanishing at the images of the points, and the preimage in `X` of the affine
 `D₊(f) ⊆ ℙⁿ_ℤ` is affine, `X ⟶ ℙⁿ_ℤ` being an affine morphism.
 
@@ -127,7 +127,7 @@ theorem exists_isAffineOpen_superset_of_isClosedImmersion {X : Scheme.{u}} {α :
   classical
   let φ := i ≫ ProjectiveSpace.toProjInt α (Spec (.of k))
   obtain ⟨m, hm, f, hf, hfS⟩ :=
-    ProjectiveSpectrum.exists_mem_graded_forall_not_mem
+    ProjectiveSpectrum.exists_homogeneous_notMem_of_finset
       (𝒜 := MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ)) (hs.image φ.base).toFinset
   have hU₀ := Proj.isAffineOpen_basicOpen (MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ))
     f hf hm
