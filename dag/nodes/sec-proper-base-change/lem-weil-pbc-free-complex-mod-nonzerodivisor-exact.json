@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reducing an exact finite free complex modulo a nonzerodivisor keeps exactness one step less",
@@ -31,9 +31,68 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-matrix"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The complex as a cochain complex of $R$-modules.) The category $\\Mod(R)$ of $R$-modules is abelian, with the usual kernels, cokernels and images [lem-weil-pbc-ring-modules-enough-injectives]. Put $F_i=R^{\\oplus n_i}$ ($0\\le i\\le e$) and reindex the given complex as a cochain complex $K$ of $R$-modules indexed by $\\mathbf N$: $K^j=F_{e-j}$ for $0\\le j\\le e$, $K^j=0$ for $j>e$, with $d^j=\\varphi_{e-j}:K^j\\to K^{j+1}$ for $0\\le j\\le e-1$ and $d^j=0$ for $j\\ge e$; $d^{j+1}\\circ d^j=\\varphi_{e-j-1}\\circ\\varphi_{e-j}=0$ for $0\\le j\\le e-2$ by hypothesis, and the other composites have a zero factor. Its cohomology is $H^j(K)=\\ker d^j/\\operatorname{im}d^{j-1}$ ($d^{-1}=0$), i.e. $H^{e-i}(K)=\\ker\\varphi_i/\\operatorname{im}\\varphi_{i+1}=:H_i(F_\\bullet)$ for $1\\le i\\le e$, with $\\varphi_{e+1}=0$. By the definition of exactness [def-weil-pbc-exact-sequence] (in $\\Mod(R)$: $\\operatorname{im}=\\ker$ as submodules), the complex $0\\to F_e\\to\\cdots\\to F_0$ is exact at $F_i$ iff $\\ker\\varphi_i=\\operatorname{im}\\varphi_{i+1}$ (for $i=e$: iff $\\varphi_e$ is injective, the incoming arrow being $0\\to F_e$), i.e. iff $H_i(F_\\bullet)=0$. So the hypothesis says $H_i(F_\\bullet)=0$ for $1\\le i\\le e$.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Denote $F_\\bullet$ the complex with terms $F_i=R^{n_i}$ and differential given by $\\varphi_i$'; Situation 00MS (situation-complex, line 24576)"
+   }
+  },
+  {
+   "text": "(The short exact sequence $0\\to F_\\bullet\\xrightarrow{x}F_\\bullet\\to F_\\bullet/xF_\\bullet\\to0$.) Let $\\mu_i:F_i\\to F_i$ be multiplication by $x$. Since each $\\varphi_i$ is $R$-linear, $\\varphi_i\\circ\\mu_i=\\mu_{i-1}\\circ\\varphi_i$, so $\\mu$ is a morphism of complexes $K\\to K$. It is injective in each degree: if $x(a_1,\\dots,a_{n_i})=0$ in the free module $F_i=R^{\\oplus n_i}$ [def-weil-pbc-free-module] then $xa_k=0$ for each coordinate, so $a_k=0$ as $x$ is a nonzerodivisor of $R$. Let $\\pi_i:F_i\\to\\bar R^{\\oplus n_i}$ reduce each coordinate modulo $x$; it is $R$-linear and surjective, and its kernel is the set of vectors with all coordinates in $xR$, which is $xF_i=\\operatorname{im}\\mu_i$. If $A_i=(a^{(i)}_{kl})$ is the matrix [def-weil-matrix] of $\\varphi_i$ (so $\\varphi_i(e_l)=\\sum_k a^{(i)}_{kl}f_k$ for the standard bases), then $\\pi_{i-1}(\\varphi_i(e_l))=\\sum_k\\overline{a^{(i)}_{kl}}\\,\\bar f_k=\\bar\\varphi_i(\\pi_i(e_l))$, hence $\\pi_{i-1}\\circ\\varphi_i=\\bar\\varphi_i\\circ\\pi_i$ by linearity. Consequently $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}\\circ\\pi_{i+1}=\\pi_{i-1}\\circ\\varphi_i\\circ\\varphi_{i+1}=0$, and $\\pi_{i+1}$ being surjective, $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}=0$: the reduced sequence is a complex. Regard it as a cochain complex $\\bar K$ of $R$-modules, $\\bar K^j=\\bar R^{\\oplus n_{e-j}}$ ($0\\le j\\le e$), $\\bar K^j=0$ ($j>e$), $\\bar d^j=\\bar\\varphi_{e-j}$ ($0\\le j\\le e-1$), $\\bar d^j=0$ otherwise. Then $\\pi:K\\to\\bar K$ is a morphism of complexes, $\\pi\\circ\\mu=0$, and in every degree $0\\to K^j\\xrightarrow{\\mu}K^j\\xrightarrow{\\pi}\\bar K^j\\to0$ is a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence] ($\\mu$ injective, $\\ker\\pi=\\operatorname{im}\\mu$, $\\pi$ surjective; trivially in degrees $j>e$).",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-matrix",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Then we have a short exact sequence of complexes $0\\to F_\\bullet\\xrightarrow{x}F_\\bullet\\to F_\\bullet/xF_\\bullet\\to0$' (injectivity of $x$ written out from the hypothesis that $x$ is a nonzerodivisor; $F_i/xF_i\\cong\\bar R^{n_i}$ with the reduced matrices written out)"
+   }
+  },
+  {
+   "text": "(Long exact sequence.) Apply the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] in the abelian category $\\Mod(R)$ [lem-weil-pbc-ring-modules-enough-injectives] to the degreewise short exact sequence $0\\to K\\xrightarrow{\\mu}K\\xrightarrow{\\pi}\\bar K\\to0$ of Step 2: for every $j\\ge0$ the sequence $H^j(K)\\xrightarrow{H^j(\\pi)}H^j(\\bar K)\\xrightarrow{\\delta^j}H^{j+1}(K)$ is exact. Let $2\\le i\\le e$ and $j=e-i$, so $0\\le j\\le e-2$. Then $H^j(K)=H_i(F_\\bullet)=0$ and $H^{j+1}(K)=H_{i-1}(F_\\bullet)=0$ by Step 1, since $i\\ge1$ and $i-1\\ge1$. Exactness at $H^j(\\bar K)$ gives $H^j(\\bar K)=\\ker\\delta^j=\\operatorname{im}H^j(\\pi)=0$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-ring-modules-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Applying the snake lemma we get a long exact sequence $H_i(F_\\bullet)\\xrightarrow{x}H_i(F_\\bullet)\\to H_i(F_\\bullet/xF_\\bullet)\\to H_{i-1}(F_\\bullet)\\xrightarrow{x}H_{i-1}(F_\\bullet)$. The lemma follows.' (the vanishing for $2\\le i\\le e$ written out)"
+   }
+  },
+  {
+   "text": "(Conclusion.) For $2\\le i\\le e$, Step 3 gives $0=H^{e-i}(\\bar K)=\\ker\\bar\\varphi_i/\\operatorname{im}\\bar\\varphi_{i+1}$ (with $\\bar\\varphi_{e+1}=0$), so $\\ker\\bar\\varphi_i=\\operatorname{im}\\bar\\varphi_{i+1}$ as subsets of $\\bar R^{\\oplus n_i}$; kernels and images of the $\\bar R$-linear maps $\\bar\\varphi_i$ are the same sets whether these maps are viewed as $R$- or $\\bar R$-linear. By the definition [def-weil-pbc-exact-sequence], the complex $0\\to\\bar R^{\\oplus n_e}\\xrightarrow{\\bar\\varphi_e}\\cdots\\xrightarrow{\\bar\\varphi_2}\\bar R^{\\oplus n_1}$ is exact at $\\bar R^{\\oplus n_i}$ for $i=e,\\dots,2$ (at $\\bar R^{\\oplus n_e}$ this says $\\bar\\varphi_e$ is injective). The hypotheses that $R$ is local and $x\\in\\mathfrak m$ are not used.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'The lemma follows.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module",
+  "def-weil-matrix",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766) and its proof (lines 24776-24790), in Situation Tag 00MS (situation-complex, line 24576) of Section Tag 00MR (section-complex-exact, line 24570)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,6 +121,20 @@
    "results": "IsSMulRegular.lean:173-183 the four-term lemma; QuotSMulTop in RingTheory/{QuotSMulTop,Support,KrullDimension/Regular,Regular/*,Depth/Rees}.lean; no statement about a finite free complex reduced modulo x",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of a chain complex of modules modulo a regular element vanishes when the complex is exact",
+   "results": "HomologicalComplex.ExactAt.isZero_homology, ShortComplex.exact_iff_isZero_homology, HomologicalComplex.acyclic_iff, ShortComplex.exact_iff_isZero_rightHomology, HomologicalComplex.Acyclic, ShortComplex.exact_iff_homology_iso_zero (Mathlib.Algebra.Homology.ShortComplex.*): exactness = vanishing of homology only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (project ~/weil-conjectures-slopmaster2)",
+   "results": "lemma in .lake/packages/mathlib/Mathlib/RingTheory/Regular/IsSMulRegular.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists; not a one-line specialization (see mathlib_candidate)"
   }
  ],
  "mathlib_match": null,
@@ -70,7 +143,7 @@
   "file": "Mathlib/RingTheory/Regular/IsSMulRegular.lean",
   "how": "lines 173-183: for exact M -> M' -> M'' -> M''' (exact at M' and M'') and r regular on M''', the maps M/rM -> M'/rM' -> M''/rM'' are exact. Applied at each position j = e, ..., 2 with M = R^{n_{j+1}} (0 for j = e), M' = R^{n_j}, M'' = R^{n_{j-1}}, M''' = R^{n_{j-2}} (x is regular on a free module), it gives the node after identifying R^n/xR^n with (R/xR)^n and the induced maps with the reduced matrices: several translations, not one line, so the node stays unsplit."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -90,5 +163,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-free-complex-mod-nonzerodivisor-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks 00MZ and its proof (algebra.tex 24766-24795) in Situation 00MS; tags 00MR, 00MS, 00MZ verified in tags/tags. Statement kept (it matches 00MZ; R local and x in m are hypotheses of the source that the proof does not use). The source's three-line proof (snake lemma / long exact sequence for 0 -> F -> F -> F/xF -> 0) written out in four steps: reindexing as a cochain complex of R-modules and exactness = vanishing of homology; the degreewise short exact sequence (x injective on free modules as x is a nonzerodivisor; R^n/xR^n = (R/xR)^n with the induced maps the reduced matrices); the long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] giving H_i(F/xF)=0 for 2<=i<=e; the translation back. Only existing nodes cited ([lem-weil-pbc-ring-modules-enough-injectives] for Mod(R) abelian with the usual kernels/images, a Mathlib leaf); no new node. The citer's step 4 (lem-weil-pbc-exact-free-complex-last-minors-regular-sequence) uses exactly this statement. Mathlib: the item's earlier searches (LeanSearch, LeanFinder, Loogle, grep) kept; one LeanSearch and one local_search added; the four-term candidate QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last stays a candidate (not a one-line specialization).",
+  "blueprint": "The item is not a blueprint node; its blueprint ancestor thm-weil-pbc-finite-etale-lifting is served through the chain in blueprint.from.via (from.place 'step 7 of its split ... essential-surjectivity paragraphs', not 'unspecified', kept). None of the four steps realizes a place of thm-weil-pbc-finite-etale-lifting's proof directly: together they realize the Stacks 00MZ fact used in step 4 (the inductive reduction modulo x) of lem-weil-pbc-exact-free-complex-last-minors-regular-sequence, which lies under that step 7 (essential surjectivity, via the G-ring / regular local ring chain). same_as: [] after searching the whole blueprint (blueprint_refs.py search: 00MZ, 00MS, div-x, nonzerodivisor, zerodivisor, R/xR, 'nonzerodivisor exact complex', 'modulo nonzerodivisor exact', 'free complex exact', 'exact one less', 'what makes a complex exact', 'snake lemma long exact sequence homology', 'Buchsbaum Eisenbud', 'regular element complex', 'finite free exact at', 'regular sequence minors', 'Tor nonzerodivisor', 'long exact', 'reduction modulo', 'mod x'): no blueprint node states it."
+ },
+ "reviewed": "2026-10-10 L: 4 steps checked against the 00MZ proof: 0 -> F -x-> F -> F/xF -> 0 short exact degreewise (x a nonzerodivisor), long exact homology sequence gives H_i(F/xF) = 0 for i >= 2; locality of R and x in m unused (noted); citer exact-free-complex-last-minors step 4 matches"
 }
