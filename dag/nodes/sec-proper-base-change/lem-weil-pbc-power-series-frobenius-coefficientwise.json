@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-power-series-frobenius-coefficientwise",
+ "kind": "statement",
+ "title": "The p-th power of a power series in characteristic p is computed coefficientwise",
+ "statement": "Let $p$ be a prime number, $R$ a commutative ring of characteristic $p$ (for an integer $N$, $N\\cdot1=0$ in $R$ if and only if $p\\mid N$), $n\\ge0$, and $f=\\sum_{E\\in\\mathbf N^n}c_Ex^E$ an element of the formal power series ring $R[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series], $x^E=x_1^{e_1}\\cdots x_n^{e_n}$. Then $f^p=\\sum_{E\\in\\mathbf N^n}c_E^p\\,x^{pE}$, where $pE=(pe_1,\\ldots,pe_n)$: the coefficient of $f^p$ at $x^{pE}$ is $c_E^p$, and its coefficient at $x^G$ is $0$ whenever some component of $G\\in\\mathbf N^n$ is not divisible by $p$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, sentence 'For a in A we see that a^p in A_J' (the Frobenius computed coefficientwise); tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "p-th power of a multivariate power series in characteristic p equals coefficientwise Frobenius of the expanded series",
+   "results": "Polynomial.expand_char (Mathlib.Algebra.Polynomial.Expand), MvPowerSeries.map_frobenius_expand, MvPowerSeries.map_iterateFrobenius_expand (Mathlib.RingTheory.MvPowerSeries.Expand), MvPolynomial.expand_char, MvPolynomial.map_expand_pow_char",
+   "date": "2026-10-10",
+   "verdict": "match: MvPowerSeries.map_frobenius_expand"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in characteristic p, (sum a_E x^E)^p = sum a_E^p x^{pE} for multivariate formal power series",
+   "results": "MvPowerSeries.map_frobenius_expand, MvPowerSeries.map_iterateFrobenius_expand, sum_pow_char, sum_pow_char_pow (Mathlib.Algebra.CharP.Lemmas), PowerSeries.coeff_pow",
+   "date": "2026-10-10",
+   "verdict": "match: MvPowerSeries.map_frobenius_expand"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.expand",
+   "results": "MvPowerSeries.expand, expand_one, expand_X, expand_mul_eq_comp, order_expand, support_expand, support_expand_subset, HasSubst.expand, FiniteField.MvPowerSeries.expand_card (Mathlib.RingTheory.MvPowerSeries.Expand)",
+   "date": "2026-10-10",
+   "verdict": "the expansion x_i -> x_i^p and its coefficient lemmas exist"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'frobenius\\|ExpChar\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/Expand.lean; sed -n 28,36p,100,135p,229,258p of that file; grep -n coeff_map Mathlib/RingTheory/MvPowerSeries/Basic.lean; grep -n expChar_prime Mathlib/Algebra/CharP/Defs.lean",
+   "results": "Expand.lean:35 def expand (substitution X_i -> X_i^p), :103 coeff_expand_smul, :121 coeff_expand_of_not_dvd, :233 map_frobenius_expand (section ExpChar, variable [ExpChar R p] at :231; no Finite hypothesis in this Mathlib); Basic.lean:542 coeff_map; CharP/Defs.lean:332 instance expChar_prime",
+   "date": "2026-10-10",
+   "verdict": "match (read): MvPowerSeries.map_frobenius_expand, Expand.lean:233-246"
+  },
+  {
+   "tool": "local_search",
+   "query": "map_frobenius_expand (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable (no language server running); existence checked by the grep above instead",
+   "date": "2026-10-10",
+   "verdict": "not consulted"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPowerSeries.map_frobenius_expand",
+  "file": "Mathlib/RingTheory/MvPowerSeries/Expand.lean",
+  "how": "specializes in one line: with σ = Fin n, `MvPowerSeries.map_frobenius_expand` (Expand.lean:233-246, `[ExpChar R p]` from the instance `expChar_prime` of `CharP R p` and `Fact p.Prime`, Algebra/CharP/Defs.lean:332) gives `map (frobenius R p) (expand p hp f) = f ^ p`; its coefficients are read off by `coeff_map` (RingTheory/MvPowerSeries/Basic.lean:542: coefficientwise c ↦ c^p), `coeff_expand_smul` (Expand.lean:103-104: the coefficient of `expand p hp f` at p•m is the coefficient of f at m) and `coeff_expand_of_not_dvd` (Expand.lean:121-122: the coefficient at m is 0 when p ∤ m i for some i)",
+  "line": 233
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-ring-subfields",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf MvPowerSeries.map_frobenius_expand (Expand.lean line 233, read) with the coefficient lemmas named in 'how'; one-line specialization."
+}
