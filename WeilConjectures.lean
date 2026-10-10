@@ -156,6 +156,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -171,6 +172,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
+public import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
@@ -243,6 +245,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCover
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverDescent
@@ -989,6 +992,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
