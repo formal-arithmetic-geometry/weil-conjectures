@@ -18,11 +18,62 @@
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-sc-scheme-tangent-space"
+  "def-sc-scheme-tangent-space",
+  "def-pc-fibre-product",
+  "lem-sc-tangent-space-vector-space",
+  "lem-sc-tangent-map-linear"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let p_X and p_Y be the two projections. Composition with them sends a tangent vector at (x,y) to tangent vectors at x and y, and the residue fields are k in all three cases. By [lem-sc-tangent-map-linear] these maps are k-linear, so they define a k-linear map Phi from T_{X x_k Y/k,(x,y)} to T_{X/k,x} direct-sum T_{Y/k,y}.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-pc-fibre-product",
+    "lem-sc-tangent-map-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEB, statement and proof: map induced by the two projections"
+   }
+  },
+  {
+   "text": "Let i_X=(1,y):X \\to X \\times_k Y and i_Y=(x,1):Y \\to X \\times_k Y. For (v,w) define Psi(v,w)=d i_X(v)+d i_Y(w), using the vector-space structure of [lem-sc-tangent-space-vector-space]. The composites p_X i_X and p_Y i_Y are identities, while p_Y i_X and p_X i_Y are the constant maps at y and x. A constant map sends every tangent vector to the zero vector because its composite with a dual-number point factors through Spec k, so [lem-sc-tangent-map-linear] and the zero element described in [lem-sc-tangent-space-vector-space] give Phi(Psi(v,w))=(v,w).",
+   "uses": [
+    "lem-sc-tangent-space-vector-space",
+    "lem-sc-tangent-map-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEB, compatibility with the maps 1 x y and x x 1"
+   }
+  },
+  {
+   "text": "For a tangent vector theta at (x,y), write (v,w)=Phi(theta), so v=p_X theta and w=p_Y theta. By Step 2, Phi(Psi(v,w))=(v,w), i.e. the morphism Psi(v,w):Spec k[epsilon] \\to X \\times_k Y has projections p_X Psi(v,w)=v and p_Y Psi(v,w)=w, the same as theta. Both are morphisms of k-schemes Spec k[epsilon] \\to X \\times_k Y, and v, w are k-morphisms, so by the uniqueness clause of the universal property of the fibre product over Spec k [def-pc-fibre-product] a morphism to X \\times_k Y is determined by its two projections; hence Psi(Phi(theta))=theta. So the k-linear map Phi of Step 1 is bijective with inverse Psi, hence a k-linear isomorphism, and Psi(v,0)=d i_X(v)+d i_Y(0)=d i_X(v), Psi(0,w)=d i_Y(w) because d i_Y and d i_X are linear [lem-sc-tangent-map-linear] and so send 0 to the zero vector of [def-sc-scheme-tangent-space].",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-pc-fibre-product",
+    "lem-sc-tangent-map-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEB proof: direct sum decomposition and compatibility via tangent-space maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-scheme-tangent-space",
+  "lem-sc-tangent-space-vector-space",
+  "lem-sc-tangent-map-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEB, expanded from the cited product-differentials argument using the dual-number universal property"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,12 +98,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-group-addition-tangent-differential",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-product-tangent-space-direct-sum",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states Tag 0BEB and no duplicate DAG or blueprint node exists. Expanded the Stacks product tangent-space argument directly with the dual-number functor: projections define Phi, the two point inclusions and tangent-vector addition define Psi, and the fiber-product universal property verifies both composites. No new nodes were needed; existing tangent-space vector-space and tangent-map linearity nodes supply the non-elementary facts.",
+  "blueprint": "Realizes the parent lem-sc-mult-n-etale-kernel proof step (c) clause identifying the tangent space of a product before applying the differential of addition.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-tangent-space-vector-space",
+    "why": "The product proof requires the general dual-number pushout and vector-space construction, which is a generic tangent-space tool from another unit."
+   },
+   {
+    "node": "lem-sc-tangent-map-linear",
+    "why": "The product proof requires functoriality and linearity of tangent maps for arbitrary scheme morphisms, which is a generic tool from another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-tangent-space-vector-space",
+  "lem-sc-tangent-map-linear",
+  "lem-sc-tangent-space-vector-space",
+  "lem-sc-tangent-map-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pts2220",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pts2220 (reviewer sub-agent of L); spot-checked: Read packet whole; field/k-rational setting kept (no relative tangent spaces, E ok); Step 1 k-linearity from lem-sc-tangent-map-linear (C4 ok); Step 2 Phi.Psi=id via linearity and constant maps to zero vector, ok; tool_uses accepted as generic tangent tools; Mathlib no-match verdict accepted. FIX more, RETURN less: C4 in Step 3 - lem-sc-tangent-space-vector-space does not say the pushout sum has projections (v,w); rewrote Step 3 to derive Psi(Phi(theta))=theta from Step 2 plus uniqueness in def-pc-fibre-product over Spec k, and the inverse values from linearity of d i_X, d i_Y; Step 3 uses now def-sc-scheme-tangent-space, def-pc-fibre-product, lem-sc-tangent-map-linear (missed by F1 second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
