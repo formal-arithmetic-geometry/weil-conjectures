@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sp-kinjective-computes",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "K-injective resolutions compute derived functors",
- "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive\n[def-sp-left-exact-additive] functor between Grothendieck abelian categories\n[def-sp-grothendieck-abelian] and let $K\\in\\operatorname{Ch}^+(\\mathcal A)$.\nThen:\n\n1. **(Well-definedness.)** Any two K-injective resolutions\n[def-sp-kinjective-bridge] $f:K\\to I$ and $g:K\\to J$ are homotopy equivalent\nunder $K$, by a homotopy equivalence unique up to homotopy. Hence\n$v(I)\\cong v(J)$ by a canonical isomorphism in the homotopy category, the\nobject $RvK$ of [def-sp-kinjective-bridge] is well defined up to canonical\nisomorphism, and it is functorial in $K$.\n\n2. **(Agreement on objects.)** A bounded-below complex of injective objects\nis K-injective. In particular an injective resolution\n[def-sp-injective-resolutions] $X\\to I^\\bullet$ of an object $X$ is a\nK-injective resolution of $X[0]$, and\n\n$$\n \\mathcal H^p\\bigl(Rv(X[0])\\bigr)\\cong R^pv(X)\n$$\n\nfor every $p$, the right-hand side being the derived functor of\n[def-sp-left-exact-additive].\n\n3. **(Shift.)** $Rv(K[n])\\cong(RvK)[n]$ for every $n\\in\\mathbb Z$.",
+ "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive [def-sp-left-exact-additive] functor between Grothendieck abelian categories [def-sp-grothendieck-abelian] and let $K\\in\\operatorname{Ch}^+(\\mathcal A)$. Then: (1) Any two K-injective resolutions [def-sp-kinjective-bridge] of $K$ are homotopy equivalent under $K$, uniquely up to homotopy; hence $v(I)\\cong v(J)$ canonically in the homotopy category, $RvK$ is well defined up to canonical isomorphism, and it is functorial in $K$. (2) A bounded-below complex of injective objects is K-injective. Thus an injective resolution [def-sp-injective-resolutions] $X\\to I^\\bullet$ is a K-injective resolution of $X[0]$ and $\\mathcal H^p(Rv(X[0]))\\cong R^pv(X)$ for every $p$. (3) $Rv(K[n])\\cong(RvK)[n]$ for every $n\\in\\mathbf Z$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-kinjective-computes.md",
   "place": "node lem-sp-kinjective-computes, order 519"
@@ -20,36 +20,65 @@
  ],
  "proof": [
   {
-   "text": "*The comparison principle.* Let $I$ be K-injective and let $s:A\\to B$ be a\nquasi-isomorphism. Then\n\n$$\n s^*:\\operatorname{Hom}_{K(\\mathcal A)}(B,I)\\longrightarrow\n \\operatorname{Hom}_{K(\\mathcal A)}(A,I)\n$$\n\nis bijective. Indeed, complete $s$ to a distinguished triangle $A\\to B\\to\nC(s)\\to A[1]$ in the homotopy category; $C(s)$ is acyclic because $s$ is a\nquasi-isomorphism. The functor $\\operatorname{Hom}_{K(\\mathcal A)}(-,I)$ is\nhomological, so it turns that triangle into a long exact sequence, and\n\n$$\n \\operatorname{Hom}_{K(\\mathcal A)}(C(s),I[n])\n =\\mathcal H^n\\bigl(\\operatorname{Hom}^\\bullet(C(s),I)\\bigr)=0\n$$\n\nfor every $n$, since $C(s)$ is acyclic and $I$ is K-injective\n[def-sp-kinjective-bridge]. The two outer terms of the long exact sequence\nvanish, so $s^*$ is bijective.",
+   "text": "For a quasi-isomorphism $s:A\\to B$ and a K-injective complex $I$, precomposition $s^*:\\operatorname{Hom}_{K(\\mathcal A)}(B,I)\\to\\operatorname{Hom}_{K(\\mathcal A)}(A,I)$ is bijective by [lem-sp-kinjective-comparison-principle].",
    "uses": [
-    "def-sp-kinjective-bridge"
+    "lem-sp-kinjective-comparison-principle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "place": "lines 41-58"
+   }
   },
   {
-   "text": "*(1).* Apply the principle to the quasi-isomorphism $f:K\\to I$ and the\nK-injective complex $J$: there is $u:I\\to J$, unique up to homotopy, with\n$uf\\simeq g$. Symmetrically there is $w:J\\to I$, unique up to homotopy, with\n$wg\\simeq f$. Then $(wu)f\\simeq wg\\simeq f=\\operatorname{id}_I\\circ f$, and\nthe principle applied to $f$ and $I$ says that a morphism $I\\to I$ is\ndetermined up to homotopy by its composite with $f$; hence\n$wu\\simeq\\operatorname{id}_I$, and symmetrically\n$uw\\simeq\\operatorname{id}_J$. An additive functor carries homotopies to\nhomotopies, so $v(u)$ and $v(w)$ are mutually inverse in the homotopy\ncategory and give the canonical isomorphism $v(I)\\cong v(J)$. Uniqueness up\nto homotopy makes the isomorphism independent of the choices and compatible\nwith composition. The same principle lifts a morphism $K\\to K'$ to a morphism\nbetween chosen resolutions, uniquely up to homotopy, which is functoriality of\n$RvK$ in $K$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(2).* Let $I^\\bullet$ be a bounded-below complex of injectives, say $I^n=0$\nfor $n<n_0$, let $A$ be acyclic and let $\\varphi:A\\to I^\\bullet$ be a chain\nmap. We build a homotopy $h^n:A^n\\to I^{n-1}$ with\n$\\varphi^n=d\\,h^n+h^{n+1}d_A^{\\,n}$ by induction on $n$, taking $h^n=0$ for\n$n\\leq n_0$, which is legitimate because $I^{n-1}=0$ there and $\\varphi^n=0$\nfor $n<n_0$. Assume $h^m$ is built for $m\\leq n$ and the identity holds below\n$n$, and put $\\psi=\\varphi^n-d\\,h^n:A^n\\to I^n$. Then\n\n$$\n \\psi\\,d_A^{\\,n-1}\n =\\varphi^nd_A^{\\,n-1}-d\\,h^nd_A^{\\,n-1}\n =d\\,\\varphi^{n-1}-d\\bigl(\\varphi^{n-1}-d\\,h^{n-1}\\bigr)=0 ,\n$$\n\nso $\\psi$ kills $\\operatorname{im}d_A^{\\,n-1}$, which is $\\ker d_A^{\\,n}$\nbecause $A$ is acyclic. Hence $\\psi$ factors through\n$A^n/\\ker d_A^{\\,n}\\cong\\operatorname{im}d_A^{\\,n}$, and since $I^n$ is\ninjective the resulting map $\\operatorname{im}d_A^{\\,n}\\to I^n$ extends along\nthe monomorphism $\\operatorname{im}d_A^{\\,n}\\hookrightarrow A^{n+1}$ to a map\n$h^{n+1}:A^{n+1}\\to I^n$ with $h^{n+1}d_A^{\\,n}=\\psi$, which is the required\nidentity in degree $n$. So every chain map from an acyclic complex to\n$I^\\bullet$ is null-homotopic. A shift $I^\\bullet[n]$ is again a\nbounded-below complex of injectives, so the same holds for it, and therefore\n$\\mathcal H^n(\\operatorname{Hom}^\\bullet(A,I^\\bullet))\n=\\operatorname{Hom}_{K(\\mathcal A)}(A,I^\\bullet[n])=0$ for every $n$: the\ncomplex $\\operatorname{Hom}^\\bullet(A,I^\\bullet)$ is acyclic and\n$I^\\bullet$ is K-injective.\n\nAn injective resolution $X\\to I^\\bullet$ of an object is a bounded-below\ncomplex of injectives which is a quasi-isomorphism from $X[0]$\n[def-sp-injective-resolutions], so it is a K-injective resolution of $X[0]$.\nBy part (1) and [def-sp-kinjective-bridge], $Rv(X[0])\\cong v(I^\\bullet)$, and\n$\\mathcal H^p(v(I^\\bullet))=R^pv(X)$ is the definition of the derived functor\nin [def-sp-left-exact-additive].",
+   "text": "Apply the comparison principle to the two resolution maps $f:K\\to I$ and $g:K\\to J$. It gives maps $u:I\\to J$ and $w:J\\to I$, unique up to homotopy, with $uf\\simeq g$ and $wg\\simeq f$. Applying the principle again with target $I$ (respectively $J$) to the two maps from $K$ obtained by composing with $f$ (respectively $g$) shows $wu\\simeq\\operatorname{id}_I$ and $uw\\simeq\\operatorname{id}_J$. The additive functor $v$ carries the displayed homotopies to homotopies, so $v(u)$ and $v(w)$ are inverse in the homotopy category and induce the same cohomology maps by [lem-weil-pbc-homotopic-maps-equal-cohomology]. For a morphism of resolved complexes, composing either comparison map with the source and target resolution maps gives the same map from the original complex; the same uniqueness argument therefore makes these isomorphisms commute with that morphism. Thus the identification is canonical and functorial in $K$.",
    "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-kinjective-computes.md",
+    "place": "## Proof, (1)"
+   }
+  },
+  {
+   "text": "The category $\\mathcal A$ is Grothendieck, so it has enough injectives by [lem-sp-grothendieck-enough-injectives]; this is the hypothesis of [lem-weil-pbc-dplus-injective-representative] and of the definition of ^pv$ in [def-sp-left-exact-additive]. By [lem-weil-pbc-dplus-injective-representative], every bounded-below complex of injectives is K-injective. An injective resolution \\to I^\\bullet$ is bounded below, consists of injectives, and is a quasi-isomorphism by [def-sp-injective-resolutions], hence is a K-injective resolution of [0]$. The definition of $ in [def-sp-kinjective-bridge] gives (X[0])\\cong v(I^\\bullet)$, and the definition of ^pv(X)$ in [def-sp-left-exact-additive] identifies its hmtBcth cohomology with ^pv(X)$.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
     "def-sp-injective-resolutions",
     "def-sp-kinjective-bridge",
     "def-sp-left-exact-additive"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-kinjective-computes.md",
+    "place": "## Proof, (2)"
+   }
   },
   {
-   "text": "*(3).* If $I$ is K-injective then so is $I[n]$, because\n$\\operatorname{Hom}^\\bullet(A,I[n])$ is $\\operatorname{Hom}^\\bullet(A,I)[n]$\nand a shift of an acyclic complex is acyclic. So $K[n]\\to I[n]$ is a\nK-injective resolution of $K[n]$, and $v$, being additive, commutes with the\nshift of a complex: $Rv(K[n])=v(I[n])=v(I)[n]=(RvK)[n]$.",
-   "uses": [],
-   "elementary": null
+   "text": "The shift of a K-injective complex is K-injective and the shift of a quasi-isomorphism is a quasi-isomorphism by [lem-weil-pbc-kinjective-shift]. Thus $K[n]\\to I[n]$ is a K-injective resolution. Since $v$ is additive, it commutes termwise with shifts, so $Rv(K[n])=v(I[n])=v(I)[n]=(RvK)[n]$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-kinjective-computes.md",
+    "place": "## Proof, (3)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sp-kinjective-comparison-principle",
   "def-sp-kinjective-bridge",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-dplus-injective-representative",
   "def-sp-injective-resolutions",
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-sp-grothendieck-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
@@ -58,7 +87,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -92,5 +121,29 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-kinjective-computes",
+  "worker": "stage1",
+  "summary": "Replaced the imported proof sketch with four explicit steps. The comparison principle is a new Mathlib leaf; bounded-below injectivity and shifts cite existing Mathlib leaves, and object-level agreement follows the stated definitions.",
+  "blueprint": "The steps realize the opening comparison principle and clauses (1), (2), and (3) of the blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Its Mathlib leaf supplies bounded-below injective-complex K-injectivity used in clause (2)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kic1911",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kic1911 (reviewer sub-agent of L); spot-checked: Read packet; no cycle (def-sp-kinjective-bridge does not depend on the item; comparison principle created from item but is Stacks/Mathlib K-injective Hom bijection, not a restatement); step 2 homotopy-equivalence argument correct, v of homotopy-equivalent K-injectives handled via lem-weil-pbc-homotopic-maps-equal-cohomology; comparison node checked against Mathlib KInjective.lean l.41-58 (Qh_map_bijective + Q inverting quasi-isos: two declarations, so unsplit is right); grep KInjective in Mathlib/Algebra/Homology (DerivedCategory/KInjective.lean, HomotopyCategory/KInjective.lean, DerivabilityStructureInjectives.lean), no direct item match. FIX more, RETURN less: C4 step 3 cited lem-weil-pbc-dplus-injective-representative and def-sp-left-exact-additive without their enough-injectives hypothesis; added citation of existing lem-sp-grothendieck-enough-injectives to step 3 uses and proof_deps.; 1 file(s) fixed by the reviewer"
+ }
 }

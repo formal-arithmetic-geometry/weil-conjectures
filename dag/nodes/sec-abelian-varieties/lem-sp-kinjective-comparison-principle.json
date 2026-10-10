@@ -1,0 +1,92 @@
+{
+ "id": "lem-sp-kinjective-comparison-principle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-kinjective-computes",
+   "place": "the proof's opening comparison principle: precomposition by a quasi-isomorphism induces a bijection on morphisms into a K-injective complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison principle for a K-injective target",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] for which the derived category exists. If $s:A\\to B$ is a quasi-isomorphism of cochain complexes and $I$ is K-injective [def-sp-kinjective-bridge], then precomposition induces a bijection\n\n$$\n s^*:\\operatorname{Hom}_{K(\\mathcal A)}(B,I)\\longrightarrow\\operatorname{Hom}_{K(\\mathcal A)}(A,I).\n$$",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+  "place": "lines 41-58 (Qh_map_bijective and quasiIso_iff)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "precomposition by a quasi-isomorphism into a K-injective complex induces a bijection on homotopy category morphisms",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective; DerivedCategory.isIso_Qh_map_iff; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso",
+   "date": "2026-10-11",
+   "verdict": "match: Qh_map_bijective together with inversion of quasi-isomorphisms gives the stated bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective resolution independence homotopy equivalence",
+   "results": "CategoryTheory.InjectiveResolution.homotopyEquiv and related declarations; no direct arbitrary-complex comparison theorem",
+   "date": "2026-10-11",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.IsKInjective.quasiIso_iff",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Qh_map_bijective",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|quasiIso_iff in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "Mathlib source KInjective.lean lines 41 and 50",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective in Mathlib/Algebra/Homology",
+   "results": "0 hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match (service indexing failure; direct source read confirms match)"
+  }
+ ],
+ "mathlib_candidate": {
+  "declarations": [
+   "CochainComplex.IsKInjective.Qh_map_bijective",
+   "DerivedCategory.isIso_Q_map_iff_quasiIso",
+   "CochainComplex.IsKInjective.nonempty_iso_quotient_obj"
+  ],
+  "files": [
+   "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:37-49",
+   "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean (isIso_Q_map_iff_quasiIso)"
+  ],
+  "how": "These declarations together yield the stated precomposition bijection: Qh_map_bijective identifies maps from the homotopy category with maps in the derived category for a K-injective target, while isIso_Q_map_iff_quasiIso makes Q(s) invertible; nonempty_iso_quotient_obj (KInjective.lean:37-49) records the resulting homotopy equivalence for two K-injective resolutions. The node is not an exact one-declaration Mathlib specialization."
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sp-kinjective-computes",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite"
+}
