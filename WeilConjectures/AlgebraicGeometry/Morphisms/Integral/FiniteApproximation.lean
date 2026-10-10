@@ -724,6 +724,73 @@ lemma coequifibered_subAlgMap (J : (dualGlueData H).glued.IdealSheafData)
     fun b' hb' ↦ exists_mul_pow_eq_of_mem_subAlg H J hJ U r hb'
   rw [hnat, ← map_mul, IsUnit.val_inv_mul, map_one]
 
+
+lemma exists_finset_subAlg_eq_closure (J : (dualGlueData H).glued.IdealSheafData)
+    (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite)
+    (hfg : (J.ideal (dualAffineOpen H U)).FG) :
+    ∃ s : Finset (F.obj (.op U)),
+      subAlg J U = Subring.closure (Set.range (α.app (.op U)) ∪ s) := by
+  classical
+  obtain ⟨T, hT⟩ := hfg
+  let eU := dualSectionsEquiv H U
+  have hfst (x : Γ((dualGlueData H).glued, (dualAffineOpen H U).1))
+      (hx : x ∈ J.ideal (dualAffineOpen H U)) : (eU x).1.fst = 0 :=
+    (mem_ker_dualGluedι_iff H U x).mp (hJ _ hx)
+  refine ⟨T.image fun t ↦ (eU t).1.snd, le_antisymm ?_ ?_⟩
+  · refine Subring.closure_le.mpr (Set.union_subset (fun x hx ↦
+      Subring.subset_closure (Or.inl hx)) fun m hm ↦ ?_)
+    let C := Subring.closure (Set.range (α.app (.op U)) ∪
+      ↑(T.image fun t ↦ (eU t).1.snd))
+    have key : ∀ x ∈ J.ideal (dualAffineOpen H U), (eU x).1.snd ∈ C := by
+      intro x hx
+      rw [← hT] at hx
+      induction hx using Submodule.span_induction with
+      | mem x hx =>
+        exact Subring.subset_closure (Or.inr (Finset.mem_coe.mpr (Finset.mem_image_of_mem _ hx)))
+      | zero => simpa using zero_mem C
+      | add x y hx hy hx' hy' =>
+        rw [map_add]
+        exact add_mem hx' hy'
+      | smul a x hx hx' =>
+        have h0 := hfst x (hT ▸ hx)
+        rw [smul_eq_mul, map_mul]
+        change (eU a).1.fst * (eU x).1.snd + (eU a).1.snd * (eU x).1.fst ∈ C
+        rw [h0, mul_zero, add_zero]
+        obtain ⟨r, hr⟩ := RingHom.mem_dualSubring.mp (eU a).2
+        exact mul_mem (Subring.subset_closure (Or.inl ⟨r, hr⟩)) hx'
+    have := key _ hm
+    rwa [RingEquiv.apply_symm_apply] at this
+  · refine Subring.closure_mono (Set.union_subset_union_right _ ?_)
+    intro m hm
+    obtain ⟨t, ht, rfl⟩ := Finset.mem_image.mp (Finset.mem_coe.mp hm)
+    have htJ : t ∈ J.ideal (dualAffineOpen H U) := hT ▸ Ideal.subset_span ht
+    change eU.symm (dualInr _) ∈ J.ideal (dualAffineOpen H U)
+    rwa [← eq_dualInr_of_fst_eq_zero _ (hfst t htJ), RingEquiv.symm_apply_apply]
+
+lemma subAlgMap_app_finite (hα : ∀ U, (α.app U).hom.IsIntegral)
+    (J : (dualGlueData H).glued.IdealSheafData) (hJ : J ≤ (dualGluedι H).ker)
+    (hfg : ∀ U, (J.ideal U).FG) (U : S.AffineZariskiSiteᵒᵖ) :
+    ((subAlgMap J).app U).hom.Finite := by
+  obtain ⟨s, hs⟩ := exists_finset_subAlg_eq_closure H J hJ U.unop (hfg _)
+  exact RingHom.finite_codRestrict_closure _ (hα U) _ s.finite_toSet hs _
+
+instance [CompactSpace S] : CompactSpace (dualGlueData H).glued :=
+  QuasiCompact.compactSpace_of_compactSpace (dualGlueData H).toBase
+
+instance [QuasiSeparatedSpace S] : QuasiSeparatedSpace (dualGlueData H).glued :=
+  quasiSeparatedSpace_of_quasiSeparated (dualGlueData H).toBase
+
+/-- Every section of `F` over an affine open lies in the subalgebra attached to some ideal sheaf
+of finite type contained in `ε F`. -/
+lemma exists_fgSub_mem_subAlg [CompactSpace S] [QuasiSeparatedSpace S] (U : S.AffineZariskiSite)
+    (a : F.obj (.op U)) : ∃ J : (dualGluedι H).ker.FGSub, a ∈ subAlg J.1 U := by
+  have hs : (dualSectionsEquiv H U).symm (dualInr a) ∈
+      (dualGluedι H).ker.ideal (dualAffineOpen H U) := by
+    rw [mem_ker_dualGluedι_iff, RingEquiv.apply_symm_apply]
+    exact TrivSqZeroExt.fst_inr _ a
+  obtain ⟨J, hJK, hJfg, hJ⟩ := (dualGluedι H).ker.exists_finiteType_le_of_mem _ hs
+  exact ⟨⟨J, hJK, hJfg⟩, subMod_subset_subAlg H J U hJ⟩
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
