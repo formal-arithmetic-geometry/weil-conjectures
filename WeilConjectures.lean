@@ -1487,6 +1487,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Locally
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Extend
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Finish
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.LocalRetract
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Retract
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LocallyPerfect.Transport
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
