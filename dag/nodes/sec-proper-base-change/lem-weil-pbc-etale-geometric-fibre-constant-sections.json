@@ -28,11 +28,61 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-constant-sheaf",
   "def-weil-connected-scheme",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $q:U\\to S$ be the composite $U\\to\\operatorname{Spec}\\Omega\\xrightarrow{\\bar s}S$. By [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant], together with the canonical composition isomorphism and its unit compatibility from [lem-weil-pbc-sets-etale-inverse-image-composition-units], there is a canonical natural isomorphism $q^{-1}F\\cong\\underline{F_{\\bar s}}$ on $U_{\\Et}$. Thus the inverse image in the statement is the claimed constant sheaf.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph, lines 5052-5067"
+   }
+  },
+  {
+   "text": "Assume $U$ is nonempty and connected. Applying [lem-weil-pbc-constant-sheaf-set-sections-connected-natural] to the set $E=F_{\\bar s}$ identifies $\\Gamma(U,q^{-1}F)$ with $F_{\\bar s}$ by sending $a$ to the corresponding constant section.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 59.23.2 (Tag 03P5), set-valued constant sheaf sections on a connected nonempty scheme"
+   }
+  },
+  {
+   "text": "For an $\\Omega$-morphism $v:V\\to U$, naturality of the isomorphism in Step 1 and the naturality clause of [lem-weil-pbc-constant-sheaf-set-sections-connected-natural] identify the pullback of the section corresponding to $a\\in F_{\\bar s}$ with the constant section of value $a$ on $V$, independently of connectedness of $V$.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph, lines 5052-5067"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph, together with Remark 59.23.2 (Tag 03P5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +107,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+  "worker": "stage1",
+  "summary": "Split the geometric-fibre assertion into the constant inverse-image identification, the set-valued connected-constant-section theorem, and the naturality calculation. The two required set-valued facts were absent from the DAG and are recorded as statement-only nodes with Stacks sources and three Mathlib searches each.",
+  "blueprint": "The three steps realize the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in lemma-weil-pbc-proper-underived-exchange: identify the pullback on the geometric fibre, compute sections on a connected fibre, and check naturality under further pullback."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gfc",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gfc (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0A3H (etale-cohomology-lemma-sections-upstairs), final paragraph of the proof (etale-cohomology.tex 5052-5067: F restricted to the geometric fibre is the pullback of F|_sbar hence constant with value F_sbar; on a connected fibre every section of a constant sheaf is constant), and Tag 03P5 (remark-constant-locally-constant-maps) for the set-valued sections; the item statement agrees with this. Step 1 is carried by lem-weil-pbc-etale-geometric-fibre-inverse-image-constant (true: every sheaf on (Spec Omega)_et is constant with value its global sections = F_sbar, and the inverse image of a constant sheaf is constant), with lem-weil-pbc-sets-etale-inverse-image-composition-units for the notion and the composition isomorphism. Step 2 by lem-weil-pbc-constant-sheaf-set-sections-connected-natural with E=F_sbar, hypotheses nonempty+connected (def-weil-connected-scheme includes nonempty) and Omega algebraically closed from the geometric point; the existing lem-weil-pbc-constant-sheaf-sections-connected is abelian-group-valued only, so the new set-valued node is not a duplicate. Step 3 by the naturality clauses of both new nodes. Small cases: U empty excluded in step 2 (E->E(empty)=pt fails), V empty or disconnected harmless in step 3. Both new statements are true (node 2 slightly over-hypothesised by Omega, harmless). Blueprint search (blueprint_refs.py 'constant sheaf connected sections', 'geometric fibre constant stalk') found nothing, same_as [] correct; three Mathlib search kinds recorded on both nodes, no Mathlib leaf. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-geometric-fibre-inverse-image-constant.json: statement/stmt_deps: cited [lem-weil-pbc-sets-etale-inverse-image-composition-units] at 'inverse image' and [def-weil-pbc-etale-site] at U_Et (notion citations, no change of mathematics); dag/nodes/sec-proper-base-change/lem-weil-pbc-constant-sheaf-set-sections-connected-natural.json: statement/stmt_deps: cited [def-pc-scheme] at 'scheme'. Start Sat Oct 10 04:45:38 PM UTC 2026, end Sat Oct 10 04:46:18 PM UTC 2026.; 2 file(s) fixed by the reviewer"
  }
 }
