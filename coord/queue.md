@@ -36,14 +36,15 @@
 | `lem-sc-hilb-dominating-power` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
-| `lem-exc-coinduced-discrete-embedding` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
+| `lem-sc-geometrically-irreducible-product` | 3011 | none |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
+| `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
 | `lem-exc-coinduced-homotopy-identity` | 3012 | none |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
@@ -58,7 +59,6 @@
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
-| `lem-sc-p1-proj-shifted-free-twist` | 3013 | none |
 | `lem-weil-pbc-proper-to-separated` | 4003 | none |
 | `lem-weil-pbc-closed-immersion-products` | 4004 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
@@ -878,7 +878,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 1029 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 1032 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
