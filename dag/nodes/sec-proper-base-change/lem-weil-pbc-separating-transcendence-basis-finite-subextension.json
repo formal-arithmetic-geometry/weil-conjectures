@@ -40,13 +40,103 @@
    "results": "IntermediateField.exists_finset_of_mem_adjoin (FieldTheory/IntermediateField/Adjoin/Basic.lean:247: an element of F(S) lies in F(S') for a finite S' ⊆ S), exists_finset_of_mem_iSup (same file:226), IsSeparable.tower_top (FieldTheory/Separable.lean:624); 'separably generated' only in FieldTheory/SeparablyGenerated.lean, FieldTheory/SeparableClosure.lean, RingTheory/Smooth/Field.lean, none stating the node",
    "date": "2026-10-10",
    "verdict": "no match; exists_finset_of_mem_adjoin is the ingredient for the coefficients of the minimal polynomials, the descent of separability to the smaller base field is not stated"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isSeparable_adjoin\\|IsSeparable.of_finite\\|separable_of_subfield\\|IsSeparable.tower_top\\|theorem Separable.of_dvd\\|theorem Separable.map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "IntermediateField.isSeparable_adjoin_iff_isSeparable (FieldTheory/SeparableClosure.lean:186), isSeparable_adjoin_simple_iff_isSeparable (SeparableDegree.lean:793), isSeparable_adjoin_pair_of_isSeparable (SeparableDegree.lean:842), IsSeparable.tower_top (Separable.lean:624), Polynomial.Separable.of_dvd (Separable.lean:87), Polynomial.Separable.map (Separable.lean:117); no IsSeparable.of_finite, no separable_of_subfield",
+   "date": "2026-10-10",
+   "verdict": "no match for the whole statement; pieces: exists_finset_of_mem_adjoin (new leaf lem-weil-pbc-adjoin-element-finite-subset), Separable.of_dvd (the divisor step, done inline from the definition), the subfield of separable elements (existing leaf lem-weil-pbc-separable-first-purely-inseparable)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "(The minimal polynomials and their Bezout identities.) Put $M=k(x_i;i\\in I)\\subseteq K$ [def-weil-pbc-transcendence-basis]. By hypothesis $K/M$ is separable algebraic [def-weil-pbc-separable-algebraic-extension], so for each $j=1,\\dots,n$ the element $a_j$ is algebraic over $M$ [def-weil-algebraic-element] and its minimal polynomial $P_j\\in M[T]$ (monic, so nonzero; $M[T]$ the polynomial ring [def-weil-polynomial-ring]) is separable [def-pc-separable-polynomial]: there are $U_j,V_j\\in M[T]$ with $U_jP_j+V_jP_j'=1$, $P_j'$ the formal derivative. Let $C\\subseteq M$ be the set of all coefficients of all the $3n$ polynomials $P_j,U_j,V_j$; it is finite.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-algebraic-element",
+    "def-weil-polynomial-ring",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), second paragraph, lines 10187-10191 (asserted without proof; argument written by the agent)"
+   }
+  },
+  {
+   "text": "(Choice of $T$.) Let $c\\in C$. Since $c\\in M=k(S)$ with $S=\\{x_i:i\\in I\\}$, by [lem-weil-pbc-adjoin-element-finite-subset] (with $E_0=k$, $F=K$) there is a finite subset $S_c\\subseteq S$ with $c\\in k(S_c)$. Choose for each element of $S_c$ one index $i\\in I$ with $x_i$ equal to it, and let $T_c\\subseteq I$ be the finite set of chosen indices; then $S_c\\subseteq\\{x_i:i\\in T_c\\}$, so $k(S_c)\\subseteq k(x_i;i\\in T_c)$ (the latter is a subfield containing $k$ and $S_c$, and $k(S_c)$ is the smallest such), hence $c\\in k(x_i;i\\in T_c)$. Put $T=\\bigcup_{c\\in C}T_c$, a finite subset of $I$ ($C$ is finite), and $L=k(x_i;i\\in T)$. For each $c$, $L$ is a subfield containing $k$ and all $x_i$ with $i\\in T_c$, so $k(x_i;i\\in T_c)\\subseteq L$ and $c\\in L$. Thus $C\\subseteq L$ (for $n=0$, $C=\\emptyset$ and $T=\\emptyset$, $L=k$). Likewise $L\\subseteq M$, as $M$ contains $k$ and all $x_i$, $i\\in T$.",
+   "uses": [
+    "lem-weil-pbc-adjoin-element-finite-subset",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), second paragraph, lines 10187-10191 (asserted without proof; argument written by the agent)"
+   }
+  },
+  {
+   "text": "(Each $a_j$ is separable algebraic over $L$.) As $L\\subseteq M$, the polynomial ring $L[T]$ is a subring of $M[T]$, and the formal derivative of a polynomial with coefficients in $L$ is the same computed in $L[T]$ or in $M[T]$. By step 2, $P_j,U_j,V_j$ lie in $L[T]$, and the identity $U_jP_j+V_jP_j'=1$ holds in $L[T]$ (it holds in $M[T]\\supseteq L[T]$). So $P_j\\in L[T]$ is separable [def-pc-separable-polynomial], nonzero, and $P_j(a_j)=0$; hence $a_j$ is algebraic over $L$ [def-weil-algebraic-element]. Let $\\mu_j\\in L[T]$ be the minimal polynomial of $a_j$ over $L$ [def-weil-pbc-separable-algebraic-extension]; it generates the kernel of $L[T]\\to K$, $T\\mapsto a_j$, which contains $P_j$, so $P_j=\\mu_jR$ with $R\\in L[T]$. Then $P_j'=\\mu_j'R+\\mu_jR'$ and $1=U_j\\mu_jR+V_j(\\mu_j'R+\\mu_jR')=(U_jR+V_jR')\\mu_j+(V_jR)\\mu_j'$, so $\\mu_j$ is separable, i.e. $a_j$ is separable over $L$ [def-weil-pbc-separable-algebraic-extension]. The minimal polynomial is the same whether $a_j$ is viewed in $K$ or in the subfield $K'\\ni a_j$ (the kernel of $L[T]\\to K'$ equals that of $L[T]\\to K$, since $K'\\to K$ is injective), so $a_j$ is also algebraic and separable over $L$ as an element of $K'$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-algebraic-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), second paragraph, lines 10187-10191 (asserted without proof; argument written by the agent)"
+   }
+  },
+  {
+   "text": "($K'/L$ is finite and algebraic.) By step 3, $a_1,\\dots,a_n\\in K$ are algebraic over $L$, so by [lem-weil-pbc-algebraic-generators-finite-extension] (with $k=L$, $\\Omega=K$) the subfield $K'=L(a_1,\\dots,a_n)\\subseteq K$ is a finite-dimensional $L$-vector space, of dimension $d$ say. Every $\\beta\\in K'$ is then algebraic over $L$ [def-weil-algebraic-element]: the $d+1$ elements $1,\\beta,\\dots,\\beta^d$ are $L$-linearly dependent, and a nontrivial relation $\\sum_{e=0}^d\\lambda_e\\beta^e=0$ is a nonzero polynomial $\\sum_e\\lambda_eT^e\\in L[T]$ vanishing at $\\beta$. So $K'/L$ is an algebraic extension [def-pc-field-extension].",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-algebraic-element",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), second paragraph, lines 10187-10191 (asserted without proof; argument written by the agent)"
+   }
+  },
+  {
+   "text": "($K'/L$ is separable algebraic.) Apply [lem-weil-pbc-separable-first-purely-inseparable] to the algebraic extension $K'/L$ (step 4): the separable algebraic closure $K'_s\\subseteq K'$ of $L$ in $K'$ [def-weil-pbc-relative-separable-closure], the set of elements of $K'$ separable over $L$, is a subfield of $K'$ containing $L$, and $K'_s/L$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. By step 3 every $a_j$ lies in $K'_s$. So $K'_s$ is a subfield of $K$ containing $L$ and $a_1,\\dots,a_n$; since $K'=L(a_1,\\dots,a_n)$ is the smallest such subfield, $K'\\subseteq K'_s\\subseteq K'$, so $K'_s=K'$ and $K'/L$ is separable algebraic. Together with step 4, $K'/L$ is finite and separable algebraic, as claimed.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 030U (lemma-separable-extension-preserves-reducedness), second paragraph, lines 10187-10191 (asserted without proof; argument written by the agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-element",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-adjoin-element-finite-subset",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-pc-field-extension",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-weil-pbc-relative-separable-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 030U, lines 10187-10191: the claim is asserted there without proof; the argument (finitely many coefficients of the minimal polynomials and of their Bezout identities lie in a finitely generated subfield) is written by the agent"
+ },
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +156,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+  "worker": "stage1",
+  "summary": "Statement kept: it matches algebra.tex lines 10187-10191 (Tag 030U verified, tags line 3961) and the use in step 1 of the only citer lem-weil-pbc-separably-generated-tensor-reduced (finite T, L=k(x_i;i in T), K'=L(a_1..a_n), K'/L finite and separable algebraic). The source asserts it without proof, so the proof is the agent's, in 5 steps matching def-weil-pbc-separable-algebraic-extension (every element algebraic with separable minimal polynomial, separable meaning coprime to the derivative as in def-pc-separable-polynomial): (1) minimal polynomials P_j over M=k(x_i;i in I) with Bezout identities U_jP_j+V_jP_j'=1 give finitely many coefficients; (2) each coefficient lies in k(x_i;i in T_c) for finite T_c by the new Mathlib leaf lem-weil-pbc-adjoin-element-finite-subset (IntermediateField.exists_finset_of_mem_adjoin), T the union; (3) the identity holds in L[T], so P_j is separable over L, the minimal polynomial over L divides it and is separable (Bezout rewritten, inline); (4) K'/L finite by the leaf lem-weil-pbc-algebraic-generators-finite-extension, hence algebraic; (5) separable elements form a subfield (leaf lem-weil-pbc-separable-first-purely-inseparable) containing L and the a_j, so equal to K'. Including the coefficients of U_j, V_j in T avoids the descent of coprimality from M[T] to L[T]. One new node (Mathlib leaf). Not a Mathlib leaf itself: searches recorded, no single declaration states the descent to a finite subfamily of the transcendence basis. All cited nodes are definitions or Mathlib leaves; no tool use of another unit."
+ },
+ "reviewed": "2026-10-10 L: 5 steps checked (agent proof of the unproved assertion in the 030U proof): Bezout identities of the minimal polynomials over k(x_i), coefficients lie in k(x_i : i in T) for a finite T by the new leaf, separability descends to L since the minimal polynomial over L divides P_j, K'/L finite by algebraic-generators-finite-extension, separable algebraic via the relative separable closure; citer separably-generated-tensor-reduced step 1 matches"
 }

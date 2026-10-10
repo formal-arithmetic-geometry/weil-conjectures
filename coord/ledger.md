@@ -1145,3 +1145,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:07 L: accepted lem-weil-pbc-quasi-coherent-algebra-change-of-rings (7 steps, 0 new; agent proof, Stacks 01SB only asserts it).
 - 09:07 L: accepted lem-weil-pbc-relative-global-complete-intersection-conormal-free (5 steps; new lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence (00SV (1), lead note to coordinate with the 00SV (2) node) and leaf lem-weil-pbc-linear-map-bijective-at-maximal-localizations (00HN (6))).
 - 09:08 L: accepted lem-weil-pbc-relative-global-complete-intersection-principal-localization (6 steps, 0 new; 00SS (2) with fibre dimensions written out; node source corrected: 00SS cites 00P3, not 00P4).
+- 09:09 L: accepted lem-weil-pbc-separating-transcendence-basis-finite-subextension (5 steps; new leaf lem-weil-pbc-adjoin-element-finite-subset, exists_finset_of_mem_adjoin). The claim is asserted without proof in the 030U proof.
