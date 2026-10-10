@@ -2770,3 +2770,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:05 L: merged deliver/C1/lemma-nagata-filtered-colimit-finite-data (reviewer FIX; first push; new nodes: 0)
 - 22:06 L: merged deliver/F1/lem-pc-sites-modules-sheafification-flat (reviewer FIX; after a return; new nodes: 2)
 - 22:07 L: merged deliver/M1/lem-pod-adic-limit-finite-modules (reviewer FIX; after a return; new nodes: 1)
+- 22:07 L: returned deliver/C1/lem-pc-perfect-summand (reviewer RETURN: Reviewer R-psm2744 (second reading missed this). (1) E/D: Step 2 is false as argued. An idempotent of K in D(O_U) (or D()
