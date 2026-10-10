@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sp-homological-functor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Homological functors of triangulated categories",
- "statement": "Let $\\mathcal C$ be a pretriangulated category (with shift $[1]$,\ndistinguished triangles and rotation), and let $\\mathcal A$ be abelian\n[def-sp-abelian]. An additive functor $F:\\mathcal C\\to\\mathcal A$ is\n*homological* if for every distinguished triangle $K_1\\to K_2\\to K_3\\to\nK_1[1]$ the sequences $F(K_1)\\to F(K_2)\\to F(K_3)$ and $F(K_3)\\to F(K_1[1])$\nare exact at the middle spots.",
+ "statement": "Let $\\mathcal C$ be a pretriangulated category (with shift $[1]$,\ndistinguished triangles and rotation), and let $\\mathcal A$ be abelian\n[def-sp-abelian]. An additive functor $F:\\mathcal C\\to\\mathcal A$ is\n*homological* if for every distinguished triangle $K_1\\to K_2\\to K_3\\to\nK_1[1]$ the sequences $F(K_1)\\to F(K_2)\\to F(K_3)$ and $F(K_2)\\to F(K_3)\\to F(K_1[1])$\nare exact at the middle spots.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-homological-functor.md",
   "place": "node def-sp-homological-functor, order 504"
@@ -18,9 +18,70 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homological functor from a pretriangulated category to an abelian category sends distinguished triangles to exact sequences",
+   "results": "CategoryTheory.Functor.IsHomological; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Functor.homologySequence_exact₁/₂/₃ (Mathlib/CategoryTheory/Triangulated/HomologicalFunctor)",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Functor.IsHomological"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsHomological, CategoryTheory.Triangulated.shortComplexOfDistTriangle",
+   "results": "unknown identifier 'CategoryTheory.Triangulated.shortComplexOfDistTriangle'",
+   "date": "2026-10-11",
+   "verdict": "no match (query identifier unavailable)"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomological [Mathlib]",
+   "results": "no hits returned by msearch grep; direct source inspection finds class IsHomological at Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:82",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Functor.IsHomological"
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of a homological functor on a pretriangulated category with abelian target exact distinguished triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor.IsHomological exact image of distinguished triangle short complex",
+   "results": "CategoryTheory.Functor.IsHomological; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Functor.homologySequence_exact₁/₂/₃ (Mathlib/CategoryTheory/Triangulated/HomologicalFunctor)",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Functor.IsHomological"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsHomological, map_distinguished_exact, homologySequence_exact₃",
+   "results": "unknown identifier 'Functor.IsHomological'",
+   "date": "2026-10-11",
+   "verdict": "no match (query identifier unavailable)"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomological [Mathlib] (second phrasing)",
+   "results": "no hits returned by msearch grep; direct source inspection finds class IsHomological at Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:82",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Functor.IsHomological"
+  },
+  {
+   "tool": "grep",
+   "query": "homological functor [Mathlib/CategoryTheory/Triangulated]",
+   "results": "no hits returned by msearch grep; direct source inspection finds the IsHomological docstring at Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:80-84",
+   "date": "2026-10-11",
+   "verdict": "match: CategoryTheory.Functor.IsHomological"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.IsHomological",
+  "file": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:82",
+  "how": "The class declaration at line 82 (`CategoryTheory.Functor.IsHomological`) requires zero-morphism preservation and exactness of the image under F of the short complex K_1 -> K_2 -> K_3 of every distinguished triangle: this is the first clause. The second clause, exactness of F(K_2) -> F(K_3) -> F(K_1[1]), is the same field applied to the rotated triangle, distinguished by `Pretriangulated.rot_of_distTriang` (Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:104), so it is part of the notion rather than an extra requirement. Additivity is the inferred instance at line 153 (`F.Additive` from `[F.IsHomological]`), and conversely an additive functor preserves zero morphisms; so the definition agrees with the class."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +102,24 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-homological-functor",
+  "worker": "stage1",
+  "summary": "The homological-functor definition is already provided by Mathlib's CategoryTheory.Functor.IsHomological. No project declaration with the blueprint tag and no duplicate DAG definition were found; the item is recorded as a Mathlib leaf.",
+  "blueprint": {
+   "steps": [],
+   "same_as_search": "Searched the complete blueprint and DAG for homological-functor definitions; no second blueprint node states this item. The item itself is the imported blueprint definition at order 504."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dhf2021",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhf2021 (reviewer sub-agent of L); spot-checked: Read IsHomological (HomologicalFunctor.lean:82), Additive instance (153), homologySequence_exact₂ (218), rot_of_distTriang (Pretriangulated.lean:104); no duplicate definition among dag nodes mentioning 'homological functor' (class b clear); consistent with lem-sp-long-exact-of-triangle. FIX more, RETURN less: (1) E7 statement repair: imported second clause 'F(K_3)->F(K_1[1]) exact at the middle spots' is a single arrow with no middle spot, corrected to F(K_2)->F(K_3)->F(K_1[1]) (missed by the second reading); (2) B8 mathlib_match.how rewritten: first clause is the class field, second clause is the field on the rotated triangle (rot_of_distTriang), additivity the inferred instance.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dhf2021): E7: statement's second clause corrected from the ill-formed single arrow F(K_3)->F(K_1[1]) to F(K_2)->F(K_3)->F(K_1[1]); follows from IsHomological via rot_of_distTriang."
 }

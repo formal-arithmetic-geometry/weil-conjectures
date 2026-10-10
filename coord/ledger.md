@@ -2413,3 +2413,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:37 L: merged deliver/G1/def-pc-derived-rhom-algebra-module (reviewer FIX; first push; new nodes: 0)
 - 19:37 L: merged deliver/F1/lem-sc-ringed-space-module-sheaves-enough-injectives (reviewer FIX; first push; new nodes: 0)
 - 19:37 L: merged deliver/K1/pqf-lem-locnoeth-lft (reviewer PASS; first push; new nodes: 0)
+- 19:38 L: merged deliver/J1/def-sp-homological-functor (reviewer FIX; first push; new nodes: 0)
