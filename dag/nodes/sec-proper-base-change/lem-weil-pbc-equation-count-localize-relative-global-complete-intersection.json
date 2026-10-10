@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+ "kind": "statement",
+ "title": "c equations in n variables with fibre dimension n-c at q: a principal localization is a relative global complete intersection",
+ "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$. Let $\\mathfrak q\\subset S$ be a prime ideal, $\\mathfrak p\\subset R$ its inverse image, $\\kappa(\\mathfrak p)$, $\\kappa(\\mathfrak q)$ the residue fields and $F=S\\otimes_R\\kappa(\\mathfrak p)$ the fibre ring [def-weil-pbc-localization-at-prime]; let $\\mathfrak Q\\subset F$ be the kernel of the ring map $F\\to\\kappa(\\mathfrak q)$, $s\\otimes\\lambda\\mapsto\\bar s\\bar\\lambda$ (a prime ideal). Assume that the Krull dimension of the topological space $\\operatorname{Spec}F$ [def-weil-affine-spectrum] at the point $\\mathfrak Q$ [def-kun-topological-dimension-at-point] equals $n-c$. Then there is $h\\in R[x_1,\\dots,x_n]$ whose image $g\\in S$ satisfies $g\\notin\\mathfrak q$, such that $T=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)$ (with $n+1$ variables and $c+1$ equations) is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection] and the $R$-algebra homomorphism $T\\to S_g$, $x_i\\mapsto(x_i\\bmod(f))/1$ ($i\\le n$), $x_{n+1}\\mapsto1/g$, is an isomorphism of $R$-algebras, $S_g$ the localization of $S$ at $\\{1,g,g^2,\\dots\\}$ [def-weil-ring-localization-away].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ST (lemma-localize-relative-complete-intersection, line 36671), part (3) and its proof (lines 36715-36720, via Lemma 00RJ lemma-dimension-fibres-bounded-open-upstairs); dim_q(S/R) there is the dimension of Spec F at Q; tag verified in stacks-project/tags/tags (00ST,algebra-lemma-localize-relative-complete-intersection). The node lem-weil-pbc-equation-count-fibre-dimension-flat states the flatness consequence of the same part."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring by c polynomials whose fibres have dimension n - c, localization at an element",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv (Mathlib.RingTheory.MvPolynomial.Localization), RingHom.finitePresentation_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, MvPolynomial.isLocalization, PrimeSpectrum.range_comap_algebraMap_localization_compl_eq_range_comap_quotientMk",
+   "date": "2026-10-10",
+   "verdict": "no match: nothing about fibre dimension of a presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization of a flat finitely presented algebra at an element is a quotient of a polynomial ring by a regular sequence with fibres of expected dimension",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv, RingHom.finitePresentation_holdsForLocalizationAway, Module.Flat.of_isLocalizedModule, RingHom.Flat.ofLocalizationSpanTarget, IsLocalization.Away.finitePresentation, Algebra.FinitePresentation.of_isLocalizationAway, RingHom.Flat.holdsForLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative global complete intersection: R[x_1..x_n]/(f_1..f_c) with all fibres of dimension n-c, localized at an element h by adding variable x_{n+1} with h x_{n+1} - 1",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.localizationAway, Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: only standard smooth presentations (Jacobian condition), no fibre-dimension condition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation.dimension",
+   "results": "Algebra.Presentation.dimension (#generators - #relations, a number attached to a presentation, no fibre condition), id_dimension, localizationAway_dimension_zero, dimension_reindex, dimension_mvPolynomial, dimension_ofAlgEquiv, PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, SubmersivePresentation.isStandardSmoothOfRelativeDimension (Mathlib.RingTheory.Extension.Presentation.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's presentation dimension is the count n - c, with no statement about fibre dimensions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'complete intersection\\|CompleteIntersection\\|syntomic\\|relative dimension' and grep -rn 'stacks 00ST\\|stacks 00SS\\|stacks 00SA\\|stacks 00SP' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; look at Mathlib/RingTheory/Extension/Presentation/",
+   "results": "no complete-intersection notion; 'relative dimension' only for standard smooth algebras and smooth morphisms (RingTheory/Smooth/StandardSmooth.lean, AlgebraicGeometry/Morphisms/Smooth.lean); the docstring of RingTheory/Extension/Presentation/Basic.lean line 103 mentions complete intersections; no Stacks tag 00ST/00SS/00SA/00SP",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
