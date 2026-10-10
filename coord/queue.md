@@ -1,13 +1,15 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (373)
+## Stage 1: nodes to split (375)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
+| `lem-weil-pbc-fpqc-descend-affine` | 1010 | none |
+| `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1015 | none |
@@ -25,8 +27,6 @@
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1016 | none |
-| `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
-| `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
@@ -65,7 +65,6 @@
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
-| `lem-galois-axioms` | 3007 | none |
 | `lem-galois-descent` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-affine-curve-h2-vanishing` | 3007 | rests_on_sorry |
@@ -86,7 +85,10 @@
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 3008 | none |
-| `lem-galois-glue` | 3008 | none |
+| `lem-galois-coproduct-morphism-components` | 3008 | none |
+| `lem-galois-fpqc-affine-descent-effective` | 3008 | none |
+| `lem-galois-fpqc-descend-etale` | 3008 | none |
+| `lem-galois-fpqc-morphisms-descend` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
@@ -863,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 391 nodes that wait for stage 1, 887 nodes that wait for a statement dependency.
+Not open yet: 393 nodes that wait for stage 1, 889 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
