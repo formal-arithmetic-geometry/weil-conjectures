@@ -23,9 +23,42 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each summand $C_i=\\operatorname{Spec}k$, restrict $F$ to the etale site of $C_i$. The single-point calculation [lem-weil-pbc-geometric-point-cohomology], obtained from the equivalence of etale sheaves with sets on a separably closed point and the comparison of sections with the geometric stalk, gives $H^q(C_i,F|_{C_i})=0$ for $q>0$ and identifies $H^0(C_i,F|_{C_i})$ with $F_{\\bar c_i}$.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03QT (etale-cohomology-theorem-equivalence-sheaves-point), Lemma 03QU (etale-cohomology-lemma-compare-cohomology-point), and Section 03QQ (section-cohomology-point)"
+   }
+  },
+  {
+   "text": "The etale site of the finite disjoint union is the finite product of the etale sites of its open-and-closed summands. Consequently the global-sections functor is the finite product of the component global-sections functors, and its derived functors are the corresponding finite products. The geometric stalk of $F|_{C_i}=\\iota_i^{-1}F$ at $\\bar c_i$ is identified with the stalk $F_{\\bar c_i}$ of $F$ at the image geometric point by [lem-weil-pbc-inverse-image-stalk-germ] applied to the inclusion $\\iota_i:C_i\\to C$. Using Step 1 componentwise gives $H^q(C,F)=0$ for $q>0$ and the canonical isomorphism $H^0(C,F)\\cong\\prod_{i\\in I}F_{\\bar c_i}$; the product is finite.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-cohomology",
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03QT, Lemma 03QU, Section 03QQ, and first paragraph of Lemma 0A5B"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +83,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-zero-dimensional-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "worker": "stage1",
+  "summary": "Split the finite coproduct calculation into the single geometric-point cohomology statement and the finite-product assembly. Checked Theorem 03QT, Lemma 03QU, Section 03QQ, and the first paragraph of Lemma 0A5B in the Stacks etale cohomology source; no exact Lean declaration exists.",
+  "blueprint": {
+   "statement": "proof, second paragraph: global sections on the finite disjoint union are the finite product of the exact point functors",
+   "steps": {
+    "1": "componentwise application of 03QT/03QU/03QQ",
+    "2": "finite-product assembly from Lemma 0A5B"
+   }
+  }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gpc",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gpc (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Theorem 03QT (equivalence-sheaves-point), Lemma 03QU (compare-cohomology-point: H^0=M^G, H^q=H^q(G,M)), proof of 0A5B (reduction over the finite disjoint union of curves and points, higher cohomology of a point trivial); item statement unchanged, item fields changed only status/proof/proof_deps/proof_origin/split_report. Step 1 carried by new node lem-weil-pbc-geometric-point-cohomology (Spec k, k algebraically closed hence separably closed, so G trivial: H^q=0 for q>0 and H^0=stalk; true). Step 2 carried by new node lem-weil-pbc-finite-coproduct-cohomology-assembly (H^q of a finite coproduct with clopen summands is the product of the summand cohomologies; true) plus Step 1 per summand. No existing node states either (checked lem-exc-etale-sheaves-gsets-point, lem-exc-abelian-sheaves-gmodules, prop-weil-pbc-geometric-stalks-exact, which a later split may use). Cited definitions read: def-weil-algebraic-closure, lem-weil-pbc-scheme-coproduct-family, def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-geometric-stalks, def-weil-pbc-etale-cohomology. Small cases: I empty (C empty, all groups 0, empty product 0), |I|=1 (single-point node). FIX more, RETURN less: (1) dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-coproduct-cohomology-assembly.json: statement/stmt_deps: cite [lem-weil-pbc-scheme-coproduct-family] for the coproduct and [def-weil-pbc-inverse-image] for F|_{C_i}=iota_i^{-1}F (B3); (2) dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-geometric-point-coproduct-cohomology.json: step 2 text/uses and proof_deps: the identification of the stalk of F|_{C_i} at c_i with F_{c_i} now cited to [lem-weil-pbc-inverse-image-stalk-germ] (C1), recorded as a generic tool use (off-unit sk-thm-p1, also used by the parent). Mathlib: no leaf, searches recorded (no match). Start Sat Oct 10 03:37:15 PM UTC 2026, end Sat Oct 10 03:38:08 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
