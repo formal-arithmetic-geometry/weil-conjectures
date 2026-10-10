@@ -2,7 +2,7 @@
 
 880 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (329)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -37,21 +37,21 @@
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
-| `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-galois-fpqc-pullback-canonical-iso` | 3011 | none |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
-| `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
+| `lem-sc-dimension-locally-algebraic` | 3011 | none |
+| `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-sc-geometrically-irreducible-product` | 3011 | none |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
-| `lem-exc-coinduced-homotopy-identity` | 3012 | none |
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 3012 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
+| `lem-pc-complete-linear-system-closed` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-proper-descends-field` | 3012 | none |
@@ -73,7 +73,6 @@
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
-| `lem-sc-normalization-properties` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-pc-xk-integral` | 4007 | rests_on_sorry |
@@ -337,7 +336,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (550)
+## Stage 2: nodes to state (551)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -395,6 +394,7 @@
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
+| `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
@@ -892,7 +892,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 351 nodes that wait for stage 1, 1055 nodes that wait for a statement dependency.
+Not open yet: 350 nodes that wait for stage 1, 1058 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
