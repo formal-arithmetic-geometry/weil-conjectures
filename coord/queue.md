@@ -2,7 +2,7 @@
 
 912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (643)
+## Stage 1: nodes to split (642)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,8 +27,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1012 | none |
-| `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
-| `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1012 | none |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
@@ -135,6 +133,7 @@
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1013 | none |
 | `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1013 | none |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1013 | none |
+| `lem-weil-pbc-symmetric-algebra-graded` | 1013 | none |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
@@ -650,7 +649,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (269)
+## Stage 2: nodes to state (270)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -905,6 +904,7 @@
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-finite-projective-smooth` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
+| `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -924,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 655 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
+Not open yet: 654 nodes that wait for stage 1, 550 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
