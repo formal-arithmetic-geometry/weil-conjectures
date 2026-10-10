@@ -20,25 +20,57 @@
    "query": "Krull dimension of an open subspace is at most the Krull dimension of the ambient topological space",
    "results": "topologicalKrullDim_subspace_le; Topology.IsInducing.topologicalKrullDim_le (Mathlib.Topology.KrullDimension)",
    "date": "2026-10-10",
-   "verdict": "related but not a match: Mathlib states the inequality for its topologicalKrullDim on an arbitrary subtype; this node records the Stacks Krull-dimension statement for open subsets"
+   "verdict": "related but not a match: Mathlib states the inequality for its topologicalKrullDim on an arbitrary subtype; this node records the Stacks Krull-dimension statement for open subsets [superseded 2026-10-10 by the stage-1 split: def-kun-topological-krull-dimension is itself the Mathlib leaf topologicalKrullDim (exact) and def-kun-subspace-topology the subtype topology, so the 'convention' difference does not exist; see mathlib_match]"
   },
   {
    "tool": "leanfinder",
    "query": "dimension of an open subset no greater than dimension of the ambient topological space",
    "results": "topologicalKrullDim_subspace_le; Topology.IsInducing.topologicalKrullDim_le; IsHomeomorph.topologicalKrullDim_eq",
    "date": "2026-10-10",
-   "verdict": "related but not a match: no declaration uses the Stacks open-subset Krull-dimension convention"
+   "verdict": "related but not a match: no declaration uses the Stacks open-subset Krull-dimension convention [superseded 2026-10-10 by the stage-1 split: def-kun-topological-krull-dimension is itself the Mathlib leaf topologicalKrullDim (exact) and def-kun-subspace-topology the subtype topology, so the 'convention' difference does not exist; see mathlib_match]"
   },
   {
    "tool": "grep",
    "query": "rg -n 'topologicalKrullDim_subspace_le|IsInducing.topologicalKrullDim_le|open.*dimension|dimension.*open' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
    "results": "Mathlib/Topology/KrullDimension.lean:63 topologicalKrullDim_subspace_le; no Stacks 0055 open-subset declaration or theorem about dim(U') <= dim(U)",
    "date": "2026-10-10",
-   "verdict": "no exact match"
+   "verdict": "no exact match [superseded 2026-10-10: Topology.IsInducing.topologicalKrullDim_le specializes in one line, see mathlib_match]"
+  },
+  {
+   "tool": "leansearch",
+   "query": "topological Krull dimension of a subspace is at most that of a larger subspace containing it",
+   "results": "topologicalKrullDim_subspace_le, IsInducing.topologicalKrullDim_le (Mathlib.Topology.KrullDimension); Order.KrullDimLE.* (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsInducing.topologicalKrullDim_le applied to the inclusion U' -> U"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim _ ≤ topologicalKrullDim _",
+   "results": "Topology.IsInducing.topologicalKrullDim_le, topologicalKrullDim_subspace_le (Mathlib.Topology.KrullDimension)",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsInducing.topologicalKrullDim_le"
+  },
+  {
+   "tool": "local_search",
+   "query": "Topology.IsInducing.topologicalKrullDim_le (project ~/weil-conjectures-slopmaster2)",
+   "results": "Topology.IsInducing.topologicalKrullDim_le in .lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean (index unavailable; existence confirmed by reading the file, line 48)",
+   "date": "2026-10-10",
+   "verdict": "match: declaration exists"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem .*topologicalKrullDim|lemma .*topologicalKrullDim' Mathlib/; rg -n 'IsEmbedding.inclusion' Mathlib/Topology",
+   "results": "Mathlib/Topology/KrullDimension.lean:48 Topology.IsInducing.topologicalKrullDim_le, :53 IsHomeomorph.topologicalKrullDim_eq, :63 topologicalKrullDim_subspace_le; no IsOpenEmbedding-specific version; Mathlib/Topology/Constructions.lean:598 Topology.IsEmbedding.inclusion (h : s ⊆ t) : IsEmbedding (Set.inclusion h)",
+   "date": "2026-10-10",
+   "verdict": "match: IsInducing.topologicalKrullDim_le with (Topology.IsEmbedding.inclusion h).isInducing; openness not needed"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Topology.IsInducing.topologicalKrullDim_le",
+  "file": "Mathlib/Topology/KrullDimension.lean",
+  "how": "specializes in one line: for U' ⊆ U (h : U' ⊆ U as Set X), the inclusion Set.inclusion h : U' → U is an embedding, hence inducing (Topology.IsEmbedding.inclusion h, Mathlib/Topology/Constructions.lean:598), so (Topology.IsEmbedding.inclusion h).isInducing.topologicalKrullDim_le : topologicalKrullDim U' ≤ topologicalKrullDim U. topologicalKrullDim is exactly the Krull dimension of def-kun-topological-krull-dimension (its Mathlib leaf, with ⊥ = -∞ for the empty space, ⊤ = ∞), and subtypes carry the subspace topology of def-kun-subspace-topology. Openness of U, U' is not needed."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +90,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-open-subspace-dimension-monotone",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Topology, remark after Definition 0055 (tag 0055 = topology-definition-Krull verified in tags/tags; topology.tex lines 1421-1425): correct, kept. stmt_deps kept. The earlier searches had judged Mathlib's topologicalKrullDim inequalities 'related but not a match' because of a supposed difference of convention; but def-kun-topological-krull-dimension is itself the exact Mathlib leaf topologicalKrullDim (supremum of lengths of chains of irreducible closed subsets, ⊥ for empty) and def-kun-subspace-topology is the subtype topology, so Topology.IsInducing.topologicalKrullDim_le applied to the embedding Set.inclusion h : U' → U (Topology.IsEmbedding.inclusion) is the statement in one line, even without openness. Declarations read in source (KrullDimension.lean:48, Constructions.lean:598); LeanSearch, Loogle, local_search and grep recorded. Status set to mathlib; no proof, no new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Topology.IsInducing.topologicalKrullDim_le (KrullDimension.lean:48) applied to the inclusion (IsEmbedding.inclusion, Constructions.lean:598); lines verified with sed. The definition nodes are Mathlib leaves for topologicalKrullDim and the subtype topology, so the earlier 'convention' objection was void. Tag 0055 verified."
+ }
 }

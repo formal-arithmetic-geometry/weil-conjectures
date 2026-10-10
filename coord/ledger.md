@@ -726,3 +726,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:53 L: reviewed lem-weil-pbc-locally-constant-finite-values-finite-type (093N(1); 3 steps; +1 leaf): accepted.
 - 00:54 L: reviewed lem-weil-pbc-make-separable (030R; 2 steps; +04KM, +030X nodes): accepted.
 - 00:55 L: reviewed lem-weil-pbc-module-pullback-finite-type (01B6; 4 steps; +1 leaf): accepted.
+- 00:56 L: reviewed lem-weil-pbc-open-subspace-dimension-monotone: Mathlib leaf (line verified): accepted.
