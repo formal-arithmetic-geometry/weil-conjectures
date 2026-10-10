@@ -842,3 +842,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:54 L: reviewed lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal (8 steps; wrong definition citation removed), lem-weil-pbc-integral-extension-dimension (2 steps, +3 leaves; stage 3: pqf-lem-incomparability duplicates the new 00GT leaf), lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite (3 steps, +Jacobson leaf), lem-weil-pbc-kahler-differentials-polynomial-extension (6 steps, +00RS leaf): accepted.
 - 03:56 L: reviewed lem-weil-pbc-local-dimension-zero-henselian (4 steps, 0 new; stage 3: dimension-zero-local-strictly-henselian could cite it): accepted.
 - 03:57 L: reviewed lem-weil-pbc-local-artinian-basis-when-flat (6 steps, 0 new): accepted.
+- 03:58 L: reviewed lem-weil-pbc-localization-colimit-principal-localizations (7 steps, 0 new; the worker's write script had not run, L applied it): accepted.
