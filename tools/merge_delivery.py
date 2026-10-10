@@ -9,6 +9,8 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
       --spot-checked NOTE   what the reviewer checked (goes into `reviewed`)
       --reviewer ID         the reviewer sub-agent (default "reviewer"); named in the commit message and the ledger
       --apply-fixes DIR     the reviewer's corrected files DIR/dag/nodes/<chapter>/<id>.json (whole files): the fields a
+                            split owns are taken; since 15:05 UTC a file there that is a NEW node (on neither branch) is
+                            added as a statement-only node (status unsplit, created.item = item): "FIX more, RETURN less"
                             split owns are taken from them (a new node of the delivery is taken whole); never a
                             maintainer's field, never a file outside the delivery
       --tool-uses a,b,c     added to the item's `tool_uses` before review_split.py runs (the worker's split_report.tool_uses
@@ -37,7 +39,7 @@ branch changed them against its base; (4) the fixes, tool_uses; (5) review_split
 delivery's author; the branch is deleted, and the queue rewritten when coord/queue.tsv is older than 60 s. On any
 failure the delivery's files are put back as on HEAD (new files removed) and nothing is committed.
 """
-import os as _os, sys as _sys
+import glob, os as _os, sys as _sys
 if _os.environ.get("SHEAF_LEAD") != "L-only":
     _sys.stderr.write("merge_delivery.py: refused. This tool is run only by the lead L in the lead's shell (deliveries are merged after review). Remote groups: push deliver/<group>/<item> and wait; any merge not made by L is reverted. Reported to the human in coord/HUMAN.md.\n")
     _sys.exit(2)
@@ -315,23 +317,39 @@ def merge_files(group, item, base, kinds, tree):
             tree.write(f, dump(set_owned(load_json_at("HEAD", f), load_json_at(br, f), UNIT_OWNS, (), load_json_at(base, f))))
 
 
-def apply_fixes(fixdir, kinds, tree):
+def apply_fixes(fixdir, kinds, tree, item=None, group=None):
+    """Returns (files fixed, statement nodes added by the reviewer). Since 2026-10-10 15:05 UTC (decision of the human:
+    "FIX more, RETURN less") a fix may ADD an unsplit statement-only node under dag/nodes/ that is neither on the main
+    branch nor on the delivery branch: created.item must be the item, status "unsplit", proof empty; it enters the queue."""
     fixdir = pathlib.Path(fixdir).resolve()
     if not fixdir.is_dir():
         raise Fail(f"--apply-fixes {fixdir}: no such directory")
     n = 0
+    added = 0
     for p in sorted(fixdir.rglob("*")):
         if not p.is_file():
             continue
         rel = p.relative_to(fixdir).as_posix()
         if not (rel.startswith(("dag/nodes/", "dag/units/")) and rel.endswith(".json")):
             raise Fail(f"fix {rel}: only dag/nodes/... and dag/units/... files can be fixed")
-        if rel not in kinds:
-            raise Fail(f"fix {rel}: not a file of the delivery (a fix never creates a node or touches another one)")
         try:
             fx = json.loads(p.read_text())
         except json.JSONDecodeError as e:
             raise Fail(f"fix {rel}: not JSON ({e})")
+        if rel not in kinds:
+            br = branch_of(group, item) if group and item else None
+            if not rel.startswith("dag/nodes/") or exists_at("HEAD", rel) or (br and exists_at(br, rel)):
+                raise Fail(f"fix {rel}: not a file of the delivery (a fix only adds a NEW statement node; it never touches another node)")
+            if any(glob.glob(str(ROOT / "dag" / "nodes" / "*" / pathlib.Path(rel).name))):
+                raise Fail(f"fix {rel}: a node with this id exists in another chapter")
+            if fx.get("id") != pathlib.Path(rel).stem or (fx.get("created") or {}).get("item") != item:
+                raise Fail(f"fix {rel}: a reviewer-added node needs id = file stem and created.item = {item}")
+            if fx.get("status") != "unsplit" or fx.get("proof") not in ([], None) or not fx.get("statement") or not fx.get("stmt_deps"):
+                raise Fail(f"fix {rel}: a reviewer-added node is statement-only: status unsplit, empty proof, a statement citing nodes, stmt_deps")
+            tree.write(rel, dump(fx))
+            kinds[rel] = "new"
+            n += 1; added += 1
+            continue
         cur = json.loads((ROOT / rel).read_text())
         if kinds[rel] == "new" and not exists_at("HEAD", rel):
             if fx.get("id") != cur.get("id") or fx.get("created") != cur.get("created"):
@@ -342,7 +360,7 @@ def apply_fixes(fixdir, kinds, tree):
         else:
             tree.write(rel, dump(set_owned(cur, fx, SPLIT_OWNS, SPLIT_OWNS_BLUEPRINT)))
         n += 1
-    return n
+    return n, added
 
 
 def backfill_blueprint(ids):
@@ -386,7 +404,7 @@ def cmd_merge(o):
         book = {"group": group, "item": item}
         try:
             merge_files(group, item, base, kinds, tree)
-            nfix = apply_fixes(o.apply_fixes, kinds, tree) if o.apply_fixes else 0
+            nfix, nadded = apply_fixes(o.apply_fixes, kinds, tree, item, group) if o.apply_fixes else (0, 0)
             item_path = next(f for f, k in kinds.items() if k == "item")
             ids = {pathlib.Path(f).stem for f, k in kinds.items() if k in ("item", "new")}
             backfill_blueprint(ids)
@@ -430,12 +448,15 @@ def cmd_merge(o):
 
             rid = o.reviewer
             verdict = (o.verdict or ("FIX" if o.apply_fixes else "PASS")).upper()
+            if nadded:
+                verdict = f"FIX+NODE({nadded})"   # the reviewer added statement node(s): counted separately as "merged with reviewer fix"
 
             def mark(d):
                 note = o.reviewed or (
                     "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by " + rid + " (reviewer sub-agent of L)"
                     + (f"; spot-checked: {o.spot_checked}" if o.spot_checked else "")
                     + (f"; {nfix} file(s) fixed by the reviewer" if nfix else "")
+                    + (f"; {nadded} statement node(s) added by the reviewer (FIX more, RETURN less)" if nadded else "")
                     + ("; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched" if pre_rule else ""))
                 d["reviewed"] = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": "pass", "note": note}
                 if o.lead_note:
