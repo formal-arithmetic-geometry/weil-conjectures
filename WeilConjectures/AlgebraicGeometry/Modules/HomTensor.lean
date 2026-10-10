@@ -24,6 +24,9 @@ every open on which `N` is trivial.
   of modules on a scheme.
 - `AlgebraicGeometry.Scheme.Modules.isIso_dualTensorHom`: it is an isomorphism if `N` is
   invertible.
+- `AlgebraicGeometry.Scheme.Modules.isIso_dualTensorHom_of_isFiniteLocallyFree`: it is an
+  isomorphism if `M` is finite locally free.
+- `AlgebraicGeometry.Scheme.Modules.dualTensorHom_naturality_right`: it is natural in `N`.
 - `AlgebraicGeometry.Scheme.Modules.dualTensorHomIso`: the natural isomorphism
   `Mᵛ ⊗ N ≅ Hom(M, N)` for an invertible `N`.
 -/
@@ -100,6 +103,121 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
     change (φ₀.app V (ψ.app V m)) • _ = _
     rw [hr, hφ₀]
 
+variable {M P} in
+/-- **`Hom(M, R) ⊗ P ≅ Hom(M, P)` for `M` free of finite rank.** If `M|_U` is a finite direct sum
+of copies of `R|_U`, with inclusions `s i` and projections `c i`, then `Hom(M, R) ⊗ P ⟶ Hom(M, P)`
+is bijective on sections over `U`: both sides are `⨁ᵢ P(U)`, through `ψ ↦ (ψ(s i 1))ᵢ` and
+`∑ᵢ c i ⊗ pᵢ ↤ (pᵢ)ᵢ`. -/
+lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj M))
+    (c : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj (unit _)))
+    (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
+    (htot : ∑ i, c i ≫ s i = 𝟙 _) :
+    Function.Bijective ((dualTensorHom M P).app (op U)) := by
+  let T : (Over U)ᵒᵖ := op (Over.mk (𝟙 U))
+  let m : ι → M.obj (op U) := fun i ↦ (s i).app T (1 : R.obj (op U))
+  -- Every section of `M` over `W ⟶ U` is a combination of the restrictions of the `m i`.
+  have hspan (W : (Over U)ᵒᵖ) (x : M.obj (op W.unop.left)) :
+      x = ∑ i, (show R.obj (op W.unop.left) from (c i).app W x) •
+        (show M.obj (op W.unop.left) from M.map W.unop.hom.op (m i)) := by
+    have h : ∑ i, (c i ≫ s i).app W x = x :=
+      (sum_app_apply Finset.univ (fun i ↦ c i ≫ s i) W x).symm.trans
+        (congrArg (fun f ↦ f.app W x) htot)
+    exact h.symm.trans (Finset.sum_congr rfl fun i _ ↦ app_unit_eq_smul (s i) W _)
+  have hcm (i j : ι) : (c i).app T (m j) = if j = i then (1 : R.obj (op U)) else 0 := by
+    have h := congrArg (fun f ↦ f.app T (1 : R.obj (op U))) (hsc i j)
+    refine h.trans ?_
+    split_ifs <;> rfl
+  -- A morphism out of `M|_U` is determined by its values on the `m i`.
+  have hval {Q : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+      (ψ : (restrictOver R U).obj M ⟶ (restrictOver R U).obj Q) (W : (Over U)ᵒᵖ)
+      (x : M.obj (op W.unop.left)) :
+      ψ.app W x = ∑ i, (show R.obj (op W.unop.left) from (c i).app W x) •
+        (show Q.obj (op W.unop.left) from Q.map W.unop.hom.op (ψ.app T (m i))) := by
+    refine (congrArg (ψ.app W) (hspan W x)).trans ?_
+    refine (map_sum (ψ.app W).hom _ _).trans (Finset.sum_congr rfl fun i _ ↦ ?_)
+    refine ((ψ.app W).hom.map_smul _ _).trans (congrArg (_ • ·) ?_)
+    exact naturality_apply ψ
+      (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (m i)
+  let c' : ι → (homObj M (unit _)).obj (op U) := c
+  let a (φ : (homObj M (unit _)).obj (op U)) (i : ι) :
+      (R ⋙ forget₂ CommRingCat RingCat).obj (op U) :=
+    (show R.obj (op U) from φ.app T (m i))
+  -- Every dual element is a combination of the `c i`.
+  have hdual (φ : (homObj M (unit _)).obj (op U)) : φ = ∑ i, a φ i • c' i := by
+    refine hom_ext (M₁ := (restrictOver R U).obj M) (M₂ := (restrictOver R U).obj (unit _))
+      fun W ↦ ?_
+    ext y
+    refine (hval φ W y).trans ?_
+    refine Eq.trans ?_ (sum_app_apply _ _ W y).symm
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    refine Eq.trans ?_ (restrictOver_smul_app_apply _ (c i) W y).symm
+    change (show R.obj (op W.unop.left) from (c i).app W y) *
+        (show R.obj (op W.unop.left) from R.map W.unop.hom.op (φ.app T (m i))) =
+      R.map W.unop.hom.op (φ.app T (m i)) * (show R.obj (op W.unop.left) from (c i).app W y)
+    exact mul_comm _ _
+  -- Every element of `Hom(M, R) ⊗ P` over `U` is `∑ i, c i ⊗ pᵢ`.
+  have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
+      ∃ p : ι → P.obj (op U), t = ∑ i, c' i ⊗ₜ p i := by
+    induction t using TensorProduct.induction_on with
+    | zero => exact ⟨0, by simp⟩
+    | tmul φ q =>
+      refine ⟨fun i ↦ a φ i • q, ?_⟩
+      conv_lhs => rw [hdual φ]
+      rw [TensorProduct.sum_tmul]
+      exact Finset.sum_congr rfl fun i _ ↦ TensorProduct.smul_tmul _ _ _
+    | add t t' ht ht' =>
+      obtain ⟨p, rfl⟩ := ht
+      obtain ⟨p', rfl⟩ := ht'
+      exact ⟨p + p', by simp [TensorProduct.tmul_add, Finset.sum_add_distrib]⟩
+  have hsingle (i j : ι) (p : P.obj (op U)) :
+      ((dualTensorHom M P).app (op U) (c' i ⊗ₜ p)).app T (m j) = if j = i then p else 0 := by
+    rw [dualTensorHom_app_tmul_app_apply, hcm]
+    split_ifs
+    · exact (one_smul _ _).trans (P.map_id_apply' p)
+    · exact zero_smul _ _
+  -- The image of `∑ i, c i ⊗ pᵢ` sends `m j` to `p j`.
+  have himage (p : ι → P.obj (op U)) (j : ι) :
+      ((dualTensorHom M P).app (op U) (∑ i, c' i ⊗ₜ p i)).app T (m j) = p j := by
+    rw [map_sum, sum_app_apply]
+    simp only [hsingle]
+    simp
+  constructor
+  · rw [injective_iff_map_eq_zero]
+    intro t ht
+    obtain ⟨p, rfl⟩ := key t
+    have hp (j : ι) : p j = 0 := by
+      rw [← himage p j, ht]
+      rfl
+    simp [hp]
+  · intro ψ
+    refine ⟨∑ i, c' i ⊗ₜ ψ.app T (m i), ?_⟩
+    refine hom_ext (M₁ := (restrictOver R U).obj M) (M₂ := (restrictOver R U).obj P)
+      fun W ↦ ?_
+    ext x
+    rw [map_sum, sum_app_apply, hval ψ W x]
+    exact Finset.sum_congr rfl fun i _ ↦ dualTensorHom_app_tmul_app_apply M P _ _ W x
+
+variable {M P} in
+/-- If `M` is free of finite rank on `U`, then `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is bijective on
+sections over every `V ⟶ U`. -/
+lemma dualTensorHom_app_bijective_of_hom {U : C} {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj M))
+    (c : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj (unit _)))
+    (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
+    (htot : ∑ i, c i ≫ s i = 𝟙 _) {V : C} (g : V ⟶ U) :
+    Function.Bijective ((dualTensorHom M P).app (op V)) := by
+  refine dualTensorHom_app_bijective_of_free (fun i ↦ restrictOverMap g (s i))
+    (fun i ↦ restrictOverMap g (c i)) (fun i j ↦ ?_) ?_
+  · change restrictOverMap g (s j ≫ c i) = _
+    rw [hsc]
+    split_ifs
+    · exact restrictOverMap_id (R := R) (M := unit _) (N := unit _) (𝟙 _)
+    · rfl
+  · change ∑ i, restrictOverMap g (c i ≫ s i) = _
+    rw [← restrictOverMap_sum, htot]
+    rfl
+
 variable {M} in
 /-- `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is natural in `M`: for `f : M ⟶ M'` the square
 ```
@@ -119,6 +237,26 @@ lemma dualTensorHom_naturality {M' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)
   exact (dualTensorHom_app_tmul_app_apply M P _ p W m).trans
     (dualTensorHom_app_tmul_app_apply M' P φ p W _).symm
 
+
+variable {P} in
+/-- `Hom(M, R) ⊗ P ⟶ Hom(M, P)` is natural in `P`: for `g : P ⟶ P'` the square
+```
+  Hom(M, R) ⊗ P  ---> Hom(M, P)
+        |                 |
+  Hom(M, R) ⊗ g          g_*
+        v                 v
+  Hom(M, R) ⊗ P' ---> Hom(M, P')
+```
+commutes. -/
+lemma dualTensorHom_naturality_right {P' : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+    (g : P ⟶ P') :
+    homObj M (unit _) ◁ g ≫ dualTensorHom M P' = dualTensorHom M P ≫ homObjMap (𝟙 M) g := by
+  ext U : 1
+  refine ModuleCat.MonoidalCategory.tensor_ext fun φ p ↦ ?_
+  refine hom_ext fun W ↦ ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)
+  refine (dualTensorHom_app_tmul_app_apply M P' φ (g.app _ p) W m).trans ?_
+  change _ = g.app (op W.unop.left) ((((dualTensorHom M P).app U (φ ⊗ₜ p)).app W) m)
+  rw [dualTensorHom_app_tmul_app_apply, (g.app _).hom.map_smul, naturality_apply]
 end PresheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
@@ -245,5 +383,124 @@ noncomputable def dualTensorHomIso (N : X.Modules) [N.IsInvertible] :
     dualFunctor X ⋙ tensorRight N ≅ (SheafOfModules.homFunctor X.sheaf).flip.obj N :=
   NatIso.ofComponents (fun M ↦ asIso (dualTensorHom M.unop N)) fun f ↦
     dualTensorHom_naturality f.unop N
+
+end AlgebraicGeometry.Scheme.Modules
+
+namespace SheafOfModules
+
+variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat RingCat.{u})] {R : Sheaf J CommRingCat.{u}}
+
+-- The underlying sheaf of rings of the sheaf of commutative rings `R`.
+set_option hygiene false in
+local notation "𝓡" => (sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R
+
+variable {U : C} in
+/-- If `M` is free of finite rank on `U`, then `Hom(M, R) ⊗ N ⟶ Hom(M, N)` is bijective on
+sections over every `V ⟶ U`. -/
+lemma dualTensorHom_app_bijective_of_iso_free [HasWeakSheafify J AddCommGrpCat.{u}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    [∀ X, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}] (M N : SheafOfModules.{u} 𝓡)
+    {I : Type u} [Finite I] (e : free I ≅ M.over U) {V : C} (g : V ⟶ U) :
+    Function.Bijective ((PresheafOfModules.dualTensorHom M.val N.val).app (op V)) := by
+  classical
+  let := Fintype.ofFinite I
+  let S (j : I) : (unit 𝓡).over U ⟶ M.over U := Sigma.ι (fun _ ↦ unit _) j ≫ e.hom
+  let Cc (j : I) : M.over U ⟶ (unit 𝓡).over U :=
+    e.inv ≫ Sigma.desc (fun k ↦ if k = j then 𝟙 (unit _) else 0)
+  have hsc (i j : I) : S j ≫ Cc i = if j = i then 𝟙 _ else 0 := by
+    simp only [S, Cc, Category.assoc, Iso.hom_inv_id_assoc, Sigma.ι_desc]
+    rfl
+  have hsum : ∑ i, Sigma.desc (fun k ↦ if k = i then 𝟙 (unit _) else 0) ≫
+      Sigma.ι (fun _ : I ↦ unit ((𝓡).over U)) i = 𝟙 (free I) := by
+    refine Sigma.hom_ext _ _ fun k ↦ ?_
+    rw [Preadditive.comp_sum, Finset.sum_eq_single k (fun b _ hb ↦ by simp [Ne.symm hb])
+      (by simp)]
+    simp only [Sigma.ι_desc_assoc]
+    exact (Category.comp_id _).symm
+  have htot : ∑ i, Cc i ≫ S i = 𝟙 _ := by
+    calc ∑ i, Cc i ≫ S i = e.inv ≫ (∑ i, Sigma.desc (fun k ↦ if k = i then 𝟙 (unit _) else 0) ≫
+          Sigma.ι (fun _ : I ↦ unit ((𝓡).over U)) i) ≫ e.hom := by
+          simp only [Cc, S, Preadditive.comp_sum, Preadditive.sum_comp, Category.assoc]
+          rfl
+      _ = 𝟙 _ := by rw [hsum, Category.id_comp, Iso.inv_hom_id]
+  refine PresheafOfModules.dualTensorHom_app_bijective_of_hom (P := N.val) (U := U)
+    (fun j ↦ toRestrictOverHom (S j)) (fun j ↦ toRestrictOverHom (Cc j)) (fun i j ↦ ?_) ?_ g
+  · refine (congrArg toRestrictOverHom (hsc i j)).trans ?_
+    split_ifs
+    · exact toRestrictOverHom_id _
+    · exact toRestrictOverHom_zero _ _
+  · exact (toRestrictOverHom_sum Finset.univ (fun i ↦ Cc i ≫ S i)).symm.trans
+      ((congrArg toRestrictOverHom htot).trans (toRestrictOverHom_id M))
+
+end SheafOfModules
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X : Scheme.{u}}
+
+set_option maxHeartbeats 1000000 in
+-- The rewrites through the localized monoidal structure on sheaves of modules are slow.
+/-- The identification `M ⊗ P ≅ a(M ⊗ P)` of the tensor product of sheaves of modules with the
+sheafification of the tensor product of presheaves is natural in `P`. -/
+lemma whiskerLeft_tensorObjIsoSheafification_hom (M : X.Modules) {P P' : X.Modules}
+    (g : P ⟶ P') :
+    M ◁ g ≫ (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M P').hom =
+      (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M P).hom ≫
+        (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map (M.val ◁ g.val) := by
+  let := SheafOfModules.sheafificationMonoidal X.sheaf
+  simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom,
+    Functor.Monoidal.μIso_hom, Category.assoc]
+  erw [← Functor.LaxMonoidal.μ_natural_right]
+  rw [← Category.assoc, ← Category.assoc]
+  congr 1
+  simp only [tensorIso_inv, Iso.app_inv, asIso_inv]
+  rw [← id_tensorHom (C := X.Modules), ← id_tensorHom (C := X.Modules),
+    tensorHom_comp_tensorHom (C := X.Modules), tensorHom_comp_tensorHom (C := X.Modules)]
+  erw [Category.id_comp]
+  congr 1
+  exact (inv (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit).naturality
+    g
+
+/-- `Mᵛ ⊗ N ⟶ Hom(M, N)` is natural in `N`. -/
+lemma dualTensorHom_naturality_right (M : X.Modules) {N N' : X.Modules} (g : N ⟶ N') :
+    Mᵛ ◁ g ≫ dualTensorHom M N' =
+      dualTensorHom M N ≫ SheafOfModules.homObjMap (R := X.sheaf) (𝟙 M) g := by
+  simp only [dualTensorHom]
+  rw [← Category.assoc, whiskerLeft_tensorObjIsoSheafification_hom, Category.assoc,
+    ← Functor.map_comp_assoc]
+  erw [PresheafOfModules.dualTensorHom_naturality_right]
+  rw [Functor.map_comp_assoc]
+  erw [(PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit.naturality
+    (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 M) g)]
+  rfl
+
+/-- **`Hom(M, N) ≅ Mᵛ ⊗ N` for a finite locally free `M`.** The morphism
+`Mᵛ ⊗ N ⟶ Hom(M, N)` is an isomorphism if `M` is finite locally free: it is the sheafification
+of a morphism of presheaves which is bijective on sections over every open on which `M` is
+free of finite rank. -/
+instance isIso_dualTensorHom_of_isFiniteLocallyFree (M N : X.Modules)
+    [M.IsFiniteLocallyFree] : IsIso (dualTensorHom M N) := by
+  obtain ⟨q, hq, hf⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := M)
+  have hb (V : X.Opens) (i : q.I) (g : V ⟶ q.X i) :
+      Function.Bijective ((PresheafOfModules.dualTensorHom M.val N.val).app (op V)) := by
+    have := (hf.isFiniteType i).finite
+    have := hq.isIso i
+    exact SheafOfModules.dualTensorHom_app_bijective_of_iso_free (R := X.sheaf) M N
+      (asIso (q.generators i).π) g
+  have hW : (Opens.grothendieckTopology X).W.inverseImage
+      (PresheafOfModules.toPresheaf X.ringCatSheaf.obj)
+      (PresheafOfModules.dualTensorHom M.val N.val) :=
+    (GrothendieckTopology.W_iff_isLocallyBijective _ _).2
+      ⟨Presheaf.isLocallyInjective_of_coversTop q.coversTop _ fun V i g ↦ (hb V i g).1,
+        Presheaf.isLocallySurjective_of_coversTop q.coversTop _ fun V i g ↦ (hb V i g).2⟩
+  rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
+    (𝟙 X.ringCatSheaf.obj)] at hW
+  have : IsIso ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map
+    (PresheafOfModules.dualTensorHom M.val N.val)) := hW
+  have hc : IsIso ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit.app
+    (homObj M N)) := inferInstance
+  exact IsIso.comp_isIso' (Iso.isIso_hom _) (IsIso.comp_isIso' this hc)
 
 end AlgebraicGeometry.Scheme.Modules

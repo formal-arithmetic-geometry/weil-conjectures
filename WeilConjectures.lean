@@ -259,6 +259,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple
