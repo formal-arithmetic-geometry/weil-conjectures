@@ -2576,3 +2576,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:51 L: merged deliver/E1/lem-pc-rf-base-change-complex (reviewer FIX; after a return; new nodes: 2)
 - 20:52 L: merged deliver/M1/def-weil-pbc-constructible-torsion (reviewer FIX; first push; new nodes: 0)
 - 20:52 L: merged deliver/C1/lem-pc-hilb-containment-locus (reviewer FIX; after a return; new nodes: 1)
+- 20:52 L: deleted deliver/F1 and deliver/J1 lem-pc-ringed-space-module-stalk-tensor (item split by L at 19:58); released J1's claim; claim.py next/take now refuse nodes with status split/mathlib/merged regardless of 'reviewed' (launcher's order 20:55)

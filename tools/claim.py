@@ -99,6 +99,10 @@ def sorries(m):
 
 
 def take(who, m, quiet=False) -> bool:
+    if node_finished(m):   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
+        if not quiet:
+            print(f"{m} is already split, matched or attached; nothing to claim")
+        return False
     if len(held_by(who)) >= LIMIT:
         if not quiet:
             print(f"{who} already holds {LIMIT} claims; deliver or release one first")
@@ -132,7 +136,10 @@ def node_finished(m: str) -> bool:
         d = json.loads(hits[0].read_text())
     except Exception:
         return False
-    if d.get("status") in ("split", "mathlib", "merged") and bool(d.get("reviewed")) or d.get("status") == "merged":
+    # launcher's order 2026-10-10 20:55 UTC: a node whose status is split, mathlib or merged is finished whether or not
+    # `reviewed` is set (L's own split of lem-pc-ringed-space-module-stalk-tensor at 19:58 carried no `reviewed`, so
+    # `next` handed the item to J1 at 20:14 after F1 had abandoned it for the same reason)
+    if d.get("status") in ("split", "mathlib", "merged"):
         return True
     # launcher's finding, 2026-10-10 17:30 UTC: a node attached to a sorry-free Lean declaration (lean_audit closed or
     # attached) stays status unsplit but is finished; groups claimed such nodes eight times each
