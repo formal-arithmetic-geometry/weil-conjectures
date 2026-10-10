@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-pic-of-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\operatorname{Pic}$ of a field",
@@ -19,9 +19,13 @@
  ],
  "proof": [
   {
-   "text": "An invertible $\\mathcal{O}_k$-module is locally free of rank $1$; an $\\mathcal{O}_k$-module\nis the same as a $k$-vector space, and a locally free rank $1$ $k$-module\nis free of rank $1$ (a module over a field is free; every nonzero\nelement of a basis is a basis), hence isomorphic to $k=\\Gamma(\\operatorname{Spec} k,\\mathcal{O})$.",
+   "text": "An invertible $\\mathcal{O}_k$-module is locally free of rank $1$. The only nonempty open of $\\operatorname{Spec}(k)$ is the whole space, so the local rank-one trivialization is global; consequently its module of sections is a one-dimensional $k$-vector space. Choosing a nonzero vector gives a $k$-linear isomorphism with $k=\\Gamma(\\operatorname{Spec}(k),\\mathcal{O})$, so the corresponding invertible sheaf is isomorphic to $\\mathcal{O}_k$ and its Picard class is the identity.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-pic-of-field.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [],
@@ -30,9 +34,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-pic-of-field.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of the spectrum of a field is trivial every invertible module is isomorphic to the structure sheaf",
+   "results": "CommRing.Pic.instSubsingletonOfIsLocalRing (Mathlib/RingTheory/PicardGroup); CommRing.relPic_eq_top; CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum; CommRing.Pic.instFreeOfSubsingleton; CommRing.Pic.subsingleton_iff; CommRing.Pic.subsingleton_iffₛ; CommRing.Pic.instFreeAsModuleOfNat; CommRing.Pic.mk_eq_one_iff",
+   "date": "2026-10-10",
+   "verdict": "generalization applies to CommRing.Pic, but not the project's Scheme.Pic"
+  },
+  {
+   "tool": "loogle",
+   "query": "PicardGroup, CommRing.Pic, IsField",
+   "results": "none; unknown identifier PicardGroup",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*field|field.*Pic|picard.*field in Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard group of Spec of a field is trivial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +94,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pic-of-field",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the blueprint and found no exact project declaration. The proof is one elementary step: Spec(k) has one point, so an invertible sheaf is a one-dimensional k-vector space and hence isomorphic to the structure sheaf. Mathlib searches found only the analogous CommRing.Pic local-ring instance, not the project's Scheme.Pic.",
+  "blueprint": "Realizes the proof paragraph under ## Proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pof1833",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pof1833 (reviewer sub-agent of L); spot-checked: Step 1 elementary: def-sc-invertible-module defines invertible as locally free of rank one, and a Zariski cover of the one-point Spec(k) contains Spec(k), so L = O globally; D: proves the statement. B8/B10: Mathlib CommRing.Pic.instSubsingletonOfIsLocalRing (RingTheory/PicardGroup.lean:537) is the algebraic Pic, not the sheaf statement; slopmaster2 subsingleton_cohomologicalPicardGroup_of_field (Sites/Hilbert90.lean:366) is etale H^1(G_m), not this statement; no exact leaf or attach. No repairs."
+ }
 }
