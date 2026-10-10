@@ -19,20 +19,57 @@
  "stmt_deps": [
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "stalk of a flat sheaf of modules is a flat module",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
+   "text": "Fix x and an acyclic three-term complex M^\\bullet of \\mathcal O_{X,x}-modules. The termwise skyscraper complex i_{x,*}M^\\bullet is acyclic and its stalk at x is M^\\bullet by [lem-pc-skyscraper-complex].",
+   "uses": [
+    "lem-pc-skyscraper-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2), skyscraper complex"
+   }
   },
   {
+   "text": "Since \\mathcal F is flat, the functor \\mathcal G\\mapsto\\mathcal G\\otimes_{\\mathcal O_X}\\mathcal F is exact by [def-pc-flat-sheaf-modules]. Applying it to the acyclic complex i_{x,*}M^\\bullet shows that i_{x,*}M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal F is acyclic.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2)"
+   }
+  },
+  {
+   "text": "Stalk exactness [lem-weil-pbc-module-stalk-exact] makes the stalk at x of this tensor complex acyclic. Applying [lem-pc-ringed-space-module-stalk-tensor] degreewise identifies it with M^\\bullet\\otimes_{\\mathcal O_{X,x}}\\mathcal F_x. Hence tensoring every exact three-term complex M^\\bullet with \\mathcal F_x on the right remains exact, which is precisely flatness of \\mathcal F_x.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2), stalkwise exactness and Lemma 17.16.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-skyscraper-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-ringed-space-module-stalk-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 17.17.2 (Tag 05NE), implication (1) => (2)"
+ },
+ "mathlib_searches": [
+  {
    "tool": "leanfinder",
-   "query": "flat sheaf stalk flat module ringed space",
+   "query": "stalk of a flat sheaf of modules is a flat module",
    "results": "Only Module.Flat for modules over a ring; no sheaf stalk theorem",
    "date": "2026-10-11",
    "verdict": "no match"
@@ -50,15 +87,56 @@
    "results": "No declarations found",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk tensor product ringed space sheaf modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-bounded-above-flat-kflat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-sheaf-stalk-flat",
+  "worker": "stage1",
+  "summary": "Checked Stacks Modules Tag 05NE, implication (1) => (2), and split its proof through an acyclic skyscraper complex. The only new prerequisite is the ringed-space stalk-tensor isomorphism from Tag 01CB; existing DAG nodes supply skyscraper complexes and stalkwise exactness. No exact sorry-free Lean declaration or blueprint duplicate was found.",
+  "blueprint": "Realizes the parent proof clause invoking Cohomology of Sheaves, Tag 06YD/05NE: a stalk of a flat sheaf module is flat over the local ring.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-skyscraper-complex",
+    "why": "Generic skyscraper construction used by the Stacks proof."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic stalkwise exactness theorem used by the proof."
+   },
+   {
+    "node": "lem-pc-ringed-space-module-stalk-tensor",
+    "why": "Generic ringed-space stalk-tensor theorem used by the Tag 01CB step; it belongs to the duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-skyscraper-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-ringed-space-module-stalk-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsf2318",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf2318 (reviewer sub-agent of L); spot-checked: Reviewed 44bcbe368; 742886419 is a rebase onto sheaf-dag with identical item and report files. Item is only 05NE (1)=>(2) (sheaf flat => stalks flat); the converse (stalk flat => sheaf flat) is not in this item, so there is no sheaf-tensor handling of that direction to judge. Step1 skyscraper node gives acyclicity and stalk identification; Step2 uses def G|->G(x)F exactly, order matches; Step3 cites lem-weil-pbc-module-stalk-exact (5) and lem-pc-ringed-space-module-stalk-tensor (natural, so degreewise isos form a complex iso): C1/C4 ok, nothing restated, no new nodes (class b n/a). The stalk-tensor node was created from lem-pc-stalk-tensor-complex, not this item, so there is no cycle. lem-pc-kflat-stalk-criterion not needed. Report text still says one new node (stale vs 0): cosmetic. No repairs."
+ }
 }
