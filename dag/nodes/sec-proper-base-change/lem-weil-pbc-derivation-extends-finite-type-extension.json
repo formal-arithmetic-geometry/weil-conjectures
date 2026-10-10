@@ -10,9 +10,77 @@
  "stmt_deps": [
   "def-weil-pbc-finite-type-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Generators; the maps into the fractions.) By [def-weil-pbc-finite-type-algebra] there are $x_1,\\ldots,x_m\\in R'$ such that every element of $R'$ is a polynomial in $x_1,\\ldots,x_m$ with coefficients in $R$. Let $\\iota':R'\\to R'_g$, $t\\mapsto t/1$, and $\\iota:R\\to R_g$, $r\\mapsto r/1$; both are ring maps. $\\iota'$ is injective: $t/1=0/1$ means $g^ut=0$ for some $u\\ge0$, hence $t=0$ as $g$ is a nonzerodivisor in $R'$; likewise $\\iota$ is injective, since $R\\subseteq R'$. Let $\\varphi:R_g\\to R'_g$, $r/g^n\\mapsto r/g^n$, be the map of the hypothesis; it is a ring map and bijective, hence a ring isomorphism, and $\\varphi(\\iota(r))=\\iota'(r)$ for $r\\in R$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  },
+  {
+   "text": "(The derivation $\\delta$ of $R'_g$.) The powers $W=\\{1,g,g^2,\\ldots\\}$ form a multiplicative subset of $R$, and $W^{-1}R$ as defined in [lem-weil-pbc-derivation-extends] (2) is the ring $R_g$ of the statement ($a/g^n=a'/g^m$ iff $g^u(ag^m-a'g^n)=0$ for some $u\\ge0$). By [lem-weil-pbc-derivation-extends] (2) there is a derivation $D_g:R_g\\to R_g$ with $D_g(a/g^n)=D(a)/g^n-aD(g^n)/g^{2n}$ for $a\\in R$, $n\\ge0$; in particular $D_g(\\iota(r))=\\iota(D(r))$. Since $\\varphi$ is a ring isomorphism (Step 1), $\\delta:=\\varphi\\circ D_g\\circ\\varphi^{-1}:R'_g\\to R'_g$ is additive and satisfies $\\delta(st)=s\\delta(t)+t\\delta(s)$ (apply $\\varphi$ to the Leibniz rule of $D_g$ at $\\varphi^{-1}(s),\\varphi^{-1}(t)$), so $\\delta$ is a derivation of $R'_g$, and $\\delta(\\iota'(r))=\\varphi(D_g(\\iota(r)))=\\iota'(D(r))$ for $r\\in R$. (This is the source's 'By (2) this extends to $R_g$', with $R_g=R'_g$.)",
+   "uses": [
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  },
+  {
+   "text": "(A common $N$ with $g^Nx_i\\in R$.) Fix $i$. As $\\varphi$ is surjective, $\\iota'(x_i)=x_i/1=\\varphi(r_i/g^{n_i})=r_i/g^{n_i}$ in $R'_g$ for some $r_i\\in R$, $n_i\\ge0$, i.e. $g^u(g^{n_i}x_i-r_i)=0$ in $R'$ for some $u\\ge0$. As $g$ is a nonzerodivisor in $R'$, $g^{n_i}x_i=r_i\\in R$. Put $N=\\max(n_1,\\ldots,n_m)$ ($N=0$ if $m=0$) and $a_i:=g^Nx_i=g^{N-n_i}r_i\\in R$. Then $\\iota'(x_i)=\\varphi(a_i/g^N)$, since $\\varphi(a_i/g^N)=a_i/g^N=x_i/1$ in $R'_g$ ($g^Nx_i-a_i=0$). (The source says only 'choose an $N$ such that $g^Nx_i\\in R$'.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  },
+  {
+   "text": "($g^{N+1}\\delta(x_i)$ comes from $R$.) By induction on $N$ with the Leibniz rule, $D(g^N)=Ng^{N-1}D(g)$ for $N\\ge1$, and $D(g^0)=D(1)=0$ ($D(1)=D(1\\cdot1)=2D(1)$). With the formula of Step 2, $D_g(a_i/g^N)=D(a_i)/g^N-a_iD(g^N)/g^{2N}=D(a_i)/g^N-Na_iD(g)/g^{N+1}$ (for $N\\ge1$, $a_iNg^{N-1}D(g)/g^{2N}=Na_iD(g)/g^{N+1}$ as $g^{N-1}g^{N+1}=g^{2N}$; for $N=0$ both second terms are $0$). Multiplying by $g^{N+1}/1$: $g^{N+1}D_g(a_i/g^N)=\\iota(c_i)$ with $c_i:=gD(a_i)-Na_iD(g)\\in R$, which is the source's $g^{N+1}D(x_i)=-Ng^Nx_iD(g)+gD(g^Nx_i)$. Applying $\\varphi$ and Step 3: $g^{N+1}\\delta(\\iota'(x_i))=\\varphi(g^{N+1}D_g(a_i/g^N))=\\iota'(c_i)\\in\\iota'(R')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  },
+  {
+   "text": "($\\Delta=g^{N+1}\\delta$ preserves $R'$.) $\\Delta:=g^{N+1}\\delta:R'_g\\to R'_g$ is additive and $\\Delta(st)=g^{N+1}(s\\delta(t)+t\\delta(s))=s\\Delta(t)+t\\Delta(s)$, so $\\Delta$ is a derivation of $R'_g$. Let $S=\\{t\\in R':\\Delta(\\iota'(t))\\in\\iota'(R')\\}$. $S$ is closed under sums and differences ($\\Delta$ is additive and $\\iota'(R')$ is a subgroup) and under products: for $t,t'\\in S$, $\\Delta(\\iota'(tt'))=\\iota'(t)\\Delta(\\iota'(t'))+\\iota'(t')\\Delta(\\iota'(t))\\in\\iota'(R')$, as $\\iota'(R')$ is a subring. $S\\supseteq R$: $\\Delta(\\iota'(r))=g^{N+1}\\iota'(D(r))=\\iota'(g^{N+1}D(r))$ (Step 2). $x_i\\in S$ (Step 4). Hence $S$ contains every polynomial in $x_1,\\ldots,x_m$ with coefficients in $R$ (built from elements of $R$ and the $x_i$ by sums and products), i.e. $S=R'$ by the choice of the $x_i$ [def-weil-pbc-finite-type-algebra]. (The source's monomial formula, written for all elements via the subring $S$; the source leaves out the terms where $\\Delta$ falls on the coefficients in $R$, which $S\\supseteq R$ covers.)",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  },
+  {
+   "text": "(The derivation $D'$.) For $t\\in R'$ let $D'(t)$ be the element of $R'$ with $\\iota'(D'(t))=\\Delta(\\iota'(t))$; it exists by Step 5 and is unique as $\\iota'$ is injective (Step 1). Since $\\iota'$ is an injective ring map and $\\Delta$ is a derivation, $\\iota'(D'(t+t'))=\\iota'(D'(t)+D'(t'))$ and $\\iota'(D'(tt'))=\\iota'(tD'(t')+t'D'(t))$, so $D':R'\\to R'$ is a derivation. For $r\\in R$, $\\iota'(D'(r))=\\iota'(g^{N+1}D(r))$ (Step 5), so $D'(r)=g^{N+1}D(r)$. This proves the statement with the integer $N+1\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-derivation-extends"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), paragraph 'Proof of the final statement' (line 11785); the choice of N (via the nonzerodivisor g), the transport of D_g to R'_g along R_g = R'_g, the formula for D(g^N), and the closure under sums and products (the coefficients in R) that the source leaves out are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +109,45 @@
    "results": "no Derivation in RingTheory/Localization; Derivation.restrictScalars (RingTheory/Derivation/Basic.lean:343) changes the base ring only",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a derivation of a subalgebra extends to the larger algebra after multiplying by a power of an element, when the localizations agree",
+   "results": "IsLocalization.Away.map, IsLocalization.Away.mapₐ, IsLocalization.Away.instMapRingHomPowersOfCoe (Mathlib.RingTheory.Localization.Away.Basic), Algebra.Extension.localization (Mathlib.RingTheory.Extension.Basic), Derivation.ext_of_adjoin_eq_top (Mathlib.RingTheory.Derivation.Basic): localization maps and uniqueness of derivations only, no extension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a derivation along a ring extension that becomes an isomorphism after localization at an element",
+   "results": "KaehlerDifferential.isLocalizedModule_map, KaehlerDifferential.span_range_map_derivation_of_isLocalization (Mathlib.RingTheory.Etale.Kaehler), KaehlerDifferential.isLocalizedModule (Mathlib.RingTheory.Kaehler.TensorProduct), derivationToSquareZeroEquivLift_apply_coe_apply, Derivation.compAlgebraMap, Derivation.liftKaehlerDifferential: Kähler differentials of localizations and restrictions, no extension of a derivation R -> R",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, Algebra.FiniteType",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Derivation.localization (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index 'unavailable' (not a proof of absence; the grep below is)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "ls Mathlib/RingTheory/Derivation; grep -rln IsLocalization Mathlib/RingTheory/Derivation Mathlib/RingTheory/Kaehler; grep -rln Derivation Mathlib | xargs grep -ln 'IsLocalization\\|Localization'; grep -rn 'def .*\\(extend\\|lift\\|map\\)' Mathlib/RingTheory/Derivation/*.lean; sed -n 365,415p Mathlib/RingTheory/Derivation/Basic.lean",
+   "results": "Derivation/{Basic,DifferentialRing,Lie,MapCoeffs,ToSquareZero}.lean: no IsLocalization; files with both Derivation and Localization: Kaehler/TensorProduct.lean, Smooth/StandardSmoothCotangent.lean, Etale/Kaehler.lean, Unramified/Basic.lean (Kähler differentials only); Derivation.liftOfRightInverse (Basic.lean:370) and Derivation.liftOfSurjective (Basic.lean:408) push a derivation forward along a surjective algebra map f with f x = 0 -> f (d x) = 0, which is neither the extension to a localization nor to a finite type overring; Derivation.leibniz_of_mul_eq_one (Basic.lean:461), leibniz_div (fields, :481) are ingredients only",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +167,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-derivation-extends-finite-type-extension",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 07PE (tag verified in tags/tags: 07PE,more-algebra-lemma-derivation-extends; label at more-algebra.tex line 11754), last sentence and 'Proof of the final statement'. Statement kept (it already makes the source's 'R_g = R'_g' precise as bijectivity of the induced map). Proof in 6 steps following the source: generators x_i of R' over R [def-weil-pbc-finite-type-algebra] and injectivity of R' -> R'_g (g nonzerodivisor); D_g on R_g by [lem-weil-pbc-derivation-extends] (2) with W the powers of g, transported to a derivation delta of R'_g along the ring isomorphism R_g -> R'_g; N with g^N x_i in R (surjectivity and the nonzerodivisor, which the source leaves out); g^{N+1} delta(x_i) = gD(g^N x_i) - N g^N x_i D(g) from R (with D(g^N) = N g^{N-1} D(g)); the set of t in R' with g^{N+1} delta(t) in R' is a subring containing R and the x_i, hence R' (covers the coefficient terms the source's monomial formula leaves out); restriction gives D' with D'(r) = g^{N+1} D(r), so the statement's N is the source's N+1. No new nodes. Mathlib: no extension of a derivation to a localization or to a finite type overring (leansearch, leanfinder, loogle, grep; recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following the last paragraph of More on Algebra 07PE: generators and the injective maps into the fractions; D extended to R_g by part (2) of the existing derivation-extends node and moved across R_g = R'_g; g^N x_i in R (justified via surjectivity and the nonzerodivisor); the formula g^{N+1} delta(x_i) in R; the subring of elements preserved by Delta = g^{N+1} delta contains R and the x_i; the restriction D'. Statement unchanged (the statement's N is the source's N+1)."
+ }
 }

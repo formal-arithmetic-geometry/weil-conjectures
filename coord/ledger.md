@@ -937,3 +937,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:53 L: reviewed lem-weil-pbc-closed-point-dimension-local-ring (6 steps, +3 leaves, +00OS node): accepted.
 - 05:54 L: reviewed lem-weil-pbc-colimit-standard-smooth-algebras (4 steps, no new node): accepted.
 - 05:56 L: reviewed lem-weil-pbc-degree-p-extension-regular (4 steps, no new node): accepted.
+- 05:57 L: reviewed lem-weil-pbc-derivation-extends-finite-type-extension (6 steps, no new node): accepted.
