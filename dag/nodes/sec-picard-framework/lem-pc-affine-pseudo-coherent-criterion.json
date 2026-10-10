@@ -25,9 +25,68 @@
   "lem-pc-affine-qcoh-derived-equivalence",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\Leftarrow$) Suppose $M^\\bullet\\cong F^\\bullet$ in $D(A)$ with $F^\\bullet$ a bounded-above complex of finite free $A$-modules, $F^n\\cong A^{r_n}$. Applying the functor of [lem-pc-affine-qcoh-derived-equivalence] gives $E=\\widetilde{M^\\bullet}\\cong\\widetilde{F^\\bullet}$ in $D(\\mathcal O_X)$. Since $\\widetilde A=\\mathcal O_X$ (the equivalence sends $A$ to $\\mathcal O_X$) and $M\\mapsto\\widetilde M$ commutes with finite direct sums [lem-weil-pbc-affine-tilde-gamma-adjunction, part (4)], each $\\widetilde{F^n}\\cong\\mathcal O_X^{r_n}$, so $\\widetilde{F^\\bullet}$ is a bounded-above complex of finite free $\\mathcal O_X$-modules. Taking the one-member cover $\\{X\\}$ in [def-pur-pseudo-coherent-complex], $E$ is pseudo-coherent.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 08E7 proof, first sentence"
+   }
+  },
+  {
+   "text": "($\\Rightarrow$) Suppose $E$ is pseudo-coherent [def-pur-pseudo-coherent-complex]: every point of $X$ has an open neighbourhood $U$ with $E|_U\\cong F_U^\\bullet$ in $D(\\mathcal O_U)$ for a bounded-above complex $F_U^\\bullet$ of finite free $\\mathcal O_U$-modules. Standard opens form a basis and $X=\\operatorname{Spec}(A)$ is quasi-compact, so there are $f_1,\\dots,f_n\\in A$ with $X=\\bigcup_i D(f_i)$ and each $D(f_i)$ inside some such $U$; restricting, $E|_{D(f_i)}\\cong F_i^\\bullet$ for a bounded-above complex $F_i^\\bullet$ of finite free $\\mathcal O_{D(f_i)}$-modules. Since the $D(f_i)$ cover $X$, the $f_i$ generate the unit ideal.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 08E7 proof, choice of a finite standard-open cover"
+   }
+  },
+  {
+   "text": "Fix $f=f_i$ and identify $D(f)$ with $\\operatorname{Spec}(A_f)$. By [lem-weil-pbc-spec-module-tilde-sections] the sections of $\\widetilde N$ over each $D(g)\\subseteq D(f)$ are $N_g=(N_f)_g$, compatibly with restriction and module structures, so $\\widetilde N|_{D(f)}$ is the sheaf $\\widetilde{N_f}$ on $\\operatorname{Spec}(A_f)$ (both are sheaves agreeing on the basis of standard opens; Stacks, Schemes, discussion after Lemma lemma-spec-sheaves); termwise, $E|_{D(f)}=\\widetilde{M^\\bullet_f}$. Write $F_i^n=\\mathcal O_{D(f)}^{r_n}=\\widetilde{A_f^{r_n}}$. By [lem-weil-pbc-affine-tilde-gamma-adjunction, parts (1) and (2)] over $A_f$, $\\operatorname{Hom}(\\widetilde{A_f^{r}},\\widetilde{A_f^{s}})=\\operatorname{Hom}_{A_f}(A_f^r,A_f^s)$ via the functor, so the differentials of $F_i^\\bullet$ are $\\widetilde{d}$ for $A_f$-linear maps $d$ with $d\\circ d=0$ (faithfulness); thus $F_i^\\bullet=\\widetilde{G^\\bullet}$ for a bounded-above complex $G^\\bullet$ of finite free $A_f$-modules. Now $\\widetilde{G^\\bullet}\\cong\\widetilde{M^\\bullet_f}$ in $D_{\\mathrm{QCoh}}(\\mathcal O_{\\operatorname{Spec}A_f})$, and [lem-pc-affine-qcoh-derived-equivalence] for the ring $A_f$ (full faithfulness) gives $M^\\bullet_f\\cong G^\\bullet$ in $D(A_f)$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 08E7 proof, \"from the definition it follows that M_{f_i} is pseudo-coherent\""
+   }
+  },
+  {
+   "text": "By the previous step each $M^\\bullet_{f_i}$ is quasi-isomorphic to a bounded-above complex of finite free $A_{f_i}$-modules, and the $f_i$ generate the unit ideal. By [lem-pc-ring-pseudo-coherent-localization-glue], $M^\\bullet$ is quasi-isomorphic to a bounded-above complex of finite free $A$-modules.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-localization-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 08E7 proof, application of More on Algebra Lemmas 066D and 064Z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pur-pseudo-coherent-complex",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-ring-pseudo-coherent-localization-glue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 08E7"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -38,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-pab2756",
@@ -54,5 +113,42 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-affine-pseudo-coherent-criterion",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 08E7 affine pseudo-coherence criterion (pseudo-coherent clause) working directly with the local finite-free definition: the direct implication by sheafifying a global finite-free model; the converse by a finite standard-open cover, identification of a finite-free complex on D(f) and of the restriction of the tilde with tilde complexes over A_f, and the ring gluing criterion (Tags 066D, 064Z). Reviewer R-apc2954 replaced the m-pseudo-coherent route (which needed the uncited Tag 064Z equivalence and the chain-map realization Tag 08C9) by this route.",
+  "blueprint": "Realizes the affine case clause of the ancestor lem-sc-finite-duality: the affine pseudo-coherence comparison used in the set-of-representatives proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Steps 1 and 3 use the affine derived equivalence over A and over A_f."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic tool: tilde is fully faithful on free modules and commutes with finite sums."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic tool: sections of the associated sheaf over standard opens are localizations, giving the restriction of tilde to D(f)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apc2954",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc2954 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08E7 (pseudo-coherent clause, D(A) side = bounded-above finite free as in lem-pc-perfect-affine-bounded-projective step 2): correct. FIX more, RETURN less: (1) C1: old Step 4 took pc <=> m-pc for all m as elementary for A-module complexes (Tag 064Z, uncited) and for E (def-pur's parenthetical justifies it by 08E7 itself, circular); proof rewritten to use def-pur's local finite-free definition directly, no m-pseudo-coherence. (2) C1: identifying M_{f_i} from the local model needed tilde restricted to D(f) = tilde of M_f and finite-free complexes on D(f) = tilde of A_f-complexes, uncited; now cites lem-weil-pbc-spec-module-tilde-sections, lem-weil-pbc-affine-tilde-gamma-adjunction (1),(2),(4), lem-pc-affine-qcoh-derived-equivalence over A_f (tool_uses declared). (3) B3: glue node used undefined m-pseudo-coherence of module complexes citing a scheme definition with empty stmt_deps; restated self-contained (bounded-above finite-free clause only, Tags 066D+064Z; E7 change named), Mathlib grep recorded. Dropped lem-pc-affine-local-derived-map (Tag 08C9), unused after the rewrite. Second reading by F1 missed (1)-(3).; 2 file(s) fixed by the reviewer"
  }
 }
