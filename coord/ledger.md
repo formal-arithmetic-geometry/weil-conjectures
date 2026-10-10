@@ -2277,3 +2277,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:43 L: merged deliver/C1/lem-pc-brown-cohomological-representability (reviewer FIX; first push; new nodes: 5)
 - 18:46 L: 31st account limit ~18:44 (R-dsc1843, R-fad1843 cut off); 5 packet reviewers relaunched
 - 18:46 L: merged deliver/C1/lem-sc-proper-flat-right-adjoint-basechange (reviewer PASS; first push; new nodes: 2)
+- 18:46 L: returned deliver/E1/lem-sc-finite-affine-derived-equivalence (reviewer RETURN: Reviewer R-fad1845, head a9afb26f1. Earlier points 1, 3 and 4 were repaired (the 0AVW route through g, no exact-equivale)
