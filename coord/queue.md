@@ -1,8 +1,8 @@
 # Work queue
 
-932 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (243)
+## Stage 1: nodes to split (241)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,11 +23,10 @@
 | `lem-sc-coherent-pseudo-coherent` | 3016 | none |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
-| `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
 | `lem-pc-perfect-object-compact` | 3017 | none |
+| `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
 | `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
-| `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3018 | none |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 3018 | none |
 | `lem-pc-left-localization-hom-colimit` | 3018 | none |
@@ -43,7 +42,6 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-group-addition-tangent-differential` | 4009 | none |
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-sc-strict-henselization-dimension` | 4009 | none |
@@ -53,6 +51,7 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `lem-pc-hilb-separated` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
+| `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-derived-module-direct-sums` | 4012 | none |
@@ -70,7 +69,6 @@
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-kflat-closure` | 5012 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5012 | none |
-| `lem-sp-derived-couple-functoriality` | 6003 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
@@ -944,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1356 nodes that wait for a statement dependency, 279 nodes that wait for stage 1.
+Not open yet: 1360 nodes that wait for a statement dependency, 277 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
