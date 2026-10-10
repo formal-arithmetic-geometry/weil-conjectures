@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
 
@@ -88,32 +89,6 @@ theorem finitePresentation_sections_top_of_presentation {R : CommRingCat.{u}}
 
 variable {X Y : Scheme.{u}}
 
-/-- A presentation of `M.over W` gives a presentation of the restriction of `M` along any open
-immersion `f` with image in `W`. -/
-noncomputable def presentationRestrictOfOpensRangeLE {M : X.Modules} {W : X.Opens}
-    (P : (M.over W).Presentation) (f : Y ⟶ X) [IsOpenImmersion f] (hf : f.opensRange ≤ W) :
-    (M.restrict f).Presentation :=
-  let u : Y ⟶ W.toScheme := IsOpenImmersion.lift W.ι f (by
-    rw [Scheme.Opens.range_ι]
-    exact hf)
-  haveI : IsOpenImmersion (u ≫ W.ι) := by
-    rw [IsOpenImmersion.lift_fac]
-    infer_instance
-  haveI : IsOpenImmersion u := IsOpenImmersion.of_comp u W.ι
-  haveI : PreservesColimitsOfSize.{u, u} (restrictFunctor u) := inferInstance
-  let F := (overEquiv W).functor ⋙ restrictFunctor u
-  let iso : SheafOfModules.overFunctor X.ringCatSheaf W ⋙ F ≅ restrictFunctor f :=
-    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (overFunctorEquiv W) _ ≪≫
-      (restrictFunctorComp u W.ι).symm ≪≫ restrictFunctorCongr (IsOpenImmersion.lift_fac _ _ _)
-  SheafOfModules.Presentation.ofIsIso.{u, u, u} (iso.app M).hom
-    (P.map F (restrictUnitIso _).symm)
-
-instance isFinite_presentationRestrictOfOpensRangeLE {M : X.Modules} {W : X.Opens}
-    (P : (M.over W).Presentation) [P.IsFinite] (f : Y ⟶ X) [IsOpenImmersion f]
-    (hf : f.opensRange ≤ W) : (presentationRestrictOfOpensRangeLE P f hf).IsFinite := by
-  dsimp [presentationRestrictOfOpensRangeLE]
-  infer_instance
-
 /-- **The sections of a module of finite presentation over an affine open are finitely
 presented.** Let `F` be an `𝒪_X`-module of finite presentation and `U` an affine open. Then
 `Γ(F, U)` is a finitely presented `Γ(X, U)`-module: `U` is covered by basic opens `D(g)` over
@@ -133,7 +108,7 @@ theorem finitePresentation_sections_of_isFinitePresentation (F : X.Modules)
     obtain ⟨i, hi⟩ := hcov.exists_mem x
     obtain ⟨g, hgW, hxg⟩ := hU.exists_basicOpen_le ⟨x, hi⟩ hx
     have hV := hU.basicOpen g
-    let P := presentationRestrictOfOpensRangeLE (q.presentation i) hV.fromSpec
+    let P := presentationRestrictOfOver (q.presentation i) hV.fromSpec
       (hV.opensRange_fromSpec.le.trans hgW)
     have : (F.restrict hV.fromSpec).IsQuasicoherent :=
       isQuasicoherent_restrictFunctor hV.fromSpec F
@@ -233,7 +208,7 @@ theorem exists_isOpenCover_presentation_isFinite (M : X.Modules) [M.IsFinitePres
       IsOpenCover U ∧ ∀ i, (P i).IsFinite := by
   obtain ⟨q, hq⟩ := SheafOfModules.IsFinitePresentation.exists_quasicoherentData
     (R := X.ringCatSheaf) M
-  exact ⟨q.I, q.X, fun i ↦ presentationRestrictOfOpensRangeLE (q.presentation i)
+  exact ⟨q.I, q.X, fun i ↦ presentationRestrictOfOver (q.presentation i)
     (Scheme.Opens.ι (q.X i)) (by simp), (Opens.coversTop_iff _ q.X).mp q.coversTop,
     fun i ↦ inferInstance⟩
 
