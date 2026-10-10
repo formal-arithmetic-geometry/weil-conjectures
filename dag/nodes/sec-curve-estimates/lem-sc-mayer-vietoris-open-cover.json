@@ -25,9 +25,27 @@
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the ringed-space Mayer–Vietoris node to the ringed space underlying W, the open cover U∪V=W, and the O_W-module F. Its long exact sequence is exactly the displayed sequence after identifying the restrictions of F to U, V, and U∩V with the indicated quasi-coherent modules. The maps are the restriction maps and their difference, and the node's naturality in F gives the asserted naturality for morphisms of quasi-coherent modules. Applying its restriction clause to an open W'⊂W gives U'=U∩W', V'=V∩W' and the asserted morphism of long exact sequences, including the connecting maps.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 01EB; scheme specialization and restriction to an open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EB (cohomology-lemma-mayer-vietoris)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +77,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mayer-vietoris-open-cover",
+  "worker": "stage1",
+  "summary": "Split the scheme statement as the direct specialization of a new statement-only ringed-space Mayer–Vietoris node from Stacks Lemma 01EB. The new node includes naturality in the module and compatibility with restriction to a smaller open, which supplies every non-elementary fact used by the specialization.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion 09MR Mayer–Vietoris paragraph through the 01EB result it cites.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mvo1740",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvo1740 (reviewer sub-agent of L); spot-checked: Item step is a direct specialization (ringed space W, cover U,V, module F) of new node lem-sc-mayer-vietoris-ringed-space; new node's statement carries exact sequence, restriction/difference maps, naturality in F, and restriction-to-open naturality incl. connecting maps, matching Stacks 01EB plus its proof (restriction of injective resolution to an open is injective); hypotheses check (QC not needed by the cited node); no cycle (new node is strictly more general, not a restatement); not class b (other 01EB nodes are invert-s special cases), not c (Mathlib only site-level MayerVietorisSquare.sequence_exact, Ext on sites, not O_X-module cohomology with restriction naturality), not d; TeX self-contained, searches recorded. No repairs."
  }
 }
