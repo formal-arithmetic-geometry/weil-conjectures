@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pd-picard-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Picard functor is compatible with base change",
@@ -23,13 +23,15 @@
  ],
  "proof": [
   {
-   "text": "For $T\\in\\mathit{Ob}((\\mathit{Sch}/S')_{fppf})$ the base changes agree:\n$X_T=(X_{S'})_T$ as schemes over $T$, by the transitivity of the fibre product\nin [def-pc-base-change]. Hence the Picard *presheaves*\n$T\\mapsto\\operatorname{Pic}(X_T)$ and $T\\mapsto\\operatorname{Pic}((X_{S'})_T)$\nof [def-pc-picard-presheaf] (functors by [lem-pc-pic-presheaf-functorial]) are literally the same functor on the slice.\nSheafification of a presheaf on a site is computed by applying the plus\nconstruction to the restriction of the presheaf to the slice categories of the\ncoverings, and the coverings of $(\\mathit{Sch}/S')_{fppf}$ are exactly the\nfppf coverings in $(\\mathit{Sch}/S)_{fppf}$ of [def-pc-fppf-site] whose\nobjects lie over $S'$; since the two presheaves coincide on the whole slice, so\ndo their sheafifications, and the resulting restriction is the Picard functor\n$\\operatorname{Pic}_{X_{S'}/S'}$ of [def-pc-picard-functor].\nThis is the assertion, and it is the remark following Stacks Project,\nDefinition 44.4.1, Tag [0B9K](https://stacks.math.columbia.edu/tag/0B9K).",
+   "text": "For $T\\in\\mathit{Ob}((\\mathit{Sch}/S')_{fppf})$ the base changes agree: $X_T=(X_{S'})_T$ as schemes over $T$, by transitivity of fibre products in [def-pc-base-change]. Therefore the Picard presheaves $T\\mapsto\\operatorname{Pic}(X_T)$ and $T\\mapsto\\operatorname{Pic}((X_{S'})_T)$ of [def-pc-picard-presheaf], with their pullback functoriality from [lem-pc-pic-presheaf-functorial], agree on the whole slice. By [lem-weil-pbc-sheafification-plus-theorem], on either site the fppf sheafification of a presheaf of sets $\\mathcal F$ is canonically $\\mathcal F^{++}$, and by [def-weil-pbc-site-plus-construction] the value $\\mathcal F^+(T)$ is the colimit of the sets $H^0(\\mathcal U,\\mathcal F)$ over the coverings $\\mathcal U$ of $T$ and their refinements over $\\mathrm{id}_T$, so it depends only on the values of $\\mathcal F$ on the members of coverings of $T$ and on their fibre products over $T$. By [def-pc-fppf-site] (for $S$ and for $S'$) the fppf coverings of $T$ in the slice are exactly its fppf coverings in $(\\mathit{Sch}/S)_{fppf}$, every member and every fibre product $T_i\\times_TT_j$ lies over $S'$ through $T$, and a refinement over $\\mathrm{id}_T$ is an $S'$-morphism; so the indexing diagrams coincide and the plus construction of the restricted presheaf is the restriction of the ambient plus construction. Applying this twice, the sheafification of the common restricted presheaf on the slice is the restriction of the ambient sheafification. By [def-pc-picard-functor], these two sheafifications are respectively the restriction of $\\operatorname{Pic}_{X/S}$ and the functor $\\operatorname{Pic}_{X_{S'}/S'}$. Hence the restriction of $\\operatorname{Pic}_{X/S}$ to the slice is $\\operatorname{Pic}_{X_{S'}/S'}$.",
    "uses": [
     "def-pc-base-change",
     "def-pc-picard-presheaf",
     "lem-pc-pic-presheaf-functorial",
     "def-pc-fppf-site",
-    "def-pc-picard-functor"
+    "def-pc-picard-functor",
+    "def-weil-pbc-site-plus-construction",
+    "lem-weil-pbc-sheafification-plus-theorem"
    ],
    "elementary": false
   }
@@ -39,7 +41,9 @@
   "def-pc-picard-presheaf",
   "lem-pc-pic-presheaf-functorial",
   "def-pc-fppf-site",
-  "def-pc-picard-functor"
+  "def-pc-picard-functor",
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-sheafification-plus-theorem"
  ],
  "proof_origin": {
   "by": "agent",
@@ -48,7 +52,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -88,5 +92,24 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian-descent"
+ "unit": "sk-prop-jacobian-descent",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pd-picard-base-change",
+  "worker": "stage1",
+  "summary": "The Lean declaration AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback has the blueprint tag but its proof is sorry and its conclusion is only a Nonempty existence statement, so it is not an attachment. I rewrote the item proof to identify the two base-change Picard presheaves on the slice, then explicitly apply the plus construction twice using the inherited fppf coverings, and unfold the Picard functor definition.",
+  "blueprint": "The single proof paragraph of the blueprint node: transitivity of fibre products, equality of Picard presheaves on the slice, and equality of their sheafifications under inherited fppf coverings.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbc2908",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbc2908 (reviewer sub-agent of L); spot-checked: Step 1 against def-pc-base-change, def-pc-picard-presheaf, lem-pc-pic-presheaf-functorial, def-pc-fppf-site (jointly surjective version), def-pc-picard-functor; citers cor-pd-pic0-base-change and thm-pd-jacobian-general-field step 9 use exactly the statement. FIX more, RETURN less: (1) C1: 'plus applied twice is the sheafification' (Stacks 00WB) was used uncited; now cites lem-weil-pbc-sheafification-plus-theorem (declared generic tool use, site-general plus theorem of sk-thm-p1) and def-weil-pbc-site-plus-construction, with the coincidence of coverings, fibre products and refinements over id_T spelled out; (2) dropped the closing 'as asserted by Tag 0B9K' (the item's own source, flagged by preflight) so the step does not quote the item as input.; 1 file(s) fixed by the reviewer"
+ }
 }

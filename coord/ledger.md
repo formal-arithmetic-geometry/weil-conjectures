@@ -2850,3 +2850,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:39 L: merged deliver/H1/lem-sc-proper-or-affine (reviewer PASS; first push; new nodes: 0)
 - 22:39 L: merged deliver/H1/lem-pc-affine-perfect-hom-colimit (reviewer FIX; first push; new nodes: 0)
 - 22:40 L: merged deliver/E1/lem-weil-derived-limit-existence (reviewer FIX; after a return; new nodes: 1)
+- 22:40 L: merged deliver/H1/lem-pd-picard-base-change (reviewer FIX; first push; new nodes: 0)
