@@ -2738,3 +2738,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:56 L: merged deliver/K1/lem-pc-tor-amplitude-qcoh-test (reviewer FIX; first push; new nodes: 1)
 - 21:56 L: returned deliver/E1/lem-pc-rf-base-change-single-complex-criterion (reviewer RETURN: Reviewer R-bcc2722. Four faults (more than three) on head 1830eac21: (1) C4/E: Step 4 applies lem-pc-rf-single-complex-q)
 - 21:56 L: returned deliver/F1/lem-weil-pbc-degreewise-split-derived-triangle (reviewer RETURN: Not a fault: the item is Mathlib's HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit (DegreewiseSplit.le)
+- 21:56 UTC L matched lem-weil-pbc-degreewise-split-derived-triangle to Mathlib distinguished_iff_iso_trianglehOfDegreewiseSplit + Qh triangulated (R-dsd2720); F1 delivery returned as unneeded
