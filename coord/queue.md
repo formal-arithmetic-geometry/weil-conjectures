@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (333)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,7 +35,6 @@
 | `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
-| `lem-sc-etale-fibre-product-base-change-coproduct` | 3010 | none |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
 | `def-sc-scheme-tangent-space` | 3012 | none |
@@ -44,7 +43,6 @@
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
-| `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
@@ -930,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1191 nodes that wait for a statement dependency.
+Not open yet: 348 nodes that wait for stage 1, 1191 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
