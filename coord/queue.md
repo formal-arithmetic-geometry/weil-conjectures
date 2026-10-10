@@ -2,7 +2,7 @@
 
 942 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (594)
+## Stage 1: nodes to split (591)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,21 +11,15 @@
 | `lem-weil-pbc-flat-module-pullback-exact-pushforward-injective` | 1013 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1014 | none |
-| `lem-weil-pbc-fs-adic-local-flat` | 1014 | none |
-| `lem-weil-pbc-global-complete-intersection-principal-localization` | 1014 | none |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1014 | none |
 | `lem-weil-pbc-intersection-subfields-subspace` | 1014 | none |
 | `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1014 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
-| `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1014 | none |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
-| `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1014 | none |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
-| `lem-weil-pbc-p-independent-differentials-independent` | 1014 | none |
-| `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1014 | none |
 | `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1014 | none |
@@ -58,6 +52,7 @@
 | `lem-weil-pbc-coherent-filtration-integral-subschemes` | 1015 | none |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1015 | none |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1015 | none |
+| `lem-weil-pbc-complete-local-flat-presentation` | 1015 | none |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1015 | none |
 | `lem-weil-pbc-depth-drops-by-one` | 1015 | none |
 | `lem-weil-pbc-depth-ext` | 1015 | none |
@@ -74,6 +69,7 @@
 | `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1015 | none |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1015 | none |
 | `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1015 | none |
+| `lem-weil-pbc-fs-adic-complete-source-target` | 1015 | none |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1015 | none |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1015 | none |
@@ -82,6 +78,7 @@
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1015 | none |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
+| `lem-weil-pbc-p-independent-extends-to-p-basis` | 1015 | none |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
@@ -601,7 +598,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (348)
+## Stage 2: nodes to state (351)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -811,12 +808,14 @@
 | `lem-weil-pbc-mate-whisker` | 1 | state |
 | `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
+| `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-extension-by-zero-adjunction` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
+| `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
@@ -824,6 +823,7 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
+| `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
@@ -954,7 +954,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 605 nodes that wait for stage 1, 673 nodes that wait for a statement dependency.
+Not open yet: 602 nodes that wait for stage 1, 676 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
