@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-serre-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Serre vanishing",
- "statement": "(Cohomology of Schemes, Lemma 30.17.1, Tag\n[0B5U](https://stacks.math.columbia.edu/tag/0B5U), for schemes\nproper over a field; EGA III$_1$, Proposition (2.6.1).)\nLet $k$ be a field, let $X$ be a proper scheme over $k$, let $\\mathcal{L}$ be an\nample invertible $\\mathcal{O}_X$-module, and let $\\mathcal{F}$ be a\ncoherent $\\mathcal{O}_X$-module. Then there exists $n_0\\geq0$ such that\n\n$$\nH^p(X,\\;\\mathcal{F}\\otimes_{\\mathcal{O}_X}\\mathcal{L}^{\\otimes n})=0\n\\qquad\\text{for all }n\\ge n_0\\text{ and all }p>0 .\n$$",
+ "statement": "(Cohomology of Schemes, Tag\n[0B5U](https://stacks.math.columbia.edu/tag/0B5U), for schemes\nproper over a field; EGA III$_1$, Proposition (2.6.1).)\nLet $k$ be a field, let $X$ be a proper scheme over $k$, let $\\mathcal{L}$ be an\nample invertible $\\mathcal{O}_X$-module, and let $\\mathcal{F}$ be a\ncoherent $\\mathcal{O}_X$-module. Then there exists $n_0\\geq0$ such that\n\n$$\nH^p(X,\\;\\mathcal{F}\\otimes_{\\mathcal{O}_X}\\mathcal{L}^{\\otimes n})=0\n\\qquad\\text{for all }n\\ge n_0\\text{ and all }p>0 .\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-serre-vanishing.md",
   "place": "node lem-pc-serre-vanishing, order 629",
@@ -23,14 +23,17 @@
   ]
  },
  "stmt_deps": [
+  "def-sc-ample",
   "def-sc-invertible-module",
   "pqf-def-coherent"
  ],
  "proof": [
   {
-   "text": "By the very-ample power condition in [def-sc-ample], choose\n$m\\ge1$ and a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$\nwith $i^*\\mathcal O(1)=\\mathcal L^{\\otimes m}$.\nFor $0\\le r<m$, put\n$\\mathcal G_r=i_*(\\mathcal F\\otimes\\mathcal L^{\\otimes r})$.\nThese are coherent, and\n[lem-pc-closed-immersion-coherent-cohomology] gives\n\n$$\nH^q(X,\\mathcal F\\otimes\\mathcal L^{\\otimes(mt+r)})\n=H^q(\\mathbf P^N_k,\\mathcal G_r(t)).\n$$",
+   "text": "By the very-ample power condition in [def-sc-ample], choose\n$m\\ge1$ and a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$\nwith $i^*\\mathcal O(1)\\cong\\mathcal L^{\\otimes m}$. For\n$0\\le r<m$, tensoring the coherent module $\\mathcal F$ by the\ninvertible module $\\mathcal L^{\\otimes r}$ remains coherent (locally\nthis is tensoring a finite module with a free rank-one module); put\n$\\mathcal G_r=i_*(\\mathcal F\\otimes\\mathcal L^{\\otimes r})$.\nThe projection formula and the cohomology identification in\n[lem-pc-closed-immersion-coherent-cohomology] give a canonical\nisomorphism\n\n$$\nH^q(X,\\mathcal F\\otimes\\mathcal L^{\\otimes(mt+r)})\\cong H^q(\\mathbf P^N_k,\\mathcal G_r(t)).\n$$",
    "uses": [
     "def-sc-ample",
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
     "lem-pc-closed-immersion-coherent-cohomology"
    ],
    "elementary": false
@@ -46,6 +49,8 @@
  ],
  "proof_deps": [
   "def-sc-ample",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
   "lem-pc-closed-immersion-coherent-cohomology",
   "def-pc-projective-space-twist",
   "lem-pc-projective-space-serre-vanishing"
@@ -55,9 +60,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-serre-vanishing.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre vanishing for coherent sheaves on a proper scheme over a field with an ample invertible sheaf",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isGE",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpace.exists_subsingleton_H_tensor_twist, Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow",
+   "results": "unknown identifier 'ProjectiveSpace.exists_subsingleton_H_tensor_twist'; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_subsingleton_H_tensorObj_tensorPow|Serre vanishing WeilConjectures",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "eventual vanishing of higher cohomology after tensoring by powers of an ample invertible sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_over_10_lines"
@@ -149,5 +183,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-serre-b"
+ "unit": "sk-thm-picard-serre-b",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-serre-vanishing",
+  "worker": "stage1",
+  "summary": "Checked the Stacks 0B5U statement and the slopmaster2 Serre declarations. The Lean declaration is not attachable because its transitive proof uses sorry-backed declarations. The proof is split into the very-ample-power reduction to projective space and the finite-residue-class argument using projective-space Serre vanishing; the statement dependency for ample was added, the tensor/coherence and projection-formula details were made explicit, and no new child node was needed.",
+  "blueprint": "Realizes the two proof paragraphs of the imported node: choose a very-ample power and reduce by closed immersion, then apply projective-space vanishing for each residue class modulo the power and take a finite maximum.",
+  "tool_uses": [
+   {
+    "node": "def-sc-ample",
+    "why": "The definition supplies the very-ample tensor power and projective-space closed immersion used in step 1; no node in this unit defines ampleness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-ample",
+  "def-sc-ample"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sev2223",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sev2223 (reviewer sub-agent of L); spot-checked: Step 1: def-sc-ample gives m>=1 and closed immersion i:X->P^N_k with i^*O(1)=L^m (ample-to-very-ample cited, C1 ok); X finite type over k so locally Noetherian, hypotheses of lem-pc-closed-immersion-coherent-cohomology (pushforward coherent, H^q iso, projection formula) met. Step 2: cites lem-pc-projective-space-serre-vanishing (k Noetherian, G_r coherent) rather than restating it; residue/max argument correct incl. m=1, n=0. No new nodes; cited nodes same unit, def-sc-ample a generic tool; no cycle. Statement change cosmetic only. Second reading by F1: no missed fault found."
+ }
 }
