@@ -44,10 +44,59 @@
   "def-pc-module-pullback",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Let $\\mathcal F\\xrightarrow{a}\\mathcal G\\xrightarrow{b}\\mathcal H$ be any exact complex of $\\mathcal O_Z$-modules, and fix $t\\in T$, with $z=h(t)$. By [lem-weil-pbc-module-stalk-exact] the complex $\\mathcal F_z\\xrightarrow{a_z}\\mathcal G_z\\xrightarrow{b_z}\\mathcal H_z$ is exact. By [lem-weil-pbc-module-stalk-pullback], naturally in the module, the stalk complex of $h^*\\mathcal F\\to h^*\\mathcal G\\to h^*\\mathcal H$ at $t$ identifies with $\\mathcal F_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}\\xrightarrow{a_z\\otimes1}\\mathcal G_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}\\xrightarrow{b_z\\otimes1}\\mathcal H_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}$. Naturality of the cited isomorphism is what identifies the two differentials with these tensor maps.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "Sheaves 0098 (lemma-stalk-pullback-modules); Modules 01AG (lemma-abelian), applied to the factorization in Modules 02N4 (lemma-pullback-flat)"
+   }
+  },
+  {
+   "text": "Flatness of $h$ means that $\\mathcal O_{T,t}$ is flat over $\\mathcal O_{Z,z}$ for every $t$ [def-weil-flat-morphism]. Apply [lem-weil-pbc-flat-tensor-exact] to $R=\\mathcal O_{Z,z}$, $M=\\mathcal O_{T,t}$ and the exact stalk complex from step 1. The tensor complex in step 1 is exact. Thus the pulled-back complex is exact at every stalk; [lem-weil-pbc-module-stalk-exact] implies it is exact as a complex of $\\mathcal O_T$-modules.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "02N4 (lemma-pullback-flat), with the stalk argument of 05NE (lemma-flat-stalks-flat), forward direction from stalkwise flatness to exact tensoring"
+   }
+  },
+  {
+   "text": "The functor $h^*$ is additive: in its defining inverse-image-and-tensor construction [def-pc-module-pullback], inverse image carries the sectionwise sum of morphisms to the sum, and $(a+a\\prime)\\otimes1=(a\\otimes1)+(a\\prime\\otimes1)$ on pure tensors and hence on the sheafification. It sends the zero module to zero by the same construction. Steps 1 and 2 apply also to the complexes at the two ends of any short exact sequence, so $h^*$ preserves short exact sequences and is exact. By [def-pc-module-pullback] it is left adjoint to the module direct image $h_*$. To prove that $h_*\\mathcal I$ is injective whenever $\\mathcal I$ is injective [def-sp-injective-resolutions], for a monomorphism $M\\hookrightarrow N$, exactness makes $h^*M\\hookrightarrow h^*N$ a monomorphism; a map $M\\to h_*\\mathcal I$ corresponds under the adjunction to $h^*M\\to\\mathcal I$, extends to $h^*N\\to\\mathcal I$ by injectivity, and its adjoint $N\\to h_*\\mathcal I$ extends the original map by naturality.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/homology.tex",
+    "place": "Cohomology 02N5 (lemma-pushforward-injective-flat); Homology 015Z (lemma-adjoint-preserve-injectives), using the adjunction of Sheaves 0096 (lemma-adjoint-pullback-pushforward-modules)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pc-module-pullback",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/cohomology.tex",
+  "place": "Modules 02N4 (lemma-pullback-flat), expanded using 05NE (lemma-flat-stalks-flat) and Sheaves 0098 (lemma-stalk-pullback-modules); Cohomology 02N5 (lemma-pushforward-injective-flat)"
+ },
+ "status": "split",
  "merged_into": null,
  "mathlib_match": null,
  "created": {
@@ -78,7 +127,20 @@
    "verdict": "no match"
   }
  ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "worker": "stage1",
+  "summary": "Exactness expanded using the existing natural module-pullback stalk formula, the existing stalkwise exactness criterion, and the Mathlib flat-tensor-exact leaf. Injectivity is proved directly from the public pullback-pushforward adjunction and the definition of an injective object, with the extension argument and its naturality written out. No new nodes or statement changes. Only the stalk formula (sk-thm-reduction) requires the generic tool use approved by L; no general right-adjoint-preserves-injectives lemma is cited."
+ },
  "tool_uses": [
   "lem-weil-pbc-module-stalk-pullback"
- ]
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 02N4/02N5: exactness of h^* stalkwise via 0098 (tool use recorded) and flatness of local rings, additivity, injectives preserved by the right adjoint of an exact functor; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched"
+ }
 }
