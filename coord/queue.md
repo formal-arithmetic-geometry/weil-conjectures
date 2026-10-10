@@ -1,6 +1,6 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (651)
 
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
-| `lem-weil-pbc-completion-finite-extension` | 1012 | none |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1012 | none |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 1012 | none |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1012 | none |
@@ -146,6 +145,7 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
@@ -658,7 +658,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (207)
+## Stage 2: nodes to state (208)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -701,6 +701,7 @@
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
+| `lem-weil-pbc-completion-finite-extension` | 1 | state |
 | `lem-weil-pbc-completion-of-dvr-is-dvr` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
