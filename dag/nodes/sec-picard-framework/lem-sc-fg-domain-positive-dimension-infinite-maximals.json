@@ -22,9 +22,56 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume for contradiction that the set of maximal ideals of A is finite. If A were not a field, every maximal ideal would be nonzero, because a zero maximal ideal would make A a field. Choose a nonzero element x_m in each maximal ideal m. Since A is a domain, the finite product x=product_m x_m is nonzero, while x belongs to every maximal ideal. The Jacobson property of the finite-type k-algebra A, applied to the prime ideal (0), says that (0) is the intersection of all maximal ideals, so x must be zero, a contradiction. (If the finite set were empty, the existing maximal-ideal theorem applied to the proper ideal (0) would produce a maximal ideal, so this case is also impossible.)",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00G1 (algebra-lemma-finite-type-field-Jacobson) and Theorem 00FV (algebra-theorem-nullstellensatz), affine positive-dimension argument"
+   }
+  },
+  {
+   "text": "Therefore A is a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem 00FV (algebra-theorem-nullstellensatz), affine positive-dimension argument"
+   }
+  },
+  {
+   "text": "The spectrum of a field has only the zero prime ideal, so it has no nontrivial strict chain of prime ideals and its Krull dimension is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem 00FV (algebra-theorem-nullstellensatz), affine positive-dimension argument"
+   }
+  },
+  {
+   "text": "This contradicts the hypothesis that the Krull dimension of A is positive. Hence the maximal ideals of A are not finite in number, and therefore A has infinitely many maximal ideals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Theorem 00FV (algebra-theorem-nullstellensatz), affine positive-dimension argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00G1 and Theorem 00FV, affine positive-dimension argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +103,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-positive-dimensional-locally-algebraic-closed-points",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-fg-domain-positive-dimension-infinite-maximals",
+  "worker": "stage1",
+  "summary": "Split the affine positive-dimension argument using the existing Jacobson finite-type algebra leaf and the existing maximal-ideal existence leaf. A finite set of maximal ideals in a domain would consist of nonzero ideals unless the ring were already a field; choosing nonzero elements and multiplying contradicts the Jacobson intersection being zero, so the ring is a field and has dimension zero.",
+  "blueprint": "lem-sc-degree-2g1-very-ample proof, third paragraph: the point-fibre argument after separation of closed points; the affine positive-dimensional finitely generated domain has infinitely many maximal ideals",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fdi1711",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdi1711 (reviewer sub-agent of L); spot-checked: Source: Stacks algebra.tex Tags 00G1 (algebra-lemma-finite-type-field-Jacobson) and 00FV (algebra-theorem-nullstellensatz), both located in tags/tags. Statement unchanged (k a field, A a finite type k-algebra that is a domain, dim A > 0 => infinitely many maximal ideals); no hypothesis on k needed, the argument works for finite k. Delivery changes only split-owned fields of the item (proof, proof_deps, proof_origin, status, split_report); no new nodes. Step 1: lem-weil-pbc-finite-type-over-field-prime-intersection-maximal (Mathlib leaf isJacobsonRing_of_finiteType / isJacobsonRing_iff_prime_eq) applied to the prime (0) of the domain A gives (0) = intersection of maximal ideals; with finitely many maximals, all nonzero if A is not a field, the product of chosen nonzero elements is nonzero (domain) and lies in every maximal ideal, contradiction; empty case excluded by lem-weil-pbc-proper-ideal-contained-in-maximal (Ideal.exists_le_maximal, I=(0), A nonzero). Both are mathlib leaves read in full, statements carry exactly what the step takes (C4 ok). Steps 2-4 elementary: field has only prime (0), so dim 0 by def-weil-pbc-krull-dimension-ring, contradicting dim > 0. Mathlib query (one, mine): grep -rn 'Infinite.*IsMaximal|IsMaximal.*Infinite|finite_maximal' Mathlib -> only Dedekind/Semilocal PID results, no statement of the item; node stays a split statement. Small cases: k[t] (dim 1; maximals (t-a) or irreducibles, infinitely many also for finite k), a field (dim 0, hypothesis fails, one maximal ideal), Z_(p)-type semilocal domains are not of finite type over a field, consistent. Start Sat Oct 10 05:09:35 PM UTC 2026, end Sat Oct 10 05:09:58 PM UTC 2026."
+ }
 }

@@ -2099,3 +2099,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:09 L: merged deliver/K1/lem-sc-finite-pushforward-locally-free (reviewer FIX; first push; new nodes: 0)
 - 17:09 L: returned deliver/J1/lem-sc-affine-maximal-points-closed-in-lft-scheme (reviewer RETURN: 1. B8: lem-sc-affine-maximal-points-closed-in-lft-scheme.json: status/mathlib_match: the item is made a Mathlib leaf fro)
 - 17:09 L: merged deliver/J1/lem-sc-graded-localization-exact (reviewer PASS; first push; new nodes: 0)
+- 17:10 L: merged deliver/M1/lem-sc-fg-domain-positive-dimension-infinite-maximals (reviewer PASS; first push; new nodes: 0)
