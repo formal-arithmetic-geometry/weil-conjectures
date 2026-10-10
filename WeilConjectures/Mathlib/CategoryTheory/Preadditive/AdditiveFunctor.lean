@@ -32,3 +32,27 @@ lemma CategoryTheory.Functor.exists_sum_comp_eq_id_of_iso {C D : Type*} [Categor
   simp only [Category.assoc, ← F.map_comp, ← F.map_sum, h, F.map_id, Category.id_comp,
     Iso.inv_hom_id]
 
+
+namespace CategoryTheory.Functor
+
+open Limits
+
+universe w v₁ v₂ u₁ u₂
+
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Preadditive C]
+  [Preadditive D] (F : C ⥤ D)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- An additive functor preserves biproducts indexed by a finite type in any universe. Compare
+`CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive`, which is about index types in
+`Type`. -/
+instance (priority := 100) preservesBiproductsOfShape_of_additive {J : Type w} [Finite J]
+    [Additive F] : PreservesBiproductsOfShape J F :=
+  let ⟨_⟩ := nonempty_fintype J
+  { preserves :=
+    { preserves := fun hb =>
+        ⟨isBilimitOfTotal _ (by
+          simp_rw [F.mapBicone_π, F.mapBicone_ι, ← F.map_comp]
+          erw [← F.map_sum, ← F.map_id, IsBilimit.total hb])⟩ } }
+
+end CategoryTheory.Functor
