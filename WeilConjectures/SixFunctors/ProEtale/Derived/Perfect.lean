@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 
 /-!
 
@@ -163,18 +164,18 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 variable {Λ} {P : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {r : ℕ}
 
 /-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
-`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a constructible étale sheaf.
+`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a finite locally constant étale sheaf.
 
-The free module `Λ_Xʳ` is `ν^*` of the constructible étale sheaf `Λ_{X_ét}ʳ`, and the idempotent
-of `Λ_Xʳ` cutting out `P` comes from an endomorphism `e'` of `Λ_{X_ét}ʳ`, as `ν^*` is full
-(`AlgebraicGeometry.ProEtale.full_comparisonUpperStar`). Since `ν^*` is exact, `P` is `ν^*` of
-the kernel of `1 - e'`, which is constructible
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel`). -/
-theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract
+The free module `Λ_Xʳ` is `ν^*` of the finite locally constant étale sheaf `Λ_{X_ét}ʳ`, and the
+idempotent of `Λ_Xʳ` cutting out `P` comes from an endomorphism `e'` of `Λ_{X_ét}ʳ`, as `ν^*` is
+full (`AlgebraicGeometry.ProEtale.full_comparisonUpperStar`). Since `ν^*` is exact, `P` is `ν^*`
+of the kernel of `1 - e'`, which is finite locally constant
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`). -/
+theorem exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract
     (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)))) :
     ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
-      IsConstructibleSheaf Q ∧ Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj Q ≅ P) := by
+      IsFiniteLocallyConstantSheaf Q ∧ Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj Q ≅ P) := by
   let N := ν^*(X)[ModuleCat.{u + 1} Λ]
   let L' := ⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   let eL : N.obj L' ≅ ⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
@@ -185,7 +186,7 @@ theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract
   have hιπ : ι ≫ π = 𝟙 P := by simp [ι, π, hP.retract]
   let e' : L' ⟶ L' := N.preimage (π ≫ ι)
   have he' : N.map (𝟙 L' - e') = 𝟙 _ - π ≫ ι := by simp [e']
-  have : IsConstructibleSheaf L' := IsConstructibleSheaf.biproduct _
+  have : IsFiniteLocallyConstantSheaf L' := IsFiniteLocallyConstantSheaf.biproduct _
   -- `ι` is a kernel of `1 - π ≫ ι`
   have hlim : IsLimit (KernelFork.ofι (f := 𝟙 _ - π ≫ ι) ι (by
       simp [Preadditive.comp_sub, reassoc_of% hιπ])) :=
@@ -196,9 +197,53 @@ theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract
       (fun g hg m hm ↦ by
         rw [← hm]
         simp [hιπ])
-  exact ⟨kernel (𝟙 L' - e'), IsConstructibleSheaf.kernel _,
+  exact ⟨kernel (𝟙 L' - e'), IsFiniteLocallyConstantSheaf.kernel _,
     ⟨PreservesKernel.iso N _ ≪≫ kernelIsoOfEq he' ≪≫
       (limit.isLimit _).conePointUniqueUpToIso hlim⟩⟩
+
+/-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
+`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a constructible étale sheaf, being `ν^*` of a
+finite locally constant one
+(`exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract`).
+-/
+theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract
+    (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} Λ)))) :
+    ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsConstructibleSheaf Q ∧ Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj Q ≅ P) :=
+  have ⟨Q, hQ, e⟩ := exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract hP
+  ⟨Q, hQ.isConstructibleSheaf, e⟩
+
+/-- A complex `P` of finite projective `Λ_X`-modules on the small pro-étale site, each a direct
+summand of a finite free module `Λ_Xʳ`, is `ν^*` of a complex of finite locally constant étale
+sheaves: its terms are
+(`exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract`),
+and so are its differentials, as `ν^*` is fully faithful. -/
+theorem exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract
+    (P : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
+    (hP : ∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
+      𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))) :
+    ∃ P' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
+      (∀ n, IsFiniteLocallyConstantSheaf (P'.X n)) ∧
+        Nonempty ((((ν^*(X)[ModuleCat.{u + 1} Λ])).mapHomologicalComplex _).obj P' ≅ P) := by
+  let N := ν^*(X)[ModuleCat.{u + 1} Λ]
+  have h (n : ℤ) : ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsFiniteLocallyConstantSheaf Q ∧ Nonempty (N.obj Q ≅ P.X n) := by
+    obtain ⟨r, ⟨h⟩⟩ := hP n
+    exact exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract h
+  choose Q hQ e using h
+  let e (n : ℤ) := (e n).some
+  let P' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ :=
+    { X := Q
+      d i j := N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)
+      shape i j hij := N.map_injective (by simp [P.shape i j hij])
+      d_comp_d' i j k _ _ := N.map_injective (by simp) }
+  let eP : (N.mapHomologicalComplex _).obj P' ≅ P :=
+    HomologicalComplex.Hom.isoOfComponents e (fun i j _ ↦ by
+      show (e i).hom ≫ P.d i j = N.map (N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)) ≫ (e j).hom
+      rw [Functor.map_preimage]
+      simp)
+  exact ⟨P', hQ, ⟨eP⟩⟩
 
 omit [Finite Λ] in
 /-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
@@ -276,37 +321,22 @@ theorem constructibleFiniteTor_Q_obj_of_retract
     obtain ⟨r, ⟨h⟩⟩ := hP n
     exact flat_of_retract h⟩
   let N := ν^*(X)[ModuleCat.{u + 1} Λ]
-  have h (n : ℤ) : ∃ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
-      IsConstructibleSheaf Q ∧ Nonempty (N.obj Q ≅ P.X n) := by
-    obtain ⟨r, ⟨h⟩⟩ := hP n
-    exact exists_isConstructibleSheaf_iso_comparisonUpperStar_obj_of_retract h
-  choose Q hQ e using h
-  let e (n : ℤ) := (e n).some
   -- the étale complex `P'` with `ν^* P' ≅ P`
-  let P' : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ :=
-    { X := Q
-      d i j := N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)
-      shape i j hij := N.map_injective (by simp [P.shape i j hij])
-      d_comp_d' i j k _ _ := N.map_injective (by simp) }
-  let eP : (N.mapHomologicalComplex _).obj P' ≅ P :=
-    HomologicalComplex.Hom.isoOfComponents e (fun i j _ ↦ by simp [P'])
-  have hz (n : ℤ) (hn : IsZero (P.X n)) : IsZero (Q n) :=
+  obtain ⟨P', hQ, ⟨eP⟩⟩ := exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract P hP
+  have hz (n : ℤ) (hn : IsZero (P.X n)) : IsZero (P'.X n) :=
     (IsZero.iff_id_eq_zero _).2 (N.map_injective (by
       rw [N.map_id, N.map_zero]
-      exact (hn.of_iso (e n)).eq_of_src _ _))
+      exact (hn.of_iso ((HomologicalComplex.eval _ _ n).mapIso eP)).eq_of_src _ _))
   have : P'.IsStrictlyGE a := (CochainComplex.isStrictlyGE_iff P' a).2 fun i hi ↦
     hz i (P.isZero_of_isStrictlyGE a i hi)
   have : P'.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff P' b).2 fun i hi ↦
     hz i (P.isZero_of_isStrictlyLE b i hi)
-  -- the cohomology sheaves of `P'` are constructible
-  have hQ' (n : ℤ) : Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X (Q n) :=
-    (Etale.constructibleSheaf_iff _ _ _).2 (hQ n)
-  have hH (n : ℤ) : IsConstructibleSheaf (P'.homology n) := by
-    have hcycles := (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_isLimit_kernelFork
-      (P'.sc n).cyclesIsKernel (hQ' _) (hQ' _)
-    exact (Etale.constructibleSheaf_iff _ _ _).1
-      ((Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_isColimit_cokernelCofork
-        (P'.sc n).homologyIsCokernel (hQ' _) hcycles)
+  -- the cohomology sheaves of `P'` are finite locally constant, hence constructible
+  have hH (n : ℤ) : IsConstructibleSheaf (P'.homology n) :=
+    have : IsFiniteLocallyConstantSheaf (P'.sc n).X₁ := hQ _
+    have : IsFiniteLocallyConstantSheaf (P'.sc n).X₂ := hQ _
+    have : IsFiniteLocallyConstantSheaf (P'.sc n).X₃ := hQ _
+    (IsFiniteLocallyConstantSheaf.homology (P'.sc n)).isConstructibleSheaf
   have hb : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
       (_root_.DerivedCategory.Q.obj P') := by
     refine ⟨⟨⟨a, inferInstance⟩, ⟨b, inferInstance⟩⟩, fun n ↦ ?_⟩
@@ -432,22 +462,80 @@ theorem isFiniteLocallyConstant_of_cover
   obtain ⟨M, hM, ⟨e⟩⟩ := hc i j
   exact ⟨M, hM, ⟨(upperStarComp _ (f i j) (g i)).app F ≪≫ e⟩⟩
 
-omit [Finite Λ] in
-/-- The cohomology sheaves of a bounded complex of finite projective `Λ_W`-modules on the small
-pro-étale site of `W` are locally constant with finite stalks. -/
-theorem isFiniteLocallyConstant_homology_of_retract [Finite Λ] {W : Scheme.{u}}
+/-- The cohomology sheaves of a complex of finite projective `Λ_W`-modules on the small pro-étale
+site of `W` are locally constant with finite stalks. The complex is `ν^*` of a complex `P'` of
+finite locally constant étale sheaves
+(`exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract`); as `ν^*` is exact, its
+cohomology sheaves are `ν^*` of those of `P'`, which are finite locally constant. -/
+theorem isFiniteLocallyConstant_homology_of_retract {W : Scheme.{u}}
     (P : CochainComplex (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ)) ℤ)
     (hP : ∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
       𝟙_ (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ))))) (n : ℤ) :
-    IsFiniteLocallyConstant Λ (P.homology n) :=
-  sorry
+    IsFiniteLocallyConstant Λ (P.homology n) := by
+  obtain ⟨P', hQ, ⟨eP⟩⟩ :=
+    exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract P hP
+  have : IsFiniteLocallyConstantSheaf (P'.sc n).X₁ := hQ _
+  have : IsFiniteLocallyConstantSheaf (P'.sc n).X₂ := hQ _
+  have : IsFiniteLocallyConstantSheaf (P'.sc n).X₃ := hQ _
+  have := IsFiniteLocallyConstantSheaf.homology (P'.sc n)
+  refine isFiniteLocallyConstant_of_iso ?_
+    (isFiniteLocallyConstant_comparisonUpperStar_obj (P'.sc n).homology)
+  exact ((P'.sc n).mapHomologyIso (ν^*(W)[ModuleCat.{u + 1} Λ])).symm ≪≫
+    (HomologicalComplex.homologyFunctor _ _ n).mapIso eP
 
 omit [Finite Λ] in
-/-- A locally perfect complex on a quasi-compact scheme is bounded. -/
-theorem bounded_of_isLocallyPerfect [CompactSpace X]
+/-- A locally perfect complex on a quasi-compact quasi-separated scheme is bounded.
+
+Finitely many members `W_{k j}` of the trivialising cover, restricted to affine opens `V_j`,
+cover `X` (the cover is quasi-compact). The morphisms `V_j ⟶ X` are quasi-compact, so pullbacks
+along them detect zero sheaves
+(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero`).
+The pullback of `H^n(K)` to `W_i` is `H^n` of a bounded complex, which vanishes outside its
+bounds; so `H^n(K)` vanishes outside the finitely many bounds attached to the `W_{k j}`. -/
+theorem bounded_of_isLocallyPerfect [CompactSpace X] [QuasiSeparatedSpace X]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K :=
-  sorry
+    (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K := by
+  obtain ⟨ι, W, g, hg, hP⟩ := hK
+  choose P a b hPa hPb _ e using hP
+  let E : PreZeroHypercover X := ⟨ι, W, g⟩
+  have : QuasiCompactCover E := Scheme.presieve₀_mem_qcPrecoverage_iff.1 hg.1
+  obtain ⟨m, k, V, hV, hU⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact E
+    (U := ⊤) isCompact_univ
+  have (j : Fin m) : IsAffine (V j) := hV j
+  let h (j : Fin m) : (V j).toScheme ⟶ X := (V j).ι ≫ g (k j)
+  have hsurj (x : X) : ∃ j, x ∈ Set.range (h j) := by
+    have hx : x ∈ ⋃ j, E.f (k j) '' (V j) := by
+      rw [hU]
+      trivial
+    obtain ⟨j, y, hy, rfl⟩ := Set.mem_iUnion.1 hx
+    exact ⟨j, ⟨y, hy⟩, rfl⟩
+  -- the pullback of `H^n(K)` to `W i` is `H^n(P i)`
+  have hW (i : ι) (n : ℤ) (hn : n < a i ∨ b i < n) :
+      IsZero ((g i)^*[ModuleCat.{u + 1} Λ].obj
+        ((_root_.DerivedCategory.homologyFunctor _ n).obj K)) := by
+    have := hPa i
+    have := hPb i
+    refine IsZero.of_iso ?_ ((leftDerivedUpperStarHomologyFunctorIso _ (g i) n).app K ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ n).mapIso (e i).some)
+    rcases hn with hn | hn
+    · exact _root_.DerivedCategory.isZero_of_isGE _ (a i) n hn
+    · exact _root_.DerivedCategory.isZero_of_isLE _ (b i) n hn
+  have key (n : ℤ) (hn : ∀ j, n < a (k j) ∨ b (k j) < n) :
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj K) := by
+    refine (IsZero.iff_id_eq_zero _).2 (eq_zero_of_forall_upperStar_map_eq_zero Λ h hsurj _
+      fun j ↦ ?_)
+    rw [CategoryTheory.Functor.map_id]
+    exact (IsZero.iff_id_eq_zero _).1 ((((V j).ι)^*[ModuleCat.{u + 1} Λ].map_isZero
+      (hW (k j) n (hn j))).of_iso ((upperStarComp _ (V j).ι (g (k j))).app _))
+  refine ⟨⟨-∑ j, |a (k j)|, (_root_.DerivedCategory.isGE_iff _ _).2 fun n hn ↦
+    key n fun j ↦ .inl ?_⟩, ⟨∑ j, |b (k j)|, (_root_.DerivedCategory.isLE_iff _ _).2 fun n hn ↦
+    key n fun j ↦ .inr ?_⟩⟩
+  · have := Finset.single_le_sum (f := fun j ↦ |a (k j)|) (fun j _ ↦ abs_nonneg _)
+      (Finset.mem_univ j)
+    linarith [neg_abs_le (a (k j))]
+  · have := Finset.single_le_sum (f := fun j ↦ |b (k j)|) (fun j _ ↦ abs_nonneg _)
+      (Finset.mem_univ j)
+    linarith [le_abs_self (b (k j))]
 
 variable [IsNoetherian X] in
 /-- A perfect complex of pro-étale `Λ`-sheaves on a Noetherian scheme is bounded, and each of its
@@ -480,7 +568,8 @@ theorem bounded_and_homology_of_isDualizable
       (isFiniteLocallyConstant_homology_of_retract P hr n)
   -- the trivial stratification of `X`
   let S : Stratification X := Stratification.ofNoetherianSpace 1 (fun _ ↦ Set.univ)
-    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _) (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
+    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _)
+    (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
     (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun _ ↦ inferInstance) (fun _ ↦ by simp)
   obtain ⟨F, hF, e⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ
     (F := (_root_.DerivedCategory.homologyFunctor _ n).obj K) ⟨S, fun _ ↦

@@ -341,6 +341,28 @@ theorem IsFiniteLocallyConstantSheaf.cokernel
   toIsLocallyConstantSheaf := (IsLocallyConstantSheaf.kernel_and_cokernel φ).2
   toIsFiniteSheaf := IsFiniteSheaf.cokernel φ
 
+/-- **The homology of a short complex of finite locally constant sheaves of modules over a
+noetherian ring is finite locally constant**: it is the cokernel of a morphism into the cycles,
+the kernel of the second morphism. -/
+theorem IsFiniteLocallyConstantSheaf.homology [IsNoetherianRing Λ]
+    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.homology := by
+  have := IsFiniteLocallyConstantSheaf.kernel S.g
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.cycles :=
+    IsFiniteLocallyConstantSheaf.of_iso (F := Limits.kernel S.g)
+      ((S.cyclesIsKernel.conePointUniqueUpToIso (kernelIsKernel S.g)).symm)
+  have := IsFiniteLocallyConstantSheaf.cokernel S.toCycles
+  exact IsFiniteLocallyConstantSheaf.of_iso (F := Limits.cokernel S.toCycles)
+    ((cokernelIsCokernel S.toCycles).coconePointUniqueUpToIso S.homologyIsCokernel)
+
 /-- Blueprint `lemma-constructible-flc-serre`: Kernels, cokernels and extensions of finite
 locally constant sheaves.
 

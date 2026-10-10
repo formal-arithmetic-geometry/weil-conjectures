@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 
 /-!
 
@@ -27,6 +30,8 @@ of a pro-étale covering family are constant sheaves of finite `Λ`-modules.
 
 ## Main statements
 
+- `AlgebraicGeometry.ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj`: the comparison
+  pullback `ν^*` of a finite locally constant étale sheaf is locally constant with finite stalks.
 - `AlgebraicGeometry.ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`
   (`lem-sf-proetale-constructible-origin` (i)): a constructible pro-étale sheaf is `ν^*` of a
   constructible étale sheaf.
@@ -37,7 +42,7 @@ of a pro-étale covering family are constant sheaves of finite `Λ`-modules.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -76,5 +81,74 @@ theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ] {T :
     ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
       Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) :=
   sorry
+
+section Comparison
+
+variable {Λ}
+
+/-- The scheme `X`, with the identity, is a terminal object of its small étale site. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.isTerminalMkId (X : Scheme.{u}) :
+    IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
+  IsTerminal.ofUniqueHom (fun V ↦ MorphismProperty.Over.homMk V.hom) fun V f ↦
+    MorphismProperty.Over.Hom.ext <| by
+      change f.left = V.hom
+      rw [← MorphismProperty.Over.w f]
+      exact (Category.comp_id _).symm
+
+variable (Λ) in
+/-- The comparison pullback `ν^*` sends constant étale sheaves to constant pro-étale sheaves:
+`constantSheaf ⋙ ν^*` and `constantSheaf` are both left adjoint to the global sections, as the
+inclusion of sites sends the terminal object `X` of `X_ét` to the terminal object `X` of
+`X_proét`. -/
+noncomputable def comparisonUpperStarConstantSheafIso (X : Scheme.{u}) :
+    constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ ν^*(X)[ModuleCat.{u + 1} Λ] ≅
+      constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) :=
+  (((constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) (Etale.isTerminalMkId X)).comp
+      (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)).ofNatIsoRight
+    ((toProEt X).sheafPushforwardContinuousCompSheafSectionsObjIso (ModuleCat.{u + 1} Λ)
+      X.smallEtaleTopology (Scheme.ProEt.topology X)
+        (op (Scheme.Etale.mk (𝟙 X))))).leftAdjointUniq
+    (constantSheafAdj (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) (ProEt.isTerminalMkId X))
+
+/-- The comparison pullback `ν^*` of a finite locally constant étale sheaf is locally constant
+with finite stalks. An étale cover trivialising `G` is a pro-étale cover, `ν^*` commutes with the
+pullbacks along its members and sends constant sheaves to constant sheaves; the values of the
+constant sheaves are finite on the nonempty members, as `G` has finitely generated stalks and `Λ`
+is finite. -/
+theorem isFiniteLocallyConstant_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
+    IsFiniteLocallyConstant Λ ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj G) := by
+  obtain ⟨⟨𝒰₀, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := G)
+  let 𝒰 := 𝒰₀.nonemptyMembers
+  refine ⟨ULift.{u + 1} 𝒰.I₀, fun i ↦ 𝒰.X i.down, fun i ↦ 𝒰.f i.down, ?_, ?_⟩
+  · have h : Presieve.ofArrows (fun i : ULift.{u + 1} 𝒰.I₀ ↦ 𝒰.X i.down)
+        (fun i ↦ 𝒰.f i.down) = 𝒰.presieve₀ := by
+      refine le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩) fun _ _ ⟨i⟩ ↦ ?_
+      exact Presieve.ofArrows.mk (ι := ULift.{u + 1} 𝒰.I₀) (Y := fun i ↦ 𝒰.X i.down) ⟨i⟩
+    rw [h]
+    exact etalePrecoverage_le_proetalePrecoverage _ 𝒰.mem₀
+  · rintro ⟨⟨i, hi⟩⟩
+    have hc : ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰₀.f i)).obj G).IsConstant
+        (𝒰₀.X i).smallEtaleTopology :=
+      (isConstant_over_iff_upperStar _ (𝒰₀.etalePrecoverageToEtale i) G).mp (h𝒰 i)
+    obtain ⟨M, ⟨e⟩⟩ :=
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰₀.f i)).obj G).mem_essImage_of_isConstant
+    have : IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+        (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+        ((constantSheaf (𝒰₀.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
+      have := IsFiniteSheaf.upperStar (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+        (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (𝒰₀.f i) G
+      IsFiniteSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+        (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) e.symm
+    have : Nonempty (𝒰₀.X i) := hi
+    have : Module.Finite Λ M := moduleFinite_of_isFiniteSheaf_constantSheaf (Y := 𝒰₀.X i) M
+    exact ⟨M, Module.finite_of_finite Λ,
+      ⟨(comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (𝒰₀.f i)).app G ≪≫
+        (ν^*(𝒰₀.X i)[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
+        (comparisonUpperStarConstantSheafIso Λ (𝒰₀.X i)).app M⟩⟩
+
+end Comparison
 
 end AlgebraicGeometry.ProEtale
