@@ -23,9 +23,69 @@
   "def-sc-topological-abelian-cohomology",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an open V subset X, the definition gives (i_*F)(V)=F(V intersect Z), with restriction maps induced by restriction in F. Thus a germ of i_*F at x is represented by a section of F on V intersect Z, and a morphism of sheaves induces the corresponding map on these germ representatives.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00AE, setup and definition of the direct image"
+   }
+  },
+  {
+   "text": "If x is not in Z, the open complement X\\Z is a neighborhood of x and its intersection with Z is empty. Hence (i_*F)(X\\Z)=F(empty)=0 for an abelian sheaf. Every germ at x restricts to this neighborhood, so the stalk (i_*F)_x is zero.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00AE, proof: point outside the closed subset"
+   }
+  },
+  {
+   "text": "Fix z in Z. The neighborhoods V intersected with Z, as V ranges over open neighborhoods of z in X, are cofinal among the open neighborhoods of z in the subspace Z: if W is open in Z and contains z, write W=U intersect Z with U open in X and replace U by U union (X\\Z). Conversely V intersect Z is a neighborhood of z. This is the neighborhood comparison used in the proof of Lemma 00AE.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00AE, proof: every neighborhood in Z is Z intersected with an open neighborhood in X"
+   }
+  },
+  {
+   "text": "By this cofinality, the directed colimit defining (i_*F)_z is the same colimit as the one defining F_z. The canonical germ map sends the class of a section s in F(V intersect Z) to its class s_z, so it is well defined and bijective; equality is detected after restriction to a smaller neighborhood, and surjectivity and injectivity follow from the cofinal indexing systems.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00AE, proof: stalk over a point of the closed subset"
+   }
+  },
+  {
+   "text": "The canonical map is an isomorphism of abelian groups because it is induced by the same section representatives and the germ maps preserve addition. For a morphism phi of abelian sheaves on Z, applying i_*phi to a representative s and then taking its germ agrees with first taking s_z and then applying phi_z; hence the isomorphisms are compatible with morphisms.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00AE, abelian-sheaf clause and functoriality of germs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +110,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-closed-immersion-pushforward-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-closed-pushforward-abelian-stalks",
+  "worker": "stage1",
+  "summary": "Split Stacks Sheaves Lemma 00AE into five explicit arguments: direct-image germ representatives, vanishing off the closed subset, cofinality of neighborhoods on the subset, the induced stalk colimit isomorphism, and abelian-group naturality. The existing module-stalk definition supplies the germ and colimit facts; no new node was needed.",
+  "blueprint": "The proof realizes the parent blueprint route through the closed-pushforward stalk description used by Cohomology Lemma 02UV and Modules Lemma 01AX.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cps",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cps (reviewer sub-agent of L); spot-checked: Source Stacks Sheaves Lemma 00AE (lemma-stalks-closed-pushforward) read: X topological, Z closed, i inclusion, F abelian sheaf on Z; stalk 0 off Z, F_z on Z; node statement agrees hypothesis by hypothesis (abelian clause). Only changed fields are proof, proof_deps, proof_origin, status, split_report; no new nodes. Step 1 (germ representatives of i_*F) and steps 4-5 (germ map well defined, bijective via germ equality criterion, additive, natural via phi_x) carried by def-weil-pbc-module-stalk (directed colimit, every element a germ, equality criterion, induced phi_x), a definition already in stmt_deps, mathlib-status generic tool. Step 2: X\\Z open neighborhood with empty trace, F(empty)=0 by sheaf axiom for the empty cover, elementary. Step 3: subspace-topology cofinality, elementary (Z closed makes U union X\\Z open; harmless). Checked surjectivity/injectivity of the germ map directly from W=U cap Z. Edge cases Z=X and Z=empty fine. Report section 'Review by M1' present; the citations.json it mentions is not in the commit and not needed. Start Sat Oct 10 04:08:15 PM UTC 2026, end Sat Oct 10 04:08:38 PM UTC 2026."
+ }
 }
