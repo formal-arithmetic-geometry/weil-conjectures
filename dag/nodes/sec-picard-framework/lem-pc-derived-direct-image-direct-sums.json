@@ -21,39 +21,89 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "This is exactly the direct-sum preservation theorem stated by [lem-pc-derived-direct-image-preserves-direct-sums], with the same hypotheses and the same canonical comparison map; hence that node proves the present statement.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Section 36.4, Lemma 36.4.5 (Tag 08DZ)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.4, Lemma 36.4.5 (Tag 08DZ)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived direct image preserves direct sums quasi coherent",
-   "results": "no declaration",
+   "query": "derived direct image preserves direct sums for quasi-compact quasi-separated morphisms of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pushforward (underived module pushforward only)",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Rf_* direct sums",
-   "results": "no declaration",
+   "query": "Rf_* preserves direct sums, DerivedCategory",
+   "results": "loogle: Unknown identifier Rf_; no hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "direct sums",
-   "results": "no derived quasi-coherent pushforward result in Mathlib/AlgebraicGeometry",
+   "query": "derived.*direct.*image|pushforward.*direct sums Mathlib/AlgebraicGeometry",
+   "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image of quasi-coherent complexes commutes with arbitrary direct sums",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-projection-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-direct-image-direct-sums",
+  "worker": "stage1",
+  "summary": "The item duplicates the existing node lem-pc-derived-direct-image-preserves-direct-sums, which states the same canonical direct-sum comparison for every quasi-compact, quasi-separated morphism and every family in D_QCoh. The proof therefore cites that existing node and creates no new node.",
+  "blueprint": "The single step realizes the blueprint clause 'derived direct image preserves set-indexed direct sums' in the proof of lem-pc-projection-formula.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-preserves-direct-sums",
+    "why": "The existing node states exactly the theorem required here; this item is a duplicate imported under another blueprint route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-preserves-direct-sums"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dds1854",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds1854 (reviewer sub-agent of L); spot-checked: Class b check: item statement equals lem-pc-derived-direct-image-preserves-direct-sums (qcqs f, all set-indexed families in D_QCoh, canonical comparison iso; Tag 08DZ both). Split is one citation of that node, C1/C4 hold. No cycle: F1 node created from lem-pc-noetherian-derived-direct-image-right-adjoint, its proof_deps do not include this item. Report and second reading claim a citations.json entry, but the diff touches only the node and report; harmless, no citation needed for a node-to-node step."
+ },
+ "lead_note": "2026-10-10 L (R-dds1854): Report/second reading claim citations.json was written; the branch diff has no citations.json change."
 }
