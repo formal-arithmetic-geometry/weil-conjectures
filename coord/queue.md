@@ -1,8 +1,8 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (307)
+## Stage 1: nodes to split (304)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -64,11 +64,8 @@
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
-| `lem-pc-f-open-subfunctor` | 4009 | rests_on_sorry |
-| `lem-pc-structure-pushforward` | 4009 | sorry_here |
 | `lem-pc-twist` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
-| `lem-pd-degree-locally-constant` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
@@ -100,7 +97,6 @@
 | `lem-pc-rf-base-change-flat-module` | 5010 | none |
 | `lem-pc-rf-perfect-base-change` | 5010 | none |
 | `lem-sc-mult-n-isogeny` | 5010 | rests_on_sorry |
-| `thm-pc-semicontinuity-base-change` | 5010 | sorry_here |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `def-pc-derived-pullback` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
@@ -108,6 +104,7 @@
 | `lem-sc-hilbert-polynomial` | 5011 | none |
 | `lem-sc-image-subgroup` | 5011 | none |
 | `lem-sc-mult-n-finite-kernel` | 5011 | rests_on_sorry |
+| `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
 | `def-sc-group-scheme-subgroup` | 5012 | none |
 | `lem-pc-kflat-resolution` | 5012 | none |
 | `lem-pc-noetherian-flat-complex-perfect` | 5012 | none |
@@ -929,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 328 nodes that wait for stage 1, 1270 nodes that wait for a statement dependency.
+Not open yet: 326 nodes that wait for stage 1, 1272 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
