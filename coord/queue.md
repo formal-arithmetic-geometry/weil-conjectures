@@ -1,8 +1,8 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+906 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (149)
+## Stage 1: nodes to split (147)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-perfect-affine-bounded-projective` | 3014 | none |
 | `lem-sc-derived-open-gluing` | 3014 | none |
-| `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
 | `lem-pc-ringed-space-product-kinjective` | 3015 | none |
@@ -65,7 +64,6 @@
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
-| `lem-pur-sheaf-hom-cover-gluing` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
@@ -920,7 +918,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1527 nodes that wait for a statement dependency, 189 nodes that wait for stage 1.
+Not open yet: 1529 nodes that wait for a statement dependency, 187 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
