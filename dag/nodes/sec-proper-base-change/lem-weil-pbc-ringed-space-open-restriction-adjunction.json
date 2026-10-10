@@ -11,9 +11,87 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (restriction is a functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$).* Sheaves on $X$ and on $U$ are sheaves on the sites of open subsets with open coverings [def-weil-pbc-sites-and-cohomology]; the open subsets of $U$ are exactly the open subsets of $X$ contained in $U$. Let $\\mathcal M\\in\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. The rule $W\\mapsto\\mathcal M(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal M$ is a presheaf of abelian groups on $U$ (composition and identity laws are those of $\\mathcal M$). A covering $\\{W_i\\to W\\}$ of an open $W\\subseteq U$ in the site of $U$ is a family of opens $W_i\\subseteq W$ with $\\bigcup_iW_i=W$, i.e. a covering of $W$ in the site of $X$, and the sheaf condition for $\\mathcal M|_U$ on it is word for word the sheaf condition for $\\mathcal M$ on it; so $\\mathcal M|_U$ is a sheaf. In the same way $\\mathcal O_U$ is a sheaf of rings on $U$. For $W\\subseteq U$, $\\mathcal M(W)$ is an $\\mathcal O_X(W)=\\mathcal O_U(W)$-module and for $W'\\subseteq W\\subseteq U$ the restriction $\\mathcal M(W)\\to\\mathcal M(W')$ is semilinear over $\\mathcal O_U(W)\\to\\mathcal O_U(W')$, which is the restriction of $\\mathcal O_X$; so $\\mathcal M|_U$ is a sheaf of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category], the restriction of [def-weil-pbc-module-finite-type-presentation]. For a morphism $\\mu:\\mathcal M\\to\\mathcal N$ of $\\mathcal O_X$-modules the components $\\mu_W$, $W\\subseteq U$, are $\\mathcal O_X(W)=\\mathcal O_U(W)$-linear and commute with the restriction maps $W'\\subseteq W$, so $\\mu|_U$ is a morphism of $\\mathcal O_U$-modules; $(\\nu\\circ\\mu)|_U=\\nu|_U\\circ\\mu|_U$ and $\\mathrm{id}_{\\mathcal M}|_U=\\mathrm{id}_{\\mathcal M|_U}$ hold componentwise. Hence $(-)|_U$ is a functor.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00A0 (label lemma-j-pullback, line 4453), statement (2) and last sentence (modules) with the proof of (2); Definition Tag 00A1 (label definition-restriction, line 4495), (3) and (4)"
+   }
+  },
+  {
+   "text": "*Step 2 ($j_*$ is a functor $\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$).* Let $\\mathcal G\\in\\Mod(\\mathcal O_U)$ and write $j:U\\to X$ for the inclusion, so $j^{-1}(V)=V\\cap U$. As a presheaf of abelian groups, $j_*\\mathcal G$, $V\\mapsto\\mathcal G(V\\cap U)$, with restriction maps $\\mathcal G(V\\cap U)\\to\\mathcal G(V'\\cap U)$ for $V'\\subseteq V$, is the direct image of the abelian sheaf $\\mathcal G$ along the continuous map $j$, hence a sheaf of abelian groups on $X$ [def-weil-pbc-topological-inverse-image] (1) (directly: an open covering $V=\\bigcup_iV_i$ gives the open covering $V\\cap U=\\bigcup_i(V_i\\cap U)$ in $U$, and the sheaf condition of $j_*\\mathcal G$ for the first is that of $\\mathcal G$ for the second, with $(V_i\\cap U)\\cap(V_k\\cap U)=(V_i\\cap V_k)\\cap U$). Module structure: for $V\\subseteq X$ open let $\\rho_V:\\mathcal O_X(V)\\to\\mathcal O_X(V\\cap U)=\\mathcal O_U(V\\cap U)$ be the restriction, a ring homomorphism; $a\\cdot t:=\\rho_V(a)t$ for $a\\in\\mathcal O_X(V)$, $t\\in\\mathcal G(V\\cap U)$ makes $\\mathcal G(V\\cap U)$ an $\\mathcal O_X(V)$-module (restriction of scalars along $\\rho_V$), extending its group structure. Semilinearity: for $V'\\subseteq V$, $(a\\cdot t)|_{V'\\cap U}=(\\rho_V(a)t)|_{V'\\cap U}=\\rho_V(a)|_{V'\\cap U}\\,t|_{V'\\cap U}=\\rho_{V'}(a|_{V'})\\,t|_{V'\\cap U}=a|_{V'}\\cdot t|_{V'\\cap U}$, using the semilinearity of the restriction of $\\mathcal G$ and $\\rho_V(a)|_{V'\\cap U}=a|_{V'\\cap U}=\\rho_{V'}(a|_{V'})$ (restrictions of $\\mathcal O_X$ compose). So $j_*\\mathcal G\\in\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. For $\\beta:\\mathcal G\\to\\mathcal G'$ in $\\Mod(\\mathcal O_U)$, $(j_*\\beta)_V=\\beta_{V\\cap U}$ is additive, commutes with the restriction maps (those of $\\mathcal G,\\mathcal G'$ along $V'\\cap U\\subseteq V\\cap U$), and is $\\mathcal O_X(V)$-linear: $\\beta_{V\\cap U}(\\rho_V(a)t)=\\rho_V(a)\\beta_{V\\cap U}(t)$ by $\\mathcal O_U(V\\cap U)$-linearity of $\\beta_{V\\cap U}$. Compositions and identities are preserved componentwise. Two identities used below: for $W\\subseteq U$ open, $W\\cap U=W$, so $(j_*\\mathcal G)(W)=\\mathcal G(W)$, $\\rho_W=\\mathrm{id}$ and the $\\mathcal O_X(W)$-module structure of $(j_*\\mathcal G)(W)$ is the $\\mathcal O_U(W)$-module structure of $\\mathcal G(W)$, and for $W'\\subseteq W\\subseteq U$ the restriction map of $j_*\\mathcal G$ is that of $\\mathcal G$; and for any open $V\\subseteq X$, the restriction map $(j_*\\mathcal G)(V)\\to(j_*\\mathcal G)(V\\cap U)$ is the restriction of $\\mathcal G$ along $(V\\cap U)\\cap U=V\\cap U$, i.e. the identity of $\\mathcal G(V\\cap U)$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition Tag 0095 (label definition-pushforward, line 3117), (1), with Lemma Tag 008W (label lemma-pushforward-module, line 2882) and the module structure restricted along O_X -> j_*O_U"
+   }
+  },
+  {
+   "text": "*Step 3 (the map $\\Phi:\\alpha\\mapsto\\beta$).* Let $\\mathcal M\\in\\Mod(\\mathcal O_X)$, $\\mathcal G\\in\\Mod(\\mathcal O_U)$ and $\\alpha:\\mathcal M|_U\\to\\mathcal G$ a morphism of $\\mathcal O_U$-modules. For $V\\subseteq X$ open define $\\beta_V:\\mathcal M(V)\\to\\mathcal G(V\\cap U)=(j_*\\mathcal G)(V)$, $\\beta_V(s)=\\alpha_{V\\cap U}(s|_{V\\cap U})$. It is additive. It is $\\mathcal O_X(V)$-linear: for $a\\in\\mathcal O_X(V)$, $\\beta_V(as)=\\alpha_{V\\cap U}(a|_{V\\cap U}s|_{V\\cap U})=a|_{V\\cap U}\\,\\alpha_{V\\cap U}(s|_{V\\cap U})=\\rho_V(a)\\beta_V(s)=a\\cdot\\beta_V(s)$, by semilinearity of the restriction of $\\mathcal M$ and $\\mathcal O_U(V\\cap U)$-linearity of $\\alpha_{V\\cap U}$. It commutes with restrictions: for $V'\\subseteq V$, $\\beta_V(s)|_{V'\\cap U}=\\alpha_{V\\cap U}(s|_{V\\cap U})|_{V'\\cap U}=\\alpha_{V'\\cap U}(s|_{V\\cap U}|_{V'\\cap U})=\\alpha_{V'\\cap U}((s|_{V'})|_{V'\\cap U})=\\beta_{V'}(s|_{V'})$, since $\\alpha$ commutes with the restriction along $V'\\cap U\\subseteq V\\cap U$ and restrictions of $\\mathcal M$ compose. So $\\Phi(\\alpha):=\\beta$ is a morphism $\\mathcal M\\to j_*\\mathcal G$ in $\\Mod(\\mathcal O_X)$ (Step 2).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0096 (label lemma-adjoint-pullback-pushforward-modules, line 3157), the bijection, written out for the open inclusion with Lemma Tag 00A0 (j^{-1} = restriction)"
+   }
+  },
+  {
+   "text": "*Step 4 (the map $\\Psi:\\beta\\mapsto\\alpha$).* Let $\\beta:\\mathcal M\\to j_*\\mathcal G$ be a morphism of $\\mathcal O_X$-modules. For $W\\subseteq U$ open put $\\alpha_W:=\\beta_W:\\mathcal M(W)=(\\mathcal M|_U)(W)\\to(j_*\\mathcal G)(W)=\\mathcal G(W)$ (Step 2). It is additive; it is $\\mathcal O_U(W)$-linear, because $\\beta_W$ is $\\mathcal O_X(W)$-linear, $\\mathcal O_X(W)=\\mathcal O_U(W)$, and $\\mathcal O_X(W)$ acts on $(j_*\\mathcal G)(W)$ through $\\rho_W=\\mathrm{id}$, i.e. by the $\\mathcal O_U(W)$-module structure of $\\mathcal G(W)$ (Step 2); it commutes with restrictions along $W'\\subseteq W\\subseteq U$, because $\\beta$ does and the restriction maps of $\\mathcal M|_U$, resp. $j_*\\mathcal G$, on opens of $U$ are those of $\\mathcal M$, resp. $\\mathcal G$ (Steps 1, 2). So $\\Psi(\\beta):=\\alpha:\\mathcal M|_U\\to\\mathcal G$ is a morphism in $\\Mod(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0096 (label lemma-adjoint-pullback-pushforward-modules, line 3157), inverse bijection, for the open inclusion; Lemma Tag 00A0 (label lemma-j-pullback), proof of (5): j^{-1}j_*F(V) = j_*F(V) = F(V)"
+   }
+  },
+  {
+   "text": "*Step 5 ($\\Phi$ and $\\Psi$ are inverse).* For $\\alpha:\\mathcal M|_U\\to\\mathcal G$ and $W\\subseteq U$: $\\Psi(\\Phi(\\alpha))_W(s)=\\Phi(\\alpha)_W(s)=\\alpha_{W\\cap U}(s|_{W\\cap U})=\\alpha_W(s|_W)=\\alpha_W(s)$, as $W\\cap U=W$ and $s|_W=s$. For $\\beta:\\mathcal M\\to j_*\\mathcal G$ and $V\\subseteq X$ open: $\\Phi(\\Psi(\\beta))_V(s)=\\Psi(\\beta)_{V\\cap U}(s|_{V\\cap U})=\\beta_{V\\cap U}(s|_{V\\cap U})$; since $\\beta$ commutes with the restriction along $V\\cap U\\subseteq V$, this equals the image of $\\beta_V(s)$ under the restriction map $(j_*\\mathcal G)(V)\\to(j_*\\mathcal G)(V\\cap U)$, which is the identity of $\\mathcal G(V\\cap U)$ (Step 2); so $\\Phi(\\Psi(\\beta))_V(s)=\\beta_V(s)$. Hence $\\Phi:\\Hom_{\\mathcal O_U}(\\mathcal M|_U,\\mathcal G)\\to\\Hom_{\\mathcal O_X}(\\mathcal M,j_*\\mathcal G)$ is a bijection with inverse $\\Psi$, which are the maps of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0096 (label lemma-adjoint-pullback-pushforward-modules, line 3157), 'canonical bijection'; Lemma Tag 00A0 (label lemma-j-pullback, line 4453), (5) j^{-1}j_* = id"
+   }
+  },
+  {
+   "text": "*Step 6 (naturality, hence the adjunction).* Let $\\mu:\\mathcal M'\\to\\mathcal M$ in $\\Mod(\\mathcal O_X)$, $\\nu:\\mathcal G\\to\\mathcal G'$ in $\\Mod(\\mathcal O_U)$ and $\\alpha:\\mathcal M|_U\\to\\mathcal G$. Claim: $\\Phi(\\nu\\circ\\alpha\\circ\\mu|_U)=j_*\\nu\\circ\\Phi(\\alpha)\\circ\\mu$. For $V\\subseteq X$ open and $s\\in\\mathcal M'(V)$: the left side gives $\\nu_{V\\cap U}(\\alpha_{V\\cap U}(\\mu_{V\\cap U}(s|_{V\\cap U})))$, the right side $(j_*\\nu)_V(\\Phi(\\alpha)_V(\\mu_V(s)))=\\nu_{V\\cap U}(\\alpha_{V\\cap U}(\\mu_V(s)|_{V\\cap U}))$, and $\\mu_V(s)|_{V\\cap U}=\\mu_{V\\cap U}(s|_{V\\cap U})$ because $\\mu$ commutes with restrictions. Taking $\\nu=\\mathrm{id}$, resp. $\\mu=\\mathrm{id}$, gives naturality of $\\Phi$ in $\\mathcal M$, resp. in $\\mathcal G$ (and $\\Psi=\\Phi^{-1}$ is then natural too). A family of bijections $\\Hom_{\\mathcal O_U}(\\mathcal M|_U,\\mathcal G)\\cong\\Hom_{\\mathcal O_X}(\\mathcal M,j_*\\mathcal G)$ natural in both variables between the functors of Steps 1 and 2 is, by the definition in the statement, an adjunction $(-)|_U\\dashv j_*$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0096 (label lemma-adjoint-pullback-pushforward-modules, line 3157): 'the functor f^* is the left adjoint to f_*'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 0096 (label lemma-adjoint-pullback-pushforward-modules, line 3157) specialized to the open inclusion j:(U,O_X|_U)->(X,O_X), with Lemma Tag 00A0 (lemma-j-pullback, line 4453), Definition Tag 00A1 (definition-restriction, line 4495), Definition Tag 0095 (definition-pushforward, line 3117) and Lemma Tag 008W (lemma-pushforward-module, line 2882); Stacks proves 0096 through the tensor-restriction adjunctions (lemma-adjointness-tensor-restrict, lemma-adjoint-push-pull-modules); the direct sectionwise verification written here for an open inclusion (where j^*M = j^{-1}M = M|_U) is the agent's"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,11 +127,46 @@
    "results": "TopologicalSpace.Opens.sheafOfModulesEquivOver, sheafOfModulesEquivOverUnit, sheafOfModulesEquivOverInverseUnit (Mathlib/Topology/Sheaves/Module.lean); index: unavailable",
    "date": "2026-10-10",
    "verdict": "names exist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "adjunction between pushforward of sheaves of modules along an open embedding and pushforward along preimage, IsOpenMap.adjunction",
+   "results": "TopCat.Presheaf.pushforwardPullbackAdjunction (Mathlib.Topology.Sheaves.Presheaf, presheaves with values in C); IsOpenMap.adjunction (Mathlib.Topology.Category.TopCat.Opens: hf.functor ⊣ Opens.map f on opens); Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction (general pullback); SheafOfModules.pushforwardPushforwardAdj (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous); TopCat.Sheaf.pullbackPushforwardAdjunction; Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-10",
+   "verdict": "generalization SheafOfModules.pushforwardPushforwardAdj found; specialization not one line (see mathlib_candidate)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardPushforwardAdj",
+   "results": "SheafOfModules.pushforwardPushforwardAdj (adj : F ⊣ G) (φ : S ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R) (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat K J).obj S) (H₁ : whiskerRight (NatTrans.op adj.counit) R.obj = ψ.hom ≫ G.op.whiskerLeft φ.hom) (H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫ whiskerRight (NatTrans.op adj.unit) S.obj = 𝟙 S.obj) : pushforward φ ⊣ pushforward ψ; _unit_app_val_app (unit at M, U is M.val.map (adj.counit.app U).op, rfl); _counit_app_val_app (M.val.map (adj.unit.app U).op, rfl)",
+   "date": "2026-10-10",
+   "verdict": "generalization with two ring-map compatibility hypotheses H₁, H₂ to be proved; not one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of modules on topological space: restriction to open subset U is left adjoint to pushforward along inclusion of U",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, instIsLeftAdjointRestrictFunctor, restrictAdjunction_unit_app_app, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf, schemes); SheafOfModules.instIsRightAdjointPushforward, PullbackConstruction.adjunction, pullbackPushforwardAdjunction (PullbackContinuous); TopCat.Sheaf.pullbackPushforwardAdjunction (sheaves, not modules)",
+   "date": "2026-10-10",
+   "verdict": "no match for a ringed space; scheme version only"
+  },
+  {
+   "tool": "local_search",
+   "query": "pushforwardPushforwardAdj (project ~/weil-conjectures-slopmaster2)",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, pushforwardPushforwardAdj_unit_app_val_app, pushforwardPushforwardAdj_counit_app_val_app (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "names exist"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pushforwardPushforwardAdj|overPushforwardOverAdj' Mathlib --include=*.lean; grep -rln SheafOfModules Mathlib | xargs grep -ln 'IsOpenMap|IsOpenEmbedding|Opens.map|sheafRestrict'; sed -n 260,360p Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; sed -n 340,445p AlgebraicGeometry/Modules/Sheaf.lean; cat Topology/Sheaves/Module.lean",
+   "results": "pushforwardPushforwardAdj (PushforwardContinuous.lean:274, unit/counit rfl lemmas :298, :303) is used outside its file only by Scheme.Modules.restrictAdjunction (AlgebraicGeometry/Modules/Sheaf.lean:425-432, with adj = f.isOpenEmbedding.isOpenMap.adjunction and H₁, H₂ proved in about six lines from appIso lemmas); overPushforwardOverAdj (:342); the only files with SheafOfModules and opens/open maps are AlgebraicGeometry/Modules/Sheaf.lean, AlgebraicGeometry/Modules/Tilde.lean, Topology/Sheaves/Module.lean (sheafOfModulesEquivOver :30, no restriction functor or adjunction of its own). No restriction functor of modules for a ringed space (TopCat with a sheaf of rings) and an open U with an adjunction.",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate updated"
   }
  ],
  "mathlib_match": null,
- "mathlib_candidate": "For X : TopCat, R : X.Sheaf RingCat (= O_X on Opens.grothendieckTopology X) and U : Opens X, the restriction of the node is the composite SheafOfModules.overFunctor R U (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:59, a left adjoint by SheafOfModules.overPushforwardOverAdj :342 and the instance :350, right adjoint pushforward along Over.star U, sections V -> G(V x U) = G(V ∩ U)) followed by the equivalence (U.sheafOfModulesEquivOver R).functor (Mathlib/Topology/Sheaves/Module.lean:30) onto SheafOfModules (U.sheafRestrict.obj R) (U.sheafRestrict: Mathlib/Topology/Sheaves/SheafCondition/Sites.lean:179, O_X|_U); the composite adjunction is Adjunction.comp. That this composite has sections W -> M(W) and that its right adjoint is the j_* of the node is an unfolding of pushforward along U.overEquivalence and Over.star, not one declaration; so the node is left unsplit with this candidate.",
- "status": "unsplit",
+ "mathlib_candidate": "Two routes, neither one declaration with the sections identified definitionally. (a) SheafOfModules.pushforwardPushforwardAdj (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:274) with adj = IsOpenMap.adjunction (Mathlib/Topology/Category/TopCat/Opens.lean:331) for the inclusion of U (functor Opens U ⥤ Opens X, W ↦ W, right adjoint Opens.map ι, V ↦ V ∩ U), S = U.sheafRestrict.obj R (Mathlib/Topology/Sheaves/SheafCondition/Sites.lean:179) or the restriction of R along the open embedding, and φ, ψ the restriction ring maps: the left adjoint has sections W ↦ M(W) and the right adjoint V ↦ G(V ∩ U) by definition (rfl), and unit/counit are restriction maps (:298, :303), but the compatibilities H₁, H₂ must be proved (about six lines in the scheme analogue Scheme.Modules.restrictAdjunction, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-432) and φ, ψ constructed; (b) SheafOfModules.overFunctor R U (PushforwardContinuous.lean:59) ⊣ pushforward (pushforwardOver U) by overPushforwardOverAdj (:342), composed with the equivalence U.sheafOfModulesEquivOver R (Mathlib/Topology/Sheaves/Module.lean:30) by Adjunction.comp; identifying the sections with W ↦ M(W) and V ↦ G(V ∩ U) is an unfolding of U.overEquivalence and Over.star. By the rule B8 the node stays a statement with this candidate and is split by the direct verification (re-judged 2026-10-10).",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +186,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ringed-space-open-restriction-adjunction",
+  "worker": "stage1",
+  "summary": "Read Sheaves 0096 (lemma-adjoint-pullback-pushforward-modules) with its proof, 00A0 (lemma-j-pullback), 00A1 (definition-restriction), 0095 (definition-pushforward), 008W (lemma-pushforward-module); tags verified in tags/tags. Statement kept (it is right against 0096 specialized to the open inclusion, where j^*M = j^{-1}M = M|_U because j^{-1}O_X = O_U). Mathlib re-judged with LeanSearch, Loogle, LeanFinder, local_search and grep: no declaration for ringed spaces; the closest are SheafOfModules.pushforwardPushforwardAdj with IsOpenMap.adjunction (needs the ring-map compatibilities H1, H2, about six lines as in Scheme.Modules.restrictAdjunction) and overPushforwardOverAdj composed with sheafOfModulesEquivOver (sections identified only by unfolding); not a leaf by B8, candidate updated. Proof in 6 elementary steps written out directly (Stacks proves 0096 through the tensor-restriction adjunctions, so proof_origin is by agent): (1) restriction is a functor (00A0 (2), coverings of opens of U are coverings in X); (2) j_*G is a sheaf of O_X-modules (direct image of an abelian sheaf, leaf def-weil-pbc-topological-inverse-image (1); module structure through the restriction O_X(V) -> O_X(V∩U), semilinearity checked) and a functor, with the identities (j_*G)(W) = G(W) for W ⊆ U and (j_*G)(V) -> (j_*G)(V∩U) = id; (3) Phi(alpha)_V(s) = alpha_{V∩U}(s|_{V∩U}) is O_X-linear and compatible with restrictions; (4) Psi(beta)_W = beta_W is O_U-linear; (5) Phi, Psi inverse; (6) naturality in both variables, hence the adjunction. No new nodes."
+ },
+ "reviewed": "pass (L, 2026-10-10): 6 elementary steps, the sectionwise adjunction between restriction to an open and j_* for sheaves of modules; both functors, the two maps, their inverseness and naturality checked. No leaf (B8: Mathlib's pushforwardPushforwardAdj needs ring-map data)."
 }
