@@ -13,9 +13,79 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-japanese-domain"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime ideal $\\mathfrak q\\subset S$ and let $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. The ring $S$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian], since $R$ is Noetherian by [def-weil-pbc-nagata-ring]. The induced map $A:=R/\\mathfrak p\\to B:=S/\\mathfrak q$ is injective: an element of $R$ maps to zero in $B$ exactly when it lies in $\\mathfrak p$. Both $A$ and $B$ are domains. If $s_1,\\dots,s_n$ generate $S$ as an $R$-module, their images generate $B$ as an $A$-module: every class in $B$ has a representative $\\sum_i\\varphi(r_i)s_i$, and reducing its coefficients modulo $\\mathfrak p$ gives the claimed expression. Thus $A\\subseteq B$ is a finite extension of domains [def-weil-finitely-generated-module]. The ring $A$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian], since it is generated as an $R$-module by $1$; it is N-2 by [def-weil-pbc-nagata-ring].",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032T (lemma-quasi-finite-over-nagata), proof, lines 45708-45717; finite case"
+   }
+  },
+  {
+   "text": "Write $K=\\operatorname{Frac}(A)$ and $L=\\operatorname{Frac}(B)$. The localization $K\\otimes_A B=(A\\setminus\\{0\\})^{-1}B$ is a nonzero domain and is finite-dimensional over $K$: the images of the same $s_i$ span it. By [lem-weil-pbc-finite-dimensional-domain-is-field] it is a field. It contains $B$, so it contains inverses of every nonzero element of $B$ and is therefore $L$. Thus $L/K$ is a finite field extension [def-pc-field-extension]. For any finite field extension $M/L$, the tower law [lem-weil-pbc-field-degree-multiplicativity] makes $M/K$ finite.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-pc-field-extension",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese), proof, lines 45206-45208 and finite case, lines 45224-45231"
+   }
+  },
+  {
+   "text": "Let $T_A$ and $T_B$ be the integral closures of $A$ and $B$ in $M$ [def-weil-pbc-integral-closure]. Since $A$ is N-2 and $M/K$ is finite, $T_A$ is a finitely generated $A$-module [def-weil-pbc-japanese-domain]. As $B$ is finite over $A$, every $b\\in B$ is integral over $A$ by [lem-weil-pbc-finite-algebra-is-integral]. If $x\\in T_B$, then $x$ is integral over $B$, hence over $A$ by [lem-weil-pbc-integral-transitive]; therefore $T_B\\subseteq T_A$. Conversely, a monic polynomial over $A$ vanishing at $x\\in T_A$ is also monic over $B$, so $T_A\\subseteq T_B$. Hence $T_A=T_B$. The finite set of $A$-module generators of $T_A$ also generates $T_B$ over $B$, because $A\\subseteq B\\subseteq T_B$. Since $M/L$ was arbitrary, $B=S/\\mathfrak q$ is N-2 [def-weil-pbc-japanese-domain]. Every prime $\\mathfrak q$ has this property and $S$ is Noetherian by step 1; hence $S$ is Nagata [def-weil-pbc-nagata-ring].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-nagata-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese), finite case of proof, lines 45224-45231; used in Lemma Tag 032T (lemma-quasi-finite-over-nagata)"
+   }
+  },
+  {
+   "text": "For an ideal $I\\subseteq R$, the quotient map $R\\to R/I$ is finite: $1+I$ generates $R/I$ as an $R$-module [def-weil-finitely-generated-module]. Applying the result just proved to this map shows that $R/I$ is Nagata.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032T (lemma-quasi-finite-over-nagata), finite case; the quotient is its immediate specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-nagata-ring",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-pc-field-extension",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-transitive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032T (lemma-quasi-finite-over-nagata), finite case, using the finite case of Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +124,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +145,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 032T, finite case, with the quotient R/I as a particular case. Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the four steps (032T finite case via 032I): prime quotients finite over domains, Frac(B) finite over Frac(A), integral closures agree, R/I as a finite quotient."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-over-nagata-nagata",
+  "worker": "stage1",
+  "summary": "Split the finite case of Stacks 032T by writing out the finite-domain proof of 032I. For every prime quotient S/q, the contracted quotient A=R/p is an N-2 Noetherian domain and B=S/q is finite over A. Its fraction field L is finite over Frac(A); for each finite M/L the integral closures of A and B in M agree because B/A is integral. N-2 makes this common closure finite over A, hence over B. The quotient R/I is generated by 1 and follows as a special case. Reused only existing Mathlib leaves and definitions; no new node was needed."
+ }
 }
