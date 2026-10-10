@@ -117,7 +117,7 @@ lemma bidual_app_bijective_of_iso_free [HasWeakSheafify J AddCommGrpCat.{u}]
     refine Sigma.hom_ext _ _ fun k ↦ ?_
     rw [Preadditive.comp_sum, Finset.sum_eq_single k (fun b _ hb ↦ by simp [Ne.symm hb])
       (by simp)]
-    simp only [Sigma.ι_desc_assoc, if_pos rfl]
+    simp only [Sigma.ι_desc_assoc]
     exact (Category.comp_id _).symm
   have htot : ∑ i, Cc i ≫ S i = 𝟙 _ := by
     calc ∑ i, Cc i ≫ S i = e.inv ≫ (∑ i, Sigma.desc (fun k ↦ if k = i then 𝟙 (unit _) else 0) ≫

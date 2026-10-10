@@ -73,7 +73,8 @@ lemma app_unit_eq_smul (s : (restrictOver R U).obj (unit _) ⟶ (restrictOver R 
   have h1 : s.app W (1 : R.obj (op W.unop.left)) =
       A.map W.unop.hom.op (s.app (op (Over.mk (𝟙 U))) (1 : R.obj (op U))) :=
     (congrArg (s.app W) (unit_map_one (R := R ⋙ forget₂ _ _) W.unop.hom.op).symm).trans
-      (naturality_apply s (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op _)
+      (naturality_apply s
+        (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op _)
   refine (congrArg (s.app W) (mul_one r).symm).trans ?_
   refine ((s.app W).hom.map_smul r (1 : R.obj (op W.unop.left))).trans ?_
   exact congrArg (fun y : A.obj (op W.unop.left) ↦ r • y) h1
@@ -146,14 +147,16 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
     -- The value of `Ψ` at a restriction of `c i` is the restriction of `a i`.
     have hΨ (i : ι) : Ψ.app W ((homObj A (unit _)).map W.unop.hom.op (c i)) =
         R.map W.unop.hom.op (a i) :=
-      naturality_apply Ψ (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (c i)
+      naturality_apply Ψ
+        (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (c i)
     have hL : ((bidual A).app (op U) (∑ i, a i • m i)).app W ψ =
         ∑ i, R.map W.unop.hom.op (a i) * b i := by
       change ψ.app T' (A.map W.unop.hom.op (∑ i, a i • m i)) = _
       refine (congrArg (fun y : A.obj (op W.unop.left) ↦ ψ.app T' y)
         (map_sum (A.map W.unop.hom.op).hom _ _)).trans ?_
       refine (map_sum (ψ.app T').hom _ _).trans (Finset.sum_congr rfl fun i _ ↦ ?_)
-      refine (congrArg (fun y : A.obj (op W.unop.left) ↦ ψ.app T' y) (A.map_smul W.unop.hom.op (a i) (m i))).trans ?_
+      refine (congrArg (fun y : A.obj (op W.unop.left) ↦ ψ.app T' y)
+        (A.map_smul W.unop.hom.op (a i) (m i))).trans ?_
       exact (ψ.app T').hom.map_smul _ _
     have hR : Ψ.app W ψ = ∑ i, b i * R.map W.unop.hom.op (a i) := by
       refine (congrArg (Ψ.app W) hψ).trans ?_
