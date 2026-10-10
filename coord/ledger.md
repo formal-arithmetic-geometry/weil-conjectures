@@ -1685,3 +1685,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:53 L: merged deliver/H1/prop-weil-pbc-kinjective-resolutions-exist (reviewer FIX; first push; new nodes: 2)
 - 14:54 L: lem-weil-pbc-kinjective-functorial-existence attached to 4 sorry-free declarations (KInjectiveResolution.lean 138-164; candidates by reviewer R-kir)
 - 14:54 L: returned deliver/M1/thm-sc-serre-duality-curve (reviewer RETURN: B10 does not apply: AlgebraicGeometry.Scheme.serreDuality is transitively sorried (sorryfree.py: SORRY via subsingleton_)
+- 14:54 L: returned deliver/G1/lem-sc-canonical-degree (reviewer RETURN: 1. D (new nodes are what the steps need, no more) and B9: lem-sc-finite-locally-free-dual, lem-sc-finite-locally-free-te)
