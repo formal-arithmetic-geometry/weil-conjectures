@@ -1378,3 +1378,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:13 L: accepted lem-sc-artin-schreier-dimension (0A3N route, 7 steps; new node: natural etale/Zariski comparison for quasi-coherent modules 03DW; 7 tool uses).
 - 12:14 L: accepted lem-sc-affine-curve-h2-vanishing (along the Lean, 4 steps; 2 new nodes closed on slopmaster2; 2 tool uses); isTorsion_upperStar attached to lem-weil-pbc-inverse-image-torsion (closed).
 - 12:15 L: accepted lem-pc-module-change-of-rings-adjunction (008A, 3 steps; new node 006R).
+- 2026-10-10, delivery of F1: lem-weil-pbc-hypercover-refinement merged from deliver/F1/lem-weil-pbc-hypercover-refinement (1 commit(s), 3 new node(s), spot-checked by L: L: 094K/0DAV/01GI/01GN/01GS: split hypercovers built by induction with affine coverings, products and finite-simplex lifting; 3 new nodes incl. a Mathlib leaf); claim closed

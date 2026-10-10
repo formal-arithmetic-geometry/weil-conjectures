@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-hypercover-refinement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite refinements and local lifting",
@@ -17,45 +17,117 @@
  ],
  "proof": [
   {
-   "text": "Use the quasi-compact etale objects of the site in\n[def-weil-pbc-etale-site]. Their fibre products and the finite limits\ndefining matching schemes are quasi-compact and quasi-separated. Any etale\ncovering of such an object admits a finite refinement by affine opens of its\nmembers: etale maps have open images, and finitely many of those images cover\nthe target. Each selected affine is of finite presentation over the target.",
+   "text": "Fix the full subsite of quasi-compact quasi-separated etale $X$-schemes. It contains $X$ and is closed under the finite limits used to form matching objects: fibre products are etale over $X$ by [def-weil-pbc-etale-site], and their quasi-compactness and quasi-separatedness follow by applying [lem-weil-pbc-qcqs-morphism-permanence] to the projections and composites; equalizers are pullbacks of diagonals of quasi-separated etale objects. Hence when the terms through degree $n-1$ are finite unions of such objects, every component $T$ of $M_n(U)$ is quasi-compact and quasi-separated. Cover $T$ by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Restrict any etale covering of $T$ to each of those opens using [lem-weil-pbc-etale-covering-base-change], then refine each restricted cover by finitely many affine opens of its members using [lem-weil-pbc-etale-covering-affine-refinement]. Taking the union over the finite affine cover of $T$ gives a finite affine etale refinement of the original covering. Each chosen affine member is etale and of finite presentation over $X$ by [lem-weil-pbc-qcqs-morphism-permanence](1).",
    "uses": [
-    "def-weil-pbc-etale-site"
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-affine-refinement"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 094K (lemma-w-contractible), proof (a),(b), together with Lemma 0DAV (lemma-hypercovering-object), construction of the next matching cover; Topologies Lemma 021D for finite limits"
+   }
   },
   {
-   "text": "Construct a split hypercover successively. In degree $n$, retain the finitely\nmany degeneracy summands already prescribed, choose a finite cover of\n$M_n(U)$ as the new summand $N_n$, and use its projections for the face maps.\nThe matching equations give the simplicial identities. This is precisely the\nsplit construction in [def-weil-pbc-finite-split-hypercover]. For a\nrefinement $V\\to U$, the corresponding target for the new nondegenerate\nsummand is\n\n$$\n M_n(V)\\times_{M_n(U)} U_n.\n$$",
+   "text": "Construct a split hypercover by induction on $n$. In degree zero take a finite affine etale covering of $X$ from step 1. Given the split skeleton below $n$, form its matching object $M_n(U)$. The degeneracies already prescribe one copy of each earlier nondegenerate summand for every surjection $[n]\\twoheadrightarrow[m]$, $m<n$, and give maps from those copies to $M_n(U)$. On every matching component, including components met by degenerate copies, choose a finite affine etale covering as in step 1 and call the disjoint union of these new pieces $N_n$. Then $U_n$ is the coproduct of the degenerate copies with $N_n$; its map to $M_n(U)$ is a cover because $N_n$ covers every component. For a nondegenerate $n$-simplex, every proper face is the corresponding projection of its matching map, and those faces satisfy all face-face identities because they form a compatible point of $M_n(U)$. For a degenerate copy indexed by a surjection $\\sigma:[n]\\twoheadrightarrow[m]$ and an $m$-simplex $i$, compose any simplicial operator into $[n]$ with $\\sigma$, factor that composite uniquely as a surjection followed by an injection, apply the old face indexed by the injection to $i$, and place the result in the degeneracy copy indexed by the surjection. This also defines each degeneracy of an old simplex as the corresponding copy. For two composable simplicial operators, the epi-mono factorization of their composite is the factorization obtained by repeating this rule, so their actions agree; when the last simplex is nondegenerate, the only extra case is two proper faces, already checked by the matching equations. This verifies the simplicial identities that Stacks 0DAV leaves implicit. Repeating for every $n$ gives a hypercover finite in each degree as defined in [def-weil-pbc-finite-split-hypercover].",
    "uses": [
-    "def-weil-pbc-finite-split-hypercover"
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-affine-refinement"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 0DAV (lemma-hypercovering-object), proof, paragraphs 'Construction of the extension' through the definition of the two kinds of morphisms; Lemma 094K (lemma-w-contractible), proof (a),(b)"
+   }
   },
   {
-   "text": "Its map to $M_n(V)$ is a cover, so the same construction works. If local\nlifts have also been prescribed, intersect this cover with the finitely many\ncovering families on which the lifts exist. Before constructing degree $n$,\nimpose also the pullbacks of the requirements in higher specified degrees\nalong every degeneracy from degree $n$. There are only finitely many such\ndegeneracies up to the specified degree. Thus the already prescribed\ndegenerate summands have the required lifts as well. Epimorphisms of the\nsheaves in [def-weil-pbc-etale-sheaves] are locally surjective, so lifting\nfinitely many sections through epimorphisms is one such requirement.\nContinuing above the specified degree needs no new requirements. This also\nconstructs a refinement of an arbitrary hypercover: only finitely many affine\npieces of the covering of each matching scheme are selected at each step.",
+   "text": "For finitely many prescribed locally solvable lifts in degrees at most $r$, list in advance their pullbacks along every degeneracy from a lower degree at most $r$; there are finitely many such maps in each bounded degree. When constructing a nondegenerate component in degree $m$, impose all requirements on it, including these pullbacks of requirements from higher degrees, before fixing that degree. Local solvability supplies finitely many etale covering families. Cover the quasi-compact matching component by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover], pull back the local-lifting covers to them by [lem-weil-pbc-etale-covering-base-change], and take a common finite affine refinement of the resulting finite family with [lem-weil-pbc-etale-covering-affine-refinement]. That choice defines $N_m$ and its lifts at once; every degree-$n$ degenerate copy, $n\\leq r$, inherits its required lift from its lower nondegenerate source. Repeat through $r$ and use the unconstrained extension of step 2 above $r$. For an epimorphism of etale sheaves, local surjectivity means precisely that its section-lifting requirement supplies such a covering; this is the case used by [def-weil-pbc-etale-sheaves].",
    "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "lem-weil-pbc-etale-covering-base-change",
     "def-weil-pbc-etale-sheaves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GK (lemma-covering-sheaf), proof, and Lemma 01GJ (lemma-covering), construction of a refinement lifting local data in a chosen degree; Lemma 094K for finite covers"
+   }
   },
   {
-   "text": "For two hypercovers, perform this construction with the product of their\nmatching covers; the result maps to both. For parallel maps $f,g:V\\to U$,\nconstruct a homotopy after refining $V$. In degree zero choose, locally, a\n$1$-simplex of $U$ with endpoints $f(v),g(v)$. In subsequent degrees\ntriangulate $\\Delta^n\\times\\Delta^1$ into its $n+1$ standard simplices.\nPreviously chosen faces prescribe compatible boundaries; the matching covers\nof $U$ lift those boundaries after finite refinement. Induction supplies a\nsimplicial homotopy in every degree. On cochains the alternating sum of these\nprism maps is a chain homotopy: internal faces cancel in pairs, leaving\n$g^*-f^*$. This proves cofilteredness after identifying homotopic maps.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $K$ be any etale hypercover and fix $r$. Build a split $V$ and a map $V\\to K$ by the same induction. If the map is already defined below $n$, the relative target for the new summand is $M_n(V)\\times_{M_n(K)}K_n$. Its projection to $M_n(V)$ is the base change of the covering $K_n\\to M_n(K)$ and hence is a covering by [lem-weil-pbc-etale-covering-base-change]. The matching components of $M_n(V)$ are quasi-compact by step 1, so that step gives finite affine refinements of the relative cover over them for $n\\leq r$, without requiring the terms of $K$ themselves to be quasi-compact. The chosen maps into the relative target define both the new faces and the map $V_n\\to K_n$. Above $r$ continue with the ordinary finite split extension from step 2, carrying along the relative target if a full refinement of $K$ is required. This yields the stated finite split refinement through $r$, and an all-degree finite split refinement when the induction is continued.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GJ (lemma-covering), statement and relative-cover construction; Lemma 0DAV, split extension; Lemma 094K, finiteness of each degree"
+   }
+  },
+  {
+   "text": "The homotopy category is nonempty by step 2. For two finite split hypercovers $U,V$, [lem-weil-pbc-hypercover-product] makes $U\\times_XV$ a hypercover mapping to both; apply step 4 to obtain a finite split hypercover mapping to this product and hence to both. For parallel maps $a,b:V\\to U$, form $W'=V\\times_{U\\times_XU}\\operatorname{Hom}(\\Delta[1],U)$ using the endpoint map. In degree zero the map $U_1\\to U_0\\times_XU_0$ is a covering. In degree $n+1$, the relative matching map for $W'$ is the pullback of the restriction from maps $\\Delta[1]\\times\\Delta[n+1]\\to U$ to maps on the union of the two endpoint simplices and $\\Delta[1]\\times\\partial\\Delta[n+1]$; that union includes into the whole prism with finitely many nondegenerate simplices. It is therefore a covering by [lem-weil-pbc-hypercover-finite-simplex-lifting]. Thus $W'$ is a hypercover, with a map to $V$ and a simplicial homotopy between the two composites to $U$. Apply step 4 to replace $W'$ by a finite split hypercover. The pulled-back homotopy equalizes $a$ and $b$ in the homotopy category, which proves cofilteredness.",
+   "uses": [
+    "lem-weil-pbc-hypercover-product",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemmas 01GI (lemma-product-hypercoverings) and 01GS (lemma-homotopy), proof with the endpoint mapping object, using Lemma 01GN (lemma-add-simplices); Lemma 094K for the finite split replacement"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-etale-covering-affine-refinement",
   "def-weil-pbc-finite-split-hypercover",
-  "def-weil-pbc-etale-sheaves"
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-hypercover-product",
+  "lem-weil-pbc-hypercover-finite-simplex-lifting"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-hypercover-refinement.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemmas 0DAV, 094K, 01GI, 01GJ, 01GK, 01GN, 01GS, adapted to the qcqs small etale site"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cofiltered category of finite split etale hypercovers of a quasi compact quasi separated scheme",
+   "results": "OneHypercover exists_nonempty_homotopy (Mathlib.CategoryTheory.Sites.Hypercover.Homotopy), only truncated 1-hypercovers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite split etale hypercovers of qcqs scheme cofiltered under refinements",
+   "results": "PreOneHypercover.inter and OneHypercover.exists_nonempty_homotopy, both degree 1 only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'hypercover|Hypercover' /home/ubuntu/weil-src-slopmaster2/WeilConjectures; rg -n 'hypercover|Hypercover' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover",
+   "results": "No all-degree finite split hypercover declaration in the source or Mathlib; Mathlib Hypercover/Homotopy.lean:13-28 states only 1-hypercovers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -81,5 +153,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypercover-refinement",
+  "worker": "stage1",
+  "summary": "Separated finite-cover geometry, the split degree induction, prescribed local lifts, relative refinement, and the product/prism homotopy into five checked steps. Used a direct Mathlib finite affine cover leaf and an existing Mathlib etale affine refinement leaf, with two narrower Stacks inputs.",
+  "blueprint": "Proof paragraphs 1-3 (finite affine matching covers, split induction, relative and locally lifted refinements) are realized by steps 1-4; proof paragraph 4 (product and prism homotopy) is realized by step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 094K/0DAV/01GI/01GN/01GS: split hypercovers built by induction with affine coverings, products and finite-simplex lifting; 3 new nodes incl. a Mathlib leaf"
+ }
 }
