@@ -34,12 +34,14 @@ from a comonoid object to a ring object form a ring for the convolution product
 * `CategoryTheory.MonObj.Γ`: the ring of global sections `𝟙_ C ⟶ R` of an algebra object `R`.
 * `CategoryTheory.MonObj.Γ.map`: the ring homomorphism `Γ R →+* Γ S` induced by a morphism
   of algebra objects.
+* `CategoryTheory.MonObj.Γ.mapFunctor`: the ring homomorphism `Γ R →+* Γ (F R)` induced by a
+  lax monoidal additive functor `F`.
 
 -/
 
 @[expose] public section
 
-universe v u
+universe v u v' u'
 
 open CategoryTheory MonoidalCategory MonObj ComonObj Preadditive Limits
 
@@ -182,6 +184,57 @@ def Γ.map : Γ R →+* Γ S where
 @[simp] lemma Γ.map_hom (f : Γ R) : (Γ.map φ f).hom = f.hom ≫ φ := rfl
 
 end Map
+
+section MapFunctor
+
+/-!
+### Global sections under lax monoidal functors
+
+A lax monoidal functor `F : C ⥤ D` sends an algebra object `R` to the algebra object `F R`
+(`Functor.monObjObj`), and a global section `s : 𝟙 ⟶ R` to the global section
+`ε ≫ F s : 𝟙 ⟶ F R`. This is a monoid homomorphism `Γ R →* Γ (F R)`, and a ring
+homomorphism when `F` is additive.
+-/
+
+open Functor.LaxMonoidal
+
+open scoped Obj
+
+variable {D : Type u'} [Category.{v'} D] [MonoidalCategory D] (F : C ⥤ D) [F.LaxMonoidal]
+  {R : C} [MonObj R]
+
+/-- A lax monoidal functor induces a monoid homomorphism on global sections. -/
+def Γ.mapFunctorMonoidHom : Γ R →* Γ (F.obj R) where
+  toFun s := Γ.ofHom (Functor.LaxMonoidal.ε F ≫ F.map s.hom)
+  map_one' := by ext; simp
+  map_mul' s t := by
+    have h : Functor.LaxMonoidal.ε F ≫ F.map (λ_ (𝟙_ C)).inv = (λ_ (𝟙_ D)).inv ≫
+        (Functor.LaxMonoidal.ε F ⊗ₘ Functor.LaxMonoidal.ε F) ≫ Functor.LaxMonoidal.μ F _ _ := by
+      rw [tensorHom_def', Category.assoc, ← leftUnitor_inv_naturality_assoc, left_unitality_inv]
+    ext
+    simp only [Γ.hom_ofHom, Γ.mul_hom, F.map_comp, Functor.obj.μ_def]
+    rw [← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, reassoc_of% h]
+
+@[simp]
+lemma Γ.mapFunctorMonoidHom_hom (s : Γ R) :
+    (Γ.mapFunctorMonoidHom F s).hom = Functor.LaxMonoidal.ε F ≫ F.map s.hom :=
+  rfl
+
+variable [Preadditive C] [MonoidalPreadditive C] [Preadditive D] [MonoidalPreadditive D]
+  [F.Additive]
+
+/-- A lax monoidal additive functor induces a ring homomorphism on global sections. -/
+def Γ.mapFunctor : Γ R →+* Γ (F.obj R) where
+  __ := Γ.mapFunctorMonoidHom F
+  map_zero' := by ext; simp [Γ.mapFunctorMonoidHom]
+  map_add' s t := by ext; simp [Γ.mapFunctorMonoidHom]
+
+@[simp]
+lemma Γ.mapFunctor_hom (s : Γ R) :
+    (Γ.mapFunctor F s).hom = Functor.LaxMonoidal.ε F ≫ F.map s.hom :=
+  rfl
+
+end MapFunctor
 
 end MonObj
 
