@@ -25,9 +25,46 @@
   "def-weil-presheaf-modules-sheafification",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The module sheafification functor $\\#$ is left adjoint to the inclusion of sheaves by [def-weil-presheaf-modules-sheafification], and it is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]. Thus the inclusion of $\\mathrm{Mod}(\\mathcal C,\\mathcal O)$ into $\\mathrm{PMod}(\\mathcal C,\\mathcal O)$ is the right adjoint of an exact functor.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03CX (sheafification of modules on a ringed site)"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-right-adjoint-preserves-injectives] to the exact sheafification functor and its inclusion right adjoint. Since $I$ is injective in $\\mathrm{Mod}(\\mathcal C,\\mathcal O)$, the inclusion sends it to an injective object of $\\mathrm{PMod}(\\mathcal C,\\mathcal O)$, which is precisely the underlying presheaf of $I$.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FB (lemma-injective-module-injective-presheaf), proof via Homology Lemma Tag 015Z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FB (lemma-injective-module-injective-presheaf), proof via Homology Lemma Tag 015Z and Modules on Sites Section Tag 03CX"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +89,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 03FB argument into exactness of module sheafification and preservation of injectives by the inclusion right adjoint. The first fact is recorded as a new statement-only ringed-site node because the existing exact-sheafification node is only for modules over a constant ring; the second uses the existing generic Mathlib leaf lem-sp-right-adjoint-preserves-injectives. No statement or hypothesis was changed.",
+  "blueprint": "The two steps realize the blueprint ancestor lem-sc-ga-cohomology proof's second-paragraph claim that an injective module sheaf is injective as a presheaf: exact module sheafification, followed by the adjunction argument of Stacks 03FB/015Z.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-imp",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-imp (reviewer sub-agent of L); spot-checked: Source: Stacks sites-cohomology Lemma 03FB (lemma-injective-module-injective-presheaf, ringed site, injective module sheaf injective in PMod(O)), proof by Homology Lemma 015Z (adjoint-preserve-injectives) applied to inclusion and sheafification, assumptions via Modules on Sites Section 03CX, whose lemma-sheafification-exact gives exactness of PMod(O)->Mod(O^#) (O a sheaf so O^#=O). Item statement unchanged and agrees with 03FB hypothesis by hypothesis. Step 1: left adjointness from def-weil-presheaf-modules-sheafification (states # left adjoint to inclusion), exactness from new node lem-weil-pbc-ringed-site-module-sheafification-exact (statement read: ringed site, PMod abelian, Mod via def-weil-sheaf-of-modules-category, # preserves finite limits and colimits; true by 03CX lemma-sheafification-exact; no proof sketch, TeX, deps exist, three searches with verdicts). Step 2: lem-sp-right-adjoint-preserves-injectives (exact functor between abelian categories with right adjoint, right adjoint preserves injectives; Mathlib leaf, Preserves.lean:49) with Mod abelian from def-weil-sheaf-of-modules-category and injectivity from def-sp-injective-resolutions. Searched the DAG for an existing ringed-site module sheafification exactness node: only constant-ring (lem-weil-pbc-site-module-presheaf-sheafification-exact, lem-weil-pbc-site-r-module-presheaf-sheafification-exact), abelian (lem-weil-pbc-sheafification-exact) and scheme (lem-weil-pbc-module-presheaf-sheafification-exact) variants, so the new node is not a duplicate. Mathlib Sheafification.lean lines 157 and 190 verified (see lead note). Small case: one-object site with trivial coverings, inclusion is identity, statement trivial. Only off-unit citations are definitions and a Mathlib leaf; no tool_uses. Start Sat Oct 10 04:34:59 PM UTC 2026, end Sat Oct 10 04:35:41 PM UTC 2026."
+ },
+ "lead_note": "2026-10-10 L (R-imp): New node lem-weil-pbc-ringed-site-module-sheafification-exact is likely a direct Mathlib leaf: PresheafOfModules.sheafification (alpha = identity of R.obj) with PreservesFiniteLimits at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:190 and IsLeftAdjoint at :157 (under HasWeakSheafify J AddCommGrpCat and WEqualsLocallyBijective, as for def-weil-sheaf-of-modules-category); the worker's verdict 'ingredients only' understates this, and lem-weil-pbc-module-presheaf-sheafification-exact already leafs the scheme case on the same line."
 }
