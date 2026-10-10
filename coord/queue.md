@@ -1,6 +1,6 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+887 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (326)
 
@@ -17,10 +17,9 @@
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
 | `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
-| `lem-sc-noetherian-cohomology-vanishing-abelian-dim-one` | 2011 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
-| `lem-sc-noetherian-closed-points-finite` | 2012 | none |
+| `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
@@ -32,20 +31,21 @@
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
-| `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
-| `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-quasi-compact-local-on-target` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
-| `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
+| `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
 | `lem-pc-affine-finite-type-algebra` | 3012 | none |
 | `lem-pc-base-change-product` | 3012 | none |
+| `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-complete-linear-system-closed` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
+| `lem-pc-global-sections-separable` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-proper-descends-field` | 3012 | none |
+| `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-irreducible-product-over-field` | 3012 | none |
@@ -333,7 +333,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (560)
+## Stage 2: nodes to state (561)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -452,6 +452,7 @@
 | `lem-weil-pbc-chow-noetherian` | 1 | state |
 | `lem-weil-pbc-clopen-open-cover-section` | 1 | state |
 | `lem-weil-pbc-closed-immersion-from-composite` | 1 | state |
+| `lem-weil-pbc-closed-immersion-products` | 1 | state |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
@@ -898,7 +899,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 346 nodes that wait for stage 1, 1080 nodes that wait for a statement dependency.
+Not open yet: 345 nodes that wait for stage 1, 1085 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
