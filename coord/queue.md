@@ -1,8 +1,8 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (321)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction` | 2010 | none |
 | `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
-| `lem-sc-affine-complement-finite-on-integral-curve` | 2012 | none |
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-closed-immersion-pushforward-exact` | 2012 | none |
@@ -27,7 +26,6 @@
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
-| `lem-sc-zero-dim-noetherian-closed-finite` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-geometric-point-cohomology` | 3006 | none |
@@ -328,7 +326,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (566)
+## Stage 2: nodes to state (567)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -429,6 +427,7 @@
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
+| `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
@@ -899,7 +898,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 340 nodes that wait for stage 1, 1107 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 1108 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
