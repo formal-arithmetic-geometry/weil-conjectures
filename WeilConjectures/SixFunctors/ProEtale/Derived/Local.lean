@@ -68,12 +68,12 @@ lemma isZero_of_isZero_upperStar (hg : Presieve.ofArrows W g ∈ Scheme.proetale
     have h₂ : IsZero (((localizationRestriction A (g i) (hw i)).obj E).obj.obj
         (op (ProEt.mk (pullback.snd V.hom (g i))))) :=
       ((sheafToPresheaf _ A).map_isZero h₁).obj _
-    exact h₂.of_iso (E.obj.mapIso (baseChangeIsoOverMap (g i) V).op).symm
+    exact h₂.of_iso (E.obj.mapIso (baseChangeIsoOverMap (g i) V).op)
   rw [IsZero.iff_id_eq_zero]
   apply (sheafToPresheaf _ A).map_injective
   ext V
   have := ProEt.ofArrows_baseChange_mem_topology V.unop g hg
-  exact E.cond.hom_ext_ofArrows _ this fun i ↦ (hZ i V.unop).eq_of_tgt _ _
+  exact E.property.hom_ext_ofArrows _ this fun i ↦ (hZ i V.unop).eq_of_tgt _ _
 
 /-- **Isomorphisms of pro-étale sheaves are local.** A morphism of sheaves whose pullbacks along
 the members of a pro-étale covering family are isomorphisms is an isomorphism. -/
@@ -82,11 +82,11 @@ lemma isIso_of_isIso_upperStar_map (hg : Presieve.ofArrows W g ∈ Scheme.proeta
     (hφ : ∀ i, IsIso ((g i)^*[A].map φ)) : IsIso φ := by
   have : Mono φ := Preadditive.mono_of_isZero_kernel _ <|
     isZero_of_isZero_upperStar hg _ fun i ↦
-      (Preadditive.isZero_kernel_of_mono ((g i)^*[A].map φ)).of_iso
+      (isZero_kernel_of_mono ((g i)^*[A].map φ)).of_iso
         (PreservesKernel.iso (g i)^*[A] φ)
   have : Epi φ := Preadditive.epi_of_isZero_cokernel _ <|
     isZero_of_isZero_upperStar hg _ fun i ↦
-      (Preadditive.isZero_cokernel_of_epi ((g i)^*[A].map φ)).of_iso
+      (isZero_cokernel_of_epi ((g i)^*[A].map φ)).of_iso
         (PreservesCokernel.iso (g i)^*[A] φ)
   exact isIso_of_mono_of_epi φ
 
