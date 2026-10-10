@@ -1336,3 +1336,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of C1: def-sc-constant-sheaves merged from deliver/C1/def-sc-constant-sheaves (1 commit(s), 0 new node(s), spot-checked by L: L: definition checked (sheafification of the constant presheaf Z/n on C_et)); claim closed
 - 2026-10-10, delivery of F1: lem-weil-pbc-regular-sequence-koszul-regular merged from deliver/F1/lem-weil-pbc-regular-sequence-koszul-regular (1 commit(s), 0 new node(s), spot-checked by L: L: 062F by induction on r through the cone decomposition K(f_1..f_r) = A_n + e_r A_{n-1}, the cycle computation written out; 0 new); claim closed
 - 11:45 L: merged C1 def-sc-constant-sheaves (0 new) and F1 lem-weil-pbc-regular-sequence-koszul-regular (062F, 0 new: the Koszul route of 0665 needs no cone lemma after all).
+- 11:46 L: accepted lem-weil-pbc-tor-one-surjective-change-rings (00MN, 5 steps; new Mathlib leaf: base change of a free module is free).
