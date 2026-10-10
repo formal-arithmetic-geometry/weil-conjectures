@@ -1489,3 +1489,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:25 L: accepted lem-weil-pbc-fpqc-descend-quasi-compact: 5 steps (02KQ), new Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open
 - 13:25 L: accepted lem-weil-pbc-fpqc-descend-separated: 5 steps (02KU via 02KS and 01IQ), tool_uses lemma-nagata-diagonal-base-change
 - 2026-10-10, delivery of K1: lem-weil-pbc-simplicial-hom-object-pushout merged from deliver/K1/lem-weil-pbc-simplicial-hom-object-pushout (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 017N read, 4 steps checked, small cases tested); claim closed
+- 13:25 L: merged deliver/K1/lem-weil-pbc-simplicial-hom-object-pushout (reviewer PASS, first push)
