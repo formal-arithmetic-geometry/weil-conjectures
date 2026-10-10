@@ -2,7 +2,7 @@
 
 896 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (650)
+## Stage 1: nodes to split (649)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-regular-local-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
 | `lem-weil-pbc-regular-ring-normal` | 1012 | none |
@@ -66,6 +65,7 @@
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `def-weil-pbc-cohen-ring` | 1013 | none |
+| `def-weil-pbc-depth` | 1013 | none |
 | `def-weil-pbc-essentially-constant-system` | 1013 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
@@ -144,7 +144,6 @@
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
-| `def-weil-pbc-depth` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -657,7 +656,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (246)
+## Stage 2: nodes to state (247)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -841,6 +840,7 @@
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
+| `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
@@ -908,7 +908,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 662 nodes that wait for stage 1, 537 nodes that wait for a statement dependency.
+Not open yet: 661 nodes that wait for stage 1, 537 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
