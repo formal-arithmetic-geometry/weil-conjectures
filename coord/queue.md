@@ -1,6 +1,6 @@
 # Work queue
 
-900 items; claim with `tools/claim.py next <group> [--stage N]`.
+901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (161)
 
@@ -15,12 +15,13 @@
 | `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-ses` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
-| `lem-pc-ringed-space-pointwise-truncation-limit` | 3015 | none |
 | `lem-pc-tower-abelian` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-limit-left-exact` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
+| `lem-pc-ringed-space-derived-limit-stalk-injective` | 3016 | none |
+| `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
 | `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
@@ -38,7 +39,6 @@
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
-| `lem-pc-affine-containment-ideal` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-hilbert-affine-denominator-module` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
@@ -60,7 +60,6 @@
 | `lem-pqf-finite-spectrum-maximal-primes` | 6014 | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
-| `lem-pur-sheaf-hom-is-sheaf` | - | none |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | - | none |
 | `thm-pqf-immersion-descent` | - | none |
 | `def-pod-lisse-l-adic-sheaves` | - | none |
@@ -72,6 +71,7 @@
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-pod-profinite-stable-lattice` | - | none |
+| `lem-pur-sheaf-hom-cover-gluing` | - | none |
 | `lem-sc-affine-cohomological-dimension` | - | rests_on_sorry |
 | `lem-sc-affine-unit-quotient` | - | rests_on_sorry |
 | `lem-sc-artin-schreier-k` | - | none |
@@ -168,7 +168,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (739)
+## Stage 2: nodes to state (740)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -253,6 +253,7 @@
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
+| `lem-pc-affine-containment-ideal` | 1 | state |
 | `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
@@ -912,7 +913,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1497 nodes that wait for a statement dependency, 201 nodes that wait for stage 1.
+Not open yet: 1499 nodes that wait for a statement dependency, 201 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
