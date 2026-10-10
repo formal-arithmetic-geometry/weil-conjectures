@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-lem-lying-over",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lying over for an injective integral extension",
- "statement": "Let $A\\hookrightarrow B$ be an injective integral map of rings. Then\nevery prime $\\mathfrak p\\subset A$ is the contraction of a prime of\n$B$.\n(*Classical: this is the lying-over theorem; Stacks Project,\nAlgebra, Lemma 10.36.22, Tag\n[00GU](https://stacks.math.columbia.edu/tag/00GU), is the going-up\ncompanion of it, and its proof invokes lying over as Algebra Lemma\n10.36.17.*)",
+ "statement": "Let $A\\hookrightarrow B$ be an injective integral map of rings. Then every prime $\\mathfrak p\\subset A$ is the contraction of a prime of $B$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-lying-over.md",
   "place": "node pqf-lem-lying-over, order 531",
@@ -19,22 +19,57 @@
   ]
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "Put $S=A\\setminus\\mathfrak p$. Localization gives an injective integral\nmap $A_{\\mathfrak p}\\hookrightarrow S^{-1}B$; the target is nonzero\nbecause the map is injective. Choose a maximal ideal $\\mathfrak m$ of\n$S^{-1}B$. Its contraction is maximal in $A_{\\mathfrak p}$: after\nquotienting, $S^{-1}B/\\mathfrak m$ is a field integral over the\ncontracted domain, and a domain over which a field is integral is\nitself a field (an integral equation for $a^{-1}$ expresses $a^{-1}$ in\nthe domain for each nonzero $a$). The only maximal ideal of\n$A_{\\mathfrak p}$ is $\\mathfrak pA_{\\mathfrak p}$. Pulling\n$\\mathfrak m$ back to $B$ therefore gives a prime whose contraction is\n$\\mathfrak p$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-lying-over.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "every prime ideal of the source ring of an injective integral ring homomorphism is the contraction of a prime ideal of the target",
+   "results": "RingHom.IsIntegral.comap_surjective (Mathlib/RingTheory/Spectrum/Prime/Topology); Algebra.IsIntegral.comap_surjective; Ideal.exists_ideal_over_prime_of_isIntegral",
+   "date": "2026-10-11",
+   "verdict": "match: RingHom.IsIntegral.comap_surjective states the exact result"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsIntegral.comap_surjective, Algebra.IsIntegral.comap_surjective, Ideal.exists_ideal_over_prime_of_isIntegral",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegral\\.comap_surjective|exists_ideal_over_prime_of_isIntegral (Mathlib/RingTheory/Spectrum/Prime)",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1217, 1222, 1226, 1230",
+   "date": "2026-10-11",
+   "verdict": "match: RingHom.IsIntegral.comap_surjective at line 1226"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lying over theorem for injective integral ring maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "comap_surjective in Mathlib/RingTheory/Spectrum/Prime/Topology.lean (slopmaster2 mathlib)",
+   "results": "RingHom.IsIntegral.comap_surjective at line 1226; Algebra.IsIntegral.comap_surjective at 1217",
+   "date": "2026-10-10",
+   "verdict": "match: RingHom.IsIntegral.comap_surjective, read by reviewer R-plo2001"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.IsIntegral.comap_surjective",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 1226,
+  "how": "exact: (hf : f.IsIntegral) (hinj : Function.Injective f) : Function.Surjective (PrimeSpectrum.comap f), i.e. every prime of A is the contraction of a prime of B"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +89,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-lying-over",
+  "worker": "stage1",
+  "summary": "The item is exactly Mathlib's RingHom.IsIntegral.comap_surjective: an integral injective map of commutative rings induces a surjection on prime spectra, which is precisely that every prime contracts from a prime of the target. No new nodes are needed.",
+  "blueprint": "The imported blueprint proof is subsumed by the exact Mathlib declaration.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-plo2001",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plo2001 (reviewer sub-agent of L); spot-checked: Read RingHom.IsIntegral.comap_surjective at Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1226 (integral + injective => comap surjective): exact match for the item; no sorry-free slopmaster2 declaration (sorryfree.py MISSING). FIX more, RETURN less: (1) source external Tag 00GU (going-up, algebra-lemma-integral-going-up) corrected to Tag 00GQ (algebra-lemma-integral-overring-surjective, the lying-over lemma) per stacks tags file; the Second reading by M1 claimed this correction but the head file still carried 00GU; (2) mathlib_match split into file + line 1226 with explicit how; reviewer grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
