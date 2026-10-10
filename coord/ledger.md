@@ -2766,3 +2766,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:04 L: merged deliver/F1/def-nagata-morphism-equality-stage (reviewer FIX; after a return; new nodes: 0)
 - 22:05 L: returned deliver/J1/lem-sp-cartan-eilenberg-comparison-homotopy (reviewer RETURN: (reviewer R-cec2740, head 51fd5e1c0) 1. E/B (ill-typed new statement): lem-sp-cartan-eilenberg-double-complex-homotopy t)
 - 22:05 L: merged deliver/K1/def-nagata-relative-gluing-datum-descent (reviewer FIX; after a return; new nodes: 0)
+- 22:05 L: returned deliver/J1/def-nagata-qc-open-descent (reviewer RETURN: Reviewer R-qod2740. The head ad13dbd5c is the imported statement unchanged apart from status, and it fails all three poi)
