@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-simplex-face-face-identity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement': the matching scheme $M_n(U)$ of def-weil-pbc-finite-split-hypercover is the limit over all proper faces, while the matching object of SR(X) is that of the codimension-1/2 diagram; this node identifies the two (Stacks 0186); the relation $\\delta^{n+1}_{i,j}=\\delta^{n+1}_j\\circ\\delta^n_i=\\delta^{n+1}_i\\circ\\delta^n_{j-1}$ recalled before Stacks 0186 and used in its proof for both directions of the identification",
+   "via": [
+    "lem-weil-pbc-matching-object-proper-faces",
+    "lem-weil-pbc-sr-matching-object-one-member",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "First cosimplicial identity for the face maps of the simplex category",
+ "statement": "Let $\\Delta$ be the category of the ordered sets $[m]=\\{0<1<\\dots<m\\}$ and order-preserving maps [def-weil-pbc-simplicial-set], and for $n\\geq1$ and $0\\leq i\\leq n$ let $\\delta^n_i:[n-1]\\to[n]$ be the increasing injection omitting $i$. Then for every $n\\geq1$ and all $0\\leq i<j\\leq n+1$ one has $\\delta^{n+1}_j\\circ\\delta^n_i=\\delta^{n+1}_i\\circ\\delta^n_{j-1}:[n-1]\\to[n+1]$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0167 (lemma-relations-face-degeneracy), item (1); recalled before Lemma 0186 (lemma-formula-limit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simplicial identity composition of two face maps δ i ≫ δ j.succ = δ j ≫ δ i.castSucc",
+   "results": "SimplexCategory.δ_comp_δ (Mathlib.AlgebraicTopology.SimplexCategory.Basic), SimplicialObject.δ_comp_δ, SSet.δ_comp_δ_apply, SimplexCategoryGenRel.δ_comp_δ, SimplexCategory.δ_comp_δ_self'",
+   "date": "2026-10-10",
+   "verdict": "match: SimplexCategory.δ_comp_δ"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.δ, CategoryTheory.CategoryStruct.comp, Fin.succ",
+   "results": "SimplexCategory.δ_comp_σ_succ, δ_comp_σ_succ', δ_zero_mkOfSucc, mkOfSucc_δ_eq (SimplexCategory.Basic); the pattern query 'δ _ ≫ δ _ = δ _ ≫ δ _' was rejected by the parser",
+   "date": "2026-10-10",
+   "verdict": "no further candidate; leansearch and grep give δ_comp_δ"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem δ_comp_δ' Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+   "results": "δ_comp_δ (line 240), δ_comp_δ' (249), δ_comp_δ'' (257), δ_comp_δ_self (later)",
+   "date": "2026-10-10",
+   "verdict": "match: δ_comp_δ"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SimplexCategory.δ_comp_δ",
+  "file": "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+  "lines": [
+   240
+  ],
+  "how": "specializes in one line: δ_comp_δ (line 240) says δ i ≫ δ j.succ = δ j ≫ δ i.castSucc for i ≤ j in Fin (n+2), i.e. in composition order δ_{j+1}∘δ_i = δ_i∘δ_j for i ≤ j; putting j' = j+1 gives δ^{n+1}_{j'}∘δ^n_i = δ^{n+1}_i∘δ^n_{j'-1} for i < j' (castSucc i is i in the larger Fin). SimplexCategory.δ i (line 230) is the injection Fin.succAbove i omitting i"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-matching-object-proper-faces",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

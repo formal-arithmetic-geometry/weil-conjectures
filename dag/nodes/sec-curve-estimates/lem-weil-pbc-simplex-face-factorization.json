@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-simplex-face-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement': the matching scheme $M_n(U)$ of def-weil-pbc-finite-split-hypercover is the limit over all proper faces, while the matching object of SR(X) is that of the codimension-1/2 diagram; this node identifies the two (Stacks 0186); in the identification (Stacks 0186) every proper face $\\delta$ omitting $i$ is written $\\delta=\\delta_i\\circ\\psi$ with $\\psi$ unique and injective (proof of 0186: 'we can write $\\alpha=\\delta^{n+1}_i\\circ\\psi$ ... given $i$ there is a unique $\\psi$ which works')",
+   "via": [
+    "lem-weil-pbc-matching-object-proper-faces",
+    "lem-weil-pbc-sr-matching-object-one-member",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A map of the simplex category missing i factors uniquely through the face map omitting i",
+ "statement": "Let $\\Delta$ be the category of the ordered sets $[m]=\\{0<1<\\dots<m\\}$ and order-preserving maps [def-weil-pbc-simplicial-set], and for $n\\geq1$ and $0\\leq i\\leq n$ let $\\delta^n_i:[n-1]\\to[n]$ be the increasing injection omitting $i$, i.e. $\\delta^n_i(x)=x$ for $x<i$ and $\\delta^n_i(x)=x+1$ for $x\\geq i$. Let $k\\geq0$, $n\\geq1$, let $\\alpha:[k]\\to[n]$ be order-preserving and let $0\\leq i\\leq n$ with $i\\notin\\alpha([k])$. Then there is a unique order-preserving map $\\psi:[k]\\to[n-1]$ with $\\alpha=\\delta^n_i\\circ\\psi$; if $\\alpha$ is injective, then so is $\\psi$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0166 (lemma-face-degeneracy), proof: 'If $j\\notin\\Im(\\varphi)$, then we can write $\\varphi$ as $\\delta^m_j\\circ\\psi$'; proof of Lemma 0186 (lemma-formula-limit): 'given $i$ there is a unique $\\psi$ which works'; $\\delta^n_j$ is Definition 0165 (definition-face-degeneracy)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "order preserving map to [n+1] missing i factors through the face map δ i",
+   "results": "SimplexCategory.Truncated.δ, SimplexCategory.δ (Mathlib.AlgebraicTopology.SimplexCategory.Basic), SimplicialObject.δ_def, CosimplicialObject.δ, FreeSimplexQuiver.σ",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; SimplexCategory.δ is the face map (Fin.succAbove i)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of the simplex category whose image misses i factors as a map followed by the i-th coface map",
+   "results": "SimplexCategory.factor_δ_spec, SimplexCategory.factor_δ (Mathlib.AlgebraicTopology.SimplexCategory.Basic), SimplexCategoryGenRel.exists_P_σ_P_δ_factorization",
+   "date": "2026-10-10",
+   "verdict": "match (existence): factor_δ_spec"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'eq_comp_δ_of_not_surjective\\|factor_δ\\|Mono (δ i)' Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; grep -n 'theorem Injective.of_comp' Mathlib/Logic/Function/Basic.lean",
+   "results": "SimplexCategory.eq_comp_δ_of_not_surjective' (Basic.lean 783), eq_comp_δ_of_not_surjective (793), factor_δ (412), factor_δ_spec (415), instance Mono (δ i) (692, via Fin.succAbove_right_injective); Function.Injective.of_comp (Logic/Function/Basic.lean 203)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SimplexCategory.eq_comp_δ_of_not_surjective'; the anonymous instance Mono (SimplexCategory.δ i); Function.Injective.of_comp",
+  "file": "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/Logic/Function/Basic.lean",
+  "lines": [
+   783,
+   692,
+   203
+  ],
+  "how": "one declaration per clause: existence = SimplexCategory.eq_comp_δ_of_not_surjective' (SimplexCategory/Basic.lean line 783: θ : Δ ⟶ ⦋n+1⦌, i with θ x ≠ i for all x gives θ' with θ = θ' ≫ δ i; SimplexCategory.δ i is mkHom of Fin.succAboveOrderEmb i, line 230, the injection omitting i); uniqueness = instance Mono (δ i) (line 692) cancels δ i on the right of ≫; injectivity of ψ = Function.Injective.of_comp (Logic/Function/Basic.lean line 203) applied to the injective α = δ_i ∘ ψ. The objects ⦋n⦌ of SimplexCategory are Stacks' [n] (def-weil-pbc-simplicial-set)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-matching-object-proper-faces",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

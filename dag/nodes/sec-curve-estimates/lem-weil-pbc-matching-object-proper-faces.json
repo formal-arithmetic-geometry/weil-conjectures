@@ -25,9 +25,105 @@
   "def-weil-pbc-simplicial-object",
   "lem-weil-pbc-simplicial-matching-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Objects of $\\mathcal I_n$ factor through a face. Let $\\delta:[k]\\to[n]$ be an object of $\\mathcal I_n$. Since $k<n$ and $\\delta$ is injective, $\\delta([k])$ has $k+1<n+1$ elements, so some $i\\in[n]$ is not in the image of $\\delta$. For every such $i$, [lem-weil-pbc-simplex-face-factorization] gives a unique order-preserving $\\psi:[k]\\to[n-1]$ with $\\delta=\\delta_i\\circ\\psi$, and $\\psi$ is injective. Conversely a factorization $\\delta=\\delta_i\\circ\\psi$ forces $i\\notin\\delta([k])$. Since $\\delta_i:[n-1]\\to[n]$ is injective with $n-1<n$, it is an object of $\\mathcal I_n$, and $\\psi$ is a morphism $\\delta\\to\\delta_i$ of $\\mathcal I_n$. So the factorizations $\\delta=\\delta_i\\circ\\varepsilon$ in (2) are exactly the pairs $(i,\\psi)$ with $i\\notin\\delta([k])$ and $\\psi$ the unique factor, and there is at least one. (This is the restriction of 'Since $k\\leq n$ the map $\\alpha$ is not surjective. Hence we can write $\\alpha=\\delta^{n+1}_i\\circ\\psi$' to injective $\\alpha$, the factor staying injective.)",
+   "uses": [
+    "lem-weil-pbc-simplex-face-factorization",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "The map of (1) lands in the tuples. Let $(x_\\delta)_\\delta$ be a family as in (1), on an object $W$, and put $x_i=x_{\\delta_i}:W\\to K_{n-1}$. For $n=1$ there is no condition on $(x_0,x_1)$ ([lem-weil-pbc-simplicial-matching-object] (2)). For $n\\geq2$ and $0\\leq i<j\\leq n$, [lem-weil-pbc-simplex-face-face-identity] (in degree $n$) gives $\\delta_i\\circ\\delta_{j-1}=\\delta_j\\circ\\delta_i=:\\delta_{i,j}:[n-2]\\to[n]$, an injective map, hence an object of $\\mathcal I_n$, and $\\delta_{j-1}:\\delta_{i,j}\\to\\delta_i$, $\\delta_i:\\delta_{i,j}\\to\\delta_j$ are morphisms of $\\mathcal I_n$ (here $\\delta_{j-1},\\delta_i:[n-2]\\to[n-1]$). With $d_m=K(\\delta_m)$ [def-weil-pbc-simplicial-object] the compatibility of the family gives $d_{j-1}\\circ x_i=K(\\delta_{j-1})\\circ x_{\\delta_i}=x_{\\delta_i\\circ\\delta_{j-1}}=x_{\\delta_j\\circ\\delta_i}=K(\\delta_i)\\circ x_{\\delta_j}=d_i\\circ x_j$, as in the displayed computation of the proof of 0186.",
+   "uses": [
+    "lem-weil-pbc-simplex-face-face-identity",
+    "def-weil-pbc-simplicial-object",
+    "lem-weil-pbc-simplicial-matching-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "The inverse map is well defined. Let $(x_0,\\dots,x_n)$ be a tuple with $d_{j-1}\\circ x_i=d_i\\circ x_j$ for $i<j$. For an object $\\delta$ of $\\mathcal I_n$ choose a factorization $\\delta=\\delta_i\\circ\\psi$ (Step 1) and put $x_\\delta=K(\\psi)\\circ x_i$. Independence of the choice: given $i$ the factor $\\psi$ is unique (Step 1). Let $\\delta=\\delta_i\\circ\\psi=\\delta_j\\circ\\phi$ be two factorizations with $i\\neq j$, say $i<j$; then $i,j\\notin\\delta([k])$, so $\\delta([k])$ has at most $n-1$ elements and $n\\geq2$. Since $j-1\\geq i$, $\\delta_i(j-1)=j$; if $\\psi(a)=j-1$ then $\\delta(a)=j$, which is excluded, so $j-1\\notin\\psi([k])$ and [lem-weil-pbc-simplex-face-factorization] (for $[n-1]$) gives $\\xi:[k]\\to[n-2]$ with $\\psi=\\delta_{j-1}\\circ\\xi$. Then $\\delta=\\delta_i\\circ\\delta_{j-1}\\circ\\xi=\\delta_j\\circ(\\delta_i\\circ\\xi)$ by [lem-weil-pbc-simplex-face-face-identity], and the uniqueness of the factor through $\\delta_j$ ([lem-weil-pbc-simplex-face-factorization]) gives $\\phi=\\delta_i\\circ\\xi$. (This is the factorization $\\alpha=\\delta^{n+1}_{i,j}\\circ\\xi$ of the source, with $\\xi$ injective because $\\psi$ is.) Since $K$ is a contravariant functor [def-weil-pbc-simplicial-object], $K(\\psi)\\circ x_i=K(\\xi)\\circ K(\\delta_{j-1})\\circ x_i=K(\\xi)\\circ d_{j-1}\\circ x_i=K(\\xi)\\circ d_i\\circ x_j=K(\\xi)\\circ K(\\delta_i)\\circ x_j=K(\\phi)\\circ x_j$.",
+   "uses": [
+    "lem-weil-pbc-simplex-face-factorization",
+    "lem-weil-pbc-simplex-face-face-identity",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "The family $(x_\\delta)$ of Step 3 is compatible. Let $\\varepsilon:\\delta'\\to\\delta$ be a morphism of $\\mathcal I_n$, so $\\delta'=\\delta\\circ\\varepsilon$. Choose $i\\notin\\delta([k])$ and $\\delta=\\delta_i\\circ\\phi$ (Step 1). Then $i\\notin\\delta'([k'])$ and $\\delta'=\\delta_i\\circ(\\phi\\circ\\varepsilon)$ is a factorization of $\\delta'$, so by Step 3 (independence) $x_{\\delta'}=K(\\phi\\circ\\varepsilon)\\circ x_i=K(\\varepsilon)\\circ K(\\phi)\\circ x_i=K(\\varepsilon)\\circ x_\\delta$, using that $K$ is a contravariant functor [def-weil-pbc-simplicial-object]. (Last paragraph of the proof of 0186.)",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "Proof of (1): the two maps are mutually inverse and natural (the part the source leaves to the reader). Starting from a compatible family $(x_\\delta)$ with $x_i=x_{\\delta_i}$, the family built in Step 3 has $\\delta$-component $K(\\psi)\\circ x_{\\delta_i}$ for a factorization $\\delta=\\delta_i\\circ\\psi$; since $\\psi:\\delta\\to\\delta_i$ is a morphism of $\\mathcal I_n$ (Step 1), compatibility gives $K(\\psi)\\circ x_{\\delta_i}=x_{\\delta_i\\circ\\psi}=x_\\delta$. Starting from a tuple $(x_0,\\dots,x_n)$, the $\\delta_i$-component of the family of Step 3 may be computed with the factorization $\\delta_i=\\delta_i\\circ\\mathrm{id}_{[n-1]}$ (Step 3, independence), giving $K(\\mathrm{id})\\circ x_i=x_i$. Both maps commute with precomposition by any $g:W'\\to W$, since they are given by postcomposition with fixed morphisms $K(\\psi)$ or by selecting components; this is the naturality in $W$. Hence (1).",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "Proof of (2). By [lem-weil-pbc-simplicial-matching-object] (2) applied to $\\mathrm{id}_{M_n(K)}$, the tuple $(\\mathrm{pr}_0,\\dots,\\mathrm{pr}_n)$ satisfies $d_{j-1}\\circ\\mathrm{pr}_i=d_i\\circ\\mathrm{pr}_j$ for $i<j$. Applying Steps 3 and 4 with $W=M_n(K)$ and $x_i=\\mathrm{pr}_i$: $\\pi_\\delta=K(\\varepsilon)\\circ\\mathrm{pr}_i$ does not depend on the factorization $\\delta=\\delta_i\\circ\\varepsilon$, and $(\\pi_\\delta)_\\delta$ is compatible, i.e. a cone on $P_n(K)$ with vertex $M_n(K)$. For an object $W$, the map $g\\mapsto(\\pi_\\delta\\circ g)_\\delta$ from morphisms $W\\to M_n(K)$ to cones on $P_n(K)$ with vertex $W$ (the compatible families of (1)) is the composite of the bijection $g\\mapsto(\\mathrm{pr}_i\\circ g)_i$ of [lem-weil-pbc-simplicial-matching-object] (2) and the inverse bijection of (1) (Step 3 sends $(\\mathrm{pr}_i\\circ g)_i$ to $(K(\\varepsilon)\\circ\\mathrm{pr}_i\\circ g)_\\delta=(\\pi_\\delta\\circ g)_\\delta$). So every cone on $P_n(K)$ factors through $(M_n(K),(\\pi_\\delta))$ by exactly one morphism, which is the definition of a limit cone of the finite diagram $P_n(K)$ [def-galois-finite-limits-colimits] ($\\mathcal I_n$ is finite: finitely many injective maps $[k]\\to[n]$, $k<n$, and finitely many maps between them). This is the statement 'the limit represents the functor of systems $(f_\\alpha)$' of the proof of 0186, with the functor of the lemma represented by $M_n(K)$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-matching-object",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  },
+  {
+   "text": "Proof of (3). For an object $\\delta$ and a factorization $\\delta=\\delta_i\\circ\\varepsilon$, [lem-weil-pbc-simplicial-matching-object] (3) gives $\\mathrm{pr}_i\\circ\\mu_n=d_i=K(\\delta_i)$, so $\\pi_\\delta\\circ\\mu_n=K(\\varepsilon)\\circ K(\\delta_i)=K(\\delta_i\\circ\\varepsilon)=K(\\delta)$ ($K$ contravariant, [def-weil-pbc-simplicial-object]). The family $(K(\\delta))_\\delta$ is a cone on $P_n(K)$ with vertex $K_n$ (for $\\varepsilon:\\delta'\\to\\delta$, $K(\\varepsilon)\\circ K(\\delta)=K(\\delta\\circ\\varepsilon)=K(\\delta')$), so by the limit property of Step 6 there is exactly one morphism $K_n\\to M_n(K)$ with $\\delta$-components $K(\\delta)$, and $\\mu_n$ is it.",
+   "uses": [
+    "lem-weil-pbc-simplicial-matching-object",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplex-face-factorization",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplicial-matching-object",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0186 (lemma-formula-limit) and its proof, restricted to injective maps $[k]\\to[n]$, $k<n$; the relations of Lemma 0167 (1) and the factorization of the proof of Lemma 0166; the verification that the two constructions are mutually inverse and natural, left to the reader in the source, is written out (Step 5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +148,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +164,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-matching-object-proper-faces",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 0186 restricted to injective faces: Step 1 factors every proper face as delta_i o psi with psi unique and injective (new Mathlib leaf lem-weil-pbc-simplex-face-factorization, Stacks 0166 proof / 0186 proof); Step 2 the forward map lands in the tuples via the identity delta_j delta_i = delta_i delta_{j-1} (new Mathlib leaf lem-weil-pbc-simplex-face-face-identity, Stacks 0167(1)); Step 3 independence of the factorization via the double factorization through delta_{i,j}, derived from the factorization leaf applied twice plus the identity (instead of a separate 'omitting i and j' lemma); Step 4 compatibility; Step 5 the mutually-inverse/natural check the source leaves to the reader; Step 6 (2) by composing the W-point bijection of lem-weil-pbc-simplicial-matching-object (2) with (1); Step 7 (3) from lem-weil-pbc-simplicial-matching-object (3). Statement unchanged. No Lean on slopmaster2 (grep by id and key words: none). No DAG node for the definition of a limit cone exists; Step 6 uses it as the definition behind def-galois-finite-limits-colimits.",
+  "blueprint": "The steps realize, in the blueprint node lem-weil-pbc-hypercover-refinement, proof fourth paragraph ('Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries'): Steps 1-5 show that compatible boundary data on all proper faces is the same as a compatible tuple of codimension-1 faces, Steps 6-7 that the matching object/matching map of the faces equals the one of all proper faces."
+ },
+ "reviewed": "2026-10-10 L: 7 steps along Stacks 0186 restricted to injective maps checked (factorization through a face, forward map into the tuples by the face-face identity, inverse map independent of the factorization, compatibility, mutual inverse and naturality written out, parts (2) and (3) from lem-weil-pbc-simplicial-matching-object). Two new Mathlib leaves accepted: lem-weil-pbc-simplex-face-factorization (eq_comp_delta_of_not_surjective' 783, Mono (delta i) 692, Injective.of_comp 203) and lem-weil-pbc-simplex-face-face-identity (delta_comp_delta 240), lines verified. Worker notes: no DAG node defines limit/cone (def-galois-finite-limits-colimits only names them); lem-weil-pbc-simplicial-matching-object (3) can cite the face-face identity at its split."
 }
