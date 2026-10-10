@@ -21,11 +21,50 @@
   "place": "Tag 07KW, Lemma 15.88.1 setup for Ab(N)"
  },
  "stmt_deps": [
-  "lem-pc-tower-abelian"
+  "lem-pc-tower-abelian",
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
+  "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a tower $A=(A_n,f_n)$, [lem-pc-tower-injective-embedding] gives a monomorphism $A\\to I$ in the abelian tower category [lem-pc-tower-abelian] such that each $I_n$ is an injective abelian group and each transition map $p_n:I_{n+1}\\to I_n$ is a split surjection.",
+   "uses": [
+    "lem-pc-tower-injective-embedding",
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  },
+  {
+   "text": "Such a tower $I$ is an injective object [def-sp-injective-resolutions] of the tower category. Let $A\\to B$ be a monomorphism of towers, with transition maps $f_n$ of $A$ and $g_n$ of $B$, and let $\\varphi:A\\to I$ be a morphism. Since kernels in the tower category [lem-pc-tower-abelian] are computed levelwise, each $A_n\\to B_n$ is injective. Extend $\\varphi_1$ to $\\psi_1:B_1\\to I_1$ by injectivity of $I_1$. If $\\psi_n:B_n\\to I_n$ extends $\\varphi_n$ and is compatible with the transitions up to level $n$, let $s_n$ be a section of $p_n$. On $A_{n+1}$ the map $\\varphi_{n+1}-s_n\\psi_ng_n=\\varphi_{n+1}-s_n\\varphi_nf_n$ satisfies $p_n(\\varphi_{n+1}-s_n\\varphi_nf_n)=\\varphi_nf_n-\\varphi_nf_n=0$, so it lands in $\\ker(p_n)$, which is injective as a direct summand of the injective group $I_{n+1}$; extend it to $\\chi:B_{n+1}\\to\\ker(p_n)$. Then $\\psi_{n+1}=\\chi+s_n\\psi_ng_n$ extends $\\varphi_{n+1}$ and satisfies $p_n\\psi_{n+1}=\\psi_ng_n$. The $\\psi_n$ form a morphism $B\\to I$ extending $\\varphi$, so $I$ is injective. Thus every tower embeds in an injective tower, which is [def-sp-enough-injectives].",
+   "uses": [
+    "lem-pc-tower-injective-embedding",
+    "lem-pc-tower-abelian",
+    "def-sp-injective-resolutions",
+    "def-sp-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tower-injective-embedding",
+  "lem-pc-tower-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +96,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-limit-roos-abelian-groups",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tower-enough-injectives",
+  "worker": "stage1",
+  "summary": "Proves enough injectives using the Tag 07KW construction of an embedding into a tower with levelwise injective groups and split-surjective transitions, followed by the compatible lifting argument.",
+  "blueprint": "Realizes the first-step clause of blueprint ancestor lem-sc-finite-duality, via lem-pc-derived-limit-roos-abelian-groups.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tei2640",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tei2640 (reviewer sub-agent of L); spot-checked: Mathlib: no EnoughInjectives/IsGrothendieckAbelian instance for functor categories (grep CategoryTheory/Abelian, Preadditive/Injective, Algebra/Category/Grp: only AddCommGrpCat.enoughInjectives and IsGrothendieckAbelian.enoughInjectives), so not a Mathlib leaf. Source: more-algebra.tex line 23045 footnote states exactly the new node (levelwise injective, split surjective transitions; every system embeds) - source place correct. Step 2 lifting argument verified (difference lies in ker p_n, summand of injective). New node lem-pc-tower-injective-embedding is a real lemma (needs Ab enough injectives in its own later split), not a duplicate of the 07KW nodes; item only uses the sufficiency direction, so the converse needed by lem-pc-tower-surjective-lim-acyclic is not assumed here. FIX more, RETURN less: B4 plain-text arrows rewritten in TeX in both steps; step 2 now names that monomorphisms of towers are levelwise injective (kernels levelwise, lem-pc-tower-abelian) and writes the restriction s_n psi_n g_n = s_n phi_n f_n explicitly; step 1 redundant sentence removed.; 1 file(s) fixed by the reviewer"
  }
 }
