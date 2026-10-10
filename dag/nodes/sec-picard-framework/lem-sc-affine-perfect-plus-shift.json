@@ -23,9 +23,51 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-affine-perfect-plus-locally-free], choose an integer r, a finite locally free module \\mathcal F on U, and a perfect object E of D(\\mathcal O_X) whose restriction is isomorphic to \\mathcal F[-r]\\oplus F.",
+   "uses": [
+    "lem-sc-affine-perfect-plus-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EI proof, first paragraph, invoking Tag 08ED"
+   }
+  },
+  {
+   "text": "The perfect object E lies in D_QCoh(\\mathcal O_X) [def-pc-derived-category]: locally it is isomorphic to a strictly perfect complex [def-pc-perfect-complex], a bounded complex of finite locally free modules, whose cohomology sheaves are kernels modulo images of maps of quasi-coherent modules, hence quasi-coherent, and quasi-coherence is local. So [lem-sc-affine-perfect-map-lift] applies with A=E and E'=E to the endomorphism of E|_U that is the identity on the summand \\mathcal F[-r] and zero on the summand F (defined through the chosen isomorphism of Step 1). It gives a perfect E_1 and maps E\\xleftarrow{\\beta}E_1\\xrightarrow{\\gamma}E with \\beta an isomorphism on U and \\gamma|_U\\circ(\\beta|_U)^{-1} equal to this endomorphism.",
+   "uses": [
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EI proof, second paragraph, invoking Tag 08EH"
+   }
+  },
+  {
+   "text": "Let C=\\operatorname{Cone}(\\gamma), so E_1\\to E\\to C\\to E_1[1] is a distinguished triangle; since E_1 and E are perfect, C is perfect [lem-pc-perfect-two-out-of-three]. Restriction to U is a triangulated functor, so C|_U\\cong\\operatorname{Cone}(\\gamma|_U). On U, identify E_1 with E using \\beta; then \\gamma|_U becomes the projection \\mathrm{id}\\oplus 0 on \\mathcal F[-r]\\oplus F, whose cone is \\operatorname{Cone}(\\mathrm{id}_{\\mathcal F[-r]})\\oplus\\operatorname{Cone}(0:F\\to F)\\cong 0\\oplus(F\\oplus F[1]). Thus C|_U\\simeq F\\oplus F[1].",
+   "uses": [
+    "lem-pc-perfect-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EI proof, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-plus-locally-free",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-pc-perfect-two-out-of-three"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EI (Lemma 36.13.8)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +99,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-support-extension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-plus-shift",
+  "worker": "stage1",
+  "summary": "Split Tag 08EI into the finite locally free summand extension (08ED), the affine map lifting lemma (08EH), and the cone cancellation argument. No existing DAG or Lean declaration states either auxiliary result.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: first extend a perfect complex after adjoining a shifted locally free summand, then lift the projection and take its cone."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-aps2758",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aps2758 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 08EI; Step 1 vs new node (08ED statement, r sign immaterial); Step 2 hypotheses of lem-sc-affine-perfect-map-lift; Step 3 cone computation. FIX more, RETURN less: (1) C1 Step 3: perfectness of Cone(gamma) was marked elementary; now cites lem-pc-perfect-two-out-of-three (added to uses/proof_deps, elementary false). (2) C4 Step 2: map-lift needs E' in D_QCoh(O_X); added the elementary reason that a perfect object has quasi-coherent cohomology (locally strictly perfect). Also spelled out C|_U = Cone(gamma|_U) = Cone(id)+Cone(0). New node lem-sc-affine-perfect-plus-locally-free: not a duplicate, not Mathlib, not elementary.; 1 file(s) fixed by the reviewer"
+ }
 }
