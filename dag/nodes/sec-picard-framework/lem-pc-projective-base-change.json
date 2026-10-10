@@ -20,12 +20,48 @@
   "def-pc-scheme",
   "def-pc-projective-morphism",
   "def-pc-fibre-product",
-  "def-pc-base-change",
-  "def-weil-scheme-over-base"
+  "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of projective morphism [def-pc-projective-morphism], choose an integer $n$ and a closed immersion $i:X\\hookrightarrow\\mathbf P^n_S$ whose composite with the structural projection is $f$. Base changing this closed immersion along $g$ gives a closed immersion $i':X'=X\\times_S S'\\hookrightarrow\\mathbf P^n_S\\times_S S'$ by [lem-pc-closed-imm-base-change]. The canonical base-change identification $\\mathbf P^n_S\\times_S S'\\cong\\mathbf P^n_{S'}$ identifies the composite of $i'$ with the structural projection to $S'$ as $f'$. Thus $f'$ is H-projective.",
+   "uses": [
+    "def-pc-projective-morphism",
+    "def-pc-fibre-product",
+    "def-pc-base-change",
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01WF (morphisms-lemma-H-projective-base-change)"
+   }
+  },
+  {
+   "text": "The morphism $f'$ is quasi-compact by [lem-pc-quasi-compact-base-change], since $f$ is quasi-compact as part of the projective-morphism hypothesis. Combining this with the H-projective factorization from step 1 gives that $f'$ is projective in the convention of [def-pc-projective-morphism].",
+   "uses": [
+    "def-pc-projective-morphism",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01K5 (schemes-lemma-quasi-compact-preserved-base-change), together with Definition Tag 01W8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-morphism",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-quasi-compact-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01WF and 01K5"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +86,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-genus-well-defined",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-projective-base-change",
+  "worker": "stage1",
+  "summary": "Split projectivity after base change into the H-projective factorization, using stability of closed immersions under base change, and the separate quasi-compactness clause, recorded as a new unsplit node from Stacks Tag 01K5. The statement and hypotheses agree with the H-projective convention of Tag 01W8 and Lemma 01WF.",
+  "blueprint": "The ancestor blueprint proof step asserting that the base change of a projective curve is projective; step 1 realizes the projective-space factorization and closed-immersion base change, and step 2 realizes preservation of quasi-compactness.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "The H-projective step needs the generic closed-immersion base-change theorem, which is not supplied by this unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbx",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbx (reviewer sub-agent of L); spot-checked: Source: Stacks morphisms 01WF (morphisms-lemma-H-projective-base-change) and schemes 01K5 (schemes-lemma-quasi-compact-preserved-base-change) against the convention of def-pc-projective-morphism (H-projective + quasi-compact, 01W8); the item statement is unchanged except the unused stmt_dep def-weil-scheme-over-base removed (statement does not cite it). Step 1: def-pc-projective-morphism gives i:X->P^n_S closed immersion with f=pi.i; lem-pc-closed-imm-base-change (same unit) gives the base-changed closed immersion; identification X x_{P^n_S}(P^n_S x_S S') = X x_S S' and P(n;S) x_S S' = S x_Z P_Z x_S S' = P(n;S') (def-nagata-projective-space-base-change) is pasting/associativity of fibre products from def-pc-fibre-product and def-pc-base-change, a few lines. Step 2: quasi-compactness of f from the definition, preserved by the new node, then the definition again. Small cases: identity base change, P^n_S->S itself, S'=empty. Blueprint ancestor lem-pc-genus-well-defined confirmed with blueprint_refs.py ancestor; searches 'projective base change' and 'quasi-compact base change' find no blueprint node stating either. No slopmaster2 declaration for projective-morphism base change (grep WeilConjectures). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-quasi-compact-base-change.json: status/mathlib_match/mathlib_searches: the worker's 'no match' Mathlib verdict was wrong; made it a Mathlib leaf, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:165 (read; IsStableUnderBaseChange.of_isPullback at CategoryTheory/MorphismProperty/Limits.lean:110), grep search entry corrected (C5: also stated by clause (3) of the existing leaf lem-weil-pbc-qcqs-morphism-permanence, noted in lead_note). Dropped the declared tool_use lem-pc-closed-imm-base-change: it is in the item's own unit sk-thm-picard-rr, no tool use needed. Start-end UTC: Sat Oct 10 03:11:11 PM UTC 2026 - Sat Oct 10 03:12:39 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pbx): lem-pc-quasi-compact-base-change (made a Mathlib leaf by the reviewer) duplicates clause (3) of lem-weil-pbc-qcqs-morphism-permanence (unit sk-thm-p1); candidates for merging."
 }

@@ -1741,3 +1741,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:11 L: returned deliver/M1/lem-weil-pbc-derived-etale-cohomology-limit (reviewer RETURN: 1. E3: step 1 (and with it steps 2-4): the claim that H^n(Y_i,K_i) and H^n(Y,K_Y) are the cohomology of Gamma(Y_i,I_i^.))
 - 15:12 L: merged deliver/K1/lem-weil-pbc-proper-to-separated (reviewer PASS; first push; new nodes: 0)
 - 15:12 L: lem-sc-brauer-zero NOT attached (K1 release; rests on sorry), notice to K1
+- 15:12 L: merged deliver/K1/lem-pc-projective-base-change (reviewer FIX; first push; new nodes: 1)
