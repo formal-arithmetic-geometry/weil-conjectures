@@ -1731,3 +1731,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:08 L: merged deliver/G1/lem-weil-pbc-zero-dimensional-cohomology (reviewer FIX; after a return; new nodes: 1)
 - 15:08 L: merge tool fills created.by/date on delivered new nodes; existing nodes with created.item but no by/date filled
 - 15:09 L: merged deliver/C1/lem-sc-brauer-zero-all-curves (reviewer FIX; after a return; new nodes: 1)
+- 15:10 L: etale-proposition-etale-reduced (new node of C1's brauer-zero-all-curves) attached to isReduced_of_etale (sorry-free)
