@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-principal-localization-conormal-injective",
+ "kind": "statement",
+ "title": "The conormal module of a presentation injects into that of its principal localization",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $P=A[x_s,\\ s\\in S]$ a polynomial ring over $A$ [def-weil-pbc-mv-polynomial-ring] and $\\alpha:P\\to B$ a surjective homomorphism of $A$-algebras with kernel $I$; $I/I^2$ is a $B=P/I$-module. Let $g\\in B$, let $B_g$ be the localization of $B$ at $\\{1,g,g^2,\\dots\\}$ [def-weil-ring-localization-away], let $P[x]$ be the polynomial ring over $P$ in one further variable $x$, and let $\\beta:P[x]\\to B_g$ be the homomorphism of $A$-algebras which is $\\alpha$ followed by $B\\to B_g$ on $P$ and sends $x$ to $1/g$, with kernel $J$. Then $\\beta$ is surjective, so $J/J^2$ is a module over $P[x]/J\\cong B_g$, and the $B_g$-linear map $$\\iota:(I/I^2)\\otimes_BB_g\\longrightarrow J/J^2,\\qquad (a\\bmod I^2)\\otimes b\\longmapsto b\\cdot(a\\bmod J^2)\\quad(a\\in I\\subseteq J,\\ b\\in B_g),$$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 08JZ (lemma-principal-localization-NL), second paragraph, lines 35661-35672 ('Let us prove (I/I^2)_g -> J/J^2 injective', via pi : P[x] -> P_f/I_f^2, x -> 1/f) (tag 08JZ verified in stacks-project/tags/tags)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "conormal module I/I^2 tensor localization injects into J/J^2 for presentation of localization away",
+   "results": "IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule (Mathlib.RingTheory.Localization.BaseChange); Ideal.instModuleQuotientCotangent, Ideal.cotangentEquivIdeal (Mathlib.RingTheory.Ideal.Cotangent); Algebra.Generators.cotangentCompLocalizationAwayEquiv (Mathlib.RingTheory.Extension.Cotangent.LocalizationAway)",
+   "date": "2026-10-10",
+   "verdict": "candidate file found (Extension/Cotangent/LocalizationAway.lean)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presentation P -> B with kernel I and the presentation P[x] -> B_g, x -> 1/g, with kernel J, the map (I/I^2) tensor B_g -> J/J^2 is injective",
+   "results": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway (Mathlib.RingTheory.Extension.Cotangent.LocalizationAway); Algebra.Generators.CotangentSpace.map_toComp_injective (Mathlib.RingTheory.Kaehler.JacobiZariski); Algebra.SubmersivePresentation.cotangentComplex_injective",
+   "date": "2026-10-10",
+   "verdict": "match: liftBaseChange_injective_of_isLocalizationAway"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway",
+   "results": "liftBaseChange_injective_of_isLocalizationAway (g : S) [IsLocalization.Away g T] (P : Algebra.Generators R S ι) : Function.Injective (LinearMap.liftBaseChange T (Algebra.Extension.Cotangent.map ((Algebra.Generators.localizationAway T g).toComp P).toExtensionHom))",
+   "date": "2026-10-10",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '08JZ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 1,260p RingTheory/Extension/Cotangent/LocalizationAway.lean; sed -n 60,135p and 222,240p and 520,532p RingTheory/Extension/Generators.lean",
+   "results": "Extension/Cotangent/LocalizationAway.lean:127 @[stacks 08JZ \"part of (1)\"] liftBaseChange_injective_of_isLocalizationAway (line 128), proved with compLocalizationAwayAlgHom : R[X,Y] → (R[X]/I^2)[1/f] (line 64), Stacks' map pi; :198 @[stacks 08JZ \"(1)\"] cotangentCompLocalizationAwayEquiv (line 200); :45 comp_localizationAway_ker",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+  "line": 128,
+  "how": "specializes in one line (tagged @[stacks 08JZ \"part of (1)\"], line 127): make alpha a family of generators P := Generators.ofSurjective (fun s ↦ alpha(x_s)) h (Mathlib/RingTheory/Extension/Generators.lean line 127, ι := S), take T := B_g (IsLocalization.Away g); then (localizationAway T g).comp P (Generators.lean line 231, variables Unit ⊕ S, X (inl ()) ↦ invSelf g = 1/g, X (inr s) ↦ image of alpha(x_s)) is beta, its ker is J and Generators.algebraMap_surjective (line 119) is the surjectivity of beta; P.toExtension.Cotangent = P.ker.Cotangent = I/I^2 (Extension/Basic.lean line 330); toComp (Generators.lean line 523, toComp_toAlgHom = rename Sum.inr, line 527) is the inclusion P ⊆ P[x] and Extension.Cotangent.map of it (Extension/Basic.lean line 465) is a mod I^2 ↦ a mod J^2, whose B_g-linear extension LinearMap.liftBaseChange T is iota; the lemma says it is injective. Lines read 2026-10-10 with sed -n."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-principal-localization-naive-cotangent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
