@@ -2078,3 +2078,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:01 L: merged deliver/E1/lem-sc-finite-locally-free-derived-hom (reviewer FIX; first push; new nodes: 0)
 - 17:01 L: merged deliver/J1/lem-sc-separated-affine-function-field-surjective (reviewer FIX; after a return; new nodes: 1)
 - 17:02 L: merged deliver/K1/lem-weil-pbc-tensor-finite-type-limit (reviewer PASS; first push; new nodes: 0)
+- 17:02 L: merged deliver/J1/lem-sc-ext-coherent-hom-injective-acyclic (reviewer FIX; first push; new nodes: 1)

@@ -26,9 +26,51 @@
   "def-pur-sheaf-hom",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-ext-coherent-hom-injective-flasque], the underlying abelian sheaf of $\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I)$ is flasque on the Zariski space of $X$.",
+   "uses": [
+    "lem-sc-ext-coherent-hom-injective-flasque"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma 0FZ3, proof of (1), the injective-resolution input to the local-to-global Ext spectral sequence"
+   }
+  },
+  {
+   "text": "The flasque acyclicity theorem [lem-sc-zariski-flasque-acyclic] gives $H^p(X_{\\rm Zar},\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I)_{\\mathrm{ab}})=0$ for every $p>0$.",
+   "uses": [
+    "lem-sc-zariski-flasque-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma 0FZ3, proof of (1), the injective-resolution input to the local-to-global Ext spectral sequence"
+   }
+  },
+  {
+   "text": "By the module/abelian Zariski cohomology comparison [lem-sc-module-abelian-zariski-cohomology], the module cohomology $H^p(X,\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I))$ is canonically the same group as the underlying abelian Zariski cohomology in Step 2. Hence it is zero for every $p>0$.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD, specialized to the small Zariski site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-coherent-hom-injective-flasque",
+  "lem-sc-zariski-flasque-acyclic",
+  "lem-sc-module-abelian-zariski-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/equiv.tex",
+  "place": "Lemma 0FZ3, proof of (1), local-to-global Ext spectral sequence input"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +95,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-sheaf-to-global-spectral-sequence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-coherent-hom-injective-acyclic",
+  "worker": "stage1",
+  "summary": "Split the coherent-sheaf Ext acyclicity input into the flasqueness of internal Hom from a coherent module into an injective module, flasque acyclicity on the Zariski site, and the existing comparison between module and underlying abelian cohomology. The item statement and hypotheses were unchanged.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality: the injective-resolution input used to construct the local-to-global Ext spectral sequence.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zariski-flasque-acyclic",
+    "why": "Step 2 uses the generic theorem that flasque abelian sheaves have vanishing positive Zariski cohomology; this homological-algebra tool is not supplied by the Picard-duality unit."
+   },
+   {
+    "node": "lem-sc-module-abelian-zariski-cohomology",
+    "why": "Step 3 uses the generic comparison between module-sheaf and underlying abelian Zariski cohomology; this comparison tool is not supplied by the Picard-duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zariski-flasque-acyclic",
+  "lem-sc-module-abelian-zariski-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ehi1705",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ehi1705 (reviewer sub-agent of L); spot-checked: Source: Stacks equiv Lemma 0FZ3 (equiv-lemma-Ext-0-regular) proof of (1) uses the spectral sequence H^p(X, Ext^q(F,G)) => Ext^{p+q} of Cohomology section-ext, whose injective-resolution input is that Hom(F,I) is Gamma-acyclic for I injective; the flasqueness is Cohomology Lemma 01EA (cohomology-lemma-injective-restriction-surjective, the case F=O_X) with the same j_! argument applied to j_!(F|_U) -> j'_!(F|_U'), so the new node lem-sc-ext-coherent-hom-injective-flasque is true for any O_X-module F; its Noetherian/coherent hypotheses are superfluous but harmless, and the item statement is unchanged from sheaf-dag. Steps: 1 is the new node's statement verbatim; 2 is lem-sc-zariski-flasque-acyclic (flasque abelian sheaf on a topological space has H^q(X_Zar,-)=0, q>0), hypotheses match since step 1 gives flasqueness of the underlying abelian sheaf (def-sc-zariski-flasque); 3 is lem-sc-module-abelian-zariski-cohomology (any O_X-module, module cohomology [pqf-def-cohomology] = abelian Zariski cohomology [def-sc-zariski-cohomology]); proof_deps = union of uses. Declared tool uses lem-sc-zariski-flasque-acyclic and lem-sc-module-abelian-zariski-cohomology are generic black-box statements (C8), accepted. No duplicate existing node found (scan of all node statements mentioning Hom, injective, flasque/acyclic). Small cases: F=O_X gives Hom(O_X,I)=I, flasque by 01EA; X empty or a point trivial. Mathlib: delivery pushed 16:58 UTC (before 17:00) so its searches treated as not run; I ran LeanFinder 'sheaf Hom from a sheaf of modules into an injective sheaf of modules is flasque' (no match) and grep flasque|flabby in pinned Mathlib (only Topology/Sheaves/Flasque.lean, no sheaf-Hom statement). FIX: dag/nodes/sec-picard-framework/lem-sc-ext-coherent-hom-injective-flasque.json: mathlib_searches: leansearch verdict 'no match' -> 'unavailable' (its result said service unavailable), added my leanfinder and grep records; source.place: 0FZ3 does not state the flasqueness, now names Cohomology Lemma 01EA as the source argument. Start Sat Oct 10 05:01:24 PM UTC 2026, end Sat Oct 10 05:02:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
