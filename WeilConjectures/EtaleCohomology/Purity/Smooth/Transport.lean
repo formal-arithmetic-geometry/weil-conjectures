@@ -39,6 +39,14 @@ compatibly with those reductions.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`
+
+## Proof
+
+Derived complete objects are those receiving no nonzero map from an object on which a
+uniformizer `ϖ` of `𝒪_E` acts invertibly
+(`DerivedCategory.derivedComplete_iff_rightOrthogonal`). A map `L ⟶ Rf^! K` is adjoint to a
+map `Rf_! L ⟶ K`, and `ϖ` acts invertibly on `Rf_! L` if it does on `L`, since `Rf_!` is
+`𝒪_E`-linear.
 -/
 
 @[expose] public section
@@ -67,6 +75,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
+omit [IsSeparated f] in
 /-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
 
 **`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure
@@ -87,8 +96,23 @@ theorem derivedCompleteIntegral_rightDerivedUpperShriek
     (hK : DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
     DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
       ((rightDerivedUpperShriek
-        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) f).obj K) :=
-  sorry
+        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) f).obj K) := by
+  obtain ⟨ϖ, hϖ, hI⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  rw [DerivedCategory.derivedCompleteIntegral,
+    DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hK ⊢
+  intro L φ (hL : IsIso (ϖ • 𝟙 L))
+  let adj := rightDerivedUpperShriekAdjunction
+    (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) f
+  have hL' : DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ
+      ((R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj L) := by
+    change IsIso (ϖ • 𝟙 _)
+    rw [← (R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).map_id,
+      ← Functor.map_smul]
+    infer_instance
+  rw [← (adj.homEquiv L K).apply_symm_apply φ, hK ((adj.homEquiv L K).symm φ) hL',
+    Adjunction.homEquiv_unit,
+    Functor.map_zero, comp_zero]
 
 end Etale
 

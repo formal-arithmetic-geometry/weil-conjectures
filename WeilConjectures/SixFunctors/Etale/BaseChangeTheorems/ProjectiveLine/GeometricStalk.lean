@@ -207,10 +207,11 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
   have hb := IsCurve.bijective_cohomologyMap_of_isSepClosed Λ _
     (ProjectiveSpace.isPullback_map _ ι)
     ((ProjectiveSpace.map _ (S.algClosurePoint (g.base t)))^*[ModuleCat.{u + 1} Λ].obj F) q
-  rw [ConcreteCategory.isIso_iff_bijective]
-  convert e₂.symm.bijective.comp (hb.comp e₁.bijective) using 1
-  funext x
-  exact (e₂.symm_apply_apply _).symm.trans (congrArg e₂.symm (h x))
+  refine (ConcreteCategory.isIso_iff_bijective _).2 ?_
+  have hfun : ⇑(((pointSmallEtale (T.algClosurePoint t)).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+      (Etale.baseChangeHomologyMap Λ sq q F)).hom = e₂.symm ∘ _ ∘ e₁ :=
+    funext fun x ↦ (e₂.symm_apply_apply _).symm.trans (congrArg e₂.symm (h x))
+  exact hfun ▸ e₂.symm.bijective.comp (hb.comp e₁.bijective)
 
 /-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. For an injective

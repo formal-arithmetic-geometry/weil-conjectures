@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import WeilConjectures.Mathlib.RingTheory.FinitePresentation
+public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.DirectLimitFG
 
@@ -181,35 +182,6 @@ theorem exists_fg_faithfullyFlat_tensorProduct [IsNoetherianRing A₀]
   exact ⟨q, hq⟩
 
 omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
-/-- If `B = A ⊗[R₀] B₀` and `A₁ → A` is a map of `R₀`-algebras, then `B = A ⊗[A₁] (A₁ ⊗[R₀] B₀)`.
--/
-theorem _root_.Algebra.IsPushout.exists_tensorProduct {R₀ A₁ B₀ B : Type u} [CommRing R₀]
-    [CommRing A₁] [CommRing B₀] [CommRing B] [Algebra R₀ A₁] [Algebra A₁ A] [Algebra R₀ A]
-    [IsScalarTower R₀ A₁ A] [Algebra R₀ B₀] [Algebra A B] [Algebra B₀ B] [Algebra R₀ B]
-    [IsScalarTower R₀ A B] [IsScalarTower R₀ B₀ B] [Algebra.IsPushout R₀ A B₀ B] :
-    ∃ (_ : Algebra (A₁ ⊗[R₀] B₀) B) (_ : Algebra A₁ B) (_ : IsScalarTower A₁ A B)
-      (_ : IsScalarTower A₁ (A₁ ⊗[R₀] B₀) B), Algebra.IsPushout A₁ A (A₁ ⊗[R₀] B₀) B := by
-  let e₀ : A ⊗[R₀] B₀ ≃ₐ[A] B := Algebra.IsPushout.equiv R₀ A B₀ B
-  let φ : A₁ ⊗[R₀] B₀ →ₐ[R₀] B := (e₀.toAlgHom.restrictScalars R₀).comp
-    (Algebra.TensorProduct.map (IsScalarTower.toAlgHom R₀ A₁ A) (AlgHom.id R₀ B₀))
-  let : Algebra (A₁ ⊗[R₀] B₀) B := φ.toRingHom.toAlgebra
-  let : Algebra A₁ B := ((algebraMap A B).comp (algebraMap A₁ A)).toAlgebra
-  have : IsScalarTower A₁ A B := .of_algebraMap_eq fun _ ↦ rfl
-  have : IsScalarTower A₁ (A₁ ⊗[R₀] B₀) B := .of_algebraMap_eq fun r ↦ by
-    simp [RingHom.algebraMap_toAlgebra, φ, e₀, Algebra.IsPushout.equiv_tmul,
-      Algebra.TensorProduct.algebraMap_apply]
-  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
-  let : Algebra (A₁ ⊗[R₀] B₀) (A ⊗[A₁] (A₁ ⊗[R₀] B₀)) := Algebra.TensorProduct.rightAlgebra
-  refine Algebra.IsPushout.of_equiv
-    ((Algebra.TensorProduct.cancelBaseChange R₀ A₁ A A B₀).trans e₀) (RingHom.ext fun x ↦ ?_)
-  induction x with
-  | zero => simp
-  | tmul a b =>
-    simp [RingHom.algebraMap_toAlgebra, φ, e₀, Algebra.IsPushout.equiv_tmul,
-      Algebra.algebraMap_eq_smul_one]
-  | add x y hx hy => rw [map_add, map_add, hx, hy]
-
-omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
 /-- **A faithfully flat model over a finitely generated `ℤ`-algebra** (the absolute case of
 Stacks, Tag 034Y). A faithfully flat `A`-algebra `B` of finite presentation is the base change
 of a faithfully flat algebra of finite presentation `B₁` over a finitely presented `ℤ`-algebra
@@ -235,14 +207,14 @@ theorem exists_isPushout_faithfullyFlat (B : Type u) [CommRing B] [Algebra A B]
   have : Module.FaithfullyFlat A (A ⊗[A₀] B₀) :=
     Module.FaithfullyFlat.of_linearEquiv _ _ e₀.toLinearEquiv
   obtain ⟨R, hR, hff⟩ := exists_fg_faithfullyFlat_tensorProduct (A₀ := A₀) (A := A) (B₀ := B₀)
-  obtain ⟨_, _, _, _, hpush'⟩ := Algebra.IsPushout.exists_tensorProduct (R₀ := A₀) (A := A)
-    (A₁ := R) (B₀ := B₀) (B := B)
+  let := Algebra.IsPushout.tensorProductAlgebra A₀ R A B₀ B
+  have := Algebra.IsPushout.isScalarTower_tensorProductAlgebra A₀ R A B₀ B
+  have hpush' := Algebra.IsPushout.tensorProduct A₀ R A B₀ B
   have hfin : Algebra.FiniteType ℤ R :=
     .trans (S := A₀) inferInstance ((Subalgebra.fg_iff_finiteType _).mp hR)
   exact ⟨R, R ⊗[A₀] B₀, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, inferInstance,
     Algebra.FinitePresentation.of_finiteType.mp hfin, inferInstance, hff, hpush'⟩
-
 
 omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
 /-- **Finite presentation descends along faithfully flat maps of finite presentation** (Stacks,
@@ -273,8 +245,11 @@ theorem of_finitePresentation_of_faithfullyFlat (R B : Type u) [CommRing R] [Com
     change _ = f (1 ⊗ₜ a)
     rw [Algebra.TensorProduct.lift_tmul, map_one, one_mul]
     rfl
-  obtain ⟨_, _, _, _, hpush₀⟩ := Algebra.IsPushout.exists_tensorProduct (R₀ := A₁) (A := A)
-    (A₁ := A₀) (B₀ := B₁) (B := B)
+  let : Algebra A₀ B := ((algebraMap A B).comp (algebraMap A₀ A)).toAlgebra
+  have : IsScalarTower A₀ A B := .of_algebraMap_eq fun _ ↦ rfl
+  let := Algebra.IsPushout.tensorProductAlgebra A₁ A₀ A B₁ B
+  have := Algebra.IsPushout.isScalarTower_tensorProductAlgebra A₁ A₀ A B₁ B
+  have hpush₀ := Algebra.IsPushout.tensorProduct A₁ A₀ A B₁ B
   have : IsScalarTower R A₀ B := IsScalarTower.of_algebraMap_eq (R := R) (S := A₀) (A := B)
       fun r ↦ by
     rw [IsScalarTower.algebraMap_apply A₀ A B, ← IsScalarTower.algebraMap_apply R A₀ A,
@@ -288,6 +263,7 @@ theorem of_finitePresentation_of_faithfullyFlat (R B : Type u) [CommRing R] [Com
       (R' := A₀ ⊗[A₁] B₁) (S' := B) (RingHom.faithfullyFlat_algebraMap_iff.mpr inferInstance)
       (RingHom.finitePresentation_algebraMap.mpr inferInstance)
   exact .trans R A₀ A
+
 end Algebra.FinitePresentation
 
 end FaithfullyFlatModel

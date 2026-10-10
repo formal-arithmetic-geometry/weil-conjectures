@@ -15,10 +15,12 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd
+public import WeilConjectures.SixFunctors.Finite.Isotypic
 
 /-!
 
@@ -119,14 +121,17 @@ stalk of `(AS_q)_* Λ` at `t ≫ AS_q` is the product of copies of `Λ` indexed 
 fibre, a `k`-torsor (`AlgebraicGeometry.Etale.exists_eq_comp_artinSchreierTranslation`), and a
 `Ψ`-isotypic germ is determined by its value at `t`. Since `AS_q` is surjective, `AS_q^*`
 reflects isomorphisms, so a morphism into `ℒ_χ` whose adjoint is an isomorphism is itself
-one; this gives `zero`, `one` and `mul`.
+one; this gives `zero`, `one` and `mul`. For `smul`, the scaling `[c]` is an automorphism of
+`𝔸¹_k` commuting with `AS_q`, so `[c]^* ≅ [c⁻¹]_*` carries the splitting of `e_Ψ` to a splitting
+of the conjugate idempotent, which is `e_{Ψ(c ·)}`. For `add`, the three sheaves `m^* ℒ_Ψ`,
+`u₁^* ℒ_Ψ` and `u₂^* ℒ_Ψ` on `𝔸²_k` are trivialized by `AS_q × AS_q`, on which `k × k` acts by
+the translations; so `m^* ℒ_Ψ` and `u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` are both the isotypic component of
+`(AS_q × AS_q)_* Λ` for the character `(a, b) ↦ Ψ(a) Ψ(b)`
+(`AlgebraicGeometry.Etale.nonempty_iso_of_isotypic`).
 
 The isomorphisms `zero`, `add`, `one`, `mul` and `smul` are stated as `Nonempty` theorems
-rather than as `def`s. For `add` and `smul` this is because they are not yet constructed, and
-the repository does not allow a data `def` with a `sorry` body; `zero`, `one` and `mul` are
-constructed, and are still `Nonempty` only to keep the statements uniform until `add` and
-`smul` are done. All of them should become `def`s: the Fourier
-inversion and base change arguments need the specific rigidification
+rather than as `def`s, to keep the statements uniform. All of them should become `def`s: the
+Fourier inversion and base change arguments need the specific rigidification
 `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` and the unique `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` restricting to it, with
 their coherences.
 
@@ -192,6 +197,49 @@ lemma artinSchreierTranslation_appTop_coord (a : k) :
       AffineSpace.coord _ PUnit.unit +
         (𝔸¹[k] ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv.hom a) :=
   AffineSpace.translation_appTop_coord _ _
+
+
+variable (k) in
+/-- The scaling `[c] : x ↦ c x` of the affine line `𝔸¹_k` by `c ∈ k`. -/
+def artinSchreierScaling (c : k) : 𝔸¹[k] ⟶ 𝔸¹[k] :=
+  AffineSpace.smul PUnit (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv.hom c)
+
+@[reassoc (attr := simp)]
+lemma artinSchreierScaling_over (c : k) :
+    artinSchreierScaling k c ≫ 𝔸¹[k] ↘ Spec (.of k) = 𝔸¹[k] ↘ Spec (.of k) :=
+  AffineSpace.smul_over _ _ _
+
+lemma artinSchreierScaling_appTop_coord (c : k) (i : PUnit) :
+    (artinSchreierScaling k c).appTop (AffineSpace.coord _ i) =
+      (𝔸¹[k] ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv.hom c) *
+        AffineSpace.coord _ i :=
+  AffineSpace.smul_appTop_coord _ _ _ _
+
+lemma artinSchreierScaling_one : artinSchreierScaling k 1 = 𝟙 _ :=
+  AffineSpace.hom_ext (by simp) fun _ ↦ by
+    simp [artinSchreierScaling_appTop_coord]
+
+/-- Scaling by `a b` is scaling by `a` followed by scaling by `b`. -/
+lemma artinSchreierScaling_mul (a b : k) :
+    artinSchreierScaling k (a * b) = artinSchreierScaling k a ≫ artinSchreierScaling k b := by
+  refine AffineSpace.hom_ext (by simp) fun _ ↦ ?_
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierScaling_appTop_coord,
+    map_mul]
+  rw [← CommRingCat.comp_apply (𝔸¹[k] ↘ Spec (.of k)).appTop, ← Scheme.Hom.comp_appTop,
+    artinSchreierScaling_over]
+  ring
+
+/-- The scaling `[c]` conjugates translations: `σ_a ≫ [c] = [c] ≫ σ_{c a}`. -/
+lemma artinSchreierTranslation_comp_artinSchreierScaling (a c : k) :
+    artinSchreierTranslation k a ≫ artinSchreierScaling k c =
+      artinSchreierScaling k c ≫ artinSchreierTranslation k (c * a) := by
+  refine AffineSpace.hom_ext (by simp [artinSchreierTranslation]) fun _ ↦ ?_
+  simp only [artinSchreierTranslation, artinSchreierScaling, Scheme.Hom.comp_appTop,
+    CommRingCat.comp_apply, AffineSpace.smul_appTop_coord, AffineSpace.translation_appTop_coord,
+    map_mul, map_add]
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, AffineSpace.translation_over,
+    AffineSpace.smul_over]
+  ring
 
 instance (a : k) : IsIso (artinSchreierTranslation k a) :=
   ⟨artinSchreierTranslation k (-a), by
@@ -274,6 +322,23 @@ lemma etale_artinSchreierMap : Etale AS[k] :=
 
 instance : IsFinite AS[k] :=
   AffineSpace.isFinite_artinSchreierMap _ _ Fintype.one_lt_card.ne'
+
+/-- The scaling `[c]` commutes with the Artin–Schreier map, as `c ^ q = c`. -/
+@[reassoc]
+lemma artinSchreierScaling_comp_artinSchreierMap (c : k) :
+    artinSchreierScaling k c ≫ AS[k] = AS[k] ≫ artinSchreierScaling k c := by
+  refine AffineSpace.hom_ext (by simp [AffineSpace.artinSchreierMap_over]) fun _ ↦ ?_
+  simp only [artinSchreierScaling, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.smul_appTop_coord, AffineSpace.artinSchreierMap_appTop_coord, map_sub, map_pow,
+    map_mul]
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, AffineSpace.artinSchreierMap_over]
+  rw [mul_pow, ← map_pow, ← map_pow, FiniteField.pow_card]
+  ring
+
+instance (c : kˣ) : IsIso (artinSchreierScaling k c) :=
+  ⟨artinSchreierScaling k ↑c⁻¹, by
+    rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one],
+    by rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]⟩
 
 /-- The origin is fixed by the Artin–Schreier map: `0 ^ q - 0 = 0`. -/
 lemma zeroSection_comp_artinSchreierMap :
@@ -680,6 +745,248 @@ theorem nonempty_iso_artinSchreierSheaf_zero (Ψ : AddChar k Λ) :
       (artinSchreierSheafUpperStarIso Ψ).symm ≪≫
     ((upperStarComp _ _ _ _ zeroSection_comp_artinSchreierMap.symm).app _).symm⟩
 
+section Add
+
+/-! ### Additivity
+
+On `𝔸²_k` the three sheaves `m^* ℒ_Ψ`, `u₁^* ℒ_Ψ` and `u₂^* ℒ_Ψ` are trivialized by the covering
+`AS_q × AS_q : 𝔸²_k ⟶ 𝔸²_k`, on which `k × k` acts by the translations `σ_a × σ_b`, through
+the characters `Ψ(a + b)`, `Ψ(a)` and `Ψ(b)`. Hence `m^* ℒ_Ψ` and `u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` are both
+the isotypic component of `(AS_q × AS_q)_* Λ` for the character `(a, b) ↦ Ψ(a) Ψ(b)`
+(`AlgebraicGeometry.Etale.nonempty_iso_of_isotypic`). -/
+
+set_option quotPrecheck false in
+/-- The affine plane `𝔸²_k = 𝔸¹_k ×_k 𝔸¹_k`. -/
+local notation "𝔸²[" k "]" => pullback (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k))
+
+variable (k) in
+/-- The product `AS_q × AS_q : 𝔸²_k ⟶ 𝔸²_k` of two Artin–Schreier maps. -/
+def artinSchreierMapProd : 𝔸²[k] ⟶ 𝔸²[k] :=
+  pullback.map _ _ _ _ AS[k] AS[k] (𝟙 _)
+    (by rw [Category.comp_id, AffineSpace.artinSchreierMap_over])
+    (by rw [Category.comp_id, AffineSpace.artinSchreierMap_over])
+
+@[reassoc (attr := simp)]
+lemma artinSchreierMapProd_fst :
+    artinSchreierMapProd k ≫ pullback.fst _ _ = pullback.fst _ _ ≫ AS[k] :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma artinSchreierMapProd_snd :
+    artinSchreierMapProd k ≫ pullback.snd _ _ = pullback.snd _ _ ≫ AS[k] :=
+  pullback.lift_snd _ _ _
+
+omit [Fintype k] in
+variable (k) in
+/-- The translation `σ_a × σ_b` of `𝔸²_k` by `(a, b) ∈ k × k`. -/
+def artinSchreierTranslationProd (g : k × k) : 𝔸²[k] ⟶ 𝔸²[k] :=
+  pullback.map _ _ _ _ (artinSchreierTranslation k g.1) (artinSchreierTranslation k g.2) (𝟙 _)
+    (by rw [Category.comp_id, artinSchreierTranslation, AffineSpace.translation_over])
+    (by rw [Category.comp_id, artinSchreierTranslation, AffineSpace.translation_over])
+
+omit [Fintype k] in
+@[reassoc (attr := simp)]
+lemma artinSchreierTranslationProd_fst (g : k × k) :
+    artinSchreierTranslationProd k g ≫ pullback.fst _ _ =
+      pullback.fst _ _ ≫ artinSchreierTranslation k g.1 :=
+  pullback.lift_fst _ _ _
+
+omit [Fintype k] in
+@[reassoc (attr := simp)]
+lemma artinSchreierTranslationProd_snd (g : k × k) :
+    artinSchreierTranslationProd k g ≫ pullback.snd _ _ =
+      pullback.snd _ _ ≫ artinSchreierTranslation k g.2 :=
+  pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma artinSchreierTranslationProd_comp_artinSchreierMapProd (g : k × k) :
+    artinSchreierTranslationProd k g ≫ artinSchreierMapProd k = artinSchreierMapProd k := by
+  apply pullback.hom_ext <;> simp
+
+omit [Fintype k] in
+lemma artinSchreierTranslationProd_zero : artinSchreierTranslationProd k 0 = 𝟙 _ := by
+  apply pullback.hom_ext <;> simp
+
+omit [Fintype k] in
+lemma artinSchreierTranslationProd_add (a b : k × k) :
+    artinSchreierTranslationProd k (a + b) =
+      artinSchreierTranslationProd k a ≫ artinSchreierTranslationProd k b := by
+  apply pullback.hom_ext <;> simp [artinSchreierTranslation_add]
+
+omit [Fintype k] in
+instance (g : k × k) : IsIso (artinSchreierTranslationProd k g) :=
+  ⟨artinSchreierTranslationProd k (-g), by
+    rw [← artinSchreierTranslationProd_add, add_neg_cancel, artinSchreierTranslationProd_zero],
+    by rw [← artinSchreierTranslationProd_add, neg_add_cancel, artinSchreierTranslationProd_zero]⟩
+
+instance : IsFinite (artinSchreierMapProd k) :=
+  MorphismProperty.pullbackMap (P := @IsFinite) (inferInstanceAs (IsFinite AS[k]))
+    (inferInstanceAs (IsFinite AS[k])) (AffineSpace.artinSchreierMap_over _ _ _).symm
+    (AffineSpace.artinSchreierMap_over _ _ _).symm
+
+lemma surjective_artinSchreierMapProd : Function.Surjective (artinSchreierMapProd k).base := by
+  have : Surjective AS[k] := ⟨AffineSpace.surjective_artinSchreierMap k⟩
+  exact (MorphismProperty.pullbackMap (P := @Surjective) this this
+    (AffineSpace.artinSchreierMap_over _ _ _).symm
+    (AffineSpace.artinSchreierMap_over _ _ _).symm).surj
+
+/-- The translations `σ_a × σ_b` act transitively on the geometric fibres of `AS_q × AS_q`. -/
+lemma exists_eq_comp_artinSchreierTranslationProd {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s t : Spec (.of Ω) ⟶ 𝔸²[k]) (h : s ≫ artinSchreierMapProd k = t ≫ artinSchreierMapProd k) :
+    ∃ g, s = t ≫ artinSchreierTranslationProd k g := by
+  obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation (t ≫ pullback.fst _ _)
+    (s ≫ pullback.fst _ _) (by simpa using congrArg (· ≫ pullback.fst _ _) h.symm)
+  obtain ⟨b, hb⟩ := exists_eq_comp_artinSchreierTranslation (t ≫ pullback.snd _ _)
+    (s ≫ pullback.snd _ _) (by simpa using congrArg (· ≫ pullback.snd _ _) h.symm)
+  refine ⟨(a, b), pullback.hom_ext ?_ ?_⟩
+  · simpa using ha
+  · simpa using hb
+
+/-- The Artin–Schreier map is additive: `(x + y) ^ q - (x + y) = (x ^ q - x) + (y ^ q - y)`. -/
+@[reassoc]
+lemma add_comp_artinSchreierMap :
+    AffineSpace.add PUnit (Spec (.of k)) ≫ AS[k] =
+      artinSchreierMapProd k ≫ AffineSpace.add PUnit (Spec (.of k)) := by
+  refine AffineSpace.hom_ext (by simp [AffineSpace.artinSchreierMap_over]) fun i ↦ ?_
+  cases i
+  obtain ⟨m, hp, hm⟩ := FiniteField.card k (ringChar k)
+  nontriviality Γ(𝔸²[k], ⊤)
+  have := CharP.of_ringHom_of_prime ((pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)) ≫
+      𝔸¹[k] ↘ Spec (.of k)).appTop.hom.comp
+    (Scheme.ΓSpecIso (.of k)).inv.hom) hp
+    ringChar.Nat.cast_ringChar
+  have := Fact.mk hp
+  have hx := congrArg (fun f ↦ f.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit))
+    (artinSchreierMapProd_fst (k := k))
+  have hy := congrArg (fun f ↦ f.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit))
+    (artinSchreierMapProd_snd (k := k))
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.artinSchreierMap_appTop_coord, map_sub, map_pow] at hx hy
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.artinSchreierMap_appTop_coord, AffineSpace.add_appTop_coord, map_sub, map_pow,
+    map_add, hx, hy]
+  rw [hm, add_pow_char_pow]
+  ring
+
+omit [Fintype k] in
+/-- The translation `σ_a × σ_b` of `𝔸²_k` lies over the translation `σ_{a + b}` of `𝔸¹_k` for
+the addition `m`. -/
+@[reassoc]
+lemma artinSchreierTranslationProd_comp_add (g : k × k) :
+    artinSchreierTranslationProd k g ≫ AffineSpace.add PUnit (Spec (.of k)) =
+      AffineSpace.add PUnit (Spec (.of k)) ≫ artinSchreierTranslation k (g.1 + g.2) := by
+  refine AffineSpace.hom_ext (by simp [artinSchreierTranslation]) fun i ↦ ?_
+  cases i
+  have hx := congrArg (fun f ↦ f.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit))
+    (artinSchreierTranslationProd_fst g)
+  have hy := congrArg (fun f ↦ f.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit))
+    (artinSchreierTranslationProd_snd g)
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    artinSchreierTranslation_appTop_coord, map_add] at hx hy
+  have e₁ (z) : (AffineSpace.add PUnit (Spec (.of k))).appTop ((𝔸¹[k] ↘ Spec (.of k)).appTop z) =
+      (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k))).appTop
+        ((𝔸¹[k] ↘ Spec (.of k)).appTop z) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, AffineSpace.add_over,
+      Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+  have e₂ (z) : (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k))).appTop
+      ((𝔸¹[k] ↘ Spec (.of k)).appTop z) =
+      (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k))).appTop
+        ((𝔸¹[k] ↘ Spec (.of k)).appTop z) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← pullback.condition,
+      Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.add_appTop_coord,
+    artinSchreierTranslation_appTop_coord, map_add, hx, hy, e₁, e₂]
+  ring
+
+variable {W Y : Scheme.{u}} (π : W ⟶ Y) (v : Y ⟶ 𝔸¹[k]) (p : W ⟶ 𝔸¹[k])
+  (h : p ≫ AS[k] = π ≫ v) (Ψ : AddChar k Λ)
+
+/-- For a commutative square `p ≫ AS_q = π ≫ v`, the morphism `v^* ℒ_Ψ ⟶ π_* Λ` adjoint to
+the inclusion `ℒ_Ψ ⟶ (AS_q)_* Λ` followed by pulling back functions along `p`. -/
+def artinSchreierSheafUpperStarToLowerStar :
+    (v)^*[ModuleCat Λ].obj (artinSchreierSheaf Ψ) ⟶ (π)_*[ModuleCat Λ].obj (𝟙_ _) :=
+  (v)^*[ModuleCat Λ].map (image.ι (artinSchreierIdempotent Ψ) ≫
+      lowerStarConstantSheafMapOfOver AS[k] (π ≫ v) p h ≫
+      (lowerStarComp _ π v (π ≫ v) rfl).inv.app _) ≫
+    (upperStarLowerStarAdjunction _ v).counit.app _
+
+/-- If an endomorphism `τ` of `W` over `Y` lies over the translation `σ_c` of `𝔸¹_k`, then
+`τ^♯` acts on `v^* ℒ_Ψ ⟶ π_* Λ` by the scalar `Ψ(c)`. -/
+lemma artinSchreierSheafUpperStarToLowerStar_comp (τ : W ⟶ W) (hτ : τ ≫ π = π) (c : k)
+    (hc : τ ≫ p = p ≫ artinSchreierTranslation k c) :
+    artinSchreierSheafUpperStarToLowerStar π v p h Ψ ≫
+        lowerStarConstantSheafEndOfOver π τ hτ =
+      Ψ c • artinSchreierSheafUpperStarToLowerStar π v p h Ψ := by
+  have hn := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).counit.naturality
+    (lowerStarConstantSheafEndOfOver π τ hτ)
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  have e1 : (lowerStarComp (ModuleCat.{u + 1} Λ) π v (π ≫ v) rfl).inv.app (𝟙_ _) ≫
+      (v)_*[ModuleCat Λ].map (lowerStarConstantSheafEndOfOver π τ hτ) =
+      lowerStarConstantSheafMapOfOver (π ≫ v) (π ≫ v) τ (by rw [← Category.assoc, hτ]) ≫
+        (lowerStarComp (ModuleCat.{u + 1} Λ) π v (π ≫ v) rfl).inv.app (𝟙_ _) := by
+    rw [← cancel_mono ((lowerStarComp (ModuleCat.{u + 1} Λ) π v (π ≫ v) rfl).hom.app _),
+      Category.assoc, Category.assoc, lowerStarConstantSheafEndOfOver_eq_mapOfOver,
+      lowerStar_map_lowerStarConstantSheafMapOfOver, Iso.inv_hom_id_app_assoc,
+      Iso.inv_hom_id_app, Category.comp_id]
+  have e2 : lowerStarConstantSheafMapOfOver AS[k] (π ≫ v) p h ≫
+      lowerStarConstantSheafMapOfOver (π ≫ v) (π ≫ v) τ (by rw [← Category.assoc, hτ]) =
+      artinSchreierTranslationAction Λ k c ≫ lowerStarConstantSheafMapOfOver AS[k] (π ≫ v) p h := by
+    rw [← lowerStarConstantSheafMapOfOver_comp, artinSchreierTranslationAction,
+      lowerStarConstantSheafEndOfOver_eq_mapOfOver, ← lowerStarConstantSheafMapOfOver_comp]
+    exact lowerStarConstantSheafMapOfOver_congr _ _ hc _ _
+  rw [artinSchreierSheafUpperStarToLowerStar, Category.assoc, ← hn, ← Category.assoc,
+    ← Functor.map_comp, Category.assoc, Category.assoc, e1, reassoc_of% e2,
+    ← Category.assoc (image.ι _),
+    image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction,
+    Linear.smul_comp, Functor.map_smul, Linear.smul_comp]
+
+/-- The adjoint `π^* v^* ℒ_Ψ ⟶ Λ` of
+`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarToLowerStar` is an isomorphism: on the
+stalk at a geometric point `s` of `W` it is the restriction of `Ψ`-isotypic germs to the point
+`s ≫ p` of the geometric fibre of `AS_q`. -/
+lemma isIso_upperStar_map_artinSchreierSheafUpperStarToLowerStar_comp_counit :
+    IsIso ((π)^*[ModuleCat.{u + 1} Λ].map (artinSchreierSheafUpperStarToLowerStar π v p h Ψ) ≫
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).counit.app (𝟙_ _)) := by
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
+  rw [Scheme.uliftPointSmallEtale, NatIso.isIso_map_iff
+    ((Scheme.pointSmallEtale _).uliftSheafFiberIso (ModuleCat.{u + 1} Λ))]
+  set s' := W.algClosurePoint s
+  have hy : s' ≫ π ≫ v = (s' ≫ π) ≫ v := (Category.assoc _ _ _).symm
+  have hL₁ := Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (ModuleCat.{u + 1} Λ) π v
+    (π ≫ v) rfl ((s' ≫ π) ≫ v) ⟨s', hy⟩ (𝟙_ _)
+  have hL₂ := Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (ModuleCat.{u + 1} Λ) p
+    AS[k] (π ≫ v) h.symm ((s' ≫ π) ≫ v) ⟨s', hy⟩ (𝟙_ _)
+  have hnat := Etale.stalkRestrict_naturality (ModuleCat.{u + 1} Λ) AS[k] ((s' ≫ π) ≫ v)
+    ⟨s' ≫ p, by rw [Category.assoc, h, hy]⟩ (Functor.LaxMonoidal.ε (p)_*[ModuleCat.{u + 1} Λ])
+  have key : (Scheme.pointSmallEtale ((s' ≫ π) ≫ v)).sheafFiber.map
+      (image.ι (artinSchreierIdempotent Ψ) ≫
+        lowerStarConstantSheafMapOfOver AS[k] (π ≫ v) p h ≫
+        (lowerStarComp _ π v (π ≫ v) rfl).inv.app _) ≫
+      Etale.stalkRestrict (ModuleCat.{u + 1} Λ) v ((s' ≫ π) ≫ v) ⟨s' ≫ π, rfl⟩ _ ≫
+      Etale.stalkRestrict (ModuleCat.{u + 1} Λ) π (s' ≫ π) ⟨s', rfl⟩ (𝟙_ _) =
+      ((Scheme.pointSmallEtale ((s' ≫ π) ≫ v)).sheafFiber.map
+          (image.ι (artinSchreierIdempotent Ψ)) ≫
+        Etale.stalkRestrict (ModuleCat.{u + 1} Λ) AS[k] ((s' ≫ π) ≫ v)
+          ⟨s' ≫ p, by rw [Category.assoc, h, hy]⟩ (𝟙_ _)) ≫
+      ((Scheme.pointSmallEtale (s' ≫ p)).sheafFiber.map
+          (Functor.LaxMonoidal.ε (p)_*[ModuleCat.{u + 1} Λ]) ≫
+        Etale.stalkRestrict (ModuleCat.{u + 1} Λ) p (s' ≫ p) ⟨s', rfl⟩ (𝟙_ _)) := by
+    rw [← hL₁, ← Functor.map_comp_assoc]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [lowerStarConstantSheafMapOfOver]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hL₂, ← reassoc_of% hnat]
+  rw [sheafFiber_map_upperStar_map_comp_counit, artinSchreierSheafUpperStarToLowerStar,
+    sheafFiber_map_upperStar_map_comp_counit]
+  simp only [Category.assoc]
+  rw [key]
+  have := isIso_sheafFiber_map_image_ι_comp_stalkRestrict ((s' ≫ π) ≫ v) Ψ
+    ⟨s' ≫ p, by rw [Category.assoc, h, hy]⟩
+  infer_instance
+
+end Add
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal in
 /-- The Artin–Schreier sheaf turns addition into tensor product: on `𝔸²_k = 𝔸¹_k ×_k 𝔸¹_k`,
 with the addition `m` and the two projections `u₁, u₂`,
 
@@ -699,8 +1006,73 @@ theorem nonempty_iso_artinSchreierSheaf_add (Ψ : AddChar k Λ) :
       (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))^*[ModuleCat Λ].obj
           (artinSchreierSheaf Ψ) ⊗
         (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))^*[ModuleCat Λ].obj
-          (artinSchreierSheaf Ψ)) :=
-  sorry
+          (artinSchreierSheaf Ψ)) := by
+  -- both sides are trivialized by `AS_q × AS_q`, with descent datum `(a, b) ↦ Ψ(a) Ψ(b)`
+  have : Invertible (Fintype.card (k × k) : Λ) :=
+    (invertibleMul (Fintype.card k : Λ) (Fintype.card k)).copy _
+      (by rw [Fintype.card_prod, Nat.cast_mul])
+  let χ : AddChar (k × k) Λ :=
+    Ψ.compAddMonoidHom (AddMonoidHom.fst k k) * Ψ.compAddMonoidHom (AddMonoidHom.snd k k)
+  have hχ (g : k × k) : χ g = Ψ g.1 * Ψ g.2 := rfl
+  have hτ := artinSchreierTranslationProd_comp_artinSchreierMapProd (k := k)
+  let φ₀ := artinSchreierSheafUpperStarToLowerStar (artinSchreierMapProd k)
+    (AffineSpace.add PUnit (Spec (.of k))) (AffineSpace.add PUnit (Spec (.of k)))
+    add_comp_artinSchreierMap Ψ
+  let φ₁ := artinSchreierSheafUpperStarToLowerStar (artinSchreierMapProd k)
+    (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+    (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+    artinSchreierMapProd_fst.symm Ψ
+  let φ₂ := artinSchreierSheafUpperStarToLowerStar (artinSchreierMapProd k)
+    (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+    (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+    artinSchreierMapProd_snd.symm Ψ
+  have hφ₁ (g : k × k) : φ₁ ≫ lowerStarConstantSheafEndOfOver _ _ (hτ g) = Ψ g.1 • φ₁ :=
+    artinSchreierSheafUpperStarToLowerStar_comp _ _ _ _ Ψ _ _ g.1
+      (artinSchreierTranslationProd_fst g)
+  have hφ₂ (g : k × k) : φ₂ ≫ lowerStarConstantSheafEndOfOver _ _ (hτ g) = Ψ g.2 • φ₂ :=
+    artinSchreierSheafUpperStarToLowerStar_comp _ _ _ _ Ψ _ _ g.2
+      (artinSchreierTranslationProd_snd g)
+  refine nonempty_iso_of_isotypic (artinSchreierMapProd k) (artinSchreierTranslationProd k) hτ χ
+    artinSchreierTranslationProd_add surjective_artinSchreierMapProd
+    (fun _ _ _ s t h ↦ exists_eq_comp_artinSchreierTranslationProd s t h) φ₀
+    ((φ₁ ⊗ₘ φ₂) ≫ lowerStarConstantSheafMul _) (fun g ↦ ?_) (fun g ↦ ?_)
+    (isIso_upperStar_map_artinSchreierSheafUpperStarToLowerStar_comp_counit _ _ _ _ Ψ) ?_
+  · rw [artinSchreierSheafUpperStarToLowerStar_comp _ _ _ _ Ψ _ _ (g.1 + g.2)
+      (artinSchreierTranslationProd_comp_add g), AddChar.map_add_eq_mul, hχ]
+  · rw [Category.assoc, lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver,
+      ← Category.assoc, tensorHom_comp_tensorHom, hφ₁, hφ₂, hχ]
+    simp only [tensorHom_def, MonoidalLinear.smul_whiskerRight, MonoidalLinear.whiskerLeft_smul,
+      Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm (Ψ g.2)]
+  · have hn := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (artinSchreierMapProd k)).counit.naturality
+      (λ_ (𝟙_ (Sheaf (pullback (𝔸¹[k] ↘ Spec (.of k))
+        (𝔸¹[k] ↘ Spec (.of k))).smallEtaleTopology (ModuleCat.{u + 1} Λ)))).hom
+    simp only [Functor.comp_map, Functor.id_map] at hn
+    have hu : (artinSchreierMapProd k)^*[ModuleCat.{u + 1} Λ].map
+        ((φ₁ ⊗ₘ φ₂) ≫ lowerStarConstantSheafMul _) ≫
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (artinSchreierMapProd k)).counit.app
+          (𝟙_ _) =
+        δ (artinSchreierMapProd k)^*[ModuleCat.{u + 1} Λ] _ _ ≫
+          (((artinSchreierMapProd k)^*[ModuleCat.{u + 1} Λ].map φ₁ ≫
+            (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+              (artinSchreierMapProd k)).counit.app (𝟙_ _)) ⊗ₘ
+          ((artinSchreierMapProd k)^*[ModuleCat.{u + 1} Λ].map φ₂ ≫
+            (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+              (artinSchreierMapProd k)).counit.app (𝟙_ _))) ≫ (λ_ _).hom := by
+      simp only [lowerStarConstantSheafMul, Functor.map_comp, Category.assoc, hn,
+        Adjunction.map_μ_comp_counit_app_tensor_assoc, ← δ_natural_assoc,
+        tensorHom_comp_tensorHom_assoc]
+      rfl
+    rw [hu]
+    have := isIso_upperStar_map_artinSchreierSheafUpperStarToLowerStar_comp_counit
+      (artinSchreierMapProd k) (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+      (pullback.fst (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+      artinSchreierMapProd_fst.symm Ψ
+    have := isIso_upperStar_map_artinSchreierSheafUpperStarToLowerStar_comp_counit
+      (artinSchreierMapProd k) (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+      (pullback.snd (𝔸¹[k] ↘ Spec (.of k)) (𝔸¹[k] ↘ Spec (.of k)))
+      artinSchreierMapProd_snd.symm Ψ
+    infer_instance
 
 /-- The Artin–Schreier sheaf of the trivial character is the constant sheaf `Λ`.
 (sketch blueprint: `sk-lem-as-properties`) -/
@@ -789,17 +1161,116 @@ theorem nonempty_iso_artinSchreierSheaf_mul (Ψ Ψ' : AddChar k Λ) :
   have := isIso_of_isIso_upperStar_map_artinSchreierMap Λ v
   exact ⟨asIso v⟩
 
+omit [Invertible (Fintype.card k : Λ)] in
+/-- The pushforward along the scaling `[c⁻¹]` carries the action of `σ_a` on `(AS_q)_* Λ` to that
+of `σ_{c⁻¹ a}`, through the identification `[c⁻¹]_* (AS_q)_* Λ ≅ (AS_q)_* Λ` pulling back
+sections along `[c]`. -/
+lemma lowerStar_map_artinSchreierTranslationAction_comp (c : kˣ) (a : k)
+    (hc : artinSchreierScaling k c ≫ AS[k] ≫ artinSchreierScaling k ↑c⁻¹ = AS[k]) :
+    (artinSchreierScaling k ↑c⁻¹)_*[ModuleCat Λ].map (artinSchreierTranslationAction Λ k a) ≫
+        (lowerStarComp _ AS[k] (artinSchreierScaling k ↑c⁻¹)
+          (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) rfl).hom.app _ ≫
+        lowerStarConstantSheafMapOfOver (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k]
+          (artinSchreierScaling k c) hc =
+      ((lowerStarComp _ AS[k] (artinSchreierScaling k ↑c⁻¹)
+          (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) rfl).hom.app _ ≫
+        lowerStarConstantSheafMapOfOver (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k]
+          (artinSchreierScaling k c) hc) ≫
+        artinSchreierTranslationAction Λ k (↑c⁻¹ * a) := by
+  rw [artinSchreierTranslationAction, artinSchreierTranslationAction,
+    lowerStarConstantSheafEndOfOver_eq_mapOfOver, lowerStarConstantSheafEndOfOver_eq_mapOfOver,
+    ← Category.assoc, lowerStar_map_lowerStarConstantSheafMapOfOver, Category.assoc,
+    Category.assoc, ← lowerStarConstantSheafMapOfOver_comp,
+    ← lowerStarConstantSheafMapOfOver_comp]
+  have hg : artinSchreierScaling k c ≫ artinSchreierTranslation k a =
+      artinSchreierTranslation k (↑c⁻¹ * a) ≫ artinSchreierScaling k c := by
+    rw [artinSchreierTranslation_comp_artinSchreierScaling, ← mul_assoc, Units.mul_inv, one_mul]
+  have e := lowerStarConstantSheafMapOfOver_congr (Λ := Λ)
+    (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k] hg
+    (by rw [Category.assoc, artinSchreierTranslation_comp_artinSchreierMap_assoc, hc])
+    (by rw [Category.assoc, hc, artinSchreierTranslation_comp_artinSchreierMap])
+  rw [e]
+
 /-- The pullback of the Artin–Schreier sheaf along the scaling `[c] : x ↦ c x` by a unit
 `c ∈ kˣ` is the Artin–Schreier sheaf of the character `Ψ(c ·)`: `[c]^* ℒ_Ψ ≅ ℒ_{Ψ(c ·)}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
 theorem nonempty_iso_artinSchreierSheaf_smul (Ψ : AddChar k Λ) (c : kˣ) :
     Nonempty ((AffineSpace.smul PUnit (Spec (.of k))
         ((Scheme.ΓSpecIso (.of k)).inv.hom c))^*[ModuleCat Λ].obj (artinSchreierSheaf Ψ) ≅
-      artinSchreierSheaf (Ψ.mulShift c)) :=
-  -- `[c]` commutes with `AS_q` since `c ^ q = c`, and it conjugates `σ_a` to `σ_{c a}`; so the
-  -- base change of `AS_q` along `[c]` is `AS_q` itself, and base change takes `e_Ψ` to
-  -- `e_{Ψ(c ·)}`
-  sorry
+      artinSchreierSheaf (Ψ.mulShift c)) := by
+  -- `[c]` is an isomorphism with inverse `[c⁻¹] =: n`, so `[c]^* ≅ n_*`; and `n_*` carries the
+  -- action of `σ_a` on `(AS_q)_* Λ` to that of `σ_{c⁻¹ a}`, as `[c]` commutes with `AS_q` and
+  -- conjugates `σ_{c⁻¹ a}` to `σ_a`; hence it carries `e_Ψ` to `e_{Ψ(c ·)}`
+  let n := artinSchreierScaling k ↑c⁻¹
+  let e : 𝔸¹[k] ≅ 𝔸¹[k] :=
+    { hom := n
+      inv := artinSchreierScaling k c
+      hom_inv_id := by rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]
+      inv_hom_id := by rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one] }
+  have hc : artinSchreierScaling k c ≫ AS[k] ≫ n = AS[k] := by
+    rw [artinSchreierScaling_comp_artinSchreierMap_assoc, ← artinSchreierScaling_mul,
+      Units.mul_inv, artinSchreierScaling_one, Category.comp_id]
+  have hn : n ≫ AS[k] = AS[k] ≫ n := artinSchreierScaling_comp_artinSchreierMap _
+  let Φ : (n)_*[ModuleCat Λ].obj 𝒫[Λ, k] ⟶ 𝒫[Λ, k] :=
+    (lowerStarComp _ AS[k] n (AS[k] ≫ n) rfl).hom.app _ ≫
+      lowerStarConstantSheafMapOfOver (AS[k] ≫ n) AS[k] (artinSchreierScaling k c) hc
+  let Φ' : 𝒫[Λ, k] ⟶ (n)_*[ModuleCat Λ].obj 𝒫[Λ, k] :=
+    lowerStarConstantSheafMapOfOver AS[k] (AS[k] ≫ n) n hn ≫
+      (lowerStarComp _ AS[k] n (AS[k] ≫ n) rfl).inv.app _
+  have hΦΦ' : Φ ≫ Φ' = 𝟙 _ := by
+    simp only [Φ, Φ', Category.assoc]
+    rw [← Category.assoc (lowerStarConstantSheafMapOfOver _ _ _ hc),
+      ← lowerStarConstantSheafMapOfOver_comp,
+      lowerStarConstantSheafMapOfOver_of_eq_id _ (by
+        rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]),
+      Category.id_comp]
+    exact Iso.hom_inv_id_app _ _
+  have hΦ'Φ : Φ' ≫ Φ = 𝟙 _ := by
+    simp only [Φ, Φ', Category.assoc, Iso.inv_hom_id_app_assoc]
+    rw [← lowerStarConstantSheafMapOfOver_comp,
+      lowerStarConstantSheafMapOfOver_of_eq_id _ (by
+        rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one])]
+  have hconj (a : k) : (n)_*[ModuleCat Λ].map (artinSchreierTranslationAction Λ k a) ≫ Φ =
+      Φ ≫ artinSchreierTranslationAction Λ k (↑c⁻¹ * a) :=
+    lowerStar_map_artinSchreierTranslationAction_comp c a hc
+  have key : (n)_*[ModuleCat Λ].map (artinSchreierIdempotent Ψ) ≫ Φ =
+      Φ ≫ artinSchreierIdempotent (Ψ.mulShift c) := by
+    simp only [artinSchreierIdempotent, Functor.map_sum, Functor.map_smul, Preadditive.sum_comp,
+      Linear.smul_comp, hconj, Preadditive.comp_sum, Linear.comp_smul]
+    refine Fintype.sum_equiv (Units.mulLeft c⁻¹) _ _ fun a ↦ ?_
+    simp only [Units.mulLeft_apply, AddChar.mulShift_apply]
+    congr 3
+    rw [mul_neg, ← mul_assoc, Units.mul_inv, one_mul]
+  -- the splitting `ℒ_{Ψ(c ·)}` of `e_{Ψ(c ·)}` is `[c⁻¹]_* ℒ_Ψ`
+  let s₁ := (n)_*[ModuleCat Λ].map (image.ι (artinSchreierIdempotent Ψ))
+  let r₁ := (n)_*[ModuleCat Λ].map (factorThruImage (artinSchreierIdempotent Ψ))
+  have hsr₁ : s₁ ≫ r₁ = 𝟙 _ := by
+    rw [← Functor.map_comp, image_ι_comp_factorThruImage_artinSchreierIdempotent,
+      CategoryTheory.Functor.map_id]
+  have hrs₁ : r₁ ≫ s₁ = (n)_*[ModuleCat Λ].map (artinSchreierIdempotent Ψ) := by
+    rw [← Functor.map_comp, image.fac]
+  let s₂ := image.ι (artinSchreierIdempotent (Ψ.mulShift c))
+  let r₂ := factorThruImage (artinSchreierIdempotent (Ψ.mulShift c))
+  have hsr₂ : s₂ ≫ r₂ = 𝟙 _ := image_ι_comp_factorThruImage_artinSchreierIdempotent _
+  have hrs₂ : r₂ ≫ s₂ = artinSchreierIdempotent (Ψ.mulShift c) := image.fac _
+  have key' : Φ ≫ r₂ ≫ s₂ = r₁ ≫ s₁ ≫ Φ := by
+    rw [hrs₂, ← Category.assoc, hrs₁, key]
+  refine ⟨(upperStarInvIsoLowerStarHom _ e).app _ ≪≫
+    { hom := s₁ ≫ Φ ≫ r₂
+      inv := s₂ ≫ Φ' ≫ r₁
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }⟩
+  · have : Φ ≫ r₂ ≫ s₂ ≫ Φ' = r₁ ≫ s₁ := by
+      rw [← Category.assoc r₂, ← Category.assoc, key', Category.assoc, Category.assoc, hΦΦ',
+        Category.comp_id]
+    simp only [Category.assoc]
+    rw [reassoc_of% this, ← Category.assoc, hsr₁]
+    exact Category.comp_id _
+  · have : Φ' ≫ r₁ ≫ s₁ ≫ Φ = r₂ ≫ s₂ := by
+      rw [← key', ← Category.assoc, hΦ'Φ, Category.id_comp]
+    simp only [Category.assoc]
+    rw [reassoc_of% this, ← Category.assoc s₂, hsr₂]
+    rfl
 
 /-- The inverse of `ℒ_Ψ` is `ℒ_{Ψ⁻¹}`.
 (sketch blueprint: `sk-lem-as-properties`) -/

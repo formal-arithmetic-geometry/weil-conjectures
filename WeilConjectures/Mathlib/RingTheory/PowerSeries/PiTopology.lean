@@ -117,6 +117,25 @@ theorem multipliable_inv_one_sub_X_pow {β : Type*} {e : β → ℕ} (he : ∀ b
     (eq_inv_iff_mul_eq_one h₁).1 rfl
   linear_combination h₂
 
+/-- A family `∏_b (f b)⁻¹` with `f b ≡ 1` modulo `X ^ e b`, all `e b ≥ 1` and only finitely many
+`e b` below any bound is multipliable. -/
+theorem multipliable_inv_of_X_pow_dvd_sub_one {β : Type*} {e : β → ℕ} {f : β → R⟦X⟧}
+    (he : ∀ b, e b ≠ 0) (hf : ∀ b, X ^ e b ∣ f b - 1) (hfin : ∀ n, {b | e b ≤ n}.Finite) :
+    Multipliable fun b ↦ (f b)⁻¹ := by
+  refine ⟨_, hasProd_of_X_pow_dvd_sub_one (fun n ↦ (hfin n).toFinset) fun n b hb ↦ ?_⟩
+  have hnb : n + 1 ≤ e b := by
+    by_contra h
+    exact hb ((hfin n).mem_toFinset.2 (show e b ≤ n by omega))
+  obtain ⟨q, hq⟩ := hf b
+  have h₁ : constantCoeff (f b) = 1 := by
+    have h := congrArg constantCoeff hq
+    rw [map_sub, map_one, map_mul, map_pow, constantCoeff_X, zero_pow (he b), zero_mul,
+      sub_eq_zero] at h
+    exact h
+  have h₂ : (f b)⁻¹ * f b = 1 := PowerSeries.inv_mul_cancel _ (by rw [h₁]; exact one_ne_zero)
+  refine (pow_dvd_pow X hnb).trans ⟨-(f b)⁻¹ * q, ?_⟩
+  linear_combination h₂ - (f b)⁻¹ * hq
+
 open ComplexOrder
 
 /-- The power series over `ℂ` with nonnegative real coefficients and constant coefficient `1`. -/
