@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sc-zariski-flasque-acyclic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Flasque sheaves are acyclic",
- "statement": "For a flasque abelian sheaf\n$F$ on a topological space, $H^q(X_{\\rm Zar},F)=0$ for\n$q>0$, in the resolution sense of\n[def-sc-zariski-cohomology].",
+ "statement": "For a flasque abelian sheaf $F$ on a topological space, $H^q(X_{\\rm Zar},F)=0$ for $q>0$, in the resolution sense of [def-sc-zariski-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-flasque-acyclic.md",
   "place": "node lem-sc-zariski-flasque-acyclic, order 1556"
@@ -17,26 +17,86 @@
  ],
  "proof": [
   {
-   "text": "We use the elementary flasque-resolution lemma of sheaf\nhomological algebra: if $0\\to F\\to I\\to Q\\to0$ is exact\nand $F$ is flasque, then $I(V)\\to Q(V)$ is surjective\nfor every open $V$; if $I$ is flasque then $Q$ is\nflasque. For the first assertion, choose local lifts of\na section of $Q$, and glue them by correcting their\ndifferences, which lie in $F$, using the restriction\nsurjectivity in [def-sc-zariski-flasque].\nOne can perform the gluing by a well-ordering of a cover:\nat a successor stage extend the difference from the\nintersection using flasqueness; at a limit stage use\nthe sheaf axiom on the union.\nFor the second assertion, lift a section of $Q(U)$\nto $I(U)$, extend it to $I(V)$, and project to $Q(V)$.\nInjective sheaves are flasque: a section on an open $U$\nis a morphism from the free abelian sheaf extended by zero\nfrom $U$, whose inclusion into the corresponding sheaf\nfor $V$ is a monomorphism; injectivity extends the map.\nEmbed $F$ in an injective $I$, and iterate this argument\non the flasque quotient $Q$.\nThe resulting injective resolution stays exact on sections.\nThe definition in [def-sc-zariski-cohomology] gives the\nclaimed vanishing.",
+   "text": "Let $0\\to F\\to I\\to Q\\to0$ be a short exact sequence of abelian sheaves on $X$ with $I$ injective in the abelian category of abelian sheaves on $X$. Let $\\mathbb Z_X$ be the sheaf of locally constant $\\mathbb Z$-valued functions, so $(X,\\mathbb Z_X)$ is a ringed space. Every abelian sheaf carries a unique $\\mathbb Z_X$-module structure (a locally constant $n$ acts on a section $s$ by gluing the sections $n_i s|_{U_i}$ on the opens $U_i$ where $n$ is the constant $n_i$), and every map of abelian sheaves is $\\mathbb Z_X$-linear; so abelian sheaves on $X$ and $\\mathbb Z_X$-modules are the same category, and $I$ is an injective $\\mathbb Z_X$-module. Hence [lem-sc-ringed-space-injective-restriction-surjective], applied to $(X,\\mathbb Z_X)$, gives that every restriction $I(V)\\to I(U)$, $U\\subseteq V$ open, is surjective: $I$ is flasque [def-sc-zariski-flasque]. Since $F$ is flasque, [lem-sc-zariski-flasque-quotient-sections] gives surjectivity $I(V)\\to Q(V)$ for every open $V$; since $I$ is flasque, it also gives that $Q$ is flasque.",
    "uses": [
-    "def-sc-zariski-flasque",
+    "lem-sc-ringed-space-injective-restriction-surjective",
+    "lem-sc-zariski-flasque-quotient-sections",
+    "def-sc-zariski-flasque"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EA (lemma-injective-restriction-surjective), applied to the ringed space (X, Z_X); Lemma 09SY proof"
+   }
+  },
+  {
+   "text": "Using enough injectives in the abelian category of sheaves on the Zariski site [lem-weil-pbc-site-sheaves-enough-injectives], embed $F$ into an injective $I^0$ and repeat the construction on the successive quotient sheaves. Thus $F\\to I^\\bullet$ is an injective resolution whose every successive quotient is flasque, and the surjectivity in Step 1 makes the complex of sections $I^\\bullet(V)$ exact in every positive degree for every open $V$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sc-zariski-flasque-quotient-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 09SY proof, embed in an injective and iterate on the flasque quotient"
+   }
+  },
+  {
+   "text": "By [def-sc-zariski-cohomology], $H^q(X_{\\rm Zar},F)$ is the $q$-th cohomology of the global-sections complex of an injective resolution. Applying the exactness from Step 2 at the object $X$ gives $H^q(X_{\\rm Zar},F)=0$ for every $q>0$.",
+   "uses": [
     "def-sc-zariski-cohomology"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 01FT, definition of cohomology over an object, applied to Lemma 09SY"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-sc-zariski-flasque-quotient-sections",
   "def-sc-zariski-flasque",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
   "def-sc-zariski-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-flasque-acyclic.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma Tag 09SY (lemma-flasque-acyclic)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flasque abelian sheaf is acyclic for Zariski sheaf cohomology",
+   "results": "CategoryTheory.Sheaf.H and cohomologyPresheaf; no flasque acyclicity theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.IsFlasque, Sheaf.H, acyclic",
+   "results": "0 hits; unknown identifier Sheaf.IsFlasque",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|flabby|acyclic in Mathlib/Topology/Sheaves",
+   "results": "no matching theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flasque abelian sheaf higher cohomology vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +119,23 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-zariski-flasque-acyclic",
+  "worker": "stage1",
+  "summary": "Checked the imported item against Stacks Cohomology Lemma 09SY and Section 01FT. No sorry-free project declaration states it. Split the compressed proof into the two substantive abelian-sheaf lemmas used by the source: injectives are flasque, and a flasque short exact sequence is sectionwise right exact with flasque quotient. The remaining resolution and cohomology steps use the existing enough-injectives node and the definition of Zariski cohomology.",
+  "blueprint": "Realizes the complete proof paragraph of blueprint node lem-sc-zariski-flasque-acyclic, order 1556."
+ },
+ "tool_uses": [
+  "lem-sc-ringed-space-injective-restriction-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zfa3040",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zfa3040 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) B class (c): lem-sc-zariski-flasque-quotient-sections is Mathlib TopCat.Sheaf.IsFlasque.epi_of_shortExact (Flasque.lean:113) and of_shortExact_of_isFlasque₁₂ (:182), read with sed; made a mathlib leaf, the recorded grep 'no match' was wrong. (2) B class (b): lem-sc-zariski-injective-flasque is the special case O_X=Z_X of lem-sc-ringed-space-injective-restriction-surjective (01EA, generic tool; ringed space need not be locally ringed); Step 1 now cites the existing node with the elementary identification Ab(X)=Mod(Z_X), duplicate dropped. Checked Step 2 dimension shifting (splicing sectionwise short exact sequences) and Step 3 against def-sc-zariski-cohomology; statement unchanged (formatting only) and as used by lem-sc-topological-flasque-acyclic.; 2 file(s) fixed by the reviewer"
+ }
 }

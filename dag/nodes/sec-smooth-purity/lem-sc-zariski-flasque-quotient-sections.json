@@ -1,0 +1,69 @@
+{
+ "id": "lem-sc-zariski-flasque-quotient-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-zariski-flasque-acyclic",
+   "place": "Proof sentence: if 0 -> F -> I -> Q -> 0 is exact and F is flasque, then I(V) -> Q(V) is surjective; if I is flasque then Q is flasque",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections and quotients for flasque sheaves",
+ "statement": "Let 0 \\to F \\to I \\to Q \\to 0 be a short exact sequence of abelian sheaves on a topological space X. If F is flasque [def-sc-zariski-flasque], then for every open V the map I(V) \\to Q(V) is surjective. If I is also flasque [def-sc-zariski-flasque], then Q is flasque [def-sc-zariski-flasque].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 09SY (lemma-flasque-acyclic), proof: flasque-resolution lemma"
+ },
+ "stmt_deps": [
+  "def-sc-zariski-flasque"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flasque sheaf quotient is flasque and sections surjective",
+   "results": "generic sheaf and locally-surjective declarations; no flasque quotient theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "flasque quotient sheaf sections surjective",
+   "results": "0 hits; unknown identifier flasque",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|quotient|surject in Mathlib/Topology/Sheaves",
+   "results": "no matching theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Flasque' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean: class IsFlasque (48), IsFlasque.epi_of_shortExact (113), IsFlasque.of_shortExact_of_isFlasque₁₂ (182); read with sed",
+   "date": "2026-10-11",
+   "verdict": "match (reviewer R-zfa3040; earlier grep records were wrong)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Sheaf.IsFlasque.epi_of_shortExact",
+  "file": "Mathlib/Topology/Sheaves/Flasque.lean",
+  "line": 113,
+  "how": "one declaration per clause, for `S : ShortComplex (Sheaf AddCommGrpCat X)` with `S.ShortExact`: first clause is `TopCat.Sheaf.IsFlasque.epi_of_shortExact` (line 113: `[IsFlasque S.X₁] : Epi (S.g.1.app (op U))`, and an epimorphism in `AddCommGrpCat` is a surjection, `AddCommGrpCat.epi_iff_surjective`); second clause is `TopCat.Sheaf.IsFlasque.of_shortExact_of_isFlasque₁₂` (line 182: `[IsFlasque S.X₁] [IsFlasque S.X₂] : IsFlasque S.X₃`). `IsFlasque` (line 48) asks every restriction map to be an epimorphism, i.e. surjective, which is [def-sc-zariski-flasque]."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-zariski-flasque-acyclic",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}
