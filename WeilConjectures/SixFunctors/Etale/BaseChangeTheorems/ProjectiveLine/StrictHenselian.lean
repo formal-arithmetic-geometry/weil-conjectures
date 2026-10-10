@@ -129,6 +129,7 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
             (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c :=
   sorry
 
+omit [IsSepClosed (IsLocalRing.ResidueField A)] in
 /-- **Acyclicity on the closed projective line in degrees at least two.** Let `A` be strictly
 henselian, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective
 sheaf `I` of `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q ≥ 2`: this is the acyclicity bound
