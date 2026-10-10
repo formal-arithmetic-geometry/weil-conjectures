@@ -1928,3 +1928,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:13 L: returned deliver/H1/lem-sc-smooth-proper-relative-dualizing-general (reviewer RETURN: 1. E1: new node lem-sc-smooth-relative-upper-shriek-formula: the statement is false. Without properness, f^! = right adj)
 - 16:13 L: merged deliver/M1/lem-sc-regular-local-ext-vanishing (reviewer PASS; first push; new nodes: 0)
 - 16:13 L: merged deliver/E1/lem-sc-cech-h1-map-natural (reviewer PASS; first push; new nodes: 0)
+- 16:13 L: returned deliver/H1/lemma-constructible-torsor-trivialises (reviewer RETURN: 1. B3/C1: statement and steps 2-3: the notion 'G-torsor' for a sheaf of (possibly non-commutative) groups on X_et has no)
