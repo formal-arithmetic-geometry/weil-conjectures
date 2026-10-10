@@ -38,4 +38,14 @@ theorem isIso_of_bijective_comp_shift (n : ℤ) {X Y : C} (u : X ⟶ Y)
   exact ((isIso_iff_coyoneda_map_bijective e.inv).1 inferInstance _).comp
     ((h _).comp ((isIso_iff_coyoneda_map_bijective e.hom).1 inferInstance _))
 
+omit [HasShift C ℤ] in
+/-- Changing the sum in `shiftFunctorAdd'` amounts to composing with an `eqToHom`. -/
+@[reassoc]
+lemma shiftFunctorAdd'_inv_app_comp_eqToHom {A : Type*} [AddMonoid A] [HasShift C A]
+    (a b c c' : A) (h : a + b = c) (h' : a + b = c') (X : C) :
+    (shiftFunctorAdd' C a b c h).inv.app X ≫ eqToHom (by rw [← h, ← h']) =
+      (shiftFunctorAdd' C a b c' h').inv.app X := by
+  subst h h'
+  simp
+
 end CategoryTheory
