@@ -22,9 +22,87 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $RF$ is defined at $K$, the ind-system $I\\mapsto F(I)$ indexed by arrows $s:K\\to I$ is essentially constant with value $RF(K)$. Applying the essential-constant ind Hom-colimit formula gives $\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))\\cong\\varinjlim_{s:K\\to I}\\operatorname{Hom}_{D(\\mathcal B)}(M,F(I))$.",
+   "uses": [
+    "lem-pc-essentially-constant-ind-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), first equality"
+   }
+  },
+  {
+   "text": "For each $I$, morphisms in the right localization are computed, since the quasi-isomorphisms of the homotopy category form a multiplicative system, by the colimit over arrows $t:P\\to M$: $\\operatorname{Hom}_{D(\\mathcal B)}(M,F(I))\\cong\\varinjlim_{t:P\\to M}\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))$.",
+   "uses": [
+    "lem-pc-right-localization-hom-colimit",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), second equality"
+   }
+  },
+  {
+   "text": "The two indexing categories are independent, so the iterated colimits can be interchanged canonically, yielding $\\varinjlim_s\\varinjlim_t\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))\\cong\\varinjlim_t\\varinjlim_s\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))$.",
+   "uses": [
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), third equality"
+   }
+  },
+  {
+   "text": "The underived adjunction $G\\dashv F$ gives a natural bijection $\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))\\cong\\operatorname{Hom}_{K(\\mathcal A)}(G(P),I)$ for every $P$ and $I$; applying it inside both colimits gives the corresponding iterated-colimit isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), fourth equality"
+   }
+  },
+  {
+   "text": "For each $P$, morphisms in the left localization are computed, since the quasi-isomorphisms of the homotopy category form a multiplicative system, by the colimit over arrows $s:K\\to I$: $\\operatorname{Hom}_{D(\\mathcal A)}(G(P),K)\\cong\\varinjlim_{s:K\\to I}\\operatorname{Hom}_{K(\\mathcal A)}(G(P),I)$.",
+   "uses": [
+    "lem-pc-left-localization-hom-colimit",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), fifth equality"
+   }
+  },
+  {
+   "text": "Since $LG$ is defined at $M$, the pro-system $P\\mapsto G(P)$ indexed by arrows $t:P\\to M$ is essentially constant with value $LG(M)$. Applying the essential-constant pro Hom-colimit formula gives $\\varinjlim_{t:P\\to M}\\operatorname{Hom}_{D(\\mathcal A)}(G(P),K)\\cong\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)$.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0FND proof (line 9515), sixth equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-essentially-constant-ind-hom-colimit",
+  "lem-pc-right-localization-hom-colimit",
+  "lem-pc-colimit-fubini",
+  "lem-pc-left-localization-hom-colimit",
+  "lem-pc-essentially-constant-pro-hom-colimit",
+  "lem-pc-quasi-isomorphisms-multiplicative-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 0FND proof (lines 9515--9516), specialized to complexes and derived categories"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +141,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-adjoint-functors",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pre-derived-adjoint-functors-general",
+  "worker": "stage1",
+  "summary": "Split the six Hom-set equalities in Stacks Lemma 0FND/0DVC into four statement-only localization and essential-constancy lemmas plus the Mathlib Fubini colimit interchange. The underived adjunction step is elementary. No exact project declaration exists in the source checkout.",
+  "blueprint": "Realizes the ancestor clause that the derived direct-image composition proof uses the pre-derived adjunction: the ind/pro essential-constancy formulas, localization Hom colimit formulas, colimit interchange, and the underived adjunction specialize the general Stacks calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pda1912",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pda1912 (reviewer sub-agent of L); spot-checked: Item vs Stacks 0DVC/0FND (pointwise Stacks-sense RF/LG; not Mathlib's absolute Adjunction.derived / derivedε_fac_app leaf, which needs globally defined derived functors, so not class c); no cycle: item cites only its own children, none cites lem-pc-derived-adjoint-functors or lem-sc-derived-adjunction-from-underived. Children vs 05PY/05PZ/05Q0/05Q4 orientations OK; Fubini leaf read at Fubini.lean:578 (curried form, one-line). No duplicates among pbc essentially-constant/localization nodes. FIX more, RETURN less: (1) C4 steps 2 and 5 applied the localization Hom-colimit lemmas (hypothesis S multiplicative system) to D(A), D(B) without a cited fact that quasi-isomorphisms in K(A) form a multiplicative system: added node lem-pc-quasi-isomorphisms-multiplicative-system (Stacks 05RT; Mathlib DerivedCategory/Fractions.lean:34,38) and cited it in steps 2 and 5; (2) B3 undefined D, D' in steps 2-5 replaced by K(A), K(B); (3) lem-pc-colimit-fubini statement bracketed def-weil-abstract-derived-category with empty stmt_deps: bracket removed.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-pda1912): new node lem-pc-quasi-isomorphisms-multiplicative-system added unsplit (reviewer-added nodes must be); it is a Mathlib leaf: DerivedCategory/Fractions.lean lines 34 and 38 (HasLeft/HasRightCalculusOfFractions for HomotopyCategory.quasiIso), recorded in its mathlib_searches"
 }
