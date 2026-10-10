@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pc-derived-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived direct image",
- "statement": "Let $f:X\\to S$ be a morphism of schemes. The *derived direct\nimage* is the total derived functor\n$Rf_*:D(\\mathcal{O}_X)\\to D(\\mathcal{O}_S)$; its cohomology sheaves\n$H^i(Rf_*E)=R^if_*E$ are the *higher direct images*. (The\ndefinition via injective resolutions (or the $K$-injective resolution\ncriterion of file 02, the standard $K$-injective-resolution criterion) is the\nstandard one; the relevant admissibility statements are in Derived\nCategories of Schemes, Section 36.30, Tag\n[0A1G](https://stacks.math.columbia.edu/tag/0A1G).)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]; it is in particular a morphism of ringed spaces $(X,\\mathcal O_X)\\to(S,\\mathcal O_S)$. The *derived direct image* $Rf_*:D(\\mathcal{O}_X)\\to D(\\mathcal{O}_S)$, on the derived categories of [def-pc-derived-category], is the derived direct image [def-pc-ringed-spaces-derived-direct-image] of this morphism of ringed spaces (computed by K-injective resolutions). For $E\\in D(\\mathcal O_X)$ and $i\\in\\mathbf Z$, the $\\mathcal O_S$-module $R^if_*E:=H^i(Rf_*E)$, the $i$-th cohomology sheaf of $Rf_*E$, is the $i$-th *higher direct image* of $E$; for an $\\mathcal O_X$-module $\\mathcal F$ it is applied to $\\mathcal F$ viewed as a complex in degree $0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/def-pc-derived-direct-image.md",
   "place": "node def-pc-derived-direct-image, order 644",
@@ -19,15 +19,73 @@
   ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-scheme"
+  "def-pc-ringed-spaces-derived-direct-image"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total derived functor derived direct image Rf_* higher direct images",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived, and CategoryTheory.NatTrans.rightDerived; generic derived-category constructions, not the scheme-level definition.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor, DerivedCategory",
+   "results": "0 hits; unknown identifier Functor.rightDerivedFunctor.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor|derived direct image|higher direct image in Mathlib/",
+   "results": "0 hits in Mathlib/.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image is total derived functor and cohomology higher direct images",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor on derived category of sheaves associated to a scheme morphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward and instIsRightAdjointPushforward; underived pushforward and adjointness, not its total derived functor.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "CategoryTheory.Functor.rightDerived and related rightDerivedZero declarations; individual right-derived functors, not the stated scheme-level total derived direct image.",
+   "date": "2026-10-11",
+   "verdict": "generalization: individual right-derived functors only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|DerivedCategory in Mathlib/CategoryTheory/Abelian",
+   "results": "0 hits from the requested msearch grep path.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|derivedDirectImage in Mathlib/ and Mathlib/AlgebraicGeometry",
+   "results": "0 hits.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -53,5 +111,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-direct-image",
+  "worker": "stage1",
+  "summary": "Checked the definition against the blueprint source and Stacks Tag 0A1G. This is a standalone definition of the total derived direct-image functor and its higher direct-image cohomology sheaves; its only statement dependencies are the existing scheme and derived-category definitions, so no child nodes or proof steps are needed. Mathlib searches found only generic right-derived constructions or underived scheme pushforwards, not this exact scheme-level definition.",
+  "blueprint": "Realizes the node's definition clause: for a morphism of schemes, define Rf_* as the total derived functor and identify its cohomology sheaves with R^i f_*.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ddi2850",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddi2850 (reviewer sub-agent of L); spot-checked: Checked the statement against def-pc-ringed-spaces-derived-direct-image (Tag 079W K-injective construction, cites prop-pur-kinjective-resolutions-exist), def-pc-scheme, def-pc-derived-category, and the uses in lem-pc-direct-image-bounded-coherent, lem-pc-global-hom-pullback-adjunction, lem-pc-coherent-support-proper-higher-direct-image (Rf_* on D(O_X); R^p f_* of a module). FIX more, RETURN less: (1) class b / B3: the node redefined Rf_* as an unspecified 'total derived functor' with no construction or existence citation, duplicating the ringed-space node specialised to schemes; now stated as the derived direct image of def-pc-ringed-spaces-derived-direct-image for the underlying morphism of ringed spaces, which supplies the K-injective construction and prop-pur-kinjective-resolutions-exist (stmt_deps adds it). (2) B3: R^if_* now defined as H^i(Rf_*E), including the module-in-degree-0 case its citers use. Removal of the parenthetical by K1 was correct (no smuggled lemma remains). Second reading by K1 missed (1): it reported no duplicate.; 1 file(s) fixed by the reviewer"
+ }
 }
