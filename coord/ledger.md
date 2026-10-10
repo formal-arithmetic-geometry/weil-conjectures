@@ -2129,3 +2129,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:34 L: merged deliver/H1/lem-sc-derived-internal-hom-stalk-localization (reviewer FIX+NODE(1); after a return; new nodes: 4)
 - 17:34 L: merged deliver/J1/lem-sc-semilocal-dedekind-dvr-reduction (reviewer FIX; first push; new nodes: 2)
 - 17:34 L: merged deliver/G1/lem-sc-scheme-over-field-universally-open (reviewer FIX; first push; new nodes: 0)
+- 17:34 L: returned deliver/C1/lem-exc-finite-galois-tensor-decomposition (reviewer RETURN: 1. D2 (no real split of part (1)): step 1 cites the new node lem-exc-finite-galois-algebra-tensor-decomposition, created)
