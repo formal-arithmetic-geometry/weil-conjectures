@@ -1,8 +1,8 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (658)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
 | `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1011 | none |
-| `lem-weil-pbc-strictly-standard-base-change` | 1011 | none |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1011 | none |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1011 | none |
 | `lem-weil-pbc-theorem-formal-functions` | 1011 | none |
@@ -27,6 +26,7 @@
 | `lem-weil-pbc-vanishing-projective` | 1011 | none |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
+| `def-weil-pbc-complete-intersection-over-field` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-fibre-degree-bound` | 1012 | none |
 | `def-weil-pbc-finite-global-dimension` | 1012 | none |
@@ -93,6 +93,7 @@
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
+| `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1012 | none |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
@@ -143,6 +144,7 @@
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
+| `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1012 | none |
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
@@ -863,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
+Not open yet: 670 nodes that wait for stage 1, 479 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
