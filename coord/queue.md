@@ -1,6 +1,6 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (640)
 
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
@@ -133,6 +132,7 @@
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-symmetric-algebra-graded` | 1013 | none |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
+| `lem-weil-pbc-tor-dimension-shift-free` | 1013 | none |
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -647,7 +647,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (272)
+## Stage 2: nodes to state (273)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -907,6 +907,7 @@
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
+| `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
