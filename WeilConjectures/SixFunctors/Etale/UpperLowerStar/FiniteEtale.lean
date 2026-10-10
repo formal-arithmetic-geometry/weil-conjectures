@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
@@ -685,5 +686,73 @@ instance Etale.isIso_etaleLowerShriekToLowerStar (G : Sheaf X.smallEtaleTopology
 
 end Concrete
 end LowerShriek
+
+section Compose
+
+variable (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+  (F : A ⥤ B) [F.PreservesZeroMorphisms] [X.smallEtaleTopology.HasSheafCompose F]
+  [Y.smallEtaleTopology.HasSheafCompose F]
+
+/-- Extension by zero off the graphs commutes with postcomposition by a functor preserving
+zero morphisms. -/
+lemma Etale.sheafCompose_map_lowerStarUnit_app (G : Sheaf X.smallEtaleTopology A) :
+    (sheafCompose _ F).map ((Etale.lowerStarUnit A f).app G) =
+      (Etale.lowerStarUnit B f).app ((sheafCompose _ F).obj G) := by
+  ext U : 3
+  refine Scheme.Etale.graph_hom_ext f ((sheafCompose _ F).obj G) ?_ ?_
+  · erw [Scheme.Etale.graphExtend_graph]
+    change F.map _ ≫ F.map _ = _
+    rw [← F.map_comp]
+    erw [Scheme.Etale.graphExtend_graph]
+    exact F.map_id _
+  · erw [Scheme.Etale.graphExtend_graphComplι]
+    change F.map _ ≫ F.map _ = _
+    rw [← F.map_comp]
+    erw [Scheme.Etale.graphExtend_graphComplι]
+    exact F.map_zero _ _
+
+end Compose
+
+section Bijective
+
+variable [IsFinite f]
+
+/-- For concrete coefficients the extension by zero off the graphs is the unit of an
+adjunction `f_* ⊣ f^*`: every morphism `G ⟶ f^* F` is `η_G ≫ f^* φ` for a unique
+`φ : f_* G ⟶ F`. -/
+lemma Etale.bijective_lowerStarUnit_comp_map_of_concrete [HasSmallSiteSheafify A]
+    {FC : A → A → Type*} {CC : A → Type (u + 1)} [∀ P Q, FunLike (FC P Q) (CC P) (CC Q)]
+    [ConcreteCategory.{u + 1} A FC] [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    (G : Sheaf X.smallEtaleTopology A) (F : Sheaf Y.smallEtaleTopology A) :
+    Function.Bijective (fun φ : (f)_*[A].obj G ⟶ F ↦
+      (Etale.lowerStarUnit A f).app G ≫ (Etale.localizationRestriction A f ‹_›).map φ) := by
+  have : (fun φ : (f)_*[A].obj G ⟶ F ↦
+      (Etale.lowerStarUnit A f).app G ≫ (Etale.localizationRestriction A f ‹_›).map φ) =
+      ((Etale.etaleLowerShriekAdjunction A f).homEquiv _ _) ∘
+        (fun φ ↦ Etale.etaleLowerShriekToLowerStar A f G ≫ φ) := by
+    funext φ
+    exact (Etale.etaleLowerShriekAdjunction_homEquiv_comp A f G φ).symm
+  rw [this]
+  exact ((Etale.etaleLowerShriekAdjunction A f).homEquiv _ _).bijective.comp
+    ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨inv (Etale.etaleLowerShriekToLowerStar A f G) ≫ ψ,
+      IsIso.hom_inv_id_assoc _ _⟩⟩
+
+example : HasSmallSiteSheafify AddCommGrpCat.{u + 1} := inferInstance
+omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f]
+  [IsFinite f] in
+/-- Composing with `Hom(a, -)` preserves sheaves on the small étale site. -/
+instance Etale.hasSheafCompose_preadditiveCoyoneda (Z : Scheme.{u}) (a : A) :
+    Z.smallEtaleTopology.HasSheafCompose (preadditiveCoyoneda.obj (op a)) :=
+  have : PreservesLimitsOfSize.{u, u + 1} (preadditiveCoyoneda.obj (op a)) :=
+    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  inferInstance
+
+example : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+  inferInstance
+example : IsGrothendieckAbelian.{u + 1} AddCommGrpCat.{u + 1} := inferInstance
+
+end Bijective
 
 end AlgebraicGeometry
