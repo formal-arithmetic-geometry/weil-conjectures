@@ -77,8 +77,8 @@ by sheafification.
   convention of the `SixFunctors` folder.
 - Both functors are defined along the base change functor, which exists for an *arbitrary*
   morphism `g` — in contrast to the localization functor `MorphismProperty.Over.map ⊤ h`
-  of `WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs`, which requires
-  `WeaklyEtale g`. This is essential for compactifications, whose structure morphism is
+  of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs`, which
+  requires `WeaklyEtale g`. This is essential for compactifications, whose structure morphism is
   proper and in general is not weakly étale.
 - Sheafification on the small pro-étale sites and the left Kan extensions along the
   opposite of base change exist since `A` is Grothendieck abelian and the small pro-étale
