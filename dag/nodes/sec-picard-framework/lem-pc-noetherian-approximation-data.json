@@ -23,9 +23,63 @@
   "def-pc-perfect-complex",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a stage in the filtered system at which the finitely presented morphism X\\to Spec(R) descends. The spreading-out theorem gives X_i\\to Spec(R_i) of finite presentation and an identification of its base change with X.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.1, Tag 01ZM"
+   }
+  },
+  {
+   "text": "After increasing the same stage, the bounded complex G^\\bullet descends as a bounded complex G_i^\\bullet of finitely presented modules, flat over R_i, and the supports of its terms descend with properness over Spec(R_i); the base change is identified with G^\\bullet. This is the combined finite-presentation, flatness, and proper-support descent statement.",
+   "uses": [
+    "lem-pc-finite-flat-proper-support-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
+    "place": "Lemmas 32.10.2 (01ZR), 32.10.4 (05LY), 32.13.5 (081G), and Cohomology of Schemes Lemma 30.26.7"
+   }
+  },
+  {
+   "text": "After increasing the stage once more, the perfect object E descends to a perfect object E_i on X_i with the prescribed base-change identification, by perfect-complex descent along the affine inverse system.",
+   "uses": [
+    "lem-pc-perfect-complex-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.29.3, Tag 09RF"
+   }
+  },
+  {
+   "text": "The filtered system is directed, so one stage dominates the stages obtained in the preceding steps. Replacing i by that common later stage and base-changing all descended data preserves finite presentation, boundedness, flatness, proper support, perfectness, and the three stated identifications. Thus all required data descend simultaneously.",
+   "uses": [
+    "lem-pc-finite-flat-proper-support-descent",
+    "lem-pc-perfect-complex-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.1, Tag 01ZM, filtered-stage enlargement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-pc-finite-flat-proper-support-descent",
+  "lem-pc-perfect-complex-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/perfect.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 01ZM, 01ZR, 05LY, 081G, 09RF and Cohomology Lemma 30.26.7"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +111,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-support-perfect-direct-image",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-noetherian-approximation-data",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this item. The empty imported proof was split into the existing finite-presentation spreading-out theorem and two statement-only descent nodes: bounded finitely presented flat complexes with proper support, and perfect complexes. A final directed-stage argument combines the independently obtained stages.",
+  "blueprint": "Realizes the parent blueprint proof sentence on Noetherian approximation of X, G^\\\\bullet, its flatness and proper support, and E (Tags 01ZR, 05LY, 081G, 09RF).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nad2213",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nad2213 (reviewer sub-agent of L); spot-checked: C1/C4: step 1 uses thm-pd-spreading-out (01ZM) clause 1 with S_i=Spec R_i affine qcqs, affine transitions; steps 2-3 cite the two new nodes whose statements give exactly G_i (bounded, fp, R_i-flat, proper support, base-change iso) and perfect E_i on X_i (09RF situation: X_i qcqs, affine transitions); step 4 directed common stage, base change preserves flatness/proper support/perfectness - elementary. C4 vs citer lem-pc-proper-support-perfect-direct-image: its Noetherian-approximation step uses exactly X_i, G_i, E_i with identifications. Class (b): grepped dag/nodes for 01ZR/05LY/081G/09RF/05N7/0A0P/081F/noetherian-approximation; lem-weil-pbc-eventually-proper (081F), lem-weil-pbc-proper-limit-noetherian (0A0P), lem-weil-pbc-limit-module-finite-presentation (00R1), lem-weil-pbc-etale-finite-data-descent state different facts, no duplicate; (c)/(d): no Mathlib geometric descent, neither node elementary. No repairs. Note: report says stale blueprint tags 0C0C/09RK replaced, but item blueprint.from.place still lists them (metadata only, not a fault)."
+ }
 }
