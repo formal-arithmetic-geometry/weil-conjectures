@@ -25,9 +25,39 @@
   "def-nagata-homogeneous-localization-degree-zero",
   "def-pc-proj"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The standard opens form a basis of the topology by [lem-weil-pbc-proj-standard-open-inclusion], clause (0), which states this for every positive-degree homogeneous element of the nonnegatively graded ring S.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Section 01M3 and Lemma 01M4 (label lemma-standard-open), clause (0); Algebra Lemma 00JP (label lemma-topology-proj), part (5)"
+   }
+  },
+  {
+   "text": "For each positive-degree homogeneous f, the standard open D_+(f) is affine because [def-nagata-affine-proj] identifies it with Spec(S_(f),0) via Proj.basicOpenIsoSpec.",
+   "uses": [
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Lemma 01MB (label lemma-proj-scheme), the affine identification D_+(f) = Spec(S_(f))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-nagata-affine-proj"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions Section 01M3, Lemmas 01M4 and 01MB; Algebra Lemma 00JP"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +82,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-finite-set-affine",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proj-standard-open-basis",
+  "worker": "stage1",
+  "summary": "Split the statement into the topological basis clause and the affine-chart clause. The basis step cites the existing cross-unit standard-open theorem, and the affine step cites the existing Proj definition whose statement identifies each standard open with the spectrum of the degree-zero homogeneous localization. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof's first-sentence use of standard opens forming a basis and having affine nonvanishing loci.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Its clause (0) supplies the positive-degree standard-open basis statement, which is a generic Proj topology theorem not duplicated in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pso",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pso (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Lemma 00JP (algebra.tex label lemma-topology-proj) item 'The open sets D_+(f) form a basis for the topology of Proj(S)' and Constructions Lemma 01MB (label lemma-proj-scheme) 'The standard opens D_+(f) are affine opens'; item statement unchanged and agrees (graded ring S as in def-pc-proj, nonnegatively graded; D_+(f), f homogeneous of positive degree). Step 1 carried by lem-weil-pbc-proj-standard-open-inclusion clause (0), whose statement says exactly that the standard opens D_+(f), f homogeneous of positive degree, form a basis of Proj(S) for an N-graded commutative ring S; off-unit (sk-thm-reduction) generic Proj-topology fact used as a black box, accepted as tool use (C8). Step 2 carried by def-nagata-affine-proj, whose statement identifies D_+(f) (f homogeneous of positive degree) with Spec(R_(f),0) via Proj.basicOpenIsoSpec, hence affine (def-pc-proj says the same). No new nodes. Mathlib (pinned) checked: ProjectiveSpectrum.isTopologicalBasis_basic_opens (Topology.lean:391) and Proj.isBasis_basicOpen (Basic.lean:79) range over basicOpen r for all r : A, not positive-degree homogeneous f, so they do not state clause 1 exactly; Proj.isAffineOpen_basicOpen (Basic.lean:201) states the affine clause only; no slopmaster2 declaration states the basis claim; split rather than leaf is right. Small cases: S=0 (Proj empty, vacuous); k[x0,x1] (D_+(x0), D_+(x1) affine lines, basis). Note: report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:28:40 PM UTC 2026, end Sat Oct 10 04:29:09 PM UTC 2026."
+ }
 }
