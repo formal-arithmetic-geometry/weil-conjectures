@@ -21,9 +21,27 @@
   "def-sc-invertible-module",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-zero-scheme-pullback-full-local-coefficient] with $W=U$ to obtain free generators on $g^{-1}(U)$ and the coefficient $g.app\\,U\\,b$. Restrict both generators along the inclusion $V\\subseteq g^{-1}(U)$; restriction of a free generator remains a free generator, and functoriality of restriction of sections gives the coefficient $g.appLE\\,U\\,V\\,b$. Thus the asserted generators on $V$ satisfy the displayed equation.",
+   "uses": [
+    "lem-pc-zero-scheme-pullback-full-local-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+    "place": "lemma IsFreeGenerator.exists_pullback, lines 388-446; restriction to an affine open V"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-zero-scheme-pullback-full-local-coefficient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+  "place": "lemma IsFreeGenerator.exists_pullback, lines 388-446"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,12 +84,28 @@
    "note": "Sorry-free by the slopmaster2 sorry map. It gives free generators and the mapped coefficient on the full inverse-image open; restrict to the affine V in this statement."
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-lem-picard-zero-dictionary",
  "created": {
   "item": "lem-pc-zero-scheme-pullback",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-zero-scheme-pullback-local-coefficient",
+  "worker": "stage1",
+  "summary": "Split the arbitrary-affine-open conclusion from the closed full-inverse-image pullback theorem. The sole proof step applies the attached full theorem on g^{-1}(U) and restricts generators and the coefficient equation to V.",
+  "blueprint": "The proof realizes the pullback-compatibility clause in part (2) of lem-pc-zero-scheme-properties: choose pullback generators and identify their coefficient, then restrict to the affine neighborhood V.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zpl1851",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zpl1851 (reviewer sub-agent of L); spot-checked: New node lem-pc-zero-scheme-pullback-full-local-coefficient matches IsFreeGenerator.exists_pullback (ZeroLocus.lean 391-396, sorryfree OK) exactly, attached; no existing DAG node states exists_pullback (grep); item is the inline specialization used in comap_zeroLocus (line 521-525), not a separate declaration, so split is right; Step 1 = new node at W=U plus elementary restriction of generators and appLE functoriality; no cycle: new node is the full-preimage version, not a restatement; consumer lem-pc-zero-scheme-pullback cites the item, not vice versa. No repairs."
  }
 }
