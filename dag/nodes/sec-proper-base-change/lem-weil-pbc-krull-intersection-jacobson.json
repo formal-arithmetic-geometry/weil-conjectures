@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-krull-intersection-jacobson",
+ "kind": "statement",
+ "title": "Krull intersection theorem for an ideal in the Jacobson radical",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq R$ an ideal contained in the Jacobson radical of $R$ (the intersection of all maximal ideals of $R$), and $M$ a finitely generated $R$-module [def-weil-finitely-generated-module]. Then $\\bigcap_{n\\ge0}I^nM=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257), part (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull intersection theorem: Noetherian ring, ideal in Jacobson radical, finite module, intersection of I^n M is zero",
+   "results": "Ideal.iInf_pow_smul_eq_bot_of_le_jacobson, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors (Mathlib.RingTheory.Filtration), IsHausdorff.of_le_jacobson (Mathlib.RingTheory.AdicCompletion.Noetherian), Submodule.le_of_le_smul_of_le_jacobson_bot (Mathlib.RingTheory.Nakayama)",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.iInf_pow_smul_eq_bot_of_le_jacobson"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "intersection of all I^n • M is zero for a finitely generated module over a Noetherian ring when I is contained in the Jacobson radical",
+   "results": "Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (Mathlib.RingTheory.Filtration), IsHausdorff.of_le_jacobson, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.mem_iInf_smul_pow_eq_bot_iff",
+   "date": "2026-10-10",
+   "verdict": "match: Ideal.iInf_pow_smul_eq_bot_of_le_jacobson"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'iInf_pow_smul_eq_bot_of_le_jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 400,430p RingTheory/Filtration.lean; grep -n 'def jacobson' RingTheory/Jacobson/Ideal.lean",
+   "results": "RingTheory/Filtration.lean:416 theorem Ideal.iInf_pow_smul_eq_bot_of_le_jacobson [IsNoetherianRing R] [Module.Finite R M] (h : I ≤ Ideal.jacobson ⊥) : (⨅ i : ℕ, I ^ i • ⊤ : Submodule R M) = ⊥; used at AdicCompletion/Noetherian.lean:24; Ideal.jacobson defined at RingTheory/Jacobson/Ideal.lean:65 as the infimum of the maximal ideals containing I",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.iInf_pow_smul_eq_bot_of_le_jacobson",
+  "file": "Mathlib/RingTheory/Filtration.lean",
+  "line": 416,
+  "how": "exact: [IsNoetherianRing R] [Module.Finite R M] (h : I ≤ Ideal.jacobson ⊥) gives ⨅ i, I ^ i • ⊤ = ⊥ in Submodule R M; Ideal.jacobson ⊥ (RingTheory/Jacobson/Ideal.lean:65) is the intersection of all maximal ideals and I ^ i • ⊤ is I^iM. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-split-injection-after-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

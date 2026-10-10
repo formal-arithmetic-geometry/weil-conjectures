@@ -1,0 +1,59 @@
+{
+ "id": "lem-weil-pbc-split-extension-free-presentation",
+ "kind": "statement",
+ "title": "Splitting of an injection measured on a free presentation of the cokernel",
+ "statement": "Let $R$ be a ring, $u:N\\to M$ an injective homomorphism of $R$-modules, $Q=M/u(N)$ with projection $p:M\\to Q$, and $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ an exact sequence of $R$-modules with $F_0$ free. Let $\\alpha:F_0\\to M$ be an $R$-linear map with $p\\circ\\alpha=\\pi$, and let $\\beta:F_1\\to N$ be the unique $R$-linear map with $u\\circ\\beta=\\alpha\\circ d_1$ (it exists since $p\\circ\\alpha\\circ d_1=\\pi\\circ d_1=0$, so $\\alpha\\circ d_1$ takes values in $u(N)$, and it is unique since $u$ is injective). Then $u$ has an $R$-linear left inverse $v:M\\to N$ ($v\\circ u=\\mathrm{id}_N$) if and only if there is an $R$-linear map $\\gamma:F_0\\to N$ with $\\beta=\\gamma\\circ d_1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion, lines 18148-18165): 'The extension above is split if and only if there exists a map gamma : F_0 -> N such that beta = gamma o d_1', stated there without proof"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence 0 → N → M → Q → 0 splits iff the map from free presentation of Q to N factors through the relations",
+   "results": "Function.Exact.split_tfae, Function.Exact.split_tfae' (Mathlib.Algebra.Exact), Module.Presentation.ofExact_R (Mathlib.Algebra.Module.Presentation.Cokernel), CategoryTheory.ShortComplex.Splitting, LinearMap.splittingOfFinsuppSurjective, ModuleCat.free_shortExact",
+   "date": "2026-10-10",
+   "verdict": "no match; split_tfae gives only the equivalence of left inverse, right inverse and direct sum decomposition, no criterion via a presentation of the cokernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective linear map u : N → M has a left inverse iff the induced extension class vanishes; lift of presentation F1 → F0 → M/N, β : F1 → N factors through d1",
+   "results": "Module.Injective.out, Module.Injective.extension_property, Module.injective_iff, Module.Relations.Solution.IsPresentation.postcomp_injective, LinearMap.codLift_apply, LinearMap.exists_leftInverse_of_injective (division rings), Module.Baer.extension_property",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'split' Algebra/Exact.lean Algebra/Module/Presentation/*.lean; grep -n 'theorem\\|lemma' Algebra/Homology/DerivedCategory/Ext/ExtClass.lean; grep -rn 'exists_leftInverse\\|leftInverse_of' --include=*.lean (Mathlib of ~/weil-conjectures-slopmaster2)",
+   "results": "Function.Exact.split_tfae (Algebra/Exact.lean); ShortExact.extClass with comp_extClass, extClass_comp, extClass_naturality (Ext/ExtClass.lean) but no lemma 'extClass = 0 iff split' and nothing on presentations; LinearMap.exists_leftInverse_of_injective only over division rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-split-injection-after-completion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

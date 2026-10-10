@@ -10,9 +10,79 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$u$ is injective.* Let $x\\in\\ker u$ and let $k$ be one of the integers for which $u_k$ has a left inverse $v_k$. The class $\\bar x\\in N/J^kN$ satisfies $u_k(\\bar x)=\\overline{u(x)}=0$, so $\\bar x=v_k(u_k(\\bar x))=0$, i.e. $x\\in J^kN$. Since these $k$ are arbitrarily large and $J^kN\\supseteq J^{k'}N$ for $k\\le k'$, $x\\in J^kN$ for every $k\\ge0$, so $x\\in\\bigcap_kJ^kN=0$ by Krull's intersection theorem [lem-weil-pbc-krull-intersection-jacobson] applied to the Noetherian ring $A$ [def-weil-pbc-noetherian-ring], $J$ in the Jacobson radical and the finitely generated module $N$ [def-weil-finitely-generated-module].",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18148-18151 (Ker(phi) in I^nN for arbitrarily large n, then Lemma 00IQ)"
+   }
+  },
+  {
+   "text": "*A finite free presentation of the cokernel.* Put $Q=M/u(N)$ with projection $p:M\\to Q$, so $0\\to N\\xrightarrow{u}M\\xrightarrow{p}Q\\to0$ is exact (step 1). $Q$ is finitely generated (images of generators of $M$) [def-weil-finitely-generated-module], so there is a surjection $\\pi:F_0=A^a\\to Q$ sending the basis to generators. Its kernel is a submodule of the finitely generated module $A^a$ over the Noetherian ring $A$, hence finitely generated [lem-weil-pbc-noetherian-submodule-finite]; choose a surjection $F_1=A^b\\to\\ker\\pi$ and let $d_1:F_1\\to F_0$ be its composite with the inclusion, so $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ is exact. (Stacks takes a resolution $F_2\\to F_1\\to F_0\\to Q\\to 0$; $F_2$ only serves to name the class of $\\beta$ in $\\mathrm{Ext}^1_A(Q,N)$ and is not needed for the argument.) Since $F_0$ is free and $p$ surjective, choose $\\alpha:F_0\\to M$ with $p\\circ\\alpha=\\pi$ (send each basis vector to a preimage of its image). Then $p\\circ\\alpha\\circ d_1=\\pi\\circ d_1=0$, so $\\alpha\\circ d_1$ takes values in $u(N)$, and since $u$ is injective there is a unique $A$-linear $\\beta:F_1\\to N$ with $u\\circ\\beta=\\alpha\\circ d_1$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18151-18162"
+   }
+  },
+  {
+   "text": "*Reduction modulo $J^k$.* Let $k$ be one of the integers of the hypothesis, $v_k:M/J^kM\\to N/J^kN$ with $v_k\\circ u_k=\\mathrm{id}$, and $q_N:N\\to N/J^kN$, $q_M:M\\to M/J^kM$ the projections, so $u_k\\circ q_N=q_M\\circ u$. Put $\\bar\\gamma_k=v_k\\circ q_M\\circ\\alpha:F_0\\to N/J^kN$. Then $\\bar\\gamma_k\\circ d_1=v_k\\circ q_M\\circ u\\circ\\beta=v_k\\circ u_k\\circ q_N\\circ\\beta=q_N\\circ\\beta$. Since $F_0$ is free and $q_N$ surjective, lift $\\bar\\gamma_k$ to an $A$-linear $\\gamma_k:F_0\\to N$ with $q_N\\circ\\gamma_k=\\bar\\gamma_k$; then $q_N\\circ(\\beta-\\gamma_k\\circ d_1)=0$, i.e. $\\beta-\\gamma_k\\circ d_1$ maps $F_1$ into $J^kN$. (This is Stacks' 'arguing as above' for the reduced sequence, which is the 'only if' direction of the splitting criterion; written directly it needs neither the exactness of the reduced sequences nor of the reduced presentation.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18166-18190"
+   }
+  },
+  {
+   "text": "*Translation into $\\mathrm{Hom}$.* Let $H=\\mathrm{Hom}_A(F_1,N)$ and $d_1^*:\\mathrm{Hom}_A(F_0,N)\\to H$, $\\gamma\\mapsto\\gamma\\circ d_1$. With the basis $e_1,\\dots,e_b$ of $F_1=A^b$, $H\\cong N^b$ via $f\\mapsto(f(e_j))_j$, and $f$ maps $F_1$ into $J^kN$ iff each $f(e_j)\\in J^kN$, iff $f\\in J^kH$ (as $J^k(N^b)=(J^kN)^b$). So step 3 gives $\\beta\\in\\mathrm{im}(d_1^*)+J^kH$ for arbitrarily large $k$. Let $C=H/\\mathrm{im}(d_1^*)$ and $c$ the image of $\\beta$ in $C$; then $c\\in J^kC$ for arbitrarily large $k$, hence for all $k$ (the $J^kC$ decrease). $C$ is a quotient of $H\\cong N^b$, a finitely generated $A$-module [def-weil-finitely-generated-module], so $\\bigcap_kJ^kC=0$ by [lem-weil-pbc-krull-intersection-jacobson] ($A$ Noetherian [def-weil-pbc-noetherian-ring], $J$ in the Jacobson radical). Hence $c=0$: there is $\\gamma:F_0\\to N$ with $\\beta=\\gamma\\circ d_1$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18186-18202 (Lemma 00IQ applied to the cokernel of Hom(F_0,N) -> Hom(F_1,N))"
+   }
+  },
+  {
+   "text": "*Conclusion.* By steps 1 and 2, $u$ is injective, $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ is exact with $F_0$ free, $p\\circ\\alpha=\\pi$ and $u\\circ\\beta=\\alpha\\circ d_1$; by step 4, $\\beta=\\gamma\\circ d_1$ for some $\\gamma:F_0\\to N$. The splitting criterion [lem-weil-pbc-split-extension-free-presentation] gives an $A$-linear $v:M\\to N$ with $v\\circ u=\\mathrm{id}_N$, i.e. $u$ is a split injection.",
+   "uses": [
+    "lem-weil-pbc-split-extension-free-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18160-18165 and 18199-18202"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-split-extension-free-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02HO (lemma-split-injection-after-completion, line 18142) and its proof, Section Tag 02HN (section-ext-application)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +127,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-split-injection-after-completion",
+  "worker": "stage1",
+  "summary": "Split along the Stacks proof of 02HO (tags 02HO, 02HN, 00IQ verified in tags/tags). Five steps: injectivity by Krull intersection (00IQ(2), new Mathlib leaf lem-weil-pbc-krull-intersection-jacobson = Ideal.iInf_pow_smul_eq_bot_of_le_jacobson); a finite free presentation F_1 -> F_0 -> Q of the cokernel with lifts alpha, beta (noetherian-submodule-finite); reduction mod J^k written directly as gamma_k = lift of v_k q_M alpha (elementary; avoids the exactness of the reduced sequences that Stacks mentions); beta in im(d_1^*) + J^k Hom(F_1,N), and Krull intersection on the finite cokernel C gives beta = gamma d_1; conclusion by the splitting criterion that Stacks states without proof (new unsplit node lem-weil-pbc-split-extension-free-presentation). F_2 of the Stacks resolution dropped (only names the Ext class). Statement kept (matches 02HO; v_k are A-linear, equivalently A/J^k-linear). stmt_deps unchanged. Item searches (leansearch, leanfinder, grep) already recorded, no Mathlib match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 02HO: u injective by Krull (new 00IQ (2) Mathlib leaf, Filtration.lean:416 verified by L); finite free presentation of the cokernel with lifts alpha, beta; modulo J^k the splitting gives beta in im(d_1^*) + J^k Hom; Krull on the finite cokernel of d_1^* gives beta = gamma d_1; the splitting criterion (new unsplit node, the fact Stacks asserts inside the proof) gives the left inverse. Tags verified."
+ }
 }
