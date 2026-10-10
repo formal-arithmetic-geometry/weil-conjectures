@@ -96,4 +96,25 @@ instance isIso_adicBaseChangeMap_of_isPullback (hsq : IsPullback g' j' j g'') :
     exact isIso_of_reflects_iso _ (Mod.forget _)
   exact NatIso.isIso_of_isIso_app _
 
+section Derived
+
+variable [IsOpenImmersion j] [IsOpenImmersion j']
+
+instance : (j')^*ᵃ[l].PreservesKInjectiveComplexes :=
+  (adicOpenImmersionLowerShriekAdjunction l j').preservesKInjectiveComplexes
+
+/-- **Open base change for the derived pushforward of `ℓ`-adic sheaves**: for a cartesian square
+with `j` (hence `j'`) an open immersion, `j^* ∘ Rg''_* ≅ Rg'_* ∘ j'^*`. -/
+noncomputable def adicDerivedBaseChangeIso (hsq : IsPullback g' j' j g'') :
+    (g'')_*ᵃ[l].rightDerivedFunctor ⋙ (j)^*ᵃ[l].mapDerivedCategory ≅
+      (j')^*ᵃ[l].mapDerivedCategory ⋙ (g')_*ᵃ[l].rightDerivedFunctor :=
+  have := isIso_adicBaseChangeMap_of_isPullback l hsq
+  (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (g'')_*ᵃ[l] (j)^*ᵃ[l]).symm ≪≫
+    Functor.rightDerivedFunctorNatIso (asIso (adicBaseChangeMap l hsq.toCommSq)) ≪≫
+    Functor.rightDerivedFunctorCompIso (j')^*ᵃ[l] (g')_*ᵃ[l] ≪≫
+    Functor.isoWhiskerRight (j')^*ᵃ[l].rightDerivedFunctorIsoMapDerivedCategory
+      (g')_*ᵃ[l].rightDerivedFunctor
+
+end Derived
+
 end AlgebraicGeometry.ProEtale
