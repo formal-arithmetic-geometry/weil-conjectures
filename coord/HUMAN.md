@@ -105,3 +105,11 @@ The unit sk-prop-cd proves cd(C) <= 2 through the generic point and the Grothend
 ## Blueprint statement error: lem-pd-morphisms-descend (2026-10-10 12:11 UTC, found by the worker of lem-galois-descent)
 
 The node states that morphisms descend along X -> S without the flat, surjective and quasi-compact hypotheses that its Lean (`existsUnique_hom_of_isPullback`) has; with X empty the descended morphism is not unique. Lead note set; to be corrected at its split. Also: the imported proof of lem-galois-descent glued along an etale cover with the Zariski gluing lemma; replaced by fpqc descent (Stacks 02W0, 0245, 02LA, 02VN).
+
+## Blueprint statement error: lem-sc-negative-degree-no-sections (2026-10-10 14:06 UTC)
+
+The blueprint node says: for a proper smooth curve $C$ over an algebraically closed field and $\mathcal M$ of negative degree, $H^0(C,\mathcal M)=0$. False for disconnected $C$: on $\mathbf P^1\sqcup\mathbf P^1$ take $\mathcal O(1)$ on one copy and $\mathcal O(-2)$ on the other (degree $-1$, a nonzero section). Found by the reviewer of E1's delivery of lem-sc-riemann-roch-large-degree. The node's statement now requires $C$ connected; its citer lem-sc-line-bundle-rational-section assumes that.
+
+## Sorry map: the `ts` flag is unusable (2026-10-10 14:06 UTC)
+
+In `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz` the transitive flag `ts` is false on every one of the 32094 entries (425 have `s` true), so `tools/sorry_map.lean` does not compute it. `tools/lean_status.py` and the lead's attachment check follow the `d` edges themselves and are unaffected; the reviewer brief now says to use that check and not `ts`. To be fixed in sorry_map.lean at the next refresh.

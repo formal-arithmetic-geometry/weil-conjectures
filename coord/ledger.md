@@ -1581,3 +1581,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:02 L: merged deliver/E1/lem-sc-riemann-roch-large-degree (reviewer PASS; first push; new nodes: 0)
 - 14:02 L: merged deliver/M1/lem-weil-pbc-dimension-preserved-field-extension (reviewer PASS; first push; new nodes: 0)
 - 14:03 L: merged deliver/M1/def-sc-picard-functor (reviewer PASS; after a return; new nodes: 0)
+- 14:03 L: lem-sc-negative-degree-no-sections corrected (connected; HUMAN.md); sorry map ts flag false everywhere (HUMAN.md; attachments are checked by the d edges, sorryfree.py for reviewers)
