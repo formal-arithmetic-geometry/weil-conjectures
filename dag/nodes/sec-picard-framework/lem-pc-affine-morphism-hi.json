@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-affine-morphism-hi",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Higher direct images of affine morphisms",
@@ -18,15 +18,39 @@
  ],
  "proof": [
   {
-   "text": "The higher direct images commute with restriction to open subschemes\n(of the target), and for an affine open $V\\subseteq S$ the preimage\n$f^{-1}(V)$ is affine (definition of an affine morphism). Hence, on a\nbasis of affine opens $V$ of $S$, the sections of $R^if_*\\mathcal{F}$ are\n$H^i(f^{-1}(V),\\mathcal{F}|)=0$ by [lem-pc-affine-vanishing]; so\n$R^if_*\\mathcal{F}=0$ for $i>0$, and $f_*\\mathcal{F}$ is quasi-coherent since its\nvalue on $V$ is $\\Gamma(f^{-1}(V),\\mathcal{F})^{\\sim}$.",
+   "text": "For every point $y\\in S$, the stalk of $R^if_*\\mathcal F$ is the filtered colimit of $H^i(f^{-1}(V),\\mathcal F|_{f^{-1}(V)})$ over open neighborhoods $V$ of $y$ [lem-weil-pbc-higher-direct-image-presheaf]. Affine opens containing $y$ are cofinal among these neighborhoods, and for such an affine $V$ the inverse image $f^{-1}(V)$ is affine by the definition of an affine morphism [pqf-def-affine-morphism]. The restriction of $\\mathcal F$ remains quasi-coherent, so [lem-pc-affine-vanishing] makes each term of this cofinal colimit zero when $i>0$. Hence every stalk of $R^if_*\\mathcal F$ is zero, and [pqf-lem-sheaf-zero-stalks] gives $R^if_*\\mathcal F=0$.",
    "uses": [
-    "lem-pc-affine-vanishing"
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "pqf-def-affine-morphism",
+    "lem-pc-affine-vanishing",
+    "pqf-lem-sheaf-zero-stalks"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01E4 (description of higher direct images) together with Schemes, Lemma 01EO (affine cohomology vanishing)"
+   }
+  },
+  {
+   "text": "An affine morphism is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. Therefore [pqf-lem-pushforward-qcoh] applies directly and gives that $f_*\\mathcal F$ is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XJ, clause (1)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-vanishing"
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "pqf-def-affine-morphism",
+  "lem-pc-affine-vanishing",
+  "pqf-lem-sheaf-zero-stalks",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-pushforward-qcoh"
  ],
  "proof_origin": {
   "by": "agent",
@@ -35,7 +59,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -119,5 +143,42 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-serre-b"
+ "unit": "sk-thm-picard-serre-b",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-morphism-hi",
+  "worker": "stage1",
+  "summary": "Repaired the split by removing the child's restatement of the vanishing clause. The vanishing is proved directly from the existing higher-direct-image presheaf/stalk description: affine neighborhoods are cofinal, affine inverse images have zero higher cohomology, and zero stalks imply the sheaf is zero. The degree-zero assertion uses the dedicated qcqs pushforward theorem, with affine morphism qcqs supplied by affine permanence.",
+  "blueprint": "The two steps realize the sole proof paragraph of the blueprint node: affine-open restriction and affine cohomology vanishing, together with the degree-zero quasi-coherence conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-higher-direct-image-presheaf",
+    "why": "Step 1 uses its general stalk-colimit description of higher direct images, a generic cohomological tool outside this unit route."
+   },
+   {
+    "node": "pqf-lem-sheaf-zero-stalks",
+    "why": "Step 1 uses the generic sheaf criterion that vanishing of all stalks implies the sheaf is zero."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Step 2 uses the general Tag 01LC theorem that qcqs pushforward preserves quasi-coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "pqf-lem-sheaf-zero-stalks",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "pqf-lem-sheaf-zero-stalks",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-amh2313",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-amh2313 (reviewer sub-agent of L); spot-checked: Return 20:06 repairs checked: (1) D2 child lem-pc-affine-higher-direct-image-vanishing removed; vanishing now proved via stalk colimit of lem-weil-pbc-higher-direct-image-presheaf, affine cofinality (elementary), pqf-def-affine-morphism, lem-pc-affine-vanishing, pqf-lem-sheaf-zero-stalks (Stacks 01XC); (2) qcqs cited from lem-weil-pbc-affine-morphism-permanence (3), f_*F qcoh from pqf-lem-pushforward-qcoh (01LC) directly. Cited nodes do not cite the item (no cycle). Tool uses generic, accepted. Second reading: no missed fault."
+ }
 }
