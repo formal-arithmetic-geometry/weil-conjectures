@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
 # The Picard scheme of a smooth projective curve
@@ -45,6 +46,9 @@ of the criterion are:
   curve over a separably closed field is representable by a group scheme whose group law is the
   tensor product of invertible modules (blueprint `sk-thm-picard-main`,
   `thm-pc-picard-representable`).
+- `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`: the Picard
+  scheme is smooth of dimension `g`, being covered by translates of an open subscheme of
+  `Hilb^g_{X/k}` (blueprint `thm-sc-theorem-of-the-base`).
 -/
 
 @[expose] public section
@@ -153,6 +157,84 @@ theorem isInvertibleDirectImage_of_finrankH_eq (K : Type u) [Field K] [Algebra k
 
 variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 
+/-- **Every class over a field is translated into `F` by a class defined over `k`.** Let `σ` be a
+`k`-rational point of the smooth projective curve `X`, let `K/k` be a field extension and let
+`g ∈ Pic_{X/k,σ}(K)`. Then there is `g' ∈ Pic_{X/k,σ}(k)` such that `g'|_K * g` lies in the
+subfunctor `F` of `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: this is the twist lemma
+`AlgebraicGeometry.Scheme.exists_isInvertible_twist` together with
+`AlgebraicGeometry.isInvertibleDirectImage_of_finrankH_eq`.
+
+This is condition (2)(c) of the representability criterion
+`AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor` for `Pic_{X/k,σ}`. -/
+theorem exists_mul_mem_picardFunctorInvertibleDirectImage [IsSepClosed k]
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 _) (K : Type u) [Field K]
+    [Algebra k K] (g : (picardFunctorNormalizedGrp (X ↘ Spec (.of k)) σ hσ).obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
+    ∃ g' : (picardFunctorNormalizedGrp (X ↘ Spec (.of k)) σ hσ).obj
+        (.op (Over.mk (𝟙 (Spec (.of k))))),
+      ((picardFunctorNormalizedGrp (X ↘ Spec (.of k)) σ hσ).map
+          (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+            (by simp) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶
+              Over.mk (𝟙 (Spec (.of k)))).op).hom g' * g ∈
+        (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).obj
+          (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))))) := by
+  set f := X ↘ Spec (.of k)
+  let G := picardFunctorNormalizedGrp f σ hσ
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  let TK := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let T₀ := Over.mk (𝟙 (Spec (.of k)))
+  let a : TK ⟶ T₀ :=
+    Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k K))) (Category.comp_id _)
+  -- the twist `ℒ₀` with `h⁰(ℒ ⊗ ℒ₀|_{X_K}) = 1` and `h¹(ℒ ⊗ ℒ₀|_{X_K}) = 0`
+  obtain ⟨ℒ₀, hℒ₀, h0, h1⟩ := exists_isInvertible_twist K ((fromSkeleton _).obj g.1.val)
+  -- `ℒ₀` pulled back to `X = X_k` is `σ`-normalized, since `Pic (Spec k)` is trivial
+  let x := Pic.ofIsInvertible ((Modules.pullback (pullback.fst f T₀.hom)).obj ℒ₀)
+  have hx : Pic.mapHom (sectionBaseChange f σ hσ T₀) x = 1 := by
+    have hs : sectionBaseChange f σ hσ T₀ ≫ pullback.fst f T₀.hom = σ :=
+      (pullback.lift_fst _ _ _).trans (Category.id_comp σ)
+    obtain ⟨eσ⟩ := Modules.IsInvertible.nonempty_iso_unit (X := Spec (.of k)) default
+      ((Modules.pullback σ).obj ℒ₀)
+    exact Pic.eq_iff_nonempty_iso.2 ⟨fromSkeletonToSkeletonIso _ ≪≫
+      (Modules.pullback _).mapIso (Pic.ofIsInvertibleIso _) ≪≫
+      (Modules.pullbackComp _ _).app ℒ₀ ≪≫ (Modules.pullbackCongr hs).app ℒ₀ ≪≫ eσ ≪≫
+      Pic.oneIso.symm⟩
+  refine ⟨⟨x, hx⟩, ?_⟩
+  -- the product is the class of `ℒ ⊗ ℒ₀|_{X_K}`
+  have hb : baseChangeMap f a ≫ pullback.fst f T₀.hom = pullback.fst f TK.hom :=
+    (pullback.lift_fst _ _ _).trans (Category.comp_id _)
+  let e₁ : (fromSkeleton _).obj (Pic.map (baseChangeMap f a) x).val ≅
+      (Modules.pullback (pullback.fst f TK.hom)).obj ℒ₀ :=
+    fromSkeletonToSkeletonIso _ ≪≫ (Modules.pullback _).mapIso (Pic.ofIsInvertibleIso _) ≪≫
+      (Modules.pullbackComp _ _).app ℒ₀ ≪≫ (Modules.pullbackCongr hb).app ℒ₀
+  let e : (fromSkeleton (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules).obj
+        (Pic.map (baseChangeMap f a) x * g.1).val ≅
+      (fromSkeleton _).obj g.1.val ⊗
+        (Modules.pullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj
+          ℒ₀ :=
+    Pic.mulIso (Pic.map (baseChangeMap f a) x) g.1 ≪≫ (e₁ ⊗ᵢ Iso.refl _) ≪≫ β_ _ _
+  exact isInvertibleDirectImage_of_finrankH_eq K _ ((Modules.finrankH_congr K e 0).trans h0)
+    ((Modules.finrankH_congr K e 1).trans h1)
+
+/-- **`F` is represented by an open subscheme of a smooth scheme.** For a `k`-rational point `σ` of
+`X`, the subfunctor `F ⊆ Pic_{X/k,σ}` is represented by an open subscheme `W` of the Hilbert scheme
+`H = Hilb^g_{X/k}`, which is smooth of relative dimension `g` over `k`
+(`AlgebraicGeometry.isRepresentable_picardFunctorInvertibleDirectImage`). -/
+lemma exists_representableBy_picardFunctorInvertibleDirectImage [IsSepClosed k]
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 _) :
+    ∃ (H : Over (Spec (.of k))) (W : Scheme.{u}) (j : W ⟶ H.left),
+      SmoothOfRelativeDimension (arithmeticGenus k X) H.hom ∧ IsOpenImmersion j ∧
+      Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
+        |>.RepresentableBy (Over.mk (j ≫ H.hom))) := by
+  obtain ⟨H, q, hq, -, -, eH, -⟩ :=
+    hilbertPresheaf_curve_representable (X ↘ Spec (.of k)) (arithmeticGenus k X)
+  obtain ⟨W, j, hj, ⟨eF⟩⟩ :=
+    isRepresentable_picardFunctorInvertibleDirectImage σ hσ (Over.mk q) eH
+  exact ⟨Over.mk q, W, j, hq, hj, ⟨eF⟩⟩
+
 /-- The version of `AlgebraicGeometry.isRepresentable_picardFunctor` for a curve given by an
 `AlgebraicGeometry.Scheme.Over` instance. -/
 theorem isRepresentable_picardFunctor_aux [IsSepClosed k] :
@@ -172,55 +254,51 @@ theorem isRepresentable_picardFunctor_aux [IsSepClosed k] :
   let G := picardFunctorNormalizedGrp f σ hσ
   let F := picardFunctorInvertibleDirectImage f σ hσ
   have hf := isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral (k := k) (X := X)
-  obtain ⟨H, q, -, -, -, eH, -⟩ := hilbertPresheaf_curve_representable f (arithmeticGenus k X)
-  obtain ⟨W, j, -, ⟨eF⟩⟩ :=
-    isRepresentable_picardFunctorInvertibleDirectImage σ hσ (Over.mk q) eH
-  have hgen (K : Type u) [Field K] [Algebra k K]
-      (g : G.obj (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
-      ∃ g' : G.obj (.op (Over.mk (𝟙 (Spec (.of k))))),
-        (G.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
-            (by simp) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶
-              Over.mk (𝟙 (Spec (.of k)))).op).hom g' * g ∈
-          F.obj (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))))) := by
-    let TK := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
-    let T₀ := Over.mk (𝟙 (Spec (.of k)))
-    let a : TK ⟶ T₀ :=
-      Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k K))) (Category.comp_id _)
-    -- the twist `ℒ₀` with `h⁰(ℒ ⊗ ℒ₀|_{X_K}) = 1` and `h¹(ℒ ⊗ ℒ₀|_{X_K}) = 0`
-    obtain ⟨ℒ₀, hℒ₀, h0, h1⟩ := exists_isInvertible_twist K ((fromSkeleton _).obj g.1.val)
-    -- `ℒ₀` pulled back to `X = X_k` is `σ`-normalized, since `Pic (Spec k)` is trivial
-    let x := Pic.ofIsInvertible ((Modules.pullback (pullback.fst f T₀.hom)).obj ℒ₀)
-    have hx : Pic.mapHom (sectionBaseChange f σ hσ T₀) x = 1 := by
-      have hs : sectionBaseChange f σ hσ T₀ ≫ pullback.fst f T₀.hom = σ :=
-        (pullback.lift_fst _ _ _).trans (Category.id_comp σ)
-      obtain ⟨eσ⟩ := Modules.IsInvertible.nonempty_iso_unit (X := Spec (.of k)) default
-        ((Modules.pullback σ).obj ℒ₀)
-      exact Pic.eq_iff_nonempty_iso.2 ⟨fromSkeletonToSkeletonIso _ ≪≫
-        (Modules.pullback _).mapIso (Pic.ofIsInvertibleIso _) ≪≫
-        (Modules.pullbackComp _ _).app ℒ₀ ≪≫ (Modules.pullbackCongr hs).app ℒ₀ ≪≫ eσ ≪≫
-        Pic.oneIso.symm⟩
-    refine ⟨⟨x, hx⟩, ?_⟩
-    -- the product is the class of `ℒ ⊗ ℒ₀|_{X_K}`
-    have hb : baseChangeMap f a ≫ pullback.fst f T₀.hom = pullback.fst f TK.hom :=
-      (pullback.lift_fst _ _ _).trans (Category.comp_id _)
-    let e₁ : (fromSkeleton _).obj (Pic.map (baseChangeMap f a) x).val ≅
-        (Modules.pullback (pullback.fst f TK.hom)).obj ℒ₀ :=
-      fromSkeletonToSkeletonIso _ ≪≫ (Modules.pullback _).mapIso (Pic.ofIsInvertibleIso _) ≪≫
-        (Modules.pullbackComp _ _).app ℒ₀ ≪≫ (Modules.pullbackCongr hb).app ℒ₀
-    let e : (fromSkeleton (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules).obj
-          (Pic.map (baseChangeMap f a) x * g.1).val ≅
-        (fromSkeleton _).obj g.1.val ⊗
-          (Modules.pullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj
-            ℒ₀ :=
-      Pic.mulIso (Pic.map (baseChangeMap f a) x) g.1 ≪≫ (e₁ ⊗ᵢ Iso.refl _) ≪≫ β_ _ _
-    exact isInvertibleDirectImage_of_finrankH_eq K _ ((Modules.finrankH_congr K e 0).trans h0)
-      ((Modules.finrankH_congr K e 1).trans h1)
+  obtain ⟨H, W, j, -, -, ⟨eF⟩⟩ := exists_representableBy_picardFunctorInvertibleDirectImage σ hσ
   obtain ⟨A, _, ⟨e⟩⟩ := isRepresentable_of_representable_open_subfunctor G F
     (fun T ↦ have := Pic.small (pullback f T.unop.hom); small_subtype _ _)
     (isSheaf_zariski_picardFunctorNormalized f σ hσ hf) eF.isRepresentable
-    (isOpenImmersion_picardFunctorInvertibleDirectImage_ι f σ hσ) hgen
+    (isOpenImmersion_picardFunctorInvertibleDirectImage_ι f σ hσ)
+    (exists_mul_mem_picardFunctorInvertibleDirectImage σ hσ)
   exact ⟨A, inferInstance,
     ⟨e.ofIso (nonempty_picardFunctorNormalized_iso_picardFunctor σ hσ).some⟩⟩
+
+/-- **The Picard scheme is smooth of dimension `g`.** Let `X` be a smooth projective curve of
+genus `g` over a separably closed field `k`. Every `k`-scheme `A` representing the Picard functor
+`Pic_{X/k}` is smooth of relative dimension `g` over `k`.
+
+Choose a `k`-rational point `σ`, so that `Pic_{X/k} ≅ Pic_{X/k,σ}`. The open subfunctor
+`F ⊆ Pic_{X/k,σ}` is represented by an open subscheme `W` of the Hilbert scheme `Hilb^g_{X/k}`,
+smooth of dimension `g`
+(`AlgebraicGeometry.exists_representableBy_picardFunctorInvertibleDirectImage`),
+and the translates of `F` by `k`-points cover `A` by open subschemes isomorphic to `W`
+(`AlgebraicGeometry.exists_isOpenImmersion_of_representable_open_subfunctor`).
+
+(blueprint: `thm-sc-theorem-of-the-base`, smoothness) -/
+theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed k]
+    (A : Over (Spec (.of k))) (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A) :
+    SmoothOfRelativeDimension (arithmeticGenus k X) A.hom := by
+  set f := X ↘ Spec (.of k)
+  have : ∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules :=
+    fun T ↦ have := Modules.isGrothendieckAbelian (pullback f T.hom); inferInstance
+  -- a `k`-rational point `σ`
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨p⟩ := Hom.nonempty_fieldPoints (k := k) f
+  let σ : Spec (.of k) ⟶ X := p.1
+  have hσ : σ ≫ f = 𝟙 _ := by
+    rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  obtain ⟨H, W, j, hH, hj, ⟨eF⟩⟩ := exists_representableBy_picardFunctorInvertibleDirectImage σ hσ
+  let e' : (picardFunctorNormalizedGrp f σ hσ ⋙ forget GrpCat.{u + 1}).RepresentableBy A :=
+    e.ofIso (nonempty_picardFunctorNormalized_iso_picardFunctor σ hσ).some.symm
+  refine IsZariskiLocalAtSource.of_forall_exists_isOpenImmersion _ fun a ↦ ?_
+  obtain ⟨ψ, hψ, ha⟩ := exists_isOpenImmersion_of_representable_open_subfunctor _ _ eF
+    (isOpenImmersion_picardFunctorInvertibleDirectImage_ι f σ hσ)
+    (exists_mul_mem_picardFunctorInvertibleDirectImage σ hσ) e' a
+  refine ⟨_, ψ.left, hψ, ha, ?_⟩
+  rw [Over.w ψ]
+  have := smoothOfRelativeDimension_comp (n := 0) (m := arithmeticGenus k X) j H.hom
+  rwa [zero_add] at this
 
 end Curve
 
