@@ -307,6 +307,18 @@ lemma torAmplitudeIn_iff_exists_iso_Q_obj_flat (a b : ℤ) (K : DerivedCategory 
   rintro ⟨P, _, _, hP, ⟨e⟩⟩
   exact (torAmplitudeIn C a b).prop_of_iso e (torAmplitudeIn_Q_obj_of_flat P a b hP)
 
+/-- A flat object placed in degree `0` has Tor amplitude in `[0, 0]`: the single complex is its
+own flat model. -/
+lemma torAmplitudeIn_singleFunctor_obj_of_flat {F : C} (hF : ObjectProperty.flat F) :
+    torAmplitudeIn C 0 0 ((singleFunctor C 0).obj F) := by
+  refine (torAmplitudeIn_iff_exists_iso_Q_obj_flat 0 0 _).2
+    ⟨(HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F, inferInstance, inferInstance,
+      fun n ↦ ?_, ⟨((singleFunctorIsoCompQ C 0).app F).symm⟩⟩
+  by_cases hn : n = 0
+  · subst hn
+    exact ObjectProperty.prop_of_iso _ (HomologicalComplex.singleObjXSelf _ 0 F).symm hF
+  · exact ObjectProperty.flat_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn)
+
 /-- For a K-flat complex `P` and any complex `L`, the derived tensor product `P ⊗ᴸ L` is the
 tensor product of complexes `P ⊗ L`. -/
 noncomputable def QObjTensorQObjIsoOfKFlatLeft (P L : CochainComplex C ℤ)
