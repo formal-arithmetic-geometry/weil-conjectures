@@ -12,9 +12,87 @@
   "def-weil-pbc-algebra-hom-quotient",
   "def-weil-pbc-adically-complete-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The finite quotients and the first row.* For integers $a,b\\geq1$ put $A_{a,b}=A/(J^a+I^b)$, with its $R$-algebra structure [def-weil-pbc-algebra-hom-quotient]. The quotient maps in either index make the $A_{a,b}$ a commutative grid of discrete $R$-algebras. Since $J$ is closed, the canonical map $A/J\\to\\varprojlim_b A/(J+I^b)=\\varprojlim_bA_{1,b}$ is bijective. Its kernel is $\\bigcap_b(J+I^b)/J=0$. For surjectivity, choose representatives $x_b\\in A$ of a compatible family, successively adjusting $x_{b+1}$ by an element of $J$ so that $x_{b+1}-x_b\\in I^b$; the adjusted representatives give a compatible family in $A/I^b$, hence an element $x\\in A$ by $I$-adic completeness [def-weil-pbc-adically-complete-ring], and its class modulo $J+I^b$ is the prescribed one. Define $\\varphi_{1,b}:S\\to A_{1,b}$ as $g$ followed by $A/J\\to A_{1,b}$. These maps are compatible in $b$. Moreover $g(\\mathfrak n^r)\\subseteq q(I)$ implies $\\varphi_{1,1}(\\mathfrak n^r)=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9274-9289): $A_{n,m}$, $A/J=\\varprojlim A/(J+I^m)$, and the maps $\\varphi_{1,m}$"
+   }
+  },
+  {
+   "text": "*The square-zero maps in the grid.* For $a,b\\geq1$ there is a natural surjective homomorphism of $R$-algebras $$A_{a+1,b+1}\\longrightarrow A_{a+1,b}\\times_{A_{a,b}}A_{a,b+1}.$$ Indeed, for ideals $K=J^{a+1}+I^b$ and $L=J^a+I^{b+1}$, the usual map $A\\to A/K\\times_{A/(K+L)}A/L$ is onto: if representatives $x,y$ have the same image modulo $K+L$, write $x-y=k+\\ell$ with $k\\in K$, $\\ell\\in L$, and the class of $x-k=y+\\ell$ gives a preimage. Here $K+L=J^a+I^b$, and $D=J^{a+1}+I^{b+1}\\subseteq K\\cap L$, so the map factors through $A/D=A_{a+1,b+1}$. Its kernel is $(K\\cap L)/D$. In $A/D$, the image of $K=J^{a+1}+I^b$ is contained in the image of $I^b$; hence the square of the kernel is contained in the image of $I^{2b}$, which is zero because $2b\\geq b+1$ and $I^{b+1}\\subseteq D$. Thus the kernel has square zero.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9281-9293): the displayed grid and the square-zero surjection; the ideal calculation is written out here"
+   }
+  },
+  {
+   "text": "*Construction of compatible maps on the grid.* Starting with $\\varphi_{1,1}$, lift successively along $A_{a+1,1}\\to A_{a,1}$ to obtain compatible $R$-algebra maps $\\varphi_{a,1}:S\\to A_{a,1}$. The kernel of this transition has square zero because $(J^a+I)^2\\subseteq J^{a+1}+I$ for $a\\geq1$. The initial map kills $\\mathfrak n^r$, and after every square-zero lift the lifted map kills the square of any power killed by its reduction (remark (a) in [def-weil-pbc-formally-smooth-adic]); hence every map to be lifted kills some power of $\\mathfrak n$. Thus the lifting property in [def-weil-pbc-formally-smooth-adic] applies at every finite stage. Induct on $a+b$ for the remaining entries. If $\\varphi_{a+1,b}$ and $\\varphi_{a,b+1}$ have been constructed compatibly, their pair is a map from $S$ to $A_{a+1,b}\\times_{A_{a,b}}A_{a,b+1}$ which kills some power of $\\mathfrak n$ (take the larger of the two exponents). Lift it through the square-zero surjection of step 2 to $\\varphi_{a+1,b+1}$. Induction gives maps $\\varphi_{a,b}$ compatible with every horizontal and vertical transition.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9294-9308): induction along the bottom row and then on $n+m$"
+   }
+  },
+  {
+   "text": "*The compatible diagonal and the limit map.* Since $J^t\\subseteq I$, one has $J^{bt}\\subseteq I^b$ for every $b\\geq1$, so $A_{bt,b}=A/(J^{bt}+I^b)=A/I^b$. Let $f_b:S\\to A/I^b$ be $\\varphi_{bt,b}$ under this equality. Grid compatibility shows that the reduction of $f_{b+1}$ modulo $I^b$ is $f_b$: reduce $\\varphi_{(b+1)t,b+1}$ first in the two indices to $\\varphi_{bt,b}$. Therefore the $f_b$ define an $R$-algebra homomorphism $f:S\\to\\varprojlim_bA/I^b=A$, where the last equality is the given $I$-adic completeness [def-weil-pbc-adically-complete-ring].",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9309-9312): $\\varphi_b=\\varphi_{bt,b}$ and passage to $A=\\varprojlim A/I^b$"
+   }
+  },
+  {
+   "text": "*Agreement modulo $J$.* For each $b$, compatibility of the grid identifies the composite $S\\xrightarrow{f}A\\to A/(J+I^b)$ with $\\varphi_{1,b}$, which by step 1 is the reduction of $g$. Hence the two maps $q\\circ f,g:S\\to A/J$ have the same composite to every $A/(J+I^b)$. The injectivity of $A/J\\to\\varprojlim_bA/(J+I^b)$ from step 1 gives $q\\circ f=g$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9311-9314): agreement with $\\psi$ through $A/J=\\varprojlim A/(J+I^b)$"
+   }
+  },
+  {
+   "text": "*The asserted adic bound.* Since $qf=g$ and $g(\\mathfrak n^r)\\subseteq q(I)=(I+J)/J$, one has $f(\\mathfrak n^r)\\subseteq I+J$. Therefore $$f(\\mathfrak n^{rt})\\subseteq(I+J)^t\\subseteq I+J^t\\subseteq I.$$ For the middle inclusion, every product of $t$ factors from $I+J$ either has a factor in $I$ and hence lies in $I$, or has all factors in $J$ and hence lies in $J^t$. This proves both the required lift and the final inclusion.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9315-9319)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07NJ (lemma-lift-continuous, lines 9274-9319); omitted finite ideal calculations written out in steps 1-3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +136,7 @@
   "how": "lines 94-101 (read with sed -n 80,104p): for [Algebra.FormallySmooth R A] (discrete formal smoothness) and [IsAdicComplete I S], every A ->ₐ[R] S ⧸ I lifts to A ->ₐ[R] S. This is the special case n = 0, J = I, t = 1 of this node; the node needs formal smoothness only for the n-adic topology (lifting of maps killing a power of n) and a closed ideal J with J^t in I, which Mathlib does not have. Not a leaf (B8)."
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +157,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07NJ with R discrete, A I-adically complete, J closed with J^t ⊆ I, continuity of g as g(n^r) ⊆ q(I) (07E9); the conclusion includes f(n^{rt}) ⊆ I. Unsplit; Mathlib candidate is the discrete case (B8)."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-lift-into-complete",
+  "worker": "E1",
+  "summary": "Statement checked against Stacks More on Algebra 07NJ and kept unchanged. The proof follows 07NJ in six steps: define the finite quotient grid and identify A/J with its inverse limit using closedness of J and I-adic completeness; prove the grid maps are surjective with square-zero kernel; construct compatible lifts first along the bottom row and then by induction on the two indices, explicitly checking that each map kills a power of n so the stated adic formal-smoothness definition applies; take the diagonal (bt,b) and the inverse limit; check agreement modulo J; prove f(n^{rt}) is contained in I. No new nodes: the only inputs are the three existing statement dependencies, and all omitted source calculations are elementary ideal and inverse-limit calculations written in the steps. Existing Mathlib searches already include LeanSearch, LeanFinder/Loogle, local search and grep and show only the discrete-formal-smoothness special case."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the six steps (07NJ): A/J as the limit of A/(J+I^b), square-zero grid surjections, inductive lifts killing powers of n, the diagonal (bt,b) and its limit, agreement modulo J, the bound f(n^{rt}) in I."
+ }
 }

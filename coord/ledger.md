@@ -1110,3 +1110,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:45 L: accepted lem-weil-pbc-colimit-flat-ring-map (9 steps; new unsplit nodes limit-finite-presentation 00R0, openness-of-flatness 00RC, colimit-category-fp-algebras 05N9).
 - 08:46 L: accepted lem-weil-pbc-lci-conormal-generators-global-complete-intersection (8 steps, no new nodes).
 - 08:46 L: accepted lem-weil-pbc-affine-conormal-sections (5 steps, no new nodes).
+- 2026-10-10, delivery of E1: lem-weil-pbc-fs-adic-lift-into-complete merged from deliver/E1/lem-weil-pbc-fs-adic-lift-into-complete (1 commit(s), 0 new node(s), spot-checked by L: L read the six steps (07NJ): A/J as the limit of A/(J+I^b), square-zero grid surjections, inductive lifts killing powers of n, the diagonal (bt,b) and its limit, agreement modulo J, the bound f(n^{rt}) in I.); claim closed
