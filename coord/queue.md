@@ -1,8 +1,8 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+889 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (328)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,15 +16,18 @@
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
 | `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
-| `lem-sc-integral-dim-one-ample` | 2011 | none |
+| `lem-sc-affine-complement-finite-on-integral-curve` | 2012 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
-| `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
+| `lem-sc-enough-globally-generated-ample` | 2012 | none |
+| `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
+| `lem-sc-reduced-ideals-zero-intersection` | 2013 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
-| `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
+| `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
+| `lem-weil-pbc-geometric-point-cohomology` | 3006 | none |
 | `lem-sc-etale-standard-cover-cech` | 3008 | none |
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 3008 | none |
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
@@ -40,7 +43,6 @@
 | `lem-pc-affine-finite-type-algebra` | 3012 | none |
 | `lem-pc-base-change-product` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
-| `lem-pc-complete-linear-system-closed` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-global-sections-separable` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
@@ -899,7 +901,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 345 nodes that wait for stage 1, 1085 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1089 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
