@@ -1,8 +1,8 @@
 # Work queue
 
-889 items; claim with `tools/claim.py next <group> [--stage N]`.
+888 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (109)
+## Stage 1: nodes to split (108)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,7 @@
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 3021 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
-| `lem-pc-perfect-summand` | 3022 | none |
+| `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -68,7 +68,6 @@
 | `lemma-nagata-qc-open-descends` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `def-pc-derived-direct-image` | - | none |
-| `lem-fin-etale-normal-components` | - | none |
 | `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
@@ -901,7 +900,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1592 nodes that wait for a statement dependency, 149 nodes that wait for stage 1.
+Not open yet: 1594 nodes that wait for a statement dependency, 148 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
