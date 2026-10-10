@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+ "kind": "statement",
+ "title": "A finite purely inseparable extension is a tower of p-th roots",
+ "statement": "Let $p$ be a prime number, $F$ a field of characteristic $p$ and $E/F$ a finite purely inseparable field extension [def-weil-pbc-finite-purely-inseparable-extension] [def-pc-field-extension]. Then there are elements $\\alpha_1,\\dots,\\alpha_n\\in E$ ($n\\ge0$) with $E=F(\\alpha_1,\\dots,\\alpha_n)$ such that for $i=1,\\dots,n$, writing $F_{i-1}=F(\\alpha_1,\\dots,\\alpha_{i-1})$ ($F_0=F$): $\\alpha_i^p\\in F_{i-1}$, $\\alpha_i^p$ is not a $p$-th power in $F_{i-1}$, and $[F_{i-1}(\\alpha_i):F_{i-1}]=p$. In particular, if $E\\ne F$, then $M=F_{n-1}$ is an intermediate field $F\\subseteq M\\subsetneq E$, finite and purely inseparable over $F$ with $[M:F]<[E:F]$, and $E=M(\\beta)$ with $\\beta=\\alpha_n$, $\\beta^p\\in M$ not a $p$-th power in $M$, and $E\\cong M[z]/(z^p-\\beta^p)$ as $M$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669) and its proof (Lemmas nr-roots-unchanged, take-pth-root); used without citation in the proof of More on Algebra Proposition 07PM ('Let K subset M subset L be a subfield such that L is a degree p extension of M obtained by adjoining a pth root of an element f in M')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "purely inseparable extension of exponent one, minimal polynomial X^p - a, intermediate field of degree p",
+   "results": "IsPurelyInseparable.elemExponent, IsPurelyInseparable.minpoly_eq, minpoly_eq', elemExponent_def, minpoly_natDegree_eq (Mathlib.FieldTheory.PurelyInseparable.Exponent), isPurelyInseparable_iff_minpoly_eq_X_sub_C_pow (Mathlib.FieldTheory.PurelyInseparable.Basic): minimal polynomials of single elements (X^(p^e) - a), not the tower of degree-p steps",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite purely inseparable field extension L/K, L ≠ K, there is an intermediate field M with L = M(b), b^p ∈ M and [L:M] = p",
+   "results": "isPurelyInseparable_iff_fd_isPurelyInseparable, IntermediateField.isPurelyInseparable_tower_bot, IntermediateField.isPurelyInseparable_tower_top (Mathlib.FieldTheory.PurelyInseparable.Basic), IsPurelyInseparable.hasExponent_of_finiteDimensional (…Exponent): tower permanence, no degree-p step",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField, Module.finrank",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IntermediateField' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/PurelyInseparable/*.lean | grep -i 'finrank|exists'",
+   "results": "only proof-internal uses (PerfectClosure.lean:397-399, Basic.lean:333, 358, 454): no tower lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

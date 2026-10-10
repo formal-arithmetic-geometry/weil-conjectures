@@ -826,3 +826,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:31 L: reviewed lem-weil-pbc-flat-smooth-fibre-smooth-at-prime (7 steps, +3 unsplit: 00SP definition, 00SY (3)=>(2), 00TE): accepted.
 - 03:32 L: reviewed lem-weil-pbc-flat-under-regular (9 steps, +00O1 composed leaf, +00O5 node): accepted.
 - 03:33 L: reviewed lem-weil-pbc-gabber-finite-etale-section (5 steps, +01SH, +01JY leaves; tool_uses lem-exc-etale-algebra-lift; unreachable flag cleared on lem-weil-pbc-clopen-open-cover-section): accepted.
+- 03:36 L: reviewed lem-weil-pbc-formally-smooth-complete-local-regular (9 steps, +7 unsplit: 07NQ, 07EG, 07NS/07NR lift, 07PL, 07PG, 07PH, 09HI; Stacks 07PM cites 07EH for a base change and applies 07PL to a non-local map): accepted.
