@@ -1,0 +1,83 @@
+{
+ "id": "lem-sc-integral-scheme-stalks-in-function-field",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "statement and proof, implicit throughout: 'for $f\\in k(C)^*$, $\\mathcal O_C(\\operatorname{div}f)=f^{-1}\\mathcal O_C$' presupposes $C$ integral with $\\mathcal O_C(V)\\subseteq\\mathcal O_{C,P}\\subseteq k(C)$ (the inclusions $\\mathcal O_C(V)\\to\\mathcal O_{C,x}\\to k(C)$ are injective and $k(C)$ is the fraction field of each $\\mathcal O_{C,x}$)",
+   "via": [
+    "lem-sc-smooth-connected-curve-local-rings"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral schemes: sections and stalks inject into the function field",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] with generic point $\\eta$ [def-sc-generic-point] (so $\\overline{\\{\\eta\\}}=X$, and $\\eta$ lies in every nonempty open subset of $X$) and function field $k(X)=\\mathcal O_{X,\\eta}$ [def-sc-function-field], a field. For $x\\in X$ let $\\rho_x:\\mathcal O_{X,x}\\to k(X)$ be the ring map of stalks [def-weil-pbc-module-stalk] sending the germ $s_x$ of a section $s\\in\\mathcal O_X(W)$, $W$ an open neighbourhood of $x$, to its germ $s_\\eta$ (well defined since $\\eta\\in W$). Then:\n\n1. for every open $V\\subseteq X$ and every $x\\in V$ the germ map $\\mathcal O_X(V)\\to\\mathcal O_{X,x}$, $s\\mapsto s_x$, is injective;\n2. for every $x\\in X$ the ring $\\mathcal O_{X,x}$ is an integral domain, $\\rho_x$ is injective, and $\\rho_x$ makes $k(X)$ a field of fractions of $\\mathcal O_{X,x}$: every element of $k(X)$ is $\\rho_x(a)\\rho_x(b)^{-1}$ with $a,b\\in\\mathcal O_{X,x}$, $b\\neq0$.\n\nIn particular for a nonempty open $V$ and $x\\in V$ the composite $\\mathcal O_X(V)\\to\\mathcal O_{X,x}\\to k(X)$, which is $s\\mapsto s_\\eta$, is injective.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Section 01OJ (properties-section-integral) with Definition 01OK and Lemma 01ON (properties-lemma-characterize-integral), and Morphisms Lemma 01RV (morphisms-lemma-integral-scheme-rational-functions: for $X$ integral $R(X)=\\mathcal O_{X,\\eta}$ is a field); Stacks states the injectivity only in passing, the statement is that of Mathlib/AlgebraicGeometry/FunctionField.lean lines 55 and 163-179"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "germ map from sections to the stalk of an integral scheme is injective",
+   "results": "none: the service answered HTTP 500 (Internal Server Error) on every call this session, through lean-lsp and through https://leansearch.net directly",
+   "date": "2026-10-10",
+   "verdict": "not run (service down); the other two kinds were run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for an integral scheme the germ map from sections over an open to the stalk is injective and the function field is the fraction field of every stalk",
+   "results": "AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (IsFractionRing (X.presheaf.stalk x) X.functionField), Scheme.germToFunctionField_injective, instFieldCarrierFunctionField, stalkFunctionFieldAlgebra (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.germ_injective_of_isIntegral",
+   "results": "AlgebraicGeometry.germ_injective_of_isIntegral (X) [IsIntegral X] {U : X.Opens} (x : X) (hx : x ∈ U) : Function.Injective (X.presheaf.germ U x hx) (Mathlib.AlgebraicGeometry.FunctionField)",
+   "date": "2026-10-10",
+   "verdict": "match (clause 1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'germ_injective\\|IsFractionRing (X.presheaf.stalk\\|IsDomain (X.presheaf.stalk\\|stalkFunctionFieldAlgebra' Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "results": "FunctionField.lean:55 germ_injective_of_isIntegral; :81 stalkFunctionFieldAlgebra (the map stalkSpecializes, i.e. rho_x); :163 instance IsFractionRing (X.presheaf.stalk x) X.functionField; :178 instance IsDomain (X.presheaf.stalk x)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.germ_injective_of_isIntegral; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; instance IsDomain (X.presheaf.stalk x)",
+  "file": "Mathlib/AlgebraicGeometry/FunctionField.lean",
+  "line": 55,
+  "how": "one declaration per clause (lines read with sed -n 51,68p, 78,100p, 160,180p on 2026-10-10): clause 1 is germ_injective_of_isIntegral (line 55) for [IsIntegral X]; clause 2 is the instance IsFractionRing (X.presheaf.stalk x) X.functionField (line 163) for the algebra stalkFunctionFieldAlgebra (line 81), whose map is X.presheaf.stalkSpecializes along genericPoint ⤳ x, i.e. rho_x; injectivity of rho_x is IsFractionRing.injective, and the domain property is the instance at line 178; X.functionField is the stalk at genericPoint X (line 37), a field by the instance at line 51. The 'in particular' is the composite (algebraMap_germ_eq_germToFunctionField, line 95; Scheme.germToFunctionField_injective, line 65)."
+ },
+ "status": "mathlib",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-smooth-connected-curve-local-rings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic"
+}

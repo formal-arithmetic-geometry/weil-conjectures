@@ -11,19 +11,156 @@
  },
  "kind": "statement",
  "title": "Smooth connected curves: integral, local rings at closed points are DVRs",
- "statement": "Let $k$ be an algebraically closed field and $C$ a smooth connected curve over $k$ [def-sc-curves] (nonempty, connected, of dimension one, separated, of finite type and smooth over $k$). Then:\n\n1. $C$ is a Noetherian integral scheme [def-pc-integral-scheme]; let $\\eta$ be its generic point, so that $k(C)=\\mathcal O_{C,\\eta}$ is a field [def-sc-function-field] and, for every nonempty open $V\\subseteq C$ and every $x\\in C$, the restriction maps $\\mathcal O_C(V)\\to\\mathcal O_{C,x}\\to\\mathcal O_{C,\\eta}=k(C)$ are injective;\n2. every point of $C$ other than $\\eta$ is a closed point, and $C$ has at least one closed point;\n3. for every closed point $P$ of $C$ the local ring $\\mathcal O_{C,P}$ is a discrete valuation ring whose fraction field is $k(C)$ (via the injection of 1.); we write $v_P:k(C)^*\\to\\mathbf Z$ for its normalized valuation.",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a smooth connected curve over $k$ [def-sc-curves] (nonempty, connected, of dimension one, separated, of finite type and smooth over $k$). Then:\n\n1. $C$ is a Noetherian integral scheme [def-pc-integral-scheme]; let $\\eta$ be its generic point [def-sc-generic-point], so that $k(C)=\\mathcal O_{C,\\eta}$ is a field [def-sc-function-field] and, for every nonempty open $V\\subseteq C$ and every $x\\in V$, the maps $\\mathcal O_C(V)\\to\\mathcal O_{C,x}\\to\\mathcal O_{C,\\eta}=k(C)$ (germ at $x$, then the map of stalks sending the germ at $x$ of a section to its germ at $\\eta$) are injective;\n2. every point of $C$ other than $\\eta$ is a closed point [def-weil-closed-points], $\\eta$ is not a closed point, and $C$ has at least one closed point;\n3. for every closed point $P$ of $C$ the local ring $\\mathcal O_{C,P}$ is a discrete valuation ring [def-sc-discrete-valuation-ring] whose fraction field is $k(C)$ (via the injection of 1.); if $t$ is a uniformizer of $\\mathcal O_{C,P}$, every $f\\in k(C)^*$ can be written $f=ut^n$ with $u$ a unit of $\\mathcal O_{C,P}$ and $n\\in\\mathbf Z$, both uniquely determined, and $n$ does not depend on the choice of $t$; we write $v_P(f)=n$, so that $v_P:k(C)^*\\to\\mathbf Z$ is a surjective group homomorphism (the normalized valuation of $\\mathcal O_{C,P}$) and $\\mathcal O_{C,P}\\setminus\\{0\\}=\\{f\\in k(C)^*:v_P(f)\\ge0\\}$.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Properties Lemma 033M (properties-lemma-normal-Noetherian: a Noetherian normal scheme is a finite disjoint union of normal integral schemes) for clause 1; Properties Lemma 02IZ (properties-lemma-codimension-local-ring: $\\dim\\mathcal O_{X,x}$ is the codimension of $\\overline{\\{x\\}}$) with Algebra Lemma 00PD (algebra-lemma-characterize-dvr) for clause 3; these are the standing hypotheses ('$X$ locally Noetherian integral', local rings DVRs) of Stacks Divisors Lemma 0BE9 specialized to a smooth connected curve"
  },
  "stmt_deps": [
   "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
   "def-sc-function-field",
-  "def-pc-integral-scheme"
+  "def-weil-closed-points",
+  "def-sc-discrete-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$C$ is Noetherian and regular.* By [def-sc-curves] the structure morphism $C\\to\\operatorname{Spec}k$ is of finite type, and $\\operatorname{Spec}k$ is Noetherian ($k$ is a field, so a Noetherian ring, and $\\operatorname{Spec}k$ is one point). Hence $C$ is Noetherian, i.e. locally Noetherian and quasi-compact [lem-weil-pbc-finite-type-over-noetherian]. Since $C$ is smooth over the field $k$, every local ring $\\mathcal O_{C,x}$ is a regular local ring [lem-sc-smooth-regular]. So $C$ is a locally Noetherian scheme all of whose local rings are regular local rings, i.e. a regular scheme in the second form of [def-weil-regular-scheme], which is the form in which [lem-sc-regular-connected-integral] states its hypothesis.",
+   "uses": [
+    "def-sc-curves",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-smooth-regular",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 033M (properties-lemma-normal-Noetherian), its hypothesis 'X Noetherian' realized for a scheme of finite type over a field; regularity of the local rings in place of normality, as in the node's source ('smooth over a field gives regular hence normal')"
+   }
+  },
+  {
+   "text": "*Clause 1: integrality and the function field.* By [def-sc-curves] $C$ is nonempty and connected; by step 1 it is regular. Hence $C$ is integral [lem-sc-regular-connected-integral]. (This is the route of Properties 033M: a Noetherian normal scheme is a finite disjoint union of normal integral schemes, and a connected one is integral; [lem-sc-regular-connected-integral] states it for regular schemes.) An integral scheme has irreducible underlying space [lem-pc-integral-scheme-irreducible], so the irreducible closed subset $C$ has a unique generic point $\\eta$ with $\\overline{\\{\\eta\\}}=C$ [lem-sc-scheme-sober]; $\\eta$ lies in every nonempty open $V$ (otherwise $\\overline{\\{\\eta\\}}\\subseteq C\\setminus V\\neq C$). By [def-sc-function-field] $k(C)=\\mathcal O_{C,\\eta}$, and it is a field by [lem-sc-integral-function-field-affine-fraction] (applied to any nonempty affine open of $C$, which exists since $C$ is a nonempty scheme). For a nonempty open $V$ and $x\\in V$, the germ map $\\mathcal O_C(V)\\to\\mathcal O_{C,x}$ and the map of stalks $\\rho_x:\\mathcal O_{C,x}\\to\\mathcal O_{C,\\eta}$ are injective by [lem-sc-integral-scheme-stalks-in-function-field] (1) and (2), hence so is their composite, which is $s\\mapsto s_\\eta$. Moreover $\\mathcal O_{C,x}$ is a domain with field of fractions $k(C)$ via $\\rho_x$ (same node, (2)). This is clause 1.",
+   "uses": [
+    "def-sc-curves",
+    "lem-sc-regular-connected-integral",
+    "lem-pc-integral-scheme-irreducible",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "def-sc-function-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 033M (properties-lemma-normal-Noetherian) for integrality; Morphisms Lemma 01RV and Definition 01RW for $k(C)=\\mathcal O_{C,\\eta}$"
+   }
+  },
+  {
+   "text": "*Distinct points have distinct closures; closed points exist.* If $x,y\\in C$ satisfy $\\overline{\\{x\\}}=\\overline{\\{y\\}}$, this irreducible closed subset has the two generic points $x$ and $y$, so $x=y$ by the uniqueness in [lem-sc-scheme-sober]. Consequently $C$ is Kolmogorov: for $x\\neq y$ the closures differ, so (as $x\\in\\overline{\\{y\\}}$ and $y\\in\\overline{\\{x\\}}$ together would give equal closures) one of them, say $y$, is not in the closure of the other, and the open set $C\\setminus\\overline{\\{x\\}}$ contains $y$ but not $x$. In the same way, if $y\\in\\overline{\\{x\\}}$, $x\\in\\overline{\\{z\\}}$ and $y\\neq x$, $x\\neq z$, then $y\\neq z$ (else $x\\in\\overline{\\{y\\}}$, giving $\\overline{\\{x\\}}=\\overline{\\{y\\}}$). $C$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] by step 1. Hence every nonempty closed subset of $C$ contains a closed point of $C$ [lem-sc-quasi-compact-kolmogorov-closed-point] [def-weil-closed-points]; in particular ($C\\neq\\emptyset$) $C$ has a closed point.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "def-weil-closed-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology Lemma 005E (topology-lemma-quasi-compact-closed-point)"
+   }
+  },
+  {
+   "text": "*Chains of generalizations in $C$ have length at most one, and $C\\neq\\{\\eta\\}$.* Suppose $y,x,z\\in C$ with $y\\in\\overline{\\{x\\}}$, $x\\in\\overline{\\{z\\}}$, $y\\neq x\\neq z$ (so $y\\neq z$ by step 3). Then $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq\\overline{\\{z\\}}$ is a chain of length 2 of irreducible closed subsets of $C$ (closures of points are irreducible; the inclusions are strict by step 3), so the topological Krull dimension of $C$ [def-kun-topological-krull-dimension] is $\\ge2$; and $y=x_0,x,z$ is a chain of generalizations of $y$ of length 2, so $\\dim\\mathcal O_{C,y}\\ge2$ [lem-sc-scheme-stalk-dimension-generalization-chains] and the dimension of $C$ as the supremum of the dimensions of its local rings [def-pc-dimension] is $\\ge2$. Either reading of 'dimension one' in [def-sc-curves] excludes this; so no such $y,x,z$ exist. If $C=\\{\\eta\\}$, its only irreducible closed subset is $C$, so its topological dimension is $0$, and $\\dim\\mathcal O_{C,\\eta}=0$ since $\\eta$ has no chain of generalizations of positive length [lem-sc-scheme-stalk-dimension-generalization-chains]; both contradict dimension one. So $C$ has a point other than $\\eta$, and $\\eta$ is not closed (if $\\{\\eta\\}$ were closed, $C=\\overline{\\{\\eta\\}}=\\{\\eta\\}$).",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-pc-dimension",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-sc-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 02IZ (properties-lemma-codimension-local-ring)"
+   }
+  },
+  {
+   "text": "*Clause 2.* $\\eta$ is not closed and $C$ has a closed point (steps 3, 4). Let $x\\in C$, $x\\neq\\eta$, and suppose $\\{x\\}$ is not closed. The nonempty closed set $\\overline{\\{x\\}}$ contains a closed point $y$ (step 3), and $y\\neq x$ since $\\{x\\}$ is not closed. Also $x\\in C=\\overline{\\{\\eta\\}}$ and $x\\neq\\eta$. So $y\\in\\overline{\\{x\\}}$, $x\\in\\overline{\\{\\eta\\}}$ with $y\\neq x\\neq\\eta$, which step 4 excludes. Hence every point other than $\\eta$ is closed.",
+   "uses": [
+    "def-weil-closed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 02IZ (properties-lemma-codimension-local-ring) and Topology Lemma 005E, as combined in steps 3-4"
+   }
+  },
+  {
+   "text": "*$\\dim\\mathcal O_{C,P}=1$ at a closed point $P$.* By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim\\mathcal O_{C,P}$ is the supremum of the lengths of chains of generalizations of $P$. Since $P$ is closed and $\\eta$ is not (step 4), $P\\neq\\eta$, and $P\\in C=\\overline{\\{\\eta\\}}$: so $P,\\eta$ is a chain of length 1. A chain $P=x_0,x_1,x_2$ of length 2 would give $x_0\\in\\overline{\\{x_1\\}}$, $x_1\\in\\overline{\\{x_2\\}}$, $x_0\\neq x_1\\neq x_2$, excluded by step 4. Hence $\\dim\\mathcal O_{C,P}=1$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 02IZ (properties-lemma-codimension-local-ring): $\\dim\\mathcal O_{C,P}=\\operatorname{codim}(\\{P\\},C)=1$"
+   }
+  },
+  {
+   "text": "*Clause 3: $\\mathcal O_{C,P}$ is a discrete valuation ring with fraction field $k(C)$.* $\\mathcal O_{C,P}$ is a regular local ring [lem-sc-smooth-regular] of dimension one (step 6), hence a discrete valuation ring [lem-sc-regular-dim1-dvr] [def-sc-discrete-valuation-ring] (Algebra Lemma 00PD, (3)$\\Rightarrow$(1)). By step 2 ([lem-sc-integral-scheme-stalks-in-function-field] (2)) the injection $\\rho_P:\\mathcal O_{C,P}\\to k(C)$ makes $k(C)$ its field of fractions.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00PD (algebra-lemma-characterize-dvr), (3) implies (1)"
+   }
+  },
+  {
+   "text": "*Clause 3: the normalized valuation.* Write $R=\\mathcal O_{C,P}\\subseteq k(C)$ (via $\\rho_P$) and let $t$ be a uniformizer, $\\mathfrak m_R=tR$, $t\\neq0$ ($R$ is not a field). $R$ is a Noetherian (principal ideal) local domain with maximal ideal generated by $t$, so every nonzero $b\\in R$ is $b=u t^m$ with $u\\in R^\\times$, $m\\ge0$ [lem-weil-pbc-dvr-unit-times-uniformizer-power]. *Existence:* $f\\in k(C)^*$ is $a/b$ with $a,b\\in R\\setminus\\{0\\}$ (step 7); writing $a=u_1t^{m_1}$, $b=u_2t^{m_2}$ gives $f=(u_1u_2^{-1})t^{m_1-m_2}$. *Uniqueness:* if $ut^n=u't^{n'}$ with $n>n'$, then $u'=ut^{n-n'}\\in tR=\\mathfrak m_R$, contradicting $u'\\in R^\\times$; so $n=n'$ and then $u=u'$. *Independence of $t$:* another uniformizer is $t'=wt$ with $w\\in R^\\times$ ($t'R=tR$, $R$ a domain), and $ut'^n=(uw^n)t^n$. Hence $v_P(f)=n$ is well defined; $v_P(ff')=v_P(f)+v_P(f')$ by multiplying the two expressions, $v_P(t^n)=n$ gives surjectivity, and $f\\in R\\setminus\\{0\\}$ iff $v_P(f)\\ge0$ (if $n\\ge0$ then $ut^n\\in R$; if $f\\in R\\setminus\\{0\\}$ the expression $f=ut^m$, $m\\ge0$, above is the unique one).",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00PD (algebra-lemma-characterize-dvr), last sentence: every nonzero element is uniquely $u\\pi^n$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-curves",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-smooth-regular",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-connected-integral",
+  "lem-pc-integral-scheme-irreducible",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "def-weil-closed-points",
+  "def-kun-topological-krull-dimension",
+  "def-pc-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-regular-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "assembled by the worker from Properties Lemmas 033M and 02IZ, Topology Lemma 005E and Algebra Lemma 00PD (the standing hypotheses of Divisors Lemma 0BE9 for a smooth connected curve); no single document proves the statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -69,7 +206,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +222,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-def-pic"
+ "unit": "sk-def-pic",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-smooth-connected-curve-local-rings",
+  "worker": "stage1",
+  "summary": "Rule 0 checked first: no sorry-free slopmaster2 declaration states the item exactly (AlgebraicGeometry.Scheme.isDiscreteValuationRing_stalk_of_isClosed, Curve/SerreDuality.lean:91, assumes SmoothOfRelativeDimension 1 and gives only the DVR part; IsRegular.isIntegral, Regular.lean:223, is lem-sc-regular-connected-integral; nothing states clause 2). Split in eight steps following the node's sources: Noetherian + regular (lem-weil-pbc-finite-type-over-noetherian, lem-sc-smooth-regular), integral via lem-sc-regular-connected-integral (the regular form of Properties 033M), generic point and k(C) (lem-sc-scheme-sober, lem-sc-integral-function-field-affine-fraction), injectivity and fraction fields of stalks (new Mathlib leaf lem-sc-integral-scheme-stalks-in-function-field), closed points via Topology 005E (new leaf lem-sc-quasi-compact-kolmogorov-closed-point), the dimension bound on chains of generalizations via Properties 02IZ (new leaf lem-sc-scheme-stalk-dimension-generalization-chains, Mathlib ringKrullDim_stalk_eq_coheight), clause 2 and dim O_{C,P}=1 from it, DVR via lem-sc-regular-dim1-dvr (00PD (3)=>(1)), and the normalized valuation written out from lem-weil-pbc-dvr-unit-times-uniformizer-power. Statement made precise (not changed in content): 'every x in V' for the injectivity (the old text said 'every x in C', meaningless for x outside V), 'eta is not closed' added to clause 2 (used by the citers' sums over closed points and proved in step 4), and v_P defined explicitly (existence/uniqueness of u t^n, independence of t, homomorphism, O_{C,P} = {v_P >= 0}) instead of 'its normalized valuation'; new definition node def-sc-discrete-valuation-ring (Mathlib IsDiscreteValuationRing) since the DAG had none. Step 4 covers both readings of 'dimension one' in def-sc-curves (topological Krull dimension, as in the Lean IsConnectedCurve, and def-pc-dimension's supremum of local dimensions).",
+  "blueprint": "Realizes the standing setting of lem-sc-divisor-class-curve's statement and proof: steps 1-3 give 'C integral with function field k(C)' and the inclusions O_C(V) ⊆ O_{C,P} ⊆ k(C) used in 'O_C(div f) = f^{-1} O_C'; steps 3-6 give that the divisors sum_P n_P[P] run over the closed points, which are all points but eta, with one-dimensional local rings; steps 7-8 give the valuations v_P used in div(f) = sum v_P(f)[P] and in 'whence D = div(f)'."
+ },
+ "reviewed": "2026-10-10 L: 8 steps checked (Noetherian and regular; integral via lem-sc-regular-connected-integral, generic point, k(C) a field, injectivity by the new stalks leaf; Kolmogorov and closed points by 005E leaf; chains of generalizations of length at most one by 02IZ leaf under both readings of dimension; clause 2; dim O_{C,P} = 1; DVR by lem-sc-regular-dim1-dvr; the normalized valuation written out from the unit-times-uniformizer-power leaf). Statement sharpened (x in V; eta not closed; v_P written out). Four new Mathlib leaves (germ_injective_of_isIntegral 55 + instances; IsClosed.exists_closed_singleton 175; ringKrullDim_stalk_eq_coheight 376; IsDiscreteValuationRing 58), lines verified. Off-unit citations are Lean-closed nodes or Mathlib leaves (tools by themselves). LeanSearch was down during the searches."
 }

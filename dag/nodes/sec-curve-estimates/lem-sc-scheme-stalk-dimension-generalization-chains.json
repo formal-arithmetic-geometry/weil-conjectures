@@ -1,0 +1,84 @@
+{
+ "id": "lem-sc-scheme-stalk-dimension-generalization-chains",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "statement, 'divisors' $D=\\sum_Pn_P[P]$ over the closed points $P$ of $C$ and the valuations $v_P$: presupposes that the points of $C$ other than its generic point are closed points with local rings of dimension one (the local ring $\\mathcal O_{C,P}$ at a closed point has dimension one)",
+   "via": [
+    "lem-sc-smooth-connected-curve-local-rings"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Dimension of a local ring of a scheme by chains of generalizations",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $x\\in X$. Call a *chain of generalizations of $x$ of length $n$* a sequence of points $x=x_0,x_1,\\dots,x_n$ of $X$ with $x_{i-1}\\in\\overline{\\{x_i\\}}$ and $x_{i-1}\\neq x_i$ for $1\\le i\\le n$. Then the Krull dimension [def-weil-pbc-krull-dimension-ring] of the local ring $\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk] is\n$$\\dim\\mathcal O_{X,x}=\\sup\\{n:\\ \\text{there is a chain of generalizations of }x\\text{ of length }n\\}\\in\\{0,1,2,\\ldots,\\infty\\}.$$\nEquivalently, $\\dim\\mathcal O_{X,x}$ is the codimension of the irreducible closed subset $\\overline{\\{x\\}}$ in $X$: the supremum of the lengths $n$ of chains $\\overline{\\{x\\}}=Z_0\\subsetneq Z_1\\subsetneq\\cdots\\subsetneq Z_n$ of irreducible closed subsets of $X$ [def-weil-irreducible-components] (the two suprema agree because $y\\mapsto\\overline{\\{y\\}}$ is an inclusion-preserving bijection from points to irreducible closed subsets [lem-sc-scheme-sober]).",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 02IZ (properties-lemma-codimension-local-ring: for $Y\\subseteq X$ irreducible closed with generic point $\\xi$, $\\operatorname{codim}(Y,X)=\\dim\\mathcal O_{X,\\xi}$), applied to $Y=\\overline{\\{x\\}}$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-sober"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of the stalk of a scheme at x equals the coheight of x",
+   "results": "none: the service answered HTTP 500 (Internal Server Error) on every call this session, through lean-lsp and through https://leansearch.net directly",
+   "date": "2026-10-10",
+   "verdict": "not run (service down); the other two kinds were run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the local ring of a scheme at a point equals the codimension of its closure (coheight in specialization order)",
+   "results": "AlgebraicGeometry.Scheme.height_of_isClosed, IsLocalization.AtPrime.ringKrullDim_eq_height, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Ring.KrullDimLE.of_isLocalization, ringKrullDim_quotient",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the loogle and grep searches found the match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight",
+   "results": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight {X : Scheme} (x : X) : ringKrullDim (X.presheaf.stalk x) = Order.coheight x (Mathlib.AlgebraicGeometry.Properties)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '02IZ\\|coheight' Mathlib/AlgebraicGeometry/*.lean; grep -n irreducibleSetEquivPoints Mathlib/Topology/Sober.lean",
+   "results": "Properties.lean:376 @[stacks 02IZ] ringKrullDim_stalk_eq_coheight; Scheme.lean:158 instance Preorder X := specializationPreorder X (x ≤ y iff y ⤳ x, le_iff_specializes line 160); Topology/Sober.lean:161 irreducibleSetEquivPoints : IrreducibleCloseds α ≃o α",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight",
+  "file": "Mathlib/AlgebraicGeometry/Properties.lean",
+  "line": 376,
+  "how": "specializes in one line (read with sed -n 340,385p on 2026-10-10, and Scheme.lean:150-160, Topology/Defs/Filter.lean:228-231): ringKrullDim (X.presheaf.stalk x) = Order.coheight x, where a scheme carries the specialization preorder x ≤ y ⟺ y ⤳ x ⟺ x ∈ closure {y} (Scheme.lean:158) and coheight x is the supremum of lengths of strict chains x = x_0 < x_1 < ... < x_n; since schemes are T0 (Properties.lean:38) x_{i-1} < x_i is x_{i-1} ∈ closure{x_i} with x_{i-1} ≠ x_i, the node's chains. The codimension form is the same supremum transported by the order isomorphism irreducibleSetEquivPoints (Topology/Sober.lean:161, for QuasiSober and T0, instances Properties.lean:38,43) and Order.coheight_orderIso, as in Topology/KrullDimension.lean:85."
+ },
+ "status": "mathlib",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-smooth-connected-curve-local-rings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic"
+}

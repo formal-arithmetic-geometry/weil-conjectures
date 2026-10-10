@@ -1,0 +1,80 @@
+{
+ "id": "lem-sc-quasi-compact-kolmogorov-closed-point",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "statement, 'divisors' $D=\\sum_Pn_P[P]$ over the closed points $P$ of $C$ and the valuations $v_P$: presupposes that the points of $C$ other than its generic point are closed points with local rings of dimension one (existence of closed points in nonempty closed subsets of $C$)",
+   "via": [
+    "lem-sc-smooth-connected-curve-local-rings"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Closed points in closed subsets of quasi-compact Kolmogorov spaces",
+ "statement": "Let $X$ be a topological space which is quasi-compact [def-weil-pbc-quasi-compact-scheme] (every open covering has a finite subcovering) and Kolmogorov (for any two distinct points $x\\neq y$ of $X$ there is an open subset of $X$ containing exactly one of them). Then every nonempty closed subset $Z\\subseteq X$ contains a point $z$ such that $\\{z\\}$ is closed in $X$. In particular, if $X$ is nonempty it has a closed point.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology Lemma 005E (topology-lemma-quasi-compact-closed-point: a nonempty quasi-compact Kolmogorov space has a closed point), applied to $Z$ with the subspace topology (a closed subset of a quasi-compact space is quasi-compact, a subspace of a Kolmogorov space is Kolmogorov, and a point closed in the closed subset $Z$ is closed in $X$)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed point in a nonempty closed subset of a compact T0 space",
+   "results": "none: the service answered HTTP 500 (Internal Server Error) on every call this session, through lean-lsp and through https://leansearch.net directly",
+   "date": "2026-10-10",
+   "verdict": "not run (service down); the other two kinds were run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a nonempty closed subset of a compact T0 space contains a point whose singleton is closed",
+   "results": "IsClosed.exists_closed_singleton (Mathlib.Topology.Separation.Basic), IsClosed.exists_minimal_nonempty_closed_subset, minimal_nonempty_closed_eq_singleton",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosed.exists_closed_singleton",
+   "results": "IsClosed.exists_closed_singleton {X} [TopologicalSpace X] [T0Space X] [CompactSpace X] {S : Set X} (hS : IsClosed S) (hne : S.Nonempty) : ∃ x ∈ S, IsClosed {x} (Mathlib.Topology.Separation.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_closed_singleton\\|005E' Mathlib/Topology",
+   "results": "Topology/Separation/Basic.lean:175 IsClosed.exists_closed_singleton",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsClosed.exists_closed_singleton",
+  "file": "Mathlib/Topology/Separation/Basic.lean",
+  "line": 175,
+  "how": "exact (lines 170-180 read with sed -n on 2026-10-10): for [T0Space X] [CompactSpace X], a closed nonempty S contains x with IsClosed {x}; T0Space is the Kolmogorov condition and CompactSpace is quasi-compactness of X (no Hausdorff condition); the 'in particular' is S = univ."
+ },
+ "status": "mathlib",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-smooth-connected-curve-local-rings",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic"
+}

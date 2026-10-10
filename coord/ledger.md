@@ -1472,3 +1472,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:15 L: returned deliver/H1/lemma-weil-pbc-affine-neighbourhood-cofinal (reviewer RETURN: C4/C2 initiality not carried by the cited node, F false paragraph in the review section)
 - 2026-10-10, delivery of E1: lem-weil-pbc-finite-product-normal merged from deliver/E1/lem-weil-pbc-finite-product-normal (1 commit(s), 3 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0CYA/00ED read, 3 steps and 3 new Mathlib leaves checked, lines verified, small cases tested); claim closed
 - 13:15 L: merged deliver/E1/lem-weil-pbc-finite-product-normal (reviewer PASS, first push; 3 new Mathlib leaves)
+- 13:16 L: accepted lem-sc-smooth-connected-curve-local-rings: 8 steps, 4 new Mathlib leaves (stalks in the function field, 005E closed point, 02IZ generalization chains, def DVR)
