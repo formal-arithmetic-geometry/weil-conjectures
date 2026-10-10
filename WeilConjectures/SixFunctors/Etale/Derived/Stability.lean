@@ -94,6 +94,10 @@ restrictions of `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!` and `𝔻_X` to `Dctf`.
   independent of the compactification
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, proved for a finite ring and a
   quasi-compact `j`).
+* Clause (iv) of `sk-thm-sf-ctf-stability`, that `Rf_!` preserves `Dctf`, is stated in the
+  torsion setting of the blueprint: a finite `Λ` whose exponent is invertible on `Y`, and `Y`
+  of finite type over a field `k`. Over an arbitrary base it is false: for the proper morphism
+  `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point and is not bounded.
 * Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
   anti-equivalence of it — is **not restated here**: it is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and
@@ -735,21 +739,6 @@ theorem constructibleFiniteTor_tensor (X : Scheme.{u})
 
 end Tensor
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
-subcategories.
-
-Clause (iv): `Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` is defined for every separated finite-type `f`
-admitting a compactification. One assembles the open-immersion case
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`) with the proper
-case, where `Rf_! = Rf_*`, along a compactification of `f`. -/
-theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    [HasCompactification f] [QuasiCompact f]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : constructibleFiniteTor A X K) :
-    constructibleFiniteTor A Y ((R(f)_![A]).obj K) :=
-  sorry
-
 /-! ### Open immersions -/
 
 section OpenImmersion
@@ -769,25 +758,19 @@ noncomputable def rightDerivedLowerShriekIsoOfIsOpenImmersion :
         Functor.mapDerivedCategoryIdIso _) ≪≫
     Functor.rightUnitor _
 
-/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
-category.
-
-For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
-`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
-`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
-`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
+omit [Finite Λ] [HasCompactification j] in
+/-- Extension by zero along a quasi-compact open immersion `j` preserves membership in
+`D_c^[a, b]` with Tor amplitude in `[a, b]`: `j_!` is exact, the extension by zero of a
 constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
 formula. -/
-theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
+theorem constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
-      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) := by
+      (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K) := by
   obtain ⟨⟨hbc, hab⟩, hta⟩ := hK
   let F := (j)_!open[ModuleCat.{u + 1} Λ]
-  refine constructibleTorAmplitudeIn_of_iso _
-    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm ⟨⟨⟨?_, fun n ↦ ?_⟩,
-      F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩, fun G ↦ ?_⟩
+  refine ⟨⟨⟨?_, fun n ↦ ?_⟩, F.homologyConcentratedIn_mapDerivedCategory_obj hab⟩, fun G ↦ ?_⟩
   · exact F.bounded_mapDerivedCategory_obj hbc.1
   · have := hbc.2 n
     have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙ F).obj K) :=
@@ -808,6 +791,24 @@ theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
           _root_.DerivedCategory.singleFunctor _ 0).obj G))) b := h₂
     exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
       _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
+
+/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
+category.
+
+For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
+`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
+`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
+`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
+constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
+formula. -/
+theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
+    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) :=
+  constructibleTorAmplitudeIn_of_iso _
+    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm
+    (constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ j a b hK)
 
 /-- For a quasi-compact open immersion `j`, the exceptional inverse image is the restriction,
 `Rj^! ≅ D(j^*)`: both are right adjoint to `Rj_! ≅ D(j_!)`. -/
@@ -852,16 +853,6 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreser
     DerivedCategoryFiniteTor A Y ⥤ DerivedCategoryFiniteTor A X :=
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ L((f)^*[A]))
     fun K ↦ constructibleFiniteTor_leftDerivedUpperStar A f K.property
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
-`Rf_! : Dctf(X, A) ⥤ Dctf(Y, A)` of the compactly supported direct image to the small
-categories. -/
-noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (f : X ⟶ Y)
-    [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
-    [HasCompactification f] [QuasiCompact f] :
-    DerivedCategoryFiniteTor A X ⥤ DerivedCategoryFiniteTor A Y :=
-  ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A X ⋙ R(f)_![A])
-    fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek A f K.property
 
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restriction
 `𝔻_X : Dctf(X, A)ᵒᵖ ⥤ Dctf(X, A)` of the Verdier dual to the small categories, given that `𝔻_X`
@@ -957,6 +948,32 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   have : IsNoetherianRing Λ := inferInstance
   exact ⟨boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN hNY hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
+
+/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+subcategories.
+
+Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
+admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent
+is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
+`Rg_* ∘ j_!`; extension by zero preserves `Dctf`
+(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
+and so does the direct image along the proper `g`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`).
+
+Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
+`Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
+theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  let c := HasCompactification.compactification f
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  obtain ⟨hbc, a, b, hta⟩ := hK
+  have h := constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
+    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
+  exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
 
 /-! #### Internal hom -/
 
@@ -1491,6 +1508,19 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (aX : X ⟶ Spe
   ObjectProperty.lift _
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R((f)_*[ModuleCat.{u + 1} Λ]))
     fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property
+
+/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
+`Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the compactly supported direct image to the small
+categories, for a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ`
+whose exponent is invertible on `Y`. -/
+noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    [HasCompactification f] [QuasiCompact f] :
+    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
+      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y :=
+  ObjectProperty.lift _
+    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R(f)_![ModuleCat.{u + 1} Λ])
+    fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property
 
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
 `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` of the exceptional inverse image to the small categories, for
