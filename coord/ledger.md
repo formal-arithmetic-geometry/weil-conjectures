@@ -2840,3 +2840,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:35 L: returned deliver/M1/lemma-nagata-morphism-descends (reviewer RETURN: 1. E/D (dependency still in returned form): def-nagata-morphism-descent is still in returned form (second return 22:42, )
 - 22:35 L: returned deliver/C1/lem-pc-global-hom-adjunction (reviewer RETURN: R-gha2856 (head c9e9a5acd): (1) E/B false-as-stated new node: lem-pc-dq-coherator-adjunction asserts that DQ_Y exists 'f)
 - 22:36 L: merged deliver/C1/lem-weil-pbc-spread-purely-inseparable-factors (reviewer FIX; first push; new nodes: 1)
+- 22:36 L: merged deliver/H1/lem-sc-affine-perfect-derived-tensor-hom (reviewer FIX; first push; new nodes: 1)
