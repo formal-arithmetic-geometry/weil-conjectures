@@ -11,9 +11,72 @@
   "def-weil-pbc-charpoly-free-module",
   "lem-weil-pbc-charpoly-free-module-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The idempotent image decomposition gives $V=\\operatorname{Im}(p)\\oplus\\operatorname{Im}(1-p)=\\operatorname{Im}(p)\\oplus\\ker(p)$, by [lem-weil-pbc-idempotent-endomorphism-image-base-change] specialized to the field $k$. On $\\operatorname{Im}(p)$ the map $p$ is the identity, since $p(pv)=pv$, while on $\\ker(p)$ it is zero. The range and kernel are finite-dimensional subspaces. Their dimensions satisfy $r+\\dim_k\\ker(p)=n$ by [lem-weil-pbc-idempotent-charpoly-rank-nullity], so $\\dim_k\\ker(p)=n-r$.",
+   "uses": [
+    "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), the image of an idempotent and its complementary summand; the restriction identities are immediate from p^2=p"
+   }
+  },
+  {
+   "text": "Choose bases of the two finite-dimensional summands and concatenate them. In this basis $p$ is the direct sum of the identity on $\\operatorname{Im}(p)$ and the zero map on $\\ker(p)$. Basis invariance from [lem-weil-pbc-charpoly-free-module-properties] and the direct-sum formula [lem-weil-pbc-charpoly-direct-sum-free] therefore give $\\det(T-p)=\\chi(1_{\\operatorname{Im}(p)})\\,\\chi(0_{\\ker(p)})$.",
+   "uses": [
+    "lem-weil-pbc-charpoly-free-module-properties",
+    "lem-weil-pbc-charpoly-direct-sum-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), the characteristic polynomial of the fibre idempotent in a basis adapted to its image"
+   }
+  },
+  {
+   "text": "Apply the identity and zero characteristic-polynomial leaves [lem-weil-pbc-idempotent-charpoly-identity] and [lem-weil-pbc-idempotent-charpoly-zero] to the two summands. Their dimensions are $r$ and $n-r$, hence $\\chi(1_{\\operatorname{Im}(p)})=(T-1)^r$ and $\\chi(0_{\\ker(p)})=T^{n-r}$. Multiplying yields $\\det(T-p)=(T-1)^rT^{n-r}$.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-identity",
+    "lem-weil-pbc-idempotent-charpoly-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), the displayed fibre characteristic polynomial"
+   }
+  },
+  {
+   "text": "Since $0\\le r\\le n$, the factors have exponents bounded by $n$: $(T-1)^r$ divides $(T-1)^n$ and $T^{n-r}$ divides $T^n$. Thus their product divides $T^n(T-1)^n$ in $k[T]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020), elementary polynomial divisibility after the displayed formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "lem-weil-pbc-charpoly-direct-sum-free",
+  "lem-weil-pbc-idempotent-charpoly-identity",
+  "lem-weil-pbc-idempotent-charpoly-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module, line 2020); the source states the fibre formula without proof, and the adapted-basis argument is written out here"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lift-projective-module-etale",
+  "worker": "stage1",
+  "summary": "Four proof steps: specialize the existing idempotent image decomposition to obtain Im(p) direct-sum ker(p), with p identity on the image and zero on the kernel; use the new Mathlib rank-nullity leaf to identify the kernel dimension as n-r; compute in a concatenated basis using basis invariance and the existing finite-free direct-sum characteristic-polynomial leaf; apply the new Mathlib identity and zero characteristic-polynomial leaves and finish the divisibility by exponent comparison. No new node duplicates an existing name or statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +128,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 4 steps: decomposition from the image-base-change node over the field k, rank-nullity, adapted basis and the direct-sum formula, charpoly of 1 and 0 on the summands (three Mathlib leaves: LinearMap.charpoly_one Basic.lean:60, charpoly_zero :56, finrank_range_add_finrank_ker Lemmas.lean:173, lines verified by L), divisibility elementary. Correct."
+ }
 }
