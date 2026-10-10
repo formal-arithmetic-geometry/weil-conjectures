@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -51,7 +51,6 @@
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
 | `lem-exc-discrete-modules-abelian` | 3010 | none |
-| `lem-pc-ample-positive-degree` | 3010 | rests_on_sorry |
 | `lem-pc-nonzero-section-integral-cartier` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
@@ -865,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 975 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 976 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
