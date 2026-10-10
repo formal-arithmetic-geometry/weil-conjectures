@@ -2754,3 +2754,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:01 L: merged deliver/C1/lem-pod-lattice-stabilizer-open (reviewer FIX; first push; new nodes: 0)
 - 22:01 L: merged deliver/M1/lem-sc-flat-precompose-pus (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 22:01 L: returned deliver/C1/lem-pc-flat-module-descent (reviewer RETURN: 1. B (false new statement, RETURN): lem-pc-affine-flat-module-descent omits Tag 02JO(3) hypothesis (a), that R_j (x)_{R_)
+- 22:02 UTC L deleted two abandoned delivery branches of Mathlib leaves (H1 connecting-formula, F1 degreewise-split-derived-triangle); notices
