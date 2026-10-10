@@ -2206,3 +2206,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:07 L: merged deliver/C1/lem-weil-pbc-sets-etale-inverse-image-constant-base-change (reviewer FIX; first push; new nodes: 0)
 - 18:07 L: returned deliver/E1/lem-sc-finite-affine-derived-equivalence (reviewer RETURN: 1. D3/E (Step 2): lem-sc-exact-equivalence-derived-category applied to QCoh(O_X) ~ QCoh(f_*O_X) gives D(QCoh(O_X)) ~ D(Q)
 - 18:09 L: merged deliver/M1/lem-sc-derived-internal-hom-restrict-open (reviewer FIX; first push; new nodes: 1)
+- 18:09 L: returned deliver/E1/lem-weil-pbc-cartesian-eilenberg-functorial (reviewer RETURN: R-cef1808. 1 (C4/E, point 1 of the 17:31 return NOT repaired): Step 2 still applies [lem-weil-pbc-injective-resolution-l)
