@@ -2306,3 +2306,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:57 L: thm-weil-pbc-bounded-below: lead note on the changed E_infinity clause of lem-sp-page-induction (hypothesis holds by boundedness)
 - 18:57 L: merged deliver/J1/lem-sc-mult-n-isogeny (reviewer PASS; first push; new nodes: 1)
 - 18:57 L: merged deliver/E1/lem-weil-pbc-cartesian-eilenberg-functorial (reviewer FIX; after a return; new nodes: 1)
+- 18:58 L: merged deliver/C1/pqf-lem-proper-basic (reviewer FIX; first push; new nodes: 0)

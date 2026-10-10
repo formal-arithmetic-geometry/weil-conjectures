@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-proper-basic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Basic consequences of properness",
@@ -12,27 +12,71 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-proper-basic.md",
   "place": "node pqf-lem-proper-basic, order 528"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-proper-morphism"
+ ],
  "proof": [
   {
-   "text": "The first three assertions are part of the definition of properness in\n[def-weil-pbc-scheme-conventions]; quasi-compactness is part of\nthe finiteness condition there, and quasi-separatedness follows from\nseparatedness (the diagonal is an affine closed immersion, hence\nquasi-compact). If $S$ is\naffine then $X$ is quasi-compact and separated because $f$ is\nquasi-compact and separated.",
+   "text": "By the definition of properness [def-weil-proper-morphism], the morphism is separated, universally closed, and of finite type. The finite-type condition includes quasi-compactness [def-weil-finite-type-morphism], so $f$ is quasi-compact. Since a separated morphism is quasi-separated [lem-pc-separated-quasi-separated], its diagonal is quasi-compact. If $S$ is affine, then $S$ is quasi-compact, so $X=f^{-1}(S)$ is quasi-compact by quasi-compactness of $f$, and separatedness of $f$ implies that $X$ is separated by [lem-sc-separated-over-affine-scheme-separated].",
    "uses": [
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-sc-separated-over-affine-scheme-separated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-separated-over-affine-scheme-separated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-proper-basic.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Definition 29.41.1, tag 01W1, together with schemes.tex Section 01KH and Lemma 01K7"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism is separated universally closed finite type quasi-compact quasi-separated",
+   "results": "AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.toIsSeparated; no single declaration listing all conclusions",
+   "date": "2026-10-11",
+   "verdict": "match for properness clauses; quasi-separatedness supplied by existing node lem-pc-separated-quasi-separated"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "results": "0 hits; second query '|- IsProper f -> IsSeparated f' returned unknown identifier IsProper",
+   "date": "2026-10-11",
+   "verdict": "no match from wrapper"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsProper|instQuasiSeparated|UniversallyClosed.*QuasiCompact in Mathlib/AlgebraicGeometry",
+   "results": "0 hits from msearch wrapper; pinned source read separately",
+   "date": "2026-10-11",
+   "verdict": "no match from wrapper"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separated scheme morphism quasi-separated diagonal quasi-compact",
+   "results": "AlgebraicGeometry.IsSeparated.instQuasiSeparated in Mathlib/AlgebraicGeometry/Morphisms/Separated",
+   "date": "2026-10-11",
+   "verdict": "match (existing node lem-pc-separated-quasi-separated)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism has separated universally closed finite type quasi-compact quasi-separated",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +98,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-proper-basic",
+  "worker": "stage1",
+  "summary": "The imported proof was corrected to cite the proper-morphism definition and the existing separated-implies-quasi-separated lemma. No new nodes were needed; the conclusion over an affine base is the immediate specialization of the established quasi-compactness and separatedness of f.",
+  "blueprint": "The single proof paragraph of pqf-lem-proper-basic is realized by unpacking properness, deriving quasi-separatedness from separatedness, and specializing to affine S."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ppb1859",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppb1859 (reviewer sub-agent of L); spot-checked: Packet read whole; Mathlib Proper.lean:42 IsProper extends IsSeparated, UniversallyClosed, LocallyOfFiniteType; affine-base clause needs comp + compactSpace_of_compactSpace (QuasiCompact.lean:150), so not one declaration per clause: split kept, not a leaf (B8). Cited statements checked (proper def, sep=>quasi-sep, separated over affine). FIX more, RETURN less: C1 - 'finite type includes quasi-compactness' is the statement of def-weil-finite-type-morphism, now cited in text/uses/proof_deps; affine-base quasi-compactness of X spelled out (S affine quasi-compact, X=f^{-1}(S)).; 1 file(s) fixed by the reviewer"
+ }
 }
