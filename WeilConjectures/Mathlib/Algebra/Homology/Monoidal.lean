@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.BifunctorFlip
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-!
@@ -137,20 +138,6 @@ the braiding `K ⊗ L ≅ L ⊗ K` is `(-1) ^ (p * q) • β_ (K.X p) (L.X q)` o
 -/
 
 namespace Monoidal
-
-section
-
-variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
-
-private lemma zsmul_whiskerRight' {X Y : C} (n : ℤ) (f : X ⟶ Y) (Z : C) :
-    (n • f) ▷ Z = n • (f ▷ Z) :=
-  Functor.map_zsmul (tensorRight Z)
-
-private lemma whiskerLeft_zsmul' (X : C) {Y Z : C} (n : ℤ) (f : Y ⟶ Z) :
-    X ◁ (n • f) = n • (X ◁ f) :=
-  Functor.map_zsmul (tensorLeft X)
-
-end
 
 variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [HasZeroObject C]
   [MonoidalPreadditive C] [BraidedCategory C]
@@ -286,7 +273,7 @@ lemma hexagon_forward :
   rw [← assoc (_ ▷ K.X p), ← e₃]
   erw [ι₁₂_associator_hom]
   rw [e₁, assoc, ι_whiskerRight_assoc, ← comp_whiskerRight_assoc, ι_braiding_hom]
-  simp only [zsmul_whiskerRight', Preadditive.zsmul_comp,
+  simp only [zsmul_whiskerRight, Preadditive.zsmul_comp,
     comp_whiskerRight, assoc]
   erw [← reassoc_of% e₅]
   erw [ι₁₂_associator_hom_assoc]
@@ -295,7 +282,7 @@ lemma hexagon_forward :
   erw [ιTensorObj_whiskerLeft_f]
   rw [← whiskerLeft_comp_assoc]
   erw [ι_braiding_hom]
-  simp only [whiskerLeft_zsmul', Preadditive.zsmul_comp, Preadditive.comp_zsmul,
+  simp only [whiskerLeft_zsmul, Preadditive.zsmul_comp, Preadditive.comp_zsmul,
     whiskerLeft_comp, assoc]
   erw [← e₄]
   rw [BraidedCategory.hexagon_forward_assoc, smul_smul, mul_add, Int.negOnePow_add,
@@ -345,7 +332,7 @@ lemma hexagon_reverse :
   rw [← assoc (_ ◁ _), ← f₃]
   erw [ι₂₃_associator_inv]
   rw [f₁, assoc, ιTensorObj_whiskerLeft_f_assoc, ← whiskerLeft_comp_assoc, ι_braiding_hom]
-  simp only [whiskerLeft_zsmul', Preadditive.zsmul_comp,
+  simp only [whiskerLeft_zsmul, Preadditive.zsmul_comp,
     whiskerLeft_comp, assoc]
   erw [← reassoc_of% f₅]
   erw [ι₂₃_associator_inv_assoc]
@@ -354,7 +341,7 @@ lemma hexagon_reverse :
   erw [ι_whiskerRight]
   rw [← comp_whiskerRight_assoc]
   erw [ι_braiding_hom]
-  simp only [zsmul_whiskerRight', Preadditive.zsmul_comp, Preadditive.comp_zsmul,
+  simp only [zsmul_whiskerRight, Preadditive.zsmul_comp, Preadditive.comp_zsmul,
     comp_whiskerRight, assoc]
   erw [← f₄]
   rw [BraidedCategory.hexagon_reverse_assoc, smul_smul, add_mul, Int.negOnePow_add,
