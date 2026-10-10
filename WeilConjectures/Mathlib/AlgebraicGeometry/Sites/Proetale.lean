@@ -57,7 +57,7 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 - `AlgebraicGeometry.Scheme.ProEt.mem_topology_of_openImmersion`: a sieve on `U : X.ProEt`
   containing a jointly surjective family of open immersions `Y i ⟶ U`
   (`AlgebraicGeometry.Scheme.ProEt.ofOpenImmersionHom`) is covering.
-- `AlgebraicGeometry.Scheme.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
+- `AlgebraicGeometry.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
   étale site into the small pro-étale site, which is fully faithful, representably flat and
   continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
 
@@ -182,6 +182,12 @@ instance : (precoverage X).IsStableUnderComposition := by
 
 instance : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]; infer_instance
+
+/-- `X.ProEt` is locally `u + 1`-small. Stated directly so that instance search does not go
+through the slow `HasCardinalFilteredGenerator` route before the low-priority
+`locallySmall_of_univLE`. -/
+instance locallySmall : LocallySmall.{u + 1} X.ProEt :=
+  ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
 
 variable {X}
 
