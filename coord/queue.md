@@ -1,8 +1,8 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (324)
+## Stage 1: nodes to split (323)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
 | `lem-sc-affine-derived-concentration` | 3014 | none |
-| `lem-sc-cech-comparison-map-iso-affine` | 3014 | none |
 | `lem-sc-cech-comparison-map-naturality` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
@@ -929,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1219 nodes that wait for a statement dependency.
+Not open yet: 340 nodes that wait for stage 1, 1220 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
