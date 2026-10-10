@@ -25,9 +25,39 @@
   "def-sbc-locally-finite-presentation",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-rf-perfect-base-change] to $\\mathcal G=\\mathcal O_X$: $f$ is proper and of finite presentation, and $\\mathcal O_X$ is an $\\mathcal O_X$-module of finite presentation which is flat over $S$ because $f$ is flat. Hence $K=Rf_*\\mathcal O_X$ is a perfect object of $D(\\mathcal O_S)$, and for every morphism $g:T\\to S$ the canonical map $Lg^*K\\to Rf_{T,*}\\mathcal O_{X_T}$ is an isomorphism. Let $u:\\mathcal O_S\\to K$ be the adjunction unit; its pullback $Lg^*u$ corresponds under this isomorphism to the unit $\\mathcal O_T\\to Rf_{T,*}\\mathcal O_{X_T}$. Taking $g=g_s:\\operatorname{Spec}\\kappa(s)\\to S$ for $s\\in S$, the complex $K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s)$ is identified with $Rf_{s,*}\\mathcal O_{X_s}$, i.e. with $R\\Gamma(X_s,\\mathcal O_{X_s})$ over the field $\\kappa(s)$. This is the derived image of a single sheaf, so $H^i(K\\otimes^{\\mathbf L}\\kappa(s))=0$ for $i<0$, and $H^0(K\\otimes^{\\mathbf L}\\kappa(s))=H^0(X_s,\\mathcal O_{X_s})$, with the map induced by $u$ being the canonical map $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0E62, reduction to the perfect-complex criterion"
+   }
+  },
+  {
+   "text": "By hypothesis the map $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$ is an isomorphism for every $s$, so by step 1 the pair $(K,u)$ satisfies the hypotheses of [lem-sc-perfect-degree-zero-fibre-criterion], which gives $\\mathcal O_S\\cong H^0(K)=f_*\\mathcal O_X$ via $H^0(u)$. For a base change $g:T\\to S$, apply the same criterion to $(Lg^*K,Lg^*u)$ on $T$: $Lg^*K$ is perfect, and for $t\\in T$ over $s\\in S$ the transitivity of derived pullback along $\\operatorname{Spec}\\kappa(t)\\to T\\to S$ gives $Lg^*K\\otimes^{\\mathbf L}_{\\mathcal O_T}\\kappa(t)\\cong(K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))\\otimes_{\\kappa(s)}\\kappa(t)$. Since $\\kappa(s)\\to\\kappa(t)$ is a field extension, hence exact, the cohomology in degrees $<0$ still vanishes and the degree-zero map induced by $Lg^*u$ is the isomorphism of the fibre at $s$ tensored with $\\kappa(t)$. The criterion gives $\\mathcal O_T\\cong H^0(Lg^*K)$, and $H^0(Lg^*K)\\cong H^0(Rf_{T,*}\\mathcal O_{X_T})=f_{T,*}\\mathcal O_{X_T}$ by step 1.",
+   "uses": [
+    "lem-sc-perfect-degree-zero-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0E62, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-degree-zero-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0E62, proof of perfect-lemma-proper-flat-h0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +89,40 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-global-sections",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-global-sections-criterion",
+  "worker": "stage1",
+  "summary": "Split Tag 0E62 into the general perfect-complex degree-zero fibre criterion and its application to K=Rf_*O_X. The new criterion is statement-only; the item proof checks perfectness and arbitrary base change using the existing Tag 0B91 node, then applies the criterion to the assumed fibre H^0 isomorphisms.",
+  "blueprint": "Realizes the theorem-of-the-cube ancestor's pushforward-of-structure-sheaf argument at the Tag 0E62 fibrewise criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "The criterion needs the generic cohomology-and-base-change theorem that Rf_* of a relatively flat finitely presented sheaf is perfect and universally base-change compatible; the theorem-of-the-cube route has no replacement for this derived input."
+   }
+  ],
+  "not_duplicates": [
+   "lem-sc-proper-flat-global-sections-criterion vs lem-sc-proper-flat-global-sections: the existing node assumes geometric reducedness and connectedness and derives the fibre H^0 hypothesis; this item assumes the H^0 hypothesis directly."
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfg3131",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfg3131 (reviewer sub-agent of L); spot-checked: Not a duplicate of lem-sc-proper-flat-global-sections (sibling adds geometric reduced/connected fibres and cites this item); statement matches Tag 0E62(a); new criterion not in Mathlib, not a duplicate of lem-sc-perfect-h0-locally-closed; C4 finite presentation and flatness of O_X checked against lem-pc-rf-perfect-base-change. FIX more, RETURN less: (1) B4 step 1 plain-text arrows/ASCII rewritten in TeX; (2) C1 step 1 asserted Tor-amplitude [0,inf) of Rf_*O_X with no cited node: removed that redundant hypothesis from the new criterion (perfect + fibre H^i=0 for i<0 already implies it) and step 1 now derives the fibre vanishing from the cited base change; (3) C1/E step 2 relied on the new node's vacuous base-change clause without checking its hypotheses on T: clause removed from the new node, step 2 now applies the criterion to (Lg^*K, Lg^*u) after verifying the fibre hypotheses via transitivity of pullback and exactness of field extension.; 2 file(s) fixed by the reviewer"
+ }
 }
