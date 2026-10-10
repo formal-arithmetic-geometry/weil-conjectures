@@ -868,3 +868,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:34 L: reviewed lem-weil-pbc-popescu-solution-modulo-choose (15 steps, 0 new; the 07FH gap is closed by a proof, HUMAN.md updated; the worker's script was applied by L after the limit): accepted.
 - 04:36 L: reviewed lem-weil-pbc-quasi-coherent-ideal-zero-set-affine (5 steps, 0 new): accepted.
 - 04:37 L: reviewed lem-weil-pbc-quotient-henselian-pair (3 steps, 0 new; source tag 05WS corrected to 09XK): accepted.
+- 04:38 L: reviewed lem-weil-pbc-quotient-local-structure (Mathlib leaf, one declaration per clause; source corrected): accepted.

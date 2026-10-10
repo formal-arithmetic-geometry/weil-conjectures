@@ -5,7 +5,7 @@
  "statement": "Let $(A,\\mathfrak m)$ be a commutative local ring and let $I\\subseteq\\mathfrak m$ be an ideal. Then $A/I$ is a nonzero local ring, its maximal ideal is the image $\\mathfrak m/I$, and the quotient map $A\\to A/I$ is local.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 05WS (label lemma-quotient-strict-henselization), line 43703 and its proof"
+  "place": "Section 07BH (label section-local-rings, line 3306): Definition 07BI (definition-local-ring, line 3312), Lemma 00E9 (lemma-characterize-local-ring, line 3367, (1)<=>(4)) and Lemma 07BJ (lemma-characterize-local-ring-map, line 3400, (2)<=>(3)); Stacks states no separate lemma for quotients, the fact is used implicitly e.g. in Lemma 05WS (lemma-quotient-strict-henselization, line 43703)"
  },
  "stmt_deps": [],
  "proof": [],
@@ -39,10 +39,50 @@
    "results": "RingTheory/LocalRing/RingHom/Basic.lean:107-126 has IsLocalRing.of_surjective and IsLocalHom.of_surjective; Henselian.lean:67 has isLocalHom_of_le_jacobson_bot; no dedicated quotient theorem",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"of_surjective\\|isLocalHom\\|map_maximalIdeal\\|maximalIdeal_comap\" Mathlib/RingTheory/LocalRing/ Mathlib/RingTheory/Ideal/Quotient/",
+   "results": "IsLocalRing.of_surjective' (RingTheory/LocalRing/Basic.lean:115-122); IsLocalHom.of_surjective (RingTheory/LocalRing/RingHom/Basic.lean:118-124, alias Function.Surjective.isLocalHom :126); IsLocalRing.map_maximalIdeal_of_surjective (RingTheory/LocalRing/RingHom/Basic.lean:145-148); IsLocalRing.maximalIdeal_comap (RingHom/Basic.lean:95); Ideal.Quotient.nontrivial_iff (RingTheory/Ideal/Quotient/Basic.lean:54); usage of exactly this combination for R/I in RingTheory/LocalRing/Quotient.lean:113-120",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "image of the maximal ideal under a surjective ring hom between local rings is the maximal ideal",
+   "results": "Ideal.IsMaximal.map_of_surjective_of_ker_le, Ideal.comap_isMaximal_of_surjective, Ideal.map_eq_top_or_isMaximal_of_surjective (Mathlib.RingTheory.Ideal.Maps); IsLocalRing.local_hom_TFAE (Mathlib.RingTheory.LocalRing.RingHom.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no single match; IsLocalRing.map_maximalIdeal_of_surjective found by grep and local_search"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom, Function.Surjective",
+   "results": "IsLocalRing.of_surjective, IsLocalHom.of_surjective, Function.Surjective.isLocalHom, IsLocalRing.surjective_units_map_of_local_ringHom (Mathlib.RingTheory.LocalRing.RingHom.Basic); RingHom.surjectiveOnStalks_iff_of_isLocalHom",
+   "date": "2026-10-10",
+   "verdict": "match for the local-homomorphism clause (IsLocalHom.of_surjective)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a surjective image of a local ring is a local ring, and the quotient map is a local homomorphism",
+   "results": "IsLocalRing.of_surjective' (Mathlib.RingTheory.LocalRing.Basic), IsLocalRing.of_surjective, Function.Surjective.isLocalHom, IsLocalHom.of_surjective (Mathlib.RingTheory.LocalRing.RingHom.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match for the local-ring and local-homomorphism clauses"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.map_maximalIdeal_of_surjective (project root ~/weil-conjectures-slopmaster2)",
+   "results": "IsLocalRing.map_maximalIdeal_of_surjective, lemma, Mathlib/RingTheory/LocalRing/RingHom/Basic.lean (index: unavailable; existence confirmed by sed -n 145,148 of that file)",
+   "date": "2026-10-10",
+   "verdict": "match for the maximal-ideal clause"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Ideal.Quotient.nontrivial_iff, IsLocalRing.of_surjective', IsLocalRing.map_maximalIdeal_of_surjective, IsLocalHom.of_surjective",
+  "file": "Mathlib/RingTheory/Ideal/Quotient/Basic.lean, Mathlib/RingTheory/LocalRing/Basic.lean, Mathlib/RingTheory/LocalRing/RingHom/Basic.lean",
+  "how": "one declaration per clause, applied to f = Ideal.Quotient.mk I with Ideal.Quotient.mk_surjective. Nonzero: Ideal.Quotient.nontrivial_iff : Nontrivial (R ⧸ I) ↔ I ≠ ⊤ (Ideal/Quotient/Basic.lean:54-55), with I ≠ ⊤ from I ≤ maximalIdeal A by ne_top_of_le_ne_top (maximalIdeal.isMaximal A).ne_top (Order/BoundedOrder/Basic.lean:205; LocalRing/MaximalIdeal/Basic.lean:36). Local: IsLocalRing.of_surjective' [CommRing R] [IsLocalRing R] [Ring S] [Nontrivial S] (f : R →+* S) (hf : Surjective f) : IsLocalRing S (LocalRing/Basic.lean:115-122). Maximal ideal = m/I: IsLocalRing.map_maximalIdeal_of_surjective (f) (hf) : (maximalIdeal R).map f = maximalIdeal S (LocalRing/RingHom/Basic.lean:145-148); m/I is (maximalIdeal A).map (Ideal.Quotient.mk I). Local map: IsLocalHom.of_surjective (f) (hf) : IsLocalHom f (LocalRing/RingHom/Basic.lean:118-124), equivalently the preimage of m/I is m by IsLocalRing.maximalIdeal_comap (RingHom/Basic.lean:95). Mathlib itself combines exactly these for R ⧸ I in RingTheory/LocalRing/Quotient.lean:113-120.",
+  "line": 115
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +102,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quotient-local-structure",
+  "worker": "stage1",
+  "summary": "Statement kept (it is correct: I ⊆ m gives I ≠ A, so A/I ≠ 0). stmt_deps kept empty: no definition node of local rings exists (ls dag/nodes/*/def-* | grep -i local finds only unrelated localization nodes), and 'local ring' and 'local homomorphism' are Mathlib's IsLocalRing and IsLocalHom. The node is a Mathlib leaf, one declaration per clause (Ideal.Quotient.nontrivial_iff, IsLocalRing.of_surjective', IsLocalRing.map_maximalIdeal_of_surjective, IsLocalHom.of_surjective), each read with sed -n; searches by grep, leansearch, loogle, leanfinder and local_search added (the four earlier searches had verdict no match because they looked for a single bundled quotient theorem). Source corrected: Lemma 05WS (lemma-quotient-strict-henselization) is about strict henselizations and does not state this fact (it only presupposes it); the fact is the local-rings section 07BH of algebra.tex: Definition 07BI, Lemma 00E9 (1)<=>(4) and Lemma 07BJ (2)<=>(3); Stacks has no separate lemma for quotients. Citers checked: lem-weil-pbc-regular-local-generators-regular-sequence step 4 (R/x_1R local with maximal ideal m/x_1R), lem-weil-pbc-strictly-henselian-quotient (A/I local, maximal ideal m/I, quotient map local), lem-weil-pbc-complete-local-quotient step 2 (R/I local with maximal ideal m/I) use exactly the clauses stated."
+ },
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one declaration per clause (Quotient/Basic.lean:54, LocalRing/Basic.lean:115, RingHom/Basic.lean:145 and 118); lines verified. Source corrected from 05WS to Section 07BH (00E9, 07BJ).",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf, one declaration per clause: nontrivial quotient, IsLocalRing.of_surjective', map_maximalIdeal_of_surjective, IsLocalHom.of_surjective (lines 54, 115, 145, 118 verified by L). Source tag corrected (05WS was the strict-henselization lemma)."
+ }
 }
