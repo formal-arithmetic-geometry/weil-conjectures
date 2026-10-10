@@ -21,9 +21,41 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "By pseudo-coherence, choose a quasi-isomorphism $Q^\\bullet\\to C$ with $Q^\\bullet$ bounded above, say $Q^i=0$ for $i>n_0$, and each $Q^i$ finitely generated projective. Apply the finite-free replacement construction of Tag 064U (proof of (3) $\\Rightarrow$ (1)): choose a finite free $P^{n_0}=Q^{n_0}\\oplus D^{n_0}$, and, descending in $n\\le n_0$, a finite free $P^{n-1}=Q^{n-1}\\oplus D^n\\oplus D^{n-1}$, where $D^{n-1}$ is a finitely generated projective complement of $Q^{n-1}\\oplus D^n$ in a finite free module; the differential $P^{n-1}\\to P^n$ agrees with the differential of $Q$ on the $Q$-summands, is the identity $D^n\\to D^n$, and is zero on $D^{n-1}$. The projection $P^\\bullet\\to Q^\\bullet$ has kernel a direct sum of contractible two-term complexes $D^n\\xrightarrow{\\mathrm{id}}D^n$, hence is a homotopy equivalence and a quasi-isomorphism, and $P^i=0$ for $i>n_0$. Composing with $Q^\\bullet\\to C$ gives a quasi-isomorphism $P^\\bullet\\to C$ from a bounded-above complex of finite free modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
+   }
+  },
+  {
+   "text": "The quasi-isomorphism $P^\\bullet\\to C$ identifies cohomology, so the hypothesis $H^i(C)=0$ for $i>b$ gives $H^i(P^\\bullet)=0$ for $i>b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
+   }
+  },
+  {
+   "text": "If $P^i=0$ for all $i>b$ we are done. Otherwise let $n>b$ be the highest degree with $P^n\\ne0$ (it exists as $P^\\bullet$ is bounded above). Since $H^n(P^\\bullet)=0$ and $P^{n+1}=0$, the differential $d^{n-1}:P^{n-1}\\to P^n$ is surjective. As $P^n$ is finite projective, the surjection splits, so $P^{n-1}=K\\oplus P^n$ and the differential restricts to the identity on the displayed $P^n$ summand. Removing the contractible two-term summand $P^n\\xrightarrow{\\mathrm{id}}P^n$ gives a quasi-isomorphic complex whose term in degree $n$ is zero; if the complementary module $K$ is only finite projective, apply the finite-free replacement construction of Step 1 (Tag 064U) to the resulting complex, whose top nonzero degree is now at most $n-1$, and add its contractible summands. Repeating for the finitely many degrees $n>b$ yields a finite-free complex $P'^{\\bullet}$ with $P'^i=0$ for $i>b$, and $P'^{\\bullet}\\to P^\\bullet\\to C$ is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,12 +94,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "worker": "stage1",
+  "summary": "Checked the target against the Stacks Lemma 15.66.5 route. No matching sorry-free Lean declaration exists. Added one statement-only supporting node for finite-free replacement of a bounded-above finitely generated projective complex; the item proof then records the quasi-isomorphism, transfers the cohomological vanishing, and gives the descending finite-free truncation construction.",
+  "blueprint": "Realizes the Tag 0658 proof sentence choosing a finite-free model and truncating it above the cohomological bound.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pbf2826",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbf2826 (reviewer sub-agent of L); spot-checked: Read packet and Tag 064U (more-algebra.tex 16047-16080) and Tag 0658 text; statement matches the 064U final clause and exactly what J1 node lem-pc-ring-pseudo-coherent-finite-tor-perfect step 1 uses, with the same inline pseudo-coherent definition (finitely generated projective, bounded above); steps 1-3 elementary and correct (contractible-kernel replacement, cohomology transfer, top-degree split-surjection cancellation, finite descent). Preflight note resolved: the construction is not in 0658's text but in 064U, the item's own source lemma, written out in full, so no node needed. FIX more, RETURN less: (1) C1 citation: step 1 attributed the finite-free replacement to Tag 0658; corrected to Tag 064U (proof of (3)=>(1)) and added Tag 064U to all source places; (2) step 1 wording defined C^{n-1} circularly and reused the letter C of the object; rewritten with complements D^n defined explicitly and n_0 introduced; (3) step 3: added the trivial case and that the finite-free replacement is applied to the truncated complex with top degree at most n-1.; 1 file(s) fixed by the reviewer"
+ }
 }
