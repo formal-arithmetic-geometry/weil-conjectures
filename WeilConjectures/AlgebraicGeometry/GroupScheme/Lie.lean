@@ -910,6 +910,62 @@ theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :
       inv dualNumbersToSpecOver ≫ (v : Scheme.dualNumbersOver _ ⟶ G) :=
   rfl
 
+/-- Through `(Spec R)[ε] ≅ Spec R[ε]`, scaling the infinitesimal by `c ∈ R` is `Spec` of
+`ε ↦ cε`. -/
+theorem dualNumbersScaleOver_comp_dualNumbersToSpecOver (c : R) :
+    Scheme.dualNumbersScaleOver (Spec (.of R)) ((Scheme.ΓSpecIso (.of R)).inv c) ≫
+        dualNumbersToSpecOver =
+      dualNumbersToSpecOver ≫
+        (Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom)).asOver (Spec (.of R)) := by
+  ext1
+  dsimp only [Over.comp_left, Scheme.dualNumbersScaleOver_left]
+  exact Scheme.dualNumbersScale_comp_dualNumbersToSpec (.of R) c
+
+/-- Rescaling an infinitesimal point by `c ∈ R` is the point of the tangent group obtained by
+`ε ↦ cε`. -/
+theorem GrpObj.coe_infPointsEquivTangentGroup_infPointsScale (c : R) (v : GrpObj.infPoints G) :
+    (GrpObj.infPointsEquivTangentGroup G
+        (GrpObj.infPointsScale G ((Scheme.ΓSpecIso (.of R)).inv c) v) : points G (DualNumber R)) =
+      points.map G (DualNumber.scale c) (GrpObj.infPointsEquivTangentGroup G v) := by
+  rw [coe_infPointsEquivTangentGroup_apply, coe_infPointsEquivTangentGroup_apply, points.map,
+    IsIso.inv_comp_eq, ← Category.assoc, ← dualNumbersScaleOver_comp_dualNumbersToSpecOver,
+    Category.assoc, IsIso.hom_inv_id_assoc]
+  rfl
+
+/-- The isomorphism `(Spec R)[ε][δ] ⟶ Spec R[ε][δ]` as a morphism over `Spec R`. -/
+noncomputable def dualNumbers₂ToSpecOver : Scheme.dualNumbers₂Over (Spec (.of R)) ⟶
+    (Spec (.of (DualNumber (DualNumber R)))).asOver (Spec (.of R)) :=
+  Over.homMk (Scheme.dualNumbers₂ToSpec (.of R)) (Scheme.dualNumbers₂ToSpec_comp_specMap _)
+
+instance : IsIso (dualNumbers₂ToSpecOver (R := R)) := by
+  have : IsIso ((Over.forget _).map (dualNumbers₂ToSpecOver (R := R))) :=
+    Scheme.isIso_dualNumbers₂ToSpec _
+  exact isIso_of_reflects_iso _ (Over.forget _)
+
+/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, the map `η ↦ εδ` is `Spec` of `R[η] → R[ε][δ]`. -/
+theorem dualNumbersMulOver_comp_dualNumbersToSpecOver :
+    Scheme.dualNumbersMulOver (Spec (.of R)) ≫ dualNumbersToSpecOver =
+      dualNumbers₂ToSpecOver ≫ (Spec.map (CommRingCat.ofHom
+        (DualNumber.mulAlgHom (R := R)).toRingHom)).asOver (Spec (.of R)) := by
+  ext1
+  exact Scheme.dualNumbersMul_comp_dualNumbersToSpec _
+
+/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, forgetting `δ` is `Spec` of `R[ε] → R[ε][δ]`. -/
+theorem dualNumbersProjεOver_comp_dualNumbersToSpecOver :
+    Scheme.dualNumbersProjεOver (Spec (.of R)) ≫ dualNumbersToSpecOver =
+      dualNumbers₂ToSpecOver ≫ (Spec.map (CommRingCat.ofHom
+        (inlAlgHom R (DualNumber R) (DualNumber R)).toRingHom)).asOver (Spec (.of R)) := by
+  ext1
+  exact Scheme.dualNumbersProj_comp_dualNumbersToSpec _
+
+/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, forgetting `ε` is `Spec` of `R[δ] → R[ε][δ]`. -/
+theorem dualNumbersProjδOver_comp_dualNumbersToSpecOver :
+    Scheme.dualNumbersProjδOver (Spec (.of R)) ≫ dualNumbersToSpecOver =
+      dualNumbers₂ToSpecOver ≫ (Spec.map (CommRingCat.ofHom
+        (DualNumber.mapInlAlgHom (R := R)).toRingHom)).asOver (Spec (.of R)) := by
+  ext1
+  exact Scheme.dualNumbers_dualNumbersProj_comp_dualNumbersToSpec _
+
 end Ring
 
 /-! ### Group schemes of finite type over a field -/

@@ -98,24 +98,186 @@ theorem map_fstHom_dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} 
     Matrix.one_apply]
   split_ifs <;> rfl
 
+theorem coe_dualUnit_inv {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+    (X : Matrix n n k) :
+    (((dualUnit X)⁻¹ : GL n (DualNumber k)) : Matrix n n (DualNumber k)) = 1 - X.map inr :=
+  rfl
+
+/-- The matrix `1 + εX` reduces to the identity modulo `ε`, entrywise. -/
+@[simp]
+theorem map_fst_dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+    (X : Matrix n n k) : (dualUnit X : Matrix n n (DualNumber k)).map fst = 1 := by
+  ext i j
+  simp [coe_dualUnit, Matrix.one_apply, apply_ite fst]
+
+/-- The `ε`-part of `1 + εX` is `X`. -/
+@[simp]
+theorem map_snd_dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
+    (X : Matrix n n k) : (dualUnit X : Matrix n n (DualNumber k)).map snd = X := by
+  ext i j
+  simp [coe_dualUnit, Matrix.one_apply, apply_ite snd]
+
+/-- A point of `GL_n` with values in `k[ε]` is in the tangent group if and only if its matrix
+reduces to the identity modulo `ε`. -/
+theorem mem_tangentGroup_iff {x : points 𝔾𝕃(n; k) (DualNumber k)} :
+    x ∈ tangentGroup 𝔾𝕃(n; k) ↔
+      ((homMulEquiv n k (DualNumber k) x : GL n (DualNumber k)) :
+        Matrix n n (DualNumber k)).map fst = 1 := by
+  rw [mem_tangentGroup, points.map, ← (homMulEquiv n k k).injective.eq_iff,
+    homMulEquiv_specMap_comp, map_one, Units.ext_iff]
+  rfl
+
+/-- The tangent group of `GL_n` is `gl_n`: a point `1 + εX` goes to its `ε`-part `X`. -/
+noncomputable def tangentGroupEquivMatrix : tangentGroup 𝔾𝕃(n; k) ≃ Matrix n n k where
+  toFun x := ((homMulEquiv n k (DualNumber k) x.1 : GL n (DualNumber k)) :
+    Matrix n n (DualNumber k)).map snd
+  invFun X := ⟨(homMulEquiv n k (DualNumber k)).symm (dualUnit X), by
+    rw [mem_tangentGroup_iff, MulEquiv.apply_symm_apply, map_fst_dualUnit]⟩
+  left_inv x := by
+    refine Subtype.ext ((MulEquiv.symm_apply_eq _).2 (Units.ext ?_))
+    rw [coe_dualUnit]
+    exact (Matrix.eq_one_add_map_inr_of_map_fst_eq_one ((mem_tangentGroup_iff n k).1 x.2)).symm
+  right_inv X := by
+    simp only [MulEquiv.apply_symm_apply, map_snd_dualUnit]
+
+theorem tangentGroupEquivMatrix_apply (x : tangentGroup 𝔾𝕃(n; k)) :
+    tangentGroupEquivMatrix n k x = ((homMulEquiv n k (DualNumber k) x.1 : GL n (DualNumber k)) :
+      Matrix n n (DualNumber k)).map snd :=
+  rfl
+
+theorem tangentGroupEquivMatrix_symm_apply (X : Matrix n n k) :
+    ((tangentGroupEquivMatrix n k).symm X : points 𝔾𝕃(n; k) (DualNumber k)) =
+      (homMulEquiv n k (DualNumber k)).symm (dualUnit X) :=
+  rfl
+
+theorem homMulEquiv_eq_dualUnit (x : tangentGroup 𝔾𝕃(n; k)) :
+    homMulEquiv n k (DualNumber k) x.1 = dualUnit (tangentGroupEquivMatrix n k x) := by
+  rw [← MulEquiv.eq_symm_apply, ← tangentGroupEquivMatrix_symm_apply, Equiv.symm_apply_apply]
+
+/-- The group law of the tangent group of `GL_n` is the addition of matrices:
+`(1 + εX)(1 + εY) = 1 + ε(X + Y)`. -/
+theorem tangentGroupEquivMatrix_mul (x y : tangentGroup 𝔾𝕃(n; k)) :
+    tangentGroupEquivMatrix n k (x * y) =
+      tangentGroupEquivMatrix n k x + tangentGroupEquivMatrix n k y := by
+  simp only [tangentGroupEquivMatrix_apply, Subgroup.coe_mul, map_mul, Units.val_mul]
+  exact Matrix.map_snd_mul_of_map_fst_eq_one ((mem_tangentGroup_iff n k).1 x.2)
+    ((mem_tangentGroup_iff n k).1 y.2)
+
 /-- The matrix of a tangent vector of `GL_n`: the infinitesimal point `1 + εX` goes to `X`. -/
 noncomputable def toMatrix (x : GrpObj.Lie 𝔾𝕃(n; k)) : Matrix n n k :=
   ((homMulEquiv n k (DualNumber k)
     (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) ((GrpObj.lieEquiv 𝔾𝕃(n; k)).symm x)).1 :
       GL n (DualNumber k)) : Matrix n n (DualNumber k)).map snd
 
+theorem toMatrix_eq (x : GrpObj.Lie 𝔾𝕃(n; k)) :
+    toMatrix n k x = tangentGroupEquivMatrix n k
+      (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) ((GrpObj.lieEquiv 𝔾𝕃(n; k)).symm x)) :=
+  rfl
+
+/-- An infinitesimal point `u` of `GL_n`, pulled back to `Spec k[ε][δ]` along a map
+`f : (Spec k)[ε][δ] ⟶ (Spec k)[ε]` coming from `φ : k[ε] → k[ε][δ]`, is the matrix `φ(1 + εX)`. -/
+theorem homMulEquiv_inv_dualNumbers₂ToSpecOver_comp
+    {f : Scheme.dualNumbers₂Over (Spec (.of k)) ⟶ Scheme.dualNumbersOver (Spec (.of k))}
+    {φ : DualNumber k →ₐ[k] DualNumber (DualNumber k)}
+    (hf : f ≫ dualNumbersToSpecOver =
+      dualNumbers₂ToSpecOver ≫ (Spec.map (CommRingCat.ofHom φ.toRingHom)).asOver _)
+    (u : GrpObj.infPoints 𝔾𝕃(n; k)) :
+    homMulEquiv n k _ (inv dualNumbers₂ToSpecOver ≫ f ≫ u.1) =
+      Matrix.GeneralLinearGroup.map φ.toRingHom (dualUnit (tangentGroupEquivMatrix n k
+        (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) u))) := by
+  rw [← homMulEquiv_eq_dualUnit, ← homMulEquiv_specMap_comp,
+    GrpObj.coe_infPointsEquivTangentGroup_apply, (IsIso.eq_comp_inv _).2 hf]
+  simp only [Category.assoc, IsIso.inv_hom_id_assoc]
+
+/-- The bracket of infinitesimal points of `GL_n` is the commutator of matrices: the mixed term of
+`(1 + εX)(1 + δY)(1 - εX)(1 - δY) = 1 + εδ(XY - YX)`. -/
+theorem tangentGroupEquivMatrix_infBracket (v w : GrpObj.infPoints 𝔾𝕃(n; k)) :
+    tangentGroupEquivMatrix n k
+        (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) (GrpObj.infBracket _ v w)) =
+      ⁅tangentGroupEquivMatrix n k (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) v),
+        tangentGroupEquivMatrix n k (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k) w)⁆ := by
+  set e := GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k)
+  set X := tangentGroupEquivMatrix n k (e v)
+  set Y := tangentGroupEquivMatrix n k (e w)
+  set Z := tangentGroupEquivMatrix n k (e (GrpObj.infBracket _ v w))
+  have hmix : Scheme.dualNumbersMulOver _ ≫ (GrpObj.infBracket _ v w).1 =
+      GrpObj.toε _ v * GrpObj.toδ _ w * (GrpObj.toε _ v)⁻¹ * (GrpObj.toδ _ w)⁻¹ :=
+    congrArg Subtype.val ((GrpObj.mixedEquiv _).apply_symm_apply _)
+  have key := congrArg (fun z ↦ homMulEquiv n k _ (inv dualNumbers₂ToSpecOver ≫ z)) hmix
+  simp only [MonObj.comp_mul, GrpObj.comp_inv, map_mul, map_inv, GrpObj.toε, GrpObj.toδ] at key
+  rw [homMulEquiv_inv_dualNumbers₂ToSpecOver_comp n k
+      dualNumbersMulOver_comp_dualNumbersToSpecOver,
+    homMulEquiv_inv_dualNumbers₂ToSpecOver_comp n k
+      dualNumbersProjεOver_comp_dualNumbersToSpecOver,
+    homMulEquiv_inv_dualNumbers₂ToSpecOver_comp n k
+      dualNumbersProjδOver_comp_dualNumbersToSpecOver] at key
+  have hZ : Z = ((Matrix.GeneralLinearGroup.map (DualNumber.mulAlgHom (R := k)).toRingHom
+      (dualUnit Z) : GL n (DualNumber (DualNumber k))) : Matrix n n (DualNumber (DualNumber k))).map
+        (fun z ↦ z.snd.snd) := by
+    ext i j
+    simp [coe_dualUnit, DualNumber.mulAlgHom, DualNumber.mulRingHom, Matrix.one_apply,
+      apply_ite, -DualNumber.inr_eq_smul_eps]
+  rw [hZ, key, Ring.lie_def, ← Matrix.map_snd_snd_commutator]
+  have hcoe (f : DualNumber k →+* DualNumber (DualNumber k)) (A : GL n (DualNumber k)) :
+      ((Matrix.GeneralLinearGroup.map f A : GL n _) : Matrix n n (DualNumber (DualNumber k))) =
+        (A : Matrix n n (DualNumber k)).map f :=
+    rfl
+  have hP : ((Matrix.GeneralLinearGroup.map (inlAlgHom k (DualNumber k) (DualNumber k)).toRingHom
+      (dualUnit X) : GL n _) : Matrix n n (DualNumber (DualNumber k))) =
+        1 + X.map fun a ↦ inl (inr a) := by
+    ext i j : 1
+    refine TrivSqZeroExt.ext ?_ ?_ <;>
+      simp [coe_dualUnit, Matrix.one_apply, apply_ite fst, apply_ite snd,
+        -DualNumber.inr_eq_smul_eps]
+  have hPi : ((Matrix.GeneralLinearGroup.map (inlAlgHom k (DualNumber k) (DualNumber k)).toRingHom
+      (dualUnit X)⁻¹ : GL n _) : Matrix n n (DualNumber (DualNumber k))) =
+        1 - X.map fun a ↦ inl (inr a) := by
+    rw [hcoe, coe_dualUnit_inv]
+    ext i j : 1
+    refine TrivSqZeroExt.ext ?_ ?_ <;>
+      simp [Matrix.one_apply, apply_ite fst, apply_ite snd,
+        -DualNumber.inr_eq_smul_eps]
+  have hQ : ((Matrix.GeneralLinearGroup.map (DualNumber.mapInlAlgHom (R := k)).toRingHom
+      (dualUnit Y) : GL n _) : Matrix n n (DualNumber (DualNumber k))) =
+        1 + Y.map fun b ↦ inr (inl b) := by
+    ext i j : 1
+    refine TrivSqZeroExt.ext ?_ ?_ <;>
+      simp [coe_dualUnit, DualNumber.mapInlAlgHom, Matrix.one_apply, apply_ite fst,
+        apply_ite snd, -DualNumber.inr_eq_smul_eps]
+  have hQi : ((Matrix.GeneralLinearGroup.map (DualNumber.mapInlAlgHom (R := k)).toRingHom
+      (dualUnit Y)⁻¹ : GL n _) : Matrix n n (DualNumber (DualNumber k))) =
+        1 - Y.map fun b ↦ inr (inl b) := by
+    rw [hcoe, coe_dualUnit_inv]
+    ext i j : 1
+    refine TrivSqZeroExt.ext ?_ ?_ <;>
+      simp [DualNumber.mapInlAlgHom, Matrix.one_apply, apply_ite fst,
+        apply_ite snd, -DualNumber.inr_eq_smul_eps]
+  rw [Units.val_mul, Units.val_mul, Units.val_mul, ← map_inv, ← map_inv, hP, hQ, hPi, hQi]
+
 /-- `Lie(GL_n) → gl_n` as a homomorphism of Lie algebras: the bracket is preserved because the
 mixed term of the commutator `(1 + εX)(1 + δY)(1 - εX)(1 - δY) = 1 + εδ(XY - YX)` is the matrix
 commutator. -/
 noncomputable def toMatrixLieHom : GrpObj.Lie 𝔾𝕃(n; k) →ₗ⁅k⁆ Matrix n n k where
   toFun := toMatrix n k
-  map_add' := by sorry
-  map_smul' := by sorry
-  map_lie' := by sorry
+  map_add' x y := by
+    rw [toMatrix_eq, toMatrix_eq, toMatrix_eq, GrpObj.lieEquiv_symm_add, map_mul,
+      tangentGroupEquivMatrix_mul]
+  map_smul' c x := by
+    rw [toMatrix_eq, toMatrix_eq, RingHom.id_apply,
+      show c • x = (Scheme.ΓSpecIso (.of k)).inv.hom c • x from rfl, GrpObj.lieEquiv_symm_smul,
+      tangentGroupEquivMatrix_apply, tangentGroupEquivMatrix_apply,
+      GrpObj.coe_infPointsEquivTangentGroup_infPointsScale, points.map, homMulEquiv_specMap_comp]
+    ext i j
+    simp [Matrix.GeneralLinearGroup.map]
+  map_lie' {x y} := by
+    rw [toMatrix_eq, toMatrix_eq, toMatrix_eq, GrpObj.lie_def, Equiv.symm_apply_apply,
+      tangentGroupEquivMatrix_infBracket]
 
 /-- `Lie(GL_n) → gl_n` is bijective: every infinitesimal point of `GL_n` is uniquely `1 + εX`. -/
-theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) := by
-  sorry
+theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) :=
+  ((tangentGroupEquivMatrix n k).bijective.comp
+    (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k)).bijective).comp
+      (GrpObj.lieEquiv 𝔾𝕃(n; k)).symm.bijective
 
 /-- The Lie algebra of the general linear group is `gl_n`, the matrices with the commutator
 bracket: the tangent vector `1 + εX` corresponds to `X`. (blueprint: `sk-d-tangent`) -/
@@ -132,7 +294,9 @@ theorem infPointsEquivTangentGroup_lieAlgebraEquivMatrix_symm (X : Matrix n n k)
     (GrpObj.infPointsEquivTangentGroup 𝔾𝕃(n; k)
       ((GrpObj.lieEquiv 𝔾𝕃(n; k)).symm ((lieAlgebraEquivMatrix n k).symm X)) :
         points 𝔾𝕃(n; k) (DualNumber k)) = (homMulEquiv n k (DualNumber k)).symm (dualUnit X) := by
-  sorry
+  obtain ⟨x, rfl⟩ : ∃ x, lieAlgebraEquivMatrix n k x = X := (lieAlgebraEquivMatrix n k).surjective X
+  rw [LieEquiv.symm_apply_apply, lieAlgebraEquivMatrix_apply, toMatrix_eq,
+    ← tangentGroupEquivMatrix_symm_apply, Equiv.symm_apply_apply]
 
 end GeneralLinear
 
