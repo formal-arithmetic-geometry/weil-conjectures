@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-finite-qf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite morphisms are quasi-finite",
@@ -15,28 +15,64 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "A finite morphism is affine and $f_*\\mathcal O_X$ is a finite\n$\\mathcal O_S$-algebra, so $f$ is of finite type and quasi-compact, by\n[def-weil-pbc-scheme-conventions]. Its fibres are finite: the\nfibre at $s$ is $\\operatorname{Spec}$ of a finite\n$\\kappa(s)$-algebra, which is a finite-dimensional $\\kappa(s)$-vector\nspace, hence Artinian and therefore has finitely many prime ideals\n(classical algebra). A morphism of finite type with finite fibres is\nquasi-finite, by [pqf-lem-qf-finitefibres], if it is locally of\nfinite type; and it is, because finite type implies locally of finite\ntype in the sense of [pqf-def-quasifinite].",
+   "text": "Let $f$ be a finite morphism. By clause (1) of [lem-weil-pbc-finite-closed-map-finite-fibres], $f$ is proper, hence of finite type; by the definition of finite type recorded in [def-weil-pbc-scheme-conventions], $f$ is therefore quasi-compact and locally of finite type. By clause (2) of [lem-weil-pbc-finite-closed-map-finite-fibres], every fibre $f^{-1}(\\{y\\})$ is finite. Applying the reverse implication of [pqf-lem-qf-finitefibres] gives that $f$ is quasi-finite.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
-    "pqf-lem-qf-finitefibres",
-    "pqf-def-quasifinite"
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-qf-finitefibres"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-scheme-conventions",
-  "pqf-lem-qf-finitefibres",
-  "pqf-def-quasifinite"
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-qf-finitefibres"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-finite-qf.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes is quasi-finite",
+   "results": "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite (Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean); also IsFinite.instLocallyOfFiniteType, IsFinite, LocallyQuasiFinite, LocallyOfFiniteType, IsFinite.toIsAffineHom, instIsProperOfIsFinite, IsProper.instOfIsFinite",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, LocallyQuasiFinite",
+   "results": "loogle: unknown identifier 'IsFinite'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*LocallyQuasiFinite|LocallyQuasiFinite.*IsFinite AlgebraicGeometry/Morphisms",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:90 instance (priority := low) [IsFinite f] : LocallyQuasiFinite f; related hits at lines 32, 190, 262, 265",
+   "date": "2026-10-10",
+   "verdict": "match: the instance at line 90"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes is quasi-finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "class QuasiFinite|def QuasiFinite in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "no scheme-level QuasiFinite class; QuasiFinite.lean:90 gives only [IsFinite f] : LocallyQuasiFinite f",
+   "date": "2026-10-10",
+   "verdict": "no exact match: the project's quasi-finite (pqf-def-quasifinite) also demands finite type, so no single-declaration leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +96,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-finite-qf",
+  "worker": "stage1",
+  "summary": "Restored the proof through the project definition of quasi-finite: finite morphisms are finite type and quasi-compact, Mathlib supplies finite fibres, and pqf-lem-qf-finitefibres finishes.",
+  "blueprint": "The single proof clause is realized by the explicit finite-type/quasi-compact check, the finite-fibre leaf, and the reverse implication of pqf-lem-qf-finitefibres."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfq2309",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfq2309 (reviewer sub-agent of L); spot-checked: Mathlib has no scheme-level QuasiFinite; QuasiFinite.lean:90 gives only LocallyQuasiFinite from IsFinite, and pqf-def-quasifinite also demands finite type, so H1's un-leafing is right. Step checked against the three cited statements: complete, non-circular. FIX more, RETURN less: C4 the step credited finite type of a finite morphism to def-weil-pbc-scheme-conventions, which only records definitions; re-attributed to clause (1) of lem-weil-pbc-finite-closed-map-finite-fibres (proper, hence finite type), with quasi-compact and locally finite type from the conventions' definition of finite type; grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
