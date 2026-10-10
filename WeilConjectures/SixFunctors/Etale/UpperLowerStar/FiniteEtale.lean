@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-!
 # The direct image along a finite étale morphism is left adjoint to the pullback
@@ -351,5 +352,133 @@ lemma Etale.lowerStarUnit_comp_counit :
   ext G U
   simp [Etale.localizationRestrictionLowerStarAdjunction_counit_app_hom_app,
     Etale.lowerStarUnit_app_hom_app]
+
+section Stalk
+
+variable [HasSmallSiteSheafify A] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+  {y : Spec (.of Ω) ⟶ Y}
+
+/-- A geometric point of an étale `X`-scheme `U` over `t` is a geometric point of `U` over
+`t ≫ f`, regarded as an étale `Y`-scheme. -/
+noncomputable def Etale.fiberMapPoint (t : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
+    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
+    (Scheme.pointSmallEtale y).fiber.obj ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).obj U) :=
+  CategoryTheory.Over.homMk x.left (by
+    change x.left ≫ U.hom ≫ f = y
+    have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
+    rw [← Category.assoc, hx]
+    exact t.2)
+
+/-- The germ at a geometric point `t` of `X` over `y` of a section of `G` is sent to the germ
+at `y` of its extension by zero off the graph: a map `G_t ⟶ (f_* G)_y`. -/
+noncomputable def Etale.sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y)
+    (G : Sheaf X.smallEtaleTopology A) :
+    (Scheme.pointSmallEtale t.1).sheafFiber.obj G ⟶
+      (Scheme.pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) :=
+  (Scheme.pointSmallEtale t.1).presheafFiberDesc
+    (fun U x ↦ Scheme.Etale.graphExtend f G U ≫
+      (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x) ((f)_*[A].obj G).obj)
+    (fun U V g x ↦ by
+      change G.obj.map g.op ≫ _ ≫ _ = _
+      rw [Scheme.Etale.graphExtend_naturality_assoc]
+      exact congrArg (Scheme.Etale.graphExtend f G V ≫ ·)
+        ((Scheme.pointSmallEtale y).toPresheafFiber_w
+          ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).map g) _
+            ((f)_*[A].obj G).obj))
+
+
+@[reassoc (attr := simp)]
+lemma Etale.toPresheafFiber_sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y)
+    (G : Sheaf X.smallEtaleTopology A) (U : X.Etale) (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
+    (Scheme.pointSmallEtale t.1).toPresheafFiber U x G.obj ≫ Etale.sheafFiberToLowerStar A f t G =
+      Scheme.Etale.graphExtend f G U ≫
+        (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x)
+          ((f)_*[A].obj G).obj :=
+  (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
+
+/-- The point `(u, t')` of `U ×_Y X` attached to a geometric point `u` of `U` over `t` and a
+geometric point `t'` of `X` over `y`. -/
+lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
+    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
+    Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t' =
+      pullback.lift x.left t'.1 (by
+        have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
+        change x.left ≫ U.hom ≫ f = _
+        rw [← Category.assoc, hx, t.2, t'.2]) :=
+  rfl
+
+/-- Restricting the germ of the extension by zero of a section back to `t` gives the germ of
+the section. -/
+@[reassoc (attr := simp)]
+lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f y)
+    (G : Sheaf X.smallEtaleTopology A) :
+    Etale.sheafFiberToLowerStar A f t G ≫ Etale.stalkRestrict A f y t G = 𝟙 _ := by
+  apply (Scheme.pointSmallEtale t.1).presheafFiber_hom_ext
+  intro U x
+  refine Eq.trans ?_ (Category.comp_id _).symm
+  erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
+  erw [Etale.toPresheafFiber_stalkRestrict A f y t G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
+  have : ((Etale.baseChangeNbhd f y t).obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
+      (Scheme.pointSmallEtale t.1).fiber.map (Scheme.Etale.graph f U) x := by
+    refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
+    · change Scheme.Hom.basePt f _ t ≫ _ = (x.left ≫ (Scheme.Etale.graph f U).left) ≫ _
+      rw [Category.assoc, Scheme.Etale.graph_left_fst]
+      exact (pullback.lift_fst _ _ _).trans (Category.comp_id _).symm
+    · change Scheme.Hom.basePt f _ t ≫ _ = (x.left ≫ (Scheme.Etale.graph f U).left) ≫ _
+      rw [Category.assoc, Scheme.Etale.graph_left_snd, hx]
+      exact pullback.lift_snd _ _ _
+  erw [this]
+  rw [← (Scheme.pointSmallEtale t.1).toPresheafFiber_w (Scheme.Etale.graph f U) x G.obj]
+  exact Scheme.Etale.graphExtend_graph_assoc f G U _
+
+/-- Restricting the germ of the extension by zero of a section to a geometric point `t'` other
+than `t` gives zero: the point `(u, t')` of `U ×_Y X` lies off the graph of `U ⟶ X`. -/
+@[reassoc (attr := simp)]
+lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.GeometricFiber f y}
+    (htt' : t ≠ t') (G : Sheaf X.smallEtaleTopology A) :
+    Etale.sheafFiberToLowerStar A f t G ≫ Etale.stalkRestrict A f y t' G = 0 := by
+  apply (Scheme.pointSmallEtale t.1).presheafFiber_hom_ext
+  intro U x
+  refine Eq.trans ?_ (comp_zero).symm
+  erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
+  erw [Etale.toPresheafFiber_stalkRestrict A f y t' G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
+  let b := Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t'
+  -- the point `(u, t')` lies off the graph
+  have hb : Set.range b ⊆ Set.range (Scheme.Etale.graphComplι f U).left := by
+    rintro _ ⟨p, rfl⟩
+    change _ ∈ Set.range (Scheme.Etale.graphCompl f U).ι
+    rw [Scheme.Opens.range_ι]
+    rintro ⟨q, hq⟩
+    have hsub : Set.range b ⊆ Set.range (Scheme.Etale.graph f U).left := by
+      rintro _ ⟨p', rfl⟩
+      rw [Subsingleton.elim p' p]
+      exact ⟨q, hq⟩
+    let v := IsOpenImmersion.lift (Scheme.Etale.graph f U).left b hsub
+    have hv : v ≫ (Scheme.Etale.graph f U).left = b := IsOpenImmersion.lift_fac _ _ _
+    have h₁ : v = x.left := by
+      have := congrArg (· ≫ pullback.fst _ f) hv
+      simp only [Category.assoc, Scheme.Etale.graph_left_fst, Category.comp_id] at this
+      exact this.trans (pullback.lift_fst _ _ _)
+    have h₂ : v ≫ U.hom = t'.1 := by
+      have := congrArg (· ≫ pullback.snd _ f) hv
+      simp only [Category.assoc, Scheme.Etale.graph_left_snd] at this
+      exact this.trans (pullback.lift_snd _ _ _)
+    exact htt' (Subtype.ext (hx.symm.trans (h₁ ▸ h₂)))
+  let w : (Scheme.pointSmallEtale t'.1).fiber.obj (Scheme.Etale.graphComplObj f U) :=
+    CategoryTheory.Over.homMk (IsOpenImmersion.lift (Scheme.Etale.graphComplι f U).left b hb)
+      (by
+        change _ ≫ (Scheme.Etale.graphComplι f U).left ≫ _ = _
+        rw [← Category.assoc, IsOpenImmersion.lift_fac]
+        exact pullback.lift_snd _ _ _)
+  have : ((Etale.baseChangeNbhd f y t').obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
+      (Scheme.pointSmallEtale t'.1).fiber.map (Scheme.Etale.graphComplι f U) w :=
+    CategoryTheory.Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _).symm
+  erw [this]
+  rw [← (Scheme.pointSmallEtale t'.1).toPresheafFiber_w (Scheme.Etale.graphComplι f U) w G.obj]
+  erw [Scheme.Etale.graphExtend_graphComplι_assoc f G U]
+  exact zero_comp
+end Stalk
 
 end AlgebraicGeometry
