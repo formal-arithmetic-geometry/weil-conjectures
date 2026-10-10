@@ -16,6 +16,8 @@ public import WeilConjectures.FourierTransform.Defs
 
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`: the transform is
   linear over the base.
+- `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_mapDerivedCategory`: the transform of a
+  complex pulled back from the base is the base change of the transform of the unit.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`: the transform commutes
   with the Tate twist.
 
@@ -27,7 +29,7 @@ See `WeilConjectures.FourierTransform.Properties` for the implementation notes.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
@@ -38,45 +40,97 @@ variable {S V V' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S)
 
 section BaseLinear
 
-variable [Finite Λ] [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
+variable [Finite Λ] [HasInvertibleExponent Λ S] [CharP Γ(pullback π π', ⊤) p]
+  [HasCompactification (pullback.snd π π')] [LocallyOfFiniteType (pullback.snd π π')]
 
-/-- Tensoring the input with a complex pulled back from the base `S` along `π : V ⟶ S` is
-the same as tensoring the output with the same complex pulled back along `π' : V' ⟶ S`:
+/-- Tensoring the input with a complex pulled back from the base `S` along `π : V ⟶ S` is the
+same as tensoring the output with the same complex pulled back along `π' : V' ⟶ S`:
 
-`FT_ψ(K ⊗ᴸ π^* N) ≅ FT_ψ(K) ⊗ᴸ π'^* N`,
+`FT_ψ(K ⊗ᴸ π^* N) ≅ FT_ψ(K) ⊗ᴸ π'^* N`
 
-naturally in `K` **and** in `N`: the statement below asserts that the two functors
-`D(S_ét) ⥤ (D(V_ét) ⥤ D(V'_ét))` are isomorphic. For fixed `N` it is the square
+for `K ∈ Dᵇc(V, Λ)` and `N ∈ Dᵇctf(S, Λ)`, naturally in `K` **and** in `N`: the statement below
+asserts that the two functors `Dᵇctf(S, Λ) ⥤ (Dᵇc(V, Λ) ⥤ D(V'_ét))` are isomorphic. For fixed
+`N` it is the square
 
 ```
-     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+     Dᵇc(V) ───FT_ψ───▶ D(V'_ét)
         │                    │
   ⊗π^*N │                    │ ⊗π'^*N
         ▼                    ▼
      D(V_ét) ───FT_ψ───▶ D(V'_ét)
 ```
 
-In particular `FT_ψ(π^* N) ≅ FT_ψ(Λ) ⊗ᴸ π'^* N`, so the transform of a complex pulled back
-from the base is determined by the transform of the unit.
+The blueprint works over a field of coefficients, where every `N ∈ Dᵇc(S)` has finite Tor
+amplitude; over the finite ring `Λ` this is the hypothesis `N ∈ Dᵇctf(S, Λ)`. The particular
+case `K = Λ_V` is `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_mapDerivedCategory`.
 
-Class: torsion; decided by the projection formula for `Rp₂,!` on the unbounded derived
-categories (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`), which needs `[Finite Λ]`.
-The proof is that of `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`.
+The proof is that of
+`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`, with the
+projection formula for `p₂` at `p₁^* K ⊗ᴸ 𝒦_ψ[r]` (bounded constructible, `𝒦_ψ` being lisse of
+rank one) and `π'^* N` (in `Dᵇctf`) given by
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`.
 (sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
-    Nonempty (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π ⋙
-          (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ≅
+    Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
+        derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π ⋙
+          (Functor.whiskeringRight _ _ _).obj (fourierTransform Λ π π' Ψ b r) ⋙
+            (Functor.whiskeringLeft _ _ _).obj
+              (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ≅
+      (DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
         derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π' ⋙
-          (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r)) :=
-  have := isIso_projectionMap_of_finite Λ (pullback.snd π π')
-  nonempty_iso_kernelTransform_tensor (ModuleCat.{u + 1} Λ) π π' _ r
+          (Functor.whiskeringLeft _ _ _).obj (fourierTransform Λ π π' Ψ b r) ⋙
+            (Functor.whiskeringLeft _ _ _).obj
+              (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι) := by
+  have := HasInvertibleExponent.of_hom (Λ := Λ) π'
+  refine nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula _ π π' _ _
+    ((DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) r
+    fun K hK N hN ↦ hasProjectionFormula_of_boundedConstructible Λ _ _ _ ?_
+      (constructibleFiniteTor_mapDerivedCategory_upperStar Λ π' hN)
+  -- `p₁^* K ⊗ᴸ 𝒦_ψ[r] ≅ (p₁^* K ⊗ᴸ 𝒦_ψ)[r]` is bounded constructible.
+  refine (DerivedCategory.boundedConstructible _ _).prop_of_iso
+    ((derivedTensorRightShiftIso _ _ r).app _).symm
+    ((DerivedCategory.boundedConstructible _ _).le_shift r _ ?_)
+  exact boundedConstructible_tensor Λ _ (hK.mapDerivedCategory_upperStar (pullback.fst π π'))
+    (DerivedCategory.boundedConstructible_singleFunctor_obj (fourierKernel Λ π π' Ψ b) 0)
+    ⟨0, 0, torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩
+
+/-- The first clause of the base linearity proposition: the transform of a complex pulled back
+from the base is the base change of the transform of the unit,
+
+`FT_ψ(π^* N) ≅ FT_ψ(Λ_V) ⊗ᴸ π'^* N`
+
+for `N ∈ Dᵇctf(S, Λ)`, naturally in `N`. It is
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `K = Λ_V`, composed with the
+left unitor `Λ_V ⊗ᴸ π^* N ≅ π^* N`.
+(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (1)) -/
+theorem nonempty_iso_fourierTransform_mapDerivedCategory (Ψ : AddChar (ZMod p) Λ)
+    (b : Γ(pullback π π', ⊤)) (r : ℤ) :
+    Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
+        D((π)^*[ModuleCat.{u + 1} Λ]) ⋙ fourierTransform Λ π π' Ψ b r ≅
+      (DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
+        derivedTensorRightPullback (ModuleCat.{u + 1} Λ) π' ⋙
+          (evaluation _ _).obj
+            ((fourierTransform Λ π π' Ψ b r).obj (constantComplex Λ V))) := by
+  obtain ⟨e⟩ := nonempty_iso_fourierTransform_tensor Λ π π' Ψ b r
+  -- `Λ_V` is bounded constructible: it is the constant sheaf `Λ` placed in degree `0`.
+  let K₀ : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).FullSubcategory :=
+    ⟨constantComplex Λ V, (DerivedCategory.boundedConstructible _ _).prop_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+      (DerivedCategory.boundedConstructible_singleFunctor_obj _ 0)⟩
+  -- `Λ_V ⊗ᴸ M ≅ M`, naturally in `M`.
+  let uV : derivedTensorRightFunctor (ModuleCat.{u + 1} Λ) V ⋙
+      (evaluation _ _).obj (constantComplex Λ V) ≅ 𝟭 _ :=
+    NatIso.ofComponents (fun M ↦ λ_ M) fun f ↦ leftUnitor_naturality f
+  exact ⟨Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft D((π)^*[ModuleCat.{u + 1} Λ]) uV.symm) _) ≪≫
+    Functor.isoWhiskerRight e ((evaluation _ _).obj K₀)⟩
 
 /-- The Fourier–Deligne transform commutes with the Tate twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`
-for every `m : ℤ`, naturally in `K`:
+for every `m : ℤ`, naturally in `K ∈ Dᵇc(V, Λ)`:
 
 ```
-     D(V_ét) ───FT_ψ───▶ D(V'_ét)
+     Dᵇc(V) ───FT_ψ───▶ D(V'_ét)
         │                    │
     (m) │                    │ (m)
         ▼                    ▼
@@ -85,15 +139,16 @@ for every `m : ℤ`, naturally in `K`:
 
 This is the second clause of the base linearity proposition, the Tate twist being tensoring
 with an invertible complex pulled back from the base: it is
-`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, composed
-with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and `π'^* Λ_S(m) ≅ Λ_{V'}(m)`.
-
-Class: torsion; decided by the projection formula for `Rp₂,!`, through
-`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor`, which needs `[Finite Λ]`.
+`AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `N = Λ_S(m)`, which lies in
+`Dᵇctf(S, Λ)`, composed with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and
+`π'^* Λ_S(m) ≅ Λ_{V'}(m)`. That the isomorphism is one of Weil complexes when `K` carries a Weil
+structure is `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`.
 (sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (2)) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
-    Nonempty (tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
+    Nonempty ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ⋙
+        tateTwist Λ V m ⋙ fourierTransform Λ π π' Ψ b r ≅
+      (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ⋙
         fourierTransform Λ π π' Ψ b r ⋙ tateTwist Λ V' m) := by
   obtain ⟨e⟩ := nonempty_iso_fourierTransform_tensor Λ π π' Ψ b r
   -- `K ↦ K ⊗ᴸ f^* Λ_S(m)` is the Tate twist `(m)` on the source of `f`.
@@ -103,8 +158,9 @@ theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar 
     (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
       (((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _).symm ≪≫
         leftDerivedUpperStarTateObjectIso f m)
-  exact ⟨Functor.isoWhiskerRight (φ π).symm _ ≪≫ e.app (tateObject Λ S m) ≪≫
-    Functor.isoWhiskerLeft _ (φ π')⟩
+  exact ⟨Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight (φ π).symm _) ≪≫
+    e.app ⟨tateObject Λ S m, boundedConstructibleFiniteTor_tateObject Λ S m⟩ ≪≫
+    Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (φ π'))⟩
 
 end BaseLinear
 
