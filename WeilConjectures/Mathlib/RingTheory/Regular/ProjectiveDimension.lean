@@ -9,6 +9,7 @@ public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
 public import Mathlib.RingTheory.Regular.ProjectiveDimension
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
@@ -425,17 +426,12 @@ theorem spanFinrank_maximalIdeal_le_spanFinrank_map_add_one {x : R} (hx : x ∈ 
   set g := Function.surjInv (Ideal.Quotient.mk_surjective (I := Ideal.span {x}))
   have hg (a) : f (g a) = a := Function.surjInv_eq _ a
   have hm : maximalIdeal R = Ideal.span (insert x (g '' T')) := by
-    have h1 : Ideal.map f (Ideal.span (g '' T')) = I' := by
-      rw [Ideal.map_span, Set.image_image]
-      simp only [hg, Set.image_id']
-      exact hspan
-    have h2 := Ideal.comap_map_of_surjective' f Ideal.Quotient.mk_surjective
-      (Ideal.span (g '' T'))
-    rw [h1, Ideal.mk_ker] at h2
-    rw [Set.insert_eq, Ideal.span_union, sup_comm, ← h2, Ideal.comap_map_of_surjective' f
-      Ideal.Quotient.mk_surjective, Ideal.mk_ker, sup_eq_left.2]
-    rw [Ideal.span_le, Set.singleton_subset_iff]
-    exact hx
+    have h := Ideal.eq_span_sup_ker_of_map_eq_span (f := f) (s := g '' T')
+      Ideal.Quotient.mk_surjective (by rwa [Ideal.mk_ker, Ideal.span_singleton_le_iff_mem]) (by
+        rw [Set.image_image]
+        simp only [hg, Set.image_id']
+        exact hspan.symm)
+    rwa [Ideal.mk_ker, ← Ideal.span_union, Set.union_singleton] at h
   rw [hm]
   refine (Submodule.spanFinrank_span_le_ncard_of_finite
     ((T'.finite_toSet.image g).insert x)).trans ?_
