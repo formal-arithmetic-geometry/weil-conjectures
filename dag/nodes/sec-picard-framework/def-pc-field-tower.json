@@ -3,24 +3,54 @@
  "blueprint": {
   "is": "def-pc-field-tower",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Field extensions",
- "statement": "Let $K/k$ be a field extension. It is *finite* if $[K:k]<\\infty$,\n*algebraic* if every element of $K$ is algebraic over $k$,\n*finite separable* if it is finite and every element has a separable\nminimal polynomial over $k$, and *purely inseparable* if every\nelement $\\alpha\\in K$ satisfies $\\alpha^{p^n}\\in k$ for some $n$ (in\ncharacteristic $0$ this means $K=k$). An *algebraic closure*\n$\\bar k$ of $k$ is an algebraically closed extension of $k$ which is\nalgebraic over $k$.",
+ "statement": "Let $k$ be a field and $K/k$ a field extension [def-pc-field-extension]. The *degree* $[K:k]$ is the dimension of $K$ as a $k$-vector space [def-weil-vector-space-dimension], and $[K:k]=\\infty$ when $K$ is not finite-dimensional over $k$ [def-weil-finite-dimensional-subspace]. The extension is *finite* if $[K:k]<\\infty$, and\n*algebraic* if every element of $K$ is algebraic over $k$ [def-weil-algebraic-element]. It is *finite separable* if it is finite and every element has a separable\nminimal polynomial over $k$, i.e. if it is finite and separable algebraic [def-weil-pbc-separable-algebraic-extension] (every element of a finite extension is integral over $k$ [lem-weil-pbc-finite-algebra-is-integral], hence algebraic, so its minimal polynomial is defined). Let $p\\ge0$ be the characteristic of $k$ [def-pc-field-characteristic]. The extension is *purely inseparable* [def-weil-pbc-finite-purely-inseparable-extension] if either $p>0$ and every\nelement $\\alpha\\in K$ satisfies $\\alpha^{p^n}\\in k$ for some $n\\ge0$, or $p=0$ and $K=k$ (the map $k\\to K$ is surjective). An *algebraic closure*\n$\\bar k$ of $k$ is an algebraically closed field extension of $k$ (every nonconstant polynomial in $\\bar k[T]$ has a root in $\\bar k$) which is\nalgebraic over $k$ [def-weil-algebraic-closure].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/def-pc-field-tower.md",
   "place": "node def-pc-field-tower, order 720"
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-pc-field-characteristic",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-algebraic-closure"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite field extension, purely inseparable, separable, algebraic field extension definitions",
+   "results": "IsPurelyInseparable, isPurelyInseparable_iff, IsPurelyInseparable.isAlgebraic, isPurelyInseparable_iff_natSepDegree_eq_one (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match for the purely inseparable clause (via isPurelyInseparable_iff_pow_mem)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite field extension is algebraic",
+   "results": "Field.isAlgebraic_of_finite_intermediateField (Mathlib.FieldTheory.PrimitiveElement), IntermediateField.finite_of_fg_of_isAlgebraic, finiteExts",
+   "date": "2026-10-10",
+   "verdict": "related; the exact instance is Algebra.IsAlgebraic.of_finite (grep below)"
+  },
+  {
+   "tool": "grep",
+   "query": "class Module.Finite (RingTheory/Finiteness/Defs.lean), def finrank (LinearAlgebra/Dimension/Finrank.lean), class Algebra.IsAlgebraic (RingTheory/Algebraic/Defs.lean), instance Algebra.IsAlgebraic.of_finite (RingTheory/Algebraic/Integral.lean), class Algebra.IsSeparable (FieldTheory/Separable.lean), class IsPurelyInseparable and isPurelyInseparable_iff_pow_mem (FieldTheory/PurelyInseparable/Basic.lean), class IsAlgClosed, class IsAlgClosure (FieldTheory/IsAlgClosed/Basic.lean)",
+   "results": "Module.Finite (Finiteness/Defs.lean:117), Module.finrank (Finrank.lean:62), Algebra.IsAlgebraic (Algebraic/Defs.lean:68, stacks 09GC), Algebra.IsAlgebraic.of_finite (Algebraic/Integral.lean:108, stacks 09GG), Algebra.IsSeparable (Separable.lean:549, stacks 09H1), IsPurelyInseparable (PurelyInseparable/Basic.lean:107), isPurelyInseparable_iff_pow_mem (line 211, stacks 09HE), IsAlgClosed (IsAlgClosed/Basic.lean:62), IsAlgClosure (line 264, stacks 09GS)",
+   "date": "2026-10-10",
+   "verdict": "match per clause: finite = Module.Finite k K; algebraic = Algebra.IsAlgebraic k K; finite separable = Module.Finite k K ∧ Algebra.IsSeparable k K; purely inseparable = IsPurelyInseparable k K; algebraic closure = IsAlgClosure k K; each clause is the Mathlib leaf of the cited definition node"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +74,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-pc-field-tower",
+  "worker": "stage1",
+  "summary": "Definition split. Checked the statement against the master blueprint node (order 720; slopmaster2 has no copy) and Stacks fields.tex (Tags 09G3 degree/finite, 09GC algebraic, 09H1 separable, 09HE purely inseparable, 09GS algebraic closure, 09GQ algebraically closed, 09FR characteristic). Every notion now cites a definition node, all Mathlib leaves: field extension def-pc-field-extension (Algebra), degree via def-weil-vector-space-dimension (Module.finrank) and def-weil-finite-dimensional-subspace (finite = Module.Finite), algebraic def-weil-algebraic-element (Algebra.IsAlgebraic), finite separable = finite + def-weil-pbc-separable-algebraic-extension (Algebra.IsSeparable), purely inseparable def-weil-pbc-finite-purely-inseparable-extension (IsPurelyInseparable), algebraically closed and algebraic closure def-weil-algebraic-closure (IsAlgClosed, IsAlgClosure). New leaf def-pc-field-characteristic (CharP/ringChar) for the p the statement used without introducing it. The well-definedness of 'separable minimal polynomial' in a finite extension (finite implies algebraic, Stacks 09GG) is taken from the existing leaf lem-weil-pbc-finite-algebra-is-integral (integral, hence algebraic) and named in the statement. Existence and uniqueness of an algebraic closure (Stacks 09GT, 09GV), presupposed by the citers' notation k-bar, had no statement node (def-weil-algebraic-closure only mentions them inside a definition): new leaf lem-pc-algebraic-closure-exists-unique, flagged unreachable (nothing cites it yet; the item, a definition, does not cite a lemma about its own notion). Statement changes: p was undefined; it is now the characteristic of k, and the parenthesis 'in characteristic 0 this means K=k' is made the characteristic-0 clause of the definition (as in Stacks 09HE and the cited node), since with p = 0 the power condition would be meaningless. Removed def-pc-scheme from stmt_deps: the statement uses no scheme. Whole item: every clause is one Mathlib class (searches recorded); left as split, not mathlib, because it is five definitions, not one declaration.",
+  "blueprint": "the item is itself the blueprint node (a definition, no proof): its five clauses (finite, algebraic, finite separable, purely inseparable, algebraic closure) are realized by the stmt_deps listed in the summary; the implicit claims of the text (minimal polynomials exist in a finite extension; an algebraic closure exists and is unique, used as the notation k-bar) are lem-weil-pbc-finite-algebra-is-integral and lem-pc-algebraic-closure-exists-unique"
+ },
+ "reviewed": "2026-10-10 L: definition split; every notion cited to a Mathlib-leaf definition node (finite, algebraic, separable, purely inseparable, algebraic closure, characteristic: new leaf), existence and uniqueness of the algebraic closure moved into a new Mathlib-leaf statement (unreachable, flagged); p defined, the characteristic-0 clause fixed; 2 new nodes"
 }

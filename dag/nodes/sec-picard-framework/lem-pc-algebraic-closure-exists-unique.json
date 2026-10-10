@@ -1,0 +1,75 @@
+{
+ "id": "lem-pc-algebraic-closure-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-field-tower",
+   "place": "its statement, last sentence: 'An *algebraic closure* $\\bar k$ of $k$ is an algebraically closed extension of $k$ which is algebraic over $k$' (the notation $\\bar k$ used by the citers presupposes existence and uniqueness up to isomorphism over $k$)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence and uniqueness of algebraic closures",
+ "statement": "Let $k$ be a field [def-weil-field]. (1) There is an algebraic closure of $k$ [def-weil-algebraic-closure]: an algebraically closed field $\\Omega$ together with a field homomorphism $\\iota:k\\to\\Omega$ such that every element of $\\Omega$ is algebraic over $k$ [def-weil-algebraic-element]. (2) If $(\\Omega_1,\\iota_1)$ and $(\\Omega_2,\\iota_2)$ are two algebraic closures of $k$, there is a field isomorphism $\\sigma:\\Omega_1\\to\\Omega_2$ with $\\sigma\\circ\\iota_1=\\iota_2$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Theorem Tag 09GT (fields-theorem-existence-algebraic-closure) for (1); Lemma Tag 09GV (fields-lemma-algebraic-closures-isomorphic) for (2), whose proof produces a morphism of $k$-extensions $\\varphi:M\\to\\overline F$ and shows it is an isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every field has an algebraic closure, unique up to isomorphism over the field",
+   "results": "AlgebraicClosure, AlgebraicClosure.isAlgClosed, AlgebraicClosure.instIsAlgClosure (Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure), algebraicClosure.isAlgebraic",
+   "date": "2026-10-10",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosure.equiv",
+   "results": "IsAlgClosure.equiv (R) [IsDomain R] (L M) [IsAlgClosure R M] [IsAlgClosure R L] : L ≃ₐ[R] M (Mathlib.FieldTheory.IsAlgClosed.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match for (2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def AlgebraicClosure\\|instance : IsAlgClosure k (AlgebraicClosure k)' Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean; grep -n 'class IsAlgClosure\\|noncomputable def equiv' Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "AlgebraicClosure (line 127, @[stacks 09GT]); instance IsAlgClosure k (AlgebraicClosure k) (line 199); IsAlgClosure (Basic.lean:264, @[stacks 09GS]); IsAlgClosure.equiv (Basic.lean:405, @[stacks 09GV])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicClosure, IsAlgClosure.equiv",
+  "file": "Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean",
+  "how": "one declaration per clause: (1) `AlgebraicClosure k` (AlgebraicClosure.lean:127, @[stacks 09GT]) with the instance `IsAlgClosure k (AlgebraicClosure k)` (line 199), i.e. algebraically closed and `Algebra.IsAlgebraic k`; (2) `IsAlgClosure.equiv k Ω₁ Ω₂ : Ω₁ ≃ₐ[k] Ω₂` (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:405, @[stacks 09GV]; a field is a domain and an algebra over a field into a field is torsion free), an isomorphism commuting with the structure maps (`AlgEquiv.commutes`). Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pc-field-tower",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

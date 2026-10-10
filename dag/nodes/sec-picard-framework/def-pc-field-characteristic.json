@@ -1,0 +1,70 @@
+{
+ "id": "def-pc-field-characteristic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-field-tower",
+   "place": "its statement, the purely inseparable clause: 'every element $\\alpha\\in K$ satisfies $\\alpha^{p^n}\\in k$ for some $n$ (in characteristic $0$ this means $K=k$)', where $p$ is the characteristic of $k$",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Characteristic of a field",
+ "statement": "Let $k$ be a field [def-weil-field]. There is a unique ring homomorphism $\\mathbf Z\\to k$, $n\\mapsto n\\cdot1_k$; its kernel is an ideal of $\\mathbf Z$, hence of the form $p\\mathbf Z$ for a unique integer $p\\ge0$. This $p$ is the *characteristic* of $k$, written $\\operatorname{char}k$: thus for every integer $n\\ge0$ one has $n\\cdot1_k=0$ if and only if $p$ divides $n$. One says $k$ has *characteristic $0$* if $p=0$ (no positive multiple of $1_k$ vanishes), and *characteristic $p>0$* otherwise, in which case $p$ is the least integer $n\\ge1$ with $n\\cdot 1_k=0$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09FR (fields-definition-characteristic), Section 09FC"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "characteristic of a field: natural number p such that n cast to the field is zero iff p divides n",
+   "results": "charP_iff, CharP.mk, CharP.cast_eq_zero_iff (Mathlib.Algebra.CharP.Defs), CharP.ofNat_eq_zero', CharP.intCast_eq_zero_iff",
+   "date": "2026-10-10",
+   "verdict": "match: CharP / its field cast_eq_zero_iff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the characteristic of a ring, the nonnegative generator of the kernel of Z to R",
+   "results": "ringChar, ringChar.charP, ringChar.eq, CharP.exists (Mathlib.Algebra.CharP.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match: ringChar"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class _root_.CharP\\|def ringChar\\|lemma existsUnique\\|class inductive ExpChar\\|def ringExpChar' Mathlib/Algebra/CharP/Defs.lean",
+   "results": "CharP (line 46), existsUnique (145), ringChar (153), ringChar.spec (158), ExpChar (328), ringExpChar (387)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CharP, ringChar",
+  "file": "Mathlib/Algebra/CharP/Defs.lean",
+  "how": "exact: `CharP k p` (class, line 46) is `∀ x : ℕ, (x : k) = 0 ↔ p ∣ x`, the defining property of the node; such p exists uniquely (`CharP.existsUnique`, line 145) and is `ringChar k` (line 153, `ringChar.spec` line 158). Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-field-tower",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
