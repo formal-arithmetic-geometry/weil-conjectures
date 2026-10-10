@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+ "kind": "statement",
+ "title": "Global sections of an invertible module without common zero give a morphism to Proj of a polynomial ring over A pulling O(1) back to the module",
+ "statement": "Let $A$ be a ring, $m\\ge0$, and $P=\\operatorname{Proj}(A[x_0,\\dots,x_m])$ [def-pc-proj] ($\\deg x_k=1$), with structure morphism $q:P\\to\\operatorname{Spec}(A)$ [def-weil-affine-spectrum] (on each standard open $D_+(x_k)=\\operatorname{Spec}(A[x_0,\\dots,x_m]_{(x_k)})$ it is induced by the ring map $A\\to A[x_0,\\dots,x_m]_{(x_k)}$), and let $\\mathcal O_P(1)$ be the twisting module of [def-pc-projective-space-twist], with its basis $e_k=e^{(1)}_k$ over $D_+(x_k)$. Let $Y$ be a scheme [def-pc-scheme] with a morphism $g:Y\\to\\operatorname{Spec}(A)$; for every open $V\\subseteq Y$ the ring $\\Gamma(V,\\mathcal O_Y)$ is an $A$-algebra through $g^\\sharp:A=\\Gamma(\\operatorname{Spec}A,\\mathcal O)\\to\\Gamma(Y,\\mathcal O_Y)$ followed by restriction. Let $\\mathcal M$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module] and $s_0,\\dots,s_m\\in\\Gamma(Y,\\mathcal M)$ global sections such that $Y=Y_{s_0}\\cup\\dots\\cup Y_{s_m}$, where for $s\\in\\Gamma(Y,\\mathcal M)$ we put $Y_s=\\{y\\in Y:\\ s_y\\notin\\mathfrak m_y\\mathcal M_y\\}$ ($\\mathfrak m_y$ the maximal ideal of $\\mathcal O_{Y,y}$ [def-weil-residue-field]). By [lem-weil-pbc-nonvanishing-section-trivializes] each $Y_{s_k}$ is open, and for all $k,l$ there is a unique $s_l/s_k\\in\\Gamma(Y_{s_k},\\mathcal O_Y)$ with $s_l|_{Y_{s_k}}=(s_l/s_k)\\cdot s_k|_{Y_{s_k}}$. Then there exist a morphism of schemes $j:Y\\to P$ and an isomorphism of $\\mathcal O_Y$-modules $\\alpha:j^*\\mathcal O_P(1)\\to\\mathcal M$ ($j^*$ the pullback of [def-pc-module-pullback]) such that: (i) $q\\circ j=g$; (ii) $j^{-1}(D_+(x_k))=Y_{s_k}$ for every $k$; (iii) for every $k$, the ring map $A[x_0,\\dots,x_m]_{(x_k)}=\\Gamma(D_+(x_k),\\mathcal O_P)\\to\\Gamma(Y_{s_k},\\mathcal O_Y)$ induced by $j$ is a homomorphism of $A$-algebras sending $x_l/x_k$ to $s_l/s_k$ for every $l$; (iv) $\\alpha$ sends the pullback $j^*e_k$ of $e_k$ to $s_k|_{Y_{s_k}}$ for every $k$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01N8 (constructions-lemma-converse-construction) with d = 1, S = A[x_0,...,x_m] and the graded ring map psi: S -> Gamma_*(Y, M), a -> g^sharp(a) (a in A), x_k -> s_k, and its proof (psi_(f): a/f^n -> psi(a)/s^n on Y_s -> D_+(f) = Spec S_(f)); Lemma 01NA (constructions-lemma-apply) and Lemma 01NE (constructions-lemma-projective-space) for the case A = Z; the morphism lies over Spec(S_0) = Spec(A) because psi in degree 0 is g^sharp"
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-affine-spectrum",
+  "def-pc-projective-space-twist",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a scheme to Proj of a graded ring defined by global sections of an invertible sheaf generating it",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections, Proj.fromOfGlobalSections_preimage_basicOpen, Proj.fromOfGlobalSections_toSpecZero, Proj.fromOfGlobalSections_resLE, Proj.toBasicOpenOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic), AlgebraicGeometry.Proj",
+   "date": "2026-10-10",
+   "verdict": "no match: Proj.fromOfGlobalSections (ProjectiveSpectrum/Basic.lean line 443) takes a ring map A ->+* Gamma(X, top) into the structure sheaf, i.e. only the case M = O_Y; no invertible module, no O(1), no pullback isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": "fromOfGlobalSections, fromOfGlobalSections_toSpecZero(_assoc), fromOfGlobalSections_preimage_basicOpen, fromOfGlobalSections_resLE, fromOfGlobalSections_morphismRestrict (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match (sections of O_X only; read the declaration at ProjectiveSpectrum/Basic.lean lines 441-458)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no module (e.g. O(1)) on Proj in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible sheaf with global sections generating it gives a morphism to projective space Proj of polynomial ring with pullback of O(1) isomorphic to the sheaf",
+   "results": "Proj.fromOfGlobalSections, ProjectiveSpectrum.Proj.toSpec, Proj.toSpecZero, Proj.basicOpenToSpec, Proj.toBasicOpenOfGlobalSections, Proj.awayι",
+   "date": "2026-10-10",
+   "verdict": "no match (only the structure-sheaf case)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'ample|veryAmple' and grep -rlniE 'LineBundle|IsInvertible|invertible sheaf|twist' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'def fromOfGlobalSections' ProjectiveSpectrum/Basic.lean",
+   "results": "no ample notion, no invertible-sheaf or twisting-sheaf file in AlgebraicGeometry; fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
