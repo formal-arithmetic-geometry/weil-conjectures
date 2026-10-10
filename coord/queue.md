@@ -2,7 +2,7 @@
 
 901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (142)
+## Stage 1: nodes to split (141)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-sc-derived-open-gluing` | 3014 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
-| `lem-pc-ringed-space-product-kinjective` | 3015 | none |
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-tower-injective-embedding` | 3016 | none |
@@ -30,11 +29,12 @@
 | `lem-pc-perfect-generator-exists` | 3019 | none |
 | `lem-pc-perfect-generator-pullback` | 3019 | none |
 | `lem-sc-affine-perfect-map-lift` | 3019 | none |
-| `lem-sc-affine-perfect-support-extension` | 3019 | none |
 | `lem-sc-flat-precompose-pus` | 3019 | none |
 | `def-pc-global-derived-rhom` | 3020 | none |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
-| `lem-sc-rhom-supported-qcoherent` | 3021 | none |
+| `lem-sc-affine-perfect-plus-shift` | 3020 | none |
+| `lem-sc-affine-support-iterated-cones` | 3020 | none |
+| `lem-sc-perfect-into-support-on-T` | 3020 | none |
 | `lem-pc-perfect-summand` | 3022 | none |
 | `lem-pc-perfect-two-out-of-three` | 3022 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -45,7 +45,6 @@
 | `lem-sc-effective-cartier-dimension-drop` | 4011 | none |
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
-| `lem-sc-generic-stalk-finite-length` | 4012 | none |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
@@ -149,7 +148,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (759)
+## Stage 2: nodes to state (760)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -338,6 +337,7 @@
 | `lem-sc-flat-polynomial-diagonal-differences-weakly-regular` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
+| `lem-sc-generic-stalk-finite-length` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
@@ -913,7 +913,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1538 nodes that wait for a statement dependency, 182 nodes that wait for stage 1.
+Not open yet: 1541 nodes that wait for a statement dependency, 181 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
