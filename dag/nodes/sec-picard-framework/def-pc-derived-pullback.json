@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pc-derived-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived pullback of modules on schemes",
- "statement": "For a morphism $g:T\\to S$ of schemes,\nlet $Lg^*:D(\\mathcal O_S)\\to D(\\mathcal O_T)$ be the left derived\nfunctor of module pullback. Explicitly it is\n\n$$\nLg^*E=\\mathcal O_T\\otimes^{\\mathbf L}_{g^{-1}\\mathcal O_S}g^{-1}E.\n$$\n\nThe derived tensor product\nis computed by a K-flat resolution.",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes [def-pc-scheme], with ring map $g^\\sharp:g^{-1}\\mathcal O_S\\to\\mathcal O_T$, and let $D(\\mathcal O_S)$, $D(\\mathcal O_T)$ be the derived categories of [def-pc-derived-category]. The *derived pullback* $Lg^*:D(\\mathcal O_S)\\to D(\\mathcal O_T)$ is the composite of the termwise inverse image $g^{-1}:D(\\mathcal O_S)\\to D(g^{-1}\\mathcal O_S)$ [def-weil-pbc-topological-inverse-image] (well defined because $g^{-1}$ is exact) with the derived change of rings along $g^\\sharp$ on the site of open subsets of $T$ [lem-pur-derived-change-of-rings]:\n\n$$\nLg^*E=\\mathcal O_T\\otimes^{\\mathbf L}_{g^{-1}\\mathcal O_S}g^{-1}E.\n$$\n\nIt is computed by a K-flat resolution: for every K-flat resolution $\\mathcal P^\\bullet\\to E$ of a complex of $\\mathcal O_S$-modules [def-pc-kflat-complex] (one exists by [lem-pc-kflat-resolution]), $g^{-1}\\mathcal P^\\bullet\\to g^{-1}E$ is a K-flat resolution over $g^{-1}\\mathcal O_S$, and $Lg^*E\\cong g^*\\mathcal P^\\bullet=\\mathcal O_T\\otimes_{g^{-1}\\mathcal O_S}g^{-1}\\mathcal P^\\bullet$, the termwise module pullback [def-pc-module-pullback] (sheaf tensor product [def-pur-sheaf-tensor-product], as a complex [def-pc-tensor-complex-sheaves]), canonically in $D(\\mathcal O_T)$ and independently of the resolution.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/def-pc-derived-pullback.md",
   "place": "node def-pc-derived-pullback, order 665"
@@ -15,14 +15,121 @@
  "stmt_deps": [
   "def-pc-derived-category",
   "def-pc-scheme",
-  "def-weil-derived-tensor"
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For an $\\mathcal O_S$-module $\\mathcal G$ and $t\\in T$ the inverse-image stalk isomorphism gives $(g^{-1}\\mathcal G)_t\\cong\\mathcal G_{g(t)}$, naturally in $\\mathcal G$ [lem-weil-pbc-topological-inverse-image-stalk]. Since exactness of a sequence of sheaves on $T$ is checked on stalks, $g^{-1}$ is exact; applied termwise it sends acyclic complexes to acyclic complexes and quasi-isomorphisms to quasi-isomorphisms [def-pc-quasi-iso-modules], and commutes with cones, so it induces an exact functor $g^{-1}:D(\\mathcal O_S)\\to D(g^{-1}\\mathcal O_S)$.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Section Tag 06YI (label section-derived-pullback), Lemma Tag 06YJ (label lemma-derived-base-change), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-derived-change-of-rings] on the site of open subsets of $T$ to $\\varphi=g^\\sharp:g^{-1}\\mathcal O_S\\to\\mathcal O_T$: it gives the exact functor $L\\varphi^*=-\\otimes^{\\mathbf L}_{g^{-1}\\mathcal O_S}\\mathcal O_T:D(g^{-1}\\mathcal O_S)\\to D(\\mathcal O_T)$, computed on any K-flat resolution $\\mathcal Q^\\bullet\\to\\mathcal G^\\bullet$ of $g^{-1}\\mathcal O_S$-modules by $\\mathcal Q^\\bullet\\otimes_{g^{-1}\\mathcal O_S}\\mathcal O_T$, with canonical comparison isomorphisms between resolutions. Hence $Lg^*=L\\varphi^*\\circ g^{-1}$ is a well-defined exact functor $D(\\mathcal O_S)\\to D(\\mathcal O_T)$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Section Tag 06YI (label section-derived-pullback), Lemma Tag 06YJ (label lemma-derived-base-change), proof"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P^\\bullet\\to E$ be a K-flat resolution [lem-pc-kflat-resolution]. By step 1, $g^{-1}\\mathcal P^\\bullet\\to g^{-1}E$ is a quasi-isomorphism. Apply [lem-pc-kflat-pullback-preservation] to the morphism of ringed spaces $(T,g^{-1}\\mathcal O_S)\\to(S,\\mathcal O_S)$ given by $g$ with adjoint ring map the identity of $g^{-1}\\mathcal O_S$: its pullback of $\\mathcal P^\\bullet$ is $g^{-1}\\mathcal P^\\bullet\\otimes_{g^{-1}\\mathcal O_S}g^{-1}\\mathcal O_S\\cong g^{-1}\\mathcal P^\\bullet$, so $g^{-1}\\mathcal P^\\bullet$ is K-flat over $g^{-1}\\mathcal O_S$. By step 2, $Lg^*E\\cong g^{-1}\\mathcal P^\\bullet\\otimes_{g^{-1}\\mathcal O_S}\\mathcal O_T$, which is the termwise module pullback $g^*\\mathcal P^\\bullet$ [def-pc-module-pullback], canonically and independently of $\\mathcal P^\\bullet$ by the canonical comparisons of step 2. In particular $g^*$ carries quasi-isomorphisms between K-flat complexes to quasi-isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma Tag 06YJ (label lemma-derived-base-change), proof, citing Lemma Tag 06YC (label lemma-pullback-K-flat) and Lemma Tag 06YG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-pc-quasi-iso-modules",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "def-pc-module-pullback"
+ ],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived pullback of sheaves on schemes, derived tensor product with inverse image",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback (Mathlib/AlgebraicGeometry/Modules/Sheaf), pullbackPushforwardAdjunction, and related underived pullback declarations",
+   "date": "2026-10-11",
+   "verdict": "no match: underived module pullback only"
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedFunctor, leftDerivedUpperStar, derived tensor product",
+   "results": "unknown identifier 'leftDerivedFunctor'",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStar|derivedUpperStar|K-flat in Mathlib/CategoryTheory/DerivedCategory",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback Lg star computed as tensor product of structure sheaf with inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total left derived functor of exact inverse image functor on sheaves",
+   "results": "CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit and generic localization-derived-functor declarations",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic derived-functor infrastructure, not this scheme-module construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedFunctor, DerivedCategory",
+   "results": "unknown identifier 'Functor.leftDerivedFunctor'",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctor|mapDerivedCategory|derived.*tensor in Mathlib/Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36 mapDerivedCategory; no derived tensor product or scheme-module derived pullback",
+   "date": "2026-10-11",
+   "verdict": "no match: exact-functor derived-category infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "total left derived functor inverse image sheaf modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +157,24 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-pullback",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint source and the generic ringed-site definitions already present in the DAG. No sorry-free project declaration states this general derived pullback definition exactly; existing Lean declarations concern etale sheaves with specific coefficient categories. Replaced the imported pro-etale-specific derived-tensor dependency with the generic module pullback, K-flat complex, K-flat resolution, sheaf tensor, and tensor-complex nodes that state the notions used by the formula. No new node was necessary.",
+  "blueprint": "The item is itself blueprint node def-pc-derived-pullback (order 665); its statement is realized directly, with no proof steps because it is a definition."
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ddp1839",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddp1839 (reviewer sub-agent of L); spot-checked: Read packet; checked no cycle (stmt/proof deps exclude derived-pullback-composition and derived-adjoint; lem-pc-kflat-pullback-preservation and lem-pur-derived-change-of-rings do not depend on this item); checked Stacks 06YI/06YJ/06YC/06YG text. FIX more, RETURN less: C1/E7 the delivered definition asserted 'computed by a K-flat resolution' with no argument for independence of the resolution and left ambiguous which complex is resolved; restated precisely as Lg^* = L(g^sharp)^* o g^{-1} with the derived change of rings of lem-pur-derived-change-of-rings (generic tool, other unit) and added three proof steps (g^{-1} exact via lem-weil-pbc-topological-inverse-image-stalk; derived change of rings; g^{-1}P K-flat over g^{-1}O_S via lem-pc-kflat-pullback-preservation (06YC) on (T,g^{-1}O_S)->(S,O_S), so Lg^*E = g^*P independently of P, Stacks 06YJ). Dropped the unsupported phrase 'the left derived functor' (E7). Second reading by F1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
