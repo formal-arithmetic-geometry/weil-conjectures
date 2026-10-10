@@ -2310,3 +2310,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:58 L: merged deliver/H1/lem-pc-flat-complex-derived-pullback (reviewer FIX; first push; new nodes: 1)
 - 18:58 L: merged deliver/J1/def-sp-composite-acyclicity (reviewer PASS; first push; new nodes: 0)
 - 18:58 L: returned deliver/J1/lem-sc-hilbert-polynomial (reviewer RETURN: 1. D/E7: the item statement was changed without a stated reason and now cites [lem-sc-deg-pullback-finite], whose proof_)
+- 18:59 L: returned deliver/H1/lem-sc-deg-pullback-finite (reviewer RETURN: Reviewer R-dpf1901 (packet review, 18:59 UTC). Five faults, more than three fixable ones, so RETURN. 1. C1 (Step 1): the)
