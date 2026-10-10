@@ -2893,3 +2893,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:57 L: merged deliver/C1/lem-sc-affine-perfect-open-represent-cohomology (reviewer FIX; first push; new nodes: 2)
 - 22:57 L: merged deliver/G1/lem-sc-proper-flat-global-sections (reviewer FIX; first push; new nodes: 1)
 - 22:58 L: merged deliver/J1/lem-sc-picard-locus-closed (reviewer PASS; after a return; new nodes: 2)
+- 22:58 L: merged deliver/M1/lem-sc-picard-product-open (reviewer FIX; after a return; new nodes: 2)

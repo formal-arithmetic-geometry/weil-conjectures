@@ -30,9 +30,41 @@
   "def-pc-module-pullback",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the special fibre over s, apply the Kunneth lemma in degree one to X_s and Y_s. The universal pushforward hypotheses give H^0(X_s,O)=κ(s)=H^0(Y_s,O), while the sections σ(s) and τ(s) are κ(s)-rational points. Thus the injective map supplied by lem-sc-picard-h1-product-injective is the map induced by pullback along the slices (1,τ(s)):X_s→X_s×_{κ(s)}Y_s and (σ(s),1):Y_s→X_s×_{κ(s)}Y_s, which are the fibres at s of 1×τ and σ×1.",
+   "uses": [
+    "lem-sc-picard-h1-product-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 33.1 (varieties-lemma-kunneth), degree 1"
+   }
+  },
+  {
+   "text": "Apply the H1 multiple Picard flat-proper lemma with the product family h:X×_S Y→S as f, the two families X→S and Y→S as the X_i, and the morphisms u_1=1×τ:X→X×_S Y and u_2=σ×1:Y→X×_S Y (morphisms over S). The product h is flat, proper and of finite presentation (stable under base change and composition). Universal pushforward for h: for T→S, the base change pr_1:X_T×_T Y_T→X_T of g_T along the flat morphism f_T gives, by flat base change in degree 0 (lem-pc-flat-base-change-cohom, g_T being quasi-compact and quasi-separated), (pr_1)_*O=f_T^*(g_T)_*O_{Y_T}=f_T^*O_T=O_{X_T}, hence (h_T)_*O=(f_T)_*O_{X_T}=O_T; for X→S and Y→S it is the hypothesis. Since (1×τ)^*L and (σ×1)^*L are trivial, the loci Z_1,Z_2 are all of S, so the containment Z⊂Z_1∩Z_2 holds trivially. The fibre triviality of L at s puts s in Z, and by Step 1 the map H^1((X×_S Y)_s,O)→H^1(X_s,O)⊕H^1(Y_s,O) induced by u_1,u_2 (whose fibres at s are the slices) is injective. Hence there is an open U∋s with Z∩U=U, i.e. L restricted to (X×_S Y)_U is h_U^*N for an invertible N on U; shrinking U so that N is trivial, L is trivial on (X×_S Y)_U.",
+   "uses": [
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-pic-of-product, proof, using lemma-H1-O-multiple-picard-flat-proper"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-h1-product-injective",
+  "lem-sc-picard-h1-multiple-locus",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma pic-of-product, Tag 0BF3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +96,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-general-theorem-of-cube",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-product-open",
+  "worker": "stage1",
+  "summary": "Split Tag 0BF3 into the Kunneth injectivity input on the special fibre and the H1 multiple Picard flat-proper openness lemma, then applied those two inputs to the two section morphisms 1×τ and σ×1. The item statement and hypotheses were unchanged.",
+  "blueprint": "Realizes the proof of thm-sc-theorem-of-cube at the step applying Tag 0BF3 to the universal locus, via the two section pullbacks.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ppo2950",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppo2950 (reviewer sub-agent of L); spot-checked: Return of 23:03 repaired: lem-sc-picard-h1-product-injective now the slice form of Tag 0BED in degree 1 (H^1(XxY)=H^1(X)+H^1(Y) when H^0=k; slice (1,y) restricts to id on H^1(X) and kills H^1(Y) via Spec k), true; Spec(k x k) excluded by H^0=k; no slopmaster2 Kunneth declaration (B10). Step 1: H^0(X_s,O)=kappa(s) is the universal-pushforward hypothesis at T=Spec kappa(s), points sigma(s),tau(s); step 1 supplies exactly the u_i-induced injectivity step 2 needs (C4). Item statement unchanged, matches cube step 6 use (cube step 2 supplies the hypotheses). FIX more, RETURN less: (1) C1 step 2: universal pushforward for the product X x_S Y -> S was asserted from the hypotheses on f,g without citation; added flat base change in degree 0 (lem-pc-flat-base-change-cohom, Tag 02KH, generic tool, tool_uses) with the computation; also spelled out Z_i=S so Z in Z_1 cap Z_2, and the final shrinking to trivialize N. (2) B3 lem-sc-picard-h1-product-injective: stmt_deps lacked def-weil-field (cited in text) and rational point; added def-weil-field, def-pc-rational-point and its citation.; 2 file(s) fixed by the reviewer"
+ }
 }
