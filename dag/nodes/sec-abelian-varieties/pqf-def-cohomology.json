@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-def-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Sheaf cohomology and higher direct images",
@@ -22,13 +22,91 @@
    }
   ]
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact"
+ ],
+ "proof": [
+  {
+   "text": "For an $\\mathcal O_X$-module, use the established ringed-space module-cohomology definition: choose an injective resolution and take the cohomology of its global-sections complex; this is independent of the resolution and realizes the right derived functors of global sections. This is exactly the cohomology functor $\\mathrm H^p(X,-)$ in the item.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 20.11, Tag 01DZ, ringed-space module paragraph"
+   }
+  },
+  {
+   "text": "For a morphism of schemes, regard it as a morphism of ringed spaces. The direct image on module sheaves is an additive pushforward functor, and its derived direct image is defined by applying pushforward to a K-injective resolution, with $Rf_*\\mathcal F$ represented by $f_*\\mathcal J$ for every K-injective resolution $\\mathcal F[0]\\to\\mathcal J$. An injective resolution $\\mathcal F[0]\\to\\mathcal I^\\bullet$ (which exists as $\\operatorname{Mod}(\\mathcal O_X)$ has enough injectives) is a bounded below complex of injectives, hence K-injective; so $H^p(Rf_*\\mathcal F)=H^p(f_*\\mathcal I^\\bullet)$, which is the $p$-th right derived functor $R^p f_*\\mathcal F$ computed by injective resolutions. This is the higher-direct-image clause.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W, derived direct image"
+   }
+  },
+  {
+   "text": "The category $\\operatorname{Mod}(\\mathcal O_X)$ is abelian with enough injectives, and $\\Gamma(X,-)$ is additive and left exact. Right derived functors of a left exact additive functor on such a category form a universal delta-functor. Applying this to global sections, whose right derived functors are $\\mathrm H^p(X,-)$ by the first step, gives connecting morphisms for every short exact sequence of $\\mathcal O_X$-modules and the associated long exact cohomology sequence.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (2), (4), and Tag 05TE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Sections 20.11 and 20.13; Tags 01DZ, 01EO, 01EY, 079W"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology right derived global sections higher direct images",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; no project-specific higher-direct-image definition",
+   "date": "2026-10-11",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, Sheaf.H, higherDirectImage",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"rightDerived|Sheaf\\.H|higherDirectImage\" Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "Sheaf.H primitives and right-derived infrastructure only; no exact combined definition",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +125,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-cohomology",
+  "worker": "stage1",
+  "summary": "The item was not an exact existing declaration. I split its three clauses into proof steps using the existing general ringed-space module-cohomology definition, the existing K-injective derived direct-image definition, and the existing universal right-derived delta-functor theorem. No child node was created because each required fact already exists in the DAG; the Lean source separately contains Modules.H, higherDirectImage, and the long-exact cohomology consequences.",
+  "blueprint": "the full item statement and its three clauses"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdh2108",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdh2108 (reviewer sub-agent of L); spot-checked: Read packet; checked each cited statement. Step1 cites def-sc-ringed-space-module-cohomology (cites enough injectives, no restatement). Step2 matches def-pc-ringed-spaces-derived-direct-image. FIX more, RETURN less: (1) C1/E step 3: hypotheses of lem-weil-pbc-right-derived-universal-delta-functor uncited; added lem-sc-ringed-space-module-sheaves-enough-injectives and lem-sc-global-sections-left-exact. (2) C1 step 2: identifying H^p(Rf_*F) with R^p f_* via injective resolutions needs injective resolutions to be K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective and enough injectives. (3) source.external Tags 01EO/01EY (Cech, Leray) wrong; replaced by 01DZ, 079W (second reading claimed this change but did not make it).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pdh2108): Second reading claimed source tags were corrected to 01DZ/015B/079W but the branch still had 01EO/01EY; source.external fixed by reviewer. The statement text itself (blueprint wording) still names 01EO/01EY, left unchanged."
 }
