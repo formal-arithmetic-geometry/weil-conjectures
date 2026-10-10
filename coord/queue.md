@@ -1,19 +1,22 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+920 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (189)
+## Stage 1: nodes to split (192)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-finite-maximals-over-element` | 2019 | none |
-| `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
 | `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
+| `lem-pc-direct-image-bounded-coherent` | 3014 | none |
+| `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 3014 | none |
+| `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
+| `lem-pc-pseudo-coherent-finite-tor-perfect` | 3014 | none |
 | `lem-pc-ringed-space-derived-products` | 3015 | none |
 | `lem-pc-ringed-space-pointwise-truncation-limit` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
@@ -35,9 +38,9 @@
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
-| `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
+| `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
@@ -929,7 +932,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1450 nodes that wait for a statement dependency, 228 nodes that wait for stage 1.
+Not open yet: 1452 nodes that wait for a statement dependency, 231 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
