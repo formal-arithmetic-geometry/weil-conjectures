@@ -2360,3 +2360,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:15 L: merged deliver/C1/lem-sc-qcoh-acyclic-derived-pushforward-cohomology (reviewer FIX; after a return; new nodes: 1)
 - 19:18 L: merged deliver/E1/lem-sc-ringed-space-restrict-injective-resolution (reviewer PASS; first push; new nodes: 0)
 - 19:19 L: merged deliver/F1/lem-weil-pbc-finite-proper (reviewer PASS; first push; new nodes: 0)
+- 19:19 L: merged deliver/C1/lem-pc-derived-module-free-generation (reviewer FIX+NODE(1); first push; new nodes: 2)
