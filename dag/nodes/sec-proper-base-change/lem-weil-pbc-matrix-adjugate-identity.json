@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-matrix-adjugate-identity",
+ "kind": "statement",
+ "title": "The adjugate identity for a square matrix",
+ "statement": "Let $R$ be a commutative ring, $m\\ge0$ an integer and $M$ an $m\\times m$ matrix with entries in $R$ [def-weil-matrix]. Let $\\operatorname{adj}(M)$ be its adjugate, the $m\\times m$ matrix whose $(i,j)$ entry is $(-1)^{i+j}\\det(M^{(j,i)})$, where $M^{(j,i)}$ is the $(m-1)\\times(m-1)$ submatrix [def-weil-submatrix] of $M$ obtained by deleting row $j$ and column $i$ (the transpose of the cofactor matrix; for $m=0$ it is the empty matrix). Then $\\operatorname{adj}(M)\\,M=M\\,\\operatorname{adj}(M)=\\det(M)\\cdot1_{m\\times m}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07DQ (lemma-matrix-left-inverse, line 2668): 'Let B_I be the adjugate (transpose of cofactor) matrix to A_I, i.e., such that A_I B_I = B_I A_I = det(A_I) 1'"
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-submatrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjugate matrix times matrix equals determinant times identity",
+   "results": "Matrix.adjugate_mul, Matrix.mul_adjugate (Mathlib.LinearAlgebra.Matrix.Adjugate), Matrix.detp_smul_adjp, Matrix.mul_adjp_apply_eq (LinearAlgebra.Matrix.SemiringInverse), Matrix.adjugate",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.adjugate_mul and Matrix.mul_adjugate"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.adjugate _ * _ = _",
+   "results": "Matrix.adjugate_mul (Mathlib.LinearAlgebra.Matrix.Adjugate)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem adjugate_mul\\|theorem mul_adjugate\\|theorem adjugate_fin_succ_eq_det_submatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Adjugate.lean; sed -n 264,272p and 367,369p",
+   "results": "mul_adjugate (line 264): A * adjugate A = A.det • 1; adjugate_mul (line 269): adjugate A * A = A.det • 1, for A : Matrix n n α, α a CommRing, n a Fintype; adjugate_fin_succ_eq_det_submatrix (line 367): adjugate A i j = (-1)^(j+i) * det (A.submatrix j.succAbove i.succAbove) for A : Matrix (Fin n.succ) (Fin n.succ) α",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Matrix.adjugate_mul (project ~/weil-conjectures-slopmaster2)",
+   "results": "Matrix.adjugate_mul, Matrix.adjugate_mul_distrib, Matrix.adjugate_mul_distrib_aux (Mathlib/LinearAlgebra/Matrix/Adjugate.lean); index unavailable",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.adjugate_mul",
+  "file": "Mathlib/LinearAlgebra/Matrix/Adjugate.lean",
+  "how": "exact, one declaration per clause: Matrix.adjugate_mul (line 269) adj(M) M = det M • 1 and Matrix.mul_adjugate (line 264) M adj(M) = det M • 1 for M : Matrix n n R, R commutative; the cofactor description of the entries is Matrix.adjugate_fin_succ_eq_det_submatrix (line 367) for M : Matrix (Fin (m+1)) (Fin (m+1)) R (for m = 0 both sides are the empty matrix)",
+  "line": 269
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-matrix-left-inverse-minors",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (adjugate_mul, mul_adjugate, adjugate_fin_succ_eq_det_submatrix); lines 269, 264 verified."
+}
