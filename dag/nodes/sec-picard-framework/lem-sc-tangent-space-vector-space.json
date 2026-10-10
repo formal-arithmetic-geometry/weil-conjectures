@@ -25,20 +25,81 @@
   "def-sc-dual-numbers",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $\\theta_1,\\theta_2\\in T$ we have $\\theta_1\\circ c=\\theta_2\\circ c$, both being the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$. The dual-number pushout [lem-sc-dual-number-scheme-pushout] with $K=\\kappa$ and $n=2$ gives a unique morphism $\\Theta:\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]\\to X$ with $\\Theta\\circ j_i=\\theta_i$; this is (a) except the last clause. Composing $\\Theta$ with the structure morphism $p:X\\to\\operatorname{Spec}k$, both $p\\circ\\Theta$ and the structure morphism of $\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]$ restrict along $j_i$ to the structure morphism of $\\operatorname{Spec}\\kappa[\\epsilon]$, so they agree by the uniqueness in the same statement (target $\\operatorname{Spec}k$); hence $\\Theta$ is a morphism of $k$-schemes.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, pushout construction"
+   }
+  },
+  {
+   "text": "The composite $\\Theta\\circ s$ restricts along $c$ to the common base point because $j_1\\circ c=j_2\\circ c=s\\circ c$. Likewise, precomposition by $\\operatorname{Spec}(m_\\lambda)$ preserves the base point because $m_\\lambda$ fixes the quotient map $\\epsilon\\mapsto0$. Thus the displayed addition and scalar multiplication are closed on $T$, and the constant map through $\\operatorname{Spec}\\kappa$ is the zero element.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, closure of operations"
+   }
+  },
+  {
+   "text": "Each identity is checked by writing both sides as $\\Psi\\circ\\operatorname{Spec}(\\varphi)$ for a $\\kappa$-algebra map $\\varphi:\\kappa[\\epsilon_1,\\dots,\\epsilon_n]\\to\\kappa[\\epsilon]$ and comparing restrictions along the $j_i$, using the uniqueness in [lem-sc-dual-number-scheme-pushout] with $K=\\kappa$ and $n=2$ or $n=3$. For $\\theta_1,\\dots,\\theta_n\\in T$ let $\\Theta_n$ be the unique morphism from $\\operatorname{Spec}\\kappa[\\epsilon_1,\\dots,\\epsilon_n]$ restricting to $\\theta_i$ along $j_i$. Associativity: both $(\\theta_1+\\theta_2)+\\theta_3$ and $\\theta_1+(\\theta_2+\\theta_3)$ equal $\\Theta_3\\circ\\operatorname{Spec}(\\epsilon_1,\\epsilon_2,\\epsilon_3\\mapsto\\epsilon)$, since e.g. the map $\\Theta_3\\circ\\operatorname{Spec}(\\epsilon_1,\\epsilon_2\\mapsto\\epsilon_1,\\ \\epsilon_3\\mapsto\\epsilon_2)$ from $\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]$ restricts to $\\theta_1+\\theta_2$ and $\\theta_3$ along $j_1,j_2$ (the first by uniqueness for $n=2$), so it is the $\\Theta$ of that pair. Commutativity: $\\Theta_2\\circ\\operatorname{Spec}(\\epsilon_1\\leftrightarrow\\epsilon_2)$ is the $\\Theta$ of $(\\theta_2,\\theta_1)$, and the swap fixes $s$. Zero: for $\\theta_2=0$, $\\Theta_2=\\theta_1\\circ\\operatorname{Spec}(\\epsilon\\mapsto\\epsilon_1)$, so $\\theta_1+0=\\theta_1$. Scalars: $\\lambda\\theta+\\mu\\theta=\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto(\\lambda+\\mu)\\epsilon)$ because the pair $(\\lambda\\theta,\\mu\\theta)$ glues to $\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto\\lambda\\epsilon_1+\\mu\\epsilon_2)$; similarly $\\lambda(\\theta_1+\\theta_2)=\\lambda\\theta_1+\\lambda\\theta_2$ via $\\epsilon_i\\mapsto\\lambda\\epsilon_i$, $(\\lambda\\mu)\\theta=\\lambda(\\mu\\theta)$ and $1\\theta=\\theta$ since $m_\\lambda m_\\mu=m_{\\lambda\\mu}$ and $m_1=\\mathrm{id}$, and $\\theta+(-1)\\theta=\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto0)$, which is the zero element. Each such $\\varphi$ is a $\\kappa$-algebra map because all products of the $\\epsilon_i$ vanish.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, verification of vector-space axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dual-number-scheme-pushout"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2B, varieties-lemma-tangent-space"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "tangent vectors of a scheme at a point as morphisms from Spec of dual numbers form a vector space; pushout Spec k[e1,e2]",
-   "results": "AlgebraicGeometry.FormallyUnramified, AffineSpace, SpecToEquivOfLocalRing_apply_fst; no tangent space of a scheme or its vector-space structure",
-   "date": "2026-10-10",
+   "query": "tangent vectors of a scheme at a point as morphisms from Spec of dual numbers form a vector space",
+   "results": "AlgebraicGeometry.FormallyUnramified, instModuleTangentSpace for manifolds, SpecToEquivOfLocalRing; no scheme tangent-space vector structure",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.dualNumbersOver, tangentSpaceAt, Module",
+   "results": "0 hits; unknown identifier Scheme.dualNumbersOver",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TangentSpace|tangentSpace|dualNumbers in Mathlib/AlgebraicGeometry",
+   "results": "no hit in the pinned Mathlib AlgebraicGeometry sources",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dual-number tangent vectors of a scheme form a vector space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-tan",
@@ -54,5 +115,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-tangent-space-vector-space",
+  "worker": "stage1",
+  "summary": "Split the Tag 0B2B tangent-vector lemma into the dual-number pushout fact and direct closure/axiom checks; no exact Lean declaration exists.",
+  "blueprint": "Realizes the tangent-vector separation paragraph of lem-sc-degree-2g1-very-ample via the pushout construction and the coefficient identities.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tsv1745",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsv1745 (reviewer sub-agent of L); spot-checked: Uses def-sc-dual-numbers; restating T is required, not a duplicate (def-sc-scheme-tangent-space has the item in its stmt_deps, so citing it would make a cycle); no other node restated; new pushout node is a real lemma, not in Mathlib (LeanFinder: only SpecToEquivOfLocalRing as an ingredient). FIX more, RETURN less: (1) B3: the new node lem-sc-dual-number-scheme-pushout was vague prose ('scheme with two square-zero coordinates', maps not named); rewritten in TeX with K[eps_1..eps_n], j_i and c defined explicitly; (2) C1/D: associativity in Step 3 needs a three-fold gluing that the two-copy pushout does not give, so the node is generalised to n copies (same Stacks/01J6 argument) and Step 3 is rewritten with explicit gluing maps for each axiom, including additive inverses; (3) Step 1: the k-morphism clause now justified by uniqueness with target Spec k.; 2 file(s) fixed by the reviewer"
  }
 }
