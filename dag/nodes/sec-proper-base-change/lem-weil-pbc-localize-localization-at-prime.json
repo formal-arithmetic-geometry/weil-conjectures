@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-localize-localization-at-prime",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Local rings of prime and principal localizations",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal and $A=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. (1) For a prime ideal $Q'\\subset A$, let $\\mathfrak q=\\{r\\in R:r/1\\in Q'\\}$ be its contraction to $R$. Then the natural $R$-algebra map $R_{\\mathfrak q}\\longrightarrow A_{Q'}$, $r/u\\longmapsto(r/1)/(u/1)$, is an isomorphism. (2) For any $t\\in A$, put $B=A[1/t]$ [def-weil-ring-localization-away]. For a prime ideal $Q\\subset B$, let $Q'=\\{a\\in A:a/1\\in Q\\}$ be its contraction to $A$. Then the natural $A$-algebra map $A_{Q'}\\longrightarrow B_Q$, $a/u\\longmapsto(a/1)/(u/1)$, is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E3 (lemma-spec-localization, line 3163), together with the fraction construction in Definition Tag 00CO (definition-localization, line 1068); both applications occur in the proof of Lemma Tag 031R (lemma-criterion-reduced, lines 43965-43972)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localization of a localization at a prime is the original ring localized at the contracted prime",
+   "results": "IsLocalization.localizationLocalizationAtPrimeIsoLocalization (Mathlib.RingTheory.Localization.LocalizationLocalization)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.isLocalization_atPrime_localization_atPrime",
+   "results": "isLocalization_atPrime_localization_atPrime; related explicit equivalence localizationLocalizationAtPrimeIsoLocalization",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'localizationLocalizationAtPrimeIsoLocalization' Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+   "results": "LocalizationLocalization.lean:156 explicit R-algebra equivalence",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.localizationLocalizationAtPrimeIsoLocalization",
+  "file": "Mathlib/RingTheory/Localization/LocalizationLocalization.lean",
+  "line": 156,
+  "how": "exact for both clauses, one application each: lines 156-159 give an R-algebra equivalence between Localization.AtPrime (Q.comap (algebraMap R (Localization S))) and Localization.AtPrime Q for any multiplicative set S. For (1), S=R minus p; for (2), the base ring is A and S={1,t,t^2,...}. The equivalence is the canonical fraction map in each clause. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-serre-criterion-reduced",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

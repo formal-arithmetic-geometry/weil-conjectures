@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-primes-of-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Primes of prime and principal localizations",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal and $A=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. (1) Contraction along $R\\to A$ gives an inclusion-preserving bijection from the primes $Q'\\subset A$ to the primes $\\mathfrak q\\subseteq\\mathfrak p$ of $R$, with inverse $\\mathfrak q\\mapsto\\mathfrak qA$. (2) For any $t\\in A$ and $B=A[1/t]$ [def-weil-ring-localization-away], contraction along $A\\to B$ gives an inclusion-preserving bijection from the primes $Q\\subset B$ to the primes $Q'\\subset A$ with $t\\notin Q'$, with inverse $Q'\\mapsto Q'B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00E3 (lemma-spec-localization, line 3163), applied to the complement of a prime and to the powers of one element; both applications occur in the proof of Lemma Tag 031R (lemma-criterion-reduced, lines 43965-43972)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "prime ideals of a localization correspond to prime ideals disjoint from the multiplicative set",
+   "results": "IsLocalization.AtPrime.orderIsoOfPrime (Mathlib.RingTheory.Localization.AtPrime.Basic); IsLocalization.orderIsoOfPrime (Mathlib.RingTheory.Localization.Ideal)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "prime ideals in a localization correspond to primes in the original ring avoiding the multiplicative subset",
+   "results": "IsLocalization.AtPrime.orderIsoOfPrime; IsLocalization.orderIsoOfPrime",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def orderIsoOfPrime' Mathlib/RingTheory/Localization/{AtPrime/Basic,Ideal}.lean",
+   "results": "AtPrime/Basic.lean:145 and Ideal.lean:236",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.AtPrime.orderIsoOfPrime, IsLocalization.orderIsoOfPrime",
+  "file": "Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+  "line": 145,
+  "how": "one exact Mathlib declaration per clause: (1) AtPrime.orderIsoOfPrime at AtPrime/Basic.lean:145 gives the order isomorphism of primes of R_p and primes q <= p; (2) IsLocalization.orderIsoOfPrime at Localization/Ideal.lean:236 gives the order isomorphism of primes of A[1/t] and primes of A disjoint from powers of t, equivalently avoiding t. The inverse in each is extension. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-serre-criterion-reduced",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-localization-preserves-reduced",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Prime localization preserves reducedness",
+ "statement": "Let $R$ be a reduced commutative ring (every nilpotent element is zero) and $\\mathfrak p\\subset R$ a prime ideal. Then the localization $R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is reduced: every nilpotent element of $R_{\\mathfrak p}$ is zero.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 031R (lemma-criterion-reduced, lines 43949-43956), where each $R_{\\mathfrak p}$ of a reduced $R$ is taken to be reduced; the localization fact is stated as a hint in Algebra, proof of Lemma Tag 04KN (lemma-geometrically-reduced-permanence, line 10094)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a reduced commutative ring remains reduced",
+   "results": "instIsReducedLocalization (Mathlib.RingTheory.LocalProperties.Reduced)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of a reduced commutative ring at any multiplicative set is reduced",
+   "results": "instIsReducedLocalization; isReduced_localizationPreserves (Mathlib.RingTheory.LocalProperties.Reduced)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*IsReduced \\(Localization|isReduced_localizationPreserves' Mathlib/RingTheory/LocalProperties/Reduced.lean",
+   "results": "Reduced.lean:47-48 instance IsReduced (Localization M) from isReduced_localizationPreserves",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsReducedLocalization",
+  "file": "Mathlib/RingTheory/LocalProperties/Reduced.lean",
+  "line": 47,
+  "how": "specializes in one line: lines 47-48 give IsReduced (Localization M) for any submonoid M of reduced R; take M to be the complement of prime p, so Localization M = R_p. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-serre-criterion-reduced",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

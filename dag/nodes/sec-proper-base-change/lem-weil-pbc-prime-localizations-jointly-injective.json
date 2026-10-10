@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-prime-localizations-jointly-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "A ring embeds in the product of its prime localizations",
+ "statement": "Let $R$ be a commutative ring. For every prime ideal $\\mathfrak p\\subset R$ let $R_{\\mathfrak p}$ be the localization at $\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Then the canonical ring homomorphism $R\\longrightarrow\\prod_{\\mathfrak p\\in\\operatorname{Spec}R}R_{\\mathfrak p}$, $r\\longmapsto(r/1)_{\\mathfrak p}$, is injective. In particular, if every $R_{\\mathfrak p}$ is reduced, then $R$ is reduced.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HN (lemma-characterize-zero-local, line 4051), part (1), applied to the $R$-module $M=R$; used in the proof of Lemma Tag 031R (lemma-criterion-reduced, line 43935)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commutative ring embeds into the product of its localizations at all prime ideals",
+   "results": "PrimeSpectrum.toPiLocalization_injective (Mathlib.RingTheory.Spectrum.Maximal.Localization)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.toPiLocalization_injective",
+   "results": "PrimeSpectrum.toPiLocalization_injective : Function.Injective (PrimeSpectrum.toPiLocalization R)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'toPiLocalization_injective' Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+   "results": "Localization.lean:172-173 PrimeSpectrum.toPiLocalization_injective; :167 PiLocalization is product of localizations at primes",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.toPiLocalization_injective",
+  "file": "Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+  "line": 172,
+  "how": "exact for the injectivity clause: lines 166-173 define PiLocalization R as the product of localizations at prime ideals and the canonical map; line 172 proves it injective. The reducedness clause specializes in one line: for nilpotent x in R, each component of toPiLocalization R x is nilpotent and hence zero, so injectivity gives x=0. This is a direct consequence of the exact declaration. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-serre-criterion-reduced",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
