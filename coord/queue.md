@@ -2,7 +2,7 @@
 
 927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (218)
+## Stage 1: nodes to split (217)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,8 +19,8 @@
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
-| `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
+| `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
 | `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
@@ -29,23 +29,24 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
+| `def-sc-intersection-number` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-etale-base-change-geometric` | 4010 | none |
 | `lem-sc-etale-local-dimension` | 4010 | none |
 | `lem-sc-faithfully-flat-local-dimension` | 4010 | none |
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 4010 | none |
-| `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
+| `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-strict-henselization-completion-noetherian` | 4010 | none |
+| `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-free-complex-cover` | 4013 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
-| `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
+| `lem-pc-fppf-affine-refinement` | 5011 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
@@ -63,10 +64,8 @@
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
-| `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-alternating-cech-computes` | 6011 | none |
-| `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
 | `pqf-lem-affine-vanishing` | 6011 | none |
@@ -75,10 +74,10 @@
 | `pqf-lem-leray` | 6011 | none |
 | `pqf-lem-leray-lowdegree` | 6011 | none |
 | `pqf-lem-qf-finitefibres` | 6011 | none |
-| `pqf-lem-serre-criterion` | 6011 | none |
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
+| `pqf-lem-serre-criterion` | 6013 | none |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -225,7 +224,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (709)
+## Stage 2: nodes to state (710)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -406,6 +405,7 @@
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
+| `lem-sc-positive-ample-hilbert-degree` | 1 | state |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
@@ -939,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1408 nodes that wait for a statement dependency, 254 nodes that wait for stage 1.
+Not open yet: 1413 nodes that wait for a statement dependency, 253 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
