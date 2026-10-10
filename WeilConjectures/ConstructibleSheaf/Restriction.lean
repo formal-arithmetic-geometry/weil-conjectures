@@ -10,21 +10,31 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
-# Morphisms into a locally constant sheaf are determined on a dense open
+# Morphisms into locally constant sheaves are determined by restrictions
 
-Let `j : U ⟶ X` be an open immersion with dense image and `M` a locally constant sheaf of
-`Λ`-modules on the small étale site of `X`. Two morphisms `L ⟶ M` which agree after restriction
-along `j` agree.
+Let `M` be a locally constant sheaf of `Λ`-modules on the small étale site of a scheme `X`.
 
-A section `b` of `M` over an étale `V ⟶ X` is, étale-locally on `V`, a constant section `n` of
-a constant sheaf. Near a point of `V` lying over `U` its germ vanishes, because the stalks of
-`M` at the geometric points of `U` are those of `j^* M`. Since `V ⟶ X` is open, every nonempty
-étale neighbourhood meets the preimage of `U`, and a constant section vanishing on a nonempty
-étale scheme is zero. Hence `b` vanishes locally, hence vanishes.
+* If `j : U ⟶ X` is an open immersion with dense image, two morphisms `L ⟶ M` which agree after
+  restriction along `j` agree. A section `b` of `M` over an étale `V ⟶ X` is, étale-locally on
+  `V`, a constant section `n` of a constant sheaf. Near a point of `V` lying over `U` its germ
+  vanishes, because the stalks of `M` at the geometric points of `U` are those of `j^* M`. Since
+  `V ⟶ X` is open, every nonempty étale neighbourhood meets the preimage of `U`, and a constant
+  section vanishing on a nonempty étale scheme is zero. Hence `b` vanishes locally, hence
+  vanishes.
+* The set of points at whose geometric points the stalks of `M` vanish is open and closed:
+  over each member of a trivialising cover all stalks are the value of a constant sheaf.
+* If `i : Z ⟶ X` is a closed immersion such that every point of `X` lies in a preconnected set
+  meeting the range of `i`, two morphisms between finite locally constant sheaves which agree
+  after restriction along `i` agree: the image of their difference is locally constant, its
+  stalks vanish along `i`, hence on a clopen set containing the range of `i`, hence everywhere.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.upperStar_map_injective_of_isLocallyConstantSheaf`
+- `AlgebraicGeometry.Etale.upperStar_map_injective_of_isLocallyConstantSheaf`: the dense open
+  case.
+- `AlgebraicGeometry.Etale.isClopen_stalkZeroLocus`: the stalks of a locally constant sheaf
+  vanish on a clopen set.
+- `AlgebraicGeometry.Etale.upperStar_map_injective_of_isPreconnected`: the closed case.
 -/
 
 @[expose] public section

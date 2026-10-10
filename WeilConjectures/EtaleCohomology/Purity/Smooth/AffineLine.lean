@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
-public import WeilConjectures.ConstructibleSheaf.DenseOpen
+public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition

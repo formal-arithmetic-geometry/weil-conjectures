@@ -482,7 +482,6 @@ public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.ConstructibleSheaf.DenseOpen
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -493,6 +492,7 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
+public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.DenseOpen
+public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal

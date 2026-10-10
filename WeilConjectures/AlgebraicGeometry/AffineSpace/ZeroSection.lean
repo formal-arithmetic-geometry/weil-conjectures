@@ -21,6 +21,11 @@ and the pullbacks of the coordinates.
 
 - `AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`: `S ≅ V(t_i)`, compatibly
   with the zero section and the inclusion of `V(t_i)`.
+
+## Main statements
+
+- `AlgebraicGeometry.AffineSpace.dense_compl_range_zeroSection`: the complement of the zero
+  section is dense, the fibres of `𝔸(n; S) ⟶ S` being irreducible.
 -/
 
 @[expose] public section
