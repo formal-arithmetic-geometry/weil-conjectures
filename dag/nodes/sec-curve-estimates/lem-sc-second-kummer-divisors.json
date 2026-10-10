@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-second-kummer-divisors",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Second Kummer cohomology of a curve",
@@ -22,50 +22,47 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-brauer-zero-all-curves], $H^2(C_{\\Et},\\mathbf G_m)=0$.\nThis is exactly the hypothesis of [lem-sc-kummer-les]. That lemma\nidentifies $H^2(C,\\mu_n)$ with\n$\\operatorname{coker}(n:\\operatorname{Pic}(C)\\to\\operatorname{Pic}(C))\n=\\operatorname{Pic}(C)/n$, via the coboundary of the Kummer sequence\nand [lem-sc-h1-gm-pic].",
+   "text": "Since $C$ is a curve over algebraically closed $k$, [lem-sc-brauer-zero-all-curves] gives $H^2(C_{\\Et},\\mathbf G_m)=0$. The hypothesis that $n>0$ is invertible in $k$ makes $n$ invertible on $C$; [lem-sc-kummer-exact] says that the Kummer sequence of [def-sc-kummer-sequence] is then a short exact sequence of etale abelian sheaves $0\\to\\mu_n\\to\\mathbf G_m\\xrightarrow{t\\mapsto t^n}\\mathbf G_m\\to0$.",
    "uses": [
     "lem-sc-brauer-zero-all-curves",
-    "lem-sc-kummer-les",
-    "lem-sc-h1-gm-pic"
+    "def-sc-kummer-sequence",
+    "lem-sc-kummer-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, Lemma 59.28.1; Tag 03RQ, Lemma 59.69.1, Kummer-sequence argument"
+   }
   },
   {
-   "text": "*Explicit form for smooth $C$.* When $C$ is a smooth separated\nconnected curve, the same group can be computed at the generic point\nwithout using the Brauer group. This also describes the isomorphism\nby divisors.\nWrite $K=k(C)$.\nNormality ([lem-sc-smooth-normal]) gives\n$\\eta_*\\mu_n=\\mu_n$: on every normal etale test object an\n$n$-th root of unity in its rational functions is integral,\nand therefore regular. The low-degree exact sequence of\n[thm-sp-grothendieck] is\n\n$$\nH^1(K,\\mu_n)\\longrightarrow H^0(C,R^1\\eta_*\\mu_n)\n\\longrightarrow H^2(C,\\mu_n)\\longrightarrow H^2(K,\\mu_n).\n$$",
+   "text": "Apply clause 2 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] to the short exact sequence from step 1, taking $X=Y=C$ and $u=\\mathrm{id}_C$. Its degree-one and degree-two portion is $H^1(C_{\\Et},\\mathbf G_m)\\xrightarrow{H^1(t\\mapsto t^n)}H^1(C_{\\Et},\\mathbf G_m)\\xrightarrow{\\delta^1}H^2(C_{\\Et},\\mu_n)\\to H^2(C_{\\Et},\\mathbf G_m)$. The last group is zero by [lem-sc-brauer-zero-all-curves]. Under the group isomorphism of [lem-sc-h1-gm-pic], $H^1(t\\mapsto t^n)$ is multiplication by $n$: the power map on the abelian sheaf $\\mathbf G_m$ is the sum of $n$ identity maps, so its induced map on $H^1$ is multiplication by $n$, which the group isomorphism carries to multiplication by $n$ on $\\operatorname{Pic}(C)$. Exactness gives $\\ker\\delta^1=n\\operatorname{Pic}(C)$ and $\\operatorname{im}\\delta^1=H^2(C_{\\Et},\\mu_n)$. Thus the Kummer connecting map itself induces $\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\simeq H^2(C_{\\Et},\\mu_n)$; invert this isomorphism for the displayed orientation.",
    "uses": [
-    "lem-sc-smooth-normal",
-    "thm-sp-grothendieck"
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-sc-h1-gm-pic",
+    "lem-sc-brauer-zero-all-curves"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The last term is zero by [lem-sc-function-field-cd-one].\nThe first two terms and their arrow are\n\n$$\nK^\\times/K^{\\times n}\\longrightarrow\n\\bigoplus_{x\\in C_{\\rm cl}}\\mathbf Z/n,\\qquad\nf\\longmapsto (v_x(f)\\bmod n)_x,\n$$\n\nby [lem-sc-generic-kummer-residues].\nThe cokernel is the divisor group modulo principal divisors\nand $n$ times the divisor group. This is\n$\\operatorname{Pic}(C)/n$ by [lem-sc-divisor-class-curve].",
-   "uses": [
-    "lem-sc-function-field-cd-one",
-    "lem-sc-generic-kummer-residues",
-    "lem-sc-divisor-class-curve"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RQ, Lemma 59.69.1, displayed long exact Kummer sequence; Tag 03PK, Section 59.28"
+   }
   }
  ],
  "proof_deps": [
   "lem-sc-brauer-zero-all-curves",
-  "lem-sc-kummer-les",
-  "lem-sc-h1-gm-pic",
-  "lem-sc-smooth-normal",
-  "thm-sp-grothendieck",
-  "lem-sc-function-field-cd-one",
-  "lem-sc-generic-kummer-residues",
-  "lem-sc-divisor-class-curve"
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-sc-h1-gm-pic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-second-kummer-divisors.md",
-  "place": "## Proof"
+  "place": "## Proof, first paragraph; the smooth generic-point comparison is not needed for this assertion"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -98,5 +95,26 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-second-kummer-divisors",
+  "worker": "stage1",
+  "summary": "Checked the general-curve assertion against the unit's smooth-proper Kummer step, Stacks Tags 03PK and 03RQ, and the existing Brauer-vanishing, Kummer exactness, and long-exact-cohomology nodes. Derived the stated boundary isomorphism directly from the latter's connecting map, since lem-sc-kummer-les states only an abstract cokernel. Removed the optional smooth generic-point route because it establishes no additional clause. The pinned Lean theorem depends on a sorry in Brauer vanishing and states only existence of an equivalence, so it is not an exact closed attachment.",
+  "blueprint": "The first paragraph of the blueprint node's Proof: apply Brauer vanishing, exactness of the Kummer sequence, the long exact cohomology sequence, and H^1(G_m)=Pic. The optional smooth-curve divisor paragraphs are not used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "reason": "Its clause 2 is the generic long exact cohomology sequence with named connecting maps, applied with u = id to the Kummer short exact sequence. It supplies the boundary identification that the unit's own lem-sc-kummer-les does not state."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kum2c",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kum2c (reviewer sub-agent of L); spot-checked: Re-push after the 14:01 return; both points repaired. (1) C4/C3: step 2 no longer cites lem-sc-kummer-les; it applies clause 2 of lem-weil-pbc-pullback-cohomology-long-exact-ladder (u=id, X=Y=C) to the Kummer short exact sequence, whose statement gives the connecting maps delta^q and exactness of H^1(G_m)->H^1(G_m)->H^2(mu_n)->H^2(G_m); lem-sc-brauer-zero-all-curves (curve over algebraically closed k, any singular/nonreduced/disconnected curve) kills H^2(G_m); lem-sc-h1-gm-pic is a group isomorphism so H^1 of t->t^n (= n times id in additive notation, H^1 additive) is multiplication by n on Pic(C); hence delta^1 induces Pic/n = H^2(mu_n), the coboundary clause of the statement. (2) C4: step 1 cites lem-sc-kummer-exact (curve over algebraically closed k, n prime to char k, i.e. invertible in k) for exactness of the sequence of def-sc-kummer-sequence. Tool use lem-weil-pbc-pullback-cohomology-long-exact-ladder accepted (C8: generic long exact sequence used as a black box, the repair the return asked for; not a step of the unit's route). Statement unchanged; no new nodes; no circularity (none of the five cited nodes reaches the item transitively); proof_deps = union of step uses; the smooth generic-point route (which cited lem-sc-generic-kummer-residues) is removed, so the item no longer uses that node and its 14:18 split statement does not bear on this delivery. Stacks 03PK = section-kummer (lemma-kummer-sequence) and 03RQ = lemma-cohomology-smooth-projective-curve located in etale-cohomology.tex; the item extends 03RQ to all curves via the Brauer-vanishing node. Cases n=1 and C=Spec k checked (both sides 0). B10 non-attachment right (Lean Kummer theorem depends on sorried subsingleton_cohomologicalBrauerGroup). Minor: tool_uses entry uses key 'reason' not 'why' (harmless). 14:19-14:19 UTC."
+ }
 }

@@ -1602,3 +1602,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:17 L: accepted lem-pc-very-ample-disjoint-union: 6 steps, tool_uses 3 (declared by the worker in split_report), no new nodes
 - 14:17 L: accepted lem-sc-generic-kummer-residues: 5 steps (03RH/03PL), new node lem-sc-generic-r1-gm-vanishing (03RJ), tool_uses 2
 - 14:19 L: 25th account limit ~14:18; five sub-agents died (3 reviewers relaunched, 2 writers released); six deliveries wait, all slots reviewers
+- 14:19 L: merged deliver/E1/lem-sc-second-kummer-divisors (reviewer PASS; after a return; new nodes: 0)
