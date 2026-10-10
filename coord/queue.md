@@ -2,7 +2,7 @@
 
 858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (328)
+## Stage 1: nodes to split (327)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -39,19 +39,18 @@
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
-| `lem-weil-pbc-matching-object-coskeleton` | 3007 | none |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-pc-h0-proper-variety` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
+| `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
-| `lem-pc-scheme-dimension-local-rings` | 3009 | none |
 | `lem-sc-group-scheme-separated-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
@@ -335,7 +334,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (530)
+## Stage 2: nodes to state (531)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -398,6 +397,7 @@
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
+| `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 965 nodes that wait for a statement dependency.
+Not open yet: 346 nodes that wait for stage 1, 966 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
