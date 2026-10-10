@@ -1,8 +1,8 @@
 # Work queue
 
-929 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (242)
+## Stage 1: nodes to split (241)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -58,8 +58,8 @@
 | `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
-| `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
+| `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
@@ -68,7 +68,6 @@
 | `lem-pc-kflat-closure` | 5013 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5013 | none |
 | `lem-sp-derived-couple-functoriality` | 6003 | none |
-| `lem-sp-half-plane-graded-canonical` | 6003 | none |
 | `pqf-lem-integral-univclosed` | 6004 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
@@ -941,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1351 nodes that wait for a statement dependency, 277 nodes that wait for stage 1.
+Not open yet: 1352 nodes that wait for a statement dependency, 277 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
