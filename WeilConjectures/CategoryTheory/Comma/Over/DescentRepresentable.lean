@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
@@ -14,8 +15,8 @@ public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 Let `p : X ⟶ Y` be a morphism, `F` a presheaf on `Over Y`, and `V` an object over `X`
 representing the restriction of `F` to `Over X`. Let `V₀` be an object over `Y` with
 `V ≅ V₀ ×_Y X` through `q : V ⟶ V₀`, such that `q` is invariant under the canonical descent
-datum of `V`. If the base changes `T ×_Y X ⟶ T` of `p` are epimorphisms along which both the
-points of `V₀` and the sections of `F` descend, then `V₀` represents `F`.
+datum of `V`. If the base changes `T ×_Y X ⟶ T` of `p` are epimorphisms along which the points
+of `V₀` descend and for which `F` satisfies the sheaf condition, then `V₀` represents `F`.
 
 ## Main statements
 
@@ -61,7 +62,8 @@ noncomputable abbrev descentCoverPr₂ (p : X ⟶ Y) (T : Over Y) :
     rw [pullback.condition_assoc, pullback.condition])
 
 
-variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Over Y} (q : V.left ⟶ V₀.left)
+variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Over Y}
+  (q : V.left ⟶ V₀.left)
   (hq : IsPullback q V.hom V₀.hom p)
   (hinv : ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
     (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q)
@@ -69,8 +71,9 @@ variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Ov
 include hq hinv in
 /-- A point of `V` over `T ×_Y X` lies in the descent equaliser for `F` exactly when its image
 in `V₀` lies in the descent equaliser for `V₀`. -/
-lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
-    F.map (descentCoverPr₁ p T).op (r.homEquiv a) = F.map (descentCoverPr₂ p T).op (r.homEquiv a) ↔
+lemma map_descentCoverPr_eq_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
+    F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
+        F.map (descentCoverPr₂ p T).op (r.homEquiv a) ↔
       pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a.left ≫ q =
         pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a.left ≫ q := by
   let π := pullback.fst T.hom p
@@ -82,8 +85,10 @@ lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
   have h : (fst₂ ≫ s) ≫ p = (snd₂ ≫ s) ≫ p := by
     simp only [Category.assoc]
     rw [← hc, ← Category.assoc, hc₂, Category.assoc]
-  let a₁ : Over.mk (fst₂ ≫ s) ⟶ V := (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) ≫ a
-  let a₂ : Over.mk (snd₂ ≫ s) ⟶ V := (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) ≫ a
+  let a₁ : Over.mk (fst₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) ≫ a
+  let a₂ : Over.mk (snd₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) ≫ a
   have w₁ : 𝟙 _ ≫ (fst₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
     rw [Category.id_comp, Category.assoc, hc]
   have w₂ : 𝟙 _ ≫ (snd₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
@@ -94,9 +99,11 @@ lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
       rw [Category.id_comp]
       exact (Category.id_comp _).symm.trans w₂ |>.symm), by ext; simp [e₂],
     by ext; simp [e₂]⟩
-  have hPr₁ : descentCoverPr₁ p T = e₁ ≫ (Over.map p).map (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) := by
+  have hPr₁ : descentCoverPr₁ p T =
+      e₁ ≫ (Over.map p).map (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) := by
     ext; simp [e₁, fst₂, π]
-  have hPr₂ : descentCoverPr₂ p T = e₂ ≫ (Over.map p).map (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) := by
+  have hPr₂ : descentCoverPr₂ p T =
+      e₂ ≫ (Over.map p).map (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) := by
     ext; simp [e₂, snd₂, π]
   have he : e₁ = e₂ ≫ overMapHomMkId (fst₂ ≫ s) (snd₂ ≫ s) h := by
     ext; simp [e₁, e₂]
@@ -128,20 +135,51 @@ lemma descent_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
 include hq hinv in
 /-- **Descending a representing object.** Let `V` represent the restriction of `F` to `Over X`,
 and let `q : V ⟶ V₀` exhibit `V` as `V₀ ×_Y X` compatibly with the canonical descent datum of
-`V`. If every base change `T ×_Y X ⟶ T` of `p` is an epimorphism along which the points of `V₀`
-and the sections of `F` descend, then `V₀` represents `F`. -/
+`V`:
+```
+  V ---q---> V₀
+  |          |
+  v          v
+  X ---p---> Y
+```
+For `T` over `Y` consider the base change `π : T ×_Y X ⟶ T` of `p` and the two projections
+```
+                         pr₁
+  (T ×_Y X) ×_T (T ×_Y X) ====> T ×_Y X --π--> T
+                         pr₂
+```
+If every such `π` is an epimorphism along which the points of `V₀` descend (a point of `V₀` over
+`T ×_Y X` whose two pullbacks along `pr₁`, `pr₂` agree comes from `T`), and `F` satisfies the
+sheaf condition for the covering `π`, then `V₀` represents `F`. -/
 theorem nonempty_representableBy_of_descent
     (hepi : ∀ T : Over Y, Epi (pullback.fst T.hom p))
     (hV₀ : ∀ (T : Over Y) (a : pullback T.hom p ⟶ V₀.left),
       pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
         pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
       ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
-    (hFinj : ∀ (T : Over Y) (x₁ x₂ : F.obj (op T)),
-      F.map (descentCoverπ p T).op x₁ = F.map (descentCoverπ p T).op x₂ → x₁ = x₂)
-    (hFglue : ∀ (T : Over Y) (y : F.obj (op (descentCover p T))),
-      F.map (descentCoverPr₁ p T).op y = F.map (descentCoverPr₂ p T).op y →
-      ∃ x, F.map (descentCoverπ p T).op x = y) :
+    (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (descentCoverπ p T))) :
     Nonempty (F.RepresentableBy V₀) := by
+  have hFinj (T : Over Y) (x₁ x₂ : F.obj (op T))
+      (h : F.map (descentCoverπ p T).op x₁ = F.map (descentCoverπ p T).op x₂) : x₁ = x₂ :=
+    (Presieve.isSheafFor_singleton.1 (hF T) _ fun p₁ p₂ hp ↦ by
+      simp only [← Functor.map_comp_apply, ← op_comp, hp]).unique rfl h.symm
+  have hFglue (T : Over Y) (y : F.obj (op (descentCover p T)))
+      (hy : F.map (descentCoverPr₁ p T).op y = F.map (descentCoverPr₂ p T).op y) :
+      ∃ x, F.map (descentCoverπ p T).op x = y := by
+    refine (Presieve.isSheafFor_singleton.1 (hF T) y fun {Z} p₁ p₂ hp ↦ ?_).exists
+    let c : Z ⟶ descentCover₂ p T := Over.homMk (pullback.lift p₁.left p₂.left
+      (congrArg CommaMorphism.left hp)) (by
+        simp only [Over.mk_hom, pullback.lift_fst_assoc]
+        rw [pullback.condition, ← Category.assoc]
+        exact (Category.assoc _ _ _).trans (Over.w p₁))
+    have h₁ : p₁ = c ≫ descentCoverPr₁ p T := by
+      ext
+      simp [c]
+    have h₂ : p₂ = c ≫ descentCoverPr₂ p T := by
+      ext
+      simp [c]
+    rw [h₁, h₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply,
+      hy]
   -- the point of `V` over `T ×_Y X` attached to a point `b` of `V₀` over `T`
   let lift (T : Over Y) (b : T ⟶ V₀) : Over.mk (pullback.snd T.hom p) ⟶ V :=
     Over.homMk (hq.lift (pullback.fst T.hom p ≫ b.left) (pullback.snd T.hom p) (by
@@ -151,7 +189,8 @@ theorem nonempty_representableBy_of_descent
   have hdesc (T : Over Y) (b : T ⟶ V₀) :
       F.map (descentCoverPr₁ p T).op (r.homEquiv (lift T b)) =
         F.map (descentCoverPr₂ p T).op (r.homEquiv (lift T b)) := by
-    rw [descent_iff r q hq hinv, hlift, ← Category.assoc, pullback.condition, Category.assoc]
+    rw [map_descentCoverPr_eq_iff r q hq hinv, hlift, ← Category.assoc, pullback.condition,
+      Category.assoc]
   let toPt (T : Over Y) (y : F.obj (op (descentCover p T))) :
       Over.mk (pullback.snd T.hom p) ⟶ V := r.homEquiv.symm y
   -- the point of `V₀` over `T` attached to a section of `F` over `T`
@@ -161,12 +200,13 @@ theorem nonempty_representableBy_of_descent
     let a := toPt T (F.map (descentCoverπ p T).op x)
     have ha : F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
         F.map (descentCoverPr₂ p T).op (r.homEquiv a) := by
-      have hpr : descentCoverPr₁ p T ≫ descentCoverπ p T = descentCoverPr₂ p T ≫ descentCoverπ p T := by
+      have hpr : descentCoverPr₁ p T ≫ descentCoverπ p T =
+          descentCoverPr₂ p T ≫ descentCoverπ p T := by
         ext
         exact pullback.condition
       simp only [a, toPt, Equiv.apply_symm_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
         ← op_comp, hpr]
-    obtain ⟨b, hb⟩ := hV₀ T (a.left ≫ q) ((descent_iff r q hq hinv T a).1 ha)
+    obtain ⟨b, hb⟩ := hV₀ T (a.left ≫ q) ((map_descentCoverPr_eq_iff r q hq hinv T a).1 ha)
     have := hepi T
     refine ⟨Over.homMk b ?_, hb.symm⟩
     rw [← cancel_epi (pullback.fst T.hom p), ← Category.assoc, hb, Category.assoc, hq.w,
