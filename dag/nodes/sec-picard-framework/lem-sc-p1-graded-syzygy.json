@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Graded syzygy bound for two-variable polynomial rings",
- "statement": "Let $k$ be a field and $S=k[x_0,x_1]$ with the standard grading from [def-sc-p1-standard]. If $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ is a finitely generated graded $S$-module (so $S_iM_j\\subseteq M_{i+j}$), then there are finite graded free $S$-modules $F_0,F_1,F_2$ and an exact sequence of graded modules $0\\to F_2\\to F_1\\to F_0\\to M\\to0$. Each $F_i$ is a finite direct sum of graded shifts $S(d)$ [def-weil-pbc-proj-twisting-sheaf] (2).",
+ "statement": "Let $k$ be a field and $S=k[x_0,x_1]$, graded by total degree (S_d is the k-span of monomials of total degree d and S_d=0 for d<0), with the projective-line conventions of [def-sc-p1-standard]. If $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ is a finitely generated graded $S$-module (so $S_iM_j\\subseteq M_{i+j}$), then there are finite graded free $S$-modules $F_0,F_1,F_2$ and an exact sequence of graded modules $0\\to F_2\\to F_1\\to F_0\\to M\\to0$. Each $F_i$ is a finite direct sum of graded shifts $S(d)$ [def-weil-pbc-proj-twisting-sheaf] (2).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
   "place": "node proof, first sentence"
@@ -20,9 +20,71 @@
   "def-sc-p1-standard",
   "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-p1-finite-homogeneous-generators], choose homogeneous generators m_1,...,m_r of M and a surjective graded map F_0=direct sum_j S(-deg m_j) \\to M. The grading here is the total-degree grading: S_d is the k-span of monomials of degree d.",
+   "uses": [
+    "lem-sc-p1-finite-homogeneous-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, choose finitely many homogeneous generators and form F_0"
+   }
+  },
+  {
+   "text": "Let K_1=ker(F_0 \\to M). It is graded, and [lem-sc-p1-graded-kernel-finite] makes it finitely generated as a graded S-module. Applying [lem-sc-p1-finite-homogeneous-generators] to K_1 gives a finite graded free F_1 \\to K_1 and hence an exact sequence F_1 \\to F_0 \\to M \\to 0.",
+   "uses": [
+    "lem-sc-p1-graded-kernel-finite",
+    "lem-sc-p1-finite-homogeneous-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, repeat the construction for the first kernel"
+   }
+  },
+  {
+   "text": "Let K_2=ker(F_1 \\to F_0). It is a finitely generated graded module by [lem-sc-p1-graded-kernel-finite]. The Koszul complex in [lem-sc-p1-koszul-resolution] is an exact graded free resolution of k of length two, so by [lem-weil-pbc-tor-symmetry] Tor_3^S(M,k) is isomorphic to Tor_3^S(k,M), which by [def-weil-pbc-tor-modules] is H_3 of that resolution tensored with M, a complex that is zero in degree 3; hence Tor_3^S(M,k)=0, and [lem-sc-p1-tor-dimension-shifting] therefore gives Tor_1^S(K_2,k)=0.",
+   "uses": [
+    "lem-sc-p1-graded-kernel-finite",
+    "lem-sc-p1-koszul-resolution",
+    "lem-sc-p1-tor-dimension-shifting",
+    "lem-weil-pbc-tor-symmetry",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, use the Koszul resolution and dimension shifting"
+   }
+  },
+  {
+   "text": "By [lem-sc-p1-graded-nakayama-free], the finitely generated graded module K_2 with Tor_1^S(K_2,k)=0 is a finite direct sum of shifts S(d), hence graded free. Calling this module F_2 gives the exact sequence 0\\to F_2\\to F_1\\to F_0\\to M\\to0, and every F_i is a finite direct sum of graded shifts S(d), as required.",
+   "uses": [
+    "lem-sc-p1-graded-nakayama-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded Nakayama concludes that the second syzygy is free"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-finite-homogeneous-generators",
+  "lem-sc-p1-graded-kernel-finite",
+  "lem-sc-p1-koszul-resolution",
+  "lem-sc-p1-tor-dimension-shifting",
+  "lem-sc-p1-graded-nakayama-free",
+  "lem-weil-pbc-tor-symmetry",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "node proof, first sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +109,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-graded-syzygy",
+  "worker": "stage1",
+  "summary": "Replaced the rejected general theorem specialization by four proof steps for the two-variable ring: finite homogeneous generation, finite graded kernels, Koszul exactness plus Tor dimension shifting, and graded Nakayama freeness.",
+  "blueprint": "Realizes the first sentence of the proof of lem-sc-p1-graded-resolution by carrying out the construction for S=k[x_0,x_1] and the two successive syzygies."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gs2",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gs2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:08 return: point 1 (D1/D2) repaired, the general syzygy node is gone and the item is proved for S=k[x_0,x_1] in four steps (finite homogeneous generators -> F_0; Noetherian kernel K_1 -> F_1; K_2 f.g., Tor_1(K_2,k)=Tor_3(M,k)=0 via Koszul resolution of k; graded Nakayama -> K_2 free); point 2 (B3) repaired, grading defined inline in the item (statement change named in report item 4) and new nodes; point 3 (B4) repaired, \\\\to in JSON. Source: blueprint lem-sc-p1-graded-resolution.md (statement source note and proof first sentence: graded Hilbert syzygy, global dimension two). Checked each new statement true: generators (f.g. graded => finite homogeneous generating set), kernel finite (S Noetherian), Koszul 0->S(-2)->(x_1,-x_0) S(-1)^2 ->(x_0,x_1) S->k->0 exact, degree-zero maps, x_0x_1-x_1x_0=0; dimension shifting Tor_1(K_2,k)=Tor_2(K_1,k)=Tor_3(M,k) for F_0,F_1 free; graded Nakayama for f.g. (bounded-below) graded N with Tor_1(N,k)=0, minimal-presentation equivalence Tor_1=K/S_+K checked. Small case M=k: F_0=S, F_1=S(-1)^2, F_2=S(-2). Exactness of 0->K_2->F_1->F_0->M->0 checked from image(F_1->F_0)=K_1. FIX more, RETURN less: (C1) item step 3 used Tor_3(M,k)=0 from a resolution of k (balance of Tor) with no node: cited lem-weil-pbc-tor-symmetry and def-weil-pbc-tor-modules in step 3 text/uses and proof_deps; (B3) Tor had no definition node: lem-sc-p1-tor-dimension-shifting: statement/stmt_deps: cite def-weil-pbc-tor-modules instead of def-sc-p1-standard ('module and exact-sequence conventions', which that node does not give), 'ring' -> 'commutative ring' to match the Tor definition, unicode ≅ -> \\\\cong; lem-sc-p1-graded-nakayama-free: statement/stmt_deps: cite def-weil-pbc-tor-modules; (B3) graded shifts S(d) uncited in new nodes: lem-sc-p1-finite-homogeneous-generators, lem-sc-p1-koszul-resolution, lem-sc-p1-graded-nakayama-free: statement/stmt_deps: cite def-weil-pbc-proj-twisting-sheaf (2). FIX: lem-sc-p1-koszul-resolution: source: document pointed at a nonexistent literature path (a dag node path); set to the blueprint lem-sc-p1-graded-resolution.md statement source note. Tool use: lem-weil-pbc-tor-symmetry (generic Tor symmetry, black box). Mathlib: no leaf; no slopmaster2 declaration states these module facts (sorry map Koszul entries are the sheaf Koszul on P^1). Start 2026-10-10 Sat Oct 10 03:27:50 PM UTC 2026, end Sat Oct 10 03:29:01 PM UTC 2026.; 5 file(s) fixed by the reviewer"
+ }
 }
