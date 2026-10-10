@@ -1,6 +1,6 @@
 # Work queue
 
-850 items; claim with `tools/claim.py next <group> [--stage N]`.
+851 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (656)
 
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
-| `lem-weil-pbc-split-injection-after-completion` | 1011 | none |
 | `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1011 | none |
 | `lem-weil-pbc-strictly-standard-base-change` | 1011 | none |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1011 | none |
@@ -147,6 +146,7 @@
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
+| `lem-weil-pbc-split-extension-free-presentation` | 1012 | none |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
@@ -663,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (194)
+## Stage 2: nodes to state (195)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -835,6 +835,7 @@
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
+| `lem-weil-pbc-split-injection-after-completion` | 1 | state |
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
