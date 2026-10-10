@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
  "kind": "statement",
  "title": "Jacobian criterion for smoothness of a relative global complete intersection at a prime",
- "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] such that $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. For a subset $I\\subseteq\\{1,\\dots,n\\}$ of cardinality $c$ let $g_I=\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-polynomial-partial-derivative] and $\\bar g_I\\in S$ its image. Let $\\mathfrak q\\subset S$ be a prime ideal. Then $R\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal] if and only if there is a subset $I\\subseteq\\{1,\\dots,n\\}$ with $|I|=c$ and $\\bar g_I\\notin\\mathfrak q$.",
+ "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] such that $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. For a subset $I\\subseteq\\{1,\\dots,n\\}$ of cardinality $c$ let $g_I=\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}\\in R[x_1,\\dots,x_n]$ (the determinant [def-weil-pbc-matrix-determinant] of the $c\\times c$ matrix with rows indexed by $j$ and columns by the elements of $I$ in increasing order, $\\partial/\\partial x_i$ the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative]) and $\\bar g_I\\in S$ its image. Let $\\mathfrak q\\subset S$ be a prime ideal. Then $R\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal] if and only if there is a subset $I\\subseteq\\{1,\\dots,n\\}$ with $|I|=c$ and $\\bar g_I\\notin\\mathfrak q$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, line 37629) and its proof (naive cotangent complex of a relative global complete intersection, Lemma 00SV lemma-relative-global-complete-intersection-conormal; Lemma 00S7 lemma-localize-NL; maximal minors)"
@@ -11,11 +11,145 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-relative-global-complete-intersection",
   "def-weil-pbc-polynomial-partial-derivative",
-  "def-weil-pbc-singular-ideal"
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-matrix-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The naive cotangent complex of the presentation.) Put $P=R[x_1,\\dots,x_n]$, $K=(f_1,\\dots,f_c)$ (we write $K$ for the ideal, as $I$ denotes a set of indices), so $S=P/K$, and write $\\bar p$ for the image in $S$ of $p\\in P$. By [lem-weil-pbc-relative-global-complete-intersection-conormal-free] the $S$-module $K/K^2$ is free [def-weil-pbc-free-module] with basis $\\varepsilon_j=f_j\\bmod K^2$, $j=1,\\dots,c$. The $S$-linear map $\\mathrm d:K/K^2\\to\\bigoplus_{i=1}^nS\\,\\mathrm dx_i$, $\\mathrm d(p\\bmod K^2)=\\sum_i\\overline{\\partial p/\\partial x_i}\\,\\mathrm dx_i$ (the map of [lem-weil-pbc-smooth-localization-conormal-split], whose ideal is called $I$ there) sends $\\varepsilon_j\\mapsto\\sum_i\\overline{\\partial f_j/\\partial x_i}\\,\\mathrm dx_i$, so in the bases $(\\varepsilon_j)$ and $(\\mathrm dx_i)$ it is given by the $n\\times c$ matrix $M$ over $S$ [def-weil-matrix] with $M_{ij}=\\overline{\\partial f_j/\\partial x_i}$ [def-weil-pbc-polynomial-partial-derivative]. For $I=\\{i_1<\\dots<i_c\\}\\subseteq\\{1,\\dots,n\\}$ let $M_I$ be the $c\\times c$ submatrix [def-weil-submatrix] of $M$ formed by the rows $i_1,\\dots,i_c$, so $(M_I)_{kj}=\\overline{\\partial f_j/\\partial x_{i_k}}$. Then $\\det M_I=\\bar g_I$: (a) $\\det$ is given by the formula $\\sum_\\sigma\\operatorname{sgn}(\\sigma)\\prod_kN_{\\sigma(k),k}$ [def-weil-pbc-matrix-determinant], a polynomial with integer coefficients in the entries, so every ring homomorphism (here $P\\to S$; below also $S\\to S_g$ and isomorphisms of polynomial rings) commutes with $\\det$ applied entrywise; (b) $M_I$ is the transpose of the image of the matrix $(\\partial f_j/\\partial x_{i_k})_{j,k}$ defining $g_I$, and $\\det N^{\\mathsf T}=\\det N$, since substituting $\\sigma\\mapsto\\sigma^{-1}$ in the formula turns $\\prod_kN_{k,\\sigma(k)}=\\prod_kN_{\\sigma^{-1}(k),k}$ into the terms of $\\det N$ and $\\operatorname{sgn}(\\sigma^{-1})=\\operatorname{sgn}(\\sigma)$ (sgn is a homomorphism to $\\{\\pm1\\}$). This is Stacks' remark that the maximal minors of the matrix of the naive cotangent complex are the $g_I$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "def-weil-matrix",
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-weil-submatrix",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), first paragraph, with Lemma Tag 00SV (lemma-relative-global-complete-intersection-conormal) part (3)"
+   }
+  },
+  {
+   "text": "('Only if': a left inverse over $S_g$.) Assume $R\\to S$ is smooth at $\\mathfrak q$. By [def-weil-pbc-singular-ideal] there is $g\\in S\\setminus\\mathfrak q$ such that the localization $S_g$ [def-weil-ring-localization-away] is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map]. By [lem-weil-pbc-smooth-localization-conormal-split] (with its ideal $K$, $A=S=P/K$, $a=g$) the localized map $\\mathrm d_g:(K/K^2)_g\\to\\bigoplus_iS_g\\,\\mathrm dx_i$ [def-weil-pbc-module-localization-away] has an $S_g$-linear left inverse $\\lambda$. The $S_g$-module $(K/K^2)_g$ is free with basis $\\varepsilon_j/1$: every element is $m/g^e$ with $m=\\sum_js_j\\varepsilon_j$ (step 1), so equals $\\sum_j(s_j/g^e)(\\varepsilon_j/1)$; and if $\\sum_j(s_j/g^e)(\\varepsilon_j/1)=0$ then $g^k\\sum_js_j\\varepsilon_j=0$ in $K/K^2$ for some $k$, so $g^ks_j=0$ for all $j$ by freeness, i.e. $s_j/g^e=0$ in $S_g$. In the bases $(\\varepsilon_j/1)$ and $(\\mathrm dx_i)$, $\\mathrm d_g$ has the matrix $M^{(g)}=(M_{ij}/1)$, the image of $M$ in $S_g$, and $\\lambda$ has a $c\\times n$ matrix $B$ over $S_g$; $\\lambda\\circ\\mathrm d_g=\\mathrm{id}$ reads $BM^{(g)}=1_{c\\times c}$ (composition of linear maps between finite free modules is the product of their matrices).",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-matrix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), third paragraph ('there is no localization by an element g not in q where this map becomes a split injection. By Lemma 00S7 again there is no such localization which is smooth over R'), read contrapositively: smoothness of S_g gives the split injection"
+   }
+  },
+  {
+   "text": "('Only if': $S_g\\ne0$ and $c\\le n$.) $S_g\\neq0$: if $1/1=0$ in $S_g$ then $g^k=0\\in\\mathfrak q$ for some $k$, so $g\\in\\mathfrak q$ as $\\mathfrak q$ is prime, a contradiction. If $c>n$, apply [lem-weil-pbc-cauchy-binet] to the $c\\times n$ matrix $B$ and the $n\\times c$ matrix $M^{(g)}$ over $S_g$: the sum over $c$-element subsets of $\\{1,\\dots,n\\}$ is empty, so $\\det(BM^{(g)})=0$; but $BM^{(g)}=1_{c\\times c}$ has determinant $1$ [def-weil-pbc-matrix-determinant] (only $\\sigma=\\mathrm{id}$ contributes), so $1=0$ in $S_g$, contradicting $S_g\\neq0$. Hence $c\\le n$.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), third paragraph (the map 'does not have maximal rank' presupposes c <= n; the case c > n written out here)"
+   }
+  },
+  {
+   "text": "('Only if': a maximal minor outside $\\mathfrak q$.) By [lem-weil-pbc-matrix-left-inverse-minors] (2), applied over the ring $S_g$ to the $n\\times c$ matrix $M^{(g)}$ ($n\\ge c$ by step 3), $f=1$ and the matrix $B$ of step 2 with $BM^{(g)}=1\\cdot1_{c\\times c}$, we get $1=1^c=\\sum_{|I|=c}b_I\\det(M^{(g)}_I)$ with $b_I\\in S_g$. By step 1 (a), (b) applied to $P\\to S\\to S_g$, $\\det(M^{(g)}_I)=\\bar g_I/1$. Suppose $\\bar g_I\\in\\mathfrak q$ for every $I$. Write $b_I=s_I/g^e$ with $s_I\\in S$ and one $e$ for all $I$ [def-weil-ring-localization-away]. Then $1/1=(\\sum_Is_I\\bar g_I)/g^e$ in $S_g$, so $g^k(g^e-\\sum_Is_I\\bar g_I)=0$ in $S$ for some $k$, i.e. $g^{k+e}=\\sum_Ig^ks_I\\bar g_I\\in\\mathfrak q$, and $g\\in\\mathfrak q$ since $\\mathfrak q$ is prime: a contradiction. Hence $\\bar g_I\\notin\\mathfrak q$ for some $I$ with $|I|=c$. (Stacks argues with the rank of the matrix over $\\kappa(\\mathfrak q)$; the identity $1=\\sum b_I\\bar g_I/1$ is the same fact without passing to the residue field.)",
+   "uses": [
+    "lem-weil-pbc-matrix-left-inverse-minors",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), third paragraph ('all g_I end up in q ... the complex above tensored with kappa(q) does not have maximal rank'), and Lemma Tag 07DQ (lemma-matrix-left-inverse) (2)"
+   }
+  },
+  {
+   "text": "('If': a presentation of $S_g$.) Assume $I=\\{i_1<\\dots<i_c\\}\\subseteq\\{1,\\dots,n\\}$ with $g:=\\bar g_I\\notin\\mathfrak q$. Apply [lem-weil-pbc-principal-localization-naive-cotangent] with $A=R$, $B=S$, $P=R[x_1,\\dots,x_n]$, $\\alpha:P\\to S$ the quotient map (kernel $K=(f_1,\\dots,f_c)$, called $I$ in that node) and the lift $f=g_I$ of $g$: the $R$-algebra map $\\beta:P[y]\\to S_g$ [def-weil-ring-localization-away] equal to $\\alpha$ followed by $S\\to S_g$ on $P$ and with $\\beta(y)=1/g$ is surjective, and its kernel $J$ is generated by $K$ and $g_Iy-1$, hence $J=(f_1,\\dots,f_c,g_Iy-1)$. Identifying $P[y]$ with the polynomial ring $R[x_1,\\dots,x_n,y]$ in $n+1$ variables [def-weil-pbc-mv-polynomial-ring], $\\beta$ induces an isomorphism of $R$-algebras $R[x_1,\\dots,x_n,y]/(f_1,\\dots,f_c,g_Iy-1)\\cong S_g$ sending $p\\bmod J$ to $\\beta(p)$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-naive-cotangent",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), second paragraph ('the algebra S_g is smooth over R'), via the presentation of S_g of Lemma Tag 08JZ (lemma-principal-localization-NL)"
+   }
+  },
+  {
+   "text": "('If': renaming the variables.) Since $I$ has $c$ elements, $c\\le n$; let $j_1<\\dots<j_{n-c}$ be the elements of $\\{1,\\dots,n\\}\\setminus I$. Let $\\tau:R[z_1,\\dots,z_{n+1}]\\to R[x_1,\\dots,x_n,y]$ be the $R$-algebra isomorphism of polynomial rings [def-weil-pbc-mv-polynomial-ring] induced by the bijection of variables $z_k\\mapsto x_{i_k}$ ($k\\le c$), $z_{c+1}\\mapsto y$, $z_{c+1+l}\\mapsto x_{j_l}$ ($1\\le l\\le n-c$), and put $F_j=\\tau^{-1}(f_j)$ ($j\\le c$), $F_{c+1}=\\tau^{-1}(g_Iy-1)$. Then $\\tau$ maps the ideal $(F_1,\\dots,F_{c+1})$ onto $(f_1,\\dots,f_c,g_Iy-1)$, so with step 5 we get an isomorphism of $R$-algebras $\\alpha':R[z_1,\\dots,z_{n+1}]/(F_1,\\dots,F_{c+1})\\cong S_g$, $p\\bmod(F)\\mapsto\\beta(\\tau(p))$. Moreover $\\tau(\\partial F/\\partial z_k)=\\partial\\tau(F)/\\partial v_k$ for every $F$, where $v_k=\\tau(z_k)$ is the variable $z_k$ is sent to: both sides are $R$-linear in $F$ and agree on monomials by the explicit formula of [def-weil-pbc-polynomial-partial-derivative] ($\\tau$ only renames exponents).",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), second paragraph; the renaming 'after renumbering the variables' is implicit in the source"
+   }
+  },
+  {
+   "text": "('If': the Jacobian determinant is a unit.) Let $N=(\\partial F_j/\\partial z_k)_{1\\le j,k\\le c+1}$. By step 6, $\\tau(N_{jk})=\\partial f_j/\\partial x_{i_k}$ for $j,k\\le c$; $\\tau(N_{j,c+1})=\\partial f_j/\\partial y=0$ for $j\\le c$ ($f_j$ does not involve $y$); $\\tau(N_{c+1,k})=y\\,\\partial g_I/\\partial x_{i_k}$ for $k\\le c$ (Leibniz rule, $\\partial y/\\partial x_{i_k}=0$); and $\\tau(N_{c+1,c+1})=\\partial(g_Iy-1)/\\partial y=g_I$ ($g_I$ does not involve $y$) [def-weil-pbc-polynomial-partial-derivative]. So $\\tau(N)$ (entrywise) is block lower triangular with diagonal blocks $(\\partial f_j/\\partial x_{i_k})_{j,k\\le c}$ and the $1\\times1$ block $(g_I)$, and by [lem-weil-pbc-block-triangular-determinant] ($p=c$, $q=1$) and step 1 (a), $\\tau(\\det N)=\\det\\tau(N)=\\det(\\partial f_j/\\partial x_{i_k})_{j,k}\\cdot g_I=g_I^2$ [def-weil-pbc-matrix-determinant]. Hence the image of $\\det N$ under $R[z]\\to R[z]/(F)\\xrightarrow{\\alpha'}S_g$ is $\\beta(g_I^2)=(g/1)^2$, a unit of $S_g$ (inverse $1/g^2$). As $n+1\\ge c+1\\ge0$, $(n+1,\\,c+1,\\,F_1,\\dots,F_{c+1},\\,\\alpha')$ is a standard smooth presentation of $S_g$ over $R$ [def-weil-pbc-standard-smooth-algebra] (the standard smooth definition uses $\\det(\\partial F_j/\\partial z_k)$ over the first $c+1$ variables; its orientation is immaterial by step 1 (b)).",
+   "uses": [
+    "def-weil-pbc-polynomial-partial-derivative",
+    "lem-weil-pbc-block-triangular-determinant",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), second paragraph ('by construction it is quasi-isomorphic to a free rank n-c module in degree 0'), realized through the standard smooth Definition Tag 00T6 (definition-standard-smooth)"
+   }
+  },
+  {
+   "text": "('If': conclusion.) By step 7 and [lem-weil-pbc-standard-smooth-is-smooth], $S_g$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map]; since $g=\\bar g_I\\notin\\mathfrak q$, $R\\to S$ is smooth at $\\mathfrak q$ by [def-weil-pbc-singular-ideal]. (This direction does not use that $S$ is a relative global complete intersection.) Together with steps 2-4 this proves the equivalence.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, lines 37644-37670), second paragraph ('Then the algebra S_g is smooth over R'), with Lemma Tag 00T7 (lemma-standard-smooth) (1), whose proof is the same naive cotangent complex computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "def-weil-matrix",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-cauchy-binet",
+  "lem-weil-pbc-matrix-left-inverse-minors",
+  "lem-weil-pbc-principal-localization-naive-cotangent",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-block-triangular-determinant",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-is-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, line 37629) and its proof (lines 37644-37670); the 'if' direction realized through the standard smooth presentation of S_g (Definition 00T6, Lemma 00T7 (1), whose proof is the source's naive cotangent complex computation), the 'only if' direction through the split injection of the localized naive cotangent complex (Smoothing 07EZ proof / Algebra 00S1, 00S7, 08JZ, packaged in lem-weil-pbc-smooth-localization-conormal-split) and Lemma 07DQ (2) in place of the rank over kappa(q)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +178,31 @@
    "results": "@[stacks 00TB] on Algebra.IsSmoothAt (RingTheory/Smooth/Locus.lean:45, formal smoothness of the localization, not Stacks' definition); Jacobian criterion for local algebras Algebra.FormallySmooth.iff_injective_lTensor_residueField (RingTheory/Smooth/Local.lean:26-45, injectivity of the cotangent complex tensored with the residue field); PreSubmersivePresentation.jacobian (Submersive.lean:118-135)",
    "date": "2026-10-10",
    "verdict": "no match (the local Jacobian criterion is a possible Lean route, not the statement)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebra.IsSmoothAt iff exists maximal minor of jacobian matrix not in prime, complete intersection",
+   "results": "Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth (Smooth/Locus.lean), Algebra.smoothLocus, RingHom.IsStandardSmooth.toAlgebra, Algebra.instSmoothOfIsStandardSmooth, Algebra.IsStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'jacobian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | xargs grep -ln 'IsSmoothAt\\|smoothLocus'",
+   "results": "only RingTheory/Smooth/StandardSmoothOfFree.lean (IsSmoothAt.exists_notMem_isStandardSmooth line 104: smooth at p gives a standard smooth localization; no statement in terms of the minors of a given complete intersection presentation)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isSmoothAt_iff_jacobian (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable (no answer)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; grep above used instead"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +222,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 00TE and kept; the determinant now cites def-weil-pbc-matrix-determinant (added to stmt_deps) and the orientation of the minor (rows j, columns I) is written. Proof in 8 steps after the proof of 00TE. Step 1: I/I^2 free on the f_j (new unsplit node for 00SV (3)) and the maximal minors of the matrix of d are the g_I (determinant commutes with ring maps and with transposition, written out). 'Only if' (steps 2-4): smooth at q gives g not in q with S_g smooth; lem-weil-pbc-smooth-localization-conormal-split gives a left inverse of the localized d, i.e. a matrix B with B M = 1 over S_g; S_g is nonzero and c <= n (Cauchy-Binet); lem-weil-pbc-matrix-left-inverse-minors (2) (07DQ) with f = 1 gives 1 = sum b_I g_I/1 in S_g, which forces some g_I outside q (replaces Stacks' rank over kappa(q)). 'If' (steps 5-8): S_g = R[x,y]/(f, g_I y - 1) by the existing 08JZ node, the variables renamed so x_I come first and y next; the (c+1)x(c+1) Jacobian is block lower triangular with determinant g_I^2, a unit in S_g, so S_g is standard smooth (00T6) hence smooth (00T7, Mathlib leaf), as the lead's brief suggested; this realizes Stacks' 'by construction quasi-isomorphic to a free module' through the standard smooth node instead of 00S7 directly. The 'if' direction does not need the complete intersection hypothesis. Mathlib: no Jacobian criterion at a prime for complete intersections (IsSmoothAt, SubmersivePresentation, StandardSmoothOfFree read); searches added."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00TE: 'only if' via the split injectivity of the localized conormal map (existing node), Cauchy-Binet for c ≤ n, and the left-inverse/minors lemma 07DQ (2) in place of the residue-field rank argument; 'if' via the standard smooth presentation of S_g (08JZ, block-triangular Jacobian with determinant g_I²) and standard-smooth-is-smooth. I/I² free for a relative global complete intersection is 00SV (3), new unsplit node. No Mathlib match for the criterion."
 }
