@@ -701,3 +701,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:28 L: reviewed lem-weil-pbc-galois-invariant-closed-subset-descends (038B; 10 steps; +3 nodes): accepted.
 - 00:30 L: reviewed lem-weil-pbc-immersion-affine-constructible-pieces (03S0 refinement step; 6 steps; +3 nodes): accepted. Stage-3 note (worker): five etale-stratification nodes cite the nonexistent tag 03S9 for lemma-etale-stratified-finite (correct: 03S0).
 - 00:30 L: reviewed lem-weil-pbc-improve-presentation (07CE, smooth case; 5 steps; +08JZ, +07EV nodes): accepted.
+- 00:31 L: reviewed lem-weil-pbc-base-change-nilpotent-thickening-idempotents (09ZU; 4 steps; no new nodes): accepted.
