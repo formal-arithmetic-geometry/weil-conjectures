@@ -1,8 +1,8 @@
 # Work queue
 
-821 items; claim with `tools/claim.py next <group> [--stage N]`.
+822 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (653)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-limit-fibre-products` | 1011 | none |
-| `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1011 | none |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1011 | none |
 | `lem-weil-pbc-make-separable` | 1011 | none |
 | `lem-weil-pbc-module-pullback-finite-type` | 1011 | none |
@@ -125,6 +124,7 @@
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
+| `lem-weil-pbc-make-separably-generated` | 1012 | none |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
@@ -141,6 +141,7 @@
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
+| `lem-weil-pbc-separably-generated-separable` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
@@ -833,7 +834,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 665 nodes that wait for stage 1, 451 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 452 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
