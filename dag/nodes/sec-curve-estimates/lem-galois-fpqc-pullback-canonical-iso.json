@@ -23,9 +23,52 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a descent datum $(V,\\varphi)$ on $V\\to X$, the pair $(r_0,r_1)$ is a morphism $T\\to X\\times_S X$ by the assumption that both maps are over $S$. Pulling the isomorphism $\\varphi:\\mathrm{pr}_0^*V\\cong\\mathrm{pr}_1^*V$ back along this pair gives an isomorphism $T\\times_{X,r_0}V\\cong T\\times_{X,r_1}V$ over $T$. The universal property and functoriality of fibre products make this construction natural in $(V,\\varphi)$ and in morphisms of descent data, so it defines a natural isomorphism between the two pullback functors.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 023Y (lemma-pullback), part (2) and its proof (the map r: X' -> X x_S X); family version Tag 02VS (lemma-pullback-family), part (3)"
+   }
+  },
+  {
+   "text": "The isomorphism in Step 1 is an isomorphism of descent data over $T/S$: after pulling it back to $T\\times_ST$ and then to $T\\times_ST\\times_ST$, both possible composites are the pullback of the two sides of the cocycle identity for $\\varphi$. Thus the equality required of a morphism in $DD(T/S)$ follows from the cocycle condition in the definition of descent datum, and the inverse gives the inverse morphism.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 023Y (lemma-pullback), part (2) and its proof (the map r: X' -> X x_S X); family version Tag 02VS (lemma-pullback-family), part (3)"
+   }
+  },
+  {
+   "text": "For morphisms $r:T\\to X$ and $t:U\\to T$ over $S$, the pullback along $r\\circ t$ has underlying scheme $U\\times_XV$, while the iterated pullback has underlying scheme $U\\times_T(T\\times_XV)$. The universal property of fibre products gives the canonical associativity isomorphism $U\\times_T(T\\times_XV)\\cong U\\times_XV$; functoriality identifies the pulled-back descent data and morphisms under this isomorphism. These identifications are natural and yield the asserted canonical natural isomorphism of functors.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 023Y (lemma-pullback), parts (1)--(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Tags 02VS(3) and 023Y(1)--(2); details written out from the fibre-product universal property"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +93,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-galois-fpqc-refinement-fully-faithful",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-pullback-canonical-iso",
+  "worker": "stage1",
+  "summary": "Split the canonical pullback comparison into construction from the descent isomorphism, verification of compatibility with the cocycle condition, and the composition comparison from the universal property of fibre products. No new dependency node was needed: the fibre-product and descent-datum definitions state the universal property, canonical identifications, isomorphism, and cocycle used by the steps.",
+  "blueprint": "lem-galois-descent proof Step 2 full-faithfulness input: the canonical comparison of pullback functors supplied by Tags 02VS(3) and 023Y(1)--(2)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpc",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Tag 023Y (lemma-pullback) parts (1)-(3) and its proof, Tag 02VS (lemma-pullback-family) part (3), read locally (the report's claim that descent.tex is absent is wrong; it is present). The statement agrees: two maps r_0,r_1:T->X over S (Stacks: f_0,f_1 fitting the same square with h=id) give canonically isomorphic pullback functors DD(X/S)->DD(T/S); the composition clause follows from the construction in 023Y(1). Step 1: (r_0,r_1):T->X x_S X by the universal property in def-pc-fibre-product, pulling back phi of def-pd-descent-datum gives T x_{r_0} V = T x_{r_1} V, exactly the Stacks proof; naturality in alpha is the pullback of the morphism condition stated in the item. Step 2: I checked the morphism-of-descent-data identity pointwise on T x_S T: both sides equal phi at (r_0 t, r_1 t') by the cocycle of def-pd-descent-datum pulled back along (r_0 t, r_1 t, r_1 t') and (r_0 t, r_0 t', r_1 t') into X_3. Step 3: associativity iso and (rt x rt)^*phi = (t x t)^*(r x r)^*phi from the unique-iso and functoriality clauses of def-pc-fibre-product. Small case r_0=r_1: comparison is the pullback of phi along the diagonal, the identity by the cocycle. Both deps are generic definitions already in stmt_deps (C7/C8 fine). No new nodes, no Mathlib leaf. FIX: dag/nodes/sec-curve-estimates/lem-galois-fpqc-pullback-canonical-iso.json: proof[0].source.place and proof[1].source.place: 02VS(3) replaced by 023Y(2) and its proof (where the argument actually is), 02VS(3) kept as the family version. Start Sat Oct 10 03:30:13 PM UTC 2026, end Sat Oct 10 03:30:40 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
