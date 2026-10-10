@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-tensor-algebra-graded",
+ "kind": "statement",
+ "title": "The tensor algebra is graded by the tensor powers",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. Let $\\mathrm T_R(M)$ be the tensor algebra of $M$ over $R$, the associative $R$-algebra $\\bigoplus_{n\\ge0}M^{\\otimes_R n}$ whose multiplication is concatenation of pure tensors, $(x_1\\otimes\\dots\\otimes x_n)\\cdot(y_1\\otimes\\dots\\otimes y_m)=x_1\\otimes\\dots\\otimes x_n\\otimes y_1\\otimes\\dots\\otimes y_m$, with $R$-linear map $\\iota:M=M^{\\otimes_R1}\\to\\mathrm T_R(M)$, so that the pure tensor $x_1\\otimes\\dots\\otimes x_n$ is the product $\\iota(x_1)\\cdots\\iota(x_n)$. For $n\\ge0$ let $\\mathrm T^n_R(M)\\subseteq\\mathrm T_R(M)$ be the $R$-submodule spanned by the products $\\iota(x_1)\\cdots\\iota(x_n)$ with $x_1,\\dots,x_n\\in M$ (so $\\mathrm T^0_R(M)=R\\cdot1$ and $\\mathrm T^1_R(M)=\\iota(M)$). Then $\\mathrm T_R(M)=\\bigoplus_{n\\ge0}\\mathrm T^n_R(M)$ as $R$-modules: every $t\\in\\mathrm T_R(M)$ is a finite sum $\\sum_nt_n$ with $t_n\\in\\mathrm T^n_R(M)$, and the $t_n$ are uniquely determined by $t$. Moreover $1\\in\\mathrm T^0_R(M)$ and $\\mathrm T^n_R(M)\\cdot\\mathrm T^m_R(M)\\subseteq\\mathrm T^{n+m}_R(M)$ for all $n,m\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00DM (section-tensor-algebra, line 2165): T(M) is defined as the direct sum of the T^n(M), T^0 = R, T^n(M) = M (x) ... (x) M, with multiplication by concatenation of pure tensors, so T^n * T^m lies in T^{n+m}"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor algebra is a graded algebra, direct sum of the powers of the range of iota",
+   "results": "TensorAlgebra.gradedAlgebra (Mathlib.LinearAlgebra.TensorAlgebra.Grading), TensorAlgebra, TensorAlgebra.toDirectSum (Mathlib.LinearAlgebra.TensorAlgebra.ToTensorPower), GradedAlgebra, TensorPower.galgebra",
+   "date": "2026-10-10",
+   "verdict": "match: TensorAlgebra.gradedAlgebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorAlgebra.gradedAlgebra",
+   "results": "TensorAlgebra.gradedAlgebra {R M} [CommSemiring R] [AddCommMonoid M] [Module R M] : GradedAlgebra fun x => (TensorAlgebra.ι R).range ^ x (Mathlib.LinearAlgebra.TensorAlgebra.Grading)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the tensor algebra of a module is graded by tensor powers, T^n T^m contained in T^(n+m)",
+   "results": "TensorAlgebra.gradedAlgebra, TensorAlgebra.GradedAlgebra.ι, ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower, TensorAlgebra.GradedAlgebra.ι_apply, TensorPower.galgebra, ExteriorAlgebra.gradedAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match: TensorAlgebra.gradedAlgebra"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance gradedAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorAlgebra/Grading.lean ; grep -n 'theorem pow_eq_span_pow_set\\|theorem one_eq_span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Algebra/Operations.lean ; grep -n 'class GradedRing\\|abbrev GradedAlgebra' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+   "results": "TensorAlgebra/Grading.lean:43 instance gradedAlgebra : GradedAlgebra ((LinearMap.range (ι R) ^ ·) : ℕ → Submodule R _) (read 43-71: GradedAlgebra.ofAlgHom with the lift of M -> ⨁ i, (range ι)^i); Algebra/Operations.lean:607 Submodule.pow_eq_span_pow_set : M ^ n = span R ((M : Set A) ^ n), :84 one_eq_span : 1 = R ∙ 1; RingTheory/GradedAlgebra/Basic.lean:67 class GradedRing extends SetLike.GradedMonoid, DirectSum.Decomposition, :170 abbrev GradedAlgebra := GradedRing",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "TensorAlgebra.gradedAlgebra (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable (no language server), not used as evidence; existence checked by Loogle and grep above",
+   "date": "2026-10-10",
+   "verdict": "no verdict (index unavailable)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorAlgebra.gradedAlgebra",
+  "file": "Mathlib/LinearAlgebra/TensorAlgebra/Grading.lean",
+  "line": 43,
+  "how": "exact: the instance GradedAlgebra (fun n => (LinearMap.range (TensorAlgebra.ι R))^n) (Grading.lean:43, read 43-71) is GradedRing (RingTheory/GradedAlgebra/Basic.lean:67, :170), i.e. SetLike.GradedMonoid (1 in degree 0, mul_mem: T^n T^m in T^(n+m)) and DirectSum.Decomposition (the internal direct sum T = ⨁ T^n, existence and uniqueness of the components). The node's T^n, the span of the n-fold products of elements of iota(M), is (range ι)^n by Submodule.pow_eq_span_pow_set (Mathlib/Algebra/Algebra/Operations.lean:607); Mathlib's TensorAlgebra is the free R-algebra on M, which is the node's T_R(M) (Stacks defines T(M) as the direct sum with concatenation)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-symmetric-algebra-graded",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): the GradedAlgebra instance TensorAlgebra.gradedAlgebra (TensorAlgebra/Grading.lean:43, checked with sed) gives the internal direct sum and multiplicativity; the identification of (range iota)^n with the span of n-fold products is Submodule.pow_eq_span_pow_set.",
+ "reviewed": "pass (L, 2026-10-10): leaf, instance checked by sed."
+}
