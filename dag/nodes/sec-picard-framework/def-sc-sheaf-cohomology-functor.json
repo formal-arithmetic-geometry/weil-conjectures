@@ -13,17 +13,43 @@
  },
  "kind": "statement",
  "title": "Functoriality of sheaf cohomology",
- "statement": "For a scheme $X$, sheaf cohomology $H^i(X,-)$ is the $i$-th right derived functor of global sections on the abelian category of $\\mathcal O_X$-modules described in [def-sc-ext-sheaf]. Hence every morphism $u:\\mathcal G'\\to\\mathcal G$ induces $H^i(u):H^i(X,\\mathcal G')\\to H^i(X,\\mathcal G)$ and $H^i(\\varphi\\circ u)=H^i(\\varphi)\\circ H^i(u)$ for composable module morphisms.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\operatorname{Mod}(\\mathcal O_X)$ be the abelian category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. The global-sections functor $\\Gamma(X,-):\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ is additive and left exact [lem-sc-global-sections-left-exact], and $\\operatorname{Mod}(\\mathcal O_X)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]. Define $H^i(X,-)$ to be the $i$-th right derived functor of $\\Gamma(X,-)$ via injective resolutions [def-sp-left-exact-additive]. Then every morphism $u:\\mathcal G'\\to\\mathcal G$ induces $H^i(u):H^i(X,\\mathcal G')\\to H^i(X,\\mathcal G)$ and $H^i(\\varphi\\circ u)=H^i(\\varphi)\\circ H^i(u)$ for composable module morphisms.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Section Tag 01DZ (Cohomology of sheaves: cohomology as right derived functors of global sections)"
  },
  "stmt_deps": [
-  "def-sc-ext-sheaf"
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The module category has enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives], and the global-sections functor is additive and left exact by [lem-sc-global-sections-left-exact]. Therefore [lem-weil-pbc-right-derived-universal-delta-functor], applied to $v=\\Gamma(X,-)$, says that the right derived functors $R^iv=H^i(X,-)$ form additive functors. Functoriality of a functor gives the induced map $H^i(u)$ and preserves composition, so $H^i(\\varphi\\circ u)=H^i(\\varphi)\\circ H^i(u)$.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Section 01DZ (section-cohomology-sheaves), definition of H^i(X,F) and assertion that the family forms a universal delta-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Section 01DZ (section-cohomology-sheaves)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +74,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-duality-pairing-naturality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-sheaf-cohomology-functor",
+  "worker": "stage1",
+  "summary": "Corrected the imported statement to define sheaf cohomology as the right derived functors of global sections on the abelian category of scheme modules, with the necessary scheme-module and enough-injectives hypotheses. The proof applies the existing generic right-derived-functor delta-functor node to global sections and obtains functoriality and composition.",
+  "blueprint": "Realizes the blueprint proof/use in thm-sc-p1-duality, proof Step 2: functoriality of H^1 used in naturality of the Cech pairing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Its statement supplies that right derived functors form additive functors and hence induce maps preserving composition; no node in the Picard-duality unit duplicates this generic homological-algebra result."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Its statement supplies the additive and kernel-preserving properties of global sections; no node in the Picard-duality unit duplicates this generic sheaf fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Its statement supplies enough injectives for the category of scheme modules, a generic module-sheaf result not proved in this Picard-duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-scf",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scf (reviewer sub-agent of L); spot-checked: Source: Stacks Cohomology 01DZ (section-cohomology-sheaves), ringed-space clause read at cohomology.tex l.61-74: Mod(O_X) has enough injectives, H^i(X,F)=H^i(Gamma(X,I^.)) for an injective resolution, universal delta-functor; the corrected statement agrees (scheme X, Mod(O_X) abelian [def-weil-sheaf-of-modules-category], Gamma additive left exact [new lem-sc-global-sections-left-exact], enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], R^i via injective resolutions [def-sp-left-exact-additive]); well-posed, and dropping the wrong Ext dependency (def-sc-ext-sheaf) is named in the report (E7). Step 1: enough injectives from lem-weil-pbc-scheme-modules-enough-injectives (states a monomorphism into an injective for every module); left exactness from lem-sc-global-sections-left-exact; lem-weil-pbc-right-derived-universal-delta-functor makes (R^nv,delta) a delta-functor, whose definition is a family of additive functors, so H^i(u) and H^i(phi u)=H^i(phi)H^i(u) follow; hypotheses (A with enough injectives, B=Ab abelian, v left exact additive) all met. New node lem-sc-global-sections-left-exact: true (kernels of O_X-modules computed sectionwise, evaluation at X additive), self-contained, TeX, notions cited, 3 Mathlib searches no match, no existing DAG node states it (grep global sections + left exact); source tag 01EZ exists. Tested on X empty (Gamma=0, all H^i=0) and X=Spec k (Gamma equivalent to k-modules, exact, H^i=0 for i>0). FIX more, RETURN less (C4): dag/nodes/sec-picard-framework/def-sc-sheaf-cohomology-functor.json: proof[0].text: left exactness was attributed to lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (which does not state it and was not in uses); replaced by [lem-sc-global-sections-left-exact], already in uses/proof_deps. Tool uses: accepted lem-weil-pbc-right-derived-universal-delta-functor and lem-weil-pbc-scheme-modules-enough-injectives as generic black boxes (C8); dropped lem-sc-global-sections-left-exact from tool_uses only because it is the item's own in-unit new node, not an off-unit tool (no step rejected). Report claim of no duplicate is wrong: pqf-def-cohomology states the same definition (see lead note). Start Sat Oct 10 04:46:44 PM UTC 2026, end Sat Oct 10 04:47:42 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-scf): def-sc-sheaf-cohomology-functor defines H^i(X,-) on Mod(O_X) as right derived functors of Gamma via injective resolutions (Stacks 01DZ, ringed-space clause): it DUPLICATES the unsplit off-unit pqf-def-cohomology (sk-prop-av-pqf-finite, same H^p(X,-) on O_X-modules, Stacks 01EO), a merged_into candidate. It does NOT duplicate def-sc-topological-abelian-cohomology (abelian sheaves Ab(X) on a space; agreement with module cohomology is lem-sc-zariski-module-abelian-cohomology-agree) nor def-weil-pbc-etale-cohomology (etale site, K-injective resolutions)."
 }
