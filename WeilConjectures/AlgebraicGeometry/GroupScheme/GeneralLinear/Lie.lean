@@ -346,6 +346,19 @@ theorem differential_apply (r : RationalHom G m) [IsMonHom r] (x : GrpObj.Lie G)
     r.differential x = lieAlgebraEquivMatrix m k (GrpObj.differential r x) :=
   rfl
 
+/-- `dr(X) v` is the `ε`-part of `r(1 + εX) v`, where `1 + εX` is the point of `G` over `k[ε]`
+of the tangent vector `X`. -/
+theorem toLin'_differential_apply (r : RationalHom G m) [IsMonHom r] (X : GrpObj.Lie G)
+    (v : m → k) :
+    Matrix.toLin' (r.differential X) v = snd ∘ ((r.points (DualNumber k)
+      (GrpObj.infPointsEquivTangentGroup G ((GrpObj.lieEquiv G).symm X)) :
+        Matrix m m (DualNumber k)) *ᵥ (inl ∘ v)) := by
+  rw [differential_apply, lieAlgebraEquivMatrix_apply, toMatrix_eq, GrpObj.differential_apply,
+    Equiv.symm_apply_apply, tangentGroupEquivMatrix_apply, points_apply]
+  ext i
+  simp [Matrix.mulVec, dotProduct, TrivSqZeroExt.snd_sum,
+    GrpObj.coe_infPointsEquivTangentGroup_apply, Category.assoc]
+
 /-- If a subspace `U ⊆ k^m` is stable under the dual-number points of `G` acting by `r`, that is
 the `ε`-part of `r(g) v` lies in `U` for `g ∈ G(k[ε])` and `v ∈ U`, then `U` is stable under the
 differential of `r`: `dr(X) v` is the `ε`-part of `r(1 + εX) v`. -/
@@ -353,8 +366,10 @@ theorem le_comap_toLin'_differential (r : RationalHom G m) [IsMonHom r]
     (U : Submodule k (m → k))
     (hU : ∀ g : AlgebraicGeometry.points G (DualNumber k), ∀ v ∈ U,
       snd ∘ ((r.points (DualNumber k) g : Matrix m m (DualNumber k)) *ᵥ (inl ∘ v)) ∈ U)
-    (X : GrpObj.Lie G) : U ≤ U.comap (Matrix.toLin' (r.differential X)) := by
-  sorry
+    (X : GrpObj.Lie G) : U ≤ U.comap (Matrix.toLin' (r.differential X)) :=
+  fun v hv ↦ by
+    rw [Submodule.mem_comap, toLin'_differential_apply]
+    exact hU _ v hv
 
 end RationalHom
 
