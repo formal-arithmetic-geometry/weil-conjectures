@@ -720,3 +720,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:44 L: reviewed lem-weil-pbc-jacobi-zariski-left-term-vanishing (00S2 final assertion; 4 steps; +3 leaves, +00HM node): accepted. Returned G1 etale-ring-map-prescribed-residue-field (step 4 imprecise and uncited).
 - 00:47 L: reviewed lem-weil-pbc-linear-equation-localization-polynomial (07EU omitted detail; 4 steps; +2 leaves): accepted.
 - 00:48 L: reviewed lem-weil-pbc-limit-residue-field (0CUG(1); 7 steps), lem-weil-pbc-local-completion-quotient (00MA; 4 steps), lem-weil-pbc-jacobi-zariski-homology-sequence (00S2; 9 steps; +6 nodes: 5 leaves incl. snake lemma and Tor definition, +1 unsplit): all accepted.
+- 2026-10-10, delivery of C1: lem-weil-pbc-z-localizations-dvr returned (8aadc081): the two new nodes restate the item's own clauses (schema split); write the elementary arguments in the steps; see coord/returns/C1.md
