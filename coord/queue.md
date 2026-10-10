@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (651)
+## Stage 1: nodes to split (650)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
-| `lem-weil-pbc-composition-fibre-degree-bound` | 1012 | none |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 1012 | none |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1012 | none |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1012 | none |
@@ -871,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 663 nodes that wait for stage 1, 497 nodes that wait for a statement dependency.
+Not open yet: 662 nodes that wait for stage 1, 498 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
