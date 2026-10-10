@@ -306,7 +306,10 @@ def merge_files(group, item, base, kinds, tree):
         if k == "report":
             tree.write(f, subprocess.run(["git", "show", f"{br}:{f}"], cwd=ROOT, text=True, capture_output=True, check=True).stdout)
         elif k == "new" and not exists_at("HEAD", f):
-            tree.write(f, dump(load_json_at(br, f)))
+            nd = load_json_at(br, f)
+            c = nd.get("created") if isinstance(nd.get("created"), dict) else {"item": item}
+            c.setdefault("by", "worker"); c.setdefault("date", today()); nd["created"] = c   # maintainer fields, filled at merge
+            tree.write(f, dump(nd))
         elif k in ("item", "new"):
             head = load_json_at("HEAD", f)
             if k == "new" and (head.get("created") or {}).get("item") != item:
