@@ -198,6 +198,14 @@ noncomputable def sectionsBaseChange :
     proj _ rfl M) ⊤).toAddEquiv.trans (appLinearEquivOfIso (pullbackCompOfEq
       (Spec.map (inclLeft k K hW)) hW.fromSpec _ (openImm_fst k K hW).symm M).symm ⊤).toAddEquiv)
 
+lemma sectionsBaseChange_apply
+    (x : Γ((Modules.pullback (proj (k := k) (K := K))).obj M, proj ⁻¹ᵁ W)) :
+    sectionsBaseChange K hW M x = appLinearEquivOfIso (pullbackCompOfEq
+      (Spec.map (inclLeft k K hW)) hW.fromSpec _ (openImm_fst k K hW).symm M).symm ⊤
+        (appLinearEquivOfIso (pullbackCompOfEq (openImm k K hW) proj _ rfl M) ⊤
+          (sectionsBaseChange₁ K hW M x)) :=
+  rfl
+
 lemma sectionsBaseChange_pullbackUnitApp (m : Γ(M, W)) :
     sectionsBaseChange K hW M (pullbackUnitApp proj M W m) =
       pullbackUnitApp (Spec.map (inclLeft k K hW)) _ ⊤ (sectionsEquiv hW M m) := by
@@ -221,6 +229,52 @@ lemma sectionsBaseChange_pullbackUnitApp (m : Γ(M, W)) :
       (pullbackUnitApp hW.fromSpec M W m)
   rw [pushforward_obj_presheaf_map] at key
   exact key.symm
+
+variable (k) in
+/-- The global function on `X_K` given by a scalar `c ∈ K`. -/
+noncomputable def scalar (c : K) : Γ(Limits.pullback (X ↘ Spec (.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K))), ⊤) :=
+  Scheme.Hom.appTop (Limits.pullback.snd (X ↘ Spec (.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ((ΓSpecIso (.of K)).inv c)
+
+lemma openImm_app_scalar (c : K) :
+    (Spec (tensorRing k K hW)).presheaf.map (homOfLE (top_le_openImm_preimage (k := k) K hW)).op
+      ((openImm k K hW).app (proj ⁻¹ᵁ W)
+        ((Limits.pullback (X ↘ Spec (.of k))
+          (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.map
+            (homOfLE (le_top : proj ⁻¹ᵁ W ≤ ⊤)).op
+            (scalar k c))) =
+      (Spec (tensorRing k K hW)).presheaf.map (TopologicalSpace.Opens.leTop ⊤).op
+        ((ΓSpecIso (tensorRing k K hW)).inv (inclRight k K hW c)) := by
+  have e₁ : (openImm k K hW).appTop (scalar k c) =
+      (ΓSpecIso (tensorRing k K hW)).inv (inclRight k K hW c) := by
+    rw [scalar, ← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, openImm_snd,
+      ← ConcreteCategory.comp_apply, ← ΓSpecIso_inv_naturality, ConcreteCategory.comp_apply]
+  have e₂ := congr($(Scheme.Hom.naturality (openImm k K hW)
+    (homOfLE (le_top : proj ⁻¹ᵁ W ≤ ⊤)).op) (scalar k c))
+  simp only [ConcreteCategory.comp_apply] at e₂
+  rw [e₂]
+  erw [e₁]
+  rw [show (TopologicalSpace.Opens.leTop (⊤ : (Spec (tensorRing k K hW)).Opens)) = 𝟙 _ from
+    Subsingleton.elim _ _, op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+
+lemma sectionsBaseChange_smul (c : K)
+    (x : Γ((Modules.pullback (proj (k := k) (K := K))).obj M, proj ⁻¹ᵁ W)) :
+    sectionsBaseChange K hW M (((Limits.pullback (X ↘ Spec (.of k))
+          (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.map
+            (homOfLE (le_top : proj ⁻¹ᵁ W ≤ ⊤)).op
+            (scalar k c)) • x) = inclRight k K hW c • sectionsBaseChange K hW M x := by
+  have h₁ : sectionsBaseChange₁ K hW M (((Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.map
+        (homOfLE (le_top : proj ⁻¹ᵁ W ≤ ⊤)).op (scalar k c)) • x) =
+      (Spec (tensorRing k K hW)).presheaf.map (TopologicalSpace.Opens.leTop ⊤).op
+        ((ΓSpecIso (tensorRing k K hW)).inv (inclRight k K hW c)) •
+          sectionsBaseChange₁ K hW M x := by
+    simp only [sectionsBaseChange₁, AddEquiv.ofBijective_apply, AddMonoidHom.coe_mk,
+      ZeroHom.coe_mk]
+    rw [pullbackUnitApp_smul, Modules.map_smul, openImm_app_scalar]
+  rw [sectionsBaseChange_apply, sectionsBaseChange_apply, h₁, LinearEquiv.map_smul,
+    LinearEquiv.map_smul, smul_Spec_def]
 
 end BaseChangeField
 
