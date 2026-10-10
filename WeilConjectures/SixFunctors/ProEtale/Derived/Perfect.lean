@@ -115,7 +115,8 @@ lemma derivedDual_obj (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology 
 tensor–internal-hom adjunction, for the coefficient dual `K^∨ = RHom(K, Λ_X)`. -/
 noncomputable def derivedDualEval (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     K ⊗ (derivedDual A X).obj (op K) ⟶ 𝟙_ _ :=
-  (ihom.ev K).app (𝟙_ _)
+  -- The intermediate type keeps the kernel from unfolding the derived tensor product.
+  show K ⊗ (ihom K).obj (𝟙_ _) ⟶ 𝟙_ _ from (ihom.ev K).app (𝟙_ _)
 
 /-- Blueprint `rem-ptr-pod-perfect-complex-on-x-5`: the evaluation of the coefficient dual is the
 map corresponding to the identity of `K^∨` under the tensor–internal-hom adjunction. -/
