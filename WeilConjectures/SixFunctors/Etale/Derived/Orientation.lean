@@ -98,9 +98,10 @@ In the blueprint an orientation is **not** an assumption: it is the smooth purit
 `sk-thm-smooth-purity`, which lives in a different blueprint block; see
 `AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`).
 This structure therefore records only the interface that purity produces and that the six
-operations consume; the blueprint's naturality in `Y` and its compatibilities with composition,
-étale base change, finite reduction, scalar extension and the pro-étale realization quantify
-over data that this block does not have and are not among its fields.
+operations consume. The blueprint's naturality in `Y` and its compatibilities with composition,
+étale base change, finite reduction, scalar extension and the pro-étale realization concern the
+whole family of orientations; they are the conditions of
+`AlgebraicGeometry.Etale.OrientationDatum` (`def-sf-orientation`).
 
 For the structure morphism `f = a_X` the isomorphism reads `ω_X ≅ Λ_X(d)[2d]`; see
 `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`. -/
