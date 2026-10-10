@@ -23,9 +23,63 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an object W of the site. Exactness of a complex of presheaves of O-modules is checked objectwise, so it suffices to show H_p(K(W)) = 0 for p > 0. By the definition of O_V, K_p(W) is the free O(W)-module on pairs (i_0,...,i_p; psi), where psi is a morphism W -> U_i0 x_U ... x_U U_ip. The differential sends such a basis element to the alternating sum of the basis elements obtained by deleting one index and composing psi with the corresponding projection.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT, proof, first display; coefficients as in Lemma Tag 03F5"
+   }
+  },
+  {
+   "text": "For each morphism phi: W -> U let Mor_phi(W,U_i) be the set of lifts chi: W -> U_i whose composite to U is phi, and let S_phi be the disjoint union of these lift sets over i. The universal property of the fibre products gives a bijection between morphisms W -> U_i0 x_U ... x_U U_ip over phi and tuples of lifts in the corresponding Mor_phi sets. The projections delete tuple entries, so the basis set in degree p is the disjoint union over phi of S_phi^(p+1), compatibly with every face map.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT, proof: decomposition by phi and the sets of lifts"
+   }
+  },
+  {
+   "text": "Free modules on disjoint unions are direct sums, so the preceding identifications give an isomorphism of chain complexes K(W) = direct_sum over phi of C(S_phi; O(W)), where C_p(S;A) is the free A-module on (p+1)-tuples with the alternating deletion differential. Homology of a direct sum of complexes is the direct sum of the homologies.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT, proof; Lemma Tag 03F5, proof, first argument after tensoring with O(W)"
+   }
+  },
+  {
+   "text": "For p > 0 and each phi, if S_phi is empty then its summand is the zero complex. If S_phi is nonempty, the cited power-set complex lemma with A = O(W) gives H_p(C(S_phi; O(W))) = 0; its contracting homotopy inserts a chosen element of S_phi. Hence every summand has zero positive-degree homology, so H_p(K(W)) = 0 for all p > 0 and every W. Therefore K is exact in every positive degree as a presheaf complex.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03AT, proof, last paragraph; Lemma Tag 03F5, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F5, using the contracting-homotopy proof of Tag 03AT"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +104,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-ringed-site-free-cech-complex-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 03F5 and 03AT and split the general ringed-site free presheaf Cech exactness argument into four steps: objectwise basis description, decomposition by maps to the target and lift sets, direct-sum decomposition, and positive-degree acyclicity of each lift-set summand. The existing power-set complex node supplies the only non-elementary homological input; no new node was needed.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-ga-cohomology proof, second paragraph, sentence asserting exactness of the free presheaf Cech complex in positive degrees.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-set-complex-contractible",
+    "why": "Step 4 takes its empty-set case and positive-degree exactness via the insertion contracting homotopy; this set-level complex is a generic tool from another unit and no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fce",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fce (reviewer sub-agent of L); spot-checked: Source: Stacks 03F5 (sites-cohomology lemma-complex-tensored-still-exact) and 03AT (lemma-homology-complex) proof; the item statement (unchanged) is 03F5 specialised to a ringed site and a covering (fibre products exist by site axiom (iii) of def-weil-pbc-sites-and-cohomology), O_V(W) the free O(W)-module on Hom(W,V), conclusion exactness in positive degrees: agrees hypothesis by hypothesis (Stacks allows a presheaf of rings, the node a sheaf, a special case). Only owned fields changed (proof, proof_deps, proof_origin, status, split_report). Step 1: objectwise exactness in presheaf modules and the basis of K_p(W), from the item's own definition of O_V and def-weil-presheaf-modules-sheafification; elementary. Step 2: universal property of the iterated fibre product over U gives basis in degree p = disjoint union over phi:W->U of S_phi^{p+1}, faces = deletion; checked, elementary. Step 3: free module on disjoint union = direct sum, so K(W) = sum_phi C(S_phi;O(W)) with C as defined in lem-weil-pbc-power-set-complex-contractible; elementary. Step 4: that node states H_p(C(S;A))=0 for p>0 when S nonempty (any ring A, so O(W) qualifies) and C_p=0 when S empty; both cases used exactly as stated, homology commutes with direct sums. Tool use lem-weil-pbc-power-set-complex-contractible (unit sk-thm-p1): generic set-level black box, no node of sk-prop-cd states it, accepted (C8). No new nodes, no Mathlib leaf. Small cases: one-index identity cover (S_phi a singleton for every phi, complex A<-A<-A... with maps 0,id,0,id: exact in positive degrees), empty covering family (K=0), U_i=U twice (S_phi two-element set, contractible). Start Sat Oct 10 04:32:14 PM UTC 2026, end Sat Oct 10 04:32:43 PM UTC 2026."
+ }
 }
