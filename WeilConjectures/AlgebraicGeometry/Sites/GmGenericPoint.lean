@@ -235,7 +235,8 @@ generic point of `X`: the local ring of `V` at `h w` is a field, so the map of l
 is injective. -/
 lemma exists_opens_res_eq_zero (V : X.Etale) {W : Scheme.{u}} (h : W ⟶ V.left) (w : W)
     (hw : V.hom (h w) = genericPoint X) (a : Γ(V.left, ⊤)) (ha : h.appTop a = 0) :
-    ∃ (N : V.left.Opens) (_ : h w ∈ N), V.left.presheaf.map (homOfLE (le_top : N ≤ ⊤)).op a = 0 := by
+    ∃ (N : V.left.Opens) (_ : h w ∈ N),
+      V.left.presheaf.map (homOfLE (le_top : N ≤ ⊤)).op a = 0 := by
   let := (isField_stalk_of_hom_eq_genericPoint V hw).toField
   have hgerm : V.left.presheaf.germ ⊤ (h w) trivial a = 0 := by
     refine (h.stalkMap w).hom.injective ?_
@@ -256,6 +257,7 @@ open Scheme
 variable (X : Scheme.{u}) [IsIntegral X] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   (s : Spec (.of Ω) ⟶ Spec X.functionField)
 
+omit [IsSepClosed Ω] in
 /-- The geometric point `s ≫ i` of `X` lies over the generic point. -/
 lemma comp_fromSpecFunctionField_apply (z : Spec (.of Ω)) :
     (s ≫ X.fromSpecFunctionField) z = genericPoint X := by
@@ -378,3 +380,118 @@ lemma exists_isStandardEtale_nbhd {K : Type u} [Field K] (U : (Spec (.of K)).Eta
     (Subsingleton.elim _ _)
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Etale
+
+open Scheme
+
+variable (X : Scheme.{u}) [IsIntegral X] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ Spec X.functionField)
+
+/-- **The stalks of `𝔾ₘ` along the generic point: surjectivity.** Every germ of a unit on an
+étale neighbourhood of a geometric point of `Spec k(X)` comes from an étale `X`-scheme: near the
+point, the neighbourhood is the spectrum of a standard étale `k(X)`-algebra
+(`AlgebraicGeometry.Scheme.exists_isStandardEtale_nbhd`), whose presentation and the unit are
+defined over a nonempty affine open of `X`
+(`StandardEtalePresentation.exists_etale_units_eq`). -/
+lemma surjective_stalkComparison_gmSheafToLowerStarGmSheaf :
+    Function.Surjective (stalkComparison X.fromSpecFunctionField s
+      (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField)) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  set i := X.fromSpecFunctionField
+  intro q
+  obtain ⟨U, u, γ, rfl⟩ :=
+    (pointSmallEtale s).toPresheafFiber_jointly_surjective
+      (P := (Spec X.functionField).gmSheaf.obj) q
+  set γu : Γ(U.left, ⊤)ˣ := Additive.toMul γ.down
+  let z₀ : Spec (.of Ω) := IsLocalRing.closedPoint Ω
+  have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+  obtain ⟨D, hD, hyD, hstd⟩ := exists_isStandardEtale_nbhd U (u.left z₀)
+  let W := Scheme.Etale.ofOpens U D
+  let : Algebra X.functionField Γ(W.left, ⊤) :=
+    ((Scheme.ΓSpecIso X.functionField).inv ≫ W.hom.appTop).hom.toAlgebra
+  obtain ⟨Qp⟩ := hstd.nonempty_standardEtalePresentation
+  -- a nonempty affine open `Spec R` of `X`
+  obtain ⟨_, ⟨UX, hUX, rfl⟩, hηUX, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (genericPoint X)) isOpen_univ
+  have : Nonempty UX := ⟨⟨_, hηUX⟩⟩
+  have : IsFractionRing Γ(X, UX) X.functionField :=
+    functionField_isFractionRing_of_isAffineOpen X UX hUX
+  -- spreading out the presentation and the unit
+  obtain ⟨T, _, ρ, ψ, hρ, hψρ, δ, hδ⟩ :=
+    Qp.exists_etale_units_eq (R := Γ(X, UX)) (Units.map D.ι.appTop.hom.toMonoidHom γu)
+  -- the étale `X`-scheme `V = Spec T`
+  have : Etale (Spec.map (CommRingCat.ofHom ρ)) := (HasRingHomProperty.Spec_iff (P := @Etale)).2 hρ
+  let V : X.Etale := Scheme.Etale.mk (Spec.map (CommRingCat.ofHom ρ) ≫ hUX.fromSpec)
+  let h : W.left ⟶ V.left := W.left.toSpecΓ ≫ Spec.map (CommRingCat.ofHom ψ)
+  have hi : i = Spec.map (CommRingCat.ofHom (algebraMap Γ(X, UX) X.functionField)) ≫
+      hUX.fromSpec := by
+    change X.fromSpecStalk (genericPoint X) = _
+    rw [← hUX.fromSpecStalk_eq_fromSpecStalk hηUX]
+    rfl
+  have hcomp : h ≫ V.hom = W.hom ≫ i := by
+    rw [hi]
+    change h ≫ Spec.map (CommRingCat.ofHom ρ) ≫ hUX.fromSpec = _
+    rw [← Category.assoc, ← Category.assoc]
+    congr 1
+    apply ext_of_isAffine
+    simp only [h, Scheme.Hom.comp_appTop, Scheme.toSpecΓ_appTop]
+    rw [Scheme.ΓSpecIso_naturality, ← Category.assoc, Scheme.ΓSpecIso_naturality, Category.assoc]
+    have e : (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, UX) X.functionField))).appTop =
+        (Scheme.ΓSpecIso _).hom ≫ CommRingCat.ofHom (algebraMap Γ(X, UX) X.functionField) ≫
+          (Scheme.ΓSpecIso X.functionField).inv := by
+      rw [← Category.assoc, ← Scheme.ΓSpecIso_naturality, Category.assoc]
+      erw [Iso.hom_inv_id]
+      rw [Category.comp_id]
+    refine Eq.trans ?_ (congrArg (· ≫ W.hom.appTop) e.symm)
+    simp only [Category.assoc]
+    congr 1
+    exact CommRingCat.hom_ext hψρ
+  -- the point `u` lies in `D`
+  obtain ⟨u', hu'⟩ := exists_pointSmallEtale_fiber_ofOpens s u D (by
+    rintro _ ⟨z, rfl⟩
+    rwa [show z = z₀ from Subsingleton.elim (α := Spec (.of Ω)) z z₀])
+  -- the pointed étale neighbourhood `(V, v)` of `s ≫ i`
+  let v : (pointSmallEtale (s ≫ i)).fiber.obj V := CategoryTheory.Over.homMk (u'.left ≫ h) (by
+    change (u'.left ≫ h) ≫ V.hom = s ≫ i
+    rw [Category.assoc, hcomp, ← Category.assoc]
+    exact congrArg (· ≫ i) (CategoryTheory.Over.w u'))
+  let k : W ⟶ (Hom.Etale i).obj V :=
+    MorphismProperty.Over.homMk (pullback.lift h W.hom hcomp) (pullback.lift_snd _ _ _)
+  have hk : (pointSmallEtale s).fiber.map k u' =
+      (pointSmallEtaleFiberEtaleIso i s).inv.app V v := by
+    refine CategoryTheory.Over.OverMorphism.ext ?_
+    change u'.left ≫ pullback.lift h W.hom hcomp = _
+    apply pullback.hom_ext
+    · rw [Category.assoc, pullback.lift_fst, pointSmallEtaleFiberEtaleIso_inv_app_left_fst]
+      rfl
+    · rw [Category.assoc, pullback.lift_snd, pointSmallEtaleFiberEtaleIso_inv_app_left_snd]
+      exact CategoryTheory.Over.w u'
+  -- the unit `δ` of `T` is a section of `𝔾ₘ` over `V`
+  let δ' : X.gmSheaf.obj.obj (op V) :=
+    ULift.up (Additive.ofMul (Units.map (Scheme.ΓSpecIso (.of T)).inv.hom.toMonoidHom δ))
+  refine ⟨(pointSmallEtale (s ≫ i)).toPresheafFiber V v X.gmSheaf.obj δ', ?_⟩
+  have h₁ := ConcreteCategory.congr_hom
+    (toPresheafFiber_stalkComparison i s (gmSheafToLowerStarGmSheaf i) V v) δ'
+  simp only [ConcreteCategory.comp_apply] at h₁
+  refine h₁.trans ?_
+  rw [← hk, ← hu']
+  refine ((pointSmallEtale s).toPresheafFiber_w_apply k u' _ _).symm.trans
+    (Eq.trans ?_ ((pointSmallEtale s).toPresheafFiber_w_apply (Scheme.Etale.ofOpensι U D) u' _ _))
+  refine congrArg _ (ULift.ext _ _ (congrArg Additive.ofMul (Units.ext ?_)))
+  change k.left.appTop ((pullback.fst V.hom i).appTop ((Scheme.ΓSpecIso (.of T)).inv δ.val)) =
+    D.ι.appTop γu.val
+  have hkf : k.left ≫ pullback.fst V.hom i = h := pullback.lift_fst _ _ _
+  have e₁ (x : Γ(V.left, ⊤)) : k.left.appTop ((pullback.fst V.hom i).appTop x) = h.appTop x := by
+    rw [← hkf, Scheme.Hom.comp_appTop]
+    rfl
+  have e₂ : h.appTop ((Scheme.ΓSpecIso (.of T)).inv δ.val) = ψ δ.val := by
+    have := congrArg (fun f ↦ f.hom ((Scheme.ΓSpecIso (.of T)).inv δ.val))
+      (Scheme.ΓSpecIso_naturality (CommRingCat.ofHom ψ))
+    simp only [CommRingCat.comp_apply, Iso.inv_hom_id_apply, CommRingCat.hom_ofHom] at this
+    simp only [h, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Scheme.toSpecΓ_appTop]
+    exact this
+  exact (e₁ _).trans (e₂.trans hδ)
+
+end AlgebraicGeometry.Etale
