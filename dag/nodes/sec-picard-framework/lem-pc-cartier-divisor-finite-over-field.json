@@ -22,9 +22,63 @@
   "def-nagata-effective-cartier-ideal",
   "def-sc-effective-cartier-divisor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-cartier-divisor-nowhere-dense], the complement of $D$ is scheme-theoretically dense in $X$, hence topologically dense. Thus $D$ contains no nonempty open subset of $X$.",
+   "uses": [
+    "lem-pc-cartier-divisor-nowhere-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY, proof of varieties-lemma-degree-effective-Cartier: 'Since D is nowhere dense in X' (using Divisors, Lemma 07ZU)"
+   }
+  },
+  {
+   "text": "Properness over $k$ makes $X$ finite type over $k$. Apply [lem-pc-nowhere-dense-dim-zero] to the closed nowhere-dense subscheme $D\\subseteq X$: since $\\dim X\\le1$, it has $\\dim D\\le0$ and every point of $D$ is closed in $D$.",
+   "uses": [
+    "lem-pc-nowhere-dense-dim-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY, proof of varieties-lemma-degree-effective-Cartier: 'we see that dim(D) <= 0'"
+   }
+  },
+  {
+   "text": "The effective Cartier ideal defines $D$ as a closed subscheme, so $D\\hookrightarrow X$ is a closed immersion. As $X$ is proper over $k$, [lem-weil-pbc-closed-immersion-proper] makes the composite $D\\to X\\to\\operatorname{Spec}k$ proper.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY, proof of varieties-lemma-degree-effective-Cartier: D is a closed subscheme of the proper scheme X"
+   }
+  },
+  {
+   "text": "Applying [lem-pc-dim-zero-finite-over-field] to the proper zero-dimensional $k$-scheme $D$ shows that $D\\to\\operatorname{Spec}k$ is finite and that $D$ is affine. Its ring of global sections is therefore finite-dimensional over $k$.",
+   "uses": [
+    "lem-pc-dim-zero-finite-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, applied after Tag 0AYY in the proof of varieties-lemma-degree-effective-Cartier"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cartier-divisor-nowhere-dense",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pc-dim-zero-finite-over-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYY (varieties-lemma-degree-effective-Cartier), first two sentences of the proof, using Divisors Lemma 07ZU and Varieties Lemma 06LH"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +123,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-cartier-divisor-finite-over-field",
+  "worker": "stage1",
+  "summary": "No sorry-free slopmaster2 declaration states the item's general proper-dimension-at-most-one version; the available isFinite_subschemeι_comp theorem assumes a smooth proper curve. Split the Stacks Tag 0AYY argument into the nowhere-density fact for effective Cartier divisors, the dimension drop to zero, and the Tag 06LH finiteness theorem for proper zero-dimensional schemes. The existing closed-immersion-proper node supplies properness of D over k.",
+  "blueprint": "The item is an imported child of lem-pc-degree-base-change. Steps 1-2 realize the Tag 0AYY sentence 'Since D is nowhere dense in X we see that dim(D) <= 0'; steps 3-4 realize 'Hence D is finite over k by Lemma 06LH', including affineness and finite-dimensional global sections.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Its statement gives properness of a closed subscheme of a proper scheme; no lemma of this Picard unit states this general morphism fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cdf",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cdf (reviewer sub-agent of L); spot-checked: Source read locally: Stacks 0AYY (varieties-lemma-degree-effective-Cartier-divisor), item statement agrees hypothesis by hypothesis (k field, X proper over k, dim X <= 1, D effective Cartier; D finite over k, Gamma(D,O_D) finite-dim); proof follows its first two sentences. 07ZU (divisors-lemma-complement-effective-Cartier-divisor): any scheme, effective Cartier D, complement scheme-theoretically dense - matches lem-pc-cartier-divisor-nowhere-dense. 06LH (varieties-lemma-algebraic-scheme-dim-0): algebraic k-scheme of dim 0 is affine and finite over k - lem-pc-dim-zero-finite-over-field is its proper case (proper gives finite type; empty case trivial). lem-pc-nowhere-dense-dim-zero checked by argument: a 1-dim component W of Z lies in a component C of X with dim C <= 1, so W = C (finite type over a field), and C contains a nonempty open of X (finitely many components), contradiction. Step 1 carried by lem-pc-cartier-divisor-nowhere-dense (sch.-th. dense implies dense); step 2 by lem-pc-nowhere-dense-dim-zero (finite type from proper, def-weil-proper-morphism); step 3 by lem-weil-pbc-closed-immersion-proper (c) (off-unit mathlib leaf, accepted as generic tool C8); step 4 by lem-pc-dim-zero-finite-over-field with steps 2-3. Small cases: D empty; Spec k[t], D=V(t); Y=Spec k[e]/(e^2). B10: RiemannRoch.lean:336 isFinite_subschemeι_comp is under smooth curve context, not the item. Blueprint search 'zero-dimensional finite', 'nowhere dense': 0 matches. Fixes (B3 missing citations, typo): dag/nodes/sec-picard-framework/lem-pc-cartier-divisor-nowhere-dense.json: statement/stmt_deps: cite def-nagata-scheme-theoretically-dense-open with its meaning O_X -> j_*O_U injective; dag/nodes/sec-picard-framework/lem-pc-nowhere-dense-dim-zero.json: statement/stmt_deps: cite def-weil-finite-type-morphism and def-weil-closed-immersion, nowhere density stated of the underlying set, unclosed math '$Z.' fixed; dag/nodes/sec-picard-framework/lem-pc-dim-zero-finite-over-field.json: statement/stmt_deps: cite def-weil-finite-integral-morphism (finite) and def-pc-scheme (affine). 14:35-14:36 UTC; 3 file(s) fixed by the reviewer"
+ }
 }
