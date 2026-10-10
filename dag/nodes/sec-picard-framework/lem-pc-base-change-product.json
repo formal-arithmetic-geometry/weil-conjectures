@@ -1,0 +1,66 @@
+{
+ "id": "lem-pc-base-change-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof, step (4) 'Connectedness': identifying the base change of the product with the product of the base changes",
+   "via": [
+    "lem-sc-geometrically-irreducible-product"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change commutes with a fibre product",
+ "statement": "Let $k$ be a field, let $X$ and $Y$ be schemes over $k$ [def-weil-scheme-over-base], and let $k'/k$ be a field extension [def-pc-field-extension]. There is a canonical isomorphism of $k'$-schemes [def-weil-scheme-over-base] $(X\\times_{\\operatorname{Spec}k}Y)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k' \\cong (X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k')\\times_{\\operatorname{Spec}k'}(Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k')$, where each fibre product and base change is as in [def-pc-fibre-product] and [def-pc-base-change], compatible with the projections to the two base-changed factors.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038F and the fibre-product base-change identifications used in Tag 054P"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-pc-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038F/054P fibre-product identifications"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical isomorphism between base change of a fibre product and fibre product of base changes of schemes",
+   "results": "Scheme.Pullback and pullback associativity declarations; no single named theorem matching the scheme statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullback (pullback _ _) _ ≅ pullback _ _",
+   "results": "CategoryTheory.Limits.pullback.associator and pullback.isoPullbackPullback; categorical pullback isomorphisms, not a named scheme base-change/product theorem",
+   "date": "2026-10-10",
+   "verdict": "generalization: categorical pullback associativity specializes in several one-line identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'isoPullbackPullback|pullback.*associat|base change' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits",
+   "results": "Categorical pullback associativity and Scheme.HasPullbacks, but no declaration with the displayed scheme-level statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-geometrically-irreducible-product",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian"
+}

@@ -27,9 +27,53 @@
   "def-pc-base-change",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a field extension $k'/k$. By [lem-pc-base-change-product], the base change $(X\\times_kY)\\times_k\\operatorname{Spec}k'$ is canonically the fibre product $X_{k'}\\times_{\\operatorname{Spec}k'}Y_{k'}$ of the two base-changed schemes.",
+   "uses": [
+    "lem-pc-base-change-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054P, the canonical identification of a base change of a fibre product with the fibre product of base changes"
+   }
+  },
+  {
+   "text": "The hypotheses that $X$ and $Y$ are geometrically irreducible over $k$ mean that $X_{k'}$ and $Y_{k'}$ are geometrically irreducible over $k'$: after any further field extension $K/k'$, their base changes $(X_{k'})\\times_{\\operatorname{Spec}k'}\\operatorname{Spec}K$ and $(Y_{k'})\\times_{\\operatorname{Spec}k'}\\operatorname{Spec}K$ are identified by [def-pc-base-change] (the identification $X_{T'}\\cong X_T\\times_TT'$ for $T'=\\operatorname{Spec}K\\to T=\\operatorname{Spec}k'$ over $S=\\operatorname{Spec}k$) with the base changes $X_K$ and $Y_K$ of $X$ and $Y$ along $K/k$, which are irreducible by hypothesis; irreducibility passes along these isomorphisms.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054P (lemma-geometrically-irreducible-check-after-extension), definition of geometric irreducibility"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-irreducible-product-over-field] over the field $k'$ to the geometrically irreducible schemes $X_{k'}$ and $Y_{k'}$. It follows that $X_{k'}\\times_{\\operatorname{Spec}k'}Y_{k'}$ is irreducible, and therefore, by the canonical isomorphism in Step 1, $(X\\times_kY)\\times_k\\operatorname{Spec}k'$ is irreducible.",
+   "uses": [
+    "lem-sc-irreducible-product-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038F, applied after the Tag 054P base-change identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-change-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "lem-sc-irreducible-product-over-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 038F and 054P"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -70,7 +114,7 @@
   ],
   "how": "apply to pullback.fst (Y ×_k X -> Y, geometrically irreducible as a base change) and Y -> Spec k; needs both universally open (Stacks 0383, not in Mathlib in general; UniversallyOpen.of_flat covers the locally finitely presented case)"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -90,5 +134,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-geometrically-irreducible-product",
+  "worker": "stage1",
+  "summary": "Split the geometric irreducibility claim into the canonical base-change/fibre-product identification and the Stacks Tag 038F irreducibility theorem for products of geometrically irreducible schemes. The proof then applies these facts for an arbitrary field extension and checks geometric irreducibility after further extensions.",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4), the assertion that products X^d of geometrically irreducible schemes remain irreducible after base change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gip",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gip (reviewer sub-agent of L); spot-checked: Source: varieties.tex Tag 038F (lemma-bijection-irreducible-components: X geometrically irreducible, Y any k-scheme, X x_k Y -> Y bijective on irreducible components) and Tag 054P (lemma-geometrically-irreducible-check-after-extension); item statement unchanged against sheaf-dag. New node lem-sc-irreducible-product-over-field is 038F specialised to Y irreducible (both factors assumed geometrically irreducible, stronger than needed, true; nonempty irreducible from the single component). New node lem-pc-base-change-product: (X x_k Y) x_k k' = X_k' x_k' Y_k', general fibre-product category theory, true; no existing node states it (grep of dag/nodes for the identification, 038F/054P/038G). Step 1 carried by lem-pc-base-change-product; step 2 by def-pc-geometrically-irreducible plus the transitivity X_T' = X_T x_T T' stated in def-pc-base-change; step 3 by lem-sc-irreducible-product-over-field over k' and transport along the step-1 isomorphism. Not a relabelling: the new node concludes irreducibility only, the item geometric irreducibility via base change. Mathlib candidate GeometricallyIrreducible.comp verified at Geometrically/Irreducible.lean:124-130 (needs UniversallyOpen; product instances 110-117 likewise), correctly not a leaf; blueprint_refs search 'geometrically irreducible product' 0 hits, ancestor thm-sc-jacobian-representability matches from.node; no GeometricallyIrreducible product declaration in slopmaster2 WeilConjectures (B10). Small cases: k'=k, one factor Spec k. FIX: dag/nodes/sec-picard-framework/lem-sc-geometrically-irreducible-product.json: proof[1].text/uses and proof_deps: cite [def-pc-base-change] for the identification (X_k')_K = X_K that step 2 used uncited (C4). Note: lem-pc-base-change-product source.place names 038F/054P though the fact is general category theory (maintainer's field, left). Start 15:22:37 UTC, end 15:23:45 UTC (Sat Oct 10 03:23:45 PM UTC 2026).; 1 file(s) fixed by the reviewer"
+ }
 }
