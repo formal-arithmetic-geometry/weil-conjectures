@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-smooth-localization-conormal-split",
+ "kind": "statement",
+ "title": "Smooth principal localization: the localized conormal sequence of a presentation is split exact",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, $P=R[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $I\\subseteq P$ an ideal and $A=P/I$; the conormal module $I/I^2$ is an $A$-module. Let $\\mathrm d:I/I^2\\to\\bigoplus_{i=1}^nA\\,\\mathrm dx_i$ (the free $A$-module on symbols $\\mathrm dx_1,\\dots,\\mathrm dx_n$) be the $A$-linear map $\\mathrm d(g\\bmod I^2)=\\sum_{i=1}^n\\overline{\\partial g/\\partial x_i}\\,\\mathrm dx_i$, with $\\partial/\\partial x_i$ the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative] and the bar the image in $A$. Let $a\\in A$ be such that the localization $A_a$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map], and let $\\mathrm d_a:(I/I^2)_a\\to\\bigoplus_{i=1}^nA_a\\,\\mathrm dx_i$ be the localization of $\\mathrm d$ at $a$ [def-weil-pbc-module-localization-away]. Then (1) $\\mathrm d_a$ has an $A_a$-linear left inverse (in particular it is injective); (2) the $A_a$-linear map $\\pi:\\bigoplus_{i=1}^nA_a\\,\\mathrm dx_i\\to\\Omega_{A_a/R}$, $\\mathrm dx_i\\mapsto\\mathrm d(\\bar x_i/1)$ ($\\Omega_{A_a/R}$ and its derivation as in [def-weil-pbc-kahler-differentials]), is surjective with kernel the image of $\\mathrm d_a$. Hence $0\\to(I/I^2)_a\\xrightarrow{\\mathrm d_a}\\bigoplus_{i=1}^nA_a\\,\\mathrm dx_i\\xrightarrow{\\pi}\\Omega_{A_a/R}\\to0$ is a split short exact sequence and $(I/I^2)_a\\oplus\\Omega_{A_a/R}\\cong A_a^{\\oplus n}$ as $A_a$-modules.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07EZ (lemma-compare-standard), part (e), first sentence ('By assumption we have a short exact sequence 0 -> (I/I^2)_a -> (+) A_a dx_i -> Omega_{A_a/R} -> 0 which is split exact'); the same argument in the proof of Lemma Tag 07C6 (lemma-find-strictly-standard, lines 160-170). It rests on Algebra, Lemma Tag 00S1 (lemma-NL-homotopy: the naive cotangent complex of any presentation is homotopy equivalent to NL_{A/R}), Lemma Tag 00S7 (lemma-localize-NL), Lemma Tag 08JZ (lemma-principal-localization-NL) and Definition Tag 00T2 (definition-smooth)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presentation of algebra, localization smooth, conormal module I/I^2 to differentials is split injective with cokernel Kaehler differentials",
+   "results": "Algebra.FormallySmooth.iff_split_injection, Algebra.FormallySmooth.iff_split_surjection (Mathlib.RingTheory.Smooth.Basic), RingHom.Smooth.ofLocalizationSpanTarget, Algebra.FormallySmooth.iff_injective_lTensor_residueField (Smooth.Local), KaehlerDifferential.isLocalizedModule (Kaehler.TensorProduct), Algebra.FormallySmooth.of_split",
+   "date": "2026-10-10",
+   "verdict": "generalization in several lines, not one: iff_split_injection gives the split injection I'/I'^2 -> A' (x)_P' Omega[P'/R] for a formally smooth P' surjecting onto A'; applying it needs P' = P_h (localization of the polynomial ring at a lift h of a, formally smooth over R) and the identification ker(P_h -> A_a)/^2 = (I/I^2)_a"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A = P/I is formally smooth over R, with P polynomial ring, then I/I^2 -> A (x) Omega[P/R] is split injective and its cokernel is Omega[A/R]",
+   "results": "Algebra.FormallySmooth.iff_split_injection, Algebra.Extension.formallySmooth_iff_split_injection (Mathlib.RingTheory.Smooth.Basic, line 291 and nearby), Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField (Smooth.Local), Algebra.formallySmooth_iff",
+   "date": "2026-10-10",
+   "verdict": "candidate, not a one-line specialization (see leansearch); the cokernel part is KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange (Mathlib/RingTheory/Kaehler/Basic.lean line 839)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iff_split_injection' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean; grep -n 'exact_kerCotangentToTensor_mapBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Kaehler/Basic.lean",
+   "results": "Algebra.FormallySmooth.iff_split_injection (Smooth/Basic.lean line 291, @[stacks 031I]: P formally smooth over R, P -> A surjective: A formally smooth iff exists l with l o kerCotangentToTensor R P A = id); KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange (Kaehler/Basic.lean line 839); no statement about a localized presentation (I/I^2)_a",
+   "date": "2026-10-10",
+   "verdict": "no exact match; Lean route: iff_split_injection with P = Localization.Away h plus the localization of the conormal module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
