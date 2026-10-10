@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-pbc-geometric-stalks-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exactness of geometric stalks",
@@ -15,28 +15,45 @@
  "stmt_deps": [
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "By [def-weil-pbc-geometric-stalks] the stalk $F_{\\bar t}$ is the filtered\ncolimit of the section groups over pointed etale neighbourhoods. The category\nof [def-weil-pbc-etale-sheaves] on $T_{\\Et}$ is Grothendieck abelian, so\nfiltered colimits of sheaves are exact: kernels and images of the colimit are\nthe colimits of the kernels and images. Applied to a short exact sequence\n$0\\to F\\to G\\to H\\to0$ this gives exactness of the sequence of colimits over\nthe filtered index category of pointed neighbourhoods on the kernel and image\nparts, and for the cokernel part a section of $H$ over a pointed\nneighbourhood which lifts over an etale cover of it still represents a\nsection of the filtered colimit after composing the index with a pointed\netale refinement; hence the sequence of stalks is exact.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-etale-sheaves"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "fiber functor of a point of a site on sheaves preserves finite limits",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize and the presheafFiber analogue (Mathlib.CategoryTheory.Sites.Point.Basic); Point.sheafFiber; Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "date": "2026-10-10",
+   "verdict": "match (left exactness clause)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.GrothendieckTopology.Point.sheafFiber _)",
+   "results": "Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize (Mathlib.CategoryTheory.Sites.Point.Basic), the only hit",
+   "date": "2026-10-10",
+   "verdict": "match (left exactness clause)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk functor at a point of a site is exact on abelian sheaves",
+   "results": "Sheaf.hasExactColimitsOfShape, Sheaf.instIsGrothendieckAbelian (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf); Point.instHasExactColimitsOfShapeOppositeElementsFiber... (Mathlib.CategoryTheory.Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "related: the last is the ingredient of the PreservesFiniteLimits instance; no single 'exact' declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exact\\|PreservesFiniteLimits\\|IsLeftAdjoint\\|instance' Mathlib/CategoryTheory/Sites/Point/*.lean; grep -rn map_of_exact Mathlib/Algebra/Homology; grep AB5 Mathlib/Algebra/Category/Grp/AB.lean; grep -rn sheafFiber WeilConjectures (slopmaster2)",
+   "results": "Point/Basic.lean:289-291 instance PreservesFiniteLimits Φ.sheafFiber [LocallySmall.{w} C] [HasFiniteLimits A] [AB5OfSize.{w,w} A]; Point/Skyscraper.lean:234-235 instance (Φ.sheafFiber (A := A)).IsLeftAdjoint (variables lines 26-28 [HasProducts.{w} A], 218 [HasColimitsOfSize.{w,w} A]); Algebra/Category/Grp/AB.lean:61-62 instance AB5 AddCommGrpCat.{u}; Algebra/Homology/ShortComplex/ShortExact.lean:107-112 ShortComplex.ShortExact.map_of_exact; Limits/Preserves/Shapes/Zero.lean:73 preservesZeroMorphisms_of_isLeftAdjoint; slopmaster2 KernelCokernel.lean:271-279 has the same finite-colimit argument only for ModuleCat.{u+1} Λ, no exactness declaration for AddCommGrpCat",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-sheaves"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/prop-weil-pbc-geometric-stalks-exact.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point (instance (Φ.sheafFiber).IsLeftAdjoint); CategoryTheory.ShortComplex.ShortExact.map_of_exact",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "how": "one declaration per clause, with Φ = AlgebraicGeometry.Scheme.pointSmallEtale s (s : Spec Ω ⟶ T, Ω separably closed; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64-65, a Point.{u} of smallEtaleTopology T, the stalk of [def-weil-pbc-geometric-stalks]) and A = AddCommGrpCat.{u}. Left exact: Point/Basic.lean:289-291, instance PreservesFiniteLimits Φ.sheafFiber under [LocallySmall.{u} C] (homs of Etale T lie in Type u), [HasFiniteLimits A] and [AB5OfSize.{u,u} A] = AB5 AddCommGrpCat.{u} (Algebra/Category/Grp/AB.lean:61-62). Right exact: Point/Skyscraper.lean:234-235, instance (Φ.sheafFiber (A := A)).IsLeftAdjoint (adjoint the skyscraper sheaf, :222-223; needs HasProducts.{u} and HasColimitsOfSize.{u,u}, both true for AddCommGrpCat.{u}), so it preserves all colimits of size u, in particular finite colimits, and zero morphisms (Limits/Preserves/Shapes/Zero.lean:73 preservesZeroMorphisms_of_isLeftAdjoint). Exactness in the sense of short exact sequences: Algebra/Homology/ShortComplex/ShortExact.lean:107-112, ShortExact.map_of_exact takes these three instances and sends every short exact sequence 0→F→G→H→0 of sheaves to a short exact sequence of stalks."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -62,5 +79,17 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "prop-weil-pbc-geometric-stalks-exact",
+  "worker": "stage1",
+  "summary": "Rule-0 search: no slopmaster2 declaration names this node or states exactness of sheafFiber with values in abelian groups (grep of WeilConjectures and Comparator for the id and for sheafFiber with exact/Preserves; KernelCokernel.lean:271-279 proves PreservesFiniteColimits only for ModuleCat.{u+1} Λ). Mathlib states the node clause by clause for the stalk functor (pointSmallEtale s).sheafFiber of [def-weil-pbc-geometric-stalks] on Sheaf (smallEtaleTopology T) AddCommGrpCat.{u}: PreservesFiniteLimits (Point/Basic.lean:289-291, using AB5 of AddCommGrpCat), IsLeftAdjoint to the skyscraper sheaf (Point/Skyscraper.lean:234-235), hence finite colimits and zero morphisms, and ShortExact.map_of_exact (ShortExact.lean:107-112) packages them as preservation of short exact sequences. All hypotheses were checked against the variable lines of the files. The item is therefore a Mathlib leaf; the imported one-step proof (filtered colimits are exact; local lifting for the cokernel part) is dropped, as a leaf carries no proof. The imported proof's argument is exactly Mathlib's: left exactness from AB5 for the cofiltered category of elements (Point/Basic.lean:90-93), right exactness from the adjunction with the skyscraper sheaf.",
+  "blueprint": {
+   "steps": [],
+   "places": "The whole '## Proof' of prop-weil-pbc-geometric-stalks-exact (single paragraph): 'filtered colimits ... are exact' is the PreservesFiniteLimits instance (AB5), the cokernel/lifting part is the IsLeftAdjoint instance; both realized by the Mathlib match, no steps.",
+   "same_as_search": "blueprint_refs.py search 'stalk exact' (12 hits) and 'stalk functor' (4 hits); grep -rl geometric-stalks-exact and sheafFiber in dag/nodes. lem-kun-stalks-commute-colimits states only commutation with colimits (right exactness part), lemma-openclosed-point-ulift is about universe raising; neither states exactness, so same_as = []."
+  }
+ },
+ "reviewed": "2026-10-10 L: Mathlib leaf: sheafFiber of the etale point preserves finite limits (Point/Basic.lean:289, AB5 for AddCommGrp) and is a left adjoint (Skyscraper.lean:234), hence exact; lines read; 0 new nodes"
 }

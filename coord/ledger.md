@@ -1289,3 +1289,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of H1: lem-weil-pbc-grothendieck-regular-sequence-flat merged from deliver/H1/lem-weil-pbc-grothendieck-regular-sequence-flat (1 commit(s), 0 new node(s), spot-checked by L: L: 00MG by induction with 00ME/00MF); claim closed
 - 11:17 L: merged C1 lem-weil-pbc-normal-domain-fractional-principal-quotient-ass (031T (3), +1 node), H1 def-weil-pbc-analytically-unramified (032X), H1 lem-weil-pbc-fs-adic-field-regular-local (07EI), H1 lem-weil-pbc-grothendieck-regular-sequence-flat (00MG).
 - 11:19 L: accepted lem-weil-pbc-koszul-differential (6 steps; new Mathlib leaf lem-weil-pbc-koszul-differential-existence, contractLeft).
+- 11:20 L: accepted prop-weil-pbc-geometric-stalks-exact as a Mathlib leaf (sheafFiber preserves finite limits and is a left adjoint).
