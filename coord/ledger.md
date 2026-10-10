@@ -1063,3 +1063,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:14 L: accepted lem-weil-pbc-differentials-dimension-bound-smooth-at-prime (6 steps; new unsplit nodes smooth-at-maximal-ideal-alg-closed-differentials-bound and smooth-at-prime-field-extension-descent).
 - 08:18 L: accepted lem-weil-pbc-dimension-supremum-local-dimensions (4 steps; new leaf open-subspace-irreducible-closed-correspondence, IrreducibleCloseds.orderIsoOfIsOpenEmbedding).
 - 08:18 L: accepted lem-weil-pbc-finite-separable-tensor-field-reduced (4 steps; new unsplit node separable-polynomial-quotient-reduced). Stage-3 note: the source repository's WeilConjectures/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean has isReduced_tensorProduct_of_formallyUnramified without sorry.
+- 08:20 L: accepted lem-weil-pbc-smooth-over-field-regular-local (8 steps, no new nodes).
