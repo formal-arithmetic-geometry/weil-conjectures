@@ -28,6 +28,8 @@ Step 1). Consequently, if `Hilb^d_{Y/S}` is representable, so is `Hilb^d_{X/S}`.
 
 ## Main statements
 
+- `AlgebraicGeometry.exists_comap_le_comap_iff_le_ker`: over an affine base `T`, the locus where
+  a point of `Hilb^d_{Y/S}(T)` is contained in a given closed subscheme of `Y_T` is closed.
 - `AlgebraicGeometry.exists_le_ker_iff_mem_range_hilbertPresheafCompι`: the closed-immersion
   claim, for an affine base `T`.
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`: if `Hilb^d_{Y/S}`
@@ -232,6 +234,49 @@ private lemma projective_appTop {X' Y' : Scheme.{u}} [IsAffine X'] [IsAffine Y']
   have := Module.FinitePresentation.of_finite_of_finitePresentation Γ(Y', ⊤) Γ(X', ⊤)
   exact Module.Flat.projective_of_finitePresentation
 
+/-- **The containment locus over an affine base** (blueprint `lem-pc-hilb-representable`,
+Step 1). Let `T` be an affine `S`-scheme, `Z ∈ Hilb^d_{Y/S}(T)` with ideal sheaf `I` and `W ⊆ Y_T`
+any closed subscheme with ideal sheaf `J`. There is a closed subscheme of `T`, given by its ideal
+sheaf `K`, such that for every affine `S`-scheme `W'` over `T` the pullback `Z_{W'}` lies in
+`W_{W'}` if and only if `W' ⟶ T` factors through it.
+
+With `T = Spec A`, `Z = Spec B` for a finite projective `A`-algebra `B`, the ideal of `K` is the
+dual content of the image of `J` in `B`. -/
+theorem exists_comap_le_comap_iff_le_ker {d : ℕ} (T : Over S) [IsAffine T.left]
+    {I : (pullback g T.hom).IdealSheafData} (hI : IsHilbertSubscheme g d T I)
+    (J : (pullback g T.hom).IdealSheafData) :
+    ∃ K : T.left.IdealSheafData, ∀ (W : Over S) [IsAffine W.left] (a : W ⟶ T),
+      J.comap (baseChangeMap g a) ≤ I.comap (baseChangeMap g a) ↔ K ≤ a.left.ker := by
+  obtain ⟨hfin, hflat, hfp, hd⟩ := hI
+  have : IsAffine I.subscheme := isAffine_of_isAffineHom (I.subschemeι ≫ pullback.snd g T.hom)
+  let k := (J.comap I.subschemeι).ideal ⟨⊤, isAffineOpen_top _⟩
+  let := (I.subschemeι ≫ pullback.snd g T.hom).appTop.hom.toAlgebra
+  refine ⟨.ofIdealTop (k.restrictScalars Γ(T.left, ⊤)).dualContent, fun W _ a ↦ ?_⟩
+  have hJ := IsHilbertSubscheme.comap a ⟨hfin, hflat, hfp, hd⟩
+  have : IsFinite ((I.comap (baseChangeMap g a)).subschemeι ≫ pullback.snd g W.hom) := hJ.1
+  have : IsAffine (I.comap (baseChangeMap g a)).subscheme :=
+    isAffine_of_isAffineHom ((I.comap (baseChangeMap g a)).subschemeι ≫ pullback.snd g W.hom)
+  have hpb := (isPullback_comap_subschemeι I (baseChangeMap g a)).flip.paste_vert
+    (isPullback_baseChangeMap g a)
+  have key : J.comap (baseChangeMap g a) ≤ I.comap (baseChangeMap g a) ↔
+      (J.comap I.subschemeι).comap
+        ((I.comapIso (baseChangeMap g a)).hom ≫ pullback.snd _ I.subschemeι) = ⊥ := by
+    rw [← Scheme.IdealSheafData.comap_comp,
+      ← (isPullback_comap_subschemeι I (baseChangeMap g a)).w,
+      Scheme.IdealSheafData.comap_comp]
+    refine ⟨fun h ↦ le_bot_iff.mp ((Scheme.IdealSheafData.comap_mono _ h).trans_eq
+      (Scheme.IdealSheafData.comap_subschemeι _)), fun h ↦ ?_⟩
+    exact (Scheme.IdealSheafData.le_ker_of_comap_eq_bot _ h).trans_eq
+      (Scheme.IdealSheafData.ker_subschemeι _)
+  refine key.trans ?_
+  rw [Scheme.ker_of_isAffine, ← Scheme.IdealSheafData.equivOfIsAffine_symm_apply,
+    ← Scheme.IdealSheafData.equivOfIsAffine_symm_apply, map_le_map_iff,
+    ← Ideal.map_eq_bot_iff_le_ker,
+    ← CommRingCat.map_eq_bot_iff_of_isPushout (isPushout_appTop_of_isPullback hpb)
+      (projective_appTop _),
+    eq_bot_iff_ideal_top_eq_bot,
+    Scheme.IdealSheafData.ideal_top_comap_of_isAffine]
+
 /-- **The closed-immersion claim** (blueprint `lem-pc-hilb-representable`, Step 1). For a closed
 immersion `i : X ⟶ Y`, an affine `S`-scheme `T` and `Z ∈ Hilb^d_{Y/S}(T)`, there is a closed
 subscheme `T_X ⊆ T`, given by its ideal sheaf `K`, such that for every affine `W` over `T` the
@@ -241,37 +286,10 @@ theorem exists_le_ker_iff_mem_range_hilbertPresheafCompι (d : ℕ) (T : Over S)
     ∃ K : T.left.IdealSheafData, ∀ (W : Over S) [IsAffine W.left] (a : W ⟶ T),
       (∃ x, (hilbertPresheafCompι i g d).app (op W) x = (hilbertPresheaf g d).map a.op z) ↔
         K ≤ a.left.ker := by
-  obtain ⟨I, hfin, hflat, hfp, hd⟩ := z
-  have : IsAffine I.subscheme := isAffine_of_isAffineHom (I.subschemeι ≫ pullback.snd g T.hom)
-  let L := (pullbackCompMap i g T).ker
-  let k := (L.comap I.subschemeι).ideal ⟨⊤, isAffineOpen_top _⟩
-  let := (I.subschemeι ≫ pullback.snd g T.hom).appTop.hom.toAlgebra
-  refine ⟨.ofIdealTop (k.restrictScalars Γ(T.left, ⊤)).dualContent, fun W _ a ↦ ?_⟩
-  have hJ := ((hilbertPresheaf g d).map a.op ⟨I, hfin, hflat, hfp, hd⟩).2
-  have : IsFinite ((I.comap (baseChangeMap g a)).subschemeι ≫ pullback.snd g W.hom) := hJ.1
-  have : IsAffine (I.comap (baseChangeMap g a)).subscheme :=
-    isAffine_of_isAffineHom ((I.comap (baseChangeMap g a)).subschemeι ≫ pullback.snd g W.hom)
-  have hpb := (isPullback_comap_subschemeι I (baseChangeMap g a)).flip.paste_vert
-    (isPullback_baseChangeMap g a)
-  have key : (pullbackCompMap i g W).ker ≤ I.comap (baseChangeMap g a) ↔
-      (L.comap I.subschemeι).comap
-        ((I.comapIso (baseChangeMap g a)).hom ≫ pullback.snd _ I.subschemeι) = ⊥ := by
-    rw [ker_pullbackCompMap_eq_comap i g a, ← Scheme.IdealSheafData.comap_comp,
-      ← (isPullback_comap_subschemeι I (baseChangeMap g a)).w,
-      Scheme.IdealSheafData.comap_comp]
-    refine ⟨fun h ↦ le_bot_iff.mp ((Scheme.IdealSheafData.comap_mono _ h).trans_eq
-      (Scheme.IdealSheafData.comap_subschemeι _)), fun h ↦ ?_⟩
-    exact (Scheme.IdealSheafData.le_ker_of_comap_eq_bot _ h).trans_eq
-      (Scheme.IdealSheafData.ker_subschemeι _)
-  rw [exists_hilbertPresheafCompι_app_eq_iff]
-  refine key.trans ?_
-  rw [Scheme.ker_of_isAffine, ← Scheme.IdealSheafData.equivOfIsAffine_symm_apply,
-    ← Scheme.IdealSheafData.equivOfIsAffine_symm_apply, map_le_map_iff,
-    ← Ideal.map_eq_bot_iff_le_ker,
-    ← CommRingCat.map_eq_bot_iff_of_isPushout (isPushout_appTop_of_isPullback hpb)
-      (projective_appTop _),
-    eq_bot_iff_ideal_top_eq_bot,
-    Scheme.IdealSheafData.ideal_top_comap_of_isAffine]
+  obtain ⟨K, hK⟩ := exists_comap_le_comap_iff_le_ker g T z.2 (pullbackCompMap i g T).ker
+  refine ⟨K, fun W _ a ↦ ?_⟩
+  rw [exists_hilbertPresheafCompι_app_eq_iff, ker_pullbackCompMap_eq_comap i g a]
+  exact hK W a
 
 /-- **The closed-immersion claim, representability** (blueprint `lem-pc-hilb-representable`,
 Step 1). For a closed immersion `i : X ⟶ Y` and `g : Y ⟶ S`, the functor `Hilb^d_{X/S}` is a
