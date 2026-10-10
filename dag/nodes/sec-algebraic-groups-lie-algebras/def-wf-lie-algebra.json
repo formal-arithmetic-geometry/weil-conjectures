@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-wf-lie-algebra",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Lie algebras, ideals, solvability and Lie representations",
@@ -12,13 +12,107 @@
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-lie/def-wf-lie-algebra.md",
   "place": "node def-wf-lie-algebra, order 2463"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-wf-algebraic-representations"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra over a commutative ring LieRing LieAlgebra LieIdeal derived series solvability LieModule representation",
+   "results": "LieAlgebra.IsSolvable; LieAlgebra.IsSolvable.solvable; LieAlgebra.isSolvable_iff; LieModule.IsNilpotent (Mathlib/Algebra/Lie/Solvable, Mathlib/Algebra/Lie/Nilpotent)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieRing, LieAlgebra, LieIdeal, LieAlgebra.derivedSeries, LieAlgebra.IsSolvable, LieModule, LieModule.toEnd",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(class LieRing|class LieAlgebra|def derivedSeries|def IsSolvable|class LieIdeal|def toEnd|class LieModule) in Mathlib/Algebra/Lie",
+   "results": "no hits (initial regex query)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra definitions, ideals, derived series, solvability, quotient, Lie representations",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "LieIdeal quotient LieModule.toEnd LieAlgebra.derivedSeries",
+   "results": "LieAlgebra.derivedSeriesOfIdeal; LieAlgebra.derivedSeries; LieAlgebra.derivedSeries_def (Mathlib/Algebra/Lie/Solvable)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.derivedSeries, LieIdeal, LieModule.toEnd",
+   "results": "LieModule.trace_toEnd_mul_eq_zero_of_traceForm_eq_zero (Mathlib/Algebra/Lie/TraceForm)",
+   "date": "2026-10-11",
+   "verdict": "generalization: related toEnd theorem, not the definition bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "LieAlgebra.IsSolvable in Algebra/Lie/Solvable.lean",
+   "results": "Mathlib/Algebra/Lie/Solvable.lean:261-275 (IsSolvable and derived-series API)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "LieIdeal in Algebra/Lie",
+   "results": "Mathlib/Algebra/Lie/Ideal.lean:46 (LieIdeal abbreviation and ideal API)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "LieModule.toEnd in Algebra/Lie",
+   "results": "Mathlib/Algebra/Lie/OfAssociative.lean:192-199",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure LieSubalgebra|structure LieSubmodule|class IsSemisimple|IsPerfect|ofAssociativeAlgebra in Mathlib/Algebra/Lie",
+   "results": "LieSubalgebra Subalgebra.lean:45; LieSubmodule Submodule.lean:43; LieAlgebra.ofAssociativeAlgebra OfAssociative.lean:103; LieAlgebra.IsSemisimple (algebras only) Semisimple/Defs.lean:105; no IsPerfect, no semisimple Lie module",
+   "date": "2026-10-11",
+   "verdict": "match (reviewer R-dla3054)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LieRing; LieAlgebra; LieAlgebra.ofAssociativeAlgebra; LieSubalgebra; LieModule; LieSubmodule; LieIdeal; LieAlgebra.derivedSeriesOfIdeal; LieAlgebra.derivedSeries; LieAlgebra.IsSolvable; LieSubmodule.Quotient.lieQuotientLieAlgebra; LieModule.toEnd; LieAlgebra.ad; LieModule.IsFaithful; LieModule.IsIrreducible",
+  "file": "Mathlib/Algebra/Lie/Basic.lean; Mathlib/Algebra/Lie/OfAssociative.lean; Mathlib/Algebra/Lie/Subalgebra.lean; Mathlib/Algebra/Lie/Submodule.lean; Mathlib/Algebra/Lie/Ideal.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Quotient.lean; Mathlib/Algebra/Lie/Semisimple/Defs.lean",
+  "lines": [
+   61,
+   73,
+   103,
+   45,
+   93,
+   43,
+   46,
+   57,
+   71,
+   261,
+   163,
+   192,
+   202,
+   230,
+   33
+  ],
+  "how": "Over a field k (a commutative ring), LieRing + LieAlgebra k L (Basic.lean:61,73) are the bilinear alternating bracket (add_lie, lie_add, lie_self, lie_smul) with the Leibniz form of Jacobi, equivalent to the cyclic form given lie_self; End(V) with XY-YX is LieRing.ofAssociativeRing/LieAlgebra.ofAssociativeAlgebra (OfAssociative.lean:50,103); subalgebra = LieSubalgebra (Subalgebra.lean:45); Lie representation = LieModule k L V (Basic.lean:93), equivalently the Lie hom LieModule.toEnd : L ->[k] End V (OfAssociative.lean:192); Lie-invariant subspace = LieSubmodule (Submodule.lean:43); ideal = LieIdeal (Ideal.lean:46); quotient = lieQuotientLieAlgebra (Quotient.lean:163); derived sequence = derivedSeriesOfIdeal / derivedSeries (Solvable.lean:57,71), solvable = IsSolvable (Solvable.lean:261; isSolvable_iff gives the k-form); ad = LieAlgebra.ad (OfAssociative.lean:202); faithful = LieModule.IsFaithful (OfAssociative.lean:230); simple = LieModule.IsIrreducible (Semisimple/Defs.lean:33, IsSimpleOrder includes V != 0). One-line specializations without a named Mathlib declaration: perfect is derivedSeries k L 1 = top; a semisimple representation is a family of irreducible LieSubmodules N_i with DirectSum.IsInternal N_i."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +131,21 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-d-lie"
+ "unit": "sk-d-lie",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-wf-lie-algebra",
+  "worker": "stage1",
+  "summary": "The complete definition bundle is already provided by Mathlib's LieRing, LieAlgebra, LieIdeal, derived-series, IsSolvable, quotient, LieModule, and LieModule.toEnd declarations; no project declaration or child node is needed.",
+  "blueprint": "The item realizes the sk-d-lie blueprint definition node directly; all clauses are covered by the Mathlib declarations recorded in mathlib_match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dla3054",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dla3054 (reviewer sub-agent of L); spot-checked: Read with sed LieRing/LieAlgebra (Basic.lean:61,73), LieModule (93), LieIdeal, derivedSeriesOfIdeal/derivedSeries/IsSolvable, lieQuotientLieAlgebra, toEnd/ad/IsFaithful, IsIrreducible; over a field k, Leibniz form = Jacobi given lie_self; no duplicate Lie-algebra definition (def-wf-lie-algebra-derivation is the tangent-space Lie algebra of a group and cites this node). FIX more, RETURN less: (1) B8 mathlib_match made one declaration per clause: added LieAlgebra.ofAssociativeAlgebra (End(V) example), LieSubalgebra, LieSubmodule (Lie-invariant), LieAlgebra.ad; perfect and semisimple representation recorded as one-line specializations; grep query recorded in mathlib_searches. Spurious stmt_dep kept only because the tool requires one (see lead note).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dla3054): stmt_deps def-wf-algebraic-representations (algebraic-group modules) is not used by the statement; the node is a true root (only field/vector space), but review_split rejects a definition with empty stmt_deps, so the edge was kept; the second reading claimed to have removed it but had not."
 }
