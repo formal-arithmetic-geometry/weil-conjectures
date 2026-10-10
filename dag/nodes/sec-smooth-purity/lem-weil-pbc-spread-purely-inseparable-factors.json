@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Spreading purely inseparable factors",
- "statement": "Let $A$ be a Noetherian integral domain with fraction field $K$, let $A'$ be a finite etale $A$-algebra [def-weil-etale-morphism] that is a domain with fraction field $K'$, and let $E$ be a finite $A'$-algebra that is a domain with fraction field $L$, where $L/K'$ is finite purely inseparable [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. After replacing $A$ by a further principal localization and base-changing $A'$ and $E$, the induced morphism $\\operatorname{Spec}(E)\\to\\operatorname{Spec}(A')$ is surjective [def-weil-surjective-morphism] and radicial [def-weil-radicial-morphism], hence a universal homeomorphism [def-weil-universal-homeomorphism].",
+ "statement": "Let $A$ be a Noetherian integral domain with fraction field $K$, let $A'$ be a finite etale $A$-algebra [def-weil-etale-morphism] that is a domain with fraction field $K'$, and let $E$ be a finite $A'$-algebra that is a domain with fraction field $L$, where $L/K'$ is finite purely inseparable [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension]. There is a nonzero $s\\in A$ such that, with $A_1=A[1/s]$, $A'_1=A'\\otimes_AA_1$, and $E_1=E\\otimes_AA_1$, the induced morphism $\\operatorname{Spec}(E_1)\\to\\operatorname{Spec}(A'_1)$ is surjective [def-weil-surjective-morphism] and radicial [def-weil-radicial-morphism], hence a universal homeomorphism [def-weil-universal-homeomorphism].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "proof, finite-algebra calculation, purely inseparable factors and universal-homeomorphism conclusion (Stacks Tags 00GQ, 0BR5, 01S2)"
@@ -24,9 +24,53 @@
   "def-weil-surjective-morphism",
   "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because E is finite over A', it is integral over A'. The inclusion A' to E is injective because it induces the stated inclusion of fraction fields. After the indicated principal localization, lying over gives a prime of E_1 above every prime of A'_1, so Spec(E_1) to Spec(A'_1) is surjective.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00GQ (lying over), applied to the finite algebra"
+   }
+  },
+  {
+   "text": "A' is finite over the Noetherian domain A, hence Noetherian, so the power-in-base node applies to E over A' and gives a nonzero s' in A'. Since A' is a domain integral over A, take a monic equation s'^m+a_{m-1}s'^{m-1}+...+a_0=0 over A of minimal degree; then a_0 is nonzero and a_0 = s'*(element of A'), so s=a_0 in A is nonzero and A'[1/s] is a localization of A'[1/s'], E_1=E[1/s]; the power property persists under this further localization. In characteristic zero E_1=A'_1, so the morphism is an isomorphism. In characteristic p>0 every x in E_1 has x^{p^n} in the image of A'_1. Hence two primes q, q' of E_1 over the same prime P of A'_1 coincide (x in q iff x^{p^n} in P iff x in q'), so Spec(E_1) to Spec(A'_1) is injective; and every element of a residue field of E_1, being a quotient of images of elements of E_1, has a p^n-th power in the residue field of A'_1, so each residue-field extension is purely inseparable. By the radicial definition (Stacks 01S4) the morphism is radicial, equivalently universally injective.",
+   "uses": [
+    "lem-weil-pbc-power-in-base-after-localization",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01S4 (radicial iff universally injective, via purely inseparable residue fields)"
+   }
+  },
+  {
+   "text": "The preceding steps give an integral, surjective and radicial morphism. Applying the integral-radicial-surjective universal-homeomorphism criterion yields that Spec(E_1) to Spec(A'_1) is a universal homeomorphism.",
+   "uses": [
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 04DF, implication (2) => (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-power-in-base-after-localization",
+  "def-weil-radicial-morphism",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof, finite-algebra calculation, purely inseparable factors"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +102,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-generic-finite-algebra-splitting",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-spread-purely-inseparable-factors",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the finite-algebra calculation. No sorry-free Lean declaration states it. Added one smaller unsplit node for the characteristic-sensitive power-in-the-base property after localization; the parent proof uses lying over for surjectivity, that power property plus the radicial residue-field criterion, and the existing integral-radicial-surjective universal-homeomorphism criterion.",
+  "blueprint": "Realizes the purely inseparable factors clause and its universal-homeomorphism conclusion in the finite-algebra calculation: localization and powers, residue-field radiciality, and Tag 04DF.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-spi2856",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spi2856 (reviewer sub-agent of L); spot-checked: Statement diff vs sheaf-dag: only makes the principal localization explicit (s in A, A_1, A'_1, E_1), no revert to any false/normality form; matches M1 (generic-finite-algebra-splitting) steps 2-3 use with D_j finite domain over A'. Child power-in-base checked true (clear denominators of p^n-th powers of finitely many generators; char 0 E''=A''); Noetherian of A' follows from finiteness over A. Steps 1 and 3 cite lying-over and 04DF with hypotheses met. FIX more, RETURN less: step 2 (E/C) gave neither how the child's s' in A' becomes s in A nor why Spec map is injective; rewrote step 2 text: s = nonzero constant term of minimal monic equation of s' over A (s' divides it in A'), and injectivity/purely inseparable residue fields derived from x^{p^n} in A'_1.; 1 file(s) fixed by the reviewer"
+ }
 }
