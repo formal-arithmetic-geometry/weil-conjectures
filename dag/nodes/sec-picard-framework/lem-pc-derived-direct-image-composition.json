@@ -20,46 +20,109 @@
   "def-pc-scheme",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-ringed-spaces-derived-adjoint], $Lf^*$ is left adjoint to $Rf_*$ and $Lp^*$ is left adjoint to $Rp_*$. By [lem-pc-ringed-spaces-derived-pullback-composition], there is a canonical natural isomorphism $Lp^*\\circ Lf^*\\cong L(f\\circ p)^*$ (with the order understood as pullback first along $f$ and then along $p$). Transporting the adjunction $L(f\\circ p)^*\\dashv R(f\\circ p)_*$ along this isomorphism makes $R(f\\circ p)_*$ a right adjoint of $Lp^*\\circ Lf^*$. The pasted adjunction from the two individual adjunctions has right adjoint $Rf_*\\circ Rp_*$ by [lem-cat-right-adjoint-composition]. Uniqueness of right adjoints therefore gives the canonical natural isomorphism $R(f\\circ p)_*\\cong Rf_*\\circ Rp_*$. This argument uses no properness or Noetherian hypothesis, so it applies under the hypotheses of the item.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 20.28.2 (Tag 0D5T), proof via Lemma 20.27.1 (Tag 079W) and derived pullback composition (Tag 0D5S)"
+   }
+  },
+  {
+   "text": "The identity and associativity laws for the direct-image comparison are the mates of the corresponding identity and associativity laws for derived pullback composition in [lem-pc-ringed-spaces-derived-pullback-composition]. The pasted units and counits in [lem-cat-right-adjoint-composition] characterize these mates, and uniqueness of right adjoints preserves the coherence equations. Hence the canonical isomorphism is natural and has the stated canonical composition meaning.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 20.28.2 (Tag 0D5T), identity and associativity compatibility inherited from Tag 0D5S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-cat-right-adjoint-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.28.2 (Tag 0D5T), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived direct image composition R(f compose p)_* equals Rf_* composed Rp_* for morphisms of schemes",
-   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp and other underived pushforward declarations; no derived direct-image composition theorem",
+   "query": "canonical natural isomorphism between right adjoint of composite and composite of right adjoints",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.leftAdjointCompIso; no scheme-derived-direct-image declaration",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "generalization: generic adjunction composition and uniqueness only"
   },
   {
    "tool": "loogle",
-   "query": "R (g ∘ f)_* Rg_* Rf_* derived direct image composition",
-   "results": "0 hits; malformed pattern reported by Loogle",
+   "query": "Adjunction.comp rightAdjointUniq",
+   "results": "0 hits; unknown identifier Adjunction.comp",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "derived.*direct.*image.*composition|R.*_\\*.*R.*_\\*",
-   "results": "0 matches in Mathlib/AlgebraicGeometry",
+   "query": "rightAdjointUniq|Adjunction.comp in Mathlib/CategoryTheory/Adjunction",
+   "results": "CategoryTheory.Adjunction.comp in Mathlib/CategoryTheory/Adjunction/Basic.lean lines 567-580; CategoryTheory.Adjunction.rightAdjointUniq in Mathlib/CategoryTheory/Adjunction/Unique.lean lines 102-108; no derived direct-image theorem",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "generalization: generic adjunction API only"
   },
   {
    "tool": "leansearch",
-   "query": "composition of derived direct images for morphisms of schemes",
+   "query": "composition of derived direct images via adjunctions",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-base-change-map-cech",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-direct-image-composition",
+  "worker": "stage1",
+  "summary": "Checked Tag 0D5T and the existing derived-adjunction and pullback-composition nodes. The proof is split into the adjunction/uniqueness argument and its identity-associativity mate coherence; no new node was needed because the right-adjoint composition fact is the existing Mathlib leaf lem-cat-right-adjoint-composition.",
+  "blueprint": "Realizes the blueprint ancestor lem-pc-rf-base-change-flat-module proof's final comparison clause identifying Rf_*Rp_* with R(f o p)_* via the canonical composition isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "The derived pullback/direct-image adjunction is a generic ringed-space tool required by Tag 0D5T; the semicontinuity unit has no replacement for it."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "The canonical composition and coherence of derived pullbacks is a generic derived-category tool required by Tag 0D5T; the semicontinuity unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ddc2126",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddc2126 (reviewer sub-agent of L); spot-checked: Step 1 against Tag 0D5T proof: variance checked (F=Lf^*, G=Lp^*, (G o F)^! = R(f o p)_* ~ Rf_* o Rp_* via lem-cat-right-adjoint-composition; pullback-composition node with f:=p, g:=f); adjunction node is scheme-level, matches hypotheses. Proof is the two-line adjoint-uniqueness argument, not a K-injective reproof, so no class (b) fix against lem-pc-ringed-spaces-derived-direct-image-composition (unsplit, empty proof, other unit; no cycle). Step 2 coherence is beyond the statement but correctly cited, harmless. No new nodes. No repairs."
+ }
 }
