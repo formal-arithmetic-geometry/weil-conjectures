@@ -2279,3 +2279,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:46 L: merged deliver/C1/lem-sc-proper-flat-right-adjoint-basechange (reviewer PASS; first push; new nodes: 2)
 - 18:46 L: returned deliver/E1/lem-sc-finite-affine-derived-equivalence (reviewer RETURN: Reviewer R-fad1845, head a9afb26f1. Earlier points 1, 3 and 4 were repaired (the 0AVW route through g, no exact-equivale)
 - 18:46 L: merged deliver/F1/def-sp-filtration (reviewer PASS; first push; new nodes: 0)
+- 18:47 L: returned deliver/E1/def-sp-convergence (reviewer RETURN: 1. E (imprecise definition, missed by the second reading): the abutment clause 'converges to the filtration of an object)
