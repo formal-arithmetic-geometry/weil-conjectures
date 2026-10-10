@@ -2808,3 +2808,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:22 L: merged deliver/C1/def-nagata-basechanged-system (reviewer FIX; first push; new nodes: 0)
 - 22:23 L: merged deliver/K1/lem-pc-tower-surjective-lim-acyclic (reviewer FIX; after a return; new nodes: 1)
 - 22:23 L: merged deliver/M1/lem-sc-derived-open-gluing (reviewer FIX; first push; new nodes: 1)
+- 22:23 L: merged deliver/K1/thm-sc-constant-invariance (reviewer FIX; after a return; new nodes: 3)

@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-sc-constant-invariance",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base-change invariance for constant sheaves",
- "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated connected curve over $k$, let\n$\\overline C$ be a compactification of $C$\n([lem-sc-compactification]; thus $\\overline C=C$ when $C$\nis proper), and let\n$g:=g(\\overline C)$ ([def-sc-genus]). Let $n\\geq1$ be\nprime to $\\operatorname{char}k$.\nFor every $q\\geq0$, the pullback map of\n[def-sc-field-extension]\n\n$$\n\\rho^q_{k'/k}(C,\\mathbf F_n):H^q(C_{\\Et},\\mathbf F_n)\n\\longrightarrow H^q((C_{k'})_{\\Et},\\mathbf F_n)\n$$\n\nis an isomorphism; if $C$ is proper it is compatible with the\nidentifications of [lem-sc-pic-proper-ntorsion] and\n[lem-sc-genus-invariant], and if $C$ is affine with the\nidentifications of [lem-sc-pic-affine].",
+ "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a smooth separated connected curve over $k$, let $\\overline C$ be a compactification of $C$ ([lem-sc-compactification]; thus $\\overline C=C$ when $C$ is proper), and let $g:=g(\\overline C)$ ([def-sc-genus]). Let $n\\geq1$ be prime to $\\operatorname{char}k$. For every $q\\geq0$, the pullback map of [def-sc-field-extension] $\\rho^q_{k'/k}(C,\\mathbf F_n):H^q(C_{\\Et},\\mathbf F_n)\\longrightarrow H^q((C_{k'})_{\\Et},\\mathbf F_n)$ is an isomorphism; if $C$ is proper it is compatible with the identifications of [lem-sc-pic-proper-ntorsion] and [lem-sc-genus-invariant], and if $C$ is affine with the identifications of [lem-sc-pic-affine].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
   "place": "node thm-sc-constant-invariance, order 1031"
@@ -23,49 +23,62 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-base-change-curve], $C_{k'}$ is a smooth separated\nconnected curve over $k'$.",
+   "text": "By [lem-sc-base-change-curve], $C_{k'}$ is a smooth separated curve over $k'$ of the same dimension, proper (resp. affine) if $C$ is proper (resp. affine). The algebraically closed field $k$ is separably closed, so the connected scheme $C$ is geometrically connected over $k$ by [lem-weil-separably-closed-geometrically-connected]; by the definition of geometric connectedness [def-pc-geometrically-irreducible], applied to the extension $k'/k$, the scheme $C_{k'}$ is connected. Thus $C_{k'}$ is a smooth separated connected curve over the algebraically closed field $k'$, and all the curve statements cited below apply to it as well as to $C$.",
    "uses": [
-    "lem-sc-base-change-curve"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Proper case.* The nonvanishing cohomology groups of\n[thm-sc-proper-cohomology] over $k$ and over $k'$ are\n$\\mathbf Z/n\\mathbf Z$, $(\\mathbf Z/n\\mathbf Z)^{2g}$ and\n$\\mathbf Z/n\\mathbf Z$, identified by $\\theta_\\zeta$\n([lem-sc-primitive-root]: the image of $\\zeta$ in $k'$ is\nprimitive), by $g(C_{k'})=g(C)$ ([lem-sc-genus-invariant])\nand by the etale group scheme $J_C[n]$\n([thm-av-final](b),(c): the canonical base change map\n$J_C[n](k)\\to J_C[n](k')$ is an isomorphism, and\n$J_{C_{k'}}\\cong(J_C)_{k'}$ by\n[thm-sc-jacobian-representability]); these identifications are\ncompatible with the pullback maps $\\rho^q$, because all maps\ninvolved are the canonical base change maps and the Kummer long\nexact sequence of [lem-sc-kummer-les] is natural in the base\nfield. Hence each $\\rho^q$ is an isomorphism.",
-   "uses": [
-    "thm-sc-proper-cohomology",
-    "lem-sc-primitive-root",
-    "lem-sc-genus-invariant",
-    "thm-av-final",
-    "thm-sc-jacobian-representability",
-    "lem-sc-kummer-les"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Affine case.* For $H^0$: $\\mu_n(k)=\\mu_n(k')$\n([lem-sc-primitive-root]). For $H^1$: by\n[lem-sc-kummer-les] there are canonical exact sequences\n\n$$\n0\\to\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}\n\\to H^1(C,\\mu_n)\\to\\operatorname{Pic}(C)[n]\\to0\n$$\n\nand the analogous one over $k'$, all maps being the canonical\npullbacks. The right-hand terms are identified by the argument\nbelow (the quotient descriptions of [lem-sc-pic-affine]); the\nleft-hand terms are identified as follows. With the compactification\n$\\overline C$ and the finite deleted set $S=\\overline C\\setminus C$\n(the same finite set over $k'$, as $S_{k'}=S$), a unit\n$u\\in\\mathcal O_C(C)^\\times$ is a function on $\\overline C$ whose\ndivisor is supported on $S$, and the association\n$u\\mapsto\\operatorname{div}(u)$ identifies\n$\\mathcal O_C(C)^\\times/k^\\times$ with the subgroup of the\ndegree-zero divisors supported on $S$ whose class in\n$J_{\\overline C}$ is zero. This subgroup is finitely generated free;\nit is unchanged by base change $k\\to k'$, because\n$J_{\\overline C}(k)\\to J_{\\overline C}(k')$ is injective, so a\ndegree-zero divisor supported at the same $k$-rational set $S$ is\nprincipal over $k$ if and only if it is principal over $k'$. As\n$k^\\times$ and $k'^\\times$ are both $n$-divisible, the natural maps\n\n$$\n\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}\n\\to\\mathcal O_{C_{k'}}(C_{k'})^\\times/\n\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}\n$$\n\nare isomorphisms. The five lemma now shows that the\nmiddle maps $H^1(C,\\mu_n)\\to H^1(C_{k'},\\mu_n)$ are isomorphisms.\nFor the right-hand identification: under the quotient descriptions\nof [lem-sc-pic-affine] for $C$ and\n$C_{k'}$ (the compactification of $C_{k'}$ is\n$\\overline C_{k'}$ by [lem-sc-base-change-curve], and the\ndeleted set $S$ is the same finite set, since\n$S_{k'}=S\\otimes_kk'=S$), the pullback map is\n$x+\\Lambda\\mapsto x+\\Lambda$. This is an isomorphism on\n$n$-torsion: injectivity is clear; for surjectivity, let\n$y\\in J_{\\overline C}(k')$ with $ny\\in\\Lambda\\subset J_{\\overline C}(k)$; by divisibility of $J_{\\overline C}(k)$\n([thm-av-final](d)) there is $z\\in J_{\\overline C}(k)$ with $ny=nz$, so\n$y-z\\in J_{\\overline C}[n](k')=J_{\\overline C}[n](k)\\subset J_{\\overline C}(k)$ ([thm-av-final](c)), whence\n$y\\in J_{\\overline C}(k)$. For $H^2$: both groups vanish\n([lem-sc-brauer-zero] over $k$ and over $k'$), and for\n$q>2$ both groups vanish by\n[lem-sc-cohomological-dimension] (over $k$ and over\n$k'$).",
-   "uses": [
-    "lem-sc-primitive-root",
-    "lem-sc-kummer-les",
-    "lem-sc-pic-affine",
     "lem-sc-base-change-curve",
-    "thm-av-final",
+    "lem-weil-separably-closed-geometrically-connected",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper case. Let $C$ be proper; by step 1, $C_{k'}$ is a proper smooth connected curve over $k'$, of genus $g$ by [lem-sc-genus-invariant]. By [lem-sc-primitive-root] the trivialization $\\theta_\\zeta:\\mu_n\\cong\\mathbf F_n$ is compatible with pullback along $k\\subseteq k'$, so it suffices to show that pullback is an isomorphism on $H^q(-,\\mu_n)$. Both curves have $H^2(-,\\mathbf G_m)=0$ by [lem-sc-brauer-zero], so [lem-sc-kummer-les] applies over $k$ and over $k'$, and by [lem-sc-kummer-base-change-compatibility] pullback is a morphism between the two Kummer sequences. For $q=0$: $H^0(-,\\mu_n)=\\mu_n(k)\\to\\mu_n(k')$ is an isomorphism by [lem-sc-primitive-root]. For $q=1$: $H^1(C,\\mu_n)=\\operatorname{Pic}(C)[n]$ by [lem-sc-kummer-les], which lies in $\\operatorname{Pic}^0(C)$ (the degree takes values in the torsion-free group $\\mathbf Z$) and is $(\\mathbf Z/n\\mathbf Z)^{2g}$ by [lem-sc-pic-proper-ntorsion]; under $\\operatorname{Pic}^0(C)=J_C(k)$ of [thm-sc-jacobian-representability], which is compatible with base change ($J_{C_{k'}}\\cong(J_C)_{k'}$) by [lem-sc-genus-invariant], $\\rho^1$ becomes the canonical map $J_C[n](k)\\to J_C[n](k')$, an isomorphism by [thm-av-final](c). For $q=2$: $H^2(C,\\mu_n)=\\operatorname{Pic}(C)/n$ by [lem-sc-kummer-les]; since $\\operatorname{Pic}^0(C)$ is $n$-divisible ([lem-sc-pic-proper-ntorsion]), the degree identifies it with $\\mathbf Z/n\\mathbf Z$, generated by the class of a point $P\\in C(k)$, which exists by [lem-pc-rational-points-dense]. The pullback of $\\mathcal O_C(P)$ is $\\mathcal O_{C_{k'}}(P_{k'})$ for the $k'$-rational point $P_{k'}$, again of degree $1$, so the same description over $k'$ shows that $\\rho^2$ sends a generator to a generator and is an isomorphism. For $q>2$ both groups vanish by [thm-sc-proper-cohomology]. By construction these isomorphisms are compatible with the identifications of [lem-sc-pic-proper-ntorsion] and [lem-sc-genus-invariant].",
+   "uses": [
+    "lem-sc-genus-invariant",
+    "lem-sc-primitive-root",
     "lem-sc-brauer-zero",
-    "lem-sc-cohomological-dimension"
+    "lem-sc-kummer-les",
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-pic-proper-ntorsion",
+    "thm-sc-jacobian-representability",
+    "thm-av-final",
+    "lem-pc-rational-points-dense",
+    "thm-sc-proper-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine case. By [lem-sc-proper-or-affine], $C$ is proper or affine; the proper case is step 2, so let $C$ be affine. By step 1, $C_{k'}$ is a smooth affine connected curve over $k'$. [thm-sc-affine-cohomology], applied over $k$ and over $k'$, gives $H^0=\\mathbf Z/n\\mathbf Z$, the canonical short exact sequences $0\\to\\mathcal O(C)^\\times/\\mathcal O(C)^{\\times n}\\to H^1(-,\\mathbf F_n)\\to\\operatorname{Pic}(-)[n]\\to0$ (obtained from [lem-sc-kummer-les] through $\\theta_\\zeta$), and $H^q(-,\\mathbf F_n)=0$ for $q>1$, so $\\rho^q$ is an isomorphism for $q\\ge2$. For $q=0$, $\\rho^0$ is $\\mu_n(k)\\to\\mu_n(k')$ transported by $\\theta_\\zeta$, an isomorphism by [lem-sc-primitive-root]. For $q=1$, [lem-sc-kummer-base-change-compatibility] and the compatibility of $\\theta_\\zeta$ with pullback ([lem-sc-primitive-root]) make pullback a morphism of these short exact sequences; its outer maps are isomorphisms by [lem-sc-units-quotient-base-change] and by the affine clause of [lem-sc-kummer-base-change-compatibility], so $\\rho^1$ is an isomorphism by the five lemma, compatibly with the $\\operatorname{Pic}(C)[n]$ of [lem-sc-pic-affine].",
+   "uses": [
+    "lem-sc-proper-or-affine",
+    "thm-sc-affine-cohomology",
+    "lem-sc-kummer-les",
+    "lem-sc-primitive-root",
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-units-quotient-base-change",
+    "lem-sc-pic-affine"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-base-change-curve",
-  "thm-sc-proper-cohomology",
-  "lem-sc-primitive-root",
+  "lem-weil-separably-closed-geometrically-connected",
+  "def-pc-geometrically-irreducible",
   "lem-sc-genus-invariant",
-  "thm-av-final",
-  "thm-sc-jacobian-representability",
-  "lem-sc-kummer-les",
-  "lem-sc-pic-affine",
+  "lem-sc-primitive-root",
   "lem-sc-brauer-zero",
-  "lem-sc-cohomological-dimension"
+  "lem-sc-kummer-les",
+  "lem-sc-kummer-base-change-compatibility",
+  "lem-sc-pic-proper-ntorsion",
+  "thm-sc-jacobian-representability",
+  "thm-av-final",
+  "lem-pc-rational-points-dense",
+  "thm-sc-proper-cohomology",
+  "lem-sc-proper-or-affine",
+  "thm-sc-affine-cohomology",
+  "lem-sc-units-quotient-base-change",
+  "lem-sc-pic-affine"
  ],
  "proof_origin": {
   "by": "agent",
@@ -74,7 +87,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -113,5 +126,30 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sc-constant-invariance",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by citing geometric connectedness over a separably closed field, adding the proper-or-affine dichotomy, and adding statement-only nodes for unit-quotient base change and Kummer/degree compatibility. The affine H^2 and higher vanishing now uses the existing affine cohomological-dimension node; the unused proper Picard dependency was removed.",
+  "blueprint": "Realizes the blueprint proof places for base-change reduction, proper case, and affine case, with explicit support nodes for each previously uncited compatibility or dichotomy fact.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "The base-change step needs the generic fact that connected schemes over a separably closed field are geometrically connected; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-separably-closed-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sci2822",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sci2822 (reviewer sub-agent of L); spot-checked: Re-push after R-sci2650 21:51 return; all 5 points checked. Delivery repairs of points 1 (connectedness via lem-weil-separably-closed-geometrically-connected), 2 (new lem-sc-proper-or-affine, no DAG duplicate), 3 (affine H^2 via lem-sc-affine-cohomological-dimension), 4 (new lem-sc-units-quotient-base-change, true for all n: units mod k^x are divisors on S, principality invariant as J(k)->J(k') injective) accepted. FIX more, RETURN less: (a) C1 point 5 only half repaired: proper rho^2 degree compatibility was dropped, not cited; step 2 rewritten per degree q: H^1 via lem-sc-pic-proper-ntorsion + Pic^0=J(k) (thm-sc-jacobian-representability) + base change from merged lem-sc-genus-invariant + thm-av-final(c); H^2 = Pic/n generated by a k-point (lem-pc-rational-points-dense) pulling back to a degree-1 k'-point; (b) C1/C4: statement still claims compatibility with lem-sc-pic-proper-ntorsion yet the delivery deleted it from stmt_deps and the proof never used it; restored to stmt_deps and now used in step 2; (c) C4: lem-sc-kummer-les needs H^2(G_m)=0, now checked by lem-sc-brauer-zero in step 2; step 3 now cites merged thm-sc-affine-cohomology (H^0, Kummer SES for F_n, vanishing q>1) over k and k' instead of restating it; theta_zeta pullback compatibility via lem-sc-primitive-root made explicit; step 1 cites def-pc-geometrically-irreducible for C_{k'} connected (was misattributed to lem-sc-base-change-curve); (d) metadata: lem-sc-proper-or-affine source corrected from Stacks 0A26 (the projectivity lemma) to 0A28 (dim-1-nonproper-affine); stmt_deps of the three new nodes set to the nodes their statements cite (units node listed compactification/global-functions/jacobian, uncited). tool_use lem-weil-separably-closed-geometrically-connected accepted (generic). K1's second reading missed (a)-(c).; 4 file(s) fixed by the reviewer"
+ }
 }
