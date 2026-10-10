@@ -1,0 +1,65 @@
+{
+ "id": "def-weil-pbc-quotient-module",
+ "kind": "definition",
+ "title": "Quotient of a module by a submodule",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module and $N\\subseteq M$ an $R$-submodule. The *quotient module* $M/N$ is the set of cosets $m+N=\\{m+n:n\\in N\\}$, $m\\in M$, with $(m+N)+(m'+N)=(m+m')+N$ and $r(m+N)=rm+N$; it is an $R$-module, and the *quotient map* $q:M\\to M/N$, $m\\mapsto m+N$ (also written $m\\bmod N$), is a surjective $R$-linear map with kernel $N$. In particular, for submodules $N\\subseteq P$ of $M$, $P/N$ is the quotient of the module $P$ by its submodule $N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035 (the quotients $I^n/I^{n+1}$ and $J\\cap I^n/J\\cap I^{n+1}$); Stacks uses quotient modules without a labelled definition (e.g. Algebra line 1746, 'Let $T$ be the quotient module')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of a module by a submodule M ⧸ N with quotient map mkQ",
+   "results": "Submodule.mkQ, Submodule.mkQ_apply, Submodule.mkQ_surjective, Submodule.Quotient.mk'_eq_mk' (Mathlib.LinearAlgebra.Quotient.Defs), LieSubmodule.Quotient.mk' (Mathlib.Algebra.Lie.Quotient)",
+   "date": "2026-10-10",
+   "verdict": "match: M ⧸ p with Submodule.mkQ"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient module M/N of a module by a submodule, with the surjective linear quotient map",
+   "results": "Submodule.hasQuotient, Submodule.Quotient.mk, Submodule.mkQ, Submodule.Quotient.module, Submodule.Quotient.addCommGroup (Mathlib.LinearAlgebra.Quotient.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -nE 'instance hasQuotient|^def mk |instance addCommGroup|instance module|^def mkQ|mkQ_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Defs.lean; grep -n 'theorem ker_mkQ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Basic.lean",
+   "results": "Defs.lean:55 instance hasQuotient : HasQuotient M (Submodule R M); :61 def Quotient.mk; :137 instance addCommGroup; :198 instance module; :227 def mkQ : M →ₗ[R] M ⧸ p; :236 mkQ_surjective; Basic.lean:154 ker_mkQ : ker p.mkQ = p",
+   "date": "2026-10-10",
+   "verdict": "match (lines read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.hasQuotient, Submodule.Quotient.module, Submodule.mkQ, Submodule.mkQ_surjective, Submodule.ker_mkQ",
+  "file": "Mathlib/LinearAlgebra/Quotient/Defs.lean, Mathlib/LinearAlgebra/Quotient/Basic.lean",
+  "how": "exact, one declaration per clause: M ⧸ N (Submodule.hasQuotient, Defs.lean:55; cosets via Submodule.Quotient.mk :61), AddCommGroup and R-module structures (:137, :198), quotient map Submodule.mkQ N : M →ₗ[R] M ⧸ N (:227), surjective (mkQ_surjective :236), kernel N (Basic.lean:154 ker_mkQ). P/N for N ⊆ P is M ⧸ N with M := ↥P and N.comap P.subtype (one line)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-associated-graded-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: Submodule.hasQuotient (Defs.lean:55), Quotient.module (:198), mkQ (:227), mkQ_surjective (:236), ker_mkQ (Basic.lean:154)",
+ "lead_note": "composed leaf accepted (point B8): one declaration per clause"
+}

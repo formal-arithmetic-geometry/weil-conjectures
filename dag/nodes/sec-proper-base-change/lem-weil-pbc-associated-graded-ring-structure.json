@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-associated-graded-ring-structure",
+ "kind": "statement",
+ "title": "The associated graded ring of an ideal is a commutative graded ring and an A/J-algebra",
+ "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal, with $J^0=A$ and $J^{k+1}=J^kJ$ [def-weil-pbc-algebra-hom-quotient]. For $n\\ge0$ let $G_n=J^n/J^{n+1}$ be the quotient of the $A$-module $J^n$ by its submodule $J^{n+1}$ [def-weil-pbc-quotient-module], and let $G=\\bigoplus_{n\\ge0}G_n$ [def-weil-pbc-direct-sum-modules], with canonical inclusions $\\iota_n:G_n\\to G$. Then:\n(1) for all $n,m\\ge0$ there is a unique map $\\mu_{n,m}:G_n\\times G_m\\to G_{n+m}$ with $\\mu_{n,m}(a\\bmod J^{n+1},\\,b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ for all $a\\in J^n$, $b\\in J^m$; it is biadditive (indeed $A$-bilinear);\n(2) the multiplication on $G$ defined by $(\\xi\\eta)_k=\\sum_{n+m=k}\\mu_{n,m}(\\xi_n,\\eta_m)$ for $\\xi=(\\xi_n)$, $\\eta=(\\eta_m)$ in $G$, together with the addition of $G$, makes $G$ a commutative ring with unit $\\iota_0(1\\bmod J)$, and $\\iota_n(x)\\iota_m(y)=\\iota_{n+m}(\\mu_{n,m}(x,y))$;\n(3) $G_0=J^0/J^1$ is the quotient ring $A/J$ as an abelian group, and $\\iota_0:A/J\\to G$ is an injective ring homomorphism; thus $G$ is an $A/J$-algebra [def-weil-pbc-algebra-hom-quotient] through $\\iota_0$, and for $a\\in A$, $n\\ge0$ and $x\\in J^n$: $\\iota_0(a\\bmod J)\\cdot\\iota_n(x\\bmod J^{n+1})=\\iota_n(ax\\bmod J^{n+1})$, so each $\\iota_n(G_n)$ is an $A/J$-submodule of $G$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: '$\\bigoplus I^n/I^{n+1}$' used as a ring and an $R/I$-algebra without proof; Algebra, Section 00JL (section-graded, line 13200) for graded rings; Artin approximation, Section 07XA (artin-section-approximation), artin.tex line 1268, the notation $\\text{Gr}_I(A)=\\bigoplus I^n/I^{n+1}$"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded ring structure on the associated graded of an ideal filtration, multiplication I^n/I^(n+1) × I^m/I^(m+1) → I^(n+m)/I^(n+m+1)",
+   "results": "GradedRing, GradedRing.mk, GradedAlgebra, DirectSum.coe_decompose_mul_of_left_mem (Mathlib.RingTheory.GradedAlgebra.Basic), IsRingFiltration.toGradedMonoid (Mathlib.RingTheory.FilteredAlgebra.Basic), Ideal.Filtration (Mathlib.RingTheory.Filtration), AddMonoidAlgebra.gradeBy.gradedMonoid",
+   "date": "2026-10-10",
+   "verdict": "no match: general graded-ring API and filtrations, no ring structure on ⊕ I^n/I^{n+1}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated graded ring of a filtered ring is a commutative graded ring, GradedPiece multiplication well defined",
+   "results": "SetLike.gcommRing, SetLike.gring, SetLike.gcommSemiring (Mathlib.Algebra.DirectSum.Internal: for subgroups A_i of R with A_i A_j ⊆ A_{i+j}, not quotients), IsRingFiltration.toGradedMonoid, GradedRing.toGradedMonoid, CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GradeZero.commRing (Mathlib.Algebra.DirectSum.Ring)",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate: DirectSum.GCommRing (Ring.lean:144) gives DirectSum.commRing (Ring.lean:356) and DirectSum.ofZeroRingHom (Ring.lean:445) once the graded multiplication μ_{n,m} on the quotients J^n/J^{n+1} and its axioms are supplied, which is the content of clauses (1)-(2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.GCommRing, Ideal ; DirectSum.GCommRing fun n : ℕ => _ ⧸ _",
+   "results": "none (both queries)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'AssociatedGraded|associatedGraded|GradedPiece|gradedPiece' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rni 'associated graded' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FilteredAlgebra/; grep -n 'gr\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Filtration.lean",
+   "results": "only Algebra/Homology/HomologicalBicomplex.lean:62 (associated graded object of a bicomplex, unrelated); FilteredAlgebra/ has only Basic.lean with IsFiltration/IsRingFiltration/IsModuleFiltration (lines 49, 75, 96), no graded pieces; Filtration.lean has no associated graded",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "DirectSum.GCommRing, DirectSum.commRing, DirectSum.ofZeroRingHom",
+  "file": "Mathlib/Algebra/DirectSum/Ring.lean",
+  "how": "lines 144 (class GCommRing), 356 (instance commRing : CommRing (⨁ i, A i)), 445 (ofZeroRingHom : A 0 →+* ⨁ i, A i): the commutative ring and the degree-0 ring map follow from a GCommRing instance on n ↦ J^n/J^{n+1}; constructing that instance (well-definedness of μ_{n,m}, graded associativity, commutativity, unit) is not in Mathlib"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-associated-graded-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "import_flags": [
+  "unreachable"
+ ],
+ "note": "Claim moved out of def-weil-pbc-associated-graded-ring (well-definedness of its multiplication and the ring and A/J-algebra structure). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). The citers lem-weil-pbc-completion-noetherian-quotient-noetherian (steps 2-4) and lem-weil-pbc-completed-module-associated-graded-generators (steps 1, 5) use these clauses through the definition.",
+ "reviewed": "2026-10-10 L: statement checked (well-definedness, ring structure, A/J-algebra through iota_0); flagged unreachable since the citers of the definition use these facts through the definition node, as for def-weil-pbc-formal-glueing-canonical-maps; candidate DirectSum.GCommRing/commRing/ofZeroRingHom recorded, not an exact match (no associated graded of an ideal in Mathlib)"
+}

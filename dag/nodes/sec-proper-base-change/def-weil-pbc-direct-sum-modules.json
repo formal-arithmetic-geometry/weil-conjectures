@@ -1,0 +1,72 @@
+{
+ "id": "def-weil-pbc-direct-sum-modules",
+ "kind": "definition",
+ "title": "Direct sum of a family of modules",
+ "statement": "Let $R$ be a commutative ring, $I$ a set and $(M_i)_{i\\in I}$ a family of $R$-modules (for $R=\\mathbf Z$: of abelian groups). The *direct sum* $\\bigoplus_{i\\in I}M_i$ is the set of families $(m_i)_{i\\in I}$ with $m_i\\in M_i$ and $m_i=0$ for all but finitely many $i$, with componentwise addition $(m_i)+(m'_i)=(m_i+m'_i)$ and scalar multiplication $r(m_i)=(rm_i)$; it is an $R$-module. For $j\\in I$ the *canonical inclusion* $\\iota_j:M_j\\to\\bigoplus_iM_i$ is the $R$-linear map sending $m$ to the family with $j$-th entry $m$ and all other entries $0$, and the *$j$-th component* of $(m_i)$ is $m_j$. An element $(m_i)$ is the finite sum $\\sum_{i:\\,m_i\\neq0}\\iota_i(m_i)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00JL (section-graded, line 13200): a graded ring is a direct sum decomposition $\\bigoplus_{d\\ge0}S_d$ of the underlying abelian group; Algebra, proof of Lemma 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: $\\bigoplus I^n/I^{n+1}$. Stacks uses the direct sum of modules without a labelled definition."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct sum of a family of modules, finitely supported functions, DirectSum",
+   "results": "DirectSum (Mathlib.Algebra.DirectSum.Basic), DirectSum.mk, DirectSum.apply_eq_component, DirectSum.instModule (Mathlib.Algebra.DirectSum.Module), DirectSum.sigmaLuncurry_apply",
+   "date": "2026-10-10",
+   "verdict": "match: DirectSum with DirectSum.instModule"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "external direct sum of a family of additive groups or modules, elements are finitely supported families, inclusion of a summand",
+   "results": "DirectSum.of (Mathlib.Algebra.DirectSum.Basic), DirectSum.lof (Mathlib.Algebra.DirectSum.Module), DirectSum.of_apply, DirectSum.coe_of_apply, instDFunLikeDirectSum",
+   "date": "2026-10-10",
+   "verdict": "match: DirectSum.of / DirectSum.lof are the canonical inclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.lof",
+   "results": "DirectSum.lof : (R) [Semiring R] (ι) (M : ι → Type) ... (i : ι) : M i →ₗ[R] DirectSum ι fun i => M i; DirectSum.component_comp_lof_same; DirectSum.single_eq_lof (Mathlib.Algebra.DirectSum.Module)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -nE '^def DirectSum|^def of |induction_on|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/DirectSum/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/DirectSum/Module.lean",
+   "results": "Basic.lean:39 def DirectSum := Π₀ i, β i (dependent functions of finite support); :89 instance AddCommGroup; :130 def of; :136 of_eq_same, :139 of_eq_of_ne; :182 DirectSum.induction_on; Module.lean:42 instance Module R (⨁ i, M i); :79 def lof; :186 def component",
+   "date": "2026-10-10",
+   "verdict": "match (lines read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DirectSum, DirectSum.instModule, DirectSum.lof, DirectSum.component, DirectSum.induction_on",
+  "file": "Mathlib/Algebra/DirectSum/Basic.lean, Mathlib/Algebra/DirectSum/Module.lean",
+  "how": "exact: ⨁ i, M i = DirectSum ι M := Π₀ i, M i (Basic.lean:39, dependent functions of finite support, AddCommGroup instance :89), R-module structure DirectSum.instModule (Module.lean:42), canonical inclusions DirectSum.lof R ι M i (Module.lean:79; DirectSum.of at Basic.lean:130 for abelian groups, with of_eq_same :136, of_eq_of_ne :139), components DirectSum.component (Module.lean:186); every element is a finite sum of inclusions by DirectSum.induction_on (Basic.lean:182)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-associated-graded-ring",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: DirectSum (Basic.lean:39), instModule (Module.lean:42), lof (:79), component (:186), induction_on (Basic.lean:182); composed leaf, one declaration per clause",
+ "lead_note": "composed leaf accepted (point B8): one declaration per clause of the definition"
+}

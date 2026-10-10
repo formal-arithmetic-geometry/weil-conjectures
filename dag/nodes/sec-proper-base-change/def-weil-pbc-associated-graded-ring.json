@@ -2,12 +2,16 @@
  "id": "def-weil-pbc-associated-graded-ring",
  "kind": "definition",
  "title": "Associated graded ring of an ideal",
- "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal, with $J^0=A$. The *associated graded ring* of $A$ with respect to $J$ is the abelian group $\\operatorname{gr}_J(A)=\\bigoplus_{n\\ge0}J^n/J^{n+1}$, whose elements are the finite sums $\\sum_n\\xi_n$ of homogeneous elements $\\xi_n\\in J^n/J^{n+1}$ of degree $n$, with the multiplication that is biadditive and given on homogeneous elements by $(a\\bmod J^{n+1})\\cdot(b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ for $a\\in J^n$, $b\\in J^m$ (independent of the choices of $a,b$ since $J^{n+1}J^m+J^nJ^{m+1}\\subseteq J^{n+m+1}$). It is a commutative ring with unit $1\\bmod J$ in degree $0$, its degree-$0$ part $J^0/J^1=A/J$ is a subring, and it is an $A/J$-algebra through this subring. An ideal $\\mathfrak b\\subseteq\\operatorname{gr}_J(A)$ is *homogeneous* if it contains the homogeneous components $\\xi_n$ of each of its elements $\\sum_n\\xi_n$.",
+ "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal; $J^0=A$, $J^{k+1}=J^kJ$, and $A/J$ is the quotient ring [def-weil-pbc-algebra-hom-quotient]. For $n\\ge0$ let $G_n=J^n/J^{n+1}$, the quotient of the $A$-module $J^n$ by its submodule $J^{n+1}$ [def-weil-pbc-quotient-module], whose elements are the classes $a\\bmod J^{n+1}$, $a\\in J^n$; so $G_0=A/J$ as an abelian group. The *associated graded ring* of $A$ with respect to $J$ is the abelian group $\\operatorname{gr}_J(A)=\\bigoplus_{n\\ge0}G_n$ [def-weil-pbc-direct-sum-modules], with canonical inclusions $\\iota_n:G_n\\to\\operatorname{gr}_J(A)$; an element $\\xi=(\\xi_n)_n$ is the finite sum $\\sum_n\\iota_n(\\xi_n)$, $\\xi_n$ is its *homogeneous component of degree $n$*, and the elements of $\\iota_n(G_n)$ are the *homogeneous elements of degree $n$* (written $\\xi_n$ for $\\iota_n(\\xi_n)$). Its multiplication is $(\\xi\\eta)_k=\\sum_{n+m=k}\\mu_{n,m}(\\xi_n,\\eta_m)$, where $\\mu_{n,m}:G_n\\times G_m\\to G_{n+m}$ is the map $(a\\bmod J^{n+1},\\,b\\bmod J^{m+1})\\mapsto ab\\bmod J^{n+m+1}$ ($a\\in J^n$, $b\\in J^m$); so $(a\\bmod J^{n+1})\\cdot(b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ on homogeneous elements, and the product is biadditive. That $\\mu_{n,m}$ is well defined and biadditive, that this multiplication makes $\\operatorname{gr}_J(A)$ a commutative ring with unit $1\\bmod J$ in degree $0$, and that $\\iota_0:A/J\\to\\operatorname{gr}_J(A)$ is an injective ring homomorphism, is the statement recorded in `pointers`; $\\operatorname{gr}_J(A)$ is regarded as an $A/J$-algebra [def-weil-pbc-algebra-hom-quotient] through $\\iota_0$, so that $(a\\bmod J)\\cdot(x\\bmod J^{n+1})=ax\\bmod J^{n+1}$ for $a\\in A$, $x\\in J^n$. An ideal $\\mathfrak b\\subseteq\\operatorname{gr}_J(A)$ is *homogeneous* if for every $\\xi\\in\\mathfrak b$ and every $n\\ge0$ the homogeneous component $\\iota_n(\\xi_n)$ lies in $\\mathfrak b$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: the ring $\\bigoplus I^n/I^{n+1}$ and the ideal $\\bigoplus J\\cap I^n/J\\cap I^{n+1}$ in it"
+  "place": "Algebra, proof of Lemma Tag 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: the ring $\\bigoplus I^n/I^{n+1}$, the map $R/I[T_1,\\ldots,T_t]\\to\\bigoplus I^n/I^{n+1}$ and the ideal $\\bigoplus J\\cap I^n/J\\cap I^{n+1}$ in it; no labelled definition in Stacks. Notation $\\text{Gr}_I(A)=\\bigoplus I^n/I^{n+1}$: Artin approximation, Section 07XA (artin-section-approximation), artin.tex line 1268. Homogeneous ideal: Algebra, Section 00JM (section-proj, line 13365), lines 13368-13372 (an ideal that is a graded submodule; equivalently, containing the homogeneous components of its elements)."
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -32,10 +36,24 @@
    "results": "no hit; RingTheory/FilteredAlgebra/Basic.lean has only IsFiltration / IsRingFiltration / IsModuleFiltration classes (lines 54-101), no associated graded object",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.GCommRing, Ideal ; DirectSum.GCommRing fun n : ℕ => _ ⧸ _",
+   "results": "none (both queries)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated graded ring of a filtered ring is a commutative graded ring, GradedPiece multiplication well defined",
+   "results": "SetLike.gcommRing, SetLike.gring (Mathlib.Algebra.DirectSum.Internal: internal gradings by subgroups), CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GradeZero.commRing (Mathlib.Algebra.DirectSum.Ring), IsRingFiltration.toGradedMonoid; Ideal.IsHomogeneous (RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:62) is for an internal grading 𝒜 of a ring, not for the external sum gr_J(A)",
+   "date": "2026-10-10",
+   "verdict": "no match: no associated graded ring of an ideal; DirectSum.GCommRing/commRing (Algebra/DirectSum/Ring.lean:144, 356) is the general construction a Lean definition would use, recorded on lem-weil-pbc-associated-graded-ring-structure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +73,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-associated-graded-ring-structure",
+   "was": [],
+   "date": "2026-10-10",
+   "reason": "well-definedness of the data, not a dependency: clause (1) gives that mu_{n,m} is well defined and biadditive, clause (2) that the multiplication makes gr_J(A) a commutative ring with unit 1 mod J, clause (3) that iota_0 : A/J -> gr_J(A) is an injective ring homomorphism and the formula for the A/J-action used by the citers"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-associated-graded-ring",
+  "worker": "stage1",
+  "summary": "Checked against Algebra, proof of Lemma 05GH (algebra.tex 23011-23060; tags/tags: 05GH algebra-lemma-completion-Noetherian), where $\\bigoplus I^n/I^{n+1}$ is used as a ring, as the target of an $R/I$-algebra map from $R/I[T_1,\\ldots,T_t]$, with the homogeneous ideal $\\bigoplus J\\cap I^n/J\\cap I^{n+1}$ and homogeneous generators; Stacks has no labelled definition of the associated graded ring (grep 'associated graded' / 'Gr_' over literature/stacks-project: the notation $\\text{Gr}_I(A)$ is introduced only in artin.tex line 1268, Section 07XA; graded rings in Algebra 00JL, homogeneous ideals in Algebra 00JM lines 13368-13372; the Rees algebra of Algebra 052Q / def-nagata-rees-algebra and prop-nagata-rees-graded is a different ring, $\\bigoplus I^n$, not $\\bigoplus I^n/I^{n+1}$). Also read the two citers: lem-weil-pbc-completion-noetherian-quotient-noetherian (step 2: $A/J$-algebra map from the polynomial ring, homogeneous pieces; step 3: $G(K)$ a homogeneous ideal, components of generators; step 4: components of degree $n$, representatives $a_j\\in J^{n-d_j}$) and lem-weil-pbc-completed-module-associated-graded-generators (step 1: unit and multiplication formula on homogeneous elements; step 5: $B_n$). (a) Completeness: the old statement defined the group, the multiplication on homogeneous elements and homogeneous ideals; now written out: $G_n$ as a quotient module, the direct sum with its inclusions and components, the product of two arbitrary elements by the convolution formula $(\\xi\\eta)_k=\\sum_{n+m=k}\\mu_{n,m}(\\xi_n,\\eta_m)$, the unit, the $A/J$-algebra structure through $\\iota_0$ with the action formula, and homogeneous ideals by components (Stacks 00JM's third equivalent form, which is the form both citers use). Small cases: $J=0$ gives $\\operatorname{gr}=A$ in degree 0; $J=A$ gives the zero ring (unit $1\\bmod A=0$, consistent); $A=k[x]$, $J=(x)$ gives $k[t]$; $A=\\mathbf Z$, $J=(p)$ gives $\\mathbf F_p[t]$. No mathematical error found in the source or the citers. (b) Claims moved out: the well-definedness and biadditivity of $\\mu_{n,m}$ (formerly the parenthesis 'independent of the choices ... since $J^{n+1}J^m+J^nJ^{m+1}\\subseteq J^{n+m+1}$'), the commutative ring axioms with unit $1\\bmod J$, and that $\\iota_0:A/J\\to\\operatorname{gr}_J(A)$ is an injective ring homomorphism (the former 'A/J is a subring' and 'it is an A/J-algebra') are the new unsplit statement node lem-weil-pbc-associated-graded-ring-structure, recorded in `pointers` (not in stmt_deps), flagged unreachable until a citer cites it. 'Homogeneous ideal' is a definition, not a claim (no equivalence with 'generated by homogeneous elements' is asserted, and the citers use only the components form). (c) stmt_deps (was empty): def-weil-pbc-algebra-hom-quotient (Mathlib leaf: ideals, powers $J^n$, quotient ring $A/J$, algebras) and two new Mathlib-leaf definition nodes def-weil-pbc-quotient-module (Submodule quotient, mkQ) and def-weil-pbc-direct-sum-modules (DirectSum, lof, component); the DAG had no node for either (searched titles, statements and mathlib_match fields of all definition nodes for direct sum / DirectSum / quotient module / Submodule.Quotient). (d) Mathlib: the earlier LeanSearch, LeanFinder and grep searches kept; added Loogle (no hit) and LeanFinder (DirectSum.GCommRing / DirectSum.commRing are the general construction, Ideal.IsHomogeneous is for internal gradings); Mathlib has no associated graded ring of an ideal (no AssociatedGraded/GradedPiece; FilteredAlgebra/Basic.lean has only the filtration classes): the definition stays a split definition node."
+ },
+ "reviewed": "2026-10-10 L: definition split checked; graded pieces J^n/J^{n+1}, product formula, unit, A/J-algebra structure through iota_0 and homogeneous ideals via components as both citers use; well-definedness/ring axioms moved to lem-weil-pbc-associated-graded-ring-structure (pointers); stmt_deps now the quotient-module and direct-sum leaves plus algebra-hom-quotient"
 }
