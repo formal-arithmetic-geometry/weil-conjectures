@@ -2179,3 +2179,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:54 L: returned deliver/M1/lem-sc-boundary-cech-injective-middle (reviewer RETURN: 1. E (sign, wrong mathematics): with the DAG's connecting map (horseshoe, lem-weil-pbc-horseshoe-delta-functor, snake li)
 - 17:54 L: lem-sc-boundary-cech-compatibility: sign of the Cech/connecting-map compatibility wrong under the repository's convention (reviewer R-bim1752, return of M1 lem-sc-boundary-cech-injective-middle c0e94f347); lead_note added, to be corrected with the child's re-push
 - 17:55 L: merged deliver/M1/lem-sc-noetherian-open-closed-cohomology-sequence (reviewer FIX; first push; new nodes: 1)
+- 17:55 L: returned deliver/J1/lem-sc-smooth-proper-diagonal-koszul-dual (reviewer RETURN: 1. E (false new statement): lem-sc-closed-immersion-derived-pushforward-fully-faithful is false. Ri_*: D_QCoh(O_Z) -> D_)
