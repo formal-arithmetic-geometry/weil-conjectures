@@ -286,6 +286,10 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Picard.LocalizationAwayRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
