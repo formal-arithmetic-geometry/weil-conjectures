@@ -143,6 +143,83 @@ theorem nonempty_iso_kernelTransform_of_isIso [Finite Λ] (σ : P ⟶ P) [IsIso 
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
       (Functor.isoWhiskerRight ((derivedTensor _ P).flip.mapIso e) X))⟩
 
+/-- If `R ⋙ T ≅ (- ⊗ N) ⋙ R` and `N ≅ U` with `U ⊗ U ≅ U`, then `T (R U) ≅ R U`. This is stated
+for abstract functors so that the kernel never unfolds the concrete derived functors it is
+applied to. -/
+private lemma nonempty_iso_of_iso_comp_flip {C D : Type*} [Category C] [Category D]
+    (R : C ⥤ D) (T : D ⥤ D) (B : C ⥤ C ⥤ C) {N U : C} (pf : R ⋙ T ≅ B.flip.obj N ⋙ R)
+    (e : N ≅ U) (l : (B.obj U).obj U ≅ U) : Nonempty (T.obj (R.obj U) ≅ R.obj U) :=
+  ⟨pf.app U ≪≫ R.mapIso ((B.obj U).mapIso e ≪≫ l)⟩
+
+/-- `(F ⋙ G ⋙ H ⋙ K).obj X = K.obj (H.obj (G.obj (F.obj X)))`, stated for abstract functors so
+that the kernel never unfolds the concrete derived functors it is applied to. -/
+private lemma _root_.CategoryTheory.Functor.comp_obj_comp_obj_comp_obj_eq
+    {C₁ C₂ C₃ C₄ C₅ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    [Category C₅] (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₃) (H : C₃ ⥤ C₄) (K : C₄ ⥤ C₅) (X : C₁) :
+    (F ⋙ G ⋙ H ⋙ K).obj X = K.obj (H.obj (G.obj (F.obj X))) :=
+  rfl
+
+/-- `q₁^* Rz_* Λ ≅ Rz'_! Λ`, for `z'` the base change of the proper `z` along `q₁`. -/
+private lemma kt_sky₁ [Finite Λ] {T : Scheme.{u}} (z : T ⟶ V) [IsProper z] (z' : V' ⟶ P)
+    (g : V' ⟶ T) [HasCompactification z'] [QuasiCompact z'] (sq : IsPullback g z' z q₁) :
+    Nonempty ((D((q₁)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R((z)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)) ≅
+      (R(z')_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _)) := by
+  let A := ModuleCat.{u + 1} Λ
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  obtain ⟨pz⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A z
+  exact ⟨(leftDerivedUpperStarIsoMapDerivedCategory A q₁).symm.app _ ≪≫
+      (L((q₁)^*[A])).mapIso (pz.symm.app _) ≪≫
+      (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app _ ≪≫
+      (R(z')_![A]).mapIso (leftDerivedUpperStarUnitIso A g)⟩
+
+/-- `Rz'_! Λ ⊗ᴸ 𝒦 ≅ Rz'_!(Λ ⊗ᴸ z'^* 𝒦) ≅ Rz'_! Λ` when `z'^* 𝒦 ≅ Λ`. -/
+private lemma kt_sky₂ [Finite Λ] (z' : V' ⟶ P) [HasCompactification z']
+    (𝒦 : DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (e : L((z')^*[ModuleCat.{u + 1} Λ]).obj 𝒦 ≅ 𝟙_ _) :
+    Nonempty ((derivedTensorRight _ P 𝒦).obj ((R(z')_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _)) ≅
+      (R(z')_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _)) := by
+  let A := ModuleCat.{u + 1} Λ
+  obtain ⟨pf⟩ := nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight A z' 𝒦
+    (fun K ↦ hasProjectionFormula_of_finite Λ _ K 𝒦)
+  exact nonempty_iso_of_iso_comp_flip _ _ (derivedTensor A V') pf e (derivedTensorLeftUnitor A V' _)
+
+omit [QuasiCompact q₂] in
+/-- `Rq₂,! Rz'_! Λ ≅ Λ` for a section `z'` of `q₂`. -/
+private lemma kt_sky₃ [Finite Λ] (z' : V' ⟶ P) [HasCompactification z'] (hz : z' ≫ q₂ = 𝟙 V') :
+    Nonempty ((R(q₂)_![ModuleCat.{u + 1} Λ]).obj ((R(z')_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _)) ≅
+      𝟙_ _) := by
+  let A := ModuleCat.{u + 1} Λ
+  have : HasCompactification (z' ≫ q₂) := .of_eq hz.symm
+  obtain ⟨pid⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A (𝟙 V')
+  obtain ⟨c⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ z' q₂
+  have hcongr {X Y : Scheme.{u}} {f f' : X ⟶ Y} [HasCompactification f]
+      [HasCompactification f'] (h : f = f') : Nonempty (R(f)_![A] ≅ R(f')_![A]) := by
+    subst h
+    exact ⟨Iso.refl _⟩
+  obtain ⟨cc⟩ := hcongr hz
+  exact ⟨(c.app _).symm ≪≫ cc.app _ ≪≫ pid.app _ ≪≫ (rightDerivedLowerStarIdIso Λ V').app _⟩
+
+omit [QuasiCompact q₂] in
+/-- The kernel transform `Rq₂,!(q₁^*(-) ⊗ᴸ 𝒦)` of a skyscraper `Rz_* Λ` along a proper
+`z : T ⟶ V`: if the base change `z'` of `z` along `q₁` is a section of `q₂` and the kernel is
+trivial along `z'`, then the transform of `Rz_* Λ` is `Λ`. This is `Rz_* = Rz_!`,
+compact-support base change along `q₁`, the projection formula for `z'` and the composition
+law `R(z' ≫ q₂)_! = R(𝟙)_!`. -/
+theorem nonempty_iso_kernelTransform_obj_rightDerivedLowerStar [Finite Λ] {T : Scheme.{u}}
+    (z : T ⟶ V) [IsProper z] (z' : V' ⟶ P) (g : V' ⟶ T) [HasCompactification z']
+    [QuasiCompact z'] (sq : IsPullback g z' z q₁) (hz : z' ≫ q₂ = 𝟙 V')
+    (𝒦 : DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (e : L((z')^*[ModuleCat.{u + 1} Λ]).obj 𝒦 ≅ 𝟙_ _) (a : ℤ) :
+    Nonempty ((D((q₁)^*[ModuleCat.{u + 1} Λ]) ⋙ derivedTensorRight _ P 𝒦 ⋙
+        R(q₂)_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ a).obj
+          ((R((z)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)) ≅ (shiftFunctor _ a).obj (𝟙_ _)) := by
+  obtain ⟨s₁⟩ := kt_sky₁ Λ q₁ z z' g sq
+  obtain ⟨s₂⟩ := kt_sky₂ Λ z' 𝒦 e
+  obtain ⟨s₃⟩ := kt_sky₃ Λ q₂ z' hz
+  exact ⟨eqToIso (Functor.comp_obj_comp_obj_comp_obj_eq _ _ _ _ _) ≪≫ (shiftFunctor _ a).mapIso
+    ((R(q₂)_![ModuleCat.{u + 1} Λ]).mapIso ((derivedTensorRight _ P 𝒦).mapIso s₁ ≪≫ s₂) ≪≫ s₃)⟩
+
 /-- The derived pullback of a sheaf placed in degree zero is the pullback of the sheaf, placed
 in degree zero. -/
 lemma nonempty_iso_leftDerivedUpperStar_singleFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -248,12 +325,55 @@ character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreie
 function.
 
 Class: torsion; decided by compact-support base change of `Rp₂,!` along the zero section,
-which needs `[Finite Λ]`.
+which needs `[Finite Λ]`. The proof
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_obj_rightDerivedLowerStar`) writes
+`δ₀ = Rz_* Λ = Rz_! Λ`, moves `p₁^*` past it by base change, applies the projection formula for
+the base change `ξ ↦ (0, ξ)` of `z`, along which the kernel is trivial, and ends with
+`R(p₂ ∘ (0, 1))_! = R(𝟙)_!`.
 (sketch blueprint: `sk-prop-first-formula`) -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
-        (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) :=
-  sorry
+        (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) := by
+  let A := ModuleCat.{u + 1} Λ
+  -- the base change `ξ ↦ (0, ξ)` of the zero section along the first projection
+  let z' : 𝔸(n; S) ⟶ pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
+    pullback.lift ((𝔸(n; S) ↘ S) ≫ zeroSection n S) (𝟙 _) (by simp)
+  have hz₁ : z' ≫ pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) = (𝔸(n; S) ↘ S) ≫ zeroSection n S :=
+    pullback.lift_fst _ _ _
+  have hz₂ : z' ≫ pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) = 𝟙 _ := pullback.lift_snd _ _ _
+  have sq : IsPullback (𝔸(n; S) ↘ S) z' (zeroSection n S)
+      (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) := by
+    refine IsPullback.of_bot ?_ hz₁.symm
+      (IsPullback.of_hasPullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
+    rw [hz₂, zeroSection_comp_over]
+    exact IsPullback.of_vert_isIso ⟨by simp⟩
+  have : IsClosedImmersion z' := MorphismProperty.of_isPullback sq inferInstance
+  -- `𝔸(n; S)` has characteristic `p`, being a retract of `𝔸(n; S) ×_S 𝔸(n; S)`
+  have hinj : Function.Injective (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop.hom := by
+    refine Function.LeftInverse.injective (g := z'.appTop.hom) fun x ↦ ?_
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hz₂, Scheme.Hom.id_appTop,
+      CommRingCat.id_apply]
+  have : CharP Γ(𝔸(n; S), ⊤) p := ⟨fun m ↦ by
+    rw [← CharP.cast_eq_zero_iff Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p,
+      ← map_natCast (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop.hom,
+      map_eq_zero_iff _ hinj]⟩
+  -- the pairing vanishes along `z'`
+  have hb : z'.appTop (stdPairing n S) = 0 := by
+    rw [stdPairing, map_sum]
+    refine Finset.sum_eq_zero fun i _ ↦ ?_
+    rw [map_mul, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hz₁, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, zeroSection_appTop_coord, map_zero, zero_mul]
+  let := 𝔸(n; S).overSpecZModOfCharP p
+  obtain ⟨e₀⟩ := nonempty_iso_artinSchreierSheafOf_zero 𝔸(n; S)
+    (Ψ.compAddMonoidHom AddEquiv.ulift.toAddMonoidHom) (Λ := Λ)
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_singleFunctor Λ z'
+    (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)) (𝟙_ _)
+    (artinSchreierSheafZModPullbackIso z' Ψ (stdPairing n S) ≪≫
+      eqToIso (congrArg (artinSchreierSheafZMod _ Ψ) hb) ≪≫ e₀)
+  -- no abbreviation for `𝔸(n; S) ↘ S`: `set` would duplicate the instances mentioning it
+  exact nonempty_iso_kernelTransform_obj_rightDerivedLowerStar Λ
+    (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)) (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))
+    (zeroSection n S) z' (𝔸(n; S) ↘ S) sq hz₂ _ (e ≪≫ singleFunctorObjUnitIso A _) _
 
 /-- The Fourier–Deligne transform for the inverse character is the transform of the reflected
 input, `ι = AlgebraicGeometry.AffineSpace.neg` being `x ↦ -x`:
