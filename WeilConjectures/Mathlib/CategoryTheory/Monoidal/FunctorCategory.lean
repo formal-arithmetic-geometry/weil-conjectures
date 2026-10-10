@@ -29,4 +29,37 @@ instance Functor.Braided.whiskeringLeft (E : Type*) [Category* E] [MonoidalCateg
     ext c
     exact (Category.id_comp _).trans (Category.comp_id _).symm
 
+
+/-- The constant functor `C ⥤ (J ⥤ C)` is monoidal for the pointwise monoidal structure on
+`J ⥤ C`, with identity structure isomorphisms. -/
+@[instance_reducible]
+noncomputable def Functor.coreMonoidalConst (J E : Type*) [Category* J] [Category* E]
+    [MonoidalCategory E] : (Functor.const J : E ⥤ J ⥤ E).CoreMonoidal where
+  εIso := Iso.refl _
+  μIso X Y := NatIso.ofComponents (fun _ ↦ Iso.refl _)
+
+noncomputable instance Functor.monoidalConst (J E : Type*) [Category* J] [Category* E]
+    [MonoidalCategory E] : (Functor.const J : E ⥤ J ⥤ E).Monoidal :=
+  (Functor.coreMonoidalConst J E).toMonoidal
+
+@[simp]
+lemma Functor.const_μ_app (J E : Type*) [Category* J] [Category* E] [MonoidalCategory E]
+    (X Y : E) (j : J) : (Functor.LaxMonoidal.μ (Functor.const J) X Y).app j = 𝟙 _ :=
+  rfl
+
+@[simp]
+lemma Functor.const_δ_app (J E : Type*) [Category* J] [Category* E] [MonoidalCategory E]
+    (X Y : E) (j : J) : (Functor.OplaxMonoidal.δ (Functor.const J) X Y).app j = 𝟙 _ :=
+  rfl
+
+@[simp]
+lemma Functor.const_ε_app (J E : Type*) [Category* J] [Category* E] [MonoidalCategory E]
+    (j : J) : (Functor.LaxMonoidal.ε (Functor.const J : E ⥤ J ⥤ E)).app j = 𝟙 _ :=
+  rfl
+
+@[simp]
+lemma Functor.const_η_app (J E : Type*) [Category* J] [Category* E] [MonoidalCategory E]
+    (j : J) : (Functor.OplaxMonoidal.η (Functor.const J : E ⥤ J ⥤ E)).app j = 𝟙 _ :=
+  rfl
+
 end CategoryTheory
