@@ -1587,3 +1587,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:08 L: accepted lem-pc-genus-base-change: 5 steps, statement made conditional on X_K being a curve, no new nodes
 - 14:09 L: returned deliver/E1/lem-weil-pbc-coskeleton-matching-tuples (reviewer RETURN: 1. C3: Step 1 (and through it Step 2): the identity eps_k = p_{k,id} (the counit of the coskeleton is the projection at )
 - 14:10 L: accepted lem-pc-cohomology-sections-affine-base: 5 steps (01XK), new leaf lem-pc-separated-quasi-separated, new node lem-pc-leray-degenerate-sections (01F4 (2)), tool_uses lem-pc-finite-support-hi
+- 14:10 L: merged deliver/J1/lem-weil-pbc-finite-type-etale-finite-factor-decomposition (reviewer PASS; first push; new nodes: 2)
