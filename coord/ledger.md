@@ -2287,3 +2287,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:48 L: returned deliver/G1/lem-sc-finite-pushforward-derived-hom-qcoherent (reviewer RETURN: Reviewer R-fpd1848, head 3b3728fdb. 1. E/C4 (statement, Steps 2-3, new node lem-sc-pseudo-coherent-rhom-qcoherent): D^+_)
 - 18:48 L: merged deliver/K1/prop-pd-picard-degree-decomposition (reviewer FIX; first push; new nodes: 0)
 - 18:49 L: STATE: RINGED-SPACE DERIVED FUNCTORS MISSING (gap behind three finite-duality returns)
+- 18:49 L: merged deliver/M1/def-sp-truncation-couple (reviewer PASS; first push; new nodes: 0)
