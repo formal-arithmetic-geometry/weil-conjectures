@@ -11,20 +11,51 @@
  },
  "kind": "statement",
  "title": "Pointwise etaleness is preserved and reflected by field extension",
- "statement": "Let k be a field, K/k a field extension, and f:X\\to Y a morphism of k-schemes [def-pc-scheme] [def-pc-morphism-conventions], with base change f_K:X_K\\to Y_K along \\operatorname{Spec}K\\to\\operatorname{Spec}k [def-pc-base-change]. For every point x\\in X and every point x_K\\in X_K above x, f is etale at x (etale on an open neighbourhood of x [def-weil-etale-morphism]) if and only if f_K is etale at x_K.",
+ "statement": "Let k be a field, K/k a field extension [def-pc-field-extension], and f:X\\to Y a morphism of k-schemes [def-pc-scheme] [def-pc-morphism-conventions], with base change f_K:X_K\\to Y_K along \\operatorname{Spec}K\\to\\operatorname{Spec}k [def-pc-base-change]. For every point x\\in X and every point x_K\\in X_K above x, f is etale at x (etale on an open neighbourhood of x [def-weil-etale-morphism]) if and only if f_K is etale at x_K.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Lemma Tag 0C4Y (lemma-change-fields-flat: O_{X,x} -> O_{X_K,x_K} faithfully flat) with Descent, Lemma Tag 02VN (lemma-descending-property-etale) and Tag 036N (lemma-locally-finite-presentation-fppf-local-source); the tags 02H5/02H6 given before are unrelated (first order thickenings, infinitesimal lifting)"
  },
  "stmt_deps": [
+  "def-pc-field-extension",
   "def-pc-scheme",
   "def-pc-morphism-conventions",
   "def-pc-base-change",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If f is etale at x, choose an open neighbourhood U of x on which f|U is etale. The base change U_K \\to Y_K is etale by [lem-weil-pbc-etale-scheme-base-change], so f_K is etale at x_K.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02GO (base change of etale morphisms)"
+   }
+  },
+  {
+   "text": "Conversely, suppose f_K is etale at x_K. By Varieties, Tag 0C4Y the local map \\mathcal{O}_{X,x}\\to\\mathcal{O}_{X_K,x_K} is faithfully flat, and etaleness at x_K descends along this field-extension base change to etaleness of f at x; this pointwise descent statement is exactly [lem-sc-etale-faithfully-flat-local], applied to the same k, K, f, x and x_K. (The global descent of etaleness along an fpqc covering, Descent Tag 02VN, does not by itself give the pointwise statement, and Tag 036N concerns fppf coverings, which \\operatorname{Spec}K\\to\\operatorname{Spec}k need not be.)",
+   "uses": [
+    "lem-sc-etale-faithfully-flat-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Tag 0C4Y (faithful flatness of \\mathcal{O}_{X,x}\\to\\mathcal{O}_{X_K,x_K}); pointwise analogue of Descent, Tag 02VN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sc-etale-faithfully-flat-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y; pointwise analogue of Descent Tag 02VN"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +87,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hom-etale-locus-translation",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-base-change-geometric",
+  "worker": "stage1",
+  "summary": "Split the two directions: stability under base change and reflection by faithfully flat local descent. Added the affine local descent statement as an unsplit child after Mathlib searches found no matching theorem.",
+  "blueprint": "Realizes proof step (a) of lem-sc-mult-n-etale-kernel: reduction from k to an algebraic closure for etaleness."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ebg2342",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ebg2342 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-weil-pbc-etale-scheme-base-change (02GO, any base change), applied to U_K, an open nbhd of x_K: correct. Step 2 cites the new child lem-sc-etale-faithfully-flat-local, a real pointwise lemma, not a special case of lem-galois-fpqc-descend-etale (02VN is global: f_i etale everywhere), not elementary, not in Mathlib; checked the child for Y=Spec k by hand (x isolated with O_{X,x}=kappa(x), kappa(x) forced finite over k). C4: statement matches lem-sc-hom-etale-locus-translation step 2 (K/k any extension, x_K any point above x). FIX more, RETURN less: (1) C4: step 2 text justified the child with Tag 036N (fppf local on source; Spec K -> Spec k is fpqc, not fppf) and the global Tags 02VN/02VM, which do not give the pointwise statement; rewrote step 2 to invoke the child via 0C4Y and noted 02VN is only the global analogue; child source place corrected likewise. (2) B4: plain-text arrows in step 2 and the item source place replaced by \\to. (3) B3: item statement now cites [def-pc-field-extension] (added to stmt_deps), as the child does.; 2 file(s) fixed by the reviewer"
+ }
 }
