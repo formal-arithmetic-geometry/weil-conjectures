@@ -553,7 +553,7 @@ lemma picardPresheafDegree_eq_degree (f : X ⟶ Spec (.of k)) {T : Over (Spec (.
     picardPresheafDegree f L t = Modules.degree (T.left.residueField t)
       ((Modules.pullback ((pullback.snd f T.hom).fiberι t)).obj
         ((fromSkeleton _).obj (Pic.val (Y := pullback f T.hom) L))) := by
-  letI := (pullback.snd f T.hom).fiberOverSpecResidueField t
+  let := (pullback.snd f T.hom).fiberOverSpecResidueField t
   refine congrArg (_ - ·) ?_
   exact Modules.eulerChar_congr _ (Modules.pullbackObjUnitIso _)
 
@@ -598,7 +598,7 @@ lemma abelClass_mem {d : ℕ} {T : Over (Spec (.of k))} (D : (hilbertPresheaf f 
   refine (mem_picardSubfunctorDegree_iff f d _).2 fun t ↦ ?_
   let π := pullback.snd f T.hom
   let κ := T.left.residueField t
-  letI := π.fiberOverSpecResidueField t
+  let := π.fiberOverSpecResidueField t
   have := smoothOfRelativeDimension_isStableUnderBaseChange 1
   have : SmoothOfRelativeDimension 1 π :=
     MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ ‹_›
@@ -612,7 +612,8 @@ lemma abelClass_mem {d : ℕ} {T : Over (Spec (.of k))} (D : (hilbertPresheaf f 
   have := hI.isInvertible_dual_toModules
   -- the fibre `D_t` is an effective Cartier divisor on `X_t`
   have hDt : (D.1.comap (π.fiberι t)).IsInvertible :=
-    (IdealSheafData.IsRelativeEffectiveCartier.isRelativeEffectiveCartier_comap_of_isPullback ⟨hI, hflat⟩
+    (IdealSheafData.IsRelativeEffectiveCartier.isRelativeEffectiveCartier_comap_of_isPullback
+      ⟨hI, hflat⟩
       (IsPullback.of_hasPullback π (T.left.fromSpecResidueField t))).1
   obtain ⟨e⟩ := hI.nonempty_pullback_dual_toModules_iso (π.fiberι t) hDt
   rw [picardPresheafDegree_eq_degree, Modules.degree_congr κ
@@ -693,7 +694,7 @@ theorem exists_abelClass_eq (K : Type u) [Field K] [Algebra k K]
   let XK := pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
   let π : XK ⟶ Spec (.of K) :=
     pullback.snd (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
-  letI : XK.Over (Spec (.of K)) := ⟨π⟩
+  let : XK.Over (Spec (.of K)) := ⟨π⟩
   obtain ⟨h₁, h₂, h₃, h₄⟩ :=
     smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd
       (X ↘ Spec (.of k)) K
@@ -899,7 +900,8 @@ theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k))
 
 /-- **`Pic^g` is smooth of dimension `g`.** A `k`-scheme representing the degree-`g` part
 `Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`:
-it is an open subscheme of the Picard scheme (`AlgebraicGeometry.exists_decomposition_picardFunctor`),
+it is an open subscheme of the Picard scheme
+(`AlgebraicGeometry.exists_decomposition_picardFunctor`),
 which is smooth of dimension `g`, being covered by translates of an open subscheme of the smooth
 `g`-dimensional `Hilb^g_{X/k}`
 (`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`).
@@ -922,6 +924,7 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
     (P := @SmoothOfRelativeDimension (arithmeticGenus k X))]
   exact this
 
+omit [IsSepClosed k] in
 /-- **The Abel map `Hilb^g ⟶ Pic^g` is surjective.** For a `k`-scheme `P` representing
 `Pic^g_{X/k}`, `g` the genus, there are a proper geometrically integral `k`-scheme `H` (the
 Hilbert scheme `Hilb^g_{X/k}`) and a morphism `a : H ⟶ P` of `k`-schemes, `D ↦ 𝒪_X(D)`
@@ -946,7 +949,8 @@ theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over
     (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv (𝟙 _))))
   let a : Over.mk q ⟶ P := hP.homEquiv.symm ab
   have hab {T : Over (Spec (.of k))} (h : T ⟶ Over.mk q) :
-      hP.homEquiv (h ≫ a) = (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv h))) := by
+      hP.homEquiv (h ≫ a) =
+        (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv h))) := by
     rw [hP.homEquiv_comp, hP.homEquiv.apply_symm_apply]
     have h₃ : eH.homEquiv h = (hilbertPresheaf _ _).map h.op (eH.homEquiv (𝟙 _)) := by
       simpa using eH.homEquiv_comp h (𝟙 _)
@@ -958,7 +962,7 @@ theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over
   let κ := P.left.residueField p
   let φ : CommRingCat.of k ⟶ κ := Spec.preimage (P.left.fromSpecResidueField p ≫ P.hom)
   let K := AlgebraicClosure κ
-  letI : Algebra k K := ((algebraMap κ K).comp φ.hom).toAlgebra
+  let : Algebra k K := ((algebraMap κ K).comp φ.hom).toAlgebra
   have hK : Spec.map (CommRingCat.ofHom (algebraMap k K)) =
       Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p ≫ P.hom := by
     rw [← Spec.map_preimage (P.left.fromSpecResidueField p ≫ P.hom), ← Spec.map_comp]
@@ -1414,7 +1418,8 @@ theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
       rw [← Category.assoc, he₀]
       rfl
   have hmapiε (L : (pullback f Tε.hom).Pic) :
-      Pic.map X.dualNumbersι (Pic.map eD.hom L) = Pic.map e₀.hom (Pic.map (baseChangeMap f iε) L) := by
+      Pic.map X.dualNumbersι (Pic.map eD.hom L) =
+        Pic.map e₀.hom (Pic.map (baseChangeMap f iε) L) := by
     rw [← Pic.map_comp, ← Pic.map_comp, hiε]
   have hmap₀ (L : (pullback f T₀.hom).Pic) : Pic.map e₀.hom L = 1 ↔ L = 1 := by
     refine ⟨fun h ↦ ?_, fun h ↦ h ▸ Pic.map_one _⟩
@@ -1425,21 +1430,21 @@ theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
         exact congrArg Subtype.val K.2⟩
       invFun M := ⟨⟨Pic.map eD.inv M.1, mem_picardSubfunctorDegree_zero_of_map_eq_one iε p₀ _ (by
           rw [← hmap₀, ← hmapiε]
-          simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
           exact M.2)⟩, by
           refine Subtype.ext ?_
           change Pic.map (baseChangeMap f iε) (Pic.map eD.inv M.1) = 1
           rw [← hmap₀, ← hmapiε]
-          simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+          simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
           exact M.2⟩
       left_inv K := by
         refine Subtype.ext (Subtype.ext ?_)
         change Pic.map eD.inv (Pic.map eD.hom K.1.1) = K.1.1
-        simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+        simp only [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]
       right_inv M := by
         refine Subtype.ext ?_
         change Pic.map eD.hom (Pic.map eD.inv M.1) = M.1
-        simp only [← Pic.map_comp, Iso.hom_inv_id, Iso.inv_hom_id, Pic.map_id]
+        simp only [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
       map_mul' K K' := Subtype.ext (Pic.map_mul _ K.1.1 K'.1.1) }
   obtain ⟨Ψ, hΨ⟩ := Scheme.exists_addEquiv_ker_picMap_dualNumbersι X
   let A : tangentSpaceAt J η[J] ≃+ (Modules.unit X).H 1 :=

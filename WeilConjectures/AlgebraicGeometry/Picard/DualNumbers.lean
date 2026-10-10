@@ -159,7 +159,8 @@ noncomputable def dualNumbersUnitsScale (c : Γ(X, ⊤)) :
     X.dualNumbersUnitsSheaf ⟶ X.dualNumbersUnitsSheaf :=
   ObjectProperty.homMk
     { app U := AddCommGrpCat.ofHom
-        (Units.map (scale (X.presheaf.map (homOfLE le_top : U.unop ⟶ ⊤).op c)).toMonoidHom).toAdditive
+        (Units.map
+          (scale (X.presheaf.map (homOfLE le_top : U.unop ⟶ ⊤).op c)).toMonoidHom).toAdditive
       naturality U V i := by
         ext u
         refine congrArg Additive.ofMul (Units.ext ?_)

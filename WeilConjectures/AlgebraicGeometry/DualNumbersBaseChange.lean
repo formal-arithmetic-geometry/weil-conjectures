@@ -204,7 +204,8 @@ private lemma eq_liftSqZero_comp_dualNumbers (h : X ⟶ Y.dualNumbers) :
   have key : ψ y' = φ y'.fst + restrictTop' t (g ⁻¹ᵁ U') * φ y'.snd := by
     rw [hφ, hφ, ht, mul_comm, ← map_mul, ← map_add, ← hy]
   change X.presheaf.map (homOfLE e₁).op (ψ y') = X.presheaf.map (homOfLE e₂).op
-    ((DualNumber.mapRingHom φ y').fst + restrictTop' t (g ⁻¹ᵁ U') * (DualNumber.mapRingHom φ y').snd)
+    ((DualNumber.mapRingHom φ y').fst +
+      restrictTop' t (g ⁻¹ᵁ U') * (DualNumber.mapRingHom φ y').snd)
   rw [key, DualNumber.fst_mapRingHom, DualNumber.snd_mapRingHom]
   rfl
 

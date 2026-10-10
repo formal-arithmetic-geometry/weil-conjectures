@@ -74,7 +74,8 @@ theorem isIso_pushforwardUnitMap_pullback_snd [IsProper (X ↘ Spec (.of k))]
     change Modules.Hom.app (Modules.pullbackObjUnitIso π).hom _
       (Modules.pullbackSection π (Modules.Hom.app (𝟙 _) ⊤ (1 : Γ(T.left, ⊤)))) =
         (1 : Γ(pullback (X ↘ Spec (.of k)) T.hom, ⊤))
-    rw [h, CategoryTheory.Functor.map_id, Category.comp_id, ← ConcreteCategory.comp_apply, ← Modules.Hom.comp_app,
+    rw [h, CategoryTheory.Functor.map_id, Category.comp_id, ← ConcreteCategory.comp_apply,
+      ← Modules.Hom.comp_app,
       Iso.inv_hom_id]
     rfl
   -- on sections over `A`, `φ` is `π^♯`
