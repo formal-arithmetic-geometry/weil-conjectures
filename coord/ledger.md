@@ -2683,3 +2683,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:32 L: merged deliver/H1/pqf-def-locnoeth (reviewer FIX; first push; new nodes: 0)
 - 21:32 L: merged deliver/H1/lem-pod-profinite-stable-lattice (reviewer PASS; first push; new nodes: 1)
 - 21:33 L: merged deliver/C1/lem-sc-pic-affine (reviewer FIX; first push; new nodes: 1)
+- 21:33 L: merged deliver/F1/lem-sc-affine-cohomological-dimension (reviewer FIX; first push; new nodes: 0)
