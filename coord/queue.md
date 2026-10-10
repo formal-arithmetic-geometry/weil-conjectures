@@ -1,6 +1,6 @@
 # Work queue
 
-923 items; claim with `tools/claim.py next <group> [--stage N]`.
+924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (607)
 
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-regular-local-mcm-free` | 1013 | none |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1013 | none |
-| `lem-weil-pbc-regular-sequence-conormal-free` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
@@ -56,6 +55,7 @@
 | `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1014 | none |
 | `lem-weil-pbc-cm-local-maximal-chain-length` | 1014 | none |
 | `lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm` | 1014 | none |
+| `lem-weil-pbc-cm-module-good-element-nonzerodivisor` | 1014 | none |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1014 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1014 | none |
 | `lem-weil-pbc-colimit-eventually-flat` | 1014 | none |
@@ -614,7 +614,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (316)
+## Stage 2: nodes to state (317)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -855,6 +855,7 @@
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-regular-ring-normal` | 1 | state |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1 | state |
+| `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
 | `lem-weil-pbc-regular-sequence-polynomial-variables` | 1 | state |
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
