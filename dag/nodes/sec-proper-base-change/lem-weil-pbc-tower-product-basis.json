@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-tower-product-basis",
+ "kind": "statement",
+ "title": "Products of bases form a basis in a tower",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and $M$ an $S$-module, regarded also as an $R$-module through $R\\to S$. Let $(\\beta_j)_{j\\in J}$ be a basis of $S$ as an $R$-module and $(\\alpha_i)_{i\\in I}$ a basis of $M$ as an $S$-module [def-weil-pbc-free-module]. Then the family $(\\beta_j\\alpha_i)_{(j,i)\\in J\\times I}$ is a basis of $M$ as an $R$-module. (In particular, for fields $k\\subseteq E\\subseteq F$ [def-pc-field-extension], a $k$-basis of $E$ times an $E$-basis of $F$ is a $k$-basis of $F$.)",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09G9 (lemma-multiplicativity-degrees, line 542), the claim of its proof ('the set of products {alpha_i beta_j} is a k-basis for F', spanning and independence arguments), stated there for a tower of fields; the argument uses only the module structures and works verbatim for R -> S -> M; tag verified in stacks-project/tags/tags (09G9,fields-lemma-multiplicativity-degrees)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "basis of a tower: products of a basis of S over R and a basis of A over S form a basis of A over R",
+   "results": "Module.Basis.smulTower, Module.Basis.smulTower_apply, Module.Basis.smulTower' (Mathlib.RingTheory.AlgebraTower), Module.Basis.prod",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Basis.smulTower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tower of fields: products of bases form a basis of the big field over the small field",
+   "results": "IntermediateField.LinearDisjoint.basisOfBasisRight / basisOfBasisLeft (Mathlib.FieldTheory.LinearDisjoint): not the tower basis",
+   "date": "2026-10-10",
+   "verdict": "no match (the leansearch result is the match)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def smulTower\\|theorem smulTower_apply\\|namespace Module.Basis' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AlgebraTower.lean",
+   "results": "RingTheory/AlgebraTower.lean:107 (namespace Module.Basis), :122 (def smulTower : Basis (ι × ι') R A), :139 (smulTower_apply : (b.smulTower c) ij = b ij.1 • c ij.2)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Basis.smulTower",
+  "file": "Mathlib/RingTheory/AlgebraTower.lean",
+  "line": 122,
+  "how": "exact: for [Semiring R] [Semiring S] [AddCommMonoid A] [Module R S] [Module S A] [Module R A] [IsScalarTower R S A], b : Basis ι R S and c : Basis ι' S A, b.smulTower c : Basis (ι × ι') R A (AlgebraTower.lean:122) with (b.smulTower c) (i, j) = b i • c j by smulTower_apply (line 139); the R-module structure of M through R -> S is the IsScalarTower instance (Module.compHom / restrictScalars). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Module.Basis.smulTower (RingTheory/AlgebraTower.lean:122) with smulTower_apply; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

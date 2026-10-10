@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+ "kind": "statement",
+ "title": "F[T]/(minimal polynomial of theta) is isomorphic to F(theta)",
+ "statement": "Let $F\\subseteq\\Omega$ be fields [def-pc-field-extension] and $\\theta\\in\\Omega$ algebraic over $F$ [def-weil-algebraic-element], with minimal polynomial $\\mu\\in F[T]$ [def-weil-pbc-separable-algebraic-extension] (the monic polynomial of least degree with $\\mu(\\theta)=0$; $F[T]$ the polynomial ring [def-weil-polynomial-ring]). Let $F(\\theta)$ be the smallest subfield of $\\Omega$ containing $F$ and $\\theta$. Then $\\deg\\mu\\ge1$, and the $F$-algebra homomorphism $F[T]\\to\\Omega$, $T\\mapsto\\theta$, induces an isomorphism of $F$-algebras $F[T]/(\\mu)\\xrightarrow{\\sim}F(\\theta)$ sending the class of $T$ to $\\theta$. In particular $F(\\theta)=\\{g(\\theta):g\\in F[T]\\}$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09G1 (lemma-field-extension-generated-by-one-element, line 357), proof, algebraic case ('If the kernel is (P) ... k[t]/(P) \\simeq F'), with the proof of Lemma Tag 09GN (lemma-degree-minimal-polynomial, line 870: 'the map k[x]/(P) \\to k(\\alpha), x \\mapsto \\alpha is an isomorphism'); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K[X] modulo minimal polynomial of alpha is isomorphic to the field K(alpha)",
+   "results": "IntermediateField.adjoinRootEquivAdjoin (Mathlib.FieldTheory.IntermediateField.Adjoin.Basic), PowerBasis.quotientEquivQuotientMinpolyMap, AdjoinRoot.Minpoly.toAdjoin (Mathlib.RingTheory.AdjoinRoot)",
+   "date": "2026-10-10",
+   "verdict": "match: IntermediateField.adjoinRootEquivAdjoin"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for alpha algebraic over a field F, adjoining a root of the minimal polynomial is isomorphic to F(alpha), root maps to alpha",
+   "results": "IntermediateField.adjoinRootEquivAdjoin_apply_root, IntermediateField.adjoinRootEquivAdjoin, adjoinRootEquivAdjoin_symm_apply_gen (Adjoin/Basic), AlgEquiv.adjoinSingletonEquivAdjoinRootMinpoly (Mathlib.RingTheory.Adjoin.Field)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def adjoinRootEquivAdjoin\\|adjoinRootEquivAdjoin_apply_root' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory; grep -n 'theorem natDegree_pos\\|theorem monic' FieldTheory/Minpoly/Basic.lean; grep -n 'isAlgebraic_iff_isIntegral' RingTheory/Algebraic/Integral.lean",
+   "results": "FieldTheory/IntermediateField/Adjoin/Basic.lean:395-396 (@[stacks 09G1 \"Algebraic case\"] adjoinRootEquivAdjoin), :422 (adjoinRootEquivAdjoin_apply_root); FieldTheory/Minpoly/Basic.lean:54 (minpoly.monic), :192 (minpoly.natDegree_pos); RingTheory/Algebraic/Integral.lean:67",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IntermediateField.adjoinRootEquivAdjoin",
+  "file": "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+  "line": 396,
+  "how": "specializes in one line, one declaration per clause: theta algebraic gives IsIntegral F theta (isAlgebraic_iff_isIntegral, Mathlib/RingTheory/Algebraic/Integral.lean:67); adjoinRootEquivAdjoin F h : AdjoinRoot (minpoly F theta) ≃ₐ[F] F⟮theta⟯ (Adjoin/Basic.lean:395-396, tagged Stacks 09G1, AdjoinRoot p = F[X]/(p)) is the lift of T ↦ theta and sends root to gen by adjoinRootEquivAdjoin_apply_root (line 422); minpoly F theta is the node's minimal polynomial (Minpoly/Basic.lean:41, monic by minpoly.monic line 54) and deg ≥ 1 is minpoly.natDegree_pos (line 192). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): IntermediateField.adjoinRootEquivAdjoin (IntermediateField/Adjoin/Basic.lean:396) with _apply_root; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

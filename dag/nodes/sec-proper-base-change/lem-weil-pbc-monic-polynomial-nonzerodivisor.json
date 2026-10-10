@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-monic-polynomial-nonzerodivisor",
+ "kind": "statement",
+ "title": "A monic polynomial is a nonzerodivisor",
+ "statement": "Let $R$ be a commutative ring and $f\\in R[T]$ a monic polynomial in the polynomial ring in one variable [def-weil-polynomial-ring] (its leading coefficient is $1$). Then $f$ is a nonzerodivisor of $R[T]$: if $g\\in R[T]$ and $fg=0$, then $g=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07BV (lemma-colimit-syntomic, line 44527), lines 44548-44550: 'Then it is clear that P_1, ..., P_r is a regular sequence', each P_i being monic in Y_i; tag verified in stacks-project/tags/tags (07BV,algebra-lemma-colimit-syntomic). The fact itself: if g has leading coefficient a ≠ 0 and degree e, the coefficient of T^{deg f + e} in fg is a."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monic polynomial is a nonzerodivisor in the polynomial ring",
+   "results": "Polynomial.Monic.mem_nonZeroDivisors (Mathlib.Algebra.Polynomial.RingDivision), Polynomial.Monic.mul_right_ne_zero (Mathlib.Algebra.Polynomial.Monic), Polynomial.mem_nonZeroDivisors_of_leadingCoeff",
+   "date": "2026-10-10",
+   "verdict": "match: Polynomial.Monic.mem_nonZeroDivisors"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic ?p → IsRegular ?p",
+   "results": "Polynomial.Monic.isRegular (Mathlib.Algebra.Polynomial.Monic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem Monic.mem_nonZeroDivisors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Polynomial/RingDivision.lean; grep -n 'theorem Monic.isRegular' Algebra/Polynomial/Monic.lean",
+   "results": "Algebra/Polynomial/RingDivision.lean:126 (Monic.mem_nonZeroDivisors, [CommRing R]); Algebra/Polynomial/Monic.lean:509 (Monic.isRegular, [Ring R])",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.Monic.mem_nonZeroDivisors",
+  "file": "Mathlib/Algebra/Polynomial/RingDivision.lean",
+  "line": 126,
+  "how": "exact: theorem Monic.mem_nonZeroDivisors {p : R[X]} (h : p.Monic) : p ∈ R[X]⁰ for [CommRing R] (RingDivision.lean:126, read 2026-10-10); membership in nonZeroDivisors is ∀ g, g * p = 0 → g = 0 (mem_nonZeroDivisors_iff), commutativity gives fg = 0 ⇒ g = 0. Also Monic.isRegular (Mathlib/Algebra/Polynomial/Monic.lean:509)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Polynomial.Monic.mem_nonZeroDivisors (Algebra/Polynomial/RingDivision.lean:126); checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}
