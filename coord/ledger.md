@@ -2064,3 +2064,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:56 L: merged deliver/M1/lem-sc-p1-ext-yoneda-associativity (reviewer FIX; first push; new nodes: 2)
 - 16:56 L: merged deliver/C1/lem-pc-field-extension-quasi-compact (reviewer FIX; first push; new nodes: 0)
 - 16:57 L: merged deliver/H1/lem-sc-cech-h1-injective (reviewer FIX; first push; new nodes: 0)
+- 16:57 L: returned deliver/H1/lem-sc-boundary-cech-compatibility (reviewer RETURN: 1. E5/C4/D3: steps 2-3: the compatibility of c_A with the connecting map, which is the whole content of the item, is ass)
