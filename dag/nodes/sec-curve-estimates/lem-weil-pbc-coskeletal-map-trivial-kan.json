@@ -23,9 +23,86 @@
   "def-weil-pbc-simplicial-coskeleton",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation. By [def-weil-pbc-trivial-kan-fibration] we must show (a) $f_0:V_0\\to U_0$ is surjective and (b) for every $k\\geq1$ and morphisms $a:\\partial\\Delta[k]\\to V$, $b:\\Delta[k]\\to U$ with $f\\circ a=b\\circ\\iota$, where $\\iota:\\partial\\Delta[k]\\to\\Delta[k]$ is the inclusion, there is $c:\\Delta[k]\\to V$ with $c\\circ\\iota=a$ and $f\\circ c=b$. For (a): if $n=0$, $f_0$ is surjective by (2); if $n\\geq1$, then $0<n$ and $f_0$ is bijective by (1).",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: 'Consider a solid diagram ... as in Definition 08NL'"
+   }
+  },
+  {
+   "text": "Case $1\\leq k\\leq n$. Put $x=b_k(\\mathrm{id}_{[k]})\\in U_k$; by naturality of $b$, $b_m(\\varphi)=b_m(\\Delta[k](\\varphi)(\\mathrm{id}_{[k]}))=U(\\varphi)(x)$ for every $\\varphi:[m]\\to[k]$. By (1) (if $k<n$) or (2) (if $k=n$) choose $y\\in V_k$ with $f_k(y)=x$, and define $c_m(\\varphi)=V(\\varphi)(y)$ for $\\varphi\\in\\Delta[k]_m$; since $V(\\varphi\\circ\\psi)=V(\\psi)\\circ V(\\varphi)$, $c:\\Delta[k]\\to V$ is a morphism of simplicial sets. Then $f_m(c_m(\\varphi))=f_m(V(\\varphi)(y))=U(\\varphi)(f_k(y))=U(\\varphi)(x)=b_m(\\varphi)$, so $f\\circ c=b$. For $c\\circ\\iota=a$, let $\\varphi:[m]\\to[k]$ be non-surjective, choose $i\\in[k]$ outside its image and write $\\varphi=\\delta_i\\circ\\psi$ with $\\psi:[m]\\to[k-1]$ by [lem-weil-pbc-simplex-face-factorization]. Since $\\delta_i\\in\\partial\\Delta[k]_{k-1}$ and $a$ is natural, $a_m(\\varphi)=V(\\psi)(a_{k-1}(\\delta_i))$, while $c_m(\\varphi)=V(\\psi)(V(\\delta_i)(y))$. So it suffices that $a_{k-1}(\\delta_i)=V(\\delta_i)(y)$ in $V_{k-1}$. Both have the same image under $f_{k-1}$: $f_{k-1}(a_{k-1}(\\delta_i))=b_{k-1}(\\delta_i)=U(\\delta_i)(x)=U(\\delta_i)(f_k(y))=f_{k-1}(V(\\delta_i)(y))$. As $k-1<n$, $f_{k-1}$ is injective by (1), so they are equal. (This is the source's 'the diagram will commute as the other nondegenerate simplices of $\\Delta[k]$ are in degrees $<k$ where $f$ is an isomorphism'.)",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: 'If $k\\leq n$ then the dotted arrow is the one corresponding to a lift $y\\in V_k$ of $x$ ...'"
+   }
+  },
+  {
+   "text": "Maps into an $n$-coskeletal simplicial set. Let $W$ be a simplicial set such that the canonical morphism $\\gamma:W\\to C=\\operatorname{cosk}_n\\mathrm{sk}_nW$, with counit $\\varepsilon:\\mathrm{sk}_nC\\to\\mathrm{sk}_nW$, is an isomorphism [def-weil-pbc-simplicial-coskeleton]. Then for every simplicial set $K$ the map $\\Theta_K:g\\mapsto\\mathrm{sk}_n(g)$, $\\operatorname{Mor}(K,W)\\to\\operatorname{Mor}(\\mathrm{sk}_nK,\\mathrm{sk}_nW)$, is bijective. Indeed, by definition of the canonical morphism, $\\varepsilon\\circ\\mathrm{sk}_n(\\gamma)=\\mathrm{id}_{\\mathrm{sk}_nW}$; by definition of the coskeleton, $h\\mapsto\\varepsilon\\circ\\mathrm{sk}_n(h)$ is a bijection $\\operatorname{Mor}(K,C)\\to\\operatorname{Mor}(\\mathrm{sk}_nK,\\mathrm{sk}_nW)$; and $g\\mapsto\\gamma\\circ g$ is a bijection $\\operatorname{Mor}(K,W)\\to\\operatorname{Mor}(K,C)$ since $\\gamma$ is an isomorphism. The composite is $g\\mapsto\\varepsilon\\circ\\mathrm{sk}_n(\\gamma)\\circ\\mathrm{sk}_n(g)=\\mathrm{sk}_n(g)$, using that $\\mathrm{sk}_n$ is a functor. By (3) and (4) this applies to $W=U$ and $W=V$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: 'by conditions (3) and (4) we have (using adjointness of skeleton and coskeleton functors) $\\mathrm{Mor}(\\Delta[k],U)=\\mathrm{Mor}(\\mathrm{sk}_n\\Delta[k],\\mathrm{sk}_nU)$'"
+   }
+  },
+  {
+   "text": "For $k>n$ the morphism $\\mathrm{sk}_n(\\iota):\\mathrm{sk}_n\\partial\\Delta[k]\\to\\mathrm{sk}_n\\Delta[k]$ is an isomorphism (indeed the identity): for $j\\leq n<k$ no order-preserving map $[j]\\to[k]$ is surjective (its image has at most $j+1<k+1$ elements), so $\\partial\\Delta[k]_j=\\Delta[k]_j$ and $\\iota_j$ is the identity for all $j\\leq n$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: 'because $\\mathrm{sk}_n\\Delta[k]=\\mathrm{sk}_n\\partial\\Delta[k]$ for $k>n$'"
+   }
+  },
+  {
+   "text": "Hence for $k>n$ and $W\\in\\{U,V\\}$ the restriction $r_W:\\operatorname{Mor}(\\Delta[k],W)\\to\\operatorname{Mor}(\\partial\\Delta[k],W)$, $g\\mapsto g\\circ\\iota$, is bijective: by functoriality $\\Theta_{\\partial\\Delta[k]}(g\\circ\\iota)=\\Theta_{\\Delta[k]}(g)\\circ\\mathrm{sk}_n(\\iota)$, so $r_W=\\Theta_{\\partial\\Delta[k]}^{-1}\\circ(-\\circ\\mathrm{sk}_n(\\iota))\\circ\\Theta_{\\Delta[k]}$ is a composite of three bijections (step 3 twice, and precomposition with the isomorphism of step 4).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: '$\\mathrm{Mor}(\\Delta[k],U)=\\mathrm{Mor}(\\mathrm{sk}_n\\Delta[k],\\mathrm{sk}_nU)=\\mathrm{Mor}(\\mathrm{sk}_n\\partial\\Delta[k],\\mathrm{sk}_nU)=\\mathrm{Mor}(\\partial\\Delta[k],U)$ and similarly for $V$'"
+   }
+  },
+  {
+   "text": "Case $k>n$ (this includes $k=n+1$). Given $a,b$ as in step 1, let $c=r_V^{-1}(a):\\Delta[k]\\to V$, so $c\\circ\\iota=a$. Then $r_U(f\\circ c)=f\\circ c\\circ\\iota=f\\circ a=b\\circ\\iota=r_U(b)$, and injectivity of $r_U$ (step 5) gives $f\\circ c=b$. Together with step 2 (for $1\\leq k\\leq n$) and step 1 (a), $f$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]; for $k>n$ the lift is moreover unique.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Simplicial, Lemma 01A6 (lemma-section), proof: 'Thus we obtain a unique dotted arrow fitting into the diagram in this case also.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplex-face-factorization",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Simplicial, Lemma 01A6 (label lemma-section), proof, lines 5998-6020"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +131,31 @@
    "results": "CategoryWithFibrations.lean:128 rlp_monomorphisms; Coskeletal.lean: StrictSegal simplicial sets are 2-coskeletal; no lifting criterion for coskeletal maps",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism between coskeletal simplicial sets bijective in low degrees surjective in degree n has right lifting property against boundary inclusions",
+   "results": "service error HTTP 500 again at about 13:35 UTC; no results",
+   "date": "2026-10-10",
+   "verdict": "no verdict (service down)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from a simplicial set into an n-coskeletal simplicial set correspond bijectively to morphisms of n-truncations",
+   "results": "SSet.Truncated.cosk.fullyFaithful, SSet.Truncated.cosk.full, SSet.Truncated.cosk, SSet.Truncated.sk.fullyFaithful, SSet.coskAdj (Mathlib.AlgebraicTopology.SimplicialSet.Basic): the adjunction of step 3, no lifting statement",
+   "date": "2026-10-10",
+   "verdict": "no match for the lemma (the adjunction coskAdj and isoCoskOfIsCoskeletal give step 3 only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cosk\\|IsCoskeletal' Mathlib; grep -rn 'trivialFibration\\|TrivialFibration' Mathlib/AlgebraicTopology",
+   "results": "Coskeletal.lean (SimplicialObject and SSet), StrictSegal.lean, NerveAdjunction.lean, HomotopyCat.lean, Basic.lean; ModelCategory/{Transport,BrownLemma,Over}.lean use trivialFibrations abstractly; nothing relates coskeletal maps to trivial fibrations",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +171,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coskeletal-map-trivial-kan",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks Simplicial Lemma 01A6 (lemma-section, simplicial.tex 5981-6020; tag verified in tags/tags line 1677). The statement agrees with the source hypothesis by hypothesis. Step 1 reduces to the lifting problems of def-weil-pbc-trivial-kan-fibration (which asks p_0 surjective separately, handled by (1)/(2)). Step 2 writes out the source's case k<=n, including the source's tacit check that the chosen lift restricts to the given boundary map (via face factorization and injectivity of f_{k-1}). Steps 3-6 write out the case k>n: the adjunction bijection of the coskeleton definition plus the canonical isomorphism give Mor(K,W) = Mor(sk_n K, sk_n W) for W=U,V; sk_n of the boundary inclusion is the identity for k>n; so restriction to the boundary is bijective for U and V and the lift is the unique extension. The case k=n+1 is covered by this coskeletal argument (as in the source), not by surjectivity. No new nodes: every fact is an existing node (definitions of coskeleton and trivial Kan fibration, face factorization leaf) or elementary. Mathlib: no 01A6 statement (searches recorded); slopmaster2 has no declaration (grep of node id, 01A6, cosk, Kan, boundary: none).",
+  "blueprint": "The item serves lem-weil-pbc-hypercover-free-resolution, proof, first paragraph ('Exactness is a local assertion ... every cycle is locally a boundary') through lem-weil-pbc-coskeleton-free-homology-comparison step 4; the steps realize the trivial-Kan-fibration input of that place (lifting against boundaries for the coskeletal map), which the blueprint text does not spell out. No blueprint node states 01A6 (searches 'trivial Kan fibration', 'coskeletal', 'coskeleton', 'Kan', '01A6': 0 matches)."
+ },
+ "reviewed": "2026-10-10 L: 6 steps along 01A6 checked (reduction to the definition, f_0 surjective; case 1 <= k <= n by lifting b(id) and the face factorization with injectivity below n; coskeletal objects: morphisms determined by n-skeleta via the adjunction; for k > n the n-skeleton of the boundary inclusion is the identity; restriction bijective; the lift). No new nodes. LeanSearch down."
 }
