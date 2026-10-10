@@ -24,9 +24,44 @@
   "def-pc-derived-category",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Pseudo-coherence is local and passes to open subsets by [def-pur-pseudo-coherent-complex], so it suffices to work on an affine open $U=\\operatorname{Spec}(R)$ of $X$, where $K|_U\\cong L|_U\\oplus M|_U$ and $K|_U$ is pseudo-coherent. First, all three objects lie in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$: locally $K|_U$ is quasi-isomorphic to a bounded-above complex of finite free modules, whose cohomology sheaves are quasi-coherent, so each $H^i(K|_U)$ is quasi-coherent; $H^i(L|_U)$ and $H^i(M|_U)$ are direct summands of $H^i(K|_U)$, i.e. images of idempotent endomorphisms of a quasi-coherent module, hence quasi-coherent (elementary). By the equivalence $D(R)\\to D_{\\mathrm{QCoh}}(\\mathcal O_U)$ of [lem-pc-affine-qcoh-derived-equivalence] choose complexes $P^\\bullet,Q^\\bullet$ of $R$-modules with $L|_U\\cong\\widetilde{P^\\bullet}$ and $M|_U\\cong\\widetilde{Q^\\bullet}$; as the functor is additive, $K|_U\\cong\\widetilde{P^\\bullet\\oplus Q^\\bullet}$. By [lem-pc-affine-pseudo-coherent-criterion] applied to $P^\\bullet\\oplus Q^\\bullet$, the complex $P^\\bullet\\oplus Q^\\bullet$ is quasi-isomorphic to a bounded-above complex of finite free $R$-modules. The last clause of [lem-pc-ring-pseudo-coherent-summand] gives the same for $P^\\bullet$ and $Q^\\bullet$, and [lem-pc-affine-pseudo-coherent-criterion] again shows that $L|_U$ and $M|_U$ are pseudo-coherent.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-ring-pseudo-coherent-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, reduction from the scheme statement to affine module complexes"
+   }
+  },
+  {
+   "text": "The bounded-above finite-free representatives obtained on each affine U witness that L and M are pseudo-coherent on X by the local definition [def-pur-pseudo-coherent-complex]. The argument applies independently to both summands, and the zero-summand cases are immediate.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, conclusion of lemma-summands-pseudo-coherent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-ring-pseudo-coherent-summand"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CE, with the affine module lemma Tag 064X"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +86,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-summand",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-pseudo-coherent-summand",
+  "worker": "stage1",
+  "summary": "Split the Tag 08CE direct-summand result into an affine reduction using the ring-level Tag 064X lemma and a local conclusion from the pseudo-coherent definition.",
+  "blueprint": "The two steps realize the proper-flat support proof clause of lem-sc-finite-duality concerning closure of pseudo-coherence under direct summands.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine reduction needs the established equivalence between module complexes over R and quasi-coherent complexes on Spec(R)."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "The affine reduction needs the criterion translating pseudo-coherence between the sheaf and module representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcs3016",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs3016 (reviewer sub-agent of L); spot-checked: Checked item vs Stacks 08CE and vs use in lem-pc-perfect-summand step 2 (exact match, C4 ok); affine reduction cites lem-pc-affine-qcoh-derived-equivalence and lem-pc-affine-pseudo-coherent-criterion; ring node vs 064X, no existing duplicate node (grep dag/nodes), no Mathlib match (grep Mathlib pseudo.?coherent: none); no degreewise idempotent splitting assumed (064X uses cones). FIX more, RETURN less: (1) C4: ring node's 'pseudo-coherent' meant m-pseudo-coherent for all m while the affine criterion yields 'quasi-isomorphic to bounded-above finite free'; the bridge is Tag 064T, not cited. Repaired by stating the ring node's last clause in the bounded-above finite-free form (source names 064T) and dropping its stray [def-pur-pseudo-coherent-complex] citation (sheaf definition, absent from stmt_deps; B3). (2) C1: Step 1 used the affine equivalence on L|U, M|U without showing they lie in D_QCoh; folded in the elementary argument (cohomology of a summand is an idempotent image of quasi-coherent H^i(K|U)) and spelled out the transport P⊕Q. Note: report's claimed created.item correction was not in the file; the original value (lem-pc-perfect-summand) is the correct creating item and was left.; 2 file(s) fixed by the reviewer"
+ }
 }
