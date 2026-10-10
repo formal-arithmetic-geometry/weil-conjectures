@@ -1605,3 +1605,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:19 L: merged deliver/E1/lem-sc-second-kummer-divisors (reviewer PASS; after a return; new nodes: 0)
 - 14:20 L: merged deliver/K1/lem-weil-pbc-finite-over-henselian-local-product (reviewer PASS; first push; new nodes: 0)
 - 14:20 L: merged deliver/C1/lem-pc-nonzero-section-integral-cartier (reviewer FIX; first push; new nodes: 0)
+- 14:21 L: merged deliver/E1/lem-sc-riemann-roch (reviewer FIX; first push; new nodes: 4)
