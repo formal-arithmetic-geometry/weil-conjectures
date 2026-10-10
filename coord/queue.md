@@ -1,8 +1,8 @@
 # Work queue
 
-924 items; claim with `tools/claim.py next <group> [--stage N]`.
+927 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (213)
+## Stage 1: nodes to split (215)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,9 +10,9 @@
 | `lem-sc-topological-filtered-injective-cech-acyclic` | 2015 | none |
 | `lem-sc-finite-length-global-submodule` | 2018 | none |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
-| `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
+| `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3014 | none |
 | `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
 | `lem-pc-stalk-direct-sums` | 3014 | none |
@@ -42,8 +42,10 @@
 | `lem-sc-top-dimensional-reduction-intersection` | 4010 | none |
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
-| `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
+| `lem-sc-hilbert-difference` | 5010 | none |
+| `lem-sc-hilbert-embedded-points` | 5010 | none |
+| `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
 | `lem-pc-fppf-affine-refinement` | 5011 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
@@ -220,7 +222,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (711)
+## Stage 2: nodes to state (712)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -913,6 +915,7 @@
 | `lem-sc-c1-brauer-trivial` | 2 | state |
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
+| `lem-sc-hilbert-polynomial` | 2 | state |
 | `lem-sc-positive-degree-ample` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
 | `lem-sc-riemann-roch-large-degree` | 2 | state |
@@ -936,7 +939,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1416 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
+Not open yet: 1417 nodes that wait for a statement dependency, 252 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
