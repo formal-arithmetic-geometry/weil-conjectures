@@ -3,25 +3,56 @@
  "blueprint": {
   "is": "def-pc-dimension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Dimension",
- "statement": "The *dimension* $\\dim X$ of a nonempty scheme $X$ is the supremum\nof the Krull dimensions of the local rings of $X$, and the\n*relative dimension* of a morphism $f:X\\to S$ of finite type at a\npoint $s\\in S$ is $\\dim X_s$ (the dimension of the fibre); $f$ is\n*of relative dimension $d$* if all nonempty fibres have dimension\n$d$.",
+ "statement": "Let $X$ be a nonempty scheme [def-pc-scheme]. Its *dimension* $\\dim X$ is the supremum of the Krull dimensions [def-weil-pbc-krull-dimension-ring] of its local rings $\\mathcal O_{X,x}$, as $x$ ranges over $X$. Let $f:X\\to S$ be a morphism of finite type [def-weil-finite-type-morphism]. At a point $s\\in S$ with nonempty scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre], the *relative dimension* of $f$ over $s$ is $\\dim X_s$. The morphism $f$ is *of relative dimension $d$* if every nonempty fibre $X_s$ has dimension $d$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-dimension.md",
   "place": "node def-pc-dimension, order 452"
  },
  "stmt_deps": [
-  "def-pc-base-change",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a scheme is the supremum of dimensions of its local rings",
+   "results": "LeanSearch returned HTTP 500 twice on 2026-10-10; no result could be read. The independent LeanFinder, Loogle and source searches below were completed.",
+   "date": "2026-10-10",
+   "verdict": "service unavailable; no match established by this tool"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme dimension supremum Krull dimensions local rings and morphism relative dimension at base point dimension fiber",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, IsLocalization.AtPrime.ringKrullDim_eq_height, Algebra.IsStandardSmooth.relativeDimension and dimension lemmas for quotient rings; none defines this bundle for arbitrary schemes and morphisms",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "topologicalKrullDim (Mathlib.Topology.KrullDimension.lean:39), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim and related inequalities; no relative dimension defined by dimensions of all fibres",
+   "date": "2026-10-10",
+   "verdict": "no match for the combined definition"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def .*dim|def .*Dimension|def relativeDimension|class .*RelativeDimension|topologicalKrullDim|ringKrullDim_stalk' .lake/packages/mathlib/Mathlib/AlgebraicGeometry .lake/packages/mathlib/Mathlib/Topology/KrullDimension.lean",
+   "results": "Mathlib/Topology/KrullDimension.lean:39 defines topologicalKrullDim; Mathlib/AlgebraicGeometry/Properties.lean:376 states ringKrullDim_stalk_eq_coheight; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:135 defines SmoothOfRelativeDimension, which includes smoothness and is narrower. No scheme dimension or fibrewise relative-dimension definition occurs in the inspected AlgebraicGeometry source.",
+   "date": "2026-10-10",
+   "verdict": "no match for the bundle; existing DAG node lem-pc-scheme-dimension-local-rings supplies the comparison with topologicalKrullDim"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +78,19 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-pc-dimension",
+  "worker": "stage1",
+  "summary": "Checked the imported blueprint statement against Stacks Tags 04MU and 01K0 and retained its convention: scheme dimension is the supremum of local-ring dimensions, and relative dimension is the dimension of each nonempty fibre. Added existing definition dependencies for ring Krull dimension, finite type and scheme-theoretic fibre; the original base-change dependency was redundant. Clarified that the dimension over a point is only defined here for a nonempty fibre. Stacks Tag 02NJ has the stronger equidimensional-fibre convention; this item deliberately retains the blueprint wording. No new nodes are needed, because the required notions and the comparison with topological dimension already have DAG nodes.",
+  "blueprint": "The sole defining sentence of blueprint node def-pc-dimension, order 452: the local-ring supremum and the two fibrewise relative-dimension clauses."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): definition kept as the supremum of local-ring dimensions, citers checked, 04MT/04MU, Mathlib lines verified"
+ }
 }
