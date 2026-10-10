@@ -35,6 +35,7 @@
 \newcommand{\Qlbar}{\overline{\mathbb{Q}}_\ell}
 \newcommand{\cO}{\mathcal{O}}
 \newcommand{\lotimes}{\otimes^{\mathrm{L}}}
+\newcommand{\Dc}{\D_{\mathrm{cons}}}
 
 \title{Pro-\'etale derived categories and six functors:\\
 the constructions chosen in the formalization}
@@ -45,15 +46,12 @@ the constructions chosen in the formalization}
 \maketitle
 
 \begin{abstract}
-This note records the current state of the pro-\'etale part of the six-functor formalism
-in the Lean formalization of the Weil conjectures, with emphasis on the
-\emph{mathematical choices} made: which categories serve as derived categories, how the
-$\ell$-adic coefficient rings are modelled, how constructibility is defined, and how each
-of the six functors is constructed. It summarizes the work on the branches
-\texttt{ring-objects-for-coefficients}, \texttt{extend-scalars-module-object},
-\texttt{extend-scalars-isLocalization},
-\texttt{bounded-constructible-module-object-of-sheaf} and
-\texttt{module-object-six-functors}, on top of what is already on \texttt{master}.
+This note records the \emph{mathematical choices} made in the pro-\'etale part of the
+six-functor formalism of the Lean formalization of the Weil conjectures: which categories
+serve as derived categories, how the $\ell$-adic coefficient rings are modelled, how
+constructibility is defined, how each of the six functors is constructed, and how the base
+change morphisms are set up. It describes the state of \texttt{master}, together with the
+branch \texttt{extend-scalars-isLocalization} (\S\ref{sec:rationalization}).
 \end{abstract}
 
 \tableofcontents
@@ -63,211 +61,127 @@ of the six functors is constructed. It summarizes the work on the branches
 %======================================================================
 
 The formalization follows Bhatt--Scholze, \emph{The pro-\'etale topology for schemes},
-\S6.8, for $\ell$-adic coefficients. Two layers coexist, and they are used for
-\emph{different kinds of coefficients}.
+\S6.8, for $\ell$-adic coefficients. Two layers coexist, used for different coefficients.
 
 \begin{enumerate}[label=(\Alph*)]
 \item \textbf{Finite coefficients: fixed coefficient category.} Sheaves on $X_\proet$ with
   values in a fixed closed symmetric monoidal Grothendieck abelian category $\mathcal{A}$,
-  the intended case being $\mathcal{A} = \Mod_\Lambda$ for a \emph{finite} (discrete) ring
-  $\Lambda$ such as $\mathbb{Z}/\ell^n$. The six functors are built on
-  $\Sh(X_\proet,\mathcal{A})$ and its derived category. This is the folder
-  \lean{SixFunctors/ProEtale/FiniteCoefficient} (on \texttt{master} it is still
-  \lean{SixFunctors/ProEtale}).
+  typically $\mathcal{A}=\Mod_\Lambda$ for a finite ring $\Lambda$ such as
+  $\mathbb{Z}/\ell^n$ (folder \lean{SixFunctors/ProEtale/FiniteCoefficient}).
 \item \textbf{Non-finite coefficients: module objects over a coefficient ring sheaf.}
-  Sheaves of modules over a sheaf of rings $\mathcal{R}_X$ on $X_\proet$ which genuinely
-  varies with $X$: $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$ and
-  $\Qlbar{}_{,X}$. These
-  are modelled as \emph{module objects} over a \emph{ring object} of the category of
-  abelian sheaves, and the six functors are obtained from those of layer (A) with
-  $\mathcal{A} = \Ab$ by transporting module structures and changing scalars. This is the
-  folder \lean{SixFunctors/ProEtale/ModuleObject}, with the subfolder
-  \lean{FiniteExtension} for the coefficient rings $C(-,T)$ and the sibling subfolder
-  \lean{PAdicAlgCl} for $\Qlbar{}_{,X}$.
+  Sheaves of modules over a sheaf of rings $\mathcal{R}_X$ that genuinely varies with $X$:
+  $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$, $\Qlbar{}_{,X}$. These
+  are \emph{module objects} over a \emph{ring object} of abelian sheaves, and the six
+  functors are obtained from those of layer (A) with $\mathcal{A}=\Ab$ by transporting
+  module structures and changing scalars (folder \lean{SixFunctors/ProEtale/ModuleObject},
+  subfolders \lean{FiniteExtension} for $C(-,T)$ and \lean{PAdicAlgCl} for $\Qlbar$).
 \end{enumerate}
 
 \begin{choice}[Module objects only for non-finite coefficients]
-The module-object setup is used \emph{only} for the non-finite (topological) coefficients
-$\mathbb{Z}_\ell,\mathbb{Q}_\ell,E,\cO_E,\Qlbar$. Finite coefficients $\Lambda=\mathbb{Z}/\ell^n$
-stay in layer (A), as sheaves with values in $\Mod_\Lambda$.
+The module-object setup is used \emph{only} for $\mathbb{Z}_\ell,\mathbb{Q}_\ell,E,\cO_E,
+\Qlbar$. Finite coefficients stay in layer (A).
 \end{choice}
 
-The reason is that for a discrete ring $\Lambda$ the sheaf of continuous maps
-$C(-,\Lambda)$ is the constant sheaf $\underline{\Lambda}$. A sheaf of
-$\underline{\Lambda}$-modules is then the same as a $\Mod_\Lambda$-valued sheaf, and the
-coefficient ring does not vary with $X$, since $f^*\underline{\Lambda}_Y=\underline{\Lambda}_X$.
-The simpler fixed-coefficient formalism therefore suffices, and it has exact pullbacks.
-For a non-discrete topological ring $T$ this breaks down. An $\ell$-adic sheaf in the sense
-of Bhatt--Scholze is a sheaf of modules over $U\mapsto C(U,\mathbb{Z}_\ell)$, which is
-\emph{not} the constant sheaf with value $\mathbb{Z}_\ell$: the constant sheaf would be the
-sheaf of locally constant functions, which is wrong on w-contractible objects. Moreover the
-coefficient morphism $\alpha_f\colon f^*\mathcal{A}_Y(T)\to\mathcal{A}_X(T)$ is not an
-isomorphism in general. So the coefficients cannot be absorbed into a fixed category
-$\mathcal{A}$, and the module-object formalism is needed.
+For a discrete ring $\Lambda$, $C(-,\Lambda)$ is the constant sheaf $\underline{\Lambda}$, a
+sheaf of $\underline{\Lambda}$-modules is a $\Mod_\Lambda$-valued sheaf, and
+$f^*\underline{\Lambda}_Y=\underline{\Lambda}_X$; so the simpler fixed-coefficient formalism
+suffices. For a non-discrete $T$ this breaks down: an $\ell$-adic sheaf is a module over
+$U\mapsto C(U,\mathbb{Z}_\ell)$, which is \emph{not} the constant sheaf (wrong on
+w-contractible objects), and the coefficient morphism $f^*\mathcal{A}_Y(T)\to\mathcal{A}_X(T)$
+need not be an isomorphism for a general $T$. So the coefficients cannot be absorbed into a
+fixed $\mathcal{A}$.
 
-\paragraph{Conventions.} Schemes live in \texttt{Type u}. The small pro-\'etale site
-$X_\proet$ is mathlib's \lean{Scheme.ProEt}: schemes \emph{weakly \'etale} over $X$, with
-the topology \lean{Scheme.ProEt.topology} generated by quasi-compact (fpqc) jointly
-surjective families of weakly \'etale maps. Its objects are in \texttt{Type (u+1)} and
-its morphisms in \texttt{Type u}; it is essentially small in \texttt{u+1}. Coefficient
-categories have $\Hom$-types in \texttt{Type (u+1)}. Note that, unlike the \'etale site,
-joint surjectivity alone does \emph{not} give a pro-\'etale cover: quasi-compactness is part
-of the covering condition, which is why Zariski covers are fed in explicitly
-(\lean{Scheme.zariskiPrecoverage_le_proetalePrecoverage}).
+\paragraph{Conventions.} $X_\proet$ is mathlib's \lean{Scheme.ProEt}: schemes weakly \'etale
+over $X$, with covers the quasi-compact (fpqc) jointly surjective families. Unlike the
+\'etale site, joint surjectivity alone does not give a cover, which is why Zariski covers
+are fed in explicitly.
 
 %======================================================================
 \section{Monoidal structure on pro-\'etale sheaves}
 %======================================================================
 
 \begin{choice}[Tensor product of sheaves]
-For a closed braided (resp.\ symmetric) monoidal coefficient category $\mathcal{A}$, the
-tensor product on $\Sh(X_\proet,\mathcal{A})$ is the \emph{sheafification of the
-objectwise tensor product of presheaves} (mathlib's \lean{Sheaf.monoidalCategory}),
-installed as a global instance (\lean{ProEtale.sheafMonoidalCategory}).
+For a closed symmetric monoidal $\mathcal{A}$, the tensor product on $\Sh(X_\proet,
+\mathcal{A})$ is the \emph{sheafification of the objectwise tensor product} (mathlib's
+\lean{Sheaf.monoidalCategory}).
 \end{choice}
 
-Closedness of $\mathcal{A}$ is what makes the class of sheafification-inverting morphisms
-stable under tensoring (tensoring is a left adjoint whose right adjoint, the internal hom,
-preserves sheaves). The sheaf category is then itself monoidal closed by \emph{Day's
-reflection theorem} applied to $\mathrm{sheafify} \dashv \mathrm{forget}$, so that
-$\mathcal{F}\otimes -$ preserves all colimits. This is the input needed for the K-flat
-derivation of the tensor product (\S\ref{sec:derived}).
-
-For $\mathcal{A} = \Ab$, the relevant monoidal structure on $\Ab$ is the tensor product
-$M\otimes_{\mathbb{Z}}N$ with unit $\mathbb{Z}$ (not the cartesian one); it is
-constructed on \texttt{ring-objects-for-coefficients} (\lean{AddCommGrpCat.monoidalCategory}),
-together with its symmetry and closedness (internal hom $\Hom(M,N)$).
+Closedness of $\mathcal{A}$ makes sheafification compatible with tensoring; by Day's
+reflection theorem the sheaf category is again monoidal closed, so $\mathcal{F}\otimes-$
+preserves colimits, which is what the K-flat derivation of $\lotimes$ needs. For
+$\mathcal{A}=\Ab$ the monoidal structure is $\otimes_{\mathbb{Z}}$ with unit $\mathbb{Z}$,
+not the cartesian one.
 
 %======================================================================
 \section{Coefficient rings as ring objects}
 \label{sec:coefficients}
 %======================================================================
 
-\subsection{Ring objects}
-
-A \emph{ring object} of a monoidal category $\mathcal{C}$ is a monoid object
-$(R,\mu,\eta)$ (mathlib's \lean{MonObj}), commutative if $\mu\circ\beta_{R,R}=\mu$
-(\lean{IsCommMonObj}). When $\mathcal{C}$ is monoidal preadditive, the global sections
-$\Gamma(R)=\Hom(\mathbb{1},R)$ form a ring for the convolution product.
-
 \begin{choice}[Rings as monoid objects of $\Ab$]
-A ring $R$ is regarded as a monoid object of $(\Ab,\otimes_{\mathbb{Z}})$. Consequently:
-\begin{itemize}
-\item a presheaf of rings $P\colon\mathcal{C}^{op}\to\mathrm{Ring}$ is a ring object of
-  abelian presheaves, objectwise;
-\item since sheafification is monoidal, the sheafification of a presheaf of rings is a
-  ring object of abelian sheaves (\lean{Sheaf.sheafifyRingPresheaf});
-\item the abelian sheaf underlying a sheaf of rings $S$ is a ring object, the structure
-  being transported along $\mathrm{sheafify}(S) \cong S$
-  (\lean{Sheaf.monObj_sheafCompose_obj}); morphisms of sheaves of rings are morphisms of
-  ring objects.
-\end{itemize}
+A ring is a monoid object of $(\Ab,\otimes_{\mathbb{Z}})$ (mathlib's \lean{MonObj}). A
+presheaf of rings is then objectwise a ring object of abelian presheaves; since
+sheafification is monoidal, its sheafification is a ring object of abelian sheaves; and the
+abelian sheaf underlying a sheaf of rings is a ring object.
 \end{choice}
 
 \subsection{The $\ell$-adic coefficient sheaves}
 
 \begin{choice}[Sheaves of continuous functions]
-For a topological ring $T$, the coefficient sheaf is
+For a topological ring $T$,
 \[
-  \mathcal{A}_X(T) \;:=\; \bigl(U \mapsto C(U,T)\bigr)
-  \quad\text{on } X_\proet,
+  \mathcal{A}_X(T) := \bigl(U\mapsto C(U,T)\bigr)\quad\text{on }X_\proet,
 \]
-a sheaf of rings (it is even an fpqc sheaf; \lean{ProEtale.continuousMapRingSheaf}),
-whose underlying abelian sheaf is a commutative ring object of $\Sh(X_\proet,\Ab)$
-(\lean{ProEtale.continuousMapRingObj}). Then
-\begin{align*}
-\mathbb{Z}_{\ell,X} &= \mathcal{A}_X(\mathbb{Z}_\ell),&
-\mathbb{Q}_{\ell,X} &= \mathcal{A}_X(\mathbb{Q}_\ell),\\
-E_X &= \mathcal{A}_X(E),&
-\cO_{E,X} &= \mathcal{A}_X(\cO_E),
-\end{align*}
-for a subfield $E\subseteq\Qlbar$ (given by an embedding $E\hookrightarrow\Qlbar$) with
-the topology restricted from $\Qlbar$, and $\cO_E$ its ring of integers
-(\lean{ProEtale.padicIntSheaf}, \lean{ProEtale.padicSheaf},
-\lean{ProEtale.padicSubfieldSheaf}, \lean{ProEtale.padicIntegersSheaf}). The abelian sheaf
-underlying $\mathbb{Z}_{\ell,X}$ is definitionally mathlib's
-\lean{Scheme.ellAdicSheaf}.
+a sheaf of rings whose underlying abelian sheaf is a commutative ring object
+(\lean{ProEtale.continuousMapRingObj}). Then $\mathbb{Z}_{\ell,X}=\mathcal{A}_X(\mathbb{Z}_\ell)$,
+$\mathbb{Q}_{\ell,X}=\mathcal{A}_X(\mathbb{Q}_\ell)$, $E_X=\mathcal{A}_X(E)$,
+$\cO_{E,X}=\mathcal{A}_X(\cO_E)$ for $E\subseteq\Qlbar$ with the subspace topology.
 \end{choice}
 
-No completeness, Noetherianity or inverse-limit presentation of $T$ is used: the same
-construction covers $\mathbb{Z}_\ell$, $\mathbb{Q}_\ell$, $E$ and $\cO_E$ uniformly. In
-particular $\mathbb{Q}_{\ell,X}$ is \emph{not} defined as $\mathbb{Z}_{\ell,X}[1/\ell]$
-and $E_X$ is not defined as $\cO_{E,X}[1/\ell]$; these identifications are theorems, not
-definitions. At the level of derived categories, the identification of $E$-coefficients
-with $\cO_E$-coefficients with $\ell$ inverted is stated in \S\ref{sec:rationalization}.
+No completeness, Noetherianity or inverse-limit presentation of $T$ is used, so all these
+rings are covered uniformly. In particular $\mathbb{Q}_{\ell,X}$ is \emph{not} defined as
+$\mathbb{Z}_{\ell,X}[1/\ell]$, nor $E_X$ as $\cO_{E,X}[1/\ell]$; such identifications are
+theorems (\S\ref{sec:rationalization}).
 
 \begin{choice}[$\Qlbar$]
-$\Qlbar{}_{,X}$ is \emph{not} $C(-,\Qlbar)$ for the valuation topology. Over a
-w-contractible $U$ the correct sections are the continuous maps $U\to\Qlbar$ with values
-in some \emph{finite} subextension $E\subseteq\Qlbar$ of $\mathbb{Q}_\ell$; this is
-strictly smaller than $C(U,\Qlbar)$ (a null sequence of elements of unbounded degree
-extends to $\beta\mathbb{N}$). Accordingly
+$\Qlbar{}_{,X}$ is \emph{not} $C(-,\Qlbar)$ for the valuation topology: over a
+w-contractible $U$ the right sections are the continuous maps with values in some
+\emph{finite} subextension $E/\mathbb{Q}_\ell$, which is strictly smaller. So
 \[
-  \Qlbar{}_{,X} := \mathrm{sheafify}\Bigl(U\mapsto \{f\in C(U,\Qlbar) \mid
-  f(U)\subseteq E \text{ for some finite } E/\mathbb{Q}_\ell\}\Bigr)
+  \Qlbar{}_{,X} := \mathrm{sheafify}\Bigl(U\mapsto\{f\in C(U,\Qlbar)\mid f(U)\subseteq E
+  \text{ for some finite } E/\mathbb{Q}_\ell\}\Bigr)
 \]
-(\lean{ProEtale.padicAlgClSheaf}), defined directly as a ring object of abelian sheaves:
-it is the sheafification of a presheaf of rings (\lean{ProEtale.padicAlgClRingPresheaf}),
-not a sheaf of rings.
+(\lean{ProEtale.padicAlgClSheaf}), a ring object of abelian sheaves obtained by sheafifying a
+presheaf of rings, not a sheaf of rings.
 \end{choice}
 
 \begin{proposition}[$\Qlbar{}_{,X}=\operatorname{colim}_E E_X$]
-Let $\mathcal{E}$ be the set of finite subextensions $E\subseteq\Qlbar$ of $\mathbb{Q}_\ell$,
-ordered by inclusion (\lean{PadicAlgCl.FiniteIntermediateField}); it is directed, the
-compositum of two finite subextensions being finite. The inclusions $E_X\to F_X$ for
-$E\subseteq F$ form a diagram $E\mapsto E_X$ of sheaves of rings
-(\lean{ProEtale.padicSubfieldSheafFunctor}), and the inclusions $E_X\to\Qlbar{}_{,X}$
-form a cocone of abelian sheaves (\lean{ProEtale.padicAlgClSheafCocone}), which is a
-colimit:
-\[
-  \Qlbar{}_{,X}\;\cong\;\operatorname*{colim}_{E\in\mathcal{E}} E_X
-  \quad\text{in }\Sh(X_\proet,\Ab)
-\]
-(\lean{ProEtale.isColimitPadicAlgClSheafCocone}, proved). This is the definition of
-$\Qlbar{}_{,X}$ in Bhatt--Scholze \S6.8.
+Over the directed set of finite subextensions $E\subseteq\Qlbar$, the inclusions
+$E_X\to\Qlbar{}_{,X}$ exhibit $\Qlbar{}_{,X}\cong\operatorname{colim}_E E_X$ in
+$\Sh(X_\proet,\Ab)$ (\lean{ProEtale.isColimitPadicAlgClSheafCocone}). This is the
+Bhatt--Scholze definition of $\Qlbar{}_{,X}$.
 \end{proposition}
-The proof works first with presheaves: objectwise, the presheaf of
-finite-subextension-valued maps is the filtered union of the injective maps
-$C(U,E)\to C(U,\Qlbar)$ (\lean{ProEtale.isColimitPadicAlgClPresheafCocone}); sheafification,
-being a left adjoint, then preserves the colimit.
-
-The inclusions $\mathbb{Z}_{\ell,X}\to\mathbb{Q}_{\ell,X}\to E_X\to\Qlbar{}_{,X}$,
-$\mathbb{Z}_{\ell,X}\to\cO_{E,X}\to E_X$ are morphisms of ring objects.
+Objectwise the presheaf is a filtered union of the $C(U,E)$, and sheafification preserves
+colimits.
 
 \subsection{Coefficient morphisms along a morphism of schemes}
 
-For $f\colon X\to Y$ the rings $\mathcal{A}_X(T)$ and $\mathcal{A}_Y(T)$ are related by
-two canonical morphisms of ring objects (\lean{ProEtale.continuousMapPushforwardHom},
-\lean{ProEtale.continuousMapPullbackHom}):
+For $f\colon X\to Y$ there are two canonical morphisms of ring objects
 \[
-  \eta_f\colon \mathcal{A}_Y(T)\to f_*\mathcal{A}_X(T),\qquad
-  (h\in C(V,T))\mapsto h\circ p_V,\quad p_V\colon V\times_Y X\to V,
-\]
-and its mate under $f^*\dashv f_*$,
-\[
-  \alpha_f\colon f^*\mathcal{A}_Y(T)\to\mathcal{A}_X(T).
+  \eta_f\colon \mathcal{A}_Y(T)\to f_*\mathcal{A}_X(T),\quad h\mapsto h\circ p_V
+  \ (p_V\colon V\times_YX\to V),
+  \qquad
+  \alpha_f\colon f^*\mathcal{A}_Y(T)\to\mathcal{A}_X(T)\ \text{its mate.}
 \]
 $\eta$ is compatible with identities and compositions. $\alpha_j$ is an isomorphism for an
-open immersion $j$ (indeed for weakly \'etale $j$), but \emph{not} in general, e.g.\ not
-for closed immersions. This is the reason the module-object pullback below needs an
-extension of scalars.
+open (indeed weakly \'etale) $j$, but not for an arbitrary $f$ and arbitrary $T$; this is why
+the module-object pullback is defined with an extension of scalars. For the rings of
+interest, $T=\cO_E$ or $E$, $\alpha_f$ is expected to be an isomorphism for all $f$
+(\S\ref{sec:sixB}).
 
-\paragraph{The case of $\Qlbar$.} Write $P_X$ for the presheaf of rings of
-finite-subextension-valued continuous maps, so that $\Qlbar{}_{,X}=P_X^\#$. The analogous
-morphisms are constructed in \lean{SixFunctors/ProEtale/ModuleObject/PAdicAlgCl/Basic}:
-\begin{itemize}
-\item on presheaves, $P_Y(V)\to P_X(V\times_YX)$, $h\mapsto h\circ p_V$, is a morphism of
-  presheaves of rings $P_Y\to f_*P_X$, since a function with values in a finite subextension
-  still has values in it after pullback (\lean{ProEtale.padicAlgClRingPresheafPushforwardHom});
-\item $\eta_f\colon\Qlbar{}_{,Y}=P_Y^\#\to f_*P_X^\#=f_*\Qlbar{}_{,X}$ corresponds under the
-  sheafification adjunction to $P_Y\to f_*P_X\to f_*P_X^\#$
-  (\lean{ProEtale.padicAlgClPushforwardHom}); it is compatible with identities and
-  compositions;
-\item $\alpha_f\colon f^*\Qlbar{}_{,Y}\to\Qlbar{}_{,X}$ is its mate
-  (\lean{ProEtale.padicAlgClPullbackHom}).
-\end{itemize}
-That $\eta_f$ is a morphism of ring objects, and that $\alpha_j$ is an isomorphism for an
-open immersion $j$, are currently \texttt{sorry}.
+For $\Qlbar$, with $P_X$ the presheaf of finite-subextension-valued maps, $h\mapsto h\circ
+p_V$ is a morphism of presheaves of rings $P_Y\to f_*P_X$; $\eta_f\colon\Qlbar{}_{,Y}\to
+f_*\Qlbar{}_{,X}$ is its adjoint under sheafification, and $\alpha_f$ its mate
+(\lean{ProEtale.padicAlgClPushforwardHom}, \lean{ProEtale.padicAlgClPullbackHom}).
 
 %======================================================================
 \section{Module objects and change of scalars}
@@ -275,76 +189,46 @@ open immersion $j$, are currently \texttt{sorry}.
 %======================================================================
 
 \begin{choice}[Sheaves of modules]
-A sheaf of $\mathcal{R}$-modules, for a ring object $\mathcal{R}$ of
-$\Sh(X_\proet,\mathcal{A})$, is a left \emph{module object} $(M,\gamma\colon
-\mathcal{R}\otimes M\to M)$ (mathlib's \lean{ModObj}, category \lean{Mod C R}). The
-category of $\ell$-adic sheaves is
+A sheaf of $\mathcal{R}$-modules is a left \emph{module object} $(M,\mathcal{R}\otimes M\to
+M)$ (mathlib's \lean{ModObj}, category \lean{Mod C R}), and
 \[
   \Mod_{\mathcal{A}_X(T)} := \Mod\bigl(\Sh(X_\proet,\Ab),\,\mathcal{A}_X(T)\bigr).
 \]
 \end{choice}
 
-This choice avoids a separate theory of sheaves of modules over a varying sheaf of rings:
-everything is internal to the fixed closed symmetric monoidal category
-$\Sh(X_\proet,\Ab)$.
+This avoids a separate theory of modules over a varying sheaf of rings: everything is
+internal to the fixed closed symmetric monoidal category $\Sh(X_\proet,\Ab)$.
 
 \subsection{Structure of $\Mod_{\mathcal{R}}(\mathcal{C})$}
-Let $\mathcal{C}$ be abelian, monoidal preadditive, and $\mathcal{R}$ a ring object with
-$\mathcal{R}\otimes-$ right exact.
 \begin{itemize}
-\item $\Mod_{\mathcal{R}}(\mathcal{C})$ is abelian, with kernels, cokernels and biproducts
-  computed in $\mathcal{C}$; the forgetful functor is exact and faithful.
-\item For $\mathcal{C}$ braided with coequalizers preserved by $\otimes$ and $\mathcal{R}$
-  commutative, the \emph{relative tensor product}
-  $M\otimes_{\mathcal{R}}N=\operatorname{coeq}(M\otimes\mathcal{R}\otimes N\rightrightarrows
-  M\otimes N)$ makes $\Mod_{\mathcal{R}}$ monoidal with unit $\mathcal{R}$; it is obtained
-  by identifying $\mathcal{R}$-modules with symmetric $\mathcal{R}$-$\mathcal{R}$-bimodules
-  and inducing from mathlib's tensor product of bimodules. If $\mathcal{C}$ is symmetric,
-  so is $\Mod_{\mathcal{R}}$.
-\item For $\mathcal{C}$ closed symmetric Grothendieck abelian, $\Mod_{\mathcal{R}}$ is
-  again closed (internal hom $\Hom_{\mathcal{R}}(M,N)$ as an equalizer of
-  $[M,N]\rightrightarrows[\mathcal{R}\otimes M,N]$), Grothendieck abelian (separator
-  $\mathcal{R}\otimes G$), and inherits functorial flat resolutions
-  ($\mathcal{R}\otimes P(M)\to M$).
+\item $\Mod_{\mathcal{R}}(\mathcal{C})$ is abelian, with (co)kernels computed in
+  $\mathcal{C}$; the forgetful functor is exact and faithful.
+\item For $\mathcal{R}$ commutative, the \emph{relative tensor product}
+  $M\otimes_{\mathcal{R}}N=\operatorname{coeq}(M\otimes\mathcal{R}\otimes N
+  \rightrightarrows M\otimes N)$, obtained via symmetric bimodules, makes
+  $\Mod_{\mathcal{R}}$ symmetric monoidal with unit $\mathcal{R}$.
+\item If $\mathcal{C}$ is closed symmetric Grothendieck abelian, so is $\Mod_{\mathcal{R}}$
+  (internal hom as an equalizer, separator $\mathcal{R}\otimes G$), with functorial flat
+  resolutions $\mathcal{R}\otimes P(M)\to M$.
 \end{itemize}
 
 \subsection{Change of scalars}
-For a morphism of ring objects $\varphi\colon\mathcal{R}\to\mathcal{S}$
-(\lean{CategoryTheory/ModuleObjects/ExtendScalars}):
-\begin{itemize}
-\item \emph{restriction} $\Res_\varphi\colon\Mod_{\mathcal{S}}\to\Mod_{\mathcal{R}}$
-  (mathlib's \lean{Mod.comap}), exact;
-\item \emph{extension} $\Ext_\varphi = \mathcal{S}\otimes_{\mathcal{R}}-$, for
-  $\mathcal{R}$ commutative, built as the bimodule tensor product of $\mathcal{S}$ (an
-  $\mathcal{S}$-$\mathcal{R}$-bimodule via $\varphi$) with $M$; right exact, not exact;
-\item \emph{coextension} $\Coext_\varphi = \Hom_{\mathcal{R}}(\mathcal{S},-)$, for
-  $\mathcal{C}$ closed, an equalizer of $[\mathcal{S},N]\rightrightarrows
-  [\mathcal{R}\otimes\mathcal{S},N]$;
-\end{itemize}
-with adjunctions $\Ext_\varphi\dashv\Res_\varphi\dashv\Coext_\varphi$, and compatibilities
-with identities and compositions. For $\varphi$ an isomorphism,
-$\Ext_\varphi\cong\Res_{\varphi^{-1}}\cong\Coext_\varphi$.
-
-\paragraph{Derived extension of scalars.} $\mathcal{S}\lotimes_{\mathcal{R}}- :=
-L(\Ext_\varphi)$, the total left derived functor computed on K-flat resolutions. Since
-$\Res_\varphi$ is exact, $R(\Res_\varphi)=\D(\Res_\varphi)$ is levelwise, and
-$\mathcal{S}\lotimes_{\mathcal{R}}-\dashv\D(\Res_\varphi)$.
+For a morphism of ring objects $\varphi\colon\mathcal{R}\to\mathcal{S}$: restriction
+$\Res_\varphi$ (exact), extension $\Ext_\varphi=\mathcal{S}\otimes_{\mathcal{R}}-$ (right
+exact) and coextension $\Coext_\varphi=\Hom_{\mathcal{R}}(\mathcal{S},-)$, with
+$\Ext_\varphi\dashv\Res_\varphi\dashv\Coext_\varphi$; for $\varphi$ invertible all three
+agree. The \emph{derived extension of scalars} $\mathcal{S}\lotimes_{\mathcal{R}}-:=
+L(\Ext_\varphi)$ is computed on K-flat resolutions, and is left adjoint to the levelwise
+$\D(\Res_\varphi)$.
 
 \subsection{Transport along monoidal functors and projection formulas}
 \begin{itemize}
-\item A lax monoidal functor $F\colon\mathcal{C}\to\mathcal{D}$ lifts to
-  $\mathrm{mapMod}(F)\colon\Mod_{\mathcal{R}}(\mathcal{C})\to
-  \Mod_{F\mathcal{R}}(\mathcal{D})$, with action $F\mathcal{R}\otimes FM\to
-  F(\mathcal{R}\otimes M)\to FM$. It is exact when $F$ is.
-\item A \emph{monoidal adjunction} $F\dashv G$ ($F$ strong, $G$ lax, structures mates)
-  lifts to $\mathrm{mapMod}(F)\dashv\Res_{\mathrm{unit}}\circ\mathrm{mapMod}(G)$.
-\item \emph{Projection formula.} For $S$ strong monoidal and $P$ a functor, a projection
-  formula is a coherent natural isomorphism $P(SL\otimes M)\cong L\otimes PM$. When $P\dashv
-  S$ the canonical map is the adjoint of $SL\otimes M\to SL\otimes SPM\to S(L\otimes PM)$,
-  and the projection formula is the condition that it be invertible. A projection formula
-  \emph{linearizes} $P$ to $P_B\colon\Mod_{SB}\to\Mod_B$, with action
-  $B\otimes PM\cong P(SB\otimes M)\to PM$, and any right adjoint $G$ of $P$ to $G_B$, with
-  $P_B\dashv G_B$.
+\item A lax monoidal $F$ lifts to $\mathrm{mapMod}(F)\colon\Mod_{\mathcal{R}}\to
+  \Mod_{F\mathcal{R}}$; a monoidal adjunction $F\dashv G$ lifts to
+  $\mathrm{mapMod}(F)\dashv\Res_{\mathrm{unit}}\circ\mathrm{mapMod}(G)$.
+\item A \emph{projection formula} $P(SL\otimes M)\cong L\otimes PM$ for a functor $P$ and a
+  strong monoidal $S$ \emph{linearizes} $P$ to $P_B\colon\Mod_{SB}\to\Mod_B$, and any right
+  adjoint $G$ of $P$ to $G_B$, with $P_B\dashv G_B$.
 \end{itemize}
 These are the formal tools from which all module-object six functors are assembled.
 
@@ -354,16 +238,11 @@ These are the formal tools from which all module-object six functors are assembl
 %======================================================================
 
 \begin{choice}[Unbounded derived categories, K-flat / K-injective derivation]
-All derived categories are mathlib's \lean{DerivedCategory}, the localization of cochain
-complexes at quasi-isomorphisms, for the Grothendieck abelian categories at hand. Right
-derived functors are total derived functors computed on K-injective resolutions; left
-derived functors (pullback, tensor product, extension of scalars) are total derived
-functors computed on K-flat resolutions, via a left derivability structure that requires a
-monoidal preadditive structure whose tensor preserves colimits and functorial flat
-resolutions. Bounded below versions use \lean{DerivedCategory.Plus}.
+All derived categories are mathlib's \lean{DerivedCategory} (localization at
+quasi-isomorphisms), with \lean{DerivedCategory.Plus} for the bounded below part. Right
+derived functors are computed on K-injective resolutions, left derived functors
+(pullback, tensor product, extension of scalars) on K-flat resolutions.
 \end{choice}
-
-The derived categories present in the development:
 
 \medskip
 \noindent
@@ -372,133 +251,79 @@ The derived categories present in the development:
 Category & Definition \\
 \midrule
 $\D(X_\proet,\mathcal{A})$ &
-  $\lean{DerivedCategory}(\Sh(X_\proet,\mathcal{A}))$, finite coefficients (layer A),
-  e.g.\ $\mathcal{A}=\Mod_{\mathbb{Z}/\ell^n}$; $\D^+$ its bounded below part. \\
+  $\D(\Sh(X_\proet,\mathcal{A}))$, finite coefficients (layer A). \\
 $\D(\Mod_{\mathcal{A}_X(T)})$ &
-  $\lean{DerivedCategory}(\Mod(\Sh(X_\proet,\Ab),\mathcal{A}_X(T)))$, non-finite
-  coefficients (layer B). For $T=\cO_E$ resp.\ $E$ this is $\D(X_\proet,\cO_E)$ resp.\
-  $\D(X_\proet,E)$; $\D^+$ its bounded below part. \\
-$\D_{\mathrm{cons}}(X_\proet,\mathcal{R})$ &
-  full subcategory of $\D(\Mod_{\mathcal{R}})$ of bounded complexes with constructible
-  cohomology sheaves (\S\ref{sec:constructible}). \\
+  $\D(\Mod(\Sh(X_\proet,\Ab),\mathcal{A}_X(T)))$, non-finite coefficients (layer B); for
+  $T=\cO_E$ resp.\ $E$ this is $\D(X_\proet,\cO_E)$ resp.\ $\D(X_\proet,E)$. \\
+$\Dc(X_\proet,\mathcal{R})$ &
+  bounded complexes with constructible cohomology in $\D(\Mod_{\mathcal{R}})$
+  (\S\ref{sec:constructible}). \\
 \bottomrule
 \end{tabularx}
 \medskip
 
-\begin{remark}
-For non-finite coefficients, $E$-coefficients are modules over the ring sheaf
-$E_X=C(-,E)$ itself. They are \emph{not defined} by inverting $\ell$ on
-$\cO_E$-coefficients in a triangulated category; that the two agree is a theorem
-(\S\ref{sec:rationalization}).
-\end{remark}
+\paragraph{Monoidal structure.} The tensor product on $\D(X_\proet,\mathcal{A})$ and
+$\D(\Mod_{\mathcal{R}})$ is the two-variable K-flat derived functor of $\otimes$ resp.\ of
+the relative $\otimes_{\mathcal{R}}$. The derived internal hom $\RHom$ is \emph{defined} as
+its right adjoint: $K\lotimes-\dashv\RHom(K,-)$.
 
 \subsection{$E$-coefficients as $\cO_E$-coefficients with $\ell$ inverted}
 \label{sec:rationalization}
 
-From the branch \texttt{extend-scalars-isLocalization}
-(\lean{CategoryTheory/ModuleObjects/EllAdicRationalization}).
+$E$-coefficients are modules over $E_X=C(-,E)$ itself, \emph{not} defined by inverting $\ell$
+on $\cO_E$-coefficients in a triangulated category; the comparison is a theorem (branch
+\texttt{extend-scalars-isLocalization}).
 
 \begin{definition}[Rationalization]
-Let $\mathcal{T}$ be a triangulated category, linear over a commutative ring $R$ with
-$R$-linear shifts, and $M\subseteq R$ a submonoid. An object $K$ is \emph{$M$-torsion} if
-$m\cdot\mathrm{id}_K=0$ for some $m\in M$; these objects form a triangulated subcategory.
-The \emph{rationalization} (\lean{CategoryTheory.Rationalization})
-\[
-  \mathcal{T}[M^{-1}] := \mathcal{T}/(M\text{-torsion objects})
-\]
-is the Verdier quotient, i.e.\ the localization at the class $W_M$
-(\lean{Rationalization.W}) of morphisms whose mapping cone is $M$-torsion. It is
-triangulated, every $m\in M$ acts invertibly on its $\Hom$ groups, and it is linear over
-any localization of $R$ at $M$ (\lean{Rationalization.linear}).
+For a triangulated category $\mathcal{T}$ linear over a commutative ring $R$ and a submonoid
+$M\subseteq R$, the \emph{rationalization} $\mathcal{T}[M^{-1}]$
+(\lean{CategoryTheory.Rationalization}) is the Verdier quotient by the $M$-torsion objects,
+i.e.\ the localization at morphisms with $M$-torsion cone. It is triangulated and linear
+over $R[M^{-1}]$.
 \end{definition}
 
 \begin{choice}[Comparison via derived extension of scalars]
-For $E\subseteq\Qlbar$ with ring of integers $\cO_E$, let $\varphi\colon\cO_{E,X}\to E_X$
-be the inclusion of ring objects. The comparison functor is the derived extension of
-scalars
-\[
-  E\lotimes_{\cO_E}- = L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X}),
-\]
-and the statement is that it is a localization functor for $W_{\ell^{\mathbb{N}}}$, the
-morphisms whose mapping cone is killed by a power of $\ell$
-(\lean{ProEtale.isLocalization_derivedExtendScalars}, currently \texttt{sorry}).
+For $\varphi\colon\cO_{E,X}\to E_X$ the comparison functor is
+$E\lotimes_{\cO_E}-=L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X})$, and the
+statement is that it is a localization at the morphisms whose cone is killed by a power of
+$\ell$ (\lean{ProEtale.isLocalization_derivedExtendScalars}).
 \end{choice}
-
-Consequently, by uniqueness of localizations, there is an equivalence
-\[
-  \D(\Mod_{\cO_{E,X}})[\ell^{-1}] \;\simeq\; \D(\Mod_{E_X})
-\]
-(\lean{ProEtale.rationalizationEquivalence}), under which the localization functor
-corresponds to $E\lotimes_{\cO_E}-$
-(\lean{ProEtale.rationalizationQCompEquivalenceIso}). So $E$-coefficients, defined as
-modules over $E_X$, and the Bhatt--Scholze description as ``$\cO_E$-coefficients with
-$\ell$ inverted'' are related by a canonical equivalence; neither is taken as the
-definition of the other. Supporting instances on this branch: $\Ab$ has functorial flat
-resolutions (the unit $\mathbb{Z}$ is a flat separator), and $\Sh(X_\proet,\Ab)$ is
-symmetric monoidal (\lean{ProEtale.sheafSymmetricCategory}).
-
-\paragraph{Monoidal structure.} On $\D(X_\proet,\mathcal{A})$ and on
-$\D(\Mod_{\mathcal{R}})$ the tensor product is the derived tensor product $\lotimes$
-(resp.\ $\lotimes_{\mathcal{R}}$), the two-variable total left derived functor of $\otimes$
-(resp.\ the relative tensor product $\otimes_{\mathcal{R}}$), making the localization
-functor lax monoidal. The derived internal hom $\RHom$ is \emph{defined} as the internal
-hom of the resulting closed monoidal structure, i.e.\ as the right adjoint of
-$\lotimes$: $K\lotimes-\dashv\RHom(K,-)$.
+Hence $\D(\Mod_{\cO_{E,X}})[\ell^{-1}]\simeq\D(\Mod_{E_X})$, compatibly with
+$E\lotimes_{\cO_E}-$; neither description is taken as the definition of the other.
 
 %======================================================================
 \section{Constructibility}
 \label{sec:constructible}
 %======================================================================
 
-From the branch \texttt{bounded-constructible-module-object-of-sheaf}
-(\lean{ConstructibleSheaf/ProEtaleModule}). Let $\mathcal{R}$ be a ring object of
-$\Sh(X_\proet,\mathcal{A})$, $\mathcal{A}$ closed symmetric Grothendieck abelian. For a
-morphism $g\colon Z\to X$, ``restriction'' of an $\mathcal{R}$-module $M$ along $g$ means
-the $g^*\mathcal{R}$-module $\mathrm{mapMod}(g^*)(M)=g^*M$, using that $g^*$ is monoidal.
+Let $\mathcal{R}$ be a ring object of $\Sh(X_\proet,\mathcal{A})$. ``Restriction'' of an
+$\mathcal{R}$-module $M$ along $g\colon Z\to X$ means the $g^*\mathcal{R}$-module
+$\mathrm{mapMod}(g^*)(M)$.
 
-\begin{definition}[Free and finitely presented]
-$\mathcal{R}^n:=\bigoplus_{i<n}\mathcal{R}$. A module is \emph{finitely presented} if it
-is isomorphic to $\operatorname{coker}(\mathcal{R}^m\to\mathcal{R}^n)$.
+\begin{definition}[Locally finitely presented, constructible; Bhatt--Scholze \S6.8]
+$M$ is \emph{locally finitely presented} (\lean{ProEtale.IsLocallyFinitelyPresented}) if
+there is a pro-\'etale cover $\{U_i\to X\}$ with each $M|_{U_i}$ a cokernel of
+$\mathcal{R}^m\to\mathcal{R}^n$ (torsion allowed). $M$ is \emph{constructible}
+(\lean{ProEtale.IsConstructible}) if there is a finite stratification by locally closed
+subschemes (\lean{Scheme.Stratification}, as for \'etale constructible sheaves) such that
+each $M|_{X_a}$ is locally finitely presented over $\mathcal{R}|_{X_a}$.
 \end{definition}
 
-\begin{definition}[Locally finitely presented]
-$M\in\Mod_{\mathcal{R}}$ is \emph{locally finitely presented}
-(\lean{ProEtale.IsLocallyFinitelyPresented}) if there is a pro-\'etale cover
-$\{U_i\to X\}$ such that each $M|_{U_i}$ is a finitely presented
-$\mathcal{R}|_{U_i}$-module. Torsion is allowed.
-\end{definition}
-
-\begin{definition}[Constructible, Bhatt--Scholze \S6.8]
-$M$ is \emph{constructible} (\lean{ProEtale.IsConstructible}) if there is a finite
-stratification $X=\coprod_a X_a$ by locally closed subschemes
-(\lean{Scheme.Stratification}, the same notion as for \'etale constructible sheaves) such
-that each $M|_{X_a}$ is locally finitely presented over $\mathcal{R}|_{X_a}$.
-\end{definition}
-
-For $\mathcal{R}=\cO_{E,X}$ these are the constructible $\cO_E$-sheaves; for
-$\mathcal{R}=E_X$ the constructible $E$-sheaves (lisse on strata).
+For $\mathcal{R}=\cO_{E,X}$ resp.\ $E_X$ these are the constructible $\cO_E$- resp.\
+$E$-sheaves (lisse on strata).
 
 \begin{definition}[Bounded constructible derived category]
-For $\mathcal{R}$ commutative,
-\[
-  \D_{\mathrm{cons}}(X_\proet,\mathcal{R}) \subseteq \D(\Mod_{\mathcal{R}})
-\]
-is the full subcategory (\lean{ProEtale.BoundedConstructible}) of complexes $K$ that are
-bounded for the canonical t-structure ($H^i(K)=0$ outside a finite interval) and all of
-whose cohomology sheaves $H^i(K)$ are constructible. Morphisms are computed in
-$\D(\Mod_{\mathcal{R}})$. On a
-topologically Noetherian $X$ it is a triangulated subcategory (constructible modules being
-closed under kernels, cokernels and extensions).
+For $\mathcal{R}$ commutative, $\Dc(X_\proet,\mathcal{R})\subseteq\D(\Mod_{\mathcal{R}})$
+(\lean{ProEtale.BoundedConstructible}) is the full subcategory of complexes bounded for the
+canonical t-structure with constructible cohomology sheaves. No derived completeness
+condition is imposed. On a topologically Noetherian $X$ it is a triangulated subcategory.
 \end{definition}
 
 \begin{remark}
-The definition is made for an arbitrary ring object $\mathcal{R}$ over a fixed $X$, so it
-applies directly to $\mathcal{R}=\mathcal{A}_X(T)$. Restriction to a stratum lands in
-$g^*\mathcal{R}$-modules, \emph{not} in $\mathcal{A}_{X_a}(T)$-modules; these differ for a
-closed stratum since $\alpha_g$ is not an isomorphism there. Whether constructibility of a
-$\mathcal{A}_X(T)$-module should be tested after extension of scalars along $\alpha_g$
-(i.e.\ via the module-object pullback $g^*$ of \S\ref{sec:sixB}) is a point to align when
-the two branches are merged.
+The definition is for an arbitrary ring object $\mathcal{R}$, so it applies to
+$\mathcal{A}_X(T)$ directly. Restriction to a stratum lands in $g^*\mathcal{R}$-modules,
+not in $\mathcal{A}_{X_a}(T)$-modules; the two agree when $\alpha_g$ is an isomorphism, as
+expected for $T=\cO_E,E$.
 \end{remark}
 
 %======================================================================
@@ -508,348 +333,280 @@ the two branches are merged.
 
 Throughout, $\mathcal{A}$ is a closed symmetric monoidal Grothendieck abelian category.
 
-\subsection{Pushforward and pullback}
-\begin{choice}
-For an \emph{arbitrary} $g\colon Z\to Y$, base change
-$Y_\proet\to Z_\proet$, $V\mapsto V\times_YZ$, is continuous. Then
+\begin{choice}[Pushforward and pullback along base change]
+For an \emph{arbitrary} $g\colon Z\to Y$, base change $V\mapsto V\times_YZ$ is continuous,
+and
 \[
   (g_*G)(V) := G(V\times_Y Z),\qquad
   g^* := \mathrm{sheafify}\circ\operatorname{Lan}_{(\text{base change})^{op}},
 \]
 with $g^*\dashv g_*$ (\lean{ProEtale.lowerStar}, \lean{ProEtale.upperStar}).
 \end{choice}
-Defining both along base change (rather than along the localization functor
-$Z_\proet\to Y_\proet$, $W\mapsto(W\to Z\to Y)$, which needs $g$ weakly \'etale) is essential
-for compactifications, whose proper part is not weakly \'etale. For $g$ weakly \'etale,
-$g^*$ is restriction along the localization functor. Properties: $g_*$ is left exact and
-lax symmetric monoidal; $g^*$ is exact, and strong symmetric monoidal with
-$g^*\dashv g_*$ a monoidal adjunction (the oplax structure of $g^*$ is the mate of the lax
-structure of $g_*$); both compose functorially.
+Using base change rather than the localization functor $W\mapsto(W\to Z\to Y)$ (which needs
+$g$ weakly \'etale) is essential for compactifications, whose proper part is not weakly
+\'etale. $g^*$ is exact and strong symmetric monoidal, and $g^*\dashv g_*$ is a monoidal
+adjunction.
 
-\subsection{Extension by zero and lower shriek}
-\begin{choice}
-For an open immersion $j\colon U\to X$, $j_!:=\mathrm{sheafify}\circ
-\operatorname{Lan}_{(\text{localization})^{op}}$, left adjoint to restriction
-$j^*$ (\lean{openImmersionLowerShriek}). For $f\colon X\to Y$ with a chosen
-compactification $X\xrightarrow{i}\bar X\xrightarrow{g}Y$ ($i$ open immersion, $g$
-proper),
-\[
-  f_! := g_*\circ i_!
-\]
-(\lean{ProEtale.lowerShriek}), definitionally attached to the chosen compactification
-\lean{HasCompactification.compactification}.
+\begin{choice}[Extension by zero and lower shriek]
+For an open immersion $j$, $j_!:=\mathrm{sheafify}\circ\operatorname{Lan}$ along the
+localization functor, left adjoint to $j^*$. For $f$ with a chosen compactification
+$X\xrightarrow{i}\bar X\xrightarrow{g}Y$, $f_!:=g_*\circ i_!$ (\lean{ProEtale.lowerShriek}).
 \end{choice}
-Properties: $j_!\dashv j^*\dashv j_*$ is an adjoint triple; $j_!$ is exact and fully
-faithful; $f_!$ is left exact. There is a canonical comparison $f_!\to f_*$ (from
-$i_!\to i_*$), which is an isomorphism for $f$ proper (proved via the vanishing of both
-sides off the range of $i$ and conservativity of restriction to the Zariski cover
-$\{i,\ \text{complement}\}$).
+$j_!$ is exact and fully faithful; $f_!\to f_*$ is an isomorphism for $f$ proper.
 
 \subsection{Derived functors}
 \begin{itemize}
-\item $Rg_* := R(g_*)$ (K-injective), also on $\D^+$.
-\item $Lg^* := L(g^*)$ (K-flat). Since $g^*$ is exact, $Lg^*\cong\D(g^*)$ is the levelwise
-  functor, compatible with composition, with $H^n$ and with degree-$0$ objects; one has
-  $Lg^*\dashv Rg_*$ on $\D$ and $\D^+(g^*)\dashv R^+g_*$ on $\D^+$.
-\item For an open immersion, $\D(j_!)\dashv\D(j^*)$ (both exact), also on $\D^+$.
-\item \textbf{Derived lower shriek.}
-  \begin{choice}
-  $Rf_! := R(g_*)\circ\D(i_!)$, for the chosen compactification; on $\D^+$,
-  $R^+(g_*)\circ\D^+(i_!)$, which is the restriction of the unbounded one.
+\item $Rg_*:=R(g_*)$; $Lg^*:=L(g^*)\cong\D(g^*)$ since $g^*$ is exact; $Lg^*\dashv Rg_*$,
+  also on $\D^+$. For an open immersion, $\D(j_!)\dashv\D(j^*)$.
+\item \begin{choice}[Derived lower shriek]
+  $Rf_!:=R(g_*)\circ\D(i_!)$ for the chosen compactification; on $\D^+$ it is the
+  restriction of the unbounded one.
   \end{choice}
-  It is deliberately \emph{not} the total derived functor of $f_!=g_*i_!$: $i_!$ does not
-  send injectives to $g_*$-acyclics, and $R(g_*i_!)$ is the wrong functor, although
-  $H^0(Rf_!)=f_!$.
-\item \textbf{Exceptional pullback.}
-  \begin{choice}
-  $Rf^! := \D(i^*)\circ Rg^!$, where $Rg^!$ is a right adjoint of $Rg_*$ for the proper
-  $g$ (which exists by Brown representability; it is an abstract choice of right adjoint,
-  used only through its adjunction).
+  It is deliberately \emph{not} $R(g_*i_!)$: $i_!$ does not send injectives to
+  $g_*$-acyclics, so $R(f_!)$ is the wrong functor (although $H^0(Rf_!)=f_!$).
+\item \begin{choice}[Exceptional pullback]
+  $Rf^!:=\D(i^*)\circ Rg^!$, with $Rg^!$ a right adjoint of $Rg_*$ for the proper $g$
+  (Brown representability), used only through the adjunction.
   \end{choice}
-  Then $Rf_!\dashv Rf^!$ is the composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$;
-  in particular, that $Rf_!$ is a left adjoint is a theorem, not an assumption. On $\D^+$,
-  $Rf^!$ is defined as the restriction of the unbounded $Rf^!$ (which preserves bounded
-  below objects), and the adjunction restricts.
-\item \textbf{Tensor and hom.} $\lotimes$ and $\RHom$ on $\D(X_\proet,\mathcal{A})$ as in
-  \S\ref{sec:derived}.
-\item \textbf{Cohomology.} $R\Gamma(X,-):=R\Gamma$ of global sections;
-  $R\Gamma_c(X/Y,-):=R\Gamma(Y,Rf_!-)$; $H^i_c:=H^i\circ R\Gamma_c$.
+  So $Rf_!\dashv Rf^!$ is the composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$:
+  that $Rf_!$ is a left adjoint is a theorem, not an assumption. On $\D^+$, $Rf^!$ is the
+  restriction of the unbounded one, and the adjunction restricts.
+\item $R\Gamma_c(X/Y,-):=R\Gamma(Y,Rf_!-)$.
 \end{itemize}
+The \'etale $Rf^!$ is constructed in the same way.
 
 %======================================================================
 \section{Six functors on module objects: non-finite coefficients (layer B)}
 \label{sec:sixB}
 %======================================================================
 
-Let $T$ be a commutative topological ring and write $\mathcal{A}_X=\mathcal{A}_X(T)$. All
-functors are of the form ``transport along the $\Ab$-valued functor, then change scalars
-along $\eta_f$ or $\alpha_f$''. Nothing requires $\alpha_f$ to be invertible except the
-open-immersion statements. The Lean declarations below are in the namespace
-\lean{ProEtale.ContinuousMapRing}, in the folder
-\lean{SixFunctors/ProEtale/ModuleObject/FiniteExtension}. The same constructions for
-$\Qlbar{}_{,X}$ are described in \S\ref{sec:sixB-Qlbar}.
+Let $T$ be a commutative topological ring, $\mathcal{A}_X=\mathcal{A}_X(T)$. Every functor is
+``transport the $\Ab$-valued functor, then change scalars along $\eta_f$ or $\alpha_f$''.
+The constructions never require $\alpha_f$ to be invertible. The same recipe is used for
+$\Qlbar$ (\S\ref{sec:sixB-Qlbar}).
 
-\subsection{Pushforward and pullback}
-\begin{choice}
-\begin{align*}
-  f_* &:= \Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\colon
-     \Mod_{\mathcal{A}_X}\to\Mod_{f_*\mathcal{A}_X}\to\Mod_{\mathcal{A}_Y},\\
-  f^* &:= \Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\colon
-     \Mod_{\mathcal{A}_Y}\to\Mod_{f^*\mathcal{A}_Y}\to\Mod_{\mathcal{A}_X}.
-\end{align*}
-\end{choice}
-So the underlying sheaf of $f_*M$ is $f_*M$ with $\mathcal{A}_Y$ acting through $\eta_f$,
-and $f^*M=\mathcal{A}_X\otimes_{f^*\mathcal{A}_Y}f^*M$ is the ringed-topos pullback.
-$f_*$ is left exact; $f^*$ is right exact but \emph{not} exact in general.
-The adjunction $f^*\dashv f_*$ is the composite of the lifted monoidal adjunction
-$\mathrm{mapMod}(f^*)\dashv\Res_{\mathrm{unit}}\circ\mathrm{mapMod}(f_*)$ and
-$\Ext_{\alpha_f}\dashv\Res_{\alpha_f}$, using that $\eta_f$ factors as the unit followed by
-$f_*\alpha_f$. One also has the \emph{linear pushforward}
-$\Res_{\mathrm{unit}}\circ\mathrm{mapMod}(f_*)\colon\Mod_{f^*\mathcal{A}_Y}\to
-\Mod_{\mathcal{A}_Y}$, with $f_*=(\text{linear }f_*)\circ\Res_{\alpha_f}$.
-
-\subsection{Extension by zero and lower shriek}
-\begin{choice}
-For an open immersion $j\colon U\to X$, the $\Ab$-valued $j_!$ satisfies the projection
-formula $j_!(j^*L\otimes M)\cong L\otimes j_!M$; this linearizes it to
-$\text{linear }j_!\colon\Mod_{j^*\mathcal{A}_X}\to\Mod_{\mathcal{A}_X}$, and
+\subsection{Underived functors}
+\begin{choice}[Pushforward and pullback]
 \[
-  j_! := (\text{linear }j_!)\circ\Res_{\alpha_j}\colon
-  \Mod_{\mathcal{A}_U}\to\Mod_{\mathcal{A}_X}.
+  f_* := \Res_{\eta_f}\circ\mathrm{mapMod}(f_*),\qquad
+  f^* := \Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)
 \]
-For $f$ with chosen compactification $(i,g)$: $f_!:=g_*\circ i_!$ on module objects.
+(\lean{ProEtale.ContinuousMapRing.lowerStar}, \lean{ProEtale.ContinuousMapRing.upperStar}).
 \end{choice}
-The underlying sheaf of $j_!M$ (resp.\ $f_!M$) is the $\Ab$-valued $j_!M$ (resp.\ $f_!M$).
-$j_!$ is exact and, since $\alpha_j$ is an isomorphism, $j^*$ is exact and
-$j_!\dashv j^*$ (composite of $\text{linear }j_!\dashv\mathrm{mapMod}(j^*)$ with
-$\Res_{\alpha_j}\dashv\Coext_{\alpha_j}\cong\Ext_{\alpha_j}$). $f_!$ is left exact. The
-projection-formula route is the template intended for $f^!$ as well:
-$f_!=P_B\circ\Res_{\alpha_f}$, $f^!=\Coext_{\alpha_f}\circ G_B$.
+So $f_*M$ is $f_*M$ with $\mathcal{A}_Y$ acting through $\eta_f$, and
+$f^*M=\mathcal{A}_X\otimes_{f^*\mathcal{A}_Y}f^*M$ is the ringed-topos pullback. The
+adjunction $f^*\dashv f_*$ is the lifted monoidal adjunction composed with
+$\Ext_{\alpha_f}\dashv\Res_{\alpha_f}$.
+
+\begin{choice}[Exactness of the module-object pullback is assumed]
+Formally $f^*$ is only right exact, extension of scalars along a non-invertible $\alpha_f$
+not being exact. The formalization \emph{assumes} that $f^*$ is exact.
+\end{choice}
+This holds whenever $\alpha_f$ is an isomorphism, since then $f^*\cong\Res_{\alpha_f^{-1}}
+\circ\mathrm{mapMod}(f^*)$, which is the case for $T=\cO_E,E$. Its role is to make the
+derived pullback levelwise, as for \'etale sheaves.
+
+\begin{choice}[Extension by zero via the projection formula]
+For an open immersion $j$, the $\Ab$-valued $j_!$ satisfies $j_!(j^*L\otimes M)\cong
+L\otimes j_!M$, which linearizes it to $\Mod_{j^*\mathcal{A}_X}\to\Mod_{\mathcal{A}_X}$, and
+\[
+  j_! := (\text{linear }j_!)\circ\Res_{\alpha_j},\qquad f_!:=g_*\circ i_!\ \text{for a
+  chosen compactification}.
+\]
+\end{choice}
+The underlying sheaf of $j_!M$ is the $\Ab$-valued $j_!M$; $j_!$ is exact and, $\alpha_j$
+being invertible, $j_!\dashv j^*$.
 
 \subsection{Derived functors: derive the composite, do not compose derived functors}
 \label{sec:sixB-derived}
 
-Each underived functor on module objects is a \emph{composite} of a transport
-$\mathrm{mapMod}(-)$ of an $\Ab$-valued functor and a change of scalars. There are two
-a priori different ways to derive such a composite $G\circ F$: take the total derived
-functor of the composite, $R(G\circ F)$ or $L(G\circ F)$, or compose the derived functors
-of the factors, $RG\circ RF$ or $LG\circ LF$. The development makes the following choice.
+A composite $G\circ F$ (transport, then change of scalars) can be derived as $R(G\circ F)$
+or as $RG\circ RF$. The development makes the following choice.
 
 \begin{choice}[Derived pullback and pushforward]
-The derived pushforward and pullback on module objects are the \emph{total derived
-functors of the composites}:
-\begin{align*}
-  Rf_* &:= R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr)
-    \colon \D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),\\
-  Lf^* &:= L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr)
-    \colon \D(\Mod_{\mathcal{A}_Y})\to\D(\Mod_{\mathcal{A}_X}),
-\end{align*}
-the first computed on K-injective resolutions in $\Mod_{\mathcal{A}_X}$, the second on
-K-flat resolutions in $\Mod_{\mathcal{A}_Y}$.
-In Lean they are not separate definitions: they are the generic
-\lean{Functor.rightDerivedFunctor} and \lean{Functor.leftDerivedFunctor} applied to the
-underived module-object functors \lean{ProEtale.ContinuousMapRing.lowerStar} and
-\lean{ProEtale.ContinuousMapRing.upperStar}. They are \emph{not} defined as
-$\D(\Res_{\eta_f})\circ R\,\mathrm{mapMod}(f_*)$ or as
-$L(\Ext_{\alpha_f})\circ L\,\mathrm{mapMod}(f^*)$, and they are \emph{not} defined from the
-$\Ab$-valued $Rf_*$, $Lf^*$ of layer (A).
+\[
+  Rf_* := R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr),\qquad
+  Lf^* := L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr),
+\]
+the \emph{total derived functors of the composites} (K-injective resp.\ K-flat resolutions
+of $\mathcal{A}$-modules). They are not separate definitions, but the generic
+\lean{Functor.rightDerivedFunctor}, \lean{Functor.leftDerivedFunctor} applied to the
+underived functors; in particular they are not built from the $\Ab$-valued $Rf_*$, $Lf^*$.
 \end{choice}
 
 \paragraph{Why.}
 \begin{itemize}
-\item The derived adjunction comes for free and is canonical. The underived adjunction
-  $f^*\dashv f_*$ on module objects is directly derived by the general theorem
-  (\lean{Adjunction.derivedAdjunction}, the left adjoint derived by the K-flat structure,
-  the right adjoint by the K-injective one), giving
+\item The derived adjunction $Lf^*\dashv Rf_*$ is obtained directly by deriving
+  $f^*\dashv f_*$ (\lean{Adjunction.derivedAdjunction}); a composite of derived functors
+  would require composing two derived adjunctions through an intermediate category.
+\item The universal property of derived functors applies to the functor one cares about,
+  not to its factors.
+\item The factorizations are kept as \emph{theorems}, valid exactly under the expected
+  exactness conditions:
   \[
-    Lf^*\dashv Rf_*\quad\text{on }\D(\Mod_{\mathcal{A}_Y})\rightleftarrows\D(\Mod_{\mathcal{A}_X})
+    Rf_*\cong\D(\Res_{\eta_f})\circ R\,\mathrm{mapMod}(f_*),\qquad
+    Lf^*\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}(f^*)),
   \]
-  (\lean{ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunction}). With a
-  composite of derived functors one would instead have to compose two derived adjunctions
-  through the intermediate category $\D(\Mod_{f^*\mathcal{A}_Y})$ resp.\
-  $\D(\Mod_{f_*\mathcal{A}_X})$, and check that the pieces match.
-\item The universal property (a derived functor is characterized by its counit/unit on
-  resolutions) applies to the functor one actually cares about, which is the pullback and
-  pushforward of $\mathcal{A}$-modules, not to its factors.
-\item The factorizations through the change of scalars are kept as \emph{theorems}, and
-  they hold exactly under the expected exactness conditions (see below). This makes it
-  visible where the non-exactness of $f^*$ on module objects enters.
+  the first since $\Res_{\eta_f}$ is exact, the second since $\mathrm{mapMod}(f^*)$ is exact
+  and preserves K-flat complexes. The latter reads $Lf^*M\cong\mathcal{A}_X
+  \lotimes_{f^*\mathcal{A}_Y}f^*M$, the pullback of Bhatt--Scholze, Remark 6.8.15.
 \end{itemize}
 
-\paragraph{Comparison with the composite of derived functors.}
-\begin{proposition}[Pushforward]
-Since $\Res_{\eta_f}$ is exact, right deriving the composite amounts to right deriving
-$\mathrm{mapMod}(f_*)$ and restricting scalars levelwise:
-\[
-  R\bigl(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)\bigr)
-  \;\cong\; \D(\Res_{\eta_f})\circ R\bigl(\mathrm{mapMod}(f_*)\bigr)
-\]
-(\lean{ProEtale.ContinuousMapRing.rightDerivedLowerStarIso}, an instance of the general
-$R(G\circ F)\cong\D(G)\circ RF$ for $G$ exact,
-\lean{Functor.rightDerivedFunctorCompMapDerivedCategoryIso}). No hypothesis on $F$ is
-needed.
-\end{proposition}
-
-\begin{proposition}[Pullback]
-Since $\mathrm{mapMod}(f^*)$ is exact and sends K-flat complexes of
-$\mathcal{A}_Y$-modules to K-flat complexes of $f^*\mathcal{A}_Y$-modules ($f^*$ being
-strong monoidal, exact and cocontinuous), left deriving the composite amounts to applying
-$\mathrm{mapMod}(f^*)$ levelwise and left deriving the extension of scalars:
-\[
-  L\bigl(\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)\bigr)
-  \;\cong\; L(\Ext_{\alpha_f})\circ\D\bigl(\mathrm{mapMod}(f^*)\bigr),
-  \qquad\text{i.e.}\qquad
-  Lf^*M \;\cong\; \mathcal{A}_X\lotimes_{f^*\mathcal{A}_Y} f^*M
-\]
-(\lean{ProEtale.ContinuousMapRing.leftDerivedUpperStarIso}, an instance of the general
-$L(G\circ F)\cong LG\circ\D(F)$ for $F$ exact preserving K-flat complexes,
-\lean{Functor.leftDerivedFunctorCompMapDerivedCategoryIso}). Both sides are computed on the
-same K-flat resolution in $\Mod_{\mathcal{A}_Y}$. This is the pullback of Bhatt--Scholze,
-Remark 6.8.15.
-\end{proposition}
-
-The functor-specific input making $Lf^*$ meaningful is that the composite preserves
-quasi-isomorphisms between K-flat complexes, which follows from the two factors:
-$\mathrm{mapMod}(f^*)$ (exact and preserving K-flatness) and $\Ext_{\alpha_f}$ (which
-preserves quasi-isomorphisms between K-flat complexes).
-
-\begin{remark}[Contrast with layer (A)]
-In layer (A), $g^*$ is exact, so $Lg^*\cong\D(g^*)$ is levelwise, and the choice of
-derived-of-composite versus composite-of-derived is invisible. On module objects
-$f^*=\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)$ is only right exact, because extension of
-scalars along the non-invertible $\alpha_f$ is not exact, so $Lf^*$ is genuinely not
-levelwise; this is exactly the case the K-flat left derivability structure is designed
-for. For the same reason there is no bounded-below derived adjunction $Lf^*\dashv R^+f_*$
-in general, while $R^+f_* := R^+(\Res_{\eta_f}\circ\mathrm{mapMod}(f_*))$ exists.
-\end{remark}
-
-\begin{remark}[Open immersions]
-For an open immersion $j$, $\alpha_j$ is an isomorphism, so $\Ext_{\alpha_j}\cong
-\Res_{\alpha_j^{-1}}$ and $j^*$ is exact on module objects. Then the total derived functor
-is levelwise, $L(j^*)\cong\D(j^*)$
-(\lean{ProEtale.ContinuousMapRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion}).
-Likewise $j_!=(\text{linear }j_!)\circ\Res_{\alpha_j}$ is exact, so it is derived
-levelwise, $\D(j_!)$, as the derived functor of the composite. The derived adjunction
-\[
-  \D(j_!)\dashv\D(j^*)\quad\text{(also on }\D^+\text{)}
-\]
-(\lean{ProEtale.ContinuousMapRing.derivedOpenImmersionLowerShriekUpperStarAdjunction}) is
-again obtained by deriving the underived adjunction $j_!\dashv j^*$ on module objects
-between total derived functors, and then identifying them with the levelwise functors.
-\end{remark}
+With the exactness assumption on $f^*$, moreover $Lf^*\cong\D(f^*)$ is levelwise, there is
+a composition isomorphism $L(g\circ f)^*\cong Lf^*\circ Lg^*$, and on $\D^+$ one has
+$\D^+(f^*)\dashv R^+f_*$. In layer (A) the choice derived-of-composite versus
+composite-of-derived is invisible, $g^*$ being exact for formal reasons; on module objects
+$Lf^*$ is \emph{defined} through the K-flat machinery, and its being levelwise is a
+consequence of the assumption, which does not enter any definition. For an open immersion
+$j$ the same holds unconditionally: $L(j^*)\cong\D(j^*)$, $j_!$ is derived levelwise, and
+$\D(j_!)\dashv\D(j^*)$, also on $\D^+$.
 
 \begin{choice}[Derived lower shriek: composite of derived functors]
-For $f$ with chosen compactification $X\xrightarrow{i}\bar X\xrightarrow{g}Y$,
+For a compactification $c=(X\xrightarrow{i}\bar X\xrightarrow{g}Y)$ of $f$,
 \[
-  Rf_! := R(g_*)\circ\D(i_!)\colon\D(\Mod_{\mathcal{A}_X})\to\D(\Mod_{\mathcal{A}_Y}),
-  \qquad
-  R^+f_! := R^+(g_*)\circ\D^+(i_!),
+  Rf_!^c := R(g_*)\circ\D(i_!),\qquad Rf_!:=Rf_!^c\ \text{for the chosen }c,
 \]
-where $g_*$ and $i_!$ are the module-object functors (each itself derived as a composite
-with change of scalars, as above)
-(\lean{ProEtale.ContinuousMapRing.rightDerivedLowerShriek}). Here, and only here, the
-choice is the \emph{opposite} one: $Rf_!$ is the composite of the derived functors of the
-two halves, \emph{not} the total derived functor $R(g_*\circ i_!)=R(f_!)$ of the underived
-lower shriek. The reason is mathematical: $i_!$ does not send injectives to
-$g_*$-acyclic objects, and $R(f_!)$ is the wrong functor (although
-$H^0(Rf_!)=f_!$). The bounded-below version is the restriction of the unbounded one.
+with $R^+f_!$ the restriction to $\D^+$. Here, and only here, the choice is the opposite
+one, for the mathematical reason of layer (A): $R(g_*\circ i_!)$ is the wrong functor.
 \end{choice}
 
 \begin{choice}[Tensor product and internal hom]
-$\lotimes_{\mathcal{A}_X}$ is the two-variable total left derived functor of the
-\emph{relative} tensor product $\otimes_{\mathcal{A}_X}$ on complexes of module objects
-(K-flat resolutions in $\Mod_{\mathcal{A}_X}$), not a derived tensor over $\mathbb{Z}$
-followed by a quotient; $\RHom_{\mathcal{A}_X}$ is its right adjoint
-(\lean{ProEtale.ContinuousMapRing.derivedTensor},
-\lean{ProEtale.ContinuousMapRing.derivedHom}).
+$\lotimes_{\mathcal{A}_X}$ is the K-flat derived functor of the \emph{relative} tensor
+product $\otimes_{\mathcal{A}_X}$, not a derived tensor over $\mathbb{Z}$ followed by a
+quotient; $\RHom_{\mathcal{A}_X}$ is its right adjoint.
 \end{choice}
 
 \begin{choice}[Exceptional pullback: assembled from the two halves of $Rf_!$]
-For $f$ with chosen compactification $X\xrightarrow{i}\bar X\xrightarrow{g}Y$,
 \[
-  Rf^! := \D(i^*)\circ Rg^!\colon\D(\Mod_{\mathcal{A}_Y})\to\D(\Mod_{\mathcal{A}_X}),
+  Rf^!:=\D(i^*)\circ Rg^!,
 \]
-(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriek}, attached to a compactification
-by \lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekOfCompactification}), where
-\begin{itemize}
-\item $Rg^!$ is a right adjoint of the module-object derived pushforward
-  $Rg_*=R(\Res_{\eta_g}\circ\mathrm{mapMod}(g_*))$ along the \emph{proper} $g$. It is an
-  abstract choice of right adjoint, used only through the adjunction $Rg_*\dashv Rg^!$.
-  It exists by Brown representability, or alternatively from the $\Ab$-valued exceptional
-  inverse image via the projection formula for $\mathcal{A}_Y(T)$ and coextension of
-  scalars along $\alpha_g$;
-\item $\D(i^*)$ is the levelwise module-object pullback along the open immersion $i$,
-  which is exact because $\alpha_i$ is an isomorphism (so $L(i^*)\cong\D(i^*)$).
-\end{itemize}
+with $Rg^!$ a right adjoint of the module-object $Rg_*$ along the proper $g$ (abstract,
+used only through the adjunction; alternatively obtainable from the $\Ab$-valued one via
+the projection formula and coextension of scalars along $\alpha_g$), and $\D(i^*)$ the
+levelwise pullback along the open immersion $i$.
 \end{choice}
-
-As in layer (A), $Rf^!$ is a \emph{composite of derived functors}, not the derived functor
-of an underived $f^!$; there is no underived $f^!$ on module objects. The adjunction
-\[
-  Rf_!\dashv Rf^!
-\]
-(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekAdjunction}) is the composite of
-the derived open-immersion adjunction $\D(i_!)\dashv\D(i^*)$ and of $Rg_*\dashv Rg^!$.
-In particular, that $Rf_!=R(g_*)\circ\D(i_!)$ is a left adjoint on module objects is a
-\emph{theorem}; the only input taken for granted is that $Rg_*$ is a left adjoint for
-proper $g$.
-
-On the bounded below derived categories,
-$R^+f^!$ is \emph{defined as the restriction} of the unbounded $Rf^!$ along
-$\D^+\hookrightarrow\D$ (which makes sense since $Rf^!$ preserves bounded below objects;
-the bound is shifted by the amplitude of $Rf_!$). It is not defined as an independently
-chosen right adjoint on $\D^+$. The adjunction $R^+f_!\dashv R^+f^!$ is then the
-restriction of $Rf_!\dashv Rf^!$ along the fully faithful inclusions
-(\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekPlusAdjunction}). So there is no
+As in layer (A), there is no underived $f^!$; $Rf_!\dashv Rf^!$ is the composite of
+$\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$, so that $Rf_!$ is a left adjoint is a theorem.
+$R^+f^!$ is \emph{defined as the restriction} of $Rf^!$ to $\D^+$, not as an independently
+chosen right adjoint, and $R^+f_!\dashv R^+f^!$ is the restricted adjunction; so there is no
 ambiguity between ``the right adjoint of $R^+f_!$'' and ``the restriction of $Rf^!$''.
 
 \subsection{$\Qlbar$-coefficients}
 \label{sec:sixB-Qlbar}
 
 \begin{choice}[Same recipe, other coefficient morphisms]
-The six functors on $\Mod_{\Qlbar{}_{,X}}=\Mod(\Sh(X_\proet,\Ab),\Qlbar{}_{,X})$ are built
-by exactly the same constructions as for $\mathcal{A}_X(T)$, with the coefficient morphisms
-$\eta_f\colon\Qlbar{}_{,Y}\to f_*\Qlbar{}_{,X}$ and
-$\alpha_f\colon f^*\Qlbar{}_{,Y}\to\Qlbar{}_{,X}$ of \S\ref{sec:coefficients} in place of
-those of $C(-,T)$ (folder \lean{SixFunctors/ProEtale/ModuleObject/PAdicAlgCl}, namespace
-\lean{ProEtale.PadicAlgClRing}):
-\begin{align*}
-  f_* &:= \Res_{\eta_f}\circ\mathrm{mapMod}(f_*), &
-  f^* &:= \Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*),\\
-  j_! &:= (\text{linear }j_!)\circ\Res_{\alpha_j}, &
-  f_! &:= g_*\circ i_!,\\
-  Rf_* &:= R(f_*),\quad Lf^* := L(f^*), &
-  Rf_! &:= R(g_*)\circ\D(i_!),\\
-  Rf^! &:= \D(i^*)\circ Rg^!, &
-  \lotimes_{\Qlbar},\ \RHom_{\Qlbar}&\text{ as in \S\ref{sec:derived}},
-\end{align*}
-with the same choices as above (total derived functors of the composites for $Rf_*$ and
-$Lf^*$; composites of derived functors for $Rf_!$ and $Rf^!$; $R^+f^!$ by restriction).
+The six functors on $\Mod_{\Qlbar{}_{,X}}$ are built by exactly the same constructions,
+with the $\eta_f$, $\alpha_f$ of $\Qlbar$ (\S\ref{sec:coefficients}) in place of those of
+$C(-,T)$ (namespace \lean{ProEtale.PadicAlgClRing}), and with the same choices: total
+derived functors of composites for $Rf_*$, $Lf^*$; composites of derived functors for
+$Rf_!$, $Rf^!$; $R^+f^!$ by restriction.
 \end{choice}
-
-Nothing in the constructions uses the particular form of the coefficient ring objects, only
-$\eta_f$, $\alpha_f$ and their properties. Accordingly the same results are available:
-$f^*\dashv f_*$ (\lean{ProEtale.PadicAlgClRing.upperStarLowerStarAdjunction}),
-$Lf^*\dashv Rf_*$ (\lean{ProEtale.PadicAlgClRing.derivedUpperStarLowerStarAdjunction}),
-the comparisons $Rf_*\cong\D(\Res_{\eta_f})\circ R\,\mathrm{mapMod}(f_*)$ and
-$Lf^*\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}(f^*))$
-(\lean{ProEtale.PadicAlgClRing.rightDerivedLowerStarIso},
-\lean{ProEtale.PadicAlgClRing.leftDerivedUpperStarIso}), $\D(j_!)\dashv\D(j^*)$, and
-$Rf_!\dashv Rf^!$ on $\D$ and $\D^+$
-(\lean{ProEtale.PadicAlgClRing.rightDerivedUpperShriekAdjunction},
-\lean{ProEtale.PadicAlgClRing.rightDerivedUpperShriekPlusAdjunction}). The sorried inputs
-are the same as for $C(-,T)$: $\eta_f$ is a morphism of ring objects, $\alpha_j$ is an
-isomorphism for open immersions, the projection formula for $j_!$, preservation of K-flat
-complexes by $\mathrm{mapMod}(f^*)$, $Rg_*$ is a left adjoint for proper $g$, and $Rf^!$
-preserves bounded below objects.
+Nothing in the constructions uses the form of the coefficient ring, only $\eta_f$ and
+$\alpha_f$, so all results of this section hold for $\Qlbar$ as well.
 
 \begin{remark}
 $\Qlbar$-coefficients are modules over the ring object $\Qlbar{}_{,X}$ itself, not a
-2-colimit of the categories $\D(\Mod_{E_X})$ over finite $E$. The colimit description
-$\Qlbar{}_{,X}=\operatorname{colim}_EE_X$ is a statement about the ring object only;
-comparing $\D(\Mod_{\Qlbar{}_{,X}})$ (or its constructible part) with
-$\operatorname{colim}_E\D(\Mod_{E_X})$ is not addressed yet.
+2-colimit of the $\D(\Mod_{E_X})$ over finite $E$. The colimit description
+$\Qlbar{}_{,X}=\operatorname{colim}_EE_X$ concerns the ring object only; comparing
+$\D(\Mod_{\Qlbar{}_{,X}})$ with $\operatorname{colim}_E\D(\Mod_{E_X})$ is not addressed yet.
 \end{remark}
+
+%======================================================================
+\section{Six functors on bounded constructible complexes}
+\label{sec:sixCons}
+%======================================================================
+
+Write $\Dc(X,T):=\Dc(X_\proet,\mathcal{A}_X(T))$, and similarly $\Dc(X,\Qlbar)$.
+
+\begin{choice}[Restriction, not a new construction]
+Each functor on $\Dc$ is the \emph{restriction} of the corresponding functor on the ambient
+$\D(\Mod_{\mathcal{A}_X(T)})$ of \S\ref{sec:sixB}, via the statement that the ambient functor
+preserves bounded constructible complexes. Thus it commutes with the inclusions by
+construction, and the adjunctions $Lf^*\dashv Rf_*$, $j_!\dashv j^*$, $Rf_!\dashv Rf^!$,
+$K\lotimes-\dashv\RHom(K,-)$ and the composition isomorphism of $Lf^*$ are restrictions of
+the ambient ones along the fully faithful inclusions. Nothing is derived afresh.
+\end{choice}
+
+\medskip
+\noindent
+\begin{tabularx}{\textwidth}{@{}llX@{}}
+\toprule
+Functor on $\Dc$ & Restriction of & Hypotheses \\
+\midrule
+$Lf^*$ & $L(f^*)$ & $X$, $Y$ Noetherian \\
+$Rf_*$ & $R(f_*)$ & and $f$ of finite type \\
+$j_!$ & $\D(j_!)$ & $j$ an open immersion \\
+$Rf_!$, $Rf^!$ & $R(g_*)\circ\D(i_!)$, $\D(i^*)\circ Rg^!$ & $f$ with a chosen
+  compactification\\
+$\lotimes$, $\RHom$ & $\lotimes_{\mathcal{A}_X}$, $\RHom_{\mathcal{A}_X}$ & $X$ Noetherian\\
+\bottomrule
+\end{tabularx}
+\medskip
+
+(``Noetherian'' refers to the underlying topological space, the hypothesis under which $\Dc$
+is triangulated.) These hypotheses are deliberately minimal placeholders: the preservation
+statements really need Deligne's finiteness theorem (finite type over a regular base of
+dimension $\le1$ with $\ell$ invertible) and $T=\cO_E$ or $E$, and will be strengthened when
+proved.
+
+%======================================================================
+\section{Base change theorems}
+\label{sec:basechange}
+%======================================================================
+
+Fix a commutative square of schemes
+\[
+\begin{array}{ccc}
+X' & \xrightarrow{\;g'\;} & X\\
+{\scriptstyle f'}\downarrow & & \downarrow{\scriptstyle f}\\
+Y' & \xrightarrow{\;g\;} & Y
+\end{array}
+\]
+(Noetherian, $f$, $f'$ of finite type). Everything is on $\Dc(-,T)$ resp.\ $\Dc(-,\Qlbar)$,
+and mirrors the \'etale constructions.
+
+\begin{choice}[The base change morphism]
+$\mathrm{BC}_{sq}\colon g^*\circ Rf_*\to Rf'_*\circ g'^*$
+(\lean{ProEtale.ContinuousMapRing.boundedConstructibleBaseChange}) is the composite of three
+steps, exactly as in the \'etale case: insert the unit of $Lf'^*\dashv Rf'_*$, transport the
+pullback comparison $Lf'^*\circ Lg^*\cong Lg'^*\circ Lf^*$ (from the composition
+isomorphisms and commutativity of the square), and contract the counit of $Lf^*\dashv Rf_*$.
+No hypothesis on the square enters the definition.
+\end{choice}
+
+\begin{proposition}[Proper base change]
+For a cartesian square with $f$ proper, $\mathrm{BC}_{sq}$ is an isomorphism; no hypothesis
+on $g$.
+\end{proposition}
+For $T=\cO_E,E$ this reduces to the \'etale torsion case by writing a constructible
+$\cO_E$-complex as the derived limit of its reductions modulo $\varpi^n$ and inverting $\ell$
+(Bhatt--Scholze \S6.7); for $\Qlbar$ it reduces to finite $E$, a constructible
+$\Qlbar$-complex being defined over some finite $E$.
+
+\paragraph{Base change for extension by zero.} For a square of open immersions $j$, $j'$, the
+canonical exchange morphism $j'_!\circ g'^*\to g^*\circ j_!$ is again built from unit,
+square transport and counit (for $j_!\dashv j^*$), and is an isomorphism for a cartesian
+square.
+
+\begin{choice}[Compact-support base change, relative to an explicit compactification]
+For a cartesian square and a compactification $c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$ of $f$,
+let $c'$ be the base-changed compactification $X'\to Z\times_YY'\to Y'$ of $f'$
+(\lean{Compactification.baseChange}). The morphism
+\[
+  \mathrm{Ex}_!^c\colon g^*\circ Rf_!^c\longrightarrow Rf'^{\,c'}_!\circ g'^*
+\]
+(\lean{ProEtale.ContinuousMapRing.boundedConstructibleLowerShriekBaseChange}) is the pasting
+of $\mathrm{BC}$ for the proper square of $c'$ with the \emph{inverse} of the
+extension-by-zero exchange for its open square.
+\end{choice}
+
+\begin{proposition}[Base change for the lower shriek]
+$\mathrm{Ex}_!^c$ is an isomorphism; it follows from proper base change for $p$ and base
+change for extension by zero, with no properness of $f$.
+\end{proposition}
+Independence of $\mathrm{Ex}_!^c$ from the compactification is not treated: all statements
+are relative to an explicit $c$. The \'etale $\mathrm{Ex}_!^c$ is set up identically on the
+bounded below derived categories, and is an isomorphism for torsion coefficients.
 
 %======================================================================
 \section{Summary}
@@ -864,59 +621,42 @@ Functor & Layer A: $\Sh(X_\proet,\mathcal{A})$ & Layer B: $\Mod_{\mathcal{A}_X(T
 $f_*$ & restriction along base change &
   $\Res_{\eta_f}\circ\mathrm{mapMod}(f_*)$\\
 $f^*$ & $\mathrm{sheafify}\circ\operatorname{Lan}$, exact, monoidal &
-  $\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)$, right exact\\
+  $\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)$; exactness assumed\\
 $j_!$ ($j$ open) & $\mathrm{sheafify}\circ\operatorname{Lan}$ along localization &
   $(\text{linear }j_!)\circ\Res_{\alpha_j}$ via projection formula\\
 $f_!$ & $g_*\circ i_!$ (chosen compactification) & $g_*\circ i_!$\\
 $Rf_*$ & $R(f_*)$ &
-  $R(\Res_{\eta_f}\circ\mathrm{mapMod}f_*)$ (derived of composite);
-  $\cong\D(\Res_{\eta_f})\circ R(\mathrm{mapMod}f_*)$ (theorem)\\
+  $R(\Res_{\eta_f}\circ\mathrm{mapMod}f_*)$ (derived of composite)\\
 $Lf^*$ & $L(f^*)\cong\D(f^*)$ &
-  $L(\Ext_{\alpha_f}\circ\mathrm{mapMod}f^*)$ (derived of composite);
-  $\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}f^*)$ (theorem)\\
-$Lf^*\dashv Rf_*$ & derived from $f^*\dashv f_*$ & derived from $f^*\dashv f_*$ on module
-  objects\\
-$Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) &
-  $R(g_*)\circ\D(i_!)$ (composite of derived)\\
-$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ (composite of derived) &
-  $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of the module-object $Rg_*$ (composite of
-  derived)\\
+  $L(\Ext_{\alpha_f}\circ\mathrm{mapMod}f^*)$ (derived of composite)
+  $\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}f^*)$\\
+$Lf^*\dashv Rf_*$ & derived from $f^*\dashv f_*$ & derived from $f^*\dashv f_*$\\
+$Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) & same\\
+$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & same\\
 $Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; on $\D^+$
   by restriction & same\\
-$\lotimes$ & K-flat derived $\otimes$ & K-flat derived $\otimes_{\mathcal{A}_X}$\\
-$\RHom$ & right adjoint of $\lotimes$ & right adjoint of $\lotimes_{\mathcal{A}_X}$\\
+$\lotimes$, $\RHom$ & K-flat derived $\otimes$, right adjoint &
+  K-flat derived $\otimes_{\mathcal{A}_X}$, right adjoint\\
+on $\Dc$ & --- & restrictions of the above\\
+base change & $\mathrm{BC}$, $\mathrm{Ex}_!^c$ (\'etale) & $\mathrm{BC}$,
+  $\mathrm{Ex}_!^c$ on $\Dc$\\
 \bottomrule
 \end{tabularx}
 \medskip
 
-The layer B column applies verbatim to $\Mod_{\Qlbar{}_{,X}}$, with the coefficient
-morphisms $\eta_f,\alpha_f$ of $\Qlbar$ (\S\ref{sec:sixB-Qlbar}).
+The layer B column applies verbatim to $\Mod_{\Qlbar{}_{,X}}$.
 
 \paragraph{Main open directions.}
 \begin{itemize}
 \item An explicit construction of $Rg^!$ for proper $g$ on module objects, via the
-  projection-formula linearization of the $\Ab$-valued right adjoint and coextension of
-  scalars along $\alpha_g$.
-\item For $\Qlbar{}_{,X}$: proving the sorried properties of $\eta_f$ and $\alpha_j$, and
-  comparing $\D(\Mod_{\Qlbar{}_{,X}})$ with $\operatorname{colim}_E\D(\Mod_{E_X})$.
-\item Restricting the module-object functors to $\D_{\mathrm{cons}}$, and aligning the
-  restriction-to-strata used in constructibility with the module-object pullback.
-\item Proving that $E\lotimes_{\cO_E}-$ is a localization at the morphisms with
-  $\ell$-power-torsion cone (\S\ref{sec:rationalization}), and comparing layer (B) with
-  layer (A) via reduction modulo $\ell^n$.
+  projection formula and coextension of scalars along $\alpha_g$.
+\item Comparing $\D(\Mod_{\Qlbar{}_{,X}})$ with $\operatorname{colim}_E\D(\Mod_{E_X})$.
+\item Preservation of $\Dc$ under the correct hypotheses, and aligning restriction to strata
+  with the module-object pullback.
+\item Proper base change on $\Dc$ by reduction to the \'etale torsion case, and independence
+  of $\mathrm{Ex}_!^c$ from the compactification.
+\item $E\lotimes_{\cO_E}-$ as a localization (\S\ref{sec:rationalization}), and comparing
+  layer (B) with layer (A) via reduction modulo $\ell^n$.
 \end{itemize}
-
-\paragraph{Branches.}
-\texttt{ring-objects-for-coefficients} (\S\ref{sec:coefficients}) and
-\texttt{extend-scalars-module-object} (\S\ref{sec:modules}) are merged into
-\texttt{module-object-six-functors} (\S\ref{sec:sixB}, the move of layer (A) to
-\lean{FiniteCoefficient}, and the move of the $C(-,T)$ module-object functors to
-\lean{ModuleObject/FiniteExtension} next to \lean{ModuleObject/PAdicAlgCl}). The latest
-commits on \texttt{ring-objects-for-coefficients} (the colimit description of
-$\Qlbar{}_{,X}$) are not yet merged into \texttt{module-object-six-functors}.
-\texttt{extend-scalars-isLocalization} (\S\ref{sec:rationalization}) builds on
-\texttt{extend-scalars-module-object} and is not yet merged with
-\texttt{module-object-six-functors}. \texttt{bounded-constructible-module-object-of-sheaf}
-(\S\ref{sec:constructible}) is not yet merged with it either.
 
 \end{document}
