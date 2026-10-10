@@ -2677,3 +2677,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:29 L: merged deliver/H1/lem-pqf-finite-spectrum-maximal-primes (reviewer PASS; first push; new nodes: 0)
 - 21:30 UTC L matched lem-sc-affine-inter-principal-both (reviewer-added, R-epg2603) to Mathlib AlgebraicGeometry.exists_basicOpen_le_affine_inter
 - 21:30 UTC L attached lem-pc-homotopy-limit-map (IsHomotopyLimit.map) and lem-pc-right-derived-functor-triangulated (RightDerivedFunctor CommShift/IsTriangulated instances) after R-dfl2603
+- 21:31 L: returned deliver/F1/def-nagata-morphism-equality-stage (reviewer RETURN: 1. E (missing hypotheses; the definition is not well formed as stated): a finite affine target cover needs Y_{lambda_0} )
