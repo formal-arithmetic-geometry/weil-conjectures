@@ -2,7 +2,7 @@
 
 861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (366)
+## Stage 1: nodes to split (365)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
-| `lem-weil-pbc-limit-module-finite-presentation` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
@@ -373,7 +372,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (495)
+## Stage 2: nodes to state (496)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -644,6 +643,7 @@
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-flat-modules` | 1 | state |
+| `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 385 nodes that wait for stage 1, 916 nodes that wait for a statement dependency.
+Not open yet: 384 nodes that wait for stage 1, 916 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
