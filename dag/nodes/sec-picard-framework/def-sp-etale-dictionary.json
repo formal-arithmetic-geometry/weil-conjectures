@@ -7,7 +7,7 @@
  },
  "kind": "definition",
  "title": "The proper-base-change dictionary",
- "statement": "The spectral sequence statements used in the proper-base-change chapter are\nobtained from the statements above by the substitutions: the abelian category\n[def-sp-abelian] $\\mathcal A$ is $\\operatorname{Ab}(X_{\\mathrm{et}})$\n(Grothendieck abelian [def-sp-grothendieck-abelian]), the left exact additive\n[def-sp-left-exact-additive] functor $v$ is the etale direct image $f_*$ with\nright derived functors $R^nf_*$, $K\\in\\operatorname{Ch}^+(\\mathcal A)$ is\n$K\\in\\Dplus(X_{\\mathrm{et}})$ (with the K-injective resolution\n[def-sp-kinjective-bridge] presentation of the proper-base-change chapter),\nthe homological functors $\\Phi$ are $Rf_*$, $Rf'_*g'^{-1}$, $g^{-1}Rf_*$, the\nnatural transformation $\\eta$ of couples is the derived exchange morphism\n$\\Ex_{\\square,K}$ (introduced in the conventions of the proper-base-change\nchapter), and the composite pair $(F,G)$ is $(f_*,h_*)$ for $X\\to Y\\to Z$.",
+ "statement": "The spectral sequence statements used in the proper-base-change chapter are\nread with the following substitutions. For a scheme $X$, the abelian category\n[def-sp-abelian] $\\mathcal A$ is the category $\\Ab(X_{\\Et})$ of abelian\nsheaves on the small etale site [def-weil-pbc-etale-sheaves], which is\nGrothendieck abelian [def-sp-grothendieck-abelian]. For a morphism\n$f:X\\to Y$, the left exact additive [def-sp-left-exact-additive] functor\n$v$ is the etale direct image $f_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$\n[def-weil-pbc-direct-image], with right derived functors $R^nf_*$. A\nbounded-below complex $K^\\bullet\\in\\operatorname{Ch}^+(\\Ab(X_{\\Et}))$\nrepresents an object $K\\in\\Dplus(X_{\\Et})$\n[def-weil-pbc-derived-categories]; its K-injective resolution supplies\nthe computation of $Rf_*K$ [def-sp-kinjective-bridge]. The functors\n$\\Phi$ occurring in the base-change comparisons are $Rf_*$,\n$Rf'_*g'^{-1}$, and $g^{-1}Rf_*$, where the inverse images on derived\ncategories are [def-weil-pbc-derived-inverse-image]. For a cartesian\nsquare, the natural transformation used to compare the resulting couples\nis the derived exchange morphism\n$\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$\n[def-weil-pbc-derived-exchange]; its compatibility with the couple\nstructure is a separate statement. For composable morphisms\n$X\\xrightarrow{f}Y\\xrightarrow{h}Z$, the composable pair\n[def-sp-composite-acyclicity] $(F,G)$ is $(f_*,h_*)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-groth-ss/def-sp-etale-dictionary.md",
   "place": "node def-sp-etale-dictionary, order 598"
@@ -16,14 +16,42 @@
   "def-sp-abelian",
   "def-sp-grothendieck-abelian",
   "def-sp-left-exact-additive",
-  "def-sp-kinjective-bridge"
+  "def-sp-kinjective-bridge",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-exchange",
+  "def-sp-composite-acyclicity"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale sheaves Grothendieck spectral sequence derived direct image dictionary",
+   "results": "sheafPushforwardCocontinuous.congr_simp, Sheaf.Hom.epi_of_presheaf_epi, Functor.sheafAdjunctionContinuous, Scheme.smallEtaleTopology; no declaration giving this spectral-sequence dictionary",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\"",
+   "results": "Functor.sheafPushforwardContinuous and its sheaf-adjunction and objectwise lemmas (Mathlib.CategoryTheory.Sites.Continuous), but no spectral-sequence substitution or derived exchange dictionary",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Etale.lowerStar|derivedBaseChangeMapPlus|IsAcyclicComposablePair|sheafPushforwardContinuous' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "results": "sheafPushforwardContinuous in Sites/Continuous, Over and Pullback; no derived etale exchange or this dictionary (source tree: /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +75,19 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-groth-ss"
+ "unit": "sk-def-groth-ss",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-sp-etale-dictionary",
+  "worker": "stage1",
+  "blueprint": "The sole defining paragraph of literature/blueprint/master/blueprint/sec-picard-framework/sk-def-groth-ss/def-sp-etale-dictionary.md (order 598); this definition has no proof steps.",
+  "summary": "Checked the blueprint's etale substitution against the unit and the existing category, direct-image, derived-inverse-image, and exchange definitions. Distinguished bounded-below complexes from their derived-category objects and identified exchange as the transformation used for a separate couple-morphism construction. Added the missing statement dependencies; no new node is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: the dictionary of substitutions checked against the unit record"
+ }
 }

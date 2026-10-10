@@ -1353,3 +1353,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:53 L: accepted lem-weil-pbc-fs-adic-field-differentials-injective (07EL (2) => (5), 7 steps; new nodes for 031K injectivity and 07E5 (3) => (4)).
 - 11:55 L: 23rd account limit ~11:53, resumed 11:54; def-weil-pbc-pointed-etale-neighbourhoods found complete on disk; relaunched as-sequence, etale-finite-data-descent, cohomological-dimension (split along the Lean), formally-smooth-differentials-injective.
 - 11:55 L: accepted def-weil-pbc-pointed-etale-neighbourhoods as a Mathlib leaf (Functor.Elements of the etale point's fibre functor).
+- 2026-10-10, delivery of E1: def-sp-etale-dictionary merged from deliver/E1/def-sp-etale-dictionary (1 commit(s), 0 new node(s), spot-checked by L: L: the dictionary of substitutions checked against the unit record); claim closed
