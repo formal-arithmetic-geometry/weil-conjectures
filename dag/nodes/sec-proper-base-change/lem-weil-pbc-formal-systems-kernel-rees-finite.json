@@ -1,146 +1,149 @@
 {
- "id": "lem-weil-pbc-formal-systems-kernel-rees-finite",
- "kind": "statement",
- "title": "The kernels of a coherent formal system form a finite graded Rees module",
- "statement": "Let $X$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] with quasi-compact underlying space), let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals, and let $(\\mathcal F_n)_{n\\ge1}$ be an object of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. Set $\\mathcal F_0=0$ and $\\mathcal K_n=\\operatorname{Ker}(\\mathcal F_{n+1}\\to\\mathcal F_n)$ in sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], for $n\\ge0$ (thus $\\mathcal K_0=\\mathcal F_1$). Put $\\mathcal I^0=\\mathcal O_X$, with the other powers and quotients as in [def-weil-pbc-coherent-formal-module]. The sheaf direct sum $\\mathcal B=\\bigoplus_{n\\ge0}\\mathcal I^n/\\mathcal I^{n+1}$ has its associated graded algebra structure: the homogeneous product is induced by multiplication of local sections, taking degrees $m,n$ to $m+n$, and its unit is $1\\bmod\\mathcal I$ in degree zero. Then $\\mathcal G=\\bigoplus_{n\\ge0}\\mathcal K_n$ has a canonical graded $\\mathcal B$-module structure, with degree-$m$ sections of $\\mathcal B$ carrying $\\mathcal K_n$ into $\\mathcal K_{n+m}$, and its underlying $\\mathcal O_X$-module is quasi-coherent [pqf-def-coherent]. It is of finite type over $\\mathcal B$: every point has an open neighbourhood $U$ and finitely many homogeneous sections of $\\mathcal G|_U$ whose $\\mathcal B|_U$-linear combinations locally generate all sections (equivalently there is a surjection from a finite direct sum of grading shifts of $\\mathcal B|_U$ onto $\\mathcal G|_U$). In fact these generators may be taken in degree zero. The action is specified locally by lifting $x\\in\\mathcal K_n$ to a section $\\widetilde x$ of $\\mathcal F_{n+m+1}$ and sending $(a\\bmod\\mathcal I^{m+1},x)$ to $a\\widetilde x\\in\\mathcal K_{n+m}$, for $a\\in\\mathcal I^m$; lifts are taken after passing to a neighbourhood if necessary.",
- "source": {
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), statement and affine proof; the coherent formal-system object is Section 0EHN (section-coherent-formal)"
- },
- "stmt_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-pbc-coherent-formal-module",
-  "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
- ],
- "proof": [
-  {
-   "text": "*Construct the action.* Repeatedly applying the reduction condition of [def-weil-pbc-coherent-formal-module] gives $\\mathcal F_l/\\mathcal I^r\\mathcal F_l\\cong\\mathcal F_r$ for $l\\ge r\\ge1$: induction on $l-r$, using $\\mathcal I^{l-1}\\mathcal F_l\\subseteq\\mathcal I^r\\mathcal F_l$ and the third isomorphism theorem for quotients. All transition maps are surjective as maps of sheaves. For $x\\in\\mathcal K_n$ and $a\\in\\mathcal I^m$, lift $x$ locally to $\\widetilde x\\in\\mathcal F_{n+m+1}$. If $n\\ge1$, its image in $\\mathcal F_n$ is zero, so $\\widetilde x\\in\\mathcal I^n\\mathcal F_{n+m+1}$; for $n=0$ the same inclusion holds with $\\mathcal I^0=\\mathcal O_X$. Thus $a\\widetilde x$ lies in $\\mathcal I^{n+m}\\mathcal F_{n+m+1}=\\mathcal K_{n+m}$. A different lift differs by $\\mathcal I^{n+1}\\mathcal F_{n+m+1}$, and multiplication by $a$ kills this difference since $\\mathcal I^{n+m+1}\\mathcal F_{n+m+1}=0$. Replacing $a$ by a section differing by $\\mathcal I^{m+1}$ likewise changes the product by zero. These local choices agree on overlaps, so glue to bilinear action maps. Additivity, the unit law and associativity are verified with lifts to a single common level $\\mathcal F_{n+m+l+1}$: for degrees $m,l$ both parenthesizations send the representative to $(ab)\\widetilde x=a(b\\widetilde x)$. The same multiplication calculation defines the associative unital algebra $\\mathcal B$. Extending over the sheaf direct sums yields the claimed graded action.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "lem-weil-pbc-formal-systems-kernel-rees-finite",
+  "kind": "statement",
+  "title": "The kernels of a coherent formal system form a finite graded Rees module",
+  "statement": "Let $X$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] with quasi-compact underlying space), let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals, and let $(\\mathcal F_n)_{n\\ge1}$ be an object of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. Set $\\mathcal F_0=0$ and $\\mathcal K_n=\\operatorname{Ker}(\\mathcal F_{n+1}\\to\\mathcal F_n)$ in sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], for $n\\ge0$ (thus $\\mathcal K_0=\\mathcal F_1$). Put $\\mathcal I^0=\\mathcal O_X$, with the other powers and quotients as in [def-weil-pbc-coherent-formal-module]. The sheaf direct sum $\\mathcal B=\\bigoplus_{n\\ge0}\\mathcal I^n/\\mathcal I^{n+1}$ has its associated graded algebra structure: the homogeneous product is induced by multiplication of local sections, taking degrees $m,n$ to $m+n$, and its unit is $1\\bmod\\mathcal I$ in degree zero. Then $\\mathcal G=\\bigoplus_{n\\ge0}\\mathcal K_n$ has a canonical graded $\\mathcal B$-module structure, with degree-$m$ sections of $\\mathcal B$ carrying $\\mathcal K_n$ into $\\mathcal K_{n+m}$, and its underlying $\\mathcal O_X$-module is quasi-coherent [pqf-def-coherent]. It is of finite type over $\\mathcal B$: every point has an open neighbourhood $U$ and finitely many homogeneous sections of $\\mathcal G|_U$ whose $\\mathcal B|_U$-linear combinations locally generate all sections (equivalently there is a surjection from a finite direct sum of grading shifts of $\\mathcal B|_U$ onto $\\mathcal G|_U$). In fact these generators may be taken in degree zero. The action is specified locally by lifting $x\\in\\mathcal K_n$ to a section $\\widetilde x$ of $\\mathcal F_{n+m+1}$ and sending $(a\\bmod\\mathcal I^{m+1},x)$ to $a\\widetilde x\\in\\mathcal K_{n+m}$, for $a\\in\\mathcal I^m$; lifts are taken after passing to a neighbourhood if necessary.",
+  "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), statement and affine action implicit in proof; Section 0EHN (section-coherent-formal) reduction condition. The lift-independence and action laws are expanded here."
-   }
+    "place": "Cohomology of Schemes, Lemma 087Z (lemma-finite-over-rees-algebra), statement and affine proof; the coherent formal-system object is Section 0EHN (section-coherent-formal)"
   },
-  {
-   "text": "*Affine identification.* Work on an affine open $U=\\operatorname{Spec}A$ with $I=\\mathcal I(U)$. The restriction is an object of $\\mathit{Coh}(U,\\widetilde I)$, since coherence and the reduction conditions are local. By [lem-weil-pbc-coherent-formal-modules-affine] (1), $M=\\varprojlim_r\\mathcal F_r(U)$ is finite over $\\widehat A$ and the projections identify $\\mathcal F_r(U)=M/I^rM$, compatibly with transitions. The kernel in degree $n$ is consequently $I^nM/I^{n+1}M$, also for $n=0$ because $\\mathcal F_0=0$. Each $\\mathcal K_n$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth] and [lem-weil-pbc-quasi-coherent-module-kernel]. Affine sections of ideal products and quotients [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] identify the degree-$n$ part of $\\mathcal B|_U$ with the associated sheaf of $I^n/I^{n+1}$. The counit and preservation of all colimits in [lem-weil-pbc-affine-tilde-gamma-adjunction] (3),(4) identify both sheaf direct sums with the associated sheaves of $B=\\bigoplus I^n/I^{n+1}$ and $G=\\bigoplus I^nM/I^{n+1}M$ respectively. In these identifications the action of step 1 is $(a,\\bar x)\\mapsto\\overline{ax}$: a representative in $M$ supplies every lift used there. Thus the identifications respect multiplication and grading. In particular $\\mathcal G|_U$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections].",
-   "uses": [
+  "stmt_deps": [
+    "pqf-def-locnoeth",
     "def-weil-pbc-coherent-formal-module",
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+  ],
+  "proof": [
+    {
+      "text": "*Construct the action.* Repeatedly applying the reduction condition of [def-weil-pbc-coherent-formal-module] gives $\\mathcal F_l/\\mathcal I^r\\mathcal F_l\\cong\\mathcal F_r$ for $l\\ge r\\ge1$: induction on $l-r$, using $\\mathcal I^{l-1}\\mathcal F_l\\subseteq\\mathcal I^r\\mathcal F_l$ and the third isomorphism theorem for quotients. All transition maps are surjective as maps of sheaves. For $x\\in\\mathcal K_n$ and $a\\in\\mathcal I^m$, lift $x$ locally to $\\widetilde x\\in\\mathcal F_{n+m+1}$. If $n\\ge1$, its image in $\\mathcal F_n$ is zero, so $\\widetilde x\\in\\mathcal I^n\\mathcal F_{n+m+1}$; for $n=0$ the same inclusion holds with $\\mathcal I^0=\\mathcal O_X$. Thus $a\\widetilde x$ lies in $\\mathcal I^{n+m}\\mathcal F_{n+m+1}=\\mathcal K_{n+m}$. A different lift differs by $\\mathcal I^{n+1}\\mathcal F_{n+m+1}$, and multiplication by $a$ kills this difference since $\\mathcal I^{n+m+1}\\mathcal F_{n+m+1}=0$. Replacing $a$ by a section differing by $\\mathcal I^{m+1}$ likewise changes the product by zero. These local choices agree on overlaps, so glue to bilinear action maps. Additivity, the unit law and associativity are verified with lifts to a single common level $\\mathcal F_{n+m+l+1}$: for degrees $m,l$ both parenthesizations send the representative to $(ab)\\widetilde x=a(b\\widetilde x)$. The same multiplication calculation defines the associative unital algebra $\\mathcal B$. Extending over the sheaf direct sums yields the claimed graded action.",
+      "uses": [
+        "def-weil-pbc-coherent-formal-module",
+        "def-weil-sheaf-of-modules-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 087Z (lemma-finite-over-rees-algebra), statement and affine action implicit in proof; Section 0EHN (section-coherent-formal) reduction condition. The lift-independence and action laws are expanded here."
+      }
+    },
+    {
+      "text": "*Affine identification.* Work on an affine open $U=\\operatorname{Spec}A$ with $I=\\mathcal I(U)$. The restriction is an object of $\\mathit{Coh}(U,\\widetilde I)$, since coherence and the reduction conditions are local. By [lem-weil-pbc-coherent-formal-modules-affine] (1), $M=\\varprojlim_r\\mathcal F_r(U)$ is finite over $\\widehat A$ and the projections identify $\\mathcal F_r(U)=M/I^rM$, compatibly with transitions. The kernel in degree $n$ is consequently $I^nM/I^{n+1}M$, also for $n=0$ because $\\mathcal F_0=0$. Each $\\mathcal K_n$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth] and [lem-weil-pbc-quasi-coherent-module-kernel]. Affine sections of ideal products and quotients [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] identify the degree-$n$ part of $\\mathcal B|_U$ with the associated sheaf of $I^n/I^{n+1}$. The counit and preservation of all colimits in [lem-weil-pbc-affine-tilde-gamma-adjunction] (3),(4) identify both sheaf direct sums with the associated sheaves of $B=\\bigoplus I^n/I^{n+1}$ and $G=\\bigoplus I^nM/I^{n+1}M$ respectively. In these identifications the action of step 1 is $(a,\\bar x)\\mapsto\\overline{ax}$: a representative in $M$ supplies every lift used there. Thus the identifications respect multiplication and grading. In particular $\\mathcal G|_U$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections].",
+      "uses": [
+        "def-weil-pbc-coherent-formal-module",
+        "lem-weil-pbc-coherent-formal-modules-affine",
+        "pqf-lem-coherent-ft-locnoeth",
+        "lem-weil-pbc-quasi-coherent-module-kernel",
+        "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+        "lem-weil-pbc-affine-tilde-gamma-adjunction",
+        "lem-weil-pbc-spec-module-tilde-sections"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via Lemma 087W (lemma-inverse-systems-affine); Schemes 01IC (lemma-kernel-cokernel-quasi-coherent), 01ID (lemma-colimit-quasi-coherent), 01I8 (lemma-widetilde-constructions)."
+      }
+    },
+    {
+      "text": "*Finite generation on the affine open.* Apply [lem-weil-pbc-completed-module-associated-graded-generators] to $A,I,M$. Choose a finite generating family of $M/IM$. The lemma says that it generates $G$ in degree zero over $B$, so gives a surjective $B$-linear graded map $B^{\\oplus t}\\to G$. It is also $A$-linear. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (4), associated sheaves preserve its cokernel and hence its surjectivity. Step 2 identifies the resulting morphism with a surjection $(\\mathcal B|_U)^{\\oplus t}\\to\\mathcal G|_U$ respecting the graded action. This proves finite type over $\\mathcal B|_U$, without asserting finite type over $\\mathcal O_U$.",
+      "uses": [
+        "lem-weil-pbc-completed-module-associated-graded-generators",
+        "lem-weil-pbc-affine-tilde-gamma-adjunction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 087Z (lemma-finite-over-rees-algebra), final sentence: the assertion that the affine associated graded module is finite is isolated in the new smaller algebraic node."
+      }
+    },
+    {
+      "text": "*Local conclusion.* Every point lies in an affine open $U$, where steps 2 and 3 establish quasi-coherence and provide finitely many degree-zero generators. Quasi-coherence and the stated finite-type condition are local, so these affine verifications give the conclusion on $X$. No global generating family or separation hypothesis on $X$ is required.",
+      "uses": [
+        "pqf-def-coherent"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 087Z (lemma-finite-over-rees-algebra), first sentence of proof: the question is local on X."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-coherent-formal-modules-affine",
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-quasi-coherent-module-kernel",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via Lemma 087W (lemma-inverse-systems-affine); Schemes 01IC (lemma-kernel-cokernel-quasi-coherent), 01ID (lemma-colimit-quasi-coherent), 01I8 (lemma-widetilde-constructions)."
-   }
-  },
-  {
-   "text": "*Finite generation on the affine open.* Apply [lem-weil-pbc-completed-module-associated-graded-generators] to $A,I,M$. Choose a finite generating family of $M/IM$. The lemma says that it generates $G$ in degree zero over $B$, so gives a surjective $B$-linear graded map $B^{\\oplus t}\\to G$. It is also $A$-linear. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (4), associated sheaves preserve its cokernel and hence its surjectivity. Step 2 identifies the resulting morphism with a surjection $(\\mathcal B|_U)^{\\oplus t}\\to\\mathcal G|_U$ respecting the graded action. This proves finite type over $\\mathcal B|_U$, without asserting finite type over $\\mathcal O_U$.",
-   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
     "lem-weil-pbc-completed-module-associated-graded-generators",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), final sentence: the assertion that the affine associated graded module is finite is isolated in the new smaller algebraic node."
-   }
-  },
-  {
-   "text": "*Local conclusion.* Every point lies in an affine open $U$, where steps 2 and 3 establish quasi-coherence and provide finitely many degree-zero generators. Quasi-coherence and the stated finite-type condition are local, so these affine verifications give the conclusion on $X$. No global generating family or separation hypothesis on $X$ is required.",
-   "uses": [
     "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), first sentence of proof: the question is local on X."
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-completed-module-associated-graded-generators",
-  "pqf-def-coherent"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via 087W; the action, n=0 convention, and the omitted affine finite-generation argument are made explicit."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "For a Noetherian ring and an adic inverse system of finite modules, the direct sum of kernels of successive reduction maps is finite over the associated graded ring",
-   "results": "AdicCompletion.flat_of_isNoetherian and ofTensorProductEquivOfFiniteNoetherian.congr_simp (AsTensorProduct); AdicCompletion.sumInv_apply, sum_of, sumInv_comp_sum (Functoriality). None states a sheaf kernel associated graded theorem.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via 087W; the action, n=0 convention, and the omitted affine finite-generation argument are made explicit."
   },
-  {
-   "tool": "leanfinder",
-   "query": "finite graded module formed by kernels of maps in an I-adic formal module over a Noetherian ring",
-   "results": "AdicCompletion.submodule, Hausdorffification, IsAdicComplete, AdicCompletion, AdicCompletion.AdicCauchySequence.submodule (Basic): completion of one module only.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "For a Noetherian ring and an adic inverse system of finite modules, the direct sum of kernels of successive reduction maps is finite over the associated graded ring",
+      "results": "AdicCompletion.flat_of_isNoetherian and ofTensorProductEquivOfFiniteNoetherian.congr_simp (AsTensorProduct); AdicCompletion.sumInv_apply, sum_of, sumInv_comp_sum (Functoriality). None states a sheaf kernel associated graded theorem.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite graded module formed by kernels of maps in an I-adic formal module over a Noetherian ring",
+      "results": "AdicCompletion.submodule, Hausdorffification, IsAdicComplete, AdicCompletion, AdicCompletion.AdicCauchySequence.submodule (Basic): completion of one module only.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n associated graded|Rees|IsCoherent|Coherent /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/RingTheory/{ReesAlgebra,Filtration}.lean",
+      "results": "ReesAlgebra defines R[It] and finite type for a finite ideal; Filtration has its associated Rees submodule and Artin-Rees. No coherent formal sheaf systems or associated graded kernel theorem.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "stage1",
+    "item": "lem-weil-pbc-grothendieck-existence-projective",
+    "date": "2026-10-10"
   },
-  {
-   "tool": "grep",
-   "query": "rg -n associated graded|Rees|IsCoherent|Coherent /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/RingTheory/{ReesAlgebra,Filtration}.lean",
-   "results": "ReesAlgebra defines R[It] and finite type for a finite ideal; Filtration has its associated Rees submodule and Artin-Rees. No coherent formal sheaf systems or associated graded kernel theorem.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "stage1",
-  "item": "lem-weil-pbc-grothendieck-existence-projective",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lead_note": " L 2026-10-10: the sum over n >= 0 uses the convention F_0 = 0 (Coh(X, I) is indexed from n = 1), as stated in the citer lem-weil-pbc-vanishing-projective; the splitter should state it here.",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
-  "worker": "stage1",
-  "summary": "Checked exact Stacks 087Z/coherent-lemma-finite-over-rees-algebra and 087W against shared source. Added F_0=0 and degree-zero convention; replaced the field-only standard graded algebra citation by explicit homogeneous algebra/module operations. Four steps construct the action with local lifts, identify affine kernels using existing 087W plus tilde/kernel/colimit statements, use one strictly smaller new algebraic associated-graded generator lemma, and conclude locally. Live LeanSearch, LeanFinder and Mathlib grep found no exact theorem. New node remains unsplit; no Lean/build or unit-route changes."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "group": "G1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the four steps (087Z): the graded action on the kernels built from lifts (well-defined since I^{n+m+1} F_{n+m+1} = 0), affine identification via 087W and tilde, finite generation in degree zero from the new unsplit algebra node, local conclusion; F_0 = 0 convention made explicit."
- }
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lead_note": " L 2026-10-10: the sum over n >= 0 uses the convention F_0 = 0 (Coh(X, I) is indexed from n = 1), as stated in the citer lem-weil-pbc-vanishing-projective; the splitter should state it here.",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
+    "worker": "stage1",
+    "summary": "Checked exact Stacks 087Z/coherent-lemma-finite-over-rees-algebra and 087W against shared source. Added F_0=0 and degree-zero convention; replaced the field-only standard graded algebra citation by explicit homogeneous algebra/module operations. Four steps construct the action with local lifts, identify affine kernels using existing 087W plus tilde/kernel/colimit statements, use one strictly smaller new algebraic associated-graded generator lemma, and conclude locally. Live LeanSearch, LeanFinder and Mathlib grep found no exact theorem. New node remains unsplit; no Lean/build or unit-route changes."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "group": "G1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the four steps (087Z): the graded action on the kernels built from lifts (well-defined since I^{n+m+1} F_{n+m+1} = 0), affine identification via 087W and tilde, finite generation in degree zero from the new unsplit algebra node, local conclusion; F_0 = 0 convention made explicit."
+  },
+  "tool_uses": [
+    "pqf-lem-coherent-ft-locnoeth"
+  ]
 }
