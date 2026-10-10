@@ -39,14 +39,6 @@ noncomputable def extensionByZeroCompιIso :
   unfold extensionByZero
   exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
 
-/-- A Weil sheaf with an epimorphism from a sheaf with weights at most `w` has weights at most
-`w`: its stalks are Frobenius-equivariant quotients. -/
-theorem HasWeightsAtMost.of_epi [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    {ι : PadicAlgCl l →+* ℂ} {w : ℝ} {F G : WeilSheaf k₀ l X} (f : F ⟶ G) [Epi f]
-    (h : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x α hα ↦
-  h x α (FrobeniusModule.hasEigenvalue_of_surjective _ (stalkAtMap_frobenius _ _ _ f)
-    (surjective_stalkAtMap _ _ _ f) hα)
-
 variable [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 

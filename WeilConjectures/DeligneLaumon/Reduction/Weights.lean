@@ -206,14 +206,6 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
 
--- TODO(adic): needs exactness of the stalk functor and closed points in the support
-/-- A subobject of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
-Frobenius-stable subspaces. -/
-theorem HasWeightsAtMost.of_mono {G : WeilSheaf k₀ l X} (f : G ⟶ F) [Mono f]
-    (h : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x α hα ↦
-  h x α (FrobeniusModule.hasEigenvalue_of_injective _ (stalkAtMap_frobenius _ _ _ f)
-    (injective_stalkAtMap _ _ _ f) hα)
-
 open scoped AlgebraicGeometry.ProEtale in
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A zero Weil sheaf is punctually pure of every weight: its stalks vanish. -/

@@ -387,6 +387,20 @@ theorem IsPunctuallyPureOfWeight.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} 
     (h : F.IsPunctuallyPureOfWeight ι w) : G.IsPunctuallyPureOfWeight ι w := fun x ↦
   stalkAt_isPureOfWeight_of_epi _ _ _ f (h x)
 
+/-- A subobject of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
+Frobenius-stable subspaces. -/
+theorem HasWeightsAtMost.of_mono {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Mono f]
+    (h : G.HasWeightsAtMost ι w) : F.HasWeightsAtMost ι w := fun x α hα ↦
+  h x α (FrobeniusModule.hasEigenvalue_of_injective _ (stalkAtMap_frobenius _ _ _ f)
+    (injective_stalkAtMap _ _ _ f) hα)
+
+/-- A quotient of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
+Frobenius-equivariant quotients. -/
+theorem HasWeightsAtMost.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
+    (h : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x α hα ↦
+  h x α (FrobeniusModule.hasEigenvalue_of_surjective _ (stalkAtMap_frobenius _ _ _ f)
+    (surjective_stalkAtMap _ _ _ f) hα)
+
 section GlobalSections
 
 variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

@@ -78,6 +78,53 @@ lemma sheafPushforwardContinuousComp'_trans {FG' : C ⥤ E} [FG'.IsContinuous J 
   simp [sheafPushforwardContinuousComp']
   rfl
 
+
+section Unit
+
+variable {C₁ : Type u₁} [Category.{v₁} C₁] {C₂ : Type u₂} [Category.{v₂} C₂]
+  {C₃ : Type u₃} [Category.{v₃} C₃]
+  {J₁ : GrothendieckTopology C₁} {J₂ : GrothendieckTopology C₂} {J₃ : GrothendieckTopology C₃}
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Abstract form of the compatibility of the units of the pushforward equivalences with
+composition (sites `C₁, C₂, C₃` for `X, Y, Z`). -/
+lemma sheafPushforwardContinuous_unit_comp
+    {F₁ : C₂ ⥤ C₁} {G₁ : C₁ ⥤ C₂} {F₂ : C₃ ⥤ C₂} {G₂ : C₂ ⥤ C₃}
+    {K₂ I₃ K₁₂ : C₃ ⥤ C₃} {K₁ I₂ : C₂ ⥤ C₂} {F₁₂ : C₃ ⥤ C₁} {G₂₁ : C₁ ⥤ C₃}
+    [F₁.IsContinuous J₂ J₁] [G₁.IsContinuous J₁ J₂] [F₂.IsContinuous J₃ J₂]
+    [G₂.IsContinuous J₂ J₃] [K₂.IsContinuous J₃ J₃] [I₃.IsContinuous J₃ J₃]
+    [K₁₂.IsContinuous J₃ J₃] [K₁.IsContinuous J₂ J₂] [I₂.IsContinuous J₂ J₂]
+    [F₁₂.IsContinuous J₃ J₁] [G₂₁.IsContinuous J₁ J₃]
+    (e₂ : F₂ ⋙ G₂ ≅ K₂) (c₂ : K₂ ≅ I₃) (i₃ : I₃ ≅ 𝟭 C₃)
+    (e₁ : F₁ ⋙ G₁ ≅ K₁) (c₁ : K₁ ≅ I₂) (i₂ : I₂ ≅ 𝟭 C₂)
+    (e₁₂ : F₂ ⋙ F₁ ≅ F₁₂) (e₂₁ : G₁ ⋙ G₂ ≅ G₂₁) (e : F₁₂ ⋙ G₂₁ ≅ K₁₂) (c : K₁₂ ≅ I₃)
+    (h : ∀ U : C₃, G₂.map (G₁.map (e₁₂.inv.app U)) ≫ G₂.map (e₁.hom.app (F₂.obj U)) ≫
+      G₂.map (c₁.hom.app (F₂.obj U)) ≫ G₂.map (i₂.hom.app (F₂.obj U)) ≫ e₂.hom.app U ≫
+      c₂.hom.app U ≫ i₃.hom.app U =
+      e₂₁.hom.app (F₁₂.obj U) ≫ e.hom.app U ≫ c.hom.app U ≫ i₃.hom.app U)
+    (M : Sheaf J₃ A) :
+    (sheafPushforwardContinuousComp' e₂ A J₃ J₂ J₃ ≪≫ sheafPushforwardContinuousIso c₂ A J₃ J₃ ≪≫
+      sheafPushforwardContinuousId' i₃ A J₃).inv.app M ≫
+      (F₂.sheafPushforwardContinuous A J₃ J₂).map
+        ((sheafPushforwardContinuousComp' e₁ A J₂ J₁ J₂ ≪≫
+          sheafPushforwardContinuousIso c₁ A J₂ J₂ ≪≫ sheafPushforwardContinuousId' i₂ A J₂).inv.app
+          ((G₂.sheafPushforwardContinuous A J₂ J₃).obj M)) ≫
+      (sheafPushforwardContinuousComp' e₁₂ A J₃ J₂ J₁).hom.app
+        ((G₁.sheafPushforwardContinuous A J₁ J₂).obj ((G₂.sheafPushforwardContinuous A J₂ J₃).obj M)) =
+    (sheafPushforwardContinuousComp' e A J₃ J₁ J₃ ≪≫ sheafPushforwardContinuousIso c A J₃ J₃ ≪≫
+      sheafPushforwardContinuousId' i₃ A J₃).inv.app M ≫
+      (F₁₂.sheafPushforwardContinuous A J₃ J₁).map
+        ((sheafPushforwardContinuousComp' e₂₁ A J₁ J₂ J₃).inv.app M) := by
+  ext U
+  simp [sheafPushforwardContinuousComp', sheafPushforwardContinuousId']
+  have h' := congrArg (fun φ => M.obj.map φ.op) (h U.unop)
+  simp only [op_comp, Functor.map_comp, Category.assoc] at h'
+  repeat erw [Category.id_comp]
+  erw [Category.comp_id]
+  exact h'
+
+end Unit
+
 end CategoryTheory.Functor
 
 namespace CategoryTheory.MorphismProperty
@@ -131,7 +178,146 @@ lemma Over.pullbackComp_symm_assoc {X Y Z W : T} (f : X ⟶ Y) (g : Y ⟶ Z) (h 
     Iso.refl_trans, Iso.self_symm_id_assoc, MorphismProperty.Over.pullbackCongr_trans_pullbackCongr,
     Iso.trans_refl]
 
+
+section Unit
+
+variable [∀ {A B : T} (f : A ⟶ B), P.IsStableUnderBaseChangeAlong f]
+  [∀ {A B : T} (f : A ⟶ B), P.HasPullbacksAlong f]
+
+/-- The associativity law for `MorphismProperty.Over.pullbackComp`, with all composites free. -/
+lemma Over.pullbackComp_assoc' {X Y Z W : T} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    (fg : X ⟶ Z) (hfg : fg = f ≫ g) (gh : Y ⟶ W) (hgh : gh = g ≫ h) (fgh : X ⟶ W)
+    (hfgh : fgh = f ≫ gh) :
+    Over.pullbackComp (P := P) (Q := Q) f gh fgh hfgh ≪≫
+        Functor.isoWhiskerRight (Over.pullbackComp g h gh hgh) (Over.pullback P Q f) ≪≫
+          Functor.associator _ _ _ =
+      Over.pullbackComp fg h fgh (by rw [hfgh, hgh, hfg, Category.assoc]) ≪≫
+        Functor.isoWhiskerLeft (Over.pullback P Q h) (Over.pullbackComp f g fg hfg) := by
+  subst hfg hgh hfgh
+  exact Over.pullbackComp_assoc f g h
+
+/-- The units `B(f) ⋙ B(g) ≅ 𝟭` of base change along a section `g` of `f` compose. -/
+lemma Over.pullback_unit_comp {X Y Z : T} (f₁ : X ⟶ Y) (g₁ : Y ⟶ X) (f₂ : Y ⟶ Z)
+    (g₂ : Z ⟶ Y) (h₁ : 𝟙 Y = g₁ ≫ f₁) (h₂ : 𝟙 Z = g₂ ≫ f₂)
+    (h₁₂ : 𝟙 Z = (g₂ ≫ g₁) ≫ f₁ ≫ f₂) :
+    Functor.isoWhiskerRight (Functor.isoWhiskerRight (Over.pullbackComp (P := P) (Q := Q) f₁ f₂)
+        (Over.pullback P Q g₁)) (Over.pullback P Q g₂) ≪≫
+      Functor.isoWhiskerRight (Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (Over.pullback P Q f₂)
+          ((Over.pullbackComp g₁ f₁ (𝟙 Y) h₁).symm ≪≫ Over.pullbackId P Q Y) ≪≫
+          Functor.rightUnitor _) (Over.pullback P Q g₂) ≪≫
+      (Over.pullbackComp g₂ f₂ (𝟙 Z) h₂).symm ≪≫ Over.pullbackId P Q Z =
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (Over.pullback P Q (f₁ ≫ f₂)) (Over.pullbackComp g₂ g₁).symm ≪≫
+      (Over.pullbackComp (g₂ ≫ g₁) (f₁ ≫ f₂) (𝟙 Z) h₁₂).symm ≪≫ Over.pullbackId P Q Z := by
+  have X1 := congr_app (congrArg Iso.hom (Over.pullbackComp_assoc' (P := P) (Q := Q) g₁ f₁ f₂
+    (𝟙 Y) h₁ (f₁ ≫ f₂) rfl f₂ (by rw [← Category.assoc, ← h₁, Category.id_comp])))
+  have X2 := congr_app (congrArg Iso.hom (Over.pullbackComp_assoc' (P := P) (Q := Q) g₂ g₁
+    (f₁ ≫ f₂) (g₂ ≫ g₁) rfl f₂ (by rw [← Category.assoc, ← h₁, Category.id_comp]) (𝟙 Z) h₂))
+  rw [Over.pullbackComp_id_left f₂ f₂ (Category.id_comp f₂).symm] at X1
+  apply Iso.ext
+  apply NatTrans.ext
+  funext U
+  have e1 := X1 U
+  have e2 := X2 U
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Category.comp_id, Category.id_comp,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom, Functor.comp_obj,
+    Over.pullbackCongr_refl, Iso.refl_hom, Functor.rightUnitor_inv_app,
+    Functor.rightUnitor_hom_app] at e1 e2 ⊢
+  have e1' : (Over.pullback P Q g₁).map ((Over.pullbackComp f₁ f₂).hom.app U) ≫
+      (Over.pullbackComp g₁ f₁ (𝟙 Y) h₁).inv.app ((Over.pullback P Q f₂).obj U) ≫
+      (Over.pullbackId P Q Y).hom.app ((Over.pullback P Q f₂).obj U) =
+      (Over.pullbackComp g₁ (f₁ ≫ f₂) f₂
+        (by rw [← Category.assoc, ← h₁, Category.id_comp])).inv.app U := by
+    rw [← cancel_epi ((Over.pullbackComp g₁ (f₁ ≫ f₂) f₂
+      (by rw [← Category.assoc, ← h₁, Category.id_comp])).hom.app U), reassoc_of% e1]
+    simp
+  have e2' : (Over.pullback P Q g₂).map ((Over.pullbackComp g₁ (f₁ ≫ f₂) f₂
+        (by rw [← Category.assoc, ← h₁, Category.id_comp])).inv.app U) ≫
+      (Over.pullbackComp g₂ f₂ (𝟙 Z) h₂).inv.app U =
+      (Over.pullbackComp g₂ g₁).inv.app ((Over.pullback P Q (f₁ ≫ f₂)).obj U) ≫
+        (Over.pullbackComp (g₂ ≫ g₁) (f₁ ≫ f₂) (𝟙 Z) h₁₂).inv.app U := by
+    have e2'' := e2 =≫ (Over.pullback P Q g₂).map ((Over.pullbackComp g₁ (f₁ ≫ f₂) f₂
+        (by rw [← Category.assoc, ← h₁, Category.id_comp])).inv.app U)
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id,
+      Category.comp_id] at e2''
+    rw [← cancel_mono ((Over.pullbackComp g₂ f₂ (𝟙 Z) h₂).hom.app U)]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [e2'']
+    simp
+  dsimp only [Functor.comp_obj] at *
+  erw [Category.comp_id]
+  rw [← Functor.map_comp_assoc, e1', reassoc_of% e2']
+
+lemma Over.pullbackComp_eq_pullbackCongr_trans' {X Y Z : T} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (fg : X ⟶ Z) (hfg : fg = f ≫ g) :
+    Over.pullbackComp (P := P) (Q := Q) f g fg hfg =
+      Over.pullbackCongr hfg ≪≫ Over.pullbackComp f g := by
+  subst hfg
+  rw [Over.pullbackCongr_refl, Iso.refl_trans]
+
+lemma Over.pullbackCongr_inv_eq {X Y : T} {f g : X ⟶ Y} (h : f = g) :
+    (Over.pullbackCongr (P := P) (Q := Q) h).inv = (Over.pullbackCongr h.symm).hom := by
+  subst h
+  simp
+
+/-- `Over.pullback_unit_comp` in components, with the default composites. -/
+lemma Over.pullback_unit_comp_app {X Y Z : T} (f₁ : X ⟶ Y) (g₁ : Y ⟶ X) (f₂ : Y ⟶ Z)
+    (g₂ : Z ⟶ Y) (h₁ : g₁ ≫ f₁ = 𝟙 Y) (h₂ : g₂ ≫ f₂ = 𝟙 Z)
+    (h₁₂ : (g₂ ≫ g₁) ≫ f₁ ≫ f₂ = 𝟙 Z) (U : P.Over Q Z) :
+    (Over.pullback P Q g₂).map ((Over.pullback P Q g₁).map
+        ((Over.pullbackComp f₁ f₂).hom.app U)) ≫
+      (Over.pullback P Q g₂).map ((Over.pullbackComp g₁ f₁).inv.app
+        ((Over.pullback P Q f₂).obj U)) ≫
+      (Over.pullback P Q g₂).map ((Over.pullbackCongr h₁).hom.app ((Over.pullback P Q f₂).obj U)) ≫
+      (Over.pullback P Q g₂).map ((Over.pullbackId P Q Y).hom.app ((Over.pullback P Q f₂).obj U)) ≫
+      (Over.pullbackComp g₂ f₂).inv.app U ≫ (Over.pullbackCongr h₂).hom.app U ≫
+      (Over.pullbackId P Q Z).hom.app U =
+    (Over.pullbackComp g₂ g₁).inv.app ((Over.pullback P Q (f₁ ≫ f₂)).obj U) ≫
+      (Over.pullbackComp (g₂ ≫ g₁) (f₁ ≫ f₂)).inv.app U ≫ (Over.pullbackCongr h₁₂).hom.app U ≫
+      (Over.pullbackId P Q Z).hom.app U := by
+  have := congr_app (congrArg Iso.hom (Over.pullback_unit_comp (P := P) (Q := Q) f₁ g₁ f₂ g₂
+    h₁.symm h₂.symm h₁₂.symm)) U
+  simp only [Over.pullbackComp_eq_pullbackCongr_trans' _ _ (𝟙 _), Iso.trans_hom, Iso.symm_hom,
+    Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, Functor.comp_obj, Category.id_comp, Category.comp_id,
+    Category.assoc, Functor.map_comp, Over.pullbackCongr_inv_eq] at this
+  erw [Functor.map_id, Category.id_comp] at this
+  exact this
+
+end Unit
+
 end CategoryTheory.MorphismProperty
+
+namespace CategoryTheory
+
+
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+  {E : Type u₃} [Category.{v₃} E]
+  {L₁ L₁' : C ⥤ D} {R₁ : D ⥤ C} (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁)
+  {L₂ L₂' : D ⥤ E} {R₂ : E ⥤ D} (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
+  {L₁₂ L₁₂' : C ⥤ E} {R₁₂ : E ⥤ C} (a₁₂ : L₁₂ ⊣ R₁₂) (b₁₂ : L₁₂' ⊣ R₁₂)
+
+/-- The uniqueness isomorphisms of left adjoints are compatible with composition, the
+composition isomorphisms of the left adjoints being conjugate to a common isomorphism
+`ρ : R₂ ⋙ R₁ ≅ R₁₂` of right adjoints. -/
+lemma Adjunction.leftAdjointUniq_trans_conjugateIsoEquiv_symm (ρ : R₂ ⋙ R₁ ≅ R₁₂) :
+    a₁₂.leftAdjointUniq b₁₂ ≪≫ (conjugateIsoEquiv (b₁.comp b₂) b₁₂).symm ρ =
+      (conjugateIsoEquiv (a₁.comp a₂) a₁₂).symm ρ ≪≫
+        Functor.isoWhiskerRight (a₁.leftAdjointUniq b₁) L₂ ≪≫
+        Functor.isoWhiskerLeft L₁' (a₂.leftAdjointUniq b₂) := by
+  apply (conjugateIsoEquiv (b₁.comp b₂) a₁₂).injective
+  rw [conjugateIsoEquiv_trans _ b₁₂ _, conjugateIsoEquiv_trans _ (a₁.comp a₂) _,
+    conjugateIsoEquiv_trans _ (b₁.comp a₂) _]
+  simp only [Equiv.apply_symm_apply]
+  rw [conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_isoWhiskerRight]
+  ext : 2
+  simp [conjugateEquiv_leftAdjointUniq_hom]
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -220,36 +406,9 @@ lemma upperStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h 
     Iso.trans_assoc]
   exact (lowerStarComp_assoc A f g h).symm
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-lemma lowerStarId_hom_app_hom_app (X : Scheme.{u}) (M : Sheaf (ProEt.topology X) A)
-    (V : X.ProEtᵒᵖ) :
-    ((lowerStarId A X).hom.app M).hom.app V =
-      M.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).op := by
-  simp [lowerStarId, Functor.sheafPushforwardContinuousId']
-  exact Category.comp_id _
-
 section
 
 variable {C D : Type*} [Category* C] [Category* D] {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-lemma lowerStarId_inv_app_hom_app (X : Scheme.{u}) (M : Sheaf (ProEt.topology X) A)
-    (V : X.ProEtᵒᵖ) :
-    ((lowerStarId A X).inv.app M).hom.app V =
-      M.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V.unop).op := by
-  simp [lowerStarId, Functor.sheafPushforwardContinuousId']
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-lemma lowerStarCongr_inv_app_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
-    (G : Sheaf (ProEt.topology Z) A) (V : Y.ProEtᵒᵖ) :
-    ((lowerStarCongr A h).inv.app G).hom.app V =
-      G.obj.map ((MorphismProperty.Over.pullbackCongr h).hom.app V.unop).op := by
-  subst h
-  simp only [lowerStarCongr_rfl, Iso.refl_inv, NatTrans.id_app]
-  rw [show (MorphismProperty.Over.pullbackCongr (rfl : g = g)).hom.app V.unop = 𝟙 _ from
-    MorphismProperty.Over.Hom.ext (by simp [MorphismProperty.Over.pullbackCongr]; rfl), op_id,
-    G.obj.map_id]
-  rfl
 
 /-- A natural transformation `β : R₁ ⟶ R₂` is the conjugate of `α : L₂ ⟶ L₁` as soon as it
 satisfies the unit identity of the conjugate, provided the unit and the counit of `adj₁` are
@@ -292,21 +451,27 @@ lemma lowerStarComp_unit_aux {X Y Z : Scheme.{u}} (f₁ : X ⟶ Y) (g₁ : Y ⟶
         (lowerStarComp A f₁ f₂).hom.app ((g₁)_*[A].obj ((g₂)_*[A].obj M)) =
       (lowerStarComp A (g₂ ≫ g₁) (f₁ ≫ f₂) ≪≫ lowerStarCongr A h₁₂ ≪≫ lowerStarId A Z).inv.app M ≫
         (f₁ ≫ f₂)_*[A].map ((lowerStarComp A g₂ g₁).inv.app M) := by
-  ext W
-  simp only [Iso.trans_inv, NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom]
-
-
-  simp only [lowerStar_map_hom_app', NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
-    lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app, lowerStarCongr_inv_app_hom_app,
-    lowerStarId_inv_app_hom_app]
-  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
-    ← Functor.map_comp, ← op_comp, Category.assoc]
-  congr 2
-  apply MorphismProperty.Over.Hom.ext
-  repeat' apply pullback.hom_ext
-  all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-    MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-    MorphismProperty.Over.pullbackId]
+  have key := @Functor.sheafPushforwardContinuous_unit_comp A _ _ _ _ _ _ _
+    (ProEt.topology X) (ProEt.topology Y) (ProEt.topology Z) _ _ _ _ _ _ _ _ _ _ _
+    (Scheme.ProEt.isContinuous_overPullback f₁) (Scheme.ProEt.isContinuous_overPullback g₁)
+    (Scheme.ProEt.isContinuous_overPullback f₂) (Scheme.ProEt.isContinuous_overPullback g₂)
+    (Scheme.ProEt.isContinuous_overPullback (g₂ ≫ f₂))
+    (Scheme.ProEt.isContinuous_overPullback (𝟙 Z))
+    (Scheme.ProEt.isContinuous_overPullback ((g₂ ≫ g₁) ≫ f₁ ≫ f₂))
+    (Scheme.ProEt.isContinuous_overPullback (g₁ ≫ f₁))
+    (Scheme.ProEt.isContinuous_overPullback (𝟙 Y))
+    (Scheme.ProEt.isContinuous_overPullback (f₁ ≫ f₂))
+    (Scheme.ProEt.isContinuous_overPullback (g₂ ≫ g₁))
+    (MorphismProperty.Over.pullbackComp g₂ f₂).symm (MorphismProperty.Over.pullbackCongr h₂)
+    (MorphismProperty.Over.pullbackId _ _ Z)
+    (MorphismProperty.Over.pullbackComp g₁ f₁).symm (MorphismProperty.Over.pullbackCongr h₁)
+    (MorphismProperty.Over.pullbackId _ _ Y)
+    (MorphismProperty.Over.pullbackComp f₁ f₂).symm (MorphismProperty.Over.pullbackComp g₂ g₁).symm
+    (MorphismProperty.Over.pullbackComp (g₂ ≫ g₁) (f₁ ≫ f₂)).symm
+    (MorphismProperty.Over.pullbackCongr h₁₂)
+    (fun U ↦ MorphismProperty.Over.pullback_unit_comp_app f₁ g₁ f₂ g₂ h₁ h₂ h₁₂ U) M
+  rw [lowerStarCongr_eq, lowerStarCongr_eq, lowerStarCongr_eq]
+  exact key
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 set_option maxHeartbeats 8000000 in
@@ -332,6 +497,7 @@ lemma conjugateIsoEquiv_upperStarIsoLowerStarInv {X Y : Scheme.{u}} (e : X ≅ Y
   ext : 1
   exact conjugateEquiv_leftAdjointUniq_hom _ _
 
+
 set_option maxHeartbeats 1000000 in
 /-- The identification `e^* ≅ (e⁻¹)_*` of the pullback along an isomorphism with the pushforward
 along its inverse is compatible with composition:
@@ -341,21 +507,24 @@ lemma upperStarIsoLowerStarInv_trans {X Y Z : Scheme.{u}} (e : X ≅ Y) (e' : Y 
       upperStarComp A e.hom e'.hom ≪≫
         Functor.isoWhiskerRight (upperStarIsoLowerStarInv A e') (e.hom)^*[A] ≪≫
         Functor.isoWhiskerLeft (e'.inv)_*[A] (upperStarIsoLowerStarInv A e) := by
-  refine (conjugateIsoEquiv ((lowerStarEquivalence A e').symm.toAdjunction.comp
-    (lowerStarEquivalence A e).symm.toAdjunction)
-    (upperStarLowerStarAdjunction A (e.hom ≫ e'.hom))).injective ?_
-  rw [conjugateIsoEquiv_trans _ (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction _,
-    conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A e'.hom).comp
-      (upperStarLowerStarAdjunction A e.hom)) _,
-    conjugateIsoEquiv_trans _ ((lowerStarEquivalence A e').symm.toAdjunction.comp
-      (upperStarLowerStarAdjunction A e.hom)) _,
-    conjugateIsoEquiv_lowerStarComp_symm]
-  erw [conjugateIsoEquiv_upperStarIsoLowerStarInv A (e ≪≫ e')]
-  erw [conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_isoWhiskerRight,
-    conjugateIsoEquiv_upperStarIsoLowerStarInv, conjugateIsoEquiv_upperStarIsoLowerStarInv,
-    conjugateIsoEquiv_upperStarComp]
-  ext : 2
-  simp
+  have key := Adjunction.leftAdjointUniq_trans_conjugateIsoEquiv_symm
+    (upperStarLowerStarAdjunction A e'.hom) (lowerStarEquivalence A e').symm.toAdjunction
+    (upperStarLowerStarAdjunction A e.hom) (lowerStarEquivalence A e).symm.toAdjunction
+    (upperStarLowerStarAdjunction A (e ≪≫ e').hom)
+    (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction (lowerStarComp A e.hom e'.hom)
+  have h2 : (conjugateIsoEquiv ((lowerStarEquivalence A e').symm.toAdjunction.comp
+      (lowerStarEquivalence A e).symm.toAdjunction)
+      (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction).symm (lowerStarComp A e.hom e'.hom) =
+      (lowerStarComp A e'.inv e.inv).symm :=
+    (Equiv.symm_apply_eq _).2 (conjugateIsoEquiv_lowerStarComp_symm A e e').symm
+  refine Eq.trans ?_ key
+  show _ = (upperStarLowerStarAdjunction A (e ≪≫ e').hom).leftAdjointUniq
+    (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction ≪≫
+    (conjugateIsoEquiv ((lowerStarEquivalence A e').symm.toAdjunction.comp
+      (lowerStarEquivalence A e).symm.toAdjunction)
+      (lowerStarEquivalence A (e ≪≫ e')).symm.toAdjunction).symm (lowerStarComp A e.hom e'.hom)
+  rw [h2]
+  rfl
 
 /-- Transport of the identification `e^* ≅ (e⁻¹)_*` along an equality of isomorphisms. -/
 lemma upperStarIsoLowerStarInv_congr {X Y : Scheme.{u}} {e₁ e₂ : X ≅ Y} (h : e₁ = e₂) :
@@ -364,28 +533,5 @@ lemma upperStarIsoLowerStarInv_congr {X Y : Scheme.{u}} {e₁ e₂ : X ≅ Y} (h
   subst h
   ext : 2
   simp [upperStarCongr]
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-set_option maxHeartbeats 2000000 in
-/-- The left unit law for the composition isomorphism of pushforwards, along a morphism `a`
-equal to the identity. -/
-lemma lowerStarComp_id_left_aux {X Y : Scheme.{u}} (a : X ⟶ X) (b c : X ⟶ Y) (ha : a = 𝟙 X)
-    (hc : c = a ≫ b) (hb : c = b) (M : Sheaf (Scheme.ProEt.topology X) A) :
-    (lowerStarCongr A hc).hom.app M ≫ (lowerStarComp A a b).inv.app M ≫
-        (b)_*[A].map ((lowerStarCongr A ha).hom.app M ≫ (lowerStarId A X).hom.app M) =
-      (lowerStarCongr A hb).hom.app M := by
-  ext W
-  simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom, Functor.map_comp,
-    lowerStarComp_inv_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStarId_hom_app_hom_app,
-    lowerStar_map_hom_app']
-  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
-    ← Functor.map_comp, ← op_comp]
-  congr 2
-  apply MorphismProperty.Over.Hom.ext
-  repeat' apply pullback.hom_ext
-  all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-    MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-    MorphismProperty.Over.pullbackId]
-  all_goals exact Category.id_comp _
 
 end AlgebraicGeometry.ProEtale
