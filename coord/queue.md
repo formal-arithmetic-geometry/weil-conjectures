@@ -1,8 +1,8 @@
 # Work queue
 
-876 items; claim with `tools/claim.py next <group> [--stage N]`.
+880 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,13 +20,14 @@
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
-| `lem-sc-component-intersections-finite` | 2011 | none |
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
-| `lem-sc-zero-dim-noetherian-affine` | 2011 | none |
 | `lem-sc-conductor-ideal-restriction` | 2012 | none |
 | `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
+| `lem-sc-finite-discrete-separated-affine` | 2012 | none |
 | `lem-sc-glue-component-reduced-cover-sections` | 2012 | none |
 | `lem-sc-glue-component-transition-cocycle` | 2012 | none |
+| `lem-sc-noetherian-closed-points-finite` | 2012 | none |
+| `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
@@ -35,15 +36,15 @@
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
-| `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
+| `lem-galois-fpqc-pullback-canonical-iso` | 3011 | none |
+| `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
-| `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
 | `lem-sc-geometrically-irreducible-product` | 3011 | none |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
@@ -51,7 +52,9 @@
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 3012 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
+| `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
+| `lem-pc-proper-descends-field` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-dvr-saturation-line` | 3012 | none |
@@ -65,9 +68,10 @@
 | `lem-sc-ext-evaluation` | 3013 | none |
 | `lem-sc-ext-tensor-exact` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
-| `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
+| `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
+| `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-normalization-properties` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
@@ -888,7 +892,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1050 nodes that wait for a statement dependency.
+Not open yet: 351 nodes that wait for stage 1, 1055 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
