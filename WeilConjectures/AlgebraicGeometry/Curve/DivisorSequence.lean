@@ -189,63 +189,6 @@ lemma exists_opens_isolate {V X : Scheme.{u}} (g : V ⟶ X) [LocallyQuasiFinite 
   refine ⟨hqZ'.1, ?_⟩
   rw [Scheme.basicOpen_res]
   exact ⟨⟨q, hq, rfl⟩, hqZ'.2⟩
-/-- A point with a discrete valuation ring as local ring has an irreducible open
-neighbourhood. -/
-lemma exists_opens_isPreirreducible {V : Scheme.{u}} [IsLocallyNoetherian V] (y : V)
-    [IsDomain (V.presheaf.stalk y)] [IsDiscreteValuationRing (V.presheaf.stalk y)] :
-    ∃ W : V.Opens, y ∈ W ∧ IsPreirreducible (W : Set V) := by
-  obtain ⟨_, ⟨U₀, hU₀, rfl⟩, hyU₀, -⟩ :=
-    V.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ y) isOpen_univ
-  have : NoetherianSpace U₀ := @noetherianSpace_of_isAffineOpen _ U₀ hU₀
-    (IsLocallyNoetherian.component_noetherian ⟨U₀, hU₀⟩)
-  have : QuasiSober U₀ := inferInstanceAs (QuasiSober (Scheme.Opens.toScheme (X := V) U₀))
-  -- any two generisations of `y` are comparable
-  have hcomp : ∀ a b : V, a ⤳ y → b ⤳ y → a ⤳ b ∨ b ⤳ a := by
-    intro a b ha hb
-    have ha' : a ∈ Set.range (V.fromSpecStalk y) := by rw [Scheme.range_fromSpecStalk]; exact ha
-    have hb' : b ∈ Set.range (V.fromSpecStalk y) := by rw [Scheme.range_fromSpecStalk]; exact hb
-    obtain ⟨p, rfl⟩ := ha'
-    obtain ⟨q, rfl⟩ := hb'
-    have key : ∀ r : PrimeSpectrum (V.presheaf.stalk y), r.asIdeal = ⊥ ∨
-        r = IsLocalRing.closedPoint _ := fun r ↦ by
-      by_cases hr : r.asIdeal = ⊥
-      · exact Or.inl hr
-      · exact Or.inr (PrimeSpectrum.ext (IsLocalRing.eq_maximalIdeal (r.isPrime.isMaximal hr)))
-    have hle : ∀ r s : PrimeSpectrum (V.presheaf.stalk y), r.asIdeal = ⊥ → r ⤳ s := fun r s hr ↦
-      (PrimeSpectrum.le_iff_specializes r s).1 (by
-        change r.asIdeal ≤ s.asIdeal
-        rw [hr]
-        exact bot_le)
-    rcases key p with hp | hp
-    · exact Or.inl ((hle p q hp).map (V.fromSpecStalk y).continuous)
-    rcases key q with hq | hq
-    · exact Or.inr ((hle q p hq).map (V.fromSpecStalk y).continuous)
-    · rw [hp, hq]
-      exact Or.inl le_rfl
-  -- hence `y` lies in a unique irreducible component of `U₀`
-  obtain ⟨W₀, hW₀, hyW₀, hirr⟩ := NoetherianSpace.exists_isOpen_isPreirreducible
-    (α := U₀) ⟨y, hyU₀⟩ fun Z₁ hZ₁ Z₂ hZ₂ h₁ h₂ ↦ by
-      obtain ⟨g₁, hg₁⟩ := QuasiSober.sober hZ₁.1 (isClosed_of_mem_irreducibleComponents _ hZ₁)
-      obtain ⟨g₂, hg₂⟩ := QuasiSober.sober hZ₂.1 (isClosed_of_mem_irreducibleComponents _ hZ₂)
-      have hsub (a b : U₀) (ha : IsGenericPoint a Z₁) (hb : IsGenericPoint b Z₂)
-          (h : a.1 ⤳ b.1) : Z₂ ⊆ Z₁ := by
-        rw [← ha.def, ← hb.def]
-        exact specializes_iff_closure_subset.1
-          ((Topology.IsInducing.subtypeVal.specializes_iff).1 h)
-      rcases hcomp g₁.1 g₂.1 ((hg₁.specializes h₁).map continuous_subtype_val)
-          ((hg₂.specializes h₂).map continuous_subtype_val) with h | h
-      · have := hsub g₁ g₂ hg₁ hg₂ h
-        exact (hZ₂.2 hZ₁.1 this).antisymm this
-      · have hsub' (a b : U₀) (ha : IsGenericPoint a Z₂) (hb : IsGenericPoint b Z₁)
-            (h : a.1 ⤳ b.1) : Z₁ ⊆ Z₂ := by
-          rw [← ha.def, ← hb.def]
-          exact specializes_iff_closure_subset.1
-            ((Topology.IsInducing.subtypeVal.specializes_iff).1 h)
-        have := hsub' g₂ g₁ hg₂ hg₁ h
-        exact this.antisymm (hZ₁.2 hZ₂.1 this)
-  refine ⟨⟨Subtype.val '' W₀, U₀.2.isOpenMap_subtype_val W₀ hW₀⟩, ⟨_, hyW₀, rfl⟩,
-    hirr.image _ continuous_subtype_val.continuousOn⟩
-
 end Scheme
 
 namespace IsCurve
@@ -313,7 +256,7 @@ lemma injective_toLocalGenericRing_appTop (W : C.Etale) [PreirreducibleSpace W.l
   have : IsDiscreteValuationRing (W.left.presheaf.stalk y) :=
     Scheme.Etale.isDiscreteValuationRing_stalk W hy
   let := (Scheme.Etale.stalkToLocalGenericRing W y).hom.toAlgebra
-  have := Scheme.Etale.isFractionRing_localGenericRing W hy
+  have := Scheme.Etale.isFractionRing_localGenericRing W y
   have hP : Nonempty P := by
     by_contra hP
     rw [not_nonempty_iff] at hP
@@ -418,7 +361,7 @@ lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS 
   have : IsDiscreteValuationRing (V.left.presheaf.stalk y) :=
     Scheme.Etale.isDiscreteValuationRing_stalk V hcoh
   let := (Scheme.Etale.stalkToLocalGenericRing V y).hom.toAlgebra
-  have := Scheme.Etale.isFractionRing_localGenericRing V hcoh
+  have := Scheme.Etale.isFractionRing_localGenericRing V y
   let genV : Γ(pullback V.hom j, ⊤) ⟶ Γ(pullback V.hom C.fromSpecFunctionField, ⊤) :=
     (pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
       (by simp [hiU])).appTop
@@ -617,7 +560,7 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
     · rw [Scheme.Etale.ord, if_pos hy'c, Scheme.Etale.toLocalGenericRing_fst_appTop]
       have := Scheme.Etale.isDiscreteValuationRing_stalk W' hy'c
       let := (Scheme.Etale.stalkToLocalGenericRing W' ⟨y', hy'W⟩).hom.toAlgebra
-      have := Scheme.Etale.isFractionRing_localGenericRing W' hy'c
+      have := Scheme.Etale.isFractionRing_localGenericRing W' ⟨y', hy'W⟩
       split_ifs with hy'
       · change y' = y at hy'
         subst hy'

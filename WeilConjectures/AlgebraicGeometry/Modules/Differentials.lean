@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -671,6 +672,44 @@ theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
     exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxV x⟩)
   exact SheafOfModules.isInvertible_of_forall_over_unit (M := f.relativeDifferentials) V hcov
     hV'
+
+/-- **Differentials of a smooth morphism.** If `f` is smooth of relative dimension `d`, then
+`Ω¹_{X/S}` is finite locally free of rank `d`: on an affine chart `Spec B ⟶ Spec A` where `f` is
+standard smooth, `Ω¹_{X/S}` is `Ω_{B/A}^~`, and `Ω_{B/A} ≅ Bᵈ`. -/
+theorem isFiniteLocallyFreeOfRank_relativeDifferentials (d : ℕ)
+    [SmoothOfRelativeDimension d f] : f.relativeDifferentials.IsFiniteLocallyFreeOfRank d := by
+  choose U hU V hV hx e hsm using fun x ↦
+    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := d) (f := f) x
+  refine Modules.isFiniteLocallyFreeOfRank_of_isOpenImmersion _ (fun x ↦ (hV x).fromSpec)
+    (eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2
+      ⟨x, by rw [IsAffineOpen.opensRange_fromSpec]; exact hx x⟩) fun x ↦ ?_
+  let φ := f.appLE (U x) (V x) (e x)
+  let := φ.hom.toAlgebra
+  have : Algebra.IsStandardSmoothOfRelativeDimension d Γ(S, U x) Γ(X, V x) := hsm x
+  obtain ⟨eΩ⟩ :=
+    Algebra.IsStandardSmoothOfRelativeDimension.nonempty_linearEquiv_kaehlerDifferential
+      (R := Γ(S, U x)) (S := Γ(X, V x)) d
+  let N := (Spec.map φ).relativeDifferentials
+  let T : (Modules.pullback (hV x).fromSpec).obj f.relativeDifferentials ≅ N :=
+    ((Modules.restrictFunctorIsoPullback _).app _).symm ≪≫
+      f.relativeDifferentialsRestrictIso (hV x).fromSpec ≪≫
+      relativeDifferentialsCongr _
+        (IsAffineOpen.SpecMap_appLE_fromSpec f (hU x) (hV x) (e x)).symm ≪≫
+      relativeDifferentialsCompIso _ _
+  have : N.IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent (Spec Γ(X, V x)).ringCatSheaf).prop_of_iso
+      (relativeDifferentialsSpecIso φ).symm
+      (inferInstanceAs (tilde (CommRingCat.KaehlerDifferential φ)).IsQuasicoherent)
+  let E : Γ(N, ⊤) ≃ₗ[Γ(X, V x)] (Fin d → Γ(X, V x)) :=
+    (relativeDifferentialsSpecΓIso φ).toLinearEquiv ≪≫ₗ eΩ
+  have : Module.FinitePresentation Γ(X, V x) Γ(N, ⊤) := .of_equiv E.symm
+  have : Module.Flat Γ(X, V x) Γ(N, ⊤) := .of_linearEquiv E
+  have : N.IsFiniteLocallyFreeOfRank d :=
+    Modules.isFiniteLocallyFreeOfRank_of_rankAtStalk_eq N fun p ↦ by
+      have := p.nontrivial
+      rw [congr_fun (Module.rankAtStalk_eq_of_equiv E) p, Module.rankAtStalk_eq_finrank_of_free]
+      simp
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso T.symm
 
 end Scheme.Hom
 

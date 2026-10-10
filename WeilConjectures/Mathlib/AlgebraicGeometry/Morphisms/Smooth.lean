@@ -9,13 +9,17 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
+public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
@@ -61,6 +65,12 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
   relative dimension `n` over a field has codimension at most `n`.
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_fiberToSpecResidueField`: a smooth morphism
   whose fibres are smooth of relative dimension `n` is smooth of relative dimension `n`.
+- `AlgebraicGeometry.Smooth.isRegularLocalRing_stalk`: the local rings of a scheme smooth over a
+  field are regular.
+- `AlgebraicGeometry.Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing`: over an algebraically
+  closed field, a scheme locally of finite type is smooth at its regular closed points.
+- `AlgebraicGeometry.Smooth.of_comp_of_flat_of_surjective_of_field`: smoothness over a field
+  descends along flat surjections (Stacks, Tag 05AX).
 - `AlgebraicGeometry.Smooth.of_comp_of_flat_of_surjective`: smoothness descends along flat
   surjections locally of finite presentation of the source.
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective`: smoothness of
@@ -69,6 +79,7 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
 ## References
 
 - Stacks Project, Tag `054L`, <https://stacks.math.columbia.edu/tag/054L>
+- Stacks Project, Tag `05AX`, <https://stacks.math.columbia.edu/tag/05AX>
 - Stacks Project, Tag `05B5`, <https://stacks.math.columbia.edu/tag/05B5>
 -/
 
@@ -544,15 +555,119 @@ theorem smoothOfRelativeDimension_of_comp_of_surjective_of_field {K : Type u} [F
   obtain rfl : n = d := by exact_mod_cast h
   exact ⟨V, hx, inferInstance⟩
 
-/-- **Smoothness over a field descends along flat surjections.** Let `u : X' ⟶ X` be flat and
-surjective, and let `f : X ⟶ Spec K` be locally of finite type. If `u ≫ f` is smooth, then so
-is `f`: `X'` is geometrically regular over `K`, regularity descends along flat local maps, and
-a geometrically regular scheme locally of finite type over a field is smooth. -/
+/-- Let `V` be an affine open of a scheme `X` and `R → Γ(X, V)` an étale ring map from a regular
+ring `R`. Then the local rings of `X` at the points of `V` are regular: they are localizations of
+`Γ(X, V)` at primes (`IsRegularLocalRing.localization_of_etale`). -/
+theorem IsAffineOpen.isRegularLocalRing_stalk_of_etale {X : Scheme.{u}} {R : Type u}
+    [CommRing R] [IsRegularRing R] {V : X.Opens} (hV : IsAffineOpen V) (φ : R →+* Γ(X, V))
+    (hφ : φ.Etale) (x : X) (hx : x ∈ V) : IsRegularLocalRing (X.presheaf.stalk x) := by
+  algebraize [φ]
+  let := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hx⟩
+  have := hV.isLocalization_stalk ⟨x, hx⟩
+  have := IsRegularLocalRing.localization_of_etale (R := R) (hV.primeIdealOf ⟨x, hx⟩).asIdeal
+  exact .of_ringEquiv (IsLocalization.algEquiv (hV.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
+    (Localization.AtPrime (hV.primeIdealOf ⟨x, hx⟩).asIdeal) (X.presheaf.stalk x)).toRingEquiv
+
+/-- The local rings of a scheme smooth over a field `k` are regular local rings: near any point
+the scheme is étale over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps
+preserve regularity. -/
+theorem Smooth.isRegularLocalRing_stalk {k : Type u} [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [Smooth f] (x : X) : IsRegularLocalRing (X.presheaf.stalk x) := by
+  obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
+  have : SmoothOfRelativeDimension d (V.ι ≫ f) := by
+    rw [← Scheme.Hom.resLE_comp_ι f e]
+    exact smoothOfRelativeDimension_comp (n := d) (m := 0) _ _
+  obtain ⟨W, hW, hxW, φ, hφ⟩ :=
+    SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field (V.ι ≫ f) d ⟨x, hx⟩
+  have := hW.isRegularLocalRing_stalk_of_etale φ hφ _ hxW
+  exact .of_ringEquiv (V.stalkIso ⟨x, hx⟩).commRingCatIsoToRingEquiv
+
+/-- Over an algebraically closed field `K`, a scheme locally of finite type over `K` is smooth at
+every closed point whose local ring is regular. -/
+theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing {K : Type u} [Field K] [IsAlgClosed K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] {x : X} (hx : IsClosed {x})
+    [IsRegularLocalRing (X.presheaf.stalk x)] : x ∈ f.smoothLocus := by
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have hU : IsAffineOpen (⊤ : (Spec (.of K)).Opens) := isAffineOpen_top _
+  have hVU : V ≤ f ⁻¹ᵁ ⊤ := le_top
+  have hft := f.finiteType_appLE hU hV hVU
+  algebraize [(f.appLE ⊤ V hVU).hom]
+  rw [Scheme.Hom.mem_smoothLocus, formallySmooth_stalkMap_iff ⊤ hU V hV hVU hxV]
+  set q := (hV.primeIdealOf ⟨x, hxV⟩).asIdeal
+  have : q.IsMaximal := hV.primeIdealOf_isMaximal_of_isClosed ⟨x, hxV⟩ hx
+  have : IsRegularLocalRing (Localization.AtPrime q) := by
+    let := TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hxV⟩
+    have := hV.isLocalization_stalk ⟨x, hxV⟩
+    exact .of_ringEquiv (IsLocalization.algEquiv q.primeCompl (X.presheaf.stalk x)
+      (Localization.AtPrime q)).toRingEquiv
+  let e : K ≃+* Γ(Spec (.of K), ⊤) := (Scheme.ΓSpecIso (.of K)).symm.commRingCatIsoToRingEquiv
+  let : Algebra K Γ(X, V) := ((f.appLE ⊤ V hVU).hom.comp e.toRingHom).toAlgebra
+  have : Algebra.FiniteType K Γ(X, V) :=
+    RingHom.FiniteType.comp hft (RingHom.FiniteType.of_surjective _ e.surjective)
+  have h : Algebra.FormallySmooth K (Localization.AtPrime q) :=
+    Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed (k := K) q
+  change Algebra.FormallySmooth Γ(Spec (.of K), ⊤) (Localization.AtPrime q)
+  rw [← RingHom.formallySmooth_algebraMap] at h ⊢
+  have heq : algebraMap K (Localization.AtPrime q) =
+      (algebraMap Γ(Spec (.of K), ⊤) (Localization.AtPrime q)).comp e.toRingHom := by
+    rw [IsScalarTower.algebraMap_eq K Γ(X, V), IsScalarTower.algebraMap_eq Γ(Spec (.of K), ⊤)
+      Γ(X, V)]
+    rfl
+  rw [heq] at h
+  have := RingHom.FormallySmooth.respectsIso.2 _ e.symm h
+  convert this using 1
+  refine RingHom.ext fun a ↦ ?_
+  simp only [RingHom.comp_apply, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom,
+    RingEquiv.apply_symm_apply]
+
+open Limits in
+/-- **Smoothness over a field descends along flat surjections** (Stacks, Tag 05AX). Let
+`u : X' ⟶ X` be flat and surjective, and let `f : X ⟶ Spec K` be locally of finite type. If
+`u ≫ f` is smooth, then so is `f`.
+
+After base change to an algebraic closure of `K` (smoothness descends along the fpqc covering
+`Spec K̄ ⟶ Spec K`), it suffices to show that `f` is smooth at the closed points, as the smooth
+locus is open and `X` is a Jacobson space. At a closed point `x = u x'`, the local ring `𝒪_{X,x}`
+is regular since `𝒪_{X,x} ⟶ 𝒪_{X',x'}` is a flat local homomorphism and `𝒪_{X',x'}` is regular
+(`IsRegularLocalRing.of_flat`), and a regular point with residue field `K` is smooth. -/
 @[stacks 05AX]
 theorem Smooth.of_comp_of_flat_of_surjective_of_field {K : Type u} [Field K] {X' X : Scheme.{u}}
     (u : X' ⟶ X) (f : X ⟶ Spec (.of K)) [Flat u] [Surjective u] [LocallyOfFiniteType f]
-    [Smooth (u ≫ f)] : Smooth f :=
-  sorry
+    [Smooth (u ≫ f)] : Smooth f := by
+  wlog hK : IsAlgClosed K generalizing K X X' with H
+  · let g : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of K) :=
+      Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
+    have h₁ : Smooth (pullback.snd (u ≫ f) g) := MorphismProperty.pullback_snd _ _ ‹_›
+    have : Smooth (pullback.snd u (pullback.fst f g) ≫ pullback.snd f g) := by
+      rw [← pullbackRightPullbackFstIso_hom_snd]
+      have h₂ : Smooth (pullbackRightPullbackFstIso f g u).hom := inferInstance
+      exact MorphismProperty.comp_mem _ _ _ h₂ h₁
+    have hsnd := H (pullback.snd u (pullback.fst f g)) (pullback.snd f g)
+      (AlgebraicClosure.isAlgClosed K)
+    have : Surjective g := ⟨fun _ ↦ ⟨⟨⊥, Ideal.isPrime_bot⟩, Subsingleton.elim _ _⟩⟩
+    have : Flat g := by
+      rw [HasRingHomProperty.Spec_iff (P := @Flat)]
+      exact RingHom.flat_algebraMap_iff.2 inferInstance
+    exact MorphismProperty.of_pullback_snd_of_descendsAlong
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) ⟨⟨‹_›, ‹_›⟩, inferInstance⟩ hsnd
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  rw [← f.smoothLocus_eq_top_iff]
+  by_contra hne
+  obtain ⟨x, hxZ, hx⟩ := nonempty_inter_closedPoints (Z := (f.smoothLocus : Set X)ᶜ)
+    (Set.nonempty_compl.2 fun h ↦ hne (TopologicalSpace.Opens.ext
+      (h.trans TopologicalSpace.Opens.coe_top.symm)))
+    f.smoothLocus.isOpen.isClosed_compl.isLocallyClosed
+  obtain ⟨x', rfl⟩ := u.surjective x
+  have : IsRegularLocalRing (X'.presheaf.stalk x') := Smooth.isRegularLocalRing_stalk (u ≫ f) x'
+  have : IsRegularLocalRing (X.presheaf.stalk (u x')) := by
+    let := (u.stalkMap x').hom.toAlgebra
+    have : IsLocalHom (algebraMap (X.presheaf.stalk (u x')) (X'.presheaf.stalk x')) :=
+      inferInstanceAs (IsLocalHom (u.stalkMap x').hom)
+    have : Module.Flat (X.presheaf.stalk (u x')) (X'.presheaf.stalk x') := Flat.stalkMap u x'
+    exact IsRegularLocalRing.of_flat (S := X'.presheaf.stalk x')
+  exact hxZ (f.mem_smoothLocus_of_isRegularLocalRing hx)
 
 open Limits in
 /-- **Smoothness descends along flat surjections** (Stacks, Tag 05B5). Let `u : X' ⟶ X` be

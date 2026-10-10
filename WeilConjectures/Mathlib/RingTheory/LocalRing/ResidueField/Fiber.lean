@@ -32,6 +32,9 @@ near any point of that fibre.
   `B_g ⧸ J B_g` for some `g ∉ q` and all ideals `J` of `A`.
 - `Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber` (Stacks, Tags 00MF, 046Z).
 - `Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber` (Stacks, Tag 062Y).
+- `PrimeSpectrum.exists_fg_forall_flat_localization_tensor_of_isCompact`: flatness along a
+  quasi-compact set descends to a finitely generated subring (Stacks, Tag 00R6).
+- `PrimeSpectrum.exists_comap_eq_of_isPushout`: points of a fibre lift along base change.
 -/
 
 @[expose] public section
@@ -1229,3 +1232,136 @@ theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Typ
   · rw [Ideal.span_le, Set.singleton_subset_iff]
     exact Ideal.mem_map_of_mem _ hfI
 
+section FlatLocus
+
+universe u
+
+namespace PrimeSpectrum
+
+/-- Flatness of `R ⊗[R₀] S₀` over `R` at the prime below a prime `q` of `A ⊗[R₀] S₀` is preserved
+by enlarging the subalgebra `R` of `A`. -/
+theorem flat_localization_tensorProduct_of_le {R₀ A S₀ : Type*} [CommRing R₀] [CommRing A]
+    [CommRing S₀] [Algebra R₀ A] [Algebra R₀ S₀] {R R' : Subalgebra R₀ A} (h : R ≤ R')
+    (q : PrimeSpectrum (A ⊗[R₀] S₀))
+    (hq : Module.Flat R (Localization.AtPrime (comap (Algebra.TensorProduct.map R.val
+        (AlgHom.id R₀ S₀) : R ⊗[R₀] S₀ →+* A ⊗[R₀] S₀) q).asIdeal)) :
+    Module.Flat R' (Localization.AtPrime (comap (Algebra.TensorProduct.map R'.val
+        (AlgHom.id R₀ S₀) : R' ⊗[R₀] S₀ →+* A ⊗[R₀] S₀) q).asIdeal) := by
+  refine Module.Flat.localization_tensorProduct_map (Subalgebra.inclusion h) _ _ ?_ hq
+  rw [comap_asIdeal, comap_asIdeal, Ideal.comap_comap]
+  congr 1
+  ext x
+  · rfl
+  · rfl
+
+/-- For a finitely generated subalgebra `R` of `A` over a noetherian ring `R₀` and a finite type
+`R₀`-algebra `S₀`, the primes `q` of `A ⊗[R₀] S₀` such that `R ⊗[R₀] S₀` is flat over `R` at the
+prime below `q` form an open set. -/
+theorem isOpen_setOf_flat_localization_tensorProduct {R₀ A S₀ : Type*} [CommRing R₀]
+    [CommRing A] [CommRing S₀] [Algebra R₀ A] [Algebra R₀ S₀] [IsNoetherianRing R₀]
+    [Algebra.FiniteType R₀ S₀] {R : Subalgebra R₀ A} (hR : R.FG) :
+    IsOpen {q : PrimeSpectrum (A ⊗[R₀] S₀) | Module.Flat R (Localization.AtPrime
+      (comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀) : R ⊗[R₀] S₀ →+* A ⊗[R₀] S₀)
+        q).asIdeal)} := by
+  have : Algebra.FiniteType R₀ R := (Subalgebra.fg_iff_finiteType _).mp hR
+  have : IsNoetherianRing R := Algebra.FiniteType.isNoetherianRing R₀ R
+  exact (isOpen_setOf_flat_localization (R := R) (S := R ⊗[R₀] S₀)).preimage
+    (continuous_comap _)
+
+/-- **Flatness along a quasi-compact set descends to a finitely generated subring** (Stacks
+`00R6`). Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra and `A` an `R₀`-algebra such that
+`A ⊗[R₀] S₀` is flat over `A`. For a quasi-compact set `K` of primes of `A ⊗[R₀] S₀` there is a
+finitely generated subalgebra `R₁` of `A` such that `R₁ ⊗[R₀] S₀` is flat over `R₁` at every prime
+lying under a prime of `K`.
+
+Each prime has a neighbourhood on which some `R ⊗[R₀] S₀` is flat
+(`Module.exists_fg_flat_localization_tensor` and openness of the flat locus), and flatness persists
+when `R` grows. -/
+theorem exists_fg_forall_flat_localization_tensor_of_isCompact {R₀ A S₀ : Type u} [CommRing R₀]
+    [CommRing A] [CommRing S₀] [Algebra R₀ A] [Algebra R₀ S₀] [IsNoetherianRing R₀]
+    [Algebra.FiniteType R₀ S₀] [Module.Flat A (A ⊗[R₀] S₀)]
+    {K : Set (PrimeSpectrum (A ⊗[R₀] S₀))} (hK : IsCompact K) :
+    ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧ ∀ q ∈ K,
+      Module.Flat R₁ (Localization.AtPrime (comap (Algebra.TensorProduct.map R₁.val
+        (AlgHom.id R₀ S₀) : R₁ ⊗[R₀] S₀ →+* A ⊗[R₀] S₀) q).asIdeal) := by
+  classical
+  let W (R : Subalgebra R₀ A) : Set (PrimeSpectrum (A ⊗[R₀] S₀)) :=
+    {q | Module.Flat R (Localization.AtPrime (comap (Algebra.TensorProduct.map R.val
+        (AlgHom.id R₀ S₀) : R ⊗[R₀] S₀ →+* A ⊗[R₀] S₀) q).asIdeal)}
+  have hWcov (q : PrimeSpectrum (A ⊗[R₀] S₀)) :
+      ∃ R : {R : Subalgebra R₀ A // R.FG}, q ∈ W R.1 := by
+    obtain ⟨R, hR, -, hflat⟩ := Module.exists_fg_flat_localization_tensor (S₀ := S₀) q.asIdeal
+    exact ⟨⟨R, hR⟩, hflat⟩
+  have : Nonempty {R : Subalgebra R₀ A // R.FG} := ⟨⟨⊥, Subalgebra.fg_bot⟩⟩
+  obtain ⟨⟨R₁, hR₁⟩, hK'⟩ := hK.elim_directed_cover (fun R ↦ W R.1)
+    (fun R ↦ isOpen_setOf_flat_localization_tensorProduct R.2)
+    (fun q _ ↦ Set.mem_iUnion.mpr (hWcov q))
+    fun (R R' : {R : Subalgebra R₀ A // R.FG}) ↦ ⟨⟨R.1 ⊔ R'.1, R.2.sup R'.2⟩,
+      flat_localization_tensorProduct_of_le le_sup_left,
+      flat_localization_tensorProduct_of_le le_sup_right⟩
+  exact ⟨R₁, hR₁, fun q hq ↦ hK' hq⟩
+
+/-- **Flatness along a fibre descends to a finitely generated subring** (Stacks `00R6`). Let `R₀`
+be noetherian, `S₀` a finite type `R₀`-algebra and `A` an `R₀`-algebra such that `A ⊗[R₀] S₀` is
+flat over `A`. For a prime `y` of `A` there is a finitely generated subalgebra `R₁` of `A` such that
+`R₁ ⊗[R₀] S₀` is flat over `R₁` at every prime lying under a prime of `A ⊗[R₀] S₀` over `y`.
+
+Each prime has a neighbourhood on which some `R ⊗[R₀] S₀` is flat
+(`Module.exists_fg_flat_localization_tensor` and openness of the flat locus), flatness persists
+when `R` grows, and the fibre over `y` is quasi-compact. -/
+theorem exists_fg_forall_flat_localization_tensor {R₀ A S₀ : Type u} [CommRing R₀] [CommRing A]
+    [CommRing S₀] [Algebra R₀ A] [Algebra R₀ S₀] [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀]
+    [Module.Flat A (A ⊗[R₀] S₀)] (y : PrimeSpectrum A) :
+    ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧ ∀ q : PrimeSpectrum (A ⊗[R₀] S₀),
+      comap (algebraMap A (A ⊗[R₀] S₀)) q = y →
+      Module.Flat R₁ (Localization.AtPrime (comap (Algebra.TensorProduct.map R₁.val
+        (AlgHom.id R₀ S₀) : R₁ ⊗[R₀] S₀ →+* A ⊗[R₀] S₀) q).asIdeal) := by
+  have hF : IsCompact (comap (algebraMap A (A ⊗[R₀] S₀)) ⁻¹' {y}) := by
+    rw [isCompact_iff_compactSpace]
+    exact (preimageHomeomorphFiber A (A ⊗[R₀] S₀) y).symm.compactSpace
+  obtain ⟨R₁, hR₁, hK⟩ := exists_fg_forall_flat_localization_tensor_of_isCompact hF
+  exact ⟨R₁, hR₁, fun q hq ↦ hK q hq⟩
+
+/-- **Points of a fibre lift along base change.** Let `B = A ⊗[A₁] B₁`, let `y` be a prime of `A`
+and `K` a field over `A` with kernel `y`. Every prime `q₁` of `B₁` lying over `y ∩ A₁` lies under a
+prime of `B` lying over `y`: take a prime of `B₁ ⊗[A₁] K` over `q₁` and pull it back along
+`B → B₁ ⊗[A₁] K`. -/
+theorem exists_comap_eq_of_isPushout {A₁ A B₁ B : Type*} [CommRing A₁] [CommRing A]
+    [CommRing B₁] [CommRing B] [Algebra A₁ A] [Algebra A₁ B₁] [Algebra A B] [Algebra B₁ B]
+    [Algebra A₁ B] [IsScalarTower A₁ A B] [IsScalarTower A₁ B₁ B] [Algebra.IsPushout A₁ A B₁ B]
+    {y : PrimeSpectrum A} (K : Type*) [Field K] [Algebra A K]
+    (hK : RingHom.ker (algebraMap A K) = y.asIdeal) (q₁ : PrimeSpectrum B₁)
+    (hq₁ : comap (algebraMap A₁ B₁) q₁ = comap (algebraMap A₁ A) y) :
+    ∃ q : PrimeSpectrum B, comap (algebraMap A B) q = y ∧ comap (algebraMap B₁ B) q = q₁ := by
+  let : Algebra A₁ K := ((algebraMap A K).comp (algebraMap A₁ A)).toAlgebra
+  have : IsScalarTower A₁ A K := .of_algebraMap_eq fun _ ↦ rfl
+  have hker : RingHom.ker (algebraMap A₁ K) = q₁.asIdeal.comap (algebraMap A₁ B₁) := by
+    rw [IsScalarTower.algebraMap_eq A₁ A K, ← RingHom.comap_ker, hK, ← comap_asIdeal,
+      ← comap_asIdeal, hq₁]
+  obtain ⟨P, hP, hPq⟩ :=
+    Algebra.exists_isPrime_comap_includeLeft_eq (Field.toIsField K) q₁.asIdeal hker
+  let f : A →ₐ[A₁] B₁ ⊗[A₁] K :=
+    (Algebra.TensorProduct.includeRight : K →ₐ[A₁] B₁ ⊗[A₁] K).comp
+      (IsScalarTower.toAlgHom A₁ A K)
+  let ψ : B →ₐ[A₁] B₁ ⊗[A₁] K := Algebra.pushoutDesc B f Algebra.TensorProduct.includeLeft
+    fun _ _ ↦ mul_comm _ _
+  have hbot : P.comap (Algebra.TensorProduct.includeRight : K →ₐ[A₁] B₁ ⊗[A₁] K).toRingHom = ⊥ :=
+    Ideal.eq_bot_of_prime _
+  have hψA (a : A) : ψ (algebraMap A B a) = f a := Algebra.pushoutDesc_left _ _ _ _ a
+  have hψB (b : B₁) : ψ (algebraMap B₁ B b) = Algebra.TensorProduct.includeLeft b :=
+    Algebra.pushoutDesc_right _ _ _ _ b
+  refine ⟨comap (ψ : B →+* B₁ ⊗[A₁] K) ⟨P, hP⟩, ?_, ?_⟩
+  · ext a
+    rw [comap_asIdeal, comap_asIdeal, Ideal.mem_comap, Ideal.mem_comap]
+    erw [hψA]
+    rw [← hK, RingHom.mem_ker, ← Ideal.mem_bot, ← hbot, Ideal.mem_comap]
+    rfl
+  · ext b
+    rw [comap_asIdeal, comap_asIdeal, Ideal.mem_comap, Ideal.mem_comap]
+    erw [hψB]
+    rw [← hPq, Ideal.mem_comap]
+    rfl
+
+end PrimeSpectrum
+
+end FlatLocus

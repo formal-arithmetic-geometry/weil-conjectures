@@ -26,17 +26,21 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
@@ -151,18 +155,6 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
     M.val.map_id] at h1
   exact h1
 
-/-- **A morphism `𝒪_X ⟶ N` is determined by the image of `1`.** If `σ : 𝒪_X ⟶ N` sends the
-global section `1` to `0`, then `σ = 0`: every section of `𝒪_X` is a multiple of a restriction
-of `1`. -/
-theorem Modules.eq_zero_of_app_top_one {X : Scheme.{u}} {N : X.Modules} (σ : 𝟙_ X.Modules ⟶ N)
-    (h : σ.app ⊤ (1 : Γ(X, ⊤)) = 0) : σ = 0 := by
-  refine hom_ext _ _ fun U ↦ ?_
-  ext r
-  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := X) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
-  rw [Hom.app_smul]
-  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(X, ⊤)), h]
-  simp
-
 /-- **A morphism `𝒪_X ⟶ N` which vanishes on `H⁰` is zero.** Under `H⁰(X, -) = Γ(X, -)` the
 map `H⁰(σ)` sends `1` to the image of `1` under `σ`. -/
 theorem Modules.eq_zero_of_forall_H_map_zero {X : Scheme.{u}} {N : X.Modules}
@@ -191,63 +183,6 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
 
 end Sections
 
-section DivisorRestriction
-
-variable {X : Scheme.{u}}
-
-/-- **`𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism**: on every affine open `V` it is the map
-`Γ(X, V) ⟶ Γ(V(J), ι⁻¹ V)`, which is surjective since `ι` is a closed immersion. Hence
-`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
-instance IdealSheafData.epi_toPushforwardSubscheme (J : X.IdealSheafData) :
-    Epi J.toPushforwardSubscheme := by
-  refine Modules.epi_of_forall_exists_app_eq _ fun W y x hx ↦ ?_
-  obtain ⟨V, hV, hxV, hVW⟩ := exists_isAffineOpen_mem_and_subset (U := W) hx
-  obtain ⟨z, hz⟩ := J.subschemeι.app_surjective V hV (J.subscheme.presheaf.map
-    ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
-  exact ⟨V, hVW, hxV, z, hz⟩
-
-/-- **The restriction of a module to a closed subscheme.** For a quasi-coherent ideal sheaf `J`
-with closed subscheme `ι : D ⟶ X` and an invertible `𝒪_X`-module `M`, the cokernel of
-`J ⊗ M ⟶ 𝒪_X ⊗ M` is `ι_* ι^* M`.
-
-Tensoring with the invertible `M` is an equivalence, so it preserves the cokernel
-`ι_* 𝒪_D` of `J ⟶ 𝒪_X`, and `ι_* 𝒪_D ⊗ M ≅ ι_* ι^* M` is the projection formula. -/
-theorem IdealSheafData.nonempty_cokernel_whiskerRight_iso (J : X.IdealSheafData) (M : X.Modules)
-    [M.IsInvertible] :
-    Nonempty (cokernel (J.toModulesι ▷ M) ≅
-      (Modules.pushforward J.subschemeι).obj ((Modules.pullback J.subschemeι).obj M)) := by
-  let F := (BraidedCategory.tensorRightEquivalence M Mᵛ
-    (Modules.nonempty_tensorObj_dual_iso_unit M).some).functor
-  let e₁ : cokernel J.toModulesι ≅
-      (Modules.pushforward J.subschemeι).obj (𝟙_ J.subscheme.Modules) :=
-    (colimit.isColimit _).coconePointUniqueUpToIso
-      (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel J.toPushforwardSubscheme))
-  let e₂ : cokernel (J.toModulesι ▷ M) ≅ F.obj (cokernel J.toModulesι) :=
-    (PreservesCokernel.iso F J.toModulesι).symm
-  obtain ⟨e₃⟩ := Modules.nonempty_pushforward_pullback_iso J.subschemeι M
-  exact ⟨e₂ ≪≫ whiskerRightIso e₁ M ≪≫ e₃.symm⟩
-
-variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
-
-/-- **The cohomology of the restriction of a module to a closed subscheme.** For a closed
-subscheme `ι : D ⟶ X` of a `k`-scheme with ideal sheaf `J` and an invertible `M`, the cohomology
-of the cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` is that of `ι^* M` on `D`: `M|_D ≅ ι_* ι^* M`
-(`AlgebraicGeometry.Scheme.IdealSheafData.nonempty_cokernel_whiskerRight_iso`), and pushforward
-along the affine morphism `ι` does not change the cohomology of quasi-coherent modules. -/
-theorem IdealSheafData.nonempty_H_cokernel_whiskerRight_linearEquiv (J : X.IdealSheafData)
-    (M : X.Modules) [M.IsInvertible] (q : ℕ) :
-    letI : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
-    Nonempty ((cokernel (J.toModulesι ▷ M)).H q ≃ₗ[k]
-      ((Modules.pullback J.subschemeι).obj M).H q) := by
-  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
-  have : J.subschemeι.IsOver (Spec (.of k)) := ⟨rfl⟩
-  obtain ⟨e⟩ := J.nonempty_cokernel_whiskerRight_iso M
-  obtain ⟨e'⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k
-    J.subschemeι q
-  exact ⟨((Modules.cohomologyFunctor k q).mapIso e).toLinearEquiv ≪≫ₗ
-    (e'.app ⟨(Modules.pullback J.subschemeι).obj M, inferInstance⟩).toLinearEquiv.symm⟩
-
-end DivisorRestriction
 
 section FiniteScheme
 
@@ -818,6 +753,85 @@ theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   · exact nonempty_dual_H_one_iso
   · exact nonempty_dual_H_zero_iso
 
+/-- **Trace duality on a finite étale scheme over `k`.** Let `X` be affine with `Γ(X, ⊤)` étale
+over `k`, and let `ℱ` be quasi-coherent. Then `x ↦ (m ↦ Tr(x(m)))`, pairing a global section `x`
+of `ℱᵛ` (a morphism `ℱ ⟶ 𝒪_X`) with a global section `m` of `ℱ` and taking the trace of
+`Γ(X, ⊤)` over `k`, is a `k`-linear isomorphism `H⁰(X, ℱᵛ) ≃ H⁰(X, ℱ)^∨`. -/
+theorem exists_linearEquiv_dual_H_zero_of_etale [IsAffine X]
+    (hX : (globalSectionsRingHom k (X := X)).Etale) (ℱ : X.Modules) [ℱ.IsQuasicoherent] :
+    letI := (globalSectionsRingHom k (X := X)).toAlgebra
+    ∃ e : (ℱᵛ).H 0 ≃ₗ[k] Module.Dual k (ℱ.H 0), ∀ x m, e x m =
+      Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit _) x).app ⊤
+        (Modules.H.zeroLinearEquiv ℱ m)) := by
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  have : Algebra.Etale k Γ(X, ⊤) := hX
+  set Φ := Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit X.ringCatSheaf)
+  set z := Modules.H.zeroLinearEquiv ℱ
+  -- `Γ(ℱ, ⊤)` as a `k`-module, by restricting scalars along `k → Γ(X, ⊤)`
+  let : Module k Γ(ℱ, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
+  have : IsScalarTower k Γ(X, ⊤) Γ(ℱ, ⊤) := ⟨fun c a m ↦ by
+    change (c • a) • m = algebraMap k Γ(X, ⊤) c • (a • m)
+    rw [Algebra.smul_def, mul_smul]⟩
+  let D := Algebra.Etale.linearMapEquivDual k Γ(X, ⊤) Γ(ℱ, ⊤)
+  -- the `Γ(X, ⊤)`-linear map on global sections of a morphism `ℱ ⟶ 𝒪_X`
+  let appₗ (φ : ℱ ⟶ SheafOfModules.unit X.ringCatSheaf) : Γ(ℱ, ⊤) →ₗ[Γ(X, ⊤)] Γ(X, ⊤) :=
+    { toFun := φ.app ⊤
+      map_add' := map_add _
+      map_smul' a m := Modules.Hom.app_smul φ a m }
+  have hz (c : k) (m : ℱ.H 0) : z (c • m) = c • z m := by
+    rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
+    rfl
+  let L : (ℱᵛ).H 0 →ₗ[k] Module.Dual k (ℱ.H 0) :=
+    { toFun x :=
+        { toFun m := Algebra.trace k Γ(X, ⊤) ((Φ x).app ⊤ (z m))
+          map_add' m m' := by simp only [map_add]
+          map_smul' c m := by
+            change Algebra.trace k Γ(X, ⊤) (appₗ (Φ x) (z (c • m))) = c * _
+            rw [hz, LinearMap.map_smul_of_tower, map_smul, smul_eq_mul]
+            rfl }
+      map_add' x y := by
+        ext m
+        simp only [map_add, LinearMap.coe_mk, AddHom.coe_mk, LinearMap.add_apply]
+        rw [show ((Φ x + Φ y).app ⊤) (z m) = (Φ x).app ⊤ (z m) + (Φ y).app ⊤ (z m) from rfl,
+          map_add]
+      map_smul' c x := by
+        ext m
+        simp only [LinearMap.coe_mk, AddHom.coe_mk, RingHom.id_apply, LinearMap.smul_apply,
+          smul_eq_mul]
+        rw [Modules.smul_H_eq_globalSectionsRingHom_smul, Modules.homObjHZeroAddEquiv_smul]
+        change Algebra.trace k Γ(X, ⊤) ((Modules.smulHom _ _).app ⊤ ((Φ x).app ⊤ (z m))) = _
+        rw [Modules.smulHom_app_top_apply, smul_eq_mul]
+        change Algebra.trace k Γ(X, ⊤) (algebraMap k Γ(X, ⊤) c * _) = _
+        rw [← Algebra.smul_def, map_smul, smul_eq_mul] }
+  refine ⟨LinearEquiv.ofBijective L ⟨fun x y h ↦ ?_, fun l ↦ ?_⟩, fun x m ↦ rfl⟩
+  · have h0 (m : ℱ.H 0) : Algebra.trace k Γ(X, ⊤) ((Φ (x - y)).app ⊤ (z m)) = 0 := by
+      have := congr($h m)
+      rw [← sub_eq_zero, ← LinearMap.sub_apply, ← map_sub] at this
+      exact this
+    have hD : D (appₗ (Φ (x - y))) = 0 := LinearMap.ext fun p ↦ by
+      obtain ⟨m, rfl⟩ := z.surjective p
+      exact h0 m
+    have happ : appₗ (Φ (x - y)) = 0 := D.injective (hD.trans D.map_zero.symm)
+    have hΦ : Φ (x - y) = 0 := Modules.hom_ext_of_isAffine fun m ↦ congr($happ m)
+    rw [← sub_eq_zero]
+    exact Φ.injective (hΦ.trans Φ.map_zero.symm)
+  · let l' : Module.Dual k Γ(ℱ, ⊤) :=
+      { toFun p := l (z.symm p)
+        map_add' p q := by rw [map_add, map_add]
+        map_smul' c p := by
+          have : z.symm (c • p) = c • z.symm p := by
+            apply z.injective
+            rw [hz, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+          rw [this, map_smul, RingHom.id_apply, smul_eq_mul] }
+    have : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
+      SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
+    obtain ⟨φ, hφ⟩ := Modules.exists_hom_app_top_eq_of_isAffine (M := ℱ)
+      (N := SheafOfModules.unit X.ringCatSheaf) (D.symm l')
+    refine ⟨Φ.symm φ, LinearMap.ext fun m ↦ ?_⟩
+    change Algebra.trace k Γ(X, ⊤) ((Φ (Φ.symm φ)).app ⊤ (z m)) = l m
+    rw [AddEquiv.apply_symm_apply, hφ]
+    exact congr($(D.apply_symm_apply l') (z m)).trans (congrArg l (z.symm_apply_apply m))
+
 /-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
 over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is
 `ω_X = 𝒪_X`. Then `ℱ ↦ H^0(X, ℱ)^∨` and `ℱ ↦ H^0(X, ℱᵛ)` are naturally isomorphic as
@@ -841,8 +855,33 @@ theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        Modules.cohomologyFunctor k 0) :=
-  sorry
+        Modules.cohomologyFunctor k 0) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have hX : (globalSectionsRingHom k (X := X)).Etale := by
+    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
+      (f := X ↘ Spec (.of k))).mp inferInstance
+    rw [globalSectionsRingHom, CommRingCat.hom_comp]
+    exact RingHom.Etale.stableUnderComposition _ _
+      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
+  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
+    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
+    have : ℱ.obj.IsQuasicoherent := inferInstance
+    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
+  choose e he using he
+  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm⟩
+  ext x
+  refine LinearMap.ext fun m ↦ ?_
+  change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
+    e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
+    (he ℱ.unop x _).symm)
+  have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
+    f.unop.hom x
+  rw [Modules.H.zeroLinearEquiv_map]
+  exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
 
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/
