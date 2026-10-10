@@ -23,9 +23,55 @@
   "lem-weil-pbc-strict-henselization-triples",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m$ be the maximal ideal of the local ring $R$. Applying [lem-weil-pbc-strict-henselization-triples] to the pair $(R,\\mathfrak m)$ identifies the filtered colimit in the statement with the ring $C=(R_{\\mathfrak m})^{\\mathrm{sh}}=R^{\\mathrm{sh}}$, and its canonical map from $R$ with the structural map of that strict henselization. The residue-field embedding into $K$ is exactly the chosen embedding in the triple construction.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1), using the strict henselization construction of Algebra Tag 04GP"
+   }
+  },
+  {
+   "text": "Every algebra in the filtered diagram is etale over $R$, hence flat over $R$ by [lem-weil-pbc-etale-algebra-flat]. The underlying $R$-module of the colimit $R^{\\mathrm{sh}}$ is the filtered colimit of these flat modules, so [lem-weil-pbc-filtered-colimit-flat-modules] shows that $R^{\\mathrm{sh}}$ is flat over $R$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), proof of (1): the maps R -> R^h -> R^sh are flat"
+   }
+  },
+  {
+   "text": "The triple construction makes $R^{\\mathrm{sh}}$ local and the structural map $R\\to R^{\\mathrm{sh}}$ local, since the preimage of its maximal ideal is the maximal ideal of $R$ [lem-weil-pbc-strict-henselization-triples]. A flat local homomorphism of local rings is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. Therefore the canonical map $R\\to R^{\\mathrm{sh}}$ is faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1): R -> R^h -> R^sh are faithfully flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +103,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Split the faithful-flatness assertion into identification of the strict-henselization colimit, flatness from the filtered colimit of etale flat algebras, and faithful flatness from the resulting local map. Reused existing DAG statements and created no new nodes.",
+  "blueprint": "Realizes the boundary stalk proof's strict-henselization flatness clause in the proof of lem-sc-brauer-zero, through the faithful-flatness assertion used by the strict-henselization Noetherianity and DVR nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "It supplies the strict-henselization colimit, filteredness, locality, and maximal-ideal contraction; the curve unit has no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "It supplies the generic theorem that a filtered colimit of flat modules is flat; the curve unit uses this as a black-box algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-filtered-colimit-flat-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shf2213",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shf2213 (reviewer sub-agent of L); spot-checked: Statement vs 07QM(1) and 04GP: agrees; source stays 07QM(1). Step 1 triples node with p=m; Step 2 etale->flat leaf (Algebra.Etale instSmooth + Smooth.flat, Smooth/Flat.lean:58 read) and filtered-colimit-flat node; Step 3 locality/contraction + Module.FaithfullyFlat.of_flat_of_isLocalHom (FaithfullyFlat/Algebra.lean:60 read). FIX more, RETURN less: B3 proof_origin label 'lemma-henselization-properties' (introduced by the second reading, no such label exists) corrected to the real label 'lemma-dumb-properties-henselization' (more-algebra.tex:10913).; 1 file(s) fixed by the reviewer"
+ }
 }

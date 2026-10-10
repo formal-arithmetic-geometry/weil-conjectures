@@ -2473,3 +2473,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:05 L: merged deliver/E1/lem-pc-ringed-spaces-derived-direct-image-composition (reviewer FIX; first push; new nodes: 0)
 - 20:06 L: merged deliver/C1/lem-sc-strict-henselization-cotangent-dimension (reviewer PASS; first push; new nodes: 0)
 - 20:06 L: merged deliver/E1/lem-pc-projective-space-cohomology-bound (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 20:06 L: merged deliver/K1/lem-sc-strict-henselization-faithfully-flat (reviewer FIX; first push; new nodes: 0)
