@@ -2,7 +2,7 @@
 
 915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (332)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-sc-proj-standard-open-basis` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
-| `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
 | `lem-sc-global-generation-nonvanishing-cover` | 2014 | none |
 | `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
 | `lem-sc-invert-s-cohomology-gluing` | 2014 | none |
@@ -40,10 +39,10 @@
 | `lem-weil-pbc-etale-site-localization-open` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-etale-fibre-product-base-change-coproduct` | 3010 | none |
-| `lem-sc-finite-type-nonclosed-closure-closed-points` | 3011 | none |
 | `lem-sc-point-tangent-cotangent-surjective` | 3011 | none |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
+| `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 3012 | none |
 | `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
@@ -339,7 +338,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (583)
+## Stage 2: nodes to state (584)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -433,6 +432,7 @@
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
+| `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
@@ -927,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1169 nodes that wait for a statement dependency.
+Not open yet: 349 nodes that wait for stage 1, 1170 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
