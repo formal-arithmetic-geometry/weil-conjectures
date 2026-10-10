@@ -1,12 +1,11 @@
 # Work queue
 
-923 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (606)
+## Stage 1: nodes to split (613)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-pbc-integral-closure-zariski-main-away` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1012 | none |
@@ -20,11 +19,15 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
+| `lem-weil-pbc-quasi-finite-at-prime-permanence` | 1012 | none |
+| `lem-weil-pbc-quasi-finite-at-prime-principal-localization` | 1012 | none |
+| `lem-weil-pbc-quasi-finite-four-rings` | 1012 | none |
+| `lem-weil-pbc-quasi-finite-monogenic-integral-closure` | 1012 | none |
+| `lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-regular-local-separable-residue-smooth` | 1013 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
@@ -62,7 +65,9 @@
 | `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1014 | none |
 | `lem-weil-pbc-depth-in-ses` | 1014 | none |
 | `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
+| `lem-weil-pbc-differentials-dimension-bound-smooth-at-prime` | 1014 | none |
 | `lem-weil-pbc-dimension-at-point-field-extension` | 1014 | none |
+| `lem-weil-pbc-dimension-at-point-local-ring-trdeg` | 1014 | none |
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
@@ -95,6 +100,8 @@
 | `lem-weil-pbc-polynomial-ring-n2` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-schanuel` | 1014 | none |
+| `lem-weil-pbc-separable-residue-cotangent-injective` | 1014 | none |
+| `lem-weil-pbc-separably-generated-differentials-dimension` | 1014 | none |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
@@ -935,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 618 nodes that wait for stage 1, 596 nodes that wait for a statement dependency.
+Not open yet: 625 nodes that wait for stage 1, 598 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
