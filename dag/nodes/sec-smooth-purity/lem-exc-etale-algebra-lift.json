@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-etale-algebra-lift",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale algebras lift across an arbitrary quotient",
@@ -24,12 +24,39 @@
  ],
  "proof": [
   {
-   "text": "For the algebra of [def-exc-etale-algebra-lift], the Jacobian determinant of\nthe $m+1$ relations in $m+1$ variables is $\\Delta^2$: the last column has\nonly its last entry $\\Delta$ nonzero. This determinant is a unit, since\n$t\\Delta=1$. Thus [lem-exc-etale-jacobian-presentation] proves etaleness.\nModulo $I$, the last variable is uniquely $\\overline\\Delta^{-1}$, giving the\nasserted reduction isomorphism. Every etale $\\overline B$ admits the\nrequired presentation by the same lemma. This proves the lifting calculation\nof [Stacks Project, Tag 04D1](https://stacks.math.columbia.edu/tag/04D1)\nexplicitly.",
+   "text": "For the lifted algebra, regard the $m+1$ relations as equations in the $m+1$ variables $(x_1,\\ldots,x_m,t)$. The last column of their Jacobian has zero entries in the first $m$ rows and last entry $\\Delta$, while the upper-left block is the Jacobian of the $f_i$. Thus the determinant is $\\Delta^2$. Since $t\\Delta=1$ in the quotient, this determinant is a unit, so the displayed presentation is a square Jacobian presentation and [lem-exc-etale-jacobian-presentation] gives that the lift is etale of finite presentation.",
    "uses": [
     "def-exc-etale-algebra-lift",
     "lem-exc-etale-jacobian-presentation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
+    "place": "## Proof, first paragraph"
+   }
+  },
+  {
+   "text": "After quotienting by $I$, the relations become $\\overline f_i=0$ and $t\\overline\\Delta=1$. In the quotient algebra the element $\\overline\\Delta$ is already invertible, so adjoining $t$ with this relation identifies $t$ uniquely with $\\overline\\Delta^{-1}$. The resulting map $B^{\\mathrm{lift}}/IB^{\\mathrm{lift}}\\to\\overline B$ is therefore an isomorphism by the universal property of the presented quotient.",
+   "uses": [
+    "def-exc-etale-algebra-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
+    "place": "## Proof, reduction modulo I"
+   }
+  },
+  {
+   "text": "Conversely, let an etale finite-presentation algebra over $A/I$ be given. By [lem-exc-etale-jacobian-presentation] it admits a square Jacobian presentation, which can be used in [def-exc-etale-algebra-lift] by choosing coefficientwise lifts of its finitely many relations. Steps 1 and 2 then construct an etale finite-presentation $A$-algebra whose reduction is the given algebra. No nilpotence condition on $I$ was used.",
+   "uses": [
+    "def-exc-etale-algebra-lift",
+    "lem-exc-etale-jacobian-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
+    "place": "## Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
@@ -41,9 +68,59 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "étale algebra lift across arbitrary quotient, Jacobian presentation and reduction isomorphism",
+   "results": "StandardEtalePair.lift; StandardEtalePair.instFormallyEtaleRing; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; RingHom.IsStandardSmooth.exists_etale_mvPolynomial (Mathlib/RingTheory/Etale/StandardEtale and Mathlib/RingTheory/RingHom/StandardSmooth)",
+   "date": "2026-10-11",
+   "verdict": "no match: only standard etale lifting/formal-etale results, no arbitrary-quotient algebra lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale algebra over a quotient ring admits an etale lift",
+   "results": "Algebra.Etale.finitePresentation; StandardEtalePair.instEtaleRing; Algebra.Etale.exists_subalgebra_fg; StandardEtalePair.lift",
+   "date": "2026-10-11",
+   "verdict": "no match: no theorem constructing a lift across an arbitrary ideal quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Algebra.FinitePresentation, SquareJacobianPresentation",
+   "results": "0 hits; loogle reported unknown identifier SquareJacobianPresentation",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.etale_algebraMap, SquareJacobianPresentation.etale",
+   "results": "0 hits; loogle reported unknown identifier SquareJacobianPresentation.etale",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*lift|lift.*etale|SquareJacobianPresentation in Mathlib/RingTheory Mathlib/AlgebraicGeometry",
+   "results": "no hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SquareJacobianPresentation|etale.*RelativeDimension in Mathlib",
+   "results": "no hits from msearch grep; direct source read found SquareJacobianPresentation.etale and Algebra.Etale.iff_exists_squareJacobianPresentation in WeilConjectures/Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean:45-60",
+   "date": "2026-10-11",
+   "verdict": "generalization exists for Jacobian presentations, but no quotient-lifting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale finite presentation algebra over A/I lifts to an etale finite presentation algebra over A by lifting a Jacobian presentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -72,5 +149,30 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-etale-algebra-lift",
+  "worker": "stage1",
+  "summary": "Checked the imported lifting statement against Stacks Tag 04D1 and the blueprint proof. No project declaration states it. Kept the existing Jacobian-presentation lemma as the sole non-elementary dependency, expanded the proof into determinant, reduction, and converse steps, and recorded Mathlib searches; no new node was needed.",
+  "blueprint": "Realizes the blueprint proof at ## Proof, first paragraph (Jacobian determinant), ## Proof, reduction modulo I (the reduction isomorphism), and ## Proof, final sentence (the converse lift).",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-jacobian-presentation",
+    "why": "The open-closed-triangle unit has no node supplying the characterization of etale finite-presentation algebras by square Jacobian presentations; this existing node supplies both etaleness of the constructed presentation and the converse presentation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-jacobian-presentation",
+  "lem-exc-etale-jacobian-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eal3020",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eal3020 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 04D1 (arbitrary ideal, no nilpotence: honest, 04D1 needs none for existence); Step 1 Jacobian of (f, t*Delta-1) in (x,t) is block lower triangular with zero last column above Delta, det = Delta^2, unit by t*Delta=1, so a square Jacobian presentation per def-exc-jacobian-presentation (Algebra.SquareJacobianPresentation) and lem-exc-etale-jacobian-presentation (Algebra.Etale.iff_exists_squareJacobianPresentation, both directions, read at StandardSmoothOfFree.lean:59) gives etale fp (C1/C4 ok); construction is exactly def-exc-etale-algebra-lift (= 04D1 proof); Step 2 B[t]/(t*Deltabar-1)=B as Deltabar is a unit, elementary; Step 3 converse via the same lemma; citers lem-weil-pbc-gabber-finite-etale-section (needs etale R->C, C/IC = Cbar as R/I-algebras) and lem-exc-closed-lift-reduction (every etale fp term lifts) use exactly this statement; tool_use of the Jacobian node accepted (generic tool); no Mathlib/slopmaster2 quotient-lift declaration (grep Mathlib/RingTheory/Etale for lift: only StandardEtalePair.lift), so not B10. No fault found; Second reading by H1 missed nothing."
+ }
 }
