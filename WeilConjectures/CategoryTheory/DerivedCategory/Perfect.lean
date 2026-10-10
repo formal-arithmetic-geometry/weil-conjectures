@@ -229,8 +229,7 @@ lemma isPerfect_obj₂_of_distTriang
     (mappingCone_triangle_distinguished ψ)
     (Pretriangulated.rot_of_distTriang _ (Pretriangulated.rot_of_distTriang _ hT))
     (Arrow.isoMk e₃.symm (((Q.commShiftIso (1 : ℤ)).app P₁) ≪≫ (shiftFunctor _ 1).mapIso e₁.symm)
-      (by
-        exact hcomm.symm.trans rfl))
+      hcomm.symm)
   have hcone := isPerfect_Q_obj_mappingCone ψ a₃ b₃ (a₁ - 1) (b₁ - 1) hP₃ fun i ↦ hP₁ (i + 1)
   exact ((hcone.of_iso (Pretriangulated.Triangle.π₃.mapIso f)).shift (-1)).of_iso
     ((shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app _)

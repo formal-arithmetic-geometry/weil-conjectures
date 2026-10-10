@@ -266,7 +266,10 @@ lemma mono_subcomplexι_whiskerRight_f (hF : ∀ q, ObjectProperty.flat (F.X q))
     (Discrete.natTrans fun i ↦ (subcomplexι N).f i.as.1.1 ▷ F.X i.as.1.2)
     (fun i ↦ this i.as.1) _ (fun ⟨⟨⟨p, q⟩, h⟩⟩ ↦ by
       refine (HomologicalComplex.ι_mapBifunctorMap (subcomplexι N) (𝟙 F) _ _ p q j h).trans ?_
-      simp
+      simp only [curriedTensor_obj_obj, curriedTensor_map_app, HomologicalComplex.id_f,
+        curriedTensor_obj_map, whiskerLeft_id, Category.id_comp,
+        Functor.mapBifunctorHomologicalComplex_obj_obj_toGradedObject,
+        Discrete.functor_obj_eq_as, Functor.const_obj_obj]
       rfl)
 
 lemma injective_subcomplexι_whiskerRight_f (hF : ∀ q, ObjectProperty.flat (F.X q)) (j : ℤ) :
