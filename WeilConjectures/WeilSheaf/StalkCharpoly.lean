@@ -63,7 +63,8 @@ lemma globalSectionsTransport_eq_of_iso (e : P' ≅ P) {t : P ⟶ Y} {t' : P' �
     globalSectionsTransport A h ψ =
       (globalSectionsUpperStarIso A e).inv.app ((upperStar A t).obj F) ≫
         (Sheaf.Γ _ A).map ((upperStarCompIso A h).hom.app F ≫ (upperStar A t').map ψ) := by
-  have h' := globalSectionsToUpperStar_app_comp_globalSectionsUpperStarIso A e ((upperStar A t).obj F)
+  have h' :=
+    globalSectionsToUpperStar_app_comp_globalSectionsUpperStarIso A e ((upperStar A t).obj F)
   replace h' : (globalSectionsToUpperStar A e.hom).app ((upperStar A t).obj F) =
       (globalSectionsUpperStarIso A e).inv.app ((upperStar A t).obj F) :=
     (Iso.comp_hom_eq_id ((globalSectionsUpperStarIso A e).app _)).1 h'
@@ -119,7 +120,10 @@ lemma lowerStarComp_id_right (t : X ⟶ Y) :
     lowerStarComp A t (𝟙 Y) = Functor.isoWhiskerLeft (t)_*[A] (lowerStarId A Y) ≪≫
       (t)_*[A].rightUnitor ≪≫ (lowerStarCongr A (Category.comp_id t)).symm := by
   refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
-  simp [lowerStarComp_id_right_hom_app, lowerStarCongr]
+  simp only [lowerStarComp_id_right_hom_app, Functor.comp_obj, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom, NatTrans.comp_app, Functor.id_obj,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, NatTrans.id_app, Category.id_comp]
+  rfl
 
 /-- The right unit law for the composition isomorphisms of the pullbacks, obtained from
 `AlgebraicGeometry.ProEtale.lowerStarComp_id_right` by conjugation. -/
@@ -158,9 +162,10 @@ lemma lowerStarComp_id_left (t : X ⟶ Y) :
     lowerStarComp A (𝟙 X) t = Functor.isoWhiskerRight (lowerStarId A X) (t)_*[A] ≪≫
       (t)_*[A].leftUnitor ≪≫ (lowerStarCongr A (Category.id_comp t)).symm := by
   refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
-  simp [lowerStarComp_id_left_hom_app, lowerStarCongr]
-  exact eqToHom_naturality (fun b : X ⟶ Y ↦ (b)_*[A].map ((lowerStarId A X).hom.app M))
-    (Category.id_comp t).symm
+  simp only [lowerStarComp_id_left_hom_app, Functor.comp_obj, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_hom, Functor.isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, Functor.id_obj,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, NatTrans.id_app, Category.id_comp]
+  rfl
 
 /-- The left unit law for the composition isomorphisms of the pullbacks, obtained from
 `AlgebraicGeometry.ProEtale.lowerStarComp_id_left` by conjugation. -/
@@ -191,7 +196,7 @@ lemma upperStarLowerStarAdjunction_unit_app_comp_lowerStarId_hom_app
   simp only [conjugateIsoEquiv_apply_hom] at h₂
   simp only [Functor.id_obj] at h₁
   rw [h₂] at h₁
-  simp only [Adjunction.id_unit, NatTrans.id_app, Iso.symm_hom, Category.id_comp] at h₁
+  simp only [Adjunction.id_unit, NatTrans.id_app, Iso.symm_hom] at h₁
   have n := (lowerStarId A X).hom.naturality ((upperStarId A X).inv.app G)
   simp only [Functor.id_map] at n
   calc (upperStarLowerStarAdjunction A (𝟙 X)).unit.app G ≫
@@ -228,8 +233,9 @@ lemma globalSectionsTransport_id {P Y : Scheme.{u}} {t : P ⟶ Y} (h : 𝟙 P �
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
     Category.id_comp, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc,
-    Iso.hom_inv_id_app, Functor.comp_obj, Functor.id_obj]
-  simp [upperStarCongr]
+    Functor.comp_obj, Functor.id_obj]
+  simp only [Iso.inv_hom_id_app, Functor.id_obj, CategoryTheory.Functor.map_id, Category.comp_id]
+  exact CategoryTheory.Functor.map_id _ _
 
 
 /-- For the identity isomorphism, `e^* ≅ (e⁻¹)_*` is the composite of `(𝟙)^* ≅ 𝟭` and
@@ -252,7 +258,11 @@ lemma upperStarIsoLowerStarInv_refl_hom_app (M : Sheaf (Scheme.ProEt.topology X)
   erw [reassoc_of% h₁, h₂]
   rw [lowerStarUnit, ← lowerStarComp_trans_lowerStarCongr]
   erw [lowerStarComp_id_left]
-  simp [lowerStarCongr]
+  simp only [Functor.id_obj, Iso.refl_hom, Iso.refl_inv, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_refl, Iso.trans_assoc, Iso.trans_inv, Category.assoc, Functor.isoWhiskerRight_inv,
+    NatTrans.comp_app, Functor.comp_obj, NatTrans.id_app, Functor.leftUnitor_inv_app,
+    Functor.whiskerRight_app, Category.id_comp, cancelIso, Category.comp_id]
+  exact Category.comp_id _
 
 
 /-- For an isomorphism `e` equal to the identity, `e^* ≅ (e⁻¹)_*` is the composite of the
@@ -339,13 +349,15 @@ lemma globalSectionsTransport_frobeniusPowStr_zero {t : Spec (.of (AlgebraicClos
 
 /-- The transports along the iterated Weil structures compose: for `b ≥ 1`, transporting along
 `φ_a` and then along `φ_b` is transporting along `φ_{a+b}`. -/
-lemma globalSectionsTransport_frobeniusPowStr_comp {t t' t'' : Spec (.of (AlgebraicClosure k₀)) ⟶
+lemma globalSectionsTransport_frobeniusPowStr_comp
+    {t t' t'' : Spec (.of (AlgebraicClosure k₀)) ⟶
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ τ' τ'' : Spec (.of (AlgebraicClosure k₀)) ⟶
       Spec (.of (AlgebraicClosure k₀))} (a b : ℕ) (hb : 1 ≤ b)
     (ha : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
     (hb' : τ' ≫ t' = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ b).hom)
     (hτ : τ' ≫ τ = τ'')
-    (hab : τ'' ≫ t = t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + b)).hom) :
+    (hab : τ'' ≫ t =
+      t'' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a + b)).hom) :
     ProEtale.globalSectionsTransport _ ha (F.frobeniusPowStr a) ≫
         ProEtale.globalSectionsTransport _ hb' (F.frobeniusPowStr b) =
       ProEtale.globalSectionsTransport _ hab (F.frobeniusPowStr (a + b)) := by
@@ -434,7 +446,6 @@ lemma frobeniusEnd_stalkAt (m : ℕ)
         F.stalkObjFrobeniusPowIso m s) := rfl
   rw [FrobeniusModule.frobeniusEnd, e₁, linearEquivOfIso_toLinearMap,
     stalkAt_frobenius_hom_eq_globalSectionsTransport F s m hs]
-  rfl
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 private lemma toModuleCat_map_comp_hom {M N P : WeilCoefficients.{u} l} (f : M ⟶ N)

@@ -278,7 +278,7 @@ lemma forget_map_frobeniusPowIso_succ_hom (m : ℕ)
           ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom) ≫
         (ProEtale.AdicSheaf.forget _).map F.obj.str.hom := by
   simp only [frobeniusPowIso, Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Functor.map_comp, Category.assoc]
+    Functor.map_comp]
   rfl
 
 /-- The iterated Weil structure satisfies `φ_{m+1} = φ ∘ Fr^* φ_m`, as morphisms of the
