@@ -3,56 +3,167 @@
  "blueprint": {
   "is": "lem-pc-proper-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper and smooth morphisms are stable under base change",
- "statement": "Let $f:X\\to S$ be a proper morphism, let $g:S'\\to S$ be arbitrary, and\nlet $f':X'=X\\times_SS'\\to S'$ be the base change. Then $f'$ is\nproper. If $f$ is smooth, then $f'$ is smooth.",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be morphisms of schemes [def-pc-scheme], let $X'=X\\times_SS'$ be the fibre product [def-pc-fibre-product] and let $f':X'\\to S'$ be its second projection, the base change of $f$ along $g$ [def-pc-base-change]. (1) If $f$ is proper (separated, of finite type and universally closed [def-weil-proper-morphism]), then $f'$ is proper. (2) If $f$ is smooth (locally of finite presentation and formally smooth [def-sbc-smooth-morphisms]), then $f'$ is smooth.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-proper-base-change.md",
   "place": "node lem-pc-proper-base-change, order 732",
   "external": [
    {
     "document": "Stacks Project",
-    "place": "Tag 0BX4"
+    "place": "Tag 01W4 (Morphisms, Lemma, lemma-base-change-proper): clause (1)"
    },
    {
     "document": "Stacks Project",
-    "place": "Tag 00T4"
+    "place": "Tag 02H2 (More on Morphisms, Lemma, lemma-base-change-formally-smooth) and Tag 01TS (Morphisms, lemma-base-change-finite-presentation): clause (2) for the definition of def-sbc-smooth-morphisms (Tag 02H0)"
    },
    {
     "document": "Stacks Project",
-    "place": "Tag 00T2"
+    "place": "Tag 01VB (Morphisms, Lemma, lemma-base-change-smooth), via Algebra Lemma (Tag 00T4) and Definition (Tag 00T2): clause (2) for the affine-local definition (Tag 01V5); the two definitions agree by Tag 02H6"
    }
   ]
  },
  "stmt_deps": [
-  "def-pc-base-change",
-  "def-pc-morphism-conventions",
   "def-pc-scheme",
-  "def-weil-scheme-morphism-properties"
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [
   {
-   "text": "*Properness.* $f'$ is separated and of finite type (base changes\nof separated and finite type morphisms have these properties: the\ndiagonal of $f'$ is the base change of the diagonal of $f$, and the\nbase changes of finite type morphisms are of finite type, both by the\ndefinitions of the properties, being Zariski-local and stable under\ncomposition with the projections). For the universal closedness, use\nthe valuative criterion for properness ([lem-pc-projective-proper]\ncites it, Tag 0BX4): a valuation square\na valuation square\n\n$$\n\\operatorname{Spec} K \\longrightarrow X'\n$$\n\noindent over\n\n$$\n\\operatorname{Spec} V \\longrightarrow S'\n$$\n\ngives, by composition, the outer square\n$\\operatorname{Spec} K\\to X\\to S$ and $\\operatorname{Spec} V\\to S' \\to S$; the criterion for the\nproper $f$ gives the (unique) lift $\\operatorname{Spec} V\\to X$; its base change\nalong $g$ restricted... the maps $\\operatorname{Spec} V\\to S'$ and $\\operatorname{Spec} V\\to X$\n(both over $S$) give the product morphism $\\operatorname{Spec} V\\to X\\times_SS'=X'$\n(the morphism into the fibre product from the two legs over $S$),\ni.e. the required lift; uniqueness is inherited from the uniqueness\nfor $f$. Hence $f'$ satisfies the valuative criterion, and is proper.",
-   "uses": [],
-   "elementary": false
+   "text": "*Separated and of finite type.* Since $f$ is proper it is separated and of finite type [def-weil-proper-morphism]. By [lem-pod-separated-finite-type-base-change], applied to $f$ and $g$, the base change $f':X'\\to S'$ is separated and of finite type.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma (Tag 01W4, lemma-base-change-proper), proof, sentences 2-3 (separated: Schemes Lemma 01KU; finite type: Morphisms Lemma 01T4)"
+   }
   },
   {
-   "text": "*Smoothness.* Smoothness is Zariski-local on the base and the\ntarget; affine-locally, a smooth ring map $R\\to A$ remains smooth\nafter base change $R\\to R'$: Algebra, Lemma 10.137.3, Tag\n[00T4](https://stacks.math.columbia.edu/tag/00T4) (the proof: the\nnaive cotangent complex base changes, and the base change of a finite\nprojective module is finite projective, so the defining property of\nDefinition 10.137.1 (Tag\n[00T2](https://stacks.math.columbia.edu/tag/00T2)) is preserved;\nthe finite presentation property is preserved by base change).\nHence $f'$ is smooth.",
-   "uses": [],
-   "elementary": null
+   "text": "*Universally closed.* Since $f$ is proper it is universally closed [def-weil-proper-morphism]. By [lem-weil-pbc-universally-closed-base-change], applied to $f$ and $g$, the base-change projection $f':X\\times_SS'\\to S'$ [def-pc-fibre-product] is universally closed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-universally-closed-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma (Tag 01W4, lemma-base-change-proper), proof, first sentence ('true by definition for universally closed morphisms')"
+   }
+  },
+  {
+   "text": "*Clause (1).* By the two preceding steps $f'$ is separated, of finite type and universally closed, i.e. proper by the definition [def-weil-proper-morphism].",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma (Tag 01W4), proof, last sentence"
+   }
+  },
+  {
+   "text": "*Locally of finite presentation.* Since $f$ is smooth it is locally of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] (the base change of a morphism locally of finite presentation along any morphism is locally of finite presentation), $f'$ is locally of finite presentation.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma (Tag 01TS, lemma-base-change-finite-presentation)"
+   }
+  },
+  {
+   "text": "*Formally smooth.* Since $f$ is smooth it is formally smooth [def-sbc-smooth-morphisms, def-sbc-formally-smooth]. Write $p:X'\\to X$ for the first projection, so $f\\circ p=g\\circ f'$ [def-pc-fibre-product]. Let $i:T\\to T'$ be a first order thickening of affine schemes over $S'$ [def-sbc-first-order-thickening], with structure morphism $t':T'\\to S'$ (so $T$ lies over $S'$ through $t'\\circ i$), and let $a:T\\to X'$ be a morphism over $S'$, i.e. $f'\\circ a=t'\\circ i$. (i) The same $i:T\\to T'$ is a first order thickening of affine schemes over $S$, with structure morphism $g\\circ t':T'\\to S$: the closed immersion $i$, its ideal sheaf and the affineness of $T,T'$ do not involve the base, and $i$ is a morphism over $S$ since $(g\\circ t')\\circ i=g\\circ(t'\\circ i)$ [def-sbc-first-order-thickening]. (ii) The morphism $p\\circ a:T\\to X$ is a morphism over $S$: $f\\circ(p\\circ a)=g\\circ f'\\circ a=(g\\circ t')\\circ i$. (iii) Since $f$ is formally smooth [def-sbc-formally-smooth], there is $b:T'\\to X$ with $b\\circ i=p\\circ a$ and $f\\circ b=g\\circ t'$. (iv) As $f\\circ b=g\\circ t'$, the universal property of the fibre product [def-pc-fibre-product] gives a unique $a'=(b,t'):T'\\to X'$ with $p\\circ a'=b$ and $f'\\circ a'=t'$; in particular $a'$ is a morphism over $S'$. (v) $a'\\circ i=a$: both are morphisms $T\\to X'$ with $p\\circ(a'\\circ i)=b\\circ i=p\\circ a$ and $f'\\circ(a'\\circ i)=t'\\circ i=f'\\circ a$, so they agree by the uniqueness in the universal property of the fibre product [def-pc-fibre-product]. Hence every such lifting problem for $f'$ has a solution, i.e. $f'$ is formally smooth [def-sbc-formally-smooth].",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-formally-smooth",
+    "def-sbc-first-order-thickening",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma (Tag 02H2, lemma-base-change-formally-smooth); the source's proof is 'Omitted', the argument is written out here from Definition (Tag 02H0)"
+   }
+  },
+  {
+   "text": "*Clause (2).* By the two preceding steps $f'$ is locally of finite presentation and formally smooth, i.e. smooth by the definition [def-sbc-smooth-morphisms].",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Definition (Tag 02H0) with Lemma (Tag 02H6), as in def-sbc-smooth-morphisms"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-universally-closed-base-change",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-formally-smooth",
+  "def-sbc-first-order-thickening"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-proper-base-change.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Clause (1): Morphisms, Lemma (Tag 01W4, lemma-base-change-proper) and its proof. Clause (2): literature/stacks-project/more-morphisms.tex, Lemma (Tag 02H2, lemma-base-change-formally-smooth; proof omitted in the source, written out by the agent in step 5) together with Morphisms Lemma (Tag 01TS)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper morphisms of schemes are stable under base change",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Proper), AlgebraicGeometry.isSmooth_isStableUnderBaseChange (deprecated name of smooth_isStableUnderBaseChange), RingHom.IsStableUnderBaseChange, AlgebraicGeometry.IsProper",
+   "date": "2026-10-10",
+   "verdict": "match for clause (1): IsProper.isStableUnderBaseChange, Proper.lean:72"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth morphisms of schemes are stable under base change",
+   "results": "AlgebraicGeometry.isSmooth_isStableUnderBaseChange, isSmoothOfRelativeDimension_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth), RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange",
+   "date": "2026-10-10",
+   "verdict": "candidate for clause (2): Mathlib's Smooth is the affine-local notion (Stacks 01V5); its agreement with def-sbc-smooth-morphisms (lfp + formally smooth) is Stacks 02H6, a theorem, so not a leaf (stages/1-dag.md §2 convention, B8)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Smooth",
+   "results": "AlgebraicGeometry.smooth_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-10",
+   "verdict": "candidate for clause (2) (see above)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally smooth morphism of schemes infinitesimal lifting base change",
+   "results": "AlgebraicGeometry.FormallyUnramified, FormallyUnramified.instHasRingHomPropertyFormallyUnramified, IsEtale.instFormallyUnramified, AlgebraicGeometry.IsSmooth, Algebra.Smooth.formallySmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no scheme-level formally smooth morphisms (only Algebra.FormallySmooth for rings)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsStableUnderBaseChange\\|class IsProper\\|class Smooth' Mathlib/AlgebraicGeometry/Morphisms/Proper.lean Smooth.lean; grep -rn FormallySmooth Mathlib/AlgebraicGeometry",
+   "results": "Proper.lean:42 class IsProper extends IsSeparated, UniversallyClosed, LocallyOfFiniteType; Proper.lean:72 instance IsProper.isStableUnderBaseChange; Smooth.lean:62 class Smooth (affine-local, RingHom.Smooth on appLE); Smooth.lean:117 instance smooth_isStableUnderBaseChange; FormallySmooth in AlgebraicGeometry only on stalk maps (Smooth.lean:246-363), no scheme-level class",
+   "date": "2026-10-10",
+   "verdict": "clause (1) match (exact, with def-weil-proper-morphism = IsProper); clause (2) candidate only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -96,5 +207,20 @@
   }
  ],
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.smooth_isStableUnderBaseChange",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "line": "72; 117",
+  "reason": "Clause (1) is exactly IsProper.isStableUnderBaseChange (Proper.lean:72), def-weil-proper-morphism being a Mathlib leaf for IsProper. Clause (2) is smooth_isStableUnderBaseChange (Smooth.lean:117) only for Mathlib's affine-local Smooth (Smooth.lean:62); def-sbc-smooth-morphisms (lfp + formally smooth) is identified with it by Stacks 02H6, a theorem (its own mathlib_match says 'not a one-line specialization'), so the item is not a leaf."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-proper-base-change",
+  "worker": "stage1",
+  "summary": "Split by one level. Statement restated with definition nodes and in two independent clauses: the smooth clause no longer assumes f proper (the original 'Let f be proper ... If f is smooth' read as smooth-and-proper; the strengthening is what the citers need and is true). Clause (1) follows Stacks 01W4 exactly (separated + finite type by the Mathlib leaf lem-pod-separated-finite-type-base-change, which covers 01KU and 01T4; universally closed by the Mathlib leaf lem-weil-pbc-universally-closed-base-change); the blueprint's valuative-criterion argument is not used (the criterion 0BX4 is a section, not a lemma, and needs Noetherian/finite-type hypotheses not needed here). Clause (2): the DAG's smooth (def-sbc-smooth-morphisms) is lfp + formally smooth (02H0), not the affine-local 01V5 notion for which Stacks 01VB uses 00T4/00T2; so the proof is lfp base change (01TS, Mathlib leaf clause (3) of lem-weil-pbc-qcqs-morphism-permanence) plus base change of formal smoothness (02H2, whose proof Stacks omits; written out in step 5 from the definition and the universal property of fibre products). Tags checked in tags/tags: 0BX4 = morphisms-section-valuative-criteria (a section), 00T4 = algebra-lemma-base-change-smooth, 00T2 = algebra-definition-smooth, 01W4 = morphisms-lemma-base-change-proper, 01VB = morphisms-lemma-base-change-smooth, 01V5 = morphisms-definition-smooth, 01TS, 02H0, 02H2, 02H6, 01KU, 01T4. No new nodes; no slopmaster2 Lean (grep by id and key words). Not a Mathlib leaf: clause (1) is IsProper.isStableUnderBaseChange (Proper.lean:72) but clause (2) matches smooth_isStableUnderBaseChange (Smooth.lean:117) only through 02H6 (recorded in mathlib_candidate).",
+  "blueprint": "Steps 1-3 realize the blueprint proof's first paragraph ('Properness': f' separated and of finite type, universally closed), replacing its valuative-criterion argument for universal closedness by the base-change leaf; steps 4-6 realize the second paragraph ('Smoothness'), with formal smoothness in place of the affine-local smooth ring maps (00T4/00T2) because def-sbc-smooth-morphisms is the formally-smooth definition; its clause 'the finite presentation property is preserved by base change' is step 4."
+ },
+ "reviewed": "2026-10-10 L: 6 steps checked (separated and finite type, universally closed, proper; lfp by the qcqs-permanence leaf; formally smooth written out via the fibre-product universal property, 02H2; smooth). Statement restated as two independent clauses with the DAG definitions (clause 2 no longer assumes proper; stronger and true). Not a Mathlib leaf: smoothness is the DAG's formally-smooth definition, Mathlib's Smooth agrees only through 02H6 (candidate recorded). Tags 0BX4 (a section), 00T4/00T2 (affine-local smoothness) of the blueprint noted as misdirected.",
+ "lead_note": "2026-10-10 L: lem-weil-pbc-proper-base-change (sec-curve-estimates, imported) states clause (1) exactly; make it a Mathlib leaf (IsProper.isStableUnderBaseChange, Proper.lean 72) or merge at its turn."
 }
