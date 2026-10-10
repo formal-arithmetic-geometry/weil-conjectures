@@ -24,9 +24,52 @@
   "def-sc-topological-abelian-cohomology",
   "def-sc-gm-torsor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In the abelian category of abelian sheaves on $X_{\\mathrm{Zar}}$ [def-sc-topological-abelian-cohomology], the quotient of $E\\oplus G'$ by the image of $g\\mapsto(j(g),-\\varphi(g))$ has the universal property of the pushout of $j:G\\to E$ along $\\varphi:G\\to G'$: a pair of morphisms from $E$ and $G'$ agrees on $G$ exactly when the induced map from $E\\oplus G'$ kills that image. Apply [lem-weil-pbc-pushout-short-exact-sequence] to the given short exact sequence and this pushout. It supplies the induced projection $E_{\\varphi}\\to\\mathbf Z_X$ and proves that $0\\to G'\\to E_{\\varphi}\\to\\mathbf Z_X\\to0$ is short exact.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, pushout extension in the proof of the torsor--H^1 correspondence"
+   }
+  },
+  {
+   "text": "A local section of the fibre of $E_{\\varphi}\\to\\mathbf Z_X$ over $1$ is represented by a pair $(t,g')$ with $t\\in T$ and $g'\\in G'$, since the first component must map to $1$. Locally means: $E\\oplus G'\\to E_{\\varphi}$ is an epimorphism, so by [lem-sc-abelian-sheaf-short-exact-stalkwise] it is surjective on stalks, and every germ of $E_{\\varphi}$ comes from a germ of $E\\oplus G'$. Two such pairs represent the same section precisely when they differ by $(j(g),-\\varphi(g))$ for a local section $g$ of $G$, which is the relation $(t,g')\\sim(g\\cdot t,\\varphi(g)^{-1}g')$. Thus the fibre is canonically the sheafification of $(T\\times G')/G$, namely $T\\wedge^G G'$, and the induced $G'$-translation agrees with the second-factor action.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, identification of the fibre over 1 of the pushout extension"
+   }
+  },
+  {
+   "text": "The fibre over $1$ of a short exact sequence $0\\to G'\\to E_{\\varphi}\\to\\mathbf Z_X\\to0$ is a $G'$-torsor: lifts of $1$ exist locally, since by [lem-sc-abelian-sheaf-short-exact-stalkwise] the stalk maps of $E_{\\varphi}\\to\\mathbf Z_X$ are surjective, so the germ of $1$ at each point lifts to a germ, represented on a neighbourhood where it maps to $1$, and any two lifts differ by a unique section of the kernel $G'$. Therefore the canonical identification in Step 2 is an identification of $G'$-torsors.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02FQ, fibre of a short exact extension is a torsor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-abelian-sheaf-short-exact-stalkwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ, pushout extension and fibre over 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +94,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-torsor-h1-functoriality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-torsor-h1-ext-pushout",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Lemma 02FQ into the quotient universal property, exactness via the existing generic abelian pushout lemma, and the explicit fibre-as-contracted-product calculation. No new DAG nodes were needed.",
+  "blueprint": "Realizes the final-step clause of blueprint ancestor lem-sc-pic-proper-ntorsion: naturality of the torsor class under a coefficient morphism, specifically the pushout extension and its fibre over 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Step 1 uses its generic theorem that pushing out a short exact sequence in an abelian category remains short exact; this is a tool lemma from the proper-base-change unit and no node in this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tep",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tep (reviewer sub-agent of L); spot-checked: Source: Stacks 02FQ (cohomology.tex label lemma-torsors-h1), whose proof forms the pushout extension of 0->Ker->Z[F]->Z->0 and takes the fibre over 1; the item's statement (scheme X, abelian Zariski sheaves G,G', phi:G->G', SES 0->G->E->Z_X->0, quotient pushout E_phi, contracted product) is unchanged and is self-contained; it does not cite the bijection of lem-sc-torsor-h1, so R-th2's C3 concern about 'canonical' does not arise here. Step 1: lem-weil-pbc-pushout-short-exact-sequence states exactly that the pushout Coker((u,-f)) of a SES along u:A->I sits in a SES 0->I->E->C->0 with p o v = g, p o iota = 0; the item's E_phi is that cokernel; accepted as a generic off-unit tool (C8). Step 2: elementary check that pairs (t,g') with t in T represent the fibre and the relation is (j(g),-phi(g)); Step 3: torsor property from local lifts and differences in the kernel G' (def-sc-gm-torsor, G-torsor clause, Zariski). Small cases: phi=id gives E_phi=E and T; X a point, G=Z/2 -> G'=0, E=Z x Z/2: E_phi=Z, fibre one point = T wedge 0. No Lean declaration for the id or key words in slopmaster2 (B10); blueprint search 'pushout extension torsor' 0 hits, same_as [] right. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-torsor-h1-ext-pushout.json: proof[0].uses: added def-sc-topological-abelian-cohomology, which states that abelian sheaves form the abelian category the pushout lemma needs (C1); proof[1].uses and proof[2].uses: added lem-sc-abelian-sheaf-short-exact-stalkwise with one sentence each, for the local representation of sections of the quotient E_phi and the local existence of lifts of 1 (epimorphism => stalkwise surjective) (C1); proof_deps updated accordingly. Start Sat Oct 10 04:19:08 PM UTC 2026, end Sat Oct 10 04:20:03 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
