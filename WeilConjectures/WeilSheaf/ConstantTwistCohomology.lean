@@ -149,6 +149,8 @@ noncomputable abbrev globalSectionsFrobeniusHom (G : WeilSheaf k₀ l X) :
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app G.obj.carrier.X).inv ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map G.obj.str.hom)
 
+omit [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 lemma globalSectionsMap_comp_frobeniusHom {G G' : WeilSheaf k₀ l X} (f : G ⟶ G') :
     globalSectionsMap f ≫ globalSectionsFrobeniusHom G' =
       globalSectionsFrobeniusHom G ≫ globalSectionsMap f := by
@@ -179,7 +181,8 @@ noncomputable def globalSectionsEquivOfIso {G G' : WeilSheaf k₀ l X} (e : G �
     simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
     exact h.symm
 
-omit [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
+omit [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 lemma globalSectionsFrobeniusHom_constantTwist (G : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     globalSectionsFrobeniusHom (G.constantTwist b) =
       globalSectionsFrobeniusHom G ≫ ((ULift.up (b : PadicAlgCl l)) • 𝟙 _) := by
@@ -200,9 +203,11 @@ noncomputable def globalSectionsConstantTwistEquiv (G : WeilSheaf k₀ l X) (b :
     (G.constantTwist b).globalSections.Equiv (G.globalSections.rescale b) where
   toLinearEquiv := LinearEquiv.refl _ _
   map_frobenius x := by
-    change (G.constantTwist b).globalSections.frobenius x = (G.globalSections.rescale b).frobenius x
+    change (G.constantTwist b).globalSections.frobenius x =
+      (G.globalSections.rescale b).frobenius x
     rw [globalSections_frobenius_apply, globalSectionsFrobeniusHom_constantTwist]
-    exact (FrobeniusModule.frobeniusEnd_rescale_apply (M := G.globalSections) (Units.ne_zero b) x).symm
+    exact (FrobeniusModule.frobeniusEnd_rescale_apply (M := G.globalSections)
+      (Units.ne_zero b) x).symm
 
 end AlgebraicGeometry.WeilSheaf
 
@@ -344,7 +349,8 @@ noncomputable def homologySheafDerivedLowerStarConstantTwistIso (F : WeilSheaf k
         (Y ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F))).constantTwist b :=
   ObjectProperty.isoMk _
     ((_root_.DerivedCategory.homologyFunctor _ r).mapIso
-        ((ProEtaleWeilSheaf.lowerStar k₀ l (Y ↘ Spec (CommRingCat.of k₀))).rightDerivedFunctor.mapIso
+        ((ProEtaleWeilSheaf.lowerStar k₀ l
+            (Y ↘ Spec (CommRingCat.of k₀))).rightDerivedFunctor.mapIso
           ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (F.constantTwistObjIso b) ≪≫
             ((ProEtaleWeilSheaf.constantTwist k₀ l Y b).mapDerivedCategorySingleFunctor 0).symm.app
               F.obj) ≪≫

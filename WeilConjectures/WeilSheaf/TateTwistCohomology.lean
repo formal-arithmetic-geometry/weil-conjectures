@@ -149,14 +149,15 @@ noncomputable def ihomConstantTwistLeftIso (A B : ProEtaleWeilSheaf k₀ l X) (b
     (K' := (constantTwist k₀ l X b⁻¹).obj (ihom k₀ l X A B))
     (Iso.refl ((AdicSheaf.ihom A.carrier).obj B.carrier)) (by
       rw [constantTwist_obj_obj_str, ihom_obj_str, ihom_obj_str, constantTwist_obj_str_inv]
-      simp only [Iso.refl_hom, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
-        Mod.ihomMap_comp, NatTrans.comp_app, AdicSheaf.ihomMap_smul_app]
-      show (WeilSheaf.frobeniusPullback k₀ l X).map (𝟙 _) ≫
+      simp only [Iso.refl_hom, Mod.ihomMap_comp, NatTrans.comp_app, AdicSheaf.ihomMap_smul_app]
+      change (WeilSheaf.frobeniusPullback k₀ l X).map (𝟙 _) ≫
           AdicSheaf.smul _ ((WeilSheaf.frobeniusPullback k₀ l X).obj
-            ((AdicSheaf.ihom A.carrier).obj B.carrier)) ≫ _ = _ ≫ 𝟙 ((AdicSheaf.ihom A.carrier).obj B.carrier)
+            ((AdicSheaf.ihom A.carrier).obj B.carrier)) ≫ _ =
+        _ ≫ 𝟙 ((AdicSheaf.ihom A.carrier).obj B.carrier)
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         reassoc_of% (AdicSheaf.smul_comp _ ((adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app B.carrier))]
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app
+            B.carrier))]
       simp only [Category.assoc]
       rfl)
 
@@ -168,13 +169,14 @@ noncomputable def ihomConstantTwistRightIso (A B : ProEtaleWeilSheaf k₀ l X) (
     (K' := (constantTwist k₀ l X c).obj (ihom k₀ l X A B))
     (Iso.refl ((AdicSheaf.ihom A.carrier).obj B.carrier)) (by
       rw [constantTwist_obj_obj_str, ihom_obj_str, ihom_obj_str, constantTwist_obj_obj_str]
-      show (WeilSheaf.frobeniusPullback k₀ l X).map (𝟙 _) ≫
+      change (WeilSheaf.frobeniusPullback k₀ l X).map (𝟙 _) ≫
           AdicSheaf.smul _ ((WeilSheaf.frobeniusPullback k₀ l X).obj
             ((AdicSheaf.ihom A.carrier).obj B.carrier)) ≫ _ =
         _ ≫ 𝟙 ((AdicSheaf.ihom A.carrier).obj B.carrier)
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         reassoc_of% (AdicSheaf.smul_comp _ ((adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app B.carrier)),
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app
+            B.carrier)),
         reassoc_of% (AdicSheaf.smul_comp _ ((Mod.ihomMap A.str.inv).app
           ((WeilSheaf.frobeniusPullback k₀ l X).obj B.carrier))), Functor.map_comp]
       erw [AdicSheaf.ihom_map_smul]
@@ -313,8 +315,8 @@ noncomputable def compactlySupportedCohomologyEquivOfIso {F G : WeilSheaf k₀ l
 variable (k₀ l Y) in
 /-- **Compactly supported cohomology of the Tate sheaves** (blueprint
 `def-weil-frobenius-coefficient-twists`, with the twist elimination of
-`prop-pod-degree-of-the-pairing`): `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same space
-with the geometric Frobenius multiplied by `q^{-m}`. -/
+`prop-pod-degree-of-the-pairing`): `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ(m))` is `H_cʳ(Y ⊗ k̄, ℚ̄_ℓ)(m)`, the same
+space with the geometric Frobenius multiplied by `q^{-m}`. -/
 theorem nonempty_equiv_compactlySupportedCohomology_tateTwistSheaf (m r : ℤ) :
     Nonempty (((tateTwistSheaf k₀ l Y m).compactlySupportedCohomology r).Equiv
       (((adicConstant k₀ l Y).compactlySupportedCohomology r).tateTwist (Nat.card k₀) m)) := by

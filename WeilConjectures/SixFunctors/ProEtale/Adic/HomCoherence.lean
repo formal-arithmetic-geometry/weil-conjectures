@@ -82,7 +82,8 @@ lemma adicLowerStarCompIhomIso_inv_app_comp_ihomMap (g : X ⟶ X) [IsIso g]
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) f N
 
 /-- The compatibility `g_* 𝓗om(M, N) ≅ 𝓗om(g_* M, g_* N)` of the pushforward along an
-automorphism with internal homs is compatible with `𝓗om(ℚ̄_ℓ,X, -) ≅ 𝟭` and `g_* ℚ̄_ℓ,X ≅ ℚ̄_ℓ,X`. -/
+automorphism with internal homs is compatible with `𝓗om(ℚ̄_ℓ,X, -) ≅ 𝟭` and
+`g_* ℚ̄_ℓ,X ≅ ℚ̄_ℓ,X`. -/
 lemma map_ihomRegularIso_inv_app_comp_adicLowerStarCompIhomIso_inv_app (e : X ≅ X)
     (N : AdicSheaf l X) :
     (e.hom)_*ᵃ[l].map (Mod.ihomRegularIso.inv.app N) ≫
