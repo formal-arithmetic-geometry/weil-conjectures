@@ -1,8 +1,8 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -60,7 +60,6 @@
 | `lem-sc-finite-locally-free-derived-hom` | 3014 | none |
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-global-sections-left-exact` | 3014 | none |
-| `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
@@ -929,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 343 nodes that wait for stage 1, 1215 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1215 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
