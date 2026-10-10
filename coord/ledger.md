@@ -2912,3 +2912,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:04 L: returned deliver/K1/lem-sp-cartan-eilenberg-double-complex-homotopy (reviewer RETURN: 1 (E, false new statement) lem-sp-ce-vertical-nullhomotopy has no exactness hypothesis on the source: it never introduce)
 - 23:04 L: merged deliver/H1/lem-sc-zariski-filtered-cohomology (reviewer FIX; first push; new nodes: 0)
 - 23:06 L: merged deliver/G1/prop-pur-kinjective-resolutions-exist (reviewer FIX; first push; new nodes: 2)
+- 23:06 UTC L deleted three abandoned delivery branches of leaves (F1 sep-closed-finite-extension-sep-closed, E1 sep-closed-finite-extension-purely-inseparable, M1 separably-closed-geometrically-connected); notices
+- 23:06 L: merged deliver/G1/def-weil-extension-by-zero-presheaf (reviewer PASS; first push; new nodes: 0)
