@@ -2468,3 +2468,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:04 L: merged deliver/F1/lem-sc-proper-flat-right-adjoint-direct-sums (reviewer FIX; first push; new nodes: 0)
 - 20:04 L: merged deliver/E1/lem-sc-hom-etale-locus-translation (reviewer FIX; after a return; new nodes: 1)
 - 20:05 L: merged deliver/H1/def-pc-essentially-constant-pro-diagram (reviewer FIX; first push; new nodes: 0)
+- 20:05 L: merged deliver/M1/lem-sc-p1-rhom-hom-derived-connecting (reviewer FIX; first push; new nodes: 0)
