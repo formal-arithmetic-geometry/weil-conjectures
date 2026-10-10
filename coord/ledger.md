@@ -1426,3 +1426,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:36 L: accepted lem-weil-pbc-noetherian-flat-locus-neighborhood: attachment check, finished by Module.Flat.exists_notMem_forall_flat_localizedModule (sorry-free on 71d63dcf, verified), lean_audit closed, not split
 - 12:37 L: accepted lem-weil-pbc-double-complex-zigzag-module-functorial: 4 steps, new Mathlib leaf lem-weil-pbc-quotient-module-induced-map (Submodule.mapQ family)
 - 12:38 L: accepted lem-weil-pbc-limit-module-finite-presentation (00R1): 7 steps along 00QX non-local, no new nodes
+- 12:39 L: accepted def-pc-morphism-conventions: definition, stmt_deps completed (finite type, lfp, projective), same_as def-weil-scheme-morphism-properties; def-pc-projective-morphism flagged for missing deps

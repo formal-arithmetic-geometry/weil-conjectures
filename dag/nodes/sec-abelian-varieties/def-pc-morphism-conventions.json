@@ -3,27 +3,52 @@
  "blueprint": {
   "is": "def-pc-morphism-conventions",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-scheme-morphism-properties"
+  ]
  },
  "kind": "definition",
  "title": "Morphism-theoretic conventions from file 02",
- "statement": "All morphism-theoretic notions used below are the ones already introduced\nin file 02: *quasi-compact*, *quasi-separated*,\n*separated*, *locally of finite type* and *of finite\ntype*, *locally of finite presentation* and *of finite\npresentation*, *surjective*, *open immersion*,\n*closed immersion*, *immersion*, *universally closed*,\n*proper*, *finite*, *integral*, *flat*,\n*unramified*, *etale*, *geometric fibre* and\n*geometric point* (see\nDefinition [def-weil-pbc-scheme-conventions]).\nOne further notion is fixed here: *projective*\n([def-pc-projective-morphism]).",
+ "statement": "All morphism-theoretic notions for morphisms of schemes [def-pc-scheme] used below are the ones fixed in\nDefinition [def-weil-pbc-scheme-conventions] (\"file 02\" of the source): *quasi-compact*, *quasi-separated*,\n*separated*, *locally of finite type* and *of finite\ntype* ([def-weil-finite-type-morphism]), *locally of finite presentation* and *of finite\npresentation* ([def-sbc-locally-finite-presentation]; of finite presentation meaning locally of finite presentation, quasi-compact and quasi-separated), *surjective*, *open immersion*,\n*closed immersion*, *immersion*, *universally closed*,\n*proper*, *finite*, *integral*, *flat*,\n*unramified*, *étale*, *geometric fibre* and\n*geometric point*, each as defined in the node that\nDefinition [def-weil-pbc-scheme-conventions] names for it.\nOne further notion is fixed here: *projective*\n([def-pc-projective-morphism]).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-jacobian/def-pc-morphism-conventions.md",
   "place": "node def-pc-morphism-conventions, order 450"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-pc-projective-morphism",
   "def-pc-scheme",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-projective-morphism"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective morphism of schemes closed immersion into projective space over the base",
+   "results": "AlgebraicGeometry.IsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), AlgebraicGeometry.IsImmersion, isClosedImmersion_iff_isAffineHom; no projective-morphism class",
+   "date": "2026-10-10",
+   "verdict": "no match (for the one notion fixed here, projective; the other notions are matched in the nodes def-weil-pbc-scheme-conventions names)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes f : X ⟶ S is projective: factors as closed immersion into P^n_S followed by projection",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.isSeparated (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper), AlgebraicGeometry.IsProper, isProper_iff; no projective-morphism class",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Projective' Mathlib/AlgebraicGeometry/Morphisms/; grep -rln 'projective morphism\\|IsProjective ' Mathlib/AlgebraicGeometry; grep 'class IsProjective\\|def IsProjective\\|HProjective' Mathlib (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none in Mathlib/AlgebraicGeometry (only Mathlib/AlgebraicGeometry/ProjectiveSpectrum, the Proj construction); slopmaster2 has IsQuasiProjective (WeilConjectures/AlgebraicGeometry/ProjectiveSpace/QuasiProjective.lean:47, over a field, immersion) and states in WeilConjectures/Blowup/Affine/Projective.lean:49 that Mathlib has no morphism class IsProjective",
+   "date": "2026-10-10",
+   "verdict": "no match: a collection of conventions has no single Mathlib declaration; projective morphisms are absent from this Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -51,5 +76,14 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-pc-morphism-conventions",
+  "worker": "stage1",
+  "summary": "Definition node collecting conventions; no proof. Checked every notion named against the nodes it cites: all of quasi-compact, quasi-separated, separated, of finite type, of finite presentation, surjective, open/closed immersion, immersion, universally closed, proper, finite, integral, flat, unramified, étale, geometric fibre and geometric point have a bullet with a defining node in def-weil-pbc-scheme-conventions; 'locally of finite type' appears there only inside an equivalence, so def-weil-finite-type-morphism (which defines it) is now cited directly, and def-sbc-locally-finite-presentation likewise for 'locally of finite presentation'; projective is def-pc-projective-morphism. The statement's 'already introduced in file 02' (a blueprint file number, not self-contained) is replaced by the reference to def-weil-pbc-scheme-conventions; 'etale' written 'étale'; no notion changed. stmt_deps: removed def-weil-scheme-morphism-properties (an overlapping collection the statement does not use; recorded under blueprint.same_as instead), added def-weil-finite-type-morphism and def-sbc-locally-finite-presentation, kept def-pc-scheme (morphism of schemes). No cycle: none of the stmt_deps reaches the item (checked by search of the dependency closure; tools/check_dag.py 0 cycles). Lean: no slopmaster2 declaration names this node or states these conventions as one object (grep of the id and of IsProjective/projective morphism in WeilConjectures and Comparator; only IsQuasiProjective over a field exists); Mathlib has no projective-morphism class.",
+  "blueprint": "The blueprint node def-pc-morphism-conventions is itself the item (a definition with no proof); its single paragraph is realized by the statement and stmt_deps above."
+ },
+ "reviewed": "2026-10-10 L: definition node checked: every notion named is defined by a stmt_dep (scheme conventions node, finite-type, locally-finite-presentation, projective); statement rewording only (file 02 reference replaced by the node); def-weil-scheme-morphism-properties recorded as same_as. No Lean declaration states these conventions. Worker flag for def-pc-projective-morphism (stmt_deps lack closed immersion, P^n_S, quasi-compact): to be fixed at its own split.",
+ "lead_note": "2026-10-10 L: def-pc-projective-morphism cites no node for closed immersion, P^n_S or quasi-compact (found by this item's worker); fix at its split."
 }
