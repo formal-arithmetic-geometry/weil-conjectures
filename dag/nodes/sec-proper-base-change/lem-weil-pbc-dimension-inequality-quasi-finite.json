@@ -34,9 +34,60 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=\\{s\\in S:\\ s\\text{ is integral over }R\\}$, the integral closure of $R$ in $S$ [def-weil-pbc-integral-closure], and $\\mathfrak q'=\\mathfrak q\\cap T$. By [lem-weil-pbc-integral-closure-zariski-main-away], finite type and quasi-finiteness at $\\mathfrak q$ give $g\\in T\\setminus\\mathfrak q'$ such that $T_g\\to S_g$ is an isomorphism. The prime $\\mathfrak qS_g$ corresponds under it to $\\mathfrak q'T_g$: a fraction $t/g^n$ with $t\\in T$ belongs to $\\mathfrak qS_g$ exactly when $t\\in\\mathfrak q$, because $g\\notin\\mathfrak q$. Localizing this isomorphism at those primes, [lem-weil-pbc-localization-prime-residue-field-iso] identifies $S_{\\mathfrak q}$ with $T_{\\mathfrak q'}$ as rings. Moreover the contraction of $\\mathfrak q'$ to $R$ is $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-closure-zariski-main-away",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00QF (lemma-dimension-inequality-quasi-finite), proof, lines 31281-31285; Theorem Tag 00Q9 (theorem-main-theorem), statement, lines 30778-30788"
+   }
+  },
+  {
+   "text": "Take any chain $\\mathfrak q'_0\\subsetneq\\cdots\\subsetneq\\mathfrak q'_n\\subseteq\\mathfrak q'$ of prime ideals of $T$. Since $T$ is integral over $R$ by its definition, [lem-weil-pbc-integral-incomparability] makes the contractions $\\mathfrak p_i=\\mathfrak q'_i\\cap R$ a strictly increasing chain of primes of $R$. Each $\\mathfrak p_i$ is contained in $\\mathfrak q'\\cap R=\\mathfrak p$, so this is a chain of length $n$ below $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OJ (lemma-integral-dim-up), proof, lines 27348-27356, as invoked by Lemma Tag 00QF, line 31285; incomparability is Lemma Tag 00GT (lemma-integral-no-inclusion)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-dimension-chains-below-prime], the dimension of $T_{\\mathfrak q'}$ is the supremum of lengths of chains of primes of $T$ below $\\mathfrak q'$, and the dimension of $R_{\\mathfrak p}$ is the corresponding supremum below $\\mathfrak p$. Step 2 sends every chain counted by the first supremum to one of the same length counted by the second. Therefore $\\dim T_{\\mathfrak q'}\\le\\dim R_{\\mathfrak p}$. The ring isomorphism from step 1 preserves prime chains, so $\\dim S_{\\mathfrak q}=\\dim T_{\\mathfrak q'}$, proving the claim, including infinite-dimensional local rings.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00QF (lemma-dimension-inequality-quasi-finite), final sentence of proof, lines 31283-31287; Definition Tag 00KF (definition-height) and Lemma Tag 00OJ (lemma-integral-dim-up)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-closure-zariski-main-away",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QF (lemma-dimension-inequality-quasi-finite), proof lines 31276-31287; general-case argument through 00Q9 and 00OJ, with 00OJ's incomparability argument applied directly to chains below the chosen prime"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +132,24 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-dimension-inequality-quasi-finite",
+  "worker": "E1",
+  "summary": "Split Stacks 00QF in its general case: pointwise Zariski Main Theorem 00Q9 identifies the local target ring with a localization of the integral closure; 00OJ/00GT contracts each prime chain below that localization to a strict chain below the base prime; the height interpretation of local dimension gives the inequality. No new nodes or statement change. The Noetherian shortcut in 00QF is unnecessary for this general proof.",
+  "blueprint": {
+   "steps": [
+    "Finite-etale lifting, step 7: syntomic approximation uses the fibre-dimension neighbourhood (00QH), whose proof invokes 00QG; 00QG invokes this 00QF inequality",
+    "00QF proof: Zariski Main Theorem 00Q9, integral dimension via 00OJ/00GT, and local prime-chain comparison"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 00QF via Zariski's main theorem (the integral closure T with S_q = T_q'), incomparability for chains in T, localization dimension; 0 new"
+ }
 }
