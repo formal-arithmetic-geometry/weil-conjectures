@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-site-plus-injective-separated",
  "kind": "statement",
  "title": "A separated presheaf injects into its plus construction",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal G$ be a separated presheaf of sets on $\\mathcal C$: for every covering $\\{U_i\\to U\\}_{i\\in I}$, the map $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)$ is injective (Stacks Sites, Definition 00WA). Let $\\mathcal G^+$ be the plus construction and $\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^+$ the canonical map [def-weil-pbc-site-plus-construction]. Then $\\theta_{\\mathcal G,U}:\\mathcal G(U)\\to\\mathcal G^+(U)$ is injective for every object $U$. This is the injectivity clause of Stacks Sites, Theorem 00WB (theorem-plus), part (2).",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal G$ be a separated presheaf of sets on $\\mathcal C$: for every covering $\\{U_i\\to U\\}_{i\\in I}$, the map $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)$, $s\\mapsto(s|_{U_i})_i$, is injective. Let $\\mathcal G^+$ be the plus construction and $\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^+$ the canonical map [def-weil-pbc-site-plus-construction]. Then $\\theta_{\\mathcal G,U}:\\mathcal G(U)\\to\\mathcal G^+(U)$ is injective for every object $U$.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Sites, Definition 00WA (definition-separated) and Theorem 00WB (theorem-plus), part (2), proof of item-sheaf"
@@ -11,9 +11,36 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Equal images under $\\theta$ agree on a covering.* Let $a,b\\in\\mathcal G(U)$ with $\\theta_{\\mathcal G,U}(a)=\\theta_{\\mathcal G,U}(b)$ in $\\mathcal G^+(U)$. The case of $\\theta$ in clause (2) of [lem-weil-pbc-site-plus-construction-presheaf], applied to the presheaf $\\mathcal G$, gives a covering $\\{v_k:V_k\\to U\\}_{k\\in K}$ of $U$ with $a|_{V_k}=b|_{V_k}$, i.e. $\\mathcal G(v_k)(a)=\\mathcal G(v_k)(b)$, for all $k\\in K$. (This is where the colimit defining $\\mathcal G^+(U)$ is used: it is filtered, so two elements of $H^0(\\{\\mathrm{id}_U\\},\\mathcal G)=\\mathcal G(U)$ with the same class already agree after pulling back to some covering $\\mathcal V$ along the unique morphism of coverings $\\mathcal V\\to\\{\\mathrm{id}_U\\}$ over $\\mathrm{id}_U$.)",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (2) (item-sheaf), first sentence; Definition 00WA (definition-separated)"
+   }
+  },
+  {
+   "text": "*Separatedness.* By Step 1 the elements $a$ and $b$ have the same image $(a|_{V_k})_k=(b|_{V_k})_k$ under the map $\\mathcal G(U)\\to\\prod_{k\\in K}\\mathcal G(V_k)$, $s\\mapsto(s|_{V_k})_k$, of the covering $\\{V_k\\to U\\}_{k\\in K}$. Since $\\mathcal G$ is separated, this map is injective (the hypothesis of the statement, for this covering), so $a=b$. As $a,b$ were arbitrary, $\\theta_{\\mathcal G,U}$ is injective, for every object $U$. (Stacks phrases this as: every canonical map $\\mathcal G(U)\\to H^0(\\mathcal U,\\mathcal G)$ is injective for a separated $\\mathcal G$, the map $H^0(\\mathcal U,\\mathcal G)\\subset\\prod_i\\mathcal G(U_i)$ being an inclusion.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (2) (item-sheaf), first sentence; Definition 00WA (definition-separated)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-plus-construction-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Theorem 00WB (theorem-plus), proof of part (2) (item-sheaf): 'It is clear that F -> F^+ is injective because all the maps F(U) -> H^0(U,F) are injective'; Definition 00WA (definition-separated)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +69,45 @@
    "results": "ConcreteSheafification.lean contains Plus.inj_of_sep in the sieve formalism; no family-of-coverings theorem appears in Mathlib.CategoryTheory.Sites",
    "date": "2026-10-10",
    "verdict": "no exact Mathlib match; the Stacks family/sieve comparison is a separate theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separated presheaf: map to plus construction is injective",
+   "results": "GrothendieckTopology.Plus.inj_of_sep, Plus.sep, Plus.meqOfSep (Mathlib.CategoryTheory.Sites.ConcreteSheafification); Presheaf.isLocallyInjective_iff_injective_of_separated, Presheaf.isLocallyInjective_toPlus (Sites.LocallyInjective); Presieve.isSeparatedFor_singleton (Sites.IsSheafFor)",
+   "date": "2026-10-10",
+   "verdict": "candidate Plus.inj_of_sep (sieve-based plus construction of a Grothendieck topology); not the same construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective (CategoryTheory.NatTrans.app (CategoryTheory.GrothendieckTopology.toPlus _ _) _)",
+   "results": "only generic Function.Injective lemmas of Init.Data.Function (the pattern did not elaborate against toPlus)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a presheaf is separated for a Grothendieck topology then the canonical map P -> P+ is injective on sections",
+   "results": "Plus.inj_of_sep, Plus.sep, Plus.meqOfSep (Sites.ConcreteSheafification); Presheaf.isLocallyInjective_iff_injective_of_separated, Presheaf.isLocallyInjective_toPlus (Sites.LocallyInjective)",
+   "date": "2026-10-10",
+   "verdict": "candidate Plus.inj_of_sep, sieve formalism only"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'inj_of_sep\\|toPlus_eq_mk\\|eq_mk_iff_exists\\|IsSeparated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 286,305p ConcreteSheafification.lean",
+   "results": "ConcreteSheafification.lean:202 toPlus_eq_mk, :217 eq_mk_iff_exists, :246 sep, :292-304 inj_of_sep (hypothesis: for every X and S : J.Cover X, sections agreeing on all arrows of S are equal; conclusion Function.Injective ((J.toPlus P).app (op X))); IsSheafFor.lean:426 IsSeparatedFor; LocallyInjective.lean:181 isLocallyInjective_toPlus; no plus construction indexed by covering families with refinements in Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate inj_of_sep over covering sieves"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep in .lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists; candidate only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "F1",
@@ -65,5 +127,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep (Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean:292-304, read): for the Grothendieck topology J and a presheaf P with values in a concrete category, separated for covering sieves (hypothesis hsep), (J.toPlus P).app (op X) is injective; the proof is toPlus_eq_mk (:202) and eq_mk_iff_exists (:217), the same route as here. Mathlib's plusObj is a colimit over covering sieves J.Cover X, the node's G^+ a colimit over covering families with refinements (Stacks 00W1); identifying the two constructions (and separatedness for families with separatedness for the generated sieves) is itself a theorem, so the node is split, not a leaf (point B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-plus-injective-separated",
+  "worker": "stage1",
+  "summary": "Read Stacks Sites Definition 00WA and the proof of Theorem 00WB (2) (sites.tex lines 1960-2030; tags 00WA, 00WB verified in tags/tags). Two steps: the theta case of clause (2) of the existing split node lem-weil-pbc-site-plus-construction-presheaf (theta(a)=theta(b) iff a, b agree on some covering, which carries the filtered-colimit description of G^+(U)) gives a covering on which a and b agree; separatedness then gives a=b (elementary). Statement: removed the tag references (B7: '(Stacks Sites, Definition 00WA)' and the closing sentence on Theorem 00WB) and wrote the restriction map of the inline definition of separated explicitly; no definition node for separated presheaves exists in dag/nodes, so the inline definition stays. No new node. Mathlib: three kinds of search plus local_search; candidate Plus.inj_of_sep (sieve formalism) recorded in mathlib_candidate, not a leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "2 steps (Sites 00WB (2), first sentence): equal images under theta agree on a covering by clause (2) of the split plus-construction node; separatedness for that covering gives equality. Statement: tag references removed (B7), the separatedness map written out. Mathlib candidate Plus.inj_of_sep recorded (B8: Mathlib's plus construction is indexed by sieves). Stage-3 note: citer lem-weil-pbc-site-plus-of-separated-is-sheaf step (b) has plain TeX and a loose reason for the agreement of t_{ij}, t_{i'j'}."
+ }
 }
