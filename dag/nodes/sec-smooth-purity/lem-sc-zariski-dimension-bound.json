@@ -3,66 +3,86 @@
  "blueprint": {
   "is": "lem-sc-zariski-dimension-bound",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Zariski dimension bound",
- "statement": "Let $X$ be a Noetherian\nscheme of finite dimension $d$.\nFor every abelian sheaf $F$ on [def-sc-zariski-site],\n\n$$\nH^q(X_{\\rm Zar},F)=0\\quad(q>d),\n$$\n\nwith cohomology as in [def-sc-zariski-cohomology].",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth], and let $d\\geq0$ be an integer such that the topological Krull dimension of the underlying space of $X$ [def-kun-topological-krull-dimension] satisfies $\\dim X\\leq d$ (this includes $X$ empty). For every abelian sheaf $F$ on [def-sc-zariski-site],\n\n$$\nH^q(X_{\\rm Zar},F)=0\\quad(q>d),\n$$\n\nwith cohomology as in [def-sc-zariski-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-dimension-bound.md",
   "place": "node lem-sc-zariski-dimension-bound, order 1557"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
   "def-sc-zariski-site",
-  "def-sc-zariski-cohomology",
-  "def-weil-pbc-scheme-conventions"
+  "def-sc-zariski-cohomology"
  ],
  "proof": [
   {
-   "text": "We induct on $d$. When $d=0$, the Noetherian scheme\nhas a finite discrete underlying space, so its section\nfunctor is a finite product of exact stalk functors.\nLet $d>0$, and let $\\eta_1,\\ldots,\\eta_m$ be the\ngeneric points of the finitely many irreducible components.\nWrite $u_i:\\{\\eta_i\\}\\to X$ for inclusion of the one-point\ntopological space. Put\n\n$$\nT(F)=\\prod_{i=1}^m u_{i*}F_{\\eta_i}.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "On an open $V$, this is the product of $F_{\\eta_i}$\nover the generic points belonging to $V$.\nRestriction maps are projections, so this is flasque\nin the sense of [def-sc-zariski-flasque].\nThe adjunction map $F\\to T(F)$ is the identity at each\ngeneric stalk. At $\\eta_i$, the other factors have\nzero stalk: remove the other irreducible components\nin a neighborhood of $\\eta_i$.",
+   "text": "Forget the scheme structure. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] the underlying topological space of $X$ is Noetherian, and by hypothesis its topological Krull dimension [def-kun-topological-krull-dimension] is at most $d$. The small Zariski site [def-sc-zariski-site] has exactly the open subsets of this space and jointly surjective open coverings, so an abelian sheaf $F$ on $X_{\\rm Zar}$ is an abelian sheaf on the space, and by [def-sc-topological-abelian-cohomology] the topological cohomology $H^q(X,F)$ is the group $H^q(X_{\\rm Zar},F)$ of [def-sc-zariski-cohomology]. Therefore [lem-sc-noetherian-topological-cohomology-vanishing] applies to $F$ and gives $H^q(X_{\\rm Zar},F)=0$ for every $q>d$.",
    "uses": [
-    "def-sc-zariski-flasque"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-kun-topological-krull-dimension",
+    "def-sc-zariski-site",
+    "def-sc-topological-abelian-cohomology",
+    "def-sc-zariski-cohomology",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
    ],
-   "elementary": false
-  },
-  {
-   "text": "We first treat a sheaf $G$ whose generic stalks all vanish.\nFor a closed $Z$ avoiding the $\\eta_i$, put\n$G_Z=\\ker(G\\to j_*G|_{X\\setminus Z})$.\nThen $G=\\varinjlim_ZG_Z$. Indeed a section on an open\n$V$ has an open zero locus, so its support is closed in\n$V$ and avoids every generic point in $V$.\nThe closure of this support in $X$ still avoids all\n$\\eta_i$. For $\\eta_i\\in V$, use the open neighborhood\nwhere the section vanishes. If $\\eta_i\\notin V$, then\n$V$ misses its whole irreducible component; remove the\nother finitely many components near $\\eta_i$.\nThis gives a suitable $Z$ for each section.\nFinite unions make the closed sets $Z$ directed.\nEvery such $Z$ has dimension at most $d-1$:\na chain of irreducible closed subsets of $Z$ can be\nextended by a component of $X$ strictly containing its\nlargest member.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Give $Z$ its reduced closed subscheme structure, which\nhas the same underlying Noetherian space and dimension.\nFor $i:Z\\to X$, the sheaf $G_Z$ equals $i_*i^{-1}G_Z$\non stalks. Closed direct image on topological sheaves is\nexact, as its stalk is the given stalk on $Z$ and zero\noutside $Z$; it preserves injectives since inverse image\nis exact. Consequently its cohomology on $X$ is the\ncohomology on $Z$. Induction and\n[lem-sc-zariski-filtered-cohomology] give\n$H^q(X,G)=0$ for $q>d-1$.",
-   "uses": [
-    "lem-sc-zariski-filtered-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply this result to the kernel $K$ and cokernel $C$\nof $F\\to T(F)$, and let $I$ be its image.\nSince $T(F)$ is acyclic by\n[lem-sc-zariski-flasque-acyclic], the sequence\n$0\\to I\\to T(F)\\to C\\to0$ gives\n$H^q(X,I)\\simeq H^{q-1}(X,C)$ for $q\\geq2$.\nIt is zero for $q>d$. The long exact sequence of\n$0\\to K\\to F\\to I\\to0$ now gives the same vanishing for\n$F$, proving the induction.",
-   "uses": [
-    "lem-sc-zariski-flasque-acyclic"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), statement and proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-sc-zariski-flasque",
-  "lem-sc-zariski-filtered-cohomology",
-  "lem-sc-zariski-flasque-acyclic"
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-kun-topological-krull-dimension",
+  "def-sc-zariski-site",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-cohomology",
+  "lem-sc-noetherian-topological-cohomology-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-dimension-bound.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme of finite dimension d, cohomology of every abelian Zariski sheaf vanishes in degrees q>d",
+   "results": "DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, and related derived-category declarations; no Noetherian sheaf-cohomology vanishing theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, Sheaf.H, NoetherianSpace",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_of_topologicalKrullDim|vanishing.*Noetherian in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck vanishing for arbitrary abelian sheaves on a Noetherian topological space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -94,5 +114,30 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-zariski-dimension-bound",
+  "worker": "stage1",
+  "summary": "Replaced the imported unsupported generic-point induction with the existing general Noetherian-topological vanishing theorem. The underlying space of a Noetherian scheme has the same open site, abelian sheaves, and derived global-sections cohomology as its small Zariski site, so the general theorem specializes directly to the stated bound. No new nodes were created.",
+  "blueprint": "Realizes the whole imported proof by the stronger Proposition 02UZ theorem represented by lem-sc-noetherian-topological-cohomology-vanishing; the scheme/open-site identification is the specialization step.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-noetherian-topological-cohomology-vanishing",
+    "why": "This generic Noetherian topological-space theorem supplies the dimension-bound argument; the compact-support base-change unit has no independent route for Grothendieck vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-sc-noetherian-topological-cohomology-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zdb2930",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zdb2930 (reviewer sub-agent of L); spot-checked: Read lem-sc-noetherian-topological-cohomology-vanishing (02UZ, dim<=d, any abelian sheaf), def-sc-topological-abelian-cohomology (identifies with def-sc-zariski-cohomology), both citers (lem-sc-noetherian-cohomology-above-dimension, thm-sc-finite-type-torsion-cd); tool use accepted; Mathlib grep (Grothendieck vanishing / NoetherianSpace cohomology): no match. FIX more, RETURN less: (1) C4/E7 statement 'Noetherian scheme of finite dimension d' cited no node for Noetherian scheme or dimension: now cites def-pc-scheme, def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth and def-kun-topological-krull-dimension with dim X<=d (stronger than =d, includes empty X; both citers' uses still match); stmt_deps updated, unused def-weil-pbc-scheme-conventions dropped. (2) C1 step 1 used 'underlying space is Noetherian' uncited: now cites lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (01OZ). (3) C1 step 1 identified topological and Zariski-site cohomology uncited: now cites def-sc-topological-abelian-cohomology, whose statement makes that identification; uses/proof_deps updated. Note: Second reading claimed the source was changed to Stacks 02UZ but the delivered file still has the blueprint source; left as is.; 1 file(s) fixed by the reviewer"
+ }
 }

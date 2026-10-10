@@ -2870,3 +2870,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:47 L: returned deliver/E1/lem-sc-kummer-base-change-compatibility (reviewer RETURN: Reviewer R-kbc2928 (head a6edba7df). Four faults, two needing new nodes and a statement change, so RETURN rather than FI)
 - 22:47 L: merged deliver/C1/lem-pc-projective-coherent-finiteness (reviewer FIX; first push; new nodes: 0)
 - 22:48 L: returned deliver/E1/lem-pc-tor-independent-perfect-tensor-base-change (reviewer RETURN: 1. E (false new statement), lem-pc-tor-independent-perfect-pullback-comparison: (g_X)^*P is defined as 'the ordinary mod)
+- 22:48 L: merged deliver/J1/lem-sc-zariski-dimension-bound (reviewer FIX; first push; new nodes: 0)
