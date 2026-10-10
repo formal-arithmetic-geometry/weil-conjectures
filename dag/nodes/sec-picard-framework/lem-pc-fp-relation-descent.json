@@ -26,9 +26,59 @@
   "pqf-def-coherent",
   "lem-pc-fp-module-map-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace the finite collection of modules and maps by the finitely many source and target modules and maps that occur in the specified composites. The statement already supplies finitely presented models on X_j with the prescribed base-change identifications; where a composite passes through a model only up to the identification, part (2) of the module-and-map descent statement, applied to the fixed models, lets us assume after increasing j that every map in every composite is a map between the chosen models, with the prescribed base-change identifications.",
+   "uses": [
+    "lem-pc-fp-module-map-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (finite-presentation descent of modules and morphisms)"
+   }
+  },
+  {
+   "text": "Fix one specified equality and let \\delta_j:F_j\\to G_j be the difference of its two composites, an \\mathcal{O}_{X_j}-linear map between finitely presented quasi-coherent models; pullback is additive and compatible with composition, so its base change to X is zero, and the same holds for its pullback \\delta_{j'} to X_{j'} for every j'\\ge j. Since X_i is of finite presentation over the affine S_i it is quasi-compact; choose a finite affine open cover U^1,\\dots,U^n of X_i, U^a=\\operatorname{Spec}A^a. Its inverse images in X_{j'} and X are the affine opens U^a_{j'}=\\operatorname{Spec}B^a_{j'}, B^a_{j'}=A^a\\otimes_{R_i}R_{j'}, and U^a_X=\\operatorname{Spec}B^a, B^a=A^a\\otimes_{R_i}R (fibre products of affines), and they cover. A map of sheaves vanishing on every member of an open cover vanishes; so it suffices to make \\delta_{j'} vanish on each U^a_{j'} at one stage. (The Noetherian hypothesis on the R_i is not used anywhere in this proof; it is carried only because the citing setting has it.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (affine case plus Zariski glueing, first proof)"
+   }
+  },
+  {
+   "text": "Fix a. By [lem-weil-pbc-spec-colimit-limit] applied to the directed system (R_{j'})_{j'\\ge i}, \\operatorname{Spec}(\\varinjlim R_{j'}) with the induced maps is a limit of the system (S_{j'}); by uniqueness of limits it is identified with S=\\operatorname{Spec}R compatibly with the projections, so, taking global sections, R=\\varinjlim_{j'}R_{j'} as rings. Since A^a\\otimes_{R_i}- commutes with colimits, B^a=\\varinjlim_{j'\\ge j}B^a_{j'}. On U^a_j the source F_j corresponds to a finitely generated B^a_j-module M with generators s_1,\\dots,s_n, and the target G_j to a finitely presented B^a_j-module N=\\operatorname{coker}(P:(B^a_j)^m\\to(B^a_j)^p); the pullbacks to U^a_{j'} and U^a_X correspond to M\\otimes B^a_{j'}, N\\otimes B^a_{j'}=\\operatorname{coker}(P\\otimes B^a_{j'}) and similarly over B^a (right exactness of tensor product). Lift each \\delta_j(s_k) to v_k\\in(B^a_j)^p. Vanishing of the base change to X means that the image of v_k in (B^a)^p is P c_k for some c_k\\in(B^a)^m. By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise] for the directed set \\{j'\\ge j\\} (a filtered category) and directedness, all finitely many entries of all c_k lift to some B^a_{j'}, giving \\tilde c_k; each entry of v_k-P\\tilde c_k\\in(B^a_{j'})^p maps to 0 in B^a, so by clause (2) of the same statement (comparison with 0) it vanishes in some later B^a_{j''}, and by directedness one j'' serves for all of them. Then \\delta_{j''}(s_k\\otimes1)=0 for all k, and since the s_k\\otimes1 generate M\\otimes B^a_{j''}, \\delta_{j''} vanishes on U^a_{j''}.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), via Algebra, Lemma algebra-lemma-colimit-category-fp-modules"
+   }
+  },
+  {
+   "text": "There are finitely many affines U^a and finitely many specified equalities; by directedness choose one stage above all the stages found in the previous step. Vanishing on U^a_{j''} persists after pullback to any later stage, so at this common stage every difference map vanishes on every U^a, hence on X_j for the new j, i.e. all specified equalities hold on X_j.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), common stage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +110,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-fp-complex-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-fp-relation-descent",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this finite-relation descent assertion. I checked the existing DAG and found no duplicate node. The split first descends the finitely presented modules and maps using lem-pc-fp-module-map-descent, then gives the finite affine-generator and filtered-colimit argument for each equality and synchronizes the finitely many resulting stages.",
+  "blueprint": "Realizes the ancestor Noetherian-approximation proof sentence on finite relations among descended differential data (Tag 01ZR).",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-frd2748",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-frd2748 (reviewer sub-agent of L); spot-checked: Statement matches Tag 01ZR(3) and the citer lem-pc-fp-complex-descent step 3 (d^{r+1}d^r=0 on fixed models). FIX more, RETURN less: (1) C1/E: step 2 said the images of generators are 'coefficients zero in the filtered colimit ring R' - they are elements of the target module over an affine coordinate ring, not of R, and R=colim R_j was uncited; rewrote as steps 2-4: finite affine cover, R=colim R_j via lem-weil-pbc-spec-colimit-limit, B=colim B_j by tensor, presentation of the target (finite presentation of G used, only finite generation of F), lifts/vanishing via lem-pc-filtered-colimit-commrings-elementwise (1)(2), common stage; both cross-unit nodes declared as generic tool_uses. (2) E: Noetherian hypothesis now declared unused. Step 1 kept (models are given; part (2) only aligns maps). Hom-colimit 05N7 not needed in the elementwise route.; 1 file(s) fixed by the reviewer"
+ }
 }

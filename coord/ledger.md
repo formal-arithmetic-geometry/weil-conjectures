@@ -2779,3 +2779,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:09 L: returned deliver/H1/def-nagata-morphism-descent (reviewer RETURN: Reviewer R-nmd2748. (1) E/C4: the stage lambda_phi is not a defined finite list ('include the finitely many pairwise-ove)
 - 22:09 L: merged deliver/F1/lem-pc-perfect-two-out-of-three (reviewer FIX; first push; new nodes: 0)
 - 22:09 L: merged deliver/G1/lem-sc-pic-affine-quotient (reviewer FIX; first push; new nodes: 0)
+- 22:10 L: merged deliver/J1/lem-pc-fp-relation-descent (reviewer FIX; first push; new nodes: 0)
