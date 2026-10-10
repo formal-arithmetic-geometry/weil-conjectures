@@ -73,6 +73,30 @@ The 16 chapter files and the 389 unit files of the blueprint are records beside 
 
 A node's route is its unit and the units its unit cites, transitively. The route is about proofs: a step of a statement may use a statement of another unit only if the node's unit cites that unit; definitions, Mathlib leaves and nodes whose Lean is finished (`closed`) are notions or tools, not route. `tools/check_dag.py` reports a unit whose `realized` fields leave a step with no node or a cited unit unreached, and a reviewed statement whose proof uses a statement outside its route; `tools/review_split.py` reports the same for one item, and the lead rejects the split (§5) unless the departure is an established error or the cited statement is a generic tool lemma used as a black box (`SETUP.md`), which the lead records in the node's `tool_uses`.
 
+### Blueprint references (decision of the human, 2026-10-10)
+
+The DAG refers to the existing blueprint node by node, so that the two can be read against each other. Every node carries one field:
+
+```
+"blueprint": {
+  "is":      the blueprint node this node is: for a node imported from the blueprint (it carries `blueprint_kind`) its own id; else null.
+  "from":    null for an imported node; for a node created in a split:
+             {"node":  the blueprint node whose proof it serves: the item it was created for if that is a blueprint node, else the
+                       nearest blueprint ancestor found by following `created.item`;
+              "place": the step, clause or sentence of that blueprint node's proof text which this node states or makes precise
+                       (name the place in the blueprint proof, e.g. "proof, second paragraph: 'by Lemma 01YE ...'"; the backfill wrote
+                       the step of the ancestor's split, or "unspecified" where it could not read it off);
+              "via":   the created nodes between this node and that blueprint node, nearest first ([] when created for it)},
+  "same_as": the blueprint nodes anywhere in the blueprint (every chapter, also outside the targets' reach) that state the same thing
+             in another form, found by search; [] when the search found none; null only on a node nobody has searched for yet.
+}
+```
+
+- **Before creating a node**, search the whole imported blueprint (every node with a blueprint id, every chapter, not only the reach) for a node with that statement: `tools/blueprint_refs.py search <words or tag>`, and `grep -rl` on `dag/nodes`. If one exists, cite it and create nothing. Record a blueprint node under `same_as` only when it states the same thing in a different form and the new node is still needed.
+- **Every new node** gets `from` with the exact place and `same_as` with the result of the search. `tools/blueprint_refs.py ancestor <item>` prints the `from.node` it must carry.
+- **The item** of a split gets its `from.place` filled if it was "unspecified" and its `same_as` searched, and the `split_report` has an entry `blueprint`: which places of the blueprint node's proof the item's steps realize.
+- The field was backfilled mechanically on 2026-10-10 by `tools/blueprint_refs.py backfill` (`is` for the imported nodes; `from` through `created.item`, with the place read off the ancestor's split). The reverse index `coord/blueprint-index.tsv` (blueprint node id → the DAG nodes that are it, come from its proof, or state the same) is regenerated with the queue (`tools/queue.py write`). `tools/check_dag.py` requires the field on every node; `tools/review_split.py` and `tools/preflight_delivery.py` check the item and the new nodes strictly.
+
 ## 7. After this stage
 
 The DAG keeps changing while statements and proofs are formalized. Nodes are added and revised under the same rules. A node is updated from Lean twice: when its statement is formalized, with the module, the declaration and the Lean statement; when its proof is done, with the proof dependencies the Lean proof uses.

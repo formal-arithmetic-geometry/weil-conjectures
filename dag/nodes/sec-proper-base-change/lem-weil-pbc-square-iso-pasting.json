@@ -1,5 +1,16 @@
 {
  "id": "lem-weil-pbc-square-iso-pasting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-exchange-identity-pasting",
+   "place": "step 2, 3, 4 of its split (source: Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mat)",
+   "via": [
+    "lem-weil-pbc-derived-square-iso-pasting"
+   ]
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Identity and pasting laws of the sheaf-level square isomorphism",
  "statement": "Let $u^{-1}$ denote the inverse image functors on abelian sheaves on small etale sites [def-weil-pbc-inverse-image], with the composition isomorphisms $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ (for $u:Y\\to X$, $v:Z\\to Y$) and the identity isomorphisms $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of [lem-weil-pbc-inverse-image-composition]. For a cartesian square $\\square=(f,f',g,g',\\alpha)$ [def-weil-pbc-cartesian-square] with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$, let $\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ be its specified isomorphism, namely $\\theta_\\square=c_{f,g'}^{-1}\\circ c_{g,f'}$, through $(g\\circ f')^{-1}=(f\\circ g')^{-1}$ (the two composites are the same morphism $X'\\to Y$; this is the definition of the source Lean `AlgebraicGeometry.Etale.squareUpperStarIso`, attached to [def-weil-pbc-cartesian-square]). Outer rectangles of pasted cartesian squares are cartesian [lem-weil-pbc-cartesian-square-pasting]. Then:\n\n1. (Identity square.) For $f:X\\to Y$ and $\\square_f=(f,f,\\mathrm{id}_Y,\\mathrm{id}_X)$: $\\theta_{\\square_f}=(e_X^{-1}f^{-1})\\circ(f^{-1}e_Y):f^{-1}\\mathrm{id}_Y^{-1}\\to f^{-1}\\to\\mathrm{id}_X^{-1}f^{-1}$.\n2. (Horizontal pasting.) For $\\square_1=(f,f',g,g')$, a cartesian square $\\square_2=(f',f'',h,h')$ with $h:Y''\\to Y'$, $h':X''\\to X'$, $f'':X''\\to Y''$, and the outer rectangle $\\square_2\\cdot\\square_1=(f,f'',g\\circ h,g'\\circ h')$:\n$$\\theta_{\\square_2\\cdot\\square_1}\\circ(f''^{-1}c_{g,h})=(c_{g',h'}f^{-1})\\circ(h'^{-1}\\theta_{\\square_1})\\circ(\\theta_{\\square_2}g^{-1}):\\ f''^{-1}h^{-1}g^{-1}\\to(g'h')^{-1}f^{-1}.$$\n3. (Vertical pasting.) For $\\square_1$ as above, a cartesian square $\\square_3=(e,e',g',g'')$ with $e:W\\to X$, $e':W'\\to X'$, $g'':W'\\to W$, and the outer rectangle $\\square_1\\circ\\square_3=(f\\circ e,f'\\circ e',g,g'')$:\n$$\\theta_{\\square_1\\circ\\square_3}\\circ(c_{f',e'}g^{-1})=(g''^{-1}c_{f,e})\\circ(\\theta_{\\square_3}f^{-1})\\circ(e'^{-1}\\theta_{\\square_1}):\\ e'^{-1}f'^{-1}g^{-1}\\to g''^{-1}(fe)^{-1}.$$\n(Only the equalities $fg'=gf'$ of the squares enter, not that they are cartesian.)",

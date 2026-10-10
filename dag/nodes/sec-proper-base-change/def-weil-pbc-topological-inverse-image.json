@@ -1,5 +1,18 @@
 {
  "id": "def-weil-pbc-topological-inverse-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
+   "via": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ]
+  },
+  "same_as": null
+ },
  "kind": "definition",
  "title": "Direct image, presheaf inverse image and inverse image along a continuous map, with units",
  "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $\\mathcal C$ be the category of sets, the category of abelian groups or the category of commutative rings. (1) For a presheaf $\\mathcal F$ on $X$ with values in $\\mathcal C$, the *direct image* $f_*\\mathcal F$ is the presheaf $V\\mapsto\\mathcal F(f^{-1}V)$ on $Y$, with the restriction maps of $\\mathcal F$; a morphism $\\varphi:\\mathcal F\\to\\mathcal F'$ gives $f_*\\varphi$ with $(f_*\\varphi)_V=\\varphi_{f^{-1}V}$; if $\\mathcal F$ is a sheaf, so is $f_*\\mathcal F$. (2) For a presheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$, the *presheaf inverse image* $f_p\\mathcal G$ is the presheaf on $X$ with $f_p\\mathcal G(U)=\\varinjlim_{V\\supseteq f(U)}\\mathcal G(V)$, the colimit in $\\mathcal C$ [def-weil-pbc-category-colimit] over the open subsets $V\\subseteq Y$ containing $f(U)$ ordered by reverse inclusion (a directed set, closed under finite intersections), with coprojections $\\iota^U_V:\\mathcal G(V)\\to f_p\\mathcal G(U)$; for opens $U'\\subseteq U$ of $X$ the restriction map $f_p\\mathcal G(U)\\to f_p\\mathcal G(U')$ is the unique morphism sending $\\iota^U_V$ to $\\iota^{U'}_V$ (every $V\\supseteq f(U)$ contains $f(U')$); a morphism $u:\\mathcal G\\to\\mathcal G'$ gives $f_pu$ with $(f_pu)_U\\circ\\iota^U_V=\\iota'^U_V\\circ u_V$. Since $f(f^{-1}V)\\subseteq V$, the maps $i_{\\mathcal G,V}=\\iota^{f^{-1}V}_V:\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ form a morphism of presheaves $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$, natural in $\\mathcal G$; it is the unit of an adjunction $f_p\\dashv f_*$ on presheaves with values in $\\mathcal C$. (3) For a sheaf $\\mathcal G$ on $Y$ with values in $\\mathcal C$, the *inverse image* is the sheafification $\\theta_{\\mathcal G}:f_p\\mathcal G\\to f^{-1}\\mathcal G:=(f_p\\mathcal G)^\\#$ [def-weil-pbc-sheafification], and for a morphism of sheaves $u:\\mathcal G\\to\\mathcal G'$, $f^{-1}u$ is the unique morphism of sheaves with $f^{-1}u\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal G'}\\circ f_pu$. The functor $f^{-1}$ is left adjoint to $f_*$ on sheaves with values in $\\mathcal C$, by the composite bijection $\\mathrm{Hom}(f^{-1}\\mathcal G,\\mathcal F)=\\mathrm{Hom}(f_p\\mathcal G,\\mathcal F)=\\mathrm{Hom}(\\mathcal G,f_*\\mathcal F)$, and the unit of this adjunction is $\\eta_{\\mathcal G}=f_*(\\theta_{\\mathcal G})\\circ i_{\\mathcal G}:\\mathcal G\\to f_*f^{-1}\\mathcal G$, that is, $\\eta_{\\mathcal G,V}=\\theta_{\\mathcal G,f^{-1}V}\\circ\\iota^{f^{-1}V}_V:\\mathcal G(V)\\to(f^{-1}\\mathcal G)(f^{-1}V)$ for $V\\subseteq Y$ open.",

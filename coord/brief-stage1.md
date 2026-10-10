@@ -27,7 +27,8 @@ Read also the slopmaster2 blueprint text for the node when it differs (`literatu
 - `proof_origin`: `{"by": "document", "document": <path under literature/>, "place": <theorem/section/page>}` when the proof follows a document in `literature/`; `{"by": "agent", ...}` when you wrote it (§4). The blueprint itself is agent-written: a proof that follows only the blueprint is `"by": "agent"` with the blueprint file as document.
 - `pointers`: leave as is.
 - `status`: `"split"` when done. Do not write `reviewed`: the lead does.
-- `split_report`: `{"date": "2026-10-09", "item": <your id>, "worker": "stage1", "summary": <one paragraph of what you checked and changed>}`.
+- `split_report`: `{"date": "2026-10-09", "item": <your id>, "worker": "stage1", "summary": <one paragraph of what you checked and changed>, "blueprint": <which places of the blueprint node's proof (the blueprint node in your item's `blueprint.is` or `blueprint.from.node`) your steps realize>}`.
+- `blueprint` (§7 below): if `from.place` is "unspecified", fill it; search the whole blueprint for your item's statement and write `same_as` (`[]` if none).
 
 Delete nothing else; keep every `blueprint_*` field and `import_flags` untouched (the review reads them). Keep the JSON layout (`json.dump(..., indent=1, ensure_ascii=False)` and a final newline).
 
@@ -44,8 +45,11 @@ mathlib_match null | {"declaration": name, "file": path under Mathlib/, "how": "
 status "unsplit" | "mathlib",
 merged_into null,
 created {"by": "worker", "item": <your item id>, "date": "2026-10-09"},
+blueprint {"is": null, "from": {"node": <tools/blueprint_refs.py ancestor <your item>>, "place": <the step, clause or sentence of that blueprint node's proof this node serves>, "via": <its via list, see §7>}, "same_as": [<blueprint nodes stating the same in another form>] or []}  (key placed right after "id")
 lean_audit {"master": {"state": "none"}, "slopmaster2": {"state": "none"}}  (or sorry_here with decls, §1)
 ```
+
+Before creating it, search the whole blueprint as well (§7): if a blueprint node states it, cite that node and create nothing.
 
 A Mathlib leaf (`status` `mathlib`) has a `mathlib_match` and no proof. Any other new node is `unsplit` and joins the queue; do not split it.
 
@@ -72,3 +76,12 @@ Write your new nodes first and your item last, each file in one write, so that a
 3. `WANTED:` lines;
 4. what was wrong in the node, the blueprint, or the brief (statement errors, steps that were not proofs, dependencies the text cites without using, Lean that states something else);
 5. what you could not finish, and why.
+
+## 7. Blueprint references (rule of 2026-10-10, `stages/1-dag.md` §6)
+
+Every node carries `"blueprint": {"is", "from", "same_as"}`: `is` = its own id for a node imported from the blueprint, else null; `from` = for a created node `{"node": <nearest blueprint ancestor through created.item>, "place": <the step, clause or sentence of that blueprint node's proof this node states or makes precise>, "via": [<created nodes in between, nearest first>]}`; `same_as` = blueprint nodes anywhere (all chapters, also outside the reach) stating the same thing in another form, `[]` if the search found none.
+
+1. Before creating a node, search the whole blueprint: `python3 tools/blueprint_refs.py search <key words or tag>` (it reads every node with a blueprint id) and `grep -rl` on `dag/nodes`. If a blueprint node states it, cite it and create nothing.
+2. A new node's `from.node` is what `python3 tools/blueprint_refs.py ancestor <your item>` prints; its `via` is the item's own `via` with the item in front when the item is not a blueprint node (`[]` when it is). Write the exact place in the blueprint node's proof text.
+3. Your item: fill `from.place` if it says "unspecified", write `same_as`, and add `blueprint` to the `split_report`.
+4. `tools/review_split.py` fails without these.

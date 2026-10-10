@@ -126,6 +126,10 @@ def main() -> int:
             for d, m, n in held:
                 f.write(f"| `{m}` | {d} | {n} |\n")
     print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)})")
+    if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
+        import blueprint_refs
+        served, on, same = blueprint_refs.index()
+        print(f"wrote coord/blueprint-index.tsv: blueprint nodes on the reach with a DAG node from their proof {served} of {on}; new nodes the same as a blueprint node {same}")
     return 0
 
 

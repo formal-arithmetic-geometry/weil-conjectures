@@ -23,7 +23,12 @@ Checks (roles/remote-lead.md §4-5, the returns of 2026-10-09):
   6. a Stacks tag (0XYZ) or section number (a.b.c) written in a statement or a step is carried
      by a cited node (or by the node itself); a step that only quotes a tag fails;
   7. tools/review_split.py <item> passes and tools/check_dag.py reports no cycle, route or
-     dependency error.
+     dependency error;
+  8. blueprint references (stages/1-dag.md §6, rule of 2026-10-10): the item and every new node
+     carry the `blueprint` field; `from.place` is filled (not "unspecified"); `same_as` is a list
+     (the whole blueprint was searched with tools/blueprint_refs.py search); a new node's
+     `from.node` is the item's nearest blueprint ancestor; the item's split_report has a
+     `blueprint` entry naming the places of the blueprint proof the steps realize.
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -272,6 +277,24 @@ def main() -> int:
         for t in sorted(tags | secs):
             if not carried(t, own) and not any(carried(t, c) for c in cited):
                 f(f"{'the item' if nid == item else 'new node ' + nid}: the statement quotes {t}, which neither its source nor a cited node carries")
+
+    # 8. blueprint references (stages/1-dag.md §6)
+    if not dirty:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import blueprint_refs as br
+        bnodes, _ = br.load()
+        strict = {item, *new_nodes}
+        for e in br.errors(bnodes, strict):
+            if any(e.startswith(f"blueprint: {k} ") or e.startswith(f"blueprint: {k}:") for k in strict):
+                f(e + " (coord/delivery-errors.md B9)")
+        anc = br.ancestor_for_item(item, bnodes)
+        for nid in new_nodes:
+            fr = ((bnodes.get(nid) or {}).get("blueprint") or {}).get("from") or {}
+            if isinstance(fr, dict) and fr.get("node") != anc:
+                f(f"new node {nid}: blueprint.from.node is {fr.get('node')!r}; the item's nearest blueprint ancestor is {anc!r} (B9)")
+        sr = d.get("split_report")
+        if not (isinstance(sr, dict) and sr.get("blueprint")) and not (isinstance(sr, str) and "blueprint" in sr.lower()):
+            f("the item's split_report has no 'blueprint' entry naming the places of the blueprint proof its steps realize (B9)")
 
     # 7. the scripts
     if not dirty:

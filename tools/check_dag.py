@@ -16,7 +16,11 @@ Checked:
              filled has a node for its statement and every step and reaches the units it cites;
   route      a split and reviewed statement whose proof uses a statement of a unit its unit does not cite (stages/1-dag.md §7);
   reach      a node is reached from a target, or from a former target (`target_former`, kept so that the subtree of an
-             earlier target is not reported when the target changes), or carries `unreachable` in `import_flags`, never both.
+             earlier target is not reported when the target changes), or carries `unreachable` in `import_flags`, never both;
+  blueprint  every node carries the `blueprint` field (is, from, same_as) of stages/1-dag.md §6, well formed: `is` is the
+             node's own id exactly for a node imported from the blueprint, `from` names a blueprint node and a place,
+             `same_as` lists blueprint nodes (tools/blueprint_refs.py; new nodes and split items are checked strictly by
+             tools/review_split.py and tools/preflight_delivery.py).
 """
 from __future__ import annotations
 import collections, json, pathlib, sys
@@ -126,6 +130,8 @@ def main() -> int:
 
     import units as un  # noqa: E402
     errors += un.check(nodes, verbose=False)
+    import blueprint_refs as br  # noqa: E402
+    errors += br.errors(br.load()[0])
     kinds = collections.Counter(e.split(":")[0] for e in errors)
     for e in errors:
         print(e)

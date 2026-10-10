@@ -1,5 +1,23 @@
 {
  "id": "def-weil-pbc-formal-glueing-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
  "kind": "definition",
  "title": "The category of formal glueing data Glue(R -> S, f_1, ..., f_t)",
  "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $f_1,\\dots,f_t\\in R$. Notation: for an $R$-module $P$ and $f\\in R$, $P_f$ is the localization of $P$ at $f$ and $h_f:P_f\\to Q_f$, $p/f^e\\mapsto h(p)/f^e$, the localization of an $R$-linear map $h:P\\to Q$ [def-weil-pbc-module-localization] (for the multiplicative set $\\{1,f,f^2,\\dots\\}$, so $P_f$ is the module of [def-weil-pbc-module-localization-away]); $R_f$ is the localized ring [def-weil-ring-localization-away]. For an $S$-module $P$, $P_f$ is its localization as an $R$-module, made an $S$-module by the localizations $(s\\cdot)_f$ of the multiplications by the elements $s\\in S$ (that these form an $S$-module structure, and that $h_f$ is $S$-linear when $h$ is, is clause (1) of the statement recorded in `pointers`). $P\\otimes_RS$ and $h\\otimes_RS$ are the base changes [def-weil-module-base-change]. For an $R$-module $P$ and $f,g\\in R$ two canonical $R$-linear maps are used: $\\sigma^P_{f,g}:(P_f)_g\\to(P_g)_f$, $(p/f^a)/g^b\\mapsto(p/g^b)/f^a$, and $c^P_f:(P\\otimes_RS)_f\\to P_f\\otimes_RS$, $(p\\otimes s)/f^e\\mapsto(p/f^e)\\otimes s$ (an $S$-linear map); $\\sigma^P_{f,g}$ is the $R$-linear map with $(p/1)/1\\mapsto(p/1)/1$ and $c^P_f$ the $R$-linear map with $(p\\otimes s)/1\\mapsto(p/1)\\otimes s$ (that each exists, is unique with this property and is given by the displayed formula, and that $c^P_f$ is $S$-linear, are clauses (2) and (3) of the statement recorded in `pointers`; they are made from the universal property of the localization map $P\\to P_f$ [def-weil-pbc-module-localization-away]).\n\nThe category $\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ of *glueing data* has as objects the systems $\\mathbf M=(M',(M_i)_{i},(\\alpha_i)_{i},(\\alpha_{ij})_{i,j})$, $1\\le i,j\\le t$, where $M'$ is an $S$-module, $M_i$ is an $R_{f_i}$-module (regarded as an $R$-module through $R\\to R_{f_i}$), $\\alpha_i:M'_{f_i}\\to M_i\\otimes_RS$ is an $S$-linear isomorphism and $\\alpha_{ij}:(M_i)_{f_j}\\to(M_j)_{f_i}$ is an $R$-linear isomorphism, such that\n(a) $(\\alpha_{ij}\\otimes_RS)\\circ c^{M_i}_{f_j}\\circ(\\alpha_i)_{f_j}=c^{M_j}_{f_i}\\circ(\\alpha_j)_{f_i}\\circ\\sigma^{M'}_{f_i,f_j}$ as maps $(M'_{f_i})_{f_j}\\to(M_j)_{f_i}\\otimes_RS$, for all $i,j$; and\n(b) (cocycle condition) $(\\alpha_{jk})_{f_i}\\circ\\sigma^{M_j}_{f_i,f_k}\\circ(\\alpha_{ij})_{f_k}=\\sigma^{M_k}_{f_i,f_j}\\circ(\\alpha_{ik})_{f_j}\\circ\\sigma^{M_i}_{f_j,f_k}$ as maps $((M_i)_{f_j})_{f_k}\\to((M_k)_{f_j})_{f_i}$, for all $i,j,k$.\nA morphism $\\mathbf M\\to\\mathbf N=(N',(N_i),(\\beta_i),(\\beta_{ij}))$ is a family $(u',(u_i)_i)$ of an $S$-linear map $u':M'\\to N'$ and $R$-linear maps $u_i:M_i\\to N_i$ such that $\\beta_i\\circ u'_{f_i}=(u_i\\otimes_RS)\\circ\\alpha_i$ and $\\beta_{ij}\\circ(u_i)_{f_j}=(u_j)_{f_i}\\circ\\alpha_{ij}$ for all $i,j$. Composition and identities are componentwise: $(v',(v_i))\\circ(u',(u_i))=(v'\\circ u',(v_i\\circ u_i))$ and $\\mathrm{id}_{\\mathbf M}=(\\mathrm{id}_{M'},(\\mathrm{id}_{M_i}))$; $\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ is a category [def-nagata-category]. (An $R$-linear map between modules on which $f$ acts bijectively is $R_f$-linear, so the $u_i$, $\\alpha_i$, $\\alpha_{ij}$ are linear over $R_{f_i}$, $S_{f_i}$, $R_{f_if_j}$ respectively, as in the source.) (Stacks writes conditions (a) and (b) as $\\alpha_{ij}\\circ\\alpha_i=\\alpha_j$ and $\\alpha_{jk}\\circ\\alpha_{ij}=\\alpha_{ik}$, leaving the maps $c$ and $\\sigma$ implicit.)",

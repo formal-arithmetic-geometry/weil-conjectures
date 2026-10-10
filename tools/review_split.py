@@ -11,6 +11,10 @@ fields and import_flags of the committed version are unchanged (read from git HE
 The item's proof dependencies stay inside its unit's route, and the unit record is read (stages/1-dag.md §7).
 For each node whose `created.item` is the item: id equals the file name, kind, statement, source and `created` are present,
 at least one Mathlib search with a verdict, a `mathlib` status has a match, every id cited exists.
+Blueprint references (stages/1-dag.md §6, rule of 2026-10-10): the item and every new node carry a well-formed `blueprint`
+field with `from.place` filled (not "unspecified") and `same_as` a list (the whole blueprint was searched); a new node's
+`from.node` is the item's nearest blueprint ancestor; the item's `split_report` has a `blueprint` entry naming the places of
+the blueprint proof its steps realize.
 It prints what it finds and changes nothing; the mathematical review is the lead's.
 """
 from __future__ import annotations
@@ -131,6 +135,19 @@ def main() -> int:
             if st == "unsplit" and n.get("mathlib_match"):
                 errs.append(f"new node {i}: has a match but is unsplit")
             check_ids(n, nodes, g.merged, f"new node {i}", errs)
+        # blueprint references (stages/1-dag.md §6)
+        import blueprint_refs as br
+        bnodes, _ = br.load()
+        strict = {item, *new}
+        errs += [e for e in br.errors(bnodes, strict) if any(e.startswith(f"blueprint: {k} ") or e.startswith(f"blueprint: {k}:") for k in strict)]
+        anc = br.ancestor_for_item(item, bnodes)
+        for i in new:
+            fr = ((bnodes.get(i) or {}).get("blueprint") or {}).get("from") or {}
+            if isinstance(fr, dict) and fr.get("node") != anc:
+                errs.append(f"blueprint: new node {i}: from.node is {fr.get('node')!r}, but the item's nearest blueprint ancestor is {anc!r}")
+        sr = d.get("split_report")
+        if isinstance(sr, dict) and not sr.get("blueprint"):
+            errs.append("blueprint: split_report has no 'blueprint' entry naming the places of the blueprint proof the steps realize")
         print(f"{item}: {'PASS' if not errs else 'FAIL'}; {len(new)} new nodes" + (f" ({', '.join(new)})" if new else "") + ("; " + "; ".join(notes) if notes else ""))
         for e in errs:
             print("  " + e)
