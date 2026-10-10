@@ -21,9 +21,39 @@
  "stmt_deps": [
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-picard-closure-specialization] to j and s. We obtain z in Z with j(z) specializing to s.",
+   "uses": [
+    "lem-sc-picard-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma morphisms-lemma-reach-points-scheme-theoretic-image, Tag 02JQ"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-picard-valuation-probe-specializes] to j, z, and s. Its valuation square supplies A, K, g, and h with the asserted generic commutativity and with the closed point mapped to s.",
+   "uses": [
+    "lem-sc-picard-valuation-probe-specializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma morphisms-lemma-reach-points-scheme-theoretic-image, Tag 02JQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-closure-specialization",
+  "lem-sc-picard-valuation-probe-specializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma morphisms-lemma-reach-points-scheme-theoretic-image, Tag 02JQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,15 +75,46 @@
    "results": "none in Mathlib source; project declaration exists only in WeilConjectures/Compactification/ValuativeCriterion.lean",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "valuation ring probe closure range quasi compact immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed-valuation-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-valuation-probe-closure",
+  "worker": "stage1",
+  "summary": "Split Tag 02JQ into the exact specialization theorem for quasi-compact morphisms and the exact valuation-probe construction from a specialization; the item composes these two closed project declarations.",
+  "blueprint": "Realizes the theorem-of-the-cube proof sentence that Tag 02JQ supplies a valuation ring through the source with closed point at a chosen closure point.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-picard-valuation-probe-specializes",
+    "why": "This closed declaration is the valuation-ring construction from a specialization and belongs to the Nagata compactification route; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-picard-valuation-probe-specializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pvp3154",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pvp3154 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-sc-picard-closure-specialization (qc morphism, s in closure => some j(z) specializes to s), stated exactly by sorry-free exists_specializes_of_mem_closure_range [QuasiCompact h] (read lines 66-85); qc hypothesis of item used there. Step 2 cites lem-sc-picard-valuation-probe-specializes, stated exactly by sorry-free ValuativeCommSqWithPt.ofSpecializes (read 90-117): K=kappa(t), i1=fromSpecResidueField t lands in Z directly, so no immersion residue-field argument is needed; closedPoint_eq gives s. Neither child is a duplicate: grep of dag for specializ/valuation finds only Nagata dense-source probe (stronger hyps, uses ofSpecializes only as a helper decl) and pbc spectral/proconstructible closure lemma (different setting). Citer lem-sc-picard-locus-closed-valuation-criterion step 1 uses exactly the item's clause. Second reading: no fault missed found."
+ }
 }
