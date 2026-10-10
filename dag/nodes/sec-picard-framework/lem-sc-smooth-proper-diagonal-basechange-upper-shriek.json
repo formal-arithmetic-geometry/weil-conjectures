@@ -26,9 +26,40 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the general proper-flat base-change theorem [lem-sc-proper-flat-right-adjoint-basechange] with Y'=X, g=f, and with the original morphism f:X\\to S. The resulting cartesian square is P=X\\times_S X with g_X=\\operatorname{pr}_1 and f'=\\operatorname{pr}_2. The hypotheses hold because S and X are Noetherian, while the given f is proper, flat, and of finite presentation.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2P, proof of Lemma 48.12.8, cartesian square and invocation of Lemma 48.12.4 (Tag 0AAB)"
+   }
+  },
+  {
+   "text": "Under this specialization, a'=b is the chosen right adjoint to R(\\operatorname{pr}_2)_*, g^*=Lf^*, and g_X^*=L\\operatorname{pr}_1^*. Evaluating the canonical base-change isomorphism of Step 1 at K=\\mathcal O_S, and using the canonical structure-sheaf pullback isomorphism [lem-weil-pbc-module-pullback-structure-sheaf] for f, gives Lf^*\\mathcal O_S\\cong\\mathcal O_X and hence the canonical isomorphism b(\\mathcal O_X)\\cong L\\operatorname{pr}_1^*a(\\mathcal O_S).",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2P, proof of Lemma 48.12.8, third equality and Equation 48.12.8.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-right-adjoint-basechange",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2P, proof of Lemma 48.12.8, invoking Lemma 48.12.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +91,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-diagonal-pushforward-structure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+  "worker": "stage1",
+  "summary": "Split the self-product base-change statement from Stacks Tag 0E2P by creating one strictly smaller statement-only node for the general Tag 0AAB base-change theorem, then specializing it to Y'=X and K=O_S. The cartesian square and projection orientation are written explicitly.",
+  "blueprint": "The steps realize the proof of lem-sc-finite-duality used through the diagonal counit item: the third equality b(O_X) = L pr_1^* a(O_S) obtained from the Tag 48.12.4 base-change formula.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dbu1815",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbu1815 (reviewer sub-agent of L); spot-checked: New node = Stacks 0AAB exactly (qcqs bases, f proper flat fp, a'(Lg^*K)=Lg_X^*a(K) on D_QCoh); no duplicate in DAG (grep 0AAB/48.12.4), not in Mathlib (no D_QCoh twisted inverse image); stmt_deps only defs, so no cycle with siblings. Step 1: Y'=X, g=f gives X'=X x_S X with g_X=pr_1, f'=pr_2, Noetherian implies qcqs; flatness of the original f is the 0AAB hypothesis (no separate Tor-independence needed), cited in Step 1. Step 2: a'=b, Lf^*O_S=f^*O_S=O_X via structure-sheaf node; target matches item. No repairs."
+ }
 }

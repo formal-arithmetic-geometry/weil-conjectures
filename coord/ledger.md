@@ -2220,3 +2220,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:14 L: merged deliver/K1/def-sc-group-scheme (reviewer PASS; first push; new nodes: 0)
 - 18:14 L: merged deliver/K1/lem-sc-smooth-proper-diagonal-koszul-regular (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 18:15 L: merged deliver/F1/lem-sc-finite-sheafhom-affine-adjoint (reviewer FIX; first push; new nodes: 2)
+- 18:15 L: merged deliver/G1/lem-sc-smooth-proper-diagonal-basechange-upper-shriek (reviewer PASS; first push; new nodes: 1)
