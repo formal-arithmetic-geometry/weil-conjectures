@@ -1,17 +1,17 @@
 # Work queue
 
-871 items; claim with `tools/claim.py next <group> [--stage N]`.
+873 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (77)
+## Stage 1: nodes to split (79)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
+| `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-derived-pullback-tensor-product` | 3019 | none |
 | `lem-pc-dualizable-evaluation-criterion` | 3019 | none |
 | `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
@@ -21,7 +21,9 @@
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
 | `lem-sc-affine-perfect-koszul-principal-unit` | 3021 | none |
-| `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
+| `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
+| `lem-sc-affine-truncation-kernel-finite-locally-free` | 3022 | none |
+| `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -883,7 +885,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1633 nodes that wait for a statement dependency, 115 nodes that wait for stage 1.
+Not open yet: 1635 nodes that wait for a statement dependency, 117 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
