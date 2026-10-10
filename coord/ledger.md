@@ -1195,3 +1195,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:55 L: accepted lem-weil-pbc-codimension-one-analytically-unramified (032Z, 7 steps, 0 new; the step 'q lies over p' left implicit in the source is written out).
 - 09:58 L: accepted lem-weil-pbc-associated-primes-flat-base-change (0312; new nodes for 02M3 and 0310 (1) over any ring, leaves for 0310 (2) and 00L0).
 - 09:58 L: accepted lem-weil-pbc-coherent-support-union-exact-sequence (01YD, 7 steps; new composed leaf for open subschemes of Noetherian schemes).
+- 09:59 L: accepted lem-weil-pbc-depth-le-dim-associated-prime (0BK4, 7 steps, 0 new).
