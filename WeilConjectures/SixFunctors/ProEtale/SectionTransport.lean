@@ -95,14 +95,17 @@ lemma upperStarConstantSheafIso_hom_app_unit {Y Z : Scheme.{u}} (g : Z ⟶ Y)
   rw [show ((constantSheafAdjunction Y).comp (upperStarLowerStarAdjunction _ g)).leftAdjointUniq
     ((constantSheafAdjunction Z).ofNatIsoRight (sectionsLowerStarIso g))
       = upperStarConstantSheafIso g from rfl] at h
-  simp only [Adjunction.comp_homEquiv, Equiv.trans_apply] at h
-  rw [constantSheafAdjunction_homEquiv_apply, Adjunction.homEquiv_unit] at h
+  rw [Adjunction.comp_homEquiv] at h
+  erw [Equiv.trans_apply] at h
+  erw [constantSheafAdjunction_homEquiv_apply] at h
+  erw [Adjunction.homEquiv_unit] at h
   have hU := Adjunction.homEquiv_ofNatIsoRight_apply (constantSheafAdjunction Z)
     (sectionsLowerStarIso g) (𝟙 ((constantSheaf _ _).obj E))
   rw [Adjunction.homEquiv_id, Adjunction.homEquiv_id] at hU
   rw [hU] at h
   refine h.trans ?_
-  rw [ConcreteCategory.comp_apply, constantSheafAdjunction_unit_app_apply]
+  rw [ConcreteCategory.comp_apply]
+  erw [constantSheafAdjunction_unit_app_apply]
   exact constSection_map E _ e
 
 /-- For `V ∈ X_proét` with structure morphism `g`, the sections of a sheaf `G` over `V` are the
