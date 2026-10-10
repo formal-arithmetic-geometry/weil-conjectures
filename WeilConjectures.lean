@@ -1385,6 +1385,7 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.LowerShriek

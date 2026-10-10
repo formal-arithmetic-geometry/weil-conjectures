@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 
@@ -35,6 +36,10 @@ derived functor (`CategoryTheory.Endofunctor.IsoAlgebra.mapDerivedCategoryTwistC
   twists.
 - `CategoryTheory.Endofunctor.IsoAlgebra.mapDerivedCategoryTwistCompIso`: so do their total right
   derived functors.
+- `CategoryTheory.Endofunctor.IsoAlgebra.mapDerivedCategoryTwistCompRightDerivedFunctorIso` and
+  `CategoryTheory.Endofunctor.IsoAlgebra.mapDerivedCategoryTwistCompMapDerivedCategoryIso`: the
+  total right derived functor of an additive functor, and the functor induced by an exact
+  functor, commute with twists if the functor does.
 -/
 
 @[expose] public section
@@ -168,6 +173,33 @@ variable {C : Type u} [Category.{v} C] [Abelian C] {F : C ⥤ C} [F.Additive]
 instance : (twist α).Additive :=
   IsoAlgebra.additive_mapOfNatIso _
 
+/-- **Right derived functors commute with twists.** If an additive functor
+`Φ : IsoAlgebra F ⥤ IsoAlgebra G` commutes with the twists by `α` and `β`, so does its total
+right derived functor. -/
+noncomputable def mapDerivedCategoryTwistCompRightDerivedFunctorIso
+    (Φ : IsoAlgebra F ⥤ IsoAlgebra G) [Φ.Additive] (e : twist α ⋙ Φ ≅ Φ ⋙ twist β) :
+    (twist α).mapDerivedCategory ⋙ Φ.rightDerivedFunctor ≅
+      Φ.rightDerivedFunctor ⋙ (twist β).mapDerivedCategory :=
+  Functor.isoWhiskerRight (twist α).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
+    (Functor.rightDerivedFunctorCompIso (twist α) Φ).symm ≪≫
+    Functor.rightDerivedFunctorNatIso e ≪≫
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIso Φ (twist β)
+
+/-- **Exact functors commute with twists on derived categories.** If an exact functor
+`Φ : IsoAlgebra F ⥤ IsoAlgebra G` commutes with the twists by `α` and `β`, so does the functor
+it induces on derived categories. -/
+noncomputable def mapDerivedCategoryTwistCompMapDerivedCategoryIso
+    (Φ : IsoAlgebra F ⥤ IsoAlgebra G) [Φ.Additive] [PreservesFiniteLimits Φ]
+    [PreservesFiniteColimits Φ] (e : twist α ⋙ Φ ≅ Φ ⋙ twist β) :
+    (twist α).mapDerivedCategory ⋙ Φ.mapDerivedCategory ≅
+      Φ.mapDerivedCategory ⋙ (twist β).mapDerivedCategory :=
+  have := IsoAlgebra.preservesFiniteLimits_mapOfNatIso (F.leftUnitor ≪≫ α ≪≫ F.rightUnitor.symm)
+  have := IsoAlgebra.preservesFiniteColimits_mapOfNatIso (F.leftUnitor ≪≫ α ≪≫ F.rightUnitor.symm)
+  have := IsoAlgebra.preservesFiniteLimits_mapOfNatIso (G.leftUnitor ≪≫ β ≪≫ G.rightUnitor.symm)
+  have := IsoAlgebra.preservesFiniteColimits_mapOfNatIso (G.leftUnitor ≪≫ β ≪≫ G.rightUnitor.symm)
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
 /-- **Right derived transports commute with twists.** If automorphisms `α` of `F` and `β` of
 `G` correspond under `e : L ⋙ G ≅ F ⋙ L`, the total right derived functor of the transport
 `mapOfNatIso e` commutes with the twists, which are exact and act levelwise:
@@ -184,10 +216,8 @@ noncomputable def mapDerivedCategoryTwistCompIso
     (h : ∀ a, β.hom.app (L.obj a) ≫ e.hom.app a = e.hom.app a ≫ L.map (α.hom.app a)) :
     (twist α).mapDerivedCategory ⋙ (mapOfNatIso e).rightDerivedFunctor ≅
       (mapOfNatIso e).rightDerivedFunctor ⋙ (twist β).mapDerivedCategory :=
-  Functor.isoWhiskerRight (twist α).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
-    (Functor.rightDerivedFunctorCompIso (twist α) (mapOfNatIso e)).symm ≪≫
-    Functor.rightDerivedFunctorNatIso (twistCompMapOfNatIsoIso e α β h) ≪≫
-    Functor.rightDerivedFunctorCompMapDerivedCategoryIso (mapOfNatIso e) (twist β)
+  mapDerivedCategoryTwistCompRightDerivedFunctorIso α β (mapOfNatIso e)
+    (twistCompMapOfNatIsoIso e α β h)
 
 end Derived
 
