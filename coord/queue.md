@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (324)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,15 +16,14 @@
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
-| `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
 | `lem-sc-ample-finite-affine-cover` | 2014 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
-| `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 2014 | none |
 | `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
+| `lem-sc-free-prime-membership` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
@@ -39,13 +38,11 @@
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
-| `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-sc-tangent-map-linear` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
-| `lem-pc-field-extension-quasi-compact` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
@@ -60,6 +57,7 @@
 | `lem-sc-finite-locally-free-derived-hom` | 3014 | none |
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-global-sections-left-exact` | 3014 | none |
+| `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
 | `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
@@ -333,7 +331,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (592)
+## Stage 2: nodes to state (593)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -415,6 +413,7 @@
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
+| `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
@@ -930,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 343 nodes that wait for stage 1, 1217 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1219 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
