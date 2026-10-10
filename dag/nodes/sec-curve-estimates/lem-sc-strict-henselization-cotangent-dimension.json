@@ -23,9 +23,54 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the strict-henselization triples description [lem-weil-pbc-strict-henselization-triples] with $\\mathfrak p=\\mathfrak m$ and $K=\\kappa^{\\mathrm{sep}}$. It identifies $R^{\\mathrm{sh}}$ with the colimit ring $C$, whose maximal ideal is $\\mathfrak m_C=\\mathfrak mR^{\\mathrm{sh}}$, and identifies its residue field with $\\kappa^{\\mathrm{sep}}$. The canonical map $R\\to R^{\\mathrm{sh}}$ is flat by faithful flatness [lem-sc-strict-henselization-faithfully-flat].",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LN (lemma-henselization-regular), proof: use the strict henselization map and Tag 07QM part (1); algebra.tex Tags 04GW and 04GP for the maximal ideal and residue field"
+   }
+  },
+  {
+   "text": "Apply the conormal flat-base-change isomorphism [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] to the flat map $R\\to R^{\\mathrm{sh}}$ and the ideal $\\mathfrak m$. Since the extended ideal is $\\mathfrak mR^{\\mathrm{sh}}=\\mathfrak m^{\\mathrm{sh}}$ by Step 1, it gives a canonical $R^{\\mathrm{sh}}$-linear isomorphism $(\\mathfrak m/\\mathfrak m^2)\\otimes_R R^{\\mathrm{sh}}\\xrightarrow{\\sim}\\mathfrak m^{\\mathrm{sh}}/(\\mathfrak m^{\\mathrm{sh}})^2$.",
+   "uses": [
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 0473 (morphisms-lemma-conormal-functorial-flat), affine conormal calculation, specialized to the maximal ideal and strict henselization"
+   }
+  },
+  {
+   "text": "The $R$-action on $\\mathfrak m/\\mathfrak m^2$ factors through $R/\\mathfrak m=\\kappa$, while the $R^{\\mathrm{sh}}$-action on the target factors through $R^{\\mathrm{sh}}/\\mathfrak m^{\\mathrm{sh}}=\\kappa^{\\mathrm{sep}}$ by Step 1. Therefore the isomorphism of Step 2 is canonically the displayed base-change map $(\\mathfrak m/\\mathfrak m^2)\\otimes_{\\kappa}\\kappa^{\\mathrm{sep}}\\to\\mathfrak m^{\\mathrm{sh}}/(\\mathfrak m^{\\mathrm{sh}})^2$. A vector-space isomorphism preserves dimension, giving the final equality.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LN, final minimal-generator/cotangent-space comparison; the scalar-factorization and dimension conclusion are elementary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LN (lemma-henselization-regular), proof via minimal generators and Tag 07QM parts (1)-(2), with conormal base change Tag 0473"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +109,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-regular",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-cotangent-dimension",
+  "worker": "stage1",
+  "summary": "Split the cotangent-space comparison into identification of the strict henselization maximal ideal and residue field, flat conormal base change, and the elementary reduction from tensoring over R to tensoring over the residue field. No new nodes were needed: the strict-henselization triples and faithful-flatness nodes provide the local data, and the existing conormal base-change Mathlib leaf supplies the isomorphism.",
+  "blueprint": "Realizes the cotangent/minimal-generator paragraph in the proof of the strict-henselization regularity claim, corresponding to the boundary-stalk strict-henselization calculation in the blueprint ancestor lem-sc-brauer-zero.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Steps 1-3 need the generic strict-henselization construction's maximal-ideal equality and residue-field identification; no node on the sk-thm-br route states these ring-level facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shc2211",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc2211 (reviewer sub-agent of L); spot-checked: Step 1: triples node clause 2 with p=m, K=kappa^sep gives m_C=mC (=mR^sh) and residue field kappa^sep, cited not restated (C1 ok); flatness from lem-sc-strict-henselization-faithfully-flat whose R^sh is the same triples colimit (C4 ok). Step 2: conormal flat base change leaf with A=R, B=R^sh, I=m, J=mR^sh=m^sh (hypotheses ok). Step 3: (m/m^2)(x)_R R^sh = (m/m^2)(x)_kappa R^sh/mR^sh, elementary. Noetherian/dimension siblings not needed. Tool use of sk-thm-p1 triples node accepted as generic construction (C7). No faults; second reading missed none."
+ }
 }

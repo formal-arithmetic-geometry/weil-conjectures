@@ -2471,3 +2471,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:05 L: merged deliver/M1/lem-sc-p1-rhom-hom-derived-connecting (reviewer FIX; first push; new nodes: 0)
 - 20:05 L: returned deliver/H1/lem-pc-affine-morphism-hi (reviewer RETURN: 1. D2 (no real split): the new child lem-pc-affine-higher-direct-image-vanishing (created from this item) is the item's )
 - 20:05 L: merged deliver/E1/lem-pc-ringed-spaces-derived-direct-image-composition (reviewer FIX; first push; new nodes: 0)
+- 20:06 L: merged deliver/C1/lem-sc-strict-henselization-cotangent-dimension (reviewer PASS; first push; new nodes: 0)
