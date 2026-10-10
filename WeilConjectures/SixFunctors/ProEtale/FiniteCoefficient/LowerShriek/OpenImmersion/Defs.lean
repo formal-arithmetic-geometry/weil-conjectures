@@ -27,8 +27,7 @@ When `f` is moreover an open immersion (in particular a monomorphism), `j_{f!}` 
 *extension by zero* functor. It is then exact and fully faithful; fully faithfulness is
 `AlgebraicGeometry.ProEtale.fullyFaithfulOpenImmersionLowerShriek` in
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.FullyFaithful`,
-proved from
-the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
+proved from the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 
 ## Main definitions
 
@@ -40,8 +39,7 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
   `j_f^* ⊣ f_*`, completing the triple `j_{f!} ⊣ j_f^* ⊣ f_*`.
 - `AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`: for `f` weakly étale the
   pullback `f^*` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is
-  computed
-  by restriction, both being left adjoint to `f_*`.
+  computed by restriction, both being left adjoint to `f_*`.
 - `AlgebraicGeometry.ProEtale.localizationLowerShriekUpperStarAdjunction`: the adjunction
   `j_{f!} ⊣ f^*`.
 - `AlgebraicGeometry.ProEtale.localizationAdjunctionTriple`: the triple
@@ -83,8 +81,7 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 - `j_f^*` restricts along the localization functor, so it requires `WeaklyEtale f`, but it
   needs neither Kan extensions nor sheafification. The pullback `ProEtale.upperStar` of
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is defined for an
-  arbitrary
-  morphism at the cost of both; the two agree for a weakly étale `f`, by
+  arbitrary morphism at the cost of both; the two agree for a weakly étale `f`, by
   `upperStarIsoLocalizationRestriction`.
 - The continuity and cocontinuity of the localization functor are
   `AlgebraicGeometry.Scheme.ProEt.isContinuous_overMap` and
