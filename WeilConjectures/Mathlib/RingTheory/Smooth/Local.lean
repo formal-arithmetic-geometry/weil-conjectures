@@ -208,7 +208,6 @@ theorem Algebra.Smooth.of_isRegularLocalRing {k A : Type*} [Field k] [PerfectFie
     inferInstanceAs (Algebra.EssFiniteType k (Localization.AtPrime p.asIdeal ⧸ _))
   exact Algebra.FormallySmooth.localization_of_isRegularLocalRing p.asIdeal
 
-
 /-- **A finitely generated algebra over a field is smooth at a regular rational point.** Let `A`
 be a finitely generated `k`-algebra and `q` a prime of `A` with residue field `k` such that `A_q`
 is a regular local ring. Then `A` is smooth over `k` at `q`. -/

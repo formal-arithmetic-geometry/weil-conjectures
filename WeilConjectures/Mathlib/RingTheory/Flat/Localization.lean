@@ -37,6 +37,10 @@ Theorem 24.3).
 - `Module.Flat.localization_of_isPushout`: flatness at a point is stable under base change.
 - `Module.Flat.localization_of_forall_mem_isClosed`: localizing away from a closed set of
   flat points gives a flat algebra.
+- `Module.Flat.localization_tensorProduct_map`: flatness of `R ⊗[R₀] S₀` over `R` at a point is
+  preserved by a map of `R₀`-algebras `R → R'`.
+- `PrimeSpectrum.isOpen_setOf_flat_localization`: the flat locus of a finite type algebra over a
+  noetherian ring is open (Stacks, Tag 00RC).
 -/
 
 @[expose] public section
@@ -746,3 +750,47 @@ theorem Module.Flat.localization_of_forall_mem_isClosed {R C : Type*} [CommRing 
   refine ⟨t, hT t fun q hq htq ↦ q.isPrime.ne_top ((Ideal.eq_top_iff_one _).2 ?_), ht⟩
   rw [← htj]
   exact add_mem htq ((PrimeSpectrum.mem_vanishingIdeal Z j).1 hj q hq)
+
+/-- **Flatness at a point along an enlargement of the base.** Let `f : R → R'` be a map of
+`R₀`-algebras and `Q` a prime of `R' ⊗[R₀] S₀`. If `R ⊗[R₀] S₀` is flat over `R` at the prime
+below `Q`, then `R' ⊗[R₀] S₀` is flat over `R'` at `Q`. -/
+theorem Module.Flat.localization_tensorProduct_map {R₀ R R' S₀ : Type*} [CommRing R₀]
+    [CommRing R] [CommRing R'] [CommRing S₀] [Algebra R₀ R] [Algebra R₀ R'] [Algebra R₀ S₀]
+    (f : R →ₐ[R₀] R') (Q : Ideal (R' ⊗[R₀] S₀)) [Q.IsPrime] (P : Ideal (R ⊗[R₀] S₀)) [P.IsPrime]
+    (hPQ : Q.comap (Algebra.TensorProduct.map f (AlgHom.id R₀ S₀)).toRingHom = P)
+    (h : Module.Flat R (Localization.AtPrime P)) :
+    Module.Flat R' (Localization.AtPrime Q) := by
+  subst hPQ
+  let : Algebra R R' := f.toRingHom.toAlgebra
+  have : IsScalarTower R₀ R R' := .of_algebraMap_eq fun r ↦ (f.commutes r).symm
+  let : Algebra (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) :=
+    (Algebra.TensorProduct.map f (AlgHom.id R₀ S₀)).toRingHom.toAlgebra
+  have : IsScalarTower R (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) := .of_algebraMap_eq fun r ↦ by
+    simp [RingHom.algebraMap_toAlgebra, Algebra.TensorProduct.algebraMap_apply]
+  have : Algebra.IsPushout R R' (R ⊗[R₀] S₀) (R' ⊗[R₀] S₀) :=
+    Algebra.IsPushout.tensorProduct_tensorProduct R₀ S₀ R R' (by
+      ext x
+      simp [RingHom.algebraMap_toAlgebra])
+  exact Module.Flat.localization_of_isPushout Q h
+
+namespace PrimeSpectrum
+
+/-- **Openness of the flat locus** (Stacks `00RC`). For a finite type algebra `S` over a
+noetherian ring `R`, the set of primes `q` of `S` such that `S_q` is flat over `R` is open. -/
+theorem isOpen_setOf_flat_localization {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    [IsNoetherianRing R] [Algebra.FiniteType R S] :
+    IsOpen {q : PrimeSpectrum S | Module.Flat R (Localization.AtPrime q.asIdeal)} := by
+  rw [isOpen_iff_forall_mem_open]
+  intro q (hq : Module.Flat R _)
+  have hP : Module.Flat R (LocalizedModule q.asIdeal.primeCompl S) := Module.Flat.of_linearEquiv
+    ((IsLocalizedModule.iso q.asIdeal.primeCompl
+      (Algebra.linearMap S (Localization.AtPrime q.asIdeal))).restrictScalars R)
+  obtain ⟨g, hg, hopen⟩ :=
+    Module.Flat.exists_notMem_forall_flat_localizedModule (M := S) q.asIdeal hP
+  refine ⟨basicOpen g, fun Q hQ ↦ ?_, isOpen_basicOpen, hg⟩
+  have := hopen Q.asIdeal hQ
+  exact Module.Flat.of_linearEquiv
+    ((IsLocalizedModule.iso Q.asIdeal.primeCompl
+      (Algebra.linearMap S (Localization.AtPrime Q.asIdeal))).restrictScalars R).symm
+
+end PrimeSpectrum

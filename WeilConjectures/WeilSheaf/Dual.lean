@@ -7,8 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.StalkPairing
 
 /-!
 # Internal homs, duals and geometric coinvariants of Weil sheaves
@@ -42,8 +44,12 @@ The geometric coinvariants of `F` are the dual of the global sections of `F^∨`
   the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`.
 - `AlgebraicGeometry.WeilSheaf.geometricCoinvariants`: the geometric coinvariants of a lisse
   Weil sheaf, with the Frobenius induced from the Weil structure.
-- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`: the geometric
-  coinvariants of a punctually pure lisse sheaf are pure of the same weight.
+- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual`: the stalks of the dual of a lisse
+  Weil sheaf are the duals of its stalks.
+
+The purity of the geometric coinvariants is
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`, in
+`WeilConjectures.WeilSheaf.GeometricCoinvariants`.
 
 ## TODO
 
@@ -246,32 +252,101 @@ noncomputable def geometricCoinvariants [QuasiCompact (X ↘ Spec (CommRingCat.o
     (hF : F.IsLisse) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   FrobeniusModule.dual (globalSections (F.dual hF))
 
--- TODO(adic): for `F` lisse, hence locally free of finite rank, the stalk of the internal hom
--- `[F, ℚ̄_ℓ]` is the dual of the stalk of `F`, with the inverse transpose Frobenius.
+section DualStalk
+
+open Functor.LaxMonoidal ProEtale
+
+/-- The evaluation `F^∨ ⊗ F ⟶ ℚ̄_ℓ` is compatible with the Weil structures. -/
+theorem dual_evaluation_str (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
+    ((F.dual hF).obj.str.hom.hom ⊗ₘ F.obj.str.hom.hom) ≫
+        Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier =
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          (F.dual hF).obj.carrier.X F.obj.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          (Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier) ≫
+        (adicConstant k₀ l X).obj.str.hom.hom := by
+  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[
+      WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
+    isEquivalence_adicLowerStar l _
+  have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+    (fun _ _ ↦ Functor.LaxBraided.braided _ _) F.obj.carrier (adicConstant k₀ l X).obj.carrier
+  have hstr : (F.dual hF).obj.str.hom.hom =
+      ((adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+        F.obj.carrier).inv.app (adicConstant k₀ l X).obj.carrier).hom ≫
+      ((Mod.ihomMap F.obj.str.inv).app _).hom ≫
+      ((ProEtale.AdicSheaf.ihom F.obj.carrier).map (adicConstant k₀ l X).obj.str.hom).hom := rfl
+  have hφ : F.obj.str.hom.hom ≫ F.obj.str.inv.hom = 𝟙 _ := by
+    rw [← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom']
+  rw [hstr, tensorHom_def', comp_whiskerRight, comp_whiskerRight]
+  simp only [Category.assoc]
+  rw [Mod.evaluation_naturality F.obj.carrier (adicConstant k₀ l X).obj.str.hom,
+    Mod.evaluation_ihomMap_assoc F.obj.str.inv]
+  erw [← whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, hφ,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp]
+  erw [reassoc_of% h]
+  rfl
+
+variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+
+/-- The pairing `(F^∨)_s × F_s → (ℚ̄_ℓ)_s` of stalks induced by the evaluation is invariant under
+the Frobenius of the stalks. -/
+lemma evaluationPairing_stalkAt_frobenius (F : WeilSheaf k₀ l X) (hF : F.IsLisse)
+    (d : ((F.dual hF).stalkAt s m hs).carrier) (x : (F.stalkAt s m hs).carrier) :
+    Mod.evaluationPairing (stalkFunctor l s) F.obj.carrier (adicConstant k₀ l X).obj.carrier
+        (((F.dual hF).stalkAt s m hs).frobenius d) ((F.stalkAt s m hs).frobenius x) =
+      Mod.evaluationPairing (stalkFunctor l s) F.obj.carrier (adicConstant k₀ l X).obj.carrier
+        d x := by
+  have h := stalkPairing_frobenius s m hs _ _ _ _
+    (frobeniusPowIso_tensor (F.dual hF) F (adicConstant k₀ l X) _ (dual_evaluation_str F hF) m)
+  have hA := adicConstant_stalkAt_frobenius (l := l) s m hs
+  rw [stalkAt_frobenius_eq_stalkFrobeniusIso] at hA
+  rw [stalkAt_frobenius_eq_stalkFrobeniusIso, stalkAt_frobenius_eq_stalkFrobeniusIso,
+    Mod.evaluationPairing_apply, Mod.evaluationPairing_apply]
+  exact WeilCoefficients.pairing_linearEquivOfIso
+    ((stalkFrobeniusIso k₀ l X s m hs).app (F.dual hF).obj.carrier.X ≪≫
+      (stalkSheafFunctor k₀ l X s).mapIso
+        ((ProEtale.AdicSheaf.forget _).mapIso ((F.dual hF).frobeniusPowIso m)))
+    ((stalkFrobeniusIso k₀ l X s m hs).app F.obj.carrier.X ≪≫
+      (stalkSheafFunctor k₀ l X s).mapIso
+        ((ProEtale.AdicSheaf.forget _).mapIso (F.frobeniusPowIso m)))
+    ((stalkFrobeniusIso k₀ l X s m hs).app (adicConstant k₀ l X).obj.carrier.X ≪≫
+      (stalkSheafFunctor k₀ l X s).mapIso
+        ((ProEtale.AdicSheaf.forget _).mapIso ((adicConstant k₀ l X).frobeniusPowIso m)))
+    (μ (stalkSheafFunctor k₀ l X s) _ _)
+    ((stalkSheafFunctor k₀ l X s).map
+      (Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier)) h hA d x
+
+/-- The stalk of the dual of a lisse Weil sheaf at a geometric point is the dual of the stalk,
+compatibly with the Frobenius: the pairing of stalks induced by the evaluation is perfect
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.bijective_evaluationPairing`) and invariant
+under the Frobenius (`AlgebraicGeometry.WeilSheaf.evaluationPairing_stalkAt_frobenius`). -/
+noncomputable def stalkAtDualEquiv (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
+    ((F.dual hF).stalkAt s m hs).Equiv (F.stalkAt s m hs).dual where
+  toLinearEquiv := LinearEquiv.ofBijective
+    (WeilCoefficients.dualLinearMap
+      (Mod.evaluationPairing (stalkFunctor l s) F.obj.carrier (adicConstant k₀ l X).obj.carrier)
+      (asIso (unitSection l s)).symm.toLinearEquiv.toLinearMap)
+    (WeilCoefficients.bijective_dualLinearMap
+      (IsAdicLisseSheaf.bijective_evaluationPairing hF s)
+      (asIso (unitSection l s)).symm.toLinearEquiv)
+  map_frobenius d := LinearMap.ext fun x ↦ by
+    obtain ⟨y, rfl⟩ := (F.stalkAt s m hs).frobenius.surjective x
+    rw [FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
+      LinearEquiv.symm_apply_apply]
+    exact congrArg (fun z ↦ ((asIso (unitSection l s)).symm.toLinearEquiv z).down)
+      (evaluationPairing_stalkAt_frobenius s m hs F hF d y)
+
+end DualStalk
+
 /-- The stalk of the dual of a lisse Weil sheaf is the dual of its stalk: the local Frobenius
 of `F^∨` at `x` is the inverse transpose of that of `F`. -/
 theorem nonempty_equiv_stalk_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    (x : X.finitePoints) : Nonempty (((F.dual hF).stalk x).Equiv (F.stalk x).dual) := by
-  sorry
-
-/-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
-weight `w`, then its geometric coinvariants `V_{π₁(X̄)}` with the induced Frobenius are `ι`-pure
-of weight `w` (possibly zero). The argument compares the coinvariants with the stalk at a closed
-point with finite residue field on each geometric component, as an equivariant quotient.
-
-The blueprint states this for `X` a nonempty smooth geometrically connected curve; here `X` is
-only assumed locally of finite type over `k₀`, which is what provides these closed points.
-Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points of
-`X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the coinvariants of a
-rank-one sheaf need not be pure of every weight.
-(blueprint: `lem-a1-geometric-coinvariants-pure`) -/
-theorem isPureOfWeightOver_geometricCoinvariants
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
-    (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    (F.geometricCoinvariants hF).IsPureOfWeightOver k₀ ι w := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+    (x : X.finitePoints) : Nonempty (((F.dual hF).stalk x).Equiv (F.stalk x).dual) :=
+  ⟨stalkAtDualEquiv _ _ _ F hF⟩
 
 end WeilSheaf
 

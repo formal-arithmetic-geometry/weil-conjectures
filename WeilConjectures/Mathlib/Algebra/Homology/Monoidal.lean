@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.BifunctorFlip
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-!
@@ -138,20 +139,6 @@ the braiding `K ⊗ L ≅ L ⊗ K` is `(-1) ^ (p * q) • β_ (K.X p) (L.X q)` o
 
 namespace Monoidal
 
-section
-
-variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
-
-private lemma zsmul_whiskerRight' {X Y : C} (n : ℤ) (f : X ⟶ Y) (Z : C) :
-    (n • f) ▷ Z = n • (f ▷ Z) :=
-  Functor.map_zsmul (tensorRight Z)
-
-private lemma whiskerLeft_zsmul' (X : C) {Y Z : C} (n : ℤ) (f : Y ⟶ Z) :
-    X ◁ (n • f) = n • (X ◁ f) :=
-  Functor.map_zsmul (tensorLeft X)
-
-end
-
 variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [HasZeroObject C]
   [MonoidalPreadditive C] [BraidedCategory C]
   [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
@@ -173,7 +160,6 @@ noncomputable def braidingBicomplexIso :
   inv := HomologicalComplex₂.homMk (fun x ↦ (β_ (K.X x.1) (L.X x.2)).inv)
     (fun p p' q _ ↦ (BraidedCategory.braiding_inv_naturality_right _ _).symm)
     (fun p q q' _ ↦ (BraidedCategory.braiding_inv_naturality_left _ _).symm)
-
   hom_inv_id := by ext; simp [HomologicalComplex₂.homMk]
   inv_hom_id := by ext; simp [HomologicalComplex₂.homMk]
 
@@ -182,8 +168,17 @@ noncomputable def braiding : K ⊗ L ≅ L ⊗ K :=
   HomologicalComplex₂.total.mapIso (braidingBicomplexIso K L) (.up ℤ) ≪≫
     HomologicalComplex.mapBifunctorFlipIso L K (curriedTensor C) (.up ℤ)
 
-
 variable {K L} in
+/-- On the summand `K.X p ⊗ L.X q`, the Koszul braiding is the braiding of `C` with sign
+`(-1)^(pq)`:
+```
+K.X p ⊗ L.X q ---ιTensorObj---> (K ⊗ L).X n
+      |                              |
+(-1)^(pq) • β              (braiding K L).hom.f n
+      v                              v
+L.X q ⊗ K.X p ---ιTensorObj---> (L ⊗ K).X n
+```
+-/
 @[reassoc]
 lemma ι_braiding_hom (p q n : ℤ) (h : p + q = n) :
     HomologicalComplex.ιTensorObj K L p q n h ≫ (braiding K L).hom.f n =
@@ -201,10 +196,18 @@ lemma ι_braiding_hom (p q n : ℤ) (h : p + q = n) :
     Preadditive.comp_zsmul, mul_comm p q]
   rfl
 
-
 variable (M : CochainComplex C ℤ)
 
 omit [BraidedCategory C] in
+/-- On the summand `(K.X p ⊗ L.X q) ⊗ M.X r`, the associator is the associator of `C`:
+```
+(K.X p ⊗ L.X q) ⊗ M.X r ---ι₁₂---> ((K ⊗ L) ⊗ M).X n
+          |                                |
+          α                         (α_ K L M).hom.f n
+          v                                v
+K.X p ⊗ (L.X q ⊗ M.X r) ---ι₂₃---> (K ⊗ (L ⊗ M)).X n
+```
+-/
 @[reassoc]
 lemma ι₁₂_associator_hom (p q r n : ℤ) (h : p + q + r = n) :
     HomologicalComplex.mapBifunctor₁₂.ι (curriedTensor C) (curriedTensor C) K L M (.up ℤ) (.up ℤ)
@@ -230,9 +233,17 @@ lemma ι₂₃_eq (p q r s n : ℤ) (hs : q + r = s) (h : p + s = n) :
       HomologicalComplex.ιTensorObj K (L ⊗ M) p s n h :=
   HomologicalComplex.mapBifunctor₂₃.ι_eq _ _ _ _ _ _ _ _ _ _ _ _ _ hs h
 
-
 variable {K L M} in
 omit [BraidedCategory C] in
+/-- On the summand `K.X p ⊗ L.X q`, right whiskering by `f : K ⟶ K'` is `f.f p ▷ L.X q`:
+```
+K.X p ⊗ L.X q ---ιTensorObj---> (K ⊗ L).X n
+      |                              |
+f.f p ▷ L.X q                   (f ▷ L).f n
+      v                              v
+K'.X p ⊗ L.X q --ιTensorObj---> (K' ⊗ L).X n
+```
+-/
 @[reassoc]
 lemma ι_whiskerRight {K' : CochainComplex C ℤ} (f : K ⟶ K') (p q n : ℤ) (h : p + q = n) :
     HomologicalComplex.ιTensorObj K L p q n h ≫ (f ▷ L).f n =
@@ -240,7 +251,7 @@ lemma ι_whiskerRight {K' : CochainComplex C ℤ} (f : K ⟶ K') (p q n : ℤ) (
   erw [HomologicalComplex.ι_mapBifunctorMap]
   simp
 
-
+/-- The forward hexagon identity for the Koszul braiding (see `BraidedCategory.hexagon_forward`). -/
 lemma hexagon_forward :
     (α_ K L M).hom ≫ (braiding K (L ⊗ M)).hom ≫ (α_ L M K).hom =
       (braiding K L).hom ▷ M ≫ (α_ L K M).hom ≫ L ◁ (braiding K M).hom := by
@@ -262,7 +273,7 @@ lemma hexagon_forward :
   rw [← assoc (_ ▷ K.X p), ← e₃]
   erw [ι₁₂_associator_hom]
   rw [e₁, assoc, ι_whiskerRight_assoc, ← comp_whiskerRight_assoc, ι_braiding_hom]
-  simp only [zsmul_whiskerRight', Preadditive.zsmul_comp,
+  simp only [zsmul_whiskerRight, Preadditive.zsmul_comp,
     comp_whiskerRight, assoc]
   erw [← reassoc_of% e₅]
   erw [ι₁₂_associator_hom_assoc]
@@ -271,14 +282,22 @@ lemma hexagon_forward :
   erw [ιTensorObj_whiskerLeft_f]
   rw [← whiskerLeft_comp_assoc]
   erw [ι_braiding_hom]
-  simp only [whiskerLeft_zsmul', Preadditive.zsmul_comp, Preadditive.comp_zsmul,
+  simp only [whiskerLeft_zsmul, Preadditive.zsmul_comp, Preadditive.comp_zsmul,
     whiskerLeft_comp, assoc]
   erw [← e₄]
   rw [BraidedCategory.hexagon_forward_assoc, smul_smul, mul_add, Int.negOnePow_add,
     Units.val_mul]
 
-
 omit [BraidedCategory C] in
+/-- On the summand `K.X p ⊗ (L.X q ⊗ M.X r)`, the inverse associator is the one of `C`:
+```
+K.X p ⊗ (L.X q ⊗ M.X r) ---ι₂₃---> (K ⊗ (L ⊗ M)).X n
+          |                                |
+         α⁻¹                        (α_ K L M).inv.f n
+          v                                v
+(K.X p ⊗ L.X q) ⊗ M.X r ---ι₁₂---> ((K ⊗ L) ⊗ M).X n
+```
+-/
 @[reassoc]
 lemma ι₂₃_associator_inv (p q r n : ℤ) (h : p + q + r = n) :
     HomologicalComplex.mapBifunctor₂₃.ι (curriedTensor C) (curriedTensor C) K L M (.up ℤ)
@@ -291,6 +310,7 @@ lemma ι₂₃_associator_inv (p q r n : ℤ) (h : p + q + r = n) :
   erw [comp_id, ι₁₂_associator_hom]
   rw [Iso.inv_hom_id_assoc]
 
+/-- The reverse hexagon identity for the Koszul braiding (see `BraidedCategory.hexagon_reverse`). -/
 lemma hexagon_reverse :
     (α_ K L M).inv ≫ (braiding (K ⊗ L) M).hom ≫ (α_ M K L).inv =
       K ◁ (braiding L M).hom ≫ (α_ K M L).inv ≫ (braiding K M).hom ▷ L := by
@@ -312,7 +332,7 @@ lemma hexagon_reverse :
   rw [← assoc (_ ◁ _), ← f₃]
   erw [ι₂₃_associator_inv]
   rw [f₁, assoc, ιTensorObj_whiskerLeft_f_assoc, ← whiskerLeft_comp_assoc, ι_braiding_hom]
-  simp only [whiskerLeft_zsmul', Preadditive.zsmul_comp,
+  simp only [whiskerLeft_zsmul, Preadditive.zsmul_comp,
     whiskerLeft_comp, assoc]
   erw [← reassoc_of% f₅]
   erw [ι₂₃_associator_inv_assoc]
@@ -321,12 +341,11 @@ lemma hexagon_reverse :
   erw [ι_whiskerRight]
   rw [← comp_whiskerRight_assoc]
   erw [ι_braiding_hom]
-  simp only [zsmul_whiskerRight', Preadditive.zsmul_comp, Preadditive.comp_zsmul,
+  simp only [zsmul_whiskerRight, Preadditive.zsmul_comp, Preadditive.comp_zsmul,
     comp_whiskerRight, assoc]
   erw [← f₄]
   rw [BraidedCategory.hexagon_reverse_assoc, smul_smul, add_mul, Int.negOnePow_add,
     Units.val_mul, mul_comm]
-
 
 variable {K L M} in
 lemma braiding_naturality_left {K' : CochainComplex C ℤ} (f : K ⟶ K') :
@@ -358,7 +377,6 @@ noncomputable instance braidedCategory : BraidedCategory (CochainComplex C ℤ) 
   braiding_naturality_right _ _ _ g := braiding_naturality_right g
   hexagon_forward := hexagon_forward
   hexagon_reverse := hexagon_reverse
-
 
 end Monoidal
 

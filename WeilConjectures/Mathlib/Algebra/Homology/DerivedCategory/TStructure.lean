@@ -166,29 +166,41 @@ section Heart
 open Category
 open TStructure (t)
 
-/-- `H^n(τ_{<a} X) ⟶ H^n(X)` is an isomorphism for `n < a`. -/
-lemma isIso_homologyFunctor_map_truncLTι_app (X : DerivedCategory C) (a n : ℤ) (h : n < a) :
-    IsIso ((homologyFunctor C n).map ((t.truncLTι a).app X)) := by
-  have hT := t.triangleLTGE_distinguished a X
-  have h₁ : Mono ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
+/-- Let `T : A ⟶ B ⟶ C ⟶ A[1]` be a distinguished triangle with `A ≤ a - 1` and `C ≥ a`.
+Then `H^n(A) ⟶ H^n(B)` is an isomorphism for `n < a`. -/
+lemma isIso_homologyFunctor_map_mor₁_of_isLE_of_isGE (T : Triangle (DerivedCategory C))
+    (hT : T ∈ distTriang _) (a n : ℤ) (h : n < a) [T.obj₁.IsLE (a - 1)] [T.obj₃.IsGE a] :
+    IsIso ((homologyFunctor C n).map T.mor₁) := by
+  have h₁ : Mono ((homologyFunctor C n).map T.mor₁) :=
     ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₁_iff _ hT (n - 1) n
       (by lia)).2 (IsZero.eq_of_src (isZero_of_isGE _ a _ (by lia)) _ _)
-  have h₂ : Epi ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
+  have h₂ : Epi ((homologyFunctor C n).map T.mor₁) :=
     ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₁_iff _ hT n).2
       (IsZero.eq_of_tgt (isZero_of_isGE _ a _ h) _ _)
   exact isIso_of_mono_of_epi _
 
-/-- `H^n(X) ⟶ H^n(τ_{≥a} X)` is an isomorphism for `a ≤ n`. -/
-lemma isIso_homologyFunctor_map_truncGEπ_app (X : DerivedCategory C) (a n : ℤ) (h : a ≤ n) :
-    IsIso ((homologyFunctor C n).map ((t.truncGEπ a).app X)) := by
-  have hT := t.triangleLTGE_distinguished a X
-  have h₁ : Mono ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
+/-- Let `T : A ⟶ B ⟶ C ⟶ A[1]` be a distinguished triangle with `A ≤ a - 1` and `C ≥ a`.
+Then `H^n(B) ⟶ H^n(C)` is an isomorphism for `a ≤ n`. -/
+lemma isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE (T : Triangle (DerivedCategory C))
+    (hT : T ∈ distTriang _) (a n : ℤ) (h : a ≤ n) [T.obj₁.IsLE (a - 1)] [T.obj₃.IsGE a] :
+    IsIso ((homologyFunctor C n).map T.mor₂) := by
+  have h₁ : Mono ((homologyFunctor C n).map T.mor₂) :=
     ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₂_iff _ hT n).2
       (IsZero.eq_of_src (isZero_of_isLE _ (a - 1) _ (by lia)) _ _)
-  have h₂ : Epi ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
+  have h₂ : Epi ((homologyFunctor C n).map T.mor₂) :=
     ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₂_iff _ hT n (n + 1) rfl).2
       (IsZero.eq_of_tgt (isZero_of_isLE _ (a - 1) _ (by lia)) _ _)
   exact isIso_of_mono_of_epi _
+
+/-- `H^n(τ_{<a} X) ⟶ H^n(X)` is an isomorphism for `n < a`. -/
+lemma isIso_homologyFunctor_map_truncLTι_app (X : DerivedCategory C) (a n : ℤ) (h : n < a) :
+    IsIso ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
+  isIso_homologyFunctor_map_mor₁_of_isLE_of_isGE _ (t.triangleLTGE_distinguished a X) a n h
+
+/-- `H^n(X) ⟶ H^n(τ_{≥a} X)` is an isomorphism for `a ≤ n`. -/
+lemma isIso_homologyFunctor_map_truncGEπ_app (X : DerivedCategory C) (a n : ℤ) (h : a ≤ n) :
+    IsIso ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
+  isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE _ (t.triangleLTGE_distinguished a X) a n h
 
 /-- On objects of the shifted heart `[n, n]`, the functor `H^n` is bijective on morphisms. -/
 lemma homologyFunctor_map_bijective_of_isGE_of_isLE {P Q : DerivedCategory C} (n : ℤ)
