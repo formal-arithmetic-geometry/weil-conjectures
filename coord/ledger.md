@@ -1760,3 +1760,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:17 L: merged deliver/C1/lem-sc-curve-base-change-relative-dimension-one (reviewer PASS; after a return; new nodes: 2)
 - 15:17 L: merged deliver/K1/lem-pc-ample-affine-loci-criterion (reviewer FIX; first push; new nodes: 1)
 - 15:17 L: merged deliver/G1/lem-exc-coinduced-homotopy-identity (reviewer FIX; first push; new nodes: 0)
+- 15:17 L: returned deliver/F1/lem-pc-base-change-closure-components (reviewer RETURN: Points 1-3 of the 14:43 return are repaired (clause-sized nodes deleted, the proof is in the item's steps, the existing )
