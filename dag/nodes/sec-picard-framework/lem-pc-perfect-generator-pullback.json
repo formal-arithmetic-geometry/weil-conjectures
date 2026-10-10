@@ -26,9 +26,56 @@
   "lem-pc-perfect-generator-exists",
   "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since M is an object of D_QCoh(X), its derived pullback Lg^*M lies in D_QCoh(X') [lem-pc-derived-pullback-tensor-qcoh], so Lg^*M is an object of the category for which the generator property is asserted. Because g is affine, the derived pullback/direct-image adjunction [lem-pc-ringed-spaces-derived-adjoint-general] restricts to the quasi-coherent derived categories (both are full subcategories of D(O_{X'}) and D(O_X)), with natural bijections Hom(Lg^*M[n], E) = Hom(M[n], Rg_*E) for E in D_QCoh(X'). The restriction is legitimate because the affine derived equivalence [lem-sc-finite-affine-derived-equivalence] identifies Rg_* with the restriction of the quasi-coherent equivalence and hence sends D_QCoh(X') to D_QCoh(X).",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-finite-affine-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQT, perfect-remark-pullback-generator, using the affine derived adjunction of Tag 079W"
+   }
+  },
+  {
+   "text": "Assume that Hom(Lg^*M[n], E)=0 for every integer n. By Step 1, Hom(M[n], Rg_*E)=0 for every n. Since M is a generator, the definition [def-pc-generators] implies Rg_*E=0: otherwise a nonzero shift of Rg_*E would admit a nonzero map from M.",
+   "uses": [
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQT, perfect-remark-pullback-generator, generator test"
+   }
+  },
+  {
+   "text": "The morphism g is affine, so derived direct image is conservative by [lem-sc-affine-derived-pushforward-conservative]. Applied to the morphism 0\\to E, whose image Rg_*(0)\\to Rg_*E=0 is an isomorphism, this gives E=0. Therefore every object E detected by all shifted Hom groups from Lg^*M is zero, which is exactly that Lg^*M is a generator of D_QCoh(X') by [def-pc-generators].",
+   "uses": [
+    "lem-sc-affine-derived-pushforward-conservative",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQT, perfect-remark-pullback-generator, affine conservativity conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-finite-affine-derived-equivalence",
+  "def-pc-generators",
+  "lem-sc-affine-derived-pushforward-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQT, perfect-remark-pullback-generator"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,12 +100,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-generator-pullback",
+  "worker": "stage1",
+  "summary": "Checked the affine pullback generator claim against Stacks Tag 09IS and found no sorry-free project declaration stating it. The proof is split into the affine derived adjunction, transfer of the generator vanishing criterion, and conservativity of affine derived pushforward. No new child node is needed: all non-elementary inputs are already stated by existing DAG nodes.",
+  "blueprint": "The three steps realize the ancestor blueprint clause 'the pullback of the perfect generator remains a generator because g_X is affine': apply the affine derived adjunction, use that M detects zero objects, and use affine pushforward conservativity.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pgp2710",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgp2710 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: adjunction (lem-pc-ringed-spaces-derived-adjoint-general) restricted via full subcategories, Rg_* lands in D_QCoh by lem-sc-finite-affine-derived-equivalence, def-pc-generators shift indexing, conservativity applied to 0->E. FIX more, RETURN less: (1) C1 Lg^*M in D_QCoh(X') (needed for def-pc-generators, which requires the generator to be an object of the category) was uncited; cited existing lem-pc-derived-pullback-tensor-qcoh (generic tool, Tag 08DW, accepted as tool_use) in Step 1 and proof_deps. (2) B3 source.document named nonexistent derived-categories-of-schemes.tex and all sources gave Tag 09IS for remark-pullback-generator, whose tag is 0BQT (09IS is Bondal-van den Bergh); corrected to perfect.tex, Tag 0BQT. Second reading by F1 missed both and claimed the source fix that was not in the file.; 1 file(s) fixed by the reviewer"
+ }
 }
