@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 
 /-!
 
@@ -442,11 +443,86 @@ theorem isFiniteLocallyConstant_homology_of_retract [Finite Λ] {W : Scheme.{u}}
   sorry
 
 omit [Finite Λ] in
-/-- A locally perfect complex on a quasi-compact scheme is bounded. -/
-theorem bounded_of_isLocallyPerfect [CompactSpace X]
+/-- A sheaf whose pullbacks along the members of a pro-étale covering family vanish is zero. -/
+theorem isZero_of_cover {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
+    {G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
+    (h : ∀ i, IsZero (((g i)^*[ModuleCat.{u + 1} Λ]).obj G)) : IsZero G := by
+  have (i : ι) : WeaklyEtale (g i) := proetalePrecoverage_le_precoverage_weaklyEtale _ hg ⟨i⟩
+  have hz (i : ι) := ((h i).of_iso
+    ((upperStarIsoLocalizationRestriction _ (g i) inferInstance).app G).symm).isoZero
+  have := isIso_of_isIso_localizationRestriction (ModuleCat.{u + 1} Λ)
+    (0 : G ⟶ G) g hg fun i ↦ isIso_of_source_target_iso_zero _ (hz i) (hz i)
+  refine (IsZero.iff_id_eq_zero G).2 ?_
+  rw [← IsIso.hom_inv_id (0 : G ⟶ G), zero_comp]
+
+omit [Finite Λ] in
+/-- A locally perfect complex on a quasi-compact quasi-separated scheme is bounded: finitely
+many affine opens of members of the trivializing cover still cover `X`, and the bounds of the
+finitely many local models bound the cohomology sheaves. -/
+theorem bounded_of_isLocallyPerfect [CompactSpace X] [QuasiSeparatedSpace X]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K :=
-  sorry
+    (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K := by
+  obtain ⟨ι, W, g, hg, hP⟩ := hK
+  choose P a b ha hb hr e using hP
+  have (i : ι) : WeaklyEtale (g i) := proetalePrecoverage_le_precoverage_weaklyEtale _ hg ⟨i⟩
+  let E : PreZeroHypercover X := ⟨ι, W, g⟩
+  have : QuasiCompactCover E := by
+    have := hg.1
+    rwa [show Presieve.ofArrows W g = E.presieve₀ from rfl,
+      presieve₀_mem_qcPrecoverage_iff] at this
+  obtain ⟨n, c, V, hV, hU⟩ :=
+    QuasiCompactCover.exists_isAffineOpen_of_isCompact E (U := ⊤) isCompact_univ
+  have (k : Fin n) : IsAffine (V k).toScheme := hV k
+  let h (k : ULift.{u + 1} (Fin n)) : (V k.down).toScheme ⟶ X := (V k.down).ι ≫ g (c k.down)
+  let 𝒰 : X.Cover (precoverage @WeaklyEtale) :=
+    Cover.mkOfCovers (ULift.{u + 1} (Fin n)) (fun k ↦ (V k.down).toScheme) h (fun x ↦ by
+      have hx : x ∈ ((⊤ : X.Opens) : Set X) := trivial
+      rw [← hU] at hx
+      obtain ⟨k, y, hy, rfl⟩ := Set.mem_iUnion.1 hx
+      obtain ⟨y, rfl⟩ : y ∈ Set.range (V k).ι := by rwa [Scheme.Opens.range_ι]
+      exact ⟨⟨k⟩, y, by simp [h, E]⟩)
+  have : Finite 𝒰.I₀ := inferInstanceAs (Finite (ULift.{u + 1} (Fin n)))
+  have (k : 𝒰.I₀) : QuasiCompact (𝒰.f k) := by
+    change QuasiCompact (h k)
+    exact quasiCompact_of_compactSpace _
+  have hcov : Presieve.ofArrows (fun k ↦ (V (ULift.down k)).toScheme) h ∈
+      Scheme.proetalePrecoverage X := by
+    have : Scheme.JointlySurjective (Scheme.precoverage.{u} @WeaklyEtale) :=
+      Scheme.instJointlySurjectivePrecoverage
+    exact mem_propQCPrecoverage_iff_exists_quasiCompactCover.2
+      ⟨𝒰, QuasiCompactCover.of_finite, rfl⟩
+  -- bounds valid for all members of the finite family
+  let A : ℤ := -∑ k, |a (c k)|
+  let B : ℤ := ∑ k, |b (c k)|
+  have hA (k : Fin n) : A ≤ a (c k) := by
+    have := Finset.single_le_sum (f := fun k ↦ |a (c k)|) (fun _ _ ↦ abs_nonneg _)
+      (Finset.mem_univ k)
+    have := neg_abs_le (a (c k))
+    simp only [A]; lia
+  have hB (k : Fin n) : b (c k) ≤ B := by
+    have := Finset.single_le_sum (f := fun k ↦ |b (c k)|) (fun _ _ ↦ abs_nonneg _)
+      (Finset.mem_univ k)
+    have := le_abs_self (b (c k))
+    simp only [B]; lia
+  -- the cohomology sheaf in degree `m` vanishes as soon as it does on every `P (c k)`
+  have hz (m : ℤ) (hm : ∀ k, IsZero ((P (c k)).homology m)) :
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj K) := by
+    refine isZero_of_cover h hcov fun k ↦ ?_
+    refine IsZero.of_iso ?_ ((upperStarComp _ (V k.down).ι (g (c k.down))).app _)
+    refine Functor.map_isZero ((V k.down).ι)^*[ModuleCat.{u + 1} Λ] ?_
+    refine (hm k.down).of_iso ?_
+    exact ((leftDerivedUpperStarHomologyFunctorIso _ (g (c k.down)) m).app K) ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ m).mapIso (e (c k.down)).some ≪≫
+      (_root_.DerivedCategory.homologyFunctorFactors _ m).app _
+  refine ⟨⟨A, (_root_.DerivedCategory.isGE_iff K A).2 fun m hm ↦ hz m fun k ↦ ?_⟩,
+    ⟨B, (_root_.DerivedCategory.isLE_iff K B).2 fun m hm ↦ hz m fun k ↦ ?_⟩⟩
+  · exact ((_root_.DerivedCategory.homologyFunctorFactors _ m).app _).isZero_iff.1
+      ((_root_.DerivedCategory.Q.obj (P (c k))).isZero_of_isGE (a (c k)) m
+        (by have := hA k; lia))
+  · exact ((_root_.DerivedCategory.homologyFunctorFactors _ m).app _).isZero_iff.1
+      ((_root_.DerivedCategory.Q.obj (P (c k))).isZero_of_isLE (b (c k)) m
+        (by have := hB k; lia))
 
 variable [IsNoetherian X] in
 /-- A perfect complex of pro-étale `Λ`-sheaves on a Noetherian scheme is bounded, and each of its
