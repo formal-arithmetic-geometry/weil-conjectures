@@ -882,6 +882,29 @@ theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
       (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
   exact ((hρ.subquotient _ _).hasDetWeight ι).eq ι (hγ.of_equiv ι e) x
 
+/-- **Local eigenvalues are compatible with restriction to an open.** For a restriction
+`W(U₀) → W(C₀)` of Weil groups along `j : U₀ ⟶ C₀`, the local Frobenius eigenvalues of
+`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`: the restriction carries
+the local Frobenius at `x` into the Frobenius conjugacy class at `j x`. This is the first step of
+reducing purity on `C₀` to purity on an affine open subcurve. -/
+theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)}
+    [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
+    {WC : WeilGroup p} (R : Restriction j WU WC) {l : ℕ} [Fact l.Prime] {V : Type u}
+    [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
+    (ρ : Representation (PadicAlgCl l) WC.carrier V) (x : U.finitePoints) (y : C.finitePoints)
+    (hxy : j.base x.1 = y.1) :
+    WU.localEigenvalues l (ρ.comp R.restrict) x = WC.localEigenvalues l ρ y := by
+  obtain ⟨c, hc⟩ := isConj_iff.1 (R.restrict_frobenius x y hxy)
+  let e : V ≃ₗ[PadicAlgCl l] V := LinearEquiv.ofLinearMap (ρ c) (ρ c⁻¹)
+    (by rw [← Module.End.mul_eq_comp, ← map_mul, mul_inv_cancel, map_one]; rfl)
+    (by rw [← Module.End.mul_eq_comp, ← map_mul, inv_mul_cancel, map_one]; rfl)
+  have he : ρ (R.restrict (WU.frobenius x)) = e.conj (ρ (WC.frobenius y)) := by
+    rw [← hc]
+    ext v
+    simp [e, LinearEquiv.conj_apply, map_mul]
+  simp only [localEigenvalues, MonoidHom.comp_apply]
+  rw [he, LinearEquiv.charpoly_conj]
+
 /-- Blueprint `sk-p-real-purity`: Purity of real lisse sheaves on curves.
 
 The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve,
