@@ -5,14 +5,94 @@
  "statement": "Let $R\\to S$ be a homomorphism of commutative rings, where $S$ is an Artinian local ring (a local ring in which every descending chain of ideals is eventually constant) with maximal ideal $\\mathfrak m$. If the composite $R\\to S\\to S/\\mathfrak m$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], then $R\\to S$ is essentially of finite type.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local, line 12869), part (3), direction 'if'; proof lines 12904-12925 (uses part (1) and Lemma 00QO, lemma-composition-essentially-of-finite-type); tag verified in literature/stacks-project/tags/tags"
+  "place": "Algebra, Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local, line 12869), part (3), direction 'if'; proof lines 12911-12923 (uses part (1) and Lemma Tag 07DS, lemma-composition-essentially-of-finite-type); tags verified in literature/stacks-project/tags/tags"
  },
  "stmt_deps": [
   "def-weil-pbc-essentially-finite-type-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Presentation of the residue field and lifts of the generators.* Write $k=S/\\mathfrak m$ and $\\pi:S\\to k$ for the quotient map; $k$ is an $R$-algebra through $R\\to S\\xrightarrow{\\pi}k$. By hypothesis and [def-weil-pbc-essentially-finite-type-algebra] there are a finite type $R$-algebra $B$, a multiplicative subset $W\\subseteq B$ and an isomorphism of $R$-algebras $\\iota:W^{-1}B\\xrightarrow{\\sim}k$; by [def-weil-pbc-finite-type-algebra] there are $n\\ge0$ and a surjective $R$-algebra map $\\beta:R[x_1,\\dots,x_n]\\to B$ (so $B\\cong R[x_1,\\dots,x_n]/I$ with $I=\\ker\\beta$, as in the source). Let $\\gamma:R[x_1,\\dots,x_n]\\to k$, $\\gamma(P)=\\iota(\\beta(P)/1)$, an $R$-algebra map. Since $\\pi$ is surjective, choose $f_1,\\dots,f_n\\in S$ with $\\pi(f_i)=\\gamma(x_i)$ ($i=1,\\dots,n$): the congruence classes of the $f_i$ modulo $\\mathfrak m$ correspond to the classes of the $x_i$ modulo $I$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12911-12915 ('Suppose S/m is the localization of R[x_1,...,x_n]/I. Choose f_1,...,f_n in S ...')"
+   }
+  },
+  {
+   "text": "*The subring $A$ and the prime $\\mathfrak p$.* Let $\\phi:R[x_1,\\dots,x_n]\\to S$ be the $R$-algebra map with $\\phi(x_i)=f_i$, $J=\\ker\\phi$, and $A=\\phi(R[x_1,\\dots,x_n])\\cong R[x_1,\\dots,x_n]/J$, an $R$-subalgebra of $S$; $A$ is a finite type $R$-algebra [def-weil-pbc-finite-type-algebra] (the surjection $R[x_1,\\dots,x_n]\\to A$). Let $\\mathfrak p=A\\cap\\mathfrak m$, the inverse image of the prime ideal $\\mathfrak m$ under the inclusion $A\\subseteq S$, hence a prime ideal of $A$. The two $R$-algebra maps $\\pi\\circ\\phi$ and $\\gamma$ from $R[x_1,\\dots,x_n]$ to $k$ agree on every $x_i$ (step 1), so they are equal (an $R$-algebra map from the polynomial ring is determined by the images of the variables). Hence $\\pi(\\phi(P))=\\iota(\\beta(P)/1)$ for all polynomials $P$: the image $\\pi(A)\\cong A/\\mathfrak p$ of $A$ in $k$ is the image of $B$ under $b\\mapsto\\iota(b/1)$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12916-12920 ('Consider the map R[x_1,...,x_n] -> S, x_i -> f_i with kernel J. Set A = R[x_1,...,x_n]/J in S and p = A cap m. Note that A/p in S/m is equal to the image of R[x_1,...,x_n]/I in S/m')"
+   }
+  },
+  {
+   "text": "*The map $A_{\\mathfrak p}\\to S$, and $A_{\\mathfrak p}\\to S/\\mathfrak m$ is surjective.* Let $A_{\\mathfrak p}$ be the localization of $A$ at $\\mathfrak p$ [def-weil-pbc-localization-at-prime], local with maximal ideal $\\mathfrak pA_{\\mathfrak p}$ and residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$. Every $s\\in A\\setminus\\mathfrak p$ lies in $S\\setminus\\mathfrak m$ and so is a unit of $S$ ($S$ is local with maximal ideal $\\mathfrak m$). Define $\\theta:A_{\\mathfrak p}\\to S$, $\\theta(a/s)=as^{-1}$: it is well defined, since $a/s=a'/s'$ means $u(as'-a's)=0$ for some $u\\in A\\setminus\\mathfrak p$, and $u$, $s$, $s'$ are units of $S$, so $as^{-1}=a's'^{-1}$; it is a ring map ($as^{-1}+a's'^{-1}=(as'+a's)(ss')^{-1}$, $(as^{-1})(a's'^{-1})=aa'(ss')^{-1}$, $\\theta(1/1)=1$), and $\\theta(a/1)=a$, so $R\\to A\\to A_{\\mathfrak p}\\xrightarrow{\\theta}S$ is the structure map $R\\to S$. Moreover $\\theta(\\mathfrak pA_{\\mathfrak p})\\subseteq\\mathfrak m$, so $\\pi\\circ\\theta$ induces a map of fields $\\kappa(\\mathfrak p)\\to k$. *$\\pi\\circ\\theta$ is surjective* (this is $\\kappa(\\mathfrak p)=S/\\mathfrak m$ of the source): every element of $k$ is $\\iota(b/w)$ with $b\\in B$, $w\\in W$; choose polynomials $P,Q$ with $\\beta(P)=b$, $\\beta(Q)=w$ (step 1) and put $a=\\phi(P)$, $s=\\phi(Q)\\in A$. By step 2, $\\pi(s)=\\iota(w/1)$, a unit of $k$ ($w/1$ is a unit of $W^{-1}B$), so $\\pi(s)\\neq0$, $s\\notin\\mathfrak m$, $s\\in A\\setminus\\mathfrak p$; and $\\pi(\\theta(a/s))=\\pi(a)\\pi(s)^{-1}=\\iota(b/1)\\iota(w/1)^{-1}=\\iota(b/w)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12920-12921 ('Hence kappa(p) = S/m')"
+   }
+  },
+  {
+   "text": "*$S$ is a finitely generated $A_{\\mathfrak p}$-module* (part (1) of 07DT, applied to $A_{\\mathfrak p}\\to S$). Regard $S$ as an $A_{\\mathfrak p}$-algebra through $\\theta$ (step 3). $S$ is Artinian, and its Jacobson radical $J(S)$, the intersection of all maximal ideals of $S$, is $\\mathfrak m$, the only maximal ideal of the local ring $S$. By step 3, $A_{\\mathfrak p}\\to S\\to S/J(S)=S/\\mathfrak m$ is surjective, so $S/J(S)$ is generated by $1$ as an $A_{\\mathfrak p}$-module, in particular finitely generated. By [lem-weil-pbc-artinian-finite-over-residue-finite] (with $A_{\\mathfrak p}\\to S$ in place of $A\\to B$), $S$ is a finitely generated $A_{\\mathfrak p}$-module.",
+   "uses": [
+    "lem-weil-pbc-artinian-finite-over-residue-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12921-12922 ('Thus A_p -> S is finite by part (1)'); part (1), lines 12885-12895"
+   }
+  },
+  {
+   "text": "*Both $R\\to A_{\\mathfrak p}$ and $\\theta:A_{\\mathfrak p}\\to S$ are essentially of finite type.* $A$ is a finite type $R$-algebra (step 2) and $A_{\\mathfrak p}=(A\\setminus\\mathfrak p)^{-1}A$ with the $R$-algebra structure through $R\\to A\\to A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], so $R\\to A_{\\mathfrak p}$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra]. If $s_1,\\dots,s_t$ generate $S$ as an $A_{\\mathfrak p}$-module (step 4), the $A_{\\mathfrak p}$-algebra map $A_{\\mathfrak p}[y_1,\\dots,y_t]\\to S$, $y_j\\mapsto s_j$, is surjective (its image contains every $A_{\\mathfrak p}$-linear combination of the $s_j$), so $S$ is a finite type $A_{\\mathfrak p}$-algebra [def-weil-pbc-finite-type-algebra]; with the multiplicative subset $\\{1\\}\\subseteq S$, $S\\cong\\{1\\}^{-1}S$ ($c\\mapsto c/1$) as $A_{\\mathfrak p}$-algebras, so $\\theta$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12917 and 12921-12922 (A = R[x_1,...,x_n]/J, A_p -> S finite)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By step 5 and [lem-weil-pbc-essentially-finite-type-composition] the composite $R\\to A_{\\mathfrak p}\\xrightarrow{\\theta}S$ is essentially of finite type; by step 3 it is the structure map $R\\to S$. Hence $R\\to S$ is essentially of finite type.",
+   "uses": [
+    "lem-weil-pbc-essentially-finite-type-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local), part (3), 'if' direction, lines 12922-12923 ('We conclude that S is essentially of finite type by Lemma lemma-composition-essentially-of-finite-type' = Tag 07DS)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-artinian-finite-over-residue-finite",
+  "lem-weil-pbc-essentially-finite-type-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07DT (lemma-essentially-of-finite-type-into-artinian-local, line 12869), proof of part (3), 'if' direction, lines 12911-12923; part (1) (lines 12885-12895) is supplied by the existing leaf lem-weil-pbc-artinian-finite-over-residue-finite; the map A_p -> S, the identification kappa(p) = S/m and the passage from finite to essentially of finite type, left implicit in Stacks, are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +114,38 @@
    "results": "QuasiFinite/Basic.lean:442 (Artinian base ring, unrelated), RingHom/EssFiniteType.lean:56 (residueFieldMap, the other direction), Unramified/LocalRing.lean, LocalRing/ResidueField/Ideal.lean (residue fields are EssFiniteType over the ring); no lemma deducing EssFiniteType R S from the residue field of an Artinian S",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsArtinianRing IsLocalRing EssFiniteType of residue field EssFiniteType",
+   "results": "IsArtinianRing.setOf_isPrime_finite, isArtinianRing_iff_isFiniteLength, IsLocalRing.ResidueField.finite_of_finite, IsArtinianRing.setOf_isMaximal_finite, Module.finite_of_isArtinianRing, isArtinianRing_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsArtinianRing",
+   "results": "Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton (Mathlib.RingTheory.QuasiFinite.Basic; Artinian base, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if S is an Artinian local R-algebra whose residue field is essentially of finite type over R then S is essentially of finite type over R",
+   "results": "Algebra.QuasiFinite.instIsArtinianRingFiber, IsLocalRing.ResidueField.finite_of_finite, Algebra.QuasiFinite.instResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.iff_of_isArtinianRing, RingHom.EssFiniteType.residueFieldMap (converse direction)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln EssFiniteType ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | xargs grep -ln IsArtinianRing; in those files grep -n -B2 -A3 'EssFiniteType R S' for lemma/instance conclusions",
+   "results": "TotallySplit.lean, QuasiFinite/Basic.lean (441 exists_basicOpen_eq_singleton, 519), RamificationInertia/Ramification.lean, Etale/Field.lean, Unramified/Field.lean, Unramified/LocalRing.lean (56, an instance under FormallyUnramified), Unramified/LocalStructure.lean (331, 335); none concludes EssFiniteType R S from the residue field of an Artinian local S",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +165,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-artinian-local-essentially-finite-type-residue",
+  "worker": "stage1",
+  "summary": "Proof written in 6 steps following the Stacks proof of 07DT (3), 'if' direction (algebra.tex lines 12911-12923): presentation S/m = W^{-1}B, B = R[x]/I, and lifts f_i of the generators; A = image of R[x] -> S, p = A cap m, A/p = image of B (equality of two R-algebra maps on the polynomial ring); the map A_p -> S (written out: A \\ p consists of units of the local ring S) and surjectivity of A_p -> S/m, which is Stacks' 'kappa(p) = S/m' (written out with the units w/1); S finite over A_p by part (1) of 07DT, supplied by the existing Mathlib leaf lem-weil-pbc-artinian-finite-over-residue-finite with J(S) = m; finite implies finite type implies essentially of finite type (W = {1}) and R -> A_p essentially of finite type by the definition; conclusion by composition, new Mathlib leaf lem-weil-pbc-essentially-finite-type-composition (Stacks 07DS, RingHom.EssFiniteType.comp). Statement unchanged. Source place corrected: the proof of (3) is lines 12911-12923 (12904-12905 end the proof of (2)), and the composition lemma is Tag 07DS, not 00QO (00QO is lemma-characterize-finite-presentation in tags/tags). Item re-searched in Mathlib with LeanSearch, Loogle, LeanFinder and grep: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Algebra 07DT (3) 'if' (lines 12911-12923): presentation of S/m and lifts; the subalgebra A and the prime p = A cap m; the map A_p -> S written out, with A_p -> S/m surjective; S finite over A_p by part (1) (existing leaf); R -> A_p and A_p -> S essentially of finite type; composition by a new leaf for 07DS (RingHom.EssFiniteType.comp, line 23 verified by L). Statement unchanged; source lines corrected."
+ }
 }

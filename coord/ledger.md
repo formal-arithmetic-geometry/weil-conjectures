@@ -925,3 +925,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:38 L: reviewed def-weil-pbc-nagata-ring (definition, no match): accepted.
 - 05:38 L: reviewed def-weil-pbc-serre-conditions-rk-sk (definition, no match): accepted.
 - 05:39 L: reviewed def-weil-pbc-relative-global-complete-intersection (definition, no match): accepted.
+- 05:41 L: reviewed lem-weil-pbc-artinian-local-essentially-finite-type-residue (6 steps, +07DS composition leaf): accepted.
