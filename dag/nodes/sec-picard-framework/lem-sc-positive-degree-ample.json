@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-sc-positive-degree-ample",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pc-ample-positive-degree"
+  ]
  },
  "kind": "statement",
  "title": "Positive degree implies ample",
@@ -13,33 +15,100 @@
   "place": "node lem-sc-positive-degree-ample, order 719"
  },
  "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-invertible-module",
   "def-sc-pic0",
-  "def-sc-curves"
+  "def-sc-ample"
  ],
  "proof": [
   {
-   "text": "Since $\\deg$ is a homomorphism ([def-sc-pic0]),\n$\\deg(\\mathcal L^{\\otimes m})=m\\deg\\mathcal L\\to\\infty$, so for\n$m\\gg0$ one has $\\deg(\\mathcal L^{\\otimes m})\\geq2g+1$, and by\n[lem-sc-degree-2g1-very-ample] the bundle\n$\\mathcal L^{\\otimes m}$ is very ample; by definition\n([def-sc-ample]) $\\mathcal L$ is ample.",
+   "text": "Let $m\\geq1$. The $m$-fold tensor product $\\mathcal L^{\\otimes m}$ is an invertible $\\mathcal O_C$-module and its class in the Picard group is $[\\mathcal L^{\\otimes m}]=m[\\mathcal L]$, because the group law of $\\operatorname{Pic}(C)$ is induced by $\\otimes$ ([def-sc-picard-group], [lem-sc-pic-group]); induction on $m$, using $\\mathcal L^{\\otimes(m+1)}=\\mathcal L^{\\otimes m}\\otimes\\mathcal L$. By [def-sc-pic0] the degree $\\deg:\\operatorname{Pic}(C)\\to\\mathbf Z$ is a group homomorphism (the divisor degree, well defined by [lem-sc-deg-principal-zero], transported along the identification $\\operatorname{Cl}(C)\\cong\\operatorname{Pic}(C)$ of abelian groups that [def-sc-pic0] names in its statement), so $\\deg(\\mathcal L^{\\otimes m})=\\deg(m[\\mathcal L])=m\\deg\\mathcal L$.",
    "uses": [
+    "def-sc-picard-group",
+    "lem-sc-pic-group",
     "def-sc-pic0",
-    "lem-sc-degree-2g1-very-ample",
+    "lem-sc-deg-principal-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-positive-degree-ample.md",
+    "place": "## Proof (the one paragraph); unit sk-thm-picard-rr, proof of (G), last sentence"
+   }
+  },
+  {
+   "text": "Put $m:=2g+1$, where $g=\\dim_kH^1(C,\\mathcal O_C)\\geq0$ is the genus ([def-sc-genus]); then $m\\geq1$. Since $\\deg\\mathcal L$ is an integer with $\\deg\\mathcal L>0$, $\\deg\\mathcal L\\geq1$, and by step 1 $\\deg(\\mathcal L^{\\otimes m})=(2g+1)\\deg\\mathcal L\\geq2g+1$. (This is the choice made in the Lean proof `AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed`; the blueprint's \"$m\\gg0$\".)",
+   "uses": [
+    "def-sc-genus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-positive-degree-ample.md",
+    "place": "## Proof (the one paragraph); unit sk-thm-picard-rr, proof of (G), last sentence"
+   }
+  },
+  {
+   "text": "$C$ is a proper smooth connected curve of genus $g$ over the algebraically closed field $k$ and $\\mathcal M:=\\mathcal L^{\\otimes m}$ is a line bundle on $C$ (step 1) with $\\deg\\mathcal M\\geq2g+1$ (step 2). By [lem-sc-degree-2g1-very-ample], applied to $\\mathcal M$, the bundle $\\mathcal L^{\\otimes m}$ is very ample.",
+   "uses": [
+    "lem-sc-degree-2g1-very-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-positive-degree-ample.md",
+    "place": "## Proof (the one paragraph); unit sk-thm-picard-rr, proof of (G), last sentence"
+   }
+  },
+  {
+   "text": "By [def-sc-ample], an invertible module is ample when some tensor power $\\mathcal L^{\\otimes m}$ with $m\\geq1$ is very ample; step 3 gives this for $m=2g+1\\geq1$. Hence $\\mathcal L$ is ample.",
+   "uses": [
     "def-sc-ample"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-positive-degree-ample.md",
+    "place": "## Proof (the one paragraph); unit sk-thm-picard-rr, proof of (G), last sentence"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-picard-group",
+  "lem-sc-pic-group",
   "def-sc-pic0",
+  "lem-sc-deg-principal-zero",
+  "def-sc-genus",
   "lem-sc-degree-2g1-very-ample",
   "def-sc-ample"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-positive-degree-ample.md",
-  "place": "## Proof"
+  "place": "## Proof; route of unit sk-thm-picard-rr, step (G) (algebraically closed case). Stacks 0B5X (varieties-lemma-ample-curve) proves the same implication by another route (a section with affine non-vanishing locus and the H^1-vanishing criterion of ampleness), which the unit does not follow."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "line bundle of positive degree on a smooth projective curve is ample",
+   "results": "AmpleSet (Mathlib.Analysis.Convex.AmpleSet), ampleSet_empty, AlgebraicGeometry.Proj.openCoverOfISupEqTop, WeierstrassCurve.natDegree_preΨ₄_pos: none about ample line bundles",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible sheaf of positive degree on a proper curve over an algebraically closed field is ample",
+   "results": "AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.Proj, function field instances: none about ampleness or degree",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsAmple\\|isAmple\\|VeryAmple\\|veryAmple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none (Mathlib has no ample or very ample invertible sheaves)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -179,5 +248,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-positive-degree-ample",
+  "worker": "stage1",
+  "summary": "Split along the Lean proof AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed (RiemannRoch.lean 1544-1556, sorry-free itself, rests_on_sorry), whose direct dependencies are isVeryAmple_of_degree (= lem-sc-degree-2g1-very-ample), Modules.degree_tensorPow (deg L^n = n deg L, via degree_tensorObj), IsInvertible.tensorPow and the definition IsAmple (= def-sc-ample, closed). By the sorry map 71d63dcf all nine open declarations of the item are reached through isVeryAmple_of_degree, and they are exactly the nine `open` entries of lem-sc-degree-2g1-very-ample (three of them, exists_addEquiv_sections_higherDirectImage_H, finite_sections_higherDirectImage, subsingleton_H_of_topologicalKrullDim_lt, are also reached through degree_tensorPow, i.e. through the chi-degree additivity of the Lean); so the sorry pieces belong to the existing node lem-sc-degree-2g1-very-ample and no node is created. In the DAG's language (divisor degree of def-sc-pic0) deg L^m = m deg L is the homomorphism property of def-sc-pic0 together with the group law of Pic (step 1). Steps: 1 deg L^m = m deg L; 2 m = 2g+1 gives deg >= 2g+1; 3 lem-sc-degree-2g1-very-ample; 4 def-sc-ample. stmt_deps: added def-sc-genus (the statement names g), def-sc-invertible-module (line bundle) and def-sc-ample (the conclusion), which were missing. No Mathlib match (three searches).",
+  "blueprint": "Step 1 realizes 'Since deg is a homomorphism ([def-sc-pic0]), deg(L^m) = m deg L'; step 2 realizes 'so for m >> 0 one has deg(L^m) >= 2g+1' (with m = 2g+1); step 3 realizes 'by [lem-sc-degree-2g1-very-ample] the bundle L^m is very ample'; step 4 realizes 'by definition ([def-sc-ample]) L is ample'. Together they carry the last sentence of step (G) of unit sk-thm-picard-rr ('for m deg L >= 2g+1 ... L^m is very ample and L is ample'), algebraically closed case."
+ },
+ "reviewed": "2026-10-10 L: 4 steps along the Lean (deg of tensor powers, m = 2g+1, very ample by the 0H2V node, hence ample); 0 new nodes"
 }
