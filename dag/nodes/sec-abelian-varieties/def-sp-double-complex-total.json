@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-double-complex-total",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "First-quadrant double complexes, total complex and the two filtrations",
@@ -19,9 +19,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "first quadrant double complex total complex two filtrations abelian category",
+   "results": "HomologicalComplex.HasGoodTrifunctor₁₂Obj; HomologicalComplex.HasGoodTrifunctor₂₃Obj; HomologicalComplex.ιMapBifunctorOrZero; HomologicalComplex₂.HasTotal; HomologicalComplex₂.ιTotalOrZero; HomologicalComplex.ιMapBifunctorOrZero_eq; HomologicalComplex.ιMapBifunctor; HomologicalComplex.mapBifunctor₁₂.ιOrZero",
+   "date": "2026-10-11",
+   "verdict": "no exact match; generic bicomplex total infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, TotalComplex, filtration",
+   "results": "unknown identifier 'TotalComplex' (0 hits)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TotalComplex|HomologicalComplex₂|first quadrant (Mathlib/Algebra/Homology)",
+   "results": "many hits (reviewer R-dct1934 rerun): Mathlib/Algebra/Homology/TotalComplex.lean, ComplexShapeSigns.lean, HomologicalBicomplex.lean etc.; generic HomologicalComplex₂/TotalComplexShape infrastructure, no first-quadrant filtrations or graded pieces",
+   "date": "2026-10-11",
+   "verdict": "generalization: total complex only, no bundled filtrations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "first quadrant double complex total complex with filtrations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "decreasing filtration total complex first quadrant bicomplex",
+   "results": "TotalComplexShape; HomologicalComplex₂.ofGradedObject_X_X; ComplexShape.instTotalComplexShape; HomologicalComplex₂.HasTotal; HomologicalComplex₂.ofGradedObject; HomologicalComplex₂.ofGradedObject_X_d; HomologicalComplex₂; HomologicalComplex₂.ιTotalOrZero",
+   "date": "2026-10-11",
+   "verdict": "no exact match; generic total-complex infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.HasTotal",
+   "results": "HomologicalComplex₂.HasTotal; HomologicalComplex₂.total; HomologicalComplex₂.totalFunctor; HomologicalComplex₂.hasTotal_of_iso; HomologicalComplex₂.D₁; HomologicalComplex₂.D₂; HomologicalComplex₂.ιTotalOrZero; HomologicalComplex₂.d₁; HomologicalComplex₂.d₂; HomologicalComplex₂.ιTotal; HomologicalComplex₂.totalDesc; HomologicalComplex₂.totalFunctor_obj",
+   "date": "2026-10-11",
+   "verdict": "generalization: total complex only, no bundled filtrations"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTotal|total_d|ComplexShape.up (Mathlib/Algebra/Homology/TotalComplex.lean)",
+   "results": "(reviewer R-dct1934 rerun) TotalComplex.lean:45 abbrev HasTotal, :265 def total, :69 d₂ with sign ComplexShape.ε₂; ComplexShapeSigns.lean:159 ε₂ (p,_) = c.ε p, i.e. (-1)^p on d_II for ComplexShape.up ℤ, agreeing with d_I+(-1)^p d_II here",
+   "date": "2026-10-11",
+   "verdict": "generalization: total complex with the same sign convention; no filtrations or graded pieces"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +93,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-double-complex-total",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint source. Its statement already introduces the double complex, total complex, two filtrations, and graded pieces, with existing statement dependencies def-sp-abelian and def-sp-filtration; no additional proof node is needed. Searched the project source for the blueprint tag and declaration names and found no matching project declaration. Mathlib searches found only generic HomologicalComplex₂ total-complex infrastructure, not this bundled definition.",
+  "blueprint": "The item is itself the blueprint node def-sp-double-complex-total (node order 516); the imported statement is retained verbatim and no proof steps are required for this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dct1934",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dct1934 (reviewer sub-agent of L); spot-checked: Statement checked: d_I+(-1)^p d_II matches Stacks 012Z and Mathlib (ComplexShapeSigns.lean:159 eps2(p,_)=c.eps p, TotalComplex.lean:69); d^2=0 cross-term cancellation, filtrations by subcomplexes, F^0/F^{n+1} bounds and graded pieces ((-1)^p d_II, d_I) correct; citing nodes (thm-sp-double-complex-spectral-sequences, lem-sc-boundary-cech-injective-middle, lem-sc-cech-h1-map-natural, lem-pc-grothendieck-ss-double-complex-model) use the same convention. Not a Mathlib leaf: filtrations/graded pieces absent. FIX more, RETURN less: B3 two grep mathlib_searches records falsely said no hits (HasTotal is at TotalComplex.lean:45; HomologicalComplex2 in 10 files of Algebra/Homology); corrected results/verdicts. Second reading missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
