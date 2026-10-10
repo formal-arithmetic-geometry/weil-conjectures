@@ -2,7 +2,7 @@
 
 858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (48)
+## Stage 1: nodes to split (47)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,15 +10,14 @@
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
-| `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
 | `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
+| `lem-pc-module-opcycles-tor-surjection` | 3018 | none |
 | `lem-sc-derived-hom-tensor-total` | 3018 | none |
 | `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-sc-finite-cohomology` | 3023 | none |
-| `lem-sc-qc-open-derived-lift` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -40,11 +39,11 @@
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-perfect-jump-loci` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
-| `lem-sc-picard-valuation-probe-closure` | 6014 | none |
 | `lem-sc-square-injective-free-map-dual-coker-zero` | 6014 | none |
+| `lem-sc-picard-closure-specialization` | 6015 | none |
+| `lem-sc-picard-valuation-probe-specializes` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pc-chow-relative-ample` | - | none |
 | `lem-pc-coherent-property-devissage` | - | none |
 | `lem-sc-pic-affine-base-change-compatibility` | - | none |
 | `lem-sc-etale-torsor-h1-functoriality` | - | none |
@@ -55,7 +54,7 @@
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (810)
+## Stage 2: nodes to state (811)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -190,6 +189,7 @@
 | `lem-pc-left-localization-hom-colimit` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
+| `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-pic-exact` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1696 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
+Not open yet: 1699 nodes that wait for a statement dependency, 88 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
