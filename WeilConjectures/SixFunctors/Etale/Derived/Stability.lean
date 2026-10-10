@@ -957,12 +957,36 @@ theorem torAmplitudeIn_rightDerivedLowerStar [ConcreteCategory.FinitelyGenerated
     torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
   sorry
 
+omit [Finite Λ] in
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+
+For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of finite-type
+`k`-schemes, `Rf_*` preserves bounded constructibility. This is the finite-coefficient case of
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`, and is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
+once `f` is known to be quasi-compact. -/
+theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [HasInvertibleExponent Λ Y]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : QuasiCompact f := by
+    subst hf
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    exact QuasiCompact.of_comp f aY
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+  exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
+
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
 finite-type `k`-schemes, for a finite `Λ` whose exponent is invertible on `Y`. It is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar` together with
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite` together with
 `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`, a finite-type `k`-scheme being
 finite dimensional. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -977,7 +1001,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   have : NeZero N := ⟨hN0.ne'⟩
   have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
   have : IsNoetherianRing Λ := inferInstance
-  exact ⟨boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN hNY hbc, a, b + 2 * (d : ℤ),
+  exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
@@ -1274,7 +1298,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     hbc' ht'
   have hM : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a (b + 2 * d)
       ((R((V.ι)_*[ModuleCat.{u + 1} Λ])).obj ((L((V.ι)^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-    ⟨⟨boundedConstructible_rightDerivedLowerStar _ (V.ι ≫ aT) aT V.ι rfl N hN hNT hbc',
+    ⟨⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ (V.ι ≫ aT) aT V.ι rfl hbc',
       _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hMt⟩, hMt⟩
   have := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
     (ModuleCat.{u + 1} Λ) i V.ι hij (by omega : b ≤ b + 2 * d) ⟨⟨hbc, hc⟩, ht⟩ hM
